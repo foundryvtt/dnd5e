@@ -17,12 +17,14 @@ export class ScaleValueConfigurationData extends foundry.abstract.DataModel {
 }
 
 
-export class ScaleValueTypeBase extends foundry.abstract.DataModel {
+export class ScaleValueType extends foundry.abstract.DataModel {
   static defineSchema() {
     return {
-      value: new foundry.data.fields.StringField({required: true, blank: false})
+      value: new foundry.data.fields.StringField({required: true})
     };
   }
+
+  /* -------------------------------------------- */
 
   /**
    * Information on how a scale value of this type is configured.
@@ -45,17 +47,34 @@ export class ScaleValueTypeBase extends foundry.abstract.DataModel {
     };
   }
 
+  /* -------------------------------------------- */
+
+  /**
+   * Attempt to convert another scale value type to this one.
+   * @param {ScaleValueType} original  Original type to attempt to convert.
+   * @returns {object|null}
+   */
+  static converted(original) {
+    return { value: original.prepared };
+  }
+
+  /* -------------------------------------------- */
+
   /**
    * This scale value prepared to be used in roll formulas.
    * @type {string|null}
    */
   get prepared() { return this.value; }
 
+  /* -------------------------------------------- */
+
   /**
    * This scale value formatted for display.
    * @type {string|null}
    */
   get formatted() { return this.prepared; }
+
+  /* -------------------------------------------- */
 
   /**
    * Shortcut to the prepared value when used in roll formulas.
@@ -67,24 +86,34 @@ export class ScaleValueTypeBase extends foundry.abstract.DataModel {
 }
 
 
-export class ScaleValueTypeNumber extends ScaleValueTypeBase {
+export class ScaleValueTypeNumber extends ScaleValueType {
   static defineSchema() {
     return {
       value: new foundry.data.fields.NumberField({required: true})
     };
   }
 
+  /* -------------------------------------------- */
+
   static get metadata() {
-    return {
+    return foundry.utils.mergeObject(super.metadata, {
       label: "DND5E.AdvancementScaleValueTypeNumber",
       hint: "DND5E.AdvancementScaleValueTypeHintNumber",
       isNumeric: true
-    };
+    });
+  }
+
+  /* -------------------------------------------- */
+
+  static converted(original) {
+    const value = Number(original.prepared);
+    if ( value.isNaN ) return null;
+    return { value };
   }
 }
 
 
-export class ScaleValueTypeCR extends ScaleValueTypeBase {
+export class ScaleValueTypeCR extends ScaleValueTypeNumber {
   static defineSchema() {
     return {
       value: new foundry.data.fields.NumberField({required: true, min: 0})
@@ -92,13 +121,16 @@ export class ScaleValueTypeCR extends ScaleValueTypeBase {
     };
   }
 
+  /* -------------------------------------------- */
+
   static get metadata() {
-    return {
+    return foundry.utils.mergeObject(super.metadata, {
       label: "DND5E.AdvancementScaleValueTypeCR",
-      hint: "DND5E.AdvancementScaleValueTypeHintCR",
-      isNumeric: true
-    };
+      hint: "DND5E.AdvancementScaleValueTypeHintCR"
+    });
   }
+
+  /* -------------------------------------------- */
 
   get formatted() {
     switch (this.value) {
@@ -111,7 +143,7 @@ export class ScaleValueTypeCR extends ScaleValueTypeBase {
 }
 
 
-export class ScaleValueTypeDice extends ScaleValueTypeBase {
+export class ScaleValueTypeDice extends ScaleValueType {
   static defineSchema() {
     return {
       n: new foundry.data.fields.NumberField({nullable: true, integer: true, positive: true}),
@@ -119,14 +151,34 @@ export class ScaleValueTypeDice extends ScaleValueTypeBase {
     };
   }
 
+  /* -------------------------------------------- */
+
   static get metadata() {
-    return {
+    return foundry.utils.mergeObject(super.metadata, {
       label: "DND5E.AdvancementScaleValueTypeDice",
       hint: "DND5E.AdvancementScaleValueTypeHintDice"
-    };
+    });
   }
 
-  get prepared() { return `${this.n ?? ""}${this.dice}`; }
+  /* -------------------------------------------- */
+
+  static converted(original) {
+    const split = (original.prepared ?? "").split("d");
+    if ( !split[1] ) return null;
+    const n = Number(split[0]) || null;
+    const die = Number(split[1]);
+    if ( Number.isNaN(n) || Number.isNaN(die) ) return null;
+    return { n, die };
+  }
+
+  /* -------------------------------------------- */
+
+  get prepared() {
+    if ( !this.die ) return null;
+    return `${this.n ?? ""}${this.dice}`;
+  }
+
+  /* -------------------------------------------- */
 
   /**
    * The number of dice to roll.
@@ -134,23 +186,30 @@ export class ScaleValueTypeDice extends ScaleValueTypeBase {
    */
   get number() { return this.n ?? 0; }
 
+  /* -------------------------------------------- */
+
   /**
    * The die value to be rolled with the leading "d" (e.g. "d4").
    * @type {string}
    */
-  get dice() { return `d${this.die}`; }
+  get dice() {
+    if ( !this.die ) return "";
+    return `d${this.die}`;
+  }
 }
 
 
 export class ScaleValueTypeDistance extends ScaleValueTypeNumber {
   static get metadata() {
-    return {
+    return foundry.utils.mergeObject(super.metadata, {
       label: "DND5E.AdvancementScaleValueTypeDistance",
       hint: "DND5E.AdvancementScaleValueTypeHintDistance"
-    };
+    });
   }
 
+  /* -------------------------------------------- */
+
   get formatted() {
-    return `${this.value} ${CONFIG.DND5E.movementUnits[this.parent.configuration.distance.units]}`;
+    return `${this.value} ${CONFIG.DND5E.movementUnits[this.parent.configuration.distance?.units ?? "ft"]}`;
   }
 }

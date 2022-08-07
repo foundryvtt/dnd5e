@@ -32,10 +32,10 @@ export class ScaleValueAdvancement extends Advancement {
 
   /**
    * The available types of scaling value.
-   * @enum {*}
+   * @enum {ScaleValueType}
    */
   static TYPES = {
-    string: dataModels.ScaleValueTypeBase,
+    string: dataModels.ScaleValueType,
     number: dataModels.ScaleValueTypeNumber,
     cr: dataModels.ScaleValueTypeCR,
     dice: dataModels.ScaleValueTypeDice,
@@ -67,7 +67,7 @@ export class ScaleValueAdvancement extends Advancement {
 
   /** @inheritdoc */
   titleForLevel(level, { configMode=false }={}) {
-    const value = this.formatValue(level);
+    const value = this.valueForLevel(level)?.formatted;
     if ( !value ) return this.title;
     return `${this.title}: <strong>${value}</strong>`;
   }
@@ -102,28 +102,6 @@ export class ScaleValueAdvancement extends Advancement {
       if ( a[k] !== b[k] ) return false;
     }
     return true;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Prepare a scale value for use in actor data.
-   * @param {number} level  Level for which to get the scale value.
-   * @returns {string|null}
-   */
-  prepareValue(level) {
-    return this.valueForLevel(level)?.prepared ?? null;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Format a scale value for display.
-   * @param {number} level  Level for which to get the scale value.
-   * @returns {string|null}
-   */
-  formatValue(level) {
-    return this.valueForLevel(level)?.formatted ?? null;
   }
 
 }
@@ -281,11 +259,12 @@ export class ScaleValueConfig extends AdvancementConfig {
   async _updateObject(event, formData) {
     const typeChange = "configuration.type" in formData;
     if ( typeChange && (formData["configuration.type"] !== this.advancement.configuration.type) ) {
-      for ( const key in formData ) { // Clear scale values if we're changing type.
-        if ( key.startsWith("configuration.scale.") ) delete formData[key];
-      }
-      for ( const l of Array.fromRange(CONFIG.DND5E.maxLevel, 1) ) {
-        formData[`configuration.scale.${l}`] = null;
+      const scale = foundry.utils.expandObject(formData).configuration?.scale ?? {};
+      const OriginalType = ScaleValueAdvancement.TYPES[this.advancement.configuration.type];
+      const NewType = ScaleValueAdvancement.TYPES[formData["configuration.type"]];
+      for ( const [lvl, data] of Object.entries(scale) ) {
+        const original = new OriginalType(data, { parent: this.advancement });
+        formData[`configuration.scale.${lvl}`] = NewType.converted(original);
       }
     }
     return super._updateObject(event, formData);
@@ -310,8 +289,8 @@ export class ScaleValueFlow extends AdvancementFlow {
   /** @inheritdoc */
   getData() {
     return foundry.utils.mergeObject(super.getData(), {
-      initial: this.advancement.formatValue(this.level - 1),
-      final: this.advancement.formatValue(this.level)
+      initial: this.advancement.valueForLevel(this.level - 1)?.formatted,
+      final: this.advancement.valueForLevel(this.level).formatted
     });
   }
 
