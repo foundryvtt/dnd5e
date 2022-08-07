@@ -131,13 +131,12 @@ export class ScaleValueConfig extends AdvancementConfig {
       classIdentifier: this.item.identifier,
       previewIdentifier: config.identifier || this.advancement.title?.slugify()
         || this.advancement.constructor.metadata.title.slugify(),
-      typeHint: game.i18n.localize(type.metadata.hint),
+      type: type.metadata,
       types: Object.fromEntries(
         Object.entries(ScaleValueAdvancement.TYPES).map(([key, d]) => [key, game.i18n.localize(d.metadata.label)])
       ),
-      faces: Object.fromEntries([2, 3, 4, 6, 8, 10, 12, 20].map(die => [die, `d${die}`])),
+      faces: Object.fromEntries(dataModels.ScaleValueTypeDice.FACES.map(die => [die, `d${die}`])),
       levels: this._prepareLevelData(),
-      isNumeric: type.metadata.isNumeric,
       movementUnits: CONFIG.DND5E.movementUnits
     });
   }

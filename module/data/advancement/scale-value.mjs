@@ -162,6 +162,14 @@ export class ScaleValueTypeDice extends ScaleValueType {
 
   /* -------------------------------------------- */
 
+  /**
+   * List of die faces that can be chosen.
+   * @type {number[]}
+   */
+  static FACES = [2, 3, 4, 6, 8, 10, 12, 20, 100];
+
+  /* -------------------------------------------- */
+
   static converted(original) {
     const split = (original.prepared ?? "").split("d");
     if ( !split[1] ) return null;
