@@ -3,9 +3,9 @@
 
   <p>
     <span class="initial-scale-value {{#unless initial}}none{{/unless}}">
-      {{#if initial}}{{initial}}{{else}}{{localize "DND5E.None"}}{{/if}}
+      {{#if initial}}{{{initial}}}{{else}}{{localize "DND5E.None"}}{{/if}}
     </span>
     &#x27A1;
-    <span class="new-scale-value">{{final}}</span>
+    <span class="new-scale-value">{{{final}}}</span>
   </p>
 </form>
