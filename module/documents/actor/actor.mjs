@@ -1216,7 +1216,7 @@ export default class Actor5e extends Actor {
     const rollData = foundry.utils.mergeObject({
       event: new Event("hitDie"),
       parts: [`1${denomination}`, "@abilities.con.mod"],
-      data: this.toObject().system,
+      data: this.getRollData(),
       title: `${flavor}: ${this.name}`,
       flavor,
       allowCritical: false,
@@ -1309,6 +1309,19 @@ export default class Actor5e extends Actor {
   /* -------------------------------------------- */
 
   /**
+   * Configuration options for a rest.
+   *
+   * @typedef {object} RestConfiguration
+   * @property {boolean} dialog            Present a dialog window which allows for rolling hit dice as part of the
+   *                                       Short Rest and selecting whether a new day has occurred.
+   * @property {boolean} chat              Should a chat message be created to summarize the results of the rest?
+   * @property {boolean} newDay            Does this rest carry over to a new day?
+   * @property {boolean} [autoHD]          Should hit dice be spent automatically during a short rest?
+   * @property {number} [autoHDThreshold]  How many hit points should be missing before hit dice are
+   *                                       automatically spent during a short rest.
+   */
+
+  /**
    * Results from a rest operation.
    *
    * @typedef {object} RestResult
@@ -1324,61 +1337,71 @@ export default class Actor5e extends Actor {
 
   /**
    * Take a short rest, possibly spending hit dice and recovering resources, item uses, and pact slots.
-   *
-   * @param {object} [options]
-   * @param {boolean} [options.dialog=true]         Present a dialog window which allows for rolling hit dice as part
-   *                                                of the Short Rest and selecting whether a new day has occurred.
-   * @param {boolean} [options.chat=true]           Summarize the results of the rest workflow as a chat message.
-   * @param {boolean} [options.autoHD=false]        Automatically spend Hit Dice if you are missing 3 or more hit
-   *                                                points.
-   * @param {boolean} [options.autoHDThreshold=3]   A number of missing hit points which would trigger an automatic HD
-   *                                                roll.
-   * @returns {Promise<RestResult>}                 A Promise which resolves once the short rest workflow has completed.
+   * @param {RestConfiguration} [config]  Configuration options for a short rest.
+   * @returns {Promise<RestResult>}       A Promise which resolves once the short rest workflow has completed.
    */
-  async shortRest({dialog=true, chat=true, autoHD=false, autoHDThreshold=3}={}) {
+  async shortRest(config={}) {
+    config = foundry.utils.mergeObject({
+      dialog: true, chat: true, newDay: false, autoHD: false, autoHDThreshold: 3
+    }, config);
+
+    /**
+     * A hook event that fires before a short rest is started.
+     * @function dnd5e.preShortRest
+     * @memberof hookEvents
+     * @param {Actor5e} actor             The actor that is being rested.
+     * @param {RestConfiguration} config  Configuration options for the rest.
+     * @returns {boolean}                 Explicitly return `false` to prevent the rest from being started.
+     */
+    if ( Hooks.call("dnd5e.preShortRest", this, config) === false ) return;
 
     // Take note of the initial hit points and number of hit dice the Actor has
     const hd0 = this.system.attributes.hd;
     const hp0 = this.system.attributes.hp.value;
-    let newDay = false;
 
     // Display a Dialog for rolling hit dice
-    if ( dialog ) {
-      try {
-        newDay = await ShortRestDialog.shortRestDialog({actor: this, canRoll: hd0 > 0});
-      } catch(err) {
-        return;
-      }
+    if ( config.dialog ) {
+      try { config.newDay = await ShortRestDialog.shortRestDialog({actor: this, canRoll: hd0 > 0});
+      } catch(err) { return; }
     }
 
     // Automatically spend hit dice
-    else if ( autoHD ) await this.autoSpendHitDice({ threshold: autoHDThreshold });
+    else if ( config.autoHD ) await this.autoSpendHitDice({ threshold: config.autoHDThreshold });
 
     // Return the rest result
-    return this._rest(chat, newDay, false, this.system.attributes.hd - hd0, this.system.attributes.hp.value - hp0);
+    const dhd = this.system.attributes.hd - hd0;
+    const dhp = this.system.attributes.hp.value - hp0;
+    return this._rest(config.chat, config.newDay, false, dhd, dhp);
   }
 
   /* -------------------------------------------- */
 
   /**
    * Take a long rest, recovering hit points, hit dice, resources, item uses, and spell slots.
-   *
-   * @param {object} [options]
-   * @param {boolean} [options.dialog=true]  Present a confirmation dialog window whether or not to take a long rest.
-   * @param {boolean} [options.chat=true]    Summarize the results of the rest workflow as a chat message.
-   * @param {boolean} [options.newDay=true]  Whether the long rest carries over to a new day.
-   * @returns {Promise<RestResult>}          A Promise which resolves once the long rest workflow has completed.
+   * @param {RestConfiguration} [config]  Configuration options for a long rest.
+   * @returns {Promise<RestResult>}       A Promise which resolves once the long rest workflow has completed.
    */
-  async longRest({dialog=true, chat=true, newDay=true}={}) {
-    if ( dialog ) {
-      try {
-        newDay = await LongRestDialog.longRestDialog({actor: this});
-      }
-      catch(err) {
-        return;
-      }
+  async longRest(config={}) {
+    config = foundry.utils.mergeObject({
+      dialog: true, chat: true, newDay: true
+    }, config);
+
+    /**
+     * A hook event that fires before a long rest is started.
+     * @function dnd5e.preLongRest
+     * @memberof hookEvents
+     * @param {Actor5e} actor             The actor that is being rested.
+     * @param {RestConfiguration} config  Configuration options for the rest.
+     * @returns {boolean}                 Explicitly return `false` to prevent the rest from being started.
+     */
+    if ( Hooks.call("dnd5e.preLongRest", this, config) === false ) return;
+
+    if ( config.dialog ) {
+      try { config.newDay = await LongRestDialog.longRestDialog({actor: this}); }
+      catch(err) { return; }
     }
-    return this._rest(chat, newDay, true);
+
+    return this._rest(config.chat, config.newDay, true);
   }
 
   /* -------------------------------------------- */
@@ -1422,6 +1445,16 @@ export default class Actor5e extends Actor {
       longRest,
       newDay
     };
+
+    /**
+     * A hook event that fires after rest result is calculated, but before any updates are performed.
+     * @function dnd5e.preRestCompleted
+     * @memberof hookEvents
+     * @param {Actor5e} actor      The actor that is being rested.
+     * @param {RestResult} result  Details on the rest to be completed.
+     * @returns {boolean}          Explicitly return `false` to prevent the rest updates from being performed.
+     */
+    if ( Hooks.call("dnd5e.preRestCompleted", this, result) === false ) return result;
 
     // Perform updates
     await this.update(result.updateData);
