@@ -92,7 +92,7 @@ export class ItemGrantAdvancement extends Advancement {
           "flags.dnd5e.advancementOrigin": `${this.item.id}.${this.id}`
         }, {keepId: true}).toObject();
       }
-      foundry.utils.mergeObject(itemData, spellChanges);
+      if ( itemData.type === "spell" ) foundry.utils.mergeObject(itemData, spellChanges);
 
       items.push(itemData);
       // TODO: Trigger any additional advancement steps for added items
