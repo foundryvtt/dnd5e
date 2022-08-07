@@ -12,7 +12,11 @@ export class ItemGrantAdvancement extends Advancement {
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
       defaults: {
-        configuration: { items: [], optional: false }
+        configuration: {
+          items: [],
+          optional: false,
+          spell: null
+        }
       },
       order: 40,
       icon: "systems/dnd5e/icons/svg/item-grant.svg",
@@ -24,6 +28,14 @@ export class ItemGrantAdvancement extends Advancement {
       }
     });
   }
+
+  /* -------------------------------------------- */
+
+  /**
+   * The item types that are supported in Item Grant.
+   * @type {Set<string>}
+   */
+  static VALID_TYPES = new Set(["feat", "spell", "consumable", "backpack", "equipment", "loot", "tool", "weapon"]);
 
   /* -------------------------------------------- */
   /*  Display Methods                             */
@@ -66,6 +78,7 @@ export class ItemGrantAdvancement extends Advancement {
   async apply(level, data, retainedData={}) {
     const items = [];
     const updates = {};
+    const spellChanges = this.data.configuration.spell ? this._prepareSpellChanges(this.data.configuration.spell) : {};
     for ( const [uuid, selected] of Object.entries(data) ) {
       if ( !selected ) continue;
 
@@ -79,6 +92,7 @@ export class ItemGrantAdvancement extends Advancement {
           "flags.dnd5e.advancementOrigin": `${this.item.id}.${this.id}`
         }, {keepId: true}).toObject();
       }
+      foundry.utils.mergeObject(itemData, spellChanges);
 
       items.push(itemData);
       // TODO: Trigger any additional advancement steps for added items
@@ -129,72 +143,29 @@ export class ItemGrantConfig extends AdvancementConfig {
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       dragDrop: [{ dropSelector: ".drop-target" }],
+      dropKeyPath: "items",
       template: "systems/dnd5e/templates/advancement/item-grant-config.hbs"
     });
   }
 
   /* -------------------------------------------- */
 
-  activateListeners(html) {
-    super.activateListeners(html);
-
-    // Remove an item from the list
-    html.on("click", ".item-delete", this._onItemDelete.bind(this));
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Handle deleting an existing Item entry from the Advancement.
-   * @param {Event} event  The originating click event.
-   * @returns {Promise<Item5e>}  The promise for the updated parent Item which resolves after the application re-renders
-   * @private
-   */
-  async _onItemDelete(event) {
-    event.preventDefault();
-    const uuidToDelete = event.currentTarget.closest("[data-item-uuid]")?.dataset.itemUuid;
-    if ( !uuidToDelete ) return;
-    const items = this.advancement.data.configuration.items.filter(uuid => uuid !== uuidToDelete);
-    const updates = { configuration: this.prepareConfigurationUpdate({ items }) };
-    await this.advancement.update(updates);
-    this.render();
+  /** @inheritdoc */
+  async getData() {
+    const data = super.getData();
+    data.items = data.data.configuration.items.map(fromUuidSync);
+    data.showSpellConfig = data.items.some(i => i.type === "spell");
+    return data;
   }
 
   /* -------------------------------------------- */
 
   /** @inheritdoc */
-  _canDragDrop() {
-    return this.isEditable;
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritdoc */
-  async _onDrop(event) {
-    // Try to extract the data
-    let data;
-    try {
-      data = JSON.parse(event.dataTransfer.getData("text/plain"));
-    } catch(err) {
-      return false;
-    }
-
-    if ( data.type !== "Item" ) return false;
-    const item = await Item.implementation.fromDropData(data);
-    const existingItems = this.advancement.data.configuration.items;
-
-    // Abort if this uuid is the parent item
-    if ( item.uuid === this.item.uuid ) {
-      return ui.notifications.warn(game.i18n.localize("DND5E.AdvancementItemGrantRecursiveWarning"));
-    }
-
-    // Abort if this uuid exists already
-    if ( existingItems.includes(item.uuid) ) {
-      return ui.notifications.warn(game.i18n.localize("DND5E.AdvancementItemGrantDuplicateWarning"));
-    }
-
-    await this.advancement.update({"configuration.items": [...existingItems, item.uuid]});
-    this.render();
+  _verifyDroppedItem(event, item) {
+    if ( this.advancement.constructor.VALID_TYPES.has(item.type) ) return true;
+    const type = game.i18n.localize(`ITEM.Type${item.type.capitalize()}`);
+    ui.notifications.warn(game.i18n.format("DND5E.AdvancementItemTypeInvalidWarning", { type }));
+    return false;
   }
 }
 

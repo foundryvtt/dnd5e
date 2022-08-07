@@ -318,4 +318,31 @@ export default class Advancement {
    * @abstract
    */
   async reverse(level) { }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Helper method to prepare spell customizations.
+   * @param {object} spell  Spell configuration object.
+   * @returns {object}      Object of updates to apply to item.
+   * @protected
+   */
+  _prepareSpellChanges(spell) {
+    const updates = {};
+    if ( spell.ability ) updates["system.ability"] = spell.ability;
+    if ( spell.preparation ) updates["system.preparation.mode"] = spell.preparation;
+    if ( spell.uses?.max ) {
+      updates["system.uses.max"] = spell.uses.max;
+      if ( Number.isNumeric(spell.uses.max) ) updates["system.uses.value"] = parseInt(spell.uses.max);
+      else {
+        try {
+          const rollData = this.actor.getRollData({ deterministic: true });
+          const formula = Roll.replaceFormulaData(spell.uses.max, rollData, {missing: 0});
+          updates["system.uses.value"] = Roll.safeEval(formula);
+        } catch(e) { }
+      }
+    }
+    if ( spell.uses?.per ) updates["system.uses.per"] = spell.uses.per;
+    return updates;
+  }
 }

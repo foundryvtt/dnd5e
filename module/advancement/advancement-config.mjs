@@ -2,8 +2,10 @@
  * Base configuration application for advancements that can be extended by other types to implement custom
  * editing interfaces.
  *
- * @param {Advancement} advancement  The advancement item being edited.
- * @param {object} [options={}]      Additional options passed to FormApplication.
+ * @property {Advancement} advancement         The advancement item being edited.
+ * @param {object} [options={}]                Additional options passed to FormApplication.
+ * @param {string} [options.dropKeyPath=null]  Path within advancement configuration where dropped items are stored.
+ *                                             If populated, will enable default drop & delete behavior.
  */
 export default class AdvancementConfig extends FormApplication {
   constructor(advancement, options={}) {
@@ -32,7 +34,8 @@ export default class AdvancementConfig extends FormApplication {
       width: 400,
       height: "auto",
       submitOnChange: true,
-      closeOnSubmit: false
+      closeOnSubmit: false,
+      dropKeyPath: null
     });
   }
 
@@ -52,6 +55,7 @@ export default class AdvancementConfig extends FormApplication {
     if ( ["class", "subclass"].includes(this.item.type) ) delete levels[0];
     else levels[0] = game.i18n.localize("DND5E.AdvancementLevelAnyHeader");
     return {
+      CONFIG: CONFIG.DND5E,
       data: this.advancement.data,
       default: {
         title: this.advancement.constructor.metadata.title,
@@ -72,6 +76,15 @@ export default class AdvancementConfig extends FormApplication {
    */
   prepareConfigurationUpdate(configuration) {
     return configuration;
+  }
+
+  /* -------------------------------------------- */
+
+  activateListeners(html) {
+    super.activateListeners(html);
+
+    // Remove an item from the list
+    if ( this.options.dropKeyPath ) html.on("click", ".item-delete", this._onItemDelete.bind(this));
   }
 
   /* -------------------------------------------- */
@@ -99,6 +112,88 @@ export default class AdvancementConfig extends FormApplication {
       else obj[`-=${key}`] = null;
       return obj;
     }, {});
+  }
+
+  /* -------------------------------------------- */
+  /*  Drag & Drop for Item Pools                  */
+  /* -------------------------------------------- */
+
+  /**
+   * Handle deleting an existing Item entry from the Advancement.
+   * @param {Event} event        The originating click event.
+   * @returns {Promise<Item5e>}  The updated parent Item after the application re-renders.
+   * @protected
+   */
+  async _onItemDelete(event) {
+    event.preventDefault();
+    const uuidToDelete = event.currentTarget.closest("[data-item-uuid]")?.dataset.itemUuid;
+    if ( !uuidToDelete ) return;
+    const items = foundry.utils.getProperty(this.advancement.data.configuration, this.options.dropKeyPath);
+    const updates = { configuration: await this.prepareConfigurationUpdate({
+      [this.options.dropKeyPath]: items.filter(uuid => uuid !== uuidToDelete)
+    }) };
+    console.log(updates);
+    await this.advancement.update(updates);
+    this.render();
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  _canDragDrop() {
+    return this.isEditable;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  async _onDrop(event) {
+    if ( !this.options.dropKeyPath ) return console.error(
+      "AdvancementConfig#options.dropKeyPath must be configured or #_onDrop must be overridden to support"
+      + " drag and drop on advancement config items."
+    );
+
+    // Try to extract the data
+    let data;
+    try {
+      data = JSON.parse(event.dataTransfer.getData("text/plain"));
+    } catch(err) {
+      return false;
+    }
+
+    if ( data.type !== "Item" ) return false;
+    const item = await Item.implementation.fromDropData(data);
+
+    const verified = this._verifyDroppedItem(event, item);
+    if ( !verified ) return false;
+
+    const existingItems = foundry.utils.getProperty(this.advancement.data.configuration, this.options.dropKeyPath);
+
+    // Abort if this uuid is the parent item
+    if ( item.uuid === this.item.uuid ) {
+      return ui.notifications.warn(game.i18n.localize("DND5E.AdvancementItemGrantRecursiveWarning"));
+    }
+
+    // Abort if this uuid exists already
+    if ( existingItems.includes(item.uuid) ) {
+      return ui.notifications.warn(game.i18n.localize("DND5E.AdvancementItemGrantDuplicateWarning"));
+    }
+
+    await this.advancement.update({[`configuration.${this.options.dropKeyPath}`]: [...existingItems, item.uuid]});
+    this.render();
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Called when an item is dropped to verify the Item before it is saved.
+   * @param {Event} event  Triggering drop event.
+   * @param {Item5e} item  The materialized Item that was dropped.
+   * @returns {boolean}    Is the dropped Item valid?
+   * @protected
+   */
+  _verifyDroppedItem(event, item) {
+    return true;
   }
 
 }
