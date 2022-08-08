@@ -33,7 +33,8 @@ async function compileJavascript() {
   await bundle.write({
     file: "./dnd5e-compiled.mjs",
     format: "es",
-    sourcemap: true
+    sourcemap: true,
+    sourcemapFile: "dnd5e.mjs"
   });
 }
 export const compile = compileJavascript;
