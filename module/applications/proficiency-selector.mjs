@@ -26,7 +26,7 @@ export default class ProficiencySelector extends TraitSelector {
 
   /** @inheritdoc */
   async getData() {
-    const attr = foundry.utils.getProperty(this.object.data, this.attribute);
+    const attr = foundry.utils.getProperty(this.object, this.attribute);
     const chosen = (this.options.valueKey) ? foundry.utils.getProperty(attr, this.options.valueKey) ?? [] : attr;
 
     const data = super.getData();
@@ -66,7 +66,7 @@ export default class ProficiencySelector extends TraitSelector {
         const item = await this.getBaseItem(id);
         if ( !item ) continue;
 
-        let type = foundry.utils.getProperty(item.data, typeProperty);
+        let type = foundry.utils.getProperty(item.system, typeProperty);
         if ( map && map[type] ) type = map[type];
         const entry = {
           label: item.name,
