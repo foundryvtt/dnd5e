@@ -642,9 +642,9 @@ export default class Item5e extends Item {
   /* -------------------------------------------- */
 
   /**
-   * Configuration data for an item roll being prepared.
+   * Configuration data for an item usage being prepared.
    *
-   * @typedef {object} ItemRollConfiguration
+   * @typedef {object} ItemUseConfiguration
    * @property {boolean} createMeasuredTemplate  Trigger a template creation
    * @property {boolean} consumeQuantity         Should the item's quantity be consumed?
    * @property {boolean} consumeRecharge         Should a recharge be consumed?
@@ -656,10 +656,10 @@ export default class Item5e extends Item {
    */
 
   /**
-   * Additional options used for configuring item rolls.
+   * Additional options used for configuring item usage.
    *
-   * @typedef {object} ItemRollOptions
-   * @property {boolean} configureDialog  Display a configuration dialog for the item roll, if applicable?
+   * @typedef {object} ItemUseOptions
+   * @property {boolean} configureDialog  Display a configuration dialog for the item usage, if applicable?
    * @property {string} rollMode          The roll display mode with which to display (or not) the card.
    * @property {boolean} createMessage    Whether to automatically create a chat message (if true) or simply return
    *                                      the prepared chat message data (if false).
@@ -667,11 +667,11 @@ export default class Item5e extends Item {
    */
 
   /**
-   * Roll the item to Chat, creating a chat card which contains follow up attack or damage roll options
-   * @param {ItemRollOptions} [options]           Options used for configuring item rolls.
-   * @param {ItemRollConfiguration} [config]      Initial configuration data for the roll.
-   * @returns {Promise<ChatMessage|object|void>}  Chat message if options.createMessage is true, message data if it is
-   *                                              false, and nothing if the roll wasn't performed.
+   * Trigger an item usage, optionally creating a chat message with followup actions.
+   * @param {ItemUseOptions} [options]           Options used for configuring item usage.
+   * @param {ItemUseConfiguration} [config]      Initial configuration data for the usage.
+   * @returns {Promise<ChatMessage|object|void>} Chat message if options.createMessage is true, message data if it is
+   *                                             false, and nothing if the roll wasn't performed.
    */
   async roll(options={}, config={}) {
     let item = this;
@@ -706,15 +706,15 @@ export default class Item5e extends Item {
       || config.consumeRecharge || config.consumeResource || config.consumeSpellSlot || config.consumeUsage;
 
     /**
-     * A hook event that fires before an item roll is configured.
-     * @function dnd5e.preRollConfiguration
+     * A hook event that fires before an item usage is configured.
+     * @function dnd5e.preUseItem
      * @memberof hookEvents
-     * @param {Item5e} item                      Item being rolled.
-     * @param {ItemRollConfiguration} config     Configuration data for the item roll being prepared.
-     * @param {ItemRollOptions} options          Additional options used for configuring item rolls.
-     * @returns {boolean}                        Explicitly return false to prevent item from being rolled.
+     * @param {Item5e} item                  Item being used.
+     * @param {ItemUseConfiguration} config  Configuration data for the item usage being prepared.
+     * @param {ItemUseOptions} options       Additional options used for configuring item usage.
+     * @returns {boolean}                    Explicitly return `false` to prevent item from being used.
      */
-    if ( Hooks.call("dnd5e.preRoll", item, config, options) === false ) return;
+    if ( Hooks.call("dnd5e.preUseItem", item, config, options) === false ) return;
 
     // Display configuration dialog
     if ( (options.configureDialog !== false) && config.needsConfiguration ) {
@@ -735,14 +735,14 @@ export default class Item5e extends Item {
 
     /**
      * A hook event that fires before an item's resource consumption has been calculated.
-     * @function dnd5e.preRollConsumption
+     * @function dnd5e.preItemUsageConsumption
      * @memberof hookEvents
-     * @param {Item5e} item                     Item being rolled.
-     * @param {ItemRollConfiguration} config    Configuration data for the item roll being prepared.
-     * @param {ItemRollOptions} options         Additional options used for configuring item rolls.
-     * @returns {boolean}                       Explicitly return false to prevent item from being rolled.
+     * @param {Item5e} item                  Item being used.
+     * @param {ItemUseConfiguration} config  Configuration data for the item usage being prepared.
+     * @param {ItemUseOptions} options       Additional options used for configuring item usage.
+     * @returns {boolean}                    Explicitly return `false` to prevent item from being used.
      */
-    if ( Hooks.call("dnd5e.preRollConsumption", item, config, options) === false ) return;
+    if ( Hooks.call("dnd5e.preItemUsageConsumption", item, config, options) === false ) return;
 
     // Determine whether the item can be used by testing for resource consumption
     const usage = item._getUsageUpdates(config);
@@ -751,18 +751,18 @@ export default class Item5e extends Item {
     /**
      * A hook event that fires after an item's resource consumption has been calculated but before any
      * changes have been made.
-     * @function dnd5e.rollConsumption
+     * @function dnd5e.itemUsageConsumption
      * @memberof hookEvents
-     * @param {Item5e} item                     Item being rolled.
-     * @param {ItemRollConfiguration} config    Configuration data for the item roll being prepared.
-     * @param {ItemRollOptions} options         Additional options used for configuring item rolls.
+     * @param {Item5e} item                     Item being used.
+     * @param {ItemUseConfiguration} config     Configuration data for the item usage being prepared.
+     * @param {ItemUseOptions} options          Additional options used for configuring item usage.
      * @param {object} usage
      * @param {object} usage.actorUpdates       Updates that will be applied to the actor.
-     * @param {object} usage.itemUpdates        Updates that will be applied to the item being rolled.
+     * @param {object} usage.itemUpdates        Updates that will be applied to the item being used.
      * @param {object[]} usage.resourceUpdates  Updates that will be applied to other items on the actor.
-     * @returns {boolean}                       Explicitly return false to prevent item from being rolled.
+     * @returns {boolean}                       Explicitly return `false` to prevent item from being used.
      */
-    if ( Hooks.call("dnd5e.rollConsumption", item, config, options, usage) === false ) return;
+    if ( Hooks.call("dnd5e.itemUsageConsumption", item, config, options, usage) === false ) return;
 
     // Commit pending data updates
     const { actorUpdates, itemUpdates, resourceUpdates } = usage;
@@ -781,14 +781,14 @@ export default class Item5e extends Item {
     }
 
     /**
-     * A hook event that fires when an item is rolled, after the measured template has been created if one is needed.
-     * @function dnd5e.roll
+     * A hook event that fires when an item is used, after the measured template has been created if one is needed.
+     * @function dnd5e.useItem
      * @memberof hookEvents
-     * @param {Item5e} item                   Item being rolled.
-     * @param {ItemRollConfiguration} config  Configuration data for the roll.
-     * @param {ItemRollOptions} options       Additional options used for configuring item rolls.
+     * @param {Item5e} item                  Item being used.
+     * @param {ItemUseConfiguration} config  Configuration data for the roll.
+     * @param {ItemUseOptions} options       Additional options for configuring item usage.
      */
-    Hooks.callAll("dnd5e.roll", item, config, options);
+    Hooks.callAll("dnd5e.useItem", item, config, options);
 
     return cardData;
   }
@@ -798,8 +798,8 @@ export default class Item5e extends Item {
   /**
    * Verify that the consumed resources used by an Item are available and prepare the updates that should
    * be performed. If required resources are not available, display an error and return false.
-   * @param {ItemRollConfiguration} config  Configuration data for an item roll being prepared.
-   * @returns {object|boolean}              A set of data changes to apply when the item is used, or false.
+   * @param {ItemUseConfiguration} config  Configuration data for an item usage being prepared.
+   * @returns {object|boolean}             A set of data changes to apply when the item is used, or false.
    * @protected
    */
   _getUsageUpdates({
@@ -977,9 +977,9 @@ export default class Item5e extends Item {
 
   /**
    * Display the chat card for an Item as a Chat Message
-   * @param {ItemRollOptions} [options]  Options which configure the display of the item chat card.
-   * @returns {ChatMessage|object}       Chat message if `createMessage` is true, otherwise an object containing
-   *                                     message data.
+   * @param {ItemUseOptions} [options]  Options which configure the display of the item chat card.
+   * @returns {ChatMessage|object}      Chat message if `createMessage` is true, otherwise an object containing
+   *                                    message data.
    */
   async displayCard(options={}) {
 
@@ -1025,9 +1025,9 @@ export default class Item5e extends Item {
      * A hook event that fires before an item chat card is created.
      * @function dnd5e.preDisplayCard
      * @memberof hookEvents
-     * @param {Item5e} item              Item for which the chat card is being displayed.
-     * @param {object} chatData          Data used to create the chat message.
-     * @param {ItemRollOptions} options  Options which configure the display of the item chat card.
+     * @param {Item5e} item             Item for which the chat card is being displayed.
+     * @param {object} chatData         Data used to create the chat message.
+     * @param {ItemUseOptions} options  Options which configure the display of the item chat card.
      */
     Hooks.callAll("dnd5e.preDisplayCard", this, chatData, options);
 
@@ -1043,7 +1043,7 @@ export default class Item5e extends Item {
      * @memberof hookEvents
      * @param {Item5e} item         Item for which the chat card is being displayed.
      * @param {ChatMessage|object}  The created ChatMessage instance or ChatMessageData depending on whether
-     *                              options.createMessage was set to true.
+     *                              options.createMessage was set to `true`.
      */
     Hooks.callAll("dnd5e.displayCard", this, card);
 
