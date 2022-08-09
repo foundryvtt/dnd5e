@@ -669,11 +669,26 @@ export default class Item5e extends Item {
   /**
    * Trigger an item usage, optionally creating a chat message with followup actions.
    * @param {ItemUseOptions} [options]           Options used for configuring item usage.
+   * @returns {Promise<ChatMessage|object|void>} Chat message if options.createMessage is true, message data if it is
+   *                                             false, and nothing if the roll wasn't performed.
+   * @deprecated since 2.0 in favor of `Item5e#use`, targeted for removal in 2.4
+   */
+  async roll(options={}) {
+    foundry.utils.logCompatibilityWarning(
+      "Item5e#roll has been renamed Item5e#use. Support for the old name will be removed in future versions.",
+      { since: "DnD5e 2.0", until: "DnD5e 2.4" }
+    );
+    return this.use(undefined, options);
+  }
+
+  /**
+   * Trigger an item usage, optionally creating a chat message with followup actions.
    * @param {ItemUseConfiguration} [config]      Initial configuration data for the usage.
+   * @param {ItemUseOptions} [options]           Options used for configuring item usage.
    * @returns {Promise<ChatMessage|object|void>} Chat message if options.createMessage is true, message data if it is
    *                                             false, and nothing if the roll wasn't performed.
    */
-  async roll(options={}, config={}) {
+  async use(config={}, options={}) {
     let item = this;
     const is = item.system;
     const as = item.actor.system;

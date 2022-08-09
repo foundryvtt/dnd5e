@@ -614,7 +614,7 @@ export default class ActorSheet5e extends ActorSheet {
       html.find(".skill-name").click(this._onRollSkillCheck.bind(this));
 
       // Item Rolling
-      html.find(".rollable .item-image").click(event => this._onItemRoll(event));
+      html.find(".rollable .item-image").click(event => this._onItemUse(event));
       html.find(".item .item-recharge").click(event => this._onItemRecharge(event));
     }
 
@@ -944,16 +944,16 @@ export default class ActorSheet5e extends ActorSheet {
   /* -------------------------------------------- */
 
   /**
-   * Handle rolling an item from the Actor sheet, obtaining the Item instance, and dispatching to its roll method.
+   * Handle using an item from the Actor sheet, obtaining the Item instance, and dispatching to its use method.
    * @param {Event} event  The triggering click event.
-   * @returns {Promise}    Results of the roll.
-   * @private
+   * @returns {Promise}    Results of the usage.
+   * @protected
    */
-  _onItemRoll(event) {
+  _onItemUse(event) {
     event.preventDefault();
     const itemId = event.currentTarget.closest(".item").dataset.itemId;
     const item = this.actor.items.get(itemId);
-    if ( item ) return item.roll();
+    if ( item ) return item.use();
   }
 
   /* -------------------------------------------- */
