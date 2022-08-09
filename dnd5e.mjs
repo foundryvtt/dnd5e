@@ -87,7 +87,6 @@ Hooks.once("init", function() {
   CONFIG.ActiveEffect.documentClass = documents.ActiveEffect5e;
   CONFIG.Actor.documentClass = documents.Actor5e;
   CONFIG.Item.documentClass = documents.Item5e;
-  CONFIG.JournalEntryPage.documentClass = documents.JournalEntryPage5e;
   CONFIG.Token.documentClass = documents.TokenDocument5e;
   CONFIG.Token.objectClass = canvas.Token5e;
   CONFIG.time.roundTime = 6;
@@ -118,6 +117,7 @@ Hooks.once("init", function() {
 
   // Hook up system data types
   CONFIG.Item.systemDataModels = dataModels.item.config;
+  CONFIG.JournalEntryPage.systemDataModels = dataModels.journal.config;
 
   // Register sheet application classes
   Actors.unregisterSheet("core", ActorSheet);

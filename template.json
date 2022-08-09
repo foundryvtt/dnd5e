@@ -727,13 +727,14 @@
   },
   "JournalEntryPage": {
     "types": ["classSummary"],
-    "htmlFields": ["description.value", "description.creating", "description.quickBuild", "description.subclass"],
+    "htmlFields": ["description.value", "description.additionalHitPoints", "description.additionalTraits", "description.additionalEquipment", "description.subclass"],
     "classSummary": {
       "itemUUID": "",
       "description": {
-        "primary": "",
-        "creating": "",
-        "quickBuild": "",
+        "value": "",
+        "additionalHitPoints": "",
+        "additionalTraits": "",
+        "additionalEquipment": "",
         "subclass": ""
       }
     }

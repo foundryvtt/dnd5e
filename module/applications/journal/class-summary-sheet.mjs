@@ -30,7 +30,7 @@ export default class JournalClassSummary5ePageSheet extends JournalPageSheet {
   async getData(options) {
     const data = super.getData(options);
 
-    const linked = this.document.system.linkedItem;
+    const linked = await fromUuid(this.document.system.itemUUID);
     if ( !linked ) return data;
     data.linked = {
       document: linked,
@@ -116,20 +116,25 @@ export default class JournalClassSummary5ePageSheet extends JournalPageSheet {
     ];
     if ( scaleValues.length ) cols.push({ class: "scale", span: scaleValues.length });
 
-    const makeLink = item => TextEditor._createContentLink(["", "UUID", item.uuid]).outerHTML;
+    const makeLink = uuid => TextEditor._createContentLink(["", "UUID", uuid]).outerHTML;
 
     const rows = [];
-    for ( let [level, data] of Object.entries(this.document.system.primaryTable) ) {
-      level = parseInt(level);
+    for ( const level of Array.fromRange(CONFIG.DND5E.maxLevel, 1) ) {
+      const features = [];
+      for ( const advancement of item.advancement.byLevel[level] ) {
+        switch ( advancement.constructor.typeName ) {
+          case "ItemGrant":
+            if ( advancement.data.configuration.optional ) continue;
+            features.push(...advancement.data.configuration.items.map(makeLink));
+            continue;
+        }
+      }
 
       // Level & proficiency bonus
       const cells = [
         { class: "level", content: level.ordinalString() },
         { class: "prof", content: `+${Math.floor((level + 7) / 4)}` },
-        {
-          class: "features",
-          content: [...data.items.map(makeLink), ...data.text].join(", ")
-        }
+        { class: "features", content: features.join(", ") }
       ];
       scaleValues.forEach(s => cells.push({ class: "scale", content: s.formatValue(level) }));
       rows.push(cells);
@@ -152,7 +157,8 @@ export default class JournalClassSummary5ePageSheet extends JournalPageSheet {
   /* -------------------------------------------- */
 
   async _getFeatures(item) {
-    const prepareFeature = async document => {
+    const prepareFeature = async uuid => {
+      const document = await fromUuid(uuid);
       return {
         document,
         name: document.name,
@@ -163,8 +169,9 @@ export default class JournalClassSummary5ePageSheet extends JournalPageSheet {
     };
 
     let features = [];
-    for ( const data of Object.values(this.document.system.primaryTable) ) {
-      features.push(...data.items.map(prepareFeature));
+    for ( const advancement of item.advancement.byType.ItemGrant ) {
+      if ( advancement.data.configuration.optional ) continue;
+      features.push(...advancement.data.configuration.items.map(prepareFeature));
     }
     features = await Promise.all(features);
     return features;
