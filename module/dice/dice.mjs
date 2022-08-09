@@ -14,8 +14,10 @@
  * ## D20 Properties
  * @property {boolean} [advantage]     Apply advantage to this roll (unless overridden by modifier keys or dialog)?
  * @property {boolean} [disadvantage]  Apply disadvantage to this roll (unless overridden by modifier keys or dialog)?
- * @property {number} [critical=20]    The value of the d20 result which represents a critical success.
- * @property {number} [fumble=1]       The value of the d20 result which represents a critical failure.
+ * @property {number|null} [critical=20]  The value of the d20 result which represents a critical success,
+ *                                     `null` will prevent critical successes.
+ * @property {number|null} [fumble=1]  The value of the d20 result which represents a critical failure,
+ *                                     `null` will prevent critical failures.
  * @property {number} [targetValue]    The value of the d20 result which should represent a successful roll.
  *
  * ## Flags

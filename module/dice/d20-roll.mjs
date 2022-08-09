@@ -83,7 +83,8 @@ export default class D20Roll extends Roll {
    */
   get isCritical() {
     if ( !this._evaluated ) return undefined;
-    return this.dice[0].total >= (this.options.critical ?? 20);
+    if ( !Number.isNumeric(this.options.critical) ) return false;
+    return this.dice[0].total >= this.options.critical;
   }
 
   /* -------------------------------------------- */
@@ -94,7 +95,8 @@ export default class D20Roll extends Roll {
    */
   get isFumble() {
     if ( !this._evaluated ) return undefined;
-    return this.dice[0].total <= (this.options.fumble ?? 1);
+    if ( !Number.isNumeric(this.options.fumble) ) return false;
+    return this.dice[0].total <= this.options.fumble;
   }
 
   /* -------------------------------------------- */
