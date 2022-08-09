@@ -25,6 +25,19 @@ export default class D20Roll extends Roll {
   /* -------------------------------------------- */
 
   /**
+   * Create a D20Roll from a standard Roll instance.
+   * @param {Roll} roll
+   * @returns {D20Roll}
+   */
+  static fromRoll(roll) {
+    const newRoll = new this(roll.formula, roll.data, roll.options);
+    Object.assign(newRoll, roll);
+    return newRoll;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Advantage mode of a 5e d20 roll
    * @enum {number}
    */
@@ -52,12 +65,38 @@ export default class D20Roll extends Roll {
     return this.options.advantageMode === D20Roll.ADV_MODE.ADVANTAGE;
   }
 
+  /* -------------------------------------------- */
+
   /**
    * A convenience reference for whether this D20Roll has disadvantage
    * @type {boolean}
    */
   get hasDisadvantage() {
     return this.options.advantageMode === D20Roll.ADV_MODE.DISADVANTAGE;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Is this roll a critical success? Returns undefined if roll isn't evaluated.
+   * @type {boolean|void}
+   */
+  get isCritical() {
+    if ( !this._evaluated ) return undefined;
+    if ( !Number.isNumeric(this.options.critical) ) return false;
+    return this.dice[0].total >= this.options.critical;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Is this roll a critical failure? Returns undefined if roll isn't evaluated.
+   * @type {boolean|void}
+   */
+  get isFumble() {
+    if ( !this._evaluated ) return undefined;
+    if ( !Number.isNumeric(this.options.fumble) ) return false;
+    return this.dice[0].total <= this.options.fumble;
   }
 
   /* -------------------------------------------- */
