@@ -12,6 +12,7 @@
 export default class DamageRoll extends Roll {
   constructor(formula, data, options) {
     super(formula, data, options);
+    if ( !this.options.preprocessed ) this.preprocessFormula();
     // For backwards compatibility, skip rolls which do not have the "critical" option defined
     if ( (this.options.critical !== undefined) && !this.options.configured ) this.configureDamage();
   }
@@ -52,11 +53,10 @@ export default class DamageRoll extends Roll {
   /* -------------------------------------------- */
 
   /**
-   * Apply optional modifiers which customize the behavior of the d20term
-   * @private
+   * Perform any term-merging required to ensure that criticals can be calculated successfully.
+   * @protected
    */
-  configureDamage() {
-    let flatBonus = 0;
+  preprocessFormula() {
     for ( let [i, term] of this.terms.entries() ) {
       const nextTerm = this.terms[i + 1];
       const prevTerm = this.terms[i - 1];
@@ -88,11 +88,26 @@ export default class DamageRoll extends Roll {
           const newTerm = (new Roll(newFormula)).terms[0];
           this.terms.splice(i, 2, newTerm);
           term = newTerm;
-        } else if ( this.isCritical ) {
-          term.term = `${this.options.criticalMultiplier ?? 2} * (${term.term})`;
         }
       }
+    }
 
+    // Re-compile the underlying formula
+    this._formula = this.constructor.getFormula(this.terms);
+
+    // Mark configuration as complete
+    this.options.preprocessed = true;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Apply optional modifiers which customize the behavior of the d20term.
+   * @protected
+   */
+  configureDamage() {
+    let flatBonus = 0;
+    for ( let [i, term] of this.terms.entries() ) {
       // Multiply dice terms
       if ( term instanceof DiceTerm ) {
         term.options.baseNumber = term.options.baseNumber ?? term.number; // Reset back
@@ -111,7 +126,6 @@ export default class DamageRoll extends Roll {
           term.alter(cm, cb);
           term.options.critical = true;
         }
-
       }
 
       // Multiply numeric terms
