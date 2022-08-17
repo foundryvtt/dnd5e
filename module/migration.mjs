@@ -567,48 +567,6 @@ function _migrateActorAC(actorData, updateData) {
 /* -------------------------------------------- */
 
 /**
- * Renamed token images.
- * @type {Object<string, string>}
- */
-const TOKEN_IMAGE_RENAME = {
-  "systems/dnd5e/tokens/beast/OwlWhite.png": "systems/dnd5e/tokens/beast/Owl.webp",
-  "systems/dnd5e/tokens/beast/ScorpionSand.png": "systems/dnd5e/tokens/beast/Scorpion.webp",
-  "systems/dnd5e/tokens/beast/BaboonBlack.png": "systems/dnd5e/tokens/beast/Baboon.webp",
-  "systems/dnd5e/tokens/humanoid/BanditRedM.png": "systems/dnd5e/tokens/humanoid/Bandit.webp",
-  "systems/dnd5e/tokens/humanoid/GuardBlueM.png": "systems/dnd5e/tokens/humanoid/Guard.webp",
-  "systems/dnd5e/tokens/humanoid/HumanBrownM.png": "systems/dnd5e/tokens/humanoid/Commoner.webp",
-  "systems/dnd5e/tokens/humanoid/NobleSwordM.png": "systems/dnd5e/tokens/humanoid/Noble.webp",
-  "systems/dnd5e/tokens/humanoid/MerfolkBlue.png": "systems/dnd5e/tokens/humanoid/Merfolk.webp",
-  "systems/dnd5e/tokens/humanoid/TribalWarriorM.png": "systems/dnd5e/tokens/humanoid/TribalWarrior.webp",
-  "systems/dnd5e/tokens/devil/Lemure.png": "systems/dnd5e/tokens/fiend/Lemure.webp",
-  "systems/dnd5e/tokens/humanoid/Satyr.png": "systems/dnd5e/tokens/fey/Satyr.webp",
-  "systems/dnd5e/tokens/beast/WinterWolf.png": "systems/dnd5e/tokens/monstrosity/WinterWolf.webp"
-};
-
-/**
- * Re-scaled token images.
- * @type {Object<string, number>}
- */
-const TOKEN_IMAGE_RESCALE = {
-  "systems/dnd5e/tokens/beast/HunterShark.png": 1.5,
-  "systems/dnd5e/tokens/beast/GiantElk.png": 1.5,
-  "systems/dnd5e/tokens/monstrosity/Bulette.png": 1.5,
-  "systems/dnd5e/tokens/beast/Wolf.png": 1.5,
-  "systems/dnd5e/tokens/beast/Panther.png": 1.5,
-  "systems/dnd5e/tokens/beast/Elk.png": 1.5,
-  "systems/dnd5e/tokens/beast/AxeBeak.png": 1.5,
-  "systems/dnd5e/tokens/beast/GiantVulture.png": 1.5,
-  "systems/dnd5e/tokens/beast/GiantSpider.png": 1.5,
-  "systems/dnd5e/tokens/beast/DireWolf.png": 1.5,
-  "systems/dnd5e/tokens/monstrosity/DeathDog.png": 1.5,
-  "systems/dnd5e/tokens/devil/Lemure.png": 1.5,
-  "systems/dnd5e/tokens/beast/Deer.png": 1.1,
-  "systems/dnd5e/tokens/beast/GiantWeasel.png": 1.5,
-  "systems/dnd5e/tokens/beast/Camel.png": 1.2,
-  "systems/dnd5e/tokens/beast/BloodHawk.png": 1.5
-};
-
-/**
  * Migrate any system token images from PNG to WEBP.
  * @param {object} actorData    Actor or token data to migrate.
  * @param {object} updateData   Existing update to expand upon.
@@ -616,28 +574,14 @@ const TOKEN_IMAGE_RESCALE = {
  * @private
  */
 function _migrateTokenImage(actorData, updateData) {
-  ["texture.src", "prototypeToken.texture.src"].forEach(prop => {
-    const img = foundry.utils.getProperty(actorData, prop);
-
-    // Special fix for a renamed token that we missed the first time.
-    if ( img === "systems/dnd5e/tokens/humanoid/HumanBrownM.webp" ) {
-      updateData[prop] = "systems/dnd5e/tokens/humanoid/Commoner.webp";
-      return updateData;
+  const oldSystemPNG = /^systems\/dnd5e\/tokens\/([a-z]+)\/([A-z]+).png$/
+  for ( const path of ["texture.src", "prototypeToken.texture.src"] ) {
+    const v = foundry.utils.getProperty(actorData, path);
+    if ( oldSystemPNG.test(v) ) {
+      const [type, fileName] = v.match(oldSystemPNG).slice(1);
+      updateData[path] = `systems/dnd5e/tokens/${type}/${fileName}.webp`;
     }
-
-    // Replace image with WEBP equivalent, renaming if necessary
-    if ( !img?.startsWith("systems/dnd5e/tokens/") || img?.endsWith(".webp") ) return;
-    updateData[prop] = TOKEN_IMAGE_RENAME[img] ?? img.replace(/\.png$/, ".webp");
-
-    // Adjust scaling to match new image
-    const scalePrefix = `${prop.startsWith("prototypeToken.") ? "prototypeToken." : ""}texture`;
-    if ( !foundry.utils.hasProperty(actorData, `${scalePrefix}.scaleX`) ) return;
-    const rescale = TOKEN_IMAGE_RESCALE[img];
-    if ( rescale ) {
-      updateData[`${scalePrefix}.scaleX`] = rescale;
-      updateData[`${scalePrefix}.scaleY`] = rescale;
-    }
-  });
+  }
   return updateData;
 }
 
