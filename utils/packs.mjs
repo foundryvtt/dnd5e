@@ -11,7 +11,7 @@ import yargs from "yargs";
  * Parsed arguments passed in through the command line.
  * @type {object}
  */
-const parsedArgs = yargs().argv;
+const parsedArgs = yargs(process.argv).argv;
 
 /**
  * Folder where the compiled compendium packs should be located relative to the

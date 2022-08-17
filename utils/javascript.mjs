@@ -11,7 +11,7 @@ import yargs from "yargs";
  * Parsed arguments passed in through the command line.
  * @type {object}
  */
-const parsedArgs = yargs().argv;
+const parsedArgs = yargs(process.argv).argv;
 
 /**
  * Paths of javascript files that should be linted.
