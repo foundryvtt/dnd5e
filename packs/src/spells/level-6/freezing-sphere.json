@@ -23,6 +23,7 @@
     },
     "target": {
       "value": 60,
+      "width": null,
       "units": "ft",
       "type": "sphere"
     },
@@ -33,8 +34,13 @@
     },
     "uses": {
       "value": 0,
-      "max": 0,
+      "max": "0",
       "per": ""
+    },
+    "consume": {
+      "type": "",
+      "target": "",
+      "amount": null
     },
     "ability": "",
     "actionType": "save",
@@ -86,6 +92,7 @@
   },
   "sort": 100001,
   "flags": {},
-  "img": "icons/magic/light/explosion-star-large-blue.webp",
-  "effects": []
+  "img": "icons/magic/light/explosion-star-blue-large.webp",
+  "effects": [],
+  "folder": null
 }

@@ -23,6 +23,7 @@
     },
     "target": {
       "value": 40,
+      "width": null,
       "units": "ft",
       "type": "cube"
     },
@@ -33,8 +34,13 @@
     },
     "uses": {
       "value": 0,
-      "max": 0,
+      "max": "0",
       "per": ""
+    },
+    "consume": {
+      "type": "",
+      "target": "",
+      "amount": null
     },
     "ability": "",
     "actionType": "save",
@@ -82,6 +88,7 @@
   },
   "sort": 100001,
   "flags": {},
-  "img": "icons/magic/air/fog-gas-smoke-dense-purple.webp",
-  "effects": []
+  "img": "icons/magic/air/fog-gas-smoke-dense-pink.webp",
+  "effects": [],
+  "folder": null
 }

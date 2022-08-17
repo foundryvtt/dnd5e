@@ -23,6 +23,7 @@
     },
     "target": {
       "value": 90,
+      "width": null,
       "units": "ft",
       "type": "wall"
     },
@@ -33,8 +34,13 @@
     },
     "uses": {
       "value": 0,
-      "max": 0,
+      "max": "0",
       "per": ""
+    },
+    "consume": {
+      "type": "",
+      "target": "",
+      "amount": null
     },
     "ability": "",
     "actionType": "save",
@@ -87,6 +93,7 @@
   },
   "sort": 100001,
   "flags": {},
-  "img": "icons/magic/light/beam-rays-orange-purple.webp",
-  "effects": []
+  "img": "icons/magic/light/beams-rays-orange-purple.webp",
+  "effects": [],
+  "folder": null
 }

@@ -23,6 +23,7 @@
     },
     "target": {
       "value": 60,
+      "width": null,
       "units": "ft",
       "type": "sphere"
     },
@@ -33,8 +34,13 @@
     },
     "uses": {
       "value": 0,
-      "max": 0,
+      "max": "0",
       "per": ""
+    },
+    "consume": {
+      "type": "",
+      "target": "",
+      "amount": null
     },
     "ability": "",
     "actionType": "save",
@@ -86,6 +92,7 @@
   },
   "sort": 100001,
   "flags": {},
-  "img": "icons/magic/air/air-burst-spiral-teal-large-green.webp",
-  "effects": []
+  "img": "icons/magic/air/air-burst-spiral-large-teal-green.webp",
+  "effects": [],
+  "folder": null
 }
