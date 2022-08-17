@@ -3,7 +3,7 @@
   "name": "Eyes of the Eagle",
   "type": "equipment",
   "img": "icons/magic/perception/hand-eye-pink.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p><em>Wondrous item, (requires attunement)</em></p>\n<p>These crystal lenses fit over the eyes. While wearing them, you have advantage on Wisdom (Perception) checks that rely on sight. In conditions of clear visibility, you can make out details of even extremely distant creatures and objects as small as 2 feet across.</p>",
       "chat": "",
@@ -90,7 +90,7 @@
   "effects": [],
   "folder": null,
   "sort": 1800000,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

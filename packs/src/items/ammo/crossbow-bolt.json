@@ -3,7 +3,7 @@
   "name": "Crossbow Bolt",
   "type": "consumable",
   "img": "icons/weapons/ammunition/arrows-bodkin-yellow-red.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>This ammunition is used for all varieties of crossbow and is typically a short metal shaft with a narrow piercing tip.</p>",
       "chat": "",
@@ -80,7 +80,7 @@
   "effects": [],
   "folder": null,
   "sort": 4400000,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

@@ -1,11 +1,11 @@
 {
   "_id": "BQk5Row4NymMnUQl",
   "name": "Hideous Laughter",
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "type": "spell",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>A creature of your choice that you can see within range perceives everything as hilariously funny and falls into fits of laughter if this spell affects it. The target must succeed on a Wisdom saving throw or fall prone, becoming Incapacitated and unable to stand up for the Duration. A creature with an Intelligence score of 4 or less isn't affected.</p><p>At the end of each of its turns, and each time it takes damage, the target can make another Wisdom saving throw. The target has advantage on the saving throw if it's triggered by damage. On a success, the spell ends.</p>",
       "chat": "",
@@ -82,6 +82,6 @@
   },
   "sort": 100001,
   "flags": {},
-  "img": "systems/dnd5e/icons/spells/explosion-magenta-2.jpg",
+  "img": "icons/magic/fire/explosion-fireball-medium-purple-pink.webp",
   "effects": []
 }

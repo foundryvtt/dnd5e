@@ -3,7 +3,7 @@
   "name": "Blanket",
   "type": "loot",
   "img": "icons/sundries/flags/banner-worn-green.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>A sheet of blanket to keep you warm at night.</p>",
       "chat": "",
@@ -24,7 +24,7 @@
   "effects": [],
   "folder": null,
   "sort": 3800000,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

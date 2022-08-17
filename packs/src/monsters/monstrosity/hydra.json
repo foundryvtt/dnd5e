@@ -3,11 +3,15 @@
   "name": "Hydra",
   "type": "npc",
   "img": "icons/svg/mystery-man.svg",
-  "data": {
+  "system": {
     "abilities": {
       "str": {
         "value": 20,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 5,
         "save": 5,
@@ -19,6 +23,10 @@
       "dex": {
         "value": 12,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 1,
         "save": 1,
@@ -30,6 +38,10 @@
       "con": {
         "value": 20,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 5,
         "save": 5,
@@ -41,6 +53,10 @@
       "int": {
         "value": 2,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": -4,
         "save": -4,
@@ -52,6 +68,10 @@
       "wis": {
         "value": 10,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 0,
         "save": 0,
@@ -63,6 +83,10 @@
       "cha": {
         "value": 7,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": -2,
         "save": -2,
@@ -102,6 +126,9 @@
         "walk": 30,
         "units": "ft",
         "hover": false
+      },
+      "attunement": {
+        "max": 3
       },
       "senses": {
         "darkvision": 60,
@@ -178,6 +205,10 @@
       "acr": {
         "value": 0,
         "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 1,
         "bonus": 0,
         "passive": 11,
@@ -187,6 +218,10 @@
       "ani": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 0,
         "bonus": 0,
         "passive": 10,
@@ -196,6 +231,10 @@
       "arc": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": -4,
         "bonus": 0,
         "passive": 6,
@@ -205,6 +244,10 @@
       "ath": {
         "value": 0,
         "ability": "str",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 5,
         "bonus": 0,
         "passive": 15,
@@ -214,6 +257,10 @@
       "dec": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": -2,
         "bonus": 0,
         "passive": 8,
@@ -223,6 +270,10 @@
       "his": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": -4,
         "bonus": 0,
         "passive": 6,
@@ -232,6 +283,10 @@
       "ins": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 0,
         "bonus": 0,
         "passive": 10,
@@ -241,6 +296,10 @@
       "itm": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": -2,
         "bonus": 0,
         "passive": 8,
@@ -250,6 +309,10 @@
       "inv": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": -4,
         "bonus": 0,
         "passive": 6,
@@ -259,6 +322,10 @@
       "med": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 0,
         "bonus": 0,
         "passive": 10,
@@ -268,6 +335,10 @@
       "nat": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": -4,
         "bonus": 0,
         "passive": 6,
@@ -277,6 +348,10 @@
       "prc": {
         "value": 2,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 0,
         "bonus": 0,
         "passive": 16,
@@ -286,6 +361,10 @@
       "prf": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": -2,
         "bonus": 0,
         "passive": 8,
@@ -295,6 +374,10 @@
       "per": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": -2,
         "bonus": 0,
         "passive": 8,
@@ -304,6 +387,10 @@
       "rel": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": -4,
         "bonus": 0,
         "passive": 6,
@@ -313,6 +400,10 @@
       "slt": {
         "value": 0,
         "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 1,
         "bonus": 0,
         "passive": 11,
@@ -322,6 +413,10 @@
       "ste": {
         "value": 0,
         "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 1,
         "bonus": 0,
         "passive": 11,
@@ -331,6 +426,10 @@
       "sur": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 0,
         "bonus": 0,
         "passive": 10,
@@ -436,7 +535,7 @@
       }
     }
   },
-  "token": {
+  "prototypeToken": {
     "name": "Hydra",
     "displayName": 20,
     "actorLink": false,
@@ -472,7 +571,28 @@
     "randomImg": false,
     "img": "icons/svg/mystery-man.svg",
     "actorId": "K4vsSlHqbBAHUDHY",
-    "alpha": 1
+    "alpha": 1,
+    "light": {
+      "alpha": 0.5,
+      "angle": 0,
+      "bright": 0,
+      "coloration": 1,
+      "dim": 0,
+      "gradual": true,
+      "luminosity": 0.5,
+      "saturation": 0,
+      "contrast": 0,
+      "shadows": 0,
+      "animation": {
+        "speed": 5,
+        "intensity": 5,
+        "reverse": false
+      },
+      "darkness": {
+        "min": 0,
+        "max": 1
+      }
+    }
   },
   "items": [
     {
@@ -480,7 +600,7 @@
       "name": "Hold Breath",
       "type": "feat",
       "img": "icons/magic/water/orb-water-transparent.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The hydra can hold its breath for 1 hour.</p>",
           "chat": "",
@@ -545,7 +665,7 @@
       "effects": [],
       "folder": null,
       "sort": 100000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -555,7 +675,7 @@
       "name": "Multiple Heads",
       "type": "feat",
       "img": "icons/skills/melee/strike-sword-stabbed-brown.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p>The hydra has five heads. While it has more than one head, the hydra has<strong> advantage </strong>on saving throws <strong>against being blinded, charmed, deafened, frightened, stunned, and knocked unconscious</strong><strong>. </strong></p>\n<p>Whenever the hydra takes 25 or more damage in a single turn, one of its heads dies. If all its heads die, the hydra dies.</p>\n<p>At the end of its turn, it grows two heads for each of its heads that died since its last turn, unless it has taken <em>fire damage</em> since its last turn. The hydra regains <strong>10 hit points</strong> for each head regrown in this way.</p>\n</section>\n<p>The hydra has five heads. While it has more than one head, the hydra has<strong> advantage </strong>on saving throws <strong>against being blinded, charmed, deafened, frightened, stunned, and knocked unconscious</strong>.</p>",
           "chat": "",
@@ -620,7 +740,7 @@
       "effects": [],
       "folder": null,
       "sort": 200000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -630,7 +750,7 @@
       "name": "Reactive Heads",
       "type": "feat",
       "img": "icons/magic/death/skull-trio-badge-purple.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>For each head the hydra has beyond one, it gets an extra reaction that can be used only for opportunity attacks.</p>",
           "chat": "",
@@ -695,7 +815,7 @@
       "effects": [],
       "folder": null,
       "sort": 300000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -705,7 +825,7 @@
       "name": "Wakeful",
       "type": "feat",
       "img": "icons/creatures/eyes/lizard-single-slit-blue.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>While the hydra sleeps, at least one of its heads is awake.</p>",
           "chat": "",
@@ -770,7 +890,7 @@
       "effects": [],
       "folder": null,
       "sort": 400000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -780,7 +900,7 @@
       "name": "Multiattack",
       "type": "feat",
       "img": "icons/skills/melee/blade-tips-triple-steel.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The hydra makes as many bite attacks as it has heads.</p>",
           "chat": "",
@@ -845,7 +965,7 @@
       "effects": [],
       "folder": null,
       "sort": 500000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -855,7 +975,7 @@
       "name": "Bite",
       "type": "weapon",
       "img": "icons/creatures/abilities/mouth-teeth-long-red.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\"><p><em>Melee Weapon Attack:</em><strong>+8 to hit,</strong>, <strong>10 ft.,</strong> one target. Hit: <strong>10 (1d10 + 5) <em>piercing damage</em></strong>.</p><p></p></section><p>The Hydra attacks with its Bite.</p>",
           "chat": "",
@@ -932,6 +1052,7 @@
           "conditions": ""
         },
         "weaponType": "natural",
+        "baseItem": "",
         "properties": {
           "amm": false,
           "fin": false,
@@ -954,7 +1075,7 @@
       "effects": [],
       "folder": null,
       "sort": 600000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -963,7 +1084,7 @@
   "effects": [],
   "folder": "DuRKNuzI99G8kWWa",
   "sort": 0,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

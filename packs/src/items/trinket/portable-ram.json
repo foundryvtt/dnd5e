@@ -3,7 +3,7 @@
   "name": "Portable Ram",
   "type": "consumable",
   "img": "icons/commodities/wood/bamboo-brown.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>You can use a portable ram to break down doors. When doing so, you gain a +4 bonus on the Strength check. One other character can help you use the ram, giving you advantage on this check.</p>",
       "chat": "",
@@ -77,7 +77,7 @@
   "effects": [],
   "folder": null,
   "sort": 3700000,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

@@ -1,11 +1,11 @@
 {
   "_id": "ImlCJQwR1VL40Qem",
   "name": "Arcane Eye",
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "type": "spell",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>You create an invisible, magical eye within range that hovers in the air for the duration.</p><p>You mentally receive visual information from the eye, which has normal vision and darkvision out to 30 feet. The eye can look in every direction.</p><p>As an action, you can move the eye up to 30 feet in any direction. There is no limit to how far away from you the eye can move, but it can't enter another plane of existence. A solid barrier blocks the eye's movement, but the eye can pass through an opening as small as 1 inch in diameter.</p>",
       "chat": "",
@@ -83,6 +83,6 @@
   },
   "sort": 100001,
   "flags": {},
-  "img": "systems/dnd5e/icons/spells/evil-eye-eerie-2.jpg",
+  "img": "icons/magic/perception/eye-ringed-glow-angry-teal.webp",
   "effects": []
 }

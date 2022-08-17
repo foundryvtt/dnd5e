@@ -3,7 +3,7 @@
   "name": "Stone of Good Luck (Luckstone)",
   "type": "equipment",
   "img": "icons/commodities/gems/gem-faceted-octagon-yellow.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p><em>Wondrous item, (requires attunement)</em></p>\n<p>While this polished agate is on your person, you gain a +1 bonus to ability checks and saving throws.</p>",
       "chat": "",
@@ -90,7 +90,7 @@
   "effects": [],
   "folder": null,
   "sort": 1300000,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

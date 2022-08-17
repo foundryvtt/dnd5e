@@ -1,11 +1,11 @@
 {
   "_id": "Z9p1vezIn95jw1Yw",
   "name": "Eldritch Blast",
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "type": "spell",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>A beam of crackling energy streaks toward a creature within range. Make a ranged spell attack against the target. On a hit, the target takes 1d10 force damage.</p><p>The spell creates more than one beam when you reach higher levels: two beams at 5th level, three beams at 11th level, and four beams at 17th level. You can direct the beams at the same target or at different ones. Make a separate attack roll for each beam.</p>",
       "chat": "",
@@ -86,6 +86,6 @@
   },
   "sort": 100001,
   "flags": {},
-  "img": "systems/dnd5e/icons/spells/fireball-eerie-1.jpg",
+  "img": "icons/magic/fire/projectile-fireball-smoke-teal.webp",
   "effects": []
 }

@@ -3,11 +3,15 @@
   "name": "Knight",
   "type": "npc",
   "img": "systems/dnd5e/tokens/humanoid/Knight.webp",
-  "data": {
+  "system": {
     "abilities": {
       "str": {
         "value": 16,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 3,
         "save": 3,
@@ -19,6 +23,10 @@
       "dex": {
         "value": 11,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 0,
         "save": 0,
@@ -30,6 +38,10 @@
       "con": {
         "value": 14,
         "proficient": 1,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 2,
         "save": 4,
@@ -41,6 +53,10 @@
       "int": {
         "value": 11,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 0,
         "save": 0,
@@ -52,6 +68,10 @@
       "wis": {
         "value": 11,
         "proficient": 1,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 0,
         "save": 2,
@@ -63,6 +83,10 @@
       "cha": {
         "value": 15,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 2,
         "save": 2,
@@ -102,6 +126,9 @@
         "walk": 30,
         "units": "ft",
         "hover": false
+      },
+      "attunement": {
+        "max": 3
       },
       "senses": {
         "darkvision": 0,
@@ -180,6 +207,10 @@
       "acr": {
         "value": 0,
         "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 0,
         "bonus": 0,
         "passive": 10,
@@ -189,6 +220,10 @@
       "ani": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 0,
         "bonus": 0,
         "passive": 10,
@@ -198,6 +233,10 @@
       "arc": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 0,
         "bonus": 0,
         "passive": 10,
@@ -207,6 +246,10 @@
       "ath": {
         "value": 0,
         "ability": "str",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 3,
         "bonus": 0,
         "passive": 13,
@@ -216,6 +259,10 @@
       "dec": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 2,
         "bonus": 0,
         "passive": 12,
@@ -225,6 +272,10 @@
       "his": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 0,
         "bonus": 0,
         "passive": 10,
@@ -234,6 +285,10 @@
       "ins": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 0,
         "bonus": 0,
         "passive": 10,
@@ -243,6 +298,10 @@
       "itm": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 2,
         "bonus": 0,
         "passive": 12,
@@ -252,6 +311,10 @@
       "inv": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 0,
         "bonus": 0,
         "passive": 10,
@@ -261,6 +324,10 @@
       "med": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 0,
         "bonus": 0,
         "passive": 10,
@@ -270,6 +337,10 @@
       "nat": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 0,
         "bonus": 0,
         "passive": 10,
@@ -279,6 +350,10 @@
       "prc": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 0,
         "bonus": 0,
         "passive": 10,
@@ -288,6 +363,10 @@
       "prf": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 2,
         "bonus": 0,
         "passive": 12,
@@ -297,6 +376,10 @@
       "per": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 2,
         "bonus": 0,
         "passive": 12,
@@ -306,6 +389,10 @@
       "rel": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 0,
         "bonus": 0,
         "passive": 10,
@@ -315,6 +402,10 @@
       "slt": {
         "value": 0,
         "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 0,
         "bonus": 0,
         "passive": 10,
@@ -324,6 +415,10 @@
       "ste": {
         "value": 0,
         "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 0,
         "bonus": 0,
         "passive": 10,
@@ -333,6 +428,10 @@
       "sur": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 0,
         "bonus": 0,
         "passive": 10,
@@ -438,7 +537,7 @@
       }
     }
   },
-  "token": {
+  "prototypeToken": {
     "name": "Knight",
     "displayName": 20,
     "actorLink": false,
@@ -474,7 +573,28 @@
     "randomImg": false,
     "img": "systems/dnd5e/tokens/humanoid/Knight.webp",
     "actorId": "D5UqYD1EnTrJaMTO",
-    "alpha": 1
+    "alpha": 1,
+    "light": {
+      "alpha": 0.5,
+      "angle": 0,
+      "bright": 0,
+      "coloration": 1,
+      "dim": 0,
+      "gradual": true,
+      "luminosity": 0.5,
+      "saturation": 0,
+      "contrast": 0,
+      "shadows": 0,
+      "animation": {
+        "speed": 5,
+        "intensity": 5,
+        "reverse": false
+      },
+      "darkness": {
+        "min": 0,
+        "max": 1
+      }
+    }
   },
   "items": [
     {
@@ -482,7 +602,7 @@
       "name": "Plate Armor",
       "type": "equipment",
       "img": "icons/equipment/chest/breastplate-cuirass-steel-grey.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>Plate consists of shaped, interlocking metal plates to cover the entire body. A suit of plate includes gauntlets, heavy leather boots, a visored helmet, and thick layers of padding underneath the armor. Buckles and straps distribute the weight over the body.</p>",
           "chat": "",
@@ -555,6 +675,7 @@
           "dt": null,
           "conditions": ""
         },
+        "baseItem": "",
         "speed": {
           "value": null,
           "conditions": ""
@@ -567,7 +688,7 @@
       "effects": [],
       "folder": null,
       "sort": 600001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -577,7 +698,7 @@
       "name": "Multiattack",
       "type": "feat",
       "img": "icons/skills/melee/blade-tips-triple-steel.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The knight makes two melee attacks.</p>",
           "chat": "",
@@ -645,7 +766,7 @@
       "effects": [],
       "folder": null,
       "sort": 200001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -655,7 +776,7 @@
       "name": "Greatsword",
       "type": "weapon",
       "img": "icons/weapons/swords/greatsword-guard-gem-blue.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+5 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>10 (2d6 + 3) <em>slashing damage</em></strong>.</p></section>\n<p>The Knight attacks with its Greatsword.</p>",
           "chat": "",
@@ -732,6 +853,7 @@
           "conditions": ""
         },
         "weaponType": "martialM",
+        "baseItem": "",
         "properties": {
           "hvy": true,
           "two": true,
@@ -754,7 +876,7 @@
       "effects": [],
       "folder": null,
       "sort": 300001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -764,7 +886,7 @@
       "name": "Heavy Crossbow",
       "type": "weapon",
       "img": "icons/weapons/crossbows/crossbow-blue.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p>Ranged Weapon Attack: +2 to hit, range 100/400 ft., one target. Hit: <strong>5 (1d10) <em>piercing damage</em></strong>.</p></section>\n<p>The Knight attacks with its Heavy Crossbow.</p>",
           "chat": "",
@@ -841,6 +963,7 @@
           "conditions": ""
         },
         "weaponType": "martialR",
+        "baseItem": "",
         "properties": {
           "amm": true,
           "hvy": true,
@@ -863,7 +986,7 @@
       "effects": [],
       "folder": null,
       "sort": 400001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -873,7 +996,7 @@
       "name": "Leadership",
       "type": "feat",
       "img": "icons/sundries/documents/document-sealed-red-yellow.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>For 1 minute, the knight can utter a special command or warning whenever a nonhostile creature that it can see within 30 ft. of it makes an attack roll or a saving throw. The creature can add a d4 to its roll provided it can hear and understand the knight. A creature can benefit from only one Leadership die at a time. This effect ends if the knight is incapacitated.</p>",
           "chat": "",
@@ -941,7 +1064,7 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -951,7 +1074,7 @@
       "name": "Parry",
       "type": "feat",
       "img": "icons/skills/melee/weapons-crossed-swords-yellow-teal.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p>The knight adds 2 to its <strong>AC</strong> against one melee Attack that would hit it. To do so, the knight must see the attacker and be wielding a melee weapon.</p>\n</section>\n<p>The knight adds 2 to its <strong>AC</strong> against one melee Attack that would hit it.</p>",
           "chat": "",
@@ -1019,7 +1142,7 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -1029,7 +1152,7 @@
       "name": "Brave",
       "type": "feat",
       "img": "icons/skills/social/intimidation-impressing.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The knight has<strong> advantage </strong>on saving throws against being frightened.</p>",
           "chat": "",
@@ -1094,7 +1217,7 @@
       "effects": [],
       "folder": null,
       "sort": 500001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -1103,7 +1226,7 @@
   "effects": [],
   "folder": "3IciKJ8pYVvyuEok",
   "sort": 0,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

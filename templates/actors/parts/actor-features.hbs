@@ -1,0 +1,108 @@
+{{#unless isVehicle}}
+<div class="inventory-filters flexrow">
+    <ul class="filter-list flexrow" data-filter="features">
+        <li class="filter-item" data-filter="action">{{localize "DND5E.Action"}}</li>
+        <li class="filter-item" data-filter="bonus">{{localize "DND5E.BonusAction"}}</li>
+        <li class="filter-item" data-filter="reaction">{{localize "DND5E.Reaction"}}</li>
+    </ul>
+</div>
+{{/unless}}
+
+<ol class="items-list inventory-list">
+{{#each sections as |section sid|}}
+    <li class="items-header flexrow">
+        <h3 class="item-name flexrow">{{localize section.label}}</h3>
+
+        {{#if section.hasActions}}
+        <div class="item-detail item-uses">{{localize "DND5E.Uses"}}</div>
+        <div class="item-detail item-action">{{localize "DND5E.Usage"}}</div>
+        {{/if}}
+
+        {{#if section.columns}}
+            {{#each section.columns}}
+                <div class="item-detail {{css}}">{{label}}</div>
+            {{/each}}
+        {{/if}}
+
+        {{#if ../owner}}
+        <div class="item-controls flexrow">
+            <a class="item-control item-create" title="{{localize 'DND5E.FeatureAdd'}}" {{#each section.dataset as |v k|}}data-{{k}}="{{v}}"{{/each}}>
+                <i class="fas fa-plus"></i> {{localize "DND5E.Add"}}
+            </a>
+        </div>
+        {{/if}}
+    </li>
+
+    <ol class="item-list">
+    {{#each section.items as |item iid|}}
+        <li class="item flexrow {{#if isDepleted}}depleted{{/if}}" data-item-id="{{item._id}}">
+            <div class="item-name flexrow rollable">
+                <div class="item-image" tabindex="0" role="button" aria-label="{{item.name}}" style="background-image: url('{{item.img}}')"></div>
+                <h4>
+                    {{#if (eq item.type "subclass")}}&rdsh;{{/if}}
+                    {{item.name}}
+                    {{#if item.system.isOriginalClass}} <i class="original-class fas fa-sun" title="{{localize 'DND5E.ClassOriginal'}}"></i>{{/if}}
+                </h4>
+            </div>
+
+            {{#if section.hasActions}}
+            <div class="item-detail item-uses">
+                {{#if item.isOnCooldown}}
+                    <a class="item-recharge rollable">{{item.labels.recharge}}</a>
+                {{else if item.system.recharge.value}}
+                    {{localize "DND5E.Charged"}}
+                {{else if item.hasUses}}
+                    <input type="text" value="{{item.system.uses.value}}" placeholder="0"/>/ {{item.system.uses.max}}
+                {{/if}}
+            </div>
+            <div class="item-detail item-action">
+                {{#if item.system.activation.type}}
+                    {{item.labels.activation}}
+                {{/if}}
+            </div>
+
+            {{else if (eq item.type "class")}}
+            <div class="item-detail item-action">
+                <select class="level-selector">
+                    {{#select 0}}
+                    {{#each item.availableLevels}}
+                        <option value="{{this.delta}}" {{disabled this.disabled}}>
+                            {{localize "DND5E.LevelNumber" level=this.level}}
+                            {{#if this.delta}}({{numberFormat this.delta sign=true}}){{/if}}
+                        </option>
+                    {{/each}}
+                    {{/select}}
+                </select>
+            </div>
+            {{/if}}
+
+            {{#if section.columns}}
+                {{#each section.columns}}
+                    <div class="item-detail {{css}}">
+                        {{#if editable}}
+                            <input type="text" value="{{getProperty item property}}" placeholder="&mdash;"
+                                   data-dtype="{{editable}}">
+                        {{else}}
+                            {{getProperty item property}}
+                        {{/if}}
+                    </div>
+                {{/each}}
+            {{/if}}
+
+            {{#if ../../owner}}
+            <div class="item-controls flexrow">
+                {{#if section.crewable}}
+                <a class="item-control item-toggle {{item.toggleClass}}"
+                   title="{{item.toggleTitle}}">
+                    <i class="fas fa-sun"></i>
+                </a>
+                {{/if}}
+                <a class="item-control item-edit" title="{{localize 'DND5E.ItemEdit'}}"><i class="fas fa-edit"></i></a>
+                <a class="item-control item-delete" title="{{localize 'DND5E.ItemDelete'}}"><i class="fas fa-trash"></i></a>
+            </div>
+            {{/if}}
+        </li>
+    {{/each}}
+    </ol>
+{{/each}}
+</ol>

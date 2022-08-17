@@ -3,11 +3,15 @@
   "name": "Solar",
   "type": "npc",
   "img": "icons/svg/mystery-man.svg",
-  "data": {
+  "system": {
     "abilities": {
       "str": {
         "value": 26,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 8,
         "save": 8,
@@ -19,6 +23,10 @@
       "dex": {
         "value": 22,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 6,
         "save": 6,
@@ -30,6 +38,10 @@
       "con": {
         "value": 26,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 8,
         "save": 8,
@@ -41,6 +53,10 @@
       "int": {
         "value": 25,
         "proficient": 1,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 7,
         "save": 14,
@@ -52,6 +68,10 @@
       "wis": {
         "value": 25,
         "proficient": 1,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 7,
         "save": 14,
@@ -63,6 +83,10 @@
       "cha": {
         "value": 30,
         "proficient": 1,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 10,
         "save": 17,
@@ -102,6 +126,9 @@
         "walk": 50,
         "units": "ft",
         "hover": false
+      },
+      "attunement": {
+        "max": 3
       },
       "senses": {
         "darkvision": 0,
@@ -188,6 +215,10 @@
       "acr": {
         "value": 0,
         "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 6,
         "passive": 16,
@@ -197,6 +228,10 @@
       "ani": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 7,
         "passive": 17,
@@ -206,6 +241,10 @@
       "arc": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 7,
         "passive": 17,
@@ -215,6 +254,10 @@
       "ath": {
         "value": 0,
         "ability": "str",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 8,
         "passive": 18,
@@ -224,6 +267,10 @@
       "dec": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 10,
         "passive": 20,
@@ -233,6 +280,10 @@
       "his": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 7,
         "passive": 17,
@@ -242,6 +293,10 @@
       "ins": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 7,
         "passive": 17,
@@ -251,6 +306,10 @@
       "itm": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 10,
         "passive": 20,
@@ -260,6 +319,10 @@
       "inv": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 7,
         "passive": 17,
@@ -269,6 +332,10 @@
       "med": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 7,
         "passive": 17,
@@ -278,6 +345,10 @@
       "nat": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 7,
         "passive": 17,
@@ -287,6 +358,10 @@
       "prc": {
         "value": 1,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 7,
         "passive": 24,
@@ -296,6 +371,10 @@
       "prf": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 10,
         "passive": 20,
@@ -305,6 +384,10 @@
       "per": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 10,
         "passive": 20,
@@ -314,6 +397,10 @@
       "rel": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 7,
         "passive": 17,
@@ -323,6 +410,10 @@
       "slt": {
         "value": 0,
         "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 6,
         "passive": 16,
@@ -332,6 +423,10 @@
       "ste": {
         "value": 0,
         "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 6,
         "passive": 16,
@@ -341,6 +436,10 @@
       "sur": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 7,
         "passive": 17,
@@ -446,7 +545,7 @@
       }
     }
   },
-  "token": {
+  "prototypeToken": {
     "name": "Solar",
     "displayName": 0,
     "actorLink": false,
@@ -482,7 +581,28 @@
     "randomImg": false,
     "img": "icons/svg/mystery-man.svg",
     "actorId": "lOYt73eaJojBDxAV",
-    "alpha": 1
+    "alpha": 1,
+    "light": {
+      "alpha": 0.5,
+      "angle": 0,
+      "bright": 0,
+      "coloration": 1,
+      "dim": 0,
+      "gradual": true,
+      "luminosity": 0.5,
+      "saturation": 0,
+      "contrast": 0,
+      "shadows": 0,
+      "animation": {
+        "speed": 5,
+        "intensity": 5,
+        "reverse": false
+      },
+      "darkness": {
+        "min": 0,
+        "max": 1
+      }
+    }
   },
   "items": [
     {
@@ -490,7 +610,7 @@
       "name": "Angelic Weapons",
       "type": "feat",
       "img": "systems/dnd5e/icons/spells/enchant-sky-3.jpg",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\"><p>The solar's weapon attacks are magical. When the solar hits with any weapon, the weapon deals an <strong>extra 6d8 <em>radiant damage</em></strong> (included in the attack).</p></section><p>The solar's weapon attacks are magical. When the solar hits with any weapon, the weapon deals extra <em>radiant damage</em> (included in the attack).</p>",
           "chat": "",
@@ -555,7 +675,7 @@
       "effects": [],
       "folder": null,
       "sort": 100000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -565,7 +685,7 @@
       "name": "Divine Awareness",
       "type": "feat",
       "img": "icons/magic/perception/third-eye-blue-red.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The solar knows if it hears a lie.</p>",
           "chat": "",
@@ -630,7 +750,7 @@
       "effects": [],
       "folder": null,
       "sort": 200000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -640,7 +760,7 @@
       "name": "Flying Sword",
       "type": "feat",
       "img": "icons/weapons/swords/sword-runed-glowing.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\"><p>The solar releases its greatsword to hover magically in an unoccupied space within <strong>5 ft.</strong> of it. If the solar can see the sword, the solar can mentally command it as a bonus action to fly up to <strong>50 ft.</strong> and either make one attack against a target or return to the solar's hands.</p><p>If the hovering sword is targeted by any effect, the solar is considered to be holding it. The hovering sword falls if the solar dies.</p></section><p>The solar releases its greatsword to hover magically in an unoccupied space within <strong>5 ft.</strong> of it. If the hovering sword is targeted by any effect, the solar is considered to be holding it. </p>",
           "chat": "",
@@ -705,7 +825,7 @@
       "effects": [],
       "folder": null,
       "sort": 400000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -715,7 +835,7 @@
       "name": "Healing Touch",
       "type": "feat",
       "img": "icons/magic/light/explosion-star-glow-blue-purple.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The solar touches another creature. The target magically regains 40 (8d8 + 4) hit points and is freed from any curse, disease, poison, blindness, or deafness.</p>",
           "chat": "",
@@ -785,7 +905,7 @@
       "effects": [],
       "folder": null,
       "sort": 700000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -795,7 +915,7 @@
       "name": "Innate Spellcasting",
       "type": "feat",
       "img": "icons/magic/light/projectiles-star-purple.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The solar's spell casting ability is Charisma (spell save DC 25). It can innately cast the following spells, requiring no material components:</p>\n<p><strong>At will:</strong> detect evil and good, invisibility (self only)</p>\n<p><strong>3/day each:</strong> blade barrier, dispel evil and good, resurrection</p>\n<p><strong>1/day each:</strong> commune, control weather</p>",
           "chat": "",
@@ -860,7 +980,7 @@
       "effects": [],
       "folder": null,
       "sort": 250000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -870,7 +990,7 @@
       "name": "Magic Resistance",
       "type": "feat",
       "img": "icons/magic/defensive/shield-barrier-glowing-blue.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The solar has<strong> advantage </strong>on saving throws against spells and other magical effects.</p>",
           "chat": "",
@@ -935,7 +1055,7 @@
       "effects": [],
       "folder": null,
       "sort": 275000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -945,7 +1065,7 @@
       "name": "Multiattack",
       "type": "feat",
       "img": "icons/skills/melee/blade-tips-triple-steel.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The solar makes two greatsword attacks.</p>",
           "chat": "",
@@ -1010,7 +1130,7 @@
       "effects": [],
       "folder": null,
       "sort": 1000000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -1020,7 +1140,7 @@
       "name": "Greatsword",
       "type": "weapon",
       "img": "icons/weapons/swords/greatsword-guard-gem-blue.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+15 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>22 (4d6 + 8) <em>slashing damage</em></strong> plus <strong>27 (6d8) <em>radiant damage</em></strong>.</p></section>\n<p>The Solar attacks with its Greatsword.</p>",
           "chat": "",
@@ -1101,6 +1221,7 @@
           "conditions": ""
         },
         "weaponType": "martialM",
+        "baseItem": "",
         "properties": {
           "hvy": true,
           "two": true,
@@ -1123,7 +1244,7 @@
       "effects": [],
       "folder": null,
       "sort": 1000000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -1133,7 +1254,7 @@
       "name": "Slaying Longbow",
       "type": "weapon",
       "img": "icons/weapons/bows/longbow-leather-green.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p>Ranged Weapon Attack: +13 to hit, range 150/600 ft., one target. Hit: <strong>15 (2d8 + 6) <em>piercing damage</em></strong> plus <strong>27 (6d8) <em>radiant damage</em></strong>.</p>\n<p>If the target is a creature that has 190 hit points or fewer, it must succeed on a  <strong>DC 15 Constitution</strong> saving throw or die.</p>\n</section>\n<p>The Solar attacks with its Slaying Longbow. If the target is a creature that has 190 hit points or fewer, it must make a <strong>Constitution</strong> saving throw.</p>",
           "chat": "",
@@ -1214,6 +1335,7 @@
           "conditions": ""
         },
         "weaponType": "martialR",
+        "baseItem": "",
         "properties": {
           "amm": true,
           "hvy": true,
@@ -1239,7 +1361,7 @@
       "effects": [],
       "folder": null,
       "sort": 1900001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -1249,7 +1371,7 @@
       "name": "Detect Evil and Good",
       "type": "spell",
       "img": "systems/dnd5e/icons/spells/air-burst-sky-2.jpg",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>For the duration, you know if there is an aberration, celestial, elemental, fey, fiend, or undead within 30 feet of you, as well as where the creature is located. Similarly, you know if there is a place or object within 30 feet of you that has been magically consecrated or desecrated.</p><p>The spell can penetrate most barriers, but it is blocked by 1 foot of stone, 1 inch of common metal, a thin sheet of lead, or 3 feet of wood or dirt.</p>",
           "chat": "",
@@ -1283,7 +1405,7 @@
         },
         "consume": {
           "type": "",
-          "target": "",
+          "target": null,
           "amount": null
         },
         "ability": "",
@@ -1335,19 +1457,23 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.Mzh95utKDPIrjiH8"
+        }
+      }
     },
     {
       "_id": "ql5KnEjMF5yaWgbk",
       "name": "Invisibility",
       "type": "spell",
       "img": "systems/dnd5e/icons/spells/fog-sky-2.jpg",
-      "data": {
+      "system": {
         "description": {
-          "value": "<p>A creature you touch becomes invisible until the spell ends. Anything the target is wearing or carrying is invisible as long as it is on the target's person. The spell ends for a target that attacks or casts a spell.</p>\n<p><strong>At Higher Levels.</strong> When you cast this spell using a spell slot of 3rd level or higher, you can target one additional creature for each slot level above 2nd.</p>",
+          "value": "<p>A creature you touch becomes invisible until the spell ends. Anything the target is wearing or carrying is invisible as long as it is on the target's person. The spell ends for a target that attacks or casts a spell.</p><p><strong>At Higher Levels.</strong> When you cast this spell using a spell slot of 3rd level or higher, you can target one additional creature for each slot level above 2nd.</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -1355,17 +1481,17 @@
         "activation": {
           "type": "action",
           "cost": 1,
-          "condition": "self only"
+          "condition": ""
         },
         "duration": {
           "value": 1,
           "units": "hour"
         },
         "target": {
-          "value": null,
+          "value": 1,
           "width": null,
-          "units": null,
-          "type": "self"
+          "units": "",
+          "type": "creature"
         },
         "range": {
           "value": null,
@@ -1379,7 +1505,7 @@
         },
         "consume": {
           "type": "",
-          "target": "",
+          "target": null,
           "amount": null
         },
         "ability": "",
@@ -1431,19 +1557,23 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.1N8dDMMgZ1h1YJ3B"
+        }
+      }
     },
     {
       "_id": "3a272tdusdFnkmtQ",
       "name": "Blade Barrier",
       "type": "spell",
       "img": "systems/dnd5e/icons/spells/needles-sky-3.jpg",
-      "data": {
+      "system": {
         "description": {
-          "value": "<p>You create a vertical wall of whirling, razor-sharp blades made of magical energy. The wall appears within range and lasts for the duration. You can make a straight wall up to 100 feet long, 20 feet high, and 5 feet thick, or a ringed wall up to 60 feet in diameter, 20 feet high, and 5 feet thick. The wall provides three-quarters cover to creatures behind it, and its space is difficult terrain.</p>\n<p>When a creature enters the wall's area for the first time on a turn or starts its turn there, the creature must make a <strong>Dexterity</strong> saving throw. On a failed save, the creature takes 6d10 <em>slashing damage</em>. On a successful save, the creature takes half as much damage.</p>",
+          "value": "<p>You create a vertical wall of whirling, razor-sharp blades made of magical energy. The wall appears within range and lasts for the duration. You can make a straight wall up to 100 feet long, 20 feet high, and 5 feet thick, or a ringed wall up to 60 feet in diameter, 20 feet high, and 5 feet thick. The wall provides three-quarters cover to creatures behind it, and its space is difficult terrain.</p><p>When a creature enters the wall's area for the first time on a turn or starts its turn there, the creature must make a Dexterity saving throw. On a failed save, the creature takes 6d10 slashing damage. On a successful save, the creature takes half as much damage.</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -1475,7 +1605,7 @@
         },
         "consume": {
           "type": "",
-          "target": "",
+          "target": null,
           "amount": null
         },
         "ability": "",
@@ -1530,19 +1660,23 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.dLJhxDfeyOsc3zsY"
+        }
+      }
     },
     {
       "_id": "1aPq4fyL2R6lZLbM",
       "name": "Dispel Evil and Good",
       "type": "spell",
       "img": "systems/dnd5e/icons/spells/air-burst-sky-3.jpg",
-      "data": {
+      "system": {
         "description": {
-          "value": "<p>Shimmering energy surrounds and protects you from fey, Undead, and creatures originating from Beyond the Material Plane. For the Duration, Celestials, Elementals, fey, Fiends, and undead have disadvantage on Attack rolls against you.</p>\n<p>You can end the spell early by using either of the following special functions.</p>\n<p><strong>Break Enchantment</strong>. As your action, you touch a creature you can reach that is Charmed, Frightened, or possessed by a Celestial, an elemental, a fey, a fiend, or an Undead. The creature you touch is no longer charmed, frightened, or possessed by such creatures.</p>\n<p><strong>Dismissal</strong>. As your action, make a melee spell Attack against a Celestial, an elemental, a fey, a fiend, or an Undead you can reach. On a hit, you attempt to drive the creature back to its home plane. The creature must succeed on a Charisma saving throw or be sent back to its home plane (if it isn't there already). If they aren't on their home plane, undead are sent to the Shadowfell, and fey are sent to the Feywild.</p>",
+          "value": "<p>Shimmering energy surrounds and protects you from fey, Undead, and creatures originating from Beyond the Material Plane. For the Duration, Celestials, Elementals, fey, Fiends, and undead have disadvantage on Attack rolls against you.</p><p>You can end the spell early by using either of the following special functions.</p><p><strong>Break Enchantment</strong>. As your action, you touch a creature you can reach that is Charmed, Frightened, or possessed by a Celestial, an elemental, a fey, a fiend, or an Undead. The creature you touch is no longer charmed, frightened, or possessed by such creatures.</p><p><strong>Dismissal</strong>. As your action, make a melee spell Attack against a Celestial, an elemental, a fey, a fiend, or an Undead you can reach. On a hit, you attempt to drive the creature back to its home plane. The creature must succeed on a Charisma saving throw or be sent back to its home plane (if it isn't there already). If they aren't on their home plane, undead are sent to the Shadowfell, and fey are sent to the Feywild.</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -1574,7 +1708,7 @@
         },
         "consume": {
           "type": "",
-          "target": "",
+          "target": null,
           "amount": null
         },
         "ability": "",
@@ -1626,17 +1760,21 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.TkJ8Wtg1L7TZtspm"
+        }
+      }
     },
     {
       "_id": "9wis0HWSLp7b6hjC",
       "name": "Resurrection",
       "type": "spell",
       "img": "systems/dnd5e/icons/spells/heal-sky-3.jpg",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>You touch a dead creature that has been dead for no more than a century, that didn't die of old age, and that isn't undead. If its soul is free and willing, the target returns to life with all its hit points.</p><p>This spell neutralizes any poisons and cures normal diseases afflicting the creature when it died. It doesn't, however, remove magical diseases, curses, and the like; if such effects aren't removed prior to casting the spell, they afflict the target on its return to life.</p><p>This spell closes all mortal wounds and restores any missing body parts.</p><p>Coming back from the dead is an ordeal. The target takes a −4 penalty to all attack rolls, saving throws, and ability checks. Every time the target finishes a long rest, the penalty is reduced by 1 until it disappears.</p><p>Casting this spell to restore life to a creature that has been dead for one year or longer taxes you greatly. Until you finish a long rest, you can't cast spells again, and you have disadvantage on all attack rolls, ability checks, and saving throws.</p>",
           "chat": "",
@@ -1670,7 +1808,7 @@
         },
         "consume": {
           "type": "",
-          "target": "",
+          "target": null,
           "amount": null
         },
         "ability": "",
@@ -1722,19 +1860,23 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.jhhT9PsHy5A7EojO"
+        }
+      }
     },
     {
       "_id": "jQji64imiJ2S55eW",
       "name": "Commune",
       "type": "spell",
       "img": "systems/dnd5e/icons/spells/wind-grasp-sky-3.jpg",
-      "data": {
+      "system": {
         "description": {
-          "value": "<p>You contact your deity or a divine proxy and ask up to three questions that can be answered with a yes or no. You must ask your questions before the spell ends. You receive a correct answer for each question.</p>\n<p>Divine beings aren't necessarily omniscient, so you might receive \"unclear\" as an answer if a question pertains to information that lies beyond the deity's knowledge. In a case where a one-word answer could be misleading or contrary to the deity's interests, the DM might offer a short phrase as an answer instead.</p>\n<p>If you cast the spell two or more times before finishing your next long rest, there is a cumulative 25 percent chance for each casting after the first that you get no answer. The DM makes this roll in secret.</p>",
+          "value": "<p>You contact your deity or a divine proxy and ask up to three questions that can be answered with a yes or no. You must ask your questions before the spell ends. You receive a correct answer for each question.</p><p>Divine beings aren't necessarily omniscient, so you might receive \"unclear\" as an answer if a question pertains to information that lies beyond the deity's knowledge. In a case where a one-word answer could be misleading or contrary to the deity's interests, the DM might offer a short phrase as an answer instead.</p><p>If you cast the spell two or more times before finishing your next long rest, there is a cumulative 25 percent chance for each casting after the first that you get no answer. The DM makes this roll in secret.</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -1766,7 +1908,7 @@
         },
         "consume": {
           "type": "",
-          "target": "",
+          "target": null,
           "amount": null
         },
         "ability": "",
@@ -1818,19 +1960,23 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.d54VDyFulD9xxY7J"
+        }
+      }
     },
     {
       "_id": "EuVQ52Ol4zBq4VMN",
       "name": "Control Weather",
       "type": "spell",
       "img": "systems/dnd5e/icons/spells/wind-sky-3.jpg",
-      "data": {
+      "system": {
         "description": {
-          "value": "<p>You take control of the weather within 5 miles of you for the duration. You must be outdoors to cast this spell. Moving to a place where you don't have a clear path to the sky ends the spell early.</p>\n<p>When you cast the spell, you change the current weather conditions, which are determined by the DM based on the climate and season. You can change precipitation, temperature, and wind. It takes 1d4 x 10 minutes for the new conditions to take effect. Once they do so, you can change the conditions again. When the spell ends, the weather gradually returns to normal.</p>\n<p>When you change the weather conditions, find a current condition on the following tables and change its stage by one, up or down. When changing the wind, you can change its direction.</p>\n<p><strong>Conditions</strong></p>\n<ol>\n<li>Clear</li>\n<li>Light clouds</li>\n<li>Overcast or ground fog</li>\n<li>Rain, hail, or snow</li>\n<li>Torrential rain, driving hail, or blizzard</li>\n</ol>\n<p><strong>Temperature</strong></p>\n<ol>\n<li>Unbearable heat</li>\n<li>Hot</li>\n<li>Warm</li>\n<li>Cool</li>\n<li>Cold</li>\n<li>Arctic cold</li>\n</ol>\n<p><strong>Wind</strong></p>\n<ol>\n<li>Calm</li>\n<li>Moderate wind</li>\n<li>Strong wind</li>\n<li>Gale</li>\n<li>Storm</li>\n</ol>",
+          "value": "<p>You take control of the weather within 5 miles of you for the duration. You must be outdoors to cast this spell. Moving to a place where you don't have a clear path to the sky ends the spell early.</p><p>When you cast the spell, you change the current weather conditions, which are determined by the DM based on the climate and season. You can change precipitation, temperature, and wind. It takes 1d4 x 10 minutes for the new conditions to take effect. Once they do so, you can change the conditions again. When the spell ends, the weather gradually returns to normal.</p><p>When you change the weather conditions, find a current condition on the following tables and change its stage by one, up or down. When changing the wind, you can change its direction.</p><p><strong>Conditions</strong></p>\n<ol>\n<li>Clear</li>\n<li>Light clouds</li>\n<li>Overcast or ground fog</li>\n<li>Rain, hail, or snow</li>\n<li>Torrential rain, driving hail, or blizzard</li>\n</ol>\n<p><strong>Temperature</strong></p>\n<ol>\n<li>Unbearable heat</li>\n<li>Hot</li>\n<li>Warm</li>\n<li>Cool</li>\n<li>Cold</li>\n<li>Arctic cold</li>\n</ol>\n<p><strong>Wind</strong></p>\n<ol>\n<li>Calm</li>\n<li>Moderate wind</li>\n<li>Strong wind</li>\n<li>Gale</li>\n<li>Storm</li>\n</ol>",
           "chat": "",
           "unidentified": ""
         },
@@ -1862,7 +2008,7 @@
         },
         "consume": {
           "type": "",
-          "target": "",
+          "target": null,
           "amount": null
         },
         "ability": "",
@@ -1914,17 +2060,21 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.ZPd73HtKF3At11jh"
+        }
+      }
     },
     {
       "_id": "sZjcCRCNcf6m4VoK",
       "name": "Legendary Actions",
       "type": "feat",
       "img": "icons/magic/light/hand-sparks-glow-yellow.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p>The solar can take 3 legendary actions. Only one legendary action option can be used at a time and only at the end of another creature's turn. The solar regains spent legendary actions at the start of its turn.</p>\n</section>\n<p>The solar can take 3 legendary actions.</p>",
           "chat": "",
@@ -1989,7 +2139,7 @@
       "effects": [],
       "folder": null,
       "sort": 300000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -1999,7 +2149,7 @@
       "name": "Teleport",
       "type": "feat",
       "img": "systems/dnd5e/icons/spells/runes-magenta-3.jpg",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The solar magically teleports, along with any equipment it is wearing or carrying, up to 120 feet to an unoccupied space it can see.</p>",
           "chat": "",
@@ -2064,7 +2214,7 @@
       "effects": [],
       "folder": null,
       "sort": 1100000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -2074,7 +2224,7 @@
       "name": "Searing Burst",
       "type": "feat",
       "img": "icons/magic/light/explosion-star-glow-yellow.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">The solar emits magical, divine energy. Each creature of its choice in a 10-foot radius must make a  <strong>DC 23 Dexterity</strong> saving throw, taking <strong>14 (4d6) <em>fire damage</em></strong> plus <strong>14 (4d6) <em>radiant damage</em></strong> on a failed save, or half as much damage on a successful one.</section>\n<p>The solar emits magical, divine energy. Each creature of its choice in a 10-foot radius must make a <strong>Dexterity</strong> saving throw.</p>",
           "chat": "",
@@ -2148,7 +2298,7 @@
       "effects": [],
       "folder": null,
       "sort": 1200000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -2158,7 +2308,7 @@
       "name": "Blinding Gaze",
       "type": "feat",
       "img": "icons/magic/perception/third-eye-blue-red.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">The solar targets one creature it can see within 30 feet of it. If the target can see it, the target must succeed on a  <strong>DC 15 Constitution</strong> saving throw or be blinded until magic such as the lesser restoration spell removes the blindness.\n<p>The solar targets one creature it can see within 30 feet of it. If the target can see it, the target must make a <strong>Constitution</strong> saving throw.</p>\n</section>\n<p>The solar targets one creature it can see within 30 feet of it. If the target can see it, the target must succeed on a Constitution saving throw or be blinded.</p>",
           "chat": "",
@@ -2223,7 +2373,7 @@
       "effects": [],
       "folder": null,
       "sort": 1300000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -2233,7 +2383,7 @@
       "name": "Regional Effects",
       "type": "feat",
       "img": "icons/environment/wilderness/cave-entrance-mountain-blue.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The mere presence of a legendary creature can have strange and wondrous effects on its environment. Regional effects end abruptly or dissipate over time when the legendary creature dies.</p>",
           "chat": "",
@@ -2298,7 +2448,7 @@
       "effects": [],
       "folder": null,
       "sort": 500000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -2308,7 +2458,7 @@
       "name": "Lair Actions",
       "type": "feat",
       "img": "icons/magic/nature/stealth-hide-eyes-green.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p>If a legendary creature has lair actions, it can use them to harness the ambient magic in its lair. On initiative count 20 (losing all initiative ties), it can use one of its lair action options. It can't do so while incapacitated or otherwise unable to take actions. If surprised, it can't use one until after its first turn in the combat.</p>\n</section>\n<p>If a legendary creature has lair actions, it can use them to harness the ambient magic in its lair. </p>",
           "chat": "",
@@ -2373,7 +2523,7 @@
       "effects": [],
       "folder": null,
       "sort": 600000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -2382,7 +2532,7 @@
   "effects": [],
   "folder": "rjehyX85FDoydEwV",
   "sort": 0,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

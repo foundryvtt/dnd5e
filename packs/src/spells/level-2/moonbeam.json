@@ -1,11 +1,11 @@
 {
   "_id": "bV3yun6MIuFj71Er",
   "name": "Moonbeam",
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "type": "spell",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>A silvery beam of pale light shines down in a 5-foot-radius, 40-foot-high Cylinder centered on a point within range. Until the spell ends, dim light fills the cylinder.</p><p>When a creature enters the spell's area for the first time on a turn or starts its turn there, it is engulfed in ghostly flames that cause searing pain, and it must make a Constitution saving throw. It takes 2d10 radiant damage on a failed save, or half as much damage on a successful one.</p><p>A Shapechanger makes its saving throw with disadvantage. If it fails, it also instantly reverts to its original form and can't assume a different form until it leaves the spell's light.</p><p>On each of your turns after you cast this spell, you can use an action to move the beam up to 60 feet in any direction.</p><p><strong>At Higher Levels</strong>. When you cast this spell using a spell slot of 3rd level or higher, the damage increases by 1d10 for each slot level above 2nd.</p>",
       "chat": "",
@@ -86,6 +86,6 @@
   },
   "sort": 100001,
   "flags": {},
-  "img": "systems/dnd5e/icons/spells/beam-blue-3.jpg",
+  "img": "icons/magic/light/beam-rays-blue-large.webp",
   "effects": []
 }

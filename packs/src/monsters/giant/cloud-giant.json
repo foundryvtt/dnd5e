@@ -3,11 +3,15 @@
   "name": "Cloud Giant",
   "type": "npc",
   "img": "icons/svg/mystery-man.svg",
-  "data": {
+  "system": {
     "abilities": {
       "str": {
         "value": 27,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 8,
         "save": 8,
@@ -19,6 +23,10 @@
       "dex": {
         "value": 10,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 0,
         "save": 0,
@@ -30,6 +38,10 @@
       "con": {
         "value": 22,
         "proficient": 1,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 6,
         "save": 10,
@@ -41,6 +53,10 @@
       "int": {
         "value": 12,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 1,
         "save": 1,
@@ -52,6 +68,10 @@
       "wis": {
         "value": 16,
         "proficient": 1,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 3,
         "save": 7,
@@ -63,6 +83,10 @@
       "cha": {
         "value": 16,
         "proficient": 1,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 3,
         "save": 7,
@@ -102,6 +126,9 @@
         "walk": 40,
         "units": "ft",
         "hover": false
+      },
+      "attunement": {
+        "max": 3
       },
       "senses": {
         "darkvision": 0,
@@ -181,6 +208,10 @@
       "acr": {
         "value": 0,
         "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 0,
         "bonus": 0,
         "passive": 10,
@@ -190,6 +221,10 @@
       "ani": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 3,
         "bonus": 0,
         "passive": 13,
@@ -199,6 +234,10 @@
       "arc": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 1,
         "bonus": 0,
         "passive": 11,
@@ -208,6 +247,10 @@
       "ath": {
         "value": 0,
         "ability": "str",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 8,
         "bonus": 0,
         "passive": 18,
@@ -217,6 +260,10 @@
       "dec": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 3,
         "bonus": 0,
         "passive": 13,
@@ -226,6 +273,10 @@
       "his": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 1,
         "bonus": 0,
         "passive": 11,
@@ -235,6 +286,10 @@
       "ins": {
         "value": 1,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 3,
         "bonus": 0,
         "passive": 17,
@@ -244,6 +299,10 @@
       "itm": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 3,
         "bonus": 0,
         "passive": 13,
@@ -253,6 +312,10 @@
       "inv": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 1,
         "bonus": 0,
         "passive": 11,
@@ -262,6 +325,10 @@
       "med": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 3,
         "bonus": 0,
         "passive": 13,
@@ -271,6 +338,10 @@
       "nat": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 1,
         "bonus": 0,
         "passive": 11,
@@ -280,6 +351,10 @@
       "prc": {
         "value": 1,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 3,
         "bonus": 0,
         "passive": 17,
@@ -289,6 +364,10 @@
       "prf": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 3,
         "bonus": 0,
         "passive": 13,
@@ -298,6 +377,10 @@
       "per": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 3,
         "bonus": 0,
         "passive": 13,
@@ -307,6 +390,10 @@
       "rel": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 1,
         "bonus": 0,
         "passive": 11,
@@ -316,6 +403,10 @@
       "slt": {
         "value": 0,
         "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 0,
         "bonus": 0,
         "passive": 10,
@@ -325,6 +416,10 @@
       "ste": {
         "value": 0,
         "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 0,
         "bonus": 0,
         "passive": 10,
@@ -334,6 +429,10 @@
       "sur": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 3,
         "bonus": 0,
         "passive": 13,
@@ -439,7 +538,7 @@
       }
     }
   },
-  "token": {
+  "prototypeToken": {
     "name": "Cloud Giant",
     "displayName": 20,
     "actorLink": false,
@@ -475,7 +574,28 @@
     "randomImg": false,
     "img": "icons/svg/mystery-man.svg",
     "actorId": "Aw2wmqGIatxe2ImI",
-    "alpha": 1
+    "alpha": 1,
+    "light": {
+      "alpha": 0.5,
+      "angle": 0,
+      "bright": 0,
+      "coloration": 1,
+      "dim": 0,
+      "gradual": true,
+      "luminosity": 0.5,
+      "saturation": 0,
+      "contrast": 0,
+      "shadows": 0,
+      "animation": {
+        "speed": 5,
+        "intensity": 5,
+        "reverse": false
+      },
+      "darkness": {
+        "min": 0,
+        "max": 1
+      }
+    }
   },
   "items": [
     {
@@ -483,7 +603,7 @@
       "name": "Keen Smell",
       "type": "feat",
       "img": "icons/creatures/mammals/wolf-howl-moon-forest-blue.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The giant has<strong> advantage </strong>on Wisdom (Perception) checks that rely on smell.</p>",
           "chat": "",
@@ -554,7 +674,7 @@
       "effects": [],
       "folder": null,
       "sort": 100000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -564,7 +684,7 @@
       "name": "Innate Spellcasting",
       "type": "feat",
       "img": "icons/magic/light/projectiles-star-purple.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The giant's innate spellcasting ability is Charisma. It can innately cast the following spells, requiring no material components:</p>\n<p>At will: detect magic, fog cloud, light</p>\n<p>3/day each: feather fall, fly, misty step, telekinesis</p>\n<p>1/day each: control weather, gaseous form</p>",
           "chat": "",
@@ -635,7 +755,7 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -645,7 +765,7 @@
       "name": "Multiattack",
       "type": "feat",
       "img": "icons/skills/melee/blade-tips-triple-steel.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The giant makes two morningstar attacks.</p>",
           "chat": "",
@@ -716,7 +836,7 @@
       "effects": [],
       "folder": null,
       "sort": 200001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -726,7 +846,7 @@
       "name": "Morningstar",
       "type": "weapon",
       "img": "icons/weapons/maces/mace-round-spiked-black.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+12 to hit,</strong>, <strong>10 ft.,</strong> one target. Hit: <strong>21 (3d8 + 8) <em>piercing damage</em></strong>.</p></section>\n<p>The Cloud Giant attacks with its Morningstar.</p>",
           "chat": "",
@@ -803,6 +923,7 @@
           "conditions": ""
         },
         "weaponType": "martialM",
+        "baseItem": "",
         "properties": {
           "rch": true,
           "amm": false,
@@ -828,7 +949,7 @@
       "effects": [],
       "folder": null,
       "sort": 300001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -838,7 +959,7 @@
       "name": "Rock",
       "type": "weapon",
       "img": "systems/dnd5e/icons/spells/rock-plain-1.jpg",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p>Ranged Weapon Attack: +12 to hit, range 60/240 ft., one target. Hit: <strong>30 (4d10 + 8) <em>bludgeoning damage</em></strong>.</p></section>\n<p>The Cloud Giant attacks with its Rock.</p>",
           "chat": "",
@@ -915,6 +1036,7 @@
           "conditions": ""
         },
         "weaponType": "improv",
+        "baseItem": "",
         "properties": {
           "amm": true,
           "fin": false,
@@ -940,7 +1062,7 @@
       "effects": [],
       "folder": null,
       "sort": 400001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -950,7 +1072,7 @@
       "name": "Detect Magic",
       "type": "spell",
       "img": "systems/dnd5e/icons/spells/light-blue-2.jpg",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>For the duration, you sense the presence of magic within 30 feet of you. If you sense magic in this way, you can use your action to see a faint aura around any visible creature or object in the area that bears magic, and you learn its school of magic, if any.</p><p>The spell can penetrate most barriers, but it is blocked by 1 foot of stone, 1 inch of common metal, a thin sheet of lead, or 3 feet of wood or dirt.</p>",
           "chat": "",
@@ -984,7 +1106,7 @@
         },
         "consume": {
           "type": "",
-          "target": "",
+          "target": null,
           "amount": null
         },
         "ability": "",
@@ -1038,20 +1160,24 @@
       },
       "effects": [],
       "folder": null,
-      "sort": 100000,
-      "permission": {
+      "sort": 100001,
+      "ownership": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.ghXTfe7sgCbgf1Q8"
+        }
+      }
     },
     {
       "_id": "8x62AVYsSsFIrNQ3",
       "name": "Fog Cloud",
       "type": "spell",
       "img": "systems/dnd5e/icons/spells/fog-water-air-2.jpg",
-      "data": {
+      "system": {
         "description": {
-          "value": "<p>You create a 20-foot-radius Sphere of fog centered on a point within range. The sphere spreads around corners, and its area is heavily obscured. It lasts for the Duration or until a wind of moderate or greater speed (at least 10 miles per hour) disperses it.</p>\n<p><strong>At Higher Levels.</strong> When you cast this spell using a spell slot of 2nd level or higher, the radius of the fog increases by 20 feet for each slot level above 1st.</p>",
+          "value": "<p>You create a 20-foot-radius Sphere of fog centered on a point within range. The sphere spreads around corners, and its area is heavily obscured. It lasts for the Duration or until a wind of moderate or greater speed (at least 10 miles per hour) disperses it.</p><p><strong>At Higher Levels.</strong> When you cast this spell using a spell slot of 2nd level or higher, the radius of the fog increases by 20 feet for each slot level above 1st.</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -1069,7 +1195,7 @@
           "value": 20,
           "width": null,
           "units": "ft",
-          "type": "radius"
+          "type": "sphere"
         },
         "range": {
           "value": 120,
@@ -1083,7 +1209,7 @@
         },
         "consume": {
           "type": "",
-          "target": "",
+          "target": null,
           "amount": null
         },
         "ability": "",
@@ -1137,18 +1263,22 @@
       },
       "effects": [],
       "folder": null,
-      "sort": 200000,
-      "permission": {
+      "sort": 100001,
+      "ownership": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.IBJmWjzbQGu7M4UX"
+        }
+      }
     },
     {
       "_id": "p2duxAMMEiya3xeC",
       "name": "Light",
       "type": "spell",
       "img": "systems/dnd5e/icons/spells/light-sky-1.jpg",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>You touch one object that is no larger than 10 feet in any dimension. Until the spell ends, the object sheds bright light in a 20-foot radius and dim light for an additional 20 feet. The light can be colored as you like. Completely covering the object with something opaque blocks the light. The spell ends if you cast it again or dismiss it as an action.</p><p>If you target an object held or worn by a hostile creature, that creature must succeed on a Dexterity saving throw to avoid the spell.</p>",
           "chat": "",
@@ -1168,7 +1298,7 @@
           "value": 1,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "object"
         },
         "range": {
           "value": null,
@@ -1182,11 +1312,11 @@
         },
         "consume": {
           "type": "",
-          "target": "",
+          "target": null,
           "amount": null
         },
         "ability": "",
-        "actionType": "util",
+        "actionType": "save",
         "attackBonus": 0,
         "chatFlavor": "",
         "critical": {
@@ -1235,18 +1365,22 @@
       },
       "effects": [],
       "folder": null,
-      "sort": 300000,
-      "permission": {
+      "sort": 100001,
+      "ownership": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.Bnn9Nzajixvow9xi"
+        }
+      }
     },
     {
       "_id": "YzSmgcm1iB2jiMme",
       "name": "Feather Fall",
       "type": "spell",
       "img": "systems/dnd5e/icons/spells/wind-magenta-2.jpg",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>Choose up to five falling creatures within range. A falling creature's rate of descent slows to 60 feet per round until the spell ends. If the creature lands before the spell ends, it takes no falling damage and can land on its feet, and the spell ends for that creature.</p>",
           "chat": "",
@@ -1263,10 +1397,10 @@
           "units": "minute"
         },
         "target": {
-          "value": 0,
+          "value": 5,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "creature"
         },
         "range": {
           "value": 60,
@@ -1280,7 +1414,7 @@
         },
         "consume": {
           "type": "",
-          "target": "",
+          "target": null,
           "amount": null
         },
         "ability": "",
@@ -1334,20 +1468,24 @@
       },
       "effects": [],
       "folder": null,
-      "sort": 350000,
-      "permission": {
+      "sort": 100001,
+      "ownership": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.pub0OWVEB71XQx1n"
+        }
+      }
     },
     {
       "_id": "5CeklSDOtVRcw7Ow",
       "name": "Fly",
       "type": "spell",
       "img": "systems/dnd5e/icons/spells/link-spirit-1.jpg",
-      "data": {
+      "system": {
         "description": {
-          "value": "<p>You touch a willing creature. The target gains a flying speed of 60 feet for the Duration. When the spell ends, the target falls if it is still aloft, unless it can stop the fall.</p>\n<p><strong>At Higher Levels.</strong> When you cast this spell using a spell slot of 4th level or higher, you can target one additional creature for each slot level above 3rd.</p>",
+          "value": "<p>You touch a willing creature. The target gains a flying speed of 60 feet for the Duration. When the spell ends, the target falls if it is still aloft, unless it can stop the fall.</p><p><strong>At Higher Levels.</strong> When you cast this spell using a spell slot of 4th level or higher, you can target one additional creature for each slot level above 3rd.</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -1379,7 +1517,7 @@
         },
         "consume": {
           "type": "",
-          "target": "",
+          "target": null,
           "amount": null
         },
         "ability": "",
@@ -1433,18 +1571,22 @@
       },
       "effects": [],
       "folder": null,
-      "sort": 400000,
-      "permission": {
+      "sort": 100001,
+      "ownership": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.yfbK8gZqESlaoY5t"
+        }
+      }
     },
     {
       "_id": "2Pd4m73pPHpWJqcI",
       "name": "Misty Step",
       "type": "spell",
       "img": "systems/dnd5e/icons/spells/wind-grasp-air-1.jpg",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>Briefly surrounded by silvery mist, you teleport up to 30 feet to an unoccupied space that you can see.</p>",
           "chat": "",
@@ -1478,7 +1620,7 @@
         },
         "consume": {
           "type": "",
-          "target": "",
+          "target": null,
           "amount": null
         },
         "ability": "",
@@ -1532,20 +1674,24 @@
       },
       "effects": [],
       "folder": null,
-      "sort": 600000,
-      "permission": {
+      "sort": 100001,
+      "ownership": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.wqfAVANuQonNBgnL"
+        }
+      }
     },
     {
       "_id": "NlAfFuuUM2T49wCd",
       "name": "Telekinesis",
       "type": "spell",
       "img": "systems/dnd5e/icons/spells/wind-grasp-air-3.jpg",
-      "data": {
+      "system": {
         "description": {
-          "value": "<p>You gain the ability to move or manipulate creatures or objects by thought. When you cast the spell, and as your action each round for the Duration, you can exert your will on one creature or object that you can see within range, causing the appropriate effect below. You can affect the same target round after round, or choose a new one at any time. If you switch targets, the prior target is no longer affected by the spell.</p>\n<p><strong>Creature</strong>. You can try to move a Huge or smaller creature. Make an ability check with your spellcasting ability contested by the creature's Strength check. If you win the contest, you move the creature up to 30 feet in any direction, including upward but not beyond the range of this spell. Until the end of your next turn, the creature is Restrained in your telekinetic grip. A creature lifted upward is suspended in mid-air.</p>\n<p>On subsequent rounds, you can use your action to attempt to maintain your telekinetic grip on the creature by repeating the contest.</p>\n<p><strong>Object</strong>. You can try to move an object that weighs up to 1,000 pounds. If the object isn't being worn or carried, you automatically move it up to 30 feet in any direction, but not beyond the range of this spell.</p>\n<p>If the object is worn or carried by a creature, you must make an ability check with your Spellcasting ability contested by that creature's Strength check. If you succeed, you pull the object away from that creature and can move it up to 30 feet in any direction but not beyond the range of this spell.</p>\n<p>You can exert fine control on Objects with your telekinetic grip, such as manipulating a simple tool, opening a door or a container, stowing or retrieving an item from an open container, or pouring the contents from a vial.</p>",
+          "value": "<p>You gain the ability to move or manipulate creatures or objects by thought. When you cast the spell, and as your action each round for the Duration, you can exert your will on one creature or object that you can see within range, causing the appropriate effect below. You can affect the same target round after round, or choose a new one at any time. If you switch targets, the prior target is no longer affected by the spell.</p><p><strong>Creature</strong>. You can try to move a Huge or smaller creature. Make an ability check with your spellcasting ability contested by the creature's Strength check. If you win the contest, you move the creature up to 30 feet in any direction, including upward but not beyond the range of this spell. Until the end of your next turn, the creature is Restrained in your telekinetic grip. A creature lifted upward is suspended in mid-air.</p><p>On subsequent rounds, you can use your action to attempt to maintain your telekinetic grip on the creature by repeating the contest.</p><p><strong>Object</strong>. You can try to move an object that weighs up to 1,000 pounds. If the object isn't being worn or carried, you automatically move it up to 30 feet in any direction, but not beyond the range of this spell.</p><p>If the object is worn or carried by a creature, you must make an ability check with your Spellcasting ability contested by that creature's Strength check. If you succeed, you pull the object away from that creature and can move it up to 30 feet in any direction but not beyond the range of this spell.</p><p>You can exert fine control on Objects with your telekinetic grip, such as manipulating a simple tool, opening a door or a container, stowing or retrieving an item from an open container, or pouring the contents from a vial.</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -1563,7 +1709,7 @@
           "value": 1,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "creature"
         },
         "range": {
           "value": 60,
@@ -1577,7 +1723,7 @@
         },
         "consume": {
           "type": "",
-          "target": "",
+          "target": null,
           "amount": null
         },
         "ability": "",
@@ -1631,20 +1777,24 @@
       },
       "effects": [],
       "folder": null,
-      "sort": 700000,
-      "permission": {
+      "sort": 100001,
+      "ownership": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.HQfd7jJyULIoGxrZ"
+        }
+      }
     },
     {
       "_id": "aM9XWV9WEslCotvD",
       "name": "Control Weather",
       "type": "spell",
       "img": "systems/dnd5e/icons/spells/wind-sky-3.jpg",
-      "data": {
+      "system": {
         "description": {
-          "value": "<p>You take control of the weather within 5 miles of you for the duration. You must be outdoors to cast this spell. Moving to a place where you don't have a clear path to the sky ends the spell early.</p>\n<p>When you cast the spell, you change the current weather conditions, which are determined by the DM based on the climate and season. You can change precipitation, temperature, and wind. It takes 1d4 x 10 minutes for the new conditions to take effect. Once they do so, you can change the conditions again. When the spell ends, the weather gradually returns to normal.</p>\n<p>When you change the weather conditions, find a current condition on the following tables and change its stage by one, up or down. When changing the wind, you can change its direction.</p>\n<p><strong>Conditions</strong></p>\n<ol>\n<li>Clear</li>\n<li>Light clouds</li>\n<li>Overcast or ground fog</li>\n<li>Rain, hail, or snow</li>\n<li>Torrential rain, driving hail, or blizzard</li>\n</ol>\n<p><strong>Temperature</strong></p>\n<ol>\n<li>Unbearable heat</li>\n<li>Hot</li>\n<li>Warm</li>\n<li>Cool</li>\n<li>Cold</li>\n<li>Arctic cold</li>\n</ol>\n<p><strong>Wind</strong></p>\n<ol>\n<li>Calm</li>\n<li>Moderate wind</li>\n<li>Strong wind</li>\n<li>Gale</li>\n<li>Storm</li>\n</ol>",
+          "value": "<p>You take control of the weather within 5 miles of you for the duration. You must be outdoors to cast this spell. Moving to a place where you don't have a clear path to the sky ends the spell early.</p><p>When you cast the spell, you change the current weather conditions, which are determined by the DM based on the climate and season. You can change precipitation, temperature, and wind. It takes 1d4 x 10 minutes for the new conditions to take effect. Once they do so, you can change the conditions again. When the spell ends, the weather gradually returns to normal.</p><p>When you change the weather conditions, find a current condition on the following tables and change its stage by one, up or down. When changing the wind, you can change its direction.</p><p><strong>Conditions</strong></p>\n<ol>\n<li>Clear</li>\n<li>Light clouds</li>\n<li>Overcast or ground fog</li>\n<li>Rain, hail, or snow</li>\n<li>Torrential rain, driving hail, or blizzard</li>\n</ol>\n<p><strong>Temperature</strong></p>\n<ol>\n<li>Unbearable heat</li>\n<li>Hot</li>\n<li>Warm</li>\n<li>Cool</li>\n<li>Cold</li>\n<li>Arctic cold</li>\n</ol>\n<p><strong>Wind</strong></p>\n<ol>\n<li>Calm</li>\n<li>Moderate wind</li>\n<li>Strong wind</li>\n<li>Gale</li>\n<li>Storm</li>\n</ol>",
           "chat": "",
           "unidentified": ""
         },
@@ -1676,7 +1826,7 @@
         },
         "consume": {
           "type": "",
-          "target": "",
+          "target": null,
           "amount": null
         },
         "ability": "",
@@ -1730,20 +1880,24 @@
       },
       "effects": [],
       "folder": null,
-      "sort": 800000,
-      "permission": {
+      "sort": 100001,
+      "ownership": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.ZPd73HtKF3At11jh"
+        }
+      }
     },
     {
       "_id": "Wx6FHxcSSoJZJlIV",
       "name": "Gaseous Form",
       "type": "spell",
       "img": "systems/dnd5e/icons/spells/fog-acid-2.jpg",
-      "data": {
+      "system": {
         "description": {
-          "value": "<p>You transform a willing creature you touch, along with everything it's wearing and carrying, into a misty cloud for the duration. The spell ends if the creature drops to 0 hit points. An incorporeal creature isn't affected.</p>\n<p>While in this form, the target's only method of movement is a flying speed of 10 feet. The target can enter and occupy the space of another creature. The target has resistance to non-magical damage, and it has advantage on Strength, Dexterity, and Constitution saving throws. The target can pass through small holes, narrow openings, and even mere cracks, though it treats liquids as though they were solid surfaces. The target can't fall and remains hovering in the air even when stunned or otherwise incapacitated.</p>\n<p>While in the form of a misty cloud, the target can't talk or manipulate objects, and any objects it was carrying or holding can't be dropped, used, or otherwise interacted with. The target can't attack or cast spells.</p>",
+          "value": "<p>You transform a willing creature you touch, along with everything it's wearing and carrying, into a misty cloud for the duration. The spell ends if the creature drops to 0 hit points. An incorporeal creature isn't affected.</p><p>While in this form, the target's only method of movement is a flying speed of 10 feet. The target can enter and occupy the space of another creature. The target has resistance to nonmagical damage, and it has advantage on Strength, Dexterity, and Constitution saving throws. The target can pass through small holes, narrow openings, and even mere cracks, though it treats liquids as though they were solid surfaces. The target can't fall and remains hovering in the air even when stunned or otherwise incapacitated.</p><p>While in the form of a misty cloud, the target can't talk or manipulate objects, and any objects it was carrying or holding can't be dropped, used, or otherwise interacted with. The target can't attack or cast spells.</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -1761,7 +1915,7 @@
           "value": 1,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "creature"
         },
         "range": {
           "value": null,
@@ -1775,7 +1929,7 @@
         },
         "consume": {
           "type": "",
-          "target": "",
+          "target": null,
           "amount": null
         },
         "ability": "",
@@ -1829,17 +1983,21 @@
       },
       "effects": [],
       "folder": null,
-      "sort": 900000,
-      "permission": {
+      "sort": 100001,
+      "ownership": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.2IWiZAJtOGDoKjiz"
+        }
+      }
     }
   ],
   "effects": [],
   "folder": "ZSWBRlk2vsD2qKZC",
   "sort": 0,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

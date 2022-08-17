@@ -3,7 +3,7 @@
   "name": "Battleaxe",
   "type": "weapon",
   "img": "icons/weapons/polearms/halberd-crescent-engraved-steel.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>A stout crescent blade mounted on a thick shaft wrapped in a sturdy grip. This axe is large enough to be wielded with two hands and is adorned with spikes upon the back-side of the blade and the top of the shaft.</p>",
       "chat": "",
@@ -89,7 +89,7 @@
   "effects": [],
   "folder": null,
   "sort": 0,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

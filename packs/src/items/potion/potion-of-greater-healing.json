@@ -3,7 +3,7 @@
   "name": "Potion of Greater Healing",
   "type": "consumable",
   "img": "icons/consumables/potions/bottle-bulb-corked-glowing-red.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p><em>The potion's red liquid glimmers when agitated.</em></p>\n<p>You regain 4d4+4 hit points when you drink this potion.</p>\n<p>&nbsp;</p>\n<p>&nbsp;</p>",
       "chat": "",
@@ -100,7 +100,7 @@
   "effects": [],
   "folder": null,
   "sort": 100001,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

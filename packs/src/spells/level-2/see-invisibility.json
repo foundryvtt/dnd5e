@@ -1,11 +1,11 @@
 {
   "_id": "DQzlB5Y3k791W5bH",
   "name": "See Invisibility",
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "type": "spell",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>For the duration, you see invisible creatures and objects as if they were visible, and you can see into the Ethereal Plane. Ethereal creatures and objects appear ghostly and translucent.</p>",
       "chat": "",
@@ -83,6 +83,6 @@
   },
   "sort": 100001,
   "flags": {},
-  "img": "systems/dnd5e/icons/spells/evil-eye-eerie-2.jpg",
+  "img": "icons/magic/perception/eye-ringed-glow-angry-teal.webp",
   "effects": []
 }

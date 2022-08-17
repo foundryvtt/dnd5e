@@ -1,11 +1,11 @@
 {
   "_id": "Sgjrf8qqv97CCWM4",
   "name": "Magic Weapon",
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "type": "spell",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>You touch a nonmagical weapon. Until the spell ends, that weapon becomes a magic weapon with a +1 bonus to Attack rolls and Damage Rolls.</p><p><strong>At Higher Levels.</strong> When you cast this spell using a spell slot of 4th level or higher, the bonus increases to +2. When you use a spell slot of 6th level or higher, the bonus increases to +3.</p>",
       "chat": "",
@@ -82,6 +82,6 @@
   },
   "sort": 100001,
   "flags": {},
-  "img": "systems/dnd5e/icons/spells/enchant-blue-2.jpg",
+  "img": "icons/magic/fire/dagger-rune-enchant-flame-blue.webp",
   "effects": []
 }

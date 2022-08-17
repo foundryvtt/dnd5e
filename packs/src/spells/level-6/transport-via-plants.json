@@ -1,11 +1,11 @@
 {
   "_id": "s7nXgot5gGZVcMrv",
   "name": "Transport via Plants",
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "type": "spell",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>This spell creates a magical link between a Large or larger inanimate plant within range and another plant, at any distance, on the same plane of existence. You must have seen or touched the destination plant at least once before. For the Duration, any creature can step into the target plant and exit from the destination plant by using 5 feet of Movement.</p>",
       "chat": "",
@@ -83,6 +83,6 @@
   },
   "sort": 100001,
   "flags": {},
-  "img": "systems/dnd5e/icons/spells/leaf-jade-3.jpg",
+  "img": "icons/magic/nature/leaf-glow-maple-teal.webp",
   "effects": []
 }

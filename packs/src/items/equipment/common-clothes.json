@@ -3,7 +3,7 @@
   "name": "Common Clothes",
   "type": "equipment",
   "img": "icons/equipment/chest/shirt-collared-brown.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>Clothes worn by most commoners.</p>",
       "chat": "",
@@ -87,7 +87,7 @@
   "effects": [],
   "folder": null,
   "sort": 800000,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

@@ -2,12 +2,16 @@
   "_id": "pOPQU4UnR27zA0jf",
   "name": "Minotaur",
   "type": "npc",
-  "img": "icons/svg/mystery-man.svg",
-  "data": {
+  "img": "systems/dnd5e/tokens/monstrosity/Minotaur.webp",
+  "system": {
     "abilities": {
       "str": {
         "value": 18,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 4,
         "save": 4,
@@ -19,6 +23,10 @@
       "dex": {
         "value": 11,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 0,
         "save": 0,
@@ -30,6 +38,10 @@
       "con": {
         "value": 16,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 3,
         "save": 3,
@@ -41,6 +53,10 @@
       "int": {
         "value": 6,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": -2,
         "save": -2,
@@ -52,6 +68,10 @@
       "wis": {
         "value": 16,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 3,
         "save": 3,
@@ -63,6 +83,10 @@
       "cha": {
         "value": 9,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": -1,
         "save": -1,
@@ -103,6 +127,9 @@
         "units": "ft",
         "hover": false
       },
+      "attunement": {
+        "max": 3
+      },
       "senses": {
         "darkvision": 60,
         "blindsight": 0,
@@ -124,7 +151,7 @@
     },
     "details": {
       "biography": {
-        "value": "",
+        "value": "<p><em>Token artwork by Forgotten Adventures.</em></p>",
         "public": ""
       },
       "alignment": "Chaotic Evil",
@@ -180,6 +207,10 @@
       "acr": {
         "value": 0,
         "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 0,
         "bonus": 0,
         "passive": 10,
@@ -189,6 +220,10 @@
       "ani": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 3,
         "bonus": 0,
         "passive": 13,
@@ -198,6 +233,10 @@
       "arc": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": -2,
         "bonus": 0,
         "passive": 8,
@@ -207,6 +246,10 @@
       "ath": {
         "value": 0,
         "ability": "str",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 4,
         "bonus": 0,
         "passive": 14,
@@ -216,6 +259,10 @@
       "dec": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": -1,
         "bonus": 0,
         "passive": 9,
@@ -225,6 +272,10 @@
       "his": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": -2,
         "bonus": 0,
         "passive": 8,
@@ -234,6 +285,10 @@
       "ins": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 3,
         "bonus": 0,
         "passive": 13,
@@ -243,6 +298,10 @@
       "itm": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": -1,
         "bonus": 0,
         "passive": 9,
@@ -252,6 +311,10 @@
       "inv": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": -2,
         "bonus": 0,
         "passive": 8,
@@ -261,6 +324,10 @@
       "med": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 3,
         "bonus": 0,
         "passive": 13,
@@ -270,6 +337,10 @@
       "nat": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": -2,
         "bonus": 0,
         "passive": 8,
@@ -279,6 +350,10 @@
       "prc": {
         "value": 2,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 3,
         "bonus": 0,
         "passive": 17,
@@ -288,6 +363,10 @@
       "prf": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": -1,
         "bonus": 0,
         "passive": 9,
@@ -297,6 +376,10 @@
       "per": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": -1,
         "bonus": 0,
         "passive": 9,
@@ -306,6 +389,10 @@
       "rel": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": -2,
         "bonus": 0,
         "passive": 8,
@@ -315,6 +402,10 @@
       "slt": {
         "value": 0,
         "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 0,
         "bonus": 0,
         "passive": 10,
@@ -324,6 +415,10 @@
       "ste": {
         "value": 0,
         "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 0,
         "bonus": 0,
         "passive": 10,
@@ -333,6 +428,10 @@
       "sur": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 3,
         "bonus": 0,
         "passive": 13,
@@ -438,7 +537,7 @@
       }
     }
   },
-  "token": {
+  "prototypeToken": {
     "name": "Minotaur",
     "displayName": 20,
     "actorLink": false,
@@ -472,9 +571,30 @@
     },
     "flags": {},
     "randomImg": false,
-    "img": "icons/svg/mystery-man.svg",
+    "img": "systems/dnd5e/tokens/monstrosity/Minotaur.webp",
     "actorId": "pOPQU4UnR27zA0jf",
-    "alpha": 1
+    "alpha": 1,
+    "light": {
+      "alpha": 0.5,
+      "angle": 0,
+      "bright": 0,
+      "coloration": 1,
+      "dim": 0,
+      "gradual": true,
+      "luminosity": 0.5,
+      "saturation": 0,
+      "contrast": 0,
+      "shadows": 0,
+      "animation": {
+        "speed": 5,
+        "intensity": 5,
+        "reverse": false
+      },
+      "darkness": {
+        "min": 0,
+        "max": 1
+      }
+    }
   },
   "items": [
     {
@@ -482,7 +602,7 @@
       "name": "Charge",
       "type": "feat",
       "img": "icons/creatures/mammals/ox-bull-horned-glowing-orange.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\"><p>If the minotaur moves at least 10 ft. straight toward a target and then hits it with a gore attack on the same turn, the target takes an extra <strong>9 (2d8) <em>piercing damage</em></strong>. </p><p>If the target is a creature, it must succeed on a  <strong>DC 14 Strength</strong> saving throw or be pushed up to 10 ft. away and knocked prone.</p></section><p>If the minotaur moves at least 10 ft. straight toward a target and then hits it with a gore attack on the same turn, the target takes extra <em>piercing damage</em>. If the target is a creature, it must make a <strong>Strength</strong> saving throw or be pushed up to 10 ft. away and knocked prone.</p>",
           "chat": "",
@@ -552,7 +672,7 @@
       "effects": [],
       "folder": null,
       "sort": 200001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -562,7 +682,7 @@
       "name": "Labyrinthine Recall",
       "type": "feat",
       "img": "icons/magic/air/wind-vortex-swirl-blue.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The minotaur can perfectly recall any path it has traveled.</p>",
           "chat": "",
@@ -627,7 +747,7 @@
       "effects": [],
       "folder": null,
       "sort": 300001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -637,7 +757,7 @@
       "name": "Reckless",
       "type": "feat",
       "img": "icons/skills/social/intimidation-impressing.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\"><p></p><p></p></section><p>At the start of its turn, the minotaur can gain advantage on all melee weapon attack rolls it makes during that turn, but attack rolls against it have advantage until the start of its next turn.</p>",
           "chat": "",
@@ -702,7 +822,7 @@
       "effects": [],
       "folder": null,
       "sort": 400001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -712,7 +832,7 @@
       "name": "Greataxe",
       "type": "weapon",
       "img": "icons/weapons/axes/axe-double.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\"><p><em>Melee Weapon Attack:</em><strong>+6 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>17 (2d12 + 4) <em>slashing damage</em></strong>.</p><p></p></section><p>The Minotaur attacks with its Greataxe.</p>",
           "chat": "",
@@ -789,6 +909,7 @@
           "conditions": ""
         },
         "weaponType": "martialM",
+        "baseItem": "",
         "properties": {
           "amm": false,
           "fin": false,
@@ -811,7 +932,7 @@
       "effects": [],
       "folder": null,
       "sort": 500001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -821,7 +942,7 @@
       "name": "Gore",
       "type": "weapon",
       "img": "icons/skills/wounds/bone-broken-tooth-fang-red.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\"><p><em>Melee Weapon Attack:</em><strong>+6 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>13 (2d8 + 4) <em>piercing damage</em></strong>.</p><p></p></section><p>The Minotaur attacks with its Gore.</p>",
           "chat": "",
@@ -898,6 +1019,7 @@
           "conditions": ""
         },
         "weaponType": "natural",
+        "baseItem": "",
         "properties": {
           "amm": false,
           "fin": false,
@@ -920,7 +1042,7 @@
       "effects": [],
       "folder": null,
       "sort": 600001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -929,7 +1051,7 @@
   "effects": [],
   "folder": "AljGyVrrsrPBi1QM",
   "sort": 0,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

@@ -2,12 +2,16 @@
   "_id": "RCv5y7iWlfNxkinx",
   "name": "Pit Fiend",
   "type": "npc",
-  "img": "icons/svg/mystery-man.svg",
-  "data": {
+  "img": "systems/dnd5e/tokens/fiend/PitFiend.webp",
+  "system": {
     "abilities": {
       "str": {
         "value": 26,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 8,
         "save": 8,
@@ -19,6 +23,10 @@
       "dex": {
         "value": 14,
         "proficient": 1,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 2,
         "save": 8,
@@ -30,6 +38,10 @@
       "con": {
         "value": 24,
         "proficient": 1,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 7,
         "save": 13,
@@ -41,6 +53,10 @@
       "int": {
         "value": 22,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 6,
         "save": 6,
@@ -52,6 +68,10 @@
       "wis": {
         "value": 18,
         "proficient": 1,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 4,
         "save": 10,
@@ -63,6 +83,10 @@
       "cha": {
         "value": 24,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 7,
         "save": 7,
@@ -103,6 +127,9 @@
         "units": "ft",
         "hover": false
       },
+      "attunement": {
+        "max": 3
+      },
       "senses": {
         "darkvision": 0,
         "blindsight": 0,
@@ -124,7 +151,7 @@
     },
     "details": {
       "biography": {
-        "value": "",
+        "value": "<p><em>Token artwork by Forgotten Adventures.</em></p>",
         "public": ""
       },
       "alignment": "Lawful Evil",
@@ -187,6 +214,10 @@
       "acr": {
         "value": 0,
         "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 2,
         "passive": 12,
@@ -196,6 +227,10 @@
       "ani": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 4,
         "passive": 14,
@@ -205,6 +240,10 @@
       "arc": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 6,
         "passive": 16,
@@ -214,6 +253,10 @@
       "ath": {
         "value": 0,
         "ability": "str",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 8,
         "passive": 18,
@@ -223,6 +266,10 @@
       "dec": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 7,
         "passive": 17,
@@ -232,6 +279,10 @@
       "his": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 6,
         "passive": 16,
@@ -241,6 +292,10 @@
       "ins": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 4,
         "passive": 14,
@@ -250,6 +305,10 @@
       "itm": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 7,
         "passive": 17,
@@ -259,6 +318,10 @@
       "inv": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 6,
         "passive": 16,
@@ -268,6 +331,10 @@
       "med": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 4,
         "passive": 14,
@@ -277,6 +344,10 @@
       "nat": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 6,
         "passive": 16,
@@ -286,6 +357,10 @@
       "prc": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 4,
         "passive": 14,
@@ -295,6 +370,10 @@
       "prf": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 7,
         "passive": 17,
@@ -304,6 +383,10 @@
       "per": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 7,
         "passive": 17,
@@ -313,6 +396,10 @@
       "rel": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 6,
         "passive": 16,
@@ -322,6 +409,10 @@
       "slt": {
         "value": 0,
         "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 2,
         "passive": 12,
@@ -331,6 +422,10 @@
       "ste": {
         "value": 0,
         "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 2,
         "passive": 12,
@@ -340,6 +435,10 @@
       "sur": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 4,
         "passive": 14,
@@ -445,14 +544,14 @@
       }
     }
   },
-  "token": {
+  "prototypeToken": {
     "name": "Pit Fiend",
-    "displayName": 0,
+    "displayName": 20,
     "actorLink": false,
     "tint": null,
     "width": 2,
     "height": 2,
-    "scale": 1,
+    "scale": 2,
     "mirrorX": false,
     "mirrorY": false,
     "lockRotation": false,
@@ -470,7 +569,7 @@
       "intensity": 5
     },
     "disposition": -1,
-    "displayBars": 0,
+    "displayBars": 40,
     "bar1": {
       "attribute": "attributes.hp"
     },
@@ -479,9 +578,30 @@
     },
     "flags": {},
     "randomImg": false,
-    "img": "icons/svg/mystery-man.svg",
+    "img": "systems/dnd5e/tokens/fiend/PitFiend.webp",
     "actorId": "RCv5y7iWlfNxkinx",
-    "alpha": 1
+    "alpha": 1,
+    "light": {
+      "alpha": 0.5,
+      "angle": 0,
+      "bright": 0,
+      "coloration": 1,
+      "dim": 0,
+      "gradual": true,
+      "luminosity": 0.5,
+      "saturation": 0,
+      "contrast": 0,
+      "shadows": 0,
+      "animation": {
+        "speed": 5,
+        "intensity": 5,
+        "reverse": false
+      },
+      "darkness": {
+        "min": 0,
+        "max": 1
+      }
+    }
   },
   "items": [
     {
@@ -489,7 +609,7 @@
       "name": "Fear Aura",
       "type": "feat",
       "img": "icons/magic/water/elemental-water.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\"><p>Any creature hostile to the pit fiend that starts its turn <strong>within 20 feet</strong> of the pit fiend must make a <strong>DC 21 Wisdom saving throw</strong>, unless the pit fiend is incapacitated. On a failed save, the creature is frightened until the start of its next turn. If a creature's saving throw is successful, the creature is immune to the pit fiend's Fear Aura for the next 24 hours.</p></section><p>Any creature hostile to the pit fiend that starts its turn <strong>within 20 feet</strong> of the pit fiend must make a <strong>Wisdom</strong> saving throw.</p>",
           "chat": "",
@@ -554,7 +674,7 @@
       "effects": [],
       "folder": null,
       "sort": 100000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -564,7 +684,7 @@
       "name": "Magic Resistance",
       "type": "feat",
       "img": "icons/magic/defensive/shield-barrier-glowing-blue.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The pit fiend has<strong> advantage </strong>on saving throws against spells and other magical effects.</p>",
           "chat": "",
@@ -629,7 +749,7 @@
       "effects": [],
       "folder": null,
       "sort": 200000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -639,7 +759,7 @@
       "name": "Magic Weapons",
       "type": "feat",
       "img": "icons/weapons/swords/sword-runed-glowing.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The pit fiend's weapon attacks are magical.</p>",
           "chat": "",
@@ -704,7 +824,7 @@
       "effects": [],
       "folder": null,
       "sort": 300000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -714,7 +834,7 @@
       "name": "Innate Spellcasting",
       "type": "feat",
       "img": "icons/magic/light/projectiles-star-purple.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The pit fiend's spellcasting ability is Charisma (spell save DC 21). The pit fiend can innately cast the following spells, requiring no material components:</p>\n<p>At will: detect magic, fireball</p>\n<p>3/day each: hold monster, wall of fire</p>",
           "chat": "",
@@ -779,7 +899,7 @@
       "effects": [],
       "folder": null,
       "sort": 400000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -789,7 +909,7 @@
       "name": "Detect Magic",
       "type": "spell",
       "img": "systems/dnd5e/icons/spells/light-blue-2.jpg",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>For the duration, you sense the presence of magic within 30 feet of you. If you sense magic in this way, you can use your action to see a faint aura around any visible creature or object in the area that bears magic, and you learn its school of magic, if any.</p><p>The spell can penetrate most barriers, but it is blocked by 1 foot of stone, 1 inch of common metal, a thin sheet of lead, or 3 feet of wood or dirt.</p>",
           "chat": "",
@@ -823,7 +943,7 @@
         },
         "consume": {
           "type": "",
-          "target": "",
+          "target": null,
           "amount": null
         },
         "ability": "",
@@ -875,19 +995,23 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.ghXTfe7sgCbgf1Q8"
+        }
+      }
     },
     {
       "_id": "QVk9OnE12POjdMsJ",
       "name": "Fireball",
       "type": "spell",
       "img": "systems/dnd5e/icons/spells/fireball-red-2.jpg",
-      "data": {
+      "system": {
         "description": {
-          "value": "<p>A bright streak flashes from your pointing finger to a point you choose within range and then blossoms with a low roar into an explosion of flame. Each creature in a 20-foot-radius sphere centered on that point must make a <strong>Dexterity</strong> saving throw. A target takes 8d6 <em>fire damage</em> on a failed save, or half as much damage on a successful one.</p>\n<p>The fire spreads around corners. It ignites flammable objects in the area that aren't being worn or carried.</p>\n<p><strong>Higher Levels.</strong> When you cast this spell using a spell slot of 4th level or higher, the damage increases by 1d6 for each slot level above 3rd.</p>",
+          "value": "<p>A bright streak flashes from your pointing finger to a point you choose within range and then blossoms with a low roar into an explosion of flame. Each creature in a 20-foot-radius sphere centered on that point must make a Dexterity saving throw. A target takes 8d6 fire damage on a failed save, or half as much damage on a successful one.</p><p>The fire spreads around corners. It ignites flammable objects in the area that aren't being worn or carried.</p><p><strong>Higher Levels.</strong> When you cast this spell using a spell slot of 4th level or higher, the damage increases by 1d6 for each slot level above 3rd.</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -919,7 +1043,7 @@
         },
         "consume": {
           "type": "",
-          "target": "",
+          "target": null,
           "amount": null
         },
         "ability": "",
@@ -974,19 +1098,23 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.ztgcdrWPshKRpFd0"
+        }
+      }
     },
     {
       "_id": "BBnzGcwmnfSDn802",
       "name": "Hold Monster",
       "type": "spell",
       "img": "systems/dnd5e/icons/spells/shielding-fire-2.jpg",
-      "data": {
+      "system": {
         "description": {
-          "value": "<p>Choose a creature that you can see within range. The target must succeed on a Wisdom saving throw or be Paralyzed for the Duration. This spell has no effect on Undead. At the end of each of its turns, the target can make another Wisdom saving throw. On a success, the spell ends on the target.</p>\n<p><strong>At Higher Levels.</strong> When you cast this spell using a spell slot of 6th level or higher, you can target one additional creature for each slot level above 5th. The creatures must be within 30 feet of each other when you target them.</p>",
+          "value": "<p>Choose a creature that you can see within range. The target must succeed on a Wisdom saving throw or be Paralyzed for the Duration. This spell has no effect on Undead. At the end of each of its turns, the target can make another Wisdom saving throw. On a success, the spell ends on the target.</p><p><strong>At Higher Levels.</strong> When you cast this spell using a spell slot of 6th level or higher, you can target one additional creature for each slot level above 5th. The creatures must be within 30 feet of each other when you target them.</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -1018,7 +1146,7 @@
         },
         "consume": {
           "type": "",
-          "target": "",
+          "target": null,
           "amount": null
         },
         "ability": "",
@@ -1069,19 +1197,23 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.l9Ju5KE7bbn3WpTm"
+        }
+      }
     },
     {
       "_id": "dhizvzmzYyUa0moh",
       "name": "Wall of Fire",
       "type": "spell",
       "img": "systems/dnd5e/icons/spells/fog-orange-3.jpg",
-      "data": {
+      "system": {
         "description": {
-          "value": "<p>You create a wall of fire on a solid surface within range. You can make the wall up to 60 feet long, 20 feet high, and 1 foot thick, or a ringed wall up to 20 feet in diameter, 20 feet high, and 1 foot thick. The wall is opaque and lasts for the duration.</p>\n<p>When the wall appears, each creature within its area must make a <strong>Dexterity</strong> saving throw. On a failed save, a creature takes 5d8 <em>fire damage</em>, or half as much damage on a successful save.</p>\n<p>One side of the wall, selected by you when you cast this spell, deals 5d8 <em>fire damage</em> to each creature that ends its turn within 10 feet of that side or inside the wall. A creature takes the same damage when it enters the wall for the first time on a turn or ends its turn there. The other side of the wall deals no damage.</p>\n<p><strong>At Higher Levels.</strong> When you cast this spell using a spell slot of 5th level or higher, the damage increases by 1d8 for each slot level above 4th.</p>",
+          "value": "<p>You create a wall of fire on a solid surface within range. You can make the wall up to 60 feet long, 20 feet high, and 1 foot thick, or a ringed wall up to 20 feet in diameter, 20 feet high, and 1 foot thick. The wall is opaque and lasts for the duration.</p><p>When the wall appears, each creature within its area must make a Dexterity saving throw. On a failed save, a creature takes 5d8 fire damage, or half as much damage on a successful save.</p><p>One side of the wall, selected by you when you cast this spell, deals 5d8 fire damage to each creature that ends its turn within 10 feet of that side or inside the wall. A creature takes the same damage when it enters the wall for the first time on a turn or ends its turn there. The other side of the wall deals no damage.</p><p><strong>At Higher Levels.</strong> When you cast this spell using a spell slot of 5th level or higher, the damage increases by 1d8 for each slot level above 4th.</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -1113,7 +1245,7 @@
         },
         "consume": {
           "type": "",
-          "target": "",
+          "target": null,
           "amount": null
         },
         "ability": "",
@@ -1168,17 +1300,21 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.X3DrXgxjwI2dvkD6"
+        }
+      }
     },
     {
       "_id": "BFv56pkQ54pdTkYM",
       "name": "Multiattack",
       "type": "feat",
       "img": "icons/skills/melee/blade-tips-triple-steel.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The pit fiend makes four attacks: one with its bite, one with its claw, one with its mace, and one with its tail.</p>",
           "chat": "",
@@ -1243,7 +1379,7 @@
       "effects": [],
       "folder": null,
       "sort": 500000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -1253,7 +1389,7 @@
       "name": "Bite",
       "type": "weapon",
       "img": "icons/creatures/abilities/mouth-teeth-long-red.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\"><p><em>Melee Weapon Attack:</em><strong>+14 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>22 (4d6 + 8) <em>piercing damage</em></strong>.</p><p>The target must succeed on a  <strong>DC 21 Constitution</strong> saving throw or become poisoned. While poisoned in this way, the target can't regain hit points, and it takes <strong>21 (6d6) <em>poison damage</em></strong> at the start of each of its turns. The poisoned target can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success.</p></section><p>The Pit Fiend attacks with its Bite. The target must succeed on a  <strong>DC 21 Constitution</strong> saving throw or become poisoned. The target can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success.</p>",
           "chat": "",
@@ -1330,6 +1466,7 @@
           "conditions": ""
         },
         "weaponType": "natural",
+        "baseItem": "",
         "properties": {
           "amm": false,
           "fin": false,
@@ -1352,7 +1489,7 @@
       "effects": [],
       "folder": null,
       "sort": 600000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -1362,7 +1499,7 @@
       "name": "Claw",
       "type": "weapon",
       "img": "icons/skills/melee/strike-slashes-red.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\"><p>Melee Weapon Attack: +14 to hit, reach 10 ft. , one target. Hit: <strong>17 (2d8 + 8) <em>slashing damage</em></strong>.</p><p></p></section><p>The Pit Fiend attacks with its Claw.</p>",
           "chat": "",
@@ -1439,6 +1576,7 @@
           "conditions": ""
         },
         "weaponType": "natural",
+        "baseItem": "",
         "properties": {
           "amm": false,
           "fin": false,
@@ -1461,7 +1599,7 @@
       "effects": [],
       "folder": null,
       "sort": 700000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -1471,7 +1609,7 @@
       "name": "Mace",
       "type": "weapon",
       "img": "icons/weapons/maces/mace-round-spiked-black.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\"><p><em>Melee Weapon Attack:</em><strong>+14 to hit,</strong>, <strong>10 ft.,</strong> one target. Hit: <strong>15 (2d6 + 8) <em>bludgeoning damage</em></strong> plus <strong>21 (6d6) <em>fire damage</em></strong>.</p><p></p></section><p>The Pit Fiend attacks with its Mace.</p>",
           "chat": "",
@@ -1552,6 +1690,7 @@
           "conditions": ""
         },
         "weaponType": "simpleM",
+        "baseItem": "",
         "properties": {
           "amm": false,
           "fin": false,
@@ -1574,7 +1713,7 @@
       "effects": [],
       "folder": null,
       "sort": 800000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -1584,7 +1723,7 @@
       "name": "Tail",
       "type": "weapon",
       "img": "icons/skills/wounds/injury-pain-impaled-hand-blood.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+14 to hit,</strong>, <strong>10 ft.,</strong> one target. Hit: <strong>24 (3d10 + 8) <em>bludgeoning damage</em></strong>.</p></section>\n<p>The Pit Fiend attacks with its Tail.</p>",
           "chat": "",
@@ -1661,6 +1800,7 @@
           "conditions": ""
         },
         "weaponType": "natural",
+        "baseItem": "",
         "properties": {
           "amm": false,
           "fin": false,
@@ -1683,7 +1823,7 @@
       "effects": [],
       "folder": null,
       "sort": 900000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -1692,7 +1832,7 @@
   "effects": [],
   "folder": "B3XQZKLaaIqhaEFM",
   "sort": 0,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

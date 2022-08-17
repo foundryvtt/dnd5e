@@ -3,7 +3,7 @@
   "name": "Ring of Three Wishes",
   "type": "equipment",
   "img": "icons/equipment/finger/ring-cabochon-gold-purple.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>While wearing this ring, you can use an action to expend 1 of its 3 charges to cast the @Compendium[dnd5e.spells.3okM6Gn63zzEULkz]{Wish} spell from it. The ring becomes nonmagical when you use the last charge.</p>",
       "chat": "",
@@ -90,7 +90,7 @@
   "effects": [],
   "folder": null,
   "sort": 800000,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

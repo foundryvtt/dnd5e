@@ -3,11 +3,15 @@
   "name": "Weretiger",
   "type": "npc",
   "img": "icons/svg/mystery-man.svg",
-  "data": {
+  "system": {
     "abilities": {
       "str": {
         "value": 17,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 3,
         "save": 3,
@@ -19,6 +23,10 @@
       "dex": {
         "value": 15,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 2,
         "save": 2,
@@ -30,6 +38,10 @@
       "con": {
         "value": 16,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 3,
         "save": 3,
@@ -41,6 +53,10 @@
       "int": {
         "value": 10,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 0,
         "save": 0,
@@ -52,6 +68,10 @@
       "wis": {
         "value": 13,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 1,
         "save": 1,
@@ -63,6 +83,10 @@
       "cha": {
         "value": 11,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 0,
         "save": 0,
@@ -102,6 +126,9 @@
         "walk": 40,
         "units": "ft",
         "hover": false
+      },
+      "attunement": {
+        "max": 3
       },
       "senses": {
         "darkvision": 60,
@@ -183,6 +210,10 @@
       "acr": {
         "value": 0,
         "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 2,
         "bonus": 0,
         "passive": 12,
@@ -192,6 +223,10 @@
       "ani": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 1,
         "bonus": 0,
         "passive": 11,
@@ -201,6 +236,10 @@
       "arc": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 0,
         "bonus": 0,
         "passive": 10,
@@ -210,6 +249,10 @@
       "ath": {
         "value": 0,
         "ability": "str",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 3,
         "bonus": 0,
         "passive": 13,
@@ -219,6 +262,10 @@
       "dec": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 0,
         "bonus": 0,
         "passive": 10,
@@ -228,6 +275,10 @@
       "his": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 0,
         "bonus": 0,
         "passive": 10,
@@ -237,6 +288,10 @@
       "ins": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 1,
         "bonus": 0,
         "passive": 11,
@@ -246,6 +301,10 @@
       "itm": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 0,
         "bonus": 0,
         "passive": 10,
@@ -255,6 +314,10 @@
       "inv": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 0,
         "bonus": 0,
         "passive": 10,
@@ -264,6 +327,10 @@
       "med": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 1,
         "bonus": 0,
         "passive": 11,
@@ -273,6 +340,10 @@
       "nat": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 0,
         "bonus": 0,
         "passive": 10,
@@ -282,6 +353,10 @@
       "prc": {
         "value": 2,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 1,
         "bonus": 0,
         "passive": 15,
@@ -291,6 +366,10 @@
       "prf": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 0,
         "bonus": 0,
         "passive": 10,
@@ -300,6 +379,10 @@
       "per": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 0,
         "bonus": 0,
         "passive": 10,
@@ -309,6 +392,10 @@
       "rel": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 0,
         "bonus": 0,
         "passive": 10,
@@ -318,6 +405,10 @@
       "slt": {
         "value": 0,
         "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 2,
         "bonus": 0,
         "passive": 12,
@@ -327,6 +418,10 @@
       "ste": {
         "value": 1,
         "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 2,
         "bonus": 0,
         "passive": 14,
@@ -336,6 +431,10 @@
       "sur": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 1,
         "bonus": 0,
         "passive": 11,
@@ -441,7 +540,7 @@
       }
     }
   },
-  "token": {
+  "prototypeToken": {
     "name": "Weretiger",
     "displayName": 20,
     "actorLink": false,
@@ -477,7 +576,28 @@
     "randomImg": false,
     "img": "icons/svg/mystery-man.svg",
     "actorId": "zIr3NaNF0mWz5Ahq",
-    "alpha": 1
+    "alpha": 1,
+    "light": {
+      "alpha": 0.5,
+      "angle": 0,
+      "bright": 0,
+      "coloration": 1,
+      "dim": 0,
+      "gradual": true,
+      "luminosity": 0.5,
+      "saturation": 0,
+      "contrast": 0,
+      "shadows": 0,
+      "animation": {
+        "speed": 5,
+        "intensity": 5,
+        "reverse": false
+      },
+      "darkness": {
+        "min": 0,
+        "max": 1
+      }
+    }
   },
   "items": [
     {
@@ -485,7 +605,7 @@
       "name": "Shapechanger",
       "type": "feat",
       "img": "icons/magic/control/silhouette-hold-change-blue.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\"><p>The weretiger can use its action to <strong>polymorph</strong> into a tiger-humanoid hybrid or into a tiger, or back into its true form, which is humanoid. </p><p>Its statistics, other than its size, are the same in each form. Any equipment it is wearing or carrying isn't transformed. It reverts to its true form if it dies.</p></section><p>The weretiger can use its action to <strong>polymorph</strong>, or return to its true form.</p>",
           "chat": "",
@@ -550,7 +670,7 @@
       "effects": [],
       "folder": null,
       "sort": 600001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -560,7 +680,7 @@
       "name": "Keen Hearing and Smell",
       "type": "feat",
       "img": "icons/creatures/mammals/wolf-howl-moon-forest-blue.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The weretiger has<strong> advantage </strong>on Wisdom (Perception) checks that rely on hearing or smell.</p>",
           "chat": "",
@@ -625,7 +745,7 @@
       "effects": [],
       "folder": null,
       "sort": 700001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -635,7 +755,7 @@
       "name": "Pounce (Tiger or Hybrid Form Only)",
       "type": "feat",
       "img": "icons/creatures/abilities/cougar-pounce-stalk-black.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\"><p>If the weretiger moves at <strong>least 15 feet</strong> straight toward a creature and then hits it with a claw attack on the same turn, that target must succeed on a <strong>DC 14 Strength saving throw</strong> or be knocked prone. If the target is prone, the weretiger can make one bite attack against it as a bonus action.</p><p>If the target is prone, the panther can make one bite attack against it as a bonus action.</p></section><p>If the weretiger moves at <strong>least 15 feet</strong> straight toward a creature and then hits it with a claw attack on the same turn, that target must make a <strong>Strength</strong> saving throw or be knocked prone.</p>",
           "chat": "",
@@ -700,7 +820,7 @@
       "effects": [],
       "folder": null,
       "sort": 800001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -710,7 +830,7 @@
       "name": "Multiattack (Humanoid or Hybrid Form Only)",
       "type": "feat",
       "img": "icons/skills/melee/blade-tips-triple-steel.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>In humanoid form, the weretiger makes two scimitar attacks or two longbow attacks. In hybrid form, it can attack like a humanoid or make two claw attacks.</p>",
           "chat": "",
@@ -775,7 +895,7 @@
       "effects": [],
       "folder": null,
       "sort": 900001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -785,7 +905,7 @@
       "name": "Bite (Tiger or Hybrid Form Only)",
       "type": "weapon",
       "img": "icons/creatures/abilities/mouth-teeth-long-red.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\"><p><em>Melee Weapon Attack:</em><strong>+5 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>8 (1d10 + 3) <em>piercing damage</em></strong>. </p><p>If the target is a humanoid, it must succeed on a  <strong>DC 13 Constitution</strong> saving throw or be cursed with weretiger lycanthropy.</p></section><p>The Weretiger attacks with its Bite. If the target is a humanoid, it must make a <strong>Constitution</strong> saving throw.</p>",
           "chat": "",
@@ -862,6 +982,7 @@
           "conditions": ""
         },
         "weaponType": "natural",
+        "baseItem": "",
         "properties": {
           "amm": false,
           "fin": false,
@@ -884,7 +1005,7 @@
       "effects": [],
       "folder": null,
       "sort": 1000001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -894,7 +1015,7 @@
       "name": "Claw (Tiger or Hybrid Form Only)",
       "type": "weapon",
       "img": "icons/skills/melee/strike-slashes-red.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\"><p><em>Melee Weapon Attack:</em><strong>+5 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>7 (1d8 + 3) <em>slashing damage</em></strong>.</p><p></p></section><p>The Weretiger attacks with its Claw.</p>",
           "chat": "",
@@ -971,6 +1092,7 @@
           "conditions": ""
         },
         "weaponType": "natural",
+        "baseItem": "",
         "properties": {
           "amm": false,
           "fin": false,
@@ -993,7 +1115,7 @@
       "effects": [],
       "folder": null,
       "sort": 1100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -1003,7 +1125,7 @@
       "name": "Scimitar (Humanoid or Hybrid Form Only)",
       "type": "weapon",
       "img": "icons/weapons/swords/sword-katana.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+5 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>6 (1d6 + 3) <em>slashing damage</em></strong>.</p>\n</section>\n<p>The Weretiger attacks with its Scimitar.</p>",
           "chat": "",
@@ -1080,6 +1202,7 @@
           "conditions": ""
         },
         "weaponType": "martialM",
+        "baseItem": "",
         "properties": {
           "fin": true,
           "lgt": true,
@@ -1102,7 +1225,7 @@
       "effects": [],
       "folder": null,
       "sort": 1200001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -1112,7 +1235,7 @@
       "name": "Longbow (Humanoid or Hybrid Form Only)",
       "type": "weapon",
       "img": "icons/weapons/bows/longbow-leather-green.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p>Ranged Weapon Attack: +4 to hit, range 150/600 ft., one target. Hit: <strong>6 (1d8 + 2) <em>piercing damage</em></strong>.</p>\n</section>\n<p>The Weretiger attacks with its Longbow.</p>",
           "chat": "",
@@ -1189,6 +1312,7 @@
           "conditions": ""
         },
         "weaponType": "martialR",
+        "baseItem": "",
         "properties": {
           "amm": true,
           "hvy": true,
@@ -1211,7 +1335,7 @@
       "effects": [],
       "folder": null,
       "sort": 1900001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -1220,7 +1344,7 @@
   "effects": [],
   "folder": "Q7qeMxX30iDI2Wbs",
   "sort": 0,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

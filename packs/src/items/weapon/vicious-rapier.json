@@ -3,7 +3,7 @@
   "name": "Vicious Rapier",
   "type": "weapon",
   "img": "icons/weapons/swords/sword-guard-brown.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>A thin tensile metal blade, light in weight but long in reach designed for quick darting attacks to target weak points in enemy defenses with lightning swiftness.</p>\n<p>When you roll a 20 on your attack roll with this magic weapon, your critical hit deals an extra 2d6 damage of the weapon's type.</p>",
       "chat": "",
@@ -106,7 +106,7 @@
   "effects": [],
   "folder": null,
   "sort": 3500000,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

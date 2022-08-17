@@ -3,7 +3,7 @@
   "name": "Vicious Whip",
   "type": "weapon",
   "img": "icons/weapons/misc/whip-red-yellow.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>A tensile lash made of leather, cord, or chain which can lash out at nearby enemies, dealing lacerations and harrying them from a distance.</p>\n<p>When you roll a 20 on your attack roll with this magic weapon, your critical hit deals an extra 2d6 damage of the weapon's type.</p>",
       "chat": "",
@@ -106,7 +106,7 @@
   "effects": [],
   "folder": null,
   "sort": 3900000,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

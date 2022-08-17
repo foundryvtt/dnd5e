@@ -3,7 +3,7 @@
   "name": "Perfume",
   "type": "loot",
   "img": "icons/consumables/potions/bottle-bulb-corked-purple.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>A vial of aromatic perfume.</p>",
       "chat": "",
@@ -24,7 +24,7 @@
   "effects": [],
   "folder": null,
   "sort": 4000000,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

@@ -1,11 +1,11 @@
 {
   "_id": "hzK7FQya0BDjSmLE",
   "name": "Sunburst",
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "type": "spell",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>Brilliant sunlight flashes in a 60-foot radius centered on a point you choose within range. Each creature in that light must make a Constitution saving throw. On a failed save, a creature takes 12d6 radiant damage and is Blinded for 1 minute. On a successful save, it takes half as much damage and isn't blinded by this spell. Undead and oozes have disadvantage on this saving throw.</p><p>A creature Blinded by this spell makes another Constitution saving throw at the end of each of its turns. On a successful save, it is no longer blinded.</p><p>This spell dispels any Darkness in its area that was created by a spell.</p>",
       "chat": "",
@@ -86,6 +86,6 @@
   },
   "sort": 100001,
   "flags": {},
-  "img": "systems/dnd5e/icons/spells/explosion-royal-3.jpg",
+  "img": "icons/magic/fire/explosion-fireball-large-purple-orange.webp",
   "effects": []
 }

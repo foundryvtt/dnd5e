@@ -3,7 +3,7 @@
   "name": "Grappling Hook",
   "type": "loot",
   "img": "icons/weapons/sickles/sickle-hooked-wood.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>A device with iron claws, can be used with rope for dragging or grasping.</p>",
       "chat": "",
@@ -21,7 +21,7 @@
   "effects": [],
   "folder": null,
   "sort": 0,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

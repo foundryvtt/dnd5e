@@ -3,7 +3,7 @@
   "name": "Restorative Ointment",
   "type": "consumable",
   "img": "icons/commodities/materials/liquid-orange.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p><em>Wondrous item</em></p>\n<p>This glass jar, 3 inches in diameter, contains 1d4 + 1 doses of a thick mixture that smells faintly of aloe. The jar and its contents weigh 1/2 pound.</p>\n<p>As an action, one dose of the ointment can be swallowed or applied to the skin. The creature that receives it regains 2d8 + 2 hit points, ceases to be poisoned, and is cured of any disease.</p>\n<p><em>Foundry note: the 5 charges reflect the maximum number of doses possible. </em><em>Similarly, the guide price of 600 gp is calculated at 120 gp per dose. A</em><em>djust both as required.</em></p>",
       "chat": "",
@@ -80,7 +80,7 @@
   "effects": [],
   "folder": null,
   "sort": 3200000,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

@@ -3,7 +3,7 @@
   "name": "Vicious Greatclub",
   "type": "weapon",
   "img": "icons/weapons/maces/mace-spiked-steel-grey.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>A larger variant of the simple club, a hefty wooden shaft with an enormous knot of wood upon the end deals crippling bludgeoning damage to unfortunate foes.</p>\n<p>When you roll a 20 on your attack roll with this magic weapon, your critical hit deals an extra 2d6 damage of the weapon's type.</p>",
       "chat": "",
@@ -106,7 +106,7 @@
   "effects": [],
   "folder": null,
   "sort": 1400001,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

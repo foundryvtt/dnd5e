@@ -3,7 +3,7 @@
   "name": "Torch",
   "type": "consumable",
   "img": "icons/sundries/lights/torch-black.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>A torch burns for 1 hour, providing bright light in a 20-foot radius and dim light for an additional 20 feet. If you make a melee attack with a burning torch and hit, it deals 1 fire damage.</p>",
       "chat": "",
@@ -77,7 +77,7 @@
   "effects": [],
   "folder": null,
   "sort": 4700000,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

@@ -3,11 +3,15 @@
   "name": "Ice Mephit",
   "type": "npc",
   "img": "systems/dnd5e/tokens/elemental/IceMephit.webp",
-  "data": {
+  "system": {
     "abilities": {
       "str": {
         "value": 7,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": -2,
         "save": -2,
@@ -19,6 +23,10 @@
       "dex": {
         "value": 13,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 1,
         "save": 1,
@@ -30,6 +38,10 @@
       "con": {
         "value": 10,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 0,
         "save": 0,
@@ -41,6 +53,10 @@
       "int": {
         "value": 9,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": -1,
         "save": -1,
@@ -52,6 +68,10 @@
       "wis": {
         "value": 11,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 0,
         "save": 0,
@@ -63,6 +83,10 @@
       "cha": {
         "value": 12,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 1,
         "save": 1,
@@ -102,6 +126,9 @@
         "walk": 30,
         "units": "ft",
         "hover": false
+      },
+      "attunement": {
+        "max": 3
       },
       "senses": {
         "darkvision": 60,
@@ -189,6 +216,10 @@
       "acr": {
         "value": 0,
         "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 1,
         "bonus": 0,
         "passive": 11,
@@ -198,6 +229,10 @@
       "ani": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 0,
         "bonus": 0,
         "passive": 10,
@@ -207,6 +242,10 @@
       "arc": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": -1,
         "bonus": 0,
         "passive": 9,
@@ -216,6 +255,10 @@
       "ath": {
         "value": 0,
         "ability": "str",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": -2,
         "bonus": 0,
         "passive": 8,
@@ -225,6 +268,10 @@
       "dec": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 1,
         "bonus": 0,
         "passive": 11,
@@ -234,6 +281,10 @@
       "his": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": -1,
         "bonus": 0,
         "passive": 9,
@@ -243,6 +294,10 @@
       "ins": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 0,
         "bonus": 0,
         "passive": 10,
@@ -252,6 +307,10 @@
       "itm": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 1,
         "bonus": 0,
         "passive": 11,
@@ -261,6 +320,10 @@
       "inv": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": -1,
         "bonus": 0,
         "passive": 9,
@@ -270,6 +333,10 @@
       "med": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 0,
         "bonus": 0,
         "passive": 10,
@@ -279,6 +346,10 @@
       "nat": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": -1,
         "bonus": 0,
         "passive": 9,
@@ -288,6 +359,10 @@
       "prc": {
         "value": 1,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 0,
         "bonus": 0,
         "passive": 12,
@@ -297,6 +372,10 @@
       "prf": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 1,
         "bonus": 0,
         "passive": 11,
@@ -306,6 +385,10 @@
       "per": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 1,
         "bonus": 0,
         "passive": 11,
@@ -315,6 +398,10 @@
       "rel": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": -1,
         "bonus": 0,
         "passive": 9,
@@ -324,6 +411,10 @@
       "slt": {
         "value": 0,
         "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 1,
         "bonus": 0,
         "passive": 11,
@@ -333,6 +424,10 @@
       "ste": {
         "value": 1,
         "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 1,
         "bonus": 0,
         "passive": 13,
@@ -342,6 +437,10 @@
       "sur": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 0,
         "bonus": 0,
         "passive": 10,
@@ -447,7 +546,7 @@
       }
     }
   },
-  "token": {
+  "prototypeToken": {
     "name": "Ice Mephit",
     "displayName": 20,
     "actorLink": false,
@@ -483,7 +582,28 @@
     "randomImg": false,
     "img": "systems/dnd5e/tokens/elemental/IceMephit.webp",
     "actorId": "ESEm3fGUfSKjzVUc",
-    "alpha": 1
+    "alpha": 1,
+    "light": {
+      "alpha": 0.5,
+      "angle": 0,
+      "bright": 0,
+      "coloration": 1,
+      "dim": 0,
+      "gradual": true,
+      "luminosity": 0.5,
+      "saturation": 0,
+      "contrast": 0,
+      "shadows": 0,
+      "animation": {
+        "speed": 5,
+        "intensity": 5,
+        "reverse": false
+      },
+      "darkness": {
+        "min": 0,
+        "max": 1
+      }
+    }
   },
   "items": [
     {
@@ -491,9 +611,9 @@
       "name": "Fog Cloud",
       "type": "spell",
       "img": "systems/dnd5e/icons/spells/fog-water-air-2.jpg",
-      "data": {
+      "system": {
         "description": {
-          "value": "<p>You create a 20-foot-radius Sphere of fog centered on a point within range. The sphere spreads around corners, and its area is heavily obscured. It lasts for the Duration or until a wind of moderate or greater speed (at least 10 miles per hour) disperses it.</p>\n<p><strong>At Higher Levels.</strong> When you cast this spell using a spell slot of 2nd level or higher, the radius of the fog increases by 20 feet for each slot level above 1st.</p>",
+          "value": "<p>You create a 20-foot-radius Sphere of fog centered on a point within range. The sphere spreads around corners, and its area is heavily obscured. It lasts for the Duration or until a wind of moderate or greater speed (at least 10 miles per hour) disperses it.</p><p><strong>At Higher Levels.</strong> When you cast this spell using a spell slot of 2nd level or higher, the radius of the fog increases by 20 feet for each slot level above 1st.</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -511,7 +631,7 @@
           "value": 20,
           "width": null,
           "units": "ft",
-          "type": "radius"
+          "type": "sphere"
         },
         "range": {
           "value": 120,
@@ -525,7 +645,7 @@
         },
         "consume": {
           "type": "",
-          "target": "",
+          "target": null,
           "amount": null
         },
         "ability": "",
@@ -577,17 +697,21 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.IBJmWjzbQGu7M4UX"
+        }
+      }
     },
     {
       "_id": "D4cqlN9pDyQwRvWP",
       "name": "Death Burst",
       "type": "feat",
       "img": "icons/magic/light/explosion-star-glow-yellow.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\"><p>When the mephit dies, it explodes in a burst of jagged ice. </p><p>Each creature within 5 ft. of it must make a  <strong>DC 10 Dexterity</strong> saving throw, taking <strong>4 (1d8) <em>slashing damage</em></strong> on a failed save, or half as much damage on a successful one.</p></section><p>When the mephit dies, it explodes in a burst of jagged ice. Each creature within 5 ft. of it must make a <strong>Dexterity</strong> saving throw.</p>",
           "chat": "",
@@ -657,7 +781,7 @@
       "effects": [],
       "folder": null,
       "sort": 200001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -667,7 +791,7 @@
       "name": "False Appearance",
       "type": "feat",
       "img": "icons/magic/nature/stealth-hide-eyes-green.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>While the mephit remains motionless, it is indistinguishable from an ordinary shard of ice.</p>",
           "chat": "",
@@ -732,7 +856,7 @@
       "effects": [],
       "folder": null,
       "sort": 300001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -742,7 +866,7 @@
       "name": "Innate Spellcasting",
       "type": "feat",
       "img": "icons/magic/light/projectiles-star-purple.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The mephit can innately cast fog cloud, requiring no material components. Its innate spellcasting ability is Charisma.</p>",
           "chat": "",
@@ -807,7 +931,7 @@
       "effects": [],
       "folder": null,
       "sort": 400001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -817,7 +941,7 @@
       "name": "Claws",
       "type": "weapon",
       "img": "icons/skills/melee/strike-slashes-red.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\"><p><em>Melee Weapon Attack:</em><strong>+3 to hit,</strong>, <strong>5 ft.,</strong> one creature. Hit: <strong>3 (1d4 + 1) <em>slashing damage</em></strong> plus <strong>2 (1d4) <em>cold damage</em></strong>.</p><p></p></section><p>The Ice Mephit attacks with its Claws.</p>",
           "chat": "",
@@ -898,6 +1022,7 @@
           "conditions": ""
         },
         "weaponType": "natural",
+        "baseItem": "",
         "properties": {
           "amm": false,
           "fin": false,
@@ -920,7 +1045,7 @@
       "effects": [],
       "folder": null,
       "sort": 500001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -930,7 +1055,7 @@
       "name": "Frost Breath",
       "type": "feat",
       "img": "icons/magic/air/wind-tornado-wall-blue.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\"><p>The mephit exhales a 15-foot cone of cold air. Each creature in that area must succeed on a  <strong>DC 10 Dexterity</strong> saving throw, taking <strong>5 (2d4) <em>cold damage</em></strong> on a failed save, or half as much damage on a successful one.</p><p></p></section><p>The mephit exhales a 15-foot cone of cold air. Each creature in that area must make a <strong>Dexterity</strong> saving throw.</p>",
           "chat": "",
@@ -1000,7 +1125,7 @@
       "effects": [],
       "folder": null,
       "sort": 600001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -1009,7 +1134,7 @@
   "effects": [],
   "folder": "OvwYcGTa27ZerqL7",
   "sort": 0,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

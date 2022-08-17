@@ -1,11 +1,11 @@
 {
   "_id": "Y6oItIuhOJZ0i0FC",
   "name": "Mass Heal",
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "type": "spell",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>A flood of Healing energy flows from you into injured creatures around you. You restore up to 700 Hit Points, divided as you choose among any number of creatures that you can see within range. Creatures healed by this spell are also cured of all Diseases and any effect making them Blinded or Deafened. This spell has no effect on Undead or constructs.</p>",
       "chat": "",
@@ -86,6 +86,6 @@
   },
   "sort": 100001,
   "flags": {},
-  "img": "systems/dnd5e/icons/spells/heal-jade-3.jpg",
+  "img": "icons/magic/life/heart-cross-strong-flame-green.webp",
   "effects": []
 }

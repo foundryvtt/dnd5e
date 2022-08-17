@@ -1,11 +1,11 @@
 {
   "_id": "ge3Saet9zPTDyaoL",
   "name": "Heroism",
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "type": "spell",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>A willing creature you touch is imbued with bravery. Until the spell ends, the creature is immune to being Frightened and gains Temporary Hit Points equal to your Spellcasting ability modifier at the start of each of its turns. When the spell ends, the target loses any remaining temporary hit points from this spell.</p><p><strong>At Higher Levels.</strong> When you cast this spell using a spell slot of 2nd level or higher, you can target one additional creature for each slot level above 1st.</p>",
       "chat": "",
@@ -87,6 +87,6 @@
   },
   "sort": 100001,
   "flags": {},
-  "img": "systems/dnd5e/icons/spells/heal-sky-2.jpg",
+  "img": "icons/magic/life/heart-cross-strong-blue.webp",
   "effects": []
 }

@@ -3,11 +3,15 @@
   "name": "Ochre Jelly",
   "type": "npc",
   "img": "systems/dnd5e/tokens/ooze/OchreJelly.webp",
-  "data": {
+  "system": {
     "abilities": {
       "str": {
         "value": 15,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 2,
         "save": 2,
@@ -19,6 +23,10 @@
       "dex": {
         "value": 6,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": -2,
         "save": -2,
@@ -30,6 +38,10 @@
       "con": {
         "value": 14,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 2,
         "save": 2,
@@ -41,6 +53,10 @@
       "int": {
         "value": 2,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": -4,
         "save": -4,
@@ -52,6 +68,10 @@
       "wis": {
         "value": 6,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": -2,
         "save": -2,
@@ -63,6 +83,10 @@
       "cha": {
         "value": 1,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": -5,
         "save": -5,
@@ -102,6 +126,9 @@
         "walk": 10,
         "units": "ft",
         "hover": false
+      },
+      "attunement": {
+        "max": 3
       },
       "senses": {
         "darkvision": 0,
@@ -190,6 +217,10 @@
       "acr": {
         "value": 0,
         "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": -2,
         "bonus": 0,
         "passive": 8,
@@ -199,6 +230,10 @@
       "ani": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": -2,
         "bonus": 0,
         "passive": 8,
@@ -208,6 +243,10 @@
       "arc": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": -4,
         "bonus": 0,
         "passive": 6,
@@ -217,6 +256,10 @@
       "ath": {
         "value": 0,
         "ability": "str",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 2,
         "bonus": 0,
         "passive": 12,
@@ -226,6 +269,10 @@
       "dec": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": -5,
         "bonus": 0,
         "passive": 5,
@@ -235,6 +282,10 @@
       "his": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": -4,
         "bonus": 0,
         "passive": 6,
@@ -244,6 +295,10 @@
       "ins": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": -2,
         "bonus": 0,
         "passive": 8,
@@ -253,6 +308,10 @@
       "itm": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": -5,
         "bonus": 0,
         "passive": 5,
@@ -262,6 +321,10 @@
       "inv": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": -4,
         "bonus": 0,
         "passive": 6,
@@ -271,6 +334,10 @@
       "med": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": -2,
         "bonus": 0,
         "passive": 8,
@@ -280,6 +347,10 @@
       "nat": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": -4,
         "bonus": 0,
         "passive": 6,
@@ -289,6 +360,10 @@
       "prc": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": -2,
         "bonus": 0,
         "passive": 8,
@@ -298,6 +373,10 @@
       "prf": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": -5,
         "bonus": 0,
         "passive": 5,
@@ -307,6 +386,10 @@
       "per": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": -5,
         "bonus": 0,
         "passive": 5,
@@ -316,6 +399,10 @@
       "rel": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": -4,
         "bonus": 0,
         "passive": 6,
@@ -325,6 +412,10 @@
       "slt": {
         "value": 0,
         "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": -2,
         "bonus": 0,
         "passive": 8,
@@ -334,6 +425,10 @@
       "ste": {
         "value": 0,
         "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": -2,
         "bonus": 0,
         "passive": 8,
@@ -343,6 +438,10 @@
       "sur": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": -2,
         "bonus": 0,
         "passive": 8,
@@ -448,7 +547,7 @@
       }
     }
   },
-  "token": {
+  "prototypeToken": {
     "name": "Ochre Jelly",
     "displayName": 20,
     "actorLink": false,
@@ -484,7 +583,28 @@
     "randomImg": false,
     "img": "systems/dnd5e/tokens/ooze/OchreJelly.webp",
     "actorId": "xBhG7Dos3tkg9jWz",
-    "alpha": 1
+    "alpha": 1,
+    "light": {
+      "alpha": 0.5,
+      "angle": 0,
+      "bright": 0,
+      "coloration": 1,
+      "dim": 0,
+      "gradual": true,
+      "luminosity": 0.5,
+      "saturation": 0,
+      "contrast": 0,
+      "shadows": 0,
+      "animation": {
+        "speed": 5,
+        "intensity": 5,
+        "reverse": false
+      },
+      "darkness": {
+        "min": 0,
+        "max": 1
+      }
+    }
   },
   "items": [
     {
@@ -492,7 +612,7 @@
       "name": "Pseudopod",
       "type": "weapon",
       "img": "icons/creatures/slimes/slime-movement-dripping-pseudopods-green.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\"><p><em>Melee Weapon Attack:</em><strong>+4 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>9 (2d6 + 2) <em>bludgeoning damage</em></strong> plus <strong>3 (1d6) <em>acid damage</em></strong>.</p><p></p></section><p>The Ochre Jelly attacks with its Pseudopod.</p>",
           "chat": "",
@@ -573,6 +693,7 @@
           "conditions": ""
         },
         "weaponType": "simpleM",
+        "baseItem": "",
         "properties": {
           "amm": false,
           "fin": false,
@@ -595,7 +716,7 @@
       "effects": [],
       "folder": null,
       "sort": 300001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -605,7 +726,7 @@
       "name": "Amorphous",
       "type": "feat",
       "img": "icons/creatures/slimes/slime-movement-dripping-purple.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The jelly can move through a space as narrow as 1 inch wide without squeezing.</p>",
           "chat": "",
@@ -670,7 +791,7 @@
       "effects": [],
       "folder": null,
       "sort": 400001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -680,7 +801,7 @@
       "name": "Spider Climb",
       "type": "feat",
       "img": "icons/creatures/invertebrates/spider-beetle-runed-green.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The jelly can climb difficult surfaces, including upside down on ceilings, without needing to make an ability check.</p>",
           "chat": "",
@@ -745,7 +866,7 @@
       "effects": [],
       "folder": null,
       "sort": 500001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -755,7 +876,7 @@
       "name": "Split",
       "type": "feat",
       "img": "icons/creatures/slimes/slime-movement-pseudopod-green.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\"><p>When a jelly that is Medium or larger is subjected to lightning or <em>slashing damage</em>, it splits into two new jellies if it has at least 10 Hit Points. Each new jelly has Hit Points equal to half the original jelly's, rounded down. New jellies are one size smaller than the original jelly.</p></section><p>The jelly splits into two new jellies. New jellies are one size smaller than the original jelly.</p>",
           "chat": "",
@@ -820,7 +941,7 @@
       "effects": [],
       "folder": null,
       "sort": 600001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -829,7 +950,7 @@
   "effects": [],
   "folder": "eDEsGNylMOfsjoZR",
   "sort": 0,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

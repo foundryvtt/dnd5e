@@ -1,11 +1,11 @@
 {
   "_id": "2skfDtglk1mGrb3l",
   "name": "Detect Poison and Disease",
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "type": "spell",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>For the duration, you can sense the presence and location of poisons, poisonous creatures, and diseases within 30 feet of you. You also identify the kind of poison, poisonous creature, or disease in each case.</p><p>The spell can penetrate most barriers, but it is blocked by 1 foot of stone, 1 inch of common metal, a thin sheet of lead, or 3 feet of wood or dirt.</p>",
       "chat": "",
@@ -82,6 +82,6 @@
   },
   "sort": 100001,
   "flags": {},
-  "img": "systems/dnd5e/icons/spells/air-burst-jade-2.jpg",
+  "img": "icons/magic/air/air-burst-spiral-teal-green.webp",
   "effects": []
 }

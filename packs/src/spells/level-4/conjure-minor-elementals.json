@@ -1,11 +1,11 @@
 {
   "_id": "KgEw3sDr39C6g8nY",
   "name": "Conjure Minor Elementals",
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "type": "spell",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>You summon elementals that appear in unoccupied spaces that you can see within range. You choose one the following options for what appears:</p>\n<ul>\n<li>One elemental of challenge rating 2 or lower</li>\n<li>Two elementals of challenge rating 1 or lower</li>\n<li>Four elementals of challenge rating 1/2 or lower</li>\n<li>Eight elementals of challenge rating 1/4 or lower.</li>\n</ul>\n<p>An elemental summoned by this spell disappears when it drops to 0 hit points or when the spell ends.</p><p>The summoned creatures are friendly to you and your companions. Roll initiative for the summoned creatures as a group, which has its own turns. They obey any verbal commands that you issue to them (no action required by you). If you don't issue any commands to them, they defend themselves from hostile creatures, but otherwise take no actions.</p><p><strong>Higher Levels.&nbsp;</strong>When you cast this spell using certain higher-level spell slots, you choose one of the summoning options above, and more creatures appear: twice as many with a 6th-level slot and three times as many with an 8th-level slot.</p>",
       "chat": "",
@@ -83,6 +83,6 @@
   },
   "sort": 100001,
   "flags": {},
-  "img": "systems/dnd5e/icons/spells/runes-orange-2.jpg",
+  "img": "icons/magic/symbols/runes-star-orange.webp",
   "effects": []
 }

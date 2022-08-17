@@ -1,0 +1,20 @@
+<form class="{{cssClass}} flexcol limited" autocomplete="off">
+
+    {{!-- Sheet Header --}}
+    <header class="sheet-header flexrow">
+        <img class="profile" src="{{actor.img}}" title="{{actor.name}}" data-edit="img"/>
+
+        <section class="header-details flexrow">
+            <h1 class="charname">
+                <input name="name" type="text" value="{{actor.name}}" placeholder="{{ localize 'DND5E.Name' }}"/>
+            </h1>
+        </section>
+    </header>
+
+    {{!-- Sheet Body --}}
+    <section class="sheet-body">
+        <div class="tab biography">
+            {{editor biographyHTML target="system.details.biography.value" button=true editable=editable}}
+        </div>
+    </section>
+</form>

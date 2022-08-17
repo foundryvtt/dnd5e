@@ -3,7 +3,7 @@
   "name": "Small Knife",
   "type": "loot",
   "img": "icons/weapons/daggers/dagger-jeweled-purple.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>A blunt knife used by the scholarly to open letters and correspondence.</p>",
       "chat": "",
@@ -24,7 +24,7 @@
   "effects": [],
   "folder": null,
   "sort": 4600000,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

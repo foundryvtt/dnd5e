@@ -3,7 +3,7 @@
   "name": "Oil of Sharpness",
   "type": "consumable",
   "img": "icons/consumables/potions/potion-tube-corked-bat-gold-red.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p><em>This clear, gelatinous oil sparkles with tiny, ultrathin silver shards. </em></p>\n<p>The oil can coat one slashing or piercing weapon or up to 5 pieces of slashing or piercing ammunition. Applying the oil takes 1 minute. For 1 hour, the coated item is magical and has a +3 bonus to attack and damage rolls.</p>",
       "chat": "",
@@ -75,7 +75,7 @@
   "effects": [],
   "folder": null,
   "sort": 1500000,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

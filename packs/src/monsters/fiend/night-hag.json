@@ -3,11 +3,15 @@
   "name": "Night Hag",
   "type": "npc",
   "img": "systems/dnd5e/tokens/fiend/NightHag.webp",
-  "data": {
+  "system": {
     "abilities": {
       "str": {
         "value": 18,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 4,
         "save": 4,
@@ -19,6 +23,10 @@
       "dex": {
         "value": 15,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 2,
         "save": 2,
@@ -30,6 +38,10 @@
       "con": {
         "value": 16,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 3,
         "save": 3,
@@ -41,6 +53,10 @@
       "int": {
         "value": 16,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 3,
         "save": 3,
@@ -52,6 +68,10 @@
       "wis": {
         "value": 14,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 2,
         "save": 2,
@@ -63,6 +83,10 @@
       "cha": {
         "value": 16,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 3,
         "save": 3,
@@ -102,6 +126,9 @@
         "walk": 30,
         "units": "ft",
         "hover": false
+      },
+      "attunement": {
+        "max": 3
       },
       "senses": {
         "darkvision": 120,
@@ -189,6 +216,10 @@
       "acr": {
         "value": 0,
         "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 2,
         "bonus": 1,
         "passive": 13,
@@ -198,6 +229,10 @@
       "ani": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 2,
         "bonus": 1,
         "passive": 13,
@@ -207,6 +242,10 @@
       "arc": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 3,
         "bonus": 1,
         "passive": 14,
@@ -216,6 +255,10 @@
       "ath": {
         "value": 0,
         "ability": "str",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 4,
         "bonus": 1,
         "passive": 15,
@@ -225,6 +268,10 @@
       "dec": {
         "value": 1,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 3,
         "bonus": 1,
         "passive": 17,
@@ -234,6 +281,10 @@
       "his": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 3,
         "bonus": 1,
         "passive": 14,
@@ -243,6 +294,10 @@
       "ins": {
         "value": 1,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 2,
         "bonus": 1,
         "passive": 16,
@@ -252,6 +307,10 @@
       "itm": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 3,
         "bonus": 1,
         "passive": 14,
@@ -261,6 +320,10 @@
       "inv": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 3,
         "bonus": 1,
         "passive": 14,
@@ -270,6 +333,10 @@
       "med": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 2,
         "bonus": 1,
         "passive": 13,
@@ -279,6 +346,10 @@
       "nat": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 3,
         "bonus": 1,
         "passive": 14,
@@ -288,6 +359,10 @@
       "prc": {
         "value": 1,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 2,
         "bonus": 1,
         "passive": 16,
@@ -297,6 +372,10 @@
       "prf": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 3,
         "bonus": 1,
         "passive": 14,
@@ -306,6 +385,10 @@
       "per": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 3,
         "bonus": 1,
         "passive": 14,
@@ -315,6 +398,10 @@
       "rel": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 3,
         "bonus": 1,
         "passive": 14,
@@ -324,6 +411,10 @@
       "slt": {
         "value": 0,
         "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 2,
         "bonus": 1,
         "passive": 13,
@@ -333,6 +424,10 @@
       "ste": {
         "value": 1,
         "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 2,
         "bonus": 1,
         "passive": 16,
@@ -342,6 +437,10 @@
       "sur": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 2,
         "bonus": 1,
         "passive": 13,
@@ -447,7 +546,7 @@
       }
     }
   },
-  "token": {
+  "prototypeToken": {
     "name": "Night Hag",
     "displayName": 20,
     "actorLink": false,
@@ -483,7 +582,28 @@
     "randomImg": false,
     "img": "systems/dnd5e/tokens/fiend/NightHag.webp",
     "actorId": "xvh2UOKv1bh03Gih",
-    "alpha": 1
+    "alpha": 1,
+    "light": {
+      "alpha": 0.5,
+      "angle": 0,
+      "bright": 0,
+      "coloration": 1,
+      "dim": 0,
+      "gradual": true,
+      "luminosity": 0.5,
+      "saturation": 0,
+      "contrast": 0,
+      "shadows": 0,
+      "animation": {
+        "speed": 5,
+        "intensity": 5,
+        "reverse": false
+      },
+      "darkness": {
+        "min": 0,
+        "max": 1
+      }
+    }
   },
   "items": [
     {
@@ -491,7 +611,7 @@
       "name": "Innate Spellcasting",
       "type": "feat",
       "img": "icons/magic/light/projectiles-star-purple.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The hag's innate spellcasting ability is Charisma (spell save DC 14, +6 to hit with spell attacks). She can innately cast the following spells, requiring no material components:</p>\n<p>At will: detect magic, magic missile</p>\n<p>2/day each: plane shift (self only), ray of enfeeblement, sleep</p>",
           "chat": "",
@@ -559,7 +679,7 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -569,7 +689,7 @@
       "name": "Detect Magic",
       "type": "spell",
       "img": "systems/dnd5e/icons/spells/light-blue-2.jpg",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>For the duration, you sense the presence of magic within 30 feet of you. If you sense magic in this way, you can use your action to see a faint aura around any visible creature or object in the area that bears magic, and you learn its school of magic, if any.</p><p>The spell can penetrate most barriers, but it is blocked by 1 foot of stone, 1 inch of common metal, a thin sheet of lead, or 3 feet of wood or dirt.</p>",
           "chat": "",
@@ -603,7 +723,7 @@
         },
         "consume": {
           "type": "",
-          "target": "",
+          "target": null,
           "amount": null
         },
         "ability": "",
@@ -655,19 +775,23 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.ghXTfe7sgCbgf1Q8"
+        }
+      }
     },
     {
       "_id": "9lPXTDWpyq7hq6WC",
       "name": "Magic Missile",
       "type": "spell",
       "img": "systems/dnd5e/icons/spells/fire-arrows-magenta-1.jpg",
-      "data": {
+      "system": {
         "description": {
-          "value": "<p>You create three glowing darts of magical force. Each dart hits a creature of your choice that you can see within range. A dart deals 1d4 +<strong> 1 <em>force damage</em> </strong>to its target. The darts all strike simultaneously, and you can direct them to hit one creature or several.</p>\n<p><strong>Higher Levels.&nbsp;</strong>When you cast this spell using a spell slot of 2nd level or higher, the spell creates one more dart for each slot level above 1st.</p>",
+          "value": "<p>You create three glowing darts of magical force. Each dart hits a creature of your choice that you can see within range. A dart deals 1d4 + 1 force damage to its target. The darts all strike simultaneously, and you can direct them to hit one creature or several.</p><p><strong>Higher Levels.&nbsp;</strong>When you cast this spell using a spell slot of 2nd level or higher, the spell creates one more dart for each slot level above 1st.</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -685,7 +809,7 @@
           "value": 1,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "creature"
         },
         "range": {
           "value": 120,
@@ -699,11 +823,11 @@
         },
         "consume": {
           "type": "",
-          "target": "",
+          "target": null,
           "amount": null
         },
         "ability": "",
-        "actionType": "util",
+        "actionType": "other",
         "attackBonus": 0,
         "chatFlavor": "",
         "critical": {
@@ -713,11 +837,7 @@
         "damage": {
           "parts": [
             [
-              "3d4",
-              "force"
-            ],
-            [
-              "3",
+              "1d4 + 1",
               "force"
             ]
           ],
@@ -752,26 +872,30 @@
         },
         "scaling": {
           "mode": "level",
-          "formula": "1d4+1"
+          "formula": ""
         },
         "attunement": 0
       },
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.41JIhpDyM9Anm7cs"
+        }
+      }
     },
     {
       "_id": "9Gf1hal94HjuAHMN",
       "name": "Plane Shift (self only)",
       "type": "spell",
       "img": "systems/dnd5e/icons/spells/runes-royal-3.jpg",
-      "data": {
+      "system": {
         "description": {
-          "value": "<p>You and up to eight willing creatures who link hands in a circle are transported to a different plane of existence. You can specify a target destination in general terms, such as the City of Brass on the Elemental Plane of Fire or the palace of Dispater on the second level of the Nine Hells, and you appear in or near that destination. If you are trying to reach the City of Brass, for example, you might arrive in its Street of Steel, before its Gate of Ashes, or looking at the city from across the Sea of Fire, at the DM's discretion.</p><p>Alternatively, if you know the sigil sequence of a teleportation circle on another plane of existence, this spell can take you to that circle. If the teleportation circle is too small to hold all the creatures you transported, they appear in the closest unoccupied spaces next to the circle.</p><p>You can use this spell to banish an unwilling creature to another plane. Choose a creature within your reach and make a melee spell attack against it. On a hit, the creature must make a <strong>Charisma</strong> saving throw. If the creature fails this save, it is transported to a random location on the plane of existence you specify. A creature so transported must find its own way back to your current plane of existence.</p>",
+          "value": "<p>You and up to eight willing creatures who link hands in a circle are transported to a different plane of existence. You can specify a target destination in general terms, such as the City of Brass on the Elemental Plane of Fire or the palace of Dispater on the second level of the Nine Hells, and you appear in or near that destination. If you are trying to reach the City of Brass, for example, you might arrive in its Street of Steel, before its Gate of Ashes, or looking at the city from across the Sea of Fire, at the DM's discretion.</p><p>Alternatively, if you know the sigil sequence of a teleportation circle on another plane of existence, this spell can take you to that circle. If the teleportation circle is too small to hold all the creatures you transported, they appear in the closest unoccupied spaces next to the circle.</p><p>You can use this spell to banish an unwilling creature to another plane. Choose a creature within your reach and make a melee spell attack against it. On a hit, the creature must make a Charisma saving throw. If the creature fails this save, it is transported to a random location on the plane of existence you specify. A creature so transported must find its own way back to your current plane of existence.</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -786,10 +910,10 @@
           "units": "inst"
         },
         "target": {
-          "value": null,
+          "value": 8,
           "width": null,
-          "units": null,
-          "type": "self"
+          "units": "",
+          "type": "creature"
         },
         "range": {
           "value": null,
@@ -807,7 +931,7 @@
           "amount": null
         },
         "ability": "",
-        "actionType": "util",
+        "actionType": "msak",
         "attackBonus": 0,
         "chatFlavor": "",
         "critical": {
@@ -854,19 +978,23 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.J6Jpw5XzB5aTeqnz"
+        }
+      }
     },
     {
       "_id": "rcgnaOciUJHj34Mi",
       "name": "Ray of Enfeeblement",
       "type": "spell",
       "img": "systems/dnd5e/icons/spells/beam-jade-2.jpg",
-      "data": {
+      "system": {
         "description": {
-          "value": "<p>A black beam of enervating energy springs from your finger toward a creature within range. Make a ranged spell attack against the target. On a hit, the target deals only half damage with weapon attacks that use Strength until the spell ends.</p><p>At the end of each of the target's turns, it can make a <strong>Constitution</strong> saving throw against the spell. On a success, the spell ends.</p>",
+          "value": "<p>A black beam of enervating energy springs from your finger toward a creature within range. Make a ranged spell attack against the target. On a hit, the target deals only half damage with weapon attacks that use Strength until the spell ends.</p><p>At the end of each of the target's turns, it can make a Constitution saving throw against the spell. On a success, the spell ends.</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -884,7 +1012,7 @@
           "value": 1,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "creature"
         },
         "range": {
           "value": 60,
@@ -898,11 +1026,11 @@
         },
         "consume": {
           "type": "",
-          "target": "",
+          "target": null,
           "amount": null
         },
         "ability": "",
-        "actionType": "util",
+        "actionType": "rsak",
         "attackBonus": 0,
         "chatFlavor": "",
         "critical": {
@@ -949,19 +1077,23 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.ODhLKBxLnvvLOnw1"
+        }
+      }
     },
     {
       "_id": "PH7UXgDUQLHXIhsf",
       "name": "Sleep",
       "type": "spell",
       "img": "systems/dnd5e/icons/spells/light-magenta-1.jpg",
-      "data": {
+      "system": {
         "description": {
-          "value": "<p>This spell sends creatures into a magical slumber. Roll 5d8; the total is how many hit points of creatures this spell can affect. Creatures within 20 feet of a point you choose within range are affected in ascending order of their current hit points (ignoring unconscious creatures).</p>\n<p>Starting with the creature that has the lowest current hit points, each creature affected by this spell falls unconscious until the spell ends, the sleeper takes damage, or someone uses an action to shake or slap the sleeper awake. Subtract each creature's hit points from the total before moving on to the creature with the next lowest hit points. A creature's hit points must be equal to or less than the remaining total for that creature to be affected.</p>\n<p>Undead and creatures immune to being charmed aren't affected by this spell.</p>\n<p><strong>Higher Levels.</strong> When you cast this spell using a spell slot of 2nd level or higher, roll an additional 2d8 for each slot level above 1st.</p>",
+          "value": "<p>This spell sends creatures into a magical slumber. Roll 5d8; the total is how many hit points of creatures this spell can affect. Creatures within 20 feet of a point you choose within range are affected in ascending order of their current hit points (ignoring unconscious creatures).</p><p>Starting with the creature that has the lowest current hit points, each creature affected by this spell falls unconscious until the spell ends, the sleeper takes damage, or someone uses an action to shake or slap the sleeper awake. Subtract each creature's hit points from the total before moving on to the creature with the next lowest hit points. A creature's hit points must be equal to or less than the remaining total for that creature to be affected.</p><p>Undead and creatures immune to being charmed aren't affected by this spell.</p><p><strong>Higher Levels.</strong> When you cast this spell using a spell slot of 2nd level or higher, roll an additional 2d8 for each slot level above 1st.</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -979,7 +1111,7 @@
           "value": 20,
           "width": null,
           "units": "ft",
-          "type": "radius"
+          "type": "sphere"
         },
         "range": {
           "value": 90,
@@ -997,8 +1129,8 @@
           "amount": null
         },
         "ability": "",
-        "actionType": "util",
-        "attackBonus": 0,
+        "actionType": "other",
+        "attackBonus": "0",
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -1050,17 +1182,21 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.KhwiSi9fwVfUPtku"
+        }
+      }
     },
     {
       "_id": "OMZ6qNK1bdpI8ryh",
       "name": "Magic Resistance",
       "type": "feat",
       "img": "icons/magic/defensive/shield-barrier-glowing-blue.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The hag has<strong> advantage </strong>on saving throws against spells and other magical effects.</p>",
           "chat": "",
@@ -1125,7 +1261,7 @@
       "effects": [],
       "folder": null,
       "sort": 800001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -1135,7 +1271,7 @@
       "name": "Claws (Hag Form Only)",
       "type": "weapon",
       "img": "icons/skills/melee/strike-slashes-red.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\"><p><em>Melee Weapon Attack:</em><strong>+7 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>13 (2d8 + 4) <em>slashing damage</em></strong>.</p><p></p></section><p>The Night Hag attacks with its Claws.</p>",
           "chat": "",
@@ -1212,6 +1348,7 @@
           "conditions": ""
         },
         "weaponType": "natural",
+        "baseItem": "",
         "properties": {
           "amm": false,
           "fin": false,
@@ -1234,7 +1371,7 @@
       "effects": [],
       "folder": null,
       "sort": 900001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -1244,7 +1381,7 @@
       "name": "Change Shape",
       "type": "feat",
       "img": "icons/magic/control/silhouette-hold-change-blue.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The hag magically <strong>polymorphs</strong> into a <strong>Small</strong> or <strong>Medium female humanoid, or back into her true form</strong>. Her statistics are the same in each form. <strong>Any equipment she is wearing or carrying isn't transformed</strong>. She reverts to her true form if she dies.</p>",
           "chat": "",
@@ -1309,7 +1446,7 @@
       "effects": [],
       "folder": null,
       "sort": 1000001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -1319,7 +1456,7 @@
       "name": "Etherealness",
       "type": "feat",
       "img": "icons/magic/unholy/barrier-shield-glowing-pink.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\"><p></p><p></p></section><p>The hag magically enters the Ethereal Plane from the Material Plane, or vice versa. To do so, the hag must have a heartstone in her possession.</p>",
           "chat": "",
@@ -1384,7 +1521,7 @@
       "effects": [],
       "folder": null,
       "sort": 1100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -1394,7 +1531,7 @@
       "name": "Nightmare Haunting",
       "type": "feat",
       "img": "icons/commodities/tech/smoke-bomb-purple.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\"><p>While on the Ethereal Plane, the hag magically touches a sleeping humanoid on the Material Plane. A protection from evil and good spell cast on the target prevents this contact, as does a magic circle. </p><p>As long as the contact persists, the target has dreadful visions. If these visions last for at least 1 hour, the target gains no benefit from its rest, and its hit point maximum is reduced by 5 (1d10). If this effect reduces the target's hit point maximum to 0, the target dies, and if the target was evil, its soul is trapped in the hag's soul bag. The reduction to the target's hit point maximum lasts until removed by the greater restoration spell or similar magic.</p></section><p>While on the Ethereal Plane, the hag magically touches a sleeping humanoid on the Material Plane. As long as the contact persists, the target has dreadful visions.</p>",
           "chat": "",
@@ -1459,7 +1596,7 @@
       "effects": [],
       "folder": null,
       "sort": 1200001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -1468,7 +1605,7 @@
   "effects": [],
   "folder": "8kEIcpvnYCYQJ2sV",
   "sort": 0,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

@@ -3,7 +3,7 @@
   "name": "Ring of Swimming",
   "type": "equipment",
   "img": "icons/equipment/finger/ring-cabochon-notched-gold-green.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>You have a swimming speed of 40 feet while wearing this ring.</p>",
       "chat": "",
@@ -90,7 +90,7 @@
   "effects": [],
   "folder": null,
   "sort": 800000,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

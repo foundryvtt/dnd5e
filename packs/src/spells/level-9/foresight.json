@@ -1,11 +1,11 @@
 {
   "_id": "6HEEhLdJz32TL4Js",
   "name": "Foresight",
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "type": "spell",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>You touch a willing creature and bestow a limited ability to see into the immediate future. For the Duration, the target can't be surprised and has advantage on Attack rolls, Ability Checks, and Saving Throws. Additionally, other creatures have disadvantage on attack rolls against the target for the duration.</p><p>This spell immediately ends if you cast it again before its Duration ends.</p>",
       "chat": "",
@@ -83,6 +83,6 @@
   },
   "sort": 100001,
   "flags": {},
-  "img": "systems/dnd5e/icons/spells/evil-eye-eerie-3.jpg",
+  "img": "icons/magic/perception/eye-ringed-glow-angry-large-teal.webp",
   "effects": []
 }

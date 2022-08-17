@@ -1,11 +1,11 @@
 {
   "_id": "n4JDcFKe5ikzYmAc",
   "name": "Gentle Repose",
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "type": "spell",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>You touch a corpse or other remains. For the duration, the target is protected from decay and can't become undead.</p><p>The spell also effectively extends the time limit on raising the target from the dead, since days spent under the influence of this spell don't count against the time limit of spells such as raise dead.</p>",
       "chat": "",
@@ -83,6 +83,6 @@
   },
   "sort": 100001,
   "flags": {},
-  "img": "systems/dnd5e/icons/spells/light-blue-2.jpg",
+  "img": "icons/magic/light/explosion-star-blue.webp",
   "effects": []
 }

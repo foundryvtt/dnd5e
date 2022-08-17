@@ -3,7 +3,7 @@
   "name": "Map or Scroll Case",
   "type": "backpack",
   "img": "icons/containers/bags/case-leather-tan.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>This cylindrical leather case can hold up to ten rolled-up sheets of paper or five rolled-up sheets of parchment.</p>",
       "chat": "",
@@ -36,7 +36,7 @@
   "effects": [],
   "folder": null,
   "sort": 2000001,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

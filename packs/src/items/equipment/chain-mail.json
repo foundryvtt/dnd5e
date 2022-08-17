@@ -3,7 +3,7 @@
   "name": "Chain Mail",
   "type": "equipment",
   "img": "icons/equipment/chest/breastplate-metal-scaled-grey.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>Made of interlocking metal rings, chain mail includes a layer of quilted fabric worn underneath the mail to prevent chafing and to cushion the impact of blows. The suit includes gauntlets.</p>",
       "chat": "",
@@ -88,7 +88,7 @@
   "effects": [],
   "folder": null,
   "sort": 800000,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

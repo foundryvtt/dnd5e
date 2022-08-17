@@ -3,7 +3,7 @@
   "name": "Blowgun Needle",
   "type": "consumable",
   "img": "icons/weapons/ammunition/arrows-war-red.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>This ammunition is designed to be fired through a blowgun using the force of the wielders lungs. These needles are frequently tipped with deadly or crippling venoms.</p>",
       "chat": "",
@@ -80,7 +80,7 @@
   "effects": [],
   "folder": null,
   "sort": 700000,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

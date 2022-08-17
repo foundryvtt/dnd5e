@@ -3,7 +3,7 @@
   "name": "Helm of Comprehending Languages",
   "type": "equipment",
   "img": "icons/magic/defensive/illusion-evasion-echo-purple.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p><em>Wondrous item</em></p>\n<p>While wearing this helm, you can use an action to cast the @Compendium[dnd5e.spells.4dSvfvTy2ZIJ3K4k]{Comprehend Languages} spell from it at will.</p>",
       "chat": "",
@@ -90,7 +90,7 @@
   "effects": [],
   "folder": null,
   "sort": 2100000,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

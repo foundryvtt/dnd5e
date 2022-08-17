@@ -3,7 +3,7 @@
   "name": "Hide Armor",
   "type": "equipment",
   "img": "icons/equipment/chest/breastplate-scale-leather.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>This crude armor consists of thick furs and pelts. It is commonly worn by barbarian tribes, evil humanoids, and other folk who lack access to the tools and materials needed to create better armor.</p>",
       "chat": "",
@@ -88,7 +88,7 @@
   "effects": [],
   "folder": null,
   "sort": 400000,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

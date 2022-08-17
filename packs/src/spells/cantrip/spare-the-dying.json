@@ -1,11 +1,11 @@
 {
   "_id": "8zT7njvqbpXs4Cel",
   "name": "Spare the Dying",
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "type": "spell",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>You touch a living creature that has 0 hit points. The creature becomes stable. This spell has no effect on undead or constructs.</p>",
       "chat": "",
@@ -83,6 +83,6 @@
   },
   "sort": 100001,
   "flags": {},
-  "img": "systems/dnd5e/icons/spells/heal-sky-1.jpg",
+  "img": "icons/magic/life/heart-cross-blue.webp",
   "effects": []
 }

@@ -3,7 +3,7 @@
   "name": "Pitcher",
   "type": "backpack",
   "img": "icons/containers/kitchenware/jug-terracotta-orange.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>A pitcher holds 1 gallon of liquid.</p>",
       "chat": "",
@@ -36,7 +36,7 @@
   "effects": [],
   "folder": null,
   "sort": 4000000,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

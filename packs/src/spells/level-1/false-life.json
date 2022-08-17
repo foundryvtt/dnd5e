@@ -1,11 +1,11 @@
 {
   "_id": "7e3QXF10hLNDEdr6",
   "name": "False Life",
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "type": "spell",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>Bolstering yourself with a necromantic facsimile of life, you gain 1d4 + 4 Temporary Hit Points for the Duration.</p><p><strong>At Higher Levels.</strong> When you cast this spell using a spell slot of 2nd level or higher, you gain 5 additional Temporary Hit Points for each slot level above 1st.</p>",
       "chat": "",
@@ -81,12 +81,12 @@
       "prepared": false
     },
     "scaling": {
-      "mode": "none",
-      "formula": ""
+      "mode": "level",
+      "formula": "(@item.level - 1) * 5"
     }
   },
   "sort": 100001,
   "flags": {},
-  "img": "systems/dnd5e/icons/spells/heal-royal-1.jpg",
+  "img": "icons/magic/life/heart-cross-purple-orange.webp",
   "effects": []
 }

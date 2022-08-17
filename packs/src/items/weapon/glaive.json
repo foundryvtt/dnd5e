@@ -3,7 +3,7 @@
   "name": "Glaive",
   "type": "weapon",
   "img": "icons/weapons/polearms/halberd-crescent-glowing.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>A crescent blade is mounted on the end of a tall metal shaft. This polearm provies the ability to attack with deadly efficiency from greater range than typical melee weapons.</p>",
       "chat": "",
@@ -91,7 +91,7 @@
   "effects": [],
   "folder": null,
   "sort": 0,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

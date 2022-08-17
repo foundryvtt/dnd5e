@@ -3,7 +3,7 @@
   "name": "Vicious Heavy Crossbow",
   "type": "weapon",
   "img": "icons/weapons/crossbows/crossbow-blue.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>A large crossbow mounted on a sturdy block of wood which is loaded using a hand crank and fires thick steel bolts with deadly acceleration that punches through armor and flesh.</p>\n<p>When you roll a 20 on your attack roll with this magic weapon, your critical hit deals an extra 2d6 damage of the weapon's type.</p>",
       "chat": "",
@@ -106,7 +106,7 @@
   "effects": [],
   "folder": null,
   "sort": 1600001,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

@@ -1,0 +1,158 @@
+{{!-- Activation Cost --}}
+<div class="form-group input-select">
+    <label>{{ localize "DND5E.ItemActivationCost" }}</label>
+    <div class="form-fields">
+        <input type="number" step="any" name="system.activation.cost"
+            value="{{system.activation.cost}}" placeholder="&mdash;">
+        <select name="system.activation.type">
+            {{#select system.activation.type}}
+            <option value=""></option>
+            {{#each config.abilityActivationTypes as |name key|}}
+            <option value="{{key}}">{{name}}</option>
+            {{/each}}
+            {{/select}}
+        </select>
+    </div>
+</div>
+{{#if system.activation.type}}
+
+{{!-- Activation Condition --}}
+<div class="form-group">
+    <label>{{ localize "DND5E.ItemActivationCondition" }}</label>
+    <div class="form-fields">
+        <input type="text" name="system.activation.condition" value="{{system.activation.condition}}"/>
+    </div>
+</div>
+
+{{#if isCrewed}}
+<div class="form-group">
+    <label>{{localize 'DND5E.Cover'}}</label>
+    <div class="form-fields">
+        <select name="system.cover" data-dtype="Number">
+            {{#select system.cover}}
+                <option value="">&mdash;</option>
+                {{#each config.cover as |v k|}}
+                    <option value="{{k}}">{{v}}</option>
+                {{/each}}
+            {{/select}}
+        </select>
+    </div>
+</div>
+{{/if}}
+
+{{!-- Ability Target --}}
+<div class="form-group input-select-select">
+    <label>{{ localize "DND5E.Target" }}</label>
+    <div class="form-fields">
+        <input type="number" step="any" name="system.target.value"
+            value="{{system.target.value}}" placeholder="&mdash;">
+        <select name="system.target.units">
+            {{#select system.target.units}}
+            <option value=""></option>
+            {{#each config.distanceUnits as |name key|}}
+            <option value="{{key}}">{{name}}</option>
+            {{/each}}
+            {{/select}}
+        </select>
+        <select name="system.target.type">
+            {{#select system.target.type}}
+            <option value=""></option>
+            {{#each config.targetTypes as |name key|}}
+            <option value="{{key}}">{{name}}</option>
+            {{/each}}
+            {{/select}}
+        </select>
+    </div>
+</div>
+
+{{!-- Ability Target Width --}}
+{{#if isLine}}
+<div class="form-group input-select-select">
+    <label>{{ localize "DND5E.TargetWidth" }}</label>
+    <div class="form-fields">
+        <input type="number" step="any" name="system.target.width"
+            value="{{system.target.width}}" placeholder="&mdash;">
+    </div>
+</div>
+{{/if}}
+
+{{!-- Ability Range --}}
+<div class="form-group input-select">
+    <label>{{ localize "DND5E.Range" }}</label>
+    <div class="form-fields">
+        <input type="number" step="any" name="system.range.value"
+            value="{{system.range.value}}" placeholder="{{localize 'DND5E.Normal'}}">
+        <span class="sep">/</span>
+        <input type="number" step="any" name="system.range.long"
+            value="{{system.range.long}}" placeholder="{{localize 'DND5E.Max'}}">
+        <select name="system.range.units">
+            {{#select system.range.units}}
+            <option value=""></option>
+            {{#each config.distanceUnits as |name key|}}
+            <option value="{{key}}">{{name}}</option>
+            {{/each}}
+            {{/select}}
+        </select>
+    </div>
+</div>
+
+{{!-- Effect Duration --}}
+<div class="form-group input-select">
+    <label>{{ localize "DND5E.Duration" }}</label>
+    <div class="form-fields">
+        <input type="number" step="any" name="system.duration.value" value="{{system.duration.value}}"
+            placeholder="&mdash;">
+        <select name="system.duration.units">
+            {{#select system.duration.units}}
+            <option value=""></option>
+            {{#each config.timePeriods as |name key|}}
+            <option value="{{key}}">{{name}}</option>
+            {{/each}}
+            {{/select}}
+        </select>
+    </div>
+</div>
+
+{{!-- Limited Uses --}}
+<div class="form-group uses-per">
+    <label>{{ localize "DND5E.LimitedUses" }}</label>
+    <div class="form-fields">
+        <input type="number" step="any" name="system.uses.value" value="{{system.uses.value}}">
+        <span class="sep">{{ localize "DND5E.of" }}</span>
+        <input type="text" name="system.uses.max" value="{{source.uses.max}}">
+        <span class="sep">{{ localize "DND5E.per" }}</span>
+        <select name="system.uses.per">
+            {{#select system.uses.per}}
+            <option value=""></option>
+            {{#each config.limitedUsePeriods as |name key|}}
+            <option value="{{key}}">{{name}}</option>
+            {{/each}}
+            {{/select}}
+        </select>
+    </div>
+</div>
+
+{{!-- Consumption --}}
+<div class="form-group uses-per">
+    <label>{{ localize "DND5E.ConsumeTitle" }}</label>
+    <div class="form-fields">
+        <select name="system.consume.type">
+            {{#select system.consume.type}}
+            <option value=""></option>
+            {{#each config.abilityConsumptionTypes as |name key|}}
+            <option value="{{key}}">{{name}}</option>
+            {{/each}}
+            {{/select}}
+        </select>
+        <select name="system.consume.target">
+            {{#select system.consume.target}}
+            <option value=""></option>
+            {{#each abilityConsumptionTargets as |name key|}}
+            <option value="{{key}}">{{name}}</option>
+            {{/each}}
+            {{/select}}
+        </select>
+        <input type="number" step="any" name="system.consume.amount" value="{{system.consume.amount}}">
+    </div>
+</div>
+{{/if}}

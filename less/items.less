@@ -88,6 +88,13 @@
           line-height: 18px;
         }
       }
+
+      .properties-header {
+        font-weight: bold;
+        color: @colorOlive;
+        margin: 0.5em 0 0 0;
+        font-size: 1em;
+      }
     }
   }
 
@@ -159,7 +166,7 @@
         font-size: 12px;
         line-height: 24px;
       }
-      input[type="text"] {
+      input[type="number"] {
         flex: 0 0 48px;
         margin-right: 10px;
       }
@@ -210,7 +217,7 @@
       text-align: right;
       padding-right: 3px;
     }
-    input[type="text"] {
+    input[type="number"] {
       flex: 0 0 32px;
       text-align: center;
     }
@@ -235,40 +242,55 @@
   /* ----------------------------------------- */
   /*  Item Advancement                         */
   /* ----------------------------------------- */
-  
+
   .advancement {
     .items-list {
+      height: 100%;
+
+      .main-controls {
+        .configuration-mode-control {
+          flex: 1 0;
+          margin-inline-start: 0.5em;
+          a { text-align: inline-start; }
+        }
+        .item-add {
+          padding-block-start: 0.2em;
+        }
+      }
       .items-header {
         .item-checkmark {
           flex: 0 0 44px;
           color: rgb(17 145 17);
+          text-shadow: white 0 0 1px;
         }
         .item-warning {
           flex: 0 0 44px;
           color: rgb(250 255 35);
+          text-shadow: black 0 0 1px;
         }
       }
       .item-name {
         flex: 1 0 10em;
       }
-      .item-image.inverted {
-        mix-blend-mode: difference;
+      .item-controls {
+        border-left: 1px solid @colorFaint;
+        flex: 0 0 44px;
       }
       .item-summary {
         flex: 0 0 100%;
         font-size: 12px;
         line-height: 16px;
-        padding: 0.25em 0.5em 0.25em 2.7em;
+        padding: 0 .5em .5em 34px;
+        margin-top: -4px;
         color: @colorDark;
-        border-top: 1px solid @colorFaint;
-  
+
         .item-list {
           .item-name {
             display: flex;
           }
         }
       }
-  
+
       .tag {
         font-size: 0.7rem;
         padding: 0.1em 0.5em;

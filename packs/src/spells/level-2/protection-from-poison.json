@@ -1,11 +1,11 @@
 {
   "_id": "MAxM77CDUu8dgIRQ",
   "name": "Protection from Poison",
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "type": "spell",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>You touch a creature. If it is poisoned, you neutralize the poison. If more than one poison afflicts the target, you neutralize one poison that you know is present, or you neutralize one at random.</p><p>For the duration, the target has advantage on saving throws against being poisoned, and it has resistance to poison damage.</p>",
       "chat": "",
@@ -82,6 +82,6 @@
   },
   "sort": 100001,
   "flags": {},
-  "img": "systems/dnd5e/icons/spells/protect-acid-1.jpg",
+  "img": "icons/magic/defensive/shield-barrier-glowing-triangle-green.webp",
   "effects": []
 }

@@ -1,11 +1,11 @@
 {
   "_id": "95K2aUhAGV9qXjnf",
   "name": "Bane",
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "type": "spell",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>Up to three creatures of your choice that you can see within range must make Charisma saving throws. Whenever a target that fails this saving throw makes an attack roll or a saving throw before the spell ends, the target must roll a d4 and subtract the number rolled from the attack roll or saving throw.</p>\n<p><strong>Higher Levels.</strong> When you cast this spell using a spell slot of 2nd level or higher, you can target one additional creature for each slot level above 1st.</p>",
       "chat": "",
@@ -88,7 +88,7 @@
   },
   "sort": 100001,
   "flags": {},
-  "img": "systems/dnd5e/icons/spells/rip-magenta-2.jpg",
+  "img": "icons/magic/unholy/strike-beam-blood-red-purple.webp",
   "effects": [
     {
       "_id": "potjmpJPeUA1U4oe",

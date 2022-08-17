@@ -1,0 +1,60 @@
+<form id="ability-use-form">
+    <p>{{title}}</p>
+    <p class="notes">{{note}}</p>
+    {{#each errors}}
+    <p class="notification error">{{this}}</p>
+    {{/each}}
+
+    {{#if consumeSpellSlot}}
+    <div class="form-group">
+        <label>{{ localize "DND5E.SpellCastUpcast" }}</label>
+        <div class="form-fields">
+            <select name="consumeSpellLevel">
+                {{#select item.system.level}}
+                {{#each spellLevels as |l|}}
+                <option value="{{l.level}}" {{disabled (not l.canCast)}}>{{l.label}}</option>
+                {{/each}}
+                {{/select}}
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="checkbox">
+            <input type="checkbox" name="consumeSpellSlot" checked>{{localize "DND5E.SpellCastConsume"}}
+        </label>
+    </div>
+    {{/if}}
+
+    {{#if consumeUses}}
+    <div class="form-group">
+        <label class="checkbox">
+            <input type="checkbox" name="consumeUsage" checked>{{localize "DND5E.AbilityUseConsume"}}
+        </label>
+    </div>
+    {{/if}}
+
+    {{#if consumeResource}}
+    <div class="form-group">
+        <label class="checkbox">
+            <input type="checkbox" name="consumeResource" checked>{{localize "DND5E.ConsumeResource"}}
+        </label>
+    </div>
+    {{/if}}
+
+    {{#if consumeRecharge}}
+    <div class="form-group">
+        <label class="checkbox">
+            <input type="checkbox" name="consumeRecharge" checked>{{localize "DND5E.ConsumeRecharge"}}
+        </label>
+    </div>
+    {{/if}}
+
+    {{#if createTemplate}}
+    <div class="form-group">
+        <label class="checkbox">
+            <input type="checkbox" name="createMeasuredTemplate" checked>{{localize "DND5E.PlaceTemplate"}}
+        </label>
+    </div>
+    {{/if}}
+</form>

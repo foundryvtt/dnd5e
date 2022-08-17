@@ -3,7 +3,7 @@
   "name": "Fighting Style: Protection",
   "type": "feat",
   "img": "icons/magic/defensive/shield-barrier-deflect-gold.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>When a creature you can see attacks a target other than you that is within 5 feet of you, you can use your reaction to impose disadvantage on the attack roll. You must be wielding a shield.</p>",
       "chat": "",
@@ -68,7 +68,7 @@
   "effects": [],
   "folder": null,
   "sort": 0,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

@@ -1,11 +1,11 @@
 {
   "_id": "F0GsG0SJzsIOacwV",
   "name": "Lesser Restoration",
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "type": "spell",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>You touch a creature and can end either one disease or one condition afflicting it. The condition can be blinded, deafened, paralyzed, or poisoned.</p>",
       "chat": "",
@@ -82,6 +82,6 @@
   },
   "sort": 100001,
   "flags": {},
-  "img": "systems/dnd5e/icons/spells/heal-sky-1.jpg",
+  "img": "icons/magic/life/heart-cross-blue.webp",
   "effects": []
 }

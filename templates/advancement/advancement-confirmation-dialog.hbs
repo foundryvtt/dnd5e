@@ -1,0 +1,17 @@
+<div class="dialog-content">
+  <p>
+    {{content}}
+  </p>
+  <label style="display: block; margin-block-end: 1em;" class="checkbox">
+    <input type="checkbox" name="apply-advancement" checked>
+    {{localize "DND5E.AdvancementDeleteConfirmationLabel"}}
+  </label>
+</div>
+<div class="dialog-buttons">
+  {{#each buttons as |button id|}}
+    <button class="dialog-button {{cssClass}}" data-button="{{id}}">
+      {{{button.icon}}}
+      {{{button.label}}}
+    </button>
+  {{/each}}
+</div>

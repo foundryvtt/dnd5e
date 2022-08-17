@@ -3,7 +3,7 @@
   "name": "Manacles",
   "type": "consumable",
   "img": "icons/weapons/misc/whip-red-yellow.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>These metal restraints can bind a Small or Medium creature. Escaping the manacles requires a successful DC 20 Dexterity check. Breaking them requires a successful DC 20 Strength check. Each set of manacles comes with one key. Without the key, a creature proficient with thieves' tools can pick the manacles' lock with a successful DC 15 Dexterity check. Manacles have 15 hit points.</p>",
       "chat": "",
@@ -72,7 +72,7 @@
   "effects": [],
   "folder": null,
   "sort": 3700000,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

@@ -3,7 +3,7 @@
   "name": "Book",
   "type": "loot",
   "img": "icons/sundries/books/book-worn-brown.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>A book might contain poetry, historical accounts, information pertaining to a particular field of lore, diagrams and notes on gnomish contraptions, or just about anything else that can be represented using text or pictures. A book of spells is a spellbook.</p>",
       "chat": "",
@@ -27,7 +27,7 @@
   "effects": [],
   "folder": null,
   "sort": 4000000,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

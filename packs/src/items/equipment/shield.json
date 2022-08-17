@@ -3,7 +3,7 @@
   "name": "Shield",
   "type": "equipment",
   "img": "icons/equipment/shield/oval-wooden-boss-steel.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>A shield is made from wood or metal and is carried in one hand. Wielding a shield increases your Armor Class by 2. You can benefit from only one shield at a time.</p>",
       "chat": "",
@@ -87,7 +87,7 @@
   "effects": [],
   "folder": null,
   "sort": 0,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

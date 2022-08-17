@@ -59,6 +59,10 @@
         height: 24px;
         line-height: 24px;
       }
+      span {
+        margin-inline-start: 4px;
+        border-block-start: 1px solid transparent;
+      }
       select {
         position: relative;
         top: -4px;
@@ -482,7 +486,7 @@
         line-height: 20px;
         color: @colorTan;
       }
-      input[type="text"] {
+      input[type="number"] {
         flex: 0 0 48px;
         text-align: center;
         margin-left: 8px;
@@ -711,6 +715,9 @@
   // Original class icon
   .features i.original-class {
     color: #4b4a44
+  }
+  .features .item-detail select {
+    max-width: 90%;
   }
 
   /* ----------------------------------------- */

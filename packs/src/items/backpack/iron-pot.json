@@ -3,7 +3,7 @@
   "name": "Iron Pot",
   "type": "backpack",
   "img": "icons/tools/laboratory/cauldron-filled-gold.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>An iron pot holds 1 gallon of liquid.</p>",
       "chat": "",
@@ -36,7 +36,7 @@
   "effects": [],
   "folder": null,
   "sort": 4800000,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

@@ -3,7 +3,7 @@
   "name": "Amulet of Health",
   "type": "equipment",
   "img": "icons/equipment/neck/pendant-faceted-red.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p><em>Wondrous item (requires attunement)</em></p>\n<p>Your Constitution score is 19 while you wear this amulet. It has no effect on you if your Constitution is already 19 or higher without it.</p>",
       "chat": "",
@@ -87,7 +87,7 @@
   "effects": [],
   "folder": null,
   "sort": 4300001,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

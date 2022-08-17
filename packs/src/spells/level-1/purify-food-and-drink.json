@@ -1,11 +1,11 @@
 {
   "_id": "Kn7K5PtYUJAKZTTp",
   "name": "Purify Food and Drink",
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "type": "spell",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>All nonmagical food and drink within a 5-foot-radius sphere centered on a point of your choice within range is purified and rendered free of poison and disease.</p>",
       "chat": "",
@@ -62,7 +62,7 @@
       "vocal": true,
       "somatic": true,
       "material": false,
-      "ritual": false,
+      "ritual": true,
       "concentration": false
     },
     "materials": {
@@ -82,6 +82,6 @@
   },
   "sort": 100001,
   "flags": {},
-  "img": "systems/dnd5e/icons/spells/light-jade-1.jpg",
+  "img": "icons/magic/light/explosion-star-small-teal.webp",
   "effects": []
 }

@@ -3,7 +3,7 @@
   "name": "Whip",
   "type": "weapon",
   "img": "icons/weapons/misc/whip-red-yellow.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>A tensile lash made of leather, cord, or chain which can lash out at nearby enemies, dealing lacerations and harrying them from a distance.</p>",
       "chat": "",
@@ -105,7 +105,7 @@
   "effects": [],
   "folder": null,
   "sort": 3900000,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

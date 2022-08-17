@@ -1,13 +1,16 @@
 {
-  "_id": "K5XFMOiiM9WufwYO",
   "name": "Randal (Human Fighter)",
   "type": "character",
   "img": "systems/dnd5e/tokens/heroes/FighterShield.webp",
-  "data": {
+  "system": {
     "abilities": {
       "str": {
         "value": 16,
         "proficient": 1,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "mod": 3,
         "save": 5,
         "prof": 2,
@@ -18,6 +21,10 @@
       "dex": {
         "value": 14,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "mod": 2,
         "save": 2,
         "prof": 0,
@@ -28,6 +35,10 @@
       "con": {
         "value": 15,
         "proficient": 1,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "mod": 2,
         "save": 4,
         "prof": 2,
@@ -38,6 +49,10 @@
       "int": {
         "value": 9,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "mod": -1,
         "save": -1,
         "prof": 0,
@@ -48,6 +63,10 @@
       "wis": {
         "value": 13,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "mod": 1,
         "save": 1,
         "prof": 0,
@@ -58,6 +77,10 @@
       "cha": {
         "value": 11,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "mod": 0,
         "save": 0,
         "prof": 0,
@@ -96,6 +119,9 @@
         "units": "ft",
         "hover": false
       },
+      "attunement": {
+        "max": 3
+      },
       "senses": {
         "darkvision": 0,
         "blindsight": 0,
@@ -129,7 +155,7 @@
       "alignment": "Neutral Good",
       "race": "Variant Human",
       "background": "Watchman",
-      "originalClass": "",
+      "originalClass": "z1xtuix2w8sjskct",
       "xp": {
         "value": 0,
         "min": 0,
@@ -208,6 +234,10 @@
       "acr": {
         "value": 1,
         "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 2,
         "passive": 14,
@@ -217,6 +247,10 @@
       "ani": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 1,
         "passive": 11,
@@ -226,6 +260,10 @@
       "arc": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": -1,
         "passive": 9,
@@ -235,6 +273,10 @@
       "ath": {
         "value": 1,
         "ability": "str",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 3,
         "passive": 15,
@@ -244,6 +286,10 @@
       "dec": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 0,
         "passive": 10,
@@ -253,6 +299,10 @@
       "his": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": -1,
         "passive": 9,
@@ -262,6 +312,10 @@
       "ins": {
         "value": 1,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 1,
         "passive": 13,
@@ -271,6 +325,10 @@
       "itm": {
         "value": 1,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 0,
         "passive": 12,
@@ -280,6 +338,10 @@
       "inv": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": -1,
         "passive": 9,
@@ -289,6 +351,10 @@
       "med": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 1,
         "passive": 11,
@@ -298,6 +364,10 @@
       "nat": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": -1,
         "passive": 9,
@@ -307,6 +377,10 @@
       "prc": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 1,
         "passive": 11,
@@ -316,6 +390,10 @@
       "prf": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 0,
         "passive": 10,
@@ -325,6 +403,10 @@
       "per": {
         "value": 1,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 0,
         "passive": 12,
@@ -334,6 +416,10 @@
       "rel": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": -1,
         "passive": 9,
@@ -343,6 +429,10 @@
       "slt": {
         "value": 0,
         "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 2,
         "passive": 12,
@@ -352,6 +442,10 @@
       "ste": {
         "value": 0,
         "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 2,
         "passive": 12,
@@ -361,6 +455,10 @@
       "sur": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 1,
         "passive": 11,
@@ -476,7 +574,7 @@
       }
     }
   },
-  "token": {
+  "prototypeToken": {
     "flags": {},
     "name": "Randal",
     "displayName": 30,
@@ -513,14 +611,35 @@
       "attribute": "attributes.ac.value"
     },
     "randomImg": false,
-    "alpha": 1
+    "alpha": 1,
+    "light": {
+      "alpha": 0.5,
+      "angle": 0,
+      "bright": 0,
+      "coloration": 1,
+      "dim": 0,
+      "gradual": true,
+      "luminosity": 0.5,
+      "saturation": 0,
+      "contrast": 0,
+      "shadows": 0,
+      "animation": {
+        "speed": 5,
+        "intensity": 5,
+        "reverse": false
+      },
+      "darkness": {
+        "min": 0,
+        "max": 1
+      }
+    }
   },
   "items": [
     {
       "_id": "j3Vs0e3IZYBTGRik",
       "name": "Background: Watchman",
       "type": "feat",
-      "data": {
+      "system": {
         "description": {
           "value": "<ul>\n<li>Skill Proficiencies: Athletics, Insight</li>\n<li>Languages: Two of your choice</li>\n<li>Equipment: A guard's uniform, a horn with which to summon help, and a pouch containing 10 gp</li>\n</ul>",
           "chat": "",
@@ -602,7 +721,7 @@
       "img": "icons/magic/defensive/shield-barrier-glowing-blue.webp",
       "effects": [],
       "folder": null,
-      "permission": {
+      "ownership": {
         "default": 0
       }
     },
@@ -610,7 +729,7 @@
       "_id": "qy0pVLQWv8tjWJPR",
       "name": "Horn",
       "type": "tool",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>A horn, used to sound the alarm and call upon reinforcements in times of need.</p>",
           "chat": "",
@@ -625,9 +744,11 @@
         "rarity": "Common",
         "identified": true,
         "toolType": "",
+        "baseItem": "",
         "ability": "cha",
         "chatFlavor": "",
         "proficient": 1,
+        "bonus": "",
         "attuned": false,
         "damage": {
           "parts": []
@@ -641,7 +762,7 @@
       "img": "icons/tools/instruments/flute-simple-wood.webp",
       "effects": [],
       "folder": null,
-      "permission": {
+      "ownership": {
         "default": 0
       }
     },
@@ -649,7 +770,7 @@
       "_id": "xhSq81g4w9vTE0nK",
       "name": "Fighting Style: Defense",
       "type": "feat",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>While you are wearing armor, you gain a +1 bonus to AC</p>",
           "chat": "",
@@ -719,87 +840,7 @@
       "img": "icons/equipment/shield/heater-stone-orange.webp",
       "effects": [],
       "folder": null,
-      "permission": {
-        "default": 0
-      }
-    },
-    {
-      "_id": "SFFL6W2FeXR94xJN",
-      "name": "Second Wind",
-      "type": "feat",
-      "data": {
-        "description": {
-          "value": "<p>You have a limited well of stamina that you can draw on to protect yourself from harm. On your turn, you can use a bonus action to regain hit points equal to 1d10 + your fighter level.</p><p>Once you use this feature, you must finish a short or long rest before you can use it again.</p>",
-          "chat": "",
-          "unidentified": ""
-        },
-        "source": "PHB pg. 72",
-        "activation": {
-          "type": "bonus",
-          "cost": 1,
-          "condition": ""
-        },
-        "duration": {
-          "value": 0,
-          "units": ""
-        },
-        "target": {
-          "value": null,
-          "width": null,
-          "units": null,
-          "type": "self"
-        },
-        "range": {
-          "value": null,
-          "long": null,
-          "units": "self"
-        },
-        "uses": {
-          "value": 1,
-          "max": 1,
-          "per": "sr"
-        },
-        "consume": {
-          "type": "",
-          "target": "",
-          "amount": null
-        },
-        "ability": "",
-        "actionType": "heal",
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "critical": {
-          "threshold": null,
-          "damage": ""
-        },
-        "damage": {
-          "parts": [
-            [
-              "1d10 + @classes.fighter.levels",
-              "healing"
-            ]
-          ],
-          "versatile": ""
-        },
-        "formula": "",
-        "save": {
-          "ability": "",
-          "dc": null,
-          "scaling": "spell"
-        },
-        "requirements": "Fighter 1",
-        "recharge": {
-          "value": 0,
-          "charged": false
-        },
-        "attunement": 0
-      },
-      "sort": 200000,
-      "flags": {},
-      "img": "icons/magic/life/heart-glowing-red.webp",
-      "effects": [],
-      "folder": null,
-      "permission": {
+      "ownership": {
         "default": 0
       }
     },
@@ -807,7 +848,7 @@
       "_id": "r7UallZJjcIFsz8i",
       "name": "Grappler",
       "type": "feat",
-      "data": {
+      "system": {
         "description": {
           "value": "<p><em>Prerequisite: Strength 13 or higher </em></p><p>You've developed the skills necessary to hold your own in close-quarters grappling.</p><p>You gain the following benefits:</p>\n<ul>\n<li>You have advantage on attack rolls against a creature you are grappling.</li>\n<li>You can use your action to try to pin a creature grappled by you. To do so, make another grapple check. If you succeed, you and the creature are both restrained until the grapple ends.</li>\n</ul>",
           "chat": "",
@@ -874,7 +915,7 @@
       "img": "icons/skills/melee/unarmed-punch-fist.webp",
       "effects": [],
       "folder": null,
-      "permission": {
+      "ownership": {
         "default": 0
       }
     },
@@ -882,7 +923,7 @@
       "_id": "6kg0dYblyeGcoclF",
       "name": "Arrows",
       "type": "consumable",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>Standard ammunition used for bows of all varieties. These mundane arrows are made of smooth wooden shafts with goose feather fletching and hammer metal bodkins.</p>",
           "chat": "",
@@ -962,7 +1003,7 @@
       "img": "icons/containers/ammunition/arrows-quiver-black.webp",
       "effects": [],
       "folder": null,
-      "permission": {
+      "ownership": {
         "default": 0
       }
     },
@@ -970,7 +1011,7 @@
       "_id": "HW10iFMNN5JaJBFf",
       "name": "Longbow",
       "type": "weapon",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>A thick shaft of laminated wood is bowed by a taut string capable of launching deadly arrows at long distances.</p>",
           "chat": "",
@@ -1047,6 +1088,7 @@
           "conditions": ""
         },
         "weaponType": "martialR",
+        "baseItem": "",
         "properties": {
           "amm": true,
           "hvy": true,
@@ -1071,7 +1113,7 @@
       "img": "icons/weapons/bows/longbow-leather-green.webp",
       "effects": [],
       "folder": null,
-      "permission": {
+      "ownership": {
         "default": 0
       }
     },
@@ -1079,7 +1121,7 @@
       "_id": "3d2b3iqnC0t116JB",
       "name": "Longsword",
       "type": "weapon",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>A lengthy stright blade designed for slashing foes, the longsword is a highly versatile weapon that may also be wielded with two hands for more punishing strikes.</p>",
           "chat": "",
@@ -1156,6 +1198,7 @@
           "conditions": ""
         },
         "weaponType": "martialM",
+        "baseItem": "",
         "properties": {
           "ver": true,
           "amm": false,
@@ -1180,7 +1223,7 @@
       "img": "icons/weapons/swords/greatsword-crossguard-steel.webp",
       "effects": [],
       "folder": null,
-      "permission": {
+      "ownership": {
         "default": 0
       }
     },
@@ -1188,7 +1231,7 @@
       "_id": "9vMrpjx6tZQVKCrF",
       "name": "Handaxe (offhand)",
       "type": "weapon",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>This one-handed axe is light and balanced for throwing while remaining useful in hand combat.</p>",
           "chat": "",
@@ -1265,6 +1308,7 @@
           "conditions": ""
         },
         "weaponType": "simpleM",
+        "baseItem": "",
         "properties": {
           "lgt": true,
           "thr": true,
@@ -1292,7 +1336,7 @@
       "img": "icons/weapons/axes/axe-broad-black.webp",
       "effects": [],
       "folder": null,
-      "permission": {
+      "ownership": {
         "default": 0
       }
     },
@@ -1300,7 +1344,7 @@
       "_id": "ZC11cflszLu1zXBL",
       "name": "City Guard Chain Mail",
       "type": "equipment",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>Made of interlocking metal rings, chain mail includes a layer of quilted fabric worn underneath the mail to prevent chafing and to cushion the impact of blows. The suit includes gauntlets.</p>",
           "chat": "",
@@ -1373,6 +1417,7 @@
           "dt": null,
           "conditions": ""
         },
+        "baseItem": "",
         "speed": {
           "value": null,
           "conditions": ""
@@ -1387,7 +1432,7 @@
       "img": "icons/equipment/chest/breastplate-metal-scaled-grey.webp",
       "effects": [],
       "folder": null,
-      "permission": {
+      "ownership": {
         "default": 0
       }
     },
@@ -1395,7 +1440,7 @@
       "_id": "UwH6scwUXajH9jCh",
       "name": "Shield",
       "type": "equipment",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>A shield is made from wood or metal and is carried in one hand. Wielding a shield increases your Armor Class by 2. You can benefit from only one shield at a time.</p>",
           "chat": "",
@@ -1468,6 +1513,7 @@
           "dt": null,
           "conditions": ""
         },
+        "baseItem": "",
         "speed": {
           "value": null,
           "conditions": ""
@@ -1482,7 +1528,7 @@
       "img": "icons/equipment/shield/oval-wooden-boss-steel.webp",
       "effects": [],
       "folder": null,
-      "permission": {
+      "ownership": {
         "default": 0
       }
     },
@@ -1490,7 +1536,7 @@
       "_id": "bq6RL40FQY52C7YE",
       "name": "Backpack",
       "type": "backpack",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>A backpack can hold one cubic foot or 30 pounds of gear. You can also strap items, such as a bedroll or a coil of rope, to the outside of a backpack.</p>",
           "chat": "",
@@ -1526,7 +1572,7 @@
       "img": "icons/containers/bags/pack-simple-leather.webp",
       "effects": [],
       "folder": null,
-      "permission": {
+      "ownership": {
         "default": 0
       }
     },
@@ -1534,7 +1580,7 @@
       "_id": "Z4bdbM4ROqwPcSli",
       "name": "Pouch",
       "type": "backpack",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>A cloth or leather pouch can hold up to 20 sling bullets or 50 blowgun needles, among other things. A compartmentalized pouch for holding spell components is called a component pouch. A pouch can hold up to ⅕ cubic foot or 6 pounds of gear.</p>",
           "chat": "",
@@ -1570,7 +1616,7 @@
       "img": "icons/containers/bags/coinpouch-simple-tan.webp",
       "effects": [],
       "folder": null,
-      "permission": {
+      "ownership": {
         "default": 0
       }
     },
@@ -1578,7 +1624,7 @@
       "_id": "RtMzLZEMAVyFwhLo",
       "name": "Hammer",
       "type": "loot",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>A tool with heavy metal head mounted ar the right angles at the end of a handle, used for job such as breaking things and driving in nails. </p>",
           "chat": "",
@@ -1602,7 +1648,7 @@
       "img": "icons/tools/smithing/hammer-sledge-steel-grey.webp",
       "effects": [],
       "folder": null,
-      "permission": {
+      "ownership": {
         "default": 0
       }
     },
@@ -1610,7 +1656,7 @@
       "_id": "BQIFmKZfFgM3XQPq",
       "name": "Tinderbox",
       "type": "loot",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>This small container holds flint, fire steel, and tinder (usually dry cloth soaked in light oil) used to kindle a fire. Using it to light a torch - or anything else with abundant, exposed fuel - takes an action. Lighting any other fire takes 1 minute.</p>",
           "chat": "",
@@ -1634,7 +1680,7 @@
       "img": "icons/sundries/lights/torch-black.webp",
       "effects": [],
       "folder": null,
-      "permission": {
+      "ownership": {
         "default": 0
       }
     },
@@ -1642,7 +1688,7 @@
       "_id": "ASK21hDnn53hojQo",
       "name": "Waterskin",
       "type": "consumable",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>A leather hide sewn into an enclosed skin which can contain up to 4 pints of liquid. It weighs 5 pounds when full; a pint of water is approximately 1 pound.</p>",
           "chat": "",
@@ -1714,7 +1760,7 @@
       "img": "icons/sundries/survival/wetskin-leather-purple.webp",
       "effects": [],
       "folder": null,
-      "permission": {
+      "ownership": {
         "default": 0
       }
     },
@@ -1722,7 +1768,7 @@
       "_id": "pueZRmygDueiEPES",
       "name": "Hempen Rope (50 ft.)",
       "type": "consumable",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>Rope, whether made of hemp or silk, has 2 hit points and can be burst with a DC 17 Strength check.</p>",
           "chat": "",
@@ -1794,7 +1840,7 @@
       "img": "icons/sundries/survival/rope-wrapped-brown.webp",
       "effects": [],
       "folder": null,
-      "permission": {
+      "ownership": {
         "default": 0
       }
     },
@@ -1802,7 +1848,7 @@
       "_id": "ph8RkMxLvWBSgIt3",
       "name": "Quiver",
       "type": "backpack",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>A quiver can hold up to 20 arrows.</p>",
           "chat": "",
@@ -1838,7 +1884,7 @@
       "img": "icons/containers/ammunition/arrows-quiver-black.webp",
       "effects": [],
       "folder": null,
-      "permission": {
+      "ownership": {
         "default": 0
       }
     },
@@ -1846,7 +1892,7 @@
       "_id": "GUsTVResLLnqzu20",
       "name": "Bedroll",
       "type": "loot",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>Roll of cloth used by traveller to sleep in.</p>",
           "chat": "",
@@ -1870,7 +1916,7 @@
       "img": "icons/sundries/flags/banner-worn-blue.webp",
       "effects": [],
       "folder": null,
-      "permission": {
+      "ownership": {
         "default": 0
       }
     },
@@ -1878,7 +1924,7 @@
       "_id": "C47RdG1DyqBhG1aB",
       "name": "Mess Kit",
       "type": "loot",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>This tin box contains a cup and simple cutlery. The box clamps together, and one side can be used as a cooking pan and the other as a plate or shallow bowl.</p>",
           "chat": "",
@@ -1902,7 +1948,7 @@
       "img": "icons/tools/cooking/fork-steel-grey.webp",
       "effects": [],
       "folder": null,
-      "permission": {
+      "ownership": {
         "default": 0
       }
     },
@@ -1910,7 +1956,7 @@
       "_id": "NcqTt0GXqkHxybfP",
       "name": "Handaxe",
       "type": "weapon",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>This one-handed axe is light and balanced for throwing while remaining useful in hand combat.</p>",
           "chat": "",
@@ -1987,6 +2033,7 @@
           "conditions": ""
         },
         "weaponType": "simpleM",
+        "baseItem": "",
         "properties": {
           "lgt": true,
           "thr": true,
@@ -2014,7 +2061,7 @@
       "img": "icons/weapons/axes/axe-broad-black.webp",
       "effects": [],
       "folder": null,
-      "permission": {
+      "ownership": {
         "default": 0
       }
     },
@@ -2022,7 +2069,7 @@
       "_id": "XlBuqgctFFNNx8Xn",
       "name": "Rations",
       "type": "consumable",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>Rations consist of dry foods suitable for extended travel, including jerky, dried fruit, hardtack, and nuts.</p>",
           "chat": "",
@@ -2094,7 +2141,7 @@
       "img": "icons/consumables/meat/hock-leg-pink-brown.webp",
       "effects": [],
       "folder": null,
-      "permission": {
+      "ownership": {
         "default": 0
       }
     },
@@ -2102,7 +2149,7 @@
       "_id": "rRBxjDaj0KZoEySZ",
       "name": "Piton",
       "type": "consumable",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>A metal spike that is drive into a seam in a climbing surface with a climbing hammer. It can also be used like iron spikes to block doors in a pinch.</p>",
           "chat": "",
@@ -2174,7 +2221,7 @@
       "img": "icons/sundries/survival/stake-rough-simple-brown.webp",
       "effects": [],
       "folder": null,
-      "permission": {
+      "ownership": {
         "default": 0
       }
     },
@@ -2182,7 +2229,7 @@
       "_id": "puS6D5ZXmiKePl1F",
       "name": "Torch",
       "type": "consumable",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>A torch burns for 1 hour, providing bright light in a 20-foot radius and dim light for an additional 20 feet. If you make a melee attack with a burning torch and hit, it deals 1 fire damage.</p>",
           "chat": "",
@@ -2259,62 +2306,7 @@
       "img": "icons/sundries/lights/torch-black.webp",
       "effects": [],
       "folder": null,
-      "permission": {
-        "default": 0
-      }
-    },
-    {
-      "_id": "JhV1pJaLZSpAt51n",
-      "name": "Fighter",
-      "type": "class",
-      "data": {
-        "description": {
-          "value": "<p>As a fighter, you gain the following class features.</p>\n<h3>Hit Points</h3>\n<p><strong>Hit Dice:</strong> 1d10 per fighter level<br /><strong>Hit Points at 1st Level:</strong> 10 + your Constitution modifier<br /><strong>Hit Points at Higher Levels:</strong> 1d10 (or 6) + your Constitution modifier per fighter level after 1st</p>\n<h3>Proficiencies</h3>\n<p><strong>Armor:</strong> All armor, shields<br /><strong>Weapons:</strong> Simple weapons, martial weapons<br /><strong>Tools:</strong> None<br /><strong>Saving Throws:</strong> Strength, Constitution<br /><strong>Skills:</strong> Choose two skills from Acrobatics, Animal Handling, Athletics, History, Insight, Intimidation, Perception, and Survival</p>\n<h3>Equipment</h3>\n<p>You start with the following equipment, in addition to the equipment granted by your background:</p>\n<ul>\n<li>(a) chain mail or (b) leather armor, longbow, and 20 arrows</li>\n<li>(a) a martial weapon and a shield or (b) two martial weapons</li>\n<li>(a) a light crossbow and 20 bolts or (b) two handaxes</li>\n<li>(a) a dungeoneer's pack or (b) an explorer's pack</li>\n</ul>\n<h1>Fighter Advancement</h1>\n<table>\n<thead>\n<tr>\n<td>Level</td>\n<td>Proficiency Bonus</td>\n<td>Features</td>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>1st</td>\n<td>+2</td>\n<td>@Compendium[dnd5e.classfeatures.fbExzwNwEAl2kW9c]{Fighting Style}, @Compendium[dnd5e.classfeatures.nTjmWbyHweXuIqwc]{Second Wind}</td>\n</tr>\n<tr>\n<td>2nd</td>\n<td>+2</td>\n<td>@Compendium[dnd5e.classfeatures.xF1VTcJ3AdkbTsdQ]{Action Surge}</td>\n</tr>\n<tr>\n<td>3rd</td>\n<td>+2</td>\n<td>@Compendium[dnd5e.classfeatures.ax8M0X0q1GGWM26j]{Martial Archetype}</td>\n</tr>\n<tr>\n<td>4th</td>\n<td>+2</td>\n<td>@Compendium[dnd5e.classfeatures.sPy2OLoN7JaAcMl4]{Ability Score Improvement}</td>\n</tr>\n<tr>\n<td>5th</td>\n<td>+3</td>\n<td>@Compendium[dnd5e.classfeatures.q9g1MLXuLZyxjQMg]{Extra Attack}</td>\n</tr>\n<tr>\n<td>6th</td>\n<td>+3</td>\n<td>@Compendium[dnd5e.classfeatures.sPy2OLoN7JaAcMl4]{Ability Score Improvement}</td>\n</tr>\n<tr>\n<td>7th</td>\n<td>+3</td>\n<td>Martial Archetype feature</td>\n</tr>\n<tr>\n<td>8th</td>\n<td>+3</td>\n<td>@Compendium[dnd5e.classfeatures.sPy2OLoN7JaAcMl4]{Ability Score Improvement}</td>\n</tr>\n<tr>\n<td>9th</td>\n<td>+4</td>\n<td>@Compendium[dnd5e.classfeatures.653ZHbNcmm7ZGXbw]{Indomitable}</td>\n</tr>\n<tr>\n<td>10th</td>\n<td>+4</td>\n<td>Martial Archetype feature</td>\n</tr>\n<tr>\n<td>11th</td>\n<td>+4</td>\n<td>@Compendium[dnd5e.classfeatures.q9g1MLXuLZyxjQMg]{Extra Attack (2)}</td>\n</tr>\n<tr>\n<td>12th</td>\n<td>+4</td>\n<td>@Compendium[dnd5e.classfeatures.sPy2OLoN7JaAcMl4]{Ability Score Improvement}</td>\n</tr>\n<tr>\n<td>13th</td>\n<td>+5</td>\n<td>@Compendium[dnd5e.classfeatures.653ZHbNcmm7ZGXbw]{Indomitable (2 uses)}</td>\n</tr>\n<tr>\n<td>14th</td>\n<td>+5</td>\n<td>@Compendium[dnd5e.classfeatures.sPy2OLoN7JaAcMl4]{Ability Score Improvement}</td>\n</tr>\n<tr>\n<td>15th</td>\n<td>+5</td>\n<td>Martial Archetype feature</td>\n</tr>\n<tr>\n<td>16th</td>\n<td>+5</td>\n<td>@Compendium[dnd5e.classfeatures.sPy2OLoN7JaAcMl4]{Ability Score Improvement}</td>\n</tr>\n<tr>\n<td>17th</td>\n<td>+6</td>\n<td>@Compendium[dnd5e.classfeatures.xF1VTcJ3AdkbTsdQ]{Action Surge (2 uses)}, @Compendium[dnd5e.classfeatures.653ZHbNcmm7ZGXbw]{Indomitable (3 uses)}</td>\n</tr>\n<tr>\n<td>18th</td>\n<td>+6</td>\n<td>Martial Archetype feature</td>\n</tr>\n<tr>\n<td>19th</td>\n<td>+6</td>\n<td>@Compendium[dnd5e.classfeatures.sPy2OLoN7JaAcMl4]{Ability Score Improvement}</td>\n</tr>\n<tr>\n<td>20th</td>\n<td>+6</td>\n<td>@Compendium[dnd5e.classfeatures.q9g1MLXuLZyxjQMg]{Extra Attack (3)}</td>\n</tr>\n</tbody>\n</table>\n<h1>Martial Archetypes</h1>\n<p>Different fighters choose different approaches to perfecting their fighting prowess. The martial archetype you choose to emulate reflects your approach.</p>\n<h2>Champion</h2>\n<p>The archetypal Champion focuses on the development of raw physical power honed to deadly perfection. Those who model themselves on this archetype combine rigorous training with physical excellence to deal devastating blows.</p>\n<h3>Champion Features</h3>\n<p>3rd Level: @Compendium[dnd5e.classfeatures.YgLQV1O849wE5TgM]{Improved Critical}</p>\n<p>7th Level: @Compendium[dnd5e.classfeatures.dHu1yzIjD38BvGGd]{Remarkable Athlete}</p>\n<p>10th Level: @Compendium[dnd5e.classfeatures.kYJsED0rqqqUcgKz]{Additional Fighting Style}</p>\n<p>15th Level: @Compendium[dnd5e.classfeatures.aVKH6TLn1AG9hPSA]{Superior Critical}</p>\n<p>18th Level: @Compendium[dnd5e.classfeatures.ipG5yx1tRNmeJfSH]{Survivor}</p>",
-          "chat": "",
-          "unidentified": ""
-        },
-        "source": "",
-        "levels": 1,
-        "subclass": "",
-        "hitDice": "d10",
-        "hitDiceUsed": 0,
-        "saves": [
-          "str",
-          "con"
-        ],
-        "skills": {
-          "number": 2,
-          "choices": [
-            "acr",
-            "ani",
-            "ath",
-            "his",
-            "ins",
-            "itm",
-            "prc",
-            "sur"
-          ],
-          "value": []
-        },
-        "spellcasting": {
-          "progression": "none",
-          "ability": ""
-        },
-        "damage": {
-          "parts": []
-        },
-        "attunement": 0
-      },
-      "sort": 0,
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.dnd5e.classes.ABEBgWyRhVlDUIfq"
-        }
-      },
-      "img": "icons/skills/melee/hand-grip-sword-red.webp",
-      "effects": [],
-      "folder": null,
-      "permission": {
+      "ownership": {
         "default": 0
       }
     },
@@ -2322,7 +2314,7 @@
       "_id": "gxGtzolLrAw1A3or",
       "name": "Crowbar",
       "type": "loot",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>Using a crowbar grants advantage to Strength checks where the crowbar's leverage can be applied.</p>",
           "chat": "",
@@ -2343,7 +2335,7 @@
       "img": "icons/tools/hand/pickaxe-steel-white.webp",
       "effects": [],
       "folder": null,
-      "permission": {
+      "ownership": {
         "default": 0
       }
     },
@@ -2351,7 +2343,7 @@
       "_id": "FZMxHGzQLRylEPyZ",
       "name": "Human",
       "type": "feat",
-      "data": {
+      "system": {
         "description": {
           "value": "<div title=\"Page 5\">\n<div>\n<div>\n<p><em>It&rsquo;s hard to make generalizations about humans, but your human character has these traits. </em></p><p><em><strong>Ability Score Increase.</strong></em> Your ability scores each increase by 1.</p><p><em><strong>Age.</strong></em> Humans reach adulthood in their late teens and live less than a century.</p><p><em><strong>Alignment. </strong></em>Humans tend toward no particular alignment. The best and the worst are found among them.</p><p><em><strong>Size.</strong></em> Humans vary widely in height and build, from barely 5 feet to well over 6 feet tall. Regardless of your position in that range, your size is Medium.</p><p><em><strong>Speed.</strong></em> Your base walking speed is 30 feet.</p><p><em><strong>Languages. </strong></em>You can speak, read, and write Common and one extra language of your choice. Humans typically learn the languages of other peoples they deal with, including obscure dialects. They are fond of sprinkling their speech with words borrowed from other tongues: Orc curses, Elvish musical expressions, Dwarvish military phrases, and so on.</p>\n</div>\n</div>\n</div>",
           "chat": "",
@@ -2418,8 +2410,358 @@
       "img": "systems/dnd5e/icons/spells/light-air-fire-3.jpg",
       "effects": [],
       "folder": null,
-      "permission": {
+      "ownership": {
         "default": 0
+      }
+    },
+    {
+      "_id": "z1xtuix2w8sjskct",
+      "name": "Fighter",
+      "type": "class",
+      "img": "icons/skills/melee/hand-grip-sword-red.webp",
+      "system": {
+        "description": {
+          "value": "<p>As a fighter, you gain the following class features.</p>\n<h3>Hit Points</h3>\n<p><strong>Hit Dice:</strong> 1d10 per fighter level<br /><strong>Hit Points at 1st Level:</strong> 10 + your Constitution modifier<br /><strong>Hit Points at Higher Levels:</strong> 1d10 (or 6) + your Constitution modifier per fighter level after 1st</p>\n<h3>Proficiencies</h3>\n<p><strong>Armor:</strong> All armor, shields<br /><strong>Weapons:</strong> Simple weapons, martial weapons<br /><strong>Tools:</strong> None<br /><strong>Saving Throws:</strong> Strength, Constitution<br /><strong>Skills:</strong> Choose two skills from Acrobatics, Animal Handling, Athletics, History, Insight, Intimidation, Perception, and Survival</p>\n<h3>Equipment</h3>\n<p>You start with the following equipment, in addition to the equipment granted by your background:</p>\n<ul>\n<li>(a) chain mail or (b) leather armor, longbow, and 20 arrows</li>\n<li>(a) a martial weapon and a shield or (b) two martial weapons</li>\n<li>(a) a light crossbow and 20 bolts or (b) two handaxes</li>\n<li>(a) a dungeoneer's pack or (b) an explorer's pack</li>\n</ul>\n<h1>Fighter Advancement</h1>\n<table>\n<thead>\n<tr>\n<td>Level</td>\n<td>Proficiency Bonus</td>\n<td>Features</td>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>1st</td>\n<td>+2</td>\n<td>@Compendium[dnd5e.classfeatures.fbExzwNwEAl2kW9c]{Fighting Style}, @Compendium[dnd5e.classfeatures.nTjmWbyHweXuIqwc]{Second Wind}</td>\n</tr>\n<tr>\n<td>2nd</td>\n<td>+2</td>\n<td>@Compendium[dnd5e.classfeatures.xF1VTcJ3AdkbTsdQ]{Action Surge}</td>\n</tr>\n<tr>\n<td>3rd</td>\n<td>+2</td>\n<td>@Compendium[dnd5e.classfeatures.ax8M0X0q1GGWM26j]{Martial Archetype}</td>\n</tr>\n<tr>\n<td>4th</td>\n<td>+2</td>\n<td>@Compendium[dnd5e.classfeatures.sPy2OLoN7JaAcMl4]{Ability Score Improvement}</td>\n</tr>\n<tr>\n<td>5th</td>\n<td>+3</td>\n<td>@Compendium[dnd5e.classfeatures.q9g1MLXuLZyxjQMg]{Extra Attack}</td>\n</tr>\n<tr>\n<td>6th</td>\n<td>+3</td>\n<td>@Compendium[dnd5e.classfeatures.sPy2OLoN7JaAcMl4]{Ability Score Improvement}</td>\n</tr>\n<tr>\n<td>7th</td>\n<td>+3</td>\n<td>Martial Archetype feature</td>\n</tr>\n<tr>\n<td>8th</td>\n<td>+3</td>\n<td>@Compendium[dnd5e.classfeatures.sPy2OLoN7JaAcMl4]{Ability Score Improvement}</td>\n</tr>\n<tr>\n<td>9th</td>\n<td>+4</td>\n<td>@Compendium[dnd5e.classfeatures.653ZHbNcmm7ZGXbw]{Indomitable}</td>\n</tr>\n<tr>\n<td>10th</td>\n<td>+4</td>\n<td>Martial Archetype feature</td>\n</tr>\n<tr>\n<td>11th</td>\n<td>+4</td>\n<td>@Compendium[dnd5e.classfeatures.q9g1MLXuLZyxjQMg]{Extra Attack (2)}</td>\n</tr>\n<tr>\n<td>12th</td>\n<td>+4</td>\n<td>@Compendium[dnd5e.classfeatures.sPy2OLoN7JaAcMl4]{Ability Score Improvement}</td>\n</tr>\n<tr>\n<td>13th</td>\n<td>+5</td>\n<td>@Compendium[dnd5e.classfeatures.653ZHbNcmm7ZGXbw]{Indomitable (2 uses)}</td>\n</tr>\n<tr>\n<td>14th</td>\n<td>+5</td>\n<td>@Compendium[dnd5e.classfeatures.sPy2OLoN7JaAcMl4]{Ability Score Improvement}</td>\n</tr>\n<tr>\n<td>15th</td>\n<td>+5</td>\n<td>Martial Archetype feature</td>\n</tr>\n<tr>\n<td>16th</td>\n<td>+5</td>\n<td>@Compendium[dnd5e.classfeatures.sPy2OLoN7JaAcMl4]{Ability Score Improvement}</td>\n</tr>\n<tr>\n<td>17th</td>\n<td>+6</td>\n<td>@Compendium[dnd5e.classfeatures.xF1VTcJ3AdkbTsdQ]{Action Surge (2 uses)}, @Compendium[dnd5e.classfeatures.653ZHbNcmm7ZGXbw]{Indomitable (3 uses)}</td>\n</tr>\n<tr>\n<td>18th</td>\n<td>+6</td>\n<td>Martial Archetype feature</td>\n</tr>\n<tr>\n<td>19th</td>\n<td>+6</td>\n<td>@Compendium[dnd5e.classfeatures.sPy2OLoN7JaAcMl4]{Ability Score Improvement}</td>\n</tr>\n<tr>\n<td>20th</td>\n<td>+6</td>\n<td>@Compendium[dnd5e.classfeatures.q9g1MLXuLZyxjQMg]{Extra Attack (3)}</td>\n</tr>\n</tbody>\n</table>\n<h1>Martial Archetypes</h1>\n<p>Different fighters choose different approaches to perfecting their fighting prowess. The martial archetype you choose to emulate reflects your approach.</p>\n<p>@Compendium[dnd5e.subclasses.sprHbe7cRg9osTzf]{Champion}</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "",
+        "identifier": "fighter",
+        "levels": 1,
+        "hitDice": "d10",
+        "hitDiceUsed": 0,
+        "advancement": [
+          {
+            "_id": "mlcvcu7p2jfwxwa3",
+            "type": "ItemGrant",
+            "configuration": {
+              "items": [
+                "Compendium.dnd5e.classfeatures.fbExzwNwEAl2kW9c",
+                "Compendium.dnd5e.classfeatures.nTjmWbyHweXuIqwc"
+              ]
+            },
+            "value": {
+              "added": {
+                "8esd96grt1e7ct4k": "Compendium.dnd5e.classfeatures.fbExzwNwEAl2kW9c",
+                "pszansgr88j2t9wz": "Compendium.dnd5e.classfeatures.nTjmWbyHweXuIqwc"
+              }
+            },
+            "level": 1,
+            "title": "Features",
+            "icon": "",
+            "classRestriction": ""
+          },
+          {
+            "_id": "0u1lokzkujbw3yp0",
+            "type": "ItemGrant",
+            "configuration": {
+              "items": [
+                "Compendium.dnd5e.classfeatures.xF1VTcJ3AdkbTsdQ"
+              ]
+            },
+            "value": {},
+            "level": 2,
+            "title": "Features",
+            "icon": "",
+            "classRestriction": ""
+          },
+          {
+            "_id": "6vyztxepntp4zeku",
+            "type": "ItemGrant",
+            "configuration": {
+              "items": [
+                "Compendium.dnd5e.classfeatures.ax8M0X0q1GGWM26j"
+              ]
+            },
+            "value": {},
+            "level": 3,
+            "title": "Features",
+            "icon": "",
+            "classRestriction": ""
+          },
+          {
+            "_id": "q2xwt7zc4sl0dufv",
+            "type": "ItemGrant",
+            "configuration": {
+              "items": [
+                "Compendium.dnd5e.classfeatures.q9g1MLXuLZyxjQMg"
+              ]
+            },
+            "value": {},
+            "level": 5,
+            "title": "Features",
+            "icon": "",
+            "classRestriction": ""
+          },
+          {
+            "_id": "gcaoecqaltbqlcw9",
+            "type": "ItemGrant",
+            "configuration": {
+              "items": [
+                "Compendium.dnd5e.classfeatures.653ZHbNcmm7ZGXbw"
+              ]
+            },
+            "value": {},
+            "level": 9,
+            "title": "Features",
+            "icon": "",
+            "classRestriction": ""
+          },
+          {
+            "_id": "o6jij5xwl7jkaob6",
+            "type": "HitPoints",
+            "configuration": {},
+            "value": {
+              "1": "max"
+            },
+            "title": "",
+            "icon": "",
+            "classRestriction": ""
+          },
+          {
+            "_id": "sk4yn2giu0mx48u8",
+            "type": "ScaleValue",
+            "configuration": {
+              "identifier": "indomitable",
+              "type": "number",
+              "scale": {
+                "9": {
+                  "value": 1
+                },
+                "13": {
+                  "value": 2
+                },
+                "17": {
+                  "value": 3
+                }
+              }
+            },
+            "value": {},
+            "title": "Indomitable Uses",
+            "icon": "",
+            "classRestriction": ""
+          },
+          {
+            "_id": "sh0ih4vmnv6qsjwp",
+            "type": "ScaleValue",
+            "configuration": {
+              "identifier": "action-surge",
+              "type": "number",
+              "scale": {
+                "2": {
+                  "value": 1
+                },
+                "17": {
+                  "value": 2
+                }
+              }
+            },
+            "value": {},
+            "title": "Action Surge Uses",
+            "icon": "",
+            "classRestriction": ""
+          }
+        ],
+        "saves": [
+          "str",
+          "con"
+        ],
+        "skills": {
+          "number": 2,
+          "choices": [
+            "acr",
+            "ani",
+            "ath",
+            "his",
+            "ins",
+            "itm",
+            "prc",
+            "sur"
+          ],
+          "value": []
+        },
+        "spellcasting": {
+          "progression": "none",
+          "ability": ""
+        },
+        "damage": {
+          "parts": []
+        },
+        "attunement": null
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.classes.ABEBgWyRhVlDUIfq"
+        }
+      }
+    },
+    {
+      "_id": "8esd96grt1e7ct4k",
+      "name": "Fighting Style",
+      "type": "feat",
+      "img": "icons/skills/melee/weapons-crossed-daggers-orange.webp",
+      "system": {
+        "description": {
+          "value": "<p>You adopt a particular style of fighting as your specialty. Choose one of the following options from the appropriate class list. You can't take a Fighting Style option more than once, even if you later get to choose again.</p>\n<h3>Fighter Options</h3>\n<p>@Compendium[dnd5e.classfeatures.8YwPFv3UAPjWVDNf]{Archery}</p><p>@Compendium[dnd5e.classfeatures.zSlV0O2rQMdoq6pB]{Defense}</p><p>@Compendium[dnd5e.classfeatures.hCop9uJrWhF1QPb4]{Dueling}</p><p>@Compendium[dnd5e.classfeatures.3Nc6u9pyStByuJsm]{Great Weapon Fighting}</p><p>@Compendium[dnd5e.classfeatures.06NVMYf58Z76O85O]{Protection}</p><p>@Compendium[dnd5e.classfeatures.mHcSjcHJ8oZu3hkb]{Two Weapon Fighting}</p>\n<h3>Paladin Options</h3>\n<p>@Compendium[dnd5e.classfeatures.zSlV0O2rQMdoq6pB]{Defense}</p><p>@Compendium[dnd5e.classfeatures.hCop9uJrWhF1QPb4]{Dueling}</p><p>@Compendium[dnd5e.classfeatures.3Nc6u9pyStByuJsm]{Great Weapon Fighting}</p><p>@Compendium[dnd5e.classfeatures.06NVMYf58Z76O85O]{Protection}</p>\n<h3>Ranger Options</h3>\n<p>@Compendium[dnd5e.classfeatures.8YwPFv3UAPjWVDNf]{Archery}</p><p>@Compendium[dnd5e.classfeatures.zSlV0O2rQMdoq6pB]{Defense}</p><p>@Compendium[dnd5e.classfeatures.hCop9uJrWhF1QPb4]{Dueling}</p><p>@Compendium[dnd5e.classfeatures.mHcSjcHJ8oZu3hkb]{Two Weapon Fighting}</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "PHB pg. 72; 84; 91",
+        "activation": {
+          "type": "",
+          "cost": 0,
+          "condition": ""
+        },
+        "duration": {
+          "value": null,
+          "units": ""
+        },
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": ""
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": ""
+        },
+        "uses": {
+          "value": null,
+          "max": "",
+          "per": null
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null
+        },
+        "ability": null,
+        "actionType": "",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "requirements": "Fighter 1, Paladin 2, Ranger 2",
+        "recharge": {
+          "value": null,
+          "charged": false
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 500001,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "dnd5e": {
+          "sourceId": "Compendium.dnd5e.classfeatures.fbExzwNwEAl2kW9c",
+          "advancementOrigin": "z1xtuix2w8sjskct.mlcvcu7p2jfwxwa3"
+        }
+      }
+    },
+    {
+      "_id": "pszansgr88j2t9wz",
+      "name": "Second Wind",
+      "type": "feat",
+      "img": "icons/magic/life/heart-glowing-red.webp",
+      "system": {
+        "description": {
+          "value": "<p>You have a limited well of stamina that you can draw on to protect yourself from harm. On your turn, you can use a bonus action to regain hit points equal to 1d10 + your fighter level.</p><p>Once you use this feature, you must finish a short or long rest before you can use it again.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "PHB pg. 72",
+        "activation": {
+          "type": "bonus",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": 0,
+          "units": ""
+        },
+        "target": {
+          "value": null,
+          "width": null,
+          "units": null,
+          "type": "self"
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": "self"
+        },
+        "uses": {
+          "value": 1,
+          "max": 1,
+          "per": "sr"
+        },
+        "consume": {
+          "type": "",
+          "target": "",
+          "amount": null
+        },
+        "ability": "",
+        "actionType": "heal",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [
+            [
+              "1d10 + @classes.fighter.levels",
+              "healing"
+            ]
+          ],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "requirements": "Fighter 1",
+        "recharge": {
+          "value": 0,
+          "charged": false
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 200000,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "dnd5e": {
+          "sourceId": "Compendium.dnd5e.classfeatures.nTjmWbyHweXuIqwc",
+          "advancementOrigin": "z1xtuix2w8sjskct.mlcvcu7p2jfwxwa3"
+        }
       }
     }
   ],
@@ -2446,10 +2788,11 @@
       "flags": {}
     }
   ],
-  "folder": "pK61u9wafV1nLfmS",
-  "sort": 199610,
-  "permission": {
+  "folder": null,
+  "sort": 0,
+  "ownership": {
     "default": 0
   },
-  "flags": {}
+  "flags": {},
+  "_id": "2Pdtnswo8Nj2nafY"
 }

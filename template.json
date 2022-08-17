@@ -388,6 +388,10 @@
     "character": {
       "templates": ["common", "creature"],
       "attributes": {
+        "hp": {
+          "value": 0,
+          "max": 0
+        },
         "death": {
           "success": 0,
           "failure": 0
@@ -446,6 +450,11 @@
     },
     "npc": {
       "templates": ["common", "creature"],
+      "attributes": {
+        "hp": {
+          "formula": ""
+        }
+      },
       "details": {
         "type": {
           "value": "",
@@ -533,7 +542,7 @@
     }
   },
   "Item": {
-    "types": ["weapon", "equipment", "consumable", "tool", "loot", "class", "spell", "feat", "backpack"],
+    "types": ["weapon", "equipment", "consumable", "tool", "loot", "background", "class", "subclass", "spell", "feat", "backpack"],
     "templates": {
       "itemDescription": {
         "description": {
@@ -617,6 +626,10 @@
       }
     },
     "htmlFields": ["description.value", "description.chat", "description.unidentified"],
+    "background": {
+      "templates": ["itemDescription"],
+      "advancement": []
+    },
     "backpack": {
       "templates": ["itemDescription", "physicalItem"],
       "capacity": {
@@ -636,7 +649,6 @@
       "templates": ["itemDescription"],
       "identifier": "",
       "levels": 1,
-      "subclass": "",
       "hitDice": "d6",
       "hitDiceUsed": 0,
       "advancement": [],
@@ -719,6 +731,16 @@
       "scaling": {
         "mode": "none",
         "formula": null
+      }
+    },
+    "subclass": {
+      "templates": ["itemDescription"],
+      "identifier": "",
+      "classIdentifier": "",
+      "advancement": [],
+      "spellcasting": {
+        "progression": "none",
+        "ability": ""
       }
     },
     "weapon": {

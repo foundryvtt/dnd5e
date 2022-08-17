@@ -1,11 +1,11 @@
 {
   "_id": "8MICCMeOXT3aJUy9",
   "name": "Divine Favor",
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "type": "spell",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>Your prayer empowers you with divine radiance. Until the spell ends, your weapon attacks deal an extra 1d4 radiant damage on a hit.</p>",
       "chat": "",
@@ -88,6 +88,6 @@
   },
   "sort": 100001,
   "flags": {},
-  "img": "systems/dnd5e/icons/spells/enchant-sky-2.jpg",
+  "img": "icons/magic/fire/dagger-rune-enchant-flame-blue-yellow.webp",
   "effects": []
 }

@@ -3,7 +3,7 @@
   "name": "Vicious Battleaxe",
   "type": "weapon",
   "img": "icons/weapons/polearms/halberd-crescent-engraved-steel.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>A stout crescent blade mounted on a thick shaft wrapped in a sturdy grip. This axe is large enough to be wielded with two hands and is adorned with spikes upon the back-side of the blade and the top of the shaft.</p>\n<p>When you roll a 20 on your attack roll with this magic weapon, your critical hit deals an extra 2d6 damage of the weapon's type.</p>",
       "chat": "",
@@ -106,7 +106,7 @@
   "effects": [],
   "folder": null,
   "sort": 2800000,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

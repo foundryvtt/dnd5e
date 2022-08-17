@@ -1,0 +1,17 @@
+<div class="form-group">
+  <label>{{localize "DND5E.SpellProgression"}}</label>
+  <div class="form-fields">
+    <select name="system.spellcasting.progression">
+      {{selectOptions config.spellProgression selected=system.spellcasting.progression}}
+    </select>
+  </div>
+</div>
+
+<div class="form-group">
+  <label>{{localize "DND5E.SpellAbility"}}</label>
+  <div class="form-fields">
+    <select name="system.spellcasting.ability">
+      {{selectOptions config.abilities selected=system.spellcasting.ability blank=""}}
+    </select>
+  </div>
+</div>

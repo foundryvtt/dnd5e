@@ -3,7 +3,7 @@
   "name": "Splint Armor",
   "type": "equipment",
   "img": "icons/equipment/chest/breastplate-layered-steel.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>This armor is made of narrow vertical strips of metal riveted to a backing of leather that is worn over cloth padding. Flexible chain mail protects the joints.</p>",
       "chat": "",
@@ -88,7 +88,7 @@
   "effects": [],
   "folder": null,
   "sort": 850000,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

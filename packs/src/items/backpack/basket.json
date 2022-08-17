@@ -3,7 +3,7 @@
   "name": "Basket",
   "type": "backpack",
   "img": "icons/environment/traps/cage-simple-wood.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>A basket holds 2 cubic feet or 40 pounds of gear.</p>",
       "chat": "",
@@ -36,7 +36,7 @@
   "effects": [],
   "folder": null,
   "sort": 600001,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

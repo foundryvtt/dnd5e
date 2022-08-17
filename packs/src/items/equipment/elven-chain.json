@@ -3,7 +3,7 @@
   "name": "Elven Chain",
   "type": "equipment",
   "img": "systems/dnd5e/icons/items/armor/leather-forest.jpg",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>You gain a +1 bonus to AC while you wear this armor. You are considered proficient with this armor even if you lack proficiency with medium armor.</p>",
       "chat": "",
@@ -91,7 +91,7 @@
   "effects": [],
   "folder": null,
   "sort": 1900000,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

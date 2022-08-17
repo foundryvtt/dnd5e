@@ -1,11 +1,11 @@
 {
   "_id": "zPGohqJRir6MyQ3U",
   "name": "Expeditious Retreat",
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "type": "spell",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>This spell allows you to move at an incredible pace. When you cast this spell, and then as a bonus action on each of your turns until the spell ends, you can take the Dash action.</p>",
       "chat": "",
@@ -83,6 +83,6 @@
   },
   "sort": 100001,
   "flags": {},
-  "img": "systems/dnd5e/icons/spells/wind-sky-1.jpg",
+  "img": "icons/magic/air/wind-stream-blue-gray.webp",
   "effects": []
 }

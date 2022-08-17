@@ -3,7 +3,7 @@
   "name": "Iron Spike",
   "type": "consumable",
   "img": "icons/sundries/survival/stake-rough-simple-brown.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>A spike of 10 inches long made of iron. Can be improvised to block doors. Usually sold in bundles of 10.</p>",
       "chat": "",
@@ -72,7 +72,7 @@
   "effects": [],
   "folder": null,
   "sort": 4700000,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

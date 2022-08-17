@@ -1,11 +1,11 @@
 {
   "_id": "g2u9PYfqWQAyg9OI",
   "name": "Poison Spray",
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "type": "spell",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>You extend your hand toward a creature you can see within range and project a puff of noxious gas from your palm. The creature must succeed on a Constitution saving throw or take 1d12 poison damage.</p><p>This spell's damage increases by 1d12 when you reach 5th level (2d12), 11th level (3d12), and 17th level (4d12).</p>",
       "chat": "",
@@ -86,6 +86,6 @@
   },
   "sort": 100001,
   "flags": {},
-  "img": "systems/dnd5e/icons/spells/fireball-acid-2.jpg",
+  "img": "icons/magic/fire/projectile-fireball-smoke-large-green.webp",
   "effects": []
 }

@@ -1,0 +1,34 @@
+<form autocomplete="off">
+    <p class="notes">{{localize "DND5E.MovementConfigHint"}}</p>
+    <div class="form-group">
+        <label>{{localize "DND5E.MovementWalk"}}</label>
+        <input name="system.attributes.movement.walk" type="number" step="0.1" value="{{movement.walk}}"/>
+    </div>
+    <div class="form-group">
+        <label>{{localize "DND5E.MovementBurrow"}}</label>
+        <input name="system.attributes.movement.burrow" type="number" step="0.1" value="{{movement.burrow}}"/>
+    </div>
+    <div class="form-group">
+        <label>{{localize "DND5E.MovementClimb"}}</label>
+        <input name="system.attributes.movement.climb" type="number" step="0.1" value="{{movement.climb}}"/>
+    </div>
+    <div class="form-group">
+        <label>{{localize "DND5E.MovementFly"}}</label>
+        <input name="system.attributes.movement.fly" type="number" step="0.1" value="{{movement.fly}}"/>
+    </div>
+    <div class="form-group">
+        <label>{{localize "DND5E.MovementSwim"}}</label>
+        <input name="system.attributes.movement.swim" type="number" step="0.1" value="{{movement.swim}}"/>
+    </div>
+    <div class="form-group">
+        <label>{{localize "DND5E.MovementUnits"}}</label>
+        <select name="system.attributes.movement.units">
+            {{selectOptions units selected=movement.units}}
+        </select>
+    </div>
+    <div class="form-group">
+        <label>{{localize "DND5E.MovementHover"}}</label>
+        <input name="system.attributes.movement.hover" type="checkbox" {{checked movement.hover}}/>
+    </div>
+    <button type="submit" name="submit" value="1"><i class="far fa-save"></i> {{ localize "Submit"}}</button>
+</form>

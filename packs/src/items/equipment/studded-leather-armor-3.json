@@ -3,7 +3,7 @@
   "name": "Studded Leather Armor +3",
   "type": "equipment",
   "img": "icons/equipment/chest/breastplate-rivited-red.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p><em>This armor has been embellished with powerful runes, crafted in sorcerous fires, blessed by a powerful being, or some other event has seen it bequeathed with enhanced protection for the wearer.</em></p>\n<p>You have a bonus to AC while wearing this armor.</p>",
       "chat": "",
@@ -88,7 +88,7 @@
   "effects": [],
   "folder": null,
   "sort": 300000,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

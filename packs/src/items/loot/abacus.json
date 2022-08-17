@@ -3,7 +3,7 @@
   "name": "Abacus",
   "type": "loot",
   "img": "icons/commodities/treasure/broach-jewel-gold-blue.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>The abacus, also called a counting frame, is a calculating tool.</p>",
       "chat": "",
@@ -27,7 +27,7 @@
   "effects": [],
   "folder": null,
   "sort": 600000,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

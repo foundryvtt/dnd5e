@@ -3,7 +3,7 @@
   "name": "Crossbow Bolt Case",
   "type": "backpack",
   "img": "icons/containers/ammunition/arrows-quiver-black.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>This wooden case can hold up to twenty crossbow bolts.</p>",
       "chat": "",
@@ -36,7 +36,7 @@
   "effects": [],
   "folder": null,
   "sort": 1000001,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

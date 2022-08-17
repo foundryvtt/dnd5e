@@ -1,11 +1,11 @@
 {
   "_id": "hJ6ZiA3fpoY8v9cp",
   "name": "Darkvision",
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "type": "spell",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>You touch a willing creature to grant it the ability to see in the dark. For the duration, that creature has darkvision out to a range of 60 feet.</p>",
       "chat": "",
@@ -82,6 +82,6 @@
   },
   "sort": 100001,
   "flags": {},
-  "img": "systems/dnd5e/icons/spells/evil-eye-red-1.jpg",
+  "img": "icons/magic/perception/eye-ringed-glow-angry-small-red.webp",
   "effects": []
 }

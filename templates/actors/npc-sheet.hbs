@@ -1,0 +1,216 @@
+<form class="{{cssClass}} flexcol" autocomplete="off">
+
+    {{!-- NPC Sheet Header --}}
+    <header class="sheet-header flexrow">
+        <img class="profile" src="{{actor.img}}" title="{{actor.name}}" data-edit="img"/>
+
+        <section class="header-details flexrow">
+            {{> "dnd5e.actor-warnings"}}
+
+            <h1 class="charname">
+                <input name="name" type="text" value="{{actor.name}}" placeholder="{{ localize 'DND5E.Name' }}"/>
+            </h1>
+
+            <aside class="header-exp flexcol">
+                <div class="cr">
+                    <label>{{ localize "DND5E.AbbreviationCR" }}</label>
+                    <input name="system.details.cr" type="text" value="{{labels.cr}}" placeholder="1"/>
+                </div>
+                <div class="experience">
+                    <span>{{system.details.xp.value}} XP</span>
+                </div>
+                <div class="proficiency">
+                    <span>
+                        {{ localize "DND5E.Proficiency" }} {{labels.proficiency}}
+                    </span>
+                </div>
+            </aside>
+
+            {{!-- Character Summary --}}
+            <ul class="summary flexrow">
+                <li>
+                    <span>{{lookup config.actorSizes system.traits.size}}</span>
+                </li>
+                <li>
+                    <input type="text" name="system.details.alignment" value="{{system.details.alignment}}" placeholder="{{ localize 'DND5E.Alignment' }}"/>
+                </li>
+                <li class="creature-type">
+                    <span title="{{labels.type}}">{{labels.type}}</span>
+                    <a class="config-button" data-action="type" title="{{localize 'DND5E.CreatureTypeConfig'}}"><i class="fas fa-cog"></i></a>
+                </li>
+                <li>
+                    <input type="text" name="system.details.source" value="{{system.details.source}}" placeholder="{{ localize 'DND5E.Source' }}"/>
+                </li>
+            </ul>
+
+            {{!-- Header Attributes --}}
+            <ul class="attributes flexrow">
+                <li class="attribute health">
+                    <h4 class="attribute-name box-title rollable">{{ localize "DND5E.HitPoints" }}</h4>
+                    <div class="attribute-value multiple">
+                        <input name="system.attributes.hp.value" type="number" step="any"
+                            value="{{system.attributes.hp.value}}" placeholder="10"
+                            title="{{localize 'DND5E.HitPointsCurrent'}}">
+                        <span class="sep"> / </span>
+                        <input name="system.attributes.hp.max" type="number" step="any"
+                            value="{{system.attributes.hp.max}}" placeholder="10"
+                            title="{{localize 'DND5E.HitPointsMax'}}">
+                    </div>
+                    <footer class="attribute-footer flexrow">
+                        <input name="system.attributes.hp.formula" class="hpformula" type="text"
+                            placeholder="{{ localize 'DND5E.HPFormula' }}"
+                            value="{{system.attributes.hp.formula}}"
+                            title="{{localize 'DND5E.HPFormula'}}">
+                        <input name="system.attributes.hp.temp" type="number" step="any" class="temphp"
+                            placeholder="+{{localize 'DND5E.Temp'}}"
+                            value="{{system.attributes.hp.temp}}"
+                            title="{{localize 'DND5E.HitPointsTemp'}}">
+                    </footer>
+                </li>
+
+                <li class="attribute armor">
+                    <h4 class="attribute-name box-title">
+                        {{ localize "DND5E.ArmorClass" }}
+                        <a class="config-button" data-action="armor" title="{{localize 'DND5E.ArmorConfig'}}"><i class="fas fa-cog"></i></a>
+                    </h4>
+                    <div class="attribute-value attributable" data-property="attributes.ac">
+                        <span>{{system.attributes.ac.value}}</span>
+                    </div>
+                    <footer class="attribute-footer">
+                        <span>{{labels.armorType}}</span>
+                    </footer>
+                </li>
+
+                <li class="attribute movement">
+                    <h4 class="attribute-name box-title">
+                        {{ localize "DND5E.Movement" }}
+                        <a class="config-button" data-action="movement" title="{{localize 'DND5E.MovementConfig'}}"><i class="fas fa-cog"></i></a>
+                    </h4>
+                    <div class="attribute-value">
+                        <span>{{movement.primary}}</span>
+                    </div>
+                    <footer class="attribute-footer">
+                        <span>{{movement.special}}</span>
+                    </footer>
+                </li>
+            </ul>
+        </section>
+    </header>
+
+    {{!-- NPC Sheet Navigation --}}
+    <nav class="sheet-navigation tabs" data-group="primary">
+        <a class="item active" data-tab="attributes">{{ localize "DND5E.Attributes" }}</a>
+        <a class="item" data-tab="features">{{ localize "DND5E.Features" }}</a>
+        <a class="item" data-tab="spellbook">{{ localize "DND5E.Spellbook" }}</a>
+        <a class="item" data-tab="effects">{{ localize "DND5E.Effects" }}</a>
+        <a class="item" data-tab="biography">{{ localize "DND5E.Biography" }}</a>
+    </nav>
+
+    {{!-- NPC Sheet Body --}}
+    <section class="sheet-body">
+        <div class="tab attributes flexrow" data-group="primary" data-tab="attributes">
+
+            {{!-- Ability Scores --}}
+            <ul class="ability-scores flexrow">
+            {{#each system.abilities as |ability id|}}
+                <li class="ability {{#if ability.proficient}}proficient{{/if}}" data-ability="{{id}}">
+                    <h4 class="ability-name box-title rollable">{{ability.label}}</h4>
+                    {{numberInput ability.value name=(concat "system.abilities." id ".value")
+                        class="ability-score" placeholder="10"}}
+                    <div class="ability-modifiers flexrow">
+                        <span class="ability-mod" title="{{ localize 'DND5E.Modifier' }}">{{numberFormat ability.mod decimals=0 sign=true}}</span>
+                        <input type="hidden" name="system.abilities.{{id}}.proficient" value="{{ability.baseProf}}" data-dtype="Number"/>
+                        <a class="proficiency-toggle ability-proficiency" title="{{ localize 'DND5E.Proficiency' }}">{{{ability.icon}}}</a>
+                        <span class="ability-save" title="{{ localize 'DND5E.SavingThrow' }}">{{numberFormat ability.save decimals=0 sign=true}}</span>
+                    </div>
+                    <a class="config-button" data-action="ability" title="{{localize 'DND5E.AbilityConfigure'}}"><i class="fas fa-cog"></i></a>
+                </li>
+            {{/each}}
+            </ul>
+
+            {{!-- Skills --}}
+            <ul class="skills-list">
+            {{#each config.skills as |label s|}}
+            {{#with (lookup ../system.skills s) as |skill|}}
+                <li class="skill flexrow {{#if skill.value}}proficient{{/if}}" data-skill="{{s}}">
+                    <input type="hidden" name="system.skills.{{s}}.value" value="{{skill.baseValue}}" data-dtype="Number"/>
+                    <a class="proficiency-toggle skill-proficiency" title="{{skill.hover}}">{{{skill.icon}}}</a>
+                    <div class="skill-name-controls">
+                      <h4 class="skill-name rollable">{{label}}</h4>
+                      <a class="config-button" data-action="skill" title="{{localize 'DND5E.SkillConfigure'}}"><i class="fas fa-cog"></i></a>
+                    </div>
+                    <span class="skill-ability">{{skill.ability}}</span>
+                    <span class="skill-mod" title="{{ localize 'DND5E.SkillModifierHint' skill=label }}">{{numberFormat skill.total decimals=0 sign=true}}</span>
+                    <span class="skill-passive" title="{{ localize 'DND5E.SkillPassiveHint' skill=label }}">({{skill.passive}})</span>
+                </li>
+            {{/with}}
+            {{/each}}
+            </ul>
+
+            <section class="center-pane flexcol">
+
+                {{!-- Legendary Actions --}}
+                <div class="counters">
+                    <div class="counter flexrow legendary">
+                        <h4>{{ localize "DND5E.LegAct" }}</h4>
+                        <div class="counter-value">
+                            <input name="system.resources.legact.value" type="number" step="any"
+                                value="{{system.resources.legact.value}}" placeholder="0"
+                                title="{{localize 'DND5E.LegActRemaining'}}">
+                            <span class="sep">/</span>
+                            <input name="system.resources.legact.max" type="number" step="any"
+                                value="{{system.resources.legact.max}}" placeholder="0"
+                                title="{{localize 'DND5E.LegActMax'}}">
+                        </div>
+                    </div>
+                    <div class="counter flexrow legendary">
+                        <h4>{{ localize "DND5E.LegRes" }}</h4>
+                        <div class="counter-value">
+                            <input name="system.resources.legres.value" type="number" step="any"
+                                value="{{system.resources.legres.value}}" placeholder="0"
+                                title="{{localize 'DND5E.LegResRemaining'}}">
+                            <span class="sep">/</span>
+                            <input name="system.resources.legres.max" type="number" step="any"
+                                value="{{system.resources.legres.max}}" placeholder="0"
+                                title="{{localize 'DND5E.LegResMax'}}">
+                        </div>
+                    </div>
+                    <div class="counter flexrow lair">
+                        <h4>{{ localize "DND5E.LairAct" }}</h4>
+                        <div class="counter-value">
+                            <input name="system.resources.lair.value" type="checkbox"
+                                value="{{system.resources.lair.value}}"
+                                data-dtype="Boolean" {{checked system.resources.lair.value}}>
+                            <input name="system.resources.lair.initiative" type="number" step="any"
+                                value="{{system.resources.lair.initiative}}" 
+                                placeholder="20" title="{{localize 'DND5E.LairActionInitiative'}}">
+                        </div>
+                    </div>
+                </div>
+
+                {{!-- Traits --}}
+                {{> "dnd5e.actor-traits"}}
+            </section>
+        </div>
+
+        {{!-- Features Tab --}}
+        <div class="tab features flexcol" data-group="primary" data-tab="features">
+            {{> "dnd5e.actor-features" sections=features}}
+        </div>
+
+        {{!-- Spellbook Tab --}}
+        <div class="tab spellbook flexcol" data-group="primary" data-tab="spellbook">
+            {{> "dnd5e.actor-spellbook"}}
+        </div>
+
+        {{!-- Effects Tab --}}
+        <div class="tab effects flexcol" data-group="primary" data-tab="effects">
+            {{> "dnd5e.active-effects"}}
+        </div>
+
+        {{!-- Biography Tab --}}
+        <div class="tab biography flexcol" data-group="primary" data-tab="biography">
+            {{editor biographyHTML target="system.details.biography.value" button=true editable=editable}}
+        </div>
+    </section>
+</form>

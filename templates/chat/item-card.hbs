@@ -1,0 +1,57 @@
+<div class="dnd5e chat-card item-card" data-actor-id="{{actor._id}}" data-item-id="{{item._id}}"
+     {{#if tokenId}}data-token-id="{{tokenId}}"{{/if}} {{#if isSpell}}data-spell-level="{{item.system.level}}"{{/if}}>
+    <header class="card-header flexrow">
+        <img src="{{item.img}}" title="{{item.name}}" width="36" height="36"/>
+        <h3 class="item-name">{{item.name}}</h3>
+    </header>
+
+    <div class="card-content">
+        {{{data.description.value}}}
+        {{#if data.materials.value}}
+        <p><strong>{{ localize "DND5E.RequiredMaterials" }}.</strong> {{data.materials.value}}</p>
+        {{/if}}
+    </div>
+
+    <div class="card-buttons">
+        {{#if hasAttack}}<button data-action="attack">{{ localize "DND5E.Attack" }}</button>{{/if}}
+
+        {{#if hasDamage}}
+        <button data-action="damage">
+            {{#if isHealing}}{{ localize "DND5E.Healing" }}
+            {{else}}{{localize "DND5E.Damage" }}{{/if}}
+        </button>
+        {{/if}}
+
+        {{#if isVersatile}}
+        <button data-action="versatile">{{ localize "DND5E.Versatile" }}</button>
+        {{/if}}
+
+        {{#if hasSave}}
+        <button data-action="save" data-ability="{{data.save.ability}}">
+            {{ localize "DND5E.SavingThrow" }} {{labels.save}}
+        </button>
+        {{/if}}
+
+        {{#if data.formula}}
+        <button data-action="formula">{{ localize "DND5E.OtherFormula"}}</button>
+        {{/if}}
+
+        {{#if hasAreaTarget}}
+        <button data-action="placeTemplate">{{ localize "DND5E.PlaceTemplate" }}</button>
+        {{/if}}
+
+        {{#if isTool}}
+        <button data-action="toolCheck" data-ability="{{data.ability.value}}">{{ localize "DND5E.Use" }} {{item.name}}</button>
+        {{/if}}
+
+        {{#if hasAbilityCheck}}
+        <button data-action="abilityCheck" data-ability="{{data.ability}}">{{labels.abilityCheck}}</button>
+        {{/if}}
+    </div>
+
+    <footer class="card-footer">
+        {{#each data.properties}}
+        <span>{{this}}</span>
+        {{/each}}
+    </footer>
+</div>

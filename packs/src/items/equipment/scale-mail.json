@@ -3,7 +3,7 @@
   "name": "Scale Mail",
   "type": "equipment",
   "img": "icons/equipment/chest/breastplate-metal-scaled-grey.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>This armor consists of a coat and leggings (and perhaps a separate skirt) of leather covered with overlapping pieces of metal, much like the scales of a fish. The suit includes gauntlets.</p>",
       "chat": "",
@@ -88,7 +88,7 @@
   "effects": [],
   "folder": null,
   "sort": 600000,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

@@ -3,7 +3,7 @@
   "name": "Cloak of Protection",
   "type": "equipment",
   "img": "icons/equipment/back/cloak-heavy-fur-blue.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p><em>Wondrous item, (requires attunement)</em></p>\n<p>You gain a +1 bonus to AC and saving throws while you wear this cloak.</p>",
       "chat": "",
@@ -107,7 +107,7 @@
   ],
   "folder": null,
   "sort": 3900000,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

@@ -1,11 +1,11 @@
 {
   "_id": "ZrTc23tToJ0JpH2h",
   "name": "Jump",
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "type": "spell",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>You touch a creature. The creature's jump distance is tripled until the spell ends.</p>",
       "chat": "",
@@ -83,6 +83,6 @@
   },
   "sort": 100001,
   "flags": {},
-  "img": "systems/dnd5e/icons/spells/wind-grasp-sky-2.jpg",
+  "img": "icons/magic/control/debuff-energy-hold-blue-yellow.webp",
   "effects": []
 }

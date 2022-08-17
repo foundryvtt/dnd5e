@@ -3,7 +3,7 @@
   "name": "Costume Clothes",
   "type": "equipment",
   "img": "icons/equipment/back/cloak-hooded-pink.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>A complete costume usually used by performers and artists in all manner of entertainment halls or for those that simply refuse to get out of character.</p>",
       "chat": "",
@@ -87,7 +87,7 @@
   "effects": [],
   "folder": null,
   "sort": 700000,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

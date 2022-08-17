@@ -3,7 +3,7 @@
   "name": "Potion of Supreme Healing",
   "type": "consumable",
   "img": "icons/consumables/potions/potion-flask-stopped-red.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p><em>The potion's red liquid glimmers when agitated.</em></p>\n<p>You regain 10d4+20 hit points when you drink this potion.</p>",
       "chat": "",
@@ -100,7 +100,7 @@
   "effects": [],
   "folder": null,
   "sort": 400001,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

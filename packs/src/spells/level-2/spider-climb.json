@@ -1,11 +1,11 @@
 {
   "_id": "KJRVzeMQXPj8Gtyx",
   "name": "Spider Climb",
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "type": "spell",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>Until the spell ends, one willing creature you touch gains the ability to move up, down, and across vertical surfaces and upside down along ceilings, while leaving its hands free. The target also gains a climbing speed equal to its walking speed.</p>",
       "chat": "",
@@ -82,6 +82,6 @@
   },
   "sort": 100001,
   "flags": {},
-  "img": "systems/dnd5e/icons/spells/shielding-spirit-1.jpg",
+  "img": "icons/magic/control/debuff-chains-blue.webp",
   "effects": []
 }

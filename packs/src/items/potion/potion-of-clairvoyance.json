@@ -3,7 +3,7 @@
   "name": "Potion of Clairvoyance",
   "type": "consumable",
   "img": "icons/consumables/potions/bottle-bulb-corked-purple.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p><em>An eyeball bobs in this yellowish liquid but vanishes when the potion is opened.</em></p>\n<p>When you drink this potion, you gain the effect of the @Compendium[dnd5e.spells.cg50KpBkBdPK6vPL]{Clairvoyance} spell.</p>",
       "chat": "",
@@ -75,7 +75,7 @@
   "effects": [],
   "folder": null,
   "sort": 1700000,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

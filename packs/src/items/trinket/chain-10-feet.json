@@ -3,7 +3,7 @@
   "name": "Chain (10 feet)",
   "type": "consumable",
   "img": "icons/weapons/misc/whip-red-yellow.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>A chain has 10 hit points. It can be burst with a successful DC 20 Strength check.</p>",
       "chat": "",
@@ -72,7 +72,7 @@
   "effects": [],
   "folder": null,
   "sort": 2200001,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

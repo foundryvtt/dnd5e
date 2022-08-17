@@ -3,7 +3,7 @@
   "name": "Longsword",
   "type": "weapon",
   "img": "icons/weapons/swords/greatsword-crossguard-steel.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>A lengthy stright blade designed for slashing foes, the longsword is a highly versatile weapon that may also be wielded with two hands for more punishing strikes.</p>",
       "chat": "",
@@ -89,7 +89,7 @@
   "effects": [],
   "folder": null,
   "sort": 0,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

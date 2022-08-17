@@ -1,11 +1,11 @@
 {
   "_id": "MK6gpQMeDFo0cP9f",
   "name": "Continual Flame",
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "type": "spell",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>A flame, equivalent in brightness to a torch, springs forth from an object that you touch. The effect looks like a regular flame, but it creates no heat and doesn't use oxygen. A continual flame can be covered or hidden but not smothered or quenched.</p>",
       "chat": "",
@@ -82,6 +82,6 @@
   },
   "sort": 100001,
   "flags": {},
-  "img": "systems/dnd5e/icons/spells/explosion-orange-2.jpg",
+  "img": "icons/magic/fire/explosion-fireball-medium-orange.webp",
   "effects": []
 }

@@ -3,7 +3,7 @@
   "name": "Quiver",
   "type": "backpack",
   "img": "icons/containers/ammunition/arrows-quiver-black.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>A quiver can hold up to 20 arrows.</p>",
       "chat": "",
@@ -36,7 +36,7 @@
   "effects": [],
   "folder": null,
   "sort": 2400001,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

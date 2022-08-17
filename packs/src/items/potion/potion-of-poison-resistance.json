@@ -3,7 +3,7 @@
   "name": "Potion of Poison Resistance",
   "type": "consumable",
   "img": "icons/consumables/potions/bottle-bulb-corked-green.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p><em>The potion is a plain indescriminate color and smells slightly foul.</em></p>\n<p>When you drink this potion, you gain resistance to Poison type damage for 1 hour.</p>\n<p> </p>",
       "chat": "",
@@ -75,7 +75,7 @@
   "effects": [],
   "folder": null,
   "sort": 2400000,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

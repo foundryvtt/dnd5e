@@ -1,11 +1,11 @@
 {
   "_id": "BV0mpbHh29IbbIj5",
   "name": "Create Food and Water",
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "type": "spell",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>You create 45 pounds of food and 30 gallons of water on the ground or in containers within range, enough to sustain up to fifteen humanoids or five steeds for 24 hours. The food is bland but nourishing, and spoils if uneaten after 24 hours. The water is clean and doesn't go bad.</p>",
       "chat": "",
@@ -83,6 +83,6 @@
   },
   "sort": 100001,
   "flags": {},
-  "img": "systems/dnd5e/icons/spells/leaf-jade-1.jpg",
+  "img": "icons/magic/nature/leaf-glow-teal.webp",
   "effects": []
 }

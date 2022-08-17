@@ -3,7 +3,7 @@
   "name": "Crystal Ball",
   "type": "consumable",
   "img": "icons/commodities/gems/pearl-natural.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p><em>Wondrous item, (requires attunement)</em></p>\n<p>The typical Crystal Ball, a very rare item, is about 6 inches in diameter. While touching it, you can cast the @Compendium[dnd5e.spells.fVbCxFRaORalHB20]{Scrying} spell (save DC 17) with it.</p>",
       "chat": "",
@@ -75,7 +75,7 @@
   "effects": [],
   "folder": null,
   "sort": 4000000,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

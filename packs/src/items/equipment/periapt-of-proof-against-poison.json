@@ -3,7 +3,7 @@
   "name": "Periapt of Proof against Poison",
   "type": "equipment",
   "img": "icons/equipment/neck/necklace-hook-brown.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p><em>Wondrous item</em></p>\n<p>This delicate silver chain has a brilliant-cut black gem pendant. While you wear it, poisons have no effect on you. You are immune to the poisoned condition and have immunity to poison damage.</p>",
       "chat": "",
@@ -90,7 +90,7 @@
   "effects": [],
   "folder": null,
   "sort": 1200000,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

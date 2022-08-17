@@ -3,7 +3,7 @@
   "name": "Hippogriff",
   "type": "npc",
   "img": "systems/dnd5e/tokens/monstrosity/Hippogriff.webp",
-  "data": {
+  "system": {
     "abilities": {
       "str": {
         "value": 17,
@@ -126,6 +126,9 @@
         "walk": 40,
         "units": "ft",
         "hover": false
+      },
+      "attunement": {
+        "max": 3
       },
       "senses": {
         "darkvision": 0,
@@ -532,7 +535,7 @@
       }
     }
   },
-  "token": {
+  "prototypeToken": {
     "name": "Hippogriff",
     "displayName": 20,
     "actorLink": false,
@@ -597,7 +600,7 @@
       "name": "Keen Sight",
       "type": "feat",
       "img": "icons/creatures/mammals/wolf-howl-moon-forest-blue.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The hippogriff has<strong> advantage </strong>on Wisdom (Perception) checks that rely on sight.</p>",
           "chat": "",
@@ -662,7 +665,7 @@
       "effects": [],
       "folder": null,
       "sort": 100000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -672,7 +675,7 @@
       "name": "Multiattack",
       "type": "feat",
       "img": "icons/skills/melee/blade-tips-triple-steel.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The hippogriff makes two attacks: one with its beak and one with its claws.</p>",
           "chat": "",
@@ -737,7 +740,7 @@
       "effects": [],
       "folder": null,
       "sort": 200000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -747,7 +750,7 @@
       "name": "Beak",
       "type": "weapon",
       "img": "icons/commodities/bones/beak-hooked-red.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\"><p><em>Melee Weapon Attack:</em><strong>+5 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>8 (1d10 + 3) <em>piercing damage</em></strong>.</p><p></p></section><p>The Hippogriff attacks with its Beak.</p>",
           "chat": "",
@@ -847,7 +850,7 @@
       "effects": [],
       "folder": null,
       "sort": 300000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -857,7 +860,7 @@
       "name": "Claws",
       "type": "weapon",
       "img": "icons/skills/melee/strike-slashes-red.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\"><p><em>Melee Weapon Attack:</em><strong>+5 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>10 (2d6 + 3) <em>slashing damage</em></strong>.</p><p></p></section><p>The Hippogriff attacks with its Claws.</p>",
           "chat": "",
@@ -957,7 +960,7 @@
       "effects": [],
       "folder": null,
       "sort": 400000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -966,7 +969,7 @@
   "effects": [],
   "folder": "DuRKNuzI99G8kWWa",
   "sort": 0,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

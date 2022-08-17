@@ -1,11 +1,11 @@
 {
   "_id": "VzgFzcmocr1X1cp4",
   "name": "Shillelagh",
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "type": "spell",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>The wood of a club or quarterstaff you are holding is imbued with nature's power. For the duration, you can use your spellcasting ability instead of Strength for the attack and damage rolls of melee attacks using that weapon, and the weapon's damage die becomes a d8. The weapon also becomes magical, if it isn't already. The spell ends if you cast it again or if you let go of the weapon.</p>",
       "chat": "",
@@ -88,6 +88,6 @@
   },
   "sort": 100001,
   "flags": {},
-  "img": "systems/dnd5e/icons/spells/enchant-jade-1.jpg",
+  "img": "icons/magic/fire/dagger-rune-enchant-teal.webp",
   "effects": []
 }

@@ -33,7 +33,7 @@ Runs the LESS -> CSS builder in watch mode so that changes made to the LESS file
 
 This repository includes some utilities which allow the Compendia included in the System to be maintained as JSON files. This makes contributions which include changes to the compendia considerably easier to review.
 
-Please remember to compile any pack whose JSON your contribution touches before submitting an MR.
+Please remember to compile any pack whose JSON your contribution touches before submitting an PR.
 
 #### Compiling Packs
 
@@ -100,34 +100,34 @@ If there is missing content, please open an issue detailing what is missing.
 
 In general, content contributions will take the shape of fixing typos or bugs in the configuration of the existing items in the included compendia JSON files, which are then compiled into the appropriate db file.
 
-Every MR which contributes content must change both the source JSON file and the db file.
+Every PR which contributes content must change both the source JSON file and the db file.
 
 ### Translations
 
 Non-English languages are not contained within the core dnd5e system, but instead they are managed by specialized [localization modules](https://foundryvtt.com/packages/tag/translation).
 
-Instead of opening an MR with translation files, create one of these modules (or contribute to an existing one!).
+Instead of opening an PR with translation files, create one of these modules (or contribute to an existing one!).
 
 ## Code
 
 Here are some guidelines for contributing code to this project.
 
-To contribute code, [fork this project](https://docs.gitlab.com/ee/user/project/repository/forking_workflow.html) and submit a [merge request (MR)](https://docs.gitlab.com/ee/user/project/merge_requests/getting_started.html) against the correct development branch.
+To contribute code, [fork this project](https://docs.github.com/en/get-started/quickstart/fork-a-repo) and submit a [pull request (PR)](https://docs.github.com/en/get-started/quickstart/contributing-to-projects#making-a-pull-request) against the correct development branch.
 
 ### Style
 
-Please attempt to follow code style present throughout the project. An ESLint profile is included to help with maintaining a consistent code style. All warnings presented by the linter should be resolved before an MR is submitted.
+Please attempt to follow code style present throughout the project. An ESLint profile is included to help with maintaining a consistent code style. All warnings presented by the linter should be resolved before an PR is submitted.
 
 - `gulp lint` or `npm run lint` - Run the linter and display any issues found.
 - `gulp lint --fix` or `npm run lint:fix` - Automatically fix any code style issues that can be fixed.
 
 ### Linked Issues
 
-Before (or alongside) submitting an MR, we ask that you open a feature request issue. This will let us discuss the approach and prioritization of the proposed change.
+Before (or alongside) submitting an PR, we ask that you open a feature request issue. This will let us discuss the approach and prioritization of the proposed change.
 
 If you want to work on an existing issue, leave a comment saying you're going to work on the issue so that other contributors know not to duplicate work. Similarly, if you see an issue is assigned to someone, that member of the team has made it known they are working on it.
 
-When you open an MR it is recommended to [link it to an open issue](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically). Include which issue it resolves by putting something like this in your description:
+When you open an PR it is recommended to [link it to an open issue](https://docs.github.com/en/issues/tracking-your-work-with-issues/linking-a-pull-request-to-an-issue). Include which issue it resolves by putting something like this in your description:
 
 ```text
 Closes #32
@@ -135,7 +135,7 @@ Closes #32
 
 ### Priority of Review
 
-Please appreciate that reviewing contributions constitutes a substantial amount of effort and our resources are limited. As a result of this, Merge Requests are reviewed with a priority that roughly follows this:
+Please appreciate that reviewing contributions constitutes a substantial amount of effort and our resources are limited. As a result of this, Pull Requests are reviewed with a priority that roughly follows this:
 
 #### High Priority
 
@@ -151,21 +151,21 @@ Please appreciate that reviewing contributions constitutes a substantial amount 
 
 - Large Features which are out of scope for the current milestone
 
-### Merge Request Review Process
+### Pull Request Review Process
 
-MRs have a few phases:
+PRs have a few phases:
 
-0. **Prioritization.** If the MR relates to the current milestone, it is assigned to that milestone.
+0. **Prioritization.** If the PR relates to the current milestone, it is assigned to that milestone.
 1. **Initial Review from the 5e contributor team.** This lets us spread out the review work and catch some of the more obvious things that need to be fixed before final review. Generally this talks about code style and some methodology.
 2. **Final Review from the Maintainers.** Atropos and Kim have final review and are the only ones with merge permission.
 
-#### MR Size
+#### PR Size
 
-Please understand that large and sprawling MRs are exceptionally difficult to review. As much as possible, break down the work for a large feature into smaller steps. Even if multiple MRs are required for a single Issue, this will make it considerably easier and therefore more likely that your contributions will be reviewed and merged in a timely manner.
+Please understand that large and sprawling PRs are exceptionally difficult to review. As much as possible, break down the work for a large feature into smaller steps. Even if multiple PRs are required for a single Issue, this will make it considerably easier and therefore more likely that your contributions will be reviewed and merged in a timely manner.
 
 ## Releases
 
-This repository includes a Gitlab CI configuration which automates the compilation and bundling required for a release when a Tag is pushed or created with the name `release-x.x.x`.
+This repository includes a GitHub Actions configuration which automates the compilation and bundling required for a release when a Tag is pushed or created with the name `release-x.x.x`.
 
 ### Prerequisites
 
@@ -175,18 +175,8 @@ If either of these conditions are not met on the commit that tag points at, the 
 - The `system.json` file's `download` url must match the expected outcome of the release CI artifact. This should simply be changing version numbers in the url to match the release version.
 
 ```text
-https://gitlab.com/foundrynet/dnd5e/-/releases/release-1.4.3/downloads/dnd5e-release-1.4.3.zip
-                                              └─ Tag Name ──┘               └─ Tag Name ──┘
-```
-
-### Package Repository
-
-This workflow uses the [Generic Package Repository](https://docs.gitlab.com/ee/user/packages/generic_packages/) to host the latest system manifest. Doing so allows us to have a stable url for a `latest` manifest as each CI run updates this package. By doing this, we avoid the 2 minute delay between release creation and file availability in which a user might hit 'update' and get an error.
-
-As such, the stable url to the "Latest" system manifest (as updated by the CI workflow) is:
-
-```text
-https://gitlab.com/api/v4/projects/foundrynet%2Fdnd5e/packages/generic/dnd5e/latest/system.json
+https://github.com/foundryvtt/dnd5e/releases/download/release-1.6.3/dnd5e-1.6.3.zip
+                                                     └─ Tag Name ──┘     └─ V ─┘ (version)
 ```
 
 ### Process for Release

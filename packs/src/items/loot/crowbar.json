@@ -3,7 +3,7 @@
   "name": "Crowbar",
   "type": "loot",
   "img": "icons/tools/hand/pickaxe-steel-white.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>Using a crowbar grants advantage to Strength checks where the crowbar's leverage can be applied.</p>",
       "chat": "",
@@ -86,7 +86,7 @@
   "effects": [],
   "folder": null,
   "sort": 100001,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

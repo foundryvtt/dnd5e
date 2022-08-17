@@ -3,7 +3,7 @@
   "name": "Amulet of Proof against Detection and Location",
   "type": "equipment",
   "img": "icons/equipment/neck/pendant-faceted-blue.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<div>\n<div><em>Wondrous Item (requires attunement)</em></div>\n<div> </div>\n<div>While wearing this amulet, you are hidden from divination magic. You can't be targeted by such magic or perceived through magical scrying sensors.</div>\n</div>",
       "chat": "",
@@ -90,7 +90,7 @@
   "effects": [],
   "folder": null,
   "sort": 5100001,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

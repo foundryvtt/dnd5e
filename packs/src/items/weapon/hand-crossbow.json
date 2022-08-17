@@ -3,7 +3,7 @@
   "name": "Hand Crossbow",
   "type": "weapon",
   "img": "icons/weapons/crossbows/crossbow-simple-brown.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>A lightweight crossbow designed to be held in one hand or strapped to one's wrist to fire light bolts.</p>",
       "chat": "",
@@ -102,7 +102,7 @@
   "effects": [],
   "folder": null,
   "sort": 1500001,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

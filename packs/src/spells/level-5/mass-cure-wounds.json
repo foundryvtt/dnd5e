@@ -1,11 +1,11 @@
 {
   "_id": "Pyzmm8R7rVsNAPsd",
   "name": "Mass Cure Wounds",
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "type": "spell",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>A wave of Healing energy washes out from a point of your choice within range. Choose up to six creatures in a 30-foot-radius Sphere centered on that point. Each target regains Hit Points equal to 3d8 + your Spellcasting ability modifier. This spell has no effect on Undead or constructs.</p><p><strong>At Higher Levels.</strong> When you cast this spell using a spell slot of 6th level or higher, the Healing increases by 1d8 for each slot level above 5th.</p>",
       "chat": "",
@@ -87,6 +87,6 @@
   },
   "sort": 100001,
   "flags": {},
-  "img": "systems/dnd5e/icons/spells/heal-jade-2.jpg",
+  "img": "icons/magic/life/heart-cross-strong-green.webp",
   "effects": []
 }

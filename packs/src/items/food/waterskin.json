@@ -3,7 +3,7 @@
   "name": "Waterskin",
   "type": "consumable",
   "img": "icons/sundries/survival/wetskin-leather-purple.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>A leather hide sewn into an enclosed skin which can contain up to 4 pints of liquid. It weighs 5 pounds when full; a pint of water is approximately 1 pound.</p>",
       "chat": "",
@@ -72,7 +72,7 @@
   "effects": [],
   "folder": null,
   "sort": 1900000,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

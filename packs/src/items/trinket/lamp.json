@@ -3,7 +3,7 @@
   "name": "Lamp",
   "type": "consumable",
   "img": "icons/commodities/treasure/lantern-stone-grey.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>A lamp casts bright light in a 15-foot radius and dim light for an additional 30 feet. Once lit, it burns for 6 hours on a flask (1 pint) of oil</p>",
       "chat": "",
@@ -72,7 +72,7 @@
   "effects": [],
   "folder": null,
   "sort": 3700000,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

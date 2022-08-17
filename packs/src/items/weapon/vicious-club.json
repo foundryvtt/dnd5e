@@ -3,7 +3,7 @@
   "name": "Vicious Club",
   "type": "weapon",
   "img": "icons/weapons/clubs/club-simple-barbed.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>A stout knob of wood forms a simple, but effective, cudgel. These weapons are used to bludgeon foes, bruising flesh and breaking bones.</p>\n<p>When you roll a 20 on your attack roll with this magic weapon, your critical hit deals an extra 2d6 damage of the weapon's type.</p>",
       "chat": "",
@@ -106,7 +106,7 @@
   "effects": [],
   "folder": null,
   "sort": 400000,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}
