@@ -81,7 +81,7 @@ export default class DamageRoll extends Roll {
       }
 
       // Merge any parenthetical terms followed by string terms
-      else if ( (term instanceof ParentheticalTerm) && (nextTerm instanceof StringTerm)
+      else if ( (term instanceof ParentheticalTerm || term instanceof MathTerm) && (nextTerm instanceof StringTerm)
         && nextTerm.term.match(/^d[0-9]*$/)) {
         if ( term.isDeterministic ) {
           const newFormula = `${term.evaluate().total}${nextTerm.term}`;
