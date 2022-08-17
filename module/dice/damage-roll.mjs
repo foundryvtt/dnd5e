@@ -12,6 +12,7 @@
 export default class DamageRoll extends Roll {
   constructor(formula, data, options) {
     super(formula, data, options);
+    if ( !this.options.preprocessed ) this.preprocessFormula();
     // For backwards compatibility, skip rolls which do not have the "critical" option defined
     if ( (this.options.critical !== undefined) && !this.options.configured ) this.configureDamage();
   }
@@ -52,13 +53,61 @@ export default class DamageRoll extends Roll {
   /* -------------------------------------------- */
 
   /**
-   * Apply optional modifiers which customize the behavior of the d20term
-   * @private
+   * Perform any term-merging required to ensure that criticals can be calculated successfully.
+   * @protected
+   */
+  preprocessFormula() {
+    for ( let [i, term] of this.terms.entries() ) {
+      const nextTerm = this.terms[i + 1];
+      const prevTerm = this.terms[i - 1];
+
+      // Merge parenthetical terms that follow string terms to build a dice term (to allow criticals)
+      if ( (term instanceof ParentheticalTerm) && (prevTerm instanceof StringTerm)
+        && prevTerm.term.match(/^[0-9]*d$/)) {
+        if ( term.isDeterministic ) {
+          let newFormula = `${prevTerm.term}${term.evaluate().total}`;
+          let deleteCount = 2;
+
+          // Merge in any roll modifiers
+          if ( nextTerm instanceof StringTerm ) {
+            newFormula += nextTerm.term;
+            deleteCount += 1;
+          }
+
+          const newTerm = (new Roll(newFormula)).terms[0];
+          this.terms.splice(i - 1, deleteCount, newTerm);
+          term = newTerm;
+        }
+      }
+
+      // Merge any parenthetical terms followed by string terms
+      else if ( (term instanceof ParentheticalTerm || term instanceof MathTerm) && (nextTerm instanceof StringTerm)
+        && nextTerm.term.match(/^d[0-9]*$/)) {
+        if ( term.isDeterministic ) {
+          const newFormula = `${term.evaluate().total}${nextTerm.term}`;
+          const newTerm = (new Roll(newFormula)).terms[0];
+          this.terms.splice(i, 2, newTerm);
+          term = newTerm;
+        }
+      }
+    }
+
+    // Re-compile the underlying formula
+    this._formula = this.constructor.getFormula(this.terms);
+
+    // Mark configuration as complete
+    this.options.preprocessed = true;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Apply optional modifiers which customize the behavior of the d20term.
+   * @protected
    */
   configureDamage() {
     let flatBonus = 0;
     for ( let [i, term] of this.terms.entries() ) {
-
       // Multiply dice terms
       if ( term instanceof DiceTerm ) {
         term.options.baseNumber = term.options.baseNumber ?? term.number; // Reset back
@@ -77,7 +126,6 @@ export default class DamageRoll extends Roll {
           term.alter(cm, cb);
           term.options.critical = true;
         }
-
       }
 
       // Multiply numeric terms
