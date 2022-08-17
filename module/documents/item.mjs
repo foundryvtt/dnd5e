@@ -1691,7 +1691,6 @@ export default class Item5e extends Item {
     // Add minimum roll
     const minimum = getProperty(rollData, `abilities.${abl}.bonuses.checkMinimum`);
 
-
     // Compose the roll data
     const rollConfig = foundry.utils.mergeObject({
       parts: parts,
