@@ -1058,7 +1058,7 @@ export default class ActorSheet5e extends ActorSheet {
     if ( !item ) return;
 
     // If item has advancement, handle it separately
-    if ( item.hasAdvancement && !game.settings.get("dnd5e", "disableAdvancements") ) {
+    if ( !game.settings.get("dnd5e", "disableAdvancements") ) {
       const manager = AdvancementManager.forDeletedItem(this.actor, item.id);
       if ( manager.steps.length ) {
         if ( ["class", "subclass"].includes(item.type) ) {
