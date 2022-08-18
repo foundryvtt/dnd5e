@@ -9,6 +9,8 @@
  * @param {number} [options.fumble]              The value of d20 result which represents a critical failure
  * @param {(number)} [options.targetValue]       Assign a target value against which the result of this roll should be
  *                                               compared
+ * @param {number} [options.minimum]             The minimum result of the roll
+ * 
  * @param {boolean} [options.elvenAccuracy=false]      Allow Elven Accuracy to modify this roll?
  * @param {boolean} [options.halflingLucky=false]      Allow Halfling Luck to modify this roll?
  * @param {boolean} [options.reliableTalent=false]     Allow Reliable Talent to modify this roll?
