@@ -621,16 +621,11 @@ export default class Item5e extends Item {
 
   /**
    * Retrieve an item's minimum attack roll.
-   *
    * @returns {number|null}  The minimum roll value that should be added to the attack roll formula.
    */
-   getMinimumRoll() {
-    const itemData = this.data.data;
-    const actorFlags = this.actor.data.flags.dnd5e || {};
-    if ( !this.hasAttack || !itemData ) return;
-
-    // Return the minimum from the flag
-    return actorFlags?.minimumAttackRoll;
+  getMinimumRoll() {
+    if ( !this.hasAttack ) return null;
+    return this.actor.flags.dnd5e?.minimumAttackRoll ?? null;
   }
 
   /* -------------------------------------------- */
@@ -1311,7 +1306,7 @@ export default class Item5e extends Item {
       flavor: title,
       elvenAccuracy,
       halflingLucky: flags.halflingLucky,
-      minimum: minimum,
+      minimum,
       dialogOptions: {
         width: 400,
         top: options.event ? options.event.clientY - 80 : null,
@@ -1706,7 +1701,7 @@ export default class Item5e extends Item {
       chooseModifier: true,
       halflingLucky: this.actor.getFlag("dnd5e", "halflingLucky" ),
       reliableTalent: (this.system.proficient >= 1) && this.actor.getFlag("dnd5e", "reliableTalent"),
-      minimum: minimum,
+      minimum,
       messageData: {
         speaker: options.speaker || ChatMessage.getSpeaker({actor: this.actor}),
         "flags.dnd5e.roll": {type: "tool", itemId: this.id }
