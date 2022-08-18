@@ -1311,7 +1311,7 @@ export default class Item5e extends Item {
       flavor: title,
       elvenAccuracy,
       halflingLucky: flags.halflingLucky,
-      minimum: minimum,
+      minimum,
       dialogOptions: {
         width: 400,
         top: options.event ? options.event.clientY - 80 : null,
@@ -1706,7 +1706,7 @@ export default class Item5e extends Item {
       chooseModifier: true,
       halflingLucky: this.actor.getFlag("dnd5e", "halflingLucky" ),
       reliableTalent: (this.system.proficient >= 1) && this.actor.getFlag("dnd5e", "reliableTalent"),
-      minimum: minimum,
+      minimum,
       messageData: {
         speaker: options.speaker || ChatMessage.getSpeaker({actor: this.actor}),
         "flags.dnd5e.roll": {type: "tool", itemId: this.id }
