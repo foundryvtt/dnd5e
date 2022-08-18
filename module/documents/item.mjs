@@ -1311,6 +1311,7 @@ export default class Item5e extends Item {
       flavor: title,
       elvenAccuracy,
       halflingLucky: flags.halflingLucky,
+      minimum: minimum,
       dialogOptions: {
         width: 400,
         top: options.event ? options.event.clientY - 80 : null,
