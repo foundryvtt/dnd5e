@@ -113,7 +113,7 @@ export function addChatMessageContextOptions(html, options) {
  */
 function applyChatCardDamage(li, multiplier) {
   const message = game.messages.get(li.data("messageId"));
-  const roll = message.roll;
+  const roll = message.rolls[0];
   return Promise.all(canvas.tokens.controlled.map(t => {
     const a = t.actor;
     return a.applyDamage(roll.total, multiplier);
