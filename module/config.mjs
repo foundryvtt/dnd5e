@@ -459,6 +459,7 @@ preLocalize("equipmentTypes", { sort: true });
 DND5E.vehicleTypes = {
   air: "DND5E.VehicleTypeAir",
   land: "DND5E.VehicleTypeLand",
+  space: "DND5E.VehicleTypeSpace",
   water: "DND5E.VehicleTypeWater"
 };
 preLocalize("vehicleTypes", { sort: true });
