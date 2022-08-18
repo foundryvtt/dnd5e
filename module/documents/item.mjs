@@ -621,16 +621,11 @@ export default class Item5e extends Item {
 
   /**
    * Retrieve an item's minimum attack roll.
-   *
    * @returns {number|null}  The minimum roll value that should be added to the attack roll formula.
    */
-   getMinimumRoll() {
-    const itemData = this.data.data;
-    const actorFlags = this.actor.data.flags.dnd5e || {};
-    if ( !this.hasAttack || !itemData ) return;
-
-    // Return the minimum from the flag
-    return actorFlags?.minimumAttackRoll;
+  getMinimumRoll() {
+    if ( !this.hasAttack ) return null;
+    return this.actor.flags.dnd5e?.minimumAttackRoll ?? null;
   }
 
   /* -------------------------------------------- */
