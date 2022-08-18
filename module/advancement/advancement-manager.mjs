@@ -282,7 +282,7 @@ export default class AdvancementManager extends Application {
     // Ensure the class level ends up at the appropriate point
     this.steps.push({
       type: "forward", automatic: true,
-      class: {item: classItem, level: classItem.data.data.levels += levelDelta}
+      class: {item: classItem, level: classItem.system.levels += levelDelta}
     });
 
     return this;
