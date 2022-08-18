@@ -16,6 +16,9 @@
 
             <ul class="summary flexrow">
                 <li>
+                    {{lookup config.toolTypes system.toolType}}
+                </li>
+                <li>
                     <select name="system.rarity">
                         {{selectOptions config.itemRarity selected=system.rarity blank=""}}
                     </select>
