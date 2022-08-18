@@ -1,6 +1,7 @@
 import Datastore from "nedb";
 import fs from "fs";
 import gulp from "gulp";
+import logger from "fancy-log";
 import mergeStream from "merge-stream";
 import path from "path";
 import through2 from "through2";
@@ -108,11 +109,12 @@ function cleanString(str) {
 function cleanPacks() {
   const packName = parsedArgs.pack;
   const entryName = parsedArgs.name?.toLowerCase();
-  const folders = fs.readdirSync(PACK_SRC, { withFileTypes: true }).filter((file) =>
+  const folders = fs.readdirSync(PACK_SRC, { withFileTypes: true }).filter(file =>
     file.isDirectory() && ( !packName || (packName === file.name) )
   );
 
-  const packs = folders.map((folder) => {
+  const packs = folders.map(folder => {
+    logger.info(`Cleaning pack ${folder.name}`);
     return gulp.src(path.join(PACK_SRC, folder.name, "/**/*.json"))
       .pipe(through2.obj(async (file, enc, callback) => {
         const json = JSON.parse(file.contents.toString());
@@ -121,7 +123,7 @@ function cleanPacks() {
         cleanPackEntry(json);
         if ( !json._id ) json._id = await determineId(json, folder.name);
         fs.rmSync(file.path, { force: true });
-        fs.writeFileSync(file.path, JSON.stringify(json, null, 2) + "\n", { mode: 0o664 });
+        fs.writeFileSync(file.path, `${JSON.stringify(json, null, 2)}\n`, { mode: 0o664 });
         callback(null, file);
       }));
   });
@@ -153,6 +155,7 @@ function compilePacks() {
     fs.rmSync(filePath, { force: true });
     const db = fs.createWriteStream(filePath, { flags: "a", mode: 0o664 });
     const data = [];
+    logger.info(`Compiling pack ${folder.name}`);
     return gulp.src(path.join(PACK_SRC, folder.name, "/**/*.json"))
       .pipe(through2.obj((file, enc, callback) => {
         const json = JSON.parse(file.contents.toString());
@@ -161,7 +164,7 @@ function compilePacks() {
         callback(null, file);
       }, callback => {
         data.sort((lhs, rhs) => lhs._id > rhs._id ? 1 : -1);
-        data.forEach(entry => db.write(JSON.stringify(entry) + "\n"));
+        data.forEach(entry => db.write(`${JSON.stringify(entry)}\n`));
         callback();
       }));
   });
@@ -198,7 +201,7 @@ function extractPacks() {
           const name = entry.name.toLowerCase();
           if ( entryName && (entryName !== name) ) return;
           cleanPackEntry(entry);
-          const output = JSON.stringify(entry, null, 2) + "\n";
+          const output = `${JSON.stringify(entry, null, 2)}\n`;
           const outputName = name.replace("'", "").replace(/[^a-z0-9]+/gi, " ").trim().replace(/\s+|-{2,}/g, "-");
           const subfolder = path.join(folder, _getSubfolderName(entry, filename));
           if ( !fs.existsSync(subfolder) ) fs.mkdirSync(subfolder, { recursive: true, mode: 0o775 });
@@ -206,6 +209,7 @@ function extractPacks() {
         });
       });
 
+      logger.info(`Extracting pack ${filename}`);
       callback(null, file);
     }));
 
