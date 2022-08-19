@@ -87,7 +87,7 @@ export function addChatMessageContextOptions(html, options) {
     },
     {
       name: game.i18n.localize("DND5E.ChatContextTempHP"),
-      icon: `<i class="fas fa-user-clock"></i>`,
+      icon: '<i class="fas fa-user-clock"></i>',
       condition: canApply,
       callback: li => applyChatCardTemp(li)
     },
@@ -126,17 +126,19 @@ function applyChatCardDamage(li, multiplier) {
   }));
 }
 
+/* -------------------------------------------- */
+ 
 /**
- * Apply rolled dice as tempoary hit points to the controled token(s).
- * @param {HTMLElement} li The chat entry which contains the roll data
+ * Apply rolled dice as temporary hit points to the controlled token(s).
+ * @param {HTMLElement} li  The chat entry which contains the roll data
  * @returns {Promise}
  */
 function applyChatCardTemp(li) {
   const message = game.messages.get(li.data("messageId"));
-  const roll = message.roll;
+  const roll = message.rolls[0];
   return Promise.all(canvas.tokens.controlled.map(t => {
     const a = t.actor;
-    return a.applyTempHp(roll.total);
+    return a.applyTempHP(roll.total);
   }));
 }
 
