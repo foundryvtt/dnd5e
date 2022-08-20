@@ -89,6 +89,7 @@ export async function d20Roll({
       defaultRollMode: defaultRollMode,
       defaultAction: advantageMode,
       defaultAbility: data?.item?.ability || data?.defaultAbility,
+      skillId: messageData["flags.dnd5e.roll"]?.skillId,
       template
     }, dialogOptions);
     if ( configured === null ) return null;
