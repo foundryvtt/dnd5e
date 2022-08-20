@@ -1,0 +1,79 @@
+{
+    "name": "Carpet of flying",
+    "img": "icons/equipment/back/cloak-hooded-pink.webp",
+    "description": "",
+    "results": [
+      {
+        "_id": "MH6rmk7jo1LOXmIV",
+        "type": 0,
+        "text": "Size :3 ft. x 5 ft.  Capacity:200lb.  Flying speed:80 feet",
+        "weight": 1,
+        "range": [
+          1,
+          20
+        ],
+        "drawn": false,
+        "flags": {},
+        "img": "icons/svg/d20-black.svg",
+        "collection": null,
+        "resultId": null,
+        "rangeL": 1,
+        "rangeH": 20
+      },
+      {
+        "_id": "Ts8mwkkkmDqMHHq4",
+        "type": 0,
+        "text": "Size :4 ft. x 6 ft.  Capacity:400lb.  Flying speed:60 feet",
+        "collection": null,
+        "weight": 1,
+        "range": [
+          21,
+          55
+        ],
+        "drawn": false,
+        "flags": {},
+        "img": "icons/svg/d20-black.svg",
+        "resultId": null,
+        "rangeL": 21,
+        "rangeH": 55
+      },
+      {
+        "_id": "1Kb0OH5nLxiKUql5",
+        "type": 0,
+        "text": "Size :5 ft. x 7 ft.  Capacity:600lb.  Flying speed:40 feet",
+        "collection": null,
+        "weight": 1,
+        "range": [
+          56,
+          80
+        ],
+        "drawn": false,
+        "flags": {},
+        "img": "icons/svg/d20-black.svg",
+        "resultId": null,
+        "rangeL": 56,
+        "rangeH": 80
+      },
+      {
+        "_id": "XhfEhS1lK63UfU4g",
+        "type": 0,
+        "text": "Size :6 ft. x 9 ft.  Capacity:800lb.  Flying speed:30 feet",
+        "collection": null,
+        "weight": 1,
+        "range": [
+          81,
+          100
+        ],
+        "drawn": false,
+        "flags": {},
+        "img": "icons/svg/d20-black.svg",
+        "resultId": null,
+        "rangeL": 81,
+        "rangeH": 100
+      }
+    ],
+    "formula": "1d100",
+    "replacement": true,
+    "displayRoll": true,
+    "flags": {}
+  }
