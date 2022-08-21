@@ -105,9 +105,15 @@ export default class JournalClassSummary5ePageSheet extends JournalPageSheet {
    * @returns {object}     Prepared table.
    */
   async _getTable(item) {
+    const spellProgression = await this._getSpellProgression(item);
     const scaleValues = (item.advancement.byType.ScaleValue ?? []);
-    const headers = ["Level", "Proficiency Bonus", "Features"];
+    const headers = [
+      game.i18n.localize("DND5E.Level"),
+      game.i18n.localize("DND5E.ProficiencyBonus"),
+      game.i18n.localize("DND5E.Features")
+    ];
     headers.push(...scaleValues.map(a => a.title));
+    if ( spellProgression ) headers.push(...spellProgression.headers);
 
     const cols = [
       { class: "level", span: 1 },
@@ -115,6 +121,7 @@ export default class JournalClassSummary5ePageSheet extends JournalPageSheet {
       { class: "features", span: 1 }
     ];
     if ( scaleValues.length ) cols.push({ class: "scale", span: scaleValues.length });
+    if ( spellProgression ) cols.push(...spellProgression.cols);
 
     const makeLink = uuid => TextEditor._createContentLink(["", "UUID", uuid]).outerHTML;
 
@@ -137,10 +144,76 @@ export default class JournalClassSummary5ePageSheet extends JournalPageSheet {
         { class: "features", content: features.join(", ") }
       ];
       scaleValues.forEach(s => cells.push({ class: "scale", content: s.formatValue(level) }));
+      const spellCells = spellProgression?.rows[rows.length];
+      if ( spellCells ) cells.push(...spellCells);
       rows.push(cells);
     }
 
     return { headers, cols, rows };
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Build out the spell progression data.
+   * @param {Item5e} item  Class item belonging to this journal.
+   */
+  async _getSpellProgression(item) {
+    const spellcasting = item.spellcasting;
+    if ( !spellcasting || (spellcasting.progression === "none") ) return null;
+
+    const actor = await Actor.implementation.create({
+      name: "tmp", type: "character", items: [item.toObject()]
+    }, {temporary: true});
+
+    const table = { rows: [] };
+
+    // Pact Progression
+    if ( spellcasting.progression === "pact" ) {
+      table.headers = ["Spell Slots", "Slot Level"]; // TODO: Localize these headers
+      table.cols = [{ class: "spellcasting", span: 2 }];
+
+      // Loop through each level, gathering "Spell Slots" & "Slot Level" for each one
+      for ( const level of Array.fromRange(CONFIG.DND5E.maxLevel, 1) ) {
+        actor.items.get(item.id).updateSource({"system.levels": level});
+        actor.reset();
+        table.rows.push([
+          { class: "spell-slots", content: `${actor.system.spells.pact.max}` },
+          { class: "slot-level", content: actor.system.spells.pact.level.ordinalString() }
+        ]);
+      }
+    }
+
+    // Leveled Progression
+    else {
+      // Get the max spell slot size based on progression
+      actor.items.get(item.id).updateSource({"system.levels": CONFIG.DND5E.maxLevel});
+      actor.reset();
+      const largestSlot = Object.entries(actor.system.spells).reduce((slot, [key, data]) => {
+        if ( data.max === 0 ) return slot;
+        const level = parseInt(key.replace("spell", ""));
+        if ( !Number.isNaN(level) && level > slot ) return level;
+        return slot;
+      }, -1);
+
+      // Prepare headers & columns
+      table.headers = Array.fromRange(largestSlot, 1).map(spellLevel => spellLevel.ordinalString());
+      table.cols = [{ class: "spellcasting", span: table.headers.length }];
+
+      // Loop through each level, gathering max slots for each level
+      for ( const level of Array.fromRange(CONFIG.DND5E.maxLevel, 1) ) {
+        actor.items.get(item.id).updateSource({"system.levels": level});
+        actor.reset();
+        const cells = [];
+        for ( const spellLevel of Array.fromRange(largestSlot, 1) ) {
+          const max = actor.system.spells[`spell${spellLevel}`]?.max;
+          cells.push({ class: "spell-slots", content: max || "&mdash;" });
+        }
+        table.rows.push(cells);
+      }
+    }
+
+    return table;
   }
 
   /* -------------------------------------------- */
