@@ -1,113 +1,114 @@
 {
-    "name": "Necklace of prayer beads",
-    "img": "icons/equipment/neck/necklace-runed-white-red.webp",
-    "description": "",
-    "results": [
-      {
-        "_id": "88TtQ5IXa8BmgGqh",
-        "type": 0,
-        "text": "Bead of:Blessing, Spell:Bless",
-        "weight": 1,
-        "range": [
-          1,
-          6
-        ],
-        "drawn": false,
-        "flags": {},
-        "img": "icons/svg/d20-black.svg",
-        "collection": null,
-        "resultId": null,
-        "rangeL": 1,
-        "rangeH": 6
-      },
-      {
-        "_id": "EAOkGnzXCNPN6c2Y",
-        "type": 0,
-        "text": "Bead of:Curing, Spell:Cure wounds(2nd level) or lesser restoration",
-        "collection": null,
-        "weight": 1,
-        "range": [
-          7,
-          12
-        ],
-        "drawn": false,
-        "flags": {},
-        "img": "icons/svg/d20-black.svg",
-        "resultId": null,
-        "rangeL": 7,
-        "rangeH": 12
-      },
-      {
-        "_id": "1tz5xaJdzf7mx9ft",
-        "type": 0,
-        "text": "Bead of:Favor, Spell:Greater restoration",
-        "collection": null,
-        "weight": 1,
-        "range": [
-          13,
-          16
-        ],
-        "drawn": false,
-        "flags": {},
-        "img": "icons/svg/d20-black.svg",
-        "resultId": null,
-        "rangeL": 13,
-        "rangeH": 16
-      },
-      {
-        "_id": "zzYXJG6Uza8mmuGY",
-        "type": 0,
-        "text": "Bead of:Smiting, Spell:Branding smite",
-        "collection": null,
-        "weight": 1,
-        "range": [
-          17,
-          18
-        ],
-        "drawn": false,
-        "flags": {},
-        "img": "icons/svg/d20-black.svg",
-        "resultId": null,
-        "rangeL": 17,
-        "rangeH": 18
-      },
-      {
-        "_id": "8fMuvH1Bhn7dlZTB",
-        "type": 0,
-        "text": "Bead of:Summons, Spell:Planar ally",
-        "collection": null,
-        "weight": 1,
-        "range": [
-          19,
-          19
-        ],
-        "drawn": false,
-        "flags": {},
-        "img": "icons/svg/d20-black.svg",
-        "resultId": null,
-        "rangeL": 19,
-        "rangeH": 19
-      },
-      {
-        "_id": "hc3ODy8iEPUuq8Ub",
-        "type": 0,
-        "text": "Bead of:Wind walking, Spell:Wind walk",
-        "collection": null,
-        "weight": 1,
-        "range": [
-          20,
-          20
-        ],
-        "drawn": false,
-        "flags": {},
-        "img": "icons/svg/d20-black.svg",
-        "resultId": null,
-        "rangeL": 20,
-        "rangeH": 20
-      }
-    ],
-    "formula": "1d20",
-    "replacement": true,
-    "displayRoll": true,
-    "flags": {}
-  }
+  "name": "Necklace of prayer beads",
+  "img": "icons/equipment/neck/necklace-runed-white-red.webp",
+  "description": "",
+  "results": [
+    {
+      "_id": "88TtQ5IXa8BmgGqh",
+      "type": 0,
+      "text": "Bead of:Blessing, Spell:Bless",
+      "weight": 1,
+      "range": [
+        1,
+        6
+      ],
+      "drawn": false,
+      "flags": {},
+      "img": "icons/svg/d20-black.svg",
+      "collection": null,
+      "resultId": null,
+      "rangeL": 1,
+      "rangeH": 6
+    },
+    {
+      "_id": "EAOkGnzXCNPN6c2Y",
+      "type": 0,
+      "text": "Bead of:Curing, Spell:Cure wounds(2nd level) or lesser restoration",
+      "collection": null,
+      "weight": 1,
+      "range": [
+        7,
+        12
+      ],
+      "drawn": false,
+      "flags": {},
+      "img": "icons/svg/d20-black.svg",
+      "resultId": null,
+      "rangeL": 7,
+      "rangeH": 12
+    },
+    {
+      "_id": "1tz5xaJdzf7mx9ft",
+      "type": 0,
+      "text": "Bead of:Favor, Spell:Greater restoration",
+      "collection": null,
+      "weight": 1,
+      "range": [
+        13,
+        16
+      ],
+      "drawn": false,
+      "flags": {},
+      "img": "icons/svg/d20-black.svg",
+      "resultId": null,
+      "rangeL": 13,
+      "rangeH": 16
+    },
+    {
+      "_id": "zzYXJG6Uza8mmuGY",
+      "type": 0,
+      "text": "Bead of:Smiting, Spell:Branding smite",
+      "collection": null,
+      "weight": 1,
+      "range": [
+        17,
+        18
+      ],
+      "drawn": false,
+      "flags": {},
+      "img": "icons/svg/d20-black.svg",
+      "resultId": null,
+      "rangeL": 17,
+      "rangeH": 18
+    },
+    {
+      "_id": "8fMuvH1Bhn7dlZTB",
+      "type": 0,
+      "text": "Bead of:Summons, Spell:Planar ally",
+      "collection": null,
+      "weight": 1,
+      "range": [
+        19,
+        19
+      ],
+      "drawn": false,
+      "flags": {},
+      "img": "icons/svg/d20-black.svg",
+      "resultId": null,
+      "rangeL": 19,
+      "rangeH": 19
+    },
+    {
+      "_id": "hc3ODy8iEPUuq8Ub",
+      "type": 0,
+      "text": "Bead of:Wind walking, Spell:Wind walk",
+      "collection": null,
+      "weight": 1,
+      "range": [
+        20,
+        20
+      ],
+      "drawn": false,
+      "flags": {},
+      "img": "icons/svg/d20-black.svg",
+      "resultId": null,
+      "rangeL": 20,
+      "rangeH": 20
+    }
+  ],
+  "formula": "1d20",
+  "replacement": true,
+  "displayRoll": true,
+  "flags": {},
+  "_id": "k04aalP3jahUyXqa"
+}

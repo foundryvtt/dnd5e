@@ -1,164 +1,165 @@
 {
-    "name": "Candle of invocation",
-    "img": "icons/sundries/lights/candle-unlit-grey.webp",
-    "description": "",
-    "results": [
-      {
-        "_id": "tR6kMSXklIpyutni",
-        "type": 0,
-        "text": "Chaotic evil",
-        "weight": 1,
-        "range": [
-          1,
-          2
-        ],
-        "drawn": false,
-        "flags": {},
-        "img": "icons/svg/d20-black.svg",
-        "collection": null,
-        "resultId": null,
-        "rangeL": 1,
-        "rangeH": 2
-      },
-      {
-        "_id": "tqA81vyzz8w8nNA7",
-        "type": 0,
-        "text": "Chaotic neutral",
-        "collection": null,
-        "weight": 1,
-        "range": [
-          3,
-          4
-        ],
-        "drawn": false,
-        "flags": {},
-        "img": "icons/svg/d20-black.svg",
-        "resultId": null,
-        "rangeL": 3,
-        "rangeH": 4
-      },
-      {
-        "_id": "Ace7EbMVXVthgNkk",
-        "type": 0,
-        "text": "Chaotic good",
-        "collection": null,
-        "weight": 1,
-        "range": [
-          5,
-          7
-        ],
-        "drawn": false,
-        "flags": {},
-        "img": "icons/svg/d20-black.svg",
-        "resultId": null,
-        "rangeL": 5,
-        "rangeH": 7
-      },
-      {
-        "_id": "kbI21TuImG68T3Vw",
-        "type": 0,
-        "text": "Neutral evil",
-        "collection": null,
-        "weight": 1,
-        "range": [
-          8,
-          9
-        ],
-        "drawn": false,
-        "flags": {},
-        "img": "icons/svg/d20-black.svg",
-        "resultId": null,
-        "rangeL": 8,
-        "rangeH": 9
-      },
-      {
-        "_id": "CIEkIVi5KF1KId3s",
-        "type": 0,
-        "text": "Neutral",
-        "collection": null,
-        "weight": 1,
-        "range": [
-          10,
-          11
-        ],
-        "drawn": false,
-        "flags": {},
-        "img": "icons/svg/d20-black.svg",
-        "resultId": null,
-        "rangeL": 10,
-        "rangeH": 11
-      },
-      {
-        "_id": "N2keaEIHFJdpumuM",
-        "type": 0,
-        "text": "Neutral good",
-        "collection": null,
-        "weight": 1,
-        "range": [
-          12,
-          13
-        ],
-        "drawn": false,
-        "flags": {},
-        "img": "icons/svg/d20-black.svg",
-        "resultId": null,
-        "rangeL": 12,
-        "rangeH": 13
-      },
-      {
-        "_id": "SyEsYFjfqdCQ7alX",
-        "type": 0,
-        "text": "Lawful evil",
-        "collection": null,
-        "weight": 1,
-        "range": [
-          14,
-          15
-        ],
-        "drawn": false,
-        "flags": {},
-        "img": "icons/svg/d20-black.svg",
-        "resultId": null,
-        "rangeL": 14,
-        "rangeH": 15
-      },
-      {
-        "_id": "ubaHFbfrRgyCTd9C",
-        "type": 0,
-        "text": "Lawful neutral",
-        "collection": null,
-        "weight": 1,
-        "range": [
-          16,
-          17
-        ],
-        "drawn": false,
-        "flags": {},
-        "img": "icons/svg/d20-black.svg",
-        "resultId": null,
-        "rangeL": 16,
-        "rangeH": 17
-      },
-      {
-        "_id": "OErDQLjYEZY2O6mD",
-        "type": 0,
-        "text": "Lawful good",
-        "collection": null,
-        "weight": 1,
-        "range": [
-          18,
-          20
-        ],
-        "drawn": false,
-        "flags": {},
-        "img": "icons/svg/d20-black.svg",
-        "resultId": null,
-        "rangeL": 18,
-        "rangeH": 20
-      }
-    ],
-    "formula": "1d20",
-    "replacement": true,
-    "displayRoll": true,
-    "flags": {}
-  }
+  "name": "Candle of invocation",
+  "img": "icons/sundries/lights/candle-unlit-grey.webp",
+  "description": "",
+  "results": [
+    {
+      "_id": "tR6kMSXklIpyutni",
+      "type": 0,
+      "text": "Chaotic evil",
+      "weight": 1,
+      "range": [
+        1,
+        2
+      ],
+      "drawn": false,
+      "flags": {},
+      "img": "icons/svg/d20-black.svg",
+      "collection": null,
+      "resultId": null,
+      "rangeL": 1,
+      "rangeH": 2
+    },
+    {
+      "_id": "tqA81vyzz8w8nNA7",
+      "type": 0,
+      "text": "Chaotic neutral",
+      "collection": null,
+      "weight": 1,
+      "range": [
+        3,
+        4
+      ],
+      "drawn": false,
+      "flags": {},
+      "img": "icons/svg/d20-black.svg",
+      "resultId": null,
+      "rangeL": 3,
+      "rangeH": 4
+    },
+    {
+      "_id": "Ace7EbMVXVthgNkk",
+      "type": 0,
+      "text": "Chaotic good",
+      "collection": null,
+      "weight": 1,
+      "range": [
+        5,
+        7
+      ],
+      "drawn": false,
+      "flags": {},
+      "img": "icons/svg/d20-black.svg",
+      "resultId": null,
+      "rangeL": 5,
+      "rangeH": 7
+    },
+    {
+      "_id": "kbI21TuImG68T3Vw",
+      "type": 0,
+      "text": "Neutral evil",
+      "collection": null,
+      "weight": 1,
+      "range": [
+        8,
+        9
+      ],
+      "drawn": false,
+      "flags": {},
+      "img": "icons/svg/d20-black.svg",
+      "resultId": null,
+      "rangeL": 8,
+      "rangeH": 9
+    },
+    {
+      "_id": "CIEkIVi5KF1KId3s",
+      "type": 0,
+      "text": "Neutral",
+      "collection": null,
+      "weight": 1,
+      "range": [
+        10,
+        11
+      ],
+      "drawn": false,
+      "flags": {},
+      "img": "icons/svg/d20-black.svg",
+      "resultId": null,
+      "rangeL": 10,
+      "rangeH": 11
+    },
+    {
+      "_id": "N2keaEIHFJdpumuM",
+      "type": 0,
+      "text": "Neutral good",
+      "collection": null,
+      "weight": 1,
+      "range": [
+        12,
+        13
+      ],
+      "drawn": false,
+      "flags": {},
+      "img": "icons/svg/d20-black.svg",
+      "resultId": null,
+      "rangeL": 12,
+      "rangeH": 13
+    },
+    {
+      "_id": "SyEsYFjfqdCQ7alX",
+      "type": 0,
+      "text": "Lawful evil",
+      "collection": null,
+      "weight": 1,
+      "range": [
+        14,
+        15
+      ],
+      "drawn": false,
+      "flags": {},
+      "img": "icons/svg/d20-black.svg",
+      "resultId": null,
+      "rangeL": 14,
+      "rangeH": 15
+    },
+    {
+      "_id": "ubaHFbfrRgyCTd9C",
+      "type": 0,
+      "text": "Lawful neutral",
+      "collection": null,
+      "weight": 1,
+      "range": [
+        16,
+        17
+      ],
+      "drawn": false,
+      "flags": {},
+      "img": "icons/svg/d20-black.svg",
+      "resultId": null,
+      "rangeL": 16,
+      "rangeH": 17
+    },
+    {
+      "_id": "OErDQLjYEZY2O6mD",
+      "type": 0,
+      "text": "Lawful good",
+      "collection": null,
+      "weight": 1,
+      "range": [
+        18,
+        20
+      ],
+      "drawn": false,
+      "flags": {},
+      "img": "icons/svg/d20-black.svg",
+      "resultId": null,
+      "rangeL": 18,
+      "rangeH": 20
+    }
+  ],
+  "formula": "1d20",
+  "replacement": true,
+  "displayRoll": true,
+  "flags": {},
+  "_id": "PtvmM1bija3Ft3Zm"
+}

@@ -1,79 +1,80 @@
 {
-    "name": "Confusion",
-    "img": "systems/dnd5e/icons/spells/wind-magenta-3.jpg",
-    "description": "",
-    "results": [
-      {
-        "_id": "qDK8ZedG4q2xWTeD",
-        "type": 0,
-        "text": "The creature uses all its movement to move in a random direction. To determine the direction, roll a d8 and assign a direction to each die face. The creature doesn't take an action this turn.",
-        "weight": 1,
-        "range": [
-          1,
-          1
-        ],
-        "drawn": false,
-        "flags": {},
-        "img": "icons/svg/d20-black.svg",
-        "collection": null,
-        "resultId": null,
-        "rangeL": 1,
-        "rangeH": 1
-      },
-      {
-        "_id": "N7boeXBI5W5hiElm",
-        "type": 0,
-        "text": "The creature doesn't move or take actions this turn.",
-        "collection": null,
-        "weight": 1,
-        "range": [
-          2,
-          6
-        ],
-        "drawn": false,
-        "flags": {},
-        "img": "icons/svg/d20-black.svg",
-        "resultId": null,
-        "rangeL": 2,
-        "rangeH": 6
-      },
-      {
-        "_id": "JP3Fm0BwnuHm4Yzr",
-        "type": 0,
-        "text": "The creature uses its action to make a melee attack against a randomly determined creature within its reach. If there is no creature within its reach, the creature does nothing this turn.",
-        "collection": null,
-        "weight": 1,
-        "range": [
-          7,
-          8
-        ],
-        "drawn": false,
-        "flags": {},
-        "img": "icons/svg/d20-black.svg",
-        "resultId": null,
-        "rangeL": 7,
-        "rangeH": 8
-      },
-      {
-        "_id": "gvHMuGy8YnJb6h16",
-        "type": 0,
-        "text": "The creature can act and move normally.",
-        "collection": null,
-        "weight": 1,
-        "range": [
-          9,
-          10
-        ],
-        "drawn": false,
-        "flags": {},
-        "img": "icons/svg/d20-black.svg",
-        "resultId": null,
-        "rangeL": 9,
-        "rangeH": 10
-      }
-    ],
-    "formula": "1d10",
-    "replacement": true,
-    "displayRoll": true,
-    "flags": {}
-  }
+  "name": "Confusion",
+  "img": "systems/dnd5e/icons/spells/wind-magenta-3.jpg",
+  "description": "",
+  "results": [
+    {
+      "_id": "qDK8ZedG4q2xWTeD",
+      "type": 0,
+      "text": "The creature uses all its movement to move in a random direction. To determine the direction, roll a d8 and assign a direction to each die face. The creature doesn't take an action this turn.",
+      "weight": 1,
+      "range": [
+        1,
+        1
+      ],
+      "drawn": false,
+      "flags": {},
+      "img": "icons/svg/d20-black.svg",
+      "collection": null,
+      "resultId": null,
+      "rangeL": 1,
+      "rangeH": 1
+    },
+    {
+      "_id": "N7boeXBI5W5hiElm",
+      "type": 0,
+      "text": "The creature doesn't move or take actions this turn.",
+      "collection": null,
+      "weight": 1,
+      "range": [
+        2,
+        6
+      ],
+      "drawn": false,
+      "flags": {},
+      "img": "icons/svg/d20-black.svg",
+      "resultId": null,
+      "rangeL": 2,
+      "rangeH": 6
+    },
+    {
+      "_id": "JP3Fm0BwnuHm4Yzr",
+      "type": 0,
+      "text": "The creature uses its action to make a melee attack against a randomly determined creature within its reach. If there is no creature within its reach, the creature does nothing this turn.",
+      "collection": null,
+      "weight": 1,
+      "range": [
+        7,
+        8
+      ],
+      "drawn": false,
+      "flags": {},
+      "img": "icons/svg/d20-black.svg",
+      "resultId": null,
+      "rangeL": 7,
+      "rangeH": 8
+    },
+    {
+      "_id": "gvHMuGy8YnJb6h16",
+      "type": 0,
+      "text": "The creature can act and move normally.",
+      "collection": null,
+      "weight": 1,
+      "range": [
+        9,
+        10
+      ],
+      "drawn": false,
+      "flags": {},
+      "img": "icons/svg/d20-black.svg",
+      "resultId": null,
+      "rangeL": 9,
+      "rangeH": 10
+    }
+  ],
+  "formula": "1d10",
+  "replacement": true,
+  "displayRoll": true,
+  "flags": {},
+  "_id": "ikwSRYPjfOfgARi7"
+}
