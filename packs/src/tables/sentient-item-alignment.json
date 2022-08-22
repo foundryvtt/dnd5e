@@ -1,0 +1,164 @@
+{
+    "name": "Sentient item alignment",
+    "img": "icons/weapons/swords/sword-guard-flanged-purple.webp",
+    "description": "",
+    "results": [
+      {
+        "_id": "aIJgQ0JiswbLkAAJ",
+        "type": 0,
+        "text": "Lawful good",
+        "weight": 1,
+        "range": [
+          1,
+          15
+        ],
+        "drawn": false,
+        "flags": {},
+        "img": "icons/svg/d20-black.svg",
+        "collection": null,
+        "resultId": null,
+        "rangeL": 1,
+        "rangeH": 15
+      },
+      {
+        "_id": "Ip31nYxjHsVjNUqI",
+        "type": 0,
+        "text": "Neutral good",
+        "collection": null,
+        "weight": 1,
+        "range": [
+          16,
+          35
+        ],
+        "drawn": false,
+        "flags": {},
+        "img": "icons/svg/d20-black.svg",
+        "resultId": null,
+        "rangeL": 16,
+        "rangeH": 35
+      },
+      {
+        "_id": "Gh2fx6yWSDtGCh9k",
+        "type": 0,
+        "text": "Chaotic good",
+        "collection": null,
+        "weight": 1,
+        "range": [
+          36,
+          50
+        ],
+        "drawn": false,
+        "flags": {},
+        "img": "icons/svg/d20-black.svg",
+        "resultId": null,
+        "rangeL": 36,
+        "rangeH": 50
+      },
+      {
+        "_id": "nbTjsRHImc0NMSIC",
+        "type": 0,
+        "text": "Lawful neutral",
+        "collection": null,
+        "weight": 1,
+        "range": [
+          51,
+          63
+        ],
+        "drawn": false,
+        "flags": {},
+        "img": "icons/svg/d20-black.svg",
+        "resultId": null,
+        "rangeL": 51,
+        "rangeH": 63
+      },
+      {
+        "_id": "DbfKVhNdKuakEQTJ",
+        "type": 0,
+        "text": "Neutral",
+        "collection": null,
+        "weight": 1,
+        "range": [
+          64,
+          73
+        ],
+        "drawn": false,
+        "flags": {},
+        "img": "icons/svg/d20-black.svg",
+        "resultId": null,
+        "rangeL": 64,
+        "rangeH": 73
+      },
+      {
+        "_id": "L0PRYnXMJ0NZhLen",
+        "type": 0,
+        "text": "Chaotic neutral",
+        "collection": null,
+        "weight": 1,
+        "range": [
+          74,
+          85
+        ],
+        "drawn": false,
+        "flags": {},
+        "img": "icons/svg/d20-black.svg",
+        "resultId": null,
+        "rangeL": 74,
+        "rangeH": 85
+      },
+      {
+        "_id": "q9APgeL28VUPHy7k",
+        "type": 0,
+        "text": "Lawful evil",
+        "collection": null,
+        "weight": 1,
+        "range": [
+          86,
+          89
+        ],
+        "drawn": false,
+        "flags": {},
+        "img": "icons/svg/d20-black.svg",
+        "resultId": null,
+        "rangeL": 86,
+        "rangeH": 89
+      },
+      {
+        "_id": "Y3YC8XVvc5ghd6b7",
+        "type": 0,
+        "text": "Neutral evil",
+        "collection": null,
+        "weight": 1,
+        "range": [
+          90,
+          96
+        ],
+        "drawn": false,
+        "flags": {},
+        "img": "icons/svg/d20-black.svg",
+        "resultId": null,
+        "rangeL": 90,
+        "rangeH": 96
+      },
+      {
+        "_id": "AqvVHx4dr0rORzzi",
+        "type": 0,
+        "text": "Chaotic evil",
+        "collection": null,
+        "weight": 1,
+        "range": [
+          97,
+          100
+        ],
+        "drawn": false,
+        "flags": {},
+        "img": "icons/svg/d20-black.svg",
+        "resultId": null,
+        "rangeL": 97,
+        "rangeH": 100
+      }
+    ],
+    "formula": "1d100",
+    "replacement": true,
+    "displayRoll": true,
+    "flags": {}
+  }

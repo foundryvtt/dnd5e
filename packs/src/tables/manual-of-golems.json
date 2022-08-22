@@ -1,0 +1,79 @@
+{
+    "name": "Manual of golems",
+    "img": "icons/sundries/books/book-symbol-triangle-silver-blue.webp",
+    "description": "",
+    "results": [
+      {
+        "_id": "Zi661GWAijdjH7DI",
+        "type": 0,
+        "text": "Golem:Clay ,Time:30 days ,Cost:65,000 gp",
+        "weight": 1,
+        "range": [
+          1,
+          5
+        ],
+        "drawn": false,
+        "flags": {},
+        "img": "icons/svg/d20-black.svg",
+        "collection": null,
+        "resultId": null,
+        "rangeL": 1,
+        "rangeH": 5
+      },
+      {
+        "_id": "GgMOPmVZzHiZ4sD3",
+        "type": 0,
+        "text": "Golem:Flesh ,Time:60 days ,Cost:50,000 gp",
+        "collection": null,
+        "weight": 1,
+        "range": [
+          6,
+          17
+        ],
+        "drawn": false,
+        "flags": {},
+        "img": "icons/svg/d20-black.svg",
+        "resultId": null,
+        "rangeL": 6,
+        "rangeH": 17
+      },
+      {
+        "_id": "xPxpGRt75PVDTDp6",
+        "type": 0,
+        "text": "Golem:Iron ,Time:120 days ,Cost:100,000 gp",
+        "collection": null,
+        "weight": 1,
+        "range": [
+          18,
+          18
+        ],
+        "drawn": false,
+        "flags": {},
+        "img": "icons/svg/d20-black.svg",
+        "resultId": null,
+        "rangeL": 18,
+        "rangeH": 18
+      },
+      {
+        "_id": "OdFdgj0ZvoGzsztu",
+        "type": 0,
+        "text": "Golem:Stone ,Time:90 days ,Cost:80,000 gp",
+        "collection": null,
+        "weight": 1,
+        "range": [
+          19,
+          20
+        ],
+        "drawn": false,
+        "flags": {},
+        "img": "icons/svg/d20-black.svg",
+        "resultId": null,
+        "rangeL": 19,
+        "rangeH": 20
+      }
+    ],
+    "formula": "1d20",
+    "replacement": true,
+    "displayRoll": true,
+    "flags": {}
+  }

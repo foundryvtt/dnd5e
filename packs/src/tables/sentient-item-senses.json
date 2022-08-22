@@ -1,0 +1,79 @@
+{
+    "name": "Sentient item senses",
+    "img": "icons/weapons/swords/sword-guard-flanged-purple.webp",
+    "description": "",
+    "results": [
+      {
+        "_id": "PyLtRSiJgzmA48IX",
+        "type": 0,
+        "text": "Hearing and normal vision out to 30 feet.",
+        "weight": 1,
+        "range": [
+          1,
+          1
+        ],
+        "drawn": false,
+        "flags": {},
+        "img": "icons/svg/d20-black.svg",
+        "collection": null,
+        "resultId": null,
+        "rangeL": 1,
+        "rangeH": 1
+      },
+      {
+        "_id": "u9NNZByNVugOL62Z",
+        "type": 0,
+        "text": "Hearing and normal vision out to 60 feet.",
+        "collection": null,
+        "weight": 1,
+        "range": [
+          2,
+          2
+        ],
+        "drawn": false,
+        "flags": {},
+        "img": "icons/svg/d20-black.svg",
+        "resultId": null,
+        "rangeL": 2,
+        "rangeH": 2
+      },
+      {
+        "_id": "yRazNCLDCEJhATC3",
+        "type": 0,
+        "text": "Hearing and normal vision out to 120 feet.",
+        "collection": null,
+        "weight": 1,
+        "range": [
+          3,
+          3
+        ],
+        "drawn": false,
+        "flags": {},
+        "img": "icons/svg/d20-black.svg",
+        "resultId": null,
+        "rangeL": 3,
+        "rangeH": 3
+      },
+      {
+        "_id": "CCy2pzAodQwiQ5tW",
+        "type": 0,
+        "text": "Hearing and darkvision out to 120 feet.",
+        "collection": null,
+        "weight": 1,
+        "range": [
+          4,
+          4
+        ],
+        "drawn": false,
+        "flags": {},
+        "img": "icons/svg/d20-black.svg",
+        "resultId": null,
+        "rangeL": 4,
+        "rangeH": 4
+      }
+    ],
+    "formula": "1d4",
+    "replacement": true,
+    "displayRoll": true,
+    "flags": {}
+  }
