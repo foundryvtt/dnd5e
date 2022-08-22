@@ -16,6 +16,15 @@
     "hitDiceUsed": 0,
     "advancement": [
       {
+        "_id": "399tof3pb8nqn7c1",
+        "type": "HitPoints",
+        "configuration": {},
+        "value": {},
+        "title": "",
+        "icon": "",
+        "classRestriction": ""
+      },
+      {
         "_id": "x1zumbrnbhqlrrs6",
         "type": "ItemGrant",
         "configuration": {
@@ -74,15 +83,6 @@
         "classRestriction": ""
       },
       {
-        "_id": "399tof3pb8nqn7c1",
-        "type": "HitPoints",
-        "configuration": {},
-        "value": {},
-        "title": "",
-        "icon": "",
-        "classRestriction": ""
-      },
-      {
         "_id": "0qejays9aapvinez",
         "type": "ScaleValue",
         "configuration": {
@@ -131,6 +131,32 @@
         },
         "value": {},
         "title": "Destroy Undead CR",
+        "icon": "",
+        "classRestriction": ""
+      },
+      {
+        "_id": "pxDc5jV9dJLpNTNz",
+        "type": "ScaleValue",
+        "configuration": {
+          "identifier": "cantrips-known",
+          "type": "number",
+          "distance": {
+            "units": ""
+          },
+          "scale": {
+            "1": {
+              "value": 3
+            },
+            "4": {
+              "value": 4
+            },
+            "10": {
+              "value": 5
+            }
+          }
+        },
+        "value": {},
+        "title": "Cantrips Known",
         "icon": "",
         "classRestriction": ""
       }

@@ -16,6 +16,15 @@
     "hitDiceUsed": 0,
     "advancement": [
       {
+        "_id": "dme7gayrvi7dvi4d",
+        "type": "HitPoints",
+        "configuration": {},
+        "value": {},
+        "title": "",
+        "icon": "",
+        "classRestriction": ""
+      },
+      {
         "_id": "4mocjr5953p6kxq6",
         "type": "ItemGrant",
         "configuration": {
@@ -145,11 +154,49 @@
         "classRestriction": ""
       },
       {
-        "_id": "dme7gayrvi7dvi4d",
-        "type": "HitPoints",
-        "configuration": {},
+        "_id": "T9vcuUsvNznEQOju",
+        "type": "ScaleValue",
+        "configuration": {
+          "identifier": "spells-known",
+          "type": "number",
+          "distance": {
+            "units": ""
+          },
+          "scale": {
+            "2": {
+              "value": 2
+            },
+            "3": {
+              "value": 3
+            },
+            "5": {
+              "value": 4
+            },
+            "7": {
+              "value": 5
+            },
+            "9": {
+              "value": 6
+            },
+            "11": {
+              "value": 7
+            },
+            "13": {
+              "value": 8
+            },
+            "15": {
+              "value": 9
+            },
+            "17": {
+              "value": 10
+            },
+            "19": {
+              "value": 11
+            }
+          }
+        },
         "value": {},
-        "title": "",
+        "title": "Spells Known",
         "icon": "",
         "classRestriction": ""
       }
