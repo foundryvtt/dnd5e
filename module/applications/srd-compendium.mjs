@@ -10,7 +10,7 @@ export default class SRDCompendium extends Compendium {
       classes: ["srd-compendium"],
       template: "systems/dnd5e/templates/apps/srd-compendium.hbs",
       width: 800,
-      height: 900,
+      height: 950,
       resizable: true
     });
   }
@@ -54,6 +54,12 @@ export default class SRDCompendium extends Compendium {
       if ( appA && appB ) return appA.charCodeAt(0) - appB.charCodeAt(0);
       return 0;
     });
+    // Add spells A-Z to the end of Chapter 10.
+    const spellList = this.collection.get(this.constructor._SPECIAL_PAGES.spellList);
+    data.chapters[9].pages.push({_id: spellList.id, name: spellList.name, entry: true});
+    // Add magic items A-Z to the end of Chapter 11.
+    const magicItemList = this.collection.get(this.constructor._SPECIAL_PAGES.magicItemList);
+    data.chapters[10].pages.push({_id: magicItemList.id, name: magicItemList.name, entry: true});
     return data;
   }
 

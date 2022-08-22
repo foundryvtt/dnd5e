@@ -16,7 +16,13 @@
         {{#if showPages}}
         <ul class="pages">
           {{#each pages}}
-          <li><a class="journal-entry-page-link" data-page-id="{{_id}}">{{name}}</a></li>
+          <li>
+            {{#if entry}}
+            <strong><a class="journal-entry-page-link" data-entry-id="{{_id}}">{{name}}</a></strong>
+            {{else}}
+            <a class="journal-entry-page-link" data-page-id="{{_id}}">{{name}}</a>
+            {{/if}}
+          </li>
           {{/each}}
         </ul>
         {{/if}}
