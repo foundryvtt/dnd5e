@@ -80,8 +80,8 @@ export default class SRDCompendium extends Compendium {
    */
   async _onClickLink(event) {
     const target = event.currentTarget;
-    const entryId = target.closest('[data-entry-id]')?.dataset.entryId;
-    const pageId = target.closest('[data-page-id]')?.dataset.pageId;
+    const entryId = target.closest("[data-entry-id]")?.dataset.entryId;
+    const pageId = target.closest("[data-page-id]")?.dataset.pageId;
     if ( !entryId ) return;
     const options = {};
     if ( pageId ) options.pageId = pageId;
