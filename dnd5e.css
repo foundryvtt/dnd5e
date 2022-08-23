@@ -1787,8 +1787,22 @@ h5 {
 .classSummary table td:is(.level, .prof, .scale) {
   text-align: center;
 }
+.classSummary form .form-group {
+  align-items: start;
+}
 .classSummary form button.launch-text-editor {
   flex: 0.35;
+}
+.classSummary form .items-list .item {
+  align-items: center;
+  padding-block: 0.35em 0;
+  padding-inline: 2px;
+}
+.classSummary form .items-list .item .item-controls {
+  flex: 0;
+}
+.classSummary form .items-list .item:not(:last-of-type) {
+  border-bottom: 1px solid var(--color-border-light-secondary);
 }
 /* ----------------------------------------- */
 /*  Chat Cards

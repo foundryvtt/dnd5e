@@ -31,6 +31,13 @@ export default class JournalClassSummary5ePageSheet extends JournalPageSheet {
     const data = super.getData(options);
     data.system = data.document.system;
 
+    data.title = {
+      level1: data.data.title.level,
+      level2: data.data.title.level + 1,
+      level3: data.data.title.level + 2,
+      level4: data.data.title.level + 3
+    };
+
     const linked = await fromUuid(this.document.system.itemUUID);
     if ( !linked ) return data;
     data.linked = {
@@ -45,13 +52,6 @@ export default class JournalClassSummary5ePageSheet extends JournalPageSheet {
     data.optionalTable = await this._getOptionalTable(linked);
     data.features = await this._getFeatures(linked);
     data.subclasses = await this._getSubclasses(this.document.system.subclassItems);
-
-    data.title = {
-      level1: data.data.title.level,
-      level2: data.data.title.level + 1,
-      level3: data.data.title.level + 2,
-      level4: data.data.title.level + 3
-    };
 
     return data;
   }
@@ -405,9 +405,34 @@ export default class JournalClassSummary5ePageSheet extends JournalPageSheet {
   /** @inheritdoc */
   activateListeners(html) {
     super.activateListeners(html);
+    html[0].querySelectorAll(".item-delete").forEach(e => {
+      e.addEventListener("click", this._onDeleteItem.bind(this));
+    });
     html[0].querySelectorAll(".launch-text-editor").forEach(e => {
       e.addEventListener("click", this._onLaunchTextEditor.bind(this));
     });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle deleting a dropped item.
+   * @param {Event} event  The triggering click event.
+   * @returns {JournalClassSummary5ePageSheet}
+   */
+  _onDeleteItem(event) {
+    event.preventDefault();
+    const container = event.currentTarget.closest("[data-item-uuid]");
+    const uuidToDelete = container?.dataset.itemUuid;
+    if ( !uuidToDelete ) return;
+    switch (container.dataset.itemType) {
+      case "class":
+        return this.document.update({"system.itemUUID": ""});
+      case "subclass":
+        const itemSet = this.document.system.subclassItems;
+        itemSet.delete(uuidToDelete);
+        return this.document.update({"system.subclassItems": Array.from(itemSet)});
+    }
   }
 
   /* -------------------------------------------- */
@@ -438,7 +463,9 @@ export default class JournalClassSummary5ePageSheet extends JournalPageSheet {
       case "class":
         return this.document.update({"system.itemUUID": item.uuid});
       case "subclass":
-        return this.document.update({"system.subclassItems": [item.uuid]});
+        const itemSet = this.document.system.subclassItems;
+        itemSet.add(item.uuid);
+        return this.document.update({"system.subclassItems": Array.from(itemSet)});
       default:
         // TODO: Display UI warning here
         return false;

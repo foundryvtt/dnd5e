@@ -4,9 +4,9 @@
   <div class="form-group">
     <label>{{localize "JOURNALENTRYPAGE.DND5E.Class.Item"}}</label>
     <div class="form-fields">
-      <ol class="item-list">
+      <ol class="items-list">
         {{#if document.system.itemUUID}}
-          <li class="item flexrow" data-item-uuid="document.system.itemUUID">
+          <li class="item flexrow" data-item-uuid="document.system.itemUUID" data-item-type="class">
             <div clas="item.name">{{{dnd5e-linkForUuid document.system.itemUUID}}}</div>
             <div class="item-controls flexrow">
               <a class="item-control item-delete" title="{{localize 'DND5E.ItemDelete'}}">
@@ -81,9 +81,9 @@
   <div class="form-group">
     <label>{{localize "JOURNALENTRYPAGE.DND5E.Class.SubclassItems"}}</label>
     <div class="form-fields">
-      <ol class="item-list">
+      <ol class="items-list">
         {{#each subclasses}}
-          <li class="item flexrow" data-item-uuid="{{this.document.uuid}}">
+          <li class="item flexrow" data-item-uuid="{{this.document.uuid}}" data-item-type="subclass">
             <div clas="item-name">{{{dnd5e-linkForUuid this.document.uuid}}}</div>
             <div class="item-controls flexrow">
               <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
