@@ -47,10 +47,22 @@
       {{{this.description}}}
     {{/each}}
 
-    {{#if advancement.subclass}}
-      <h{{title.level3}}>{{advancement.subclass.name}}</h{{title.level3}}>
+    {{#if (or enriched.subclass subclasses)}}
+      <h{{title.level2}}>
+        {{#if system.subclassHeader}}{{system.subclassHeader}}
+        {{else}}{{localize "JOURNALENTRYPAGE.DND5E.Class.SubclassItems"}}{{/if}}
+      </h{{title.level2}}>
       {{{enriched.subclass}}}
-      List of subclasses here
+
+      {{#each subclasses}}
+        <h{{../title.level3}}>{{this.name}}</h{{../title.level3}}>
+        {{{this.description}}}
+        
+        {{#each this.features}}
+          <h{{@root.title.level4}}>{{this.name}}</h{{@root.title.level4}}>
+          {{{this.description}}}
+        {{/each}}
+      {{/each}}
     {{/if}}
   </section>
 

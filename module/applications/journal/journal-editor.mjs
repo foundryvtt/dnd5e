@@ -1,5 +1,5 @@
 /**
- * Popout ProseMirror editor window for journal entries with multiple text areas that need editing.
+ * Pop out ProseMirror editor window for journal entries with multiple text areas that need editing.
  *
  * @param {JournalEntryPage} document   Journal entry page to be edited.
  * @param {object} options
@@ -16,6 +16,14 @@ export default class JournalEditor extends DocumentSheet {
       height: 640,
       textKeyPath: null
     });
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  get title() {
+    if ( this.options.title ) return `${this.document.name}: ${this.options.title}`;
+    else return this.document.name;
   }
 
   /* -------------------------------------------- */

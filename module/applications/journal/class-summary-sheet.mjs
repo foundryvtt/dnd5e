@@ -9,7 +9,7 @@ export default class JournalClassSummary5ePageSheet extends JournalPageSheet {
   static get defaultOptions() {
     const options = super.defaultOptions;
     options.classes.push("classSummary");
-    options.dragDrop = [{dropSelector: ".item-drop-area"}];
+    options.dragDrop = [{dropSelector: ".drop-target"}];
     return options;
   }
 
@@ -29,6 +29,7 @@ export default class JournalClassSummary5ePageSheet extends JournalPageSheet {
   /** @inheritdoc */
   async getData(options) {
     const data = super.getData(options);
+    data.system = data.document.system;
 
     const linked = await fromUuid(this.document.system.itemUUID);
     if ( !linked ) return data;
@@ -43,6 +44,7 @@ export default class JournalClassSummary5ePageSheet extends JournalPageSheet {
     data.table = await this._getTable(linked);
     data.optionalTable = await this._getOptionalTable(linked);
     data.features = await this._getFeatures(linked);
+    data.subclasses = await this._getSubclasses(this.document.system.subclassItems);
 
     data.title = {
       level1: data.data.title.level,
@@ -229,6 +231,11 @@ export default class JournalClassSummary5ePageSheet extends JournalPageSheet {
 
   /* -------------------------------------------- */
 
+  /**
+   * Fetch data for each class feature listed.
+   * @param {Item5e} item  Class or subclass item belonging to this journal.
+   * @returns {object[]}   Prepared features.
+   */
   async _getFeatures(item) {
     const prepareFeature = async uuid => {
       const document = await fromUuid(uuid);
@@ -248,6 +255,30 @@ export default class JournalClassSummary5ePageSheet extends JournalPageSheet {
     }
     features = await Promise.all(features);
     return features;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Fetch each subclass and their features.
+   * @param {string[]} uuids   UUIDs for the subclasses to fetch.
+   * @returns {object[]|null}  Prepared subclasses.
+   */
+  async _getSubclasses(uuids) {
+    const prepareSubclass = async uuid => {
+      const document = await fromUuid(uuid);
+      return {
+        document,
+        name: document.name,
+        description: await TextEditor.enrichHTML(document.system.description.value, {
+          relativeTo: this.object, secrets: false, async: true
+        }),
+        features: await this._getFeatures(document)
+      };
+    };
+
+    const subclasses = await Promise.all(uuids.map(prepareSubclass));
+    return subclasses.length ? subclasses : null;
   }
 
   /* -------------------------------------------- */
@@ -388,7 +419,8 @@ export default class JournalClassSummary5ePageSheet extends JournalPageSheet {
   _onLaunchTextEditor(event) {
     event.preventDefault();
     const textKeyPath = event.target.name;
-    const editor = new JournalEditor(this.document, { textKeyPath });
+    const label = event.target.closest(".form-group").querySelector("label");
+    const editor = new JournalEditor(this.document, { textKeyPath, title: label?.innerText });
     editor.render(true);
   }
 
@@ -402,12 +434,15 @@ export default class JournalClassSummary5ePageSheet extends JournalPageSheet {
 
     if ( data.type !== "Item" ) return false;
     const item = await Item.implementation.fromDropData(data);
-    if ( item.type !== "class" ) {
-      return false;
-      // TODO: Display UI warning here
+    switch (item.type) {
+      case "class":
+        return this.document.update({"system.itemUUID": item.uuid});
+      case "subclass":
+        return this.document.update({"system.subclassItems": [item.uuid]});
+      default:
+        // TODO: Display UI warning here
+        return false;
     }
-
-    this.document.update({"system.itemUUID": item.uuid});
   }
 
 }
