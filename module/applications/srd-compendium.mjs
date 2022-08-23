@@ -1,8 +1,3 @@
-Hooks.once("ready", () => {
-  const pack = game.packs.get("dnd5e.rules");
-  pack.apps = [new SRDCompendium(pack)];
-});
-
 export default class SRDCompendium extends Compendium {
   /** @inheritdoc */
   static get defaultOptions() {
