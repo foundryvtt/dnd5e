@@ -183,6 +183,9 @@ Hooks.once("i18nInit", () => utils.performPreLocalization(CONFIG.DND5E));
  * Once the entire VTT framework is initialized, check to see if we should perform a data migration
  */
 Hooks.once("ready", function() {
+  // Apply custom compendium styles to the SRD rules compendium.
+  const rules = game.packs.get("dnd5e.rules");
+  rules.apps = [new applications.SRDCompendium(rules)];
 
   // Wait to register hotbar drop hook on ready so that modules could register earlier if they want to
   Hooks.on("hotbarDrop", (bar, data, slot) => documents.macro.create5eMacro(data, slot));

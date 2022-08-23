@@ -1,0 +1,33 @@
+<article>
+  <aside>
+    <header>
+      <h2>{{localize "DND5E.Disclaimer"}}</h2>
+    </header>
+    <section>{{{disclaimer}}}</section>
+  </aside>
+  <div class="contents">
+    <header>
+      <h2>{{localize "DND5E.Contents"}}</h2>
+    </header>
+    <section>
+      {{#each chapters}}
+      <div class="chapter" data-entry-id="{{_id}}">
+        <h3><a class="journal-entry-link">{{name}}</a></h3>
+        {{#if showPages}}
+        <ul class="pages">
+          {{#each pages}}
+          <li>
+            {{#if entry}}
+            <strong><a class="journal-entry-page-link" data-entry-id="{{_id}}">{{name}}</a></strong>
+            {{else}}
+            <a class="journal-entry-page-link" data-page-id="{{_id}}">{{name}}</a>
+            {{/if}}
+          </li>
+          {{/each}}
+        </ul>
+        {{/if}}
+      </div>
+      {{/each}}
+    </section>
+  </div>
+</article>
