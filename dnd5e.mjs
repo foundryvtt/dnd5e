@@ -195,7 +195,7 @@ Hooks.once("i18nInit", () => utils.performPreLocalization(CONFIG.DND5E));
 Hooks.once("ready", function() {
   // Apply custom compendium styles to the SRD rules compendium.
   const rules = game.packs.get("dnd5e.rules");
-  rules.apps = [new applications.SRDCompendium(rules)];
+  rules.apps = [new applications.journal.SRDCompendium(rules)];
 
   // Wait to register hotbar drop hook on ready so that modules could register earlier if they want to
   Hooks.on("hotbarDrop", (bar, data, slot) => {
