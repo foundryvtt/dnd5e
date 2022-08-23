@@ -59,7 +59,7 @@
                             title="{{localize 'DND5E.HitPointsCurrent'}}">
                         <span class="sep"> / </span>
                         <input name="system.attributes.hp.max" type="number" step="any"
-                            value="{{system.attributes.hp.max}}" placeholder="10" 
+                            value="{{system.attributes.hp.max}}" placeholder="10"
                             title="{{localize 'DND5E.HitPointsMax'}}">
                     </div>
                     <footer class="attribute-footer">
@@ -282,7 +282,8 @@
                 <textarea name="system.details.flaw">{{system.details.flaw}}</textarea>
             </div>
             <div class="biography">
-                {{editor biographyHTML target="system.details.biography.value" button=true editable=editable}}
+                {{editor biographyHTML target="system.details.biography.value" button=true editable=editable
+                         engine="prosemirror" collaborate=false}}
             </div>
         </div>
     </section>
