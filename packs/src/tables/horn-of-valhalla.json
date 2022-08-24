@@ -1,0 +1,80 @@
+{
+  "name": "Horn of valhalla",
+  "img": "icons/tools/instruments/flute-simple-wood.webp",
+  "description": "",
+  "results": [
+    {
+      "_id": "Q4SB1ECZsoGJn4rh",
+      "type": 0,
+      "text": "Horn type:Silver ,Berserkers summoned:2d4+2 ,requirement:none",
+      "weight": 1,
+      "range": [
+        1,
+        40
+      ],
+      "drawn": false,
+      "flags": {},
+      "img": "icons/svg/d20-black.svg",
+      "collection": null,
+      "resultId": null,
+      "rangeL": 1,
+      "rangeH": 40
+    },
+    {
+      "_id": "2CMdsxTCNDgTHhQd",
+      "type": 0,
+      "text": "Horn type:Brass ,Berserkers summoned:3d4+3 ,requirement:Proficiency with all simple weapons",
+      "collection": null,
+      "weight": 1,
+      "range": [
+        41,
+        75
+      ],
+      "drawn": false,
+      "flags": {},
+      "img": "icons/svg/d20-black.svg",
+      "resultId": null,
+      "rangeL": 41,
+      "rangeH": 75
+    },
+    {
+      "_id": "mzsygn0hXBu6Z3Hz",
+      "type": 0,
+      "text": "Horn type:Bronze ,Berserkers summoned:4d4+4 ,requirement:Proficiency with all medium armor",
+      "collection": null,
+      "weight": 1,
+      "range": [
+        76,
+        90
+      ],
+      "drawn": false,
+      "flags": {},
+      "img": "icons/svg/d20-black.svg",
+      "resultId": null,
+      "rangeL": 76,
+      "rangeH": 90
+    },
+    {
+      "_id": "K81sqAOLewkusN3o",
+      "type": 0,
+      "text": "Horn type:Iron ,Berserkers summoned:5d4+5 ,requirement:Proficiency with all martial weapons",
+      "collection": null,
+      "weight": 1,
+      "range": [
+        91,
+        100
+      ],
+      "drawn": false,
+      "flags": {},
+      "img": "icons/svg/d20-black.svg",
+      "resultId": null,
+      "rangeL": 91,
+      "rangeH": 100
+    }
+  ],
+  "formula": "1d100",
+  "replacement": true,
+  "displayRoll": true,
+  "flags": {},
+  "_id": "KEWhssYy857VjmQK"
+}

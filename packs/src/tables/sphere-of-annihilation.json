@@ -1,0 +1,63 @@
+{
+  "name": "Sphere of annihilation",
+  "img": "icons/magic/unholy/barrier-shield-glowing-pink.webp",
+  "description": "",
+  "results": [
+    {
+      "_id": "44Sx722sxuZKvcxs",
+      "type": 0,
+      "text": "The sphere is destroyed.",
+      "weight": 1,
+      "range": [
+        1,
+        50
+      ],
+      "drawn": false,
+      "flags": {},
+      "img": "icons/svg/d20-black.svg",
+      "collection": null,
+      "resultId": null,
+      "rangeL": 1,
+      "rangeH": 50
+    },
+    {
+      "_id": "ncwXxnKGbSGmrXPO",
+      "type": 0,
+      "text": "The sphere moves through the portal or into the extradimensional space.",
+      "collection": null,
+      "weight": 1,
+      "range": [
+        51,
+        85
+      ],
+      "drawn": false,
+      "flags": {},
+      "img": "icons/svg/d20-black.svg",
+      "resultId": null,
+      "rangeL": 51,
+      "rangeH": 85
+    },
+    {
+      "_id": "i7sdsJgItgTecJrm",
+      "type": 0,
+      "text": "A spatial rift sends each creature and object within 180 feet of the sphere, including the sphere, to a random plane of existence.",
+      "collection": null,
+      "weight": 1,
+      "range": [
+        86,
+        100
+      ],
+      "drawn": false,
+      "flags": {},
+      "img": "icons/svg/d20-black.svg",
+      "resultId": null,
+      "rangeL": 86,
+      "rangeH": 100
+    }
+  ],
+  "formula": "1d100",
+  "replacement": true,
+  "displayRoll": true,
+  "flags": {},
+  "_id": "YUmkr7CZdOwzfEII"
+}
