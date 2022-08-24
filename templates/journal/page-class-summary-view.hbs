@@ -37,15 +37,23 @@
     {{> "dnd5e.journal-table" table=table
       caption=(localize "JOURNALENTRYPAGE.DND5E.Class.TableCaption" class=linked.name)}}
 
-    {{#if advancement.optionalFeatures}}
-      <h{{title.level2}}>{{localize "JOURNALENTRYPAGE.DND5E.Class.OptionalFeaturesCaption"}}</h{{title.level2}}>
-      Table Here!
-    {{/if}}
-
     {{#each features}}
-      <h{{../title.level4}}>{{this.name}}</h{{../title.level4}}>
+      <h{{@root.title.level4}}>{{this.name}}</h{{@root.title.level4}}>
       {{{this.description}}}
     {{/each}}
+
+    {{#if optionalTable}}
+      <h{{title.level2}}>{{localize "JOURNALENTRYPAGE.DND5E.Class.OptionalFeaturesCaption"}}</h{{title.level2}}>
+      <p>{{localize "JOURNALENTRYPAGE.DND5E.Class.OptionalFeaturesDescription" class=linked.lowercaseName}}</p>
+
+      {{> "dnd5e.journal-table" table=optionalTable
+        caption=(localize "JOURNALENTRYPAGE.DND5E.Class.TableOptionalCaption" class=linked.name)}}
+
+      {{#each optionalFeatures}}
+        <h{{@root.title.level4}}>{{this.name}}</h{{@root.title.level4}}>
+        {{{this.description}}}
+      {{/each}}
+    {{/if}}
 
     {{#if (or enriched.subclass subclasses)}}
       <h{{title.level2}}>
@@ -55,7 +63,7 @@
       {{{enriched.subclass}}}
 
       {{#each subclasses}}
-        <h{{../title.level3}}>{{this.name}}</h{{../title.level3}}>
+        <h{{@root.title.level3}}>{{this.name}}</h{{@root.title.level3}}>
         {{{this.description}}}
         
         {{#each this.features}}

@@ -51,11 +51,11 @@ export default class JournalClassSummary5ePageSheet extends JournalPageSheet {
     data.enriched = await this._getDescriptions(data.document);
     data.table = await this._getTable(linked);
     data.optionalTable = await this._getOptionalTable(linked);
-    // TODO: Implement optional table
     data.features = await this._getFeatures(linked);
-    // TODO: Fetch optional class features
+    data.optionalFeatures = await this._getFeatures(linked, true);
+    console.log(data.optionalFeatures);
     data.subclasses = await this._getSubclasses(this.document.system.subclassItems);
-    data.subclasses.sort((lhs, rhs) => lhs.name.localeCompare(rhs.name));
+    data.subclasses?.sort((lhs, rhs) => lhs.name.localeCompare(rhs.name));
     // TODO: Add spellcasting table to subclasses with spellcasting
 
     return data;
@@ -119,7 +119,7 @@ export default class JournalClassSummary5ePageSheet extends JournalPageSheet {
       { content: game.i18n.localize("DND5E.ProficiencyBonus") },
       { content: game.i18n.localize("DND5E.Features") }
     ]];
-    headers[0].push(...scaleValues.map(a => ({ content: a.title })));
+    headers[0].push(...scaleValues.map(a => ({content: a.title})));
     if ( spellProgression ) {
       if ( spellProgression.headers.length > 1 ) {
         headers[0].forEach(h => h.rowSpan = 2);
@@ -135,7 +135,7 @@ export default class JournalClassSummary5ePageSheet extends JournalPageSheet {
       { class: "prof", span: 1 },
       { class: "features", span: 1 }
     ];
-    if ( scaleValues.length ) cols.push({ class: "scale", span: scaleValues.length });
+    if ( scaleValues.length ) cols.push({class: "scale", span: scaleValues.length});
     if ( spellProgression ) cols.push(...spellProgression.cols);
 
     const makeLink = uuid => TextEditor._createContentLink(["", "UUID", uuid]).outerHTML;
@@ -158,7 +158,7 @@ export default class JournalClassSummary5ePageSheet extends JournalPageSheet {
         { class: "prof", content: `+${Math.floor((level + 7) / 4)}` },
         { class: "features", content: features.join(", ") }
       ];
-      scaleValues.forEach(s => cells.push({ class: "scale", content: s.formatValue(level) }));
+      scaleValues.forEach(s => cells.push({class: "scale", content: s.formatValue(level)}));
       const spellCells = spellProgression?.rows[rows.length];
       if ( spellCells ) cells.push(...spellCells);
       rows.push(cells);
@@ -189,7 +189,7 @@ export default class JournalClassSummary5ePageSheet extends JournalPageSheet {
         { content: game.i18n.localize("JOURNALENTRYPAGE.DND5E.Class.SpellSlots") },
         { content: game.i18n.localize("JOURNALENTRYPAGE.DND5E.Class.SpellSlotLevel") }
       ]];
-      table.cols = [{ class: "spellcasting", span: 2 }];
+      table.cols = [{class: "spellcasting", span: 2}];
 
       // Loop through each level, gathering "Spell Slots" & "Slot Level" for each one
       for ( const level of Array.fromRange(CONFIG.DND5E.maxLevel, 1) ) {
@@ -216,12 +216,10 @@ export default class JournalClassSummary5ePageSheet extends JournalPageSheet {
 
       // Prepare headers & columns
       table.headers = [
-        [{
-          content: game.i18n.localize("JOURNALENTRYPAGE.DND5E.Class.SpellSlotsPerSpellLevel"), colSpan: largestSlot
-        }],
-        Array.fromRange(largestSlot, 1).map(spellLevel => ({ content: spellLevel.ordinalString() }))
+        [{content: game.i18n.localize("JOURNALENTRYPAGE.DND5E.Class.SpellSlotsPerSpellLevel"), colSpan: largestSlot}],
+        Array.fromRange(largestSlot, 1).map(spellLevel => ({content: spellLevel.ordinalString()}))
       ];
-      table.cols = [{ class: "spellcasting", span: largestSlot }];
+      table.cols = [{class: "spellcasting", span: largestSlot}];
 
       // Loop through each level, gathering max slots for each level
       for ( const level of Array.fromRange(CONFIG.DND5E.maxLevel, 1) ) {
@@ -230,7 +228,7 @@ export default class JournalClassSummary5ePageSheet extends JournalPageSheet {
         const cells = [];
         for ( const spellLevel of Array.fromRange(largestSlot, 1) ) {
           const max = actor.system.spells[`spell${spellLevel}`]?.max;
-          cells.push({ class: "spell-slots", content: max || "&mdash;" });
+          cells.push({class: "spell-slots", content: max || "&mdash;"});
         }
         table.rows.push(cells);
       }
@@ -243,21 +241,56 @@ export default class JournalClassSummary5ePageSheet extends JournalPageSheet {
 
   /**
    * Prepare options table based on optional GrantItem advancement.
-   * @param {Item5e} item  Class item belonging to this journal.
-   * @returns {object}     Prepared optional features table.
+   * @param {Item5e} item    Class item belonging to this journal.
+   * @returns {object|null}  Prepared optional features table.
    */
   async _getOptionalTable(item) {
-    return {};
+    const headers = [[
+      { content: game.i18n.localize("DND5E.Level") },
+      { content: game.i18n.localize("DND5E.Features") }
+    ]];
+
+    const cols = [
+      { class: "level", span: 1 },
+      { class: "features", span: 1 }
+    ];
+
+    const makeLink = uuid => TextEditor._createContentLink(["", "UUID", uuid]).outerHTML;
+
+    const rows = [];
+    for ( const level of Array.fromRange(CONFIG.DND5E.maxLevel, 1) ) {
+      const features = [];
+      for ( const advancement of item.advancement.byLevel[level] ) {
+        switch ( advancement.constructor.typeName ) {
+          case "ItemGrant":
+            if ( !advancement.data.configuration.optional ) continue;
+            features.push(...advancement.data.configuration.items.map(makeLink));
+            continue;
+        }
+      }
+      if ( !features.length ) continue;
+
+      // Level & proficiency bonus
+      const cells = [
+        { class: "level", content: level.ordinalString() },
+        { class: "features", content: features.join(", ") }
+      ];
+      rows.push(cells);
+    }
+    if ( !rows.length ) return null;
+
+    return { headers, cols, rows };
   }
 
   /* -------------------------------------------- */
 
   /**
    * Fetch data for each class feature listed.
-   * @param {Item5e} item  Class or subclass item belonging to this journal.
+   * @param {Item5e} item               Class or subclass item belonging to this journal.
+   * @param {boolean} [optional=false]  Should optional features be fetched rather than required features?
    * @returns {object[]}   Prepared features.
    */
-  async _getFeatures(item) {
+  async _getFeatures(item, optional=false) {
     const prepareFeature = async uuid => {
       const document = await fromUuid(uuid);
       return {
@@ -270,8 +303,8 @@ export default class JournalClassSummary5ePageSheet extends JournalPageSheet {
     };
 
     let features = [];
-    for ( const advancement of item.advancement.byType.ItemGrant ) {
-      if ( advancement.data.configuration.optional ) continue;
+    for ( const advancement of item.advancement.byType.ItemGrant ?? [] ) {
+      if ( !!advancement.data.configuration.optional !== optional ) continue;
       features.push(...advancement.data.configuration.items.map(prepareFeature));
     }
     features = await Promise.all(features);
@@ -411,7 +444,7 @@ export default class JournalClassSummary5ePageSheet extends JournalPageSheet {
    */
   _makeTableNode(table, level) {
     return {
-      text: game.i18n.format("JOURNALENTRYPAGE.DND5E.TableTOC", { caption: table.caption?.innerText ?? "" }),
+      text: game.i18n.format("JOURNALENTRYPAGE.DND5E.TableTOC", {caption: table.caption?.innerText ?? ""}),
       level,
       slug: table.id || JournalEntryPage.implementation.slugifyHeading(table.caption ?? ""),
       element: table,
@@ -488,7 +521,6 @@ export default class JournalClassSummary5ePageSheet extends JournalPageSheet {
         itemSet.add(item.uuid);
         return this.document.update({"system.subclassItems": Array.from(itemSet)});
       default:
-        // TODO: Display UI warning here
         return false;
     }
   }
