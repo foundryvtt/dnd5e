@@ -10,11 +10,15 @@
     </colgroup>
   {{/if}}
   <thead>
-    <tr>
-      {{#each table.headers}}
-        <th scope="col">{{this}}</th>
-      {{/each}}
-    </tr>
+    {{#each table.headers}}
+      <tr>
+        {{#each this}}
+          <th scope="col"{{#if this.rowSpan}}
+            rowspan={{this.rowSpan}}{{/if}}{{#if this.colSpan}}
+            colspan={{this.colSpan}}{{/if}}>{{this.content}}</th>
+        {{/each}}
+      </tr>
+    {{/each}}
   </thead>
   <tbody>
     {{#each table.rows}}

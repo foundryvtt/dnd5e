@@ -10,6 +10,7 @@ export default class JournalClassSummary5ePageSheet extends JournalPageSheet {
     const options = super.defaultOptions;
     options.classes.push("classSummary");
     options.dragDrop = [{dropSelector: ".drop-target"}];
+    options.submitOnChange = true;
     return options;
   }
 
@@ -50,8 +51,12 @@ export default class JournalClassSummary5ePageSheet extends JournalPageSheet {
     data.enriched = await this._getDescriptions(data.document);
     data.table = await this._getTable(linked);
     data.optionalTable = await this._getOptionalTable(linked);
+    // TODO: Implement optional table
     data.features = await this._getFeatures(linked);
+    // TODO: Fetch optional class features
     data.subclasses = await this._getSubclasses(this.document.system.subclassItems);
+    data.subclasses.sort((lhs, rhs) => lhs.name.localeCompare(rhs.name));
+    // TODO: Add spellcasting table to subclasses with spellcasting
 
     return data;
   }
@@ -109,13 +114,21 @@ export default class JournalClassSummary5ePageSheet extends JournalPageSheet {
   async _getTable(item) {
     const spellProgression = await this._getSpellProgression(item);
     const scaleValues = (item.advancement.byType.ScaleValue ?? []);
-    const headers = [
-      game.i18n.localize("DND5E.Level"),
-      game.i18n.localize("DND5E.ProficiencyBonus"),
-      game.i18n.localize("DND5E.Features")
-    ];
-    headers.push(...scaleValues.map(a => a.title));
-    if ( spellProgression ) headers.push(...spellProgression.headers);
+    const headers = [[
+      { content: game.i18n.localize("DND5E.Level") },
+      { content: game.i18n.localize("DND5E.ProficiencyBonus") },
+      { content: game.i18n.localize("DND5E.Features") }
+    ]];
+    headers[0].push(...scaleValues.map(a => ({ content: a.title })));
+    if ( spellProgression ) {
+      if ( spellProgression.headers.length > 1 ) {
+        headers[0].forEach(h => h.rowSpan = 2);
+        headers[0].push(...spellProgression.headers[0]);
+        headers[1] = spellProgression.headers[1];
+      } else {
+        headers[0].push(...spellProgression.headers[0]);
+      }
+    }
 
     const cols = [
       { class: "level", span: 1 },
@@ -172,7 +185,10 @@ export default class JournalClassSummary5ePageSheet extends JournalPageSheet {
 
     // Pact Progression
     if ( spellcasting.progression === "pact" ) {
-      table.headers = ["Spell Slots", "Slot Level"]; // TODO: Localize these headers
+      table.headers = [[
+        { content: game.i18n.localize("JOURNALENTRYPAGE.DND5E.Class.SpellSlots") },
+        { content: game.i18n.localize("JOURNALENTRYPAGE.DND5E.Class.SpellSlotLevel") }
+      ]];
       table.cols = [{ class: "spellcasting", span: 2 }];
 
       // Loop through each level, gathering "Spell Slots" & "Slot Level" for each one
@@ -199,8 +215,13 @@ export default class JournalClassSummary5ePageSheet extends JournalPageSheet {
       }, -1);
 
       // Prepare headers & columns
-      table.headers = Array.fromRange(largestSlot, 1).map(spellLevel => spellLevel.ordinalString());
-      table.cols = [{ class: "spellcasting", span: table.headers.length }];
+      table.headers = [
+        [{
+          content: game.i18n.localize("JOURNALENTRYPAGE.DND5E.Class.SpellSlotsPerSpellLevel"), colSpan: largestSlot
+        }],
+        Array.fromRange(largestSlot, 1).map(spellLevel => ({ content: spellLevel.ordinalString() }))
+      ];
+      table.cols = [{ class: "spellcasting", span: largestSlot }];
 
       // Loop through each level, gathering max slots for each level
       for ( const level of Array.fromRange(CONFIG.DND5E.maxLevel, 1) ) {
