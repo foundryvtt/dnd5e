@@ -34,7 +34,7 @@
       {{{enriched.additionalEquipment}}}
     {{/if}}
 
-    {{> "dnd5e.journal-table" table=table
+    {{> "dnd5e.journal-table" table=table level=title.level3
       caption=(localize "JOURNALENTRYPAGE.DND5E.Class.TableCaption" class=linked.name)}}
 
     {{#each features}}
@@ -46,7 +46,7 @@
       <h{{title.level2}}>{{localize "JOURNALENTRYPAGE.DND5E.Class.OptionalFeaturesCaption"}}</h{{title.level2}}>
       <p>{{localize "JOURNALENTRYPAGE.DND5E.Class.OptionalFeaturesDescription" class=linked.lowercaseName}}</p>
 
-      {{> "dnd5e.journal-table" table=optionalTable
+      {{> "dnd5e.journal-table" table=optionalTable level=title.level3
         caption=(localize "JOURNALENTRYPAGE.DND5E.Class.TableOptionalCaption" class=linked.name)}}
 
       {{#each optionalFeatures}}
@@ -65,7 +65,12 @@
       {{#each subclasses}}
         <h{{@root.title.level3}}>{{this.name}}</h{{@root.title.level3}}>
         {{{this.description}}}
-        
+
+        {{#if this.table}}
+          {{> "dnd5e.journal-table" table=this.table level=title.level4
+            caption=(localize "JOURNALENTRYPAGE.DND5E.Class.TableCaption" class=this.name)}}
+        {{/if}}
+
         {{#each this.features}}
           <h{{@root.title.level4}}>{{this.name}}</h{{@root.title.level4}}>
           {{{this.description}}}

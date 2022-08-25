@@ -56,7 +56,6 @@ export default class JournalClassSummary5ePageSheet extends JournalPageSheet {
     console.log(data.optionalFeatures);
     data.subclasses = await this._getSubclasses(this.document.system.subclassItems);
     data.subclasses?.sort((lhs, rhs) => lhs.name.localeCompare(rhs.name));
-    // TODO: Add spellcasting table to subclasses with spellcasting
 
     return data;
   }
@@ -108,17 +107,18 @@ export default class JournalClassSummary5ePageSheet extends JournalPageSheet {
 
   /**
    * Prepare table based on non-optional GrantItem advancement & ScaleValue advancement.
-   * @param {Item5e} item  Class item belonging to this journal.
+   * @param {Item5e} item              Class item belonging to this journal.
+   * @param {number} [initialLevel=1]  Level at which the table begins.
    * @returns {object}     Prepared table.
    */
-  async _getTable(item) {
-    const spellProgression = await this._getSpellProgression(item);
+  async _getTable(item, initialLevel=1) {
+    const hasFeatures = !!item.advancement.byType.ItemGrant;
     const scaleValues = (item.advancement.byType.ScaleValue ?? []);
-    const headers = [[
-      { content: game.i18n.localize("DND5E.Level") },
-      { content: game.i18n.localize("DND5E.ProficiencyBonus") },
-      { content: game.i18n.localize("DND5E.Features") }
-    ]];
+    const spellProgression = await this._getSpellProgression(item);
+
+    const headers = [[{content: game.i18n.localize("DND5E.Level")}]];
+    if ( item.type === "class" ) headers[0].push({content: game.i18n.localize("DND5E.ProficiencyBonus")});
+    if ( hasFeatures ) headers[0].push({content: game.i18n.localize("DND5E.Features")});
     headers[0].push(...scaleValues.map(a => ({content: a.title})));
     if ( spellProgression ) {
       if ( spellProgression.headers.length > 1 ) {
@@ -130,18 +130,16 @@ export default class JournalClassSummary5ePageSheet extends JournalPageSheet {
       }
     }
 
-    const cols = [
-      { class: "level", span: 1 },
-      { class: "prof", span: 1 },
-      { class: "features", span: 1 }
-    ];
+    const cols = [{ class: "level", span: 1 }];
+    if ( item.type === "class" ) cols.push({class: "prof", span: 1});
+    if ( hasFeatures ) cols.push({class: "features", span: 1});
     if ( scaleValues.length ) cols.push({class: "scale", span: scaleValues.length});
     if ( spellProgression ) cols.push(...spellProgression.cols);
 
     const makeLink = uuid => TextEditor._createContentLink(["", "UUID", uuid]).outerHTML;
 
     const rows = [];
-    for ( const level of Array.fromRange(CONFIG.DND5E.maxLevel, 1) ) {
+    for ( const level of Array.fromRange((CONFIG.DND5E.maxLevel - (initialLevel - 1)), initialLevel) ) {
       const features = [];
       for ( const advancement of item.advancement.byLevel[level] ) {
         switch ( advancement.constructor.typeName ) {
@@ -153,14 +151,16 @@ export default class JournalClassSummary5ePageSheet extends JournalPageSheet {
       }
 
       // Level & proficiency bonus
-      const cells = [
-        { class: "level", content: level.ordinalString() },
-        { class: "prof", content: `+${Math.floor((level + 7) / 4)}` },
-        { class: "features", content: features.join(", ") }
-      ];
+      const cells = [{class: "level", content: level.ordinalString()}];
+      if ( item.type === "class" ) cells.push({class: "prof", content: `+${Math.floor((level + 7) / 4)}`});
+      if ( hasFeatures ) cells.push({class: "features", content: features.join(", ")});
       scaleValues.forEach(s => cells.push({class: "scale", content: s.formatValue(level)}));
       const spellCells = spellProgression?.rows[rows.length];
       if ( spellCells ) cells.push(...spellCells);
+
+      // Skip empty rows on subclasses
+      if ( (item.type === "subclass") && !features.length && !scaleValues.length && !spellCells ) continue;
+
       rows.push(cells);
     }
 
@@ -177,9 +177,13 @@ export default class JournalClassSummary5ePageSheet extends JournalPageSheet {
     const spellcasting = item.spellcasting;
     if ( !spellcasting || (spellcasting.progression === "none") ) return null;
 
-    const actor = await Actor.implementation.create({
-      name: "tmp", type: "character", items: [item.toObject()]
-    }, {temporary: true});
+    const items = [item.toObject()];
+    let classId = item.id;
+    if ( item.type === "subclass" ) {
+      classId = foundry.utils.randomID();
+      items.push({_id: classId, name: "tmp-class", type: "class", system: {identifier: item.system.classIdentifier}});
+    }
+    const actor = await Actor.implementation.create({name: "tmp", type: "character", items}, {temporary: true});
 
     const table = { rows: [] };
 
@@ -193,7 +197,7 @@ export default class JournalClassSummary5ePageSheet extends JournalPageSheet {
 
       // Loop through each level, gathering "Spell Slots" & "Slot Level" for each one
       for ( const level of Array.fromRange(CONFIG.DND5E.maxLevel, 1) ) {
-        actor.items.get(item.id).updateSource({"system.levels": level});
+        actor.items.get(classId).updateSource({"system.levels": level});
         actor.reset();
         table.rows.push([
           { class: "spell-slots", content: `${actor.system.spells.pact.max}` },
@@ -205,7 +209,7 @@ export default class JournalClassSummary5ePageSheet extends JournalPageSheet {
     // Leveled Progression
     else {
       // Get the max spell slot size based on progression
-      actor.items.get(item.id).updateSource({"system.levels": CONFIG.DND5E.maxLevel});
+      actor.items.get(classId).updateSource({"system.levels": CONFIG.DND5E.maxLevel});
       actor.reset();
       const largestSlot = Object.entries(actor.system.spells).reduce((slot, [key, data]) => {
         if ( data.max === 0 ) return slot;
@@ -223,7 +227,7 @@ export default class JournalClassSummary5ePageSheet extends JournalPageSheet {
 
       // Loop through each level, gathering max slots for each level
       for ( const level of Array.fromRange(CONFIG.DND5E.maxLevel, 1) ) {
-        actor.items.get(item.id).updateSource({"system.levels": level});
+        actor.items.get(classId).updateSource({"system.levels": level});
         actor.reset();
         const cells = [];
         for ( const spellLevel of Array.fromRange(largestSlot, 1) ) {
@@ -321,18 +325,31 @@ export default class JournalClassSummary5ePageSheet extends JournalPageSheet {
   async _getSubclasses(uuids) {
     const prepareSubclass = async uuid => {
       const document = await fromUuid(uuid);
-      return {
-        document,
-        name: document.name,
-        description: await TextEditor.enrichHTML(document.system.description.value, {
-          relativeTo: this.object, secrets: false, async: true
-        }),
-        features: await this._getFeatures(document)
-      };
+      return this._getSubclass(document);
     };
 
     const subclasses = await Promise.all(uuids.map(prepareSubclass));
     return subclasses.length ? subclasses : null;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare data for the provided subclass.
+   * @param {Item5e} item  Subclass item being prepared.
+   * @returns {object}     Presentation data for this subclass.
+   */
+  async _getSubclass(item) {
+    const initialLevel = Object.entries(item.advancement.byLevel).find(([lvl, d]) => d.length)?.[0] ?? 1;
+    return {
+      document: item,
+      name: item.name,
+      description: await TextEditor.enrichHTML(item.system.description.value, {
+        relativeTo: this.object, secrets: false, async: true
+      }),
+      features: await this._getFeatures(item),
+      table: await this._getTable(item, parseInt(initialLevel))
+    };
   }
 
   /* -------------------------------------------- */
@@ -371,9 +388,12 @@ export default class JournalClassSummary5ePageSheet extends JournalPageSheet {
         stack.push(node);
       } else if ( element instanceof HTMLTableElement ) {
         let parent = stack.at(-1);
-        const node = this._makeTableNode(element, parent.level);
-        parent.children.push(node);
-        stack.push(node);
+        const level = element.dataset.tocLevel;
+        if ( level ) {
+          const node = this._makeTableNode(element, level);
+          parent.children.push(node);
+          stack.push(node);
+        }
       }
       for ( const child of (element.children || []) ) {
         searchHeadings(child);
