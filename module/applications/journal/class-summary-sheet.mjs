@@ -7,10 +7,11 @@ export default class JournalClassSummary5ePageSheet extends JournalPageSheet {
 
   /** @inheritdoc */
   static get defaultOptions() {
-    const options = super.defaultOptions;
+    const options = foundry.utils.mergeObject(super.defaultOptions, {
+      dragDrop: [{dropSelector: ".drop-target"}],
+      submitOnChange: true
+    });
     options.classes.push("classSummary");
-    options.dragDrop = [{dropSelector: ".drop-target"}];
-    options.submitOnChange = true;
     return options;
   }
 
@@ -517,7 +518,7 @@ export default class JournalClassSummary5ePageSheet extends JournalPageSheet {
    */
   _onLaunchTextEditor(event) {
     event.preventDefault();
-    const textKeyPath = event.target.name;
+    const textKeyPath = event.target.dataset.target;
     const label = event.target.closest(".form-group").querySelector("label");
     const editor = new JournalEditor(this.document, { textKeyPath, title: label?.innerText });
     editor.render(true);
