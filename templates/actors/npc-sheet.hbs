@@ -182,7 +182,7 @@
                                 value="{{system.resources.lair.value}}"
                                 data-dtype="Boolean" {{checked system.resources.lair.value}}>
                             <input name="system.resources.lair.initiative" type="number" step="any"
-                                value="{{system.resources.lair.initiative}}" 
+                                value="{{system.resources.lair.initiative}}"
                                 placeholder="20" title="{{localize 'DND5E.LairActionInitiative'}}">
                         </div>
                     </div>
@@ -210,7 +210,8 @@
 
         {{!-- Biography Tab --}}
         <div class="tab biography flexcol" data-group="primary" data-tab="biography">
-            {{editor biographyHTML target="system.details.biography.value" button=true editable=editable}}
+            {{editor biographyHTML target="system.details.biography.value" button=true editable=editable
+                     engine="prosemirror" collaborate=false}}
         </div>
     </section>
 </form>
