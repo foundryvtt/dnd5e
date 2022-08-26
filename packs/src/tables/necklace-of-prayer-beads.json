@@ -1,12 +1,12 @@
 {
-  "name": "Necklace of prayer beads",
+  "name": "Necklace of Prayer Beads",
   "img": "icons/equipment/neck/necklace-runed-white-red.webp",
   "description": "",
   "results": [
     {
       "_id": "88TtQ5IXa8BmgGqh",
-      "type": 0,
-      "text": "Bead of:Blessing, Spell:Bless",
+      "type": 2,
+      "text": "Bless",
       "weight": 1,
       "range": [
         1,
@@ -14,17 +14,16 @@
       ],
       "drawn": false,
       "flags": {},
-      "img": "icons/svg/d20-black.svg",
-      "collection": null,
-      "resultId": null,
+      "img": "icons/magic/control/buff-flight-wings-blue.webp",
       "rangeL": 1,
-      "rangeH": 6
+      "rangeH": 6,
+      "collection": "dnd5e.spells",
+      "resultId": "8dzaICjGy6mTUaUr"
     },
     {
       "_id": "EAOkGnzXCNPN6c2Y",
       "type": 0,
       "text": "Bead of:Curing, Spell:Cure wounds(2nd level) or lesser restoration",
-      "collection": null,
       "weight": 1,
       "range": [
         7,
@@ -33,15 +32,15 @@
       "drawn": false,
       "flags": {},
       "img": "icons/svg/d20-black.svg",
-      "resultId": null,
       "rangeL": 7,
-      "rangeH": 12
+      "rangeH": 12,
+      "collection": null,
+      "resultId": null
     },
     {
       "_id": "1tz5xaJdzf7mx9ft",
-      "type": 0,
-      "text": "Bead of:Favor, Spell:Greater restoration",
-      "collection": null,
+      "type": 2,
+      "text": "Greater Restoration",
       "weight": 1,
       "range": [
         13,
@@ -49,16 +48,16 @@
       ],
       "drawn": false,
       "flags": {},
-      "img": "icons/svg/d20-black.svg",
-      "resultId": null,
+      "img": "icons/magic/life/heart-cross-strong-flame-blue.webp",
       "rangeL": 13,
-      "rangeH": 16
+      "rangeH": 16,
+      "collection": "dnd5e.spells",
+      "resultId": "WzvJ7G3cqvIubsLk"
     },
     {
       "_id": "zzYXJG6Uza8mmuGY",
-      "type": 0,
-      "text": "Bead of:Smiting, Spell:Branding smite",
-      "collection": null,
+      "type": 2,
+      "text": "Branding Smite",
       "weight": 1,
       "range": [
         17,
@@ -66,16 +65,16 @@
       ],
       "drawn": false,
       "flags": {},
-      "img": "icons/svg/d20-black.svg",
-      "resultId": null,
+      "img": "icons/magic/fire/dagger-rune-enchant-flame-orange.webp",
       "rangeL": 17,
-      "rangeH": 18
+      "rangeH": 18,
+      "collection": "dnd5e.spells",
+      "resultId": "7UwUjJ6owIQkEPrs"
     },
     {
       "_id": "8fMuvH1Bhn7dlZTB",
-      "type": 0,
-      "text": "Bead of:Summons, Spell:Planar ally",
-      "collection": null,
+      "type": 2,
+      "text": "Planar Ally",
       "weight": 1,
       "range": [
         19,
@@ -83,16 +82,16 @@
       ],
       "drawn": false,
       "flags": {},
-      "img": "icons/svg/d20-black.svg",
-      "resultId": null,
+      "img": "icons/magic/symbols/runes-star-pentagon-magenta.webp",
       "rangeL": 19,
-      "rangeH": 19
+      "rangeH": 19,
+      "collection": "dnd5e.spells",
+      "resultId": "fkREcytuZ8sngWtC"
     },
     {
       "_id": "hc3ODy8iEPUuq8Ub",
-      "type": 0,
-      "text": "Bead of:Wind walking, Spell:Wind walk",
-      "collection": null,
+      "type": 2,
+      "text": "Wind Walk",
       "weight": 1,
       "range": [
         20,
@@ -100,10 +99,11 @@
       ],
       "drawn": false,
       "flags": {},
-      "img": "icons/svg/d20-black.svg",
-      "resultId": null,
+      "img": "icons/magic/air/wind-swirl-gray-blue.webp",
       "rangeL": 20,
-      "rangeH": 20
+      "rangeH": 20,
+      "collection": "dnd5e.spells",
+      "resultId": "8PJAsHmbu6UgDHC0"
     }
   ],
   "formula": "1d20",

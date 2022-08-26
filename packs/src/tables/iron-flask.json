@@ -1,5 +1,5 @@
 {
-  "name": "Iron flask",
+  "name": "Iron Flask",
   "img": "icons/consumables/potions/bottle-round-empty-glass.webp",
   "description": "",
   "results": [
@@ -15,16 +15,15 @@
       "drawn": false,
       "flags": {},
       "img": "icons/svg/d20-black.svg",
-      "collection": null,
-      "resultId": null,
       "rangeL": 1,
-      "rangeH": 50
+      "rangeH": 50,
+      "collection": null,
+      "resultId": null
     },
     {
       "_id": "tGzfkJmXhR755fM5",
       "type": 0,
       "text": "Demon (type 1)",
-      "collection": null,
       "weight": 1,
       "range": [
         51,
@@ -33,15 +32,15 @@
       "drawn": false,
       "flags": {},
       "img": "icons/svg/d20-black.svg",
-      "resultId": null,
       "rangeL": 51,
-      "rangeH": 54
+      "rangeH": 54,
+      "collection": null,
+      "resultId": null
     },
     {
       "_id": "tnfJlBxh2hc4AMMs",
       "type": 0,
       "text": "Demon (type 2)",
-      "collection": null,
       "weight": 1,
       "range": [
         55,
@@ -50,15 +49,15 @@
       "drawn": false,
       "flags": {},
       "img": "icons/svg/d20-black.svg",
-      "resultId": null,
       "rangeL": 55,
-      "rangeH": 58
+      "rangeH": 58,
+      "collection": null,
+      "resultId": null
     },
     {
       "_id": "ixEm38qkC1tq9GZD",
       "type": 0,
       "text": "Demon (type 3)",
-      "collection": null,
       "weight": 1,
       "range": [
         59,
@@ -67,15 +66,15 @@
       "drawn": false,
       "flags": {},
       "img": "icons/svg/d20-black.svg",
-      "resultId": null,
       "rangeL": 59,
-      "rangeH": 62
+      "rangeH": 62,
+      "collection": null,
+      "resultId": null
     },
     {
       "_id": "vJ98y0eATHJUNhBi",
       "type": 0,
       "text": "Demon (type 4)",
-      "collection": null,
       "weight": 1,
       "range": [
         63,
@@ -84,15 +83,15 @@
       "drawn": false,
       "flags": {},
       "img": "icons/svg/d20-black.svg",
-      "resultId": null,
       "rangeL": 63,
-      "rangeH": 64
+      "rangeH": 64,
+      "collection": null,
+      "resultId": null
     },
     {
       "_id": "t4NpfkUghR6kBhYh",
       "type": 0,
       "text": "Demon (type 5)",
-      "collection": null,
       "weight": 1,
       "range": [
         65,
@@ -101,15 +100,15 @@
       "drawn": false,
       "flags": {},
       "img": "icons/svg/d20-black.svg",
-      "resultId": null,
       "rangeL": 65,
-      "rangeH": 65
+      "rangeH": 65,
+      "collection": null,
+      "resultId": null
     },
     {
       "_id": "6vVVwQL0ESAYlmyP",
       "type": 0,
       "text": "Demon (type 6)",
-      "collection": null,
       "weight": 1,
       "range": [
         66,
@@ -118,15 +117,15 @@
       "drawn": false,
       "flags": {},
       "img": "icons/svg/d20-black.svg",
-      "resultId": null,
       "rangeL": 66,
-      "rangeH": 66
+      "rangeH": 66,
+      "collection": null,
+      "resultId": null
     },
     {
       "_id": "c2zbAnTkm0nGCVdN",
-      "type": 0,
+      "type": 2,
       "text": "Deva",
-      "collection": null,
       "weight": 1,
       "range": [
         67,
@@ -134,16 +133,16 @@
       ],
       "drawn": false,
       "flags": {},
-      "img": "icons/svg/d20-black.svg",
-      "resultId": null,
+      "img": "systems/dnd5e/tokens/celestial/Deva.webp",
       "rangeL": 67,
-      "rangeH": 67
+      "rangeH": 67,
+      "collection": "dnd5e.monsters",
+      "resultId": "m4H3hjamBNMH09S9"
     },
     {
       "_id": "ltTom7WNy6JH5GGD",
       "type": 0,
       "text": "Devil (greater)",
-      "collection": null,
       "weight": 1,
       "range": [
         68,
@@ -152,15 +151,15 @@
       "drawn": false,
       "flags": {},
       "img": "icons/svg/d20-black.svg",
-      "resultId": null,
       "rangeL": 68,
-      "rangeH": 69
+      "rangeH": 69,
+      "collection": null,
+      "resultId": null
     },
     {
       "_id": "L73nfibKrWE7TG4g",
       "type": 0,
       "text": "Devil (lesser)",
-      "collection": null,
       "weight": 1,
       "range": [
         70,
@@ -169,15 +168,15 @@
       "drawn": false,
       "flags": {},
       "img": "icons/svg/d20-black.svg",
-      "resultId": null,
       "rangeL": 70,
-      "rangeH": 73
+      "rangeH": 73,
+      "collection": null,
+      "resultId": null
     },
     {
       "_id": "U4mMcvj9r3eXkjNn",
-      "type": 0,
+      "type": 2,
       "text": "Djinni",
-      "collection": null,
       "weight": 1,
       "range": [
         74,
@@ -185,16 +184,16 @@
       ],
       "drawn": false,
       "flags": {},
-      "img": "icons/svg/d20-black.svg",
-      "resultId": null,
+      "img": "systems/dnd5e/tokens/elemental/Djinni.webp",
       "rangeL": 74,
-      "rangeH": 75
+      "rangeH": 75,
+      "collection": "dnd5e.monsters",
+      "resultId": "5P1VGAZQwOilwZQf"
     },
     {
       "_id": "591jWejDDI0pL2dE",
-      "type": 0,
+      "type": 2,
       "text": "Efreeti",
-      "collection": null,
       "weight": 1,
       "range": [
         76,
@@ -202,16 +201,16 @@
       ],
       "drawn": false,
       "flags": {},
-      "img": "icons/svg/d20-black.svg",
-      "resultId": null,
+      "img": "systems/dnd5e/tokens/elemental/Efreeti.webp",
       "rangeL": 76,
-      "rangeH": 77
+      "rangeH": 77,
+      "collection": "dnd5e.monsters",
+      "resultId": "LTomFUTBrkRi0Pj5"
     },
     {
       "_id": "aW0gC72rF94kv9pU",
       "type": 0,
       "text": "Elemental (any)",
-      "collection": null,
       "weight": 1,
       "range": [
         78,
@@ -220,15 +219,15 @@
       "drawn": false,
       "flags": {},
       "img": "icons/svg/d20-black.svg",
-      "resultId": null,
       "rangeL": 78,
-      "rangeH": 83
+      "rangeH": 83,
+      "collection": null,
+      "resultId": null
     },
     {
       "_id": "addHwpt25frd6aE6",
-      "type": 0,
+      "type": 2,
       "text": "Invisible Stalker",
-      "collection": null,
       "weight": 1,
       "range": [
         84,
@@ -236,16 +235,16 @@
       ],
       "drawn": false,
       "flags": {},
-      "img": "icons/svg/d20-black.svg",
-      "resultId": null,
+      "img": "icons/svg/mystery-man.svg",
       "rangeL": 84,
-      "rangeH": 86
+      "rangeH": 86,
+      "collection": "dnd5e.monsters",
+      "resultId": "oDspGxRQFBhE74L2"
     },
     {
       "_id": "uyyNF4YXK8RwvVS0",
-      "type": 0,
-      "text": "Night hag",
-      "collection": null,
+      "type": 2,
+      "text": "Night Hag",
       "weight": 1,
       "range": [
         87,
@@ -253,16 +252,16 @@
       ],
       "drawn": false,
       "flags": {},
-      "img": "icons/svg/d20-black.svg",
-      "resultId": null,
+      "img": "systems/dnd5e/tokens/fiend/NightHag.webp",
       "rangeL": 87,
-      "rangeH": 90
+      "rangeH": 90,
+      "collection": "dnd5e.monsters",
+      "resultId": "xvh2UOKv1bh03Gih"
     },
     {
       "_id": "GkP33d59Fky7OzFM",
-      "type": 0,
+      "type": 2,
       "text": "Planetar",
-      "collection": null,
       "weight": 1,
       "range": [
         91,
@@ -270,16 +269,16 @@
       ],
       "drawn": false,
       "flags": {},
-      "img": "icons/svg/d20-black.svg",
-      "resultId": null,
+      "img": "systems/dnd5e/tokens/celestial/Planetar.webp",
       "rangeL": 91,
-      "rangeH": 91
+      "rangeH": 91,
+      "collection": "dnd5e.monsters",
+      "resultId": "XEByBLeOkDgL3mrr"
     },
     {
       "_id": "kY5KVaG7TIslHfbO",
-      "type": 0,
+      "type": 2,
       "text": "Salamander",
-      "collection": null,
       "weight": 1,
       "range": [
         92,
@@ -287,16 +286,16 @@
       ],
       "drawn": false,
       "flags": {},
-      "img": "icons/svg/d20-black.svg",
-      "resultId": null,
+      "img": "systems/dnd5e/tokens/elemental/Salamander.webp",
       "rangeL": 92,
-      "rangeH": 95
+      "rangeH": 95,
+      "collection": "dnd5e.monsters",
+      "resultId": "yVNPVJIBpQ2Mp3Xa"
     },
     {
       "_id": "0cQKcxQkzFDDmv8j",
-      "type": 0,
+      "type": 2,
       "text": "Solar",
-      "collection": null,
       "weight": 1,
       "range": [
         96,
@@ -304,16 +303,16 @@
       ],
       "drawn": false,
       "flags": {},
-      "img": "icons/svg/d20-black.svg",
-      "resultId": null,
+      "img": "icons/svg/mystery-man.svg",
       "rangeL": 96,
-      "rangeH": 96
+      "rangeH": 96,
+      "collection": "dnd5e.monsters",
+      "resultId": "lOYt73eaJojBDxAV"
     },
     {
       "_id": "ReOwSdBQC7FDy4Xv",
-      "type": 0,
-      "text": "Succubus/incubus",
-      "collection": null,
+      "type": 2,
+      "text": "Succubus/Incubus",
       "weight": 1,
       "range": [
         97,
@@ -321,16 +320,16 @@
       ],
       "drawn": false,
       "flags": {},
-      "img": "icons/svg/d20-black.svg",
-      "resultId": null,
+      "img": "systems/dnd5e/tokens/fiend/Succubus.webp",
       "rangeL": 97,
-      "rangeH": 99
+      "rangeH": 99,
+      "collection": "dnd5e.monsters",
+      "resultId": "VmdyZDjqAc8vdncY"
     },
     {
       "_id": "UXTcjM02GpXrvTzV",
-      "type": 0,
+      "type": 2,
       "text": "Xorn",
-      "collection": null,
       "weight": 1,
       "range": [
         100,
@@ -338,10 +337,11 @@
       ],
       "drawn": false,
       "flags": {},
-      "img": "icons/svg/d20-black.svg",
-      "resultId": null,
+      "img": "systems/dnd5e/tokens/elemental/Xorn.webp",
       "rangeL": 100,
-      "rangeH": 100
+      "rangeH": 100,
+      "collection": "dnd5e.monsters",
+      "resultId": "2MZNHeOZweXAYbv1"
     }
   ],
   "formula": "1d100",

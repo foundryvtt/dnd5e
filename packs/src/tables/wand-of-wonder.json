@@ -1,12 +1,12 @@
 {
-  "name": "Wand of wonder",
+  "name": "Wand of Wonder",
   "img": "icons/weapons/staves/staff-skull-brown.webp",
   "description": "",
   "results": [
     {
       "_id": "Vc4sFYo5zOhrdGhK",
-      "type": 0,
-      "text": "You cast slow.",
+      "type": 2,
+      "text": "Slow",
       "weight": 1,
       "range": [
         1,
@@ -14,17 +14,16 @@
       ],
       "drawn": false,
       "flags": {},
-      "img": "icons/svg/d20-black.svg",
-      "collection": null,
-      "resultId": null,
+      "img": "icons/magic/air/fog-gas-smoke-dense-pink.webp",
       "rangeL": 1,
-      "rangeH": 5
+      "rangeH": 5,
+      "collection": "dnd5e.spells",
+      "resultId": "yqUDoxk4x0NWG5Bz"
     },
     {
       "_id": "wbEvqSOyS8J274wL",
-      "type": 0,
-      "text": "You cast faerie fire.",
-      "collection": null,
+      "type": 2,
+      "text": "Faerie Fire",
       "weight": 1,
       "range": [
         6,
@@ -32,16 +31,16 @@
       ],
       "drawn": false,
       "flags": {},
-      "img": "icons/svg/d20-black.svg",
-      "resultId": null,
+      "img": "icons/magic/fire/projectile-meteor-salvo-strong-teal.webp",
       "rangeL": 6,
-      "rangeH": 10
+      "rangeH": 10,
+      "collection": "dnd5e.spells",
+      "resultId": "nqBDWkVOfcGZt4YU"
     },
     {
       "_id": "lorzIYmZB8OuL5Gm",
       "type": 0,
       "text": "You are stunned until the start of your next turn, believing something awesome just happened.",
-      "collection": null,
       "weight": 1,
       "range": [
         11,
@@ -50,15 +49,15 @@
       "drawn": false,
       "flags": {},
       "img": "icons/svg/d20-black.svg",
-      "resultId": null,
       "rangeL": 11,
-      "rangeH": 15
+      "rangeH": 15,
+      "collection": null,
+      "resultId": null
     },
     {
       "_id": "eQCPf79LN5wniod7",
-      "type": 0,
-      "text": "You cast gust of wind.",
-      "collection": null,
+      "type": 2,
+      "text": "Gust of Wind",
       "weight": 1,
       "range": [
         16,
@@ -66,16 +65,16 @@
       ],
       "drawn": false,
       "flags": {},
-      "img": "icons/svg/d20-black.svg",
-      "resultId": null,
+      "img": "icons/magic/air/wind-swirl-gray-blue.webp",
       "rangeL": 16,
-      "rangeH": 20
+      "rangeH": 20,
+      "collection": "dnd5e.spells",
+      "resultId": "FSMy6VAjDnXY9vWz"
     },
     {
       "_id": "BBHNxEbh4hMHZ6o1",
       "type": 0,
       "text": "You cast detect thoughts on the target you chose. If you didn't target a creature, you instead take 1d6 psychic damage.",
-      "collection": null,
       "weight": 1,
       "range": [
         21,
@@ -84,15 +83,15 @@
       "drawn": false,
       "flags": {},
       "img": "icons/svg/d20-black.svg",
-      "resultId": null,
       "rangeL": 21,
-      "rangeH": 25
+      "rangeH": 25,
+      "collection": null,
+      "resultId": null
     },
     {
       "_id": "DQwyPCpikHdCMF2i",
-      "type": 0,
-      "text": "You cast stinking cloud.",
-      "collection": null,
+      "type": 2,
+      "text": "Stinking Cloud",
       "weight": 1,
       "range": [
         26,
@@ -100,16 +99,16 @@
       ],
       "drawn": false,
       "flags": {},
-      "img": "icons/svg/d20-black.svg",
-      "resultId": null,
+      "img": "icons/magic/air/fog-gas-smoke-dense-green.webp",
       "rangeL": 26,
-      "rangeH": 30
+      "rangeH": 30,
+      "collection": "dnd5e.spells",
+      "resultId": "TwlD4PLcltv7Xh7j"
     },
     {
       "_id": "DxJqzH42hpm0OJFe",
       "type": 0,
       "text": "Heavy rain falls in a 60-foot radius centered on the target. The area becomes lightly obscured. The rain falls until the start of your next turn.",
-      "collection": null,
       "weight": 1,
       "range": [
         31,
@@ -118,15 +117,15 @@
       "drawn": false,
       "flags": {},
       "img": "icons/svg/d20-black.svg",
-      "resultId": null,
       "rangeL": 31,
-      "rangeH": 33
+      "rangeH": 33,
+      "collection": null,
+      "resultId": null
     },
     {
       "_id": "FHLk9MMSVxzu8P9F",
       "type": 0,
       "text": "An animal appears in the unoccupied space nearest the target. The animal isn't under your control and acts as it normally would. Roll a d100 to determine which animal appears. On a 01–25, a rhinoceros appears; on a 26–50, an elephant appears; and on a 51–100, a rat appears.",
-      "collection": null,
       "weight": 1,
       "range": [
         34,
@@ -135,15 +134,15 @@
       "drawn": false,
       "flags": {},
       "img": "icons/svg/d20-black.svg",
-      "resultId": null,
       "rangeL": 34,
-      "rangeH": 36
+      "rangeH": 36,
+      "collection": null,
+      "resultId": null
     },
     {
       "_id": "I1fJSnG84THgqim4",
-      "type": 0,
-      "text": "You cast lightning bolt.",
-      "collection": null,
+      "type": 2,
+      "text": "Lightning Bolt",
       "weight": 1,
       "range": [
         37,
@@ -151,16 +150,16 @@
       ],
       "drawn": false,
       "flags": {},
-      "img": "icons/svg/d20-black.svg",
-      "resultId": null,
+      "img": "icons/magic/lightning/bolt-forked-large-blue.webp",
       "rangeL": 37,
-      "rangeH": 46
+      "rangeH": 46,
+      "collection": "dnd5e.spells",
+      "resultId": "IyikgTEOTv701jgQ"
     },
     {
       "_id": "GndC3mBBGVcq6krx",
       "type": 0,
       "text": "A cloud of 600 oversized butterflies fills a 30‐foot radius centered on the target. The area becomes heavily obscured. The butterflies remain for 10 minutes.",
-      "collection": null,
       "weight": 1,
       "range": [
         47,
@@ -169,15 +168,15 @@
       "drawn": false,
       "flags": {},
       "img": "icons/svg/d20-black.svg",
-      "resultId": null,
       "rangeL": 47,
-      "rangeH": 49
+      "rangeH": 49,
+      "collection": null,
+      "resultId": null
     },
     {
       "_id": "LOG5GFCR6bisWQYv",
       "type": 0,
       "text": "You enlarge the target as if you had cast enlarge/reduce. If the target can't be affected by that spell, or if you didn't target a creature, you become the target.",
-      "collection": null,
       "weight": 1,
       "range": [
         50,
@@ -186,15 +185,15 @@
       "drawn": false,
       "flags": {},
       "img": "icons/svg/d20-black.svg",
-      "resultId": null,
       "rangeL": 50,
-      "rangeH": 53
+      "rangeH": 53,
+      "collection": null,
+      "resultId": null
     },
     {
       "_id": "vGJZWS8Zx9ADGSRr",
-      "type": 0,
-      "text": "You cast darkness.",
-      "collection": null,
+      "type": 2,
+      "text": "Darkness",
       "weight": 1,
       "range": [
         54,
@@ -202,16 +201,16 @@
       ],
       "drawn": false,
       "flags": {},
-      "img": "icons/svg/d20-black.svg",
-      "resultId": null,
+      "img": "icons/magic/perception/eye-ringed-glow-angry-red.webp",
       "rangeL": 54,
-      "rangeH": 58
+      "rangeH": 58,
+      "collection": "dnd5e.spells",
+      "resultId": "S7VbUetIfVT7B6Eq"
     },
     {
       "_id": "EEL1lFDZ6AZ5518h",
       "type": 0,
       "text": "Grass grows on the ground in a 60‐foot radius centered on the target. If grass is already there, it grows to ten times its normal size and remains overgrown for 1 minute.",
-      "collection": null,
       "weight": 1,
       "range": [
         59,
@@ -220,15 +219,15 @@
       "drawn": false,
       "flags": {},
       "img": "icons/svg/d20-black.svg",
-      "resultId": null,
       "rangeL": 59,
-      "rangeH": 62
+      "rangeH": 62,
+      "collection": null,
+      "resultId": null
     },
     {
       "_id": "vtg0NDxak43FPbaO",
       "type": 0,
       "text": "An object of the GM's choice disappears into the Ethereal Plane. The object must be neither worn nor carried, within 120 feet of the target, and no larger than 10 feet in any dimension.",
-      "collection": null,
       "weight": 1,
       "range": [
         63,
@@ -237,15 +236,15 @@
       "drawn": false,
       "flags": {},
       "img": "icons/svg/d20-black.svg",
-      "resultId": null,
       "rangeL": 63,
-      "rangeH": 65
+      "rangeH": 65,
+      "collection": null,
+      "resultId": null
     },
     {
       "_id": "aG4wMX7Zb8p9atQw",
       "type": 0,
       "text": "You shrink yourself as if you had cast enlarge/reduce on yourself.",
-      "collection": null,
       "weight": 1,
       "range": [
         66,
@@ -254,15 +253,15 @@
       "drawn": false,
       "flags": {},
       "img": "icons/svg/d20-black.svg",
-      "resultId": null,
       "rangeL": 66,
-      "rangeH": 69
+      "rangeH": 69,
+      "collection": null,
+      "resultId": null
     },
     {
       "_id": "audYFJaMTHlHUUzf",
-      "type": 0,
-      "text": "You cast fireball.",
-      "collection": null,
+      "type": 2,
+      "text": "Fireball",
       "weight": 1,
       "range": [
         70,
@@ -270,16 +269,16 @@
       ],
       "drawn": false,
       "flags": {},
-      "img": "icons/svg/d20-black.svg",
-      "resultId": null,
+      "img": "icons/magic/fire/projectile-fireball-smoke-large-orange.webp",
       "rangeL": 70,
-      "rangeH": 79
+      "rangeH": 79,
+      "collection": "dnd5e.spells",
+      "resultId": "ztgcdrWPshKRpFd0"
     },
     {
       "_id": "u0KGQN24k1xxU5Fa",
       "type": 0,
       "text": "You cast invisibility on yourself.",
-      "collection": null,
       "weight": 1,
       "range": [
         80,
@@ -288,15 +287,15 @@
       "drawn": false,
       "flags": {},
       "img": "icons/svg/d20-black.svg",
-      "resultId": null,
       "rangeL": 80,
-      "rangeH": 84
+      "rangeH": 84,
+      "collection": null,
+      "resultId": null
     },
     {
       "_id": "NBHhCcAsfxMQiD04",
       "type": 0,
       "text": "Leaves grow from the target. If you chose a point in space as the target, leaves sprout from the creature nearest to that point. Unless they are picked off, the leaves turn brown and fall off after 24 hours.",
-      "collection": null,
       "weight": 1,
       "range": [
         85,
@@ -305,15 +304,15 @@
       "drawn": false,
       "flags": {},
       "img": "icons/svg/d20-black.svg",
-      "resultId": null,
       "rangeL": 85,
-      "rangeH": 87
+      "rangeH": 87,
+      "collection": null,
+      "resultId": null
     },
     {
       "_id": "g1ntJe0oYeEOk2lg",
       "type": 0,
       "text": "A stream of 1d4 × 10 gems, each worth 1 gp, shoots from the wand's tip in a line 30 feet long and 5 feet wide. Each gem deals 1 bludgeoning damage, and the total damage of the gems is divided equally among all creatures in the line.",
-      "collection": null,
       "weight": 1,
       "range": [
         88,
@@ -322,15 +321,15 @@
       "drawn": false,
       "flags": {},
       "img": "icons/svg/d20-black.svg",
-      "resultId": null,
       "rangeL": 88,
-      "rangeH": 90
+      "rangeH": 90,
+      "collection": null,
+      "resultId": null
     },
     {
       "_id": "wBKxTkXiN62JvV3i",
       "type": 0,
       "text": "A burst of colorful shimmering light extends from you in a 30‐foot radius. You and each creature in the area that can see must succeed on a DC 15 Constitution saving throw or become blinded for 1 minute. A creature can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success.",
-      "collection": null,
       "weight": 1,
       "range": [
         91,
@@ -339,15 +338,15 @@
       "drawn": false,
       "flags": {},
       "img": "icons/svg/d20-black.svg",
-      "resultId": null,
       "rangeL": 91,
-      "rangeH": 95
+      "rangeH": 95,
+      "collection": null,
+      "resultId": null
     },
     {
       "_id": "DycKUjjvoLMujT2g",
       "type": 0,
       "text": "The target's skin turns bright blue for 1d10 days. If you chose a point in space, the creature nearest to that point is affected.",
-      "collection": null,
       "weight": 1,
       "range": [
         96,
@@ -356,15 +355,15 @@
       "drawn": false,
       "flags": {},
       "img": "icons/svg/d20-black.svg",
-      "resultId": null,
       "rangeL": 96,
-      "rangeH": 97
+      "rangeH": 97,
+      "collection": null,
+      "resultId": null
     },
     {
       "_id": "UH41jo0v3bp4qMMm",
       "type": 0,
       "text": "If you targeted a creature, it must make a DC 15 Constitution saving throw. If you didn't target a creature, you become the target and must make the saving throw. If the saving throw fails by 5 or more, the target is instantly petrified. On any other failed save, the target is restrained and begins to turn to stone. While restrained in this way, the target must repeat the saving throw at the end of its next turn, becoming petrified on a failure or ending the effect on a success. The petrification lasts until the target is freed by the greater restoration spell or similar magic.",
-      "collection": null,
       "weight": 1,
       "range": [
         98,
@@ -373,9 +372,10 @@
       "drawn": false,
       "flags": {},
       "img": "icons/svg/d20-black.svg",
-      "resultId": null,
       "rangeL": 98,
-      "rangeH": 100
+      "rangeH": 100,
+      "collection": null,
+      "resultId": null
     }
   ],
   "formula": "1d100",

@@ -1,11 +1,11 @@
 {
-  "name": "Grey bag of tricks",
+  "name": "Grey Bag of Tricks",
   "img": "icons/containers/bags/coinpouch-simple-tan.webp",
   "description": "",
   "results": [
     {
       "_id": "XBd7m6p8tgHYZmQQ",
-      "type": 0,
+      "type": 2,
       "text": "Weasel",
       "weight": 1,
       "range": [
@@ -14,17 +14,16 @@
       ],
       "drawn": false,
       "flags": {},
-      "img": "icons/svg/d20-black.svg",
-      "collection": null,
-      "resultId": null,
+      "img": "systems/dnd5e/tokens/beast/Weasel.webp",
       "rangeL": 1,
-      "rangeH": 1
+      "rangeH": 1,
+      "collection": "dnd5e.monsters",
+      "resultId": "WOdeacKCYVhgLDuN"
     },
     {
       "_id": "jEBUnfyRp8wMRvaY",
-      "type": 0,
-      "text": "Giant rat",
-      "collection": null,
+      "type": 2,
+      "text": "Giant Rat",
       "weight": 1,
       "range": [
         2,
@@ -32,16 +31,16 @@
       ],
       "drawn": false,
       "flags": {},
-      "img": "icons/svg/d20-black.svg",
-      "resultId": null,
+      "img": "systems/dnd5e/tokens/beast/GiantRat.webp",
       "rangeL": 2,
-      "rangeH": 2
+      "rangeH": 2,
+      "collection": "dnd5e.monsters",
+      "resultId": "q1YJIeIt6rK8fCKn"
     },
     {
       "_id": "YQkRSDbEumbEbKpR",
-      "type": 0,
+      "type": 2,
       "text": "Badger",
-      "collection": null,
       "weight": 1,
       "range": [
         3,
@@ -49,16 +48,16 @@
       ],
       "drawn": false,
       "flags": {},
-      "img": "icons/svg/d20-black.svg",
-      "resultId": null,
+      "img": "systems/dnd5e/tokens/beast/Badger.webp",
       "rangeL": 3,
-      "rangeH": 3
+      "rangeH": 3,
+      "collection": "dnd5e.monsters",
+      "resultId": "oQvORD924obyPdCc"
     },
     {
       "_id": "TJXtTnj6Q9V5bMr1",
-      "type": 0,
+      "type": 2,
       "text": "Boar",
-      "collection": null,
       "weight": 1,
       "range": [
         4,
@@ -66,16 +65,16 @@
       ],
       "drawn": false,
       "flags": {},
-      "img": "icons/svg/d20-black.svg",
-      "resultId": null,
+      "img": "systems/dnd5e/tokens/beast/Boar.webp",
       "rangeL": 4,
-      "rangeH": 4
+      "rangeH": 4,
+      "collection": "dnd5e.monsters",
+      "resultId": "lZR4lhNmYSf89s4Q"
     },
     {
       "_id": "sRzZ86oPZcgDgQrO",
-      "type": 0,
+      "type": 2,
       "text": "Panther",
-      "collection": null,
       "weight": 1,
       "range": [
         5,
@@ -83,16 +82,16 @@
       ],
       "drawn": false,
       "flags": {},
-      "img": "icons/svg/d20-black.svg",
-      "resultId": null,
+      "img": "systems/dnd5e/tokens/beast/Panther.webp",
       "rangeL": 5,
-      "rangeH": 5
+      "rangeH": 5,
+      "collection": "dnd5e.monsters",
+      "resultId": "AijNdqMurWxDxUSl"
     },
     {
       "_id": "WmHsDBVxNha1jZ98",
-      "type": 0,
-      "text": "Giant badger",
-      "collection": null,
+      "type": 2,
+      "text": "Giant Badger",
       "weight": 1,
       "range": [
         6,
@@ -100,16 +99,16 @@
       ],
       "drawn": false,
       "flags": {},
-      "img": "icons/svg/d20-black.svg",
-      "resultId": null,
+      "img": "systems/dnd5e/tokens/beast/GiantBadger.webp",
       "rangeL": 6,
-      "rangeH": 6
+      "rangeH": 6,
+      "collection": "dnd5e.monsters",
+      "resultId": "cJGY1ZywUOo6heNR"
     },
     {
       "_id": "EEc2sAFsTteEdydn",
-      "type": 0,
-      "text": "Dire wolf",
-      "collection": null,
+      "type": 2,
+      "text": "Dire Wolf",
       "weight": 1,
       "range": [
         7,
@@ -117,16 +116,16 @@
       ],
       "drawn": false,
       "flags": {},
-      "img": "icons/svg/d20-black.svg",
-      "resultId": null,
+      "img": "systems/dnd5e/tokens/beast/DireWolf.webp",
       "rangeL": 7,
-      "rangeH": 7
+      "rangeH": 7,
+      "collection": "dnd5e.monsters",
+      "resultId": "EYiQZ3rFL25fEJY5"
     },
     {
       "_id": "JAqooJTNIuXTDL7D",
-      "type": 0,
-      "text": "Giant elk",
-      "collection": null,
+      "type": 2,
+      "text": "Giant Elk",
       "weight": 1,
       "range": [
         8,
@@ -134,10 +133,11 @@
       ],
       "drawn": false,
       "flags": {},
-      "img": "icons/svg/d20-black.svg",
-      "resultId": null,
+      "img": "systems/dnd5e/tokens/beast/GiantElk.webp",
       "rangeL": 8,
-      "rangeH": 8
+      "rangeH": 8,
+      "collection": "dnd5e.monsters",
+      "resultId": "hQt3qIahnB1Odb40"
     }
   ],
   "formula": "1d8",

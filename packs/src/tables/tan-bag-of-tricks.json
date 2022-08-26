@@ -1,11 +1,11 @@
 {
-  "name": "Tan bag of tricks",
+  "name": "Tan Bag of Tricks",
   "img": "icons/containers/bags/sack-twisted-leather-red.webp",
   "description": "",
   "results": [
     {
       "_id": "IhksDn0A3J263umu",
-      "type": 0,
+      "type": 2,
       "text": "Jackal",
       "weight": 1,
       "range": [
@@ -14,17 +14,16 @@
       ],
       "drawn": false,
       "flags": {},
-      "img": "icons/svg/d20-black.svg",
-      "collection": null,
-      "resultId": null,
+      "img": "systems/dnd5e/tokens/beast/Jackal.webp",
       "rangeL": 1,
-      "rangeH": 1
+      "rangeH": 1,
+      "collection": "dnd5e.monsters",
+      "resultId": "MZYCPIVoBs918qGZ"
     },
     {
       "_id": "peadd1dtdZ0crYtg",
-      "type": 0,
+      "type": 2,
       "text": "Ape",
-      "collection": null,
       "weight": 1,
       "range": [
         2,
@@ -32,16 +31,16 @@
       ],
       "drawn": false,
       "flags": {},
-      "img": "icons/svg/d20-black.svg",
-      "resultId": null,
+      "img": "systems/dnd5e/tokens/beast/Ape.webp",
       "rangeL": 2,
-      "rangeH": 2
+      "rangeH": 2,
+      "collection": "dnd5e.monsters",
+      "resultId": "K5cKmPoFkpuOotis"
     },
     {
       "_id": "IZURa0KNEMTeUVV8",
-      "type": 0,
+      "type": 2,
       "text": "Baboon",
-      "collection": null,
       "weight": 1,
       "range": [
         3,
@@ -49,16 +48,16 @@
       ],
       "drawn": false,
       "flags": {},
-      "img": "icons/svg/d20-black.svg",
-      "resultId": null,
+      "img": "systems/dnd5e/tokens/beast/Baboon.webp",
       "rangeL": 3,
-      "rangeH": 3
+      "rangeH": 3,
+      "collection": "dnd5e.monsters",
+      "resultId": "JW8bXggOMBx1S6tF"
     },
     {
       "_id": "5VjauAYVmxJEMhJH",
-      "type": 0,
-      "text": "Axe beak",
-      "collection": null,
+      "type": 2,
+      "text": "Axe Beak",
       "weight": 1,
       "range": [
         4,
@@ -66,16 +65,16 @@
       ],
       "drawn": false,
       "flags": {},
-      "img": "icons/svg/d20-black.svg",
-      "resultId": null,
+      "img": "systems/dnd5e/tokens/beast/AxeBeak.webp",
       "rangeL": 4,
-      "rangeH": 4
+      "rangeH": 4,
+      "collection": "dnd5e.monsters",
+      "resultId": "SXXvwaLBNuzBymp3"
     },
     {
       "_id": "DBa6OK5Oge2wu86H",
-      "type": 0,
-      "text": "Black bear",
-      "collection": null,
+      "type": 2,
+      "text": "Black Bear",
       "weight": 1,
       "range": [
         5,
@@ -83,16 +82,16 @@
       ],
       "drawn": false,
       "flags": {},
-      "img": "icons/svg/d20-black.svg",
-      "resultId": null,
+      "img": "systems/dnd5e/tokens/beast/BlackBear.webp",
       "rangeL": 5,
-      "rangeH": 5
+      "rangeH": 5,
+      "collection": "dnd5e.monsters",
+      "resultId": "D5WjGwKskeUT8HXa"
     },
     {
       "_id": "Plz7vGDF4tL8MMJg",
-      "type": 0,
-      "text": "Giant weasel",
-      "collection": null,
+      "type": 2,
+      "text": "Giant Weasel",
       "weight": 1,
       "range": [
         6,
@@ -100,16 +99,16 @@
       ],
       "drawn": false,
       "flags": {},
-      "img": "icons/svg/d20-black.svg",
-      "resultId": null,
+      "img": "systems/dnd5e/tokens/beast/GiantWeasel.webp",
       "rangeL": 6,
-      "rangeH": 6
+      "rangeH": 6,
+      "collection": "dnd5e.monsters",
+      "resultId": "8VXxqeBvN54rPh81"
     },
     {
       "_id": "umeZVvubowdJVHLM",
-      "type": 0,
-      "text": "Giant hyena",
-      "collection": null,
+      "type": 2,
+      "text": "Giant Hyena",
       "weight": 1,
       "range": [
         7,
@@ -117,16 +116,16 @@
       ],
       "drawn": false,
       "flags": {},
-      "img": "icons/svg/d20-black.svg",
-      "resultId": null,
+      "img": "systems/dnd5e/tokens/beast/GiantHyena.webp",
       "rangeL": 7,
-      "rangeH": 7
+      "rangeH": 7,
+      "collection": "dnd5e.monsters",
+      "resultId": "aAqfEHPiVbhMwZ6j"
     },
     {
       "_id": "LBsxVmoBlycD6AUp",
-      "type": 0,
+      "type": 2,
       "text": "Tiger",
-      "collection": null,
       "weight": 1,
       "range": [
         8,
@@ -134,13 +133,14 @@
       ],
       "drawn": false,
       "flags": {},
-      "img": "icons/svg/d20-black.svg",
-      "resultId": null,
+      "img": "systems/dnd5e/tokens/beast/Tiger.webp",
       "rangeL": 8,
-      "rangeH": 8
+      "rangeH": 8,
+      "collection": "dnd5e.monsters",
+      "resultId": "FayqbnjBMszO6Pat"
     }
   ],
-  "formula": "",
+  "formula": "1d8",
   "replacement": true,
   "displayRoll": true,
   "flags": {},

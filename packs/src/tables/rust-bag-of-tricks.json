@@ -1,11 +1,11 @@
 {
-  "name": "Rust bag of tricks",
+  "name": "Rust Bag of Tricks",
   "img": "icons/containers/bags/sack-simple-leather-tan.webp",
   "description": "",
   "results": [
     {
       "_id": "StvJ85SMUP5YFofl",
-      "type": 0,
+      "type": 2,
       "text": "Rat",
       "weight": 1,
       "range": [
@@ -14,17 +14,16 @@
       ],
       "drawn": false,
       "flags": {},
-      "img": "icons/svg/d20-black.svg",
-      "collection": null,
-      "resultId": null,
+      "img": "systems/dnd5e/tokens/beast/Rat.webp",
       "rangeL": 1,
-      "rangeH": 1
+      "rangeH": 1,
+      "collection": "dnd5e.monsters",
+      "resultId": "pozQUPTnLZW8epox"
     },
     {
       "_id": "v5b8t1ubwG2MLr28",
-      "type": 0,
+      "type": 2,
       "text": "Owl",
-      "collection": null,
       "weight": 1,
       "range": [
         2,
@@ -32,16 +31,16 @@
       ],
       "drawn": false,
       "flags": {},
-      "img": "icons/svg/d20-black.svg",
-      "resultId": null,
+      "img": "systems/dnd5e/tokens/beast/Owl.webp",
       "rangeL": 2,
-      "rangeH": 2
+      "rangeH": 2,
+      "collection": "dnd5e.monsters",
+      "resultId": "d0prpsGSAorDadec"
     },
     {
       "_id": "NpAPgWHnObfUiw17",
-      "type": 0,
+      "type": 2,
       "text": "Mastiff",
-      "collection": null,
       "weight": 1,
       "range": [
         3,
@@ -49,16 +48,16 @@
       ],
       "drawn": false,
       "flags": {},
-      "img": "icons/svg/d20-black.svg",
-      "resultId": null,
+      "img": "systems/dnd5e/tokens/beast/Mastiff.webp",
       "rangeL": 3,
-      "rangeH": 3
+      "rangeH": 3,
+      "collection": "dnd5e.monsters",
+      "resultId": "YTpL2c3NO4sOn2UA"
     },
     {
       "_id": "U2vX0imNldvVRZPK",
-      "type": 0,
+      "type": 2,
       "text": "Goat",
-      "collection": null,
       "weight": 1,
       "range": [
         4,
@@ -66,16 +65,16 @@
       ],
       "drawn": false,
       "flags": {},
-      "img": "icons/svg/d20-black.svg",
-      "resultId": null,
+      "img": "systems/dnd5e/tokens/beast/Goat.webp",
       "rangeL": 4,
-      "rangeH": 4
+      "rangeH": 4,
+      "collection": "dnd5e.monsters",
+      "resultId": "y8sRU8Ks2lcrGsaf"
     },
     {
       "_id": "LIETYpYg2cQyP2OP",
-      "type": 0,
-      "text": "Giant goat",
-      "collection": null,
+      "type": 2,
+      "text": "Giant Goat",
       "weight": 1,
       "range": [
         5,
@@ -83,16 +82,16 @@
       ],
       "drawn": false,
       "flags": {},
-      "img": "icons/svg/d20-black.svg",
-      "resultId": null,
+      "img": "systems/dnd5e/tokens/beast/GiantGoat.webp",
       "rangeL": 5,
-      "rangeH": 5
+      "rangeH": 5,
+      "collection": "dnd5e.monsters",
+      "resultId": "rjqk7ToMD8sGr3n4"
     },
     {
       "_id": "pCaNqhrSHxh8pHat",
-      "type": 0,
-      "text": "Giant boar",
-      "collection": null,
+      "type": 2,
+      "text": "Giant Boar",
       "weight": 1,
       "range": [
         6,
@@ -100,16 +99,16 @@
       ],
       "drawn": false,
       "flags": {},
-      "img": "icons/svg/d20-black.svg",
-      "resultId": null,
+      "img": "systems/dnd5e/tokens/beast/GiantBoar.webp",
       "rangeL": 6,
-      "rangeH": 6
+      "rangeH": 6,
+      "collection": "dnd5e.monsters",
+      "resultId": "SsuCaF2fIEoDdFA3"
     },
     {
       "_id": "xRrnY1BhGaFtT4Rr",
-      "type": 0,
+      "type": 2,
       "text": "Lion",
-      "collection": null,
       "weight": 1,
       "range": [
         7,
@@ -117,16 +116,16 @@
       ],
       "drawn": false,
       "flags": {},
-      "img": "icons/svg/d20-black.svg",
-      "resultId": null,
+      "img": "systems/dnd5e/tokens/beast/Lion.webp",
       "rangeL": 7,
-      "rangeH": 7
+      "rangeH": 7,
+      "collection": "dnd5e.monsters",
+      "resultId": "hjhERRzafCiFFVLA"
     },
     {
       "_id": "n6u2AIpqwb2vNWeq",
-      "type": 0,
-      "text": "Brown bear",
-      "collection": null,
+      "type": 2,
+      "text": "Brown Bear",
       "weight": 1,
       "range": [
         8,
@@ -134,10 +133,11 @@
       ],
       "drawn": false,
       "flags": {},
-      "img": "icons/svg/d20-black.svg",
-      "resultId": null,
+      "img": "systems/dnd5e/tokens/beast/BrownBear.webp",
       "rangeL": 8,
-      "rangeH": 8
+      "rangeH": 8,
+      "collection": "dnd5e.monsters",
+      "resultId": "omcDpBoB69esCXeM"
     }
   ],
   "formula": "1d8",

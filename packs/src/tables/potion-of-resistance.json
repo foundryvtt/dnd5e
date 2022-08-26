@@ -1,12 +1,12 @@
 {
-  "name": "Potion of resistance",
+  "name": "Potion of Resistance",
   "img": "icons/consumables/potions/bottle-round-flask-fumes-purple.webp",
   "description": "",
   "results": [
     {
       "_id": "wrhDmDQhGeZs7gpv",
-      "type": 0,
-      "text": "Acid",
+      "type": 2,
+      "text": "Potion of Acid Resistance",
       "weight": 1,
       "range": [
         1,
@@ -14,17 +14,16 @@
       ],
       "drawn": false,
       "flags": {},
-      "img": "icons/svg/d20-black.svg",
-      "collection": null,
-      "resultId": null,
+      "img": "icons/consumables/potions/bottle-bulb-corked-green.webp",
       "rangeL": 1,
-      "rangeH": 1
+      "rangeH": 1,
+      "collection": "dnd5e.items",
+      "resultId": "zgZkJAyFAfYmyn11"
     },
     {
       "_id": "IUMIRptkfU4jg1aW",
-      "type": 0,
-      "text": "Cold",
-      "collection": null,
+      "type": 2,
+      "text": "Potion of Cold Resistance",
       "weight": 1,
       "range": [
         2,
@@ -32,16 +31,16 @@
       ],
       "drawn": false,
       "flags": {},
-      "img": "icons/svg/d20-black.svg",
-      "resultId": null,
+      "img": "icons/consumables/potions/bottle-bulb-corked-labeled-blue.webp",
       "rangeL": 2,
-      "rangeH": 2
+      "rangeH": 2,
+      "collection": "dnd5e.items",
+      "resultId": "34YKlIJVVWLeBv7R"
     },
     {
       "_id": "9rG6rnfec1aECeoQ",
-      "type": 0,
-      "text": "Fire",
-      "collection": null,
+      "type": 2,
+      "text": "Potion of Fire Resistance",
       "weight": 1,
       "range": [
         3,
@@ -49,16 +48,16 @@
       ],
       "drawn": false,
       "flags": {},
-      "img": "icons/svg/d20-black.svg",
-      "resultId": null,
+      "img": "icons/consumables/potions/bottle-bulb-corked-glowing-red.webp",
       "rangeL": 3,
-      "rangeH": 3
+      "rangeH": 3,
+      "collection": "dnd5e.items",
+      "resultId": "Jj4iFQQGvckx8Wsj"
     },
     {
       "_id": "3xQx9agJC6yfhlHN",
-      "type": 0,
-      "text": "Force",
-      "collection": null,
+      "type": 2,
+      "text": "Potion of Force Resistance",
       "weight": 1,
       "range": [
         4,
@@ -66,16 +65,16 @@
       ],
       "drawn": false,
       "flags": {},
-      "img": "icons/svg/d20-black.svg",
-      "resultId": null,
+      "img": "icons/consumables/potions/bottle-bulb-corked-labeled-blue.webp",
       "rangeL": 4,
-      "rangeH": 4
+      "rangeH": 4,
+      "collection": "dnd5e.items",
+      "resultId": "kKGJjVVlJVoakWgQ"
     },
     {
       "_id": "T4TZLXm3iwdOew7C",
-      "type": 0,
-      "text": "Lightning",
-      "collection": null,
+      "type": 2,
+      "text": "Potion of Lightning Resistance",
       "weight": 1,
       "range": [
         5,
@@ -83,16 +82,16 @@
       ],
       "drawn": false,
       "flags": {},
-      "img": "icons/svg/d20-black.svg",
-      "resultId": null,
+      "img": "icons/consumables/potions/bottle-round-corked-yellow.webp",
       "rangeL": 5,
-      "rangeH": 5
+      "rangeH": 5,
+      "collection": "dnd5e.items",
+      "resultId": "8MPnSrvEeZhPhtTi"
     },
     {
       "_id": "EqwQXFi8AFhmCclX",
-      "type": 0,
-      "text": "Necrotic",
-      "collection": null,
+      "type": 2,
+      "text": "Potion of Necrotic Resistance",
       "weight": 1,
       "range": [
         6,
@@ -100,16 +99,16 @@
       ],
       "drawn": false,
       "flags": {},
-      "img": "icons/svg/d20-black.svg",
-      "resultId": null,
+      "img": "icons/consumables/potions/bottle-round-corked-pink.webp",
       "rangeL": 6,
-      "rangeH": 6
+      "rangeH": 6,
+      "collection": "dnd5e.items",
+      "resultId": "xw99pcqPBVwtMOLw"
     },
     {
       "_id": "5Buypj4YqAzrQFw0",
-      "type": 0,
-      "text": "Poison",
-      "collection": null,
+      "type": 2,
+      "text": "Potion of Poison Resistance",
       "weight": 1,
       "range": [
         7,
@@ -117,16 +116,16 @@
       ],
       "drawn": false,
       "flags": {},
-      "img": "icons/svg/d20-black.svg",
-      "resultId": null,
+      "img": "icons/consumables/potions/bottle-bulb-corked-green.webp",
       "rangeL": 7,
-      "rangeH": 7
+      "rangeH": 7,
+      "collection": "dnd5e.items",
+      "resultId": "f5chGcpQCi1HYPQw"
     },
     {
       "_id": "12koWWEubudv203U",
-      "type": 0,
-      "text": "Psychic",
-      "collection": null,
+      "type": 2,
+      "text": "Potion of Psychic Resistance",
       "weight": 1,
       "range": [
         8,
@@ -134,16 +133,16 @@
       ],
       "drawn": false,
       "flags": {},
-      "img": "icons/svg/d20-black.svg",
-      "resultId": null,
+      "img": "icons/consumables/potions/bottle-round-corked-pink.webp",
       "rangeL": 8,
-      "rangeH": 8
+      "rangeH": 8,
+      "collection": "dnd5e.items",
+      "resultId": "c0luemOP0iW8L23R"
     },
     {
       "_id": "v9gJi8EmYGxRuTK3",
-      "type": 0,
-      "text": "Radiant",
-      "collection": null,
+      "type": 2,
+      "text": "Potion of Radiant Resistance",
       "weight": 1,
       "range": [
         9,
@@ -151,16 +150,16 @@
       ],
       "drawn": false,
       "flags": {},
-      "img": "icons/svg/d20-black.svg",
-      "resultId": null,
+      "img": "icons/consumables/potions/bottle-round-corked-yellow.webp",
       "rangeL": 9,
-      "rangeH": 9
+      "rangeH": 9,
+      "collection": "dnd5e.items",
+      "resultId": "LBQWNqX6hZOKhQ8a"
     },
     {
       "_id": "k59rey3TWWeMMOXA",
-      "type": 0,
-      "text": "Thunder",
-      "collection": null,
+      "type": 2,
+      "text": "Potion of Thunder Resistance",
       "weight": 1,
       "range": [
         10,
@@ -168,10 +167,11 @@
       ],
       "drawn": false,
       "flags": {},
-      "img": "icons/svg/d20-black.svg",
-      "resultId": null,
+      "img": "icons/consumables/potions/bottle-round-corked-yellow.webp",
       "rangeL": 10,
-      "rangeH": 10
+      "rangeH": 10,
+      "collection": "dnd5e.items",
+      "resultId": "zBX8LLC2CjC89Dzl"
     }
   ],
   "formula": "1d10",

@@ -1,12 +1,12 @@
 {
-  "name": "Feather token",
+  "name": "Feather Token",
   "img": "icons/commodities/materials/feather-red.webp",
   "description": "",
   "results": [
     {
       "_id": "DxRwXmSG5Us9EIFE",
-      "type": 0,
-      "text": "Anchor",
+      "type": 2,
+      "text": "Feather Token Anchor",
       "weight": 1,
       "range": [
         1,
@@ -14,17 +14,16 @@
       ],
       "drawn": false,
       "flags": {},
-      "img": "icons/svg/d20-black.svg",
-      "collection": null,
-      "resultId": null,
+      "img": "icons/commodities/materials/feather-blue.webp",
       "rangeL": 1,
-      "rangeH": 20
+      "rangeH": 20,
+      "collection": "dnd5e.items",
+      "resultId": "DnlQkH6Bpwkd5n5Y"
     },
     {
       "_id": "cVe4siqGuZA0R6ro",
-      "type": 0,
-      "text": "Bird",
-      "collection": null,
+      "type": 2,
+      "text": "Feather Token Bird",
       "weight": 1,
       "range": [
         21,
@@ -32,16 +31,16 @@
       ],
       "drawn": false,
       "flags": {},
-      "img": "icons/svg/d20-black.svg",
-      "resultId": null,
+      "img": "icons/commodities/materials/feather-yellow.webp",
       "rangeL": 21,
-      "rangeH": 35
+      "rangeH": 35,
+      "collection": "dnd5e.items",
+      "resultId": "hWqImieUaLo08l9l"
     },
     {
       "_id": "FkOd089vQo0nH49R",
-      "type": 0,
-      "text": "Fan",
-      "collection": null,
+      "type": 2,
+      "text": "Feather Token Fan",
       "weight": 1,
       "range": [
         36,
@@ -49,16 +48,16 @@
       ],
       "drawn": false,
       "flags": {},
-      "img": "icons/svg/d20-black.svg",
-      "resultId": null,
+      "img": "icons/commodities/materials/feather-colored-red.webp",
       "rangeL": 36,
-      "rangeH": 50
+      "rangeH": 50,
+      "collection": "dnd5e.items",
+      "resultId": "e98hfROZjztt7ccO"
     },
     {
       "_id": "xMfIW7G295IPbyg9",
-      "type": 0,
-      "text": "Swan boat",
-      "collection": null,
+      "type": 2,
+      "text": "Feather Token Swan Boat",
       "weight": 1,
       "range": [
         51,
@@ -66,16 +65,16 @@
       ],
       "drawn": false,
       "flags": {},
-      "img": "icons/svg/d20-black.svg",
-      "resultId": null,
+      "img": "icons/commodities/materials/feather-blue-grey.webp",
       "rangeL": 51,
-      "rangeH": 65
+      "rangeH": 65,
+      "collection": "dnd5e.items",
+      "resultId": "UgnUJhu0tW1tLt7g"
     },
     {
       "_id": "F7c9gxlC07kaqwYe",
-      "type": 0,
-      "text": "Tree",
-      "collection": null,
+      "type": 2,
+      "text": "Feather Token Tree",
       "weight": 1,
       "range": [
         66,
@@ -83,16 +82,16 @@
       ],
       "drawn": false,
       "flags": {},
-      "img": "icons/svg/d20-black.svg",
-      "resultId": null,
+      "img": "icons/commodities/materials/feather-colored-green.webp",
       "rangeL": 66,
-      "rangeH": 90
+      "rangeH": 90,
+      "collection": "dnd5e.items",
+      "resultId": "NjTgPn2o0M1TGk93"
     },
     {
       "_id": "4K2qorO3uz1izkBP",
-      "type": 0,
-      "text": "Whip",
-      "collection": null,
+      "type": 2,
+      "text": "Feather Token Whip",
       "weight": 1,
       "range": [
         91,
@@ -100,10 +99,11 @@
       ],
       "drawn": false,
       "flags": {},
-      "img": "icons/svg/d20-black.svg",
-      "resultId": null,
+      "img": "icons/commodities/materials/feather-colored-blue.webp",
       "rangeL": 91,
-      "rangeH": 100
+      "rangeH": 100,
+      "collection": "dnd5e.items",
+      "resultId": "Fgkj11diTJJ7H3JC"
     }
   ],
   "formula": "1d100",

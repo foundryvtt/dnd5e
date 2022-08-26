@@ -1,12 +1,12 @@
 {
-  "name": "Manual of golems",
+  "name": "Manual of Golems",
   "img": "icons/sundries/books/book-symbol-triangle-silver-blue.webp",
   "description": "",
   "results": [
     {
       "_id": "Zi661GWAijdjH7DI",
-      "type": 0,
-      "text": "Golem:Clay ,Time:30 days ,Cost:65,000 gp",
+      "type": 2,
+      "text": "Clay Golem",
       "weight": 1,
       "range": [
         1,
@@ -14,17 +14,16 @@
       ],
       "drawn": false,
       "flags": {},
-      "img": "icons/svg/d20-black.svg",
-      "collection": null,
-      "resultId": null,
+      "img": "systems/dnd5e/tokens/construct/ClayGolem.webp",
       "rangeL": 1,
-      "rangeH": 5
+      "rangeH": 5,
+      "collection": "dnd5e.monsters",
+      "resultId": "YOqhbf8WsX0jH9Fu"
     },
     {
       "_id": "GgMOPmVZzHiZ4sD3",
-      "type": 0,
-      "text": "Golem:Flesh ,Time:60 days ,Cost:50,000 gp",
-      "collection": null,
+      "type": 2,
+      "text": "Flesh Golem",
       "weight": 1,
       "range": [
         6,
@@ -32,16 +31,16 @@
       ],
       "drawn": false,
       "flags": {},
-      "img": "icons/svg/d20-black.svg",
-      "resultId": null,
+      "img": "icons/svg/mystery-man.svg",
       "rangeL": 6,
-      "rangeH": 17
+      "rangeH": 17,
+      "collection": "dnd5e.monsters",
+      "resultId": "Hm4o2FgPZsdbXjLq"
     },
     {
       "_id": "xPxpGRt75PVDTDp6",
-      "type": 0,
-      "text": "Golem:Iron ,Time:120 days ,Cost:100,000 gp",
-      "collection": null,
+      "type": 2,
+      "text": "Iron Golem",
       "weight": 1,
       "range": [
         18,
@@ -49,16 +48,16 @@
       ],
       "drawn": false,
       "flags": {},
-      "img": "icons/svg/d20-black.svg",
-      "resultId": null,
+      "img": "systems/dnd5e/tokens/construct/IronGolem.webp",
       "rangeL": 18,
-      "rangeH": 18
+      "rangeH": 18,
+      "collection": "dnd5e.monsters",
+      "resultId": "h98AuPfomEPcCibP"
     },
     {
       "_id": "OdFdgj0ZvoGzsztu",
-      "type": 0,
-      "text": "Golem:Stone ,Time:90 days ,Cost:80,000 gp",
-      "collection": null,
+      "type": 2,
+      "text": "Stone Golem",
       "weight": 1,
       "range": [
         19,
@@ -66,10 +65,11 @@
       ],
       "drawn": false,
       "flags": {},
-      "img": "icons/svg/d20-black.svg",
-      "resultId": null,
+      "img": "systems/dnd5e/tokens/construct/StoneGolem.webp",
       "rangeL": 19,
-      "rangeH": 20
+      "rangeH": 20,
+      "collection": "dnd5e.monsters",
+      "resultId": "z3gSIXHHWYaHjfBT"
     }
   ],
   "formula": "1d20",
