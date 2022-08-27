@@ -84,7 +84,7 @@ export default class AdvancementConfig extends FormApplication {
     super.activateListeners(html);
 
     // Remove an item from the list
-    if ( this.options.dropKeyPath ) html.on("click", ".item-delete", this._onItemDelete.bind(this));
+    if ( this.options.dropKeyPath ) html.on("click", "[data-action='delete']", this._onItemDelete.bind(this));
   }
 
   /* -------------------------------------------- */
@@ -132,7 +132,6 @@ export default class AdvancementConfig extends FormApplication {
     const updates = { configuration: await this.prepareConfigurationUpdate({
       [this.options.dropKeyPath]: items.filter(uuid => uuid !== uuidToDelete)
     }) };
-    console.log(updates);
     await this.advancement.update(updates);
     this.render();
   }
@@ -148,7 +147,7 @@ export default class AdvancementConfig extends FormApplication {
 
   /** @inheritdoc */
   async _onDrop(event) {
-    if ( !this.options.dropKeyPath ) return console.error(
+    if ( !this.options.dropKeyPath ) throw new Error(
       "AdvancementConfig#options.dropKeyPath must be configured or #_onDrop must be overridden to support"
       + " drag and drop on advancement config items."
     );
@@ -164,14 +163,17 @@ export default class AdvancementConfig extends FormApplication {
     if ( data.type !== "Item" ) return false;
     const item = await Item.implementation.fromDropData(data);
 
-    const verified = this._verifyDroppedItem(event, item);
-    if ( !verified ) return false;
+    try {
+      this._validateDroppedItem(event, item);
+    } catch(err) {
+      return ui.notifications.error(err.message);
+    }
 
     const existingItems = foundry.utils.getProperty(this.advancement.data.configuration, this.options.dropKeyPath);
 
     // Abort if this uuid is the parent item
     if ( item.uuid === this.item.uuid ) {
-      return ui.notifications.warn(game.i18n.localize("DND5E.AdvancementItemGrantRecursiveWarning"));
+      return ui.notifications.error(game.i18n.localize("DND5E.AdvancementItemGrantRecursiveWarning"));
     }
 
     // Abort if this uuid exists already
@@ -186,14 +188,12 @@ export default class AdvancementConfig extends FormApplication {
   /* -------------------------------------------- */
 
   /**
-   * Called when an item is dropped to verify the Item before it is saved.
+   * Called when an item is dropped to validate the Item before it is saved. An error should be thrown
+   * if the item is invalid.
    * @param {Event} event  Triggering drop event.
    * @param {Item5e} item  The materialized Item that was dropped.
-   * @returns {boolean}    Is the dropped Item valid?
    * @protected
    */
-  _verifyDroppedItem(event, item) {
-    return true;
-  }
+  _validateDroppedItem(event, item) {}
 
 }
