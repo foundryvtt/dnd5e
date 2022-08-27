@@ -1263,7 +1263,7 @@ export default class Item5e extends Item {
     const consume = this.system.consume;
     if ( consume?.type === "ammo" ) {
       ammo = this.actor.items.get(consume.target);
-      if ( ammo?.data ) {
+      if ( ammo?.system ) {
         const q = ammo.system.quantity;
         const consumeAmount = consume.amount ?? 0;
         if ( q && (q - consumeAmount >= 0) ) {
