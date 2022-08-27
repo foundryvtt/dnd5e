@@ -80,9 +80,6 @@ export default class ItemSheet5e extends ItemSheet {
         async: true
       }),
 
-      // Potential consumption targets
-      abilityConsumptionTargets: this._getItemConsumptionTargets(item),
-
       // Action Details
       hasAttackRoll: item.hasAttack,
       isHealing: item.system.actionType === "heal",
@@ -104,6 +101,9 @@ export default class ItemSheet5e extends ItemSheet {
       // Prepare Active Effects
       effects: ActiveEffect5e.prepareActiveEffectCategories(item.effects)
     });
+
+    // Potential consumption targets
+    context.abilityConsumptionTargets = this._getItemConsumptionTargets(item);
 
     /** @deprecated */
     Object.defineProperty(context, "data", {
