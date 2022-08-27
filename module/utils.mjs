@@ -208,3 +208,72 @@ function _localizeObject(obj, keys) {
     }
   }
 }
+
+
+/**
+ * Synchronize the spells for all Actors in some collection with source data from an Item compendium pack.
+ * @param {CompendiumCollection} actorPack      An Actor compendium pack which will be updated
+ * @param {CompendiumCollection} spellsPack     An Item compendium pack which provides source data for spells
+ * @returns {Promise<void>}
+ */
+export async function synchronizeActorSpells(actorPack, spellsPack) {
+
+  // Load all actors and spells
+  const actors = await actorPack.getDocuments();
+  const spells = await spellsPack.getDocuments();
+  const spellsMap = spells.reduce((obj, item) => {
+    obj[item.name] = item;
+    return obj;
+  }, {});
+
+  // Unlock the pack
+  await actorPack.configure({locked: false});
+
+  // Iterate over actors
+  SceneNavigation.displayProgressBar({label: "Synchronizing Spell Data", pct: 0});
+  for ( const [i, actor] of actors.entries() ) {
+    const {toDelete, toCreate} = _synchronizeActorSpells(actor, spellsMap);
+    if ( toDelete.length ) await actor.deleteEmbeddedDocuments("Item", toDelete);
+    if ( toCreate.length ) await actor.createEmbeddedDocuments("Item", toCreate, {keepId: true});
+    console.debug(`${actor.name} | Synchronized ${toCreate.length} spells`);
+    SceneNavigation.displayProgressBar({label: actor.name, pct: ((i / actors.length) * 100).toFixed(0)});
+  }
+
+  // Re-lock the pack
+  await actorPack.configure({locked: true});
+  SceneNavigation.displayProgressBar({label: "Synchronizing Spell Data", pct: 100});
+}
+
+/**
+ * A helper function to synchronize spell data for a specific Actor.
+ * @param {Actor5e} actor
+ * @param {Object<string,Item5e>} spellsMap
+ * @returns {{toDelete: string[], toCreate: object[]}}
+ * @private
+ */
+function _synchronizeActorSpells(actor, spellsMap) {
+  const spells = actor.itemTypes.spell;
+  const toDelete = [];
+  const toCreate = [];
+  if ( !spells.length ) return {toDelete, toCreate};
+
+  for ( const spell of spells ) {
+    const source = spellsMap[spell.name];
+    if ( !source ) {
+      console.warn(`${actor.name} | ${spell.name} | Does not exist in spells compendium pack`);
+      continue;
+    }
+
+    // Combine source data with the preparation and uses data from the actor
+    const spellData = source.toObject();
+    const {preparation, uses, save} = spell.toObject().system;
+    Object.assign(spellData.system, {preparation, uses});
+    spellData.system.save.dc = save.dc;
+    foundry.utils.setProperty(spellData, "flags.core.sourceId", source.uuid);
+
+    // Record spells to be deleted and created
+    toDelete.push(spell.id);
+    toCreate.push(spellData);
+  }
+  return {toDelete, toCreate};
+}
