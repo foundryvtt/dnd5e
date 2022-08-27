@@ -275,7 +275,7 @@ export const migrateItemData = function(item, migrationData) {
   _migrateItemSpellcasting(item, updateData);
   _migrateArmorType(item, updateData);
   _migrateItemCriticalData(item, updateData);
-  _migrateItemIcon(item, updateData, migrationData);
+  _migrateDocumentIcon(item, updateData, migrationData);
 
   // Migrate embedded effects
   if ( item.effects ) {
@@ -317,6 +317,7 @@ export const migrateEffects = function(parent, migrationData) {
  */
 export const migrateEffectData = function(effect, migrationData) {
   const updateData = {};
+  _migrateDocumentIcon(effect, updateData, {...migrationData, field: "icon"});
   _migrateEffectArmorClass(effect, updateData);
   return updateData;
 };
@@ -331,7 +332,7 @@ export const migrateEffectData = function(effect, migrationData) {
  */
 export const migrateMacroData = function(macro, migrationData) {
   const updateData = {};
-  _migrateItemIcon(macro, updateData, migrationData);
+  _migrateDocumentIcon(macro, updateData, migrationData);
   _migrateMacroCommands(macro, updateData);
   return updateData;
 };
@@ -574,7 +575,7 @@ function _migrateActorAC(actorData, updateData) {
  * @private
  */
 function _migrateTokenImage(actorData, updateData) {
-  const oldSystemPNG = /^systems\/dnd5e\/tokens\/([a-z]+)\/([A-z]+).png$/
+  const oldSystemPNG = /^systems\/dnd5e\/tokens\/([a-z]+)\/([A-z]+).png$/;
   for ( const path of ["texture.src", "prototypeToken.texture.src"] ) {
     const v = foundry.utils.getProperty(actorData, path);
     if ( oldSystemPNG.test(v) ) {
@@ -675,17 +676,23 @@ function _migrateItemCriticalData(item, updateData) {
 
 /**
  * Convert system icons to use bundled core webp icons.
- * @param {object} item                                     Item data to migrate
+ * @param {object} document                                 Document data to migrate
  * @param {object} updateData                               Existing update to expand upon
  * @param {object} [migrationData={}]                       Additional data to perform the migration
- * @param {Object<string, string>} [migrationData.iconMap]  A mapping of system icons to core foundry icons
+ * @param {object<string, string>} [migrationData.iconMap]  A mapping of system icons to core foundry icons
+ * @param {string} [migrationData.field]                    The document field to migrate
  * @returns {object}                                        The updateData to apply
  * @private
  */
-function _migrateItemIcon(item, updateData, {iconMap}={}) {
-  if ( iconMap && item.img?.startsWith("systems/dnd5e/icons/") ) {
-    const rename = iconMap[item.img];
-    if ( rename ) updateData.img = rename;
+function _migrateDocumentIcon(document, updateData, {iconMap, field="img"}={}) {
+  if (!document?.[field]) {
+    return;
+  }
+
+  if ( iconMap && document[field]?.startsWith("systems/dnd5e/icons/") ) {
+    debugger;
+    const rename = iconMap[document[field]];
+    if ( rename ) updateData[field] = rename;
   }
   return updateData;
 }
