@@ -1156,7 +1156,7 @@ export default class Item5e extends Item {
     props.push(
       CONFIG.DND5E.equipmentTypes[data.armor.type],
       labels.armor || null,
-      data.stealth.value ? game.i18n.localize("DND5E.StealthDisadvantage") : null
+      data.stealth ? game.i18n.localize("DND5E.StealthDisadvantage") : null
     );
   }
 
