@@ -5,7 +5,7 @@
   "img": "icons/weapons/staves/staff-simple-spiral-green.webp",
   "system": {
     "description": {
-      "value": "<p><em>(Requires attunement by a bard, cleric, druid, sorcerer, warlock, or wizard)</em></p>\n<p>This staff has 10 charges and regains 1d6 + 4 expended charges daily at dawn. If you expend the last charge, roll a d20. On a 1, a swarm of insects consumes and destroys the staff, then disperses.</p>\n<p><strong>Spells</strong>. While holding the staff, you can use an action to expend some of its charges to cast one of the following spells from it, using your spell save DC: @Compendium[dnd5e.spells.czXrVRx6XYRWsHAi]{Giant Insect} (4 charges) or @Compendium[dnd5e.spells.OVikYmSdHliAG2YD]{Insect Plague} (5 charges).</p>\n<p><strong>Insect Cloud</strong>. While holding the staff, you can use an action and expend 1 charge to cause a swarm of harmless flying insects to spread out in a 30-foot radius from you. The insects remain for 10 minutes, making the area heavily obscured for creatures other than you. The swarm moves with you, remaining centered on you. A wind of at least 10 miles per hour disperses the swarm and ends the effect.</p>\n<p><em>Foundry note: the Other Formula button has been configured to roll the staff's recharge rate at dawn if required.</em></p>",
+      "value": "<p><em>(Requires attunement by a bard, cleric, druid, sorcerer, warlock, or wizard)</em></p><p>This staff has 10 charges and regains 1d6 + 4 expended charges daily at dawn. If you expend the last charge, roll a d20. On a 1, a swarm of insects consumes and destroys the staff, then disperses.</p><p><strong>Spells</strong>. While holding the staff, you can use an action to expend some of its charges to cast one of the following spells from it, using your spell save DC: @Compendium[dnd5e.spells.czXrVRx6XYRWsHAi]{Giant Insect} (4 charges) or @Compendium[dnd5e.spells.OVikYmSdHliAG2YD]{Insect Plague} (5 charges).</p><p><strong>Insect Cloud</strong>. While holding the staff, you can use an action and expend 1 charge to cause a swarm of harmless flying insects to spread out in a 30-foot radius from you. The insects remain for 10 minutes, making the area heavily obscured for creatures other than you. The swarm moves with you, remaining centered on you. A wind of at least 10 miles per hour disperses the swarm and ends the effect.</p>",
       "chat": "",
       "unidentified": ""
     },
@@ -29,7 +29,7 @@
     "target": {
       "value": null,
       "width": null,
-      "units": null,
+      "units": "",
       "type": "self"
     },
     "range": {
@@ -39,16 +39,16 @@
     },
     "uses": {
       "value": 10,
-      "max": 10,
+      "max": "10",
       "per": "charges",
       "recovery": "1d6 + 4"
     },
     "consume": {
       "type": "",
-      "target": null,
+      "target": "",
       "amount": null
     },
-    "ability": null,
+    "ability": "",
     "actionType": "util",
     "attackBonus": 0,
     "chatFlavor": "",
@@ -60,7 +60,7 @@
       "parts": [],
       "versatile": ""
     },
-    "formula": "1d6 +4",
+    "formula": "",
     "save": {
       "ability": "con",
       "dc": null,
@@ -92,7 +92,9 @@
       "thr": false,
       "two": false,
       "ver": false,
-      "mgc": true
+      "mgc": true,
+      "ada": false,
+      "sil": false
     },
     "proficient": false,
     "attributes": {
@@ -108,10 +110,10 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.0.2",
+    "systemVersion": "2.0.3",
     "coreVersion": "10.286",
     "createdTime": 1661787233733,
-    "modifiedTime": 1663775408695,
+    "modifiedTime": 1663991724386,
     "lastModifiedBy": "dnd5ebuilder0000"
   }
 }

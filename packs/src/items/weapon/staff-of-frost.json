@@ -5,7 +5,7 @@
   "img": "icons/weapons/staves/staff-ornate-engraved-blue.webp",
   "system": {
     "description": {
-      "value": "<p><em>(Requires attunement by a druid, sorcerer, warlock, or wizard)</em></p>\n<p>You have resistance to cold damage while you hold this staff.</p>\n<p>The staff has 10 charges. While holding it, you can use an action to expend 1 or more of its charges to cast one of the following spells from it, using your spell save DC: @Compendium[dnd5e.spells.RpKjTlYASrfqUPVA]{Cone of Cold} (5 charges), @Compendium[dnd5e.spells.IBJmWjzbQGu7M4UX]{Fog Cloud} (1 charge), @Compendium[dnd5e.spells.WN2LWEljYU6QqnRH]{Ice Storm} (4 charges), or @Compendium[dnd5e.spells.fzZnVKLmBMo2f5up]{Wall of Ice} (4 charges).</p>\n<p>The staff regains 1d6 + 4 expended charges daily at dawn. If you expend the last charge, roll a d20. On a 1, the staff turns to water and is destroyed.</p>\n<p><em>Foundry note: the Other Formula button has been configured to roll the staff's recharge rate at dawn if required.</em></p>",
+      "value": "<p><em>(Requires attunement by a druid, sorcerer, warlock, or wizard)</em></p><p>You have resistance to cold damage while you hold this staff.</p><p>The staff has 10 charges. While holding it, you can use an action to expend 1 or more of its charges to cast one of the following spells from it, using your spell save DC: @Compendium[dnd5e.spells.RpKjTlYASrfqUPVA]{Cone of Cold} (5 charges), @Compendium[dnd5e.spells.IBJmWjzbQGu7M4UX]{Fog Cloud} (1 charge), @Compendium[dnd5e.spells.WN2LWEljYU6QqnRH]{Ice Storm} (4 charges), or @Compendium[dnd5e.spells.fzZnVKLmBMo2f5up]{Wall of Ice} (4 charges).</p><p>The staff regains 1d6 + 4 expended charges daily at dawn. If you expend the last charge, roll a d20. On a 1, the staff turns to water and is destroyed.</p>",
       "chat": "",
       "unidentified": ""
     },
@@ -39,16 +39,16 @@
     },
     "uses": {
       "value": 10,
-      "max": 10,
+      "max": "10",
       "per": "charges",
       "recovery": "1d6 + 4"
     },
     "consume": {
       "type": "",
-      "target": null,
+      "target": "",
       "amount": null
     },
-    "ability": null,
+    "ability": "",
     "actionType": "save",
     "attackBonus": 0,
     "chatFlavor": "",
@@ -60,7 +60,7 @@
       "parts": [],
       "versatile": ""
     },
-    "formula": "1d6 +4",
+    "formula": "",
     "save": {
       "ability": "",
       "dc": null,
@@ -92,7 +92,9 @@
       "thr": false,
       "two": false,
       "ver": false,
-      "mgc": true
+      "mgc": true,
+      "ada": false,
+      "sil": false
     },
     "proficient": false,
     "attributes": {
@@ -108,10 +110,10 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.0.2",
+    "systemVersion": "2.0.3",
     "coreVersion": "10.286",
     "createdTime": 1661787233964,
-    "modifiedTime": 1663775408859,
+    "modifiedTime": 1663991799232,
     "lastModifiedBy": "dnd5ebuilder0000"
   }
 }

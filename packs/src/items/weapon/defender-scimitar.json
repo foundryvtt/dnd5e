@@ -5,7 +5,7 @@
   "img": "icons/weapons/polearms/spear-flared-silver-pink.webp",
   "system": {
     "description": {
-      "value": "<p><em>(Requires attunement)</em></p>\n<p>You gain a +3 bonus to attack and damage rolls made with this magic weapon.</p>\n<p>The first time you attack with the sword on each of your turns, you can transfer some or all of the sword's bonus to your Armor Class, instead of using the bonus on any attacks that turn. For example, you could reduce the bonus to your attack and damage rolls to +1 and gain a +2 bonus to AC. The adjusted bonuses remain in effect until the start of your next turn, although you must hold the sword to gain a bonus to AC from it.</p>\n<p><em>**Foundry note: the sword's bonus to attack and damage rolls have been included; please remember to manually subtract should the user transfer any of the bonus to their AC.</em></p>",
+      "value": "<p><em>(Requires attunement)</em></p><p>You gain a +3 bonus to attack and damage rolls made with this magic weapon.</p><p>The first time you attack with the sword on each of your turns, you can transfer some or all of the sword's bonus to your Armor Class, instead of using the bonus on any attacks that turn. For example, you could reduce the bonus to your attack and damage rolls to +1 and gain a +2 bonus to AC. The adjusted bonuses remain in effect until the start of your next turn, although you must hold the sword to gain a bonus to AC from it.</p><section class=\"secret foundry-note\" id=\"secret-OoHYjcLbNDagnF3Y\"><p><strong>Foundry Note</strong></p><p>The sword's bonus to attack and damage rolls have been included; please remember to manually subtract should the user transfer any of the bonus to their AC.</p></section>",
       "chat": "",
       "unidentified": ""
     },
@@ -40,16 +40,17 @@
     "uses": {
       "value": null,
       "max": "",
-      "per": ""
+      "per": "",
+      "recovery": ""
     },
     "consume": {
       "type": "",
-      "target": null,
+      "target": "",
       "amount": null
     },
-    "ability": null,
+    "ability": "",
     "actionType": "mwak",
-    "attackBonus": 3,
+    "attackBonus": "3",
     "chatFlavor": "",
     "critical": {
       "threshold": null,
@@ -96,7 +97,9 @@
       "thr": false,
       "two": false,
       "ver": false,
-      "mgc": true
+      "mgc": true,
+      "ada": false,
+      "sil": false
     },
     "proficient": false,
     "attributes": {
@@ -112,10 +115,10 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.0.0",
-    "coreVersion": "10.279",
+    "systemVersion": "2.0.3",
+    "coreVersion": "10.286",
     "createdTime": 1661787233574,
-    "modifiedTime": 1661787233574,
+    "modifiedTime": 1663991543026,
     "lastModifiedBy": "dnd5ebuilder0000"
   }
 }
