@@ -161,11 +161,10 @@ export class ItemGrantConfig extends AdvancementConfig {
   /* -------------------------------------------- */
 
   /** @inheritdoc */
-  _verifyDroppedItem(event, item) {
+  _validateDroppedItem(event, item) {
     if ( this.advancement.constructor.VALID_TYPES.has(item.type) ) return true;
     const type = game.i18n.localize(`ITEM.Type${item.type.capitalize()}`);
-    ui.notifications.warn(game.i18n.format("DND5E.AdvancementItemTypeInvalidWarning", { type }));
-    return false;
+    throw new Error(game.i18n.format("DND5E.AdvancementItemTypeInvalidWarning", { type }));
   }
 }
 
