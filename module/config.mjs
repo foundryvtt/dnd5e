@@ -50,6 +50,43 @@ preLocalize("abilityAbbreviations");
 /* -------------------------------------------- */
 
 /**
+ * Configuration data for skills.
+ *
+ * @typedef {object} SkillConfiguration
+ * @property {string} label    Localized label.
+ * @property {string} ability  Key for the default ability used by this skill.
+ */
+
+/**
+ * The set of skill which can be trained with their default ability scores.
+ * @enum {SkillConfiguration}
+ */
+DND5E.skills = {
+  acr: { label: "DND5E.SkillAcr", ability: "dex" },
+  ani: { label: "DND5E.SkillAni", ability: "wis" },
+  arc: { label: "DND5E.SkillArc", ability: "int" },
+  ath: { label: "DND5E.SkillAth", ability: "str" },
+  dec: { label: "DND5E.SkillDec", ability: "cha" },
+  his: { label: "DND5E.SkillHis", ability: "int" },
+  ins: { label: "DND5E.SkillIns", ability: "wis" },
+  itm: { label: "DND5E.SkillItm", ability: "cha" },
+  inv: { label: "DND5E.SkillInv", ability: "int" },
+  med: { label: "DND5E.SkillMed", ability: "wis" },
+  nat: { label: "DND5E.SkillNat", ability: "int" },
+  prc: { label: "DND5E.SkillPrc", ability: "wis" },
+  prf: { label: "DND5E.SkillPrf", ability: "cha" },
+  per: { label: "DND5E.SkillPer", ability: "cha" },
+  rel: { label: "DND5E.SkillRel", ability: "int" },
+  slt: { label: "DND5E.SkillSlt", ability: "dex" },
+  ste: { label: "DND5E.SkillSte", ability: "dex" },
+  sur: { label: "DND5E.SkillSur", ability: "wis" }
+};
+preLocalize("skills", { key: "label", sort: true });
+patchConfig("skills", "label", { since: 2.0, until: 2.2 });
+
+/* -------------------------------------------- */
+
+/**
  * Character alignment options.
  * @enum {string}
  */
@@ -793,34 +830,6 @@ preLocalize("senses", { sort: true });
 /* -------------------------------------------- */
 
 /**
- * The set of skill which can be trained.
- * @enum {string}
- */
-DND5E.skills = {
-  acr: "DND5E.SkillAcr",
-  ani: "DND5E.SkillAni",
-  arc: "DND5E.SkillArc",
-  ath: "DND5E.SkillAth",
-  dec: "DND5E.SkillDec",
-  his: "DND5E.SkillHis",
-  ins: "DND5E.SkillIns",
-  itm: "DND5E.SkillItm",
-  inv: "DND5E.SkillInv",
-  med: "DND5E.SkillMed",
-  nat: "DND5E.SkillNat",
-  prc: "DND5E.SkillPrc",
-  prf: "DND5E.SkillPrf",
-  per: "DND5E.SkillPer",
-  rel: "DND5E.SkillRel",
-  slt: "DND5E.SkillSlt",
-  ste: "DND5E.SkillSte",
-  sur: "DND5E.SkillSur"
-};
-preLocalize("skills", { sort: true });
-
-/* -------------------------------------------- */
-
-/**
  * Various different ways a spell can be prepared.
  */
 DND5E.spellPreparationModes = {
@@ -1304,5 +1313,28 @@ preLocalize("characterFlags", { keys: ["name", "hint", "section"] });
  * @type {string[]}
  */
 DND5E.allowedActorFlags = ["isPolymorphed", "originalActor"].concat(Object.keys(DND5E.characterFlags));
+
+/* -------------------------------------------- */
+
+/**
+ * Patch an existing config enum to allow conversion from string values to object values without
+ * breaking existing modules that are expecting strings.
+ * @param {string} key          Key within DND5E that has been replaced with an enum of objects.
+ * @param {string} fallbackKey  Key within the new config object from which to get the fallback value.
+ * @param {object} [options]    Additional options passed through to logCompatibilityWarning.
+ */
+function patchConfig(key, fallbackKey, options) {
+  /** @override */
+  function toString() {
+    const message = `The value of CONFIG.DND5E.${key} has been changed to an object.`
+      +` The former value can be acccessed from .${fallbackKey}.`;
+    foundry.utils.logCompatibilityWarning(message, options);
+    return this[fallbackKey];
+  }
+
+  Object.values(DND5E[key]).forEach(o => o.toString = toString);
+}
+
+/* -------------------------------------------- */
 
 export default DND5E;
