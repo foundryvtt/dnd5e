@@ -485,7 +485,9 @@ export default class Actor5e extends Actor {
           const replaced = Roll.replaceFormulaData(formula, rollData);
           ac.base = Roll.safeEval(replaced);
         } catch(err) {
-          this._preparationWarnings.push("DND5E.WarnBadACFormula");
+          this._preparationWarnings.push({
+            message: game.i18n.localize("DND5E.WarnBadACFormula"), link: "armor", type: "error"
+          });
           const replaced = Roll.replaceFormulaData(CONFIG.DND5E.armorClasses.default.formula, rollData);
           ac.base = Roll.safeEval(replaced);
         }

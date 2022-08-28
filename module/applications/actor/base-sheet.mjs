@@ -93,7 +93,7 @@ export default class ActorSheet5e extends ActorSheet {
       movement: this._getMovementSpeed(actorData.system),
       senses: this._getSenses(actorData.system),
       effects: ActiveEffect5e.prepareActiveEffectCategories(this.actor.effects),
-      warnings: this.actor._preparationWarnings,
+      warnings: this._getWarnings(this.actor._preparationWarnings),
       filters: this._filters,
       owner: this.actor.isOwner,
       limited: this.actor.limited,
@@ -250,6 +250,26 @@ export default class ActorSheet5e extends ActorSheet {
     }
     if ( senses.special ) tags.special = senses.special;
     return tags;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare preparation warnings for display.
+   * @param {Array<string|object>} warnings  Array of warnings.
+   * @returns {object[]}                     Prepared warnings.
+   * @protected
+   */
+  _getWarnings(warnings) {
+    const prepared = [];
+    for ( const warning of warnings ) {
+      if ( typeof warning === "string" ) {
+        prepared.push({ message: game.i18n.localize(warning), type: "warning" });
+      } else {
+        prepared.push(warning);
+      }
+    }
+    return prepared;
   }
 
   /* -------------------------------------------- */
@@ -584,6 +604,9 @@ export default class ActorSheet5e extends ActorSheet {
 
     // Property attributions
     html.find(".attributable").mouseover(this._onPropertyAttribution.bind(this));
+
+    // Preparation Warnings
+    html.find(".warnings").click(this._onWarningLink.bind(this));
 
     // Editable Only Listeners
     if ( this.isEditable ) {
@@ -1201,6 +1224,27 @@ export default class ActorSheet5e extends ActorSheet {
     const choices = CONFIG.DND5E[a.dataset.options];
     const options = { name: a.dataset.target, title: `${label.innerText}: ${this.actor.name}`, choices };
     return new TraitSelector(this.actor, options).render(true);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle links within preparation warnings.
+   * @param {Event} event  The click event on the warning.
+   * @protected
+   */
+  async _onWarningLink(event) {
+    event.preventDefault();
+    const a = event.target;
+    if ( !a || !a.dataset.target ) return;
+    switch ( a.dataset.target ) {
+      case "armor":
+        (new ActorArmorConfig(this.actor)).render(true);
+        return;
+      default:
+        const item = await fromUuid(a.dataset.target);
+        item?.sheet.render(true);
+    }
   }
 
   /* -------------------------------------------- */

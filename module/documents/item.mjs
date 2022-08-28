@@ -628,15 +628,50 @@ export default class Item5e extends Item {
     if ( !uses?.max ) return;
     let max = uses.max;
     if ( this.isOwned && !Number.isNumeric(max) ) {
+      const property = game.i18n.localize("DND5E.UsesMax");
       try {
         const rollData = this.actor.getRollData({ deterministic: true });
-        max = Roll.safeEval(Roll.replaceFormulaData(max, rollData, {missing: 0, warn: true}));
+        max = Roll.safeEval(this.replaceFormulaData(max, rollData, { property }));
       } catch(e) {
-        console.error("Problem preparing Max uses for", this.name, e);
+        const message = game.i18n.format("DND5E.FormulaMalformedError", { property, name: this.name });
+        this.actor._preparationWarnings.push({ message, link: this.uuid, type: "error" });
+        console.error(message, e);
         return;
       }
     }
     uses.max = Number(max);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Replace referenced data attributes in the roll formula with values from the provided data.
+   * If the attribute is not found in the provided data, display a warning on the actor.
+   * @param {string} formula           The original formula within which to replace.
+   * @param {object} data              The data object which provides replacements.
+   * @param {object} options
+   * @param {string} options.property  Name of the property to which this formula belongs.
+   * @returns {string}                 Formula with replaced data.
+   */
+  replaceFormulaData(formula, data, { property }) {
+    let dataRgx = new RegExp(/@([a-z.0-9_-]+)/gi);
+    const missingReferences = [];
+    formula = formula.replace(dataRgx, (match, term) => {
+      let value = foundry.utils.getProperty(data, term);
+      if ( value == null ) {
+        missingReferences.push(match);
+        return "0";
+      }
+      return String(value).trim();
+    });
+    if ( (missingReferences.length > 0) && this.actor ) {
+      const listFormatter = new Intl.ListFormat(game.i18n.lang, { style: "long", type: "conjunction" });
+      const message = game.i18n.format("DND5E.FormulaMissingReferenceWarn", {
+        property, name: this.name, references: listFormatter.format(missingReferences)
+      });
+      this.actor._preparationWarnings.push({ message, link: this.uuid, type: "warning" });
+    }
+    return formula;
   }
 
   /* -------------------------------------------- */

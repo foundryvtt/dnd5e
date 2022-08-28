@@ -301,6 +301,12 @@
   padding: 2px 8px;
   margin-bottom: 2px;
 }
+.dnd5e.sheet .warnings .warning,
+.dnd5e.sheet .info .warning,
+.dnd5e.sheet .warnings .error,
+.dnd5e.sheet .info .error {
+  text-shadow: black 0 1px 2px;
+}
 .dnd5e.sheet .sheet-header {
   flex: 0 0 100px;
   border-bottom: 2px groove #eeede0;
