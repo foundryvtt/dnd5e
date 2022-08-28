@@ -655,16 +655,16 @@ export default class Item5e extends Item {
    */
   replaceFormulaData(formula, data, { property }) {
     let dataRgx = new RegExp(/@([a-z.0-9_-]+)/gi);
-    const missingReferences = [];
+    const missingReferences = new Set();
     formula = formula.replace(dataRgx, (match, term) => {
       let value = foundry.utils.getProperty(data, term);
       if ( value == null ) {
-        missingReferences.push(match);
+        missingReferences.add(match);
         return "0";
       }
       return String(value).trim();
     });
-    if ( (missingReferences.length > 0) && this.actor ) {
+    if ( (missingReferences.size > 0) && this.actor ) {
       const listFormatter = new Intl.ListFormat(game.i18n.lang, { style: "long", type: "conjunction" });
       const message = game.i18n.format("DND5E.FormulaMissingReferenceWarn", {
         property, name: this.name, references: listFormatter.format(missingReferences)
