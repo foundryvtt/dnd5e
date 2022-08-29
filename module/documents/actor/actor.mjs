@@ -867,7 +867,7 @@ export default class Actor5e extends Actor {
      * @param {Actor5e} actor                Actor for which the skill check is being rolled.
      * @param {D20RollConfiguration} config  Configuration data for the pending roll.
      * @param {string} skillId               ID of the skill being rolled as defined in `DND5E.skills`.
-     * @returns {boolean}                    Explicitly return false to prevent skill check from being rolled.
+     * @returns {boolean}                    Explicitly return `false` to prevent skill check from being rolled.
      */
     if ( Hooks.call("dnd5e.preRollSkill", this, rollData, skillId) === false ) return;
 
@@ -975,7 +975,7 @@ export default class Actor5e extends Actor {
      * @param {Actor5e} actor                Actor for which the ability test is being rolled.
      * @param {D20RollConfiguration} config  Configuration data for the pending roll.
      * @param {string} abilityId             ID of the ability being rolled as defined in `DND5E.abilities`.
-     * @returns {boolean}                    Explicitly return false to prevent ability test from being rolled.
+     * @returns {boolean}                    Explicitly return `false` to prevent ability test from being rolled.
      */
     if ( Hooks.call("dnd5e.preRollAbilityTest", this, rollData, abilityId) === false ) return;
 
@@ -1057,7 +1057,7 @@ export default class Actor5e extends Actor {
      * @param {Actor5e} actor                Actor for which the ability save is being rolled.
      * @param {D20RollConfiguration} config  Configuration data for the pending roll.
      * @param {string} abilityId             ID of the ability being rolled as defined in `DND5E.abilities`.
-     * @returns {boolean}                    Explicitly return false to prevent ability save from being rolled.
+     * @returns {boolean}                    Explicitly return `false` to prevent ability save from being rolled.
      */
     if ( Hooks.call("dnd5e.preRollAbilitySave", this, rollData, abilityId) === false ) return;
 
@@ -1131,7 +1131,7 @@ export default class Actor5e extends Actor {
      * @memberof hookEvents
      * @param {Actor5e} actor                Actor for which the death saving throw is being rolled.
      * @param {D20RollConfiguration} config  Configuration data for the pending roll.
-     * @returns {boolean}                    Explicitly return false to prevent death saving throw from being rolled.
+     * @returns {boolean}                    Explicitly return `false` to prevent death saving throw from being rolled.
      */
     if ( Hooks.call("dnd5e.preRollDeathSave", this, rollData) === false ) return;
 
@@ -1178,7 +1178,8 @@ export default class Actor5e extends Actor {
     }
 
     /**
-     * A hook event that fires after a death saving throw has been rolled for an Actor.
+     * A hook event that fires after a death saving throw has been rolled for an Actor, but before
+     * updates have been performed.
      * @function dnd5e.rollDeathSave
      * @memberof hookEvents
      * @param {Actor5e} actor              Actor for which the death saving throw has been rolled.
@@ -1187,6 +1188,7 @@ export default class Actor5e extends Actor {
      * @param {object} details.updates     Updates that will be applied to the actor as a result of this save.
      * @param {string} details.chatString  Localizable string displayed in the create chat message. If not set, then
      *                                     no chat message will be displayed.
+     * @returns {boolean}                  Explicitly return `false` to prevent updates from being performed.
      */
     if ( Hooks.call("dnd5e.rollDeathSave", this, roll, details) === false ) return roll;
 
@@ -1254,10 +1256,10 @@ export default class Actor5e extends Actor {
      * A hook event that fires before a hit die is rolled for an Actor.
      * @function dnd5e.preRollHitDie
      * @memberof hookEvents
-     * @param {Actor5e} actor                Actor for which the hit die is to be rolled.
-     * @param {D20RollConfiguration} config  Configuration data for the pending roll.
-     * @param {string} denomination          Size of hit die to be rolled.
-     * @returns {boolean}                    Explicitly return false to prevent hit die from being rolled.
+     * @param {Actor5e} actor                   Actor for which the hit die is to be rolled.
+     * @param {DamageRollConfiguration} config  Configuration data for the pending roll.
+     * @param {string} denomination             Size of hit die to be rolled.
+     * @returns {boolean}                       Explicitly return `false` to prevent hit die from being rolled.
      */
     if ( Hooks.call("dnd5e.preRollHitDie", this, rollData, denomination) === false ) return;
 
@@ -1272,14 +1274,15 @@ export default class Actor5e extends Actor {
     };
 
     /**
-     * A hook event that fires after a hit die has been rolled for an Actor.
+     * A hook event that fires after a hit die has been rolled for an Actor, but before updates have been performed.
      * @function dnd5e.rollHitDie
      * @memberof hookEvents
-     * @param {Actor5e} actor        Actor for which the hit die has been rolled.
-     * @param {D20Roll} roll         The resulting roll.
+     * @param {Actor5e} actor         Actor for which the hit die has been rolled.
+     * @param {DamageRoll} roll       The resulting roll.
      * @param {object} updates
      * @param {object} updates.actor  Updates that will be applied to the actor.
      * @param {object} updates.class  Updates that will be applied to the class.
+     * @returns {boolean}             Explicitly return `false` to prevent updates from being performed.
      */
     if ( Hooks.call("dnd5e.rollHitDie", this, roll, updates) === false ) return roll;
 
