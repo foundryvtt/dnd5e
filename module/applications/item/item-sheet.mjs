@@ -509,12 +509,14 @@ export default class ItemSheet5e extends ItemSheet {
       case "skills.choices":
         options.choices = CONFIG.DND5E.skills;
         options.valueKey = null;
+        options.labelKey = "label";
         break;
       case "skills":
         const skills = this.item.system.skills;
         const choices = skills.choices?.length ? skills.choices : Object.keys(CONFIG.DND5E.skills);
         options.choices = Object.fromEntries(Object.entries(CONFIG.DND5E.skills).filter(([s]) => choices.includes(s)));
         options.maximum = skills.number;
+        options.labelKey = "label";
         break;
     }
     new TraitSelector(this.item, options).render(true);

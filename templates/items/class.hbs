@@ -116,7 +116,7 @@
                 <div class="form-fields">
                     <ul class="traits-list">
                         {{#each system.skills.choices}}
-                        <li class="tag {{this}}">{{lookup ../config.skills this}}</li>
+                        <li class="tag {{this}}">{{lookup (lookup ../config.skills this) "label"}}</li>
                         {{/each}}
                     </ul>
                 </div>
@@ -134,7 +134,7 @@
                 <div class="form-fields">
                     <ul class="traits-list">
                         {{#each system.skills.value}}
-                            <li class="tag {{this}}">{{lookup ../config.skills this}}</li>
+                            <li class="tag {{this}}">{{lookup (lookup ../config.skills this) "label"}}</li>
                         {{/each}}
                     </ul>
                 </div>
