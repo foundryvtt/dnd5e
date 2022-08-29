@@ -2,7 +2,7 @@
   "_id": "45Z5kogZEhawX1Ey",
   "name": "Fire Giant",
   "type": "npc",
-  "img": "icons/svg/mystery-man.svg",
+  "img": "systems/dnd5e/tokens/giant/FireGiant.webp",
   "system": {
     "abilities": {
       "str": {
@@ -151,7 +151,7 @@
     },
     "details": {
       "biography": {
-        "value": "",
+        "value": "<p><em>Token artwork by Forgotten Adventures.</em></p>",
         "public": ""
       },
       "alignment": "Lawful Evil",
@@ -582,10 +582,10 @@
       "color": null
     },
     "texture": {
-      "src": "icons/svg/mystery-man.svg",
+      "src": "systems/dnd5e/tokens/giant/FireGiant.webp",
       "tint": null,
-      "scaleX": 1,
-      "scaleY": 1,
+      "scaleX": 1.6,
+      "scaleY": 1.6,
       "offsetX": 0,
       "offsetY": 0,
       "rotation": 0
