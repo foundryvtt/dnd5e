@@ -23,6 +23,7 @@
     },
     "target": {
       "value": "",
+      "width": null,
       "units": "",
       "type": ""
     },
@@ -72,21 +73,38 @@
       "_id": "TIBmPKKnAAiWYuN4",
       "changes": [
         {
-          "key": "data.attributes.movement.walk",
+          "key": "system.attributes.movement.walk",
           "mode": 2,
-          "value": "10"
+          "value": "10",
+          "priority": null
         }
       ],
       "disabled": false,
       "duration": {
-        "startTime": null
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
       },
       "icon": "icons/skills/movement/feet-winged-boots-brown.webp",
       "label": "Fast Movement",
       "origin": "Item.Kl6zifJ5OmdHlOi2",
       "transfer": true,
       "flags": {},
-      "tint": ""
+      "tint": null
     }
-  ]
+  ],
+  "folder": null,
+  "sort": 0,
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.0.0",
+    "coreVersion": "10.279",
+    "createdTime": 1661787234361,
+    "modifiedTime": 1661787234361,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  }
 }

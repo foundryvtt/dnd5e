@@ -23,9 +23,9 @@
     },
     "target": {
       "value": null,
+      "width": null,
       "units": "",
-      "type": "self",
-      "width": null
+      "type": "self"
     },
     "range": {
       "value": null,
@@ -75,64 +75,76 @@
       "flags": {},
       "changes": [
         {
-          "key": "data.traits.dr.value",
+          "key": "system.traits.dr.value",
           "value": "fire",
-          "mode": 2
+          "mode": 2,
+          "priority": null
         },
         {
-          "key": "data.traits.dr.value",
+          "key": "system.traits.dr.value",
           "value": "cold",
-          "mode": 2
+          "mode": 2,
+          "priority": null
         },
         {
-          "key": "data.traits.dr.value",
+          "key": "system.traits.dr.value",
           "value": "acid",
-          "mode": 2
+          "mode": 2,
+          "priority": null
         },
         {
-          "key": "data.traits.dr.value",
+          "key": "system.traits.dr.value",
           "value": "bludgeoning",
-          "mode": 2
+          "mode": 2,
+          "priority": null
         },
         {
-          "key": "data.traits.dr.value",
+          "key": "system.traits.dr.value",
           "value": "lightning",
-          "mode": 2
+          "mode": 2,
+          "priority": null
         },
         {
-          "key": "data.traits.dr.value",
+          "key": "system.traits.dr.value",
           "value": "necrotic",
-          "mode": 2
+          "mode": 2,
+          "priority": null
         },
         {
-          "key": "data.traits.dr.value",
+          "key": "system.traits.dr.value",
           "value": "piercing",
-          "mode": 2
+          "mode": 2,
+          "priority": null
         },
         {
-          "key": "data.traits.dr.value",
+          "key": "system.traits.dr.value",
           "value": "psychic",
-          "mode": 2
+          "mode": 2,
+          "priority": null
         },
         {
-          "key": "data.traits.dr.value",
+          "key": "system.traits.dr.value",
           "value": "radiant",
-          "mode": 2
+          "mode": 2,
+          "priority": null
         },
         {
-          "key": "data.traits.dr.value",
+          "key": "system.traits.dr.value",
           "value": "slashing",
-          "mode": 2
+          "mode": 2,
+          "priority": null
         },
         {
-          "key": "data.traits.dr.value",
+          "key": "system.traits.dr.value",
           "value": "thunder",
-          "mode": 2
+          "mode": 2,
+          "priority": null
         },
         {
-          "key": "data.traits.dr.value",
+          "key": "system.traits.dr.value",
           "value": "poison",
-          "mode": 2
+          "mode": 2,
+          "priority": null
         }
       ],
       "disabled": true,
@@ -142,13 +154,24 @@
         "rounds": 10,
         "turns": null,
         "startRound": null,
-        "startTurn": null
+        "startTurn": null,
+        "combat": null
       },
       "icon": "icons/magic/perception/silhouette-stealth-shadow.webp",
       "label": "Ki: Empty Body",
       "origin": "Item.xqRleciuHDZlYCl6",
-      "tint": "",
+      "tint": null,
       "transfer": true
     }
-  ]
+  ],
+  "folder": null,
+  "sort": 0,
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.0.0",
+    "coreVersion": "10.279",
+    "createdTime": 1661787234326,
+    "modifiedTime": 1661787234326,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  }
 }

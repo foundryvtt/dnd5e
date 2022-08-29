@@ -23,6 +23,7 @@
     },
     "target": {
       "value": 15,
+      "width": null,
       "units": "ft",
       "type": "cube"
     },
@@ -35,6 +36,11 @@
       "value": 0,
       "max": 0,
       "per": ""
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
     },
     "ability": "",
     "actionType": "util",
@@ -53,6 +59,7 @@
     "save": {
       "ability": "",
       "dc": null,
+      "scaling": "spell",
       "value": ""
     },
     "level": 1,
@@ -83,5 +90,14 @@
   "sort": 100001,
   "flags": {},
   "img": "icons/magic/air/air-burst-spiral-teal-green.webp",
-  "effects": []
+  "effects": [],
+  "folder": null,
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.0.0",
+    "coreVersion": "10.279",
+    "createdTime": 1661787234094,
+    "modifiedTime": 1661787234094,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  }
 }

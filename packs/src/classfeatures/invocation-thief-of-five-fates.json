@@ -23,6 +23,7 @@
     },
     "target": {
       "value": 3,
+      "width": null,
       "units": "",
       "type": "creature"
     },
@@ -57,8 +58,8 @@
     "save": {
       "ability": "cha",
       "dc": null,
-      "value": "",
-      "scaling": "cha"
+      "scaling": "cha",
+      "value": ""
     },
     "requirements": "Warlock 2",
     "recharge": {
@@ -68,5 +69,15 @@
   },
   "flags": {},
   "img": "icons/magic/earth/orb-stone-smoke-teal.webp",
-  "effects": []
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.0.0",
+    "coreVersion": "10.279",
+    "createdTime": 1661787234430,
+    "modifiedTime": 1661787234430,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  }
 }

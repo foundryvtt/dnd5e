@@ -23,6 +23,7 @@
     },
     "target": {
       "value": 1,
+      "width": null,
       "units": "",
       "type": "creature"
     },
@@ -57,8 +58,8 @@
     "save": {
       "ability": "wis",
       "dc": null,
-      "value": "",
-      "scaling": "cha"
+      "scaling": "cha",
+      "value": ""
     },
     "requirements": "Warlock 5",
     "recharge": {
@@ -68,5 +69,15 @@
   },
   "flags": {},
   "img": "icons/magic/symbols/rune-sigil-black-pink.webp",
-  "effects": []
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.0.0",
+    "coreVersion": "10.279",
+    "createdTime": 1661787234398,
+    "modifiedTime": 1661787234398,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  }
 }

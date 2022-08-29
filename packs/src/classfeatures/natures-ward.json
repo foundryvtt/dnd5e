@@ -23,6 +23,7 @@
     },
     "target": {
       "value": "",
+      "width": null,
       "units": "",
       "type": ""
     },
@@ -72,26 +73,44 @@
       "_id": "Jxpz4MZmgTy7z7cm",
       "changes": [
         {
-          "key": "data.traits.ci.value",
+          "key": "system.traits.ci.value",
           "mode": 2,
-          "value": "diseased"
+          "value": "diseased",
+          "priority": null
         },
         {
-          "key": "data.traits.ci.value",
+          "key": "system.traits.ci.value",
           "mode": 2,
-          "value": "poisoned"
+          "value": "poisoned",
+          "priority": null
         }
       ],
       "disabled": false,
       "duration": {
-        "startTime": null
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
       },
       "icon": "icons/commodities/flowers/lotus-pink.webp",
       "label": "Nature's Ward",
       "origin": "Item.OTvrJSJSUgAwXrWX",
       "transfer": true,
       "flags": {},
-      "tint": ""
+      "tint": null
     }
-  ]
+  ],
+  "folder": null,
+  "sort": 0,
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.0.0",
+    "coreVersion": "10.279",
+    "createdTime": 1661787234370,
+    "modifiedTime": 1661787234370,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  }
 }

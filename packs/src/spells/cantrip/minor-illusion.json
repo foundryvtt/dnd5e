@@ -23,6 +23,7 @@
     },
     "target": {
       "value": 5,
+      "width": null,
       "units": "ft",
       "type": "cube"
     },
@@ -35,6 +36,11 @@
       "value": 0,
       "max": 0,
       "per": ""
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
     },
     "ability": "",
     "actionType": "util",
@@ -83,5 +89,14 @@
   "sort": 100001,
   "flags": {},
   "img": "icons/magic/control/hypnosis-mesmerism-eye.webp",
-  "effects": []
+  "effects": [],
+  "folder": null,
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.0.0",
+    "coreVersion": "10.279",
+    "createdTime": 1661787234224,
+    "modifiedTime": 1661787234224,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  }
 }

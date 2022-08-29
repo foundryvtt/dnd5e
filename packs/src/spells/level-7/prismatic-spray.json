@@ -23,6 +23,7 @@
     },
     "target": {
       "value": 60,
+      "width": null,
       "units": "ft",
       "type": "cone"
     },
@@ -35,6 +36,11 @@
       "value": 0,
       "max": 0,
       "per": ""
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
     },
     "ability": "",
     "actionType": "save",
@@ -88,5 +94,14 @@
   "sort": 100001,
   "flags": {},
   "img": "icons/magic/light/projectile-beams-salvo-yellow.webp",
-  "effects": []
+  "effects": [],
+  "folder": null,
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.0.0",
+    "coreVersion": "10.279",
+    "createdTime": 1661787234184,
+    "modifiedTime": 1661787234184,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  }
 }

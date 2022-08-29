@@ -23,6 +23,7 @@
     },
     "target": {
       "value": 0,
+      "width": null,
       "units": "",
       "type": ""
     },
@@ -35,6 +36,11 @@
       "value": 0,
       "max": 0,
       "per": ""
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
     },
     "ability": "",
     "actionType": "save",
@@ -58,8 +64,8 @@
     "save": {
       "ability": "con",
       "dc": 0,
-      "value": "",
-      "scaling": "spell"
+      "scaling": "spell",
+      "value": ""
     },
     "level": 7,
     "school": "abj",
@@ -89,5 +95,14 @@
   "sort": 100001,
   "flags": {},
   "img": "icons/magic/symbols/runes-star-pentagon-blue.webp",
-  "effects": []
+  "effects": [],
+  "folder": null,
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.0.0",
+    "coreVersion": "10.279",
+    "createdTime": 1661787234090,
+    "modifiedTime": 1661787234090,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  }
 }

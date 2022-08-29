@@ -73,21 +73,38 @@
       "_id": "hIaIpLxcMZSY3qXi",
       "changes": [
         {
-          "key": "data.traits.dr.value",
+          "key": "system.traits.dr.value",
           "mode": 2,
-          "value": "poison"
+          "value": "poison",
+          "priority": null
         }
       ],
       "disabled": false,
       "duration": {
-        "startTime": null
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
       },
       "icon": "icons/creatures/abilities/stinger-poison-green.webp",
       "label": "Dwarven Resilience",
       "origin": "Item.ufysTkqet2Ctmtyi",
       "transfer": true,
       "flags": {},
-      "tint": ""
+      "tint": null
     }
-  ]
+  ],
+  "folder": null,
+  "sort": 0,
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.0.0",
+    "coreVersion": "10.279",
+    "createdTime": 1661787234474,
+    "modifiedTime": 1661787234474,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  }
 }
