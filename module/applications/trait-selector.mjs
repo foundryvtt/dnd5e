@@ -16,6 +16,7 @@ export default class TraitSelector extends DocumentSheet {
       allowCustom: true,
       minimum: 0,
       maximum: null,
+      labelKey: null,
       valueKey: "value",
       customKey: "custom"
     });
@@ -50,7 +51,8 @@ export default class TraitSelector extends DocumentSheet {
     // Populate choices
     const choices = Object.entries(o.choices).reduce((obj, e) => {
       let [k, v] = e;
-      obj[k] = { label: v, chosen: attr ? value.includes(k) : false };
+      const label = o.labelKey ? foundry.utils.getProperty(v, o.labelKey) ?? v : v;
+      obj[k] = { label, chosen: attr ? value.includes(k) : false };
       return obj;
     }, {});
 
