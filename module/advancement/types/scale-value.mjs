@@ -252,7 +252,7 @@ export class ScaleValueConfig extends AdvancementConfig {
   activateListeners(html) {
     super.activateListeners(html);
     this.form.querySelector("input[name='data.title']").addEventListener("input", this._onChangeTitle.bind(this));
-    this.form.querySelector("i[name='identifier-hint-copy']").addEventListener("click", this._onIdentifyerHintCopy.bind(this));
+    this.form.querySelector(".identifier-hint-copy").addEventListener("click", this._onIdentifierHintCopy.bind(this));
   }
 
   /* -------------------------------------------- */
@@ -260,9 +260,10 @@ export class ScaleValueConfig extends AdvancementConfig {
   /**
    * Copies the full scale identifier hint to the clipboard.
    */
-  _onIdentifyerHintCopy() {
+  _onIdentifierHintCopy(event) {
     let data = this.getData();
     navigator.clipboard.writeText(`@scale.${data.classIdentifier}.${data.previewIdentifier}`);
+    game.tooltip.activate(event.target, {text: game.i18n.localize("DND5E.IdentifierCopied"), direction: "UP"});
   }
 
   /* -------------------------------------------- */
