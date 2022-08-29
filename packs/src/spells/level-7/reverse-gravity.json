@@ -23,6 +23,7 @@
     },
     "target": {
       "value": 50,
+      "width": null,
       "units": "ft",
       "type": "cylinder"
     },
@@ -35,6 +36,11 @@
       "value": 0,
       "max": 0,
       "per": ""
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
     },
     "ability": "",
     "actionType": "save",
@@ -53,8 +59,8 @@
     "save": {
       "ability": "dex",
       "dc": 0,
-      "value": "",
-      "scaling": "spell"
+      "scaling": "spell",
+      "value": ""
     },
     "level": 7,
     "school": "trs",
@@ -84,5 +90,14 @@
   "sort": 100001,
   "flags": {},
   "img": "icons/magic/control/debuff-energy-hold-yellow.webp",
-  "effects": []
+  "effects": [],
+  "folder": null,
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.0.0",
+    "coreVersion": "10.279",
+    "createdTime": 1661787234101,
+    "modifiedTime": 1661787234101,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  }
 }

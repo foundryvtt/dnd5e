@@ -73,9 +73,10 @@
       "flags": {},
       "changes": [
         {
-          "key": "data.attributes.movement.walk",
-          "value": 10,
-          "mode": 2
+          "key": "system.attributes.movement.walk",
+          "value": "10",
+          "mode": 2,
+          "priority": null
         }
       ],
       "disabled": false,
@@ -85,14 +86,25 @@
         "rounds": null,
         "turns": null,
         "startRound": null,
-        "startTurn": null
+        "startTurn": null,
+        "combat": null
       },
       "icon": "icons/magic/nature/root-vine-entangle-foot-green.webp",
       "label": "Unarmored Movement",
       "origin": "Item.C1StXv1J6o9PrZ1K",
-      "tint": "",
+      "tint": null,
       "transfer": true
     }
   ],
-  "_id": "zCeqyQ8uIPNdYJSW"
+  "_id": "zCeqyQ8uIPNdYJSW",
+  "folder": null,
+  "sort": 0,
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.0.0",
+    "coreVersion": "10.279",
+    "createdTime": 1661787234444,
+    "modifiedTime": 1661787234444,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  }
 }

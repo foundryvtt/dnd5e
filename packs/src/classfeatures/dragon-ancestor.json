@@ -23,6 +23,7 @@
     },
     "target": {
       "value": "",
+      "width": null,
       "units": "",
       "type": ""
     },
@@ -72,21 +73,38 @@
       "_id": "xI5jjbA2Dlj7L0cd",
       "changes": [
         {
-          "key": "data.traits.languages.value",
+          "key": "system.traits.languages.value",
           "mode": 2,
-          "value": "draconic"
+          "value": "draconic",
+          "priority": null
         }
       ],
       "disabled": false,
       "duration": {
-        "startTime": null
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
       },
       "icon": "icons/creatures/abilities/dragon-fire-breath-orange.webp",
       "label": "Dragon Ancestor",
       "origin": "Item.EZsonMThTNLZq35j",
       "transfer": true,
       "flags": {},
-      "tint": ""
+      "tint": null
     }
-  ]
+  ],
+  "folder": null,
+  "sort": 0,
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.0.0",
+    "coreVersion": "10.279",
+    "createdTime": 1661787234352,
+    "modifiedTime": 1661787234352,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  }
 }

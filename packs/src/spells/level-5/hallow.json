@@ -23,6 +23,7 @@
     },
     "target": {
       "value": 60,
+      "width": null,
       "units": "ft",
       "type": "radius"
     },
@@ -35,6 +36,11 @@
       "value": 0,
       "max": 0,
       "per": ""
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
     },
     "ability": "",
     "actionType": "util",
@@ -53,8 +59,8 @@
     "save": {
       "ability": "cha",
       "dc": null,
-      "value": "",
-      "scaling": "spell"
+      "scaling": "spell",
+      "value": ""
     },
     "level": 5,
     "school": "evo",
@@ -84,5 +90,14 @@
   "sort": 100001,
   "flags": {},
   "img": "icons/magic/light/explosion-star-large-teal.webp",
-  "effects": []
+  "effects": [],
+  "folder": null,
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.0.0",
+    "coreVersion": "10.279",
+    "createdTime": 1661787234140,
+    "modifiedTime": 1661787234140,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  }
 }

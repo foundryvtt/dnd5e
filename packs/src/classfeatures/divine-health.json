@@ -23,6 +23,7 @@
     },
     "target": {
       "value": "",
+      "width": null,
       "units": "",
       "type": ""
     },
@@ -72,21 +73,38 @@
       "_id": "RjX1etQhr8M2TBgv",
       "changes": [
         {
-          "key": "data.traits.ci.value",
+          "key": "system.traits.ci.value",
           "mode": 2,
-          "value": "diseased"
+          "value": "diseased",
+          "priority": null
         }
       ],
       "disabled": false,
       "duration": {
-        "startTime": null
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
       },
       "icon": "icons/magic/life/cross-worn-green.webp",
       "label": "Divine Health",
       "origin": "Item.dY9yrqkyEDuF0CG2",
       "transfer": true,
       "flags": {},
-      "tint": ""
+      "tint": null
     }
-  ]
+  ],
+  "folder": null,
+  "sort": 0,
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.0.0",
+    "coreVersion": "10.279",
+    "createdTime": 1661787234398,
+    "modifiedTime": 1661787234398,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  }
 }
