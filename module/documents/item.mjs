@@ -787,23 +787,26 @@ export default class Item5e extends Item {
     if ( resourceUpdates.length ) await this.actor.updateEmbeddedDocuments("Item", resourceUpdates);
 
     // Prepare card data & display it if options.createMessage is true
-    const cardData = item.displayCard(options);
+    const cardData = await item.displayCard(options);
 
     // Initiate measured template creation
+    let templates;
     if ( config.createMeasuredTemplate ) {
-      const template = dnd5e.canvas.AbilityTemplate.fromItem(item);
-      if ( template ) await template.drawPreview();
+      try {
+        templates = await (dnd5e.canvas.AbilityTemplate.fromItem(item))?.drawPreview();
+      } catch(err) {}
     }
 
     /**
      * A hook event that fires when an item is used, after the measured template has been created if one is needed.
      * @function dnd5e.useItem
      * @memberof hookEvents
-     * @param {Item5e} item                  Item being used.
-     * @param {ItemUseConfiguration} config  Configuration data for the roll.
-     * @param {ItemUseOptions} options       Additional options for configuring item usage.
+     * @param {Item5e} item                                Item being used.
+     * @param {ItemUseConfiguration} config                Configuration data for the roll.
+     * @param {ItemUseOptions} options                     Additional options for configuring item usage.
+     * @param {MeasuredTemplateDocument[]|null} templates  The measured templates if they were created.
      */
-    Hooks.callAll("dnd5e.useItem", item, config, options);
+    Hooks.callAll("dnd5e.useItem", item, config, options, templates ?? null);
 
     return cardData;
   }
@@ -1056,9 +1059,9 @@ export default class Item5e extends Item {
      * A hook event that fires after an item chat card is created.
      * @function dnd5e.displayCard
      * @memberof hookEvents
-     * @param {Item5e} item         Item for which the chat card is being displayed.
-     * @param {ChatMessage|object}  The created ChatMessage instance or ChatMessageData depending on whether
-     *                              options.createMessage was set to `true`.
+     * @param {Item5e} item              Item for which the chat card is being displayed.
+     * @param {ChatMessage|object} card  The created ChatMessage instance or ChatMessageData depending on whether
+     *                                   options.createMessage was set to `true`.
      */
     Hooks.callAll("dnd5e.displayCard", this, card);
 
@@ -1563,8 +1566,8 @@ export default class Item5e extends Item {
      * A hook event that fires after a formula has been rolled for an Item.
      * @function dnd5e.rollFormula
      * @memberof hookEvents
-     * @param {Item5e} item           Item for which the roll was performed.
-     * @param {D20Roll} roll          The resulting roll.
+     * @param {Item5e} item  Item for which the roll was performed.
+     * @param {Roll} roll    The resulting roll.
      */
     Hooks.callAll("dnd5e.rollFormula", this, roll);
 
@@ -1614,12 +1617,12 @@ export default class Item5e extends Item {
     }
 
     /**
-     * A hook event that fires after the Item has rolled to recharge.
+     * A hook event that fires after the Item has rolled to recharge, but before any changes have been performed.
      * @function dnd5e.rollRecharge
      * @memberof hookEvents
-     * @param {Item5e} item           Item for which the roll was performed.
-     * @param {D20Roll} roll          The resulting roll.
-     * @returns {boolean}             Explicitly return false to prevent the item from being recharged.
+     * @param {Item5e} item  Item for which the roll was performed.
+     * @param {Roll} roll    The resulting roll.
+     * @returns {boolean}    Explicitly return false to prevent the item from being recharged.
      */
     if ( Hooks.call("dnd5e.rollRecharge", this, roll) === false ) return roll;
 
