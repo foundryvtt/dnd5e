@@ -755,7 +755,7 @@
         "price": 0.5,
         "attunement": 0,
         "equipped": false,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
         "activation": {
           "type": "action",
@@ -838,7 +838,6 @@
           "lod": false
         },
         "proficient": true,
-        "attuned": false,
         "attributes": {
           "spelldc": 10
         }
@@ -876,7 +875,7 @@
         "price": 0.5,
         "attunement": 0,
         "equipped": false,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
         "activation": {
           "type": "action",
@@ -959,7 +958,6 @@
           "lod": false
         },
         "proficient": true,
-        "attuned": false,
         "attributes": {
           "spelldc": 10
         }
@@ -997,7 +995,7 @@
         "price": 0.5,
         "attunement": 0,
         "equipped": false,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
         "activation": {
           "type": "",
@@ -1048,8 +1046,7 @@
           "dc": null,
           "scaling": "spell"
         },
-        "consumableType": "ammo",
-        "attuned": false
+        "consumableType": "ammo"
       },
       "sort": 100001,
       "flags": {},
@@ -1084,7 +1081,7 @@
         "price": 30,
         "attunement": 0,
         "equipped": true,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
         "activation": {
           "type": "action",
@@ -1167,7 +1164,6 @@
           "ver": false
         },
         "proficient": true,
-        "attuned": false,
         "attributes": {
           "spelldc": 10
         }
@@ -1205,7 +1201,7 @@
         "price": 2,
         "attunement": 0,
         "equipped": false,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
         "capacity": {
           "type": "weight",
@@ -1219,7 +1215,6 @@
           "gp": 0,
           "pp": 0
         },
-        "attuned": false,
         "damage": {
           "parts": []
         }
@@ -1257,9 +1252,8 @@
         "price": 1,
         "attunement": 0,
         "equipped": false,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
-        "attuned": false,
         "damage": {
           "parts": []
         }
@@ -1297,7 +1291,7 @@
         "price": 1,
         "attunement": 0,
         "equipped": false,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
         "activation": {
           "type": "action",
@@ -1349,8 +1343,7 @@
           "dc": 17,
           "scaling": "flat"
         },
-        "consumableType": "trinket",
-        "attuned": false
+        "consumableType": "trinket"
       },
       "sort": 1000000,
       "flags": {},
@@ -1385,7 +1378,7 @@
         "price": 0.5,
         "attunement": 0,
         "equipped": false,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
         "activation": {
           "type": "action",
@@ -1437,8 +1430,7 @@
           "dc": null,
           "scaling": "spell"
         },
-        "consumableType": "food",
-        "attuned": false
+        "consumableType": "food"
       },
       "sort": 1800000,
       "flags": {},
@@ -1473,9 +1465,8 @@
         "price": 0.2,
         "attunement": 0,
         "equipped": false,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
-        "attuned": false,
         "damage": {
           "parts": []
         }
@@ -1513,9 +1504,8 @@
         "price": 0.5,
         "attunement": 0,
         "equipped": false,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
-        "attuned": false,
         "damage": {
           "parts": []
         }
@@ -1553,7 +1543,7 @@
         "price": 0.01,
         "attunement": 0,
         "equipped": false,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
         "activation": {
           "type": "action",
@@ -1610,8 +1600,7 @@
           "dc": null,
           "scaling": "spell"
         },
-        "consumableType": "trinket",
-        "attuned": false
+        "consumableType": "trinket"
       },
       "sort": 4700000,
       "flags": {},
@@ -1646,7 +1635,7 @@
         "price": 0.2,
         "attunement": 0,
         "equipped": false,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
         "activation": {
           "type": "action",
@@ -1698,8 +1687,7 @@
           "dc": null,
           "scaling": "spell"
         },
-        "consumableType": "food",
-        "attuned": false
+        "consumableType": "food"
       },
       "sort": 500000,
       "flags": {},
@@ -1734,7 +1722,7 @@
         "price": 5,
         "attunement": 0,
         "equipped": false,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
         "activation": {
           "type": "action",
@@ -1817,7 +1805,6 @@
           "ver": false
         },
         "proficient": true,
-        "attuned": false,
         "attributes": {
           "spelldc": 10
         }
@@ -1855,7 +1842,7 @@
         "price": 5,
         "attunement": 0,
         "equipped": false,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
         "activation": {
           "type": "action",
@@ -1938,7 +1925,6 @@
           "ver": false
         },
         "proficient": true,
-        "attuned": false,
         "attributes": {
           "spelldc": 10
         }
@@ -2419,7 +2405,7 @@
       },
       "sort": 4875000,
       "flags": {},
-      "img": "systems/dnd5e/icons/spells/lightning-jade-2.jpg",
+      "img": "icons/magic/lightning/bolt-forked-large-teal.webp",
       "effects": [],
       "folder": null,
       "ownership": {
@@ -2502,7 +2488,7 @@
       },
       "sort": 4987500,
       "flags": {},
-      "img": "systems/dnd5e/icons/spells/lightning-jade-1.jpg",
+      "img": "icons/magic/lightning/bolt-forked-teal.webp",
       "effects": [],
       "folder": null,
       "ownership": {
@@ -3156,7 +3142,7 @@
     "systemVersion": "2.0.0",
     "coreVersion": "10.279",
     "createdTime": 1661787232184,
-    "modifiedTime": 1661787232184,
+    "modifiedTime": 1661878142540,
     "lastModifiedBy": "dnd5ebuilder0000"
   }
 }
