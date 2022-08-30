@@ -302,7 +302,7 @@ export default class JournalClassSummary5ePageSheet extends JournalPageSheet {
         document,
         name: document.name,
         description: await TextEditor.enrichHTML(document.system.description.value, {
-          relativeTo: this.object, secrets: false, async: true
+          relativeTo: item, secrets: false, async: true
         })
       };
     };
@@ -346,7 +346,7 @@ export default class JournalClassSummary5ePageSheet extends JournalPageSheet {
       document: item,
       name: item.name,
       description: await TextEditor.enrichHTML(item.system.description.value, {
-        relativeTo: this.object, secrets: false, async: true
+        relativeTo: item, secrets: false, async: true
       }),
       features: await this._getFeatures(item),
       table: await this._getTable(item, parseInt(initialLevel))
