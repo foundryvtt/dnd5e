@@ -252,6 +252,14 @@ export default class ActorSheet5e extends ActorSheet {
     return tags;
   }
 
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  async activateEditor(name, options={}, initialContent="") {
+    options.relativeLinks = true;
+    return super.activateEditor(name, options, initialContent);
+  }
+
   /* --------------------------------------------- */
   /*  Property Attribution                         */
   /* --------------------------------------------- */

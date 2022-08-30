@@ -356,6 +356,14 @@ export default class ItemSheet5e extends ItemSheet {
   }
 
   /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  async activateEditor(name, options={}, initialContent="") {
+    options.relativeLinks = true;
+    return super.activateEditor(name, options, initialContent);
+  }
+
+  /* -------------------------------------------- */
   /*  Form Submission                             */
   /* -------------------------------------------- */
 
