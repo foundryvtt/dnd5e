@@ -679,21 +679,14 @@ function _migrateItemCriticalData(item, updateData) {
  * @param {object} document                                 Document data to migrate
  * @param {object} updateData                               Existing update to expand upon
  * @param {object} [migrationData={}]                       Additional data to perform the migration
- * @param {object<string, string>} [migrationData.iconMap]  A mapping of system icons to core foundry icons
+ * @param {Object<string, string>} [migrationData.iconMap]  A mapping of system icons to core foundry icons
  * @param {string} [migrationData.field]                    The document field to migrate
  * @returns {object}                                        The updateData to apply
  * @private
  */
 function _migrateDocumentIcon(document, updateData, {iconMap, field="img"}={}) {
-  if (!document?.[field]) {
-    return;
-  }
-
-  if ( iconMap && document[field]?.startsWith("systems/dnd5e/icons/") ) {
-    debugger;
-    const rename = iconMap[document[field]];
-    if ( rename ) updateData[field] = rename;
-  }
+  const rename = iconMap?.[document?.[field]];
+  if ( rename ) updateData[field] = rename;
   return updateData;
 }
 
