@@ -957,8 +957,7 @@
           "two": false,
           "ver": false
         },
-        "proficient": true,
-        "attuned": false
+        "proficient": true
       },
       "effects": [],
       "folder": null,
@@ -980,7 +979,7 @@
       "_id": "nE7YNnVM7srBcdfl",
       "name": "Create Whirlwind",
       "type": "feat",
-      "img": "systems/dnd5e/icons/spells/wind-sky-3.jpg",
+      "img": "icons/magic/air/wind-tornado-cyclone-white.webp",
       "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p>A 5-foot-radius, 30-foot-tall cylinder of swirling air magically forms on a point the djinni can see within 120 feet of it. The whirlwind lasts as long as the djinni maintains concentration (as if concentrating on a spell).</p>\n<p>Any creature but the djinni that enters the whirlwind must succeed on a  <strong>DC 18 Strength</strong> saving throw or be restrained by it. The djinni can move the whirlwind up to 60 feet as an action, and creatures restrained by the whirlwind move with it. The whirlwind ends if the djinni loses sight of it.</p>\n<p>A creature can use its action to free a creature restrained by the whirlwind, including itself, by succeeding on a DC 18 Strength check. If the check succeeds, the creature is no longer restrained and moves to the nearest space outside the whirlwind.</p>\n</section>\n<p>A 5-foot-radius, 30-foot-tall cylinder of swirling air magically forms on a point the djinni can see within 120 feet of it. Any creature but the djinni that enters the whirlwind must make a <strong>Strength</strong> saving throw or be restrained by it. The djinni can move the whirlwind up to 60 feet as an action, and creatures restrained by the whirlwind move with it. A creature can use its action to free a creature restrained by the whirlwind, including itself, by succeeding on a Strength check. If the check succeeds, the creature is no longer restrained and moves to the nearest space outside the whirlwind.</p>",
@@ -1063,7 +1062,7 @@
       "_id": "gr4aC1723KRzCJ5z",
       "name": "Conjure Air Elemental",
       "type": "spell",
-      "img": "systems/dnd5e/icons/spells/runes-orange-3.jpg",
+      "img": "icons/magic/symbols/runes-star-pentagon-orange.webp",
       "system": {
         "description": {
           "value": "<p>You call forth an air elemental servant. Choose an area of air that fills a 10-foot cube within range. An elemental of challenge rating 5 or lower appropriate to the area you chose appears in an unoccupied space within 10 feet of it. For example, a fire elemental emerges from a bonfire, and an earth elemental rises up from the ground. The elemental disappears when it drops to 0 hit points or when the spell ends.</p>\n<p>The elemental is friendly to you and your companions for the duration. Roll initiative for the elemental, which has its own turns. It obeys any verbal commands that you issue to it (no action required by you). If you don't issue any commands to the elemental, it defends itself from hostile creatures but otherwise takes no actions.</p>\n<p>If your concentration is broken, the elemental doesn't disappear. Instead, you lose control of the elemental, it becomes hostile toward you and your companions, and it might attack. An uncontrolled elemental can't be dismissed by you, and it disappears 1 hour after you summoned it.</p>\n<p><strong>Higher Levels.&nbsp;</strong>When you cast this spell using a spell slot of 6th level or higher, the challenge rating increases by 1 for each slot level above 5th.</p>",
@@ -2355,7 +2354,7 @@
     "systemVersion": "2.0.0",
     "coreVersion": "10.279",
     "createdTime": 1661787232589,
-    "modifiedTime": 1661791116041,
+    "modifiedTime": 1661878729163,
     "lastModifiedBy": "dnd5ebuilder0000"
   }
 }

@@ -614,7 +614,7 @@
       "_id": "zkNT86Xasjyzk8Df",
       "name": "Angelic Weapons",
       "type": "feat",
-      "img": "systems/dnd5e/icons/spells/enchant-sky-3.jpg",
+      "img": "icons/magic/fire/dagger-rune-enchant-flame-strong-blue-yellow.webp",
       "system": {
         "description": {
           "value": "<section class=\"secret\"><p>The solar's weapon attacks are magical. When the solar hits with any weapon, the weapon deals an <strong>extra 6d8 <em>radiant damage</em></strong> (included in the attack).</p></section><p>The solar's weapon attacks are magical. When the solar hits with any weapon, the weapon deals extra <em>radiant damage</em> (included in the attack).</p>",
@@ -1213,7 +1213,7 @@
         "price": 50,
         "attunement": 0,
         "equipped": true,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
         "activation": {
           "type": "action",
@@ -1299,8 +1299,7 @@
           "thr": false,
           "ver": false
         },
-        "proficient": true,
-        "attuned": false
+        "proficient": true
       },
       "effects": [],
       "folder": null,
@@ -1335,7 +1334,7 @@
         "price": 350,
         "attunement": 0,
         "equipped": true,
-        "rarity": "Rare",
+        "rarity": "rare",
         "identified": true,
         "activation": {
           "type": "action",
@@ -1422,7 +1421,6 @@
           "lod": false
         },
         "proficient": true,
-        "attuned": false,
         "attributes": {
           "spelldc": 10
         }
@@ -1530,7 +1528,7 @@
       "_id": "H4Qnl5aNwIuOiKvm",
       "name": "Teleport",
       "type": "feat",
-      "img": "systems/dnd5e/icons/spells/runes-magenta-3.jpg",
+      "img": "icons/magic/symbols/runes-star-pentagon-magenta.webp",
       "system": {
         "description": {
           "value": "<p>The solar magically teleports, along with any equipment it is wearing or carrying, up to 120 feet to an unoccupied space it can see.</p>",
@@ -2715,7 +2713,7 @@
     "systemVersion": "2.0.0",
     "coreVersion": "10.279",
     "createdTime": 1661787233022,
-    "modifiedTime": 1661791116767,
+    "modifiedTime": 1661878734544,
     "lastModifiedBy": "dnd5ebuilder0000"
   }
 }

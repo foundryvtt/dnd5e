@@ -621,7 +621,7 @@
         "price": "1500",
         "attunement": 0,
         "equipped": true,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
         "activation": {
           "type": "",
@@ -689,8 +689,7 @@
         },
         "strength": "15",
         "stealth": true,
-        "proficient": true,
-        "attuned": false
+        "proficient": true
       },
       "effects": [],
       "folder": null,
@@ -890,8 +889,7 @@
           "two": true,
           "ver": false
         },
-        "proficient": true,
-        "attuned": false
+        "proficient": true
       },
       "effects": [],
       "folder": null,
@@ -913,7 +911,7 @@
       "_id": "DgNvJ2F0HSMya3hp",
       "name": "Rock",
       "type": "weapon",
-      "img": "systems/dnd5e/icons/spells/rock-plain-1.jpg",
+      "img": "icons/magic/earth/projectile-stone-ball-brown.webp",
       "system": {
         "description": {
           "value": "<section class=\"secret\"><p>Ranged Weapon Attack: +11 to hit, range 60/240 ft., one target. Hit: <strong>29 (4d10 + 7) <em>bludgeoning damage</em></strong>.</p><p></p></section><p>The Fire Giant attacks with its Rock.</p>",
@@ -1008,8 +1006,7 @@
           "two": false,
           "ver": false
         },
-        "proficient": true,
-        "attuned": false
+        "proficient": true
       },
       "effects": [],
       "folder": null,
@@ -1040,7 +1037,7 @@
     "systemVersion": "2.0.0",
     "coreVersion": "10.279",
     "createdTime": 1661787232577,
-    "modifiedTime": 1661787232577,
+    "modifiedTime": 1661878728935,
     "lastModifiedBy": "dnd5ebuilder0000"
   }
 }
