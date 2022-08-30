@@ -77,7 +77,8 @@ export default class ItemSheet5e extends ItemSheet {
       // Enrich HTML description
       descriptionHTML: await TextEditor.enrichHTML(item.system.description.value, {
         secrets: item.isOwner,
-        async: true
+        async: true,
+        relativeTo: this.item
       }),
 
       // Action Details
