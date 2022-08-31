@@ -360,6 +360,13 @@ export default class ItemSheet5e extends ItemSheet {
   /** @inheritdoc */
   async activateEditor(name, options={}, initialContent="") {
     options.relativeLinks = true;
+    options.plugins = {
+      menu: ProseMirror.ProseMirrorMenu.build(ProseMirror.defaultSchema, {
+        compact: true,
+        destroyOnSave: true,
+        onSave: () => this.saveEditor(name, {remove: true})
+      })
+    };
     return super.activateEditor(name, options, initialContent);
   }
 
