@@ -77,7 +77,8 @@ export default class ItemSheet5e extends ItemSheet {
       // Enrich HTML description
       descriptionHTML: await TextEditor.enrichHTML(item.system.description.value, {
         secrets: item.isOwner,
-        async: true
+        async: true,
+        relativeTo: this.item
       }),
 
       // Action Details
@@ -352,6 +353,14 @@ export default class ItemSheet5e extends ItemSheet {
       position.height = (this._tabs[0].active === "details") ? "auto" : this.options.height;
     }
     return super.setPosition(position);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  async activateEditor(name, options={}, initialContent="") {
+    options.relativeLinks = true;
+    return super.activateEditor(name, options, initialContent);
   }
 
   /* -------------------------------------------- */

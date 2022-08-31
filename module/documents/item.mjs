@@ -1082,7 +1082,11 @@ export default class Item5e extends Item {
     const labels = this.labels;
 
     // Rich text description
-    data.description.value = await TextEditor.enrichHTML(data.description.value, {async: true, ...htmlOptions});
+    data.description.value = await TextEditor.enrichHTML(data.description.value, {
+      async: true,
+      relativeTo: this,
+      ...htmlOptions
+    });
 
     // Item type specific properties
     const props = [];

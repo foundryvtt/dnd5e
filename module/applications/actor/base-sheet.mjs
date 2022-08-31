@@ -156,7 +156,8 @@ export default class ActorSheet5e extends ActorSheet {
     context.biographyHTML = await TextEditor.enrichHTML(context.system.details.biography.value, {
       secrets: this.actor.isOwner,
       rollData: context.rollData,
-      async: true
+      async: true,
+      relativeTo: this.actor
     });
 
     return context;
@@ -249,6 +250,14 @@ export default class ActorSheet5e extends ActorSheet {
     }
     if ( senses.special ) tags.special = senses.special;
     return tags;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  async activateEditor(name, options={}, initialContent="") {
+    options.relativeLinks = true;
+    return super.activateEditor(name, options, initialContent);
   }
 
   /* --------------------------------------------- */
