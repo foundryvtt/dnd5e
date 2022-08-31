@@ -789,7 +789,7 @@
         "price": null,
         "attunement": 0,
         "equipped": true,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
         "activation": {
           "type": "action",
@@ -871,8 +871,7 @@
           "two": false,
           "ver": false
         },
-        "proficient": true,
-        "attuned": false
+        "proficient": true
       },
       "effects": [],
       "folder": null,
@@ -894,7 +893,7 @@
       "_id": "qzSE2ZiVMLKsWF4F",
       "name": "Darkness Aura",
       "type": "feat",
-      "img": "systems/dnd5e/icons/spells/evil-eye-red-2.jpg",
+      "img": "icons/magic/perception/eye-ringed-glow-angry-red.webp",
       "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p>A 15-foot radius of magical darkness extends out from the darkmantle, moves with it, and spreads around corners. The darkness lasts as long as the darkmantle maintains concentration, up to 10 minutes (as if concentrating on a spell).</p>\n<p>Darkvision can't penetrate this darkness, and no natural light can illuminate it. If any of the darkness overlaps with an area of light created by a spell of 2nd level or lower, the spell creating the light is dispelled.</p>\n</section>\n<p>A 15-foot radius of magical darkness extends out from the darkmantle, moves with it, and spreads around corners. Darkvision can't penetrate this darkness, and no natural light can illuminate it.</p>",
@@ -989,7 +988,7 @@
     "systemVersion": "2.0.0",
     "coreVersion": "10.279",
     "createdTime": 1661787232968,
-    "modifiedTime": 1661787232968,
+    "modifiedTime": 1661878733822,
     "lastModifiedBy": "dnd5ebuilder0000"
   }
 }

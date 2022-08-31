@@ -612,7 +612,7 @@
       "_id": "nzkZgDrDq0RwWUao",
       "name": "Death Throes",
       "type": "feat",
-      "img": "systems/dnd5e/icons/spells/explosion-red-3.jpg",
+      "img": "icons/magic/fire/explosion-fireball-large-red-orange.webp",
       "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p>When the balor dies, it explodes, and each creature within 30 feet of it must make a  <strong>DC 20 Dexterity</strong> saving throw, taking <strong>70 (20d6) <em>fire damage</em></strong> on a failed save, or half as much damage on a successful one.</p>\n<p>The explosion ignites flammable objects in that area that aren't being worn or carried, and it destroys the balor's weapons.</p>\n</section>\n<p>When the balor dies, it explodes, and each creature within 30 feet of it must make a <strong>Dexterity</strong> saving throw. The explosion ignites flammable objects in that area that aren't being worn or carried, and it destroys the balor's weapons.</p>",
@@ -700,7 +700,7 @@
       "_id": "FWSzSLqeIDq7meXC",
       "name": "Fire Aura",
       "type": "feat",
-      "img": "systems/dnd5e/icons/spells/fog-orange-3.jpg",
+      "img": "icons/magic/air/fog-gas-smoke-swirling-orange.webp",
       "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p>At the start of each of the balor's turns, each creature within 5 feet of it takes <strong>10 (3d6) <em>fire damage</em></strong>, and flammable objects in the aura that aren't being worn or carried ignite.</p>\n<p>A creature that touches the balor or hits it with a melee attack while within 5 feet of it takes <strong>10 (3d6) <em>fire damage</em></strong>.</p>\n</section>\n<p>At the start of each of the balor's turns, each creature within 5 feet of it takes <em>fire damage</em>, and flammable objects in the aura that aren't being worn or carried ignite. A creature that touches the balor or hits it with a melee attack while within 5 feet of it takes <em>fire damage</em>.</p>",
@@ -1043,7 +1043,7 @@
       "_id": "mw93amZDA4ctKqvQ",
       "name": "Teleport",
       "type": "feat",
-      "img": "systems/dnd5e/icons/spells/runes-magenta-3.jpg",
+      "img": "icons/magic/symbols/runes-star-pentagon-magenta.webp",
       "system": {
         "description": {
           "value": "<p>The balor magically teleports, along with any equipment it is wearing or carrying, up to 120 feet to an unoccupied space it can see.</p>",
@@ -1142,7 +1142,7 @@
         "price": 15,
         "attunement": 0,
         "equipped": true,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
         "activation": {
           "type": "action",
@@ -1228,8 +1228,7 @@
           "thr": false,
           "two": false
         },
-        "proficient": true,
-        "attuned": false
+        "proficient": true
       },
       "effects": [],
       "folder": null,
@@ -1264,7 +1263,7 @@
         "price": 2,
         "attunement": 0,
         "equipped": true,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
         "activation": {
           "type": "action",
@@ -1351,7 +1350,6 @@
           "ver": false
         },
         "proficient": true,
-        "attuned": false,
         "attributes": {
           "spelldc": 10
         }
@@ -1385,7 +1383,7 @@
     "systemVersion": "2.0.0",
     "coreVersion": "10.279",
     "createdTime": 1661787233232,
-    "modifiedTime": 1661787233232,
+    "modifiedTime": 1661878736313,
     "lastModifiedBy": "dnd5ebuilder0000"
   }
 }

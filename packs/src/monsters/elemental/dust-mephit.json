@@ -798,7 +798,7 @@
         "price": null,
         "attunement": 0,
         "equipped": true,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
         "activation": {
           "type": "action",
@@ -880,8 +880,7 @@
           "two": false,
           "ver": false
         },
-        "proficient": true,
-        "attuned": false
+        "proficient": true
       },
       "effects": [],
       "folder": null,
@@ -1090,7 +1089,7 @@
       },
       "_stats": {
         "systemId": "dnd5e",
-        "systemVersion": "2.0.0-alpha3",
+        "systemVersion": "2.0.0",
         "coreVersion": "10.279",
         "createdTime": 1661787234117,
         "modifiedTime": 1661791116287,
@@ -1107,10 +1106,10 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.0.0-alpha3",
+    "systemVersion": "2.0.0",
     "coreVersion": "10.279",
     "createdTime": 1661787232661,
-    "modifiedTime": 1661791116287,
+    "modifiedTime": 1661878730069,
     "lastModifiedBy": "dnd5ebuilder0000"
   }
 }

@@ -625,7 +625,7 @@
         "price": 50,
         "attunement": 0,
         "equipped": true,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
         "activation": {
           "type": "",
@@ -693,8 +693,7 @@
         },
         "strength": null,
         "stealth": true,
-        "proficient": true,
-        "attuned": false
+        "proficient": true
       },
       "effects": [],
       "folder": null,
@@ -894,8 +893,7 @@
           "two": false,
           "ver": false
         },
-        "proficient": true,
-        "attuned": false
+        "proficient": true
       },
       "effects": [],
       "folder": null,
@@ -1000,7 +998,7 @@
       "_id": "k0g8uqoYdJ4LVxcn",
       "name": "Lightning Strike",
       "type": "weapon",
-      "img": "systems/dnd5e/icons/spells/lighting-sky-1.jpg",
+      "img": "icons/magic/lightning/bolt-forked-blue-yellow.webp",
       "system": {
         "description": {
           "value": "<section class=\"secret\"><p>The giant hurls a magical lightning bolt at a point it can see within 500 feet of it. </p><p>Each creature within 10 feet of that point must make a  <strong>DC 17 Dexterity</strong> saving throw, taking <strong>54 (12d8) <em>lightning damage</em></strong> on a failed save, or half as much damage on a successful one.</p></section><p>The Storm Giant attacks with its Lightning Strike. Each creature within 10 feet of that point must make a <strong>Dexterity</strong> saving throw.</p>",
@@ -1095,8 +1093,7 @@
           "two": false,
           "ver": false
         },
-        "proficient": true,
-        "attuned": false
+        "proficient": true
       },
       "effects": [],
       "folder": null,
@@ -1201,7 +1198,7 @@
       "_id": "bRdk2uZ6iTuNGUIL",
       "name": "Rock",
       "type": "weapon",
-      "img": "systems/dnd5e/icons/spells/rock-plain-1.jpg",
+      "img": "icons/magic/earth/projectile-stone-ball-brown.webp",
       "system": {
         "description": {
           "value": "<section class=\"secret\"><p>Ranged Weapon Attack: +14 to hit, range 60/240 ft., one target. Hit: <strong>35 (4d12 + 9) <em>bludgeoning damage</em></strong>.</p><p></p></section><p>The Storm Giant attacks with its Rock.</p>",
@@ -1296,8 +1293,7 @@
           "two": false,
           "ver": false
         },
-        "proficient": true,
-        "attuned": false
+        "proficient": true
       },
       "effects": [],
       "folder": null,
@@ -1415,7 +1411,7 @@
       "folder": null,
       "_stats": {
         "systemId": "dnd5e",
-        "systemVersion": "2.0.0-alpha3",
+        "systemVersion": "2.0.0",
         "coreVersion": "10.279",
         "createdTime": 1661787234192,
         "modifiedTime": 1661791116062,
@@ -1522,7 +1518,7 @@
       "folder": null,
       "_stats": {
         "systemId": "dnd5e",
-        "systemVersion": "2.0.0-alpha3",
+        "systemVersion": "2.0.0",
         "coreVersion": "10.279",
         "createdTime": 1661787234229,
         "modifiedTime": 1661791116064,
@@ -1628,7 +1624,7 @@
       "folder": null,
       "_stats": {
         "systemId": "dnd5e",
-        "systemVersion": "2.0.0-alpha3",
+        "systemVersion": "2.0.0",
         "coreVersion": "10.279",
         "createdTime": 1661787234127,
         "modifiedTime": 1661791116064,
@@ -1734,7 +1730,7 @@
       "folder": null,
       "_stats": {
         "systemId": "dnd5e",
-        "systemVersion": "2.0.0-alpha3",
+        "systemVersion": "2.0.0",
         "coreVersion": "10.279",
         "createdTime": 1661787234093,
         "modifiedTime": 1661791116065,
@@ -1841,7 +1837,7 @@
       "folder": null,
       "_stats": {
         "systemId": "dnd5e",
-        "systemVersion": "2.0.0-alpha3",
+        "systemVersion": "2.0.0",
         "coreVersion": "10.279",
         "createdTime": 1661787234163,
         "modifiedTime": 1661791116067,
@@ -1948,7 +1944,7 @@
       "folder": null,
       "_stats": {
         "systemId": "dnd5e",
-        "systemVersion": "2.0.0-alpha3",
+        "systemVersion": "2.0.0",
         "coreVersion": "10.279",
         "createdTime": 1661787234054,
         "modifiedTime": 1661791116068,
@@ -1965,10 +1961,10 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.0.0-alpha3",
+    "systemVersion": "2.0.0",
     "coreVersion": "10.279",
     "createdTime": 1661787232600,
-    "modifiedTime": 1661791116068,
+    "modifiedTime": 1661878729297,
     "lastModifiedBy": "dnd5ebuilder0000"
   }
 }

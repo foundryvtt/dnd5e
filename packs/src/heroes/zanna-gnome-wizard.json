@@ -750,7 +750,7 @@
         "price": 25,
         "attunement": 0,
         "equipped": true,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
         "activation": {
           "type": "action",
@@ -801,8 +801,7 @@
           "dc": null,
           "scaling": "spell"
         },
-        "consumableType": "ammo",
-        "attuned": false
+        "consumableType": "ammo"
       },
       "sort": 400000,
       "flags": {},
@@ -837,7 +836,7 @@
         "price": 0.2,
         "attunement": 0,
         "equipped": true,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
         "activation": {
           "type": "action",
@@ -920,7 +919,6 @@
           "two": false
         },
         "proficient": true,
-        "attuned": false,
         "attributes": {
           "spelldc": 10
         }
@@ -958,7 +956,7 @@
         "price": 1,
         "attunement": 0,
         "equipped": true,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
         "activation": {
           "type": "none",
@@ -1026,12 +1024,11 @@
         },
         "strength": 0,
         "stealth": false,
-        "proficient": true,
-        "attuned": false
+        "proficient": true
       },
       "sort": 3800000,
       "flags": {},
-      "img": "systems/dnd5e/icons/items/armor/robe.jpg",
+      "img": "icons/equipment/back/mantle-collared-black.webp",
       "effects": [],
       "folder": null,
       "ownership": {
@@ -1062,7 +1059,7 @@
         "price": 2,
         "attunement": 0,
         "equipped": false,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
         "capacity": {
           "type": "weight",
@@ -1076,7 +1073,6 @@
           "gp": 0,
           "pp": 0
         },
-        "attuned": false,
         "damage": {
           "parts": []
         }
@@ -1114,7 +1110,7 @@
         "price": 0.5,
         "attunement": 0,
         "equipped": false,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
         "capacity": {
           "type": "weight",
@@ -1128,7 +1124,6 @@
           "gp": 0,
           "pp": 0
         },
-        "attuned": false,
         "damage": {
           "parts": []
         }
@@ -1166,9 +1161,8 @@
         "price": 1,
         "attunement": 0,
         "equipped": false,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
-        "attuned": false,
         "damage": {
           "parts": []
         }
@@ -1213,7 +1207,7 @@
         "price": 1,
         "attunement": 0,
         "equipped": false,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
         "activation": {
           "type": "action",
@@ -1265,8 +1259,7 @@
           "dc": 17,
           "scaling": "flat"
         },
-        "consumableType": "trinket",
-        "attuned": false
+        "consumableType": "trinket"
       },
       "sort": 1000000,
       "flags": {
@@ -1308,9 +1301,8 @@
         "price": 0.2,
         "attunement": 0,
         "equipped": false,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
-        "attuned": false,
         "damage": {
           "parts": []
         }
@@ -1355,7 +1347,7 @@
         "price": 0.5,
         "attunement": 0,
         "equipped": false,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
         "activation": {
           "type": "action",
@@ -1407,8 +1399,7 @@
           "dc": null,
           "scaling": "spell"
         },
-        "consumableType": "food",
-        "attuned": false
+        "consumableType": "food"
       },
       "sort": 1800000,
       "flags": {},
@@ -1443,9 +1434,8 @@
         "price": 0.5,
         "attunement": 0,
         "equipped": false,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
-        "attuned": false,
         "damage": {
           "parts": []
         }
@@ -1483,7 +1473,7 @@
         "price": 0.01,
         "attunement": 0,
         "equipped": false,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
         "activation": {
           "type": "action",
@@ -1540,8 +1530,7 @@
           "dc": null,
           "scaling": "spell"
         },
-        "consumableType": "trinket",
-        "attuned": false
+        "consumableType": "trinket"
       },
       "sort": 4700000,
       "flags": {
@@ -1583,7 +1572,7 @@
         "price": 0.2,
         "attunement": 0,
         "equipped": false,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
         "activation": {
           "type": "action",
@@ -1635,8 +1624,7 @@
           "dc": null,
           "scaling": "spell"
         },
-        "consumableType": "food",
-        "attuned": false
+        "consumableType": "food"
       },
       "sort": 500000,
       "flags": {},
@@ -1671,9 +1659,8 @@
         "price": 10,
         "attunement": 0,
         "equipped": false,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
-        "attuned": false,
         "damage": {
           "parts": []
         }
@@ -1711,9 +1698,8 @@
         "price": 0.02,
         "attunement": 0,
         "equipped": false,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
-        "attuned": false,
         "damage": {
           "parts": []
         }
@@ -1751,9 +1737,8 @@
         "price": 0.1,
         "attunement": 0,
         "equipped": false,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
-        "attuned": false,
         "damage": {
           "parts": []
         }
@@ -1791,9 +1776,8 @@
         "price": 25,
         "attunement": 0,
         "equipped": false,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
-        "attuned": false,
         "damage": {
           "parts": []
         }
@@ -1831,9 +1815,8 @@
         "price": 50,
         "attunement": 0,
         "equipped": false,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
-        "attuned": false,
         "damage": {
           "parts": []
         },
@@ -1874,9 +1857,8 @@
         "price": 0.5,
         "attunement": 0,
         "equipped": false,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
-        "attuned": false,
         "damage": {
           "parts": []
         }
@@ -2275,7 +2257,7 @@
       },
       "sort": 5000000,
       "flags": {},
-      "img": "systems/dnd5e/icons/spells/fire-arrows-royal-2.jpg",
+      "img": "icons/magic/fire/projectile-meteor-salvo-strong-purple-yellow.webp",
       "effects": [],
       "folder": null,
       "ownership": {
@@ -2358,7 +2340,7 @@
       },
       "sort": 5100000,
       "flags": {},
-      "img": "systems/dnd5e/icons/spells/fire-arrows-royal-1.jpg",
+      "img": "icons/magic/fire/projectile-meteor-salvo-light-purple.webp",
       "effects": [],
       "folder": null,
       "ownership": {
@@ -2788,11 +2770,11 @@
       "folder": null,
       "_stats": {
         "systemId": "dnd5e",
-        "systemVersion": "2.0.0-alpha3",
+        "systemVersion": "2.0.0",
         "coreVersion": "10.279",
         "createdTime": 1661603486020,
         "modifiedTime": 1661603486020,
-        "lastModifiedBy": "bmcUarCizzNhZT0y"
+        "lastModifiedBy": "dnd5ebuilder0000"
       }
     },
     {
@@ -2894,11 +2876,11 @@
       "folder": null,
       "_stats": {
         "systemId": "dnd5e",
-        "systemVersion": "2.0.0-alpha3",
+        "systemVersion": "2.0.0",
         "coreVersion": "10.279",
         "createdTime": 1661603486021,
         "modifiedTime": 1661603486021,
-        "lastModifiedBy": "bmcUarCizzNhZT0y"
+        "lastModifiedBy": "dnd5ebuilder0000"
       }
     },
     {
@@ -3001,11 +2983,11 @@
       "folder": null,
       "_stats": {
         "systemId": "dnd5e",
-        "systemVersion": "2.0.0-alpha3",
+        "systemVersion": "2.0.0",
         "coreVersion": "10.279",
         "createdTime": 1661603486021,
         "modifiedTime": 1661603486021,
-        "lastModifiedBy": "bmcUarCizzNhZT0y"
+        "lastModifiedBy": "dnd5ebuilder0000"
       }
     },
     {
@@ -3108,11 +3090,11 @@
       "folder": null,
       "_stats": {
         "systemId": "dnd5e",
-        "systemVersion": "2.0.0-alpha3",
+        "systemVersion": "2.0.0",
         "coreVersion": "10.279",
         "createdTime": 1661603486022,
         "modifiedTime": 1661603486022,
-        "lastModifiedBy": "bmcUarCizzNhZT0y"
+        "lastModifiedBy": "dnd5ebuilder0000"
       }
     },
     {
@@ -3243,11 +3225,11 @@
       },
       "_stats": {
         "systemId": "dnd5e",
-        "systemVersion": "2.0.0-alpha3",
+        "systemVersion": "2.0.0",
         "coreVersion": "10.279",
         "createdTime": 1661603486022,
         "modifiedTime": 1661603486022,
-        "lastModifiedBy": "bmcUarCizzNhZT0y"
+        "lastModifiedBy": "dnd5ebuilder0000"
       }
     },
     {
@@ -3350,11 +3332,11 @@
       "folder": null,
       "_stats": {
         "systemId": "dnd5e",
-        "systemVersion": "2.0.0-alpha3",
+        "systemVersion": "2.0.0",
         "coreVersion": "10.279",
         "createdTime": 1661603486025,
         "modifiedTime": 1661603486025,
-        "lastModifiedBy": "bmcUarCizzNhZT0y"
+        "lastModifiedBy": "dnd5ebuilder0000"
       }
     },
     {
@@ -3485,11 +3467,11 @@
       },
       "_stats": {
         "systemId": "dnd5e",
-        "systemVersion": "2.0.0-alpha3",
+        "systemVersion": "2.0.0",
         "coreVersion": "10.279",
         "createdTime": 1661603486026,
         "modifiedTime": 1661603486026,
-        "lastModifiedBy": "bmcUarCizzNhZT0y"
+        "lastModifiedBy": "dnd5ebuilder0000"
       }
     },
     {
@@ -3597,11 +3579,11 @@
       },
       "_stats": {
         "systemId": "dnd5e",
-        "systemVersion": "2.0.0-alpha3",
+        "systemVersion": "2.0.0",
         "coreVersion": "10.279",
         "createdTime": 1661603486027,
         "modifiedTime": 1661603486027,
-        "lastModifiedBy": "bmcUarCizzNhZT0y"
+        "lastModifiedBy": "dnd5ebuilder0000"
       }
     },
     {
@@ -3708,11 +3690,11 @@
       "folder": null,
       "_stats": {
         "systemId": "dnd5e",
-        "systemVersion": "2.0.0-alpha3",
+        "systemVersion": "2.0.0",
         "coreVersion": "10.279",
         "createdTime": 1661603486027,
         "modifiedTime": 1661603486027,
-        "lastModifiedBy": "bmcUarCizzNhZT0y"
+        "lastModifiedBy": "dnd5ebuilder0000"
       }
     }
   ],
@@ -3784,7 +3766,7 @@
     "systemVersion": "2.0.0",
     "coreVersion": "10.279",
     "createdTime": 1661787232155,
-    "modifiedTime": 1661787232155,
+    "modifiedTime": 1661878142271,
     "lastModifiedBy": "dnd5ebuilder0000"
   }
 }
