@@ -1380,6 +1380,7 @@ export default class Actor5e extends Actor {
    * @property {object[]} updateItems  Updates applied to actor's items.
    * @property {boolean} longRest      Whether the rest type was a long rest.
    * @property {boolean} newDay        Whether a new day occurred during the rest.
+   * @property {Roll[]} rolls          Any rolls that occurred during the rest process, not including hit dice.
    */
 
   /* -------------------------------------------- */
@@ -1471,6 +1472,7 @@ export default class Actor5e extends Actor {
     let hitPointUpdates = {};
     let hitDiceRecovered = 0;
     let hitDiceUpdates = [];
+    const rolls = [];
 
     // Recover hit points & hit dice on long rest
     if ( longRest ) {
@@ -1489,11 +1491,12 @@ export default class Actor5e extends Actor {
       },
       updateItems: [
         ...hitDiceUpdates,
-        ...await this._getRestItemUsesRecovery({ recoverLongRestUses: longRest, recoverDailyUses: newDay })
+        ...await this._getRestItemUsesRecovery({ recoverLongRestUses: longRest, recoverDailyUses: newDay, rolls })
       ],
       longRest,
       newDay
     };
+    result.rolls = rolls;
 
     /**
      * A hook event that fires after rest result is calculated, but before any updates are performed.
@@ -1551,9 +1554,15 @@ export default class Actor5e extends Actor {
     // Summarize the rest duration
     let restFlavor;
     switch (game.settings.get("dnd5e", "restVariant")) {
-      case "normal": restFlavor = (longRest && newDay) ? "DND5E.LongRestOvernight" : `DND5E.${length}RestNormal`; break;
-      case "gritty": restFlavor = (!longRest && newDay) ? "DND5E.ShortRestOvernight" : `DND5E.${length}RestGritty`; break;
-      case "epic": restFlavor = `DND5E.${length}RestEpic`; break;
+      case "normal":
+        restFlavor = (longRest && newDay) ? "DND5E.LongRestOvernight" : `DND5E.${length}RestNormal`;
+        break;
+      case "gritty":
+        restFlavor = (!longRest && newDay) ? "DND5E.ShortRestOvernight" : `DND5E.${length}RestGritty`;
+        break;
+      case "epic":
+        restFlavor = `DND5E.${length}RestEpic`;
+        break;
     }
 
     // Determine the chat message to display
@@ -1568,6 +1577,7 @@ export default class Actor5e extends Actor {
       user: game.user.id,
       speaker: {actor: this, alias: this.name},
       flavor: game.i18n.localize(restFlavor),
+      rolls: result.rolls,
       content: game.i18n.format(message, {
         name: this.name,
         dice: longRest ? dhd : -dhd,
@@ -1649,7 +1659,7 @@ export default class Actor5e extends Actor {
    * @returns {object}                               Updates to the actor.
    * @protected
    */
-  _getRestSpellRecovery({ recoverPact=true, recoverSpells=true }={}) {
+  _getRestSpellRecovery({recoverPact=true, recoverSpells=true}={}) {
     const spells = this.system.spells;
     let updates = {};
     if ( recoverPact ) {
@@ -1674,8 +1684,7 @@ export default class Actor5e extends Actor {
    * @returns {object}                     Array of item updates and number of hit dice recovered.
    * @protected
    */
-  _getRestHitDiceRecovery({maxHitDice=undefined}={}) {
-
+  _getRestHitDiceRecovery({maxHitDice}={}) {
     // Determine the number of hit dice which may be recovered
     if ( maxHitDice === undefined ) maxHitDice = Math.max(Math.floor(this.system.details.level / 2), 1);
 
@@ -1702,15 +1711,16 @@ export default class Actor5e extends Actor {
 
   /**
    * Recovers item uses during short or long rests.
-   *
    * @param {object} [options]
    * @param {boolean} [options.recoverShortRestUses=true]  Recover uses for items that recharge after a short rest.
    * @param {boolean} [options.recoverLongRestUses=true]   Recover uses for items that recharge after a long rest.
    * @param {boolean} [options.recoverDailyUses=true]      Recover uses for items that recharge on a new day.
-   * @return {Promise.<object[]>}                          Array of item updates.
+   * @param {Roll[]} [options.rolls]                       Rolls that have been performed as part of this rest.
+   * @returns {Promise<object[]>}                          Array of item updates.
    * @protected
    */
-  async _getRestItemUsesRecovery({ recoverShortRestUses=true, recoverLongRestUses=true, recoverDailyUses=true }={}) {
+  async _getRestItemUsesRecovery({recoverShortRestUses=true, recoverLongRestUses=true,
+    recoverDailyUses=true, rolls}={}) {
     let recovery = [];
     if ( recoverShortRestUses ) recovery.push("sr");
     if ( recoverLongRestUses ) recovery.push("lr");
@@ -1725,22 +1735,26 @@ export default class Actor5e extends Actor {
       }
 
       // Items that roll to gain charges on a new day
-      if ( recoverDailyUses && d.uses && (d.uses.per === "charges") &&
-           (d.uses.recoveryFormula !== "") && (d.uses.value !== d.uses.max) ) {
-        const roll = new CONFIG.Dice.DamageRoll(d.uses.recoveryFormula, this.getRollData());
+      if ( recoverDailyUses && (item.system.uses?.per === "charges")
+           && (item.system.uses.recoveryFormula !== "")
+           && (item.system.uses.value !== item.system.uses.max) ) {
+        const roll = new CONFIG.Dice.DamageRoll(item.system.uses.recoveryFormula, this.getRollData());
 
-        if ( recoverLongRestUses && (game.settings.get("dnd5e", "restVariant") === "gritty") )
+        if ( recoverLongRestUses && (game.settings.get("dnd5e", "restVariant") === "gritty") ) {
           roll.alter(7, 0, {multiplyNumeric: true});
+        }
 
         await roll.evaluate({async: true});
         if ( roll ) {
-          const count = Math.min(d.uses.max - d.uses.value, roll.total);
-          const locKey = `DND5E.ItemRecoveryRoll${( (d.uses.value + count) === d.uses.max ) ? "Max" : ""}`;
-          updates.push({_id: item.id, "data.uses.value": d.uses.value + count});
+          const count = Math.min(item.system.uses.max - item.system.uses.value, roll.total);
+          const isMax = (item.system.uses.value + count) === item.system.uses.max;
+          const locKey = `DND5E.ItemRecoveryRoll${isMax ? "Max" : ""}`;
+          updates.push({_id: item.id, "system.uses.value": item.system.uses.value + count});
+          roll.options.flavor = game.i18n.format(locKey, { name: item.name, count });
+          rolls.push(roll);
           await roll.toMessage({
             user: game.user.id,
-            speaker: { actor: this, alias: this.name },
-            flavor: game.i18n.format(locKey, { name: item.name, count })
+            speaker: { actor: this, alias: this.name }
           });
         }
       }

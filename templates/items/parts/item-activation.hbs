@@ -132,11 +132,11 @@
     </div>
 </div>
 
-{{#if (eq data.uses.per "charges")}}
+{{#if (eq system.uses.per "charges")}}
 <div class="form-group">
-    <label>{{ localize "DND5E.RecoveryFormula" }}</label>
+    <label>{{localize "DND5E.RecoveryFormula"}}</label>
     <div class="form-fields">
-        <input type="text" name="data.uses.recoveryFormula" value="{{data.uses.recoveryFormula}}" data-dtype="String">
+        <input type="text" name="system.uses.recoveryFormula" value="{{system.uses.recoveryFormula}}">
     </div>
 </div>
 {{/if}}
