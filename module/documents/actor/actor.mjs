@@ -1623,13 +1623,19 @@ export default class Actor5e extends Actor {
 
   /**
    * Roll hit points for a specific class as part of a level-up workflow.
-   * @param {Item5e} item      The class item whose hit dice to roll.
-   * @returns {Promise<Roll>}  The completed roll.
+   * @param {Item5e} item                         The class item whose hit dice to roll.
+   * @param {object} options
+   * @param {boolean} [options.chatMessage=true]  Display the chat message for this roll.
+   * @returns {Promise<Roll>}                     The completed roll.
    * @see {@link dnd5e.preRollClassHitPoints}
    */
-  async rollClassHitPoints(item) {
+  async rollClassHitPoints(item, { chatMessage=true }={}) {
     if ( item.type !== "class" ) throw new Error("Hit points can only be rolled for a class item.");
-    const rollData = { formula: `1${item.system.hitDice}`, data: item.getRollData() };
+    const rollData = {
+      formula: `1${item.system.hitDice}`,
+      data: item.getRollData(),
+      chatMessage
+    };
     const flavor = game.i18n.format("DND5E.AdvancementHitPointsRollMessage", { class: item.name });
     const messageData = {
       title: `${flavor}: ${this.name}`,
@@ -1652,34 +1658,36 @@ export default class Actor5e extends Actor {
     Hooks.callAll("dnd5e.preRollClassHitPoints", this, item, rollData, messageData);
 
     const roll = new Roll(rollData.formula, rollData.data);
-    await roll.toMessage(messageData);
+
+    /**
+     * A hook event that fires after hit points haven been rolled for a character's class.
+     * @function dnd5e.rollClassHitPoints
+     * @memberof hookEvents
+     * @param {Actor5e} actor  Actor for which the hit points have been rolled.
+     * @param {Roll} roll      The resulting roll.
+     */
+    Hooks.callAll("dnd5e.rollClassHitPoints", this, roll);
+
+    if ( rollData.chatMessage ) await roll.toMessage(messageData);
     return roll;
   }
 
   /* -------------------------------------------- */
-  /*  Resting                                     */
-  /* -------------------------------------------- */
-
-  /**
-   * Configuration options for a rest.
-   *
-   * @typedef {object} RestConfiguration
-   * @property {boolean} dialog            Present a dialog window which allows for rolling hit dice as part of the
-   *                                       Short Rest and selecting whether a new day has occurred.
-   * @property {boolean} chat              Should a chat message be created to summarize the results of the rest?
-   * @property {boolean} newDay            Does this rest carry over to a new day?
-   * @property {boolean} [autoHD]          Should hit dice be spent automatically during a short rest?
-   * @property {number} [autoHDThreshold]  How many hit points should be missing before hit dice are
-   *                                       automatically spent during a short rest.
-   */
 
   /**
    * Roll hit points for an NPC based on the HP formula.
-   * @returns {Promise<Roll>}  The completed roll.
+   * @param {object} options
+   * @param {boolean} [options.chatMessage=true]  Display the chat message for this roll.
+   * @returns {Promise<Roll>}                     The completed roll.
+   * @see {@link dnd5e.preRollNPCHitPoints}
    */
-  async rollNPCHitPoints() {
+  async rollNPCHitPoints({ chatMessage=true }={}) {
     if ( this.type !== "npc" ) throw new Error("NPC hit points can only be rolled for NPCs");
-    const rollData = { formula: this.system.attributes.hp.formula, data: this.getRollData() };
+    const rollData = {
+      formula: this.system.attributes.hp.formula,
+      data: this.getRollData(),
+      chatMessage
+    };
     const flavor = game.i18n.format("DND5E.HPFormulaRollMessage");
     const messageData = {
       title: `${flavor}: ${this.name}`,
@@ -1701,13 +1709,36 @@ export default class Actor5e extends Actor {
     Hooks.callAll("dnd5e.preRollNPCHitPoints", this, rollData, messageData);
 
     const roll = new Roll(rollData.formula, rollData.data);
-    await roll.toMessage(messageData);
+
+    /**
+     * A hook event that fires after hit points are rolled for an NPC.
+     * @function dnd5e.rollNPCHitPoints
+     * @memberof hookEvents
+     * @param {Actor5e} actor  Actor for which the hit points have been rolled.
+     * @param {Roll} roll      The resulting roll.
+     */
+    Hooks.callAll("dnd5e.rollNPCHitPoints", this, roll);
+
+    if ( rollData.chatMessage ) await roll.toMessage(messageData);
     return roll;
   }
 
   /* -------------------------------------------- */
   /*  Resting                                     */
   /* -------------------------------------------- */
+
+  /**
+   * Configuration options for a rest.
+   *
+   * @typedef {object} RestConfiguration
+   * @property {boolean} dialog            Present a dialog window which allows for rolling hit dice as part of the
+   *                                       Short Rest and selecting whether a new day has occurred.
+   * @property {boolean} chat              Should a chat message be created to summarize the results of the rest?
+   * @property {boolean} newDay            Does this rest carry over to a new day?
+   * @property {boolean} [autoHD]          Should hit dice be spent automatically during a short rest?
+   * @property {number} [autoHDThreshold]  How many hit points should be missing before hit dice are
+   *                                       automatically spent during a short rest.
+   */
 
   /**
    * Results from a rest operation.
