@@ -45,6 +45,14 @@
         <div class="tab details" data-group="primary" data-tab="details">
             <h3 class="form-header">{{ localize "DND5E.SpellDetails" }}</h3>
 
+            {{!-- Identifier --}}
+            <div class="form-group">
+                <label>{{localize "DND5E.Identifier"}}</label>
+                <div class="form-fields">
+                    <input type="text" name="system.identifier" value="{{system.identifier}}">
+                </div>
+            </div>
+
             {{!-- Spell Level --}}
             <div class="form-group">
                 <label>{{ localize "DND5E.SpellLevel" }}</label>

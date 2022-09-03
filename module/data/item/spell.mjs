@@ -1,5 +1,5 @@
 import SystemDataModel from "../abstract.mjs";
-import { FormulaField, MappingField } from "../fields.mjs";
+import { FormulaField, IdentifierField, MappingField } from "../fields.mjs";
 import ActionTemplate from "./templates/action.mjs";
 import ActivatedEffectTemplate from "./templates/activated-effect.mjs";
 import ItemDescriptionTemplate from "./templates/item-description.mjs";
@@ -10,6 +10,7 @@ import ItemDescriptionTemplate from "./templates/item-description.mjs";
  * @mixes ActivatedEffectTemplate
  * @mixes ActionTemplate
  *
+ * @property {string} identifier                 Identifier slug for this spell.
  * @property {number} level                      Base level of the spell.
  * @property {string} school                     Magical school to which this spell belongs.
  * @property {object} components                 General components and tags for this spell.
@@ -36,6 +37,7 @@ export default class SpellData extends SystemDataModel.mixin(
   /** @inheritdoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
+      identifier: new IdentifierField({required: true, label: "DND5E.Identifier"}),
       level: new foundry.data.fields.NumberField({
         required: true, integer: true, initial: 1, min: 0, label: "DND5E.SpellLevel"
       }),

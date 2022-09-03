@@ -73,7 +73,9 @@ export default class Item5e extends Item {
    * @type {string}
    */
   get identifier() {
-    return this.system.identifier || this.name.slugify({strict: true});
+    if ( this.system.identifier ) return this.system.identifier;
+    const identifier = this.name.replaceAll(/(\w+)([\\|/])(\w+)/g, "$1-$3");
+    return identifier.slugify({strict: true});
   }
 
   /* -------------------------------------------- */
@@ -2103,8 +2105,8 @@ export default class Item5e extends Item {
     await super._preCreate(data, options, user);
 
     // Create class identifier based on name
-    if ( ["class", "subclass"].includes(this.type) && !this.system.identifier ) {
-      await this.updateSource({ "system.identifier": data.name.slugify({strict: true}) });
+    if ( this.system.hasOwnProperty("identifier") && !this.system.identifier ) {
+      await this.updateSource({ "system.identifier": this.identifier });
     }
 
     if ( !this.isEmbedded || (this.parent.type === "vehicle") ) return;
