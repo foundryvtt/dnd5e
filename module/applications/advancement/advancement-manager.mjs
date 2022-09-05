@@ -200,7 +200,7 @@ export default class AdvancementManager extends Application {
   /**
    * Construct a manager for an item that needs to be deleted.
    * @param {Actor5e} actor         Actor from which the item should be deleted.
-   * @param {object} itemId         ID of the item to be deleted.
+   * @param {string} itemId         ID of the item to be deleted.
    * @param {object} options        Rendering options passed to the application.
    * @returns {AdvancementManager}  Prepared manager. Steps count can be used to determine if advancements are needed.
    */
@@ -301,6 +301,69 @@ export default class AdvancementManager extends Application {
     return (item?.advancement.byLevel[level] ?? [])
       .filter(a => a.appliesToClass)
       .map(a => new a.constructor.metadata.apps.flow(item, a.id, level));
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Construct a manager for a newly added advancement from drag-drop.
+   * @param {Actor5e} actor               Actor from which the advancement should be updated.
+   * @param {string} itemId               ID of the item to which the advancements are being dropped.
+   * @param {Advancement[]} advancements  Dropped advancements to add.
+   * @param {object} options              Rendering options passed to the application.
+   * @returns {AdvancementManager}  Prepared manager. Steps count can be used to determine if advancements are needed.
+   */
+  static forMigration(actor, itemId, advancements, options) {
+    const manager = new this(actor, options);
+    const clonedItem = manager.clone.items.get(itemId);
+    if ( !clonedItem ) return manager;
+
+    const currentLevel = clonedItem.system.levels ?? cloneItem.class?.system.levels
+      ?? manager.clone.system.details.level;
+    let minimumLevel = Infinity;
+
+    // Determine which advancements need to be added
+    const advancementsToAdd = [];
+    for ( const advancement of advancements ) {
+      if ( clonedItem.advancement.byId[advancement.id] ) continue;
+      advancementsToAdd.push(advancement);
+      minimumLevel = Math.min(advancement.levels[0] ?? Infinity, minimumLevel);
+    }
+    if ( !advancementsToAdd.length ) return manager;
+
+    const advancementArray = clonedItem.toObject().system.advancement;
+
+    // If no advancement changes need to be immediately applied, just add the new advancements
+    if ( minimumLevel > currentLevel ) {
+      advancementArray.push(...advancementsToAdd.map(a => a.data));
+      actor.items.get(itemId).update({"system.advancement": advancementArray});
+      return manager;
+    }
+
+    const oldFlows = Array.fromRange(currentLevel + 1).slice(minimumLevel)
+      .flatMap(l => this.flowsForLevel(clonedItem, l));
+
+    // Revert advancements trough minimum level
+    oldFlows.reverse().forEach(flow => manager.steps.push({ type: "reverse", flow, automatic: true }));
+
+    // Add new advancements
+    advancementArray.push(...advancementsToAdd.map(a => a.data));
+    clonedItem.updateSource({"system.advancement": advancementArray});
+
+    const newFlows = Array.fromRange(currentLevel + 1).slice(minimumLevel)
+      .flatMap(l => this.flowsForLevel(clonedItem, l));
+
+    // Restore existing advancements and apply new advancements
+    newFlows.forEach(flow => {
+      const matchingFlow = oldFlows.find(f => (f.advancement.id === flow.advancement.id) && (f.level === flow.level));
+      if ( matchingFlow ) {
+        manager.steps.push({ type: "restore", flow: matchingFlow, automatic: true });
+      } else {
+        manager.steps.push({ type: "forward", flow });
+      }
+    });
+
+    return manager;
   }
 
   /* -------------------------------------------- */
