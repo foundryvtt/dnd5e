@@ -31,7 +31,7 @@ export default class ItemSheet5e extends ItemSheet {
       resizable: true,
       scrollY: [".tab.details"],
       tabs: [{navSelector: ".tabs", contentSelector: ".sheet-body", initial: "description"}],
-      dragDrop: [{dragSelector: "[data-effect-id]", dropSelector: ".effects-list"}]
+      dragDrop: [{dragSelector: "[data-effect-id]", dropSelector: ".effects-list"}, { dropSelector: ".advancement" }]
     });
   }
 
@@ -576,6 +576,8 @@ export default class ItemSheet5e extends ItemSheet {
     switch ( data.type ) {
       case "ActiveEffect":
         return this._onDropActiveEffect(event, data);
+      case "Item":
+        return this._onDropAdvancement(event, data);
     }
   }
 
@@ -596,6 +598,40 @@ export default class ItemSheet5e extends ItemSheet {
       ...effect.toObject(),
       origin: this.item.uuid
     }, {parent: this.item});
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle the dropping of an advancement or item with advancements onto the advancements tab.
+   * @param {DragEvent} event                  The concluding DragEvent which contains drop data.
+   * @param {object} data                      The data transfer extracted from the event.
+   */
+  async _onDropAdvancement(event, data) {
+    let advancements;
+    if ( data.type === "Item" ) {
+      const item = await Item.implementation.fromDropData(data);
+      if ( !item ) return false;
+      advancements = Object.values(item.advancement.byId);
+    } else {
+      return false;
+    }
+    advancements = advancements.filter(a => {
+      return !this.item.advancement.byId[a.id]
+        && a.constructor.metadata.validItemTypes.has(this.item.type)
+        && a.constructor.availableForItem(this.item);
+    });
+
+    if ( !advancements.length ) return false;
+    if ( this.item.isEmbedded && !game.settings.get("dnd5e", "disableAdvancements") ) {
+      const manager = AdvancementManager.forMigration(this.item.actor, this.item.id, advancements);
+      if ( manager.steps.length ) return manager.render(true);
+    }
+
+    // If no advancements need to be applied, just add them to the item
+    const advancementArray = foundry.utils.deepClone(this.item.system.advancement);
+    advancementArray.push(...advancements.map(a => a.data));
+    this.item.update({"system.advancement": advancementArray});
   }
 
   /* -------------------------------------------- */
