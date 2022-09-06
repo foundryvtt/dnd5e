@@ -324,18 +324,41 @@ preLocalize("abilityConsumptionTypes", { sort: true });
 /* -------------------------------------------- */
 
 /**
- * Creature sizes.
- * @enum {string}
+ * Various sizes that an actor can be.
+ * @enum {ActorSizeConfiguration}
  */
 DND5E.actorSizes = {
-  tiny: "DND5E.SizeTiny",
-  sm: "DND5E.SizeSmall",
-  med: "DND5E.SizeMedium",
-  lg: "DND5E.SizeLarge",
-  huge: "DND5E.SizeHuge",
-  grg: "DND5E.SizeGargantuan"
+  tiny: {
+    label: "DND5E.SizeTiny",
+    encumbranceMultiplier: 0.5,
+    next: "small"
+  },
+  small: {
+    label: "DND5E.SizeSmall",
+    encumbranceMultiplier: 1,
+    next: "med"
+  },
+  med: {
+    label: "DND5E.SizeMedium",
+    encumbranceMultiplier: 1,
+    next: "lg"
+  },
+  lg: {
+    label: "DND5E.SizeLarge",
+    encumbranceMultiplier: 2,
+    next: "huge"
+  },
+  huge: {
+    label: "DND5E.SizeHuge",
+    encumbranceMultiplier: 4,
+    next: "grg"
+  },
+  grg: {
+    label: "DND5E.SizeGargantuan",
+    encumbranceMultiplier: 8
+  }
 };
-preLocalize("actorSizes");
+preLocalize("actorSizes", { key: "label" });
 
 /**
  * Default token image size for the values of `DND5E.actorSizes`.
@@ -743,6 +766,32 @@ DND5E.encumbrance = {
   strMultiplier: {
     imperial: 15,
     metric: 6.8
+  },
+  variant: {
+    0: {
+      name: "DND5E.Unencumbered"
+    },
+    33: {
+      name: "DND5E.Encumbered",
+      strMultiplier: {
+        imperial: 5,
+        metric: 2.2
+      }
+    },
+    66: {
+      name: "DND5E.HeavilyEncumbered",
+      strMultiplier: {
+        imperial: 10,
+        metric: 4.5
+      }
+    },
+    max: {
+      name: "DND5E.ExceedingCarryingCapacity",
+      strMultiplier: {
+        imperial: 15,
+        metric: 6.8
+      }
+    }
   },
   vehicleWeightMultiplier: {
     imperial: 2000, // 2000 lbs in an imperial ton

@@ -515,7 +515,7 @@ function _migrateActorType(actor, updateData) {
     if ( match.groups.size || isNamedSwarm ) {
       const sizeLc = match.groups.size ? match.groups.size.trim().toLowerCase() : "tiny";
       const sizeMatch = Object.entries(CONFIG.DND5E.actorSizes).find(([k, v]) => {
-        return (sizeLc === k) || (sizeLc === game.i18n.localize(v).toLowerCase());
+        return (sizeLc === k) || (sizeLc === game.i18n.localize(v.label).toLowerCase());
       });
       actorTypeData.swarm = sizeMatch ? sizeMatch[0] : "tiny";
     }

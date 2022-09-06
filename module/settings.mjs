@@ -171,6 +171,15 @@ export default function registerSystemSettings() {
     default: false
   });
 
+  game.settings.register("dnd5e", "variantEncumbrance", {
+    name: "SETTINGS.5eVarEncumbranceN",
+    hint: "SETTINGS.5eVarEncumbranceL",
+    scope: "world",
+    config: true,
+    default: false,
+    type: Boolean
+  });
+
   // Critical Damage Modifiers
   game.settings.register("dnd5e", "criticalDamageModifiers", {
     name: "SETTINGS.5eCriticalModifiersN",

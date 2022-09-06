@@ -29,7 +29,7 @@
             {{!-- Character Summary --}}
             <ul class="summary flexrow">
                 <li>
-                    <span>{{lookup config.actorSizes system.traits.size}}</span>
+                    <span>{{#with (lookup config.actorSizes system.traits.size)}}{{label}}{{/with}}</span>
                 </li>
                 <li>
                     <input type="text" name="system.details.alignment" value="{{system.details.alignment}}" placeholder="{{ localize 'DND5E.Alignment' }}"/>

@@ -67,7 +67,7 @@ export default class ActorTypeConfig extends FormApplication {
       subtype: attr.subtype,
       swarm: attr.swarm,
       sizes: Array.from(Object.entries(CONFIG.DND5E.actorSizes)).reverse().reduce((obj, e) => {
-        obj[e[0]] = e[1];
+        obj[e[0]] = e[1].label;
         return obj;
       }, {}),
       preview: Actor5e.formatCreatureType(attr) || "–"

@@ -129,8 +129,8 @@
 
 {{#unless isNPC}}
 {{#with system.attributes.encumbrance}}
-<div class="encumbrance {{#if encumbered}}encumbered{{/if}}">
-    <span class="encumbrance-bar" style="width:{{pct}}%"></span>
+<div class="encumbrance encumbered-{{level}}">
+    <span class="encumbrance-bar" style="width:{{pct}}%" data-tooltip="{{localize name}}"></span>
     <span class="encumbrance-label">{{value}} / {{max}}</span>
     <i class="encumbrance-breakpoint encumbrance-33 arrow-up"></i>
     <i class="encumbrance-breakpoint encumbrance-33 arrow-down"></i>

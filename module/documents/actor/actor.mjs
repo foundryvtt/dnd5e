@@ -513,6 +513,7 @@ export default class Actor5e extends Actor {
    */
   _prepareEncumbrance() {
     const encumbrance = this.system.attributes.encumbrance ??= {};
+    const units = game.settings.get("dnd5e", "metricWeightUnits") ? "metric" : "imperial";
 
     // Get the total weight from items
     const physicalItems = ["weapon", "equipment", "consumable", "tool", "backpack", "loot"];
@@ -527,25 +528,50 @@ export default class Actor5e extends Actor {
     const currency = this.system.currency;
     if ( game.settings.get("dnd5e", "currencyWeight") && currency ) {
       const numCoins = Object.values(currency).reduce((val, denom) => val + Math.max(denom, 0), 0);
-      const currencyPerWeight = game.settings.get("dnd5e", "metricWeightUnits")
-        ? CONFIG.DND5E.encumbrance.currencyPerWeight.metric
-        : CONFIG.DND5E.encumbrance.currencyPerWeight.imperial;
-      weight += numCoins / currencyPerWeight;
+      weight += numCoins / CONFIG.DND5E.encumbrance.currencyPerWeight[units];
     }
 
-    // Determine the Encumbrance size class
-    let mod = {tiny: 0.5, sm: 1, med: 1, lg: 2, huge: 4, grg: 8}[this.system.traits.size] || 1;
-    if ( this.flags.dnd5e?.powerfulBuild ) mod = Math.min(mod * 2, 8);
+    weight = weight.toNearest(0.1);
 
-    const strengthMultiplier = game.settings.get("dnd5e", "metricWeightUnits")
-      ? CONFIG.DND5E.encumbrance.strMultiplier.metric
-      : CONFIG.DND5E.encumbrance.strMultiplier.imperial;
+    let size = CONFIG.DND5E.actorSizes[this.system.traits.size]
+      || CONFIG.DND5E.actorSizes.med;
+
+    if ( this.getFlag("dnd5e", "powerfulBuild") ) {
+      size = CONFIG.DND5E.actorSizes[size.next];
+    }
+
+    const sizeMultiplier = size.encumbranceMultiplier || 1;
+    const strValue = this.system.abilities.str.value ?? 10;
+
+    let max = 0;
+    let level = "0";
+    let name = "DND5E.Unencumbered";
+
+    if ( game.settings.get("dnd5e", "variantEncumbrance") ) {
+      const levels = CONFIG.DND5E.encumbrance.variant;
+      for ( const l of ["33", "66", "max"] ) {
+        const strMultiplier = levels[l].strMultiplier[units];
+        max = (strValue * strMultiplier * sizeMultiplier).toNearest(0.1);
+        if ( weight > max ) {
+          level = l;
+          name = levels[l].name;
+        }
+      }
+    } else {
+      const strMultiplier = CONFIG.DND5E.encumbrance.strMultiplier[units];
+      max = (strValue * strMultiplier * sizeMultiplier).toNearest(0.1);
+      if ( weight > max ) {
+        level = "max";
+        name = "DND5E.Encumbered";
+      }
+    }
 
     // Populate final Encumbrance values
-    encumbrance.value = weight.toNearest(0.1);
-    encumbrance.max = ((this.system.abilities.str?.value ?? 10) * strengthMultiplier * mod).toNearest(0.1);
-    encumbrance.pct = Math.clamped((encumbrance.value * 100) / encumbrance.max, 0, 100);
-    encumbrance.encumbered = encumbrance.pct > (200 / 3);
+    encumbrance.value = weight;
+    encumbrance.max = max;
+    encumbrance.pct = Math.clamped((weight * 100) / max, 0, 100);
+    encumbrance.level = level;
+    encumbrance.name = name;
   }
 
   /* -------------------------------------------- */
@@ -777,7 +803,7 @@ export default class Actor5e extends Actor {
   }
 
   /* -------------------------------------------- */
- 
+
   /**
    * Apply a certain amount of temporary hit point, but only if it's more than the actor currently has.
    * @param {number} amount       An amount of temporary hit points to set
@@ -2015,7 +2041,7 @@ export default class Actor5e extends Actor {
     let type = localizedType;
     if ( typeData.swarm ) {
       type = game.i18n.format("DND5E.CreatureSwarmPhrase", {
-        size: game.i18n.localize(CONFIG.DND5E.actorSizes[typeData.swarm]),
+        size: game.i18n.localize(CONFIG.DND5E.actorSizes[typeData.swarm].label),
         type: localizedType
       });
     }
