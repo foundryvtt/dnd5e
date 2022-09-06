@@ -274,6 +274,19 @@ export default class Advancement extends BaseAdvancement {
   }
 
   /* -------------------------------------------- */
+
+  /**
+   * Serialize salient information for this Advancement when dragging it.
+   * @returns {object}  An object of drag data.
+   */
+  toDragData() {
+    const dragData = { type: "Advancement" };
+    if ( this.id ) dragData.uuid = this.uuid;
+    else dragData.data = this.toObject();
+    return dragData;
+  }
+
+  /* -------------------------------------------- */
   /*  Application Methods                         */
   /* -------------------------------------------- */
 

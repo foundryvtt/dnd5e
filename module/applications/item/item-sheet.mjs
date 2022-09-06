@@ -31,7 +31,10 @@ export default class ItemSheet5e extends ItemSheet {
       resizable: true,
       scrollY: [".tab.details"],
       tabs: [{navSelector: ".tabs", contentSelector: ".sheet-body", initial: "description"}],
-      dragDrop: [{dragSelector: "[data-effect-id]", dropSelector: ".effects-list"}, { dropSelector: ".advancement" }]
+      dragDrop: [
+        {dragSelector: "[data-effect-id]", dropSelector: ".effects-list"},
+        {dragSelector: ".advancement-item", dropSelector: ".advancement"}
+      ]
     });
   }
 
@@ -546,6 +549,8 @@ export default class ItemSheet5e extends ItemSheet {
     if ( li.dataset.effectId ) {
       const effect = this.item.effects.get(li.dataset.effectId);
       dragData = effect.toDragData();
+    } else if ( li.classList.contains("advancement-item") ) {
+      dragData = this.item.advancement.byId[li.dataset.id]?.toDragData();
     }
 
     if ( !dragData ) return;
@@ -576,6 +581,7 @@ export default class ItemSheet5e extends ItemSheet {
     switch ( data.type ) {
       case "ActiveEffect":
         return this._onDropActiveEffect(event, data);
+      case "Advancement":
       case "Item":
         return this._onDropAdvancement(event, data);
     }
@@ -609,7 +615,9 @@ export default class ItemSheet5e extends ItemSheet {
    */
   async _onDropAdvancement(event, data) {
     let advancements;
-    if ( data.type === "Item" ) {
+    if ( data.type === "Advancement" ) {
+      advancements = [await fromUuid(data.uuid)];
+    } else if ( data.type === "Item" ) {
       const item = await Item.implementation.fromDropData(data);
       if ( !item ) return false;
       advancements = Object.values(item.advancement.byId);
@@ -630,7 +638,7 @@ export default class ItemSheet5e extends ItemSheet {
 
     // If no advancements need to be applied, just add them to the item
     const advancementArray = foundry.utils.deepClone(this.item.system.advancement);
-    advancementArray.push(...advancements.map(a => a.data));
+    advancementArray.push(...advancements.map(a => a.toObject()));
     this.item.update({"system.advancement": advancementArray});
   }
 
