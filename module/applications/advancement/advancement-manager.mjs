@@ -124,6 +124,58 @@ export default class AdvancementManager extends Application {
   /* -------------------------------------------- */
 
   /**
+   * Construct a manager for a newly added advancement from drag-drop.
+   * @param {Actor5e} actor               Actor from which the advancement should be updated.
+   * @param {string} itemId               ID of the item to which the advancements are being dropped.
+   * @param {Advancement[]} advancements  Dropped advancements to add.
+   * @param {object} options              Rendering options passed to the application.
+   * @returns {AdvancementManager}  Prepared manager. Steps count can be used to determine if advancements are needed.
+   */
+  static forNewAdvancement(actor, itemId, advancements, options) {
+    const manager = new this(actor, options);
+    const clonedItem = manager.clone.items.get(itemId);
+    if ( !clonedItem || !advancements.length ) return manager;
+
+    const currentLevel = clonedItem.system.levels ?? cloneItem.class?.system.levels
+      ?? manager.clone.system.details.level;
+    const minimumLevel = advancements.reduce((min, a) => Math.min(a.levels[0] ?? Infinity, min), Infinity);
+    if ( minimumLevel > currentLevel ) return manager;
+
+    const oldFlows = Array.fromRange(currentLevel + 1).slice(minimumLevel)
+      .flatMap(l => this.flowsForLevel(clonedItem, l));
+
+    // Revert advancements trough minimum level
+    oldFlows.reverse().forEach(flow => manager.steps.push({ type: "reverse", flow, automatic: true }));
+
+    // Add new advancements
+    const advancementArray = clonedItem.toObject().system.advancement;
+    advancementArray.push(...advancements.map(a => {
+      const obj = a.toObject();
+      if ( obj.constructor.dataModels?.value ) a.value = (new a.constructor.metadata.dataModels.value()).toObject();
+      else obj.value = foundry.utils.deepClone(a.constructor.metadata.defaults?.value ?? {});
+      return obj;
+    }));
+    clonedItem.updateSource({"system.advancement": advancementArray});
+
+    const newFlows = Array.fromRange(currentLevel + 1).slice(minimumLevel)
+      .flatMap(l => this.flowsForLevel(clonedItem, l));
+
+    // Restore existing advancements and apply new advancements
+    newFlows.forEach(flow => {
+      const matchingFlow = oldFlows.find(f => (f.advancement.id === flow.advancement.id) && (f.level === flow.level));
+      if ( matchingFlow ) {
+        manager.steps.push({ type: "restore", flow: matchingFlow, automatic: true });
+      } else {
+        manager.steps.push({ type: "forward", flow });
+      }
+    });
+
+    return manager;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Construct a manager for a newly added item.
    * @param {Actor5e} actor         Actor to which the item is being added.
    * @param {object} itemData       Data for the item being added.
@@ -335,74 +387,6 @@ export default class AdvancementManager extends Application {
     return (item?.advancement.byLevel[level] ?? [])
       .filter(a => a.appliesToClass)
       .map(a => new a.constructor.metadata.apps.flow(item, a.id, level));
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Construct a manager for a newly added advancement from drag-drop.
-   * @param {Actor5e} actor               Actor from which the advancement should be updated.
-   * @param {string} itemId               ID of the item to which the advancements are being dropped.
-   * @param {Advancement[]} advancements  Dropped advancements to add.
-   * @param {object} options              Rendering options passed to the application.
-   * @returns {AdvancementManager}  Prepared manager. Steps count can be used to determine if advancements are needed.
-   */
-  static forMigration(actor, itemId, advancements, options) {
-    // TODO: Split into two methods, one for determining what advancement to add,
-    // the second for generating steps for a provided array of new advancements
-
-    const manager = new this(actor, options);
-    const clonedItem = manager.clone.items.get(itemId);
-    if ( !clonedItem ) return manager;
-
-    const currentLevel = clonedItem.system.levels ?? cloneItem.class?.system.levels
-      ?? manager.clone.system.details.level;
-    let minimumLevel = Infinity;
-
-    // Determine which advancements need to be added
-    const advancementsToAdd = [];
-    for ( const advancement of advancements ) {
-      if ( clonedItem.advancement.byId[advancement.id] ) continue;
-      advancementsToAdd.push(advancement);
-      minimumLevel = Math.min(advancement.levels[0] ?? Infinity, minimumLevel);
-    }
-    if ( !advancementsToAdd.length ) return manager;
-    // TODO: Verify that advancement can actually be added to item of this type and this item
-
-    const advancementArray = clonedItem.toObject().system.advancement;
-    // TODO: Reset `data.value` on newly added advancements
-
-    // If no advancement changes need to be immediately applied, just add the new advancements
-    if ( minimumLevel > currentLevel ) {
-      advancementArray.push(...advancementsToAdd.map(a => a.data));
-      actor.items.get(itemId).update({"system.advancement": advancementArray});
-      return manager;
-    }
-
-    const oldFlows = Array.fromRange(currentLevel + 1).slice(minimumLevel)
-      .flatMap(l => this.flowsForLevel(clonedItem, l));
-
-    // Revert advancements trough minimum level
-    oldFlows.reverse().forEach(flow => manager.steps.push({ type: "reverse", flow, automatic: true }));
-
-    // Add new advancements
-    advancementArray.push(...advancementsToAdd.map(a => a.data));
-    clonedItem.updateSource({"system.advancement": advancementArray});
-
-    const newFlows = Array.fromRange(currentLevel + 1).slice(minimumLevel)
-      .flatMap(l => this.flowsForLevel(clonedItem, l));
-
-    // Restore existing advancements and apply new advancements
-    newFlows.forEach(flow => {
-      const matchingFlow = oldFlows.find(f => (f.advancement.id === flow.advancement.id) && (f.level === flow.level));
-      if ( matchingFlow ) {
-        manager.steps.push({ type: "restore", flow: matchingFlow, automatic: true });
-      } else {
-        manager.steps.push({ type: "forward", flow });
-      }
-    });
-
-    return manager;
   }
 
   /* -------------------------------------------- */

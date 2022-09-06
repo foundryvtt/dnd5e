@@ -624,7 +624,7 @@ export default class ItemSheet5e extends ItemSheet {
 
     if ( !advancements.length ) return false;
     if ( this.item.isEmbedded && !game.settings.get("dnd5e", "disableAdvancements") ) {
-      const manager = AdvancementManager.forMigration(this.item.actor, this.item.id, advancements);
+      const manager = AdvancementManager.forNewAdvancement(this.item.actor, this.item.id, advancements);
       if ( manager.steps.length ) return manager.render(true);
     }
 
