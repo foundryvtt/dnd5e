@@ -1,0 +1,25 @@
+<div class="advancement">
+  <p>{{localize "DND5E.AdvancementMigrationHint" name=item.name}}</p>
+  <ol class="items-list">
+    <li class="items-header flexrow">
+      <h3 class="item-name flexrow">{{localize "DND5E.AdvancementTitle"}}</h3>
+      <div class="item-controls flexrow">{{localize "DND5E.Add"}}</div>
+    </li>
+    {{#each advancements}}
+      <li class="advancement-item item flexrow">
+        <div class="item-name flexrow">
+          <div class="item-image" style="background-image: url('{{this.icon}}')"></div>
+          <h4>{{this.title}}</h4>
+        </div>
+        <div class="item-controls flexrow">
+          <input type="checkbox" name="{{this.id}}" checked>
+        </div>
+        {{#if this.summary}}
+          <div class="item-summary">
+            {{{this.summary}}}
+          </div>
+        {{/if}}
+      </li>
+    {{/each}}
+  </ol>
+</div>
