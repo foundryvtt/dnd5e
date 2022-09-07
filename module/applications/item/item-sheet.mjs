@@ -460,7 +460,11 @@ export default class ItemSheet5e extends ItemSheet {
       {
         name: "DND5E.AdvancementControlDuplicate",
         icon: "<i class='fas fa-copy fa-fw'></i>",
-        condition,
+        condition: li => {
+          const id = li[0].closest(".advancement-item")?.dataset.id;
+          const advancement = this.item.advancement.byId[id];
+          return condition(li) && advancement?.constructor.availableForItem(this.item);
+        },
         callback: li => this._onAdvancementAction(li[0], "duplicate")
       },
       {
