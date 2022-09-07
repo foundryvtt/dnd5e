@@ -1,4 +1,6 @@
 import AdvancementManager from "../advancement/advancement-manager.mjs";
+import AdvancementMigrationDialog from "../advancement/advancement-migration-dialog.mjs";
+import ProficiencySelector from "../proficiency-selector.mjs";
 import TraitSelector from "../trait-selector.mjs";
 import ActiveEffect5e from "../../documents/active-effect.mjs";
 import * as Trait from "../../documents/actor/trait.mjs";
@@ -615,12 +617,14 @@ export default class ItemSheet5e extends ItemSheet {
    */
   async _onDropAdvancement(event, data) {
     let advancements;
+    let showDialog = false;
     if ( data.type === "Advancement" ) {
       advancements = [await fromUuid(data.uuid)];
     } else if ( data.type === "Item" ) {
       const item = await Item.implementation.fromDropData(data);
       if ( !item ) return false;
       advancements = Object.values(item.advancement.byId);
+      showDialog = true;
     } else {
       return false;
     }
@@ -629,6 +633,15 @@ export default class ItemSheet5e extends ItemSheet {
         && a.constructor.metadata.validItemTypes.has(this.item.type)
         && a.constructor.availableForItem(this.item);
     });
+
+    // Display dialog prompting for which advancements to add
+    if ( showDialog ) {
+      try {
+        advancements = await AdvancementMigrationDialog.createDialog(this.item, advancements);
+      } catch(err) {
+        return false;
+      }
+    }
 
     if ( !advancements.length ) return false;
     if ( this.item.isEmbedded && !game.settings.get("dnd5e", "disableAdvancements") ) {
