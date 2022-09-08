@@ -3,7 +3,7 @@ import JournalEditor from "./journal-editor.mjs";
 /**
  * Journal entry page that displays an automatically generated summary of a class along with additional description.
  */
-export default class JournalClassSummary5ePageSheet extends JournalPageSheet {
+export default class JournalClassSummaryPageSheet extends JournalPageSheet {
 
   /** @inheritdoc */
   static get defaultOptions() {

@@ -141,7 +141,7 @@ Hooks.once("init", function() {
     makeDefault: true,
     label: "DND5E.SheetClassItem"
   });
-  DocumentSheetConfig.registerSheet(JournalEntryPage, "dnd5e", applications.journal.JournalClassSummary5ePageSheet, {
+  DocumentSheetConfig.registerSheet(JournalEntryPage, "dnd5e", applications.journal.JournalClassSummaryPageSheet, {
     label: "DND5E.SheetClassClassSummary",
     types: ["classSummary"]
   });
