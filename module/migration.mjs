@@ -685,8 +685,12 @@ function _migrateItemCriticalData(item, updateData) {
  * @private
  */
 function _migrateDocumentIcon(document, updateData, {iconMap, field="img"}={}) {
-  const rename = iconMap?.[document?.[field]];
-  if ( rename ) updateData[field] = rename;
+  let path = document?.[field];
+  if ( path && iconMap ) {
+    if ( path.startsWith("/") || path.startsWith("\\") ) path = path.substring(1);
+    const rename = iconMap[path];
+    if ( rename ) updateData[field] = rename;
+  }
   return updateData;
 }
 
