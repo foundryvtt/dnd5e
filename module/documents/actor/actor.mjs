@@ -855,6 +855,37 @@ export default class Actor5e extends Actor {
     // Reliable Talent applies to any skill check we have full or better proficiency in
     const reliableTalent = (skl.value >= 1 && this.getFlag("dnd5e", "reliableTalent"));
 
+    // Configuration callback to handle changes to the selected ability
+    const callback = (roll, formData) => {
+      if ( !formData.ability ) return;
+
+      const abl = roll.data.abilities[formData.ability];
+      let prof = roll.data.baseProf;
+
+      // Make proficiency adjustments based on remarkable athlete
+      if ( this.getFlag("dnd5e", "remarkableAthlete") ) {
+        const v = CONFIG.DND5E.characterFlags.remarkableAthlete.abilities;
+        if ( !v.includes(formData.ability) && (prof.multiplier === 0.5) && (prof.rounding === "up") ) {
+          if ( this.getFlag("dnd5e", "jackOfAllTrades") ) prof = prof.clone({ roundDown: true });
+          else prof = prof.clone({ multiplier: 0 });
+        } else if ( v.includes(formData.ability) && (prof.multiplier <= 0.5) && (prof.rounding === "down") ) {
+          prof = prof.clone({ multiplier: 0.5, roundDown: false });
+        }
+      }
+
+      roll.terms = roll.terms.flatMap(t => {
+        if ( t.term === "@prof" ) return new Roll(prof.term).terms[0];
+        if ( t.term === "@mod" ) return new NumericTerm({number: abl.mod});
+        if ( t.term === "@abilityCheckBonus" ) {
+          const bonus = abl.bonuses?.check;
+          if ( bonus ) return new Roll(bonus, roll.data).terms;
+          return new NumericTerm({number: 0});
+        }
+        return t;
+      });
+      roll.options.flavor += ` (${CONFIG.DND5E.abilities[formData.ability]})`;
+    };
+
     // Roll and return
     const flavor = game.i18n.format("DND5E.SkillPromptTitle", {skill: CONFIG.DND5E.skills[skillId]?.label ?? ""});
     const rollData = foundry.utils.mergeObject({
@@ -864,9 +895,8 @@ export default class Actor5e extends Actor {
       flavor,
       chooseModifier: true,
       halflingLucky: this.getFlag("dnd5e", "halflingLucky"),
-      jackOfAllTrades: this.getFlag("dnd5e", "jackOfAllTrades"),
       reliableTalent,
-      remarkableAthlete: this.getFlag("dnd5e", "remarkableAthlete"),
+      callback,
       messageData: {
         speaker: options.speaker || ChatMessage.getSpeaker({actor: this}),
         "flags.dnd5e.roll": {type: "skill", skillId }

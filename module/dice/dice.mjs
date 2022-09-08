@@ -21,11 +21,9 @@
  * @property {number} [targetValue]    The value of the d20 result which should represent a successful roll.
  *
  * ## Flags
- * @property {boolean} [elvenAccuracy]      Allow Elven Accuracy to modify this roll?
- * @property {boolean} [halflingLucky]      Allow Halfling Luck to modify this roll?
- * @property {boolean} [jackOfAllTrades]    Allow Jack of All Trades to modify this roll?
- * @property {boolean} [reliableTalent]     Allow Reliable Talent to modify this roll?
- * @property {boolean} [remarkableAthlete]  Allow Remarkable Athlete to modify this roll?
+ * @property {boolean} [elvenAccuracy]   Allow Elven Accuracy to modify this roll?
+ * @property {boolean} [halflingLucky]   Allow Halfling Luck to modify this roll?
+ * @property {boolean} [reliableTalent]  Allow Reliable Talent to modify this roll?
  *
  * ## Roll Configuration Dialog
  * @property {boolean} [fastForward=false]     Should the roll configuration dialog be skipped?
@@ -33,6 +31,7 @@
  *                                             configurable within that interface?
  * @property {string} [template]               The HTML template used to display the roll configuration dialog.
  * @property {string} [title]                  Title of the roll configuration dialog.
+ * @param {Function} [callback]                Callback function for final configuration with result of config dialog.
  * @property {object} [dialogOptions]          Additional options passed to the roll configuration dialog.
  *
  * ## Chat Message
@@ -53,8 +52,8 @@
 export async function d20Roll({
   parts=[], data={}, event,
   advantage, disadvantage, critical=20, fumble=1, targetValue,
-  elvenAccuracy, halflingLucky, jackOfAllTrades, reliableTalent, remarkableAthlete,
-  fastForward=false, chooseModifier=false, template, title, dialogOptions,
+  elvenAccuracy, halflingLucky, reliableTalent,
+  fastForward=false, chooseModifier=false, template, title, callback, dialogOptions,
   chatMessage=true, messageData={}, rollMode, flavor
 }={}) {
 
@@ -79,9 +78,7 @@ export async function d20Roll({
     targetValue,
     elvenAccuracy,
     halflingLucky,
-    jackOfAllTrades,
-    reliableTalent,
-    remarkableAthlete
+    reliableTalent
   });
 
   // Prompt a Dialog to further configure the D20Roll
@@ -92,7 +89,8 @@ export async function d20Roll({
       defaultRollMode,
       defaultAction: advantageMode,
       defaultAbility: data?.item?.ability || data?.defaultAbility,
-      template
+      template,
+      callback
     }, dialogOptions);
     if ( configured === null ) return null;
   } else roll.options.rollMode ??= defaultRollMode;

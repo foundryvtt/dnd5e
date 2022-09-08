@@ -230,17 +230,28 @@ export default class DamageRoll extends Roll {
    */
   _onDialogSubmit(html, isCritical) {
     const form = html[0].querySelector("form");
+    const formData = new FormDataExtended(form).object;
+
+    /**
+     * A hook event that fires when a damage roll configuration dialog is completed.
+     * @function dnd5e.configureDamageRoll
+     * @memberof hookEvents
+     * @param {DamageRoll} roll  The roll being configured.
+     * @param {object} formData  Data from the configuration form.
+     * @returns {boolean}        Explicitly return `false` to prevent any core configuration from occurring.
+     */
+    if ( Hooks.call("dnd5e.configureDamageRoll", this, formData) === false ) return this;
 
     // Append a situational bonus term
-    if ( form.bonus.value ) {
-      const bonus = new Roll(form.bonus.value, this.data);
+    if ( formData.bonus ) {
+      const bonus = new Roll(formData.bonus, this.data);
       if ( !(bonus.terms[0] instanceof OperatorTerm) ) this.terms.push(new OperatorTerm({operator: "+"}));
       this.terms = this.terms.concat(bonus.terms);
     }
 
     // Apply advantage or disadvantage
     this.options.critical = isCritical;
-    this.options.rollMode = form.rollMode.value;
+    this.options.rollMode = formData.rollMode;
     this.configureDamage();
     return this;
   }

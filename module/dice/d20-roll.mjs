@@ -11,9 +11,7 @@
  *                                               compared
  * @param {boolean} [options.elvenAccuracy=false]      Allow Elven Accuracy to modify this roll?
  * @param {boolean} [options.halflingLucky=false]      Allow Halfling Luck to modify this roll?
- * @param {boolean} [options.jackOfAllTrades=false]    Allow Jack of All Trades to modify this roll?
  * @param {boolean} [options.reliableTalent=false]     Allow Reliable Talent to modify this roll?
- * @param {boolean} [options.remarkableAthlete=false]  Allow Remarkable Athlete to modify this roll?
  */
 export default class D20Roll extends Roll {
   constructor(formula, data, options) {
@@ -183,12 +181,13 @@ export default class D20Roll extends Roll {
    * @param {boolean} [data.chooseModifier]   Choose which ability modifier should be applied to the roll?
    * @param {string} [data.defaultAbility]    For tool rolls, the default ability modifier applied to the roll
    * @param {string} [data.template]          A custom path to an HTML template to use instead of the default
+   * @param {Function} [data.callback]        Callback function for final configuration with result of config dialog.
    * @param {object} options                  Additional Dialog customization options
    * @returns {Promise<D20Roll|null>}         A resulting D20Roll object constructed with the dialog, or null if the
    *                                          dialog was closed
    */
   async configureDialog({title, defaultRollMode, defaultAction=D20Roll.ADV_MODE.NORMAL, chooseModifier=false,
-    defaultAbility, template}={}, options={}) {
+    defaultAbility, template, callback}={}, options={}) {
 
     // Render the Dialog inner HTML
     const content = await renderTemplate(template ?? this.constructor.EVALUATION_TEMPLATE, {
@@ -214,15 +213,15 @@ export default class D20Roll extends Roll {
         buttons: {
           advantage: {
             label: game.i18n.localize("DND5E.Advantage"),
-            callback: html => resolve(this._onDialogSubmit(html, D20Roll.ADV_MODE.ADVANTAGE))
+            callback: html => resolve(this._onDialogSubmit(html, D20Roll.ADV_MODE.ADVANTAGE, callback))
           },
           normal: {
             label: game.i18n.localize("DND5E.Normal"),
-            callback: html => resolve(this._onDialogSubmit(html, D20Roll.ADV_MODE.NORMAL))
+            callback: html => resolve(this._onDialogSubmit(html, D20Roll.ADV_MODE.NORMAL, callback))
           },
           disadvantage: {
             label: game.i18n.localize("DND5E.Disadvantage"),
-            callback: html => resolve(this._onDialogSubmit(html, D20Roll.ADV_MODE.DISADVANTAGE))
+            callback: html => resolve(this._onDialogSubmit(html, D20Roll.ADV_MODE.DISADVANTAGE, callback))
           }
         },
         default: defaultButton,
@@ -237,51 +236,36 @@ export default class D20Roll extends Roll {
    * Handle submission of the Roll evaluation configuration Dialog
    * @param {jQuery} html            The submitted dialog content
    * @param {number} advantageMode   The chosen advantage mode
+   * @param {Function} [callback]    Callback function for final configuration with result of config dialog.
    * @returns {D20Roll}              This damage roll.
    * @private
    */
-  _onDialogSubmit(html, advantageMode) {
+  _onDialogSubmit(html, advantageMode, callback) {
     const form = html[0].querySelector("form");
+    const formData = new FormDataExtended(form).object;
+
+    /**
+     * A hook event that fires when a D20 roll configuration dialog is completed.
+     * @function dnd5e.configureD20Roll
+     * @memberof hookEvents
+     * @param {D20Roll} roll     The roll being configured.
+     * @param {object} formData  Data from the configuration form.
+     * @returns {boolean}        Explicitly return `false` to prevent any core configuration from occurring.
+     */
+    if ( Hooks.call("dnd5e.configureD20Roll", this, formData) === false ) return this;
+
+    if ( callback ) callback(this, formData);
 
     // Append a situational bonus term
-    if ( form.bonus.value ) {
-      const bonus = new Roll(form.bonus.value, this.data);
+    if ( formData.bonus ) {
+      const bonus = new Roll(formData.bonus, this.data);
       if ( !(bonus.terms[0] instanceof OperatorTerm) ) this.terms.push(new OperatorTerm({operator: "+"}));
       this.terms = this.terms.concat(bonus.terms);
     }
 
-    // Customize the modifier
-    if ( form.ability?.value ) {
-      const abl = this.data.abilities[form.ability.value];
-      let prof = this.data.baseProf;
-
-      // Make proficiency adjustments based on remarkable athlete
-      if ( this.options.remarkableAthlete ) {
-        const v = CONFIG.DND5E.characterFlags.remarkableAthlete.abilities;
-        if ( !v.includes(form.ability.value) && (prof.multiplier === 0.5) && (prof.rounding === "up") ) {
-          if ( this.options.jackOfAllTrades ) prof = prof.clone({ roundDown: true });
-          else prof = prof.clone({ multiplier: 0 });
-        } else if ( v.includes(form.ability.value) && (prof.multiplier <= 0.5) && (prof.rounding === "down") ) {
-          prof = prof.clone({ multiplier: 0.5, roundDown: false });
-        }
-      }
-
-      this.terms = this.terms.flatMap(t => {
-        if ( t.term === "@prof" ) return new Roll(prof.term).terms[0];
-        if ( t.term === "@mod" ) return new NumericTerm({number: abl.mod});
-        if ( t.term === "@abilityCheckBonus" ) {
-          const bonus = abl.bonuses?.check;
-          if ( bonus ) return new Roll(bonus, this.data).terms;
-          return new NumericTerm({number: 0});
-        }
-        return t;
-      });
-      this.options.flavor += ` (${CONFIG.DND5E.abilities[form.ability.value]})`;
-    }
-
     // Apply advantage or disadvantage
     this.options.advantageMode = advantageMode;
-    this.options.rollMode = form.rollMode.value;
+    this.options.rollMode = formData.rollMode;
     this.configureModifiers();
     return this;
   }
