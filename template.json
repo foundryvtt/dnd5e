@@ -716,7 +716,7 @@
     }
   },
   "JournalEntryPage": {
-    "types": ["class"],
+    "types": ["class", "spellList"],
     "htmlFields": ["description.value", "description.additionalHitPoints", "description.additionalTraits", "description.additionalEquipment", "description.subclass"],
     "class": {
       "item": "",
@@ -729,6 +729,14 @@
       },
       "subclassHeader": "",
       "subclassItems": []
+    },
+    "spellList": {
+      "type": "class",
+      "identifier": "",
+      "description": {
+        "value": ""
+      },
+      "spells": []
     }
   }
 }

@@ -1432,6 +1432,21 @@ preLocalize("spellSchools", { sort: true });
 /* -------------------------------------------- */
 
 /**
+ * Types of spell lists.
+ * @enum {string}
+ */
+DND5E.spellListTypes = {
+  class: "CLASS",
+  subclass: "SUBCLASS",
+  background: "BACKGROUND",
+  race: "RACE",
+  other: "OTHER"
+};
+preLocalize("spellListTypes");
+
+/* -------------------------------------------- */
+
+/**
  * Spell scroll item ID within the `DND5E.sourcePacks` compendium for each level.
  * @enum {string}
  */

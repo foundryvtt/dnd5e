@@ -123,6 +123,10 @@ Hooks.once("init", function() {
     label: "DND5E.SheetClassClassSummary",
     types: ["class"]
   });
+  DocumentSheetConfig.registerSheet(JournalEntryPage, "dnd5e", applications.journal.JournalSpellListPageSheet, {
+    label: "DND5E.SheetClassSpellList",
+    types: ["spellList"]
+  });
 
   // Preload Handlebars helpers & partials
   utils.registerHandlebarsHelpers();

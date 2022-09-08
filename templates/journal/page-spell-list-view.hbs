@@ -1,0 +1,18 @@
+{{#if data.title.show}}
+<header>
+  <h{{title.level1}}>{{data.name}}</h{{title.level1}}>
+</header>
+{{/if}}
+
+{{log this}}
+
+{{{description}}}
+
+{{#each spellLevels}}
+  <h{{@root.title.level2}}>{{this.header}}</h{{@root.title.level2}}>
+  <ul>
+  {{#each this.spells}}
+    <li>{{this.document.name}}</li>
+  {{/each}}
+  </ul>
+{{/each}}

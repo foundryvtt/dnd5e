@@ -1,9 +1,12 @@
 import ClassJournalPageData from "./class.mjs";
+import SpellListJournalPageData from "./spell-list.mjs";
 
 export {
-  ClassJournalPageData
+  ClassJournalPageData,
+  SpellListJournalPageData
 };
 
 export const config = {
-  class: ClassJournalPageData
+  class: ClassJournalPageData,
+  spellList: SpellListJournalPageData
 };
