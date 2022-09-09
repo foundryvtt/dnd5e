@@ -16,7 +16,7 @@
 export default class D20Roll extends Roll {
   constructor(formula, data, options) {
     super(formula, data, options);
-    if ( this.#validD20Roll && !this.options.configured ) this.configureModifiers();
+    if ( !this.options.configured ) this.configureModifiers();
   }
 
   /* -------------------------------------------- */
@@ -58,7 +58,7 @@ export default class D20Roll extends Roll {
    * Does this roll start with a d20?
    * @type {boolean}
    */
-  get #validD20Roll() {
+  get validD20Roll() {
     return (this.terms[0] instanceof Die) && (this.terms[0].faces === 20);
   }
 
@@ -89,7 +89,7 @@ export default class D20Roll extends Roll {
    * @type {boolean|void}
    */
   get isCritical() {
-    if ( !this.#validD20Roll || !this._evaluated ) return undefined;
+    if ( !this.validD20Roll || !this._evaluated ) return undefined;
     if ( !Number.isNumeric(this.options.critical) ) return false;
     return this.dice[0].total >= this.options.critical;
   }
@@ -101,7 +101,7 @@ export default class D20Roll extends Roll {
    * @type {boolean|void}
    */
   get isFumble() {
-    if ( !this.#validD20Roll || !this._evaluated ) return undefined;
+    if ( !this.validD20Roll || !this._evaluated ) return undefined;
     if ( !Number.isNumeric(this.options.fumble) ) return false;
     return this.dice[0].total <= this.options.fumble;
   }
@@ -115,7 +115,7 @@ export default class D20Roll extends Roll {
    * @private
    */
   configureModifiers() {
-    if ( !this.#validD20Roll ) return;
+    if ( !this.validD20Roll ) return;
 
     const d20 = this.terms[0];
     d20.modifiers = [];
@@ -165,7 +165,7 @@ export default class D20Roll extends Roll {
     else if ( this.hasDisadvantage ) messageData.flavor += ` (${game.i18n.localize("DND5E.Disadvantage")})`;
 
     // Add reliable talent to the d20-term flavor text if it applied
-    if ( this.#validD20Roll && this.options.reliableTalent ) {
+    if ( this.validD20Roll && this.options.reliableTalent ) {
       const d20 = this.dice[0];
       const isRT = d20.results.every(r => !r.active || (r.result < 10));
       const label = `(${game.i18n.localize("DND5E.FlagsReliableTalent")})`;
