@@ -151,11 +151,10 @@ export class ItemGrantConfig extends AdvancementConfig {
   /* -------------------------------------------- */
 
   /** @inheritdoc */
-  async getData() {
-    const data = super.getData();
-    data.items = data.data.configuration.items.map(fromUuidSync);
-    data.showSpellConfig = data.items.some(i => i.type === "spell");
-    return data;
+  getData() {
+    const context = super.getData();
+    context.showSpellConfig = context.data.configuration.items.map(fromUuidSync).some(i => i.type === "spell");
+    return context;
   }
 
   /* -------------------------------------------- */
