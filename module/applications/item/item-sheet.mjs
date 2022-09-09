@@ -429,7 +429,7 @@ export default class ItemSheet5e extends ItemSheet {
     }
 
     // Advancement context menu
-    const contextOptions = this.#getAdvancementContextMenuOptions();
+    const contextOptions = this._getAdvancementContextMenuOptions();
     /**
      * A hook event that fires when the context menu for the advancements list is constructed.
      * @function dnd5e.getItemAdvancementContext
@@ -446,9 +446,9 @@ export default class ItemSheet5e extends ItemSheet {
   /**
    * Get the set of ContextMenu options which should be applied for advancement entries.
    * @returns {ContextMenuEntry[]}  Context menu entries.
-   * @private
+   * @protected
    */
-  #getAdvancementContextMenuOptions() {
+  _getAdvancementContextMenuOptions() {
     const condition = li => (this.advancementConfigurationMode || !this.isEmbedded) && this.isEditable;
     return [
       {
