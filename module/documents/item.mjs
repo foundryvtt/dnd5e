@@ -1909,6 +1909,10 @@ export default class Item5e extends Item {
     if ( !Advancement ) throw new Error(`${type}Advancement not found in dnd5e.advancement.types`);
     data = foundry.utils.mergeObject(Advancement.defaultData, data);
 
+    if ( !Advancement.metadata.validItemTypes.has(this.type) || !Advancement.availableForItem(this) ) {
+      throw new Error(`${type} advancement cannot be added to ${this.name}`);
+    }
+
     const advancement = this.toObject().system.advancement;
     if ( !data._id ) data._id = foundry.utils.randomID();
     advancement.push(data);
