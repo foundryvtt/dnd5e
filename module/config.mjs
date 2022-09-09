@@ -1,5 +1,5 @@
 import ClassFeatures from "./advancement/class-features.mjs";
-import { preLocalize } from "./utils.mjs";
+import { preLocalize, preLocalizeDeep } from "./utils.mjs";
 
 // Namespace Configuration Values
 const DND5E = {};
@@ -416,6 +416,168 @@ DND5E.itemCapacityTypes = {
   weight: "DND5E.ItemContainerCapacityWeight"
 };
 preLocalize("itemCapacityTypes", { sort: true });
+
+/* -------------------------------------------- */
+
+/**
+ * The standard item subtypes.
+ */
+DND5E.itemSubtypes = {
+  armor: {
+    light: {
+      label: "DND5E.ItemTypeLight",
+      baseItems: {
+        padded: "DND5E.BaseItemPadded",
+        leather: "DND5E.BaseItemLeather",
+        studded: "DND5E.BaseItemStudded"
+      }
+    },
+    medium: {
+      label: "DND5E.ItemTypeMedium",
+      baseItems: {
+        hide: "DND5E.BaseItemHide",
+        chainshirt: "DND5E.BaseItemChainShirt",
+        scalemail: "DND5E.BaseItemScaleMail",
+        breastplate: "DND5E.BaseItemBreastplate",
+        halfplate: "DND5E.BaseItemHalfPlate"
+      }
+    },
+    heavy: {
+      label: "DND5E.ItemTypeHeavy",
+      baseItems: {
+        chainmail: "DND5E.BaseItemChainMail",
+        plate: "DND5E.BaseItemPlate",
+        ringmail: "DND5E.BaseItemRingMail",
+        splint: "DND5E.BaseItemSplint"
+      }
+    },
+    natural: "DND5E.ItemTypeNatural",
+    shield: "DND5E.ItemTypeShield"
+  },
+  tool: {
+    art: {
+      label: "DND5E.ItemTypeArt",
+      baseItems: {
+        alchemist: "DND5E.BaseItemAlchemist",
+        brewer: "DND5E.BaseItemBrewer",
+        calligrapher: "DND5E.BaseItemCalligrapher",
+        carpenter: "DND5E.BaseItemCarpenter",
+        cartographer: "DND5E.BaseItemCartographer",
+        cobbler: "DND5E.BaseItemCobbler",
+        cook: "DND5E.BaseItemCook",
+        glassblower: "DND5E.BaseItemGlassblower",
+        jeweler: "DND5E.BaseItemJeweler",
+        leatherworker: "DND5E.BaseItemLeatherworker",
+        mason: "DND5E.BaseItemMason",
+        painter: "DND5E.BaseItemPainter",
+        potter: "DND5E.BaseItemPotter",
+        smith: "DND5E.BaseItemSmith",
+        tinker: "DND5E.BaseItemTinker",
+        weaver: "DND5E.BaseItemWeaver",
+        woodcarver: "DND5E.BaseItemWoodcarver",
+      }
+    },
+    game: {
+      label: "DND5E.ItemTypeGame",
+      baseItems: {
+        card: "DND5E.BaseItemCard",
+        chess: "DND5E.BaseItemDragonchess",
+        dice: "DND5E.BaseItemDice",
+        threedragon: "DND5E.BaseItemThreeDragon"
+      }
+    },
+    music: {
+      label: "DND5E.ItemTypeMusic",
+      baseItems: {
+        bagpipes: "DND5E.BaseItemBagpipes",
+        drum: "DND5E.BaseItemDrum",
+        dulcimer: "DND5E.BaseItemDulcimer",
+        flute: "DND5E.BaseItemFlute",
+        horn: "DND5E.BaseItemHorn",
+        lute: "DND5E.BaseItemLute",
+        lyre: "DND5E.BaseItemLyre",
+        panflute: "DND5E.BaseItemPanFlute",
+        shawm: "DND5E.BaseItemShawm",
+        viol: "DND5E.BaseItemViol",
+      }
+    },
+    vehicle: {
+      label: "DND5E.ItemTypeVehicle",
+      baseItems: {
+        air: "DND5E.VehicleTypeAir",
+        land: "DND5E.VehicleTypeLand",
+        space: "DND5E.VehicleTypeSpace",
+        water: "DND5E.VehicleTypeWater"
+      }
+    },
+    disg: "DND5E.BaseItemDisguise",
+    forg: "DND5E.BaseItemForgery",
+    herb: "DND5E.BaseItemHerbalism",
+    navg: "DND5E.BaseItemNavg",
+    pois: "DND5E.BaseItemPois",
+    thief: "DND5E.BaseItemThief",
+  },
+  weapon: {
+    simpleM: {
+      label: "DND5E.ItemTypeSimpleM",
+      baseItems: {
+        club: "DND5E.BaseItemClub",
+        dagger: "DND5E.BaseItemDagger",
+        greatclub: "DND5E.BaseItemGreatclub",
+        handaxe: "DND5E.BaseItemHandaxe",
+        javelin: "DND5E.BaseItemJavelin",
+        lighthammer: "DND5E.BaseItemLightHammer",
+        mace: "DND5E.BaseItemMace",
+        quarterstaff: "DND5E.BaseItemQuarterstaff",
+        sickle: "DND5E.BaseItemSickle",
+        spear: "DND5E.BaseItemSpear"
+      }
+    },
+    simpleR: {
+      label: "DND5E.ItemTypeSimpleR",
+      baseItems: {
+        lightcrossbow: "DND5E.BaseItemCrossbowLight",
+        dart: "DND5E.BaseItemDart",
+        shortbow: "DND5E.BaseItemShortbow",
+        sling: "DND5E.BaseItemSling"
+      }
+    },
+    martialM: {
+      label: "DND5E.ItemTypeMartialM",
+      baseItems: {
+        battleaxe: "DND5E.BaseItemBattleaxe",
+        flail: "DND5E.BaseItemFlail",
+        glaive: "DND5E.BaseItemGlaive",
+        greataxe: "DND5E.BaseItemGreataxe",
+        greatsword: "DND5E.BaseItemGreatsword",
+        halberd: "DND5E.BaseItemHalberd",
+        lance: "DND5E.BaseItemLance",
+        longsword: "DND5E.BaseItemLongsword",
+        maul: "DND5E.BaseItemMaul",
+        morningstar: "DND5E.BaseItemMorningstar",
+        pike: "DND5E.BaseItemPike",
+        rapier: "DND5E.BaseItemRapier",
+        scimitar: "DND5E.BaseItemScimitar",
+        shortsword: "DND5E.BaseItemShortsword",
+        trident: "DND5E.BaseItemTrident",
+        warpick: "DND5E.BaseItemWarPick",
+        warhammer: "DND5E.BaseItemWarhammer",
+        whip: "DND5E.BaseItemWhip"
+      }
+    },
+    martialR: {
+      label: "DND5E.ItemTypeMartialR",
+      baseItems: {
+        blowgun: "DND5E.BaseItemBlowgun",
+        handcrossbow: "DND5E.BaseItemHandCrossbow",
+        heavycrossbow: "DND5E.BaseItemHeavyCrossbow",
+        longbow: "DND5E.BaseItemLongbow",
+        net: "DND5E.BaseItemNet"
+      }
+    }
+  }
+}
+preLocalizeDeep(DND5E, "itemSubtypes");
 
 /* -------------------------------------------- */
 
@@ -1081,6 +1243,19 @@ preLocalize("proficiencyLevels");
 /* -------------------------------------------- */
 
 /**
+ * Weapon and armor proficiency levels.
+ * The key for each level represents its proficiency multiplier.
+ * @enum {string}
+ */
+DND5E.proficientLevels = {
+  0: "DND5E.NotProficient",
+  1: "DND5E.Proficient",
+};
+preLocalize("proficientLevels");
+
+/* -------------------------------------------- */
+
+/**
  * The amount of cover provided by an object. In cases where multiple pieces
  * of cover are in play, we take the highest value.
  * @enum {string}
@@ -1327,7 +1502,7 @@ function patchConfig(key, fallbackKey, options) {
   /** @override */
   function toString() {
     const message = `The value of CONFIG.DND5E.${key} has been changed to an object.`
-      +` The former value can be acccessed from .${fallbackKey}.`;
+        +` The former value can be acccessed from .${fallbackKey}.`;
     foundry.utils.logCompatibilityWarning(message, options);
     return this[fallbackKey];
   }

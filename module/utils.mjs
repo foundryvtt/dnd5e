@@ -163,13 +163,35 @@ export function preLocalize(configKey, { key, keys=[], sort=false }={}) {
 /* -------------------------------------------- */
 
 /**
+ * Mark the provided config key to be pre-localized during the init stage.
+ * @param {string} subconfig              Subset of `CONFIG.DND5E` to localize.
+ */
+export function preLocalizeDeep(config, subkey) {
+  for ( let key in foundry.utils.getProperty(config, subkey) ) {
+    const newKey = subkey + "." + key;
+    const value = foundry.utils.getProperty(config, newKey);
+    if ( typeof value === "string" ) _preLocalizationRegistrations[newKey] = {string: true};
+    preLocalizeDeep(config, newKey);
+  }
+}
+
+/* -------------------------------------------- */
+
+/**
  * Execute previously defined pre-localization tasks on the provided config object.
  * @param {object} config  The `CONFIG.DND5E` object to localize and sort. *Will be mutated.*
  */
 export function performPreLocalization(config) {
   for ( const [key, settings] of Object.entries(_preLocalizationRegistrations) ) {
-    _localizeObject(config[key], settings.keys);
-    if ( settings.sort ) config[key] = sortObjectEntries(config[key], settings.keys[0]);
+    let values = foundry.utils.getProperty(config, key)
+    if ( settings.string ) {
+      values = game.i18n.localize(values);
+    }
+    else {
+      _localizeObject(values, settings.keys);
+      if ( settings.sort ) values = sortObjectEntries(values, settings.keys[0]);
+    }
+    foundry.utils.setProperty(config, key, values);
   }
 }
 
@@ -191,13 +213,13 @@ function _localizeObject(obj, keys) {
 
     if ( type !== "object" ) {
       console.error(new Error(
-        `Pre-localized configuration values must be a string or object, ${type} found for "${k}" instead.`
+          `Pre-localized configuration values must be a string or object, ${type} found for "${k}" instead.`
       ));
       continue;
     }
     if ( !keys?.length ) {
       console.error(new Error(
-        "Localization keys must be provided for pre-localizing when target is an object."
+          "Localization keys must be provided for pre-localizing when target is an object."
       ));
       continue;
     }
