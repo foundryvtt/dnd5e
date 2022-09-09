@@ -192,6 +192,7 @@ export default class AdvancementConfig extends FormApplication {
    * if the item is invalid.
    * @param {Event} event  Triggering drop event.
    * @param {Item5e} item  The materialized Item that was dropped.
+   * @throws An error if the item is invalid.
    * @protected
    */
   _validateDroppedItem(event, item) {}
