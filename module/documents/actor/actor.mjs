@@ -1224,14 +1224,13 @@ export default class Actor5e extends Actor {
   /* -------------------------------------------- */
 
   /**
-   * Roll a hit die of the appropriate type, gaining hit points equal to the die roll plus your CON modifier
-   * @param {string} [denomination]       The hit denomination of hit die to roll. Example "d8".
-   *                                      If no denomination is provided, the first available HD will be used
-   * @param {object} options              Additional options which modify the roll.
-   * @returns {Promise<DamageRoll|null>}  The created Roll instance, or null if no hit die was rolled
+   * Roll a hit die of the appropriate type, gaining hit points equal to the die roll plus your CON modifier.
+   * @param {string} [denomination]  The hit denomination of hit die to roll. Example "d8".
+   *                                 If no denomination is provided, the first available HD will be used
+   * @param {object} options         Additional options which modify the roll.
+   * @returns {Promise<Roll|null>}   The created Roll instance, or null if no hit die was rolled
    */
   async rollHitDie(denomination, options={}) {
-
     // If no denomination was provided, choose the first available
     let cls = null;
     if ( !denomination ) {
@@ -1253,17 +1252,15 @@ export default class Actor5e extends Actor {
 
     // Prepare roll data
     const flavor = game.i18n.localize("DND5E.HitDiceRoll");
-    if ( options.fastForward === undefined ) options.fastForward = !options.dialog;
-    const rollData = foundry.utils.mergeObject({
-      event: new Event("hitDie"),
-      parts: [`1${denomination}`, "@abilities.con.mod"],
+    const rollConfig = foundry.utils.mergeObject({
+      formula: `max(0, 1${denomination} + @abilities.con.mod)`,
       data: this.getRollData(),
-      title: `${flavor}: ${this.name}`,
-      flavor,
-      allowCritical: false,
-      dialogOptions: {width: 350},
+      chatMessage: true,
       messageData: {
         speaker: ChatMessage.getSpeaker({actor: this}),
+        flavor,
+        title: `${flavor}: ${this.name}`,
+        rollMode: game.settings.get("core", "rollMode"),
         "flags.dnd5e.roll": {type: "hitDie"}
       }
     }, options);
@@ -1272,15 +1269,19 @@ export default class Actor5e extends Actor {
      * A hook event that fires before a hit die is rolled for an Actor.
      * @function dnd5e.preRollHitDie
      * @memberof hookEvents
-     * @param {Actor5e} actor                   Actor for which the hit die is to be rolled.
-     * @param {DamageRollConfiguration} config  Configuration data for the pending roll.
-     * @param {string} denomination             Size of hit die to be rolled.
-     * @returns {boolean}                       Explicitly return `false` to prevent hit die from being rolled.
+     * @param {Actor5e} actor               Actor for which the hit die is to be rolled.
+     * @param {object} config               Configuration data for the pending roll.
+     * @param {string} config.formula       Formula that will be rolled.
+     * @param {object} config.data          Data used when evaluating the roll.
+     * @param {boolean} config.chatMessage  Should a chat message be created for this roll?
+     * @param {object} config.messageData   Data used to create the chat message.
+     * @param {string} denomination         Size of hit die to be rolled.
+     * @returns {boolean}                   Explicitly return `false` to prevent hit die from being rolled.
      */
-    if ( Hooks.call("dnd5e.preRollHitDie", this, rollData, denomination) === false ) return;
+    if ( Hooks.call("dnd5e.preRollHitDie", this, rollConfig, denomination) === false ) return;
 
-    const roll = await damageRoll(rollData);
-    if ( !roll ) return roll;
+    const roll = await new Roll(rollConfig.formula, rollConfig.data).roll({async: true});
+    if ( rollConfig.chatMessage ) roll.toMessage(rollConfig.messageData);
 
     const hp = this.system.attributes.hp;
     const dhp = Math.min(hp.max + (hp.tempmax ?? 0) - hp.value, roll.total);
@@ -1294,7 +1295,7 @@ export default class Actor5e extends Actor {
      * @function dnd5e.rollHitDie
      * @memberof hookEvents
      * @param {Actor5e} actor         Actor for which the hit die has been rolled.
-     * @param {DamageRoll} roll       The resulting roll.
+     * @param {Roll} roll             The resulting roll.
      * @param {object} updates
      * @param {object} updates.actor  Updates that will be applied to the actor.
      * @param {object} updates.class  Updates that will be applied to the class.
@@ -1584,7 +1585,7 @@ export default class Actor5e extends Actor {
     const max = hp.max + hp.tempmax;
     let diceRolled = 0;
     while ( (this.system.attributes.hp.value + threshold) <= max ) {
-      const r = await this.rollHitDie(undefined, {dialog: false});
+      const r = await this.rollHitDie();
       if ( r === null ) break;
       diceRolled += 1;
     }
