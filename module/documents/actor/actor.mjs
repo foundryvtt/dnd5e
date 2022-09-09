@@ -239,7 +239,7 @@ export default class Actor5e extends Actor {
       if ( !skills[key] ) {
         skills[key] = foundry.utils.deepClone(game.system.template.Actor.templates.creature.skills.acr);
         skills[key].ability = skill.ability;
-        updates[`data.skills.${key}`] = foundry.utils.deepClone(skills[key]);
+        updates[`system.skills.${key}`] = foundry.utils.deepClone(skills[key]);
       }
     }
     this.system.skills = skills;
