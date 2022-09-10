@@ -56,7 +56,17 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
     // Compute overall encumbrance
     const max = actorData.system.attributes.capacity.cargo;
     const pct = Math.clamped((totalWeight * 100) / max, 0, 100);
-    return {value: totalWeight.toNearest(0.1), max, pct};
+
+    let { tooltip, color } = CONFIG.DND5E.encumbrance.bar;
+    if ( totalWeight > max ) {
+      ({ tooltip, color } = CONFIG.DND5E.encumbrance.maxCapacity);
+    }
+
+    return {
+      breakpoints: [33, 66],
+      color, max, pct, tooltip,
+      value: totalWeight.toNearest(0.1)
+    };
   }
 
   /* -------------------------------------------- */

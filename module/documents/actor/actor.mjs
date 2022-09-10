@@ -512,6 +512,7 @@ export default class Actor5e extends Actor {
    * @protected
    */
   _prepareEncumbrance() {
+    const config = CONFIG.DND5E.encumbrance;
     const encumbrance = this.system.attributes.encumbrance ??= {};
     const units = game.settings.get("dnd5e", "metricWeightUnits") ? "metric" : "imperial";
 
@@ -521,10 +522,10 @@ export default class Actor5e extends Actor {
     const currency = this.system.currency;
     if ( game.settings.get("dnd5e", "currencyWeight") && currency ) {
       const numCoins = Object.values(currency).reduce((val, denom) => val + Math.max(denom, 0), 0);
-      weight += numCoins / CONFIG.DND5E.encumbrance.currencyPerWeight[units];
+      weight += numCoins / config.currencyPerWeight[units];
     }
 
-    weight = weight.toNearest(0.1)
+    weight = weight.toNearest(0.1);
 
     let size = CONFIG.DND5E.actorSizes[this.system.traits.size]
       || CONFIG.DND5E.actorSizes.med;
@@ -534,37 +535,38 @@ export default class Actor5e extends Actor {
     }
 
     const sizeMultiplier = size.encumbranceMultiplier || 1;
+    const strMultiplier = config.maxCapacity.strMultiplier[units];
     const strValue = this.system.abilities.str.value ?? 10;
+    const max = (strValue * strMultiplier * sizeMultiplier).toNearest(0.1);
 
-    let max = 0;
-    let level = "0";
-    let name = "DND5E.Unencumbered";
+    let breakpoints = [33, 66];
+    let { tooltip, color } = config.bar;
 
     if ( game.settings.get("dnd5e", "variantEncumbrance") ) {
-      const levels = CONFIG.DND5E.encumbrance.variant;
-      for ( const l of ["33", "66", "max"] ) {
-        const strMultiplier = levels[l].strMultiplier[units];
-        max = (strValue * strMultiplier * sizeMultiplier).toNearest(0.1);
-        if ( weight > max ) {
-          level = l;
-          name = levels[l].name;
+      breakpoints = [];
+      for ( const level of config.variant ) {
+        const strMultiplier = level.strMultiplier[units];
+        const limit = (strValue * strMultiplier * sizeMultiplier).toNearest(0.1);
+        if ( weight > limit ) {
+          ({ tooltip, color } = level);
         }
+        breakpoints.push(Math.clamped((limit * 100) / max, 0, 100).toNearest(1));
       }
     } else {
-      const strMultiplier = CONFIG.DND5E.encumbrance.strMultiplier[units];
-      max = (strValue * strMultiplier * sizeMultiplier).toNearest(0.1);
-      if ( weight > max ) {
-        level = "max";
-        name = "DND5E.Encumbered";
-      }
+      tooltip = null;
+    }
+
+    if ( weight > max ) {
+      ({ tooltip, color } = config.maxCapacity);
     }
 
     // Populate final Encumbrance values
     encumbrance.value = weight;
+    encumbrance.tooltip = tooltip;
     encumbrance.max = max;
     encumbrance.pct = Math.clamped((weight * 100) / max, 0, 100);
-    encumbrance.level = level;
-    encumbrance.name = name;
+    encumbrance.breakpoints = breakpoints;
+    encumbrance.color = color;
   }
 
   /** Tally the total weight of Items that the Actor is carrying, excluding

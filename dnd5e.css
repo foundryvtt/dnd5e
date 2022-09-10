@@ -1204,26 +1204,12 @@
   position: relative;
 }
 .dnd5e.sheet.actor .encumbrance .encumbrance-bar {
-  --encumbered-0-color: #6c8aa5;
-  --encumbered-33-color: #7e8197;
-  --encumbered-66-color: #907789;
-  --encumbered-max-color: #a56c79;
   position: absolute;
   top: 1px;
   left: 1px;
-  background: var(--encumbered-0-color);
   height: 8px;
   border: 1px solid #cde4ff;
   border-radius: 2px;
-}
-.dnd5e.sheet.actor .encumbrance.encumbered-33 .encumbrance-bar {
-  background: var(--encumbered-33-color);
-}
-.dnd5e.sheet.actor .encumbrance.encumbered-66 .encumbrance-bar {
-  background: var(--encumbered-66-color);
-}
-.dnd5e.sheet.actor .encumbrance.encumbered-max .encumbrance-bar {
-  background: var(--encumbered-max-color);
 }
 .dnd5e.sheet.actor .encumbrance .encumbrance-label {
   height: 10px;
@@ -1241,12 +1227,6 @@
   display: block;
   position: absolute;
 }
-.dnd5e.sheet.actor .encumbrance .encumbrance-breakpoint.encumbrance-33 {
-  left: 33%;
-}
-.dnd5e.sheet.actor .encumbrance .encumbrance-breakpoint.encumbrance-66 {
-  left: 66%;
-}
 .dnd5e.sheet.actor .encumbrance .arrow-up {
   bottom: 0;
   width: 0;
@@ -1254,6 +1234,9 @@
   border-left: 4px solid transparent;
   border-right: 4px solid transparent;
   border-bottom: 4px solid #666;
+}
+.dnd5e.sheet.actor .encumbrance .arrow-up.encumbered {
+  border-bottom: 4px solid #000;
 }
 .dnd5e.sheet.actor .encumbrance .arrow-down {
   top: 0;
@@ -1263,22 +1246,7 @@
   border-right: 4px solid transparent;
   border-top: 4px solid #666;
 }
-.dnd5e.sheet.actor .encumbrance.encumbered-33 .encumbrance-33.arrow-up {
-  border-bottom: 4px solid #000;
-}
-.dnd5e.sheet.actor .encumbrance.encumbered-33 .encumbrance-33.arrow-down {
-  border-top: 4px solid #000;
-}
-.dnd5e.sheet.actor .encumbrance.encumbered-66 .arrow-up {
-  border-bottom: 4px solid #000;
-}
-.dnd5e.sheet.actor .encumbrance.encumbered-66 .arrow-down {
-  border-top: 4px solid #000;
-}
-.dnd5e.sheet.actor .encumbrance.encumbered-max .arrow-up {
-  border-bottom: 4px solid #000;
-}
-.dnd5e.sheet.actor .encumbrance.encumbered-max .arrow-down {
+.dnd5e.sheet.actor .encumbrance .arrow-down.encumbered {
   border-top: 4px solid #000;
 }
 .dnd5e.sheet.actor .spellcasting-ability {

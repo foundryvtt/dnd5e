@@ -129,13 +129,13 @@
 
 {{#unless isNPC}}
 {{#with system.attributes.encumbrance}}
-<div class="encumbrance encumbered-{{level}}">
-    <span class="encumbrance-bar" style="width:{{pct}}%" data-tooltip="{{localize name}}"></span>
+<div class="encumbrance">
+    <span class="encumbrance-bar" style="width:{{pct}}%; background: {{color}};" {{#if tooltip}}data-tooltip="{{localize tooltip}}"{{/if}}></span>
     <span class="encumbrance-label">{{value}} / {{max}}</span>
-    <i class="encumbrance-breakpoint encumbrance-33 arrow-up"></i>
-    <i class="encumbrance-breakpoint encumbrance-33 arrow-down"></i>
-    <i class="encumbrance-breakpoint encumbrance-66 arrow-up"></i>
-    <i class="encumbrance-breakpoint encumbrance-66 arrow-down"></i>
+    {{#each breakpoints}}
+    <i class="encumbrance-breakpoint arrow-up{{#if (gt ../pct this)}} encumbered{{/if}}" style="left: {{this}}%"></i>
+    <i class="encumbrance-breakpoint arrow-down{{#if (gt ../pct this)}} encumbered{{/if}}" style="left: {{this}}%"></i>
+    {{/each}}
 </div>
 {{/with}}
 {{/unless}}

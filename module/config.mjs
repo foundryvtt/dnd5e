@@ -763,36 +763,36 @@ DND5E.encumbrance = {
     imperial: 50,
     metric: 110
   },
-  strMultiplier: {
-    imperial: 15,
-    metric: 6.8
+  bar: {
+    tooltip: "DND5E.Unencumbered",
+    color: "#6c8aa5"
   },
-  variant: {
-    0: {
-      name: "DND5E.Unencumbered"
-    },
-    33: {
-      name: "DND5E.Encumbered",
+  maxCapacity: {
+    tooltip: "DND5E.ExceedingCarryingCapacity",
+    color: "#a56c79",
+    strMultiplier: {
+      imperial: 15,
+      metric: 6.8
+    }
+  },
+  variant: [ // these should be defined in ascending order of strMultiplier
+    {
+      tooltip: "DND5E.Encumbered",
+      color: "#7f8096",
       strMultiplier: {
         imperial: 5,
         metric: 2.2
       }
     },
-    66: {
-      name: "DND5E.HeavilyEncumbered",
+    {
+      tooltip: "DND5E.HeavilyEncumbered",
+      color: "#927688",
       strMultiplier: {
         imperial: 10,
         metric: 4.5
       }
-    },
-    max: {
-      name: "DND5E.ExceedingCarryingCapacity",
-      strMultiplier: {
-        imperial: 15,
-        metric: 6.8
-      }
     }
-  },
+  ],
   vehicleWeightMultiplier: {
     imperial: 2000, // 2000 lbs in an imperial ton
     metric: 1000 // 1000 kg in a metric ton
