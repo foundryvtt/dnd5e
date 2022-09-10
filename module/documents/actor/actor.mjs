@@ -515,14 +515,7 @@ export default class Actor5e extends Actor {
     const encumbrance = this.system.attributes.encumbrance ??= {};
     const units = game.settings.get("dnd5e", "metricWeightUnits") ? "metric" : "imperial";
 
-    // Get the total weight from items
-    const physicalItems = ["weapon", "equipment", "consumable", "tool", "backpack", "loot"];
-    let weight = this.items.reduce((weight, i) => {
-      if ( !physicalItems.includes(i.type) ) return weight;
-      const q = i.system.quantity || 0;
-      const w = i.system.weight || 0;
-      return weight + (q * w);
-    }, 0);
+    let weight = this._tallyInventoryEncumbrance();
 
     // [Optional] add Currency Weight (for non-transformed actors)
     const currency = this.system.currency;
@@ -531,7 +524,7 @@ export default class Actor5e extends Actor {
       weight += numCoins / CONFIG.DND5E.encumbrance.currencyPerWeight[units];
     }
 
-    weight = weight.toNearest(0.1);
+    weight = weight.toNearest(0.1)
 
     let size = CONFIG.DND5E.actorSizes[this.system.traits.size]
       || CONFIG.DND5E.actorSizes.med;
@@ -572,6 +565,22 @@ export default class Actor5e extends Actor {
     encumbrance.pct = Math.clamped((weight * 100) / max, 0, 100);
     encumbrance.level = level;
     encumbrance.name = name;
+  }
+
+  /** Tally the total weight of Items that the Actor is carrying, excluding
+   * currency and any items types that shouldn't contribute to encumbrance.
+   * @protected
+   * @returns {number} the total weight
+   */
+  _tallyInventoryEncumbrance() {
+    const physicalItems = ["weapon", "equipment", "consumable", "tool", "backpack", "loot"];
+
+    return this.items.reduce((weight, i) => {
+      if ( !physicalItems.includes(i.type) ) return weight;
+      const q = i.system.quantity || 0;
+      const w = i.system.weight || 0;
+      return weight + (q * w);
+    }, 0);
   }
 
   /* -------------------------------------------- */
