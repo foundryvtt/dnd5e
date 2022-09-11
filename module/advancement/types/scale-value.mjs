@@ -2,6 +2,8 @@ import Advancement from "../advancement.mjs";
 import AdvancementConfig from "../advancement-config.mjs";
 import AdvancementFlow from "../advancement-flow.mjs";
 
+import ScaleValueConfigurationData from "../../data/advancement/scale-value.mjs";
+
 /**
  * Advancement that represents a value that scales with class level. **Can only be added to classes or subclasses.**
  */
@@ -10,13 +12,8 @@ export class ScaleValueAdvancement extends Advancement {
   /** @inheritdoc */
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
-      defaults: {
-        configuration: {
-          identifier: "",
-          type: "string",
-          distance: {units: ""},
-          scale: {}
-        }
+      dataModels: {
+        configuration: ScaleValueConfigurationData
       },
       order: 60,
       icon: "systems/dnd5e/icons/svg/scale-value.svg",

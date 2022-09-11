@@ -22,6 +22,7 @@ export default class BaseAdvancement extends foundry.abstract.DataModel {
       level: new foundry.data.fields.NumberField({integer: true, initial: 1, min: 0, label: ""}),
       title: new foundry.data.fields.StringField({initial: undefined, label: ""}),
       icon: new foundry.data.fields.FilePathField({initial: undefined, categories: ["IMAGE"], label: ""}),
+      // TODO: Invalid value entered here prevents any advancement from being loaded
       classRestriction: new foundry.data.fields.StringField({
         initial: undefined, blank: true, choices: ["primary", "secondary"], label: ""
       })

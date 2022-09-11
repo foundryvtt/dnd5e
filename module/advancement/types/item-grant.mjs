@@ -16,13 +16,6 @@ export class ItemGrantAdvancement extends Advancement {
       dataModels: {
         configuration: ItemGrantConfigurationData
       },
-      defaults: {
-        configuration: {
-          items: [],
-          optional: false,
-          spell: null
-        }
-      },
       order: 40,
       icon: "systems/dnd5e/icons/svg/item-grant.svg",
       title: game.i18n.localize("DND5E.AdvancementItemGrantTitle"),
