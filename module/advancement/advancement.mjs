@@ -31,7 +31,7 @@ export default class Advancement extends BaseAdvancement {
     if ( !game._documentsReady ) return;
 
     this.title = this.title || this.constructor.metadata.title;
-    this.icon = this.data.icon || this.constructor.metadata.icon;
+    this.icon = this.icon || this.constructor.metadata.icon;
 
     return this.prepareData();
   }
@@ -81,37 +81,6 @@ export default class Advancement extends BaseAdvancement {
   }
 
   /* -------------------------------------------- */
-  /*  Static Properties                           */
-  /* -------------------------------------------- */
-
-  /**
-   * Name of this advancement type that will be stored in config and used for lookups.
-   * @type {string}
-   * @protected
-   */
-  static get typeName() {
-    return this.name.replace(/Advancement$/, "");
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Data structure for a newly created advancement of this type.
-   * @type {object}
-   * @protected
-   */
-  static get defaultData() {
-    const data = {
-      _id: null,
-      type: this.typeName,
-      configuration: foundry.utils.deepClone(this.metadata.defaults.configuration),
-      value: foundry.utils.deepClone(this.metadata.defaults.value)
-    };
-    if ( !this.metadata.multiLevel ) data.level = 1;
-    return data;
-  }
-
-  /* -------------------------------------------- */
   /*  Instance Properties                         */
   /* -------------------------------------------- */
 
@@ -120,7 +89,7 @@ export default class Advancement extends BaseAdvancement {
    * @type {string}
    */
   get id() {
-    return this.data._id;
+    return this._id;
   }
 
   /* -------------------------------------------- */
@@ -161,7 +130,7 @@ export default class Advancement extends BaseAdvancement {
    * @returns {number[]}
    */
   get levels() {
-    return this.data.level !== undefined ? [this.data.level] : [];
+    return this.level !== undefined ? [this.level] : [];
   }
 
   /* -------------------------------------------- */
@@ -174,9 +143,9 @@ export default class Advancement extends BaseAdvancement {
    */
   get appliesToClass() {
     const originalClass = this.item.isOriginalClass;
-    return (originalClass === null) || !this.data.classRestriction
-      || (this.data.classRestriction === "primary" && originalClass)
-      || (this.data.classRestriction === "secondary" && !originalClass);
+    return (originalClass === null) || !this.classRestriction
+      || (this.classRestriction === "primary" && originalClass)
+      || (this.classRestriction === "secondary" && !originalClass);
   }
 
   /* -------------------------------------------- */
@@ -360,7 +329,7 @@ export default class Advancement extends BaseAdvancement {
       `You are accessing the ${this.constructor.name}#data object which is no longer used. `
       + "Since 2.1 the Advancement class and its contained DataModel are merged into a combined data structure. "
       + "You should now reference keys which were previously contained within the data object directly.",
-      { since: "DnD5e 2.1", until: "DnD5e 2.3" }
+      { since: "DnD5e 2.1", until: "DnD5e 2.2" }
     );
     const data = {};
     for ( const k of this.schema.keys() ) {
@@ -390,7 +359,7 @@ export default class Advancement extends BaseAdvancement {
     if ( logWarning ) foundry.utils.logCompatibilityWarning(
       "An update being performed on an advancement points to `data`. Advancement data has moved to the top level so the"
       + " leading `data.` is no longer required.",
-      { since: "DnD5e 2.1", until: "DnD5e 2.3" }
+      { since: "DnD5e 2.1", until: "DnD5e 2.2" }
     );
     return updates;
   }

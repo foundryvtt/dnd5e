@@ -1941,20 +1941,19 @@ export default class Item5e extends Item {
     if ( !this.system.advancement ) return;
 
     const Advancement = dnd5e.advancement.types[`${type}Advancement`];
-    if ( !Advancement ) throw new Error(`${type}Advancement not found in dnd5e.advancement.types`);
-    data = foundry.utils.mergeObject(Advancement.defaultData, data);
+    if ( !Advancement ) throw new Error(`${type} advancement not found in dnd5e.advancement.types`);
+    const newAdvancement = new Advancement(this, data);
 
     if ( !Advancement.metadata.validItemTypes.has(this.type) || !Advancement.availableForItem(this) ) {
       throw new Error(`${type} advancement cannot be added to ${this.name}`);
     }
 
     const advancement = this.toObject().system.advancement;
-    if ( !data._id ) data._id = foundry.utils.randomID();
-    advancement.push(data);
+    advancement.push(newAdvancement.toObject());
     await this.update({"system.advancement": advancement});
 
     if ( !showConfig ) return;
-    const config = new Advancement.metadata.apps.config(this.advancement.byId[data._id]);
+    const config = new Advancement.metadata.apps.config(this.advancement.byId[newAdvancement.id]);
     return config.render(true);
   }
 
@@ -1999,9 +1998,13 @@ export default class Item5e extends Item {
   async duplicateAdvancement(id, options) {
     const original = this.advancement.byId[id];
     if ( !original ) return;
-    const duplicate = foundry.utils.deepClone(original.data);
+    const duplicate = original.toObject();
     delete duplicate._id;
-    duplicate.value = original.constructor.metadata.defaults.value;
+    if ( original.constructor.metadata.dataModels?.value ) {
+      duplicate.value = (new original.constructor.metadata.dataModels.value()).toObject();
+    } else {
+      duplicate.value = original.constructor.metadata.defaults?.value ?? {};
+    }
     return this.createAdvancement(original.constructor.typeName, duplicate, options);
   }
 

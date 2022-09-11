@@ -14,7 +14,7 @@ export class AdvancementDataField extends foundry.data.fields.ObjectField {
   }
 
   getDefaults() {
-    return this.advancementType.metadata.defaults?.[this.name];
+    return this.advancementType.metadata.defaults?.[this.name] ?? {};
   }
 
   _cleanType(value, options) {

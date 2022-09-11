@@ -146,7 +146,7 @@ export default class ItemSheet5e extends ItemSheet {
           order: a.constructor.order,
           title: a.title,
           icon: a.icon,
-          classRestriction: a.data.classRestriction,
+          classRestriction: a.classRestriction,
           configured: false
         })),
         configured: "partial"
@@ -161,7 +161,7 @@ export default class ItemSheet5e extends ItemSheet {
         order: advancement.sortingValueForLevel(level),
         title: advancement.titleForLevel(level, { configMode }),
         icon: advancement.icon,
-        classRestriction: advancement.data.classRestriction,
+        classRestriction: advancement.classRestriction,
         summary: advancement.summaryForLevel(level, { configMode }),
         configured: advancement.configuredForLevel(level)
       }));
