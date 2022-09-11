@@ -91,7 +91,7 @@ export default class AdvancementConfig extends FormApplication {
 
   /** @inheritdoc */
   async _updateObject(event, formData) {
-    let updates = foundry.utils.expandObject(formData).data;
+    let updates = foundry.utils.expandObject(formData);
     if ( updates.configuration ) updates.configuration = this.prepareConfigurationUpdate(updates.configuration);
     await this.advancement.update(updates);
     this.render();

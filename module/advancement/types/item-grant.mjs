@@ -2,6 +2,8 @@ import Advancement from "../advancement.mjs";
 import AdvancementFlow from "../advancement-flow.mjs";
 import AdvancementConfig from "../advancement-config.mjs";
 
+import ItemGrantConfigurationData from "../../data/advancement/item-grant.mjs";
+
 /**
  * Advancement that automatically grants one or more items to the player. Presents the player with the option of
  * skipping any or all of the items.
@@ -11,6 +13,9 @@ export class ItemGrantAdvancement extends Advancement {
   /** @inheritdoc */
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
+      dataModels: {
+        configuration: ItemGrantConfigurationData
+      },
       defaults: {
         configuration: {
           items: [],

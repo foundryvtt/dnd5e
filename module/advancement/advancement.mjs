@@ -1,5 +1,6 @@
 import AdvancementConfig from "./advancement-config.mjs";
 import AdvancementFlow from "./advancement-flow.mjs";
+import BaseAdvancement from "../data/advancement/base-advancement.mjs";
 
 /**
  * Error that can be thrown during the advancement update preparation process.
@@ -13,23 +14,26 @@ class AdvancementError extends Error {
 
 /**
  * Abstract base class which various advancement types can subclass.
- * @param {Item5e} item       Item to which this advancement belongs.
- * @param {object} [data={}]  Raw data stored in the advancement object.
+ * @param {Item5e} item          Item to which this advancement belongs.
+ * @param {object} [data={}]     Raw data stored in the advancement object.
+ * @param {object} [options={}]  Options which affect DataModel construction.
  * @abstract
  */
-export default class Advancement {
-  constructor(item, data={}) {
-    /**
-     * Item to which this advancement belongs.
-     * @type {Item5e}
-     */
-    this.item = item;
+export default class Advancement extends BaseAdvancement {
+  constructor(item, data={}, options={}) {
+    options.parent ??= item;
+    super(data, options);
+  }
 
-    /**
-     * Configuration data for this advancement.
-     * @type {object}
-     */
-    this.data = data;
+  /** @inheritdoc */
+  _initialize(options) {
+    super._initialize(options);
+    if ( !game._documentsReady ) return;
+
+    this.title = this.title || this.constructor.metadata.title;
+    this.icon = this.data.icon || this.constructor.metadata.icon;
+
+    return this.prepareData();
   }
 
   static ERROR = AdvancementError;
@@ -40,9 +44,9 @@ export default class Advancement {
    * Information on how an advancement type is configured.
    *
    * @typedef {object} AdvancementMetadata
-   * @property {object} defaults
-   * @property {object} defaults.configuration  Default contents of the configuration object for this advancement type.
-   * @property {object} defaults.value          Default contents of the actor value object for this advancement type.
+   * @property {object} dataModels
+   * @property {DataModel} configuration  Data model used for validating configuration data.
+   * @property {DataModel} value          Data model used for validating value data.
    * @property {number} order          Number used to determine default sorting order of advancement items.
    * @property {string} icon           Icon used for this advancement type if no user icon is specified.
    * @property {string} title          Title to be displayed if no user title is specified.
@@ -63,10 +67,6 @@ export default class Advancement {
    */
   static get metadata() {
     return {
-      defaults: {
-        configuration: {},
-        value: {}
-      },
       order: 100,
       icon: "icons/svg/upgrade.svg",
       title: game.i18n.localize("DND5E.AdvancementTitle"),
@@ -136,31 +136,21 @@ export default class Advancement {
   /* -------------------------------------------- */
 
   /**
+   * Item to which this advancement belongs.
+   * @type {Item5e}
+   */
+  get item() {
+    return this.parent;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Actor to which this advancement's item belongs, if the item is embedded.
    * @type {Actor5e|null}
    */
   get actor() {
     return this.item.parent ?? null;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Title of this advancement object when level isn't relevant.
-   * @type {string}
-   */
-  get title() {
-    return this.data.title || this.constructor.metadata.title;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Icon to display in advancement list.
-   * @type {string}
-   */
-  get icon() {
-    return this.data.icon || this.constructor.metadata.icon;
   }
 
   /* -------------------------------------------- */
@@ -188,6 +178,15 @@ export default class Advancement {
       || (this.data.classRestriction === "primary" && originalClass)
       || (this.data.classRestriction === "secondary" && !originalClass);
   }
+
+  /* -------------------------------------------- */
+  /*  Preparation Methods                         */
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare data for the Advancement.
+   */
+  prepareData() {}
 
   /* -------------------------------------------- */
   /*  Display Methods                             */
@@ -253,8 +252,9 @@ export default class Advancement {
    * @returns {Promise<Advancement>}  This advancement after updates have been applied.
    */
   async update(updates) {
+    this.constructor._migrateUpdateData(updates);
     await this.item.updateAdvancement(this.id, updates);
-    this.data = this.item.advancement.byId[this.id].data;
+    super.updateSource(updates);
     return this.item.advancement.byId[this.id];
   }
 
@@ -266,12 +266,13 @@ export default class Advancement {
    * @returns {Advancement}   This advancement after updates have been applied.
    */
   updateSource(updates) {
+    this.constructor._migrateUpdateData(updates);
     const advancement = foundry.utils.deepClone(this.item.system.advancement);
     const idx = advancement.findIndex(a => a._id === this.id);
     if ( idx < 0 ) throw new Error(`Advancement of ID ${this.id} could not be found to update`);
-    foundry.utils.mergeObject(this.data, updates, { performDeletions: true });
     foundry.utils.mergeObject(advancement[idx], updates, { performDeletions: true });
     this.item.updateSource({"system.advancement": advancement});
+    super.updateSource(updates);
     return this;
   }
 
@@ -345,4 +346,53 @@ export default class Advancement {
     if ( spell.uses?.per ) updates["system.uses.per"] = spell.uses.per;
     return updates;
   }
+
+  /* -------------------------------------------- */
+  /*  Deprecations and Compatibility              */
+  /* -------------------------------------------- */
+
+  /**
+   * @deprecated since 2.1.0
+   * @ignore
+   */
+  get data() {
+    foundry.utils.logCompatibilityWarning(
+      `You are accessing the ${this.constructor.name}#data object which is no longer used. `
+      + "Since 2.1 the Advancement class and its contained DataModel are merged into a combined data structure. "
+      + "You should now reference keys which were previously contained within the data object directly.",
+      { since: "DnD5e 2.1", until: "DnD5e 2.3" }
+    );
+    const data = {};
+    for ( const k of this.schema.keys() ) {
+      data[k] = this[k];
+    }
+    return this.constructor.shimData(data, {embedded: false});
+  }
+
+  /**
+   * Shim to remove leading `data.` from updates.
+   * @ignore
+   */
+  static _migrateUpdateData(updates) {
+    let logWarning = false;
+    for ( const [key, value] of Object.entries(updates) ) {
+      if ( key.startsWith("data.") ) {
+        updates[key.substring(5)] = value;
+        delete updates[key];
+        logWarning = true;
+      }
+    }
+    if ( updates.data ) {
+      Object.assign(updates, updates.data);
+      delete updates.data;
+      logWarning = true;
+    }
+    if ( logWarning ) foundry.utils.logCompatibilityWarning(
+      "An update being performed on an advancement points to `data`. Advancement data has moved to the top level so the"
+      + " leading `data.` is no longer required.",
+      { since: "DnD5e 2.1", until: "DnD5e 2.3" }
+    );
+    return updates;
+  }
+
 }
