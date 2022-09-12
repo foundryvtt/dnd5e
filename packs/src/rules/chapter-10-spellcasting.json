@@ -1,13 +1,5 @@
 {
   "name": "Chapter 10: Spellcasting",
-  "ownership": {
-    "default": 0
-  },
-  "flags": {
-    "core": {
-      "viewMode": 1
-    }
-  },
   "pages": [
     {
       "name": "Spellcasting",
@@ -327,12 +319,24 @@
       }
     }
   ],
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "core": {
+      "viewMode": 1
+    },
+    "dnd5e": {
+      "type": "chapter",
+      "position": 10
+    }
+  },
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.0.0",
-    "coreVersion": "10.279",
-    "createdTime": 1660925136823,
-    "modifiedTime": 1661787234664,
+    "systemVersion": "2.0.2",
+    "coreVersion": "10.285",
+    "createdTime": 1660925148884,
+    "modifiedTime": 1663018863337,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "folder": null,

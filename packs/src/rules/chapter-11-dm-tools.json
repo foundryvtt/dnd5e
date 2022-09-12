@@ -1,13 +1,5 @@
 {
   "name": "Chapter 11: DM Tools",
-  "ownership": {
-    "default": 0
-  },
-  "flags": {
-    "core": {
-      "viewMode": 2
-    }
-  },
   "pages": [
     {
       "name": "Traps",
@@ -215,12 +207,24 @@
       }
     }
   ],
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "core": {
+      "viewMode": 2
+    },
+    "dnd5e": {
+      "type": "chapter",
+      "position": 11
+    }
+  },
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.0.0",
-    "coreVersion": "10.279",
-    "createdTime": 1660925138709,
-    "modifiedTime": 1661787234671,
+    "systemVersion": "2.0.2",
+    "coreVersion": "10.285",
+    "createdTime": 1660925148884,
+    "modifiedTime": 1663018863337,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "folder": null,
