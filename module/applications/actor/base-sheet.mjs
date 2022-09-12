@@ -93,7 +93,7 @@ export default class ActorSheet5e extends ActorSheet {
       movement: this._getMovementSpeed(actorData.system),
       senses: this._getSenses(actorData.system),
       effects: ActiveEffect5e.prepareActiveEffectCategories(this.actor.effects),
-      warnings: this._getWarnings(this.actor._preparationWarnings),
+      warnings: this.actor._preparationWarnings,
       filters: this._filters,
       owner: this.actor.isOwner,
       limited: this.actor.limited,
@@ -250,26 +250,6 @@ export default class ActorSheet5e extends ActorSheet {
     }
     if ( senses.special ) tags.special = senses.special;
     return tags;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Prepare preparation warnings for display.
-   * @param {Array<string|object>} warnings  Array of warnings.
-   * @returns {object[]}                     Prepared warnings.
-   * @protected
-   */
-  _getWarnings(warnings) {
-    const prepared = [];
-    for ( const warning of warnings ) {
-      if ( typeof warning === "string" ) {
-        prepared.push({ message: game.i18n.localize(warning), type: "warning" });
-      } else {
-        prepared.push(warning);
-      }
-    }
-    return prepared;
   }
 
   /* -------------------------------------------- */
