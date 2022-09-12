@@ -21,7 +21,7 @@ class AdvancementError extends Error {
  */
 export default class Advancement extends BaseAdvancement {
   constructor(item, data={}, options={}) {
-    options.parent ??= item;
+    options.parent = item;
     super(data, options);
   }
 
@@ -29,10 +29,6 @@ export default class Advancement extends BaseAdvancement {
   _initialize(options) {
     super._initialize(options);
     if ( !game._documentsReady ) return;
-
-    this.title = this.title || this.constructor.metadata.title;
-    this.icon = this.icon || this.constructor.metadata.icon;
-
     return this.prepareData();
   }
 
@@ -155,7 +151,10 @@ export default class Advancement extends BaseAdvancement {
   /**
    * Prepare data for the Advancement.
    */
-  prepareData() {}
+  prepareData() {
+    this.title = this.title || this.constructor.metadata.title;
+    this.icon = this.icon || this.constructor.metadata.icon;
+  }
 
   /* -------------------------------------------- */
   /*  Display Methods                             */
