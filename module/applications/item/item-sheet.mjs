@@ -397,14 +397,10 @@ export default class ItemSheet5e extends ItemSheet {
     }
 
     // Check class identifier
-    if ( formData.system?.identifier ) {
-      const dataRgx = new RegExp(/^([a-z0-9_-]+)$/i);
-      const match = formData.system.identifier.match(dataRgx);
-      if ( !match ) {
-        formData.system.identifier = this.item._source.system.identifier;
-        this.form.querySelector("input[name='system.identifier']").value = formData.system.identifier;
-        return ui.notifications.error(game.i18n.localize("DND5E.IdentifierError"));
-      }
+    if ( formData.system?.identifier && !dnd5e.utils.validators.isValidIdentifier(formData.system.identifier) ) {
+      formData.system.identifier = this.item._source.system.identifier;
+      this.form.querySelector("input[name='system.identifier']").value = formData.system.identifier;
+      return ui.notifications.error(game.i18n.localize("DND5E.IdentifierError"));
     }
 
     // Return the flattened submission data

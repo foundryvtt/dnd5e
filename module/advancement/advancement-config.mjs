@@ -125,7 +125,9 @@ export default class AdvancementConfig extends FormApplication {
           ui.notifications.error(`${key} ${error.message}`);
           const name = key.split(".").pop();
           const field = this.form.querySelector(`[name="${name}"]`);
-          field.classList.add("invalid");
+          field?.classList.add("invalid");
+          // TODO: Currently only highlights top-level fields, figure out a way to do this for configuration fields
+          // TODO: Fetch "label" from DataModel for better message
         }
       } else {
         throw err;

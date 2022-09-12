@@ -36,3 +36,26 @@ export class AdvancementDataField extends foundry.data.fields.ObjectField {
     return foundry.utils.deepClone(value);
   }
 }
+
+/* -------------------------------------------- */
+
+export class IdentifierField extends foundry.data.fields.StringField {
+
+  /** @inheritdoc */
+  static get _defaults() {
+    return foundry.utils.mergeObject(super._defaults, {
+      validationError: "is not a valid Identifier string"
+    });
+  }
+
+  /** @override */
+  _cast(value) {
+    return String(value).slugify({strict: true});
+  }
+
+  /** @override */
+  _validateType(value) {
+    if ( !dnd5e.utils.validators.isValidIdentifier(value) ) throw new Error(game.i18n.localize("DND5E.IdentifierError"));
+  }
+
+}

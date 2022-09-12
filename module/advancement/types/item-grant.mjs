@@ -93,7 +93,6 @@ export class ItemGrantAdvancement extends Advancement {
       if ( itemData.type === "spell" ) foundry.utils.mergeObject(itemData, spellChanges);
 
       items.push(itemData);
-      // TODO: Trigger any additional advancement steps for added items
       updates[itemData._id] = uuid;
     }
     this.actor.updateSource({items});
@@ -107,7 +106,6 @@ export class ItemGrantAdvancement extends Advancement {
     const updates = {};
     for ( const item of data.items ) {
       this.actor.updateSource({items: [item]});
-      // TODO: Restore any additional advancement data here
       updates[item._id] = item.flags.dnd5e.sourceId;
     }
     this.updateSource({"value.added": updates});
@@ -118,12 +116,10 @@ export class ItemGrantAdvancement extends Advancement {
   /** @inheritdoc */
   reverse(level) {
     const items = [];
-    for ( const id of Object.keys(this.data.value.added ?? {}) ) {
+    for ( const id of Object.keys(this.value.added ?? {}) ) {
       const item = this.actor.items.get(id);
       if ( item ) items.push(item.toObject());
       this.actor.items.delete(id);
-      // TODO: Ensure any advancement data attached to these items is properly reversed
-      // and store any advancement data for these items in case they need to be restored
     }
     this.updateSource({ "value.-=added": null });
     return { items };
