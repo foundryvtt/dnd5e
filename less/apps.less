@@ -42,6 +42,12 @@
     }
   }
 
+  // Invalid Fields
+  input:is([type="text"], [type="number"], [type="checkbox"]):is(.invalid) {
+    border-color: var(--dnd5e-color-border-invalid);
+    outline: 2px solid var(--dnd5e-color-border-invalid);
+  }
+
   // Disabled Fields
   input:disabled,
   select:disabled,

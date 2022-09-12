@@ -1931,71 +1931,87 @@ export default class Item5e extends Item {
 
   /**
    * Create a new advancement of the specified type.
-   * @param {string} type                        Type of advancement to create.
-   * @param {object} [data]                      Data to use when creating the advancement.
+   * @param {string} type                          Type of advancement to create.
+   * @param {object} [data]                        Data to use when creating the advancement.
    * @param {object} [options]
-   * @param {boolean} [options.showConfig=true]  Should the new advancement's configuration application be shown?
-   * @returns {Promise<AdvancementConfig>}
+   * @param {boolean} [options.showConfig=true]    Should the new advancement's configuration application be shown?
+   * @param {boolean} [options.local=false]        Should a local-only update be performed?
+   * @returns {Promise<AdvancementConfig>|Item5e}  Promise for advancement config for new advancement if local
+   *                                               is `false`, or item with newly added advancement.
    */
-  async createAdvancement(type, data={}, { showConfig=true }={}) {
+  createAdvancement(type, data={}, { showConfig=true, local=false }={}) {
     if ( !this.system.advancement ) return;
 
     const Advancement = dnd5e.advancement.types[`${type}Advancement`];
     if ( !Advancement ) throw new Error(`${type} advancement not found in dnd5e.advancement.types`);
-    const newAdvancement = new Advancement(this, data);
 
     if ( !Advancement.metadata.validItemTypes.has(this.type) || !Advancement.availableForItem(this) ) {
       throw new Error(`${type} advancement cannot be added to ${this.name}`);
     }
 
-    const advancement = this.toObject().system.advancement;
-    advancement.push(newAdvancement.toObject());
-    await this.update({"system.advancement": advancement});
-
-    if ( !showConfig ) return;
-    const config = new Advancement.metadata.apps.config(this.advancement.byId[newAdvancement.id]);
-    return config.render(true);
+    const advancement = new Advancement(this, data);
+    const advancementCollection = this.toObject().system.advancement;
+    advancementCollection.push(advancement.toObject());
+    if ( local ) return this.updateSource({"system.advancement": advancementCollection});
+    return this.update({"system.advancement": advancementCollection}).then(() => {
+      if ( !showConfig ) return this;
+      const config = new Advancement.metadata.apps.config(this.advancement.byId[advancement.id]);
+      return config.render(true);
+    });
   }
 
   /* -------------------------------------------- */
 
   /**
    * Update an advancement belonging to this item.
-   * @param {string} id          ID of the advancement to update.
-   * @param {object} updates     Updates to apply to this advancement, using the same format as `Document#update`.
-   * @returns {Promise<Item5e>}  This item with the changes applied.
+   * @param {string} id                      ID of the advancement to update.
+   * @param {object} updates                 Updates to apply to this advancement.
+   * @param {object} [options={}]
+   * @param {boolean} [options.local=false]  Should a local-only update be performed?
+   * @returns {Promise<Item5e>}              This item with the changes applied, promised if local is `false`.
    */
-  async updateAdvancement(id, updates) {
+  updateAdvancement(id, updates, { local=false }={}) {
     if ( !this.system.advancement ) return;
     const idx = this.system.advancement.findIndex(a => a._id === id);
     if ( idx === -1 ) throw new Error(`Advancement of ID ${id} could not be found to update`);
-    const advancement = this.toObject().system.advancement;
-    foundry.utils.mergeObject(advancement[idx], updates, { performDeletions: true });
-    return this.update({"system.advancement": advancement});
+
+    const advancement = this.advancement.byId[id];
+    advancement.updateSource(updates, { updateItem: false });
+    const advancementCollection = this.toObject().system.advancement;
+    advancementCollection[idx] = advancement.toObject();
+    if ( local ) return this.updateSource({"system.advancement": advancementCollection});
+    return this.update({"system.advancement": advancementCollection});
   }
 
   /* -------------------------------------------- */
 
   /**
    * Remove an advancement from this item.
-   * @param {string} id          ID of the advancement to remove.
-   * @returns {Promise<Item5e>}  This item with the changes applied.
+   * @param {string} id                      ID of the advancement to remove.
+   * @param {object} [options={}]
+   * @param {boolean} [options.local=false]  Should a local-only update be performed?
+   * @returns {Promise<Item5e>}              This item with the changes applied.
    */
-  async deleteAdvancement(id) {
+  deleteAdvancement(id, { local=false }={}) {
     if ( !this.system.advancement ) return;
-    return this.update({"system.advancement": this.system.advancement.filter(a => a._id !== id)});
+
+    const advancementCollection = this.system.advancement.filter(a => a._id !== id);
+    if ( local ) return this.updateSource({"system.advancement": advancementCollection});
+    return this.update({"system.advancement": advancementCollection});
   }
 
   /* -------------------------------------------- */
 
   /**
    * Duplicate an advancement, resetting its value to default and giving it a new ID.
-   * @param {string} id                          ID of the advancement to duplicate.
+   * @param {string} id                            ID of the advancement to duplicate.
    * @param {object} [options]
-   * @param {boolean} [options.showConfig=true]  Should the new advancement's configuration application be shown?
-   * @returns {Promise<Item5e>}                  This item with the changes applied.
+   * @param {boolean} [options.showConfig=true]    Should the new advancement's configuration application be shown?
+   * @param {boolean} [options.local=false]        Should a local-only update be performed?
+   * @returns {Promise<AdvancementConfig>|Item5e}  Promise for advancement config for duplicate advancement if local
+   *                                               is `false`, or item with newly duplicated advancement.
    */
-  async duplicateAdvancement(id, options) {
+  duplicateAdvancement(id, options) {
     const original = this.advancement.byId[id];
     if ( !original ) return;
     const duplicate = original.toObject();

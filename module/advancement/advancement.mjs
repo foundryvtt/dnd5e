@@ -217,13 +217,13 @@ export default class Advancement extends BaseAdvancement {
 
   /**
    * Update this advancement.
-   * @param {object} updates          Updates to apply to this advancement, using the same format as `Document#update`.
+   * @param {object} updates          Updates to apply to this advancement.
    * @returns {Promise<Advancement>}  This advancement after updates have been applied.
    */
   async update(updates) {
     this.constructor._migrateUpdateData(updates);
     await this.item.updateAdvancement(this.id, updates);
-    super.updateSource(updates);
+    this.updateSource(updates);
     return this.item.advancement.byId[this.id];
   }
 
@@ -231,16 +231,15 @@ export default class Advancement extends BaseAdvancement {
 
   /**
    * Update this advancement's data on the item without performing a database commit.
-   * @param {object} updates  Updates to apply to this advancement, using the same format as `Document#update`.
-   * @returns {Advancement}   This advancement after updates have been applied.
+   * @param {object} updates                     Updates to apply to this advancement.
+   * @param {object} [options={}]
+   * @param {boolean} [options.updateItem=true]  Apply this update to the item in which this advancement is embedded?
+   * @returns {Advancement}                      This advancement after updates have been applied.
    */
-  updateSource(updates) {
+  updateSource(updates, { updateItem=true }={}) {
+    if ( !updateItem ) return super.updateSource(updates);
     this.constructor._migrateUpdateData(updates);
-    const advancement = foundry.utils.deepClone(this.item.system.advancement);
-    const idx = advancement.findIndex(a => a._id === this.id);
-    if ( idx < 0 ) throw new Error(`Advancement of ID ${this.id} could not be found to update`);
-    foundry.utils.mergeObject(advancement[idx], updates, { performDeletions: true });
-    this.item.updateSource({"system.advancement": advancement});
+    this.item.updateAdvancement(this.id, updates, { local: true });
     super.updateSource(updates);
     return this;
   }

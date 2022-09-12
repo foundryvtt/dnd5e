@@ -10,11 +10,11 @@ export class AdvancementDataField extends foundry.data.fields.ObjectField {
   }
 
   getModel() {
-    return this.advancementType.metadata.dataModels?.[this.name];
+    return this.advancementType.metadata?.dataModels?.[this.name];
   }
 
   getDefaults() {
-    return this.advancementType.metadata.defaults?.[this.name] ?? {};
+    return this.advancementType.metadata?.defaults?.[this.name] ?? {};
   }
 
   _cleanType(value, options) {
