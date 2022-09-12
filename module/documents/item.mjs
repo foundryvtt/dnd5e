@@ -654,7 +654,7 @@ export default class Item5e extends Item {
    * @returns {string}                 Formula with replaced data.
    */
   replaceFormulaData(formula, data, { property }) {
-    let dataRgx = new RegExp(/@([a-z.0-9_-]+)/gi);
+    const dataRgx = new RegExp(/@([a-z.0-9_-]+)/gi);
     const missingReferences = new Set();
     formula = formula.replace(dataRgx, (match, term) => {
       let value = foundry.utils.getProperty(data, term);
