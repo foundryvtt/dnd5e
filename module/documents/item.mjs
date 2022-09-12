@@ -780,6 +780,7 @@ export default class Item5e extends Item {
       if ( upcastLevel && (upcastLevel !== is.level) ) {
         item = item.clone({"system.level": upcastLevel}, {keepId: true});
         item.prepareData();
+        item.prepareFinalAttributes();
       }
     }
 
