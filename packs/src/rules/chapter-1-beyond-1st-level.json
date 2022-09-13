@@ -1,9 +1,5 @@
 {
   "name": "Chapter 1: Beyond 1st Level",
-  "ownership": {
-    "default": 0
-  },
-  "flags": {},
   "pages": [
     {
       "name": "Beyond 1st Level",
@@ -31,12 +27,21 @@
       "flags": {}
     }
   ],
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "dnd5e": {
+      "type": "chapter",
+      "position": 1
+    }
+  },
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.0.0",
-    "coreVersion": "10.279",
-    "createdTime": 1660925117598,
-    "modifiedTime": 1661787234660,
+    "systemVersion": "2.0.2",
+    "coreVersion": "10.285",
+    "createdTime": 1660925148884,
+    "modifiedTime": 1663018863337,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "folder": null,

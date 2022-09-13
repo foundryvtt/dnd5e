@@ -1,13 +1,5 @@
 {
   "name": "Chapter 7: Using Ability Scores",
-  "ownership": {
-    "default": 0
-  },
-  "flags": {
-    "core": {
-      "viewMode": 2
-    }
-  },
   "pages": [
     {
       "name": "Using Ability Scores",
@@ -211,12 +203,24 @@
       }
     }
   ],
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "core": {
+      "viewMode": 2
+    },
+    "dnd5e": {
+      "type": "chapter",
+      "position": 7
+    }
+  },
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.0.0",
-    "coreVersion": "10.279",
-    "createdTime": 1660925130143,
-    "modifiedTime": 1661787234659,
+    "systemVersion": "2.0.2",
+    "coreVersion": "10.285",
+    "createdTime": 1660925148884,
+    "modifiedTime": 1663018863337,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "folder": null,
