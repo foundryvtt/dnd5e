@@ -470,7 +470,9 @@ export default class Actor5e extends Actor {
       default:
         let formula = ac.calc === "custom" ? ac.formula : cfg.formula;
         if ( armors.length ) {
-          if ( armors.length > 1 ) this._preparationWarnings.push("DND5E.WarnMultipleArmor");
+          if ( armors.length > 1 ) this._preparationWarnings.push({
+            message: game.i18n.localize("DND5E.WarnMultipleArmor"), type: "warning"
+          });
           const armorData = armors[0].system.armor;
           const isHeavy = armorData.type === "heavy";
           ac.armor = armorData.value ?? ac.armor;
@@ -485,7 +487,9 @@ export default class Actor5e extends Actor {
           const replaced = Roll.replaceFormulaData(formula, rollData);
           ac.base = Roll.safeEval(replaced);
         } catch(err) {
-          this._preparationWarnings.push("DND5E.WarnBadACFormula");
+          this._preparationWarnings.push({
+            message: game.i18n.localize("DND5E.WarnBadACFormula"), link: "armor", type: "error"
+          });
           const replaced = Roll.replaceFormulaData(CONFIG.DND5E.armorClasses.default.formula, rollData);
           ac.base = Roll.safeEval(replaced);
         }
@@ -494,7 +498,9 @@ export default class Actor5e extends Actor {
 
     // Equipped Shield
     if ( shields.length ) {
-      if ( shields.length > 1 ) this._preparationWarnings.push("DND5E.WarnMultipleShields");
+      if ( shields.length > 1 ) this._preparationWarnings.push({
+        message: game.i18n.localize("DND5E.WarnMultipleShields"), type: "warning"
+      });
       ac.shield = shields[0].system.armor.value ?? 0;
       ac.equippedShield = shields[0];
     }
