@@ -29,6 +29,7 @@ export default class SRDCompendium extends Compendium {
   async getData(options) {
     const data = await super.getData(options);
     const documents = await this.collection.getDocuments();
+    const getOrder = o => ({chapter: 0, appendix: 100}[o.flags?.dnd5e?.type] ?? 200) + (o.flags?.dnd5e?.position ?? 0);
     data.disclaimer = this.collection.get(this.constructor._SPECIAL_PAGES.disclaimer).pages.contents[0].text.content;
     data.chapters = documents.reduce((arr, entry) => {
       const type = entry.getFlag("dnd5e", "type");
@@ -37,11 +38,7 @@ export default class SRDCompendium extends Compendium {
       e.showPages = (e.pages.length > 1) && (type === "chapter");
       arr.push(e);
       return arr;
-    }, []).sort((a, b) => {
-      const positions = { chapter: 0, appendix: 100 };
-      const getOrder = o => (positions[o.flags?.dnd5e?.type] ?? 200) + (o.flags?.dnd5e?.position ?? 0);
-      return getOrder(a) - getOrder(b);
-    });
+    }, []).sort((a, b) => getOrder(a) - getOrder(b));
     // Add spells A-Z to the end of Chapter 10.
     const spellList = this.collection.get(this.constructor._SPECIAL_PAGES.spellList);
     data.chapters[9].pages.push({_id: spellList.id, name: spellList.name, entry: true});
