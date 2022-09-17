@@ -31,7 +31,7 @@ export default class ItemSheet5e extends ItemSheet {
       resizable: true,
       scrollY: [".tab.details"],
       tabs: [{navSelector: ".tabs", contentSelector: ".sheet-body", initial: "description"}],
-      dragDrop: [{dragSelector: "[data-effect-id]", dropSelector: '.effects-list'}],
+      dragDrop: [{dragSelector: "[data-effect-id]", dropSelector: ".effects-list"}],
     });
   }
 
@@ -539,7 +539,7 @@ export default class ItemSheet5e extends ItemSheet {
      * @param {object} data                  The data that has been dropped onto the sheet
      * @returns {boolean}                    Explicitly return `false` to prevent normal drop handling.
      */
-    const allowed = Hooks.call('dnd5e.dropItemSheetData', item, this, data);
+    const allowed = Hooks.call("dnd5e.dropItemSheetData", item, this, data);
     if ( allowed === false ) return;
 
     switch ( data.type ) {
@@ -559,7 +559,7 @@ export default class ItemSheet5e extends ItemSheet {
   async _onDropActiveEffect(event, data) {
     const effect = await ActiveEffect.implementation.fromDropData(data);
     if ( !this.item.isOwner || !effect ) return false;
-    if ( this.item.uuid === effect.parent.uuid || this.item.uuid === effect.origin ) return false;
+    if ( (this.item.uuid === effect.parent.uuid) || (this.item.uuid === effect.origin) ) return false;
     return ActiveEffect.create({
       ...effect.toObject(),
       origin: this.item.uuid,
