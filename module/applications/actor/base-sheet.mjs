@@ -14,6 +14,7 @@ import ActorTypeConfig from "./type-config.mjs";
 import AdvancementConfirmationDialog from "../../advancement/advancement-confirmation-dialog.mjs";
 import AdvancementManager from "../../advancement/advancement-manager.mjs";
 
+import DamageTraitSelector from "../damage-trait-selector.mjs";
 import ProficiencySelector from "../proficiency-selector.mjs";
 import PropertyAttribution from "../property-attribution.mjs";
 import TraitSelector from "../trait-selector.mjs";
@@ -378,15 +379,37 @@ export default class ActorSheet5e extends ActorSheet {
       ci: CONFIG.DND5E.conditionTypes,
       languages: CONFIG.DND5E.languages
     };
-    for ( let [t, choices] of Object.entries(map) ) {
-      const trait = traits[t];
+    const config = CONFIG.DND5E;
+    for ( const [key, choices] of Object.entries(map) ) {
+      const trait = traits[key];
       if ( !trait ) continue;
-      let values = [];
-      if ( trait.value ) values = trait.value instanceof Array ? trait.value : [trait.value];
+      let values = (trait.value ?? []) instanceof Array ? trait.value : [trait.value];
+
+      // Split physical damage types from others if bypasses is set
+      const physical = [];
+      if ( trait.bypasses?.length ) {
+        values = values.filter(t => {
+          if ( !config.physicalDamageTypes[t] ) return true;
+          physical.push(t);
+          return false;
+        });
+      }
+
+      // Fill out trait values
       trait.selected = values.reduce((obj, t) => {
         obj[t] = choices[t];
         return obj;
       }, {});
+
+      // Display bypassed damage types
+      if ( physical.length ) {
+        const damageTypesFormatter = new Intl.ListFormat(game.i18n.lang, { style: "long", type: "conjunction" });
+        const bypassFormatter = new Intl.ListFormat(game.i18n.lang, { style: "long", type: "disjunction" });
+        trait.selected.physical = game.i18n.format("DND5E.DamagePhysicalBypasses", {
+          damageTypes: damageTypesFormatter.format(physical.map(t => choices[t])),
+          bypassTypes: bypassFormatter.format(trait.bypasses.map(t => config.physicalWeaponProperties[t]))
+        });
+      }
 
       // Add custom entry
       if ( trait.custom ) trait.custom.split(";").forEach((c, i) => trait.selected[`custom${i+1}`] = c.trim());
@@ -1203,7 +1226,12 @@ export default class ActorSheet5e extends ActorSheet {
     const label = a.parentElement.querySelector("label");
     const choices = CONFIG.DND5E[a.dataset.options];
     const options = { name: a.dataset.target, title: `${label.innerText}: ${this.actor.name}`, choices };
-    return new TraitSelector(this.actor, options).render(true);
+    if ( ["di", "dr", "dv"].some(t => a.dataset.target.endsWith(`.${t}`)) ) {
+      options.bypasses = CONFIG.DND5E.physicalWeaponProperties;
+      return new DamageTraitSelector(this.actor, options).render(true);
+    } else {
+      return new TraitSelector(this.actor, options).render(true);
+    }
   }
 
   /* -------------------------------------------- */

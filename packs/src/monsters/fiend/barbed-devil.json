@@ -107,7 +107,7 @@
         "value": 110,
         "min": 0,
         "max": 110,
-        "temp": 0,
+        "temp": null,
         "tempmax": 0,
         "formula": "13d8 + 52"
       },
@@ -178,16 +178,25 @@
           "fire",
           "poison"
         ],
+        "bypasses": [],
         "custom": ""
       },
       "dr": {
         "value": [
-          "cold"
+          "bludgeoning",
+          "cold",
+          "piercing",
+          "slashing"
         ],
-        "custom": "bludgeoning, piercing, and slashing from non-magical attacks that aren't silvered"
+        "bypasses": [
+          "mgc",
+          "sil"
+        ],
+        "custom": ""
       },
       "dv": {
         "value": [],
+        "bypasses": [],
         "custom": ""
       },
       "ci": {
@@ -1318,10 +1327,10 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.0.0",
-    "coreVersion": "10.279",
+    "systemVersion": "2.0.1",
+    "coreVersion": "10.284",
     "createdTime": 1661787233211,
-    "modifiedTime": 1661878736053,
+    "modifiedTime": 1662076629776,
     "lastModifiedBy": "dnd5ebuilder0000"
   }
 }

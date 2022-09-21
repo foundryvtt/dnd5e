@@ -107,7 +107,7 @@
         "value": 78,
         "min": 0,
         "max": 78,
-        "temp": 0,
+        "temp": null,
         "tempmax": 0,
         "formula": "12d8 + 24"
       },
@@ -175,16 +175,24 @@
       "size": "med",
       "di": {
         "value": [
-          "custom"
+          "bludgeoning",
+          "piercing",
+          "slashing"
         ],
-        "custom": "bludgeoning, piercing, and slashing from nonmagical attacks not made with silvered weapons"
+        "bypasses": [
+          "mgc",
+          "sil"
+        ],
+        "custom": ""
       },
       "dr": {
         "value": [],
+        "bypasses": [],
         "custom": ""
       },
       "dv": {
         "value": [],
+        "bypasses": [],
         "custom": ""
       },
       "ci": {
@@ -193,8 +201,7 @@
       },
       "languages": {
         "value": [
-          "common",
-          "custom"
+          "common"
         ],
         "custom": "(can't speak in boar form)"
       }
@@ -1186,10 +1193,10 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.0.0",
-    "coreVersion": "10.279",
+    "systemVersion": "2.0.1",
+    "coreVersion": "10.284",
     "createdTime": 1661787232741,
-    "modifiedTime": 1661878730777,
+    "modifiedTime": 1662076919011,
     "lastModifiedBy": "dnd5ebuilder0000"
   }
 }

@@ -107,7 +107,7 @@
         "value": 676,
         "min": 0,
         "max": 676,
-        "temp": 0,
+        "temp": null,
         "tempmax": 0,
         "formula": "33d20 + 330"
       },
@@ -175,17 +175,25 @@
       "size": "grg",
       "di": {
         "value": [
+          "bludgeoning",
           "fire",
-          "poison"
+          "piercing",
+          "poison",
+          "slashing"
         ],
-        "custom": "bludgeoning, piercing, and slashing from nonmagical attacks"
+        "bypasses": [
+          "mgc"
+        ],
+        "custom": ""
       },
       "dr": {
         "value": [],
+        "bypasses": [],
         "custom": ""
       },
       "dv": {
         "value": [],
+        "bypasses": [],
         "custom": ""
       },
       "ci": {
@@ -2199,10 +2207,10 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.0.0",
-    "coreVersion": "10.279",
+    "systemVersion": "2.0.1",
+    "coreVersion": "10.284",
     "createdTime": 1661787232752,
-    "modifiedTime": 1661878730884,
+    "modifiedTime": 1662079502618,
     "lastModifiedBy": "dnd5ebuilder0000"
   }
 }
