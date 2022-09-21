@@ -410,7 +410,7 @@ export const getMigrationData = async function() {
  * @private
  */
 function _migrateActorMovement(actorData, updateData) {
-  const attrs = actorData.system.attributes || {};
+  const attrs = actorData.system?.attributes || {};
 
   // Work is needed if old data is present
   const old = actorData.type === "vehicle" ? attrs.speed : attrs.speed?.value;
@@ -440,7 +440,7 @@ function _migrateActorMovement(actorData, updateData) {
  * @private
  */
 function _migrateActorSenses(actor, updateData) {
-  const oldSenses = actor.system.traits?.senses;
+  const oldSenses = actor.system?.traits?.senses;
   if ( oldSenses === undefined ) return;
   if ( typeof oldSenses !== "string" ) return;
 
@@ -480,7 +480,7 @@ function _migrateActorSenses(actor, updateData) {
  * @private
  */
 function _migrateActorType(actor, updateData) {
-  const original = actor.system.details?.type;
+  const original = actor.system?.details?.type;
   if ( typeof original !== "string" ) return;
 
   // New default data structure
@@ -511,7 +511,7 @@ function _migrateActorType(actor, updateData) {
     actorTypeData.subtype = match.groups.subtype?.trim().titleCase() || "";
 
     // Match a swarm
-    const isNamedSwarm = actor.name.startsWith(game.i18n.localize("DND5E.CreatureSwarm"));
+    const isNamedSwarm = actor.name?.startsWith(game.i18n.localize("DND5E.CreatureSwarm"));
     if ( match.groups.size || isNamedSwarm ) {
       const sizeLc = match.groups.size ? match.groups.size.trim().toLowerCase() : "tiny";
       const sizeMatch = Object.entries(CONFIG.DND5E.actorSizes).find(([k, v]) => {
