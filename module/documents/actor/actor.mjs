@@ -1736,8 +1736,8 @@ export default class Actor5e extends Actor {
       }
 
       // Items that roll to gain charges on a new day
-      if ( recoverDailyUses && uses?.recoveryFormula && (uses?.per === "charges") ) {
-        const roll = new Roll(uses.recoveryFormula, this.getRollData());
+      if ( recoverDailyUses && uses?.recovery && (uses?.per === "charges") ) {
+        const roll = new Roll(uses.recovery, this.getRollData());
         if ( recoverLongRestUses && (game.settings.get("dnd5e", "restVariant") === "gritty") ) {
           roll.alter(7, 0, {multiplyNumeric: true});
         }
@@ -1748,7 +1748,7 @@ export default class Actor5e extends Actor {
         } catch (err) {
           ui.notifications.warn(game.i18n.format("DND5E.ItemRecoveryFormulaWarning", {
             name: item.name,
-            formula: uses.recoveryFormula
+            formula: uses.recovery
           }));
         }
 
