@@ -31,10 +31,7 @@ export default class DamageTraitSelector extends TraitSelector {
     const data = foundry.utils.expandObject(formData);
     const updateData = this._prepareUpdateData(data.choices);
     if ( !updateData ) return;
-
-    const bypassesChosen = Object.entries(data.bypasses).filter(([k, v]) => v).map(([k]) => k);
-    updateData[`${this.attribute}.bypasses`] = bypassesChosen;
-
+    updateData[`${this.attribute}.bypasses`] = Object.entries(data.bypasses).filter(([, v]) => v).map(([k]) => k);
     this.object.update(updateData);
   }
 

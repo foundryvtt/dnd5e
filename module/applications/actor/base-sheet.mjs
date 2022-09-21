@@ -380,8 +380,8 @@ export default class ActorSheet5e extends ActorSheet {
       languages: CONFIG.DND5E.languages
     };
     const config = CONFIG.DND5E;
-    for ( let [t, choices] of Object.entries(map) ) {
-      const trait = traits[t];
+    for ( const [key, choices] of Object.entries(map) ) {
+      const trait = traits[key];
       if ( !trait ) continue;
       let values = (trait.value ?? []) instanceof Array ? trait.value : [trait.value];
 
@@ -389,7 +389,7 @@ export default class ActorSheet5e extends ActorSheet {
       const physical = [];
       if ( trait.bypasses?.length ) {
         values = values.filter(t => {
-          if ( !Object.keys(config.physicalDamageTypes).includes(t) ) return true;
+          if ( !config.physicalDamageTypes[t] ) return true;
           physical.push(t);
           return false;
         });
@@ -1226,7 +1226,7 @@ export default class ActorSheet5e extends ActorSheet {
     const label = a.parentElement.querySelector("label");
     const choices = CONFIG.DND5E[a.dataset.options];
     const options = { name: a.dataset.target, title: `${label.innerText}: ${this.actor.name}`, choices };
-    if ( ["di", "dr", "dv"].find(t => a.dataset.target.endsWith(`.${t}`)) ) {
+    if ( ["di", "dr", "dv"].some(t => a.dataset.target.endsWith(`.${t}`)) ) {
       options.bypasses = CONFIG.DND5E.physicalWeaponProperties;
       return new DamageTraitSelector(this.actor, options).render(true);
     } else {
