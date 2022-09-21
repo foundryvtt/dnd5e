@@ -783,7 +783,7 @@ export default class Actor5e extends Actor {
   }
 
   /* -------------------------------------------- */
- 
+
   /**
    * Apply a certain amount of temporary hit point, but only if it's more than the actor currently has.
    * @param {number} amount       An amount of temporary hit points to set
@@ -1727,34 +1727,42 @@ export default class Actor5e extends Actor {
     if ( recoverDailyUses ) recovery.push("day");
     let updates = [];
     for ( let item of this.items ) {
-      if ( recovery.includes(item.system.uses?.per) ) {
-        updates.push({_id: item.id, "system.uses.value": item.system.uses.max});
+      const uses = item.system.uses;
+      if ( recovery.includes(uses?.per) ) {
+        updates.push({_id: item.id, "system.uses.value": uses.max});
       }
       if ( recoverLongRestUses && item.system.recharge?.value ) {
         updates.push({_id: item.id, "system.recharge.charged": true});
       }
 
       // Items that roll to gain charges on a new day
-      if ( recoverDailyUses && (item.system.uses?.per === "charges")
-           && (item.system.uses.recoveryFormula !== "")
-           && (item.system.uses.value !== item.system.uses.max) ) {
-        const roll = new CONFIG.Dice.DamageRoll(item.system.uses.recoveryFormula, this.getRollData());
-
+      if ( recoverDailyUses && uses?.recoveryFormula && (uses?.per === "charges") ) {
+        const roll = new Roll(uses.recoveryFormula, this.getRollData());
         if ( recoverLongRestUses && (game.settings.get("dnd5e", "restVariant") === "gritty") ) {
           roll.alter(7, 0, {multiplyNumeric: true});
         }
 
-        await roll.evaluate({async: true});
-        if ( roll ) {
-          const count = Math.min(item.system.uses.max - item.system.uses.value, roll.total);
-          const isMax = (item.system.uses.value + count) === item.system.uses.max;
-          const locKey = `DND5E.ItemRecoveryRoll${isMax ? "Max" : ""}`;
-          updates.push({_id: item.id, "system.uses.value": item.system.uses.value + count});
-          roll.options.flavor = game.i18n.format(locKey, { name: item.name, count });
+        let total = 0;
+        try {
+          total = (await roll.evaluate({async: true})).total;
+        } catch (err) {
+          ui.notifications.warn(game.i18n.format("DND5E.ItemRecoveryFormulaWarning", {
+            name: item.name,
+            formula: uses.recoveryFormula
+          }));
+        }
+
+        const newValue = Math.clamped(uses.value + total, 0, uses.max);
+        if ( newValue !== uses.value ) {
+          const diff = newValue - uses.value;
+          const isMax = newValue === uses.max;
+          const locKey = `DND5E.Item${diff < 0 ? "Loss" : "Recovery"}Roll${isMax ? "Max" : ""}`;
+          updates.push({_id: item.id, "system.uses.value": newValue});
           rolls.push(roll);
           await roll.toMessage({
             user: game.user.id,
-            speaker: { actor: this, alias: this.name }
+            speaker: {actor: this, alias: this.name},
+            flavor: game.i18n.format(locKey, {name: item.name, count: Math.abs(diff)})
           });
         }
       }
