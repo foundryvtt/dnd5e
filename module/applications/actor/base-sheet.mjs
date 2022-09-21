@@ -94,7 +94,7 @@ export default class ActorSheet5e extends ActorSheet {
       movement: this._getMovementSpeed(actorData.system),
       senses: this._getSenses(actorData.system),
       effects: ActiveEffect5e.prepareActiveEffectCategories(this.actor.effects),
-      warnings: this.actor._preparationWarnings,
+      warnings: foundry.utils.deepClone(this.actor._preparationWarnings),
       filters: this._filters,
       owner: this.actor.isOwner,
       limited: this.actor.limited,
@@ -111,7 +111,7 @@ export default class ActorSheet5e extends ActorSheet {
     /** @deprecated */
     Object.defineProperty(context, "data", {
       get() {
-        const msg = `You are accessing the "data" attribute within the rendering context provided by the ItemSheet5e 
+        const msg = `You are accessing the "data" attribute within the rendering context provided by the ActorSheet5e 
         class. This attribute has been deprecated in favor of "system" and will be removed in a future release`;
         foundry.utils.logCompatibilityWarning(msg, { since: "DnD5e 2.0", until: "DnD5e 2.2" });
         return context.system;
