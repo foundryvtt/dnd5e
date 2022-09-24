@@ -1,3 +1,5 @@
+import { FormulaField } from "../fields.mjs";
+
 export default class SpellConfigurationData extends foundry.abstract.DataModel {
   static defineSchema() {
     return {
@@ -8,8 +10,7 @@ export default class SpellConfigurationData extends foundry.abstract.DataModel {
         blank: true, choices: CONFIG.DND5E.spellPreparationModes, label: "DND5E.SpellPreparationMode"
       }),
       uses: new foundry.data.fields.SchemaField({
-        // TODO: Replace with FormulaField once core data models are merged
-        max: new foundry.data.fields.StringField({label: "DND5E.UsesMax"}),
+        max: new FormulaField({deterministic: true, label: "DND5E.UsesMax"}),
         per: new foundry.data.fields.StringField({
           blank: true, choices: CONFIG.DND5E.limitedUsePeriods, label: "DND5E.UsesPeriod"
         })

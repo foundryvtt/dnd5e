@@ -22,13 +22,15 @@ export default class BaseAdvancement extends foundry.abstract.DataModel {
       }),
       configuration: new AdvancementDataField(this, {required: true}),
       value: new AdvancementDataField(this, {required: true}),
-      level: new foundry.data.fields.NumberField({integer: true, initial: 1, min: 0, label: "DND5E.Level"}),
+      level: new foundry.data.fields.NumberField({
+        integer: true, initial: this.metadata?.multiLevel ? undefined : 1, min: 0, label: "DND5E.Level"
+      }),
       title: new foundry.data.fields.StringField({initial: undefined, label: "DND5E.AdvancementCustomTitle"}),
       icon: new foundry.data.fields.FilePathField({
         initial: undefined, categories: ["IMAGE"], label: "DND5E.AdvancementCustomIcon"
       }),
       classRestriction: new foundry.data.fields.StringField({
-        initial: undefined, blank: true, choices: ["primary", "secondary"], label: "DND5E.AdvancementClassRestriction"
+        initial: undefined, choices: ["primary", "secondary"], label: "DND5E.AdvancementClassRestriction"
       })
     };
   }
