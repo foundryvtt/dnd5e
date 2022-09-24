@@ -699,6 +699,7 @@ export default class Item5e extends Item {
    * @property {boolean} createMessage    Whether to automatically create a chat message (if true) or simply return
    *                                      the prepared chat message data (if false).
    * @property {object} flags             Additional flags added to the chat message.
+   * @property {Event} event              The browser event which triggered the item usage, if any.
    */
 
   /**
