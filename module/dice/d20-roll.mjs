@@ -241,8 +241,8 @@ export default class D20Roll extends Roll {
    * Handle submission of the Roll evaluation configuration Dialog
    * @param {jQuery} html            The submitted dialog content
    * @param {number} advantageMode   The chosen advantage mode
-   * @returns {D20Roll}              This damage roll.
-   * @private
+   * @returns {D20Roll}              This d20 roll.
+   * @protected
    */
   _onDialogSubmit(html, advantageMode, skillId) {
     const form = html[0].querySelector("form");

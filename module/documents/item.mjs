@@ -621,7 +621,7 @@ export default class Item5e extends Item {
 
   /**
    * Retrieve an item's minimum attack roll.
-   * @returns {number|null}  The minimum roll value that should be added to the attack roll formula.
+   * @returns {number|null}  The minimum roll value that should be applied to the attack roll formula.
    */
   getMinimumAttackRoll() {
     if ( !this.hasAttack ) return null;
