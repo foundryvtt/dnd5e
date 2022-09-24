@@ -4,8 +4,6 @@ import { simplifyBonus } from "../../utils.mjs";
 import ShortRestDialog from "../../applications/actor/short-rest.mjs";
 import LongRestDialog from "../../applications/actor/long-rest.mjs";
 import ProficiencySelector from "../../applications/proficiency-selector.mjs";
-import Item5e from "../item.mjs";
-import SelectItemsPrompt from "../../applications/select-items-prompt.mjs";
 
 /**
  * Extend the base Actor class to implement additional system-specific logic.
@@ -1672,13 +1670,6 @@ export default class Actor5e extends Actor {
     // Display a Chat Message summarizing the rest effects
     if ( chat ) await this._displayRestResultMessage(result, longRest);
 
-    if ( Hooks.events.restCompleted?.length ) foundry.utils.logCompatibilityWarning(
-      "The restCompleted hook has been deprecated in favor of dnd5e.restCompleted.",
-      { since: "DnD5e 1.6", until: "DnD5e 2.1" }
-    );
-    /** @deprecated since 1.6, targeted for removal in 2.1 */
-    Hooks.callAll("restCompleted", this, result);
-
     /**
      * A hook event that fires when the rest process is completed for an actor.
      * @function dnd5e.restCompleted
@@ -2414,115 +2405,6 @@ export default class Actor5e extends Actor {
 
   /* -------------------------------------------- */
   /*  DEPRECATED METHODS                          */
-  /* -------------------------------------------- */
-
-  /**
-   * Given a list of items to add to the Actor, optionally prompt the user for which they would like to add.
-   * @param {Item5e[]} items         The items being added to the Actor.
-   * @param {boolean} [prompt=true]  Whether or not to prompt the user.
-   * @returns {Promise<Item5e[]>}
-   * @deprecated since dnd5e 1.6, targeted for removal in 2.1
-   */
-  async addEmbeddedItems(items, prompt=true) {
-    foundry.utils.logCompatibilityWarning(
-      "Actor5e#addEmbeddedItems has been deprecated.", { since: "DnD5e 1.6", until: "DnD5e 2.1" }
-    );
-    let itemsToAdd = items;
-    if ( !items.length ) return [];
-
-    // Obtain the array of item creation data
-    let toCreate = [];
-    if (prompt) {
-      const itemIdsToAdd = await SelectItemsPrompt.create(items, {
-        hint: game.i18n.localize("DND5E.AddEmbeddedItemPromptHint")
-      });
-      for (let item of items) {
-        if (itemIdsToAdd.includes(item.id)) toCreate.push(item.toObject());
-      }
-    }
-    else toCreate = items.map(item => item.toObject());
-
-    // Create the requested items
-    if (itemsToAdd.length === 0) return [];
-    return Item5e.createDocuments(toCreate, {parent: this});
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Get a list of features to add to the Actor when a class item is updated.
-   * Optionally prompt the user for which they would like to add.
-   * @param {object} [options]
-   * @param {string} [options.classIdentifier] Identifier slug of the class if it has been changed.
-   * @param {string} [options.subclassName]    Name of the selected subclass if it has been changed.
-   * @param {number} [options.level]           New class level if it has been changed.
-   * @returns {Promise<Item5e[]>}              Any new items that should be added to the actor.
-   * @deprecated since dnd5e 1.6, targeted for removal in 2.1
-   */
-  async getClassFeatures({classIdentifier, subclassName, level}={}) {
-    foundry.utils.logCompatibilityWarning(
-      "Actor5e#getClassFeatures has been deprecated. Please refer to the Advancement API for its replacement.",
-      { since: "DnD5e 1.6", until: "DnD5e 2.1" }
-    );
-    const existing = new Set(this.items.map(i => i.name));
-    const features = await Actor5e.loadClassFeatures({classIdentifier, subclassName, level});
-    return features.filter(f => !existing.has(f.name)) || [];
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Return the features which a character is awarded for each class level.
-   * @param {object} [options]
-   * @param {string} [options.classIdentifier] Identifier slug of the class being added or updated.
-   * @param {string} [options.subclassName]    Name of the subclass of the class being added, if any.
-   * @param {number} [options.level]           The number of levels in the added class.
-   * @param {number} [options.priorLevel]      The previous level of the added class.
-   * @returns {Promise<Item5e[]>}              Items that should be added based on the changes made.
-   * @deprecated since dnd5e 1.6, targeted for removal in 2.1
-   */
-  static async loadClassFeatures({classIdentifier="", subclassName="", level=1, priorLevel=0}={}) {
-    foundry.utils.logCompatibilityWarning(
-      "Actor5e#loadClassFeatures has been deprecated. Please refer to the Advancement API for its replacement.",
-      { since: "DnD5e 1.6", until: "DnD5e 2.1" }
-    );
-    subclassName = subclassName.slugify();
-
-    // Get the configuration of features which may be added
-    const clsConfig = CONFIG.DND5E.classFeatures[classIdentifier];
-    if (!clsConfig) return [];
-
-    // Acquire class features
-    let ids = [];
-    for ( let [l, f] of Object.entries(clsConfig.features || {}) ) {
-      l = parseInt(l);
-      if ( (l <= level) && (l > priorLevel) ) ids = ids.concat(f);
-    }
-
-    // Acquire subclass features
-    const subConfig = clsConfig.subclasses[subclassName] || {};
-    for ( let [l, f] of Object.entries(subConfig.features || {}) ) {
-      l = parseInt(l);
-      if ( (l <= level) && (l > priorLevel) ) ids = ids.concat(f);
-    }
-
-    // Load item data for all identified features
-    const features = [];
-    for ( let id of ids ) {
-      features.push(await fromUuid(id));
-    }
-
-    // Class spells should always be prepared
-    for ( const feature of features ) {
-      if ( feature.type === "spell" ) {
-        const preparation = feature.system.preparation;
-        preparation.mode = "always";
-        preparation.prepared = true;
-      }
-    }
-    return features;
-  }
-
   /* -------------------------------------------- */
 
   /**
