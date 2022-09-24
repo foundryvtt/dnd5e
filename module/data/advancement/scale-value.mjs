@@ -1,23 +1,71 @@
-import { IdentifierField } from "../fields.mjs";
+import { IdentifierField, MappingField } from "../fields.mjs";
 
+/**
+ * Data model for the Scale Value advancement type.
+ *
+ * @property {string} identifier        Identifier used to select this scale value in roll formulas.
+ * @property {string} type              Type of data represented by this scale value.
+ * @property {object} [distance]
+ * @property {string} [distance.units]  If distance type is selected, the units each value uses.
+ * @property {Object<string, *>} scale  Scale values for each level. Value format is determined by type.
+ */
 export class ScaleValueConfigurationData extends foundry.abstract.DataModel {
   static defineSchema() {
     return {
       identifier: new IdentifierField({required: true, label: "DND5E.Identifier"}),
       type: new foundry.data.fields.StringField({
-        required: true, initial: "string", label: "DND5E.AdvancementScaleValueTypeLabel"
+        required: true, initial: "string", choices: TYPES, label: "DND5E.AdvancementScaleValueTypeLabel"
       }),
       distance: new foundry.data.fields.SchemaField({
         units: new foundry.data.fields.StringField({required: true, label: "DND5E.MovementUnits"})
       }),
-      // TODO: Switch to MappingField with custom type with #1688
-      scale: new foundry.data.fields.ObjectField({required: true})
+      scale: new MappingField(new ScaleValueEntryField(), {required: true})
     };
   }
 }
 
 
+/**
+ * Data field that automatically selects the appropriate ScaleValueType based on the selected type.
+ */
+export class ScaleValueEntryField extends foundry.data.fields.ObjectField {
+  /** @override */
+  _cleanType(value, options) {
+    if ( !(typeof value === "object") ) value = {};
+
+    // Use a defined DataModel
+    const cls = TYPES[options.source?.type];
+    if ( cls ) return cls.cleanData(value, options);
+
+    return value;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  initialize(value, model) {
+    const cls = TYPES[model.type];
+    if ( !value || !cls ) return value;
+    return new cls(value, {parent: model});
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  toObject(value) {
+    return value.toObject(false);
+  }
+}
+
+
+/**
+ * Base scale value data type that stores generic string values.
+ *
+ * @property {string} value  String value.
+ */
 export class ScaleValueType extends foundry.abstract.DataModel {
+
+  /** @inheritdoc */
   static defineSchema() {
     return {
       value: new foundry.data.fields.StringField({required: true})
@@ -54,8 +102,8 @@ export class ScaleValueType extends foundry.abstract.DataModel {
    * @param {ScaleValueType} original  Original type to attempt to convert.
    * @returns {object|null}
    */
-  static converted(original) {
-    return { value: original.prepared };
+  static convertFrom(original) {
+    return { value: original.formula };
   }
 
   /* -------------------------------------------- */
@@ -64,7 +112,7 @@ export class ScaleValueType extends foundry.abstract.DataModel {
    * This scale value prepared to be used in roll formulas.
    * @type {string|null}
    */
-  get prepared() { return this.value; }
+  get formula() { return this.value; }
 
   /* -------------------------------------------- */
 
@@ -72,7 +120,7 @@ export class ScaleValueType extends foundry.abstract.DataModel {
    * This scale value formatted for display.
    * @type {string|null}
    */
-  get formatted() { return this.prepared; }
+  get display() { return this.formula; }
 
   /* -------------------------------------------- */
 
@@ -81,12 +129,19 @@ export class ScaleValueType extends foundry.abstract.DataModel {
    * @returns {string}
    */
   toString() {
-    return this.prepared;
+    return this.formula;
   }
 }
 
 
+/**
+ * Scale value data type that stores numeric values.
+ *
+ * @property {number} value  Numeric value.
+ */
 export class ScaleValueTypeNumber extends ScaleValueType {
+
+  /** @inheritdoc */
   static defineSchema() {
     return {
       value: new foundry.data.fields.NumberField({required: true})
@@ -95,6 +150,7 @@ export class ScaleValueTypeNumber extends ScaleValueType {
 
   /* -------------------------------------------- */
 
+  /** @inheritdoc */
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
       label: "DND5E.AdvancementScaleValueTypeNumber",
@@ -105,15 +161,23 @@ export class ScaleValueTypeNumber extends ScaleValueType {
 
   /* -------------------------------------------- */
 
-  static converted(original) {
-    const value = Number(original.prepared);
-    if ( value.isNaN ) return null;
+  /** @inheritdoc */
+  static convertFrom(original) {
+    const value = Number(original.formula);
+    if ( Number.isNaN(value) ) return null;
     return { value };
   }
 }
 
 
+/**
+ * Scale value data type that stores challenge ratings.
+ *
+ * @property {number} value  CR value.
+ */
 export class ScaleValueTypeCR extends ScaleValueTypeNumber {
+
+  /** @inheritdoc */
   static defineSchema() {
     return {
       value: new foundry.data.fields.NumberField({required: true, min: 0})
@@ -123,6 +187,7 @@ export class ScaleValueTypeCR extends ScaleValueTypeNumber {
 
   /* -------------------------------------------- */
 
+  /** @inheritdoc */
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
       label: "DND5E.AdvancementScaleValueTypeCR",
@@ -132,18 +197,27 @@ export class ScaleValueTypeCR extends ScaleValueTypeNumber {
 
   /* -------------------------------------------- */
 
-  get formatted() {
-    switch (this.value) {
+  /** @inheritdoc */
+  get display() {
+    switch ( this.value ) {
       case 0.125: return "&frac18;";
       case 0.25: return "&frac14;";
       case 0.5: return "&frac12;";
-      default: return super.formatted;
+      default: return super.display;
     }
   }
 }
 
 
+/**
+ * Scale value data type that stores dice values.
+ *
+ * @property {number} n    Number of dice.
+ * @property {number} die  Die face.
+ */
 export class ScaleValueTypeDice extends ScaleValueType {
+
+  /** @inheritdoc */
   static defineSchema() {
     return {
       n: new foundry.data.fields.NumberField({nullable: true, integer: true, positive: true}),
@@ -153,6 +227,7 @@ export class ScaleValueTypeDice extends ScaleValueType {
 
   /* -------------------------------------------- */
 
+  /** @inheritdoc */
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
       label: "DND5E.AdvancementScaleValueTypeDice",
@@ -170,8 +245,9 @@ export class ScaleValueTypeDice extends ScaleValueType {
 
   /* -------------------------------------------- */
 
-  static converted(original) {
-    const split = (original.prepared ?? "").split("d");
+  /** @inheritdoc */
+  static convertFrom(original) {
+    const split = (original.formula ?? "").split("d");
     if ( !split[1] ) return null;
     const n = Number(split[0]) || null;
     const die = Number(split[1]);
@@ -181,7 +257,8 @@ export class ScaleValueTypeDice extends ScaleValueType {
 
   /* -------------------------------------------- */
 
-  get prepared() {
+  /** @inheritdoc */
+  get formula() {
     if ( !this.die ) return null;
     return `${this.n ?? ""}${this.dice}`;
   }
@@ -207,7 +284,14 @@ export class ScaleValueTypeDice extends ScaleValueType {
 }
 
 
+/**
+ * Scale value data type that stores distance values.
+ *
+ * @property {number} value  Numeric value.
+ */
 export class ScaleValueTypeDistance extends ScaleValueTypeNumber {
+
+  /** @inheritdoc */
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
       label: "DND5E.AdvancementScaleValueTypeDistance",
@@ -217,7 +301,21 @@ export class ScaleValueTypeDistance extends ScaleValueTypeNumber {
 
   /* -------------------------------------------- */
 
-  get formatted() {
+  /** @inheritdoc */
+  get display() {
     return `${this.value} ${CONFIG.DND5E.movementUnits[this.parent.configuration.distance?.units ?? "ft"]}`;
   }
 }
+
+
+/**
+ * The available types of scaling value.
+ * @enum {ScaleValueType}
+ */
+export const TYPES = {
+  string: ScaleValueType,
+  number: ScaleValueTypeNumber,
+  cr: ScaleValueTypeCR,
+  dice: ScaleValueTypeDice,
+  distance: ScaleValueTypeDistance
+};
