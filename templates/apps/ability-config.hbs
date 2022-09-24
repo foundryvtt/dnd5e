@@ -13,7 +13,7 @@
   </div>
   <div class="form-group">
     <label>{{localize "DND5E.SaveMinimum"}}</label>
-    <input name="system.abilities.{{abilityId}}.bonuses.saveMinimum" type="number" value="{{ability.bonuses.saveMinimum}}">
+    {{numberInput ability.bonuses.saveMinimum name=(concat "system.abilities." abilityId ".bonuses.saveMinimum") step=1}}
   </div>
   <hr>
   <div class="form-group">
