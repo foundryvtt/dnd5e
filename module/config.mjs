@@ -1,4 +1,3 @@
-import ClassFeatures from "./advancement/class-features.mjs";
 import * as advancement from "./advancement/types/_module.mjs";
 import { preLocalize } from "./utils.mjs";
 
@@ -1419,13 +1418,6 @@ DND5E.CR_EXP_LEVELS = [
   10, 200, 450, 700, 1100, 1800, 2300, 2900, 3900, 5000, 5900, 7200, 8400, 10000, 11500, 13000, 15000, 18000,
   20000, 22000, 25000, 33000, 41000, 50000, 62000, 75000, 90000, 105000, 120000, 135000, 155000
 ];
-
-/**
- * Character features automatically granted by classes & subclasses at certain levels.
- * @type {object}
- * @deprecated since 1.6.0, targeted for removal in 2.1
- */
-DND5E.classFeatures = ClassFeatures;
 
 /**
  * Special character flags.

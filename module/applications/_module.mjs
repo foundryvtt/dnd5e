@@ -6,4 +6,3 @@ export {default as DamageTraitSelector} from "./damage-trait-selector.mjs";
 export {default as ProficiencySelector} from "./proficiency-selector.mjs";
 export {default as PropertyAttribution} from "./property-attribution.mjs";
 export {default as TraitSelector} from "./trait-selector.mjs";
-export {default as SelectItemsPrompt} from "./select-items-prompt.mjs";
