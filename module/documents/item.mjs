@@ -623,7 +623,7 @@ export default class Item5e extends Item {
    * Retrieve an item's minimum attack roll.
    * @returns {number|null}  The minimum roll value that should be added to the attack roll formula.
    */
-  getMinimumRoll() {
+  getMinimumAttackRoll() {
     if ( !this.hasAttack ) return null;
     return this.actor.flags.dnd5e?.minimumAttackRoll ?? null;
   }
@@ -1290,7 +1290,7 @@ export default class Item5e extends Item {
     }
 
     // Get minimum roll
-    const minimum = this.getMinimumRoll();
+    const minimum = this.getMinimumAttackRoll();
 
     // Flags
     const elvenAccuracy = (flags.elvenAccuracy
@@ -1685,7 +1685,7 @@ export default class Item5e extends Item {
     }
 
     // Add minimum roll
-    const minimum = getProperty(rollData, `abilities.${abl}.bonuses.checkMinimum`);
+    const minimum = getProperty(rollData, `abilities.${abl}.minimum.check`);
 
     // Compose the roll data
     const rollConfig = foundry.utils.mergeObject({

@@ -266,7 +266,7 @@ export default class D20Roll extends Roll {
         }
         // Update the minimum roll
         if ( t.modifiers ){
-          const minimum = Math.max(abl.bonuses?.checkMinimum || 0, this.data.skills[skillId]?.bonuses?.minimum || 0);
+          const minimum = Math.max(abl.minimum?.check || 0, this.data.skills[skillId]?.minimum || 0);
           this.options.minimum = minimum;
         }
         return t;

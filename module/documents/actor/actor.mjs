@@ -816,7 +816,7 @@ export default class Actor5e extends Actor {
     }
 
     // Calculate skill minimum roll
-    const skillMinimum = Math.max(skl.bonuses?.minimum ?? 0, abl?.bonuses?.checkMinimum ?? 0) || false;
+    const skillMinimum = Math.max(skl?.minimum ?? 0, abl?.minimum?.check ?? 0) || false;
 
     // Add provided extra roll parts now because they will get clobbered by mergeObject below
     if ( options.parts?.length > 0 ) parts.push(...options.parts);
@@ -936,7 +936,7 @@ export default class Actor5e extends Actor {
     if ( options.parts?.length > 0 ) parts.push(...options.parts);
 
     // Add Check Minimum
-    const abilityCheckMinimum = abl?.bonuses?.checkMinimum || false;
+    const abilityCheckMinimum = abl?.minimum?.check || false;
 
     // Roll and return
     const flavor = game.i18n.format("DND5E.AbilityPromptTitle", {ability: label});
@@ -1021,7 +1021,7 @@ export default class Actor5e extends Actor {
     // Add provided extra roll parts now because they will get clobbered by mergeObject below
     if ( options.parts?.length > 0 ) parts.push(...options.parts);
 
-    const abilitySaveMinimum = abl?.bonuses?.saveMinimum || false;
+    const abilitySaveMinimum = abl?.minimum?.save || false;
 
     // Roll and return
     const flavor = game.i18n.format("DND5E.SavePromptTitle", {ability: label});
