@@ -1804,7 +1804,6 @@ export default class Item5e extends Item {
       case "damage":
       case "versatile":
         await item.rollDamage({
-          // critical: event.altKey,
           event: event,
           spellLevel: spellLevel,
           versatile: action === "versatile"
