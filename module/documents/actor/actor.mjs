@@ -1779,18 +1779,25 @@ export default class Actor5e extends Actor {
    * carried by an Actor.
    * @returns {Promise<Actor5e>}
    */
+
   convertCurrency() {
     const curr = foundry.utils.deepClone(this.system.currency);
     const conversion = Object.entries(CONFIG.DND5E.currencies);
-    conversion.reverse();
-    for ( let [c, data] of conversion ) {
-      const t = data.conversion;
-      if ( !t ) continue;
-      let change = Math.floor(curr[c] / t.each);
-      curr[c] -= (change * t.each);
-      curr[t.into] += change;
+    conversion.sort((a, b) => a[1].conversion-b[1].conversion);
+    var change = 0
+    for ( let [c, data] of conversion) {
+      const rate = data.conversion
+      if ( !rate ) continue
+      change = change + curr[c] / rate
+      }
+    for ( let [c, data] of conversion) {
+      const rate = data.conversion;
+      if ( !rate ) continue;
+      let amt = (change * rate).toFixed(8);
+      curr[c] = Math.floor(amt);
+      change = (change - (Math.floor(amt) / rate)) ;
     }
-    return this.update({"system.currency": curr});
+    return this.update({"data.currency": curr});
   }
 
   /* -------------------------------------------- */
