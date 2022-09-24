@@ -16,7 +16,7 @@
   </div>
   <div class="form-group">
     <label>{{localize "DND5E.SkillMinimumRoll"}}</label>
-    <input name="system.skills.{{skillId}}.bonuses.minimum" type="number" value="{{skill.bonuses.minimum}}">
+    {{numberInput skill.minimum name=(concat "system.skills." skillId ".minimum") step=1}}
   </div>
   <hr>
   <div class="form-group">
