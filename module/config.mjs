@@ -14,7 +14,6 @@ ______      ______ _____ _____
 |___/ \\___/\\/___/ \\____/\\____/
 _______________________________`;
 
-
 /**
  * The set of Ability Scores used within the system.
  * @enum {string}
@@ -627,27 +626,28 @@ preLocalize("consumableTypes", { sort: true });
 DND5E.currencies = {
   pp: {
     label: "DND5E.CurrencyPP",
-    abbreviation: "DND5E.CurrencyAbbrPP"
+    abbreviation: "DND5E.CurrencyAbbrPP",
+    conversion: 0.1
   },
   gp: {
     label: "DND5E.CurrencyGP",
     abbreviation: "DND5E.CurrencyAbbrGP",
-    conversion: {into: "pp", each: 10}
+    conversion: 1
   },
   ep: {
     label: "DND5E.CurrencyEP",
     abbreviation: "DND5E.CurrencyAbbrEP",
-    conversion: {into: "gp", each: 2}
+    conversion: 2
   },
   sp: {
     label: "DND5E.CurrencySP",
     abbreviation: "DND5E.CurrencyAbbrSP",
-    conversion: {into: "ep", each: 5}
+    conversion: 10
   },
   cp: {
     label: "DND5E.CurrencyCP",
     abbreviation: "DND5E.CurrencyAbbrCP",
-    conversion: {into: "sp", each: 10}
+    conversion: 100
   }
 };
 preLocalize("currencies", { keys: ["label", "abbreviation"] });
