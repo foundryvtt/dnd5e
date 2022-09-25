@@ -1,0 +1,39 @@
+<form class="{{cssClass}} flexcol drop-target" autocomplete="off">
+  {{> journalEntryPageHeader}}
+
+  <div class="form-group">
+    <label>{{localize "JOURNALENTRYPAGE.DND5E.SpellList.Type"}}</label>
+    <div class="form-fields">
+      <select name="system.type">
+        {{selectOptions CONFIG.spellListTypes selected=system.type}}
+      </select>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label>{{localize "DND5E.Identifier"}}</label>
+    <div class="form-fields">
+      <input type="text" name="system.identifier" value="{{system.identifier}}">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label>{{localize "DND5E.Description"}}</label>
+  </div>
+
+  <div class="form-group">
+    <label>{{localize "DND5E.ItemTypeSpellPl"}}</label>
+    <div class="form-fields">
+      <ol class="items-list">
+        {{#each spells}}
+          <li class="item flexrow" data-item-uuid="{{this.uuid}}">
+            <div class="item-name">{{{dnd5e-linkForUuid this.uuid}}}</div>
+            <div class="item-controls flexrow">
+              <a class="item-control item-delete" title="{{localize 'DND5E.ItemDelete'}}"><i class="fas fa-trash"></i></a>
+            </div>
+          </li>
+        {{/each}}
+      </ol>
+    </div>
+  </div>
+</form>

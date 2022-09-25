@@ -4,15 +4,13 @@
 </header>
 {{/if}}
 
-{{log this}}
-
 {{{description}}}
 
 {{#each spellLevels}}
-  <h{{@root.title.level2}}>{{this.header}}</h{{@root.title.level2}}>
+  <h{{@root.title.level3}}>{{this.header}}</h{{@root.title.level3}}>
   <ul>
   {{#each this.spells}}
-    <li>{{this.document.name}}</li>
+    <li>{{{dnd5e-linkForUuid this.uuid}}}</li>
   {{/each}}
   </ul>
 {{/each}}

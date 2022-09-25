@@ -102,6 +102,36 @@
   }
 }
 
+.class-journal, .spellList {
+  form {
+    .form-group {
+      align-items: start;
+    }
+
+    button.launch-text-editor {
+      flex: 0.35;
+    }
+
+    .items-list {
+      margin-block-end: 1em;
+      padding-inline-start: 0;
+
+      .item {
+        align-items: center;
+        padding-block: 0.35em 0;
+        padding-inline: 2px;
+  
+        .item-controls {
+          flex: 0;
+        }
+      }
+      .item:not(:last-of-type) {
+        border-bottom: 1px solid var(--color-border-light-secondary);
+      }
+    }
+  }
+}
+
 .journal-entry-page.class, .class-journal {
   h4 {
     border-block-end: 1px solid var(--color-underline-header);
@@ -117,10 +147,16 @@
       text-align: center;
     }
   }
+}
 
-  form {
-    .form-group {
-      align-items: start;
+.journal-entry-page.spellList {
+  ul {
+    column-count: 2;
+    padding-inline-start: 0;
+
+    li {
+      list-style: none;
+      line-height: 1.8em;
     }
 
     button.launch-text-editor {

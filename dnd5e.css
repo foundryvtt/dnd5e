@@ -2224,6 +2224,33 @@ h5 {
 .journal-editor .prosemirror .editor-container {
   overflow-y: auto;
 }
+.class-journal form .form-group,
+.spellList form .form-group {
+  align-items: start;
+}
+.class-journal form button.launch-text-editor,
+.spellList form button.launch-text-editor {
+  flex: 0.35;
+}
+.class-journal form .items-list,
+.spellList form .items-list {
+  margin-block-end: 1em;
+  padding-inline-start: 0;
+}
+.class-journal form .items-list .item,
+.spellList form .items-list .item {
+  align-items: center;
+  padding-block: 0.35em 0;
+  padding-inline: 2px;
+}
+.class-journal form .items-list .item .item-controls,
+.spellList form .items-list .item .item-controls {
+  flex: 0;
+}
+.class-journal form .items-list .item:not(:last-of-type),
+.spellList form .items-list .item:not(:last-of-type) {
+  border-bottom: 1px solid var(--color-border-light-secondary);
+}
 .journal-entry-page.class h4,
 .class-journal h4 {
   border-block-end: 1px solid var(--color-underline-header);
@@ -2237,27 +2264,13 @@ h5 {
 .class-journal table td:is(.level, .prof, .scale, .spell-slots) {
   text-align: center;
 }
-.journal-entry-page.class form .form-group,
-.class-journal form .form-group {
-  align-items: start;
+.journal-entry-page.spellList ul {
+  column-count: 2;
+  padding-inline-start: 0;
 }
-.journal-entry-page.class form button.launch-text-editor,
-.class-journal form button.launch-text-editor {
-  flex: 0.35;
-}
-.journal-entry-page.class form .items-list .item,
-.class-journal form .items-list .item {
-  align-items: center;
-  padding-block: 0.35em 0;
-  padding-inline: 2px;
-}
-.journal-entry-page.class form .items-list .item .item-controls,
-.class-journal form .items-list .item .item-controls {
-  flex: 0;
-}
-.journal-entry-page.class form .items-list .item:not(:last-of-type),
-.class-journal form .items-list .item:not(:last-of-type) {
-  border-bottom: 1px solid var(--color-border-light-secondary);
+.journal-entry-page.spellList ul li {
+  list-style: none;
+  line-height: 1.8em;
 }
 /* ----------------------------------------- */
 /*  Chat Cards                               */
