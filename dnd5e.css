@@ -2232,6 +2232,11 @@ h5 {
 .spellList form button.launch-text-editor {
   flex: 0.35;
 }
+.class-journal form .editor,
+.spellList form .editor {
+  flex: none;
+  min-height: 15em;
+}
 .class-journal form .items-list,
 .spellList form .items-list {
   margin-block-end: 1em;

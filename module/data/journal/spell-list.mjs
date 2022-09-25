@@ -8,11 +8,11 @@ export default class SpellListJournalPageData extends foundry.abstract.DataModel
       }),
       identifier: new IdentifierField({label: "DND5E.Identifier"}),
       description: new foundry.data.fields.SchemaField({
-        value: new foundry.data.fields.HTMLField()
+        value: new foundry.data.fields.HTMLField({label: "DND5E.Description"})
       }),
       spells: new foundry.data.fields.SetField(new foundry.data.fields.SchemaField({
-        uuid: new foundry.data.fields.StringField({label: ""})
-      }), {label: ""})
+        uuid: new foundry.data.fields.StringField()
+      }), {label: "DND5E.ItemTypeSpellPl"})
     };
   }
 }

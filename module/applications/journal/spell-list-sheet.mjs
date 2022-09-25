@@ -41,9 +41,12 @@ export default class JournalSpellListPageSheet extends JournalPageSheet {
       level3: context.data.title.level + 2,
       level4: context.data.title.level + 3
     };
-    context.spellLevels = {};
-    context.spells = [];
 
+    context.description = await TextEditor.enrichHTML(context.system.description.value, {
+      async: true, relativeTo: this
+    });
+
+    context.spellLevels = {};
     context.spells = await Promise.all(context.system.spells.map(async s => {
       return { ...s, document: await fromUuid(s.uuid) };
     }));
@@ -85,12 +88,13 @@ export default class JournalSpellListPageSheet extends JournalPageSheet {
    * @param {Event} event  This triggering click event.
    * @returns {JournalSpellListPageSheet}
    */
-  _onDeleteItem(event) {
+  async _onDeleteItem(event) {
     event.preventDefault();
     const uuidToDelete = event.currentTarget.closest("[data-item-uuid]")?.dataset.itemUuid;
     if ( !uuidToDelete ) return this;
     const spellSet = this.document.system.spells.filter(s => s.uuid !== uuidToDelete);
-    return this.document.update({"system.spells": Array.from(spellSet)});
+    await this.document.update({"system.spells": Array.from(spellSet)});
+    this.render();
   }
 
   /* -------------------------------------------- */
@@ -98,15 +102,26 @@ export default class JournalSpellListPageSheet extends JournalPageSheet {
   /** @inheritdoc */
   async _onDrop(event) {
     const data = TextEditor.getDragEventData(event);
-    if ( !data || (data.type !== "Item") ) return false;
+    let spells;
+    switch (data?.type) {
+      case "Folder":
+        if ( data.documentName !== "Item" ) return false;
+        spells = (await Folder.implementation.fromDropData(data))?.contents;
+        break;
+      case "Item":
+        spells = [await Item.implementation.fromDropData(data)];
+        break;
+      default: return false;
+    }
 
-    const item = await Item.implementation.fromDropData(data);
-    if ( item.type !== "spell" ) return false;
+    const spellCollection = this.document.system.spells;
+    const spellUuids = new Set(spellCollection.map(s => s.uuid));
+    spells = spells.filter(item => (item.type === "spell") && !spellUuids.has(item.uuid));
+    if ( !spells.length ) return false;
 
-    const spellSet = this.document.system.spells;
-    if ( spellSet.find(s => s.uuid === item.uuid) ) return false;
-    spellSet.add({uuid: item.uuid});
-    this.document.update({"system.spells": Array.from(spellSet)});
-    this.render(); // TODO: Shouldn't need to explicitly render this
+    spells.forEach(i => spellCollection.add({uuid: i.uuid}));
+    await this.document.update({"system.spells": Array.from(spellCollection)});
+    this.render();
   }
+
 }
