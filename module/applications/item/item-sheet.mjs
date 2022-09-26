@@ -396,6 +396,19 @@ export default class ItemSheet5e extends ItemSheet {
       }
     }
 
+    // Check duration value formula
+    const duration = formData.system?.duration;
+    if ( duration?.value ) {
+      const durationRoll = new Roll(duration.value);
+      if ( !durationRoll.isDeterministic ) {
+        duration.value = this.item._source.system.duration.value;
+        this.form.querySelector("input[name='system.duration.value']").value = duration.value;
+        return ui.notifications.error(game.i18n.format("DND5E.FormulaCannotContainDiceError", {
+          name: game.i18n.localize("DND5E.Duration")
+        }));
+      }
+    }
+
     // Check class identifier
     if ( formData.system?.identifier && !dnd5e.utils.validators.isValidIdentifier(formData.system.identifier) ) {
       formData.system.identifier = this.item._source.system.identifier;

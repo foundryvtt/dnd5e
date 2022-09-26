@@ -393,11 +393,6 @@ export default class Item5e extends Item {
     }
     this.labels.range = [rng.value, rng.long ? `/ ${rng.long}` : null, C.distanceUnits[rng.units]].filterJoin(" ");
 
-    // Duration Label
-    let dur = this.system.duration ?? {};
-    if ( ["inst", "perm"].includes(dur.units) ) dur.value = null;
-    this.labels.duration = [dur.value, C.timePeriods[dur.units]].filterJoin(" ");
-
     // Recharge Label
     let chg = this.system.recharge ?? {};
     const chgSuffix = `${chg.value}${parseInt(chg.value) < 6 ? "+" : ""}`;
@@ -652,27 +647,28 @@ export default class Item5e extends Item {
    * duration value is not numeric, calculate based on actor data.
    */
   prepareDurationValue() {
-    const data = this.data.data;
-    if ( !data.duration?.value ) return;
-    let value = data.duration.value;
+    const duration = this.system.duration;
+    if ( !duration?.value ) return;
+    let value = duration.value;
 
     // If this is an owned item and the value is not numeric, we need to calculate it
     if ( this.isOwned && !Number.isNumeric(value) ) {
-      if ( this.actor.data === undefined ) return;
+      const property = game.i18n.localize("DND5E.Duration");
       try {
-        value = Roll.replaceFormulaData(value, this.getRollData(), {missing: 0, warn: true});
-        value = Roll.safeEval(value);
+        const rollData = this.actor.getRollData({ deterministic: true });
+        value = Roll.safeEval(this.replaceFormulaData(value, rollData, { property }));
       } catch(e) {
-        console.error("Problem preparing duration value for", this.data.name, e);
+        const message = game.i18n.format("DND5E.FormulaMalformedError", { property, name: this.name });
+        this.actor._preparationWarnings.push({ message, link: this.uuid, type: "error" });
+        console.error(message, e);
         return;
       }
     }
-    data.duration.value = Number(value);
+    duration.value = Number(value);
 
     // Now that duration value is a number, set the label
-    let dur = data.duration || {};
-    if ( ["inst", "perm"].includes(dur.units) ) dur.value = null;
-    this.labels.duration = [dur.value, CONFIG.DND5E.timePeriods[dur.units]].filterJoin(" ");
+    if ( ["inst", "perm"].includes(duration.units) ) duration.value = null;
+    this.labels.duration = [duration.value, CONFIG.DND5E.timePeriods[duration.units]].filterJoin(" ");
   }
 
   /* -------------------------------------------- */
