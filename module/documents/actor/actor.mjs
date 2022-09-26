@@ -936,7 +936,7 @@ export default class Actor5e extends Actor {
     if ( options.parts?.length > 0 ) parts.push(...options.parts);
 
     // Add Check Minimum
-    const abilityCheckMinimum = abl?.minimum?.check || false;
+    const abilityCheckMinimum = abl?.minimum?.check;
 
     // Roll and return
     const flavor = game.i18n.format("DND5E.AbilityPromptTitle", {ability: label});
@@ -1021,7 +1021,7 @@ export default class Actor5e extends Actor {
     // Add provided extra roll parts now because they will get clobbered by mergeObject below
     if ( options.parts?.length > 0 ) parts.push(...options.parts);
 
-    const abilitySaveMinimum = abl?.minimum?.save || false;
+    const abilitySaveMinimum = abl?.minimum?.save;
 
     // Roll and return
     const flavor = game.i18n.format("DND5E.SavePromptTitle", {ability: label});
