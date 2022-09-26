@@ -1793,9 +1793,9 @@ export default class Actor5e extends Actor {
     for ( let [c, data] of conversion) {
       const rate = data.conversion;
       if ( !rate ) continue;
-      let amt = (change * rate).toFixed(8);
-      curr[c] = Math.floor(amt);
-      change = (change - (Math.floor(amt) / rate)) ;
+      let amt = Math.floor(change * rate);
+      curr[c] = amt;
+      change = (change - amt / rate);
     }
     return this.update({"data.currency": curr});
   }
