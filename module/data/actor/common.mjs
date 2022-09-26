@@ -236,8 +236,8 @@ export class DetailsData extends foundry.abstract.DataModel {
   static defineSchema() {
     return {
       biography: new foundry.data.fields.SchemaField({
-        value: new foundry.data.fields.StringField({blank: true, label: "DND5E.Biography"}),
-        public: new foundry.data.fields.StringField({blank: true, label: "DND5E.BiographyPublic"})
+        value: new foundry.data.fields.HTMLField({blank: true, label: "DND5E.Biography"}),
+        public: new foundry.data.fields.HTMLField({blank: true, label: "DND5E.BiographyPublic"})
       }, {label: "DND5E.Biography"})
     };
   }
@@ -295,7 +295,7 @@ export class TraitsData extends foundry.abstract.DataModel {
 
 /**
  * An embedded data structure for currently held currencies.
- * @see DetailsData
+ * @see CommonData
  *
  * @property {number} pp  Platinum pieces.
  * @property {number} gp  Gold pieces.

@@ -4,10 +4,10 @@ import * as common from "./common.mjs";
 /**
  * Data definition for creature data template used by Characters & NPCs.
  *
- * @property {AttributeData} attributes          Extended attributes with senses and spellcasting.
- * @property {DetailsData} details               Extended details with race and alignment.
+ * @property {CreatureAttributeData} attributes  Extended attributes with senses and spellcasting.
+ * @property {CreatureDetailsData} details       Extended details with race and alignment.
  * @property {Object<string, SkillData>} skills  Creature's skills.
- * @property {TraitsData} traits                 Extended traits with languages.
+ * @property {CreatureTraitsData} traits         Extended traits with languages.
  * @property {Object<string, SpellData>} spells  Creature's spell levels with slots.
  * @property {BonusesData} bonuses               Global bonuses to various rolls.
  */
@@ -15,12 +15,12 @@ export class CreatureData extends common.CommonData {
   static defineSchema() {
     return {
       ...super.defineSchema(),
-      attributes: new foundry.data.fields.EmbeddedDataField(AttributeData, {label: "DND5E.Attributes"}),
-      details: new foundry.data.fields.EmbeddedDataField(DetailsData, {label: "DND5E.Details"}),
+      attributes: new foundry.data.fields.EmbeddedDataField(CreatureAttributeData, {label: "DND5E.Attributes"}),
+      details: new foundry.data.fields.EmbeddedDataField(CreatureDetailsData, {label: "DND5E.Details"}),
       skills: new MappingField(new foundry.data.fields.EmbeddedDataField(SkillData), {
         initialKeys: CONFIG.DND5E.skills, label: "DND5E.Skills"
       }),
-      traits: new foundry.data.fields.EmbeddedDataField(TraitsData, {label: "DND5E.Traits"}),
+      traits: new foundry.data.fields.EmbeddedDataField(CreatureTraitsData, {label: "DND5E.Traits"}),
       spells: new MappingField(new foundry.data.fields.EmbeddedDataField(SpellData), {
         initialKeys: this._spellLevels, label: "DND5E.SpellLevels"
       }),
@@ -56,7 +56,7 @@ export class CreatureData extends common.CommonData {
  * @property {string} senses.special      Description of any special senses or restrictions.
  * @property {string} spellcasting        Primary spellcasting ability.
  */
-export class AttributeData extends common.AttributeData {
+export class CreatureAttributeData extends common.AttributeData {
   static defineSchema() {
     return {
       ...super.defineSchema(),
@@ -95,7 +95,7 @@ export class AttributeData extends common.AttributeData {
  * @property {string} alignment  Creature's alignment.
  * @property {string} race       Creature's race.
  */
-export class DetailsData extends common.DetailsData {
+export class CreatureDetailsData extends common.DetailsData {
   static defineSchema() {
     return {
       ...super.defineSchema(),
@@ -137,7 +137,7 @@ export class SkillData extends foundry.abstract.DataModel {
  * @property {string[]} languages.value  Currently selected languages.
  * @property {string} languages.custom   Semicolon-separated list of custom languages.
  */
-export class TraitsData extends common.TraitsData {
+export class CreatureTraitsData extends common.TraitsData {
   static defineSchema() {
     return {
       ...super.defineSchema(),
@@ -164,7 +164,9 @@ export class SpellData extends foundry.abstract.DataModel {
       value: new foundry.data.fields.NumberField({
         required: true, nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.SpellProgAvailable"
       }),
-      override: new foundry.data.fields.NumberField({required: true, integer: true, min: 0, label: "DND5E.SpellProgOverride"})
+      override: new foundry.data.fields.NumberField({
+        required: true, integer: true, min: 0, label: "DND5E.SpellProgOverride"
+      })
     };
   }
 }

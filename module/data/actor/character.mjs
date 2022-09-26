@@ -3,33 +3,33 @@ import * as creature from "./creature.mjs";
 /**
  * Data definition for Player Characters.
  *
- * @property {AttributesData} attributes         Extended attributes with death saves, exhaustion, and inspiration.
- * @property {DetailsData} details               Extended details with additional character biography.
- * @property {object} resources                  Actor's three resources.
- * @property {ResourceData} resources.primary    Resource number one.
- * @property {ResourceData} resources.secondary  Resource number two.
- * @property {ResourceData} resources.tertiary   Resource number three.
- * @property {TraitsData} traits                 Extended traits with character's proficiencies.
+ * @property {CharacterAttributeData} attributes          Extended attributes with death saves, exhaustion, etc.
+ * @property {CharacterDetailsData} details               Extended details with additional character biography.
+ * @property {object} resources                           Actor's three resources.
+ * @property {CharacterResourceData} resources.primary    Resource number one.
+ * @property {CharacterResourceData} resources.secondary  Resource number two.
+ * @property {CharacterResourceData} resources.tertiary   Resource number three.
+ * @property {CharacterTraitsData} traits                 Extended traits with character's proficiencies.
  */
-export default class ActorCharacterData extends creature.CreatureData {
+export class CharacterData extends creature.CreatureData {
   static defineSchema() {
     return {
       ...super.defineSchema(),
-      attributes: new foundry.data.fields.EmbeddedDataField(AttributeData, {label: "DND5E.Attributes"}),
-      details: new foundry.data.fields.EmbeddedDataField(DetailsData, {label: "DND5E.Details"}),
+      attributes: new foundry.data.fields.EmbeddedDataField(CharacterAttributeData, {label: "DND5E.Attributes"}),
+      details: new foundry.data.fields.EmbeddedDataField(CharacterDetailsData, {label: "DND5E.Details"}),
       resources: new foundry.data.fields.SchemaField({
-        primary: new foundry.data.fields.EmbeddedDataField(ResourceData, {label: "DND5E.ResourcePrimary"}),
-        secondary: new foundry.data.fields.EmbeddedDataField(ResourceData, {label: "DND5E.ResourceSecondary"}),
-        tertiary: new foundry.data.fields.EmbeddedDataField(ResourceData, {label: "DND5E.ResourceTertiary"})
+        primary: new foundry.data.fields.EmbeddedDataField(CharacterResourceData, {label: "DND5E.ResourcePrimary"}),
+        secondary: new foundry.data.fields.EmbeddedDataField(CharacterResourceData, {label: "DND5E.ResourceSecondary"}),
+        tertiary: new foundry.data.fields.EmbeddedDataField(CharacterResourceData, {label: "DND5E.ResourceTertiary"})
       }, {label: "DND5E.Resources"}),
-      traits: new foundry.data.fields.EmbeddedDataField(TraitsData, {label: "DND5E.Traits"})
+      traits: new foundry.data.fields.EmbeddedDataField(CharacterTraitsData, {label: "DND5E.Traits"})
     };
   }
 }
 
 /**
  * An embedded data structure for extra attribute data used by characters.
- * @see ActorCharacterData
+ * @see CharacterData
  *
  * @property {DeathData} death       Information on death saving throws.
  * @property {number} death.success  Number of successful death saves.
@@ -37,7 +37,7 @@ export default class ActorCharacterData extends creature.CreatureData {
  * @property {number} exhaustion   Number of levels of exhaustion.
  * @property {number} inspiration  Does this character have inspiration?
  */
-export class AttributeData extends creature.AttributeData {
+export class CharacterAttributeData extends creature.CreatureAttributeData {
   static defineSchema() {
     const schema = super.defineSchema();
     schema.hp.fields.value.initial = 0;
@@ -62,7 +62,7 @@ export class AttributeData extends creature.AttributeData {
 
 /**
  * An embedded data structure for extra details data used by characters.
- * @see ActorCharacterData
+ * @see CharacterData
  *
  * @property {string} background     Name of character's background.
  * @property {string} originalClass  ID of first class taken by character.
@@ -76,7 +76,7 @@ export class AttributeData extends creature.AttributeData {
  * @property {string} bond           Character's bonds.
  * @property {string} flaw           Character's flaws.
  */
-export class DetailsData extends creature.DetailsData {
+export class CharacterDetailsData extends creature.CreatureDetailsData {
   static defineSchema() {
     return {
       ...super.defineSchema(),
@@ -107,7 +107,7 @@ export class DetailsData extends creature.DetailsData {
 
 /**
  * An embedded data structure for individual resource properties.
- * @see DetailsData
+ * @see CharacterData
  *
  * @property {number} value  Available uses of this resource.
  * @property {number} max    Maximum allowed uses of this resource.
@@ -115,7 +115,7 @@ export class DetailsData extends creature.DetailsData {
  * @property {boolean} lr    Does this resource recover on a long rest?
  * @property {string} label  Displayed name.
  */
-export class ResourceData extends foundry.abstract.DataModel {
+export class CharacterResourceData extends foundry.abstract.DataModel {
   static defineSchema() {
     return {
       value: new foundry.data.fields.NumberField({
@@ -133,7 +133,7 @@ export class ResourceData extends foundry.abstract.DataModel {
 
 /**
  * An embedded data structure for extra trait data used by characters.
- * @see ActorCharacterData
+ * @see CharacterData
  *
  * @property {object} weaponProf             Character's weapon proficiencies.
  * @property {Set<string>} weaponProf.value  Currently selected weapon proficiencies.
@@ -145,7 +145,7 @@ export class ResourceData extends foundry.abstract.DataModel {
  * @property {Set<string>} toolProf.value    Currently selected tool proficiencies.
  * @property {string} toolProf.custom        Semicolon-separated list of custom tool proficiencies.
  */
-export class TraitsData extends creature.TraitsData {
+export class CharacterTraitsData extends creature.CreatureTraitsData {
   static defineSchema() {
     return {
       ...super.defineSchema(),

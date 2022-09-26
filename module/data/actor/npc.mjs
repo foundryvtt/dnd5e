@@ -3,29 +3,29 @@ import * as creature from "./creature.mjs";
 /**
  * Data definition for Non-Player Characters.
  *
- * @property {DetailsData} details      NPC type, environment, CR, and other extended details.
- * @property {ResourcesData} resources  NPC's legendary and lair resources.
+ * @property {NPCAttributeData} attributes  NPC's HP formula & default HP value.
+ * @property {NPCDetailsData} details       NPC type, environment, CR, and other extended details.
+ * @property {NPCResourcesData} resources   NPC's legendary and lair resources.
  */
-export default class ActorNPCData extends creature.CreatureData {
+export class NPCData extends creature.CreatureData {
   static defineSchema() {
     return {
       ...super.defineSchema(),
-      attributes: new foundry.data.fields.EmbeddedDataField(AttributeData, {label: "DND5E.Attributes"}),
-      details: new foundry.data.fields.EmbeddedDataField(DetailsData, {label: "DND5E.Details"}),
-      resources: new foundry.data.fields.EmbeddedDataField(ResourcesData, {label: "DND5E.Resources"})
+      attributes: new foundry.data.fields.EmbeddedDataField(NPCAttributeData, {label: "DND5E.Attributes"}),
+      details: new foundry.data.fields.EmbeddedDataField(NPCDetailsData, {label: "DND5E.Details"}),
+      resources: new foundry.data.fields.EmbeddedDataField(NPCResourcesData, {label: "DND5E.Resources"})
     };
   }
 }
 
 /**
  * An embedded data structure for extra attribute data used by NPCs.
- * @extends creature.AttributeData
- * @see ActorNPCData
+ * @see NPCData
  *
  * @property {object} hp                    NPC's hit point data.
  * @property {string} hp.formula            Formula used to determine hit points.
  */
-export class AttributeData extends creature.AttributeData {
+export class NPCAttributeData extends creature.CreatureAttributeData {
   static defineSchema() {
     const schema = super.defineSchema();
     const hpFields = foundry.utils.deepClone(schema.hp.fields);
@@ -42,7 +42,7 @@ export class AttributeData extends creature.AttributeData {
 
 /**
  * An embedded data structure for extra details data used by NPCs.
- * @see ActorNPCData
+ * @see NPCData
  *
  * @property {TypeData} type        Creature type of this NPC.
  * @property {string} type.value    NPC's type as defined in the system configuration.
@@ -54,7 +54,7 @@ export class AttributeData extends creature.AttributeData {
  * @property {number} spellLevel    Spellcasting level of this NPC.
  * @property {string} source        What book or adventure is this NPC from?
  */
-export class DetailsData extends creature.DetailsData {
+export class NPCDetailsData extends creature.CreatureDetailsData {
   static defineSchema() {
     return {
       ...super.defineSchema(),
@@ -140,7 +140,7 @@ export class DetailsData extends creature.DetailsData {
 
 /**
  * An embedded data structure for NPC resources.
- * @see ActorCharacterData
+ * @see NPCData
  *
  * @property {object} legact           NPC's legendary actions.
  * @property {number} legact.value     Currently available legendary actions.
@@ -152,7 +152,7 @@ export class DetailsData extends creature.DetailsData {
  * @property {boolean} lair.value      Does this NPC use lair actions.
  * @property {number} lair.initiative  Initiative count when lair actions are triggered.
  */
-export class ResourcesData extends foundry.abstract.DataModel {
+export class NPCResourcesData extends foundry.abstract.DataModel {
   static defineSchema() {
     return {
       legact: new foundry.data.fields.SchemaField({

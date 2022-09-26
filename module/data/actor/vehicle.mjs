@@ -5,20 +5,20 @@ import * as common from "./common.mjs";
  * Data definition for Vehicles.
  *
  * @property {string} vehicleType                Type of vehicle as defined in `DND5E.vehicleTypes`.
- * @property {AttributeData} attributes          Extended attributes with additional vehicle information.
- * @property {TraitsData} traits                 Extended traits with vehicle dimensions.
+ * @property {VehicleAttributeData} attributes   Extended attributes with additional vehicle information.
+ * @property {VehicleTraitsData} traits          Extended traits with vehicle dimensions.
  * @property {object} cargo                      Details on this vehicle's crew and cargo capacities.
  * @property {PassengerData[]} cargo.crew        Creatures responsible for operating the vehicle.
  * @property {PassengerData[]} cargo.passengers  Creatures just takin' a ride.
  */
-export default class ActorVehicleData extends common.CommonData {
+export class VehicleData extends common.CommonData {
   static defineSchema() {
     return {
       ...super.defineSchema(),
       vehicleType: new foundry.data.fields.StringField({required: true, initial: "water", label: "DND5E.VehicleType"}),
       // TODO: Mental abilities should default to zero
-      attributes: new foundry.data.fields.EmbeddedDataField(AttributeData, {label: "DND5E.Attributes"}),
-      traits: new foundry.data.fields.EmbeddedDataField(TraitsData, {label: "DND5E.Traits"}),
+      attributes: new foundry.data.fields.EmbeddedDataField(VehicleAttributeData, {label: "DND5E.Attributes"}),
+      traits: new foundry.data.fields.EmbeddedDataField(VehicleTraitsData, {label: "DND5E.Traits"}),
       cargo: new foundry.data.fields.SchemaField({
         crew: new foundry.data.fields.ArrayField(
           new foundry.data.fields.EmbeddedDataField(PassengerData), {label: "DND5E.VehicleCrew"}
@@ -33,7 +33,7 @@ export default class ActorVehicleData extends common.CommonData {
 
 /**
  * An embedded data structure for extra attribute data used by vehicles.
- * @see ActorVehicleData
+ * @see VehicleData
  *
  * @property {object} ac                    Data used to calculate vehicle's armor class.
  * @property {number} ac.flat               Flat value used for flat or natural armor calculation.
@@ -60,7 +60,7 @@ export default class ActorVehicleData extends common.CommonData {
  * @property {string} capacity.creature     Description of the number of creatures the vehicle can carry.
  * @property {number} capacity.cargo        Cargo carrying capacity measured in tons.
  */
-export class AttributeData extends common.AttributeData {
+export class VehicleAttributeData extends common.AttributeData {
   static defineSchema() {
     const schema = super.defineSchema();
     const hpFields = foundry.utils.deepClone(schema.hp.fields);
@@ -121,11 +121,11 @@ export class AttributeData extends common.AttributeData {
 
 /**
  * An embedded data structure for extra trait data used by vehicles.
- * @see ActorVehicleData
+ * @see VehicleData
  *
  * @property {string} dimensions  Description of the vehicle's size.
  */
-export class TraitsData extends common.TraitsData {
+export class VehicleTraitsData extends common.TraitsData {
   static defineSchema() {
     const schema = super.defineSchema();
     schema.size.initial = "lg";
@@ -142,7 +142,7 @@ export class TraitsData extends common.TraitsData {
 
 /**
  * An embedded data structure representing an entry in the crew or passenger lists.
- * @see CargoData
+ * @see VehicleData
  *
  * @property {string} name      Name of individual or type of creature.
  * @property {number} quantity  How many of this creature are onboard?
