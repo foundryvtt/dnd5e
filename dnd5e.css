@@ -1659,6 +1659,9 @@ h5 {
   /*  Sheet Header                             */
   /* ----------------------------------------- */
   /* ----------------------------------------- */
+  /*  Item Descriptions                        */
+  /* ----------------------------------------- */
+  /* ----------------------------------------- */
   /*  Item Details Form                        */
   /* ----------------------------------------- */
   /* ----------------------------------------- */
@@ -1747,6 +1750,11 @@ h5 {
 }
 .dnd5e.sheet.item .sheet-body .item-properties [name="system.price.denomination"] {
   border: none;
+}
+.dnd5e.sheet.item .unidentified-description {
+  background-color: rgba(181, 179, 164, 0.5);
+  padding: 0.5em;
+  border-radius: 0.5em;
 }
 .dnd5e.sheet.item .details input[type="text"],
 .dnd5e.sheet.item .details input[type="number"],
