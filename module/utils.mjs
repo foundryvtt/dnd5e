@@ -174,7 +174,8 @@ export function registerHandlebarsHelpers() {
   Handlebars.registerHelper({
     getProperty: foundry.utils.getProperty,
     "dnd5e-linkForUuid": linkForUuid,
-    "dnd5e-itemContext": itemContext
+    "dnd5e-itemContext": itemContext,
+    "dnd5e-unidentifiedName": unidentifiedName,
   });
 }
 
@@ -326,4 +327,29 @@ function _synchronizeActorSpells(actor, spellsMap) {
     toCreate.push(spellData);
   }
   return {toDelete, toCreate};
+}
+
+/**
+ * For unidentified items, returns a localized masked name based on the item type and base item, where appropriate.
+ * @param {object} item   The item to evaluate.
+ * @returns {string}      The localized name to show for the unidentified item.
+ * @private
+ */
+ export function unidentifiedName(item) {
+  let type = item.type;
+  const systemData = item.system;
+  switch(item.type) {
+    case 'weapon':
+      type = systemData.baseItem || systemData.weaponType;
+      break;
+    case 'equipment':
+      type = systemData.baseItem || systemData.armor.type;
+      break;
+    case 'consumable':
+      type = systemData.consumableType || item.type;
+      break;
+  }
+  return game.user.isGM
+    ? game.i18n.format('DND5E.UnidentifiedGM', {type, trueName: item.name})
+    : game.i18n.format('DND5E.Unidentified', {type});
 }

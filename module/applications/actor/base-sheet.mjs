@@ -1260,6 +1260,7 @@ export default class ActorSheet5e extends ActorSheet {
       this._expanded.delete(item.id);
     } else {
       const summary = $(await renderTemplate("systems/dnd5e/templates/items/parts/item-summary.hbs", chatData));
+      //let div = $(`<div class="item-summary">${chatData.identified === false ? chatData.description.unidentified : chatData.description.value}</div>`);
       li.append(summary.hide());
       summary.slideDown(200);
       this._expanded.add(item.id);
