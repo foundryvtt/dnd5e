@@ -12,14 +12,14 @@
     "source": "PHB pg. 159",
     "quantity": 1,
     "weight": 0,
-    "price": null,
+    "price": {
+      "value": 0,
+      "denomination": "gp"
+    },
     "attunement": 0,
     "equipped": false,
     "rarity": "common",
-    "identified": true,
-    "damage": {
-      "parts": []
-    }
+    "identified": true
   },
   "effects": [],
   "folder": null,
@@ -30,10 +30,10 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.0.0",
-    "coreVersion": "10.279",
+    "systemVersion": "2.1.0",
+    "coreVersion": "10.291",
     "createdTime": 1661787233953,
-    "modifiedTime": 1661787233953,
+    "modifiedTime": 1671220965547,
     "lastModifiedBy": "dnd5ebuilder0000"
   }
 }

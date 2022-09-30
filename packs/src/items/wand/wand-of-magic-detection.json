@@ -26,9 +26,10 @@
       "condition": ""
     },
     "duration": {
-      "value": 10,
+      "value": "10",
       "units": "minute"
     },
+    "cover": null,
     "target": {
       "value": 30,
       "width": null,
@@ -42,11 +43,10 @@
     },
     "uses": {
       "value": 3,
-      "max": 3,
+      "max": "3",
       "per": "charges",
-      "autoDestroy": false,
-      "autoUse": true,
-      "recovery": "1d3"
+      "recovery": "1d3",
+      "autoDestroy": false
     },
     "consume": {
       "type": "",
@@ -55,7 +55,7 @@
     },
     "ability": "",
     "actionType": "util",
-    "attackBonus": 0,
+    "attackBonus": "",
     "chatFlavor": "",
     "critical": {
       "threshold": null,
@@ -71,10 +71,7 @@
       "dc": null,
       "scaling": "spell"
     },
-    "consumableType": "wand",
-    "attributes": {
-      "spelldc": 10
-    }
+    "consumableType": "wand"
   },
   "effects": [],
   "folder": null,
@@ -85,10 +82,10 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.0.2",
-    "coreVersion": "10.286",
+    "systemVersion": "2.1.0",
+    "coreVersion": "10.291",
     "createdTime": 1661787233438,
-    "modifiedTime": 1663775408454,
+    "modifiedTime": 1671220957022,
     "lastModifiedBy": "dnd5ebuilder0000"
   }
 }

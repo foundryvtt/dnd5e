@@ -7,7 +7,7 @@
   "type": "spell",
   "system": {
     "description": {
-      "value": "<p>You summon a celestial of challenge rating 4 or lower, which appears in an unoccupied space that you can see within range. The celestial disappears when it drops to 0 hit points or when the spell ends.</p><p>The celestial is friendly to you and your companions for the duration. Roll initiative for the celestial, which has its own turns. It obeys any verbal commands that you issue to it (no action required by you), as long as they don't violate its alignment. If you don't issue any commands to the celestial, it defends itself from hostile creatures but otherwise takes no actions.</p><p><strong>Higher Levels.&nbsp;</strong>When you cast this spell using a 9th-level spell slot, you summon a celestial of challenge rating 5 or lower.</p>",
+      "value": "<p>You summon a celestial of challenge rating 4 or lower, which appears in an unoccupied space that you can see within range. The celestial disappears when it drops to 0 hit points or when the spell ends.</p><p>The celestial is friendly to you and your companions for the duration. Roll initiative for the celestial, which has its own turns. It obeys any verbal commands that you issue to it (no action required by you), as long as they don't violate its alignment. If you don't issue any commands to the celestial, it defends itself from hostile creatures but otherwise takes no actions.</p><p><strong>Higher Levels. </strong>When you cast this spell using a 9th-level spell slot, you summon a celestial of challenge rating 5 or lower.</p>",
       "chat": "",
       "unidentified": ""
     },
@@ -18,9 +18,10 @@
       "condition": ""
     },
     "duration": {
-      "value": 1,
+      "value": "1",
       "units": "hour"
     },
+    "cover": null,
     "target": {
       "value": null,
       "width": null,
@@ -34,8 +35,9 @@
     },
     "uses": {
       "value": 0,
-      "max": 0,
-      "per": ""
+      "max": "",
+      "per": null,
+      "recovery": ""
     },
     "consume": {
       "type": "",
@@ -44,7 +46,7 @@
     },
     "ability": "",
     "actionType": "util",
-    "attackBonus": 0,
+    "attackBonus": "",
     "chatFlavor": "",
     "critical": {
       "threshold": null,
@@ -52,20 +54,17 @@
     },
     "damage": {
       "parts": [],
-      "versatile": "",
-      "value": ""
+      "versatile": ""
     },
     "formula": "",
     "save": {
       "ability": "",
       "dc": null,
-      "scaling": "spell",
-      "value": ""
+      "scaling": "spell"
     },
     "level": 7,
     "school": "con",
     "components": {
-      "value": "",
       "vocal": true,
       "somatic": true,
       "material": false,
@@ -94,10 +93,10 @@
   "folder": null,
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.0.0",
-    "coreVersion": "10.279",
+    "systemVersion": "2.1.0",
+    "coreVersion": "10.291",
     "createdTime": 1661787234156,
-    "modifiedTime": 1661787234156,
+    "modifiedTime": 1671220970149,
     "lastModifiedBy": "dnd5ebuilder0000"
   }
 }

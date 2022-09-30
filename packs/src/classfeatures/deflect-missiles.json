@@ -15,12 +15,13 @@
     "activation": {
       "type": "reaction",
       "cost": 1,
-      "condition": "Can be thrown back using 1 ki point "
+      "condition": "Can be thrown back using 1 ki point"
     },
     "duration": {
-      "value": null,
+      "value": "",
       "units": ""
     },
+    "cover": null,
     "target": {
       "value": null,
       "width": null,
@@ -35,17 +36,17 @@
     "uses": {
       "value": null,
       "max": "",
-      "per": "",
+      "per": null,
       "recovery": ""
     },
     "consume": {
       "type": "",
-      "target": "",
+      "target": null,
       "amount": null
     },
     "ability": "dex",
     "actionType": "rwak",
-    "attackBonus": "0",
+    "attackBonus": "",
     "chatFlavor": "",
     "critical": {
       "threshold": null,
@@ -58,8 +59,7 @@
           ""
         ]
       ],
-      "versatile": "",
-      "value": ""
+      "versatile": ""
     },
     "formula": "1d10 + @mod + @classes.monk.levels",
     "save": {
@@ -80,10 +80,10 @@
   "sort": 0,
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.0.3",
-    "coreVersion": "10.286",
+    "systemVersion": "2.1.0",
+    "coreVersion": "10.291",
     "createdTime": 1661787234421,
-    "modifiedTime": 1663990870715,
+    "modifiedTime": 1671220976352,
     "lastModifiedBy": "dnd5ebuilder0000"
   }
 }

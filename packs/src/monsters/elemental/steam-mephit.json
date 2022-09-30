@@ -179,14 +179,17 @@
           "fire",
           "poison"
         ],
+        "bypasses": [],
         "custom": ""
       },
       "dr": {
         "value": [],
+        "bypasses": [],
         "custom": ""
       },
       "dv": {
         "value": [],
+        "bypasses": [],
         "custom": ""
       },
       "ci": {
@@ -637,9 +640,10 @@
           "condition": ""
         },
         "duration": {
-          "value": null,
+          "value": "",
           "units": ""
         },
+        "cover": null,
         "target": {
           "value": null,
           "width": null,
@@ -653,17 +657,18 @@
         },
         "uses": {
           "value": 0,
-          "max": 0,
-          "per": ""
+          "max": "",
+          "per": null,
+          "recovery": ""
         },
         "consume": {
           "type": "",
-          "target": "",
+          "target": null,
           "amount": null
         },
         "ability": "dex",
         "actionType": "mwak",
-        "attackBonus": 0,
+        "attackBonus": "",
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -747,13 +752,14 @@
         "source": "",
         "activation": {
           "type": "special",
-          "cost": null,
+          "cost": 0,
           "condition": "on death"
         },
         "duration": {
-          "value": null,
+          "value": "",
           "units": ""
         },
+        "cover": null,
         "target": {
           "value": null,
           "width": null,
@@ -767,17 +773,18 @@
         },
         "uses": {
           "value": 1,
-          "max": 1,
-          "per": ""
+          "max": "1",
+          "per": null,
+          "recovery": ""
         },
         "consume": {
           "type": "",
-          "target": "",
+          "target": null,
           "amount": null
         },
         "ability": "",
         "actionType": "other",
-        "attackBonus": 0,
+        "attackBonus": "",
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -802,8 +809,7 @@
         "recharge": {
           "value": null,
           "charged": false
-        },
-        "attunement": 0
+        }
       },
       "effects": [],
       "folder": null,
@@ -835,13 +841,14 @@
         "source": "",
         "activation": {
           "type": "",
-          "cost": null,
+          "cost": 0,
           "condition": ""
         },
         "duration": {
-          "value": null,
+          "value": "",
           "units": ""
         },
+        "cover": null,
         "target": {
           "value": null,
           "width": null,
@@ -855,8 +862,9 @@
         },
         "uses": {
           "value": 0,
-          "max": 0,
-          "per": null
+          "max": "",
+          "per": null,
+          "recovery": ""
         },
         "consume": {
           "type": "",
@@ -865,7 +873,7 @@
         },
         "ability": null,
         "actionType": "",
-        "attackBonus": 0,
+        "attackBonus": "",
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -885,8 +893,7 @@
         "recharge": {
           "value": null,
           "charged": false
-        },
-        "attunement": 0
+        }
       },
       "effects": [],
       "folder": null,
@@ -922,9 +929,10 @@
           "condition": ""
         },
         "duration": {
-          "value": null,
+          "value": "",
           "units": "inst"
         },
+        "cover": null,
         "target": {
           "value": 15,
           "width": null,
@@ -938,17 +946,18 @@
         },
         "uses": {
           "value": 0,
-          "max": 0,
-          "per": ""
+          "max": "",
+          "per": null,
+          "recovery": ""
         },
         "consume": {
           "type": "",
-          "target": "",
+          "target": null,
           "amount": null
         },
         "ability": "",
         "actionType": "save",
-        "attackBonus": 0,
+        "attackBonus": "",
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -973,8 +982,7 @@
         "recharge": {
           "value": 6,
           "charged": true
-        },
-        "attunement": 0
+        }
       },
       "effects": [],
       "folder": null,
@@ -1012,13 +1020,14 @@
           "condition": ""
         },
         "duration": {
-          "value": 1,
+          "value": "1",
           "units": "minute"
         },
+        "cover": null,
         "target": {
           "value": null,
           "width": null,
-          "units": null,
+          "units": "",
           "type": "self"
         },
         "range": {
@@ -1028,8 +1037,9 @@
         },
         "uses": {
           "value": 1,
-          "max": 1,
-          "per": "day"
+          "max": "1",
+          "per": "day",
+          "recovery": ""
         },
         "consume": {
           "type": "",
@@ -1038,7 +1048,7 @@
         },
         "ability": "",
         "actionType": "util",
-        "attackBonus": 0,
+        "attackBonus": "",
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -1046,20 +1056,17 @@
         },
         "damage": {
           "parts": [],
-          "versatile": "",
-          "value": ""
+          "versatile": ""
         },
         "formula": "",
         "save": {
           "ability": "",
           "dc": null,
-          "scaling": "spell",
-          "value": ""
+          "scaling": "spell"
         },
         "level": 2,
         "school": "ill",
         "components": {
-          "value": "",
           "vocal": true,
           "somatic": false,
           "material": false,
@@ -1109,10 +1116,10 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.0.0",
-    "coreVersion": "10.279",
+    "systemVersion": "2.1.0",
+    "coreVersion": "10.291",
     "createdTime": 1661787232856,
-    "modifiedTime": 1661878732356,
+    "modifiedTime": 1671220948992,
     "lastModifiedBy": "dnd5ebuilder0000"
   }
 }

@@ -26,9 +26,10 @@
       "condition": ""
     },
     "duration": {
-      "value": 0,
+      "value": "",
       "units": "spec"
     },
+    "cover": null,
     "target": {
       "value": 1,
       "width": null,
@@ -45,17 +46,16 @@
       "max": "1",
       "per": "charges",
       "recovery": "",
-      "autoDestroy": true,
-      "autoUse": true
+      "autoDestroy": true
     },
     "consume": {
       "type": "",
-      "target": "",
+      "target": null,
       "amount": null
     },
     "ability": "",
     "actionType": "save",
-    "attackBonus": 0,
+    "attackBonus": "",
     "chatFlavor": "",
     "critical": {
       "threshold": null,
@@ -76,10 +76,7 @@
       "dc": 13,
       "scaling": "flat"
     },
-    "consumableType": "poison",
-    "attributes": {
-      "spelldc": 10
-    }
+    "consumableType": "poison"
   },
   "effects": [],
   "folder": null,
@@ -90,10 +87,10 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.0.3",
-    "coreVersion": "10.286",
+    "systemVersion": "2.1.0",
+    "coreVersion": "10.291",
     "createdTime": 1661787233878,
-    "modifiedTime": 1663991423356,
+    "modifiedTime": 1671220964452,
     "lastModifiedBy": "dnd5ebuilder0000"
   }
 }

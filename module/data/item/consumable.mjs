@@ -18,6 +18,7 @@ import PhysicalItemTemplate from "./templates/physical-item.mjs";
 export default class ConsumableData extends SystemDataModel.mixin(
   ItemDescriptionTemplate, PhysicalItemTemplate, ActivatedEffectTemplate, ActionTemplate
 ) {
+  /** @inheritdoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
       consumableType: new foundry.data.fields.StringField({

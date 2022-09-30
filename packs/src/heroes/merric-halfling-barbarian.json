@@ -661,22 +661,21 @@
         },
         "cover": null,
         "target": {
-          "value": "",
+          "value": 0,
           "width": null,
           "units": "",
           "type": ""
         },
         "range": {
-          "value": "",
+          "value": 0,
           "long": null,
           "units": ""
         },
         "uses": {
           "value": 0,
-          "max": 0,
+          "max": "",
           "per": null,
-          "recovery": "",
-          "type": ""
+          "recovery": ""
         },
         "consume": {
           "type": "",
@@ -685,7 +684,7 @@
         },
         "ability": "",
         "actionType": "",
-        "attackBonus": 0,
+        "attackBonus": "",
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -693,39 +692,19 @@
         },
         "damage": {
           "parts": [],
-          "versatile": "",
-          "value": ""
+          "versatile": ""
         },
         "formula": "",
         "save": {
           "ability": "",
           "dc": null,
-          "scaling": "spell",
-          "value": ""
+          "scaling": "spell"
         },
         "requirements": "",
         "recharge": {
           "value": null,
           "charged": false
-        },
-        "featType": {
-          "value": "passive",
-          "_deprecated": true,
-          "type": "String",
-          "label": "Feat Type"
-        },
-        "time": {
-          "value": "",
-          "_deprecated": true
-        },
-        "damageType": {
-          "value": "",
-          "_deprecated": true
-        },
-        "attributes": {
-          "spelldc": 10
-        },
-        "attunement": 0
+        }
       },
       "sort": 4650000,
       "flags": {},
@@ -771,7 +750,7 @@
           "condition": ""
         },
         "duration": {
-          "value": 0,
+          "value": "",
           "units": ""
         },
         "cover": null,
@@ -788,18 +767,18 @@
         },
         "uses": {
           "value": 0,
-          "max": 0,
-          "per": "",
+          "max": "",
+          "per": null,
           "recovery": ""
         },
         "consume": {
           "type": "",
-          "target": "",
+          "target": null,
           "amount": null
         },
         "ability": "",
         "actionType": "mwak",
-        "attackBonus": 0,
+        "attackBonus": "",
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -847,10 +826,7 @@
           "ver": false,
           "lod": false
         },
-        "proficient": true,
-        "attributes": {
-          "spelldc": 10
-        }
+        "proficient": true
       },
       "sort": 225000,
       "flags": {},
@@ -896,7 +872,7 @@
           "condition": ""
         },
         "duration": {
-          "value": 0,
+          "value": "",
           "units": ""
         },
         "cover": null,
@@ -913,8 +889,8 @@
         },
         "uses": {
           "value": 0,
-          "max": 0,
-          "per": "",
+          "max": "",
+          "per": null,
           "recovery": ""
         },
         "consume": {
@@ -924,7 +900,7 @@
         },
         "ability": "",
         "actionType": "rwak",
-        "attackBonus": 0,
+        "attackBonus": "",
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -972,10 +948,7 @@
           "ver": false,
           "lod": false
         },
-        "proficient": true,
-        "attributes": {
-          "spelldc": 10
-        }
+        "proficient": true
       },
       "sort": 250000,
       "flags": {},
@@ -1021,7 +994,7 @@
           "condition": ""
         },
         "duration": {
-          "value": null,
+          "value": "",
           "units": ""
         },
         "cover": null,
@@ -1038,7 +1011,7 @@
         },
         "uses": {
           "value": 0,
-          "max": 0,
+          "max": "",
           "per": null,
           "recovery": "",
           "autoDestroy": false
@@ -1050,7 +1023,7 @@
         },
         "ability": null,
         "actionType": "",
-        "attackBonus": 0,
+        "attackBonus": "",
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -1112,7 +1085,7 @@
           "condition": ""
         },
         "duration": {
-          "value": null,
+          "value": "",
           "units": ""
         },
         "cover": null,
@@ -1129,18 +1102,18 @@
         },
         "uses": {
           "value": 0,
-          "max": 0,
-          "per": "",
+          "max": "",
+          "per": null,
           "recovery": ""
         },
         "consume": {
           "type": "",
-          "target": "",
+          "target": null,
           "amount": null
         },
         "ability": "",
         "actionType": "mwak",
-        "attackBonus": 0,
+        "attackBonus": "",
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -1188,10 +1161,7 @@
           "thr": false,
           "ver": false
         },
-        "proficient": true,
-        "attributes": {
-          "spelldc": 10
-        }
+        "proficient": true
       },
       "sort": 200000,
       "flags": {},
@@ -1242,9 +1212,6 @@
           "ep": 0,
           "gp": 0,
           "pp": 0
-        },
-        "damage": {
-          "parts": []
         }
       },
       "sort": 100000,
@@ -1284,10 +1251,7 @@
         "attunement": 0,
         "equipped": false,
         "rarity": "common",
-        "identified": true,
-        "damage": {
-          "parts": []
-        }
+        "identified": true
       },
       "sort": 800000,
       "flags": {},
@@ -1333,7 +1297,7 @@
           "condition": ""
         },
         "duration": {
-          "value": null,
+          "value": "",
           "units": ""
         },
         "cover": null,
@@ -1350,11 +1314,10 @@
         },
         "uses": {
           "value": 1,
-          "max": 1,
+          "max": "1",
           "per": "charges",
           "recovery": "",
-          "autoDestroy": false,
-          "autoUse": true
+          "autoDestroy": false
         },
         "consume": {
           "type": "",
@@ -1363,7 +1326,7 @@
         },
         "ability": "",
         "actionType": "abil",
-        "attackBonus": 0,
+        "attackBonus": "",
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -1425,7 +1388,7 @@
           "condition": ""
         },
         "duration": {
-          "value": 0,
+          "value": "",
           "units": ""
         },
         "cover": null,
@@ -1442,20 +1405,19 @@
         },
         "uses": {
           "value": 1,
-          "max": 1,
+          "max": "1",
           "per": "charges",
           "recovery": "",
-          "autoDestroy": true,
-          "autoUse": true
+          "autoDestroy": true
         },
         "consume": {
           "type": "",
-          "target": "",
+          "target": null,
           "amount": null
         },
         "ability": "",
         "actionType": "util",
-        "attackBonus": 0,
+        "attackBonus": "",
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -1510,10 +1472,7 @@
         "attunement": 0,
         "equipped": false,
         "rarity": "common",
-        "identified": true,
-        "damage": {
-          "parts": []
-        }
+        "identified": true
       },
       "sort": 900000,
       "flags": {},
@@ -1552,10 +1511,7 @@
         "attunement": 0,
         "equipped": false,
         "rarity": "common",
-        "identified": true,
-        "damage": {
-          "parts": []
-        }
+        "identified": true
       },
       "sort": 1400000,
       "flags": {},
@@ -1601,7 +1557,7 @@
           "condition": ""
         },
         "duration": {
-          "value": 1,
+          "value": "1",
           "units": "hour"
         },
         "cover": null,
@@ -1618,20 +1574,19 @@
         },
         "uses": {
           "value": 1,
-          "max": 1,
+          "max": "1",
           "per": "charges",
           "recovery": "",
-          "autoDestroy": true,
-          "autoUse": true
+          "autoDestroy": true
         },
         "consume": {
           "type": "",
-          "target": "",
+          "target": null,
           "amount": null
         },
         "ability": "str",
         "actionType": "mwak",
-        "attackBonus": 0,
+        "attackBonus": "",
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -1698,7 +1653,7 @@
           "condition": ""
         },
         "duration": {
-          "value": 0,
+          "value": "",
           "units": ""
         },
         "cover": null,
@@ -1715,11 +1670,10 @@
         },
         "uses": {
           "value": 4,
-          "max": 4,
+          "max": "4",
           "per": "charges",
           "recovery": "",
-          "autoDestroy": false,
-          "autoUse": true
+          "autoDestroy": false
         },
         "consume": {
           "type": "",
@@ -1728,7 +1682,7 @@
         },
         "ability": "",
         "actionType": "util",
-        "attackBonus": 0,
+        "attackBonus": "",
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -1790,7 +1744,7 @@
           "condition": ""
         },
         "duration": {
-          "value": null,
+          "value": "",
           "units": ""
         },
         "cover": null,
@@ -1807,18 +1761,18 @@
         },
         "uses": {
           "value": 0,
-          "max": 0,
-          "per": "",
+          "max": "",
+          "per": null,
           "recovery": ""
         },
         "consume": {
           "type": "",
-          "target": "",
+          "target": null,
           "amount": null
         },
         "ability": "",
         "actionType": "mwak",
-        "attackBonus": 0,
+        "attackBonus": "",
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -1866,10 +1820,7 @@
           "two": false,
           "ver": false
         },
-        "proficient": true,
-        "attributes": {
-          "spelldc": 10
-        }
+        "proficient": true
       },
       "sort": 287500,
       "flags": {},
@@ -1915,7 +1866,7 @@
           "condition": ""
         },
         "duration": {
-          "value": null,
+          "value": "",
           "units": ""
         },
         "cover": null,
@@ -1932,18 +1883,18 @@
         },
         "uses": {
           "value": 0,
-          "max": 0,
-          "per": "",
+          "max": "",
+          "per": null,
           "recovery": ""
         },
         "consume": {
           "type": "",
-          "target": "",
+          "target": null,
           "amount": null
         },
         "ability": "",
         "actionType": "mwak",
-        "attackBonus": 0,
+        "attackBonus": "",
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -1991,10 +1942,7 @@
           "two": false,
           "ver": false
         },
-        "proficient": true,
-        "attributes": {
-          "spelldc": 10
-        }
+        "proficient": true
       },
       "sort": 325000,
       "flags": {},
@@ -2030,7 +1978,7 @@
           "condition": ""
         },
         "duration": {
-          "value": null,
+          "value": "",
           "units": ""
         },
         "cover": null,
@@ -2047,10 +1995,9 @@
         },
         "uses": {
           "value": null,
-          "max": null,
-          "per": "",
-          "recovery": "",
-          "type": "lr"
+          "max": "",
+          "per": null,
+          "recovery": ""
         },
         "consume": {
           "type": "",
@@ -2059,7 +2006,7 @@
         },
         "ability": "",
         "actionType": "",
-        "attackBonus": 0,
+        "attackBonus": "",
         "chatFlavor": "You have advantage on saving throws against being frightened.",
         "critical": {
           "threshold": null,
@@ -2067,39 +2014,19 @@
         },
         "damage": {
           "parts": [],
-          "versatile": "",
-          "value": ""
+          "versatile": ""
         },
         "formula": "",
         "save": {
           "ability": "",
           "dc": null,
-          "scaling": "spell",
-          "value": ""
+          "scaling": "spell"
         },
         "requirements": "Halfling",
         "recharge": {
           "value": null,
           "charged": false
-        },
-        "featType": {
-          "value": "ability",
-          "_deprecated": true,
-          "type": "String",
-          "label": "Feat Type"
-        },
-        "time": {
-          "value": "",
-          "_deprecated": true
-        },
-        "damageType": {
-          "value": "",
-          "_deprecated": true
-        },
-        "attributes": {
-          "spelldc": 10
-        },
-        "attunement": 0
+        }
       },
       "sort": 5100000,
       "flags": {},
@@ -2135,7 +2062,7 @@
           "condition": ""
         },
         "duration": {
-          "value": null,
+          "value": "",
           "units": ""
         },
         "cover": null,
@@ -2152,7 +2079,7 @@
         },
         "uses": {
           "value": 0,
-          "max": 0,
+          "max": "",
           "per": null,
           "recovery": ""
         },
@@ -2163,7 +2090,7 @@
         },
         "ability": null,
         "actionType": "",
-        "attackBonus": 0,
+        "attackBonus": "",
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -2183,8 +2110,7 @@
         "recharge": {
           "value": null,
           "charged": false
-        },
-        "attunement": 0
+        }
       },
       "sort": 5200000,
       "flags": {},
@@ -2225,19 +2151,19 @@
         },
         "cover": null,
         "target": {
-          "value": "",
+          "value": 0,
           "width": null,
           "units": "",
           "type": ""
         },
         "range": {
-          "value": "",
+          "value": 0,
           "long": null,
           "units": ""
         },
         "uses": {
           "value": 0,
-          "max": 0,
+          "max": "",
           "per": null,
           "recovery": ""
         },
@@ -2248,7 +2174,7 @@
         },
         "ability": "",
         "actionType": "",
-        "attackBonus": 0,
+        "attackBonus": "",
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -2256,39 +2182,19 @@
         },
         "damage": {
           "parts": [],
-          "versatile": "",
-          "value": ""
+          "versatile": ""
         },
         "formula": "",
         "save": {
           "ability": "",
           "dc": null,
-          "scaling": "spell",
-          "value": ""
+          "scaling": "spell"
         },
         "requirements": "Lightfoot",
         "recharge": {
           "value": null,
           "charged": false
-        },
-        "featType": {
-          "value": "ability",
-          "_deprecated": true,
-          "type": "String",
-          "label": "Feat Type"
-        },
-        "time": {
-          "value": "",
-          "_deprecated": true
-        },
-        "damageType": {
-          "value": "",
-          "_deprecated": true
-        },
-        "attributes": {
-          "spelldc": 10
-        },
-        "attunement": 0
+        }
       },
       "sort": 5300000,
       "flags": {},
@@ -2329,22 +2235,21 @@
         },
         "cover": null,
         "target": {
-          "value": "",
+          "value": 0,
           "width": null,
           "units": "",
           "type": ""
         },
         "range": {
-          "value": "",
+          "value": 0,
           "long": null,
           "units": ""
         },
         "uses": {
           "value": 0,
-          "max": 0,
+          "max": "",
           "per": null,
-          "recovery": "",
-          "type": ""
+          "recovery": ""
         },
         "consume": {
           "type": "",
@@ -2353,7 +2258,7 @@
         },
         "ability": "",
         "actionType": "",
-        "attackBonus": 0,
+        "attackBonus": "",
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -2361,39 +2266,19 @@
         },
         "damage": {
           "parts": [],
-          "versatile": "",
-          "value": ""
+          "versatile": ""
         },
         "formula": "",
         "save": {
           "ability": "",
           "dc": null,
-          "scaling": "spell",
-          "value": ""
+          "scaling": "spell"
         },
         "requirements": "Halfling",
         "recharge": {
           "value": null,
           "charged": false
-        },
-        "featType": {
-          "value": "passive",
-          "_deprecated": true,
-          "type": "String",
-          "label": "Feat Type"
-        },
-        "time": {
-          "value": "",
-          "_deprecated": true
-        },
-        "damageType": {
-          "value": "",
-          "_deprecated": true
-        },
-        "attributes": {
-          "spelldc": 10
-        },
-        "attunement": 0
+        }
       },
       "sort": 5400000,
       "flags": {},
@@ -2429,7 +2314,7 @@
           "condition": ""
         },
         "duration": {
-          "value": null,
+          "value": "",
           "units": ""
         },
         "cover": null,
@@ -2446,7 +2331,7 @@
         },
         "uses": {
           "value": 0,
-          "max": 0,
+          "max": "",
           "per": null,
           "recovery": ""
         },
@@ -2457,7 +2342,7 @@
         },
         "ability": null,
         "actionType": "",
-        "attackBonus": 0,
+        "attackBonus": "",
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -2477,8 +2362,7 @@
         "recharge": {
           "value": null,
           "charged": false
-        },
-        "attunement": 0
+        }
       },
       "sort": 4875000,
       "flags": {},
@@ -2514,7 +2398,7 @@
           "condition": ""
         },
         "duration": {
-          "value": null,
+          "value": "",
           "units": ""
         },
         "cover": null,
@@ -2531,7 +2415,7 @@
         },
         "uses": {
           "value": 0,
-          "max": 0,
+          "max": "",
           "per": null,
           "recovery": ""
         },
@@ -2542,7 +2426,7 @@
         },
         "ability": null,
         "actionType": "",
-        "attackBonus": 0,
+        "attackBonus": "",
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -2562,8 +2446,7 @@
         "recharge": {
           "value": null,
           "charged": false
-        },
-        "attunement": 0
+        }
       },
       "sort": 4987500,
       "flags": {},
@@ -2606,7 +2489,16 @@
               "items": [
                 "Compendium.dnd5e.classfeatures.VoR0SUrNX5EJVPIO",
                 "Compendium.dnd5e.classfeatures.SZbsNbaxFFGwBpNK"
-              ]
+              ],
+              "optional": false,
+              "spell": {
+                "ability": "",
+                "preparation": "",
+                "uses": {
+                  "max": "",
+                  "per": ""
+                }
+              }
             },
             "value": {
               "added": {
@@ -2615,9 +2507,7 @@
               }
             },
             "level": 1,
-            "title": "Features",
-            "icon": "",
-            "classRestriction": ""
+            "title": "Features"
           },
           {
             "_id": "udl318k61boq0rnn",
@@ -2626,13 +2516,20 @@
               "items": [
                 "Compendium.dnd5e.classfeatures.SCVjqRdlZ9cvHVSR",
                 "Compendium.dnd5e.classfeatures.vt31lWAULygEl7yk"
-              ]
+              ],
+              "optional": false,
+              "spell": {
+                "ability": "",
+                "preparation": "",
+                "uses": {
+                  "max": "",
+                  "per": ""
+                }
+              }
             },
             "value": {},
             "level": 2,
-            "title": "Features",
-            "icon": "",
-            "classRestriction": ""
+            "title": "Features"
           },
           {
             "_id": "8y2ey740kizr4jb6",
@@ -2640,13 +2537,20 @@
             "configuration": {
               "items": [
                 "Compendium.dnd5e.classfeatures.TH1QAf6YNGSeBVjT"
-              ]
+              ],
+              "optional": false,
+              "spell": {
+                "ability": "",
+                "preparation": "",
+                "uses": {
+                  "max": "",
+                  "per": ""
+                }
+              }
             },
             "value": {},
             "level": 3,
-            "title": "Features",
-            "icon": "",
-            "classRestriction": ""
+            "title": "Features"
           },
           {
             "_id": "uoexdq8totskritb",
@@ -2655,13 +2559,20 @@
               "items": [
                 "Compendium.dnd5e.classfeatures.XogoBnFWmCAHXppo",
                 "Compendium.dnd5e.classfeatures.Kl6zifJ5OmdHlOi2"
-              ]
+              ],
+              "optional": false,
+              "spell": {
+                "ability": "",
+                "preparation": "",
+                "uses": {
+                  "max": "",
+                  "per": ""
+                }
+              }
             },
             "value": {},
             "level": 5,
-            "title": "Features",
-            "icon": "",
-            "classRestriction": ""
+            "title": "Features"
           },
           {
             "_id": "w6ceiqibcmzpcuy8",
@@ -2669,13 +2580,20 @@
             "configuration": {
               "items": [
                 "Compendium.dnd5e.classfeatures.NlXslw4yAqmKZWtN"
-              ]
+              ],
+              "optional": false,
+              "spell": {
+                "ability": "",
+                "preparation": "",
+                "uses": {
+                  "max": "",
+                  "per": ""
+                }
+              }
             },
             "value": {},
             "level": 7,
-            "title": "Features",
-            "icon": "",
-            "classRestriction": ""
+            "title": "Features"
           },
           {
             "_id": "ty9si22p6pfwb3ow",
@@ -2683,13 +2601,20 @@
             "configuration": {
               "items": [
                 "Compendium.dnd5e.classfeatures.L94gyvNpUhUe0rwh"
-              ]
+              ],
+              "optional": false,
+              "spell": {
+                "ability": "",
+                "preparation": "",
+                "uses": {
+                  "max": "",
+                  "per": ""
+                }
+              }
             },
             "value": {},
             "level": 9,
-            "title": "Features",
-            "icon": "",
-            "classRestriction": ""
+            "title": "Features"
           },
           {
             "_id": "802xi5l50le3ntk8",
@@ -2697,13 +2622,20 @@
             "configuration": {
               "items": [
                 "Compendium.dnd5e.classfeatures.FqfmbPgxiyrWzhYk"
-              ]
+              ],
+              "optional": false,
+              "spell": {
+                "ability": "",
+                "preparation": "",
+                "uses": {
+                  "max": "",
+                  "per": ""
+                }
+              }
             },
             "value": {},
             "level": 11,
-            "title": "Features",
-            "icon": "",
-            "classRestriction": ""
+            "title": "Features"
           },
           {
             "_id": "g9ut0x1ugm31gbhk",
@@ -2711,13 +2643,20 @@
             "configuration": {
               "items": [
                 "Compendium.dnd5e.classfeatures.l8tUhZ5Pecm9wz7I"
-              ]
+              ],
+              "optional": false,
+              "spell": {
+                "ability": "",
+                "preparation": "",
+                "uses": {
+                  "max": "",
+                  "per": ""
+                }
+              }
             },
             "value": {},
             "level": 15,
-            "title": "Features",
-            "icon": "",
-            "classRestriction": ""
+            "title": "Features"
           },
           {
             "_id": "so18afasiyobkpxy",
@@ -2725,13 +2664,20 @@
             "configuration": {
               "items": [
                 "Compendium.dnd5e.classfeatures.Q1exex5ALteprrPo"
-              ]
+              ],
+              "optional": false,
+              "spell": {
+                "ability": "",
+                "preparation": "",
+                "uses": {
+                  "max": "",
+                  "per": ""
+                }
+              }
             },
             "value": {},
             "level": 18,
-            "title": "Features",
-            "icon": "",
-            "classRestriction": ""
+            "title": "Features"
           },
           {
             "_id": "9hvtrqbg7d7zwg07",
@@ -2739,13 +2685,20 @@
             "configuration": {
               "items": [
                 "Compendium.dnd5e.classfeatures.jVU4AgqfrFaqgXns"
-              ]
+              ],
+              "optional": false,
+              "spell": {
+                "ability": "",
+                "preparation": "",
+                "uses": {
+                  "max": "",
+                  "per": ""
+                }
+              }
             },
             "value": {},
             "level": 20,
-            "title": "Features",
-            "icon": "",
-            "classRestriction": ""
+            "title": "Features"
           },
           {
             "_id": "5jn0ekktgccyvvpw",
@@ -2754,9 +2707,7 @@
             "value": {
               "1": "max"
             },
-            "title": "",
-            "icon": "",
-            "classRestriction": ""
+            "title": ""
           },
           {
             "_id": "62svnflxsuad7oar",
@@ -2783,12 +2734,13 @@
                 "20": {
                   "value": 999
                 }
+              },
+              "distance": {
+                "units": ""
               }
             },
             "value": {},
-            "title": "Rages",
-            "icon": "",
-            "classRestriction": ""
+            "title": "Rages"
           },
           {
             "_id": "t42incolsbuqn2ec",
@@ -2806,12 +2758,13 @@
                 "16": {
                   "value": 4
                 }
+              },
+              "distance": {
+                "units": ""
               }
             },
             "value": {},
-            "title": "Rage Damage",
-            "icon": "",
-            "classRestriction": ""
+            "title": "Rage Damage"
           },
           {
             "_id": "y0kr48pnq5doebeb",
@@ -2829,12 +2782,13 @@
                 "17": {
                   "value": 3
                 }
+              },
+              "distance": {
+                "units": ""
               }
             },
             "value": {},
-            "title": "Brutal Critical Dice",
-            "icon": "",
-            "classRestriction": ""
+            "title": "Brutal Critical Dice"
           }
         ],
         "saves": [
@@ -2856,11 +2810,7 @@
         "spellcasting": {
           "progression": "none",
           "ability": ""
-        },
-        "damage": {
-          "parts": []
-        },
-        "attunement": null
+        }
       },
       "effects": [],
       "folder": null,
@@ -2900,7 +2850,7 @@
           "condition": ""
         },
         "duration": {
-          "value": 1,
+          "value": "1",
           "units": "minute"
         },
         "cover": null,
@@ -2923,12 +2873,12 @@
         },
         "consume": {
           "type": "",
-          "target": "",
+          "target": null,
           "amount": null
         },
         "ability": "",
         "actionType": "",
-        "attackBonus": 0,
+        "attackBonus": "",
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -3035,7 +2985,7 @@
           "condition": ""
         },
         "duration": {
-          "value": null,
+          "value": "",
           "units": ""
         },
         "cover": null,
@@ -3058,12 +3008,12 @@
         },
         "consume": {
           "type": "",
-          "target": "",
+          "target": null,
           "amount": null
         },
         "ability": "",
         "actionType": "",
-        "attackBonus": 0,
+        "attackBonus": "",
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -3222,10 +3172,10 @@
   "_id": "irWonyO6ZLh47sN7",
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.0.3",
-    "coreVersion": "10.290",
+    "systemVersion": "2.1.0",
+    "coreVersion": "10.291",
     "createdTime": 1661787232184,
-    "modifiedTime": 1670011647601,
+    "modifiedTime": 1671220939298,
     "lastModifiedBy": "dnd5ebuilder0000"
   }
 }

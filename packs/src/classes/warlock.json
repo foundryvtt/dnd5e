@@ -20,9 +20,7 @@
         "type": "HitPoints",
         "configuration": {},
         "value": {},
-        "title": "",
-        "icon": "",
-        "classRestriction": ""
+        "title": ""
       },
       {
         "_id": "6wykf1qry5o7swn1",
@@ -31,13 +29,20 @@
           "items": [
             "Compendium.dnd5e.classfeatures.jTXHaK0vvT5DV3uO",
             "Compendium.dnd5e.classfeatures.x6IJZwr6f0SGral7"
-          ]
+          ],
+          "optional": false,
+          "spell": {
+            "ability": "",
+            "preparation": "",
+            "uses": {
+              "max": "",
+              "per": ""
+            }
+          }
         },
         "value": {},
         "level": 1,
-        "title": "Features",
-        "icon": "",
-        "classRestriction": ""
+        "title": "Features"
       },
       {
         "_id": "rhw4wpt4eqn0mg7e",
@@ -45,13 +50,20 @@
         "configuration": {
           "items": [
             "Compendium.dnd5e.classfeatures.8MlxM2nEfE3Q0EVk"
-          ]
+          ],
+          "optional": false,
+          "spell": {
+            "ability": "",
+            "preparation": "",
+            "uses": {
+              "max": "",
+              "per": ""
+            }
+          }
         },
         "value": {},
         "level": 2,
-        "title": "Features",
-        "icon": "",
-        "classRestriction": ""
+        "title": "Features"
       },
       {
         "_id": "uh49ihpbnqvy8jdu",
@@ -59,13 +71,20 @@
         "configuration": {
           "items": [
             "Compendium.dnd5e.classfeatures.QwgfIpCN8VWfoUtX"
-          ]
+          ],
+          "optional": false,
+          "spell": {
+            "ability": "",
+            "preparation": "",
+            "uses": {
+              "max": "",
+              "per": ""
+            }
+          }
         },
         "value": {},
         "level": 3,
-        "title": "Features",
-        "icon": "",
-        "classRestriction": ""
+        "title": "Features"
       },
       {
         "_id": "j2llrpqzdjszdqcr",
@@ -73,13 +92,20 @@
         "configuration": {
           "items": [
             "Compendium.dnd5e.classfeatures.zB77V8BcCJvWVxck"
-          ]
+          ],
+          "optional": false,
+          "spell": {
+            "ability": "",
+            "preparation": "",
+            "uses": {
+              "max": "",
+              "per": ""
+            }
+          }
         },
         "value": {},
         "level": 11,
-        "title": "Features",
-        "icon": "",
-        "classRestriction": ""
+        "title": "Features"
       },
       {
         "_id": "4rqq43u7wtq9vn1k",
@@ -87,13 +113,20 @@
         "configuration": {
           "items": [
             "Compendium.dnd5e.classfeatures.HBn6FXLz7Eiudz0V"
-          ]
+          ],
+          "optional": false,
+          "spell": {
+            "ability": "",
+            "preparation": "",
+            "uses": {
+              "max": "",
+              "per": ""
+            }
+          }
         },
         "value": {},
         "level": 13,
-        "title": "Features",
-        "icon": "",
-        "classRestriction": ""
+        "title": "Features"
       },
       {
         "_id": "05ek6hg9mar50thz",
@@ -101,13 +134,20 @@
         "configuration": {
           "items": [
             "Compendium.dnd5e.classfeatures.knDZR4l4QfLTKinm"
-          ]
+          ],
+          "optional": false,
+          "spell": {
+            "ability": "",
+            "preparation": "",
+            "uses": {
+              "max": "",
+              "per": ""
+            }
+          }
         },
         "value": {},
         "level": 15,
-        "title": "Features",
-        "icon": "",
-        "classRestriction": ""
+        "title": "Features"
       },
       {
         "_id": "85feykdd4eyor8d1",
@@ -115,13 +155,20 @@
         "configuration": {
           "items": [
             "Compendium.dnd5e.classfeatures.vMxJQEKeK6WwZFaF"
-          ]
+          ],
+          "optional": false,
+          "spell": {
+            "ability": "",
+            "preparation": "",
+            "uses": {
+              "max": "",
+              "per": ""
+            }
+          }
         },
         "value": {},
         "level": 17,
-        "title": "Features",
-        "icon": "",
-        "classRestriction": ""
+        "title": "Features"
       },
       {
         "_id": "fd0c4m55mgtb5t8u",
@@ -129,13 +176,20 @@
         "configuration": {
           "items": [
             "Compendium.dnd5e.classfeatures.0C04rwyvoknvFYiy"
-          ]
+          ],
+          "optional": false,
+          "spell": {
+            "ability": "",
+            "preparation": "",
+            "uses": {
+              "max": "",
+              "per": ""
+            }
+          }
         },
         "value": {},
         "level": 20,
-        "title": "Features",
-        "icon": "",
-        "classRestriction": ""
+        "title": "Features"
       },
       {
         "_id": "fMO3Z9wZmb6EZPN1",
@@ -159,9 +213,7 @@
           }
         },
         "value": {},
-        "title": "Cantrips Known",
-        "icon": "",
-        "classRestriction": ""
+        "title": "Cantrips Known"
       },
       {
         "_id": "7owUaZki6MyoFEuL",
@@ -218,9 +270,7 @@
           }
         },
         "value": {},
-        "title": "Spells Known",
-        "icon": "",
-        "classRestriction": ""
+        "title": "Spells Known"
       }
     ],
     "saves": [
@@ -243,9 +293,6 @@
     "spellcasting": {
       "progression": "pact",
       "ability": "cha"
-    },
-    "damage": {
-      "parts": []
     }
   },
   "effects": [],
@@ -257,10 +304,10 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.0.0",
-    "coreVersion": "10.279",
+    "systemVersion": "2.1.0",
+    "coreVersion": "10.291",
     "createdTime": 1661787234278,
-    "modifiedTime": 1661787234278,
+    "modifiedTime": 1671220972779,
     "lastModifiedBy": "dnd5ebuilder0000"
   }
 }

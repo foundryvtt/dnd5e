@@ -16,9 +16,10 @@
       "condition": ""
     },
     "duration": {
-      "value": 8,
+      "value": "8",
       "units": "hour"
     },
+    "cover": null,
     "target": {
       "value": 1,
       "width": null,
@@ -32,8 +33,9 @@
     },
     "uses": {
       "value": 0,
-      "max": 0,
-      "per": ""
+      "max": "",
+      "per": null,
+      "recovery": ""
     },
     "consume": {
       "type": "",
@@ -42,7 +44,7 @@
     },
     "ability": "",
     "actionType": "util",
-    "attackBonus": 0,
+    "attackBonus": "",
     "chatFlavor": "",
     "critical": {
       "threshold": null,
@@ -50,20 +52,17 @@
     },
     "damage": {
       "parts": [],
-      "versatile": "",
-      "value": ""
+      "versatile": ""
     },
     "formula": "",
     "save": {
       "ability": "",
       "dc": null,
-      "scaling": "spell",
-      "value": ""
+      "scaling": "spell"
     },
     "level": 1,
     "school": "abj",
     "components": {
-      "value": "",
       "vocal": true,
       "somatic": true,
       "material": true,
@@ -122,10 +121,10 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.0.0",
-    "coreVersion": "10.279",
+    "systemVersion": "2.1.0",
+    "coreVersion": "10.291",
     "createdTime": 1661787234095,
-    "modifiedTime": 1661787234095,
+    "modifiedTime": 1671220968939,
     "lastModifiedBy": "dnd5ebuilder0000"
   }
 }

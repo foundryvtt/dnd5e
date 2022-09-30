@@ -26,9 +26,10 @@
       "condition": "Must have enough charges for the face pressed otherwise the Action is lost."
     },
     "duration": {
-      "value": 1,
+      "value": "1",
       "units": "minute"
     },
+    "cover": null,
     "target": {
       "value": 15,
       "width": null,
@@ -42,11 +43,10 @@
     },
     "uses": {
       "value": 36,
-      "max": 36,
+      "max": "36",
       "per": "charges",
-      "autoDestroy": false,
-      "autoUse": false,
-      "recovery": "1d20"
+      "recovery": "1d20",
+      "autoDestroy": false
     },
     "consume": {
       "type": "",
@@ -55,7 +55,7 @@
     },
     "ability": "",
     "actionType": "util",
-    "attackBonus": 0,
+    "attackBonus": "",
     "chatFlavor": "",
     "critical": {
       "threshold": null,
@@ -71,10 +71,7 @@
       "dc": null,
       "scaling": "spell"
     },
-    "consumableType": "trinket",
-    "attributes": {
-      "spelldc": 10
-    }
+    "consumableType": "trinket"
   },
   "effects": [],
   "folder": null,
@@ -85,10 +82,10 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.0.2",
-    "coreVersion": "10.286",
+    "systemVersion": "2.1.0",
+    "coreVersion": "10.291",
     "createdTime": 1661787233895,
-    "modifiedTime": 1663775408819,
+    "modifiedTime": 1671220964662,
     "lastModifiedBy": "dnd5ebuilder0000"
   }
 }

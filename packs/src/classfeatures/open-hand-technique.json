@@ -14,13 +14,14 @@
     "source": "PHB pg. 79",
     "activation": {
       "type": "special",
-      "cost": null,
+      "cost": 0,
       "condition": ""
     },
     "duration": {
-      "value": null,
+      "value": "",
       "units": ""
     },
+    "cover": null,
     "target": {
       "value": 1,
       "width": null,
@@ -35,17 +36,17 @@
     "uses": {
       "value": null,
       "max": "",
-      "per": "",
+      "per": null,
       "recovery": ""
     },
     "consume": {
       "type": "",
-      "target": "",
+      "target": null,
       "amount": null
     },
     "ability": "",
     "actionType": "",
-    "attackBonus": 0,
+    "attackBonus": "",
     "chatFlavor": "",
     "critical": {
       "threshold": null,
@@ -74,10 +75,10 @@
   "sort": 0,
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.0.3",
-    "coreVersion": "10.286",
+    "systemVersion": "2.1.0",
+    "coreVersion": "10.291",
     "createdTime": 1661787234410,
-    "modifiedTime": 1663990940408,
+    "modifiedTime": 1671220976238,
     "lastModifiedBy": "dnd5ebuilder0000"
   }
 }

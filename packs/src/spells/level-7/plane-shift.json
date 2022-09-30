@@ -18,9 +18,10 @@
       "condition": ""
     },
     "duration": {
-      "value": null,
+      "value": "",
       "units": "inst"
     },
+    "cover": null,
     "target": {
       "value": 8,
       "width": null,
@@ -34,17 +35,18 @@
     },
     "uses": {
       "value": 0,
-      "max": 0,
-      "per": ""
+      "max": "",
+      "per": null,
+      "recovery": ""
     },
     "consume": {
       "type": "",
-      "target": "",
+      "target": null,
       "amount": null
     },
     "ability": "",
     "actionType": "msak",
-    "attackBonus": 0,
+    "attackBonus": "",
     "chatFlavor": "",
     "critical": {
       "threshold": null,
@@ -52,8 +54,7 @@
     },
     "damage": {
       "parts": [],
-      "versatile": "",
-      "value": ""
+      "versatile": ""
     },
     "formula": "",
     "save": {
@@ -64,7 +65,6 @@
     "level": 7,
     "school": "con",
     "components": {
-      "value": "",
       "vocal": true,
       "somatic": true,
       "material": true,
@@ -93,10 +93,10 @@
   "folder": null,
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.0.0",
-    "coreVersion": "10.279",
+    "systemVersion": "2.1.0",
+    "coreVersion": "10.291",
     "createdTime": 1661787234111,
-    "modifiedTime": 1661787234111,
+    "modifiedTime": 1671220969075,
     "lastModifiedBy": "dnd5ebuilder0000"
   }
 }

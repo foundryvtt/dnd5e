@@ -20,9 +20,7 @@
         "type": "HitPoints",
         "configuration": {},
         "value": {},
-        "title": "",
-        "icon": "",
-        "classRestriction": ""
+        "title": ""
       },
       {
         "_id": "x1zumbrnbhqlrrs6",
@@ -31,13 +29,20 @@
           "items": [
             "Compendium.dnd5e.classfeatures.v4gKwLhAq9vuqza7",
             "Compendium.dnd5e.classfeatures.x637K2Icp2ZFM1TB"
-          ]
+          ],
+          "optional": false,
+          "spell": {
+            "ability": "",
+            "preparation": "",
+            "uses": {
+              "max": "",
+              "per": ""
+            }
+          }
         },
         "value": {},
         "level": 1,
-        "title": "Features",
-        "icon": "",
-        "classRestriction": ""
+        "title": "Features"
       },
       {
         "_id": "3f8dslbuft75khej",
@@ -46,13 +51,20 @@
           "items": [
             "Compendium.dnd5e.classfeatures.YpiLQEKGalROn7iJ",
             "Compendium.dnd5e.classfeatures.r91UIgwFdHwkXdia"
-          ]
+          ],
+          "optional": false,
+          "spell": {
+            "ability": "",
+            "preparation": "",
+            "uses": {
+              "max": "",
+              "per": ""
+            }
+          }
         },
         "value": {},
         "level": 2,
-        "title": "Features",
-        "icon": "",
-        "classRestriction": ""
+        "title": "Features"
       },
       {
         "_id": "6hhfay73h7bk90kx",
@@ -60,13 +72,20 @@
         "configuration": {
           "items": [
             "Compendium.dnd5e.classfeatures.NMy4piwXIpLjYbRE"
-          ]
+          ],
+          "optional": false,
+          "spell": {
+            "ability": "",
+            "preparation": "",
+            "uses": {
+              "max": "",
+              "per": ""
+            }
+          }
         },
         "value": {},
         "level": 5,
-        "title": "Features",
-        "icon": "",
-        "classRestriction": ""
+        "title": "Features"
       },
       {
         "_id": "isb9tz3m2pku3v5k",
@@ -74,13 +93,20 @@
         "configuration": {
           "items": [
             "Compendium.dnd5e.classfeatures.eVXqHn0ojWrEuYGU"
-          ]
+          ],
+          "optional": false,
+          "spell": {
+            "ability": "",
+            "preparation": "",
+            "uses": {
+              "max": "",
+              "per": ""
+            }
+          }
         },
         "value": {},
         "level": 10,
-        "title": "Features",
-        "icon": "",
-        "classRestriction": ""
+        "title": "Features"
       },
       {
         "_id": "0qejays9aapvinez",
@@ -98,12 +124,13 @@
             "18": {
               "value": 3
             }
+          },
+          "distance": {
+            "units": ""
           }
         },
         "value": {},
-        "title": "Channel Divinity Uses",
-        "icon": "",
-        "classRestriction": ""
+        "title": "Channel Divinity Uses"
       },
       {
         "_id": "7x56rxulbhb82zdi",
@@ -133,9 +160,7 @@
           }
         },
         "value": {},
-        "title": "Destroy Undead CR",
-        "icon": "",
-        "classRestriction": ""
+        "title": "Destroy Undead CR"
       },
       {
         "_id": "pxDc5jV9dJLpNTNz",
@@ -159,9 +184,7 @@
           }
         },
         "value": {},
-        "title": "Cantrips Known",
-        "icon": "",
-        "classRestriction": ""
+        "title": "Cantrips Known"
       }
     ],
     "saves": [
@@ -182,9 +205,6 @@
     "spellcasting": {
       "progression": "full",
       "ability": "wis"
-    },
-    "damage": {
-      "parts": []
     }
   },
   "effects": [],
@@ -196,10 +216,10 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.0.3",
-    "coreVersion": "10.286",
+    "systemVersion": "2.1.0",
+    "coreVersion": "10.291",
     "createdTime": 1661787234282,
-    "modifiedTime": 1664049282806,
+    "modifiedTime": 1671220972871,
     "lastModifiedBy": "dnd5ebuilder0000"
   }
 }

@@ -26,9 +26,10 @@
       "condition": ""
     },
     "duration": {
-      "value": 1,
+      "value": "1",
       "units": "minute"
     },
+    "cover": null,
     "target": {
       "value": 0,
       "width": null,
@@ -42,7 +43,7 @@
     },
     "uses": {
       "value": 3,
-      "max": 3,
+      "max": "3",
       "per": "charges",
       "recovery": "1d3"
     },
@@ -53,7 +54,7 @@
     },
     "ability": null,
     "actionType": "mwak",
-    "attackBonus": 1,
+    "attackBonus": "1",
     "chatFlavor": "",
     "critical": {
       "threshold": null,
@@ -102,10 +103,7 @@
       "ver": false,
       "mgc": true
     },
-    "proficient": false,
-    "attributes": {
-      "spelldc": 10
-    }
+    "proficient": false
   },
   "effects": [],
   "folder": null,
@@ -116,10 +114,10 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.0.2",
-    "coreVersion": "10.286",
+    "systemVersion": "2.1.0",
+    "coreVersion": "10.291",
     "createdTime": 1661787233728,
-    "modifiedTime": 1663775408677,
+    "modifiedTime": 1671220961872,
     "lastModifiedBy": "dnd5ebuilder0000"
   }
 }

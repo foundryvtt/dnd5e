@@ -26,9 +26,10 @@
       "condition": ""
     },
     "duration": {
-      "value": null,
+      "value": "",
       "units": "inst"
     },
+    "cover": null,
     "target": {
       "value": 0,
       "width": null,
@@ -42,8 +43,9 @@
     },
     "uses": {
       "value": 1,
-      "max": 1,
-      "per": "day"
+      "max": "1",
+      "per": "day",
+      "recovery": ""
     },
     "consume": {
       "type": "",
@@ -52,7 +54,7 @@
     },
     "ability": "",
     "actionType": "rsak",
-    "attackBonus": 5,
+    "attackBonus": "5",
     "chatFlavor": "",
     "critical": {
       "threshold": null,
@@ -91,10 +93,7 @@
     },
     "strength": 0,
     "stealth": false,
-    "proficient": false,
-    "attributes": {
-      "spelldc": 10
-    }
+    "proficient": false
   },
   "effects": [],
   "folder": null,
@@ -105,10 +104,10 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.0.0",
-    "coreVersion": "10.279",
+    "systemVersion": "2.1.0",
+    "coreVersion": "10.291",
     "createdTime": 1661787233498,
-    "modifiedTime": 1661787233498,
+    "modifiedTime": 1671220957735,
     "lastModifiedBy": "dnd5ebuilder0000"
   }
 }

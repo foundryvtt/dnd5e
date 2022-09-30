@@ -18,13 +18,14 @@
       "condition": ""
     },
     "duration": {
-      "value": 0,
+      "value": "",
       "units": ""
     },
+    "cover": null,
     "target": {
       "value": null,
       "width": null,
-      "units": null,
+      "units": "",
       "type": "self"
     },
     "range": {
@@ -34,17 +35,18 @@
     },
     "uses": {
       "value": 1,
-      "max": 1,
-      "per": "sr"
+      "max": "1",
+      "per": "sr",
+      "recovery": ""
     },
     "consume": {
       "type": "",
-      "target": "",
+      "target": null,
       "amount": null
     },
     "ability": "",
     "actionType": "heal",
-    "attackBonus": 0,
+    "attackBonus": "",
     "chatFlavor": "",
     "critical": {
       "threshold": null,
@@ -67,7 +69,7 @@
     },
     "requirements": "Fighter 1",
     "recharge": {
-      "value": 0,
+      "value": 1,
       "charged": false
     }
   },
@@ -78,10 +80,10 @@
   "effects": [],
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.0.0",
-    "coreVersion": "10.279",
+    "systemVersion": "2.1.0",
+    "coreVersion": "10.291",
     "createdTime": 1661787234421,
-    "modifiedTime": 1661787234421,
+    "modifiedTime": 1671220976378,
     "lastModifiedBy": "dnd5ebuilder0000"
   }
 }

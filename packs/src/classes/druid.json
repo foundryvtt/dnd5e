@@ -20,9 +20,7 @@
         "type": "HitPoints",
         "configuration": {},
         "value": {},
-        "title": "",
-        "icon": "",
-        "classRestriction": ""
+        "title": ""
       },
       {
         "_id": "6pdotglp4hy4zlvb",
@@ -31,13 +29,20 @@
           "items": [
             "Compendium.dnd5e.classfeatures.LzJ5ayHt0OlSVGxi",
             "Compendium.dnd5e.classfeatures.i6tPm3FNK13Ftc9v"
-          ]
+          ],
+          "optional": false,
+          "spell": {
+            "ability": "",
+            "preparation": "",
+            "uses": {
+              "max": "",
+              "per": ""
+            }
+          }
         },
         "value": {},
         "level": 1,
-        "title": "Features",
-        "icon": "",
-        "classRestriction": ""
+        "title": "Features"
       },
       {
         "_id": "qnfy6m18u4cfdqwm",
@@ -46,13 +51,20 @@
           "items": [
             "Compendium.dnd5e.classfeatures.swK0r5TOIxredxWS",
             "Compendium.dnd5e.classfeatures.u6Du2P9s81SWuGbi"
-          ]
+          ],
+          "optional": false,
+          "spell": {
+            "ability": "",
+            "preparation": "",
+            "uses": {
+              "max": "",
+              "per": ""
+            }
+          }
         },
         "value": {},
         "level": 2,
-        "title": "Features",
-        "icon": "",
-        "classRestriction": ""
+        "title": "Features"
       },
       {
         "_id": "r3xhzsz7noff50w3",
@@ -61,13 +73,20 @@
           "items": [
             "Compendium.dnd5e.classfeatures.cVDEQo0ow1WJT7Wl",
             "Compendium.dnd5e.classfeatures.xvgPu1O57DgXCM86"
-          ]
+          ],
+          "optional": false,
+          "spell": {
+            "ability": "",
+            "preparation": "",
+            "uses": {
+              "max": "",
+              "per": ""
+            }
+          }
         },
         "value": {},
         "level": 18,
-        "title": "Features",
-        "icon": "",
-        "classRestriction": ""
+        "title": "Features"
       },
       {
         "_id": "pkfb1a2u37665epq",
@@ -75,13 +94,20 @@
         "configuration": {
           "items": [
             "Compendium.dnd5e.classfeatures.ip4bvmGoz3qkoqes"
-          ]
+          ],
+          "optional": false,
+          "spell": {
+            "ability": "",
+            "preparation": "",
+            "uses": {
+              "max": "",
+              "per": ""
+            }
+          }
         },
         "value": {},
         "level": 20,
-        "title": "Features",
-        "icon": "",
-        "classRestriction": ""
+        "title": "Features"
       },
       {
         "_id": "6vytnom37pkazgld",
@@ -105,9 +131,7 @@
           }
         },
         "value": {},
-        "title": "Wild Shape CR",
-        "icon": "",
-        "classRestriction": ""
+        "title": "Wild Shape CR"
       },
       {
         "_id": "K8ShWezgK90dp1uk",
@@ -131,9 +155,7 @@
           }
         },
         "value": {},
-        "title": "Cantrips Known",
-        "icon": "",
-        "classRestriction": ""
+        "title": "Cantrips Known"
       }
     ],
     "saves": [
@@ -157,9 +179,6 @@
     "spellcasting": {
       "progression": "full",
       "ability": "wis"
-    },
-    "damage": {
-      "parts": []
     }
   },
   "effects": [],
@@ -171,10 +190,10 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.0.3",
-    "coreVersion": "10.286",
+    "systemVersion": "2.1.0",
+    "coreVersion": "10.291",
     "createdTime": 1661787234284,
-    "modifiedTime": 1664049296255,
+    "modifiedTime": 1671220972919,
     "lastModifiedBy": "dnd5ebuilder0000"
   }
 }

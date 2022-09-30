@@ -18,9 +18,10 @@
       "condition": ""
     },
     "duration": {
-      "value": null,
+      "value": "",
       "units": ""
     },
+    "cover": null,
     "target": {
       "value": null,
       "width": null,
@@ -34,8 +35,9 @@
     },
     "uses": {
       "value": 0,
-      "max": 0,
-      "per": null
+      "max": "",
+      "per": null,
+      "recovery": ""
     },
     "consume": {
       "type": "",
@@ -44,7 +46,7 @@
     },
     "ability": null,
     "actionType": "",
-    "attackBonus": 0,
+    "attackBonus": "",
     "chatFlavor": "",
     "critical": {
       "threshold": null,
@@ -64,18 +66,6 @@
     "recharge": {
       "value": null,
       "charged": false
-    },
-    "featType": {
-      "value": "",
-      "_deprecated": true
-    },
-    "time": {
-      "value": "",
-      "_deprecated": true
-    },
-    "damageType": {
-      "value": "",
-      "_deprecated": true
     }
   },
   "flags": {},
@@ -85,10 +75,10 @@
   "sort": 0,
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.0.0",
-    "coreVersion": "10.279",
+    "systemVersion": "2.1.0",
+    "coreVersion": "10.291",
     "createdTime": 1661787234586,
-    "modifiedTime": 1661787234586,
+    "modifiedTime": 1671220981030,
     "lastModifiedBy": "dnd5ebuilder0000"
   }
 }

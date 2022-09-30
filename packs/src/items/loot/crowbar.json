@@ -19,72 +19,7 @@
     "attunement": 0,
     "equipped": false,
     "rarity": "common",
-    "identified": true,
-    "activation": {
-      "type": "",
-      "cost": 0,
-      "condition": ""
-    },
-    "duration": {
-      "value": null,
-      "units": ""
-    },
-    "target": {
-      "value": null,
-      "units": "",
-      "type": ""
-    },
-    "range": {
-      "value": null,
-      "long": null,
-      "units": ""
-    },
-    "uses": {
-      "value": null,
-      "max": "",
-      "per": null,
-      "autoUse": false,
-      "autoDestroy": false
-    },
-    "damage": {
-      "parts": [],
-      "versatile": ""
-    },
-    "save": {
-      "ability": "",
-      "dc": null,
-      "scaling": "spell"
-    },
-    "consume": {
-      "type": "",
-      "target": null,
-      "amount": null
-    },
-    "armor": {
-      "value": 10
-    },
-    "hp": {
-      "value": 0,
-      "max": 0,
-      "dt": null,
-      "conditions": ""
-    },
-    "properties": {
-      "amm": false,
-      "fin": false,
-      "fir": false,
-      "foc": false,
-      "hvy": false,
-      "lgt": false,
-      "lod": false,
-      "rch": false,
-      "rel": false,
-      "ret": false,
-      "spc": false,
-      "thr": false,
-      "two": false,
-      "ver": false
-    }
+    "identified": true
   },
   "effects": [],
   "folder": null,
@@ -95,10 +30,10 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.0.0",
-    "coreVersion": "10.279",
+    "systemVersion": "2.1.0",
+    "coreVersion": "10.291",
     "createdTime": 1661787233682,
-    "modifiedTime": 1661787233682,
+    "modifiedTime": 1671220961307,
     "lastModifiedBy": "dnd5ebuilder0000"
   }
 }

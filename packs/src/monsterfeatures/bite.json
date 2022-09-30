@@ -28,9 +28,10 @@
       "condition": ""
     },
     "duration": {
-      "value": null,
+      "value": "",
       "units": ""
     },
+    "cover": null,
     "target": {
       "value": 1,
       "width": null,
@@ -44,17 +45,18 @@
     },
     "uses": {
       "value": 0,
-      "max": 0,
-      "per": ""
+      "max": "",
+      "per": null,
+      "recovery": ""
     },
     "consume": {
       "type": "",
-      "target": "",
+      "target": null,
       "amount": null
     },
     "ability": "str",
     "actionType": "mwak",
-    "attackBonus": 0,
+    "attackBonus": "",
     "chatFlavor": "",
     "critical": {
       "threshold": null,
@@ -97,8 +99,7 @@
       "two": false,
       "ver": false
     },
-    "proficient": true,
-    "attuned": false
+    "proficient": true
   },
   "flags": {},
   "img": "icons/creatures/abilities/mouth-teeth-long-red.webp",
@@ -107,10 +108,10 @@
   "sort": 0,
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.0.0",
-    "coreVersion": "10.290",
+    "systemVersion": "2.1.0",
+    "coreVersion": "10.291",
     "createdTime": 1661787234559,
-    "modifiedTime": 1670010904135,
+    "modifiedTime": 1671220980694,
     "lastModifiedBy": "dnd5ebuilder0000"
   }
 }

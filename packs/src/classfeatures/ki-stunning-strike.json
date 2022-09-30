@@ -14,13 +14,14 @@
     "source": "PHB pg. 79",
     "activation": {
       "type": "special",
-      "cost": null,
+      "cost": 0,
       "condition": ""
     },
     "duration": {
-      "value": null,
+      "value": "",
       "units": ""
     },
+    "cover": null,
     "target": {
       "value": null,
       "width": null,
@@ -35,16 +36,17 @@
     "uses": {
       "value": null,
       "max": "",
-      "per": null
+      "per": null,
+      "recovery": ""
     },
     "consume": {
       "type": "",
-      "target": "",
+      "target": null,
       "amount": null
     },
     "ability": "",
     "actionType": "save",
-    "attackBonus": 0,
+    "attackBonus": "",
     "chatFlavor": "",
     "critical": {
       "threshold": null,
@@ -58,8 +60,7 @@
     "save": {
       "ability": "con",
       "dc": null,
-      "scaling": "wis",
-      "value": "con"
+      "scaling": "wis"
     },
     "requirements": "Monk 5",
     "recharge": {
@@ -74,10 +75,10 @@
   "sort": 0,
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.0.0",
-    "coreVersion": "10.279",
+    "systemVersion": "2.1.0",
+    "coreVersion": "10.291",
     "createdTime": 1661787234427,
-    "modifiedTime": 1661787234427,
+    "modifiedTime": 1671220976416,
     "lastModifiedBy": "dnd5ebuilder0000"
   }
 }

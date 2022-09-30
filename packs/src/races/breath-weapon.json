@@ -18,9 +18,10 @@
       "condition": ""
     },
     "duration": {
-      "value": null,
+      "value": "",
       "units": "inst"
     },
+    "cover": null,
     "target": {
       "value": 15,
       "width": null,
@@ -40,12 +41,12 @@
     },
     "consume": {
       "type": "",
-      "target": "",
+      "target": null,
       "amount": null
     },
     "ability": "con",
     "actionType": "save",
-    "attackBonus": 0,
+    "attackBonus": "",
     "chatFlavor": "",
     "critical": {
       "threshold": null,
@@ -79,10 +80,10 @@
   "sort": 0,
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.0.3",
-    "coreVersion": "10.286",
+    "systemVersion": "2.1.0",
+    "coreVersion": "10.291",
     "createdTime": 1661787234466,
-    "modifiedTime": 1663991928512,
+    "modifiedTime": 1671220977503,
     "lastModifiedBy": "dnd5ebuilder0000"
   }
 }
