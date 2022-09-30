@@ -86,6 +86,8 @@ export class FormulaField extends foundry.data.fields.StringField {
 export class IdentifierField extends foundry.data.fields.StringField {
   /** @override */
   _validateType(value) {
-    if ( !dnd5e.utils.validators.isValidIdentifier(value) ) throw new Error(game.i18n.localize("DND5E.IdentifierError"));
+    if ( !dnd5e.utils.validators.isValidIdentifier(value) ) {
+      throw new Error(game.i18n.localize("DND5E.IdentifierError"));
+    }
   }
 }

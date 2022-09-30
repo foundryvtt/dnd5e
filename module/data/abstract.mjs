@@ -42,9 +42,22 @@ export default class SystemDataModel extends foundry.abstract.DataModel {
       if ( !template.defineSchema ) {
         throw new Error(`Invalid dnd5e template mixin ${template} defined on class ${this.constructor}`);
       }
-      Object.assign(schema, template.defineSchema());
+      this.mergeSchema(schema, template.defineSchema());
     }
     return schema;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Merge two schema definitions together as well as possible.
+   * @param {object} a  First schema that forms the basis for the merge. *Will be mutated.*
+   * @param {object} b  Second schema that will be merged in, overwriting any non-mergeable properties.
+   * @returns {object}  Fully merged schema.
+   */
+  static mergeSchema(a, b) {
+    Object.assign(a, b);
+    return a;
   }
 
   /* -------------------------------------------- */
