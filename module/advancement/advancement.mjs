@@ -20,15 +20,10 @@ class AdvancementError extends Error {
  * @abstract
  */
 export default class Advancement extends BaseAdvancement {
-  constructor(item, data={}, options={}) {
-    options.parent = item;
-    super(data, options);
-  }
 
   /** @inheritdoc */
   _initialize(options) {
     super._initialize(options);
-    if ( !game._documentsReady ) return;
     return this.prepareData();
   }
 
@@ -105,7 +100,7 @@ export default class Advancement extends BaseAdvancement {
    * @type {Item5e}
    */
   get item() {
-    return this.parent;
+    return this.parent.parent;
   }
 
   /* -------------------------------------------- */
@@ -222,23 +217,18 @@ export default class Advancement extends BaseAdvancement {
   async update(updates) {
     this.constructor._migrateUpdateData(updates);
     await this.item.updateAdvancement(this.id, updates);
-    this.updateSource(updates);
-    return this.item.advancement.byId[this.id];
+    return this;
   }
 
   /* -------------------------------------------- */
 
   /**
    * Update this advancement's data on the item without performing a database commit.
-   * @param {object} updates                     Updates to apply to this advancement.
-   * @param {object} [options={}]
-   * @param {boolean} [options.updateItem=true]  Apply this update to the item in which this advancement is embedded?
-   * @returns {Advancement}                      This advancement after updates have been applied.
+   * @param {object} updates  Updates to apply to this advancement.
+   * @returns {Advancement}   This advancement after updates have been applied.
    */
-  updateSource(updates, { updateItem=true }={}) {
-    if ( !updateItem ) return super.updateSource(updates);
+  updateSource(updates) {
     this.constructor._migrateUpdateData(updates);
-    this.item.updateAdvancement(this.id, updates, { source: true });
     super.updateSource(updates);
     return this;
   }
