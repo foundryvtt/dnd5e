@@ -51,12 +51,28 @@ export default class SystemDataModel extends foundry.abstract.DataModel {
 
   /**
    * Merge two schema definitions together as well as possible.
-   * @param {object} a  First schema that forms the basis for the merge. *Will be mutated.*
-   * @param {object} b  Second schema that will be merged in, overwriting any non-mergeable properties.
-   * @returns {object}  Fully merged schema.
+   * @param {DataSchema} a  First schema that forms the basis for the merge. *Will be mutated.*
+   * @param {DataSchema} b  Second schema that will be merged in, overwriting any non-mergeable properties.
+   * @returns {DataSchema}  Fully merged schema.
    */
   static mergeSchema(a, b) {
-    Object.assign(a, b);
+    for ( const key of Object.keys(b) ) {
+      if ( !(key in a) || (a[key].constructor !== b[key].constructor) ) {
+        a[key] = b[key];
+        continue;
+      }
+      switch ( b[key].constructor ) {
+        case foundry.data.fields.SchemaField:
+          const fields = this.mergeSchema(a[key].fields, b[key].fields);
+          Object.values(fields).forEach(f => f.parent = undefined);
+          a[key] = new foundry.data.fields.SchemaField(
+            fields, foundry.utils.mergeObject(a[key].options, b[key].options)
+          );
+          break;
+        default:
+          a[key] = b[key];
+      }
+    }
     return a;
   }
 
