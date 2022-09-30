@@ -26,9 +26,10 @@
       "condition": ""
     },
     "duration": {
-      "value": 0,
+      "value": "",
       "units": ""
     },
+    "cover": null,
     "target": {
       "value": 1,
       "width": null,
@@ -44,19 +45,17 @@
       "value": 1,
       "max": "1",
       "per": "charges",
-      "autoDestroy": true,
-      "autoUse": true
+      "recovery": "",
+      "autoDestroy": true
     },
     "consume": {
       "type": "",
-      "target": "",
-      "amount": null,
-      "value": "",
-      "_deprecated": true
+      "target": null,
+      "amount": null
     },
     "ability": "",
     "actionType": "heal",
-    "attackBonus": 0,
+    "attackBonus": "",
     "chatFlavor": "",
     "critical": {
       "threshold": null,
@@ -77,28 +76,7 @@
       "dc": null,
       "scaling": "spell"
     },
-    "consumableType": "potion",
-    "attributes": {
-      "spelldc": 10
-    },
-    "consumes": {
-      "type": "",
-      "target": null,
-      "amount": null
-    },
-    "charges": {
-      "value": 1,
-      "max": 1,
-      "_deprecated": true
-    },
-    "autoUse": {
-      "value": true,
-      "_deprecated": true
-    },
-    "autoDestroy": {
-      "value": true,
-      "_deprecated": true
-    }
+    "consumableType": "potion"
   },
   "effects": [],
   "folder": null,
@@ -109,10 +87,10 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.0.0",
-    "coreVersion": "10.279",
+    "systemVersion": "2.1.0",
+    "coreVersion": "10.291",
     "createdTime": 1661787233578,
-    "modifiedTime": 1661787233578,
+    "modifiedTime": 1671220959341,
     "lastModifiedBy": "dnd5ebuilder0000"
   }
 }

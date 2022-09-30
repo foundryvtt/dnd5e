@@ -26,9 +26,10 @@
       "condition": ""
     },
     "duration": {
-      "value": null,
+      "value": "",
       "units": ""
     },
+    "cover": null,
     "target": {
       "value": null,
       "width": null,
@@ -43,17 +44,17 @@
     "uses": {
       "value": null,
       "max": "",
-      "per": "",
+      "per": null,
       "recovery": ""
     },
     "consume": {
       "type": "",
-      "target": "",
+      "target": null,
       "amount": null
     },
     "ability": "",
     "actionType": "mwak",
-    "attackBonus": "0",
+    "attackBonus": "",
     "chatFlavor": "",
     "critical": {
       "threshold": null,
@@ -115,10 +116,10 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.0.3",
-    "coreVersion": "10.290",
+    "systemVersion": "2.1.0",
+    "coreVersion": "10.291",
     "createdTime": 1661787234400,
-    "modifiedTime": 1670010904135,
+    "modifiedTime": 1671220976154,
     "lastModifiedBy": "dnd5ebuilder0000"
   }
 }

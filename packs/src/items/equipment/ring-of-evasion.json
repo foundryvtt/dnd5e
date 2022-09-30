@@ -26,13 +26,14 @@
       "condition": ""
     },
     "duration": {
-      "value": 0,
+      "value": "",
       "units": ""
     },
+    "cover": null,
     "target": {
       "value": null,
       "width": null,
-      "units": null,
+      "units": "",
       "type": "self"
     },
     "range": {
@@ -42,7 +43,7 @@
     },
     "uses": {
       "value": 3,
-      "max": 3,
+      "max": "3",
       "per": "charges",
       "recovery": "1d3"
     },
@@ -53,7 +54,7 @@
     },
     "ability": "",
     "actionType": "util",
-    "attackBonus": 0,
+    "attackBonus": "",
     "chatFlavor": "",
     "critical": {
       "threshold": null,
@@ -87,10 +88,7 @@
     },
     "strength": 0,
     "stealth": false,
-    "proficient": false,
-    "attributes": {
-      "spelldc": 10
-    }
+    "proficient": false
   },
   "effects": [],
   "folder": null,
@@ -101,10 +99,10 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.0.2",
-    "coreVersion": "10.286",
+    "systemVersion": "2.1.0",
+    "coreVersion": "10.291",
     "createdTime": 1661787233451,
-    "modifiedTime": 1663775408489,
+    "modifiedTime": 1671220957159,
     "lastModifiedBy": "dnd5ebuilder0000"
   }
 }

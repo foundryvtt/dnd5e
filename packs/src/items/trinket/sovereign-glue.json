@@ -26,9 +26,10 @@
       "condition": "Takes 1 minute to set."
     },
     "duration": {
-      "value": null,
+      "value": "",
       "units": ""
     },
+    "cover": null,
     "target": {
       "value": 1,
       "width": null,
@@ -45,17 +46,16 @@
       "max": "7",
       "per": "charges",
       "recovery": "",
-      "autoDestroy": true,
-      "autoUse": true
+      "autoDestroy": true
     },
     "consume": {
       "type": "",
-      "target": "",
+      "target": null,
       "amount": null
     },
     "ability": "",
     "actionType": "util",
-    "attackBonus": 0,
+    "attackBonus": "",
     "chatFlavor": "",
     "critical": {
       "threshold": null,
@@ -82,10 +82,10 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.0.3",
-    "coreVersion": "10.286",
+    "systemVersion": "2.1.0",
+    "coreVersion": "10.291",
     "createdTime": 1661787233977,
-    "modifiedTime": 1663991510073,
+    "modifiedTime": 1671220965850,
     "lastModifiedBy": "dnd5ebuilder0000"
   }
 }

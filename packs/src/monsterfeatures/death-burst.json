@@ -14,13 +14,14 @@
     "source": "",
     "activation": {
       "type": "special",
-      "cost": null,
+      "cost": 0,
       "condition": "on death"
     },
     "duration": {
-      "value": 1,
+      "value": "1",
       "units": "minute"
     },
+    "cover": null,
     "target": {
       "value": null,
       "width": null,
@@ -34,18 +35,18 @@
     },
     "uses": {
       "value": 1,
-      "max": 1,
-      "per": "",
-      "type": "day"
+      "max": "1",
+      "per": null,
+      "recovery": ""
     },
     "consume": {
       "type": "",
-      "target": "",
+      "target": null,
       "amount": null
     },
     "ability": "con",
     "actionType": "other",
-    "attackBonus": 0,
+    "attackBonus": "",
     "chatFlavor": "",
     "critical": {
       "threshold": null,
@@ -53,28 +54,18 @@
     },
     "damage": {
       "parts": [],
-      "versatile": "",
-      "value": ""
+      "versatile": ""
     },
     "formula": "",
     "save": {
       "ability": "con",
       "dc": 10,
-      "scaling": "flat",
-      "value": "con"
+      "scaling": "flat"
     },
     "requirements": "",
     "recharge": {
       "value": null,
       "charged": false
-    },
-    "time": {
-      "value": "",
-      "_deprecated": true
-    },
-    "damageType": {
-      "value": "",
-      "_deprecated": true
     }
   },
   "flags": {},
@@ -84,10 +75,10 @@
   "sort": 0,
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.0.0",
-    "coreVersion": "10.279",
+    "systemVersion": "2.1.0",
+    "coreVersion": "10.291",
     "createdTime": 1661787234603,
-    "modifiedTime": 1661787234603,
+    "modifiedTime": 1671220981196,
     "lastModifiedBy": "dnd5ebuilder0000"
   }
 }

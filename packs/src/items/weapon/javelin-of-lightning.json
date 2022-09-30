@@ -26,9 +26,10 @@
       "condition": "Command word."
     },
     "duration": {
-      "value": null,
+      "value": "",
       "units": "inst"
     },
+    "cover": null,
     "target": {
       "value": 120,
       "width": null,
@@ -42,8 +43,9 @@
     },
     "uses": {
       "value": 1,
-      "max": 1,
-      "per": "day"
+      "max": "1",
+      "per": "day",
+      "recovery": ""
     },
     "consume": {
       "type": "",
@@ -52,7 +54,7 @@
     },
     "ability": null,
     "actionType": "rwak",
-    "attackBonus": 0,
+    "attackBonus": "",
     "chatFlavor": "",
     "critical": {
       "threshold": null,
@@ -105,10 +107,7 @@
       "ver": false,
       "mgc": true
     },
-    "proficient": false,
-    "attributes": {
-      "spelldc": 10
-    }
+    "proficient": false
   },
   "effects": [],
   "folder": null,
@@ -119,10 +118,10 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.0.0",
-    "coreVersion": "10.279",
+    "systemVersion": "2.1.0",
+    "coreVersion": "10.291",
     "createdTime": 1661787233617,
-    "modifiedTime": 1661787233617,
+    "modifiedTime": 1671220960056,
     "lastModifiedBy": "dnd5ebuilder0000"
   }
 }

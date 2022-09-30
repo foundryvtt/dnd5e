@@ -23,12 +23,13 @@
     "activation": {
       "type": "bonus",
       "cost": 1,
-      "condition": "Proficiency with wind instruments. "
+      "condition": "Proficiency with wind instruments."
     },
     "duration": {
-      "value": 0,
+      "value": "",
       "units": ""
     },
+    "cover": null,
     "target": {
       "value": 0,
       "width": null,
@@ -42,11 +43,10 @@
     },
     "uses": {
       "value": 3,
-      "max": 3,
+      "max": "3",
       "per": "charges",
-      "autoDestroy": false,
-      "autoUse": true,
-      "recovery": "1d3"
+      "recovery": "1d3",
+      "autoDestroy": false
     },
     "consume": {
       "type": "",
@@ -55,7 +55,7 @@
     },
     "ability": "",
     "actionType": "abil",
-    "attackBonus": 0,
+    "attackBonus": "",
     "chatFlavor": "",
     "critical": {
       "threshold": null,
@@ -71,10 +71,7 @@
       "dc": null,
       "scaling": "cha"
     },
-    "consumableType": "trinket",
-    "attributes": {
-      "spelldc": 10
-    }
+    "consumableType": "trinket"
   },
   "effects": [],
   "folder": null,
@@ -85,10 +82,10 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.0.2",
-    "coreVersion": "10.286",
+    "systemVersion": "2.1.0",
+    "coreVersion": "10.291",
     "createdTime": 1661787233865,
-    "modifiedTime": 1663775408782,
+    "modifiedTime": 1671220964244,
     "lastModifiedBy": "dnd5ebuilder0000"
   }
 }

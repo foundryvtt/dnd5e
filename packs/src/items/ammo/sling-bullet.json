@@ -26,7 +26,7 @@
       "condition": ""
     },
     "duration": {
-      "value": 0,
+      "value": "",
       "units": ""
     },
     "cover": null,
@@ -44,18 +44,18 @@
     "uses": {
       "value": null,
       "max": "",
-      "per": "",
+      "per": null,
       "recovery": "",
       "autoDestroy": false
     },
     "consume": {
       "type": "",
-      "target": "",
+      "target": null,
       "amount": null
     },
     "ability": "",
     "actionType": "rwak",
-    "attackBonus": "0",
+    "attackBonus": "",
     "chatFlavor": "",
     "critical": {
       "threshold": null,
@@ -63,8 +63,7 @@
     },
     "damage": {
       "parts": [],
-      "versatile": "",
-      "value": ""
+      "versatile": ""
     },
     "formula": "",
     "save": {
@@ -72,10 +71,7 @@
       "dc": null,
       "scaling": "spell"
     },
-    "consumableType": "ammo",
-    "attributes": {
-      "spelldc": 10
-    }
+    "consumableType": "ammo"
   },
   "effects": [],
   "folder": null,
@@ -86,10 +82,10 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.0.3",
-    "coreVersion": "10.290",
+    "systemVersion": "2.1.0",
+    "coreVersion": "10.291",
     "createdTime": 1661787233974,
-    "modifiedTime": 1670010904169,
+    "modifiedTime": 1671220965813,
     "lastModifiedBy": "dnd5ebuilder0000"
   }
 }

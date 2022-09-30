@@ -20,9 +20,7 @@
         "type": "HitPoints",
         "configuration": {},
         "value": {},
-        "title": "",
-        "icon": "",
-        "classRestriction": ""
+        "title": ""
       },
       {
         "_id": "rpmaepj0rdbnnrzd",
@@ -31,13 +29,20 @@
           "items": [
             "Compendium.dnd5e.classfeatures.u4NLajXETJhJU31v",
             "Compendium.dnd5e.classfeatures.hpLNiGq7y67d2EHA"
-          ]
+          ],
+          "optional": false,
+          "spell": {
+            "ability": "",
+            "preparation": "",
+            "uses": {
+              "max": "",
+              "per": ""
+            }
+          }
         },
         "value": {},
         "level": 1,
-        "title": "Features",
-        "icon": "",
-        "classRestriction": ""
+        "title": "Features"
       },
       {
         "_id": "77jeukqxu384wt2s",
@@ -46,13 +51,20 @@
           "items": [
             "Compendium.dnd5e.classfeatures.ezWijmCnlnQ9ZRX2",
             "Compendium.dnd5e.classfeatures.he8RpPXwSl2lVSIk"
-          ]
+          ],
+          "optional": false,
+          "spell": {
+            "ability": "",
+            "preparation": "",
+            "uses": {
+              "max": "",
+              "per": ""
+            }
+          }
         },
         "value": {},
         "level": 2,
-        "title": "Features",
-        "icon": "",
-        "classRestriction": ""
+        "title": "Features"
       },
       {
         "_id": "gsusowuu88npa5l0",
@@ -61,13 +73,20 @@
           "items": [
             "Compendium.dnd5e.classfeatures.ILhzFHiRrqgQ9dFJ",
             "Compendium.dnd5e.classfeatures.aQLg7BWdRnm4Hr9S"
-          ]
+          ],
+          "optional": false,
+          "spell": {
+            "ability": "",
+            "preparation": "",
+            "uses": {
+              "max": "",
+              "per": ""
+            }
+          }
         },
         "value": {},
         "level": 3,
-        "title": "Features",
-        "icon": "",
-        "classRestriction": ""
+        "title": "Features"
       },
       {
         "_id": "qg5x53gnsdjd4a0l",
@@ -75,13 +94,20 @@
         "configuration": {
           "items": [
             "Compendium.dnd5e.classfeatures.3VDZGs5Ug3hIE322"
-          ]
+          ],
+          "optional": false,
+          "spell": {
+            "ability": "",
+            "preparation": "",
+            "uses": {
+              "max": "",
+              "per": ""
+            }
+          }
         },
         "value": {},
         "level": 5,
-        "title": "Features",
-        "icon": "",
-        "classRestriction": ""
+        "title": "Features"
       },
       {
         "_id": "ldtolype17rp6e63",
@@ -89,13 +115,20 @@
         "configuration": {
           "items": [
             "Compendium.dnd5e.classfeatures.SEJmsjkEhdAZ90ki"
-          ]
+          ],
+          "optional": false,
+          "spell": {
+            "ability": "",
+            "preparation": "",
+            "uses": {
+              "max": "",
+              "per": ""
+            }
+          }
         },
         "value": {},
         "level": 6,
-        "title": "Features",
-        "icon": "",
-        "classRestriction": ""
+        "title": "Features"
       },
       {
         "_id": "6ekuqdrpfvjx7zfl",
@@ -103,13 +136,20 @@
         "configuration": {
           "items": [
             "Compendium.dnd5e.classfeatures.aonJ2YjkqkYB9WYB"
-          ]
+          ],
+          "optional": false,
+          "spell": {
+            "ability": "",
+            "preparation": "",
+            "uses": {
+              "max": "",
+              "per": ""
+            }
+          }
         },
         "value": {},
         "level": 10,
-        "title": "Features",
-        "icon": "",
-        "classRestriction": ""
+        "title": "Features"
       },
       {
         "_id": "idix0tts0uroxn4h",
@@ -117,13 +157,20 @@
         "configuration": {
           "items": [
             "Compendium.dnd5e.classfeatures.GBYN5rH4nh1ocRlY"
-          ]
+          ],
+          "optional": false,
+          "spell": {
+            "ability": "",
+            "preparation": "",
+            "uses": {
+              "max": "",
+              "per": ""
+            }
+          }
         },
         "value": {},
         "level": 20,
-        "title": "Features",
-        "icon": "",
-        "classRestriction": ""
+        "title": "Features"
       },
       {
         "_id": "vc31v6423jmiex1p",
@@ -133,27 +180,28 @@
           "type": "dice",
           "scale": {
             "1": {
-              "n": null,
-              "die": 6
+              "faces": 6,
+              "number": null
             },
             "5": {
-              "n": null,
-              "die": 8
+              "faces": 8,
+              "number": null
             },
             "10": {
-              "n": null,
-              "die": 10
+              "faces": 10,
+              "number": null
             },
             "15": {
-              "n": null,
-              "die": 12
+              "faces": 12,
+              "number": null
             }
+          },
+          "distance": {
+            "units": ""
           }
         },
         "value": {},
-        "title": "Bardic Inspiration Die",
-        "icon": "",
-        "classRestriction": ""
+        "title": "Bardic Inspiration Die"
       },
       {
         "_id": "kf9gpqhy2mdx6hes",
@@ -163,27 +211,28 @@
           "type": "dice",
           "scale": {
             "2": {
-              "n": null,
-              "die": 6
+              "faces": 6,
+              "number": null
             },
             "9": {
-              "n": null,
-              "die": 8
+              "faces": 8,
+              "number": null
             },
             "13": {
-              "n": null,
-              "die": 10
+              "faces": 10,
+              "number": null
             },
             "17": {
-              "n": null,
-              "die": 12
+              "faces": 12,
+              "number": null
             }
+          },
+          "distance": {
+            "units": ""
           }
         },
         "value": {},
-        "title": "Song of Rest Die",
-        "icon": "",
-        "classRestriction": ""
+        "title": "Song of Rest Die"
       },
       {
         "_id": "XqVWKlXYIk9A39le",
@@ -207,9 +256,7 @@
           }
         },
         "value": {},
-        "title": "Cantrips Known",
-        "icon": "",
-        "classRestriction": ""
+        "title": "Cantrips Known"
       },
       {
         "_id": "sZl8eAmx0M2KXdRA",
@@ -272,9 +319,7 @@
           }
         },
         "value": {},
-        "title": "Spells Known",
-        "icon": "",
-        "classRestriction": ""
+        "title": "Spells Known"
       }
     ],
     "saves": [
@@ -308,9 +353,6 @@
     "spellcasting": {
       "progression": "full",
       "ability": "cha"
-    },
-    "damage": {
-      "parts": []
     }
   },
   "effects": [],
@@ -322,10 +364,10 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.0.0",
-    "coreVersion": "10.279",
+    "systemVersion": "2.1.0",
+    "coreVersion": "10.291",
     "createdTime": 1661787234279,
-    "modifiedTime": 1661787234279,
+    "modifiedTime": 1671220972809,
     "lastModifiedBy": "dnd5ebuilder0000"
   }
 }

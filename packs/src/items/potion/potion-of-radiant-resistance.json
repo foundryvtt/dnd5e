@@ -26,9 +26,10 @@
       "condition": ""
     },
     "duration": {
-      "value": 1,
+      "value": "1",
       "units": "hour"
     },
+    "cover": null,
     "target": {
       "value": 1,
       "width": null,
@@ -42,10 +43,10 @@
     },
     "uses": {
       "value": 1,
-      "max": 1,
+      "max": "1",
       "per": "charges",
-      "autoDestroy": true,
-      "autoUse": true
+      "recovery": "",
+      "autoDestroy": true
     },
     "consume": {
       "type": "",
@@ -54,7 +55,7 @@
     },
     "ability": "",
     "actionType": "util",
-    "attackBonus": 0,
+    "attackBonus": "",
     "chatFlavor": "",
     "critical": {
       "threshold": null,
@@ -70,10 +71,7 @@
       "dc": null,
       "scaling": "spell"
     },
-    "consumableType": "potion",
-    "attributes": {
-      "spelldc": 10
-    }
+    "consumableType": "potion"
   },
   "effects": [],
   "folder": null,
@@ -84,10 +82,10 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.0.0",
-    "coreVersion": "10.279",
+    "systemVersion": "2.1.0",
+    "coreVersion": "10.291",
     "createdTime": 1661787233615,
-    "modifiedTime": 1661787233615,
+    "modifiedTime": 1671220960020,
     "lastModifiedBy": "dnd5ebuilder0000"
   }
 }

@@ -5,7 +5,7 @@
   "img": "icons/magic/control/control-influence-rally-purple.webp",
   "system": {
     "description": {
-      "value": "<p><em>Wondrous item, (requires attunement)</em></p>\n<p>While wearing this helm, you can use an action to cast the @Compendium[dnd5e.spells.ppWAAEul0QHtm4er]{Detect Thoughts} spell (save DC 13) from it. As long as you maintain concentration on the spell, you can use a bonus action to send a telepathic message to a creature you are focused on. It can reply using a bonus action to do so while your focus on it continues.<br>While focusing on a creature with Detect Thoughts, you can use an action to cast the @Compendium[dnd5e.spells.zMAWdyc8UVb37BK4]{Suggestion} spell (save DC 13) from the helm on that creature. Once used, the Suggestion property can't be used again until the next dawn.</p>",
+      "value": "<p><em>Wondrous item, (requires attunement)</em></p>\n<p>While wearing this helm, you can use an action to cast the @Compendium[dnd5e.spells.ppWAAEul0QHtm4er]{Detect Thoughts} spell (save DC 13) from it. As long as you maintain concentration on the spell, you can use a bonus action to send a telepathic message to a creature you are focused on. It can reply using a bonus action to do so while your focus on it continues.<br />While focusing on a creature with Detect Thoughts, you can use an action to cast the @Compendium[dnd5e.spells.zMAWdyc8UVb37BK4]{Suggestion} spell (save DC 13) from the helm on that creature. Once used, the Suggestion property can't be used again until the next dawn.</p>",
       "chat": "",
       "unidentified": ""
     },
@@ -26,9 +26,10 @@
       "condition": ""
     },
     "duration": {
-      "value": 0,
+      "value": "",
       "units": ""
     },
+    "cover": null,
     "target": {
       "value": 0,
       "width": null,
@@ -42,8 +43,9 @@
     },
     "uses": {
       "value": 1,
-      "max": 1,
-      "per": "day"
+      "max": "1",
+      "per": "day",
+      "recovery": ""
     },
     "consume": {
       "type": "",
@@ -52,7 +54,7 @@
     },
     "ability": "",
     "actionType": "save",
-    "attackBonus": 0,
+    "attackBonus": "",
     "chatFlavor": "",
     "critical": {
       "threshold": null,
@@ -86,10 +88,7 @@
     },
     "strength": 0,
     "stealth": false,
-    "proficient": false,
-    "attributes": {
-      "spelldc": 10
-    }
+    "proficient": false
   },
   "effects": [],
   "folder": null,
@@ -100,10 +99,10 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.0.0",
-    "coreVersion": "10.279",
+    "systemVersion": "2.1.0",
+    "coreVersion": "10.291",
     "createdTime": 1661787233534,
-    "modifiedTime": 1661787233534,
+    "modifiedTime": 1671220958880,
     "lastModifiedBy": "dnd5ebuilder0000"
   }
 }

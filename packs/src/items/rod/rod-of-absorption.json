@@ -26,9 +26,10 @@
       "condition": "Spell slots created can be no higher than 5th level."
     },
     "duration": {
-      "value": 0,
+      "value": "",
       "units": ""
     },
+    "cover": null,
     "target": {
       "value": null,
       "width": null,
@@ -45,17 +46,16 @@
       "max": "50",
       "per": "charges",
       "recovery": "",
-      "autoDestroy": false,
-      "autoUse": false
+      "autoDestroy": false
     },
     "consume": {
       "type": "",
-      "target": "",
+      "target": null,
       "amount": null
     },
     "ability": "",
     "actionType": "util",
-    "attackBonus": 0,
+    "attackBonus": "",
     "chatFlavor": "",
     "critical": {
       "threshold": null,
@@ -71,10 +71,7 @@
       "dc": null,
       "scaling": "spell"
     },
-    "consumableType": "rod",
-    "attributes": {
-      "spelldc": 10
-    }
+    "consumableType": "rod"
   },
   "effects": [],
   "folder": null,
@@ -85,10 +82,10 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.0.3",
-    "coreVersion": "10.286",
+    "systemVersion": "2.1.0",
+    "coreVersion": "10.291",
     "createdTime": 1661787233480,
-    "modifiedTime": 1663991463835,
+    "modifiedTime": 1671220957521,
     "lastModifiedBy": "dnd5ebuilder0000"
   }
 }

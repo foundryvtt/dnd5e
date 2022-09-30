@@ -26,9 +26,10 @@
       "condition": ""
     },
     "duration": {
-      "value": null,
+      "value": "",
       "units": ""
     },
+    "cover": null,
     "target": {
       "value": null,
       "width": null,
@@ -44,8 +45,7 @@
       "value": null,
       "max": "",
       "per": null,
-      "autoUse": false,
-      "autoDestroy": false
+      "recovery": ""
     },
     "consume": {
       "type": "",
@@ -54,7 +54,7 @@
     },
     "ability": null,
     "actionType": "",
-    "attackBonus": 0,
+    "attackBonus": "",
     "chatFlavor": "",
     "critical": {
       "threshold": null,
@@ -88,10 +88,7 @@
     },
     "strength": 0,
     "stealth": false,
-    "proficient": false,
-    "attributes": {
-      "spelldc": 10
-    }
+    "proficient": false
   },
   "effects": [],
   "folder": "oENpm3Crialw50Y1",
@@ -102,10 +99,10 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.0.0",
-    "coreVersion": "10.279",
+    "systemVersion": "2.1.0",
+    "coreVersion": "10.291",
     "createdTime": 1661787233637,
-    "modifiedTime": 1661787233637,
+    "modifiedTime": 1671220960346,
     "lastModifiedBy": "dnd5ebuilder0000"
   }
 }
