@@ -1,5 +1,6 @@
 import BackgroundData from "./background.mjs";
 import ClassData from "./class.mjs";
+import EquipmentData from "./equipment.mjs";
 import FeatData from "./feat.mjs";
 import LootData from "./loot.mjs";
 import SpellData from "./spell.mjs";
@@ -9,6 +10,7 @@ import WeaponData from "./weapon.mjs";
 export {
   BackgroundData,
   ClassData,
+  EquipmentData,
   FeatData,
   LootData,
   SpellData,
@@ -24,6 +26,7 @@ export {default as PhysicalItemTemplate} from "./templates/physical-item.mjs";
 export const config = {
   background: BackgroundData,
   class: ClassData,
+  equipment: EquipmentData,
   feat: FeatData,
   loot: LootData,
   spell: SpellData,

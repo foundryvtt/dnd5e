@@ -307,7 +307,6 @@ function cleanActorData(actorData) {
  */
 export function migrateItemData(item, migrationData) {
   const updateData = {};
-  _migrateArmorType(item, updateData);
   _migrateDocumentIcon(item, updateData, migrationData);
 
   // Migrate embedded effects
@@ -616,21 +615,6 @@ function _migrateTokenImage(actorData, updateData) {
       updateData[path] = `systems/dnd5e/tokens/${type}/${fileName}.webp`;
     }
   }
-  return updateData;
-}
-
-/* -------------------------------------------- */
-
-/**
- * Convert equipment items of type 'bonus' to 'trinket'.
- * @param {object} item        Item data to migrate.
- * @param {object} updateData  Existing update to expand upon.
- * @returns {object}           The updateData to apply.
- * @private
- */
-function _migrateArmorType(item, updateData) {
-  if ( item.type !== "equipment" ) return updateData;
-  if ( item.system?.armor?.type === "bonus" ) updateData["system.armor.type"] = "trinket";
   return updateData;
 }
 
