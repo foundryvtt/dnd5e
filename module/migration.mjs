@@ -307,9 +307,6 @@ function cleanActorData(actorData) {
  */
 export function migrateItemData(item, migrationData) {
   const updateData = {};
-  _migrateItemSpellcasting(item, updateData);
-  _migrateArmorType(item, updateData);
-  _migrateItemCriticalData(item, updateData);
   _migrateDocumentIcon(item, updateData, migrationData);
 
   // Migrate embedded effects
@@ -618,58 +615,6 @@ function _migrateTokenImage(actorData, updateData) {
       updateData[path] = `systems/dnd5e/tokens/${type}/${fileName}.webp`;
     }
   }
-  return updateData;
-}
-
-/* -------------------------------------------- */
-
-/**
- * Replace class spellcasting string to object.
- * @param {object} item        Item data to migrate.
- * @param {object} updateData  Existing update to expand upon.
- * @returns {object}           The updateData to apply.
- * @private
- */
-function _migrateItemSpellcasting(item, updateData) {
-  if ( item.type !== "class" || (foundry.utils.getType(item.system.spellcasting) === "Object") ) return updateData;
-  updateData["system.spellcasting"] = {
-    progression: item.system.spellcasting,
-    ability: ""
-  };
-  return updateData;
-}
-
-/* --------------------------------------------- */
-
-/**
- * Convert equipment items of type 'bonus' to 'trinket'.
- * @param {object} item        Item data to migrate.
- * @param {object} updateData  Existing update to expand upon.
- * @returns {object}           The updateData to apply.
- * @private
- */
-function _migrateArmorType(item, updateData) {
-  if ( item.type !== "equipment" ) return updateData;
-  if ( item.system?.armor?.type === "bonus" ) updateData["system.armor.type"] = "trinket";
-  return updateData;
-}
-
-/* -------------------------------------------- */
-
-/**
- * Set the item's `critical` property to a proper object value.
- * @param {object} item        Item data to migrate.
- * @param {object} updateData  Existing update to expand upon.
- * @returns {object}           The updateData to apply.
- * @private
- */
-function _migrateItemCriticalData(item, updateData) {
-  const hasCritData = game.system.template.Item[item.type]?.templates?.includes("action");
-  if ( !hasCritData || (foundry.utils.getType(item.system.critical) === "Object") ) return updateData;
-  updateData["system.critical"] = {
-    threshold: null,
-    damage: null
-  };
   return updateData;
 }
 
