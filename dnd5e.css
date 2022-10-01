@@ -365,6 +365,9 @@
 .dnd5e.sheet .sheet-header .summary li:last-child {
   border-right: none;
 }
+.dnd5e.sheet.npc .sheet-header .summary li:first-child {
+  flex:0.5;
+}
 .dnd5e.sheet .sheet-navigation {
   flex: 0 0 30px;
   margin-bottom: 5px;
@@ -909,7 +912,7 @@
   border-radius: 3px;
 }
 .dnd5e.sheet.actor .ability-scores .ability {
-  height: 70px;
+  height: 72.5px;
   text-align: center;
   border-bottom: 2px groove #eeede0;
   position: relative;

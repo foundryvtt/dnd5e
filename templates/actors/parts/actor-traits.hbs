@@ -139,4 +139,12 @@
         </a>
     </div>
     {{/unless}}
+
+    {{#unless isCharacter}}
+    <div class="form-group ">
+        <label>{{localize "DND5E.Source"}}</label>
+        <input type="text" name="system.details.source" value="{{system.details.source}}" placeholder="{{ localize 'DND5E.Source' }}"/>
+    </div>
+    {{/unless}}
+
 </div>
