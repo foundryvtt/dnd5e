@@ -1095,9 +1095,26 @@ DND5E.polymorphSettings = {
   keepSpells: "DND5E.PolymorphKeepSpells",
   keepItems: "DND5E.PolymorphKeepItems",
   keepBio: "DND5E.PolymorphKeepBio",
-  keepVision: "DND5E.PolymorphKeepVision"
+  keepVision: "DND5E.PolymorphKeepVision",
+  keepSelf: "DND5E.PolymorphKeepSelf"
 };
 preLocalize("polymorphSettings", { sort: true });
+
+/**
+ * Settings to configure how actors are effects are merged when polymorphing is applied.
+ * @enum {string}
+ */
+DND5E.polymorphEffectSettings = {
+  removeAE: "DND5E.PolymorphRemoveAE",
+  removeOtherOriginAE: "DND5E.PolymorphRemoveOtherOriginAE",
+  removeOriginAE: "DND5E.PolymorphRemoveOriginAE",
+  removeEquipmentAE: "DND5E.PolymorphRemoveEquipmentAE",
+  removeFeatAE: "DND5E.PolymorphRemoveFeatureAE",
+  removeSpellAE: "DND5E.PolymorphRemoveSpellAE",
+  removeClassAE: "DND5E.PolymorphRemoveClassAE",
+  removeBackgroundAE: "DND5E.PolymorphRemoveBackgroundAE"
+};
+preLocalize("polymorphEffectSettings", { sort: true });
 
 /* -------------------------------------------- */
 

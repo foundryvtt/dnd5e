@@ -712,6 +712,26 @@
 .srd-compendium article .contents section {
   column-count: 3;
 }
+/* ----------------------------------------- */
+/*  Polymorph Features                       */
+/* ----------------------------------------- */
+.polymorph {
+  /* ----------------------------------------- */
+  /*  Two Column Configurations                */
+  /* ----------------------------------------- */
+}
+.polymorph.two-column {
+  display: grid;
+  grid-template-columns: var(--grid-two-column-left-size) var(--grid-two-column-right-size);
+  grid-template-areas: "left right";
+  grid-gap: 0.4em;
+}
+.polymorph.two-column .left-column {
+  grid-area: left;
+}
+.polymorph.two-column .right-column {
+  grid-area: right;
+}
 .dnd5e.sheet.actor {
   /* ----------------------------------------- */
   /*  Shared Styles                            */

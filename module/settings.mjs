@@ -157,6 +157,15 @@ export default function registerSystemSettings() {
       keepItems: false,
       keepBio: false,
       keepVision: true,
+      keepSelf: false,
+      removeAE: false,
+      removeOriginAE: false,
+      removeOtherOriginAE: false,
+      removeFeatAE: false,
+      removeSpellAE: false,
+      removeEquipmentAE: false,
+      removeClassAE: false,
+      removeBackgroundAE: false,
       transformTokens: true
     }
   });

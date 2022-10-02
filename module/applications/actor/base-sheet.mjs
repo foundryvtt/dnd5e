@@ -797,7 +797,8 @@ export default class ActorSheet5e extends ActorSheet {
       title: game.i18n.localize("DND5E.PolymorphPromptTitle"),
       content: {
         options: game.settings.get("dnd5e", "polymorphSettings"),
-        i18n: CONFIG.DND5E.polymorphSettings,
+        settings: CONFIG.DND5E.polymorphSettings,
+        effectSettings: CONFIG.DND5E.polymorphEffectSettings,
         isToken: this.actor.isToken
       },
       default: "accept",
@@ -816,14 +817,46 @@ export default class ActorSheet5e extends ActorSheet {
             keepMental: true,
             mergeSaves: true,
             mergeSkills: true,
-            transformTokens: rememberOptions(html).transformTokens
+            transformTokens: rememberOptions(html).transformTokens,
+            removeAE: rememberOptions(html).removeAE,
+            removeOriginAE: rememberOptions(html).removeOriginAE,
+            removeOtherOriginAE: rememberOptions(html).removeOtherOriginAE,
+            removeFeatAE: rememberOptions(html).removeFeatAE,
+            removeSpellAE: rememberOptions(html).removeSpellAE,
+            removeEquipmentAE: rememberOptions(html).removeEquipmentAE,
+            removeClassAE: rememberOptions(html).removeClassAE,
+            removeBackgroundAE: rememberOptions(html).removeBackgroundAE
           })
         },
         polymorph: {
           icon: '<i class="fas fa-pastafarianism"></i>',
           label: game.i18n.localize("DND5E.Polymorph"),
           callback: html => this.actor.transformInto(sourceActor, {
-            transformTokens: rememberOptions(html).transformTokens
+            transformTokens: rememberOptions(html).transformTokens,
+            removeAE: rememberOptions(html).removeAE,
+            removeOriginAE: rememberOptions(html).removeOriginAE,
+            removeOtherOriginAE: rememberOptions(html).removeOtherOriginAE,
+            removeFeatAE: rememberOptions(html).removeFeatAE,
+            removeSpellAE: rememberOptions(html).removeSpellAE,
+            removeEquipmentAE: rememberOptions(html).removeEquipmentAE,
+            removeClassAE: rememberOptions(html).removeClassAE,
+            removeBackgroundAE: rememberOptions(html).removeBackgroundAE
+          })
+        },
+        self: {
+          icon: '<i class="fas fa-eye"></i>',
+          label: game.i18n.localize("DND5E.PolymorphSelf"),
+          callback: html => this.actor.transformInto(sourceActor, {
+            keepSelf: true,
+            transformTokens: rememberOptions(html).transformTokens,
+            removeAE: rememberOptions(html).removeAE,
+            removeOriginAE: rememberOptions(html).removeOriginAE,
+            removeOtherOriginAE: rememberOptions(html).removeOtherOriginAE,
+            removeFeatAE: rememberOptions(html).removeFeatAE,
+            removeSpellAE: rememberOptions(html).removeSpellAE,
+            removeEquipmentAE: rememberOptions(html).removeEquipmentAE,
+            removeClassAE: rememberOptions(html).removeClassAE,
+            removeBackgroundAE: rememberOptions(html).removeBackgroundAE
           })
         },
         cancel: {
@@ -832,7 +865,7 @@ export default class ActorSheet5e extends ActorSheet {
         }
       }
     }, {
-      classes: ["dialog", "dnd5e"],
+      classes: ["dialog", "dnd5e", "polymorph"],
       width: 600,
       template: "systems/dnd5e/templates/apps/polymorph-prompt.hbs"
     }).render(true);

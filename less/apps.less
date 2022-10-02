@@ -732,3 +732,28 @@
     }
   }
 }
+
+/* ----------------------------------------- */
+/*  Polymorph Features                       */
+/* ----------------------------------------- */
+
+
+.polymorph {
+  /* ----------------------------------------- */
+  /*  Two Column Configurations                */
+  /* ----------------------------------------- */
+  &.two-column {
+    display: grid;
+    grid-template-columns: var(--grid-two-column-left-size) var(--grid-two-column-right-size);
+    grid-template-areas: "left right";
+    grid-gap: 0.4em;
+
+    .left-column {
+      grid-area: left;
+    }
+    .right-column {
+      grid-area: right;
+    }
+  }
+
+}
