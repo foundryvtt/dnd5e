@@ -11,6 +11,7 @@ import Advancement from "../../documents/advancement/advancement.mjs";
  * @property {Item5e} [class.item]        Class item that caused this advancement step.
  * @property {number} [class.level]       Level the class should be during this step.
  * @property {boolean} [automatic=false]  Should the manager attempt to apply this step without user interaction?
+ * @property {boolean} [synthetic=false]  Was this step created as a result of an item introduced or deleted?
  */
 
 /**
@@ -553,6 +554,7 @@ export default class AdvancementManager extends Application {
       do {
         const flow = this.step.flow;
         const type = this.step.type;
+        const preEmbeddedItems = this.clone.items.map(i => i);
 
         // Apply changes based on step type
         if ( (type === "delete") && this.step.item ) this.clone.items.delete(this.step.item.id);
@@ -564,6 +566,7 @@ export default class AdvancementManager extends Application {
         else if ( automaticData && flow ) await flow.advancement.apply(flow.level, automaticData);
         else if ( flow ) await flow._updateObject(event, flow._getSubmitData());
 
+        this._synthesizeSteps(preEmbeddedItems);
         this._stepIndex++;
 
         // Ensure the level on the class item matches the specified level
@@ -590,6 +593,74 @@ export default class AdvancementManager extends Application {
   /* -------------------------------------------- */
 
   /**
+   * Add synthetic steps for any added or removed items with advancement.
+   * @param {Item5e[]} preEmbeddedItems  Items present before the current step was applied.
+   */
+  _synthesizeSteps(preEmbeddedItems) {
+    // Build a set of item IDs for non-synthetic steps
+    const initialIds = this.steps.reduce((ids, step) => {
+      if ( step.synthetic || !step.flow?.item ) return ids;
+      ids.add(step.flow.item.id);
+      return ids;
+    }, new Set());
+
+    const preIds = new Set(preEmbeddedItems.map(i => i.id));
+    const postIds = new Set(this.clone.items.map(i => i.id));
+    const addedIds = postIds.difference(preIds).difference(initialIds);
+    const deletedIds = preIds.difference(postIds).difference(initialIds);
+
+    for ( const addedId of addedIds ) {
+      const item = this.clone.items.get(addedId);
+      if ( !item.hasAdvancement ) continue;
+
+      let handledLevel = 0;
+      for ( let idx = this._stepIndex; idx < this.steps.length; idx++ ) {
+        // Find spots where the level increases
+        const thisLevel = this.steps[idx].flow?.level || this.steps[idx].class?.level;
+        const nextLevel = this.steps[idx + 1]?.flow?.level || this.steps[idx + 1]?.class?.level;
+        if ( (thisLevel <= handledLevel) || (thisLevel === nextLevel) ) continue;
+
+        // Determine if there is any advancement to be done for the added item to this level
+        // from the previously handled level
+        const steps = Array.fromRange(thisLevel - handledLevel + 1, handledLevel)
+          .flatMap(l => this.constructor.flowsForLevel(item, l))
+          .map(flow => ({ type: "forward", flow, synthetic: true }));
+
+        // Add new steps at the end of the level group
+        this.steps.splice(idx + 1, 0, ...steps);
+        idx += steps.length;
+
+        handledLevel = nextLevel ?? handledLevel;
+      }
+    }
+
+    if ( (this.step.type === "delete") && this.step.synthetic ) return;
+    for ( const deletedId of deletedIds ) {
+      let item = preEmbeddedItems.find(i => i.id === deletedId);
+      if ( !item?.hasAdvancement ) continue;
+
+      // Temporarily add the item back
+      this.clone.updateSource({items: [item.toObject()]});
+      item = this.clone.items.get(item.id);
+
+      // Check for advancement from the maximum level handled by this manager to zero
+      let steps = [];
+      Array.fromRange(this.clone.system.details.level + 1)
+        .flatMap(l => this.constructor.flowsForLevel(item, l))
+        .reverse()
+        .forEach(flow => steps.push({ type: "reverse", flow, automatic: true, synthetic: true }));
+
+      // Add a new remove item step to the end of the synthetic steps to finally get rid of this item
+      steps.push({ type: "delete", item, automatic: true, synthetic: true });
+
+      // Add new steps after the current step
+      this.steps.splice(this._stepIndex + 1, 0, ...steps);
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Reverse through the steps until one requiring user interaction is encountered.
    * @param {Event} [event]                  Triggering click event if one occurred.
    * @param {object} [options]               Additional options to configure behavior.
@@ -606,6 +677,7 @@ export default class AdvancementManager extends Application {
         if ( !this.step ) break;
         const flow = this.step.flow;
         const type = this.step.type;
+        const preEmbeddedItems = this.clone.items.map(i => i);
 
         // Reverse step based on step type
         if ( (type === "delete") && this.step.item ) this.clone.updateSource({items: [this.step.item]});
@@ -614,6 +686,8 @@ export default class AdvancementManager extends Application {
         );
         else if ( type === "reverse" ) await flow.advancement.restore(flow.level, flow.retainedData);
         else if ( flow ) await flow.retainData(await flow.advancement.reverse(flow.level));
+
+        this._clearSyntheticSteps(preEmbeddedItems);
         this.clone.reset();
       } while ( this.step?.automatic );
     } catch(error) {
@@ -627,6 +701,26 @@ export default class AdvancementManager extends Application {
     if ( !render ) return;
     if ( this.step ) this.render(true, { direction: "backward" });
     else this.close({ skipConfirmation: true });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Remove synthetic steps for any added or removed items.
+   * @param {Item5e[]} preEmbeddedItems  Items present before the current step was applied.
+   */
+  _clearSyntheticSteps(preEmbeddedItems) {
+    // Create a disjoint union of the before and after items
+    const preIds = new Set(preEmbeddedItems.map(i => i.id));
+    const postIds = new Set(this.clone.items.map(i => i.id));
+    const modifiedIds = postIds.difference(preIds);
+    preIds.difference(postIds).forEach(id => modifiedIds.add(id));
+
+    // Remove any synthetic steps after the current step if their item has been modified
+    for ( const [idx, element] of Array.from(this.steps.entries()).reverse() ) {
+      if ( idx <= this._stepIndex ) break;
+      if ( element.synthetic && modifiedIds.has(element.flow?.item?.id) ) this.steps.splice(idx, 1);
+    }
   }
 
   /* -------------------------------------------- */
