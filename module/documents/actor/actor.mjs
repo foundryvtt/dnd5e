@@ -793,9 +793,9 @@ export default class Actor5e extends Actor {
     amount = parseInt(amount);
     const hp = this.system.attributes.hp;
 
-    // Update the actor if the new amount is greater than the current
+    // Update the actor if the new amount is greater than the current or if the new amount is 0.
     const tmp = parseInt(hp.temp) || 0;
-    return amount > tmp ? this.update({"system.attributes.hp.temp": amount}) : this;
+    return (amount > tmp || amount === 0) ? this.update({"system.attributes.hp.temp": amount}) : this;
   }
 
   /* -------------------------------------------- */
