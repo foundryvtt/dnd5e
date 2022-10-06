@@ -18,11 +18,12 @@ _______________________________`;
  * Configuration data for abilities.
  *
  * @typedef {object} AbilityConfiguration
- * @property {string} label         Localized label.
- * @property {string} abbreviation  Localized abbreviation.
- * @property {Object<string, number|string>}  defaults  Default values for this ability based on actor type.
- *                                  If a string is used, the system will attempt to fetch the value of the
- *                                  specified ability.
+ * @property {string} label                               Localized label.
+ * @property {string} abbreviation                        Localized abbreviation.
+ * @property {string} [type]                              Whether this is a "physical" or "mental" ability.
+ * @property {Object<string, number|string>}  [defaults]  Default values for this ability based on actor type.
+ *                                                        If a string is used, the system will attempt to fetch.
+ *                                                        the value of the specified ability.
  */
 
 /**
@@ -32,39 +33,47 @@ _______________________________`;
 DND5E.abilities = {
   str: {
     label: "DND5E.AbilityStr",
-    abbreviation: "DND5E.AbilityStrAbbr"
+    abbreviation: "DND5E.AbilityStrAbbr",
+    type: "physical"
   },
   dex: {
     label: "DND5E.AbilityDex",
-    abbreviation: "DND5E.AbilityDexAbbr"
+    abbreviation: "DND5E.AbilityDexAbbr",
+    type: "physical"
   },
   con: {
     label: "DND5E.AbilityCon",
-    abbreviation: "DND5E.AbilityConAbbr"
+    abbreviation: "DND5E.AbilityConAbbr",
+    type: "physical"
   },
   int: {
     label: "DND5E.AbilityInt",
     abbreviation: "DND5E.AbilityIntAbbr",
+    type: "mental",
     defaults: { vehicle: 0 }
   },
   wis: {
     label: "DND5E.AbilityWis",
     abbreviation: "DND5E.AbilityWisAbbr",
+    type: "mental",
     defaults: { vehicle: 0 }
   },
   cha: {
     label: "DND5E.AbilityCha",
     abbreviation: "DND5E.AbilityChaAbbr",
+    type: "mental",
     defaults: { vehicle: 0 }
   },
   hon: {
     label: "DND5E.AbilityHon",
     abbreviation: "DND5E.AbilityHonAbbr",
+    type: "mental",
     defaults: { npc: "cha", vehicle: 0 }
   },
   san: {
     label: "DND5E.AbilitySan",
     abbreviation: "DND5E.AbilitySanAbbr",
+    type: "mental",
     defaults: { npc: "wis", vehicle: 0 }
   }
 };
