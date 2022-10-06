@@ -15,11 +15,19 @@ ______      ______ _____ _____
 _______________________________`;
 
 /**
+ * Configuration data for abilities.
+ *
+ * @typedef {object} AbilityConfiguration
+ * @property {string} label         Localized label.
+ * @property {string} abbreviation  Localized abbreviation.
+ * @property {Object<string, number|string>}  defaults  Default values for this ability based on actor type.
+ *                                  If a string is used, the system will attempt to fetch the value of the
+ *                                  specified ability.
+ */
+
+/**
  * The set of Ability Scores used within the system.
- * @enum {{
- *  label: string,
- *  abbreviation: string
- * }}
+ * @enum {AbilityConfiguration}
  */
 DND5E.abilities = {
   str: {
@@ -36,23 +44,28 @@ DND5E.abilities = {
   },
   int: {
     label: "DND5E.AbilityInt",
-    abbreviation: "DND5E.AbilityIntAbbr"
+    abbreviation: "DND5E.AbilityIntAbbr",
+    defaults: { vehicle: 0 }
   },
   wis: {
     label: "DND5E.AbilityWis",
-    abbreviation: "DND5E.AbilityWisAbbr"
+    abbreviation: "DND5E.AbilityWisAbbr",
+    defaults: { vehicle: 0 }
   },
   cha: {
     label: "DND5E.AbilityCha",
-    abbreviation: "DND5E.AbilityChaAbbr"
+    abbreviation: "DND5E.AbilityChaAbbr",
+    defaults: { vehicle: 0 }
   },
   hon: {
     label: "DND5E.AbilityHon",
-    abbreviation: "DND5E.AbilityHonAbbr"
+    abbreviation: "DND5E.AbilityHonAbbr",
+    defaults: { npc: "cha", vehicle: 0 }
   },
   san: {
     label: "DND5E.AbilitySan",
-    abbreviation: "DND5E.AbilitySanAbbr"
+    abbreviation: "DND5E.AbilitySanAbbr",
+    defaults: { npc: "wis", vehicle: 0 }
   }
 };
 preLocalize("abilities", { keys: ["label", "abbreviation"] });

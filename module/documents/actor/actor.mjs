@@ -229,22 +229,16 @@ export default class Actor5e extends Actor {
   _prepareBaseAbilities() {
     if ( !("abilities" in this.system) ) return;
     const abilities = {};
-    for ( const key of Object.keys(CONFIG.DND5E.abilities) ) {
+    for ( const [key, config] of Object.entries(CONFIG.DND5E.abilities) ) {
       abilities[key] = this.system.abilities[key];
       if ( !abilities[key] ) {
         abilities[key] = foundry.utils.deepClone(game.system.template.Actor.templates.common.abilities.cha);
 
-        // Honor: Charisma for NPC, 0 for vehicles
-        if ( key === "hon" ) {
-          if ( this.type === "vehicle" ) abilities[key].value = 0;
-          else if ( this.type === "npc" ) abilities[key].value = this.system.abilities.cha?.value ?? 10;
+        let defaultValue = config.defaults?.[this.type] ?? 10;
+        if ( typeof defaultValue === "string" ) {
+          defaultValue = abilities[defaultValue].value ?? this.system.abilities[defaultValue] ?? 10;
         }
-
-        // Sanity: Wisdom for NPC, 0 for vehicles
-        else if ( key === "san" ) {
-          if ( this.type === "vehicle" ) abilities[key].value = 0;
-          else if ( this.type === "npc" ) abilities[key].value = this.system.abilities.wis?.value ?? 10;
-        }
+        abilities[key].value = defaultValue;
       }
     }
     this.system.abilities = abilities;
