@@ -187,23 +187,18 @@ export default class D20Roll extends Roll {
    * @param {string} [data.title]             The title of the shown dialog window
    * @param {number} [data.defaultRollMode]   The roll mode that the roll mode select element should default to
    * @param {number} [data.defaultAction]     The button marked as default
-   * @param {boolean} [data.chooseModifier]   Choose which ability modifier should be applied to the roll?
-   * @param {string} [data.defaultAbility]    For tool rolls, the default ability modifier applied to the roll
    * @param {string} [data.template]          A custom path to an HTML template to use instead of the default
    * @param {object} options                  Additional Dialog customization options
    * @returns {Promise<D20Roll|null>}         A resulting D20Roll object constructed with the dialog, or null if the
    *                                          dialog was closed
    */
-  async configureDialog({title, defaultRollMode, defaultAction=D20Roll.ADV_MODE.NORMAL, chooseModifier=false,
-    defaultAbility, template}={}, options={}) {
+  async configureDialog({title, defaultRollMode, defaultAction=D20Roll.ADV_MODE.NORMAL, template}={}, options={}) {
 
     // Render the Dialog inner HTML
     const content = await renderTemplate(template ?? this.constructor.EVALUATION_TEMPLATE, {
       formula: `${this.formula} + @bonus`,
       defaultRollMode,
       rollModes: CONFIG.Dice.rollModes,
-      chooseModifier,
-      defaultAbility,
       abilities: CONFIG.DND5E.abilities
     });
 

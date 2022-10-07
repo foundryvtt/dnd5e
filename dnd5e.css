@@ -981,7 +981,7 @@
   cursor: default;
 }
 .dnd5e.sheet.actor ul.skills-list {
-  flex: 0 0 180px;
+  flex: 0 0 212px;
   list-style: none;
   margin: 0 5px 0;
   padding: 0;
@@ -991,6 +991,7 @@
 .dnd5e.sheet.actor ul.skills-list li.skill {
   height: 24px;
   padding: 3px 2px;
+  align-items: center;
 }
 .dnd5e.sheet.actor ul.skills-list li.skill:nth-child(even) {
   background: rgba(0, 0, 0, 0.05);
@@ -1019,6 +1020,7 @@
 }
 .dnd5e.sheet.actor ul.skills-list li.skill .skill-ability {
   flex: 0 0 26px;
+  border: none;
   text-transform: capitalize;
 }
 .dnd5e.sheet.actor ul.skills-list li.skill .skill-mod {
@@ -1934,16 +1936,12 @@
   margin: 0;
   top: -6px;
 }
-.dnd5e.sheet.actor.character ul.skills-list {
-  flex: 0 0 212px;
-}
 .dnd5e.sheet.actor.character ul.skills-list li.skill {
   padding: 3px;
 }
 .dnd5e.sheet.actor.character ul.skills-list li.skill h4 {
   flex: 1px;
   margin: 0;
-  font-size: 13px;
 }
 .dnd5e.sheet.actor.character .item-detail.player-class {
   flex: 0 0 180px;

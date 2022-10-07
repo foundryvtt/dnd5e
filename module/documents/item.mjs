@@ -1723,7 +1723,6 @@ export default class Item5e extends Item {
         top: options.event ? options.event.clientY - 80 : null,
         left: window.innerWidth - 710
       },
-      chooseModifier: true,
       halflingLucky: this.actor.getFlag("dnd5e", "halflingLucky" ),
       reliableTalent: (this.system.proficient >= 1) && this.actor.getFlag("dnd5e", "reliableTalent"),
       messageData: {

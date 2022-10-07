@@ -829,7 +829,6 @@ export default class Actor5e extends Actor {
 
     // Add ability modifier
     data.mod = skl.mod;
-    data.defaultAbility = skl.ability;
 
     // Include proficiency bonus
     if ( skl.prof.hasProficiency ) {
@@ -873,7 +872,6 @@ export default class Actor5e extends Actor {
       data: data,
       title: `${flavor}: ${this.name}`,
       flavor,
-      chooseModifier: true,
       halflingLucky: this.getFlag("dnd5e", "halflingLucky"),
       reliableTalent,
       messageData: {

@@ -27,8 +27,6 @@
  *
  * ## Roll Configuration Dialog
  * @property {boolean} [fastForward]           Should the roll configuration dialog be skipped?
- * @property {boolean} [chooseModifier=false]  If the configuration dialog is shown, should the ability modifier be
- *                                             configurable within that interface?
  * @property {string} [template]               The HTML template used to display the roll configuration dialog.
  * @property {string} [title]                  Title of the roll configuration dialog.
  * @property {object} [dialogOptions]          Additional options passed to the roll configuration dialog.
@@ -52,7 +50,7 @@ export async function d20Roll({
   parts=[], data={}, event,
   advantage, disadvantage, critical=20, fumble=1, targetValue,
   elvenAccuracy, halflingLucky, reliableTalent,
-  fastForward, chooseModifier=false, template, title, dialogOptions,
+  fastForward, template, title, dialogOptions,
   chatMessage=true, messageData={}, rollMode, flavor
 }={}) {
 
@@ -60,10 +58,6 @@ export async function d20Roll({
   const formula = ["1d20"].concat(parts).join(" + ");
   const {advantageMode, isFF} = _determineAdvantageMode({advantage, disadvantage, fastForward, event});
   const defaultRollMode = rollMode || game.settings.get("core", "rollMode");
-  if ( chooseModifier && !isFF ) {
-    data.mod = "@mod";
-    if ( "abilityCheckBonus" in data ) data.abilityCheckBonus = "@abilityCheckBonus";
-  }
 
   // Construct the D20Roll instance
   const roll = new CONFIG.Dice.D20Roll(formula, data, {
@@ -83,10 +77,8 @@ export async function d20Roll({
   if ( !isFF ) {
     const configured = await roll.configureDialog({
       title,
-      chooseModifier,
       defaultRollMode,
       defaultAction: advantageMode,
-      defaultAbility: data?.item?.ability || data?.defaultAbility,
       template
     }, dialogOptions);
     if ( configured === null ) return null;
