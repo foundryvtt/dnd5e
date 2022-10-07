@@ -120,6 +120,13 @@
   background: rgba(0, 0, 0, 0.1);
   border: 2px groove #eeede0;
 }
+.dnd5e .secret .reveal {
+  border: 1px dashed var(--color-border-light-primary);
+  background: rgba(255, 255, 240, 0.8);
+}
+.dnd5e .locked .secret .reveal {
+  display: none;
+}
 .dnd5e .form-group label {
   flex: 2;
   color: #4b4a44;

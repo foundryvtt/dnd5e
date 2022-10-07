@@ -5,7 +5,7 @@
   "img": "icons/weapons/staves/staff-skull-brown.webp",
   "system": {
     "description": {
-      "value": "<p><em>(Requires attunement)</em></p>\n<p>This staff has 3 charges and regains 1d3 expended charges daily at dawn.</p>\n<p>The staff can be wielded as a magic quarterstaff. On a hit, it deals damage as a normal quarterstaff, and you can expend 1 charge to deal an extra 2d10 necrotic damage to the target. In addition, the target must succeed on a DC 15 Constitution saving throw or have disadvantage for 1 hour on any ability check or saving throw that uses Strength or Constitution.</p>\n<p><em>Foundry note: the Other Formula button has been configured to roll the staff's necrotic damage if required.</em></p>",
+      "value": "<p><em>(Requires attunement)</em></p><p>This staff has 3 charges and regains 1d3 expended charges daily at dawn.</p><p>The staff can be wielded as a magic quarterstaff. On a hit, it deals damage as a normal quarterstaff, and you can expend 1 charge to deal an extra 2d10 necrotic damage to the target. In addition, the target must succeed on a DC 15 Constitution saving throw or have disadvantage for 1 hour on any ability check or saving throw that uses Strength or Constitution.</p><section class=\"secret foundry-note\" id=\"secret-Qm70cZsiRYZFY5b9\"><p><strong>Foundry Note</strong></p><p>The Other Formula button has been configured to roll the staff's necrotic damage if required.</p></section>",
       "chat": "",
       "unidentified": ""
     },
@@ -39,18 +39,18 @@
     },
     "uses": {
       "value": 3,
-      "max": 3,
+      "max": "3",
       "per": "charges",
       "recovery": "1d3"
     },
     "consume": {
       "type": "",
-      "target": null,
+      "target": "",
       "amount": null
     },
-    "ability": null,
+    "ability": "",
     "actionType": "mwak",
-    "attackBonus": null,
+    "attackBonus": "",
     "chatFlavor": "",
     "critical": {
       "threshold": null,
@@ -97,7 +97,9 @@
       "thr": false,
       "two": false,
       "ver": true,
-      "mgc": true
+      "mgc": true,
+      "ada": false,
+      "sil": false
     },
     "proficient": false,
     "attributes": {
@@ -113,10 +115,10 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.0.2",
+    "systemVersion": "2.0.3",
     "coreVersion": "10.286",
     "createdTime": 1661787233917,
-    "modifiedTime": 1663775408840,
+    "modifiedTime": 1663991638534,
     "lastModifiedBy": "dnd5ebuilder0000"
   }
 }

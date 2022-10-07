@@ -5,7 +5,7 @@
   "img": "icons/consumables/drinks/tea-jug-gourd-brown.webp",
   "system": {
     "description": {
-      "value": "<p><em>Wondrous item</em></p>\n<p>This viscous, milky-white substance can form a permanent adhesive bond between any two objects. It must be stored in a jar or flask that has been coated inside with oil of slipperiness. When found, a container contains 1d6 + 1 ounces.</p>\n<p>One ounce of the glue can cover a 1-foot square surface. The glue takes 1 minute to set. Once it has done so, the bond it creates can be broken only by the application of universal solvent or oil of etherealness, or with a @Compendium[dnd5e.spells.3okM6Gn63zzEULkz]{Wish} spell.</p>\n<p><em>Foundry note: the 7 charges reflect the maximum amount a character can find. Please adjust as required.</em></p>",
+      "value": "<p><em>Wondrous item</em></p><p>This viscous, milky-white substance can form a permanent adhesive bond between any two objects. It must be stored in a jar or flask that has been coated inside with oil of slipperiness. When found, a container contains 1d6 + 1 ounces.</p><p>One ounce of the glue can cover a 1-foot square surface. The glue takes 1 minute to set. Once it has done so, the bond it creates can be broken only by the application of universal solvent or oil of etherealness, or with a @Compendium[dnd5e.spells.3okM6Gn63zzEULkz]{Wish} spell.</p><section class=\"secret foundry-note\" id=\"secret-s3MCPshCsEZEYTHn\"><p><strong>Foundry Note</strong></p><p>The 7 charges reflect the maximum amount a character can find. Please adjust as required.</p></section>",
       "chat": "",
       "unidentified": ""
     },
@@ -39,14 +39,15 @@
     },
     "uses": {
       "value": 7,
-      "max": 7,
+      "max": "7",
       "per": "charges",
+      "recovery": "",
       "autoDestroy": true,
       "autoUse": true
     },
     "consume": {
       "type": "",
-      "target": null,
+      "target": "",
       "amount": null
     },
     "ability": "",
@@ -67,13 +68,7 @@
       "dc": null,
       "scaling": "spell"
     },
-    "consumableType": "trinket",
-    "attributes": {
-      "spelldc": 10
-    },
-    "details": {
-      "description": "<p><em>Wondrous item</em></p>\n<p>This viscous, milky-white substance can form a permanent adhesive bond between any two objects. It must be stored in a jar or flask that has been coated inside with @Compendium[dnd5e.items.FIDyR0kZnxGy7bj8]{Oil of Slipperiness}. When found, a container contains 1d6 + 1 ounces.</p>\n<p>One ounce of the glue can cover a 1-foot square surface. The glue takes 1 minute to set. Once it has done so, the bond it creates can be broken only by the application of @Compendium[dnd5e.items.MAwoj2suj6cvb9Ti]{Universal Solvent} or @Compendium[dnd5e.items.Xbq8CyXSRV358SfP]{Oil of Etherealness}, or with a @Compendium[dnd5e.spells.3okM6Gn63zzEULkz]{Wish} spell.</p>\n<p><em>Foundry note: the 7 charges reflect the maximum amount a character can find. Please adjust as required.</em></p>"
-    }
+    "consumableType": "trinket"
   },
   "effects": [],
   "folder": null,
@@ -84,10 +79,10 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.0.0",
-    "coreVersion": "10.279",
+    "systemVersion": "2.0.3",
+    "coreVersion": "10.286",
     "createdTime": 1661787233977,
-    "modifiedTime": 1661787233977,
+    "modifiedTime": 1663991510073,
     "lastModifiedBy": "dnd5ebuilder0000"
   }
 }

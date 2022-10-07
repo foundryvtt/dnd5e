@@ -5,7 +5,7 @@
   "img": "icons/weapons/staves/staff-simple-green.webp",
   "system": {
     "description": {
-      "value": "<p><em>(Requires attunement by a bard, cleric, or druid)</em></p>\n<p>This staff has 10 charges. While holding it, you can use an action to expend 1 or more of its charges to cast one of the following spells from it, using your spell save DC and spellcasting ability modifier: @Compendium[dnd5e.spells.uUWb1wZgtMou0TVP]{Cure Wounds} (1 charge per spell level, up to 4th), @Compendium[dnd5e.spells.F0GsG0SJzsIOacwV]{Lesser Restoration} (2 charges), or @Compendium[dnd5e.spells.Pyzmm8R7rVsNAPsd]{Mass Cure Wounds} (5 charges).</p>\n<p>The staff regains 1d6 + 4 expended charges daily at dawn. If you expend the last charge, roll a d20. On a 1, the staff vanishes in a flash of light, lost forever.</p>\n<p><em>Foundry note: the Other Formula button has been configured to roll the staff's recharge rate at dawn if required.</em></p>",
+      "value": "<p><em>(Requires attunement by a bard, cleric, or druid)</em></p><p>This staff has 10 charges. While holding it, you can use an action to expend 1 or more of its charges to cast one of the following spells from it, using your spell save DC and spellcasting ability modifier: @Compendium[dnd5e.spells.uUWb1wZgtMou0TVP]{Cure Wounds} (1 charge per spell level, up to 4th), @Compendium[dnd5e.spells.F0GsG0SJzsIOacwV]{Lesser Restoration} (2 charges), or @Compendium[dnd5e.spells.Pyzmm8R7rVsNAPsd]{Mass Cure Wounds} (5 charges).</p><p>The staff regains 1d6 + 4 expended charges daily at dawn. If you expend the last charge, roll a d20. On a 1, the staff vanishes in a flash of light, lost forever.</p>",
       "chat": "",
       "unidentified": ""
     },
@@ -39,16 +39,16 @@
     },
     "uses": {
       "value": 10,
-      "max": 10,
+      "max": "10",
       "per": "charges",
       "recovery": "1d6 + 4"
     },
     "consume": {
       "type": "",
-      "target": null,
+      "target": "",
       "amount": null
     },
-    "ability": null,
+    "ability": "",
     "actionType": "heal",
     "attackBonus": 0,
     "chatFlavor": "",
@@ -60,7 +60,7 @@
       "parts": [],
       "versatile": ""
     },
-    "formula": "1d6 +4",
+    "formula": "",
     "save": {
       "ability": "",
       "dc": null,
@@ -92,7 +92,9 @@
       "thr": false,
       "two": false,
       "ver": false,
-      "mgc": true
+      "mgc": true,
+      "ada": false,
+      "sil": false
     },
     "proficient": false,
     "attributes": {
@@ -108,10 +110,10 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.0.2",
+    "systemVersion": "2.0.3",
     "coreVersion": "10.286",
     "createdTime": 1661787233689,
-    "modifiedTime": 1663775408647,
+    "modifiedTime": 1663991786994,
     "lastModifiedBy": "dnd5ebuilder0000"
   }
 }
