@@ -2,7 +2,7 @@
   <label>{{localize "DND5E.AbilityModifier"}}</label>
   <div class="form-fields">
     <select name="data.configuration.spell.ability">
-      {{selectOptions CONFIG.abilities selected=data.configuration.spell.ability blank="&mdash;"}}
+      {{selectOptions CONFIG.abilities selected=data.configuration.spell.ability blank="—"}}
     </select>
   </div>
 </div>
@@ -11,7 +11,7 @@
   <label>{{localize "DND5E.SpellPreparationMode"}}</label>
   <div class="form-fields">
     <select name="data.configuration.spell.preparation">
-      {{selectOptions CONFIG.spellPreparationModes selected=data.configuration.spell.preparation blank="&mdash;"}}
+      {{selectOptions CONFIG.spellPreparationModes selected=data.configuration.spell.preparation blank="—"}}
     </select>
   </div>
 </div>
@@ -21,7 +21,7 @@
   <div class="form-fields">
     <input type="text" name="data.configuration.spell.uses.max" value="{{data.configuration.spell.uses.max}}">
     <select name="data.configuration.spell.uses.per">
-      {{selectOptions CONFIG.limitedUsePeriods selected=data.configuration.spell.uses.per blank="&mdash;"}}
+      {{selectOptions CONFIG.limitedUsePeriods selected=data.configuration.spell.uses.per blank="—"}}
     </select>
   </div>
 </div>
