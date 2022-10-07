@@ -1353,7 +1353,6 @@ export default class Item5e extends Item {
    *                                       cannot be performed.
    */
   async rollDamage({critical, event=null, spellLevel=null, versatile=false, options={}}={}) {
-    debugger;
     if ( !this.hasDamage ) throw new Error("You may not make a Damage Roll with this Item.");
     const messageData = {
       "flags.dnd5e.roll": {type: "damage", itemId: this.id},
