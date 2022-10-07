@@ -744,16 +744,8 @@
   /* ----------------------------------------- */
   &.two-column {
     display: grid;
-    grid-template-columns: var(--grid-two-column-left-size) var(--grid-two-column-right-size);
-    grid-template-areas: "left right";
+    grid-template-columns: 50% 50%;
     grid-gap: 0.4em;
-
-    .left-column {
-      grid-area: left;
-    }
-    .right-column {
-      grid-area: right;
-    }
   }
 
 }

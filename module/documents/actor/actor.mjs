@@ -1829,14 +1829,15 @@ export default class Actor5e extends Actor {
    *
    * @param {Actor5e} target                      The target Actor.
    * @param {TransformationOptions} [options={}]  Options that determine how the transformation is performed.
-   * @param {boolean} [renderSheet=true]          Render the sheet of the transformed actor after the polymorph
+   * @param {object} [options]
+   * @param {boolean} [options.renderSheet=true]  Render the sheet of the transformed actor after the polymorph
    * @returns {Promise<Array<Token>>|null}        Updated token if the transformation was performed.
    */
   async transformInto(target, { keepPhysical=false, keepMental=false, keepSaves=false, keepSkills=false,
     mergeSaves=false, mergeSkills=false, keepClass=false, keepFeats=false, keepSpells=false, keepItems=false,
     keepBio=false, keepVision=false, keepSelf=false, removeAE=false, removeOriginAE=false, removeOtherOriginAE=false,
     removeSpellAE=false, removeEquipmentAE=false, removeFeatAE=false, removeClassAE=false, removeBackgroundAE=false,
-    transformTokens=true}={}, renderSheet=true) {
+    transformTokens=true}={}, {renderSheet=true}={}) {
 
     // Ensure the player is allowed to polymorph
     const allowed = game.settings.get("dnd5e", "allowPolymorphing");
@@ -1850,7 +1851,7 @@ export default class Actor5e extends Actor {
     o.flags.dnd5e.transformOptions = {mergeSkills, mergeSaves};
     const source = target.toObject();
 
-    if (keepSelf) {
+    if ( keepSelf ) {
       o.img = source.img;
       o.name = `${o.name} (${game.i18n.localize("DND5E.PolymorphSelf")})`;
     }
@@ -1891,7 +1892,7 @@ export default class Actor5e extends Actor {
       d.prototypeToken.texture[k] = source.prototypeToken.texture[k];
     }
     for ( const k of ["bar1", "bar2", "displayBars", "displayName", "disposition", "rotation", "elevation"] ) {
-      d.prototypeToken.texture[k] = o.prototypeToken.texture[k];
+      d.prototypeToken[k] = o.prototypeToken[k];
     }
 
     if ( !keepSelf ) {
@@ -1947,26 +1948,26 @@ export default class Actor5e extends Actor {
       if ( removeAE ) {
         d.effects = [];
       } else if ( removeEquipmentAE || removeFeatAE || removeOriginAE || removeSpellAE ) {
-        const oEffects = duplicate(d.effects);
+        const oEffects = foundry.utils.deepClone(d.effects);
         d.effects = [];
         const originEffectIds = oEffects.filter(effect => {
           return !effect.origin || effect.origin === this.uuid;
         }).map(e => e._id);
 
-        for (const e of oEffects) {
-          const item = e.origin?.startsWith("Actor") ? await fromUuid(e.origin) : {};
-          const originIsSelf = item.parent?.uuid === this.uuid;
+        for ( const e of oEffects ) {
+          const origin = await fromUuid(e.origin);
+          const originIsSelf = origin.parent?.uuid === this.uuid;
           const isOriginEffect = originEffectIds.includes(e._id);
 
           if ( isOriginEffect ) {
             // If effect originates on actor
-            if (!removeOriginAE) d.effects.push(e);
+            if ( !removeOriginAE ) d.effects.push(e);
           } else if ( !isOriginEffect && !originIsSelf ) {
             // Effect is not from Actor
             if ( !removeOtherOriginAE ) d.effects.push(e);
           } else {
             // Effect is from an item originating on actor
-            switch (item.type) {
+            switch ( origin.type ) {
               case "spell": {
                 if ( !removeSpellAE ) d.effects.push(e);
                 break;
@@ -2021,11 +2022,11 @@ export default class Actor5e extends Actor {
     if ( this.isToken ) {
       const tokenData = d.prototypeToken;
       delete d.prototypeToken;
-      d.flags.dnd5e.previousActorData = duplicate(this.token.actorData);
+      d.flags.dnd5e.previousActorData = this.token.toObject().actorData;
       tokenData.actorData = d;
       await this.sheet?.close();
       const update = await this.token.update(tokenData);
-      if (renderSheet) this.sheet?.render(true);
+      if ( renderSheet ) this.sheet?.render(true);
       return update;
     }
 
@@ -2040,13 +2041,13 @@ export default class Actor5e extends Actor {
      * @param {Actor5e} target                 The target actor into which to transform.
      * @param {object} data                    The data that will be used to create the new transformed actor.
      * @param {TransformationOptions} options  Options that determine how the transformation is performed.
-     * @param {boolean} [renderSheet=true]   Render the sheet of the transformed actor after the polymorph
+     * @param {object} [options]
      */
     Hooks.callAll("dnd5e.transformActor", this, target, d, {
       keepPhysical, keepMental, keepSaves, keepSkills, mergeSaves, mergeSkills, keepClass, keepFeats, keepSpells,
       keepItems, keepBio, keepVision, keepSelf, removeAE, removeOriginAE, removeOtherOriginAE, removeSpellAE,
       removeEquipmentAE, removeFeatAE, removeClassAE, removeBackgroundAE, transformTokens
-    }, renderSheet);
+    }, {renderSheet});
 
     // Create new Actor with transformed data
     const newActor = await this.constructor.create(d, {renderSheet: true});
@@ -2060,8 +2061,8 @@ export default class Actor5e extends Actor {
       newTokenData.actorId = newActor.id;
       newTokenData.actorLink = true;
 
-      const dOriginalActorData = foundry.utils.getProperty(d, "flags.dnd5e.originalActor");
-      foundry.utils.setProperty(newTokenData, "flags.dnd5e.originalActor", dOriginalActorData);
+      const dOriginalActor = foundry.utils.getProperty(d, "flags.dnd5e.originalActor");
+      foundry.utils.setProperty(newTokenData, "flags.dnd5e.originalActor", dOriginalActor);
       foundry.utils.setProperty(newTokenData, "flags.dnd5e.isPolymorphed", true);
       return newTokenData;
     });
@@ -2086,9 +2087,9 @@ export default class Actor5e extends Actor {
      * @function dnd5e.transformActor
      * @memberof hookEvents
      * @param {Actor} this                 The original actor before transformation.
-     * @param {boolean} renderSheet             Render Sheet after revert the transformation.
+     * @param {object} [options]
      */
-    Hooks.callAll("dnd5e.revertOriginalForm", this, renderSheet);
+    Hooks.callAll("dnd5e.revertOriginalForm", this, {renderSheet});
     const previousActorIds = this.getFlag("dnd5e", "previousActorIds");
     const isOriginalActor = !previousActorIds || previousActorIds.length <= 0;
     const isRendered = this.sheet.rendered;
@@ -2107,7 +2108,7 @@ export default class Actor5e extends Actor {
       }
       const prototypeTokenData = await baseActor.getTokenDocument();
       const actorData = foundry.utils.getProperty(this, "flags.dnd5e.previousActorData");
-      const tokenUpdate = duplicate(this.token);
+      const tokenUpdate = this.token.toObject();
       tokenUpdate.actorData = actorData ? actorData : {};
 
       for ( const k of ["width", "height", "alpha", "lockRotation", "name"] ) {
@@ -2121,14 +2122,15 @@ export default class Actor5e extends Actor {
 
       await this.sheet.close();
       await canvas.scene?.deleteEmbeddedDocuments("Token", [this.token._id]);
-      const results = await canvas.scene?.createEmbeddedDocuments("Token", [tokenUpdate], { keepId: true, render: true });
-      const actor = results.find(r => r._id === tokenUpdate._id).actor;
+      const token = await TokenDocument.implementation.create(tokenUpdate, {
+        parent: canvas.scene, keepId: true, render: true
+      });
       if ( isOriginalActor ) {
         await this.unsetFlag("dnd5e", "isPolymorphed");
         await this.unsetFlag("dnd5e", "previousActorIds");
       }
-      if ( isRendered && renderSheet ) actor.sheet?.render(true);
-      return actor;
+      if ( isRendered && renderSheet ) token.actor.sheet?.render(true);
+      return token;
     }
 
     if ( !original ) {
@@ -2157,18 +2159,13 @@ export default class Actor5e extends Actor {
     }
 
     // Delete the polymorphed version(s) of the actor, if possible
-    if (game.user?.isGM) {
+    if (game.user.isGM) {
       const idsToDelete = previousActorIds.filter(id =>
         id !== original.id // Is not original Actor Id
         && game.actors?.get(id) // Actor still exists
       ).concat([this.id]); // Add this id
 
-      for (const id of idsToDelete) {
-        const actorToDelete = game.actors.get(id);
-        if (actorToDelete) {
-          await actorToDelete.delete();
-        }
-      }
+      await Actor.implementation.deleteDocuments(idsToDelete);
     } else if ( isRendered ) {
       this.sheet?.close();
     }
