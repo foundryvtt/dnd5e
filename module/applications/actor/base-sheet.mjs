@@ -809,55 +809,58 @@ export default class ActorSheet5e extends ActorSheet {
           callback: html => this.actor.transformInto(sourceActor, rememberOptions(html))
         },
         wildshape: {
-          icon: '<i class="fas fa-paw"></i>',
-          label: game.i18n.localize("DND5E.PolymorphWildShape"),
-          callback: html => this.actor.transformInto(sourceActor, {
-            keepBio: true,
-            keepClass: true,
-            keepMental: true,
-            mergeSaves: true,
-            mergeSkills: true,
-            transformTokens: rememberOptions(html).transformTokens,
-            removeAE: rememberOptions(html).removeAE,
-            removeOriginAE: rememberOptions(html).removeOriginAE,
-            removeOtherOriginAE: rememberOptions(html).removeOtherOriginAE,
-            removeFeatAE: rememberOptions(html).removeFeatAE,
-            removeSpellAE: rememberOptions(html).removeSpellAE,
-            removeEquipmentAE: rememberOptions(html).removeEquipmentAE,
-            removeClassAE: rememberOptions(html).removeClassAE,
-            removeBackgroundAE: rememberOptions(html).removeBackgroundAE
-          })
+          icon: CONFIG.DND5E.transformationPresets.wildshape.icon,
+          label: CONFIG.DND5E.transformationPresets.wildshape.label,
+          callback: html => this.actor.transformInto(sourceActor, foundry.utils.mergeObject(
+            CONFIG.DND5E.transformationPresets.wildshape.options,
+            {
+              transformTokens: rememberOptions(html).transformTokens,
+              removeAE: rememberOptions(html).removeAE,
+              removeOriginAE: rememberOptions(html).removeOriginAE,
+              removeOtherOriginAE: rememberOptions(html).removeOtherOriginAE,
+              removeFeatAE: rememberOptions(html).removeFeatAE,
+              removeSpellAE: rememberOptions(html).removeSpellAE,
+              removeEquipmentAE: rememberOptions(html).removeEquipmentAE,
+              removeClassAE: rememberOptions(html).removeClassAE,
+              removeBackgroundAE: rememberOptions(html).removeBackgroundAE
+            }
+          ))
         },
         polymorph: {
-          icon: '<i class="fas fa-pastafarianism"></i>',
-          label: game.i18n.localize("DND5E.Polymorph"),
-          callback: html => this.actor.transformInto(sourceActor, {
-            transformTokens: rememberOptions(html).transformTokens,
-            removeAE: rememberOptions(html).removeAE,
-            removeOriginAE: rememberOptions(html).removeOriginAE,
-            removeOtherOriginAE: rememberOptions(html).removeOtherOriginAE,
-            removeFeatAE: rememberOptions(html).removeFeatAE,
-            removeSpellAE: rememberOptions(html).removeSpellAE,
-            removeEquipmentAE: rememberOptions(html).removeEquipmentAE,
-            removeClassAE: rememberOptions(html).removeClassAE,
-            removeBackgroundAE: rememberOptions(html).removeBackgroundAE
-          })
+          icon: CONFIG.DND5E.transformationPresets.polymorph.icon,
+          label: CONFIG.DND5E.transformationPresets.polymorph.label,
+          callback: html => this.actor.transformInto(sourceActor, foundry.utils.mergeObject(
+            CONFIG.DND5E.transformationPresets.polymorph.options,
+            {
+              transformTokens: rememberOptions(html).transformTokens,
+              removeAE: rememberOptions(html).removeAE,
+              removeOriginAE: rememberOptions(html).removeOriginAE,
+              removeOtherOriginAE: rememberOptions(html).removeOtherOriginAE,
+              removeFeatAE: rememberOptions(html).removeFeatAE,
+              removeSpellAE: rememberOptions(html).removeSpellAE,
+              removeEquipmentAE: rememberOptions(html).removeEquipmentAE,
+              removeClassAE: rememberOptions(html).removeClassAE,
+              removeBackgroundAE: rememberOptions(html).removeBackgroundAE
+            }
+          ))
         },
         self: {
-          icon: '<i class="fas fa-eye"></i>',
-          label: game.i18n.localize("DND5E.PolymorphSelf"),
-          callback: html => this.actor.transformInto(sourceActor, {
-            keepSelf: true,
-            transformTokens: rememberOptions(html).transformTokens,
-            removeAE: rememberOptions(html).removeAE,
-            removeOriginAE: rememberOptions(html).removeOriginAE,
-            removeOtherOriginAE: rememberOptions(html).removeOtherOriginAE,
-            removeFeatAE: rememberOptions(html).removeFeatAE,
-            removeSpellAE: rememberOptions(html).removeSpellAE,
-            removeEquipmentAE: rememberOptions(html).removeEquipmentAE,
-            removeClassAE: rememberOptions(html).removeClassAE,
-            removeBackgroundAE: rememberOptions(html).removeBackgroundAE
-          })
+          icon: CONFIG.DND5E.transformationPresets.polymorphSelf.icon,
+          label: CONFIG.DND5E.transformationPresets.polymorphSelf.label,
+          callback: html => this.actor.transformInto(sourceActor, foundry.utils.mergeObject(
+            CONFIG.DND5E.transformationPresets.polymorphSelf.options,
+            {
+              transformTokens: rememberOptions(html).transformTokens,
+              removeAE: rememberOptions(html).removeAE,
+              removeOriginAE: rememberOptions(html).removeOriginAE,
+              removeOtherOriginAE: rememberOptions(html).removeOtherOriginAE,
+              removeFeatAE: rememberOptions(html).removeFeatAE,
+              removeSpellAE: rememberOptions(html).removeSpellAE,
+              removeEquipmentAE: rememberOptions(html).removeEquipmentAE,
+              removeClassAE: rememberOptions(html).removeClassAE,
+              removeBackgroundAE: rememberOptions(html).removeBackgroundAE
+            }
+          ))
         },
         cancel: {
           icon: '<i class="fas fa-times"></i>',

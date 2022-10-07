@@ -1116,6 +1116,37 @@ DND5E.polymorphEffectSettings = {
 };
 preLocalize("polymorphEffectSettings", { sort: true });
 
+/**
+ * Settings to configure how actors are merged when preset polymorphing is applied.
+ * @enum {object}
+ */
+DND5E.transformationPresets = {
+  wildshape: {
+    icon: '<i class="fas fa-paw"></i>',
+    label: "DND5E.PolymorphWildShape",
+    options: {
+      keepBio: true,
+      keepClass: true,
+      keepMental: true,
+      mergeSaves: true,
+      mergeSkills: true
+    }
+  },
+  polymorph: {
+    icon: '<i class="fas fa-pastafarianism"></i>',
+    label: "DND5E.Polymorph",
+    options: {}
+  },
+  polymorphSelf: {
+    icon: '<i class="fas fa-eye"></i>',
+    label: "DND5E.PolymorphSelf",
+    options: {
+      keepSelf: true
+    }
+  }
+};
+preLocalize("transformationPresets", { sort: true, keys: ["label"] });
+
 /* -------------------------------------------- */
 
 /**
