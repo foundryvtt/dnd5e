@@ -2075,10 +2075,11 @@ export default class Actor5e extends Actor {
    * If this actor was transformed with transformTokens enabled, then its
    * active tokens need to be returned to their original state. If not, then
    * we can safely just delete this actor.
-   * @param {boolean} [renderSheet] Render Sheet after revert the transformation.
+   * @param {object} [options]
+   * @param {boolean} [options.renderSheet=true]  Render Sheet after revert the transformation.
    * @returns {Promise<Actor>|null}  Original actor if it was reverted.
    */
-  async revertOriginalForm(renderSheet=true) {
+  async revertOriginalForm({renderSheet=true}={}) {
     if ( !this.isPolymorphed ) return;
     if ( !this.isOwner ) return ui.notifications.warn(game.i18n.localize("DND5E.PolymorphRevertWarn"));
 
