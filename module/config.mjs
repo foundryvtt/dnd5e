@@ -304,7 +304,7 @@ DND5E.abilityActivationTypes = {
   lair: "DND5E.LairActionLabel",
   crew: "DND5E.VehicleCrewAction"
 };
-preLocalize("abilityActivationTypes", { sort: true });
+preLocalize("abilityActivationTypes");
 
 /* -------------------------------------------- */
 
@@ -706,6 +706,18 @@ preLocalize("damageResistanceTypes", { sort: true });
 /* -------------------------------------------- */
 
 /**
+ * Different types of healing that can be applied using abilities.
+ * @enum {string}
+ */
+DND5E.healingTypes = {
+  healing: "DND5E.Healing",
+  temphp: "DND5E.HealingTemp"
+};
+preLocalize("healingTypes");
+
+/* -------------------------------------------- */
+
+/**
  * The valid units of measure for movement distances in the game system.
  * By default this uses the imperial units of feet and miles.
  * @enum {string}
@@ -718,6 +730,10 @@ DND5E.movementTypes = {
   walk: "DND5E.MovementWalk"
 };
 preLocalize("movementTypes", { sort: true });
+
+/* -------------------------------------------- */
+/*  Measurement                                 */
+/* -------------------------------------------- */
 
 /**
  * The valid units of measure for movement distances in the game system.
@@ -732,18 +748,31 @@ DND5E.movementUnits = {
 };
 preLocalize("movementUnits");
 
+/* -------------------------------------------- */
+
 /**
- * The valid units of measure for the range of an action or effect.
- * This object automatically includes the movement units from `DND5E.movementUnits`.
+ * The types of range that are used for measuring actions and effects.
+ * @enum {string}
+ */
+DND5E.rangeTypes = {
+  self: "DND5E.DistSelf",
+  touch: "DND5E.DistTouch",
+  spec: "DND5E.Special",
+  any: "DND5E.DistAny"
+};
+preLocalize("rangeTypes");
+
+/* -------------------------------------------- */
+
+/**
+ * The valid units of measure for the range of an action or effect. A combination of `DND5E.movementUnits` and
+ * `DND5E.rangeUnits`.
  * @enum {string}
  */
 DND5E.distanceUnits = {
   none: "DND5E.None",
-  self: "DND5E.DistSelf",
-  touch: "DND5E.DistTouch",
-  spec: "DND5E.Special",
-  any: "DND5E.DistAny",
-  ...DND5E.movementUnits
+  ...DND5E.movementUnits,
+  ...DND5E.rangeTypes
 };
 preLocalize("distanceUnits");
 
@@ -769,6 +798,75 @@ DND5E.encumbrance = {
 };
 
 /* -------------------------------------------- */
+/*  Targeting                                   */
+/* -------------------------------------------- */
+
+/**
+ * Targeting types that apply to one or more distinct targets.
+ * @enum {string}
+ */
+DND5E.individualTargetTypes = {
+  self: "DND5E.TargetSelf",
+  ally: "DND5E.TargetAlly",
+  enemy: "DND5E.TargetEnemy",
+  creature: "DND5E.TargetCreature",
+  object: "DND5E.TargetObject",
+  space: "DND5E.TargetSpace"
+};
+preLocalize("individualTargetTypes");
+
+/* -------------------------------------------- */
+
+/**
+ * Information needed to represent different area of effect target types.
+ *
+ * @typedef {object} AreaTargetDefinition
+ * @property {string} label     Localized label for this type.
+ * @property {string} template  Type of `MeasuredTemplate` create for this target type.
+ */
+
+/**
+ * Targeting types that cover an area.
+ * @enum {AreaTargetDefinition}
+ */
+DND5E.areaTargetTypes = {
+  radius: {
+    label: "DND5E.TargetRadius",
+    template: "circle"
+  },
+  sphere: {
+    label: "DND5E.TargetSphere",
+    template: "circle"
+  },
+  cylinder: {
+    label: "DND5E.TargetCylinder",
+    template: "circle"
+  },
+  cone: {
+    label: "DND5E.TargetCone",
+    template: "cone"
+  },
+  square: {
+    label: "DND5E.TargetSquare",
+    template: "rect"
+  },
+  cube: {
+    label: "DND5E.TargetCube",
+    template: "rect"
+  },
+  line: {
+    label: "DND5E.TargetLine",
+    template: "ray"
+  },
+  wall: {
+    label: "DND5E.TargetWall",
+    template: "ray"
+  }
+};
+preLocalize("areaTargetTypes", { key: "label", sort: true });
+patchConfig("areaTargetTypes", "template", { since: 2.0, until: 2.2 });
+
+/* -------------------------------------------- */
 
 /**
  * The types of single or area targets which can be applied to abilities.
@@ -776,52 +874,10 @@ DND5E.encumbrance = {
  */
 DND5E.targetTypes = {
   none: "DND5E.None",
-  self: "DND5E.TargetSelf",
-  creature: "DND5E.TargetCreature",
-  ally: "DND5E.TargetAlly",
-  enemy: "DND5E.TargetEnemy",
-  object: "DND5E.TargetObject",
-  space: "DND5E.TargetSpace",
-  radius: "DND5E.TargetRadius",
-  sphere: "DND5E.TargetSphere",
-  cylinder: "DND5E.TargetCylinder",
-  cone: "DND5E.TargetCone",
-  square: "DND5E.TargetSquare",
-  cube: "DND5E.TargetCube",
-  line: "DND5E.TargetLine",
-  wall: "DND5E.TargetWall"
+  ...DND5E.individualTargetTypes,
+  ...Object.fromEntries(Object.entries(DND5E.areaTargetTypes).map(([k, v]) => [k, v.label]))
 };
 preLocalize("targetTypes", { sort: true });
-
-/* -------------------------------------------- */
-
-/**
- * Mapping between `DND5E.targetTypes` and `MeasuredTemplate` shape types to define
- * which templates are produced by which area of effect target type.
- * @enum {string}
- */
-DND5E.areaTargetTypes = {
-  cone: "cone",
-  cube: "rect",
-  cylinder: "circle",
-  line: "ray",
-  radius: "circle",
-  sphere: "circle",
-  square: "rect",
-  wall: "ray"
-};
-
-/* -------------------------------------------- */
-
-/**
- * Different types of healing that can be applied using abilities.
- * @enum {string}
- */
-DND5E.healingTypes = {
-  healing: "DND5E.Healing",
-  temphp: "DND5E.HealingTemp"
-};
-preLocalize("healingTypes");
 
 /* -------------------------------------------- */
 
