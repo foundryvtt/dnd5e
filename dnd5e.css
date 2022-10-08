@@ -1019,9 +1019,10 @@
   display: block;
 }
 .dnd5e.sheet.actor ul.skills-list li.skill .skill-ability {
-  flex: 0 0 26px;
+  flex: 0;
   border: none;
   text-transform: capitalize;
+  margin-right: 8px;
 }
 .dnd5e.sheet.actor ul.skills-list li.skill .skill-mod {
   flex: 0 0 20px;
