@@ -1957,7 +1957,6 @@ export default class Actor5e extends Actor {
         }).map(e => e._id);
 
         for ( const e of oEffects ) {
-          console.warn("effect", e)
           const origin = e.origin?.startsWith("Actor") || e.origin?.startsWith("Item") ? await fromUuid(e.origin) : {};
           const originIsSelf = origin.parent?.uuid === this.uuid;
           const isOriginEffect = originEffectIds.includes(e._id);
