@@ -159,13 +159,13 @@ export default function registerSystemSettings() {
       keepVision: true,
       keepSelf: false,
       removeAE: false,
-      removeOriginAE: false,
-      removeOtherOriginAE: false,
-      removeFeatAE: false,
-      removeSpellAE: false,
-      removeEquipmentAE: false,
-      removeClassAE: false,
-      removeBackgroundAE: false,
+      keepOriginAE: true,
+      keepOtherOriginAE: true,
+      keepFeatAE: true,
+      keepSpellAE: true,
+      keepEquipmentAE: true,
+      keepClassAE: true,
+      keepBackgroundAE: true,
       transformTokens: true
     }
   });

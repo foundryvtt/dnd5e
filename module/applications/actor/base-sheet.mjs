@@ -813,17 +813,7 @@ export default class ActorSheet5e extends ActorSheet {
           label: CONFIG.DND5E.transformationPresets.wildshape.label,
           callback: html => this.actor.transformInto(sourceActor, foundry.utils.mergeObject(
             CONFIG.DND5E.transformationPresets.wildshape.options,
-            {
-              transformTokens: rememberOptions(html).transformTokens,
-              removeAE: rememberOptions(html).removeAE,
-              removeOriginAE: rememberOptions(html).removeOriginAE,
-              removeOtherOriginAE: rememberOptions(html).removeOtherOriginAE,
-              removeFeatAE: rememberOptions(html).removeFeatAE,
-              removeSpellAE: rememberOptions(html).removeSpellAE,
-              removeEquipmentAE: rememberOptions(html).removeEquipmentAE,
-              removeClassAE: rememberOptions(html).removeClassAE,
-              removeBackgroundAE: rememberOptions(html).removeBackgroundAE
-            }
+            { transformTokens: rememberOptions(html).transformTokens }
           ))
         },
         polymorph: {
@@ -831,17 +821,7 @@ export default class ActorSheet5e extends ActorSheet {
           label: CONFIG.DND5E.transformationPresets.polymorph.label,
           callback: html => this.actor.transformInto(sourceActor, foundry.utils.mergeObject(
             CONFIG.DND5E.transformationPresets.polymorph.options,
-            {
-              transformTokens: rememberOptions(html).transformTokens,
-              removeAE: rememberOptions(html).removeAE,
-              removeOriginAE: rememberOptions(html).removeOriginAE,
-              removeOtherOriginAE: rememberOptions(html).removeOtherOriginAE,
-              removeFeatAE: rememberOptions(html).removeFeatAE,
-              removeSpellAE: rememberOptions(html).removeSpellAE,
-              removeEquipmentAE: rememberOptions(html).removeEquipmentAE,
-              removeClassAE: rememberOptions(html).removeClassAE,
-              removeBackgroundAE: rememberOptions(html).removeBackgroundAE
-            }
+            { transformTokens: rememberOptions(html).transformTokens }
           ))
         },
         self: {
@@ -849,17 +829,7 @@ export default class ActorSheet5e extends ActorSheet {
           label: CONFIG.DND5E.transformationPresets.polymorphSelf.label,
           callback: html => this.actor.transformInto(sourceActor, foundry.utils.mergeObject(
             CONFIG.DND5E.transformationPresets.polymorphSelf.options,
-            {
-              transformTokens: rememberOptions(html).transformTokens,
-              removeAE: rememberOptions(html).removeAE,
-              removeOriginAE: rememberOptions(html).removeOriginAE,
-              removeOtherOriginAE: rememberOptions(html).removeOtherOriginAE,
-              removeFeatAE: rememberOptions(html).removeFeatAE,
-              removeSpellAE: rememberOptions(html).removeSpellAE,
-              removeEquipmentAE: rememberOptions(html).removeEquipmentAE,
-              removeClassAE: rememberOptions(html).removeClassAE,
-              removeBackgroundAE: rememberOptions(html).removeBackgroundAE
-            }
+            { transformTokens: rememberOptions(html).transformTokens }
           ))
         },
         cancel: {

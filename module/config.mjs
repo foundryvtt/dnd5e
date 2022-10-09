@@ -1106,13 +1106,13 @@ preLocalize("polymorphSettings", { sort: true });
  */
 DND5E.polymorphEffectSettings = {
   removeAE: "DND5E.PolymorphRemoveAE",
-  removeOtherOriginAE: "DND5E.PolymorphRemoveOtherOriginAE",
-  removeOriginAE: "DND5E.PolymorphRemoveOriginAE",
-  removeEquipmentAE: "DND5E.PolymorphRemoveEquipmentAE",
-  removeFeatAE: "DND5E.PolymorphRemoveFeatureAE",
-  removeSpellAE: "DND5E.PolymorphRemoveSpellAE",
-  removeClassAE: "DND5E.PolymorphRemoveClassAE",
-  removeBackgroundAE: "DND5E.PolymorphRemoveBackgroundAE"
+  keepOtherOriginAE: "DND5E.PolymorphKeepOtherOriginAE",
+  keepOriginAE: "DND5E.PolymorphKeepOriginAE",
+  keepEquipmentAE: "DND5E.PolymorphKeepEquipmentAE",
+  keepFeatAE: "DND5E.PolymorphKeepFeatureAE",
+  keepSpellAE: "DND5E.PolymorphKeepSpellAE",
+  keepClassAE: "DND5E.PolymorphKeepClassAE",
+  keepBackgroundAE: "DND5E.PolymorphKeepBackgroundAE"
 };
 preLocalize("polymorphEffectSettings", { sort: true });
 
@@ -1129,13 +1129,19 @@ DND5E.transformationPresets = {
       keepClass: true,
       keepMental: true,
       mergeSaves: true,
-      mergeSkills: true
+      mergeSkills: true,
+      keepEquipmentAE: false
     }
   },
   polymorph: {
     icon: '<i class="fas fa-pastafarianism"></i>',
     label: "DND5E.Polymorph",
-    options: {}
+    options: {
+      keepEquipmentAE: false,
+      keepClassAE: false,
+      keepFeatAE: false,
+      keepBackgroundAE: false
+    }
   },
   polymorphSelf: {
     icon: '<i class="fas fa-eye"></i>',

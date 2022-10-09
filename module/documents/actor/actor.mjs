@@ -1814,13 +1814,13 @@ export default class Actor5e extends Actor {
    * @property {boolean} [keepVision=false]         Keep vision
    * @property {boolean} [keepSelf=false]           Keep self
    * @property {boolean} [removeAE=false]           Remove all effects
-   * @property {boolean} [removeOriginAE=true]      Remove effects which originate on this actor
-   * @property {boolean} [removeOtherOriginAE=true] Remove effects which originate on another actor
-   * @property {boolean} [removeSpellAE=false]      Remove effects which originate from actors spells
-   * @property {boolean} [removeFeatAE=false]       Remove effects which originate from actors features
-   * @property {boolean} [removeEquipmentAE=false]  Remove effects which originate on actors equipment
-   * @property {boolean} [removeClassAE=false]      Remove effects which originate from actors class/subclass
-   * @property {boolean} [removeBackgroundAE=false] Remove effects which originate from actors background
+   * @property {boolean} [keepOriginAE=true]        Keep effects which originate on this actor
+   * @property {boolean} [keepOtherOriginAE=true]   Keep effects which originate on another actor
+   * @property {boolean} [keepSpellAE=true]         Keep effects which originate from actors spells
+   * @property {boolean} [keepFeatAE=true]          Keep effects which originate from actors features
+   * @property {boolean} [keepEquipmentAE=true]     Keep effects which originate on actors equipment
+   * @property {boolean} [keepClassAE=true]         Keep effects which originate from actors class/subclass
+   * @property {boolean} [keepBackgroundAE=true]    Keep effects which originate from actors background
    * @property {boolean} [transformTokens=true]     Transform linked tokens too
    */
 
@@ -1835,8 +1835,8 @@ export default class Actor5e extends Actor {
    */
   async transformInto(target, { keepPhysical=false, keepMental=false, keepSaves=false, keepSkills=false,
     mergeSaves=false, mergeSkills=false, keepClass=false, keepFeats=false, keepSpells=false, keepItems=false,
-    keepBio=false, keepVision=false, keepSelf=false, removeAE=false, removeOriginAE=false, removeOtherOriginAE=false,
-    removeSpellAE=false, removeEquipmentAE=false, removeFeatAE=false, removeClassAE=false, removeBackgroundAE=false,
+    keepBio=false, keepVision=false, keepSelf=false, removeAE=false, keepOriginAE=true, keepOtherOriginAE=true,
+    keepSpellAE=true, keepEquipmentAE=true, keepFeatAE=true, keepClassAE=true, keepBackgroundAE=true,
     transformTokens=true}={}, {renderSheet=true}={}) {
 
     // Ensure the player is allowed to polymorph
@@ -1947,7 +1947,9 @@ export default class Actor5e extends Actor {
       // Remove active effects
       if ( removeAE ) {
         d.effects = [];
-      } else if ( removeEquipmentAE || removeFeatAE || removeOriginAE || removeSpellAE ) {
+      } else if ( !keepEquipmentAE || !keepFeatAE || !keepOriginAE || !keepOtherOriginAE || !keepSpellAE
+          || !keepClassAE || !keepBackgroundAE
+      ) {
         const oEffects = foundry.utils.deepClone(d.effects);
         d.effects = [];
         const originEffectIds = oEffects.filter(effect => {
@@ -1955,30 +1957,31 @@ export default class Actor5e extends Actor {
         }).map(e => e._id);
 
         for ( const e of oEffects ) {
-          const origin = await fromUuid(e.origin);
+          console.warn("effect", e)
+          const origin = e.origin?.startsWith("Actor") || e.origin?.startsWith("Item") ? await fromUuid(e.origin) : {};
           const originIsSelf = origin.parent?.uuid === this.uuid;
           const isOriginEffect = originEffectIds.includes(e._id);
 
           if ( isOriginEffect ) {
             // If effect originates on actor
-            if ( !removeOriginAE ) d.effects.push(e);
+            if ( keepOriginAE ) d.effects.push(e);
           } else if ( !isOriginEffect && !originIsSelf ) {
             // Effect is not from Actor
-            if ( !removeOtherOriginAE ) d.effects.push(e);
+            if ( keepOtherOriginAE ) d.effects.push(e);
           } else {
             // Effect is from an item originating on actor
             switch ( origin.type ) {
               case "spell": {
-                if ( !removeSpellAE ) d.effects.push(e);
+                if ( keepSpellAE ) d.effects.push(e);
                 break;
               }
               case "feat": {
-                if ( !removeFeatAE ) d.effects.push(e);
+                if ( keepFeatAE ) d.effects.push(e);
                 break;
               }
               case "subclass":
               case "class": {
-                if ( !removeClassAE ) d.effects.push(e);
+                if ( keepClassAE ) d.effects.push(e);
                 break;
               }
               case "equipment":
@@ -1986,11 +1989,11 @@ export default class Actor5e extends Actor {
               case "tool":
               case "loot":
               case "backpack": {
-                if ( !removeEquipmentAE ) d.effects.push(e);
+                if ( keepEquipmentAE ) d.effects.push(e);
                 break;
               }
               case "background": {
-                if ( !removeBackgroundAE ) d.effects.push(e);
+                if ( keepBackgroundAE ) d.effects.push(e);
                 break;
               }
               default: {
@@ -2045,8 +2048,8 @@ export default class Actor5e extends Actor {
      */
     Hooks.callAll("dnd5e.transformActor", this, target, d, {
       keepPhysical, keepMental, keepSaves, keepSkills, mergeSaves, mergeSkills, keepClass, keepFeats, keepSpells,
-      keepItems, keepBio, keepVision, keepSelf, removeAE, removeOriginAE, removeOtherOriginAE, removeSpellAE,
-      removeEquipmentAE, removeFeatAE, removeClassAE, removeBackgroundAE, transformTokens
+      keepItems, keepBio, keepVision, keepSelf, removeAE, keepOriginAE, keepOtherOriginAE, keepSpellAE,
+      keepEquipmentAE, keepFeatAE, keepClassAE, keepBackgroundAE, transformTokens
     }, {renderSheet});
 
     // Create new Actor with transformed data
