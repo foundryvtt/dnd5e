@@ -196,7 +196,9 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
+
   activateListeners(html) {
+    console.log("line 201 in character-sheet.mjs ran")
     super.activateListeners(html);
     if ( !this.isEditable ) return;
     html.find(".level-selector").change(this._onLevelChange.bind(this));

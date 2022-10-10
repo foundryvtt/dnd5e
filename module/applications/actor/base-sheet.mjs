@@ -553,6 +553,7 @@ export default class ActorSheet5e extends ActorSheet {
       for ( let f of ["action", "bonus", "reaction"] ) {
         if ( filters.has(f) && (item.system.activation?.type !== f) ) return false;
       }
+      
 
       // Spell-specific filters
       if ( filters.has("ritual") && (item.system.components.ritual !== true) ) return false;
@@ -593,7 +594,7 @@ export default class ActorSheet5e extends ActorSheet {
 
   /** @inheritdoc */
   activateListeners(html) {
-
+    console.log("Line 597 in base-sheet ran");
     // Activate Item Filters
     const filterLists = html.find(".filter-list");
     filterLists.each(this._initializeFilterItemList.bind(this));
@@ -613,9 +614,10 @@ export default class ActorSheet5e extends ActorSheet {
 
     // Editable Only Listeners
     if ( this.isEditable ) {
-
       // Input focus and update
+      
       const inputs = html.find("input");
+      console.log("Input focus and update");
       inputs.focus(ev => ev.currentTarget.select());
       inputs.addBack().find('[type="number"]').change(this._onChangeInputDelta.bind(this));
 
@@ -662,6 +664,7 @@ export default class ActorSheet5e extends ActorSheet {
     }
 
     // Handle default listeners last so system listeners are triggered first
+    console.log("line 668 in base-sheet.mjs ran")
     super.activateListeners(html);
   }
 
@@ -691,6 +694,7 @@ export default class ActorSheet5e extends ActorSheet {
    * @private
    */
   _onChangeInputDelta(event) {
+    console.log("_onChangeInputDelta ran");
     const input = event.target;
     const value = input.value;
     if ( ["+", "-"].includes(value[0]) ) {
