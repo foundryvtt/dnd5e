@@ -259,6 +259,7 @@ export class ScaleValueConfig extends AdvancementConfig {
 
   /**
    * Copies the full scale identifier hint to the clipboard.
+   * @protected
    */
   _onIdentifierHintCopy(event) {
     const data = this.getData();
