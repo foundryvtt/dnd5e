@@ -279,18 +279,28 @@ DND5E.toolIds = {
 /* -------------------------------------------- */
 
 /**
- * The various lengths of time over which effects can occur.
+ * Time periods that accept a numeric value.
  * @enum {string}
  */
-DND5E.timePeriods = {
-  inst: "DND5E.TimeInst",
+DND5E.scalarTimePeriods = {
   turn: "DND5E.TimeTurn",
   round: "DND5E.TimeRound",
   minute: "DND5E.TimeMinute",
   hour: "DND5E.TimeHour",
   day: "DND5E.TimeDay",
   month: "DND5E.TimeMonth",
-  year: "DND5E.TimeYear",
+  year: "DND5E.TimeYear"
+};
+
+/* -------------------------------------------- */
+
+/**
+ * The various lengths of time over which effects can occur.
+ * @enum {string}
+ */
+DND5E.timePeriods = {
+  inst: "DND5E.TimeInst",
+  ...DND5E.scalarTimePeriods,
   perm: "DND5E.TimePerm",
   spec: "DND5E.Special"
 };
