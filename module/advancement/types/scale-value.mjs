@@ -261,7 +261,7 @@ export class ScaleValueConfig extends AdvancementConfig {
    * Copies the full scale identifier hint to the clipboard.
    */
   _onIdentifierHintCopy(event) {
-    let data = this.getData();
+    const data = this.getData();
     game.clipboard.copyPlainText(`@scale.${data.classIdentifier}.${data.previewIdentifier}`);
     game.tooltip.activate(event.target, {text: game.i18n.localize("DND5E.IdentifierCopied"), direction: "UP"});
   }
