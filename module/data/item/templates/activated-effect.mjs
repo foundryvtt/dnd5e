@@ -78,6 +78,7 @@ export default class ActivatedEffectTemplate extends foundry.abstract.DataModel 
   /** @inheritdoc */
   static migrateData(source) {
     this.migrateMaxUses(source);
+    this.migrateRanges(source);
   }
 
   /* -------------------------------------------- */
@@ -88,5 +89,19 @@ export default class ActivatedEffectTemplate extends foundry.abstract.DataModel 
    */
   static migrateMaxUses(source) {
     if ( (source.uses?.max === 0) || (source.uses?.max === "0") ) source.uses.max = "";
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Fix issue with some imported range data that uses the format "100/400" in the range field,
+   * rather than splitting it between "range.value" & "range.long".
+   * @param {object} source  The candidate source data from which the model will be constructed.
+   */
+  static migrateRanges(source) {
+    if ( typeof source.range?.value !== "string" ) return;
+    const split = source.range.value.split("/");
+    if ( !Number.isNaN(split[0]) ) source.range.value = Number(split[0]);
+    if ( (split.length > 1) && !Number.isNaN(split[1]) ) source.range.long = Number(split[1]);
   }
 }
