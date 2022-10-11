@@ -594,7 +594,6 @@ export default class ActorSheet5e extends ActorSheet {
 
   /** @inheritdoc */
   activateListeners(html) {
-    console.log("Line 597 in base-sheet ran");
     // Activate Item Filters
     const filterLists = html.find(".filter-list");
     filterLists.each(this._initializeFilterItemList.bind(this));
@@ -617,7 +616,6 @@ export default class ActorSheet5e extends ActorSheet {
       // Input focus and update
       
       const inputs = html.find("input");
-      console.log("Input focus and update");
       inputs.focus(ev => ev.currentTarget.select());
       inputs.addBack().find('[type="text"]').change(this._onChangeInputDelta.bind(this));
 
