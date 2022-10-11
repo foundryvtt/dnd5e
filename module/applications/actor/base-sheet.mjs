@@ -662,7 +662,6 @@ export default class ActorSheet5e extends ActorSheet {
     }
 
     // Handle default listeners last so system listeners are triggered first
-    console.log("line 668 in base-sheet.mjs ran")
     super.activateListeners(html);
   }
 
@@ -692,7 +691,6 @@ export default class ActorSheet5e extends ActorSheet {
    * @private
    */
   _onChangeInputDelta(event) {
-    console.log("_onChangeInputDelta ran");
     const input = event.target;
     const value = input.value;
     if ( ["+", "-"].includes(value[0]) ) {
