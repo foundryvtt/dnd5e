@@ -158,7 +158,7 @@ export default function registerSystemSettings() {
       keepBio: false,
       keepVision: true,
       keepSelf: false,
-      removeAE: false,
+      keepAE: false,
       keepOriginAE: true,
       keepOtherOriginAE: true,
       keepFeatAE: true,

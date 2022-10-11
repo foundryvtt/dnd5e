@@ -1813,7 +1813,7 @@ export default class Actor5e extends Actor {
    * @property {boolean} [keepBio=false]            Keep biography
    * @property {boolean} [keepVision=false]         Keep vision
    * @property {boolean} [keepSelf=false]           Keep self
-   * @property {boolean} [removeAE=false]           Remove all effects
+   * @property {boolean} [keepAE=false]             Keep all effects
    * @property {boolean} [keepOriginAE=true]        Keep effects which originate on this actor
    * @property {boolean} [keepOtherOriginAE=true]   Keep effects which originate on another actor
    * @property {boolean} [keepSpellAE=true]         Keep effects which originate from actors spells
@@ -1835,7 +1835,7 @@ export default class Actor5e extends Actor {
    */
   async transformInto(target, { keepPhysical=false, keepMental=false, keepSaves=false, keepSkills=false,
     mergeSaves=false, mergeSkills=false, keepClass=false, keepFeats=false, keepSpells=false, keepItems=false,
-    keepBio=false, keepVision=false, keepSelf=false, removeAE=false, keepOriginAE=true, keepOtherOriginAE=true,
+    keepBio=false, keepVision=false, keepSelf=false, keepAE=false, keepOriginAE=true, keepOtherOriginAE=true,
     keepSpellAE=true, keepEquipmentAE=true, keepFeatAE=true, keepClassAE=true, keepBackgroundAE=true,
     transformTokens=true}={}, {renderSheet=true}={}) {
 
@@ -1866,7 +1866,8 @@ export default class Actor5e extends Actor {
       img: source.img, // New appearance
       ownership: o.ownership, // Use the original actor permissions
       folder: o.folder, // Be displayed in the same sidebar folder
-      flags: o.flags // Use the original actor flags
+      flags: o.flags, // Use the original actor flags
+      prototypeToken: { name: `${o.name} (${source.name})`, texture: {}, sight: {}, detectionModes: [] } // Set a new empty token
     }, keepSelf ? o : {}); // Keeps most of original actor
 
     // Specifically delete some data attributes
@@ -1882,9 +1883,6 @@ export default class Actor5e extends Actor {
     d.system.attributes.ac.flat = target.system.attributes.ac.value; // Override AC
 
     // Token appearance updates
-    if ( !hasProperty(d, "prototypeToken.texture.src") ) {
-      d.prototypeToken = { name: d.name, texture: {}, sight: {}, detectionModes: [] };
-    }
     for ( const k of ["width", "height", "alpha", "lockRotation"] ) {
       d.prototypeToken[k] = source.prototypeToken[k];
     }
@@ -1897,7 +1895,7 @@ export default class Actor5e extends Actor {
 
     if ( !keepSelf ) {
       const sightSource = keepVision ? o.prototypeToken : source.prototypeToken;
-      for ( const k of ["range", "angle", "visionMode", "color", "attenuation", "brightness", "saturation", "contrast"] ) {
+      for ( const k of ["range", "angle", "visionMode", "color", "attenuation", "brightness", "saturation", "contrast", "enabled"] ) {
         d.prototypeToken.sight[k] = sightSource.sight[k];
       }
       d.prototypeToken.detectionModes = sightSource.detectionModes;
@@ -1945,64 +1943,24 @@ export default class Actor5e extends Actor {
       if ( keepVision ) d.system.traits.senses = o.system.traits.senses;
 
       // Remove active effects
-      if ( removeAE ) {
-        d.effects = [];
-      } else if ( !keepEquipmentAE || !keepFeatAE || !keepOriginAE || !keepOtherOriginAE || !keepSpellAE
-          || !keepClassAE || !keepBackgroundAE
-      ) {
-        const oEffects = foundry.utils.deepClone(d.effects);
-        d.effects = [];
-        const originEffectIds = oEffects.filter(effect => {
-          return !effect.origin || effect.origin === this.uuid;
-        }).map(e => e._id);
-
-        for ( const e of oEffects ) {
-          const origin = e.origin?.startsWith("Actor") || e.origin?.startsWith("Item") ? await fromUuid(e.origin) : {};
-          const originIsSelf = origin.parent?.uuid === this.uuid;
-          const isOriginEffect = originEffectIds.includes(e._id);
-
-          if ( isOriginEffect ) {
-            // If effect originates on actor
-            if ( keepOriginAE ) d.effects.push(e);
-          } else if ( !isOriginEffect && !originIsSelf ) {
-            // Effect is not from Actor
-            if ( keepOtherOriginAE ) d.effects.push(e);
-          } else {
-            // Effect is from an item originating on actor
-            switch ( origin.type ) {
-              case "spell": {
-                if ( keepSpellAE ) d.effects.push(e);
-                break;
-              }
-              case "feat": {
-                if ( keepFeatAE ) d.effects.push(e);
-                break;
-              }
-              case "subclass":
-              case "class": {
-                if ( keepClassAE ) d.effects.push(e);
-                break;
-              }
-              case "equipment":
-              case "weapon":
-              case "tool":
-              case "loot":
-              case "backpack": {
-                if ( keepEquipmentAE ) d.effects.push(e);
-                break;
-              }
-              case "background": {
-                if ( keepBackgroundAE ) d.effects.push(e);
-                break;
-              }
-              default: {
-                // Unknown type, or origin was not caught by above filters, keep
-                d.effects.push(e);
-              }
-            }
-          }
-        }
-      }
+      const oEffects = foundry.utils.deepClone(d.effects);
+      const originEffectIds = new Set(oEffects.filter(effect => {
+        return !effect.origin || effect.origin === this.uuid;
+      }).map(e => e._id));
+      d.effects = d.effects.filter(e => {
+        if ( keepAE ) return true;
+        const origin = e.origin?.startsWith("Actor") || e.origin?.startsWith("Item") ? fromUuidSync(e.origin) : {};
+        const originIsSelf = origin?.parent?.uuid === this.uuid;
+        const isOriginEffect = originEffectIds.has(e._id);
+        if ( isOriginEffect ) return keepOriginAE;
+        if ( !isOriginEffect && !originIsSelf ) return keepOtherOriginAE;
+        if ( origin.type === "spell" ) return keepSpellAE;
+        if ( origin.type === "feat" ) return keepFeatAE;
+        if ( origin.type === "background" ) return keepBackgroundAE;
+        if ( ["subclass", "feat"].includes(origin.type) ) return keepClassAE;
+        if ( ["equipment", "weapon", "tool", "loot", "backpack"].includes(origin.type) ) return keepEquipmentAE;
+        return true;
+      });
     }
 
     // Set a random image if source is configured that way
@@ -2047,7 +2005,7 @@ export default class Actor5e extends Actor {
      */
     Hooks.callAll("dnd5e.transformActor", this, target, d, {
       keepPhysical, keepMental, keepSaves, keepSkills, mergeSaves, mergeSkills, keepClass, keepFeats, keepSpells,
-      keepItems, keepBio, keepVision, keepSelf, removeAE, keepOriginAE, keepOtherOriginAE, keepSpellAE,
+      keepItems, keepBio, keepVision, keepSelf, keepAE, keepOriginAE, keepOtherOriginAE, keepSpellAE,
       keepEquipmentAE, keepFeatAE, keepClassAE, keepBackgroundAE, transformTokens
     }, {renderSheet});
 
@@ -2093,8 +2051,8 @@ export default class Actor5e extends Actor {
      * @param {object} [options]
      */
     Hooks.callAll("dnd5e.revertOriginalForm", this, {renderSheet});
-    const previousActorIds = this.getFlag("dnd5e", "previousActorIds");
-    const isOriginalActor = !previousActorIds || previousActorIds.length <= 0;
+    const previousActorIds = this.getFlag("dnd5e", "previousActorIds") ?? [];
+    const isOriginalActor = !previousActorIds.length;
     const isRendered = this.sheet.rendered;
 
     // Obtain a reference to the original actor
@@ -2132,7 +2090,7 @@ export default class Actor5e extends Actor {
         await this.unsetFlag("dnd5e", "isPolymorphed");
         await this.unsetFlag("dnd5e", "previousActorIds");
       }
-      if ( isRendered && renderSheet ) token.actor.sheet?.render(true);
+      if ( isRendered && renderSheet ) token.actor?.sheet?.render(true);
       return token;
     }
 
@@ -2162,7 +2120,7 @@ export default class Actor5e extends Actor {
     }
 
     // Delete the polymorphed version(s) of the actor, if possible
-    if (game.user.isGM) {
+    if ( game.user.isGM ) {
       const idsToDelete = previousActorIds.filter(id =>
         id !== original.id // Is not original Actor Id
         && game.actors?.get(id) // Actor still exists

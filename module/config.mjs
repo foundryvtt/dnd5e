@@ -1105,7 +1105,7 @@ preLocalize("polymorphSettings", { sort: true });
  * @enum {string}
  */
 DND5E.polymorphEffectSettings = {
-  removeAE: "DND5E.PolymorphRemoveAE",
+  keepAE: "DND5E.PolymorphKeepAE",
   keepOtherOriginAE: "DND5E.PolymorphKeepOtherOriginAE",
   keepOriginAE: "DND5E.PolymorphKeepOriginAE",
   keepEquipmentAE: "DND5E.PolymorphKeepEquipmentAE",
