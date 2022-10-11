@@ -861,7 +861,7 @@ export default class Actor5e extends Actor {
     }
 
     // Add provided extra roll parts now because they will get clobbered by mergeObject below
-    if ( options.parts?.length > 0 ) options.parts.push(...parts);
+    if ( options.parts?.length > 0 ) options.parts = parts.concat(options.parts);
     else options.parts = parts;
 
     // Reliable Talent applies to any skill check we have full or better proficiency in
@@ -975,7 +975,7 @@ export default class Actor5e extends Actor {
     }
 
     // Add provided extra roll parts now because they will get clobbered by mergeObject below
-    if ( options.parts?.length > 0 ) options.parts.push(...parts);
+    if ( options.parts?.length > 0 ) options.parts = parts.concat(options.parts);
     else options.parts = parts;
 
     // Roll and return
@@ -1058,7 +1058,7 @@ export default class Actor5e extends Actor {
     }
 
     // Add provided extra roll parts now because they will get clobbered by mergeObject below
-    if ( options.parts?.length > 0 ) options.parts.push(...parts);
+    if ( options.parts?.length > 0 ) options.parts = parts.concat(options.parts);
     else options.parts = parts;
 
     // Roll and return
@@ -1136,7 +1136,7 @@ export default class Actor5e extends Actor {
     }
 
     // Add provided extra roll parts now because they will get clobbered by mergeObject below
-    if ( options.parts?.length > 0 ) options.parts.push(...parts);
+    if ( options.parts?.length > 0 ) options.parts = parts.concat(options.parts);
     else options.parts = parts;
 
     // Evaluate the roll

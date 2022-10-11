@@ -1327,7 +1327,7 @@ export default class Item5e extends Item {
       && CONFIG.DND5E.characterFlags.elvenAccuracy.abilities.includes(this.abilityMod)) || undefined;
 
     // Add provided extra roll parts now because they will get clobbered by mergeObject below
-    if ( options.parts?.length > 0 ) options.parts.push(...parts);
+    if ( options.parts?.length > 0 ) options.parts = parts.concat(options.parts);
     else options.parts = parts;
 
     // Compose roll options
