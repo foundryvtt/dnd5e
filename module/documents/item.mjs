@@ -1720,6 +1720,10 @@ export default class Item5e extends Item {
       rollData.checkBonus = Roll.replaceFormulaData(globalBonus.check, rollData);
     }
 
+    // Add provided extra roll parts now because they will get clobbered by mergeObject below
+    if ( options.parts?.length > 0 ) options.parts = parts.concat(options.parts);
+    else options.parts = parts;
+
     // Compose the roll data
     const rollConfig = foundry.utils.mergeObject({
       parts: parts,
