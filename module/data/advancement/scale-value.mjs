@@ -9,9 +9,7 @@ export default class ScaleValueConfigurationData extends foundry.abstract.DataMo
         required: true, initial: "string", label: "DND5E.AdvancementScaleValueTypeLabel"
       }),
       distance: new foundry.data.fields.SchemaField({
-        units: new foundry.data.fields.StringField({
-          required: true, blank: true, choices: CONFIG.DND5E.movementUnits, label: "DND5E.MovementUnits"
-        })
+        units: new foundry.data.fields.StringField({required: true, label: "DND5E.MovementUnits"})
       }),
       // TODO: Switch to MappingField with custom type with #1688
       scale: new foundry.data.fields.ObjectField({required: true})
