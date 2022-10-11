@@ -4,8 +4,7 @@
         <label>{{localize "DND5E.Spellcasting"}}</label>
         {{else}}
         <label>{{localize "DND5E.Level"}}</label>
-        {{numberInput system.details.spellLevel name="system.details.spellLevel" class="spellcasting-level"
-            placeholder="0"}}
+        <input type="text" value = "{{system.details.spellLevel name="system.details.spellLevel"}}" class="spellcasting-level delta-input" placeholder="0">
         {{/unless}}
         <select name="system.attributes.spellcasting" data-type="String">
             {{#select system.attributes.spellcasting}}
@@ -35,7 +34,7 @@
             <h3>{{section.label}}</h3>
             <div class="spell-slots">
                 {{#if section.usesSlots}}
-                {{numberInput section.uses name=(concat "system.spells." section.prop ".value") placeholder="0"}}
+                <input type="text" value="{{section.uses}}"  name="{{concat "system.spells." section.prop ".value"}}" placeholder="0" class = "delta-input"> 
                 <span class="sep"> / </span>
                 <span class="spell-max" data-level="{{section.prop}}" data-slots="{{section.slots}}">
                     {{{section.slots}}}

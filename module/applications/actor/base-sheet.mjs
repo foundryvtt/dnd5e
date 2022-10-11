@@ -619,7 +619,7 @@ export default class ActorSheet5e extends ActorSheet {
       const inputs = html.find("input");
       console.log("Input focus and update");
       inputs.focus(ev => ev.currentTarget.select());
-      inputs.addBack().find('[type="number"]').change(this._onChangeInputDelta.bind(this));
+      inputs.addBack().find('[type="text"]').change(this._onChangeInputDelta.bind(this));
 
       // Ability Proficiency
       html.find(".ability-proficiency").click(this._onToggleAbilityProficiency.bind(this));
@@ -699,7 +699,7 @@ export default class ActorSheet5e extends ActorSheet {
     const value = input.value;
     if ( ["+", "-"].includes(value[0]) ) {
       let delta = parseFloat(value);
-      input.value = foundry.utils.getProperty(this.actor, input.name) + delta;
+      input.value = parseFloat(foundry.utils.getProperty(this.actor, input.name)) + delta;
     }
     else if ( value[0] === "=" ) input.value = value.slice(1);
   }
