@@ -1326,6 +1326,10 @@ export default class Item5e extends Item {
     const elvenAccuracy = (flags.elvenAccuracy
       && CONFIG.DND5E.characterFlags.elvenAccuracy.abilities.includes(this.abilityMod)) || undefined;
 
+    // Add provided extra roll parts now because they will get clobbered by mergeObject below
+    if ( options.parts?.length > 0 ) options.parts.push(...parts);
+    else options.parts = parts;
+
     // Compose roll options
     const rollConfig = foundry.utils.mergeObject({
       parts,
@@ -1463,6 +1467,10 @@ export default class Item5e extends Item {
 
     // Factor in extra weapon-specific critical damage
     if ( this.system.critical?.damage ) rollConfig.criticalBonusDamage = this.system.critical.damage;
+
+    // Add provided extra roll parts now because they will get clobbered by mergeObject below
+    if ( options.parts?.length > 0 ) options.parts = parts.concat(options.parts);
+    else options.parts = parts;
 
     foundry.utils.mergeObject(rollConfig, options);
 
