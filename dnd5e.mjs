@@ -9,7 +9,7 @@
  */
 
 // Import Configuration
-import DND5E from "./module/config.mjs";
+import DND5E from "./module/config/_module.mjs";
 import registerSystemSettings from "./module/settings.mjs";
 
 // Import Submodules
@@ -173,7 +173,7 @@ function expandAttributeList(attributes) {
 /**
  * Perform one-time pre-localization and sorting of some configuration objects
  */
-Hooks.once("i18nInit", () => utils.performPreLocalization(CONFIG.DND5E));
+Hooks.once("i18nInit", () => DND5E.utils.performPreLocalization(CONFIG.DND5E));
 
 /* -------------------------------------------- */
 /*  Foundry VTT Ready                           */
