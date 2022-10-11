@@ -1118,7 +1118,7 @@ export default class ActorSheet5e extends ActorSheet {
       }
     }
 
-    return item.delete();
+    return item.deleteDialog();
   }
 
   /* -------------------------------------------- */
