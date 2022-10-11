@@ -32,7 +32,7 @@ export class AdvancementDataField extends foundry.data.fields.ObjectField {
 
     // Use the defined defaults
     const defaults = this.getDefaults();
-    return foundry.utils.mergeObject(defaults, value, {inplace: true});
+    return foundry.utils.mergeObject(defaults, value);
   }
 
   initialize(value, model) {
@@ -80,14 +80,6 @@ export class FormulaField extends foundry.data.fields.StringField {
  * Special case StringField that includes automatic validation for identifiers.
  */
 export class IdentifierField extends foundry.data.fields.StringField {
-
-  /** @inheritdoc */
-  static get _defaults() {
-    return foundry.utils.mergeObject(super._defaults, {
-      validationError: "is not a valid Identifier string"
-    });
-  }
-
   /** @override */
   _validateType(value) {
     if ( !dnd5e.utils.validators.isValidIdentifier(value) ) throw new Error(game.i18n.localize("DND5E.IdentifierError"));

@@ -1935,11 +1935,11 @@ export default class Item5e extends Item {
    * @param {object} [data]                        Data to use when creating the advancement.
    * @param {object} [options]
    * @param {boolean} [options.showConfig=true]    Should the new advancement's configuration application be shown?
-   * @param {boolean} [options.local=false]        Should a local-only update be performed?
+   * @param {boolean} [options.source=false]       Should a source-only update be performed?
    * @returns {Promise<AdvancementConfig>|Item5e}  Promise for advancement config for new advancement if local
    *                                               is `false`, or item with newly added advancement.
    */
-  createAdvancement(type, data={}, { showConfig=true, local=false }={}) {
+  createAdvancement(type, data={}, { showConfig=true, source=false }={}) {
     if ( !this.system.advancement ) return;
 
     const Advancement = dnd5e.advancement.types[`${type}Advancement`];
@@ -1952,7 +1952,7 @@ export default class Item5e extends Item {
     const advancement = new Advancement(this, data);
     const advancementCollection = this.toObject().system.advancement;
     advancementCollection.push(advancement.toObject());
-    if ( local ) return this.updateSource({"system.advancement": advancementCollection});
+    if ( source ) return this.updateSource({"system.advancement": advancementCollection});
     return this.update({"system.advancement": advancementCollection}).then(() => {
       if ( !showConfig ) return this;
       const config = new Advancement.metadata.apps.config(this.advancement.byId[advancement.id]);
@@ -1964,13 +1964,13 @@ export default class Item5e extends Item {
 
   /**
    * Update an advancement belonging to this item.
-   * @param {string} id                      ID of the advancement to update.
-   * @param {object} updates                 Updates to apply to this advancement.
+   * @param {string} id                       ID of the advancement to update.
+   * @param {object} updates                  Updates to apply to this advancement.
    * @param {object} [options={}]
-   * @param {boolean} [options.local=false]  Should a local-only update be performed?
-   * @returns {Promise<Item5e>}              This item with the changes applied, promised if local is `false`.
+   * @param {boolean} [options.source=false]  Should a source-only update be performed?
+   * @returns {Promise<Item5e>|Item5e}        This item with the changes applied, promised if source is `false`.
    */
-  updateAdvancement(id, updates, { local=false }={}) {
+  updateAdvancement(id, updates, { source=false }={}) {
     if ( !this.system.advancement ) return;
     const idx = this.system.advancement.findIndex(a => a._id === id);
     if ( idx === -1 ) throw new Error(`Advancement of ID ${id} could not be found to update`);
@@ -1979,7 +1979,7 @@ export default class Item5e extends Item {
     advancement.updateSource(updates, { updateItem: false });
     const advancementCollection = this.toObject().system.advancement;
     advancementCollection[idx] = advancement.toObject();
-    if ( local ) return this.updateSource({"system.advancement": advancementCollection});
+    if ( source ) return this.updateSource({"system.advancement": advancementCollection});
     return this.update({"system.advancement": advancementCollection});
   }
 
@@ -1987,16 +1987,16 @@ export default class Item5e extends Item {
 
   /**
    * Remove an advancement from this item.
-   * @param {string} id                      ID of the advancement to remove.
+   * @param {string} id                       ID of the advancement to remove.
    * @param {object} [options={}]
-   * @param {boolean} [options.local=false]  Should a local-only update be performed?
-   * @returns {Promise<Item5e>}              This item with the changes applied.
+   * @param {boolean} [options.source=false]  Should a source-only update be performed?
+   * @returns {Promise<Item5e>|Item5e}        This item with the changes applied.
    */
-  deleteAdvancement(id, { local=false }={}) {
+  deleteAdvancement(id, { source=false }={}) {
     if ( !this.system.advancement ) return;
 
     const advancementCollection = this.system.advancement.filter(a => a._id !== id);
-    if ( local ) return this.updateSource({"system.advancement": advancementCollection});
+    if ( source ) return this.updateSource({"system.advancement": advancementCollection});
     return this.update({"system.advancement": advancementCollection});
   }
 
@@ -2004,12 +2004,12 @@ export default class Item5e extends Item {
 
   /**
    * Duplicate an advancement, resetting its value to default and giving it a new ID.
-   * @param {string} id                            ID of the advancement to duplicate.
+   * @param {string} id                             ID of the advancement to duplicate.
    * @param {object} [options]
-   * @param {boolean} [options.showConfig=true]    Should the new advancement's configuration application be shown?
-   * @param {boolean} [options.local=false]        Should a local-only update be performed?
-   * @returns {Promise<AdvancementConfig>|Item5e}  Promise for advancement config for duplicate advancement if local
-   *                                               is `false`, or item with newly duplicated advancement.
+   * @param {boolean} [options.showConfig=true]     Should the new advancement's configuration application be shown?
+   * @param {boolean} [options.source=false]        Should a source-only update be performed?
+   * @returns {Promise<AdvancementConfig>|Item5e}   Promise for advancement config for duplicate advancement if source
+   *                                                is `false`, or item with newly duplicated advancement.
    */
   duplicateAdvancement(id, options) {
     const original = this.advancement.byId[id];

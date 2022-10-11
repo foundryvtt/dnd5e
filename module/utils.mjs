@@ -89,8 +89,7 @@ export function linkForUuid(uuid) {
  * @returns {boolean}
  */
 function isValidIdentifier(identifier) {
-  const regex = new RegExp(/^([a-z0-9_-]+)$/i);
-  return regex.test(identifier);
+  return /^([a-z0-9_-]+)$/i.test(identifier);
 }
 
 export const validators = {

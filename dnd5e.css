@@ -22,9 +22,6 @@
 /* ----------------------------------------- */
 /*  Sheet Styles                             */
 /* ----------------------------------------- */
-:root {
-  --dnd5e-color-border-invalid: red;
-}
 /* ----------------------------------------- */
 /*  Flexbox                                  */
 /* ----------------------------------------- */
@@ -101,10 +98,6 @@
 .dnd5e input[type="checkbox"]:focus {
   border: 1px solid #111;
   box-shadow: 0 0 8px red;
-}
-.dnd5e input:is([type="text"], [type="number"], [type="checkbox"]):is(.invalid) {
-  border-color: var(--dnd5e-color-border-invalid);
-  outline: 2px solid var(--dnd5e-color-border-invalid);
 }
 .dnd5e input:disabled,
 .dnd5e select:disabled,

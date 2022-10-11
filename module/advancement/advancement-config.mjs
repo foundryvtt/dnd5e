@@ -116,23 +116,8 @@ export default class AdvancementConfig extends FormApplication {
       updates = { ...updates, ...data };
     }
     if ( updates.configuration ) updates.configuration = this.prepareConfigurationUpdate(updates.configuration);
-    try {
-      await this.advancement.update(updates);
-      this.render();
-    } catch(err) {
-      if ( err instanceof foundry.data.fields.ModelValidationError ) {
-        for ( const [key, error] of Object.entries(err.errors) ) {
-          ui.notifications.error(`${key} ${error.message}`);
-          const name = key.split(".").pop();
-          const field = this.form.querySelector(`[name="${name}"]`);
-          field?.classList.add("invalid");
-          // TODO: Currently only highlights top-level fields, figure out a way to do this for configuration fields
-          // TODO: Fetch "label" from DataModel for better message
-        }
-      } else {
-        throw err;
-      }
-    }
+    await this.advancement.update(updates);
+    this.render();
   }
 
   /* -------------------------------------------- */

@@ -4,7 +4,6 @@ export default class ScaleValueConfigurationData extends foundry.abstract.DataMo
   static defineSchema() {
     return {
       identifier: new IdentifierField({required: true, label: "DND5E.Identifier"}),
-      // TODO: Add type choices with #1688
       type: new foundry.data.fields.StringField({
         required: true, initial: "string", label: "DND5E.AdvancementScaleValueTypeLabel"
       }),
