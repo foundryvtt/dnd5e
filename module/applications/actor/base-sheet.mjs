@@ -553,7 +553,6 @@ export default class ActorSheet5e extends ActorSheet {
       for ( let f of ["action", "bonus", "reaction"] ) {
         if ( filters.has(f) && (item.system.activation?.type !== f) ) return false;
       }
-      
 
       // Spell-specific filters
       if ( filters.has("ritual") && (item.system.components.ritual !== true) ) return false;
