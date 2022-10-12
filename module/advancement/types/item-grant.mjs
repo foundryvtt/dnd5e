@@ -76,7 +76,7 @@ export class ItemGrantAdvancement extends Advancement {
   async apply(level, data, retainedData={}) {
     const items = [];
     const updates = {};
-    const spellChanges = this.configuration.spell ? this._prepareSpellChanges(this.configuration.spell) : {};
+    const spellChanges = this.configuration.spell?.spellChanges ?? {};
     for ( const [uuid, selected] of Object.entries(data) ) {
       if ( !selected ) continue;
 
