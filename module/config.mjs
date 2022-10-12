@@ -840,6 +840,7 @@ DND5E.hitDieTypes = ["d4", "d6", "d8", "d10", "d12"];
 DND5E.senses = {
   blindsight: "DND5E.SenseBlindsight",
   darkvision: "DND5E.SenseDarkvision",
+  devilsSight: "DND5E.SenseDevilsSight",
   tremorsense: "DND5E.SenseTremorsense",
   truesight: "DND5E.SenseTruesight"
 };
