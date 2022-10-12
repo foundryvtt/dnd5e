@@ -615,7 +615,7 @@ export default class ActorSheet5e extends ActorSheet {
       // Input focus and update
       const inputs = html.find("input");
       inputs.focus(ev => ev.currentTarget.select());
-      inputs.addBack().find('[type="text"]').change(this._onChangeInputDelta.bind(this));
+      inputs.addBack().find('[data-dtype="Number"]').change(this._onChangeInputDelta.bind(this));
 
       // Ability Proficiency
       html.find(".ability-proficiency").click(this._onToggleAbilityProficiency.bind(this));
