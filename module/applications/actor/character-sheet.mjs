@@ -196,7 +196,6 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-
   activateListeners(html) {
     super.activateListeners(html);
     if ( !this.isEditable ) return;
