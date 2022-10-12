@@ -34,7 +34,7 @@
             <h3>{{section.label}}</h3>
             <div class="spell-slots">
                 {{#if section.usesSlots}}
-                <input type="text" value="{{section.uses}}"  name="{{concat "system.spells." section.prop ".value"}}" placeholder="0" class = "delta-input"> 
+                <input type="text" name="system.spells.{{section.prop}}.value" value="{{section.uses}}" placeholder="0" data-dtype="Number"> 
                 <span class="sep"> / </span>
                 <span class="spell-max" data-level="{{section.prop}}" data-slots="{{section.slots}}">
                     {{{section.slots}}}
