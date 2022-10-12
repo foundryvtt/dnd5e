@@ -19,7 +19,7 @@
 
                 {{#unless disableExperience}}
                 <div class="experience flexrow">
-                    <input type="text" value="{{system.details.xp.value}}" step="any" name="system.details.xp.value" placeholder="0" >
+                    <input type="text" name="system.details.xp.value" value="{{system.details.xp.value}}" placeholder="0" data-dtype="Number">
                     <span class="sep">/</span>
                     <span class="max">{{system.details.xp.max}}</span>
                 </div>
