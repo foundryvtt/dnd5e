@@ -205,7 +205,7 @@
                             </label>
                             <input type="text" value="{{res.value}}" name="{{concat "system.resources." res.name ".value"}}" placeholder="0" class="delta-input">
                             <span class="sep"> / </span>
-                            <input type="text" value="{{res.max}}" name="{{concat "system.resources." res.name ".max"}}" placeholder="0" class="delta-input">
+                            <input type="text" name="system.resources.{{res.name}}.max" value="{{res.max}}" placeholder="0" data-dtype="Number">
                             <label class="recharge checkbox flexcol">
                                 <span>{{ localize "DND5E.AbbreviationLR" }}</span><input name="system.resources.{{res.name}}.lr" type="checkbox" {{checked res.lr}}/>
                             </label>
