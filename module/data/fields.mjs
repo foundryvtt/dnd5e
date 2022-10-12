@@ -130,9 +130,7 @@ export class MappingField extends foundry.data.fields.ObjectField {
     if ( !keys || !foundry.utils.isEmpty(this.initial()) ) return super.getInitialValue(data);
     if ( !(keys instanceof Array) ) keys = Object.keys(keys);
     const initial = {};
-    for ( const key of keys ) {
-      initial[key] = this.model.getInitialValue();
-    }
+    for ( const key of keys ) initial[key] = this.model.getInitialValue();
     return initial;
   }
 

@@ -56,8 +56,7 @@ export default class ActivatedEffectTemplate extends foundry.abstract.DataModel 
       }, {label: "DND5E.Range"}),
       uses: new foundry.data.fields.SchemaField({
         value: new foundry.data.fields.NumberField({required: true, min: 0, label: "DND5E.LimitedUsesAvailable"}),
-        // Max uses cannot be FormulaField because it supports unconventional syntax
-        max: new foundry.data.fields.StringField({required: true, label: "DND5E.LimitedUsesMax"}),
+        max: new FormulaField({required: true, deterministic: true, label: "DND5E.LimitedUsesMax"}),
         per: new foundry.data.fields.StringField({
           required: true, blank: false, nullable: true, initial: null, label: "DND5E.LimitedUsesPer"
         }),
