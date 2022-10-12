@@ -1982,8 +1982,8 @@ export default class Actor5e extends Actor {
     if ( this.isToken ) {
       const tokenData = d.prototypeToken;
       delete d.prototypeToken;
-      d.flags.dnd5e.previousActorData = this.token.toObject().actorData;
       tokenData.actorData = d;
+      setProperty(tokenData, "flags.dnd5e.previousActorData", this.token.toObject().actorData);
       await this.sheet?.close();
       const update = await this.token.update(tokenData);
       if ( renderSheet ) this.sheet?.render(true);
@@ -2045,7 +2045,7 @@ export default class Actor5e extends Actor {
 
     /**
      * A hook event that fires just before the actor is reverted to original form.
-     * @function dnd5e.transformActor
+     * @function dnd5e.revertOriginalForm
      * @memberof hookEvents
      * @param {Actor} this                 The original actor before transformation.
      * @param {object} [options]
@@ -2068,7 +2068,7 @@ export default class Actor5e extends Actor {
         return;
       }
       const prototypeTokenData = await baseActor.getTokenDocument();
-      const actorData = foundry.utils.getProperty(this, "flags.dnd5e.previousActorData");
+      const actorData = foundry.utils.getProperty(this.token, "flags.dnd5e.previousActorData");
       const tokenUpdate = this.token.toObject();
       tokenUpdate.actorData = actorData ? actorData : {};
 
@@ -2089,6 +2089,7 @@ export default class Actor5e extends Actor {
       if ( isOriginalActor ) {
         await this.unsetFlag("dnd5e", "isPolymorphed");
         await this.unsetFlag("dnd5e", "previousActorIds");
+        await this.unsetFlag("dnd5e", "previousActorData");
       }
       if ( isRendered && renderSheet ) token.actor?.sheet?.render(true);
       return token;
