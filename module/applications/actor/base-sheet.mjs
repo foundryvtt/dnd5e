@@ -613,7 +613,6 @@ export default class ActorSheet5e extends ActorSheet {
     // Editable Only Listeners
     if ( this.isEditable ) {
       // Input focus and update
-      
       const inputs = html.find("input");
       inputs.focus(ev => ev.currentTarget.select());
       inputs.addBack().find('[type="text"]').change(this._onChangeInputDelta.bind(this));
