@@ -1151,9 +1151,63 @@ DND5E.polymorphSettings = {
   keepSpells: "DND5E.PolymorphKeepSpells",
   keepItems: "DND5E.PolymorphKeepItems",
   keepBio: "DND5E.PolymorphKeepBio",
-  keepVision: "DND5E.PolymorphKeepVision"
+  keepVision: "DND5E.PolymorphKeepVision",
+  keepSelf: "DND5E.PolymorphKeepSelf"
 };
 preLocalize("polymorphSettings", { sort: true });
+
+/**
+ * Settings to configure how actors are effects are merged when polymorphing is applied.
+ * @enum {string}
+ */
+DND5E.polymorphEffectSettings = {
+  keepAE: "DND5E.PolymorphKeepAE",
+  keepOtherOriginAE: "DND5E.PolymorphKeepOtherOriginAE",
+  keepOriginAE: "DND5E.PolymorphKeepOriginAE",
+  keepEquipmentAE: "DND5E.PolymorphKeepEquipmentAE",
+  keepFeatAE: "DND5E.PolymorphKeepFeatureAE",
+  keepSpellAE: "DND5E.PolymorphKeepSpellAE",
+  keepClassAE: "DND5E.PolymorphKeepClassAE",
+  keepBackgroundAE: "DND5E.PolymorphKeepBackgroundAE"
+};
+preLocalize("polymorphEffectSettings", { sort: true });
+
+/**
+ * Settings to configure how actors are merged when preset polymorphing is applied.
+ * @enum {object}
+ */
+DND5E.transformationPresets = {
+  wildshape: {
+    icon: '<i class="fas fa-paw"></i>',
+    label: "DND5E.PolymorphWildShape",
+    options: {
+      keepBio: true,
+      keepClass: true,
+      keepMental: true,
+      mergeSaves: true,
+      mergeSkills: true,
+      keepEquipmentAE: false
+    }
+  },
+  polymorph: {
+    icon: '<i class="fas fa-pastafarianism"></i>',
+    label: "DND5E.Polymorph",
+    options: {
+      keepEquipmentAE: false,
+      keepClassAE: false,
+      keepFeatAE: false,
+      keepBackgroundAE: false
+    }
+  },
+  polymorphSelf: {
+    icon: '<i class="fas fa-eye"></i>',
+    label: "DND5E.PolymorphSelf",
+    options: {
+      keepSelf: true
+    }
+  }
+};
+preLocalize("transformationPresets", { sort: true, keys: ["label"] });
 
 /* -------------------------------------------- */
 

@@ -31,7 +31,7 @@ export default class ItemSheet5e extends ItemSheet {
       resizable: true,
       scrollY: [".tab.details"],
       tabs: [{navSelector: ".tabs", contentSelector: ".sheet-body", initial: "description"}],
-      dragDrop: [{dragSelector: "[data-effect-id]", dropSelector: ".effects-list"}],
+      dragDrop: [{dragSelector: "[data-effect-id]", dropSelector: ".effects-list"}]
     });
   }
 
@@ -533,7 +533,7 @@ export default class ItemSheet5e extends ItemSheet {
   _onDrop(event) {
     const data = TextEditor.getDragEventData(event);
     const item = this.item;
-    
+
     /**
      * A hook event that fires when some useful data is dropped onto an ItemSheet5e.
      * @function dnd5e.dropItemSheetData
@@ -567,7 +567,7 @@ export default class ItemSheet5e extends ItemSheet {
     if ( (this.item.uuid === effect.parent.uuid) || (this.item.uuid === effect.origin) ) return false;
     return ActiveEffect.create({
       ...effect.toObject(),
-      origin: this.item.uuid,
+      origin: this.item.uuid
     }, {parent: this.item});
   }
 

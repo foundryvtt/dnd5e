@@ -797,7 +797,8 @@ export default class ActorSheet5e extends ActorSheet {
       title: game.i18n.localize("DND5E.PolymorphPromptTitle"),
       content: {
         options: game.settings.get("dnd5e", "polymorphSettings"),
-        i18n: CONFIG.DND5E.polymorphSettings,
+        settings: CONFIG.DND5E.polymorphSettings,
+        effectSettings: CONFIG.DND5E.polymorphEffectSettings,
         isToken: this.actor.isToken
       },
       default: "accept",
@@ -808,23 +809,28 @@ export default class ActorSheet5e extends ActorSheet {
           callback: html => this.actor.transformInto(sourceActor, rememberOptions(html))
         },
         wildshape: {
-          icon: '<i class="fas fa-paw"></i>',
-          label: game.i18n.localize("DND5E.PolymorphWildShape"),
-          callback: html => this.actor.transformInto(sourceActor, {
-            keepBio: true,
-            keepClass: true,
-            keepMental: true,
-            mergeSaves: true,
-            mergeSkills: true,
-            transformTokens: rememberOptions(html).transformTokens
-          })
+          icon: CONFIG.DND5E.transformationPresets.wildshape.icon,
+          label: CONFIG.DND5E.transformationPresets.wildshape.label,
+          callback: html => this.actor.transformInto(sourceActor, foundry.utils.mergeObject(
+            CONFIG.DND5E.transformationPresets.wildshape.options,
+            { transformTokens: rememberOptions(html).transformTokens }
+          ))
         },
         polymorph: {
-          icon: '<i class="fas fa-pastafarianism"></i>',
-          label: game.i18n.localize("DND5E.Polymorph"),
-          callback: html => this.actor.transformInto(sourceActor, {
-            transformTokens: rememberOptions(html).transformTokens
-          })
+          icon: CONFIG.DND5E.transformationPresets.polymorph.icon,
+          label: CONFIG.DND5E.transformationPresets.polymorph.label,
+          callback: html => this.actor.transformInto(sourceActor, foundry.utils.mergeObject(
+            CONFIG.DND5E.transformationPresets.polymorph.options,
+            { transformTokens: rememberOptions(html).transformTokens }
+          ))
+        },
+        self: {
+          icon: CONFIG.DND5E.transformationPresets.polymorphSelf.icon,
+          label: CONFIG.DND5E.transformationPresets.polymorphSelf.label,
+          callback: html => this.actor.transformInto(sourceActor, foundry.utils.mergeObject(
+            CONFIG.DND5E.transformationPresets.polymorphSelf.options,
+            { transformTokens: rememberOptions(html).transformTokens }
+          ))
         },
         cancel: {
           icon: '<i class="fas fa-times"></i>',
@@ -832,8 +838,8 @@ export default class ActorSheet5e extends ActorSheet {
         }
       }
     }, {
-      classes: ["dialog", "dnd5e"],
-      width: 600,
+      classes: ["dialog", "dnd5e", "polymorph"],
+      width: 900,
       template: "systems/dnd5e/templates/apps/polymorph-prompt.hbs"
     }).render(true);
   }
