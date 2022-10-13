@@ -32,7 +32,7 @@ export class AdvancementDataField extends foundry.data.fields.ObjectField {
 
     // Use the defined defaults
     const defaults = this.getDefaults();
-    return foundry.utils.mergeObject(defaults, value);
+    return foundry.utils.mergeObject(defaults, value, {inplace: false});
   }
 
   initialize(value, model) {
@@ -47,7 +47,6 @@ export class AdvancementDataField extends foundry.data.fields.ObjectField {
 /**
  * @typedef {StringFieldOptions} FormulaFieldOptions
  * @property {boolean} [deterministic=false]  Is this formula not allowed to have dice values?
- * @property {boolean} [extended=false]       Does this formula support conditional operators (aka max uses field)?
  */
 
 /**
@@ -55,26 +54,23 @@ export class AdvancementDataField extends foundry.data.fields.ObjectField {
  *
  * @param {FormulaFieldOptions} [options={}]  Options which configure the behavior of the field.
  * @property {boolean} deterministic=false    Is this formula not allowed to have dice values?
- * @property {boolean} extended=false         Does this formula support conditional operators (aka max uses field)?
  */
 export class FormulaField extends foundry.data.fields.StringField {
 
   /** @inheritdoc */
   static get _defaults() {
     return foundry.utils.mergeObject(super._defaults, {
-      deterministic: false,
-      extended: false
+      deterministic: false
     });
   }
 
   /** @inheritdoc */
   _validateType(value) {
-    if ( this.options.extended ) {
-      const formula = Roll.replaceFormulaData(value, {}, {missing: "0"});
-      Roll.safeEval(formula);
+    const roll = new Roll(value);
+    if ( this.options.deterministic ) {
+      if ( !roll.isDeterministic ) throw new Error("must not contain dice terms");
+      Roll.safeEval(roll.formula);
     } else {
-      const roll = new Roll(value);
-      if ( this.deterministic && !roll.isDeterministic ) throw new Error("must not contain dice terms");
       roll.evaluate({async: false});
     }
     super._validateType(value);
