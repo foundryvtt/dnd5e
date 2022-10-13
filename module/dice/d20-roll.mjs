@@ -198,8 +198,7 @@ export default class D20Roll extends Roll {
     const content = await renderTemplate(template ?? this.constructor.EVALUATION_TEMPLATE, {
       formula: `${this.formula} + @bonus`,
       defaultRollMode,
-      rollModes: CONFIG.Dice.rollModes,
-      abilities: CONFIG.DND5E.abilities
+      rollModes: CONFIG.Dice.rollModes
     });
 
     let defaultButton = "normal";
@@ -250,21 +249,6 @@ export default class D20Roll extends Roll {
       const bonus = new Roll(form.bonus.value, this.data);
       if ( !(bonus.terms[0] instanceof OperatorTerm) ) this.terms.push(new OperatorTerm({operator: "+"}));
       this.terms = this.terms.concat(bonus.terms);
-    }
-
-    // Customize the modifier
-    if ( form.ability?.value ) {
-      const abl = this.data.abilities[form.ability.value];
-      this.terms = this.terms.flatMap(t => {
-        if ( t.term === "@mod" ) return new NumericTerm({number: abl.mod});
-        if ( t.term === "@abilityCheckBonus" ) {
-          const bonus = abl.bonuses?.check;
-          if ( bonus ) return new Roll(bonus, this.data).terms;
-          return new NumericTerm({number: 0});
-        }
-        return t;
-      });
-      this.options.flavor += ` (${CONFIG.DND5E.abilities[form.ability.value]})`;
     }
 
     // Apply advantage or disadvantage

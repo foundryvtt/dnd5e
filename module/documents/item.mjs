@@ -1717,7 +1717,7 @@ export default class Item5e extends Item {
       parts: parts,
       data: rollData,
       title: title,
-      flavor: title,
+      flavor: title + ` (${CONFIG.DND5E.abilities[abl]})`,
       dialogOptions: {
         width: 400,
         top: options.event ? options.event.clientY - 80 : null,
