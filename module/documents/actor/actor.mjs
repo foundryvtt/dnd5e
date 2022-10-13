@@ -2068,7 +2068,7 @@ export default class Actor5e extends Actor {
         return;
       }
       const prototypeTokenData = await baseActor.getTokenDocument();
-      const actorData = foundry.utils.getProperty(this.token, "flags.dnd5e.previousActorData");
+      const actorData = this.token.get.getFlag("dnd5e", "previousActorData");
       const tokenUpdate = this.token.toObject();
       tokenUpdate.actorData = actorData ? actorData : {};
 
