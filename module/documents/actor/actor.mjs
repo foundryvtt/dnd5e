@@ -2089,7 +2089,7 @@ export default class Actor5e extends Actor {
       if ( isOriginalActor ) {
         await this.unsetFlag("dnd5e", "isPolymorphed");
         await this.unsetFlag("dnd5e", "previousActorIds");
-        await this.unsetFlag("dnd5e", "previousActorData");
+        await this.token.unsetFlag("dnd5e", "previousActorData");
       }
       if ( isRendered && renderSheet ) token.actor?.sheet?.render(true);
       return token;
