@@ -15,7 +15,7 @@ export default class SpellConfigurationData extends foundry.abstract.DataModel {
   /* -------------------------------------------- */
 
   /**
-   * Changes that this spell configuration indicates should be perform on spells.
+   * Changes that this spell configuration indicates should be performed on spells.
    * @type {object}
    */
   get spellChanges() {

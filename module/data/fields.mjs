@@ -69,13 +69,13 @@ export class FormulaField extends foundry.data.fields.StringField {
 
   /** @inheritdoc */
   _validateType(value) {
-    if ( !this.options.extended ) {
-      const roll = new Roll(value);
-      roll.evaluate({async: false});
-      if ( this.deterministic && !roll.isDeterministic ) throw new Error("must not contain dice terms");
-    } else {
+    if ( this.options.extended ) {
       const formula = Roll.replaceFormulaData(value, {}, {missing: "0"});
       Roll.safeEval(formula);
+    } else {
+      const roll = new Roll(value);
+      if ( this.deterministic && !roll.isDeterministic ) throw new Error("must not contain dice terms");
+      roll.evaluate({async: false});
     }
     super._validateType(value);
   }
