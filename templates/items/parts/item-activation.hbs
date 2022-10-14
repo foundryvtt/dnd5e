@@ -83,7 +83,13 @@
                    placeholder="{{localize 'DND5E.Long'}}" data-tooltip="DND5E.RangeLong">
         {{/if}}
         <select name="system.range.units" data-tooltip="DND5E.RangeUnits">
-            {{selectOptions config.distanceUnits selected=system.range.units blank=(localize "DND5E.None")}}
+            {{#select system.range.units}}
+                <option value="">{{localize "DND5E.None"}}</option>
+                {{selectOptions config.rangeTypes}}
+                <optgroup label="{{localize 'DND5E.RangeDistance'}}">
+                    {{selectOptions config.movementUnits}}
+                </optgroup>
+            {{/select}}
         </select>
     </div>
 </div>
@@ -98,10 +104,11 @@
         {{/if}}
         <select name="system.duration.units" data-tooltip="DND5E.DurationType">
             {{#select system.duration.units}}
-                <option value=""></option>
-                {{#each config.timePeriods as |name key|}}
-                <option value="{{key}}">{{name}}</option>
-                {{/each}}
+                <option value="">{{localize "DND5E.None"}}</option>
+                {{selectOptions config.specialTimePeriods}}
+                <optgroup label="{{localize 'DND5E.DurationTime'}}">
+                    {{selectOptions config.scalarTimePeriods}}
+                </optgroup>
             {{/select}}
         </select>
     </div>
@@ -144,7 +151,7 @@
             </select>
         {{/if}}
         <select name="system.consume.type" data-tooltip="DND5E.ConsumeType">
-            {{selectOptions config.abilityConsumptionTypes selected=system.consume.type blank=""}}
+            {{selectOptions config.abilityConsumptionTypes selected=system.consume.type blank=(localize "DND5E.None")}}
         </select>
     </div>
 </div>

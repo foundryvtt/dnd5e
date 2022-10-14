@@ -291,6 +291,20 @@ DND5E.scalarTimePeriods = {
   month: "DND5E.TimeMonth",
   year: "DND5E.TimeYear"
 };
+preLocalize("scalarTimePeriods");
+
+/* -------------------------------------------- */
+
+/**
+ * Time periods that don't accept a numeric value.
+ * @enum {string}
+ */
+DND5E.specialTimePeriods = {
+  inst: "DND5E.TimeInst",
+  perm: "DND5E.TimePerm",
+  spec: "DND5E.Special"
+};
+preLocalize("specialTimePeriods");
 
 /* -------------------------------------------- */
 
@@ -299,10 +313,8 @@ DND5E.scalarTimePeriods = {
  * @enum {string}
  */
 DND5E.timePeriods = {
-  inst: "DND5E.TimeInst",
-  ...DND5E.scalarTimePeriods,
-  perm: "DND5E.TimePerm",
-  spec: "DND5E.Special"
+  ...DND5E.specialTimePeriods,
+  ...DND5E.scalarTimePeriods
 };
 preLocalize("timePeriods");
 
