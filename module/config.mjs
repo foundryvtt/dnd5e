@@ -1,4 +1,5 @@
 import ClassFeatures from "./advancement/class-features.mjs";
+import * as advancement from "./advancement/types/_module.mjs";
 import { preLocalize } from "./utils.mjs";
 
 // Namespace Configuration Values
@@ -1459,6 +1460,18 @@ preLocalize("characterFlags", { keys: ["name", "hint", "section"] });
  * @type {string[]}
  */
 DND5E.allowedActorFlags = ["isPolymorphed", "originalActor"].concat(Object.keys(DND5E.characterFlags));
+
+/* -------------------------------------------- */
+
+/**
+ * Advancement types that can be added to items.
+ * @enum {*}
+ */
+DND5E.advancementTypes = {
+  HitPoints: advancement.HitPointsAdvancement,
+  ItemGrant: advancement.ItemGrantAdvancement,
+  ScaleValue: advancement.ScaleValueAdvancement
+};
 
 /* -------------------------------------------- */
 

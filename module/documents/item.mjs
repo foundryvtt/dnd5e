@@ -437,7 +437,7 @@ export default class Item5e extends Item {
       needingConfiguration: []
     };
     for ( const advancementData of this.system.advancement ?? [] ) {
-      const Advancement = dnd5e.advancement.types[`${advancementData.type}Advancement`];
+      const Advancement = CONFIG.DND5E.advancementTypes[advancementData.type];
       if ( !Advancement ) continue;
       const advancement = new Advancement(this, advancementData);
       this.advancement.byId[advancement.id] = advancement;
@@ -1942,8 +1942,8 @@ export default class Item5e extends Item {
   createAdvancement(type, data={}, { showConfig=true, source=false }={}) {
     if ( !this.system.advancement ) return;
 
-    const Advancement = dnd5e.advancement.types[`${type}Advancement`];
-    if ( !Advancement ) throw new Error(`${type} advancement not found in dnd5e.advancement.types`);
+    const Advancement = CONFIG.DND5E.advancementTypes[type];
+    if ( !Advancement ) throw new Error(`${type} not found in CONFIG.DND5E.advancementTypes`);
 
     if ( !Advancement.metadata.validItemTypes.has(this.type) || !Advancement.availableForItem(this) ) {
       throw new Error(`${type} advancement cannot be added to ${this.name}`);
