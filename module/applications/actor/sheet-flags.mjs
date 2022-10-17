@@ -92,7 +92,9 @@ export default class ActorSheetFlags extends DocumentSheet {
       {name: "system.bonuses.abilities.check", label: "DND5E.BonusAbilityCheck"},
       {name: "system.bonuses.abilities.save", label: "DND5E.BonusAbilitySave"},
       {name: "system.bonuses.abilities.skill", label: "DND5E.BonusAbilitySkill"},
-      {name: "system.bonuses.spell.dc", label: "DND5E.BonusSpellDC"}
+      {name: "system.bonuses.spell.dc", label: "DND5E.BonusSpellDC"},
+      ...Object.keys(CONFIG.DND5E.abilities)
+        .map(k => ({name: `system.bonuses.${k}.dc`, label: `DND5E.Bonus${k.titleCase()}DC`}))
     ];
     for ( let b of bonuses ) {
       b.value = foundry.utils.getProperty(src, b.name) || "";

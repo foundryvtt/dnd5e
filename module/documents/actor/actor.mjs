@@ -348,7 +348,7 @@ export default class Actor5e extends Actor {
    */
   _prepareAbilities(bonusData, globalBonuses, checkBonus, originalSaves) {
     const flags = this.flags.dnd5e ?? {};
-    const dcBonus = simplifyBonus(this.system.bonuses?.spell?.dc, bonusData);
+    const spellDcBonus = simplifyBonus(this.system.bonuses?.spell?.dc, bonusData);
     const saveBonus = simplifyBonus(globalBonuses.save, bonusData);
     for ( const [id, abl] of Object.entries(this.system.abilities) ) {
       if ( flags.diamondSoul ) abl.proficient = 1;  // Diamond Soul is proficient in all saves
@@ -365,7 +365,8 @@ export default class Actor5e extends Actor {
 
       abl.save = abl.mod + abl.saveBonus;
       if ( Number.isNumeric(abl.saveProf.term) ) abl.save += abl.saveProf.flat;
-      abl.dc = 8 + abl.mod + this.system.attributes.prof + dcBonus;
+      abl.spellDc = 8 + abl.mod + this.system.attributes.prof + spellDcBonus;
+      abl.dc = 8 + abl.mod + this.system.attributes.prof + simplifyBonus(this.system.bonuses?.[id]?.dc, bonusData);
 
       // If we merged saves when transforming, take the highest bonus here.
       if ( originalSaves && abl.proficient ) abl.save = Math.max(abl.save, originalSaves[id].save);
@@ -610,7 +611,9 @@ export default class Actor5e extends Actor {
 
     // Spellcasting DC
     const spellcastingAbility = this.system.abilities[this.system.attributes.spellcasting];
-    this.system.attributes.spelldc = spellcastingAbility ? spellcastingAbility.dc : 8 + this.system.attributes.prof;
+    this.system.attributes.spelldc = spellcastingAbility
+      ? spellcastingAbility.spellDc
+      : 8 + this.system.attributes.prof;
 
     // Translate the list of classes into spell-casting progression
     const progression = {total: 0, slot: 0, pact: 0};
