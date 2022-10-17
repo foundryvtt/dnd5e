@@ -1,5 +1,6 @@
 import { FormulaField, MappingField } from "../fields.mjs";
 import * as common from "./common.mjs";
+import SkillData from "./skill.mjs";
 
 /**
  * Data definition for creature data template used by Characters & NPCs.
@@ -21,9 +22,14 @@ export class CreatureData extends common.CommonData {
         initialKeys: CONFIG.DND5E.skills, label: "DND5E.Skills"
       }),
       traits: new foundry.data.fields.EmbeddedDataField(CreatureTraitsData, {label: "DND5E.Traits"}),
-      spells: new MappingField(new foundry.data.fields.EmbeddedDataField(SpellData), {
-        initialKeys: this._spellLevels, label: "DND5E.SpellLevels"
-      }),
+      spells: new MappingField(new foundry.data.fields.SchemaField({
+        value: new foundry.data.fields.NumberField({
+          required: true, nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.SpellProgAvailable"
+        }),
+        override: new foundry.data.fields.NumberField({
+          required: true, integer: true, min: 0, label: "DND5E.SpellProgOverride"
+        })
+      }), {initialKeys: this._spellLevels, label: "DND5E.SpellLevels"}),
       bonuses: new foundry.data.fields.EmbeddedDataField(BonusesData, {label: "DND5E.Bonuses"})
     };
   }
@@ -106,30 +112,6 @@ export class CreatureDetailsData extends common.DetailsData {
 }
 
 /**
- * An embedded data structure for individual skill data.
- * @see CreatureData
- *
- * @property {number} value            Proficiency level creature has in this skill.
- * @property {string} ability          Default ability used for this skill.
- * @property {object} bonuses          Bonuses for this skill.
- * @property {string} bonuses.check    Numeric or dice bonus to skill's check.
- * @property {string} bonuses.passive  Numeric bonus to skill's passive check.
- */
-export class SkillData extends foundry.abstract.DataModel {
-  static defineSchema() {
-    return {
-      value: new foundry.data.fields.NumberField({required: true, initial: 0, label: "DND5E.ProficiencyLevel"}),
-      // TODO: Default abilities for skills are not filled properly
-      ability: new foundry.data.fields.StringField({required: true, initial: "dex", label: "DND5E.Ability"}),
-      bonuses: new foundry.data.fields.SchemaField({
-        check: new FormulaField({required: true, label: "DND5E.SkillBonusCheck"}),
-        passive: new FormulaField({required: true, label: "DND5E.SkillBonusPassive"})
-      }, {label: "DND5E.SkillBonuses"})
-    };
-  }
-}
-
-/**
  * An embedded data structure for extra traits data used by creatures.
  * @see CreatureData
  *
@@ -147,26 +129,6 @@ export class CreatureTraitsData extends common.TraitsData {
         ),
         custom: new foundry.data.fields.StringField({required: true, label: "DND5E.Special"})
       }, {label: "DND5E.Languages"})
-    };
-  }
-}
-
-/**
- * An embedded data structure for individual spell levels.
- * @see CreatureData
- *
- * @property {number} value     Number of unused spell slots at this level.
- * @property {number} override  Manual override of total spell slot count for this level.
- */
-export class SpellData extends foundry.abstract.DataModel {
-  static defineSchema() {
-    return {
-      value: new foundry.data.fields.NumberField({
-        required: true, nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.SpellProgAvailable"
-      }),
-      override: new foundry.data.fields.NumberField({
-        required: true, integer: true, min: 0, label: "DND5E.SpellProgOverride"
-      })
     };
   }
 }

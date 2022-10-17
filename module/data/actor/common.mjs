@@ -1,4 +1,6 @@
 import { FormulaField, MappingField } from "../fields.mjs";
+import CurrencyData from "../shared/currency.mjs";
+import AbilityData from "./ability.mjs";
 
 /**
  * Data definition for common data template.
@@ -60,31 +62,6 @@ export class CommonData extends foundry.abstract.DataModel {
 
     // If nothing was matched, but there was an old string - put the whole thing in "special"
     if ( !wasMatched && original ) source.attributes.senses.special = original;
-  }
-}
-
-/**
- * An embedded data structure for actor ability scores.
- * @see ActorData5e
- *
- * @property {number} value          Ability score.
- * @property {number} proficient     Proficiency value for saves.
- * @property {object} bonuses        Bonuses that modify ability checks and saves.
- * @property {string} bonuses.check  Numeric or dice bonus to ability checks.
- * @property {string} bonuses.save   Numeric or dice bonus to ability saving throws.
- */
-export class AbilityData extends foundry.abstract.DataModel {
-  static defineSchema() {
-    return {
-      value: new foundry.data.fields.NumberField({
-        required: true, nullable: false, integer: true, min: 0, initial: 10, label: "DND5E.AbilityScore"
-      }),
-      proficient: new foundry.data.fields.NumberField({required: true, initial: 0, label: "DND5E.ProficiencyLevel"}),
-      bonuses: new foundry.data.fields.SchemaField({
-        check: new FormulaField({required: true, label: "DND5E.AbilityCheckBonus"}),
-        save: new FormulaField({required: true, label: "DND5E.SaveBonus"})
-      }, {label: "DND5E.AbilityBonuses"})
-    };
   }
 }
 
@@ -289,38 +266,6 @@ export class TraitsData extends foundry.abstract.DataModel {
         ),
         custom: new foundry.data.fields.StringField({required: true, label: "DND5E.Special"})
       }, {label: "DND5E.ConImm"})
-    };
-  }
-}
-
-/**
- * An embedded data structure for currently held currencies.
- * @see CommonData
- *
- * @property {number} pp  Platinum pieces.
- * @property {number} gp  Gold pieces.
- * @property {number} ep  Electrum pieces.
- * @property {number} sp  Silver pieces.
- * @property {number} cp  Copper pieces.
- */
-export class CurrencyData extends foundry.abstract.DataModel {
-  static defineSchema() {
-    return {
-      pp: new foundry.data.fields.NumberField({
-        required: true, nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.CurrencyPP"
-      }),
-      gp: new foundry.data.fields.NumberField({
-        required: true, nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.CurrencyGP"
-      }),
-      ep: new foundry.data.fields.NumberField({
-        required: true, nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.CurrencyEP"
-      }),
-      sp: new foundry.data.fields.NumberField({
-        required: true, nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.CurrencySP"
-      }),
-      cp: new foundry.data.fields.NumberField({
-        required: true, nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.CurrencyCP"
-      })
     };
   }
 }
