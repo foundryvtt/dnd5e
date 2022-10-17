@@ -42,7 +42,7 @@ export default class Token5e extends Token {
     // Determine the container size (logic borrowed from core)
     const w = this.w;
     let h = Math.max((canvas.dimensions.size / 12), 8);
-    if ( this.height >= 2 ) h *= 1.6;
+    if ( this.document.height >= 2 ) h *= 1.6;
     const bs = Math.clamped(h / 8, 1, 2);
     const bs1 = bs+1;
 
