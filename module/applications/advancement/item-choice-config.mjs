@@ -23,7 +23,7 @@ export default class ItemChoiceConfig extends AdvancementConfig {
     for ( const type of this.advancement.constructor.VALID_TYPES ) {
       data.validTypes[type] = game.i18n.localize(`ITEM.Type${type.capitalize()}`);
     }
-    data.showSpellConfig = this.advancement.data.configuration.type === "spell";
+    data.showSpellConfig = this.advancement.configuration.type === "spell";
     return data;
   }
 
@@ -34,7 +34,7 @@ export default class ItemChoiceConfig extends AdvancementConfig {
     if ( configuration.choices ) configuration.choices = this.constructor._cleanedObject(configuration.choices);
 
     // Ensure items are still valid if type restriction or spell restriction are changed
-    configuration.pool ??= this.advancement.data.configuration.pool;
+    configuration.pool ??= this.advancement.configuration.pool;
     configuration.pool = await configuration.pool.reduce(async (pool, uuid) => {
       const item = await fromUuid(uuid);
       if ( this.advancement._verifyItemType(item, {

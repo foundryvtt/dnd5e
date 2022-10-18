@@ -40,9 +40,9 @@ export default class ItemChoiceFlow extends AdvancementFlow {
     // Prepare initial data
     this.selected ??= new Set(
       this.retainedData?.items.map(i => foundry.utils.getProperty(i, "flags.dnd5e.sourceId"))
-        ?? Object.values(this.advancement.data.value[this.level] ?? {})
+        ?? Object.values(this.advancement.value[this.level] ?? {})
     );
-    this.pool ??= await Promise.all(this.advancement.data.configuration.pool.map(fromUuid));
+    this.pool ??= await Promise.all(this.advancement.configuration.pool.map(fromUuid));
     this.dropped ??= await (this.retainedData?.items ?? []).reduce(async (arrP, data) => {
       const arr = await arrP;
       const uuid = foundry.utils.getProperty(data, "flags.dnd5e.sourceId");
@@ -54,12 +54,12 @@ export default class ItemChoiceFlow extends AdvancementFlow {
       return arr;
     }, []);
 
-    const max = this.advancement.data.configuration.choices[this.level];
+    const max = this.advancement.configuration.choices[this.level];
     const choices = { max, current: this.selected.size, full: this.selected.size >= max };
 
     const previousLevels = {};
     const previouslySelected = new Set();
-    for ( const [level, data] of Object.entries(this.advancement.data.value) ) {
+    for ( const [level, data] of Object.entries(this.advancement.value) ) {
       if ( level > this.level ) continue;
       previousLevels[level] = await Promise.all(Object.values(data).map(fromUuid));
       Object.values(data).forEach(uuid => previouslySelected.add(uuid));
@@ -127,7 +127,7 @@ export default class ItemChoiceFlow extends AdvancementFlow {
 
   /** @inheritdoc */
   async _onDrop(event) {
-    if ( this.selected.size >= this.advancement.data.configuration.choices[this.level] ) return false;
+    if ( this.selected.size >= this.advancement.configuration.choices[this.level] ) return false;
 
     // Try to extract the data
     let data;
@@ -150,14 +150,14 @@ export default class ItemChoiceFlow extends AdvancementFlow {
     if ( this.selected.has(item.uuid) ) return false;
 
     // Check to ensure the dropped item hasn't been selected at a lower level
-    for ( const [level, data] of Object.entries(this.advancement.data.value) ) {
+    for ( const [level, data] of Object.entries(this.advancement.value) ) {
       if ( level >= this.level ) continue;
       if ( Object.values(data).includes(item.uuid) ) return;
     }
 
     // If spell level is restricted to available level, ensure the spell is of the appropriate level
-    const spellLevel = this.advancement.data.configuration.spell?.level;
-    if ( (this.advancement.data.configuration.type === "spell") && spellLevel === "available" ) {
+    const spellLevel = this.advancement.configuration.spell?.level;
+    if ( (this.advancement.configuration.type === "spell") && spellLevel === "available" ) {
       const maxSlot = this._maxSpellSlotLevel();
       if ( item.system.level > maxSlot ) return ui.notifications.error(game.i18n.format(
         "DND5E.AdvancementItemChoiceSpellLevelAvailableWarning", { level: CONFIG.DND5E.spellLevels[maxSlot] }

@@ -1,6 +1,7 @@
 import Advancement from "./advancement.mjs";
 import ItemChoiceConfig from "../../applications/advancement/item-choice-config.mjs";
 import ItemChoiceFlow from "../../applications/advancement/item-choice-flow.mjs";
+import ItemChoiceConfigurationData from "../../data/advancement/item-choice.mjs";
 
 /**
  * Advancement that presents the player with a choice of multiple items that they can take. Keeps track of which
@@ -11,15 +12,8 @@ export default class ItemChoiceAdvancement extends Advancement {
   /** @inheritdoc */
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
-      defaults: {
-        configuration: {
-          hint: "",
-          choices: {},
-          allowDrops: true,
-          type: null,
-          pool: [],
-          spell: null
-        }
+      dataModels: {
+        configuration: ItemChoiceConfigurationData
       },
       order: 50,
       icon: "systems/dnd5e/icons/svg/item-choice.svg",
@@ -90,7 +84,7 @@ export default class ItemChoiceAdvancement extends Advancement {
   async apply(level, data, retainedData={}) {
     const items = [];
     const updates = {};
-    const spellChanges = this.data.configuration.spell ? this._prepareSpellChanges(this.data.configuration.spell) : {};
+    const spellChanges = this.configuration.spell?.spellChanges ?? {};
     for ( const [uuid, selected] of Object.entries(data) ) {
       if ( !selected ) continue;
 
@@ -130,7 +124,7 @@ export default class ItemChoiceAdvancement extends Advancement {
   /** @inheritdoc */
   reverse(level) {
     const items = [];
-    for ( const id of Object.keys(this.data.value[level] ?? {}) ) {
+    for ( const id of Object.keys(this.value[level] ?? {}) ) {
       const item = this.actor.items.get(id);
       if ( item ) items.push(item.toObject());
       this.actor.items.delete(id);
@@ -152,8 +146,8 @@ export default class ItemChoiceAdvancement extends Advancement {
    * @throws An error if the item is invalid and warn is `true`.
    */
   _verifyItemType(item, { restriction, spellLevel, error=true }={}) {
-    restriction ??= this.data.configuration.type;
-    spellLevel ??= this.data.configuration.spell?.level;
+    restriction ??= this.configuration.type;
+    spellLevel ??= this.configuration.spell?.level;
 
     // Type restriction is set and the item type does not match the selected type
     if ( restriction && (restriction !== item.type) ) {

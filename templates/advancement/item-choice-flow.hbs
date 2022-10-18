@@ -3,8 +3,8 @@
   <h3>{{{title}}}</h3>
 
   <div class="drop-target">
-    {{#if advancement.data.configuration.hint}}
-      <p>{{advancement.data.configuration.hint}}</p>
+    {{#if advancement.configuration.hint}}
+      <p>{{advancement.configuration.hint}}</p>
     {{/if}}
 
     {{#each previousLevels}}
@@ -40,7 +40,7 @@
       </div>
     {{/each}}
 
-    {{#if advancement.data.configuration.allowDrops}}
+    {{#if advancement.configuration.allowDrops}}
       <p class="hint centered">{{localize "DND5E.AdvancementFlowDropAreaHint"}}</p>
     {{/if}}
   </div>

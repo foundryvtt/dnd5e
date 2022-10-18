@@ -2,14 +2,14 @@
   <div class="left-column">
     {{> "dnd5e.advancement-controls"}}
     <div class="form-group">
-      <label>Hint</label>
-      <textarea name="data.configuration.hint">{{data.configuration.hint}}</textarea>
+      <label>{{localize "DND5E.AdvancementHint"}}</label>
+      <textarea name="configuration.hint">{{configuration.hint}}</textarea>
     </div>
 
     <div class="form-group">
       <label>{{localize "DND5E.AdvancementConfigureAllowDrops"}}</label>
       <div class="form-fields">
-        <input type="checkbox" name="data.configuration.allowDrops" {{checked data.configuration.allowDrops}}>
+        <input type="checkbox" name="configuration.allowDrops" {{checked configuration.allowDrops}}>
       </div>
       <p class="hint">{{localize "DND5E.AdvancementConfigureAllowDropsHint"}}</p>
     </div>
@@ -17,8 +17,8 @@
     <div class="form-group">
       <label>{{localize "DND5E.AdvancementItemChoiceType"}}</label>
       <div class="form-fields">
-        <select name="data.configuration.type">
-          {{selectOptions validTypes selected=data.configuration.type
+        <select name="configuration.type">
+          {{selectOptions validTypes selected=configuration.type
             blank=(localize "DND5E.AdvancementItemChoiceTypeAny")}}
         </select>
       </div>
@@ -29,8 +29,8 @@
       <div class="form-group">
         <label>{{localize "DND5E.SpellLevel"}}</label>
         <div class="form-fields">
-          <select name="data.configuration.spell.level">
-            {{#select data.configuration.spell.level}}
+          <select name="configuration.spell.level">
+            {{#select configuration.spell.level}}
               <option value="">&mdash;</option>
               {{#each CONFIG.spellLevels as |label key|}}
                 <option value="{{key}}">{{label}}</option>
@@ -49,7 +49,7 @@
       <ol class="items-list">
         <li class="items-header flexrow"><h3 class="item-name">{{localize "DOCUMENT.Items"}}</h3></li>
         <ol class="item-list">
-        {{#each data.configuration.pool}}
+        {{#each configuration.pool}}
           <li class="item flexrow" data-item-uuid="{{this}}">
             <div class="item-name">{{{dnd5e-linkForUuid this}}}</div>
             <div class="item-controls flexrow">
@@ -72,8 +72,8 @@
       <div class="form-group">
         <label>{{level}}</label>
         <div class="form-fields">
-          {{numberInput (lookup ../data.configuration.choices level) placeholder="0"
-            name=(concat "data.configuration.choices." level) min=1 step=1}}
+          {{numberInput (lookup ../configuration.choices level) placeholder="0"
+            name=(concat "configuration.choices." level) min=1 step=1}}
         </div>
       </div>
     {{/each}}
