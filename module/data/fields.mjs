@@ -183,7 +183,8 @@ export class MappingField extends foundry.data.fields.ObjectField {
   /** @inheritdoc */
   static get _defaults() {
     return foundry.utils.mergeObject(super._defaults, {
-      initialKeys: undefined
+      initialKeys: null,
+      initialValue: null
     });
   }
 
@@ -203,7 +204,10 @@ export class MappingField extends foundry.data.fields.ObjectField {
     const initial = super.getInitialValue(data);
     if ( !keys || !foundry.utils.isEmpty(initial) ) return initial;
     if ( !(keys instanceof Array) ) keys = Object.keys(keys);
-    for ( const key of keys ) initial[key] = this.model.getInitialValue();
+    for ( const key of keys ) {
+      const modelInitial = this.model.getInitialValue();
+      initial[key] = this.initialValue?.(key, modelInitial) ?? modelInitial;
+    }
     return initial;
   }
 
@@ -241,4 +245,28 @@ export class MappingField extends foundry.data.fields.ObjectField {
     Object.values(value).forEach(v => this.model.initialize(v, model, options));
     return value;
   }
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Data structure for a standard actor trait.
+ *
+ * @typedef {object} SimpleTraitData
+ * @property {Set<string>} value  Keys for currently selected traits.
+ * @property {string} custom      Semicolon-separated list of custom traits.
+ */
+
+/**
+ * Produce the schema field for a simple trait.
+ * @param {object} schemaOptions  Options passed to the outer schema.
+ * @returns {SchemaField}
+ */
+export function makeSimpleTrait(schemaOptions={}) {
+  return new foundry.data.fields.SchemaField({
+    value: new foundry.data.fields.SetField(
+      new foundry.data.fields.StringField({blank: false}), {label: "DND5E.TraitsChosen"}
+    ),
+    custom: new foundry.data.fields.StringField({required: true, label: "DND5E.Special"})
+  }, schemaOptions);
 }
