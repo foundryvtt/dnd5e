@@ -43,19 +43,19 @@ export default class AdvancementSelection extends Dialog {
 
   /** @inheritDoc */
   getData() {
-    const data = { types: {} };
+    const context = { types: {} };
     for ( const advancement of Object.values(dnd5e.advancement.types) ) {
       if ( !(advancement.prototype instanceof Advancement)
         || !advancement.metadata.validItemTypes.has(this.item.type) ) continue;
-      data.types[advancement.typeName] = {
+      context.types[advancement.typeName] = {
         label: advancement.metadata.title,
         icon: advancement.metadata.icon,
         hint: advancement.metadata.hint,
         disabled: !advancement.availableForItem(this.item)
       };
     }
-    data.types = dnd5e.utils.sortObjectEntries(data.types, "label");
-    return data;
+    context.types = dnd5e.utils.sortObjectEntries(context.types, "label");
+    return context;
   }
 
   /* -------------------------------------------- */

@@ -146,7 +146,7 @@ export default class ItemSheet5e extends ItemSheet {
           order: a.constructor.order,
           title: a.title,
           icon: a.icon,
-          classRestriction: a.data.classRestriction,
+          classRestriction: a.classRestriction,
           configured: false
         })),
         configured: "partial"
@@ -161,7 +161,7 @@ export default class ItemSheet5e extends ItemSheet {
         order: advancement.sortingValueForLevel(level),
         title: advancement.titleForLevel(level, { configMode }),
         icon: advancement.icon,
-        classRestriction: advancement.data.classRestriction,
+        classRestriction: advancement.classRestriction,
         summary: advancement.summaryForLevel(level, { configMode }),
         configured: advancement.configuredForLevel(level)
       }));
@@ -397,14 +397,10 @@ export default class ItemSheet5e extends ItemSheet {
     }
 
     // Check class identifier
-    if ( formData.system?.identifier ) {
-      const dataRgx = new RegExp(/^([a-z0-9_-]+)$/i);
-      const match = formData.system.identifier.match(dataRgx);
-      if ( !match ) {
-        formData.system.identifier = this.item._source.system.identifier;
-        this.form.querySelector("input[name='system.identifier']").value = formData.system.identifier;
-        return ui.notifications.error(game.i18n.localize("DND5E.IdentifierError"));
-      }
+    if ( formData.system?.identifier && !dnd5e.utils.validators.isValidIdentifier(formData.system.identifier) ) {
+      formData.system.identifier = this.item._source.system.identifier;
+      this.form.querySelector("input[name='system.identifier']").value = formData.system.identifier;
+      return ui.notifications.error(game.i18n.localize("DND5E.IdentifierError"));
     }
 
     // Return the flattened submission data

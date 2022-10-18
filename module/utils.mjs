@@ -80,6 +80,23 @@ export function linkForUuid(uuid) {
 }
 
 /* -------------------------------------------- */
+/*  Validators                                  */
+/* -------------------------------------------- */
+
+/**
+ * Ensure the provided string contains only the characters allowed in identifiers.
+ * @param {string} identifier
+ * @returns {boolean}
+ */
+function isValidIdentifier(identifier) {
+  return /^([a-z0-9_-]+)$/i.test(identifier);
+}
+
+export const validators = {
+  isValidIdentifier: isValidIdentifier
+};
+
+/* -------------------------------------------- */
 /*  Handlebars Template Helpers                 */
 /* -------------------------------------------- */
 
