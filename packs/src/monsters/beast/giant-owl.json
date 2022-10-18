@@ -2,7 +2,7 @@
   "_id": "VVXly3ue0i3YgGrB",
   "name": "Giant Owl",
   "type": "npc",
-  "img": "systems/dnd5e/tokens/beast/GiantOwl.webp",
+  "img": "systems/shaper/tokens/beast/GiantOwl.webp",
   "system": {
     "abilities": {
       "str": {
@@ -578,7 +578,7 @@
       "attenuation": 0.5
     },
     "texture": {
-      "src": "systems/dnd5e/tokens/beast/GiantOwl.webp",
+      "src": "systems/shaper/tokens/beast/GiantOwl.webp",
       "tint": null,
       "scaleX": 1.5,
       "scaleY": 1.5,
@@ -898,11 +898,11 @@
   },
   "flags": {},
   "_stats": {
-    "systemId": "dnd5e",
+    "systemId": "shaper",
     "systemVersion": "2.0.0",
     "coreVersion": "10.279",
     "createdTime": 1661787232864,
     "modifiedTime": 1661878732454,
-    "lastModifiedBy": "dnd5ebuilder0000"
+    "lastModifiedBy": "shaperbuilder0000"
   }
 }

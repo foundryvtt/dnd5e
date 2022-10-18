@@ -2,7 +2,7 @@
     <input type="text" name="preview" value="{{preview}}" disabled>
 
     <div class="form-group stacked">
-        <label>{{ localize "DND5E.CreatureType" }}</label>
+        <label>{{ localize "SHAPER.CreatureType" }}</label>
         <ul class="trait-list">
             {{#each types as |type key|}}
             <li>
@@ -18,21 +18,21 @@
                 <input type="text" name="custom" value="{{custom.value}}"/>
             </li>
             <li class="subtype form-group">
-                <label>{{ localize "DND5E.CreatureTypeSelectorSubtype" }}</label>
+                <label>{{ localize "SHAPER.CreatureTypeSelectorSubtype" }}</label>
                 <input type="text" name="subtype" value="{{subtype}}"/>
             </li>
         </ul>
     </div>
 
     <div class="swarm-size form-group">
-        <label>{{ localize "DND5E.CreatureSwarmSize" }}</label>
+        <label>{{ localize "SHAPER.CreatureSwarmSize" }}</label>
         <select name="swarm">
             {{selectOptions sizes selected=swarm blank="" localize=true}}
         </select>
     </div>
 
     <button type="submit">
-        <i class="far fa-save"></i> {{ localize "DND5E.TraitSave"}}
+        <i class="far fa-save"></i> {{ localize "SHAPER.TraitSave"}}
     </button>
 </form>
 

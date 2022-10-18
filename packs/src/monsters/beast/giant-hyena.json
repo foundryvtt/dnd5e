@@ -2,7 +2,7 @@
   "_id": "aAqfEHPiVbhMwZ6j",
   "name": "Giant Hyena",
   "type": "npc",
-  "img": "systems/dnd5e/tokens/beast/GiantHyena.webp",
+  "img": "systems/shaper/tokens/beast/GiantHyena.webp",
   "system": {
     "abilities": {
       "str": {
@@ -578,7 +578,7 @@
       "attenuation": 0.5
     },
     "texture": {
-      "src": "systems/dnd5e/tokens/beast/GiantHyena.webp",
+      "src": "systems/shaper/tokens/beast/GiantHyena.webp",
       "tint": null,
       "scaleX": 1.5,
       "scaleY": 1.5,
@@ -812,11 +812,11 @@
   },
   "flags": {},
   "_stats": {
-    "systemId": "dnd5e",
+    "systemId": "shaper",
     "systemVersion": "2.0.0",
     "coreVersion": "10.279",
     "createdTime": 1661787232901,
     "modifiedTime": 1661878732846,
-    "lastModifiedBy": "dnd5ebuilder0000"
+    "lastModifiedBy": "shaperbuilder0000"
   }
 }

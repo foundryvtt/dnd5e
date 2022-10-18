@@ -2,7 +2,7 @@
   "_id": "f6HaKROPIcBRmSd1",
   "name": "Rug of Smothering",
   "type": "npc",
-  "img": "systems/dnd5e/tokens/construct/RugOfSmothering.webp",
+  "img": "systems/shaper/tokens/construct/RugOfSmothering.webp",
   "system": {
     "abilities": {
       "str": {
@@ -589,7 +589,7 @@
       "attenuation": 0.5
     },
     "texture": {
-      "src": "systems/dnd5e/tokens/construct/RugOfSmothering.webp",
+      "src": "systems/shaper/tokens/construct/RugOfSmothering.webp",
       "tint": null,
       "scaleX": 1,
       "scaleY": 1,
@@ -983,11 +983,11 @@
   },
   "flags": {},
   "_stats": {
-    "systemId": "dnd5e",
+    "systemId": "shaper",
     "systemVersion": "2.0.0",
     "coreVersion": "10.279",
     "createdTime": 1661787232954,
     "modifiedTime": 1661878733582,
-    "lastModifiedBy": "dnd5ebuilder0000"
+    "lastModifiedBy": "shaperbuilder0000"
   }
 }

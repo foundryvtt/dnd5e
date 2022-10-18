@@ -2,7 +2,7 @@
   "_id": "IZMbiAHqQpzPo0CX",
   "name": "Black Dragon Wyrmling",
   "type": "npc",
-  "img": "systems/dnd5e/tokens/dragon/BlackDragonWyrmling.webp",
+  "img": "systems/shaper/tokens/dragon/BlackDragonWyrmling.webp",
   "system": {
     "abilities": {
       "str": {
@@ -582,7 +582,7 @@
       "color": null
     },
     "texture": {
-      "src": "systems/dnd5e/tokens/dragon/BlackDragonWyrmling.webp",
+      "src": "systems/shaper/tokens/dragon/BlackDragonWyrmling.webp",
       "tint": null,
       "scaleX": 3,
       "scaleY": 3,
@@ -905,11 +905,11 @@
   },
   "flags": {},
   "_stats": {
-    "systemId": "dnd5e",
+    "systemId": "shaper",
     "systemVersion": "2.0.0",
     "coreVersion": "10.279",
     "createdTime": 1661787232730,
     "modifiedTime": 1661878730659,
-    "lastModifiedBy": "dnd5ebuilder0000"
+    "lastModifiedBy": "shaperbuilder0000"
   }
 }

@@ -3,7 +3,7 @@ import less from "gulp-less";
 
 
 const LESS_DEST = "./";
-const LESS_SRC = "less/dnd5e.less";
+const LESS_SRC = "less/shaper.less";
 const LESS_WATCH = ["less/*.less"];
 
 

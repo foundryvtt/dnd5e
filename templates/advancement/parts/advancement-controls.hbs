@@ -1,12 +1,12 @@
 <div class="form-group">
-  <label>{{localize "DND5E.AdvancementCustomTitle"}}</label>
+  <label>{{localize "SHAPER.AdvancementCustomTitle"}}</label>
   <div class="form-fields">
     <input type="text" name="data.title" value="{{data.title}}" placeholder="{{default.title}}">
   </div>
 </div>
 
 <div class="form-group">
-  <label>{{localize "DND5E.AdvancementCustomIcon"}}</label>
+  <label>{{localize "SHAPER.AdvancementCustomIcon"}}</label>
   <div class="form-fields">
     {{filePicker type="image" target="data.icon"}}
     <input type="text" name="data.icon" value="{{data.icon}}" placeholder="{{default.icon}}">
@@ -15,13 +15,13 @@
 
 {{#if showClassRestrictions}}
   <div class="form-group">
-    <label>{{localize "DND5E.AdvancementClassRestriction"}}</label>
+    <label>{{localize "SHAPER.AdvancementClassRestriction"}}</label>
     <div class="form-fields">
       <select name="data.classRestriction">
         {{#select data.classRestriction}}
-          <option value="">{{localize "DND5E.AdvancementClassRestrictionNone"}}</option>
-          <option value="primary">{{localize "DND5E.AdvancementClassRestrictionPrimary"}}</option>
-          <option value="secondary">{{localize "DND5E.AdvancementClassRestrictionSecondary"}}</option>
+          <option value="">{{localize "SHAPER.AdvancementClassRestrictionNone"}}</option>
+          <option value="primary">{{localize "SHAPER.AdvancementClassRestrictionPrimary"}}</option>
+          <option value="secondary">{{localize "SHAPER.AdvancementClassRestrictionSecondary"}}</option>
         {{/select}}
       </select>
     </div>
@@ -30,7 +30,7 @@
 
 {{#if showLevelSelector}}
   <div class="form-group">
-    <label>{{localize "DND5E.Level"}}</label>
+    <label>{{localize "SHAPER.Level"}}</label>
     <div class="form-fields">
       <select name="data.level" data-dtype="Number">
         {{selectOptions levels selected=data.level}}

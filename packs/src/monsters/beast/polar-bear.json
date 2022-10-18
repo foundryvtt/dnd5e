@@ -2,7 +2,7 @@
   "_id": "hb6pjvdCNYmLLp8V",
   "name": "Polar Bear",
   "type": "npc",
-  "img": "systems/dnd5e/tokens/beast/PolarBear.webp",
+  "img": "systems/shaper/tokens/beast/PolarBear.webp",
   "system": {
     "abilities": {
       "str": {
@@ -578,7 +578,7 @@
       "attenuation": 0.5
     },
     "texture": {
-      "src": "systems/dnd5e/tokens/beast/PolarBear.webp",
+      "src": "systems/shaper/tokens/beast/PolarBear.webp",
       "tint": null,
       "scaleX": 1.5,
       "scaleY": 1.5,
@@ -1009,11 +1009,11 @@
   },
   "flags": {},
   "_stats": {
-    "systemId": "dnd5e",
+    "systemId": "shaper",
     "systemVersion": "2.0.0",
     "coreVersion": "10.279",
     "createdTime": 1661787232992,
     "modifiedTime": 1661878734121,
-    "lastModifiedBy": "dnd5ebuilder0000"
+    "lastModifiedBy": "shaperbuilder0000"
   }
 }

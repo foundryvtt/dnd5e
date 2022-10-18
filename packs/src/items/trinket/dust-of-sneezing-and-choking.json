@@ -5,7 +5,7 @@
   "img": "icons/magic/water/bubbles-air-water-light.webp",
   "system": {
     "description": {
-      "value": "<p><em>Wondrous item</em></p>\n<p>Found in a small container, this powder resembles very fine sand. It appears to be dust of disappearance, and an <em>@Compendium[dnd5e.spells.3OZnNhunvRtPOQmH]{Identify} </em>spell reveals it to be such. There is enough of it for one use.</p>\n<p>When you use an action to throw a handful of the dust into the air, you and each creature that needs to breathe within 30 feet of you must succeed on a DC 15 Constitution saving throw or become unable to breathe, while sneezing uncontrollably. A creature affected in this way is incapacitated and suffocating. As long as it is conscious, a creature can repeat the saving throw at the end of each of its turns, ending the effect on it on a success. The @Compendium[dnd5e.spells.F0GsG0SJzsIOacwV]{Lesser Restoration} spell can also end the effect on a creature.</p>",
+      "value": "<p><em>Wondrous item</em></p>\n<p>Found in a small container, this powder resembles very fine sand. It appears to be dust of disappearance, and an <em>@Compendium[shaper.spells.3OZnNhunvRtPOQmH]{Identify} </em>spell reveals it to be such. There is enough of it for one use.</p>\n<p>When you use an action to throw a handful of the dust into the air, you and each creature that needs to breathe within 30 feet of you must succeed on a DC 15 Constitution saving throw or become unable to breathe, while sneezing uncontrollably. A creature affected in this way is incapacitated and suffocating. As long as it is conscious, a creature can repeat the saving throw at the end of each of its turns, ending the effect on it on a success. The @Compendium[shaper.spells.F0GsG0SJzsIOacwV]{Lesser Restoration} spell can also end the effect on a creature.</p>",
       "chat": "",
       "unidentified": ""
     },
@@ -72,7 +72,7 @@
       "spelldc": 10
     },
     "details": {
-      "description": "<p><em>Wondrous item</em></p>\n<p>Found in a small container, this powder resembles very fine sand. It appears to be @Compendium[dnd5e.items.cGUPm15mLfhGDz2b]{Dust of Disappearance}, and an <em>@Compendium[dnd5e.spells.3OZnNhunvRtPOQmH]{Identify} </em>spell reveals it to be such. There is enough of it for one use.</p>\n<p>When you use an action to throw a handful of the dust into the air, you and each creature that needs to breathe within 30 feet of you must succeed on a DC 15 Constitution saving throw or become unable to breathe, while sneezing uncontrollably. A creature affected in this way is incapacitated and suffocating. As long as it is conscious, a creature can repeat the saving throw at the end of each of its turns, ending the effect on it on a success. The @Compendium[dnd5e.spells.F0GsG0SJzsIOacwV]{Lesser Restoration} spell can also end the effect on a creature.</p>"
+      "description": "<p><em>Wondrous item</em></p>\n<p>Found in a small container, this powder resembles very fine sand. It appears to be @Compendium[shaper.items.cGUPm15mLfhGDz2b]{Dust of Disappearance}, and an <em>@Compendium[shaper.spells.3OZnNhunvRtPOQmH]{Identify} </em>spell reveals it to be such. There is enough of it for one use.</p>\n<p>When you use an action to throw a handful of the dust into the air, you and each creature that needs to breathe within 30 feet of you must succeed on a DC 15 Constitution saving throw or become unable to breathe, while sneezing uncontrollably. A creature affected in this way is incapacitated and suffocating. As long as it is conscious, a creature can repeat the saving throw at the end of each of its turns, ending the effect on it on a success. The @Compendium[shaper.spells.F0GsG0SJzsIOacwV]{Lesser Restoration} spell can also end the effect on a creature.</p>"
     }
   },
   "effects": [],
@@ -83,11 +83,11 @@
   },
   "flags": {},
   "_stats": {
-    "systemId": "dnd5e",
+    "systemId": "shaper",
     "systemVersion": "2.0.0",
     "coreVersion": "10.279",
     "createdTime": 1661787233500,
     "modifiedTime": 1661787233500,
-    "lastModifiedBy": "dnd5ebuilder0000"
+    "lastModifiedBy": "shaperbuilder0000"
   }
 }

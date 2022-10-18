@@ -6,7 +6,7 @@ export default class AdvancementConfirmationDialog extends Dialog {
   /** @inheritdoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
-      template: "systems/dnd5e/templates/advancement/advancement-confirmation-dialog.hbs",
+      template: "systems/shaper/templates/advancement/advancement-confirmation-dialog.hbs",
       jQuery: false
     });
   }
@@ -21,8 +21,8 @@ export default class AdvancementConfirmationDialog extends Dialog {
   static forDelete(item) {
     return this.createDialog(
       item,
-      game.i18n.localize("DND5E.AdvancementDeleteConfirmationTitle"),
-      game.i18n.localize("DND5E.AdvancementDeleteConfirmationMessage"),
+      game.i18n.localize("SHAPER.AdvancementDeleteConfirmationTitle"),
+      game.i18n.localize("SHAPER.AdvancementDeleteConfirmationMessage"),
       {
         icon: '<i class="fas fa-trash"></i>',
         label: game.i18n.localize("Delete")
@@ -40,11 +40,11 @@ export default class AdvancementConfirmationDialog extends Dialog {
   static forLevelDown(item) {
     return this.createDialog(
       item,
-      game.i18n.localize("DND5E.AdvancementLevelDownConfirmationTitle"),
-      game.i18n.localize("DND5E.AdvancementLevelDownConfirmationMessage"),
+      game.i18n.localize("SHAPER.AdvancementLevelDownConfirmationTitle"),
+      game.i18n.localize("SHAPER.AdvancementLevelDownConfirmationMessage"),
       {
         icon: '<i class="fas fa-sort-numeric-down-alt"></i>',
-        label: game.i18n.localize("DND5E.LevelActionDecrease")
+        label: game.i18n.localize("SHAPER.LevelActionDecrease")
       }
     );
   }

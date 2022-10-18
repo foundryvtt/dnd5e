@@ -2,7 +2,7 @@
   "_id": "T1xZTDCGuvMBSq8d",
   "name": "Warhorse",
   "type": "npc",
-  "img": "systems/dnd5e/tokens/beast/Warhorse.webp",
+  "img": "systems/shaper/tokens/beast/Warhorse.webp",
   "system": {
     "abilities": {
       "str": {
@@ -581,7 +581,7 @@
       "attenuation": 0.5
     },
     "texture": {
-      "src": "systems/dnd5e/tokens/beast/Warhorse.webp",
+      "src": "systems/shaper/tokens/beast/Warhorse.webp",
       "tint": null,
       "scaleX": 1.5,
       "scaleY": 1.5,
@@ -815,11 +815,11 @@
   },
   "flags": {},
   "_stats": {
-    "systemId": "dnd5e",
+    "systemId": "shaper",
     "systemVersion": "2.0.0",
     "coreVersion": "10.279",
     "createdTime": 1661787232841,
     "modifiedTime": 1661878732013,
-    "lastModifiedBy": "dnd5ebuilder0000"
+    "lastModifiedBy": "shaperbuilder0000"
   }
 }

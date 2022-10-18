@@ -20,7 +20,7 @@ export default class TokenDocument5e extends TokenDocument {
   static getTrackedAttributes(data, _path=[]) {
     const attributes = super.getTrackedAttributes(data, _path);
     if ( _path.length ) return attributes;
-    const allowed = CONFIG.DND5E.trackableAttributes;
+    const allowed = CONFIG.SHAPER.trackableAttributes;
     attributes.value = attributes.value.filter(attrs => this._isAllowedAttribute(allowed, attrs));
     return attributes;
   }
@@ -34,7 +34,7 @@ export default class TokenDocument5e extends TokenDocument {
    */
   static getConsumedAttributes(data) {
     const attributes = super.getTrackedAttributes(data);
-    const allowed = CONFIG.DND5E.consumableResources;
+    const allowed = CONFIG.SHAPER.consumableResources;
     attributes.value = attributes.value.filter(attrs => this._isAllowedAttribute(allowed, attrs));
     return attributes;
   }

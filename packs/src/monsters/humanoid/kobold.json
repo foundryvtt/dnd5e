@@ -2,7 +2,7 @@
   "_id": "5ngbctIMeEnuC1p1",
   "name": "Kobold",
   "type": "npc",
-  "img": "systems/dnd5e/tokens/humanoid/Kobold.webp",
+  "img": "systems/shaper/tokens/humanoid/Kobold.webp",
   "system": {
     "abilities": {
       "str": {
@@ -581,7 +581,7 @@
       "color": null
     },
     "texture": {
-      "src": "systems/dnd5e/tokens/humanoid/Kobold.webp",
+      "src": "systems/shaper/tokens/humanoid/Kobold.webp",
       "tint": null,
       "scaleX": 1,
       "scaleY": 1,
@@ -1012,11 +1012,11 @@
   },
   "flags": {},
   "_stats": {
-    "systemId": "dnd5e",
+    "systemId": "shaper",
     "systemVersion": "2.0.0",
     "coreVersion": "10.279",
     "createdTime": 1661787232598,
     "modifiedTime": 1661878729282,
-    "lastModifiedBy": "dnd5ebuilder0000"
+    "lastModifiedBy": "shaperbuilder0000"
   }
 }

@@ -1,6 +1,6 @@
 <div class="traits">
     <div class="form-group">
-        <label>{{localize "DND5E.Size"}}</label>
+        <label>{{localize "SHAPER.Size"}}</label>
         <select class="actor-size" name="system.traits.size">
             {{#select system.traits.size}}
             {{#each config.actorSizes as |label size|}}
@@ -12,8 +12,8 @@
 
     {{#unless isVehicle}}
     <div class="form-group">
-        <label>{{localize "DND5E.Senses"}}</label>
-        <a class="config-button" data-action="senses" title="{{localize 'DND5E.SensesConfig'}}">
+        <label>{{localize "SHAPER.Senses"}}</label>
+        <a class="config-button" data-action="senses" title="{{localize 'SHAPER.SensesConfig'}}">
             <i class="fas fa-cog"></i>
         </a>
         <ul class="traits-list">
@@ -24,9 +24,9 @@
     </div>
 
     <div class="form-group {{system.traits.languages.cssClass}}">
-        <label>{{localize "DND5E.Languages"}}</label>
+        <label>{{localize "SHAPER.Languages"}}</label>
         <a class="trait-selector" data-options="languages" data-target="system.traits.languages"
-           title="{{localize 'DND5E.TraitConfig' trait=(localize 'DND5E.Languages')}}" tabindex="0">
+           title="{{localize 'SHAPER.TraitConfig' trait=(localize 'SHAPER.Languages')}}" tabindex="0">
             <i class="fas fa-edit"></i>
         </a>
         <ul class="traits-list">
@@ -38,9 +38,9 @@
     {{/unless}}
 
     <div class="form-group {{system.traits.di.cssClass}}">
-        <label>{{localize "DND5E.DamImm"}}</label>
+        <label>{{localize "SHAPER.DamImm"}}</label>
         <a class="trait-selector" data-options="damageTypes" data-target="system.traits.di"
-           title="{{localize 'DND5E.TraitConfig' trait=(localize 'DND5E.DamImm')}}" tabindex="0">
+           title="{{localize 'SHAPER.TraitConfig' trait=(localize 'SHAPER.DamImm')}}" tabindex="0">
             <i class="fas fa-edit"></i>
         </a>
         <ul class="traits-list">
@@ -51,9 +51,9 @@
     </div>
 
     <div class="form-group {{system.traits.dr.cssClass}}">
-        <label>{{localize "DND5E.DamRes"}}</label>
+        <label>{{localize "SHAPER.DamRes"}}</label>
         <a class="trait-selector" data-options="damageTypes" data-target="system.traits.dr"
-           title="{{localize 'DND5E.TraitConfig' trait=(localize 'DND5E.DamRes')}}" tabindex="0">
+           title="{{localize 'SHAPER.TraitConfig' trait=(localize 'SHAPER.DamRes')}}" tabindex="0">
             <i class="fas fa-edit"></i>
         </a>
         <ul class="traits-list">
@@ -64,9 +64,9 @@
     </div>
 
     <div class="form-group {{system.traits.dv.cssClass}}">
-        <label>{{localize "DND5E.DamVuln"}}</label>
+        <label>{{localize "SHAPER.DamVuln"}}</label>
         <a class="trait-selector" data-options="damageTypes" data-target="system.traits.dv"
-           title="{{localize 'DND5E.TraitConfig' trait=(localize 'DND5E.DamVuln')}}">
+           title="{{localize 'SHAPER.TraitConfig' trait=(localize 'SHAPER.DamVuln')}}">
             <i class="fas fa-edit"></i>
         </a>
         <ul class="traits-list">
@@ -77,9 +77,9 @@
     </div>
 
     <div class="form-group {{system.traits.ci.cssClass}}">
-        <label>{{localize "DND5E.ConImm"}}</label>
+        <label>{{localize "SHAPER.ConImm"}}</label>
         <a class="trait-selector" data-options="conditionTypes" data-target="system.traits.ci"
-           title="{{localize 'DND5E.TraitConfig' trait=(localize 'DND5E.ConImm')}}">
+           title="{{localize 'SHAPER.TraitConfig' trait=(localize 'SHAPER.ConImm')}}">
             <i class="fas fa-edit"></i>
         </a>
         <ul class="traits-list">
@@ -91,9 +91,9 @@
 
     {{#if isCharacter}}
     <div class="form-group {{system.traits.weaponProf.cssClass}}">
-        <label>{{localize "DND5E.TraitWeaponProf"}}</label>
+        <label>{{localize "SHAPER.TraitWeaponProf"}}</label>
         <a class="proficiency-selector" data-type="weapon" data-target="system.traits.weaponProf"
-           title="{{localize 'DND5E.TraitConfig' trait=(localize 'DND5E.TraitWeaponProf')}}">
+           title="{{localize 'SHAPER.TraitConfig' trait=(localize 'SHAPER.TraitWeaponProf')}}">
             <i class="fas fa-edit"></i>
         </a>
         <ul class="traits-list">
@@ -104,9 +104,9 @@
     </div>
 
     <div class="form-group {{system.traits.armorProf.cssClass}}">
-        <label>{{localize "DND5E.TraitArmorProf"}}</label>
+        <label>{{localize "SHAPER.TraitArmorProf"}}</label>
         <a class="proficiency-selector" data-type="armor" data-target="system.traits.armorProf"
-           title="{{localize 'DND5E.TraitConfig' trait=(localize 'DND5E.TraitArmorProf')}}">
+           title="{{localize 'SHAPER.TraitConfig' trait=(localize 'SHAPER.TraitArmorProf')}}">
             <i class="fas fa-edit"></i>
         </a>
         <ul class="traits-list">
@@ -117,9 +117,9 @@
     </div>
 
     <div class="form-group {{system.traits.toolProf.cssClass}}">
-        <label>{{localize "DND5E.TraitToolProf"}}</label>
+        <label>{{localize "SHAPER.TraitToolProf"}}</label>
         <a class="proficiency-selector" data-type="tool" data-target="system.traits.toolProf"
-           title="{{localize 'DND5E.TraitConfig' trait=(localize 'DND5E.TraitToolProf')}}">
+           title="{{localize 'SHAPER.TraitConfig' trait=(localize 'SHAPER.TraitToolProf')}}">
             <i class="fas fa-edit"></i>
         </a>
         <ul class="traits-list">
@@ -132,9 +132,9 @@
 
     {{#unless isVehicle}}
     <div class="form-group ">
-        <label>{{localize "DND5E.SpecialTraits"}}</label>
+        <label>{{localize "SHAPER.SpecialTraits"}}</label>
         <a class="config-button" data-action="flags"
-           title="{{localize 'DND5E.TraitConfig' trait=(localize 'DND5E.SpecialTraits')}}">
+           title="{{localize 'SHAPER.TraitConfig' trait=(localize 'SHAPER.SpecialTraits')}}">
             <i class="fas fa-cog"></i>
         </a>
     </div>

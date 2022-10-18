@@ -3,7 +3,7 @@
  *
  * @param {Actor5e} actor               The Actor instance being displayed within the sheet.
  * @param {ApplicationOptions} options  Additional application configuration options.
- * @param {string} abilityId            The ability key as defined in CONFIG.DND5E.abilities.
+ * @param {string} abilityId            The ability key as defined in CONFIG.SHAPER.abilities.
  */
 export default class ActorAbilityConfig extends DocumentSheet {
   constructor(actor, options, abilityId) {
@@ -16,8 +16,8 @@ export default class ActorAbilityConfig extends DocumentSheet {
   /** @override */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
-      classes: ["dnd5e"],
-      template: "systems/dnd5e/templates/apps/ability-config.hbs",
+      classes: ["shaper"],
+      template: "systems/shaper/templates/apps/ability-config.hbs",
       width: 500,
       height: "auto"
     });
@@ -27,7 +27,7 @@ export default class ActorAbilityConfig extends DocumentSheet {
 
   /** @override */
   get title() {
-    return `${game.i18n.format("DND5E.AbilityConfigureTitle", {ability: CONFIG.DND5E.abilities[this._abilityId]})}: ${this.document.name}`;
+    return `${game.i18n.format("SHAPER.AbilityConfigureTitle", {ability: CONFIG.SHAPER.abilities[this._abilityId]})}: ${this.document.name}`;
   }
 
   /* -------------------------------------------- */
@@ -37,12 +37,12 @@ export default class ActorAbilityConfig extends DocumentSheet {
     const src = this.object.toObject();
     return {
       ability: src.system.abilities[this._abilityId] || {},
-      labelSaves: game.i18n.format("DND5E.AbilitySaveConfigure", {ability: CONFIG.DND5E.abilities[this._abilityId]}),
-      labelChecks: game.i18n.format("DND5E.AbilityCheckConfigure", {ability: CONFIG.DND5E.abilities[this._abilityId]}),
+      labelSaves: game.i18n.format("SHAPER.AbilitySaveConfigure", {ability: CONFIG.SHAPER.abilities[this._abilityId]}),
+      labelChecks: game.i18n.format("SHAPER.AbilityCheckConfigure", {ability: CONFIG.SHAPER.abilities[this._abilityId]}),
       abilityId: this._abilityId,
       proficiencyLevels: {
-        0: CONFIG.DND5E.proficiencyLevels[0],
-        1: CONFIG.DND5E.proficiencyLevels[1]
+        0: CONFIG.SHAPER.proficiencyLevels[0],
+        1: CONFIG.SHAPER.proficiencyLevels[1]
       },
       bonusGlobalSave: src.system.bonuses?.abilities?.save,
       bonusGlobalCheck: src.system.bonuses?.abilities?.check

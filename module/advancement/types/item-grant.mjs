@@ -19,9 +19,9 @@ export class ItemGrantAdvancement extends Advancement {
         }
       },
       order: 40,
-      icon: "systems/dnd5e/icons/svg/item-grant.svg",
-      title: game.i18n.localize("DND5E.AdvancementItemGrantTitle"),
-      hint: game.i18n.localize("DND5E.AdvancementItemGrantHint"),
+      icon: "systems/shaper/icons/svg/item-grant.svg",
+      title: game.i18n.localize("SHAPER.AdvancementItemGrantTitle"),
+      hint: game.i18n.localize("SHAPER.AdvancementItemGrantHint"),
       apps: {
         config: ItemGrantConfig,
         flow: ItemGrantFlow
@@ -52,7 +52,7 @@ export class ItemGrantAdvancement extends Advancement {
   summaryForLevel(level, { configMode=false }={}) {
     // Link to compendium items
     if ( !this.data.value.added || configMode ) {
-      return this.data.configuration.items.reduce((html, uuid) => html + dnd5e.utils.linkForUuid(uuid), "");
+      return this.data.configuration.items.reduce((html, uuid) => html + shaper.utils.linkForUuid(uuid), "");
     }
 
     // Link to items on the actor
@@ -88,8 +88,8 @@ export class ItemGrantAdvancement extends Advancement {
         if ( !source ) continue;
         itemData = source.clone({
           _id: foundry.utils.randomID(),
-          "flags.dnd5e.sourceId": uuid,
-          "flags.dnd5e.advancementOrigin": `${this.item.id}.${this.id}`
+          "flags.shaper.sourceId": uuid,
+          "flags.shaper.advancementOrigin": `${this.item.id}.${this.id}`
         }, {keepId: true}).toObject();
       }
       if ( itemData.type === "spell" ) foundry.utils.mergeObject(itemData, spellChanges);
@@ -110,7 +110,7 @@ export class ItemGrantAdvancement extends Advancement {
     for ( const item of data.items ) {
       this.actor.updateSource({items: [item]});
       // TODO: Restore any additional advancement data here
-      updates[item._id] = item.flags.dnd5e.sourceId;
+      updates[item._id] = item.flags.shaper.sourceId;
     }
     this.updateSource({"value.added": updates});
   }
@@ -144,7 +144,7 @@ export class ItemGrantConfig extends AdvancementConfig {
     return foundry.utils.mergeObject(super.defaultOptions, {
       dragDrop: [{ dropSelector: ".drop-target" }],
       dropKeyPath: "items",
-      template: "systems/dnd5e/templates/advancement/item-grant-config.hbs"
+      template: "systems/shaper/templates/advancement/item-grant-config.hbs"
     });
   }
 
@@ -163,7 +163,7 @@ export class ItemGrantConfig extends AdvancementConfig {
   _validateDroppedItem(event, item) {
     if ( this.advancement.constructor.VALID_TYPES.has(item.type) ) return true;
     const type = game.i18n.localize(`ITEM.Type${item.type.capitalize()}`);
-    throw new Error(game.i18n.format("DND5E.AdvancementItemTypeInvalidWarning", { type }));
+    throw new Error(game.i18n.format("SHAPER.AdvancementItemTypeInvalidWarning", { type }));
   }
 }
 
@@ -176,7 +176,7 @@ export class ItemGrantFlow extends AdvancementFlow {
   /** @inheritdoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
-      template: "systems/dnd5e/templates/advancement/item-grant-flow.hbs"
+      template: "systems/shaper/templates/advancement/item-grant-flow.hbs"
     });
   }
 
@@ -185,7 +185,7 @@ export class ItemGrantFlow extends AdvancementFlow {
   /** @inheritdoc */
   async getData() {
     const config = this.advancement.data.configuration.items;
-    const added = this.retainedData?.items.map(i => foundry.utils.getProperty(i, "flags.dnd5e.sourceId"))
+    const added = this.retainedData?.items.map(i => foundry.utils.getProperty(i, "flags.shaper.sourceId"))
       ?? this.advancement.data.value.added;
     const checked = new Set(Object.values(added ?? {}));
 
@@ -228,7 +228,7 @@ export class ItemGrantFlow extends AdvancementFlow {
   /** @inheritdoc */
   async _updateObject(event, formData) {
     const retainedData = this.retainedData?.items.reduce((obj, i) => {
-      obj[foundry.utils.getProperty(i, "flags.dnd5e.sourceId")] = i;
+      obj[foundry.utils.getProperty(i, "flags.shaper.sourceId")] = i;
       return obj;
     }, {});
     await this.advancement.apply(this.level, formData, retainedData);

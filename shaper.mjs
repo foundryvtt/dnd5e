@@ -1,15 +1,15 @@
 /**
- * The DnD5e game system for Foundry Virtual Tabletop
+ * The shaperSystem game system for Foundry Virtual Tabletop
  * A system for playing the fifth edition of the world's most popular role-playing game.
  * Author: Atropos
  * Software License: MIT
  * Content License: https://media.wizards.com/2016/downloads/DND/SRD-OGL_V5.1.pdf
- * Repository: https://github.com/foundryvtt/dnd5e
- * Issue Tracker: https://github.com/foundryvtt/dnd5e/issues
+ * Repository: https://github.com/foundryvtt/shaper
+ * Issue Tracker: https://github.com/foundryvtt/shaper/issues
  */
 
 // Import Configuration
-import DND5E from "./module/config.mjs";
+import SHAPER from "./module/config.mjs";
 import registerSystemSettings from "./module/settings.mjs";
 
 // Import Submodules
@@ -25,11 +25,11 @@ import * as utils from "./module/utils.mjs";
 /*  Define Module Structure                     */
 /* -------------------------------------------- */
 
-globalThis.dnd5e = {
+globalThis.shaper = {
   advancement,
   applications,
   canvas,
-  config: DND5E,
+  config: SHAPER,
   dice,
   documents,
   migrations,
@@ -41,47 +41,47 @@ globalThis.dnd5e = {
 /* -------------------------------------------- */
 
 Hooks.once("init", function() {
-  globalThis.dnd5e = game.dnd5e = Object.assign(game.system, globalThis.dnd5e);
-  console.log(`DnD5e | Initializing the DnD5e Game System - Version ${dnd5e.version}\n${DND5E.ASCII}`);
+  globalThis.shaper = game.shaper = Object.assign(game.system, globalThis.shaper);
+  console.log(`shaperSystem | Initializing the shaperSystem Game System - Version ${shaper.version}\n${SHAPER.ASCII}`);
 
   /** @deprecated */
-  Object.defineProperty(dnd5e, "entities", {
+  Object.defineProperty(shaper, "entities", {
     get() {
       foundry.utils.logCompatibilityWarning(
-        "You are referencing the 'dnd5e.entities' property which has been deprecated and renamed to "
-        + "'dnd5e.documents'. Support for this old path will be removed in a future version.",
-        { since: "DnD5e 2.0", until: "DnD5e 2.2" }
+        "You are referencing the 'shaper.entities' property which has been deprecated and renamed to "
+        + "'shaper.documents'. Support for this old path will be removed in a future version.",
+        { since: "shaperSystem 2.0", until: "shaperSystem 2.2" }
       );
-      return dnd5e.documents;
+      return shaper.documents;
     }
   });
 
   /** @deprecated */
-  Object.defineProperty(dnd5e, "rollItemMacro", {
+  Object.defineProperty(shaper, "rollItemMacro", {
     get() {
       foundry.utils.logCompatibilityWarning(
-        "You are referencing the 'dnd5e.rollItemMacro' method which has been deprecated and renamed to "
-        + "'dnd5e.documents.macro.rollItem'. Support for this old path will be removed in a future version.",
-        { since: "DnD5e 2.0", until: "DnD5e 2.2" }
+        "You are referencing the 'shaper.rollItemMacro' method which has been deprecated and renamed to "
+        + "'shaper.documents.macro.rollItem'. Support for this old path will be removed in a future version.",
+        { since: "shaperSystem 2.0", until: "shaperSystem 2.2" }
       );
-      return dnd5e.documents.macro.rollItem;
+      return shaper.documents.macro.rollItem;
     }
   });
 
   /** @deprecated */
-  Object.defineProperty(dnd5e, "macros", {
+  Object.defineProperty(shaper, "macros", {
     get() {
       foundry.utils.logCompatibilityWarning(
-        "You are referencing the 'dnd5e.macros' property which has been deprecated and renamed to "
-        + "'dnd5e.documents.macro'. Support for this old path will be removed in a future version.",
-        { since: "DnD5e 2.0", until: "DnD5e 2.2" }
+        "You are referencing the 'shaper.macros' property which has been deprecated and renamed to "
+        + "'shaper.documents.macro'. Support for this old path will be removed in a future version.",
+        { since: "shaperSystem 2.0", until: "shaperSystem 2.2" }
       );
-      return dnd5e.documents.macro;
+      return shaper.documents.macro;
     }
   });
 
   // Record Configuration Values
-  CONFIG.DND5E = DND5E;
+  CONFIG.SHAPER = SHAPER;
   CONFIG.ActiveEffect.documentClass = documents.ActiveEffect5e;
   CONFIG.Actor.documentClass = documents.Actor5e;
   CONFIG.Item.documentClass = documents.Item5e;
@@ -96,13 +96,13 @@ Hooks.once("init", function() {
   registerSystemSettings();
 
   // Remove honor & sanity from configuration if they aren't enabled
-  if ( !game.settings.get("dnd5e", "honorScore") ) {
-    delete DND5E.abilities.hon;
-    delete DND5E.abilityAbbreviations.hon;
+  if ( !game.settings.get("shaper", "honorScore") ) {
+    delete SHAPER.abilities.hon;
+    delete SHAPER.abilityAbbreviations.hon;
   }
-  if ( !game.settings.get("dnd5e", "sanityScore") ) {
-    delete DND5E.abilities.san;
-    delete DND5E.abilityAbbreviations.san;
+  if ( !game.settings.get("shaper", "sanityScore") ) {
+    delete SHAPER.abilities.san;
+    delete SHAPER.abilityAbbreviations.san;
   }
 
   // Patch Core Functions
@@ -115,25 +115,25 @@ Hooks.once("init", function() {
 
   // Register sheet application classes
   Actors.unregisterSheet("core", ActorSheet);
-  Actors.registerSheet("dnd5e", applications.actor.ActorSheet5eCharacter, {
+  Actors.registerSheet("shaper", applications.actor.ActorSheet5eCharacter, {
     types: ["character"],
     makeDefault: true,
-    label: "DND5E.SheetClassCharacter"
+    label: "SHAPER.SheetClassCharacter"
   });
-  Actors.registerSheet("dnd5e", applications.actor.ActorSheet5eNPC, {
+  Actors.registerSheet("shaper", applications.actor.ActorSheet5eNPC, {
     types: ["npc"],
     makeDefault: true,
-    label: "DND5E.SheetClassNPC"
+    label: "SHAPER.SheetClassNPC"
   });
-  Actors.registerSheet("dnd5e", applications.actor.ActorSheet5eVehicle, {
+  Actors.registerSheet("shaper", applications.actor.ActorSheet5eVehicle, {
     types: ["vehicle"],
     makeDefault: true,
-    label: "DND5E.SheetClassVehicle"
+    label: "SHAPER.SheetClassVehicle"
   });
   Items.unregisterSheet("core", ItemSheet);
-  Items.registerSheet("dnd5e", applications.item.ItemSheet5e, {
+  Items.registerSheet("shaper", applications.item.ItemSheet5e, {
     makeDefault: true,
-    label: "DND5E.SheetClassItem"
+    label: "SHAPER.SheetClassItem"
   });
 
   // Preload Handlebars helpers & partials
@@ -150,8 +150,8 @@ Hooks.once("init", function() {
  * Prepare attribute lists.
  */
 Hooks.once("setup", function() {
-  CONFIG.DND5E.trackableAttributes = expandAttributeList(CONFIG.DND5E.trackableAttributes);
-  CONFIG.DND5E.consumableResources = expandAttributeList(CONFIG.DND5E.consumableResources);
+  CONFIG.SHAPER.trackableAttributes = expandAttributeList(CONFIG.SHAPER.trackableAttributes);
+  CONFIG.SHAPER.consumableResources = expandAttributeList(CONFIG.SHAPER.consumableResources);
 });
 
 /* --------------------------------------------- */
@@ -173,7 +173,7 @@ function expandAttributeList(attributes) {
 /**
  * Perform one-time pre-localization and sorting of some configuration objects
  */
-Hooks.once("i18nInit", () => utils.performPreLocalization(CONFIG.DND5E));
+Hooks.once("i18nInit", () => utils.performPreLocalization(CONFIG.SHAPER));
 
 /* -------------------------------------------- */
 /*  Foundry VTT Ready                           */
@@ -184,7 +184,7 @@ Hooks.once("i18nInit", () => utils.performPreLocalization(CONFIG.DND5E));
  */
 Hooks.once("ready", function() {
   // Apply custom compendium styles to the SRD rules compendium.
-  const rules = game.packs.get("dnd5e.rules");
+  const rules = game.packs.get("shaper.rules");
   rules.apps = [new applications.SRDCompendium(rules)];
 
   // Wait to register hotbar drop hook on ready so that modules could register earlier if they want to
@@ -197,9 +197,9 @@ Hooks.once("ready", function() {
 
   // Determine whether a system migration is required and feasible
   if ( !game.user.isGM ) return;
-  const cv = game.settings.get("dnd5e", "systemMigrationVersion") || game.world.flags.dnd5e?.version;
+  const cv = game.settings.get("shaper", "systemMigrationVersion") || game.world.flags.shaper?.version;
   const totalDocuments = game.actors.size + game.scenes.size + game.items.size;
-  if ( !cv && totalDocuments === 0 ) return game.settings.set("dnd5e", "systemMigrationVersion", game.system.version);
+  if ( !cv && totalDocuments === 0 ) return game.settings.set("shaper", "systemMigrationVersion", game.system.version);
   if ( cv && !isNewerVersion(game.system.flags.needsMigrationVersion, cv) ) return;
 
   // Perform the migration
@@ -214,7 +214,7 @@ Hooks.once("ready", function() {
 /* -------------------------------------------- */
 
 Hooks.on("canvasInit", gameCanvas => {
-  gameCanvas.grid.diagonalRule = game.settings.get("dnd5e", "diagonalMovement");
+  gameCanvas.grid.diagonalRule = game.settings.get("shaper", "diagonalMovement");
   SquareGrid.prototype.measureDistances = canvas.measureDistances;
 });
 
@@ -241,5 +241,5 @@ export {
   documents,
   migrations,
   utils,
-  DND5E
+  SHAPER
 };

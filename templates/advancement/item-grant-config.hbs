@@ -1,15 +1,15 @@
 <form autocomplete="off">
-  {{> "dnd5e.advancement-controls"}}
+  {{> "shaper.advancement-controls"}}
   <div class="form-group">
-    <label>{{localize "DND5E.AdvancementItemGrantOptional"}}</label>
+    <label>{{localize "SHAPER.AdvancementItemGrantOptional"}}</label>
     <div class="form-fields">
       <input type="checkbox" name="data.configuration.optional" {{checked data.configuration.optional}}>
     </div>
-    <p class="hint">{{localize "DND5E.AdvancementItemGrantOptionalHint"}}</p>
+    <p class="hint">{{localize "SHAPER.AdvancementItemGrantOptionalHint"}}</p>
   </div>
 
   {{#if showSpellConfig}}
-    {{> "dnd5e.advancement-spell-config"}}
+    {{> "shaper.advancement-spell-config"}}
   {{/if}}
 
   <div class="drop-target">
@@ -18,9 +18,9 @@
       <ol class="item-list">
       {{#each data.configuration.items}}
         <li class="item flexrow" data-item-uuid="{{this}}">
-          <div class="item-name">{{{dnd5e-linkForUuid this}}}</div>
+          <div class="item-name">{{{shaper-linkForUuid this}}}</div>
           <div class="item-controls flexrow">
-            <a class="item-control item-action" data-action="delete" title="{{localize 'DND5E.ItemDelete'}}">
+            <a class="item-control item-action" data-action="delete" title="{{localize 'SHAPER.ItemDelete'}}">
               <i class="fas fa-trash"></i>
             </a>
           </div>
@@ -29,6 +29,6 @@
       </ol>
     </ol>
 
-    <p class="hint centered">{{localize "DND5E.AdvancementItemGrantDropHint"}}</p>
+    <p class="hint centered">{{localize "SHAPER.AdvancementItemGrantDropHint"}}</p>
   </div>
 </form>

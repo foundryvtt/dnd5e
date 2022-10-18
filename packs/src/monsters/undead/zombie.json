@@ -2,7 +2,7 @@
   "_id": "NAISFPoNNgUCsEyW",
   "name": "Zombie",
   "type": "npc",
-  "img": "systems/dnd5e/tokens/undead/Zombie.webp",
+  "img": "systems/shaper/tokens/undead/Zombie.webp",
   "system": {
     "abilities": {
       "str": {
@@ -585,7 +585,7 @@
       "attenuation": 0.5
     },
     "texture": {
-      "src": "systems/dnd5e/tokens/undead/Zombie.webp",
+      "src": "systems/shaper/tokens/undead/Zombie.webp",
       "tint": null,
       "scaleX": 1,
       "scaleY": 1,
@@ -816,11 +816,11 @@
   },
   "flags": {},
   "_stats": {
-    "systemId": "dnd5e",
+    "systemId": "shaper",
     "systemVersion": "2.0.0",
     "coreVersion": "10.279",
     "createdTime": 1661787232788,
     "modifiedTime": 1661878731218,
-    "lastModifiedBy": "dnd5ebuilder0000"
+    "lastModifiedBy": "shaperbuilder0000"
   }
 }

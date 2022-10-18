@@ -6,20 +6,20 @@
           {{#if isEmbedded}}
             {{#if advancementEditable}}
               <a class="item-control" data-action="toggle-configuration"
-                title="{{localize 'DND5E.AdvancementConfigurationActionDisable'}}">
-                <i class="fas fa-lock-open"></i> {{localize "DND5E.AdvancementConfigurationModeEnabled"}}
+                title="{{localize 'SHAPER.AdvancementConfigurationActionDisable'}}">
+                <i class="fas fa-lock-open"></i> {{localize "SHAPER.AdvancementConfigurationModeEnabled"}}
               </a>
             {{else}}
               <a class="item-control" data-action="toggle-configuration"
-                title="{{localize 'DND5E.AdvancementConfigurationActionEnable'}}">
-                <i class="fas fa-lock"></i> {{localize "DND5E.AdvancementConfigurationModeDisabled"}}
+                title="{{localize 'SHAPER.AdvancementConfigurationActionEnable'}}">
+                <i class="fas fa-lock"></i> {{localize "SHAPER.AdvancementConfigurationModeDisabled"}}
               </a>
             {{/if}}
           {{/if}}
         </div>
         {{#if advancementEditable}}
           <div class="item-controls flexrow add-button">
-            <a class="item-control" data-action="add" title="{{localize 'DND5E.AdvancementControlCreate'}}">
+            <a class="item-control" data-action="add" title="{{localize 'SHAPER.AdvancementControlCreate'}}">
               <i class="fas fa-plus"></i>
             </a>
           </div>
@@ -31,26 +31,26 @@
       <li class="items-header flexrow" data-level="{{level}}">
         <h3 class="item-name flexrow">
           {{#if (eq level "0")}}
-            {{localize "DND5E.AdvancementLevelAnyHeader"}}
+            {{localize "SHAPER.AdvancementLevelAnyHeader"}}
           {{else if (eq level "unconfigured")}}
-            {{localize "DND5E.AdvancementLevelNoneHeader"}}
+            {{localize "SHAPER.AdvancementLevelNoneHeader"}}
           {{else}}
-            {{localize "DND5E.AdvancementLevelHeader" level=level}}
+            {{localize "SHAPER.AdvancementLevelHeader" level=level}}
           {{/if}}
         </h3>
 
         {{#if (and @root.editable data.configured (ne level "unconfigured"))}}
           <div>
-            <a class="item-control" data-action="modify-choices">{{localize "DND5E.AdvancementModifyChoices"}}</a>
+            <a class="item-control" data-action="modify-choices">{{localize "SHAPER.AdvancementModifyChoices"}}</a>
           </div>
         {{/if}}
 
         {{#if (eq data.configured "full")}}
-          <div class="item-checkmark" title="{{localize 'DND5E.AdvancementConfiguredComplete'}}">
+          <div class="item-checkmark" title="{{localize 'SHAPER.AdvancementConfiguredComplete'}}">
             <i class="fas fa-check-circle"></i>
           </div>
         {{else if (eq data.configured "partial")}}
-          <div class="item-warning" title="{{localize 'DND5E.AdvancementConfiguredIncomplete'}}">
+          <div class="item-warning" title="{{localize 'SHAPER.AdvancementConfiguredIncomplete'}}">
             <i class="fas fa-exclamation-triangle"></i>
           </div>
         {{/if}}
@@ -65,18 +65,18 @@
             {{#if (or @root.advancementEditable (not @root.isEmbedded))}}
               <div class="flexrow">
                 {{#if (eq this.classRestriction "primary")}}
-                  {{localize "DND5E.AdvancementClassRestrictionPrimary"}}
+                  {{localize "SHAPER.AdvancementClassRestrictionPrimary"}}
                 {{else if (eq this.classRestriction "secondary")}}
-                  {{localize "DND5E.AdvancementClassRestrictionSecondary"}}
+                  {{localize "SHAPER.AdvancementClassRestrictionSecondary"}}
                 {{/if}}
               </div>
             {{/if}}
             {{#if @root.advancementEditable}}
               <div class="item-controls flexrow">
-                  <a class="item-control" data-action="edit" title="{{localize 'DND5E.AdvancementControlEdit'}}">
+                  <a class="item-control" data-action="edit" title="{{localize 'SHAPER.AdvancementControlEdit'}}">
                     <i class="fas fa-edit"></i>
                   </a>
-                  <a class="item-control" data-action="delete" title="{{localize 'DND5E.AdvancementControlDelete'}}">
+                  <a class="item-control" data-action="delete" title="{{localize 'SHAPER.AdvancementControlDelete'}}">
                     <i class="fas fa-trash"></i>
                   </a>
               </div>

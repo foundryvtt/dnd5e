@@ -1,8 +1,8 @@
 <form autocomplete="off">
   <div class="left-column">
-    {{> "dnd5e.advancement-controls"}}
+    {{> "shaper.advancement-controls"}}
     <div class="form-group">
-      <label>{{localize "DND5E.AdvancementScaleValueTypeLabel"}}</label>
+      <label>{{localize "SHAPER.AdvancementScaleValueTypeLabel"}}</label>
       <div class="form-fields">
         <select name="data.configuration.type">
           {{selectOptions types selected=data.configuration.type}}
@@ -20,12 +20,12 @@
     <hr>
 
     <div class="form-group">
-      <label>{{localize "DND5E.Identifier"}}</label>
+      <label>{{localize "SHAPER.Identifier"}}</label>
       <div class="form-fields">
         <input name="data.configuration.identifier" type="text" value="{{data.configuration.identifier}}" placeholder="{{previewIdentifier}}">
       </div>
       <p class="hint identifier-hint">
-        {{{localize "DND5E.AdvancementScaleValueIdentifierHint" class=classIdentifier identifier=previewIdentifier}}}
+        {{{localize "SHAPER.AdvancementScaleValueIdentifierHint" class=classIdentifier identifier=previewIdentifier}}}
       </p>
     </div>
   </div>

@@ -3,23 +3,23 @@
     <div class="item-properties">
         {{#if isPhysical}}
         <div class="form-group">
-            <label>{{ localize "DND5E.Quantity" }}</label>
+            <label>{{ localize "SHAPER.Quantity" }}</label>
             {{numberInput system.quantity name="system.quantity"}}
         </div>
 
         <div class="form-group">
-            <label>{{ localize "DND5E.Weight" }}</label>
+            <label>{{ localize "SHAPER.Weight" }}</label>
             {{numberInput system.weight name="system.weight"}}
         </div>
 
         <div class="form-group">
-            <label>{{ localize "DND5E.Price" }}</label>
+            <label>{{ localize "SHAPER.Price" }}</label>
             {{numberInput system.price name="system.price"}}
         </div>
         {{/if}}
 
         {{#if (or labels.toHit labels.derivedDamage)}}
-        <h4 class="properties-header">{{localize "DND5E.Attack"}}/{{localize "DND5E.Damage"}}</h4>
+        <h4 class="properties-header">{{localize "SHAPER.Attack"}}/{{localize "SHAPER.Damage"}}</h4>
         <ol class="properties-list">
             {{#if labels.save}}
             <li>
@@ -29,7 +29,7 @@
 
             {{#if labels.toHit}}
             <li>
-                {{labels.toHit}} {{localize "DND5E.ToHit"}}
+                {{labels.toHit}} {{localize "SHAPER.ToHit"}}
             </li>
             {{/if}}
 
@@ -42,7 +42,7 @@
         {{/if}}
 
         {{#if itemProperties.length}}
-        <h4 class="properties-header">{{localize "DND5E.Properties"}}</h4>
+        <h4 class="properties-header">{{localize "SHAPER.Properties"}}</h4>
         <ol class="properties-list">
             {{#each itemProperties}}
             <li>{{this}}</li>

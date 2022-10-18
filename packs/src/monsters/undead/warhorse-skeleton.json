@@ -2,7 +2,7 @@
   "_id": "7KJ5vjnp0FJrdu6T",
   "name": "Warhorse Skeleton",
   "type": "npc",
-  "img": "systems/dnd5e/tokens/undead/WarhorseSkeleton.webp",
+  "img": "systems/shaper/tokens/undead/WarhorseSkeleton.webp",
   "system": {
     "abilities": {
       "str": {
@@ -585,7 +585,7 @@
       "color": null
     },
     "texture": {
-      "src": "systems/dnd5e/tokens/undead/WarhorseSkeleton.webp",
+      "src": "systems/shaper/tokens/undead/WarhorseSkeleton.webp",
       "tint": null,
       "scaleX": 1.5,
       "scaleY": 1.5,
@@ -733,11 +733,11 @@
   },
   "flags": {},
   "_stats": {
-    "systemId": "dnd5e",
+    "systemId": "shaper",
     "systemVersion": "2.0.0",
     "coreVersion": "10.279",
     "createdTime": 1661787232611,
     "modifiedTime": 1661878729448,
-    "lastModifiedBy": "dnd5ebuilder0000"
+    "lastModifiedBy": "shaperbuilder0000"
   }
 }

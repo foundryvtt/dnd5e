@@ -2,7 +2,7 @@
   "_id": "rbyp54px2D0ql4QK",
   "name": "Wight",
   "type": "npc",
-  "img": "systems/dnd5e/tokens/undead/Wight.webp",
+  "img": "systems/shaper/tokens/undead/Wight.webp",
   "system": {
     "abilities": {
       "str": {
@@ -594,7 +594,7 @@
       "color": null
     },
     "texture": {
-      "src": "systems/dnd5e/tokens/undead/Wight.webp",
+      "src": "systems/shaper/tokens/undead/Wight.webp",
       "tint": null,
       "scaleX": 1,
       "scaleY": 1,
@@ -1245,11 +1245,11 @@
   },
   "flags": {},
   "_stats": {
-    "systemId": "dnd5e",
+    "systemId": "shaper",
     "systemVersion": "2.0.1",
     "coreVersion": "10.284",
     "createdTime": 1661787233205,
     "modifiedTime": 1662076967274,
-    "lastModifiedBy": "dnd5ebuilder0000"
+    "lastModifiedBy": "shaperbuilder0000"
   }
 }

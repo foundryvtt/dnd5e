@@ -8,19 +8,19 @@
   <nav>
     {{#if steps.hasPrevious}}
       <button type="button" data-action="previous">
-        <i class="fas fa-angle-double-left"></i> {{localize "DND5E.AdvancementManagerPreviousStep"}}
+        <i class="fas fa-angle-double-left"></i> {{localize "SHAPER.AdvancementManagerPreviousStep"}}
       </button>
       <button type="button" data-action="restart">
-        <i class="fas fa-undo"></i> {{localize "DND5E.AdvancementManagerRestart"}}
+        <i class="fas fa-undo"></i> {{localize "SHAPER.AdvancementManagerRestart"}}
       </button>
     {{/if}}
     {{#if steps.hasNext}}
       <button type="button" data-action="next">
-          <i class="fas fa-angle-double-right"></i> {{localize "DND5E.AdvancementManagerNextStep"}}
+          <i class="fas fa-angle-double-right"></i> {{localize "SHAPER.AdvancementManagerNextStep"}}
       </button>
     {{else}}
       <button type="button" data-action="complete">
-          <i class="fas fa-check"></i> {{localize "DND5E.AdvancementManagerComplete"}}
+          <i class="fas fa-check"></i> {{localize "SHAPER.AdvancementManagerComplete"}}
       </button>
     {{/if}}
   </nav>

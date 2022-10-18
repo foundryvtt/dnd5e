@@ -1,6 +1,6 @@
 {
-  "id": "dnd5e",
-  "title": "DnD5e - Fifth Edition System",
+  "id": "shaper",
+  "title": "shaperSystem - Fifth Edition System",
   "description": "A system for playing the fifth edition of the worlds most popular role-playing game in the Foundry Virtual Tabletop environment.",
   "version": "2.0.3",
   "compatibility": {
@@ -8,9 +8,9 @@
     "verified": "10",
     "maximum": "10"
   },
-  "url": "https://github.com/foundryvtt/dnd5e/",
-  "manifest": "https://raw.githubusercontent.com/foundryvtt/dnd5e/master/system.json",
-  "download": "https://github.com/foundryvtt/dnd5e/releases/download/release-2.0.3/dnd5e-release-2.0.3.zip",
+  "url": "https://github.com/foundryvtt/shaper/",
+  "manifest": "https://raw.githubusercontent.com/foundryvtt/shaper/master/system.json",
+  "download": "https://github.com/foundryvtt/shaper/releases/download/release-2.0.3/shaper-release-2.0.3.zip",
   "authors": [
     {
       "name": "Atropos",
@@ -18,97 +18,97 @@
     }
   ],
   "scripts": [],
-  "esmodules": ["dnd5e.mjs"],
-  "styles": ["dnd5e.css"],
+  "esmodules": ["shaper.mjs"],
+  "styles": ["shaper.css"],
   "packs": [
     {
       "name": "heroes",
       "label": "Starter Heroes",
-      "system": "dnd5e",
+      "system": "shaper",
       "path": "./packs/heroes.db",
       "type": "Actor"
     },
     {
       "name": "monsters",
       "label": "Monsters (SRD)",
-      "system": "dnd5e",
+      "system": "shaper",
       "path": "./packs/monsters.db",
       "type": "Actor"
     },
     {
       "name": "items",
       "label": "Items (SRD)",
-      "system": "dnd5e",
+      "system": "shaper",
       "path": "./packs/items.db",
       "type": "Item"
     },
     {
       "name": "tradegoods",
       "label": "Trade Goods (SRD)",
-      "system": "dnd5e",
+      "system": "shaper",
       "path": "./packs/tradegoods.db",
       "type": "Item"
     },
     {
       "name": "spells",
       "label": "Spells (SRD)",
-      "system": "dnd5e",
+      "system": "shaper",
       "path": "./packs/spells.db",
       "type": "Item"
     },
     {
       "name": "backgrounds",
       "label": "Backgrounds (SRD)",
-      "system": "dnd5e",
+      "system": "shaper",
       "path": "./packs/backgrounds.db",
       "type": "Item"
     },
     {
       "name": "classes",
       "label": "Classes (SRD)",
-      "system": "dnd5e",
+      "system": "shaper",
       "path": "./packs/classes.db",
       "type": "Item"
     },
     {
       "name": "subclasses",
       "label": "Subclasses (SRD)",
-      "system": "dnd5e",
+      "system": "shaper",
       "path": "./packs/subclasses.db",
       "type": "Item"
     },
     {
       "name": "classfeatures",
       "label": "Class Features (SRD)",
-      "system": "dnd5e",
+      "system": "shaper",
       "path": "./packs/classfeatures.db",
       "type": "Item"
     },
     {
       "name": "races",
       "label": "Racial Features (SRD)",
-      "system": "dnd5e",
+      "system": "shaper",
       "path": "./packs/races.db",
       "type": "Item"
     },
     {
       "name": "monsterfeatures",
       "label": "Monster Features (SRD)",
-      "system": "dnd5e",
+      "system": "shaper",
       "path": "./packs/monsterfeatures.db",
       "type": "Item"
     },
     {
       "name": "rules",
       "label": "Rules (SRD)",
-      "system": "dnd5e",
+      "system": "shaper",
       "path": "./packs/rules.db",
       "type": "JournalEntry"
     },
     {
       "name": "tables",
       "label": "Tables (SRD)",
-      "system": "dnd5e",
+      "system": "shaper",
       "path": "./packs/tables.db",
       "type": "RollTable"
     }
@@ -123,7 +123,7 @@
   "media": [
     {
       "type":"cover",
-      "link":"https://github.com/foundryvtt/dnd5e/blob/v10-dev/media/repo-dnd5e.jpg?raw=true"
+      "link":"https://github.com/foundryvtt/shaper/blob/v10-dev/media/repo-shaper.jpg?raw=true"
     }
   ],
   "socket": true,

@@ -6,7 +6,7 @@
 
     <div class="header-details flexrow">
       <h1 class="charname">
-        <input name="name" type="text" value="{{item.name}}" placeholder="{{ localize 'DND5E.SubclassName' }}"/>
+        <input name="name" type="text" value="{{item.name}}" placeholder="{{ localize 'SHAPER.SubclassName' }}"/>
       </h1>
 
       <div class="item-subtitle">
@@ -16,7 +16,7 @@
 
       <ul class="summary flexrow">
         <li>
-          <input type="text" name="system.source" value="{{system.source}}" placeholder="{{ localize 'DND5E.Source' }}"/>
+          <input type="text" name="system.source" value="{{system.source}}" placeholder="{{ localize 'SHAPER.Source' }}"/>
         </li>
       </ul>
     </div>
@@ -24,9 +24,9 @@
 
   {{!-- Item Sheet Navigation --}}
   <nav class="sheet-navigation tabs" data-group="primary">
-    <a class="item active" data-tab="description">{{localize "DND5E.Description"}}</a>
-    <a class="item" data-tab="details">{{localize "DND5E.Details"}}</a>
-    <a class="item" data-tab="advancement">{{localize "DND5E.AdvancementTitle"}}</a>
+    <a class="item active" data-tab="description">{{localize "SHAPER.Description"}}</a>
+    <a class="item" data-tab="details">{{localize "SHAPER.Details"}}</a>
+    <a class="item" data-tab="advancement">{{localize "SHAPER.AdvancementTitle"}}</a>
   </nav>
 
   {{!-- Item Sheet Body --}}
@@ -43,30 +43,30 @@
 
       {{!-- Identifier --}}
       <div class="form-group">
-        <label>{{localize "DND5E.Identifier"}}</label>
+        <label>{{localize "SHAPER.Identifier"}}</label>
         <div class="form-fields">
           <input type="text" name="system.identifier" value="{{system.identifier}}">
         </div>
       </div>
 
       <div class="form-group">
-        <label>{{localize "DND5E.ClassIdentifier"}}</label>
+        <label>{{localize "SHAPER.ClassIdentifier"}}</label>
         <div class="form-fields">
           <input type="text" name="system.classIdentifier" value="{{system.classIdentifier}}">
         </div>
         <p class="hint">
-            {{localize "DND5E.SubclassIdentifierHint"}}
+            {{localize "SHAPER.SubclassIdentifierHint"}}
         </p>
       </div>
 
       {{!-- Spellcasting --}}
-      <h3 class="form-header">{{localize "DND5E.Spellcasting"}}</h3>
-      {{> "dnd5e.item-spellcasting"}}
+      <h3 class="form-header">{{localize "SHAPER.Spellcasting"}}</h3>
+      {{> "shaper.item-spellcasting"}}
 
     </div>
 
     {{!-- Advancement Tab --}}
-    {{> "dnd5e.item-advancement"}}
+    {{> "shaper.item-advancement"}}
 
   </section>
 </form>

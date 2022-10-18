@@ -1,7 +1,7 @@
 {
   "name": "Randal (Human Fighter)",
   "type": "character",
-  "img": "systems/dnd5e/tokens/heroes/FighterShield.webp",
+  "img": "systems/shaper/tokens/heroes/FighterShield.webp",
   "system": {
     "abilities": {
       "str": {
@@ -617,7 +617,7 @@
       "attenuation": 0.5
     },
     "texture": {
-      "src": "systems/dnd5e/tokens/heroes/FighterShield.webp",
+      "src": "systems/shaper/tokens/heroes/FighterShield.webp",
       "tint": null,
       "scaleX": 1,
       "scaleY": 1,
@@ -2604,7 +2604,7 @@
       "img": "icons/skills/melee/hand-grip-sword-red.webp",
       "system": {
         "description": {
-          "value": "<p>As a fighter, you gain the following class features.</p>\n<h3>Hit Points</h3>\n<p><strong>Hit Dice:</strong> 1d10 per fighter level<br /><strong>Hit Points at 1st Level:</strong> 10 + your Constitution modifier<br /><strong>Hit Points at Higher Levels:</strong> 1d10 (or 6) + your Constitution modifier per fighter level after 1st</p>\n<h3>Proficiencies</h3>\n<p><strong>Armor:</strong> All armor, shields<br /><strong>Weapons:</strong> Simple weapons, martial weapons<br /><strong>Tools:</strong> None<br /><strong>Saving Throws:</strong> Strength, Constitution<br /><strong>Skills:</strong> Choose two skills from Acrobatics, Animal Handling, Athletics, History, Insight, Intimidation, Perception, and Survival</p>\n<h3>Equipment</h3>\n<p>You start with the following equipment, in addition to the equipment granted by your background:</p>\n<ul>\n<li>(a) chain mail or (b) leather armor, longbow, and 20 arrows</li>\n<li>(a) a martial weapon and a shield or (b) two martial weapons</li>\n<li>(a) a light crossbow and 20 bolts or (b) two handaxes</li>\n<li>(a) a dungeoneer's pack or (b) an explorer's pack</li>\n</ul>\n<h1>Fighter Advancement</h1>\n<table>\n<thead>\n<tr>\n<td>Level</td>\n<td>Proficiency Bonus</td>\n<td>Features</td>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>1st</td>\n<td>+2</td>\n<td>@Compendium[dnd5e.classfeatures.fbExzwNwEAl2kW9c]{Fighting Style}, @Compendium[dnd5e.classfeatures.nTjmWbyHweXuIqwc]{Second Wind}</td>\n</tr>\n<tr>\n<td>2nd</td>\n<td>+2</td>\n<td>@Compendium[dnd5e.classfeatures.xF1VTcJ3AdkbTsdQ]{Action Surge}</td>\n</tr>\n<tr>\n<td>3rd</td>\n<td>+2</td>\n<td>@Compendium[dnd5e.classfeatures.ax8M0X0q1GGWM26j]{Martial Archetype}</td>\n</tr>\n<tr>\n<td>4th</td>\n<td>+2</td>\n<td>@Compendium[dnd5e.classfeatures.sPy2OLoN7JaAcMl4]{Ability Score Improvement}</td>\n</tr>\n<tr>\n<td>5th</td>\n<td>+3</td>\n<td>@Compendium[dnd5e.classfeatures.q9g1MLXuLZyxjQMg]{Extra Attack}</td>\n</tr>\n<tr>\n<td>6th</td>\n<td>+3</td>\n<td>@Compendium[dnd5e.classfeatures.sPy2OLoN7JaAcMl4]{Ability Score Improvement}</td>\n</tr>\n<tr>\n<td>7th</td>\n<td>+3</td>\n<td>Martial Archetype feature</td>\n</tr>\n<tr>\n<td>8th</td>\n<td>+3</td>\n<td>@Compendium[dnd5e.classfeatures.sPy2OLoN7JaAcMl4]{Ability Score Improvement}</td>\n</tr>\n<tr>\n<td>9th</td>\n<td>+4</td>\n<td>@Compendium[dnd5e.classfeatures.653ZHbNcmm7ZGXbw]{Indomitable}</td>\n</tr>\n<tr>\n<td>10th</td>\n<td>+4</td>\n<td>Martial Archetype feature</td>\n</tr>\n<tr>\n<td>11th</td>\n<td>+4</td>\n<td>@Compendium[dnd5e.classfeatures.q9g1MLXuLZyxjQMg]{Extra Attack (2)}</td>\n</tr>\n<tr>\n<td>12th</td>\n<td>+4</td>\n<td>@Compendium[dnd5e.classfeatures.sPy2OLoN7JaAcMl4]{Ability Score Improvement}</td>\n</tr>\n<tr>\n<td>13th</td>\n<td>+5</td>\n<td>@Compendium[dnd5e.classfeatures.653ZHbNcmm7ZGXbw]{Indomitable (2 uses)}</td>\n</tr>\n<tr>\n<td>14th</td>\n<td>+5</td>\n<td>@Compendium[dnd5e.classfeatures.sPy2OLoN7JaAcMl4]{Ability Score Improvement}</td>\n</tr>\n<tr>\n<td>15th</td>\n<td>+5</td>\n<td>Martial Archetype feature</td>\n</tr>\n<tr>\n<td>16th</td>\n<td>+5</td>\n<td>@Compendium[dnd5e.classfeatures.sPy2OLoN7JaAcMl4]{Ability Score Improvement}</td>\n</tr>\n<tr>\n<td>17th</td>\n<td>+6</td>\n<td>@Compendium[dnd5e.classfeatures.xF1VTcJ3AdkbTsdQ]{Action Surge (2 uses)}, @Compendium[dnd5e.classfeatures.653ZHbNcmm7ZGXbw]{Indomitable (3 uses)}</td>\n</tr>\n<tr>\n<td>18th</td>\n<td>+6</td>\n<td>Martial Archetype feature</td>\n</tr>\n<tr>\n<td>19th</td>\n<td>+6</td>\n<td>@Compendium[dnd5e.classfeatures.sPy2OLoN7JaAcMl4]{Ability Score Improvement}</td>\n</tr>\n<tr>\n<td>20th</td>\n<td>+6</td>\n<td>@Compendium[dnd5e.classfeatures.q9g1MLXuLZyxjQMg]{Extra Attack (3)}</td>\n</tr>\n</tbody>\n</table>\n<h1>Martial Archetypes</h1>\n<p>Different fighters choose different approaches to perfecting their fighting prowess. The martial archetype you choose to emulate reflects your approach.</p>\n<p>@Compendium[dnd5e.subclasses.sprHbe7cRg9osTzf]{Champion}</p>",
+          "value": "<p>As a fighter, you gain the following class features.</p>\n<h3>Hit Points</h3>\n<p><strong>Hit Dice:</strong> 1d10 per fighter level<br /><strong>Hit Points at 1st Level:</strong> 10 + your Constitution modifier<br /><strong>Hit Points at Higher Levels:</strong> 1d10 (or 6) + your Constitution modifier per fighter level after 1st</p>\n<h3>Proficiencies</h3>\n<p><strong>Armor:</strong> All armor, shields<br /><strong>Weapons:</strong> Simple weapons, martial weapons<br /><strong>Tools:</strong> None<br /><strong>Saving Throws:</strong> Strength, Constitution<br /><strong>Skills:</strong> Choose two skills from Acrobatics, Animal Handling, Athletics, History, Insight, Intimidation, Perception, and Survival</p>\n<h3>Equipment</h3>\n<p>You start with the following equipment, in addition to the equipment granted by your background:</p>\n<ul>\n<li>(a) chain mail or (b) leather armor, longbow, and 20 arrows</li>\n<li>(a) a martial weapon and a shield or (b) two martial weapons</li>\n<li>(a) a light crossbow and 20 bolts or (b) two handaxes</li>\n<li>(a) a dungeoneer's pack or (b) an explorer's pack</li>\n</ul>\n<h1>Fighter Advancement</h1>\n<table>\n<thead>\n<tr>\n<td>Level</td>\n<td>Proficiency Bonus</td>\n<td>Features</td>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>1st</td>\n<td>+2</td>\n<td>@Compendium[shaper.classfeatures.fbExzwNwEAl2kW9c]{Fighting Style}, @Compendium[shaper.classfeatures.nTjmWbyHweXuIqwc]{Second Wind}</td>\n</tr>\n<tr>\n<td>2nd</td>\n<td>+2</td>\n<td>@Compendium[shaper.classfeatures.xF1VTcJ3AdkbTsdQ]{Action Surge}</td>\n</tr>\n<tr>\n<td>3rd</td>\n<td>+2</td>\n<td>@Compendium[shaper.classfeatures.ax8M0X0q1GGWM26j]{Martial Archetype}</td>\n</tr>\n<tr>\n<td>4th</td>\n<td>+2</td>\n<td>@Compendium[shaper.classfeatures.sPy2OLoN7JaAcMl4]{Ability Score Improvement}</td>\n</tr>\n<tr>\n<td>5th</td>\n<td>+3</td>\n<td>@Compendium[shaper.classfeatures.q9g1MLXuLZyxjQMg]{Extra Attack}</td>\n</tr>\n<tr>\n<td>6th</td>\n<td>+3</td>\n<td>@Compendium[shaper.classfeatures.sPy2OLoN7JaAcMl4]{Ability Score Improvement}</td>\n</tr>\n<tr>\n<td>7th</td>\n<td>+3</td>\n<td>Martial Archetype feature</td>\n</tr>\n<tr>\n<td>8th</td>\n<td>+3</td>\n<td>@Compendium[shaper.classfeatures.sPy2OLoN7JaAcMl4]{Ability Score Improvement}</td>\n</tr>\n<tr>\n<td>9th</td>\n<td>+4</td>\n<td>@Compendium[shaper.classfeatures.653ZHbNcmm7ZGXbw]{Indomitable}</td>\n</tr>\n<tr>\n<td>10th</td>\n<td>+4</td>\n<td>Martial Archetype feature</td>\n</tr>\n<tr>\n<td>11th</td>\n<td>+4</td>\n<td>@Compendium[shaper.classfeatures.q9g1MLXuLZyxjQMg]{Extra Attack (2)}</td>\n</tr>\n<tr>\n<td>12th</td>\n<td>+4</td>\n<td>@Compendium[shaper.classfeatures.sPy2OLoN7JaAcMl4]{Ability Score Improvement}</td>\n</tr>\n<tr>\n<td>13th</td>\n<td>+5</td>\n<td>@Compendium[shaper.classfeatures.653ZHbNcmm7ZGXbw]{Indomitable (2 uses)}</td>\n</tr>\n<tr>\n<td>14th</td>\n<td>+5</td>\n<td>@Compendium[shaper.classfeatures.sPy2OLoN7JaAcMl4]{Ability Score Improvement}</td>\n</tr>\n<tr>\n<td>15th</td>\n<td>+5</td>\n<td>Martial Archetype feature</td>\n</tr>\n<tr>\n<td>16th</td>\n<td>+5</td>\n<td>@Compendium[shaper.classfeatures.sPy2OLoN7JaAcMl4]{Ability Score Improvement}</td>\n</tr>\n<tr>\n<td>17th</td>\n<td>+6</td>\n<td>@Compendium[shaper.classfeatures.xF1VTcJ3AdkbTsdQ]{Action Surge (2 uses)}, @Compendium[shaper.classfeatures.653ZHbNcmm7ZGXbw]{Indomitable (3 uses)}</td>\n</tr>\n<tr>\n<td>18th</td>\n<td>+6</td>\n<td>Martial Archetype feature</td>\n</tr>\n<tr>\n<td>19th</td>\n<td>+6</td>\n<td>@Compendium[shaper.classfeatures.sPy2OLoN7JaAcMl4]{Ability Score Improvement}</td>\n</tr>\n<tr>\n<td>20th</td>\n<td>+6</td>\n<td>@Compendium[shaper.classfeatures.q9g1MLXuLZyxjQMg]{Extra Attack (3)}</td>\n</tr>\n</tbody>\n</table>\n<h1>Martial Archetypes</h1>\n<p>Different fighters choose different approaches to perfecting their fighting prowess. The martial archetype you choose to emulate reflects your approach.</p>\n<p>@Compendium[shaper.subclasses.sprHbe7cRg9osTzf]{Champion}</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -2619,14 +2619,14 @@
             "type": "ItemGrant",
             "configuration": {
               "items": [
-                "Compendium.dnd5e.classfeatures.fbExzwNwEAl2kW9c",
-                "Compendium.dnd5e.classfeatures.nTjmWbyHweXuIqwc"
+                "Compendium.shaper.classfeatures.fbExzwNwEAl2kW9c",
+                "Compendium.shaper.classfeatures.nTjmWbyHweXuIqwc"
               ]
             },
             "value": {
               "added": {
-                "8esd96grt1e7ct4k": "Compendium.dnd5e.classfeatures.fbExzwNwEAl2kW9c",
-                "pszansgr88j2t9wz": "Compendium.dnd5e.classfeatures.nTjmWbyHweXuIqwc"
+                "8esd96grt1e7ct4k": "Compendium.shaper.classfeatures.fbExzwNwEAl2kW9c",
+                "pszansgr88j2t9wz": "Compendium.shaper.classfeatures.nTjmWbyHweXuIqwc"
               }
             },
             "level": 1,
@@ -2639,7 +2639,7 @@
             "type": "ItemGrant",
             "configuration": {
               "items": [
-                "Compendium.dnd5e.classfeatures.xF1VTcJ3AdkbTsdQ"
+                "Compendium.shaper.classfeatures.xF1VTcJ3AdkbTsdQ"
               ]
             },
             "value": {},
@@ -2653,7 +2653,7 @@
             "type": "ItemGrant",
             "configuration": {
               "items": [
-                "Compendium.dnd5e.classfeatures.ax8M0X0q1GGWM26j"
+                "Compendium.shaper.classfeatures.ax8M0X0q1GGWM26j"
               ]
             },
             "value": {},
@@ -2667,7 +2667,7 @@
             "type": "ItemGrant",
             "configuration": {
               "items": [
-                "Compendium.dnd5e.classfeatures.q9g1MLXuLZyxjQMg"
+                "Compendium.shaper.classfeatures.q9g1MLXuLZyxjQMg"
               ]
             },
             "value": {},
@@ -2681,7 +2681,7 @@
             "type": "ItemGrant",
             "configuration": {
               "items": [
-                "Compendium.dnd5e.classfeatures.653ZHbNcmm7ZGXbw"
+                "Compendium.shaper.classfeatures.653ZHbNcmm7ZGXbw"
               ]
             },
             "value": {},
@@ -2780,7 +2780,7 @@
       },
       "flags": {
         "core": {
-          "sourceId": "Compendium.dnd5e.classes.ABEBgWyRhVlDUIfq"
+          "sourceId": "Compendium.shaper.classes.ABEBgWyRhVlDUIfq"
         }
       },
       "_stats": {
@@ -2799,7 +2799,7 @@
       "img": "icons/skills/melee/weapons-crossed-daggers-orange.webp",
       "system": {
         "description": {
-          "value": "<p>You adopt a particular style of fighting as your specialty. Choose one of the following options from the appropriate class list. You can't take a Fighting Style option more than once, even if you later get to choose again.</p>\n<h3>Fighter Options</h3>\n<p>@Compendium[dnd5e.classfeatures.8YwPFv3UAPjWVDNf]{Archery}</p><p>@Compendium[dnd5e.classfeatures.zSlV0O2rQMdoq6pB]{Defense}</p><p>@Compendium[dnd5e.classfeatures.hCop9uJrWhF1QPb4]{Dueling}</p><p>@Compendium[dnd5e.classfeatures.3Nc6u9pyStByuJsm]{Great Weapon Fighting}</p><p>@Compendium[dnd5e.classfeatures.06NVMYf58Z76O85O]{Protection}</p><p>@Compendium[dnd5e.classfeatures.mHcSjcHJ8oZu3hkb]{Two Weapon Fighting}</p>\n<h3>Paladin Options</h3>\n<p>@Compendium[dnd5e.classfeatures.zSlV0O2rQMdoq6pB]{Defense}</p><p>@Compendium[dnd5e.classfeatures.hCop9uJrWhF1QPb4]{Dueling}</p><p>@Compendium[dnd5e.classfeatures.3Nc6u9pyStByuJsm]{Great Weapon Fighting}</p><p>@Compendium[dnd5e.classfeatures.06NVMYf58Z76O85O]{Protection}</p>\n<h3>Ranger Options</h3>\n<p>@Compendium[dnd5e.classfeatures.8YwPFv3UAPjWVDNf]{Archery}</p><p>@Compendium[dnd5e.classfeatures.zSlV0O2rQMdoq6pB]{Defense}</p><p>@Compendium[dnd5e.classfeatures.hCop9uJrWhF1QPb4]{Dueling}</p><p>@Compendium[dnd5e.classfeatures.mHcSjcHJ8oZu3hkb]{Two Weapon Fighting}</p>",
+          "value": "<p>You adopt a particular style of fighting as your specialty. Choose one of the following options from the appropriate class list. You can't take a Fighting Style option more than once, even if you later get to choose again.</p>\n<h3>Fighter Options</h3>\n<p>@Compendium[shaper.classfeatures.8YwPFv3UAPjWVDNf]{Archery}</p><p>@Compendium[shaper.classfeatures.zSlV0O2rQMdoq6pB]{Defense}</p><p>@Compendium[shaper.classfeatures.hCop9uJrWhF1QPb4]{Dueling}</p><p>@Compendium[shaper.classfeatures.3Nc6u9pyStByuJsm]{Great Weapon Fighting}</p><p>@Compendium[shaper.classfeatures.06NVMYf58Z76O85O]{Protection}</p><p>@Compendium[shaper.classfeatures.mHcSjcHJ8oZu3hkb]{Two Weapon Fighting}</p>\n<h3>Paladin Options</h3>\n<p>@Compendium[shaper.classfeatures.zSlV0O2rQMdoq6pB]{Defense}</p><p>@Compendium[shaper.classfeatures.hCop9uJrWhF1QPb4]{Dueling}</p><p>@Compendium[shaper.classfeatures.3Nc6u9pyStByuJsm]{Great Weapon Fighting}</p><p>@Compendium[shaper.classfeatures.06NVMYf58Z76O85O]{Protection}</p>\n<h3>Ranger Options</h3>\n<p>@Compendium[shaper.classfeatures.8YwPFv3UAPjWVDNf]{Archery}</p><p>@Compendium[shaper.classfeatures.zSlV0O2rQMdoq6pB]{Defense}</p><p>@Compendium[shaper.classfeatures.hCop9uJrWhF1QPb4]{Dueling}</p><p>@Compendium[shaper.classfeatures.mHcSjcHJ8oZu3hkb]{Two Weapon Fighting}</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -2865,8 +2865,8 @@
         "default": 0
       },
       "flags": {
-        "dnd5e": {
-          "sourceId": "Compendium.dnd5e.classfeatures.fbExzwNwEAl2kW9c",
+        "shaper": {
+          "sourceId": "Compendium.shaper.classfeatures.fbExzwNwEAl2kW9c",
           "advancementOrigin": "z1xtuix2w8sjskct.mlcvcu7p2jfwxwa3"
         }
       },
@@ -2957,8 +2957,8 @@
         "default": 0
       },
       "flags": {
-        "dnd5e": {
-          "sourceId": "Compendium.dnd5e.classfeatures.nTjmWbyHweXuIqwc",
+        "shaper": {
+          "sourceId": "Compendium.shaper.classfeatures.nTjmWbyHweXuIqwc",
           "advancementOrigin": "z1xtuix2w8sjskct.mlcvcu7p2jfwxwa3"
         }
       },
@@ -2995,7 +2995,7 @@
       },
       "icon": "icons/equipment/shield/heater-stone-orange.webp",
       "label": "+1 to AC",
-      "origin": "Compendium.dnd5e.heroes.K5XFMOiiM9WufwYO.Item.xhSq81g4w9vTE0nK",
+      "origin": "Compendium.shaper.heroes.K5XFMOiiM9WufwYO.Item.xhSq81g4w9vTE0nK",
       "transfer": false,
       "flags": {},
       "tint": null
@@ -3009,11 +3009,11 @@
   "flags": {},
   "_id": "2Pdtnswo8Nj2nafY",
   "_stats": {
-    "systemId": "dnd5e",
+    "systemId": "shaper",
     "systemVersion": "2.0.0",
     "coreVersion": "10.279",
     "createdTime": 1661787232150,
     "modifiedTime": 1661878142218,
-    "lastModifiedBy": "dnd5ebuilder0000"
+    "lastModifiedBy": "shaperbuilder0000"
   }
 }

@@ -1,6 +1,6 @@
 {{!-- Activation Cost --}}
 <div class="form-group input-select">
-    <label>{{ localize "DND5E.ItemActivationCost" }}</label>
+    <label>{{ localize "SHAPER.ItemActivationCost" }}</label>
     <div class="form-fields">
         <input type="number" step="any" name="system.activation.cost"
             value="{{system.activation.cost}}" placeholder="&mdash;">
@@ -18,7 +18,7 @@
 
 {{!-- Activation Condition --}}
 <div class="form-group">
-    <label>{{ localize "DND5E.ItemActivationCondition" }}</label>
+    <label>{{ localize "SHAPER.ItemActivationCondition" }}</label>
     <div class="form-fields">
         <input type="text" name="system.activation.condition" value="{{system.activation.condition}}"/>
     </div>
@@ -26,7 +26,7 @@
 
 {{#if isCrewed}}
 <div class="form-group">
-    <label>{{localize 'DND5E.Cover'}}</label>
+    <label>{{localize 'SHAPER.Cover'}}</label>
     <div class="form-fields">
         <select name="system.cover" data-dtype="Number">
             {{#select system.cover}}
@@ -42,7 +42,7 @@
 
 {{!-- Ability Target --}}
 <div class="form-group input-select-select">
-    <label>{{ localize "DND5E.Target" }}</label>
+    <label>{{ localize "SHAPER.Target" }}</label>
     <div class="form-fields">
         <input type="number" step="any" name="system.target.value"
             value="{{system.target.value}}" placeholder="&mdash;">
@@ -68,7 +68,7 @@
 {{!-- Ability Target Width --}}
 {{#if isLine}}
 <div class="form-group input-select-select">
-    <label>{{ localize "DND5E.TargetWidth" }}</label>
+    <label>{{ localize "SHAPER.TargetWidth" }}</label>
     <div class="form-fields">
         <input type="number" step="any" name="system.target.width"
             value="{{system.target.width}}" placeholder="&mdash;">
@@ -78,13 +78,13 @@
 
 {{!-- Ability Range --}}
 <div class="form-group input-select">
-    <label>{{ localize "DND5E.Range" }}</label>
+    <label>{{ localize "SHAPER.Range" }}</label>
     <div class="form-fields">
         <input type="number" step="any" name="system.range.value"
-            value="{{system.range.value}}" placeholder="{{localize 'DND5E.Normal'}}">
+            value="{{system.range.value}}" placeholder="{{localize 'SHAPER.Normal'}}">
         <span class="sep">/</span>
         <input type="number" step="any" name="system.range.long"
-            value="{{system.range.long}}" placeholder="{{localize 'DND5E.Max'}}">
+            value="{{system.range.long}}" placeholder="{{localize 'SHAPER.Max'}}">
         <select name="system.range.units">
             {{#select system.range.units}}
             <option value=""></option>
@@ -98,7 +98,7 @@
 
 {{!-- Effect Duration --}}
 <div class="form-group input-select">
-    <label>{{ localize "DND5E.Duration" }}</label>
+    <label>{{ localize "SHAPER.Duration" }}</label>
     <div class="form-fields">
         <input type="number" step="any" name="system.duration.value" value="{{system.duration.value}}"
             placeholder="&mdash;">
@@ -115,12 +115,12 @@
 
 {{!-- Limited Uses --}}
 <div class="form-group uses-per">
-    <label>{{ localize "DND5E.LimitedUses" }}</label>
+    <label>{{ localize "SHAPER.LimitedUses" }}</label>
     <div class="form-fields">
         <input type="number" step="any" name="system.uses.value" value="{{system.uses.value}}">
-        <span class="sep">{{ localize "DND5E.of" }}</span>
+        <span class="sep">{{ localize "SHAPER.of" }}</span>
         <input type="text" name="system.uses.max" value="{{source.uses.max}}">
-        <span class="sep">{{ localize "DND5E.per" }}</span>
+        <span class="sep">{{ localize "SHAPER.per" }}</span>
         <select name="system.uses.per">
             {{#select system.uses.per}}
             <option value=""></option>
@@ -134,7 +134,7 @@
 
 {{#if (eq system.uses.per "charges")}}
 <div class="form-group">
-    <label>{{localize "DND5E.RecoveryFormula"}}</label>
+    <label>{{localize "SHAPER.RecoveryFormula"}}</label>
     <div class="form-fields">
         <input type="text" name="system.uses.recovery" value="{{system.uses.recovery}}">
     </div>
@@ -143,7 +143,7 @@
 
 {{!-- Consumption --}}
 <div class="form-group uses-per">
-    <label>{{ localize "DND5E.ConsumeTitle" }}</label>
+    <label>{{ localize "SHAPER.ConsumeTitle" }}</label>
     <div class="form-fields">
         <select name="system.consume.type">
             {{#select system.consume.type}}

@@ -1,9 +1,9 @@
 {{#unless isVehicle}}
 <div class="inventory-filters flexrow">
     <ul class="filter-list flexrow" data-filter="features">
-        <li class="filter-item" data-filter="action">{{localize "DND5E.Action"}}</li>
-        <li class="filter-item" data-filter="bonus">{{localize "DND5E.BonusAction"}}</li>
-        <li class="filter-item" data-filter="reaction">{{localize "DND5E.Reaction"}}</li>
+        <li class="filter-item" data-filter="action">{{localize "SHAPER.Action"}}</li>
+        <li class="filter-item" data-filter="bonus">{{localize "SHAPER.BonusAction"}}</li>
+        <li class="filter-item" data-filter="reaction">{{localize "SHAPER.Reaction"}}</li>
     </ul>
 </div>
 {{/unless}}
@@ -14,8 +14,8 @@
         <h3 class="item-name flexrow">{{localize section.label}}</h3>
 
         {{#if section.hasActions}}
-        <div class="item-detail item-uses">{{localize "DND5E.Uses"}}</div>
-        <div class="item-detail item-action">{{localize "DND5E.Usage"}}</div>
+        <div class="item-detail item-uses">{{localize "SHAPER.Uses"}}</div>
+        <div class="item-detail item-action">{{localize "SHAPER.Usage"}}</div>
         {{/if}}
 
         {{#if section.columns}}
@@ -26,8 +26,8 @@
 
         {{#if ../owner}}
         <div class="item-controls flexrow">
-            <a class="item-control item-create" title="{{localize 'DND5E.FeatureAdd'}}" {{#each section.dataset as |v k|}}data-{{k}}="{{v}}"{{/each}}>
-                <i class="fas fa-plus"></i> {{localize "DND5E.Add"}}
+            <a class="item-control item-create" title="{{localize 'SHAPER.FeatureAdd'}}" {{#each section.dataset as |v k|}}data-{{k}}="{{v}}"{{/each}}>
+                <i class="fas fa-plus"></i> {{localize "SHAPER.Add"}}
             </a>
         </div>
         {{/if}}
@@ -41,7 +41,7 @@
                 <h4>
                     {{#if (eq item.type "subclass")}}&rdsh;{{/if}}
                     {{item.name}}
-                    {{#if item.system.isOriginalClass}} <i class="original-class fas fa-sun" title="{{localize 'DND5E.ClassOriginal'}}"></i>{{/if}}
+                    {{#if item.system.isOriginalClass}} <i class="original-class fas fa-sun" title="{{localize 'SHAPER.ClassOriginal'}}"></i>{{/if}}
                 </h4>
             </div>
 
@@ -50,7 +50,7 @@
                 {{#if item.isOnCooldown}}
                     <a class="item-recharge rollable">{{item.labels.recharge}}</a>
                 {{else if item.system.recharge.value}}
-                    {{localize "DND5E.Charged"}}
+                    {{localize "SHAPER.Charged"}}
                 {{else if item.hasUses}}
                     <input type="text" value="{{item.system.uses.value}}" placeholder="0"/>/ {{item.system.uses.max}}
                 {{/if}}
@@ -67,7 +67,7 @@
                     {{#select 0}}
                     {{#each item.availableLevels}}
                         <option value="{{this.delta}}" {{disabled this.disabled}}>
-                            {{localize "DND5E.LevelNumber" level=this.level}}
+                            {{localize "SHAPER.LevelNumber" level=this.level}}
                             {{#if this.delta}}({{numberFormat this.delta sign=true}}){{/if}}
                         </option>
                     {{/each}}
@@ -97,8 +97,8 @@
                     <i class="fas fa-sun"></i>
                 </a>
                 {{/if}}
-                <a class="item-control item-edit" title="{{localize 'DND5E.ItemEdit'}}"><i class="fas fa-edit"></i></a>
-                <a class="item-control item-delete" title="{{localize 'DND5E.ItemDelete'}}"><i class="fas fa-trash"></i></a>
+                <a class="item-control item-edit" title="{{localize 'SHAPER.ItemEdit'}}"><i class="fas fa-edit"></i></a>
+                <a class="item-control item-delete" title="{{localize 'SHAPER.ItemDelete'}}"><i class="fas fa-trash"></i></a>
             </div>
             {{/if}}
         </li>

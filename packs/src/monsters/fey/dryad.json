@@ -2,7 +2,7 @@
   "_id": "KOHVWl5RU9XBR8Jb",
   "name": "Dryad",
   "type": "npc",
-  "img": "systems/dnd5e/tokens/fey/Dryad.webp",
+  "img": "systems/shaper/tokens/fey/Dryad.webp",
   "system": {
     "abilities": {
       "str": {
@@ -581,7 +581,7 @@
       "color": null
     },
     "texture": {
-      "src": "systems/dnd5e/tokens/fey/Dryad.webp",
+      "src": "systems/shaper/tokens/fey/Dryad.webp",
       "tint": null,
       "scaleX": 1,
       "scaleY": 1,
@@ -1238,7 +1238,7 @@
       "effects": [],
       "flags": {
         "core": {
-          "sourceId": "Compendium.dnd5e.spells.gMrWeG8fMDPRFiVe"
+          "sourceId": "Compendium.shaper.spells.gMrWeG8fMDPRFiVe"
         }
       },
       "_id": "gMrWeG8fMDPRFiVe",
@@ -1248,12 +1248,12 @@
         "default": 0
       },
       "_stats": {
-        "systemId": "dnd5e",
+        "systemId": "shaper",
         "systemVersion": "2.0.0",
         "coreVersion": "10.279",
         "createdTime": 1661787234191,
         "modifiedTime": 1661791116394,
-        "lastModifiedBy": "dnd5ebuilder0000"
+        "lastModifiedBy": "shaperbuilder0000"
       }
     },
     {
@@ -1348,19 +1348,19 @@
       "sort": 100001,
       "flags": {
         "core": {
-          "sourceId": "Compendium.dnd5e.spells.SbSvZKkJASyk8jKo"
+          "sourceId": "Compendium.shaper.spells.SbSvZKkJASyk8jKo"
         }
       },
       "img": "icons/magic/nature/vines-thorned-glow-teal.webp",
       "effects": [],
       "folder": null,
       "_stats": {
-        "systemId": "dnd5e",
+        "systemId": "shaper",
         "systemVersion": "2.0.0",
         "coreVersion": "10.279",
         "createdTime": 1661787234141,
         "modifiedTime": 1661791116394,
-        "lastModifiedBy": "dnd5ebuilder0000"
+        "lastModifiedBy": "shaperbuilder0000"
       }
     },
     {
@@ -1459,19 +1459,19 @@
       "sort": 100001,
       "flags": {
         "core": {
-          "sourceId": "Compendium.dnd5e.spells.Qf6CAZkc7ms4ZY3e"
+          "sourceId": "Compendium.shaper.spells.Qf6CAZkc7ms4ZY3e"
         }
       },
       "img": "icons/magic/nature/leaf-glow-green.webp",
       "effects": [],
       "folder": null,
       "_stats": {
-        "systemId": "dnd5e",
+        "systemId": "shaper",
         "systemVersion": "2.0.0",
         "coreVersion": "10.279",
         "createdTime": 1661787234136,
         "modifiedTime": 1661791116394,
-        "lastModifiedBy": "dnd5ebuilder0000"
+        "lastModifiedBy": "shaperbuilder0000"
       }
     },
     {
@@ -1603,16 +1603,16 @@
       },
       "flags": {
         "core": {
-          "sourceId": "Compendium.dnd5e.spells.JPwIEfgUPVebr5AH"
+          "sourceId": "Compendium.shaper.spells.JPwIEfgUPVebr5AH"
         }
       },
       "_stats": {
-        "systemId": "dnd5e",
+        "systemId": "shaper",
         "systemVersion": "2.0.0",
         "coreVersion": "10.279",
         "createdTime": 1661787234113,
         "modifiedTime": 1661791116395,
-        "lastModifiedBy": "dnd5ebuilder0000"
+        "lastModifiedBy": "shaperbuilder0000"
       }
     },
     {
@@ -1707,19 +1707,19 @@
       "sort": 100001,
       "flags": {
         "core": {
-          "sourceId": "Compendium.dnd5e.spells.pRMvmknwLf2tdMTj"
+          "sourceId": "Compendium.shaper.spells.pRMvmknwLf2tdMTj"
         }
       },
       "img": "icons/magic/air/fog-gas-smoke-brown.webp",
       "effects": [],
       "folder": null,
       "_stats": {
-        "systemId": "dnd5e",
+        "systemId": "shaper",
         "systemVersion": "2.0.0",
         "coreVersion": "10.279",
         "createdTime": 1661787234227,
         "modifiedTime": 1661791116395,
-        "lastModifiedBy": "dnd5ebuilder0000"
+        "lastModifiedBy": "shaperbuilder0000"
       }
     },
     {
@@ -1819,19 +1819,19 @@
       "sort": 100001,
       "flags": {
         "core": {
-          "sourceId": "Compendium.dnd5e.spells.VzgFzcmocr1X1cp4"
+          "sourceId": "Compendium.shaper.spells.VzgFzcmocr1X1cp4"
         }
       },
       "img": "icons/magic/fire/dagger-rune-enchant-teal.webp",
       "effects": [],
       "folder": null,
       "_stats": {
-        "systemId": "dnd5e",
+        "systemId": "shaper",
         "systemVersion": "2.0.0",
         "coreVersion": "10.279",
         "createdTime": 1661787234149,
         "modifiedTime": 1661791116395,
-        "lastModifiedBy": "dnd5ebuilder0000"
+        "lastModifiedBy": "shaperbuilder0000"
       }
     }
   ],
@@ -1865,7 +1865,7 @@
       },
       "icon": "icons/magic/defensive/shield-barrier-flaming-diamond-orange.webp",
       "label": "Barkskin",
-      "origin": "Compendium.dnd5e.monsters.KOHVWl5RU9XBR8Jb.Item.JPwIEfgUPVebr5AH",
+      "origin": "Compendium.shaper.monsters.KOHVWl5RU9XBR8Jb.Item.JPwIEfgUPVebr5AH",
       "tint": null,
       "transfer": false
     }
@@ -1877,11 +1877,11 @@
   },
   "flags": {},
   "_stats": {
-    "systemId": "dnd5e",
+    "systemId": "shaper",
     "systemVersion": "2.0.0",
     "coreVersion": "10.279",
     "createdTime": 1661787232758,
     "modifiedTime": 1661878730944,
-    "lastModifiedBy": "dnd5ebuilder0000"
+    "lastModifiedBy": "shaperbuilder0000"
   }
 }

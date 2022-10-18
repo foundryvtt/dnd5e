@@ -13,10 +13,10 @@ export default {
         label: "Path of the Berserker",
         source: "PHB pg. 49",
         features: {
-          3: ["Compendium.dnd5e.classfeatures.CkbbAckeCtyHXEnL"],
-          6: ["Compendium.dnd5e.classfeatures.0Jgf8fYY2ExwgQpN"],
-          10: ["Compendium.dnd5e.classfeatures.M6VSMzVtKPhh8B0i"],
-          14: ["Compendium.dnd5e.classfeatures.xzD9zlRP6dUxCtCl"]
+          3: ["Compendium.shaper.classfeatures.CkbbAckeCtyHXEnL"],
+          6: ["Compendium.shaper.classfeatures.0Jgf8fYY2ExwgQpN"],
+          10: ["Compendium.shaper.classfeatures.M6VSMzVtKPhh8B0i"],
+          14: ["Compendium.shaper.classfeatures.xzD9zlRP6dUxCtCl"]
         }
       },
       "path-of-the-juggernaut": {
@@ -37,16 +37,16 @@ export default {
       }
     },
     features: {
-      1: ["Compendium.dnd5e.classfeatures.VoR0SUrNX5EJVPIO", "Compendium.dnd5e.classfeatures.SZbsNbaxFFGwBpNK"],
-      2: ["Compendium.dnd5e.classfeatures.SCVjqRdlZ9cvHVSR", "Compendium.dnd5e.classfeatures.vt31lWAULygEl7yk"],
-      3: ["Compendium.dnd5e.classfeatures.TH1QAf6YNGSeBVjT"],
-      5: ["Compendium.dnd5e.classfeatures.XogoBnFWmCAHXppo", "Compendium.dnd5e.classfeatures.Kl6zifJ5OmdHlOi2"],
-      7: ["Compendium.dnd5e.classfeatures.NlXslw4yAqmKZWtN"],
-      9: ["Compendium.dnd5e.classfeatures.L94gyvNpUhUe0rwh"],
-      11: ["Compendium.dnd5e.classfeatures.FqfmbPgxiyrWzhYk"],
-      15: ["Compendium.dnd5e.classfeatures.l8tUhZ5Pecm9wz7I"],
-      18: ["Compendium.dnd5e.classfeatures.Q1exex5ALteprrPo"],
-      20: ["Compendium.dnd5e.classfeatures.jVU4AgqfrFaqgXns"]
+      1: ["Compendium.shaper.classfeatures.VoR0SUrNX5EJVPIO", "Compendium.shaper.classfeatures.SZbsNbaxFFGwBpNK"],
+      2: ["Compendium.shaper.classfeatures.SCVjqRdlZ9cvHVSR", "Compendium.shaper.classfeatures.vt31lWAULygEl7yk"],
+      3: ["Compendium.shaper.classfeatures.TH1QAf6YNGSeBVjT"],
+      5: ["Compendium.shaper.classfeatures.XogoBnFWmCAHXppo", "Compendium.shaper.classfeatures.Kl6zifJ5OmdHlOi2"],
+      7: ["Compendium.shaper.classfeatures.NlXslw4yAqmKZWtN"],
+      9: ["Compendium.shaper.classfeatures.L94gyvNpUhUe0rwh"],
+      11: ["Compendium.shaper.classfeatures.FqfmbPgxiyrWzhYk"],
+      15: ["Compendium.shaper.classfeatures.l8tUhZ5Pecm9wz7I"],
+      18: ["Compendium.shaper.classfeatures.Q1exex5ALteprrPo"],
+      20: ["Compendium.shaper.classfeatures.jVU4AgqfrFaqgXns"]
     }
   },
   bard: {
@@ -60,9 +60,9 @@ export default {
         label: "College of Lore",
         source: "PHB pg. 54",
         features: {
-          3: ["Compendium.dnd5e.classfeatures.5zPmHPQUne7RDfaU"],
-          6: ["Compendium.dnd5e.classfeatures.myBu3zi5eYvQIcuy"],
-          14: ["Compendium.dnd5e.classfeatures.pquwueEMweRhiWaq"]
+          3: ["Compendium.shaper.classfeatures.5zPmHPQUne7RDfaU"],
+          6: ["Compendium.shaper.classfeatures.myBu3zi5eYvQIcuy"],
+          14: ["Compendium.shaper.classfeatures.pquwueEMweRhiWaq"]
         }
       },
       "college-of-swords": {
@@ -82,13 +82,13 @@ export default {
       }
     },
     features: {
-      1: ["Compendium.dnd5e.classfeatures.hpLNiGq7y67d2EHA", "Compendium.dnd5e.classfeatures.u4NLajXETJhJU31v"],
-      2: ["Compendium.dnd5e.classfeatures.ezWijmCnlnQ9ZRX2", "Compendium.dnd5e.classfeatures.he8RpPXwSl2lVSIk"],
-      3: ["Compendium.dnd5e.classfeatures.ILhzFHiRrqgQ9dFJ", "Compendium.dnd5e.classfeatures.aQLg7BWdRnm4Hr9S"],
-      5: ["Compendium.dnd5e.classfeatures.3VDZGs5Ug3hIE322"],
-      6: ["Compendium.dnd5e.classfeatures.SEJmsjkEhdAZ90ki"],
-      10: ["Compendium.dnd5e.classfeatures.aonJ2YjkqkYB9WYB"],
-      20: ["Compendium.dnd5e.classfeatures.GBYN5rH4nh1ocRlY"]
+      1: ["Compendium.shaper.classfeatures.hpLNiGq7y67d2EHA", "Compendium.shaper.classfeatures.u4NLajXETJhJU31v"],
+      2: ["Compendium.shaper.classfeatures.ezWijmCnlnQ9ZRX2", "Compendium.shaper.classfeatures.he8RpPXwSl2lVSIk"],
+      3: ["Compendium.shaper.classfeatures.ILhzFHiRrqgQ9dFJ", "Compendium.shaper.classfeatures.aQLg7BWdRnm4Hr9S"],
+      5: ["Compendium.shaper.classfeatures.3VDZGs5Ug3hIE322"],
+      6: ["Compendium.shaper.classfeatures.SEJmsjkEhdAZ90ki"],
+      10: ["Compendium.shaper.classfeatures.aonJ2YjkqkYB9WYB"],
+      20: ["Compendium.shaper.classfeatures.GBYN5rH4nh1ocRlY"]
     }
   },
   cleric: {
@@ -132,15 +132,15 @@ export default {
         label: "Life Domain",
         source: "PHB pg. 60",
         features: {
-          1: ["Compendium.dnd5e.classfeatures.68bYIOvx6rIqnlOW", "Compendium.dnd5e.classfeatures.jF8AFfEMICIJnAkR", "Compendium.dnd5e.spells.8dzaICjGy6mTUaUr", "Compendium.dnd5e.spells.uUWb1wZgtMou0TVP"],
-          2: ["Compendium.dnd5e.classfeatures.hEymt45rICi4f9eL"],
-          3: ["Compendium.dnd5e.spells.F0GsG0SJzsIOacwV", "Compendium.dnd5e.spells.JbxsYXxSOTZbf9I0"],
-          5: ["Compendium.dnd5e.spells.ZU9d6woBdUP8pIPt", "Compendium.dnd5e.spells.LmRHHMtplpxr9fX6"],
-          6: ["Compendium.dnd5e.classfeatures.yv49QN6Bzqs0ecCs"],
-          7: ["Compendium.dnd5e.spells.VtCXMdyM6mAdIJZb", "Compendium.dnd5e.spells.TgHsuhNasPbhu8MO"],
-          8: ["Compendium.dnd5e.classfeatures.T6u5z8ZTX6UftXqE"],
-          9: ["Compendium.dnd5e.spells.Pyzmm8R7rVsNAPsd", "Compendium.dnd5e.spells.AGFMPAmuzwWO6Dfz"],
-          17: ["Compendium.dnd5e.classfeatures.4UOgxzr83vFuUash"]
+          1: ["Compendium.shaper.classfeatures.68bYIOvx6rIqnlOW", "Compendium.shaper.classfeatures.jF8AFfEMICIJnAkR", "Compendium.shaper.spells.8dzaICjGy6mTUaUr", "Compendium.shaper.spells.uUWb1wZgtMou0TVP"],
+          2: ["Compendium.shaper.classfeatures.hEymt45rICi4f9eL"],
+          3: ["Compendium.shaper.spells.F0GsG0SJzsIOacwV", "Compendium.shaper.spells.JbxsYXxSOTZbf9I0"],
+          5: ["Compendium.shaper.spells.ZU9d6woBdUP8pIPt", "Compendium.shaper.spells.LmRHHMtplpxr9fX6"],
+          6: ["Compendium.shaper.classfeatures.yv49QN6Bzqs0ecCs"],
+          7: ["Compendium.shaper.spells.VtCXMdyM6mAdIJZb", "Compendium.shaper.spells.TgHsuhNasPbhu8MO"],
+          8: ["Compendium.shaper.classfeatures.T6u5z8ZTX6UftXqE"],
+          9: ["Compendium.shaper.spells.Pyzmm8R7rVsNAPsd", "Compendium.shaper.spells.AGFMPAmuzwWO6Dfz"],
+          17: ["Compendium.shaper.classfeatures.4UOgxzr83vFuUash"]
         }
       },
       "light-domain": {
@@ -190,10 +190,10 @@ export default {
       }
     },
     features: {
-      1: ["Compendium.dnd5e.classfeatures.x637K2Icp2ZFM1TB", "Compendium.dnd5e.classfeatures.v4gKwLhAq9vuqza7"],
-      2: ["Compendium.dnd5e.classfeatures.YpiLQEKGalROn7iJ"],
-      5: ["Compendium.dnd5e.classfeatures.NMy4piwXIpLjYbRE"],
-      10: ["Compendium.dnd5e.classfeatures.eVXqHn0ojWrEuYGU"]
+      1: ["Compendium.shaper.classfeatures.x637K2Icp2ZFM1TB", "Compendium.shaper.classfeatures.v4gKwLhAq9vuqza7"],
+      2: ["Compendium.shaper.classfeatures.YpiLQEKGalROn7iJ"],
+      5: ["Compendium.shaper.classfeatures.NMy4piwXIpLjYbRE"],
+      10: ["Compendium.shaper.classfeatures.eVXqHn0ojWrEuYGU"]
     }
   },
   druid: {
@@ -207,11 +207,11 @@ export default {
         label: "Circle of the Land",
         source: "PHB pg. 68",
         features: {
-          2: ["Compendium.dnd5e.classfeatures.lT8GsPOPgRzDC3QJ", "Compendium.dnd5e.classfeatures.wKdRtFsvGfMKQHLY"],
-          3: ["Compendium.dnd5e.classfeatures.YiK59gWSlcQ6Mbdz"],
-          6: ["Compendium.dnd5e.classfeatures.3FB25qKxmkmxcxuC"],
-          10: ["Compendium.dnd5e.classfeatures.OTvrJSJSUgAwXrWX"],
-          14: ["Compendium.dnd5e.classfeatures.EuX1kJNIw1F68yus"]
+          2: ["Compendium.shaper.classfeatures.lT8GsPOPgRzDC3QJ", "Compendium.shaper.classfeatures.wKdRtFsvGfMKQHLY"],
+          3: ["Compendium.shaper.classfeatures.YiK59gWSlcQ6Mbdz"],
+          6: ["Compendium.shaper.classfeatures.3FB25qKxmkmxcxuC"],
+          10: ["Compendium.shaper.classfeatures.OTvrJSJSUgAwXrWX"],
+          14: ["Compendium.shaper.classfeatures.EuX1kJNIw1F68yus"]
         }
       },
       "circle-of-the-moon": {
@@ -231,10 +231,10 @@ export default {
       }
     },
     features: {
-      1: ["Compendium.dnd5e.classfeatures.LzJ5ayHt0OlSVGxi", "Compendium.dnd5e.classfeatures.i6tPm3FNK13Ftc9v"],
-      2: ["Compendium.dnd5e.classfeatures.swK0r5TOIxredxWS", "Compendium.dnd5e.classfeatures.u6Du2P9s81SWuGbi"],
-      18: ["Compendium.dnd5e.classfeatures.cVDEQo0ow1WJT7Wl", "Compendium.dnd5e.classfeatures.xvgPu1O57DgXCM86"],
-      20: ["Compendium.dnd5e.classfeatures.ip4bvmGoz3qkoqes"]
+      1: ["Compendium.shaper.classfeatures.LzJ5ayHt0OlSVGxi", "Compendium.shaper.classfeatures.i6tPm3FNK13Ftc9v"],
+      2: ["Compendium.shaper.classfeatures.swK0r5TOIxredxWS", "Compendium.shaper.classfeatures.u6Du2P9s81SWuGbi"],
+      18: ["Compendium.shaper.classfeatures.cVDEQo0ow1WJT7Wl", "Compendium.shaper.classfeatures.xvgPu1O57DgXCM86"],
+      20: ["Compendium.shaper.classfeatures.ip4bvmGoz3qkoqes"]
     }
   },
   fighter: {
@@ -263,11 +263,11 @@ export default {
         label: "Champion",
         source: "PHB pg. 72",
         features: {
-          3: ["Compendium.dnd5e.classfeatures.YgLQV1O849wE5TgM"],
-          7: ["Compendium.dnd5e.classfeatures.dHu1yzIjD38BvGGd"],
-          10: ["Compendium.dnd5e.classfeatures.kYJsED0rqqqUcgKz"],
-          15: ["Compendium.dnd5e.classfeatures.aVKH6TLn1AG9hPSA"],
-          18: ["Compendium.dnd5e.classfeatures.ipG5yx1tRNmeJfSH"]
+          3: ["Compendium.shaper.classfeatures.YgLQV1O849wE5TgM"],
+          7: ["Compendium.shaper.classfeatures.dHu1yzIjD38BvGGd"],
+          10: ["Compendium.shaper.classfeatures.kYJsED0rqqqUcgKz"],
+          15: ["Compendium.shaper.classfeatures.aVKH6TLn1AG9hPSA"],
+          18: ["Compendium.shaper.classfeatures.ipG5yx1tRNmeJfSH"]
         }
       },
       "echo-knight": {
@@ -287,11 +287,11 @@ export default {
       }
     },
     features: {
-      1: ["Compendium.dnd5e.classfeatures.fbExzwNwEAl2kW9c", "Compendium.dnd5e.classfeatures.nTjmWbyHweXuIqwc"],
-      2: ["Compendium.dnd5e.classfeatures.xF1VTcJ3AdkbTsdQ"],
-      3: ["Compendium.dnd5e.classfeatures.ax8M0X0q1GGWM26j"],
-      5: ["Compendium.dnd5e.classfeatures.q9g1MLXuLZyxjQMg"],
-      9: ["Compendium.dnd5e.classfeatures.653ZHbNcmm7ZGXbw"]
+      1: ["Compendium.shaper.classfeatures.fbExzwNwEAl2kW9c", "Compendium.shaper.classfeatures.nTjmWbyHweXuIqwc"],
+      2: ["Compendium.shaper.classfeatures.xF1VTcJ3AdkbTsdQ"],
+      3: ["Compendium.shaper.classfeatures.ax8M0X0q1GGWM26j"],
+      5: ["Compendium.shaper.classfeatures.q9g1MLXuLZyxjQMg"],
+      9: ["Compendium.shaper.classfeatures.653ZHbNcmm7ZGXbw"]
     }
   },
   monk: {
@@ -325,10 +325,10 @@ export default {
         label: "Way of the Open Hand",
         source: "PHB pg. 79",
         features: {
-          3: ["Compendium.dnd5e.classfeatures.iQxLNydNLlCHNKbp"],
-          6: ["Compendium.dnd5e.classfeatures.Q7mOdk4b1lgjcptF"],
-          11: ["Compendium.dnd5e.classfeatures.rBDZLatuoolT2FUW"],
-          17: ["Compendium.dnd5e.classfeatures.h1gM8SH3BNRtFevE"]
+          3: ["Compendium.shaper.classfeatures.iQxLNydNLlCHNKbp"],
+          6: ["Compendium.shaper.classfeatures.Q7mOdk4b1lgjcptF"],
+          11: ["Compendium.shaper.classfeatures.rBDZLatuoolT2FUW"],
+          17: ["Compendium.shaper.classfeatures.h1gM8SH3BNRtFevE"]
         }
       },
       "way-of-the-shadow": {
@@ -343,19 +343,19 @@ export default {
       }
     },
     features: {
-      1: ["Compendium.dnd5e.classfeatures.UAvV7N7T4zJhxdfI", "Compendium.dnd5e.classfeatures.l50hjTxO2r0iecKw"],
-      2: ["Compendium.dnd5e.classfeatures.10b6z2W1txNkrGP7", "Compendium.dnd5e.classfeatures.7vSrGc0MP5Vzm9Ac"],
-      3: ["Compendium.dnd5e.classfeatures.rtpQdX77dYWbDIOH", "Compendium.dnd5e.classfeatures.mzweVbnsJPQiVkAe"],
-      4: ["Compendium.dnd5e.classfeatures.KQz9bqxVkXjDl8gK"],
-      5: ["Compendium.dnd5e.classfeatures.XogoBnFWmCAHXppo", "Compendium.dnd5e.classfeatures.pvRc6GAu1ok6zihC"],
-      6: ["Compendium.dnd5e.classfeatures.7flZKruSSu6dHg6D"],
-      7: ["Compendium.dnd5e.classfeatures.a4P4DNMmH8CqSNkC", "Compendium.dnd5e.classfeatures.ZmC31XKS4YNENnoc"],
-      10: ["Compendium.dnd5e.classfeatures.bqWA7t9pDELbNRkp"],
-      13: ["Compendium.dnd5e.classfeatures.XjuGBeB8Y0C3A5D4"],
-      14: ["Compendium.dnd5e.classfeatures.7D2EkLdISwShEDlN"],
-      15: ["Compendium.dnd5e.classfeatures.gDH8PMrKvLHaNmEI"],
-      18: ["Compendium.dnd5e.classfeatures.3jwFt3hSqDswBlOH"],
-      20: ["Compendium.dnd5e.classfeatures.mQNPg89YIs7g5tG4"]
+      1: ["Compendium.shaper.classfeatures.UAvV7N7T4zJhxdfI", "Compendium.shaper.classfeatures.l50hjTxO2r0iecKw"],
+      2: ["Compendium.shaper.classfeatures.10b6z2W1txNkrGP7", "Compendium.shaper.classfeatures.7vSrGc0MP5Vzm9Ac"],
+      3: ["Compendium.shaper.classfeatures.rtpQdX77dYWbDIOH", "Compendium.shaper.classfeatures.mzweVbnsJPQiVkAe"],
+      4: ["Compendium.shaper.classfeatures.KQz9bqxVkXjDl8gK"],
+      5: ["Compendium.shaper.classfeatures.XogoBnFWmCAHXppo", "Compendium.shaper.classfeatures.pvRc6GAu1ok6zihC"],
+      6: ["Compendium.shaper.classfeatures.7flZKruSSu6dHg6D"],
+      7: ["Compendium.shaper.classfeatures.a4P4DNMmH8CqSNkC", "Compendium.shaper.classfeatures.ZmC31XKS4YNENnoc"],
+      10: ["Compendium.shaper.classfeatures.bqWA7t9pDELbNRkp"],
+      13: ["Compendium.shaper.classfeatures.XjuGBeB8Y0C3A5D4"],
+      14: ["Compendium.shaper.classfeatures.7D2EkLdISwShEDlN"],
+      15: ["Compendium.shaper.classfeatures.gDH8PMrKvLHaNmEI"],
+      18: ["Compendium.shaper.classfeatures.3jwFt3hSqDswBlOH"],
+      20: ["Compendium.shaper.classfeatures.mQNPg89YIs7g5tG4"]
     }
   },
   paladin: {
@@ -379,11 +379,11 @@ export default {
         label: "Oath of Devotion",
         source: "PHB pg. 85",
         features: {
-          3: ["Compendium.dnd5e.spells.xmDBqZhRVrtLP8h2", "Compendium.dnd5e.spells.gvdA9nPuWLck4tBl"],
-          5: ["Compendium.dnd5e.spells.F0GsG0SJzsIOacwV", "Compendium.dnd5e.spells.CylBa7jR8DSbo8Z3"],
-          9: ["Compendium.dnd5e.spells.ZU9d6woBdUP8pIPt", "Compendium.dnd5e.spells.15Fa6q1nH27XfbR8"],
-          13: ["Compendium.dnd5e.spells.da0a1t2FqaTjRZGT", "Compendium.dnd5e.spells.TgHsuhNasPbhu8MO"],
-          17: ["Compendium.dnd5e.spells.d54VDyFulD9xxY7J", "Compendium.dnd5e.spells.5e1xTohkzqFqbYH4"]
+          3: ["Compendium.shaper.spells.xmDBqZhRVrtLP8h2", "Compendium.shaper.spells.gvdA9nPuWLck4tBl"],
+          5: ["Compendium.shaper.spells.F0GsG0SJzsIOacwV", "Compendium.shaper.spells.CylBa7jR8DSbo8Z3"],
+          9: ["Compendium.shaper.spells.ZU9d6woBdUP8pIPt", "Compendium.shaper.spells.15Fa6q1nH27XfbR8"],
+          13: ["Compendium.shaper.spells.da0a1t2FqaTjRZGT", "Compendium.shaper.spells.TgHsuhNasPbhu8MO"],
+          17: ["Compendium.shaper.spells.d54VDyFulD9xxY7J", "Compendium.shaper.spells.5e1xTohkzqFqbYH4"]
         }
       },
       oathbreaker: {
@@ -403,14 +403,14 @@ export default {
       }
     },
     features: {
-      1: ["Compendium.dnd5e.classfeatures.E8ozg8avUVOX9N7u", "Compendium.dnd5e.classfeatures.OdrvL3afwLOPeuYZ"],
-      2: ["Compendium.dnd5e.classfeatures.ySMPQ6zNSlvkrl2f", "Compendium.dnd5e.classfeatures.fbExzwNwEAl2kW9c", "Compendium.dnd5e.classfeatures.ihoQHsmVZlyDbPhX"],
-      3: ["Compendium.dnd5e.classfeatures.dY9yrqkyEDuF0CG2", "Compendium.dnd5e.classfeatures.olAqNsUTIef9x8xC"],
-      5: ["Compendium.dnd5e.classfeatures.XogoBnFWmCAHXppo"],
-      6: ["Compendium.dnd5e.classfeatures.carGDhkIdoduTC0I"],
-      10: ["Compendium.dnd5e.classfeatures.nahSkBO6LH4HkpaT"],
-      11: ["Compendium.dnd5e.classfeatures.FAk41RPCTcvCk6KI"],
-      14: ["Compendium.dnd5e.classfeatures.U7BIPVPsptBmwsnV"]
+      1: ["Compendium.shaper.classfeatures.E8ozg8avUVOX9N7u", "Compendium.shaper.classfeatures.OdrvL3afwLOPeuYZ"],
+      2: ["Compendium.shaper.classfeatures.ySMPQ6zNSlvkrl2f", "Compendium.shaper.classfeatures.fbExzwNwEAl2kW9c", "Compendium.shaper.classfeatures.ihoQHsmVZlyDbPhX"],
+      3: ["Compendium.shaper.classfeatures.dY9yrqkyEDuF0CG2", "Compendium.shaper.classfeatures.olAqNsUTIef9x8xC"],
+      5: ["Compendium.shaper.classfeatures.XogoBnFWmCAHXppo"],
+      6: ["Compendium.shaper.classfeatures.carGDhkIdoduTC0I"],
+      10: ["Compendium.shaper.classfeatures.nahSkBO6LH4HkpaT"],
+      11: ["Compendium.shaper.classfeatures.FAk41RPCTcvCk6KI"],
+      14: ["Compendium.shaper.classfeatures.U7BIPVPsptBmwsnV"]
     }
   },
   ranger: {
@@ -434,10 +434,10 @@ export default {
         label: "Hunter",
         source: "PHB pg. 93",
         features: {
-          3: ["Compendium.dnd5e.classfeatures.wrxIW5sDfmGr3u5s"],
-          7: ["Compendium.dnd5e.classfeatures.WgQrqjmeyMqDzVt3"],
-          11: ["Compendium.dnd5e.classfeatures.7zlTRRXT1vWSBGjX"],
-          15: ["Compendium.dnd5e.classfeatures.a0Sq88dgnREcIMfl"]
+          3: ["Compendium.shaper.classfeatures.wrxIW5sDfmGr3u5s"],
+          7: ["Compendium.shaper.classfeatures.WgQrqjmeyMqDzVt3"],
+          11: ["Compendium.shaper.classfeatures.7zlTRRXT1vWSBGjX"],
+          15: ["Compendium.shaper.classfeatures.a0Sq88dgnREcIMfl"]
         }
       },
       "monster-slayer": {
@@ -447,15 +447,15 @@ export default {
       }
     },
     features: {
-      1: ["Compendium.dnd5e.classfeatures.4Vpj9vCOB37GtXk6", "Compendium.dnd5e.classfeatures.8fbZt2Qh7ZttwIan"],
-      2: ["Compendium.dnd5e.classfeatures.fbExzwNwEAl2kW9c", "Compendium.dnd5e.classfeatures.u6xV3Ki3TXRrD7zg"],
-      3: ["Compendium.dnd5e.classfeatures.1dJHU48yNqn3lcfx", "Compendium.dnd5e.classfeatures.kaHcUGiwi8AtfZIm"],
-      5: ["Compendium.dnd5e.classfeatures.XogoBnFWmCAHXppo"],
-      8: ["Compendium.dnd5e.classfeatures.C5fzaOBc6HxyOWRn"],
-      10: ["Compendium.dnd5e.classfeatures.r0unvWK0lPsDthDx"],
-      14: ["Compendium.dnd5e.classfeatures.DhU2dWCNnX78TstR"],
-      18: ["Compendium.dnd5e.classfeatures.QBVmY56RMQuh6C8h"],
-      20: ["Compendium.dnd5e.classfeatures.3CaP1vFHVR8LgHjx"]
+      1: ["Compendium.shaper.classfeatures.4Vpj9vCOB37GtXk6", "Compendium.shaper.classfeatures.8fbZt2Qh7ZttwIan"],
+      2: ["Compendium.shaper.classfeatures.fbExzwNwEAl2kW9c", "Compendium.shaper.classfeatures.u6xV3Ki3TXRrD7zg"],
+      3: ["Compendium.shaper.classfeatures.1dJHU48yNqn3lcfx", "Compendium.shaper.classfeatures.kaHcUGiwi8AtfZIm"],
+      5: ["Compendium.shaper.classfeatures.XogoBnFWmCAHXppo"],
+      8: ["Compendium.shaper.classfeatures.C5fzaOBc6HxyOWRn"],
+      10: ["Compendium.shaper.classfeatures.r0unvWK0lPsDthDx"],
+      14: ["Compendium.shaper.classfeatures.DhU2dWCNnX78TstR"],
+      18: ["Compendium.shaper.classfeatures.QBVmY56RMQuh6C8h"],
+      20: ["Compendium.shaper.classfeatures.3CaP1vFHVR8LgHjx"]
     }
   },
   rogue: {
@@ -494,24 +494,24 @@ export default {
         label: "Thief",
         source: "PHB pg. 97",
         features: {
-          3: ["Compendium.dnd5e.classfeatures.ga3dt2zrCn2MHK8R", "Compendium.dnd5e.classfeatures.FGrbXs6Ku5qxFK5G"],
-          9: ["Compendium.dnd5e.classfeatures.Ei1Oh4UAA2E30jcD"],
-          13: ["Compendium.dnd5e.classfeatures.NqWyHE7Rpw9lyKWu"],
-          17: ["Compendium.dnd5e.classfeatures.LhRm1EeUMvp2EWhV"]
+          3: ["Compendium.shaper.classfeatures.ga3dt2zrCn2MHK8R", "Compendium.shaper.classfeatures.FGrbXs6Ku5qxFK5G"],
+          9: ["Compendium.shaper.classfeatures.Ei1Oh4UAA2E30jcD"],
+          13: ["Compendium.shaper.classfeatures.NqWyHE7Rpw9lyKWu"],
+          17: ["Compendium.shaper.classfeatures.LhRm1EeUMvp2EWhV"]
         }
       }
     },
     features: {
-      1: ["Compendium.dnd5e.classfeatures.3sYPftQKnbbVnHrh", "Compendium.dnd5e.classfeatures.DPN2Gfk8yi1Z5wp7", "Compendium.dnd5e.classfeatures.ohwfuwnvuoBWlSQr"],
-      2: ["Compendium.dnd5e.classfeatures.01pcLg6PRu5zGrsb"],
-      3: ["Compendium.dnd5e.classfeatures.80USV8ZFPIahpLd0"],
-      5: ["Compendium.dnd5e.classfeatures.Mm64SKAHJWYecgXS"],
-      7: ["Compendium.dnd5e.classfeatures.a4P4DNMmH8CqSNkC"],
-      11: ["Compendium.dnd5e.classfeatures.YN9xm6MCvse4Y60u"],
-      14: ["Compendium.dnd5e.classfeatures.fjsBk7zxoAbLf8ZI"],
-      15: ["Compendium.dnd5e.classfeatures.V4pwFxlwHtNeB4w9"],
-      18: ["Compendium.dnd5e.classfeatures.L7nJSRosos8sHJH9"],
-      20: ["Compendium.dnd5e.classfeatures.rQhWDaMHMn7iU4f2"]
+      1: ["Compendium.shaper.classfeatures.3sYPftQKnbbVnHrh", "Compendium.shaper.classfeatures.DPN2Gfk8yi1Z5wp7", "Compendium.shaper.classfeatures.ohwfuwnvuoBWlSQr"],
+      2: ["Compendium.shaper.classfeatures.01pcLg6PRu5zGrsb"],
+      3: ["Compendium.shaper.classfeatures.80USV8ZFPIahpLd0"],
+      5: ["Compendium.shaper.classfeatures.Mm64SKAHJWYecgXS"],
+      7: ["Compendium.shaper.classfeatures.a4P4DNMmH8CqSNkC"],
+      11: ["Compendium.shaper.classfeatures.YN9xm6MCvse4Y60u"],
+      14: ["Compendium.shaper.classfeatures.fjsBk7zxoAbLf8ZI"],
+      15: ["Compendium.shaper.classfeatures.V4pwFxlwHtNeB4w9"],
+      18: ["Compendium.shaper.classfeatures.L7nJSRosos8sHJH9"],
+      20: ["Compendium.shaper.classfeatures.rQhWDaMHMn7iU4f2"]
     }
   },
   sorcerer: {
@@ -520,10 +520,10 @@ export default {
         label: "Draconic Bloodline",
         source: "PHB pg. 102",
         features: {
-          1: ["Compendium.dnd5e.classfeatures.EZsonMThTNLZq35j", "Compendium.dnd5e.classfeatures.MW1ExvBLm8Hg82aA"],
-          6: ["Compendium.dnd5e.classfeatures.x6eEZ9GUsuOcEa3G"],
-          14: ["Compendium.dnd5e.classfeatures.3647zjKSE9zFwOXc"],
-          18: ["Compendium.dnd5e.classfeatures.Gsha4bl0apxqspFy"]
+          1: ["Compendium.shaper.classfeatures.EZsonMThTNLZq35j", "Compendium.shaper.classfeatures.MW1ExvBLm8Hg82aA"],
+          6: ["Compendium.shaper.classfeatures.x6eEZ9GUsuOcEa3G"],
+          14: ["Compendium.shaper.classfeatures.3647zjKSE9zFwOXc"],
+          18: ["Compendium.shaper.classfeatures.Gsha4bl0apxqspFy"]
         }
       },
       "divine-soul": {
@@ -558,10 +558,10 @@ export default {
       }
     },
     features: {
-      1: ["Compendium.dnd5e.classfeatures.cmRCL9T9UgRYOj1c", "Compendium.dnd5e.classfeatures.oygRF3ZjTv2T7z0Y"],
-      2: ["Compendium.dnd5e.classfeatures.LBKChJY5n02Afhnq"],
-      3: ["Compendium.dnd5e.classfeatures.9Uh7uTDNZ04oTJsL"],
-      20: ["Compendium.dnd5e.classfeatures.F2lEKSmOY0NUruzY"]
+      1: ["Compendium.shaper.classfeatures.cmRCL9T9UgRYOj1c", "Compendium.shaper.classfeatures.oygRF3ZjTv2T7z0Y"],
+      2: ["Compendium.shaper.classfeatures.LBKChJY5n02Afhnq"],
+      3: ["Compendium.shaper.classfeatures.9Uh7uTDNZ04oTJsL"],
+      20: ["Compendium.shaper.classfeatures.F2lEKSmOY0NUruzY"]
     }
   },
   warlock: {
@@ -580,10 +580,10 @@ export default {
         label: "The Fiend",
         source: "PHB pg. 109",
         features: {
-          1: ["Compendium.dnd5e.classfeatures.Jv0zu4BtUi8bFCqJ"],
-          6: ["Compendium.dnd5e.classfeatures.OQSb0bO1yDI4aiMx"],
-          10: ["Compendium.dnd5e.classfeatures.9UZ2WjUF2k58CQug"],
-          14: ["Compendium.dnd5e.classfeatures.aCUmlnHlUPHS0rdu"]
+          1: ["Compendium.shaper.classfeatures.Jv0zu4BtUi8bFCqJ"],
+          6: ["Compendium.shaper.classfeatures.OQSb0bO1yDI4aiMx"],
+          10: ["Compendium.shaper.classfeatures.9UZ2WjUF2k58CQug"],
+          14: ["Compendium.shaper.classfeatures.aCUmlnHlUPHS0rdu"]
         }
       },
       "the-hexblade": {
@@ -603,14 +603,14 @@ export default {
       }
     },
     features: {
-      1: ["Compendium.dnd5e.classfeatures.jTXHaK0vvT5DV3uO", "Compendium.dnd5e.classfeatures.x6IJZwr6f0SGral7"],
-      2: ["Compendium.dnd5e.classfeatures.8MlxM2nEfE3Q0EVk"],
-      3: ["Compendium.dnd5e.classfeatures.QwgfIpCN8VWfoUtX"],
-      11: ["Compendium.dnd5e.classfeatures.zB77V8BcCJvWVxck"],
-      13: ["Compendium.dnd5e.classfeatures.HBn6FXLz7Eiudz0V"],
-      15: ["Compendium.dnd5e.classfeatures.knDZR4l4QfLTKinm"],
-      17: ["Compendium.dnd5e.classfeatures.vMxJQEKeK6WwZFaF"],
-      20: ["Compendium.dnd5e.classfeatures.0C04rwyvoknvFYiy"]
+      1: ["Compendium.shaper.classfeatures.jTXHaK0vvT5DV3uO", "Compendium.shaper.classfeatures.x6IJZwr6f0SGral7"],
+      2: ["Compendium.shaper.classfeatures.8MlxM2nEfE3Q0EVk"],
+      3: ["Compendium.shaper.classfeatures.QwgfIpCN8VWfoUtX"],
+      11: ["Compendium.shaper.classfeatures.zB77V8BcCJvWVxck"],
+      13: ["Compendium.shaper.classfeatures.HBn6FXLz7Eiudz0V"],
+      15: ["Compendium.shaper.classfeatures.knDZR4l4QfLTKinm"],
+      17: ["Compendium.shaper.classfeatures.vMxJQEKeK6WwZFaF"],
+      20: ["Compendium.shaper.classfeatures.0C04rwyvoknvFYiy"]
     }
   },
   wizard: {
@@ -649,10 +649,10 @@ export default {
         label: "School of Evocation",
         source: "PHB pg. 117",
         features: {
-          2: ["Compendium.dnd5e.classfeatures.7uzJ2JkmsdRGLra3", "Compendium.dnd5e.classfeatures.6VBXkjjBgjSpNElh"],
-          6: ["Compendium.dnd5e.classfeatures.evEWCpE5MYgr5RRW"],
-          10: ["Compendium.dnd5e.classfeatures.7O85kj6uDEG5NzUE"],
-          14: ["Compendium.dnd5e.classfeatures.VUtSLeCzFubGXmGx"]
+          2: ["Compendium.shaper.classfeatures.7uzJ2JkmsdRGLra3", "Compendium.shaper.classfeatures.6VBXkjjBgjSpNElh"],
+          6: ["Compendium.shaper.classfeatures.evEWCpE5MYgr5RRW"],
+          10: ["Compendium.shaper.classfeatures.7O85kj6uDEG5NzUE"],
+          14: ["Compendium.shaper.classfeatures.VUtSLeCzFubGXmGx"]
         }
       },
       "school-of-graviturgy-magic": {
@@ -682,10 +682,10 @@ export default {
       }
     },
     features: {
-      1: ["Compendium.dnd5e.classfeatures.gbNo5eVPaqr8IVKL", "Compendium.dnd5e.classfeatures.e0uTcFPpgxjIyUW9"],
-      2: ["Compendium.dnd5e.classfeatures.AEWr9EMxy5gj4ZFT"],
-      18: ["Compendium.dnd5e.classfeatures.JfFfHTeIszx1hNRx"],
-      20: ["Compendium.dnd5e.classfeatures.nUrZDi6QN1YjwAr6", "Compendium.dnd5e.classfeatures.31bKbWe9ZGVLEns6"]
+      1: ["Compendium.shaper.classfeatures.gbNo5eVPaqr8IVKL", "Compendium.shaper.classfeatures.e0uTcFPpgxjIyUW9"],
+      2: ["Compendium.shaper.classfeatures.AEWr9EMxy5gj4ZFT"],
+      18: ["Compendium.shaper.classfeatures.JfFfHTeIszx1hNRx"],
+      20: ["Compendium.shaper.classfeatures.nUrZDi6QN1YjwAr6", "Compendium.shaper.classfeatures.31bKbWe9ZGVLEns6"]
     }
   }
 };

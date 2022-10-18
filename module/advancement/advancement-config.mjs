@@ -29,8 +29,8 @@ export default class AdvancementConfig extends FormApplication {
   /** @inheritDoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
-      classes: ["dnd5e", "advancement", "dialog"],
-      template: "systems/dnd5e/templates/advancement/advancement-config.hbs",
+      classes: ["shaper", "advancement", "dialog"],
+      template: "systems/shaper/templates/advancement/advancement-config.hbs",
       width: 400,
       height: "auto",
       submitOnChange: true,
@@ -44,18 +44,18 @@ export default class AdvancementConfig extends FormApplication {
   /** @inheritDoc */
   get title() {
     const type = this.advancement.constructor.metadata.title;
-    return `${game.i18n.format("DND5E.AdvancementConfigureTitle", { item: this.item.name })}: ${type}`;
+    return `${game.i18n.format("SHAPER.AdvancementConfigureTitle", { item: this.item.name })}: ${type}`;
   }
 
   /* -------------------------------------------- */
 
   /** @inheritdoc */
   getData() {
-    const levels = Object.fromEntries(Array.fromRange(CONFIG.DND5E.maxLevel + 1).map(l => [l, l]));
+    const levels = Object.fromEntries(Array.fromRange(CONFIG.SHAPER.maxLevel + 1).map(l => [l, l]));
     if ( ["class", "subclass"].includes(this.item.type) ) delete levels[0];
-    else levels[0] = game.i18n.localize("DND5E.AdvancementLevelAnyHeader");
+    else levels[0] = game.i18n.localize("SHAPER.AdvancementLevelAnyHeader");
     return {
-      CONFIG: CONFIG.DND5E,
+      CONFIG: CONFIG.SHAPER,
       data: this.advancement.data,
       default: {
         title: this.advancement.constructor.metadata.title,
@@ -173,12 +173,12 @@ export default class AdvancementConfig extends FormApplication {
 
     // Abort if this uuid is the parent item
     if ( item.uuid === this.item.uuid ) {
-      return ui.notifications.error(game.i18n.localize("DND5E.AdvancementItemGrantRecursiveWarning"));
+      return ui.notifications.error(game.i18n.localize("SHAPER.AdvancementItemGrantRecursiveWarning"));
     }
 
     // Abort if this uuid exists already
     if ( existingItems.includes(item.uuid) ) {
-      return ui.notifications.warn(game.i18n.localize("DND5E.AdvancementItemGrantDuplicateWarning"));
+      return ui.notifications.warn(game.i18n.localize("SHAPER.AdvancementItemGrantDuplicateWarning"));
     }
 
     await this.advancement.update({[`configuration.${this.options.dropKeyPath}`]: [...existingItems, item.uuid]});

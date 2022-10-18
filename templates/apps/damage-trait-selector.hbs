@@ -16,19 +16,19 @@
     </ol>
     {{/inline}}
 
-    <h3>{{localize "DND5E.DamageTypes"}}</h3>
+    <h3>{{localize "SHAPER.DamageTypes"}}</h3>
     {{> traitList prefix="choices"}}
 
     {{#if allowCustom}}
     <div class="form-group stacked">
-        <label>{{ localize "DND5E.TraitSelectorSpecial" }}</label>
+        <label>{{ localize "SHAPER.TraitSelectorSpecial" }}</label>
         <input type="text" name="choices.custom" value="{{custom}}" data-dtype="String"/>
     </div>
     {{/if}}
 
-    <h3>{{localize "DND5E.DamagePhysicalBypass"}}</h3>
-    <p class="note">{{localize "DND5E.DamagePhysicalBypassHint"}}</p>
+    <h3>{{localize "SHAPER.DamagePhysicalBypass"}}</h3>
+    <p class="note">{{localize "SHAPER.DamagePhysicalBypassHint"}}</p>
     {{> traitList choices=bypasses prefix="bypasses"}}
 
-    <button type="submit" name="submit" value="1"><i class="far fa-save"></i> {{ localize "DND5E.TraitSave"}}</button>
+    <button type="submit" name="submit" value="1"><i class="far fa-save"></i> {{ localize "SHAPER.TraitSave"}}</button>
 </form>

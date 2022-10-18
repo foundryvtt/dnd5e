@@ -2,10 +2,10 @@ import ClassFeatures from "./advancement/class-features.mjs";
 import { preLocalize } from "./utils.mjs";
 
 // Namespace Configuration Values
-const DND5E = {};
+const SHAPER = {};
 
 // ASCII Artwork
-DND5E.ASCII = `_______________________________
+SHAPER.ASCII = `_______________________________
 ______      ______ _____ _____
 |  _  \\___  |  _  \\  ___|  ___|
 | | | ( _ ) | | | |___ \\| |__
@@ -19,15 +19,15 @@ _______________________________`;
  * The set of Ability Scores used within the system.
  * @enum {string}
  */
-DND5E.abilities = {
-  str: "DND5E.AbilityStr",
-  dex: "DND5E.AbilityDex",
-  con: "DND5E.AbilityCon",
-  int: "DND5E.AbilityInt",
-  wis: "DND5E.AbilityWis",
-  cha: "DND5E.AbilityCha",
-  hon: "DND5E.AbilityHon",
-  san: "DND5E.AbilitySan"
+SHAPER.abilities = {
+  str: "SHAPER.AbilityStr",
+  dex: "SHAPER.AbilityDex",
+  con: "SHAPER.AbilityCon",
+  int: "SHAPER.AbilityInt",
+  wis: "SHAPER.AbilityWis",
+  cha: "SHAPER.AbilityCha",
+  hon: "SHAPER.AbilityHon",
+  san: "SHAPER.AbilitySan"
 };
 preLocalize("abilities");
 
@@ -35,15 +35,15 @@ preLocalize("abilities");
  * Localized abbreviations for Ability Scores.
  * @enum {string}
  */
-DND5E.abilityAbbreviations = {
-  str: "DND5E.AbilityStrAbbr",
-  dex: "DND5E.AbilityDexAbbr",
-  con: "DND5E.AbilityConAbbr",
-  int: "DND5E.AbilityIntAbbr",
-  wis: "DND5E.AbilityWisAbbr",
-  cha: "DND5E.AbilityChaAbbr",
-  hon: "DND5E.AbilityHonAbbr",
-  san: "DND5E.AbilitySanAbbr"
+SHAPER.abilityAbbreviations = {
+  str: "SHAPER.AbilityStrAbbr",
+  dex: "SHAPER.AbilityDexAbbr",
+  con: "SHAPER.AbilityConAbbr",
+  int: "SHAPER.AbilityIntAbbr",
+  wis: "SHAPER.AbilityWisAbbr",
+  cha: "SHAPER.AbilityChaAbbr",
+  hon: "SHAPER.AbilityHonAbbr",
+  san: "SHAPER.AbilitySanAbbr"
 };
 preLocalize("abilityAbbreviations");
 
@@ -61,25 +61,25 @@ preLocalize("abilityAbbreviations");
  * The set of skill which can be trained with their default ability scores.
  * @enum {SkillConfiguration}
  */
-DND5E.skills = {
-  acr: { label: "DND5E.SkillAcr", ability: "dex" },
-  ani: { label: "DND5E.SkillAni", ability: "wis" },
-  arc: { label: "DND5E.SkillArc", ability: "int" },
-  ath: { label: "DND5E.SkillAth", ability: "str" },
-  dec: { label: "DND5E.SkillDec", ability: "cha" },
-  his: { label: "DND5E.SkillHis", ability: "int" },
-  ins: { label: "DND5E.SkillIns", ability: "wis" },
-  itm: { label: "DND5E.SkillItm", ability: "cha" },
-  inv: { label: "DND5E.SkillInv", ability: "int" },
-  med: { label: "DND5E.SkillMed", ability: "wis" },
-  nat: { label: "DND5E.SkillNat", ability: "int" },
-  prc: { label: "DND5E.SkillPrc", ability: "wis" },
-  prf: { label: "DND5E.SkillPrf", ability: "cha" },
-  per: { label: "DND5E.SkillPer", ability: "cha" },
-  rel: { label: "DND5E.SkillRel", ability: "int" },
-  slt: { label: "DND5E.SkillSlt", ability: "dex" },
-  ste: { label: "DND5E.SkillSte", ability: "dex" },
-  sur: { label: "DND5E.SkillSur", ability: "wis" }
+SHAPER.skills = {
+  acr: { label: "SHAPER.SkillAcr", ability: "dex" },
+  ani: { label: "SHAPER.SkillAni", ability: "wis" },
+  arc: { label: "SHAPER.SkillArc", ability: "int" },
+  ath: { label: "SHAPER.SkillAth", ability: "str" },
+  dec: { label: "SHAPER.SkillDec", ability: "cha" },
+  his: { label: "SHAPER.SkillHis", ability: "int" },
+  ins: { label: "SHAPER.SkillIns", ability: "wis" },
+  itm: { label: "SHAPER.SkillItm", ability: "cha" },
+  inv: { label: "SHAPER.SkillInv", ability: "int" },
+  med: { label: "SHAPER.SkillMed", ability: "wis" },
+  nat: { label: "SHAPER.SkillNat", ability: "int" },
+  prc: { label: "SHAPER.SkillPrc", ability: "wis" },
+  prf: { label: "SHAPER.SkillPrf", ability: "cha" },
+  per: { label: "SHAPER.SkillPer", ability: "cha" },
+  rel: { label: "SHAPER.SkillRel", ability: "int" },
+  slt: { label: "SHAPER.SkillSlt", ability: "dex" },
+  ste: { label: "SHAPER.SkillSte", ability: "dex" },
+  sur: { label: "SHAPER.SkillSur", ability: "wis" }
 };
 preLocalize("skills", { key: "label", sort: true });
 patchConfig("skills", "label", { since: 2.0, until: 2.2 });
@@ -90,16 +90,16 @@ patchConfig("skills", "label", { since: 2.0, until: 2.2 });
  * Character alignment options.
  * @enum {string}
  */
-DND5E.alignments = {
-  lg: "DND5E.AlignmentLG",
-  ng: "DND5E.AlignmentNG",
-  cg: "DND5E.AlignmentCG",
-  ln: "DND5E.AlignmentLN",
-  tn: "DND5E.AlignmentTN",
-  cn: "DND5E.AlignmentCN",
-  le: "DND5E.AlignmentLE",
-  ne: "DND5E.AlignmentNE",
-  ce: "DND5E.AlignmentCE"
+SHAPER.alignments = {
+  lg: "SHAPER.AlignmentLG",
+  ng: "SHAPER.AlignmentNG",
+  cg: "SHAPER.AlignmentCG",
+  ln: "SHAPER.AlignmentLN",
+  tn: "SHAPER.AlignmentTN",
+  cn: "SHAPER.AlignmentCN",
+  le: "SHAPER.AlignmentLE",
+  ne: "SHAPER.AlignmentNE",
+  ce: "SHAPER.AlignmentCE"
 };
 preLocalize("alignments");
 
@@ -109,7 +109,7 @@ preLocalize("alignments");
  * An enumeration of item attunement types.
  * @enum {number}
  */
-DND5E.attunementTypes = {
+SHAPER.attunementTypes = {
   NONE: 0,
   REQUIRED: 1,
   ATTUNED: 2
@@ -119,10 +119,10 @@ DND5E.attunementTypes = {
  * An enumeration of item attunement states.
  * @type {{"0": string, "1": string, "2": string}}
  */
-DND5E.attunements = {
-  0: "DND5E.AttunementNone",
-  1: "DND5E.AttunementRequired",
-  2: "DND5E.AttunementAttuned"
+SHAPER.attunements = {
+  0: "SHAPER.AttunementNone",
+  1: "SHAPER.AttunementRequired",
+  2: "SHAPER.AttunementAttuned"
 };
 preLocalize("attunements");
 
@@ -132,18 +132,18 @@ preLocalize("attunements");
  * General weapon categories.
  * @enum {string}
  */
-DND5E.weaponProficiencies = {
-  sim: "DND5E.WeaponSimpleProficiency",
-  mar: "DND5E.WeaponMartialProficiency"
+SHAPER.weaponProficiencies = {
+  sim: "SHAPER.WeaponSimpleProficiency",
+  mar: "SHAPER.WeaponMartialProficiency"
 };
 preLocalize("weaponProficiencies");
 
 /**
- * A mapping between `DND5E.weaponTypes` and `DND5E.weaponProficiencies` that
+ * A mapping between `SHAPER.weaponTypes` and `SHAPER.weaponProficiencies` that
  * is used to determine if character has proficiency when adding an item.
  * @enum {(boolean|string)}
  */
-DND5E.weaponProficienciesMap = {
+SHAPER.weaponProficienciesMap = {
   natural: true,
   simpleM: "sim",
   simpleR: "sim",
@@ -156,7 +156,7 @@ DND5E.weaponProficienciesMap = {
  * starting equipment provided by classes and backgrounds.
  * @enum {string}
  */
-DND5E.weaponIds = {
+SHAPER.weaponIds = {
   battleaxe: "I0WocDSuNpGJayPb",
   blowgun: "wNWK6yJMHG9ANqQV",
   club: "nfIRTECQIG81CvM4",
@@ -203,10 +203,10 @@ DND5E.weaponIds = {
  *
  * @enum {string}
  */
-DND5E.toolTypes = {
-  art: "DND5E.ToolArtisans",
-  game: "DND5E.ToolGamingSet",
-  music: "DND5E.ToolMusicalInstrument"
+SHAPER.toolTypes = {
+  art: "SHAPER.ToolArtisans",
+  game: "SHAPER.ToolGamingSet",
+  music: "SHAPER.ToolMusicalInstrument"
 };
 preLocalize("toolTypes", { sort: true });
 
@@ -215,9 +215,9 @@ preLocalize("toolTypes", { sort: true });
  *
  * @enum {string}
  */
-DND5E.toolProficiencies = {
-  ...DND5E.toolTypes,
-  vehicle: "DND5E.ToolVehicle"
+SHAPER.toolProficiencies = {
+  ...SHAPER.toolTypes,
+  vehicle: "SHAPER.ToolVehicle"
 };
 preLocalize("toolProficiencies", { sort: true });
 
@@ -226,7 +226,7 @@ preLocalize("toolProficiencies", { sort: true });
  * starting equipment provided by classes and backgrounds.
  * @enum {string}
  */
-DND5E.toolIds = {
+SHAPER.toolIds = {
   alchemist: "SztwZhbhZeCqyAes",
   bagpipes: "yxHi57T5mmVt0oDr",
   brewer: "Y9S75go1hLMXUD48",
@@ -271,17 +271,17 @@ DND5E.toolIds = {
  * The various lengths of time over which effects can occur.
  * @enum {string}
  */
-DND5E.timePeriods = {
-  inst: "DND5E.TimeInst",
-  turn: "DND5E.TimeTurn",
-  round: "DND5E.TimeRound",
-  minute: "DND5E.TimeMinute",
-  hour: "DND5E.TimeHour",
-  day: "DND5E.TimeDay",
-  month: "DND5E.TimeMonth",
-  year: "DND5E.TimeYear",
-  perm: "DND5E.TimePerm",
-  spec: "DND5E.Special"
+SHAPER.timePeriods = {
+  inst: "SHAPER.TimeInst",
+  turn: "SHAPER.TimeTurn",
+  round: "SHAPER.TimeRound",
+  minute: "SHAPER.TimeMinute",
+  hour: "SHAPER.TimeHour",
+  day: "SHAPER.TimeDay",
+  month: "SHAPER.TimeMonth",
+  year: "SHAPER.TimeYear",
+  perm: "SHAPER.TimePerm",
+  spec: "SHAPER.Special"
 };
 preLocalize("timePeriods");
 
@@ -291,18 +291,18 @@ preLocalize("timePeriods");
  * Various ways in which an item or ability can be activated.
  * @enum {string}
  */
-DND5E.abilityActivationTypes = {
-  none: "DND5E.None",
-  action: "DND5E.Action",
-  bonus: "DND5E.BonusAction",
-  reaction: "DND5E.Reaction",
-  minute: DND5E.timePeriods.minute,
-  hour: DND5E.timePeriods.hour,
-  day: DND5E.timePeriods.day,
-  special: DND5E.timePeriods.spec,
-  legendary: "DND5E.LegendaryActionLabel",
-  lair: "DND5E.LairActionLabel",
-  crew: "DND5E.VehicleCrewAction"
+SHAPER.abilityActivationTypes = {
+  none: "SHAPER.None",
+  action: "SHAPER.Action",
+  bonus: "SHAPER.BonusAction",
+  reaction: "SHAPER.Reaction",
+  minute: SHAPER.timePeriods.minute,
+  hour: SHAPER.timePeriods.hour,
+  day: SHAPER.timePeriods.day,
+  special: SHAPER.timePeriods.spec,
+  legendary: "SHAPER.LegendaryActionLabel",
+  lair: "SHAPER.LairActionLabel",
+  crew: "SHAPER.VehicleCrewAction"
 };
 preLocalize("abilityActivationTypes", { sort: true });
 
@@ -312,12 +312,12 @@ preLocalize("abilityActivationTypes", { sort: true });
  * Different things that an ability can consume upon use.
  * @enum {string}
  */
-DND5E.abilityConsumptionTypes = {
-  ammo: "DND5E.ConsumeAmmunition",
-  attribute: "DND5E.ConsumeAttribute",
-  hitDice: "DND5E.ConsumeHitDice",
-  material: "DND5E.ConsumeMaterial",
-  charges: "DND5E.ConsumeCharges"
+SHAPER.abilityConsumptionTypes = {
+  ammo: "SHAPER.ConsumeAmmunition",
+  attribute: "SHAPER.ConsumeAttribute",
+  hitDice: "SHAPER.ConsumeHitDice",
+  material: "SHAPER.ConsumeMaterial",
+  charges: "SHAPER.ConsumeCharges"
 };
 preLocalize("abilityConsumptionTypes", { sort: true });
 
@@ -327,21 +327,21 @@ preLocalize("abilityConsumptionTypes", { sort: true });
  * Creature sizes.
  * @enum {string}
  */
-DND5E.actorSizes = {
-  tiny: "DND5E.SizeTiny",
-  sm: "DND5E.SizeSmall",
-  med: "DND5E.SizeMedium",
-  lg: "DND5E.SizeLarge",
-  huge: "DND5E.SizeHuge",
-  grg: "DND5E.SizeGargantuan"
+SHAPER.actorSizes = {
+  tiny: "SHAPER.SizeTiny",
+  sm: "SHAPER.SizeSmall",
+  med: "SHAPER.SizeMedium",
+  lg: "SHAPER.SizeLarge",
+  huge: "SHAPER.SizeHuge",
+  grg: "SHAPER.SizeGargantuan"
 };
 preLocalize("actorSizes");
 
 /**
- * Default token image size for the values of `DND5E.actorSizes`.
+ * Default token image size for the values of `SHAPER.actorSizes`.
  * @enum {number}
  */
-DND5E.tokenSizes = {
+SHAPER.tokenSizes = {
   tiny: 0.5,
   sm: 1,
   med: 1,
@@ -354,7 +354,7 @@ DND5E.tokenSizes = {
  * Colors used to visualize temporary and temporary maximum HP in token health bars.
  * @enum {number}
  */
-DND5E.tokenHPColors = {
+SHAPER.tokenHPColors = {
   damage: 0xFF0000,
   healing: 0x00FF00,
   temp: 0x66CCFF,
@@ -369,21 +369,21 @@ DND5E.tokenHPColors = {
  * *Note: Not pre-localized to allow for easy fetching of pluralized forms.*
  * @enum {string}
  */
-DND5E.creatureTypes = {
-  aberration: "DND5E.CreatureAberration",
-  beast: "DND5E.CreatureBeast",
-  celestial: "DND5E.CreatureCelestial",
-  construct: "DND5E.CreatureConstruct",
-  dragon: "DND5E.CreatureDragon",
-  elemental: "DND5E.CreatureElemental",
-  fey: "DND5E.CreatureFey",
-  fiend: "DND5E.CreatureFiend",
-  giant: "DND5E.CreatureGiant",
-  humanoid: "DND5E.CreatureHumanoid",
-  monstrosity: "DND5E.CreatureMonstrosity",
-  ooze: "DND5E.CreatureOoze",
-  plant: "DND5E.CreaturePlant",
-  undead: "DND5E.CreatureUndead"
+SHAPER.creatureTypes = {
+  aberration: "SHAPER.CreatureAberration",
+  beast: "SHAPER.CreatureBeast",
+  celestial: "SHAPER.CreatureCelestial",
+  construct: "SHAPER.CreatureConstruct",
+  dragon: "SHAPER.CreatureDragon",
+  elemental: "SHAPER.CreatureElemental",
+  fey: "SHAPER.CreatureFey",
+  fiend: "SHAPER.CreatureFiend",
+  giant: "SHAPER.CreatureGiant",
+  humanoid: "SHAPER.CreatureHumanoid",
+  monstrosity: "SHAPER.CreatureMonstrosity",
+  ooze: "SHAPER.CreatureOoze",
+  plant: "SHAPER.CreaturePlant",
+  undead: "SHAPER.CreatureUndead"
 };
 
 /* -------------------------------------------- */
@@ -392,16 +392,16 @@ DND5E.creatureTypes = {
  * Classification types for item action types.
  * @enum {string}
  */
-DND5E.itemActionTypes = {
-  mwak: "DND5E.ActionMWAK",
-  rwak: "DND5E.ActionRWAK",
-  msak: "DND5E.ActionMSAK",
-  rsak: "DND5E.ActionRSAK",
-  save: "DND5E.ActionSave",
-  heal: "DND5E.ActionHeal",
-  abil: "DND5E.ActionAbil",
-  util: "DND5E.ActionUtil",
-  other: "DND5E.ActionOther"
+SHAPER.itemActionTypes = {
+  mwak: "SHAPER.ActionMWAK",
+  rwak: "SHAPER.ActionRWAK",
+  msak: "SHAPER.ActionMSAK",
+  rsak: "SHAPER.ActionRSAK",
+  save: "SHAPER.ActionSave",
+  heal: "SHAPER.ActionHeal",
+  abil: "SHAPER.ActionAbil",
+  util: "SHAPER.ActionUtil",
+  other: "SHAPER.ActionOther"
 };
 preLocalize("itemActionTypes");
 
@@ -411,9 +411,9 @@ preLocalize("itemActionTypes");
  * Different ways in which item capacity can be limited.
  * @enum {string}
  */
-DND5E.itemCapacityTypes = {
-  items: "DND5E.ItemContainerCapacityItems",
-  weight: "DND5E.ItemContainerCapacityWeight"
+SHAPER.itemCapacityTypes = {
+  items: "SHAPER.ItemContainerCapacityItems",
+  weight: "SHAPER.ItemContainerCapacityWeight"
 };
 preLocalize("itemCapacityTypes", { sort: true });
 
@@ -423,13 +423,13 @@ preLocalize("itemCapacityTypes", { sort: true });
  * List of various item rarities.
  * @enum {string}
  */
-DND5E.itemRarity = {
-  common: "DND5E.ItemRarityCommon",
-  uncommon: "DND5E.ItemRarityUncommon",
-  rare: "DND5E.ItemRarityRare",
-  veryRare: "DND5E.ItemRarityVeryRare",
-  legendary: "DND5E.ItemRarityLegendary",
-  artifact: "DND5E.ItemRarityArtifact"
+SHAPER.itemRarity = {
+  common: "SHAPER.ItemRarityCommon",
+  uncommon: "SHAPER.ItemRarityUncommon",
+  rare: "SHAPER.ItemRarityRare",
+  veryRare: "SHAPER.ItemRarityVeryRare",
+  legendary: "SHAPER.ItemRarityLegendary",
+  artifact: "SHAPER.ItemRarityArtifact"
 };
 preLocalize("itemRarity");
 
@@ -439,11 +439,11 @@ preLocalize("itemRarity");
  * Enumerate the lengths of time over which an item can have limited use ability.
  * @enum {string}
  */
-DND5E.limitedUsePeriods = {
-  sr: "DND5E.ShortRest",
-  lr: "DND5E.LongRest",
-  day: "DND5E.Day",
-  charges: "DND5E.Charges"
+SHAPER.limitedUsePeriods = {
+  sr: "SHAPER.ShortRest",
+  lr: "SHAPER.LongRest",
+  day: "SHAPER.Day",
+  charges: "SHAPER.Charges"
 };
 preLocalize("limitedUsePeriods");
 
@@ -453,12 +453,12 @@ preLocalize("limitedUsePeriods");
  * Specific equipment types that modify base AC.
  * @enum {string}
  */
-DND5E.armorTypes = {
-  light: "DND5E.EquipmentLight",
-  medium: "DND5E.EquipmentMedium",
-  heavy: "DND5E.EquipmentHeavy",
-  natural: "DND5E.EquipmentNatural",
-  shield: "DND5E.EquipmentShield"
+SHAPER.armorTypes = {
+  light: "SHAPER.EquipmentLight",
+  medium: "SHAPER.EquipmentMedium",
+  heavy: "SHAPER.EquipmentHeavy",
+  natural: "SHAPER.EquipmentNatural",
+  shield: "SHAPER.EquipmentShield"
 };
 preLocalize("armorTypes");
 
@@ -468,10 +468,10 @@ preLocalize("armorTypes");
  * Equipment types that aren't armor.
  * @enum {string}
  */
-DND5E.miscEquipmentTypes = {
-  clothing: "DND5E.EquipmentClothing",
-  trinket: "DND5E.EquipmentTrinket",
-  vehicle: "DND5E.EquipmentVehicle"
+SHAPER.miscEquipmentTypes = {
+  clothing: "SHAPER.EquipmentClothing",
+  trinket: "SHAPER.EquipmentTrinket",
+  vehicle: "SHAPER.EquipmentVehicle"
 };
 preLocalize("miscEquipmentTypes", { sort: true });
 
@@ -481,9 +481,9 @@ preLocalize("miscEquipmentTypes", { sort: true });
  * The set of equipment types for armor, clothing, and other objects which can be worn by the character.
  * @enum {string}
  */
-DND5E.equipmentTypes = {
-  ...DND5E.miscEquipmentTypes,
-  ...DND5E.armorTypes
+SHAPER.equipmentTypes = {
+  ...SHAPER.miscEquipmentTypes,
+  ...SHAPER.armorTypes
 };
 preLocalize("equipmentTypes", { sort: true });
 
@@ -493,11 +493,11 @@ preLocalize("equipmentTypes", { sort: true });
  * The various types of vehicles in which characters can be proficient.
  * @enum {string}
  */
-DND5E.vehicleTypes = {
-  air: "DND5E.VehicleTypeAir",
-  land: "DND5E.VehicleTypeLand",
-  space: "DND5E.VehicleTypeSpace",
-  water: "DND5E.VehicleTypeWater"
+SHAPER.vehicleTypes = {
+  air: "SHAPER.VehicleTypeAir",
+  land: "SHAPER.VehicleTypeLand",
+  space: "SHAPER.VehicleTypeSpace",
+  water: "SHAPER.VehicleTypeWater"
 };
 preLocalize("vehicleTypes", { sort: true });
 
@@ -507,20 +507,20 @@ preLocalize("vehicleTypes", { sort: true });
  * The set of Armor Proficiencies which a character may have.
  * @type {object}
  */
-DND5E.armorProficiencies = {
-  lgt: DND5E.equipmentTypes.light,
-  med: DND5E.equipmentTypes.medium,
-  hvy: DND5E.equipmentTypes.heavy,
-  shl: "DND5E.EquipmentShieldProficiency"
+SHAPER.armorProficiencies = {
+  lgt: SHAPER.equipmentTypes.light,
+  med: SHAPER.equipmentTypes.medium,
+  hvy: SHAPER.equipmentTypes.heavy,
+  shl: "SHAPER.EquipmentShieldProficiency"
 };
 preLocalize("armorProficiencies");
 
 /**
- * A mapping between `DND5E.equipmentTypes` and `DND5E.armorProficiencies` that
+ * A mapping between `SHAPER.equipmentTypes` and `SHAPER.armorProficiencies` that
  * is used to determine if character has proficiency when adding an item.
  * @enum {(boolean|string)}
  */
-DND5E.armorProficienciesMap = {
+SHAPER.armorProficienciesMap = {
   natural: true,
   clothing: true,
   light: "lgt",
@@ -534,7 +534,7 @@ DND5E.armorProficienciesMap = {
  * automated AC calculation in NPCs, and starting equipment.
  * @enum {string}
  */
-DND5E.armorIds = {
+SHAPER.armorIds = {
   breastplate: "SK2HATQ4abKUlV8i",
   chainmail: "rLMflzmxpe8JGTOA",
   chainshirt: "p2zChy24ZJdVqMSH",
@@ -553,7 +553,7 @@ DND5E.armorIds = {
  * The basic shield in 5e.
  * @enum {string}
  */
-DND5E.shieldIds = {
+SHAPER.shieldIds = {
   shield: "sSs3hSzkKBMNBgTs"
 };
 
@@ -561,37 +561,37 @@ DND5E.shieldIds = {
  * Common armor class calculations.
  * @enum {{ label: string, [formula]: string }}
  */
-DND5E.armorClasses = {
+SHAPER.armorClasses = {
   flat: {
-    label: "DND5E.ArmorClassFlat",
+    label: "SHAPER.ArmorClassFlat",
     formula: "@attributes.ac.flat"
   },
   natural: {
-    label: "DND5E.ArmorClassNatural",
+    label: "SHAPER.ArmorClassNatural",
     formula: "@attributes.ac.flat"
   },
   default: {
-    label: "DND5E.ArmorClassEquipment",
+    label: "SHAPER.ArmorClassEquipment",
     formula: "@attributes.ac.armor + @attributes.ac.dex"
   },
   mage: {
-    label: "DND5E.ArmorClassMage",
+    label: "SHAPER.ArmorClassMage",
     formula: "13 + @abilities.dex.mod"
   },
   draconic: {
-    label: "DND5E.ArmorClassDraconic",
+    label: "SHAPER.ArmorClassDraconic",
     formula: "13 + @abilities.dex.mod"
   },
   unarmoredMonk: {
-    label: "DND5E.ArmorClassUnarmoredMonk",
+    label: "SHAPER.ArmorClassUnarmoredMonk",
     formula: "10 + @abilities.dex.mod + @abilities.wis.mod"
   },
   unarmoredBarb: {
-    label: "DND5E.ArmorClassUnarmoredBarbarian",
+    label: "SHAPER.ArmorClassUnarmoredBarbarian",
     formula: "10 + @abilities.dex.mod + @abilities.con.mod"
   },
   custom: {
-    label: "DND5E.ArmorClassCustom"
+    label: "SHAPER.ArmorClassCustom"
   }
 };
 preLocalize("armorClasses", { key: "label" });
@@ -602,15 +602,15 @@ preLocalize("armorClasses", { key: "label" });
  * Enumerate the valid consumable types which are recognized by the system.
  * @enum {string}
  */
-DND5E.consumableTypes = {
-  ammo: "DND5E.ConsumableAmmunition",
-  potion: "DND5E.ConsumablePotion",
-  poison: "DND5E.ConsumablePoison",
-  food: "DND5E.ConsumableFood",
-  scroll: "DND5E.ConsumableScroll",
-  wand: "DND5E.ConsumableWand",
-  rod: "DND5E.ConsumableRod",
-  trinket: "DND5E.ConsumableTrinket"
+SHAPER.consumableTypes = {
+  ammo: "SHAPER.ConsumableAmmunition",
+  potion: "SHAPER.ConsumablePotion",
+  poison: "SHAPER.ConsumablePoison",
+  food: "SHAPER.ConsumableFood",
+  scroll: "SHAPER.ConsumableScroll",
+  wand: "SHAPER.ConsumableWand",
+  rod: "SHAPER.ConsumableRod",
+  trinket: "SHAPER.ConsumableTrinket"
 };
 preLocalize("consumableTypes", { sort: true });
 
@@ -624,29 +624,29 @@ preLocalize("consumableTypes", { sort: true });
  *   [conversion]: {into: string, each: number}
  * }}
  */
-DND5E.currencies = {
+SHAPER.currencies = {
   pp: {
-    label: "DND5E.CurrencyPP",
-    abbreviation: "DND5E.CurrencyAbbrPP"
+    label: "SHAPER.CurrencyPP",
+    abbreviation: "SHAPER.CurrencyAbbrPP"
   },
   gp: {
-    label: "DND5E.CurrencyGP",
-    abbreviation: "DND5E.CurrencyAbbrGP",
+    label: "SHAPER.CurrencyGP",
+    abbreviation: "SHAPER.CurrencyAbbrGP",
     conversion: {into: "pp", each: 10}
   },
   ep: {
-    label: "DND5E.CurrencyEP",
-    abbreviation: "DND5E.CurrencyAbbrEP",
+    label: "SHAPER.CurrencyEP",
+    abbreviation: "SHAPER.CurrencyAbbrEP",
     conversion: {into: "gp", each: 2}
   },
   sp: {
-    label: "DND5E.CurrencySP",
-    abbreviation: "DND5E.CurrencyAbbrSP",
+    label: "SHAPER.CurrencySP",
+    abbreviation: "SHAPER.CurrencyAbbrSP",
     conversion: {into: "ep", each: 5}
   },
   cp: {
-    label: "DND5E.CurrencyCP",
-    abbreviation: "DND5E.CurrencyAbbrCP",
+    label: "SHAPER.CurrencyCP",
+    abbreviation: "SHAPER.CurrencyAbbrCP",
     conversion: {into: "sp", each: 10}
   }
 };
@@ -660,10 +660,10 @@ preLocalize("currencies", { keys: ["label", "abbreviation"] });
  * Types of damage that are considered physical.
  * @enum {string}
  */
-DND5E.physicalDamageTypes = {
-  bludgeoning: "DND5E.DamageBludgeoning",
-  piercing: "DND5E.DamagePiercing",
-  slashing: "DND5E.DamageSlashing"
+SHAPER.physicalDamageTypes = {
+  bludgeoning: "SHAPER.DamageBludgeoning",
+  piercing: "SHAPER.DamagePiercing",
+  slashing: "SHAPER.DamageSlashing"
 };
 preLocalize("physicalDamageTypes", { sort: true });
 
@@ -673,18 +673,18 @@ preLocalize("physicalDamageTypes", { sort: true });
  * Types of damage the can be caused by abilities.
  * @enum {string}
  */
-DND5E.damageTypes = {
-  ...DND5E.physicalDamageTypes,
-  acid: "DND5E.DamageAcid",
-  cold: "DND5E.DamageCold",
-  fire: "DND5E.DamageFire",
-  force: "DND5E.DamageForce",
-  lightning: "DND5E.DamageLightning",
-  necrotic: "DND5E.DamageNecrotic",
-  poison: "DND5E.DamagePoison",
-  psychic: "DND5E.DamagePsychic",
-  radiant: "DND5E.DamageRadiant",
-  thunder: "DND5E.DamageThunder"
+SHAPER.damageTypes = {
+  ...SHAPER.physicalDamageTypes,
+  acid: "SHAPER.DamageAcid",
+  cold: "SHAPER.DamageCold",
+  fire: "SHAPER.DamageFire",
+  force: "SHAPER.DamageForce",
+  lightning: "SHAPER.DamageLightning",
+  necrotic: "SHAPER.DamageNecrotic",
+  poison: "SHAPER.DamagePoison",
+  psychic: "SHAPER.DamagePsychic",
+  radiant: "SHAPER.DamageRadiant",
+  thunder: "SHAPER.DamageThunder"
 };
 preLocalize("damageTypes", { sort: true });
 
@@ -695,9 +695,9 @@ preLocalize("damageTypes", { sort: true });
  * @enum {string}
  * @deprecated
  */
-DND5E.damageResistanceTypes = {
-  ...DND5E.damageTypes,
-  physical: "DND5E.DamagePhysical"
+SHAPER.damageResistanceTypes = {
+  ...SHAPER.damageTypes,
+  physical: "SHAPER.DamagePhysical"
 };
 preLocalize("damageResistanceTypes", { sort: true });
 
@@ -710,12 +710,12 @@ preLocalize("damageResistanceTypes", { sort: true });
  * By default this uses the imperial units of feet and miles.
  * @enum {string}
  */
-DND5E.movementTypes = {
-  burrow: "DND5E.MovementBurrow",
-  climb: "DND5E.MovementClimb",
-  fly: "DND5E.MovementFly",
-  swim: "DND5E.MovementSwim",
-  walk: "DND5E.MovementWalk"
+SHAPER.movementTypes = {
+  burrow: "SHAPER.MovementBurrow",
+  climb: "SHAPER.MovementClimb",
+  fly: "SHAPER.MovementFly",
+  swim: "SHAPER.MovementSwim",
+  walk: "SHAPER.MovementWalk"
 };
 preLocalize("movementTypes", { sort: true });
 
@@ -724,26 +724,26 @@ preLocalize("movementTypes", { sort: true });
  * By default this uses the imperial units of feet and miles.
  * @enum {string}
  */
-DND5E.movementUnits = {
-  ft: "DND5E.DistFt",
-  mi: "DND5E.DistMi",
-  m: "DND5E.DistM",
-  km: "DND5E.DistKm"
+SHAPER.movementUnits = {
+  ft: "SHAPER.DistFt",
+  mi: "SHAPER.DistMi",
+  m: "SHAPER.DistM",
+  km: "SHAPER.DistKm"
 };
 preLocalize("movementUnits");
 
 /**
  * The valid units of measure for the range of an action or effect.
- * This object automatically includes the movement units from `DND5E.movementUnits`.
+ * This object automatically includes the movement units from `SHAPER.movementUnits`.
  * @enum {string}
  */
-DND5E.distanceUnits = {
-  none: "DND5E.None",
-  self: "DND5E.DistSelf",
-  touch: "DND5E.DistTouch",
-  spec: "DND5E.Special",
-  any: "DND5E.DistAny",
-  ...DND5E.movementUnits
+SHAPER.distanceUnits = {
+  none: "SHAPER.None",
+  self: "SHAPER.DistSelf",
+  touch: "SHAPER.DistTouch",
+  spec: "SHAPER.Special",
+  any: "SHAPER.DistAny",
+  ...SHAPER.movementUnits
 };
 preLocalize("distanceUnits");
 
@@ -753,7 +753,7 @@ preLocalize("distanceUnits");
  * Configure aspects of encumbrance calculation so that it could be configured by modules.
  * @enum {{ imperial: number, metric: number }}
  */
-DND5E.encumbrance = {
+SHAPER.encumbrance = {
   currencyPerWeight: {
     imperial: 50,
     metric: 110
@@ -774,33 +774,33 @@ DND5E.encumbrance = {
  * The types of single or area targets which can be applied to abilities.
  * @enum {string}
  */
-DND5E.targetTypes = {
-  none: "DND5E.None",
-  self: "DND5E.TargetSelf",
-  creature: "DND5E.TargetCreature",
-  ally: "DND5E.TargetAlly",
-  enemy: "DND5E.TargetEnemy",
-  object: "DND5E.TargetObject",
-  space: "DND5E.TargetSpace",
-  radius: "DND5E.TargetRadius",
-  sphere: "DND5E.TargetSphere",
-  cylinder: "DND5E.TargetCylinder",
-  cone: "DND5E.TargetCone",
-  square: "DND5E.TargetSquare",
-  cube: "DND5E.TargetCube",
-  line: "DND5E.TargetLine",
-  wall: "DND5E.TargetWall"
+SHAPER.targetTypes = {
+  none: "SHAPER.None",
+  self: "SHAPER.TargetSelf",
+  creature: "SHAPER.TargetCreature",
+  ally: "SHAPER.TargetAlly",
+  enemy: "SHAPER.TargetEnemy",
+  object: "SHAPER.TargetObject",
+  space: "SHAPER.TargetSpace",
+  radius: "SHAPER.TargetRadius",
+  sphere: "SHAPER.TargetSphere",
+  cylinder: "SHAPER.TargetCylinder",
+  cone: "SHAPER.TargetCone",
+  square: "SHAPER.TargetSquare",
+  cube: "SHAPER.TargetCube",
+  line: "SHAPER.TargetLine",
+  wall: "SHAPER.TargetWall"
 };
 preLocalize("targetTypes", { sort: true });
 
 /* -------------------------------------------- */
 
 /**
- * Mapping between `DND5E.targetTypes` and `MeasuredTemplate` shape types to define
+ * Mapping between `SHAPER.targetTypes` and `MeasuredTemplate` shape types to define
  * which templates are produced by which area of effect target type.
  * @enum {string}
  */
-DND5E.areaTargetTypes = {
+SHAPER.areaTargetTypes = {
   cone: "cone",
   cube: "rect",
   cylinder: "circle",
@@ -817,9 +817,9 @@ DND5E.areaTargetTypes = {
  * Different types of healing that can be applied using abilities.
  * @enum {string}
  */
-DND5E.healingTypes = {
-  healing: "DND5E.Healing",
-  temphp: "DND5E.HealingTemp"
+SHAPER.healingTypes = {
+  healing: "SHAPER.Healing",
+  temphp: "SHAPER.HealingTemp"
 };
 preLocalize("healingTypes");
 
@@ -829,7 +829,7 @@ preLocalize("healingTypes");
  * Denominations of hit dice which can apply to classes.
  * @type {string[]}
  */
-DND5E.hitDieTypes = ["d4", "d6", "d8", "d10", "d12"];
+SHAPER.hitDieTypes = ["d4", "d6", "d8", "d10", "d12"];
 
 /* -------------------------------------------- */
 
@@ -837,11 +837,11 @@ DND5E.hitDieTypes = ["d4", "d6", "d8", "d10", "d12"];
  * The set of possible sensory perception types which an Actor may have.
  * @enum {string}
  */
-DND5E.senses = {
-  blindsight: "DND5E.SenseBlindsight",
-  darkvision: "DND5E.SenseDarkvision",
-  tremorsense: "DND5E.SenseTremorsense",
-  truesight: "DND5E.SenseTruesight"
+SHAPER.senses = {
+  blindsight: "SHAPER.SenseBlindsight",
+  darkvision: "SHAPER.SenseDarkvision",
+  tremorsense: "SHAPER.SenseTremorsense",
+  truesight: "SHAPER.SenseTruesight"
 };
 preLocalize("senses", { sort: true });
 
@@ -850,32 +850,32 @@ preLocalize("senses", { sort: true });
 /**
  * Various different ways a spell can be prepared.
  */
-DND5E.spellPreparationModes = {
-  prepared: "DND5E.SpellPrepPrepared",
-  pact: "DND5E.PactMagic",
-  always: "DND5E.SpellPrepAlways",
-  atwill: "DND5E.SpellPrepAtWill",
-  innate: "DND5E.SpellPrepInnate"
+SHAPER.spellPreparationModes = {
+  prepared: "SHAPER.SpellPrepPrepared",
+  pact: "SHAPER.PactMagic",
+  always: "SHAPER.SpellPrepAlways",
+  atwill: "SHAPER.SpellPrepAtWill",
+  innate: "SHAPER.SpellPrepInnate"
 };
 preLocalize("spellPreparationModes");
 
 /**
- * Subset of `DND5E.spellPreparationModes` that consume spell slots.
+ * Subset of `SHAPER.spellPreparationModes` that consume spell slots.
  * @type {boolean[]}
  */
-DND5E.spellUpcastModes = ["always", "pact", "prepared"];
+SHAPER.spellUpcastModes = ["always", "pact", "prepared"];
 
 /**
  * Ways in which a class can contribute to spellcasting levels.
  * @enum {string}
  */
-DND5E.spellProgression = {
-  none: "DND5E.SpellNone",
-  full: "DND5E.SpellProgFull",
-  half: "DND5E.SpellProgHalf",
-  third: "DND5E.SpellProgThird",
-  pact: "DND5E.SpellProgPact",
-  artificer: "DND5E.SpellProgArt"
+SHAPER.spellProgression = {
+  none: "SHAPER.SpellNone",
+  full: "SHAPER.SpellProgFull",
+  half: "SHAPER.SpellProgHalf",
+  third: "SHAPER.SpellProgThird",
+  pact: "SHAPER.SpellProgPact",
+  artificer: "SHAPER.SpellProgArt"
 };
 preLocalize("spellProgression");
 
@@ -885,10 +885,10 @@ preLocalize("spellProgression");
  * The available choices for how spell damage scaling may be computed.
  * @enum {string}
  */
-DND5E.spellScalingModes = {
-  none: "DND5E.SpellNone",
-  cantrip: "DND5E.SpellCantrip",
-  level: "DND5E.SpellLevel"
+SHAPER.spellScalingModes = {
+  none: "SHAPER.SpellNone",
+  cantrip: "SHAPER.SpellCantrip",
+  level: "SHAPER.SpellLevel"
 };
 preLocalize("spellScalingModes", { sort: true });
 
@@ -900,14 +900,14 @@ preLocalize("spellScalingModes", { sort: true });
  * The set of types which a weapon item can take.
  * @enum {string}
  */
-DND5E.weaponTypes = {
-  simpleM: "DND5E.WeaponSimpleM",
-  simpleR: "DND5E.WeaponSimpleR",
-  martialM: "DND5E.WeaponMartialM",
-  martialR: "DND5E.WeaponMartialR",
-  natural: "DND5E.WeaponNatural",
-  improv: "DND5E.WeaponImprov",
-  siege: "DND5E.WeaponSiege"
+SHAPER.weaponTypes = {
+  simpleM: "SHAPER.WeaponSimpleM",
+  simpleR: "SHAPER.WeaponSimpleR",
+  martialM: "SHAPER.WeaponMartialM",
+  martialR: "SHAPER.WeaponMartialR",
+  natural: "SHAPER.WeaponNatural",
+  improv: "SHAPER.WeaponImprov",
+  siege: "SHAPER.WeaponSiege"
 };
 preLocalize("weaponTypes");
 
@@ -918,10 +918,10 @@ preLocalize("weaponTypes");
  * These properties are used for determining physical resistance bypasses.
  * @enum {string}
  */
-DND5E.physicalWeaponProperties = {
-  ada: "DND5E.WeaponPropertiesAda",
-  mgc: "DND5E.WeaponPropertiesMgc",
-  sil: "DND5E.WeaponPropertiesSil"
+SHAPER.physicalWeaponProperties = {
+  ada: "SHAPER.WeaponPropertiesAda",
+  mgc: "SHAPER.WeaponPropertiesMgc",
+  sil: "SHAPER.WeaponPropertiesSil"
 };
 preLocalize("physicalWeaponProperties", { sort: true });
 
@@ -931,22 +931,22 @@ preLocalize("physicalWeaponProperties", { sort: true });
  * The set of weapon property flags which can exist on a weapon.
  * @enum {string}
  */
-DND5E.weaponProperties = {
-  ...DND5E.physicalWeaponProperties,
-  amm: "DND5E.WeaponPropertiesAmm",
-  fin: "DND5E.WeaponPropertiesFin",
-  fir: "DND5E.WeaponPropertiesFir",
-  foc: "DND5E.WeaponPropertiesFoc",
-  hvy: "DND5E.WeaponPropertiesHvy",
-  lgt: "DND5E.WeaponPropertiesLgt",
-  lod: "DND5E.WeaponPropertiesLod",
-  rch: "DND5E.WeaponPropertiesRch",
-  rel: "DND5E.WeaponPropertiesRel",
-  ret: "DND5E.WeaponPropertiesRet",
-  spc: "DND5E.WeaponPropertiesSpc",
-  thr: "DND5E.WeaponPropertiesThr",
-  two: "DND5E.WeaponPropertiesTwo",
-  ver: "DND5E.WeaponPropertiesVer"
+SHAPER.weaponProperties = {
+  ...SHAPER.physicalWeaponProperties,
+  amm: "SHAPER.WeaponPropertiesAmm",
+  fin: "SHAPER.WeaponPropertiesFin",
+  fir: "SHAPER.WeaponPropertiesFir",
+  foc: "SHAPER.WeaponPropertiesFoc",
+  hvy: "SHAPER.WeaponPropertiesHvy",
+  lgt: "SHAPER.WeaponPropertiesLgt",
+  lod: "SHAPER.WeaponPropertiesLod",
+  rch: "SHAPER.WeaponPropertiesRch",
+  rel: "SHAPER.WeaponPropertiesRel",
+  ret: "SHAPER.WeaponPropertiesRet",
+  spc: "SHAPER.WeaponPropertiesSpc",
+  thr: "SHAPER.WeaponPropertiesThr",
+  two: "SHAPER.WeaponPropertiesTwo",
+  ver: "SHAPER.WeaponPropertiesVer"
 };
 preLocalize("weaponProperties", { sort: true });
 
@@ -958,18 +958,18 @@ preLocalize("weaponProperties", { sort: true });
  * Types of components that can be required when casting a spell.
  * @enum {object}
  */
-DND5E.spellComponents = {
+SHAPER.spellComponents = {
   vocal: {
-    label: "DND5E.ComponentVerbal",
-    abbr: "DND5E.ComponentVerbalAbbr"
+    label: "SHAPER.ComponentVerbal",
+    abbr: "SHAPER.ComponentVerbalAbbr"
   },
   somatic: {
-    label: "DND5E.ComponentSomatic",
-    abbr: "DND5E.ComponentSomaticAbbr"
+    label: "SHAPER.ComponentSomatic",
+    abbr: "SHAPER.ComponentSomaticAbbr"
   },
   material: {
-    label: "DND5E.ComponentMaterial",
-    abbr: "DND5E.ComponentMaterialAbbr"
+    label: "SHAPER.ComponentMaterial",
+    abbr: "SHAPER.ComponentMaterialAbbr"
   }
 };
 preLocalize("spellComponents", {keys: ["label", "abbr"]});
@@ -978,14 +978,14 @@ preLocalize("spellComponents", {keys: ["label", "abbr"]});
  * Supplementary rules keywords that inform a spell's use.
  * @enum {object}
  */
-DND5E.spellTags = {
+SHAPER.spellTags = {
   concentration: {
-    label: "DND5E.Concentration",
-    abbr: "DND5E.ConcentrationAbbr"
+    label: "SHAPER.Concentration",
+    abbr: "SHAPER.ConcentrationAbbr"
   },
   ritual: {
-    label: "DND5E.Ritual",
-    abbr: "DND5E.RitualAbbr"
+    label: "SHAPER.Ritual",
+    abbr: "SHAPER.RitualAbbr"
   }
 };
 preLocalize("spellTags", {keys: ["label", "abbr"]});
@@ -994,15 +994,15 @@ preLocalize("spellTags", {keys: ["label", "abbr"]});
  * Schools to which a spell can belong.
  * @enum {string}
  */
-DND5E.spellSchools = {
-  abj: "DND5E.SchoolAbj",
-  con: "DND5E.SchoolCon",
-  div: "DND5E.SchoolDiv",
-  enc: "DND5E.SchoolEnc",
-  evo: "DND5E.SchoolEvo",
-  ill: "DND5E.SchoolIll",
-  nec: "DND5E.SchoolNec",
-  trs: "DND5E.SchoolTrs"
+SHAPER.spellSchools = {
+  abj: "SHAPER.SchoolAbj",
+  con: "SHAPER.SchoolCon",
+  div: "SHAPER.SchoolDiv",
+  enc: "SHAPER.SchoolEnc",
+  evo: "SHAPER.SchoolEvo",
+  ill: "SHAPER.SchoolIll",
+  nec: "SHAPER.SchoolNec",
+  trs: "SHAPER.SchoolTrs"
 };
 preLocalize("spellSchools", { sort: true });
 
@@ -1010,25 +1010,25 @@ preLocalize("spellSchools", { sort: true });
  * Valid spell levels.
  * @enum {string}
  */
-DND5E.spellLevels = {
-  0: "DND5E.SpellLevel0",
-  1: "DND5E.SpellLevel1",
-  2: "DND5E.SpellLevel2",
-  3: "DND5E.SpellLevel3",
-  4: "DND5E.SpellLevel4",
-  5: "DND5E.SpellLevel5",
-  6: "DND5E.SpellLevel6",
-  7: "DND5E.SpellLevel7",
-  8: "DND5E.SpellLevel8",
-  9: "DND5E.SpellLevel9"
+SHAPER.spellLevels = {
+  0: "SHAPER.SpellLevel0",
+  1: "SHAPER.SpellLevel1",
+  2: "SHAPER.SpellLevel2",
+  3: "SHAPER.SpellLevel3",
+  4: "SHAPER.SpellLevel4",
+  5: "SHAPER.SpellLevel5",
+  6: "SHAPER.SpellLevel6",
+  7: "SHAPER.SpellLevel7",
+  8: "SHAPER.SpellLevel8",
+  9: "SHAPER.SpellLevel9"
 };
 preLocalize("spellLevels");
 
 /**
- * Spell scroll item ID within the `DND5E.sourcePacks` compendium for each level.
+ * Spell scroll item ID within the `SHAPER.sourcePacks` compendium for each level.
  * @enum {string}
  */
-DND5E.spellScrollIds = {
+SHAPER.spellScrollIds = {
   0: "rQ6sO7HDWzqMhSI3",
   1: "9GSfMg0VOA2b4uFN",
   2: "XdDp6CKh9qEvPTuS",
@@ -1045,8 +1045,8 @@ DND5E.spellScrollIds = {
  * Compendium packs used for localized items.
  * @enum {string}
  */
-DND5E.sourcePacks = {
-  ITEMS: "dnd5e.items"
+SHAPER.sourcePacks = {
+  ITEMS: "shaper.items"
 };
 
 /**
@@ -1054,7 +1054,7 @@ DND5E.sourcePacks = {
  * The entries of this array represent the spell slot progression for a full spell-caster.
  * @type {number[][]}
  */
-DND5E.SPELL_SLOT_TABLE = [
+SHAPER.SPELL_SLOT_TABLE = [
   [2],
   [3],
   [4, 2],
@@ -1083,19 +1083,19 @@ DND5E.SPELL_SLOT_TABLE = [
  * Settings to configure how actors are merged when polymorphing is applied.
  * @enum {string}
  */
-DND5E.polymorphSettings = {
-  keepPhysical: "DND5E.PolymorphKeepPhysical",
-  keepMental: "DND5E.PolymorphKeepMental",
-  keepSaves: "DND5E.PolymorphKeepSaves",
-  keepSkills: "DND5E.PolymorphKeepSkills",
-  mergeSaves: "DND5E.PolymorphMergeSaves",
-  mergeSkills: "DND5E.PolymorphMergeSkills",
-  keepClass: "DND5E.PolymorphKeepClass",
-  keepFeats: "DND5E.PolymorphKeepFeats",
-  keepSpells: "DND5E.PolymorphKeepSpells",
-  keepItems: "DND5E.PolymorphKeepItems",
-  keepBio: "DND5E.PolymorphKeepBio",
-  keepVision: "DND5E.PolymorphKeepVision"
+SHAPER.polymorphSettings = {
+  keepPhysical: "SHAPER.PolymorphKeepPhysical",
+  keepMental: "SHAPER.PolymorphKeepMental",
+  keepSaves: "SHAPER.PolymorphKeepSaves",
+  keepSkills: "SHAPER.PolymorphKeepSkills",
+  mergeSaves: "SHAPER.PolymorphMergeSaves",
+  mergeSkills: "SHAPER.PolymorphMergeSkills",
+  keepClass: "SHAPER.PolymorphKeepClass",
+  keepFeats: "SHAPER.PolymorphKeepFeats",
+  keepSpells: "SHAPER.PolymorphKeepSpells",
+  keepItems: "SHAPER.PolymorphKeepItems",
+  keepBio: "SHAPER.PolymorphKeepBio",
+  keepVision: "SHAPER.PolymorphKeepVision"
 };
 preLocalize("polymorphSettings", { sort: true });
 
@@ -1106,11 +1106,11 @@ preLocalize("polymorphSettings", { sort: true });
  * The key for each level represents its proficiency multiplier.
  * @enum {string}
  */
-DND5E.proficiencyLevels = {
-  0: "DND5E.NotProficient",
-  1: "DND5E.Proficient",
-  0.5: "DND5E.HalfProficient",
-  2: "DND5E.Expertise"
+SHAPER.proficiencyLevels = {
+  0: "SHAPER.NotProficient",
+  1: "SHAPER.Proficient",
+  0.5: "SHAPER.HalfProficient",
+  2: "SHAPER.Expertise"
 };
 preLocalize("proficiencyLevels");
 
@@ -1121,11 +1121,11 @@ preLocalize("proficiencyLevels");
  * of cover are in play, we take the highest value.
  * @enum {string}
  */
-DND5E.cover = {
-  0: "DND5E.None",
-  .5: "DND5E.CoverHalf",
-  .75: "DND5E.CoverThreeQuarters",
-  1: "DND5E.CoverTotal"
+SHAPER.cover = {
+  0: "SHAPER.None",
+  .5: "SHAPER.CoverHalf",
+  .75: "SHAPER.CoverThreeQuarters",
+  1: "SHAPER.CoverTotal"
 };
 preLocalize("cover");
 
@@ -1135,7 +1135,7 @@ preLocalize("cover");
  * A selection of actor attributes that can be tracked on token resource bars.
  * @type {string[]}
  */
-DND5E.trackableAttributes = [
+SHAPER.trackableAttributes = [
   "attributes.ac.value", "attributes.init.value", "attributes.movement", "attributes.senses", "attributes.spelldc",
   "attributes.spellLevel", "details.cr", "details.spellLevel", "details.xp.value", "skills.*.passive",
   "abilities.*.value"
@@ -1147,7 +1147,7 @@ DND5E.trackableAttributes = [
  * A selection of actor and item attributes that are valid targets for item resource consumption.
  * @type {string[]}
  */
-DND5E.consumableResources = [
+SHAPER.consumableResources = [
   "item.quantity", "item.weight", "item.duration.value", "currency", "details.xp.value", "abilities.*.value",
   "attributes.senses", "attributes.movement", "attributes.ac.flat", "item.armor.value", "item.target", "item.range",
   "item.save.dc"
@@ -1159,23 +1159,23 @@ DND5E.consumableResources = [
  * Conditions that can effect an actor.
  * @enum {string}
  */
-DND5E.conditionTypes = {
-  blinded: "DND5E.ConBlinded",
-  charmed: "DND5E.ConCharmed",
-  deafened: "DND5E.ConDeafened",
-  diseased: "DND5E.ConDiseased",
-  exhaustion: "DND5E.ConExhaustion",
-  frightened: "DND5E.ConFrightened",
-  grappled: "DND5E.ConGrappled",
-  incapacitated: "DND5E.ConIncapacitated",
-  invisible: "DND5E.ConInvisible",
-  paralyzed: "DND5E.ConParalyzed",
-  petrified: "DND5E.ConPetrified",
-  poisoned: "DND5E.ConPoisoned",
-  prone: "DND5E.ConProne",
-  restrained: "DND5E.ConRestrained",
-  stunned: "DND5E.ConStunned",
-  unconscious: "DND5E.ConUnconscious"
+SHAPER.conditionTypes = {
+  blinded: "SHAPER.ConBlinded",
+  charmed: "SHAPER.ConCharmed",
+  deafened: "SHAPER.ConDeafened",
+  diseased: "SHAPER.ConDiseased",
+  exhaustion: "SHAPER.ConExhaustion",
+  frightened: "SHAPER.ConFrightened",
+  grappled: "SHAPER.ConGrappled",
+  incapacitated: "SHAPER.ConIncapacitated",
+  invisible: "SHAPER.ConInvisible",
+  paralyzed: "SHAPER.ConParalyzed",
+  petrified: "SHAPER.ConPetrified",
+  poisoned: "SHAPER.ConPoisoned",
+  prone: "SHAPER.ConProne",
+  restrained: "SHAPER.ConRestrained",
+  stunned: "SHAPER.ConStunned",
+  unconscious: "SHAPER.ConUnconscious"
 };
 preLocalize("conditionTypes", { sort: true });
 
@@ -1183,32 +1183,32 @@ preLocalize("conditionTypes", { sort: true });
  * Languages a character can learn.
  * @enum {string}
  */
-DND5E.languages = {
-  common: "DND5E.LanguagesCommon",
-  aarakocra: "DND5E.LanguagesAarakocra",
-  abyssal: "DND5E.LanguagesAbyssal",
-  aquan: "DND5E.LanguagesAquan",
-  auran: "DND5E.LanguagesAuran",
-  celestial: "DND5E.LanguagesCelestial",
-  deep: "DND5E.LanguagesDeepSpeech",
-  draconic: "DND5E.LanguagesDraconic",
-  druidic: "DND5E.LanguagesDruidic",
-  dwarvish: "DND5E.LanguagesDwarvish",
-  elvish: "DND5E.LanguagesElvish",
-  giant: "DND5E.LanguagesGiant",
-  gith: "DND5E.LanguagesGith",
-  gnomish: "DND5E.LanguagesGnomish",
-  goblin: "DND5E.LanguagesGoblin",
-  gnoll: "DND5E.LanguagesGnoll",
-  halfling: "DND5E.LanguagesHalfling",
-  ignan: "DND5E.LanguagesIgnan",
-  infernal: "DND5E.LanguagesInfernal",
-  orc: "DND5E.LanguagesOrc",
-  primordial: "DND5E.LanguagesPrimordial",
-  sylvan: "DND5E.LanguagesSylvan",
-  terran: "DND5E.LanguagesTerran",
-  cant: "DND5E.LanguagesThievesCant",
-  undercommon: "DND5E.LanguagesUndercommon"
+SHAPER.languages = {
+  common: "SHAPER.LanguagesCommon",
+  aarakocra: "SHAPER.LanguagesAarakocra",
+  abyssal: "SHAPER.LanguagesAbyssal",
+  aquan: "SHAPER.LanguagesAquan",
+  auran: "SHAPER.LanguagesAuran",
+  celestial: "SHAPER.LanguagesCelestial",
+  deep: "SHAPER.LanguagesDeepSpeech",
+  draconic: "SHAPER.LanguagesDraconic",
+  druidic: "SHAPER.LanguagesDruidic",
+  dwarvish: "SHAPER.LanguagesDwarvish",
+  elvish: "SHAPER.LanguagesElvish",
+  giant: "SHAPER.LanguagesGiant",
+  gith: "SHAPER.LanguagesGith",
+  gnomish: "SHAPER.LanguagesGnomish",
+  goblin: "SHAPER.LanguagesGoblin",
+  gnoll: "SHAPER.LanguagesGnoll",
+  halfling: "SHAPER.LanguagesHalfling",
+  ignan: "SHAPER.LanguagesIgnan",
+  infernal: "SHAPER.LanguagesInfernal",
+  orc: "SHAPER.LanguagesOrc",
+  primordial: "SHAPER.LanguagesPrimordial",
+  sylvan: "SHAPER.LanguagesSylvan",
+  terran: "SHAPER.LanguagesTerran",
+  cant: "SHAPER.LanguagesThievesCant",
+  undercommon: "SHAPER.LanguagesUndercommon"
 };
 preLocalize("languages", { sort: true });
 
@@ -1216,13 +1216,13 @@ preLocalize("languages", { sort: true });
  * Maximum allowed character level.
  * @type {number}
  */
-DND5E.maxLevel = 20;
+SHAPER.maxLevel = 20;
 
 /**
  * XP required to achieve each character level.
  * @type {number[]}
  */
-DND5E.CHARACTER_EXP_LEVELS = [
+SHAPER.CHARACTER_EXP_LEVELS = [
   0, 300, 900, 2700, 6500, 14000, 23000, 34000, 48000, 64000, 85000, 100000,
   120000, 140000, 165000, 195000, 225000, 265000, 305000, 355000
 ];
@@ -1231,7 +1231,7 @@ DND5E.CHARACTER_EXP_LEVELS = [
  * XP granted for each challenge rating.
  * @type {number[]}
  */
-DND5E.CR_EXP_LEVELS = [
+SHAPER.CR_EXP_LEVELS = [
   10, 200, 450, 700, 1100, 1800, 2300, 2900, 3900, 5000, 5900, 7200, 8400, 10000, 11500, 13000, 15000, 18000,
   20000, 22000, 25000, 33000, 41000, 50000, 62000, 75000, 90000, 105000, 120000, 135000, 155000
 ];
@@ -1241,7 +1241,7 @@ DND5E.CR_EXP_LEVELS = [
  * @type {object}
  * @deprecated since 1.6.0, targeted for removal in 2.1
  */
-DND5E.classFeatures = ClassFeatures;
+SHAPER.classFeatures = ClassFeatures;
 
 /**
  * Special character flags.
@@ -1256,88 +1256,88 @@ DND5E.classFeatures = ClassFeatures;
  *   placeholder: any
  * }}
  */
-DND5E.characterFlags = {
+SHAPER.characterFlags = {
   diamondSoul: {
-    name: "DND5E.FlagsDiamondSoul",
-    hint: "DND5E.FlagsDiamondSoulHint",
-    section: "DND5E.Feats",
+    name: "SHAPER.FlagsDiamondSoul",
+    hint: "SHAPER.FlagsDiamondSoulHint",
+    section: "SHAPER.Feats",
     type: Boolean
   },
   elvenAccuracy: {
-    name: "DND5E.FlagsElvenAccuracy",
-    hint: "DND5E.FlagsElvenAccuracyHint",
-    section: "DND5E.RacialTraits",
+    name: "SHAPER.FlagsElvenAccuracy",
+    hint: "SHAPER.FlagsElvenAccuracyHint",
+    section: "SHAPER.RacialTraits",
     abilities: ["dex", "int", "wis", "cha"],
     type: Boolean
   },
   halflingLucky: {
-    name: "DND5E.FlagsHalflingLucky",
-    hint: "DND5E.FlagsHalflingLuckyHint",
-    section: "DND5E.RacialTraits",
+    name: "SHAPER.FlagsHalflingLucky",
+    hint: "SHAPER.FlagsHalflingLuckyHint",
+    section: "SHAPER.RacialTraits",
     type: Boolean
   },
   initiativeAdv: {
-    name: "DND5E.FlagsInitiativeAdv",
-    hint: "DND5E.FlagsInitiativeAdvHint",
-    section: "DND5E.Feats",
+    name: "SHAPER.FlagsInitiativeAdv",
+    hint: "SHAPER.FlagsInitiativeAdvHint",
+    section: "SHAPER.Feats",
     type: Boolean
   },
   initiativeAlert: {
-    name: "DND5E.FlagsAlert",
-    hint: "DND5E.FlagsAlertHint",
-    section: "DND5E.Feats",
+    name: "SHAPER.FlagsAlert",
+    hint: "SHAPER.FlagsAlertHint",
+    section: "SHAPER.Feats",
     type: Boolean
   },
   jackOfAllTrades: {
-    name: "DND5E.FlagsJOAT",
-    hint: "DND5E.FlagsJOATHint",
-    section: "DND5E.Feats",
+    name: "SHAPER.FlagsJOAT",
+    hint: "SHAPER.FlagsJOATHint",
+    section: "SHAPER.Feats",
     type: Boolean
   },
   observantFeat: {
-    name: "DND5E.FlagsObservant",
-    hint: "DND5E.FlagsObservantHint",
+    name: "SHAPER.FlagsObservant",
+    hint: "SHAPER.FlagsObservantHint",
     skills: ["prc", "inv"],
-    section: "DND5E.Feats",
+    section: "SHAPER.Feats",
     type: Boolean
   },
   powerfulBuild: {
-    name: "DND5E.FlagsPowerfulBuild",
-    hint: "DND5E.FlagsPowerfulBuildHint",
-    section: "DND5E.RacialTraits",
+    name: "SHAPER.FlagsPowerfulBuild",
+    hint: "SHAPER.FlagsPowerfulBuildHint",
+    section: "SHAPER.RacialTraits",
     type: Boolean
   },
   reliableTalent: {
-    name: "DND5E.FlagsReliableTalent",
-    hint: "DND5E.FlagsReliableTalentHint",
-    section: "DND5E.Feats",
+    name: "SHAPER.FlagsReliableTalent",
+    hint: "SHAPER.FlagsReliableTalentHint",
+    section: "SHAPER.Feats",
     type: Boolean
   },
   remarkableAthlete: {
-    name: "DND5E.FlagsRemarkableAthlete",
-    hint: "DND5E.FlagsRemarkableAthleteHint",
+    name: "SHAPER.FlagsRemarkableAthlete",
+    hint: "SHAPER.FlagsRemarkableAthleteHint",
     abilities: ["str", "dex", "con"],
-    section: "DND5E.Feats",
+    section: "SHAPER.Feats",
     type: Boolean
   },
   weaponCriticalThreshold: {
-    name: "DND5E.FlagsWeaponCritThreshold",
-    hint: "DND5E.FlagsWeaponCritThresholdHint",
-    section: "DND5E.Feats",
+    name: "SHAPER.FlagsWeaponCritThreshold",
+    hint: "SHAPER.FlagsWeaponCritThresholdHint",
+    section: "SHAPER.Feats",
     type: Number,
     placeholder: 20
   },
   spellCriticalThreshold: {
-    name: "DND5E.FlagsSpellCritThreshold",
-    hint: "DND5E.FlagsSpellCritThresholdHint",
-    section: "DND5E.Feats",
+    name: "SHAPER.FlagsSpellCritThreshold",
+    hint: "SHAPER.FlagsSpellCritThresholdHint",
+    section: "SHAPER.Feats",
     type: Number,
     placeholder: 20
   },
   meleeCriticalDamageDice: {
-    name: "DND5E.FlagsMeleeCriticalDice",
-    hint: "DND5E.FlagsMeleeCriticalDiceHint",
-    section: "DND5E.Feats",
+    name: "SHAPER.FlagsMeleeCriticalDice",
+    hint: "SHAPER.FlagsMeleeCriticalDiceHint",
+    section: "SHAPER.Feats",
     type: Number,
     placeholder: 0
   }
@@ -1348,29 +1348,29 @@ preLocalize("characterFlags", { keys: ["name", "hint", "section"] });
  * Flags allowed on actors. Any flags not in the list may be deleted during a migration.
  * @type {string[]}
  */
-DND5E.allowedActorFlags = ["isPolymorphed", "originalActor"].concat(Object.keys(DND5E.characterFlags));
+SHAPER.allowedActorFlags = ["isPolymorphed", "originalActor"].concat(Object.keys(SHAPER.characterFlags));
 
 /* -------------------------------------------- */
 
 /**
  * Patch an existing config enum to allow conversion from string values to object values without
  * breaking existing modules that are expecting strings.
- * @param {string} key          Key within DND5E that has been replaced with an enum of objects.
+ * @param {string} key          Key within SHAPER that has been replaced with an enum of objects.
  * @param {string} fallbackKey  Key within the new config object from which to get the fallback value.
  * @param {object} [options]    Additional options passed through to logCompatibilityWarning.
  */
 function patchConfig(key, fallbackKey, options) {
   /** @override */
   function toString() {
-    const message = `The value of CONFIG.DND5E.${key} has been changed to an object.`
+    const message = `The value of CONFIG.SHAPER.${key} has been changed to an object.`
       +` The former value can be acccessed from .${fallbackKey}.`;
     foundry.utils.logCompatibilityWarning(message, options);
     return this[fallbackKey];
   }
 
-  Object.values(DND5E[key]).forEach(o => o.toString = toString);
+  Object.values(SHAPER[key]).forEach(o => o.toString = toString);
 }
 
 /* -------------------------------------------- */
 
-export default DND5E;
+export default SHAPER;

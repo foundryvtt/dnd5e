@@ -8,7 +8,7 @@
 export default class AbilityUseDialog extends Dialog {
   constructor(item, dialogData={}, options={}) {
     super(dialogData, options);
-    this.options.classes = ["dnd5e", "dialog"];
+    this.options.classes = ["shaper", "dialog"];
 
     /**
      * Store a reference to the Item document being used
@@ -40,7 +40,7 @@ export default class AbilityUseDialog extends Dialog {
     // Prepare dialog form data
     const data = {
       item: item,
-      title: game.i18n.format("DND5E.AbilityUseHint", {type: game.i18n.localize(`DND5E.ItemType${item.type.capitalize()}`), name: item.name}),
+      title: game.i18n.format("SHAPER.AbilityUseHint", {type: game.i18n.localize(`SHAPER.ItemType${item.type.capitalize()}`), name: item.name}),
       note: this._getAbilityUseNote(item, uses, recharge),
       consumeSpellSlot: false,
       consumeRecharge: recharges,
@@ -53,14 +53,14 @@ export default class AbilityUseDialog extends Dialog {
     if ( item.type === "spell" ) this._getSpellData(item.actor.system, item.system, data);
 
     // Render the ability usage template
-    const html = await renderTemplate("systems/dnd5e/templates/apps/ability-use.hbs", data);
+    const html = await renderTemplate("systems/shaper/templates/apps/ability-use.hbs", data);
 
     // Create the Dialog and return data as a Promise
     const icon = data.isSpell ? "fa-magic" : "fa-fist-raised";
-    const label = game.i18n.localize(`DND5E.AbilityUse${data.isSpell ? "Cast" : "Use"}`);
+    const label = game.i18n.localize(`SHAPER.AbilityUse${data.isSpell ? "Cast" : "Use"}`);
     return new Promise(resolve => {
       const dlg = new this(item, {
-        title: `${item.name}: ${game.i18n.localize("DND5E.AbilityUseConfig")}`,
+        title: `${item.name}: ${game.i18n.localize("SHAPER.AbilityUseConfig")}`,
         content: html,
         buttons: {
           use: {
@@ -95,7 +95,7 @@ export default class AbilityUseDialog extends Dialog {
 
     // Determine whether the spell may be up-cast
     const lvl = itemData.level;
-    const consumeSpellSlot = (lvl > 0) && CONFIG.DND5E.spellUpcastModes.includes(itemData.preparation.mode);
+    const consumeSpellSlot = (lvl > 0) && CONFIG.SHAPER.spellUpcastModes.includes(itemData.preparation.mode);
 
     // If can't upcast, return early and don't bother calculating available spell slots
     if (!consumeSpellSlot) {
@@ -106,14 +106,14 @@ export default class AbilityUseDialog extends Dialog {
     let lmax = 0;
     const spellLevels = Array.fromRange(10).reduce((arr, i) => {
       if ( i < lvl ) return arr;
-      const label = CONFIG.DND5E.spellLevels[i];
+      const label = CONFIG.SHAPER.spellLevels[i];
       const l = actorData.spells[`spell${i}`] || {max: 0, override: null};
       let max = parseInt(l.override || l.max || 0);
       let slots = Math.clamped(parseInt(l.value || 0), 0, max);
       if ( max > 0 ) lmax = i;
       arr.push({
         level: i,
-        label: i > 0 ? game.i18n.format("DND5E.SpellLevelSlot", {level: label, n: slots}) : label,
+        label: i > 0 ? game.i18n.format("SHAPER.SpellLevelSlot", {level: label, n: slots}) : label,
         canCast: max > 0,
         hasSlots: slots > 0
       });
@@ -125,14 +125,14 @@ export default class AbilityUseDialog extends Dialog {
     if (pact.level >= lvl) {
       spellLevels.push({
         level: "pact",
-        label: `${game.i18n.format("DND5E.SpellLevelPact", {level: pact.level, n: pact.value})}`,
+        label: `${game.i18n.format("SHAPER.SpellLevelPact", {level: pact.level, n: pact.value})}`,
         canCast: true,
         hasSlots: pact.value > 0
       });
     }
     const canCast = spellLevels.some(l => l.hasSlots);
-    if ( !canCast ) data.errors.push(game.i18n.format("DND5E.SpellCastNoSlots", {
-      level: CONFIG.DND5E.spellLevels[lvl],
+    if ( !canCast ) data.errors.push(game.i18n.format("SHAPER.SpellCastNoSlots", {
+      level: CONFIG.SHAPER.spellLevels[lvl],
       name: data.item.name
     }));
 
@@ -154,12 +154,12 @@ export default class AbilityUseDialog extends Dialog {
 
     // Zero quantity
     const quantity = item.system.quantity;
-    if ( quantity <= 0 ) return game.i18n.localize("DND5E.AbilityUseUnavailableHint");
+    if ( quantity <= 0 ) return game.i18n.localize("SHAPER.AbilityUseUnavailableHint");
 
     // Abilities which use Recharge
     if ( recharge.value ) {
-      return game.i18n.format(recharge.charged ? "DND5E.AbilityUseChargedHint" : "DND5E.AbilityUseRechargeHint", {
-        type: game.i18n.localize(`DND5E.ItemType${item.type.capitalize()}`)
+      return game.i18n.format(recharge.charged ? "SHAPER.AbilityUseChargedHint" : "SHAPER.AbilityUseRechargeHint", {
+        type: game.i18n.localize(`SHAPER.ItemType${item.type.capitalize()}`)
       });
     }
 
@@ -168,26 +168,26 @@ export default class AbilityUseDialog extends Dialog {
 
     // Consumables
     if ( item.type === "consumable" ) {
-      let str = "DND5E.AbilityUseNormalHint";
-      if ( uses.value > 1 ) str = "DND5E.AbilityUseConsumableChargeHint";
-      else if ( item.system.quantity === 1 && uses.autoDestroy ) str = "DND5E.AbilityUseConsumableDestroyHint";
-      else if ( item.system.quantity > 1 ) str = "DND5E.AbilityUseConsumableQuantityHint";
+      let str = "SHAPER.AbilityUseNormalHint";
+      if ( uses.value > 1 ) str = "SHAPER.AbilityUseConsumableChargeHint";
+      else if ( item.system.quantity === 1 && uses.autoDestroy ) str = "SHAPER.AbilityUseConsumableDestroyHint";
+      else if ( item.system.quantity > 1 ) str = "SHAPER.AbilityUseConsumableQuantityHint";
       return game.i18n.format(str, {
-        type: game.i18n.localize(`DND5E.Consumable${item.system.consumableType.capitalize()}`),
+        type: game.i18n.localize(`SHAPER.Consumable${item.system.consumableType.capitalize()}`),
         value: uses.value,
         quantity: item.system.quantity,
         max: uses.max,
-        per: CONFIG.DND5E.limitedUsePeriods[uses.per]
+        per: CONFIG.SHAPER.limitedUsePeriods[uses.per]
       });
     }
 
     // Other Items
     else {
-      return game.i18n.format("DND5E.AbilityUseNormalHint", {
-        type: game.i18n.localize(`DND5E.ItemType${item.type.capitalize()}`),
+      return game.i18n.format("SHAPER.AbilityUseNormalHint", {
+        type: game.i18n.localize(`SHAPER.ItemType${item.type.capitalize()}`),
         value: uses.value,
         max: uses.max,
-        per: CONFIG.DND5E.limitedUsePeriods[uses.per]
+        per: CONFIG.SHAPER.limitedUsePeriods[uses.per]
       });
     }
   }

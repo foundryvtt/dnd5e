@@ -2,7 +2,7 @@
   "_id": "IyIybE5t2adMEVUM",
   "name": "Ghast",
   "type": "npc",
-  "img": "systems/dnd5e/tokens/undead/Ghast.webp",
+  "img": "systems/shaper/tokens/undead/Ghast.webp",
   "system": {
     "abilities": {
       "str": {
@@ -588,7 +588,7 @@
       "color": null
     },
     "texture": {
-      "src": "systems/dnd5e/tokens/undead/Ghast.webp",
+      "src": "systems/shaper/tokens/undead/Ghast.webp",
       "tint": null,
       "scaleX": 1,
       "scaleY": 1,
@@ -1017,11 +1017,11 @@
   },
   "flags": {},
   "_stats": {
-    "systemId": "dnd5e",
+    "systemId": "shaper",
     "systemVersion": "2.0.0",
     "coreVersion": "10.279",
     "createdTime": 1661787232735,
     "modifiedTime": 1661878730721,
-    "lastModifiedBy": "dnd5ebuilder0000"
+    "lastModifiedBy": "shaperbuilder0000"
   }
 }

@@ -43,7 +43,7 @@ export default class Actor5e extends Actor {
    * @type {boolean}
    */
   get isPolymorphed() {
-    return this.getFlag("dnd5e", "isPolymorphed") || false;
+    return this.getFlag("shaper", "isPolymorphed") || false;
   }
 
   /* -------------------------------------------- */
@@ -115,7 +115,7 @@ export default class Actor5e extends Actor {
 
   /** @inheritDoc */
   prepareDerivedData() {
-    const flags = this.flags.dnd5e || {};
+    const flags = this.flags.shaper || {};
     this.labels = {};
 
     // Retrieve data for polymorphed actors
@@ -151,7 +151,7 @@ export default class Actor5e extends Actor {
    * @returns {number}      The XP required.
    */
   getLevelExp(level) {
-    const levels = CONFIG.DND5E.CHARACTER_EXP_LEVELS;
+    const levels = CONFIG.SHAPER.CHARACTER_EXP_LEVELS;
     return levels[Math.min(level, levels.length - 1)];
   }
 
@@ -164,7 +164,7 @@ export default class Actor5e extends Actor {
    */
   getCRExp(cr) {
     if ( cr < 1.0 ) return Math.max(200 * cr, 10);
-    return CONFIG.DND5E.CR_EXP_LEVELS[cr];
+    return CONFIG.SHAPER.CR_EXP_LEVELS[cr];
   }
 
   /* -------------------------------------------- */
@@ -193,14 +193,14 @@ export default class Actor5e extends Actor {
   /* -------------------------------------------- */
 
   /**
-   * Update the actor's abilities list to match the abilities configured in `DND5E.abilities`.
+   * Update the actor's abilities list to match the abilities configured in `SHAPER.abilities`.
    * Mutates the system.abilities object.
    * @param {object} updates  Updates to be applied to the actor. *Will be mutated.*
    * @protected
    */
   _prepareBaseAbilities(updates) {
     const abilities = {};
-    for ( const key of Object.keys(CONFIG.DND5E.abilities) ) {
+    for ( const key of Object.keys(CONFIG.SHAPER.abilities) ) {
       abilities[key] = this.system.abilities[key];
       if ( !abilities[key] ) {
         abilities[key] = foundry.utils.deepClone(game.system.template.Actor.templates.common.abilities.cha);
@@ -226,7 +226,7 @@ export default class Actor5e extends Actor {
   /* -------------------------------------------- */
 
   /**
-   * Update the actor's skill list to match the skills configured in `DND5E.skills`.
+   * Update the actor's skill list to match the skills configured in `SHAPER.skills`.
    * Mutates the system.skills object.
    * @param {object} updates  Updates to be applied to the actor. *Will be mutated*.
    * @private
@@ -234,7 +234,7 @@ export default class Actor5e extends Actor {
   _prepareBaseSkills(updates) {
     if ( this.type === "vehicle") return;
     const skills = {};
-    for ( const [key, skill] of Object.entries(CONFIG.DND5E.skills) ) {
+    for ( const [key, skill] of Object.entries(CONFIG.SHAPER.skills) ) {
       skills[key] = this.system.skills[key];
       if ( !skills[key] ) {
         skills[key] = foundry.utils.deepClone(game.system.template.Actor.templates.creature.skills.acr);
@@ -279,7 +279,7 @@ export default class Actor5e extends Actor {
       }
 
       // Attuned items
-      else if ( item.system.attunement === CONFIG.DND5E.attunementTypes.ATTUNED ) {
+      else if ( item.system.attunement === CONFIG.SHAPER.attunementTypes.ATTUNED ) {
         this.system.attributes.attunement.value += 1;
       }
     }
@@ -308,7 +308,7 @@ export default class Actor5e extends Actor {
 
     // Attuned items
     this.system.attributes.attunement.value = this.items.filter(i => {
-      return i.system.attunement === CONFIG.DND5E.attunementTypes.ATTUNED;
+      return i.system.attunement === CONFIG.SHAPER.attunementTypes.ATTUNED;
     }).length;
 
     // Kill Experience
@@ -347,7 +347,7 @@ export default class Actor5e extends Actor {
    * @protected
    */
   _prepareAbilities(bonusData, globalBonuses, checkBonus, originalSaves) {
-    const flags = this.flags.dnd5e ?? {};
+    const flags = this.flags.shaper ?? {};
     const dcBonus = simplifyBonus(this.system.bonuses?.spell?.dc, bonusData);
     const saveBonus = simplifyBonus(globalBonuses.save, bonusData);
     for ( const [id, abl] of Object.entries(this.system.abilities) ) {
@@ -384,10 +384,10 @@ export default class Actor5e extends Actor {
    */
   _prepareSkills(bonusData, globalBonuses, checkBonus, originalSkills) {
     if ( this.type === "vehicle" ) return;
-    const flags = this.flags.dnd5e ?? {};
+    const flags = this.flags.shaper ?? {};
 
     // Skill modifiers
-    const feats = CONFIG.DND5E.characterFlags;
+    const feats = CONFIG.SHAPER.characterFlags;
     const skillBonus = simplifyBonus(globalBonuses.skill, bonusData);
     for ( const [id, skl] of Object.entries(this.system.skills) ) {
       const ability = this.system.abilities[skl.ability];
@@ -437,15 +437,15 @@ export default class Actor5e extends Actor {
     const ac = this.system.attributes.ac;
 
     // Apply automatic migrations for older data structures
-    let cfg = CONFIG.DND5E.armorClasses[ac.calc];
+    let cfg = CONFIG.SHAPER.armorClasses[ac.calc];
     if ( !cfg ) {
       ac.calc = "flat";
       if ( Number.isNumeric(ac.value) ) ac.flat = Number(ac.value);
-      cfg = CONFIG.DND5E.armorClasses.flat;
+      cfg = CONFIG.SHAPER.armorClasses.flat;
     }
 
     // Identify Equipped Items
-    const armorTypes = new Set(Object.keys(CONFIG.DND5E.armorTypes));
+    const armorTypes = new Set(Object.keys(CONFIG.SHAPER.armorTypes));
     const {armors, shields} = this.itemTypes.equipment.reduce((obj, equip) => {
       const armor = equip.system.armor;
       if ( !equip.system.equipped || !armorTypes.has(armor?.type) ) return obj;
@@ -471,7 +471,7 @@ export default class Actor5e extends Actor {
         let formula = ac.calc === "custom" ? ac.formula : cfg.formula;
         if ( armors.length ) {
           if ( armors.length > 1 ) this._preparationWarnings.push({
-            message: game.i18n.localize("DND5E.WarnMultipleArmor"), type: "warning"
+            message: game.i18n.localize("SHAPER.WarnMultipleArmor"), type: "warning"
           });
           const armorData = armors[0].system.armor;
           const isHeavy = armorData.type === "heavy";
@@ -488,9 +488,9 @@ export default class Actor5e extends Actor {
           ac.base = Roll.safeEval(replaced);
         } catch(err) {
           this._preparationWarnings.push({
-            message: game.i18n.localize("DND5E.WarnBadACFormula"), link: "armor", type: "error"
+            message: game.i18n.localize("SHAPER.WarnBadACFormula"), link: "armor", type: "error"
           });
-          const replaced = Roll.replaceFormulaData(CONFIG.DND5E.armorClasses.default.formula, rollData);
+          const replaced = Roll.replaceFormulaData(CONFIG.SHAPER.armorClasses.default.formula, rollData);
           ac.base = Roll.safeEval(replaced);
         }
         break;
@@ -499,7 +499,7 @@ export default class Actor5e extends Actor {
     // Equipped Shield
     if ( shields.length ) {
       if ( shields.length > 1 ) this._preparationWarnings.push({
-        message: game.i18n.localize("DND5E.WarnMultipleShields"), type: "warning"
+        message: game.i18n.localize("SHAPER.WarnMultipleShields"), type: "warning"
       });
       ac.shield = shields[0].system.armor.value ?? 0;
       ac.equippedShield = shields[0];
@@ -531,21 +531,21 @@ export default class Actor5e extends Actor {
 
     // [Optional] add Currency Weight (for non-transformed actors)
     const currency = this.system.currency;
-    if ( game.settings.get("dnd5e", "currencyWeight") && currency ) {
+    if ( game.settings.get("shaper", "currencyWeight") && currency ) {
       const numCoins = Object.values(currency).reduce((val, denom) => val + Math.max(denom, 0), 0);
-      const currencyPerWeight = game.settings.get("dnd5e", "metricWeightUnits")
-        ? CONFIG.DND5E.encumbrance.currencyPerWeight.metric
-        : CONFIG.DND5E.encumbrance.currencyPerWeight.imperial;
+      const currencyPerWeight = game.settings.get("shaper", "metricWeightUnits")
+        ? CONFIG.SHAPER.encumbrance.currencyPerWeight.metric
+        : CONFIG.SHAPER.encumbrance.currencyPerWeight.imperial;
       weight += numCoins / currencyPerWeight;
     }
 
     // Determine the Encumbrance size class
     let mod = {tiny: 0.5, sm: 1, med: 1, lg: 2, huge: 4, grg: 8}[this.system.traits.size] || 1;
-    if ( this.flags.dnd5e?.powerfulBuild ) mod = Math.min(mod * 2, 8);
+    if ( this.flags.shaper?.powerfulBuild ) mod = Math.min(mod * 2, 8);
 
-    const strengthMultiplier = game.settings.get("dnd5e", "metricWeightUnits")
-      ? CONFIG.DND5E.encumbrance.strMultiplier.metric
-      : CONFIG.DND5E.encumbrance.strMultiplier.imperial;
+    const strengthMultiplier = game.settings.get("shaper", "metricWeightUnits")
+      ? CONFIG.SHAPER.encumbrance.strMultiplier.metric
+      : CONFIG.SHAPER.encumbrance.strMultiplier.imperial;
 
     // Populate final Encumbrance values
     encumbrance.value = weight.toNearest(0.1);
@@ -565,7 +565,7 @@ export default class Actor5e extends Actor {
    */
   _prepareInitiative(bonusData, globalCheckBonus) {
     const init = this.system.attributes.init ??= {};
-    const { initiativeAlert, jackOfAllTrades, remarkableAthlete } = this.flags.dnd5e ?? {};
+    const { initiativeAlert, jackOfAllTrades, remarkableAthlete } = this.flags.shaper ?? {};
 
     // Initiative modifiers
     const dexCheckBonus = simplifyBonus(this.system.abilities.dex?.bonuses?.check, bonusData);
@@ -649,8 +649,8 @@ export default class Actor5e extends Actor {
     if ( isNPC && this.system.details.spellLevel ) progression.slot = this.system.details.spellLevel;
 
     // Look up the number of slots per level from the progression table
-    const levels = Math.clamped(progression.slot, 0, CONFIG.DND5E.maxLevel);
-    const slots = CONFIG.DND5E.SPELL_SLOT_TABLE[Math.min(levels, CONFIG.DND5E.SPELL_SLOT_TABLE.length) - 1] || [];
+    const levels = Math.clamped(progression.slot, 0, CONFIG.SHAPER.maxLevel);
+    const slots = CONFIG.SHAPER.SPELL_SLOT_TABLE[Math.min(levels, CONFIG.SHAPER.SPELL_SLOT_TABLE.length) - 1] || [];
     for ( let [n, lvl] of Object.entries(spells) ) {
       let i = parseInt(n.slice(-1));
       if ( Number.isNaN(i) ) continue;
@@ -660,7 +660,7 @@ export default class Actor5e extends Actor {
     }
 
     // Determine the Actor's pact magic level (if any)
-    let pl = Math.clamped(progression.pact, 0, CONFIG.DND5E.maxLevel);
+    let pl = Math.clamped(progression.pact, 0, CONFIG.SHAPER.maxLevel);
     spells.pact = spells.pact || {};
     if ( (pl === 0) && isNPC && Number.isNumeric(spells.pact.override) ) pl = this.system.details.spellLevel;
 
@@ -687,7 +687,7 @@ export default class Actor5e extends Actor {
     if ( sourceId?.startsWith("Compendium.") ) return;
 
     // Configure prototype token settings
-    const s = CONFIG.DND5E.tokenSizes[this.system.traits.size || "med"];
+    const s = CONFIG.SHAPER.tokenSizes[this.system.traits.size || "med"];
     const prototypeToken = {width: s, height: s};
     if ( this.type === "character" ) Object.assign(prototypeToken, {vision: true, actorLink: true, disposition: 1});
     this.updateSource({prototypeToken});
@@ -702,7 +702,7 @@ export default class Actor5e extends Actor {
     // Apply changes in Actor size to Token width/height
     const newSize = foundry.utils.getProperty(changed, "system.traits.size");
     if ( newSize && (newSize !== this.system.traits?.size) ) {
-      let size = CONFIG.DND5E.tokenSizes[newSize];
+      let size = CONFIG.SHAPER.tokenSizes[newSize];
       if ( !foundry.utils.hasProperty(changed, "prototypeToken.width") ) {
         changed.prototypeToken ||= {};
         changed.prototypeToken.height = size;
@@ -807,8 +807,8 @@ export default class Actor5e extends Actor {
    * @private
    */
   _isRemarkableAthlete(ability) {
-    return this.getFlag("dnd5e", "remarkableAthlete")
-      && CONFIG.DND5E.characterFlags.remarkableAthlete.abilities.includes(ability);
+    return this.getFlag("shaper", "remarkableAthlete")
+      && CONFIG.SHAPER.characterFlags.remarkableAthlete.abilities.includes(ability);
   }
 
   /* -------------------------------------------- */
@@ -864,46 +864,46 @@ export default class Actor5e extends Actor {
     if ( options.parts?.length > 0 ) parts.push(...options.parts);
 
     // Reliable Talent applies to any skill check we have full or better proficiency in
-    const reliableTalent = (skl.value >= 1 && this.getFlag("dnd5e", "reliableTalent"));
+    const reliableTalent = (skl.value >= 1 && this.getFlag("shaper", "reliableTalent"));
 
     // Roll and return
-    const flavor = game.i18n.format("DND5E.SkillPromptTitle", {skill: CONFIG.DND5E.skills[skillId]?.label ?? ""});
+    const flavor = game.i18n.format("SHAPER.SkillPromptTitle", {skill: CONFIG.SHAPER.skills[skillId]?.label ?? ""});
     const rollData = foundry.utils.mergeObject({
       parts: parts,
       data: data,
       title: `${flavor}: ${this.name}`,
       flavor,
       chooseModifier: true,
-      halflingLucky: this.getFlag("dnd5e", "halflingLucky"),
+      halflingLucky: this.getFlag("shaper", "halflingLucky"),
       reliableTalent,
       messageData: {
         speaker: options.speaker || ChatMessage.getSpeaker({actor: this}),
-        "flags.dnd5e.roll": {type: "skill", skillId }
+        "flags.shaper.roll": {type: "skill", skillId }
       }
     }, options);
 
     /**
      * A hook event that fires before a skill check is rolled for an Actor.
-     * @function dnd5e.preRollSkill
+     * @function shaper.preRollSkill
      * @memberof hookEvents
      * @param {Actor5e} actor                Actor for which the skill check is being rolled.
      * @param {D20RollConfiguration} config  Configuration data for the pending roll.
-     * @param {string} skillId               ID of the skill being rolled as defined in `DND5E.skills`.
+     * @param {string} skillId               ID of the skill being rolled as defined in `SHAPER.skills`.
      * @returns {boolean}                    Explicitly return `false` to prevent skill check from being rolled.
      */
-    if ( Hooks.call("dnd5e.preRollSkill", this, rollData, skillId) === false ) return;
+    if ( Hooks.call("shaper.preRollSkill", this, rollData, skillId) === false ) return;
 
     const roll = await d20Roll(rollData);
 
     /**
      * A hook event that fires after a skill check has been rolled for an Actor.
-     * @function dnd5e.rollSkill
+     * @function shaper.rollSkill
      * @memberof hookEvents
      * @param {Actor5e} actor   Actor for which the skill check has been rolled.
      * @param {D20Roll} roll    The resulting roll.
-     * @param {string} skillId  ID of the skill that was rolled as defined in `DND5E.skills`.
+     * @param {string} skillId  ID of the skill that was rolled as defined in `SHAPER.skills`.
      */
-    if ( roll ) Hooks.callAll("dnd5e.rollSkill", this, roll, skillId);
+    if ( roll ) Hooks.callAll("shaper.rollSkill", this, roll, skillId);
 
     return roll;
   }
@@ -917,17 +917,17 @@ export default class Actor5e extends Actor {
    * @param {object} options      Options which configure how ability tests or saving throws are rolled
    */
   rollAbility(abilityId, options={}) {
-    const label = CONFIG.DND5E.abilities[abilityId] ?? "";
+    const label = CONFIG.SHAPER.abilities[abilityId] ?? "";
     new Dialog({
-      title: `${game.i18n.format("DND5E.AbilityPromptTitle", {ability: label})}: ${this.name}`,
-      content: `<p>${game.i18n.format("DND5E.AbilityPromptText", {ability: label})}</p>`,
+      title: `${game.i18n.format("SHAPER.AbilityPromptTitle", {ability: label})}: ${this.name}`,
+      content: `<p>${game.i18n.format("SHAPER.AbilityPromptText", {ability: label})}</p>`,
       buttons: {
         test: {
-          label: game.i18n.localize("DND5E.ActionAbil"),
+          label: game.i18n.localize("SHAPER.ActionAbil"),
           callback: () => this.rollAbilityTest(abilityId, options)
         },
         save: {
-          label: game.i18n.localize("DND5E.ActionSave"),
+          label: game.i18n.localize("SHAPER.ActionSave"),
           callback: () => this.rollAbilitySave(abilityId, options)
         }
       }
@@ -944,7 +944,7 @@ export default class Actor5e extends Actor {
    * @returns {Promise<D20Roll>}  A Promise which resolves to the created Roll instance
    */
   async rollAbilityTest(abilityId, options={}) {
-    const label = CONFIG.DND5E.abilities[abilityId] ?? "";
+    const label = CONFIG.SHAPER.abilities[abilityId] ?? "";
     const abl = this.system.abilities[abilityId];
     const globalBonuses = this.system.bonuses?.abilities ?? {};
     const parts = [];
@@ -977,41 +977,41 @@ export default class Actor5e extends Actor {
     if ( options.parts?.length > 0 ) parts.push(...options.parts);
 
     // Roll and return
-    const flavor = game.i18n.format("DND5E.AbilityPromptTitle", {ability: label});
+    const flavor = game.i18n.format("SHAPER.AbilityPromptTitle", {ability: label});
     const rollData = foundry.utils.mergeObject({
       parts,
       data,
       title: `${flavor}: ${this.name}`,
       flavor,
-      halflingLucky: this.getFlag("dnd5e", "halflingLucky"),
+      halflingLucky: this.getFlag("shaper", "halflingLucky"),
       messageData: {
         speaker: options.speaker || ChatMessage.getSpeaker({actor: this}),
-        "flags.dnd5e.roll": {type: "ability", abilityId }
+        "flags.shaper.roll": {type: "ability", abilityId }
       }
     }, options);
 
     /**
      * A hook event that fires before an ability test is rolled for an Actor.
-     * @function dnd5e.preRollAbilityTest
+     * @function shaper.preRollAbilityTest
      * @memberof hookEvents
      * @param {Actor5e} actor                Actor for which the ability test is being rolled.
      * @param {D20RollConfiguration} config  Configuration data for the pending roll.
-     * @param {string} abilityId             ID of the ability being rolled as defined in `DND5E.abilities`.
+     * @param {string} abilityId             ID of the ability being rolled as defined in `SHAPER.abilities`.
      * @returns {boolean}                    Explicitly return `false` to prevent ability test from being rolled.
      */
-    if ( Hooks.call("dnd5e.preRollAbilityTest", this, rollData, abilityId) === false ) return;
+    if ( Hooks.call("shaper.preRollAbilityTest", this, rollData, abilityId) === false ) return;
 
     const roll = await d20Roll(rollData);
 
     /**
      * A hook event that fires after an ability test has been rolled for an Actor.
-     * @function dnd5e.rollAbilityTest
+     * @function shaper.rollAbilityTest
      * @memberof hookEvents
      * @param {Actor5e} actor     Actor for which the ability test has been rolled.
      * @param {D20Roll} roll      The resulting roll.
-     * @param {string} abilityId  ID of the ability that was rolled as defined in `DND5E.abilities`.
+     * @param {string} abilityId  ID of the ability that was rolled as defined in `SHAPER.abilities`.
      */
-    if ( roll ) Hooks.callAll("dnd5e.rollAbilityTest", this, roll, abilityId);
+    if ( roll ) Hooks.callAll("shaper.rollAbilityTest", this, roll, abilityId);
 
     return roll;
   }
@@ -1026,7 +1026,7 @@ export default class Actor5e extends Actor {
    * @returns {Promise<D20Roll>}  A Promise which resolves to the created Roll instance
    */
   async rollAbilitySave(abilityId, options={}) {
-    const label = CONFIG.DND5E.abilities[abilityId] ?? "";
+    const label = CONFIG.SHAPER.abilities[abilityId] ?? "";
     const abl = this.system.abilities[abilityId];
     const globalBonuses = this.system.bonuses?.abilities ?? {};
     const parts = [];
@@ -1059,41 +1059,41 @@ export default class Actor5e extends Actor {
     if ( options.parts?.length > 0 ) parts.push(...options.parts);
 
     // Roll and return
-    const flavor = game.i18n.format("DND5E.SavePromptTitle", {ability: label});
+    const flavor = game.i18n.format("SHAPER.SavePromptTitle", {ability: label});
     const rollData = foundry.utils.mergeObject({
       parts,
       data,
       title: `${flavor}: ${this.name}`,
       flavor,
-      halflingLucky: this.getFlag("dnd5e", "halflingLucky"),
+      halflingLucky: this.getFlag("shaper", "halflingLucky"),
       messageData: {
         speaker: options.speaker || ChatMessage.getSpeaker({actor: this}),
-        "flags.dnd5e.roll": {type: "save", abilityId }
+        "flags.shaper.roll": {type: "save", abilityId }
       }
     }, options);
 
     /**
      * A hook event that fires before an ability save is rolled for an Actor.
-     * @function dnd5e.preRollAbilitySave
+     * @function shaper.preRollAbilitySave
      * @memberof hookEvents
      * @param {Actor5e} actor                Actor for which the ability save is being rolled.
      * @param {D20RollConfiguration} config  Configuration data for the pending roll.
-     * @param {string} abilityId             ID of the ability being rolled as defined in `DND5E.abilities`.
+     * @param {string} abilityId             ID of the ability being rolled as defined in `SHAPER.abilities`.
      * @returns {boolean}                    Explicitly return `false` to prevent ability save from being rolled.
      */
-    if ( Hooks.call("dnd5e.preRollAbilitySave", this, rollData, abilityId) === false ) return;
+    if ( Hooks.call("shaper.preRollAbilitySave", this, rollData, abilityId) === false ) return;
 
     const roll = await d20Roll(rollData);
 
     /**
      * A hook event that fires after an ability save has been rolled for an Actor.
-     * @function dnd5e.rollAbilitySave
+     * @function shaper.rollAbilitySave
      * @memberof hookEvents
      * @param {Actor5e} actor     Actor for which the ability save has been rolled.
      * @param {D20Roll} roll      The resulting roll.
-     * @param {string} abilityId  ID of the ability that was rolled as defined in `DND5E.abilities`.
+     * @param {string} abilityId  ID of the ability that was rolled as defined in `SHAPER.abilities`.
      */
-    if ( roll ) Hooks.callAll("dnd5e.rollAbilitySave", this, roll, abilityId);
+    if ( roll ) Hooks.callAll("shaper.rollAbilitySave", this, roll, abilityId);
 
     return roll;
   }
@@ -1110,7 +1110,7 @@ export default class Actor5e extends Actor {
 
     // Display a warning if we are not at zero HP or if we already have reached 3
     if ( (this.system.attributes.hp.value > 0) || (death.failure >= 3) || (death.success >= 3) ) {
-      ui.notifications.warn(game.i18n.localize("DND5E.DeathSaveUnnecessary"));
+      ui.notifications.warn(game.i18n.localize("SHAPER.DeathSaveUnnecessary"));
       return null;
     }
 
@@ -1121,7 +1121,7 @@ export default class Actor5e extends Actor {
     const data = this.getRollData();
 
     // Diamond Soul adds proficiency
-    if ( this.getFlag("dnd5e", "diamondSoul") ) {
+    if ( this.getFlag("shaper", "diamondSoul") ) {
       parts.push("@prof");
       data.prof = new Proficiency(this.system.attributes.prof, 1).term;
     }
@@ -1133,29 +1133,29 @@ export default class Actor5e extends Actor {
     }
 
     // Evaluate the roll
-    const flavor = game.i18n.localize("DND5E.DeathSavingThrow");
+    const flavor = game.i18n.localize("SHAPER.DeathSavingThrow");
     const rollData = foundry.utils.mergeObject({
       parts,
       data,
       title: `${flavor}: ${this.name}`,
       flavor,
-      halflingLucky: this.getFlag("dnd5e", "halflingLucky"),
+      halflingLucky: this.getFlag("shaper", "halflingLucky"),
       targetValue: 10,
       messageData: {
         speaker: speaker,
-        "flags.dnd5e.roll": {type: "death"}
+        "flags.shaper.roll": {type: "death"}
       }
     }, options);
 
     /**
      * A hook event that fires before a death saving throw is rolled for an Actor.
-     * @function dnd5e.preRollDeathSave
+     * @function shaper.preRollDeathSave
      * @memberof hookEvents
      * @param {Actor5e} actor                Actor for which the death saving throw is being rolled.
      * @param {D20RollConfiguration} config  Configuration data for the pending roll.
      * @returns {boolean}                    Explicitly return `false` to prevent death saving throw from being rolled.
      */
-    if ( Hooks.call("dnd5e.preRollDeathSave", this, rollData) === false ) return;
+    if ( Hooks.call("shaper.preRollDeathSave", this, rollData) === false ) return;
 
     const roll = await d20Roll(rollData);
     if ( !roll ) return null;
@@ -1174,7 +1174,7 @@ export default class Actor5e extends Actor {
           "system.attributes.death.failure": 0,
           "system.attributes.hp.value": 1
         };
-        details.chatString = "DND5E.DeathSaveCriticalSuccess";
+        details.chatString = "SHAPER.DeathSaveCriticalSuccess";
       }
 
       // 3 Successes = survive and reset checks
@@ -1183,7 +1183,7 @@ export default class Actor5e extends Actor {
           "system.attributes.death.success": 0,
           "system.attributes.death.failure": 0
         };
-        details.chatString = "DND5E.DeathSaveSuccess";
+        details.chatString = "SHAPER.DeathSaveSuccess";
       }
 
       // Increment successes
@@ -1195,14 +1195,14 @@ export default class Actor5e extends Actor {
       let failures = (death.failure || 0) + (roll.isFumble ? 2 : 1);
       details.updates = {"system.attributes.death.failure": Math.clamped(failures, 0, 3)};
       if ( failures >= 3 ) {  // 3 Failures = death
-        details.chatString = "DND5E.DeathSaveFailure";
+        details.chatString = "SHAPER.DeathSaveFailure";
       }
     }
 
     /**
      * A hook event that fires after a death saving throw has been rolled for an Actor, but before
      * updates have been performed.
-     * @function dnd5e.rollDeathSave
+     * @function shaper.rollDeathSave
      * @memberof hookEvents
      * @param {Actor5e} actor              Actor for which the death saving throw has been rolled.
      * @param {D20Roll} roll               The resulting roll.
@@ -1212,7 +1212,7 @@ export default class Actor5e extends Actor {
      *                                     no chat message will be displayed.
      * @returns {boolean}                  Explicitly return `false` to prevent updates from being performed.
      */
-    if ( Hooks.call("dnd5e.rollDeathSave", this, roll, details) === false ) return roll;
+    if ( Hooks.call("shaper.rollDeathSave", this, roll, details) === false ) return roll;
 
     if ( !foundry.utils.isEmpty(details.updates) ) await this.update(details.updates);
 
@@ -1252,12 +1252,12 @@ export default class Actor5e extends Actor {
 
     // If no class is available, display an error notification
     if ( !cls ) {
-      ui.notifications.error(game.i18n.format("DND5E.HitDiceWarn", {name: this.name, formula: denomination}));
+      ui.notifications.error(game.i18n.format("SHAPER.HitDiceWarn", {name: this.name, formula: denomination}));
       return null;
     }
 
     // Prepare roll data
-    const flavor = game.i18n.localize("DND5E.HitDiceRoll");
+    const flavor = game.i18n.localize("SHAPER.HitDiceRoll");
     const rollConfig = foundry.utils.mergeObject({
       formula: `max(0, 1${denomination} + @abilities.con.mod)`,
       data: this.getRollData(),
@@ -1267,13 +1267,13 @@ export default class Actor5e extends Actor {
         flavor,
         title: `${flavor}: ${this.name}`,
         rollMode: game.settings.get("core", "rollMode"),
-        "flags.dnd5e.roll": {type: "hitDie"}
+        "flags.shaper.roll": {type: "hitDie"}
       }
     }, options);
 
     /**
      * A hook event that fires before a hit die is rolled for an Actor.
-     * @function dnd5e.preRollHitDie
+     * @function shaper.preRollHitDie
      * @memberof hookEvents
      * @param {Actor5e} actor               Actor for which the hit die is to be rolled.
      * @param {object} config               Configuration data for the pending roll.
@@ -1284,7 +1284,7 @@ export default class Actor5e extends Actor {
      * @param {string} denomination         Size of hit die to be rolled.
      * @returns {boolean}                   Explicitly return `false` to prevent hit die from being rolled.
      */
-    if ( Hooks.call("dnd5e.preRollHitDie", this, rollConfig, denomination) === false ) return;
+    if ( Hooks.call("shaper.preRollHitDie", this, rollConfig, denomination) === false ) return;
 
     const roll = await new Roll(rollConfig.formula, rollConfig.data).roll({async: true});
     if ( rollConfig.chatMessage ) roll.toMessage(rollConfig.messageData);
@@ -1298,7 +1298,7 @@ export default class Actor5e extends Actor {
 
     /**
      * A hook event that fires after a hit die has been rolled for an Actor, but before updates have been performed.
-     * @function dnd5e.rollHitDie
+     * @function shaper.rollHitDie
      * @memberof hookEvents
      * @param {Actor5e} actor         Actor for which the hit die has been rolled.
      * @param {Roll} roll             The resulting roll.
@@ -1307,7 +1307,7 @@ export default class Actor5e extends Actor {
      * @param {object} updates.class  Updates that will be applied to the class.
      * @returns {boolean}             Explicitly return `false` to prevent updates from being performed.
      */
-    if ( Hooks.call("dnd5e.rollHitDie", this, roll, updates) === false ) return roll;
+    if ( Hooks.call("shaper.rollHitDie", this, roll, updates) === false ) return roll;
 
     // Perform updates
     if ( !foundry.utils.isEmpty(updates.actor) ) await this.update(updates.actor);
@@ -1322,22 +1322,22 @@ export default class Actor5e extends Actor {
    * Roll hit points for a specific class as part of a level-up workflow.
    * @param {Item5e} item      The class item whose hit dice to roll.
    * @returns {Promise<Roll>}  The completed roll.
-   * @see {@link dnd5e.preRollClassHitPoints}
+   * @see {@link shaper.preRollClassHitPoints}
    */
   async rollClassHitPoints(item) {
     if ( item.type !== "class" ) throw new Error("Hit points can only be rolled for a class item.");
     const rollData = { formula: `1${item.system.hitDice}`, data: item.getRollData() };
-    const flavor = game.i18n.format("DND5E.AdvancementHitPointsRollMessage", { class: item.name });
+    const flavor = game.i18n.format("SHAPER.AdvancementHitPointsRollMessage", { class: item.name });
     const messageData = {
       title: `${flavor}: ${this.name}`,
       flavor,
       speaker: ChatMessage.getSpeaker({ actor: this }),
-      "flags.dnd5e.roll": { type: "hitPoints" }
+      "flags.shaper.roll": { type: "hitPoints" }
     };
 
     /**
      * A hook event that fires before hit points are rolled for a character's class.
-     * @function dnd5e.preRollClassHitPoints
+     * @function shaper.preRollClassHitPoints
      * @memberof hookEvents
      * @param {Actor5e} actor            Actor for which the hit points are being rolled.
      * @param {Item5e} item              The class item whose hit dice will be rolled.
@@ -1346,7 +1346,7 @@ export default class Actor5e extends Actor {
      * @param {object} rollData.data     The data object against which to parse attributes within the formula.
      * @param {object} messageData       The data object to use when creating the message.
      */
-    Hooks.callAll("dnd5e.preRollClassHitPoints", this, item, rollData, messageData);
+    Hooks.callAll("shaper.preRollClassHitPoints", this, item, rollData, messageData);
 
     const roll = new Roll(rollData.formula, rollData.data);
     await roll.toMessage(messageData);
@@ -1397,13 +1397,13 @@ export default class Actor5e extends Actor {
 
     /**
      * A hook event that fires before a short rest is started.
-     * @function dnd5e.preShortRest
+     * @function shaper.preShortRest
      * @memberof hookEvents
      * @param {Actor5e} actor             The actor that is being rested.
      * @param {RestConfiguration} config  Configuration options for the rest.
      * @returns {boolean}                 Explicitly return `false` to prevent the rest from being started.
      */
-    if ( Hooks.call("dnd5e.preShortRest", this, config) === false ) return;
+    if ( Hooks.call("shaper.preShortRest", this, config) === false ) return;
 
     // Take note of the initial hit points and number of hit dice the Actor has
     const hd0 = this.system.attributes.hd;
@@ -1438,13 +1438,13 @@ export default class Actor5e extends Actor {
 
     /**
      * A hook event that fires before a long rest is started.
-     * @function dnd5e.preLongRest
+     * @function shaper.preLongRest
      * @memberof hookEvents
      * @param {Actor5e} actor             The actor that is being rested.
      * @param {RestConfiguration} config  Configuration options for the rest.
      * @returns {boolean}                 Explicitly return `false` to prevent the rest from being started.
      */
-    if ( Hooks.call("dnd5e.preLongRest", this, config) === false ) return;
+    if ( Hooks.call("shaper.preLongRest", this, config) === false ) return;
 
     if ( config.dialog ) {
       try { config.newDay = await LongRestDialog.longRestDialog({actor: this}); }
@@ -1500,13 +1500,13 @@ export default class Actor5e extends Actor {
 
     /**
      * A hook event that fires after rest result is calculated, but before any updates are performed.
-     * @function dnd5e.preRestCompleted
+     * @function shaper.preRestCompleted
      * @memberof hookEvents
      * @param {Actor5e} actor      The actor that is being rested.
      * @param {RestResult} result  Details on the rest to be completed.
      * @returns {boolean}          Explicitly return `false` to prevent the rest updates from being performed.
      */
-    if ( Hooks.call("dnd5e.preRestCompleted", this, result) === false ) return result;
+    if ( Hooks.call("shaper.preRestCompleted", this, result) === false ) return result;
 
     // Perform updates
     await this.update(result.updateData);
@@ -1516,20 +1516,20 @@ export default class Actor5e extends Actor {
     if ( chat ) await this._displayRestResultMessage(result, longRest);
 
     if ( Hooks.events.restCompleted?.length ) foundry.utils.logCompatibilityWarning(
-      "The restCompleted hook has been deprecated in favor of dnd5e.restCompleted.",
-      { since: "DnD5e 1.6", until: "DnD5e 2.1" }
+      "The restCompleted hook has been deprecated in favor of shaper.restCompleted.",
+      { since: "shaperSystem 1.6", until: "shaperSystem 2.1" }
     );
     /** @deprecated since 1.6, targeted for removal in 2.1 */
     Hooks.callAll("restCompleted", this, result);
 
     /**
      * A hook event that fires when the rest process is completed for an actor.
-     * @function dnd5e.restCompleted
+     * @function shaper.restCompleted
      * @memberof hookEvents
      * @param {Actor5e} actor      The actor that just completed resting.
      * @param {RestResult} result  Details on the rest completed.
      */
-    Hooks.callAll("dnd5e.restCompleted", this, result);
+    Hooks.callAll("shaper.restCompleted", this, result);
 
     // Return data summarizing the rest effects
     return result;
@@ -1553,24 +1553,24 @@ export default class Actor5e extends Actor {
 
     // Summarize the rest duration
     let restFlavor;
-    switch (game.settings.get("dnd5e", "restVariant")) {
+    switch (game.settings.get("shaper", "restVariant")) {
       case "normal":
-        restFlavor = (longRest && newDay) ? "DND5E.LongRestOvernight" : `DND5E.${length}RestNormal`;
+        restFlavor = (longRest && newDay) ? "SHAPER.LongRestOvernight" : `SHAPER.${length}RestNormal`;
         break;
       case "gritty":
-        restFlavor = (!longRest && newDay) ? "DND5E.ShortRestOvernight" : `DND5E.${length}RestGritty`;
+        restFlavor = (!longRest && newDay) ? "SHAPER.ShortRestOvernight" : `SHAPER.${length}RestGritty`;
         break;
       case "epic":
-        restFlavor = `DND5E.${length}RestEpic`;
+        restFlavor = `SHAPER.${length}RestEpic`;
         break;
     }
 
     // Determine the chat message to display
     let message;
-    if ( diceRestored && healthRestored ) message = `DND5E.${length}RestResult`;
-    else if ( longRest && !diceRestored && healthRestored ) message = "DND5E.LongRestResultHitPoints";
-    else if ( longRest && diceRestored && !healthRestored ) message = "DND5E.LongRestResultHitDice";
-    else message = `DND5E.${length}RestResultShort`;
+    if ( diceRestored && healthRestored ) message = `SHAPER.${length}RestResult`;
+    else if ( longRest && !diceRestored && healthRestored ) message = "SHAPER.LongRestResultHitPoints";
+    else if ( longRest && diceRestored && !healthRestored ) message = "SHAPER.LongRestResultHitDice";
+    else message = `SHAPER.${length}RestResultShort`;
 
     // Create a chat message
     let chatData = {
@@ -1738,7 +1738,7 @@ export default class Actor5e extends Actor {
       // Items that roll to gain charges on a new day
       if ( recoverDailyUses && uses?.recovery && (uses?.per === "charges") ) {
         const roll = new Roll(uses.recovery, this.getRollData());
-        if ( recoverLongRestUses && (game.settings.get("dnd5e", "restVariant") === "gritty") ) {
+        if ( recoverLongRestUses && (game.settings.get("shaper", "restVariant") === "gritty") ) {
           roll.alter(7, 0, {multiplyNumeric: true});
         }
 
@@ -1746,7 +1746,7 @@ export default class Actor5e extends Actor {
         try {
           total = (await roll.evaluate({async: true})).total;
         } catch (err) {
-          ui.notifications.warn(game.i18n.format("DND5E.ItemRecoveryFormulaWarning", {
+          ui.notifications.warn(game.i18n.format("SHAPER.ItemRecoveryFormulaWarning", {
             name: item.name,
             formula: uses.recovery
           }));
@@ -1756,7 +1756,7 @@ export default class Actor5e extends Actor {
         if ( newValue !== uses.value ) {
           const diff = newValue - uses.value;
           const isMax = newValue === uses.max;
-          const locKey = `DND5E.Item${diff < 0 ? "Loss" : "Recovery"}Roll${isMax ? "Max" : ""}`;
+          const locKey = `SHAPER.Item${diff < 0 ? "Loss" : "Recovery"}Roll${isMax ? "Max" : ""}`;
           updates.push({_id: item.id, "system.uses.value": newValue});
           rolls.push(roll);
           await roll.toMessage({
@@ -1781,7 +1781,7 @@ export default class Actor5e extends Actor {
    */
   convertCurrency() {
     const curr = foundry.utils.deepClone(this.system.currency);
-    const conversion = Object.entries(CONFIG.DND5E.currencies);
+    const conversion = Object.entries(CONFIG.SHAPER.currencies);
     conversion.reverse();
     for ( let [c, data] of conversion ) {
       const t = data.conversion;
@@ -1827,15 +1827,15 @@ export default class Actor5e extends Actor {
     keepItems=false, keepBio=false, keepVision=false, transformTokens=true }={}) {
 
     // Ensure the player is allowed to polymorph
-    const allowed = game.settings.get("dnd5e", "allowPolymorphing");
+    const allowed = game.settings.get("shaper", "allowPolymorphing");
     if ( !allowed && !game.user.isGM ) {
-      return ui.notifications.warn(game.i18n.localize("DND5E.PolymorphWarn"));
+      return ui.notifications.warn(game.i18n.localize("SHAPER.PolymorphWarn"));
     }
 
     // Get the original Actor data and the new source data
     const o = this.toObject();
-    o.flags.dnd5e = o.flags.dnd5e || {};
-    o.flags.dnd5e.transformOptions = {mergeSkills, mergeSaves};
+    o.flags.shaper = o.flags.shaper || {};
+    o.flags.shaper.transformOptions = {mergeSkills, mergeSaves};
     const source = target.toObject();
 
     // Prepare new data to merge from the source
@@ -1911,7 +1911,7 @@ export default class Actor5e extends Actor {
     if ( !keepClass && d.system.details.cr ) {
       d.items.push({
         type: "class",
-        name: game.i18n.localize("DND5E.PolymorphTmpClass"),
+        name: game.i18n.localize("SHAPER.PolymorphTmpClass"),
         data: { levels: d.system.details.cr }
       });
     }
@@ -1923,8 +1923,8 @@ export default class Actor5e extends Actor {
     if ( keepVision ) d.system.traits.senses = o.system.traits.senses;
 
     // Set new data flags
-    if ( !this.isPolymorphed || !d.flags.dnd5e.originalActor ) d.flags.dnd5e.originalActor = this.id;
-    d.flags.dnd5e.isPolymorphed = true;
+    if ( !this.isPolymorphed || !d.flags.shaper.originalActor ) d.flags.shaper.originalActor = this.id;
+    d.flags.shaper.isPolymorphed = true;
 
     // Update unlinked Tokens in place since they can simply be re-dropped from the base actor
     if ( this.isToken ) {
@@ -1939,14 +1939,14 @@ export default class Actor5e extends Actor {
 
     /**
      * A hook event that fires just before the actor is transformed.
-     * @function dnd5e.transformActor
+     * @function shaper.transformActor
      * @memberof hookEvents
      * @param {Actor5e} actor                  The original actor before transformation.
      * @param {Actor5e} target                 The target actor into which to transform.
      * @param {object} data                    The data that will be used to create the new transformed actor.
      * @param {TransformationOptions} options  Options that determine how the transformation is performed.
      */
-    Hooks.callAll("dnd5e.transformActor", this, target, d, {
+    Hooks.callAll("shaper.transformActor", this, target, d, {
       keepPhysical, keepMental, keepSaves, keepSkills, mergeSaves, mergeSkills,
       keepClass, keepFeats, keepSpells, keepItems, keepBio, keepVision, transformTokens
     });
@@ -1978,7 +1978,7 @@ export default class Actor5e extends Actor {
   async revertOriginalForm() {
     if ( !this.isPolymorphed ) return;
     if ( !this.isOwner ) {
-      return ui.notifications.warn(game.i18n.localize("DND5E.PolymorphRevertWarn"));
+      return ui.notifications.warn(game.i18n.localize("SHAPER.PolymorphRevertWarn"));
     }
 
     // If we are reverting an unlinked token, simply replace it with the base actor prototype
@@ -1997,7 +1997,7 @@ export default class Actor5e extends Actor {
     }
 
     // Obtain a reference to the original actor
-    const original = game.actors.get(this.getFlag("dnd5e", "originalActor"));
+    const original = game.actors.get(this.getFlag("shaper", "originalActor"));
     if ( !original ) return;
 
     // Get the Tokens which represent this actor
@@ -2031,14 +2031,14 @@ export default class Actor5e extends Actor {
    */
   static addDirectoryContextOptions(html, entryOptions) {
     entryOptions.push({
-      name: "DND5E.PolymorphRestoreTransformation",
+      name: "SHAPER.PolymorphRestoreTransformation",
       icon: '<i class="fas fa-backward"></i>',
       callback: li => {
         const actor = game.actors.get(li.data("documentId"));
         return actor.revertOriginalForm();
       },
       condition: li => {
-        const allowed = game.settings.get("dnd5e", "allowPolymorphing");
+        const allowed = game.settings.get("shaper", "allowPolymorphing");
         if ( !allowed && !game.user.isGM ) return false;
         const actor = game.actors.get(li.data("documentId"));
         return actor && actor.isPolymorphed;
@@ -2059,13 +2059,13 @@ export default class Actor5e extends Actor {
     if ( typeData.value === "custom" ) {
       localizedType = typeData.custom;
     } else {
-      let code = CONFIG.DND5E.creatureTypes[typeData.value];
+      let code = CONFIG.SHAPER.creatureTypes[typeData.value];
       localizedType = game.i18n.localize(typeData.swarm ? `${code}Pl` : code);
     }
     let type = localizedType;
     if ( typeData.swarm ) {
-      type = game.i18n.format("DND5E.CreatureSwarmPhrase", {
-        size: game.i18n.localize(CONFIG.DND5E.actorSizes[typeData.swarm]),
+      type = game.i18n.format("SHAPER.CreatureSwarmPhrase", {
+        size: game.i18n.localize(CONFIG.SHAPER.actorSizes[typeData.swarm]),
         type: localizedType
       });
     }
@@ -2085,8 +2085,8 @@ export default class Actor5e extends Actor {
    * @param {string} type          "armor", "weapon", or "tool"
    */
   static prepareProficiencies(data, type) {
-    const profs = CONFIG.DND5E[`${type}Proficiencies`];
-    const itemTypes = CONFIG.DND5E[`${type}Ids`];
+    const profs = CONFIG.SHAPER[`${type}Proficiencies`];
+    const itemTypes = CONFIG.SHAPER[`${type}Ids`];
 
     let values = [];
     if ( data.value ) values = data.value instanceof Array ? data.value : [data.value];
@@ -2098,8 +2098,8 @@ export default class Actor5e extends Actor {
       } else if ( itemTypes && itemTypes[key] ) {
         const item = ProficiencySelector.getBaseItem(itemTypes[key], { indexOnly: true });
         if ( item ) data.selected[key] = item.name;
-      } else if ( type === "tool" && CONFIG.DND5E.vehicleTypes[key] ) {
-        data.selected[key] = CONFIG.DND5E.vehicleTypes[key];
+      } else if ( type === "tool" && CONFIG.SHAPER.vehicleTypes[key] ) {
+        data.selected[key] = CONFIG.SHAPER.vehicleTypes[key];
       }
     }
 
@@ -2134,7 +2134,7 @@ export default class Actor5e extends Actor {
       canvas.interface.createScrollingText(t.center, dhp.signedString(), {
         anchor: CONST.TEXT_ANCHOR_POINTS.TOP,
         fontSize: 16 + (32 * pct), // Range between [16, 48]
-        fill: CONFIG.DND5E.tokenHPColors[dhp < 0 ? "damage" : "healing"],
+        fill: CONFIG.SHAPER.tokenHPColors[dhp < 0 ? "damage" : "healing"],
         stroke: 0x000000,
         strokeThickness: 4,
         jitter: 0.25
@@ -2151,11 +2151,11 @@ export default class Actor5e extends Actor {
    * @param {Item5e[]} items         The items being added to the Actor.
    * @param {boolean} [prompt=true]  Whether or not to prompt the user.
    * @returns {Promise<Item5e[]>}
-   * @deprecated since dnd5e 1.6, targeted for removal in 2.1
+   * @deprecated since shaper 1.6, targeted for removal in 2.1
    */
   async addEmbeddedItems(items, prompt=true) {
     foundry.utils.logCompatibilityWarning(
-      "Actor5e#addEmbeddedItems has been deprecated.", { since: "DnD5e 1.6", until: "DnD5e 2.1" }
+      "Actor5e#addEmbeddedItems has been deprecated.", { since: "shaperSystem 1.6", until: "shaperSystem 2.1" }
     );
     let itemsToAdd = items;
     if ( !items.length ) return [];
@@ -2164,7 +2164,7 @@ export default class Actor5e extends Actor {
     let toCreate = [];
     if (prompt) {
       const itemIdsToAdd = await SelectItemsPrompt.create(items, {
-        hint: game.i18n.localize("DND5E.AddEmbeddedItemPromptHint")
+        hint: game.i18n.localize("SHAPER.AddEmbeddedItemPromptHint")
       });
       for (let item of items) {
         if (itemIdsToAdd.includes(item.id)) toCreate.push(item.toObject());
@@ -2187,12 +2187,12 @@ export default class Actor5e extends Actor {
    * @param {string} [options.subclassName]    Name of the selected subclass if it has been changed.
    * @param {number} [options.level]           New class level if it has been changed.
    * @returns {Promise<Item5e[]>}              Any new items that should be added to the actor.
-   * @deprecated since dnd5e 1.6, targeted for removal in 2.1
+   * @deprecated since shaper 1.6, targeted for removal in 2.1
    */
   async getClassFeatures({classIdentifier, subclassName, level}={}) {
     foundry.utils.logCompatibilityWarning(
       "Actor5e#getClassFeatures has been deprecated. Please refer to the Advancement API for its replacement.",
-      { since: "DnD5e 1.6", until: "DnD5e 2.1" }
+      { since: "shaperSystem 1.6", until: "shaperSystem 2.1" }
     );
     const existing = new Set(this.items.map(i => i.name));
     const features = await Actor5e.loadClassFeatures({classIdentifier, subclassName, level});
@@ -2209,17 +2209,17 @@ export default class Actor5e extends Actor {
    * @param {number} [options.level]           The number of levels in the added class.
    * @param {number} [options.priorLevel]      The previous level of the added class.
    * @returns {Promise<Item5e[]>}              Items that should be added based on the changes made.
-   * @deprecated since dnd5e 1.6, targeted for removal in 2.1
+   * @deprecated since shaper 1.6, targeted for removal in 2.1
    */
   static async loadClassFeatures({classIdentifier="", subclassName="", level=1, priorLevel=0}={}) {
     foundry.utils.logCompatibilityWarning(
       "Actor5e#loadClassFeatures has been deprecated. Please refer to the Advancement API for its replacement.",
-      { since: "DnD5e 1.6", until: "DnD5e 2.1" }
+      { since: "shaperSystem 1.6", until: "shaperSystem 2.1" }
     );
     subclassName = subclassName.slugify();
 
     // Get the configuration of features which may be added
-    const clsConfig = CONFIG.DND5E.classFeatures[classIdentifier];
+    const clsConfig = CONFIG.SHAPER.classFeatures[classIdentifier];
     if (!clsConfig) return [];
 
     // Acquire class features
@@ -2259,12 +2259,12 @@ export default class Actor5e extends Actor {
    * Determine a character's AC value from their equipped armor and shield.
    * @returns {object}
    * @private
-   * @deprecated since dnd5e 2.0, targeted for removal in 2.2
+   * @deprecated since shaper 2.0, targeted for removal in 2.2
    */
   _computeArmorClass() {
     foundry.utils.logCompatibilityWarning(
       "Actor5e#_computeArmorClass has been renamed Actor5e#_prepareArmorClass.",
-      { since: "DnD5e 2.0", until: "DnD5e 2.2" }
+      { since: "shaperSystem 2.0", until: "shaperSystem 2.2" }
     );
     this._prepareArmorClass();
     return this.system.attributes.ac;
@@ -2276,12 +2276,12 @@ export default class Actor5e extends Actor {
    * Compute the level and percentage of encumbrance for an Actor.
    * @returns {object}  An object describing the character's encumbrance level
    * @private
-   * @deprecated since dnd5e 2.0, targeted for removal in 2.2
+   * @deprecated since shaper 2.0, targeted for removal in 2.2
    */
   _computeEncumbrance() {
     foundry.utils.logCompatibilityWarning(
       "Actor5e#_computeEncumbrance has been renamed Actor5e#_prepareEncumbrance.",
-      { since: "DnD5e 2.0", until: "DnD5e 2.2" }
+      { since: "shaperSystem 2.0", until: "shaperSystem 2.2" }
     );
     this._prepareEncumbrance();
     return this.system.attributes.encumbrance;
@@ -2292,12 +2292,12 @@ export default class Actor5e extends Actor {
   /**
    * Calculate the initiative bonus to display on a character sheet.
    * @private
-   * @deprecated since dnd5e 2.0, targeted for removal in 2.2
+   * @deprecated since shaper 2.0, targeted for removal in 2.2
    */
   _computeInitiativeModifier() {
     foundry.utils.logCompatibilityWarning(
       "Actor5e#_computeInitiativeModifier has been renamed Actor5e#_prepareInitiative.",
-      { since: "DnD5e 2.0", until: "DnD5e 2.2" }
+      { since: "shaperSystem 2.0", until: "shaperSystem 2.2" }
     );
     this._prepareInitiative();
   }
@@ -2308,12 +2308,12 @@ export default class Actor5e extends Actor {
    * Prepare data related to the spell-casting capabilities of the Actor.
    * Mutates the value of the system.spells object.
    * @private
-   * @deprecated since dnd5e 2.0, targeted for removal in 2.2
+   * @deprecated since shaper 2.0, targeted for removal in 2.2
    */
   _computeSpellcastingProgression() {
     foundry.utils.logCompatibilityWarning(
       "Actor5e#_computeSpellcastingProgression has been renamed Actor5e#_prepareSpellcasting.",
-      { since: "DnD5e 2.0", until: "DnD5e 2.2" }
+      { since: "shaperSystem 2.0", until: "shaperSystem 2.2" }
     );
     this._prepareSpellcasting();
   }
@@ -2326,12 +2326,12 @@ export default class Actor5e extends Actor {
    * @param {object} data               Actor data to use for replacing @ strings.
    * @returns {number}                  Simplified bonus as an integer.
    * @protected
-   * @deprecated since dnd5e 2.0, targeted for removal in 2.2
+   * @deprecated since shaper 2.0, targeted for removal in 2.2
    */
   _simplifyBonus(bonus, data) {
     foundry.utils.logCompatibilityWarning(
-      "Actor#_simplifyBonus has been made a utility function and can be accessed at dnd5e.utils.simplifyBonus.",
-      { since: "DnD5e 2.0", until: "DnD5e 2.2" }
+      "Actor#_simplifyBonus has been made a utility function and can be accessed at shaper.utils.simplifyBonus.",
+      { since: "shaperSystem 2.0", until: "shaperSystem 2.2" }
     );
     return simplifyBonus(bonus, data);
   }

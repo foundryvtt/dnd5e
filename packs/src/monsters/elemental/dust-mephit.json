@@ -2,7 +2,7 @@
   "_id": "BUCfQ7ihaXX75Vai",
   "name": "Dust Mephit",
   "type": "npc",
-  "img": "systems/dnd5e/tokens/elemental/DustMephit.webp",
+  "img": "systems/shaper/tokens/elemental/DustMephit.webp",
   "system": {
     "abilities": {
       "str": {
@@ -587,7 +587,7 @@
       "color": null
     },
     "texture": {
-      "src": "systems/dnd5e/tokens/elemental/DustMephit.webp",
+      "src": "systems/shaper/tokens/elemental/DustMephit.webp",
       "tint": null,
       "scaleX": 1,
       "scaleY": 1,
@@ -1084,16 +1084,16 @@
       },
       "flags": {
         "core": {
-          "sourceId": "Compendium.dnd5e.spells.KhwiSi9fwVfUPtku"
+          "sourceId": "Compendium.shaper.spells.KhwiSi9fwVfUPtku"
         }
       },
       "_stats": {
-        "systemId": "dnd5e",
+        "systemId": "shaper",
         "systemVersion": "2.0.0",
         "coreVersion": "10.279",
         "createdTime": 1661787234117,
         "modifiedTime": 1661791116287,
-        "lastModifiedBy": "dnd5ebuilder0000"
+        "lastModifiedBy": "shaperbuilder0000"
       }
     }
   ],
@@ -1105,11 +1105,11 @@
   },
   "flags": {},
   "_stats": {
-    "systemId": "dnd5e",
+    "systemId": "shaper",
     "systemVersion": "2.0.0",
     "coreVersion": "10.279",
     "createdTime": 1661787232661,
     "modifiedTime": 1661878730069,
-    "lastModifiedBy": "dnd5ebuilder0000"
+    "lastModifiedBy": "shaperbuilder0000"
   }
 }

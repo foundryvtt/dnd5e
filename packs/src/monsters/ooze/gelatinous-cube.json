@@ -2,7 +2,7 @@
   "_id": "3fzQVYQhXxCXRa2o",
   "name": "Gelatinous Cube",
   "type": "npc",
-  "img": "systems/dnd5e/tokens/ooze/GelatinousCube.webp",
+  "img": "systems/shaper/tokens/ooze/GelatinousCube.webp",
   "system": {
     "abilities": {
       "str": {
@@ -585,7 +585,7 @@
       "attenuation": 0.5
     },
     "texture": {
-      "src": "systems/dnd5e/tokens/ooze/GelatinousCube.webp",
+      "src": "systems/shaper/tokens/ooze/GelatinousCube.webp",
       "tint": null,
       "scaleX": 2,
       "scaleY": 2,
@@ -984,11 +984,11 @@
   },
   "flags": {},
   "_stats": {
-    "systemId": "dnd5e",
+    "systemId": "shaper",
     "systemVersion": "2.0.0",
     "coreVersion": "10.279",
     "createdTime": 1661787232572,
     "modifiedTime": 1661878728851,
-    "lastModifiedBy": "dnd5ebuilder0000"
+    "lastModifiedBy": "shaperbuilder0000"
   }
 }

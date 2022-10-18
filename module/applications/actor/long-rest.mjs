@@ -16,8 +16,8 @@ export default class LongRestDialog extends Dialog {
   /** @inheritDoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
-      template: "systems/dnd5e/templates/apps/long-rest.hbs",
-      classes: ["dnd5e", "dialog"]
+      template: "systems/shaper/templates/apps/long-rest.hbs",
+      classes: ["shaper", "dialog"]
     });
   }
 
@@ -26,7 +26,7 @@ export default class LongRestDialog extends Dialog {
   /** @inheritDoc */
   getData() {
     const data = super.getData();
-    const variant = game.settings.get("dnd5e", "restVariant");
+    const variant = game.settings.get("shaper", "restVariant");
     data.promptNewDay = variant !== "gritty";     // It's always a new day when resting 1 week
     data.newDay = variant === "normal";           // It's probably a new day when resting normally (8 hours)
     return data;
@@ -44,14 +44,14 @@ export default class LongRestDialog extends Dialog {
   static async longRestDialog({ actor } = {}) {
     return new Promise((resolve, reject) => {
       const dlg = new this(actor, {
-        title: `${game.i18n.localize("DND5E.LongRest")}: ${actor.name}`,
+        title: `${game.i18n.localize("SHAPER.LongRest")}: ${actor.name}`,
         buttons: {
           rest: {
             icon: '<i class="fas fa-bed"></i>',
-            label: game.i18n.localize("DND5E.Rest"),
+            label: game.i18n.localize("SHAPER.Rest"),
             callback: html => {
               let newDay = true;
-              if (game.settings.get("dnd5e", "restVariant") !== "gritty") {
+              if (game.settings.get("shaper", "restVariant") !== "gritty") {
                 newDay = html.find('input[name="newDay"]')[0].checked;
               }
               resolve(newDay);

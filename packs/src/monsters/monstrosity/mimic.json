@@ -2,7 +2,7 @@
   "_id": "hx240PG5r5qpRet3",
   "name": "Mimic",
   "type": "npc",
-  "img": "systems/dnd5e/tokens/monstrosity/Mimic.webp",
+  "img": "systems/shaper/tokens/monstrosity/Mimic.webp",
   "system": {
     "abilities": {
       "str": {
@@ -582,7 +582,7 @@
       "attenuation": 0.5
     },
     "texture": {
-      "src": "systems/dnd5e/tokens/monstrosity/Mimic.webp",
+      "src": "systems/shaper/tokens/monstrosity/Mimic.webp",
       "tint": null,
       "scaleX": 1.2,
       "scaleY": 1.2,
@@ -1183,11 +1183,11 @@
   },
   "flags": {},
   "_stats": {
-    "systemId": "dnd5e",
+    "systemId": "shaper",
     "systemVersion": "2.0.0",
     "coreVersion": "10.279",
     "createdTime": 1661787232997,
     "modifiedTime": 1661878734185,
-    "lastModifiedBy": "dnd5ebuilder0000"
+    "lastModifiedBy": "shaperbuilder0000"
   }
 }

@@ -6,7 +6,7 @@
 
         <div class="header-details flexrow">
             <h1 class="charname">
-                <input name="name" type="text" value="{{item.name}}" placeholder="{{ localize 'DND5E.ClassName' }}"/>
+                <input name="name" type="text" value="{{item.name}}" placeholder="{{ localize 'SHAPER.ClassName' }}"/>
             </h1>
 
             <div class="item-subtitle">
@@ -16,7 +16,7 @@
 
             <ul class="summary flexrow">
                 <li>
-                    <input type="text" name="system.source" value="{{system.source}}" placeholder="{{ localize 'DND5E.Source' }}"/>
+                    <input type="text" name="system.source" value="{{system.source}}" placeholder="{{ localize 'SHAPER.Source' }}"/>
                 </li>
             </ul>
         </div>
@@ -24,9 +24,9 @@
 
     {{!-- Item Sheet Navigation --}}
     <nav class="sheet-navigation tabs" data-group="primary">
-        <a class="item active" data-tab="description">{{ localize "DND5E.Description" }}</a>
-        <a class="item" data-tab="details">{{ localize "DND5E.Details" }}</a>
-        <a class="item" data-tab="advancement">{{ localize "DND5E.AdvancementTitle" }}</a>
+        <a class="item active" data-tab="description">{{ localize "SHAPER.Description" }}</a>
+        <a class="item" data-tab="details">{{ localize "SHAPER.Details" }}</a>
+        <a class="item" data-tab="advancement">{{ localize "SHAPER.AdvancementTitle" }}</a>
     </nav>
 
     {{!-- Item Sheet Body --}}
@@ -43,18 +43,18 @@
 
             {{!-- Identifier --}}
             <div class="form-group">
-                <label>{{ localize "DND5E.Identifier" }}</label>
+                <label>{{ localize "SHAPER.Identifier" }}</label>
                 <div class="form-fields">
                     <input type="text" name="system.identifier" value="{{system.identifier}}">
                 </div>
                 <p class="hint">
-                    {{{localize "DND5E.ClassIdentifierHint" identifier=system.identifier}}}
+                    {{{localize "SHAPER.ClassIdentifierHint" identifier=system.identifier}}}
                 </p>
             </div>
 
             {{!-- Class Hit Dice --}}
             <div class="form-group">
-                <label>{{localize "DND5E.HitDice"}}</label>
+                <label>{{localize "SHAPER.HitDice"}}</label>
                 <div class="form-fields">
                     <select name="system.hitDice">
                         {{#select system.hitDice}}
@@ -67,21 +67,21 @@
             </div>
 
             <div class="form-group">
-                <label>{{localize "DND5E.HitDiceUsed"}}</label>
+                <label>{{localize "SHAPER.HitDiceUsed"}}</label>
                 <div class="form-fields">
                     {{numberInput system.hitDiceUsed name="system.hitDiceUsed" placeholder="0"}}
                 </div>
             </div>
 
             {{!-- Spellcasting --}}
-            <h3 class="form-header">{{localize "DND5E.Spellcasting"}}</h3>
-            {{> "dnd5e.item-spellcasting"}}
+            <h3 class="form-header">{{localize "SHAPER.Spellcasting"}}</h3>
+            {{> "shaper.item-spellcasting"}}
 
             {{!-- Proficiencies --}}
-            <h3 class="form-header">{{localize "DND5E.Proficiency"}}</h3>
+            <h3 class="form-header">{{localize "SHAPER.Proficiency"}}</h3>
             <div class="form-group">
                 <label>
-                    {{ localize "DND5E.ClassSaves" }}
+                    {{ localize "SHAPER.ClassSaves" }}
                     {{#if editable}}
                     <a class="trait-selector class-saves" data-target="system.saves" data-options="saves">
                         <i class="fas fa-edit"></i>
@@ -99,7 +99,7 @@
 
             {{!-- Level 1 skills --}}
             <div class="form-group">
-                <label>{{localize "DND5E.ClassSkillsNumber"}}</label>
+                <label>{{localize "SHAPER.ClassSkillsNumber"}}</label>
                 <div class="form-fields">
                     {{numberInput system.skills.number name="system.skills.number" placeholder="0"}}
                 </div>
@@ -107,7 +107,7 @@
 
             <div class="form-group">
                 <label>
-                    {{localize "DND5E.ClassSkillsEligible"}}
+                    {{localize "SHAPER.ClassSkillsEligible"}}
                     {{#if editable }}
                     <a class="trait-selector class-skills" data-target="system.skills.choices" data-options="skills.choices">
                         <i class="fas fa-edit"></i>
@@ -125,7 +125,7 @@
 
             <div class="form-group">
                 <label>
-                    {{localize "DND5E.ClassSkillsChosen"}}
+                    {{localize "SHAPER.ClassSkillsChosen"}}
                     {{#if editable }}
                     <a class="trait-selector class-skills" data-target="system.skills" data-options="skills">
                         <i class="fas fa-edit"></i>
@@ -143,7 +143,7 @@
         </div>
 
         {{!-- Advancement Tab --}}
-        {{> "dnd5e.item-advancement"}}
+        {{> "shaper.item-advancement"}}
 
     </section>
 </form>

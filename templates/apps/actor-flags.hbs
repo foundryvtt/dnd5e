@@ -1,14 +1,14 @@
 <form class="{{cssClass}}" autocomplete="off">
     <section class="form-body">
-	    <p class="notes">{{localize "DND5E.FlagsInstructions"}}</p>
+	    <p class="notes">{{localize "SHAPER.FlagsInstructions"}}</p>
 
-        <h3 class="form-header">{{localize "DND5E.ItemTypeClass"}}</h3>
+        <h3 class="form-header">{{localize "SHAPER.ItemTypeClass"}}</h3>
         <div class="form-group">
-            <label>{{localize "DND5E.ClassMakeOriginal"}}</label>
+            <label>{{localize "SHAPER.ClassMakeOriginal"}}</label>
             <select name="system.details.originalClass">
               {{selectOptions classes selected=actor.system.details.originalClass}}
             </select>
-            <p class="notes">{{localize "DND5E.ClassMakeOriginalHint"}}</p>
+            <p class="notes">{{localize "SHAPER.ClassMakeOriginalHint"}}</p>
         </div>
 
         {{#each flags as |fs section|}}
@@ -35,8 +35,8 @@
         {{/each}}
         {{/each}}
 
-        <h3 class="form-header">{{localize "DND5E.Bonuses"}}</h3>
-        <p class="notes">{{localize "DND5E.BonusesHint"}}</p>
+        <h3 class="form-header">{{localize "SHAPER.Bonuses"}}</h3>
+        <p class="notes">{{localize "SHAPER.BonusesHint"}}</p>
         {{#each bonuses as |b|}}
         <div class="form-group">
             <label>{{localize b.label}}</label>
@@ -47,7 +47,7 @@
 
     <footer class="form-footer">
         <button type="submit">
-            <i class="far fa-save"></i> {{localize "DND5E.FlagsSave"}}
+            <i class="far fa-save"></i> {{localize "SHAPER.FlagsSave"}}
         </button>
     </footer>
 </form>

@@ -2,7 +2,7 @@
   "_id": "UthHOT7QfZfEIUue",
   "name": "Steam Mephit",
   "type": "npc",
-  "img": "systems/dnd5e/tokens/elemental/SteamMephit.webp",
+  "img": "systems/shaper/tokens/elemental/SteamMephit.webp",
   "system": {
     "abilities": {
       "str": {
@@ -587,7 +587,7 @@
       "color": null
     },
     "texture": {
-      "src": "systems/dnd5e/tokens/elemental/SteamMephit.webp",
+      "src": "systems/shaper/tokens/elemental/SteamMephit.webp",
       "tint": null,
       "scaleX": 1,
       "scaleY": 1,
@@ -1081,19 +1081,19 @@
       "sort": 100001,
       "flags": {
         "core": {
-          "sourceId": "Compendium.dnd5e.spells.UDUnlfPsOAbq2RSE"
+          "sourceId": "Compendium.shaper.spells.UDUnlfPsOAbq2RSE"
         }
       },
       "img": "icons/magic/air/air-burst-spiral-blue-gray.webp",
       "effects": [],
       "folder": null,
       "_stats": {
-        "systemId": "dnd5e",
+        "systemId": "shaper",
         "systemVersion": "2.0.0",
         "coreVersion": "10.279",
         "createdTime": 1661787234147,
         "modifiedTime": 1661791116593,
-        "lastModifiedBy": "dnd5ebuilder0000"
+        "lastModifiedBy": "shaperbuilder0000"
       }
     }
   ],
@@ -1105,11 +1105,11 @@
   },
   "flags": {},
   "_stats": {
-    "systemId": "dnd5e",
+    "systemId": "shaper",
     "systemVersion": "2.0.0",
     "coreVersion": "10.279",
     "createdTime": 1661787232856,
     "modifiedTime": 1661878732356,
-    "lastModifiedBy": "dnd5ebuilder0000"
+    "lastModifiedBy": "shaperbuilder0000"
   }
 }

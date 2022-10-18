@@ -69,7 +69,7 @@ export default class Advancement {
       },
       order: 100,
       icon: "icons/svg/upgrade.svg",
-      title: game.i18n.localize("DND5E.AdvancementTitle"),
+      title: game.i18n.localize("SHAPER.AdvancementTitle"),
       hint: "",
       multiLevel: false,
       validItemTypes: new Set(["background", "class", "subclass"]),

@@ -1,29 +1,29 @@
 <form id="short-rest-hd" class="dialog-content" onsubmit="event.preventDefault();">
-    <p>{{ localize "DND5E.ShortRestHint" }}</p>
+    <p>{{ localize "SHAPER.ShortRestHint" }}</p>
     <div class="form-group">
-        <label>{{ localize "DND5E.ShortRestSelect" }}</label>
+        <label>{{ localize "SHAPER.ShortRestSelect" }}</label>
         <div class="form-fields">
             <select name="hd">
                 {{#select denomination}}
                 {{#each availableHD as |num denom|}}
-                <option value="{{denom}}">{{denom}} ({{num}} {{ localize "DND5E.available" }})</option>
+                <option value="{{denom}}">{{denom}} ({{num}} {{ localize "SHAPER.available" }})</option>
                 {{/each}}
                 {{/select}}
             </select>
             <button id="roll-hd" {{#unless canRoll}}disabled{{/unless}}>
-                <i class="fas fa-dice-d20"></i> {{ localize "DND5E.Roll" }}
+                <i class="fas fa-dice-d20"></i> {{ localize "SHAPER.Roll" }}
             </button>
         </div>
         {{#unless canRoll}}
-        <p class="notes">{{ localize "DND5E.ShortRestNoHD" }}</p>
+        <p class="notes">{{ localize "SHAPER.ShortRestNoHD" }}</p>
         {{/unless}}
     </div>
 
     {{#if promptNewDay}}
     <div class="form-group">
-        <label>{{ localize "DND5E.NewDay" }}</label>
+        <label>{{ localize "SHAPER.NewDay" }}</label>
         <input type="checkbox" name="newDay" {{checked newDay}}/>
-        <p class="hint">{{ localize "DND5E.NewDayHint" }}</p>
+        <p class="hint">{{ localize "SHAPER.NewDayHint" }}</p>
     </div>
     {{/if}}
 

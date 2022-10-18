@@ -17,7 +17,7 @@ export const migrateWorld = async function() {
         await a.update(updateData, {enforceTypes: false});
       }
     } catch(err) {
-      err.message = `Failed dnd5e system migration for Actor ${a.name}: ${err.message}`;
+      err.message = `Failed shaper system migration for Actor ${a.name}: ${err.message}`;
       console.error(err);
     }
   }
@@ -31,7 +31,7 @@ export const migrateWorld = async function() {
         await i.update(updateData, {enforceTypes: false});
       }
     } catch(err) {
-      err.message = `Failed dnd5e system migration for Item ${i.name}: ${err.message}`;
+      err.message = `Failed shaper system migration for Item ${i.name}: ${err.message}`;
       console.error(err);
     }
   }
@@ -45,7 +45,7 @@ export const migrateWorld = async function() {
         await m.update(updateData, {enforceTypes: false});
       }
     } catch(err) {
-      err.message = `Failed dnd5e system migration for Macro ${m.name}: ${err.message}`;
+      err.message = `Failed shaper system migration for Macro ${m.name}: ${err.message}`;
       console.error(err);
     }
   }
@@ -62,7 +62,7 @@ export const migrateWorld = async function() {
         s.tokens.forEach(t => t._actor = null);
       }
     } catch(err) {
-      err.message = `Failed dnd5e system migration for Scene ${s.name}: ${err.message}`;
+      err.message = `Failed shaper system migration for Scene ${s.name}: ${err.message}`;
       console.error(err);
     }
   }
@@ -75,7 +75,7 @@ export const migrateWorld = async function() {
   }
 
   // Set the migration as complete
-  game.settings.set("dnd5e", "systemMigrationVersion", game.system.version);
+  game.settings.set("shaper", "systemMigrationVersion", game.system.version);
   ui.notifications.info(game.i18n.format("MIGRATION.5eComplete", {version}), {permanent: true});
 };
 
@@ -124,7 +124,7 @@ export const migrateCompendium = async function(pack) {
 
     // Handle migration failures
     catch(err) {
-      err.message = `Failed dnd5e system migration for document ${doc.name} in pack ${pack.collection}: ${err.message}`;
+      err.message = `Failed shaper system migration for document ${doc.name} in pack ${pack.collection}: ${err.message}`;
       console.error(err);
     }
   }
@@ -147,7 +147,7 @@ export const migrateArmorClass = async function(pack) {
   await pack.configure({locked: false});
   const actors = await pack.getDocuments();
   const updates = [];
-  const armor = new Set(Object.keys(CONFIG.DND5E.armorTypes));
+  const armor = new Set(Object.keys(CONFIG.SHAPER.armorTypes));
 
   for ( const actor of actors ) {
     try {
@@ -246,12 +246,12 @@ function cleanActorData(actorData) {
   actorData.system = foundry.utils.filterObject(actorData.system, model);
 
   // Scrub system flags
-  const allowedFlags = CONFIG.DND5E.allowedActorFlags.reduce((obj, f) => {
+  const allowedFlags = CONFIG.SHAPER.allowedActorFlags.reduce((obj, f) => {
     obj[f] = null;
     return obj;
   }, {});
-  if ( actorData.flags.dnd5e ) {
-    actorData.flags.dnd5e = foundry.utils.filterObject(actorData.flags.dnd5e, allowedFlags);
+  if ( actorData.flags.shaper ) {
+    actorData.flags.shaper = foundry.utils.filterObject(actorData.flags.shaper, allowedFlags);
   }
 
   // Return the scrubbed data
@@ -389,8 +389,8 @@ export const migrateSceneData = function(scene, migrationData) {
 export const getMigrationData = async function() {
   const data = {};
   try {
-    const icons = await fetch("systems/dnd5e/json/icon-migration.json");
-    const spellIcons = await fetch("systems/dnd5e/json/spell-icon-migration.json");
+    const icons = await fetch("systems/shaper/json/icon-migration.json");
+    const spellIcons = await fetch("systems/shaper/json/spell-icon-migration.json");
     data.iconMap = {...await icons.json(), ...await spellIcons.json()};
   } catch(err) {
     console.warn(`Failed to retrieve icon migration data: ${err.message}`);
@@ -454,7 +454,7 @@ function _migrateActorSenses(actor, updateData) {
     const match = s.match(pattern);
     if ( !match ) continue;
     const type = match[1].toLowerCase();
-    if ( type in CONFIG.DND5E.senses ) {
+    if ( type in CONFIG.SHAPER.senses ) {
       updateData[`system.attributes.senses.${type}`] = Number(match[2]).toNearest(0.5);
       wasMatched = true;
     }
@@ -498,7 +498,7 @@ function _migrateActorType(actor, updateData) {
 
     // Match a known creature type
     const typeLc = match.groups.type.trim().toLowerCase();
-    const typeMatch = Object.entries(CONFIG.DND5E.creatureTypes).find(([k, v]) => {
+    const typeMatch = Object.entries(CONFIG.SHAPER.creatureTypes).find(([k, v]) => {
       return (typeLc === k)
         || (typeLc === game.i18n.localize(v).toLowerCase())
         || (typeLc === game.i18n.localize(`${v}Pl`).toLowerCase());
@@ -511,10 +511,10 @@ function _migrateActorType(actor, updateData) {
     actorTypeData.subtype = match.groups.subtype?.trim().titleCase() || "";
 
     // Match a swarm
-    const isNamedSwarm = actor.name?.startsWith(game.i18n.localize("DND5E.CreatureSwarm"));
+    const isNamedSwarm = actor.name?.startsWith(game.i18n.localize("SHAPER.CreatureSwarm"));
     if ( match.groups.size || isNamedSwarm ) {
       const sizeLc = match.groups.size ? match.groups.size.trim().toLowerCase() : "tiny";
-      const sizeMatch = Object.entries(CONFIG.DND5E.actorSizes).find(([k, v]) => {
+      const sizeMatch = Object.entries(CONFIG.SHAPER.actorSizes).find(([k, v]) => {
         return (sizeLc === k) || (sizeLc === game.i18n.localize(v).toLowerCase());
       });
       actorTypeData.swarm = sizeMatch ? sizeMatch[0] : "tiny";
@@ -575,12 +575,12 @@ function _migrateActorAC(actorData, updateData) {
  * @private
  */
 function _migrateTokenImage(actorData, updateData) {
-  const oldSystemPNG = /^systems\/dnd5e\/tokens\/([a-z]+)\/([A-z]+).png$/;
+  const oldSystemPNG = /^systems\/shaper\/tokens\/([a-z]+)\/([A-z]+).png$/;
   for ( const path of ["texture.src", "prototypeToken.texture.src"] ) {
     const v = foundry.utils.getProperty(actorData, path);
     if ( oldSystemPNG.test(v) ) {
       const [type, fileName] = v.match(oldSystemPNG).slice(1);
-      updateData[path] = `systems/dnd5e/tokens/${type}/${fileName}.webp`;
+      updateData[path] = `systems/shaper/tokens/${type}/${fileName}.webp`;
     }
   }
   return updateData;
@@ -597,7 +597,7 @@ function _migrateTokenImage(actorData, updateData) {
  */
 function _migrateItemAttunement(item, updateData) {
   if ( item.system?.attuned === undefined ) return updateData;
-  updateData["system.attunement"] = CONFIG.DND5E.attunementTypes.NONE;
+  updateData["system.attunement"] = CONFIG.SHAPER.attunementTypes.NONE;
   updateData["system.-=attuned"] = null;
   return updateData;
 }
@@ -613,8 +613,8 @@ function _migrateItemAttunement(item, updateData) {
  */
 function _migrateItemRarity(item, updateData) {
   if ( item.system?.rarity === undefined ) return updateData;
-  const rarity = Object.keys(CONFIG.DND5E.itemRarity).find(key =>
-    (CONFIG.DND5E.itemRarity[key].toLowerCase() === item.system.rarity.toLowerCase()) || (key === item.system.rarity)
+  const rarity = Object.keys(CONFIG.SHAPER.itemRarity).find(key =>
+    (CONFIG.SHAPER.itemRarity[key].toLowerCase() === item.system.rarity.toLowerCase()) || (key === item.system.rarity)
   );
   updateData["system.rarity"] = rarity ?? "";
   return updateData;
@@ -717,16 +717,16 @@ function _migrateEffectArmorClass(effect, updateData) {
 /* -------------------------------------------- */
 
 /**
- * Migrate macros from the old 'dnd5e.rollItemMacro' and 'dnd5e.macros' commands to the new location.
+ * Migrate macros from the old 'shaper.rollItemMacro' and 'shaper.macros' commands to the new location.
  * @param {object} macro       Macro data to migrate.
  * @param {object} updateData  Existing update to expand upon.
  * @returns {object}           The updateData to apply.
  */
 function _migrateMacroCommands(macro, updateData) {
-  if ( macro.command.includes("game.dnd5e.rollItemMacro") ) {
-    updateData.command = macro.command.replaceAll("game.dnd5e.rollItemMacro", "dnd5e.documents.macro.rollItem");
-  } else if ( macro.command.includes("game.dnd5e.macros.") ) {
-    updateData.command = macro.command.replaceAll("game.dnd5e.macros.", "dnd5e.documents.macro.");
+  if ( macro.command.includes("game.shaper.rollItemMacro") ) {
+    updateData.command = macro.command.replaceAll("game.shaper.rollItemMacro", "shaper.documents.macro.rollItem");
+  } else if ( macro.command.includes("game.shaper.macros.") ) {
+    updateData.command = macro.command.replaceAll("game.shaper.macros.", "shaper.documents.macro.");
   }
   return updateData;
 }
@@ -740,8 +740,8 @@ function _migrateMacroCommands(macro, updateData) {
  */
 export async function purgeFlags(pack) {
   const cleanFlags = flags => {
-    const flags5e = flags.dnd5e || null;
-    return flags5e ? {dnd5e: flags5e} : {};
+    const flags5e = flags.shaper || null;
+    return flags5e ? {shaper: flags5e} : {};
   };
   await pack.configure({locked: false});
   const content = await pack.getDocuments();

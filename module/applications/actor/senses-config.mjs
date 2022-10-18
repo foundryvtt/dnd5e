@@ -6,8 +6,8 @@ export default class ActorSensesConfig extends DocumentSheet {
   /** @inheritdoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
-      classes: ["dnd5e"],
-      template: "systems/dnd5e/templates/apps/senses-config.hbs",
+      classes: ["shaper"],
+      template: "systems/shaper/templates/apps/senses-config.hbs",
       width: 300,
       height: "auto"
     });
@@ -17,7 +17,7 @@ export default class ActorSensesConfig extends DocumentSheet {
 
   /** @inheritdoc */
   get title() {
-    return `${game.i18n.localize("DND5E.SensesConfig")}: ${this.document.name}`;
+    return `${game.i18n.localize("SHAPER.SensesConfig")}: ${this.document.name}`;
   }
 
   /* -------------------------------------------- */
@@ -28,9 +28,9 @@ export default class ActorSensesConfig extends DocumentSheet {
     const data = {
       senses: {},
       special: source.special ?? "",
-      units: source.units, movementUnits: CONFIG.DND5E.movementUnits
+      units: source.units, movementUnits: CONFIG.SHAPER.movementUnits
     };
-    for ( let [name, label] of Object.entries(CONFIG.DND5E.senses) ) {
+    for ( let [name, label] of Object.entries(CONFIG.SHAPER.senses) ) {
       const v = Number(source[name]);
       data.senses[name] = {
         label: game.i18n.localize(label),

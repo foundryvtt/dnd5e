@@ -6,7 +6,7 @@
 
         <div class="header-details flexrow">
             <h1 class="charname">
-                <input name="name" type="text" value="{{item.name}}" placeholder="{{ localize 'DND5E.ItemName' }}"/>
+                <input name="name" type="text" value="{{item.name}}" placeholder="{{ localize 'SHAPER.ItemName' }}"/>
             </h1>
 
             <div class="item-subtitle">
@@ -19,10 +19,10 @@
                     {{labels.featType}}
                 </li>
                 <li>
-                    <input type="text" name="system.requirements" value="{{system.requirements}}" placeholder="{{ localize 'DND5E.Requirements' }}"/>
+                    <input type="text" name="system.requirements" value="{{system.requirements}}" placeholder="{{ localize 'SHAPER.Requirements' }}"/>
                 </li>
                 <li>
-                    <input type="text" name="system.source" value="{{system.source}}" placeholder="{{ localize 'DND5E.Source' }}"/>
+                    <input type="text" name="system.source" value="{{system.source}}" placeholder="{{ localize 'SHAPER.Source' }}"/>
                 </li>
             </ul>
         </div>
@@ -30,50 +30,50 @@
 
     {{!-- Item Sheet Navigation --}}
     <nav class="sheet-navigation tabs" data-group="primary">
-        <a class="item active" data-tab="description">{{ localize "DND5E.Description" }}</a>
-        <a class="item" data-tab="details">{{ localize "DND5E.Details" }}</a>
-        <a class="item" data-tab="effects">{{ localize "DND5E.Effects" }}</a>
+        <a class="item active" data-tab="description">{{ localize "SHAPER.Description" }}</a>
+        <a class="item" data-tab="details">{{ localize "SHAPER.Details" }}</a>
+        <a class="item" data-tab="effects">{{ localize "SHAPER.Effects" }}</a>
     </nav>
 
     {{!-- Item Sheet Body --}}
     <section class="sheet-body">
 
         {{!-- Description Tab --}}
-        {{> "dnd5e.item-description"}}
+        {{> "shaper.item-description"}}
 
         {{!-- Details Tab --}}
         <div class="tab details" data-group="primary" data-tab="details">
 
-            <h3 class="form-header">{{ localize "DND5E.FeatureUsage" }}</h3>
+            <h3 class="form-header">{{ localize "SHAPER.FeatureUsage" }}</h3>
 
             {{!-- Item Activation Template --}}
-            {{> "dnd5e.item-activation"}}
+            {{> "shaper.item-activation"}}
 
             {{!-- Recharge Requirement --}}
             {{#if system.activation.type}}
             <div class="form-group recharge">
-                <label>{{ localize "DND5E.FeatureActionRecharge" }}</label>
+                <label>{{ localize "SHAPER.FeatureActionRecharge" }}</label>
                 <div class="form-fields">
-                    <span>{{ localize "DND5E.FeatureRechargeOn" }}</span>
+                    <span>{{ localize "SHAPER.FeatureRechargeOn" }}</span>
                     {{numberInput system.recharge.value name="system.recharge.value"
-                        placeholder=(localize "DND5E.FeatureRechargeResult")}}
+                        placeholder=(localize "SHAPER.FeatureRechargeResult")}}
                     <label class="checkbox">
-                        {{ localize "DND5E.Charged" }}
+                        {{ localize "SHAPER.Charged" }}
                         <input type="checkbox" name="system.recharge.charged" {{checked system.recharge.charged}}/>
                     </label>
                 </div>
             </div>
             {{/if}}
 
-            <h3 class="form-header">{{ localize "DND5E.FeatureAttack" }}</h3>
+            <h3 class="form-header">{{ localize "SHAPER.FeatureAttack" }}</h3>
 
             {{!-- Item Action Template --}}
-            {{> "dnd5e.item-action"}}
+            {{> "shaper.item-action"}}
         </div>
 
         {{!-- Effects Tab --}}
         <div class="tab effects flexcol" data-group="primary" data-tab="effects">
-            {{> "dnd5e.active-effects"}}
+            {{> "shaper.active-effects"}}
         </div>
     </section>
 </form>

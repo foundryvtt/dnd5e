@@ -1,7 +1,7 @@
 {
   "name": "Aoth (Human Druid)",
   "type": "character",
-  "img": "systems/dnd5e/tokens/heroes/DruidStaff.webp",
+  "img": "systems/shaper/tokens/heroes/DruidStaff.webp",
   "system": {
     "abilities": {
       "str": {
@@ -614,7 +614,7 @@
       "attenuation": 0.5
     },
     "texture": {
-      "src": "systems/dnd5e/tokens/heroes/DruidStaff.webp",
+      "src": "systems/shaper/tokens/heroes/DruidStaff.webp",
       "tint": null,
       "scaleX": 1,
       "scaleY": 1,
@@ -1973,7 +1973,7 @@
       "img": "icons/creatures/mammals/elk-moose-marked-green.webp",
       "system": {
         "description": {
-          "value": "<p>As a druid, you gain the following class features.</p>\n<h3>Hit Points</h3>\n<p><strong>Hit Dice:</strong> 1d8 per druid level<br /><strong>Hit Points at 1st Level:</strong> 8 + your Constitution modifier<br /><strong>Hit Points at Higher Levels:</strong> 1d8 (or 5) + your Constitution modifier per druid level after 1st</p>\n<h3>Proficiencies</h3>\n<p><strong>Armor:</strong> Light armor, medium armor, shields (druids will not wear armor or use shields made of metal)<br /><strong>Weapons:</strong> Clubs, daggers, darts, javelins, maces, quarterstaffs, scimitars, sickles, slings, spears<br /><strong>Tools:</strong> Herbalism kit<br /><strong>Saving Throws:</strong> Intelligence, Wisdom<br /><strong>Skills:</strong> Choose two from Arcana, Animal Handling, Insight, Medicine, Nature, Perception, Religion, and Survival</p>\n<h3>Equipment</h3>\n<p>You start with the following equipment, in addition to the equipment granted by your background:</p>\n<ul>\n<li>(a) a wooden shield or (b) any simple weapon</li>\n<li>(a) a scimitar or (b) any simple melee weapon</li>\n<li>Leather armor, an explorer's pack, and a druidic focus</li>\n</ul>\n<h1>Druid Advancement</h1>\n<table>\n<thead>\n<tr>\n<td>Level</td>\n<td>Proficiency Bonus</td>\n<td>Features</td>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>1st</td>\n<td>+2</td>\n<td>@Compendium[dnd5e.classfeatures.LzJ5ayHt0OlSVGxi]{Druidic}, @Compendium[dnd5e.classfeatures.i6tPm3FNK13Ftc9v]{Spellcasting}</td>\n</tr>\n<tr>\n<td>2nd</td>\n<td>+2</td>\n<td>@Compendium[dnd5e.classfeatures.swK0r5TOIxredxWS]{Wild Shape (Max CR ¼}, @Compendium[dnd5e.classfeatures.u6Du2P9s81SWuGbi]{Druid Circle}</td>\n</tr>\n<tr>\n<td>3rd</td>\n<td>+2</td>\n<td>2nd Level Spell Slot</td>\n</tr>\n<tr>\n<td>4th</td>\n<td>+2</td>\n<td>@Compendium[dnd5e.classfeatures.swK0r5TOIxredxWS]{Wild Shape (Max CR ½}, @Compendium[dnd5e.classfeatures.s0Cc2zcX0JzIgam5]{Ability Score Improvement}</td>\n</tr>\n<tr>\n<td>5th</td>\n<td>+3</td>\n<td>3rd Level Spell Slot</td>\n</tr>\n<tr>\n<td>6th</td>\n<td>+3</td>\n<td>Druid Circle feature</td>\n</tr>\n<tr>\n<td>7th</td>\n<td>+3</td>\n<td>4th Level Spell Slot</td>\n</tr>\n<tr>\n<td>8th</td>\n<td>+3</td>\n<td>@Compendium[dnd5e.classfeatures.swK0r5TOIxredxWS]{Wild Shape (Max CR 1}, @Compendium[dnd5e.classfeatures.s0Cc2zcX0JzIgam5]{Ability Score Improvement}</td>\n</tr>\n<tr>\n<td>9th</td>\n<td>+4</td>\n<td>5th Level Spell Slot</td>\n</tr>\n<tr>\n<td>10th</td>\n<td>+4</td>\n<td>Druid Circle feature</td>\n</tr>\n<tr>\n<td>11th</td>\n<td>+4</td>\n<td>6th Level Spell Slot</td>\n</tr>\n<tr>\n<td>12th</td>\n<td>+4</td>\n<td>@Compendium[dnd5e.classfeatures.s0Cc2zcX0JzIgam5]{Ability Score Improvement}</td>\n</tr>\n<tr>\n<td>13th</td>\n<td>+5</td>\n<td>7th Level Spell Slot</td>\n</tr>\n<tr>\n<td>14th</td>\n<td>+5</td>\n<td>Druid Circle feature</td>\n</tr>\n<tr>\n<td>15th</td>\n<td>+5</td>\n<td>8th Level Spell Slot</td>\n</tr>\n<tr>\n<td>16th</td>\n<td>+5</td>\n<td>@Compendium[dnd5e.classfeatures.s0Cc2zcX0JzIgam5]{Ability Score Improvement}</td>\n</tr>\n<tr>\n<td>17th</td>\n<td>+6</td>\n<td>9th Level Spell Slot</td>\n</tr>\n<tr>\n<td>18th</td>\n<td>+6</td>\n<td>@Compendium[dnd5e.classfeatures.cVDEQo0ow1WJT7Wl]{Timeless Body}, @Compendium[dnd5e.classfeatures.xvgPu1O57DgXCM86]{Beast Spells}</td>\n</tr>\n<tr>\n<td>19th</td>\n<td>+6</td>\n<td>@Compendium[dnd5e.classfeatures.s0Cc2zcX0JzIgam5]{Ability Score Improvement}</td>\n</tr>\n<tr>\n<td>20th</td>\n<td>+6</td>\n<td>@Compendium[dnd5e.classfeatures.ip4bvmGoz3qkoqes]{Archdruid}</td>\n</tr>\n</tbody>\n</table>\n<h3>Sacred Plants and Wood</h3>\n<p>A druid holds certain plants to be sacred, particularly alder, ash, birch, elder, hazel, holly, juniper, mistletoe, oak, rowan, willow, and yew. Druids often use such plants as part of a spellcasting focus, incorporating lengths of oak or yew or sprigs of mistletoe.</p>\n<p>Similarly, a druid uses such woods to make other objects, such as weapons and shields. Yew is associated with death and rebirth, so weapon handles for scimitars or sickles might be fashioned from it. Ash is associated with life and oak with strength. These woods make excellent hafts or whole weapons, such as clubs or quarterstaffs, as well as shields. Alder is associated with air, and it might be used for thrown weapons, such as darts or javelins.</p>\n<p>Druids from regions that lack the plants described here have chosen other plants to take on similar uses. For instance, a druid of a desert region might value the yucca tree and cactus plants.</p>\n<h3>Druids and the Gods</h3>\n<p>Some druids venerate the forces of nature themselves, but most druids are devoted to one of the many nature deities worshiped in the multiverse (the lists of gods in <a class=\"content-link\" draggable=\"true\" data-pack=\"dnd5e.rules\" data-id=\"2JNtWRo7wMq08bXn\"> appendix PH-B</a> include many such deities). The worship of these deities is often considered a more ancient tradition than the faiths of clerics and urbanized peoples.</p>\n<h1>Druid Circles</h1>\n<p>@Compendium[dnd5e.subclasses.4Ae2SPZRXEVbVs0M]{Circle of the Land}</p>",
+          "value": "<p>As a druid, you gain the following class features.</p>\n<h3>Hit Points</h3>\n<p><strong>Hit Dice:</strong> 1d8 per druid level<br /><strong>Hit Points at 1st Level:</strong> 8 + your Constitution modifier<br /><strong>Hit Points at Higher Levels:</strong> 1d8 (or 5) + your Constitution modifier per druid level after 1st</p>\n<h3>Proficiencies</h3>\n<p><strong>Armor:</strong> Light armor, medium armor, shields (druids will not wear armor or use shields made of metal)<br /><strong>Weapons:</strong> Clubs, daggers, darts, javelins, maces, quarterstaffs, scimitars, sickles, slings, spears<br /><strong>Tools:</strong> Herbalism kit<br /><strong>Saving Throws:</strong> Intelligence, Wisdom<br /><strong>Skills:</strong> Choose two from Arcana, Animal Handling, Insight, Medicine, Nature, Perception, Religion, and Survival</p>\n<h3>Equipment</h3>\n<p>You start with the following equipment, in addition to the equipment granted by your background:</p>\n<ul>\n<li>(a) a wooden shield or (b) any simple weapon</li>\n<li>(a) a scimitar or (b) any simple melee weapon</li>\n<li>Leather armor, an explorer's pack, and a druidic focus</li>\n</ul>\n<h1>Druid Advancement</h1>\n<table>\n<thead>\n<tr>\n<td>Level</td>\n<td>Proficiency Bonus</td>\n<td>Features</td>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>1st</td>\n<td>+2</td>\n<td>@Compendium[shaper.classfeatures.LzJ5ayHt0OlSVGxi]{Druidic}, @Compendium[shaper.classfeatures.i6tPm3FNK13Ftc9v]{Spellcasting}</td>\n</tr>\n<tr>\n<td>2nd</td>\n<td>+2</td>\n<td>@Compendium[shaper.classfeatures.swK0r5TOIxredxWS]{Wild Shape (Max CR ¼}, @Compendium[shaper.classfeatures.u6Du2P9s81SWuGbi]{Druid Circle}</td>\n</tr>\n<tr>\n<td>3rd</td>\n<td>+2</td>\n<td>2nd Level Spell Slot</td>\n</tr>\n<tr>\n<td>4th</td>\n<td>+2</td>\n<td>@Compendium[shaper.classfeatures.swK0r5TOIxredxWS]{Wild Shape (Max CR ½}, @Compendium[shaper.classfeatures.s0Cc2zcX0JzIgam5]{Ability Score Improvement}</td>\n</tr>\n<tr>\n<td>5th</td>\n<td>+3</td>\n<td>3rd Level Spell Slot</td>\n</tr>\n<tr>\n<td>6th</td>\n<td>+3</td>\n<td>Druid Circle feature</td>\n</tr>\n<tr>\n<td>7th</td>\n<td>+3</td>\n<td>4th Level Spell Slot</td>\n</tr>\n<tr>\n<td>8th</td>\n<td>+3</td>\n<td>@Compendium[shaper.classfeatures.swK0r5TOIxredxWS]{Wild Shape (Max CR 1}, @Compendium[shaper.classfeatures.s0Cc2zcX0JzIgam5]{Ability Score Improvement}</td>\n</tr>\n<tr>\n<td>9th</td>\n<td>+4</td>\n<td>5th Level Spell Slot</td>\n</tr>\n<tr>\n<td>10th</td>\n<td>+4</td>\n<td>Druid Circle feature</td>\n</tr>\n<tr>\n<td>11th</td>\n<td>+4</td>\n<td>6th Level Spell Slot</td>\n</tr>\n<tr>\n<td>12th</td>\n<td>+4</td>\n<td>@Compendium[shaper.classfeatures.s0Cc2zcX0JzIgam5]{Ability Score Improvement}</td>\n</tr>\n<tr>\n<td>13th</td>\n<td>+5</td>\n<td>7th Level Spell Slot</td>\n</tr>\n<tr>\n<td>14th</td>\n<td>+5</td>\n<td>Druid Circle feature</td>\n</tr>\n<tr>\n<td>15th</td>\n<td>+5</td>\n<td>8th Level Spell Slot</td>\n</tr>\n<tr>\n<td>16th</td>\n<td>+5</td>\n<td>@Compendium[shaper.classfeatures.s0Cc2zcX0JzIgam5]{Ability Score Improvement}</td>\n</tr>\n<tr>\n<td>17th</td>\n<td>+6</td>\n<td>9th Level Spell Slot</td>\n</tr>\n<tr>\n<td>18th</td>\n<td>+6</td>\n<td>@Compendium[shaper.classfeatures.cVDEQo0ow1WJT7Wl]{Timeless Body}, @Compendium[shaper.classfeatures.xvgPu1O57DgXCM86]{Beast Spells}</td>\n</tr>\n<tr>\n<td>19th</td>\n<td>+6</td>\n<td>@Compendium[shaper.classfeatures.s0Cc2zcX0JzIgam5]{Ability Score Improvement}</td>\n</tr>\n<tr>\n<td>20th</td>\n<td>+6</td>\n<td>@Compendium[shaper.classfeatures.ip4bvmGoz3qkoqes]{Archdruid}</td>\n</tr>\n</tbody>\n</table>\n<h3>Sacred Plants and Wood</h3>\n<p>A druid holds certain plants to be sacred, particularly alder, ash, birch, elder, hazel, holly, juniper, mistletoe, oak, rowan, willow, and yew. Druids often use such plants as part of a spellcasting focus, incorporating lengths of oak or yew or sprigs of mistletoe.</p>\n<p>Similarly, a druid uses such woods to make other objects, such as weapons and shields. Yew is associated with death and rebirth, so weapon handles for scimitars or sickles might be fashioned from it. Ash is associated with life and oak with strength. These woods make excellent hafts or whole weapons, such as clubs or quarterstaffs, as well as shields. Alder is associated with air, and it might be used for thrown weapons, such as darts or javelins.</p>\n<p>Druids from regions that lack the plants described here have chosen other plants to take on similar uses. For instance, a druid of a desert region might value the yucca tree and cactus plants.</p>\n<h3>Druids and the Gods</h3>\n<p>Some druids venerate the forces of nature themselves, but most druids are devoted to one of the many nature deities worshiped in the multiverse (the lists of gods in <a class=\"content-link\" draggable=\"true\" data-pack=\"shaper.rules\" data-id=\"2JNtWRo7wMq08bXn\"> appendix PH-B</a> include many such deities). The worship of these deities is often considered a more ancient tradition than the faiths of clerics and urbanized peoples.</p>\n<h1>Druid Circles</h1>\n<p>@Compendium[shaper.subclasses.4Ae2SPZRXEVbVs0M]{Circle of the Land}</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -1988,14 +1988,14 @@
             "type": "ItemGrant",
             "configuration": {
               "items": [
-                "Compendium.dnd5e.classfeatures.LzJ5ayHt0OlSVGxi",
-                "Compendium.dnd5e.classfeatures.i6tPm3FNK13Ftc9v"
+                "Compendium.shaper.classfeatures.LzJ5ayHt0OlSVGxi",
+                "Compendium.shaper.classfeatures.i6tPm3FNK13Ftc9v"
               ]
             },
             "value": {
               "added": {
-                "mq7aft43zn80ksgr": "Compendium.dnd5e.classfeatures.LzJ5ayHt0OlSVGxi",
-                "mukslab94jgo077m": "Compendium.dnd5e.classfeatures.i6tPm3FNK13Ftc9v"
+                "mq7aft43zn80ksgr": "Compendium.shaper.classfeatures.LzJ5ayHt0OlSVGxi",
+                "mukslab94jgo077m": "Compendium.shaper.classfeatures.i6tPm3FNK13Ftc9v"
               }
             },
             "level": 1,
@@ -2008,8 +2008,8 @@
             "type": "ItemGrant",
             "configuration": {
               "items": [
-                "Compendium.dnd5e.classfeatures.swK0r5TOIxredxWS",
-                "Compendium.dnd5e.classfeatures.u6Du2P9s81SWuGbi"
+                "Compendium.shaper.classfeatures.swK0r5TOIxredxWS",
+                "Compendium.shaper.classfeatures.u6Du2P9s81SWuGbi"
               ]
             },
             "value": {},
@@ -2023,8 +2023,8 @@
             "type": "ItemGrant",
             "configuration": {
               "items": [
-                "Compendium.dnd5e.classfeatures.cVDEQo0ow1WJT7Wl",
-                "Compendium.dnd5e.classfeatures.xvgPu1O57DgXCM86"
+                "Compendium.shaper.classfeatures.cVDEQo0ow1WJT7Wl",
+                "Compendium.shaper.classfeatures.xvgPu1O57DgXCM86"
               ]
             },
             "value": {},
@@ -2038,7 +2038,7 @@
             "type": "ItemGrant",
             "configuration": {
               "items": [
-                "Compendium.dnd5e.classfeatures.ip4bvmGoz3qkoqes"
+                "Compendium.shaper.classfeatures.ip4bvmGoz3qkoqes"
               ]
             },
             "value": {},
@@ -2117,7 +2117,7 @@
       },
       "flags": {
         "core": {
-          "sourceId": "Compendium.dnd5e.classes.ygVYgPbJkaH0tH1N"
+          "sourceId": "Compendium.shaper.classes.ygVYgPbJkaH0tH1N"
         }
       },
       "_stats": {
@@ -2230,8 +2230,8 @@
         "default": 0
       },
       "flags": {
-        "dnd5e": {
-          "sourceId": "Compendium.dnd5e.classfeatures.LzJ5ayHt0OlSVGxi",
+        "shaper": {
+          "sourceId": "Compendium.shaper.classfeatures.LzJ5ayHt0OlSVGxi",
           "advancementOrigin": "wu0878mk64sgvd9z.6pdotglp4hy4zlvb"
         }
       },
@@ -2251,7 +2251,7 @@
       "img": "icons/magic/light/orb-beams-green.webp",
       "system": {
         "description": {
-          "value": "<p>Drawing on the divine essence of nature itself, you can cast spells to shape that essence to your will.</p>\n<h3>Cantrips</h3>\n<p>At 1st level, you know two cantrips of your choice from the druid spell list. You learn additional druid cantrips of your choice at higher levels, as shown in the Cantrips Known column of the Druid table.</p>\n<h3>Preparing and Casting Spells</h3>\n<p>The Druid table shows how many spell slots you have to cast your spells of 1st level and higher. To cast one of these druid spells, you must expend a slot of the spell's level or higher. You regain all expended spell slots when you finish a long rest.</p><p>You prepare the list of druid spells that are available for you to cast, choosing from the druid spell list. When you do so, choose a number of druid spells equal to your Wisdom modifier + your druid level (minimum of one spell). The spells must be of a level for which you have spell slots.</p><p>For example, if you are a 3rd-level druid, you have four 1st-level and two 2nd-level spell slots. With a Wisdom of 16, your list of prepared spells can include six spells of 1st or 2nd level, in any combination. If you prepare the 1st-level spell cure wounds, you can cast it using a 1st-level or 2nd-level slot. Casting the spell doesn't remove it from your list of prepared spells.</p><p>You can also change your list of prepared spells when you finish a long rest. Preparing a new list of druid spells requires time spent in prayer and meditation: at least 1 minute per spell level for each spell on your list.</p>\n<table border=\"1\">\n<thead>\n<tr>\n<td rowspan=\"2\">Level</td>\n<td rowspan=\"2\">Cantrips Known</td>\n<td colspan=\"9\">-Spell Slots per Spell Level-</td>\n</tr>\n<tr>\n<td>1st</td>\n<td>2nd</td>\n<td>3rd</td>\n<td>4th</td>\n<td>5th</td>\n<td>6th</td>\n<td>7th</td>\n<td>8th</td>\n<td>9th</td>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>1st</td>\n<td>2</td>\n<td>2</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>2nd</td>\n<td>2</td>\n<td>3</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>3rd</td>\n<td>2</td>\n<td>4</td>\n<td>2</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>4th</td>\n<td>3</td>\n<td>4</td>\n<td>3</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>5th</td>\n<td>3</td>\n<td>4</td>\n<td>3</td>\n<td>2</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>6th</td>\n<td>3</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>7th</td>\n<td>3</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>1</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>8th</td>\n<td>3</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>2</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>9th</td>\n<td>3</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>1</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>10th</td>\n<td>4</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>2</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>11th</td>\n<td>4</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>2</td>\n<td>1</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>12th</td>\n<td>4</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>2</td>\n<td>1</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>13th</td>\n<td>4</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>2</td>\n<td>1</td>\n<td>1</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>14th</td>\n<td>4</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>2</td>\n<td>1</td>\n<td>1</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>15th</td>\n<td>4</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>2</td>\n<td>1</td>\n<td>1</td>\n<td>1</td>\n<td>-</td>\n</tr>\n<tr>\n<td>16th</td>\n<td>4</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>2</td>\n<td>1</td>\n<td>1</td>\n<td>1</td>\n<td>-</td>\n</tr>\n<tr>\n<td>17th</td>\n<td>4</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>2</td>\n<td>1</td>\n<td>1</td>\n<td>1</td>\n<td>1</td>\n</tr>\n<tr>\n<td>18th</td>\n<td>4</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>1</td>\n<td>1</td>\n<td>1</td>\n<td>1</td>\n</tr>\n<tr>\n<td>19th</td>\n<td>4</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>2</td>\n<td>1</td>\n<td>1</td>\n<td>1</td>\n</tr>\n<tr>\n<td>20th</td>\n<td>4</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>2</td>\n<td>2</td>\n<td>1</td>\n<td>1</td>\n</tr>\n</tbody>\n</table>\n<h3>Spellcasting Ability</h3>\n<p>Wisdom is your spellcasting ability for your druid spells, since your magic draws upon your devotion and attunement to nature. You use your Wisdom whenever a spell refers to your spellcasting ability. In addition, you use your Wisdom modifier when setting the saving throw DC for a druid spell you cast and when making an attack roll with one.</p><p><strong>Spell save DC</strong> = 8 + your proficiency bonus + your Wisdom modifier</p><p><strong>Spell attack modifier</strong> = your proficiency bonus + your Wisdom modifier</p>\n<h3>Ritual Casting</h3>\n<p>You can cast a druid spell as a ritual if that spell has the ritual tag and you have the spell prepared.</p>\n<h3>Spellcasting Focus</h3>\n<p>You can use a druidic focus (see @UUID[Compendium.dnd5e.rules.BYFd9hiJGo9L5aOM.JournalEntryPage.AjavRU4yPfI9hfaI]{Adventuring Gear}) as a spellcasting focus for your druid spells.</p>",
+          "value": "<p>Drawing on the divine essence of nature itself, you can cast spells to shape that essence to your will.</p>\n<h3>Cantrips</h3>\n<p>At 1st level, you know two cantrips of your choice from the druid spell list. You learn additional druid cantrips of your choice at higher levels, as shown in the Cantrips Known column of the Druid table.</p>\n<h3>Preparing and Casting Spells</h3>\n<p>The Druid table shows how many spell slots you have to cast your spells of 1st level and higher. To cast one of these druid spells, you must expend a slot of the spell's level or higher. You regain all expended spell slots when you finish a long rest.</p><p>You prepare the list of druid spells that are available for you to cast, choosing from the druid spell list. When you do so, choose a number of druid spells equal to your Wisdom modifier + your druid level (minimum of one spell). The spells must be of a level for which you have spell slots.</p><p>For example, if you are a 3rd-level druid, you have four 1st-level and two 2nd-level spell slots. With a Wisdom of 16, your list of prepared spells can include six spells of 1st or 2nd level, in any combination. If you prepare the 1st-level spell cure wounds, you can cast it using a 1st-level or 2nd-level slot. Casting the spell doesn't remove it from your list of prepared spells.</p><p>You can also change your list of prepared spells when you finish a long rest. Preparing a new list of druid spells requires time spent in prayer and meditation: at least 1 minute per spell level for each spell on your list.</p>\n<table border=\"1\">\n<thead>\n<tr>\n<td rowspan=\"2\">Level</td>\n<td rowspan=\"2\">Cantrips Known</td>\n<td colspan=\"9\">-Spell Slots per Spell Level-</td>\n</tr>\n<tr>\n<td>1st</td>\n<td>2nd</td>\n<td>3rd</td>\n<td>4th</td>\n<td>5th</td>\n<td>6th</td>\n<td>7th</td>\n<td>8th</td>\n<td>9th</td>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>1st</td>\n<td>2</td>\n<td>2</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>2nd</td>\n<td>2</td>\n<td>3</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>3rd</td>\n<td>2</td>\n<td>4</td>\n<td>2</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>4th</td>\n<td>3</td>\n<td>4</td>\n<td>3</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>5th</td>\n<td>3</td>\n<td>4</td>\n<td>3</td>\n<td>2</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>6th</td>\n<td>3</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>7th</td>\n<td>3</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>1</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>8th</td>\n<td>3</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>2</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>9th</td>\n<td>3</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>1</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>10th</td>\n<td>4</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>2</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>11th</td>\n<td>4</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>2</td>\n<td>1</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>12th</td>\n<td>4</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>2</td>\n<td>1</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>13th</td>\n<td>4</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>2</td>\n<td>1</td>\n<td>1</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>14th</td>\n<td>4</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>2</td>\n<td>1</td>\n<td>1</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>15th</td>\n<td>4</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>2</td>\n<td>1</td>\n<td>1</td>\n<td>1</td>\n<td>-</td>\n</tr>\n<tr>\n<td>16th</td>\n<td>4</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>2</td>\n<td>1</td>\n<td>1</td>\n<td>1</td>\n<td>-</td>\n</tr>\n<tr>\n<td>17th</td>\n<td>4</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>2</td>\n<td>1</td>\n<td>1</td>\n<td>1</td>\n<td>1</td>\n</tr>\n<tr>\n<td>18th</td>\n<td>4</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>1</td>\n<td>1</td>\n<td>1</td>\n<td>1</td>\n</tr>\n<tr>\n<td>19th</td>\n<td>4</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>2</td>\n<td>1</td>\n<td>1</td>\n<td>1</td>\n</tr>\n<tr>\n<td>20th</td>\n<td>4</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>2</td>\n<td>2</td>\n<td>1</td>\n<td>1</td>\n</tr>\n</tbody>\n</table>\n<h3>Spellcasting Ability</h3>\n<p>Wisdom is your spellcasting ability for your druid spells, since your magic draws upon your devotion and attunement to nature. You use your Wisdom whenever a spell refers to your spellcasting ability. In addition, you use your Wisdom modifier when setting the saving throw DC for a druid spell you cast and when making an attack roll with one.</p><p><strong>Spell save DC</strong> = 8 + your proficiency bonus + your Wisdom modifier</p><p><strong>Spell attack modifier</strong> = your proficiency bonus + your Wisdom modifier</p>\n<h3>Ritual Casting</h3>\n<p>You can cast a druid spell as a ritual if that spell has the ritual tag and you have the spell prepared.</p>\n<h3>Spellcasting Focus</h3>\n<p>You can use a druidic focus (see @UUID[Compendium.shaper.rules.BYFd9hiJGo9L5aOM.JournalEntryPage.AjavRU4yPfI9hfaI]{Adventuring Gear}) as a spellcasting focus for your druid spells.</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -2317,8 +2317,8 @@
         "default": 0
       },
       "flags": {
-        "dnd5e": {
-          "sourceId": "Compendium.dnd5e.classfeatures.i6tPm3FNK13Ftc9v",
+        "shaper": {
+          "sourceId": "Compendium.shaper.classfeatures.i6tPm3FNK13Ftc9v",
           "advancementOrigin": "wu0878mk64sgvd9z.6pdotglp4hy4zlvb"
         }
       },
@@ -2423,19 +2423,19 @@
       "sort": 100001,
       "flags": {
         "core": {
-          "sourceId": "Compendium.dnd5e.spells.SbSvZKkJASyk8jKo"
+          "sourceId": "Compendium.shaper.spells.SbSvZKkJASyk8jKo"
         }
       },
       "img": "icons/magic/nature/vines-thorned-glow-teal.webp",
       "effects": [],
       "folder": null,
       "_stats": {
-        "systemId": "dnd5e",
+        "systemId": "shaper",
         "systemVersion": "2.0.0",
         "coreVersion": "10.279",
         "createdTime": 1661603486122,
         "modifiedTime": 1661603486122,
-        "lastModifiedBy": "dnd5ebuilder0000"
+        "lastModifiedBy": "shaperbuilder0000"
       }
     },
     {
@@ -2535,19 +2535,19 @@
       "sort": 100001,
       "flags": {
         "core": {
-          "sourceId": "Compendium.dnd5e.spells.VzgFzcmocr1X1cp4"
+          "sourceId": "Compendium.shaper.spells.VzgFzcmocr1X1cp4"
         }
       },
       "img": "icons/magic/fire/dagger-rune-enchant-teal.webp",
       "effects": [],
       "folder": null,
       "_stats": {
-        "systemId": "dnd5e",
+        "systemId": "shaper",
         "systemVersion": "2.0.0",
         "coreVersion": "10.279",
         "createdTime": 1661603486123,
         "modifiedTime": 1661603486123,
-        "lastModifiedBy": "dnd5ebuilder0000"
+        "lastModifiedBy": "shaperbuilder0000"
       }
     },
     {
@@ -2641,19 +2641,19 @@
       "sort": 100001,
       "flags": {
         "core": {
-          "sourceId": "Compendium.dnd5e.spells.hDOENzjuj5WpLq7B"
+          "sourceId": "Compendium.shaper.spells.hDOENzjuj5WpLq7B"
         }
       },
       "img": "icons/magic/nature/wolf-paw-glow-teal-blue.webp",
       "effects": [],
       "folder": null,
       "_stats": {
-        "systemId": "dnd5e",
+        "systemId": "shaper",
         "systemVersion": "2.0.0",
         "coreVersion": "10.279",
         "createdTime": 1661603486123,
         "modifiedTime": 1661603486123,
-        "lastModifiedBy": "dnd5ebuilder0000"
+        "lastModifiedBy": "shaperbuilder0000"
       }
     },
     {
@@ -2747,19 +2747,19 @@
       "sort": 100001,
       "flags": {
         "core": {
-          "sourceId": "Compendium.dnd5e.spells.eS7XnnApoxRxYXPs"
+          "sourceId": "Compendium.shaper.spells.eS7XnnApoxRxYXPs"
         }
       },
       "img": "icons/magic/fire/explosion-fireball-medium-purple-pink.webp",
       "effects": [],
       "folder": null,
       "_stats": {
-        "systemId": "dnd5e",
+        "systemId": "shaper",
         "systemVersion": "2.0.0",
         "coreVersion": "10.279",
         "createdTime": 1661603486124,
         "modifiedTime": 1661603486124,
-        "lastModifiedBy": "dnd5ebuilder0000"
+        "lastModifiedBy": "shaperbuilder0000"
       }
     },
     {
@@ -2854,19 +2854,19 @@
       "sort": 100001,
       "flags": {
         "core": {
-          "sourceId": "Compendium.dnd5e.spells.a3XtAO5n2GrqiAh5"
+          "sourceId": "Compendium.shaper.spells.a3XtAO5n2GrqiAh5"
         }
       },
       "img": "icons/magic/air/wind-swirl-purple-blue.webp",
       "effects": [],
       "folder": null,
       "_stats": {
-        "systemId": "dnd5e",
+        "systemId": "shaper",
         "systemVersion": "2.0.0",
         "coreVersion": "10.279",
         "createdTime": 1661603486124,
         "modifiedTime": 1661603486124,
-        "lastModifiedBy": "dnd5ebuilder0000"
+        "lastModifiedBy": "shaperbuilder0000"
       }
     },
     {
@@ -2965,19 +2965,19 @@
       "sort": 100001,
       "flags": {
         "core": {
-          "sourceId": "Compendium.dnd5e.spells.uUWb1wZgtMou0TVP"
+          "sourceId": "Compendium.shaper.spells.uUWb1wZgtMou0TVP"
         }
       },
       "img": "icons/magic/life/heart-cross-green.webp",
       "effects": [],
       "folder": null,
       "_stats": {
-        "systemId": "dnd5e",
+        "systemId": "shaper",
         "systemVersion": "2.0.0",
         "coreVersion": "10.279",
         "createdTime": 1661603486124,
         "modifiedTime": 1661603486124,
-        "lastModifiedBy": "dnd5ebuilder0000"
+        "lastModifiedBy": "shaperbuilder0000"
       }
     },
     {
@@ -3072,19 +3072,19 @@
       "sort": 100001,
       "flags": {
         "core": {
-          "sourceId": "Compendium.dnd5e.spells.ghXTfe7sgCbgf1Q8"
+          "sourceId": "Compendium.shaper.spells.ghXTfe7sgCbgf1Q8"
         }
       },
       "img": "icons/magic/light/explosion-star-blue.webp",
       "effects": [],
       "folder": null,
       "_stats": {
-        "systemId": "dnd5e",
+        "systemId": "shaper",
         "systemVersion": "2.0.0",
         "coreVersion": "10.279",
         "createdTime": 1661603486125,
         "modifiedTime": 1661603486125,
-        "lastModifiedBy": "dnd5ebuilder0000"
+        "lastModifiedBy": "shaperbuilder0000"
       }
     },
     {
@@ -3179,19 +3179,19 @@
       "sort": 100001,
       "flags": {
         "core": {
-          "sourceId": "Compendium.dnd5e.spells.2skfDtglk1mGrb3l"
+          "sourceId": "Compendium.shaper.spells.2skfDtglk1mGrb3l"
         }
       },
       "img": "icons/magic/air/air-burst-spiral-teal-green.webp",
       "effects": [],
       "folder": null,
       "_stats": {
-        "systemId": "dnd5e",
+        "systemId": "shaper",
         "systemVersion": "2.0.0",
         "coreVersion": "10.279",
         "createdTime": 1661603486125,
         "modifiedTime": 1661603486125,
-        "lastModifiedBy": "dnd5ebuilder0000"
+        "lastModifiedBy": "shaperbuilder0000"
       }
     },
     {
@@ -3283,7 +3283,7 @@
       "effects": [],
       "flags": {
         "core": {
-          "sourceId": "Compendium.dnd5e.spells.gMrWeG8fMDPRFiVe"
+          "sourceId": "Compendium.shaper.spells.gMrWeG8fMDPRFiVe"
         }
       },
       "_id": "gMrWeG8fMDPRFiVe",
@@ -3293,12 +3293,12 @@
         "default": 0
       },
       "_stats": {
-        "systemId": "dnd5e",
+        "systemId": "shaper",
         "systemVersion": "2.0.0",
         "coreVersion": "10.279",
         "createdTime": 1661603486126,
         "modifiedTime": 1661603486126,
-        "lastModifiedBy": "dnd5ebuilder0000"
+        "lastModifiedBy": "shaperbuilder0000"
       }
     },
     {
@@ -3392,19 +3392,19 @@
       "sort": 100001,
       "flags": {
         "core": {
-          "sourceId": "Compendium.dnd5e.spells.nqBDWkVOfcGZt4YU"
+          "sourceId": "Compendium.shaper.spells.nqBDWkVOfcGZt4YU"
         }
       },
       "img": "icons/magic/fire/projectile-meteor-salvo-strong-teal.webp",
       "effects": [],
       "folder": null,
       "_stats": {
-        "systemId": "dnd5e",
+        "systemId": "shaper",
         "systemVersion": "2.0.0",
         "coreVersion": "10.279",
         "createdTime": 1661603486127,
         "modifiedTime": 1661603486127,
-        "lastModifiedBy": "dnd5ebuilder0000"
+        "lastModifiedBy": "shaperbuilder0000"
       }
     },
     {
@@ -3499,19 +3499,19 @@
       "sort": 100001,
       "flags": {
         "core": {
-          "sourceId": "Compendium.dnd5e.spells.IBJmWjzbQGu7M4UX"
+          "sourceId": "Compendium.shaper.spells.IBJmWjzbQGu7M4UX"
         }
       },
       "img": "icons/magic/air/fog-gas-smoke-dense-gray.webp",
       "effects": [],
       "folder": null,
       "_stats": {
-        "systemId": "dnd5e",
+        "systemId": "shaper",
         "systemVersion": "2.0.0",
         "coreVersion": "10.279",
         "createdTime": 1661603486128,
         "modifiedTime": 1661603486128,
-        "lastModifiedBy": "dnd5ebuilder0000"
+        "lastModifiedBy": "shaperbuilder0000"
       }
     },
     {
@@ -3610,19 +3610,19 @@
       "sort": 100001,
       "flags": {
         "core": {
-          "sourceId": "Compendium.dnd5e.spells.Qf6CAZkc7ms4ZY3e"
+          "sourceId": "Compendium.shaper.spells.Qf6CAZkc7ms4ZY3e"
         }
       },
       "img": "icons/magic/nature/leaf-glow-green.webp",
       "effects": [],
       "folder": null,
       "_stats": {
-        "systemId": "dnd5e",
+        "systemId": "shaper",
         "systemVersion": "2.0.0",
         "coreVersion": "10.279",
         "createdTime": 1661603486128,
         "modifiedTime": 1661603486128,
-        "lastModifiedBy": "dnd5ebuilder0000"
+        "lastModifiedBy": "shaperbuilder0000"
       }
     },
     {
@@ -3721,19 +3721,19 @@
       "sort": 100001,
       "flags": {
         "core": {
-          "sourceId": "Compendium.dnd5e.spells.o8Dh7fblk1d16tnO"
+          "sourceId": "Compendium.shaper.spells.o8Dh7fblk1d16tnO"
         }
       },
       "img": "icons/magic/life/heart-cross-green.webp",
       "effects": [],
       "folder": null,
       "_stats": {
-        "systemId": "dnd5e",
+        "systemId": "shaper",
         "systemVersion": "2.0.0",
         "coreVersion": "10.279",
         "createdTime": 1661603486129,
         "modifiedTime": 1661603486129,
-        "lastModifiedBy": "dnd5ebuilder0000"
+        "lastModifiedBy": "shaperbuilder0000"
       }
     },
     {
@@ -3828,19 +3828,19 @@
       "sort": 100001,
       "flags": {
         "core": {
-          "sourceId": "Compendium.dnd5e.spells.ZrTc23tToJ0JpH2h"
+          "sourceId": "Compendium.shaper.spells.ZrTc23tToJ0JpH2h"
         }
       },
       "img": "icons/magic/control/debuff-energy-hold-blue-yellow.webp",
       "effects": [],
       "folder": null,
       "_stats": {
-        "systemId": "dnd5e",
+        "systemId": "shaper",
         "systemVersion": "2.0.0",
         "coreVersion": "10.279",
         "createdTime": 1661603486129,
         "modifiedTime": 1661603486129,
-        "lastModifiedBy": "dnd5ebuilder0000"
+        "lastModifiedBy": "shaperbuilder0000"
       }
     },
     {
@@ -3935,19 +3935,19 @@
       "sort": 100001,
       "flags": {
         "core": {
-          "sourceId": "Compendium.dnd5e.spells.B0pnIcc52O6G8hi8"
+          "sourceId": "Compendium.shaper.spells.B0pnIcc52O6G8hi8"
         }
       },
       "img": "icons/magic/air/wind-stream-blue-gray.webp",
       "effects": [],
       "folder": null,
       "_stats": {
-        "systemId": "dnd5e",
+        "systemId": "shaper",
         "systemVersion": "2.0.0",
         "coreVersion": "10.279",
         "createdTime": 1661603486130,
         "modifiedTime": 1661603486130,
-        "lastModifiedBy": "dnd5ebuilder0000"
+        "lastModifiedBy": "shaperbuilder0000"
       }
     },
     {
@@ -4042,19 +4042,19 @@
       "sort": 100001,
       "flags": {
         "core": {
-          "sourceId": "Compendium.dnd5e.spells.Kn7K5PtYUJAKZTTp"
+          "sourceId": "Compendium.shaper.spells.Kn7K5PtYUJAKZTTp"
         }
       },
       "img": "icons/magic/light/explosion-star-small-teal.webp",
       "effects": [],
       "folder": null,
       "_stats": {
-        "systemId": "dnd5e",
+        "systemId": "shaper",
         "systemVersion": "2.0.0",
         "coreVersion": "10.279",
         "createdTime": 1661603486130,
         "modifiedTime": 1661603486130,
-        "lastModifiedBy": "dnd5ebuilder0000"
+        "lastModifiedBy": "shaperbuilder0000"
       }
     },
     {
@@ -4149,19 +4149,19 @@
       "sort": 100001,
       "flags": {
         "core": {
-          "sourceId": "Compendium.dnd5e.spells.aL1F8fvYLtNzUbKu"
+          "sourceId": "Compendium.shaper.spells.aL1F8fvYLtNzUbKu"
         }
       },
       "img": "icons/magic/nature/wolf-paw-glow-small-teal-blue.webp",
       "effects": [],
       "folder": null,
       "_stats": {
-        "systemId": "dnd5e",
+        "systemId": "shaper",
         "systemVersion": "2.0.0",
         "coreVersion": "10.279",
         "createdTime": 1661603486131,
         "modifiedTime": 1661603486131,
-        "lastModifiedBy": "dnd5ebuilder0000"
+        "lastModifiedBy": "shaperbuilder0000"
       }
     },
     {
@@ -4259,19 +4259,19 @@
       "sort": 100001,
       "flags": {
         "core": {
-          "sourceId": "Compendium.dnd5e.spells.WTbOQBsarsL1LuXJ"
+          "sourceId": "Compendium.shaper.spells.WTbOQBsarsL1LuXJ"
         }
       },
       "img": "icons/magic/lightning/bolt-forked-teal.webp",
       "effects": [],
       "folder": null,
       "_stats": {
-        "systemId": "dnd5e",
+        "systemId": "shaper",
         "systemVersion": "2.0.0",
         "coreVersion": "10.279",
         "createdTime": 1661603486131,
         "modifiedTime": 1661603486131,
-        "lastModifiedBy": "dnd5ebuilder0000"
+        "lastModifiedBy": "shaperbuilder0000"
       }
     }
   ],
@@ -4312,11 +4312,11 @@
   "flags": {},
   "_id": "ZGDys30OS76uYaIO",
   "_stats": {
-    "systemId": "dnd5e",
+    "systemId": "shaper",
     "systemVersion": "2.0.0",
     "coreVersion": "10.279",
     "createdTime": 1661787232171,
     "modifiedTime": 1661878142437,
-    "lastModifiedBy": "dnd5ebuilder0000"
+    "lastModifiedBy": "shaperbuilder0000"
   }
 }

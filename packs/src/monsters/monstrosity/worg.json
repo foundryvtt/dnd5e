@@ -2,7 +2,7 @@
   "_id": "VBkp2rGQKvMcCOus",
   "name": "Worg",
   "type": "npc",
-  "img": "systems/dnd5e/tokens/monstrosity/Worg.webp",
+  "img": "systems/shaper/tokens/monstrosity/Worg.webp",
   "system": {
     "abilities": {
       "str": {
@@ -584,7 +584,7 @@
       "attenuation": 0.5
     },
     "texture": {
-      "src": "systems/dnd5e/tokens/monstrosity/Worg.webp",
+      "src": "systems/shaper/tokens/monstrosity/Worg.webp",
       "tint": null,
       "scaleX": 1.5,
       "scaleY": 1.5,
@@ -818,11 +818,11 @@
   },
   "flags": {},
   "_stats": {
-    "systemId": "dnd5e",
+    "systemId": "shaper",
     "systemVersion": "2.0.0",
     "coreVersion": "10.279",
     "createdTime": 1661787232858,
     "modifiedTime": 1661878732384,
-    "lastModifiedBy": "dnd5ebuilder0000"
+    "lastModifiedBy": "shaperbuilder0000"
   }
 }

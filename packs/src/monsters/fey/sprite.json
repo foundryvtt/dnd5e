@@ -2,7 +2,7 @@
   "_id": "MUpBNDoJEr09bLaO",
   "name": "Sprite",
   "type": "npc",
-  "img": "systems/dnd5e/tokens/fey/Sprite.webp",
+  "img": "systems/shaper/tokens/fey/Sprite.webp",
   "system": {
     "abilities": {
       "str": {
@@ -582,7 +582,7 @@
     "flags": {},
     "randomImg": false,
     "texture": {
-      "src": "systems/dnd5e/tokens/fey/Sprite.webp",
+      "src": "systems/shaper/tokens/fey/Sprite.webp",
       "tint": null,
       "scaleX": 1,
       "scaleY": 1,
@@ -1116,11 +1116,11 @@
   },
   "flags": {},
   "_stats": {
-    "systemId": "dnd5e",
+    "systemId": "shaper",
     "systemVersion": "2.0.0",
     "coreVersion": "10.279",
     "createdTime": 1661787232779,
     "modifiedTime": 1661878731145,
-    "lastModifiedBy": "dnd5ebuilder0000"
+    "lastModifiedBy": "shaperbuilder0000"
   }
 }

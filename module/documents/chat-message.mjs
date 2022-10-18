@@ -13,7 +13,7 @@ export function highlightCriticalSuccessFailure(message, html, data) {
     return (d0?.faces === 20) && (d0?.values.length === 1);
   });
   if ( !d20Roll ) return;
-  d20Roll = dnd5e.dice.D20Roll.fromRoll(d20Roll);
+  d20Roll = shaper.dice.D20Roll.fromRoll(d20Roll);
   const d = d20Roll.dice[0];
 
   const isModifiedRoll = ("success" in d.results[0]) || d.options.marginSuccess || d.options.marginFailure;
@@ -37,7 +37,7 @@ export function highlightCriticalSuccessFailure(message, html, data) {
  * @param {object} data          Configuration data passed to the message.
  */
 export function displayChatActionButtons(message, html, data) {
-  const chatCard = html.find(".dnd5e.chat-card");
+  const chatCard = html.find(".shaper.chat-card");
   if ( chatCard.length > 0 ) {
     const flavor = html.find(".flavor-text");
     if ( flavor.text() === html.find(".item-name").text() ) flavor.remove();
@@ -74,31 +74,31 @@ export function addChatMessageContextOptions(html, options) {
   };
   options.push(
     {
-      name: game.i18n.localize("DND5E.ChatContextDamage"),
+      name: game.i18n.localize("SHAPER.ChatContextDamage"),
       icon: '<i class="fas fa-user-minus"></i>',
       condition: canApply,
       callback: li => applyChatCardDamage(li, 1)
     },
     {
-      name: game.i18n.localize("DND5E.ChatContextHealing"),
+      name: game.i18n.localize("SHAPER.ChatContextHealing"),
       icon: '<i class="fas fa-user-plus"></i>',
       condition: canApply,
       callback: li => applyChatCardDamage(li, -1)
     },
     {
-      name: game.i18n.localize("DND5E.ChatContextTempHP"),
+      name: game.i18n.localize("SHAPER.ChatContextTempHP"),
       icon: '<i class="fas fa-user-clock"></i>',
       condition: canApply,
       callback: li => applyChatCardTemp(li)
     },
     {
-      name: game.i18n.localize("DND5E.ChatContextDoubleDamage"),
+      name: game.i18n.localize("SHAPER.ChatContextDoubleDamage"),
       icon: '<i class="fas fa-user-injured"></i>',
       condition: canApply,
       callback: li => applyChatCardDamage(li, 2)
     },
     {
-      name: game.i18n.localize("DND5E.ChatContextHalfDamage"),
+      name: game.i18n.localize("SHAPER.ChatContextHalfDamage"),
       icon: '<i class="fas fa-user-shield"></i>',
       condition: canApply,
       callback: li => applyChatCardDamage(li, 0.5)
@@ -153,5 +153,5 @@ function applyChatCardTemp(li) {
 export function onRenderChatMessage(app, html, data) {
   displayChatActionButtons(app, html, data);
   highlightCriticalSuccessFailure(app, html, data);
-  if (game.settings.get("dnd5e", "autoCollapseItemCards")) html.find(".card-content").hide();
+  if (game.settings.get("shaper", "autoCollapseItemCards")) html.find(".card-content").hide();
 }

@@ -19,9 +19,9 @@ export class ScaleValueAdvancement extends Advancement {
         }
       },
       order: 60,
-      icon: "systems/dnd5e/icons/svg/scale-value.svg",
-      title: game.i18n.localize("DND5E.AdvancementScaleValueTitle"),
-      hint: game.i18n.localize("DND5E.AdvancementScaleValueHint"),
+      icon: "systems/shaper/icons/svg/scale-value.svg",
+      title: game.i18n.localize("SHAPER.AdvancementScaleValueTitle"),
+      hint: game.i18n.localize("SHAPER.AdvancementScaleValueHint"),
       multiLevel: true,
       validItemTypes: new Set(["class", "subclass"]),
       apps: {
@@ -38,10 +38,10 @@ export class ScaleValueAdvancement extends Advancement {
    * @enum {object}
    */
   static TYPES = {
-    string: "DND5E.AdvancementScaleValueTypeString",
-    number: "DND5E.AdvancementScaleValueTypeNumber",
-    dice: "DND5E.AdvancementScaleValueTypeDice",
-    distance: "DND5E.AdvancementScaleValueTypeDistance"
+    string: "SHAPER.AdvancementScaleValueTypeString",
+    number: "SHAPER.AdvancementScaleValueTypeNumber",
+    dice: "SHAPER.AdvancementScaleValueTypeDice",
+    distance: "SHAPER.AdvancementScaleValueTypeDistance"
   };
 
   /* -------------------------------------------- */
@@ -128,7 +128,7 @@ export class ScaleValueAdvancement extends Advancement {
     if ( this.data.configuration.type !== "distance" ) return this.prepareValue(level);
     const value = this.valueForLevel(level);
     if ( value == null ) return null;
-    return `${value.value} ${CONFIG.DND5E.movementUnits[this.data.configuration.distance.units]}`;
+    return `${value.value} ${CONFIG.SHAPER.movementUnits[this.data.configuration.distance.units]}`;
   }
 
 }
@@ -142,8 +142,8 @@ export class ScaleValueConfig extends AdvancementConfig {
   /** @inheritdoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
-      classes: ["dnd5e", "advancement", "scale-value", "two-column"],
-      template: "systems/dnd5e/templates/advancement/scale-value-config.hbs",
+      classes: ["shaper", "advancement", "scale-value", "two-column"],
+      template: "systems/shaper/templates/advancement/scale-value-config.hbs",
       width: 540
     });
   }
@@ -157,14 +157,14 @@ export class ScaleValueConfig extends AdvancementConfig {
     data.classIdentifier = this.item.identifier;
     data.previewIdentifier = config.identifier || this.advancement.data.title?.slugify()
       || this.advancement.constructor.metadata.title.slugify();
-    data.typeHint = game.i18n.localize(`DND5E.AdvancementScaleValueTypeHint${config.type.capitalize()}`);
+    data.typeHint = game.i18n.localize(`SHAPER.AdvancementScaleValueTypeHint${config.type.capitalize()}`);
     data.types =
       Object.fromEntries(
         Object.entries(ScaleValueAdvancement.TYPES).map(([key, label]) => [key, game.i18n.localize(label)]));
     data.faces = Object.fromEntries([2, 3, 4, 6, 8, 10, 12, 20].map(die => [die, `d${die}`]));
     data.levels = this._prepareLevelData();
     data.isNumeric = ["number", "distance"].includes(config.type);
-    data.movementUnits = CONFIG.DND5E.movementUnits;
+    data.movementUnits = CONFIG.SHAPER.movementUnits;
     return data;
   }
 
@@ -177,7 +177,7 @@ export class ScaleValueConfig extends AdvancementConfig {
    */
   _prepareLevelData() {
     let lastValue = null;
-    return Array.fromRange(CONFIG.DND5E.maxLevel + 1).slice(1).reduce((obj, level) => {
+    return Array.fromRange(CONFIG.SHAPER.maxLevel + 1).slice(1).reduce((obj, level) => {
       obj[level] = { placeholder: this._formatPlaceholder(lastValue), value: null };
       const value = this.advancement.data.configuration.scale[level];
       if ( value ) {
@@ -274,7 +274,7 @@ export class ScaleValueConfig extends AdvancementConfig {
       for ( const key in formData ) { // Clear scale values if we're changing type.
         if ( key.startsWith("data.configuration.scale.") ) delete formData[key];
       }
-      for ( const l of Array.fromRange(CONFIG.DND5E.maxLevel, 1) ) {
+      for ( const l of Array.fromRange(CONFIG.SHAPER.maxLevel, 1) ) {
         formData[`data.configuration.scale.${l}`] = null;
       }
     }
@@ -291,7 +291,7 @@ export class ScaleValueFlow extends AdvancementFlow {
   /** @inheritdoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
-      template: "systems/dnd5e/templates/advancement/scale-value-flow.hbs"
+      template: "systems/shaper/templates/advancement/scale-value-flow.hbs"
     });
   }
 

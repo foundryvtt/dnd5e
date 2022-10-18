@@ -2,7 +2,7 @@
   "_id": "JW8bXggOMBx1S6tF",
   "name": "Baboon",
   "type": "npc",
-  "img": "systems/dnd5e/tokens/beast/Baboon.webp",
+  "img": "systems/shaper/tokens/beast/Baboon.webp",
   "system": {
     "abilities": {
       "str": {
@@ -578,7 +578,7 @@
       "color": null
     },
     "texture": {
-      "src": "systems/dnd5e/tokens/beast/Baboon.webp",
+      "src": "systems/shaper/tokens/beast/Baboon.webp",
       "tint": null,
       "scaleX": 0.8,
       "scaleY": 0.8,
@@ -812,11 +812,11 @@
   },
   "flags": {},
   "_stats": {
-    "systemId": "dnd5e",
+    "systemId": "shaper",
     "systemVersion": "2.0.0",
     "coreVersion": "10.279",
     "createdTime": 1661787232742,
     "modifiedTime": 1661878730789,
-    "lastModifiedBy": "dnd5ebuilder0000"
+    "lastModifiedBy": "shaperbuilder0000"
   }
 }

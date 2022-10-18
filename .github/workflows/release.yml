@@ -26,8 +26,8 @@ jobs:
       run: |
         TAG=${GITHUB_REF/refs\/tags\//}
         echo ::set-output name=TAG_NAME::$TAG
-        echo ::set-output name=ZIP_NAME::dnd5e-$TAG.zip
-        echo ::set-output name=RELEASE_DOWNLOAD_URL::https://github.com/${{github.repository}}/releases/download/$TAG/dnd5e-$TAG.zip
+        echo ::set-output name=ZIP_NAME::shaper-$TAG.zip
+        echo ::set-output name=RELEASE_DOWNLOAD_URL::https://github.com/${{github.repository}}/releases/download/$TAG/shaper-$TAG.zip
         echo ::set-output name=RELEASE_INSTALL_URL::https://github.com/${{github.repository}}/releases/download/$TAG/system.json
         JSON=$(cat ./system.json)
         echo ::set-output name=SYSTEM_JSON::${JSON//'%'/'%25'}
@@ -81,10 +81,10 @@ jobs:
     - name: Build All
       run: |
         npm run build --if-present
-        mv --force dnd5e-compiled.mjs dnd5e.mjs
+        mv --force shaper-compiled.mjs shaper.mjs
 
     # Create a zip file with all files required by the module to add to the release
-    - run: zip ${{steps.get_vars.outputs.ZIP_NAME}} -r icons lang json packs/*.db templates tokens ui dnd5e.css dnd5e.mjs dnd5e-compiled.mjs.map LICENSE.txt OGL.txt README.md system.json template.json
+    - run: zip ${{steps.get_vars.outputs.ZIP_NAME}} -r icons lang json packs/*.db templates tokens ui shaper.css shaper.mjs shaper-compiled.mjs.map LICENSE.txt OGL.txt README.md system.json template.json
 
 
     # Create a release for this specific version

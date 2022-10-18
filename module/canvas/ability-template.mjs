@@ -34,7 +34,7 @@ export default class AbilityTemplate extends MeasuredTemplate {
    */
   static fromItem(item) {
     const target = item.system.target || {};
-    const templateShape = dnd5e.config.areaTargetTypes[target.type];
+    const templateShape = shaper.config.areaTargetTypes[target.type];
     if ( !templateShape ) return null;
 
     // Prepare template data
@@ -46,7 +46,7 @@ export default class AbilityTemplate extends MeasuredTemplate {
       x: 0,
       y: 0,
       fillColor: game.user.color,
-      flags: { dnd5e: { origin: item.uuid } }
+      flags: { shaper: { origin: item.uuid } }
     };
 
     // Additional type-specific data

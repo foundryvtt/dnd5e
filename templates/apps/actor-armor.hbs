@@ -4,18 +4,18 @@
     </div>
 
     <div class="form-group select">
-        <label>{{localize "DND5E.ArmorClassCalculation"}}</label>
+        <label>{{localize "SHAPER.ArmorClassCalculation"}}</label>
         <select name="ac.calc">
             {{selectOptions calculations selected=ac.calc labelAttr="label"}}
         </select>
     </div>
 
     <div class="form-group stacked">
-        <label>{{localize "DND5E.ArmorClassFormula"}}</label>
+        <label>{{localize "SHAPER.ArmorClassFormula"}}</label>
         <input type="text" name="ac.formula" value="{{formula}}" {{#if formulaDisabled}}disabled{{/if}}>
     </div>
 
     <button type="submit">
-        <i class="far fa-save"></i> {{ localize "DND5E.TraitSave" }}
+        <i class="far fa-save"></i> {{ localize "SHAPER.TraitSave" }}
     </button>
 </form>

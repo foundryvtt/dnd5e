@@ -1,17 +1,17 @@
 <form autocomplete="off">
-    <p class="notes">{{ localize "DND5E.HitDiceConfigHint" }}</p>
+    <p class="notes">{{ localize "SHAPER.HitDiceConfigHint" }}</p>
     {{#each classes}}
         <div class="form-group">
             <label>{{this.name}} ({{this.diceDenom}})</label>
             <div class="form-fields">
                 <button class="decrement" type="button">-</button>
-                <input title="{{ localize 'DND5E.HitDiceRemaining' }}" class="current" name="{{this.classItemId}}" type="number" value="{{this.currentHitDice}}" />
+                <input title="{{ localize 'SHAPER.HitDiceRemaining' }}" class="current" name="{{this.classItemId}}" type="number" value="{{this.currentHitDice}}" />
                 <span class="sep">/</span>
-                <input title="{{ localize 'DND5E.HitDiceMax' }}" class="max" type="number" value="{{this.maxHitDice}}" disabled />
+                <input title="{{ localize 'SHAPER.HitDiceMax' }}" class="max" type="number" value="{{this.maxHitDice}}" disabled />
                 <button class="increment" type="button">+</button>
 
                 <button class="roll-hd" data-hd-denom="{{this.diceDenom}}" {{#unless this.canRoll}}disabled{{/unless}}>
-                    <i class="fas fa-dice-d20"></i> {{ localize "DND5E.Roll" }}
+                    <i class="fas fa-dice-d20"></i> {{ localize "SHAPER.Roll" }}
                 </button>
             </div>
         </div>

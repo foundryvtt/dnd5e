@@ -6,7 +6,7 @@
 
         <div class="header-details flexrow">
             <h1 class="charname">
-                <input name="name" type="text" value="{{item.name}}" placeholder="{{ localize 'DND5E.ItemName' }}"/>
+                <input name="name" type="text" value="{{item.name}}" placeholder="{{ localize 'SHAPER.ItemName' }}"/>
             </h1>
 
             <div class="item-subtitle">
@@ -24,7 +24,7 @@
                     </select>
                 </li>
                 <li>
-                    <input type="text" name="system.source" value="{{system.source}}" placeholder="{{ localize 'DND5E.Source' }}"/>
+                    <input type="text" name="system.source" value="{{system.source}}" placeholder="{{ localize 'SHAPER.Source' }}"/>
                 </li>
             </ul>
         </div>
@@ -32,67 +32,67 @@
 
     {{!-- Item Sheet Navigation --}}
     <nav class="sheet-navigation tabs" data-group="primary">
-        <a class="item active" data-tab="description">{{ localize "DND5E.Description" }}</a>
-        <a class="item" data-tab="details">{{ localize "DND5E.Details" }}</a>
-        <a class="item" data-tab="effects">{{ localize "DND5E.Effects" }}</a>
+        <a class="item active" data-tab="description">{{ localize "SHAPER.Description" }}</a>
+        <a class="item" data-tab="details">{{ localize "SHAPER.Details" }}</a>
+        <a class="item" data-tab="effects">{{ localize "SHAPER.Effects" }}</a>
     </nav>
 
     {{!-- Item Sheet Body --}}
     <section class="sheet-body">
 
         {{!-- Description Tab --}}
-        {{> "dnd5e.item-description"}}
+        {{> "shaper.item-description"}}
 
         {{!-- Details Tab --}}
         <div class="tab details" data-group="primary" data-tab="details">
-            <h3 class="form-header">{{ localize "DND5E.ItemConsumableDetails" }}</h3>
+            <h3 class="form-header">{{ localize "SHAPER.ItemConsumableDetails" }}</h3>
 
             {{!-- Consumable Type --}}
             <div class="form-group">
-                <label>{{ localize "DND5E.ItemConsumableType" }}</label>
+                <label>{{ localize "SHAPER.ItemConsumableType" }}</label>
                 <select name="system.consumableType">
                     {{selectOptions config.consumableTypes selected=system.consumableType}}
                 </select>
             </div>
 
             <div class="form-group">
-                <label>{{localize "DND5E.Attunement"}}</label>
+                <label>{{localize "SHAPER.Attunement"}}</label>
                 <select name="system.attunement" data-dtype="Number">
                     {{selectOptions config.attunements selected=system.attunement}}
                 </select>
             </div>
 
             <div class="form-group stacked">
-                <label>{{ localize "DND5E.ItemConsumableStatus" }}</label>
+                <label>{{ localize "SHAPER.ItemConsumableStatus" }}</label>
                 <label class="checkbox">
-                    <input type="checkbox" name="system.equipped" {{checked system.equipped}}/> {{ localize "DND5E.Equipped" }}
+                    <input type="checkbox" name="system.equipped" {{checked system.equipped}}/> {{ localize "SHAPER.Equipped" }}
                 </label>
                 <label class="checkbox">
-                    <input type="checkbox" name="system.identified" {{checked system.identified}}/> {{ localize "DND5E.Identified" }}
+                    <input type="checkbox" name="system.identified" {{checked system.identified}}/> {{ localize "SHAPER.Identified" }}
                 </label>
             </div>
 
-            <h3 class="form-header">{{ localize "DND5E.ItemConsumableUsage" }}</h3>
+            <h3 class="form-header">{{ localize "SHAPER.ItemConsumableUsage" }}</h3>
 
             {{!-- Item Activation Template --}}
-            {{> "dnd5e.item-activation"}}
+            {{> "shaper.item-activation"}}
             {{#if system.activation.type}}
             <div class="form-group">
                 <label class="checkbox">
-                    <input type="checkbox" name="system.uses.autoDestroy" {{checked system.uses.autoDestroy}}/> {{ localize "DND5E.ItemDestroyEmpty" }}
+                    <input type="checkbox" name="system.uses.autoDestroy" {{checked system.uses.autoDestroy}}/> {{ localize "SHAPER.ItemDestroyEmpty" }}
                 </label>
             </div>
             {{/if}}
 
-            <h3 class="form-header">{{ localize "DND5E.ItemConsumableActivation" }}</h3>
+            <h3 class="form-header">{{ localize "SHAPER.ItemConsumableActivation" }}</h3>
 
             {{!-- Item Action Template --}}
-            {{> "dnd5e.item-action"}}
+            {{> "shaper.item-action"}}
         </div>
 
         {{!-- Effects Tab --}}
         <div class="tab effects flexcol" data-group="primary" data-tab="effects">
-            {{> "dnd5e.active-effects"}}
+            {{> "shaper.active-effects"}}
         </div>
     </section>
 </form>

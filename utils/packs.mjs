@@ -49,7 +49,7 @@ function cleanPackEntry(data, { clearSourceId=true }={}) {
   if ( clearSourceId ) delete data.flags?.core?.sourceId;
   delete data.flags?.importSource;
   delete data.flags?.exportSource;
-  if ( data._stats?.lastModifiedBy ) data._stats.lastModifiedBy = "dnd5ebuilder0000";
+  if ( data._stats?.lastModifiedBy ) data._stats.lastModifiedBy = "shaperbuilder0000";
 
   // Remove empty entries in flags
   if ( !data.flags ) data.flags = {};

@@ -1,7 +1,7 @@
 {
   "name": "Quillathe (Elf Ranger)",
   "type": "character",
-  "img": "systems/dnd5e/tokens/heroes/RangerBow.webp",
+  "img": "systems/shaper/tokens/heroes/RangerBow.webp",
   "system": {
     "abilities": {
       "str": {
@@ -617,7 +617,7 @@
       "attenuation": 0.5
     },
     "texture": {
-      "src": "systems/dnd5e/tokens/heroes/RangerBow.webp",
+      "src": "systems/shaper/tokens/heroes/RangerBow.webp",
       "tint": null,
       "scaleX": 0.9,
       "scaleY": 0.9,
@@ -1972,7 +1972,7 @@
       "type": "feat",
       "system": {
         "description": {
-          "value": "<div title=\"Page 4\">\n<div>\n<div>\n<p><em>Your elf character has a variety of natural abilities, the result of thousands of years of elven refinement. </em></p><p><em><strong>Ability Score Increase.</strong></em> Your Dexterity score increases by 2.</p><p><em><strong>Age.</strong></em> Although elves reach physical maturity at about the same age as humans, the elven understanding of adulthood goes beyond physical growth to encompass worldly experience. An elf typically claims adulthood and an adult name around the age of 100 and can live to be 750 years old.</p><p><em><strong>Alignment</strong></em>. Elves love freedom, variety, and self-­expression, so they lean strongly toward the gentler aspects of chaos. They value and protect others' freedom as well as their own, and they are more often good than not.</p><p><em><strong>Size.</strong></em> Elves range from under 5 to over 6 feet tall and have slender builds. Your size is Medium.</p><p><em><strong>Speed.</strong></em> Your base walking speed is 30 feet.</p><p><em><strong>Darkvision.</strong></em> Accustomed to twilit forests and the night sky, you have superior vision in dark and dim conditions. You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can't discern color in darkness, only shades of gray.</p><p><em><strong>Keen Senses.</strong></em> You have proficiency in the Perception skill.</p><p><em><strong>Fey Ancestry.</strong></em> @Compendium[dnd5e.races.cnTbpPPeGW7vGjOV]{Fey Ancestry} You have advantage on saving throws against being charmed, and magic can't put you to sleep.</p><p><em><strong>Trance.</strong></em> Elves don't need to sleep. Instead, they meditate deeply, remaining semiconscious, for 4 hours a day. (The Common word for such meditation is \"trance.\") While meditating, you can dream after a fashion; such dreams are actually mental exercises that have become reflexive through years of practice. After resting in this way, you gain the same benefit that a human does from 8 hours of sleep.</p>\n<div title=\"Page 4\">\n<div>\n<div>\n<p><em><strong>Languages.</strong></em> You can speak, read, and write Common and Elvish. Elvish is fluid, with subtle intonations and intricate grammar. Elven literature is rich and varied, and their songs and poems are famous among other races. Many bards learn their language so they can add Elvish ballads to their repertoires.</p>\n</div>\n</div>\n</div>\n</div>\n</div>\n</div>",
+          "value": "<div title=\"Page 4\">\n<div>\n<div>\n<p><em>Your elf character has a variety of natural abilities, the result of thousands of years of elven refinement. </em></p><p><em><strong>Ability Score Increase.</strong></em> Your Dexterity score increases by 2.</p><p><em><strong>Age.</strong></em> Although elves reach physical maturity at about the same age as humans, the elven understanding of adulthood goes beyond physical growth to encompass worldly experience. An elf typically claims adulthood and an adult name around the age of 100 and can live to be 750 years old.</p><p><em><strong>Alignment</strong></em>. Elves love freedom, variety, and self-­expression, so they lean strongly toward the gentler aspects of chaos. They value and protect others' freedom as well as their own, and they are more often good than not.</p><p><em><strong>Size.</strong></em> Elves range from under 5 to over 6 feet tall and have slender builds. Your size is Medium.</p><p><em><strong>Speed.</strong></em> Your base walking speed is 30 feet.</p><p><em><strong>Darkvision.</strong></em> Accustomed to twilit forests and the night sky, you have superior vision in dark and dim conditions. You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can't discern color in darkness, only shades of gray.</p><p><em><strong>Keen Senses.</strong></em> You have proficiency in the Perception skill.</p><p><em><strong>Fey Ancestry.</strong></em> @Compendium[shaper.races.cnTbpPPeGW7vGjOV]{Fey Ancestry} You have advantage on saving throws against being charmed, and magic can't put you to sleep.</p><p><em><strong>Trance.</strong></em> Elves don't need to sleep. Instead, they meditate deeply, remaining semiconscious, for 4 hours a day. (The Common word for such meditation is \"trance.\") While meditating, you can dream after a fashion; such dreams are actually mental exercises that have become reflexive through years of practice. After resting in this way, you gain the same benefit that a human does from 8 hours of sleep.</p>\n<div title=\"Page 4\">\n<div>\n<div>\n<p><em><strong>Languages.</strong></em> You can speak, read, and write Common and Elvish. Elvish is fluid, with subtle intonations and intricate grammar. Elven literature is rich and varied, and their songs and poems are famous among other races. Many bards learn their language so they can add Elvish ballads to their repertoires.</p>\n</div>\n</div>\n</div>\n</div>\n</div>\n</div>",
           "chat": "",
           "unidentified": ""
         },
@@ -2139,7 +2139,7 @@
       "img": "icons/weapons/bows/shortbow-recurve-yellow.webp",
       "system": {
         "description": {
-          "value": "<p>As a ranger, you gain the following class features.</p>\n<h3>Hit Points</h3>\n<p><strong>Hit Dice:</strong> 1d10 per ranger level<br /><strong>Hit Points at 1st Level:</strong> 10 + your Constitution modifier<br /><strong>Hit Points at Higher Levels:</strong> 1d10 (or 6) + your Constitution modifier per ranger level after 1st</p>\n<h3>Proficiencies</h3>\n<p><strong>Armor:</strong> Light armor, medium armor, shields<br /><strong>Weapons:</strong> Simple weapons, martial weapons<br /><strong>Tools:</strong> None<br /><strong>Saving Throws:</strong> Strength, Dexterity<br /><strong>Skills:</strong> Choose three from Animal Handling, Athletics, Insight, Investigation, Nature, Perception, Stealth, and Survival</p>\n<h3>Equipment</h3>\n<p>You start with the following equipment, in addition to the equipment granted by your background:</p>\n<ul>\n<li>(a) scale mail or (b) leather armor</li>\n<li>(a) two shortswords or (b) two simple melee weapons</li>\n<li>(a) a dungeoneer's pack or (b) an explorer's pack</li>\n<li>A longbow and a quiver of 20 arrows</li>\n</ul>\n<h1>Ranger Advancement</h1>\n<table>\n<thead>\n<tr>\n<td>Level</td>\n<td>Proficiency Bonus</td>\n<td>Features</td>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>1st</td>\n<td>+2</td>\n<td>@Compendium[dnd5e.classfeatures.4Vpj9vCOB37GtXk6]{Favored Enemy}, @Compendium[dnd5e.classfeatures.8fbZt2Qh7ZttwIan]{Natural Explorer}</td>\n</tr>\n<tr>\n<td>2nd</td>\n<td>+2</td>\n<td>@Compendium[dnd5e.classfeatures.fbExzwNwEAl2kW9c]{Fighting Style}, @Compendium[dnd5e.classfeatures.u6xV3Ki3TXRrD7zg]{Spellcasting}</td>\n</tr>\n<tr>\n<td>3rd</td>\n<td>+2</td>\n<td>@Compendium[dnd5e.classfeatures.1dJHU48yNqn3lcfx]{Ranger Archetype}, @Compendium[dnd5e.classfeatures.kaHcUGiwi8AtfZIm]{Primeval Awareness}</td>\n</tr>\n<tr>\n<td>4th</td>\n<td>+2</td>\n<td>@Compendium[dnd5e.classfeatures.s0Cc2zcX0JzIgam5]{Ability Score Improvement}</td>\n</tr>\n<tr>\n<td>5th</td>\n<td>+3</td>\n<td>2nd Level Spell Slot, @Compendium[dnd5e.classfeatures.XogoBnFWmCAHXppo]{Extra Attack}</td>\n</tr>\n<tr>\n<td>6th</td>\n<td>+3</td>\n<td>@Compendium[dnd5e.classfeatures.4Vpj9vCOB37GtXk6]{Favored Enemy +1}, @Compendium[dnd5e.classfeatures.8fbZt2Qh7ZttwIan]{Natural Explorer improvements}</td>\n</tr>\n<tr>\n<td>7th</td>\n<td>+3</td>\n<td>Ranger Archetype feature</td>\n</tr>\n<tr>\n<td>8th</td>\n<td>+3</td>\n<td>@Compendium[dnd5e.classfeatures.s0Cc2zcX0JzIgam5]{Ability Score Improvement}, @Compendium[dnd5e.classfeatures.C5fzaOBc6HxyOWRn]{Land's Stride}</td>\n</tr>\n<tr>\n<td>9th</td>\n<td>+4</td>\n<td>3rd Level Spell Slot</td>\n</tr>\n<tr>\n<td>10th</td>\n<td>+4</td>\n<td>@Compendium[dnd5e.classfeatures.8fbZt2Qh7ZttwIan]{Natural Explorer improvement}, @Compendium[dnd5e.classfeatures.r0unvWK0lPsDthDx]{Hide in Plain Sight}</td>\n</tr>\n<tr>\n<td>11th</td>\n<td>+4</td>\n<td>Ranger Archetype feature</td>\n</tr>\n<tr>\n<td>12th</td>\n<td>+4</td>\n<td>@Compendium[dnd5e.classfeatures.s0Cc2zcX0JzIgam5]{Ability Score Improvement}</td>\n</tr>\n<tr>\n<td>13th</td>\n<td>+5</td>\n<td>4th Level Spell Slot</td>\n</tr>\n<tr>\n<td>14th</td>\n<td>+5</td>\n<td>@Compendium[dnd5e.classfeatures.4Vpj9vCOB37GtXk6]{Favored Enemy +1}, @Compendium[dnd5e.classfeatures.DhU2dWCNnX78TstR]{Vanish}</td>\n</tr>\n<tr>\n<td>15th</td>\n<td>+5</td>\n<td>Ranger Archetype feature</td>\n</tr>\n<tr>\n<td>16th</td>\n<td>+5</td>\n<td>@Compendium[dnd5e.classfeatures.s0Cc2zcX0JzIgam5]{Ability Score Improvement}</td>\n</tr>\n<tr>\n<td>17th</td>\n<td>+6</td>\n<td>5th Level Spell Slot</td>\n</tr>\n<tr>\n<td>18th</td>\n<td>+6</td>\n<td>@Compendium[dnd5e.classfeatures.QBVmY56RMQuh6C8h]{Feral Senses}</td>\n</tr>\n<tr>\n<td>19th</td>\n<td>+6</td>\n<td>@Compendium[dnd5e.classfeatures.s0Cc2zcX0JzIgam5]{Ability Score Improvement}</td>\n</tr>\n<tr>\n<td>20th</td>\n<td>+6</td>\n<td>@Compendium[dnd5e.classfeatures.3CaP1vFHVR8LgHjx]{Foe Slayer}</td>\n</tr>\n</tbody>\n</table>\n<h1>Ranger Archetypes</h1>\n<p>A classic expression of the ranger ideal is the Hunter.</p>\n<p>@Compendium[dnd5e.subclasses.uqd2q6WjVfcsaaGb]{Hunter}</p>",
+          "value": "<p>As a ranger, you gain the following class features.</p>\n<h3>Hit Points</h3>\n<p><strong>Hit Dice:</strong> 1d10 per ranger level<br /><strong>Hit Points at 1st Level:</strong> 10 + your Constitution modifier<br /><strong>Hit Points at Higher Levels:</strong> 1d10 (or 6) + your Constitution modifier per ranger level after 1st</p>\n<h3>Proficiencies</h3>\n<p><strong>Armor:</strong> Light armor, medium armor, shields<br /><strong>Weapons:</strong> Simple weapons, martial weapons<br /><strong>Tools:</strong> None<br /><strong>Saving Throws:</strong> Strength, Dexterity<br /><strong>Skills:</strong> Choose three from Animal Handling, Athletics, Insight, Investigation, Nature, Perception, Stealth, and Survival</p>\n<h3>Equipment</h3>\n<p>You start with the following equipment, in addition to the equipment granted by your background:</p>\n<ul>\n<li>(a) scale mail or (b) leather armor</li>\n<li>(a) two shortswords or (b) two simple melee weapons</li>\n<li>(a) a dungeoneer's pack or (b) an explorer's pack</li>\n<li>A longbow and a quiver of 20 arrows</li>\n</ul>\n<h1>Ranger Advancement</h1>\n<table>\n<thead>\n<tr>\n<td>Level</td>\n<td>Proficiency Bonus</td>\n<td>Features</td>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>1st</td>\n<td>+2</td>\n<td>@Compendium[shaper.classfeatures.4Vpj9vCOB37GtXk6]{Favored Enemy}, @Compendium[shaper.classfeatures.8fbZt2Qh7ZttwIan]{Natural Explorer}</td>\n</tr>\n<tr>\n<td>2nd</td>\n<td>+2</td>\n<td>@Compendium[shaper.classfeatures.fbExzwNwEAl2kW9c]{Fighting Style}, @Compendium[shaper.classfeatures.u6xV3Ki3TXRrD7zg]{Spellcasting}</td>\n</tr>\n<tr>\n<td>3rd</td>\n<td>+2</td>\n<td>@Compendium[shaper.classfeatures.1dJHU48yNqn3lcfx]{Ranger Archetype}, @Compendium[shaper.classfeatures.kaHcUGiwi8AtfZIm]{Primeval Awareness}</td>\n</tr>\n<tr>\n<td>4th</td>\n<td>+2</td>\n<td>@Compendium[shaper.classfeatures.s0Cc2zcX0JzIgam5]{Ability Score Improvement}</td>\n</tr>\n<tr>\n<td>5th</td>\n<td>+3</td>\n<td>2nd Level Spell Slot, @Compendium[shaper.classfeatures.XogoBnFWmCAHXppo]{Extra Attack}</td>\n</tr>\n<tr>\n<td>6th</td>\n<td>+3</td>\n<td>@Compendium[shaper.classfeatures.4Vpj9vCOB37GtXk6]{Favored Enemy +1}, @Compendium[shaper.classfeatures.8fbZt2Qh7ZttwIan]{Natural Explorer improvements}</td>\n</tr>\n<tr>\n<td>7th</td>\n<td>+3</td>\n<td>Ranger Archetype feature</td>\n</tr>\n<tr>\n<td>8th</td>\n<td>+3</td>\n<td>@Compendium[shaper.classfeatures.s0Cc2zcX0JzIgam5]{Ability Score Improvement}, @Compendium[shaper.classfeatures.C5fzaOBc6HxyOWRn]{Land's Stride}</td>\n</tr>\n<tr>\n<td>9th</td>\n<td>+4</td>\n<td>3rd Level Spell Slot</td>\n</tr>\n<tr>\n<td>10th</td>\n<td>+4</td>\n<td>@Compendium[shaper.classfeatures.8fbZt2Qh7ZttwIan]{Natural Explorer improvement}, @Compendium[shaper.classfeatures.r0unvWK0lPsDthDx]{Hide in Plain Sight}</td>\n</tr>\n<tr>\n<td>11th</td>\n<td>+4</td>\n<td>Ranger Archetype feature</td>\n</tr>\n<tr>\n<td>12th</td>\n<td>+4</td>\n<td>@Compendium[shaper.classfeatures.s0Cc2zcX0JzIgam5]{Ability Score Improvement}</td>\n</tr>\n<tr>\n<td>13th</td>\n<td>+5</td>\n<td>4th Level Spell Slot</td>\n</tr>\n<tr>\n<td>14th</td>\n<td>+5</td>\n<td>@Compendium[shaper.classfeatures.4Vpj9vCOB37GtXk6]{Favored Enemy +1}, @Compendium[shaper.classfeatures.DhU2dWCNnX78TstR]{Vanish}</td>\n</tr>\n<tr>\n<td>15th</td>\n<td>+5</td>\n<td>Ranger Archetype feature</td>\n</tr>\n<tr>\n<td>16th</td>\n<td>+5</td>\n<td>@Compendium[shaper.classfeatures.s0Cc2zcX0JzIgam5]{Ability Score Improvement}</td>\n</tr>\n<tr>\n<td>17th</td>\n<td>+6</td>\n<td>5th Level Spell Slot</td>\n</tr>\n<tr>\n<td>18th</td>\n<td>+6</td>\n<td>@Compendium[shaper.classfeatures.QBVmY56RMQuh6C8h]{Feral Senses}</td>\n</tr>\n<tr>\n<td>19th</td>\n<td>+6</td>\n<td>@Compendium[shaper.classfeatures.s0Cc2zcX0JzIgam5]{Ability Score Improvement}</td>\n</tr>\n<tr>\n<td>20th</td>\n<td>+6</td>\n<td>@Compendium[shaper.classfeatures.3CaP1vFHVR8LgHjx]{Foe Slayer}</td>\n</tr>\n</tbody>\n</table>\n<h1>Ranger Archetypes</h1>\n<p>A classic expression of the ranger ideal is the Hunter.</p>\n<p>@Compendium[shaper.subclasses.uqd2q6WjVfcsaaGb]{Hunter}</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -2154,14 +2154,14 @@
             "type": "ItemGrant",
             "configuration": {
               "items": [
-                "Compendium.dnd5e.classfeatures.4Vpj9vCOB37GtXk6",
-                "Compendium.dnd5e.classfeatures.8fbZt2Qh7ZttwIan"
+                "Compendium.shaper.classfeatures.4Vpj9vCOB37GtXk6",
+                "Compendium.shaper.classfeatures.8fbZt2Qh7ZttwIan"
               ]
             },
             "value": {
               "added": {
-                "5a0iduv0soxcvsvu": "Compendium.dnd5e.classfeatures.4Vpj9vCOB37GtXk6",
-                "lqbdzxqx22jb5m7p": "Compendium.dnd5e.classfeatures.8fbZt2Qh7ZttwIan"
+                "5a0iduv0soxcvsvu": "Compendium.shaper.classfeatures.4Vpj9vCOB37GtXk6",
+                "lqbdzxqx22jb5m7p": "Compendium.shaper.classfeatures.8fbZt2Qh7ZttwIan"
               }
             },
             "level": 1,
@@ -2174,8 +2174,8 @@
             "type": "ItemGrant",
             "configuration": {
               "items": [
-                "Compendium.dnd5e.classfeatures.fbExzwNwEAl2kW9c",
-                "Compendium.dnd5e.classfeatures.u6xV3Ki3TXRrD7zg"
+                "Compendium.shaper.classfeatures.fbExzwNwEAl2kW9c",
+                "Compendium.shaper.classfeatures.u6xV3Ki3TXRrD7zg"
               ]
             },
             "value": {},
@@ -2189,8 +2189,8 @@
             "type": "ItemGrant",
             "configuration": {
               "items": [
-                "Compendium.dnd5e.classfeatures.1dJHU48yNqn3lcfx",
-                "Compendium.dnd5e.classfeatures.kaHcUGiwi8AtfZIm"
+                "Compendium.shaper.classfeatures.1dJHU48yNqn3lcfx",
+                "Compendium.shaper.classfeatures.kaHcUGiwi8AtfZIm"
               ]
             },
             "value": {},
@@ -2204,7 +2204,7 @@
             "type": "ItemGrant",
             "configuration": {
               "items": [
-                "Compendium.dnd5e.classfeatures.XogoBnFWmCAHXppo"
+                "Compendium.shaper.classfeatures.XogoBnFWmCAHXppo"
               ]
             },
             "value": {},
@@ -2218,7 +2218,7 @@
             "type": "ItemGrant",
             "configuration": {
               "items": [
-                "Compendium.dnd5e.classfeatures.C5fzaOBc6HxyOWRn"
+                "Compendium.shaper.classfeatures.C5fzaOBc6HxyOWRn"
               ]
             },
             "value": {},
@@ -2232,7 +2232,7 @@
             "type": "ItemGrant",
             "configuration": {
               "items": [
-                "Compendium.dnd5e.classfeatures.r0unvWK0lPsDthDx"
+                "Compendium.shaper.classfeatures.r0unvWK0lPsDthDx"
               ]
             },
             "value": {},
@@ -2246,7 +2246,7 @@
             "type": "ItemGrant",
             "configuration": {
               "items": [
-                "Compendium.dnd5e.classfeatures.DhU2dWCNnX78TstR"
+                "Compendium.shaper.classfeatures.DhU2dWCNnX78TstR"
               ]
             },
             "value": {},
@@ -2260,7 +2260,7 @@
             "type": "ItemGrant",
             "configuration": {
               "items": [
-                "Compendium.dnd5e.classfeatures.QBVmY56RMQuh6C8h"
+                "Compendium.shaper.classfeatures.QBVmY56RMQuh6C8h"
               ]
             },
             "value": {},
@@ -2274,7 +2274,7 @@
             "type": "ItemGrant",
             "configuration": {
               "items": [
-                "Compendium.dnd5e.classfeatures.3CaP1vFHVR8LgHjx"
+                "Compendium.shaper.classfeatures.3CaP1vFHVR8LgHjx"
               ]
             },
             "value": {},
@@ -2330,7 +2330,7 @@
       },
       "flags": {
         "core": {
-          "sourceId": "Compendium.dnd5e.classes.VkRQ7glQvTWWiOCS"
+          "sourceId": "Compendium.shaper.classes.VkRQ7glQvTWWiOCS"
         }
       },
       "_stats": {
@@ -2415,8 +2415,8 @@
         "default": 0
       },
       "flags": {
-        "dnd5e": {
-          "sourceId": "Compendium.dnd5e.classfeatures.4Vpj9vCOB37GtXk6",
+        "shaper": {
+          "sourceId": "Compendium.shaper.classfeatures.4Vpj9vCOB37GtXk6",
           "advancementOrigin": "cngivn4658pbhjc3.4mocjr5953p6kxq6"
         }
       },
@@ -2502,8 +2502,8 @@
         "default": 0
       },
       "flags": {
-        "dnd5e": {
-          "sourceId": "Compendium.dnd5e.classfeatures.8fbZt2Qh7ZttwIan",
+        "shaper": {
+          "sourceId": "Compendium.shaper.classfeatures.8fbZt2Qh7ZttwIan",
           "advancementOrigin": "cngivn4658pbhjc3.4mocjr5953p6kxq6"
         }
       },
@@ -2608,19 +2608,19 @@
       "sort": 100001,
       "flags": {
         "core": {
-          "sourceId": "Compendium.dnd5e.spells.udsLtG0BugXHR2JQ"
+          "sourceId": "Compendium.shaper.spells.udsLtG0BugXHR2JQ"
         }
       },
       "img": "icons/magic/fire/explosion-fireball-small-purple-orange.webp",
       "effects": [],
       "folder": null,
       "_stats": {
-        "systemId": "dnd5e",
+        "systemId": "shaper",
         "systemVersion": "2.0.0",
         "coreVersion": "10.279",
         "createdTime": 1661603486171,
         "modifiedTime": 1661603486171,
-        "lastModifiedBy": "dnd5ebuilder0000"
+        "lastModifiedBy": "shaperbuilder0000"
       }
     }
   ],
@@ -2633,11 +2633,11 @@
   "flags": {},
   "_id": "cYD0wRXLW4B17aoY",
   "_stats": {
-    "systemId": "dnd5e",
+    "systemId": "shaper",
     "systemVersion": "2.0.0",
     "coreVersion": "10.279",
     "createdTime": 1661787232181,
     "modifiedTime": 1661878142510,
-    "lastModifiedBy": "dnd5ebuilder0000"
+    "lastModifiedBy": "shaperbuilder0000"
   }
 }
