@@ -20,13 +20,11 @@ ________________________________________________________________________________
  */
 SHAPER.abilities = {
   str: "SHAPER.AbilityStr",
-  dex: "SHAPER.AbilityDex",
-  con: "SHAPER.AbilityCon",
-  int: "SHAPER.AbilityInt",
-  wis: "SHAPER.AbilityWis",
-  cha: "SHAPER.AbilityCha",
-  hon: "SHAPER.AbilityHon",
-  san: "SHAPER.AbilitySan"
+  fin: "SHAPER.AbilityFin",
+  tgh: "SHAPER.AbilityTgh",
+  mnd: "SHAPER.AbilityMnd",
+  hrt: "SHAPER.AbilityHrt",
+  sol: "SHAPER.AbilitySol"
 };
 preLocalize("abilities");
 
@@ -36,13 +34,11 @@ preLocalize("abilities");
  */
 SHAPER.abilityAbbreviations = {
   str: "SHAPER.AbilityStrAbbr",
-  dex: "SHAPER.AbilityDexAbbr",
-  con: "SHAPER.AbilityConAbbr",
-  int: "SHAPER.AbilityIntAbbr",
-  wis: "SHAPER.AbilityWisAbbr",
-  cha: "SHAPER.AbilityChaAbbr",
-  hon: "SHAPER.AbilityHonAbbr",
-  san: "SHAPER.AbilitySanAbbr"
+  fin: "SHAPER.AbilityFinAbbr",
+  tgh: "SHAPER.AbilityTghAbbr",
+  mnd: "SHAPER.AbilityMndAbbr",
+  hrt: "SHAPER.AbilityHrtAbbr",
+  sol: "SHAPER.AbilitySolAbbr"
 };
 preLocalize("abilityAbbreviations");
 
@@ -61,208 +57,28 @@ preLocalize("abilityAbbreviations");
  * @enum {SkillConfiguration}
  */
 SHAPER.skills = {
-  acr: { label: "SHAPER.SkillAcr", ability: "dex" },
-  ani: { label: "SHAPER.SkillAni", ability: "wis" },
-  arc: { label: "SHAPER.SkillArc", ability: "int" },
-  ath: { label: "SHAPER.SkillAth", ability: "str" },
-  dec: { label: "SHAPER.SkillDec", ability: "cha" },
-  his: { label: "SHAPER.SkillHis", ability: "int" },
-  ins: { label: "SHAPER.SkillIns", ability: "wis" },
-  itm: { label: "SHAPER.SkillItm", ability: "cha" },
-  inv: { label: "SHAPER.SkillInv", ability: "int" },
-  med: { label: "SHAPER.SkillMed", ability: "wis" },
-  nat: { label: "SHAPER.SkillNat", ability: "int" },
-  prc: { label: "SHAPER.SkillPrc", ability: "wis" },
-  prf: { label: "SHAPER.SkillPrf", ability: "cha" },
-  per: { label: "SHAPER.SkillPer", ability: "cha" },
-  rel: { label: "SHAPER.SkillRel", ability: "int" },
-  slt: { label: "SHAPER.SkillSlt", ability: "dex" },
-  ste: { label: "SHAPER.SkillSte", ability: "dex" },
-  sur: { label: "SHAPER.SkillSur", ability: "wis" }
+  acr: { label: "SHAPER.SkillAcr", ability: ["dex", "fin"] },
+  ath: { label: "SHAPER.SkillAth", ability: ["str", "tgh"] },
+  ani: { label: "SHAPER.SkillAni", ability: ["hrt", "sol"] },
+  awa: { label: "SHAPER.SkillAwa", ability: ["mnd", "sol"] },
+  cmp: { label: "SHAPER.SkillCmp", ability: ["tgh", "sol"] },
+  con: { label: "SHAPER.SkillCon", ability: ["tgh", "mnd"] },
+  dec: { label: "SHAPER.SkillDec", ability: ["mnd", "hrt"] },
+  dip: { label: "SHAPER.SkillDip", ability: ["hrt", "sol"] },
+  drv: { label: "SHAPER.SkillDrv", ability: ["fin", "mnd"] },
+  emp: { label: "SHAPER.SkillEmp", ability: ["hrt", "sol"] },
+  end: { label: "SHAPER.SkillEnd", ability: ["tgh", "hrt"] },
+  int: { label: "SHAPER.SkillInt", ability: ["str", "hrt"] },
+  inv: { label: "SHAPER.SkillInv", ability: ["mnd", "sol"] },
+  lor: { label: "SHAPER.SkillLor", ability: ["mnd", "sol"] },
+  med: { label: "SHAPER.SkillMed", ability: ["mnd", "fin"] },
+  per: { label: "SHAPER.SkillPer", ability: ["fin", "hrt"] },
+  sab: { label: "SHAPER.SkillSab", ability: ["fin", "mnd"] },
+  sci: { label: "SHAPER.SkillSci", ability: ["mnd", "sol"] },
+  sab: { label: "SHAPER.SkillSab", ability: ["fin", "mnd"] },
 };
 preLocalize("skills", { key: "label", sort: true });
 patchConfig("skills", "label", { since: 2.0, until: 2.2 });
-
-/* -------------------------------------------- */
-
-/**
- * Character alignment options.
- * @enum {string}
- */
-SHAPER.alignments = {
-  lg: "SHAPER.AlignmentLG",
-  ng: "SHAPER.AlignmentNG",
-  cg: "SHAPER.AlignmentCG",
-  ln: "SHAPER.AlignmentLN",
-  tn: "SHAPER.AlignmentTN",
-  cn: "SHAPER.AlignmentCN",
-  le: "SHAPER.AlignmentLE",
-  ne: "SHAPER.AlignmentNE",
-  ce: "SHAPER.AlignmentCE"
-};
-preLocalize("alignments");
-
-/* -------------------------------------------- */
-
-/**
- * An enumeration of item attunement types.
- * @enum {number}
- */
-SHAPER.attunementTypes = {
-  NONE: 0,
-  REQUIRED: 1,
-  ATTUNED: 2
-};
-
-/**
- * An enumeration of item attunement states.
- * @type {{"0": string, "1": string, "2": string}}
- */
-SHAPER.attunements = {
-  0: "SHAPER.AttunementNone",
-  1: "SHAPER.AttunementRequired",
-  2: "SHAPER.AttunementAttuned"
-};
-preLocalize("attunements");
-
-/* -------------------------------------------- */
-
-/**
- * General weapon categories.
- * @enum {string}
- */
-SHAPER.weaponProficiencies = {
-  sim: "SHAPER.WeaponSimpleProficiency",
-  mar: "SHAPER.WeaponMartialProficiency"
-};
-preLocalize("weaponProficiencies");
-
-/**
- * A mapping between `SHAPER.weaponTypes` and `SHAPER.weaponProficiencies` that
- * is used to determine if character has proficiency when adding an item.
- * @enum {(boolean|string)}
- */
-SHAPER.weaponProficienciesMap = {
-  natural: true,
-  simpleM: "sim",
-  simpleR: "sim",
-  martialM: "mar",
-  martialR: "mar"
-};
-
-/**
- * The basic weapon types in 5e. This enables specific weapon proficiencies or
- * starting equipment provided by classes and backgrounds.
- * @enum {string}
- */
-SHAPER.weaponIds = {
-  battleaxe: "I0WocDSuNpGJayPb",
-  blowgun: "wNWK6yJMHG9ANqQV",
-  club: "nfIRTECQIG81CvM4",
-  dagger: "0E565kQUBmndJ1a2",
-  dart: "3rCO8MTIdPGSW6IJ",
-  flail: "UrH3sMdnUDckIHJ6",
-  glaive: "rOG1OM2ihgPjOvFW",
-  greataxe: "1Lxk6kmoRhG8qQ0u",
-  greatclub: "QRCsxkCwWNwswL9o",
-  greatsword: "xMkP8BmFzElcsMaR",
-  halberd: "DMejWAc8r8YvDPP1",
-  handaxe: "eO7Fbv5WBk5zvGOc",
-  handcrossbow: "qaSro7kFhxD6INbZ",
-  heavycrossbow: "RmP0mYRn2J7K26rX",
-  javelin: "DWLMnODrnHn8IbAG",
-  lance: "RnuxdHUAIgxccVwj",
-  lightcrossbow: "ddWvQRLmnnIS0eLF",
-  lighthammer: "XVK6TOL4sGItssAE",
-  longbow: "3cymOVja8jXbzrdT",
-  longsword: "10ZP2Bu3vnCuYMIB",
-  mace: "Ajyq6nGwF7FtLhDQ",
-  maul: "DizirD7eqjh8n95A",
-  morningstar: "dX8AxCh9o0A9CkT3",
-  net: "aEiM49V8vWpWw7rU",
-  pike: "tC0kcqZT9HHAO0PD",
-  quarterstaff: "g2dWN7PQiMRYWzyk",
-  rapier: "Tobce1hexTnDk4sV",
-  scimitar: "fbC0Mg1a73wdFbqO",
-  shortsword: "osLzOwQdPtrK3rQH",
-  sickle: "i4NeNZ30ycwPDHMx",
-  spear: "OG4nBBydvmfWYXIk",
-  shortbow: "GJv6WkD7D2J6rP6M",
-  sling: "3gynWO9sN4OLGMWD",
-  trident: "F65ANO66ckP8FDMa",
-  warpick: "2YdfjN1PIIrSHZii",
-  warhammer: "F0Df164Xv1gWcYt0",
-  whip: "QKTyxoO0YDnAsbYe"
-};
-
-/* -------------------------------------------- */
-
-/**
- * The categories into which Tool items can be grouped.
- *
- * @enum {string}
- */
-SHAPER.toolTypes = {
-  art: "SHAPER.ToolArtisans",
-  game: "SHAPER.ToolGamingSet",
-  music: "SHAPER.ToolMusicalInstrument"
-};
-preLocalize("toolTypes", { sort: true });
-
-/**
- * The categories of tool proficiencies that a character can gain.
- *
- * @enum {string}
- */
-SHAPER.toolProficiencies = {
-  ...SHAPER.toolTypes,
-  vehicle: "SHAPER.ToolVehicle"
-};
-preLocalize("toolProficiencies", { sort: true });
-
-/**
- * The basic tool types in 5e. This enables specific tool proficiencies or
- * starting equipment provided by classes and backgrounds.
- * @enum {string}
- */
-SHAPER.toolIds = {
-  alchemist: "SztwZhbhZeCqyAes",
-  bagpipes: "yxHi57T5mmVt0oDr",
-  brewer: "Y9S75go1hLMXUD48",
-  calligrapher: "jhjo20QoiD5exf09",
-  card: "YwlHI3BVJapz4a3E",
-  carpenter: "8NS6MSOdXtUqD7Ib",
-  cartographer: "fC0lFK8P4RuhpfaU",
-  chess: "23y8FvWKf9YLcnBL",
-  cobbler: "hM84pZnpCqKfi8XH",
-  cook: "Gflnp29aEv5Lc1ZM",
-  dice: "iBuTM09KD9IoM5L8",
-  disg: "IBhDAr7WkhWPYLVn",
-  drum: "69Dpr25pf4BjkHKb",
-  dulcimer: "NtdDkjmpdIMiX7I2",
-  flute: "eJOrPcAz9EcquyRQ",
-  forg: "cG3m4YlHfbQlLEOx",
-  glassblower: "rTbVrNcwApnuTz5E",
-  herb: "i89okN7GFTWHsvPy",
-  horn: "aa9KuBy4dst7WIW9",
-  jeweler: "YfBwELTgPFHmQdHh",
-  leatherworker: "PUMfwyVUbtyxgYbD",
-  lute: "qBydtUUIkv520DT7",
-  lyre: "EwG1EtmbgR3bM68U",
-  mason: "skUih6tBvcBbORzA",
-  navg: "YHCmjsiXxZ9UdUhU",
-  painter: "ccm5xlWhx74d6lsK",
-  panflute: "G5m5gYIx9VAUWC3J",
-  pois: "il2GNi8C0DvGLL9P",
-  potter: "hJS8yEVkqgJjwfWa",
-  shawm: "G3cqbejJpfB91VhP",
-  smith: "KndVe2insuctjIaj",
-  thief: "woWZ1sO5IUVGzo58",
-  tinker: "0d08g1i5WXnNrCNA",
-  viol: "baoe3U5BfMMMxhCU",
-  weaver: "ap9prThUB2y9lDyj",
-  woodcarver: "xKErqkLo4ASYr5EP"
-};
 
 /* -------------------------------------------- */
 
@@ -287,21 +103,19 @@ preLocalize("timePeriods");
 /* -------------------------------------------- */
 
 /**
+ * TODO: Change to just major and minor action
+ * 
  * Various ways in which an item or ability can be activated.
  * @enum {string}
  */
 SHAPER.abilityActivationTypes = {
   none: "SHAPER.None",
-  action: "SHAPER.Action",
-  bonus: "SHAPER.BonusAction",
-  reaction: "SHAPER.Reaction",
+  major: "SHAPER.Major",
+  minor: "SHAPER.Minor",
+  counter: "SHAPER.Counter",
   minute: SHAPER.timePeriods.minute,
   hour: SHAPER.timePeriods.hour,
-  day: SHAPER.timePeriods.day,
-  special: SHAPER.timePeriods.spec,
-  legendary: "SHAPER.LegendaryActionLabel",
-  lair: "SHAPER.LairActionLabel",
-  crew: "SHAPER.VehicleCrewAction"
+  day: SHAPER.timePeriods.day
 };
 preLocalize("abilityActivationTypes", { sort: true });
 
@@ -361,32 +175,6 @@ SHAPER.tokenHPColors = {
   negmax: 0x550000
 };
 
-/* -------------------------------------------- */
-
-/**
- * Default types of creatures.
- * *Note: Not pre-localized to allow for easy fetching of pluralized forms.*
- * @enum {string}
- */
-SHAPER.creatureTypes = {
-  aberration: "SHAPER.CreatureAberration",
-  beast: "SHAPER.CreatureBeast",
-  celestial: "SHAPER.CreatureCelestial",
-  construct: "SHAPER.CreatureConstruct",
-  dragon: "SHAPER.CreatureDragon",
-  elemental: "SHAPER.CreatureElemental",
-  fey: "SHAPER.CreatureFey",
-  fiend: "SHAPER.CreatureFiend",
-  giant: "SHAPER.CreatureGiant",
-  humanoid: "SHAPER.CreatureHumanoid",
-  monstrosity: "SHAPER.CreatureMonstrosity",
-  ooze: "SHAPER.CreatureOoze",
-  plant: "SHAPER.CreaturePlant",
-  undead: "SHAPER.CreatureUndead"
-};
-
-/* -------------------------------------------- */
-
 /**
  * Classification types for item action types.
  * @enum {string}
@@ -406,33 +194,6 @@ preLocalize("itemActionTypes");
 
 /* -------------------------------------------- */
 
-/**
- * Different ways in which item capacity can be limited.
- * @enum {string}
- */
-SHAPER.itemCapacityTypes = {
-  items: "SHAPER.ItemContainerCapacityItems",
-  weight: "SHAPER.ItemContainerCapacityWeight"
-};
-preLocalize("itemCapacityTypes", { sort: true });
-
-/* -------------------------------------------- */
-
-/**
- * List of various item rarities.
- * @enum {string}
- */
-SHAPER.itemRarity = {
-  common: "SHAPER.ItemRarityCommon",
-  uncommon: "SHAPER.ItemRarityUncommon",
-  rare: "SHAPER.ItemRarityRare",
-  veryRare: "SHAPER.ItemRarityVeryRare",
-  legendary: "SHAPER.ItemRarityLegendary",
-  artifact: "SHAPER.ItemRarityArtifact"
-};
-preLocalize("itemRarity");
-
-/* -------------------------------------------- */
 
 /**
  * Enumerate the lengths of time over which an item can have limited use ability.
@@ -446,47 +207,6 @@ SHAPER.limitedUsePeriods = {
 };
 preLocalize("limitedUsePeriods");
 
-/* -------------------------------------------- */
-
-/**
- * Specific equipment types that modify base AC.
- * @enum {string}
- */
-SHAPER.armorTypes = {
-  light: "SHAPER.EquipmentLight",
-  medium: "SHAPER.EquipmentMedium",
-  heavy: "SHAPER.EquipmentHeavy",
-  natural: "SHAPER.EquipmentNatural",
-  shield: "SHAPER.EquipmentShield"
-};
-preLocalize("armorTypes");
-
-/* -------------------------------------------- */
-
-/**
- * Equipment types that aren't armor.
- * @enum {string}
- */
-SHAPER.miscEquipmentTypes = {
-  clothing: "SHAPER.EquipmentClothing",
-  trinket: "SHAPER.EquipmentTrinket",
-  vehicle: "SHAPER.EquipmentVehicle"
-};
-preLocalize("miscEquipmentTypes", { sort: true });
-
-/* -------------------------------------------- */
-
-/**
- * The set of equipment types for armor, clothing, and other objects which can be worn by the character.
- * @enum {string}
- */
-SHAPER.equipmentTypes = {
-  ...SHAPER.miscEquipmentTypes,
-  ...SHAPER.armorTypes
-};
-preLocalize("equipmentTypes", { sort: true });
-
-/* -------------------------------------------- */
 
 /**
  * The various types of vehicles in which characters can be proficient.
@@ -502,116 +222,6 @@ preLocalize("vehicleTypes", { sort: true });
 
 /* -------------------------------------------- */
 
-/**
- * The set of Armor Proficiencies which a character may have.
- * @type {object}
- */
-SHAPER.armorProficiencies = {
-  lgt: SHAPER.equipmentTypes.light,
-  med: SHAPER.equipmentTypes.medium,
-  hvy: SHAPER.equipmentTypes.heavy,
-  shl: "SHAPER.EquipmentShieldProficiency"
-};
-preLocalize("armorProficiencies");
-
-/**
- * A mapping between `SHAPER.equipmentTypes` and `SHAPER.armorProficiencies` that
- * is used to determine if character has proficiency when adding an item.
- * @enum {(boolean|string)}
- */
-SHAPER.armorProficienciesMap = {
-  natural: true,
-  clothing: true,
-  light: "lgt",
-  medium: "med",
-  heavy: "hvy",
-  shield: "shl"
-};
-
-/**
- * The basic armor types in 5e. This enables specific armor proficiencies,
- * automated AC calculation in NPCs, and starting equipment.
- * @enum {string}
- */
-SHAPER.armorIds = {
-  breastplate: "SK2HATQ4abKUlV8i",
-  chainmail: "rLMflzmxpe8JGTOA",
-  chainshirt: "p2zChy24ZJdVqMSH",
-  halfplate: "vsgmACFYINloIdPm",
-  hide: "n1V07puo0RQxPGuF",
-  leather: "WwdpHLXGX5r8uZu5",
-  padded: "GtKV1b5uqFQqpEni",
-  plate: "OjkIqlW2UpgFcjZa",
-  ringmail: "nsXZejlmgalj4he9",
-  scalemail: "XmnlF5fgIO3tg6TG",
-  splint: "cKpJmsJmU8YaiuqG",
-  studded: "TIV3B1vbrVHIhQAm"
-};
-
-/**
- * The basic shield in 5e.
- * @enum {string}
- */
-SHAPER.shieldIds = {
-  shield: "sSs3hSzkKBMNBgTs"
-};
-
-/**
- * Common armor class calculations.
- * @enum {{ label: string, [formula]: string }}
- */
-SHAPER.armorClasses = {
-  flat: {
-    label: "SHAPER.ArmorClassFlat",
-    formula: "@attributes.ac.flat"
-  },
-  natural: {
-    label: "SHAPER.ArmorClassNatural",
-    formula: "@attributes.ac.flat"
-  },
-  default: {
-    label: "SHAPER.ArmorClassEquipment",
-    formula: "@attributes.ac.armor + @attributes.ac.dex"
-  },
-  mage: {
-    label: "SHAPER.ArmorClassMage",
-    formula: "13 + @abilities.dex.mod"
-  },
-  draconic: {
-    label: "SHAPER.ArmorClassDraconic",
-    formula: "13 + @abilities.dex.mod"
-  },
-  unarmoredMonk: {
-    label: "SHAPER.ArmorClassUnarmoredMonk",
-    formula: "10 + @abilities.dex.mod + @abilities.wis.mod"
-  },
-  unarmoredBarb: {
-    label: "SHAPER.ArmorClassUnarmoredBarbarian",
-    formula: "10 + @abilities.dex.mod + @abilities.con.mod"
-  },
-  custom: {
-    label: "SHAPER.ArmorClassCustom"
-  }
-};
-preLocalize("armorClasses", { key: "label" });
-
-/* -------------------------------------------- */
-
-/**
- * Enumerate the valid consumable types which are recognized by the system.
- * @enum {string}
- */
-SHAPER.consumableTypes = {
-  ammo: "SHAPER.ConsumableAmmunition",
-  potion: "SHAPER.ConsumablePotion",
-  poison: "SHAPER.ConsumablePoison",
-  food: "SHAPER.ConsumableFood",
-  scroll: "SHAPER.ConsumableScroll",
-  wand: "SHAPER.ConsumableWand",
-  rod: "SHAPER.ConsumableRod",
-  trinket: "SHAPER.ConsumableTrinket"
-};
-preLocalize("consumableTypes", { sort: true });
 
 /* -------------------------------------------- */
 
@@ -824,27 +434,6 @@ preLocalize("healingTypes");
 
 /* -------------------------------------------- */
 
-/**
- * Denominations of hit dice which can apply to classes.
- * @type {string[]}
- */
-SHAPER.hitDieTypes = ["d4", "d6", "d8", "d10", "d12"];
-
-/* -------------------------------------------- */
-
-/**
- * The set of possible sensory perception types which an Actor may have.
- * @enum {string}
- */
-SHAPER.senses = {
-  blindsight: "SHAPER.SenseBlindsight",
-  darkvision: "SHAPER.SenseDarkvision",
-  tremorsense: "SHAPER.SenseTremorsense",
-  truesight: "SHAPER.SenseTruesight"
-};
-preLocalize("senses", { sort: true });
-
-/* -------------------------------------------- */
 
 /**
  * Various different ways a spell can be prepared.
@@ -891,63 +480,6 @@ SHAPER.spellScalingModes = {
 };
 preLocalize("spellScalingModes", { sort: true });
 
-/* -------------------------------------------- */
-/*  Weapon Details                              */
-/* -------------------------------------------- */
-
-/**
- * The set of types which a weapon item can take.
- * @enum {string}
- */
-SHAPER.weaponTypes = {
-  simpleM: "SHAPER.WeaponSimpleM",
-  simpleR: "SHAPER.WeaponSimpleR",
-  martialM: "SHAPER.WeaponMartialM",
-  martialR: "SHAPER.WeaponMartialR",
-  natural: "SHAPER.WeaponNatural",
-  improv: "SHAPER.WeaponImprov",
-  siege: "SHAPER.WeaponSiege"
-};
-preLocalize("weaponTypes");
-
-/* -------------------------------------------- */
-
-/**
- * A subset of weapon properties that determine the physical characteristics of the weapon.
- * These properties are used for determining physical resistance bypasses.
- * @enum {string}
- */
-SHAPER.physicalWeaponProperties = {
-  ada: "SHAPER.WeaponPropertiesAda",
-  mgc: "SHAPER.WeaponPropertiesMgc",
-  sil: "SHAPER.WeaponPropertiesSil"
-};
-preLocalize("physicalWeaponProperties", { sort: true });
-
-/* -------------------------------------------- */
-
-/**
- * The set of weapon property flags which can exist on a weapon.
- * @enum {string}
- */
-SHAPER.weaponProperties = {
-  ...SHAPER.physicalWeaponProperties,
-  amm: "SHAPER.WeaponPropertiesAmm",
-  fin: "SHAPER.WeaponPropertiesFin",
-  fir: "SHAPER.WeaponPropertiesFir",
-  foc: "SHAPER.WeaponPropertiesFoc",
-  hvy: "SHAPER.WeaponPropertiesHvy",
-  lgt: "SHAPER.WeaponPropertiesLgt",
-  lod: "SHAPER.WeaponPropertiesLod",
-  rch: "SHAPER.WeaponPropertiesRch",
-  rel: "SHAPER.WeaponPropertiesRel",
-  ret: "SHAPER.WeaponPropertiesRet",
-  spc: "SHAPER.WeaponPropertiesSpc",
-  thr: "SHAPER.WeaponPropertiesThr",
-  two: "SHAPER.WeaponPropertiesTwo",
-  ver: "SHAPER.WeaponPropertiesVer"
-};
-preLocalize("weaponProperties", { sort: true });
 
 /* -------------------------------------------- */
 /*  Spell Details                               */
@@ -1142,15 +674,6 @@ SHAPER.trackableAttributes = [
 
 /* -------------------------------------------- */
 
-/**
- * A selection of actor and item attributes that are valid targets for item resource consumption.
- * @type {string[]}
- */
-SHAPER.consumableResources = [
-  "item.quantity", "item.weight", "item.duration.value", "currency", "details.xp.value", "abilities.*.value",
-  "attributes.senses", "attributes.movement", "attributes.ac.flat", "item.armor.value", "item.target", "item.range",
-  "item.save.dc"
-];
 
 /* -------------------------------------------- */
 
@@ -1235,12 +758,6 @@ SHAPER.CR_EXP_LEVELS = [
   20000, 22000, 25000, 33000, 41000, 50000, 62000, 75000, 90000, 105000, 120000, 135000, 155000
 ];
 
-/**
- * Character features automatically granted by classes & subclasses at certain levels.
- * @type {object}
- * @deprecated since 1.6.0, targeted for removal in 2.1
- */
-SHAPER.classFeatures = ClassFeatures;
 
 /**
  * Special character flags.
