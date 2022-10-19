@@ -860,17 +860,12 @@ export default class Actor5e extends Actor {
       data.skillBonus = Roll.replaceFormulaData(globalBonuses.skill, data);
     }
 
-    // Add provided extra roll parts now because they will get clobbered by mergeObject below
-    if ( options.parts?.length > 0 ) options.parts = parts.concat(options.parts);
-    else options.parts = parts;
-
     // Reliable Talent applies to any skill check we have full or better proficiency in
     const reliableTalent = (skl.value >= 1 && this.getFlag("dnd5e", "reliableTalent"));
 
     // Roll and return
     const flavor = game.i18n.format("DND5E.SkillPromptTitle", {skill: CONFIG.DND5E.skills[skillId]?.label ?? ""});
     const rollData = foundry.utils.mergeObject({
-      parts: parts,
       data: data,
       title: `${flavor}: ${this.name}`,
       flavor,
@@ -882,6 +877,7 @@ export default class Actor5e extends Actor {
         "flags.dnd5e.roll": {type: "skill", skillId }
       }
     }, options);
+    rollData.parts = parts.concat(options.parts ?? []);
 
     /**
      * A hook event that fires before a skill check is rolled for an Actor.
@@ -974,14 +970,9 @@ export default class Actor5e extends Actor {
       data.checkBonus = Roll.replaceFormulaData(globalBonuses.check, data);
     }
 
-    // Add provided extra roll parts now because they will get clobbered by mergeObject below
-    if ( options.parts?.length > 0 ) options.parts = parts.concat(options.parts);
-    else options.parts = parts;
-
     // Roll and return
     const flavor = game.i18n.format("DND5E.AbilityPromptTitle", {ability: label});
     const rollData = foundry.utils.mergeObject({
-      parts,
       data,
       title: `${flavor}: ${this.name}`,
       flavor,
@@ -991,6 +982,7 @@ export default class Actor5e extends Actor {
         "flags.dnd5e.roll": {type: "ability", abilityId }
       }
     }, options);
+    rollData.parts = parts.concat(options.parts ?? []);
 
     /**
      * A hook event that fires before an ability test is rolled for an Actor.
@@ -1057,14 +1049,9 @@ export default class Actor5e extends Actor {
       data.saveBonus = Roll.replaceFormulaData(globalBonuses.save, data);
     }
 
-    // Add provided extra roll parts now because they will get clobbered by mergeObject below
-    if ( options.parts?.length > 0 ) options.parts = parts.concat(options.parts);
-    else options.parts = parts;
-
     // Roll and return
     const flavor = game.i18n.format("DND5E.SavePromptTitle", {ability: label});
     const rollData = foundry.utils.mergeObject({
-      parts,
       data,
       title: `${flavor}: ${this.name}`,
       flavor,
@@ -1074,6 +1061,7 @@ export default class Actor5e extends Actor {
         "flags.dnd5e.roll": {type: "save", abilityId }
       }
     }, options);
+    rollData.parts = parts.concat(options.parts ?? []);
 
     /**
      * A hook event that fires before an ability save is rolled for an Actor.
@@ -1135,14 +1123,9 @@ export default class Actor5e extends Actor {
       data.saveBonus = Roll.replaceFormulaData(globalBonuses.save, data);
     }
 
-    // Add provided extra roll parts now because they will get clobbered by mergeObject below
-    if ( options.parts?.length > 0 ) options.parts = parts.concat(options.parts);
-    else options.parts = parts;
-
     // Evaluate the roll
     const flavor = game.i18n.localize("DND5E.DeathSavingThrow");
     const rollData = foundry.utils.mergeObject({
-      parts,
       data,
       title: `${flavor}: ${this.name}`,
       flavor,
@@ -1153,6 +1136,7 @@ export default class Actor5e extends Actor {
         "flags.dnd5e.roll": {type: "death"}
       }
     }, options);
+    rollData.parts = parts.concat(options.parts ?? []);
 
     /**
      * A hook event that fires before a death saving throw is rolled for an Actor.

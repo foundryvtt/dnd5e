@@ -1326,13 +1326,8 @@ export default class Item5e extends Item {
     const elvenAccuracy = (flags.elvenAccuracy
       && CONFIG.DND5E.characterFlags.elvenAccuracy.abilities.includes(this.abilityMod)) || undefined;
 
-    // Add provided extra roll parts now because they will get clobbered by mergeObject below
-    if ( options.parts?.length > 0 ) options.parts = parts.concat(options.parts);
-    else options.parts = parts;
-
     // Compose roll options
     const rollConfig = foundry.utils.mergeObject({
-      parts,
       actor: this.actor,
       data: rollData,
       critical: this.getCriticalThreshold(),
@@ -1350,6 +1345,7 @@ export default class Item5e extends Item {
         speaker: ChatMessage.getSpeaker({actor: this.actor})
       }
     }, options);
+    rollConfig.parts = parts.concat(options.parts ?? []);
 
     /**
      * A hook event that fires before an attack is rolled for an Item.
@@ -1414,7 +1410,6 @@ export default class Item5e extends Item {
       critical,
       data: rollData,
       event,
-      parts: parts,
       title: title,
       flavor: this.labels.damageTypes.length ? `${title} (${this.labels.damageTypes})` : title,
       dialogOptions: {
@@ -1468,11 +1463,8 @@ export default class Item5e extends Item {
     // Factor in extra weapon-specific critical damage
     if ( this.system.critical?.damage ) rollConfig.criticalBonusDamage = this.system.critical.damage;
 
-    // Add provided extra roll parts now because they will get clobbered by mergeObject below
-    if ( options.parts?.length > 0 ) options.parts = parts.concat(options.parts);
-    else options.parts = parts;
-
     foundry.utils.mergeObject(rollConfig, options);
+    rollConfig.parts = parts.concat(options.parts ?? []);
 
     /**
      * A hook event that fires before a damage is rolled for an Item.
@@ -1720,13 +1712,8 @@ export default class Item5e extends Item {
       rollData.checkBonus = Roll.replaceFormulaData(globalBonus.check, rollData);
     }
 
-    // Add provided extra roll parts now because they will get clobbered by mergeObject below
-    if ( options.parts?.length > 0 ) options.parts = parts.concat(options.parts);
-    else options.parts = parts;
-
     // Compose the roll data
     const rollConfig = foundry.utils.mergeObject({
-      parts: parts,
       data: rollData,
       title: title,
       flavor: title,
@@ -1743,6 +1730,7 @@ export default class Item5e extends Item {
         "flags.dnd5e.roll": {type: "tool", itemId: this.id }
       }
     }, options);
+    rollConfig.parts = parts.concat(options.parts ?? []);
 
     /**
      * A hook event that fires before a tool check is rolled for an Item.
