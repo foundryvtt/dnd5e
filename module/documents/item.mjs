@@ -1357,7 +1357,6 @@ export default class Item5e extends Item {
 
     // Compose roll options
     const rollConfig = foundry.utils.mergeObject({
-      parts,
       actor: this.actor,
       data: rollData,
       critical: this.getCriticalThreshold(),
@@ -1375,6 +1374,7 @@ export default class Item5e extends Item {
         speaker: ChatMessage.getSpeaker({actor: this.actor})
       }
     }, options);
+    rollConfig.parts = parts.concat(options.parts ?? []);
 
     /**
      * A hook event that fires before an attack is rolled for an Item.
@@ -1439,7 +1439,6 @@ export default class Item5e extends Item {
       critical,
       data: rollData,
       event,
-      parts: parts,
       title: title,
       flavor: this.labels.damageTypes.length ? `${title} (${this.labels.damageTypes})` : title,
       dialogOptions: {
@@ -1494,6 +1493,7 @@ export default class Item5e extends Item {
     if ( this.system.critical?.damage ) rollConfig.criticalBonusDamage = this.system.critical.damage;
 
     foundry.utils.mergeObject(rollConfig, options);
+    rollConfig.parts = parts.concat(options.parts ?? []);
 
     /**
      * A hook event that fires before a damage is rolled for an Item.
@@ -1743,7 +1743,6 @@ export default class Item5e extends Item {
 
     // Compose the roll data
     const rollConfig = foundry.utils.mergeObject({
-      parts: parts,
       data: rollData,
       title: title,
       flavor: title,
@@ -1760,6 +1759,7 @@ export default class Item5e extends Item {
         "flags.dnd5e.roll": {type: "tool", itemId: this.id }
       }
     }, options);
+    rollConfig.parts = parts.concat(options.parts ?? []);
 
     /**
      * A hook event that fires before a tool check is rolled for an Item.
