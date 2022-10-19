@@ -63,6 +63,7 @@ SHAPER.skills = {
   awa: { label: "SHAPER.SkillAwa", ability: ["mnd", "sol"] },
   cmp: { label: "SHAPER.SkillCmp", ability: ["tgh", "sol"] },
   con: { label: "SHAPER.SkillCon", ability: ["tgh", "mnd"] },
+  cft: { label: "SHAPER.SkillCft", ability: ["fin", "mnd"] },
   dec: { label: "SHAPER.SkillDec", ability: ["mnd", "hrt"] },
   dip: { label: "SHAPER.SkillDip", ability: ["hrt", "sol"] },
   drv: { label: "SHAPER.SkillDrv", ability: ["fin", "mnd"] },
@@ -75,7 +76,10 @@ SHAPER.skills = {
   per: { label: "SHAPER.SkillPer", ability: ["fin", "hrt"] },
   sab: { label: "SHAPER.SkillSab", ability: ["fin", "mnd"] },
   sci: { label: "SHAPER.SkillSci", ability: ["mnd", "sol"] },
-  sab: { label: "SHAPER.SkillSab", ability: ["fin", "mnd"] },
+  stl: { label: "SHAPER.SkillStl", ability: ["fin", "mnd"] },
+  stw: { label: "SHAPER.SkillStw", ability: ["mnd", "hrt"] },
+  sur: { label: "SHAPER.SkillSur", ability: ["mnd", "sol"] },
+  tch: { label: "SHAPER.SkillTch", ability: ["fin", "mnd"] }
 };
 preLocalize("skills", { key: "label", sort: true });
 patchConfig("skills", "label", { since: 2.0, until: 2.2 });
