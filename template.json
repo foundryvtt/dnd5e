@@ -1,70 +1,38 @@
 {
   "Actor": {
-    "types": ["character", "npc", "vehicle"],
+    "types": ["character", "npc"],
     "templates": {
       "common": {
         "abilities": {
           "str": {
-            "value": 10,
-            "proficient": 0,
-            "bonuses": {
-              "check": "",
-              "save": ""
-            }
+            "value": 0
           },
-          "dex": {
-            "value": 10,
-            "proficient": 0,
-            "bonuses": {
-              "check": "",
-              "save": ""
-            }
+          "fin": {
+            "value": 0
           },
-          "con": {
-            "value": 10,
-            "proficient": 0,
-            "bonuses": {
-              "check": "",
-              "save": ""
-            }
+          "tgh": {
+            "value": 0
           },
-          "int": {
-            "value": 10,
-            "proficient": 0,
-            "bonuses": {
-              "check": "",
-              "save": ""
-            }
+          "mnd": {
+            "value": 0
           },
-          "wis": {
-            "value": 10,
-            "proficient": 0,
-            "bonuses": {
-              "check": "",
-              "save": ""
-            }
+          "hrt": {
+            "value": 0
           },
-          "cha": {
-            "value": 10,
-            "proficient": 0,
-            "bonuses": {
-              "check": "",
-              "save": ""
-            }
+          "sol": {
+            "value": 0
           }
         },
         "attributes": {
-          "ac": {
-            "flat": null,
-            "calc": "default",
-            "formula": ""
-          },
           "hp": {
             "value": 10,
             "min": 0,
-            "max": 10,
-            "temp": 0,
-            "tempmax": 0
+            "max": 10
+          },
+          "mp": {
+            "value": 10,
+            "min": 0,
+            "max": 10
           },
           "init": {
             "value": 0,
@@ -107,30 +75,9 @@
             "value": [],
             "custom": ""
           }
-        },
-        "currency": {
-          "pp": 0,
-          "gp": 0,
-          "ep": 0,
-          "sp": 0,
-          "cp": 0
         }
       },
       "creature": {
-        "attributes": {
-          "attunement": {
-            "max": 3
-          },
-          "senses": {
-            "darkvision": 0,
-            "blindsight": 0,
-            "tremorsense": 0,
-            "truesight": 0,
-            "units": "ft",
-            "special": ""
-          },
-          "spellcasting": "int"
-        },
         "details": {
           "alignment": "",
           "race": ""
@@ -138,147 +85,92 @@
         "skills": {
           "acr": {
             "value": 0,
-            "ability": "dex",
-            "bonuses": {
-              "check": "",
-              "passive": ""
-            }
-          },
-          "ani": {
-            "value": 0,
-            "ability": "wis",
-            "bonuses": {
-              "check": "",
-              "passive": ""
-            }
-          },
-          "arc": {
-            "value": 0,
-            "ability": "int",
-            "bonuses": {
-              "check": "",
-              "passive": ""
-            }
+            "ability": ["dex", "fin"]
           },
           "ath": {
             "value": 0,
-            "ability": "str",
-            "bonuses": {
-              "check": "",
-              "passive": ""
-            }
+            "ability": ["str", "tgh"]
+          },
+          "ani": {
+            "value": 0,
+            "ability": ["hrt", "sol"]
+          },
+          "awa": {
+            "value": 0,
+            "ability": ["mnd", "sol"]
+          },
+          "cmp": {
+            "value": 0,
+            "ability": ["tgh", "sol"]
+          },
+          "con": {
+            "value": 0,
+            "ability": ["tgh", "mnd"]
           },
           "dec": {
             "value": 0,
-            "ability": "cha",
-            "bonuses": {
-              "check": "",
-              "passive": ""
-            }
+            "ability": ["mnd", "hrt"]
           },
-          "his": {
+          "dip": {
             "value": 0,
-            "ability": "int",
-            "bonuses": {
-              "check": "",
-              "passive": ""
-            }
+            "ability": ["hrt", "sol"]
           },
-          "ins": {
+          "drv": {
             "value": 0,
-            "ability": "wis",
-            "bonuses": {
-              "check": "",
-              "passive": ""
-            }
+            "ability": ["fin", "mnd"]
           },
-          "itm": {
+          "emp": {
             "value": 0,
-            "ability": "cha",
-            "bonuses": {
-              "check": "",
-              "passive": ""
-            }
+            "ability": ["hrt", "sol"]
+          },
+          "end": {
+            "value": 0,
+            "ability": ["tgh", "hrt"]
+          },
+          "int": {
+            "value": 0,
+            "ability": ["str", "hrt"]
           },
           "inv": {
             "value": 0,
-            "ability": "int",
-            "bonuses": {
-              "check": "",
-              "passive": ""
-            }
+            "ability": ["mnd", "sol"]
+          },
+          "lor": {
+            "value": 0,
+            "ability": ["mnd", "sol"]
           },
           "med": {
             "value": 0,
-            "ability": "wis",
-            "bonuses": {
-              "check": "",
-              "passive": ""
-            }
-          },
-          "nat": {
-            "value": 0,
-            "ability": "int",
-            "bonuses": {
-              "check": "",
-              "passive": ""
-            }
-          },
-          "prc": {
-            "value": 0,
-            "ability": "wis",
-            "bonuses": {
-              "check": "",
-              "passive": ""
-            }
-          },
-          "prf": {
-            "value": 0,
-            "ability": "cha",
-            "bonuses": {
-              "check": "",
-              "passive": ""
-            }
+            "ability": ["mnd", "fin"]
           },
           "per": {
             "value": 0,
-            "ability": "cha",
-            "bonuses": {
-              "check": "",
-              "passive": ""
-            }
+            "ability": ["fin", "hrt"]
           },
-          "rel": {
+          "sab": {
             "value": 0,
-            "ability": "int",
-            "bonuses": {
-              "check": "",
-              "passive": ""
-            }
+            "ability": ["fin", "mnd"]
           },
-          "slt": {
+          "sci": {
             "value": 0,
-            "ability": "dex",
-            "bonuses": {
-              "check": "",
-              "passive": ""
-            }
+            "ability": ["mnd", "sol"]
           },
-          "ste": {
+          "stl": {
             "value": 0,
-            "ability": "dex",
-            "bonuses": {
-              "check": "",
-              "passive": ""
-            }
+            "ability": ["fin", "mnd"]
+          },
+          "stw": {
+            "value": 0,
+            "ability": ["mnd", "hrt"]
           },
           "sur": {
             "value": 0,
-            "ability": "wis",
-            "bonuses": {
-              "check": "",
-              "passive": ""
-            }
+            "ability": ["mnd", "sol"]
+          },
+          "tch": {
+            "value": 0,
+            "ability": ["fin", "mnd"]
+          }
           }
         },
         "traits": {
@@ -365,16 +257,13 @@
           "value": 0,
           "max": 0
         },
-        "death": {
-          "success": 0,
-          "failure": 0
-        },
-        "exhaustion": 0,
-        "inspiration": 0
+        "injury": {
+          "value": 0,
+          "max": 0
+        }
       },
       "details": {
         "background": "",
-        "originalClass": "",
         "xp": {
           "value": 0,
           "min": 0,
@@ -404,20 +293,6 @@
           "max": 0,
           "sr": 0,
           "lr": 0
-        }
-      },
-      "traits": {
-        "weaponProf": {
-          "value": [],
-          "custom": ""
-        },
-        "armorProf": {
-          "value": [],
-          "custom": ""
-        },
-        "toolProf": {
-          "value": [],
-          "custom": ""
         }
       }
     },
@@ -457,65 +332,10 @@
           "initiative": 0
         }
       }
-    },
-    "vehicle": {
-      "templates": ["common"],
-      "vehicleType": "water",
-      "abilities": {
-        "int": {
-          "value": 0
-        },
-        "wis": {
-          "value": 0
-        },
-        "cha": {
-          "value": 0
-        }
-      },
-      "attributes": {
-        "ac": {
-          "value": null,
-          "motionless": ""
-        },
-        "actions": {
-          "stations": false,
-          "value": 0,
-          "thresholds": {
-            "2": null,
-            "1": null,
-            "0": null
-          }
-        },
-        "hp": {
-          "value": null,
-          "max": null,
-          "dt": null,
-          "mt": null
-        },
-        "capacity": {
-          "creature": "",
-          "cargo": 0
-        }
-      },
-      "traits": {
-        "size": "lg",
-        "dimensions": "",
-        "di": {
-          "value": ["poison", "psychic"]
-        },
-        "ci": {
-          "value": ["blinded", "charmed", "deafened", "frightened", "paralyzed", "petrified", "poisoned", "stunned",
-            "unconscious"]
-        }
-      },
-      "cargo": {
-        "crew": [],
-        "passengers": []
-      }
     }
   },
   "Item": {
-    "types": ["weapon", "equipment", "consumable", "tool", "loot", "background", "class", "subclass", "spell", "feat", "backpack"],
+    "types": ["ability", "lesson", "utility", "talent", "backpack"],
     "templates": {
       "itemDescription": {
         "description": {
@@ -619,48 +439,7 @@
         "pp": 0
       }
     },
-    "class": {
-      "templates": ["itemDescription"],
-      "identifier": "",
-      "levels": 1,
-      "hitDice": "d6",
-      "hitDiceUsed": 0,
-      "advancement": [],
-      "saves": [],
-      "skills": {
-        "number": 2,
-        "choices": [],
-        "value": []
-      },
-      "spellcasting": {
-        "progression": "none",
-        "ability": ""
-      }
-    },
-    "consumable": {
-      "templates": ["itemDescription", "physicalItem", "activatedEffect", "action"],
-      "consumableType": "potion",
-      "uses": {
-        "autoDestroy": false
-      }
-    },
-    "equipment": {
-      "templates": ["itemDescription", "physicalItem", "activatedEffect", "action", "mountable"],
-      "armor": {
-        "type": "light",
-        "value": null,
-        "dex": null
-      },
-      "baseItem": "",
-      "speed": {
-        "value": null,
-        "conditions": ""
-      },
-      "strength": 0,
-      "stealth": false,
-      "proficient": true
-    },
-    "feat": {
+    "lesson": {
       "templates": ["itemDescription", "activatedEffect", "action"],
       "requirements": "",
       "recharge": {
@@ -668,17 +447,21 @@
         "charged": false
       }
     },
-    "loot": {
-      "templates": ["itemDescription", "physicalItem"]
+    "utility": {
+      "templates": ["itemDescription", "activatedEffect", "action"],
+      "requirements": "",
+      "recharge": {
+        "value": null,
+        "charged": false
+      }
     },
-    "tool": {
-      "templates": ["itemDescription", "physicalItem"],
-      "toolType": "",
-      "baseItem": "",
-      "ability": "int",
-      "chatFlavor": "",
-      "proficient": 0,
-      "bonus": ""
+    "talent": {
+      "templates": ["itemDescription", "activatedEffect", "action"],
+      "requirements": "",
+      "recharge": {
+        "value": null,
+        "charged": false
+      }
     },
     "spell": {
       "templates": ["itemDescription", "activatedEffect", "action"],
@@ -706,23 +489,6 @@
         "mode": "none",
         "formula": null
       }
-    },
-    "subclass": {
-      "templates": ["itemDescription"],
-      "identifier": "",
-      "classIdentifier": "",
-      "advancement": [],
-      "spellcasting": {
-        "progression": "none",
-        "ability": ""
-      }
-    },
-    "weapon": {
-      "templates": ["itemDescription", "physicalItem" ,"activatedEffect", "action", "mountable"],
-      "weaponType": "simpleM",
-      "baseItem": "",
-      "properties": {},
-      "proficient": true
     }
   }
 }
