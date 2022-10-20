@@ -1,5 +1,9 @@
 /**
  * Data Model variant with some extra methods to support template mix-ins.
+ *
+ * **Note**: This uses some advanced Javascript techniques that are not necessary for most data models.
+ * Please refer to the [advancement data models]{@link BaseAdvancement} for an example of a more typical usage.
+ *
  */
 export default class SystemDataModel extends foundry.abstract.DataModel {
 
