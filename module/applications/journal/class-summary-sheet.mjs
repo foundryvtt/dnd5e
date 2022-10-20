@@ -54,7 +54,6 @@ export default class JournalClassSummaryPageSheet extends JournalPageSheet {
     data.optionalTable = await this._getOptionalTable(linked);
     data.features = await this._getFeatures(linked);
     data.optionalFeatures = await this._getFeatures(linked, true);
-    console.log(data.optionalFeatures);
     data.subclasses = await this._getSubclasses(this.document.system.subclassItems);
     data.subclasses?.sort((lhs, rhs) => lhs.name.localeCompare(rhs.name));
 
@@ -145,8 +144,8 @@ export default class JournalClassSummaryPageSheet extends JournalPageSheet {
       for ( const advancement of item.advancement.byLevel[level] ) {
         switch ( advancement.constructor.typeName ) {
           case "ItemGrant":
-            if ( advancement.data.configuration.optional ) continue;
-            features.push(...advancement.data.configuration.items.map(makeLink));
+            if ( advancement.configuration.optional ) continue;
+            features.push(...advancement.configuration.items.map(makeLink));
             continue;
         }
       }
@@ -268,8 +267,8 @@ export default class JournalClassSummaryPageSheet extends JournalPageSheet {
       for ( const advancement of item.advancement.byLevel[level] ) {
         switch ( advancement.constructor.typeName ) {
           case "ItemGrant":
-            if ( !advancement.data.configuration.optional ) continue;
-            features.push(...advancement.data.configuration.items.map(makeLink));
+            if ( !advancement.configuration.optional ) continue;
+            features.push(...advancement.configuration.items.map(makeLink));
             continue;
         }
       }
@@ -309,8 +308,8 @@ export default class JournalClassSummaryPageSheet extends JournalPageSheet {
 
     let features = [];
     for ( const advancement of item.advancement.byType.ItemGrant ?? [] ) {
-      if ( !!advancement.data.configuration.optional !== optional ) continue;
-      features.push(...advancement.data.configuration.items.map(prepareFeature));
+      if ( !!advancement.configuration.optional !== optional ) continue;
+      features.push(...advancement.configuration.items.map(prepareFeature));
     }
     features = await Promise.all(features);
     return features;
@@ -360,117 +359,8 @@ export default class JournalClassSummaryPageSheet extends JournalPageSheet {
   /** @inheritdoc */
   async _renderInner(...args) {
     const html = await super._renderInner(...args);
-    this.toc = this._buildTOC(html.get());
+    this.toc = JournalEntryPage.buildTOC(html.get());
     return html;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Build the table of contents for this JournalEntryPage.
-   * @param {HTMLElement[]} html  The HTML contents of this page.
-   * @returns {Object<JournalEntryPageHeading>}
-   * @protected
-   */
-  _buildTOC(html) {
-    // A pseudo root heading element to start at.
-    const root = {level: 0, children: []};
-    // Perform a depth-first-search down the DOM to locate heading nodes.
-    const stack = [root];
-    const searchHeadings = element => {
-      if ( element instanceof HTMLHeadingElement ) {
-        const node = this._makeHeadingNode(element);
-        let parent = stack.at(-1);
-        if ( node.level <= parent.level ) {
-          stack.pop();
-          parent = stack.at(-1);
-        }
-        parent.children.push(node);
-        stack.push(node);
-      } else if ( element instanceof HTMLTableElement ) {
-        let parent = stack.at(-1);
-        const level = element.dataset.tocLevel;
-        if ( level ) {
-          const node = this._makeTableNode(element, level);
-          parent.children.push(node);
-          stack.push(node);
-        }
-      }
-      for ( const child of (element.children || []) ) {
-        searchHeadings(child);
-      }
-    };
-    html.forEach(searchHeadings);
-    return this._flattenTOC(root.children);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Flatten the tree structure into a single object with each node's slug as the key.
-   * @param {JournalEntryPageHeading[]} nodes  The root ToC nodes.
-   * @returns {Object<JournalEntryPageHeading>}
-   * @protected
-   */
-  _flattenTOC(nodes) {
-    const toc = {};
-    const addNode = node => {
-      if ( toc[node.slug] ) {
-        let i = 1;
-        while ( toc[`${node.slug}$${i}`] ) i++;
-        node.slug = `${node.slug}$${i}`;
-      }
-      toc[node.slug] = node;
-      return node.slug;
-    };
-    const flattenNode = node => {
-      const slug = addNode(node);
-      while ( node.children.length ) {
-        if ( typeof node.children[0] === "string" ) break;
-        const child = node.children.shift();
-        node.children.push(flattenNode(child));
-      }
-      return slug;
-    };
-    nodes.forEach(flattenNode);
-    return toc;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Construct a table of contents node from a heading element.
-   * @param {HTMLHeadingElement} heading  The heading element.
-   * @returns {JournalEntryPageHeading}
-   * @protected
-   */
-  _makeHeadingNode(heading) {
-    return {
-      text: heading.innerText,
-      level: Number(heading.tagName[1]),
-      slug: heading.id || JournalEntryPage.implementation.slugifyHeading(heading),
-      element: heading,
-      children: []
-    };
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Construct a table of contents node from a table element.
-   * @param {HTMLTableElement} table  The table element.
-   * @param {number} level            TOC level for this table.
-   * @returns {JournalEntryPageHeading}
-   * @protected
-   */
-  _makeTableNode(table, level) {
-    return {
-      text: game.i18n.format("JOURNALENTRYPAGE.DND5E.TableTOC", {caption: table.caption?.innerText ?? ""}),
-      level,
-      slug: table.id || JournalEntryPage.implementation.slugifyHeading(table.caption ?? ""),
-      element: table,
-      children: []
-    };
   }
 
   /* -------------------------------------------- */
