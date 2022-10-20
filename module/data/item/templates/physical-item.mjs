@@ -14,7 +14,7 @@ export default class PhysicalItemTemplate extends foundry.abstract.DataModel {
   static defineSchema() {
     return {
       quantity: new foundry.data.fields.NumberField({
-        required: true, nullable: false, integer: true, positive: true, initial: 1, label: "DND5E.Quantity"
+        required: true, nullable: false, integer: true, initial: 1, min: 0, label: "DND5E.Quantity"
       }),
       weight: new foundry.data.fields.NumberField({
         required: true, nullable: false, initial: 0, min: 0, label: "DND5E.Weight"
@@ -57,10 +57,10 @@ export default class PhysicalItemTemplate extends foundry.abstract.DataModel {
    * @param {object} source  The candidate source data from which the model will be constructed.
    */
   static migrateRarity(source) {
-    if ( !source.rarity ) return;
+    if ( !source.rarity || CONFIG.DND5E.itemRarity[source.rarity] ) return;
     const rarity = Object.keys(CONFIG.DND5E.itemRarity).find(key =>
       (CONFIG.DND5E.itemRarity[key].toLowerCase() === source.rarity.toLowerCase()) || (key === source.rarity)
     );
-    if ( rarity ) source.rarity = rarity;
+    source.rarity = rarity;
   }
 }
