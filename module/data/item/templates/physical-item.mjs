@@ -1,5 +1,3 @@
-import SystemDataModel from "../../abstract.mjs";
-
 /**
  * Data model template with information on physical items.
  *
@@ -10,9 +8,10 @@ import SystemDataModel from "../../abstract.mjs";
  * @property {boolean} equipped    Is this item equipped on its owning actor.
  * @property {string} rarity       Item rarity as defined in `DND5E.itemRarity`.
  * @property {boolean} identified  Has this item been identified?
+ * @mixin
  */
-export default class PhysicalItemTemplate extends SystemDataModel {
-  static systemSchema() {
+export default class PhysicalItemTemplate extends foundry.abstract.DataModel {
+  static defineSchema() {
     return {
       quantity: new foundry.data.fields.NumberField({
         required: true, nullable: false, integer: true, positive: true, initial: 1, label: "DND5E.Quantity"
@@ -30,6 +29,14 @@ export default class PhysicalItemTemplate extends SystemDataModel {
       rarity: new foundry.data.fields.StringField({required: true, blank: true, label: "DND5E.Rarity"}),
       identified: new foundry.data.fields.BooleanField({required: true, initial: true, label: "DND5E.Identified"})
     };
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  static migrateData(source) {
+    this.migrateAttunement(source);
+    this.migrateRarity(source);
   }
 
   /* -------------------------------------------- */

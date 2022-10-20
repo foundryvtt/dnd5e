@@ -4,7 +4,7 @@ import PhysicalItemTemplate from "./templates/physical-item.mjs";
 
 /**
  * Data definition for Loot items.
- * @see ItemDescriptionTemplate
- * @see PhysicalItemTemplate
+ * @mixes ItemDescriptionTemplate
+ * @mixes PhysicalItemTemplate
  */
 export default class LootData extends SystemDataModel.mixin(ItemDescriptionTemplate, PhysicalItemTemplate) {}

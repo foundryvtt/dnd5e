@@ -1,5 +1,3 @@
-import SystemDataModel from "../../abstract.mjs";
-
 /**
  * Data model template with item description & source.
  *
@@ -8,9 +6,10 @@ import SystemDataModel from "../../abstract.mjs";
  * @property {string} description.chat          Description displayed in chat card.
  * @property {string} description.unidentified  Description displayed if item is unidentified.
  * @property {string} source                    Adventure or sourcebook where this item originated.
+ * @mixin
  */
-export default class ItemDescriptionTemplate extends SystemDataModel {
-  static systemSchema() {
+export default class ItemDescriptionTemplate extends foundry.abstract.DataModel {
+  static defineSchema() {
     return {
       description: new foundry.data.fields.SchemaField({
         value: new foundry.data.fields.HTMLField({required: true, label: "DND5E.Description"}),
