@@ -126,21 +126,6 @@ function applyChatCardDamage(li, multiplier) {
   }));
 }
 
-/* -------------------------------------------- */
- 
-/**
- * Apply rolled dice as temporary hit points to the controlled token(s).
- * @param {HTMLElement} li  The chat entry which contains the roll data
- * @returns {Promise}
- */
-function applyChatCardTemp(li) {
-  const message = game.messages.get(li.data("messageId"));
-  const roll = message.rolls[0];
-  return Promise.all(canvas.tokens.controlled.map(t => {
-    const a = t.actor;
-    return a.applyTempHP(roll.total);
-  }));
-}
 
 /* -------------------------------------------- */
 
