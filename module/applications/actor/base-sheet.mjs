@@ -1,5 +1,6 @@
 import ActiveEffect5e from "../../documents/active-effect.mjs";
 import Actor5e from "../../documents/actor/actor.mjs";
+import * as Trait from "../../documents/actor/trait.mjs";
 import Item5e from "../../documents/item.mjs";
 
 import ActorAbilityConfig from "./ability-config.mjs";
@@ -151,7 +152,7 @@ export default class ActorSheet5e extends ActorSheet {
     }
 
     // Update traits
-    this._prepareTraits(context.system.traits);
+    this._prepareTraits(context.system);
 
     // Prepare owned items
     this._prepareItems(context);
@@ -371,36 +372,29 @@ export default class ActorSheet5e extends ActorSheet {
 
   /**
    * Prepare the data structure for traits data like languages, resistances & vulnerabilities, and proficiencies.
-   * @param {object} traits   The raw traits data object from the actor data. *Will be mutated.*
-   * @private
+   * @param {object} systemData  System data for the Actor being prepared.
+   * @protected
    */
-  _prepareTraits(traits) {
-    const map = {
-      dr: CONFIG.DND5E.damageResistanceTypes,
-      di: CONFIG.DND5E.damageResistanceTypes,
-      dv: CONFIG.DND5E.damageResistanceTypes,
-      ci: CONFIG.DND5E.conditionTypes,
-      languages: CONFIG.DND5E.languages
-    };
-    const config = CONFIG.DND5E;
-    for ( const [key, choices] of Object.entries(map) ) {
-      const trait = traits[key];
-      if ( !trait ) continue;
-      let values = (trait.value ?? []) instanceof Array ? trait.value : [trait.value];
+  _prepareTraits(systemData) {
+    for ( const [trait, traitConfig] of Object.entries(CONFIG.DND5E.traits) ) {
+      const data = foundry.utils.getProperty(systemData, traitConfig.actorKeyPath ?? `traits.${trait}`);
+      const choices = CONFIG.DND5E[traitConfig.configKey];
+      if ( !data ) continue;
+
+      let values = data.value ? data.value instanceof Array ? data.value : [data.value] : [];
 
       // Split physical damage types from others if bypasses is set
       const physical = [];
-      if ( trait.bypasses?.length ) {
+      if ( data.bypasses?.length ) {
         values = values.filter(t => {
-          if ( !config.physicalDamageTypes[t] ) return true;
+          if ( !CONFIG.DND5E.physicalDamageTypes[t] ) return true;
           physical.push(t);
           return false;
         });
       }
 
-      // Fill out trait values
-      trait.selected = values.reduce((obj, t) => {
-        obj[t] = choices[t];
+      data.selected = values.reduce((obj, key) => {
+        obj[key] = Trait.keyLabel(trait, key) ?? key;
         return obj;
       }, {});
 
@@ -408,23 +402,15 @@ export default class ActorSheet5e extends ActorSheet {
       if ( physical.length ) {
         const damageTypesFormatter = new Intl.ListFormat(game.i18n.lang, { style: "long", type: "conjunction" });
         const bypassFormatter = new Intl.ListFormat(game.i18n.lang, { style: "long", type: "disjunction" });
-        trait.selected.physical = game.i18n.format("DND5E.DamagePhysicalBypasses", {
+        data.selected.physical = game.i18n.format("DND5E.DamagePhysicalBypasses", {
           damageTypes: damageTypesFormatter.format(physical.map(t => choices[t])),
-          bypassTypes: bypassFormatter.format(trait.bypasses.map(t => config.physicalWeaponProperties[t]))
+          bypassTypes: bypassFormatter.format(data.bypasses.map(t => CONFIG.DND5E.physicalWeaponProperties[t]))
         });
       }
 
-      // Add custom entry
-      if ( trait.custom ) trait.custom.split(";").forEach((c, i) => trait.selected[`custom${i+1}`] = c.trim());
-      trait.cssClass = !foundry.utils.isEmpty(trait.selected) ? "" : "inactive";
-    }
-
-    // Populate and localize proficiencies
-    for ( const t of ["armor", "weapon", "tool"] ) {
-      const trait = traits[`${t}Prof`];
-      if ( !trait ) continue;
-      Actor5e.prepareProficiencies(trait, t);
-      trait.cssClass = !foundry.utils.isEmpty(trait.selected) ? "" : "inactive";
+      // Add custom entries
+      if ( data.custom ) data.custom.split(";").forEach((c, i) => data.selected[`custom${i+1}`] = c.trim());
+      data.cssClass = !foundry.utils.isEmpty(data.selected) ? "" : "inactive";
     }
   }
 
