@@ -19,53 +19,6 @@ export default class Item5e extends Item {
   /*  Item Properties                             */
   /* -------------------------------------------- */
 
-  /**
-   * Which ability score modifier is used by this item?
-   * @type {string|null}
-   */
-  get abilityMod() {
-    if ( !("ability" in this.system) ) return null;
-
-    // Case 1 - defined directly by the item
-    if ( this.system.ability ) return this.system.ability;
-
-    // Case 2 - inferred from a parent actor
-    if ( this.actor ) {
-      const abilities = this.actor.system.abilities;
-      const spellcasting = this.actor.system.attributes.spellcasting;
-
-      // Special rules per item type
-      switch ( this.type ) {
-        case "consumable":
-          if ( this.system.consumableType === "scroll" ) return spellcasting || "int";
-          break;
-        case "spell":
-          return spellcasting || "int";
-        case "tool":
-          return "int";
-        case "weapon":
-          // Finesse weapons - Str or Dex (PHB pg. 147)
-          if ( this.system.properties.fin === true ) {
-            return abilities.dex.mod >= abilities.str.mod ? "dex" : "str";
-          }
-          // Ranged weapons - Dex (PH p.194)
-          if ( ["simpleR", "martialR"].includes(this.system.weaponType) ) return "dex";
-          break;
-      }
-
-      // If a specific attack type is defined
-      if ( this.hasAttack ) return {
-        mwak: "str",
-        rwak: "dex",
-        msak: spellcasting || "int",
-        rsak: spellcasting || "int"
-      }[this.system.actionType];
-    }
-
-    // Case 3 - unknown
-    return null;
-  }
-
   /* -------------------------------------------- */
 
   /**
@@ -76,25 +29,7 @@ export default class Item5e extends Item {
     return this.system.identifier || this.name.slugify({strict: true});
   }
 
-  /* -------------------------------------------- */
 
-  /**
-   * Does this item support advancement and have advancements defined?
-   * @type {boolean}
-   */
-  get hasAdvancement() {
-    return !!this.system.advancement?.length;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Does the Item implement an attack roll as part of its usage?
-   * @type {boolean}
-   */
-  get hasAttack() {
-    return ["mwak", "rwak", "msak", "rsak"].includes(this.system.actionType);
-  }
 
   /* -------------------------------------------- */
 
@@ -128,42 +63,6 @@ export default class Item5e extends Item {
 
   /* -------------------------------------------- */
 
-  /**
-   * Is this class item the original class for the containing actor? If the item is not a class or it is not
-   * embedded in an actor then this will return `null`.
-   * @type {boolean|null}
-   */
-  get isOriginalClass() {
-    if ( this.type !== "class" || !this.isEmbedded ) return null;
-    return this.id === this.parent.system.details.originalClass;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Class associated with this subclass. Always returns null on non-subclass or non-embedded items.
-   * @type {Item5e|null}
-   */
-  get class() {
-    if ( !this.isEmbedded || (this.type !== "subclass") ) return null;
-    const cid = this.system.classIdentifier;
-    return this._classLink ??= this.parent.items.find(i => (i.type === "class") && (i.system.identifier === cid));
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Subclass associated with this class. Always returns null on non-class or non-embedded items.
-   * @type {Item5e|null}
-   */
-  get subclass() {
-    if ( !this.isEmbedded || (this.type !== "class") ) return null;
-    const items = this.parent.items;
-    const cid = this.system.identifier;
-    return this._classLink ??= items.find(i => (i.type === "subclass") && (i.system.classIdentifier === cid));
-  }
-
-  /* -------------------------------------------- */
 
   /**
    * Does the Item implement a saving throw as part of its usage?
@@ -210,6 +109,9 @@ export default class Item5e extends Item {
 
   /**
    * Is this Item limited in its ability to be used by charges or by recharge?
+   * 
+   * TODO: Rework this into MP
+   * 
    * @type {boolean}
    */
   get hasLimitedUses() {
@@ -220,48 +122,6 @@ export default class Item5e extends Item {
 
   /* -------------------------------------------- */
 
-  /**
-   * Is this item any of the armor subtypes?
-   * @type {boolean}
-   */
-  get isArmor() {
-    return this.system.armor?.type in CONFIG.SHAPER.armorTypes;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Retrieve scale values for current level from advancement data.
-   * @type {object}
-   */
-  get scaleValues() {
-    if ( !["class", "subclass"].includes(this.type) || !this.advancement.byType.ScaleValue ) return {};
-    const level = this.type === "class" ? this.system.levels : this.class?.system.levels ?? 0;
-    return this.advancement.byType.ScaleValue.reduce((obj, advancement) => {
-      obj[advancement.identifier] = advancement.prepareValue(level);
-      return obj;
-    }, {});
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Retrieve the spellcasting for a class or subclass. For classes, this will return the spellcasting
-   * of the subclass if it overrides the class. For subclasses, this will return the class's spellcasting
-   * if no spellcasting is defined on the subclass.
-   * @type {object}  Spellcasting object containing progression & ability.
-   */
-  get spellcasting() {
-    const spellcasting = this.system.spellcasting;
-    if ( !spellcasting ) return spellcasting;
-    const isSubclass = this.type === "subclass";
-    const classSpellcasting = isSubclass ? this.class?.system.spellcasting : spellcasting;
-    const subclassSpellcasting = isSubclass ? spellcasting : this.subclass?.system.spellcasting;
-    if ( subclassSpellcasting && subclassSpellcasting.progression !== "none" ) return subclassSpellcasting;
-    return classSpellcasting;
-  }
-
-  /* -------------------------------------------- */
 
   /**
    * Should this item's active effects be suppressed.
@@ -278,6 +138,10 @@ export default class Item5e extends Item {
   /*  Data Preparation                            */
   /* -------------------------------------------- */
 
+  /*
+   * TODO: Look at these and modify them
+  */
+ 
   /** @inheritDoc */
   prepareDerivedData() {
     super.prepareDerivedData();

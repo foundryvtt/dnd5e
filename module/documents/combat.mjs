@@ -4,21 +4,18 @@
  * Apply the dexterity score as a decimal tiebreaker if requested
  * See Combat._getInitiativeFormula for more detail.
  * @returns {string}  Final initiative formula for the actor.
+ * 
+ * TODO: Modify this to fit the system
  */
 export function _getInitiativeFormula() {
   const actor = this.actor;
-  if ( !actor ) return "1d20";
+  if ( !actor ) return "2d10";
   const init = actor.system.attributes.init;
   const rollData = actor.getRollData();
 
   // Construct initiative formula parts
   let nd = 1;
   let mods = "";
-  if ( actor.getFlag("shaper", "halflingLucky") ) mods += "r1=1";
-  if ( actor.getFlag("shaper", "initiativeAdv") ) {
-    nd = 2;
-    mods += "kh";
-  }
   const parts = [
     `${nd}d20${mods}`,
     init.mod,
@@ -26,7 +23,7 @@ export function _getInitiativeFormula() {
     (init.bonus !== 0) ? init.bonus : null
   ];
 
-  // Ability Check Bonuses
+  // Ability Check Bonuses TODO: probably will need to revamp this
   const dexCheckBonus = actor.system.abilities.dex?.bonuses?.check;
   const globalCheckBonus = actor.system.bonuses?.abilities?.check;
   if ( dexCheckBonus ) parts.push(Roll.replaceFormulaData(dexCheckBonus, rollData));
