@@ -59,7 +59,7 @@ export default class PhysicalItemTemplate extends foundry.abstract.DataModel {
   static migrateRarity(source) {
     if ( !source.rarity || CONFIG.DND5E.itemRarity[source.rarity] ) return;
     const rarity = Object.keys(CONFIG.DND5E.itemRarity).find(key =>
-      (CONFIG.DND5E.itemRarity[key].toLowerCase() === source.rarity.toLowerCase()) || (key === source.rarity)
+      CONFIG.DND5E.itemRarity[key].toLowerCase() === source.rarity.toLowerCase()
     );
     source.rarity = rarity;
   }

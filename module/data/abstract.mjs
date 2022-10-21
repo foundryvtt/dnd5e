@@ -3,23 +3,22 @@
  *
  * **Note**: This uses some advanced Javascript techniques that are not necessary for most data models.
  * Please refer to the [advancement data models]{@link BaseAdvancement} for an example of a more typical usage.
- *
  */
 export default class SystemDataModel extends foundry.abstract.DataModel {
 
   /**
    * Base templates used for construction.
    * @type {*[]}
-   * @protected
+   * @private
    */
-  static _schemaTemplates = [];
+  static _schemaTemplates;
 
   /* -------------------------------------------- */
 
   /**
    * A list of properties that should not be mixed-in to the final type.
-   * @type {string[]}
-   * @protected
+   * @type {Set<string>}
+   * @private
    */
   static _immiscible = new Set(["length", "mixed", "name", "prototype", "migrateData", "defineSchema"]);
 
@@ -56,11 +55,13 @@ export default class SystemDataModel extends foundry.abstract.DataModel {
    */
   static mixin(...templates) {
     const Base = class extends this {};
-    Base._schemaTemplates = [];
+    Object.defineProperty(Base, "_schemaTemplates", {
+      value: Object.seal(templates),
+      writable: false,
+      configurable: false
+    });
 
     for ( const template of templates ) {
-      Base._schemaTemplates.push(template);
-
       // Take all static methods and fields from template and mix in to base class
       for ( const [key, descriptor] of Object.entries(Object.getOwnPropertyDescriptors(template)) ) {
         if ( this._immiscible.has(key) ) continue;
