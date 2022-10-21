@@ -610,7 +610,8 @@ export default class ItemSheet5e extends ItemSheet {
       name: a.dataset.target,
       title: a.parentElement.innerText,
       choices: [],
-      allowCustom: false
+      allowCustom: false,
+      suppressWarning: true
     };
     switch (a.dataset.options) {
       case "saves":

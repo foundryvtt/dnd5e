@@ -108,6 +108,7 @@ export async function preloadHandlebarsTemplates() {
   const partials = [
     // Shared Partials
     "systems/dnd5e/templates/actors/parts/active-effects.hbs",
+    "systems/dnd5e/templates/apps/parts/trait-list.hbs",
 
     // Actor Sheet Partials
     "systems/dnd5e/templates/actors/parts/actor-traits.hbs",

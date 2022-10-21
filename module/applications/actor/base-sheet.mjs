@@ -1,5 +1,4 @@
 import ActiveEffect5e from "../../documents/active-effect.mjs";
-import Actor5e from "../../documents/actor/actor.mjs";
 import * as Trait from "../../documents/actor/trait.mjs";
 import Item5e from "../../documents/item.mjs";
 
@@ -17,10 +16,8 @@ import ActorTypeConfig from "./type-config.mjs";
 import AdvancementConfirmationDialog from "../advancement/advancement-confirmation-dialog.mjs";
 import AdvancementManager from "../advancement/advancement-manager.mjs";
 
-import DamageTraitSelector from "../damage-trait-selector.mjs";
-import ProficiencySelector from "../proficiency-selector.mjs";
 import PropertyAttribution from "../property-attribution.mjs";
-import TraitSelector from "../trait-selector.mjs";
+import TraitSelector from "./trait-selector.mjs";
 
 /**
  * Extend the basic ActorSheet class to suppose system-specific logic and functionality.
@@ -613,7 +610,6 @@ export default class ActorSheet5e extends ActorSheet {
       html.find(".skill-proficiency").on("click contextmenu", this._onCycleSkillProficiency.bind(this));
 
       // Trait Selector
-      html.find(".proficiency-selector").click(this._onProficiencySelector.bind(this));
       html.find(".trait-selector").click(this._onTraitSelector.bind(this));
 
       // Configure Special Flags
@@ -1317,22 +1313,6 @@ export default class ActorSheet5e extends ActorSheet {
   /* -------------------------------------------- */
 
   /**
-   * Handle spawning the ProficiencySelector application to configure armor, weapon, and tool proficiencies.
-   * @param {Event} event            The click event which originated the selection.
-   * @returns {ProficiencySelector}  Newly displayed application.
-   * @private
-   */
-  _onProficiencySelector(event) {
-    event.preventDefault();
-    const a = event.currentTarget;
-    const label = a.parentElement.querySelector("label");
-    const options = { name: a.dataset.target, title: `${label.innerText}: ${this.actor.name}`, type: a.dataset.type };
-    return new ProficiencySelector(this.actor, options).render(true);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
    * Handle spawning the TraitSelector application which allows a checkbox of multiple trait options.
    * @param {Event} event      The click event which originated the selection.
    * @returns {TraitSelector}  Newly displayed application.
@@ -1340,16 +1320,7 @@ export default class ActorSheet5e extends ActorSheet {
    */
   _onTraitSelector(event) {
     event.preventDefault();
-    const a = event.currentTarget;
-    const label = a.parentElement.querySelector("label");
-    const choices = CONFIG.DND5E[a.dataset.options];
-    const options = { name: a.dataset.target, title: `${label.innerText}: ${this.actor.name}`, choices };
-    if ( ["di", "dr", "dv"].some(t => a.dataset.target.endsWith(`.${t}`)) ) {
-      options.bypasses = CONFIG.DND5E.physicalWeaponProperties;
-      return new DamageTraitSelector(this.actor, options).render(true);
-    } else {
-      return new TraitSelector(this.actor, options).render(true);
-    }
+    return new TraitSelector(this.actor, event.currentTarget.dataset.trait).render(true);
   }
 
   /* -------------------------------------------- */
