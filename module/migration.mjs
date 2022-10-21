@@ -134,6 +134,43 @@ export const migrateCompendium = async function(pack) {
   console.log(`Migrated all ${documentName} documents from Compendium ${pack.collection}`);
 };
 
+/* -------------------------------------------- */
+
+/**
+ * Update all compendium packs using the new system data model.
+ */
+export async function refreshAllCompendiums() {
+  for ( const pack of game.packs ) {
+    await refreshCompendium(pack);
+  }
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Update all Documents in a compendium using the new system data model.
+ * @param {CompendiumCollection} pack  Pack to refresh.
+ */
+export async function refreshCompendium(pack) {
+  if ( !pack?.documentName ) return;
+  const DocumentClass = CONFIG[pack.documentName].documentClass;
+  const wasLocked = pack.locked;
+  await pack.configure({locked: false});
+  await pack.migrate();
+
+  ui.notifications.info(`Beginning to refresh Compendium ${pack.collection}`);
+  const documents = await pack.getDocuments();
+  for ( const doc of documents ) {
+    const data = doc.toObject();
+    await doc.delete();
+    await DocumentClass.create(data, {keepId: true, keepEmbeddedIds: true, pack: pack.collection});
+  }
+  await pack.configure({locked: wasLocked});
+  ui.notifications.info(`Refreshed all documents from Compendium ${pack.collection}`);
+}
+
+/* -------------------------------------------- */
+
 /**
  * Apply 'smart' AC migration to a given Actor compendium. This will perform the normal AC migration but additionally
  * check to see if the actor has armor already equipped, and opt to use that instead.
@@ -268,10 +305,8 @@ function cleanActorData(actorData) {
  * @param {object} [migrationData]  Additional data to perform the migration
  * @returns {object}                The updateData to apply
  */
-export const migrateItemData = function(item, migrationData) {
+export function migrateItemData(item, migrationData) {
   const updateData = {};
-  _migrateItemAttunement(item, updateData);
-  _migrateItemRarity(item, updateData);
   _migrateItemSpellcasting(item, updateData);
   _migrateArmorType(item, updateData);
   _migrateItemCriticalData(item, updateData);
@@ -284,7 +319,7 @@ export const migrateItemData = function(item, migrationData) {
   }
 
   return updateData;
-};
+}
 
 /* -------------------------------------------- */
 
@@ -589,40 +624,6 @@ function _migrateTokenImage(actorData, updateData) {
 /* -------------------------------------------- */
 
 /**
- * Delete the old data.attuned boolean.
- * @param {object} item        Item data to migrate
- * @param {object} updateData  Existing update to expand upon
- * @returns {object}           The updateData to apply
- * @private
- */
-function _migrateItemAttunement(item, updateData) {
-  if ( item.system?.attuned === undefined ) return updateData;
-  updateData["system.attunement"] = CONFIG.DND5E.attunementTypes.NONE;
-  updateData["system.-=attuned"] = null;
-  return updateData;
-}
-
-/* -------------------------------------------- */
-
-/**
- * Attempt to migrate item rarity from freeform string to enum value.
- * @param {object} item        Item data to migrate.
- * @param {object} updateData  Existing update to expand upon.
- * @returns {object}           The updateData to apply.
- * @private
- */
-function _migrateItemRarity(item, updateData) {
-  if ( item.system?.rarity === undefined ) return updateData;
-  const rarity = Object.keys(CONFIG.DND5E.itemRarity).find(key =>
-    (CONFIG.DND5E.itemRarity[key].toLowerCase() === item.system.rarity.toLowerCase()) || (key === item.system.rarity)
-  );
-  updateData["system.rarity"] = rarity ?? "";
-  return updateData;
-}
-
-/* -------------------------------------------- */
-
-/**
  * Replace class spellcasting string to object.
  * @param {object} item        Item data to migrate.
  * @param {object} updateData  Existing update to expand upon.
@@ -757,26 +758,4 @@ export async function purgeFlags(pack) {
     console.log(`Purged flags from ${doc.name}`);
   }
   await pack.configure({locked: true});
-}
-
-/* -------------------------------------------- */
-
-
-/**
- * Purge the data model of any inner objects which have been flagged as _deprecated.
- * @param {object} data   The data to clean.
- * @returns {object}      Cleaned data.
- * @private
- */
-export function removeDeprecatedObjects(data) {
-  for ( let [k, v] of Object.entries(data) ) {
-    if ( getType(v) === "Object" ) {
-      if (v._deprecated === true) {
-        console.log(`Deleting deprecated object key ${k}`);
-        delete data[k];
-      }
-      else removeDeprecatedObjects(v);
-    }
-  }
-  return data;
 }

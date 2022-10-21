@@ -2298,4 +2298,16 @@ export default class Item5e extends Item {
     });
     return new this(spellScrollData);
   }
+
+  /* -------------------------------------------- */
+  /*  Compatibility                               */
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  static migrateData(source) {
+    // TODO: Temporary patch until https://github.com/foundryvtt/foundryvtt/issues/8366 is resolved
+    const model = this.schema.get("system").getModelForType(source.type);
+    if ( model ) source.system = model.migrateDataSafe(source.system ?? {});
+    return super.migrateData(source);
+  }
 }
