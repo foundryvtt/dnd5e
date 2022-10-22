@@ -86,12 +86,6 @@ export function addChatMessageContextOptions(html, options) {
       callback: li => applyChatCardDamage(li, -1)
     },
     {
-      name: game.i18n.localize("SHAPER.ChatContextTempHP"),
-      icon: '<i class="fas fa-user-clock"></i>',
-      condition: canApply,
-      callback: li => applyChatCardTemp(li)
-    },
-    {
       name: game.i18n.localize("SHAPER.ChatContextDoubleDamage"),
       icon: '<i class="fas fa-user-injured"></i>',
       condition: canApply,

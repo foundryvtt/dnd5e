@@ -438,8 +438,7 @@ SHAPER.areaTargetTypes = {
  * @enum {string}
  */
 SHAPER.healingTypes = {
-  healing: "SHAPER.Healing",
-  temphp: "SHAPER.HealingTemp"
+  healing: "SHAPER.Healing"
 };
 preLocalize("healingTypes");
 
