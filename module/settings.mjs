@@ -108,15 +108,6 @@ export default function registerSystemSettings() {
     type: Boolean
   });
 
-  // Disable Advancements
-  game.settings.register("shaper", "disableAdvancements", {
-    name: "SETTINGS.5eNoAdvancementsN",
-    hint: "SETTINGS.5eNoAdvancementsL",
-    scope: "world",
-    config: true,
-    default: false,
-    type: Boolean
-  });
 
   // Collapse Item Cards (by default)
   game.settings.register("shaper", "autoCollapseItemCards", {

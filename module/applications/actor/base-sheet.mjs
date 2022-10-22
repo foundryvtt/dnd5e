@@ -3,7 +3,6 @@ import Actor5e from "../../documents/actor/actor.mjs";
 import Item5e from "../../documents/item.mjs";
 
 import ActorAbilityConfig from "./ability-config.mjs";
-import ActorArmorConfig from "./armor-config.mjs";
 import ActorHitDiceConfig from "./hit-dice-config.mjs";
 import ActorMovementConfig from "./movement-config.mjs";
 import ActorSensesConfig from "./senses-config.mjs";
@@ -609,9 +608,6 @@ export default class ActorSheet5e extends ActorSheet {
     const button = event.currentTarget;
     let app;
     switch ( button.dataset.action ) {
-      case "armor":
-        app = new ActorArmorConfig(this.actor);
-        break;
       case "hit-dice":
         app = new ActorHitDiceConfig(this.actor);
         break;
@@ -740,12 +736,6 @@ export default class ActorSheet5e extends ActorSheet {
   /** @override */
   async _onDropItemCreate(itemData) {
     let items = itemData instanceof Array ? itemData : [itemData];
-    const itemsWithoutAdvancement = items.filter(i => !i.system.advancement?.length);
-    const multipleAdvancements = (items.length - itemsWithoutAdvancement.length) > 1;
-    if ( multipleAdvancements && !game.settings.get("shaper", "disableAdvancements") ) {
-      ui.notifications.warn(game.i18n.format("SHAPER.WarnCantAddMultipleAdvancements"));
-      items = itemsWithoutAdvancement;
-    }
 
     const toCreate = [];
     for ( const item of items ) {
@@ -790,14 +780,6 @@ export default class ActorSheet5e extends ActorSheet {
     const stacked = this._onDropStackConsumables(itemData);
     if ( stacked ) return false;
 
-    // Bypass normal creation flow for any items with advancement
-    if ( itemData.system.advancement?.length && !game.settings.get("shaper", "disableAdvancements") ) {
-      const manager = AdvancementManager.forNewItem(this.actor, itemData);
-      if ( manager.steps.length ) {
-        manager.render(true);
-        return false;
-      }
-    }
     return itemData;
   }
 
@@ -982,8 +964,7 @@ export default class ActorSheet5e extends ActorSheet {
   /**
    * Handle deleting an existing Owned Item for the Actor.
    * @param {Event} event  The originating click event.
-   * @returns {Promise<Item5e|AdvancementManager>|undefined}  The deleted item if something was deleted or the
-   *                                                          advancement manager if advancements need removing.
+   * @returns {Promise<Item5e>|undefined}  The deleted item if something was deleted
    * @private
    */
   async _onItemDelete(event) {
@@ -991,24 +972,6 @@ export default class ActorSheet5e extends ActorSheet {
     const li = event.currentTarget.closest(".item");
     const item = this.actor.items.get(li.dataset.itemId);
     if ( !item ) return;
-
-    // If item has advancement, handle it separately
-    if ( !game.settings.get("shaper", "disableAdvancements") ) {
-      const manager = AdvancementManager.forDeletedItem(this.actor, item.id);
-      if ( manager.steps.length ) {
-        if ( ["class", "subclass"].includes(item.type) ) {
-          try {
-            const shouldRemoveAdvancements = await AdvancementConfirmationDialog.forDelete(item);
-            if ( shouldRemoveAdvancements ) return manager.render(true);
-          } catch(err) {
-            return;
-          }
-        } else {
-          return manager.render(true);
-        }
-      }
-    }
-
     return item.delete();
   }
 
@@ -1143,9 +1106,6 @@ export default class ActorSheet5e extends ActorSheet {
     const a = event.target;
     if ( !a || !a.dataset.target ) return;
     switch ( a.dataset.target ) {
-      case "armor":
-        (new ActorArmorConfig(this.actor)).render(true);
-        return;
       default:
         const item = await fromUuid(a.dataset.target);
         item?.sheet.render(true);

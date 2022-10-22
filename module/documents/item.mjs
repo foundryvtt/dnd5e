@@ -149,9 +149,6 @@ export default class Item5e extends Item {
     // Clear out linked item cache
     this._classLink = undefined;
 
-    // Advancement
-    this._prepareAdvancement();
-
     // Specialized preparation per Item type
     switch ( this.type ) {
       case "equipment":
@@ -283,36 +280,7 @@ export default class Item5e extends Item {
     }
   }
 
-  /* -------------------------------------------- */
 
-  /**
-   * Prepare advancement objects from stored advancement data.
-   * @protected
-   */
-  _prepareAdvancement() {
-    const minAdvancementLevel = ["class", "subclass"].includes(this.type) ? 1 : 0;
-    this.advancement = {
-      byId: {},
-      byLevel: Object.fromEntries(
-        Array.fromRange(CONFIG.SHAPER.maxLevel + 1).slice(minAdvancementLevel).map(l => [l, []])
-      ),
-      byType: {},
-      needingConfiguration: []
-    };
-    for ( const advancementData of this.system.advancement ?? [] ) {
-      const Advancement = shaper.advancement.types[`${advancementData.type}Advancement`];
-      if ( !Advancement ) continue;
-      const advancement = new Advancement(this, advancementData);
-      this.advancement.byId[advancement.id] = advancement;
-      this.advancement.byType[advancementData.type] ??= [];
-      this.advancement.byType[advancementData.type].push(advancement);
-      advancement.levels.forEach(l => this.advancement.byLevel[l].push(advancement));
-      if ( !advancement.levels.length ) this.advancement.needingConfiguration.push(advancement);
-    }
-    Object.entries(this.advancement.byLevel).forEach(([lvl, data]) => data.sort((a, b) => {
-      return a.sortingValueForLevel(lvl).localeCompare(b.sortingValueForLevel(lvl));
-    }));
-  }
 
   /* -------------------------------------------- */
 
@@ -1789,98 +1757,7 @@ export default class Item5e extends Item {
     return targets;
   }
 
-  /* -------------------------------------------- */
-  /*  Advancements                                */
-  /* -------------------------------------------- */
-
-  /**
-   * Create a new advancement of the specified type.
-   * @param {string} type                        Type of advancement to create.
-   * @param {object} [data]                      Data to use when creating the advancement.
-   * @param {object} [options]
-   * @param {boolean} [options.showConfig=true]  Should the new advancement's configuration application be shown?
-   * @returns {Promise<AdvancementConfig>}
-   */
-  async createAdvancement(type, data={}, { showConfig=true }={}) {
-    if ( !this.system.advancement ) return;
-
-    const Advancement = shaper.advancement.types[`${type}Advancement`];
-    if ( !Advancement ) throw new Error(`${type}Advancement not found in shaper.advancement.types`);
-    data = foundry.utils.mergeObject(Advancement.defaultData, data);
-
-    if ( !Advancement.metadata.validItemTypes.has(this.type) || !Advancement.availableForItem(this) ) {
-      throw new Error(`${type} advancement cannot be added to ${this.name}`);
-    }
-
-    const advancement = this.toObject().system.advancement;
-    if ( !data._id ) data._id = foundry.utils.randomID();
-    advancement.push(data);
-    await this.update({"system.advancement": advancement});
-
-    if ( !showConfig ) return;
-    const config = new Advancement.metadata.apps.config(this.advancement.byId[data._id]);
-    return config.render(true);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Update an advancement belonging to this item.
-   * @param {string} id          ID of the advancement to update.
-   * @param {object} updates     Updates to apply to this advancement, using the same format as `Document#update`.
-   * @returns {Promise<Item5e>}  This item with the changes applied.
-   */
-  async updateAdvancement(id, updates) {
-    if ( !this.system.advancement ) return;
-    const idx = this.system.advancement.findIndex(a => a._id === id);
-    if ( idx === -1 ) throw new Error(`Advancement of ID ${id} could not be found to update`);
-    const advancement = this.toObject().system.advancement;
-    foundry.utils.mergeObject(advancement[idx], updates, { performDeletions: true });
-    return this.update({"system.advancement": advancement});
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Remove an advancement from this item.
-   * @param {string} id          ID of the advancement to remove.
-   * @returns {Promise<Item5e>}  This item with the changes applied.
-   */
-  async deleteAdvancement(id) {
-    if ( !this.system.advancement ) return;
-    return this.update({"system.advancement": this.system.advancement.filter(a => a._id !== id)});
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Duplicate an advancement, resetting its value to default and giving it a new ID.
-   * @param {string} id                          ID of the advancement to duplicate.
-   * @param {object} [options]
-   * @param {boolean} [options.showConfig=true]  Should the new advancement's configuration application be shown?
-   * @returns {Promise<Item5e>}                  This item with the changes applied.
-   */
-  async duplicateAdvancement(id, options) {
-    const original = this.advancement.byId[id];
-    if ( !original ) return;
-    const duplicate = foundry.utils.deepClone(original.data);
-    delete duplicate._id;
-    duplicate.value = original.constructor.metadata.defaults.value;
-    return this.createAdvancement(original.constructor.typeName, duplicate, options);
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritdoc */
-  getEmbeddedDocument(embeddedName, id, options) {
-    if ( embeddedName !== "Advancement" ) return super.getEmbeddedDocument(embeddedName, id, options);
-    const advancement = this.advancement.byId[id];
-    if ( options?.strict && (advancement === undefined) ) {
-      throw new Error(`The key ${id} does not exist in the ${embeddedName} Collection`);
-    }
-    return advancement;
-  }
-
+ 
   /* -------------------------------------------- */
   /*  Event Handlers                              */
   /* -------------------------------------------- */

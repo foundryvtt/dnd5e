@@ -234,7 +234,7 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
   /**
    * Respond to a new level being selected from the level selector.
    * @param {Event} event                           The originating change.
-   * @returns {Promise<AdvancementManager|Item5e>}  Manager if advancements needed, otherwise updated class item.
+   * @returns {Promise<Item5e>}  updated class item.
    * @private
    */
   async _onLevelChange(event) {
@@ -243,19 +243,6 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
     const classId = event.target.closest(".item")?.dataset.itemId;
     if ( !delta || !classId ) return;
     const classItem = this.actor.items.get(classId);
-    if ( !game.settings.get("shaper", "disableAdvancements") ) {
-      const manager = AdvancementManager.forLevelChange(this.actor, classId, delta);
-      if ( manager.steps.length ) {
-        if ( delta > 0 ) return manager.render(true);
-        try {
-          const shouldRemoveAdvancements = await AdvancementConfirmationDialog.forLevelDown(classItem);
-          if ( shouldRemoveAdvancements ) return manager.render(true);
-        }
-        catch(err) {
-          return;
-        }
-      }
-    }
     return classItem.update({"system.levels": classItem.system.levels + delta});
   }
 
@@ -321,13 +308,6 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
       const cls = this.actor.itemTypes.class.find(c => c.identifier === itemData.system.identifier);
       if ( cls ) {
         const priorLevel = cls.system.levels;
-        if ( !game.settings.get("shaper", "disableAdvancements") ) {
-          const manager = AdvancementManager.forLevelChange(this.actor, cls.id, itemData.system.levels);
-          if ( manager.steps.length ) {
-            manager.render(true);
-            return false;
-          }
-        }
         cls.update({"system.levels": priorLevel + itemData.system.levels});
         return false;
       }

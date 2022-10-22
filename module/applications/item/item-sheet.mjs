@@ -33,13 +33,7 @@ export default class ItemSheet5e extends ItemSheet {
     });
   }
 
-  /* -------------------------------------------- */
 
-  /**
-   * Whether advancements on embedded items should be configurable.
-   * @type {boolean}
-   */
-  advancementConfigurationMode = false;
 
   /* -------------------------------------------- */
 
@@ -64,7 +58,6 @@ export default class ItemSheet5e extends ItemSheet {
       system: item.system,
       labels: item.labels,
       isEmbedded: item.isEmbedded,
-      advancementEditable: (this.advancementConfigurationMode || !item.isEmbedded) && context.editable,
 
       // Item Type, Status, and Details
       itemType: game.i18n.localize(`ITEM.Type${item.type.titleCase()}`),
@@ -95,8 +88,6 @@ export default class ItemSheet5e extends ItemSheet {
       hasAC: item.isArmor || isMountable,
       hasDexModifier: item.isArmor && (item.system.armor?.type !== "shield"),
 
-      // Advancement
-      advancement: this._getItemAdvancement(item),
 
       // Prepare Active Effects
       effects: ActiveEffect5e.prepareActiveEffectCategories(item.effects)
@@ -123,54 +114,6 @@ export default class ItemSheet5e extends ItemSheet {
     return context;
   }
 
-  /* -------------------------------------------- */
-
-  /**
-   * Get the display object used to show the advancement tab.
-   * @param {Item5e} item  The item for which the advancement is being prepared.
-   * @returns {object}     Object with advancement data grouped by levels.
-   */
-  _getItemAdvancement(item) {
-    const advancement = {};
-    const configMode = !item.parent || this.advancementConfigurationMode;
-    const maxLevel = !configMode
-      ? (item.system.levels ?? item.class?.system.levels ?? item.parent.system.details.level) : -1;
-
-    // Improperly configured advancements
-    if ( item.advancement.needingConfiguration.length ) {
-      advancement.unconfigured = {
-        items: item.advancement.needingConfiguration.map(a => ({
-          id: a.id,
-          order: a.constructor.order,
-          title: a.title,
-          icon: a.icon,
-          classRestriction: a.data.classRestriction,
-          configured: false
-        })),
-        configured: "partial"
-      };
-    }
-
-    // All other advancements by level
-    for ( let [level, advancements] of Object.entries(item.advancement.byLevel) ) {
-      if ( !configMode ) advancements = advancements.filter(a => a.appliesToClass);
-      const items = advancements.map(advancement => ({
-        id: advancement.id,
-        order: advancement.sortingValueForLevel(level),
-        title: advancement.titleForLevel(level, { configMode }),
-        icon: advancement.icon,
-        classRestriction: advancement.data.classRestriction,
-        summary: advancement.summaryForLevel(level, { configMode }),
-        configured: advancement.configuredForLevel(level)
-      }));
-      if ( !items.length ) continue;
-      advancement[level] = {
-        items: items.sort((a, b) => a.order.localeCompare(b.order)),
-        configured: (level > maxLevel) ? false : items.some(a => !a.configured) ? "partial" : "full"
-      };
-    }
-    return advancement;
-  }
 
   /* -------------------------------------------- */
 
@@ -421,59 +364,9 @@ export default class ItemSheet5e extends ItemSheet {
         if ( this.item.isOwned ) return ui.notifications.warn("Managing Active Effects within an Owned Item is not currently supported and will be added in a subsequent update.");
         ActiveEffect5e.onManageActiveEffect(ev, this.item);
       });
-      html.find(".advancement .item-control").click(event => {
-        const t = event.currentTarget;
-        if ( t.dataset.action ) this._onAdvancementAction(t, t.dataset.action);
-      });
     }
-
-    // Advancement context menu
-    const contextOptions = this._getAdvancementContextMenuOptions();
-    /**
-     * A hook event that fires when the context menu for the advancements list is constructed.
-     * @function shaper.getItemAdvancementContext
-     * @memberof hookEvents
-     * @param {jQuery} html                      The HTML element to which the context options are attached.
-     * @param {ContextMenuEntry[]} entryOptions  The context menu entries.
-     */
-    Hooks.call("shaper.getItemAdvancementContext", html, contextOptions);
-    if ( contextOptions ) new ContextMenu(html, ".advancement-item", contextOptions);
   }
 
-  /* -------------------------------------------- */
-
-  /**
-   * Get the set of ContextMenu options which should be applied for advancement entries.
-   * @returns {ContextMenuEntry[]}  Context menu entries.
-   * @protected
-   */
-  _getAdvancementContextMenuOptions() {
-    const condition = li => (this.advancementConfigurationMode || !this.isEmbedded) && this.isEditable;
-    return [
-      {
-        name: "SHAPER.AdvancementControlEdit",
-        icon: "<i class='fas fa-edit fa-fw'></i>",
-        condition,
-        callback: li => this._onAdvancementAction(li[0], "edit")
-      },
-      {
-        name: "SHAPER.AdvancementControlDuplicate",
-        icon: "<i class='fas fa-copy fa-fw'></i>",
-        condition: li => {
-          const id = li[0].closest(".advancement-item")?.dataset.id;
-          const advancement = this.item.advancement.byId[id];
-          return condition(li) && advancement?.constructor.availableForItem(this.item);
-        },
-        callback: li => this._onAdvancementAction(li[0], "duplicate")
-      },
-      {
-        name: "SHAPER.AdvancementControlDelete",
-        icon: "<i class='fas fa-trash fa-fw' style='color: rgb(255, 65, 65);'></i>",
-        condition,
-        callback: li => this._onAdvancementAction(li[0], "delete")
-      }
-    ];
-  }
 
   /* -------------------------------------------- */
 
@@ -606,33 +499,7 @@ export default class ItemSheet5e extends ItemSheet {
     new TraitSelector(this.item, options).render(true);
   }
 
-  /* -------------------------------------------- */
 
-  /**
-   * Handle one of the advancement actions from the buttons or context menu.
-   * @param {Element} target  Button or context menu entry that triggered this action.
-   * @param {string} action   Action being triggered.
-   * @returns {Promise}
-   */
-  _onAdvancementAction(target, action) {
-    const id = target.closest(".advancement-item")?.dataset.id;
-    const advancement = this.item.advancement.byId[id];
-    if ( ["edit", "delete", "duplicate"].includes(action) && !advancement ) return;
-    switch (action) {
-      case "add": return game.shaper.advancement.AdvancementSelection.createDialog(this.item);
-      case "edit": return new advancement.constructor.metadata.apps.config(advancement).render(true);
-      case "delete": return this.item.deleteAdvancement(id);
-      case "duplicate": return this.item.duplicateAdvancement(id);
-      case "modify-choices":
-        const level = target.closest("li")?.dataset.level;
-        const manager = AdvancementManager.forModifyChoices(this.item.actor, this.item.id, Number(level));
-        if ( manager.steps.length ) manager.render(true);
-        return;
-      case "toggle-configuration":
-        this.advancementConfigurationMode = !this.advancementConfigurationMode;
-        return this.render();
-    }
-  }
 
   /* -------------------------------------------- */
 

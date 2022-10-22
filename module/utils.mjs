@@ -104,14 +104,10 @@ export async function preloadHandlebarsTemplates() {
     // Item Sheet Partials
     "systems/shaper/templates/items/parts/item-action.hbs",
     "systems/shaper/templates/items/parts/item-activation.hbs",
-    "systems/shaper/templates/items/parts/item-advancement.hbs",
     "systems/shaper/templates/items/parts/item-description.hbs",
     "systems/shaper/templates/items/parts/item-mountable.hbs",
     "systems/shaper/templates/items/parts/item-spellcasting.hbs",
 
-    // Advancement Partials
-    "systems/shaper/templates/advancement/parts/advancement-controls.hbs",
-    "systems/shaper/templates/advancement/parts/advancement-spell-config.hbs"
   ];
 
   const paths = {};
