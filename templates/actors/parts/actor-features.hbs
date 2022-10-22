@@ -38,11 +38,6 @@
         <li class="item flexrow {{#if isDepleted}}depleted{{/if}}" data-item-id="{{item._id}}">
             <div class="item-name flexrow rollable">
                 <div class="item-image" tabindex="0" role="button" aria-label="{{item.name}}" style="background-image: url('{{item.img}}')"></div>
-                <h4>
-                    {{#if (eq item.type "subclass")}}&rdsh;{{/if}}
-                    {{item.name}}
-                    {{#if item.system.isOriginalClass}} <i class="original-class fas fa-sun" title="{{localize 'SHAPER.ClassOriginal'}}"></i>{{/if}}
-                </h4>
             </div>
 
             {{#if section.hasActions}}

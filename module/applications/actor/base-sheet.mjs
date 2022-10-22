@@ -964,7 +964,7 @@ export default class ActorSheet5e extends ActorSheet {
   /**
    * Handle deleting an existing Owned Item for the Actor.
    * @param {Event} event  The originating click event.
-   * @returns {Promise<Item5e>|undefined}  The deleted item if something was deleted
+   * @returns {Promise<Item5e>|undefined}  The deleted item if something was deleted or the
    * @private
    */
   async _onItemDelete(event) {

@@ -177,11 +177,6 @@ export default class Actor5e extends Actor {
     data.prof = new Proficiency(this.system.attributes.prof, 1);
     if ( deterministic ) data.prof = data.prof.flat;
 
-    data.classes = {};
-    for ( const [identifier, cls] of Object.entries(this.classes) ) {
-      data.classes[identifier] = cls.system;
-      if ( cls.subclass ) data.classes[identifier].subclass = cls.subclass.system;
-    }
     return data;
   }
 
@@ -576,7 +571,6 @@ export default class Actor5e extends Actor {
   _prepareScaleValues() {
     this.system.scale = Object.entries(this.classes).reduce((scale, [identifier, cls]) => {
       scale[identifier] = cls.scaleValues;
-      if ( cls.subclass ) scale[cls.subclass.identifier] = cls.subclass.scaleValues;
       return scale;
     }, {});
   }
@@ -1886,8 +1880,7 @@ export default class Actor5e extends Actor {
 
     // Keep specific items from the original data
     d.items = d.items.concat(o.items.filter(i => {
-      if ( ["class", "subclass"].includes(i.type) ) return keepClass;
-      else if ( i.type === "feat" ) return keepFeats;
+      if ( i.type === "feat" ) return keepFeats;
       else if ( i.type === "spell" ) return keepSpells;
       else return keepItems;
     }));
@@ -2162,98 +2155,6 @@ export default class Actor5e extends Actor {
     return Item5e.createDocuments(toCreate, {parent: this});
   }
 
-  /* -------------------------------------------- */
-
-  /**
-   * Get a list of features to add to the Actor when a class item is updated.
-   * Optionally prompt the user for which they would like to add.
-   * @param {object} [options]
-   * @param {string} [options.classIdentifier] Identifier slug of the class if it has been changed.
-   * @param {string} [options.subclassName]    Name of the selected subclass if it has been changed.
-   * @param {number} [options.level]           New class level if it has been changed.
-   * @returns {Promise<Item5e[]>}              Any new items that should be added to the actor.
-   * @deprecated since shaper 1.6, targeted for removal in 2.1
-   */
-  async getClassFeatures({classIdentifier, subclassName, level}={}) {
-    foundry.utils.logCompatibilityWarning(
-      "Actor5e#getClassFeatures has been deprecated. Please refer to the Advancement API for its replacement.",
-      { since: "shaperSystem 1.6", until: "shaperSystem 2.1" }
-    );
-    const existing = new Set(this.items.map(i => i.name));
-    const features = await Actor5e.loadClassFeatures({classIdentifier, subclassName, level});
-    return features.filter(f => !existing.has(f.name)) || [];
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Return the features which a character is awarded for each class level.
-   * @param {object} [options]
-   * @param {string} [options.classIdentifier] Identifier slug of the class being added or updated.
-   * @param {string} [options.subclassName]    Name of the subclass of the class being added, if any.
-   * @param {number} [options.level]           The number of levels in the added class.
-   * @param {number} [options.priorLevel]      The previous level of the added class.
-   * @returns {Promise<Item5e[]>}              Items that should be added based on the changes made.
-   * @deprecated since shaper 1.6, targeted for removal in 2.1
-   */
-  static async loadClassFeatures({classIdentifier="", subclassName="", level=1, priorLevel=0}={}) {
-    foundry.utils.logCompatibilityWarning(
-      "Actor5e#loadClassFeatures has been deprecated. Please refer to the Advancement API for its replacement.",
-      { since: "shaperSystem 1.6", until: "shaperSystem 2.1" }
-    );
-    subclassName = subclassName.slugify();
-
-    // Get the configuration of features which may be added
-    const clsConfig = CONFIG.SHAPER.classFeatures[classIdentifier];
-    if (!clsConfig) return [];
-
-    // Acquire class features
-    let ids = [];
-    for ( let [l, f] of Object.entries(clsConfig.features || {}) ) {
-      l = parseInt(l);
-      if ( (l <= level) && (l > priorLevel) ) ids = ids.concat(f);
-    }
-
-    // Acquire subclass features
-    const subConfig = clsConfig.subclasses[subclassName] || {};
-    for ( let [l, f] of Object.entries(subConfig.features || {}) ) {
-      l = parseInt(l);
-      if ( (l <= level) && (l > priorLevel) ) ids = ids.concat(f);
-    }
-
-    // Load item data for all identified features
-    const features = [];
-    for ( let id of ids ) {
-      features.push(await fromUuid(id));
-    }
-
-    // Class spells should always be prepared
-    for ( const feature of features ) {
-      if ( feature.type === "spell" ) {
-        const preparation = feature.system.preparation;
-        preparation.mode = "always";
-        preparation.prepared = true;
-      }
-    }
-    return features;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Determine a character's AC value from their equipped armor and shield.
-   * @returns {object}
-   * @private
-   * @deprecated since shaper 2.0, targeted for removal in 2.2
-   */
-  _computeArmorClass() {
-    foundry.utils.logCompatibilityWarning(
-      "Actor5e#_computeArmorClass has been renamed Actor5e#_prepareArmorClass.",
-      { since: "shaperSystem 2.0", until: "shaperSystem 2.2" }
-    );
-    this._prepareArmorClass();
-    return this.system.attributes.ac;
-  }
 
   /* -------------------------------------------- */
 

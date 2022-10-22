@@ -30,11 +30,8 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
       return arr.concat([res]);
     }, []);
 
-    const classes = this.actor.itemTypes.class;
     return foundry.utils.mergeObject(context, {
       disableExperience: game.settings.get("shaper", "disableExperienceTracking"),
-      classLabels: classes.map(c => c.name).join(", "),
-      multiclassLabels: classes.map(c => [c.subclass?.name ?? "", c.name, c.system.levels].filterJoin(" ")).join(", "),
       weightUnit: game.i18n.localize(`SHAPER.Abbreviation${
         game.settings.get("shaper", "metricWeightUnits") ? "Kgs" : "Lbs"}`)
     });
@@ -56,7 +53,7 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
     };
 
     // Partition items by category
-    let {items, spells, feats, backgrounds, classes, subclasses} = context.items.reduce((obj, item) => {
+    let {items, spells, feats, backgrounds} = context.items.reduce((obj, item) => {
       const {quantity, uses, recharge, target} = item.system;
 
       // Item details
@@ -88,11 +85,9 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
       if ( item.type === "spell" ) obj.spells.push(item);
       else if ( item.type === "feat" ) obj.feats.push(item);
       else if ( item.type === "background" ) obj.backgrounds.push(item);
-      else if ( item.type === "class" ) obj.classes.push(item);
-      else if ( item.type === "subclass" ) obj.subclasses.push(item);
       else if ( Object.keys(inventory).includes(item.type) ) obj.items.push(item);
       return obj;
-    }, { items: [], spells: [], feats: [], backgrounds: [], classes: [], subclasses: [] });
+    }, { items: [], spells: [], feats: [], backgrounds: [] });
 
     // Apply active item filters
     items = this._filterItems(items, this._filters.inventory);
@@ -114,36 +109,14 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
       return (spell.system.level > 0) && (prep.mode === "prepared") && prep.prepared;
     }).length;
 
-    // Sort classes and interleave matching subclasses, put unmatched subclasses into features so they don't disappear
-    classes.sort((a, b) => b.system.levels - a.system.levels);
     const maxLevelDelta = CONFIG.SHAPER.maxLevel - this.actor.system.details.level;
-    classes = classes.reduce((arr, cls) => {
-      cls.availableLevels = Array.fromRange(CONFIG.SHAPER.maxLevel + 1).slice(1).map(level => {
-        const delta = level - cls.system.levels;
-        return { level, delta, disabled: delta > maxLevelDelta };
-      });
-      arr.push(cls);
-      const identifier = cls.system.identifier || cls.name.slugify({strict: true});
-      const subclass = subclasses.findSplice(s => s.system.classIdentifier === identifier);
-      if ( subclass ) arr.push(subclass);
-      return arr;
-    }, []);
-    for ( const subclass of subclasses ) {
-      feats.push(subclass);
-      const message = game.i18n.format("SHAPER.SubclassMismatchWarn", {
-        name: subclass.name, class: subclass.system.classIdentifier
-      });
-      context.warnings.push({ message, type: "warning" });
-    }
+
 
     // Organize Features
     const features = {
       background: {
         label: "SHAPER.ItemTypeBackground", items: backgrounds,
         hasActions: false, dataset: {type: "background"} },
-      classes: {
-        label: "SHAPER.ItemTypeClassPl", items: classes,
-        hasActions: false, dataset: {type: "class"}, isClass: true },
       active: {
         label: "SHAPER.FeatureActive", items: [],
         hasActions: true, dataset: {type: "feat", "activation.type": "action"} },
@@ -313,21 +286,7 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
       }
     }
 
-    // If a subclass is dropped, ensure it doesn't match another subclass with the same identifier
-    else if ( itemData.type === "subclass" ) {
-      const other = this.actor.itemTypes.subclass.find(i => i.identifier === itemData.system.identifier);
-      if ( other ) {
-        const err = game.i18n.format("SHAPER.SubclassDuplicateError", {identifier: other.identifier});
-        ui.notifications.error(err);
-        return false;
-      }
-      const cls = this.actor.itemTypes.class.find(i => i.identifier === itemData.system.classIdentifier);
-      if ( cls && cls.subclass ) {
-        const err = game.i18n.format("SHAPER.SubclassAssignmentError", {class: cls.name, subclass: cls.subclass.name});
-        ui.notifications.error(err);
-        return false;
-      }
-    }
+
     return super._onDropSingleItem(itemData);
   }
 }

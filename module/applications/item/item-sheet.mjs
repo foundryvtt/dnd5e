@@ -7,15 +7,6 @@ import ActiveEffect5e from "../../documents/active-effect.mjs";
 export default class ItemSheet5e extends ItemSheet {
   constructor(...args) {
     super(...args);
-
-    // Expand the default size of the class sheet
-    if ( this.object.type === "class" ) {
-      this.options.width = this.position.width = 600;
-      this.options.height = this.position.height = 680;
-    }
-    else if ( this.object.type === "subclass" ) {
-      this.options.height = this.position.height = 540;
-    }
   }
 
   /* -------------------------------------------- */

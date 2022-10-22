@@ -1766,11 +1766,6 @@ export default class Item5e extends Item {
   async _preCreate(data, options, user) {
     await super._preCreate(data, options, user);
 
-    // Create class identifier based on name
-    if ( ["class", "subclass"].includes(this.type) && !this.system.identifier ) {
-      await this.updateSource({ "system.identifier": data.name.slugify({strict: true}) });
-    }
-
     if ( !this.isEmbedded || (this.parent.type === "vehicle") ) return;
     const isNPC = this.parent.type === "npc";
     let updates;
