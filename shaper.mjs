@@ -25,7 +25,6 @@ import * as utils from "./module/utils.mjs";
 /* -------------------------------------------- */
 
 globalThis.shaper = {
-  advancement,
   applications,
   canvas,
   config: SHAPER,

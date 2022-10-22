@@ -1,5 +1,3 @@
-import AdvancementManager from "../../advancement/advancement-manager.mjs";
-import ProficiencySelector from "../proficiency-selector.mjs";
 import TraitSelector from "../trait-selector.mjs";
 import ActiveEffect5e from "../../documents/active-effect.mjs";
 

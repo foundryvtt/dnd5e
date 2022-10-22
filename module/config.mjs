@@ -1,4 +1,3 @@
-import ClassFeatures from "./advancement/class-features.mjs";
 import { preLocalize } from "./utils.mjs";
 
 // Namespace Configuration Values

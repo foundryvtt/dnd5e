@@ -1,7 +1,6 @@
 import {d20Roll, damageRoll} from "../dice/dice.mjs";
 import simplifyRollFormula from "../dice/simplify-roll-formula.mjs";
 import AbilityUseDialog from "../applications/item/ability-use-dialog.mjs";
-import Proficiency from "./actor/proficiency.mjs";
 
 /**
  * Override and extend the basic Item implementation.
