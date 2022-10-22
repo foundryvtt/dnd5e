@@ -141,9 +141,9 @@ Hooks.once("init", function() {
     makeDefault: true,
     label: "DND5E.SheetClassItem"
   });
-  DocumentSheetConfig.registerSheet(JournalEntryPage, "dnd5e", applications.journal.JournalClassSummaryPageSheet, {
+  DocumentSheetConfig.registerSheet(JournalEntryPage, "dnd5e", applications.journal.JournalClassPageSheet, {
     label: "DND5E.SheetClassClassSummary",
-    types: ["classSummary"]
+    types: ["class"]
   });
 
   // Preload Handlebars helpers & partials

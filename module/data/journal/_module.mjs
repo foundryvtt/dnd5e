@@ -1,7 +1,7 @@
 import ClassJournalPageData from "./class.mjs";
 
 export const config = {
-  classSummary: ClassJournalPageData
+  class: ClassJournalPageData
 };
 
 export {

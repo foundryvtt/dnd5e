@@ -3,7 +3,7 @@ import JournalEditor from "./journal-editor.mjs";
 /**
  * Journal entry page that displays an automatically generated summary of a class along with additional description.
  */
-export default class JournalClassSummaryPageSheet extends JournalPageSheet {
+export default class JournalClassPageSheet extends JournalPageSheet {
 
   /** @inheritdoc */
   static get defaultOptions() {
@@ -11,14 +11,14 @@ export default class JournalClassSummaryPageSheet extends JournalPageSheet {
       dragDrop: [{dropSelector: ".drop-target"}],
       submitOnChange: true
     });
-    options.classes.push("classSummary");
+    options.classes.push("class-journal");
     return options;
   }
 
   /* -------------------------------------------- */
 
   get template() {
-    return `systems/dnd5e/templates/journal/page-class-summary-${this.isEditable ? "edit" : "view"}.hbs`;
+    return `systems/dnd5e/templates/journal/page-class-${this.isEditable ? "edit" : "view"}.hbs`;
   }
 
   /* -------------------------------------------- */
