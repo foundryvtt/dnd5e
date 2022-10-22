@@ -89,15 +89,6 @@
             </div>
             {{/unless}}
 
-            {{!-- Armor Class --}}
-            {{#if hasAC}}
-            <div class="form-group">
-                <label>{{ localize "SHAPER.ArmorClass" }}</label>
-                <div class="form-fields">
-                    {{numberInput system.armor.value name="system.armor.value"}}
-                </div>
-            </div>
-            {{/if}}
 
             {{#if hasDexModifier}}
             {{!-- Dexterity Modifier --}}

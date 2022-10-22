@@ -83,11 +83,6 @@ export default class ItemSheet5e extends ItemSheet {
       isCrewed: item.system.activation?.type === "crew",
       isMountable,
 
-      // Armor Class
-      isArmor: item.isArmor,
-      hasAC: item.isArmor || isMountable,
-      hasDexModifier: item.isArmor && (item.system.armor?.type !== "shield"),
-
 
       // Prepare Active Effects
       effects: ActiveEffect5e.prepareActiveEffectCategories(item.effects)
