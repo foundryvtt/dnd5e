@@ -5,9 +5,9 @@
     <label>{{localize "JOURNALENTRYPAGE.DND5E.Class.Item"}}</label>
     <div class="form-fields">
       <ol class="items-list">
-        {{#if document.system.itemUUID}}
-          <li class="item flexrow" data-item-uuid="document.system.itemUUID" data-item-type="class">
-            <div clas="item.name">{{{dnd5e-linkForUuid document.system.itemUUID}}}</div>
+        {{#if document.system.item}}
+          <li class="item flexrow" data-item-uuid="{{document.system.item}}" data-item-type="class">
+            <div clas="item.name">{{{dnd5e-linkForUuid document.system.item}}}</div>
             <div class="item-controls flexrow">
               <a class="item-control item-delete" title="{{localize 'DND5E.ItemDelete'}}">
                 <i class="fas fa-trash"></i>
@@ -15,7 +15,7 @@
             </div>
           </li>
         {{else}}
-          {{localize "JOURNALENTRYPAGE.DND5E.Class.ItemHint"}}
+          <li class="item flexrow">{{localize "JOURNALENTRYPAGE.DND5E.Class.ItemHint"}}</li>
         {{/if}}
       </ol>
     </div>
@@ -28,7 +28,7 @@
         <i class="fas fa-edit"></i> {{localize "JOURNALENTRYPAGE.DND5E.EditDescription"}}
       </button>
     </div>
-    <p class="hint">{{localize "JOURNALENTRYPAGE.DND5E.Class.DescriptionHint"}}
+    <p class="hint">{{localize "JOURNALENTRYPAGE.DND5E.Class.DescriptionHint"}}</p>
   </div>
 
   <div class="form-group">
@@ -38,7 +38,7 @@
         <i class="fas fa-edit"></i> {{localize "JOURNALENTRYPAGE.DND5E.EditDescription"}}
       </button>
     </div>
-    <p class="hint">{{localize "JOURNALENTRYPAGE.DND5E.Class.AdditionalHitPointsHint"}}
+    <p class="hint">{{localize "JOURNALENTRYPAGE.DND5E.Class.AdditionalHitPointsHint"}}</p>
   </div>
 
   <div class="form-group">
@@ -48,7 +48,7 @@
         <i class="fas fa-edit"></i> {{localize "JOURNALENTRYPAGE.DND5E.EditDescription"}}
       </button>
     </div>
-    <p class="hint">{{localize "JOURNALENTRYPAGE.DND5E.Class.AdditionalTraitsHint"}}
+    <p class="hint">{{localize "JOURNALENTRYPAGE.DND5E.Class.AdditionalTraitsHint"}}</p>
   </div>
 
   <div class="form-group">
@@ -58,7 +58,7 @@
         <i class="fas fa-edit"></i> {{localize "JOURNALENTRYPAGE.DND5E.EditDescription"}}
       </button>
     </div>
-    <p class="hint">{{localize "JOURNALENTRYPAGE.DND5E.Class.AdditionalEquipmentHint"}}
+    <p class="hint">{{localize "JOURNALENTRYPAGE.DND5E.Class.AdditionalEquipmentHint"}}</p>
   </div>
 
   <div class="form-group">
@@ -89,6 +89,8 @@
               <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
             </div>
           </li>
+        {{else}}
+          <li class="item flexrow">{{localize "JOURNALENTRYPAGE.DND5E.Class.SubclassHint"}}</li>
         {{/each}}
       </ol>
     </div>

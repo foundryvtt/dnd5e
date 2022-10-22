@@ -14,8 +14,8 @@
       <tr>
         {{#each this}}
           <th scope="col"{{#if this.rowSpan}}
-            rowspan={{this.rowSpan}}{{/if}}{{#if this.colSpan}}
-            colspan={{this.colSpan}}{{/if}}>{{this.content}}</th>
+            rowspan="{{this.rowSpan}}"{{/if}}{{#if this.colSpan}}
+            colspan="{{this.colSpan}}"{{/if}}>{{this.content}}</th>
         {{/each}}
       </tr>
     {{/each}}

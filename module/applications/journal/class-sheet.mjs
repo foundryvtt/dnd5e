@@ -17,6 +17,7 @@ export default class JournalClassPageSheet extends JournalPageSheet {
 
   /* -------------------------------------------- */
 
+  /** @inheritdoc */
   get template() {
     return `systems/dnd5e/templates/journal/page-class-${this.isEditable ? "edit" : "view"}.hbs`;
   }
@@ -33,14 +34,9 @@ export default class JournalClassPageSheet extends JournalPageSheet {
     const data = super.getData(options);
     data.system = data.document.system;
 
-    data.title = {
-      level1: data.data.title.level,
-      level2: data.data.title.level + 1,
-      level3: data.data.title.level + 2,
-      level4: data.data.title.level + 3
-    };
+    data.title = Object.fromEntries(Array.fromRange(4, 1).map(n => [`level${n}`, data.data.title.level + n - 1]));
 
-    const linked = await fromUuid(this.document.system.itemUUID);
+    const linked = await fromUuid(this.document.system.item);
     if ( !linked ) return data;
     data.linked = {
       document: linked,
@@ -136,7 +132,7 @@ export default class JournalClassPageSheet extends JournalPageSheet {
     if ( scaleValues.length ) cols.push({class: "scale", span: scaleValues.length});
     if ( spellProgression ) cols.push(...spellProgression.cols);
 
-    const makeLink = uuid => TextEditor._createContentLink(["", "UUID", uuid]).outerHTML;
+    const makeLink = async uuid => (await fromUuid(uuid))?.toAnchor({classes: ["content-link"]}).outerHTML;
 
     const rows = [];
     for ( const level of Array.fromRange((CONFIG.DND5E.maxLevel - (initialLevel - 1)), initialLevel) ) {
@@ -145,7 +141,7 @@ export default class JournalClassPageSheet extends JournalPageSheet {
         switch ( advancement.constructor.typeName ) {
           case "ItemGrant":
             if ( advancement.configuration.optional ) continue;
-            features.push(...advancement.configuration.items.map(makeLink));
+            features.push(...await Promise.all(advancement.configuration.items.map(makeLink)));
             continue;
         }
       }
@@ -212,9 +208,9 @@ export default class JournalClassPageSheet extends JournalPageSheet {
       actor.items.get(classId).updateSource({"system.levels": CONFIG.DND5E.maxLevel});
       actor.reset();
       const largestSlot = Object.entries(actor.system.spells).reduce((slot, [key, data]) => {
-        if ( data.max === 0 ) return slot;
-        const level = parseInt(key.replace("spell", ""));
-        if ( !Number.isNaN(level) && level > slot ) return level;
+        if ( !data.max ) return slot;
+        const level = parseInt(key.slice(5));
+        if ( !Number.isNaN(level) && (level > slot) ) return level;
         return slot;
       }, -1);
 
@@ -259,7 +255,7 @@ export default class JournalClassPageSheet extends JournalPageSheet {
       { class: "features", span: 1 }
     ];
 
-    const makeLink = uuid => TextEditor._createContentLink(["", "UUID", uuid]).outerHTML;
+    const makeLink = async uuid => (await fromUuid(uuid))?.toAnchor({classes: ["content-link"]}).outerHTML;
 
     const rows = [];
     for ( const level of Array.fromRange(CONFIG.DND5E.maxLevel, 1) ) {
@@ -268,7 +264,7 @@ export default class JournalClassPageSheet extends JournalPageSheet {
         switch ( advancement.constructor.typeName ) {
           case "ItemGrant":
             if ( !advancement.configuration.optional ) continue;
-            features.push(...advancement.configuration.items.map(makeLink));
+            features.push(...await Promise.all(advancement.configuration.items.map(makeLink)));
             continue;
         }
       }
@@ -385,18 +381,20 @@ export default class JournalClassPageSheet extends JournalPageSheet {
    * @param {Event} event  The triggering click event.
    * @returns {JournalClassSummary5ePageSheet}
    */
-  _onDeleteItem(event) {
+  async _onDeleteItem(event) {
     event.preventDefault();
     const container = event.currentTarget.closest("[data-item-uuid]");
     const uuidToDelete = container?.dataset.itemUuid;
     if ( !uuidToDelete ) return;
     switch (container.dataset.itemType) {
       case "class":
-        return this.document.update({"system.itemUUID": ""});
+        await this.document.update({"system.item": ""});
+        return this.render();
       case "subclass":
         const itemSet = this.document.system.subclassItems;
         itemSet.delete(uuidToDelete);
-        return this.document.update({"system.subclassItems": Array.from(itemSet)});
+        await this.document.update({"system.subclassItems": Array.from(itemSet)});
+        return this.render();
     }
   }
 
@@ -418,19 +416,19 @@ export default class JournalClassPageSheet extends JournalPageSheet {
 
   /** @inheritdoc */
   async _onDrop(event) {
-    let data;
-    try { data = JSON.parse(event.dataTransfer.getData("text/plain")); }
-    catch(err) { return false; }
+    const data = TextEditor.getDragEventData(event);
 
-    if ( data.type !== "Item" ) return false;
+    if ( data?.type !== "Item" ) return false;
     const item = await Item.implementation.fromDropData(data);
-    switch (item.type) {
+    switch ( item.type ) {
       case "class":
-        return this.document.update({"system.itemUUID": item.uuid});
+        await this.document.update({"system.item": item.uuid});
+        this.render();
       case "subclass":
         const itemSet = this.document.system.subclassItems;
         itemSet.add(item.uuid);
-        return this.document.update({"system.subclassItems": Array.from(itemSet)});
+        await this.document.update({"system.subclassItems": Array.from(itemSet)});
+        this.render();
       default:
         return false;
     }
