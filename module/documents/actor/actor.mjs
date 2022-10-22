@@ -110,8 +110,8 @@ export default class Actor5e extends Actor {
     const globalBonuses = this.system.bonuses?.abilities ?? {};
     const bonusData = this.getRollData();
     const checkBonus = simplifyBonus(globalBonuses?.check, bonusData);
-    this._prepareAbilities(bonusData, globalBonuses, checkBonus, originalSaves);
-    this._prepareSkills(bonusData, globalBonuses, checkBonus, originalSkills);
+    this._prepareAbilities(bonusData, globalBonuses, checkBonus);
+    this._prepareSkills(bonusData, globalBonuses, checkBonus);
     this._prepareArmorClass();
     this._prepareEncumbrance();
     this._prepareInitiative(bonusData, checkBonus);
@@ -285,10 +285,9 @@ export default class Actor5e extends Actor {
    * @param {object} bonusData      Data produced by `getRollData` to be applied to bonus formulas.
    * @param {object} globalBonuses  Global bonus data.
    * @param {number} checkBonus     Global ability check bonus.
-   * @param {object} originalSaves  A transformed actor's original actor's abilities.
    * @protected
    */
-  _prepareAbilities(bonusData, globalBonuses, checkBonus, originalSaves) {
+  _prepareAbilities(bonusData, globalBonuses, checkBonus) {
     const flags = this.flags.shaper ?? {};
     const dcBonus = simplifyBonus(this.system.bonuses?.spell?.dc, bonusData);
     const saveBonus = simplifyBonus(globalBonuses.save, bonusData);
@@ -319,10 +318,9 @@ export default class Actor5e extends Actor {
    * @param {object} bonusData       Data produced by `getRollData` to be applied to bonus formulas.
    * @param {object} globalBonuses   Global bonus data.
    * @param {number} checkBonus      Global ability check bonus.
-   * @param {object} originalSkills  A transformed actor's original actor's skills.
    * @protected
    */
-  _prepareSkills(bonusData, globalBonuses, checkBonus, originalSkills) {
+  _prepareSkills(bonusData, globalBonuses, checkBonus) {
     if ( this.type === "vehicle" ) return;
     const flags = this.flags.shaper ?? {};
 
