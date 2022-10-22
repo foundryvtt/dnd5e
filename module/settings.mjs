@@ -42,41 +42,6 @@ export default function registerSystemSettings() {
     onChange: rule => canvas.grid.diagonalRule = rule
   });
 
-  // Proficiency modifier type
-  game.settings.register("shaper", "proficiencyModifier", {
-    name: "SETTINGS.5eProfN",
-    hint: "SETTINGS.5eProfL",
-    scope: "world",
-    config: true,
-    default: "bonus",
-    type: String,
-    choices: {
-      bonus: "SETTINGS.5eProfBonus",
-      dice: "SETTINGS.5eProfDice"
-    }
-  });
-
-  // Use Honor ability score
-  game.settings.register("shaper", "honorScore", {
-    name: "SETTINGS.5eHonorN",
-    hint: "SETTINGS.5eHonorL",
-    scope: "world",
-    config: true,
-    default: false,
-    type: Boolean,
-    requiresReload: true
-  });
-
-  // Use Sanity ability score
-  game.settings.register("shaper", "sanityScore", {
-    name: "SETTINGS.5eSanityN",
-    hint: "SETTINGS.5eSanityL",
-    scope: "world",
-    config: true,
-    default: false,
-    type: Boolean,
-    requiresReload: true
-  });
 
   // Apply Dexterity as Initiative Tiebreaker
   game.settings.register("shaper", "initiativeDexTiebreaker", {

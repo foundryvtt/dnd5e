@@ -85,9 +85,7 @@ export default class PropertyAttribution extends Application {
       return CONFIG.SHAPER.abilities[parts[1]] ?? property;
     } else if ( (property === "attributes.ac.dex") && CONFIG.SHAPER.abilities.dex ) {
       return CONFIG.SHAPER.abilities.dex;
-    } else if ( (parts[0] === "prof") || (property === "attributes.prof") ) {
-      return game.i18n.localize("SHAPER.Proficiency");
-    }
+    } 
     return property;
   }
 }

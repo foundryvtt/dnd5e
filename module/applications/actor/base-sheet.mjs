@@ -126,17 +126,12 @@ export default class ActorSheet5e extends ActorSheet {
 
     // Ability Scores
     for ( const [a, abl] of Object.entries(context.system.abilities) ) {
-      abl.icon = this._getProficiencyIcon(abl.proficient);
-      abl.hover = CONFIG.SHAPER.proficiencyLevels[abl.proficient];
       abl.label = CONFIG.SHAPER.abilities[a];
-      abl.baseProf = source.system.abilities[a]?.proficient ?? 0;
     }
 
     // Skills
     for ( const [s, skl] of Object.entries(context.system.skills ?? {}) ) {
       skl.ability = CONFIG.SHAPER.abilityAbbreviations[skl.ability];
-      skl.icon = this._getProficiencyIcon(skl.value);
-      skl.hover = CONFIG.SHAPER.proficiencyLevels[skl.value];
       skl.label = CONFIG.SHAPER.skills[s]?.label;
       skl.baseValue = source.system.skills[s]?.value ?? 0;
     }
@@ -465,23 +460,6 @@ export default class ActorSheet5e extends ActorSheet {
     });
   }
 
-  /* -------------------------------------------- */
-
-  /**
-   * Get the font-awesome icon used to display a certain level of skill proficiency.
-   * @param {number} level  A proficiency mode defined in `CONFIG.SHAPER.proficiencyLevels`.
-   * @returns {string}      HTML string for the chosen icon.
-   * @private
-   */
-  _getProficiencyIcon(level) {
-    const icons = {
-      0: '<i class="far fa-circle"></i>',
-      0.5: '<i class="fas fa-adjust"></i>',
-      1: '<i class="fas fa-check"></i>',
-      2: '<i class="fas fa-check-double"></i>'
-    };
-    return icons[level] || icons[0];
-  }
 
   /* -------------------------------------------- */
   /*  Event Listeners and Handlers                */
@@ -515,14 +493,6 @@ export default class ActorSheet5e extends ActorSheet {
       inputs.focus(ev => ev.currentTarget.select());
       inputs.addBack().find('[type="number"]').change(this._onChangeInputDelta.bind(this));
 
-      // Ability Proficiency
-      html.find(".ability-proficiency").click(this._onToggleAbilityProficiency.bind(this));
-
-      // Toggle Skill Proficiency
-      html.find(".skill-proficiency").on("click contextmenu", this._onCycleSkillProficiency.bind(this));
-
-      // Trait Selector
-      html.find(".proficiency-selector").click(this._onProficiencySelector.bind(this));
       html.find(".trait-selector").click(this._onTraitSelector.bind(this));
 
       // Configure Special Flags
@@ -637,30 +607,7 @@ export default class ActorSheet5e extends ActorSheet {
     app?.render(true);
   }
 
-  /* -------------------------------------------- */
 
-  /**
-   * Handle cycling proficiency in a Skill.
-   * @param {Event} event   A click or contextmenu event which triggered the handler.
-   * @returns {Promise}     Updated data for this actor after changes are applied.
-   * @private
-   */
-  _onCycleSkillProficiency(event) {
-    event.preventDefault();
-    const field = event.currentTarget.previousElementSibling;
-    const skillName = field.parentElement.dataset.skill;
-    const source = this.actor._source.system.skills[skillName];
-    if ( !source ) return;
-
-    // Cycle to the next or previous skill level
-    const levels = [0, 1, 0.5, 2];
-    let idx = levels.indexOf(source.value);
-    const next = idx + (event.type === "click" ? 1 : 3);
-    field.value = levels[next % 4];
-
-    // Update the field value and save the form
-    return this._onSubmit(event);
-  }
 
   /* -------------------------------------------- */
 
@@ -791,7 +738,7 @@ export default class ActorSheet5e extends ActorSheet {
    */
   _onDropResetData(itemData) {
     if ( !itemData.system ) return;
-    ["equipped", "proficient", "prepared"].forEach(k => delete itemData.system[k]);
+    ["equipped", "prepared"].forEach(k => delete itemData.system[k]);
     if ( "attunement" in itemData.system ) {
       itemData.system.attunement = Math.min(itemData.system.attunement, CONFIG.SHAPER.attunementTypes.REQUIRED);
     }
@@ -1024,19 +971,7 @@ export default class ActorSheet5e extends ActorSheet {
     return this.actor.rollSkill(skill, {event: event});
   }
 
-  /* -------------------------------------------- */
 
-  /**
-   * Handle toggling Ability score proficiency level.
-   * @param {Event} event         The originating click event.
-   * @returns {Promise<Actor5e>}  Updated actor instance.
-   * @private
-   */
-  _onToggleAbilityProficiency(event) {
-    event.preventDefault();
-    const field = event.currentTarget.previousElementSibling;
-    return this.actor.update({[field.name]: 1 - parseInt(field.value)});
-  }
 
   /* -------------------------------------------- */
 
@@ -1056,21 +991,7 @@ export default class ActorSheet5e extends ActorSheet {
     return this.render();
   }
 
-  /* -------------------------------------------- */
 
-  /**
-   * Handle spawning the ProficiencySelector application to configure armor, weapon, and tool proficiencies.
-   * @param {Event} event            The click event which originated the selection.
-   * @returns {ProficiencySelector}  Newly displayed application.
-   * @private
-   */
-  _onProficiencySelector(event) {
-    event.preventDefault();
-    const a = event.currentTarget;
-    const label = a.parentElement.querySelector("label");
-    const options = { name: a.dataset.target, title: `${label.innerText}: ${this.actor.name}`, type: a.dataset.type };
-    return new ProficiencySelector(this.actor, options).render(true);
-  }
 
   /* -------------------------------------------- */
 

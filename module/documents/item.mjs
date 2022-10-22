@@ -291,12 +291,6 @@ export default class Item5e extends Item {
    */
   prepareFinalAttributes() {
 
-    // Proficiency
-    const isProficient = (this.type === "spell") || this.system.proficient; // Always proficient in spell attacks.
-    this.system.prof = new Proficiency(this.actor?.system.attributes.prof, isProficient);
-
-    // Class data
-    if ( this.type === "class" ) this.system.isOriginalClass = this.isOriginalClass;
 
     // Action usage
     if ( "actionType" in this.system ) {
@@ -375,7 +369,6 @@ export default class Item5e extends Item {
   /**
    * Update a label to the Item detailing its total to hit bonus from the following sources:
    * - item document's innate attack bonus
-   * - item's actor's proficiency bonus if applicable
    * - item's actor's global bonuses to the given item type
    * - item's ammunition if applicable
    * @returns {{rollData: object, parts: string[]}|null}  Data used in the item's Attack roll.
@@ -398,11 +391,6 @@ export default class Item5e extends Item {
     // Ability score modifier
     parts.push("@mod");
 
-    // Add proficiency bonus if an explicit proficiency flag is present or for non-item features
-    if ( !["weapon", "consumable"].includes(this.type) || this.system.proficient ) {
-      parts.push("@prof");
-      if ( this.system.prof?.hasProficiency ) rollData.prof = this.system.prof.term;
-    }
 
     // Actor-level global bonus to attack rolls
     const actorBonus = this.actor.system.bonuses?.[this.system.actionType] || {};
@@ -981,7 +969,6 @@ export default class Item5e extends Item {
       }
       props.push(
         game.i18n.localize(data.equipped ? "SHAPER.Equipped" : "SHAPER.Unequipped"),
-        game.i18n.localize(data.proficient ? "SHAPER.Proficient" : "SHAPER.NotProficient")
       );
     }
 
@@ -1091,8 +1078,7 @@ export default class Item5e extends Item {
    */
   _toolChatData(data, labels, props) {
     props.push(
-      CONFIG.SHAPER.abilities[data.ability] || null,
-      CONFIG.SHAPER.proficiencyLevels[data.proficient || 0]
+      CONFIG.SHAPER.abilities[data.ability] || null
     );
   }
 
@@ -1519,11 +1505,6 @@ export default class Item5e extends Item {
     const parts = ["@mod", "@abilityCheckBonus"];
     const title = `${this.name} - ${game.i18n.localize("SHAPER.ToolCheck")}`;
 
-    // Add proficiency
-    if ( this.system.prof?.hasProficiency ) {
-      parts.push("@prof");
-      rollData.prof = this.system.prof.term;
-    }
 
     // Add tool bonuses
     if ( this.system.bonus ) {
@@ -1555,8 +1536,6 @@ export default class Item5e extends Item {
         left: window.innerWidth - 710
       },
       chooseModifier: true,
-      halflingLucky: this.actor.getFlag("shaper", "halflingLucky" ),
-      reliableTalent: (this.system.proficient >= 1) && this.actor.getFlag("shaper", "reliableTalent"),
       messageData: {
         speaker: options.speaker || ChatMessage.getSpeaker({actor: this.actor}),
         "flags.shaper.roll": {type: "tool", itemId: this.id }
@@ -1856,16 +1835,6 @@ export default class Item5e extends Item {
     if ( foundry.utils.getProperty(data, "system.equipped") === undefined ) {
       updates["system.equipped"] = isNPC;  // NPCs automatically equip equipment
     }
-    if ( foundry.utils.getProperty(data, "system.proficient") === undefined ) {
-      if ( isNPC ) {
-        updates["system.proficient"] = true;  // NPCs automatically have equipment proficiency
-      } else {
-        const armorProf = CONFIG.SHAPER.armorProficienciesMap[this.system.armor?.type]; // Player characters check proficiency
-        const actorArmorProfs = this.parent.system.traits?.armorProf?.value || [];
-        updates["system.proficient"] = (armorProf === true) || actorArmorProfs.includes(armorProf)
-          || actorArmorProfs.includes(this.system.baseItem);
-      }
-    }
     return updates;
   }
 
@@ -1925,21 +1894,9 @@ export default class Item5e extends Item {
     if ( isNPC ) {
       const updates = {};
       if ( !foundry.utils.hasProperty(data, "system.equipped") ) updates["system.equipped"] = true;
-      if ( !foundry.utils.hasProperty(data, "system.proficient") ) updates["system.proficient"] = true;
       return updates;
     }
-    if ( data.system?.proficient !== undefined ) return {};
 
-    // Some weapon types are always proficient
-    const weaponProf = CONFIG.SHAPER.weaponProficienciesMap[this.system.weaponType];
-    const updates = {};
-    if ( weaponProf === true ) updates["system.proficient"] = true;
-
-    // Characters may have proficiency in this weapon type (or specific base weapon)
-    else {
-      const actorProfs = this.parent.system.traits?.weaponProf?.value || [];
-      updates["system.proficient"] = actorProfs.includes(weaponProf) || actorProfs.includes(this.system.baseItem);
-    }
     return updates;
   }
 

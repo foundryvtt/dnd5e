@@ -118,7 +118,6 @@ export default class ItemSheet5e extends ItemSheet {
 
     const items = {};
     for ( const [name, id] of Object.entries(baseIds) ) {
-      const baseItem = await ProficiencySelector.getBaseItem(id);
       if ( baseType !== foundry.utils.getProperty(baseItem.system, typeProperty) ) continue;
       items[name] = baseItem.name;
     }
@@ -209,13 +208,10 @@ export default class ItemSheet5e extends ItemSheet {
     switch ( this.item.type ) {
       case "class":
         return game.i18n.format("SHAPER.LevelCount", {ordinal: this.item.system.levels.ordinalString()});
-      case "equipment":
       case "weapon":
         return game.i18n.localize(this.item.system.equipped ? "SHAPER.Equipped" : "SHAPER.Unequipped");
       case "spell":
         return CONFIG.SHAPER.spellPreparationModes[this.item.system.preparation];
-      case "tool":
-        return game.i18n.localize(this.item.system.proficient ? "SHAPER.Proficient" : "SHAPER.NotProficient");
     }
   }
 

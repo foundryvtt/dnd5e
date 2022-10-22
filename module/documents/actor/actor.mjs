@@ -174,8 +174,6 @@ export default class Actor5e extends Actor {
    */
   getRollData({ deterministic=false }={}) {
     const data = foundry.utils.deepClone(super.getRollData());
-    data.prof = new Proficiency(this.system.attributes.prof, 1);
-    if ( deterministic ) data.prof = data.prof.flat;
 
     return data;
   }
@@ -264,9 +262,6 @@ export default class Actor5e extends Actor {
       }
     }
 
-    // Character proficiency bonus
-    this.system.attributes.prof = Math.floor((this.system.details.level + 7) / 4);
-
     // Experience required for next level
     const xp = this.system.details.xp;
     xp.max = this.getLevelExp(this.system.details.level || 1);
@@ -293,9 +288,6 @@ export default class Actor5e extends Actor {
 
     // Kill Experience
     this.system.details.xp.value = this.getCRExp(cr);
-
-    // Proficiency
-    this.system.attributes.prof = Math.floor((Math.max(cr, 1) + 7) / 4);
 
     // Spellcaster Level
     if ( this.system.attributes.spellcasting && !Number.isNumeric(this.system.details.spellLevel) ) {
@@ -331,15 +323,13 @@ export default class Actor5e extends Actor {
     const dcBonus = simplifyBonus(this.system.bonuses?.spell?.dc, bonusData);
     const saveBonus = simplifyBonus(globalBonuses.save, bonusData);
     for ( const [id, abl] of Object.entries(this.system.abilities) ) {
-      if ( flags.diamondSoul ) abl.proficient = 1;  // Diamond Soul is proficient in all saves
+
       abl.mod = Math.floor((abl.value - 10) / 2);
 
-      const isRA = this._isRemarkableAthlete(id);
-      abl.checkProf = new Proficiency(this.system.attributes.prof, (isRA || flags.jackOfAllTrades) ? 0.5 : 0, !isRA);
+
       const saveBonusAbl = simplifyBonus(abl.bonuses?.save, bonusData);
       abl.saveBonus = saveBonusAbl + saveBonus;
 
-      abl.saveProf = new Proficiency(this.system.attributes.prof, abl.proficient);
       const checkBonusAbl = simplifyBonus(abl.bonuses?.check, bonusData);
       abl.checkBonus = checkBonusAbl + checkBonus;
 
@@ -395,7 +385,6 @@ export default class Actor5e extends Actor {
       const checkBonusAbl = simplifyBonus(ability?.bonuses?.check, bonusData);
       skl.bonus = baseBonus + checkBonus + checkBonusAbl + skillBonus;
       skl.mod = ability?.mod ?? 0;
-      skl.prof = new Proficiency(this.system.attributes.prof, skl.value, roundDown);
       skl.proficient = skl.value;
       skl.total = skl.mod + skl.bonus;
       if ( Number.isNumeric(skl.prof.term) ) skl.total += skl.prof.flat;
@@ -552,9 +541,7 @@ export default class Actor5e extends Actor {
 
     // Compute initiative modifier
     init.mod = this.system.abilities.dex?.mod ?? 0;
-    init.prof = new Proficiency(
-      this.system.attributes.prof, (jackOfAllTrades || remarkableAthlete) ? 0.5 : 0, !remarkableAthlete
-    );
+
     init.value = init.value ?? 0;
     init.bonus = init.value + (initiativeAlert ? 5 : 0);
     init.total = init.mod + init.bonus + dexCheckBonus + globalCheckBonus;
@@ -810,11 +797,6 @@ export default class Actor5e extends Actor {
     data.mod = skl.mod;
     data.defaultAbility = skl.ability;
 
-    // Include proficiency bonus
-    if ( skl.prof.hasProficiency ) {
-      parts.push("@prof");
-      data.prof = skl.prof.term;
-    }
 
     // Global ability check bonus
     if ( globalBonuses.check ) {
@@ -842,8 +824,6 @@ export default class Actor5e extends Actor {
     // Add provided extra roll parts now because they will get clobbered by mergeObject below
     if ( options.parts?.length > 0 ) parts.push(...options.parts);
 
-    // Reliable Talent applies to any skill check we have full or better proficiency in
-    const reliableTalent = (skl.value >= 1 && this.getFlag("shaper", "reliableTalent"));
 
     // Roll and return
     const flavor = game.i18n.format("SHAPER.SkillPromptTitle", {skill: CONFIG.SHAPER.skills[skillId]?.label ?? ""});
@@ -933,11 +913,7 @@ export default class Actor5e extends Actor {
     parts.push("@mod");
     data.mod = abl?.mod ?? 0;
 
-    // Include proficiency bonus
-    if ( abl?.checkProf.hasProficiency ) {
-      parts.push("@prof");
-      data.prof = abl.checkProf.term;
-    }
+
 
     // Add ability-specific check bonus
     if ( abl?.bonuses?.check ) {
@@ -1015,11 +991,7 @@ export default class Actor5e extends Actor {
     parts.push("@mod");
     data.mod = abl?.mod ?? 0;
 
-    // Include proficiency bonus
-    if ( abl?.saveProf.hasProficiency ) {
-      parts.push("@prof");
-      data.prof = abl.saveProf.term;
-    }
+
 
     // Include ability-specific saving throw bonus
     if ( abl?.bonuses?.save ) {
@@ -1099,11 +1071,6 @@ export default class Actor5e extends Actor {
     const parts = [];
     const data = this.getRollData();
 
-    // Diamond Soul adds proficiency
-    if ( this.getFlag("shaper", "diamondSoul") ) {
-      parts.push("@prof");
-      data.prof = new Proficiency(this.system.attributes.prof, 1).term;
-    }
 
     // Include a global actor ability save bonus
     if ( globalBonuses.save ) {
@@ -1785,7 +1752,6 @@ export default class Actor5e extends Actor {
    * @property {boolean} [keepSkills=false]      Keep skill proficiencies
    * @property {boolean} [mergeSaves=false]      Take the maximum of the save proficiencies
    * @property {boolean} [mergeSkills=false]     Take the maximum of the skill proficiencies
-   * @property {boolean} [keepClass=false]       Keep proficiency bonus
    * @property {boolean} [keepFeats=false]       Keep features
    * @property {boolean} [keepSpells=false]      Keep spells
    * @property {boolean} [keepItems=false]       Keep items
@@ -2051,39 +2017,6 @@ export default class Actor5e extends Actor {
     return type;
   }
 
-  /* -------------------------------------------- */
-
-  /**
-   * Populate a proficiency object with a `selected` field containing a combination of
-   * localizable group & individual proficiencies from `value` and the contents of `custom`.
-   *
-   * @param {object} data          Object containing proficiency data.
-   * @param {string[]} data.value  Array of standard proficiency keys.
-   * @param {string} data.custom   Semicolon-separated string of custom proficiencies.
-   * @param {string} type          "armor", "weapon", or "tool"
-   */
-  static prepareProficiencies(data, type) {
-    const profs = CONFIG.SHAPER[`${type}Proficiencies`];
-    const itemTypes = CONFIG.SHAPER[`${type}Ids`];
-
-    let values = [];
-    if ( data.value ) values = data.value instanceof Array ? data.value : [data.value];
-
-    data.selected = {};
-    for ( const key of values ) {
-      if ( profs[key] ) {
-        data.selected[key] = profs[key];
-      } else if ( itemTypes && itemTypes[key] ) {
-        const item = ProficiencySelector.getBaseItem(itemTypes[key], { indexOnly: true });
-        if ( item ) data.selected[key] = item.name;
-      } else if ( type === "tool" && CONFIG.SHAPER.vehicleTypes[key] ) {
-        data.selected[key] = CONFIG.SHAPER.vehicleTypes[key];
-      }
-    }
-
-    // Add custom entries
-    if ( data.custom ) data.custom.split(";").forEach((c, i) => data.selected[`custom${i+1}`] = c.trim());
-  }
 
   /* -------------------------------------------- */
   /*  Event Listeners and Handlers                */

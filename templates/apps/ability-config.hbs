@@ -2,12 +2,6 @@
   <p class="notes">{{localize "SHAPER.AbilityConfigurationHint"}}</p>
   <h3 class="form-header">{{labelSaves}}</h3>
   <div class="form-group">
-    <label>{{ localize "SHAPER.ProficiencyLevel" }}</label>
-    <select name="system.abilities.{{abilityId}}.proficient" data-dtype="Number">
-      {{selectOptions proficiencyLevels selected=ability.proficient}}
-    </select>
-  </div>
-  <div class="form-group">
     <label>{{localize "SHAPER.SaveBonus"}}</label>
     <input name="system.abilities.{{abilityId}}.bonuses.save" type="text" value="{{ability.bonuses.save}}">
   </div>

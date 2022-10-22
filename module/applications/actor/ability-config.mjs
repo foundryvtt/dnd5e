@@ -40,10 +40,6 @@ export default class ActorAbilityConfig extends DocumentSheet {
       labelSaves: game.i18n.format("SHAPER.AbilitySaveConfigure", {ability: CONFIG.SHAPER.abilities[this._abilityId]}),
       labelChecks: game.i18n.format("SHAPER.AbilityCheckConfigure", {ability: CONFIG.SHAPER.abilities[this._abilityId]}),
       abilityId: this._abilityId,
-      proficiencyLevels: {
-        0: CONFIG.SHAPER.proficiencyLevels[0],
-        1: CONFIG.SHAPER.proficiencyLevels[1]
-      },
       bonusGlobalSave: src.system.bonuses?.abilities?.save,
       bonusGlobalCheck: src.system.bonuses?.abilities?.check
     };

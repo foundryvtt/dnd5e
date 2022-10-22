@@ -641,20 +641,7 @@ SHAPER.polymorphSettings = {
 };
 preLocalize("polymorphSettings", { sort: true });
 
-/* -------------------------------------------- */
 
-/**
- * Skill, ability, and tool proficiency levels.
- * The key for each level represents its proficiency multiplier.
- * @enum {string}
- */
-SHAPER.proficiencyLevels = {
-  0: "SHAPER.NotProficient",
-  1: "SHAPER.Proficient",
-  0.5: "SHAPER.HalfProficient",
-  2: "SHAPER.Expertise"
-};
-preLocalize("proficiencyLevels");
 
 /* -------------------------------------------- */
 

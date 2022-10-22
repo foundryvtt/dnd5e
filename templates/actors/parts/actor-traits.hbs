@@ -92,10 +92,6 @@
     {{#if isCharacter}}
     <div class="form-group {{system.traits.weaponProf.cssClass}}">
         <label>{{localize "SHAPER.TraitWeaponProf"}}</label>
-        <a class="proficiency-selector" data-type="weapon" data-target="system.traits.weaponProf"
-           title="{{localize 'SHAPER.TraitConfig' trait=(localize 'SHAPER.TraitWeaponProf')}}">
-            <i class="fas fa-edit"></i>
-        </a>
         <ul class="traits-list">
         {{#each system.traits.weaponProf.selected as |v k|}}
             <li class="tag {{k}}">{{v}}</li>
@@ -105,10 +101,6 @@
 
     <div class="form-group {{system.traits.armorProf.cssClass}}">
         <label>{{localize "SHAPER.TraitArmorProf"}}</label>
-        <a class="proficiency-selector" data-type="armor" data-target="system.traits.armorProf"
-           title="{{localize 'SHAPER.TraitConfig' trait=(localize 'SHAPER.TraitArmorProf')}}">
-            <i class="fas fa-edit"></i>
-        </a>
         <ul class="traits-list">
         {{#each system.traits.armorProf.selected as |v k|}}
             <li class="tag {{k}}">{{v}}</li>
@@ -118,10 +110,6 @@
 
     <div class="form-group {{system.traits.toolProf.cssClass}}">
         <label>{{localize "SHAPER.TraitToolProf"}}</label>
-        <a class="proficiency-selector" data-type="tool" data-target="system.traits.toolProf"
-           title="{{localize 'SHAPER.TraitConfig' trait=(localize 'SHAPER.TraitToolProf')}}">
-            <i class="fas fa-edit"></i>
-        </a>
         <ul class="traits-list">
         {{#each system.traits.toolProf.selected as |v k|}}
             <li class="tag {{k}}">{{v}}</li>

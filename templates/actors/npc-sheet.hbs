@@ -19,11 +19,6 @@
                 <div class="experience">
                     <span>{{system.details.xp.value}} XP</span>
                 </div>
-                <div class="proficiency">
-                    <span>
-                        {{ localize "SHAPER.Proficiency" }} {{labels.proficiency}}
-                    </span>
-                </div>
             </aside>
 
             {{!-- Character Summary --}}
@@ -100,14 +95,12 @@
             {{!-- Ability Scores --}}
             <ul class="ability-scores flexrow">
             {{#each system.abilities as |ability id|}}
-                <li class="ability {{#if ability.proficient}}proficient{{/if}}" data-ability="{{id}}">
+                <li class="ability" data-ability="{{id}}">
                     <h4 class="ability-name box-title rollable">{{ability.label}}</h4>
                     {{numberInput ability.value name=(concat "system.abilities." id ".value")
                         class="ability-score" placeholder="10"}}
                     <div class="ability-modifiers flexrow">
                         <span class="ability-mod" title="{{ localize 'SHAPER.Modifier' }}">{{numberFormat ability.mod decimals=0 sign=true}}</span>
-                        <input type="hidden" name="system.abilities.{{id}}.proficient" value="{{ability.baseProf}}" data-dtype="Number"/>
-                        <a class="proficiency-toggle ability-proficiency" title="{{ localize 'SHAPER.Proficiency' }}">{{{ability.icon}}}</a>
                         <span class="ability-save" title="{{ localize 'SHAPER.SavingThrow' }}">{{numberFormat ability.save decimals=0 sign=true}}</span>
                     </div>
                     <a class="config-button" data-action="ability" title="{{localize 'SHAPER.AbilityConfigure'}}"><i class="fas fa-cog"></i></a>
@@ -119,9 +112,8 @@
             <ul class="skills-list">
             {{#each config.skills as |obj s|}}
             {{#with (lookup ../system.skills s) as |skill|}}
-                <li class="skill flexrow {{#if skill.value}}proficient{{/if}}" data-skill="{{s}}">
+                <li class="skill flexrow" data-skill="{{s}}">
                     <input type="hidden" name="system.skills.{{s}}.value" value="{{skill.baseValue}}" data-dtype="Number"/>
-                    <a class="proficiency-toggle skill-proficiency" title="{{skill.hover}}">{{{skill.icon}}}</a>
                     <div class="skill-name-controls">
                       <h4 class="skill-name rollable">{{skill.label}}</h4>
                       <a class="config-button" data-action="skill" title="{{localize 'SHAPER.SkillConfigure'}}"><i class="fas fa-cog"></i></a>
