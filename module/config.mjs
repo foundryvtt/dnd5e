@@ -678,8 +678,7 @@ preLocalize("cover");
  * @type {string[]}
  */
 SHAPER.trackableAttributes = [
-  "attributes.ac.value", "attributes.init.value", "attributes.movement", "attributes.senses", "attributes.spelldc",
-  "attributes.spellLevel", "details.cr", "details.spellLevel", "details.xp.value", "skills.*.passive",
+  "attributes.init.value", "attributes.movement", "details.xp.value", "skills.*.passive",
   "abilities.*.value"
 ];
 
