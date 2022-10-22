@@ -258,7 +258,7 @@ export default class ActorSheet5e extends ActorSheet {
   /* -------------------------------------------- */
 
   /**
-   * Prepare the data structure for traits data like languages, resistances & vulnerabilities, and proficiencies.
+   * Prepare the data structure for traits data like languages, resistances & vulnerabilities.
    * @param {object} traits   The raw traits data object from the actor data. *Will be mutated.*
    * @private
    */
@@ -307,13 +307,6 @@ export default class ActorSheet5e extends ActorSheet {
       trait.cssClass = !foundry.utils.isEmpty(trait.selected) ? "" : "inactive";
     }
 
-    // Populate and localize proficiencies
-    for ( const t of ["armor", "weapon", "tool"] ) {
-      const trait = traits[`${t}Prof`];
-      if ( !trait ) continue;
-      Actor5e.prepareProficiencies(trait, t);
-      trait.cssClass = !foundry.utils.isEmpty(trait.selected) ? "" : "inactive";
-    }
   }
 
   /* -------------------------------------------- */
