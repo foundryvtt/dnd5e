@@ -605,75 +605,6 @@ export default class ActorSheet5e extends ActorSheet {
   /* -------------------------------------------- */
 
   /** @override */
-  async _onDropActor(event, data) {
-    const canPolymorph = game.user.isGM || (this.actor.isOwner && game.settings.get("shaper", "allowPolymorphing"));
-    if ( !canPolymorph ) return false;
-
-    // Get the target actor
-    const cls = getDocumentClass("Actor");
-    const sourceActor = await cls.fromDropData(data);
-    if ( !sourceActor ) return;
-
-    // Define a function to record polymorph settings for future use
-    const rememberOptions = html => {
-      const options = {};
-      html.find("input").each((i, el) => {
-        options[el.name] = el.checked;
-      });
-      const settings = foundry.utils.mergeObject(game.settings.get("shaper", "polymorphSettings") ?? {}, options);
-      game.settings.set("shaper", "polymorphSettings", settings);
-      return settings;
-    };
-
-    // Create and render the Dialog
-    return new Dialog({
-      title: game.i18n.localize("SHAPER.PolymorphPromptTitle"),
-      content: {
-        options: game.settings.get("shaper", "polymorphSettings"),
-        i18n: CONFIG.SHAPER.polymorphSettings,
-        isToken: this.actor.isToken
-      },
-      default: "accept",
-      buttons: {
-        accept: {
-          icon: '<i class="fas fa-check"></i>',
-          label: game.i18n.localize("SHAPER.PolymorphAcceptSettings"),
-          callback: html => this.actor.transformInto(sourceActor, rememberOptions(html))
-        },
-        wildshape: {
-          icon: '<i class="fas fa-paw"></i>',
-          label: game.i18n.localize("SHAPER.PolymorphWildShape"),
-          callback: html => this.actor.transformInto(sourceActor, {
-            keepBio: true,
-            keepClass: true,
-            keepMental: true,
-            mergeSaves: true,
-            mergeSkills: true,
-            transformTokens: rememberOptions(html).transformTokens
-          })
-        },
-        polymorph: {
-          icon: '<i class="fas fa-pastafarianism"></i>',
-          label: game.i18n.localize("SHAPER.Polymorph"),
-          callback: html => this.actor.transformInto(sourceActor, {
-            transformTokens: rememberOptions(html).transformTokens
-          })
-        },
-        cancel: {
-          icon: '<i class="fas fa-times"></i>',
-          label: game.i18n.localize("Cancel")
-        }
-      }
-    }, {
-      classes: ["dialog", "shaper"],
-      width: 600,
-      template: "systems/shaper/templates/apps/polymorph-prompt.hbs"
-    }).render(true);
-  }
-
-  /* -------------------------------------------- */
-
-  /** @override */
   async _onDropItemCreate(itemData) {
     let items = itemData instanceof Array ? itemData : [itemData];
 
@@ -1026,19 +957,4 @@ export default class ActorSheet5e extends ActorSheet {
     }
   }
 
-  /* -------------------------------------------- */
-
-  /** @override */
-  _getHeaderButtons() {
-    let buttons = super._getHeaderButtons();
-    if ( this.actor.isPolymorphed ) {
-      buttons.unshift({
-        label: "SHAPER.PolymorphRestoreTransformation",
-        class: "restore-transformation",
-        icon: "fas fa-backward",
-        onclick: () => this.actor.revertOriginalForm()
-      });
-    }
-    return buttons;
-  }
 }

@@ -618,27 +618,6 @@ SHAPER.SPELL_SLOT_TABLE = [
   [4, 3, 3, 3, 3, 2, 2, 1, 1]
 ];
 
-/* -------------------------------------------- */
-
-/**
- * Settings to configure how actors are merged when polymorphing is applied.
- * @enum {string}
- */
-SHAPER.polymorphSettings = {
-  keepPhysical: "SHAPER.PolymorphKeepPhysical",
-  keepMental: "SHAPER.PolymorphKeepMental",
-  keepSaves: "SHAPER.PolymorphKeepSaves",
-  keepSkills: "SHAPER.PolymorphKeepSkills",
-  mergeSaves: "SHAPER.PolymorphMergeSaves",
-  mergeSkills: "SHAPER.PolymorphMergeSkills",
-  keepClass: "SHAPER.PolymorphKeepClass",
-  keepFeats: "SHAPER.PolymorphKeepFeats",
-  keepSpells: "SHAPER.PolymorphKeepSpells",
-  keepItems: "SHAPER.PolymorphKeepItems",
-  keepBio: "SHAPER.PolymorphKeepBio",
-  keepVision: "SHAPER.PolymorphKeepVision"
-};
-preLocalize("polymorphSettings", { sort: true });
 
 
 
@@ -856,11 +835,7 @@ SHAPER.characterFlags = {
 };
 preLocalize("characterFlags", { keys: ["name", "hint", "section"] });
 
-/**
- * Flags allowed on actors. Any flags not in the list may be deleted during a migration.
- * @type {string[]}
- */
-SHAPER.allowedActorFlags = ["isPolymorphed", "originalActor"].concat(Object.keys(SHAPER.characterFlags));
+
 
 /* -------------------------------------------- */
 
