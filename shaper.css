@@ -431,8 +431,7 @@
   margin: 0;
   padding: 0;
 }
-.shaper.sheet .trait-selector,
-.shaper.sheet .proficiency-selector {
+.shaper.sheet .trait-selector {
   flex: 0 0 16px;
   padding: 2px 0;
   color: #999;
@@ -955,23 +954,8 @@
 .shaper.sheet.actor .ability-scores .ability .ability-modifiers span.ability-mod {
   border-right: 2px groove #eeede0;
 }
-.shaper.sheet.actor .ability-scores .ability .ability-modifiers .ability-proficiency {
-  line-height: 30px;
-}
 .shaper.sheet.actor .ability-scores .ability .ability-modifiers span.ability-save {
   border-left: 2px groove #eeede0;
-}
-.shaper.sheet.actor .proficiency-toggle {
-  color: #b5b3a4;
-  font-size: 12px;
-}
-.shaper.sheet.actor .proficient .proficiency-toggle {
-  color: #4b4a44;
-}
-.shaper.sheet.actor .locked .proficiency-toggle {
-  color: #b5b3a4;
-  text-shadow: none;
-  cursor: default;
 }
 .shaper.sheet.actor ul.skills-list {
   flex: 0 0 180px;
@@ -992,10 +976,6 @@
   flex: 1px;
   margin: 0;
   font-size: 11px;
-  line-height: 18px;
-}
-.shaper.sheet.actor ul.skills-list li.skill .skill-proficiency {
-  flex: 0 0 16px;
   line-height: 18px;
 }
 .shaper.sheet.actor ul.skills-list li.skill .skill-name-controls {
@@ -1701,7 +1681,7 @@
 .shaper.sheet.actor.character .sheet-header .attributes .initiative .attribute-footer input {
   width: 32px;
 }
-.shaper.sheet.actor.character .sheet-header .summary .proficiency {
+.shaper.sheet.actor.character .sheet-header .summary {
   text-align: right;
   padding-right: 5px;
 }
@@ -1806,14 +1786,10 @@
   padding: 0;
   text-align: center;
 }
-.shaper.sheet.actor.npc .header-exp .experience,
-.shaper.sheet.actor.npc .header-exp .proficiency {
+.shaper.sheet.actor.npc .header-exp .experience {
   flex: 0 0 18px;
   color: #7a7971;
   font-size: 16px;
-}
-.shaper.sheet.actor.npc .header-exp .proficiency {
-  margin-top: -0.3em;
 }
 .shaper.sheet.actor.npc .summary {
   font-size: 18px;
