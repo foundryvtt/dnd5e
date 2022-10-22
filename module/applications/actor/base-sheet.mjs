@@ -663,9 +663,6 @@ export default class ActorSheet5e extends ActorSheet {
   _onDropResetData(itemData) {
     if ( !itemData.system ) return;
     ["equipped", "prepared"].forEach(k => delete itemData.system[k]);
-    if ( "attunement" in itemData.system ) {
-      itemData.system.attunement = Math.min(itemData.system.attunement, CONFIG.SHAPER.attunementTypes.REQUIRED);
-    }
   }
 
   /* -------------------------------------------- */

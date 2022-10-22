@@ -59,18 +59,7 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
       // Item details
       item.img = item.img || CONST.DEFAULT_TOKEN;
       item.isStack = Number.isNumeric(quantity) && (quantity !== 1);
-      item.attunement = {
-        [CONFIG.SHAPER.attunementTypes.REQUIRED]: {
-          icon: "fa-sun",
-          cls: "not-attuned",
-          title: "SHAPER.AttunementRequired"
-        },
-        [CONFIG.SHAPER.attunementTypes.ATTUNED]: {
-          icon: "fa-sun",
-          cls: "attuned",
-          title: "SHAPER.AttunementAttuned"
-        }
-      }[item.system.attunement];
+
 
       // Item usage
       item.hasUses = uses && (uses.max > 0);

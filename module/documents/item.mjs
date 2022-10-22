@@ -122,16 +122,6 @@ export default class Item5e extends Item {
   /* -------------------------------------------- */
 
 
-  /**
-   * Should this item's active effects be suppressed.
-   * @type {boolean}
-   */
-  get areEffectsSuppressed() {
-    const requireEquipped = (this.type !== "consumable")
-      || ["rod", "trinket", "wand"].includes(this.system.consumableType);
-    if ( requireEquipped && (this.system.equipped === false) ) return true;
-    return this.system.attunement === CONFIG.SHAPER.attunementTypes.REQUIRED;
-  }
 
   /* -------------------------------------------- */
   /*  Data Preparation                            */
@@ -964,9 +954,7 @@ export default class Item5e extends Item {
 
     // Equipment properties
     if ( data.hasOwnProperty("equipped") && !["loot", "tool"].includes(this.type) ) {
-      if ( data.attunement === CONFIG.SHAPER.attunementTypes.REQUIRED ) {
-        props.push(CONFIG.SHAPER.attunements[CONFIG.SHAPER.attunementTypes.REQUIRED]);
-      }
+
       props.push(
         game.i18n.localize(data.equipped ? "SHAPER.Equipped" : "SHAPER.Unequipped"),
       );

@@ -62,13 +62,6 @@
                 </select>
             </div>
 
-            {{#unless isMountable}}
-            <div class="form-group">
-                <label>{{localize "SHAPER.Attunement"}}</label>
-                <select name="system.attunement" data-dtype="Number">
-                    {{selectOptions config.attunements selected=system.attunement}}
-                </select>
-            </div>
 
             {{!-- Weapon Status --}}
             <div class="form-group stacked">

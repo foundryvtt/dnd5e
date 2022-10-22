@@ -225,7 +225,6 @@ export default class Actor5e extends Actor {
   _prepareCharacterData() {
     this.system.details.level = 0;
     this.system.attributes.hd = 0;
-    this.system.attributes.attunement.value = 0;
 
     for ( const item of this.items ) {
       // Class levels & hit dice
@@ -233,11 +232,6 @@ export default class Actor5e extends Actor {
         const classLevels = parseInt(item.system.levels) || 1;
         this.system.details.level += classLevels;
         this.system.attributes.hd += classLevels - (parseInt(item.system.hitDiceUsed) || 0);
-      }
-
-      // Attuned items
-      else if ( item.system.attunement === CONFIG.SHAPER.attunementTypes.ATTUNED ) {
-        this.system.attributes.attunement.value += 1;
       }
     }
 
@@ -260,10 +254,7 @@ export default class Actor5e extends Actor {
   _prepareNPCData() {
     const cr = this.system.details.cr;
 
-    // Attuned items
-    this.system.attributes.attunement.value = this.items.filter(i => {
-      return i.system.attunement === CONFIG.SHAPER.attunementTypes.ATTUNED;
-    }).length;
+
 
     // Kill Experience
     this.system.details.xp.value = this.getCRExp(cr);
