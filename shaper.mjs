@@ -91,16 +91,6 @@ Hooks.once("init", function() {
   // Register System Settings
   registerSystemSettings();
 
-  // Remove honor & sanity from configuration if they aren't enabled
-  if ( !game.settings.get("shaper", "honorScore") ) {
-    delete SHAPER.abilities.hon;
-    delete SHAPER.abilityAbbreviations.hon;
-  }
-  if ( !game.settings.get("shaper", "sanityScore") ) {
-    delete SHAPER.abilities.san;
-    delete SHAPER.abilityAbbreviations.san;
-  }
-
   // Patch Core Functions
   CONFIG.Combat.initiative.formula = "1d20 + @attributes.init.mod + @attributes.init.prof + @attributes.init.bonus + @abilities.dex.bonuses.check + @bonuses.abilities.check";
   Combatant.prototype._getInitiativeFormula = documents.combat._getInitiativeFormula;
