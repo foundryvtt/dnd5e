@@ -88,7 +88,6 @@ export default class ActorSheet5e extends ActorSheet {
       items: actorData.items,
       labels: this._getLabels(actorData.system),
       movement: this._getMovementSpeed(actorData.system),
-      senses: this._getSenses(actorData.system),
       effects: ActiveEffect5e.prepareActiveEffectCategories(this.actor.effects),
       warnings: foundry.utils.deepClone(this.actor._preparationWarnings),
       filters: this._filters,
@@ -177,11 +176,6 @@ export default class ActorSheet5e extends ActorSheet {
       return obj;
     }, {});
 
-    // Proficiency
-    labels.proficiency = game.settings.get("shaper", "proficiencyModifier") === "dice"
-      ? `d${systemData.attributes.prof * 2}`
-      : `+${systemData.attributes.prof}`;
-
     return labels;
   }
 
@@ -231,23 +225,6 @@ export default class ActorSheet5e extends ActorSheet {
 
   /* -------------------------------------------- */
 
-  /**
-   * Prepare senses object for display.
-   * @param {object} systemData  System data for the Actor being prepared.
-   * @returns {object}           Senses grouped by key with localized and formatted string.
-   * @protected
-   */
-  _getSenses(systemData) {
-    const senses = systemData.attributes.senses ?? {};
-    const tags = {};
-    for ( let [k, label] of Object.entries(CONFIG.SHAPER.senses) ) {
-      const v = senses[k] ?? 0;
-      if ( v === 0 ) continue;
-      tags[k] = `${game.i18n.localize(label)} ${v} ${senses.units}`;
-    }
-    if ( senses.special ) tags.special = senses.special;
-    return tags;
-  }
 
   /* -------------------------------------------- */
 
@@ -283,82 +260,6 @@ export default class ActorSheet5e extends ActorSheet {
     }, []);
   }
 
-  /* -------------------------------------------- */
-
-  /**
-   * Produce a list of armor class attribution objects.
-   * @param {object} rollData             Data provided by Actor5e#getRollData
-   * @returns {AttributionDescription[]}  List of attribution descriptions.
-   * @protected
-   */
-  _prepareArmorClassAttribution(rollData) {
-    const ac = rollData.attributes.ac;
-    const cfg = CONFIG.SHAPER.armorClasses[ac.calc];
-    const attribution = [];
-
-    // Base AC Attribution
-    switch ( ac.calc ) {
-
-      // Flat AC
-      case "flat":
-        return [{
-          label: game.i18n.localize("SHAPER.ArmorClassFlat"),
-          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-          value: ac.flat
-        }];
-
-      // Natural armor
-      case "natural":
-        attribution.push({
-          label: game.i18n.localize("SHAPER.ArmorClassNatural"),
-          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-          value: ac.flat
-        });
-        break;
-
-      default:
-        const formula = ac.calc === "custom" ? ac.formula : cfg.formula;
-        let base = ac.base;
-        const dataRgx = new RegExp(/@([a-z.0-9_-]+)/gi);
-        for ( const [match, term] of formula.matchAll(dataRgx) ) {
-          const value = String(foundry.utils.getProperty(rollData, term));
-          if ( (term === "attributes.ac.armor") || (value === "0") ) continue;
-          if ( Number.isNumeric(value) ) base -= Number(value);
-          attribution.push({
-            label: match,
-            mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-            value
-          });
-        }
-        const armorInFormula = formula.includes("@attributes.ac.armor");
-        let label = game.i18n.localize("SHAPER.PropertyBase");
-        if ( armorInFormula ) label = this.actor.armor?.name ?? game.i18n.localize("SHAPER.ArmorClassUnarmored");
-        attribution.unshift({
-          label,
-          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-          value: base
-        });
-        break;
-    }
-
-    // Shield
-    if ( ac.shield !== 0 ) attribution.push({
-      label: this.actor.shield?.name ?? game.i18n.localize("SHAPER.EquipmentShield"),
-      mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-      value: ac.shield
-    });
-
-    // Bonus
-    if ( ac.bonus !== 0 ) attribution.push(...this._prepareActiveEffectAttributions("system.attributes.ac.bonus"));
-
-    // Cover
-    if ( ac.cover !== 0 ) attribution.push({
-      label: game.i18n.localize("SHAPER.Cover"),
-      mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-      value: ac.cover
-    });
-    return attribution;
-  }
 
   /* -------------------------------------------- */
 

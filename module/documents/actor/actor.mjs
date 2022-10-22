@@ -88,7 +88,6 @@ export default class Actor5e extends Actor {
       else this.update(updates);
     }
 
-    this._prepareBaseArmorClass();
     switch ( this.type ) {
       case "character":
         return this._prepareCharacterData();
@@ -243,18 +242,6 @@ export default class Actor5e extends Actor {
     this.system.skills = skills;
   }
 
-  /* -------------------------------------------- */
-
-  /**
-   * Initialize derived AC fields for Active Effects to target.
-   * Mutates the system.attributes.ac object.
-   * @protected
-   */
-  _prepareBaseArmorClass() {
-    const ac = this.system.attributes.ac;
-    ac.armor = 10;
-    ac.shield = ac.bonus = ac.cover = 0;
-  }
 
   /* -------------------------------------------- */
 

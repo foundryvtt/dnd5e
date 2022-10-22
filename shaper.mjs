@@ -17,7 +17,6 @@ import * as applications from "./module/applications/_module.mjs";
 import * as canvas from "./module/canvas/_module.mjs";
 import * as dice from "./module/dice/_module.mjs";
 import * as documents from "./module/documents/_module.mjs";
-import * as migrations from "./module/migration.mjs";
 import * as utils from "./module/utils.mjs";
 
 /* -------------------------------------------- */
@@ -30,7 +29,6 @@ globalThis.shaper = {
   config: SHAPER,
   dice,
   documents,
-  migrations,
   utils
 };
 
@@ -177,35 +175,6 @@ Hooks.once("i18nInit", () => utils.performPreLocalization(CONFIG.SHAPER));
 /*  Foundry VTT Ready                           */
 /* -------------------------------------------- */
 
-/**
- * Once the entire VTT framework is initialized, check to see if we should perform a data migration
- */
-Hooks.once("ready", function() {
-  // Apply custom compendium styles to the SRD rules compendium.
-  const rules = game.packs.get("shaper.rules");
-  rules.apps = [new applications.SRDCompendium(rules)];
-
-  // Wait to register hotbar drop hook on ready so that modules could register earlier if they want to
-  Hooks.on("hotbarDrop", (bar, data, slot) => {
-    if ( ["Item", "ActiveEffect"].includes(data.type) ) {
-      documents.macro.create5eMacro(data, slot);
-      return false;
-    }
-  });
-
-  // Determine whether a system migration is required and feasible
-  if ( !game.user.isGM ) return;
-  const cv = game.settings.get("shaper", "systemMigrationVersion") || game.world.flags.shaper?.version;
-  const totalDocuments = game.actors.size + game.scenes.size + game.items.size;
-  if ( !cv && totalDocuments === 0 ) return game.settings.set("shaper", "systemMigrationVersion", game.system.version);
-  if ( cv && !isNewerVersion(game.system.flags.needsMigrationVersion, cv) ) return;
-
-  // Perform the migration
-  if ( cv && isNewerVersion(game.system.flags.compatibleMigrationVersion, cv) ) {
-    ui.notifications.error(game.i18n.localize("MIGRATION.5eVersionTooOldWarning"), {permanent: true});
-  }
-  migrations.migrateWorld();
-});
 
 /* -------------------------------------------- */
 /*  Canvas Initialization                       */
@@ -236,7 +205,6 @@ export {
   canvas,
   dice,
   documents,
-  migrations,
   utils,
   SHAPER
 };
