@@ -233,7 +233,6 @@ Hooks.on("getActorDirectoryEntryContext", documents.Actor5e.addDirectoryContextO
 /* -------------------------------------------- */
 
 export {
-  advancement,
   applications,
   canvas,
   dice,
