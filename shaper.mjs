@@ -13,7 +13,6 @@ import SHAPER from "./module/config.mjs";
 import registerSystemSettings from "./module/settings.mjs";
 
 // Import Submodules
-import * as advancement from "./module/advancement/_module.mjs";
 import * as applications from "./module/applications/_module.mjs";
 import * as canvas from "./module/canvas/_module.mjs";
 import * as dice from "./module/dice/_module.mjs";
