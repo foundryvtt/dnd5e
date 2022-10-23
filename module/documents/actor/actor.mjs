@@ -643,8 +643,6 @@ export default class Actor5e extends Actor {
       title: `${flavor}: ${this.name}`,
       flavor,
       chooseModifier: true,
-      halflingLucky: this.getFlag("shaper", "halflingLucky"),
-      reliableTalent,
       messageData: {
         speaker: options.speaker || ChatMessage.getSpeaker({actor: this}),
         "flags.shaper.roll": {type: "skill", skillId }
