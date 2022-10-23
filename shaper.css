@@ -936,24 +936,6 @@
 .shaper.sheet.actor .ability-scores .ability:hover .config-button {
   display: block;
 }
-.shaper.sheet.actor .ability-scores .ability .ability-modifiers {
-  height: 24px;
-  margin: -8px 0 0;
-}
-.shaper.sheet.actor .ability-scores .ability .ability-modifiers span.ability-mod,
-.shaper.sheet.actor .ability-scores .ability .ability-modifiers span.ability-save {
-  flex: 0 0 24px;
-  height: 22px;
-  line-height: 22px;
-  font-size: 16px;
-  border-top: 2px groove #eeede0;
-}
-.shaper.sheet.actor .ability-scores .ability .ability-modifiers span.ability-mod {
-  border-right: 2px groove #eeede0;
-}
-.shaper.sheet.actor .ability-scores .ability .ability-modifiers span.ability-save {
-  border-left: 2px groove #eeede0;
-}
 .shaper.sheet.actor ul.skills-list {
   flex: 0 0 180px;
   list-style: none;
