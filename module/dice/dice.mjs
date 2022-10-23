@@ -69,9 +69,6 @@ export async function d10Roll({
     critical,
     fumble,
     targetValue,
-    elvenAccuracy,
-    halflingLucky,
-    reliableTalent
   });
 
   // Prompt a Dialog to further configure the D10Roll

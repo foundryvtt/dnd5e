@@ -1126,10 +1126,6 @@ export default class Item5e extends Item {
       ammoUpdate = usage.resourceUpdates ?? [];
     }
 
-    // Flags
-    const elvenAccuracy = (flags.elvenAccuracy
-      && CONFIG.SHAPER.characterFlags.elvenAccuracy.abilities.includes(this.abilityMod)) || undefined;
-
     // Compose roll options
     const rollConfig = foundry.utils.mergeObject({
       parts,
@@ -1138,8 +1134,6 @@ export default class Item5e extends Item {
       critical: this.getCriticalThreshold(),
       title,
       flavor: title,
-      elvenAccuracy,
-      halflingLucky: flags.halflingLucky,
       dialogOptions: {
         width: 400,
         top: options.event ? options.event.clientY - 80 : null,

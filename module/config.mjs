@@ -748,69 +748,6 @@ SHAPER.CR_EXP_LEVELS = [
  * }}
  */
 SHAPER.characterFlags = {
-  diamondSoul: {
-    name: "SHAPER.FlagsDiamondSoul",
-    hint: "SHAPER.FlagsDiamondSoulHint",
-    section: "SHAPER.Feats",
-    type: Boolean
-  },
-  elvenAccuracy: {
-    name: "SHAPER.FlagsElvenAccuracy",
-    hint: "SHAPER.FlagsElvenAccuracyHint",
-    section: "SHAPER.RacialTraits",
-    abilities: ["dex", "int", "wis", "cha"],
-    type: Boolean
-  },
-  halflingLucky: {
-    name: "SHAPER.FlagsHalflingLucky",
-    hint: "SHAPER.FlagsHalflingLuckyHint",
-    section: "SHAPER.RacialTraits",
-    type: Boolean
-  },
-  initiativeAdv: {
-    name: "SHAPER.FlagsInitiativeAdv",
-    hint: "SHAPER.FlagsInitiativeAdvHint",
-    section: "SHAPER.Feats",
-    type: Boolean
-  },
-  initiativeAlert: {
-    name: "SHAPER.FlagsAlert",
-    hint: "SHAPER.FlagsAlertHint",
-    section: "SHAPER.Feats",
-    type: Boolean
-  },
-  jackOfAllTrades: {
-    name: "SHAPER.FlagsJOAT",
-    hint: "SHAPER.FlagsJOATHint",
-    section: "SHAPER.Feats",
-    type: Boolean
-  },
-  observantFeat: {
-    name: "SHAPER.FlagsObservant",
-    hint: "SHAPER.FlagsObservantHint",
-    skills: ["prc", "inv"],
-    section: "SHAPER.Feats",
-    type: Boolean
-  },
-  powerfulBuild: {
-    name: "SHAPER.FlagsPowerfulBuild",
-    hint: "SHAPER.FlagsPowerfulBuildHint",
-    section: "SHAPER.RacialTraits",
-    type: Boolean
-  },
-  reliableTalent: {
-    name: "SHAPER.FlagsReliableTalent",
-    hint: "SHAPER.FlagsReliableTalentHint",
-    section: "SHAPER.Feats",
-    type: Boolean
-  },
-  remarkableAthlete: {
-    name: "SHAPER.FlagsRemarkableAthlete",
-    hint: "SHAPER.FlagsRemarkableAthleteHint",
-    abilities: ["str", "dex", "con"],
-    section: "SHAPER.Feats",
-    type: Boolean
-  },
   weaponCriticalThreshold: {
     name: "SHAPER.FlagsWeaponCritThreshold",
     hint: "SHAPER.FlagsWeaponCritThresholdHint",

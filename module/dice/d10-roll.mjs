@@ -9,9 +9,6 @@
  * @param {number} [options.fumble]              The value of d20 result which represents a critical failure
  * @param {(number)} [options.targetValue]       Assign a target value against which the result of this roll should be
  *                                               compared
- * @param {boolean} [options.elvenAccuracy=false]      Allow Elven Accuracy to modify this roll?
- * @param {boolean} [options.halflingLucky=false]      Allow Halfling Luck to modify this roll?
- * @param {boolean} [options.reliableTalent=false]     Allow Reliable Talent to modify this roll?
  */
 export default class D10Roll extends Roll {
   constructor(formula, data, options) {
@@ -128,7 +125,6 @@ export default class D10Roll extends Roll {
 
     // Handle Advantage or Disadvantage
     if ( this.hasAdvantage ) {
-      d20.number = this.options.elvenAccuracy ? 3 : 2;
       d20.modifiers.push("kh");
       d20.options.advantage = true;
     }
