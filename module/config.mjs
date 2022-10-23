@@ -661,7 +661,7 @@ SHAPER.conditionTypes = {
   charmed: "SHAPER.ConCharmed",
   deafened: "SHAPER.ConDeafened",
   diseased: "SHAPER.ConDiseased",
-  exhaustion: "SHAPER.ConExhaustion",
+  injury: "SHAPER.ConInjury",
   frightened: "SHAPER.ConFrightened",
   grappled: "SHAPER.ConGrappled",
   incapacitated: "SHAPER.ConIncapacitated",

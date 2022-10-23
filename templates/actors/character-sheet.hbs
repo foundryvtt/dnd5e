@@ -129,7 +129,7 @@
                 <li class="ability" data-ability="{{id}}">
                     <h4 class="ability-name box-title rollable">{{ability.label}}</h4>
                     {{numberInput ability.value name=(concat "system.abilities." id ".value")
-                        class="ability-score" placeholder="10"}}
+                        class="ability-score" placeholder="0"}}
                     <a class="config-button" data-action="ability" title="{{localize 'SHAPER.AbilityConfigure'}}"><i class="fas fa-cog"></i></a>
                 </li>
             {{/each}}
@@ -187,29 +187,11 @@
 
                 {{!-- Counters --}}
                 <div class="counters">
-                    <div class="counter flexrow death-saves">
-                        <h4 class="rollable" data-action="rollDeathSave">{{ localize "SHAPER.DeathSave" }}</h4>
+                    <div class="counter flexrow ">
+                        <h4>{{ localize "SHAPER.Injury" }}</h4>
                         <div class="counter-value">
-                            <i class="fas fa-check"></i>
-                            {{numberInput system.attributes.death.success name="system.attributes.death.success"
+                            {{numberInput system.attributes.injury name="system.attributes.injury"
                                 placeholder="0"}}
-                            <i class="fas fa-times"></i>
-                            {{numberInput system.attributes.death.failure name="system.attributes.death.failure"
-                                placeholder="0"}}
-                        </div>
-                    </div>
-                    <div class="counter flexrow exhaustion">
-                        <h4>{{ localize "SHAPER.Exhaustion" }}</h4>
-                        <div class="counter-value">
-                            {{numberInput system.attributes.exhaustion name="system.attributes.exhaustion"
-                                placeholder="0"}}
-                        </div>
-                    </div>
-                    <div class="counter flexrow inspiration">
-                        <h4>{{ localize "SHAPER.Inspiration" }}</h4>
-                        <div class="counter-value">
-                            <input type="checkbox" name="system.attributes.inspiration" data-dtype="Boolean"
-                                   {{checked system.attributes.inspiration}}/>
                         </div>
                     </div>
                 </div>

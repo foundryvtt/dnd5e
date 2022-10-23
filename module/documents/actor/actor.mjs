@@ -266,8 +266,6 @@ export default class Actor5e extends Actor {
    */
   _prepareAbilities(bonusData, globalBonuses, checkBonus) {
     const flags = this.flags.shaper ?? {};
-    const dcBonus = simplifyBonus(this.system.bonuses?.spell?.dc, bonusData);
-    const saveBonus = simplifyBonus(globalBonuses.save, bonusData);
     for ( const [id, abl] of Object.entries(this.system.abilities) ) {
       abl.mod = abl.value;
     }
@@ -293,7 +291,6 @@ export default class Actor5e extends Actor {
       const ability = this.system.abilities[skl.ability];
       skl.value = Math.clamped(Number(skl.value).toNearest(0.5), 0, 2) ?? 0;
       const baseBonus = simplifyBonus(skl.bonuses?.check, bonusData);
-      let roundDown = true;
 
 
       // Compute modifier
