@@ -64,7 +64,7 @@ preLocalize("abilityAbbreviations");
  * @enum {SkillConfiguration}
  */
 SHAPER.skills = {
-  acr: { label: "SHAPER.SkillAcr", ability: ["dex", "fin"] },
+  acr: { label: "SHAPER.SkillAcr", ability: ["str", "fin"] },
   ath: { label: "SHAPER.SkillAth", ability: ["str", "tgh"] },
   ani: { label: "SHAPER.SkillAni", ability: ["hrt", "sol"] },
   awa: { label: "SHAPER.SkillAwa", ability: ["mnd", "sol"] },
