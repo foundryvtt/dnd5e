@@ -85,7 +85,7 @@ Hooks.once("init", function() {
   CONFIG.Token.objectClass = canvas.Token5e;
   CONFIG.time.roundTime = 6;
   CONFIG.Dice.DamageRoll = dice.DamageRoll;
-  CONFIG.Dice.D20Roll = dice.D20Roll;
+  CONFIG.Dice.D10Roll = dice.D10Roll;
   CONFIG.MeasuredTemplate.defaults.angle = 53.13; // 5e cone RAW should be 53.13 degrees
 
   // Register System Settings
@@ -96,7 +96,7 @@ Hooks.once("init", function() {
   Combatant.prototype._getInitiativeFormula = documents.combat._getInitiativeFormula;
 
   // Register Roll Extensions
-  CONFIG.Dice.rolls.push(dice.D20Roll);
+  CONFIG.Dice.rolls.push(dice.D10Roll);
   CONFIG.Dice.rolls.push(dice.DamageRoll);
 
   // Register sheet application classes

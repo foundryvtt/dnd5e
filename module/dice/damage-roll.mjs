@@ -177,7 +177,7 @@ export default class DamageRoll extends Roll {
   /* -------------------------------------------- */
 
   /**
-   * Create a Dialog prompt used to configure evaluation of an existing D20Roll instance.
+   * Create a Dialog prompt used to configure evaluation of an existing D10Roll instance.
    * @param {object} data                     Dialog configuration data
    * @param {string} [data.title]               The title of the shown dialog window
    * @param {number} [data.defaultRollMode]     The roll mode that the roll mode select element should default to
@@ -185,7 +185,7 @@ export default class DamageRoll extends Roll {
    * @param {string} [data.template]            A custom path to an HTML template to use instead of the default
    * @param {boolean} [data.allowCritical=true] Allow critical hit to be chosen as a possible damage mode
    * @param {object} options                  Additional Dialog customization options
-   * @returns {Promise<D20Roll|null>}         A resulting D20Roll object constructed with the dialog, or null if the
+   * @returns {Promise<D10Roll|null>}         A resulting D10Roll object constructed with the dialog, or null if the
    *                                          dialog was closed
    */
   async configureDialog({title, defaultRollMode, defaultCritical=false, template, allowCritical=true}={}, options={}) {

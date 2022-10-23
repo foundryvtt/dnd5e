@@ -1,4 +1,4 @@
-import {d20Roll, damageRoll} from "../dice/dice.mjs";
+import {d10Roll, damageRoll} from "../dice/dice.mjs";
 import simplifyRollFormula from "../dice/simplify-roll-formula.mjs";
 import AbilityUseDialog from "../applications/item/ability-use-dialog.mjs";
 
@@ -1091,10 +1091,10 @@ export default class Item5e extends Item {
 
   /**
    * Place an attack roll using an item (weapon, feat, spell, or equipment)
-   * Rely upon the d20Roll logic for the core implementation
+   * Rely upon the d10Roll logic for the core implementation
    *
-   * @param {D20RollConfiguration} options  Roll options which are configured and provided to the d20Roll function
-   * @returns {Promise<D20Roll|null>}       A Promise which resolves to the created Roll instance
+   * @param {D10RollConfiguration} options  Roll options which are configured and provided to the d10Roll function
+   * @returns {Promise<D10Roll|null>}       A Promise which resolves to the created Roll instance
    */
   async rollAttack(options={}) {
     const flags = this.actor.flags.shaper ?? {};
@@ -1156,12 +1156,12 @@ export default class Item5e extends Item {
      * @function shaper.preRollAttack
      * @memberof hookEvents
      * @param {Item5e} item                  Item for which the roll is being performed.
-     * @param {D20RollConfiguration} config  Configuration data for the pending roll.
+     * @param {D10RollConfiguration} config  Configuration data for the pending roll.
      * @returns {boolean}                    Explicitly return false to prevent the roll from being performed.
      */
     if ( Hooks.call("shaper.preRollAttack", this, rollConfig) === false ) return;
 
-    const roll = await d20Roll(rollConfig);
+    const roll = await d10Roll(rollConfig);
     if ( roll === null ) return null;
 
     /**
@@ -1169,7 +1169,7 @@ export default class Item5e extends Item {
      * @function shaper.rollAttack
      * @memberof hookEvents
      * @param {Item5e} item          Item for which the roll was performed.
-     * @param {D20Roll} roll         The resulting roll.
+     * @param {D10Roll} roll         The resulting roll.
      * @param {object[]} ammoUpdate  Updates that will be applied to ammo Items as a result of this attack.
      */
     Hooks.callAll("shaper.rollAttack", this, roll, ammoUpdate);
@@ -1368,7 +1368,7 @@ export default class Item5e extends Item {
 
   /**
    * Prepare data needed to roll an attack using an item (weapon, feat, spell, or equipment)
-   * and then pass it off to `d20Roll`.
+   * and then pass it off to `d10Roll`.
    * @param {object} [options]
    * @param {boolean} [options.spellLevel]  Level at which a spell is cast.
    * @returns {Promise<Roll>}   A Promise which resolves to the created Roll instance.
@@ -1480,8 +1480,8 @@ export default class Item5e extends Item {
   /* -------------------------------------------- */
 
   /**
-   * Prepare data needed to roll a tool check and then pass it off to `d20Roll`.
-   * @param {D20RollConfiguration} [options]  Roll configuration options provided to the d20Roll function.
+   * Prepare data needed to roll a tool check and then pass it off to `d10Roll`.
+   * @param {D10RollConfiguration} [options]  Roll configuration options provided to the d10Roll function.
    * @returns {Promise<Roll>}                 A Promise which resolves to the created Roll instance.
    */
   async rollToolCheck(options={}) {
@@ -1535,19 +1535,19 @@ export default class Item5e extends Item {
      * @function shaper.preRollToolCheck
      * @memberof hookEvents
      * @param {Item5e} item                  Item for which the roll is being performed.
-     * @param {D20RollConfiguration} config  Configuration data for the pending roll.
+     * @param {D10RollConfiguration} config  Configuration data for the pending roll.
      * @returns {boolean}                    Explicitly return false to prevent the roll from being performed.
      */
     if ( Hooks.call("shaper.preRollToolCheck", this, rollConfig) === false ) return;
 
-    const roll = await d20Roll(rollConfig);
+    const roll = await d10Roll(rollConfig);
 
     /**
      * A hook event that fires after a tool check has been rolled for an Item.
      * @function shaper.rollToolCheck
      * @memberof hookEvents
      * @param {Item5e} item   Item for which the roll was performed.
-     * @param {D20Roll} roll  The resulting roll.
+     * @param {D10Roll} roll  The resulting roll.
      */
     if ( roll ) Hooks.callAll("shaper.rollToolCheck", this, roll);
 

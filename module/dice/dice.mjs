@@ -1,29 +1,25 @@
 /* -------------------------------------------- */
-/* D20 Roll                                     */
+/* D10 Roll                                     */
 /* -------------------------------------------- */
 
 /**
- * Configuration data for a D20 roll.
+ * Configuration data for a D10 roll.
  *
- * @typedef {object} D20RollConfiguration
+ * @typedef {object} D10RollConfiguration
  *
- * @property {string[]} [parts=[]]  The dice roll component parts, excluding the initial d20.
+ * @property {string[]} [parts=[]]  The dice roll component parts, excluding the initial d10.
  * @property {object} [data={}]     Data that will be used when parsing this roll.
  * @property {Event} [event]        The triggering event for this roll.
  *
- * ## D20 Properties
+ * ## D10 Properties
  * @property {boolean} [advantage]     Apply advantage to this roll (unless overridden by modifier keys or dialog)?
  * @property {boolean} [disadvantage]  Apply disadvantage to this roll (unless overridden by modifier keys or dialog)?
- * @property {number|null} [critical=20]  The value of the d20 result which represents a critical success,
+ * @property {number|null} [critical=20]  The value of the d10 result which represents a critical success,
  *                                     `null` will prevent critical successes.
- * @property {number|null} [fumble=1]  The value of the d20 result which represents a critical failure,
+ * @property {number|null} [fumble=1]  The value of the d10 result which represents a critical failure,
  *                                     `null` will prevent critical failures.
- * @property {number} [targetValue]    The value of the d20 result which should represent a successful roll.
+ * @property {number} [targetValue]    The value of the d10 result which should represent a successful roll.
  *
- * ## Flags
- * @property {boolean} [elvenAccuracy]   Allow Elven Accuracy to modify this roll?
- * @property {boolean} [halflingLucky]   Allow Halfling Luck to modify this roll?
- * @property {boolean} [reliableTalent]  Allow Reliable Talent to modify this roll?
  *
  * ## Roll Configuration Dialog
  * @property {boolean} [fastForward=false]     Should the roll configuration dialog be skipped?
@@ -41,23 +37,22 @@
  */
 
 /**
- * A standardized helper function for managing core 5e d20 rolls.
+ * A standardized helper function for managing core 5e d10 rolls.
  * Holding SHIFT, ALT, or CTRL when the attack is rolled will "fast-forward".
  * This chooses the default options of a normal attack with no bonus, Advantage, or Disadvantage respectively
  *
- * @param {D20RollConfiguration} configuration  Configuration data for the D20 roll.
- * @returns {Promise<D20Roll|null>}             The evaluated D20Roll, or null if the workflow was cancelled.
+ * @param {D10RollConfiguration} configuration  Configuration data for the D10 roll.
+ * @returns {Promise<D10Roll|null>}             The evaluated D10Roll, or null if the workflow was cancelled.
  */
-export async function d20Roll({
+export async function d10Roll({
   parts=[], data={}, event,
   advantage, disadvantage, critical=20, fumble=1, targetValue,
-  elvenAccuracy, halflingLucky, reliableTalent,
   fastForward=false, chooseModifier=false, template, title, dialogOptions,
   chatMessage=true, messageData={}, rollMode, flavor
 }={}) {
 
   // Handle input arguments
-  const formula = ["1d20"].concat(parts).join(" + ");
+  const formula = ["2d10"].concat(parts).join(" + ");
   const {advantageMode, isFF} = _determineAdvantageMode({advantage, disadvantage, fastForward, event});
   const defaultRollMode = rollMode || game.settings.get("core", "rollMode");
   if ( chooseModifier && !isFF ) {
@@ -65,8 +60,8 @@ export async function d20Roll({
     if ( "abilityCheckBonus" in data ) data.abilityCheckBonus = "@abilityCheckBonus";
   }
 
-  // Construct the D20Roll instance
-  const roll = new CONFIG.Dice.D20Roll(formula, data, {
+  // Construct the D10Roll instance
+  const roll = new CONFIG.Dice.D10Roll(formula, data, {
     flavor: flavor || title,
     advantageMode,
     defaultRollMode,
@@ -79,7 +74,7 @@ export async function d20Roll({
     reliableTalent
   });
 
-  // Prompt a Dialog to further configure the D20Roll
+  // Prompt a Dialog to further configure the D10Roll
   if ( !isFF ) {
     const configured = await roll.configureDialog({
       title,
@@ -103,7 +98,7 @@ export async function d20Roll({
 /* -------------------------------------------- */
 
 /**
- * Determines whether this d20 roll should be fast-forwarded, and whether advantage or disadvantage should be applied
+ * Determines whether this d10 roll should be fast-forwarded, and whether advantage or disadvantage should be applied
  * @param {object} [config]
  * @param {Event} [config.event]           Event that triggered the roll.
  * @param {boolean} [config.advantage]     Is something granting this roll advantage?
@@ -113,10 +108,10 @@ export async function d20Roll({
  */
 function _determineAdvantageMode({event, advantage=false, disadvantage=false, fastForward=false}={}) {
   const isFF = fastForward || (event && (event.shiftKey || event.altKey || event.ctrlKey || event.metaKey));
-  let advantageMode = CONFIG.Dice.D20Roll.ADV_MODE.NORMAL;
-  if ( advantage || event?.altKey ) advantageMode = CONFIG.Dice.D20Roll.ADV_MODE.ADVANTAGE;
+  let advantageMode = CONFIG.Dice.D10Roll.ADV_MODE.NORMAL;
+  if ( advantage || event?.altKey ) advantageMode = CONFIG.Dice.D10Roll.ADV_MODE.ADVANTAGE;
   else if ( disadvantage || event?.ctrlKey || event?.metaKey ) {
-    advantageMode = CONFIG.Dice.D20Roll.ADV_MODE.DISADVANTAGE;
+    advantageMode = CONFIG.Dice.D10Roll.ADV_MODE.DISADVANTAGE;
   }
   return {isFF, advantageMode};
 }
@@ -212,7 +207,7 @@ export async function damageRoll({
 /* -------------------------------------------- */
 
 /**
- * Determines whether this d20 roll should be fast-forwarded, and whether advantage or disadvantage should be applied
+ * Determines whether this d10 roll should be fast-forwarded, and whether advantage or disadvantage should be applied
  * @param {object} [config]
  * @param {Event} [config.event]          Event that triggered the roll.
  * @param {boolean} [config.critical]     Is this roll treated as a critical by default?

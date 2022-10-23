@@ -2,7 +2,7 @@
  * A type of Roll specific to a d20-based check, save, or attack roll in the 5e system.
  * @param {string} formula                       The string formula to parse
  * @param {object} data                          The data object against which to parse attributes within the formula
- * @param {object} [options={}]                  Extra optional arguments which describe or modify the D20Roll
+ * @param {object} [options={}]                  Extra optional arguments which describe or modify the D10Roll
  * @param {number} [options.advantageMode]       What advantage modifier to apply to the roll (none, advantage,
  *                                               disadvantage)
  * @param {number} [options.critical]            The value of d20 result which represents a critical success
@@ -13,7 +13,7 @@
  * @param {boolean} [options.halflingLucky=false]      Allow Halfling Luck to modify this roll?
  * @param {boolean} [options.reliableTalent=false]     Allow Reliable Talent to modify this roll?
  */
-export default class D20Roll extends Roll {
+export default class D10Roll extends Roll {
   constructor(formula, data, options) {
     super(formula, data, options);
     if ( !this.options.configured ) this.configureModifiers();
@@ -22,9 +22,9 @@ export default class D20Roll extends Roll {
   /* -------------------------------------------- */
 
   /**
-   * Create a D20Roll from a standard Roll instance.
+   * Create a D10Roll from a standard Roll instance.
    * @param {Roll} roll
-   * @returns {D20Roll}
+   * @returns {D10Roll}
    */
   static fromRoll(roll) {
     const newRoll = new this(roll.formula, roll.data, roll.options);
@@ -55,31 +55,31 @@ export default class D20Roll extends Roll {
   /* -------------------------------------------- */
 
   /**
-   * Does this roll start with a d20?
+   * Does this roll start with a d10?
    * @type {boolean}
    */
-  get validD20Roll() {
-    return (this.terms[0] instanceof Die) && (this.terms[0].faces === 20);
+  get validD10Roll() {
+    return (this.terms[0] instanceof Die) && (this.terms[0].faces === 10);
   }
 
   /* -------------------------------------------- */
 
   /**
-   * A convenience reference for whether this D20Roll has advantage
+   * A convenience reference for whether this D10Roll has advantage
    * @type {boolean}
    */
   get hasAdvantage() {
-    return this.options.advantageMode === D20Roll.ADV_MODE.ADVANTAGE;
+    return this.options.advantageMode === D10Roll.ADV_MODE.ADVANTAGE;
   }
 
   /* -------------------------------------------- */
 
   /**
-   * A convenience reference for whether this D20Roll has disadvantage
+   * A convenience reference for whether this D10Roll has disadvantage
    * @type {boolean}
    */
   get hasDisadvantage() {
-    return this.options.advantageMode === D20Roll.ADV_MODE.DISADVANTAGE;
+    return this.options.advantageMode === D10Roll.ADV_MODE.DISADVANTAGE;
   }
 
   /* -------------------------------------------- */
@@ -89,7 +89,7 @@ export default class D20Roll extends Roll {
    * @type {boolean|void}
    */
   get isCritical() {
-    if ( !this.validD20Roll || !this._evaluated ) return undefined;
+    if ( !this.validD10Roll || !this._evaluated ) return undefined;
     if ( !Number.isNumeric(this.options.critical) ) return false;
     return this.dice[0].total >= this.options.critical;
   }
@@ -101,7 +101,7 @@ export default class D20Roll extends Roll {
    * @type {boolean|void}
    */
   get isFumble() {
-    if ( !this.validD20Roll || !this._evaluated ) return undefined;
+    if ( !this.validD10Roll || !this._evaluated ) return undefined;
     if ( !Number.isNumeric(this.options.fumble) ) return false;
     return this.dice[0].total <= this.options.fumble;
   }
@@ -115,7 +115,7 @@ export default class D20Roll extends Roll {
    * @private
    */
   configureModifiers() {
-    if ( !this.validD20Roll ) return;
+    if ( !this.validD10Roll ) return;
 
     const d20 = this.terms[0];
     d20.modifiers = [];
@@ -165,7 +165,7 @@ export default class D20Roll extends Roll {
     else if ( this.hasDisadvantage ) messageData.flavor += ` (${game.i18n.localize("SHAPER.Disadvantage")})`;
 
     // Add reliable talent to the d20-term flavor text if it applied
-    if ( this.validD20Roll && this.options.reliableTalent ) {
+    if ( this.validD10Roll && this.options.reliableTalent ) {
       const d20 = this.dice[0];
       const isRT = d20.results.every(r => !r.active || (r.result < 10));
       const label = `(${game.i18n.localize("SHAPER.FlagsReliableTalent")})`;
@@ -182,7 +182,7 @@ export default class D20Roll extends Roll {
   /* -------------------------------------------- */
 
   /**
-   * Create a Dialog prompt used to configure evaluation of an existing D20Roll instance.
+   * Create a Dialog prompt used to configure evaluation of an existing D10Roll instance.
    * @param {object} data                     Dialog configuration data
    * @param {string} [data.title]             The title of the shown dialog window
    * @param {number} [data.defaultRollMode]   The roll mode that the roll mode select element should default to
@@ -191,10 +191,10 @@ export default class D20Roll extends Roll {
    * @param {string} [data.defaultAbility]    For tool rolls, the default ability modifier applied to the roll
    * @param {string} [data.template]          A custom path to an HTML template to use instead of the default
    * @param {object} options                  Additional Dialog customization options
-   * @returns {Promise<D20Roll|null>}         A resulting D20Roll object constructed with the dialog, or null if the
+   * @returns {Promise<D10Roll|null>}         A resulting D10Roll object constructed with the dialog, or null if the
    *                                          dialog was closed
    */
-  async configureDialog({title, defaultRollMode, defaultAction=D20Roll.ADV_MODE.NORMAL, chooseModifier=false,
+  async configureDialog({title, defaultRollMode, defaultAction=D10Roll.ADV_MODE.NORMAL, chooseModifier=false,
     defaultAbility, template}={}, options={}) {
 
     // Render the Dialog inner HTML
@@ -209,8 +209,8 @@ export default class D20Roll extends Roll {
 
     let defaultButton = "normal";
     switch ( defaultAction ) {
-      case D20Roll.ADV_MODE.ADVANTAGE: defaultButton = "advantage"; break;
-      case D20Roll.ADV_MODE.DISADVANTAGE: defaultButton = "disadvantage"; break;
+      case D10Roll.ADV_MODE.ADVANTAGE: defaultButton = "advantage"; break;
+      case D10Roll.ADV_MODE.DISADVANTAGE: defaultButton = "disadvantage"; break;
     }
 
     // Create the Dialog window and await submission of the form
@@ -221,15 +221,15 @@ export default class D20Roll extends Roll {
         buttons: {
           advantage: {
             label: game.i18n.localize("SHAPER.Advantage"),
-            callback: html => resolve(this._onDialogSubmit(html, D20Roll.ADV_MODE.ADVANTAGE))
+            callback: html => resolve(this._onDialogSubmit(html, D10Roll.ADV_MODE.ADVANTAGE))
           },
           normal: {
             label: game.i18n.localize("SHAPER.Normal"),
-            callback: html => resolve(this._onDialogSubmit(html, D20Roll.ADV_MODE.NORMAL))
+            callback: html => resolve(this._onDialogSubmit(html, D10Roll.ADV_MODE.NORMAL))
           },
           disadvantage: {
             label: game.i18n.localize("SHAPER.Disadvantage"),
-            callback: html => resolve(this._onDialogSubmit(html, D20Roll.ADV_MODE.DISADVANTAGE))
+            callback: html => resolve(this._onDialogSubmit(html, D10Roll.ADV_MODE.DISADVANTAGE))
           }
         },
         default: defaultButton,
@@ -244,7 +244,7 @@ export default class D20Roll extends Roll {
    * Handle submission of the Roll evaluation configuration Dialog
    * @param {jQuery} html            The submitted dialog content
    * @param {number} advantageMode   The chosen advantage mode
-   * @returns {D20Roll}              This damage roll.
+   * @returns {D10Roll}              This damage roll.
    * @private
    */
   _onDialogSubmit(html, advantageMode) {

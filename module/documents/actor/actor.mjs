@@ -1,4 +1,4 @@
-import { d20Roll, damageRoll } from "../../dice/dice.mjs";
+import { d10Roll, damageRoll } from "../../dice/dice.mjs";
 import { simplifyBonus } from "../../utils.mjs";
 import ShortRestDialog from "../../applications/actor/short-rest.mjs";
 import LongRestDialog from "../../applications/actor/long-rest.mjs";
@@ -594,7 +594,7 @@ export default class Actor5e extends Actor {
    * Prompt the user for input regarding Advantage/Disadvantage and any Situational Bonus
    * @param {string} skillId      The skill id (e.g. "ins")
    * @param {object} options      Options which configure how the skill check is rolled
-   * @returns {Promise<D20Roll>}  A Promise which resolves to the created Roll instance
+   * @returns {Promise<D10Roll>}  A Promise which resolves to the created Roll instance
    */
   async rollSkill(skillId, options={}) {
     const skl = this.system.skills[skillId];
@@ -654,20 +654,20 @@ export default class Actor5e extends Actor {
      * @function shaper.preRollSkill
      * @memberof hookEvents
      * @param {Actor5e} actor                Actor for which the skill check is being rolled.
-     * @param {D20RollConfiguration} config  Configuration data for the pending roll.
+     * @param {D10RollConfiguration} config  Configuration data for the pending roll.
      * @param {string} skillId               ID of the skill being rolled as defined in `SHAPER.skills`.
      * @returns {boolean}                    Explicitly return `false` to prevent skill check from being rolled.
      */
     if ( Hooks.call("shaper.preRollSkill", this, rollData, skillId) === false ) return;
 
-    const roll = await d20Roll(rollData);
+    const roll = await d10Roll(rollData);
 
     /**
      * A hook event that fires after a skill check has been rolled for an Actor.
      * @function shaper.rollSkill
      * @memberof hookEvents
      * @param {Actor5e} actor   Actor for which the skill check has been rolled.
-     * @param {D20Roll} roll    The resulting roll.
+     * @param {D10Roll} roll    The resulting roll.
      * @param {string} skillId  ID of the skill that was rolled as defined in `SHAPER.skills`.
      */
     if ( roll ) Hooks.callAll("shaper.rollSkill", this, roll, skillId);
@@ -708,7 +708,7 @@ export default class Actor5e extends Actor {
    * Prompt the user for input regarding Advantage/Disadvantage and any Situational Bonus
    * @param {string} abilityId    The ability ID (e.g. "str")
    * @param {object} options      Options which configure how ability tests are rolled
-   * @returns {Promise<D20Roll>}  A Promise which resolves to the created Roll instance
+   * @returns {Promise<D10Roll>}  A Promise which resolves to the created Roll instance
    */
   async rollAbilityTest(abilityId, options={}) {
     const label = CONFIG.SHAPER.abilities[abilityId] ?? "";
@@ -758,20 +758,20 @@ export default class Actor5e extends Actor {
      * @function shaper.preRollAbilityTest
      * @memberof hookEvents
      * @param {Actor5e} actor                Actor for which the ability test is being rolled.
-     * @param {D20RollConfiguration} config  Configuration data for the pending roll.
+     * @param {D10RollConfiguration} config  Configuration data for the pending roll.
      * @param {string} abilityId             ID of the ability being rolled as defined in `SHAPER.abilities`.
      * @returns {boolean}                    Explicitly return `false` to prevent ability test from being rolled.
      */
     if ( Hooks.call("shaper.preRollAbilityTest", this, rollData, abilityId) === false ) return;
 
-    const roll = await d20Roll(rollData);
+    const roll = await d10Roll(rollData);
 
     /**
      * A hook event that fires after an ability test has been rolled for an Actor.
      * @function shaper.rollAbilityTest
      * @memberof hookEvents
      * @param {Actor5e} actor     Actor for which the ability test has been rolled.
-     * @param {D20Roll} roll      The resulting roll.
+     * @param {D10Roll} roll      The resulting roll.
      * @param {string} abilityId  ID of the ability that was rolled as defined in `SHAPER.abilities`.
      */
     if ( roll ) Hooks.callAll("shaper.rollAbilityTest", this, roll, abilityId);
@@ -786,7 +786,7 @@ export default class Actor5e extends Actor {
    * Prompt the user for input regarding Advantage/Disadvantage and any Situational Bonus
    * @param {string} abilityId    The ability ID (e.g. "str")
    * @param {object} options      Options which configure how ability tests are rolled
-   * @returns {Promise<D20Roll>}  A Promise which resolves to the created Roll instance
+   * @returns {Promise<D10Roll>}  A Promise which resolves to the created Roll instance
    */
   async rollAbilitySave(abilityId, options={}) {
     const label = CONFIG.SHAPER.abilities[abilityId] ?? "";
@@ -836,20 +836,20 @@ export default class Actor5e extends Actor {
      * @function shaper.preRollAbilitySave
      * @memberof hookEvents
      * @param {Actor5e} actor                Actor for which the ability save is being rolled.
-     * @param {D20RollConfiguration} config  Configuration data for the pending roll.
+     * @param {D10RollConfiguration} config  Configuration data for the pending roll.
      * @param {string} abilityId             ID of the ability being rolled as defined in `SHAPER.abilities`.
      * @returns {boolean}                    Explicitly return `false` to prevent ability save from being rolled.
      */
     if ( Hooks.call("shaper.preRollAbilitySave", this, rollData, abilityId) === false ) return;
 
-    const roll = await d20Roll(rollData);
+    const roll = await d10Roll(rollData);
 
     /**
      * A hook event that fires after an ability save has been rolled for an Actor.
      * @function shaper.rollAbilitySave
      * @memberof hookEvents
      * @param {Actor5e} actor     Actor for which the ability save has been rolled.
-     * @param {D20Roll} roll      The resulting roll.
+     * @param {D10Roll} roll      The resulting roll.
      * @param {string} abilityId  ID of the ability that was rolled as defined in `SHAPER.abilities`.
      */
     if ( roll ) Hooks.callAll("shaper.rollAbilitySave", this, roll, abilityId);
@@ -862,7 +862,7 @@ export default class Actor5e extends Actor {
   /**
    * Perform a death saving throw, rolling a d20 plus any global save bonuses
    * @param {object} options          Additional options which modify the roll
-   * @returns {Promise<D20Roll|null>} A Promise which resolves to the Roll instance
+   * @returns {Promise<D10Roll|null>} A Promise which resolves to the Roll instance
    */
   async rollDeathSave(options={}) {
     const death = this.system.attributes.death;
@@ -906,12 +906,12 @@ export default class Actor5e extends Actor {
      * @function shaper.preRollDeathSave
      * @memberof hookEvents
      * @param {Actor5e} actor                Actor for which the death saving throw is being rolled.
-     * @param {D20RollConfiguration} config  Configuration data for the pending roll.
+     * @param {D10RollConfiguration} config  Configuration data for the pending roll.
      * @returns {boolean}                    Explicitly return `false` to prevent death saving throw from being rolled.
      */
     if ( Hooks.call("shaper.preRollDeathSave", this, rollData) === false ) return;
 
-    const roll = await d20Roll(rollData);
+    const roll = await d10Roll(rollData);
     if ( !roll ) return null;
 
     // Take action depending on the result
@@ -959,7 +959,7 @@ export default class Actor5e extends Actor {
      * @function shaper.rollDeathSave
      * @memberof hookEvents
      * @param {Actor5e} actor              Actor for which the death saving throw has been rolled.
-     * @param {D20Roll} roll               The resulting roll.
+     * @param {D10Roll} roll               The resulting roll.
      * @param {object} details
      * @param {object} details.updates     Updates that will be applied to the actor as a result of this save.
      * @param {string} details.chatString  Localizable string displayed in the create chat message. If not set, then
