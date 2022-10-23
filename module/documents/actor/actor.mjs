@@ -374,7 +374,6 @@ export default class Actor5e extends Actor {
     init.value = init.value ?? 0;
     init.bonus = init.value + (initiativeAlert ? 5 : 0);
     init.total = init.mod + init.bonus + dexCheckBonus + globalCheckBonus;
-    if ( Number.isNumeric(init.prof.term) ) init.total += init.prof.flat;
   }
 
   /* -------------------------------------------- */
