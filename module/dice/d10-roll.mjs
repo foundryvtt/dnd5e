@@ -1,12 +1,12 @@
 /**
- * A type of Roll specific to a d20-based check, save, or attack roll in the 5e system.
+ * A type of Roll specific to a d10-based check, save, or attack roll in the 5e system.
  * @param {string} formula                       The string formula to parse
  * @param {object} data                          The data object against which to parse attributes within the formula
  * @param {object} [options={}]                  Extra optional arguments which describe or modify the D10Roll
  * @param {number} [options.advantageMode]       What advantage modifier to apply to the roll (none, advantage,
  *                                               disadvantage)
- * @param {number} [options.critical]            The value of d20 result which represents a critical success
- * @param {number} [options.fumble]              The value of d20 result which represents a critical failure
+ * @param {number} [options.critical]            The value of d10 result which represents a critical success
+ * @param {number} [options.fumble]              The value of d10 result which represents a critical failure
  * @param {(number)} [options.targetValue]       Assign a target value against which the result of this roll should be
  *                                               compared
  */
@@ -32,7 +32,7 @@ export default class D10Roll extends Roll {
   /* -------------------------------------------- */
 
   /**
-   * Advantage mode of a 5e d20 roll
+   * Advantage mode of a 5e d10 roll
    * @enum {number}
    */
   static ADV_MODE = {
@@ -104,41 +104,36 @@ export default class D10Roll extends Roll {
   }
 
   /* -------------------------------------------- */
-  /*  D20 Roll Methods                            */
+  /*  D10 Roll Methods                            */
   /* -------------------------------------------- */
 
   /**
-   * Apply optional modifiers which customize the behavior of the d20term
+   * Apply optional modifiers which customize the behavior of the d10term
    * @private
    */
   configureModifiers() {
     if ( !this.validD10Roll ) return;
 
-    const d20 = this.terms[0];
-    d20.modifiers = [];
+    const d10 = this.terms[0];
+    d10.modifiers = [];
 
-    // Halfling Lucky
-    if ( this.options.halflingLucky ) d20.modifiers.push("r1=1");
-
-    // Reliable Talent
-    if ( this.options.reliableTalent ) d20.modifiers.push("min10");
 
     // Handle Advantage or Disadvantage
     if ( this.hasAdvantage ) {
-      d20.modifiers.push("kh");
-      d20.options.advantage = true;
+      d10.modifiers.push("kh");
+      d10.options.advantage = true;
     }
     else if ( this.hasDisadvantage ) {
-      d20.number = 2;
-      d20.modifiers.push("kl");
-      d20.options.disadvantage = true;
+      d10.number = 2;
+      d10.modifiers.push("kl");
+      d10.options.disadvantage = true;
     }
-    else d20.number = 1;
+    else d10.number = 2;
 
     // Assign critical and fumble thresholds
-    if ( this.options.critical ) d20.options.critical = this.options.critical;
-    if ( this.options.fumble ) d20.options.fumble = this.options.fumble;
-    if ( this.options.targetValue ) d20.options.target = this.options.targetValue;
+    if ( this.options.critical ) d10.options.critical = this.options.critical;
+    if ( this.options.fumble ) d10.options.fumble = this.options.fumble;
+    if ( this.options.targetValue ) d10.options.target = this.options.targetValue;
 
     // Re-compile the underlying formula
     this._formula = this.constructor.getFormula(this.terms);
@@ -159,14 +154,6 @@ export default class D10Roll extends Roll {
     messageData.flavor = messageData.flavor || this.options.flavor;
     if ( this.hasAdvantage ) messageData.flavor += ` (${game.i18n.localize("SHAPER.Advantage")})`;
     else if ( this.hasDisadvantage ) messageData.flavor += ` (${game.i18n.localize("SHAPER.Disadvantage")})`;
-
-    // Add reliable talent to the d20-term flavor text if it applied
-    if ( this.validD10Roll && this.options.reliableTalent ) {
-      const d20 = this.dice[0];
-      const isRT = d20.results.every(r => !r.active || (r.result < 10));
-      const label = `(${game.i18n.localize("SHAPER.FlagsReliableTalent")})`;
-      if ( isRT ) d20.options.flavor = d20.options.flavor ? `${d20.options.flavor} (${label})` : label;
-    }
 
     // Record the preferred rollMode
     options.rollMode = options.rollMode ?? this.options.rollMode;

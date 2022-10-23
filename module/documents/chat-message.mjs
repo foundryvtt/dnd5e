@@ -1,5 +1,5 @@
 /**
- * Highlight critical success or failure on d20 rolls.
+ * Highlight critical success or failure on d10 rolls.
  * @param {ChatMessage} message  Message being prepared.
  * @param {HTMLElement} html     Rendered contents of the message.
  * @param {object} data          Configuration data passed to the message.
@@ -7,13 +7,13 @@
 export function highlightCriticalSuccessFailure(message, html, data) {
   if ( !message.isRoll || !message.isContentVisible || !message.rolls.length ) return;
 
-  // Highlight rolls where the first part is a d20 roll
+  // Highlight rolls where the first part is a d10 roll
   let d10Roll = message.rolls.find(r => {
     const d0 = r.dice[0];
     return (d0?.faces === 10) && (d0?.values.length === 2);
   });
   if ( !d10Roll ) return;
-  d10Roll = shaper.dice.d10Roll.fromRoll(d10Roll);
+  d10Roll = shaper.dice.D10Roll.fromRoll(d10Roll);
   const d = d10Roll.dice[0];
 
   const isModifiedRoll = ("success" in d.results[0]) || d.options.marginSuccess || d.options.marginFailure;

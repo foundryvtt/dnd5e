@@ -746,7 +746,6 @@ export default class Actor5e extends Actor {
       data,
       title: `${flavor}: ${this.name}`,
       flavor,
-      halflingLucky: this.getFlag("shaper", "halflingLucky"),
       messageData: {
         speaker: options.speaker || ChatMessage.getSpeaker({actor: this}),
         "flags.shaper.roll": {type: "ability", abilityId }
@@ -824,7 +823,6 @@ export default class Actor5e extends Actor {
       data,
       title: `${flavor}: ${this.name}`,
       flavor,
-      halflingLucky: this.getFlag("shaper", "halflingLucky"),
       messageData: {
         speaker: options.speaker || ChatMessage.getSpeaker({actor: this}),
         "flags.shaper.roll": {type: "save", abilityId }
@@ -893,7 +891,6 @@ export default class Actor5e extends Actor {
       data,
       title: `${flavor}: ${this.name}`,
       flavor,
-      halflingLucky: this.getFlag("shaper", "halflingLucky"),
       targetValue: 10,
       messageData: {
         speaker: speaker,
