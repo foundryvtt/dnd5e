@@ -573,21 +573,6 @@ export default class Actor5e extends Actor {
     return allowed !== false ? this.update(updates, {dhp: -amount}) : this;
   }
 
-  /* -------------------------------------------- */
-
-  /**
-   * Apply a certain amount of temporary hit point, but only if it's more than the actor currently has.
-   * @param {number} amount       An amount of temporary hit points to set
-   * @returns {Promise<Actor5e>}  A Promise which resolves once the temp HP has been applied
-   */
-  async applyTempHP(amount=0) {
-    amount = parseInt(amount);
-    const hp = this.system.attributes.hp;
-
-    // Update the actor if the new amount is greater than the current
-    const tmp = parseInt(hp.temp) || 0;
-    return amount > tmp ? this.update({"system.attributes.hp.temp": amount}) : this;
-  }
 
   /* -------------------------------------------- */
 
