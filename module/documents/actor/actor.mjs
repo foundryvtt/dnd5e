@@ -292,22 +292,7 @@ export default class Actor5e extends Actor {
     const dcBonus = simplifyBonus(this.system.bonuses?.spell?.dc, bonusData);
     const saveBonus = simplifyBonus(globalBonuses.save, bonusData);
     for ( const [id, abl] of Object.entries(this.system.abilities) ) {
-
-      abl.mod = Math.floor((abl.value - 10) / 2);
-
-
-      const saveBonusAbl = simplifyBonus(abl.bonuses?.save, bonusData);
-      abl.saveBonus = saveBonusAbl + saveBonus;
-
-      const checkBonusAbl = simplifyBonus(abl.bonuses?.check, bonusData);
-      abl.checkBonus = checkBonusAbl + checkBonus;
-
-      abl.save = abl.mod + abl.saveBonus;
-      if ( Number.isNumeric(abl.saveProf.term) ) abl.save += abl.saveProf.flat;
-      abl.dc = 8 + abl.mod + this.system.attributes.prof + dcBonus;
-
-      // If we merged saves when transforming, take the highest bonus here.
-      if ( originalSaves && abl.proficient ) abl.save = Math.max(abl.save, originalSaves[id].save);
+      abl.mod = abl.value;
     }
   }
 
