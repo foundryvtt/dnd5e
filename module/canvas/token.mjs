@@ -65,10 +65,6 @@ export default class Token5e extends Token {
     // Health bar
     bar.beginFill(hpColor, 1.0).lineStyle(bs, blk, 1.0).drawRoundedRect(0, 0, valuePct*w, h, 2);
 
-    // Temporary hit points
-    if ( temp > 0 ) {
-      bar.beginFill(c.temp, 1.0).lineStyle(0).drawRoundedRect(bs1, bs1, (tempPct*w)-(2*bs1), h-(2*bs1), 1);
-    }
 
     // Set position
     let posY = (number === 0) ? (this.h - h) : 0;

@@ -5,7 +5,6 @@ import Item5e from "../../documents/item.mjs";
 import ActorAbilityConfig from "./ability-config.mjs";
 import ActorHitDiceConfig from "./hit-dice-config.mjs";
 import ActorMovementConfig from "./movement-config.mjs";
-import ActorSensesConfig from "./senses-config.mjs";
 import ActorSheetFlags from "./sheet-flags.mjs";
 import ActorSkillConfig from "./skill-config.mjs";
 import ActorTypeConfig from "./type-config.mjs";
@@ -574,9 +573,6 @@ export default class ActorSheet5e extends ActorSheet {
         break;
       case "flags":
         app = new ActorSheetFlags(this.actor);
-        break;
-      case "senses":
-        app = new ActorSensesConfig(this.actor);
         break;
       case "type":
         app = new ActorTypeConfig(this.actor);
