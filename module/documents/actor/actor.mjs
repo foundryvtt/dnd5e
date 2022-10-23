@@ -112,7 +112,6 @@ export default class Actor5e extends Actor {
     const checkBonus = simplifyBonus(globalBonuses?.check, bonusData);
     this._prepareAbilities(bonusData, globalBonuses, checkBonus);
     this._prepareSkills(bonusData, globalBonuses, checkBonus);
-    this._prepareArmorClass();
     this._prepareEncumbrance();
     this._prepareInitiative(bonusData, checkBonus);
     this._prepareScaleValues();
@@ -171,23 +170,6 @@ export default class Actor5e extends Actor {
     const abilities = {};
     for ( const key of Object.keys(CONFIG.SHAPER.abilities) ) {
       abilities[key] = this.system.abilities[key];
-      if ( !abilities[key] ) {
-        abilities[key] = foundry.utils.deepClone(game.system.template.Actor.templates.common.abilities.cha);
-
-        // Honor: Charisma for NPC, 0 for vehicles
-        if ( key === "hon" ) {
-          if ( this.type === "vehicle" ) abilities[key].value = 0;
-          else if ( this.type === "npc" ) abilities[key].value = this.system.abilities.cha?.value ?? 10;
-        }
-
-        // Sanity: Wisdom for NPC, 0 for vehicles
-        else if ( key === "san" ) {
-          if ( this.type === "vehicle" ) abilities[key].value = 0;
-          else if ( this.type === "npc" ) abilities[key].value = this.system.abilities.wis?.value ?? 10;
-        }
-
-        updates[`system.abilities.${key}`] = foundry.utils.deepClone(abilities[key]);
-      }
     }
     this.system.abilities = abilities;
   }
@@ -205,11 +187,6 @@ export default class Actor5e extends Actor {
     const skills = {};
     for ( const [key, skill] of Object.entries(CONFIG.SHAPER.skills) ) {
       skills[key] = this.system.skills[key];
-      if ( !skills[key] ) {
-        skills[key] = foundry.utils.deepClone(game.system.template.Actor.templates.creature.skills.acr);
-        skills[key].ability = skill.ability;
-        updates[`system.skills.${key}`] = foundry.utils.deepClone(skills[key]);
-      }
     }
     this.system.skills = skills;
   }
@@ -318,17 +295,6 @@ export default class Actor5e extends Actor {
       const baseBonus = simplifyBonus(skl.bonuses?.check, bonusData);
       let roundDown = true;
 
-      // Remarkable Athlete
-      if ( this._isRemarkableAthlete(skl.ability) && (skl.value < 0.5) ) {
-        skl.value = 0.5;
-        roundDown = false;
-      }
-
-      // Jack of All Trades
-      else if ( flags.jackOfAllTrades && (skl.value < 0.5) ) {
-        skl.value = 0.5;
-      }
-
 
       // Compute modifier
       const checkBonusAbl = simplifyBonus(ability?.bonuses?.check, bonusData);
@@ -336,96 +302,10 @@ export default class Actor5e extends Actor {
       skl.mod = ability?.mod ?? 0;
       skl.proficient = skl.value;
       skl.total = skl.mod + skl.bonus;
-      if ( Number.isNumeric(skl.prof.term) ) skl.total += skl.prof.flat;
 
-      // Compute passive bonus
-      const passive = flags.observantFeat && (feats.observantFeat.skills.includes(id)) ? 5 : 0;
-      const passiveBonus = simplifyBonus(skl.bonuses?.passive, bonusData);
-      skl.passive = 10 + skl.mod + skl.bonus + skl.prof.flat + passive + passiveBonus;
     }
   }
 
-  /* -------------------------------------------- */
-
-  /**
-   * Prepare a character's AC value from their equipped armor and shield.
-   * Mutates the value of the `system.attributes.ac` object.
-   */
-  _prepareArmorClass() {
-    const ac = this.system.attributes.ac;
-
-    // Apply automatic migrations for older data structures
-    let cfg = CONFIG.SHAPER.armorClasses[ac.calc];
-    if ( !cfg ) {
-      ac.calc = "flat";
-      if ( Number.isNumeric(ac.value) ) ac.flat = Number(ac.value);
-      cfg = CONFIG.SHAPER.armorClasses.flat;
-    }
-
-    // Identify Equipped Items
-    const armorTypes = new Set(Object.keys(CONFIG.SHAPER.armorTypes));
-    const {armors, shields} = this.itemTypes.equipment.reduce((obj, equip) => {
-      const armor = equip.system.armor;
-      if ( !equip.system.equipped || !armorTypes.has(armor?.type) ) return obj;
-      if ( armor.type === "shield" ) obj.shields.push(equip);
-      else obj.armors.push(equip);
-      return obj;
-    }, {armors: [], shields: []});
-
-    // Determine base AC
-    switch ( ac.calc ) {
-
-      // Flat AC (no additional bonuses)
-      case "flat":
-        ac.value = Number(ac.flat);
-        return;
-
-      // Natural AC (includes bonuses)
-      case "natural":
-        ac.base = Number(ac.flat);
-        break;
-
-      default:
-        let formula = ac.calc === "custom" ? ac.formula : cfg.formula;
-        if ( armors.length ) {
-          if ( armors.length > 1 ) this._preparationWarnings.push({
-            message: game.i18n.localize("SHAPER.WarnMultipleArmor"), type: "warning"
-          });
-          const armorData = armors[0].system.armor;
-          const isHeavy = armorData.type === "heavy";
-          ac.armor = armorData.value ?? ac.armor;
-          ac.dex = isHeavy ? 0 : Math.min(armorData.dex ?? Infinity, this.system.abilities.dex?.mod ?? 0);
-          ac.equippedArmor = armors[0];
-        }
-        else ac.dex = this.system.abilities.dex?.mod ?? 0;
-
-        const rollData = this.getRollData({ deterministic: true });
-        rollData.attributes.ac = ac;
-        try {
-          const replaced = Roll.replaceFormulaData(formula, rollData);
-          ac.base = Roll.safeEval(replaced);
-        } catch(err) {
-          this._preparationWarnings.push({
-            message: game.i18n.localize("SHAPER.WarnBadACFormula"), link: "armor", type: "error"
-          });
-          const replaced = Roll.replaceFormulaData(CONFIG.SHAPER.armorClasses.default.formula, rollData);
-          ac.base = Roll.safeEval(replaced);
-        }
-        break;
-    }
-
-    // Equipped Shield
-    if ( shields.length ) {
-      if ( shields.length > 1 ) this._preparationWarnings.push({
-        message: game.i18n.localize("SHAPER.WarnMultipleShields"), type: "warning"
-      });
-      ac.shield = shields[0].system.armor.value ?? 0;
-      ac.equippedShield = shields[0];
-    }
-
-    // Compute total AC and return
-    ac.value = ac.base + ac.shield + ac.bonus + ac.cover;
-  }
 
   /* -------------------------------------------- */
 

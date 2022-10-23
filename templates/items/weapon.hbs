@@ -87,17 +87,6 @@
                 {{/each}}
             </div>
 
-            {{#if isMountable}}
-            <div class="form-group">
-                <label>{{localize 'SHAPER.ArmorClass'}}</label>
-                <div class="form-fields">
-                    {{numberInput system.armor.value name="system.armor.value"}}
-                </div>
-            </div>
-
-            {{> "shaper.item-mountable"}}
-            {{/if}}
-
             <h3 class="form-header">{{ localize "SHAPER.ItemWeaponUsage" }}</h3>
 
             {{!-- Item Activation Template --}}

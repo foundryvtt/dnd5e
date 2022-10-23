@@ -851,10 +851,6 @@ export default class ActorSheet5e extends ActorSheet {
     if ( existingTooltip || !property ) return;
     const rollData = this.actor.getRollData({ deterministic: true });
     let attributions;
-    switch ( property ) {
-      case "attributes.ac":
-        attributions = this._prepareArmorClassAttribution(rollData); break;
-    }
     if ( !attributions ) return;
     const html = await new PropertyAttribution(this.actor, attributions, property).renderTooltip();
     event.currentTarget.insertAdjacentElement("beforeend", html[0]);
