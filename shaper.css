@@ -1122,12 +1122,6 @@
 .shaper.sheet.actor .inventory-list .item .item-name.rollable .item-image:hover {
   background-image: url("../../icons/svg/d20-black.svg") !important;
 }
-.shaper.sheet.actor .inventory-list .item .item-name i.attuned {
-  color: #7a7971;
-}
-.shaper.sheet.actor .inventory-list .item .item-name i.not-attuned {
-  color: #44191A;
-}
 .shaper.sheet.actor .inventory-list .item .item-uses input {
   width: 24px;
   text-align: center;
@@ -1158,9 +1152,6 @@
 }
 .shaper.sheet.actor .inventory-list .item-detail.item-action {
   flex: 0 0 100px;
-}
-.shaper.sheet.actor .inventory-list .item-detail.attunement {
-  flex: 0 0 24px;
 }
 .shaper.sheet.actor .inventory-list .item-weight {
   flex: 0 0 60px;

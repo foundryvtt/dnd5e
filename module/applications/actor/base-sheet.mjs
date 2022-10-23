@@ -119,11 +119,6 @@ export default class ActorSheet5e extends ActorSheet {
     }
     context.items.sort((a, b) => (a.sort || 0) - (b.sort || 0));
 
-    // Temporary HP
-    const hp = context.system.attributes.hp;
-    if ( hp.temp === 0 ) delete hp.temp;
-    if ( hp.tempmax === 0 ) delete hp.tempmax;
-
     // Ability Scores
     for ( const [a, abl] of Object.entries(context.system.abilities) ) {
       abl.label = CONFIG.SHAPER.abilities[a];
