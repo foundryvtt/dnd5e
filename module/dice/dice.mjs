@@ -78,7 +78,8 @@ export async function d10Roll({
       chooseModifier,
       defaultRollMode,
       defaultAction: advantageMode,
-      defaultAbility: data?.item?.ability || data?.defaultAbility,
+      defaultAbility0: data?.defaultAbility0,
+      defaultAbility1: data?.defaultAbility1,
       template
     }, dialogOptions);
     if ( configured === null ) return null;

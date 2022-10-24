@@ -182,7 +182,6 @@ export default class D10Roll extends Roll {
     defaultAbility0, defaultAbility1, template}={}, options={}) {
 
     // Render the Dialog inner HTML
-    // TODO: Find out why it defaults to str str
     const content = await renderTemplate(template ?? this.constructor.EVALUATION_TEMPLATE, {
       formula: `${this.formula} + @bonus`,
       defaultRollMode,
