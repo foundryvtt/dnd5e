@@ -6,8 +6,14 @@
     {{#if chooseModifier}}
     <div class="form-group">
         <label>{{ localize "SHAPER.AbilityModifier" }}</label>
-        <select name="ability">
-            {{selectOptions abilities selected=defaultAbility}}
+        <select name="ability0">
+            {{selectOptions abilities selected=defaultAbility0}}
+        </select>
+    </div>
+        <div class="form-group">
+        <label>{{ localize "SHAPER.AbilityModifier" }}</label>
+        <select name="ability1">
+            {{selectOptions abilities selected=defaultAbility1}}
         </select>
     </div>
     {{/if}}

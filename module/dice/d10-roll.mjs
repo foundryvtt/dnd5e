@@ -171,22 +171,25 @@ export default class D10Roll extends Roll {
    * @param {number} [data.defaultRollMode]   The roll mode that the roll mode select element should default to
    * @param {number} [data.defaultAction]     The button marked as default
    * @param {boolean} [data.chooseModifier]   Choose which ability modifier should be applied to the roll?
-   * @param {string} [data.defaultAbility]    For tool rolls, the default ability modifier applied to the roll
+   * @param {string} [data.defaultAbility0]    For tool rolls, the default ability modifier applied to the roll
+   * @param {string} [data.defaultAbility1]    For tool rolls, the default ability modifier applied to the roll
    * @param {string} [data.template]          A custom path to an HTML template to use instead of the default
    * @param {object} options                  Additional Dialog customization options
    * @returns {Promise<D10Roll|null>}         A resulting D10Roll object constructed with the dialog, or null if the
    *                                          dialog was closed
    */
   async configureDialog({title, defaultRollMode, defaultAction=D10Roll.ADV_MODE.NORMAL, chooseModifier=false,
-    defaultAbility, template}={}, options={}) {
+    defaultAbility0, defaultAbility1, template}={}, options={}) {
 
     // Render the Dialog inner HTML
+    // TODO: Find out why it defaults to str str
     const content = await renderTemplate(template ?? this.constructor.EVALUATION_TEMPLATE, {
       formula: `${this.formula} + @bonus`,
       defaultRollMode,
       rollModes: CONFIG.Dice.rollModes,
       chooseModifier,
-      defaultAbility,
+      defaultAbility0,
+      defaultAbility1,
       abilities: CONFIG.SHAPER.abilities
     });
 
@@ -241,18 +244,21 @@ export default class D10Roll extends Roll {
     }
 
     // Customize the modifier
-    if ( form.ability?.value ) {
-      const abl = this.data.abilities[form.ability.value];
+    if ( form.ability0?.value && form.ability1?.value ) {
+      const abl0 = this.data.abilities[form.ability0.value];
+      const abl1 = this.data.abilities[form.ability1.value];
       this.terms = this.terms.flatMap(t => {
-        if ( t.term === "@mod" ) return new NumericTerm({number: abl.mod});
+        if ( t.term === "@mod" ) return new NumericTerm({number: abl0.mod + abl1.mod });
         if ( t.term === "@abilityCheckBonus" ) {
-          const bonus = abl.bonuses?.check;
+          // TODO: See what this does
+          const bonus = abl0.bonuses?.check;
           if ( bonus ) return new Roll(bonus, this.data).terms;
           return new NumericTerm({number: 0});
         }
         return t;
       });
-      this.options.flavor += ` (${CONFIG.SHAPER.abilities[form.ability.value]})`;
+      this.options.flavor += ` (${CONFIG.SHAPER.abilities[form.ability0.value]})`;
+      this.options.flavor += ` (${CONFIG.SHAPER.abilities[form.ability1.value]})`;
     }
 
     // Apply advantage or disadvantage

@@ -288,15 +288,17 @@ export default class Actor5e extends Actor {
     const feats = CONFIG.SHAPER.characterFlags;
     const skillBonus = simplifyBonus(globalBonuses.skill, bonusData);
     for ( const [id, skl] of Object.entries(this.system.skills) ) {
-      const ability = this.system.abilities[skl.ability];
+      const ability0 = this.system.abilities[skl.ability[0]];
+      const ability1 = this.system.abilities[skl.ability[1]];
       skl.value = Math.clamped(Number(skl.value).toNearest(0.5), 0, 2) ?? 0;
       const baseBonus = simplifyBonus(skl.bonuses?.check, bonusData);
 
 
       // Compute modifier
-      const checkBonusAbl = simplifyBonus(ability?.bonuses?.check, bonusData);
-      skl.bonus = baseBonus + checkBonus + checkBonusAbl + skillBonus;
-      skl.mod = ability?.mod ?? 0;
+      const checkBonusAbl0 = simplifyBonus(ability0?.bonuses?.check, bonusData);
+      const checkBonusAbl1 = simplifyBonus(ability1?.bonuses?.check, bonusData);
+      skl.bonus = baseBonus + checkBonus + checkBonusAbl0 + checkBonusAbl1 + skillBonus;
+      skl.mod = (ability0?.mod ?? 0) + (ability1?.mod ?? 0);
       skl.proficient = skl.value;
       skl.total = skl.mod + skl.bonus;
 
@@ -598,14 +600,16 @@ export default class Actor5e extends Actor {
    */
   async rollSkill(skillId, options={}) {
     const skl = this.system.skills[skillId];
-    const abl = this.system.abilities[skl.ability];
+    const abl0 = this.system.abilities[skl.ability[0]];
+    const abl1 = this.system.abilities[skl.ability[1]];
     const globalBonuses = this.system.bonuses?.abilities ?? {};
     const parts = ["@mod", "@abilityCheckBonus"];
     const data = this.getRollData();
 
     // Add ability modifier
     data.mod = skl.mod;
-    data.defaultAbility = skl.ability;
+    data.defaultAbility0 = skl.ability[0];
+    data.defaultAbility1 = skl.ability[1];
 
 
     // Global ability check bonus
@@ -615,7 +619,12 @@ export default class Actor5e extends Actor {
     }
 
     // Ability-specific check bonus
-    if ( abl?.bonuses?.check ) data.abilityCheckBonus = Roll.replaceFormulaData(abl.bonuses.check, data);
+    // TODO: See what this does
+    if ( abl0?.bonuses?.check ) {
+      
+      console.log(abl0.bonuses.check);
+      data.abilityCheckBonus = Roll.replaceFormulaData(abl0.bonuses.check, data);
+    }
     else data.abilityCheckBonus = 0;
 
     // Skill-specific skill bonus
