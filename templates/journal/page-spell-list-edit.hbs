@@ -18,6 +18,18 @@
   </div>
 
   <div class="form-group">
+    <label>{{localize "JOURNALETNRYPAGE.DND5E.SpellList.GroupingLabel"}}</label>
+    <div class="form-fields">
+      <select name="system.grouping">
+        {{selectOptions GROUPING_MODES selected=system.grouping localize=true}}
+      </select>
+    </div>
+    <p class="hint">
+      {{localize "JOURNALETNRYPAGE.DND5E.SpellList.GroupingHint"}}
+    </p>
+  </div>
+
+  <div class="form-group">
     <label>{{localize "DND5E.Description"}}</label>
   </div>
 

@@ -4,13 +4,26 @@
 </header>
 {{/if}}
 
+<label class="grouping">
+  {{localize "JOURNALETNRYPAGE.DND5E.SpellList.GroupingLabel"}}
+  <select name="grouping">
+    {{selectOptions GROUPING_MODES selected=grouping localize=true}}
+  </select>
+</label>
+
 {{{description}}}
 
-{{#each spellLevels}}
+{{#each sections}}
   <h{{@root.title.level3}}>{{this.header}}</h{{@root.title.level3}}>
   <ul>
   {{#each this.spells}}
     <li>{{{dnd5e-linkForUuid this.uuid}}}</li>
   {{/each}}
+  </ul>
+{{else}}
+  <ul>
+    {{#each this.spells}}
+      <li>{{{dnd5e-linkForUuid this.uuid}}}</li>
+    {{/each}}
   </ul>
 {{/each}}

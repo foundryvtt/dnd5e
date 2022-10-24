@@ -1,3 +1,5 @@
+import { sortObjectEntries } from "../../utils.mjs";
+
 /**
  * Journal entry page the displays a list of spells for a class, subclass, background, or something else.
  */
@@ -12,6 +14,27 @@ export default class JournalSpellListPageSheet extends JournalPageSheet {
     options.classes.push("spellList");
     return options;
   }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Different ways in which spells can be grouped on the sheet.
+   * @enum {string}
+   */
+  static GROUPING_MODES = {
+    none: "JOURNALETNRYPAGE.DND5E.SpellList.GroupingNone",
+    alphabetical: "JOURNALETNRYPAGE.DND5E.SpellList.GroupingAlphabetical",
+    level: "JOURNALETNRYPAGE.DND5E.SpellList.GroupingLevel",
+    school: "JOURNALETNRYPAGE.DND5E.SpellList.GroupingSchool"
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Currently selected grouping mode.
+   * @type {string|null}
+   */
+  grouping = null;
 
   /* -------------------------------------------- */
 
@@ -35,27 +58,43 @@ export default class JournalSpellListPageSheet extends JournalPageSheet {
     context.CONFIG = CONFIG.DND5E;
     context.system = context.document.system;
 
-    context.title = {
-      level1: context.data.title.level,
-      level2: context.data.title.level + 1,
-      level3: context.data.title.level + 2,
-      level4: context.data.title.level + 3
-    };
+    context.title = Object.fromEntries(Array.fromRange(4, 1).map(n => [`level${n}`, context.data.title.level + n - 1]));
 
     context.description = await TextEditor.enrichHTML(context.system.description.value, {
       async: true, relativeTo: this
     });
+    if ( context.description === "<p></p>" ) context.description = "";
 
-    context.spellLevels = {};
+    context.GROUPING_MODES = this.constructor.GROUPING_MODES;
+    context.grouping = this.grouping || context.system.grouping;
+
     context.spells = await Promise.all(context.system.spells.map(async s => {
       return { ...s, document: await fromUuid(s.uuid) };
     }));
     context.spells.sort((a, b) => a.document.name.localeCompare(b.document.name));
+
+    context.sections = {};
     for ( const spell of context.spells ) {
-      const level = spell.document.system.level;
-      context.spellLevels[level] ??= { header: CONFIG.DND5E.spellLevels[level], spells: [] };
-      context.spellLevels[level].spells.push(spell);
+      let section;
+      switch ( context.grouping ) {
+        case "level":
+          const level = spell.document.system.level;
+          section = context.sections[level] ??= { header: CONFIG.DND5E.spellLevels[level], spells: [] };
+          break;
+        case "school":
+          const school = spell.document.system.school;
+          section = context.sections[school] ??= { header: CONFIG.DND5E.spellSchools[school], spells: [] };
+          break;
+        case "alphabetical":
+          const letter = spell.document.name.slice(0, 1).toLowerCase();
+          section = context.sections[letter] ??= { header: letter.toUpperCase(), spells: [] };
+          break;
+        default:
+          continue;
+      }
+      section.spells.push(spell);
     }
+    if ( context.grouping === "school" ) context.sections = sortObjectEntries(context.sections, "header");
 
     return context;
   }
@@ -79,6 +118,18 @@ export default class JournalSpellListPageSheet extends JournalPageSheet {
     html[0].querySelectorAll(".item-delete").forEach(e => {
       e.addEventListener("click", this._onDeleteItem.bind(this));
     });
+    html.find("[name='grouping']")?.change(this._onChangeGrouping.bind(this));
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Respond to changes to the manual grouping mode.
+   * @param {Event} event  This triggering change event.
+   */
+  _onChangeGrouping(event) {
+    this.grouping = (event.target.value === this.document.system.grouping) ? null : event.target.value;
+    this.object.parent.sheet.render();
   }
 
   /* -------------------------------------------- */

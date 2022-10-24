@@ -2269,6 +2269,13 @@ h5 {
 .class-journal table td:is(.level, .prof, .scale, .spell-slots) {
   text-align: center;
 }
+.journal-entry-page.spellList .grouping {
+  font-size: var(--font-size-12);
+}
+.journal-entry-page.spellList .grouping select {
+  margin-inline-start: 1em;
+  height: 1.75em;
+}
 .journal-entry-page.spellList ul {
   column-count: 2;
   padding-inline-start: 0;

@@ -1440,7 +1440,7 @@ DND5E.spellListTypes = {
   subclass: "ITEM.TypeSubclass",
   background: "ITEM.TypeBackground",
   race: "ITEM.TypeRace",
-  other: "OTHER"
+  other: "JOURNALENTRYPAGE.DND5E.SpellList.TypeOther"
 };
 preLocalize("spellListTypes");
 

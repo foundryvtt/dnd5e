@@ -7,6 +7,10 @@ export default class SpellListJournalPageData extends foundry.abstract.DataModel
         initial: "class", choices: CONFIG.DND5E.spellListTypes, label: "JOURNALENTRYPAGE.DND5E.SpellList.Type"
       }),
       identifier: new IdentifierField({label: "DND5E.Identifier"}),
+      grouping: new foundry.data.fields.StringField({
+        initial: "level", label: "JOURNALETNRYPAGE.DND5E.SpellList.GroupingLabel",
+        hint: "JOURNALETNRYPAGE.DND5E.SpellList.GroupingHint"
+      }),
       description: new foundry.data.fields.SchemaField({
         value: new foundry.data.fields.HTMLField({label: "DND5E.Description"})
       }),
