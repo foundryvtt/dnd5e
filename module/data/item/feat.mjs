@@ -22,7 +22,7 @@ export default class FeatData extends SystemDataModel.mixin(
       requirements: new foundry.data.fields.StringField({required: true, label: "DND5E.Requirements"}),
       recharge: new foundry.data.fields.SchemaField({
         value: new foundry.data.fields.NumberField({
-          required: true, integer: true, minimum: 1, label: "DND5E.FeatureRechargeOn"
+          required: true, integer: true, min: 1, label: "DND5E.FeatureRechargeOn"
         }),
         charged: new foundry.data.fields.BooleanField({required: true, label: "DND5E.Charged"})
       }, {label: "DND5E.FeatureActionRecharge"})

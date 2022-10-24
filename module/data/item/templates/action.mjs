@@ -46,7 +46,9 @@ export default class ActionTemplate extends foundry.abstract.DataModel {
       formula: new FormulaField({required: true, label: "DND5E.OtherFormula"}),
       save: new foundry.data.fields.SchemaField({
         ability: new foundry.data.fields.StringField({required: true, blank: true, label: "DND5E.Ability"}),
-        dc: new foundry.data.fields.NumberField({required: true, min: 0, label: "DND5E.AbbreviationDC"}),
+        dc: new foundry.data.fields.NumberField({
+          required: true, min: 0, integer: true, label: "DND5E.AbbreviationDC"
+        }),
         scaling: new foundry.data.fields.StringField({
           required: true, blank: false, initial: "spell", label: "DND5E.ScalingFormula"
         })

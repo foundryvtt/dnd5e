@@ -55,7 +55,9 @@ export default class ActivatedEffectTemplate extends foundry.abstract.DataModel 
         units: new foundry.data.fields.StringField({required: true, blank: true, label: "DND5E.RangeUnits"})
       }, {label: "DND5E.Range"}),
       uses: new foundry.data.fields.SchemaField({
-        value: new foundry.data.fields.NumberField({required: true, min: 0, label: "DND5E.LimitedUsesAvailable"}),
+        value: new foundry.data.fields.NumberField({
+          required: true, min: 0, integer: true, label: "DND5E.LimitedUsesAvailable"
+        }),
         max: new FormulaField({required: true, deterministic: true, label: "DND5E.LimitedUsesMax"}),
         per: new foundry.data.fields.StringField({
           required: true, blank: false, nullable: true, initial: null, label: "DND5E.LimitedUsesPer"
@@ -67,7 +69,7 @@ export default class ActivatedEffectTemplate extends foundry.abstract.DataModel 
         target: new foundry.data.fields.StringField({
           required: true, blank: false, nullable: true, initial: null, label: "DND5E.ConsumeTarget"
         }),
-        amount: new foundry.data.fields.NumberField({required: true, label: "DND5E.ConsumeAmount"})
+        amount: new foundry.data.fields.NumberField({required: true, integer: true, label: "DND5E.ConsumeAmount"})
       }, {label: "DND5E.ConsumeTitle"})
     };
   }
@@ -99,8 +101,8 @@ export default class ActivatedEffectTemplate extends foundry.abstract.DataModel 
    */
   static migrateRanges(source) {
     if ( typeof source.range?.value !== "string" ) return;
-    const split = source.range.value.split("/");
-    if ( !Number.isNaN(split[0]) ) source.range.value = Number(split[0]);
-    if ( (split.length > 1) && !Number.isNaN(split[1]) ) source.range.long = Number(split[1]);
+    const [value, long] = source.range.value.split("/");
+    if ( !Number.isNumeric(value) ) source.range.value = Number(value);
+    if ( (split.length > 1) && !Number.isNumeric(long) ) source.range.long = Number(long);
   }
 }
