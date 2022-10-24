@@ -31,29 +31,31 @@ export default class JournalClassPageSheet extends JournalPageSheet {
 
   /** @inheritdoc */
   async getData(options) {
-    const data = super.getData(options);
-    data.system = data.document.system;
+    const context = super.getData(options);
+    context.system = context.document.system;
 
-    data.title = Object.fromEntries(Array.fromRange(4, 1).map(n => [`level${n}`, data.data.title.level + n - 1]));
+    context.title = Object.fromEntries(
+      Array.fromRange(4, 1).map(n => [`level${n}`, context.data.title.level + n - 1])
+    );
 
     const linked = await fromUuid(this.document.system.item);
-    if ( !linked ) return data;
-    data.linked = {
+    if ( !linked ) return context;
+    context.linked = {
       document: linked,
       name: linked.name,
       lowercaseName: linked.name.toLowerCase()
     };
 
-    data.advancement = this._getAdvancement(linked);
-    data.enriched = await this._getDescriptions(data.document);
-    data.table = await this._getTable(linked);
-    data.optionalTable = await this._getOptionalTable(linked);
-    data.features = await this._getFeatures(linked);
-    data.optionalFeatures = await this._getFeatures(linked, true);
-    data.subclasses = await this._getSubclasses(this.document.system.subclassItems);
-    data.subclasses?.sort((lhs, rhs) => lhs.name.localeCompare(rhs.name));
+    context.advancement = this._getAdvancement(linked);
+    context.enriched = await this._getDescriptions(context.document);
+    context.table = await this._getTable(linked);
+    context.optionalTable = await this._getOptionalTable(linked);
+    context.features = await this._getFeatures(linked);
+    context.optionalFeatures = await this._getFeatures(linked, true);
+    context.subclasses = await this._getSubclasses(this.document.system.subclassItems);
+    context.subclasses?.sort((lhs, rhs) => lhs.name.localeCompare(rhs.name));
 
-    return data;
+    return context;
   }
 
   /* -------------------------------------------- */
