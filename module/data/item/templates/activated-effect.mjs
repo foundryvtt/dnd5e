@@ -102,7 +102,7 @@ export default class ActivatedEffectTemplate extends foundry.abstract.DataModel 
   static migrateRanges(source) {
     if ( typeof source.range?.value !== "string" ) return;
     const [value, long] = source.range.value.split("/");
-    if ( !Number.isNumeric(value) ) source.range.value = Number(value);
-    if ( (split.length > 1) && !Number.isNumeric(long) ) source.range.long = Number(long);
+    if ( Number.isNumeric(value) ) source.range.value = Number(value);
+    if ( Number.isNumeric(long) ) source.range.long = Number(long);
   }
 }
