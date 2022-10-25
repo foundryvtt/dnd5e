@@ -597,6 +597,8 @@ export default class Actor5e extends Actor {
   }
 
   /* -------------------------------------------- */
+  /*  Spellcasting Preparation                    */
+  /* -------------------------------------------- */
 
   /**
    * Prepare data related to the spell-casting capabilities of the Actor.
@@ -605,73 +607,164 @@ export default class Actor5e extends Actor {
    */
   _prepareSpellcasting() {
     if ( this.type === "vehicle" ) return;
-    const isNPC = this.type === "npc";
-    const spells = this.system.spells;
 
     // Spellcasting DC
     const spellcastingAbility = this.system.abilities[this.system.attributes.spellcasting];
     this.system.attributes.spelldc = spellcastingAbility ? spellcastingAbility.dc : 8 + this.system.attributes.prof;
 
-    // Translate the list of classes into spell-casting progression
-    const progression = {total: 0, slot: 0, pact: 0};
+    // Translate the list of classes into spellcasting progression
+    const progression = { slot: 0, pact: 0 };
+    const types = {};
 
-    // Keep track of the last seen caster in case we're in a single-caster situation.
-    let caster = null;
+    // NPCs don't get spell levels from classes
+    if ( this.type === "npc" ) {
+      progression.slot = this.system.details.spellLevel ?? 0;
+    }
 
-    // Tabulate the total spell-casting progression
-    for ( let cls of Object.values(this.classes) ) {
-      const prog = cls.spellcasting.progression;
-      if ( prog === "none" ) continue;
-      const levels = cls.system.levels;
+    else {
+      // Grab all classes with spellcasting
+      const classes = this.items.filter(cls => {
+        if ( cls.type !== "class" ) return false;
+        const type = cls.spellcasting.type;
+        if ( !type ) return false;
+        types[type] ??= 0;
+        types[type] += 1;
+        return true;
+      });
 
-      // Accumulate levels
-      if ( prog !== "pact" ) {
-        caster = cls;
-        progression.total++;
-      }
-      switch (prog) {
-        case "third": progression.slot += Math.floor(levels / 3); break;
-        case "half": progression.slot += Math.floor(levels / 2); break;
-        case "full": progression.slot += levels; break;
-        case "artificer": progression.slot += Math.ceil(levels / 2); break;
-        case "pact": progression.pact += levels; break;
+      for ( const cls of classes ) {
+        const type = cls.spellcasting.type;
+
+        /**
+         * A hook event that fires while computing the spellcasting progression for each class on each actor.
+         * The actual hook names include the spellcasting type (e.g. `dnd5e.computeLeveledProgression`).
+         * @param {object} progression   Spellcasting progression data. *Will be mutated.*
+         * @param {Actor5e} actor        Actor for whom the data is being prepared.
+         * @param {Item5e} cls           Class for whom this progression is being computed.
+         * @param {number} count         Number of classes with this type of spellcasting.
+         * @returns {boolean}            Explicitly return false to prevent default progression from being calculated.
+         * @function dnd5e.computeSpellcastingProgression
+         * @memberof hookEvents
+         */
+        const allowed = Hooks.call(
+          `dnd5e.compute${type.capitalize()}Progression`, progression, this, cls, types[type] ?? 0
+        );
+
+        if ( allowed && (type === "pact") ) {
+          this.constructor.computePactProgression(progression, this, cls, types.pact);
+        } else if ( allowed && (type === "leveled") ) {
+          this.constructor.computeLeveledProgression(progression, this, cls, types.leveled);
+        }
       }
     }
 
-    // EXCEPTION: single-classed non-full progression rounds up, rather than down
-    const isSingleClass = (progression.total === 1) && (progression.slot > 0);
-    if ( !isNPC && isSingleClass && ["half", "third"].includes(caster.spellcasting.progression) ) {
-      const denom = caster.spellcasting.progression === "third" ? 3 : 2;
-      progression.slot = Math.ceil(caster.system.levels / denom);
+    const spells = this.system.spells;
+    for ( const type of Object.keys(types) ) {
+      /**
+       * A hook event that fires to convert the provided spellcasting progression into spell slots.
+       * The actual hook names include the spellcasting type (e.g. `dnd5e.prepareLeveledSlots`).
+       * @param {object} spells        The `data.spells` object within actor's data. *Will be mutated.*
+       * @param {Actor5e} actor        Actor for whom the data is being prepared.
+       * @param {object} progression   Spellcasting progression data.
+       * @returns {boolean}            Explicitly return false to prevent default preparation from being performed.
+       * @function dnd5e.prepareSpellcastingSlots
+       * @memberof hookEvents
+       */
+      const allowed = Hooks.call(`dnd5e.prepare${type.capitalize()}Slots`, spells, this, progression);
+
+      if ( allowed && (type === "pact") ) this.constructor.preparePactSlots(spells, this, progression);
+      else if ( allowed && (type === "leveled") ) this.constructor.prepareLeveledSlots(spells, this, progression);
     }
+  }
 
-    // EXCEPTION: NPC with an explicit spell-caster level
-    if ( isNPC && this.system.details.spellLevel ) progression.slot = this.system.details.spellLevel;
+  /* -------------------------------------------- */
 
-    // Look up the number of slots per level from the progression table
+  /**
+   * Contribute to the actor's spellcasting progression for a class with leveled spellcasting.
+   * @param {object} progression   Spellcasting progression data. *Will be mutated.*
+   * @param {Actor5e} actor        Actor for whom the data is being prepared.
+   * @param {Item5e} cls           Class for whom this progression is being computed.
+   * @param {number} count         Number of classes with this type of spellcasting.
+   */
+  static computeLeveledProgression(progression, actor, cls, count) {
+    const levels = cls.system.levels;
+    const prog = CONFIG.DND5E.spellcastingTypes.leveled.progression[cls.spellcasting.progression];
+    if ( !prog ) return;
+
+    // Single-classed, non-full progression rounds up, rather than down.
+    const rounding = ( (count === 1) || prog.roundUp) ? Math.ceil : Math.floor;
+    progression.slot += rounding(levels / prog.divisor ?? 1);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Contribute to the actor's spellcasting progression for a class with pact spellcasting.
+   * @param {object} progression   Spellcasting progression data. *Will be mutated.*
+   * @param {Actor5e} actor        Actor for whom the data is being prepared.
+   * @param {Item5e} cls           Class for whom this progression is being computed.
+   * @param {number} count         Number of classes with this type of spellcasting.
+   */
+  static computePactProgression(progression, actor, cls, count) {
+    progression.pact += cls.system.levels;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare leveled spell slots using progression data.
+   * @param {object} spells        The `data.spells` object within actor's data. *Will be mutated.*
+   * @param {Actor5e} actor        Actor for whom the data is being prepared.
+   * @param {object} progression   Spellcasting progression data.
+   */
+  static prepareLeveledSlots(spells, actor, progression) {
     const levels = Math.clamped(progression.slot, 0, CONFIG.DND5E.maxLevel);
-    const slots = CONFIG.DND5E.SPELL_SLOT_TABLE[Math.min(levels, CONFIG.DND5E.SPELL_SLOT_TABLE.length) - 1] || [];
-    for ( let [n, lvl] of Object.entries(spells) ) {
-      let i = parseInt(n.slice(-1));
-      if ( Number.isNaN(i) ) continue;
-      if ( Number.isNumeric(lvl.override) ) lvl.max = Math.max(parseInt(lvl.override), 0);
-      else lvl.max = slots[i-1] || 0;
-      lvl.value = parseInt(lvl.value);
+    const slots = CONFIG.DND5E.SPELL_SLOT_TABLE[Math.min(levels, CONFIG.DND5E.SPELL_SLOT_TABLE.length) - 1] ?? [];
+    for ( const [n, slot] of Object.entries(spells) ) {
+      const level = parseInt(n.slice(-1));
+      if ( Number.isNaN(level) ) continue;
+      slot.max = Number.isNumeric(slot.override) ? Math.max(parseInt(slot.override), 0) : slots[level - 1] ?? 0;
+      slot.value = parseInt(slot.value); // TODO: DataModels should remove the need for this
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare pact spell slots using progression data.
+   * @param {object} spells        The `data.spells` object within actor's data. *Will be mutated.*
+   * @param {Actor5e} actor        Actor for whom the data is being prepared.
+   * @param {object} progression   Spellcasting progression data.
+   */
+  static preparePactSlots(spells, actor, progression) {
+    // Pact spell data:
+    // - pact.level: Slot level for pact casting
+    // - pact.max: Total number of pact slots
+    // - pact.value: Currently available pact slots
+    // - pact.override: Override number of available spell slots
+
+    let pactLevel = Math.clamped(progression.pact, 0, CONFIG.DND5E.maxLevel);
+    spells.pact ??= {};
+    const override = Number.isNumeric(spells.pact.override) ? parseInt(spells.pact.override) : null;
+
+    // Pact slot override
+    if ( (pactLevel === 0) && (actor.type === "npc") && (override !== null) ) {
+      pactLevel = actor.system.details.spellLevel;
     }
 
-    // Determine the Actor's pact magic level (if any)
-    let pl = Math.clamped(progression.pact, 0, CONFIG.DND5E.maxLevel);
-    spells.pact = spells.pact || {};
-    if ( (pl === 0) && isNPC && Number.isNumeric(spells.pact.override) ) pl = this.system.details.spellLevel;
-
-    // Determine the number of Warlock pact slots per level
-    if ( pl > 0 ) {
-      spells.pact.level = Math.ceil(Math.min(10, pl) / 2);
-      if ( Number.isNumeric(spells.pact.override) ) spells.pact.max = Math.max(parseInt(spells.pact.override), 1);
-      else spells.pact.max = Math.max(1, Math.min(pl, 2), Math.min(pl - 8, 3), Math.min(pl - 13, 4));
+    // TODO: Allow pact level and slot count to be configured
+    if ( pactLevel > 0 ) {
+      spells.pact.level = Math.ceil(Math.min(10, pactLevel) / 2); // TODO: Allow custom max pact level
+      if ( override === null ) {
+        spells.pact.max = Math.max(1, Math.min(pactLevel, 2), Math.min(pactLevel - 8, 3), Math.min(pactLevel - 13, 4));
+      } else {
+        spells.pact.max = Math.max(override, 1);
+      }
       spells.pact.value = Math.min(spells.pact.value, spells.pact.max);
-    } else {
-      spells.pact.max = parseInt(spells.pact.override) || 0;
+    }
+
+    else {
+      spells.pact.max = override || 0;
       spells.pact.level = spells.pact.max > 0 ? 1 : 0;
     }
   }
