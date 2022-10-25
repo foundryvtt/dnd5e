@@ -2,593 +2,990 @@
   "name": "Spells A-Z",
   "pages": [
     {
-      "name": "A",
-      "type": "text",
+      "sort": 100000,
+      "name": "Spells A-Z",
+      "type": "spellList",
       "_id": "fwkSG4DkT0379wjE",
       "title": {
-        "show": true,
+        "show": false,
         "level": 1
       },
       "image": {},
       "text": {
-        "format": 1,
-        "content": "<p>@Compendium[dnd5e.spells.4H6YgYdKgnX6ZQ8M]{Acid Arrow}</p>\n<p>@Compendium[dnd5e.spells.JLTQyqXEaJDrTXyW]{Acid Splash}</p>\n<p>@Compendium[dnd5e.spells.Opwh2PdX4runSBlm]{Aid}</p>\n<p>@Compendium[dnd5e.spells.7p9IuWrSWFgfyQo2]{Alarm}</p>\n<p>@Compendium[dnd5e.spells.8RTDOt80u8aBv9qx]{Alter Self}</p>\n<p>@Compendium[dnd5e.spells.hDOENzjuj5WpLq7B]{Animal Friendship}</p>\n<p>@Compendium[dnd5e.spells.X8w9EzYLGc4vQ1H2]{Animal Messenger}</p>\n<p>@Compendium[dnd5e.spells.ohqAIBg6de989CIo]{Animal Shapes}</p>\n<p>@Compendium[dnd5e.spells.oyE5nVppa5mde5gT]{Animate Dead}</p>\n<p>@Compendium[dnd5e.spells.ATo0Eb63TDtnu6iA]{Animate Objects}</p>\n<p>@Compendium[dnd5e.spells.wXzkqpeFP8eWgJzK]{Antilife Shell}</p>\n<p>@Compendium[dnd5e.spells.Eon0jzGzQRNluTPQ]{Antimagic Field}</p>\n<p>@Compendium[dnd5e.spells.GJ2WYm3SQFR0winH]{Antipathy/Sympathy}</p>\n<p>@Compendium[dnd5e.spells.ImlCJQwR1VL40Qem]{Arcane Eye}</p>\n<p>@Compendium[dnd5e.spells.a2KJHCIbY5Mi4Dmn]{Arcane Hand}</p>\n<p>@Compendium[dnd5e.spells.8cse7rit0oswRPUP]{Arcane Lock}</p>\n<p>@Compendium[dnd5e.spells.LTDNWoFVJNLjiiNa]{Arcane Sword}</p>\n<p>@Compendium[dnd5e.spells.RvEqsD89Zvd5yex4]{Arcanist's Magic Aura}</p>\n<p>@Compendium[dnd5e.spells.TIoadMIsUKD4edXi]{Astral Projection}</p>\n<p>@Compendium[dnd5e.spells.4v2H3hHb3Ph9XLNd]{Augury}</p>\n<p>@Compendium[dnd5e.spells.MCEpGpvovcXagwQS]{Awaken}</p>",
-        "markdown": ""
+        "format": 1
       },
       "video": {
         "controls": true,
         "volume": 0.5
       },
       "src": null,
-      "system": {},
-      "sort": 0,
-      "ownership": {
-        "default": -1
+      "system": {
+        "type": "other",
+        "identifier": "",
+        "grouping": "alphabetical",
+        "description": {
+          "value": "<p></p>"
+        },
+        "spells": [
+          {
+            "uuid": "Compendium.dnd5e.spells.gMrWeG8fMDPRFiVe"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.pB7XVYwdGNcUG935"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.4H6YgYdKgnX6ZQ8M"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.JLTQyqXEaJDrTXyW"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.Opwh2PdX4runSBlm"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.7p9IuWrSWFgfyQo2"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.8RTDOt80u8aBv9qx"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.hDOENzjuj5WpLq7B"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.X8w9EzYLGc4vQ1H2"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.ohqAIBg6de989CIo"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.oyE5nVppa5mde5gT"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.ATo0Eb63TDtnu6iA"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.wXzkqpeFP8eWgJzK"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.Eon0jzGzQRNluTPQ"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.GJ2WYm3SQFR0winH"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.ImlCJQwR1VL40Qem"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.a2KJHCIbY5Mi4Dmn"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.8cse7rit0oswRPUP"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.LTDNWoFVJNLjiiNa"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.RvEqsD89Zvd5yex4"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.TIoadMIsUKD4edXi"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.4v2H3hHb3Ph9XLNd"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.MCEpGpvovcXagwQS"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.95K2aUhAGV9qXjnf"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.pxpb2eOB6bv4phAf"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.JPwIEfgUPVebr5AH"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.ZU9d6woBdUP8pIPt"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.pO4zGe5LmFIYqJiL"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.DGONTFbk5eORs5qv"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.dLJhxDfeyOsc3zsY"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.8dzaICjGy6mTUaUr"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.pybg5MNc3lkerH4Y"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.zwGsAv6kmwzYGhh3"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.GSvLWcdCZLQkilXT"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.UDUnlfPsOAbq2RSE"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.7UwUjJ6owIQkEPrs"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.5SuJewoa1CRWaj1F"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.ehvmg9U9fcMEhE4z"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.3MYDjS6k9IYL0aTj"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.QbTxN5dWIbYZ4jLU"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.eS7XnnApoxRxYXPs"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.vrN18tbTw7io5MWd"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.KeunEkg1JYbOCOhV"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.cg50KpBkBdPK6vPL"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.h830iyqParFleNqR"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.LkvI11Uue774QBKZ"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.LWTUqKkUQdMAmOe0"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.arzCrMRgcNiQuh43"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.d54VDyFulD9xxY7J"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.dp6xny4v8PDoIGjh"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.4dSvfvTy2ZIJ3K4k"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.P6f1PPKPd9BCb742"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.RpKjTlYASrfqUPVA"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.9hQXdMSmerkTsHDe"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.1Drt0SHxbEAHxprN"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.XT7nzJmVGgv73uaf"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.1LkZvINag7KqBmDR"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.yN3XZZujhR4aVvPa"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.KgEw3sDr39C6g8nY"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.dEfSELiY1eO3cpX9"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.dSTu1MaPhBqPITwM"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.CjIq8Ed7bu3vVwT1"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.4smlOvpF5AQHcyg1"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.MK6gpQMeDFo0cP9f"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.7fFHlBk3UNX8gPKL"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.ZPd73HtKF3At11jh"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.Ek45cBpVXvJdv1Qy"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.BV0mpbHh29IbbIj5"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.a3XtAO5n2GrqiAh5"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.E4NXux0RHvME1XgP"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.lnaGnxMzpYnbw1uU"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.uUWb1wZgtMou0TVP"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.CAxSzHWizrafT033"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.S7VbUetIfVT7B6Eq"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.hJ6ZiA3fpoY8v9cp"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.BP3GCwa66IAw1yTG"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.VtCXMdyM6mAdIJZb"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.AoTTjapz1FsGOIZz"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.xNM9CzQQr2CieM4B"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.Mzh95utKDPIrjiH8"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.ghXTfe7sgCbgf1Q8"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.2skfDtglk1mGrb3l"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.ppWAAEul0QHtm4er"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.A4RsPuSvB9wFtz1j"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.A3q2gTNqG6fvNGrv"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.HBHbOGKNVVprSlwn"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.TkJ8Wtg1L7TZtspm"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.15Fa6q1nH27XfbR8"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.XqzXSKNR75ZdYTA9"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.8MICCMeOXT3aJUy9"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.T1vpZLam7LezjToj"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.LrPvWHBPmiMQQsKB"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.eEpy1ONlXumKS1mp"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.91Sw6vOIaO7U8DvM"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.kSPRpeIx3w3nihrF"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.SbSvZKkJASyk8jKo"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.x5JNBSyIBBZsjcGT"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.Z9p1vezIn95jw1Yw"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.9eOZDBImVKxbeOyZ"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.WahI41a3goVUg0x1"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.30ZgXtijJVCxQk5N"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.PQuEgKyCdovOvhqN"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.zPGohqJRir6MyQ3U"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.ZRqu3Xh9FmlBCZGy"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.7Fw7Bf1k3xxDVr5L"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.nqBDWkVOfcGZt4YU"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.SAj03P2WBDiWu7zu"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.7e3QXF10hLNDEdr6"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.XXUDGFELgoskdOD0"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.pub0OWVEB71XQx1n"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.hYCrN82dMJFuJODB"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.JGT5bNqu9REL7Fuz"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.5eh2HFbS13078Y3H"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.cYI4RNNjI5GAmLhy"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.KrM3oHVv13RAALrS"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.HPvZm8YJO91k6Qdg"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.EOmsUcFQJTfG2oio"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.avD5XUtkBPQQR97c"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.J3uILDYS7MiOfmTJ"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.ztgcdrWPshKRpFd0"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.Advtckpz1B733bu9"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.5e1xTohkzqFqbYH4"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.FjYE214HTERCRZNm"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.kozNy29b0X6exFhY"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.bnjXlk13ZRJuf5d0"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.yfbK8gZqESlaoY5t"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.IBJmWjzbQGu7M4UX"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.64D1gNZ4hx7SWG2x"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.Y7uWUO4yqUN0JKl0"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.6HEEhLdJz32TL4Js"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.da0a1t2FqaTjRZGT"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.MImfWCzEPRMYD3Xp"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.2IWiZAJtOGDoKjiz"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.XbwGq5kDJNvAxNXV"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.JQyigMNPiDnGI18b"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.n4JDcFKe5ikzYmAc"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.czXrVRx6XYRWsHAi"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.1RzxKZzkQOoioxPj"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.WmQpxfjZwF3MGUby"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.Qf6CAZkc7ms4ZY3e"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.etgcR9wqmrhyZ0tx"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.tEpDmYZNGc9f5OhJ"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.WzvJ7G3cqvIubsLk"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.TgHsuhNasPbhu8MO"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.yw0tYQkOMCgKZ8Ur"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.P7mF2MxSuVJwHRRY"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.7buEm5KhI5lP8m1z"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.FSMy6VAjDnXY9vWz"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.SLxA9QhrggTz0taU"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.sTIkQK7KuQNOyY0C"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.tMH6Ivn4GmE1naMj"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.Szvk5FEVQW3uhJi5"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.qcYitWoSMTnKkzM1"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.o8Dh7fblk1d16tnO"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.2yHXEcrRbadZDr5M"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.22dPoeXfaaAv4K3h"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.mgFqi0ev8f7Ut19y"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.ge3Saet9zPTDyaoL"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.BQk5Row4NymMnUQl"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.l9Ju5KE7bbn3WpTm"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.3Lo9boi7P2ro6QV4"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.j8S49Rea8b1640Zi"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.0xmXiPiuYws1OGcX"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.6g3WLOZ2u0EbaLAd"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.WN2LWEljYU6QqnRH"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.3OZnNhunvRtPOQmH"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.82jM6qD9axLJsTrH"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.ZVnL9L8v1KC9TBF4"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.pV04y1iXoWiom6bp"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.ksaaTxIbKx2sJfia"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.OVikYmSdHliAG2YD"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.SgrEKiC6dAtvy6Pz"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.1N8dDMMgZ1h1YJ3B"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.ZrTc23tToJ0JpH2h"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.1nhIxh0DsJsntCfj"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.W4Qx5z0id6da0vqg"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.F0GsG0SJzsIOacwV"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.MRxldJd6C4bsBo3O"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.Bnn9Nzajixvow9xi"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.IyikgTEOTv701jgQ"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.Iv2qqSAT7OkXKPFx"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.gXtzz9t1DTzJeLr4"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.SleYkHovQ8NagmeV"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.B0pnIcc52O6G8hi8"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.CKZTpZlxj7hjjo2H"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.Utk1OQRwYkMkFRD3"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.y8A4HfTwd93ypdEz"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.ej6wyY4G1gOcb1U6"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.41JIhpDyM9Anm7cs"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.7v06rdmUakoTk1LQ"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.Sgjrf8qqv97CCWM4"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.pn4SnsFDvYDiE6rC"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.nslx2nT3p4lNkmdp"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.Pyzmm8R7rVsNAPsd"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.Y6oItIuhOJZ0i0FC"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.34ddoYIrnOZ2GFYi"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.5OGFdJw35QXp6mh6"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.clwv2PWOcT822hlr"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.64uo4fHriHLjRUrX"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.kjmjY0zlE6IEiQVL"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.icZokbgV1jIMpNCv"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.mF52ldF79Cr7wfQo"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.bllEWfm9xfEKynhv"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.oIzA2MEHwxhtQneU"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.f38w5rd9SgdmWc6F"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.X4c8xCkmF8U9HUMz"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.MBMaQLwoy05qzMJ3"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.wqfAVANuQonNBgnL"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.r3243JU4AyQJyfX4"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.bV3yun6MIuFj71Er"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.yI0XWIgI0IGGsR3R"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.aU62xVUBYkAQWIHv"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.pRMvmknwLf2tdMTj"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.d9MwcXi7Il3HROXd"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.BYNvBJzHcF5VJhXw"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.wpx42mtoZ5BmXRs1"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.fkREcytuZ8sngWtC"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.42O2aNBW7vK90gTL"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.J6Jpw5XzB5aTeqnz"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.YWtwzp6ZnQJMEmVW"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.g2u9PYfqWQAyg9OI"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.04nMsTWkIFvkbXlY"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.dmvaMLFWFtv0qx0S"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.35j2QIMmIk6aEdxj"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.MOEmz9N0j0QPkKEE"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.udsLtG0BugXHR2JQ"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.eGMhwmuleAM46C6L"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.jmfu8zj4zjjzUbeh"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.NJgxf7pmSsBArIG7"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.eCPQuQkIabFKTl9u"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.bA2sk9eMKBeY7EPD"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.ePhRKHXRE7l1sEoQ"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.j8NtLXOOJ3GAKF8I"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.xmDBqZhRVrtLP8h2"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.MAxM77CDUu8dgIRQ"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.Kn7K5PtYUJAKZTTp"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.AGFMPAmuzwWO6Dfz"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.ODhLKBxLnvvLOnw1"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.ctW81uiX56xZR2c5"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.9kGrFXnLiRg3Xnbo"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.zMEo5DKK8uxsuWnq"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.XZhdgVK3cLoxNCQl"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.1ADstb0Xec6HHRcU"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.dl8YwvMboBqX2OC4"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.jhhT9PsHy5A7EojO"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.ERCv7yuRkQ0YjGx6"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.LmRHHMtplpxr9fX6"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.ap4dmtshjEbwU3Ts"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.n9pJzTDsAwQxJVRl"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.gvdA9nPuWLck4tBl"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.7u2obDvuvtZBkTfq"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.fVbCxFRaORalHB20"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.8sgwRh8NUNkn9Vi0"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.DQzlB5Y3k791W5bH"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.mbFw57uyfLkyiw5k"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.GtGjNjPBgUHxGYAD"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.wvLbtemkH8gyBpdc"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.N2UEFq8X5LRsLcOZ"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.wJKpSvSTbSkTjqyb"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.z1mx84ONwkXKUZd7"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.jZ6JNykRtdQ90MOo"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.VzgFzcmocr1X1cp4"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.XvbiNhNqXXIFisIy"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.5VhqFROQYjr1P9lp"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.BrBZdCCrJRIVg7YX"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.jccbeBIfLrqEZnDP"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.KhwiSi9fwVfUPtku"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.dhqBY4TvVjxVmOZd"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.yqUDoxk4x0NWG5Bz"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.8zT7njvqbpXs4Cel"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.aL1F8fvYLtNzUbKu"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.I2LUSF5ogc7Bj62e"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.2VXGS206tuChoeXy"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.KJRVzeMQXPj8Gtyx"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.9gYGkrL6qFTsE6fw"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.uCud2s4TjMfjiXUb"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.JbxsYXxSOTZbf9I0"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.TwlD4PLcltv7Xh7j"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.QvGcdRUSNRKEQJlK"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.ReMbjfeOKoSj3O79"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.7KjExw0kmuqERa7C"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.zMAWdyc8UVb37BK4"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.2RC0EyvBLPH88PZF"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.hzK7FQya0BDjSmLE"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.B2kbmgbA2WQR00kx"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.HQfd7jJyULIoGxrZ"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.uAwtVZkiSTyP6ORB"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.L4J89JXqbKs6puEV"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.8aWtP5hcrmcEesBW"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.MUO1uYN7JR1hm4dR"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.WTbOQBsarsL1LuXJ"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.JYuRBwxpoFhXduvD"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.NXWWWgHtWb7Nv21F"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.gopnZvS0c2jD5FP8"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.s7nXgot5gGZVcMrv"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.DUBgwHPakcLDkB6W"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.QbQZKoXOgHWN06aa"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.qLeEXZDbW5y4bmLY"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.XzkJpE6XpZfKjODD"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.mGGlcLdggHwcL7MG"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.ccduLIvutyNqvkgv"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.UfHQhA54M4323gVO"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.cdrYKaFi98YWaBMw"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.X3DrXgxjwI2dvkD6"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.o9ZCvuD2B1OTcubb"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.fzZnVKLmBMo2f5up"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.NmoRmM1mhuM3pqnY"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.AQsBc94ES7W7s7iG"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.JVhKeanAXZH62DrF"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.13uVuBQP6VaiSPvC"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.YBda6nLKjxdT1LbS"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.UJJu9c2UvCzVljiP"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.Wl2vtJ4hCt2tpWfR"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.8PJAsHmbu6UgDHC0"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.ew6GA8dJy2spQmFW"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.3okM6Gn63zzEULkz"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.76C0FdcxlU8F9Rl2"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.CylBa7jR8DSbo8Z3"
+          },
+          {
+            "uuid": "Compendium.dnd5e.spells.TfRzwEgBHHkCc6Ql"
+          }
+        ]
       },
-      "flags": {},
-      "_key": "!journal.pages!plCB5ei1JbVtBseb.fwkSG4DkT0379wjE"
-    },
-    {
-      "name": "B",
-      "type": "text",
-      "_id": "NtvBcsKpLrYEV9Y7",
-      "title": {
-        "show": true,
-        "level": 1
-      },
-      "image": {},
-      "text": {
-        "format": 1,
-        "content": "<p>@Compendium[dnd5e.spells.95K2aUhAGV9qXjnf]{Bane}</p>\n<p>@Compendium[dnd5e.spells.pxpb2eOB6bv4phAf]{Banishment}</p>\n<p>@Compendium[dnd5e.spells.JPwIEfgUPVebr5AH]{Barkskin}</p>\n<p>@Compendium[dnd5e.spells.ZU9d6woBdUP8pIPt]{Beacon of Hope}</p>\n<p>@Compendium[dnd5e.spells.pO4zGe5LmFIYqJiL]{Bestow Curse}</p>\n<p>@Compendium[dnd5e.spells.DGONTFbk5eORs5qv]{Black Tentacles}</p>\n<p>@Compendium[dnd5e.spells.dLJhxDfeyOsc3zsY]{Blade Barrier}</p>\n<p>@Compendium[dnd5e.spells.8dzaICjGy6mTUaUr]{Bless}</p>\n<p>@Compendium[dnd5e.spells.pybg5MNc3lkerH4Y]{Blight}</p>\n<p>@Compendium[dnd5e.spells.zwGsAv6kmwzYGhh3]{Blindness/Deafness}</p>\n<p>@Compendium[dnd5e.spells.GSvLWcdCZLQkilXT]{Blink}</p>\n<p>@Compendium[dnd5e.spells.UDUnlfPsOAbq2RSE]{Blur}</p>\n<p>@Compendium[dnd5e.spells.7UwUjJ6owIQkEPrs]{Branding Smite}</p>\n<p>@Compendium[dnd5e.spells.5SuJewoa1CRWaj1F]{Burning Hands}</p>",
-        "markdown": ""
-      },
-      "video": {
-        "controls": true,
-        "volume": 0.5
-      },
-      "src": null,
-      "system": {},
-      "sort": 0,
-      "ownership": {
-        "default": -1
-      },
-      "flags": {},
-      "_key": "!journal.pages!plCB5ei1JbVtBseb.NtvBcsKpLrYEV9Y7"
-    },
-    {
-      "name": "C",
-      "type": "text",
-      "_id": "KU4VD1FIv3OOovn0",
-      "title": {
-        "show": true,
-        "level": 1
-      },
-      "image": {},
-      "text": {
-        "format": 1,
-        "content": "<p>@Compendium[dnd5e.spells.ehvmg9U9fcMEhE4z]{Call Lightning}</p>\n<p>@Compendium[dnd5e.spells.3MYDjS6k9IYL0aTj]{Calm Emotions}</p>\n<p>@Compendium[dnd5e.spells.QbTxN5dWIbYZ4jLU]{Chain Lightning}</p>\n<p>@Compendium[dnd5e.spells.eS7XnnApoxRxYXPs]{Charm Person}</p>\n<p>@Compendium[dnd5e.spells.vrN18tbTw7io5MWd]{Chill Touch}</p>\n<p>@Compendium[dnd5e.spells.KeunEkg1JYbOCOhV]{Circle of Death}</p>\n<p>@Compendium[dnd5e.spells.cg50KpBkBdPK6vPL]{Clairvoyance}</p>\n<p>@Compendium[dnd5e.spells.h830iyqParFleNqR]{Clone}</p>\n<p>@Compendium[dnd5e.spells.LkvI11Uue774QBKZ]{Cloudkill}</p>\n<p>@Compendium[dnd5e.spells.LWTUqKkUQdMAmOe0]{Color Spray}</p>\n<p>@Compendium[dnd5e.spells.arzCrMRgcNiQuh43]{Command}</p>\n<p>@Compendium[dnd5e.spells.d54VDyFulD9xxY7J]{Commune}</p>\n<p>@Compendium[dnd5e.spells.dp6xny4v8PDoIGjh]{Commune with Nature}</p>\n<p>@Compendium[dnd5e.spells.4dSvfvTy2ZIJ3K4k]{Comprehend Languages}</p>\n<p>@Compendium[dnd5e.spells.P6f1PPKPd9BCb742]{Compulsion}</p>\n<p>@Compendium[dnd5e.spells.RpKjTlYASrfqUPVA]{Cone of Cold}</p>\n<p>@Compendium[dnd5e.spells.9hQXdMSmerkTsHDe]{Confusion}</p>\n<p>@Compendium[dnd5e.spells.1Drt0SHxbEAHxprN]{Conjure Animals}</p>\n<p>@Compendium[dnd5e.spells.XT7nzJmVGgv73uaf]{Conjure Celestial}</p>\n<p>@Compendium[dnd5e.spells.1LkZvINag7KqBmDR]{Conjure Elemental}</p>\n<p>@Compendium[dnd5e.spells.yN3XZZujhR4aVvPa]{Conjure Fey}</p>\n<p>@Compendium[dnd5e.spells.KgEw3sDr39C6g8nY]{Conjure Minor Elementals}</p>\n<p>@Compendium[dnd5e.spells.dEfSELiY1eO3cpX9]{Conjure Woodland Beings}</p>\n<p>@Compendium[dnd5e.spells.dSTu1MaPhBqPITwM]{Contact Other Plane}</p>\n<p>@Compendium[dnd5e.spells.CjIq8Ed7bu3vVwT1]{Contagion}</p>\n<p>@Compendium[dnd5e.spells.4smlOvpF5AQHcyg1]{Contingency}</p>\n<p>@Compendium[dnd5e.spells.MK6gpQMeDFo0cP9f]{Continual Flame}</p>\n<p>@Compendium[dnd5e.spells.7fFHlBk3UNX8gPKL]{Control Water}</p>\n<p>@Compendium[dnd5e.spells.ZPd73HtKF3At11jh]{Control Weather}</p>\n<p>@Compendium[dnd5e.spells.Ek45cBpVXvJdv1Qy]{Counterspell}</p>\n<p>@Compendium[dnd5e.spells.BV0mpbHh29IbbIj5]{Create Food and Water}</p>\n<p>@Compendium[dnd5e.spells.a3XtAO5n2GrqiAh5]{Create or Destroy Water}</p>\n<p>@Compendium[dnd5e.spells.E4NXux0RHvME1XgP]{Create Undead}</p>\n<p>@Compendium[dnd5e.spells.lnaGnxMzpYnbw1uU]{Creation}</p>\n<p>@Compendium[dnd5e.spells.uUWb1wZgtMou0TVP]{Cure Wounds}</p>",
-        "markdown": ""
-      },
-      "video": {
-        "controls": true,
-        "volume": 0.5
-      },
-      "src": null,
-      "system": {},
-      "sort": 0,
-      "ownership": {
-        "default": -1
-      },
-      "flags": {},
-      "_key": "!journal.pages!plCB5ei1JbVtBseb.KU4VD1FIv3OOovn0"
-    },
-    {
-      "name": "D",
-      "type": "text",
-      "_id": "BmCHiD6pLNjIgeTx",
-      "title": {
-        "show": true,
-        "level": 1
-      },
-      "image": {},
-      "text": {
-        "format": 1,
-        "content": "<p>@Compendium[dnd5e.spells.CAxSzHWizrafT033]{Dancing Lights}</p>\n<p>@Compendium[dnd5e.spells.S7VbUetIfVT7B6Eq]{Darkness}</p>\n<p>@Compendium[dnd5e.spells.hJ6ZiA3fpoY8v9cp]{Darkvision}</p>\n<p>@Compendium[dnd5e.spells.BP3GCwa66IAw1yTG]{Daylight}</p>\n<p>@Compendium[dnd5e.spells.VtCXMdyM6mAdIJZb]{Death Ward}</p>\n<p>@Compendium[dnd5e.spells.AoTTjapz1FsGOIZz]{Delayed Blast Fireball}</p>\n<p>@Compendium[dnd5e.spells.xNM9CzQQr2CieM4B]{Demiplane}</p>\n<p>@Compendium[dnd5e.spells.Mzh95utKDPIrjiH8]{Detect Evil and Good}</p>\n<p>@Compendium[dnd5e.spells.ghXTfe7sgCbgf1Q8]{Detect Magic}</p>\n<p>@Compendium[dnd5e.spells.2skfDtglk1mGrb3l]{Detect Poison and Disease}</p>\n<p>@Compendium[dnd5e.spells.ppWAAEul0QHtm4er]{Detect Thoughts}</p>\n<p>@Compendium[dnd5e.spells.A4RsPuSvB9wFtz1j]{Dimension Door}</p>\n<p>@Compendium[dnd5e.spells.A3q2gTNqG6fvNGrv]{Disguise Self}</p>\n<p>@Compendium[dnd5e.spells.HBHbOGKNVVprSlwn]{Disintegrate}</p>\n<p>@Compendium[dnd5e.spells.TkJ8Wtg1L7TZtspm]{Dispel Evil and Good}</p>\n<p>@Compendium[dnd5e.spells.15Fa6q1nH27XfbR8]{Dispel Magic}</p>\n<p>@Compendium[dnd5e.spells.XqzXSKNR75ZdYTA9]{Divination}</p>\n<p>@Compendium[dnd5e.spells.8MICCMeOXT3aJUy9]{Divine Favor}</p>\n<p>@Compendium[dnd5e.spells.T1vpZLam7LezjToj]{Divine Word}</p>\n<p>@Compendium[dnd5e.spells.LrPvWHBPmiMQQsKB]{Dominate Beast}</p>\n<p>@Compendium[dnd5e.spells.eEpy1ONlXumKS1mp]{Dominate Monster}</p>\n<p>@Compendium[dnd5e.spells.91Sw6vOIaO7U8DvM]{Dominate Person}</p>\n<p>@Compendium[dnd5e.spells.kSPRpeIx3w3nihrF]{Dream}</p>\n<p>@Compendium[dnd5e.spells.SbSvZKkJASyk8jKo]{Druidcraft}</p>",
-        "markdown": ""
-      },
-      "video": {
-        "controls": true,
-        "volume": 0.5
-      },
-      "src": null,
-      "system": {},
-      "sort": 0,
-      "ownership": {
-        "default": -1
-      },
-      "flags": {},
-      "_key": "!journal.pages!plCB5ei1JbVtBseb.BmCHiD6pLNjIgeTx"
-    },
-    {
-      "name": "E",
-      "type": "text",
-      "_id": "yK94U1uZ8xkuYlHa",
-      "title": {
-        "show": true,
-        "level": 1
-      },
-      "image": {},
-      "text": {
-        "format": 1,
-        "content": "<p>@Compendium[dnd5e.spells.x5JNBSyIBBZsjcGT]{Earthquake}</p>\n<p>@Compendium[dnd5e.spells.Z9p1vezIn95jw1Yw]{Eldritch Blast}</p>\n<p>@Compendium[dnd5e.spells.9eOZDBImVKxbeOyZ]{Enhance Ability}</p>\n<p>@Compendium[dnd5e.spells.WahI41a3goVUg0x1]{Enlarge/Reduce}</p>\n<p>@Compendium[dnd5e.spells.gMrWeG8fMDPRFiVe]{Entangle}</p>\n<p>@Compendium[dnd5e.spells.30ZgXtijJVCxQk5N]{Enthrall}</p>\n<p>@Compendium[dnd5e.spells.PQuEgKyCdovOvhqN]{Etherealness}</p>\n<p>@Compendium[dnd5e.spells.zPGohqJRir6MyQ3U]{Expeditious Retreat}</p>\n<p>@Compendium[dnd5e.spells.ZRqu3Xh9FmlBCZGy]{Eyebite}</p>",
-        "markdown": ""
-      },
-      "video": {
-        "controls": true,
-        "volume": 0.5
-      },
-      "src": null,
-      "system": {},
-      "sort": 0,
-      "ownership": {
-        "default": -1
-      },
-      "flags": {},
-      "_key": "!journal.pages!plCB5ei1JbVtBseb.yK94U1uZ8xkuYlHa"
-    },
-    {
-      "name": "F",
-      "type": "text",
-      "_id": "yAxKu1Ffw5nMUHSv",
-      "title": {
-        "show": true,
-        "level": 1
-      },
-      "image": {},
-      "text": {
-        "format": 1,
-        "content": "<p>@Compendium[dnd5e.spells.7Fw7Bf1k3xxDVr5L]{Fabricate}</p>\n<p>@Compendium[dnd5e.spells.nqBDWkVOfcGZt4YU]{Faerie Fire}</p>\n<p>@Compendium[dnd5e.spells.SAj03P2WBDiWu7zu]{Faithful Hound}</p>\n<p>@Compendium[dnd5e.spells.7e3QXF10hLNDEdr6]{False Life}</p>\n<p>@Compendium[dnd5e.spells.XXUDGFELgoskdOD0]{Fear}</p>\n<p>@Compendium[dnd5e.spells.pub0OWVEB71XQx1n]{Feather Fall}</p>\n<p>@Compendium[dnd5e.spells.hYCrN82dMJFuJODB]{Feeblemind}</p>\n<p>@Compendium[dnd5e.spells.JGT5bNqu9REL7Fuz]{Find Familiar}</p>\n<p>@Compendium[dnd5e.spells.5eh2HFbS13078Y3H]{Find Steed}</p>\n<p>@Compendium[dnd5e.spells.cYI4RNNjI5GAmLhy]{Find the Path}</p>\n<p>@Compendium[dnd5e.spells.KrM3oHVv13RAALrS]{Find Traps}</p>\n<p>@Compendium[dnd5e.spells.HPvZm8YJO91k6Qdg]{Finger of Death}</p>\n<p>@Compendium[dnd5e.spells.EOmsUcFQJTfG2oio]{Fire Bolt}</p>\n<p>@Compendium[dnd5e.spells.avD5XUtkBPQQR97c]{Fire Shield}</p>\n<p>@Compendium[dnd5e.spells.J3uILDYS7MiOfmTJ]{Fire Storm}</p>\n<p>@Compendium[dnd5e.spells.ztgcdrWPshKRpFd0]{Fireball}</p>\n<p>@Compendium[dnd5e.spells.Advtckpz1B733bu9]{Flame Blade}</p>\n<p>@Compendium[dnd5e.spells.5e1xTohkzqFqbYH4]{Flame Strike}</p>\n<p>@Compendium[dnd5e.spells.FjYE214HTERCRZNm]{Flaming Sphere}</p>\n<p>@Compendium[dnd5e.spells.kozNy29b0X6exFhY]{Flesh to Stone}</p>\n<p>@Compendium[dnd5e.spells.bnjXlk13ZRJuf5d0]{Floating Disk}</p>\n<p>@Compendium[dnd5e.spells.yfbK8gZqESlaoY5t]{Fly}</p>\n<p>@Compendium[dnd5e.spells.IBJmWjzbQGu7M4UX]{Fog Cloud}</p>\n<p>@Compendium[dnd5e.spells.64D1gNZ4hx7SWG2x]{Forbiddance}</p>\n<p>@Compendium[dnd5e.spells.Y7uWUO4yqUN0JKl0]{Forcecage}</p>\n<p>@Compendium[dnd5e.spells.6HEEhLdJz32TL4Js]{Foresight}</p>\n<p>@Compendium[dnd5e.spells.da0a1t2FqaTjRZGT]{Freedom of Movement}</p>\n<p>@Compendium[dnd5e.spells.MImfWCzEPRMYD3Xp]{Freezing Sphere}</p>",
-        "markdown": ""
-      },
-      "video": {
-        "controls": true,
-        "volume": 0.5
-      },
-      "src": null,
-      "system": {},
-      "sort": 0,
-      "ownership": {
-        "default": -1
-      },
-      "flags": {},
-      "_key": "!journal.pages!plCB5ei1JbVtBseb.yAxKu1Ffw5nMUHSv"
-    },
-    {
-      "name": "G",
-      "type": "text",
-      "_id": "Gwq0BG0orHTTCmbX",
-      "title": {
-        "show": true,
-        "level": 1
-      },
-      "image": {},
-      "text": {
-        "format": 1,
-        "content": "<p>@Compendium[dnd5e.spells.2IWiZAJtOGDoKjiz]{Gaseous Form}</p>\n<p>@Compendium[dnd5e.spells.XbwGq5kDJNvAxNXV]{Gate}</p>\n<p>@Compendium[dnd5e.spells.JQyigMNPiDnGI18b]{Geas}</p>\n<p>@Compendium[dnd5e.spells.n4JDcFKe5ikzYmAc]{Gentle Repose}</p>\n<p>@Compendium[dnd5e.spells.czXrVRx6XYRWsHAi]{Giant Insect}</p>\n<p>@Compendium[dnd5e.spells.1RzxKZzkQOoioxPj]{Glibness}</p>\n<p>@Compendium[dnd5e.spells.WmQpxfjZwF3MGUby]{Globe of Invulnerability}</p>\n<p>@Compendium[dnd5e.spells.pB7XVYwdGNcUG935]{Glyph of Warding}</p>\n<p>@Compendium[dnd5e.spells.Qf6CAZkc7ms4ZY3e]{Goodberry}</p>\n<p>@Compendium[dnd5e.spells.etgcR9wqmrhyZ0tx]{Grease}</p>\n<p>@Compendium[dnd5e.spells.tEpDmYZNGc9f5OhJ]{Greater Invisibility}</p>\n<p>@Compendium[dnd5e.spells.WzvJ7G3cqvIubsLk]{Greater Restoration}</p>\n<p>@Compendium[dnd5e.spells.TgHsuhNasPbhu8MO]{Guardian of Faith}</p>\n<p>@Compendium[dnd5e.spells.yw0tYQkOMCgKZ8Ur]{Guards and Wards}</p>\n<p>@Compendium[dnd5e.spells.P7mF2MxSuVJwHRRY]{Guidance}</p>\n<p>@Compendium[dnd5e.spells.7buEm5KhI5lP8m1z]{Guiding Bolt}</p>\n<p>@Compendium[dnd5e.spells.FSMy6VAjDnXY9vWz]{Gust of Wind}</p>",
-        "markdown": ""
-      },
-      "video": {
-        "controls": true,
-        "volume": 0.5
-      },
-      "src": null,
-      "system": {},
-      "sort": 0,
-      "ownership": {
-        "default": -1
-      },
-      "flags": {},
-      "_key": "!journal.pages!plCB5ei1JbVtBseb.Gwq0BG0orHTTCmbX"
-    },
-    {
-      "name": "H",
-      "type": "text",
-      "_id": "5pMrBRugiTmOqo8t",
-      "title": {
-        "show": true,
-        "level": 1
-      },
-      "image": {},
-      "text": {
-        "format": 1,
-        "content": "<p>@Compendium[dnd5e.spells.SLxA9QhrggTz0taU]{Hallow}</p>\n<p>@Compendium[dnd5e.spells.sTIkQK7KuQNOyY0C]{Hallucinatory Terrain}</p>\n<p>@Compendium[dnd5e.spells.tMH6Ivn4GmE1naMj]{Harm}</p>\n<p>@Compendium[dnd5e.spells.Szvk5FEVQW3uhJi5]{Haste}</p>\n<p>@Compendium[dnd5e.spells.qcYitWoSMTnKkzM1]{Heal}</p>\n<p>@Compendium[dnd5e.spells.o8Dh7fblk1d16tnO]{Healing Word}</p>\n<p>@Compendium[dnd5e.spells.2yHXEcrRbadZDr5M]{Heat Metal}</p>\n<p>@Compendium[dnd5e.spells.22dPoeXfaaAv4K3h]{Hellish Rebuke}</p>\n<p>@Compendium[dnd5e.spells.mgFqi0ev8f7Ut19y]{Heroes' Feast}</p>\n<p>@Compendium[dnd5e.spells.ge3Saet9zPTDyaoL]{Heroism}</p>\n<p>@Compendium[dnd5e.spells.BQk5Row4NymMnUQl]{Hideous Laughter}</p>\n<p>@Compendium[dnd5e.spells.l9Ju5KE7bbn3WpTm]{Hold Monster}</p>\n<p>@Compendium[dnd5e.spells.3Lo9boi7P2ro6QV4]{Hold Person}</p>\n<p>@Compendium[dnd5e.spells.j8S49Rea8b1640Zi]{Holy Aura}</p>\n<p>@Compendium[dnd5e.spells.0xmXiPiuYws1OGcX]{Hunter's Mark}</p>\n<p>@Compendium[dnd5e.spells.6g3WLOZ2u0EbaLAd]{Hypnotic Pattern}</p>",
-        "markdown": ""
-      },
-      "video": {
-        "controls": true,
-        "volume": 0.5
-      },
-      "src": null,
-      "system": {},
-      "sort": 0,
-      "ownership": {
-        "default": -1
-      },
-      "flags": {},
-      "_key": "!journal.pages!plCB5ei1JbVtBseb.5pMrBRugiTmOqo8t"
-    },
-    {
-      "name": "I",
-      "type": "text",
-      "_id": "qDa1UPF8OHCCPVM4",
-      "title": {
-        "show": true,
-        "level": 1
-      },
-      "image": {},
-      "text": {
-        "format": 1,
-        "content": "<p>@Compendium[dnd5e.spells.WN2LWEljYU6QqnRH]{Ice Storm}</p>\n<p>@Compendium[dnd5e.spells.3OZnNhunvRtPOQmH]{Identify}</p>\n<p>@Compendium[dnd5e.spells.82jM6qD9axLJsTrH]{Illusory Script}</p>\n<p>@Compendium[dnd5e.spells.ZVnL9L8v1KC9TBF4]{Imprisonment}</p>\n<p>@Compendium[dnd5e.spells.pV04y1iXoWiom6bp]{Incendiary Cloud}</p>\n<p>@Compendium[dnd5e.spells.ksaaTxIbKx2sJfia]{Inflict Wounds}</p>\n<p>@Compendium[dnd5e.spells.OVikYmSdHliAG2YD]{Insect Plague}</p>\n<p>@Compendium[dnd5e.spells.SgrEKiC6dAtvy6Pz]{Instant Summons}</p>\n<p>@Compendium[dnd5e.spells.1N8dDMMgZ1h1YJ3B]{Invisibility}</p>\n<p>@Compendium[dnd5e.spells.TfRzwEgBHHkCc6Ql]{Irresistible Dance}</p>",
-        "markdown": ""
-      },
-      "video": {
-        "controls": true,
-        "volume": 0.5
-      },
-      "src": null,
-      "system": {},
-      "sort": 0,
-      "ownership": {
-        "default": -1
-      },
-      "flags": {},
-      "_key": "!journal.pages!plCB5ei1JbVtBseb.qDa1UPF8OHCCPVM4"
-    },
-    {
-      "name": "J",
-      "type": "text",
-      "_id": "4jyYYINOE5kg9hnA",
-      "title": {
-        "show": true,
-        "level": 1
-      },
-      "image": {},
-      "text": {
-        "format": 1,
-        "content": "<p>@Compendium[dnd5e.spells.ZrTc23tToJ0JpH2h]{Jump}</p>",
-        "markdown": ""
-      },
-      "video": {
-        "controls": true,
-        "volume": 0.5
-      },
-      "src": null,
-      "system": {},
-      "sort": 0,
-      "ownership": {
-        "default": -1
-      },
-      "flags": {},
-      "_key": "!journal.pages!plCB5ei1JbVtBseb.4jyYYINOE5kg9hnA"
-    },
-    {
-      "name": "K",
-      "type": "text",
-      "_id": "rVqb9MusYjBGrk6B",
-      "title": {
-        "show": true,
-        "level": 1
-      },
-      "image": {},
-      "text": {
-        "format": 1,
-        "content": "<p>@Compendium[dnd5e.spells.1nhIxh0DsJsntCfj]{Knock}</p>",
-        "markdown": ""
-      },
-      "video": {
-        "controls": true,
-        "volume": 0.5
-      },
-      "src": null,
-      "system": {},
-      "sort": 0,
-      "ownership": {
-        "default": -1
-      },
-      "flags": {},
-      "_key": "!journal.pages!plCB5ei1JbVtBseb.rVqb9MusYjBGrk6B"
-    },
-    {
-      "name": "L",
-      "type": "text",
-      "_id": "54V7wpfYdnPtb6WS",
-      "title": {
-        "show": true,
-        "level": 1
-      },
-      "image": {},
-      "text": {
-        "format": 1,
-        "content": "<p>@Compendium[dnd5e.spells.W4Qx5z0id6da0vqg]{Legend Lore}</p>\n<p>@Compendium[dnd5e.spells.F0GsG0SJzsIOacwV]{Lesser Restoration}</p>\n<p>@Compendium[dnd5e.spells.MRxldJd6C4bsBo3O]{Levitate}</p>\n<p>@Compendium[dnd5e.spells.Bnn9Nzajixvow9xi]{Light}</p>\n<p>@Compendium[dnd5e.spells.IyikgTEOTv701jgQ]{Lightning Bolt}</p>\n<p>@Compendium[dnd5e.spells.Iv2qqSAT7OkXKPFx]{Locate Animals or Plants}</p>\n<p>@Compendium[dnd5e.spells.gXtzz9t1DTzJeLr4]{Locate Creature}</p>\n<p>@Compendium[dnd5e.spells.SleYkHovQ8NagmeV]{Locate Object}</p>\n<p>@Compendium[dnd5e.spells.B0pnIcc52O6G8hi8]{Longstrider}</p>",
-        "markdown": ""
-      },
-      "video": {
-        "controls": true,
-        "volume": 0.5
-      },
-      "src": null,
-      "system": {},
-      "sort": 0,
-      "ownership": {
-        "default": -1
-      },
-      "flags": {},
-      "_key": "!journal.pages!plCB5ei1JbVtBseb.54V7wpfYdnPtb6WS"
-    },
-    {
-      "name": "M",
-      "type": "text",
-      "_id": "ILRZw1QbK6ixZhac",
-      "title": {
-        "show": true,
-        "level": 1
-      },
-      "image": {},
-      "text": {
-        "format": 1,
-        "content": "<p>@Compendium[dnd5e.spells.CKZTpZlxj7hjjo2H]{Mage Armor}</p>\n<p>@Compendium[dnd5e.spells.Utk1OQRwYkMkFRD3]{Mage Hand}</p>\n<p>@Compendium[dnd5e.spells.y8A4HfTwd93ypdEz]{Magic Circle}</p>\n<p>@Compendium[dnd5e.spells.ej6wyY4G1gOcb1U6]{Magic Jar}</p>\n<p>@Compendium[dnd5e.spells.41JIhpDyM9Anm7cs]{Magic Missile}</p>\n<p>@Compendium[dnd5e.spells.7v06rdmUakoTk1LQ]{Magic Mouth}</p>\n<p>@Compendium[dnd5e.spells.Sgjrf8qqv97CCWM4]{Magic Weapon}</p>\n<p>@Compendium[dnd5e.spells.pn4SnsFDvYDiE6rC]{Magnificent Mansion}</p>\n<p>@Compendium[dnd5e.spells.nslx2nT3p4lNkmdp]{Major Image}</p>\n<p>@Compendium[dnd5e.spells.Pyzmm8R7rVsNAPsd]{Mass Cure Wounds}</p>\n<p>@Compendium[dnd5e.spells.Y6oItIuhOJZ0i0FC]{Mass Heal}</p>\n<p>@Compendium[dnd5e.spells.34ddoYIrnOZ2GFYi]{Mass Healing Word}</p>\n<p>@Compendium[dnd5e.spells.5OGFdJw35QXp6mh6]{Mass Suggestion}</p>\n<p>@Compendium[dnd5e.spells.clwv2PWOcT822hlr]{Maze}</p>\n<p>@Compendium[dnd5e.spells.64uo4fHriHLjRUrX]{Meld into Stone}</p>\n<p>@Compendium[dnd5e.spells.kjmjY0zlE6IEiQVL]{Mending}</p>\n<p>@Compendium[dnd5e.spells.icZokbgV1jIMpNCv]{Message}</p>\n<p>@Compendium[dnd5e.spells.mF52ldF79Cr7wfQo]{Meteor Swarm}</p>\n<p>@Compendium[dnd5e.spells.bllEWfm9xfEKynhv]{Mind Blank}</p>\n<p>@Compendium[dnd5e.spells.oIzA2MEHwxhtQneU]{Minor Illusion}</p>\n<p>@Compendium[dnd5e.spells.f38w5rd9SgdmWc6F]{Mirage Arcane}</p>\n<p>@Compendium[dnd5e.spells.X4c8xCkmF8U9HUMz]{Mirror Image}</p>\n<p>@Compendium[dnd5e.spells.MBMaQLwoy05qzMJ3]{Mislead}</p>\n<p>@Compendium[dnd5e.spells.wqfAVANuQonNBgnL]{Misty Step}</p>\n<p>@Compendium[dnd5e.spells.r3243JU4AyQJyfX4]{Modify Memory}</p>\n<p>@Compendium[dnd5e.spells.bV3yun6MIuFj71Er]{Moonbeam}</p>\n<p>@Compendium[dnd5e.spells.yI0XWIgI0IGGsR3R]{Move Earth}</p>",
-        "markdown": ""
-      },
-      "video": {
-        "controls": true,
-        "volume": 0.5
-      },
-      "src": null,
-      "system": {},
-      "sort": 0,
-      "ownership": {
-        "default": -1
-      },
-      "flags": {},
-      "_key": "!journal.pages!plCB5ei1JbVtBseb.ILRZw1QbK6ixZhac"
-    },
-    {
-      "name": "N",
-      "type": "text",
-      "_id": "4FlMOQZ7aUuergFe",
-      "title": {
-        "show": true,
-        "level": 1
-      },
-      "image": {},
-      "text": {
-        "format": 1,
-        "content": "<p>@Compendium[dnd5e.spells.aU62xVUBYkAQWIHv]{Nondetection}</p>",
-        "markdown": ""
-      },
-      "video": {
-        "controls": true,
-        "volume": 0.5
-      },
-      "src": null,
-      "system": {},
-      "sort": 0,
-      "ownership": {
-        "default": -1
-      },
-      "flags": {},
-      "_key": "!journal.pages!plCB5ei1JbVtBseb.4FlMOQZ7aUuergFe"
-    },
-    {
-      "name": "P",
-      "type": "text",
-      "_id": "GaGqOeIqwylIgOsB",
-      "title": {
-        "show": true,
-        "level": 1
-      },
-      "image": {},
-      "text": {
-        "format": 1,
-        "content": "<p>@Compendium[dnd5e.spells.pRMvmknwLf2tdMTj]{Pass without Trace}</p>\n<p>@Compendium[dnd5e.spells.d9MwcXi7Il3HROXd]{Passwall}</p>\n<p>@Compendium[dnd5e.spells.BYNvBJzHcF5VJhXw]{Phantasmal Killer}</p>\n<p>@Compendium[dnd5e.spells.wpx42mtoZ5BmXRs1]{Phantom Steed}</p>\n<p>@Compendium[dnd5e.spells.fkREcytuZ8sngWtC]{Planar Ally}</p>\n<p>@Compendium[dnd5e.spells.42O2aNBW7vK90gTL]{Planar Binding}</p>\n<p>@Compendium[dnd5e.spells.J6Jpw5XzB5aTeqnz]{Plane Shift}</p>\n<p>@Compendium[dnd5e.spells.YWtwzp6ZnQJMEmVW]{Plant Growth}</p>\n<p>@Compendium[dnd5e.spells.g2u9PYfqWQAyg9OI]{Poison Spray}</p>\n<p>@Compendium[dnd5e.spells.04nMsTWkIFvkbXlY]{Polymorph}</p>\n<p>@Compendium[dnd5e.spells.dmvaMLFWFtv0qx0S]{Power Word Kill}</p>\n<p>@Compendium[dnd5e.spells.35j2QIMmIk6aEdxj]{Power Word Stun}</p>\n<p>@Compendium[dnd5e.spells.MOEmz9N0j0QPkKEE]{Prayer of Healing}</p>\n<p>@Compendium[dnd5e.spells.udsLtG0BugXHR2JQ]{Prestidigitation}</p>\n<p>@Compendium[dnd5e.spells.eGMhwmuleAM46C6L]{Prismatic Spray}</p>\n<p>@Compendium[dnd5e.spells.jmfu8zj4zjjzUbeh]{Prismatic Wall}</p>\n<p>@Compendium[dnd5e.spells.NJgxf7pmSsBArIG7]{Private Sanctum}</p>\n<p>@Compendium[dnd5e.spells.eCPQuQkIabFKTl9u]{Produce Flame}</p>\n<p>@Compendium[dnd5e.spells.bA2sk9eMKBeY7EPD]{Programmed Illusion}</p>\n<p>@Compendium[dnd5e.spells.ePhRKHXRE7l1sEoQ]{Project Image}</p>\n<p>@Compendium[dnd5e.spells.j8NtLXOOJ3GAKF8I]{Protection from Energy}</p>\n<p>@Compendium[dnd5e.spells.xmDBqZhRVrtLP8h2]{Protection from Evil and Good}</p>\n<p>@Compendium[dnd5e.spells.MAxM77CDUu8dgIRQ]{Protection from Poison}</p>\n<p>@Compendium[dnd5e.spells.Kn7K5PtYUJAKZTTp]{Purify Food and Drink}</p>",
-        "markdown": ""
-      },
-      "video": {
-        "controls": true,
-        "volume": 0.5
-      },
-      "src": null,
-      "system": {},
-      "sort": 0,
-      "ownership": {
-        "default": -1
-      },
-      "flags": {},
-      "_key": "!journal.pages!plCB5ei1JbVtBseb.GaGqOeIqwylIgOsB"
-    },
-    {
-      "name": "R",
-      "type": "text",
-      "_id": "YM7RJylVdSyhAwbI",
-      "title": {
-        "show": true,
-        "level": 1
-      },
-      "image": {},
-      "text": {
-        "format": 1,
-        "content": "<p>@Compendium[dnd5e.spells.AGFMPAmuzwWO6Dfz]{Raise Dead}</p>\n<p>@Compendium[dnd5e.spells.ODhLKBxLnvvLOnw1]{Ray of Enfeeblement}</p>\n<p>@Compendium[dnd5e.spells.ctW81uiX56xZR2c5]{Ray of Frost}</p>\n<p>@Compendium[dnd5e.spells.9kGrFXnLiRg3Xnbo]{Regenerate}</p>\n<p>@Compendium[dnd5e.spells.zMEo5DKK8uxsuWnq]{Reincarnate}</p>\n<p>@Compendium[dnd5e.spells.XZhdgVK3cLoxNCQl]{Remove Curse}</p>\n<p>@Compendium[dnd5e.spells.1ADstb0Xec6HHRcU]{Resilient Sphere}</p>\n<p>@Compendium[dnd5e.spells.dl8YwvMboBqX2OC4]{Resistance}</p>\n<p>@Compendium[dnd5e.spells.jhhT9PsHy5A7EojO]{Resurrection}</p>\n<p>@Compendium[dnd5e.spells.ERCv7yuRkQ0YjGx6]{Reverse Gravity}</p>\n<p>@Compendium[dnd5e.spells.LmRHHMtplpxr9fX6]{Revivify}</p>\n<p>@Compendium[dnd5e.spells.ap4dmtshjEbwU3Ts]{Rope Trick}</p>",
-        "markdown": ""
-      },
-      "video": {
-        "controls": true,
-        "volume": 0.5
-      },
-      "src": null,
-      "system": {},
-      "sort": 0,
-      "ownership": {
-        "default": -1
-      },
-      "flags": {},
-      "_key": "!journal.pages!plCB5ei1JbVtBseb.YM7RJylVdSyhAwbI"
-    },
-    {
-      "name": "S",
-      "type": "text",
-      "_id": "yEK0RUmDMxWubBlS",
-      "title": {
-        "show": true,
-        "level": 1
-      },
-      "image": {},
-      "text": {
-        "format": 1,
-        "content": "<p>@Compendium[dnd5e.spells.n9pJzTDsAwQxJVRl]{Sacred Flame}</p>\n<p>@Compendium[dnd5e.spells.gvdA9nPuWLck4tBl]{Sanctuary}</p>\n<p>@Compendium[dnd5e.spells.7u2obDvuvtZBkTfq]{Scorching Ray}</p>\n<p>@Compendium[dnd5e.spells.fVbCxFRaORalHB20]{Scrying}</p>\n<p>@Compendium[dnd5e.spells.8sgwRh8NUNkn9Vi0]{Secret Chest}</p>\n<p>@Compendium[dnd5e.spells.DQzlB5Y3k791W5bH]{See Invisibility}</p>\n<p>@Compendium[dnd5e.spells.mbFw57uyfLkyiw5k]{Seeming}</p>\n<p>@Compendium[dnd5e.spells.GtGjNjPBgUHxGYAD]{Sending}</p>\n<p>@Compendium[dnd5e.spells.wvLbtemkH8gyBpdc]{Sequester}</p>\n<p>@Compendium[dnd5e.spells.N2UEFq8X5LRsLcOZ]{Shapechange}</p>\n<p>@Compendium[dnd5e.spells.wJKpSvSTbSkTjqyb]{Shatter}</p>\n<p>@Compendium[dnd5e.spells.z1mx84ONwkXKUZd7]{Shield}</p>\n<p>@Compendium[dnd5e.spells.jZ6JNykRtdQ90MOo]{Shield of Faith}</p>\n<p>@Compendium[dnd5e.spells.VzgFzcmocr1X1cp4]{Shillelagh}</p>\n<p>@Compendium[dnd5e.spells.XvbiNhNqXXIFisIy]{Shocking Grasp}</p>\n<p>@Compendium[dnd5e.spells.5VhqFROQYjr1P9lp]{Silence}</p>\n<p>@Compendium[dnd5e.spells.BrBZdCCrJRIVg7YX]{Silent Image}</p>\n<p>@Compendium[dnd5e.spells.jccbeBIfLrqEZnDP]{Simulacrum}</p>\n<p>@Compendium[dnd5e.spells.KhwiSi9fwVfUPtku]{Sleep}</p>\n<p>@Compendium[dnd5e.spells.dhqBY4TvVjxVmOZd]{Sleet Storm}</p>\n<p>@Compendium[dnd5e.spells.yqUDoxk4x0NWG5Bz]{Slow}</p>\n<p>@Compendium[dnd5e.spells.8zT7njvqbpXs4Cel]{Spare the Dying}</p>\n<p>@Compendium[dnd5e.spells.aL1F8fvYLtNzUbKu]{Speak with Animals}</p>\n<p>@Compendium[dnd5e.spells.I2LUSF5ogc7Bj62e]{Speak with Dead}</p>\n<p>@Compendium[dnd5e.spells.2VXGS206tuChoeXy]{Speak with Plants}</p>\n<p>@Compendium[dnd5e.spells.KJRVzeMQXPj8Gtyx]{Spider Climb}</p>\n<p>@Compendium[dnd5e.spells.9gYGkrL6qFTsE6fw]{Spike Growth}</p>\n<p>@Compendium[dnd5e.spells.uCud2s4TjMfjiXUb]{Spirit Guardians}</p>\n<p>@Compendium[dnd5e.spells.JbxsYXxSOTZbf9I0]{Spiritual Weapon}</p>\n<p>@Compendium[dnd5e.spells.TwlD4PLcltv7Xh7j]{Stinking Cloud}</p>\n<p>@Compendium[dnd5e.spells.QvGcdRUSNRKEQJlK]{Stone Shape}</p>\n<p>@Compendium[dnd5e.spells.ReMbjfeOKoSj3O79]{Stoneskin}</p>\n<p>@Compendium[dnd5e.spells.7KjExw0kmuqERa7C]{Storm of Vengeance}</p>\n<p>@Compendium[dnd5e.spells.zMAWdyc8UVb37BK4]{Suggestion}</p>\n<p>@Compendium[dnd5e.spells.2RC0EyvBLPH88PZF]{Sunbeam}</p>\n<p>@Compendium[dnd5e.spells.hzK7FQya0BDjSmLE]{Sunburst}</p>\n<p>@Compendium[dnd5e.spells.B2kbmgbA2WQR00kx]{Symbol}</p>",
-        "markdown": ""
-      },
-      "video": {
-        "controls": true,
-        "volume": 0.5
-      },
-      "src": null,
-      "system": {},
-      "sort": 0,
-      "ownership": {
-        "default": -1
-      },
-      "flags": {},
-      "_key": "!journal.pages!plCB5ei1JbVtBseb.yEK0RUmDMxWubBlS"
-    },
-    {
-      "name": "T",
-      "type": "text",
-      "_id": "U91wa2xksFdN49jc",
-      "title": {
-        "show": true,
-        "level": 1
-      },
-      "image": {},
-      "text": {
-        "format": 1,
-        "content": "<p>@Compendium[dnd5e.spells.HQfd7jJyULIoGxrZ]{Telekinesis}</p>\n<p>@Compendium[dnd5e.spells.uAwtVZkiSTyP6ORB]{Telepathic Bond}</p>\n<p>@Compendium[dnd5e.spells.L4J89JXqbKs6puEV]{Teleport}</p>\n<p>@Compendium[dnd5e.spells.8aWtP5hcrmcEesBW]{Teleportation Circle}</p>\n<p>@Compendium[dnd5e.spells.MUO1uYN7JR1hm4dR]{Thaumaturgy}</p>\n<p>@Compendium[dnd5e.spells.WTbOQBsarsL1LuXJ]{Thunderwave}</p>\n<p>@Compendium[dnd5e.spells.JYuRBwxpoFhXduvD]{Time Stop}</p>\n<p>@Compendium[dnd5e.spells.NXWWWgHtWb7Nv21F]{Tiny Hut}</p>\n<p>@Compendium[dnd5e.spells.gopnZvS0c2jD5FP8]{Tongues}</p>\n<p>@Compendium[dnd5e.spells.s7nXgot5gGZVcMrv]{Transport via Plants}</p>\n<p>@Compendium[dnd5e.spells.DUBgwHPakcLDkB6W]{Tree Stride}</p>\n<p>@Compendium[dnd5e.spells.QbQZKoXOgHWN06aa]{True Polymorph}</p>\n<p>@Compendium[dnd5e.spells.qLeEXZDbW5y4bmLY]{True Resurrection}</p>\n<p>@Compendium[dnd5e.spells.XzkJpE6XpZfKjODD]{True Seeing}</p>\n<p>@Compendium[dnd5e.spells.mGGlcLdggHwcL7MG]{True Strike}</p>",
-        "markdown": ""
-      },
-      "video": {
-        "controls": true,
-        "volume": 0.5
-      },
-      "src": null,
-      "system": {},
-      "sort": 0,
-      "ownership": {
-        "default": -1
-      },
-      "flags": {},
-      "_key": "!journal.pages!plCB5ei1JbVtBseb.U91wa2xksFdN49jc"
-    },
-    {
-      "name": "U",
-      "type": "text",
-      "_id": "Vgc0SlCji7PgJXH1",
-      "title": {
-        "show": true,
-        "level": 1
-      },
-      "image": {},
-      "text": {
-        "format": 1,
-        "content": "<p>@Compendium[dnd5e.spells.ccduLIvutyNqvkgv]{Unseen Servant}</p>",
-        "markdown": ""
-      },
-      "video": {
-        "controls": true,
-        "volume": 0.5
-      },
-      "src": null,
-      "system": {},
-      "sort": 0,
-      "ownership": {
-        "default": -1
-      },
-      "flags": {},
-      "_key": "!journal.pages!plCB5ei1JbVtBseb.Vgc0SlCji7PgJXH1"
-    },
-    {
-      "name": "V",
-      "type": "text",
-      "_id": "nk7LKOPdp2p513fO",
-      "title": {
-        "show": true,
-        "level": 1
-      },
-      "image": {},
-      "text": {
-        "format": 1,
-        "content": "<p>@Compendium[dnd5e.spells.UfHQhA54M4323gVO]{Vampiric Touch}</p>\n<p>@Compendium[dnd5e.spells.cdrYKaFi98YWaBMw]{Vicious Mockery}</p>",
-        "markdown": ""
-      },
-      "video": {
-        "controls": true,
-        "volume": 0.5
-      },
-      "src": null,
-      "system": {},
-      "sort": 0,
-      "ownership": {
-        "default": -1
-      },
-      "flags": {},
-      "_key": "!journal.pages!plCB5ei1JbVtBseb.nk7LKOPdp2p513fO"
-    },
-    {
-      "name": "W",
-      "type": "text",
-      "_id": "OVPruCAPRdXlmy7f",
-      "title": {
-        "show": true,
-        "level": 1
-      },
-      "image": {},
-      "text": {
-        "format": 1,
-        "content": "<p>@Compendium[dnd5e.spells.X3DrXgxjwI2dvkD6]{Wall of Fire}</p>\n<p>@Compendium[dnd5e.spells.o9ZCvuD2B1OTcubb]{Wall of Force}</p>\n<p>@Compendium[dnd5e.spells.fzZnVKLmBMo2f5up]{Wall of Ice}</p>\n<p>@Compendium[dnd5e.spells.NmoRmM1mhuM3pqnY]{Wall of Stone}</p>\n<p>@Compendium[dnd5e.spells.AQsBc94ES7W7s7iG]{Wall of Thorns}</p>\n<p>@Compendium[dnd5e.spells.JVhKeanAXZH62DrF]{Warding Bond}</p>\n<p>@Compendium[dnd5e.spells.13uVuBQP6VaiSPvC]{Water Breathing}</p>\n<p>@Compendium[dnd5e.spells.YBda6nLKjxdT1LbS]{Water Walk}</p>\n<p>@Compendium[dnd5e.spells.UJJu9c2UvCzVljiP]{Web}</p>\n<p>@Compendium[dnd5e.spells.Wl2vtJ4hCt2tpWfR]{Weird}</p>\n<p>@Compendium[dnd5e.spells.8PJAsHmbu6UgDHC0]{Wind Walk}</p>\n<p>@Compendium[dnd5e.spells.ew6GA8dJy2spQmFW]{Wind Wall}</p>\n<p>@Compendium[dnd5e.spells.3okM6Gn63zzEULkz]{Wish}</p>\n<p>@Compendium[dnd5e.spells.76C0FdcxlU8F9Rl2]{Word of Recall}</p>",
-        "markdown": ""
-      },
-      "video": {
-        "controls": true,
-        "volume": 0.5
-      },
-      "src": null,
-      "system": {},
-      "sort": 0,
-      "ownership": {
-        "default": -1
-      },
-      "flags": {},
-      "_key": "!journal.pages!plCB5ei1JbVtBseb.OVPruCAPRdXlmy7f"
-    },
-    {
-      "name": "Z",
-      "type": "text",
-      "_id": "X7MUx4s27wFrY6Df",
-      "title": {
-        "show": true,
-        "level": 1
-      },
-      "image": {},
-      "text": {
-        "format": 1,
-        "content": "<p>@Compendium[dnd5e.spells.CylBa7jR8DSbo8Z3]{Zone of Truth}</p>",
-        "markdown": ""
-      },
-      "video": {
-        "controls": true,
-        "volume": 0.5
-      },
-      "src": null,
-      "system": {},
-      "sort": 0,
       "ownership": {
         "default": -1
       },
@@ -599,17 +996,13 @@
   "ownership": {
     "default": 0
   },
-  "flags": {
-    "core": {
-      "viewMode": 2
-    }
-  },
+  "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.0.2",
-    "coreVersion": "10.285",
-    "createdTime": 1660925148884,
-    "modifiedTime": 1663018863337,
+    "systemVersion": "2.0.3",
+    "coreVersion": "10.288",
+    "createdTime": 1666736820526,
+    "modifiedTime": 1666737548932,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "folder": null,
