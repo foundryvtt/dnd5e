@@ -690,10 +690,12 @@ export default class Actor5e extends Actor {
     const levels = cls.system.levels;
     const prog = CONFIG.DND5E.spellcastingTypes.leveled.progression[cls.spellcasting.progression];
     if ( !prog ) return;
-
-    // Single-classed, non-full progression rounds up, rather than down.
-    const rounding = ( (count === 1) || prog.roundUp) ? Math.ceil : Math.floor;
+    const rounding = prog.roundUp ? Math.ceil : Math.floor;
     progression.slot += rounding(levels / prog.divisor ?? 1);
+    // Single-classed, non-full progression rounds up, rather than down.
+    if ( (count === 1) && (prog.divisor > 1) && progression.slot ) {
+      progression.slot = Math.ceil(levels / prog.divisor);
+    }
   }
 
   /* -------------------------------------------- */
