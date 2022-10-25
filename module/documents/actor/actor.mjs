@@ -651,9 +651,9 @@ export default class Actor5e extends Actor {
         );
 
         if ( allowed && (type === "pact") ) {
-          this.constructor._computePactProgression(progression, this, cls, types.pact);
+          this.constructor.computePactProgression(progression, this, cls, types.pact);
         } else if ( allowed && (type === "leveled") ) {
-          this.constructor._computeLeveledProgression(progression, this, cls, types.leveled);
+          this.constructor.computeLeveledProgression(progression, this, cls, types.leveled);
         }
       }
     }
@@ -672,8 +672,8 @@ export default class Actor5e extends Actor {
        */
       const allowed = Hooks.call(`dnd5e.prepare${type.capitalize()}Slots`, spells, this, progression);
 
-      if ( allowed && (type === "pact") ) this.constructor._preparePactSlots(spells, this, progression);
-      else if ( allowed && (type === "leveled") ) this.constructor._prepareLeveledSlots(spells, this, progression);
+      if ( allowed && (type === "pact") ) this.constructor.preparePactSlots(spells, this, progression);
+      else if ( allowed && (type === "leveled") ) this.constructor.prepareLeveledSlots(spells, this, progression);
     }
   }
 
@@ -686,13 +686,14 @@ export default class Actor5e extends Actor {
    * @param {Item5e} cls           Class for whom this progression is being computed.
    * @param {number} count         Number of classes with this type of spellcasting.
    */
-  static _computeLeveledProgression(progression, actor, cls, count) {
+  static computeLeveledProgression(progression, actor, cls, count) {
     const levels = cls.system.levels;
     const prog = CONFIG.DND5E.spellcastingTypes.leveled.progression[cls.spellcasting.progression];
     if ( !prog ) return;
 
-    const rounder = ( (count === 1) || prog.roundUp) ? Math.ceil : Math.floor;
-    progression.slot += rounder(levels / prog.divisor ?? 1);
+    // Single-classed, non-full progression rounds up, rather than down.
+    const rounding = ( (count === 1) || prog.roundUp) ? Math.ceil : Math.floor;
+    progression.slot += rounding(levels / prog.divisor ?? 1);
   }
 
   /* -------------------------------------------- */
@@ -704,7 +705,7 @@ export default class Actor5e extends Actor {
    * @param {Item5e} cls           Class for whom this progression is being computed.
    * @param {number} count         Number of classes with this type of spellcasting.
    */
-  static _computePactProgression(progression, actor, cls, count) {
+  static computePactProgression(progression, actor, cls, count) {
     progression.pact += cls.system.levels;
   }
 
@@ -716,7 +717,7 @@ export default class Actor5e extends Actor {
    * @param {Actor5e} actor        Actor for whom the data is being prepared.
    * @param {object} progression   Spellcasting progression data.
    */
-  static _prepareLeveledSlots(spells, actor, progression) {
+  static prepareLeveledSlots(spells, actor, progression) {
     const levels = Math.clamped(progression.slot, 0, CONFIG.DND5E.maxLevel);
     const slots = CONFIG.DND5E.SPELL_SLOT_TABLE[Math.min(levels, CONFIG.DND5E.SPELL_SLOT_TABLE.length) - 1] ?? [];
     for ( const [n, slot] of Object.entries(spells) ) {
@@ -735,7 +736,7 @@ export default class Actor5e extends Actor {
    * @param {Actor5e} actor        Actor for whom the data is being prepared.
    * @param {object} progression   Spellcasting progression data.
    */
-  static _preparePactSlots(spells, actor, progression) {
+  static preparePactSlots(spells, actor, progression) {
     // Pact spell data:
     // - pact.level: Slot level for pact casting
     // - pact.max: Total number of pact slots
@@ -754,15 +755,16 @@ export default class Actor5e extends Actor {
     // TODO: Allow pact level and slot count to be configured
     if ( pactLevel > 0 ) {
       spells.pact.level = Math.ceil(Math.min(10, pactLevel) / 2); // TODO: Allow custom max pact level
-      if ( override !== null ) spells.pact.max = Math.max(override, 1);
-      else {
+      if ( override === null ) {
         spells.pact.max = Math.max(1, Math.min(pactLevel, 2), Math.min(pactLevel - 8, 3), Math.min(pactLevel - 13, 4));
+      } else {
+        spells.pact.max = Math.max(override, 1);
       }
       spells.pact.value = Math.min(spells.pact.value, spells.pact.max);
     }
 
     else {
-      spells.pact.max = parseInt(spells.pact.override) || 0;
+      spells.pact.max = override || 0;
       spells.pact.level = spells.pact.max > 0 ? 1 : 0;
     }
   }
