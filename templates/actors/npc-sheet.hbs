@@ -115,8 +115,10 @@
             {{#each system.abilities as |ability id|}}
                 <li class="ability {{#if ability.proficient}}proficient{{/if}}" data-ability="{{id}}">
                     <h4 class="ability-name box-title rollable">{{ability.label}}</h4>
-                    {{numberInput ability.value name=(concat "system.abilities." id ".value")
-                        class="ability-score" placeholder="10"}}
+                   {{!-- {{numberInput ability.value name=(concat "system.abilities." id ".value")
+                        class="ability-score" placeholder="10"}}--}}
+                    <input type="text" value="{{ability.value}}" name="{{concat "system.abilities." id ".value"}}"
+                        class="ability-score" placeholder="10" data-dtype="Number">
                     <div class="ability-modifiers flexrow">
                         <span class="ability-mod" title="{{ localize 'DND5E.Modifier' }}">{{numberFormat ability.mod decimals=0 sign=true}}</span>
                         <input type="hidden" name="system.abilities.{{id}}.proficient" value="{{ability.baseProf}}" data-dtype="Number"/>
