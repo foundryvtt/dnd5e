@@ -309,7 +309,6 @@ export function migrateItemData(item, migrationData) {
   const updateData = {};
   _migrateItemSpellcasting(item, updateData);
   _migrateArmorType(item, updateData);
-  _migrateItemCriticalData(item, updateData);
   _migrateDocumentIcon(item, updateData, migrationData);
 
   // Migrate embedded effects
@@ -651,25 +650,6 @@ function _migrateItemSpellcasting(item, updateData) {
 function _migrateArmorType(item, updateData) {
   if ( item.type !== "equipment" ) return updateData;
   if ( item.system?.armor?.type === "bonus" ) updateData["system.armor.type"] = "trinket";
-  return updateData;
-}
-
-/* -------------------------------------------- */
-
-/**
- * Set the item's `critical` property to a proper object value.
- * @param {object} item        Item data to migrate.
- * @param {object} updateData  Existing update to expand upon.
- * @returns {object}           The updateData to apply.
- * @private
- */
-function _migrateItemCriticalData(item, updateData) {
-  const hasCritData = game.system.template.Item[item.type]?.templates?.includes("action");
-  if ( !hasCritData || (foundry.utils.getType(item.system.critical) === "Object") ) return updateData;
-  updateData["system.critical"] = {
-    threshold: null,
-    damage: null
-  };
   return updateData;
 }
 
