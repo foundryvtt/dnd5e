@@ -684,18 +684,22 @@ export default class ActorSheet5e extends ActorSheet {
   /* -------------------------------------------- */
 
   /**
-   * Handle input changes to numeric form fields, allowing them to accept delta-typed inputs
+   * Handle input changes to numeric form fields, allowing them to accept delta-typed inputs, uses REGEX to determine if input is valid or not.
    * @param {Event} event  Triggering event.
    * @private
    */
   _onChangeInputDelta(event) {
     const input = event.target;
     const value = input.value;
-    if ( ["+", "-"].includes(value[0]) ) {
-      let delta = parseFloat(value);
-      input.value = Number(foundry.utils.getProperty(this.actor, input.name)) + delta;
+    if(value.match(/^([\d+-]\d*$)/) != null){
+      if ( ["+", "-"].includes(value[0]) ) {
+        let delta = parseFloat(value);
+        input.value = Number(foundry.utils.getProperty(this.actor, input.name)) + delta;
+      }
+     else if ( value[0] === "=" ) input.value = value.slice(1);
+    }else{
+      input.value = Number(foundry.utils.getProperty(this.actor, input.name));
     }
-    else if ( value[0] === "=" ) input.value = value.slice(1);
   }
 
   /* -------------------------------------------- */
