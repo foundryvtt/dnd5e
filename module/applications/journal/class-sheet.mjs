@@ -1,3 +1,4 @@
+import Actor5e from "../../documents/actor/actor.mjs";
 import JournalEditor from "./journal-editor.mjs";
 
 /**
@@ -175,18 +176,53 @@ export default class JournalClassPageSheet extends JournalPageSheet {
     const spellcasting = item.spellcasting;
     if ( !spellcasting || (spellcasting.progression === "none") ) return null;
 
-    const items = [item.toObject()];
-    let classId = item.id;
-    if ( item.type === "subclass" ) {
-      classId = foundry.utils.randomID();
-      items.push({_id: classId, name: "tmp-class", type: "class", system: {identifier: item.system.classIdentifier}});
-    }
-    const actor = await Actor.implementation.create({name: "tmp", type: "character", items}, {temporary: true});
-
     const table = { rows: [] };
 
-    // Pact Progression
-    if ( spellcasting.progression === "pact" ) {
+    let cls;
+    if ( item.type === "class" ) {
+      cls = item.clone();
+    } else {
+      cls = await Item.implementation.create({
+        name: "tmp", type: "class", system: {spellcasting: { progression: spellcasting.progression }}
+      }, {temporary: true});
+    }
+
+    if ( spellcasting.type === "leveled" ) {
+      const spells = {};
+      const maxSpellLevel = CONFIG.DND5E.SPELL_SLOT_TABLE[CONFIG.DND5E.SPELL_SLOT_TABLE.length - 1].length;
+      Array.fromRange(maxSpellLevel, 1).forEach(l => spells[`spell${l}`] = {});
+
+      let largestSlot;
+      for ( const level of Array.fromRange(CONFIG.DND5E.maxLevel, 1).reverse() ) {
+        const progression = { slot: 0 };
+        cls.updateSource({system: {levels: level}});
+        Actor5e.computeClassProgression(progression, null, cls, 1);
+        Actor5e.prepareSpellcastingSlots(spells, null, "leveled", progression);
+
+        if ( !largestSlot ) largestSlot = Object.entries(spells).reduce((slot, [key, data]) => {
+          if ( !data.max ) return slot;
+          const level = parseInt(key.slice(5));
+          if ( !Number.isNaN(level) && (level > slot) ) return level;
+          return slot;
+        }, -1);
+
+        table.rows.push(Array.fromRange(largestSlot, 1).map(spellLevel => {
+          return {class: "spell-slots", content: spells[`spell${spellLevel}`]?.max || "&mdash;"};
+        }));
+      }
+
+      // Prepare headers & columns
+      table.headers = [
+        [{content: game.i18n.localize("JOURNALENTRYPAGE.DND5E.Class.SpellSlotsPerSpellLevel"), colSpan: largestSlot}],
+        Array.fromRange(largestSlot, 1).map(spellLevel => ({content: spellLevel.ordinalString()}))
+      ];
+      table.cols = [{class: "spellcasting", span: largestSlot}];
+      table.rows.reverse();
+    }
+
+    else if ( spellcasting.type === "pact" ) {
+      const spells = { pact: {} };
+
       table.headers = [[
         { content: game.i18n.localize("JOURNALENTRYPAGE.DND5E.Class.SpellSlots") },
         { content: game.i18n.localize("JOURNALENTRYPAGE.DND5E.Class.SpellSlotLevel") }
@@ -195,45 +231,29 @@ export default class JournalClassPageSheet extends JournalPageSheet {
 
       // Loop through each level, gathering "Spell Slots" & "Slot Level" for each one
       for ( const level of Array.fromRange(CONFIG.DND5E.maxLevel, 1) ) {
-        actor.items.get(classId).updateSource({"system.levels": level});
-        actor.reset();
+        const progression = { pact: 0 };
+        cls.updateSource({system: {levels: level}});
+        Actor5e.computeClassProgression(progression, null, cls, 1);
+        Actor5e.prepareSpellcastingSlots(spells, null, "pact", progression);
         table.rows.push([
-          { class: "spell-slots", content: `${actor.system.spells.pact.max}` },
-          { class: "slot-level", content: actor.system.spells.pact.level.ordinalString() }
+          { class: "spell-slots", content: `${spells.pact.max}` },
+          { class: "slot-level", content: spells.pact.level.ordinalString() }
         ]);
       }
     }
 
-    // Leveled Progression
     else {
-      // Get the max spell slot size based on progression
-      actor.items.get(classId).updateSource({"system.levels": CONFIG.DND5E.maxLevel});
-      actor.reset();
-      const largestSlot = Object.entries(actor.system.spells).reduce((slot, [key, data]) => {
-        if ( !data.max ) return slot;
-        const level = parseInt(key.slice(5));
-        if ( !Number.isNaN(level) && (level > slot) ) return level;
-        return slot;
-      }, -1);
-
-      // Prepare headers & columns
-      table.headers = [
-        [{content: game.i18n.localize("JOURNALENTRYPAGE.DND5E.Class.SpellSlotsPerSpellLevel"), colSpan: largestSlot}],
-        Array.fromRange(largestSlot, 1).map(spellLevel => ({content: spellLevel.ordinalString()}))
-      ];
-      table.cols = [{class: "spellcasting", span: largestSlot}];
-
-      // Loop through each level, gathering max slots for each level
-      for ( const level of Array.fromRange(CONFIG.DND5E.maxLevel, 1) ) {
-        actor.items.get(classId).updateSource({"system.levels": level});
-        actor.reset();
-        const cells = [];
-        for ( const spellLevel of Array.fromRange(largestSlot, 1) ) {
-          const max = actor.system.spells[`spell${spellLevel}`]?.max;
-          cells.push({class: "spell-slots", content: max || "&mdash;"});
-        }
-        table.rows.push(cells);
-      }
+      /**
+       * A hook event that fires to generate the table for custom spellcasting types.
+       * The actual hook names include the spellcasting type (e.g. `dnd5e.buildPsionicSpellcastingTable`).
+       * @param {object} table  Table definition being built. *Will be mutated.*
+       * @param {Item5e} cls    Synthetic class with the proper spellcasting set.
+       * @function dnd5e.buildSpellcastingTable
+       * @memberof hookEvents
+       */
+      Hooks.callAll(
+        `dnd5e.build${type.capitalize()}SpellcastingTable`, table, cls
+      );
     }
 
     return table;

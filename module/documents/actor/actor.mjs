@@ -633,47 +633,46 @@ export default class Actor5e extends Actor {
       });
 
       for ( const cls of classes ) {
-        const type = cls.spellcasting.type;
-
-        /**
-         * A hook event that fires while computing the spellcasting progression for each class on each actor.
-         * The actual hook names include the spellcasting type (e.g. `dnd5e.computeLeveledProgression`).
-         * @param {object} progression   Spellcasting progression data. *Will be mutated.*
-         * @param {Actor5e} actor        Actor for whom the data is being prepared.
-         * @param {Item5e} cls           Class for whom this progression is being computed.
-         * @param {number} count         Number of classes with this type of spellcasting.
-         * @returns {boolean}            Explicitly return false to prevent default progression from being calculated.
-         * @function dnd5e.computeSpellcastingProgression
-         * @memberof hookEvents
-         */
-        const allowed = Hooks.call(
-          `dnd5e.compute${type.capitalize()}Progression`, progression, this, cls, types[type] ?? 0
-        );
-
-        if ( allowed && (type === "pact") ) {
-          this.constructor.computePactProgression(progression, this, cls, types.pact);
-        } else if ( allowed && (type === "leveled") ) {
-          this.constructor.computeLeveledProgression(progression, this, cls, types.leveled);
-        }
+        this.constructor.computeClassProgression(progression, this, cls, type[cls.spellcasting.type]);
       }
     }
 
-    const spells = this.system.spells;
     for ( const type of Object.keys(types) ) {
-      /**
-       * A hook event that fires to convert the provided spellcasting progression into spell slots.
-       * The actual hook names include the spellcasting type (e.g. `dnd5e.prepareLeveledSlots`).
-       * @param {object} spells        The `data.spells` object within actor's data. *Will be mutated.*
-       * @param {Actor5e} actor        Actor for whom the data is being prepared.
-       * @param {object} progression   Spellcasting progression data.
-       * @returns {boolean}            Explicitly return false to prevent default preparation from being performed.
-       * @function dnd5e.prepareSpellcastingSlots
-       * @memberof hookEvents
-       */
-      const allowed = Hooks.call(`dnd5e.prepare${type.capitalize()}Slots`, spells, this, progression);
+      this.constructor.prepareSpellcastingSlots(this.system.spells, this, type, progression);
+    }
+  }
 
-      if ( allowed && (type === "pact") ) this.constructor.preparePactSlots(spells, this, progression);
-      else if ( allowed && (type === "leveled") ) this.constructor.prepareLeveledSlots(spells, this, progression);
+  /* -------------------------------------------- */
+
+  /**
+   * Contribute to the actor's spellcasting progression.
+   * @param {object} progression   Spellcasting progression data. *Will be mutated.*
+   * @param {Actor5e} actor        Actor for whom the data is being prepared.
+   * @param {Item5e} cls           Class for whom this progression is being computed.
+   * @param {number} count         Number of classes with this type of spellcasting.
+   */
+  static computeClassProgression(progression, actor, cls, count) {
+    const type = cls.spellcasting.type;
+
+    /**
+     * A hook event that fires while computing the spellcasting progression for each class on each actor.
+     * The actual hook names include the spellcasting type (e.g. `dnd5e.computeLeveledProgression`).
+     * @param {object} progression   Spellcasting progression data. *Will be mutated.*
+     * @param {Actor5e} actor        Actor for whom the data is being prepared.
+     * @param {Item5e} cls           Class for whom this progression is being computed.
+     * @param {number} count         Number of classes with this type of spellcasting.
+     * @returns {boolean}            Explicitly return false to prevent default progression from being calculated.
+     * @function dnd5e.computeSpellcastingProgression
+     * @memberof hookEvents
+     */
+    const allowed = Hooks.call(
+      `dnd5e.compute${type.capitalize()}Progression`, progression, actor, cls, count
+    );
+
+    if ( allowed && (type === "pact") ) {
+      this.computePactProgression(progression, actor, cls, count);
+    } else if ( allowed && (type === "leveled") ) {
+      this.computeLeveledProgression(progression, actor, cls, count);
     }
   }
 
@@ -709,6 +708,32 @@ export default class Actor5e extends Actor {
    */
   static computePactProgression(progression, actor, cls, count) {
     progression.pact += cls.system.levels;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare actor's spell slots using progression data.
+   * @param {object} spells        The `data.spells` object within actor's data. *Will be mutated.*
+   * @param {Actor5e} actor        Actor for whom the data is being prepared.
+   * @param {string} type          Type of spellcasting slots being prepared.
+   * @param {object} progression   Spellcasting progression data.
+   */
+  static prepareSpellcastingSlots(spells, actor, type, progression) {
+    /**
+     * A hook event that fires to convert the provided spellcasting progression into spell slots.
+     * The actual hook names include the spellcasting type (e.g. `dnd5e.prepareLeveledSlots`).
+     * @param {object} spells        The `data.spells` object within actor's data. *Will be mutated.*
+     * @param {Actor5e} actor        Actor for whom the data is being prepared.
+     * @param {object} progression   Spellcasting progression data.
+     * @returns {boolean}            Explicitly return false to prevent default preparation from being performed.
+     * @function dnd5e.prepareSpellcastingSlots
+     * @memberof hookEvents
+     */
+    const allowed = Hooks.call(`dnd5e.prepare${type.capitalize()}Slots`, spells, actor, progression);
+
+    if ( allowed && (type === "pact") ) this.preparePactSlots(spells, actor, progression);
+    else if ( allowed && (type === "leveled") ) this.prepareLeveledSlots(spells, actor, progression);
   }
 
   /* -------------------------------------------- */
