@@ -693,7 +693,7 @@ export default class ActorSheet5e extends ActorSheet {
     const value = input.value;
     if ( ["+", "-"].includes(value[0]) ) {
       let delta = parseFloat(value);
-      input.value = parseFloat(foundry.utils.getProperty(this.actor, input.name)) + delta;
+      input.value = Number(foundry.utils.getProperty(this.actor, input.name)) + delta;
     }
     else if ( value[0] === "=" ) input.value = value.slice(1);
   }
