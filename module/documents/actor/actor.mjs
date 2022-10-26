@@ -1,7 +1,6 @@
 import { d10Roll, damageRoll } from "../../dice/dice.mjs";
 import { simplifyBonus } from "../../utils.mjs";
 import Item5e from "../item.mjs";
-import SelectItemsPrompt from "../../applications/select-items-prompt.mjs";
 
 /**
  * Extend the base Actor class to implement additional system-specific logic.
@@ -1065,107 +1064,5 @@ export default class Actor5e extends Actor {
         jitter: 0.25
       });
     }
-  }
-
-  /* -------------------------------------------- */
-  /*  DEPRECATED METHODS                          */
-  /* -------------------------------------------- */
-
-  /**
-   * Given a list of items to add to the Actor, optionally prompt the user for which they would like to add.
-   * @param {Item5e[]} items         The items being added to the Actor.
-   * @param {boolean} [prompt=true]  Whether or not to prompt the user.
-   * @returns {Promise<Item5e[]>}
-   * @deprecated since shaper 1.6, targeted for removal in 2.1
-   */
-  async addEmbeddedItems(items, prompt=true) {
-    foundry.utils.logCompatibilityWarning(
-      "Actor5e#addEmbeddedItems has been deprecated.", { since: "shaperSystem 1.6", until: "shaperSystem 2.1" }
-    );
-    let itemsToAdd = items;
-    if ( !items.length ) return [];
-
-    // Obtain the array of item creation data
-    let toCreate = [];
-    if (prompt) {
-      const itemIdsToAdd = await SelectItemsPrompt.create(items, {
-        hint: game.i18n.localize("SHAPER.AddEmbeddedItemPromptHint")
-      });
-      for (let item of items) {
-        if (itemIdsToAdd.includes(item.id)) toCreate.push(item.toObject());
-      }
-    }
-    else toCreate = items.map(item => item.toObject());
-
-    // Create the requested items
-    if (itemsToAdd.length === 0) return [];
-    return Item5e.createDocuments(toCreate, {parent: this});
-  }
-
-
-  /* -------------------------------------------- */
-
-  /**
-   * Compute the level and percentage of encumbrance for an Actor.
-   * @returns {object}  An object describing the character's encumbrance level
-   * @private
-   * @deprecated since shaper 2.0, targeted for removal in 2.2
-   */
-  _computeEncumbrance() {
-    foundry.utils.logCompatibilityWarning(
-      "Actor5e#_computeEncumbrance has been renamed Actor5e#_prepareEncumbrance.",
-      { since: "shaperSystem 2.0", until: "shaperSystem 2.2" }
-    );
-    this._prepareEncumbrance();
-    return this.system.attributes.encumbrance;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Calculate the initiative bonus to display on a character sheet.
-   * @private
-   * @deprecated since shaper 2.0, targeted for removal in 2.2
-   */
-  _computeInitiativeModifier() {
-    foundry.utils.logCompatibilityWarning(
-      "Actor5e#_computeInitiativeModifier has been renamed Actor5e#_prepareInitiative.",
-      { since: "shaperSystem 2.0", until: "shaperSystem 2.2" }
-    );
-    this._prepareInitiative();
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Prepare data related to the spell-casting capabilities of the Actor.
-   * Mutates the value of the system.spells object.
-   * @private
-   * @deprecated since shaper 2.0, targeted for removal in 2.2
-   */
-  _computeSpellcastingProgression() {
-    foundry.utils.logCompatibilityWarning(
-      "Actor5e#_computeSpellcastingProgression has been renamed Actor5e#_prepareSpellcasting.",
-      { since: "shaperSystem 2.0", until: "shaperSystem 2.2" }
-    );
-    this._prepareSpellcasting();
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Convert a bonus value to a simple integer for displaying on the sheet.
-   * @param {number|string|null} bonus  Actor's bonus value.
-   * @param {object} data               Actor data to use for replacing @ strings.
-   * @returns {number}                  Simplified bonus as an integer.
-   * @protected
-   * @deprecated since shaper 2.0, targeted for removal in 2.2
-   */
-  _simplifyBonus(bonus, data) {
-    foundry.utils.logCompatibilityWarning(
-      "Actor#_simplifyBonus has been made a utility function and can be accessed at shaper.utils.simplifyBonus.",
-      { since: "shaperSystem 2.0", until: "shaperSystem 2.2" }
-    );
-    return simplifyBonus(bonus, data);
   }
 }

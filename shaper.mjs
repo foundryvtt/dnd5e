@@ -40,41 +40,6 @@ Hooks.once("init", function() {
   globalThis.shaper = game.shaper = Object.assign(game.system, globalThis.shaper);
   console.log(`shaperSystem | Initializing the shaperSystem Game System - Version ${shaper.version}\n${SHAPER.ASCII}`);
 
-  /** @deprecated */
-  Object.defineProperty(shaper, "entities", {
-    get() {
-      foundry.utils.logCompatibilityWarning(
-        "You are referencing the 'shaper.entities' property which has been deprecated and renamed to "
-        + "'shaper.documents'. Support for this old path will be removed in a future version.",
-        { since: "shaperSystem 2.0", until: "shaperSystem 2.2" }
-      );
-      return shaper.documents;
-    }
-  });
-
-  /** @deprecated */
-  Object.defineProperty(shaper, "rollItemMacro", {
-    get() {
-      foundry.utils.logCompatibilityWarning(
-        "You are referencing the 'shaper.rollItemMacro' method which has been deprecated and renamed to "
-        + "'shaper.documents.macro.rollItem'. Support for this old path will be removed in a future version.",
-        { since: "shaperSystem 2.0", until: "shaperSystem 2.2" }
-      );
-      return shaper.documents.macro.rollItem;
-    }
-  });
-
-  /** @deprecated */
-  Object.defineProperty(shaper, "macros", {
-    get() {
-      foundry.utils.logCompatibilityWarning(
-        "You are referencing the 'shaper.macros' property which has been deprecated and renamed to "
-        + "'shaper.documents.macro'. Support for this old path will be removed in a future version.",
-        { since: "shaperSystem 2.0", until: "shaperSystem 2.2" }
-      );
-      return shaper.documents.macro;
-    }
-  });
 
   // Record Configuration Values
   CONFIG.SHAPER = SHAPER;

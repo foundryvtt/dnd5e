@@ -82,15 +82,6 @@ export default class ItemSheet5e extends ItemSheet {
     // Potential consumption targets
     context.abilityConsumptionTargets = this._getItemConsumptionTargets(item);
 
-    /** @deprecated */
-    Object.defineProperty(context, "data", {
-      get() {
-        const msg = `You are accessing the "data" attribute within the rendering context provided by the ItemSheet5e 
-        class. This attribute has been deprecated in favor of "system" and will be removed in a future release`;
-        foundry.utils.logCompatibilityWarning(msg, { since: "shaperSystem 2.0", until: "shaperSystem 2.2" });
-        return context.system;
-      }
-    });
 
     // Set up config with proper spell components
     context.config = foundry.utils.mergeObject(CONFIG.SHAPER, {
