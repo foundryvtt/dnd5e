@@ -688,6 +688,8 @@ export default class ActorSheet5e extends ActorSheet {
    * @param {Event} event  Triggering event.
    * @private
    */
+  // Uses strict regex validation to prevent malicious injection
+  // Has a limit on size to further prevent malicious injection, it's going to be hard to do malicious code in  10 characters.
   _onChangeInputDelta(event) {
     const input = event.target;
     const value = input.value;
@@ -696,6 +698,10 @@ export default class ActorSheet5e extends ActorSheet {
         let delta = parseFloat(value);
         input.value = Number(foundry.utils.getProperty(this.actor, input.name)) + delta;
       } else if ( value[0] === "=" ) input.value = value.slice(1);
+    }else if(value.match(/^([\d+-]\d*[+-/*]?[-]?\d*$)/)){
+      if(value.length <= 10){ 
+        input.value = Math.round(eval(value));
+      }
     }else{
       input.value = Number(foundry.utils.getProperty(this.actor, input.name));
     }
