@@ -246,8 +246,9 @@ export default class D10Roll extends Roll {
     if ( form.ability0?.value && form.ability1?.value ) {
       const abl0 = this.data.abilities[form.ability0.value];
       const abl1 = this.data.abilities[form.ability1.value];
+      const points = this.data.points;
       this.terms = this.terms.flatMap(t => {
-        if ( t.term === "@mod" ) return new NumericTerm({number: abl0.mod + abl1.mod });
+        if ( t.term === "@mod" ) return new NumericTerm({number: abl0.mod + abl1.mod + points});
         if ( t.term === "@abilityCheckBonus" ) {
           // TODO: See what this does
           const bonus = abl0.bonuses?.check;

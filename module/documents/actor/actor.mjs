@@ -286,7 +286,7 @@ export default class Actor5e extends Actor {
       const checkBonusAbl0 = simplifyBonus(ability0?.bonuses?.check, bonusData);
       const checkBonusAbl1 = simplifyBonus(ability1?.bonuses?.check, bonusData);
       skl.bonus = baseBonus + checkBonus + checkBonusAbl0 + checkBonusAbl1 + skillBonus;
-      skl.mod = (ability0?.mod ?? 0) + (ability1?.mod ?? 0);
+      skl.mod = (ability0?.mod ?? 0) + (ability1?.mod ?? 0) + skl.points;
       skl.proficient = skl.value;
       skl.total = skl.mod + skl.bonus;
 
@@ -596,6 +596,7 @@ export default class Actor5e extends Actor {
 
     // Add ability modifier
     data.mod = skl.mod;
+    data.points = skl.points;
     data.defaultAbility0 = skl.ability[0];
     data.defaultAbility1 = skl.ability[1];
 

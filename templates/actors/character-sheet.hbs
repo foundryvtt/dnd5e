@@ -131,8 +131,8 @@
                     <span class="skill-mod" title="{{ localize 'SHAPER.SkillModifierHint' skill=skill.label }}">
                         {{numberFormat skill.total decimals=0 sign=true}}
                     </span>
-                    <span class="skill-passive" title="{{ localize 'SHAPER.SkillPassiveHint' skill=skill.label }}">
-                        ({{skill.passive}})
+                    <span class="skill-points" title="{{ localize 'SHAPER.SkillPointsHint' skill=skill.label }}">
+                        {{numberInput skill.points name=(concat "system.skills." s ".points")}}
                     </span>
                 </li>
             {{/with}}

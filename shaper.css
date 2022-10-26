@@ -1,4 +1,3 @@
-/* Deprecated vars */
 /* ----------------------------------------- */
 /*  Fonts                                    */
 /* ----------------------------------------- */
@@ -956,9 +955,8 @@
 .shaper.sheet.actor ul.skills-list li.skill .skill-mod {
   flex: 0 0 20px;
 }
-.shaper.sheet.actor ul.skills-list li.skill .skill-passive {
-  flex: 0 0 26px;
-  text-align: center;
+.shaper.sheet.actor ul.skills-list li.skill .skill-points {
+  flex: 0 0 20px;
   color: #7a7971;
 }
 .shaper.sheet.actor .counters {
