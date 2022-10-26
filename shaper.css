@@ -181,26 +181,6 @@
   background: rgba(0, 0, 0, 0.05);
 }
 /* ----------------------------------------- */
-/*  Hit Dice Config Sheet Specifically       */
-/* ----------------------------------------- */
-.shaper.hd-config .form-group button.increment,
-.shaper.hd-config .form-group button.decrement {
-  flex: 0 0 1rem;
-  line-height: 1rem;
-}
-.shaper.hd-config .form-group button.decrement {
-  margin-right: 0;
-}
-.shaper.hd-config .form-group span.sep {
-  margin: 0;
-}
-.shaper.hd-config .form-group input {
-  flex: 0 0 2rem;
-  text-align: center;
-  margin-left: 2px;
-  margin-right: 2px;
-}
-/* ----------------------------------------- */
 /*  Entity Sheets Specifically               */
 /* ----------------------------------------- */
 .shaper.sheet {

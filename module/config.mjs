@@ -139,7 +139,6 @@ preLocalize("abilityActivationTypes", { sort: true });
 SHAPER.abilityConsumptionTypes = {
   ammo: "SHAPER.ConsumeAmmunition",
   attribute: "SHAPER.ConsumeAttribute",
-  hitDice: "SHAPER.ConsumeHitDice",
   material: "SHAPER.ConsumeMaterial",
   charges: "SHAPER.ConsumeCharges"
 };
@@ -211,8 +210,6 @@ preLocalize("itemActionTypes");
  * @enum {string}
  */
 SHAPER.limitedUsePeriods = {
-  sr: "SHAPER.ShortRest",
-  lr: "SHAPER.LongRest",
   day: "SHAPER.Day",
   charges: "SHAPER.Charges"
 };

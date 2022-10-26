@@ -161,8 +161,6 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
     if ( !this.isEditable ) return;
     html.find(".level-selector").change(this._onLevelChange.bind(this));
     html.find(".item-toggle").click(this._onToggleItem.bind(this));
-    html.find(".short-rest").click(this._onShortRest.bind(this));
-    html.find(".long-rest").click(this._onLongRest.bind(this));
     html.find(".rollable[data-action]").click(this._onSheetAction.bind(this));
   }
 
@@ -224,33 +222,6 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
     return item.update({[attr]: !foundry.utils.getProperty(item, attr)});
   }
 
-  /* -------------------------------------------- */
-
-  /**
-   * Take a short rest, calling the relevant function on the Actor instance.
-   * @param {Event} event             The triggering click event.
-   * @returns {Promise<RestResult>}  Result of the rest action.
-   * @private
-   */
-  async _onShortRest(event) {
-    event.preventDefault();
-    await this._onSubmit(event);
-    return this.actor.shortRest();
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Take a long rest, calling the relevant function on the Actor instance.
-   * @param {Event} event             The triggering click event.
-   * @returns {Promise<RestResult>}  Result of the rest action.
-   * @private
-   */
-  async _onLongRest(event) {
-    event.preventDefault();
-    await this._onSubmit(event);
-    return this.actor.longRest();
-  }
 
   /* -------------------------------------------- */
 

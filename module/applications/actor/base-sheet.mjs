@@ -1,9 +1,7 @@
 import ActiveEffect5e from "../../documents/active-effect.mjs";
-import Actor5e from "../../documents/actor/actor.mjs";
 import Item5e from "../../documents/item.mjs";
 
 import ActorAbilityConfig from "./ability-config.mjs";
-import ActorHitDiceConfig from "./hit-dice-config.mjs";
 import ActorMovementConfig from "./movement-config.mjs";
 import ActorSheetFlags from "./sheet-flags.mjs";
 import ActorSkillConfig from "./skill-config.mjs";
@@ -565,9 +563,6 @@ export default class ActorSheet5e extends ActorSheet {
     const button = event.currentTarget;
     let app;
     switch ( button.dataset.action ) {
-      case "hit-dice":
-        app = new ActorHitDiceConfig(this.actor);
-        break;
       case "movement":
         app = new ActorMovementConfig(this.actor);
         break;

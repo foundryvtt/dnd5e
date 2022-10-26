@@ -769,11 +769,6 @@ export default class Item5e extends Item {
         resource = this.actor.items.get(consume.target);
         quantity = resource ? resource.system.quantity : 0;
         break;
-      case "hitDice":
-        const denom = !["smallest", "largest"].includes(consume.target) ? consume.target : false;
-        resource = Object.values(this.actor.classes).filter(cls => !denom || (cls.system.hitDice === denom));
-        quantity = resource.reduce((count, cls) => count + cls.system.levels - cls.system.hitDiceUsed, 0);
-        break;
       case "charges":
         resource = this.actor.items.get(consume.target);
         if ( !resource ) break;
@@ -807,23 +802,6 @@ export default class Item5e extends Item {
       case "ammo":
       case "material":
         resourceUpdates.push({_id: consume.target, "system.quantity": remaining});
-        break;
-      case "hitDice":
-        if ( ["smallest", "largest"].includes(consume.target) ) resource = resource.sort((lhs, rhs) => {
-          let sort = lhs.system.hitDice.localeCompare(rhs.system.hitDice, "en", {numeric: true});
-          if ( consume.target === "largest" ) sort *= -1;
-          return sort;
-        });
-        let toConsume = consume.amount;
-        for ( const cls of resource ) {
-          const available = (toConsume > 0 ? cls.system.levels : 0) - cls.system.hitDiceUsed;
-          const delta = toConsume > 0 ? Math.min(toConsume, available) : Math.max(toConsume, available);
-          if ( delta !== 0 ) {
-            resourceUpdates.push({_id: cls.id, "system.hitDiceUsed": cls.system.hitDiceUsed + delta});
-            toConsume -= delta;
-            if ( toConsume === 0 ) break;
-          }
-        }
         break;
       case "charges":
         const uses = resource.system.uses || {};
