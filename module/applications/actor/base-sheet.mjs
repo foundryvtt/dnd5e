@@ -698,10 +698,6 @@ export default class ActorSheet5e extends ActorSheet {
         let delta = parseFloat(value);
         input.value = Number(foundry.utils.getProperty(this.actor, input.name)) + delta;
       } else if ( value[0] === "=" ) input.value = value.slice(1);
-    }else if(value.match(/^([\d+-]\d*[+-/*]?[-]?\d*$)/)){
-      if(value.length <= 10){ 
-        input.value = Math.round(eval(value));
-      }
     }else{
       input.value = Number(foundry.utils.getProperty(this.actor, input.name));
     }
