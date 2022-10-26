@@ -135,6 +135,11 @@ Hooks.once("init", function() {
     makeDefault: true,
     label: "DND5E.SheetClassVehicle"
   });
+  Actors.registerSheet("dnd5e", applications.actor.ActorSheet5eSidekick, {
+    types: ["sidekick"],
+    makeDefault: true,
+    label: "DND5E.SheetClassSidekick"
+  });
   Items.unregisterSheet("core", ItemSheet);
   Items.registerSheet("dnd5e", applications.item.ItemSheet5e, {
     makeDefault: true,

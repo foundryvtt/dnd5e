@@ -98,6 +98,8 @@ export default class Actor5e extends Actor {
         return this._prepareNPCData();
       case "vehicle":
         return this._prepareVehicleData();
+      case "sidekick":
+        return this._prepareSidekickData();
     }
   }
 
@@ -332,6 +334,34 @@ export default class Actor5e extends Actor {
    */
   _prepareVehicleData() {
     this.system.attributes.prof = 0;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Perform any Sidekick specific preparation.
+   * Mutates several aspects of the system data object.
+   * @protected
+   */
+   _prepareSidekickData() {
+    // TODO ask for advise... for now is the same of npc
+    const cr = this.system.details.cr;
+
+    // Attuned items
+    this.system.attributes.attunement.value = this.items.filter(i => {
+      return i.system.attunement === CONFIG.DND5E.attunementTypes.ATTUNED;
+    }).length;
+
+    // Kill Experience
+    this.system.details.xp.value = this.getCRExp(cr);
+
+    // Proficiency
+    this.system.attributes.prof = Math.floor((Math.max(cr, 1) + 7) / 4);
+
+    // Spellcaster Level
+    if ( this.system.attributes.spellcasting && !Number.isNumeric(this.system.details.spellLevel) ) {
+      this.system.details.spellLevel = Math.max(cr, 1);
+    }
   }
 
   /* -------------------------------------------- */

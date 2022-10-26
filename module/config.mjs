@@ -502,6 +502,17 @@ DND5E.vehicleTypes = {
 };
 preLocalize("vehicleTypes", { sort: true });
 
+/**
+ * The various types of sidekicks in which characters can be proficient.
+ * @enum {string}
+ */
+DND5E.sidekickClasses = {
+  expert: "DND5E.SidekickClassExpert",
+  spellcaster: "DND5E.SidekickClassSpellcaster",
+  warrior: "DND5E.SidekickClassWarrior"
+};
+preLocalize("sidekickClasses", { sort: true });
+
 /* -------------------------------------------- */
 
 /**

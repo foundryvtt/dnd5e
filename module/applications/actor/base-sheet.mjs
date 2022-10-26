@@ -104,6 +104,7 @@ export default class ActorSheet5e extends ActorSheet {
       isCharacter: this.actor.type === "character",
       isNPC: this.actor.type === "npc",
       isVehicle: this.actor.type === "vehicle",
+      isSidekick: this.actor.type === "sidekick",
       config: CONFIG.DND5E,
       rollData: this.actor.getRollData.bind(this.actor)
     };

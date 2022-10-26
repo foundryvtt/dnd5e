@@ -1,6 +1,6 @@
 {
   "Actor": {
-    "types": ["character", "npc", "vehicle"],
+    "types": ["character", "npc", "vehicle", "sidekick"],
     "templates": {
       "common": {
         "abilities": {
@@ -511,6 +511,69 @@
       "cargo": {
         "crew": [],
         "passengers": []
+      }
+    },
+    "sidekick": {
+      "templates": ["common", "creature"],
+      "attributes": {
+        "hp": {
+          "value": 0,
+          "max": 0
+        },
+        "death": {
+          "success": 0,
+          "failure": 0
+        },
+        "exhaustion": 0,
+        "inspiration": 0
+      },
+      "details": {
+        "background": "",
+        "originalClass": "",
+        "xp": {
+          "value": 0,
+          "min": 0,
+          "max": 300
+        },
+        "appearance": "",
+        "trait": "",
+        "ideal": "",
+        "bond": "",
+        "flaw": ""
+      },
+      "resources": {
+        "primary": {
+          "value": 0,
+          "max": 0,
+          "sr": 0,
+          "lr": 0
+        },
+        "secondary": {
+          "value": 0,
+          "max": 0,
+          "sr": 0,
+          "lr": 0
+        },
+        "tertiary": {
+          "value": 0,
+          "max": 0,
+          "sr": 0,
+          "lr": 0
+        }
+      },
+      "traits": {
+        "weaponProf": {
+          "value": [],
+          "custom": ""
+        },
+        "armorProf": {
+          "value": [],
+          "custom": ""
+        },
+        "toolProf": {
+          "value": [],
+          "custom": ""
+        }
       }
     }
   },
