@@ -192,7 +192,7 @@ export default class Item5e extends Item {
    */
   get hasTarget() {
     const target = this.system.target;
-    return target && !["none", ""].includes(target.type);
+    return target && ![""].includes(target.type);
   }
 
   /* -------------------------------------------- */
