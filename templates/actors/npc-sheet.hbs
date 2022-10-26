@@ -48,23 +48,26 @@
                 <li class="attribute health">
                     <h4 class="attribute-name box-title rollable">{{ localize "DND5E.HitPoints" }}</h4>
                     <div class="attribute-value multiple">
-                        <input name="system.attributes.hp.value" type="number" step="any"
+                        <input name="system.attributes.hp.value" type="text" step="any"
                             value="{{system.attributes.hp.value}}" placeholder="10"
-                            title="{{localize 'DND5E.HitPointsCurrent'}}">
+                            title="{{localize 'DND5E.HitPointsCurrent'}}"
+                            data-dtype="Number">
                         <span class="sep"> / </span>
-                        <input name="system.attributes.hp.max" type="number" step="any"
+                        <input name="system.attributes.hp.max" type="text" step="any"
                             value="{{system.attributes.hp.max}}" placeholder="10"
-                            title="{{localize 'DND5E.HitPointsMax'}}">
+                            title="{{localize 'DND5E.HitPointsMax'}}"
+                            data-dtype="Number">
                     </div>
                     <footer class="attribute-footer flexrow">
                         <input name="system.attributes.hp.formula" class="hpformula" type="text"
                             placeholder="{{ localize 'DND5E.HPFormula' }}"
                             value="{{system.attributes.hp.formula}}"
                             title="{{localize 'DND5E.HPFormula'}}">
-                        <input name="system.attributes.hp.temp" type="number" step="any" class="temphp"
+                        <input name="system.attributes.hp.temp" type="text" step="any" class="temphp"
                             placeholder="+{{localize 'DND5E.Temp'}}"
                             value="{{system.attributes.hp.temp}}"
-                            title="{{localize 'DND5E.HitPointsTemp'}}">
+                            title="{{localize 'DND5E.HitPointsTemp'}}"
+                            data-dtype="Number">
                     </footer>
                 </li>
 
@@ -115,8 +118,6 @@
             {{#each system.abilities as |ability id|}}
                 <li class="ability {{#if ability.proficient}}proficient{{/if}}" data-ability="{{id}}">
                     <h4 class="ability-name box-title rollable">{{ability.label}}</h4>
-                   {{!-- {{numberInput ability.value name=(concat "system.abilities." id ".value")
-                        class="ability-score" placeholder="10"}}--}}
                     <input type="text" value="{{ability.value}}" name="{{concat "system.abilities." id ".value"}}"
                         class="ability-score" placeholder="10" data-dtype="Number">
                     <div class="ability-modifiers flexrow">
@@ -160,25 +161,29 @@
                     <div class="counter flexrow legendary">
                         <h4>{{ localize "DND5E.LegAct" }}</h4>
                         <div class="counter-value">
-                            <input name="system.resources.legact.value" type="number" step="any"
+                            <input name="system.resources.legact.value" type="text" step="any"
                                 value="{{system.resources.legact.value}}" placeholder="0"
-                                title="{{localize 'DND5E.LegActRemaining'}}">
+                                title="{{localize 'DND5E.LegActRemaining'}}"
+                                data-dtype="Number">
                             <span class="sep">/</span>
-                            <input name="system.resources.legact.max" type="number" step="any"
+                            <input name="system.resources.legact.max" type="text" step="any"
                                 value="{{system.resources.legact.max}}" placeholder="0"
-                                title="{{localize 'DND5E.LegActMax'}}">
+                                title="{{localize 'DND5E.LegActMax'}}"
+                                data-dtype="Number">
                         </div>
                     </div>
                     <div class="counter flexrow legendary">
                         <h4>{{ localize "DND5E.LegRes" }}</h4>
                         <div class="counter-value">
-                            <input name="system.resources.legres.value" type="number" step="any"
+                            <input name="system.resources.legres.value" type="text" step="any"
                                 value="{{system.resources.legres.value}}" placeholder="0"
-                                title="{{localize 'DND5E.LegResRemaining'}}">
+                                title="{{localize 'DND5E.LegResRemaining'}}"
+                                data-dtype="Number">
                             <span class="sep">/</span>
-                            <input name="system.resources.legres.max" type="number" step="any"
+                            <input name="system.resources.legres.max" type="text" step="any"
                                 value="{{system.resources.legres.max}}" placeholder="0"
-                                title="{{localize 'DND5E.LegResMax'}}">
+                                title="{{localize 'DND5E.LegResMax'}}"
+                                data-dtype="Number">
                         </div>
                     </div>
                     <div class="counter flexrow lair">
