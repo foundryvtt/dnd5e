@@ -632,9 +632,9 @@ export default class Actor5e extends Actor {
         return true;
       });
 
-      for ( const cls of classes ) {
-        this.constructor.computeClassProgression(progression, this, cls, type[cls.spellcasting.type]);
-      }
+      for ( const cls of classes ) this.constructor.computeClassProgression(
+        progression, this, cls, cls.spellcasting, types[cls.spellcasting.type]
+      );
     }
 
     for ( const type of Object.keys(types) ) {
@@ -646,33 +646,35 @@ export default class Actor5e extends Actor {
 
   /**
    * Contribute to the actor's spellcasting progression.
-   * @param {object} progression   Spellcasting progression data. *Will be mutated.*
-   * @param {Actor5e} actor        Actor for whom the data is being prepared.
-   * @param {Item5e} cls           Class for whom this progression is being computed.
-   * @param {number} count         Number of classes with this type of spellcasting.
+   * @param {object} progression                    Spellcasting progression data. *Will be mutated.*
+   * @param {Actor5e|null} actor                    Actor for whom the data is being prepared.
+   * @param {Item5e} cls                            Class for whom this progression is being computed.
+   * @param {SpellcastingDescription} spellcasting  Spellcasting descriptive object.
+   * @param {number} [count=1]                      Number of classes with this type of spellcasting.
    */
-  static computeClassProgression(progression, actor, cls, count) {
+  static computeClassProgression(progression, actor, cls, spellcasting, count=1) {
     const type = cls.spellcasting.type;
 
     /**
      * A hook event that fires while computing the spellcasting progression for each class on each actor.
      * The actual hook names include the spellcasting type (e.g. `dnd5e.computeLeveledProgression`).
-     * @param {object} progression   Spellcasting progression data. *Will be mutated.*
-     * @param {Actor5e} actor        Actor for whom the data is being prepared.
-     * @param {Item5e} cls           Class for whom this progression is being computed.
-     * @param {number} count         Number of classes with this type of spellcasting.
-     * @returns {boolean}            Explicitly return false to prevent default progression from being calculated.
+     * @param {object} progression                    Spellcasting progression data. *Will be mutated.*
+     * @param {Actor5e|null} [actor]                  Actor for whom the data is being prepared.
+     * @param {Item5e} cls                            Class for whom this progression is being computed.
+     * @param {SpellcastingDescription} spellcasting  Spellcasting descriptive object.
+     * @param {number} count                          Number of classes with this type of spellcasting.
+     * @returns {boolean}  Explicitly return false to prevent default progression from being calculated.
      * @function dnd5e.computeSpellcastingProgression
      * @memberof hookEvents
      */
     const allowed = Hooks.call(
-      `dnd5e.compute${type.capitalize()}Progression`, progression, actor, cls, count
+      `dnd5e.compute${type.capitalize()}Progression`, progression, actor, cls, spellcasting, count
     );
 
     if ( allowed && (type === "pact") ) {
-      this.computePactProgression(progression, actor, cls, count);
+      this.computePactProgression(progression, actor, cls, spellcasting, count);
     } else if ( allowed && (type === "leveled") ) {
-      this.computeLeveledProgression(progression, actor, cls, count);
+      this.computeLeveledProgression(progression, actor, cls, spellcasting, count);
     }
   }
 
@@ -680,20 +682,20 @@ export default class Actor5e extends Actor {
 
   /**
    * Contribute to the actor's spellcasting progression for a class with leveled spellcasting.
-   * @param {object} progression   Spellcasting progression data. *Will be mutated.*
-   * @param {Actor5e} actor        Actor for whom the data is being prepared.
-   * @param {Item5e} cls           Class for whom this progression is being computed.
-   * @param {number} count         Number of classes with this type of spellcasting.
+   * @param {object} progression                    Spellcasting progression data. *Will be mutated.*
+   * @param {Actor5e} actor                         Actor for whom the data is being prepared.
+   * @param {Item5e} cls                            Class for whom this progression is being computed.
+   * @param {SpellcastingDescription} spellcasting  Spellcasting descriptive object.
+   * @param {number} count                          Number of classes with this type of spellcasting.
    */
-  static computeLeveledProgression(progression, actor, cls, count) {
-    const levels = cls.system.levels;
-    const prog = CONFIG.DND5E.spellcastingTypes.leveled.progression[cls.spellcasting.progression];
+  static computeLeveledProgression(progression, actor, cls, spellcasting, count) {
+    const prog = CONFIG.DND5E.spellcastingTypes.leveled.progression[spellcasting.progression];
     if ( !prog ) return;
     const rounding = prog.roundUp ? Math.ceil : Math.floor;
-    progression.slot += rounding(levels / prog.divisor ?? 1);
+    progression.slot += rounding(spellcasting.levels / prog.divisor ?? 1);
     // Single-classed, non-full progression rounds up, rather than down.
     if ( (count === 1) && (prog.divisor > 1) && progression.slot ) {
-      progression.slot = Math.ceil(levels / prog.divisor);
+      progression.slot = Math.ceil(spellcasting.levels / prog.divisor);
     }
   }
 
@@ -701,13 +703,14 @@ export default class Actor5e extends Actor {
 
   /**
    * Contribute to the actor's spellcasting progression for a class with pact spellcasting.
-   * @param {object} progression   Spellcasting progression data. *Will be mutated.*
-   * @param {Actor5e} actor        Actor for whom the data is being prepared.
-   * @param {Item5e} cls           Class for whom this progression is being computed.
-   * @param {number} count         Number of classes with this type of spellcasting.
+   * @param {object} progression                    Spellcasting progression data. *Will be mutated.*
+   * @param {Actor5e} actor                         Actor for whom the data is being prepared.
+   * @param {Item5e} cls                            Class for whom this progression is being computed.
+   * @param {SpellcastingDescription} spellcasting  Spellcasting descriptive object.
+   * @param {number} count                          Number of classes with this type of spellcasting.
    */
-  static computePactProgression(progression, actor, cls, count) {
-    progression.pact += cls.system.levels;
+  static computePactProgression(progression, actor, cls, spellcasting, count) {
+    progression.pact += spellcasting.levels;
   }
 
   /* -------------------------------------------- */

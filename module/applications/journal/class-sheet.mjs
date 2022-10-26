@@ -108,7 +108,7 @@ export default class JournalClassPageSheet extends JournalPageSheet {
    * Prepare table based on non-optional GrantItem advancement & ScaleValue advancement.
    * @param {Item5e} item              Class item belonging to this journal.
    * @param {number} [initialLevel=1]  Level at which the table begins.
-   * @returns {object}     Prepared table.
+   * @returns {object}                 Prepared table.
    */
   async _getTable(item, initialLevel=1) {
     const hasFeatures = !!item.advancement.byType.ItemGrant;
@@ -171,21 +171,13 @@ export default class JournalClassPageSheet extends JournalPageSheet {
   /**
    * Build out the spell progression data.
    * @param {Item5e} item  Class item belonging to this journal.
+   * @returns {object}     Prepared spell progression table.
    */
   async _getSpellProgression(item) {
-    const spellcasting = item.spellcasting;
+    const spellcasting = foundry.utils.deepClone(item.spellcasting);
     if ( !spellcasting || (spellcasting.progression === "none") ) return null;
 
     const table = { rows: [] };
-
-    let cls;
-    if ( item.type === "class" ) {
-      cls = item.clone();
-    } else {
-      cls = await Item.implementation.create({
-        name: "tmp", type: "class", system: {spellcasting: { progression: spellcasting.progression }}
-      }, {temporary: true});
-    }
 
     if ( spellcasting.type === "leveled" ) {
       const spells = {};
@@ -195,8 +187,8 @@ export default class JournalClassPageSheet extends JournalPageSheet {
       let largestSlot;
       for ( const level of Array.fromRange(CONFIG.DND5E.maxLevel, 1).reverse() ) {
         const progression = { slot: 0 };
-        cls.updateSource({system: {levels: level}});
-        Actor5e.computeClassProgression(progression, null, cls, 1);
+        spellcasting.levels = level;
+        Actor5e.computeClassProgression(progression, null, item, spellcasting);
         Actor5e.prepareSpellcastingSlots(spells, null, "leveled", progression);
 
         if ( !largestSlot ) largestSlot = Object.entries(spells).reduce((slot, [key, data]) => {
@@ -232,8 +224,8 @@ export default class JournalClassPageSheet extends JournalPageSheet {
       // Loop through each level, gathering "Spell Slots" & "Slot Level" for each one
       for ( const level of Array.fromRange(CONFIG.DND5E.maxLevel, 1) ) {
         const progression = { pact: 0 };
-        cls.updateSource({system: {levels: level}});
-        Actor5e.computeClassProgression(progression, null, cls, 1);
+        spellcasting.levels = level;
+        Actor5e.computeClassProgression(progression, null, item, spellcasting);
         Actor5e.prepareSpellcastingSlots(spells, null, "pact", progression);
         table.rows.push([
           { class: "spell-slots", content: `${spells.pact.max}` },
@@ -246,13 +238,14 @@ export default class JournalClassPageSheet extends JournalPageSheet {
       /**
        * A hook event that fires to generate the table for custom spellcasting types.
        * The actual hook names include the spellcasting type (e.g. `dnd5e.buildPsionicSpellcastingTable`).
-       * @param {object} table  Table definition being built. *Will be mutated.*
-       * @param {Item5e} cls    Synthetic class with the proper spellcasting set.
+       * @param {object} table                          Table definition being built. *Will be mutated.*
+       * @param {Item5e} item                           Class for which the spellcasting table is being built.
+       * @param {SpellcastingDescription} spellcasting  Spellcasting descriptive object.
        * @function dnd5e.buildSpellcastingTable
        * @memberof hookEvents
        */
       Hooks.callAll(
-        `dnd5e.build${type.capitalize()}SpellcastingTable`, table, cls
+        `dnd5e.build${spellcasting.type.capitalize()}SpellcastingTable`, table, item, spellcasting
       );
     }
 
