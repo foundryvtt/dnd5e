@@ -29,23 +29,6 @@
                 {{/unless}}
             </aside>
 
-            {{!-- Character Summary --}}
-            <ul class="summary flexrow">
-                <li>
-                    <input type="text" name="system.details.race" value="{{system.details.race}}" placeholder="{{ localize 'SHAPER.Race' }}"/>
-                </li>
-                <li>
-                    {{#if labels.background}}
-                        <span title="{{localize 'SHAPER.Background'}}">{{labels.background}}</span>
-                    {{else}}
-                        <input type="text" name="system.details.background" value="{{system.details.background}}" placeholder="{{ localize 'SHAPER.Background' }}"/>
-                    {{/if}}
-                </li>
-                <li>
-                    <input type="text" name="system.details.alignment" value="{{system.details.alignment}}" placeholder="{{ localize 'SHAPER.Alignment' }}"/>
-                </li>
-            </ul>
-
             {{!-- Header Attributes --}}
             <ul class="attributes flexrow">
                 <li class="attribute health">
@@ -60,7 +43,18 @@
                             title="{{localize 'SHAPER.HitPointsMax'}}">
                     </div>
                 </li>
-
+                <li class="attribute mind">
+                    <h4 class="attribute-name box-title">{{ localize "SHAPER.MindPoints" }}</h4>
+                    <div class="attribute-value multiple">
+                        <input name="system.attributes.mp.value" type="number" step="any"
+                            value="{{system.attributes.mp.value}}" placeholder="10"
+                            title="{{localize 'SHAPER.MindPointsCurrent'}}">
+                        <span class="sep"> / </span>
+                        <input name="system.attributes.mp.max" type="number" step="any"
+                            value="{{system.attributes.mp.max}}" placeholder="10"
+                            title="{{localize 'SHAPER.MindPointsMax'}}">
+                    </div>
+                </li>
 
                 <li class="attribute movement">
                     <h4 class="attribute-name box-title">
@@ -150,18 +144,10 @@
                                    placeholder="{{res.placeholder}}" />
                         </h4>
                         <div class="attribute-value">
-                            <label class="recharge checkbox flexcol">
-                                <span>{{ localize "SHAPER.AbbreviationSR" }}</span><input name="system.resources.{{res.name}}.sr" type="checkbox" {{checked res.sr}}/>
-                            </label>
-
                             {{numberInput res.value name=(concat "system.resources." res.name ".value")
                                 placeholder="0"}}
                             <span class="sep"> / </span>
                             {{numberInput res.max name=(concat "system.resources." res.name ".max") placeholder="0"}}
-
-                            <label class="recharge checkbox flexcol">
-                                <span>{{ localize "SHAPER.AbbreviationLR" }}</span><input name="system.resources.{{res.name}}.lr" type="checkbox" {{checked res.lr}}/>
-                            </label>
                         </div>
                     </li>
                     {{/each}}
