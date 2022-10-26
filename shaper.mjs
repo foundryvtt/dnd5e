@@ -57,7 +57,7 @@ Hooks.once("init", function() {
   registerSystemSettings();
 
   // Patch Core Functions
-  CONFIG.Combat.initiative.formula = "2d10 + @attributes.init.mod + @attributes.init.prof + @attributes.init.bonus + @abilities.dex.bonuses.check + @bonuses.abilities.check";
+  CONFIG.Combat.initiative.formula = "2d10 + @attributes.fin.mod + @attributes.sol.mod";
   Combatant.prototype._getInitiativeFormula = documents.combat._getInitiativeFormula;
 
   // Register Roll Extensions
@@ -102,7 +102,6 @@ Hooks.once("init", function() {
  */
 Hooks.once("setup", function() {
   CONFIG.SHAPER.trackableAttributes = expandAttributeList(CONFIG.SHAPER.trackableAttributes);
-  CONFIG.SHAPER.consumableResources = expandAttributeList(CONFIG.SHAPER.consumableResources);
 });
 
 /* --------------------------------------------- */
@@ -149,7 +148,6 @@ Hooks.on("getChatLogEntryContext", documents.chat.addChatMessageContextOptions);
 
 Hooks.on("renderChatLog", (app, html, data) => documents.Item5e.chatListeners(html));
 Hooks.on("renderChatPopout", (app, html, data) => documents.Item5e.chatListeners(html));
-Hooks.on("getActorDirectoryEntryContext", documents.Actor5e.addDirectoryContextOptions);
 
 /* -------------------------------------------- */
 /*  Bundled Module Exports                      */

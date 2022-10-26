@@ -24,19 +24,6 @@ export default class TokenDocument5e extends TokenDocument {
     return attributes;
   }
 
-  /* -------------------------------------------- */
-
-  /**
-   * Get an Array of attribute choices which are suitable for being consumed by an item usage.
-   * @param {object} data  The actor data.
-   * @returns {{bar: string[], value: string[]}}
-   */
-  static getConsumedAttributes(data) {
-    const attributes = super.getTrackedAttributes(data);
-    const allowed = CONFIG.SHAPER.consumableResources;
-    attributes.value = attributes.value.filter(attrs => this._isAllowedAttribute(allowed, attrs));
-    return attributes;
-  }
 
   /* -------------------------------------------- */
 
