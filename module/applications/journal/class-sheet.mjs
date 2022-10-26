@@ -188,8 +188,8 @@ export default class JournalClassPageSheet extends JournalPageSheet {
       for ( const level of Array.fromRange(CONFIG.DND5E.maxLevel, 1).reverse() ) {
         const progression = { slot: 0 };
         spellcasting.levels = level;
-        Actor5e.computeClassProgression(progression, null, item, spellcasting);
-        Actor5e.prepareSpellcastingSlots(spells, null, "leveled", progression);
+        Actor5e.computeClassProgression(progression, item, { spellcasting });
+        Actor5e.prepareSpellcastingSlots(spells, "leveled", progression);
 
         if ( !largestSlot ) largestSlot = Object.entries(spells).reduce((slot, [key, data]) => {
           if ( !data.max ) return slot;
@@ -225,8 +225,8 @@ export default class JournalClassPageSheet extends JournalPageSheet {
       for ( const level of Array.fromRange(CONFIG.DND5E.maxLevel, 1) ) {
         const progression = { pact: 0 };
         spellcasting.levels = level;
-        Actor5e.computeClassProgression(progression, null, item, spellcasting);
-        Actor5e.prepareSpellcastingSlots(spells, null, "pact", progression);
+        Actor5e.computeClassProgression(progression, item, { spellcasting });
+        Actor5e.prepareSpellcastingSlots(spells, "pact", progression);
         table.rows.push([
           { class: "spell-slots", content: `${spells.pact.max}` },
           { class: "slot-level", content: spells.pact.level.ordinalString() }

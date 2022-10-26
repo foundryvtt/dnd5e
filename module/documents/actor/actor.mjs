@@ -633,12 +633,12 @@ export default class Actor5e extends Actor {
       });
 
       for ( const cls of classes ) this.constructor.computeClassProgression(
-        progression, this, cls, cls.spellcasting, types[cls.spellcasting.type]
+        progression, cls, { actor: this, count: types[cls.spellcasting.type] }
       );
     }
 
     for ( const type of Object.keys(types) ) {
-      this.constructor.prepareSpellcastingSlots(this.system.spells, this, type, progression);
+      this.constructor.prepareSpellcastingSlots(this.system.spells, type, progression, { actor: this });
     }
   }
 
@@ -646,14 +646,16 @@ export default class Actor5e extends Actor {
 
   /**
    * Contribute to the actor's spellcasting progression.
-   * @param {object} progression                    Spellcasting progression data. *Will be mutated.*
-   * @param {Actor5e|null} actor                    Actor for whom the data is being prepared.
-   * @param {Item5e} cls                            Class for whom this progression is being computed.
-   * @param {SpellcastingDescription} spellcasting  Spellcasting descriptive object.
-   * @param {number} [count=1]                      Number of classes with this type of spellcasting.
+   * @param {object} progression                             Spellcasting progression data. *Will be mutated.*
+   * @param {Item5e} cls                                     Class for whom this progression is being computed.
+   * @param {object} [config={}]
+   * @param {Actor5e|null} [config.actor]                    Actor for whom the data is being prepared.
+   * @param {SpellcastingDescription} [config.spellcasting]  Spellcasting descriptive object.
+   * @param {number} [config.count=1]                        Number of classes with this type of spellcasting.
    */
-  static computeClassProgression(progression, actor, cls, spellcasting, count=1) {
+  static computeClassProgression(progression, cls, {actor, spellcasting, count=1}={}) {
     const type = cls.spellcasting.type;
+    spellcasting = spellcasting ?? cls.spellcasting;
 
     /**
      * A hook event that fires while computing the spellcasting progression for each class on each actor.
@@ -717,12 +719,13 @@ export default class Actor5e extends Actor {
 
   /**
    * Prepare actor's spell slots using progression data.
-   * @param {object} spells        The `data.spells` object within actor's data. *Will be mutated.*
-   * @param {Actor5e} actor        Actor for whom the data is being prepared.
-   * @param {string} type          Type of spellcasting slots being prepared.
-   * @param {object} progression   Spellcasting progression data.
+   * @param {object} spells           The `data.spells` object within actor's data. *Will be mutated.*
+   * @param {string} type             Type of spellcasting slots being prepared.
+   * @param {object} progression      Spellcasting progression data.
+   * @param {object} [config]
+   * @param {Actor5e} [config.actor]  Actor for whom the data is being prepared.
    */
-  static prepareSpellcastingSlots(spells, actor, type, progression) {
+  static prepareSpellcastingSlots(spells, type, progression, {actor}={}) {
     /**
      * A hook event that fires to convert the provided spellcasting progression into spell slots.
      * The actual hook names include the spellcasting type (e.g. `dnd5e.prepareLeveledSlots`).
