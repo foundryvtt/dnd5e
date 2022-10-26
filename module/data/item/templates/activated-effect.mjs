@@ -40,7 +40,7 @@ export default class ActivatedEffectTemplate extends foundry.abstract.DataModel 
         condition: new foundry.data.fields.StringField({required: true, label: "DND5E.ItemActivationCondition"})
       }, {label: "DND5E.ItemActivation"}),
       duration: new foundry.data.fields.SchemaField({
-        value: new foundry.data.fields.NumberField({required: true, min: 0, label: "DND5E.Duration"}),
+        value: new FormulaField({required: true, deterministic: true, label: "DND5E.Duration"}),
         units: new foundry.data.fields.StringField({required: true, blank: true, label: "DND5E.DurationType"})
       }, {label: "DND5E.Duration"}),
       target: new foundry.data.fields.SchemaField({
@@ -78,18 +78,19 @@ export default class ActivatedEffectTemplate extends foundry.abstract.DataModel 
 
   /** @inheritdoc */
   static migrateData(source) {
-    this.migrateMaxUses(source);
+    this.migrateFormulaFields(source);
     this.migrateRanges(source);
   }
 
   /* -------------------------------------------- */
 
   /**
-   * Ensure a 0 in max uses is converted to an empty string rather than "0".
+   * Ensure a 0 in max uses & durations are converted to an empty string rather than "0".
    * @param {object} source  The candidate source data from which the model will be constructed.
    */
-  static migrateMaxUses(source) {
+  static migrateFormulaFields(source) {
     if ( (source.uses?.max === 0) || (source.uses?.max === "0") ) source.uses.max = "";
+    if ( (source.duration?.value === 0) || (source.duration?.value === "0") ) source.duration.value = "";
   }
 
   /* -------------------------------------------- */
