@@ -69,11 +69,7 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
     }, [[], []]);
 
     // Apply item filters
-    spells = this._filterItems(spells, this._filters.spellbook);
     other = this._filterItems(other, this._filters.features);
-
-    // Organize Spellbook
-    const spellbook = this._prepareSpellbook(context, spells);
 
     // Organize Features
     for ( let item of other ) {
@@ -87,7 +83,6 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
 
     // Assign and return
     context.features = Object.values(features);
-    context.spellbook = spellbook;
   }
 
   /* -------------------------------------------- */

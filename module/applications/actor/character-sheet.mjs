@@ -42,7 +42,7 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
   /** @override */
   _prepareItems(context) {
 
-    // Categorize items as inventory, spellbook, features, and classes
+    // Categorize items as inventory, features, and classes
     const inventory = {
       weapon: { label: "SHAPER.ItemTypeWeaponPl", items: [], dataset: {type: "weapon"} },
       equipment: { label: "SHAPER.ItemTypeEquipmentPl", items: [], dataset: {type: "equipment"} },
@@ -80,7 +80,6 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
 
     // Apply active item filters
     items = this._filterItems(items, this._filters.inventory);
-    spells = this._filterItems(spells, this._filters.spellbook);
     feats = this._filterItems(feats, this._filters.features);
 
     // Organize items
@@ -90,13 +89,6 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
       i.totalWeight = (i.system.quantity * i.system.weight).toNearest(0.1);
       inventory[i.type].items.push(i);
     }
-
-    // Organize Spellbook and count the number of prepared spells (excluding always, at will, etc...)
-    const spellbook = this._prepareSpellbook(context, spells);
-    const nPrepared = spells.filter(spell => {
-      const prep = spell.system.preparation;
-      return (spell.system.level > 0) && (prep.mode === "prepared") && prep.prepared;
-    }).length;
 
     const maxLevelDelta = CONFIG.SHAPER.maxLevel - this.actor.system.details.level;
 
@@ -120,8 +112,6 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
 
     // Assign and return
     context.inventory = Object.values(inventory);
-    context.spellbook = spellbook;
-    context.preparedSpells = nPrepared;
     context.features = Object.values(features);
     context.labels.background = backgrounds[0]?.name;
   }

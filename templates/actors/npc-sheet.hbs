@@ -76,7 +76,6 @@
     <nav class="sheet-navigation tabs" data-group="primary">
         <a class="item active" data-tab="attributes">{{ localize "SHAPER.Attributes" }}</a>
         <a class="item" data-tab="features">{{ localize "SHAPER.Features" }}</a>
-        <a class="item" data-tab="spellbook">{{ localize "SHAPER.Spellbook" }}</a>
         <a class="item" data-tab="effects">{{ localize "SHAPER.Effects" }}</a>
         <a class="item" data-tab="biography">{{ localize "SHAPER.Biography" }}</a>
     </nav>
@@ -172,11 +171,6 @@
         {{!-- Features Tab --}}
         <div class="tab features flexcol" data-group="primary" data-tab="features">
             {{> "shaper.actor-features" sections=features}}
-        </div>
-
-        {{!-- Spellbook Tab --}}
-        <div class="tab spellbook flexcol" data-group="primary" data-tab="spellbook">
-            {{> "shaper.actor-spellbook"}}
         </div>
 
         {{!-- Effects Tab --}}

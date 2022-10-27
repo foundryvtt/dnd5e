@@ -98,7 +98,6 @@ export async function preloadHandlebarsTemplates() {
     "systems/shaper/templates/actors/parts/actor-traits.hbs",
     "systems/shaper/templates/actors/parts/actor-inventory.hbs",
     "systems/shaper/templates/actors/parts/actor-features.hbs",
-    "systems/shaper/templates/actors/parts/actor-spellbook.hbs",
     "systems/shaper/templates/actors/parts/actor-warnings.hbs",
 
     // Item Sheet Partials
