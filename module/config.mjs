@@ -617,10 +617,12 @@ preLocalize("consumableTypes", { sort: true });
 
 /**
  * The valid currency denominations with localized labels, abbreviations, and conversions.
+ * The conversion number defines how many of that currency are equal to one GP (according
+ * to the rules as written).
  * @enum {{
  *   label: string,
  *   abbreviation: string,
- *   [conversion]: {into: string, each: number}
+ *   conversion: number,
  * }}
  */
 DND5E.currencies = {
