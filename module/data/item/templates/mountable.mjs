@@ -15,15 +15,15 @@ export default class MountableTemplate extends foundry.abstract.DataModel {
     return {
       armor: new foundry.data.fields.SchemaField({
         value: new foundry.data.fields.NumberField({
-          required: true, nullable: false, integer: true, initial: 10, min: 0, label: "DND5E.ArmorClass"
+          required: true, integer: true, min: 0, label: "DND5E.ArmorClass"
         })
       }, {label: "DND5E.ArmorClass"}),
       hp: new foundry.data.fields.SchemaField({
         value: new foundry.data.fields.NumberField({
-          required: true, nullable: false, integer: true, initial: 0, min: 0, label: "DND5E.HitPointsCurrent"
+          required: true, integer: true, min: 0, label: "DND5E.HitPointsCurrent"
         }),
         max: new foundry.data.fields.NumberField({
-          required: true, nullable: false, integer: true, initial: 0, min: 0, label: "DND5E.HitPointsMax"
+          required: true, integer: true, min: 0, label: "DND5E.HitPointsMax"
         }),
         dt: new foundry.data.fields.NumberField({
           required: true, integer: true, min: 0, label: "DND5E.DamageThreshold"
