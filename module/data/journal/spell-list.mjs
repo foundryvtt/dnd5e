@@ -14,9 +14,7 @@ export default class SpellListJournalPageData extends foundry.abstract.DataModel
       description: new foundry.data.fields.SchemaField({
         value: new foundry.data.fields.HTMLField({label: "DND5E.Description"})
       }),
-      spells: new foundry.data.fields.SetField(new foundry.data.fields.SchemaField({
-        uuid: new foundry.data.fields.StringField()
-      }), {label: "DND5E.ItemTypeSpellPl"})
+      spells: new foundry.data.fields.SetField(new foundry.data.fields.StringField(), {label: "DND5E.ItemTypeSpellPl"})
     };
   }
 }

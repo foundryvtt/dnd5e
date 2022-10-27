@@ -68,25 +68,23 @@ export default class JournalSpellListPageSheet extends JournalPageSheet {
     context.GROUPING_MODES = this.constructor.GROUPING_MODES;
     context.grouping = this.grouping || context.system.grouping;
 
-    context.spells = await Promise.all(context.system.spells.map(async s => {
-      return { ...s, document: await fromUuid(s.uuid) };
-    }));
-    context.spells.sort((a, b) => a.document.name.localeCompare(b.document.name));
+    context.spells = await Promise.all(context.system.spells.map(fromUuid));
+    context.spells.sort((a, b) => a.name.localeCompare(b.name));
 
     context.sections = {};
     for ( const spell of context.spells ) {
       let section;
       switch ( context.grouping ) {
         case "level":
-          const level = spell.document.system.level;
+          const level = spell.system.level;
           section = context.sections[level] ??= { header: CONFIG.DND5E.spellLevels[level], spells: [] };
           break;
         case "school":
-          const school = spell.document.system.school;
+          const school = spell.system.school;
           section = context.sections[school] ??= { header: CONFIG.DND5E.spellSchools[school], spells: [] };
           break;
         case "alphabetical":
-          const letter = spell.document.name.slice(0, 1).toLowerCase();
+          const letter = spell.name.slice(0, 1).toLowerCase();
           section = context.sections[letter] ??= { header: letter.toUpperCase(), spells: [] };
           break;
         default:
@@ -143,7 +141,7 @@ export default class JournalSpellListPageSheet extends JournalPageSheet {
     event.preventDefault();
     const uuidToDelete = event.currentTarget.closest("[data-item-uuid]")?.dataset.itemUuid;
     if ( !uuidToDelete ) return this;
-    const spellSet = this.document.system.spells.filter(s => s.uuid !== uuidToDelete);
+    const spellSet = this.document.system.spells.filter(s => s !== uuidToDelete);
     await this.document.update({"system.spells": Array.from(spellSet)});
     this.render();
   }
@@ -165,13 +163,12 @@ export default class JournalSpellListPageSheet extends JournalPageSheet {
       default: return false;
     }
 
-    const spellCollection = this.document.system.spells;
-    const spellUuids = new Set(spellCollection.map(s => s.uuid));
+    const spellUuids = this.document.system.spells;
     spells = spells.filter(item => (item.type === "spell") && !spellUuids.has(item.uuid));
     if ( !spells.length ) return false;
 
-    spells.forEach(i => spellCollection.add({uuid: i.uuid}));
-    await this.document.update({"system.spells": Array.from(spellCollection)});
+    spells.forEach(i => spellUuids.add(i.uuid));
+    await this.document.update({"system.spells": Array.from(spellUuids)});
     this.render();
   }
 
