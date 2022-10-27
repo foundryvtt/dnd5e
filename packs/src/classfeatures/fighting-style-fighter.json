@@ -1,34 +1,34 @@
 {
-  "_id": "x637K2Icp2ZFM1TB",
-  "name": "Divine Domain",
+  "_id": "fbExzwNwEAl2kW9c",
+  "name": "Fighting Style (Fighter)",
   "ownership": {
     "default": 0
   },
   "type": "feat",
   "system": {
     "description": {
-      "value": "<p>Choose one domain related to your deity, such as Life. Your choice grants you domain spells and other features when you choose it at 1st level. It also grants you additional ways to use Channel Divinity when you gain that feature at 2nd level, and additional benefits at 6th, 8th, and 17th levels.</p>\n<h5>Domain Spells</h5>\n<p>Each domain has a list of spells—its domain spells—that you gain at the cleric levels noted in the domain description. Once you gain a domain spell, you always have it prepared, and it doesn't count against the number of spells you can prepare each day.</p>\n<p>If you have a domain spell that doesn't appear on the cleric spell list, the spell is nonetheless a cleric spell for you.</p>",
+      "value": "<p>You adopt a particular style of fighting as your specialty. Choose one of the following options from the appropriate class list. You can't take a Fighting Style option more than once, even if you later get to choose again.</p>\n<p>@Compendium[dnd5e.classfeatures.8YwPFv3UAPjWVDNf]{Archery}</p>\n<p>@Compendium[dnd5e.classfeatures.zSlV0O2rQMdoq6pB]{Defense}</p>\n<p>@Compendium[dnd5e.classfeatures.hCop9uJrWhF1QPb4]{Dueling}</p>\n<p>@Compendium[dnd5e.classfeatures.3Nc6u9pyStByuJsm]{Great Weapon Fighting}</p>\n<p>@Compendium[dnd5e.classfeatures.06NVMYf58Z76O85O]{Protection}</p>\n<p>@Compendium[dnd5e.classfeatures.mHcSjcHJ8oZu3hkb]{Two Weapon Fighting}</p>",
       "chat": "",
       "unidentified": ""
     },
-    "source": "PHB pg. 58",
+    "source": "PHB pg. 72",
     "activation": {
       "type": "",
       "cost": 0,
       "condition": ""
     },
     "duration": {
-      "value": "",
+      "value": null,
       "units": ""
     },
     "target": {
-      "value": "",
+      "value": null,
       "width": null,
       "units": "",
       "type": ""
     },
     "range": {
-      "value": "",
+      "value": null,
       "long": null,
       "units": ""
     },
@@ -39,10 +39,10 @@
     },
     "consume": {
       "type": "",
-      "target": "",
+      "target": null,
       "amount": null
     },
-    "ability": "",
+    "ability": null,
     "actionType": "",
     "attackBonus": 0,
     "chatFlavor": "",
@@ -60,23 +60,23 @@
       "dc": null,
       "scaling": "spell"
     },
-    "requirements": "Cleric 1",
+    "requirements": "Fighter 1",
     "recharge": {
       "value": null,
       "charged": false
     }
   },
-  "sort": 800001,
+  "sort": 500001,
   "flags": {},
-  "img": "icons/magic/nature/tree-spirit-blue.webp",
+  "img": "icons/skills/melee/weapons-crossed-daggers-orange.webp",
   "effects": [],
   "folder": null,
   "_stats": {
     "systemId": "dnd5e",
     "systemVersion": "2.0.0",
     "coreVersion": "10.279",
-    "createdTime": 1661787234439,
-    "modifiedTime": 1661787234439,
+    "createdTime": 1661787234404,
+    "modifiedTime": 1661787234404,
     "lastModifiedBy": "dnd5ebuilder0000"
   }
 }

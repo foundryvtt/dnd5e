@@ -246,18 +246,32 @@ export default class Item5e extends Item {
   /* -------------------------------------------- */
 
   /**
+   * Spellcasting details for a class or subclass.
+   *
+   * @typedef {object} SpellcastingDescription
+   * @property {string} type              Spellcasting type as defined in ``CONFIG.DND5E.spellcastingTypes`.
+   * @property {string|null} progression  Progression within the specified spellcasting type if supported.
+   * @property {string} ability           Ability used when casting spells from this class or subclass.
+   * @property {number|null} levels       Number of levels of this class or subclass's class if embedded.
+   */
+
+  /**
    * Retrieve the spellcasting for a class or subclass. For classes, this will return the spellcasting
    * of the subclass if it overrides the class. For subclasses, this will return the class's spellcasting
    * if no spellcasting is defined on the subclass.
-   * @type {object}  Spellcasting object containing progression & ability.
+   * @type {SpellcastingDescription|null}  Spellcasting object containing progression & ability.
    */
   get spellcasting() {
     const spellcasting = this.system.spellcasting;
-    if ( !spellcasting ) return spellcasting;
+    if ( !spellcasting ) return null;
     const isSubclass = this.type === "subclass";
     const classSC = isSubclass ? this.class?.system.spellcasting : spellcasting;
     const subclassSC = isSubclass ? spellcasting : this.subclass?.system.spellcasting;
-    const finalSC = ( subclassSC && (subclassSC.progression !== "none") ) ? subclassSC : classSC;
+    const finalSC = foundry.utils.deepClone(
+      ( subclassSC && (subclassSC.progression !== "none") ) ? subclassSC : classSC
+    );
+    if ( !finalSC ) return null;
+    finalSC.levels = this.isEmbedded ? (this.system.levels ?? this.class?.system.levels) : null;
 
     // Temp method for determining spellcasting type until this data is available directly using advancement
     if ( CONFIG.DND5E.spellcastingTypes[finalSC.progression] ) finalSC.type = finalSC.progression;

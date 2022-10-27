@@ -16,6 +16,15 @@
     "hitDiceUsed": 0,
     "advancement": [
       {
+        "_id": "qv0gbr1rb5889ubd",
+        "type": "HitPoints",
+        "configuration": {},
+        "value": {},
+        "title": "",
+        "icon": "",
+        "classRestriction": ""
+      },
+      {
         "_id": "6pdotglp4hy4zlvb",
         "type": "ItemGrant",
         "configuration": {
@@ -75,15 +84,6 @@
         "classRestriction": ""
       },
       {
-        "_id": "qv0gbr1rb5889ubd",
-        "type": "HitPoints",
-        "configuration": {},
-        "value": {},
-        "title": "",
-        "icon": "",
-        "classRestriction": ""
-      },
-      {
         "_id": "6vytnom37pkazgld",
         "type": "ScaleValue",
         "configuration": {
@@ -103,6 +103,32 @@
         },
         "value": {},
         "title": "Wild Shape CR",
+        "icon": "",
+        "classRestriction": ""
+      },
+      {
+        "_id": "K8ShWezgK90dp1uk",
+        "type": "ScaleValue",
+        "configuration": {
+          "identifier": "cantrips-known",
+          "type": "number",
+          "distance": {
+            "units": ""
+          },
+          "scale": {
+            "1": {
+              "value": 2
+            },
+            "4": {
+              "value": 3
+            },
+            "10": {
+              "value": 4
+            }
+          }
+        },
+        "value": {},
+        "title": "Cantrips Known",
         "icon": "",
         "classRestriction": ""
       }

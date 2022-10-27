@@ -1,0 +1,32 @@
+<table{{#if level}} data-toc-level="{{level}}"{{/if}}>
+  {{#if caption}}
+    <caption>{{caption}}</caption>
+  {{/if}}
+  {{#if table.cols}}
+    <colgroup>
+      {{#each table.cols}}
+        <col{{#if (gt this.span 1)}} span="{{this.span}}"{{/if}}{{#if this.class}} class="{{this.class}}"{{/if}}>
+      {{/each}}
+    </colgroup>
+  {{/if}}
+  <thead>
+    {{#each table.headers}}
+      <tr>
+        {{#each this}}
+          <th scope="col"{{#if this.rowSpan}}
+            rowspan="{{this.rowSpan}}"{{/if}}{{#if this.colSpan}}
+            colspan="{{this.colSpan}}"{{/if}}>{{this.content}}</th>
+        {{/each}}
+      </tr>
+    {{/each}}
+  </thead>
+  <tbody>
+    {{#each table.rows}}
+      <tr>
+        {{#each this}}
+          <td{{#if this.class}} class="{{this.class}}"{{/if}}>{{{this.content}}}</td>
+        {{/each}}
+      </tr>
+    {{/each}}
+  </tbody>
+</table>

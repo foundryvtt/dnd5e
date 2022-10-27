@@ -117,6 +117,7 @@ Hooks.once("init", function() {
 
   // Hook up system data types
   CONFIG.Item.systemDataModels = dataModels.item.config;
+  CONFIG.JournalEntryPage.systemDataModels = dataModels.journal.config;
 
   // Register sheet application classes
   Actors.unregisterSheet("core", ActorSheet);
@@ -139,6 +140,10 @@ Hooks.once("init", function() {
   Items.registerSheet("dnd5e", applications.item.ItemSheet5e, {
     makeDefault: true,
     label: "DND5E.SheetClassItem"
+  });
+  DocumentSheetConfig.registerSheet(JournalEntryPage, "dnd5e", applications.journal.JournalClassPageSheet, {
+    label: "DND5E.SheetClassClassSummary",
+    types: ["class"]
   });
 
   // Preload Handlebars helpers & partials
@@ -190,7 +195,7 @@ Hooks.once("i18nInit", () => utils.performPreLocalization(CONFIG.DND5E));
 Hooks.once("ready", function() {
   // Apply custom compendium styles to the SRD rules compendium.
   const rules = game.packs.get("dnd5e.rules");
-  rules.apps = [new applications.SRDCompendium(rules)];
+  rules.apps = [new applications.journal.SRDCompendium(rules)];
 
   // Wait to register hotbar drop hook on ready so that modules could register earlier if they want to
   Hooks.on("hotbarDrop", (bar, data, slot) => {
