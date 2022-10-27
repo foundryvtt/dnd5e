@@ -1783,20 +1783,25 @@ export default class Actor5e extends Actor {
   convertCurrency() {
     const curr = foundry.utils.deepClone(this.system.currency);
     const conversion = Object.entries(CONFIG.DND5E.currencies);
-    conversion.sort((a, b) => a[1].conversion-b[1].conversion);
-    var change = 0
-    for ( let [c, data] of conversion) {
-      const rate = data.conversion
-      if ( !rate ) continue
-      change = change + curr[c] / rate
-      }
+    conversion.sort((a, b) => a[1].conversion - b[1].conversion);
+
+    var change = 0;
     for ( let [c, data] of conversion) {
       const rate = data.conversion;
       if ( !rate ) continue;
+
+      change = change + curr[c] / rate;
+    }
+
+    for ( let [c, data] of conversion) {
+      const rate = data.conversion;
+      if ( !rate ) continue;
+
       let amt = Math.floor(change * rate);
       curr[c] = amt;
       change = (change - amt / rate);
     }
+
     return this.update({"data.currency": curr});
   }
 
