@@ -112,7 +112,6 @@ export default class Actor5e extends Actor {
     this._prepareEncumbrance();
     this._prepareInitiative(bonusData, checkBonus);
     this._prepareScaleValues();
-    this._prepareSpellcasting();
   }
 
   /* -------------------------------------------- */
