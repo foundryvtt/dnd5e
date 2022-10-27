@@ -276,8 +276,8 @@ export default class Actor5e extends Actor {
     const feats = CONFIG.SHAPER.characterFlags;
     const skillBonus = simplifyBonus(globalBonuses.skill, bonusData);
     for ( const [id, skl] of Object.entries(this.system.skills) ) {
-      const ability0 = this.system.abilities[skl.ability[0]];
-      const ability1 = this.system.abilities[skl.ability[1]];
+      const ability0 = this.system.abilities[skl.ability0];
+      const ability1 = this.system.abilities[skl.ability1];
       skl.value = Math.clamped(Number(skl.value).toNearest(0.5), 0, 2) ?? 0;
       const baseBonus = simplifyBonus(skl.bonuses?.check, bonusData);
 
@@ -588,8 +588,8 @@ export default class Actor5e extends Actor {
    */
   async rollSkill(skillId, options={}) {
     const skl = this.system.skills[skillId];
-    const abl0 = this.system.abilities[skl.ability[0]];
-    const abl1 = this.system.abilities[skl.ability[1]];
+    const abl0 = this.system.abilities[skl.ability0];
+    const abl1 = this.system.abilities[skl.ability1];
     const globalBonuses = this.system.bonuses?.abilities ?? {};
     const parts = ["@mod", "@abilityCheckBonus"];
     const data = this.getRollData();
@@ -597,8 +597,8 @@ export default class Actor5e extends Actor {
     // Add ability modifier
     data.mod = skl.mod;
     data.points = skl.points;
-    data.defaultAbility0 = skl.ability[0];
-    data.defaultAbility1 = skl.ability[1];
+    data.defaultAbility0 = skl.ability0;
+    data.defaultAbility1 = skl.ability1;
 
 
     // Global ability check bonus
