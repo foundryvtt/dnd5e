@@ -693,12 +693,12 @@ export default class ActorSheet5e extends ActorSheet {
   _onChangeInputDelta(event) {
     const input = event.target;
     const value = input.value;
-    if(value.match(/^([\d+-]\d*$)/)){
+    if ( /^([\d+-]\d*$)/.test(value) ){
       if ( ["+", "-"].includes(value[0]) ) {
-        let delta = parseFloat(value);
+        const delta = parseFloat(value);
         input.value = Number(foundry.utils.getProperty(this.actor, input.name)) + delta;
       } else if ( value[0] === "=" ) input.value = value.slice(1);
-    }else{
+    } else {
       input.value = Number(foundry.utils.getProperty(this.actor, input.name));
     }
   }
