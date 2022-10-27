@@ -227,34 +227,12 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
       case "rollDeathSave":
         return this.actor.rollDeathSave({event: event});
       case "rollInitiative":
-        let answer = false; 
-        answer = await new Promise((resolve) => {
-            new Dialog({
-                title: "Advantage",
-                buttons: {
-                          advantage: {
-                            label: game.i18n.localize("DND5E.Advantage"),
-                            callback: async() =>  resolve(1)
-                          },
-                          normal: {
-                            label: game.i18n.localize("DND5E.Normal"),
-                            callback: async() =>  resolve(2)
-                          },
-                          disadvantage: {
-                            label: game.i18n.localize("DND5E.Disadvantage"),
-                            callback: async() =>  resolve(3)
-                          }
-                        },
-                default:'true'
-            }).render(true);
+        const initiative = new Promise((resolve) => {
+          resolve(this.actor.rollSkill("ini"));
         });
-        if(answer == 1 || this.actor.system.FlagsInitiativeAdv == true){
-          return(this.actor.rollInitiative({createCombatants: true, initiativeOptions: {formula: ("2d20kh1+" + this.actor.system.attributes.init.total)}}));
-        }else if(answer == 2){
-          return(this.actor.rollInitiative({createCombatants: true, initiativeOptions: {}}));
-        }else if(answer == 3){
-          return(this.actor.rollInitiative({createCombatants: true, initiativeOptions: {formula: ("2d20kl1+" + this.actor.system.attributes.init.total)}}));
-        }
+        let z = (await initiative);
+        let x = this.actor.rollInitiative({ createCombatants: true, initiativeOptions: { formula: (""+ z +"+"+ this.actor.system.attributes.init.bonus) } });
+        return (x);
     }
     
   }

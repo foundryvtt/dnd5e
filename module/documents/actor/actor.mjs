@@ -892,7 +892,9 @@ export default class Actor5e extends Actor {
      * @returns {boolean}                    Explicitly return `false` to prevent skill check from being rolled.
      */
     if ( Hooks.call("dnd5e.preRollSkill", this, rollData, skillId) === false ) return;
-
+    if(skillId == "ini"){
+      rollData.chatMessage = false;
+    }
     const roll = await d20Roll(rollData);
 
     /**

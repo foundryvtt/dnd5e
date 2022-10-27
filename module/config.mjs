@@ -68,6 +68,7 @@ DND5E.skills = {
   ath: { label: "DND5E.SkillAth", ability: "str" },
   dec: { label: "DND5E.SkillDec", ability: "cha" },
   his: { label: "DND5E.SkillHis", ability: "int" },
+  ini: { label: "DND5E.SkillIni", ability: "dex" },
   ins: { label: "DND5E.SkillIns", ability: "wis" },
   itm: { label: "DND5E.SkillItm", ability: "cha" },
   inv: { label: "DND5E.SkillInv", ability: "int" },
