@@ -1335,22 +1335,6 @@
   text-align: right;
   padding-right: 10px;
 }
-.shaper.sheet.item .details .spell-materials {
-  flex: 0 0 100%;
-  margin: 0.25em 0;
-  justify-content: flex-end;
-}
-.shaper.sheet.item .details .spell-materials label {
-  flex: 0 0 64px;
-  text-align: right;
-  margin-right: 5px;
-  font-size: 12px;
-  line-height: 24px;
-}
-.shaper.sheet.item .details .spell-materials input[type="number"] {
-  flex: 0 0 48px;
-  margin-right: 10px;
-}
 .shaper.sheet.item h4.damage-header {
   margin: 0;
   padding: 0;

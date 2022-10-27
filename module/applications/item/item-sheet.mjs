@@ -67,7 +67,6 @@ export default class ItemSheet5e extends ItemSheet {
       // Action Details
       hasAttackRoll: item.hasAttack,
       isHealing: item.system.actionType === "heal",
-      isFlatDC: item.system.save?.scaling === "flat",
       isLine: ["line", "wall"].includes(item.system.target?.type),
 
       // Vehicles

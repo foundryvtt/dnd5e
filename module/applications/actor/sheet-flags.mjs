@@ -91,8 +91,7 @@ export default class ActorSheetFlags extends DocumentSheet {
       {name: "system.bonuses.rsak.damage", label: "SHAPER.BonusRSDamage"},
       {name: "system.bonuses.abilities.check", label: "SHAPER.BonusAbilityCheck"},
       {name: "system.bonuses.abilities.save", label: "SHAPER.BonusAbilitySave"},
-      {name: "system.bonuses.abilities.skill", label: "SHAPER.BonusAbilitySkill"},
-      {name: "system.bonuses.spell.dc", label: "SHAPER.BonusSpellDC"}
+      {name: "system.bonuses.abilities.skill", label: "SHAPER.BonusAbilitySkill"}
     ];
     for ( let b of bonuses ) {
       b.value = foundry.utils.getProperty(src, b.name) || "";

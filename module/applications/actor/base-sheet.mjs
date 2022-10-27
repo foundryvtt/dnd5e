@@ -319,15 +319,6 @@ export default class ActorSheet5e extends ActorSheet {
         if ( filters.has(f) && (item.system.activation?.type !== f) ) return false;
       }
 
-      // Spell-specific filters
-      if ( filters.has("ritual") && (item.system.components.ritual !== true) ) return false;
-      if ( filters.has("concentration") && (item.system.components.concentration !== true) ) return false;
-      if ( filters.has("prepared") ) {
-        if ( (item.system.level === 0) || ["innate", "always"].includes(item.system.preparation.mode) ) return true;
-        if ( this.actor.type === "npc" ) return true;
-        return item.system.preparation.prepared;
-      }
-
       // Equipment-specific filters
       if ( filters.has("equipped") && (item.system.equipped !== true) ) return false;
       return true;
@@ -376,7 +367,6 @@ export default class ActorSheet5e extends ActorSheet {
       html.find(".item-create").click(this._onItemCreate.bind(this));
       html.find(".item-delete").click(this._onItemDelete.bind(this));
       html.find(".item-uses input").click(ev => ev.target.select()).change(this._onUsesChange.bind(this));
-      html.find(".slot-max-override").click(this._onSpellSlotOverride.bind(this));
 
       // Active Effect management
       html.find(".effect-control").click(ev => ActiveEffect5e.onManageActiveEffect(ev, this.actor));
@@ -513,12 +503,6 @@ export default class ActorSheet5e extends ActorSheet {
       return false;
     }
 
-    // Create a Consumable spell scroll on the Inventory tab
-    if ( (itemData.type === "spell") && (this._tabs[0].active === "inventory") ) {
-      const scroll = await Item5e.createScrollFromSpell(itemData);
-      return scroll.toObject();
-    }
-
     // Clean up data
     this._onDropResetData(itemData);
 
@@ -558,30 +542,6 @@ export default class ActorSheet5e extends ActorSheet {
     return similarItem.update({
       "system.quantity": similarItem.system.quantity + Math.max(itemData.system.quantity, 1)
     });
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Handle enabling editing for a spell slot override value.
-   * @param {MouseEvent} event    The originating click event.
-   * @private
-   */
-  async _onSpellSlotOverride(event) {
-    const span = event.currentTarget.parentElement;
-    const level = span.dataset.level;
-    const override = this.actor.system.spells[level].override || span.dataset.slots;
-    const input = document.createElement("INPUT");
-    input.type = "text";
-    input.name = `system.spells.${level}.override`;
-    input.value = override;
-    input.placeholder = span.dataset.slots;
-    input.dataset.dtype = "Number";
-
-    // Replace the HTML
-    const parent = span.parentElement;
-    parent.removeChild(span);
-    parent.appendChild(input);
   }
 
   /* -------------------------------------------- */

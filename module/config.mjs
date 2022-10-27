@@ -441,144 +441,6 @@ preLocalize("healingTypes");
 
 /* -------------------------------------------- */
 
-
-/**
- * Various different ways a spell can be prepared.
- */
-SHAPER.spellPreparationModes = {
-  prepared: "SHAPER.SpellPrepPrepared",
-  pact: "SHAPER.PactMagic",
-  always: "SHAPER.SpellPrepAlways",
-  atwill: "SHAPER.SpellPrepAtWill",
-  innate: "SHAPER.SpellPrepInnate"
-};
-preLocalize("spellPreparationModes");
-
-/**
- * Subset of `SHAPER.spellPreparationModes` that consume spell slots.
- * @type {boolean[]}
- */
-SHAPER.spellUpcastModes = ["always", "pact", "prepared"];
-
-/**
- * Ways in which a class can contribute to spellcasting levels.
- * @enum {string}
- */
-SHAPER.spellProgression = {
-  none: "SHAPER.SpellNone",
-  full: "SHAPER.SpellProgFull",
-  half: "SHAPER.SpellProgHalf",
-  third: "SHAPER.SpellProgThird",
-  pact: "SHAPER.SpellProgPact",
-  artificer: "SHAPER.SpellProgArt"
-};
-preLocalize("spellProgression");
-
-/* -------------------------------------------- */
-
-/**
- * The available choices for how spell damage scaling may be computed.
- * @enum {string}
- */
-SHAPER.spellScalingModes = {
-  none: "SHAPER.SpellNone",
-  cantrip: "SHAPER.SpellCantrip",
-  level: "SHAPER.SpellLevel"
-};
-preLocalize("spellScalingModes", { sort: true });
-
-
-/* -------------------------------------------- */
-/*  Spell Details                               */
-/* -------------------------------------------- */
-
-/**
- * Types of components that can be required when casting a spell.
- * @enum {object}
- */
-SHAPER.spellComponents = {
-  vocal: {
-    label: "SHAPER.ComponentVerbal",
-    abbr: "SHAPER.ComponentVerbalAbbr"
-  },
-  somatic: {
-    label: "SHAPER.ComponentSomatic",
-    abbr: "SHAPER.ComponentSomaticAbbr"
-  },
-  material: {
-    label: "SHAPER.ComponentMaterial",
-    abbr: "SHAPER.ComponentMaterialAbbr"
-  }
-};
-preLocalize("spellComponents", {keys: ["label", "abbr"]});
-
-/**
- * Supplementary rules keywords that inform a spell's use.
- * @enum {object}
- */
-SHAPER.spellTags = {
-  concentration: {
-    label: "SHAPER.Concentration",
-    abbr: "SHAPER.ConcentrationAbbr"
-  },
-  ritual: {
-    label: "SHAPER.Ritual",
-    abbr: "SHAPER.RitualAbbr"
-  }
-};
-preLocalize("spellTags", {keys: ["label", "abbr"]});
-
-/**
- * Schools to which a spell can belong.
- * @enum {string}
- */
-SHAPER.spellSchools = {
-  abj: "SHAPER.SchoolAbj",
-  con: "SHAPER.SchoolCon",
-  div: "SHAPER.SchoolDiv",
-  enc: "SHAPER.SchoolEnc",
-  evo: "SHAPER.SchoolEvo",
-  ill: "SHAPER.SchoolIll",
-  nec: "SHAPER.SchoolNec",
-  trs: "SHAPER.SchoolTrs"
-};
-preLocalize("spellSchools", { sort: true });
-
-/**
- * Valid spell levels.
- * @enum {string}
- */
-SHAPER.spellLevels = {
-  0: "SHAPER.SpellLevel0",
-  1: "SHAPER.SpellLevel1",
-  2: "SHAPER.SpellLevel2",
-  3: "SHAPER.SpellLevel3",
-  4: "SHAPER.SpellLevel4",
-  5: "SHAPER.SpellLevel5",
-  6: "SHAPER.SpellLevel6",
-  7: "SHAPER.SpellLevel7",
-  8: "SHAPER.SpellLevel8",
-  9: "SHAPER.SpellLevel9"
-};
-preLocalize("spellLevels");
-
-/**
- * Spell scroll item ID within the `SHAPER.sourcePacks` compendium for each level.
- * @enum {string}
- */
-SHAPER.spellScrollIds = {
-  0: "rQ6sO7HDWzqMhSI3",
-  1: "9GSfMg0VOA2b4uFN",
-  2: "XdDp6CKh9qEvPTuS",
-  3: "hqVKZie7x9w3Kqds",
-  4: "DM7hzgL836ZyUFB1",
-  5: "wa1VF8TXHmkrrR35",
-  6: "tI3rWx4bxefNCexS",
-  7: "mtyw4NS1s7j2EJaD",
-  8: "aOrinPg7yuDZEuWr",
-  9: "O4YbkJkLlnsgUszZ"
-};
-
 /**
  * Compendium packs used for localized items.
  * @enum {string}
@@ -586,36 +448,6 @@ SHAPER.spellScrollIds = {
 SHAPER.sourcePacks = {
   ITEMS: "shaper.items"
 };
-
-/**
- * Define the standard slot progression by character level.
- * The entries of this array represent the spell slot progression for a full spell-caster.
- * @type {number[][]}
- */
-SHAPER.SPELL_SLOT_TABLE = [
-  [2],
-  [3],
-  [4, 2],
-  [4, 3],
-  [4, 3, 2],
-  [4, 3, 3],
-  [4, 3, 3, 1],
-  [4, 3, 3, 2],
-  [4, 3, 3, 3, 1],
-  [4, 3, 3, 3, 2],
-  [4, 3, 3, 3, 2, 1],
-  [4, 3, 3, 3, 2, 1],
-  [4, 3, 3, 3, 2, 1, 1],
-  [4, 3, 3, 3, 2, 1, 1],
-  [4, 3, 3, 3, 2, 1, 1, 1],
-  [4, 3, 3, 3, 2, 1, 1, 1],
-  [4, 3, 3, 3, 2, 1, 1, 1, 1],
-  [4, 3, 3, 3, 3, 1, 1, 1, 1],
-  [4, 3, 3, 3, 3, 2, 1, 1, 1],
-  [4, 3, 3, 3, 3, 2, 2, 1, 1]
-];
-
-
 
 
 /* -------------------------------------------- */
@@ -748,13 +580,6 @@ SHAPER.characterFlags = {
   weaponCriticalThreshold: {
     name: "SHAPER.FlagsWeaponCritThreshold",
     hint: "SHAPER.FlagsWeaponCritThresholdHint",
-    section: "SHAPER.Feats",
-    type: Number,
-    placeholder: 20
-  },
-  spellCriticalThreshold: {
-    name: "SHAPER.FlagsSpellCritThreshold",
-    hint: "SHAPER.FlagsSpellCritThresholdHint",
     section: "SHAPER.Feats",
     type: Number,
     placeholder: 20

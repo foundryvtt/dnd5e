@@ -98,33 +98,6 @@
     </div>
 </div>
 
-{{!-- Saving Throw --}}
-<div class="form-group input-select">
-    <label>{{ localize "SHAPER.ActionSave" }}</label>
-    <div class="form-fields">
-        <select name="system.save.ability">
-            {{#select system.save.ability}}
-            <option value=""></option>
-            {{#each config.abilities as |ability a|}}
-            <option value="{{a}}">{{ability}}</option>
-            {{/each}}
-            {{/select}}
-        </select>
-        <span>{{ localize "SHAPER.VsDC" }}</span>
-        <input type="number" step="any" name="system.save.dc"
-            value="{{#if system.save.dc}}{{system.save.dc}}{{/if}}"
-            placeholder="{{ localize 'SHAPER.AbbreviationDC' }}" {{#unless isFlatDC}}disabled{{/unless}}>
-        <select name="system.save.scaling">
-            {{#select system.save.scaling}}
-            <option value="spell">{{ localize "SHAPER.Spellcasting" }}</option>
-            {{#each config.abilities as |ability a|}}
-            <option value="{{a}}">{{ability}}</option>
-            {{/each}}
-            <option value="flat">{{ localize "SHAPER.Flat" }}</option>
-            {{/select}}
-        </select>
-    </div>
-</div>
 
 {{!-- Chat Message Flavor --}}
 <div class="form-group stacked">

@@ -53,7 +53,7 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
     };
 
     // Partition items by category
-    let {items, spells, feats, backgrounds} = context.items.reduce((obj, item) => {
+    let {items, feats, backgrounds} = context.items.reduce((obj, item) => {
       const {quantity, uses, recharge, target} = item.system;
 
       // Item details
@@ -71,12 +71,11 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
       this._prepareItemToggleState(item);
 
       // Classify items into types
-      if ( item.type === "spell" ) obj.spells.push(item);
-      else if ( item.type === "feat" ) obj.feats.push(item);
+      if ( item.type === "feat" ) obj.feats.push(item);
       else if ( item.type === "background" ) obj.backgrounds.push(item);
       else if ( Object.keys(inventory).includes(item.type) ) obj.items.push(item);
       return obj;
-    }, { items: [], spells: [], feats: [], backgrounds: [] });
+    }, { items: [], feats: [], backgrounds: [] });
 
     // Apply active item filters
     items = this._filterItems(items, this._filters.inventory);
@@ -124,21 +123,9 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
    * @private
    */
   _prepareItemToggleState(item) {
-    if (item.type === "spell") {
-      const prep = item.system.preparation || {};
-      const isAlways = prep.mode === "always";
-      const isPrepared = !!prep.prepared;
-      item.toggleClass = isPrepared ? "active" : "";
-      if ( isAlways ) item.toggleClass = "fixed";
-      if ( isAlways ) item.toggleTitle = CONFIG.SHAPER.spellPreparationModes.always;
-      else if ( isPrepared ) item.toggleTitle = CONFIG.SHAPER.spellPreparationModes.prepared;
-      else item.toggleTitle = game.i18n.localize("SHAPER.SpellUnprepared");
-    }
-    else {
-      const isActive = !!item.system.equipped;
-      item.toggleClass = isActive ? "active" : "";
-      item.toggleTitle = game.i18n.localize(isActive ? "SHAPER.Equipped" : "SHAPER.Unequipped");
-    }
+    const isActive = !!item.system.equipped;
+    item.toggleClass = isActive ? "active" : "";
+    item.toggleTitle = game.i18n.localize(isActive ? "SHAPER.Equipped" : "SHAPER.Unequipped");
   }
 
   /* -------------------------------------------- */
@@ -208,7 +195,6 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
     event.preventDefault();
     const itemId = event.currentTarget.closest(".item").dataset.itemId;
     const item = this.actor.items.get(itemId);
-    const attr = item.type === "spell" ? "system.preparation.prepared" : "system.equipped";
     return item.update({[attr]: !foundry.utils.getProperty(item, attr)});
   }
 

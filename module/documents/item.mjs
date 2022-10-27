@@ -288,9 +288,6 @@ export default class Item5e extends Item {
         ability: CONFIG.SHAPER.abilities[this.system.ability]
       });
 
-      // Saving throws
-      this.getSaveDC();
-
       // To Hit
       this.getAttackToHit();
 
@@ -328,31 +325,6 @@ export default class Item5e extends Item {
     return this.labels.derivedDamage = derivedDamage;
   }
 
-  /* -------------------------------------------- */
-
-  /**
-   * Update the derived spell DC for an item that requires a saving throw.
-   * @returns {number|null}
-   */
-  getSaveDC() {
-    if ( !this.hasSave ) return null;
-    const save = this.system.save;
-
-    // Actor spell-DC based scaling
-    if ( save.scaling === "spell" ) {
-      save.dc = this.isOwned ? this.actor.system.attributes.spelldc : null;
-    }
-
-    // Ability-score based scaling
-    else if ( save.scaling !== "flat" ) {
-      save.dc = this.isOwned ? this.actor.system.abilities[save.scaling].dc : null;
-    }
-
-    // Update labels
-    const abl = CONFIG.SHAPER.abilities[save.ability] ?? "";
-    this.labels.save = game.i18n.format("SHAPER.SaveDC", {dc: save.dc || "", ability: abl});
-    return save.dc;
-  }
 
   /* -------------------------------------------- */
 

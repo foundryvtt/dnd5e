@@ -44,7 +44,7 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
   /** @override */
   _prepareItems(context) {
 
-    // Categorize Items as Features and Spells
+    // Categorize Items as Features
     const features = {
       weapons: { label: game.i18n.localize("SHAPER.AttackPl"), items: [], hasActions: true,
         dataset: {type: "weapon", "weapon-type": "natural"} },
