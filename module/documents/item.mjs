@@ -609,7 +609,7 @@ export default class Item5e extends Item {
    * - the constant '20'
    * @returns {number|null}  The minimum value that must be rolled to be considered a critical hit.
    */
-   getCriticalThreshold() {
+  getCriticalThreshold() {
     const actorFlags = this.actor.flags.dnd5e || {};
     if ( !this.hasAttack ) return null;
     let actorThreshold = null;
