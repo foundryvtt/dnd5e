@@ -632,11 +632,6 @@ export default class ActorSheet5e extends ActorSheet {
     const header = event.currentTarget;
     const type = header.dataset.type;
 
-    // Check to make sure the newly created class doesn't take player over level cap
-    if ( type === "class" && (this.actor.system.details.level + 1 > CONFIG.SHAPER.maxLevel) ) {
-      const err = game.i18n.format("SHAPER.MaxCharacterLevelExceededWarn", {max: CONFIG.SHAPER.maxLevel});
-      return ui.notifications.error(err);
-    }
 
     const itemData = {
       name: game.i18n.format("SHAPER.ItemNew", {type: game.i18n.localize(`SHAPER.ItemType${type.capitalize()}`)}),

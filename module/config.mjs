@@ -538,30 +538,6 @@ SHAPER.languages = {
 };
 preLocalize("languages", { sort: true });
 
-/**
- * Maximum allowed character level.
- * @type {number}
- */
-SHAPER.maxLevel = 20;
-
-/**
- * XP required to achieve each character level.
- * @type {number[]}
- */
-SHAPER.CHARACTER_EXP_LEVELS = [
-  0, 300, 900, 2700, 6500, 14000, 23000, 34000, 48000, 64000, 85000, 100000,
-  120000, 140000, 165000, 195000, 225000, 265000, 305000, 355000
-];
-
-/**
- * XP granted for each challenge rating.
- * @type {number[]}
- */
-SHAPER.CR_EXP_LEVELS = [
-  10, 200, 450, 700, 1100, 1800, 2300, 2900, 3900, 5000, 5900, 7200, 8400, 10000, 11500, 13000, 15000, 18000,
-  20000, 22000, 25000, 33000, 41000, 50000, 62000, 75000, 90000, 105000, 120000, 135000, 155000
-];
-
 
 /**
  * Special character flags.

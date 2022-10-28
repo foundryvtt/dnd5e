@@ -89,8 +89,6 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
       inventory[i.type].items.push(i);
     }
 
-    const maxLevelDelta = CONFIG.SHAPER.maxLevel - this.actor.system.details.level;
-
 
     // Organize Features
     const features = {
@@ -198,31 +196,4 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
     return item.update({[attr]: !foundry.utils.getProperty(item, attr)});
   }
 
-
-  /* -------------------------------------------- */
-
-  /** @override */
-  async _onDropSingleItem(itemData) {
-
-    // Increment the number of class levels a character instead of creating a new item
-    if ( itemData.type === "class" ) {
-      const charLevel = this.actor.system.details.level;
-      itemData.system.levels = Math.min(itemData.system.levels, CONFIG.SHAPER.maxLevel - charLevel);
-      if ( itemData.system.levels <= 0 ) {
-        const err = game.i18n.format("SHAPER.MaxCharacterLevelExceededWarn", { max: CONFIG.SHAPER.maxLevel });
-        ui.notifications.error(err);
-        return false;
-      }
-
-      const cls = this.actor.itemTypes.class.find(c => c.identifier === itemData.system.identifier);
-      if ( cls ) {
-        const priorLevel = cls.system.levels;
-        cls.update({"system.levels": priorLevel + itemData.system.levels});
-        return false;
-      }
-    }
-
-
-    return super._onDropSingleItem(itemData);
-  }
 }

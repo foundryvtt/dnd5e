@@ -19,12 +19,8 @@
 
                 {{#unless disableExperience}}
                 <div class="experience flexrow">
+                    <span class="current-xp-label">{{localize "SHAPER.CurrentXP"}}</span>
                     {{numberInput system.details.xp.value name="system.details.xp.value" placeholder="0"}}
-                    <span class="sep">/</span>
-                    <span class="max">{{system.details.xp.max}}</span>
-                </div>
-                <div class="xpbar">
-                    <span class="bar" style="width: {{system.details.xp.pct}}%"></span>
                 </div>
                 {{/unless}}
             </aside>

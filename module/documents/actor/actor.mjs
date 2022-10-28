@@ -114,17 +114,6 @@ export default class Actor5e extends Actor {
     this._prepareScaleValues();
   }
 
-  /* -------------------------------------------- */
-
-  /**
-   * Return the amount of experience required to gain a certain character level.
-   * @param {number} level  The desired level.
-   * @returns {number}      The XP required.
-   */
-  getLevelExp(level) {
-    const levels = CONFIG.SHAPER.CHARACTER_EXP_LEVELS;
-    return levels[Math.min(level, levels.length - 1)];
-  }
 
   /* -------------------------------------------- */
 
@@ -201,11 +190,6 @@ export default class Actor5e extends Actor {
 
     // Experience required for next level
     const xp = this.system.details.xp;
-    xp.max = this.getLevelExp(this.system.details.level || 1);
-    const prior = this.getLevelExp(this.system.details.level - 1 || 0);
-    const required = xp.max - prior;
-    const pct = Math.round((xp.value - prior) * 100 / required);
-    xp.pct = Math.clamped(pct, 0, 100);
   }
 
   /* -------------------------------------------- */
