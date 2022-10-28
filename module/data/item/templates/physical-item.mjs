@@ -19,9 +19,14 @@ export default class PhysicalItemTemplate extends foundry.abstract.DataModel {
       weight: new foundry.data.fields.NumberField({
         required: true, nullable: false, initial: 0, min: 0, label: "DND5E.Weight"
       }),
-      price: new foundry.data.fields.NumberField({
-        required: true, nullable: false, initial: 0, min: 0, label: "DND5E.Price"
-      }),
+      price: new foundry.data.fields.SchemaField({
+        value: new foundry.data.fields.NumberField({
+          required: true, nullable: false, initial: 0, min: 0, label: "DND5E.Price"
+        }),
+        currency: new foundry.data.fields.StringField({
+          required: true, blank: false, initial: "gp", label: "DND5E.Currency"
+        })
+      }, {label: "DND5E.Price"}),
       attunement: new foundry.data.fields.NumberField({
         required: true, integer: true, initial: CONFIG.DND5E.attunementTypes.NONE, label: "DND5E.Attunement"
       }),
@@ -36,6 +41,7 @@ export default class PhysicalItemTemplate extends foundry.abstract.DataModel {
   /** @inheritdoc */
   static migrateData(source) {
     this.migrateAttunement(source);
+    this.migratePrice(source);
     this.migrateRarity(source);
   }
 
@@ -48,6 +54,20 @@ export default class PhysicalItemTemplate extends foundry.abstract.DataModel {
   static migrateAttunement(source) {
     if ( (source.attuned === undefined) || (source.attunement !== undefined) ) return;
     source.attunement = source.attuned ? CONFIG.DND5E.attunementTypes.ATTUNED : CONFIG.DND5E.attunementTypes.NONE;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Migrate the item's price from a single field to an object with currency.
+   * @param {object} source  The candidate source data from which the model will be constructed.
+   */
+  static migratePrice(source) {
+    if ( foundry.utils.getType(source.price) === "Object" ) return;
+    source.price = {
+      value: Number.isNumeric(source.price) ? Number(source.price) : 0,
+      currency: "gp"
+    };
   }
 
   /* -------------------------------------------- */

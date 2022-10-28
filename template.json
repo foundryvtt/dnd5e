@@ -549,7 +549,10 @@
       "physicalItem": {
         "quantity": 1,
         "weight": 0,
-        "price": 0,
+        "price": {
+          "value": 0,
+          "currency": "gp"
+        },
         "attunement": 0,
         "equipped": false,
         "rarity": "",
