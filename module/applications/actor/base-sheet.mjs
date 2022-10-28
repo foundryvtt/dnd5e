@@ -315,7 +315,7 @@ export default class ActorSheet5e extends ActorSheet {
     return items.filter(item => {
 
       // Action usage
-      for ( let f of ["action", "bonus", "reaction"] ) {
+      for ( let f of ["major", "minor", "counter"] ) {
         if ( filters.has(f) && (item.system.activation?.type !== f) ) return false;
       }
 
