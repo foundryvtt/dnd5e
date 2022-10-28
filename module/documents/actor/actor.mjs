@@ -111,20 +111,6 @@ export default class Actor5e extends Actor {
     this._prepareSkills(bonusData, globalBonuses, checkBonus);
     this._prepareEncumbrance();
     this._prepareInitiative(bonusData, checkBonus);
-    this._prepareScaleValues();
-  }
-
-
-  /* -------------------------------------------- */
-
-  /**
-   * Return the amount of experience granted by killing a creature of a certain CR.
-   * @param {number} cr     The creature's challenge rating.
-   * @returns {number}      The amount of experience granted per kill.
-   */
-  getCRExp(cr) {
-    if ( cr < 1.0 ) return Math.max(200 * cr, 10);
-    return CONFIG.SHAPER.CR_EXP_LEVELS[cr];
   }
 
   /* -------------------------------------------- */
@@ -201,11 +187,6 @@ export default class Actor5e extends Actor {
    */
   _prepareNPCData() {
     const cr = this.system.details.cr;
-
-
-
-    // Kill Experience
-    this.system.details.xp.value = this.getCRExp(cr);
 
     // Spellcaster Level
     if ( this.system.attributes.spellcasting && !Number.isNumeric(this.system.details.spellLevel) ) {
@@ -343,19 +324,6 @@ export default class Actor5e extends Actor {
     init.total = init.mod + init.bonus + globalCheckBonus;
   }
 
-  /* -------------------------------------------- */
-
-  /**
-   * Derive any values that have been scaled by the Advancement system.
-   * Mutates the value of the `system.scale` object.
-   * @protected
-   */
-  _prepareScaleValues() {
-    this.system.scale = Object.entries(this.classes).reduce((scale, [identifier, cls]) => {
-      scale[identifier] = cls.scaleValues;
-      return scale;
-    }, {});
-  }
 
   /* -------------------------------------------- */
 
