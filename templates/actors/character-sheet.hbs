@@ -170,6 +170,7 @@
             <ul class="skills-list">
             {{#each config.skills as |obj s|}}
             {{#with (lookup ../system.skills s) as |skill|}}
+                {{#unless (eq skill.label "Initiative")}}
                 <li class="skill flexrow {{#if skill.value}}proficient{{/if}}" data-skill="{{s}}">
                     <input type="hidden" name="system.skills.{{s}}.value" value="{{skill.baseValue}}" data-dtype="Number"/>
                     <a class="proficiency-toggle skill-proficiency" title="{{skill.hover}}">{{{skill.icon}}}</a>
@@ -185,6 +186,7 @@
                         ({{skill.passive}})
                     </span>
                 </li>
+                {{/unless}}
             {{/with}}
             {{/each}}
             </ul>

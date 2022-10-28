@@ -24,6 +24,7 @@
  * @property {boolean} [elvenAccuracy]   Allow Elven Accuracy to modify this roll?
  * @property {boolean} [halflingLucky]   Allow Halfling Luck to modify this roll?
  * @property {boolean} [reliableTalent]  Allow Reliable Talent to modify this roll?
+ * @property {boolean} [formulaOnly]     Only return the formula, do not roll.
  *
  * ## Roll Configuration Dialog
  * @property {boolean} [fastForward=false]     Should the roll configuration dialog be skipped?
@@ -51,7 +52,7 @@
 export async function d20Roll({
   parts=[], data={}, event,
   advantage, disadvantage, critical=20, fumble=1, targetValue,
-  elvenAccuracy, halflingLucky, reliableTalent,
+  elvenAccuracy, halflingLucky, reliableTalent, formulaOnly,
   fastForward=false, chooseModifier=false, template, title, dialogOptions,
   chatMessage=true, messageData={}, rollMode, flavor
 }={}) {
@@ -91,6 +92,10 @@ export async function d20Roll({
     }, dialogOptions);
     if ( configured === null ) return null;
   } else roll.options.rollMode ??= defaultRollMode;
+
+  if(formulaOnly == true){
+    return (roll.formula);
+  }
 
   // Evaluate the configured roll
   await roll.evaluate({async: true});

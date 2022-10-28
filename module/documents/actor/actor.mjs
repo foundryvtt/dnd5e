@@ -866,6 +866,12 @@ export default class Actor5e extends Actor {
     // Reliable Talent applies to any skill check we have full or better proficiency in
     const reliableTalent = (skl.value >= 1 && this.getFlag("dnd5e", "reliableTalent"));
 
+    let formulaOnly = false;
+
+    if(skillId == "ini"){
+      formulaOnly = true;
+    }
+
     // Roll and return
     const flavor = game.i18n.format("DND5E.SkillPromptTitle", {skill: CONFIG.DND5E.skills[skillId]?.label ?? ""});
     const rollData = foundry.utils.mergeObject({
@@ -879,7 +885,8 @@ export default class Actor5e extends Actor {
       messageData: {
         speaker: options.speaker || ChatMessage.getSpeaker({actor: this}),
         "flags.dnd5e.roll": {type: "skill", skillId }
-      }
+      },
+      formulaOnly
     }, options);
 
     /**
@@ -892,9 +899,7 @@ export default class Actor5e extends Actor {
      * @returns {boolean}                    Explicitly return `false` to prevent skill check from being rolled.
      */
     if ( Hooks.call("dnd5e.preRollSkill", this, rollData, skillId) === false ) return;
-    if(skillId == "ini"){
-      rollData.chatMessage = false;
-    }
+
     const roll = await d20Roll(rollData);
 
     /**
