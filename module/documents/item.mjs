@@ -613,14 +613,14 @@ export default class Item5e extends Item {
     const actorFlags = this.actor.flags.dnd5e || {};
     if ( !this.hasAttack ) return null;
     let actorThreshold = null;
-    let it = this.system.critical?.threshold ?? 20;
-    let at = 20;
+    let itemThreshold = this.system.critical?.threshold ?? Infinity;
+    let ammoThreshold = Infinity;
     if ( this.type === "weapon" ) actorThreshold = actorFlags.weaponCriticalThreshold;
     else if ( this.type === "spell" ) actorThreshold = actorFlags.spellCriticalThreshold;
     if ( this.system.consume?.type === "ammo" ) {
-      at = this.actor.items.get(this.system.consume.target)?.system.critical?.threshold ?? 20;
+      ammoThreshold = this.actor.items.get(this.system.consume.target)?.system.critical.threshold ?? Infinity;
     }
-    return Math.min(it, at, actorThreshold ?? 20);
+    return Math.min(itemThreshold, ammoThreshold, actorThreshold ?? 20);
   }
 
   /* -------------------------------------------- */
