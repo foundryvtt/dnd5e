@@ -307,6 +307,10 @@
           "value": 0,
           "max": 0
         },
+        "mp": {
+          "value": 0,
+          "max": 0
+        },
         "injury": {
           "value": 0,
           "max": 0
@@ -328,21 +332,15 @@
       "resources": {
         "primary": {
           "value": 0,
-          "max": 0,
-          "sr": 0,
-          "lr": 0
+          "max": 0
         },
         "secondary": {
           "value": 0,
-          "max": 0,
-          "sr": 0,
-          "lr": 0
+          "max": 0
         },
         "tertiary": {
           "value": 0,
-          "max": 0,
-          "sr": 0,
-          "lr": 0
+          "max": 0
         }
       }
     },
@@ -361,26 +359,7 @@
           "custom": ""
         },
         "environment": "",
-        "cr": 1,
-        "spellLevel": 0,
-        "xp": {
-          "value": 10
-        },
         "source": ""
-      },
-      "resources": {
-        "legact": {
-          "value": 0,
-          "max": 0
-        },
-        "legres": {
-          "value": 0,
-          "max": 0
-        },
-        "lair": {
-          "value": 0,
-          "initiative": 0
-        }
       }
     }
   },
