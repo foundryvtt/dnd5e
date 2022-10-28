@@ -10,16 +10,12 @@ export function _getInitiativeFormula() {
   const actor = this.actor;
   if ( !actor ) return "2d10";
   const init = actor.system.attributes.init;
-  const fin = actor.system.abilities.fin;
-  const sol = actor.system.abilities.sol;
 
   // Construct initiative formula parts
   let nd = 2;
   let mods = "";
   const parts = [
     `${nd}d10${mods}`,
-    fin.value,
-    sol.value,
     init.mod,
     (init.bonus !== 0) ? init.bonus : null
   ];

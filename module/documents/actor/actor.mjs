@@ -335,15 +335,12 @@ export default class Actor5e extends Actor {
     const init = this.system.attributes.init ??= {};
     const { initiativeAlert, jackOfAllTrades, remarkableAthlete } = this.flags.shaper ?? {};
 
-    // Initiative modifiers
-    const dexCheckBonus = simplifyBonus(this.system.abilities.dex?.bonuses?.check, bonusData);
-
     // Compute initiative modifier
-    init.mod = this.system.abilities.dex?.mod ?? 0;
+    init.mod = (this.system.abilities.fin?.mod ?? 0) + (this.system.abilities.sol?.mod ?? 0);
 
     init.value = init.value ?? 0;
     init.bonus = init.value + (initiativeAlert ? 5 : 0);
-    init.total = init.mod + init.bonus + dexCheckBonus + globalCheckBonus;
+    init.total = init.mod + init.bonus + globalCheckBonus;
   }
 
   /* -------------------------------------------- */
