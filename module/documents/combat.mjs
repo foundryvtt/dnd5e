@@ -5,7 +5,6 @@
  * See Combat._getInitiativeFormula for more detail.
  * @returns {string}  Final initiative formula for the actor.
  * 
- * TODO: Modify this to fit the system
  */
 export function _getInitiativeFormula() {
   const actor = this.actor;
@@ -13,7 +12,6 @@ export function _getInitiativeFormula() {
   const init = actor.system.attributes.init;
   const fin = actor.system.abilities.fin;
   const sol = actor.system.abilities.sol;
-  const rollData = actor.getRollData();
 
   // Construct initiative formula parts
   let nd = 2;
@@ -25,6 +23,8 @@ export function _getInitiativeFormula() {
     init.mod,
     (init.bonus !== 0) ? init.bonus : null
   ];
+
+  /* TODO: Find out how to implement tiebreaker */
 
   return parts.filter(p => p !== null).join(" + ");
 }
