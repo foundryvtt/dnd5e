@@ -20,7 +20,8 @@ export function _getInitiativeFormula() {
     (init.bonus !== 0) ? init.bonus : null
   ];
 
-  /* TODO: Find out how to implement tiebreaker */
+  // Apply tiebreaker
+  parts.push((init.mod ?? 0) / 100);
 
   return parts.filter(p => p !== null).join(" + ");
 }
