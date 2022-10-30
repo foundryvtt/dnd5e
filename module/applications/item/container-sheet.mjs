@@ -1,3 +1,4 @@
+import PhysicalItemTemplate from "../../data/item/templates/physical-item.mjs";
 import ItemSheet5e from "./item-sheet.mjs";
 
 export default class ContainerSheet extends ItemSheet5e {
@@ -124,7 +125,6 @@ export default class ContainerSheet extends ItemSheet5e {
           const summary = $(li.querySelector(".item-summary"));
           summary.slideUp(200, () => summary.remove());
           this._expanded.delete(item.id);
-          li.classList.remove("expanded");
         } else {
           const chatData = await item.getChatData({secrets: this.item.actor?.isOwner ?? false});
           const summary = $(await renderTemplate("systems/dnd5e/templates/items/parts/item-summary.hbs", chatData));
@@ -132,6 +132,7 @@ export default class ContainerSheet extends ItemSheet5e {
           summary.slideDown(200);
           this._expanded.add(item.id);
         }
+        return;
       case "use":
         return item.use({}, { event });
     }
@@ -172,9 +173,9 @@ export default class ContainerSheet extends ItemSheet5e {
 
   /**
    * Handle the dropping of Item data onto an Item Sheet.
-   * @param {DragEvent} event          The concluding DragEvent which contains the drop data.
-   * @param {object} data              The data transfer extracted from the event.
-   * @returns {Promise<Item|boolean>}  The created Item object or `false` if it couldn't be created.
+   * @param {DragEvent} event              The concluding DragEvent which contains the drop data.
+   * @param {object} data                  The data transfer extracted from the event.
+   * @returns {Promise<Item5e[]|boolean>}  The created Item object or `false` if it couldn't be created.
    * @protected
    */
   async _onDropItem(event, data) {
@@ -199,11 +200,7 @@ export default class ContainerSheet extends ItemSheet5e {
     }
 
     // Otherwise, create a new item in this context
-    const context = {pack: this.item.pack, parent: this.item.actor};
-    const itemData = foundry.utils.mergeObject(item.toObject(), {"system.container": this.item.id});
-    const newItem = await Item.create(itemData, context);
-
-    return newItem;
+    return await item.createInContext({pack: this.item.pack, parent: this.item.actor, container: this.item});
   }
 
   /* -------------------------------------------- */

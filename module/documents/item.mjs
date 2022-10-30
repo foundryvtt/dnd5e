@@ -1,4 +1,5 @@
 import ClassData from "../data/item/class.mjs";
+import PhysicalItemTemplate from "../data/item/templates/physical-item.mjs";
 import {d20Roll, damageRoll} from "../dice/dice.mjs";
 import simplifyRollFormula from "../dice/simplify-roll-formula.mjs";
 import Advancement from "./advancement/advancement.mjs";
@@ -2097,11 +2098,9 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     if ( userId !== game.user.id ) return;
 
     // Delete a container's contents when it is deleted
-    const contents = await this.system.contents;
-    if ( contents && options.deleteContents ) {
-      await Item.deleteDocuments(Array.from(contents.map(i => i.id)), {
-        pack: this.pack, parent: this.parent, deleteContents: true
-      });
+    const contents = await this.system.allContainedItems;
+    if ( contents?.size && options.deleteContents ) {
+      await Item.deleteDocuments(Array.from(contents.map(i => i.id)), { pack: this.pack, parent: this.parent });
     }
 
     // Assign a new original class
@@ -2180,6 +2179,47 @@ export default class Item5e extends SystemDocumentMixin(Item) {
 
   /* -------------------------------------------- */
 
+  /**
+   * Copy this item into the provided context along with any contained items.
+   * @param {DocumentModificationContext} [context]  Context for the item's creation.
+   * @param {Item5e} [context.container]             Container in which to create the item.
+   * @param {Function} [transformation]              Method called on this item (but not contents) before creation.
+   * @returns {Item5e[]}                             Newly created items along with any contained items also created.
+   */
+  async createInContext(context, transformation) {
+    let container;
+    let depth = 0;
+    if ( context.container ) {
+      container = context.container;
+      delete context.container;
+      depth = 1 + (await container.system.allContainers()).length;
+      if ( depth > PhysicalItemTemplate.MAX_DEPTH ) {
+        ui.notifications.warn(game.i18n.format("DND5E.ContainerMaxDepth", { depth: PhysicalItemTemplate.MAX_DEPTH }));
+        return;
+      }
+    }
+
+    const createItem = async (item, container, depth) => {
+      const newItem = await Item.create(foundry.utils.mergeObject(
+        transformation && (depth === 0) ? await transformation(item.toObject()) : item.toObject(),
+        {"system.container": container?.id ?? null}
+      ), context);
+
+      const contents = await item.system.contents;
+      if ( contents && (depth < PhysicalItemTemplate.MAX_DEPTH) ) {
+        for ( const doc of contents ) await createItem(doc, newItem, depth + 1);
+      }
+
+      created.push(newItem);
+    };
+
+    const created = [];
+    await createItem(this, container, depth);
+    return created;
+  }
+
+  /* -------------------------------------------- */
+
   /** @inheritdoc */
   async deleteDialog(options={}) {
     // Display custom delete dialog when deleting a container with contents
@@ -2202,6 +2242,17 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     }
 
     return super.deleteDialog(options);
+  }
+
+  /* -------------------------------------------- */
+  /*  Importing and Exporting                     */
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  toCompendium(pack, { setContainerId=false, ...options }={}) {
+    const data = super.toCompendium(pack, options);
+    if ( setContainerId ) foundry.utils.setProperty(data, "system.container", setContainerId);
+    return data;
   }
 
   /* -------------------------------------------- */

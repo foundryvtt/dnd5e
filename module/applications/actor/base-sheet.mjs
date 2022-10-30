@@ -140,7 +140,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
 
     // Remove items in containers & sort remaining
     context.items = context.items
-      .filter(i => !i.system.container)
+      .filter(i => !this.actor.items.has(i.system.container))
       .sort((a, b) => (a.sort || 0) - (b.sort || 0));
 
     // Temporary HP
@@ -961,21 +961,20 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
   /** @inheritdoc */
   async _onDropItemCreate(itemData) {
     let items = itemData instanceof Array ? itemData : [itemData];
-    const itemsWithoutAdvancement = items.filter(i => !i.system.advancement?.length);
+    const itemsWithoutAdvancement = items.filter(i => !i.system?.advancement?.length);
     const multipleAdvancements = (items.length - itemsWithoutAdvancement.length) > 1;
     if ( multipleAdvancements && !game.settings.get("dnd5e", "disableAdvancements") ) {
       ui.notifications.warn(game.i18n.format("DND5E.WarnCantAddMultipleAdvancements"));
       items = itemsWithoutAdvancement;
     }
 
-    const toCreate = [];
-    for ( const item of items ) {
-      const result = await this._onDropSingleItem(item);
-      if ( result ) toCreate.push(result);
-    }
-
     // Create the owned items as normal
-    return this.actor.createEmbeddedDocuments("Item", toCreate);
+    const created = [];
+    for ( const item of items ) created.concat(await item.createInContext(
+      {pack: this.actor.pack, parent: this.actor}, this._onDropSingleItem.bind(this)
+    ));
+
+    return created;
   }
 
   /* -------------------------------------------- */
