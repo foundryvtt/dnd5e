@@ -63,6 +63,10 @@ Hooks.once("init", function() {
   // Configure trackable attributes.
   _configureTrackableAttributes();
 
+  // Hook up custom item sidebar directory
+  CONFIG.Item.compendiumIndexFields.push("system.container");
+  CONFIG.ui.items = dnd5e.applications.item.ItemDirectory5e;
+
   // Register System Settings
   registerSystemSettings();
 
@@ -251,6 +255,10 @@ Hooks.once("ready", function() {
     const rules = game.packs.get("dnd5e.rules");
     rules.apps = [new applications.journal.SRDCompendium(rules)];
   }
+
+  // Apply custom item compendium
+  game.packs.filter(p => p.metadata.type === "Item")
+    .forEach(p => p.apps = [new applications.item.ItemCompendium5e(p)]);
 
   // Wait to register hotbar drop hook on ready so that modules could register earlier if they want to
   Hooks.on("hotbarDrop", (bar, data, slot) => {

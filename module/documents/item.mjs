@@ -32,6 +32,19 @@ export default class Item5e extends Item {
   /* --------------------------------------------- */
 
   /**
+   * The item that contains this item, if it is in a container. Returns a promise if the item is located
+   * in a compendium pack.
+   * @type {Item5e|Promise<Item5e>|void}
+   */
+  get container() {
+    if ( this.isEmbedded ) return this.actor.items.get(this.system.container);
+    if ( this.pack ) return game.packs.get(this.pack).getDocument(this.system.container);
+    return game.items.get(this.system.container);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * What is the critical hit threshold for this item, if applicable?
    * @type {number|null}
    * @see {@link ActionTemplate#criticalThreshold}
@@ -1890,6 +1903,36 @@ export default class Item5e extends Item {
   /*  Event Handlers                              */
   /* -------------------------------------------- */
 
+  /**
+   * Trigger a render on all sheets for items within which this item is contained.
+   * @param {object} options          Additional rendering options.
+   * @param {string} formerContainer  UUID of the former container if this item was moved.
+   * @private
+   */
+  async _renderContainers(options, formerContainer) {
+    // Render this item's container & any containers it is within
+    const parentContainers = await this.system.allContainers();
+    parentContainers.forEach(c => c.sheet?.render(false, options));
+
+    // Render the actor sheet, compendium, or sidebar
+    if ( this.isEmbedded ) this.actor.sheet?.render(false, options);
+    else if ( this.pack ) game.packs.get(this.pack).apps.forEach(a => a.render(false, options));
+    else {
+      const itemSidebar = ui.sidebar.tabs.items;
+      itemSidebar.render(false, options);
+      itemSidebar._popout?.render(false, options);
+    }
+
+    // Render former container if it was moved between containers
+    if ( formerContainer ) {
+      const former = await fromUuid(formerContainer);
+      former.render(false, options);
+      former._renderContainers(options);
+    }
+  }
+
+  /* -------------------------------------------- */
+
   /** @inheritdoc */
   async _preCreate(data, options, user) {
     await super._preCreate(data, options, user);
@@ -1921,13 +1964,15 @@ export default class Item5e extends Item {
   /** @inheritdoc */
   async _onCreate(data, options, userId) {
     super._onCreate(data, options, userId);
-    if ( (userId !== game.user.id) || !this.parent ) return;
+    if ( (userId !== game.user.id) || !this.parent ) return this._renderContainers();
 
     // Assign a new original class
     if ( (this.parent.type === "character") && (this.type === "class") ) {
       const pc = this.parent.items.get(this.parent.system.details.originalClass);
       if ( !pc ) await this.parent._assignPrimaryClass();
     }
+
+    this._renderContainers();
   }
 
   /* -------------------------------------------- */
@@ -1935,6 +1980,9 @@ export default class Item5e extends Item {
   /** @inheritdoc */
   async _preUpdate(changed, options, user) {
     await super._preUpdate(changed, options, user);
+    if ( foundry.utils.hasProperty(changed, "system.container") ) {
+      options.formerContainer = (await this.container)?.uuid;
+    }
     if ( (this.type !== "class") || !("levels" in (changed.system || {})) ) return;
 
     // Check to make sure the updated class level isn't below zero
@@ -1961,14 +2009,30 @@ export default class Item5e extends Item {
   /* -------------------------------------------- */
 
   /** @inheritdoc */
-  _onDelete(options, userId) {
+  async _onUpdate(changed, options, userId) {
+    await super._onUpdate(changed, options, userId);
+    this._renderContainers({}, options.formerContainer);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  async _onDelete(options, userId) {
     super._onDelete(options, userId);
-    if ( (userId !== game.user.id) || !this.parent ) return;
+    if ( userId !== game.user.id ) return this._renderContainers();
+
+    // Delete a container's contents when it is deleted
+    const contents = await this.system.contents;
+    if ( contents && !options.retainContents ) {
+      await Item.deleteDocuments(Array.from(contents.map(i => i.id)), {pack: this.pack, parent: this.parent});
+    }
 
     // Assign a new original class
-    if ( (this.type === "class") && (this.id === this.parent.system.details.originalClass) ) {
+    if ( this.parent && (this.type === "class") && (this.id === this.parent.system.details.originalClass) ) {
       this.parent._assignPrimaryClass();
     }
+
+    this._renderContainers();
   }
 
   /* -------------------------------------------- */

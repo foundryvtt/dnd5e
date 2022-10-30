@@ -1,68 +1,134 @@
 <form class="{{cssClass}} flexcol" autocomplete="off">
 
-	{{!-- Item Sheet Header --}}
-	<header class="sheet-header flexrow">
-		<img class="profile" src="{{item.img}}" data-tooltip="{{item.name}}" data-edit="img"/>
+  {{!-- Item Sheet Header --}}
+  <header class="sheet-header flexrow">
+    <img class="profile" src="{{item.img}}" data-tooltip="{{item.name}}" data-edit="img"/>
 
-		<div class="header-details flexrow">
-			<h1 class="charname">
-				<input name="name" type="text" value="{{item.name}}" placeholder="{{ localize 'DND5E.ItemName' }}"/>
-			</h1>
+    <div class="header-details flexrow">
+      <h1 class="charname">
+        <input name="name" type="text" value="{{item.name}}" placeholder="{{ localize 'DND5E.ItemName' }}"/>
+      </h1>
 
-			<div class="item-subtitle">
-				<h4 class="item-type">{{itemType}}</h4>
-				<span class="item-status">{{itemStatus}}</span>
-			</div>
+      <div class="item-subtitle">
+        <h4 class="item-type">{{itemType}}</h4>
+        <span class="item-status">{{itemStatus}}</span>
+      </div>
 
-			<ul class="summary flexrow">
-				<li>
-					<select name="system.rarity">
-						{{selectOptions config.itemRarity selected=system.rarity blank=""}}
-					</select>
-				</li>
-				<li>
-					<input type="text" name="system.source" value="{{system.source}}" placeholder="{{ localize 'DND5E.Source' }}"/>
-				</li>
-			</ul>
-		</div>
-	</header>
+      <ul class="summary flexrow">
+        <li>
+          <select name="system.rarity">
+            {{selectOptions config.itemRarity selected=system.rarity blank=""}}
+          </select>
+        </li>
+        <li>
+          <input type="text" name="system.source" value="{{system.source}}" placeholder="{{ localize 'DND5E.Source' }}"/>
+        </li>
+      </ul>
+    </div>
+  </header>
 
-	{{!-- Item Sheet Navigation --}}
-	<nav class="sheet-navigation tabs" data-group="primary">
-		<a class="item active" data-tab="description">{{ localize "DND5E.Description" }}</a>
-		<a class="item" data-tab="details">{{ localize "DND5E.Details" }}</a>
-	</nav>
+  {{!-- Item Sheet Navigation --}}
+  <nav class="sheet-navigation tabs" data-group="primary">
+    <a class="item" data-tab="contents">{{ localize "DND5E.Contents" }}</a>
+    <a class="item" data-tab="description">{{ localize "DND5E.Description" }}</a>
+    <a class="item" data-tab="details">{{ localize "DND5E.Details" }}</a>
+  </nav>
 
-	{{!-- Item Sheet Body --}}
-	<section class="sheet-body">
+  {{!-- Item Sheet Body --}}
+  <section class="sheet-body">
 
-		{{!-- Description Tab --}}
-		{{> "dnd5e.item-description"}}
+    {{!-- Contents Tab --}}
+    <div class="tab inventory flexcol" data-group="primary" data-tab="contents">
+      <div class="inventory-header flexrow">
+        <div class="currency flexrow">
+          {{#each system.currency as |v k|}}
+            <label class="denomination {{k}}">{{lookup (lookup @root.config.currencies k) "label"}}</label>
+            {{numberInput v name=(concat "system.currency." k)}}
+          {{/each}}
+        </div>
+      </div>
+      <ol class="items-list inventory-list">
+        <li class="items-header flexrow">
+          <h3 class="item-name flexrow">Contents</h3>
+          
+          <div class="item-detail item-weight">{{localize "DND5E.Weight"}}</div>
 
-		{{!-- Details Tab --}}
-		<div class="tab details" data-group="primary" data-tab="details">
-			<h3 class="form-header">{{localize 'DND5E.ItemContainerDetails'}}</h3>
+          {{#if @root.editable}}
+            <div class="item-controls flexrow"></div>
+          {{/if}}
+        </li>
 
-			<div class="form-group">
-				<label>{{localize 'DND5E.ItemContainerCapacity'}}</label>
-				<div class="form-fields">
-					{{numberInput system.capacity.value name="system.capacity.value" placeholder="&mdash;"}}
-				</div>
-			</div>
+        {{#each items as |item|}}
+        {{#dnd5e-itemContext this as |ctx|}}
+          <li class="item flexrow" data-item-id="{{item.id}}">
+            <div class="item-name flexrow rollable">
+              <div class="item-image" style="background-image: url('{{item.img}}')"></div>
+              <h4>{{item.name}} {{~#if ctx.isStack}} ({{item.system.quantity}}){{/if}}</h4>
+              {{#if item.attunement}}
+                <div class="item-detail attunement">
+                  <i class="fas {{item.attunement.icon}} {{item.attunement.cls}}"
+                    title="{{localize item.attunement.title}}"></i>
+                </div>
+              {{/if}}
+            </div>
 
-			<div class="form-group">
-				<label>{{localize 'DND5E.ItemContainerCapacityType'}}</label>
-				<select name="system.capacity.type">
-					{{selectOptions config.itemCapacityTypes selected=system.capacity.type}}
-				</select>
-			</div>
+            <div class="item-detail item-weight">
+              <div class="item-detail">
+                {{ctx.totalWeight}} {{@root.weightUnit}}
+              </div>
+            </div>
 
-			<div class="form-group stacked">
-				<label>{{localize 'DND5E.ItemContainerProperties'}}</label>
-				<label class="checkbox">
-					<input type="checkbox" name="system.capacity.weightless" {{checked system.capacity.weightless}}>
-					{{localize 'DND5E.ItemContainerWeightless'}}
-				</label>
-			</div>
-	</section>
+            {{#if @root.editable}}
+              <div class="item-controls flexrow">
+                <a class="item-control item-toggle {{item.toggleClass}}" title="{{item.toggleTitle}}">
+                  <i class="fas fa-shield-alt"></i>
+                </a>
+                <a class="item-control item-edit" title="{{localize 'DND5E.ItemEdit'}}">
+                  <i class="fas fa-edit"></i>
+                </a>
+                <a class="item-control item-delete" title="{{localize 'DND5E.ItemDelete'}}">
+                  <i class="fas fa-trash"></i>
+                </a>
+              </div>
+            {{/if}}
+          </li>
+        {{/dnd5e-itemContext}}
+        {{/each}}
+      </ol>
+
+      <div class="capacity">
+        <label>{{capacity.value}} / {{capacity.max}} {{capacity.units}}</label>
+        <div class="bar" style="width:{{capacity.pct}}%"></div>
+      </div>
+    </div>
+
+    {{!-- Description Tab --}}
+    {{> "dnd5e.item-description"}}
+
+    {{!-- Details Tab --}}
+    <div class="tab details" data-group="primary" data-tab="details">
+      <h3 class="form-header">{{localize 'DND5E.ItemContainerDetails'}}</h3>
+
+      <div class="form-group">
+        <label>{{localize 'DND5E.ItemContainerCapacity'}}</label>
+        <div class="form-fields">
+          {{numberInput system.capacity.value name="system.capacity.value" placeholder="&mdash;"}}
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>{{localize 'DND5E.ItemContainerCapacityType'}}</label>
+        <select name="system.capacity.type">
+          {{selectOptions config.itemCapacityTypes selected=system.capacity.type}}
+        </select>
+      </div>
+
+      <div class="form-group stacked">
+        <label>{{localize 'DND5E.ItemContainerProperties'}}</label>
+        <label class="checkbox">
+          <input type="checkbox" name="system.capacity.weightless" {{checked system.capacity.weightless}}>
+          {{localize 'DND5E.ItemContainerWeightless'}}
+        </label>
+      </div>
+  </section>
 </form>

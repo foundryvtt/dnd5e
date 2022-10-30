@@ -1,11 +1,13 @@
-<div class="tab flexrow active" data-group="primary" data-tab="description">
+<div class="tab flexrow" data-group="primary" data-tab="description">
 
     <div class="item-properties">
         {{#if isPhysical}}
-        <div class="form-group">
-            <label>{{ localize "DND5E.Quantity" }}</label>
-            {{numberInput system.quantity name="system.quantity"}}
-        </div>
+        {{#unless (eq item.type "backpack")}}
+            <div class="form-group">
+                <label>{{ localize "DND5E.Quantity" }}</label>
+                {{numberInput system.quantity name="system.quantity"}}
+            </div>
+        {{/unless}}
 
         <div class="form-group">
             <label>{{ localize "DND5E.Weight" }}</label>

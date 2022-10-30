@@ -224,7 +224,7 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
       // Handle cargo explicitly
       const isCargo = item.flags.dnd5e?.vehicleCargo === true;
       if ( isCargo ) {
-        totalWeight += (item.system.weight || 0) * item.system.quantity;
+        totalWeight += item.system.totalWeight ?? 0;
         cargo.cargo.items.push(item);
         continue;
       }
@@ -244,7 +244,7 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
           else features.actions.items.push(item);
           break;
         default:
-          totalWeight += (item.system.weight || 0) * item.system.quantity;
+          totalWeight += item.system.totalWeight ?? 0;
           cargo.cargo.items.push(item);
       }
     }

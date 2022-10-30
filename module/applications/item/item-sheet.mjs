@@ -8,16 +8,25 @@ import * as Trait from "../../documents/actor/trait.mjs";
  * Override and extend the core ItemSheet implementation to handle specific item types.
  */
 export default class ItemSheet5e extends ItemSheet {
-  constructor(...args) {
-    super(...args);
-
-    // Expand the default size of the class sheet
-    if ( this.object.type === "class" ) {
-      this.options.width = this.position.width = 600;
-      this.options.height = this.position.height = 680;
+  constructor(object, options={}) {
+    if ( object.type === "backpack" ) {
+      options.tabs = [{navSelector: ".tabs", contentSelector: ".sheet-body", initial: "contents"}];
     }
-    else if ( this.object.type === "subclass" ) {
-      this.options.height = this.position.height = 540;
+
+    super(object, options);
+
+    switch ( this.object.type ) {
+      case "backpack":
+        this.options.width = this.position.width = 600;
+        this.options.height = this.position.height = 540;
+        break;
+      case "class":
+        this.options.width = this.position.width = 600;
+        this.options.height = this.position.height = 680;
+        break;
+      case "subclass":
+        this.options.height = this.position.height = 540;
+        break;
     }
   }
 
@@ -34,7 +43,8 @@ export default class ItemSheet5e extends ItemSheet {
       tabs: [{navSelector: ".tabs", contentSelector: ".sheet-body", initial: "description"}],
       dragDrop: [
         {dragSelector: "[data-effect-id]", dropSelector: ".effects-list"},
-        {dragSelector: ".advancement-item", dropSelector: ".advancement"}
+        {dragSelector: ".advancement-item", dropSelector: ".advancement"},
+        {dragSelector: ".items-list .item", dropSelector: null}
       ]
     });
   }
@@ -101,6 +111,30 @@ export default class ItemSheet5e extends ItemSheet {
       effects: ActiveEffect5e.prepareActiveEffectCategories(item.effects)
     });
     context.abilityConsumptionTargets = this._getItemConsumptionTargets();
+
+    // Container contents
+    if ( this.item.type === "backpack" ) {
+      context.items = Array.from(await item.system.contents);
+      context.itemContext = {};
+
+      context.capacity = { max: item.system.capacity.value };
+      if ( item.system.capacity.type === "weight" ) {
+        context.capacity.value = await item.system.contentsWeight;
+        context.capacity.units = game.i18n.localize("DND5E.AbbreviationLbs"); // TODO: Support metric
+      } else {
+        context.capacity.value = await item.system.contentsCount;
+        context.capacity.units = game.i18n.localize("DND5E.ItemContainerCapacityItems");
+      }
+      context.capacity.pct = (context.capacity.value / context.capacity.max) * 100;
+
+      for ( let item of context.items ) {
+        const ctx = context.itemContext[item.id] ??= {};
+        ctx.totalWeight = (await item.system.totalWeight).toNearest(0.1);
+        ctx.isStack = item.system.quantity > 1;
+      }
+
+      context.items = context.items.sort((a, b) => (a.sort || 0) - (b.sort || 0));
+    }
 
     // Special handling for specific item types
     switch ( item.type ) {
@@ -424,6 +458,10 @@ export default class ItemSheet5e extends ItemSheet {
   /** @inheritDoc */
   activateListeners(html) {
     super.activateListeners(html);
+
+    html.find(".item .item-name.rollable h4").click(event => this._onItemSummary(event));
+    html.find(".item-edit").click(this._onItemEdit.bind(this));
+
     if ( this.isEditable ) {
       html.find(".damage-control").click(this._onDamageControl.bind(this));
       html.find(".trait-selector").click(this._onConfigureTraits.bind(this));
@@ -436,6 +474,12 @@ export default class ItemSheet5e extends ItemSheet {
         const t = event.currentTarget;
         if ( t.dataset.action ) this._onAdvancementAction(t, t.dataset.action);
       });
+      html.find(".item-delete").click(this._onItemDelete.bind(this));
+    }
+    if ( this.item.isEmbedded && this.item.actor.isOwner ) {
+      html.find(".rollable .item-image").click(event => this._onItemUse(event));
+    } else {
+      html.find(".rollable").each((i, el) => el.classList.remove("rollable"));
     }
 
     // Advancement context menu
@@ -517,7 +561,7 @@ export default class ItemSheet5e extends ItemSheet {
   /* -------------------------------------------- */
 
   /** @inheritdoc */
-  _onDragStart(event) {
+  async _onDragStart(event) {
     const li = event.currentTarget;
     if ( event.target.classList.contains("content-link") ) return;
 
@@ -528,8 +572,17 @@ export default class ItemSheet5e extends ItemSheet {
     if ( li.dataset.effectId ) {
       const effect = this.item.effects.get(li.dataset.effectId);
       dragData = effect.toDragData();
-    } else if ( li.classList.contains("advancement-item") ) {
+    }
+
+    // Advancement
+    else if ( li.classList.contains("advancement-item") ) {
       dragData = this.item.advancement.byId[li.dataset.id]?.toDragData();
+    }
+
+    // Item
+    else if ( li.dataset.itemId ) {
+      const item = await this.item.system.getContainedItem(li.dataset.itemId);
+      dragData = item?.toDragData();
     }
 
     if ( !dragData ) return;
@@ -560,8 +613,10 @@ export default class ItemSheet5e extends ItemSheet {
     switch ( data.type ) {
       case "ActiveEffect":
         return this._onDropActiveEffect(event, data);
-      case "Advancement":
       case "Item":
+      // TODO: Handle dropping folders into containers
+        if ( this.item.type === "backpack" ) return this._onDropItem(event, data);
+      case "Advancement":
         return this._onDropAdvancement(event, data);
     }
   }
@@ -630,6 +685,87 @@ export default class ItemSheet5e extends ItemSheet {
     const advancementArray = foundry.utils.deepClone(this.item.system.advancement);
     advancementArray.push(...advancements.map(a => a.toObject()));
     this.item.update({"system.advancement": advancementArray});
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle the dropping of Item data onto an Item Sheet.
+   * @param {DragEvent} event          The concluding DragEvent which contains the drop data.
+   * @param {object} data              The data transfer extracted from the event.
+   * @returns {Promise<Item|boolean>}  The created Item object or `false` if it couldn't be created.
+   */
+  async _onDropItem(event, data) {
+    const item = await Item.implementation.fromDropData(data);
+    if ( !this.item.isOwner || !item ) return false;
+
+    // If item already exists in this container, just adjust its sorting
+    if ( item.system.container === this.item.id ) {
+      return this._onSortItem(event, item);
+    }
+
+    // Prevent dropping containers within themselves
+    const parentContainers = await this.item.system.allContainers();
+    if ( (this.item.uuid === item.uuid) || parentContainers.includes(item) ) {
+      return ui.notifications.error(game.i18n.localize("DND5E.ContainerRecursiveError"));
+    }
+
+    // If item already exists in same DocumentCollection, just adjust its container property
+    if ( (item.actor === this.item.actor) && (item.pack === this.item.pack) ) {
+      return item.update({"system.container": this.item.id});
+    }
+
+    // Otherwise, create a new item in this context
+    const context = {pack: this.item.pack, parent: this.item.actor};
+    const itemData = foundry.utils.mergeObject(item.toObject(), {"system.container": this.item.id});
+    const newItem = await Item.create(itemData, context);
+
+    // Check to see if item is container. If so, copy over all of its contents also
+    const contents = await item.system.contents;
+    if ( contents ) {
+      const contentsData = contents.reduce((arr, c) => {
+        arr.push(foundry.utils.mergeObject(c.toObject(), {"system.container": newItem.id}));
+        return arr;
+      }, []);
+      await Item.createDocuments(contentsData, context);
+    }
+
+    return newItem;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle a drop event for an existing contained Item to sort it relative to its siblings.
+   * @param {DragEvent} event  The concluding DragEvent.
+   * @param {Item5e} item      The item that needs to be sorted.
+   */
+  async _onSortItem(event, item) {
+    const dropTarget = event.target.closest("[data-item-id]");
+    if ( !dropTarget ) return;
+    const contents = await this.item.system.contents;
+    const target = contents.get(dropTarget.dataset.itemId);
+
+    // Don't sort on yourself
+    if ( item.id === target.id ) return;
+
+    // Identify sibling items based on adjacent HTML elements
+    const siblings = [];
+    for ( const el of dropTarget.parentElement.children ) {
+      const siblingId = el.dataset.itemId;
+      if ( siblingId && (siblingId !== item.id) ) siblings.push(contents.get(siblingId));
+    }
+
+    // Perform the sort
+    const sortUpdates = SortingHelpers.performIntegerSort(item, {target, siblings});
+    const updateData = sortUpdates.map(u => {
+      const update = u.update;
+      update._id = u.target.id;
+      return update;
+    });
+
+    // Perform the update
+    Item.updateDocuments(updateData, {pack: this.item.pack, parent: this.item.actor});
   }
 
   /* -------------------------------------------- */
@@ -707,9 +843,89 @@ export default class ItemSheet5e extends ItemSheet {
 
   /* -------------------------------------------- */
 
+  /**
+   * Handle using an item from the Actor sheet, obtaining the Item instance, and dispatching to its use method.
+   * @param {Event} event  The triggering click event.
+   * @protected
+   */
+  async _onItemUse(event) {
+    event.preventDefault();
+    const itemId = event.currentTarget.closest(".item").dataset.itemId;
+    const item = await this.item.system.getContainedItem(itemId);
+    item?.use({}, {event});
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle toggling and items expanded description.
+   * @param {Event} event   Triggering event.
+   * @protected
+   */
+  async _onItemSummary(event) {
+    event.preventDefault();
+    const li = event.currentTarget.closest(".item");
+    const item = await this.item.system.getContainedItem(li.dataset.itemId);
+    if ( !item ) return;
+    const chatData = await item.getChatData({secrets: this.item.actor?.isOwner ?? false});
+
+    if ( li.classList.contains("expanded") ) {
+      let summary = $(li.querySelector(".item-summary"));
+      summary.slideUp(200, () => summary.remove());
+      li.classList.remove("expanded");
+    } else {
+      // TODO: Replace with template to support inline container contents list
+      const div = $(`<div class="item-summary">${chatData.description.value}</div>`);
+      const props = $('<div class="item-properties"></div>');
+      chatData.properties.forEach(p => props.append(`<span class="tag">${p}</span>`));
+      div.append(props);
+      $(li).append(div.hide());
+      div.slideDown(200); // TODO: Replace with non-jQuery implementation
+      li.classList.add("expanded");
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle editing an item in a container.
+   * @param {Event} event  The originating click event.
+   * @protected
+   */
+  async _onItemEdit(event) {
+    event.preventDefault();
+    const itemId = event.currentTarget.closest(".item").dataset.itemId;
+    const item = await this.item.system.getContainedItem(itemId);
+    item?.sheet.render(true);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle deleting an item from a container.
+   * @param {Event} event  The originating click event.
+   * @protected
+   */
+  async _onItemDelete(event) {
+    event.preventDefault();
+    const itemId = event.currentTarget.closest(".item").dataset.itemId;
+    const item = await this.item.system.getContainedItem(itemId);
+    item?.deleteDialog();
+  }
+
+  /* -------------------------------------------- */
+
   /** @inheritdoc */
   async _onSubmit(...args) {
     if ( this._tabs[0].active === "details" ) this.position.height = "auto";
     await super._onSubmit(...args);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  async deleteDialog(options={}) {
+    // TODO: Display custom delete dialog when deleting a container with contents
+    return super.deleteDialog(options);
   }
 }

@@ -1,6 +1,7 @@
 /**
  * Data model template with information on physical items.
  *
+ * @property {string} container           Container within which this item is located.
  * @property {number} quantity            Number of items in a stack.
  * @property {number} weight              Item's weight in pounds or kilograms (depending on system setting).
  * @property {object} price
@@ -14,6 +15,9 @@ export default class PhysicalItemTemplate extends foundry.abstract.DataModel {
   /** @inheritdoc */
   static defineSchema() {
     return {
+      container: new foundry.data.fields.ForeignDocumentField(foundry.documents.BaseItem, {
+        idOnly: true, label: "DND5E.Container"
+      }),
       quantity: new foundry.data.fields.NumberField({
         required: true, nullable: false, integer: true, initial: 1, min: 0, label: "DND5E.Quantity"
       }),
@@ -31,6 +35,18 @@ export default class PhysicalItemTemplate extends foundry.abstract.DataModel {
       rarity: new foundry.data.fields.StringField({required: true, blank: true, label: "DND5E.Rarity"}),
       identified: new foundry.data.fields.BooleanField({required: true, initial: true, label: "DND5E.Identified"})
     };
+  }
+
+  /* -------------------------------------------- */
+  /*  Getters                                     */
+  /* -------------------------------------------- */
+
+  /**
+   * The weight of all of the items in an item stack.
+   * @type {number}
+   */
+  get totalWeight() {
+    return this.quantity * this.weight;
   }
 
   /* -------------------------------------------- */
@@ -80,5 +96,26 @@ export default class PhysicalItemTemplate extends foundry.abstract.DataModel {
   static #migrateWeight(source) {
     if ( !("weight" in source) ) return;
     if ( (source.weight === null) || (source.weight === undefined) ) source.weight = 0;
+  }
+
+  /* -------------------------------------------- */
+  /*  Helper Methods                              */
+  /* -------------------------------------------- */
+
+  /**
+   * All of the containers this item is within up to the parent actor or collection.
+   * @returns {Promise<Item5e[]>}
+   */
+  async allContainers() {
+    let item = this.parent;
+    let container;
+    let depth = 0;
+    const containers = [];
+    while ( (container = await item.container) && (depth < 20) ) {
+      containers.push(container);
+      item = container;
+      depth++;
+    }
+    return containers;
   }
 }
