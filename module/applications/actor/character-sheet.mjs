@@ -42,6 +42,8 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
   /** @override */
   _prepareItems(context) {
 
+    /* TODO: HEY DUMBASS HERE"S WHERE THE ITEMS ARE CLASSIFIED AND GIVEN TYPES CHANGE THIS */
+
     // Categorize items as inventory, features, and classes
     const inventory = {
       weapon: { label: "SHAPER.ItemTypeWeaponPl", items: [], dataset: {type: "weapon"} },
