@@ -114,7 +114,6 @@ preLocalize("timePeriods");
 /* -------------------------------------------- */
 
 /**
- * TODO: Change to just major and minor action
  * 
  * Various ways in which an item or ability can be activated.
  * @enum {string}

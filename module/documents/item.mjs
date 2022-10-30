@@ -141,8 +141,6 @@ export default class Item5e extends Item {
 
     // Specialized preparation per Item type
     switch ( this.type ) {
-      case "equipment":
-        this._prepareEquipment(); break;
       case "feat":
         this._prepareFeat(); break;
       case "spell":
@@ -160,25 +158,13 @@ export default class Item5e extends Item {
   /* -------------------------------------------- */
 
   /**
-   * Prepare derived data for an equipment-type item and define labels.
-   * @protected
-   */
-  _prepareEquipment() {
-    this.labels.armor = this.system.armor.value ? `${this.system.armor.value} ${game.i18n.localize("SHAPER.AC")}` : "";
-  }
-
-  /* -------------------------------------------- */
-
-  /**
    * Prepare derived data for a feat-type item and define labels.
    * @protected
    */
   _prepareFeat() {
     const act = this.system.activation;
     const types = CONFIG.SHAPER.abilityActivationTypes;
-    if ( act?.type === types.legendary ) this.labels.featType = game.i18n.localize("SHAPER.LegendaryActionLabel");
-    else if ( act?.type === types.lair ) this.labels.featType = game.i18n.localize("SHAPER.LairActionLabel");
-    else if ( act?.type ) {
+    if ( act?.type ) {
       this.labels.featType = game.i18n.localize(this.system.damage.length ? "SHAPER.Attack" : "SHAPER.Action");
     }
     else this.labels.featType = game.i18n.localize("SHAPER.Passive");
