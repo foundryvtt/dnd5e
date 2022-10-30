@@ -2,14 +2,6 @@
     <section class="form-body">
 	    <p class="notes">{{localize "SHAPER.FlagsInstructions"}}</p>
 
-        <h3 class="form-header">{{localize "SHAPER.ItemTypeClass"}}</h3>
-        <div class="form-group">
-            <label>{{localize "SHAPER.ClassMakeOriginal"}}</label>
-            <select name="system.details.originalClass">
-              {{selectOptions classes selected=actor.system.details.originalClass}}
-            </select>
-            <p class="notes">{{localize "SHAPER.ClassMakeOriginalHint"}}</p>
-        </div>
 
         {{#each flags as |fs section|}}
         <h3 class="form-header">{{section}}</h3>

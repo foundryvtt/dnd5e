@@ -257,31 +257,11 @@ export default class ActorSheet5e extends ActorSheet {
       if ( !trait ) continue;
       let values = (trait.value ?? []) instanceof Array ? trait.value : [trait.value];
 
-      // Split physical damage types from others if bypasses is set
-      const physical = [];
-      if ( trait.bypasses?.length ) {
-        values = values.filter(t => {
-          if ( !config.physicalDamageTypes[t] ) return true;
-          physical.push(t);
-          return false;
-        });
-      }
-
       // Fill out trait values
       trait.selected = values.reduce((obj, t) => {
         obj[t] = choices[t];
         return obj;
       }, {});
-
-      // Display bypassed damage types
-      if ( physical.length ) {
-        const damageTypesFormatter = new Intl.ListFormat(game.i18n.lang, { style: "long", type: "conjunction" });
-        const bypassFormatter = new Intl.ListFormat(game.i18n.lang, { style: "long", type: "disjunction" });
-        trait.selected.physical = game.i18n.format("SHAPER.DamagePhysicalBypasses", {
-          damageTypes: damageTypesFormatter.format(physical.map(t => choices[t])),
-          bypassTypes: bypassFormatter.format(trait.bypasses.map(t => config.physicalWeaponProperties[t]))
-        });
-      }
 
       // Add custom entry
       if ( trait.custom ) trait.custom.split(";").forEach((c, i) => trait.selected[`custom${i+1}`] = c.trim());
@@ -755,7 +735,6 @@ export default class ActorSheet5e extends ActorSheet {
     const choices = CONFIG.SHAPER[a.dataset.options];
     const options = { name: a.dataset.target, title: `${label.innerText}: ${this.actor.name}`, choices };
     if ( ["di", "dr", "dv"].some(t => a.dataset.target.endsWith(`.${t}`)) ) {
-      options.bypasses = CONFIG.SHAPER.physicalWeaponProperties;
       return new DamageTraitSelector(this.actor, options).render(true);
     } else {
       return new TraitSelector(this.actor, options).render(true);

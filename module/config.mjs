@@ -278,9 +278,7 @@ preLocalize("currencies", { keys: ["label", "abbreviation"] });
  * @enum {string}
  */
 SHAPER.physicalDamageTypes = {
-  bludgeoning: "SHAPER.DamageBludgeoning",
-  piercing: "SHAPER.DamagePiercing",
-  slashing: "SHAPER.DamageSlashing"
+  physical: "SHAPER.DamagePhysical"
 };
 preLocalize("physicalDamageTypes", { sort: true });
 
@@ -292,16 +290,13 @@ preLocalize("physicalDamageTypes", { sort: true });
  */
 SHAPER.damageTypes = {
   ...SHAPER.physicalDamageTypes,
-  acid: "SHAPER.DamageAcid",
-  cold: "SHAPER.DamageCold",
+  ice: "SHAPER.DamageIce",
   fire: "SHAPER.DamageFire",
-  force: "SHAPER.DamageForce",
-  lightning: "SHAPER.DamageLightning",
-  necrotic: "SHAPER.DamageNecrotic",
-  poison: "SHAPER.DamagePoison",
-  psychic: "SHAPER.DamagePsychic",
-  radiant: "SHAPER.DamageRadiant",
-  thunder: "SHAPER.DamageThunder"
+  earth: "SHAPER.DamageEarth",
+  sky: "SHAPER.DamageSky",
+  light: "SHAPER.DamageLight",
+  dark: "SHAPER.DamageDark",
+  almighty: "SHAPER.DamageAlmighty"
 };
 preLocalize("damageTypes", { sort: true });
 
@@ -313,8 +308,7 @@ preLocalize("damageTypes", { sort: true });
  * @deprecated
  */
 SHAPER.damageResistanceTypes = {
-  ...SHAPER.damageTypes,
-  physical: "SHAPER.DamagePhysical"
+  ...SHAPER.damageTypes
 };
 preLocalize("damageResistanceTypes", { sort: true });
 
@@ -486,22 +480,13 @@ SHAPER.trackableAttributes = [
  * @enum {string}
  */
 SHAPER.conditionTypes = {
-  blinded: "SHAPER.ConBlinded",
-  charmed: "SHAPER.ConCharmed",
-  deafened: "SHAPER.ConDeafened",
-  diseased: "SHAPER.ConDiseased",
-  injury: "SHAPER.ConInjury",
-  frightened: "SHAPER.ConFrightened",
-  grappled: "SHAPER.ConGrappled",
-  incapacitated: "SHAPER.ConIncapacitated",
-  invisible: "SHAPER.ConInvisible",
-  paralyzed: "SHAPER.ConParalyzed",
-  petrified: "SHAPER.ConPetrified",
-  poisoned: "SHAPER.ConPoisoned",
-  prone: "SHAPER.ConProne",
-  restrained: "SHAPER.ConRestrained",
-  stunned: "SHAPER.ConStunned",
-  unconscious: "SHAPER.ConUnconscious"
+  blind: "SHAPER.ConBlind",
+  daze: "SHAPER.ConDaze",
+  degeneration: "SHAPER.ConDegeneration",
+  provoke: "SHAPER.ConProvoke",
+  root: "SHAPER.ConRoot",
+  slow: "SHAPER.ConSlow",
+  stagger: "SHAPER.ConStagger"
 };
 preLocalize("conditionTypes", { sort: true });
 

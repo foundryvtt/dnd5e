@@ -364,7 +364,7 @@
     }
   },
   "Item": {
-    "types": ["ability", "lesson", "utility", "talent", "backpack"],
+    "types": ["ability", "background", "lesson", "utility", "talent", "backpack", "spell", "feat"],
     "templates": {
       "itemDescription": {
         "description": {
@@ -483,6 +483,14 @@
       }
     },
     "talent": {
+      "templates": ["itemDescription", "activatedEffect", "action"],
+      "requirements": "",
+      "recharge": {
+        "value": null,
+        "charged": false
+      }
+    },
+    "feat": {
       "templates": ["itemDescription", "activatedEffect", "action"],
       "requirements": "",
       "recharge": {
