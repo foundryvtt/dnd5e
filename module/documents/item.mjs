@@ -783,6 +783,7 @@ export default class Item5e extends Item {
         item.prepareFinalAttributes();
       }
     }
+    if ( isSpell ) foundry.utils.setProperty(options.flags, "dnd5e.use", {spellLevel: item.system.level, itemId: this.id});
 
     /**
      * A hook event that fires before an item's resource consumption has been calculated.
