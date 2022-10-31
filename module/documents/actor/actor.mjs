@@ -182,7 +182,7 @@ export default class Actor5e extends Actor {
 
     data.classes = {};
     for ( const [identifier, cls] of Object.entries(this.classes) ) {
-      data.classes[identifier] = cls.system;
+      data.classes[identifier] = foundry.utils.deepClone(cls.system);
       if ( cls.subclass ) data.classes[identifier].subclass = cls.subclass.system;
     }
     return data;
