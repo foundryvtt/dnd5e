@@ -147,7 +147,7 @@ export default class Item5e extends Item {
   get class() {
     if ( !this.isEmbedded || (this.type !== "subclass") ) return null;
     const cid = this.system.classIdentifier;
-    return this._classLink ??= this.parent.items.find(i => (i.type === "class") && (i.system.identifier === cid));
+    return this._classLink ??= this.parent.items.find(i => (i.type === "class") && (i.identifier === cid));
   }
 
   /* -------------------------------------------- */
@@ -159,7 +159,7 @@ export default class Item5e extends Item {
   get subclass() {
     if ( !this.isEmbedded || (this.type !== "class") ) return null;
     const items = this.parent.items;
-    const cid = this.system.identifier;
+    const cid = this.identifier;
     return this._classLink ??= items.find(i => (i.type === "subclass") && (i.system.classIdentifier === cid));
   }
 
