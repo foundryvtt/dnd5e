@@ -21,6 +21,8 @@
                 <div class="experience flexrow">
                     <span class="current-xp-label">{{localize "SHAPER.CurrentXP"}}</span>
                     {{numberInput system.details.xp.value name="system.details.xp.value" placeholder="0"}}
+                    <span class="total-xp-label">{{localize "SHAPER.TotalXP"}}</span>
+                    {{numberInput system.details.xp.total name="system.details.xp.total" placeholder="0"}}
                 </div>
                 {{/unless}}
             </aside>
