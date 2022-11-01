@@ -283,10 +283,6 @@ preLocalize("damageResistanceTypes", { sort: true });
  * @enum {string}
  */
 SHAPER.movementTypes = {
-  burrow: "SHAPER.MovementBurrow",
-  climb: "SHAPER.MovementClimb",
-  fly: "SHAPER.MovementFly",
-  swim: "SHAPER.MovementSwim",
   walk: "SHAPER.MovementWalk"
 };
 preLocalize("movementTypes", { sort: true });
@@ -311,10 +307,11 @@ preLocalize("movementUnits");
  */
 SHAPER.distanceUnits = {
   none: "SHAPER.None",
-  self: "SHAPER.DistSelf",
-  touch: "SHAPER.DistTouch",
-  spec: "SHAPER.Special",
-  any: "SHAPER.DistAny",
+  melee: "SHAPER.DistMelee",
+  short: "SHAPER.DistShort",
+  medium: "SHAPER.DistMedium",
+  long: "SHAPER.DistLong",
+  extreme: "SHAPER.DistExtreme",
   ...SHAPER.movementUnits
 };
 preLocalize("distanceUnits");

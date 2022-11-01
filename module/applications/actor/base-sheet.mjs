@@ -158,37 +158,10 @@ export default class ActorSheet5e extends ActorSheet {
    */
   _getMovementSpeed(systemData, largestPrimary=false) {
     const movement = systemData.attributes.movement ?? {};
-
-    // Prepare an array of available movement speeds
-    let speeds = [
-      [movement.burrow, `${game.i18n.localize("SHAPER.MovementBurrow")} ${movement.burrow}`],
-      [movement.climb, `${game.i18n.localize("SHAPER.MovementClimb")} ${movement.climb}`],
-      [movement.fly, `${game.i18n.localize("SHAPER.MovementFly")} ${movement.fly}${movement.hover ? ` (${game.i18n.localize("SHAPER.MovementHover")})` : ""}`],
-      [movement.swim, `${game.i18n.localize("SHAPER.MovementSwim")} ${movement.swim}`]
-    ];
-    if ( largestPrimary ) {
-      speeds.push([movement.walk, `${game.i18n.localize("SHAPER.MovementWalk")} ${movement.walk}`]);
-    }
-
-    // Filter and sort speeds on their values
-    speeds = speeds.filter(s => !!s[0]).sort((a, b) => b[0] - a[0]);
-
-    // Case 1: Largest as primary
-    if ( largestPrimary ) {
-      let primary = speeds.shift();
-      return {
-        primary: `${primary ? primary[1] : "0"} ${movement.units}`,
-        special: speeds.map(s => s[1]).join(", ")
-      };
-    }
-
-    // Case 2: Walk as primary
-    else {
-      return {
-        primary: `${movement.walk || 0} ${movement.units}`,
-        special: speeds.length ? speeds.map(s => s[1]).join(", ") : ""
-      };
-    }
+    let speeds = [movement.walk, `${game.i18n.localize("SHAPER.MovementWalk")} ${movement.walk}`];
+    return {
+      primary: `${movement.walk || 0} ${movement.units}`,
+    };
   }
 
   /* -------------------------------------------- */
