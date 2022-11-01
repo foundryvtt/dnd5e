@@ -110,7 +110,7 @@ export default class ItemSheet5e extends ItemSheet {
     /** @deprecated */
     Object.defineProperty(context, "data", {
       get() {
-        const msg = `You are accessing the "data" attribute within the rendering context provided by the ItemSheet5e 
+        const msg = `You are accessing the "data" attribute within the rendering context provided by the ItemSheet5e
         class. This attribute has been deprecated in favor of "system" and will be removed in a future release`;
         foundry.utils.logCompatibilityWarning(msg, { since: "DnD5e 2.0", until: "DnD5e 2.2" });
         return context.system;
@@ -351,7 +351,7 @@ export default class ItemSheet5e extends ItemSheet {
   /** @inheritDoc */
   setPosition(position={}) {
     if ( !(this._minimized || position.height) ) {
-      position.height = (this._tabs[0].active === "details") ? "auto" : this.options.height;
+      position.height = (this._tabs[0].active === "details") ? "auto" : Math.max(this.height, this.options.height);
     }
     return super.setPosition(position);
   }
@@ -533,7 +533,7 @@ export default class ItemSheet5e extends ItemSheet {
   _onDrop(event) {
     const data = TextEditor.getDragEventData(event);
     const item = this.item;
-    
+
     /**
      * A hook event that fires when some useful data is dropped onto an ItemSheet5e.
      * @function dnd5e.dropItemSheetData
