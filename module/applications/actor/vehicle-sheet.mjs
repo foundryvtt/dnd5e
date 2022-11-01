@@ -40,14 +40,6 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
    */
   _computeEncumbrance(totalWeight, actorData) {
 
-    // Compute currency weight
-    const totalCoins = Object.values(actorData.system.currency).reduce((acc, denom) => acc + denom, 0);
-
-    const currencyPerWeight = game.settings.get("shaper", "metricWeightUnits")
-      ? CONFIG.SHAPER.encumbrance.currencyPerWeight.metric
-      : CONFIG.SHAPER.encumbrance.currencyPerWeight.imperial;
-    totalWeight += totalCoins / currencyPerWeight;
-
     // Vehicle weights are an order of magnitude greater.
     totalWeight /= game.settings.get("shaper", "metricWeightUnits")
       ? CONFIG.SHAPER.encumbrance.vehicleWeightMultiplier.metric

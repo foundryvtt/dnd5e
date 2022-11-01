@@ -144,13 +144,6 @@ export default class ActorSheet5e extends ActorSheet {
    */
   _getLabels(systemData) {
     const labels = this.actor.labels ?? {};
-
-    // Currency Labels
-    labels.currencies = Object.entries(CONFIG.SHAPER.currencies).reduce((obj, [k, c]) => {
-      obj[k] = c.label;
-      return obj;
-    }, {});
-
     return labels;
   }
 

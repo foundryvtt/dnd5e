@@ -1042,29 +1042,6 @@
   flex: 0 0 20px;
   justify-content: flex-end;
 }
-.shaper.sheet.actor .tab.features .currency,
-.shaper.sheet.actor .tab.inventory .inventory-filters .currency {
-  flex: 0 0 100%;
-  list-style: none;
-  margin: 4px 0 8px;
-  padding: 0;
-  font-size: 12px;
-}
-.shaper.sheet.actor .tab.features .currency label,
-.shaper.sheet.actor .tab.inventory .inventory-filters .currency label {
-  flex: 0;
-  margin-left: 8px;
-  text-align: right;
-  line-height: 20px;
-  color: #7a7971;
-}
-.shaper.sheet.actor .tab.features .currency input[type="number"],
-.shaper.sheet.actor .tab.inventory .inventory-filters .currency input[type="number"] {
-  flex: 0 0 48px;
-  text-align: center;
-  margin-left: 8px;
-  border-bottom: 2px groove #eeede0;
-}
 .shaper.sheet.actor .inventory-list {
   padding: 0 5px;
 }

@@ -46,10 +46,6 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
 
     // Categorize items as inventory, features, and classes
     const inventory = {
-      weapon: { label: "SHAPER.ItemTypeWeaponPl", items: [], dataset: {type: "weapon"} },
-      equipment: { label: "SHAPER.ItemTypeEquipmentPl", items: [], dataset: {type: "equipment"} },
-      consumable: { label: "SHAPER.ItemTypeConsumablePl", items: [], dataset: {type: "consumable"} },
-      tool: { label: "SHAPER.ItemTypeToolPl", items: [], dataset: {type: "tool"} },
       backpack: { label: "SHAPER.ItemTypeContainerPl", items: [], dataset: {type: "backpack"} },
       loot: { label: "SHAPER.ItemTypeLootPl", items: [], dataset: {type: "loot"} }
     };
@@ -153,14 +149,6 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
     event.preventDefault();
     const button = event.currentTarget;
     switch ( button.dataset.action ) {
-      case "convertCurrency":
-        return Dialog.confirm({
-          title: `${game.i18n.localize("SHAPER.CurrencyConvert")}`,
-          content: `<p>${game.i18n.localize("SHAPER.CurrencyConvertHint")}</p>`,
-          yes: () => this.actor.convertCurrency()
-        });
-      case "rollDeathSave":
-        return this.actor.rollDeathSave({event: event});
       case "rollInitiative":
         return this.actor.rollInitiative({createCombatants: true});
     }

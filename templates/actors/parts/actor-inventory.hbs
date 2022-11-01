@@ -1,19 +1,4 @@
 <div class="inventory-filters flexrow">
-    {{#unless isNPC}}
-    <ol class="currency flexrow">
-        <h3>
-            {{localize "SHAPER.Currency"}}
-            <a class="currency-convert rollable" data-action="convertCurrency" title="{{localize 'SHAPER.CurrencyConvert'}}">
-                <i class="fas fa-coins"></i>
-            </a>
-        </h3>
-        {{#each system.currency as |v k|}}
-        <label class="denomination {{k}}">{{ lookup ../labels.currencies k }}</label>
-        {{numberInput v name=(concat "system.currency." k)}}
-        {{/each}}
-    </ol>
-    {{/unless}}
-
     {{#unless isVehicle}}
     <ul class="filter-list flexrow" data-filter="inventory">
         <li class="filter-item" data-filter="action">{{localize "SHAPER.Action"}}</li>

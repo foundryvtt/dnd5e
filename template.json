@@ -364,7 +364,7 @@
     }
   },
   "Item": {
-    "types": ["ability", "background", "lesson", "utility", "talent", "backpack", "spell", "feat"],
+    "types": ["ability", "background", "lesson", "utility", "talent", "backpack", "spell", "feat", "loot"],
     "templates": {
       "itemDescription": {
         "description": {
@@ -497,6 +497,9 @@
         "value": null,
         "charged": false
       }
+    },
+    "loot": {
+      "templates": ["itemDescription", "physicalItem"]
     },
     "spell": {
       "templates": ["itemDescription", "activatedEffect", "action"],

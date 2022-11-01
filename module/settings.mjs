@@ -53,15 +53,6 @@ export default function registerSystemSettings() {
     type: Boolean
   });
 
-  // Record Currency Weight
-  game.settings.register("shaper", "currencyWeight", {
-    name: "SETTINGS.5eCurWtN",
-    hint: "SETTINGS.5eCurWtL",
-    scope: "world",
-    config: true,
-    default: true,
-    type: Boolean
-  });
 
   // Disable Experience Tracking
   game.settings.register("shaper", "disableExperienceTracking", {

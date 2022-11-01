@@ -231,44 +231,6 @@ preLocalize("vehicleTypes", { sort: true });
 
 
 /* -------------------------------------------- */
-
-/**
- * The valid currency denominations with localized labels, abbreviations, and conversions.
- * @enum {{
- *   label: string,
- *   abbreviation: string,
- *   [conversion]: {into: string, each: number}
- * }}
- */
-SHAPER.currencies = {
-  pp: {
-    label: "SHAPER.CurrencyPP",
-    abbreviation: "SHAPER.CurrencyAbbrPP"
-  },
-  gp: {
-    label: "SHAPER.CurrencyGP",
-    abbreviation: "SHAPER.CurrencyAbbrGP",
-    conversion: {into: "pp", each: 10}
-  },
-  ep: {
-    label: "SHAPER.CurrencyEP",
-    abbreviation: "SHAPER.CurrencyAbbrEP",
-    conversion: {into: "gp", each: 2}
-  },
-  sp: {
-    label: "SHAPER.CurrencySP",
-    abbreviation: "SHAPER.CurrencyAbbrSP",
-    conversion: {into: "ep", each: 5}
-  },
-  cp: {
-    label: "SHAPER.CurrencyCP",
-    abbreviation: "SHAPER.CurrencyAbbrCP",
-    conversion: {into: "sp", each: 10}
-  }
-};
-preLocalize("currencies", { keys: ["label", "abbreviation"] });
-
-/* -------------------------------------------- */
 /*  Damage Types                                */
 /* -------------------------------------------- */
 
@@ -364,10 +326,6 @@ preLocalize("distanceUnits");
  * @enum {{ imperial: number, metric: number }}
  */
 SHAPER.encumbrance = {
-  currencyPerWeight: {
-    imperial: 50,
-    metric: 110
-  },
   strMultiplier: {
     imperial: 15,
     metric: 6.8
