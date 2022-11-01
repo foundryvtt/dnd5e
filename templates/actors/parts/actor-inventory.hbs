@@ -1,10 +1,9 @@
 <div class="inventory-filters flexrow">
     {{#unless isVehicle}}
     <ul class="filter-list flexrow" data-filter="inventory">
-        <li class="filter-item" data-filter="action">{{localize "SHAPER.Action"}}</li>
-        <li class="filter-item" data-filter="bonus">{{localize "SHAPER.BonusAction"}}</li>
-        <li class="filter-item" data-filter="reaction">{{localize "SHAPER.Reaction"}}</li>
-        <li class="filter-item" data-filter="equipped">{{localize "SHAPER.Equipped"}}</li>
+        <li class="filter-item" data-filter="major">{{localize "SHAPER.MajorAction"}}</li>
+        <li class="filter-item" data-filter="minor">{{localize "SHAPER.MinorAction"}}</li>
+        <li class="filter-item" data-filter="counter">{{localize "SHAPER.CounterAction"}}</li>
     </ul>
     {{/unless}}
 </div>
@@ -105,17 +104,3 @@
     </ol>
 {{/each}}
 </ol>
-
-
-{{#unless isNPC}}
-{{#with system.attributes.encumbrance}}
-<div class="encumbrance {{#if encumbered}}encumbered{{/if}}">
-    <span class="encumbrance-bar" style="width:{{pct}}%"></span>
-    <span class="encumbrance-label">{{value}} / {{max}}</span>
-    <i class="encumbrance-breakpoint encumbrance-33 arrow-up"></i>
-    <i class="encumbrance-breakpoint encumbrance-33 arrow-down"></i>
-    <i class="encumbrance-breakpoint encumbrance-66 arrow-up"></i>
-    <i class="encumbrance-breakpoint encumbrance-66 arrow-down"></i>
-</div>
-{{/with}}
-{{/unless}}

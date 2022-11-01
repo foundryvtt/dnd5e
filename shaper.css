@@ -718,7 +718,6 @@
   /* ----------------------------------------- */
   /*  Inventory Lists                          */
   /* ----------------------------------------- */
-  /* Encumbrance Bar */
   /* ----------------------------------------- */
   /*  Features Tab                             */
   /* ----------------------------------------- */
@@ -1100,67 +1099,6 @@
   padding: 0.25em 0.5em;
   color: #191813;
   border-top: 1px solid #c9c7b8;
-}
-.shaper.sheet.actor .encumbrance {
-  flex: 0 0 12px;
-  background: #7a7971;
-  margin: 1px 15px 0 1px;
-  border: 1px solid #191813;
-  border-radius: 3px;
-  position: relative;
-}
-.shaper.sheet.actor .encumbrance .encumbrance-bar {
-  position: absolute;
-  top: 1px;
-  left: 1px;
-  background: #6c8aa5;
-  height: 8px;
-  border: 1px solid #cde4ff;
-  border-radius: 2px;
-}
-.shaper.sheet.actor .encumbrance .encumbrance-label {
-  height: 10px;
-  padding: 0 5px;
-  position: absolute;
-  top: 0;
-  right: 0;
-  font-size: 13px;
-  line-height: 12px;
-  text-align: right;
-  color: #EEE;
-  text-shadow: 0 0 5px #000;
-}
-.shaper.sheet.actor .encumbrance .encumbrance-breakpoint {
-  display: block;
-  position: absolute;
-}
-.shaper.sheet.actor .encumbrance .encumbrance-breakpoint.encumbrance-33 {
-  left: 33%;
-}
-.shaper.sheet.actor .encumbrance .encumbrance-breakpoint.encumbrance-66 {
-  left: 66%;
-}
-.shaper.sheet.actor .encumbrance .arrow-up {
-  bottom: 0;
-  width: 0;
-  height: 0;
-  border-left: 4px solid transparent;
-  border-right: 4px solid transparent;
-  border-bottom: 4px solid #666;
-}
-.shaper.sheet.actor .encumbrance .arrow-down {
-  top: 0;
-  width: 0;
-  height: 0;
-  border-left: 4px solid transparent;
-  border-right: 4px solid transparent;
-  border-top: 4px solid #666;
-}
-.shaper.sheet.actor .encumbrance.encumbered .arrow-up {
-  border-bottom: 4px solid #000;
-}
-.shaper.sheet.actor .encumbrance.encumbered .arrow-down {
-  border-top: 4px solid #000;
 }
 .shaper.sheet.actor .features .item-detail select {
   max-width: 90%;

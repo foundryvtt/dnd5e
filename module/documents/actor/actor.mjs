@@ -109,7 +109,6 @@ export default class Actor5e extends Actor {
     const checkBonus = simplifyBonus(globalBonuses?.check, bonusData);
     this._prepareAbilities(bonusData, globalBonuses, checkBonus);
     this._prepareSkills(bonusData, globalBonuses, checkBonus);
-    this._prepareEncumbrance();
     this._prepareInitiative(bonusData, checkBonus);
   }
 
@@ -257,40 +256,6 @@ export default class Actor5e extends Actor {
     }
   }
 
-
-  /* -------------------------------------------- */
-
-  /**
-   * Prepare the level and percentage of encumbrance for an Actor.
-   * Mutates the value of the `system.attributes.encumbrance` object.
-   * @protected
-   */
-  _prepareEncumbrance() {
-    const encumbrance = this.system.attributes.encumbrance ??= {};
-
-    // Get the total weight from items
-    const physicalItems = ["weapon", "equipment", "consumable", "tool", "backpack", "loot"];
-    let weight = this.items.reduce((weight, i) => {
-      if ( !physicalItems.includes(i.type) ) return weight;
-      const q = i.system.quantity || 0;
-      const w = i.system.weight || 0;
-      return weight + (q * w);
-    }, 0);
-
-    // Determine the Encumbrance size class
-    let mod = {tiny: 0.5, sm: 1, med: 1, lg: 2, huge: 4, grg: 8}[this.system.traits.size] || 1;
-    if ( this.flags.shaper?.powerfulBuild ) mod = Math.min(mod * 2, 8);
-
-    const strengthMultiplier = game.settings.get("shaper", "metricWeightUnits")
-      ? CONFIG.SHAPER.encumbrance.strMultiplier.metric
-      : CONFIG.SHAPER.encumbrance.strMultiplier.imperial;
-
-    // Populate final Encumbrance values
-    encumbrance.value = weight.toNearest(0.1);
-    encumbrance.max = ((this.system.abilities.str?.value ?? 10) * strengthMultiplier * mod).toNearest(0.1);
-    encumbrance.pct = Math.clamped((encumbrance.value * 100) / encumbrance.max, 0, 100);
-    encumbrance.encumbered = encumbrance.pct > (200 / 3);
-  }
 
   /* -------------------------------------------- */
 

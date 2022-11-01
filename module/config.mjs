@@ -319,22 +319,6 @@ SHAPER.distanceUnits = {
 };
 preLocalize("distanceUnits");
 
-/* -------------------------------------------- */
-
-/**
- * Configure aspects of encumbrance calculation so that it could be configured by modules.
- * @enum {{ imperial: number, metric: number }}
- */
-SHAPER.encumbrance = {
-  strMultiplier: {
-    imperial: 15,
-    metric: 6.8
-  },
-  vehicleWeightMultiplier: {
-    imperial: 2000, // 2000 lbs in an imperial ton
-    metric: 1000 // 1000 kg in a metric ton
-  }
-};
 
 /* -------------------------------------------- */
 

@@ -31,26 +31,6 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
   /*  Context Preparation                         */
   /* -------------------------------------------- */
 
-  /**
-   * Compute the total weight of the vehicle's cargo.
-   * @param {number} totalWeight    The cumulative item weight from inventory items
-   * @param {object} actorData      The data object for the Actor being rendered
-   * @returns {{max: number, value: number, pct: number}}
-   * @private
-   */
-  _computeEncumbrance(totalWeight, actorData) {
-
-    // Vehicle weights are an order of magnitude greater.
-    totalWeight /= game.settings.get("shaper", "metricWeightUnits")
-      ? CONFIG.SHAPER.encumbrance.vehicleWeightMultiplier.metric
-      : CONFIG.SHAPER.encumbrance.vehicleWeightMultiplier.imperial;
-
-    // Compute overall encumbrance
-    const max = actorData.system.attributes.capacity.cargo;
-    const pct = Math.clamped((totalWeight * 100) / max, 0, 100);
-    return {value: totalWeight.toNearest(0.1), max, pct};
-  }
-
   /* -------------------------------------------- */
 
   /** @override */
@@ -239,7 +219,6 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
     // Update the rendering context data
     context.features = Object.values(features);
     context.cargo = Object.values(cargo);
-    context.system.attributes.encumbrance = this._computeEncumbrance(totalWeight, context);
   }
 
   /* -------------------------------------------- */
