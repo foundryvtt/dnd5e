@@ -399,16 +399,17 @@
           "long": null,
           "units": ""
         },
-        "uses": {
+        "cooldown": {
           "value": null,
           "max": "",
           "per": null,
           "recovery": ""
         },
-        "consume": {
-          "type": "",
-          "target": null,
-          "amount": null
+        "upkeep": {
+          "value": null,
+          "max": "",
+          "per": null,
+          "recovery": ""
         }
       },
       "action": {
@@ -424,12 +425,7 @@
           "parts": [],
           "versatile": ""
         },
-        "formula": "",
-        "save": {
-          "ability": "",
-          "dc": null,
-          "scaling": "spell"
-        }
+        "formula": ""
       },
       "mountable": {
         "armor": {
@@ -453,13 +449,6 @@
         "type": "weight",
         "value": 0,
         "weightless": false
-      },
-      "currency": {
-        "cp": 0,
-        "sp": 0,
-        "ep": 0,
-        "gp": 0,
-        "pp": 0
       }
     },
     "lesson": {
@@ -486,43 +475,15 @@
         "charged": false
       }
     },
-    "feat": {
-      "templates": ["itemDescription", "activatedEffect", "action"],
-      "requirements": "",
-      "recharge": {
-        "value": null,
-        "charged": false
-      }
-    },
     "loot": {
       "templates": ["itemDescription", "physicalItem"]
     },
     "spell": {
       "templates": ["itemDescription", "activatedEffect", "action"],
-      "level": 1,
-      "school": "",
-      "components": {
-        "value": "",
-        "vocal": false,
-        "somatic": false,
-        "material": false,
-        "ritual": false,
-        "concentration": false
-      },
-      "materials": {
-        "value": "",
-        "consumed": false,
-        "cost": 0,
-        "supply": 0
-      },
-      "preparation": {
-        "mode": "prepared",
-        "prepared": false
-      },
-      "scaling": {
-        "mode": "none",
-        "formula": null
-      }
+      "tier": 1,
+      "careful": false,
+      "prerequisite": "",
+      "element": ""      
     }
   }
 }
