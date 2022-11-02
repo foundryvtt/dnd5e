@@ -16,6 +16,7 @@ import registerSystemSettings from "./module/settings.mjs";
 import * as advancement from "./module/advancement/_module.mjs";
 import * as applications from "./module/applications/_module.mjs";
 import * as canvas from "./module/canvas/_module.mjs";
+import * as dataModels from "./module/data/_module.mjs";
 import * as dice from "./module/dice/_module.mjs";
 import * as documents from "./module/documents/_module.mjs";
 import * as migrations from "./module/migration.mjs";
@@ -30,6 +31,7 @@ globalThis.dnd5e = {
   applications,
   canvas,
   config: DND5E,
+  dataModels,
   dice,
   documents,
   migrations,
@@ -113,6 +115,10 @@ Hooks.once("init", function() {
   CONFIG.Dice.rolls.push(dice.D20Roll);
   CONFIG.Dice.rolls.push(dice.DamageRoll);
 
+  // Hook up system data types
+  CONFIG.Item.systemDataModels = dataModels.item.config;
+  CONFIG.JournalEntryPage.systemDataModels = dataModels.journal.config;
+
   // Register sheet application classes
   Actors.unregisterSheet("core", ActorSheet);
   Actors.registerSheet("dnd5e", applications.actor.ActorSheet5eCharacter, {
@@ -134,6 +140,10 @@ Hooks.once("init", function() {
   Items.registerSheet("dnd5e", applications.item.ItemSheet5e, {
     makeDefault: true,
     label: "DND5E.SheetClassItem"
+  });
+  DocumentSheetConfig.registerSheet(JournalEntryPage, "dnd5e", applications.journal.JournalClassPageSheet, {
+    label: "DND5E.SheetClassClassSummary",
+    types: ["class"]
   });
 
   // Preload Handlebars helpers & partials
@@ -185,7 +195,7 @@ Hooks.once("i18nInit", () => utils.performPreLocalization(CONFIG.DND5E));
 Hooks.once("ready", function() {
   // Apply custom compendium styles to the SRD rules compendium.
   const rules = game.packs.get("dnd5e.rules");
-  rules.apps = [new applications.SRDCompendium(rules)];
+  rules.apps = [new applications.journal.SRDCompendium(rules)];
 
   // Wait to register hotbar drop hook on ready so that modules could register earlier if they want to
   Hooks.on("hotbarDrop", (bar, data, slot) => {
@@ -237,6 +247,7 @@ export {
   advancement,
   applications,
   canvas,
+  dataModels,
   dice,
   documents,
   migrations,

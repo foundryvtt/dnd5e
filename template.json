@@ -552,6 +552,7 @@
           "value": null,
           "units": ""
         },
+        "cover": null,
         "target": {
           "value": null,
           "width": null,
@@ -578,7 +579,7 @@
       "action": {
         "ability": null,
         "actionType": null,
-        "attackBonus": 0,
+        "attackBonus": "",
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -597,11 +598,11 @@
       },
       "mountable": {
         "armor": {
-          "value": 10
+          "value": null
         },
         "hp": {
-          "value": 0,
-          "max": 0,
+          "value": null,
+          "max": null,
           "dt": null,
           "conditions": ""
         }
@@ -693,7 +694,6 @@
       "level": 1,
       "school": "",
       "components": {
-        "value": "",
         "vocal": false,
         "somatic": false,
         "material": false,
@@ -731,6 +731,22 @@
       "baseItem": "",
       "properties": {},
       "proficient": true
+    }
+  },
+  "JournalEntryPage": {
+    "types": ["class"],
+    "htmlFields": ["description.value", "description.additionalHitPoints", "description.additionalTraits", "description.additionalEquipment", "description.subclass"],
+    "class": {
+      "item": "",
+      "description": {
+        "value": "",
+        "additionalHitPoints": "",
+        "additionalTraits": "",
+        "additionalEquipment": "",
+        "subclass": ""
+      },
+      "subclassHeader": "",
+      "subclassItems": []
     }
   }
 }
