@@ -115,7 +115,8 @@
                     <div class="item-detail item-weight">
                         {{#if ctx.totalWeight}}
                         <div class="item-detail">
-                            {{ ctx.totalWeight }} {{ @root.weightUnit }}
+                            {{ ctx.totalWeight }}
+                            {{ lookup (lookup @root.config.weightUnits item.system.weight.units) "abbreviation" }}
                         </div>
                         {{/if}}
                     </div>

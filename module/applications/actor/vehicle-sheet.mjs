@@ -48,11 +48,6 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
       : CONFIG.DND5E.encumbrance.currencyPerWeight.imperial;
     totalWeight += totalCoins / currencyPerWeight;
 
-    // Vehicle weights are an order of magnitude greater.
-    totalWeight /= game.settings.get("dnd5e", "metricWeightUnits")
-      ? CONFIG.DND5E.encumbrance.vehicleWeightMultiplier.metric
-      : CONFIG.DND5E.encumbrance.vehicleWeightMultiplier.imperial;
-
     // Compute overall encumbrance
     const max = actorData.system.attributes.capacity.cargo;
     const pct = Math.clamped((totalWeight * 100) / max, 0, 100);
@@ -210,11 +205,14 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
         }, {
           label: game.i18n.localize("DND5E.Weight"),
           css: "item-weight",
-          property: "system.weight",
+          property: "system.weight.value",
           editable: "Number"
         }]
       }
     };
+
+    const baseUnits = CONFIG.DND5E.encumbrance.baseUnits[this.actor.type] ?? CONFIG.DND5E.encumbrance.baseUnits.default;
+    const units = game.settings.get("dnd5e", "metricWeightUnits") ? baseUnits.metric : baseUnits.imperial;
 
     // Classify items owned by the vehicle and compute total cargo weight
     let totalWeight = 0;
@@ -225,7 +223,7 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
       // Handle cargo explicitly
       const isCargo = item.flags.dnd5e?.vehicleCargo === true;
       if ( isCargo ) {
-        totalWeight += item.system.totalWeight ?? 0;
+        totalWeight += item.system.totalWeightin?.(units) ?? 0;
         cargo.cargo.items.push(item);
         continue;
       }
@@ -245,7 +243,7 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
           else features.actions.items.push(item);
           break;
         default:
-          totalWeight += item.system.totalWeight ?? 0;
+          totalWeight += item.system.totalWeightIn?.(units) ?? 0;
           cargo.cargo.items.push(item);
       }
     }
