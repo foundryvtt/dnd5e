@@ -1426,32 +1426,6 @@
   flex: none;
   margin-left: 3px;
 }
-.shaper.sheet.actor.character .sheet-header .xpbar {
-  flex: 0 0 8px;
-  width: 100%;
-  margin-bottom: 5px;
-  background: #7a7971;
-  border: 1px solid #000;
-  border-radius: 3px;
-}
-.shaper.sheet.actor.character .sheet-header .xpbar .bar {
-  height: 4px;
-  margin: 1px;
-  display: block;
-  background: #afebff;
-  border: 1px solid #000;
-  border-radius: 2px;
-}
-.shaper.sheet.actor.character .sheet-header .attributes a.rest {
-  border: 1px solid #b5b3a4;
-  border-radius: 2px;
-  background: rgba(0, 0, 0, 0.05);
-  padding: 0 3px;
-  margin: 0 3px;
-}
-.shaper.sheet.actor.character .sheet-header .attributes .hit-dice {
-  font-size: 24px;
-}
 .shaper.sheet.actor.character .sheet-header .attributes .initiative .attribute-footer input {
   width: 32px;
 }
@@ -1459,24 +1433,8 @@
   text-align: right;
   padding-right: 5px;
 }
-.shaper.sheet.actor.character .resource .attribute-value > input {
-  flex: 0 0 25%;
-}
-.shaper.sheet.actor.character .resource .attribute-value label.recharge {
-  height: 32px;
-  position: relative;
-  font-family: "Signika", sans-serif;
-  font-size: 11px;
-  text-align: center;
-  color: #4b4a44;
-  align-items: center;
-}
-.shaper.sheet.actor.character .resource .attribute-value label.recharge input[type="checkbox"] {
-  flex-basis: 14px;
-  height: 14px;
-  width: 14px;
-  margin: 0;
-  top: -6px;
+.shaper.sheet.actor.character .resource .attribute-footer input {
+  width: 32px;
 }
 .shaper.sheet.actor.character ul.skills-list {
   flex: 0 0 212px;

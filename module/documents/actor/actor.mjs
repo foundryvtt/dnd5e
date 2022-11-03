@@ -71,6 +71,7 @@ export default class Actor5e extends Actor {
     const updates = {};
     this._prepareBaseAbilities(updates);
     this._prepareBaseSkills(updates);
+    this._prepareBaseStats();
     if ( !foundry.utils.isEmpty(updates) ) {
       if ( !this.id ) this.updateSource(updates);
       else this.update(updates);
@@ -162,6 +163,20 @@ export default class Actor5e extends Actor {
     this.system.skills = skills;
   }
 
+
+  /**
+   * Prepare the point stat data for an actor.
+   * Specifically, physO, menO, physD, menD
+   * @protected
+   */
+     _prepareBaseStats() {
+      if ( this.type === "vehicle") return;
+      const stats = {};
+      for ( const key of Object.keys(CONFIG.SHAPER.stats) ) {
+        stats[key] = this.system.stats[key];
+      }
+      this.system.stats = stats;
+    }
 
   /* -------------------------------------------- */
 
@@ -287,11 +302,7 @@ export default class Actor5e extends Actor {
    */
   _prepareStats() {
 
-    const stats = {};
-    for ( const key of Object.keys(CONFIG.SHAPER.stats) ) {
-      stats[key] = this.system.stats[key];
-    }
-    this.system.stats = stats;
+     const stats = this.system.stats ??={};
 
     const str = this.system.abilities.str.value;
     const fin = this.system.abilities.fin.value;
@@ -300,11 +311,16 @@ export default class Actor5e extends Actor {
     const hrt = this.system.abilities.hrt.value;
     const sol = this.system.abilities.sol.value;
     
-    this.system.stats.physO.value = str + fin;
-    this.system.stats.menO.value = mnd + sol;
+    stats.physO.bonus = stats.physO.bonus ?? 0;
+    stats.menO.bonus = stats.menO.bonus ?? 0;
+    stats.physD.bonus = stats.physD.bonus ?? 0;
+    stats.menD.bonus = stats.menD.bonus ?? 0;
 
-    this.system.stats.physD.value = 10 + fin + tgh;
-    this.system.stats.menD.value = 10 + hrt + sol;
+    stats.physO.value = str + fin + stats.physO.bonus;
+    stats.menO.value = mnd + sol + stats.menO.bonus;
+
+    stats.physD.value = 10 + fin + tgh + stats.physD.bonus;
+    stats.menD.value = 10 + hrt + sol + stats.menD.bonus;
   }
   /* -------------------------------------------- */
 

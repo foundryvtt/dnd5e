@@ -135,14 +135,18 @@
 
                 {{!-- Body Attributes --}}
                 <ul class="attributes flexrow">
-                    {{#each stats as |stat|}}
+                {{#each stats as |stat|}}
                     <li class="attribute resource">
                         <h4 class="attribute-name box-title">{{ stat.placeholder }}</h4>
                         <div class="attribute-value">
                             {{numberFormat stat.value name=(concat "system.stats." stat.name ".value")}}
                         </div>
+                        <footer class="attribute-footer">
+                            <span>{{ localize "SHAPER.Modifier" }}</span>
+                            {{numberInput stat.bonus name=(concat "system.stats." stat.name ".bonus")}}
+                        </footer>
                     </li>
-                    {{/each}}
+                {{/each}}
                 </ul>
 
                 {{!-- Counters --}}
