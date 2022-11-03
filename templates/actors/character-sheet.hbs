@@ -135,17 +135,11 @@
 
                 {{!-- Body Attributes --}}
                 <ul class="attributes flexrow">
-                    {{#each resources as |res|}}
+                    {{#each stats as |stat|}}
                     <li class="attribute resource">
-                        <h4 class="attribute-name box-title">
-                            <input name="system.resources.{{res.name}}.label" type="text" value="{{res.label}}"
-                                   placeholder="{{res.placeholder}}" />
-                        </h4>
+                        <h4 class="attribute-name box-title">{{ stat.placeholder }}</h4>
                         <div class="attribute-value">
-                            {{numberInput res.value name=(concat "system.resources." res.name ".value")
-                                placeholder="0"}}
-                            <span class="sep"> / </span>
-                            {{numberInput res.max name=(concat "system.resources." res.name ".max") placeholder="0"}}
+                            {{numberFormat stat.value name=(concat "system.stats." stat.name ".value")}}
                         </div>
                     </li>
                     {{/each}}

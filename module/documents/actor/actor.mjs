@@ -110,6 +110,7 @@ export default class Actor5e extends Actor {
     this._prepareAbilities(bonusData, globalBonuses, checkBonus);
     this._prepareSkills(bonusData, globalBonuses, checkBonus);
     this._prepareInitiative(bonusData, checkBonus);
+    this._prepareStats();
   }
 
   /* -------------------------------------------- */
@@ -279,6 +280,33 @@ export default class Actor5e extends Actor {
   }
 
 
+  /**
+   * Prepare the point stat data for an actor.
+   * Specifically, physO, menO, physD, menD
+   * @protected
+   */
+  _prepareStats() {
+
+    const stats = {};
+    for ( const key of Object.keys(CONFIG.SHAPER.stats) ) {
+      stats[key] = this.system.stats[key];
+    }
+    this.system.stats = stats;
+
+    const str = this.system.abilities.str.value;
+    const fin = this.system.abilities.fin.value;
+    const tgh = this.system.abilities.tgh.value;
+    const mnd = this.system.abilities.mnd.value;
+    const hrt = this.system.abilities.hrt.value;
+    const sol = this.system.abilities.sol.value;
+
+    console.log(this.system.stats);
+    this.system.stats.physO.value = str + fin;
+    this.system.stats.menO.value = mnd + sol;
+
+    this.system.stats.physD.value = 10 + fin + tgh;
+    this.system.stats.menD.value = 10 + hrt + sol;
+  }
   /* -------------------------------------------- */
 
 

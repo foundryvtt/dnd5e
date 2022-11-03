@@ -21,13 +21,11 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
     const context = await super.getData(options);
 
     // Resources
-    context.resources = ["primary", "secondary", "tertiary"].reduce((arr, r) => {
-      const res = context.actor.system.resources[r] || {};
-      res.name = r;
-      res.placeholder = game.i18n.localize(`SHAPER.Resource${r.titleCase()}`);
-      if (res && res.value === 0) delete res.value;
-      if (res && res.max === 0) delete res.max;
-      return arr.concat([res]);
+    context.stats = ["physO", "menO", "physD", "menD"].reduce((arr, r) => {
+      const stat = context.actor.system.stats[r] || {};
+      stat.name = r;
+      stat.placeholder = game.i18n.localize(`SHAPER.Stat${r.titleCase()}`);
+      return arr.concat([stat]);
     }, []);
 
     return foundry.utils.mergeObject(context, {

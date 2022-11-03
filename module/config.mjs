@@ -91,6 +91,19 @@ SHAPER.skills = {
 preLocalize("skills", { key: "label", sort: true });
 patchConfig("skills", "label", { since: 2.0, until: 2.2 });
 
+
+/**
+ * The set of Point Stats used within the system.
+ * @enum {string}
+ */
+ SHAPER.stats = {
+  physO: "SHAPER.StatPhyso",
+  menO: "SHAPER.StatMeno",
+  physD: "SHAPER.StatPhysd",
+  menD: "SHAPER.StatMend"
+};
+preLocalize("stats");
+
 /* -------------------------------------------- */
 
 /**
