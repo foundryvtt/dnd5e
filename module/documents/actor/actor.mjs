@@ -299,8 +299,7 @@ export default class Actor5e extends Actor {
     const mnd = this.system.abilities.mnd.value;
     const hrt = this.system.abilities.hrt.value;
     const sol = this.system.abilities.sol.value;
-
-    console.log(this.system.stats);
+    
     this.system.stats.physO.value = str + fin;
     this.system.stats.menO.value = mnd + sol;
 
