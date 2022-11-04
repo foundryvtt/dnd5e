@@ -104,6 +104,17 @@ patchConfig("skills", "label", { since: 2.0, until: 2.2 });
 };
 preLocalize("stats");
 
+/**
+ * The set of Counters used within the system.
+ * @enum {string}
+ */
+ SHAPER.counts = {
+  injury: "SHAPER.Injury",
+  obuff: "SHAPER.OBuff",
+  dbuff: "SHAPER.DBuff"
+};
+preLocalize("counts");
+
 /* -------------------------------------------- */
 
 /**

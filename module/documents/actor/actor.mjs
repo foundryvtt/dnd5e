@@ -72,6 +72,7 @@ export default class Actor5e extends Actor {
     this._prepareBaseAbilities(updates);
     this._prepareBaseSkills(updates);
     this._prepareBaseStats();
+    this._prepareBaseCounts();
     if ( !foundry.utils.isEmpty(updates) ) {
       if ( !this.id ) this.updateSource(updates);
       else this.update(updates);
@@ -111,6 +112,7 @@ export default class Actor5e extends Actor {
     this._prepareAbilities(bonusData, globalBonuses, checkBonus);
     this._prepareSkills(bonusData, globalBonuses, checkBonus);
     this._prepareInitiative(bonusData, checkBonus);
+    this._prepareCounts();
     this._prepareStats();
   }
 
@@ -169,14 +171,27 @@ export default class Actor5e extends Actor {
    * Specifically, physO, menO, physD, menD
    * @protected
    */
-     _prepareBaseStats() {
-      if ( this.type === "vehicle") return;
-      const stats = {};
-      for ( const key of Object.keys(CONFIG.SHAPER.stats) ) {
-        stats[key] = this.system.stats[key];
-      }
-      this.system.stats = stats;
+    _prepareBaseStats() {
+    if ( this.type === "vehicle") return;
+    const stats = {};
+    for ( const key of Object.keys(CONFIG.SHAPER.stats) ) {
+      stats[key] = this.system.stats[key];
     }
+    this.system.stats = stats;
+  }
+
+  /**
+ * Prepare the counter data for an actor.
+ * @protected
+ */
+    _prepareBaseCounts() {
+    if ( this.type === "vehicle") return;
+    const counts = {};
+    for ( const key of Object.keys(CONFIG.SHAPER.counts) ) {
+      counts[key] = this.system.counts[key];
+    }
+    this.system.counts = counts;
+  }
 
   /* -------------------------------------------- */
 
@@ -302,7 +317,7 @@ export default class Actor5e extends Actor {
    */
   _prepareStats() {
 
-     const stats = this.system.stats ??={};
+    const stats = this.system.stats ??={};
 
     const str = this.system.abilities.str.value;
     const fin = this.system.abilities.fin.value;
@@ -322,6 +337,20 @@ export default class Actor5e extends Actor {
     stats.physD.value = 10 + fin + tgh + stats.physD.bonus;
     stats.menD.value = 10 + hrt + sol + stats.menD.bonus;
   }
+
+  /**
+ * Prepare the counter data for an actor.
+ * @protected
+ */
+  _prepareCounts() {
+
+    const counts = this.system.counts ??={};
+    
+    counts.injury.value = counts.injury.value ?? 0; 
+    counts.obuff.value = counts.obuff.value ?? 0; 
+    counts.dbuff.value = counts.dbuff.value ?? 0; 
+  }
+
   /* -------------------------------------------- */
 
 

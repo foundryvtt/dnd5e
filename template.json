@@ -306,20 +306,6 @@
         "mp": {
           "value": 0,
           "max": 0
-        },
-        "injury": {
-          "value": 0,
-          "max": 0
-        },
-        "obuff": {
-          "value": 0,
-          "max": 3,
-          "min": -3
-        },
-        "dbuff": {
-          "value": 0,
-          "max": 3,
-          "min": -3
         }
       },
       "details": {
@@ -351,6 +337,22 @@
         "menD": {
           "value": 10,
           "bonus": 0
+        }
+      },
+      "counts": {
+        "injury": {
+          "value": 0,
+          "max": 10
+        },
+        "obuff": {
+          "value": 0,
+          "max": 3,
+          "min": -3
+        },
+        "dbuff": {
+          "value": 0,
+          "max": 3,
+          "min": -3
         }
       }
     },
