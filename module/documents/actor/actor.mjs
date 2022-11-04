@@ -319,6 +319,7 @@ export default class Actor5e extends Actor {
 
     const stats = this.system.stats ??={};
 
+    // Could improve by including abilities in template like skills, but lazy
     const str = this.system.abilities.str.value;
     const fin = this.system.abilities.fin.value;
     const tgh = this.system.abilities.tgh.value;
