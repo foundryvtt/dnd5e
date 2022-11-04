@@ -358,6 +358,7 @@ export default class Actor5e extends Actor {
 
       counts[key].value = counts[key].value ?? 0;
 
+      // If the value is higher than the max or less than the min, clamp it
       if ( counts[key].value > counts[key].max ) counts[key].value = counts[key].max;
       else if ( counts[key].value < counts[key].min ) counts[key].value = counts[key].min;
 
