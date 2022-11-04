@@ -326,16 +326,23 @@ export default class Actor5e extends Actor {
     const hrt = this.system.abilities.hrt.value;
     const sol = this.system.abilities.sol.value;
     
-    stats.physO.bonus = stats.physO.bonus ?? 0;
-    stats.menO.bonus = stats.menO.bonus ?? 0;
-    stats.physD.bonus = stats.physD.bonus ?? 0;
-    stats.menD.bonus = stats.menD.bonus ?? 0;
+    for ( const key of Object.keys(stats) ) {
+      stats[key].bonus = stats[key].bonus ?? 0
 
-    stats.physO.value = str + fin + stats.physO.bonus;
-    stats.menO.value = mnd + sol + stats.menO.bonus;
-
-    stats.physD.value = 10 + fin + tgh + stats.physD.bonus;
-    stats.menD.value = 10 + hrt + sol + stats.menD.bonus;
+      switch (key) {
+        case "physO":
+          stats[key].value = str + fin + stats[key].bonus;
+          break;
+        case "menO":
+          stats[key].value = mnd + sol + stats[key].bonus;
+          break;
+        case "physD":
+          stats[key].value = 10 + fin + tgh + stats[key].bonus;
+          break;
+        case "menD":
+          stats[key].value = 10 + hrt + sol + stats[key].bonus;
+      }
+    }
   }
 
   /**
@@ -345,10 +352,15 @@ export default class Actor5e extends Actor {
   _prepareCounts() {
 
     const counts = this.system.counts ??={};
-    
-    counts.injury.value = counts.injury.value ?? 0; 
-    counts.obuff.value = counts.obuff.value ?? 0; 
-    counts.dbuff.value = counts.dbuff.value ?? 0; 
+
+    for ( const key of Object.keys(counts) ) {
+
+      counts[key].value = counts[key].value ?? 0;
+
+      if ( counts[key].value > counts[key].max ) counts[key].value = counts[key].max;
+      else if ( counts[key].value < counts[key].min ) counts[key].value = counts[key].min;
+
+    }
   }
 
   /* -------------------------------------------- */
