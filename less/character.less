@@ -35,10 +35,22 @@
       margin-bottom: -5px;
       align-items: center;
       font-size: 18px;
-      span.max {
+      span.current-xp-label {
         color: @colorTan;
         flex: none;
         margin-left: 3px;
+        min-width: fit-content;
+
+      }
+      span.total-xp-label {
+        color: @colorTan;
+        flex: none;
+        margin-left: 3px;
+        min-width: fit-content;
+
+      }
+      input {
+        width: 32px;
       }
     }
 
@@ -61,7 +73,8 @@
   /* ----------------------------------------- */
 
   // Custom Resources
-  .resource {
+  .attribute {
+    width: 150px;
     .attribute-footer input {
       width: 32px;
     }

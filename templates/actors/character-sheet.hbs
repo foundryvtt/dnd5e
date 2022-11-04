@@ -20,9 +20,11 @@
                 {{#unless disableExperience}}
                 <div class="experience flexrow">
                     <span class="current-xp-label">{{localize "SHAPER.CurrentXP"}}</span>
-                    {{numberInput system.details.xp.value name="system.details.xp.value" placeholder="0"}}
+                    <input name="system.details.xp.value" type="text" data-dtype="Number" placeholder="0"
+                           value="{{numberFormat system.details.xp.value}}"/>
                     <span class="total-xp-label">{{localize "SHAPER.TotalXP"}}</span>
-                    {{numberInput system.details.xp.total name="system.details.xp.total" placeholder="0"}}
+                    <input name="system.details.xp.total" type="text" data-dtype="Number" placeholder="0"
+                           value="{{numberFormat system.details.xp.total}}"/>
                 </div>
                 {{/unless}}
             </aside>
@@ -131,15 +133,15 @@
             {{/each}}
             </ul>
 
-            <section class="center-pane flexcol">
+            <section class="lcenter-pane flexcol">
 
                 {{!-- Body Attributes --}}
-                <ul class="attributes flexrow">
+                <ul class="attributes flexcol">
                 {{#each stats as |stat|}}
-                    <li class="attribute resource">
+                    <li class="attribute stats">
                         <h4 class="attribute-name box-title">{{ stat.placeholder }}</h4>
                         <div class="attribute-value">
-                            {{numberFormat stat.value name=(concat "system.stats." stat.name ".value")}}
+                            <span>{{numberFormat stat.value name=(concat "system.stats." stat.name ".value")}}</span>
                         </div>
                         <footer class="attribute-footer">
                             <span>{{ localize "SHAPER.Modifier" }}</span>
@@ -148,7 +150,9 @@
                     </li>
                 {{/each}}
                 </ul>
+            </section>
 
+            <section class="rcenter-pane flexcol">
                 {{!-- Counters --}}
                 <div class="counters">
                     <div class="counter flexrow ">
@@ -158,8 +162,21 @@
                                 placeholder="0"}}
                         </div>
                     </div>
+                    <div class="counter flexrow ">
+                        <h4>{{ localize "SHAPER.OBuff" }}</h4>
+                        <div class="counter-value">
+                            {{numberInput system.attributes.obuff name="system.attributes.obuff"
+                                placeholder="0"}}
+                        </div>
+                    </div>
+                    <div class="counter flexrow ">
+                        <h4>{{ localize "SHAPER.DBuff" }}</h4>
+                        <div class="counter-value">
+                            {{numberInput system.attributes.dbuff name="system.attributes.dbuff"
+                                placeholder="0"}}
+                        </div>
+                    </div>
                 </div>
-
                 {{!-- Traits --}}
                 {{> "shaper.actor-traits"}}
             </section>

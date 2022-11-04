@@ -747,7 +747,7 @@
   margin: 10px 0;
 }
 .shaper.sheet.actor .sheet-header .header-exp {
-  flex: 0 0 150px;
+  flex: 0 0 200px;
   margin-right: 3px;
   height: 60px;
   justify-content: flex-end;
@@ -889,6 +889,7 @@
   text-align: center;
   border-bottom: 2px groove #eeede0;
   position: relative;
+  min-width: 100px;
 }
 .shaper.sheet.actor .ability-scores .ability:last-child {
   border-bottom: none;
@@ -1421,10 +1422,20 @@
   align-items: center;
   font-size: 18px;
 }
-.shaper.sheet.actor.character .sheet-header .experience span.max {
+.shaper.sheet.actor.character .sheet-header .experience span.current-xp-label {
   color: #7a7971;
   flex: none;
   margin-left: 3px;
+  min-width: fit-content;
+}
+.shaper.sheet.actor.character .sheet-header .experience span.total-xp-label {
+  color: #7a7971;
+  flex: none;
+  margin-left: 3px;
+  min-width: fit-content;
+}
+.shaper.sheet.actor.character .sheet-header .experience input {
+  width: 32px;
 }
 .shaper.sheet.actor.character .sheet-header .attributes .initiative .attribute-footer input {
   width: 32px;
@@ -1433,7 +1444,10 @@
   text-align: right;
   padding-right: 5px;
 }
-.shaper.sheet.actor.character .resource .attribute-footer input {
+.shaper.sheet.actor.character .attribute {
+  width: 150px;
+}
+.shaper.sheet.actor.character .attribute .attribute-footer input {
   width: 32px;
 }
 .shaper.sheet.actor.character ul.skills-list {
