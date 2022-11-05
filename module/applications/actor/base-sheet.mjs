@@ -684,7 +684,7 @@ export default class ActorSheet5e extends ActorSheet {
   /* -------------------------------------------- */
 
   /**
-   * Handle input changes to numeric form fields, allowing them to accept delta-typed inputs, uses REGEX to determine if input is valid or not.
+   * Handle input changes to numeric form fields, allowing them to accept delta-typed inputs.
    * @param {Event} event  Triggering event.
    * @private
    */
