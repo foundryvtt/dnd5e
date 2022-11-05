@@ -225,48 +225,6 @@
             "custom": ""
           }
         },
-        "spells": {
-          "spell1": {
-            "value": 0,
-            "override": null
-          },
-          "spell2": {
-            "value": 0,
-            "override": null
-          },
-          "spell3": {
-            "value": 0,
-            "override": null
-          },
-          "spell4": {
-            "value": 0,
-            "override": null
-          },
-          "spell5": {
-            "value": 0,
-            "override": null
-          },
-          "spell6": {
-            "value": 0,
-            "override": null
-          },
-          "spell7": {
-            "value": 0,
-            "override": null
-          },
-          "spell8": {
-            "value": 0,
-            "override": null
-          },
-          "spell9": {
-            "value": 0,
-            "override": null
-          },
-          "pact": {
-            "value": 0,
-            "override": null
-          }
-        },
         "bonuses": {
           "mwak": {
             "attack": "",
@@ -288,9 +246,6 @@
             "check": "",
             "save": "",
             "skill": ""
-          },
-          "spell":  {
-            "dc": ""
           }
         }
       }
@@ -377,23 +332,18 @@
     }
   },
   "Item": {
-    "types": ["ability", "background", "lesson", "utility", "talent", "backpack", "spell", "feat", "loot"],
+    "types": ["spell", "background", "feat", "backpack", "loot"],
     "templates": {
       "itemDescription": {
         "description": {
           "value": "",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": ""
       },
       "physicalItem": {
         "quantity": 1,
-        "weight": 0,
-        "price": 0,
-        "equipped": false,
-        "rarity": "",
-        "identified": true
+        "equipped": false
       },
       "activatedEffect": {
         "activation": {
@@ -463,28 +413,10 @@
     "backpack": {
       "templates": ["itemDescription", "physicalItem"],
       "capacity": {
-        "type": "weight",
-        "value": 0,
-        "weightless": false
+        "value": 0
       }
     },
-    "lesson": {
-      "templates": ["itemDescription", "activatedEffect", "action"],
-      "requirements": "",
-      "recharge": {
-        "value": null,
-        "charged": false
-      }
-    },
-    "utility": {
-      "templates": ["itemDescription", "activatedEffect", "action"],
-      "requirements": "",
-      "recharge": {
-        "value": null,
-        "charged": false
-      }
-    },
-    "talent": {
+    "feat": {
       "templates": ["itemDescription", "activatedEffect", "action"],
       "requirements": "",
       "recharge": {

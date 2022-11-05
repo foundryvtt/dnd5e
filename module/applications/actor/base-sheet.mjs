@@ -264,9 +264,6 @@ export default class ActorSheet5e extends ActorSheet {
       for ( let f of ["major", "minor", "counter"] ) {
         if ( filters.has(f) && (item.system.activation?.type !== f) ) return false;
       }
-
-      // Equipment-specific filters
-      if ( filters.has("equipped") && (item.system.equipped !== true) ) return false;
       return true;
     });
   }

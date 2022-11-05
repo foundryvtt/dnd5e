@@ -67,11 +67,12 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
       this._prepareItemToggleState(item);
 
       // Classify items into types
-      if ( item.type === "feat" ) obj.feats.push(item);
+      if ( item.type === "spell" ) obj.spells.push(item);
       else if ( item.type === "background" ) obj.backgrounds.push(item);
+      else if ( item.type === "feat" ) obj.feats.push(item);
       else if ( Object.keys(inventory).includes(item.type) ) obj.items.push(item);
       return obj;
-    }, { items: [], feats: [], backgrounds: [] });
+    }, { items: [], feats: [], backgrounds: [], spells: [] });
 
     // Apply active item filters
     items = this._filterItems(items, this._filters.inventory);
