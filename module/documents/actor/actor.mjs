@@ -690,7 +690,7 @@ export default class Actor5e extends Actor {
     const s = CONFIG.DND5E.tokenSizes[this.system.traits.size || "med"];
     const prototypeToken = {width: s, height: s};
     if ( this.type === "character" ) Object.assign(prototypeToken, {sight: { enabled: true }, actorLink: true, disposition: 1});
-    this.updateSource({prototypeToken}); 
+    this.updateSource({prototypeToken});
   }
 
   /* -------------------------------------------- */
