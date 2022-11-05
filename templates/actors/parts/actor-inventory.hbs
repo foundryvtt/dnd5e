@@ -18,11 +18,6 @@
                 <div class="item-detail {{css}}">{{label}}</div>
             {{/each}}
         {{else}}
-            {{#if ../isCharacter}}
-                <div class="item-detail item-weight">{{localize "SHAPER.Weight"}}</div>
-            {{/if}}
-
-            <div class="item-detail item-uses">{{localize "SHAPER.Charges"}}</div>
             <div class="item-detail item-action">{{localize "SHAPER.Usage"}}</div>
         {{/if}}
 
@@ -47,7 +42,6 @@
                 <div class="item-image" tabindex="0" role="button" aria-label="{{item.name}}" style="background-image: url('{{item.img}}')"></div>
                 <h4>
                     {{item.name~}}
-                    {{~#if item.isStack}} ({{item.system.quantity}}){{/if}}
                 </h4>
                 {{/if}}
             </div>
@@ -64,23 +58,6 @@
                     </div>
                 {{/each}}
             {{else}}
-                {{#if ../../isCharacter}}
-                <div class="item-detail item-weight">
-                    {{#if item.totalWeight}}
-                        <div class="item-detail">
-                            {{ item.totalWeight }} {{ @root.weightUnit }}
-                        </div>
-                    {{/if}}
-                </div>
-                {{/if}}
-
-                <div class="item-detail item-uses">
-                    {{#if item.hasUses }}
-                        <input type="text" value="{{item.system.uses.value}}" placeholder="0"/>
-                        / {{item.system.uses.max}}
-                    {{/if}}
-                </div>
-
                 <div class="item-detail item-action">
                     {{#if item.system.activation.type }}
                         {{item.labels.activation}}

@@ -1036,8 +1036,9 @@
 .shaper.sheet.actor .traits .inactive {
   color: #7a7971;
 }
+.shaper.sheet.actor .tab.inventory,
 .shaper.sheet.actor .tab.features,
-.shaper.sheet.actor .tab.inventory .inventory-filters {
+.shaper.sheet.actor .inventory-filters {
   margin: 0 8px;
   flex: 0 0 20px;
   justify-content: flex-end;
@@ -1466,12 +1467,16 @@
   text-align: right;
   padding-right: 10px;
 }
-.shaper.sheet.actor.character .inventory .characteristics {
+.shaper.sheet.actor.character .inventory,
+.shaper.sheet.actor.character .features,
+.shaper.sheet.actor.character .characteristics {
   flex: 0 0 180px;
   height: 100%;
   padding: 0 3px 3px;
 }
-.shaper.sheet.actor.character .inventory .characteristics label {
+.shaper.sheet.actor.character .inventory label,
+.shaper.sheet.actor.character .features label,
+.shaper.sheet.actor.character .characteristics label {
   flex: 0 0 20px;
   font-family: "Modesto Condensed", "Palatino Linotype", serif;
   font-size: 20px;
@@ -1481,7 +1486,9 @@
   line-height: 20px;
   text-align: center;
 }
-.shaper.sheet.actor.character .inventory .characteristics textarea {
+.shaper.sheet.actor.character .inventory textarea,
+.shaper.sheet.actor.character .features textarea,
+.shaper.sheet.actor.character .characteristics textarea {
   font-family: "Signika", serif;
   font-size: 13px;
   border: 1px solid #c9c7b8;
