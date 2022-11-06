@@ -42,14 +42,14 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
 
     /* TODO: HEY DUMBASS HERE"S WHERE THE ITEMS ARE CLASSIFIED AND GIVEN TYPES CHANGE THIS */
 
-    // Categorize items as inventory, features, and classes
+    // Categorize items as inventory, features
     const inventory = {
       backpack: { label: "SHAPER.ItemTypeContainerPl", items: [], dataset: {type: "backpack"} },
       loot: { label: "SHAPER.ItemTypeLootPl", items: [], dataset: {type: "loot"} }
     };
 
     // Partition items by category
-    let {items, feats, backgrounds} = context.items.reduce((obj, item) => {
+    let {items, feats} = context.items.reduce((obj, item) => {
       const {quantity, uses, recharge, target} = item.system;
 
       // Item details
@@ -67,12 +67,10 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
       this._prepareItemToggleState(item);
 
       // Classify items into types
-      if ( item.type === "spell" ) obj.spells.push(item);
-      else if ( item.type === "background" ) obj.backgrounds.push(item);
-      else if ( item.type === "feat" ) obj.feats.push(item);
+      if ( item.type === "feat" ) obj.feats.push(item);
       else if ( Object.keys(inventory).includes(item.type) ) obj.items.push(item);
       return obj;
-    }, { items: [], feats: [], backgrounds: [], spells: [] });
+    }, { items: [], feats: [] });
 
     // Apply active item filters
     items = this._filterItems(items, this._filters.inventory);
@@ -89,9 +87,6 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
 
     // Organize Features
     const features = {
-      background: {
-        label: "SHAPER.ItemTypeBackground", items: backgrounds,
-        hasActions: false, dataset: {type: "background"} },
       active: {
         label: "SHAPER.FeatureActive", items: [],
         hasActions: true, dataset: {type: "feat", "activation.type": "action"} },
@@ -99,7 +94,7 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
         label: "SHAPER.FeaturePassive", items: [],
         hasActions: false, dataset: {type: "feat"} }
     };
-    for ( const feat of feats ) {
+    for ( const feat of feats ) {     
       if ( feat.system.activation?.type ) features.active.items.push(feat);
       else features.passive.items.push(feat);
     }
@@ -107,7 +102,6 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
     // Assign and return
     context.inventory = Object.values(inventory);
     context.features = Object.values(features);
-    context.labels.background = backgrounds[0]?.name;
   }
 
   /* -------------------------------------------- */
@@ -131,7 +125,6 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
   activateListeners(html) {
     super.activateListeners(html);
     if ( !this.isEditable ) return;
-    html.find(".level-selector").change(this._onLevelChange.bind(this));
     html.find(".item-toggle").click(this._onToggleItem.bind(this));
     html.find(".rollable[data-action]").click(this._onSheetAction.bind(this));
   }
@@ -151,23 +144,6 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
       case "rollInitiative":
         return this.actor.rollInitiative({createCombatants: true});
     }
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Respond to a new level being selected from the level selector.
-   * @param {Event} event                           The originating change.
-   * @returns {Promise<Item5e>}  updated class item.
-   * @private
-   */
-  async _onLevelChange(event) {
-    event.preventDefault();
-    const delta = Number(event.target.value);
-    const classId = event.target.closest(".item")?.dataset.itemId;
-    if ( !delta || !classId ) return;
-    const classItem = this.actor.items.get(classId);
-    return classItem.update({"system.levels": classItem.system.levels + delta});
   }
 
   /* -------------------------------------------- */

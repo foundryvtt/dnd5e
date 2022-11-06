@@ -14,11 +14,6 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
 
   /* -------------------------------------------- */
 
-  /** @override */
-  static unsupportedItemTypes = new Set(["background"]);
-
-  /* -------------------------------------------- */
-
   /**
    * Creates a new cargo entry for a vehicle Actor.
    * @type {object}

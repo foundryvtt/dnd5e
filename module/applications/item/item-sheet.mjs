@@ -42,7 +42,6 @@ export default class ItemSheet5e extends ItemSheet {
     const context = await super.getData(options);
     const item = context.item;
     const source = item.toObject();
-    const isMountable = this._isItemMountable(item);
 
     foundry.utils.mergeObject(context, {
       source: source.system,
@@ -52,7 +51,6 @@ export default class ItemSheet5e extends ItemSheet {
 
       // Item Type, Status, and Details
       itemType: game.i18n.localize(`ITEM.Type${item.type.titleCase()}`),
-      itemStatus: this._getItemStatus(),
       itemProperties: this._getItemProperties(),
       baseItems: await this._getItemBaseTypes(),
       isPhysical: item.system.hasOwnProperty("quantity"),
@@ -68,11 +66,6 @@ export default class ItemSheet5e extends ItemSheet {
       hasAttackRoll: item.hasAttack,
       isHealing: item.system.actionType === "heal",
       isLine: ["line", "wall"].includes(item.system.target?.type),
-
-      // Vehicles
-      isCrewed: item.system.activation?.type === "crew",
-      isMountable,
-
 
       // Prepare Active Effects
       effects: ActiveEffect5e.prepareActiveEffectCategories(item.effects)
@@ -99,11 +92,11 @@ export default class ItemSheet5e extends ItemSheet {
    * @protected
    */
   async _getItemBaseTypes() {
-    const type = this.item.type === "equipment" ? "armor" : this.item.type;
+    const type = this.item.type;
     const baseIds = CONFIG.SHAPER[`${type}Ids`];
     if ( baseIds === undefined ) return {};
 
-    const typeProperty = type === "armor" ? "armor.type" : `${type}Type`;
+    const typeProperty = `${type}Type`;
     const baseType = foundry.utils.getProperty(this.item.system, typeProperty);
 
     const items = {};
@@ -120,6 +113,9 @@ export default class ItemSheet5e extends ItemSheet {
    * Get the valid item consumption targets which exist on the actor
    * @returns {Object<string>}   An object of potential consumption targets
    * @private
+   * 
+   * TODO: Change consumption to just HP/MP (may be already in attributes)
+   * 
    */
   _getItemConsumptionTargets() {
     const consume = this.item.system.consume || {};
@@ -127,16 +123,8 @@ export default class ItemSheet5e extends ItemSheet {
     const actor = this.item.actor;
     if ( !actor ) return {};
 
-    // Ammunition
-    if ( consume.type === "ammo" ) {
-      return actor.itemTypes.consumable.reduce((ammo, i) => {
-        if ( i.system.consumableType === "ammo" ) ammo[i.id] = `${i.name} (${i.system.quantity})`;
-        return ammo;
-      }, {[this.item.id]: `${this.item.name} (${this.item.system.quantity})`});
-    }
-
     // Attributes
-    else if ( consume.type === "attribute" ) {
+    if ( consume.type === "attribute" ) {
       const attributes = TokenDocument.implementation.getConsumedAttributes(actor.system);
       attributes.bar.forEach(a => a.push("value"));
       return attributes.bar.concat(attributes.value).reduce((obj, a) => {
@@ -145,55 +133,7 @@ export default class ItemSheet5e extends ItemSheet {
         return obj;
       }, {});
     }
-
-    // Materials
-    else if ( consume.type === "material" ) {
-      return actor.items.reduce((obj, i) => {
-        if ( ["consumable", "loot"].includes(i.type) && !i.system.activation ) {
-          obj[i.id] = `${i.name} (${i.system.quantity})`;
-        }
-        return obj;
-      }, {});
-    }
-
-    // Charges
-    else if ( consume.type === "charges" ) {
-      return actor.items.reduce((obj, i) => {
-
-        // Limited-use items
-        const uses = i.system.uses || {};
-        if ( uses.per && uses.max ) {
-          const label = uses.per === "charges"
-            ? ` (${game.i18n.format("SHAPER.AbilityUseChargesLabel", {value: uses.value})})`
-            : ` (${game.i18n.format("SHAPER.AbilityUseConsumableLabel", {max: uses.max, per: uses.per})})`;
-          obj[i.id] = i.name + label;
-        }
-
-        // Recharging items
-        const recharge = i.system.recharge || {};
-        if ( recharge.value ) obj[i.id] = `${i.name} (${game.i18n.format("SHAPER.Recharge")})`;
-        return obj;
-      }, {});
-    }
     else return {};
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Get the text item status which is shown beneath the Item type in the top-right corner of the sheet.
-   * @returns {string|null}  Item status string if applicable to item's type.
-   * @private
-   */
-  _getItemStatus() {
-    switch ( this.item.type ) {
-      case "class":
-        return game.i18n.format("SHAPER.LevelCount", {ordinal: this.item.system.levels.ordinalString()});
-      case "weapon":
-        return game.i18n.localize(this.item.system.equipped ? "SHAPER.Equipped" : "SHAPER.Unequipped");
-      case "spell":
-        return CONFIG.SHAPER.spellPreparationModes[this.item.system.preparation];
-    }
   }
 
   /* -------------------------------------------- */
@@ -207,20 +147,8 @@ export default class ItemSheet5e extends ItemSheet {
     const props = [];
     const labels = this.item.labels;
     switch ( this.item.type ) {
-      case "equipment":
-        props.push(CONFIG.SHAPER.equipmentTypes[this.item.system.armor.type]);
-        if ( this.item.isArmor || this._isItemMountable(this.item) ) props.push(labels.armor);
-        break;
       case "feat":
         props.push(labels.featType);
-        break;
-      case "spell":
-        props.push(labels.components.vsm, labels.materials, ...labels.components.tags);
-        break;
-      case "weapon":
-        for ( const [k, v] of Object.entries(this.item.system.properties) ) {
-          if ( v === true ) props.push(CONFIG.SHAPER.weaponProperties[k]);
-        }
         break;
     }
 
@@ -230,24 +158,10 @@ export default class ItemSheet5e extends ItemSheet {
     }
 
     // Action usage
-    if ( (this.item.type !== "weapon") && !foundry.utils.isEmpty(this.item.system.activation) ) {
+    if ( !foundry.utils.isEmpty(this.item.system.activation) ) {
       props.push(labels.activation, labels.range, labels.target, labels.duration);
     }
     return props.filter(p => !!p);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Is this item a separate large object like a siege engine or vehicle component that is
-   * usually mounted on fixtures rather than equipped, and has its own AC and HP.
-   * @param {object} item  Copy of item data being prepared for display.
-   * @returns {boolean}    Is item siege weapon or vehicle equipment?
-   * @private
-   */
-  _isItemMountable(item) {
-    return ((item.type === "weapon") && (item.system.weaponType === "siege"))
-      || (item.type === "equipment" && (item.system.armor.type === "vehicle"));
   }
 
   /* -------------------------------------------- */
@@ -286,30 +200,6 @@ export default class ItemSheet5e extends ItemSheet {
     // Handle Damage array
     const damage = formData.system?.damage;
     if ( damage ) damage.parts = Object.values(damage?.parts || {}).map(d => [d[0] || "", d[1] || ""]);
-
-    // Check max uses formula
-    const uses = formData.system?.uses;
-    if ( uses?.max ) {
-      const maxRoll = new Roll(uses.max);
-      if ( !maxRoll.isDeterministic ) {
-        uses.max = this.item._source.system.uses.max;
-        this.form.querySelector("input[name='system.uses.max']").value = uses.max;
-        return ui.notifications.error(game.i18n.format("SHAPER.FormulaCannotContainDiceError", {
-          name: game.i18n.localize("SHAPER.LimitedUses")
-        }));
-      }
-    }
-
-    // Check class identifier
-    if ( formData.system?.identifier ) {
-      const dataRgx = new RegExp(/^([a-z0-9_-]+)$/i);
-      const match = formData.system.identifier.match(dataRgx);
-      if ( !match ) {
-        formData.system.identifier = this.item._source.system.identifier;
-        this.form.querySelector("input[name='system.identifier']").value = formData.system.identifier;
-        return ui.notifications.error(game.i18n.localize("SHAPER.IdentifierError"));
-      }
-    }
 
     // Return the flattened submission data
     return foundry.utils.flattenObject(formData);

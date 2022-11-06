@@ -264,7 +264,6 @@
         }
       },
       "details": {
-        "background": "",
         "xp": {
           "value": 0,
           "min": 0,
@@ -332,7 +331,7 @@
     }
   },
   "Item": {
-    "types": ["spell", "background", "feat", "backpack", "loot"],
+    "types": ["feat", "backpack", "loot"],
     "templates": {
       "itemDescription": {
         "description": {
@@ -366,17 +365,15 @@
           "long": null,
           "units": ""
         },
-        "cooldown": {
-          "value": null,
-          "max": "",
-          "per": null,
-          "recovery": ""
-        },
         "upkeep": {
           "value": null,
           "max": "",
-          "per": null,
-          "recovery": ""
+          "per": null
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null
         }
       },
       "action": {
@@ -407,32 +404,26 @@
       }
     },
     "htmlFields": ["description.value", "description.chat", "description.unidentified"],
-    "background": {
-      "templates": ["itemDescription"]
-    },
     "backpack": {
       "templates": ["itemDescription", "physicalItem"],
       "capacity": {
         "value": 0
       }
     },
+    "loot": {
+      "templates": ["itemDescription", "physicalItem"]
+    },
     "feat": {
       "templates": ["itemDescription", "activatedEffect", "action"],
-      "requirements": "",
+      "tier": 1,
+      "type": "",
+      "careful": false,
+      "prerequisite": "",
+      "element": "",
       "recharge": {
         "value": null,
         "charged": false
       }
-    },
-    "loot": {
-      "templates": ["itemDescription", "physicalItem"]
-    },
-    "spell": {
-      "templates": ["itemDescription", "activatedEffect", "action"],
-      "tier": 1,
-      "careful": false,
-      "prerequisite": "",
-      "element": ""      
     }
   }
 }

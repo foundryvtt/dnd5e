@@ -27,26 +27,11 @@ export default class ActorSheetFlags extends DocumentSheet {
   getData() {
     const data = {};
     data.actor = this.object;
-    data.classes = this._getClasses();
     data.flags = this._getFlags();
     data.bonuses = this._getBonuses();
     return data;
   }
 
-  /* -------------------------------------------- */
-
-  /**
-   * Prepare an object of sorted classes.
-   * @returns {object}
-   * @private
-   */
-  _getClasses() {
-    const classes = this.object.items.filter(i => i.type === "class");
-    return classes.sort((a, b) => a.name.localeCompare(b.name)).reduce((obj, i) => {
-      obj[i.id] = i.name;
-      return obj;
-    }, {});
-  }
 
   /* -------------------------------------------- */
 
@@ -90,7 +75,6 @@ export default class ActorSheetFlags extends DocumentSheet {
       {name: "system.bonuses.rsak.attack", label: "SHAPER.BonusRSAttack"},
       {name: "system.bonuses.rsak.damage", label: "SHAPER.BonusRSDamage"},
       {name: "system.bonuses.abilities.check", label: "SHAPER.BonusAbilityCheck"},
-      {name: "system.bonuses.abilities.save", label: "SHAPER.BonusAbilitySave"},
       {name: "system.bonuses.abilities.skill", label: "SHAPER.BonusAbilitySkill"}
     ];
     for ( let b of bonuses ) {
