@@ -102,6 +102,7 @@ Hooks.once("init", function() {
  */
 Hooks.once("setup", function() {
   CONFIG.SHAPER.trackableAttributes = expandAttributeList(CONFIG.SHAPER.trackableAttributes);
+  CONFIG.SHAPER.consumableResources = expandAttributeList(CONFIG.SHAPER.consumableResources);
 });
 
 /* --------------------------------------------- */

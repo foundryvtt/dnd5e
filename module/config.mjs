@@ -144,12 +144,9 @@ preLocalize("timePeriods");
  */
 SHAPER.abilityActivationTypes = {
   none: "SHAPER.None",
-  major: "SHAPER.Major",
-  minor: "SHAPER.Minor",
-  counter: "SHAPER.Counter",
-  minute: SHAPER.timePeriods.minute,
-  hour: SHAPER.timePeriods.hour,
-  day: SHAPER.timePeriods.day
+  major: "SHAPER.MajorAction",
+  minor: "SHAPER.MinorAction",
+  counter: "SHAPER.CounterAction"
 };
 preLocalize("abilityActivationTypes", { sort: true });
 
@@ -160,10 +157,7 @@ preLocalize("abilityActivationTypes", { sort: true });
  * @enum {string}
  */
 SHAPER.abilityConsumptionTypes = {
-  ammo: "SHAPER.ConsumeAmmunition",
-  attribute: "SHAPER.ConsumeAttribute",
-  material: "SHAPER.ConsumeMaterial",
-  charges: "SHAPER.ConsumeCharges"
+  attribute: "SHAPER.ConsumeAttribute"
 };
 preLocalize("abilityConsumptionTypes", { sort: true });
 
@@ -213,46 +207,16 @@ SHAPER.tokenHPColors = {
  * @enum {string}
  */
 SHAPER.itemActionTypes = {
-  mwak: "SHAPER.ActionMWAK",
-  rwak: "SHAPER.ActionRWAK",
-  msak: "SHAPER.ActionMSAK",
-  rsak: "SHAPER.ActionRSAK",
-  save: "SHAPER.ActionSave",
+  atk: "SHAPER.ActionAttack",
+  spl: "SHAPER.ActionSpell",
+  aux: "SHAPER.ActionAuxillary",
   heal: "SHAPER.ActionHeal",
-  abil: "SHAPER.ActionAbil",
   util: "SHAPER.ActionUtil",
   other: "SHAPER.ActionOther"
 };
 preLocalize("itemActionTypes");
 
 /* -------------------------------------------- */
-
-
-/**
- * Enumerate the lengths of time over which an item can have limited use ability.
- * @enum {string}
- */
-SHAPER.limitedUsePeriods = {
-  day: "SHAPER.Day",
-  charges: "SHAPER.Charges"
-};
-preLocalize("limitedUsePeriods");
-
-
-/**
- * The various types of vehicles in which characters can be proficient.
- * @enum {string}
- */
-SHAPER.vehicleTypes = {
-  air: "SHAPER.VehicleTypeAir",
-  land: "SHAPER.VehicleTypeLand",
-  space: "SHAPER.VehicleTypeSpace",
-  water: "SHAPER.VehicleTypeWater"
-};
-preLocalize("vehicleTypes", { sort: true });
-
-/* -------------------------------------------- */
-
 
 /* -------------------------------------------- */
 /*  Damage Types                                */
@@ -317,10 +281,7 @@ preLocalize("movementTypes", { sort: true });
  * @enum {string}
  */
 SHAPER.movementUnits = {
-  ft: "SHAPER.DistFt",
-  mi: "SHAPER.DistMi",
-  m: "SHAPER.DistM",
-  km: "SHAPER.DistKm"
+  sq: "SHAPER.DistSq"
 };
 preLocalize("movementUnits");
 
@@ -350,19 +311,9 @@ preLocalize("distanceUnits");
 SHAPER.targetTypes = {
   none: "SHAPER.None",
   self: "SHAPER.TargetSelf",
-  creature: "SHAPER.TargetCreature",
   ally: "SHAPER.TargetAlly",
   enemy: "SHAPER.TargetEnemy",
-  object: "SHAPER.TargetObject",
-  space: "SHAPER.TargetSpace",
-  radius: "SHAPER.TargetRadius",
-  sphere: "SHAPER.TargetSphere",
-  cylinder: "SHAPER.TargetCylinder",
-  cone: "SHAPER.TargetCone",
-  square: "SHAPER.TargetSquare",
-  cube: "SHAPER.TargetCube",
-  line: "SHAPER.TargetLine",
-  wall: "SHAPER.TargetWall"
+  space: "SHAPER.TargetSpace"
 };
 preLocalize("targetTypes", { sort: true });
 
@@ -428,12 +379,19 @@ preLocalize("cover");
  * @type {string[]}
  */
 SHAPER.trackableAttributes = [
-  "attributes.init.value", "attributes.movement", "details.xp.value", "skills.*.points",
+  "attributes.init.value", "attributes.*.value", "details.xp.value", "skills.*.points",
   "abilities.*.value"
 ];
 
 /* -------------------------------------------- */
 
+/**
+ * A selection of actor and item attributes that are valid targets for item resource consumption.
+ * @type {string[]}
+ */
+ SHAPER.consumableResources = [
+  "attributes.*.value"
+];
 
 /* -------------------------------------------- */
 
@@ -506,13 +464,6 @@ SHAPER.characterFlags = {
     section: "SHAPER.Feats",
     type: Number,
     placeholder: 20
-  },
-  meleeCriticalDamageDice: {
-    name: "SHAPER.FlagsMeleeCriticalDice",
-    hint: "SHAPER.FlagsMeleeCriticalDiceHint",
-    section: "SHAPER.Feats",
-    type: Number,
-    placeholder: 0
   }
 };
 preLocalize("characterFlags", { keys: ["name", "hint", "section"] });

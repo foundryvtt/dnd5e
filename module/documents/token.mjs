@@ -24,7 +24,36 @@ export default class TokenDocument5e extends TokenDocument {
     return attributes;
   }
 
+  /* -------------------------------------------- */
 
+  /**
+   * Get an Array of attribute choices which are suitable for being consumed by an item usage.
+   * @param {object} data  The actor data.
+   * @returns {{bar: string[], value: string[]}}
+   */
+   static getConsumedAttributes(data) {
+    const attributes = super.getTrackedAttributes(data);
+    const allowed = CONFIG.SHAPER.consumableResources;
+    
+    // TODO Find how this list is populated; only allow HP, MP
+    /**
+     * TODO (written here so you find it, dumbass)
+     * Find out why items can't be edited
+     * Edit UI on item sheets, remove number from activation cost
+     * Remove range box on target
+     * Remove number boxes for range
+     * Figure out possible durations
+     * Remove limited use row
+     * Remove action recharge
+     * Add a space for cooldown
+     * Add a space for upkeep
+     * Remove other damage formulae boxes -> Bane/Boon and Impact
+     */
+
+    console.log(allowed);
+    attributes.value = attributes.value.filter(attrs => this._isAllowedAttribute(allowed, attrs));
+    return attributes;
+  }
   /* -------------------------------------------- */
 
   /**
