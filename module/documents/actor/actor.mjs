@@ -157,8 +157,6 @@ export default class Actor5e extends Actor {
    */
   _prepareCharacterData() {
     this.system.details.level = 0;
-    this.system.attributes.hd = 0;
-
     // Experience required for next level
     const xp = this.system.details.xp;
   }
@@ -172,11 +170,7 @@ export default class Actor5e extends Actor {
    */
   _prepareNPCData() {
     const cr = this.system.details.cr;
-
-    // Spellcaster Level
-    if ( this.system.attributes.spellcasting && !Number.isNumeric(this.system.details.spellLevel) ) {
-      this.system.details.spellLevel = Math.max(cr, 1);
-    }
+    // Do I even need this here?
   }
 
   /* -------------------------------------------- */
@@ -219,10 +213,8 @@ export default class Actor5e extends Actor {
    */
   _prepareSkills(bonusData, globalBonuses, checkBonus) {
     if ( this.type === "vehicle" ) return;
-    const flags = this.flags.shaper ?? {};
 
     // Skill modifiers
-    const feats = CONFIG.SHAPER.characterFlags;
     const skillBonus = simplifyBonus(globalBonuses.skill, bonusData);
     for ( const [id, skl] of Object.entries(this.system.skills) ) {
       const ability0 = this.system.abilities[skl.ability0];
