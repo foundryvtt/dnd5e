@@ -1508,44 +1508,10 @@
   flex: 0 0 80px;
   justify-content: center;
 }
-.shaper.sheet.actor.npc .header-exp .cr {
-  flex: 0 0 32px;
-  line-height: 28px;
-  margin-bottom: -5px;
-  font-size: 24px;
-}
-.shaper.sheet.actor.npc .header-exp .cr input {
-  width: 32px;
-  padding: 0;
-  text-align: center;
-}
 .shaper.sheet.actor.npc .header-exp .experience {
   flex: 0 0 18px;
   color: #7a7971;
   font-size: 16px;
-}
-.shaper.sheet.actor.npc .summary {
-  font-size: 18px;
-}
-.shaper.sheet.actor.npc .summary .creature-type {
-  display: flex;
-  justify-content: space-between;
-  width: 1em;
-  padding: 0 3px;
-}
-.shaper.sheet.actor.npc .summary .creature-type span {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-.shaper.sheet.actor.npc .summary .creature-type .config-button {
-  display: none;
-  font-size: 12px;
-  font-weight: normal;
-  line-height: 2em;
-}
-.shaper.sheet.actor.npc .summary .creature-type:hover .config-button {
-  display: block;
 }
 .shaper.sheet.actor.vehicle {
   min-width: 720px;

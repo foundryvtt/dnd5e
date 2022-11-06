@@ -11,24 +11,10 @@
                 <input name="name" type="text" value="{{actor.name}}" placeholder="{{ localize 'SHAPER.Name' }}"/>
             </h1>
 
-            <aside class="header-exp flexcol">
-                <div class="cr">
-                    <label>{{ localize "SHAPER.AbbreviationCR" }}</label>
-                    <input name="system.details.cr" type="text" value="{{labels.cr}}" placeholder="1"/>
-                </div>
-                <div class="experience">
-                    <span>{{system.details.xp.value}} XP</span>
-                </div>
-            </aside>
-
             {{!-- Character Summary --}}
             <ul class="summary flexrow">
                 <li>
                     <span>{{lookup config.actorSizes system.traits.size}}</span>
-                </li>
-                <li class="creature-type">
-                    <span title="{{labels.type}}">{{labels.type}}</span>
-                    <a class="config-button" data-action="type" title="{{localize 'SHAPER.CreatureTypeConfig'}}"><i class="fas fa-cog"></i></a>
                 </li>
                 <li>
                     <input type="text" name="system.details.source" value="{{system.details.source}}" placeholder="{{ localize 'SHAPER.Source' }}"/>
@@ -53,6 +39,25 @@
                             placeholder="{{ localize 'SHAPER.HPFormula' }}"
                             value="{{system.attributes.hp.formula}}"
                             title="{{localize 'SHAPER.HPFormula'}}">
+                    </footer>
+                </li>
+
+                <li class="attribute health">
+                    <h4 class="attribute-name box-title rollable">{{ localize "SHAPER.MindPoints" }}</h4>
+                    <div class="attribute-value multiple">
+                        <input name="system.attributes.mp.value" type="number" step="any"
+                            value="{{system.attributes.mp.value}}" placeholder="10"
+                            title="{{localize 'SHAPER.MindPointsCurrent'}}">
+                        <span class="sep"> / </span>
+                        <input name="system.attributes.mp.max" type="number" step="any"
+                            value="{{system.attributes.mp.max}}" placeholder="10"
+                            title="{{localize 'SHAPER.MindPointsMax'}}">
+                    </div>
+                    <footer class="attribute-footer flexrow">
+                        <input name="system.attributes.mp.formula" class="mpformula" type="text"
+                            placeholder="{{ localize 'SHAPER.MPFormula' }}"
+                            value="{{system.attributes.mp.formula}}"
+                            title="{{localize 'SHAPER.MPFormula'}}">
                     </footer>
                 </li>
 
@@ -90,11 +95,7 @@
                 <li class="ability" data-ability="{{id}}">
                     <h4 class="ability-name box-title rollable">{{ability.label}}</h4>
                     {{numberInput ability.value name=(concat "system.abilities." id ".value")
-                        class="ability-score" placeholder="10"}}
-                    <div class="ability-modifiers flexrow">
-                        <span class="ability-mod" title="{{ localize 'SHAPER.Modifier' }}">{{numberFormat ability.mod decimals=0 sign=true}}</span>
-                        <span class="ability-save" title="{{ localize 'SHAPER.SavingThrow' }}">{{numberFormat ability.save decimals=0 sign=true}}</span>
-                    </div>
+                        class="ability-score" placeholder="0"}}
                     <a class="config-button" data-action="ability" title="{{localize 'SHAPER.AbilityConfigure'}}"><i class="fas fa-cog"></i></a>
                 </li>
             {{/each}}
@@ -110,59 +111,63 @@
                       <h4 class="skill-name rollable">{{skill.label}}</h4>
                       <a class="config-button" data-action="skill" title="{{localize 'SHAPER.SkillConfigure'}}"><i class="fas fa-cog"></i></a>
                     </div>
-                    <span class="skill-ability">{{skill.ability}}</span>
+                    <span class="skill-ability">{{skill.ability0}}</span>
+                    <span class="skill-ability">{{skill.ability1}}</span>
                     <span class="skill-mod" title="{{ localize 'SHAPER.SkillModifierHint' skill=skill.label }}">
                         {{numberFormat skill.total decimals=0 sign=true}}
                     </span>
-                    <span class="skill-passive" title="{{ localize 'SHAPER.SkillPassiveHint' skill=skill.label }}">
-                        ({{skill.passive}})
+                    <span class="skill-points" title="{{ localize 'SHAPER.SkillPointsHint' skill=skill.label }}">
+                        {{numberInput skill.points name=(concat "system.skills." s ".points")}}
                     </span>
                 </li>
             {{/with}}
             {{/each}}
             </ul>
 
-            <section class="center-pane flexcol">
+            <section class="lcenter-pane flexcol">
 
-                {{!-- Legendary Actions --}}
+                {{!-- Body Attributes --}}
+                <ul class="attributes flexcol">
+                {{#each stats as |stat|}}
+                    <li class="attribute stats">
+                        <h4 class="attribute-name box-title">{{ stat.placeholder }}</h4>
+                        <div class="attribute-value">
+                            <span>{{numberFormat stat.value name=(concat "system.stats." stat.name ".value")}}</span>
+                        </div>
+                        <footer class="attribute-footer">
+                            <span>{{ localize "SHAPER.Modifier" }}</span>
+                            {{numberInput stat.bonus name=(concat "system.stats." stat.name ".bonus")}}
+                        </footer>
+                    </li>
+                {{/each}}
+                </ul>
+            </section>
+
+            <section class="rcenter-pane flexcol">
+                {{!-- Counters --}}
                 <div class="counters">
-                    <div class="counter flexrow legendary">
-                        <h4>{{ localize "SHAPER.LegAct" }}</h4>
+                    <div class="counter flexrow ">
+                        <h4>{{ localize "SHAPER.Injury" }}</h4>
                         <div class="counter-value">
-                            <input name="system.resources.legact.value" type="number" step="any"
-                                value="{{system.resources.legact.value}}" placeholder="0"
-                                title="{{localize 'SHAPER.LegActRemaining'}}">
-                            <span class="sep">/</span>
-                            <input name="system.resources.legact.max" type="number" step="any"
-                                value="{{system.resources.legact.max}}" placeholder="0"
-                                title="{{localize 'SHAPER.LegActMax'}}">
+                            {{numberInput system.counts.injury.value name="system.counts.injury.value"
+                                placeholder="0"}}
                         </div>
                     </div>
-                    <div class="counter flexrow legendary">
-                        <h4>{{ localize "SHAPER.LegRes" }}</h4>
+                    <div class="counter flexrow ">
+                        <h4>{{ localize "SHAPER.OBuff" }}</h4>
                         <div class="counter-value">
-                            <input name="system.resources.legres.value" type="number" step="any"
-                                value="{{system.resources.legres.value}}" placeholder="0"
-                                title="{{localize 'SHAPER.LegResRemaining'}}">
-                            <span class="sep">/</span>
-                            <input name="system.resources.legres.max" type="number" step="any"
-                                value="{{system.resources.legres.max}}" placeholder="0"
-                                title="{{localize 'SHAPER.LegResMax'}}">
+                            {{numberInput system.counts.obuff.value name="system.counts.obuff.value"
+                                placeholder="0"}}
                         </div>
                     </div>
-                    <div class="counter flexrow lair">
-                        <h4>{{ localize "SHAPER.LairAct" }}</h4>
+                    <div class="counter flexrow ">
+                        <h4>{{ localize "SHAPER.DBuff" }}</h4>
                         <div class="counter-value">
-                            <input name="system.resources.lair.value" type="checkbox"
-                                value="{{system.resources.lair.value}}"
-                                data-dtype="Boolean" {{checked system.resources.lair.value}}>
-                            <input name="system.resources.lair.initiative" type="number" step="any"
-                                value="{{system.resources.lair.initiative}}"
-                                placeholder="20" title="{{localize 'SHAPER.LairActionInitiative'}}">
+                            {{numberInput system.counts.dbuff.value name="system.counts.dbuff.value"
+                                placeholder="0"}}
                         </div>
                     </div>
                 </div>
-
                 {{!-- Traits --}}
                 {{> "shaper.actor-traits"}}
             </section>

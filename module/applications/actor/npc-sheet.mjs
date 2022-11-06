@@ -29,12 +29,9 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
 
     // Categorize Items as Features
     const features = {
-      weapons: { label: game.i18n.localize("SHAPER.AttackPl"), items: [], hasActions: true,
-        dataset: {type: "weapon", "weapon-type": "natural"} },
       actions: { label: game.i18n.localize("SHAPER.ActionPl"), items: [], hasActions: true,
         dataset: {type: "feat", "activation.type": "action"} },
-      passive: { label: game.i18n.localize("SHAPER.Features"), items: [], dataset: {type: "feat"} },
-      equipment: { label: game.i18n.localize("SHAPER.Inventory"), items: [], dataset: {type: "loot"}}
+      passive: { label: game.i18n.localize("SHAPER.Features"), items: [], dataset: {type: "feat"} }
     };
 
     // Start by classifying items into groups for rendering
@@ -56,12 +53,10 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
 
     // Organize Features
     for ( let item of other ) {
-      if ( item.type === "weapon" ) features.weapons.items.push(item);
-      else if ( item.type === "feat" ) {
+      if ( item.type === "feat" ) {
         if ( item.system.activation.type ) features.actions.items.push(item);
         else features.passive.items.push(item);
       }
-      else features.equipment.items.push(item);
     }
 
     // Assign and return
