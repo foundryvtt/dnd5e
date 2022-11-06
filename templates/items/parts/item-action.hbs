@@ -14,12 +14,12 @@
 
 {{!-- Ability Modifier --}}
 <div class="form-group select">
-    <label>{{ localize "SHAPER.AbilityModifier" }}</label>
-    <select name="system.ability">
-        {{#select system.ability}}
+    <label>{{ localize "SHAPER.StatsModifier" }}</label>
+    <select name="system.stat">
+        {{#select system.stat}}
         <option value="">{{ localize "SHAPER.Default" }}</option>
-        {{#each config.abilities as |ability a|}}
-        <option value="{{a}}">{{ability}}</option>
+        {{#each config.stats as |stat a|}}
+        <option value="{{a}}">{{stat}}</option>
         {{/each}}
         {{/select}}
     </select>
@@ -79,16 +79,6 @@
     </li>
     {{/each}}
 </ol>
-
-{{!-- Versatile Damage --}}
-{{#if system.damage.parts.length }}
-<div class="form-group">
-    <label>{{ localize "SHAPER.VersatileDamage" }}</label>
-    <div class="form-fields">
-        <input type="text" name="system.damage.versatile" value="{{system.damage.versatile}}" placeholder="{{ localize 'SHAPER.Formula' }}"/>
-    </div>
-</div>
-{{/if}}
 
 {{!-- Other Formula --}}
 <div class="form-group">

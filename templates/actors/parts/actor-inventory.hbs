@@ -1,13 +1,3 @@
-<div class="inventory-filters flexrow">
-    {{#unless isVehicle}}
-    <ul class="filter-list flexrow" data-filter="inventory">
-        <li class="filter-item" data-filter="major">{{localize "SHAPER.MajorAction"}}</li>
-        <li class="filter-item" data-filter="minor">{{localize "SHAPER.MinorAction"}}</li>
-        <li class="filter-item" data-filter="counter">{{localize "SHAPER.CounterAction"}}</li>
-    </ul>
-    {{/unless}}
-</div>
-
 <ol class="items-list inventory-list">
 {{#each sections as |section sid|}}
     <li class="items-header flexrow">

@@ -29,9 +29,7 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
     }, []);
 
     return foundry.utils.mergeObject(context, {
-      disableExperience: game.settings.get("shaper", "disableExperienceTracking"),
-      weightUnit: game.i18n.localize(`SHAPER.Abbreviation${
-        game.settings.get("shaper", "metricWeightUnits") ? "Kgs" : "Lbs"}`)
+      disableExperience: game.settings.get("shaper", "disableExperienceTracking")
     });
   }
 
@@ -40,11 +38,8 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
   /** @override */
   _prepareItems(context) {
 
-    /* TODO: HEY DUMBASS HERE"S WHERE THE ITEMS ARE CLASSIFIED AND GIVEN TYPES CHANGE THIS */
-
     // Categorize items as inventory, features
     const inventory = {
-      backpack: { label: "SHAPER.ItemTypeContainerPl", items: [], dataset: {type: "backpack"} },
       loot: { label: "SHAPER.ItemTypeLootPl", items: [], dataset: {type: "loot"} }
     };
 
@@ -79,8 +74,6 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
     // Organize items
     for ( let i of items ) {
       i.system.quantity = i.system.quantity || 0;
-      i.system.weight = i.system.weight || 0;
-      i.totalWeight = (i.system.quantity * i.system.weight).toNearest(0.1);
       inventory[i.type].items.push(i);
     }
 

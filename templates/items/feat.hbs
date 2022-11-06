@@ -52,11 +52,10 @@
             {{!-- Recharge Requirement --}}
             {{#if system.activation.type}}
             <div class="form-group recharge">
-                <label>{{ localize "SHAPER.FeatureActionRecharge" }}</label>
+                <label>{{ localize "SHAPER.FeatureCooldown" }}</label>
                 <div class="form-fields">
-                    <span>{{ localize "SHAPER.FeatureRechargeOn" }}</span>
-                    {{numberInput system.recharge.value name="system.recharge.value"
-                        placeholder=(localize "SHAPER.FeatureRechargeResult")}}
+                    <span>{{ localize "SHAPER.TimeTurn" }}</span>
+                    {{numberInput system.recharge.value name="system.recharge.value"}}
                     <label class="checkbox">
                         {{ localize "SHAPER.Charged" }}
                         <input type="checkbox" name="system.recharge.charged" {{checked system.recharge.charged}}/>

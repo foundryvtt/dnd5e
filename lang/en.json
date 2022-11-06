@@ -28,7 +28,10 @@
 "SHAPER.AbilityHrtAbbr": "hrt",
 "SHAPER.AbilitySol": "Soul",
 "SHAPER.AbilitySolAbbr": "sol",
+
 "SHAPER.AbilityModifier": "Ability Modifier",
+"SHAPER.StatsModifier": "Stats Modifier",
+
 "SHAPER.AbilityPromptText": "What type of {ability} check?",
 "SHAPER.AbilityPromptTitle": "{ability} Ability Check",
 "SHAPER.AbilityUseHint": "Configure how you would like to use the {name} {type}.",
@@ -150,6 +153,7 @@
 "SHAPER.Concentration": "Concentration",
 "SHAPER.ConcentrationAbbr": "C",
 "SHAPER.ConsumeTitle": "Resource Consumption",
+"SHAPER.UpkeepTitle": "Upkeep",
 "SHAPER.ConsumeAmmunition": "Ammunition",
 "SHAPER.ConsumeAttribute": "Attribute",
 "SHAPER.ConsumeHitDice": "Hit Dice",
@@ -294,7 +298,7 @@
 "SHAPER.DBuff": "Defensive Buff",
 
 "SHAPER.Expertise": "Expertise",
-"SHAPER.FeatureActionRecharge": "Action Recharge",
+"SHAPER.FeatureCooldown": "Cooldown",
 "SHAPER.Flaws": "Flaws",
 "SHAPER.FormulaCannotContainDiceError": "{name} formula cannot contain dice expressions.",
 "SHAPER.EffectCreate": "Create Effect",
@@ -346,8 +350,6 @@
 "SHAPER.FeatureUtility": "Utilities",
 "SHAPER.FeatureTalent": "Talents",
 
-"SHAPER.FeatureRechargeOn": "Recharge On",
-"SHAPER.FeatureRechargeResult": "1d6 Result",
 "SHAPER.FeatureUsage": "Feature Usage",
 "SHAPER.Features": "Features",
 "SHAPER.Feats": "Feats",

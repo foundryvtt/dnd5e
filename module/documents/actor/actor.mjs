@@ -7,51 +7,6 @@ import Item5e from "../item.mjs";
  */
 export default class Actor5e extends Actor {
 
-  /**
-   * The data source for Actor5e.classes allowing it to be lazily computed.
-   * @type {Object<Item5e>}
-   * @private
-   */
-  _classes;
-
-  /* -------------------------------------------- */
-  /*  Properties                                  */
-  /* -------------------------------------------- */
-
-  /**
-   * A mapping of classes belonging to this Actor.
-   * @type {Object<Item5e>}
-   */
-  get classes() {
-    if ( this._classes !== undefined ) return this._classes;
-    if ( !["character", "npc"].includes(this.type) ) return this._classes = {};
-    return this._classes = this.items.filter(item => item.type === "class").reduce((obj, cls) => {
-      obj[cls.identifier] = cls;
-      return obj;
-    }, {});
-  }
-
-
-  /* -------------------------------------------- */
-
-  /**
-   * The Actor's currently equipped armor, if any.
-   * @type {Item5e|null}
-   */
-  get armor() {
-    return this.system.attributes.ac.equippedArmor ?? null;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * The Actor's currently equipped shield, if any.
-   * @type {Item5e|null}
-   */
-  get shield() {
-    return this.system.attributes.ac.equippedShield ?? null;
-  }
-
   /* -------------------------------------------- */
   /*  Methods                                     */
   /* -------------------------------------------- */
@@ -521,8 +476,6 @@ export default class Actor5e extends Actor {
     // Ability-specific check bonus
     // TODO: See what this does
     if ( abl0?.bonuses?.check ) {
-      
-      console.log(abl0.bonuses.check);
       data.abilityCheckBonus = Roll.replaceFormulaData(abl0.bonuses.check, data);
     }
     else data.abilityCheckBonus = 0;

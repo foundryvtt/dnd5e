@@ -277,7 +277,6 @@ preLocalize("movementTypes", { sort: true });
 
 /**
  * The valid units of measure for movement distances in the game system.
- * By default this uses the imperial units of feet and miles.
  * @enum {string}
  */
 SHAPER.movementUnits = {
@@ -287,7 +286,6 @@ preLocalize("movementUnits");
 
 /**
  * The valid units of measure for the range of an action or effect.
- * This object automatically includes the movement units from `SHAPER.movementUnits`.
  * @enum {string}
  */
 SHAPER.distanceUnits = {
@@ -296,8 +294,7 @@ SHAPER.distanceUnits = {
   short: "SHAPER.DistShort",
   medium: "SHAPER.DistMedium",
   long: "SHAPER.DistLong",
-  extreme: "SHAPER.DistExtreme",
-  ...SHAPER.movementUnits
+  extreme: "SHAPER.DistExtreme"
 };
 preLocalize("distanceUnits");
 

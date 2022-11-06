@@ -20,18 +20,6 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
   /** @inheritDoc */
   async getData(options) {
     const context = await super.getData(options);
-
-    // Challenge Rating
-    const cr = parseFloat(context.system.details.cr ?? 0);
-    const crLabels = {0: "0", 0.125: "1/8", 0.25: "1/4", 0.5: "1/2"};
-
-    return foundry.utils.mergeObject(context, {
-      labels: {
-        cr: cr >= 1 ? String(cr) : crLabels[cr] ?? 1,
-        type: this.actor.constructor.formatCreatureType(context.system.details.type),
-        armorType: this.getArmorLabel()
-      }
-    });
   }
 
   /* -------------------------------------------- */
@@ -80,20 +68,6 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
     context.features = Object.values(features);
   }
 
-  /* -------------------------------------------- */
-
-  /**
-   * Format NPC armor information into a localized string.
-   * @returns {string}  Formatted armor label.
-   */
-  getArmorLabel() {
-    const ac = this.actor.system.attributes.ac;
-    const label = [];
-    if ( ac.calc === "default" ) label.push(this.actor.armor?.name || game.i18n.localize("SHAPER.ArmorClassUnarmored"));
-    else label.push(game.i18n.localize(CONFIG.SHAPER.armorClasses[ac.calc].label));
-    if ( this.actor.shield ) label.push(this.actor.shield.name);
-    return label.filterJoin(", ");
-  }
 
   /* -------------------------------------------- */
   /*  Object Updates                              */
@@ -102,12 +76,6 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
   /** @inheritDoc */
   async _updateObject(event, formData) {
 
-    // Format NPC Challenge Rating
-    const crs = {"1/8": 0.125, "1/4": 0.25, "1/2": 0.5};
-    let crv = "system.details.cr";
-    let cr = formData[crv];
-    cr = crs[cr] || parseFloat(cr);
-    if ( cr ) formData[crv] = cr < 1 ? cr : parseInt(cr);
 
     // Parent ActorSheet update steps
     return super._updateObject(event, formData);

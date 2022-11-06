@@ -858,20 +858,10 @@ export default class Item5e extends Item {
     // Item type specific properties
     const props = [];
     switch ( this.type ) {
-      case "consumable":
-        this._consumableChatData(data, labels, props); break;
-      case "equipment":
-        this._equipmentChatData(data, labels, props); break;
       case "feat":
         this._featChatData(data, labels, props); break;
       case "loot":
         this._lootChatData(data, labels, props); break;
-      case "spell":
-        this._spellChatData(data, labels, props); break;
-      case "tool":
-        this._toolChatData(data, labels, props); break;
-      case "weapon":
-        this._weaponChatData(data, labels, props); break;
     }
 
     // Equipment properties
@@ -897,39 +887,6 @@ export default class Item5e extends Item {
     return data;
   }
 
-  /* -------------------------------------------- */
-
-  /**
-   * Prepare chat card data for consumable type items.
-   * @param {object} data     Copy of item data being use to display the chat message.
-   * @param {object} labels   Specially prepared item labels.
-   * @param {string[]} props  Existing list of properties to be displayed. *Will be mutated.*
-   * @private
-   */
-  _consumableChatData(data, labels, props) {
-    props.push(
-      CONFIG.SHAPER.consumableTypes[data.consumableType],
-      `${data.uses.value}/${data.uses.max} ${game.i18n.localize("SHAPER.Charges")}`
-    );
-    data.hasCharges = data.uses.value >= 0;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Prepare chat card data for equipment type items.
-   * @param {object} data     Copy of item data being use to display the chat message.
-   * @param {object} labels   Specially prepared item labels.
-   * @param {string[]} props  Existing list of properties to be displayed. *Will be mutated.*
-   * @private
-   */
-  _equipmentChatData(data, labels, props) {
-    props.push(
-      CONFIG.SHAPER.equipmentTypes[data.armor.type],
-      labels.armor || null,
-      data.stealth ? game.i18n.localize("SHAPER.StealthDisadvantage") : null
-    );
-  }
 
   /* -------------------------------------------- */
 
@@ -960,52 +917,6 @@ export default class Item5e extends Item {
     );
   }
 
-  /* -------------------------------------------- */
-
-  /**
-   * Render a chat card for Spell type data.
-   * @param {object} data     Copy of item data being use to display the chat message.
-   * @param {object} labels   Specially prepared item labels.
-   * @param {string[]} props  Existing list of properties to be displayed. *Will be mutated.*
-   * @private
-   */
-  _spellChatData(data, labels, props) {
-    props.push(
-      labels.level,
-      labels.components.vsm + (labels.materials ? ` (${labels.materials})` : ""),
-      ...labels.components.tags
-    );
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Prepare chat card data for tool type items.
-   * @param {object} data     Copy of item data being use to display the chat message.
-   * @param {object} labels   Specially prepared item labels.
-   * @param {string[]} props  Existing list of properties to be displayed. *Will be mutated.*
-   * @private
-   */
-  _toolChatData(data, labels, props) {
-    props.push(
-      CONFIG.SHAPER.abilities[data.ability] || null
-    );
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Prepare chat card data for weapon type items.
-   * @param {object} data     Copy of item data being use to display the chat message.
-   * @param {object} labels   Specially prepared item labels.
-   * @param {string[]} props  Existing list of properties to be displayed. *Will be mutated.*
-   * @private
-   */
-  _weaponChatData(data, labels, props) {
-    props.push(
-      CONFIG.SHAPER.weaponTypes[data.weaponType]
-    );
-  }
 
   /* -------------------------------------------- */
   /*  Item Rolls - Attack, Damage, Saves, Checks  */
@@ -1027,26 +938,8 @@ export default class Item5e extends Item {
     const {parts, rollData} = this.getAttackToHit();
 
     // Handle ammunition consumption
-    delete this._ammo;
-    let ammo = null;
-    let ammoUpdate = [];
-    const consume = this.system.consume;
-    if ( consume?.type === "ammo" ) {
-      ammo = this.actor.items.get(consume.target);
-      if ( ammo?.system ) {
-        const q = ammo.system.quantity;
-        const consumeAmount = consume.amount ?? 0;
-        if ( q && (q - consumeAmount >= 0) ) {
-          this._ammo = ammo;
-          title += ` [${ammo.name}]`;
-        }
-      }
 
-      // Get pending ammunition update
-      const usage = this._getUsageUpdates({consumeResource: true});
-      if ( usage === false ) return null;
-      ammoUpdate = usage.resourceUpdates ?? [];
-    }
+    let ammoUpdate = [];
 
     // Compose roll options
     const rollConfig = foundry.utils.mergeObject({
@@ -1090,8 +983,6 @@ export default class Item5e extends Item {
      */
     Hooks.callAll("shaper.rollAttack", this, roll, ammoUpdate);
 
-    // Commit ammunition consumption on attack rolls resource consumption if the attack roll was made
-    if ( ammoUpdate.length ) await this.actor?.updateEmbeddedDocuments("Item", ammoUpdate);
     return roll;
   }
 
@@ -1142,44 +1033,11 @@ export default class Item5e extends Item {
       messageData
     };
 
-    // Adjust damage from versatile usage
-    if ( versatile && dmg.versatile ) {
-      parts[0] = dmg.versatile;
-      messageData["flags.shaper.roll"].versatile = true;
-    }
-
-    // Scale damage from up-casting spells
-    const scaling = this.system.scaling;
-    if ( (this.type === "spell") ) {
-      if ( scaling.mode === "cantrip" ) {
-        let level;
-        if ( this.actor.type === "character" ) level = this.actor.system.details.level;
-        else if ( this.system.preparation.mode === "innate" ) level = Math.ceil(this.actor.system.details.cr);
-        else level = this.actor.system.details.spellLevel;
-        this._scaleCantripDamage(parts, scaling.formula, level, rollData);
-      }
-      else if ( spellLevel && (scaling.mode === "level") && scaling.formula ) {
-        this._scaleSpellDamage(parts, this.system.level, spellLevel, scaling.formula, rollData);
-      }
-    }
 
     // Add damage bonus formula
     const actorBonus = foundry.utils.getProperty(this.actor.system, `bonuses.${this.system.actionType}`) || {};
     if ( actorBonus.damage && (parseInt(actorBonus.damage) !== 0) ) {
       parts.push(actorBonus.damage);
-    }
-
-    // Only add the ammunition damage if the ammunition is a consumable with type 'ammo'
-    if ( this._ammo && (this._ammo.type === "consumable") && (this._ammo.system.consumableType === "ammo") ) {
-      parts.push("@ammo");
-      rollData.ammo = this._ammo.system.damage.parts.map(p => p[0]).join("+");
-      rollConfig.flavor += ` [${this._ammo.name}]`;
-      delete this._ammo;
-    }
-
-    // Factor in extra critical damage dice from the Barbarian's "Brutal Critical"
-    if ( this.system.actionType === "mwak" ) {
-      rollConfig.criticalBonusDice = this.actor.getFlag("shaper", "meleeCriticalDamageDice") ?? 0;
     }
 
     // Factor in extra weapon-specific critical damage
@@ -1212,73 +1070,6 @@ export default class Item5e extends Item {
     return roll;
   }
 
-  /* -------------------------------------------- */
-
-  /**
-   * Adjust a cantrip damage formula to scale it for higher level characters and monsters.
-   * @param {string[]} parts   The original parts of the damage formula.
-   * @param {string} scale     The scaling formula.
-   * @param {number} level     Level at which the spell is being cast.
-   * @param {object} rollData  A data object that should be applied to the scaled damage roll.
-   * @returns {string[]}       The parts of the damage formula with the scaling applied.
-   * @private
-   */
-  _scaleCantripDamage(parts, scale, level, rollData) {
-    const add = Math.floor((level + 1) / 6);
-    if ( add === 0 ) return [];
-    return this._scaleDamage(parts, scale || parts.join(" + "), add, rollData);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Adjust the spell damage formula to scale it for spell level up-casting.
-   * @param {string[]} parts      The original parts of the damage formula.
-   * @param {number} baseLevel    Default level for the spell.
-   * @param {number} spellLevel   Level at which the spell is being cast.
-   * @param {string} formula      The scaling formula.
-   * @param {object} rollData     A data object that should be applied to the scaled damage roll.
-   * @returns {string[]}          The parts of the damage formula with the scaling applied.
-   * @private
-   */
-  _scaleSpellDamage(parts, baseLevel, spellLevel, formula, rollData) {
-    const upcastLevels = Math.max(spellLevel - baseLevel, 0);
-    if ( upcastLevels === 0 ) return parts;
-    return this._scaleDamage(parts, formula, upcastLevels, rollData);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Scale an array of damage parts according to a provided scaling formula and scaling multiplier.
-   * @param {string[]} parts    The original parts of the damage formula.
-   * @param {string} scaling    The scaling formula.
-   * @param {number} times      A number of times to apply the scaling formula.
-   * @param {object} rollData   A data object that should be applied to the scaled damage roll
-   * @returns {string[]}        The parts of the damage formula with the scaling applied.
-   * @private
-   */
-  _scaleDamage(parts, scaling, times, rollData) {
-    if ( times <= 0 ) return parts;
-    const p0 = new Roll(parts[0], rollData);
-    const s = new Roll(scaling, rollData).alter(times);
-
-    // Attempt to simplify by combining like dice terms
-    let simplified = false;
-    if ( (s.terms[0] instanceof Die) && (s.terms.length === 1) ) {
-      const d0 = p0.terms[0];
-      const s0 = s.terms[0];
-      if ( (d0 instanceof Die) && (d0.faces === s0.faces) && d0.modifiers.equals(s0.modifiers) ) {
-        d0.number += s0.number;
-        parts[0] = p0.formula;
-        simplified = true;
-      }
-    }
-
-    // Otherwise, add to the first part
-    if ( !simplified ) parts[0] = `${parts[0]} + ${s.formula}`;
-    return parts;
-  }
 
   /* -------------------------------------------- */
 
@@ -1331,141 +1122,6 @@ export default class Item5e extends Item {
      * @param {Roll} roll    The resulting roll.
      */
     Hooks.callAll("shaper.rollFormula", this, roll);
-
-    return roll;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Perform an ability recharge test for an item which uses the d6 recharge mechanic.
-   * @returns {Promise<Roll>}   A Promise which resolves to the created Roll instance
-   */
-  async rollRecharge() {
-    const recharge = this.system.recharge ?? {};
-    if ( !recharge.value ) return;
-
-    const rollConfig = {
-      formula: "1d6",
-      data: this.getRollData(),
-      target: parseInt(recharge.value),
-      chatMessage: true
-    };
-
-    /**
-     * A hook event that fires before the Item is rolled to recharge.
-     * @function shaper.preRollRecharge
-     * @memberof hookEvents
-     * @param {Item5e} item                 Item for which the roll is being performed.
-     * @param {object} config               Configuration data for the pending roll.
-     * @param {string} config.formula       Formula that will be used to roll the recharge.
-     * @param {object} config.data          Data used when evaluating the roll.
-     * @param {number} config.target        Total required to be considered recharged.
-     * @param {boolean} config.chatMessage  Should a chat message be created for this roll?
-     * @returns {boolean}                   Explicitly return false to prevent the roll from being performed.
-     */
-    if ( Hooks.call("shaper.preRollRecharge", this, rollConfig) === false ) return;
-
-    const roll = await new Roll(rollConfig.formula, rollConfig.data).roll({async: true});
-    const success = roll.total >= rollConfig.target;
-
-    if ( rollConfig.chatMessage ) {
-      const resultMessage = game.i18n.localize(`SHAPER.ItemRecharge${success ? "Success" : "Failure"}`);
-      roll.toMessage({
-        flavor: `${game.i18n.format("SHAPER.ItemRechargeCheck", {name: this.name})} - ${resultMessage}`,
-        speaker: ChatMessage.getSpeaker({actor: this.actor, token: this.actor.token})
-      });
-    }
-
-    /**
-     * A hook event that fires after the Item has rolled to recharge, but before any changes have been performed.
-     * @function shaper.rollRecharge
-     * @memberof hookEvents
-     * @param {Item5e} item  Item for which the roll was performed.
-     * @param {Roll} roll    The resulting roll.
-     * @returns {boolean}    Explicitly return false to prevent the item from being recharged.
-     */
-    if ( Hooks.call("shaper.rollRecharge", this, roll) === false ) return roll;
-
-    // Update the Item data
-    if ( success ) this.update({"system.recharge.charged": true});
-
-    return roll;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Prepare data needed to roll a tool check and then pass it off to `d10Roll`.
-   * @param {D10RollConfiguration} [options]  Roll configuration options provided to the d10Roll function.
-   * @returns {Promise<Roll>}                 A Promise which resolves to the created Roll instance.
-   */
-  async rollToolCheck(options={}) {
-    if ( this.type !== "tool" ) throw new Error("Wrong item type!");
-
-    // Prepare roll data
-    const rollData = this.getRollData();
-    const abl = this.system.ability;
-    const parts = ["@mod", "@abilityCheckBonus"];
-    const title = `${this.name} - ${game.i18n.localize("SHAPER.ToolCheck")}`;
-
-
-    // Add tool bonuses
-    if ( this.system.bonus ) {
-      parts.push("@toolBonus");
-      rollData.toolBonus = Roll.replaceFormulaData(this.system.bonus, rollData);
-    }
-
-    // Add ability-specific check bonus
-    const checkBonus = foundry.utils.getProperty(rollData, `abilities.${abl}.bonuses.check`);
-    if ( checkBonus ) rollData.abilityCheckBonus = Roll.replaceFormulaData(checkBonus, rollData);
-    else rollData.abilityCheckBonus = 0;
-
-    // Add global actor bonus
-    const globalBonus = this.actor.system.bonuses?.abilities || {};
-    if ( globalBonus.check ) {
-      parts.push("@checkBonus");
-      rollData.checkBonus = Roll.replaceFormulaData(globalBonus.check, rollData);
-    }
-
-    // Compose the roll data
-    const rollConfig = foundry.utils.mergeObject({
-      parts: parts,
-      data: rollData,
-      title: title,
-      flavor: title,
-      dialogOptions: {
-        width: 400,
-        top: options.event ? options.event.clientY - 80 : null,
-        left: window.innerWidth - 710
-      },
-      chooseModifier: true,
-      messageData: {
-        speaker: options.speaker || ChatMessage.getSpeaker({actor: this.actor}),
-        "flags.shaper.roll": {type: "tool", itemId: this.id }
-      }
-    }, options);
-
-    /**
-     * A hook event that fires before a tool check is rolled for an Item.
-     * @function shaper.preRollToolCheck
-     * @memberof hookEvents
-     * @param {Item5e} item                  Item for which the roll is being performed.
-     * @param {D10RollConfiguration} config  Configuration data for the pending roll.
-     * @returns {boolean}                    Explicitly return false to prevent the roll from being performed.
-     */
-    if ( Hooks.call("shaper.preRollToolCheck", this, rollConfig) === false ) return;
-
-    const roll = await d10Roll(rollConfig);
-
-    /**
-     * A hook event that fires after a tool check has been rolled for an Item.
-     * @function shaper.rollToolCheck
-     * @memberof hookEvents
-     * @param {Item5e} item   Item for which the roll was performed.
-     * @param {D10Roll} roll  The resulting roll.
-     */
-    if ( roll ) Hooks.callAll("shaper.rollToolCheck", this, roll);
 
     return roll;
   }
@@ -1552,25 +1208,8 @@ export default class Item5e extends Item {
       case "attack":
         await item.rollAttack({event}); break;
       case "damage":
-      case "versatile":
-        await item.rollDamage({
-          critical: event.altKey,
-          event: event,
-          spellLevel: spellLevel,
-          versatile: action === "versatile"
-        });
-        break;
       case "formula":
         await item.rollFormula({event, spellLevel}); break;
-      case "save":
-        targets = this._getChatCardTargets(card);
-        for ( let token of targets ) {
-          const speaker = ChatMessage.getSpeaker({scene: canvas.scene, token: token});
-          await token.actor.rollAbilitySave(button.dataset.ability, { event, speaker });
-        }
-        break;
-      case "toolCheck":
-        await item.rollToolCheck({event}); break;
       case "placeTemplate":
         const template = shaper.canvas.AbilityTemplate.fromItem(item);
         if ( template ) template.drawPreview();
@@ -1650,22 +1289,7 @@ export default class Item5e extends Item {
     await super._preCreate(data, options, user);
 
     if ( !this.isEmbedded || (this.parent.type === "vehicle") ) return;
-    const isNPC = this.parent.type === "npc";
     let updates;
-    switch (data.type) {
-      case "equipment":
-        updates = this._onCreateOwnedEquipment(data, isNPC);
-        break;
-      case "spell":
-        updates = this._onCreateOwnedSpell(data, isNPC);
-        break;
-      case "tool":
-        updates = this._onCreateOwnedTool(data, isNPC);
-        break;
-      case "weapon":
-        updates = this._onCreateOwnedWeapon(data, isNPC);
-        break;
-    }
     if ( updates ) return this.updateSource(updates);
   }
 
@@ -1675,12 +1299,6 @@ export default class Item5e extends Item {
   async _onCreate(data, options, userId) {
     super._onCreate(data, options, userId);
     if ( (userId !== game.user.id) || !this.parent ) return;
-
-    // Assign a new original class
-    if ( (this.parent.type === "character") && (this.type === "class") ) {
-      const pc = this.parent.items.get(this.parent.system.details.originalClass);
-      if ( !pc ) await this.parent._assignPrimaryClass();
-    }
   }
 
   /* -------------------------------------------- */
@@ -1717,134 +1335,5 @@ export default class Item5e extends Item {
   _onDelete(options, userId) {
     super._onDelete(options, userId);
     if ( (userId !== game.user.id) || !this.parent ) return;
-
-    // Assign a new original class
-    if ( (this.type === "class") && (this.id === this.parent.system.details.originalClass) ) {
-      this.parent._assignPrimaryClass();
-    }
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Pre-creation logic for the automatic configuration of owned equipment type Items.
-   *
-   * @param {object} data       Data for the newly created item.
-   * @param {boolean} isNPC     Is this actor an NPC?
-   * @returns {object}          Updates to apply to the item data.
-   * @private
-   */
-  _onCreateOwnedEquipment(data, isNPC) {
-    const updates = {};
-    if ( foundry.utils.getProperty(data, "system.equipped") === undefined ) {
-      updates["system.equipped"] = isNPC;  // NPCs automatically equip equipment
-    }
-    return updates;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Pre-creation logic for the automatic configuration of owned spell type Items.
-   *
-   * @param {object} data       Data for the newly created item.
-   * @param {boolean} isNPC     Is this actor an NPC?
-   * @returns {object}          Updates to apply to the item data.
-   * @private
-   */
-  _onCreateOwnedSpell(data, isNPC) {
-    const updates = {};
-    if ( foundry.utils.getProperty(data, "system.preparation.prepared") === undefined ) {
-      updates["system.preparation.prepared"] = isNPC; // NPCs automatically prepare spells
-    }
-    return updates;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Pre-creation logic for the automatic configuration of owned tool type Items.
-   * @param {object} data       Data for the newly created item.
-   * @param {boolean} isNPC     Is this actor an NPC?
-   * @returns {object}          Updates to apply to the item data.
-   * @private
-   */
-  _onCreateOwnedTool(data, isNPC) {
-    const updates = {};
-    if ( data.system?.proficient === undefined ) {
-      if ( isNPC ) updates["system.proficient"] = 1;
-      else {
-        const actorToolProfs = this.parent.system.traits?.toolProf?.value;
-        const proficient = actorToolProfs.includes(this.system.toolType)
-          || actorToolProfs.includes(this.system.baseItem);
-        updates["system.proficient"] = Number(proficient);
-      }
-    }
-    return updates;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Pre-creation logic for the automatic configuration of owned weapon type Items.
-   * @param {object} data       Data for the newly created item.
-   * @param {boolean} isNPC     Is this actor an NPC?
-   * @returns {object}          Updates to apply to the item data.
-   * @private
-   */
-  _onCreateOwnedWeapon(data, isNPC) {
-
-    // NPCs automatically equip items and are proficient with them
-    if ( isNPC ) {
-      const updates = {};
-      if ( !foundry.utils.hasProperty(data, "system.equipped") ) updates["system.equipped"] = true;
-      return updates;
-    }
-
-    return updates;
-  }
-
-  /* -------------------------------------------- */
-  /*  Factory Methods                             */
-  /* -------------------------------------------- */
-
-  /**
-   * Create a consumable spell scroll Item from a spell Item.
-   * @param {Item5e} spell      The spell to be made into a scroll
-   * @returns {Item5e}          The created scroll consumable item
-   */
-  static async createScrollFromSpell(spell) {
-
-    // Get spell data
-    const itemData = (spell instanceof Item5e) ? spell.toObject() : spell;
-    const { actionType, description, source, activation, duration, target,
-      range, damage, formula, save, level} = itemData.system;
-
-    // Get scroll data
-    const scrollUuid = `Compendium.${CONFIG.SHAPER.sourcePacks.ITEMS}.${CONFIG.SHAPER.spellScrollIds[level]}`;
-    const scrollItem = await fromUuid(scrollUuid);
-    const scrollData = scrollItem.toObject();
-    delete scrollData._id;
-
-    // Split the scroll description into an intro paragraph and the remaining details
-    const scrollDescription = scrollData.system.description.value;
-    const pdel = "</p>";
-    const scrollIntroEnd = scrollDescription.indexOf(pdel);
-    const scrollIntro = scrollDescription.slice(0, scrollIntroEnd + pdel.length);
-    const scrollDetails = scrollDescription.slice(scrollIntroEnd + pdel.length);
-
-    // Create a composite description from the scroll description and the spell details
-    const desc = `${scrollIntro}<hr/><h3>${itemData.name} (Level ${level})</h3><hr/>${description.value}<hr/><h3>Scroll Details</h3><hr/>${scrollDetails}`;
-
-    // Create the spell scroll data
-    const spellScrollData = foundry.utils.mergeObject(scrollData, {
-      name: `${game.i18n.localize("SHAPER.SpellScroll")}: ${itemData.name}`,
-      img: itemData.img,
-      system: {
-        "description.value": desc.trim(), source, actionType, activation, duration, target, range, damage, formula,
-        save, level
-      }
-    });
-    return new this(spellScrollData);
   }
 }

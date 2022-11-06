@@ -78,6 +78,41 @@
           "alignment": "",
           "race": ""
         },
+        "stats": {
+          "physO": {
+            "value": 0,
+            "bonus": 0
+          },
+          "menO": {
+            "value": 0,
+            "bonus": 0
+          },
+          "physD": {
+            "value": 10,
+            "bonus": 0
+          },
+          "menD": {
+            "value": 10,
+            "bonus": 0
+          }
+        },
+        "counts": {
+          "injury": {
+            "value": 0,
+            "max": 10,
+            "min": 0
+          },
+          "obuff": {
+            "value": 0,
+            "max": 3,
+            "min": -3
+          },
+          "dbuff": {
+            "value": 0,
+            "max": 3,
+            "min": -3
+          }
+        },
         "skills": {
           "acr": {
             "value": 0,
@@ -274,41 +309,6 @@
         "ideal": "",
         "bond": "",
         "flaw": ""
-      },
-      "stats": {
-        "physO": {
-          "value": 0,
-          "bonus": 0
-        },
-        "menO": {
-          "value": 0,
-          "bonus": 0
-        },
-        "physD": {
-          "value": 10,
-          "bonus": 0
-        },
-        "menD": {
-          "value": 10,
-          "bonus": 0
-        }
-      },
-      "counts": {
-        "injury": {
-          "value": 0,
-          "max": 10,
-          "min": 0
-        },
-        "obuff": {
-          "value": 0,
-          "max": 3,
-          "min": -3
-        },
-        "dbuff": {
-          "value": 0,
-          "max": 3,
-          "min": -3
-        }
       }
     },
     "npc": {
@@ -331,7 +331,7 @@
     }
   },
   "Item": {
-    "types": ["feat", "backpack", "loot"],
+    "types": ["feat", "loot"],
     "templates": {
       "itemDescription": {
         "description": {
@@ -403,13 +403,7 @@
         }
       }
     },
-    "htmlFields": ["description.value", "description.chat", "description.unidentified"],
-    "backpack": {
-      "templates": ["itemDescription", "physicalItem"],
-      "capacity": {
-        "value": 0
-      }
-    },
+    "htmlFields": ["description.value", "description.chat"],
     "loot": {
       "templates": ["itemDescription", "physicalItem"]
     },
