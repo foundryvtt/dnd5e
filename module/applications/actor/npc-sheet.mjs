@@ -20,6 +20,7 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
   /** @inheritDoc */
   async getData(options) {
     const context = await super.getData(options);
+    return context
   }
 
   /* -------------------------------------------- */

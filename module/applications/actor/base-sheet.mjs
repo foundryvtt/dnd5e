@@ -112,9 +112,22 @@ export default class ActorSheet5e extends ActorSheet {
 
     // Skills
     for ( const [s, skl] of Object.entries(context.system.skills ?? {}) ) {
-      skl.ability = CONFIG.SHAPER.abilityAbbreviations[skl.ability];
+      skl.ability0 = CONFIG.SHAPER.abilityAbbreviations[skl.ability0];
+      skl.ability1 = CONFIG.SHAPER.abilityAbbreviations[skl.ability1];
       skl.label = CONFIG.SHAPER.skills[s]?.label;
       skl.baseValue = source.system.skills[s]?.value ?? 0;
+    }
+
+    // Stats
+    for ( const [s, stat] of Object.entries(context.system.stats ?? {}) ) {
+      stat.label = CONFIG.SHAPER.stats[s]?.label;
+      stat.baseValue = source.system.stats[s]?.value ?? 0;
+    }
+
+    // Counts
+    for ( const [c, count] of Object.entries(context.system.counts ?? {}) ) {
+      count.label = CONFIG.SHAPER.counts[c]?.label;
+      count.baseValue = source.system.counts[c]?.value ?? 0;
     }
 
     // Update traits
