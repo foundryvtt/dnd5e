@@ -96,4 +96,30 @@
         <input type="number" step="any" name="system.consume.amount" value="{{system.consume.amount}}">
     </div>
 </div>
+
+{{!-- Upkeep Requirement --}}
+
+<div class="form-group uses-per">
+    <label>{{ localize "SHAPER.FeatureUpkeep" }}</label>
+    <div class="form-fields">
+        <select name="system.upkeep.type">
+            {{#select system.upkeep.type}}
+            <option value=""></option>
+            {{#each config.abilityConsumptionTypes as |name key|}}
+            <option value="{{key}}">{{name}}</option>
+            {{/each}}
+            {{/select}}
+        </select>
+        <select name="system.upkeep.target">
+            {{#select system.upkeep.target}}
+            <option value=""></option>
+            {{#each abilityConsumptionTargets as |name key|}}
+            <option value="{{key}}">{{name}}</option>
+            {{/each}}
+            {{/select}}
+        </select>
+        <input type="number" step="any" name="system.upkeep.amount" value="{{system.upkeep.amount}}">
+    </div>
+</div>
+
 {{/if}}
