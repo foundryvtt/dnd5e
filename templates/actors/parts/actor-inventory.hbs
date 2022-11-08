@@ -57,9 +57,6 @@
 
             {{#if ../../owner}}
             <div class="item-controls flexrow">
-                {{#unless @root.isVehicle}}
-                <a class="item-control item-toggle {{item.toggleClass}}" title='{{item.toggleTitle}}'><i class="fas fa-shield-alt"></i></a>
-                {{/unless}}
                 {{#unless section.editableName}}
                 <a class="item-control item-edit" title='{{localize "SHAPER.ItemEdit"}}'><i class="fas fa-edit"></i></a>
                 {{/unless}}

@@ -118,7 +118,6 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
   activateListeners(html) {
     super.activateListeners(html);
     if ( !this.isEditable ) return;
-    html.find(".item-toggle").click(this._onToggleItem.bind(this));
     html.find(".rollable[data-action]").click(this._onSheetAction.bind(this));
   }
 
@@ -138,20 +137,4 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
         return this.actor.rollInitiative({createCombatants: true});
     }
   }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Handle toggling the state of an Owned Item within the Actor.
-   * @param {Event} event        The triggering click event.
-   * @returns {Promise<Item5e>}  Item with the updates applied.
-   * @private
-   */
-  _onToggleItem(event) {
-    event.preventDefault();
-    const itemId = event.currentTarget.closest(".item").dataset.itemId;
-    const item = this.actor.items.get(itemId);
-    return item.update({[attr]: !foundry.utils.getProperty(item, attr)});
-  }
-
 }
