@@ -147,10 +147,10 @@ export default class AbilityTemplate extends MeasuredTemplate {
    */
   _onMovePlacement(event) {
     event.stopPropagation();
-    let now = Date.now(); // Apply a 20ms throttle
+    const now = Date.now(); // Apply a 20ms throttle
     if ( now - this.#moveTime <= 20 ) return;
     const center = event.data.getLocalPosition(this.layer);
-    let interval = canvas.grid.type === CONST.GRID_TYPES.GRIDLESS ? 0 : 2;
+    const interval = canvas.grid.type === CONST.GRID_TYPES.GRIDLESS ? 0 : 2;
     const snapped = canvas.grid.getSnappedPosition(center.x, center.y, interval);
     this.document.updateSource({x: snapped.x, y: snapped.y});
     this.refresh();
@@ -166,8 +166,8 @@ export default class AbilityTemplate extends MeasuredTemplate {
   _onRotatePlacement(event) {
     if ( event.ctrlKey ) event.preventDefault(); // Avoid zooming the browser window
     event.stopPropagation();
-    let delta = canvas.grid.type > CONST.GRID_TYPES.SQUARE ? 30 : 15;
-    let snap = event.shiftKey ? delta : 5;
+    const delta = canvas.grid.type > CONST.GRID_TYPES.SQUARE ? 30 : 15;
+    const snap = event.shiftKey ? delta : 5;
     const update = {direction: this.document.direction + (snap * Math.sign(event.deltaY))};
     this.document.updateSource(update);
     this.refresh();
@@ -181,7 +181,7 @@ export default class AbilityTemplate extends MeasuredTemplate {
    */
   async _onConfirmPlacement(event) {
     await this._finishPlacement(event);
-    let interval = canvas.grid.type === CONST.GRID_TYPES.GRIDLESS ? 0 : 2;
+    const interval = canvas.grid.type === CONST.GRID_TYPES.GRIDLESS ? 0 : 2;
     const destination = canvas.grid.getSnappedPosition(this.document.x, this.document.y, interval);
     this.document.updateSource(destination);
     this.#events.resolve(canvas.scene.createEmbeddedDocuments("MeasuredTemplate", [this.document.toObject()]));
