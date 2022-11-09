@@ -732,7 +732,7 @@ export default class Item5e extends Item {
     options = foundry.utils.mergeObject({
       configureDialog: true,
       createMessage: true,
-      flags: {}
+      "flags.dnd5e.use": {type: this.type, itemId: this.id}
     }, options);
 
     // Reference aspects of the item data necessary for usage
@@ -783,7 +783,7 @@ export default class Item5e extends Item {
         item.prepareFinalAttributes();
       }
     }
-    if ( isSpell ) foundry.utils.setProperty(options.flags, "dnd5e.use", {spellLevel: item.system.level, itemId: this.id});
+    if ( isSpell ) foundry.utils.mergeObject(options.flags, {"dnd5e.use.spellLevel": item.system.level});
 
     /**
      * A hook event that fires before an item's resource consumption has been calculated.
@@ -1342,7 +1342,7 @@ export default class Item5e extends Item {
         left: window.innerWidth - 710
       },
       messageData: {
-        "flags.dnd5e.roll": {type: "attack", itemId: this.id },
+        "flags.dnd5e.roll": {type: "attack", itemId: this.id},
         speaker: ChatMessage.getSpeaker({actor: this.actor})
       }
     }, options);
