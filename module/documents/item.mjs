@@ -28,7 +28,15 @@ export default class Item5e extends Item {
     return this.system.identifier || this.name.slugify({strict: true});
   }
 
+  /* -------------------------------------------- */
 
+  /**
+   * Does the Item implement an attack roll as part of its usage?
+   * @type {boolean}
+   */
+   get hasAttack() {
+    return ["attack", "spell"].includes(this.system.actionType);
+  }
 
   /* -------------------------------------------- */
 
@@ -143,8 +151,6 @@ export default class Item5e extends Item {
     switch ( this.type ) {
       case "feat":
         this._prepareFeat(); break;
-      case "spell":
-        this._prepareSpell(); break;
     }
 
     // Activated Items
@@ -170,33 +176,6 @@ export default class Item5e extends Item {
     else this.labels.featType = game.i18n.localize("SHAPER.Passive");
   }
 
-  /* -------------------------------------------- */
-
-  /**
-   * Prepare derived data for a spell-type item and define labels.
-   * @protected
-   */
-  _prepareSpell() {
-    const tags = Object.fromEntries(Object.entries(CONFIG.SHAPER.spellTags).map(([k, v]) => {
-      v.tag = true;
-      return [k, v];
-    }));
-    const attributes = {...CONFIG.SHAPER.spellComponents, ...tags};
-    this.system.preparation.mode ||= "prepared";
-    this.labels.level = CONFIG.SHAPER.spellLevels[this.system.level];
-    this.labels.school = CONFIG.SHAPER.spellSchools[this.system.school];
-    this.labels.components = Object.entries(this.system.components).reduce((obj, [c, active]) => {
-      const config = attributes[c];
-      if ( !config || (active !== true) ) return obj;
-      obj.all.push({abbr: config.abbr, tag: config.tag});
-      if ( config.tag ) obj.tags.push(config.label);
-      else obj.vsm.push(config.abbr);
-      return obj;
-    }, {all: [], vsm: [], tags: []});
-    this.labels.components.vsm = new Intl.ListFormat(game.i18n.lang, { style: "narrow", type: "conjunction" })
-      .format(this.labels.components.vsm);
-    this.labels.materials = this.system?.materials?.value ?? null;
-  }
 
   /* -------------------------------------------- */
 
@@ -344,20 +323,6 @@ export default class Item5e extends Item {
     const actorBonus = this.actor.system.bonuses?.[this.system.actionType] || {};
     if ( actorBonus.attack ) parts.push(actorBonus.attack);
 
-    // One-time bonus provided by consumed ammunition
-    if ( (this.system.consume?.type === "ammo") && this.actor.items ) {
-      const ammoItem = this.actor.items.get(this.system.consume.target);
-      if ( ammoItem ) {
-        const ammoItemQuantity = ammoItem.system.quantity;
-        const ammoCanBeConsumed = ammoItemQuantity && (ammoItemQuantity - (this.system.consume.amount ?? 0) >= 0);
-        const ammoItemAttackBonus = ammoItem.system.attackBonus;
-        const ammoIsTypeConsumable = (ammoItem.type === "consumable") && (ammoItem.system.consumableType === "ammo");
-        if ( ammoCanBeConsumed && ammoItemAttackBonus && ammoIsTypeConsumable ) {
-          parts.push("@ammo");
-          rollData.ammo = ammoItemAttackBonus;
-        }
-      }
-    }
 
     // Condense the resulting attack bonus formula into a simplified label
     const roll = new Roll(parts.join("+"), rollData);
@@ -380,7 +345,6 @@ export default class Item5e extends Item {
     if ( !this.hasAttack ) return null;
     let actorThreshold = null;
     if ( this.type === "weapon" ) actorThreshold = actorFlags.weaponCriticalThreshold;
-    else if ( this.type === "spell" ) actorThreshold = actorFlags.spellCriticalThreshold;
     return Math.min(this.system.critical?.threshold ?? 20, actorThreshold ?? 20);
   }
 
@@ -451,8 +415,6 @@ export default class Item5e extends Item {
    * @property {boolean} consumeQuantity         Should the item's quantity be consumed?
    * @property {boolean} consumeRecharge         Should a recharge be consumed?
    * @property {boolean} consumeResource         Should a linked (non-ammo) resource be consumed?
-   * @property {number|string|null} consumeSpellLevel  Specific spell level to consume, or "pact" for pact level.
-   * @property {boolean} consumeSpellSlot        Should any spell slot be consumed?
    * @property {boolean} consumeUsage            Should limited uses be consumed?
    * @property {boolean} needsConfiguration      Is user-configuration needed?
    */
@@ -491,20 +453,20 @@ export default class Item5e extends Item {
     // Reference aspects of the item data necessary for usage
     const resource = is.consume || {};        // Resource consumption
     const isSpell = item.type === "spell";    // Does the item require a spell slot?
-    const requireSpellSlot = isSpell && (is.level > 0) && CONFIG.SHAPER.spellUpcastModes.includes(is.preparation.mode);
 
     // Define follow-up actions resulting from the item usage
     config = foundry.utils.mergeObject({
       createMeasuredTemplate: item.hasAreaTarget,
       consumeQuantity: is.uses?.autoDestroy ?? false,
       consumeRecharge: !!is.recharge?.value,
+      consumeResource: !!resource.target && !item.hasAttack,
       consumeUpkeep: !!is.upkeep?.value,
       consumeUsage: !!is.uses?.per
     }, config);
 
     // Display a configuration dialog to customize the usage
     if ( config.needsConfiguration === undefined ) config.needsConfiguration = config.createMeasuredTemplate
-      || config.consumeRecharge || config.consumeResource || config.consumeSpellSlot || config.consumeUsage;
+      || config.consumeRecharge || config.consumeResource || config.consumeUpkeep || config.consumeUsage;
 
     /**
      * A hook event that fires before an item usage is configured.
@@ -522,17 +484,6 @@ export default class Item5e extends Item {
       const configuration = await AbilityUseDialog.create(item);
       if ( !configuration ) return;
       foundry.utils.mergeObject(config, configuration);
-    }
-
-    // Handle spell upcasting
-    if ( isSpell && (config.consumeSpellSlot || config.consumeSpellLevel) ) {
-      const upcastLevel = config.consumeSpellLevel === "pact" ? as.spells.pact.level
-        : parseInt(config.consumeSpellLevel);
-      if ( upcastLevel && (upcastLevel !== is.level) ) {
-        item = item.clone({"system.level": upcastLevel}, {keepId: true});
-        item.prepareData();
-        item.prepareFinalAttributes();
-      }
     }
 
     /**
@@ -608,8 +559,7 @@ export default class Item5e extends Item {
    * @protected
    */
   _getUsageUpdates({
-    consumeQuantity, consumeRecharge, consumeResource, consumeSpellSlot,
-    consumeSpellLevel, consumeUsage}) {
+    consumeQuantity, consumeRecharge, consumeResource, consumeUpkeep, consumeUsage}) {
     const actorUpdates = {};
     const itemUpdates = {};
     const resourceUpdates = [];
@@ -630,20 +580,11 @@ export default class Item5e extends Item {
       if ( canConsume === false ) return false;
     }
 
-    // Consume Spell Slots
-    if ( consumeSpellSlot && consumeSpellLevel ) {
-      if ( Number.isNumeric(consumeSpellLevel) ) consumeSpellLevel = `spell${consumeSpellLevel}`;
-      const level = this.actor?.system.spells[consumeSpellLevel];
-      const spells = Number(level?.value ?? 0);
-      if ( spells === 0 ) {
-        const labelKey = consumeSpellLevel === "pact" ? "SHAPER.SpellProgPact" : `SHAPER.SpellLevel${this.system.level}`;
-        const label = game.i18n.localize(labelKey);
-        ui.notifications.warn(game.i18n.format("SHAPER.SpellCastNoSlots", {name: this.name, level: label}));
-        return false;
-      }
-      actorUpdates[`system.spells.${consumeSpellLevel}.value`] = Math.max(spells - 1, 0);
+    // Consume Upkeep Requirement TODO: Placeholder implementation
+    if ( consumeUpkeep ) {
+      const canConsume = this._handleConsumeResource(itemUpdates, actorUpdates, resourceUpdates);
+      if ( canConsume === false ) return false;
     }
-
     // Consume Limited Usage
     if ( consumeUsage ) {
       const uses = this.system.uses || {};
@@ -992,13 +933,11 @@ export default class Item5e extends Item {
    * @param {object} [config]
    * @param {MouseEvent} [config.event]    An event which triggered this roll, if any
    * @param {boolean} [config.critical]    Should damage be rolled as a critical hit?
-   * @param {number} [config.spellLevel]   If the item is a spell, override the level for damage scaling
-   * @param {boolean} [config.versatile]   If the item is a weapon, roll damage using the versatile formula
    * @param {DamageRollConfiguration} [config.options]  Additional options passed to the damageRoll function
    * @returns {Promise<DamageRoll>}        A Promise which resolves to the created Roll instance, or null if the action
    *                                       cannot be performed.
    */
-  async rollDamage({critical=false, event=null, spellLevel=null, versatile=false, options={}}={}) {
+  async rollDamage({critical=false, event=null, options={}}={}) {
     if ( !this.hasDamage ) throw new Error("You may not make a Damage Roll with this Item.");
     const messageData = {
       "flags.shaper.roll": {type: "damage", itemId: this.id},
@@ -1009,7 +948,6 @@ export default class Item5e extends Item {
     const dmg = this.system.damage;
     const parts = dmg.parts.map(d => d[0]);
     const rollData = this.getRollData();
-    if ( spellLevel ) rollData.item.level = spellLevel;
 
     // Configure the damage roll
     const actionFlavor = game.i18n.localize(this.system.actionType === "heal" ? "SHAPER.Healing" : "SHAPER.DamageRoll");
@@ -1075,7 +1013,6 @@ export default class Item5e extends Item {
    * Prepare data needed to roll an attack using an item (weapon, feat, spell, or equipment)
    * and then pass it off to `d10Roll`.
    * @param {object} [options]
-   * @param {boolean} [options.spellLevel]  Level at which a spell is cast.
    * @returns {Promise<Roll>}   A Promise which resolves to the created Roll instance.
    */
   async rollFormula({spellLevel}={}) {
@@ -1086,7 +1023,6 @@ export default class Item5e extends Item {
       data: this.getRollData(),
       chatMessage: true
     };
-    if ( spellLevel ) rollConfig.data.item.level = spellLevel;
 
     /**
      * A hook event that fires before a formula is rolled for an Item.
@@ -1198,7 +1134,6 @@ export default class Item5e extends Item {
       const err = game.i18n.format("SHAPER.ActionWarningNoItem", {item: card.dataset.itemId, name: actor.name});
       return ui.notifications.error(err);
     }
-    const spellLevel = parseInt(card.dataset.spellLevel) || null;
 
     // Handle different actions
     let targets;
@@ -1207,7 +1142,7 @@ export default class Item5e extends Item {
         await item.rollAttack({event}); break;
       case "damage":
       case "formula":
-        await item.rollFormula({event, spellLevel}); break;
+        await item.rollFormula({event}); break;
       case "placeTemplate":
         const template = shaper.canvas.AbilityTemplate.fromItem(item);
         if ( template ) template.drawPreview();

@@ -42,7 +42,6 @@ export default class AbilityUseDialog extends Dialog {
       item: item,
       title: game.i18n.format("SHAPER.AbilityUseHint", {type: game.i18n.localize(`SHAPER.ItemType${item.type.capitalize()}`), name: item.name}),
       note: this._getAbilityUseNote(item, uses, recharge),
-      consumeSpellSlot: false,
       consumeRecharge: recharges,
       consumeResource: !!item.system.consume.target,
       consumeUses: uses.per && (uses.max > 0),
@@ -81,65 +80,6 @@ export default class AbilityUseDialog extends Dialog {
 
   /* -------------------------------------------- */
   /*  Helpers                                     */
-  /* -------------------------------------------- */
-
-  /**
-   * Get dialog data related to limited spell slots.
-   * @param {object} actorData  System data from the actor using the spell.
-   * @param {object} itemData   System data from the spell being used.
-   * @param {object} data       Data for the dialog being presented.
-   * @returns {object}          Modified dialog data.
-   * @private
-   */
-  static _getSpellData(actorData, itemData, data) {
-
-    // Determine whether the spell may be up-cast
-    const lvl = itemData.level;
-    const consumeSpellSlot = (lvl > 0) && CONFIG.SHAPER.spellUpcastModes.includes(itemData.preparation.mode);
-
-    // If can't upcast, return early and don't bother calculating available spell slots
-    if (!consumeSpellSlot) {
-      return foundry.utils.mergeObject(data, { isSpell: true, consumeSpellSlot });
-    }
-
-    // Determine the levels which are feasible
-    let lmax = 0;
-    const spellLevels = Array.fromRange(10).reduce((arr, i) => {
-      if ( i < lvl ) return arr;
-      const label = CONFIG.SHAPER.spellLevels[i];
-      const l = actorData.spells[`spell${i}`] || {max: 0, override: null};
-      let max = parseInt(l.override || l.max || 0);
-      let slots = Math.clamped(parseInt(l.value || 0), 0, max);
-      if ( max > 0 ) lmax = i;
-      arr.push({
-        level: i,
-        label: i > 0 ? game.i18n.format("SHAPER.SpellLevelSlot", {level: label, n: slots}) : label,
-        canCast: max > 0,
-        hasSlots: slots > 0
-      });
-      return arr;
-    }, []).filter(sl => sl.level <= lmax);
-
-    // If this character has pact slots, present them as an option for casting the spell.
-    const pact = actorData.spells.pact;
-    if (pact.level >= lvl) {
-      spellLevels.push({
-        level: "pact",
-        label: `${game.i18n.format("SHAPER.SpellLevelPact", {level: pact.level, n: pact.value})}`,
-        canCast: true,
-        hasSlots: pact.value > 0
-      });
-    }
-    const canCast = spellLevels.some(l => l.hasSlots);
-    if ( !canCast ) data.errors.push(game.i18n.format("SHAPER.SpellCastNoSlots", {
-      level: CONFIG.SHAPER.spellLevels[lvl],
-      name: data.item.name
-    }));
-
-    // Merge spell casting data
-    return foundry.utils.mergeObject(data, { isSpell: true, consumeSpellSlot, spellLevels });
-  }
-
   /* -------------------------------------------- */
 
   /**

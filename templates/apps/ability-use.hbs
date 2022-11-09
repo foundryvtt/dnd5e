@@ -5,27 +5,6 @@
     <p class="notification error">{{this}}</p>
     {{/each}}
 
-    {{#if consumeSpellSlot}}
-    <div class="form-group">
-        <label>{{ localize "SHAPER.SpellCastUpcast" }}</label>
-        <div class="form-fields">
-            <select name="consumeSpellLevel">
-                {{#select item.system.level}}
-                {{#each spellLevels as |l|}}
-                <option value="{{l.level}}" {{disabled (not l.canCast)}}>{{l.label}}</option>
-                {{/each}}
-                {{/select}}
-            </select>
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label class="checkbox">
-            <input type="checkbox" name="consumeSpellSlot" checked>{{localize "SHAPER.SpellCastConsume"}}
-        </label>
-    </div>
-    {{/if}}
-
     {{#if consumeUses}}
     <div class="form-group">
         <label class="checkbox">
@@ -46,6 +25,14 @@
     <div class="form-group">
         <label class="checkbox">
             <input type="checkbox" name="consumeRecharge" checked>{{localize "SHAPER.ConsumeRecharge"}}
+        </label>
+    </div>
+    {{/if}}
+
+    {{#if consumeUpkeep}}
+    <div class="form-group">
+        <label class="checkbox">
+            <input type="checkbox" name="consumeUpkeep" checked>{{localize "SHAPER.ConsumeUpkeep"}}
         </label>
     </div>
     {{/if}}

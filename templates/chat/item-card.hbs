@@ -22,26 +22,12 @@
         </button>
         {{/if}}
 
-        {{#if isVersatile}}
-        <button data-action="versatile">{{ localize "SHAPER.Versatile" }}</button>
-        {{/if}}
-
-        {{#if hasSave}}
-        <button data-action="save" data-ability="{{data.save.ability}}">
-            {{ localize "SHAPER.SavingThrow" }} {{labels.save}}
-        </button>
-        {{/if}}
-
         {{#if data.formula}}
         <button data-action="formula">{{ localize "SHAPER.OtherFormula"}}</button>
         {{/if}}
 
         {{#if hasAreaTarget}}
         <button data-action="placeTemplate">{{ localize "SHAPER.PlaceTemplate" }}</button>
-        {{/if}}
-
-        {{#if isTool}}
-        <button data-action="toolCheck" data-ability="{{data.ability.value}}">{{ localize "SHAPER.Use" }} {{item.name}}</button>
         {{/if}}
 
         {{#if hasAbilityCheck}}

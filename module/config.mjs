@@ -207,8 +207,8 @@ SHAPER.tokenHPColors = {
  * @enum {string}
  */
 SHAPER.itemActionTypes = {
-  atk: "SHAPER.ActionAttack",
-  spl: "SHAPER.ActionSpell",
+  attack: "SHAPER.ActionAttack",
+  spell: "SHAPER.ActionSpell",
   aux: "SHAPER.ActionAuxillary",
   heal: "SHAPER.ActionHeal",
   util: "SHAPER.ActionUtil",
