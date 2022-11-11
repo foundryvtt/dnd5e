@@ -23,7 +23,7 @@ export default class Item5e extends Item {
    * @type {string|null}
    */
   get statMod() {
-    
+
     // Case 1 - defined directly by the item
     if ( this.system.stats ) return this.system.stats;
 
@@ -58,7 +58,7 @@ export default class Item5e extends Item {
    * @type {boolean}
    */
    get hasAttack() {
-    return ["attack", "heal", "spell"].includes(this.system.actionType);
+    return ["attack", "spell"].includes(this.system.actionType);
   }
 
   /* -------------------------------------------- */
@@ -868,14 +868,8 @@ export default class Item5e extends Item {
   async rollAttack(options={}) {
     const flags = this.actor.flags.shaper ?? {};
     if ( !this.hasAttack ) throw new Error("You may not place an Attack Roll with this Item.");
-    
-    let t = "SHAPER.AttackRoll"
 
-    if ( this.isHealing ){
-      t = "SHAPER.HealingRoll";
-    } 
-
-    let title = `${this.name} - ${game.i18n.localize(t)}`;
+    let title = `${this.name} - ${game.i18n.localize("SHAPER.AttackRoll")}`;
 
     // Get the parts and rollData for this item's attack
     const {parts, rollData} = this.getAttackToHit();
@@ -1076,14 +1070,8 @@ export default class Item5e extends Item {
 
     // Include stat modifier if one exists
     const stat = this.statMod;
-    console.log('made it to here')
-    console.log(actorRollData);
-    console.log(stat);
-    console.log(rollData.stats[stat]);
-    console.log('made it past here')
     if ( stat ) {
       const s = rollData.stats[stat];
-      console.log(s);
       if ( !s ) {
         console.warn(`Item ${this.name} in Actor ${this.actor.name} has an invalid item ability modifier of ${s} defined`);
       }

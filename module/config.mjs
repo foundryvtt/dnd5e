@@ -210,9 +210,7 @@ SHAPER.itemActionTypes = {
   attack: "SHAPER.ActionAttack",
   spell: "SHAPER.ActionSpell",
   aux: "SHAPER.ActionAuxillary",
-  heal: "SHAPER.ActionHeal",
-  util: "SHAPER.ActionUtil",
-  other: "SHAPER.ActionOther"
+  heal: "SHAPER.ActionHeal"
 };
 preLocalize("itemActionTypes");
 

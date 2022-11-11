@@ -64,7 +64,7 @@ export default class ItemSheet5e extends ItemSheet {
 
       // Action Details
       isHealing: item.system.actionType === "heal",
-      hasAttackRoll: item.hasAttack || ( item.system.actionType === "heal" ),
+      hasAttackRoll: item.hasAttack,
       isLine: ["line", "wall"].includes(item.system.target?.type),
 
       // Prepare Active Effects

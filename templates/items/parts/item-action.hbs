@@ -12,19 +12,6 @@
 </div>
 {{#if system.actionType}}
 
-{{!-- Ability Modifier --}}
-<div class="form-group select">
-    <label>{{ localize "SHAPER.StatsModifier" }}</label>
-    <select name="system.stat">
-        {{#select system.stat}}
-        <option value="">{{ localize "SHAPER.Default" }}</option>
-        {{#each config.stats as |stat a|}}
-        <option value="{{a}}">{{stat}}</option>
-        {{/each}}
-        {{/select}}
-    </select>
-</div>
-
 {{!-- Attack Roll Bonus --}}
 {{#if hasAttackRoll }}
 <div class="form-group">
