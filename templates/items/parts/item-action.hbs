@@ -23,8 +23,10 @@
 {{/if}}
 
 {{!-- Damage Formula --}}
+
+{{#if isHealing}}
 <h4 class="damage-header">
-    {{#unless isHealing }}{{ localize "SHAPER.Damage" }}{{ else }}{{ localize "SHAPER.Healing" }}{{/unless}}
+    {{ localize "SHAPER.Healing" }}
     <a class="damage-control add-damage"><i class="fas fa-plus"></i></a>
 </h4>
 <ol class="damage-parts form-group">
@@ -46,6 +48,7 @@
     </li>
     {{/each}}
 </ol>
+{{/if}}
 
 {{!-- Chat Message Flavor --}}
 <div class="form-group stacked">

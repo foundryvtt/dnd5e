@@ -68,7 +68,7 @@ export default class Item5e extends Item {
    * @type {boolean}
    */
   get hasDamage() {
-    return !!(this.system.damage && this.system.damage.parts.length);
+    return this.isHealing;
   }
 
   /* -------------------------------------------- */
@@ -1008,7 +1008,9 @@ export default class Item5e extends Item {
    * @param {object} [options]
    * @returns {Promise<Roll>}   A Promise which resolves to the created Roll instance.
    */
-  async rollFormula({spellLevel}={}) {
+  async rollFormula() {
+
+    console.log(this.system);
     if ( !this.system.formula ) throw new Error("This Item does not have a formula to roll!");
 
     const rollConfig = {
@@ -1133,6 +1135,14 @@ export default class Item5e extends Item {
     switch ( action ) {
       case "attack":
         await item.rollAttack({event}); break;
+      case "damage":
+        await item.rollDamage({
+          critical: event.altKey,
+          event: event
+        });
+        break;
+      case "formula":
+        await item.rollFormula({event}); break;
       case "placeTemplate":
         const template = shaper.canvas.AbilityTemplate.fromItem(item);
         if ( template ) template.drawPreview();
