@@ -116,19 +116,8 @@ export default class D10Roll extends Roll {
 
     const d10 = this.terms[0];
     d10.modifiers = [];
-
-
-    // Handle Advantage or Disadvantage
-    if ( this.hasAdvantage ) {
-      d10.modifiers.push("kh");
-      d10.options.advantage = true;
-    }
-    else if ( this.hasDisadvantage ) {
-      d10.number = 2;
-      d10.modifiers.push("kl");
-      d10.options.disadvantage = true;
-    }
-    else d10.number = 2;
+    
+    d10.number = 2;
 
     // Assign critical and fumble thresholds
     if ( this.options.critical ) d10.options.critical = this.options.critical;
@@ -250,8 +239,7 @@ export default class D10Roll extends Roll {
       this.terms = this.terms.flatMap(t => {
         if ( t.term === "@mod" ) return new NumericTerm({number: abl0.mod + abl1.mod + points});
         if ( t.term === "@abilityCheckBonus" ) {
-          // TODO: See what this does
-          const bonus = abl0.bonuses?.check;
+          const bonus = abl0.bonuses?.check + abl1.bonuses?.check;
           if ( bonus ) return new Roll(bonus, this.data).terms;
           return new NumericTerm({number: 0});
         }

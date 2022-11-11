@@ -49,14 +49,13 @@ export default class AbilityUseDialog extends Dialog {
       createTemplate: game.user.can("TEMPLATE_CREATE") && item.hasAreaTarget,
       errors: []
     };
-    if ( item.type === "spell" ) this._getSpellData(item.actor.system, item.system, data);
 
     // Render the ability usage template
     const html = await renderTemplate("systems/shaper/templates/apps/ability-use.hbs", data);
 
     // Create the Dialog and return data as a Promise
-    const icon = data.isSpell ? "fa-magic" : "fa-fist-raised";
-    const label = game.i18n.localize(`SHAPER.AbilityUse${data.isSpell ? "Cast" : "Use"}`);
+    const icon = "fa-fist-raised";
+    const label = game.i18n.localize(`SHAPER.AbilityUse${"Use"}`);
     return new Promise(resolve => {
       const dlg = new this(item, {
         title: `${item.name}: ${game.i18n.localize("SHAPER.AbilityUseConfig")}`,
@@ -105,21 +104,6 @@ export default class AbilityUseDialog extends Dialog {
 
     // Does not use any resource
     if ( !uses.per || !uses.max ) return "";
-
-    // Consumables
-    if ( item.type === "consumable" ) {
-      let str = "SHAPER.AbilityUseNormalHint";
-      if ( uses.value > 1 ) str = "SHAPER.AbilityUseConsumableChargeHint";
-      else if ( item.system.quantity === 1 && uses.autoDestroy ) str = "SHAPER.AbilityUseConsumableDestroyHint";
-      else if ( item.system.quantity > 1 ) str = "SHAPER.AbilityUseConsumableQuantityHint";
-      return game.i18n.format(str, {
-        type: game.i18n.localize(`SHAPER.Consumable${item.system.consumableType.capitalize()}`),
-        value: uses.value,
-        quantity: item.system.quantity,
-        max: uses.max,
-        per: CONFIG.SHAPER.limitedUsePeriods[uses.per]
-      });
-    }
 
     // Other Items
     else {

@@ -81,7 +81,7 @@ export default class Actor5e extends Actor {
    */
   getRollData({ deterministic=false }={}) {
     const data = foundry.utils.deepClone(super.getRollData());
-
+    data.stats = this.system.stats;
     return data;
   }
 
@@ -467,8 +467,9 @@ export default class Actor5e extends Actor {
 
     // Ability-specific check bonus
     // TODO: See what this does
-    if ( abl0?.bonuses?.check ) {
+    if ( abl0?.bonuses?.check || abl1?.bonuses?.check ) {
       data.abilityCheckBonus = Roll.replaceFormulaData(abl0.bonuses.check, data);
+      data.abilityCheckBonus = Roll.replaceFormulaData(abl1.bonuses.check, data);
     }
     else data.abilityCheckBonus = 0;
 

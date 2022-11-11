@@ -7,23 +7,14 @@
 
     <div class="card-content">
         {{{data.description.value}}}
-        {{#if data.materials.value}}
-        <p><strong>{{ localize "SHAPER.RequiredMaterials" }}.</strong> {{data.materials.value}}</p>
-        {{/if}}
     </div>
 
     <div class="card-buttons">
-        {{#if hasAttack}}<button data-action="attack">{{ localize "SHAPER.Attack" }}</button>{{/if}}
-
-        {{#if hasDamage}}
-        <button data-action="damage">
+        {{#if hasAttack}}
+        <button data-action="attack">
             {{#if isHealing}}{{ localize "SHAPER.Healing" }}
-            {{else}}{{localize "SHAPER.Damage" }}{{/if}}
+            {{else}}{{localize "SHAPER.Attack" }}{{/if}}
         </button>
-        {{/if}}
-
-        {{#if data.formula}}
-        <button data-action="formula">{{ localize "SHAPER.OtherFormula"}}</button>
         {{/if}}
 
         {{#if hasAreaTarget}}

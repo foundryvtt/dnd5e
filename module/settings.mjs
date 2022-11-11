@@ -32,7 +32,7 @@ export default function registerSystemSettings() {
     hint: "SETTINGS.5eDiagL",
     scope: "world",
     config: true,
-    default: "555",
+    default: "EUCL",
     type: String,
     choices: {
       555: "SETTINGS.5eDiagPHB",
@@ -40,17 +40,6 @@ export default function registerSystemSettings() {
       EUCL: "SETTINGS.5eDiagEuclidean"
     },
     onChange: rule => canvas.grid.diagonalRule = rule
-  });
-
-
-  // Apply Dexterity as Initiative Tiebreaker
-  game.settings.register("shaper", "initiativeDexTiebreaker", {
-    name: "SETTINGS.5eInitTBN",
-    hint: "SETTINGS.5eInitTBL",
-    scope: "world",
-    config: true,
-    default: false,
-    type: Boolean
   });
 
 
@@ -76,19 +65,6 @@ export default function registerSystemSettings() {
     onChange: s => {
       ui.chat.render();
     }
-  });
-
-
-
-
-  // Metric Unit Weights
-  game.settings.register("shaper", "metricWeightUnits", {
-    name: "SETTINGS.5eMetricN",
-    hint: "SETTINGS.5eMetricL",
-    scope: "world",
-    config: true,
-    type: Boolean,
-    default: false
   });
 
   // Critical Damage Modifiers

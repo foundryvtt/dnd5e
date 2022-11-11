@@ -18,6 +18,29 @@ export default class Item5e extends Item {
   /*  Item Properties                             */
   /* -------------------------------------------- */
 
+  /**
+   * Which stat modifier is used by this item?
+   * @type {string|null}
+   */
+  get statMod() {
+    
+    // Case 1 - defined directly by the item
+    if ( this.system.stats ) return this.system.stats;
+
+    // Case 2 - inferred from a parent actor
+    if ( this.actor ) {
+
+      // If a specific attack type is defined
+      if ( this.hasAttack ) return {
+        attack: "physO",
+        spell: "menO"
+      }[this.system.actionType];
+    }
+
+    // Case 3 - unknown
+    return null;
+  }
+
   /* -------------------------------------------- */
 
   /**
@@ -35,7 +58,7 @@ export default class Item5e extends Item {
    * @type {boolean}
    */
    get hasAttack() {
-    return ["attack", "spell"].includes(this.system.actionType);
+    return ["attack", "heal", "spell"].includes(this.system.actionType);
   }
 
   /* -------------------------------------------- */
@@ -51,33 +74,11 @@ export default class Item5e extends Item {
   /* -------------------------------------------- */
 
   /**
-   * Does the Item implement a versatile damage roll as part of its usage?
-   * @type {boolean}
-   */
-  get isVersatile() {
-    return !!(this.hasDamage && this.system.damage.versatile);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
    * Does the item provide an amount of healing instead of conventional damage?
    * @type {boolean}
    */
   get isHealing() {
-    return (this.system.actionType === "heal") && this.system.damage.parts.length;
-  }
-
-  /* -------------------------------------------- */
-
-
-  /**
-   * Does the Item implement a saving throw as part of its usage?
-   * @type {boolean}
-   */
-  get hasSave() {
-    const save = this.system.save || {};
-    return !!(save.ability && save.scaling);
+    return (this.system.actionType === "heal");
   }
 
   /* --------------------------------------------- */
@@ -116,9 +117,6 @@ export default class Item5e extends Item {
 
   /**
    * Is this Item limited in its ability to be used by charges or by recharge?
-   * 
-   * TODO: Rework this into MP
-   * 
    * @type {boolean}
    */
   get hasLimitedUses() {
@@ -193,7 +191,7 @@ export default class Item5e extends Item {
 
     // Target Label
     let tgt = this.system.target ?? {};
-    if ( ["none", "touch", "self"].includes(tgt.units) ) tgt.value = null;
+    if ( ["none", "self"].includes(tgt.units) ) tgt.value = null;
     if ( ["none", "self"].includes(tgt.type) ) {
       tgt.value = null;
       tgt.units = null;
@@ -202,7 +200,7 @@ export default class Item5e extends Item {
 
     // Range Label
     let rng = this.system.range ?? {};
-    if ( ["none", "touch", "self"].includes(rng.units) ) {
+    if ( ["none", "self"].includes(rng.units) ) {
       rng.value = null;
       rng.long = null;
     }
@@ -718,7 +716,6 @@ export default class Item5e extends Item {
       hasAttack: this.hasAttack,
       isHealing: this.isHealing,
       hasDamage: this.hasDamage,
-      isVersatile: this.isVersatile,
       isSpell: this.type === "spell",
       hasSave: this.hasSave,
       hasAreaTarget: this.hasAreaTarget,
@@ -871,14 +868,17 @@ export default class Item5e extends Item {
   async rollAttack(options={}) {
     const flags = this.actor.flags.shaper ?? {};
     if ( !this.hasAttack ) throw new Error("You may not place an Attack Roll with this Item.");
-    let title = `${this.name} - ${game.i18n.localize("SHAPER.AttackRoll")}`;
+    
+    let t = "SHAPER.AttackRoll"
+
+    if ( this.isHealing ){
+      t = "SHAPER.HealingRoll";
+    } 
+
+    let title = `${this.name} - ${game.i18n.localize(t)}`;
 
     // Get the parts and rollData for this item's attack
     const {parts, rollData} = this.getAttackToHit();
-
-    // Handle ammunition consumption
-
-    let ammoUpdate = [];
 
     // Compose roll options
     const rollConfig = foundry.utils.mergeObject({
@@ -918,9 +918,8 @@ export default class Item5e extends Item {
      * @memberof hookEvents
      * @param {Item5e} item          Item for which the roll was performed.
      * @param {D10Roll} roll         The resulting roll.
-     * @param {object[]} ammoUpdate  Updates that will be applied to ammo Items as a result of this attack.
      */
-    Hooks.callAll("shaper.rollAttack", this, roll, ammoUpdate);
+    Hooks.callAll("shaper.rollAttack", this, roll);
 
     return roll;
   }
@@ -1075,14 +1074,20 @@ export default class Item5e extends Item {
       item: this.toObject().system
     };
 
-    // Include an ability score modifier if one exists
-    const abl = this.abilityMod;
-    if ( abl ) {
-      const ability = rollData.abilities[abl];
-      if ( !ability ) {
-        console.warn(`Item ${this.name} in Actor ${this.actor.name} has an invalid item ability modifier of ${abl} defined`);
+    // Include stat modifier if one exists
+    const stat = this.statMod;
+    console.log('made it to here')
+    console.log(actorRollData);
+    console.log(stat);
+    console.log(rollData.stats[stat]);
+    console.log('made it past here')
+    if ( stat ) {
+      const s = rollData.stats[stat];
+      console.log(s);
+      if ( !s ) {
+        console.warn(`Item ${this.name} in Actor ${this.actor.name} has an invalid item ability modifier of ${s} defined`);
       }
-      rollData.mod = ability?.mod ?? 0;
+      rollData.mod = s?.value ?? 0;
     }
     return rollData;
   }
@@ -1140,9 +1145,6 @@ export default class Item5e extends Item {
     switch ( action ) {
       case "attack":
         await item.rollAttack({event}); break;
-      case "damage":
-      case "formula":
-        await item.rollFormula({event}); break;
       case "placeTemplate":
         const template = shaper.canvas.AbilityTemplate.fromItem(item);
         if ( template ) template.drawPreview();

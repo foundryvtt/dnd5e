@@ -63,8 +63,8 @@ export default class ItemSheet5e extends ItemSheet {
       }),
 
       // Action Details
-      hasAttackRoll: item.hasAttack,
       isHealing: item.system.actionType === "heal",
+      hasAttackRoll: item.hasAttack || ( item.system.actionType === "heal" ),
       isLine: ["line", "wall"].includes(item.system.target?.type),
 
       // Prepare Active Effects
@@ -332,10 +332,6 @@ export default class ItemSheet5e extends ItemSheet {
       allowCustom: false
     };
     switch (a.dataset.options) {
-      case "saves":
-        options.choices = CONFIG.SHAPER.abilities;
-        options.valueKey = null;
-        break;
       case "skills.choices":
         options.choices = CONFIG.SHAPER.skills;
         options.valueKey = null;
