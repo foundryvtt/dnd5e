@@ -119,6 +119,24 @@ export default class D10Roll extends Roll {
     
     d10.number = 2;
 
+    let b = 11 - parseInt(this.options?.boonbane);
+    let bane = b.toString();
+
+    let baneBoundary = 5;
+
+    // Clamp bane values that are too low
+    if ( b < baneBoundary ) bane = baneBoundary.toString();
+
+
+    // Handle Boon or Bane
+    if ( this.hasAdvantage ) {
+      d10.options.advantage = true;
+    }
+    else if ( this.hasDisadvantage ) {
+      d10.modifiers.push("r>" + bane)
+      d10.options.disadvantage = true;
+    }
+
     // Assign critical and fumble thresholds
     if ( this.options.critical ) d10.options.critical = this.options.critical;
     if ( this.options.fumble ) d10.options.fumble = this.options.fumble;
@@ -139,10 +157,12 @@ export default class D10Roll extends Roll {
     // Evaluate the roll now so we have the results available to determine whether reliable talent came into play
     if ( !this._evaluated ) await this.evaluate({async: true});
 
+    let bb = this.options?.boonbane
+
     // Add appropriate advantage mode message flavor and shaper roll flags
     messageData.flavor = messageData.flavor || this.options.flavor;
-    if ( this.hasAdvantage ) messageData.flavor += ` (${game.i18n.localize("SHAPER.Advantage")})`;
-    else if ( this.hasDisadvantage ) messageData.flavor += ` (${game.i18n.localize("SHAPER.Disadvantage")})`;
+    if ( this.hasAdvantage ) messageData.flavor += ` (${game.i18n.localize("SHAPER.Boon")}) ` + bb;
+    else if ( this.hasDisadvantage ) messageData.flavor += ` (${game.i18n.localize("SHAPER.Bane")}) ` + bb;
 
     // Record the preferred rollMode
     options.rollMode = options.rollMode ?? this.options.rollMode;
@@ -168,7 +188,7 @@ export default class D10Roll extends Roll {
    *                                          dialog was closed
    */
   async configureDialog({title, defaultRollMode, defaultAction=D10Roll.ADV_MODE.NORMAL, chooseModifier=false,
-    defaultAbility0, defaultAbility1, template}={}, options={}) {
+    defaultAbility0, defaultAbility1, boonbane, template}={}, options={}) {
 
     // Render the Dialog inner HTML
     const content = await renderTemplate(template ?? this.constructor.EVALUATION_TEMPLATE, {
@@ -178,13 +198,14 @@ export default class D10Roll extends Roll {
       chooseModifier,
       defaultAbility0,
       defaultAbility1,
+      boonbane,
       abilities: CONFIG.SHAPER.abilities
     });
 
     let defaultButton = "normal";
     switch ( defaultAction ) {
-      case D10Roll.ADV_MODE.ADVANTAGE: defaultButton = "advantage"; break;
-      case D10Roll.ADV_MODE.DISADVANTAGE: defaultButton = "disadvantage"; break;
+      case D10Roll.ADV_MODE.ADVANTAGE: defaultButton = "boon"; break;
+      case D10Roll.ADV_MODE.DISADVANTAGE: defaultButton = "bane"; break;
     }
 
     // Create the Dialog window and await submission of the form
@@ -193,16 +214,16 @@ export default class D10Roll extends Roll {
         title,
         content,
         buttons: {
-          advantage: {
-            label: game.i18n.localize("SHAPER.Advantage"),
+          boon: {
+            label: game.i18n.localize("SHAPER.Boon"),
             callback: html => resolve(this._onDialogSubmit(html, D10Roll.ADV_MODE.ADVANTAGE))
           },
           normal: {
             label: game.i18n.localize("SHAPER.Normal"),
             callback: html => resolve(this._onDialogSubmit(html, D10Roll.ADV_MODE.NORMAL))
           },
-          disadvantage: {
-            label: game.i18n.localize("SHAPER.Disadvantage"),
+          bane: {
+            label: game.i18n.localize("SHAPER.Bane"),
             callback: html => resolve(this._onDialogSubmit(html, D10Roll.ADV_MODE.DISADVANTAGE))
           }
         },
@@ -252,6 +273,7 @@ export default class D10Roll extends Roll {
     // Apply advantage or disadvantage
     this.options.advantageMode = advantageMode;
     this.options.rollMode = form.rollMode.value;
+    this.options.boonbane = form.boonbane.value;
     this.configureModifiers();
     return this;
   }

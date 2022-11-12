@@ -46,7 +46,7 @@
  */
 export async function d10Roll({
   parts=[], data={}, event,
-  advantage, disadvantage, critical=20, fumble=1, targetValue,
+  advantage, disadvantage, boonbane=0, critical=20, fumble=1, targetValue,
   fastForward=false, chooseModifier=false, template, title, dialogOptions,
   chatMessage=true, messageData={}, rollMode, flavor
 }={}) {
@@ -64,6 +64,7 @@ export async function d10Roll({
   const roll = new CONFIG.Dice.D10Roll(formula, data, {
     flavor: flavor || title,
     advantageMode,
+    boonbane,
     defaultRollMode,
     rollMode,
     critical,
@@ -80,6 +81,7 @@ export async function d10Roll({
       defaultAction: advantageMode,
       defaultAbility0: data?.defaultAbility0,
       defaultAbility1: data?.defaultAbility1,
+      boonbane,
       template
     }, dialogOptions);
     if ( configured === null ) return null;
