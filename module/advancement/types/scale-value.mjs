@@ -250,17 +250,23 @@ export class ScaleValueConfig extends AdvancementConfig {
 
   /** @inheritdoc */
   async _updateObject(event, formData) {
+    const updates = foundry.utils.expandObject(formData);
     const typeChange = "configuration.type" in formData;
-    if ( typeChange && (formData["configuration.type"] !== this.advancement.configuration.type) ) {
-      const scale = foundry.utils.expandObject(formData).configuration?.scale ?? {};
+    if ( typeChange && (updates.configuration.type !== this.advancement.configuration.type) ) {
+      // Clear existing scale value data to prevent error during type update
+      await this.advancement.update(Array.fromRange(CONFIG.DND5E.maxLevel, 1).reduce((obj, lvl) => {
+        obj[`configuration.scale.-=${lvl}`] = null;
+        return obj;
+      }, {}));
+      const scale = updates.configuration.scale = updates.configuration.scale ?? {};
       const OriginalType = ScaleValueAdvancement.TYPES[this.advancement.configuration.type];
-      const NewType = ScaleValueAdvancement.TYPES[formData["configuration.type"]];
+      const NewType = ScaleValueAdvancement.TYPES[updates.configuration.type];
       for ( const [lvl, data] of Object.entries(scale) ) {
         const original = new OriginalType(data, { parent: this.advancement });
-        formData[`configuration.scale.${lvl}`] = NewType.convertFrom(original);
+        updates.configuration.scale[lvl] = NewType.convertFrom(original);
       }
     }
-    return super._updateObject(event, formData);
+    return super._updateObject(event, foundry.utils.flattenObject(updates));
   }
 }
 
