@@ -167,7 +167,7 @@ export class ScaleValueConfig extends AdvancementConfig {
    */
   _formatPlaceholder(placeholder) {
     if ( this.advancement.configuration.type === "dice" ) {
-      return { n: placeholder?.n ?? "", die: placeholder?.die ? `d${placeholder.die}` : "" };
+      return { number: placeholder?.number ?? "", face: placeholder?.face ? `d${placeholder.face}` : "" };
     }
     return { value: placeholder?.value ?? "" };
   }

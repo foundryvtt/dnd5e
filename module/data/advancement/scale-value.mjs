@@ -22,6 +22,13 @@ export class ScaleValueConfigurationData extends foundry.abstract.DataModel {
       scale: new MappingField(new ScaleValueEntryField(), {required: true})
     };
   }
+
+  /* -------------------------------------------- */
+
+  static migrateData(source) {
+    Object.values(source.scale ?? {}).forEach(v => TYPES[source.type].migrateData(v));
+    super.migrateData(source);
+  }
 }
 
 
@@ -220,8 +227,8 @@ export class ScaleValueTypeDice extends ScaleValueType {
   /** @inheritdoc */
   static defineSchema() {
     return {
-      n: new foundry.data.fields.NumberField({nullable: true, integer: true, positive: true}),
-      die: new foundry.data.fields.NumberField({required: true, integer: true, positive: true})
+      number: new foundry.data.fields.NumberField({nullable: true, integer: true, positive: true}),
+      face: new foundry.data.fields.NumberField({required: true, integer: true, positive: true})
     };
   }
 
@@ -247,29 +254,18 @@ export class ScaleValueTypeDice extends ScaleValueType {
 
   /** @inheritdoc */
   static convertFrom(original) {
-    const split = (original.formula ?? "").split("d");
-    if ( !split[1] ) return null;
-    const n = Number(split[0]) || null;
-    const die = Number(split[1]);
-    if ( Number.isNaN(n) || Number.isNaN(die) ) return null;
-    return { n, die };
+    let [number, face] = (original.formula ?? "").split("d");
+    if ( !face || !Number.isNumeric(number) || !Number.isNumeric(face) ) return null;
+    return { number: Number(number) || null, face: Number(face) };
   }
 
   /* -------------------------------------------- */
 
   /** @inheritdoc */
   get formula() {
-    if ( !this.die ) return null;
-    return `${this.n ?? ""}${this.dice}`;
+    if ( !this.face ) return null;
+    return `${this.number ?? ""}${this.die}`;
   }
-
-  /* -------------------------------------------- */
-
-  /**
-   * The number of dice to roll.
-   * @type {number}
-   */
-  get number() { return this.n ?? 0; }
 
   /* -------------------------------------------- */
 
@@ -277,9 +273,17 @@ export class ScaleValueTypeDice extends ScaleValueType {
    * The die value to be rolled with the leading "d" (e.g. "d4").
    * @type {string}
    */
-  get dice() {
-    if ( !this.die ) return "";
-    return `d${this.die}`;
+  get die() {
+    if ( !this.face ) return "";
+    return `d${this.face}`;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  static migrateData(source) {
+    if ( source.n ) source.number = source.n;
+    if ( source.die ) source.face = source.die;
   }
 }
 
