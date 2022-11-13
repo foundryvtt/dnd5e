@@ -34,15 +34,9 @@ export default class TokenDocument5e extends TokenDocument {
    static getConsumedAttributes(data) {
     const attributes = super.getTrackedAttributes(data);
     const allowed = CONFIG.SHAPER.consumableResources;
-    
-    // TODO Find how this list is populated; only allow HP, MP
-    /**
-     * TODO (written here so you find it, dumbass)
-     * Figure out possible durations
-     * Add a space for upkeep
-     * Remove other damage formulae boxes -> Bane/Boon and Impact
-     */
+
     attributes.value = attributes.value.filter(attrs => this._isAllowedAttribute(allowed, attrs));
+
     return attributes;
   }
   /* -------------------------------------------- */

@@ -1,6 +1,5 @@
 import { d10Roll, damageRoll } from "../../dice/dice.mjs";
 import { simplifyBonus } from "../../utils.mjs";
-import Item5e from "../item.mjs";
 
 /**
  * Extend the base Actor class to implement additional system-specific logic.
@@ -228,7 +227,6 @@ export default class Actor5e extends Actor {
       const checkBonusAbl1 = simplifyBonus(ability1?.bonuses?.check, bonusData);
       skl.bonus = baseBonus + checkBonus + checkBonusAbl0 + checkBonusAbl1 + skillBonus;
       skl.mod = (ability0?.mod ?? 0) + (ability1?.mod ?? 0) + skl.points;
-      skl.proficient = skl.value;
       skl.total = skl.mod + skl.bonus;
 
     }

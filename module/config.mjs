@@ -182,12 +182,12 @@ preLocalize("actorSizes");
  * @enum {number}
  */
 SHAPER.tokenSizes = {
-  tiny: 0.5,
-  sm: 1,
-  med: 1,
-  lg: 2,
-  huge: 3,
-  grg: 4
+  tiny: 0.5*.5,
+  sm: 1*.5,
+  med: 1*.5,
+  lg: 2*.5,
+  huge: 3*.5,
+  grg: 4*.5
 };
 
 /**
@@ -374,8 +374,7 @@ preLocalize("cover");
  * @type {string[]}
  */
 SHAPER.trackableAttributes = [
-  "attributes.init.value", "attributes.*.value", "details.xp.value", "skills.*.points",
-  "abilities.*.value"
+  "attributes.init.value", "attributes.hp.value", "attributes.mp.value", "details.xp.value"
 ];
 
 /* -------------------------------------------- */
@@ -385,7 +384,8 @@ SHAPER.trackableAttributes = [
  * @type {string[]}
  */
  SHAPER.consumableResources = [
-  "attributes.*.value"
+  "attributes.hp.value",
+  "attributes.mp.value"
 ];
 
 /* -------------------------------------------- */

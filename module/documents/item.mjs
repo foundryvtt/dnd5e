@@ -1055,6 +1055,23 @@ export default class Item5e extends Item {
     return roll;
   }
 
+  /**
+   * Perform an ability recharge
+   */
+  async recharge() {
+    const recharge = this.system.recharge ?? {};
+    if ( !recharge.value ) return;
+
+    let cd = recharge.value - 1;
+
+    if ( cd <=0 ){
+      this.update({"system.recharge.charged": true});
+    }
+    else {
+      this.update({"system.recharge.value": cd});
+    }
+
+  }
   /* -------------------------------------------- */
 
   /**

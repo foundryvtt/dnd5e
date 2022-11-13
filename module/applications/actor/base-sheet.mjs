@@ -533,22 +533,17 @@ export default class ActorSheet5e extends ActorSheet {
   }
 
   /* -------------------------------------------- */
-
   /**
    * Handle attempting to recharge an item usage by rolling a recharge check.
    * @param {Event} event      The originating click event.
+   * @returns {Promise<Roll>}  The resulting recharge roll.
    * @private
-   * TODO: See if this can be made better
    */
-  _onItemRecharge(event) {
+   _onItemRecharge(event) {
     event.preventDefault();
     const itemId = event.currentTarget.closest(".item").dataset.itemId;
     const item = this.actor.items.get(itemId);
-    item.system.recharge.value -= 1;
-    if ( item.system.recharge.value <= 0 ) {
-      item.system.recharge.charged = true;
-      item.system.recharge.value = 0;
-    }
+    return item.recharge();
   }
 
   /* -------------------------------------------- */
