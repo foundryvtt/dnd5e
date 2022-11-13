@@ -628,7 +628,7 @@ export default class Item5e extends Item {
   _handleConsumeResource(itemUpdates, actorUpdates, resourceUpdates) {
     const consume = this.system.consume || {};
     if ( !consume.type ) return;
-
+    
     // No consumed target
     const typeLabel = CONFIG.SHAPER.abilityConsumptionTypes[consume.type];
     if ( !consume.target ) {
@@ -643,12 +643,8 @@ export default class Item5e extends Item {
     switch ( consume.type ) {
       case "attribute":
         resource = foundry.utils.getProperty(this.actor.system, consume.target);
+        console.log(resource);
         quantity = resource || 0;
-        break;
-      case "ammo":
-      case "material":
-        resource = this.actor.items.get(consume.target);
-        quantity = resource ? resource.system.quantity : 0;
         break;
       case "charges":
         resource = this.actor.items.get(consume.target);

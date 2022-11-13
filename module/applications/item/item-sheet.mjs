@@ -71,10 +71,6 @@ export default class ItemSheet5e extends ItemSheet {
       effects: ActiveEffect5e.prepareActiveEffectCategories(item.effects)
     });
 
-    // Potential consumption targets
-    context.abilityConsumptionTargets = this._getItemConsumptionTargets(item);
-
-
     // Set up config with proper spell components
     context.config = foundry.utils.mergeObject(CONFIG.SHAPER, {
       spellComponents: {...CONFIG.SHAPER.spellComponents, ...CONFIG.SHAPER.spellTags}
@@ -105,35 +101,6 @@ export default class ItemSheet5e extends ItemSheet {
       items[name] = baseItem.name;
     }
     return Object.fromEntries(Object.entries(items).sort((lhs, rhs) => lhs[1].localeCompare(rhs[1])));
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Get the valid item consumption targets which exist on the actor
-   * @returns {Object<string>}   An object of potential consumption targets
-   * @private
-   * 
-   * TODO: Change consumption to just HP/MP (may be already in attributes)
-   * 
-   */
-  _getItemConsumptionTargets() {
-    const consume = this.item.system.consume || {};
-    if ( !consume.type ) return [];
-    const actor = this.item.actor;
-    if ( !actor ) return {};
-
-    // Attributes
-    if ( consume.type === "attribute" ) {
-      const attributes = TokenDocument.implementation.getConsumedAttributes(actor.system);
-      attributes.bar.forEach(a => a.push("value"));
-      return attributes.bar.concat(attributes.value).reduce((obj, a) => {
-        let k = a.join(".");
-        obj[k] = k;
-        return obj;
-      }, {});
-    }
-    else return {};
   }
 
   /* -------------------------------------------- */
@@ -200,6 +167,19 @@ export default class ItemSheet5e extends ItemSheet {
     // Handle Damage array
     const damage = formData.system?.damage;
     if ( damage ) damage.parts = Object.values(damage?.parts || {}).map(d => [d[0] || "", d[1] || ""]);
+
+    // Handle Resource Consumption
+    const consume = formData.system?.consume;
+    if ( consume?.type === "attribute" ) {
+      switch (consume.label) {
+        case 'hp':
+          consume.target = "attributes.hp.value";
+          break;
+        case 'mp':
+          consume.target = "attributes.mp.value";
+          break;
+      }
+    }
 
     // Return the flattened submission data
     return foundry.utils.flattenObject(formData);

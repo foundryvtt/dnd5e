@@ -391,6 +391,18 @@ SHAPER.trackableAttributes = [
 /* -------------------------------------------- */
 
 /**
+ * A selection of actor and item attributes that are valid targets for item resource consumption.
+ * @enum {string}
+ */
+ SHAPER.consumeTargets = {
+  hp: "SHAPER.HP",
+  mp: "SHAPER.MP"
+ };
+ preLocalize("consumeTargets", { sort: true });
+
+/* -------------------------------------------- */
+
+/**
  * Conditions that can effect an actor.
  * @enum {string}
  */

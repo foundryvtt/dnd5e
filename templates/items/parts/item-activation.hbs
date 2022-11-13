@@ -84,10 +84,10 @@
             {{/each}}
             {{/select}}
         </select>
-        <select name="system.consume.target">
-            {{#select system.consume.target}}
+        <select name="system.consume.label">
+            {{#select system.consume.label}}
             <option value=""></option>
-            {{#each abilityConsumptionTargets as |name key|}}
+            {{#each config.consumeTargets as |name key|}}
             <option value="{{key}}">{{name}}</option>
             {{/each}}
             {{/select}}
@@ -109,10 +109,10 @@
             {{/each}}
             {{/select}}
         </select>
-        <select name="system.upkeep.target">
-            {{#select system.upkeep.target}}
+        <select name="system.upkeep.label">
+            {{#select system.upkeep.label}}
             <option value=""></option>
-            {{#each abilityConsumptionTargets as |name key|}}
+            {{#each config.consumeTargets as |name key|}}
             <option value="{{key}}">{{name}}</option>
             {{/each}}
             {{/select}}
