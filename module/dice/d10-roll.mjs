@@ -119,7 +119,7 @@ export default class D10Roll extends Roll {
     
     d10.number = 2;
 
-    let b = 11 - parseInt(this.options?.boonbane);
+    let b = 11 - Math.abs(parseInt(this.options?.boonbane));
     let bane = b.toString();
 
     let baneBoundary = 5;
