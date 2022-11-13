@@ -20,6 +20,13 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
   /** @inheritDoc */
   async getData(options) {
     const context = await super.getData(options);
+    // Resources
+    context.stats = ["physO", "menO", "physD", "menD"].reduce((arr, r) => {
+      const stat = context.actor.system.stats[r] || {};
+      stat.name = r;
+      stat.placeholder = game.i18n.localize(`SHAPER.Stat${r.titleCase()}`);
+      return arr.concat([stat]);
+    }, []);
     return context
   }
 
@@ -85,6 +92,7 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
   activateListeners(html) {
     super.activateListeners(html);
     html.find(".health .rollable").click(this._onRollHPFormula.bind(this));
+    html.find(".mind .rollable").click(this._onRollMPFormula.bind(this));
   }
 
   /* -------------------------------------------- */
@@ -101,5 +109,21 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
     const hp = new Roll(formula).roll({async: false}).total;
     AudioHelper.play({src: CONFIG.sounds.dice});
     this.actor.update({"system.attributes.hp.value": hp, "system.attributes.hp.max": hp});
+  }
+
+    /* -------------------------------------------- */
+
+  /**
+   * Handle rolling NPC mind values using the provided formula.
+   * @param {Event} event  The original click event.
+   * @private
+   */
+   _onRollMPFormula(event) {
+    event.preventDefault();
+    const formula = this.actor.system.attributes.mp.formula;
+    if ( !formula ) return;
+    const mp = new Roll(formula).roll({async: false}).total;
+    AudioHelper.play({src: CONFIG.sounds.dice});
+    this.actor.update({"system.attributes.mp.value": mp, "system.attributes.mp.max": mp});
   }
 }

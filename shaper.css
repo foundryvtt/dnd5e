@@ -1513,6 +1513,12 @@
   color: #7a7971;
   font-size: 16px;
 }
+.shaper.sheet.actor.npc .attribute {
+  width: 150px;
+}
+.shaper.sheet.actor.npc .attribute .attribute-footer input {
+  width: 32px;
+}
 .shaper.sheet.actor.vehicle {
   min-width: 720px;
   min-height: 680px;
