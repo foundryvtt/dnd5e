@@ -12,9 +12,16 @@
             </h1>
 
             <aside class="header-exp flexcol">
-                <div class="charlevel" title="{{multiclassLabels}}">
-                    <label>{{ localize "SHAPER.Level" }} {{system.details.level}}</label>
-                    <span class="levels">{{classLabels}}</span>
+                <div class="charlevel">
+                    <span>{{ localize "SHAPER.Level" }}</span>
+                    <input name="system.details.level" type="text" data-dtype="Number" placeholder="0"
+                        value="{{numberFormat system.details.level}}"/>
+                </div>
+                <div class="charlevel">
+                    <span>{{ localize "SHAPER.HeroTier" }}</span>
+                    <input name="system.details.tier" type="text" data-dtype="Number" placeholder="0"
+                        value="{{numberFormat system.details.tier}}"/>
+                </div>
                 </div>
 
                 {{#unless disableExperience}}
@@ -173,6 +180,20 @@
                         <h4>{{ localize "SHAPER.DBuff" }}</h4>
                         <div class="counter-value">
                             {{numberInput system.counts.dbuff.value name="system.counts.dbuff.value"
+                                placeholder="0"}}
+                        </div>
+                    </div>
+                    <div class="counter flexrow ">
+                        <h4>{{ localize "SHAPER.Vitality" }}</h4>
+                        <div class="counter-value">
+                            {{numberInput system.counts.vitality.value name="system.counts.vitality.value"
+                                placeholder="0"}}
+                        </div>
+                    </div>
+                    <div class="counter flexrow ">
+                        <h4>{{ localize "SHAPER.Capacity" }}</h4>
+                        <div class="counter-value">
+                            {{numberInput system.counts.capacity.value name="system.counts.capacity.value"
                                 placeholder="0"}}
                         </div>
                     </div>

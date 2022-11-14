@@ -155,9 +155,9 @@ export default class Actor5e extends Actor {
    * @protected
    */
   _prepareCharacterData() {
-    this.system.details.level = 0;
+    //this.system.details.level = this.system.details?.level ?? 0;
     // Experience required for next level
-    const xp = this.system.details.xp;
+    //const xp = this.system.details.xp;
   }
 
   /* -------------------------------------------- */
@@ -353,19 +353,6 @@ export default class Actor5e extends Actor {
       foundry.utils.setProperty(changed, "system.attributes.death.success", 0);
       foundry.utils.setProperty(changed, "system.attributes.death.failure", 0);
     }
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Assign a class item as the original class for the Actor based on which class has the most levels.
-   * @returns {Promise<Actor5e>}  Instance of the updated actor.
-   * @protected
-   */
-  _assignPrimaryClass() {
-    const classes = this.itemTypes.class.sort((a, b) => b.system.levels - a.system.levels);
-    const newPC = classes[0]?.id || "";
-    return this.update({"system.details.originalClass": newPC});
   }
 
   /* -------------------------------------------- */

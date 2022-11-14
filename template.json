@@ -75,8 +75,9 @@
       },
       "creature": {
         "details": {
-          "alignment": "",
-          "race": ""
+          "level": 0,
+          "race": "",
+          "tier": 0
         },
         "stats": {
           "physO": {
@@ -111,6 +112,16 @@
             "value": 0,
             "max": 3,
             "min": -3
+          },
+          "vitality": {
+            "value": 0,
+            "max": 100,
+            "min": 0
+          },
+          "capacity": {
+            "value": 0,
+            "max": 100,
+            "min": 0
           }
         },
         "skills": {

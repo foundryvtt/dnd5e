@@ -1417,6 +1417,9 @@
   color: #7a7971;
   white-space: nowrap;
 }
+.shaper.sheet.actor.character .sheet-header .charlevel input {
+  width: 32px;
+}
 .shaper.sheet.actor.character .sheet-header .experience {
   flex: 0 0 32px;
   margin-bottom: -5px;
