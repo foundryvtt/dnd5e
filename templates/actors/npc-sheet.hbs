@@ -48,12 +48,12 @@
                 <li class="attribute health">
                     <h4 class="attribute-name box-title rollable">{{ localize "DND5E.HitPoints" }}</h4>
                     <div class="attribute-value multiple">
-                        <input name="system.attributes.hp.value" type="text" step="any"
+                        <input name="system.attributes.hp.value" type="text"
                             value="{{system.attributes.hp.value}}" placeholder="10"
                             title="{{localize 'DND5E.HitPointsCurrent'}}"
                             data-dtype="Number">
                         <span class="sep"> / </span>
-                        <input name="system.attributes.hp.max" type="text" step="any"
+                        <input name="system.attributes.hp.max" type="text"
                             value="{{system.attributes.hp.max}}" placeholder="10"
                             title="{{localize 'DND5E.HitPointsMax'}}"
                             data-dtype="Number">
@@ -63,7 +63,7 @@
                             placeholder="{{ localize 'DND5E.HPFormula' }}"
                             value="{{system.attributes.hp.formula}}"
                             title="{{localize 'DND5E.HPFormula'}}">
-                        <input name="system.attributes.hp.temp" type="text" step="any" class="temphp"
+                        <input name="system.attributes.hp.temp" type="text" class="temphp"
                             placeholder="+{{localize 'DND5E.Temp'}}"
                             value="{{system.attributes.hp.temp}}"
                             title="{{localize 'DND5E.HitPointsTemp'}}"
@@ -166,10 +166,8 @@
                                 title="{{localize 'DND5E.LegActRemaining'}}"
                                 data-dtype="Number">
                             <span class="sep">/</span>
-                            <input name="system.resources.legact.max" type="text" step="any"
-                                value="{{system.resources.legact.max}}" placeholder="0"
-                                title="{{localize 'DND5E.LegActMax'}}"
-                                data-dtype="Number">
+                            {{numberInput system.resources.legact.max name="system.resources.legact.max" min=0 step=1
+                                          placeholder=0}}
                         </div>
                     </div>
                     <div class="counter flexrow legendary">
@@ -180,10 +178,8 @@
                                 title="{{localize 'DND5E.LegResRemaining'}}"
                                 data-dtype="Number">
                             <span class="sep">/</span>
-                            <input name="system.resources.legres.max" type="text" step="any"
-                                value="{{system.resources.legres.max}}" placeholder="0"
-                                title="{{localize 'DND5E.LegResMax'}}"
-                                data-dtype="Number">
+                            {{numberInput system.resources.legres.max name="system.resources.legres.max" min=0 step=1
+                                          placeholder=0}}
                         </div>
                     </div>
                     <div class="counter flexrow lair">

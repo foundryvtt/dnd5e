@@ -615,7 +615,7 @@ export default class ActorSheet5e extends ActorSheet {
       // Input focus and update
       const inputs = html.find("input");
       inputs.focus(ev => ev.currentTarget.select());
-      inputs.addBack().find('[data-dtype="Number"]').change(this._onChangeInputDelta.bind(this));
+      inputs.addBack().find('[type="text"][data-dtype="Number"]').change(this._onChangeInputDelta.bind(this));
 
       // Ability Proficiency
       html.find(".ability-proficiency").click(this._onToggleAbilityProficiency.bind(this));
@@ -686,21 +686,15 @@ export default class ActorSheet5e extends ActorSheet {
   /**
    * Handle input changes to numeric form fields, allowing them to accept delta-typed inputs.
    * @param {Event} event  Triggering event.
-   * @private
+   * @protected
    */
-  // Uses strict regex validation to prevent malicious injection
-  // Has a limit on size to further prevent malicious injection, it's going to be hard to do malicious code in  10 characters.
   _onChangeInputDelta(event) {
     const input = event.target;
     const value = input.value;
-    if ( /^([\d+-]\d*$)/.test(value) ){
-      if ( ["+", "-"].includes(value[0]) ) {
-        const delta = parseFloat(value);
-        input.value = Number(foundry.utils.getProperty(this.actor, input.name)) + delta;
-      } else if ( value[0] === "=" ) input.value = value.slice(1);
-    } else {
-      input.value = Number(foundry.utils.getProperty(this.actor, input.name));
-    }
+    if ( ["+", "-"].includes(value[0]) ) {
+      const delta = parseFloat(value);
+      input.value = Number(foundry.utils.getProperty(this.actor, input.name)) + delta;
+    } else if ( value[0] === "=" ) input.value = value.slice(1);
   }
 
   /* -------------------------------------------- */
