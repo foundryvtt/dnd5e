@@ -1,0 +1,87 @@
+<form class="{{cssClass}} flexcol" autocomplete="off">
+    <header class="sheet-header flexrow">
+        <img class="profile" src="{{actor.img}}" title="{{actor.name}}" alt="{{actor.name}}" data-edit="img">
+        <section class="header-details flexrow">
+            <h1 class="charname">
+                <input name="name" type="text" value="{{actor.name}}" placeholder="{{localize 'DND5E.Name'}}">
+            </h1>
+            <ul class="summary flexrow">
+                <li>
+                    <span>{{summary}}</span>
+                </li>
+            </ul>
+
+            <ul class="attributes flexrow">
+                <li class="attribute health">
+                    <h4 class="attribute-name box-title">{{localize 'DND5E.GroupHP'}}</h4>
+                    <div class="attribute-value">
+                        <span class="value" data-tooltip="{{localize 'DND5E.HitPointsCurrent'}}">{{currentHP}}</span>
+                        <span class="sep"> &sol; </span>
+                        <span class="value" data-tooltip="{{localize 'DND5E.HitPointsMax'}}">{{maxHP}}</span>
+                    </div>
+                </li>
+                <li class="attribute movement">
+                    <h4 class="attribute-name box-title">
+                        {{ localize "DND5E.Movement" }}
+                        <a class="action-button config-button" data-action="movementConfig" data-tooltip="{{localize 'DND5E.MovementConfig'}}">
+                            <i class="fas fa-cog"></i>
+                        </a>
+                    </h4>
+                    <div class="attribute-value">
+                        <span>{{movement.primary}}</span>
+                    </div>
+                    <footer class="attribute-footer">
+                        <span>{{movement.secondary}}</span>
+                    </footer>
+                </li>
+            </ul>
+        </section>
+    </header>
+
+    <nav class="sheet-navigation tabs" data-group="primary">
+        <a class="item active" data-tab="members">{{localize 'DND5E.GroupMembers'}}</a>
+        <a class="item" data-tab="inventory">{{localize 'DND5E.GroupInventory'}}</a>
+        <a class="item" data-tab="description">{{localize 'DND5E.Description'}}</a>
+    </nav>
+
+    <section class="sheet-body">
+        <div class="tab members" data-group="primary" data-tab="members">
+            {{#each sections as |section id|}}
+            <section class="group-members directory" data-section="{{id}}">
+                <header class="directory-header flexrow">
+                    <h3 class="name">{{section.label}}</h3>
+                    <span class="hp">Hit Points</span>
+                    <span class="controls">Controls</span>
+                </header>
+                <ol class="section-members directory-list">
+                    {{#each section.members as |member|}}
+                    <li class="group-member directory-item flexrow" data-actor-id="{{member.id}}">
+                        <div class="name flexrow">
+                            <img class="thumbnail" src="{{member.img}}">
+                            <h4 class="document-name"><a class="member-link">{{member.name}}</a></h4>
+                        </div>
+                        <div class="hp flexrow">
+                            <span class="current">{{member.hp.current}}</span>
+                            <div class="bar-container">
+                                <div class="bar" style="width:{{member.hp.pct}}%; background:{{member.hp.color}}; border-color:{{member.hp.border}}"></div>
+                            </div>
+                            <span class="max">{{member.hp.max}}</span>
+                        </div>
+                        <div class="controls">
+                            <a class="action-button" data-action="removeMember"><i class="fa-solid fa-close"></i></a>
+                        </div>
+                    </li>
+                    {{/each}}
+                </ol>
+            </section>
+            {{/each}}
+        </div>
+
+        <div class="tab inventory" data-group="primary" data-tab="inventory"></div>
+        <div class="tab description" data-group="primary" data-tab="description">
+            {{editor descriptionFull target="system.description.full" button=true editable=editable
+                     engine="prosemirror" collaborate=false}}
+        </div>
+
+    </section>
+</form>

@@ -138,6 +138,12 @@ Hooks.once("init", function() {
     makeDefault: true,
     label: "DND5E.SheetClassVehicle"
   });
+  Actors.registerSheet("dnd5e", applications.actor.GroupActorSheet, {
+    types: ["group"],
+    makeDefault: true,
+    label: "DND5E.SheetClassGroup"
+  });
+
   Items.unregisterSheet("core", ItemSheet);
   Items.registerSheet("dnd5e", applications.item.ItemSheet5e, {
     makeDefault: true,

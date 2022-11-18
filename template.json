@@ -519,11 +519,13 @@
         "summary": ""
       },
       "members": [],
-      "movement": {
-        "land": 0,
-        "water": 0,
-        "air": 0,
-        "units": "mi"
+      "attributes": {
+        "movement": {
+          "land": 0,
+          "water": 0,
+          "air": 0,
+          "units": "mi"
+        }
       }
     }
   },

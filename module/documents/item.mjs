@@ -476,8 +476,10 @@ export default class Item5e extends Item {
   prepareFinalAttributes() {
 
     // Proficiency
-    const isProficient = (this.type === "spell") || this.system.proficient; // Always proficient in spell attacks.
-    this.system.prof = new Proficiency(this.actor?.system.attributes.prof, isProficient);
+    if ( this.actor?.system.attributes?.prof ) {
+      const isProficient = (this.type === "spell") || this.system.proficient; // Always proficient in spell attacks.
+      this.system.prof = new Proficiency(this.actor?.system.attributes.prof, isProficient);
+    }
 
     // Class data
     if ( this.type === "class" ) this.system.isOriginalClass = this.isOriginalClass;
