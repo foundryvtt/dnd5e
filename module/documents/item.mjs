@@ -624,6 +624,7 @@ export default class Item5e extends Item {
    * Retrieve an item's critical hit threshold. Uses the smallest value from among the following sources:
    * - item document
    * - item document's actor (if it has one)
+   * - item document's ammunition (if it has any)
    * - the constant '20'
    * @returns {number|null}  The minimum value that must be rolled to be considered a critical hit.
    */
@@ -631,9 +632,14 @@ export default class Item5e extends Item {
     const actorFlags = this.actor.flags.dnd5e || {};
     if ( !this.hasAttack ) return null;
     let actorThreshold = null;
+    let itemThreshold = this.system.critical?.threshold ?? Infinity;
+    let ammoThreshold = Infinity;
     if ( this.type === "weapon" ) actorThreshold = actorFlags.weaponCriticalThreshold;
     else if ( this.type === "spell" ) actorThreshold = actorFlags.spellCriticalThreshold;
-    return Math.min(this.system.critical?.threshold ?? 20, actorThreshold ?? 20);
+    if ( this.system.consume?.type === "ammo" ) {
+      ammoThreshold = this.actor.items.get(this.system.consume.target)?.system.critical.threshold ?? Infinity;
+    }
+    return Math.min(itemThreshold, ammoThreshold, actorThreshold ?? 20);
   }
 
   /* -------------------------------------------- */
