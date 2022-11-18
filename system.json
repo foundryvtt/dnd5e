@@ -5,8 +5,7 @@
   "version": "2.0.3",
   "compatibility": {
     "minimum": "10",
-    "verified": "10",
-    "maximum": "10"
+    "verified": "10"
   },
   "url": "https://github.com/foundryvtt/dnd5e/",
   "manifest": "https://raw.githubusercontent.com/foundryvtt/dnd5e/master/system.json",
@@ -14,123 +13,154 @@
   "authors": [
     {
       "name": "Atropos",
-      "url": "https://foundryvtt.com"
+      "url": "https://foundryvtt.com",
+      "flags": {}
     }
   ],
-  "scripts": [],
-  "esmodules": ["dnd5e.mjs"],
-  "styles": ["dnd5e.css"],
+  "esmodules": [
+    "dnd5e.mjs"
+  ],
+  "styles": [
+    "dnd5e.css"
+  ],
   "packs": [
     {
       "name": "heroes",
       "label": "Starter Heroes",
       "system": "dnd5e",
-      "path": "./packs/heroes.db",
-      "type": "Actor"
+      "path": "packs/heroes.db",
+      "type": "Actor",
+      "private": false,
+      "flags": {}
     },
     {
       "name": "monsters",
       "label": "Monsters (SRD)",
       "system": "dnd5e",
-      "path": "./packs/monsters.db",
-      "type": "Actor"
+      "path": "packs/monsters.db",
+      "type": "Actor",
+      "private": false,
+      "flags": {}
     },
     {
       "name": "items",
       "label": "Items (SRD)",
       "system": "dnd5e",
-      "path": "./packs/items.db",
-      "type": "Item"
+      "path": "packs/items.db",
+      "type": "Item",
+      "private": false,
+      "flags": {}
     },
     {
       "name": "tradegoods",
       "label": "Trade Goods (SRD)",
       "system": "dnd5e",
-      "path": "./packs/tradegoods.db",
-      "type": "Item"
+      "path": "packs/tradegoods.db",
+      "type": "Item",
+      "private": false,
+      "flags": {}
     },
     {
       "name": "spells",
       "label": "Spells (SRD)",
       "system": "dnd5e",
-      "path": "./packs/spells.db",
-      "type": "Item"
+      "path": "packs/spells.db",
+      "type": "Item",
+      "private": false,
+      "flags": {}
     },
     {
       "name": "backgrounds",
       "label": "Backgrounds (SRD)",
       "system": "dnd5e",
-      "path": "./packs/backgrounds.db",
-      "type": "Item"
+      "path": "packs/backgrounds.db",
+      "type": "Item",
+      "private": false,
+      "flags": {}
     },
     {
       "name": "classes",
       "label": "Classes (SRD)",
       "system": "dnd5e",
-      "path": "./packs/classes.db",
-      "type": "Item"
+      "path": "packs/classes.db",
+      "type": "Item",
+      "private": false,
+      "flags": {}
     },
     {
       "name": "subclasses",
       "label": "Subclasses (SRD)",
       "system": "dnd5e",
-      "path": "./packs/subclasses.db",
-      "type": "Item"
+      "path": "packs/subclasses.db",
+      "type": "Item",
+      "private": false,
+      "flags": {}
     },
     {
       "name": "classfeatures",
       "label": "Class Features (SRD)",
       "system": "dnd5e",
-      "path": "./packs/classfeatures.db",
-      "type": "Item"
+      "path": "packs/classfeatures.db",
+      "type": "Item",
+      "private": false,
+      "flags": {}
     },
     {
       "name": "races",
       "label": "Racial Features (SRD)",
       "system": "dnd5e",
-      "path": "./packs/races.db",
-      "type": "Item"
+      "path": "packs/races.db",
+      "type": "Item",
+      "private": false,
+      "flags": {}
     },
     {
       "name": "monsterfeatures",
       "label": "Monster Features (SRD)",
       "system": "dnd5e",
-      "path": "./packs/monsterfeatures.db",
-      "type": "Item"
+      "path": "packs/monsterfeatures.db",
+      "type": "Item",
+      "private": false,
+      "flags": {}
     },
     {
       "name": "rules",
       "label": "Rules (SRD)",
       "system": "dnd5e",
-      "path": "./packs/rules.db",
-      "type": "JournalEntry"
+      "path": "packs/rules.db",
+      "type": "JournalEntry",
+      "private": false,
+      "flags": {}
     },
     {
       "name": "tables",
       "label": "Tables (SRD)",
       "system": "dnd5e",
-      "path": "./packs/tables.db",
-      "type": "RollTable"
+      "path": "packs/tables.db",
+      "type": "RollTable",
+      "private": false,
+      "flags": {}
     }
   ],
   "languages": [
     {
       "lang": "en",
       "name": "English",
-      "path": "lang/en.json"
+      "path": "lang/en.json",
+      "flags": {}
     }
   ],
   "media": [
     {
-      "type":"cover",
-      "link":"https://github.com/foundryvtt/dnd5e/blob/v10-dev/media/repo-dnd5e.jpg?raw=true"
+      "type": "cover",
+      "loop": false,
+      "flags": {}
     }
   ],
   "socket": true,
   "gridDistance": 5,
   "gridUnits": "ft",
   "primaryTokenAttribute": "attributes.hp",
-  "secondaryTokenAttribute": null,
   "flags": {
     "needsMigrationVersion": "2.0.2",
     "compatibleMigrationVersion": "0.8"

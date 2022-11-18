@@ -86,6 +86,8 @@ Hooks.once("init", function() {
   CONFIG.DND5E = DND5E;
   CONFIG.ActiveEffect.documentClass = documents.ActiveEffect5e;
   CONFIG.Actor.documentClass = documents.Actor5e;
+  CONFIG.Actor.systemDataModels.group = documents.GroupActor;
+
   CONFIG.Item.documentClass = documents.Item5e;
   CONFIG.Token.documentClass = documents.TokenDocument5e;
   CONFIG.Token.objectClass = canvas.Token5e;

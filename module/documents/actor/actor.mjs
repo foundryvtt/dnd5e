@@ -82,6 +82,12 @@ export default class Actor5e extends Actor {
 
   /** @inheritDoc */
   prepareBaseData() {
+
+    // Delegate preparation to type-subclass
+    if ( this.type === "group" ) {  // Eventually other types will also support this
+      return this.system._prepareBaseData();
+    }
+
     const updates = {};
     this._prepareBaseAbilities(updates);
     this._prepareBaseSkills(updates);
@@ -91,6 +97,8 @@ export default class Actor5e extends Actor {
     }
 
     this._prepareBaseArmorClass();
+
+    // Type-specific preparation
     switch ( this.type ) {
       case "character":
         return this._prepareCharacterData();
@@ -115,6 +123,12 @@ export default class Actor5e extends Actor {
 
   /** @inheritDoc */
   prepareDerivedData() {
+
+    // Delegate preparation to type-subclass
+    if ( this.type === "group" ) {  // Eventually other types will also support this
+      return this.system._prepareDerivedData();
+    }
+
     const flags = this.flags.dnd5e || {};
     this.labels = {};
 
@@ -199,6 +213,7 @@ export default class Actor5e extends Actor {
    * @protected
    */
   _prepareBaseAbilities(updates) {
+    if ( !("abilities" in this.system) ) return;
     const abilities = {};
     for ( const key of Object.keys(CONFIG.DND5E.abilities) ) {
       abilities[key] = this.system.abilities[key];
@@ -232,7 +247,7 @@ export default class Actor5e extends Actor {
    * @private
    */
   _prepareBaseSkills(updates) {
-    if ( this.type === "vehicle") return;
+    if ( !("skills" in this.system) ) return;
     const skills = {};
     for ( const [key, skill] of Object.entries(CONFIG.DND5E.skills) ) {
       skills[key] = this.system.skills[key];
