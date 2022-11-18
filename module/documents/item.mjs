@@ -1871,13 +1871,13 @@ export default class Item5e extends Item {
     const message = game.messages.get(messageId);
     const action = button.dataset.action;
 
-    // Validate permission to proceed with the roll
-    const isTargetted = action === "save";
-    if ( !( isTargetted || game.user.isGM || message.isAuthor ) ) return;
-
     // Recover the actor for the chat card
     const actor = await this._getChatCardActor(card);
     if ( !actor ) return;
+
+    // Validate permission to proceed with the roll
+    const isTargetted = action === "save";
+    if ( !( isTargetted || game.user.isGM || actor.isOwner ) ) return;
 
     // Get the Item from stored flag data or by the item ID on the Actor
     const storedData = message.getFlag("dnd5e", "itemData");
