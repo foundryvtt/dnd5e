@@ -9,7 +9,7 @@
         </h3>
         {{#each system.currency as |v k|}}
         <label class="denomination {{k}}">{{ lookup ../labels.currencies k }}</label>
-        {{numberInput v name=(concat "system.currency." k)}}
+        <input type="text" name="system.currency.{{k}}" value="{{v}}" data-dtype="Number"> 
         {{/each}}
     </ol>
     {{/unless}}

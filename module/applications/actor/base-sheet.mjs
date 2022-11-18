@@ -593,7 +593,6 @@ export default class ActorSheet5e extends ActorSheet {
 
   /** @inheritdoc */
   activateListeners(html) {
-
     // Activate Item Filters
     const filterLists = html.find(".filter-list");
     filterLists.each(this._initializeFilterItemList.bind(this));
@@ -613,11 +612,10 @@ export default class ActorSheet5e extends ActorSheet {
 
     // Editable Only Listeners
     if ( this.isEditable ) {
-
       // Input focus and update
       const inputs = html.find("input");
       inputs.focus(ev => ev.currentTarget.select());
-      inputs.addBack().find('[type="number"]').change(this._onChangeInputDelta.bind(this));
+      inputs.addBack().find('[type="text"][data-dtype="Number"]').change(this._onChangeInputDelta.bind(this));
 
       // Ability Proficiency
       html.find(".ability-proficiency").click(this._onToggleAbilityProficiency.bind(this));
@@ -686,18 +684,17 @@ export default class ActorSheet5e extends ActorSheet {
   /* -------------------------------------------- */
 
   /**
-   * Handle input changes to numeric form fields, allowing them to accept delta-typed inputs
+   * Handle input changes to numeric form fields, allowing them to accept delta-typed inputs.
    * @param {Event} event  Triggering event.
-   * @private
+   * @protected
    */
   _onChangeInputDelta(event) {
     const input = event.target;
     const value = input.value;
     if ( ["+", "-"].includes(value[0]) ) {
-      let delta = parseFloat(value);
-      input.value = foundry.utils.getProperty(this.actor, input.name) + delta;
-    }
-    else if ( value[0] === "=" ) input.value = value.slice(1);
+      const delta = parseFloat(value);
+      input.value = Number(foundry.utils.getProperty(this.actor, input.name)) + delta;
+    } else if ( value[0] === "=" ) input.value = value.slice(1);
   }
 
   /* -------------------------------------------- */
