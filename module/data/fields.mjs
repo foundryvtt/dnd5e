@@ -27,9 +27,9 @@ export class AdvancementField extends foundry.data.fields.ObjectField {
   /* -------------------------------------------- */
 
   /** @inheritdoc */
-  initialize(value, model) {
+  initialize(value, model, options={}) {
     const cls = this.getModelForType(value.type);
-    if ( cls ) return new cls(value, {parent: model});
+    if ( cls ) return new cls(value, {parent: model, ...options});
     return foundry.utils.deepClone(value);
   }
 }
@@ -91,9 +91,9 @@ export class AdvancementDataField extends foundry.data.fields.ObjectField {
   /* -------------------------------------------- */
 
   /** @inheritdoc */
-  initialize(value, model) {
+  initialize(value, model, options={}) {
     const cls = this.getModel();
-    if ( cls ) return new cls(value, {parent: model});
+    if ( cls ) return new cls(value, {parent: model, ...options});
     return foundry.utils.deepClone(value);
   }
 }
@@ -236,9 +236,9 @@ export class MappingField extends foundry.data.fields.ObjectField {
   /* -------------------------------------------- */
 
   /** @override */
-  initialize(value, model) {
+  initialize(value, model, options={}) {
     if ( !value ) return value;
-    Object.values(value).forEach(v => this.model.initialize(v, model));
+    Object.values(value).forEach(v => this.model.initialize(v, model, options));
     return value;
   }
 }

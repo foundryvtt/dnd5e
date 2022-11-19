@@ -20,6 +20,12 @@ class AdvancementError extends Error {
  * @abstract
  */
 export default class Advancement extends BaseAdvancement {
+  constructor(data, {parent=null, ...options}={}) {
+    if ( parent instanceof Item ) parent = parent.system;
+    super(data, {parent, ...options});
+  }
+
+  /* -------------------------------------------- */
 
   /** @inheritdoc */
   _initialize(options) {

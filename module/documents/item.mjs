@@ -1,5 +1,6 @@
 import {d20Roll, damageRoll} from "../dice/dice.mjs";
 import simplifyRollFormula from "../dice/simplify-roll-formula.mjs";
+import Advancement from "../advancement/advancement.mjs";
 import AbilityUseDialog from "../applications/item/ability-use-dialog.mjs";
 import Proficiency from "./actor/proficiency.mjs";
 
@@ -453,7 +454,7 @@ export default class Item5e extends Item {
       needingConfiguration: []
     };
     for ( const advancement of this.system.advancement ?? [] ) {
-      if ( !(advancement instanceof foundry.abstract.DataModel) ) continue;
+      if ( !(advancement instanceof Advancement) ) continue;
       this.advancement.byId[advancement.id] = advancement;
       this.advancement.byType[advancement.type] ??= [];
       this.advancement.byType[advancement.type].push(advancement);

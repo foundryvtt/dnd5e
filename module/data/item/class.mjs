@@ -27,7 +27,10 @@ export default class ClassData extends SystemDataModel.mixin(ItemDescriptionTemp
       levels: new foundry.data.fields.NumberField({
         required: true, nullable: false, integer: true, positive: true, initial: 1, label: "DND5E.ClassLevels"
       }),
-      hitDice: new foundry.data.fields.StringField({required: true, initial: "d6", label: "DND5E.HitDice"}),
+      hitDice: new foundry.data.fields.StringField({
+        required: true, initial: "d6", blank: false, label: "DND5E.HitDice",
+        validate: v => /d\d+/.test(v), validationError: "must be a dice value in the format d#"
+      }),
       hitDiceUsed: new foundry.data.fields.NumberField({
         required: true, nullable: false, integer: true, initial: 0, min: 0, label: "DND5E.HitDiceUsed"
       }),
@@ -46,11 +49,9 @@ export default class ClassData extends SystemDataModel.mixin(ItemDescriptionTemp
       }),
       spellcasting: new foundry.data.fields.SchemaField({
         progression: new foundry.data.fields.StringField({
-          required: true, initial: "none", label: "DND5E.SpellProgression"
+          required: true, initial: "none", blank: false, label: "DND5E.SpellProgression"
         }),
-        ability: new foundry.data.fields.StringField({
-          required: true, blank: true, label: "DND5E.SpellAbility"
-        })
+        ability: new foundry.data.fields.StringField({required: true, label: "DND5E.SpellAbility"})
       }, {label: "DND5E.Spellcasting"})
     });
   }
