@@ -20,6 +20,50 @@
   "scripts": [],
   "esmodules": ["shaper.mjs"],
   "styles": ["shaper.css"],
+  "packs": [
+    {
+      "name": "abilities-tier-0",
+      "label": "Abilities (Tier 0)",
+      "system": "shaper",
+      "path": "./packs/abilities-tier-0.db",
+      "type": "Item"
+    },
+    {
+      "name": "abilities-tier-1",
+      "label": "Abilities (Tier 1)",
+      "system": "shaper",
+      "path": "./packs/abilities-tier-1.db",
+      "type": "Item"
+    },
+    {
+      "name": "abilities-tier-2",
+      "label": "Abilities (Tier 2)",
+      "system": "shaper",
+      "path": "./packs/abilities-tier-2.db",
+      "type": "Item"
+    },
+    {
+      "name": "lessons",
+      "label": "Lessons",
+      "system": "shaper",
+      "path": "./packs/lessons.db",
+      "type": "Item"
+    },
+    {
+      "name": "talents",
+      "label": "Talents",
+      "system": "shaper",
+      "path": "./packs/talents.db",
+      "type": "Item"
+    },
+    {
+      "name": "utilities",
+      "label": "Utilities",
+      "system": "shaper",
+      "path": "./packs/utilities.db",
+      "type": "Item"
+    }
+  ],
   "languages": [
     {
       "lang": "en",
