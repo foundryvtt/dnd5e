@@ -4,6 +4,7 @@
     <div class="form-fields">
         <select name="system.activation.type">
             {{#select system.activation.type}}
+            <option value=""></option>
             {{#each config.abilityActivationTypes as |name key|}}
             <option value="{{key}}">{{name}}</option>
             {{/each}}
