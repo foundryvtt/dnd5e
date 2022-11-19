@@ -39,27 +39,33 @@
             {{!-- Header Attributes --}}
             <ul class="attributes flexrow">
                 <li class="attribute health">
-                    <h4 class="attribute-name box-title">{{ localize "SHAPER.HitPoints" }}</h4>
+                    <h4 class="attribute-name box-title">
+                        {{ localize "SHAPER.HitPoints" }}
+                        <a class="config-button" data-action="scaling" title="{{localize 'SHAPER.HPConfig'}}"><i class="fas fa-cog"></i></a>
+                    </h4>
                     <div class="attribute-value multiple">
                         <input name="system.attributes.hp.value" type="number" step="any"
                             value="{{system.attributes.hp.value}}" placeholder="10"
                             title="{{localize 'SHAPER.HitPointsCurrent'}}">
                         <span class="sep"> / </span>
-                        <input name="system.attributes.hp.max" type="number" step="any"
-                            value="{{system.attributes.hp.max}}" placeholder="10"
-                            title="{{localize 'SHAPER.HitPointsMax'}}">
+                        <div class="attribute-value">
+                            <span>{{numberFormat system.attributes.hp.max decimals=0}}</span>
+                        </div>
                     </div>
                 </li>
                 <li class="attribute health">
-                    <h4 class="attribute-name box-title">{{ localize "SHAPER.MindPoints" }}</h4>
+                    <h4 class="attribute-name box-title">
+                        {{ localize "SHAPER.MindPoints" }}
+                        <a class="config-button" data-action="scaling" title="{{localize 'SHAPER.MPConfig'}}"><i class="fas fa-cog"></i></a>
+                    </h4>
                     <div class="attribute-value multiple">
                         <input name="system.attributes.mp.value" type="number" step="any"
                             value="{{system.attributes.mp.value}}" placeholder="10"
                             title="{{localize 'SHAPER.MindPointsCurrent'}}">
                         <span class="sep"> / </span>
-                        <input name="system.attributes.mp.max" type="number" step="any"
-                            value="{{system.attributes.mp.max}}" placeholder="10"
-                            title="{{localize 'SHAPER.MindPointsMax'}}">
+                        <div class="attribute-value">
+                            <span>{{numberFormat system.attributes.mp.max decimals=0}}</span>
+                        </div>
                     </div>
                 </li>
 
@@ -143,14 +149,14 @@
             <section class="lcenter-pane flexcol">
 
                 {{!-- Body Attributes --}}
-                <ul class="attributes flexcol">
+                <ul class="ability-scores flexcol">
                 {{#each stats as |stat|}}
-                    <li class="attribute stats">
-                        <h4 class="attribute-name box-title">{{ stat.placeholder }}</h4>
-                        <div class="attribute-value">
-                            <span>{{numberFormat stat.value name=(concat "system.stats." stat.name ".value")}}</span>
-                        </div>
-                        <footer class="attribute-footer">
+                    <li class="ability stats">
+                        <h4 class="ability-name box-title">{{ stat.placeholder }}</h4>
+                        {{numberFormat stat.value name=(concat "system.abilities." stat.name ".value")
+                            class="ability-score" placeholder="0"}}
+                        <a class="config-button" data-action="scaling" title="{{localize 'SHAPER.ScalingConfig'}}"><i class="fas fa-cog"></i></a>
+                        <footer class="ability-footer">
                             <span>{{ localize "SHAPER.Modifier" }}</span>
                             {{numberInput stat.bonus name=(concat "system.stats." stat.name ".bonus")}}
                         </footer>

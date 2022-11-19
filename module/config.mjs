@@ -97,12 +97,12 @@ patchConfig("skills", "label", { since: 2.0, until: 2.2 });
  * @enum {string}
  */
  SHAPER.stats = {
-  physO: "SHAPER.StatPhyso",
-  menO: "SHAPER.StatMeno",
-  physD: "SHAPER.StatPhysd",
-  menD: "SHAPER.StatMend"
+  physO: { label: "SHAPER.StatPhyso", scale0: "str", scale1: "fin"},
+  menO: { label: "SHAPER.StatMeno", scale0: "mnd", scale1: "sol" },
+  physD: { label: "SHAPER.StatPhysd", scale0: "tgh", scale1: "fin" },
+  menD: { label: "SHAPER.StatMend", scale0: "hrt", scale1: "sol" }
 };
-preLocalize("stats");
+preLocalize("stats", { key: "label", sort: true });
 
 /**
  * The set of Counters used within the system.
@@ -111,7 +111,9 @@ preLocalize("stats");
  SHAPER.counts = {
   injury: "SHAPER.Injury",
   obuff: "SHAPER.OBuff",
-  dbuff: "SHAPER.DBuff"
+  dbuff: "SHAPER.DBuff",
+  vitality: "SHAPER.Vitality",
+  capacity: "SHAPER.Capacity"
 };
 preLocalize("counts");
 

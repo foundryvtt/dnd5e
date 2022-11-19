@@ -3,6 +3,7 @@ import Item5e from "../../documents/item.mjs";
 
 import ActorAbilityConfig from "./ability-config.mjs";
 import ActorMovementConfig from "./movement-config.mjs";
+import ActorScalingConfig from "./scaling-config.mjs";
 import ActorSheetFlags from "./sheet-flags.mjs";
 import ActorSkillConfig from "./skill-config.mjs";
 import ActorTypeConfig from "./type-config.mjs";
@@ -400,6 +401,9 @@ export default class ActorSheet5e extends ActorSheet {
     switch ( button.dataset.action ) {
       case "movement":
         app = new ActorMovementConfig(this.actor);
+        break;
+      case "scaling":
+        app = new ActorScalingConfig(this.actor);
         break;
       case "flags":
         app = new ActorSheetFlags(this.actor);

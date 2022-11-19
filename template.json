@@ -27,12 +27,16 @@
           "hp": {
             "value": 10,
             "min": 0,
-            "max": 10
+            "max": 10,
+            "scale0": "str",
+            "scale1": "tgh"
           },
           "mp": {
             "value": 10,
             "min": 0,
-            "max": 10
+            "max": 10,
+            "scale0": "mnd",
+            "scale1": "hrt"
           },
           "init": {
             "value": 0,
@@ -82,19 +86,27 @@
         "stats": {
           "physO": {
             "value": 0,
-            "bonus": 0
+            "bonus": 0,
+            "scale0": "str",
+            "scale1": "fin" 
           },
           "menO": {
             "value": 0,
-            "bonus": 0
+            "bonus": 0,
+            "scale0": "mnd",
+            "scale1": "sol"
           },
           "physD": {
             "value": 10,
-            "bonus": 0
+            "bonus": 0,
+            "scale0": "tgh",
+            "scale1": "fin"
           },
           "menD": {
             "value": 10,
-            "bonus": 0
+            "bonus": 0,
+            "scale0": "hrt",
+            "scale1": "sol"
           }
         },
         "counts": {
@@ -115,12 +127,12 @@
           },
           "vitality": {
             "value": 0,
-            "max": 100,
+            "max": 10000,
             "min": 0
           },
           "capacity": {
             "value": 0,
-            "max": 100,
+            "max": 10000,
             "min": 0
           }
         },

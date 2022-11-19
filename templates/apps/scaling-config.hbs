@@ -1,0 +1,12 @@
+<form autocomplete="off">
+    <p class="notes">{{localize "SHAPER.MovementConfigHint"}}</p>
+    <div class="form-group">
+        <label>{{localize "SHAPER.MovementWalk"}}</label>
+        <input name="system.attributes.movement.walk" type="number" step="0.1" value="{{movement.walk}}"/>
+    </div>
+    <div class="form-group">
+        <label>{{localize "SHAPER.MovementHover"}}</label>
+        <input name="system.attributes.movement.hover" type="checkbox" {{checked movement.hover}}/>
+    </div>
+    <button type="submit"><i class="far fa-save"></i> {{ localize "Submit"}}</button>
+</form>

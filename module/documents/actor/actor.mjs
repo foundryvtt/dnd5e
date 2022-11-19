@@ -68,6 +68,8 @@ export default class Actor5e extends Actor {
     this._prepareInitiative(bonusData, checkBonus);
     this._prepareCounts();
     this._prepareStats();
+    this._prepareHP();
+    this._prepareMP();
   }
 
   /* -------------------------------------------- */
@@ -254,6 +256,46 @@ export default class Actor5e extends Actor {
     init.total = init.mod + init.bonus + globalCheckBonus;
   }
 
+  /**
+   * Prepare the max hp for an actor.
+   * @protected
+   */
+  _prepareHP() {
+    const hp = this.system.attributes.hp ?? 0;
+
+    const scale0 = this.system.abilities[hp.scale0];
+    const scale1 = this.system.abilities[hp.scale1];
+    
+    const vit = this.system.counts['vitality'];
+
+    const base = 3 * ( scale0.value + scale1.value ) + 15;
+
+    const vim = vit.value * ( 5 + scale0.value + scale1.value );
+
+    hp.max = base + vim;
+
+  }
+
+    /**
+   * Prepare the max mp for an actor.
+   * @protected
+   */
+     _prepareMP() {
+      const mp = this.system.attributes.mp ?? 0;
+  
+      const scale0 = this.system.abilities[mp.scale0];
+      const scale1 = this.system.abilities[mp.scale1];
+      
+      const cap = this.system.counts['capacity'];
+  
+      const base = 3 * ( scale0.value + scale1.value ) + 15;
+  
+      const vig = cap.value * ( 5 + scale0.value + scale1.value );
+      
+      mp.max = base + vig;
+  
+    }
+
 
   /**
    * Prepare the point stat data for an actor.
@@ -262,31 +304,18 @@ export default class Actor5e extends Actor {
    */
   _prepareStats() {
 
-    const stats = this.system.stats ??={};
-
-    // Could improve by including abilities in template like skills, but lazy
-    const str = this.system.abilities.str.value;
-    const fin = this.system.abilities.fin.value;
-    const tgh = this.system.abilities.tgh.value;
-    const mnd = this.system.abilities.mnd.value;
-    const hrt = this.system.abilities.hrt.value;
-    const sol = this.system.abilities.sol.value;
-    
-    for ( const key of Object.keys(stats) ) {
-      stats[key].bonus = stats[key].bonus ?? 0
-
-      switch (key) {
+    for ( const [id, st] of Object.entries(this.system.stats) ) {
+      const scale0 = this.system.abilities[st.scale0];
+      const scale1 = this.system.abilities[st.scale1];
+      switch (id) {
         case "physO":
-          stats[key].value = str + fin + stats[key].bonus;
-          break;
         case "menO":
-          stats[key].value = mnd + sol + stats[key].bonus;
+          st.value = scale0.value + scale1.value + st.bonus;
           break;
         case "physD":
-          stats[key].value = 10 + fin + tgh + stats[key].bonus;
-          break;
         case "menD":
-          stats[key].value = 10 + hrt + sol + stats[key].bonus;
+          st.value = scale0.value + scale1.value + st.bonus + 10;
+          break;
       }
     }
   }

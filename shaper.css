@@ -1448,10 +1448,16 @@
   text-align: right;
   padding-right: 5px;
 }
-.shaper.sheet.actor.character .attribute {
-  width: 150px;
+.shaper.sheet.actor.character .ability .ability-footer {
+  flex: 0 0 18px;
+  margin-top: -1px;
+  line-height: 18px;
+  font-family: "Signika", sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  white-space: nowrap;
 }
-.shaper.sheet.actor.character .attribute .attribute-footer input {
+.shaper.sheet.actor.character .ability .ability-footer input {
   width: 32px;
 }
 .shaper.sheet.actor.character ul.skills-list {
