@@ -1,12 +1,30 @@
 <form autocomplete="off">
-    <p class="notes">{{localize "SHAPER.MovementConfigHint"}}</p>
-    <div class="form-group">
-        <label>{{localize "SHAPER.MovementWalk"}}</label>
-        <input name="system.attributes.movement.walk" type="number" step="0.1" value="{{movement.walk}}"/>
+    <p class="notes">{{localize "SHAPER.ScalingConfigHint"}}</p>
+    <div class="form-group select">
+        <label>{{localize "SHAPER.Scale0"}}</label>
+        <div class="form-fields">
+            <select name="system.ability">
+                {{#select system.ability}}
+                <option value="">{{ localize "SHAPER.Default" }}</option>
+                {{#each config.abilities as |name key|}}
+                <option value="{{key}}">{{name}}</option>
+                {{/each}}
+                {{/select}}
+            </select>
+        </div>
     </div>
-    <div class="form-group">
-        <label>{{localize "SHAPER.MovementHover"}}</label>
-        <input name="system.attributes.movement.hover" type="checkbox" {{checked movement.hover}}/>
+    <div class="form-group select">
+        <label>{{localize "SHAPER.Scale1"}}</label>
+        <div class="form-fields">
+            <select name="system.ability">
+                {{#select system.ability}}
+                <option value="">{{ localize "SHAPER.Default" }}</option>
+                {{#each config.abilities as |name key|}}
+                <option value="{{key}}">{{name}}</option>
+                {{/each}}
+                {{/select}}
+            </select>
+        </div>
     </div>
     <button type="submit"><i class="far fa-save"></i> {{ localize "Submit"}}</button>
 </form>
