@@ -38,7 +38,7 @@
 
             {{!-- Header Attributes --}}
             <ul class="attributes flexrow">
-                <li class="attribute health">
+                <li class="attribute health" data-stat="hp">
                     <h4 class="attribute-name box-title">
                         {{ localize "SHAPER.HitPoints" }}
                         <a class="config-button" data-action="scaling" title="{{localize 'SHAPER.HPConfig'}}"><i class="fas fa-cog"></i></a>
@@ -53,7 +53,7 @@
                         </div>
                     </div>
                 </li>
-                <li class="attribute health">
+                <li class="attribute health" data-stat="mp">
                     <h4 class="attribute-name box-title">
                         {{ localize "SHAPER.MindPoints" }}
                         <a class="config-button" data-action="scaling" title="{{localize 'SHAPER.MPConfig'}}"><i class="fas fa-cog"></i></a>
@@ -150,10 +150,10 @@
 
                 {{!-- Body Attributes --}}
                 <ul class="ability-scores flexcol">
-                {{#each stats as |stat|}}
-                    <li class="ability stats">
-                        <h4 class="ability-name box-title">{{ stat.placeholder }}</h4>
-                        {{numberFormat stat.value name=(concat "system.abilities." stat.name ".value")
+                {{#each system.stats as |stat id|}}
+                    <li class="ability stats" data-stat="{{id}}">
+                        <h4 class="attribute-name box-title">{{ stat.placeholder }}</h4>
+                        {{numberFormat stat.value name=(concat "system.stats." id ".value")
                             class="ability-score" placeholder="0"}}
                         <a class="config-button" data-action="scaling" title="{{localize 'SHAPER.ScalingConfig'}}"><i class="fas fa-cog"></i></a>
                         <footer class="ability-footer">

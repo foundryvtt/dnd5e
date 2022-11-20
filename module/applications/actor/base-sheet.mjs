@@ -403,7 +403,8 @@ export default class ActorSheet5e extends ActorSheet {
         app = new ActorMovementConfig(this.actor);
         break;
       case "scaling":
-        app = new ActorScalingConfig(this.actor);
+        const stat = event.currentTarget.closest("[data-stat]").dataset.stat;
+        app = new ActorScalingConfig(this.actor, null, stat);
         break;
       case "flags":
         app = new ActorSheetFlags(this.actor);

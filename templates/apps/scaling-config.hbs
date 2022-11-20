@@ -3,11 +3,10 @@
     <div class="form-group select">
         <label>{{localize "SHAPER.Scale0"}}</label>
         <div class="form-fields">
-            <select name="system.ability">
-                {{#select system.ability}}
-                <option value="">{{ localize "SHAPER.Default" }}</option>
-                {{#each config.abilities as |name key|}}
-                <option value="{{key}}">{{name}}</option>
+            <select name="scale0">
+                {{#select scale0}}
+                {{#each config.abilities as |ability id|}}
+                <option value="{{id}}">{{ability}}</option>
                 {{/each}}
                 {{/select}}
             </select>
@@ -16,11 +15,10 @@
     <div class="form-group select">
         <label>{{localize "SHAPER.Scale1"}}</label>
         <div class="form-fields">
-            <select name="system.ability">
-                {{#select system.ability}}
-                <option value="">{{ localize "SHAPER.Default" }}</option>
-                {{#each config.abilities as |name key|}}
-                <option value="{{key}}">{{name}}</option>
+            <select name="scale1">
+                {{#select scale1}}
+                {{#each config.abilities as |ability id|}}
+                <option value="{{id}}">{{ability}}</option>
                 {{/each}}
                 {{/select}}
             </select>

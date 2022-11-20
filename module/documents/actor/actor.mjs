@@ -261,7 +261,7 @@ export default class Actor5e extends Actor {
    * @protected
    */
   _prepareHP() {
-    const hp = this.system.attributes.hp ?? 0;
+    const hp = this.system.attributes.hp ?? {};
 
     const scale0 = this.system.abilities[hp.scale0];
     const scale1 = this.system.abilities[hp.scale1];
@@ -281,7 +281,7 @@ export default class Actor5e extends Actor {
    * @protected
    */
      _prepareMP() {
-      const mp = this.system.attributes.mp ?? 0;
+      const mp = this.system.attributes.mp ?? {};
   
       const scale0 = this.system.abilities[mp.scale0];
       const scale1 = this.system.abilities[mp.scale1];

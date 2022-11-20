@@ -77,6 +77,8 @@ export default class TraitSelector extends DocumentSheet {
     // Obtain choices
     const chosen = Object.entries(formData).filter(([k, v]) => (k !== "custom") && v).map(([k]) => k);
 
+    console.log(chosen);
+
     // Object including custom data
     const updateData = {};
     if ( o.valueKey ) updateData[`${this.attribute}.${o.valueKey}`] = chosen;

@@ -102,7 +102,7 @@ patchConfig("skills", "label", { since: 2.0, until: 2.2 });
   physD: { label: "SHAPER.StatPhysd", scale0: "tgh", scale1: "fin" },
   menD: { label: "SHAPER.StatMend", scale0: "hrt", scale1: "sol" }
 };
-preLocalize("stats", { key: "label", sort: true });
+preLocalize("stats", { key: "label" });
 
 /**
  * The set of Counters used within the system.
