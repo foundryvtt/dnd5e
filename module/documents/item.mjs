@@ -1,5 +1,6 @@
 import {d20Roll, damageRoll} from "../dice/dice.mjs";
 import simplifyRollFormula from "../dice/simplify-roll-formula.mjs";
+import Advancement from "../advancement/advancement.mjs";
 import AbilityUseDialog from "../applications/item/ability-use-dialog.mjs";
 import Proficiency from "./actor/proficiency.mjs";
 
@@ -452,13 +453,11 @@ export default class Item5e extends Item {
       byType: {},
       needingConfiguration: []
     };
-    for ( const advancementData of this.system.advancement ?? [] ) {
-      const Advancement = CONFIG.DND5E.advancementTypes[advancementData.type];
-      if ( !Advancement ) continue;
-      const advancement = new Advancement(this, advancementData);
+    for ( const advancement of this.system.advancement ?? [] ) {
+      if ( !(advancement instanceof Advancement) ) continue;
       this.advancement.byId[advancement.id] = advancement;
-      this.advancement.byType[advancementData.type] ??= [];
-      this.advancement.byType[advancementData.type].push(advancement);
+      this.advancement.byType[advancement.type] ??= [];
+      this.advancement.byType[advancement.type].push(advancement);
       advancement.levels.forEach(l => this.advancement.byLevel[l].push(advancement));
       if ( !advancement.levels.length ) this.advancement.needingConfiguration.push(advancement);
     }
@@ -2005,7 +2004,7 @@ export default class Item5e extends Item {
       throw new Error(`${type} advancement cannot be added to ${this.name}`);
     }
 
-    const advancement = new Advancement(this, data);
+    const advancement = new Advancement(data, {parent: this});
     const advancementCollection = this.toObject().system.advancement;
     advancementCollection.push(advancement.toObject());
     if ( source ) return this.updateSource({"system.advancement": advancementCollection});
@@ -2032,10 +2031,10 @@ export default class Item5e extends Item {
     if ( idx === -1 ) throw new Error(`Advancement of ID ${id} could not be found to update`);
 
     const advancement = this.advancement.byId[id];
-    advancement.updateSource(updates, { updateItem: false });
+    advancement.updateSource(updates);
+    if ( source ) return this;
     const advancementCollection = this.toObject().system.advancement;
     advancementCollection[idx] = advancement.toObject();
-    if ( source ) return this.updateSource({"system.advancement": advancementCollection});
     return this.update({"system.advancement": advancementCollection});
   }
 
