@@ -50,8 +50,9 @@ export default class ActorMovementConfig extends DocumentSheet {
     return {
       speeds,
       movement,
-      units: CONFIG.DND5E.movementUnits,
-      canHover: source.type !== "group"
+      selectUnits: source.type !== "group",
+      canHover: source.type !== "group",
+      units: CONFIG.DND5E.movementUnits
     };
   }
 }

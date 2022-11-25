@@ -81,8 +81,8 @@ export default class GroupActorSheet extends ActorSheet {
       // HP bar
       const hp = member.system.attributes.hp;
       m.hp.current = hp.value + (hp.temp || 0);
-      m.hp.max = hp.max + (hp.tempMax || 0);
-      m.hp.pct = ((m.hp.current / m.hp.max) * 100).toFixed(2);
+      m.hp.max = hp.max + (hp.tempmax || 0);
+      m.hp.pct = Math.clamped((m.hp.current / m.hp.max) * 100, 0, 100).toFixed(2);
       m.hp.color = dnd5e.documents.Actor5e.getHPColor(m.hp.current, m.hp.max).css;
       stats.currentHP += m.hp.current;
       stats.maxHP += m.hp.max;
@@ -105,8 +105,6 @@ export default class GroupActorSheet extends ActorSheet {
    */
   #prepareMovementSpeed() {
     const movement = this.object.system.attributes.movement;
-
-    // Prepare an array of available movement speeds
     let speeds = [
       [movement.land, `${game.i18n.localize("DND5E.MovementLand")} ${movement.land}`],
       [movement.water, `${game.i18n.localize("DND5E.MovementWater")} ${movement.water}`],
@@ -115,7 +113,7 @@ export default class GroupActorSheet extends ActorSheet {
     speeds = speeds.filter(s => !!s[0]).sort((a, b) => b[0] - a[0]);
     const primary = speeds.shift();
     return {
-      primary: `${primary ? primary[1] : "0"} ${movement.units}`,
+      primary: `${primary ? primary[1] : "0"}`,
       secondary: speeds.map(s => s[1]).join(", ")
     };
   }

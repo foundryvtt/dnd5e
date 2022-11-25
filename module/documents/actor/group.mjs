@@ -26,8 +26,7 @@ export default class GroupActor extends foundry.abstract.DataModel {
         movement: new fields.SchemaField({
           land: new fields.NumberField({min: 0, initial: 0, nullable: false}),
           water: new fields.NumberField({min: 0, initial: 0, nullable: false}),
-          air: new fields.NumberField({min: 0, initial: 0, nullable: false}),
-          units: new fields.StringField({blank: false, choices: () => CONFIG.DND5E.movementUnits, initial: "mi"})
+          air: new fields.NumberField({min: 0, initial: 0, nullable: false})
         })
       })
     }
