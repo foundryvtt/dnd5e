@@ -62,7 +62,7 @@ export default class GroupActorSheet extends ActorSheet {
         obj[k] = c.label;
         return obj;
       }, {})
-    }
+    };
     return context;
   }
 
@@ -70,6 +70,7 @@ export default class GroupActorSheet extends ActorSheet {
 
   /**
    * Prepare membership data for the sheet.
+   * @returns {{sections: object, stats: object}}
    */
   #prepareMembers() {
     const stats = {
@@ -77,7 +78,7 @@ export default class GroupActorSheet extends ActorSheet {
       maxHP: 0,
       nMembers: 0,
       nVehicles: 0
-    }
+    };
     const sections = {
       character: {label: "Player Characters", members: []},
       npc: {label: "Non-Player Characters", members: []},
@@ -137,6 +138,7 @@ export default class GroupActorSheet extends ActorSheet {
 
   /**
    * Prepare inventory items for rendering on the sheet.
+   * @param {object[]} items      Prepared rendering data for owned items
    * @returns {Object<string,object>}
    */
   #prepareInventory(items) {
@@ -145,6 +147,7 @@ export default class GroupActorSheet extends ActorSheet {
     const sections = {
       weapon: {label: "DND5E.ItemTypeWeaponPl", items: [], hasActions: false, dataset: {type: "weapon"}},
       equipment: {label: "DND5E.ItemTypeEquipmentPl", items: [], hasActions: false, dataset: {type: "equipment"}},
+      consumable: {label: "DND5E.ItemTypeConsumablePl", items: [], hasActions: false, dataset: {type: "consumable"}},
       backpack: {label: "DND5E.ItemTypeContainerPl", items: [], hasActions: false, dataset: {type: "backpack"}},
       loot: {label: "DND5E.ItemTypeLootPl", items: [], hasActions: false, dataset: {type: "loot"}}
     };
@@ -154,7 +157,7 @@ export default class GroupActorSheet extends ActorSheet {
       const {quantity} = item.system;
       item.isStack = Number.isNumeric(quantity) && (quantity > 1);
       item.canToggle = false;
-      if ( ["weapon", "equipment", "backpack"].includes(item.type) ) sections[item.type].items.push(item);
+      if ( (item.type in sections) && (item.type !== "loot") ) sections[item.type].items.push(item);
       else sections.loot.items.push(item);
     }
     return sections;
@@ -210,17 +213,20 @@ export default class GroupActorSheet extends ActorSheet {
     const button = event.currentTarget;
     switch ( button.dataset.action ) {
       case "convertCurrency":
-        return Dialog.confirm({
+        Dialog.confirm({
           title: `${game.i18n.localize("DND5E.CurrencyConvert")}`,
           content: `<p>${game.i18n.localize("DND5E.CurrencyConvertHint")}</p>`,
           yes: () => this.actor.convertCurrency()
         });
+        break;
       case "removeMember":
         const removeMemberId = button.closest("li.group-member").dataset.actorId;
-        return this.object.system.removeMember(removeMemberId);
+        this.object.system.removeMember(removeMemberId);
+        break;
       case "movementConfig":
         const movementConfig = new ActorMovementConfig(this.object);
-        return movementConfig.render(true);
+        movementConfig.render(true);
+        break;
     }
   }
 
@@ -235,15 +241,18 @@ export default class GroupActorSheet extends ActorSheet {
     const button = event.currentTarget;
     switch ( button.dataset.action ) {
       case "itemCreate":
-        return this.#createItem(button);
+        this.#createItem(button);
+        break;
       case "itemDelete":
         const deleteLi = event.currentTarget.closest(".item");
         const deleteItem = this.actor.items.get(deleteLi.dataset.itemId);
-        return deleteItem.deleteDialog();
+        deleteItem.deleteDialog();
+        break;
       case "itemEdit":
         const editLi = event.currentTarget.closest(".item");
         const editItem = this.actor.items.get(editLi.dataset.itemId);
-        return editItem.sheet.render(true);
+        editItem.sheet.render(true);
+        break;
     }
   }
 

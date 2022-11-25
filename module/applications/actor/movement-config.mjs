@@ -38,7 +38,7 @@ export default class ActorMovementConfig extends DocumentSheet {
       land: "DND5E.MovementLand",
       water: "DND5E.MovementWater",
       air: "DND5E.MovementAir"
-    }: {
+    } : {
       walk: "DND5E.MovementWalk",
       burrow: "DND5E.MovementBurrow",
       climb: "DND5E.MovementClimb",

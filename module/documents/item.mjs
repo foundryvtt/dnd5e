@@ -25,13 +25,12 @@ export default class Item5e extends Item {
    * @type {string|null}
    */
   get abilityMod() {
-    if ( !("ability" in this.system) ) return null;
 
     // Case 1 - defined directly by the item
     if ( this.system.ability ) return this.system.ability;
 
     // Case 2 - inferred from a parent actor
-    if ( this.actor ) {
+    if ( this.actor && ("ability" in this.actor.system) ) {
       const abilities = this.actor.system.abilities;
       const spellcasting = this.actor.system.attributes.spellcasting;
 

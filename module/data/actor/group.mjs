@@ -49,10 +49,12 @@ export default class GroupActor extends foundry.abstract.DataModel {
    */
   _prepareBaseData() {
     this.members.clear();
-    for ( const id of this._source.members) {
+    for ( const id of this._source.members ) {
       const a = game.actors.get(id);
       if ( a ) {
-        if ( a.type === "group" ) console.warn(`Group "${this._id}" may not contain another Group "${a.id}" as a member.`)
+        if ( a.type === "group" ) {
+          console.warn(`Group "${this._id}" may not contain another Group "${a.id}" as a member.`);
+        }
         else this.members.add(a);
       }
       else console.warn(`Actor "${id}" in group "${this._id}" does not exist within the World.`);
@@ -77,8 +79,8 @@ export default class GroupActor extends foundry.abstract.DataModel {
    * @returns {Promise<Actor5e>}      The updated group Actor
    */
   async addMember(actor) {
-    if ( actor.type === "group" ) throw new Error(`You may not add a group within a group.`);
-    if ( actor.pack ) throw new Error(`You may only add Actors to the group which exist within the World.`);
+    if ( actor.type === "group" ) throw new Error("You may not add a group within a group.");
+    if ( actor.pack ) throw new Error("You may only add Actors to the group which exist within the World.");
     const memberIds = this._source.members;
     if ( memberIds.includes(actor.id) ) return;
     return this.parent.update({
@@ -92,6 +94,7 @@ export default class GroupActor extends foundry.abstract.DataModel {
 
   /**
    * Remove a member from the group.
+   * @param {Actor5e} actor           An Actor to remove from this group
    * @returns {Promise<Actor5e>}      The updated group Actor
    */
   async removeMember(actor) {
