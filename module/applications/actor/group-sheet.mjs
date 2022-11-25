@@ -143,10 +143,10 @@ export default class GroupActorSheet extends ActorSheet {
 
     // Categorize as weapons, equipment, containers, and loot
     const sections = {
-      weapon: {label: "Weapons", items: [], hasActions: false, dataset: {type: "weapon"}},
-      equipment: {label: "Equipment", items: [], hasActions: false, dataset: {type: "equipment"}},
-      backpack: {label: "Containers", items: [], hasActions: false, dataset: {type: "backpack"}},
-      loot: {label: "Loot", items: [], hasActions: false, dataset: {type: "loot"}}
+      weapon: {label: "DND5E.ItemTypeWeaponPl", items: [], hasActions: false, dataset: {type: "weapon"}},
+      equipment: {label: "DND5E.ItemTypeEquipmentPl", items: [], hasActions: false, dataset: {type: "equipment"}},
+      backpack: {label: "DND5E.ItemTypeContainerPl", items: [], hasActions: false, dataset: {type: "backpack"}},
+      loot: {label: "DND5E.ItemTypeLootPl", items: [], hasActions: false, dataset: {type: "loot"}}
     };
 
     // Classify items

@@ -71,6 +71,11 @@ export default class GroupActor extends foundry.abstract.DataModel {
   /*  Methods                                     */
   /* -------------------------------------------- */
 
+  /**
+   * Add a new member to the group.
+   * @param {Actor5e} actor           A non-group Actor to add to the group
+   * @returns {Promise<Actor5e>}      The updated group Actor
+   */
   async addMember(actor) {
     if ( actor.type === "group" ) throw new Error(`You may not add a group within a group.`);
     if ( actor.pack ) throw new Error(`You may only add Actors to the group which exist within the World.`);
@@ -85,6 +90,10 @@ export default class GroupActor extends foundry.abstract.DataModel {
 
   /* -------------------------------------------- */
 
+  /**
+   * Remove a member from the group.
+   * @returns {Promise<Actor5e>}      The updated group Actor
+   */
   async removeMember(actor) {
     const memberIds = Array.from(this._source.members);
     const actorId = actor instanceof Actor ? actor.id : actor;

@@ -905,6 +905,7 @@ export default class Actor5e extends Actor {
   async applyDamage(amount=0, multiplier=1) {
     amount = Math.floor(parseInt(amount) * multiplier);
     const hp = this.system.attributes.hp;
+    if ( !hp ) return this; // Group actors don't have HP at the moment
 
     // Deduct damage from temp HP first
     const tmp = parseInt(hp.temp) || 0;
