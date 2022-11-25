@@ -18,16 +18,23 @@ export default class GroupActor extends foundry.abstract.DataModel {
     const fields = foundry.data.fields;
     return {
       description: new fields.SchemaField({
-        full: new fields.StringField(),
-        summary: new fields.StringField()
+        full: new fields.HTMLField(),
+        summary: new fields.HTMLField()
       }),
       members: new fields.SetField(new fields.ForeignDocumentField(foundry.documents.BaseActor, {idOnly: true})),
       attributes: new fields.SchemaField({
         movement: new fields.SchemaField({
-          land: new fields.NumberField({min: 0, initial: 0, nullable: false}),
-          water: new fields.NumberField({min: 0, initial: 0, nullable: false}),
-          air: new fields.NumberField({min: 0, initial: 0, nullable: false})
+          land: new fields.NumberField({initial: 0, nullable: false, integer: true, min: 0}),
+          water: new fields.NumberField({initial: 0, nullable: false, integer: true, min: 0}),
+          air: new fields.NumberField({initial: 0, nullable: false, integer: true, min: 0})
         })
+      }),
+      currency: new fields.SchemaField({
+        pp: new fields.NumberField({nullable: false, initial: 0, integer: true, min: 0}),
+        gp: new fields.NumberField({nullable: false, initial: 0, integer: true, min: 0}),
+        ep: new fields.NumberField({nullable: false, initial: 0, integer: true, min: 0}),
+        sp: new fields.NumberField({nullable: false, initial: 0, integer: true, min: 0}),
+        cp: new fields.NumberField({nullable: false, initial: 0, integer: true, min: 0})
       })
     }
   }

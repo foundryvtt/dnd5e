@@ -61,11 +61,14 @@
                             <h4 class="document-name"><a class="member-link">{{member.name}}</a></h4>
                         </div>
                         <div class="hp flexrow">
-                            <span class="current">{{member.hp.current}}</span>
                             <div class="bar-container">
                                 <div class="bar" style="width:{{member.hp.pct}}%; background:{{member.hp.color}}; border-color:{{member.hp.border}}"></div>
                             </div>
+                            {{#if displayHPValues}}
+                            <span class="current">{{member.hp.current}}</span>
+                            <span class="sep">/</span>
                             <span class="max">{{member.hp.max}}</span>
+                            {{/if}}
                         </div>
                         <div class="controls">
                             <a class="action-button" data-action="removeMember"><i class="fa-solid fa-close"></i></a>
@@ -77,7 +80,10 @@
             {{/each}}
         </div>
 
-        <div class="tab inventory" data-group="primary" data-tab="inventory"></div>
+        <div class="tab inventory" data-group="primary" data-tab="inventory">
+            {{> "dnd5e.actor-inventory" sections=inventory}}
+        </div>
+
         <div class="tab description" data-group="primary" data-tab="description">
             {{editor descriptionFull target="system.description.full" button=true editable=editable
                      engine="prosemirror" collaborate=false}}

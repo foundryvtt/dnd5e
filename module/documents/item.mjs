@@ -1830,7 +1830,7 @@ export default class Item5e extends Item {
 
     // Include an ability score modifier if one exists
     const abl = this.abilityMod;
-    if ( abl ) {
+    if ( abl && ("abilities" in rollData) ) {
       const ability = rollData.abilities[abl];
       if ( !ability ) {
         console.warn(`Item ${this.name} in Actor ${this.actor.name} has an invalid item ability modifier of ${abl} defined`);

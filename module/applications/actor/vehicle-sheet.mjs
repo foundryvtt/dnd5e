@@ -166,6 +166,7 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
 
     context.items.forEach(item => {
       const {uses, recharge} = item.system;
+      item.canToggle = false;
       item.hasUses = uses && (uses.max > 0);
       item.isOnCooldown = recharge && !!recharge.value && (recharge.charged === false);
       item.isDepleted = item.isOnCooldown && (uses.per && (uses.value > 0));
@@ -245,6 +246,7 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
     }
 
     // Update the rendering context data
+    context.inventoryFilters = false;
     context.features = Object.values(features);
     context.cargo = Object.values(cargo);
     context.system.attributes.encumbrance = this._computeEncumbrance(totalWeight, context);

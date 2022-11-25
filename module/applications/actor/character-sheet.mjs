@@ -159,6 +159,7 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
     }
 
     // Assign and return
+    context.inventoryFilters = true;
     context.inventory = Object.values(inventory);
     context.spellbook = spellbook;
     context.preparedSpells = nPrepared;

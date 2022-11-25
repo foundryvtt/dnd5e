@@ -25,6 +25,7 @@ export default class GroupActorSheet extends ActorSheet {
   /** @inheritDoc */
   async getData(options={}) {
     const context = super.getData(options);
+    context.system = context.data.system;
 
     // Membership
     const {sections, stats} = this.#prepareMembers();
@@ -33,6 +34,11 @@ export default class GroupActorSheet extends ActorSheet {
 
     // Movement
     context.movement = this.#prepareMovementSpeed();
+
+    // Inventory
+    context.inventory = this.#prepareInventory(context.items);
+    context.inventoryFilters = false;
+    context.rollableClass = this.isEditable ? "rollable" : "";
 
     // Biography HTML
     context.descriptionFull = await TextEditor.enrichHTML(this.actor.system.description.full, {
@@ -48,7 +54,15 @@ export default class GroupActorSheet extends ActorSheet {
         stats.nMembers ? `${stats.nMembers} ${game.i18n.localize("DND5E.GroupMembers")}` : "",
         stats.nVehicles ? `${stats.nVehicles} ${game.i18n.localize("DND5E.GroupVehicles")}` : ""
       ].filterJoin(` ${game.i18n.localize("and")} `)
-    })
+    });
+
+    // Text labels
+    context.labels = {
+      currencies: Object.entries(CONFIG.DND5E.currencies).reduce((obj, [k, c]) => {
+        obj[k] = c.label;
+        return obj;
+      }, {})
+    }
     return context;
   }
 
@@ -75,7 +89,8 @@ export default class GroupActorSheet extends ActorSheet {
         id: member.id,
         name: member.name,
         img: member.img,
-        hp: {}
+        hp: {},
+        displayHPValues: member.testUserPermission(game.user, "OBSERVER")
       };
 
       // HP bar
@@ -119,6 +134,33 @@ export default class GroupActorSheet extends ActorSheet {
   }
 
   /* -------------------------------------------- */
+
+  /**
+   * Prepare inventory items for rendering on the sheet.
+   * @returns {Object<string,object>}
+   */
+  #prepareInventory(items) {
+
+    // Categorize as weapons, equipment, containers, and loot
+    const sections = {
+      weapon: {label: "Weapons", items: [], hasActions: false, dataset: {type: "weapon"}},
+      equipment: {label: "Equipment", items: [], hasActions: false, dataset: {type: "equipment"}},
+      backpack: {label: "Containers", items: [], hasActions: false, dataset: {type: "backpack"}},
+      loot: {label: "Loot", items: [], hasActions: false, dataset: {type: "loot"}}
+    };
+
+    // Classify items
+    for ( const item of items ) {
+      const {quantity} = item.system;
+      item.isStack = Number.isNumeric(quantity) && (quantity > 1);
+      item.canToggle = false;
+      if ( ["weapon", "equipment", "backpack"].includes(item.type) ) sections[item.type].items.push(item);
+      else sections.loot.items.push(item);
+    }
+    return sections;
+  }
+
+  /* -------------------------------------------- */
   /*  Rendering Workflow                          */
   /* -------------------------------------------- */
 
@@ -148,7 +190,13 @@ export default class GroupActorSheet extends ActorSheet {
   activateListeners(html) {
     super.activateListeners(html);
     html.find(".group-member .name").click(this.#onClickMemberName.bind(this));
+
+    // Action buttons
     html.find(".action-button").click(this.#onClickActionButton.bind(this));
+    html.find(".item-control").click(this.#onClickItemControl.bind(this));
+
+    // Item summaries
+    html.find(".item .rollable h4").click(event => this.#onClickItemName(event));
   }
 
   /* -------------------------------------------- */
@@ -161,6 +209,12 @@ export default class GroupActorSheet extends ActorSheet {
     event.preventDefault();
     const button = event.currentTarget;
     switch ( button.dataset.action ) {
+      case "convertCurrency":
+        return Dialog.confirm({
+          title: `${game.i18n.localize("DND5E.CurrencyConvert")}`,
+          content: `<p>${game.i18n.localize("DND5E.CurrencyConvertHint")}</p>`,
+          yes: () => this.actor.convertCurrency()
+        });
       case "removeMember":
         const removeMemberId = button.closest("li.group-member").dataset.actorId;
         return this.object.system.removeMember(removeMemberId);
@@ -168,6 +222,45 @@ export default class GroupActorSheet extends ActorSheet {
         const movementConfig = new ActorMovementConfig(this.object);
         return movementConfig.render(true);
     }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle clicks to item control buttons on the group sheet.
+   * @param {PointerEvent} event      The initiating click event
+   */
+  #onClickItemControl(event) {
+    event.preventDefault();
+    const button = event.currentTarget;
+    switch ( button.dataset.action ) {
+      case "itemCreate":
+        return this.#createItem(button);
+      case "itemDelete":
+        const deleteLi = event.currentTarget.closest(".item");
+        const deleteItem = this.actor.items.get(deleteLi.dataset.itemId);
+        return deleteItem.deleteDialog();
+      case "itemEdit":
+        const editLi = event.currentTarget.closest(".item");
+        const editItem = this.actor.items.get(editLi.dataset.itemId);
+        return editItem.sheet.render(true);
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle workflows to create a new Item directly within the Group Actor sheet.
+   * @param {HTMLElement} button      The clicked create button
+   * @returns {Item5e}                The created embedded Item
+   */
+  #createItem(button) {
+    const type = button.dataset.type;
+    const system = {...button.dataset};
+    delete system.type;
+    const name = game.i18n.format("DND5E.ItemNew", {type: game.i18n.localize(`DND5E.ItemType${type.capitalize()}`)});
+    const itemData = {name, type, system};
+    return this.actor.createEmbeddedDocuments("Item", [itemData]);
   }
 
   /* -------------------------------------------- */
@@ -181,6 +274,16 @@ export default class GroupActorSheet extends ActorSheet {
     const member = event.currentTarget.closest("li.group-member");
     const actor = game.actors.get(member.dataset.actorId);
     if ( actor ) actor.sheet.render(true, {focus: true});
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle clicks on an item name to expand its description
+   * @param {PointerEvent} event      The initiating click event
+   */
+  #onClickItemName(event) {
+    return game.system.applications.actor.ActorSheet5e.prototype._onItemSummary.call(this, event);
   }
 
   /* -------------------------------------------- */
