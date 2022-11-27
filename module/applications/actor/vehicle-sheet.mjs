@@ -139,7 +139,7 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
         }]
       },
       equipment: {
-        label: game.i18n.localize("DND5E.ItemTypeEquipment"),
+        label: game.i18n.localize("ITEM.TypeEquipment"),
         items: [],
         crewable: true,
         dataset: {type: "equipment", "armor.type": "vehicle"},
@@ -156,7 +156,7 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
         dataset: {type: "feat", "activation.type": "reaction"}
       },
       weapons: {
-        label: game.i18n.localize("DND5E.ItemTypeWeaponPl"),
+        label: game.i18n.localize("ITEM.TypeWeaponPl"),
         items: [],
         crewable: true,
         dataset: {type: "weapon", "weapon-type": "siege"},

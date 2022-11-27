@@ -1284,7 +1284,7 @@ export default class Item5e extends Item {
    */
   _lootChatData(data, labels, props) {
     props.push(
-      game.i18n.localize("DND5E.ItemTypeLoot"),
+      game.i18n.localize("ITEM.TypeLoot"),
       data.weight ? `${data.weight} ${game.i18n.localize("DND5E.AbbreviationLbs")}` : null
     );
   }

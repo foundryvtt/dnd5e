@@ -1061,7 +1061,7 @@ export default class ActorSheet5e extends ActorSheet {
     }
 
     const itemData = {
-      name: game.i18n.format("DND5E.ItemNew", {type: game.i18n.localize(`DND5E.ItemType${type.capitalize()}`)}),
+      name: game.i18n.format("DND5E.ItemNew", {type: game.i18n.localize(`ITEM.Type${type.capitalize()}`)}),
       type: type,
       system: { ...header.dataset }
     };
