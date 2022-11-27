@@ -13,6 +13,7 @@ export default class GroupActorSheet extends ActorSheet {
       classes: ["dnd5e", "sheet", "actor", "group"],
       template: "systems/dnd5e/templates/actors/group-sheet.hbs",
       tabs: [{navSelector: ".tabs", contentSelector: ".sheet-body", initial: "members"}],
+      scrollY: [".inventory .inventory-list"],
       width: 620,
       height: 620
     });
@@ -49,12 +50,7 @@ export default class GroupActorSheet extends ActorSheet {
     });
 
     // Summary tag
-    context.summary = game.i18n.format("DND5E.GroupSummary", {
-      members: [
-        stats.nMembers ? `${stats.nMembers} ${game.i18n.localize("DND5E.GroupMembers")}` : "",
-        stats.nVehicles ? `${stats.nVehicles} ${game.i18n.localize("DND5E.GroupVehicles")}` : ""
-      ].filterJoin(` ${game.i18n.localize("and")} `)
-    });
+    context.summary = this.#getSummary(stats);
 
     // Text labels
     context.labels = {
@@ -64,6 +60,21 @@ export default class GroupActorSheet extends ActorSheet {
       }, {})
     };
     return context;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare a localized summary of group membership.
+   * @param {{nMembers: number, nVehicles: number}} stats     The number of members in the group
+   * @returns {string}                                        The formatted summary string
+   */
+  #getSummary(stats) {
+    const formatter = new Intl.ListFormat(game.i18n.lang, {style: "long", type: "conjunction"});
+    const members = [];
+    if ( stats.nMembers ) members.push(`${stats.nMembers} ${game.i18n.localize("DND5E.GroupMembers")}`);
+    if ( stats.nVehicles ) members.push(`${stats.nVehicles} ${game.i18n.localize("DND5E.GroupVehicles")}`);
+    return game.i18n.format("DND5E.GroupSummary", {members: formatter.format(members)});
   }
 
   /* -------------------------------------------- */
@@ -80,9 +91,9 @@ export default class GroupActorSheet extends ActorSheet {
       nVehicles: 0
     };
     const sections = {
-      character: {label: "Player Characters", members: []},
-      npc: {label: "Non-Player Characters", members: []},
-      vehicle: {label: "Vehicles", members: []}
+      character: {label: "ACTOR.TypeCharacterPl", members: []},
+      npc: {label: "ACTOR.TypeNpcPl", members: []},
+      vehicle: {label: "ACTOR.TypeVehiclePl", members: []}
     };
     for ( const member of this.object.system.members ) {
       const m = {
@@ -103,8 +114,8 @@ export default class GroupActorSheet extends ActorSheet {
       stats.currentHP += m.hp.current;
       stats.maxHP += m.hp.max;
 
-      if ( member.type !== "vehicle" ) stats.nMembers++;
-      else stats.nVehicles++;
+      if ( member.type === "vehicle" ) stats.nVehicles++;
+      else stats.nMembers++;
       sections[member.type].members.push(m);
     }
     for ( const [k, section] of Object.entries(sections) ) {
@@ -126,7 +137,7 @@ export default class GroupActorSheet extends ActorSheet {
       [movement.water, `${game.i18n.localize("DND5E.MovementWater")} ${movement.water}`],
       [movement.air, `${game.i18n.localize("DND5E.MovementAir")} ${movement.air}`]
     ];
-    speeds = speeds.filter(s => !!s[0]).sort((a, b) => b[0] - a[0]);
+    speeds = speeds.filter(s => s[0]).sort((a, b) => b[0] - a[0]);
     const primary = speeds.shift();
     return {
       primary: `${primary ? primary[1] : "0"}`,
@@ -192,14 +203,10 @@ export default class GroupActorSheet extends ActorSheet {
   /** @inheritDoc */
   activateListeners(html) {
     super.activateListeners(html);
-    html.find(".group-member .name").click(this.#onClickMemberName.bind(this));
-
-    // Action buttons
-    html.find(".action-button").click(this.#onClickActionButton.bind(this));
-    html.find(".item-control").click(this.#onClickItemControl.bind(this));
-
-    // Item summaries
-    html.find(".item .rollable h4").click(event => this.#onClickItemName(event));
+    html.find(".group-member .name").click(this._onClickMemberName.bind(this));
+    html.find(".action-button").click(this._onClickActionButton.bind(this));
+    html.find(".item-control").click(this._onClickItemControl.bind(this));
+    html.find(".item .rollable h4").click(event => this._onClickItemName(event));
   }
 
   /* -------------------------------------------- */
@@ -207,8 +214,9 @@ export default class GroupActorSheet extends ActorSheet {
   /**
    * Handle clicks to action buttons on the group sheet.
    * @param {PointerEvent} event      The initiating click event
+   * @protected
    */
-  #onClickActionButton(event) {
+  _onClickActionButton(event) {
     event.preventDefault();
     const button = event.currentTarget;
     switch ( button.dataset.action ) {
@@ -235,13 +243,14 @@ export default class GroupActorSheet extends ActorSheet {
   /**
    * Handle clicks to item control buttons on the group sheet.
    * @param {PointerEvent} event      The initiating click event
+   * @protected
    */
-  #onClickItemControl(event) {
+  _onClickItemControl(event) {
     event.preventDefault();
     const button = event.currentTarget;
     switch ( button.dataset.action ) {
       case "itemCreate":
-        this.#createItem(button);
+        this._createItem(button);
         break;
       case "itemDelete":
         const deleteLi = event.currentTarget.closest(".item");
@@ -262,8 +271,9 @@ export default class GroupActorSheet extends ActorSheet {
    * Handle workflows to create a new Item directly within the Group Actor sheet.
    * @param {HTMLElement} button      The clicked create button
    * @returns {Item5e}                The created embedded Item
+   * @protected
    */
-  #createItem(button) {
+  _createItem(button) {
     const type = button.dataset.type;
     const system = {...button.dataset};
     delete system.type;
@@ -277,8 +287,9 @@ export default class GroupActorSheet extends ActorSheet {
   /**
    * Handle clicks on member names in the members list.
    * @param {PointerEvent} event      The initiating click event
+   * @protected
    */
-  #onClickMemberName(event) {
+  _onClickMemberName(event) {
     event.preventDefault();
     const member = event.currentTarget.closest("li.group-member");
     const actor = game.actors.get(member.dataset.actorId);
@@ -290,8 +301,9 @@ export default class GroupActorSheet extends ActorSheet {
   /**
    * Handle clicks on an item name to expand its description
    * @param {PointerEvent} event      The initiating click event
+   * @protected
    */
-  #onClickItemName(event) {
+  _onClickItemName(event) {
     return game.system.applications.actor.ActorSheet5e.prototype._onItemSummary.call(this, event);
   }
 

@@ -36,7 +36,7 @@ export default class GroupActor extends foundry.abstract.DataModel {
         sp: new fields.NumberField({nullable: false, initial: 0, integer: true, min: 0}),
         cp: new fields.NumberField({nullable: false, initial: 0, integer: true, min: 0})
       })
-    }
+    };
   }
 
   /* -------------------------------------------- */
@@ -94,13 +94,20 @@ export default class GroupActor extends foundry.abstract.DataModel {
 
   /**
    * Remove a member from the group.
-   * @param {Actor5e} actor           An Actor to remove from this group
+   * @param {Actor5e|string} actor    An Actor or ID to remove from this group
    * @returns {Promise<Actor5e>}      The updated group Actor
    */
   async removeMember(actor) {
-    const memberIds = Array.from(this._source.members);
-    const actorId = actor instanceof Actor ? actor.id : actor;
-    if ( !memberIds.includes(actorId) ) return;
+    const memberIds = foundry.utils.deepClone(this._source.members);
+
+    // Handle user input
+    let actorId;
+    if ( typeof actor === "string" ) actorId = actor;
+    else if ( actor instanceof Actor ) actorId = actor.id;
+    else throw new Error("You must provide an Actor document or an actor ID to remove a group member");
+    if ( !memberIds.includes(actorId) ) throw new Error(`Actor id "${actorId}" is not a group member`);
+
+    // Remove the actor and update the parent document
     memberIds.findSplice(id => id === actorId);
     return this.parent.update({
       system: {

@@ -47,13 +47,13 @@
     <section class="sheet-body">
         <div class="tab members" data-group="primary" data-tab="members">
             {{#each sections as |section id|}}
-            <section class="group-members directory" data-section="{{id}}">
+            <section class="directory" data-section="{{id}}">
                 <header class="directory-header flexrow">
-                    <h3 class="name">{{section.label}}</h3>
-                    <span class="hp">Hit Points</span>
-                    <span class="controls">Controls</span>
+                    <h3 class="name">{{localize section.label}}</h3>
+                    <span class="hp">{{localize "DND5E.HitPoints"}}</span>
+                    <span class="controls">{{localize "DND5E.GroupControls"}}</span>
                 </header>
-                <ol class="section-members directory-list">
+                <ol class="members-list directory-list">
                     {{#each section.members as |member|}}
                     <li class="group-member directory-item flexrow" data-actor-id="{{member.id}}">
                         <div class="name flexrow">
@@ -80,7 +80,7 @@
             {{/each}}
         </div>
 
-        <div class="tab inventory" data-group="primary" data-tab="inventory">
+        <div class="tab inventory flexcol" data-group="primary" data-tab="inventory">
             {{> "dnd5e.actor-inventory" sections=inventory}}
         </div>
 

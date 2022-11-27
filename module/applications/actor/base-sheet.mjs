@@ -214,7 +214,7 @@ export default class ActorSheet5e extends ActorSheet {
     }
 
     // Filter and sort speeds on their values
-    speeds = speeds.filter(s => !!s[0]).sort((a, b) => b[0] - a[0]);
+    speeds = speeds.filter(s => s[0]).sort((a, b) => b[0] - a[0]);
 
     // Case 1: Largest as primary
     if ( largestPrimary ) {

@@ -6,7 +6,7 @@
   }
 
   /** Members Directory */
-  .group-members {
+  .members {
     .directory-header {
       height: 28px;
       margin: 2px 0;
@@ -24,21 +24,20 @@
       }
     }
 
-    .directory-item {
+    .group-member {
       padding: 0 0.5rem;
-    }
-
-    .name {
-      cursor: pointer;
+      .name {
+        cursor: pointer;
+      }
     }
 
     .hp {
       flex: 2;
       align-items: center;
-      text-align: center;
 
       .current, .max {
         flex: 0 0 40px;
+        text-align: center;
       }
       .bar-container {
         background: #111;
