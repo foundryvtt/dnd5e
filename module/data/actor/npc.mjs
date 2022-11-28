@@ -28,7 +28,7 @@ import CreatureTemplate from "./templates/creature.mjs";
  * @property {boolean} resources.lair.value      Does this NPC use lair actions.
  * @property {number} resources.lair.initiative  Initiative count when lair actions are triggered.
  */
-export class NPCData extends CreatureTemplate {
+export default class NPCData extends CreatureTemplate {
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
       attributes: new foundry.data.fields.SchemaField({

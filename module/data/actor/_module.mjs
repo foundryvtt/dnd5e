@@ -1,11 +1,11 @@
 import CharacterData from "./character.mjs";
-import GroupActor from "./group.mjs";
-import { NPCData } from "./npc.mjs";
+import GroupData from "./group.mjs";
+import NPCData from "./npc.mjs";
 import VehicleData from "./vehicle.mjs";
 
 export {
   CharacterData,
-  GroupActor,
+  GroupData,
   NPCData,
   VehicleData
 };
@@ -15,7 +15,7 @@ export {default as SkillData} from "./skill.mjs";
 
 export const config = {
   character: CharacterData,
-  group: GroupActor,
+  group: GroupData,
   npc: NPCData,
   vehicle: VehicleData
 };

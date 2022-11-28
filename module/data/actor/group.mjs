@@ -5,6 +5,17 @@ import CurrencyTemplate from "../shared/currency.mjs";
  * A data model and API layer which handles the schema and functionality of "group" type Actors in the dnd5e system.
  * @mixes CurrencyTemplate
  *
+ * @property {object} description
+ * @property {string} description.full           Description of this group.
+ * @property {string} description.summary        Summary description (currently unused).
+ * @property {Set<string>} members               IDs of actors belonging to this group in the world collection.
+ * @property {object} attributes
+ * @property {object} attributes.movement
+ * @property {number} attributes.movement.land   Base movement speed over land.
+ * @property {number} attributes.movement.water  Base movement speed over water.
+ * @property {number} attributes.movement.air    Base movement speed through the air.
+ * @property {CurrencyData} currency             Any money currently held in this group's shared pool.
+ *
  * @example Create a new Group
  * const g = new dnd5e.documents.Actor5e({
  *  type: "group",
@@ -17,27 +28,28 @@ import CurrencyTemplate from "../shared/currency.mjs";
 export default class GroupActor extends SystemDataModel.mixin(CurrencyTemplate) {
   /** @inheritdoc */
   static defineSchema() {
-    const fields = foundry.data.fields;
     return {
-      description: new fields.SchemaField({
-        full: new fields.HTMLField(),
-        summary: new fields.HTMLField()
+      description: new foundry.data.fields.SchemaField({
+        full: new foundry.data.fields.HTMLField({label: "DND5E.Description"}),
+        summary: new foundry.data.fields.HTMLField({label: "DND5E.DescriptionSummary"})
       }),
-      members: new fields.SetField(new fields.ForeignDocumentField(foundry.documents.BaseActor, {idOnly: true})),
-      attributes: new fields.SchemaField({
-        movement: new fields.SchemaField({
-          land: new fields.NumberField({initial: 0, nullable: false, integer: true, min: 0}),
-          water: new fields.NumberField({initial: 0, nullable: false, integer: true, min: 0}),
-          air: new fields.NumberField({initial: 0, nullable: false, integer: true, min: 0})
+      members: new foundry.data.fields.SetField(
+        new foundry.data.fields.ForeignDocumentField(foundry.documents.BaseActor, {idOnly: true}),
+        {label: "DND5E.GroupMembers"}
+      ),
+      attributes: new foundry.data.fields.SchemaField({
+        movement: new foundry.data.fields.SchemaField({
+          land: new foundry.data.fields.NumberField({
+            initial: 0, nullable: false, integer: true, min: 0, label: "DND5E.MovementLand"
+          }),
+          water: new foundry.data.fields.NumberField({
+            initial: 0, nullable: false, integer: true, min: 0, label: "DND5E.MovementWater"
+          }),
+          air: new foundry.data.fields.NumberField({
+            initial: 0, nullable: false, integer: true, min: 0, label: "DND5E.MovementAir"
+          })
         })
-      }),
-      currency: new fields.SchemaField({
-        pp: new fields.NumberField({nullable: false, initial: 0, integer: true, min: 0}),
-        gp: new fields.NumberField({nullable: false, initial: 0, integer: true, min: 0}),
-        ep: new fields.NumberField({nullable: false, initial: 0, integer: true, min: 0}),
-        sp: new fields.NumberField({nullable: false, initial: 0, integer: true, min: 0}),
-        cp: new fields.NumberField({nullable: false, initial: 0, integer: true, min: 0})
-      })
+      }, {label: "DND5E.Attributes"})
     };
   }
 
