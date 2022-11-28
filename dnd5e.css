@@ -2132,3 +2132,58 @@ h5 {
   max-width: 40px;
   text-align: right;
 }
+.dnd5e.sheet.group {
+  /** Members Directory */
+}
+.dnd5e.sheet.group .attribute.health span.value {
+  line-height: 64px;
+  flex: 0 0 64px;
+}
+.dnd5e.sheet.group .members .directory-header {
+  height: 28px;
+  margin: 2px 0;
+  padding: 0 0.5rem;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.05);
+  border: 2px groove #eeede0;
+}
+.dnd5e.sheet.group .members .directory-header > * {
+  margin: 0;
+  font-family: "Modesto Condensed", "Palatino Linotype", serif;
+  font-size: 20px;
+  font-weight: 700;
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 20px;
+  text-align: left;
+}
+.dnd5e.sheet.group .members .group-member {
+  padding: 0 0.5rem;
+}
+.dnd5e.sheet.group .members .group-member .name {
+  cursor: pointer;
+}
+.dnd5e.sheet.group .members .hp {
+  flex: 2;
+  align-items: center;
+}
+.dnd5e.sheet.group .members .hp .current,
+.dnd5e.sheet.group .members .hp .max {
+  flex: 0 0 40px;
+  text-align: center;
+}
+.dnd5e.sheet.group .members .hp .bar-container {
+  background: #111;
+  height: 20px;
+  padding: 1px;
+  border: 1px solid #000;
+  border-radius: 6px;
+}
+.dnd5e.sheet.group .members .hp .bar {
+  height: 16px;
+  border-radius: 4px;
+}
+.dnd5e.sheet.group .members .controls {
+  flex: 0 0 64px;
+  text-align: right;
+}

@@ -25,13 +25,12 @@ export default class Item5e extends Item {
    * @type {string|null}
    */
   get abilityMod() {
-    if ( !("ability" in this.system) ) return null;
 
     // Case 1 - defined directly by the item
     if ( this.system.ability ) return this.system.ability;
 
     // Case 2 - inferred from a parent actor
-    if ( this.actor ) {
+    if ( this.actor && ("ability" in this.actor.system) ) {
       const abilities = this.actor.system.abilities;
       const spellcasting = this.actor.system.attributes.spellcasting;
 
@@ -476,8 +475,10 @@ export default class Item5e extends Item {
   prepareFinalAttributes() {
 
     // Proficiency
-    const isProficient = (this.type === "spell") || this.system.proficient; // Always proficient in spell attacks.
-    this.system.prof = new Proficiency(this.actor?.system.attributes.prof, isProficient);
+    if ( this.actor?.system.attributes?.prof ) {
+      const isProficient = (this.type === "spell") || this.system.proficient; // Always proficient in spell attacks.
+      this.system.prof = new Proficiency(this.actor?.system.attributes.prof, isProficient);
+    }
 
     // Class data
     if ( this.type === "class" ) this.system.isOriginalClass = this.isOriginalClass;
@@ -1283,7 +1284,7 @@ export default class Item5e extends Item {
    */
   _lootChatData(data, labels, props) {
     props.push(
-      game.i18n.localize("DND5E.ItemTypeLoot"),
+      game.i18n.localize("ITEM.TypeLoot"),
       data.weight ? `${data.weight} ${game.i18n.localize("DND5E.AbbreviationLbs")}` : null
     );
   }
@@ -1828,7 +1829,7 @@ export default class Item5e extends Item {
 
     // Include an ability score modifier if one exists
     const abl = this.abilityMod;
-    if ( abl ) {
+    if ( abl && ("abilities" in rollData) ) {
       const ability = rollData.abilities[abl];
       if ( !ability ) {
         console.warn(`Item ${this.name} in Actor ${this.actor.name} has an invalid item ability modifier of ${abl} defined`);

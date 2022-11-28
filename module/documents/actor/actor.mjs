@@ -82,6 +82,12 @@ export default class Actor5e extends Actor {
 
   /** @inheritDoc */
   prepareBaseData() {
+
+    // Delegate preparation to type-subclass
+    if ( this.type === "group" ) {  // Eventually other types will also support this
+      return this.system._prepareBaseData();
+    }
+
     const updates = {};
     this._prepareBaseAbilities(updates);
     this._prepareBaseSkills(updates);
@@ -91,6 +97,8 @@ export default class Actor5e extends Actor {
     }
 
     this._prepareBaseArmorClass();
+
+    // Type-specific preparation
     switch ( this.type ) {
       case "character":
         return this._prepareCharacterData();
@@ -115,6 +123,12 @@ export default class Actor5e extends Actor {
 
   /** @inheritDoc */
   prepareDerivedData() {
+
+    // Delegate preparation to type-subclass
+    if ( this.type === "group" ) {  // Eventually other types will also support this
+      return this.system._prepareDerivedData();
+    }
+
     const flags = this.flags.dnd5e || {};
     this.labels = {};
 
@@ -199,6 +213,7 @@ export default class Actor5e extends Actor {
    * @protected
    */
   _prepareBaseAbilities(updates) {
+    if ( !("abilities" in this.system) ) return;
     const abilities = {};
     for ( const key of Object.keys(CONFIG.DND5E.abilities) ) {
       abilities[key] = this.system.abilities[key];
@@ -232,7 +247,7 @@ export default class Actor5e extends Actor {
    * @private
    */
   _prepareBaseSkills(updates) {
-    if ( this.type === "vehicle") return;
+    if ( !("skills" in this.system) ) return;
     const skills = {};
     for ( const [key, skill] of Object.entries(CONFIG.DND5E.skills) ) {
       skills[key] = this.system.skills[key];
@@ -813,12 +828,14 @@ export default class Actor5e extends Actor {
     if ( sourceId?.startsWith("Compendium.") ) return;
 
     // Configure prototype token settings
-    const s = CONFIG.DND5E.tokenSizes[this.system.traits.size || "med"];
-    const prototypeToken = {width: s, height: s};
-    if ( this.type === "character" ) Object.assign(prototypeToken, {
-      sight: { enabled: true }, actorLink: true, disposition: 1
-    });
-    this.updateSource({prototypeToken});
+    if ( "size" in (this.system.traits || {}) ) {
+      const s = CONFIG.DND5E.tokenSizes[this.system.traits.size || "med"];
+      const prototypeToken = {width: s, height: s};
+      if ( this.type === "character" ) Object.assign(prototypeToken, {
+        sight: { enabled: true }, actorLink: true, disposition: 1
+      });
+      this.updateSource({prototypeToken});
+    }
   }
 
   /* -------------------------------------------- */
@@ -828,21 +845,25 @@ export default class Actor5e extends Actor {
     await super._preUpdate(changed, options, user);
 
     // Apply changes in Actor size to Token width/height
-    const newSize = foundry.utils.getProperty(changed, "system.traits.size");
-    if ( newSize && (newSize !== this.system.traits?.size) ) {
-      let size = CONFIG.DND5E.tokenSizes[newSize];
-      if ( !foundry.utils.hasProperty(changed, "prototypeToken.width") ) {
-        changed.prototypeToken ||= {};
-        changed.prototypeToken.height = size;
-        changed.prototypeToken.width = size;
+    if ( "size" in (this.system.traits || {}) ) {
+      const newSize = foundry.utils.getProperty(changed, "system.traits.size");
+      if ( newSize && (newSize !== this.system.traits?.size) ) {
+        let size = CONFIG.DND5E.tokenSizes[newSize];
+        if ( !foundry.utils.hasProperty(changed, "prototypeToken.width") ) {
+          changed.prototypeToken ||= {};
+          changed.prototypeToken.height = size;
+          changed.prototypeToken.width = size;
+        }
       }
     }
 
     // Reset death save counters
-    const isDead = this.system.attributes.hp.value <= 0;
-    if ( isDead && (foundry.utils.getProperty(changed, "system.attributes.hp.value") > 0) ) {
-      foundry.utils.setProperty(changed, "system.attributes.death.success", 0);
-      foundry.utils.setProperty(changed, "system.attributes.death.failure", 0);
+    if ( "hp" in (this.system.attributes || {}) ) {
+      const isDead = this.system.attributes.hp.value <= 0;
+      if ( isDead && (foundry.utils.getProperty(changed, "system.attributes.hp.value") > 0) ) {
+        foundry.utils.setProperty(changed, "system.attributes.death.success", 0);
+        foundry.utils.setProperty(changed, "system.attributes.death.failure", 0);
+      }
     }
   }
 
@@ -884,6 +905,7 @@ export default class Actor5e extends Actor {
   async applyDamage(amount=0, multiplier=1) {
     amount = Math.floor(parseInt(amount) * multiplier);
     const hp = this.system.attributes.hp;
+    if ( !hp ) return this; // Group actors don't have HP at the moment
 
     // Deduct damage from temp HP first
     const tmp = parseInt(hp.temp) || 0;
@@ -924,6 +946,19 @@ export default class Actor5e extends Actor {
     // Update the actor if the new amount is greater than the current
     const tmp = parseInt(hp.temp) || 0;
     return amount > tmp ? this.update({"system.attributes.hp.temp": amount}) : this;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Get a color used to represent the current hit points of an Actor.
+   * @param {number} current        The current HP value
+   * @param {number} max            The maximum HP value
+   * @returns {Color}               The color used to represent the HP percentage
+   */
+  static getHPColor(current, max) {
+    const pct = Math.clamped(current, 0, max) / max;
+    return Color.fromRGB([(1-(pct/2)), pct, 0]);
   }
 
   /* -------------------------------------------- */

@@ -105,6 +105,7 @@ export default class ActorSheet5e extends ActorSheet {
       isNPC: this.actor.type === "npc",
       isVehicle: this.actor.type === "vehicle",
       config: CONFIG.DND5E,
+      rollableClass: this.isEditable ? "rollable" : "",
       rollData: this.actor.getRollData.bind(this.actor)
     };
 
@@ -213,7 +214,7 @@ export default class ActorSheet5e extends ActorSheet {
     }
 
     // Filter and sort speeds on their values
-    speeds = speeds.filter(s => !!s[0]).sort((a, b) => b[0] - a[0]);
+    speeds = speeds.filter(s => s[0]).sort((a, b) => b[0] - a[0]);
 
     // Case 1: Largest as primary
     if ( largestPrimary ) {
@@ -1060,7 +1061,7 @@ export default class ActorSheet5e extends ActorSheet {
     }
 
     const itemData = {
-      name: game.i18n.format("DND5E.ItemNew", {type: game.i18n.localize(`DND5E.ItemType${type.capitalize()}`)}),
+      name: game.i18n.format("DND5E.ItemNew", {type: game.i18n.localize(`ITEM.Type${type.capitalize()}`)}),
       type: type,
       system: { ...header.dataset }
     };

@@ -116,6 +116,7 @@ Hooks.once("init", function() {
   CONFIG.Dice.rolls.push(dice.DamageRoll);
 
   // Hook up system data types
+  CONFIG.Actor.systemDataModels.group = dataModels.actor.GroupActor;
   CONFIG.Item.systemDataModels = dataModels.item.config;
   CONFIG.JournalEntryPage.systemDataModels = dataModels.journal.config;
 
@@ -136,6 +137,12 @@ Hooks.once("init", function() {
     makeDefault: true,
     label: "DND5E.SheetClassVehicle"
   });
+  Actors.registerSheet("dnd5e", applications.actor.GroupActorSheet, {
+    types: ["group"],
+    makeDefault: true,
+    label: "DND5E.SheetClassGroup"
+  });
+
   Items.unregisterSheet("core", ItemSheet);
   Items.registerSheet("dnd5e", applications.item.ItemSheet5e, {
     makeDefault: true,

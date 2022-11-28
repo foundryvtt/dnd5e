@@ -31,12 +31,11 @@ export default class Token5e extends Token {
 
     // Allocate percentages of the total
     const tempPct = Math.clamped(temp, 0, displayMax) / displayMax;
-    const valuePct = Math.clamped(value, 0, effectiveMax) / displayMax;
     const colorPct = Math.clamped(value, 0, effectiveMax) / displayMax;
+    const hpColor = dnd5e.documents.Actor5e.getHPColor(value, effectiveMax);
 
     // Determine colors to use
     const blk = 0x000000;
-    const hpColor = PIXI.utils.rgb2hex([(1-(colorPct/2)), colorPct, 0]);
     const c = CONFIG.DND5E.tokenHPColors;
 
     // Determine the container size (logic borrowed from core)
@@ -63,7 +62,7 @@ export default class Token5e extends Token {
     }
 
     // Health bar
-    bar.beginFill(hpColor, 1.0).lineStyle(bs, blk, 1.0).drawRoundedRect(0, 0, valuePct*w, h, 2);
+    bar.beginFill(hpColor, 1.0).lineStyle(bs, blk, 1.0).drawRoundedRect(0, 0, colorPct*w, h, 2);
 
     // Temporary hit points
     if ( temp > 0 ) {

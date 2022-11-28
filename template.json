@@ -1,6 +1,6 @@
 {
   "Actor": {
-    "types": ["character", "npc", "vehicle"],
+    "types": ["character", "npc", "vehicle", "group"],
     "templates": {
       "common": {
         "abilities": {
@@ -357,7 +357,7 @@
         }
       }
     },
-    "htmlFields": ["details.biography.value", "details.biography.public"],
+    "htmlFields": ["details.biography.value", "details.biography.public", "description.full", "description.summary"],
     "character": {
       "templates": ["common", "creature"],
       "attributes": {
@@ -511,6 +511,27 @@
       "cargo": {
         "crew": [],
         "passengers": []
+      }
+    },
+    "group": {
+      "description": {
+        "full": "",
+        "summary": ""
+      },
+      "members": [],
+      "attributes": {
+        "movement": {
+          "land": 0,
+          "water": 0,
+          "air": 0
+        }
+      },
+      "currency": {
+        "pp": 0,
+        "gp": 0,
+        "ep": 0,
+        "sp": 0,
+        "cp": 0
       }
     }
   },
