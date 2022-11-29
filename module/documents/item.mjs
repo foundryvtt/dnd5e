@@ -1908,7 +1908,7 @@ export default class Item5e extends Item {
         await item.rollToolCheck({event}); break;
       case "placeTemplate":
         try {
-          await (dnd5e.canvas.AbilityTemplate.fromItem(item))?.drawPreview();
+          await dnd5e.canvas.AbilityTemplate.fromItem(item)?.drawPreview();
         } catch(err) {}
         break;
       case "abilityCheck":
