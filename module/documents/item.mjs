@@ -1913,8 +1913,9 @@ export default class Item5e extends Item {
       case "toolCheck":
         await item.rollToolCheck({event}); break;
       case "placeTemplate":
-        const template = dnd5e.canvas.AbilityTemplate.fromItem(item);
-        if ( template ) template.drawPreview();
+        try {
+          await dnd5e.canvas.AbilityTemplate.fromItem(item)?.drawPreview();
+        } catch(err) {}
         break;
       case "abilityCheck":
         targets = this._getChatCardTargets(card);
