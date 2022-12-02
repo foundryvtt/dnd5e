@@ -1,3 +1,4 @@
+import SystemDataModel from "../../abstract.mjs";
 import { FormulaField } from "../../fields.mjs";
 
 /**
@@ -54,16 +55,7 @@ export default class ActivatedEffectTemplate extends foundry.abstract.DataModel 
         long: new foundry.data.fields.NumberField({required: true, min: 0, label: "DND5E.RangeLong"}),
         units: new foundry.data.fields.StringField({required: true, blank: true, label: "DND5E.RangeUnits"})
       }, {label: "DND5E.Range"}),
-      uses: new foundry.data.fields.SchemaField({
-        value: new foundry.data.fields.NumberField({
-          required: true, min: 0, integer: true, label: "DND5E.LimitedUsesAvailable"
-        }),
-        max: new FormulaField({required: true, deterministic: true, label: "DND5E.LimitedUsesMax"}),
-        per: new foundry.data.fields.StringField({
-          required: true, blank: false, nullable: true, initial: null, label: "DND5E.LimitedUsesPer"
-        }),
-        recovery: new FormulaField({required: true, label: "DND5E.RecoveryFormula"})
-      }, {label: "DND5E.LimitedUses"}),
+      uses: new this.ItemUsesField({}, {label: "DND5E.LimitedUses"}),
       consume: new foundry.data.fields.SchemaField({
         type: new foundry.data.fields.StringField({required: true, blank: true, label: "DND5E.ConsumeType"}),
         target: new foundry.data.fields.StringField({
@@ -73,6 +65,27 @@ export default class ActivatedEffectTemplate extends foundry.abstract.DataModel 
       }, {label: "DND5E.ConsumeTitle"})
     };
   }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Extension of SchemaField used to track item uses.
+   * @internal
+   */
+  static ItemUsesField = class ItemUsesField extends foundry.data.fields.SchemaField {
+    constructor(extraSchema, options) {
+      super(SystemDataModel.mergeSchema({
+        value: new foundry.data.fields.NumberField({
+          required: true, min: 0, integer: true, label: "DND5E.LimitedUsesAvailable"
+        }),
+        max: new FormulaField({required: true, deterministic: true, label: "DND5E.LimitedUsesMax"}),
+        per: new foundry.data.fields.StringField({
+          required: true, blank: false, nullable: true, initial: null, label: "DND5E.LimitedUsesPer"
+        }),
+        recovery: new FormulaField({required: true, label: "DND5E.RecoveryFormula"})
+      }, extraSchema), options);
+    }
+  };
 
   /* -------------------------------------------- */
 

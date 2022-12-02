@@ -23,9 +23,9 @@ export default class ConsumableData extends SystemDataModel.mixin(
       consumableType: new foundry.data.fields.StringField({
         required: true, initial: "potion", label: "DND5E.ItemConsumableType"
       }),
-      uses: new foundry.data.fields.SchemaField({
+      uses: new ActivatedEffectTemplate.ItemUsesField({
         autoDestroy: new foundry.data.fields.BooleanField({required: true, label: "DND5E.ItemDestroyEmpty"})
-      })
+      }, {label: "DND5E.LimitedUses"})
     });
   }
 }
