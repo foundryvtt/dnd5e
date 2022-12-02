@@ -5,6 +5,7 @@ import FeatData from "./feat.mjs";
 import LootData from "./loot.mjs";
 import SpellData from "./spell.mjs";
 import SubclassData from "./subclass.mjs";
+import ToolData from "./tool.mjs";
 import WeaponData from "./weapon.mjs";
 
 export {
@@ -15,6 +16,7 @@ export {
   LootData,
   SpellData,
   SubclassData,
+  ToolData,
   WeaponData
 };
 export {default as ActionTemplate} from "./templates/action.mjs";
@@ -31,5 +33,6 @@ export const config = {
   loot: LootData,
   spell: SpellData,
   subclass: SubclassData,
+  tool: ToolData,
   weapon: WeaponData
 };
