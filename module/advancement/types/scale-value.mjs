@@ -167,7 +167,7 @@ export class ScaleValueConfig extends AdvancementConfig {
    */
   _formatPlaceholder(placeholder) {
     if ( this.advancement.configuration.type === "dice" ) {
-      return { number: placeholder?.number ?? "", face: placeholder?.face ? `d${placeholder.face}` : "" };
+      return { number: placeholder?.number ?? "", faces: placeholder?.faces ? `d${placeholder.faces}` : "" };
     }
     return { value: placeholder?.value ?? "" };
   }
@@ -258,12 +258,12 @@ export class ScaleValueConfig extends AdvancementConfig {
         obj[`configuration.scale.-=${lvl}`] = null;
         return obj;
       }, {}));
-      const scale = updates.configuration.scale = updates.configuration.scale ?? {};
+      updates.configuration.scale ??= {};
       const OriginalType = ScaleValueAdvancement.TYPES[this.advancement.configuration.type];
       const NewType = ScaleValueAdvancement.TYPES[updates.configuration.type];
-      for ( const [lvl, data] of Object.entries(scale) ) {
+      for ( const [lvl, data] of Object.entries(updates.configuration.scale) ) {
         const original = new OriginalType(data, { parent: this.advancement });
-        updates.configuration.scale[lvl] = NewType.convertFrom(original);
+        updates.configuration.scale[lvl] = NewType.convertFrom(original)?.toObject();
       }
     }
     return super._updateObject(event, foundry.utils.flattenObject(updates));
