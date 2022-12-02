@@ -14,7 +14,10 @@
     "source": "DMG pg. 199",
     "quantity": 1,
     "weight": 1,
-    "price": 36000,
+    "price": {
+      "value": 36000,
+      "denomination": "gp"
+    },
     "attunement": 1,
     "equipped": {
       "type": "Boolean",

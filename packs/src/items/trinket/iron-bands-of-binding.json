@@ -12,7 +12,10 @@
     "source": "DMG pg. 177",
     "quantity": 1,
     "weight": 1,
-    "price": 4000,
+    "price": {
+      "value": 4000,
+      "denomination": "gp"
+    },
     "attunement": 0,
     "equipped": false,
     "rarity": "rare",

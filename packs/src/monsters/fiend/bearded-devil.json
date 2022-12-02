@@ -1007,7 +1007,10 @@
         "source": "PHB pg. 149",
         "quantity": 1,
         "weight": 6,
-        "price": 20,
+        "price": {
+          "value": 20,
+          "denomination": "gp"
+        },
         "attunement": 0,
         "equipped": true,
         "rarity": "common",

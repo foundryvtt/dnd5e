@@ -12,7 +12,10 @@
     "source": "DMG pg. 191",
     "quantity": 1,
     "weight": 0,
-    "price": 20000,
+    "price": {
+      "value": 20000,
+      "denomination": "gp"
+    },
     "attunement": 1,
     "equipped": false,
     "rarity": "rare",

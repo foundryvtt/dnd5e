@@ -201,7 +201,7 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
         }, {
           label: game.i18n.localize("DND5E.Price"),
           css: "item-price",
-          property: "system.price",
+          property: "system.price.value",
           editable: "Number"
         }, {
           label: game.i18n.localize("DND5E.Weight"),
