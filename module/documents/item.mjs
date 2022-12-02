@@ -732,7 +732,7 @@ export default class Item5e extends Item {
     options = foundry.utils.mergeObject({
       configureDialog: true,
       createMessage: true,
-      "flags.dnd5e.use": {type: this.type, itemId: this.id}
+      "flags.dnd5e.use": {type: this.type, itemId: this.id, itemUuid: this.uuid}
     }, options);
 
     // Reference aspects of the item data necessary for usage
@@ -1342,7 +1342,7 @@ export default class Item5e extends Item {
         left: window.innerWidth - 710
       },
       messageData: {
-        "flags.dnd5e.roll": {type: "attack", itemId: this.id},
+        "flags.dnd5e.roll": {type: "attack", itemId: this.id, itemUuid: this.uuid},
         speaker: ChatMessage.getSpeaker({actor: this.actor})
       }
     }, options);
@@ -1392,7 +1392,7 @@ export default class Item5e extends Item {
   async rollDamage({critical=false, event=null, spellLevel=null, versatile=false, options={}}={}) {
     if ( !this.hasDamage ) throw new Error("You may not make a Damage Roll with this Item.");
     const messageData = {
-      "flags.dnd5e.roll": {type: "damage", itemId: this.id},
+      "flags.dnd5e.roll": {type: "damage", itemId: this.id, itemUuid: this.uuid},
       speaker: ChatMessage.getSpeaker({actor: this.actor})
     };
 
@@ -1599,7 +1599,7 @@ export default class Item5e extends Item {
         speaker: ChatMessage.getSpeaker({actor: this.actor}),
         flavor: `${this.name} - ${game.i18n.localize("DND5E.OtherFormula")}`,
         rollMode: game.settings.get("core", "rollMode"),
-        messageData: {"flags.dnd5e.roll": {type: "other", itemId: this.id }}
+        messageData: {"flags.dnd5e.roll": {type: "other", itemId: this.id, itemUuid: this.uuid}}
       });
     }
 
@@ -1729,7 +1729,7 @@ export default class Item5e extends Item {
       reliableTalent: (this.system.proficient >= 1) && this.actor.getFlag("dnd5e", "reliableTalent"),
       messageData: {
         speaker: options.speaker || ChatMessage.getSpeaker({actor: this.actor}),
-        "flags.dnd5e.roll": {type: "tool", itemId: this.id }
+        "flags.dnd5e.roll": {type: "tool", itemId: this.id, itemUuid: this.uuid}
       }
     }, options);
 
