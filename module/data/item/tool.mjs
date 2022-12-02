@@ -26,7 +26,7 @@ export default class ToolData extends SystemDataModel.mixin(ItemDescriptionTempl
       }),
       chatFlavor: new foundry.data.fields.StringField({required: true, label: "DND5E.ChatFlavor"}),
       proficient: new foundry.data.fields.NumberField({
-        required: true, nullable: false, integer: true, initial: 0, min: 0, label: "DND5E.ItemToolProficiency"
+        required: true, nullable: false, initial: 0, min: 0, label: "DND5E.ItemToolProficiency"
       }),
       bonus: new FormulaField({required: true, label: "DND5E.ItemToolBonus"})
     });
