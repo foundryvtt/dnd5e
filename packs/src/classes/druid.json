@@ -88,7 +88,7 @@
         "type": "ScaleValue",
         "configuration": {
           "identifier": "wild-shape",
-          "type": "number",
+          "type": "cr",
           "scale": {
             "2": {
               "value": 0.25
@@ -99,6 +99,9 @@
             "8": {
               "value": 1
             }
+          },
+          "distance": {
+            "units": ""
           }
         },
         "value": {},
@@ -168,10 +171,10 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.0.0",
-    "coreVersion": "10.279",
+    "systemVersion": "2.0.3",
+    "coreVersion": "10.286",
     "createdTime": 1661787234284,
-    "modifiedTime": 1661787234284,
+    "modifiedTime": 1664049296255,
     "lastModifiedBy": "dnd5ebuilder0000"
   }
 }

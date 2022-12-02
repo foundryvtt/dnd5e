@@ -93,6 +93,7 @@ export default class AdvancementConfig extends FormApplication {
 
   /* -------------------------------------------- */
 
+  /** @inheritdoc */
   activateListeners(html) {
     super.activateListeners(html);
 

@@ -238,7 +238,7 @@ export default class Item5e extends Item {
     if ( !["class", "subclass"].includes(this.type) || !this.advancement.byType.ScaleValue ) return {};
     const level = this.type === "class" ? this.system.levels : this.class?.system.levels ?? 0;
     return this.advancement.byType.ScaleValue.reduce((obj, advancement) => {
-      obj[advancement.identifier] = advancement.prepareValue(level);
+      obj[advancement.identifier] = advancement.valueForLevel(level);
       return obj;
     }, {});
   }
