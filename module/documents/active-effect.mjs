@@ -57,10 +57,12 @@ export default class ActiveEffect5e extends ActiveEffect {
   determineSuppression() {
     this.isSuppressed = false;
     if ( this.disabled || (this.parent.documentName !== "Actor") || !this.origin ) return;
-    // Determine if this is an effect from an item
-    const item = fromUuidSync(this.origin);
-    if ( item?.parent !== this.parent ) return;
-    this.isSuppressed = item.areEffectsSuppressed;
+    try {
+      // Determine if this is an effect from an item
+      const item = fromUuidSync(this.origin);
+      if ( item?.parent !== this.parent ) return;
+      this.isSuppressed = item.areEffectsSuppressed;
+    } catch(e) {}
   }
 
   /* --------------------------------------------- */
