@@ -23,7 +23,7 @@ export default class PhysicalItemTemplate extends foundry.abstract.DataModel {
         value: new foundry.data.fields.NumberField({
           required: true, nullable: false, initial: 0, min: 0, label: "DND5E.Price"
         }),
-        currency: new foundry.data.fields.StringField({
+        denomination: new foundry.data.fields.StringField({
           required: true, blank: false, initial: "gp", label: "DND5E.Currency"
         })
       }, {label: "DND5E.Price"}),
@@ -66,7 +66,7 @@ export default class PhysicalItemTemplate extends foundry.abstract.DataModel {
     if ( foundry.utils.getType(source.price) === "Object" ) return;
     source.price = {
       value: Number.isNumeric(source.price) ? Number(source.price) : 0,
-      currency: "gp"
+      denomination: "gp"
     };
   }
 
