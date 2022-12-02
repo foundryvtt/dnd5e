@@ -12,7 +12,10 @@
     "source": "DMG pg. 160",
     "quantity": 1,
     "weight": 0.1,
-    "price": 40000,
+    "price": {
+      "value": 40000,
+      "denomination": "gp"
+    },
     "attunement": 0,
     "equipped": false,
     "rarity": "legendary",

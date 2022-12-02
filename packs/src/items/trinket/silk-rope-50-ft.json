@@ -12,7 +12,10 @@
     "source": "PHB pg. 153",
     "quantity": 1,
     "weight": 5,
-    "price": 10,
+    "price": {
+      "value": 10,
+      "denomination": "gp"
+    },
     "attunement": 0,
     "equipped": false,
     "rarity": "common",

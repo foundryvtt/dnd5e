@@ -12,7 +12,10 @@
     "source": "DMG pg. 184",
     "quantity": 1,
     "weight": 0.1,
-    "price": 90,
+    "price": {
+      "value": 90,
+      "denomination": "gp"
+    },
     "attunement": 0,
     "equipped": false,
     "rarity": "uncommon",

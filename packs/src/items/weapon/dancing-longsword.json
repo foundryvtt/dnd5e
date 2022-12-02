@@ -12,7 +12,10 @@
     "source": "DMG pg. 161",
     "quantity": 1,
     "weight": 3,
-    "price": 2000,
+    "price": {
+      "value": 2000,
+      "denomination": "gp"
+    },
     "attunement": 1,
     "equipped": false,
     "rarity": "veryRare",

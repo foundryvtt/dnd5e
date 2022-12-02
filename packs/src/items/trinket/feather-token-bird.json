@@ -12,7 +12,10 @@
     "source": "DMG pg. 188",
     "quantity": 1,
     "weight": 0,
-    "price": 3000,
+    "price": {
+      "value": 3000,
+      "denomination": "gp"
+    },
     "attunement": 0,
     "equipped": false,
     "rarity": "rare",
