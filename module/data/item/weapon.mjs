@@ -22,6 +22,7 @@ import MountableTemplate from "./templates/mountable.mjs";
 export default class WeaponData extends SystemDataModel.mixin(
   ItemDescriptionTemplate, PhysicalItemTemplate, ActivatedEffectTemplate, ActionTemplate, MountableTemplate
 ) {
+  /** @inheritdoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
       weaponType: new foundry.data.fields.StringField({

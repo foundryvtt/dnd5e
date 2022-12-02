@@ -33,6 +33,7 @@ import ItemDescriptionTemplate from "./templates/item-description.mjs";
 export default class SpellData extends SystemDataModel.mixin(
   ItemDescriptionTemplate, ActivatedEffectTemplate, ActionTemplate
 ) {
+  /** @inheritdoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
       level: new foundry.data.fields.NumberField({

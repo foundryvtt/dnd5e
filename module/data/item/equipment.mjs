@@ -29,6 +29,7 @@ import MountableTemplate from "./templates/mountable.mjs";
 export default class EquipmentData extends SystemDataModel.mixin(
   ItemDescriptionTemplate, PhysicalItemTemplate, ActivatedEffectTemplate, ActionTemplate, MountableTemplate
 ) {
+  /** @inheritdoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
       armor: new foundry.data.fields.SchemaField({

@@ -17,6 +17,7 @@ import ItemDescriptionTemplate from "./templates/item-description.mjs";
 export default class FeatData extends SystemDataModel.mixin(
   ItemDescriptionTemplate, ActivatedEffectTemplate, ActionTemplate
 ) {
+  /** @inheritdoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
       requirements: new foundry.data.fields.StringField({required: true, label: "DND5E.Requirements"}),

@@ -9,6 +9,7 @@ import ItemDescriptionTemplate from "./templates/item-description.mjs";
  * @property {object[]} advancement  Advancement objects for this background.
  */
 export default class BackgroundData extends SystemDataModel.mixin(ItemDescriptionTemplate) {
+  /** @inheritdoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
       advancement: new foundry.data.fields.ArrayField(new AdvancementField(), {label: "DND5E.AdvancementTitle"})

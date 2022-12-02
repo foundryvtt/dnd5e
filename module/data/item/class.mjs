@@ -21,6 +21,7 @@ import ItemDescriptionTemplate from "./templates/item-description.mjs";
  * @property {string} spellcasting.ability      Ability score to use for spellcasting.
  */
 export default class ClassData extends SystemDataModel.mixin(ItemDescriptionTemplate) {
+  /** @inheritdoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
       identifier: new IdentifierField({required: true, label: "DND5E.Identifier"}),
