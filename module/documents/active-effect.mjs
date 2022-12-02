@@ -56,20 +56,10 @@ export default class ActiveEffect5e extends ActiveEffect {
    */
   determineSuppression() {
     this.isSuppressed = false;
-    if ( this.disabled || (this.parent.documentName !== "Actor") ) return;
-    const [parentType, parentId, documentType, documentId, syntheticItem, syntheticItemId] = this.origin?.split(".") ?? [];
-    // case 1: linked or sidebar actor
-    if ( parentType === "Actor" ) {
-      if ( (parentId !== this.parent.id) || (documentType !== "Item") ) return;
-    }
-    // case 2: synthetic actor on scene
-    else if ( parentType === "Scene" ) {
-      if ( (documentId !== this.parent.token?.id) || (syntheticItem !== "Item") ) return;
-    }
-    // case 3: not an actor
-    else return;
-    const item = this.parent.items.get(documentId) ?? this.parent.items.get(syntheticItemId);
-    if ( !item ) return;
+    if ( this.disabled || (this.parent.documentName !== "Actor") || !this.origin ) return;
+    // Determine if this is an effect from an item
+    const item = fromUuidSync(this.origin);
+    if ( item?.parent !== this.parent ) return;
     this.isSuppressed = item.areEffectsSuppressed;
   }
 
