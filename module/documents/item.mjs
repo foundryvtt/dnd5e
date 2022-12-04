@@ -1397,9 +1397,28 @@ export default class Item5e extends Item {
 
     // Get roll data
     const dmg = this.system.damage;
-    const parts = dmg.parts.map(d => d[0]);
+    const dmgParts = deepClone(dmg.parts)
     const rollData = this.getRollData();
     if ( spellLevel ) rollData.item.level = spellLevel;
+
+    // Adjust damage from versatile usage
+    if ( versatile && dmg.versatile ) {
+      parts[0][0] = dmg.versatile;
+      messageData["flags.dnd5e.roll"].versatile = true;
+    }
+
+    // Convert damage parts to formula parts
+    const parts = dmgParts.map(d => {
+      if (!d[1]) {
+        return d[0];
+      } else {
+        const endsWithFlavor = /\[([^[\]]*)]$/.exec(d[0]);
+        if (endsWithFlavor) {
+          return `${d[0].substring(0, d[0].length - endsWithFlavor[0].length)}[${endsWithFlavor[1]} ${d[1]}]`;
+        }
+        return `${d[0]}[${d[1]}]`;
+      }
+    });
 
     // Configure the damage roll
     const actionFlavor = game.i18n.localize(this.system.actionType === "heal" ? "DND5E.Healing" : "DND5E.DamageRoll");
@@ -1420,12 +1439,6 @@ export default class Item5e extends Item {
       },
       messageData
     };
-
-    // Adjust damage from versatile usage
-    if ( versatile && dmg.versatile ) {
-      parts[0] = dmg.versatile;
-      messageData["flags.dnd5e.roll"].versatile = true;
-    }
 
     // Scale damage from up-casting spells
     const scaling = this.system.scaling;
