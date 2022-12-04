@@ -74,6 +74,19 @@ h5 {
   margin-block-end: 0;
   font-size: var(--font-size-13);
 }
+div.editor select.editor-source-selector {
+  display: none;
+  position: absolute;
+  top: 5px;
+  right: calc(2em + 9px);
+  background: rgba(187, 187, 187, 0.5);
+  backdrop-filter: blur(4px);
+  box-shadow: 0 0 1px var(--color-shadow-dark);
+}
+div.editor:hover:not(:is(.prosemirror, .tinymce)) .editor-source-selector,
+div.editor .editor-source-selector:focus {
+  display: unset;
+}
 .dnd5e {
   /* ----------------------------------------- */
   /*  Element Styles                           */
@@ -1659,6 +1672,9 @@ h5 {
   /*  Sheet Header                             */
   /* ----------------------------------------- */
   /* ----------------------------------------- */
+  /*  Item Description                         */
+  /* ----------------------------------------- */
+  /* ----------------------------------------- */
   /*  Item Details Form                        */
   /* ----------------------------------------- */
   /* ----------------------------------------- */
@@ -1744,6 +1760,12 @@ h5 {
 }
 .dnd5e.sheet.item .sheet-body .item-properties [name="system.price.denomination"] {
   border: none;
+}
+.dnd5e.sheet.item .editor {
+  overflow-y: unset;
+}
+.dnd5e.sheet.item .editor .editor-content {
+  overflow-y: unset;
 }
 .dnd5e.sheet.item .details input[type="text"],
 .dnd5e.sheet.item .details input[type="number"],

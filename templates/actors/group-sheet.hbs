@@ -84,8 +84,12 @@
         </div>
 
         <div class="tab description" data-group="primary" data-tab="description">
-            {{editor descriptionFull target="system.description.full" button=true editable=editable
-                     engine="prosemirror" collaborate=false}}
+            {{dnd5e-multiEditor
+                (dnd5e-source enriched.full target="system.description.full" label=(localize "DND5E.Description"))
+                (dnd5e-source enriched.summary target="system.description.summary"
+                    label=(localize "DND5E.DescriptionSummary"))
+                button=true editable=editable engine="prosemirror" collaborate=false selectedTarget=selectedDescriptionTarget
+            }}
         </div>
 
     </section>

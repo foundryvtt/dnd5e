@@ -54,6 +54,11 @@
         {{/if}}
     </div>
 
-    {{editor descriptionHTML target="system.description.value" button=true editable=editable engine="prosemirror"
-             collaborate=false}}
+    {{dnd5e-multiEditor
+        (dnd5e-source enriched.description target="system.description.value" label=(localize "DND5E.Description"))
+        (dnd5e-source enriched.unidentified target="system.description.unidentified"
+            label=(localize "DND5E.DescriptionUnidentified"))
+        (dnd5e-source enriched.chat target="system.description.chat" label=(localize "DND5E.DescriptionChat"))
+        button=true editable=editable engine="prosemirror" collaborate=false selectedTarget=selectedDescriptionTarget
+    }}
 </div>

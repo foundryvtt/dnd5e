@@ -54,6 +54,14 @@ export default class ItemSheet5e extends ItemSheet {
 
   /* -------------------------------------------- */
 
+  /**
+   * The description currently displayed in the editor.
+   * @type {string}
+   */
+  selectedDescriptionTarget = "system.description.value";
+
+  /* -------------------------------------------- */
+
   /** @inheritdoc */
   get template() {
     return `systems/dnd5e/templates/items/${this.item.type}.hbs`;
@@ -121,13 +129,17 @@ export default class ItemSheet5e extends ItemSheet {
         break;
     }
 
-    // Enrich HTML description
-    context.descriptionHTML = await TextEditor.enrichHTML(item.system.description.value, {
-      secrets: item.isOwner,
-      async: true,
-      relativeTo: this.item,
-      rollData: context.rollData
-    });
+    // Enrich HTML descriptions
+    const enrichmentOptions = {
+      secrets: item.isOwner, async: true, relativeTo: this.item, rollData: context.rollData
+    };
+    context.enriched = {
+      description: await TextEditor.enrichHTML(item.system.description.value, enrichmentOptions),
+      unidentified: await TextEditor.enrichHTML(item.system.description.unidentified, enrichmentOptions),
+      chat: await TextEditor.enrichHTML(item.system.description.chat, enrichmentOptions)
+    };
+    context.selectedDescriptionTarget = this.selectedDescriptionTarget;
+
     return context;
   }
 
@@ -442,6 +454,7 @@ export default class ItemSheet5e extends ItemSheet {
         if ( t.dataset.action ) this._onAdvancementAction(t, t.dataset.action);
       });
     }
+    html.find(".editor .editor-source-selector").change(this._onSelectEditorTarget.bind(this));
 
     // Advancement context menu
     const contextOptions = this._getAdvancementContextMenuOptions();
@@ -709,6 +722,18 @@ export default class ItemSheet5e extends ItemSheet {
         this.advancementConfigurationMode = !this.advancementConfigurationMode;
         return this.render();
     }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle modifying the content displayed in a multi-editor.
+   * @param {PointerEvent} event  The initiating click event.
+   */
+  _onSelectEditorTarget(event) {
+    event.preventDefault();
+    this.selectedDescriptionTarget = event.currentTarget.value;
+    this.render();
   }
 
   /* -------------------------------------------- */

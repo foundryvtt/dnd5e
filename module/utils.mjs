@@ -168,13 +168,73 @@ function itemContext(context, options) {
 /* -------------------------------------------- */
 
 /**
+ * Helper designed to be used as a sub-helper to provide data to `multiEditor`.
+ *
+ * @param {string} content              Content to display.
+ * @param {object} options
+ * @param {object} options.hash
+ * @param {object} options.hash.target  The named target data element.
+ * @param {object} options.hash.label   Label for this specific target.
+ * @returns {object}
+ */
+function editorSource(content, options) {
+  if ( !options.hash.target ) throw new Error("You must define the name of the target field.");
+  return { content, ...options.hash };
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Editor with a dropdown to allow for editing multiple sources in the same space.
+ * @param {[object, TextEditorOptions]} sources  Any editor sources, followed by the handlebars options.
+ * @returns {Handlebars.SafeString}
+ */
+function multiEditor(...sources) {
+  const options = sources.pop();
+  const button = Boolean(options.hash.button);
+  const editable = "editable" in options.hash ? Boolean(options.hash.editable) : true;
+
+  const selectedTarget = options.hash.selectedTarget || sources[0].target;
+  let selectedContent = "";
+
+  // Construct the source selector
+  let sourceSelector = '<select class="editor-source-selector">';
+  for ( const source of sources ) {
+    if ( source.enabled === false ) continue;
+    const label = source.label ? game.i18n.localize(source.label) : source.target;
+    const selected = source.target === selectedTarget ? " selected" : "";
+    sourceSelector += `<option value="${source.target}"${selected}>${label}</option>`;
+    if ( selected ) selectedContent = source.content;
+  }
+  sourceSelector += "</select>";
+
+  // Construct the HTML
+  const editorClasses = ["editor-content", options.hash.class ?? null].filterJoin(" ");
+  let editorHTML = `<div class="editor">${sourceSelector}`;
+  if ( button && editable ) editorHTML += '<a class="editor-edit"><i class="fas fa-edit"></i></a>';
+  let dataset = {
+    engine: options.hash.engine || "tinymce",
+    collaborate: !!options.hash.collaborate
+  };
+  if ( editable ) dataset.edit = selectedTarget;
+  dataset = Object.entries(dataset).map(([k, v]) => `data-${k}="${v}"`).join(" ");
+  editorHTML += `<div class="${editorClasses}" ${dataset}>${selectedContent}</div></div>`;
+
+  return new Handlebars.SafeString(editorHTML);
+}
+
+/* -------------------------------------------- */
+
+/**
  * Register custom Handlebars helpers used by 5e.
  */
 export function registerHandlebarsHelpers() {
   Handlebars.registerHelper({
     getProperty: foundry.utils.getProperty,
     "dnd5e-linkForUuid": linkForUuid,
-    "dnd5e-itemContext": itemContext
+    "dnd5e-itemContext": itemContext,
+    "dnd5e-multiEditor": multiEditor,
+    "dnd5e-source": editorSource
   });
 }
 

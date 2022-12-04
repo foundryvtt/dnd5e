@@ -14,6 +14,23 @@ h5 {
   font-size: var(--font-size-13);
 }
 
+div.editor {
+  select.editor-source-selector {
+    display: none;
+    position: absolute;
+    top: 5px;
+    right: calc(2em + 9px);
+    background: rgba(187, 187, 187, 0.5);
+    backdrop-filter: blur(4px);
+    box-shadow: 0 0 1px var(--color-shadow-dark);
+  }
+
+  &:hover:not(:is(.prosemirror, .tinymce)) .editor-source-selector,
+  .editor-source-selector:focus {
+    display: unset;
+  }
+}
+
 .dnd5e {
   .window-content {
     font-size: 13px;

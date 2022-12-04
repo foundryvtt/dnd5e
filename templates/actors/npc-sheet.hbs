@@ -229,8 +229,13 @@
 
         {{!-- Biography Tab --}}
         <div class="tab biography flexcol" data-group="primary" data-tab="biography">
-            {{editor biographyHTML target="system.details.biography.value" button=true editable=editable
-                     engine="prosemirror" collaborate=false}}
+            {{dnd5e-multiEditor
+                (dnd5e-source enriched.value target="system.details.biography.value"
+                    label=(localize "DND5E.Biography"))
+                (dnd5e-source enriched.public target="system.details.biography.public"
+                    label=(localize "DND5E.BiographyPublic"))
+                button=true editable=editable engine="prosemirror" collaborate=false selectedTarget=selectedDescriptionTarget
+            }}
         </div>
     </section>
 </form>

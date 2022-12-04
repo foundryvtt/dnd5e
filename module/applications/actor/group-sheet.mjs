@@ -39,6 +39,14 @@ export default class GroupActorSheet extends ActorSheet {
   static unsupportedItemTypes = new Set(["background", "class", "subclass", "feat"]);
 
   /* -------------------------------------------- */
+
+  /**
+   * The description currently displayed in the editor.
+   * @type {string}
+   */
+  selectedDescriptionTarget = "system.description.full";
+
+  /* -------------------------------------------- */
   /*  Context Preparation                         */
   /* -------------------------------------------- */
 
@@ -47,6 +55,7 @@ export default class GroupActorSheet extends ActorSheet {
     const context = super.getData(options);
     context.system = context.data.system;
     context.items = Array.from(this.actor.items);
+    context.rollData = this.actor.getRollData();
 
     // Membership
     const {sections, stats} = this.#prepareMembers();
@@ -68,12 +77,14 @@ export default class GroupActorSheet extends ActorSheet {
     context.rollableClass = this.isEditable ? "rollable" : "";
 
     // Biography HTML
-    context.descriptionFull = await TextEditor.enrichHTML(this.actor.system.description.full, {
-      secrets: this.actor.isOwner,
-      rollData: context.rollData,
-      async: true,
-      relativeTo: this.actor
-    });
+    const enrichmentOptions = {
+      secrets: this.actor.isOwner, async: true, relativeTo: this.actor, rollData: context.rollData
+    };
+    context.enriched = {
+      full: await TextEditor.enrichHTML(this.actor.system.description.full, enrichmentOptions),
+      summary: await TextEditor.enrichHTML(this.actor.system.description.summary, enrichmentOptions)
+    };
+    context.selectedDescriptionTarget = this.selectedDescriptionTarget;
 
     // Summary tag
     context.summary = this.#getSummary(stats);
@@ -240,6 +251,7 @@ export default class GroupActorSheet extends ActorSheet {
       html.find(".item-control").click(this._onClickItemControl.bind(this));
       html.find(".item .rollable h4").click(event => this._onClickItemName(event));
       html.find(".item-quantity input, .item-uses input").change(this._onItemPropertyChange.bind(this));
+      html.find(".editor .editor-source-selector").change(this._onSelectEditorTarget.bind(this));
       new ContextMenu(html, ".item-list .item", [], {onOpen: this._onItemContext.bind(this)});
     }
   }
@@ -298,6 +310,18 @@ export default class GroupActorSheet extends ActorSheet {
         editItem.sheet.render(true);
         break;
     }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle modifying the content displayed in a multi-editor.
+   * @param {PointerEvent} event  The initiating click event.
+   */
+  _onSelectEditorTarget(event) {
+    event.preventDefault();
+    this.selectedDescriptionTarget = event.currentTarget.value;
+    this.render();
   }
 
   /* -------------------------------------------- */

@@ -87,6 +87,14 @@ export default class ActorSheet5e extends ActorSheet {
 
   /* -------------------------------------------- */
 
+  /**
+   * The description currently displayed in the editor.
+   * @type {string}
+   */
+  selectedDescriptionTarget = "system.details.biography.value";
+
+  /* -------------------------------------------- */
+
   /** @override */
   get template() {
     if ( !game.user.isGM && this.actor.limited ) return "systems/dnd5e/templates/actors/limited-sheet.hbs";
@@ -175,12 +183,14 @@ export default class ActorSheet5e extends ActorSheet {
     }
 
     // Biography HTML enrichment
-    context.biographyHTML = await TextEditor.enrichHTML(context.system.details.biography.value, {
-      secrets: this.actor.isOwner,
-      rollData: context.rollData,
-      async: true,
-      relativeTo: this.actor
-    });
+    const enrichmentOptions = {
+      secrets: this.actor.isOwner, async: true, relativeTo: this.actor, rollData: context.rollData
+    };
+    context.enriched = {
+      value: await TextEditor.enrichHTML(context.system.details.biography.value, enrichmentOptions),
+      public: await TextEditor.enrichHTML(context.system.details.biography.public, enrichmentOptions)
+    };
+    context.selectedDescriptionTarget = this.selectedDescriptionTarget;
 
     return context;
   }
@@ -614,6 +624,7 @@ export default class ActorSheet5e extends ActorSheet {
 
     // Item summaries
     html.find(".item .item-name.rollable h4").click(event => this._onItemSummary(event));
+    html.find(".editor .editor-source-selector").change(this._onSelectEditorTarget.bind(this));
 
     // View Item Sheets
     html.find(".item-edit").click(this._onItemEdit.bind(this));
@@ -1197,6 +1208,18 @@ export default class ActorSheet5e extends ActorSheet {
     else {
       itemData.system.preparation.mode = mode["preparation.mode"];
     }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle modifying the content displayed in a multi-editor.
+   * @param {PointerEvent} event  The initiating click event.
+   */
+  _onSelectEditorTarget(event) {
+    event.preventDefault();
+    this.selectedDescriptionTarget = event.currentTarget.value;
+    this.render();
   }
 
   /* -------------------------------------------- */
