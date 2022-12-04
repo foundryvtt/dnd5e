@@ -1397,13 +1397,13 @@ export default class Item5e extends Item {
 
     // Get roll data
     const dmg = this.system.damage;
-    const dmgParts = deepClone(dmg.parts)
+    const dmgParts = deepClone(dmg.parts);
     const rollData = this.getRollData();
     if ( spellLevel ) rollData.item.level = spellLevel;
 
     // Adjust damage from versatile usage
     if ( versatile && dmg.versatile ) {
-      parts[0][0] = dmg.versatile;
+      dmgParts[0][0] = dmg.versatile;
       messageData["flags.dnd5e.roll"].versatile = true;
     }
 
