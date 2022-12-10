@@ -5,7 +5,7 @@
   "img": "icons/equipment/finger/ring-cabochon-gold-orange.webp",
   "system": {
     "description": {
-      "value": "<p><em>(Requires attunement)</em></p>\n<p><em>This ring has been inlaid with a citrine </em><em>stone </em><em>that glints when it catches the light.</em></p>\n<p>You have resistance to lightning damage while wearing this ring.</p>",
+      "value": "<p><em>(Requires attunement)</em></p>\n<p><em>This ring has been inlaid with a citrine </em><em>stone </em><em>that glints when it catches the light.</em></p>\n<p>You have resistance to lightning damage while wearing this ring.</p>\n<p>For other rings of resistance, roll on the @Compendium[dnd5e.tables.MdTxWyYVhTIgtNcG]{Ring of Resistance} table</p>",
       "chat": "",
       "unidentified": ""
     },
@@ -76,6 +76,7 @@
       "dt": null,
       "conditions": ""
     },
+    "baseItem": "",
     "speed": {
       "value": null,
       "conditions": ""
@@ -93,5 +94,13 @@
   "ownership": {
     "default": 0
   },
-  "flags": {}
+  "flags": {},
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.0.0",
+    "coreVersion": "10.279",
+    "createdTime": 1661787233699,
+    "modifiedTime": 1661787233699,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  }
 }

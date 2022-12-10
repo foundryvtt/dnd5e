@@ -84,6 +84,7 @@ export default class Actor5e extends Actor {
   prepareBaseData() {
     const updates = {};
     this._prepareBaseAbilities(updates);
+    this._prepareBaseSkills(updates);
     if ( !foundry.utils.isEmpty(updates) ) {
       if ( !this.id ) this.updateSource(updates);
       else this.update(updates);
@@ -220,6 +221,28 @@ export default class Actor5e extends Actor {
       }
     }
     this.system.abilities = abilities;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Update the actor's skill list to match the skills configured in `DND5E.skills`.
+   * Mutates the system.skills object.
+   * @param {object} updates  Updates to be applied to the actor. *Will be mutated*.
+   * @private
+   */
+  _prepareBaseSkills(updates) {
+    if ( this.type === "vehicle") return;
+    const skills = {};
+    for ( const [key, skill] of Object.entries(CONFIG.DND5E.skills) ) {
+      skills[key] = this.system.skills[key];
+      if ( !skills[key] ) {
+        skills[key] = foundry.utils.deepClone(game.system.template.Actor.templates.creature.skills.acr);
+        skills[key].ability = skill.ability;
+        updates[`system.skills.${key}`] = foundry.utils.deepClone(skills[key]);
+      }
+    }
+    this.system.skills = skills;
   }
 
   /* -------------------------------------------- */
@@ -447,7 +470,9 @@ export default class Actor5e extends Actor {
       default:
         let formula = ac.calc === "custom" ? ac.formula : cfg.formula;
         if ( armors.length ) {
-          if ( armors.length > 1 ) this._preparationWarnings.push("DND5E.WarnMultipleArmor");
+          if ( armors.length > 1 ) this._preparationWarnings.push({
+            message: game.i18n.localize("DND5E.WarnMultipleArmor"), type: "warning"
+          });
           const armorData = armors[0].system.armor;
           const isHeavy = armorData.type === "heavy";
           ac.armor = armorData.value ?? ac.armor;
@@ -462,7 +487,9 @@ export default class Actor5e extends Actor {
           const replaced = Roll.replaceFormulaData(formula, rollData);
           ac.base = Roll.safeEval(replaced);
         } catch(err) {
-          this._preparationWarnings.push("DND5E.WarnBadACFormula");
+          this._preparationWarnings.push({
+            message: game.i18n.localize("DND5E.WarnBadACFormula"), link: "armor", type: "error"
+          });
           const replaced = Roll.replaceFormulaData(CONFIG.DND5E.armorClasses.default.formula, rollData);
           ac.base = Roll.safeEval(replaced);
         }
@@ -471,7 +498,9 @@ export default class Actor5e extends Actor {
 
     // Equipped Shield
     if ( shields.length ) {
-      if ( shields.length > 1 ) this._preparationWarnings.push("DND5E.WarnMultipleShields");
+      if ( shields.length > 1 ) this._preparationWarnings.push({
+        message: game.i18n.localize("DND5E.WarnMultipleShields"), type: "warning"
+      });
       ac.shield = shields[0].system.armor.value ?? 0;
       ac.equippedShield = shields[0];
     }
@@ -756,6 +785,22 @@ export default class Actor5e extends Actor {
   /* -------------------------------------------- */
 
   /**
+   * Apply a certain amount of temporary hit point, but only if it's more than the actor currently has.
+   * @param {number} amount       An amount of temporary hit points to set
+   * @returns {Promise<Actor5e>}  A Promise which resolves once the temp HP has been applied
+   */
+  async applyTempHP(amount=0) {
+    amount = parseInt(amount);
+    const hp = this.system.attributes.hp;
+
+    // Update the actor if the new amount is greater than the current
+    const tmp = parseInt(hp.temp) || 0;
+    return amount > tmp ? this.update({"system.attributes.hp.temp": amount}) : this;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Determine whether the provided ability is usable for remarkable athlete.
    * @param {string} ability  Ability type to check.
    * @returns {boolean}       Whether the actor has the remarkable athlete flag and the ability is physical.
@@ -825,7 +870,7 @@ export default class Actor5e extends Actor {
     const reliableTalent = (skl.value >= 1 && this.getFlag("dnd5e", "reliableTalent"));
 
     // Roll and return
-    const flavor = game.i18n.format("DND5E.SkillPromptTitle", {skill: CONFIG.DND5E.skills[skillId]});
+    const flavor = game.i18n.format("DND5E.SkillPromptTitle", {skill: CONFIG.DND5E.skills[skillId]?.label ?? ""});
     const rollData = foundry.utils.mergeObject({
       parts: parts,
       data: data,
@@ -848,7 +893,7 @@ export default class Actor5e extends Actor {
      * @param {Actor5e} actor                Actor for which the skill check is being rolled.
      * @param {D20RollConfiguration} config  Configuration data for the pending roll.
      * @param {string} skillId               ID of the skill being rolled as defined in `DND5E.skills`.
-     * @returns {boolean}                    Explicitly return false to prevent skill check from being rolled.
+     * @returns {boolean}                    Explicitly return `false` to prevent skill check from being rolled.
      */
     if ( Hooks.call("dnd5e.preRollSkill", this, rollData, skillId) === false ) return;
 
@@ -960,7 +1005,7 @@ export default class Actor5e extends Actor {
      * @param {Actor5e} actor                Actor for which the ability test is being rolled.
      * @param {D20RollConfiguration} config  Configuration data for the pending roll.
      * @param {string} abilityId             ID of the ability being rolled as defined in `DND5E.abilities`.
-     * @returns {boolean}                    Explicitly return false to prevent ability test from being rolled.
+     * @returns {boolean}                    Explicitly return `false` to prevent ability test from being rolled.
      */
     if ( Hooks.call("dnd5e.preRollAbilityTest", this, rollData, abilityId) === false ) return;
 
@@ -1045,7 +1090,7 @@ export default class Actor5e extends Actor {
      * @param {Actor5e} actor                Actor for which the ability save is being rolled.
      * @param {D20RollConfiguration} config  Configuration data for the pending roll.
      * @param {string} abilityId             ID of the ability being rolled as defined in `DND5E.abilities`.
-     * @returns {boolean}                    Explicitly return false to prevent ability save from being rolled.
+     * @returns {boolean}                    Explicitly return `false` to prevent ability save from being rolled.
      */
     if ( Hooks.call("dnd5e.preRollAbilitySave", this, rollData, abilityId) === false ) return;
 
@@ -1119,7 +1164,7 @@ export default class Actor5e extends Actor {
      * @memberof hookEvents
      * @param {Actor5e} actor                Actor for which the death saving throw is being rolled.
      * @param {D20RollConfiguration} config  Configuration data for the pending roll.
-     * @returns {boolean}                    Explicitly return false to prevent death saving throw from being rolled.
+     * @returns {boolean}                    Explicitly return `false` to prevent death saving throw from being rolled.
      */
     if ( Hooks.call("dnd5e.preRollDeathSave", this, rollData) === false ) return;
 
@@ -1166,7 +1211,8 @@ export default class Actor5e extends Actor {
     }
 
     /**
-     * A hook event that fires after a death saving throw has been rolled for an Actor.
+     * A hook event that fires after a death saving throw has been rolled for an Actor, but before
+     * updates have been performed.
      * @function dnd5e.rollDeathSave
      * @memberof hookEvents
      * @param {Actor5e} actor              Actor for which the death saving throw has been rolled.
@@ -1175,6 +1221,7 @@ export default class Actor5e extends Actor {
      * @param {object} details.updates     Updates that will be applied to the actor as a result of this save.
      * @param {string} details.chatString  Localizable string displayed in the create chat message. If not set, then
      *                                     no chat message will be displayed.
+     * @returns {boolean}                  Explicitly return `false` to prevent updates from being performed.
      */
     if ( Hooks.call("dnd5e.rollDeathSave", this, roll, details) === false ) return roll;
 
@@ -1194,14 +1241,13 @@ export default class Actor5e extends Actor {
   /* -------------------------------------------- */
 
   /**
-   * Roll a hit die of the appropriate type, gaining hit points equal to the die roll plus your CON modifier
-   * @param {string} [denomination]       The hit denomination of hit die to roll. Example "d8".
-   *                                      If no denomination is provided, the first available HD will be used
-   * @param {object} options              Additional options which modify the roll.
-   * @returns {Promise<DamageRoll|null>}  The created Roll instance, or null if no hit die was rolled
+   * Roll a hit die of the appropriate type, gaining hit points equal to the die roll plus your CON modifier.
+   * @param {string} [denomination]  The hit denomination of hit die to roll. Example "d8".
+   *                                 If no denomination is provided, the first available HD will be used
+   * @param {object} options         Additional options which modify the roll.
+   * @returns {Promise<Roll|null>}   The created Roll instance, or null if no hit die was rolled
    */
   async rollHitDie(denomination, options={}) {
-
     // If no denomination was provided, choose the first available
     let cls = null;
     if ( !denomination ) {
@@ -1223,17 +1269,15 @@ export default class Actor5e extends Actor {
 
     // Prepare roll data
     const flavor = game.i18n.localize("DND5E.HitDiceRoll");
-    if ( options.fastForward === undefined ) options.fastForward = !options.dialog;
-    const rollData = foundry.utils.mergeObject({
-      event: new Event("hitDie"),
-      parts: [`1${denomination}`, "@abilities.con.mod"],
+    const rollConfig = foundry.utils.mergeObject({
+      formula: `max(0, 1${denomination} + @abilities.con.mod)`,
       data: this.getRollData(),
-      title: `${flavor}: ${this.name}`,
-      flavor,
-      allowCritical: false,
-      dialogOptions: {width: 350},
+      chatMessage: true,
       messageData: {
         speaker: ChatMessage.getSpeaker({actor: this}),
+        flavor,
+        title: `${flavor}: ${this.name}`,
+        rollMode: game.settings.get("core", "rollMode"),
         "flags.dnd5e.roll": {type: "hitDie"}
       }
     }, options);
@@ -1242,15 +1286,19 @@ export default class Actor5e extends Actor {
      * A hook event that fires before a hit die is rolled for an Actor.
      * @function dnd5e.preRollHitDie
      * @memberof hookEvents
-     * @param {Actor5e} actor                Actor for which the hit die is to be rolled.
-     * @param {D20RollConfiguration} config  Configuration data for the pending roll.
-     * @param {string} denomination          Size of hit die to be rolled.
-     * @returns {boolean}                    Explicitly return false to prevent hit die from being rolled.
+     * @param {Actor5e} actor               Actor for which the hit die is to be rolled.
+     * @param {object} config               Configuration data for the pending roll.
+     * @param {string} config.formula       Formula that will be rolled.
+     * @param {object} config.data          Data used when evaluating the roll.
+     * @param {boolean} config.chatMessage  Should a chat message be created for this roll?
+     * @param {object} config.messageData   Data used to create the chat message.
+     * @param {string} denomination         Size of hit die to be rolled.
+     * @returns {boolean}                   Explicitly return `false` to prevent hit die from being rolled.
      */
-    if ( Hooks.call("dnd5e.preRollHitDie", this, rollData, denomination) === false ) return;
+    if ( Hooks.call("dnd5e.preRollHitDie", this, rollConfig, denomination) === false ) return;
 
-    const roll = await damageRoll(rollData);
-    if ( !roll ) return roll;
+    const roll = await new Roll(rollConfig.formula, rollConfig.data).roll({async: true});
+    if ( rollConfig.chatMessage ) roll.toMessage(rollConfig.messageData);
 
     const hp = this.system.attributes.hp;
     const dhp = Math.min(hp.max + (hp.tempmax ?? 0) - hp.value, roll.total);
@@ -1260,14 +1308,15 @@ export default class Actor5e extends Actor {
     };
 
     /**
-     * A hook event that fires after a hit die has been rolled for an Actor.
+     * A hook event that fires after a hit die has been rolled for an Actor, but before updates have been performed.
      * @function dnd5e.rollHitDie
      * @memberof hookEvents
-     * @param {Actor5e} actor        Actor for which the hit die has been rolled.
-     * @param {D20Roll} roll         The resulting roll.
+     * @param {Actor5e} actor         Actor for which the hit die has been rolled.
+     * @param {Roll} roll             The resulting roll.
      * @param {object} updates
      * @param {object} updates.actor  Updates that will be applied to the actor.
      * @param {object} updates.class  Updates that will be applied to the class.
+     * @returns {boolean}             Explicitly return `false` to prevent updates from being performed.
      */
     if ( Hooks.call("dnd5e.rollHitDie", this, roll, updates) === false ) return roll;
 
@@ -1342,6 +1391,7 @@ export default class Actor5e extends Actor {
    * @property {object[]} updateItems  Updates applied to actor's items.
    * @property {boolean} longRest      Whether the rest type was a long rest.
    * @property {boolean} newDay        Whether a new day occurred during the rest.
+   * @property {Roll[]} rolls          Any rolls that occurred during the rest process, not including hit dice.
    */
 
   /* -------------------------------------------- */
@@ -1433,6 +1483,7 @@ export default class Actor5e extends Actor {
     let hitPointUpdates = {};
     let hitDiceRecovered = 0;
     let hitDiceUpdates = [];
+    const rolls = [];
 
     // Recover hit points & hit dice on long rest
     if ( longRest ) {
@@ -1451,11 +1502,12 @@ export default class Actor5e extends Actor {
       },
       updateItems: [
         ...hitDiceUpdates,
-        ...this._getRestItemUsesRecovery({ recoverLongRestUses: longRest, recoverDailyUses: newDay })
+        ...await this._getRestItemUsesRecovery({ recoverLongRestUses: longRest, recoverDailyUses: newDay, rolls })
       ],
       longRest,
       newDay
     };
+    result.rolls = rolls;
 
     /**
      * A hook event that fires after rest result is calculated, but before any updates are performed.
@@ -1513,9 +1565,15 @@ export default class Actor5e extends Actor {
     // Summarize the rest duration
     let restFlavor;
     switch (game.settings.get("dnd5e", "restVariant")) {
-      case "normal": restFlavor = (longRest && newDay) ? "DND5E.LongRestOvernight" : `DND5E.${length}RestNormal`; break;
-      case "gritty": restFlavor = (!longRest && newDay) ? "DND5E.ShortRestOvernight" : `DND5E.${length}RestGritty`; break;
-      case "epic": restFlavor = `DND5E.${length}RestEpic`; break;
+      case "normal":
+        restFlavor = (longRest && newDay) ? "DND5E.LongRestOvernight" : `DND5E.${length}RestNormal`;
+        break;
+      case "gritty":
+        restFlavor = (!longRest && newDay) ? "DND5E.ShortRestOvernight" : `DND5E.${length}RestGritty`;
+        break;
+      case "epic":
+        restFlavor = `DND5E.${length}RestEpic`;
+        break;
     }
 
     // Determine the chat message to display
@@ -1530,6 +1588,7 @@ export default class Actor5e extends Actor {
       user: game.user.id,
       speaker: {actor: this, alias: this.name},
       flavor: game.i18n.localize(restFlavor),
+      rolls: result.rolls,
       content: game.i18n.format(message, {
         name: this.name,
         dice: longRest ? dhd : -dhd,
@@ -1553,7 +1612,7 @@ export default class Actor5e extends Actor {
     const max = hp.max + hp.tempmax;
     let diceRolled = 0;
     while ( (this.system.attributes.hp.value + threshold) <= max ) {
-      const r = await this.rollHitDie(undefined, {dialog: false});
+      const r = await this.rollHitDie();
       if ( r === null ) break;
       diceRolled += 1;
     }
@@ -1611,7 +1670,7 @@ export default class Actor5e extends Actor {
    * @returns {object}                               Updates to the actor.
    * @protected
    */
-  _getRestSpellRecovery({ recoverPact=true, recoverSpells=true }={}) {
+  _getRestSpellRecovery({recoverPact=true, recoverSpells=true}={}) {
     const spells = this.system.spells;
     let updates = {};
     if ( recoverPact ) {
@@ -1636,8 +1695,7 @@ export default class Actor5e extends Actor {
    * @returns {object}                     Array of item updates and number of hit dice recovered.
    * @protected
    */
-  _getRestHitDiceRecovery({maxHitDice=undefined}={}) {
-
+  _getRestHitDiceRecovery({maxHitDice}={}) {
     // Determine the number of hit dice which may be recovered
     if ( maxHitDice === undefined ) maxHitDice = Math.max(Math.floor(this.system.details.level / 2), 1);
 
@@ -1664,26 +1722,60 @@ export default class Actor5e extends Actor {
 
   /**
    * Recovers item uses during short or long rests.
-   *
    * @param {object} [options]
    * @param {boolean} [options.recoverShortRestUses=true]  Recover uses for items that recharge after a short rest.
    * @param {boolean} [options.recoverLongRestUses=true]   Recover uses for items that recharge after a long rest.
    * @param {boolean} [options.recoverDailyUses=true]      Recover uses for items that recharge on a new day.
-   * @returns {Array<object>}                              Array of item updates.
+   * @param {Roll[]} [options.rolls]                       Rolls that have been performed as part of this rest.
+   * @returns {Promise<object[]>}                          Array of item updates.
    * @protected
    */
-  _getRestItemUsesRecovery({ recoverShortRestUses=true, recoverLongRestUses=true, recoverDailyUses=true }={}) {
+  async _getRestItemUsesRecovery({recoverShortRestUses=true, recoverLongRestUses=true,
+    recoverDailyUses=true, rolls}={}) {
     let recovery = [];
     if ( recoverShortRestUses ) recovery.push("sr");
     if ( recoverLongRestUses ) recovery.push("lr");
     if ( recoverDailyUses ) recovery.push("day");
     let updates = [];
     for ( let item of this.items ) {
-      if ( recovery.includes(item.system.uses?.per) ) {
-        updates.push({_id: item.id, "system.uses.value": item.system.uses.max});
+      const uses = item.system.uses;
+      if ( recovery.includes(uses?.per) ) {
+        updates.push({_id: item.id, "system.uses.value": uses.max});
       }
       if ( recoverLongRestUses && item.system.recharge?.value ) {
         updates.push({_id: item.id, "system.recharge.charged": true});
+      }
+
+      // Items that roll to gain charges on a new day
+      if ( recoverDailyUses && uses?.recovery && (uses?.per === "charges") ) {
+        const roll = new Roll(uses.recovery, this.getRollData());
+        if ( recoverLongRestUses && (game.settings.get("dnd5e", "restVariant") === "gritty") ) {
+          roll.alter(7, 0, {multiplyNumeric: true});
+        }
+
+        let total = 0;
+        try {
+          total = (await roll.evaluate({async: true})).total;
+        } catch (err) {
+          ui.notifications.warn(game.i18n.format("DND5E.ItemRecoveryFormulaWarning", {
+            name: item.name,
+            formula: uses.recovery
+          }));
+        }
+
+        const newValue = Math.clamped(uses.value + total, 0, uses.max);
+        if ( newValue !== uses.value ) {
+          const diff = newValue - uses.value;
+          const isMax = newValue === uses.max;
+          const locKey = `DND5E.Item${diff < 0 ? "Loss" : "Recovery"}Roll${isMax ? "Max" : ""}`;
+          updates.push({_id: item.id, "system.uses.value": newValue});
+          rolls.push(roll);
+          await roll.toMessage({
+            user: game.user.id,
+            speaker: {actor: this, alias: this.name},
+            flavor: game.i18n.format(locKey, {name: item.name, count: Math.abs(diff)})
+          });
+        }
       }
     }
     return updates;

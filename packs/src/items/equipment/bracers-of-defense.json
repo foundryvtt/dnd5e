@@ -76,6 +76,7 @@
       "dt": null,
       "conditions": ""
     },
+    "baseItem": "",
     "speed": {
       "value": null,
       "conditions": ""
@@ -89,20 +90,28 @@
       "_id": "ul7rjl68p1kyv4z2",
       "changes": [
         {
-          "key": "data.attributes.ac.bonus",
+          "key": "system.attributes.ac.bonus",
           "mode": 2,
-          "value": "2"
+          "value": "2",
+          "priority": null
         }
       ],
       "disabled": false,
       "duration": {
-        "startTime": null
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
       },
       "icon": "icons/equipment/wrist/bracer-segmented-leather.webp",
       "label": "+2 to AC",
       "origin": "Compendium.dnd5e.items.DSHi7yT6OUyDoCcu",
       "transfer": true,
-      "flags": {}
+      "flags": {},
+      "tint": null
     }
   ],
   "folder": null,
@@ -110,5 +119,13 @@
   "ownership": {
     "default": 0
   },
-  "flags": {}
+  "flags": {},
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.0.0",
+    "coreVersion": "10.279",
+    "createdTime": 1661787233523,
+    "modifiedTime": 1661787233523,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  }
 }

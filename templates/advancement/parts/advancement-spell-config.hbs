@@ -1,0 +1,27 @@
+<div class="form-group">
+  <label>{{localize "DND5E.AbilityModifier"}}</label>
+  <div class="form-fields">
+    <select name="data.configuration.spell.ability">
+      {{selectOptions CONFIG.abilities selected=data.configuration.spell.ability blank="&mdash;"}}
+    </select>
+  </div>
+</div>
+
+<div class="form-group">
+  <label>{{localize "DND5E.SpellPreparationMode"}}</label>
+  <div class="form-fields">
+    <select name="data.configuration.spell.preparation">
+      {{selectOptions CONFIG.spellPreparationModes selected=data.configuration.spell.preparation blank="&mdash;"}}
+    </select>
+  </div>
+</div>
+
+<div class="form-group">
+  <label>{{localize "DND5E.LimitedUses"}}</label>
+  <div class="form-fields">
+    <input type="text" name="data.configuration.spell.uses.max" value="{{data.configuration.spell.uses.max}}">
+    <select name="data.configuration.spell.uses.per">
+      {{selectOptions CONFIG.limitedUsePeriods selected=data.configuration.spell.uses.per blank="&mdash;"}}
+    </select>
+  </div>
+</div>

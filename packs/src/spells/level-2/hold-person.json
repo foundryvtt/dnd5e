@@ -23,6 +23,7 @@
     },
     "target": {
       "value": 1,
+      "width": null,
       "units": "",
       "type": "creature"
     },
@@ -35,6 +36,11 @@
       "value": 0,
       "max": 0,
       "per": ""
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
     },
     "ability": "",
     "actionType": "save",
@@ -83,5 +89,14 @@
   "sort": 100001,
   "flags": {},
   "img": "icons/magic/control/debuff-chains-ropes-purple.webp",
-  "effects": []
+  "effects": [],
+  "folder": null,
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.0.0",
+    "coreVersion": "10.279",
+    "createdTime": 1661787234063,
+    "modifiedTime": 1661787234063,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  }
 }

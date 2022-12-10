@@ -107,7 +107,7 @@
         "value": 200,
         "min": 0,
         "max": 200,
-        "temp": 0,
+        "temp": null,
         "tempmax": 0,
         "formula": "16d10 + 112"
       },
@@ -175,16 +175,24 @@
       "size": "lg",
       "di": {
         "value": [],
+        "bypasses": [],
         "custom": ""
       },
       "dr": {
         "value": [
-          "radiant"
+          "bludgeoning",
+          "piercing",
+          "radiant",
+          "slashing"
         ],
-        "custom": "bludgeoning, piercing, and slashing from nonmagical attacks"
+        "bypasses": [
+          "mgc"
+        ],
+        "custom": ""
       },
       "dv": {
         "value": [],
+        "bypasses": [],
         "custom": ""
       },
       "ci": {
@@ -545,46 +553,27 @@
     "name": "Planetar",
     "displayName": 20,
     "actorLink": false,
-    "tint": null,
     "width": 2,
     "height": 2,
-    "scale": 1.5,
-    "mirrorX": false,
-    "mirrorY": false,
     "lockRotation": false,
     "rotation": 0,
-    "vision": false,
-    "dimSight": 0,
-    "brightSight": 120,
-    "dimLight": 0,
-    "brightLight": 0,
-    "sightAngle": 0,
-    "lightAngle": 0,
-    "lightAlpha": 1,
-    "lightAnimation": {
-      "speed": 5,
-      "intensity": 5
-    },
     "disposition": -1,
     "displayBars": 40,
     "bar1": {
       "attribute": "attributes.hp"
     },
     "bar2": {
-      "attribute": ""
+      "attribute": null
     },
     "flags": {},
     "randomImg": false,
-    "img": "systems/dnd5e/tokens/celestial/Planetar.webp",
-    "actorId": "XEByBLeOkDgL3mrr",
     "alpha": 1,
     "light": {
-      "alpha": 0.5,
-      "angle": 0,
+      "alpha": 1,
+      "angle": 360,
       "bright": 0,
       "coloration": 1,
       "dim": 0,
-      "gradual": true,
       "luminosity": 0.5,
       "saturation": 0,
       "contrast": 0,
@@ -592,20 +581,44 @@
       "animation": {
         "speed": 5,
         "intensity": 5,
+        "type": null,
         "reverse": false
       },
       "darkness": {
         "min": 0,
         "max": 1
-      }
-    }
+      },
+      "attenuation": 0.5,
+      "color": null
+    },
+    "texture": {
+      "src": "systems/dnd5e/tokens/celestial/Planetar.webp",
+      "tint": null,
+      "scaleX": 1.5,
+      "scaleY": 1.5,
+      "offsetX": 0,
+      "offsetY": 0,
+      "rotation": 0
+    },
+    "sight": {
+      "angle": 360,
+      "enabled": false,
+      "range": 120,
+      "brightness": 1,
+      "visionMode": "basic",
+      "color": null,
+      "attenuation": 0.1,
+      "saturation": 0,
+      "contrast": 0
+    },
+    "detectionModes": []
   },
   "items": [
     {
       "_id": "sDvx0IybgYa8Q4WG",
       "name": "Angelic Weapons",
       "type": "feat",
-      "img": "systems/dnd5e/icons/spells/enchant-sky-3.jpg",
+      "img": "icons/magic/fire/dagger-rune-enchant-flame-strong-blue-yellow.webp",
       "system": {
         "description": {
           "value": "<section class=\"secret\"><p>The planetar's weapon attacks are magical. When the planetar hits with any weapon, the weapon deals an <strong>extra 5d8 <em>radiant damage</em></strong> (included in the attack).</p></section><p>The planetar's weapon attacks are magical. When the planetar hits with any weapon, the weapon deals extra <em>radiant damage</em> (included in the attack).</p>",
@@ -674,7 +687,15 @@
       "ownership": {
         "default": 0
       },
-      "flags": {}
+      "flags": {},
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      }
     },
     {
       "_id": "2kBUlTLMlwq3KoUB",
@@ -749,7 +770,15 @@
       "ownership": {
         "default": 0
       },
-      "flags": {}
+      "flags": {},
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      }
     },
     {
       "_id": "9hrSczyYfl4fSrpZ",
@@ -824,113 +853,21 @@
       "ownership": {
         "default": 0
       },
-      "flags": {}
-    },
-    {
-      "_id": "Ku07tO3vqvuYCbkJ",
-      "name": "Detect Evil and Good",
-      "type": "spell",
-      "img": "systems/dnd5e/icons/spells/air-burst-sky-2.jpg",
-      "system": {
-        "description": {
-          "value": "<p>For the duration, you know if there is an aberration, celestial, elemental, fey, fiend, or undead within 30 feet of you, as well as where the creature is located. Similarly, you know if there is a place or object within 30 feet of you that has been magically consecrated or desecrated.</p><p>The spell can penetrate most barriers, but it is blocked by 1 foot of stone, 1 inch of common metal, a thin sheet of lead, or 3 feet of wood or dirt.</p>",
-          "chat": "",
-          "unidentified": ""
-        },
-        "source": "PHB pg. 231",
-        "activation": {
-          "type": "action",
-          "cost": 1,
-          "condition": ""
-        },
-        "duration": {
-          "value": 10,
-          "units": "minute"
-        },
-        "target": {
-          "value": 30,
-          "width": null,
-          "units": "ft",
-          "type": "radius"
-        },
-        "range": {
-          "value": null,
-          "long": null,
-          "units": "self"
-        },
-        "uses": {
-          "value": 0,
-          "max": 0,
-          "per": ""
-        },
-        "consume": {
-          "type": "",
-          "target": null,
-          "amount": null
-        },
-        "ability": "",
-        "actionType": "util",
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "critical": {
-          "threshold": null,
-          "damage": ""
-        },
-        "damage": {
-          "parts": [],
-          "versatile": "",
-          "value": ""
-        },
-        "formula": "",
-        "save": {
-          "ability": "",
-          "dc": null,
-          "scaling": "spell",
-          "value": ""
-        },
-        "level": 1,
-        "school": "div",
-        "components": {
-          "value": "",
-          "vocal": true,
-          "somatic": true,
-          "material": false,
-          "ritual": false,
-          "concentration": true
-        },
-        "materials": {
-          "value": "",
-          "consumed": false,
-          "cost": 0,
-          "supply": 0
-        },
-        "preparation": {
-          "mode": "atwill",
-          "prepared": true
-        },
-        "scaling": {
-          "mode": "none",
-          "formula": ""
-        },
-        "attunement": 0
-      },
-      "effects": [],
-      "folder": null,
-      "sort": 100001,
-      "ownership": {
-        "default": 0
-      },
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.dnd5e.spells.Mzh95utKDPIrjiH8"
-        }
+      "flags": {},
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
       "_id": "2C0408CEBtrZW8ji",
       "name": "Invisibility (self only)",
       "type": "spell",
-      "img": "systems/dnd5e/icons/spells/fog-sky-2.jpg",
+      "img": "icons/magic/air/fog-gas-smoke-blue-dense-white.webp",
       "system": {
         "description": {
           "value": "<p>A creature you touch becomes invisible until the spell ends. Anything the target is wearing or carrying is invisible as long as it is on the target's person. The spell ends for a target that attacks or casts a spell.</p><p><strong>At Higher Levels.</strong> When you cast this spell using a spell slot of 3rd level or higher, you can target one additional creature for each slot level above 2nd.</p>",
@@ -1024,724 +961,14 @@
         "core": {
           "sourceId": "Compendium.dnd5e.spells.1N8dDMMgZ1h1YJ3B"
         }
-      }
-    },
-    {
-      "_id": "QKDbYTV2WLbIss7l",
-      "name": "Blade Barrier",
-      "type": "spell",
-      "img": "systems/dnd5e/icons/spells/needles-sky-3.jpg",
-      "system": {
-        "description": {
-          "value": "<p>You create a vertical wall of whirling, razor-sharp blades made of magical energy. The wall appears within range and lasts for the duration. You can make a straight wall up to 100 feet long, 20 feet high, and 5 feet thick, or a ringed wall up to 60 feet in diameter, 20 feet high, and 5 feet thick. The wall provides three-quarters cover to creatures behind it, and its space is difficult terrain.</p><p>When a creature enters the wall's area for the first time on a turn or starts its turn there, the creature must make a Dexterity saving throw. On a failed save, the creature takes 6d10 slashing damage. On a successful save, the creature takes half as much damage.</p>",
-          "chat": "",
-          "unidentified": ""
-        },
-        "source": "PHB pg. 218",
-        "activation": {
-          "type": "action",
-          "cost": 1,
-          "condition": ""
-        },
-        "duration": {
-          "value": 10,
-          "units": "minute"
-        },
-        "target": {
-          "value": 100,
-          "width": null,
-          "units": "ft",
-          "type": "wall"
-        },
-        "range": {
-          "value": 90,
-          "long": 0,
-          "units": "ft"
-        },
-        "uses": {
-          "value": 3,
-          "max": 3,
-          "per": "day"
-        },
-        "consume": {
-          "type": "",
-          "target": null,
-          "amount": null
-        },
-        "ability": "",
-        "actionType": "save",
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "critical": {
-          "threshold": null,
-          "damage": ""
-        },
-        "damage": {
-          "parts": [
-            [
-              "6d10",
-              "slashing"
-            ]
-          ],
-          "versatile": ""
-        },
-        "formula": "",
-        "save": {
-          "ability": "dex",
-          "dc": 20,
-          "scaling": "spell"
-        },
-        "level": 6,
-        "school": "evo",
-        "components": {
-          "value": "",
-          "vocal": true,
-          "somatic": true,
-          "material": false,
-          "ritual": false,
-          "concentration": true
-        },
-        "materials": {
-          "value": "",
-          "consumed": false,
-          "cost": 0,
-          "supply": 0
-        },
-        "preparation": {
-          "mode": "innate",
-          "prepared": true
-        },
-        "scaling": {
-          "mode": "none",
-          "formula": ""
-        },
-        "attunement": 0
       },
-      "effects": [],
-      "folder": null,
-      "sort": 100001,
-      "ownership": {
-        "default": 0
-      },
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.dnd5e.spells.dLJhxDfeyOsc3zsY"
-        }
-      }
-    },
-    {
-      "_id": "uckU6zjyrjGJ4ODK",
-      "name": "Dispel Evil and Good",
-      "type": "spell",
-      "img": "systems/dnd5e/icons/spells/air-burst-sky-3.jpg",
-      "system": {
-        "description": {
-          "value": "<p>Shimmering energy surrounds and protects you from fey, Undead, and creatures originating from Beyond the Material Plane. For the Duration, Celestials, Elementals, fey, Fiends, and undead have disadvantage on Attack rolls against you.</p><p>You can end the spell early by using either of the following special functions.</p><p><strong>Break Enchantment</strong>. As your action, you touch a creature you can reach that is Charmed, Frightened, or possessed by a Celestial, an elemental, a fey, a fiend, or an Undead. The creature you touch is no longer charmed, frightened, or possessed by such creatures.</p><p><strong>Dismissal</strong>. As your action, make a melee spell Attack against a Celestial, an elemental, a fey, a fiend, or an Undead you can reach. On a hit, you attempt to drive the creature back to its home plane. The creature must succeed on a Charisma saving throw or be sent back to its home plane (if it isn't there already). If they aren't on their home plane, undead are sent to the Shadowfell, and fey are sent to the Feywild.</p>",
-          "chat": "",
-          "unidentified": ""
-        },
-        "source": "PHB pg. 233",
-        "activation": {
-          "type": "action",
-          "cost": 1,
-          "condition": ""
-        },
-        "duration": {
-          "value": 1,
-          "units": "minute"
-        },
-        "target": {
-          "value": null,
-          "width": null,
-          "units": null,
-          "type": "self"
-        },
-        "range": {
-          "value": null,
-          "long": null,
-          "units": "self"
-        },
-        "uses": {
-          "value": 3,
-          "max": 3,
-          "per": "day"
-        },
-        "consume": {
-          "type": "",
-          "target": null,
-          "amount": null
-        },
-        "ability": "",
-        "actionType": "msak",
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "critical": {
-          "threshold": null,
-          "damage": ""
-        },
-        "damage": {
-          "parts": [],
-          "versatile": "",
-          "value": ""
-        },
-        "formula": "",
-        "save": {
-          "ability": "cha",
-          "dc": 20,
-          "scaling": "spell",
-          "value": ""
-        },
-        "level": 5,
-        "school": "abj",
-        "components": {
-          "value": "",
-          "vocal": true,
-          "somatic": true,
-          "material": false,
-          "ritual": false,
-          "concentration": true
-        },
-        "materials": {
-          "value": "",
-          "consumed": false,
-          "cost": 0,
-          "supply": 0
-        },
-        "preparation": {
-          "mode": "innate",
-          "prepared": true
-        },
-        "scaling": {
-          "mode": "none",
-          "formula": ""
-        },
-        "attunement": 0
-      },
-      "effects": [],
-      "folder": null,
-      "sort": 100001,
-      "ownership": {
-        "default": 0
-      },
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.dnd5e.spells.TkJ8Wtg1L7TZtspm"
-        }
-      }
-    },
-    {
-      "_id": "cbFJQzrSdDMwuA6e",
-      "name": "Flame Strike",
-      "type": "spell",
-      "img": "systems/dnd5e/icons/spells/beam-red-3.jpg",
-      "system": {
-        "description": {
-          "value": "<p>A vertical column of divine fire roars down from the heavens in a location you specify. Each creature in a 10-foot-radius, 40-foot-high Cylinder centered on a point within range must make a Dexterity saving throw. A creature takes 4d6 fire damage and 4d6 radiant damage on a failed save, or half as much damage on a successful one.</p><p><strong>At Higher Levels.</strong> When you cast this spell using a spell slot of 6th level or higher, the fire damage or the radiant damage (your choice) increases by 1d6 for each slot level above 5th.</p>",
-          "chat": "",
-          "unidentified": ""
-        },
-        "source": "PHB pg. 242",
-        "activation": {
-          "type": "action",
-          "cost": 1,
-          "condition": ""
-        },
-        "duration": {
-          "value": null,
-          "units": "inst"
-        },
-        "target": {
-          "value": 10,
-          "width": null,
-          "units": "ft",
-          "type": "cylinder"
-        },
-        "range": {
-          "value": 60,
-          "long": 0,
-          "units": "ft"
-        },
-        "uses": {
-          "value": 3,
-          "max": 3,
-          "per": "day"
-        },
-        "consume": {
-          "type": "",
-          "target": null,
-          "amount": null
-        },
-        "ability": "",
-        "actionType": "save",
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "critical": {
-          "threshold": null,
-          "damage": ""
-        },
-        "damage": {
-          "parts": [
-            [
-              "4d6",
-              "radiant"
-            ],
-            [
-              "4d6",
-              "fire"
-            ]
-          ],
-          "versatile": ""
-        },
-        "formula": "",
-        "save": {
-          "ability": "dex",
-          "dc": 20,
-          "scaling": "spell"
-        },
-        "level": 5,
-        "school": "evo",
-        "components": {
-          "value": "",
-          "vocal": true,
-          "somatic": true,
-          "material": false,
-          "ritual": false,
-          "concentration": false
-        },
-        "materials": {
-          "value": "",
-          "consumed": false,
-          "cost": 0,
-          "supply": 0
-        },
-        "preparation": {
-          "mode": "innate",
-          "prepared": true
-        },
-        "scaling": {
-          "mode": "level",
-          "formula": "1d6"
-        },
-        "attunement": 0
-      },
-      "effects": [],
-      "folder": null,
-      "sort": 100001,
-      "ownership": {
-        "default": 0
-      },
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.dnd5e.spells.5e1xTohkzqFqbYH4"
-        }
-      }
-    },
-    {
-      "_id": "PkK73wFtbXRz5zlC",
-      "name": "Raise Dead",
-      "type": "spell",
-      "img": "systems/dnd5e/icons/spells/heal-royal-2.jpg",
-      "system": {
-        "description": {
-          "value": "<p>You return a dead creature you touch to life, provided that it has been dead no longer than 10 days. If the creature's soul is both willing and at liberty to rejoin the body, the creature returns to life with 1 hit point.</p><p>This spell also neutralizes any poisons and cures nonmagical diseases that affected the creature at the time it died. This spell doesn't, however, remove magical diseases, curses, or similar effects; if these aren't first removed prior to casting the spell, they take effect when the creature returns to life. The spell can't return an undead creature to life.</p><p>This spell closes all mortal wounds, but it doesn't restore missing body parts. If the creature is lacking body parts or organs integral for its survival—its head, for instance—the spell automatically fails.</p><p>Coming back from the dead is an ordeal. The target takes a −4 penalty to all attack rolls, saving throws, and ability checks. Every time the target finishes a long rest, the penalty is reduced by 1 until it disappears.</p>",
-          "chat": "",
-          "unidentified": ""
-        },
-        "source": "PHB pg. 270",
-        "activation": {
-          "type": "hour",
-          "cost": 1,
-          "condition": ""
-        },
-        "duration": {
-          "value": null,
-          "units": "inst"
-        },
-        "target": {
-          "value": 1,
-          "width": null,
-          "units": "spec",
-          "type": "creature"
-        },
-        "range": {
-          "value": null,
-          "long": null,
-          "units": "touch"
-        },
-        "uses": {
-          "value": 3,
-          "max": 3,
-          "per": "day"
-        },
-        "consume": {
-          "type": "",
-          "target": null,
-          "amount": null
-        },
-        "ability": "",
-        "actionType": "heal",
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "critical": {
-          "threshold": null,
-          "damage": ""
-        },
-        "damage": {
-          "parts": [
-            [
-              "1",
-              "healing"
-            ]
-          ],
-          "versatile": "",
-          "value": ""
-        },
-        "formula": "",
-        "save": {
-          "ability": "",
-          "dc": null,
-          "scaling": "spell",
-          "value": ""
-        },
-        "level": 5,
-        "school": "nec",
-        "components": {
-          "value": "",
-          "vocal": true,
-          "somatic": true,
-          "material": false,
-          "ritual": false,
-          "concentration": false
-        },
-        "materials": {
-          "value": "",
-          "consumed": true,
-          "cost": 500,
-          "supply": 0
-        },
-        "preparation": {
-          "mode": "innate",
-          "prepared": true
-        },
-        "scaling": {
-          "mode": "none",
-          "formula": ""
-        },
-        "attunement": 0
-      },
-      "effects": [],
-      "folder": null,
-      "sort": 100001,
-      "ownership": {
-        "default": 0
-      },
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.dnd5e.spells.AGFMPAmuzwWO6Dfz"
-        }
-      }
-    },
-    {
-      "_id": "aBaYlyr1HxX3qdBe",
-      "name": "Commune",
-      "type": "spell",
-      "img": "systems/dnd5e/icons/spells/wind-grasp-sky-3.jpg",
-      "system": {
-        "description": {
-          "value": "<p>You contact your deity or a divine proxy and ask up to three questions that can be answered with a yes or no. You must ask your questions before the spell ends. You receive a correct answer for each question.</p><p>Divine beings aren't necessarily omniscient, so you might receive \"unclear\" as an answer if a question pertains to information that lies beyond the deity's knowledge. In a case where a one-word answer could be misleading or contrary to the deity's interests, the DM might offer a short phrase as an answer instead.</p><p>If you cast the spell two or more times before finishing your next long rest, there is a cumulative 25 percent chance for each casting after the first that you get no answer. The DM makes this roll in secret.</p>",
-          "chat": "",
-          "unidentified": ""
-        },
-        "source": "PHB pg. 223",
-        "activation": {
-          "type": "minute",
-          "cost": 1,
-          "condition": ""
-        },
-        "duration": {
-          "value": 1,
-          "units": "minute"
-        },
-        "target": {
-          "value": null,
-          "width": null,
-          "units": null,
-          "type": "self"
-        },
-        "range": {
-          "value": null,
-          "long": null,
-          "units": "self"
-        },
-        "uses": {
-          "value": 1,
-          "max": 1,
-          "per": "day"
-        },
-        "consume": {
-          "type": "",
-          "target": null,
-          "amount": null
-        },
-        "ability": "",
-        "actionType": "util",
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "critical": {
-          "threshold": null,
-          "damage": ""
-        },
-        "damage": {
-          "parts": [],
-          "versatile": "",
-          "value": ""
-        },
-        "formula": "",
-        "save": {
-          "ability": "",
-          "dc": null,
-          "scaling": "spell",
-          "value": ""
-        },
-        "level": 5,
-        "school": "div",
-        "components": {
-          "value": "",
-          "vocal": true,
-          "somatic": true,
-          "material": false,
-          "ritual": true,
-          "concentration": false
-        },
-        "materials": {
-          "value": "",
-          "consumed": false,
-          "cost": 0,
-          "supply": 0
-        },
-        "preparation": {
-          "mode": "innate",
-          "prepared": true
-        },
-        "scaling": {
-          "mode": "none",
-          "formula": ""
-        },
-        "attunement": 0
-      },
-      "effects": [],
-      "folder": null,
-      "sort": 100001,
-      "ownership": {
-        "default": 0
-      },
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.dnd5e.spells.d54VDyFulD9xxY7J"
-        }
-      }
-    },
-    {
-      "_id": "hnTVqZPYILLXFnMa",
-      "name": "Control Weather",
-      "type": "spell",
-      "img": "systems/dnd5e/icons/spells/wind-sky-3.jpg",
-      "system": {
-        "description": {
-          "value": "<p>You take control of the weather within 5 miles of you for the duration. You must be outdoors to cast this spell. Moving to a place where you don't have a clear path to the sky ends the spell early.</p><p>When you cast the spell, you change the current weather conditions, which are determined by the DM based on the climate and season. You can change precipitation, temperature, and wind. It takes 1d4 x 10 minutes for the new conditions to take effect. Once they do so, you can change the conditions again. When the spell ends, the weather gradually returns to normal.</p><p>When you change the weather conditions, find a current condition on the following tables and change its stage by one, up or down. When changing the wind, you can change its direction.</p><p><strong>Conditions</strong></p>\n<ol>\n<li>Clear</li>\n<li>Light clouds</li>\n<li>Overcast or ground fog</li>\n<li>Rain, hail, or snow</li>\n<li>Torrential rain, driving hail, or blizzard</li>\n</ol>\n<p><strong>Temperature</strong></p>\n<ol>\n<li>Unbearable heat</li>\n<li>Hot</li>\n<li>Warm</li>\n<li>Cool</li>\n<li>Cold</li>\n<li>Arctic cold</li>\n</ol>\n<p><strong>Wind</strong></p>\n<ol>\n<li>Calm</li>\n<li>Moderate wind</li>\n<li>Strong wind</li>\n<li>Gale</li>\n<li>Storm</li>\n</ol>",
-          "chat": "",
-          "unidentified": ""
-        },
-        "source": "PHB pg. 228",
-        "activation": {
-          "type": "minute",
-          "cost": 10,
-          "condition": ""
-        },
-        "duration": {
-          "value": 8,
-          "units": "hour"
-        },
-        "target": {
-          "value": 5,
-          "width": null,
-          "units": "mi",
-          "type": "radius"
-        },
-        "range": {
-          "value": null,
-          "long": null,
-          "units": "self"
-        },
-        "uses": {
-          "value": 1,
-          "max": 1,
-          "per": "day"
-        },
-        "consume": {
-          "type": "",
-          "target": null,
-          "amount": null
-        },
-        "ability": "",
-        "actionType": "util",
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "critical": {
-          "threshold": null,
-          "damage": ""
-        },
-        "damage": {
-          "parts": [],
-          "versatile": "",
-          "value": ""
-        },
-        "formula": "",
-        "save": {
-          "ability": "",
-          "dc": null,
-          "scaling": "spell",
-          "value": ""
-        },
-        "level": 8,
-        "school": "trs",
-        "components": {
-          "value": "",
-          "vocal": true,
-          "somatic": true,
-          "material": false,
-          "ritual": false,
-          "concentration": true
-        },
-        "materials": {
-          "value": "",
-          "consumed": false,
-          "cost": 0,
-          "supply": 0
-        },
-        "preparation": {
-          "mode": "innate",
-          "prepared": true
-        },
-        "scaling": {
-          "mode": "none",
-          "formula": ""
-        },
-        "attunement": 0
-      },
-      "effects": [],
-      "folder": null,
-      "sort": 100001,
-      "ownership": {
-        "default": 0
-      },
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.dnd5e.spells.ZPd73HtKF3At11jh"
-        }
-      }
-    },
-    {
-      "_id": "SMlbWJOjP5Ua8cnr",
-      "name": "Insect Plague",
-      "type": "spell",
-      "img": "systems/dnd5e/icons/spells/leaf-jade-3.jpg",
-      "system": {
-        "description": {
-          "value": "<p>Swarming, biting locusts fill a 20-foot-radius Sphere centered on a point you choose within range. The sphere spreads around corners. The sphere remains for the Duration, and its area is lightly obscured. The sphere's area is difficult terrain.</p><p>When the area appears, each creature in it must make a Constitution saving throw. A creature takes 4d10 piercing damage on a failed save, or half as much damage on a successful one. A creature must also make this saving throw when it enters the spell's area for the first time on a turn or ends its turn there.</p><p><strong>At Higher Levels.</strong> When you cast this spell using a spell slot of 6th level or higher, the damage increases by 1d10 for each slot level above 5th.</p>",
-          "chat": "",
-          "unidentified": ""
-        },
-        "source": "PHB pg. 254",
-        "activation": {
-          "type": "action",
-          "cost": 1,
-          "condition": ""
-        },
-        "duration": {
-          "value": 10,
-          "units": "minute"
-        },
-        "target": {
-          "value": 20,
-          "width": null,
-          "units": "ft",
-          "type": "sphere"
-        },
-        "range": {
-          "value": 300,
-          "long": 0,
-          "units": "ft"
-        },
-        "uses": {
-          "value": 1,
-          "max": 1,
-          "per": "day"
-        },
-        "consume": {
-          "type": "",
-          "target": null,
-          "amount": null
-        },
-        "ability": "",
-        "actionType": "save",
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "critical": {
-          "threshold": null,
-          "damage": ""
-        },
-        "damage": {
-          "parts": [
-            [
-              "4d10",
-              "piercing"
-            ]
-          ],
-          "versatile": ""
-        },
-        "formula": "",
-        "save": {
-          "ability": "con",
-          "dc": 20,
-          "scaling": "spell"
-        },
-        "level": 5,
-        "school": "con",
-        "components": {
-          "value": "",
-          "vocal": true,
-          "somatic": true,
-          "material": false,
-          "ritual": false,
-          "concentration": true
-        },
-        "materials": {
-          "value": "",
-          "consumed": false,
-          "cost": 0,
-          "supply": 0
-        },
-        "preparation": {
-          "mode": "innate",
-          "prepared": true
-        },
-        "scaling": {
-          "mode": "level",
-          "formula": "1d10"
-        },
-        "attunement": 0
-      },
-      "effects": [],
-      "folder": null,
-      "sort": 100001,
-      "ownership": {
-        "default": 0
-      },
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.dnd5e.spells.OVikYmSdHliAG2YD"
-        }
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -1817,7 +1044,15 @@
       "ownership": {
         "default": 0
       },
-      "flags": {}
+      "flags": {},
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      }
     },
     {
       "_id": "LyxrhwvzMW4YbiYE",
@@ -1892,7 +1127,15 @@
       "ownership": {
         "default": 0
       },
-      "flags": {}
+      "flags": {},
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      }
     },
     {
       "_id": "BBLXs9hiUvtRaP16",
@@ -1997,8 +1240,7 @@
           "two": true,
           "ver": false
         },
-        "proficient": true,
-        "attuned": false
+        "proficient": true
       },
       "effects": [],
       "folder": null,
@@ -2006,7 +1248,15 @@
       "ownership": {
         "default": 0
       },
-      "flags": {}
+      "flags": {},
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      }
     },
     {
       "_id": "VJz6sW3vOJcEL4IS",
@@ -2086,7 +1336,889 @@
       "ownership": {
         "default": 0
       },
-      "flags": {}
+      "flags": {},
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      }
+    },
+    {
+      "_id": "Mzh95utKDPIrjiH8",
+      "name": "Detect Evil and Good",
+      "ownership": {
+        "default": 0
+      },
+      "type": "spell",
+      "system": {
+        "description": {
+          "value": "<p>For the duration, you know if there is an aberration, celestial, elemental, fey, fiend, or undead within 30 feet of you, as well as where the creature is located. Similarly, you know if there is a place or object within 30 feet of you that has been magically consecrated or desecrated.</p><p>The spell can penetrate most barriers, but it is blocked by 1 foot of stone, 1 inch of common metal, a thin sheet of lead, or 3 feet of wood or dirt.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "PHB pg. 231",
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": 10,
+          "units": "minute"
+        },
+        "target": {
+          "value": 30,
+          "width": null,
+          "units": "ft",
+          "type": "radius"
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": "self"
+        },
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": ""
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null
+        },
+        "ability": "",
+        "actionType": "util",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": "",
+          "value": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell",
+          "value": ""
+        },
+        "level": 1,
+        "school": "div",
+        "components": {
+          "value": "",
+          "vocal": true,
+          "somatic": true,
+          "material": false,
+          "ritual": false,
+          "concentration": true
+        },
+        "materials": {
+          "value": "",
+          "consumed": false,
+          "cost": 0,
+          "supply": 0
+        },
+        "preparation": {
+          "mode": "atwill",
+          "prepared": true
+        },
+        "scaling": {
+          "mode": "none",
+          "formula": ""
+        }
+      },
+      "sort": 100001,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.Mzh95utKDPIrjiH8"
+        }
+      },
+      "img": "icons/magic/air/air-burst-spiral-blue-gray.webp",
+      "effects": [],
+      "folder": null,
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.0",
+        "coreVersion": "10.279",
+        "createdTime": 1661787234128,
+        "modifiedTime": 1661791116611,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      }
+    },
+    {
+      "_id": "dLJhxDfeyOsc3zsY",
+      "name": "Blade Barrier",
+      "ownership": {
+        "default": 0
+      },
+      "type": "spell",
+      "system": {
+        "description": {
+          "value": "<p>You create a vertical wall of whirling, razor-sharp blades made of magical energy. The wall appears within range and lasts for the duration. You can make a straight wall up to 100 feet long, 20 feet high, and 5 feet thick, or a ringed wall up to 60 feet in diameter, 20 feet high, and 5 feet thick. The wall provides three-quarters cover to creatures behind it, and its space is difficult terrain.</p><p>When a creature enters the wall's area for the first time on a turn or starts its turn there, the creature must make a Dexterity saving throw. On a failed save, the creature takes 6d10 slashing damage. On a successful save, the creature takes half as much damage.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "PHB pg. 218",
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": 10,
+          "units": "minute"
+        },
+        "target": {
+          "value": 100,
+          "width": null,
+          "units": "ft",
+          "type": "wall"
+        },
+        "range": {
+          "value": 90,
+          "long": 0,
+          "units": "ft"
+        },
+        "uses": {
+          "value": 3,
+          "max": 3,
+          "per": "day"
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null
+        },
+        "ability": "",
+        "actionType": "save",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [
+            [
+              "6d10",
+              "slashing"
+            ]
+          ],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "dex",
+          "dc": 20,
+          "scaling": "spell"
+        },
+        "level": 6,
+        "school": "evo",
+        "components": {
+          "value": "",
+          "vocal": true,
+          "somatic": true,
+          "material": false,
+          "ritual": false,
+          "concentration": true
+        },
+        "materials": {
+          "value": "",
+          "consumed": false,
+          "cost": 0,
+          "supply": 0
+        },
+        "preparation": {
+          "mode": "innate",
+          "prepared": true
+        },
+        "scaling": {
+          "mode": "none",
+          "formula": ""
+        }
+      },
+      "sort": 100001,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.dLJhxDfeyOsc3zsY"
+        }
+      },
+      "img": "icons/magic/light/projectile-beams-salvo-white.webp",
+      "effects": [],
+      "folder": null,
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.0",
+        "coreVersion": "10.279",
+        "createdTime": 1661787234179,
+        "modifiedTime": 1661791116612,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      }
+    },
+    {
+      "_id": "TkJ8Wtg1L7TZtspm",
+      "name": "Dispel Evil and Good",
+      "ownership": {
+        "default": 0
+      },
+      "type": "spell",
+      "system": {
+        "description": {
+          "value": "<p>Shimmering energy surrounds and protects you from fey, Undead, and creatures originating from Beyond the Material Plane. For the Duration, Celestials, Elementals, fey, Fiends, and undead have disadvantage on Attack rolls against you.</p><p>You can end the spell early by using either of the following special functions.</p><p><strong>Break Enchantment</strong>. As your action, you touch a creature you can reach that is Charmed, Frightened, or possessed by a Celestial, an elemental, a fey, a fiend, or an Undead. The creature you touch is no longer charmed, frightened, or possessed by such creatures.</p><p><strong>Dismissal</strong>. As your action, make a melee spell Attack against a Celestial, an elemental, a fey, a fiend, or an Undead you can reach. On a hit, you attempt to drive the creature back to its home plane. The creature must succeed on a Charisma saving throw or be sent back to its home plane (if it isn't there already). If they aren't on their home plane, undead are sent to the Shadowfell, and fey are sent to the Feywild.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "PHB pg. 233",
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": 1,
+          "units": "minute"
+        },
+        "target": {
+          "value": null,
+          "width": null,
+          "units": null,
+          "type": "self"
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": "self"
+        },
+        "uses": {
+          "value": 3,
+          "max": 3,
+          "per": "day"
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null
+        },
+        "ability": "",
+        "actionType": "msak",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": "",
+          "value": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "cha",
+          "dc": 20,
+          "scaling": "spell",
+          "value": ""
+        },
+        "level": 5,
+        "school": "abj",
+        "components": {
+          "value": "",
+          "vocal": true,
+          "somatic": true,
+          "material": true,
+          "ritual": false,
+          "concentration": true
+        },
+        "materials": {
+          "value": "Holy water or powdered silver and iron",
+          "consumed": false,
+          "cost": 0,
+          "supply": 0
+        },
+        "preparation": {
+          "mode": "innate",
+          "prepared": true
+        },
+        "scaling": {
+          "mode": "none",
+          "formula": ""
+        }
+      },
+      "sort": 100001,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.TkJ8Wtg1L7TZtspm"
+        }
+      },
+      "img": "icons/magic/air/air-burst-spiral-large-blue.webp",
+      "effects": [],
+      "folder": null,
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.0",
+        "coreVersion": "10.279",
+        "createdTime": 1661787234146,
+        "modifiedTime": 1661791116612,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      }
+    },
+    {
+      "_id": "5e1xTohkzqFqbYH4",
+      "name": "Flame Strike",
+      "ownership": {
+        "default": 0
+      },
+      "type": "spell",
+      "system": {
+        "description": {
+          "value": "<p>A vertical column of divine fire roars down from the heavens in a location you specify. Each creature in a 10-foot-radius, 40-foot-high Cylinder centered on a point within range must make a Dexterity saving throw. A creature takes 4d6 fire damage and 4d6 radiant damage on a failed save, or half as much damage on a successful one.</p><p><strong>At Higher Levels.</strong> When you cast this spell using a spell slot of 6th level or higher, the fire damage or the radiant damage (your choice) increases by 1d6 for each slot level above 5th.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "PHB pg. 242",
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": null,
+          "units": "inst"
+        },
+        "target": {
+          "value": 10,
+          "width": null,
+          "units": "ft",
+          "type": "cylinder"
+        },
+        "range": {
+          "value": 60,
+          "long": 0,
+          "units": "ft"
+        },
+        "uses": {
+          "value": 3,
+          "max": 3,
+          "per": "day"
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null
+        },
+        "ability": "",
+        "actionType": "save",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [
+            [
+              "4d6",
+              "radiant"
+            ],
+            [
+              "4d6",
+              "fire"
+            ]
+          ],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "dex",
+          "dc": 20,
+          "scaling": "spell"
+        },
+        "level": 5,
+        "school": "evo",
+        "components": {
+          "value": "",
+          "vocal": true,
+          "somatic": true,
+          "material": true,
+          "ritual": false,
+          "concentration": false
+        },
+        "materials": {
+          "value": "A pinch of sulfur",
+          "consumed": false,
+          "cost": 0,
+          "supply": 0
+        },
+        "preparation": {
+          "mode": "innate",
+          "prepared": true
+        },
+        "scaling": {
+          "mode": "level",
+          "formula": "1d6"
+        }
+      },
+      "sort": 100001,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.5e1xTohkzqFqbYH4"
+        }
+      },
+      "img": "icons/magic/light/beam-rays-red-large.webp",
+      "effects": [],
+      "folder": null,
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.0",
+        "coreVersion": "10.279",
+        "createdTime": 1661787234070,
+        "modifiedTime": 1661791116612,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      }
+    },
+    {
+      "_id": "AGFMPAmuzwWO6Dfz",
+      "name": "Raise Dead",
+      "ownership": {
+        "default": 0
+      },
+      "type": "spell",
+      "system": {
+        "description": {
+          "value": "<p>You return a dead creature you touch to life, provided that it has been dead no longer than 10 days. If the creature's soul is both willing and at liberty to rejoin the body, the creature returns to life with 1 hit point.</p><p>This spell also neutralizes any poisons and cures nonmagical diseases that affected the creature at the time it died. This spell doesn't, however, remove magical diseases, curses, or similar effects; if these aren't first removed prior to casting the spell, they take effect when the creature returns to life. The spell can't return an undead creature to life.</p><p>This spell closes all mortal wounds, but it doesn't restore missing body parts. If the creature is lacking body parts or organs integral for its survival—its head, for instance—the spell automatically fails.</p><p>Coming back from the dead is an ordeal. The target takes a −4 penalty to all attack rolls, saving throws, and ability checks. Every time the target finishes a long rest, the penalty is reduced by 1 until it disappears.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "PHB pg. 270",
+        "activation": {
+          "type": "hour",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": null,
+          "units": "inst"
+        },
+        "target": {
+          "value": 1,
+          "width": null,
+          "units": "spec",
+          "type": "creature"
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": "touch"
+        },
+        "uses": {
+          "value": 3,
+          "max": 3,
+          "per": "day"
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null
+        },
+        "ability": "",
+        "actionType": "heal",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [
+            [
+              "1",
+              "healing"
+            ]
+          ],
+          "versatile": "",
+          "value": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell",
+          "value": ""
+        },
+        "level": 5,
+        "school": "nec",
+        "components": {
+          "value": "",
+          "vocal": true,
+          "somatic": true,
+          "material": true,
+          "ritual": false,
+          "concentration": false
+        },
+        "materials": {
+          "value": "A diamond worth at least 500gp, which the spell consumes.",
+          "consumed": true,
+          "cost": 500,
+          "supply": 0
+        },
+        "preparation": {
+          "mode": "innate",
+          "prepared": true
+        },
+        "scaling": {
+          "mode": "none",
+          "formula": ""
+        }
+      },
+      "sort": 100001,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.AGFMPAmuzwWO6Dfz"
+        }
+      },
+      "img": "icons/magic/life/heart-cross-strong-purple-orange.webp",
+      "effects": [],
+      "folder": null,
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.0",
+        "coreVersion": "10.279",
+        "createdTime": 1661787234087,
+        "modifiedTime": 1661791116613,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      }
+    },
+    {
+      "_id": "d54VDyFulD9xxY7J",
+      "name": "Commune",
+      "ownership": {
+        "default": 0
+      },
+      "type": "spell",
+      "system": {
+        "description": {
+          "value": "<p>You contact your deity or a divine proxy and ask up to three questions that can be answered with a yes or no. You must ask your questions before the spell ends. You receive a correct answer for each question.</p><p>Divine beings aren't necessarily omniscient, so you might receive \"unclear\" as an answer if a question pertains to information that lies beyond the deity's knowledge. In a case where a one-word answer could be misleading or contrary to the deity's interests, the DM might offer a short phrase as an answer instead.</p><p>If you cast the spell two or more times before finishing your next long rest, there is a cumulative 25 percent chance for each casting after the first that you get no answer. The DM makes this roll in secret.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "PHB pg. 223",
+        "activation": {
+          "type": "minute",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": 1,
+          "units": "minute"
+        },
+        "target": {
+          "value": null,
+          "width": null,
+          "units": null,
+          "type": "self"
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": "self"
+        },
+        "uses": {
+          "value": 1,
+          "max": 1,
+          "per": "day"
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null
+        },
+        "ability": "",
+        "actionType": "util",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": "",
+          "value": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell",
+          "value": ""
+        },
+        "level": 5,
+        "school": "div",
+        "components": {
+          "value": "",
+          "vocal": true,
+          "somatic": true,
+          "material": true,
+          "ritual": true,
+          "concentration": false
+        },
+        "materials": {
+          "value": "Incense and a vial of holy or unholy water",
+          "consumed": false,
+          "cost": 0,
+          "supply": 0
+        },
+        "preparation": {
+          "mode": "innate",
+          "prepared": true
+        },
+        "scaling": {
+          "mode": "none",
+          "formula": ""
+        }
+      },
+      "sort": 100001,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.d54VDyFulD9xxY7J"
+        }
+      },
+      "img": "icons/magic/control/debuff-energy-hold-levitate-blue-yellow.webp",
+      "effects": [],
+      "folder": null,
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.0",
+        "coreVersion": "10.279",
+        "createdTime": 1661787234177,
+        "modifiedTime": 1661791116613,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      }
+    },
+    {
+      "_id": "ZPd73HtKF3At11jh",
+      "name": "Control Weather",
+      "ownership": {
+        "default": 0
+      },
+      "type": "spell",
+      "system": {
+        "description": {
+          "value": "<p>You take control of the weather within 5 miles of you for the duration. You must be outdoors to cast this spell. Moving to a place where you don't have a clear path to the sky ends the spell early.</p><p>When you cast the spell, you change the current weather conditions, which are determined by the DM based on the climate and season. You can change precipitation, temperature, and wind. It takes 1d4 x 10 minutes for the new conditions to take effect. Once they do so, you can change the conditions again. When the spell ends, the weather gradually returns to normal.</p><p>When you change the weather conditions, find a current condition on the following tables and change its stage by one, up or down. When changing the wind, you can change its direction.</p><p><strong>Conditions</strong></p>\n<ol>\n<li>Clear</li>\n<li>Light clouds</li>\n<li>Overcast or ground fog</li>\n<li>Rain, hail, or snow</li>\n<li>Torrential rain, driving hail, or blizzard</li>\n</ol>\n<p><strong>Temperature</strong></p>\n<ol>\n<li>Unbearable heat</li>\n<li>Hot</li>\n<li>Warm</li>\n<li>Cool</li>\n<li>Cold</li>\n<li>Arctic cold</li>\n</ol>\n<p><strong>Wind</strong></p>\n<ol>\n<li>Calm</li>\n<li>Moderate wind</li>\n<li>Strong wind</li>\n<li>Gale</li>\n<li>Storm</li>\n</ol>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "PHB pg. 228",
+        "activation": {
+          "type": "minute",
+          "cost": 10,
+          "condition": ""
+        },
+        "duration": {
+          "value": 8,
+          "units": "hour"
+        },
+        "target": {
+          "value": 5,
+          "width": null,
+          "units": "mi",
+          "type": "radius"
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": "self"
+        },
+        "uses": {
+          "value": 1,
+          "max": 1,
+          "per": "day"
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null
+        },
+        "ability": "",
+        "actionType": "util",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": "",
+          "value": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell",
+          "value": ""
+        },
+        "level": 8,
+        "school": "trs",
+        "components": {
+          "value": "",
+          "vocal": true,
+          "somatic": true,
+          "material": true,
+          "ritual": false,
+          "concentration": true
+        },
+        "materials": {
+          "value": "Burning incense and bits of earth and wood mixed in water.",
+          "consumed": false,
+          "cost": 0,
+          "supply": 0
+        },
+        "preparation": {
+          "mode": "innate",
+          "prepared": true
+        },
+        "scaling": {
+          "mode": "none",
+          "formula": ""
+        }
+      },
+      "sort": 100001,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.ZPd73HtKF3At11jh"
+        }
+      },
+      "img": "icons/magic/air/wind-tornado-cyclone-white.webp",
+      "effects": [],
+      "folder": null,
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.0",
+        "coreVersion": "10.279",
+        "createdTime": 1661787234163,
+        "modifiedTime": 1661791116614,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      }
+    },
+    {
+      "_id": "OVikYmSdHliAG2YD",
+      "name": "Insect Plague",
+      "ownership": {
+        "default": 0
+      },
+      "type": "spell",
+      "system": {
+        "description": {
+          "value": "<p>Swarming, biting locusts fill a 20-foot-radius Sphere centered on a point you choose within range. The sphere spreads around corners. The sphere remains for the Duration, and its area is lightly obscured. The sphere's area is difficult terrain.</p><p>When the area appears, each creature in it must make a Constitution saving throw. A creature takes 4d10 piercing damage on a failed save, or half as much damage on a successful one. A creature must also make this saving throw when it enters the spell's area for the first time on a turn or ends its turn there.</p><p><strong>At Higher Levels.</strong> When you cast this spell using a spell slot of 6th level or higher, the damage increases by 1d10 for each slot level above 5th.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "PHB pg. 254",
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": 10,
+          "units": "minute"
+        },
+        "target": {
+          "value": 20,
+          "width": null,
+          "units": "ft",
+          "type": "sphere"
+        },
+        "range": {
+          "value": 300,
+          "long": 0,
+          "units": "ft"
+        },
+        "uses": {
+          "value": 1,
+          "max": 1,
+          "per": "day"
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null
+        },
+        "ability": "",
+        "actionType": "save",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [
+            [
+              "4d10",
+              "piercing"
+            ]
+          ],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "con",
+          "dc": 20,
+          "scaling": "spell"
+        },
+        "level": 5,
+        "school": "con",
+        "components": {
+          "value": "",
+          "vocal": true,
+          "somatic": true,
+          "material": true,
+          "ritual": false,
+          "concentration": true
+        },
+        "materials": {
+          "value": "A few grains of sugar, some kernels of grain, and a smear of fat",
+          "consumed": false,
+          "cost": 0,
+          "supply": 0
+        },
+        "preparation": {
+          "mode": "innate",
+          "prepared": true
+        },
+        "scaling": {
+          "mode": "level",
+          "formula": "1d10"
+        }
+      },
+      "sort": 100001,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.OVikYmSdHliAG2YD"
+        }
+      },
+      "img": "icons/magic/nature/leaf-glow-maple-teal.webp",
+      "effects": [],
+      "folder": null,
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.0",
+        "coreVersion": "10.279",
+        "createdTime": 1661787234131,
+        "modifiedTime": 1661791116614,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      }
     }
   ],
   "effects": [],
@@ -2095,5 +2227,13 @@
   "ownership": {
     "default": 0
   },
-  "flags": {}
+  "flags": {},
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.0.1",
+    "coreVersion": "10.284",
+    "createdTime": 1661787232875,
+    "modifiedTime": 1662078807811,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  }
 }

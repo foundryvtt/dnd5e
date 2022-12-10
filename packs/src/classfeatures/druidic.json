@@ -23,6 +23,7 @@
     },
     "target": {
       "value": null,
+      "width": null,
       "units": "",
       "type": ""
     },
@@ -72,21 +73,38 @@
       "_id": "iIQXR8VezkvbkFoS",
       "changes": [
         {
-          "key": "data.traits.languages.value",
+          "key": "system.traits.languages.value",
           "mode": 2,
-          "value": "druidic"
+          "value": "druidic",
+          "priority": null
         }
       ],
       "disabled": false,
       "duration": {
-        "startTime": null
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
       },
       "icon": "icons/sundries/documents/document-torn-diagram-tan.webp",
       "label": "Druidic",
       "origin": "Item.LzJ5ayHt0OlSVGxi",
       "transfer": true,
       "flags": {},
-      "tint": ""
+      "tint": null
     }
-  ]
+  ],
+  "folder": null,
+  "sort": 0,
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.0.0",
+    "coreVersion": "10.279",
+    "createdTime": 1661787234364,
+    "modifiedTime": 1661787234364,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  }
 }

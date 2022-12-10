@@ -107,7 +107,7 @@
         "value": 472,
         "min": 0,
         "max": 472,
-        "temp": 0,
+        "temp": null,
         "tempmax": 0,
         "formula": "27d20 + 189"
       },
@@ -175,16 +175,24 @@
       "size": "grg",
       "di": {
         "value": [
-          "lightning"
+          "bludgeoning",
+          "lightning",
+          "piercing",
+          "slashing"
         ],
-        "custom": "bludgeoning, piercing, and slashing from nonmagical attacks"
+        "bypasses": [
+          "mgc"
+        ],
+        "custom": ""
       },
       "dr": {
         "value": [],
+        "bypasses": [],
         "custom": ""
       },
       "dv": {
         "value": [],
+        "bypasses": [],
         "custom": ""
       },
       "ci": {
@@ -196,7 +204,7 @@
       },
       "languages": {
         "value": [],
-        "custom": "understands Abyssal, Celestial, Infernal, and Primordial but can't speak, telepathy 120 ft."
+        "custom": "understands Abyssal, Celestial, Infernal, and Primordial but can't speak;telepathy 120 ft."
       }
     },
     "currency": {
@@ -544,46 +552,27 @@
     "name": "Kraken",
     "displayName": 0,
     "actorLink": false,
-    "tint": null,
     "width": 4,
     "height": 4,
-    "scale": 1,
-    "mirrorX": false,
-    "mirrorY": false,
     "lockRotation": false,
     "rotation": 0,
-    "vision": false,
-    "dimSight": 0,
-    "brightSight": 120,
-    "dimLight": 0,
-    "brightLight": 0,
-    "sightAngle": 0,
-    "lightAngle": 0,
-    "lightAlpha": 1,
-    "lightAnimation": {
-      "speed": 5,
-      "intensity": 5
-    },
     "disposition": -1,
     "displayBars": 0,
     "bar1": {
       "attribute": "attributes.hp"
     },
     "bar2": {
-      "attribute": ""
+      "attribute": null
     },
     "flags": {},
     "randomImg": false,
-    "img": "icons/svg/mystery-man.svg",
-    "actorId": "kVg37NlPcACAzjCT",
     "alpha": 1,
     "light": {
-      "alpha": 0.5,
-      "angle": 0,
+      "alpha": 1,
+      "angle": 360,
       "bright": 0,
       "coloration": 1,
       "dim": 0,
-      "gradual": true,
       "luminosity": 0.5,
       "saturation": 0,
       "contrast": 0,
@@ -591,13 +580,37 @@
       "animation": {
         "speed": 5,
         "intensity": 5,
+        "type": null,
         "reverse": false
       },
       "darkness": {
         "min": 0,
         "max": 1
-      }
-    }
+      },
+      "attenuation": 0.5,
+      "color": null
+    },
+    "texture": {
+      "src": "icons/svg/mystery-man.svg",
+      "tint": null,
+      "scaleX": 1,
+      "scaleY": 1,
+      "offsetX": 0,
+      "offsetY": 0,
+      "rotation": 0
+    },
+    "sight": {
+      "angle": 360,
+      "enabled": false,
+      "range": 120,
+      "brightness": 1,
+      "visionMode": "basic",
+      "color": null,
+      "attenuation": 0.1,
+      "saturation": 0,
+      "contrast": 0
+    },
+    "detectionModes": []
   },
   "items": [
     {
@@ -673,7 +686,15 @@
       "ownership": {
         "default": 0
       },
-      "flags": {}
+      "flags": {},
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      }
     },
     {
       "_id": "uxrpcslS4BkraMVB",
@@ -748,7 +769,15 @@
       "ownership": {
         "default": 0
       },
-      "flags": {}
+      "flags": {},
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      }
     },
     {
       "_id": "1oNtSpRA4XS3L6to",
@@ -823,7 +852,15 @@
       "ownership": {
         "default": 0
       },
-      "flags": {}
+      "flags": {},
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      }
     },
     {
       "_id": "j4xzhdYjtz2migUE",
@@ -898,7 +935,15 @@
       "ownership": {
         "default": 0
       },
-      "flags": {}
+      "flags": {},
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      }
     },
     {
       "_id": "r51OovswZTVF8Yna",
@@ -999,8 +1044,7 @@
           "two": false,
           "ver": false
         },
-        "proficient": true,
-        "attuned": false
+        "proficient": true
       },
       "effects": [],
       "folder": null,
@@ -1008,7 +1052,15 @@
       "ownership": {
         "default": 0
       },
-      "flags": {}
+      "flags": {},
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      }
     },
     {
       "_id": "lfg28JvVAru30yJ4",
@@ -1109,8 +1161,7 @@
           "two": false,
           "ver": false
         },
-        "proficient": true,
-        "attuned": false
+        "proficient": true
       },
       "effects": [],
       "folder": null,
@@ -1118,7 +1169,15 @@
       "ownership": {
         "default": 0
       },
-      "flags": {}
+      "flags": {},
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      }
     },
     {
       "_id": "bwwyMBn4QwiNd4SM",
@@ -1198,13 +1257,21 @@
       "ownership": {
         "default": 0
       },
-      "flags": {}
+      "flags": {},
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      }
     },
     {
       "_id": "wVCkpBj5omvdfaMm",
       "name": "Lightning Storm",
       "type": "feat",
-      "img": "systems/dnd5e/icons/spells/lighting-sky-3.jpg",
+      "img": "icons/magic/lightning/bolts-forked-large-blue-yellow.webp",
       "system": {
         "description": {
           "value": "<section class=\"secret\"><p>The kraken magically creates three bolts of lightning, each of which can strike a target the kraken can see within 120 feet of it. </p><p>A target must make a  <strong>DC 23 Dexterity</strong> saving throw, taking <strong>22 (4d10) <em>lightning damage</em></strong> on a failed save, or half as much damage on a successful one.</p></section><p>The kraken magically creates three bolts of lightning, each of which can strike a target the kraken can see within 120 feet of it. A target must make a <strong>Dexterity</strong> saving throw.</p>",
@@ -1278,7 +1345,15 @@
       "ownership": {
         "default": 0
       },
-      "flags": {}
+      "flags": {},
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      }
     },
     {
       "_id": "ojhTng7wa5ehcJz3",
@@ -1353,7 +1428,15 @@
       "ownership": {
         "default": 0
       },
-      "flags": {}
+      "flags": {},
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      }
     },
     {
       "_id": "y6iT81UwIkojo6c5",
@@ -1428,7 +1511,15 @@
       "ownership": {
         "default": 0
       },
-      "flags": {}
+      "flags": {},
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      }
     },
     {
       "_id": "K9y1op1wZOMNsFg0",
@@ -1503,7 +1594,15 @@
       "ownership": {
         "default": 0
       },
-      "flags": {}
+      "flags": {},
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      }
     },
     {
       "_id": "e2EtrJsAPZ19WuE7",
@@ -1578,13 +1677,21 @@
       "ownership": {
         "default": 0
       },
-      "flags": {}
+      "flags": {},
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      }
     },
     {
       "_id": "OKGAJSxcW9xQiwyj",
       "name": "Lightning Storm",
       "type": "feat",
-      "img": "systems/dnd5e/icons/spells/lighting-sky-3.jpg",
+      "img": "icons/magic/lightning/bolts-forked-large-blue-yellow.webp",
       "system": {
         "description": {
           "value": "<p>The kraken uses Lightning Storm.</p>",
@@ -1653,7 +1760,15 @@
       "ownership": {
         "default": 0
       },
-      "flags": {}
+      "flags": {},
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      }
     },
     {
       "_id": "K0T5NDyi2n8Yt8Ts",
@@ -1733,7 +1848,15 @@
       "ownership": {
         "default": 0
       },
-      "flags": {}
+      "flags": {},
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      }
     }
   ],
   "effects": [],
@@ -1742,5 +1865,13 @@
   "ownership": {
     "default": 0
   },
-  "flags": {}
+  "flags": {},
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.0.1",
+    "coreVersion": "10.284",
+    "createdTime": 1661787233015,
+    "modifiedTime": 1662079308408,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  }
 }

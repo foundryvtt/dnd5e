@@ -542,46 +542,27 @@
     "name": "Dryad",
     "displayName": 20,
     "actorLink": false,
-    "tint": null,
     "width": 1,
     "height": 1,
-    "scale": 1,
-    "mirrorX": false,
-    "mirrorY": false,
     "lockRotation": false,
     "rotation": 0,
-    "vision": false,
-    "dimSight": 60,
-    "brightSight": 0,
-    "dimLight": 0,
-    "brightLight": 0,
-    "sightAngle": 0,
-    "lightAngle": 0,
-    "lightAlpha": 1,
-    "lightAnimation": {
-      "speed": 5,
-      "intensity": 5
-    },
     "disposition": -1,
     "displayBars": 40,
     "bar1": {
       "attribute": "attributes.hp"
     },
     "bar2": {
-      "attribute": ""
+      "attribute": null
     },
     "flags": {},
     "randomImg": false,
-    "img": "systems/dnd5e/tokens/fey/Dryad.webp",
-    "actorId": "KOHVWl5RU9XBR8Jb",
     "alpha": 1,
     "light": {
-      "alpha": 0.5,
-      "angle": 0,
+      "alpha": 1,
+      "angle": 360,
       "bright": 0,
       "coloration": 1,
       "dim": 0,
-      "gradual": true,
       "luminosity": 0.5,
       "saturation": 0,
       "contrast": 0,
@@ -589,13 +570,37 @@
       "animation": {
         "speed": 5,
         "intensity": 5,
+        "type": null,
         "reverse": false
       },
       "darkness": {
         "min": 0,
         "max": 1
-      }
-    }
+      },
+      "attenuation": 0.5,
+      "color": null
+    },
+    "texture": {
+      "src": "systems/dnd5e/tokens/fey/Dryad.webp",
+      "tint": null,
+      "scaleX": 1,
+      "scaleY": 1,
+      "offsetX": 0,
+      "offsetY": 0,
+      "rotation": 0
+    },
+    "sight": {
+      "angle": 360,
+      "enabled": false,
+      "range": 60,
+      "brightness": 0,
+      "visionMode": "basic",
+      "color": null,
+      "attenuation": 0.1,
+      "saturation": 0,
+      "contrast": 0
+    },
+    "detectionModes": []
   },
   "items": [
     {
@@ -674,13 +679,480 @@
       "ownership": {
         "default": 0
       },
-      "flags": {}
+      "flags": {},
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      }
     },
     {
-      "_id": "nZ8w7AlnmfziI1yb",
+      "_id": "JExoadfmCtQH6vsK",
+      "name": "Magic Resistance",
+      "type": "feat",
+      "img": "icons/magic/defensive/shield-barrier-glowing-blue.webp",
+      "system": {
+        "description": {
+          "value": "<p>The dryad has advantage on saving throws against spells and other magical effects.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "",
+        "activation": {
+          "type": "",
+          "cost": 0,
+          "condition": ""
+        },
+        "duration": {
+          "value": null,
+          "units": ""
+        },
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": ""
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": ""
+        },
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": ""
+        },
+        "consume": {
+          "type": "",
+          "target": "",
+          "amount": null
+        },
+        "ability": "",
+        "actionType": "",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": "",
+          "value": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell",
+          "value": ""
+        },
+        "requirements": "",
+        "recharge": {
+          "value": null,
+          "charged": false
+        },
+        "attunement": 0
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 400001,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      }
+    },
+    {
+      "_id": "beL4bLUcyTb1Sxgz",
+      "name": "Speak with Beasts and Plants",
+      "type": "feat",
+      "img": "icons/commodities/currency/coin-engraved-sun-smile-copper.webp",
+      "system": {
+        "description": {
+          "value": "<p>The dryad can communicate with beasts and plants as if they shared a language.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "",
+        "activation": {
+          "type": "",
+          "cost": 0,
+          "condition": ""
+        },
+        "duration": {
+          "value": null,
+          "units": ""
+        },
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": ""
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": ""
+        },
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": "",
+          "type": ""
+        },
+        "consume": {
+          "type": "",
+          "target": "",
+          "amount": null
+        },
+        "ability": "",
+        "actionType": "",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": "",
+          "value": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell",
+          "value": ""
+        },
+        "requirements": "",
+        "recharge": {
+          "value": null,
+          "charged": false
+        },
+        "attunement": 0
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 500001,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      }
+    },
+    {
+      "_id": "wwQTeXOmFLO2MW0Y",
+      "name": "Tree Stride",
+      "type": "feat",
+      "img": "icons/magic/nature/tree-spirit-green.webp",
+      "system": {
+        "description": {
+          "value": "<p>Once on her turn, the dryad can use 10 feet of her movement to step magically into one living tree within her reach and emerge from a second living tree within 60 feet of the first tree, appearing in an unoccupied space within 5 feet of the second tree. Both trees must be Large or bigger.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "",
+        "activation": {
+          "type": "",
+          "cost": 0,
+          "condition": ""
+        },
+        "duration": {
+          "value": null,
+          "units": ""
+        },
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": ""
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": ""
+        },
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": "",
+          "type": ""
+        },
+        "consume": {
+          "type": "",
+          "target": "",
+          "amount": null
+        },
+        "ability": "",
+        "actionType": "",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": "",
+          "value": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell",
+          "value": ""
+        },
+        "requirements": "",
+        "recharge": {
+          "value": null,
+          "charged": false
+        },
+        "attunement": 0
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 600001,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      }
+    },
+    {
+      "_id": "DNPx6Myd5rHTGu4a",
+      "name": "Club",
+      "type": "weapon",
+      "img": "icons/weapons/clubs/club-simple-barbed.webp",
+      "system": {
+        "description": {
+          "value": "<section class=\"secret\">\n<p>Melee Weapon Attack: +2 to hit (+6 to hit with shillelagh), reach 5 ft., one target. Hit: <strong>2 (1d4) <em>bludgeoning damage</em></strong>, or <strong>8 (1d8 + 4) <em>bludgeoning damage</em></strong> with shillelagh.</p>\n</section>\n<p>The Dryad attacks with its Club.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "PHB pg. 149",
+        "quantity": 1,
+        "weight": 2,
+        "price": 1,
+        "attunement": 0,
+        "equipped": true,
+        "rarity": "common",
+        "identified": true,
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": null,
+          "units": ""
+        },
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": ""
+        },
+        "range": {
+          "value": 5,
+          "long": null,
+          "units": "ft"
+        },
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": ""
+        },
+        "consume": {
+          "type": "",
+          "target": "",
+          "amount": null
+        },
+        "ability": "dex",
+        "actionType": "mwak",
+        "attackBonus": 1,
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [
+            [
+              "1d4 + 4",
+              "bludgeoning"
+            ]
+          ],
+          "versatile": "1d8 + 4"
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "armor": {
+          "value": 10
+        },
+        "hp": {
+          "value": 0,
+          "max": 0,
+          "dt": null,
+          "conditions": ""
+        },
+        "weaponType": "simpleM",
+        "baseItem": "",
+        "properties": {
+          "lgt": true,
+          "amm": false,
+          "fin": false,
+          "fir": false,
+          "foc": false,
+          "hvy": false,
+          "lod": false,
+          "rch": false,
+          "rel": false,
+          "ret": false,
+          "spc": false,
+          "thr": false,
+          "two": false,
+          "ver": false
+        },
+        "proficient": true
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 200001,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      }
+    },
+    {
+      "_id": "OdzhvEDeD06BWsZS",
+      "name": "Fey Charm",
+      "type": "feat",
+      "img": "icons/consumables/plants/leaf-veins-glowing-green.webp",
+      "system": {
+        "description": {
+          "value": "<section class=\"secret\">\n<p>The dryad targets one humanoid or beast that she can see within 30 feet of her. If the target can see the dryad, it must succeed on a  <strong>DC 14 Wisdom</strong> saving throw or be magically charmed.</p>\n<p>The charmed creature regards the dryad as a trusted friend to be heeded and protected. Although the target isn't under the dryad's control, it takes the dryad's requests or actions in the most favorable way it can.Each time the dryad or its allies do anything harmful to the target, it can repeat the saving throw, ending the effect on itself on a success. Otherwise, the effect lasts 24 hours or until the dryad dies, is on a different plane of existence from the target, or ends the effect as a bonus action. If a target's saving throw is successful, the target is immune to the dryad's Fey Charm for the next 24 hours.The dryad can have no more than one humanoid and up to three beasts charmed at a time.</p>\n</section>\n<p>The dryad targets one humanoid or beast that she can see within 30 feet of her. If the target can see the dryad, it must make a <strong>Wisdom</strong> saving throw. Each time the dryad or its allies do anything harmful to the target, it can repeat the saving throw.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "",
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": "one humanoid or beast"
+        },
+        "duration": {
+          "value": 24,
+          "units": "hour"
+        },
+        "target": {
+          "value": 1,
+          "width": null,
+          "units": "spec",
+          "type": ""
+        },
+        "range": {
+          "value": 30,
+          "long": null,
+          "units": "ft"
+        },
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": "",
+          "type": ""
+        },
+        "consume": {
+          "type": "",
+          "target": "",
+          "amount": null
+        },
+        "ability": "wis",
+        "actionType": "other",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": "",
+          "value": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "wis",
+          "dc": 14,
+          "scaling": "flat",
+          "value": ""
+        },
+        "requirements": "",
+        "recharge": {
+          "value": null,
+          "charged": false
+        },
+        "attunement": 0
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 300001,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      }
+    },
+    {
       "name": "Entangle",
       "type": "spell",
-      "img": "systems/dnd5e/icons/spells/vines-acid-2.jpg",
+      "img": "icons/magic/nature/vines-thorned-curled-glow-green.webp",
       "system": {
         "description": {
           "value": "<p>Grasping weeds and vines sprout from the ground in a 20-foot square starting from a point within range. For the Duration, these Plants turn the ground in the area into difficult terrain.</p><p>A creature in the area when you cast the spell must succeed on a Strength saving throw or be Restrained by the entangling Plants until the spell ends. A creature restrained by the plants can use its action to make a Strength check against your spell save DC. On a success, it frees itself.</p><p>When the spell ends, the conjured Plants wilt away.</p>",
@@ -764,22 +1236,33 @@
         "attunement": null
       },
       "effects": [],
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.gMrWeG8fMDPRFiVe"
+        }
+      },
+      "_id": "gMrWeG8fMDPRFiVe",
       "folder": null,
       "sort": 0,
       "ownership": {
         "default": 0
       },
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.dnd5e.spells.gMrWeG8fMDPRFiVe"
-        }
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.0",
+        "coreVersion": "10.279",
+        "createdTime": 1661787234191,
+        "modifiedTime": 1661791116394,
+        "lastModifiedBy": "dnd5ebuilder0000"
       }
     },
     {
-      "_id": "FNz3TuwOTx2PRjgB",
+      "_id": "SbSvZKkJASyk8jKo",
       "name": "Druidcraft",
+      "ownership": {
+        "default": 0
+      },
       "type": "spell",
-      "img": "systems/dnd5e/icons/spells/vines-jade-1.jpg",
       "system": {
         "description": {
           "value": "<p>Whispering to the spirits of Nature, you create one of the following Effects within range:</p>\n<ul>\n<li>You create a tiny, harmless sensory effect that predicts what the weather will be at your location for the next 24 hours. The effect might manifest as a golden orb for clear skies, a cloud for rain, Falling snowflakes for snow, and so on. This effect persists for 1 round.</li>\n<li>You instantly make a flower blossom, a seed pod open, or a leaf bud bloom.</li>\n<li>You create an Instantaneous, harmless sensory effect, such as Falling leaves, a puff of wind, the sound of a small animal, or the faint odor of skunk. The effect must fit in a 5-foot cube.</li>\n<li>You instantly light or snuff out a Candle, a torch, or a small campfire.</li>\n</ul>",
@@ -860,26 +1343,33 @@
         "scaling": {
           "mode": "none",
           "formula": ""
-        },
-        "attunement": 0
+        }
       },
-      "effects": [],
-      "folder": null,
       "sort": 100001,
-      "ownership": {
-        "default": 0
-      },
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.spells.SbSvZKkJASyk8jKo"
         }
+      },
+      "img": "icons/magic/nature/vines-thorned-glow-teal.webp",
+      "effects": [],
+      "folder": null,
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.0",
+        "coreVersion": "10.279",
+        "createdTime": 1661787234141,
+        "modifiedTime": 1661791116394,
+        "lastModifiedBy": "dnd5ebuilder0000"
       }
     },
     {
-      "_id": "fTuW1a9H5UWeGMeC",
+      "_id": "Qf6CAZkc7ms4ZY3e",
       "name": "Goodberry",
+      "ownership": {
+        "default": 0
+      },
       "type": "spell",
-      "img": "systems/dnd5e/icons/spells/leaf-acid-1.jpg",
       "system": {
         "description": {
           "value": "<p>Up to ten berries appear in your hand and are infused with magic for the duration. A creature can use its action to eat one berry. Eating a berry restores 1 hit point, and the berry provides enough nourishment to sustain a creature for one day.</p><p>The berries lose their potency if they have not been consumed within 24 hours of the casting of this spell.</p>",
@@ -947,7 +1437,7 @@
           "value": "",
           "vocal": true,
           "somatic": true,
-          "material": false,
+          "material": true,
           "ritual": false,
           "concentration": false
         },
@@ -964,26 +1454,31 @@
         "scaling": {
           "mode": "none",
           "formula": ""
-        },
-        "attunement": 0
+        }
       },
-      "effects": [],
-      "folder": null,
       "sort": 100001,
-      "ownership": {
-        "default": 0
-      },
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.spells.Qf6CAZkc7ms4ZY3e"
         }
+      },
+      "img": "icons/magic/nature/leaf-glow-green.webp",
+      "effects": [],
+      "folder": null,
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.0",
+        "coreVersion": "10.279",
+        "createdTime": 1661787234136,
+        "modifiedTime": 1661791116394,
+        "lastModifiedBy": "dnd5ebuilder0000"
       }
     },
     {
-      "_id": "czKMH6YSTDmJLmjb",
+      "_id": "JPwIEfgUPVebr5AH",
       "name": "Barkskin",
       "type": "spell",
-      "img": "systems/dnd5e/icons/spells/protect-orange-2.jpg",
+      "img": "icons/magic/defensive/shield-barrier-flaming-diamond-orange.webp",
       "system": {
         "description": {
           "value": "<p>You touch a willing creature. Until the spell ends, the target's skin has a rough, bark-like appearance, and the target's AC can't be less than 16, regardless of what kind of armor it is wearing.</p>",
@@ -1047,7 +1542,7 @@
           "value": "",
           "vocal": true,
           "somatic": true,
-          "material": false,
+          "material": true,
           "ritual": false,
           "concentration": true
         },
@@ -1064,8 +1559,7 @@
         "scaling": {
           "mode": "none",
           "formula": ""
-        },
-        "attunement": 0
+        }
       },
       "effects": [
         {
@@ -1073,22 +1567,29 @@
           "flags": {},
           "changes": [
             {
-              "key": "data.attributes.ac.formula",
+              "key": "system.attributes.ac.formula",
               "value": "16",
-              "mode": 5
+              "mode": 5,
+              "priority": null
             },
             {
-              "key": "data.attributes.ac.calc",
+              "key": "system.attributes.ac.calc",
               "value": "custom",
-              "mode": 5
+              "mode": 5,
+              "priority": null
             }
           ],
           "disabled": true,
           "duration": {
             "startTime": null,
-            "seconds": 3600
+            "seconds": 3600,
+            "combat": null,
+            "rounds": null,
+            "turns": null,
+            "startRound": null,
+            "startTurn": null
           },
-          "icon": "systems/dnd5e/icons/spells/protect-orange-2.jpg",
+          "icon": "icons/magic/defensive/shield-barrier-flaming-diamond-orange.webp",
           "label": "Barkskin",
           "origin": "Item.VQMKMnQDw5rzL0zp",
           "tint": null,
@@ -1104,13 +1605,23 @@
         "core": {
           "sourceId": "Compendium.dnd5e.spells.JPwIEfgUPVebr5AH"
         }
+      },
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.0",
+        "coreVersion": "10.279",
+        "createdTime": 1661787234113,
+        "modifiedTime": 1661791116395,
+        "lastModifiedBy": "dnd5ebuilder0000"
       }
     },
     {
-      "_id": "NXPG19gpvi65HMqg",
+      "_id": "pRMvmknwLf2tdMTj",
       "name": "Pass without Trace",
+      "ownership": {
+        "default": 0
+      },
       "type": "spell",
-      "img": "systems/dnd5e/icons/spells/fog-air-1.jpg",
       "system": {
         "description": {
           "value": "<p>A veil of shadows and Silence radiates from you, masking you and your companions from detection. For the Duration, each creature you choose within 30 feet of you (including you) has a +10 bonus to Dexterity (Stealth) checks and can't be tracked except by magical means. A creature that receives this bonus leaves behind no tracks or other traces of its passage.</p>",
@@ -1174,7 +1685,7 @@
           "value": "",
           "vocal": true,
           "somatic": true,
-          "material": false,
+          "material": true,
           "ritual": false,
           "concentration": true
         },
@@ -1191,26 +1702,33 @@
         "scaling": {
           "mode": "none",
           "formula": ""
-        },
-        "attunement": 0
+        }
       },
-      "effects": [],
-      "folder": null,
       "sort": 100001,
-      "ownership": {
-        "default": 0
-      },
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.spells.pRMvmknwLf2tdMTj"
         }
+      },
+      "img": "icons/magic/air/fog-gas-smoke-brown.webp",
+      "effects": [],
+      "folder": null,
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.0",
+        "coreVersion": "10.279",
+        "createdTime": 1661787234227,
+        "modifiedTime": 1661791116395,
+        "lastModifiedBy": "dnd5ebuilder0000"
       }
     },
     {
-      "_id": "d5IswUCOFC1xTCGq",
+      "_id": "VzgFzcmocr1X1cp4",
       "name": "Shillelagh",
+      "ownership": {
+        "default": 0
+      },
       "type": "spell",
-      "img": "systems/dnd5e/icons/spells/enchant-jade-1.jpg",
       "system": {
         "description": {
           "value": "<p>The wood of a club or quarterstaff you are holding is imbued with nature's power. For the duration, you can use your spellcasting ability instead of Strength for the attack and damage rolls of melee attacks using that weapon, and the weapon's damage die becomes a d8. The weapon also becomes magical, if it isn't already. The spell ends if you cast it again or if you let go of the weapon.</p>",
@@ -1279,7 +1797,7 @@
           "value": "",
           "vocal": true,
           "somatic": true,
-          "material": false,
+          "material": true,
           "ritual": false,
           "concentration": false
         },
@@ -1296,448 +1814,74 @@
         "scaling": {
           "mode": "none",
           "formula": ""
-        },
-        "attunement": 0
+        }
       },
-      "effects": [],
-      "folder": null,
       "sort": 100001,
-      "ownership": {
-        "default": 0
-      },
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.spells.VzgFzcmocr1X1cp4"
         }
+      },
+      "img": "icons/magic/fire/dagger-rune-enchant-teal.webp",
+      "effects": [],
+      "folder": null,
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.0",
+        "coreVersion": "10.279",
+        "createdTime": 1661787234149,
+        "modifiedTime": 1661791116395,
+        "lastModifiedBy": "dnd5ebuilder0000"
       }
-    },
-    {
-      "_id": "JExoadfmCtQH6vsK",
-      "name": "Magic Resistance",
-      "type": "feat",
-      "img": "icons/magic/defensive/shield-barrier-glowing-blue.webp",
-      "system": {
-        "description": {
-          "value": "<p>The dryad has advantage on saving throws against spells and other magical effects.</p>",
-          "chat": "",
-          "unidentified": ""
-        },
-        "source": "",
-        "activation": {
-          "type": "",
-          "cost": 0,
-          "condition": ""
-        },
-        "duration": {
-          "value": null,
-          "units": ""
-        },
-        "target": {
-          "value": null,
-          "width": null,
-          "units": "",
-          "type": ""
-        },
-        "range": {
-          "value": null,
-          "long": null,
-          "units": ""
-        },
-        "uses": {
-          "value": 0,
-          "max": 0,
-          "per": ""
-        },
-        "consume": {
-          "type": "",
-          "target": "",
-          "amount": null
-        },
-        "ability": "",
-        "actionType": "",
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "critical": {
-          "threshold": null,
-          "damage": ""
-        },
-        "damage": {
-          "parts": [],
-          "versatile": "",
-          "value": ""
-        },
-        "formula": "",
-        "save": {
-          "ability": "",
-          "dc": null,
-          "scaling": "spell",
-          "value": ""
-        },
-        "requirements": "",
-        "recharge": {
-          "value": null,
-          "charged": false
-        },
-        "attunement": 0
-      },
-      "effects": [],
-      "folder": null,
-      "sort": 400001,
-      "ownership": {
-        "default": 0
-      },
-      "flags": {}
-    },
-    {
-      "_id": "beL4bLUcyTb1Sxgz",
-      "name": "Speak with Beasts and Plants",
-      "type": "feat",
-      "img": "icons/commodities/currency/coin-engraved-sun-smile-copper.webp",
-      "system": {
-        "description": {
-          "value": "<p>The dryad can communicate with beasts and plants as if they shared a language.</p>",
-          "chat": "",
-          "unidentified": ""
-        },
-        "source": "",
-        "activation": {
-          "type": "",
-          "cost": 0,
-          "condition": ""
-        },
-        "duration": {
-          "value": null,
-          "units": ""
-        },
-        "target": {
-          "value": null,
-          "width": null,
-          "units": "",
-          "type": ""
-        },
-        "range": {
-          "value": null,
-          "long": null,
-          "units": ""
-        },
-        "uses": {
-          "value": 0,
-          "max": 0,
-          "per": "",
-          "type": ""
-        },
-        "consume": {
-          "type": "",
-          "target": "",
-          "amount": null
-        },
-        "ability": "",
-        "actionType": "",
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "critical": {
-          "threshold": null,
-          "damage": ""
-        },
-        "damage": {
-          "parts": [],
-          "versatile": "",
-          "value": ""
-        },
-        "formula": "",
-        "save": {
-          "ability": "",
-          "dc": null,
-          "scaling": "spell",
-          "value": ""
-        },
-        "requirements": "",
-        "recharge": {
-          "value": null,
-          "charged": false
-        },
-        "attunement": 0
-      },
-      "effects": [],
-      "folder": null,
-      "sort": 500001,
-      "ownership": {
-        "default": 0
-      },
-      "flags": {}
-    },
-    {
-      "_id": "wwQTeXOmFLO2MW0Y",
-      "name": "Tree Stride",
-      "type": "feat",
-      "img": "icons/magic/nature/tree-spirit-green.webp",
-      "system": {
-        "description": {
-          "value": "<p>Once on her turn, the dryad can use 10 feet of her movement to step magically into one living tree within her reach and emerge from a second living tree within 60 feet of the first tree, appearing in an unoccupied space within 5 feet of the second tree. Both trees must be Large or bigger.</p>",
-          "chat": "",
-          "unidentified": ""
-        },
-        "source": "",
-        "activation": {
-          "type": "",
-          "cost": 0,
-          "condition": ""
-        },
-        "duration": {
-          "value": null,
-          "units": ""
-        },
-        "target": {
-          "value": null,
-          "width": null,
-          "units": "",
-          "type": ""
-        },
-        "range": {
-          "value": null,
-          "long": null,
-          "units": ""
-        },
-        "uses": {
-          "value": 0,
-          "max": 0,
-          "per": "",
-          "type": ""
-        },
-        "consume": {
-          "type": "",
-          "target": "",
-          "amount": null
-        },
-        "ability": "",
-        "actionType": "",
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "critical": {
-          "threshold": null,
-          "damage": ""
-        },
-        "damage": {
-          "parts": [],
-          "versatile": "",
-          "value": ""
-        },
-        "formula": "",
-        "save": {
-          "ability": "",
-          "dc": null,
-          "scaling": "spell",
-          "value": ""
-        },
-        "requirements": "",
-        "recharge": {
-          "value": null,
-          "charged": false
-        },
-        "attunement": 0
-      },
-      "effects": [],
-      "folder": null,
-      "sort": 600001,
-      "ownership": {
-        "default": 0
-      },
-      "flags": {}
-    },
-    {
-      "_id": "DNPx6Myd5rHTGu4a",
-      "name": "Club",
-      "type": "weapon",
-      "img": "icons/weapons/clubs/club-simple-barbed.webp",
-      "system": {
-        "description": {
-          "value": "<section class=\"secret\">\n<p>Melee Weapon Attack: +2 to hit (+6 to hit with shillelagh), reach 5 ft., one target. Hit: <strong>2 (1d4) <em>bludgeoning damage</em></strong>, or <strong>8 (1d8 + 4) <em>bludgeoning damage</em></strong> with shillelagh.</p>\n</section>\n<p>The Dryad attacks with its Club.</p>",
-          "chat": "",
-          "unidentified": ""
-        },
-        "source": "PHB pg. 149",
-        "quantity": 1,
-        "weight": 2,
-        "price": 1,
-        "attunement": 0,
-        "equipped": true,
-        "rarity": "Common",
-        "identified": true,
-        "activation": {
-          "type": "action",
-          "cost": 1,
-          "condition": ""
-        },
-        "duration": {
-          "value": null,
-          "units": ""
-        },
-        "target": {
-          "value": null,
-          "width": null,
-          "units": "",
-          "type": ""
-        },
-        "range": {
-          "value": 5,
-          "long": null,
-          "units": "ft"
-        },
-        "uses": {
-          "value": 0,
-          "max": 0,
-          "per": ""
-        },
-        "consume": {
-          "type": "",
-          "target": "",
-          "amount": null
-        },
-        "ability": "dex",
-        "actionType": "mwak",
-        "attackBonus": 1,
-        "chatFlavor": "",
-        "critical": {
-          "threshold": null,
-          "damage": ""
-        },
-        "damage": {
-          "parts": [
-            [
-              "1d4 + 4",
-              "bludgeoning"
-            ]
-          ],
-          "versatile": "1d8 + 4"
-        },
-        "formula": "",
-        "save": {
-          "ability": "",
-          "dc": null,
-          "scaling": "spell"
-        },
-        "armor": {
-          "value": 10
-        },
-        "hp": {
-          "value": 0,
-          "max": 0,
-          "dt": null,
-          "conditions": ""
-        },
-        "weaponType": "simpleM",
-        "baseItem": "",
-        "properties": {
-          "lgt": true,
-          "amm": false,
-          "fin": false,
-          "fir": false,
-          "foc": false,
-          "hvy": false,
-          "lod": false,
-          "rch": false,
-          "rel": false,
-          "ret": false,
-          "spc": false,
-          "thr": false,
-          "two": false,
-          "ver": false
-        },
-        "proficient": true,
-        "attuned": false
-      },
-      "effects": [],
-      "folder": null,
-      "sort": 200001,
-      "ownership": {
-        "default": 0
-      },
-      "flags": {}
-    },
-    {
-      "_id": "OdzhvEDeD06BWsZS",
-      "name": "Fey Charm",
-      "type": "feat",
-      "img": "icons/consumables/plants/leaf-veins-glowing-green.webp",
-      "system": {
-        "description": {
-          "value": "<section class=\"secret\">\n<p>The dryad targets one humanoid or beast that she can see within 30 feet of her. If the target can see the dryad, it must succeed on a  <strong>DC 14 Wisdom</strong> saving throw or be magically charmed.</p>\n<p>The charmed creature regards the dryad as a trusted friend to be heeded and protected. Although the target isn't under the dryad's control, it takes the dryad's requests or actions in the most favorable way it can.Each time the dryad or its allies do anything harmful to the target, it can repeat the saving throw, ending the effect on itself on a success. Otherwise, the effect lasts 24 hours or until the dryad dies, is on a different plane of existence from the target, or ends the effect as a bonus action. If a target's saving throw is successful, the target is immune to the dryad's Fey Charm for the next 24 hours.The dryad can have no more than one humanoid and up to three beasts charmed at a time.</p>\n</section>\n<p>The dryad targets one humanoid or beast that she can see within 30 feet of her. If the target can see the dryad, it must make a <strong>Wisdom</strong> saving throw. Each time the dryad or its allies do anything harmful to the target, it can repeat the saving throw.</p>",
-          "chat": "",
-          "unidentified": ""
-        },
-        "source": "",
-        "activation": {
-          "type": "action",
-          "cost": 1,
-          "condition": "one humanoid or beast"
-        },
-        "duration": {
-          "value": 24,
-          "units": "hour"
-        },
-        "target": {
-          "value": 1,
-          "width": null,
-          "units": "spec",
-          "type": ""
-        },
-        "range": {
-          "value": 30,
-          "long": null,
-          "units": "ft"
-        },
-        "uses": {
-          "value": 0,
-          "max": 0,
-          "per": "",
-          "type": ""
-        },
-        "consume": {
-          "type": "",
-          "target": "",
-          "amount": null
-        },
-        "ability": "wis",
-        "actionType": "other",
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "critical": {
-          "threshold": null,
-          "damage": ""
-        },
-        "damage": {
-          "parts": [],
-          "versatile": "",
-          "value": ""
-        },
-        "formula": "",
-        "save": {
-          "ability": "wis",
-          "dc": 14,
-          "scaling": "flat",
-          "value": ""
-        },
-        "requirements": "",
-        "recharge": {
-          "value": null,
-          "charged": false
-        },
-        "attunement": 0
-      },
-      "effects": [],
-      "folder": null,
-      "sort": 300001,
-      "ownership": {
-        "default": 0
-      },
-      "flags": {}
     }
   ],
-  "effects": [],
+  "effects": [
+    {
+      "_id": "uM6rgctYpcbCVSkn",
+      "flags": {},
+      "changes": [
+        {
+          "key": "system.attributes.ac.formula",
+          "value": "16",
+          "mode": 5,
+          "priority": null
+        },
+        {
+          "key": "system.attributes.ac.calc",
+          "value": "custom",
+          "mode": 5,
+          "priority": null
+        }
+      ],
+      "disabled": true,
+      "duration": {
+        "startTime": 678,
+        "seconds": 3600,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": 2,
+        "startTurn": 1
+      },
+      "icon": "icons/magic/defensive/shield-barrier-flaming-diamond-orange.webp",
+      "label": "Barkskin",
+      "origin": "Compendium.dnd5e.monsters.KOHVWl5RU9XBR8Jb.Item.JPwIEfgUPVebr5AH",
+      "tint": null,
+      "transfer": false
+    }
+  ],
   "folder": "lqq7AC8UiPDuwneP",
   "sort": 0,
   "ownership": {
     "default": 0
   },
-  "flags": {}
+  "flags": {},
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.0.0",
+    "coreVersion": "10.279",
+    "createdTime": 1661787232758,
+    "modifiedTime": 1661878730944,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  }
 }

@@ -1,6 +1,6 @@
 /**
  * The DnD5e game system for Foundry Virtual Tabletop
- * A system for playing the fifth edition of the worlds most popular roleplaying game.
+ * A system for playing the fifth edition of the world's most popular role-playing game.
  * Author: Atropos
  * Software License: MIT
  * Content License: https://media.wizards.com/2016/downloads/DND/SRD-OGL_V5.1.pdf
@@ -183,13 +183,21 @@ Hooks.once("i18nInit", () => utils.performPreLocalization(CONFIG.DND5E));
  * Once the entire VTT framework is initialized, check to see if we should perform a data migration
  */
 Hooks.once("ready", function() {
+  // Apply custom compendium styles to the SRD rules compendium.
+  const rules = game.packs.get("dnd5e.rules");
+  rules.apps = [new applications.SRDCompendium(rules)];
 
   // Wait to register hotbar drop hook on ready so that modules could register earlier if they want to
-  Hooks.on("hotbarDrop", (bar, data, slot) => documents.macro.create5eMacro(data, slot));
+  Hooks.on("hotbarDrop", (bar, data, slot) => {
+    if ( ["Item", "ActiveEffect"].includes(data.type) ) {
+      documents.macro.create5eMacro(data, slot);
+      return false;
+    }
+  });
 
   // Determine whether a system migration is required and feasible
   if ( !game.user.isGM ) return;
-  const cv = game.settings.get("dnd5e", "systemMigrationVersion") || game.world.data.flags.dnd5e?.version;
+  const cv = game.settings.get("dnd5e", "systemMigrationVersion") || game.world.flags.dnd5e?.version;
   const totalDocuments = game.actors.size + game.scenes.size + game.items.size;
   if ( !cv && totalDocuments === 0 ) return game.settings.set("dnd5e", "systemMigrationVersion", game.system.version);
   if ( cv && !isNewerVersion(game.system.flags.needsMigrationVersion, cv) ) return;

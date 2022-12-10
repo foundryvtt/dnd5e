@@ -16,6 +16,13 @@
 
             <ul class="summary flexrow">
                 <li>
+                    {{#if system.toolType}}
+                      {{lookup config.toolTypes system.toolType}}
+                    {{else}}
+                      {{localize "DND5E.ItemTypeTool"}}
+                    {{/if}}
+                </li>
+                <li>
                     <select name="system.rarity">
                         {{selectOptions config.itemRarity selected=system.rarity blank=""}}
                     </select>

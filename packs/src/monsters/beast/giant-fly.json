@@ -8,6 +8,10 @@
       "str": {
         "value": 14,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "mod": 2,
         "save": 2,
         "prof": 0,
@@ -18,6 +22,10 @@
       "dex": {
         "value": 13,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "mod": 1,
         "save": 1,
         "prof": 0,
@@ -28,6 +36,10 @@
       "con": {
         "value": 13,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "mod": 1,
         "save": 1,
         "prof": 0,
@@ -38,6 +50,10 @@
       "int": {
         "value": 2,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "mod": -4,
         "save": -4,
         "prof": 0,
@@ -48,6 +64,10 @@
       "wis": {
         "value": 10,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "mod": 0,
         "prof": 0,
         "saveBonus": 0,
@@ -58,6 +78,10 @@
       "cha": {
         "value": 3,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "mod": -4,
         "save": -4,
         "prof": 0,
@@ -95,6 +119,9 @@
         "walk": 30,
         "units": "ft",
         "hover": false
+      },
+      "attunement": {
+        "max": 3
       },
       "senses": {
         "darkvision": 60,
@@ -169,6 +196,10 @@
       "acr": {
         "value": 0,
         "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 1,
         "total": 1,
         "passive": 11,
@@ -178,6 +209,10 @@
       "ani": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 0,
         "prof": 0,
@@ -187,6 +222,10 @@
       "arc": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": -4,
         "total": -4,
         "passive": 6,
@@ -196,6 +235,10 @@
       "ath": {
         "value": 0,
         "ability": "str",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 2,
         "total": 2,
         "passive": 12,
@@ -205,6 +248,10 @@
       "dec": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": -4,
         "total": -4,
         "passive": 6,
@@ -214,6 +261,10 @@
       "his": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": -4,
         "total": -4,
         "passive": 6,
@@ -223,6 +274,10 @@
       "ins": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 0,
         "prof": 0,
@@ -232,6 +287,10 @@
       "itm": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": -4,
         "total": -4,
         "passive": 6,
@@ -241,6 +300,10 @@
       "inv": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": -4,
         "total": -4,
         "passive": 6,
@@ -250,6 +313,10 @@
       "med": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 0,
         "prof": 0,
@@ -259,6 +326,10 @@
       "nat": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": -4,
         "total": -4,
         "passive": 6,
@@ -268,6 +339,10 @@
       "prc": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 0,
         "prof": 0,
@@ -277,6 +352,10 @@
       "prf": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": -4,
         "total": -4,
         "passive": 6,
@@ -286,6 +365,10 @@
       "per": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": -4,
         "total": -4,
         "passive": 6,
@@ -295,6 +378,10 @@
       "rel": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": -4,
         "total": -4,
         "passive": 6,
@@ -304,6 +391,10 @@
       "slt": {
         "value": 0,
         "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 1,
         "total": 1,
         "passive": 11,
@@ -313,6 +404,10 @@
       "ste": {
         "value": 0,
         "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 1,
         "total": 1,
         "passive": 11,
@@ -322,6 +417,10 @@
       "sur": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 0,
         "prof": 0,
@@ -427,39 +526,65 @@
     "name": "Giant Fly",
     "displayName": 0,
     "actorLink": false,
-    "tint": null,
     "width": 2,
     "height": 2,
-    "scale": 1,
-    "mirrorX": false,
-    "mirrorY": false,
     "lockRotation": false,
     "rotation": 0,
-    "vision": false,
-    "dimSight": 60,
-    "brightSight": 0,
-    "dimLight": 0,
-    "brightLight": 0,
-    "sightAngle": 0,
-    "lightAngle": 0,
-    "lightAlpha": 1,
-    "lightAnimation": {
-      "speed": 5,
-      "intensity": 5
-    },
     "disposition": -1,
     "displayBars": 0,
     "bar1": {
       "attribute": "attributes.hp"
     },
     "bar2": {
-      "attribute": ""
+      "attribute": null
     },
     "flags": {},
     "randomImg": false,
-    "img": "icons/svg/mystery-man.svg",
-    "actorId": "rLl22hYeAH3ljhdI",
-    "alpha": 1
+    "alpha": 1,
+    "light": {
+      "dim": 0,
+      "bright": 0,
+      "angle": 360,
+      "alpha": 1,
+      "animation": {
+        "speed": 5,
+        "intensity": 5,
+        "type": null,
+        "reverse": false
+      },
+      "color": null,
+      "coloration": 1,
+      "attenuation": 0.5,
+      "luminosity": 0.5,
+      "saturation": 0,
+      "contrast": 0,
+      "shadows": 0,
+      "darkness": {
+        "min": 0,
+        "max": 1
+      }
+    },
+    "texture": {
+      "src": "icons/svg/mystery-man.svg",
+      "tint": null,
+      "scaleX": 1,
+      "scaleY": 1,
+      "offsetX": 0,
+      "offsetY": 0,
+      "rotation": 0
+    },
+    "sight": {
+      "angle": 360,
+      "enabled": false,
+      "range": 60,
+      "brightness": 0,
+      "visionMode": "basic",
+      "color": null,
+      "attenuation": 0.1,
+      "saturation": 0,
+      "contrast": 0
+    },
+    "detectionModes": []
   },
   "items": [],
   "effects": [],
@@ -468,5 +593,13 @@
   "ownership": {
     "default": 0
   },
-  "flags": {}
+  "flags": {},
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.0.0",
+    "coreVersion": "10.279",
+    "createdTime": 1661787233200,
+    "modifiedTime": 1661787233200,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  }
 }

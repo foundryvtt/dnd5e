@@ -100,7 +100,7 @@
         "value": 66,
         "min": 0,
         "max": 66,
-        "temp": 0,
+        "temp": null,
         "tempmax": 0,
         "formula": "12d8 + 12"
       },
@@ -166,19 +166,27 @@
       "size": "med",
       "di": {
         "value": [],
+        "bypasses": [],
         "custom": ""
       },
       "dr": {
         "value": [
+          "bludgeoning",
           "cold",
           "fire",
           "lightning",
-          "poison"
+          "piercing",
+          "poison",
+          "slashing"
         ],
-        "custom": "bludgeoning, piercing, and slashing from nonmagical attacks"
+        "bypasses": [
+          "mgc"
+        ],
+        "custom": ""
       },
       "dv": {
         "value": [],
+        "bypasses": [],
         "custom": ""
       },
       "ci": {
@@ -535,47 +543,27 @@
     "name": "Succubus/Incubus",
     "displayName": 20,
     "actorLink": false,
-    "tint": null,
     "width": 1,
     "height": 1,
-    "scale": 3,
-    "mirrorX": false,
-    "mirrorY": false,
     "lockRotation": false,
     "rotation": 0,
-    "vision": false,
-    "dimSight": 60,
-    "brightSight": 0,
-    "dimLight": 0,
-    "brightLight": 0,
-    "sightAngle": 0,
-    "lightAngle": 0,
-    "lightColor": null,
-    "lightAlpha": 1,
-    "lightAnimation": {
-      "speed": 5,
-      "intensity": 5
-    },
     "disposition": -1,
     "displayBars": 40,
     "bar1": {
       "attribute": "attributes.hp"
     },
     "bar2": {
-      "attribute": ""
+      "attribute": null
     },
     "flags": {},
     "randomImg": false,
-    "img": "systems/dnd5e/tokens/fiend/Succubus.webp",
-    "actorId": "VmdyZDjqAc8vdncY",
     "alpha": 1,
     "light": {
-      "alpha": 0.5,
-      "angle": 0,
+      "alpha": 1,
+      "angle": 360,
       "bright": 0,
       "coloration": 1,
       "dim": 0,
-      "gradual": true,
       "luminosity": 0.5,
       "saturation": 0,
       "contrast": 0,
@@ -583,20 +571,44 @@
       "animation": {
         "speed": 5,
         "intensity": 5,
+        "type": null,
         "reverse": false
       },
       "darkness": {
         "min": 0,
         "max": 1
-      }
-    }
+      },
+      "color": null,
+      "attenuation": 0.5
+    },
+    "texture": {
+      "src": "systems/dnd5e/tokens/fiend/Succubus.webp",
+      "tint": null,
+      "scaleX": 3,
+      "scaleY": 3,
+      "offsetX": 0,
+      "offsetY": 0,
+      "rotation": 0
+    },
+    "sight": {
+      "angle": 360,
+      "enabled": false,
+      "range": 60,
+      "brightness": 0,
+      "visionMode": "basic",
+      "color": null,
+      "attenuation": 0.1,
+      "saturation": 0,
+      "contrast": 0
+    },
+    "detectionModes": []
   },
   "items": [
     {
       "_id": "P3P1EukfOip32dtd",
       "name": "Telepathic Bond",
       "type": "feat",
-      "img": "systems/dnd5e/icons/spells/wind-grasp-magenta-2.jpg",
+      "img": "icons/magic/control/debuff-energy-hold-levitate-pink.webp",
       "system": {
         "description": {
           "value": "<p>The fiend ignores the range restriction on its telepathy when communicating with a creature it has charmed. The two don't even need to be on the same plane of existence.</p>",
@@ -665,7 +677,15 @@
       "ownership": {
         "default": 0
       },
-      "flags": {}
+      "flags": {},
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      }
     },
     {
       "_id": "ZVMVqd01HraMcenH",
@@ -740,7 +760,15 @@
       "ownership": {
         "default": 0
       },
-      "flags": {}
+      "flags": {},
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      }
     },
     {
       "_id": "oSlFzVMu0fdEfYt1",
@@ -841,8 +869,7 @@
           "two": false,
           "ver": false
         },
-        "proficient": true,
-        "attuned": false
+        "proficient": true
       },
       "effects": [],
       "folder": null,
@@ -850,13 +877,21 @@
       "ownership": {
         "default": 0
       },
-      "flags": {}
+      "flags": {},
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      }
     },
     {
       "_id": "2bFCfFfjRNmhyE8A",
       "name": "Charm",
       "type": "feat",
-      "img": "systems/dnd5e/icons/spells/air-burst-magenta-1.jpg",
+      "img": "icons/magic/air/wind-tornado-spiral-pink-purple.webp",
       "system": {
         "description": {
           "value": "<section class=\"secret\"><p>One humanoid the fiend can see within 30 feet of it must make a <strong>Wisdom</strong> saving throw or be magically charmed for 1 day. The charmed target obeys the fiend's verbal or telepathic commands.</p><p>If the target suffers any harm or receives a suicidal command, it can repeat the saving throw, ending the effect on a success. If the target successfully saves against the effect, or if the effect on it ends, the target is immune to this fiend's Charm for the next 24 hours.The fiend can have only one target charmed at a time. If it charms another, the effect on the previous target ends.</p></section><p>One humanoid the fiend can see within 30 feet of it must make a <strong>Wisdom</strong> saving throw.</p>",
@@ -925,7 +960,15 @@
       "ownership": {
         "default": 0
       },
-      "flags": {}
+      "flags": {},
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      }
     },
     {
       "_id": "eb0O9cQ8N6lovLyI",
@@ -1005,7 +1048,15 @@
       "ownership": {
         "default": 0
       },
-      "flags": {}
+      "flags": {},
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      }
     },
     {
       "_id": "s1s5asgUorljP7SV",
@@ -1080,7 +1131,15 @@
       "ownership": {
         "default": 0
       },
-      "flags": {}
+      "flags": {},
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      }
     }
   ],
   "effects": [],
@@ -1089,5 +1148,13 @@
   "ownership": {
     "default": 0
   },
-  "flags": {}
+  "flags": {},
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.0.1",
+    "coreVersion": "10.284",
+    "createdTime": 1661787232867,
+    "modifiedTime": 1662079481925,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  }
 }

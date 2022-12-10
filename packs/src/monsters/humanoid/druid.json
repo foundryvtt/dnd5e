@@ -542,46 +542,27 @@
     "name": "Druid",
     "displayName": 20,
     "actorLink": false,
-    "tint": null,
     "width": 1,
     "height": 1,
-    "scale": 1,
-    "mirrorX": false,
-    "mirrorY": false,
     "lockRotation": false,
     "rotation": 0,
-    "vision": false,
-    "dimSight": 0,
-    "brightSight": 0,
-    "dimLight": 0,
-    "brightLight": 0,
-    "sightAngle": 0,
-    "lightAngle": 0,
-    "lightAlpha": 1,
-    "lightAnimation": {
-      "speed": 5,
-      "intensity": 5
-    },
     "disposition": -1,
     "displayBars": 40,
     "bar1": {
       "attribute": "attributes.hp"
     },
     "bar2": {
-      "attribute": ""
+      "attribute": null
     },
     "flags": {},
     "randomImg": false,
-    "img": "systems/dnd5e/tokens/humanoid/Druid.webp",
-    "actorId": "K15Yl8JmB5iPircc",
     "alpha": 1,
     "light": {
-      "alpha": 0.5,
-      "angle": 0,
+      "alpha": 1,
+      "angle": 360,
       "bright": 0,
       "coloration": 1,
       "dim": 0,
-      "gradual": true,
       "luminosity": 0.5,
       "saturation": 0,
       "contrast": 0,
@@ -589,13 +570,37 @@
       "animation": {
         "speed": 5,
         "intensity": 5,
+        "type": null,
         "reverse": false
       },
       "darkness": {
         "min": 0,
         "max": 1
-      }
-    }
+      },
+      "attenuation": 0.5,
+      "color": null
+    },
+    "texture": {
+      "src": "systems/dnd5e/tokens/humanoid/Druid.webp",
+      "tint": null,
+      "scaleX": 1,
+      "scaleY": 1,
+      "offsetX": 0,
+      "offsetY": 0,
+      "rotation": 0
+    },
+    "sight": {
+      "angle": 360,
+      "enabled": false,
+      "range": 0,
+      "brightness": 1,
+      "visionMode": "basic",
+      "color": null,
+      "attenuation": 0.1,
+      "saturation": 0,
+      "contrast": 0
+    },
+    "detectionModes": []
   },
   "items": [
     {
@@ -673,13 +678,140 @@
       "ownership": {
         "default": 0
       },
-      "flags": {}
+      "flags": {},
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      }
     },
     {
-      "_id": "gdpkOBvo0Jxb3OVR",
+      "_id": "KUP8WEfLxlcY7K2x",
+      "name": "Quarterstaff",
+      "type": "weapon",
+      "img": "icons/weapons/staves/staff-simple-gold.webp",
+      "system": {
+        "description": {
+          "value": "<section class=\"secret\">\n<p>Melee Weapon Attack: +2 to hit (+4 to hit with shillelagh), reach 5 ft., one target. Hit: <strong>3 (1d6) <em>bludgeoning damage</em></strong>, or <strong>6 (1d8 + 2) <em>bludgeoning damage</em></strong> with shillelagh or if wielded with two hands.</p></section>\n<p>The Druid attacks with its Quarterstaff.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "PHB pg. 149",
+        "quantity": 1,
+        "weight": 4,
+        "price": 2,
+        "attunement": 0,
+        "equipped": true,
+        "rarity": "common",
+        "identified": true,
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": null,
+          "units": ""
+        },
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": ""
+        },
+        "range": {
+          "value": 5,
+          "long": null,
+          "units": "ft"
+        },
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": ""
+        },
+        "consume": {
+          "type": "",
+          "target": "",
+          "amount": null
+        },
+        "ability": "dex",
+        "actionType": "mwak",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [
+            [
+              "1d6 + @mod",
+              "bludgeoning"
+            ]
+          ],
+          "versatile": "1d8 + @mod"
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "armor": {
+          "value": 10
+        },
+        "hp": {
+          "value": 0,
+          "max": 0,
+          "dt": null,
+          "conditions": ""
+        },
+        "weaponType": "simpleM",
+        "baseItem": "",
+        "properties": {
+          "ver": true,
+          "amm": false,
+          "fin": false,
+          "fir": false,
+          "foc": false,
+          "hvy": false,
+          "lgt": false,
+          "lod": false,
+          "rch": false,
+          "rel": false,
+          "ret": false,
+          "spc": false,
+          "thr": false,
+          "two": false
+        },
+        "proficient": true
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 200001,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      }
+    },
+    {
+      "_id": "SbSvZKkJASyk8jKo",
       "name": "Druidcraft",
+      "ownership": {
+        "default": 0
+      },
       "type": "spell",
-      "img": "systems/dnd5e/icons/spells/vines-jade-1.jpg",
       "system": {
         "description": {
           "value": "<p>Whispering to the spirits of Nature, you create one of the following Effects within range:</p>\n<ul>\n<li>You create a tiny, harmless sensory effect that predicts what the weather will be at your location for the next 24 hours. The effect might manifest as a golden orb for clear skies, a cloud for rain, Falling snowflakes for snow, and so on. This effect persists for 1 round.</li>\n<li>You instantly make a flower blossom, a seed pod open, or a leaf bud bloom.</li>\n<li>You create an Instantaneous, harmless sensory effect, such as Falling leaves, a puff of wind, the sound of a small animal, or the faint odor of skunk. The effect must fit in a 5-foot cube.</li>\n<li>You instantly light or snuff out a Candle, a torch, or a small campfire.</li>\n</ul>",
@@ -762,23 +894,31 @@
           "formula": ""
         }
       },
-      "effects": [],
-      "folder": null,
       "sort": 100001,
-      "ownership": {
-        "default": 0
-      },
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.spells.SbSvZKkJASyk8jKo"
         }
+      },
+      "img": "icons/magic/nature/vines-thorned-glow-teal.webp",
+      "effects": [],
+      "folder": null,
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.0",
+        "coreVersion": "10.279",
+        "createdTime": 1661787234141,
+        "modifiedTime": 1661791116365,
+        "lastModifiedBy": "dnd5ebuilder0000"
       }
     },
     {
-      "_id": "QwPEzLNW8iVCL7cR",
+      "_id": "eCPQuQkIabFKTl9u",
       "name": "Produce Flame",
+      "ownership": {
+        "default": 0
+      },
       "type": "spell",
-      "img": "systems/dnd5e/icons/spells/explosion-orange-2.jpg",
       "system": {
         "description": {
           "value": "<p>A flickering flame appears in your hand. The flame remains there for the Duration and harms neither you nor your Equipment. The flame sheds bright light in a 10-foot radius and dim light for an additional 10 feet. The spell ends if you dismiss it as an action or if you cast it again.</p><p>You can also Attack with the flame, although doing so ends the spell. When you cast this spell, or as an action on a later turn, you can hurl the flame at a creature within 30 feet of you. Make a ranged spell Attack. On a hit, the target takes 1d8 fire damage.</p><p>This spell's damage increases by 1d8 when you reach 5th level (2d8), 11th level (3d8), and 17th level (4d8).</p>",
@@ -845,8 +985,8 @@
         "components": {
           "value": "",
           "vocal": true,
-          "somatic": false,
-          "material": true,
+          "somatic": true,
+          "material": false,
           "ritual": false,
           "concentration": false
         },
@@ -865,23 +1005,28 @@
           "formula": ""
         }
       },
-      "effects": [],
-      "folder": null,
       "sort": 100001,
-      "ownership": {
-        "default": 0
-      },
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.spells.eCPQuQkIabFKTl9u"
         }
+      },
+      "img": "icons/magic/fire/explosion-fireball-medium-orange.webp",
+      "effects": [],
+      "folder": null,
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.0",
+        "coreVersion": "10.279",
+        "createdTime": 1661787234183,
+        "modifiedTime": 1661791116365,
+        "lastModifiedBy": "dnd5ebuilder0000"
       }
     },
     {
-      "_id": "326YyjtlKmYZh3T3",
       "name": "Entangle",
       "type": "spell",
-      "img": "systems/dnd5e/icons/spells/vines-acid-2.jpg",
+      "img": "icons/magic/nature/vines-thorned-curled-glow-green.webp",
       "system": {
         "description": {
           "value": "<p>Grasping weeds and vines sprout from the ground in a 20-foot square starting from a point within range. For the Duration, these Plants turn the ground in the area into difficult terrain.</p><p>A creature in the area when you cast the spell must succeed on a Strength saving throw or be Restrained by the entangling Plants until the spell ends. A creature restrained by the plants can use its action to make a Strength check against your spell save DC. On a success, it frees itself.</p><p>When the spell ends, the conjured Plants wilt away.</p>",
@@ -965,22 +1110,33 @@
         "attunement": null
       },
       "effects": [],
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.gMrWeG8fMDPRFiVe"
+        }
+      },
+      "_id": "gMrWeG8fMDPRFiVe",
       "folder": null,
       "sort": 0,
       "ownership": {
         "default": 0
       },
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.dnd5e.spells.gMrWeG8fMDPRFiVe"
-        }
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.0",
+        "coreVersion": "10.279",
+        "createdTime": 1661787234191,
+        "modifiedTime": 1661791116366,
+        "lastModifiedBy": "dnd5ebuilder0000"
       }
     },
     {
-      "_id": "BdApmAz4M3id4rnL",
+      "_id": "B0pnIcc52O6G8hi8",
       "name": "Longstrider",
+      "ownership": {
+        "default": 0
+      },
       "type": "spell",
-      "img": "systems/dnd5e/icons/spells/wind-sky-1.jpg",
       "system": {
         "description": {
           "value": "<p>You touch a creature. The target's speed increases by 10 feet until the spell ends.</p>",
@@ -1063,23 +1219,31 @@
           "formula": ""
         }
       },
-      "effects": [],
-      "folder": null,
       "sort": 100001,
-      "ownership": {
-        "default": 0
-      },
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.spells.B0pnIcc52O6G8hi8"
         }
+      },
+      "img": "icons/magic/air/wind-stream-blue-gray.webp",
+      "effects": [],
+      "folder": null,
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.0",
+        "coreVersion": "10.279",
+        "createdTime": 1661787234090,
+        "modifiedTime": 1661791116366,
+        "lastModifiedBy": "dnd5ebuilder0000"
       }
     },
     {
-      "_id": "lXZnkgspOXxSoLPF",
+      "_id": "aL1F8fvYLtNzUbKu",
       "name": "Speak with Animals",
+      "ownership": {
+        "default": 0
+      },
       "type": "spell",
-      "img": "systems/dnd5e/icons/spells/wild-jade-1.jpg",
       "system": {
         "description": {
           "value": "<p>You gain the ability to comprehend and verbally communicate with beasts for the duration. The knowledge and awareness of many beasts is limited by their intelligence, but at minimum, beasts can give you information about nearby locations and monsters, including whatever they can perceive or have perceived within the past day. You might be able to persuade a beast to perform a small favor for you, at the DM's discretion.</p>",
@@ -1144,7 +1308,7 @@
           "vocal": true,
           "somatic": true,
           "material": false,
-          "ritual": false,
+          "ritual": true,
           "concentration": false
         },
         "materials": {
@@ -1162,23 +1326,31 @@
           "formula": ""
         }
       },
-      "effects": [],
-      "folder": null,
       "sort": 100001,
-      "ownership": {
-        "default": 0
-      },
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.spells.aL1F8fvYLtNzUbKu"
         }
+      },
+      "img": "icons/magic/nature/wolf-paw-glow-small-teal-blue.webp",
+      "effects": [],
+      "folder": null,
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.0",
+        "coreVersion": "10.279",
+        "createdTime": 1661787234167,
+        "modifiedTime": 1661791116366,
+        "lastModifiedBy": "dnd5ebuilder0000"
       }
     },
     {
-      "_id": "2ZxbeICwcq94lFTU",
+      "_id": "WTbOQBsarsL1LuXJ",
       "name": "Thunderwave",
+      "ownership": {
+        "default": 0
+      },
       "type": "spell",
-      "img": "systems/dnd5e/icons/spells/lightning-jade-1.jpg",
       "system": {
         "description": {
           "value": "<p>A wave of thunderous force sweeps out from you. Each creature in a 15-foot cube originating from you must make a Constitution saving throw. On a failed save, a creature takes 2d8 thunder damage and is pushed 10 feet away from you. On a successful save, the creature takes half as much damage and isn't pushed.</p><p>In addition, unsecured objects that are completely within the area of effect are automatically pushed 10 feet away from you by the spell's effect, and the spell emits a thunderous boom audible out to 300 feet.</p><p><strong>Higher Levels.</strong> When you cast this spell using a spell slot of 2nd level or higher, the damage increases by 1d8 for each slot level above 1st.</p>",
@@ -1264,23 +1436,31 @@
           "formula": "1d8"
         }
       },
-      "effects": [],
-      "folder": null,
       "sort": 100001,
-      "ownership": {
-        "default": 0
-      },
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.spells.WTbOQBsarsL1LuXJ"
         }
+      },
+      "img": "icons/magic/lightning/bolt-forked-teal.webp",
+      "effects": [],
+      "folder": null,
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.0",
+        "coreVersion": "10.279",
+        "createdTime": 1661787234152,
+        "modifiedTime": 1661791116367,
+        "lastModifiedBy": "dnd5ebuilder0000"
       }
     },
     {
-      "_id": "6DpP5JZ3gznrULif",
+      "_id": "X8w9EzYLGc4vQ1H2",
       "name": "Animal Messenger",
+      "ownership": {
+        "default": 0
+      },
       "type": "spell",
-      "img": "systems/dnd5e/icons/spells/wild-jade-1.jpg",
       "system": {
         "description": {
           "value": "<p>By means of this spell, you use an animal to deliver a message. Choose a Tiny beast you can see within range, such as a squirrel, a blue jay, or a bat. You specify a location, which you must have visited, and a recipient who matches a general description, such as \"a man or woman dressed in the uniform of the town guard\" or \"a red-haired dwarf wearing a pointed hat.\" You also speak a message of up to twenty-five words. The target beast travels for the duration of the spell toward the specified location, covering about 50 miles per 24 hours for a flying messenger, or 25 miles for other animals.</p><p>When the messenger arrives, it delivers your message to the creature that you described, replicating the sound of your voice. The messenger speaks only to a creature matching the description you gave. If the messenger doesn't reach its destination before the spell ends, the message is lost, and the beast makes its way back to where you cast this spell.</p><p><strong>At Higher Levels.</strong> If you cast this spell using a spell slot of 3rd level or higher, the duration of the spell increases by 48 hours for each slot level above 2nd.</p>",
@@ -1363,23 +1543,31 @@
           "formula": ""
         }
       },
-      "effects": [],
-      "folder": null,
       "sort": 100001,
-      "ownership": {
-        "default": 0
-      },
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.spells.X8w9EzYLGc4vQ1H2"
         }
+      },
+      "img": "icons/magic/nature/wolf-paw-glow-small-teal-blue.webp",
+      "effects": [],
+      "folder": null,
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.0",
+        "coreVersion": "10.279",
+        "createdTime": 1661787234156,
+        "modifiedTime": 1661791116367,
+        "lastModifiedBy": "dnd5ebuilder0000"
       }
     },
     {
-      "_id": "PHcdIFirPgGkjSV7",
+      "_id": "VzgFzcmocr1X1cp4",
       "name": "Shillelagh",
+      "ownership": {
+        "default": 0
+      },
       "type": "spell",
-      "img": "systems/dnd5e/icons/spells/enchant-jade-1.jpg",
       "system": {
         "description": {
           "value": "<p>The wood of a club or quarterstaff you are holding is imbued with nature's power. For the duration, you can use your spellcasting ability instead of Strength for the attack and damage rolls of melee attacks using that weapon, and the weapon's damage die becomes a d8. The weapon also becomes magical, if it isn't already. The spell ends if you cast it again or if you let go of the weapon.</p>",
@@ -1467,23 +1655,29 @@
           "formula": ""
         }
       },
-      "effects": [],
-      "folder": null,
       "sort": 100001,
-      "ownership": {
-        "default": 0
-      },
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.spells.VzgFzcmocr1X1cp4"
         }
+      },
+      "img": "icons/magic/fire/dagger-rune-enchant-teal.webp",
+      "effects": [],
+      "folder": null,
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.0",
+        "coreVersion": "10.279",
+        "createdTime": 1661787234149,
+        "modifiedTime": 1661791116367,
+        "lastModifiedBy": "dnd5ebuilder0000"
       }
     },
     {
-      "_id": "xf9PRKOZJ3jjwouV",
+      "_id": "JPwIEfgUPVebr5AH",
       "name": "Barkskin",
       "type": "spell",
-      "img": "systems/dnd5e/icons/spells/protect-orange-2.jpg",
+      "img": "icons/magic/defensive/shield-barrier-flaming-diamond-orange.webp",
       "system": {
         "description": {
           "value": "<p>You touch a willing creature. Until the spell ends, the target's skin has a rough, bark-like appearance, and the target's AC can't be less than 16, regardless of what kind of armor it is wearing.</p>",
@@ -1572,22 +1766,29 @@
           "flags": {},
           "changes": [
             {
-              "key": "data.attributes.ac.formula",
+              "key": "system.attributes.ac.formula",
               "value": "16",
-              "mode": 5
+              "mode": 5,
+              "priority": null
             },
             {
-              "key": "data.attributes.ac.calc",
+              "key": "system.attributes.ac.calc",
               "value": "custom",
-              "mode": 5
+              "mode": 5,
+              "priority": null
             }
           ],
           "disabled": true,
           "duration": {
             "startTime": null,
-            "seconds": 3600
+            "seconds": 3600,
+            "combat": null,
+            "rounds": null,
+            "turns": null,
+            "startRound": null,
+            "startTurn": null
           },
-          "icon": "systems/dnd5e/icons/spells/protect-orange-2.jpg",
+          "icon": "icons/magic/defensive/shield-barrier-flaming-diamond-orange.webp",
           "label": "Barkskin",
           "origin": "Item.VQMKMnQDw5rzL0zp",
           "tint": null,
@@ -1603,124 +1804,64 @@
         "core": {
           "sourceId": "Compendium.dnd5e.spells.JPwIEfgUPVebr5AH"
         }
+      },
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.0",
+        "coreVersion": "10.279",
+        "createdTime": 1661787234113,
+        "modifiedTime": 1661791116367,
+        "lastModifiedBy": "dnd5ebuilder0000"
       }
-    },
-    {
-      "_id": "KUP8WEfLxlcY7K2x",
-      "name": "Quarterstaff",
-      "type": "weapon",
-      "img": "icons/weapons/staves/staff-simple-gold.webp",
-      "system": {
-        "description": {
-          "value": "<section class=\"secret\">\n<p>Melee Weapon Attack: +2 to hit (+4 to hit with shillelagh), reach 5 ft., one target. Hit: <strong>3 (1d6) <em>bludgeoning damage</em></strong>, or <strong>6 (1d8 + 2) <em>bludgeoning damage</em></strong> with shillelagh or if wielded with two hands.</p></section>\n<p>The Druid attacks with its Quarterstaff.</p>",
-          "chat": "",
-          "unidentified": ""
-        },
-        "source": "PHB pg. 149",
-        "quantity": 1,
-        "weight": 4,
-        "price": 2,
-        "attunement": 0,
-        "equipped": true,
-        "rarity": "Common",
-        "identified": true,
-        "activation": {
-          "type": "action",
-          "cost": 1,
-          "condition": ""
-        },
-        "duration": {
-          "value": null,
-          "units": ""
-        },
-        "target": {
-          "value": null,
-          "width": null,
-          "units": "",
-          "type": ""
-        },
-        "range": {
-          "value": 5,
-          "long": null,
-          "units": "ft"
-        },
-        "uses": {
-          "value": 0,
-          "max": 0,
-          "per": ""
-        },
-        "consume": {
-          "type": "",
-          "target": "",
-          "amount": null
-        },
-        "ability": "dex",
-        "actionType": "mwak",
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "critical": {
-          "threshold": null,
-          "damage": ""
-        },
-        "damage": {
-          "parts": [
-            [
-              "1d6 + @mod",
-              "bludgeoning"
-            ]
-          ],
-          "versatile": "1d8 + @mod"
-        },
-        "formula": "",
-        "save": {
-          "ability": "",
-          "dc": null,
-          "scaling": "spell"
-        },
-        "armor": {
-          "value": 10
-        },
-        "hp": {
-          "value": 0,
-          "max": 0,
-          "dt": null,
-          "conditions": ""
-        },
-        "weaponType": "simpleM",
-        "baseItem": "",
-        "properties": {
-          "ver": true,
-          "amm": false,
-          "fin": false,
-          "fir": false,
-          "foc": false,
-          "hvy": false,
-          "lgt": false,
-          "lod": false,
-          "rch": false,
-          "rel": false,
-          "ret": false,
-          "spc": false,
-          "thr": false,
-          "two": false
-        },
-        "proficient": true,
-        "attuned": false
-      },
-      "effects": [],
-      "folder": null,
-      "sort": 200001,
-      "ownership": {
-        "default": 0
-      },
-      "flags": {}
     }
   ],
-  "effects": [],
+  "effects": [
+    {
+      "_id": "uM6rgctYpcbCVSkn",
+      "flags": {},
+      "changes": [
+        {
+          "key": "system.attributes.ac.formula",
+          "value": "16",
+          "mode": 5,
+          "priority": null
+        },
+        {
+          "key": "system.attributes.ac.calc",
+          "value": "custom",
+          "mode": 5,
+          "priority": null
+        }
+      ],
+      "disabled": true,
+      "duration": {
+        "startTime": 678,
+        "seconds": 3600,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": 2,
+        "startTurn": 1
+      },
+      "icon": "icons/magic/defensive/shield-barrier-flaming-diamond-orange.webp",
+      "label": "Barkskin",
+      "origin": "Compendium.dnd5e.monsters.K15Yl8JmB5iPircc.Item.JPwIEfgUPVebr5AH",
+      "tint": null,
+      "transfer": false
+    }
+  ],
   "folder": "lqq7AC8UiPDuwneP",
   "sort": 0,
   "ownership": {
     "default": 0
   },
-  "flags": {}
+  "flags": {},
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.0.0",
+    "coreVersion": "10.279",
+    "createdTime": 1661787232744,
+    "modifiedTime": 1661878730802,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  }
 }

@@ -573,29 +573,10 @@
     "flags": {},
     "name": "Beiro",
     "displayName": 30,
-    "img": "systems/dnd5e/tokens/heroes/BardLute.webp",
-    "tint": null,
     "width": 1,
     "height": 1,
-    "scale": 1,
-    "mirrorX": false,
-    "mirrorY": false,
     "lockRotation": false,
     "rotation": 0,
-    "vision": true,
-    "dimSight": 60,
-    "brightSight": 0,
-    "dimLight": 0,
-    "brightLight": 0,
-    "sightAngle": 0,
-    "lightAngle": 0,
-    "lightColor": null,
-    "lightAlpha": 1,
-    "lightAnimation": {
-      "speed": 5,
-      "intensity": 5
-    },
-    "actorId": "BnukfoG210lqJ9a2",
     "actorLink": true,
     "disposition": 1,
     "displayBars": 40,
@@ -608,12 +589,11 @@
     "randomImg": false,
     "alpha": 1,
     "light": {
-      "alpha": 0.5,
-      "angle": 0,
+      "alpha": 1,
+      "angle": 360,
       "bright": 0,
       "coloration": 1,
       "dim": 0,
-      "gradual": true,
       "luminosity": 0.5,
       "saturation": 0,
       "contrast": 0,
@@ -621,13 +601,37 @@
       "animation": {
         "speed": 5,
         "intensity": 5,
+        "type": null,
         "reverse": false
       },
       "darkness": {
         "min": 0,
         "max": 1
-      }
-    }
+      },
+      "color": null,
+      "attenuation": 0.5
+    },
+    "texture": {
+      "src": "systems/dnd5e/tokens/heroes/BardLute.webp",
+      "tint": null,
+      "scaleX": 1,
+      "scaleY": 1,
+      "offsetX": 0,
+      "offsetY": 0,
+      "rotation": 0
+    },
+    "sight": {
+      "angle": 360,
+      "enabled": true,
+      "range": 60,
+      "brightness": 0,
+      "visionMode": "basic",
+      "color": null,
+      "attenuation": 0.1,
+      "saturation": 0,
+      "contrast": 0
+    },
+    "detectionModes": []
   },
   "items": [
     {
@@ -723,6 +727,14 @@
       "folder": null,
       "ownership": {
         "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -741,7 +753,7 @@
         "price": 35,
         "attunement": 0,
         "equipped": false,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
         "toolType": "",
         "baseItem": "",
@@ -749,7 +761,6 @@
         "chatFlavor": "",
         "proficient": 1,
         "bonus": "",
-        "attuned": false,
         "damage": {
           "parts": []
         }
@@ -761,6 +772,14 @@
       "folder": null,
       "ownership": {
         "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -779,7 +798,7 @@
         "price": 2,
         "attunement": 0,
         "equipped": false,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
         "toolType": "",
         "baseItem": "",
@@ -787,7 +806,6 @@
         "chatFlavor": "",
         "proficient": 1,
         "bonus": "",
-        "attuned": false,
         "damage": {
           "parts": []
         }
@@ -799,6 +817,14 @@
       "folder": null,
       "ownership": {
         "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -817,7 +843,7 @@
         "price": 5,
         "attunement": 0,
         "equipped": false,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
         "capacity": {
           "type": "weight",
@@ -831,7 +857,6 @@
           "gp": 0,
           "pp": 0
         },
-        "attuned": false,
         "damage": {
           "parts": []
         }
@@ -843,6 +868,14 @@
       "folder": null,
       "ownership": {
         "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -861,7 +894,7 @@
         "price": 1,
         "attunement": 0,
         "equipped": false,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
         "capacity": {
           "type": "items",
@@ -875,7 +908,6 @@
           "gp": 0,
           "pp": 0
         },
-        "attuned": false,
         "damage": {
           "parts": []
         }
@@ -887,6 +919,14 @@
       "folder": null,
       "ownership": {
         "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -905,7 +945,7 @@
         "price": 2,
         "attunement": 0,
         "equipped": false,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
         "capacity": {
           "type": "weight",
@@ -919,7 +959,6 @@
           "gp": 0,
           "pp": 0
         },
-        "attuned": false,
         "damage": {
           "parts": []
         }
@@ -931,6 +970,14 @@
       "folder": null,
       "ownership": {
         "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -949,7 +996,7 @@
         "price": 0.5,
         "attunement": 0,
         "equipped": false,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
         "capacity": {
           "type": "weight",
@@ -963,7 +1010,6 @@
           "gp": 0,
           "pp": 0
         },
-        "attuned": false,
         "damage": {
           "parts": []
         }
@@ -975,6 +1021,14 @@
       "folder": null,
       "ownership": {
         "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -993,7 +1047,7 @@
         "price": 25,
         "attunement": 0,
         "equipped": false,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
         "toolType": "",
         "baseItem": "",
@@ -1001,7 +1055,6 @@
         "chatFlavor": "",
         "proficient": 1,
         "bonus": "",
-        "attuned": false,
         "damage": {
           "parts": []
         }
@@ -1013,6 +1066,14 @@
       "folder": null,
       "ownership": {
         "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -1031,7 +1092,7 @@
         "price": 2,
         "attunement": 0,
         "equipped": false,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
         "activation": {
           "type": "action",
@@ -1113,8 +1174,7 @@
           "two": false,
           "ver": false
         },
-        "proficient": true,
-        "attuned": false
+        "proficient": true
       },
       "sort": 2000000,
       "flags": {},
@@ -1123,6 +1183,14 @@
       "folder": null,
       "ownership": {
         "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -1141,7 +1209,7 @@
         "price": 25,
         "attunement": 0,
         "equipped": true,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
         "activation": {
           "type": "action",
@@ -1223,8 +1291,7 @@
           "two": false,
           "ver": false
         },
-        "proficient": true,
-        "attuned": false
+        "proficient": true
       },
       "sort": 1900000,
       "flags": {},
@@ -1233,6 +1300,14 @@
       "folder": null,
       "ownership": {
         "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -1251,7 +1326,7 @@
         "price": 10,
         "attunement": 0,
         "equipped": true,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
         "activation": {
           "type": "",
@@ -1319,8 +1394,7 @@
         },
         "strength": null,
         "stealth": false,
-        "proficient": true,
-        "attuned": false
+        "proficient": true
       },
       "sort": 200000,
       "flags": {},
@@ -1329,6 +1403,14 @@
       "folder": null,
       "ownership": {
         "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -1347,7 +1429,7 @@
         "price": 5,
         "attunement": 0,
         "equipped": false,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
         "activation": {
           "type": "none",
@@ -1415,8 +1497,7 @@
         },
         "strength": 0,
         "stealth": false,
-        "proficient": false,
-        "attuned": false
+        "proficient": false
       },
       "sort": 700000,
       "flags": {},
@@ -1425,6 +1506,14 @@
       "folder": null,
       "ownership": {
         "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -1443,7 +1532,7 @@
         "price": 15,
         "attunement": 0,
         "equipped": false,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
         "activation": {
           "type": "none",
@@ -1511,8 +1600,7 @@
         },
         "strength": 0,
         "stealth": false,
-        "proficient": false,
-        "attuned": false
+        "proficient": false
       },
       "sort": 700000,
       "flags": {},
@@ -1521,6 +1609,14 @@
       "folder": null,
       "ownership": {
         "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -1539,7 +1635,7 @@
         "price": 0.1,
         "attunement": 0,
         "equipped": false,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
         "activation": {
           "type": "action",
@@ -1596,8 +1692,7 @@
           "dc": null,
           "scaling": "spell"
         },
-        "consumableType": "trinket",
-        "attuned": false
+        "consumableType": "trinket"
       },
       "sort": 200001,
       "flags": {},
@@ -1606,6 +1701,14 @@
       "folder": null,
       "ownership": {
         "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -1624,7 +1727,7 @@
         "price": 0.5,
         "attunement": 0,
         "equipped": false,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
         "activation": {
           "type": "action",
@@ -1676,8 +1779,7 @@
           "dc": null,
           "scaling": "spell"
         },
-        "consumableType": "trinket",
-        "attuned": false
+        "consumableType": "trinket"
       },
       "sort": 3700000,
       "flags": {},
@@ -1686,6 +1788,14 @@
       "folder": null,
       "ownership": {
         "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -1704,7 +1814,7 @@
         "price": 6,
         "attunement": 0,
         "equipped": false,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
         "toolType": "",
         "baseItem": "",
@@ -1712,7 +1822,6 @@
         "chatFlavor": "",
         "proficient": 1,
         "bonus": "",
-        "attuned": false,
         "damage": {
           "parts": []
         }
@@ -1724,6 +1833,14 @@
       "folder": null,
       "ownership": {
         "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -1742,9 +1859,8 @@
         "price": 0.02,
         "attunement": 0,
         "equipped": false,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
-        "attuned": false,
         "damage": {
           "parts": []
         }
@@ -1756,6 +1872,14 @@
       "folder": null,
       "ownership": {
         "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -1774,9 +1898,8 @@
         "price": 10,
         "attunement": 0,
         "equipped": false,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
-        "attuned": false,
         "damage": {
           "parts": []
         }
@@ -1788,6 +1911,14 @@
       "folder": null,
       "ownership": {
         "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -1806,9 +1937,8 @@
         "price": 0.2,
         "attunement": 0,
         "equipped": false,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
-        "attuned": false,
         "damage": {
           "parts": []
         }
@@ -1820,6 +1950,14 @@
       "folder": null,
       "ownership": {
         "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -1838,9 +1976,8 @@
         "price": 5,
         "attunement": 0,
         "equipped": false,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
-        "attuned": false,
         "damage": {
           "parts": []
         }
@@ -1852,6 +1989,14 @@
       "folder": null,
       "ownership": {
         "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -1870,9 +2015,8 @@
         "price": 0.02,
         "attunement": 0,
         "equipped": false,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
-        "attuned": false,
         "damage": {
           "parts": []
         }
@@ -1884,6 +2028,14 @@
       "folder": null,
       "ownership": {
         "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -1902,9 +2054,8 @@
         "price": 0.5,
         "attunement": 0,
         "equipped": false,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
-        "attuned": false,
         "damage": {
           "parts": []
         }
@@ -1916,607 +2067,14 @@
       "folder": null,
       "ownership": {
         "default": 0
-      }
-    },
-    {
-      "_id": "hEUrELgWXKAaJOZ9",
-      "name": "Light",
-      "type": "spell",
-      "system": {
-        "description": {
-          "value": "<p>You touch one object that is no larger than 10 feet in any dimension. Until the spell ends, the object sheds bright light in a 20-foot radius and dim light for an additional 20 feet. The light can be colored as you like. Completely covering the object with something opaque blocks the light. The spell ends if you cast it again or dismiss it as an action.</p><p>If you target an object held or worn by a hostile creature, that creature must succeed on a Dexterity saving throw to avoid the spell.</p>",
-          "chat": "",
-          "unidentified": ""
-        },
-        "source": "PHB pg. 255",
-        "activation": {
-          "type": "action",
-          "cost": 1,
-          "condition": ""
-        },
-        "duration": {
-          "value": 1,
-          "units": "hour"
-        },
-        "target": {
-          "value": 1,
-          "width": null,
-          "units": "",
-          "type": "object"
-        },
-        "range": {
-          "value": null,
-          "long": null,
-          "units": "touch"
-        },
-        "uses": {
-          "value": 0,
-          "max": 0,
-          "per": ""
-        },
-        "consume": {
-          "type": "",
-          "target": null,
-          "amount": null
-        },
-        "ability": "",
-        "actionType": "save",
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "critical": {
-          "threshold": null,
-          "damage": ""
-        },
-        "damage": {
-          "parts": [],
-          "versatile": "",
-          "value": ""
-        },
-        "formula": "",
-        "save": {
-          "ability": "dex",
-          "dc": 13,
-          "scaling": "spell"
-        },
-        "level": 0,
-        "school": "evo",
-        "components": {
-          "value": "",
-          "vocal": true,
-          "somatic": false,
-          "material": true,
-          "ritual": false,
-          "concentration": false
-        },
-        "materials": {
-          "value": "A firefly or phosphorescent moss.",
-          "consumed": false,
-          "cost": 0,
-          "supply": 0
-        },
-        "preparation": {
-          "mode": "prepared",
-          "prepared": false
-        },
-        "scaling": {
-          "mode": "none",
-          "formula": ""
-        },
-        "attunement": 0
       },
-      "sort": 100001,
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.dnd5e.spells.Bnn9Nzajixvow9xi"
-        }
-      },
-      "img": "systems/dnd5e/icons/spells/light-sky-1.jpg",
-      "effects": [],
-      "folder": null,
-      "ownership": {
-        "default": 0
-      }
-    },
-    {
-      "_id": "KetraWCseV9yIycQ",
-      "name": "Mage Hand",
-      "type": "spell",
-      "system": {
-        "description": {
-          "value": "<p>A spectral, floating hand appears at a point you choose within range. The hand lasts for the duration or until you dismiss it as an action. The hand vanishes if it is ever more than 30 feet away from you or if you cast this spell again.</p><p>You can use your action to control the hand. You can use the hand to manipulate an object, open an unlocked door or container, stow or retrieve an item from an open container, or pour the contents out of a vial. You can move the hand up to 30 feet each time you use it.</p><p>The hand can't attack, activate magic items, or carry more than 10 pounds.</p>",
-          "chat": "",
-          "unidentified": ""
-        },
-        "source": "PHB pg. 256",
-        "activation": {
-          "type": "action",
-          "cost": 1,
-          "condition": ""
-        },
-        "duration": {
-          "value": 1,
-          "units": "minute"
-        },
-        "target": {
-          "value": 1,
-          "width": null,
-          "units": "",
-          "type": "space"
-        },
-        "range": {
-          "value": 30,
-          "long": 0,
-          "units": "ft"
-        },
-        "uses": {
-          "value": 0,
-          "max": 0,
-          "per": ""
-        },
-        "consume": {
-          "type": "",
-          "target": null,
-          "amount": null
-        },
-        "ability": "",
-        "actionType": "util",
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "critical": {
-          "threshold": null,
-          "damage": ""
-        },
-        "damage": {
-          "parts": [],
-          "versatile": "",
-          "value": ""
-        },
-        "formula": "",
-        "save": {
-          "ability": "",
-          "dc": null,
-          "scaling": "spell",
-          "value": ""
-        },
-        "level": 0,
-        "school": "con",
-        "components": {
-          "value": "",
-          "vocal": true,
-          "somatic": true,
-          "material": false,
-          "ritual": false,
-          "concentration": false
-        },
-        "materials": {
-          "value": "",
-          "consumed": false,
-          "cost": 0,
-          "supply": 0
-        },
-        "preparation": {
-          "mode": "prepared",
-          "prepared": false
-        },
-        "scaling": {
-          "mode": "none",
-          "formula": ""
-        },
-        "attunement": 0
-      },
-      "sort": 100001,
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.dnd5e.spells.Utk1OQRwYkMkFRD3"
-        }
-      },
-      "img": "icons/magic/water/water-hand.webp",
-      "effects": [],
-      "folder": null,
-      "ownership": {
-        "default": 0
-      }
-    },
-    {
-      "_id": "nsCHxtON5ZkzjLsT",
-      "name": "Charm Person",
-      "type": "spell",
-      "system": {
-        "description": {
-          "value": "<p>You attempt to charm a humanoid you can see within range. It must make a Wisdom saving throw, and does so with advantage if you or your companions are fighting it. If it fails the saving throw, it is charmed by you until the spell ends or until you or your companions do anything harmful to it. The charmed creature regards you as a friendly acquaintance. When the spell ends, the creature knows it was charmed by you.</p>\n        <p><strong>At Higher Levels.</strong> When you cast this spell using a spell slot of 2nd level or higher, you can target one additional creature for each slot level above 1st. The creatures must be within 30 feet of each other when you target them.</p>",
-          "chat": "",
-          "unidentified": ""
-        },
-        "source": "PHB pg. 221",
-        "activation": {
-          "type": "action",
-          "cost": 1,
-          "condition": ""
-        },
-        "duration": {
-          "value": 1,
-          "units": "hour"
-        },
-        "target": {
-          "value": 1,
-          "width": null,
-          "units": "",
-          "type": "creature"
-        },
-        "range": {
-          "value": 30,
-          "long": 0,
-          "units": "ft"
-        },
-        "uses": {
-          "value": 0,
-          "max": 0,
-          "per": ""
-        },
-        "consume": {
-          "type": "",
-          "target": "",
-          "amount": null
-        },
-        "ability": "",
-        "actionType": "save",
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "critical": {
-          "threshold": null,
-          "damage": ""
-        },
-        "damage": {
-          "parts": [],
-          "versatile": "",
-          "value": ""
-        },
-        "formula": "",
-        "save": {
-          "ability": "wis",
-          "dc": 13,
-          "scaling": "spell"
-        },
-        "level": 1,
-        "school": "enc",
-        "components": {
-          "value": "",
-          "vocal": true,
-          "somatic": true,
-          "material": false,
-          "ritual": false,
-          "concentration": false
-        },
-        "materials": {
-          "value": "",
-          "consumed": false,
-          "cost": 0,
-          "supply": 0
-        },
-        "preparation": {
-          "mode": "prepared",
-          "prepared": false
-        },
-        "scaling": {
-          "mode": "level",
-          "formula": ""
-        },
-        "attunement": 0
-      },
-      "sort": 100001,
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.dnd5e.spells.eS7XnnApoxRxYXPs"
-        }
-      },
-      "img": "systems/dnd5e/icons/spells/explosion-magenta-2.jpg",
-      "effects": [],
-      "folder": null,
-      "ownership": {
-        "default": 0
-      }
-    },
-    {
-      "_id": "xgbCmlnGyxeoPgVh",
-      "name": "Disguise Self",
-      "type": "spell",
-      "system": {
-        "description": {
-          "value": "<p>You make yourself—including your clothing, armor, weapons, and other belongings on your person—look different until the spell ends or until you use your action to dismiss it. You can seem 1 foot shorter or taller and can appear thin, fat, or in between. You can't change your body type, so you must adopt a form that has the same basic arrangement of limbs. Otherwise, the extent of the illusion is up to you.</p><p>The changes wrought by this spell fail to hold up to physical inspection. For example, if you use this spell to add a hat to your outfit, objects pass through the hat, and anyone who touches it would feel nothing or would feel your head and hair. If you use this spell to appear thinner than you are, the hand of someone who reaches out to touch you would bump into you while it was seemingly still in midair.</p><p>To discern that you are disguised, a creature can use its action to inspect your appearance and must succeed on an Intelligence (Investigation) check against your spell save DC.</p>",
-          "chat": "",
-          "unidentified": ""
-        },
-        "source": "PHB pg. 233",
-        "activation": {
-          "type": "action",
-          "cost": 1,
-          "condition": ""
-        },
-        "duration": {
-          "value": 1,
-          "units": "hour"
-        },
-        "target": {
-          "value": null,
-          "width": null,
-          "units": null,
-          "type": "self"
-        },
-        "range": {
-          "value": null,
-          "long": null,
-          "units": "self"
-        },
-        "uses": {
-          "value": 0,
-          "max": 0,
-          "per": ""
-        },
-        "consume": {
-          "type": "",
-          "target": null,
-          "amount": null
-        },
-        "ability": "",
-        "actionType": "util",
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "critical": {
-          "threshold": null,
-          "damage": ""
-        },
-        "damage": {
-          "parts": [],
-          "versatile": "",
-          "value": ""
-        },
-        "formula": "",
-        "save": {
-          "ability": "",
-          "dc": null,
-          "scaling": "spell",
-          "value": ""
-        },
-        "level": 1,
-        "school": "ill",
-        "components": {
-          "value": "",
-          "vocal": true,
-          "somatic": true,
-          "material": false,
-          "ritual": false,
-          "concentration": false
-        },
-        "materials": {
-          "value": "",
-          "consumed": false,
-          "cost": 0,
-          "supply": 0
-        },
-        "preparation": {
-          "mode": "prepared",
-          "prepared": false
-        },
-        "scaling": {
-          "mode": "none",
-          "formula": ""
-        },
-        "attunement": 0
-      },
-      "sort": 100001,
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.dnd5e.spells.A3q2gTNqG6fvNGrv"
-        }
-      },
-      "img": "systems/dnd5e/icons/spells/wind-grasp-eerie-2.jpg",
-      "effects": [],
-      "folder": null,
-      "ownership": {
-        "default": 0
-      }
-    },
-    {
-      "_id": "cCU43lTu78gtSj0H",
-      "name": "Heroism",
-      "type": "spell",
-      "system": {
-        "description": {
-          "value": "<p>A willing creature you touch is imbued with bravery. Until the spell ends, the creature is immune to being Frightened and gains Temporary Hit Points equal to your Spellcasting ability modifier at the start of each of its turns. When the spell ends, the target loses any remaining temporary hit points from this spell.</p><p><strong>At Higher Levels.</strong> When you cast this spell using a spell slot of 2nd level or higher, you can target one additional creature for each slot level above 1st.</p>",
-          "chat": "",
-          "unidentified": ""
-        },
-        "source": "PHB pg. 250",
-        "activation": {
-          "type": "action",
-          "cost": 1,
-          "condition": ""
-        },
-        "duration": {
-          "value": 1,
-          "units": "minute"
-        },
-        "target": {
-          "value": 1,
-          "width": null,
-          "units": "",
-          "type": "creature"
-        },
-        "range": {
-          "value": null,
-          "long": null,
-          "units": "touch"
-        },
-        "uses": {
-          "value": 0,
-          "max": 0,
-          "per": ""
-        },
-        "consume": {
-          "type": "",
-          "target": null,
-          "amount": null
-        },
-        "ability": "",
-        "actionType": "heal",
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "critical": {
-          "threshold": null,
-          "damage": ""
-        },
-        "damage": {
-          "parts": [
-            [
-              "@mod",
-              "temphp"
-            ]
-          ],
-          "versatile": ""
-        },
-        "formula": "",
-        "save": {
-          "ability": "",
-          "dc": null,
-          "scaling": "spell",
-          "value": ""
-        },
-        "level": 1,
-        "school": "enc",
-        "components": {
-          "value": "",
-          "vocal": true,
-          "somatic": true,
-          "material": false,
-          "ritual": false,
-          "concentration": true
-        },
-        "materials": {
-          "value": "",
-          "consumed": false,
-          "cost": 0,
-          "supply": 0
-        },
-        "preparation": {
-          "mode": "prepared",
-          "prepared": false
-        },
-        "scaling": {
-          "mode": "level",
-          "formula": ""
-        },
-        "attunement": 0
-      },
-      "sort": 100001,
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.dnd5e.spells.ge3Saet9zPTDyaoL"
-        }
-      },
-      "img": "systems/dnd5e/icons/spells/heal-sky-2.jpg",
-      "effects": [],
-      "folder": null,
-      "ownership": {
-        "default": 0
-      }
-    },
-    {
-      "_id": "5tez50g1xWPPfqA8",
-      "name": "Hideous Laughter",
-      "type": "spell",
-      "system": {
-        "description": {
-          "value": "<p>A creature of your choice that you can see within range perceives everything as hilariously funny and falls into fits of laughter if this spell affects it. The target must succeed on a Wisdom saving throw or fall prone, becoming Incapacitated and unable to stand up for the Duration. A creature with an Intelligence score of 4 or less isn't affected.</p><p>At the end of each of its turns, and each time it takes damage, the target can make another Wisdom saving throw. The target has advantage on the saving throw if it's triggered by damage. On a success, the spell ends.</p>",
-          "chat": "",
-          "unidentified": ""
-        },
-        "source": "",
-        "activation": {
-          "type": "action",
-          "cost": 1,
-          "condition": ""
-        },
-        "duration": {
-          "value": 1,
-          "units": "minute"
-        },
-        "target": {
-          "value": 1,
-          "width": null,
-          "units": "",
-          "type": "creature"
-        },
-        "range": {
-          "value": 30,
-          "long": 0,
-          "units": "ft"
-        },
-        "uses": {
-          "value": 0,
-          "max": 0,
-          "per": ""
-        },
-        "consume": {
-          "type": "",
-          "target": null,
-          "amount": null
-        },
-        "ability": "",
-        "actionType": "save",
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "critical": {
-          "threshold": null,
-          "damage": ""
-        },
-        "damage": {
-          "parts": [],
-          "versatile": "",
-          "value": ""
-        },
-        "formula": "",
-        "save": {
-          "ability": "wis",
-          "dc": 13,
-          "scaling": "spell"
-        },
-        "level": 1,
-        "school": "enc",
-        "components": {
-          "value": "",
-          "vocal": true,
-          "somatic": true,
-          "material": true,
-          "ritual": false,
-          "concentration": true
-        },
-        "materials": {
-          "value": "Tiny tarts and a feather that is waved in the air",
-          "consumed": false,
-          "cost": 0,
-          "supply": 0
-        },
-        "preparation": {
-          "mode": "prepared",
-          "prepared": false
-        },
-        "scaling": {
-          "mode": "none",
-          "formula": ""
-        },
-        "attunement": 0
-      },
-      "sort": 100001,
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.dnd5e.spells.BQk5Row4NymMnUQl"
-        }
-      },
-      "img": "systems/dnd5e/icons/spells/explosion-magenta-2.jpg",
-      "effects": [],
-      "folder": null,
-      "ownership": {
-        "default": 0
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -2536,8 +2094,7 @@
         "attunement": 0,
         "equipped": false,
         "rarity": "",
-        "identified": true,
-        "attuned": false
+        "identified": true
       },
       "sort": 100001,
       "flags": {},
@@ -2546,6 +2103,14 @@
       "folder": null,
       "ownership": {
         "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -2564,7 +2129,7 @@
         "price": 0.5,
         "attunement": 0,
         "equipped": false,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
         "activation": {
           "type": "action",
@@ -2616,8 +2181,7 @@
           "dc": null,
           "scaling": "spell"
         },
-        "consumableType": "food",
-        "attuned": false
+        "consumableType": "food"
       },
       "sort": 1800000,
       "flags": {},
@@ -2626,6 +2190,14 @@
       "folder": null,
       "ownership": {
         "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -2721,6 +2293,14 @@
       "folder": null,
       "ownership": {
         "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -2791,11 +2371,19 @@
       },
       "sort": 2700000,
       "flags": {},
-      "img": "systems/dnd5e/icons/spells/leaf-jade-2.jpg",
+      "img": "icons/magic/nature/leaf-glow-triple-teal.webp",
       "effects": [],
       "folder": null,
       "ownership": {
         "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -3040,6 +2628,14 @@
         "core": {
           "sourceId": "Compendium.dnd5e.classes.ILvRZGEx3aXqSVUt"
         }
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -3049,7 +2645,7 @@
       "img": "icons/magic/symbols/runes-carved-stone-yellow.webp",
       "system": {
         "description": {
-          "value": "<p>You have learned to untangle and reshape the fabric of reality in harmony with your wishes and music. Your spells are part of your vast repertoire, magic that you can tune to different situations.</p>\n<h3>Cantrips</h3>\n<p>You know two cantrips of your choice from the bard spell list. You learn additional bard cantrips of your choice at higher levels, as shown in the Cantrips Known column of the Bard table.</p>\n<h3>Spell Slots</h3>\n<p>The Bard table shows how many spell slots you have to cast your spells of 1st level and higher. To cast one of these spells, you must expend a slot of the spell's level or higher. You regain all expended spell slots when you finish a long rest.</p><p>For example, if you know the 1st-level spell cure wounds and have a 1st-level and a 2nd-level spell slot available, you can cast cure wounds using either slot.</p>\n<h3>Spells Known of 1st Level and Higher</h3>\n<p>You know four 1st-level spells of your choice from the bard spell list.</p><p>The Spells Known column of the Bard table shows when you learn more bard spells of your choice. Each of these spells must be of a level for which you have spell slots, as shown on the table. For instance, when you reach 3rd level in this class, you can learn one new spell of 1st or 2nd level.</p><p>Additionally, when you gain a level in this class, you can choose one of the bard spells you know and replace it with another spell from the bard spell list, which also must be of a level for which you have spell slots.</p>\n<table border=\"1\">\n<thead>\n<tr>\n<td rowspan=\"2\">Level</td>\n<td rowspan=\"2\">Cantrips Known</td>\n<td rowspan=\"2\">Spells Known</td>\n<td colspan=\"9\">—Spell Slots per Spell Level—</td>\n</tr>\n<tr>\n<td>1st</td>\n<td>2nd</td>\n<td>3rd</td>\n<td>4th</td>\n<td>5th</td>\n<td>6th</td>\n<td>7th</td>\n<td>8th</td>\n<td>9th</td>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>1st</td>\n<td>2</td>\n<td>4</td>\n<td>2</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>2nd</td>\n<td>2</td>\n<td>5</td>\n<td>3</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>3rd</td>\n<td>2</td>\n<td>6</td>\n<td>4</td>\n<td>2</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>4th</td>\n<td>3</td>\n<td>7</td>\n<td>4</td>\n<td>3</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>5th</td>\n<td>3</td>\n<td>8</td>\n<td>4</td>\n<td>3</td>\n<td>2</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>6th</td>\n<td>3</td>\n<td>9</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>7th</td>\n<td>3</td>\n<td>10</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>1</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>8th</td>\n<td>3</td>\n<td>11</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>2</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>9th</td>\n<td>3</td>\n<td>12</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>1</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>10th</td>\n<td>4</td>\n<td>14</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>2</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>11th</td>\n<td>4</td>\n<td>15</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>2</td>\n<td>1</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>12th</td>\n<td>4</td>\n<td>15</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>2</td>\n<td>1</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>13th</td>\n<td>4</td>\n<td>16</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>2</td>\n<td>1</td>\n<td>1</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>14th</td>\n<td>4</td>\n<td>18</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>2</td>\n<td>1</td>\n<td>1</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>15th</td>\n<td>4</td>\n<td>19</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>2</td>\n<td>1</td>\n<td>1</td>\n<td>1</td>\n<td>-</td>\n</tr>\n<tr>\n<td>16th</td>\n<td>4</td>\n<td>19</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>2</td>\n<td>1</td>\n<td>1</td>\n<td>1</td>\n<td>-</td>\n</tr>\n<tr>\n<td>17th</td>\n<td>4</td>\n<td>20</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>2</td>\n<td>1</td>\n<td>1</td>\n<td>1</td>\n<td>1</td>\n</tr>\n<tr>\n<td>18th</td>\n<td>4</td>\n<td>22</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>1</td>\n<td>1</td>\n<td>1</td>\n<td>1</td>\n</tr>\n<tr>\n<td>19th</td>\n<td>4</td>\n<td>22</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>2</td>\n<td>1</td>\n<td>1</td>\n<td>1</td>\n</tr>\n<tr>\n<td>20th</td>\n<td>4</td>\n<td>22</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>2</td>\n<td>2</td>\n<td>1</td>\n<td>1</td>\n</tr>\n</tbody>\n</table>\n<h3>Spellcasting Ability</h3>\n<p>Charisma is your spellcasting ability for your bard spells. Your magic comes from the heart and soul you pour into the performance of your music or oration. You use your Charisma whenever a spell refers to your spellcasting ability. In addition, you use your Charisma modifier when setting the saving throw DC for a bard spell you cast and when making an attack roll with one.</p><p><strong>Spell save DC</strong> = 8 + your proficiency bonus + your Charisma modifier</p><p><strong>Spell attack modifier</strong> = your proficiency bonus + your Charisma modifier</p>\n<h3>Ritual Casting</h3>\n<p>You can cast any bard spell you know as a ritual if that spell has the ritual tag.</p>\n<h3>Spellcasting Focus</h3>\n<p>You can use a musical instrument (see @Compendium[dnd5e.rules.bogWrnJqoNlBd0O8]{Adventuring Gear}) as a spellcasting focus for your bard spells.</p>",
+          "value": "<p>You have learned to untangle and reshape the fabric of reality in harmony with your wishes and music. Your spells are part of your vast repertoire, magic that you can tune to different situations.</p>\n<h3>Cantrips</h3>\n<p>You know two cantrips of your choice from the bard spell list. You learn additional bard cantrips of your choice at higher levels, as shown in the Cantrips Known column of the Bard table.</p>\n<h3>Spell Slots</h3>\n<p>The Bard table shows how many spell slots you have to cast your spells of 1st level and higher. To cast one of these spells, you must expend a slot of the spell's level or higher. You regain all expended spell slots when you finish a long rest.</p><p>For example, if you know the 1st-level spell cure wounds and have a 1st-level and a 2nd-level spell slot available, you can cast cure wounds using either slot.</p>\n<h3>Spells Known of 1st Level and Higher</h3>\n<p>You know four 1st-level spells of your choice from the bard spell list.</p><p>The Spells Known column of the Bard table shows when you learn more bard spells of your choice. Each of these spells must be of a level for which you have spell slots, as shown on the table. For instance, when you reach 3rd level in this class, you can learn one new spell of 1st or 2nd level.</p><p>Additionally, when you gain a level in this class, you can choose one of the bard spells you know and replace it with another spell from the bard spell list, which also must be of a level for which you have spell slots.</p>\n<table border=\"1\">\n<thead>\n<tr>\n<td rowspan=\"2\">Level</td>\n<td rowspan=\"2\">Cantrips Known</td>\n<td rowspan=\"2\">Spells Known</td>\n<td colspan=\"9\">—Spell Slots per Spell Level—</td>\n</tr>\n<tr>\n<td>1st</td>\n<td>2nd</td>\n<td>3rd</td>\n<td>4th</td>\n<td>5th</td>\n<td>6th</td>\n<td>7th</td>\n<td>8th</td>\n<td>9th</td>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>1st</td>\n<td>2</td>\n<td>4</td>\n<td>2</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>2nd</td>\n<td>2</td>\n<td>5</td>\n<td>3</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>3rd</td>\n<td>2</td>\n<td>6</td>\n<td>4</td>\n<td>2</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>4th</td>\n<td>3</td>\n<td>7</td>\n<td>4</td>\n<td>3</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>5th</td>\n<td>3</td>\n<td>8</td>\n<td>4</td>\n<td>3</td>\n<td>2</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>6th</td>\n<td>3</td>\n<td>9</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>7th</td>\n<td>3</td>\n<td>10</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>1</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>8th</td>\n<td>3</td>\n<td>11</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>2</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>9th</td>\n<td>3</td>\n<td>12</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>1</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>10th</td>\n<td>4</td>\n<td>14</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>2</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>11th</td>\n<td>4</td>\n<td>15</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>2</td>\n<td>1</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>12th</td>\n<td>4</td>\n<td>15</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>2</td>\n<td>1</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>13th</td>\n<td>4</td>\n<td>16</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>2</td>\n<td>1</td>\n<td>1</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>14th</td>\n<td>4</td>\n<td>18</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>2</td>\n<td>1</td>\n<td>1</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>15th</td>\n<td>4</td>\n<td>19</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>2</td>\n<td>1</td>\n<td>1</td>\n<td>1</td>\n<td>-</td>\n</tr>\n<tr>\n<td>16th</td>\n<td>4</td>\n<td>19</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>2</td>\n<td>1</td>\n<td>1</td>\n<td>1</td>\n<td>-</td>\n</tr>\n<tr>\n<td>17th</td>\n<td>4</td>\n<td>20</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>2</td>\n<td>1</td>\n<td>1</td>\n<td>1</td>\n<td>1</td>\n</tr>\n<tr>\n<td>18th</td>\n<td>4</td>\n<td>22</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>1</td>\n<td>1</td>\n<td>1</td>\n<td>1</td>\n</tr>\n<tr>\n<td>19th</td>\n<td>4</td>\n<td>22</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>2</td>\n<td>1</td>\n<td>1</td>\n<td>1</td>\n</tr>\n<tr>\n<td>20th</td>\n<td>4</td>\n<td>22</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>2</td>\n<td>2</td>\n<td>1</td>\n<td>1</td>\n</tr>\n</tbody>\n</table>\n<h3>Spellcasting Ability</h3>\n<p>Charisma is your spellcasting ability for your bard spells. Your magic comes from the heart and soul you pour into the performance of your music or oration. You use your Charisma whenever a spell refers to your spellcasting ability. In addition, you use your Charisma modifier when setting the saving throw DC for a bard spell you cast and when making an attack roll with one.</p><p><strong>Spell save DC</strong> = 8 + your proficiency bonus + your Charisma modifier</p><p><strong>Spell attack modifier</strong> = your proficiency bonus + your Charisma modifier</p>\n<h3>Ritual Casting</h3>\n<p>You can cast any bard spell you know as a ritual if that spell has the ritual tag.</p>\n<h3>Spellcasting Focus</h3>\n<p>You can use a musical instrument (see @UUID[Compendium.dnd5e.rules.BYFd9hiJGo9L5aOM.JournalEntryPage.AjavRU4yPfI9hfaI]{Adventuring Gear}) as a spellcasting focus for your bard spells.</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -3119,6 +2715,14 @@
           "sourceId": "Compendium.dnd5e.classfeatures.u4NLajXETJhJU31v",
           "advancementOrigin": "5trn1skegukwezch.rpmaepj0rdbnnrzd"
         }
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -3198,6 +2802,657 @@
           "sourceId": "Compendium.dnd5e.classfeatures.hpLNiGq7y67d2EHA",
           "advancementOrigin": "5trn1skegukwezch.rpmaepj0rdbnnrzd"
         }
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      }
+    },
+    {
+      "_id": "Bnn9Nzajixvow9xi",
+      "name": "Light",
+      "ownership": {
+        "default": 0
+      },
+      "type": "spell",
+      "system": {
+        "description": {
+          "value": "<p>You touch one object that is no larger than 10 feet in any dimension. Until the spell ends, the object sheds bright light in a 20-foot radius and dim light for an additional 20 feet. The light can be colored as you like. Completely covering the object with something opaque blocks the light. The spell ends if you cast it again or dismiss it as an action.</p><p>If you target an object held or worn by a hostile creature, that creature must succeed on a Dexterity saving throw to avoid the spell.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "PHB pg. 255",
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": 1,
+          "units": "hour"
+        },
+        "target": {
+          "value": 1,
+          "width": null,
+          "units": "",
+          "type": "object"
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": "touch"
+        },
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": ""
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null
+        },
+        "ability": "",
+        "actionType": "save",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": "",
+          "value": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "dex",
+          "dc": 13,
+          "scaling": "spell"
+        },
+        "level": 0,
+        "school": "evo",
+        "components": {
+          "value": "",
+          "vocal": true,
+          "somatic": false,
+          "material": true,
+          "ritual": false,
+          "concentration": false
+        },
+        "materials": {
+          "value": "A firefly or phosphorescent moss.",
+          "consumed": false,
+          "cost": 0,
+          "supply": 0
+        },
+        "preparation": {
+          "mode": "prepared",
+          "prepared": false
+        },
+        "scaling": {
+          "mode": "none",
+          "formula": ""
+        }
+      },
+      "sort": 100001,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.Bnn9Nzajixvow9xi"
+        }
+      },
+      "img": "icons/magic/light/explosion-star-small-blue-yellow.webp",
+      "effects": [],
+      "folder": null,
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.0",
+        "coreVersion": "10.279",
+        "createdTime": 1661603486304,
+        "modifiedTime": 1661603486304,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      }
+    },
+    {
+      "_id": "Utk1OQRwYkMkFRD3",
+      "name": "Mage Hand",
+      "ownership": {
+        "default": 0
+      },
+      "type": "spell",
+      "system": {
+        "description": {
+          "value": "<p>A spectral, floating hand appears at a point you choose within range. The hand lasts for the duration or until you dismiss it as an action. The hand vanishes if it is ever more than 30 feet away from you or if you cast this spell again.</p><p>You can use your action to control the hand. You can use the hand to manipulate an object, open an unlocked door or container, stow or retrieve an item from an open container, or pour the contents out of a vial. You can move the hand up to 30 feet each time you use it.</p><p>The hand can't attack, activate magic items, or carry more than 10 pounds.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "PHB pg. 256",
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": 1,
+          "units": "minute"
+        },
+        "target": {
+          "value": 1,
+          "width": null,
+          "units": "",
+          "type": "space"
+        },
+        "range": {
+          "value": 30,
+          "long": 0,
+          "units": "ft"
+        },
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": ""
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null
+        },
+        "ability": "",
+        "actionType": "util",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": "",
+          "value": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell",
+          "value": ""
+        },
+        "level": 0,
+        "school": "con",
+        "components": {
+          "value": "",
+          "vocal": true,
+          "somatic": true,
+          "material": false,
+          "ritual": false,
+          "concentration": false
+        },
+        "materials": {
+          "value": "",
+          "consumed": false,
+          "cost": 0,
+          "supply": 0
+        },
+        "preparation": {
+          "mode": "prepared",
+          "prepared": false
+        },
+        "scaling": {
+          "mode": "none",
+          "formula": ""
+        }
+      },
+      "sort": 100001,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.Utk1OQRwYkMkFRD3"
+        }
+      },
+      "img": "icons/magic/water/water-hand.webp",
+      "effects": [],
+      "folder": null,
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.0",
+        "coreVersion": "10.279",
+        "createdTime": 1661603486305,
+        "modifiedTime": 1661603486305,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      }
+    },
+    {
+      "_id": "eS7XnnApoxRxYXPs",
+      "name": "Charm Person",
+      "ownership": {
+        "default": 0
+      },
+      "type": "spell",
+      "system": {
+        "description": {
+          "value": "<p>You attempt to charm a humanoid you can see within range. It must make a Wisdom saving throw, and does so with advantage if you or your companions are fighting it. If it fails the saving throw, it is charmed by you until the spell ends or until you or your companions do anything harmful to it. The charmed creature regards you as a friendly acquaintance. When the spell ends, the creature knows it was charmed by you.</p>\n        <p><strong>At Higher Levels.</strong> When you cast this spell using a spell slot of 2nd level or higher, you can target one additional creature for each slot level above 1st. The creatures must be within 30 feet of each other when you target them.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "PHB pg. 221",
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": 1,
+          "units": "hour"
+        },
+        "target": {
+          "value": 1,
+          "width": null,
+          "units": "",
+          "type": "creature"
+        },
+        "range": {
+          "value": 30,
+          "long": 0,
+          "units": "ft"
+        },
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": ""
+        },
+        "consume": {
+          "type": "",
+          "target": "",
+          "amount": null
+        },
+        "ability": "",
+        "actionType": "save",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": "",
+          "value": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "wis",
+          "dc": 13,
+          "scaling": "spell"
+        },
+        "level": 1,
+        "school": "enc",
+        "components": {
+          "value": "",
+          "vocal": true,
+          "somatic": true,
+          "material": false,
+          "ritual": false,
+          "concentration": false
+        },
+        "materials": {
+          "value": "",
+          "consumed": false,
+          "cost": 0,
+          "supply": 0
+        },
+        "preparation": {
+          "mode": "prepared",
+          "prepared": false
+        },
+        "scaling": {
+          "mode": "level",
+          "formula": ""
+        }
+      },
+      "sort": 100001,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.eS7XnnApoxRxYXPs"
+        }
+      },
+      "img": "icons/magic/fire/explosion-fireball-medium-purple-pink.webp",
+      "effects": [],
+      "folder": null,
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.0",
+        "coreVersion": "10.279",
+        "createdTime": 1661603486305,
+        "modifiedTime": 1661603486305,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      }
+    },
+    {
+      "_id": "A3q2gTNqG6fvNGrv",
+      "name": "Disguise Self",
+      "ownership": {
+        "default": 0
+      },
+      "type": "spell",
+      "system": {
+        "description": {
+          "value": "<p>You make yourself—including your clothing, armor, weapons, and other belongings on your person—look different until the spell ends or until you use your action to dismiss it. You can seem 1 foot shorter or taller and can appear thin, fat, or in between. You can't change your body type, so you must adopt a form that has the same basic arrangement of limbs. Otherwise, the extent of the illusion is up to you.</p><p>The changes wrought by this spell fail to hold up to physical inspection. For example, if you use this spell to add a hat to your outfit, objects pass through the hat, and anyone who touches it would feel nothing or would feel your head and hair. If you use this spell to appear thinner than you are, the hand of someone who reaches out to touch you would bump into you while it was seemingly still in midair.</p><p>To discern that you are disguised, a creature can use its action to inspect your appearance and must succeed on an Intelligence (Investigation) check against your spell save DC.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "PHB pg. 233",
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": 1,
+          "units": "hour"
+        },
+        "target": {
+          "value": null,
+          "width": null,
+          "units": null,
+          "type": "self"
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": "self"
+        },
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": ""
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null
+        },
+        "ability": "",
+        "actionType": "util",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": "",
+          "value": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell",
+          "value": ""
+        },
+        "level": 1,
+        "school": "ill",
+        "components": {
+          "value": "",
+          "vocal": true,
+          "somatic": true,
+          "material": false,
+          "ritual": false,
+          "concentration": false
+        },
+        "materials": {
+          "value": "",
+          "consumed": false,
+          "cost": 0,
+          "supply": 0
+        },
+        "preparation": {
+          "mode": "prepared",
+          "prepared": false
+        },
+        "scaling": {
+          "mode": "none",
+          "formula": ""
+        }
+      },
+      "sort": 100001,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.A3q2gTNqG6fvNGrv"
+        }
+      },
+      "img": "icons/magic/control/debuff-energy-hold-teal-blue.webp",
+      "effects": [],
+      "folder": null,
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.0",
+        "coreVersion": "10.279",
+        "createdTime": 1661603486305,
+        "modifiedTime": 1661603486305,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      }
+    },
+    {
+      "_id": "ge3Saet9zPTDyaoL",
+      "name": "Heroism",
+      "ownership": {
+        "default": 0
+      },
+      "type": "spell",
+      "system": {
+        "description": {
+          "value": "<p>A willing creature you touch is imbued with bravery. Until the spell ends, the creature is immune to being Frightened and gains Temporary Hit Points equal to your Spellcasting ability modifier at the start of each of its turns. When the spell ends, the target loses any remaining temporary hit points from this spell.</p><p><strong>At Higher Levels.</strong> When you cast this spell using a spell slot of 2nd level or higher, you can target one additional creature for each slot level above 1st.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "PHB pg. 250",
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": 1,
+          "units": "minute"
+        },
+        "target": {
+          "value": 1,
+          "width": null,
+          "units": "",
+          "type": "creature"
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": "touch"
+        },
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": ""
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null
+        },
+        "ability": "",
+        "actionType": "heal",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [
+            [
+              "@mod",
+              "temphp"
+            ]
+          ],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell",
+          "value": ""
+        },
+        "level": 1,
+        "school": "enc",
+        "components": {
+          "value": "",
+          "vocal": true,
+          "somatic": true,
+          "material": false,
+          "ritual": false,
+          "concentration": true
+        },
+        "materials": {
+          "value": "",
+          "consumed": false,
+          "cost": 0,
+          "supply": 0
+        },
+        "preparation": {
+          "mode": "prepared",
+          "prepared": false
+        },
+        "scaling": {
+          "mode": "level",
+          "formula": ""
+        }
+      },
+      "sort": 100001,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.ge3Saet9zPTDyaoL"
+        }
+      },
+      "img": "icons/magic/life/heart-cross-strong-blue.webp",
+      "effects": [],
+      "folder": null,
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.0",
+        "coreVersion": "10.279",
+        "createdTime": 1661603486306,
+        "modifiedTime": 1661603486306,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      }
+    },
+    {
+      "_id": "BQk5Row4NymMnUQl",
+      "name": "Hideous Laughter",
+      "ownership": {
+        "default": 0
+      },
+      "type": "spell",
+      "system": {
+        "description": {
+          "value": "<p>A creature of your choice that you can see within range perceives everything as hilariously funny and falls into fits of laughter if this spell affects it. The target must succeed on a Wisdom saving throw or fall prone, becoming Incapacitated and unable to stand up for the Duration. A creature with an Intelligence score of 4 or less isn't affected.</p><p>At the end of each of its turns, and each time it takes damage, the target can make another Wisdom saving throw. The target has advantage on the saving throw if it's triggered by damage. On a success, the spell ends.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "",
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": 1,
+          "units": "minute"
+        },
+        "target": {
+          "value": 1,
+          "width": null,
+          "units": "",
+          "type": "creature"
+        },
+        "range": {
+          "value": 30,
+          "long": 0,
+          "units": "ft"
+        },
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": ""
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null
+        },
+        "ability": "",
+        "actionType": "save",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": "",
+          "value": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "wis",
+          "dc": 13,
+          "scaling": "spell"
+        },
+        "level": 1,
+        "school": "enc",
+        "components": {
+          "value": "",
+          "vocal": true,
+          "somatic": true,
+          "material": true,
+          "ritual": false,
+          "concentration": true
+        },
+        "materials": {
+          "value": "Tiny tarts and a feather that is waved in the air",
+          "consumed": false,
+          "cost": 0,
+          "supply": 0
+        },
+        "preparation": {
+          "mode": "prepared",
+          "prepared": false
+        },
+        "scaling": {
+          "mode": "none",
+          "formula": ""
+        }
+      },
+      "sort": 100001,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.BQk5Row4NymMnUQl"
+        }
+      },
+      "img": "icons/magic/fire/explosion-fireball-medium-purple-pink.webp",
+      "effects": [],
+      "folder": null,
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.0",
+        "coreVersion": "10.279",
+        "createdTime": 1661603486306,
+        "modifiedTime": 1661603486306,
+        "lastModifiedBy": "dnd5ebuilder0000"
       }
     }
   ],
@@ -3208,5 +3463,13 @@
     "default": 0
   },
   "flags": {},
-  "_id": "xVmbM44RXyI2Eqq3"
+  "_id": "xVmbM44RXyI2Eqq3",
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.0.0",
+    "coreVersion": "10.279",
+    "createdTime": 1661787232198,
+    "modifiedTime": 1661878142737,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  }
 }

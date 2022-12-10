@@ -107,7 +107,7 @@
         "value": 7,
         "min": 0,
         "max": 7,
-        "temp": 0,
+        "temp": null,
         "tempmax": 0,
         "formula": "3d4"
       },
@@ -177,19 +177,26 @@
         "value": [
           "poison"
         ],
+        "bypasses": [],
         "custom": ""
       },
       "dr": {
         "value": [
+          "bludgeoning",
           "cold",
           "fire",
           "lightning",
-          "custom"
+          "piercing",
+          "slashing"
         ],
-        "custom": "bludgeoning, piercing, and slashing from nonmagical attacks"
+        "bypasses": [
+          "mgc"
+        ],
+        "custom": ""
       },
       "dv": {
         "value": [],
+        "bypasses": [],
         "custom": ""
       },
       "ci": {
@@ -551,47 +558,27 @@
     "name": "Quasit",
     "displayName": 20,
     "actorLink": false,
-    "tint": null,
     "width": 0.5,
     "height": 0.5,
-    "scale": 2,
-    "mirrorX": false,
-    "mirrorY": false,
     "lockRotation": false,
     "rotation": 0,
-    "vision": false,
-    "dimSight": 120,
-    "brightSight": 0,
-    "dimLight": 0,
-    "brightLight": 0,
-    "sightAngle": 0,
-    "lightAngle": 0,
-    "lightColor": null,
-    "lightAlpha": 1,
-    "lightAnimation": {
-      "speed": 5,
-      "intensity": 5
-    },
     "disposition": -1,
     "displayBars": 40,
     "bar1": {
       "attribute": "attributes.hp"
     },
     "bar2": {
-      "attribute": ""
+      "attribute": null
     },
     "flags": {},
     "randomImg": false,
-    "img": "systems/dnd5e/tokens/fiend/Quasit.webp",
-    "actorId": "bwtkdzavdNHISgp4",
     "alpha": 1,
     "light": {
-      "alpha": 0.5,
-      "angle": 0,
+      "alpha": 1,
+      "angle": 360,
       "bright": 0,
       "coloration": 1,
       "dim": 0,
-      "gradual": true,
       "luminosity": 0.5,
       "saturation": 0,
       "contrast": 0,
@@ -599,13 +586,37 @@
       "animation": {
         "speed": 5,
         "intensity": 5,
+        "type": null,
         "reverse": false
       },
       "darkness": {
         "min": 0,
         "max": 1
-      }
-    }
+      },
+      "color": null,
+      "attenuation": 0.5
+    },
+    "texture": {
+      "src": "systems/dnd5e/tokens/fiend/Quasit.webp",
+      "tint": null,
+      "scaleX": 2,
+      "scaleY": 2,
+      "offsetX": 0,
+      "offsetY": 0,
+      "rotation": 0
+    },
+    "sight": {
+      "angle": 360,
+      "enabled": false,
+      "range": 120,
+      "brightness": 0,
+      "visionMode": "basic",
+      "color": null,
+      "attenuation": 0.1,
+      "saturation": 0,
+      "contrast": 0
+    },
+    "detectionModes": []
   },
   "items": [
     {
@@ -684,7 +695,15 @@
       "ownership": {
         "default": 0
       },
-      "flags": {}
+      "flags": {},
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      }
     },
     {
       "_id": "ae0OI3obJqa4AS7U",
@@ -785,8 +804,7 @@
           "two": false,
           "ver": false
         },
-        "proficient": true,
-        "attuned": false
+        "proficient": true
       },
       "effects": [],
       "folder": null,
@@ -794,7 +812,15 @@
       "ownership": {
         "default": 0
       },
-      "flags": {}
+      "flags": {},
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      }
     },
     {
       "_id": "e8rpvJJVWCN4HU7I",
@@ -869,7 +895,15 @@
       "ownership": {
         "default": 0
       },
-      "flags": {}
+      "flags": {},
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      }
     },
     {
       "_id": "vlmHYqAZxNGh8xQ6",
@@ -944,7 +978,15 @@
       "ownership": {
         "default": 0
       },
-      "flags": {}
+      "flags": {},
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      }
     },
     {
       "_id": "1YhP86rTuRIXKFi2",
@@ -1019,7 +1061,15 @@
       "ownership": {
         "default": 0
       },
-      "flags": {}
+      "flags": {},
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      }
     }
   ],
   "effects": [],
@@ -1028,5 +1078,13 @@
   "ownership": {
     "default": 0
   },
-  "flags": {}
+  "flags": {},
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.0.1",
+    "coreVersion": "10.284",
+    "createdTime": 1661787232916,
+    "modifiedTime": 1662079150007,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  }
 }

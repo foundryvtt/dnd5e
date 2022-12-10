@@ -91,22 +91,29 @@
       "flags": {},
       "changes": [
         {
-          "key": "data.attributes.ac.formula",
+          "key": "system.attributes.ac.formula",
           "value": "16",
-          "mode": 5
+          "mode": 5,
+          "priority": null
         },
         {
-          "key": "data.attributes.ac.calc",
+          "key": "system.attributes.ac.calc",
           "value": "custom",
-          "mode": 5
+          "mode": 5,
+          "priority": null
         }
       ],
       "disabled": true,
       "duration": {
         "startTime": null,
-        "seconds": 3600
+        "seconds": 3600,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
       },
-      "icon": "systems/dnd5e/icons/spells/protect-orange-2.jpg",
+      "icon": "icons/magic/defensive/shield-barrier-flaming-diamond-orange.webp",
       "label": "Barkskin",
       "origin": "Item.VQMKMnQDw5rzL0zp",
       "tint": null,
@@ -118,5 +125,13 @@
   "ownership": {
     "default": 0
   },
-  "flags": {}
+  "flags": {},
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.0.0",
+    "coreVersion": "10.279",
+    "createdTime": 1661787234113,
+    "modifiedTime": 1661787234113,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  }
 }

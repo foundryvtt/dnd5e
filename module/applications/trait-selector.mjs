@@ -16,6 +16,7 @@ export default class TraitSelector extends DocumentSheet {
       allowCustom: true,
       minimum: 0,
       maximum: null,
+      labelKey: null,
       valueKey: "value",
       customKey: "custom"
     });
@@ -50,7 +51,8 @@ export default class TraitSelector extends DocumentSheet {
     // Populate choices
     const choices = Object.entries(o.choices).reduce((obj, e) => {
       let [k, v] = e;
-      obj[k] = { label: v, chosen: attr ? value.includes(k) : false };
+      const label = o.labelKey ? foundry.utils.getProperty(v, o.labelKey) ?? v : v;
+      obj[k] = { label, chosen: attr ? value.includes(k) : false };
       return obj;
     }, {});
 
@@ -64,15 +66,16 @@ export default class TraitSelector extends DocumentSheet {
 
   /* -------------------------------------------- */
 
-  /** @override */
-  async _updateObject(event, formData) {
+  /**
+   * Prepare the update data to include choices in the provided object.
+   * @param {object} formData  Form data to search for choices.
+   * @returns {object}         Updates to apply to target.
+   */
+  _prepareUpdateData(formData) {
     const o = this.options;
 
     // Obtain choices
-    const chosen = [];
-    for ( let [k, v] of Object.entries(formData) ) {
-      if ( (k !== "custom") && v ) chosen.push(k);
-    }
+    const chosen = Object.entries(formData).filter(([k, v]) => (k !== "custom") && v).map(([k]) => k);
 
     // Object including custom data
     const updateData = {};
@@ -88,7 +91,14 @@ export default class TraitSelector extends DocumentSheet {
       return ui.notifications.error(`You may choose no more than ${o.maximum} options`);
     }
 
-    // Update the object
-    this.object.update(updateData);
+    return updateData;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  async _updateObject(event, formData) {
+    const updateData = this._prepareUpdateData(formData);
+    if ( updateData ) this.object.update(updateData);
   }
 }

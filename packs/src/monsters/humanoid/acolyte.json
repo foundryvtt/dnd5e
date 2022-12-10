@@ -536,38 +536,20 @@
     }
   },
   "prototypeToken": {
-    "_id": "a2J5z9eErgpY3Ezj",
     "name": "Acolyte",
     "displayName": 20,
-    "actorId": "q10DenuZWlNsJWBq",
     "actorLink": false,
-    "actorData": {},
-    "img": "systems/dnd5e/tokens/humanoid/Acolyte.webp",
-    "tint": null,
     "width": 1,
     "height": 1,
-    "scale": 1,
-    "mirrorX": false,
-    "mirrorY": false,
-    "x": null,
-    "y": null,
-    "elevation": 0,
     "lockRotation": false,
     "rotation": 0,
-    "effects": [],
     "alpha": 1,
-    "hidden": false,
-    "vision": false,
-    "dimSight": 0,
-    "brightSight": 0,
-    "sightAngle": 0,
     "light": {
       "alpha": 0.5,
-      "angle": 0,
+      "angle": 360,
       "bright": 0,
       "coloration": 1,
       "dim": 0,
-      "gradual": false,
       "luminosity": 0.5,
       "saturation": 0,
       "contrast": 0,
@@ -575,13 +557,15 @@
       "animation": {
         "speed": 5,
         "intensity": 5,
-        "reverse": false
+        "reverse": false,
+        "type": null
       },
       "darkness": {
         "min": 0,
         "max": 1
       },
-      "color": null
+      "color": null,
+      "attenuation": 0.3
     },
     "disposition": -1,
     "displayBars": 0,
@@ -589,11 +573,31 @@
       "attribute": "attributes.hp"
     },
     "bar2": {
-      "attribute": ""
+      "attribute": null
     },
     "flags": {},
-    "tokenId": null,
-    "randomImg": false
+    "randomImg": false,
+    "texture": {
+      "src": "systems/dnd5e/tokens/humanoid/Acolyte.webp",
+      "tint": null,
+      "scaleX": 1,
+      "scaleY": 1,
+      "offsetX": 0,
+      "offsetY": 0,
+      "rotation": 0
+    },
+    "sight": {
+      "angle": 360,
+      "enabled": false,
+      "range": 0,
+      "brightness": 1,
+      "visionMode": "basic",
+      "color": null,
+      "attenuation": 0.1,
+      "saturation": 0,
+      "contrast": 0
+    },
+    "detectionModes": []
   },
   "items": [
     {
@@ -672,13 +676,140 @@
       "ownership": {
         "default": 0
       },
-      "flags": {}
+      "flags": {},
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      }
     },
     {
-      "_id": "FA3jpb8uEewm81am",
+      "_id": "swpThURVHnaQRjfY",
+      "name": "Club",
+      "type": "weapon",
+      "img": "icons/weapons/clubs/club-simple-barbed.webp",
+      "system": {
+        "description": {
+          "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+2 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>2 (1d4) <em>bludgeoning damage</em></strong>.</p></section>\n<p>The Acolyte attacks with their Club.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "PHB pg. 149",
+        "quantity": 1,
+        "weight": 2,
+        "price": 1,
+        "attunement": 0,
+        "equipped": true,
+        "rarity": "common",
+        "identified": true,
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": null,
+          "units": ""
+        },
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": ""
+        },
+        "range": {
+          "value": 5,
+          "long": null,
+          "units": "ft"
+        },
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": ""
+        },
+        "consume": {
+          "type": "",
+          "target": "",
+          "amount": null
+        },
+        "ability": "str",
+        "actionType": "mwak",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [
+            [
+              "1d4",
+              "bludgeoning"
+            ]
+          ],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "armor": {
+          "value": 10
+        },
+        "hp": {
+          "value": 0,
+          "max": 0,
+          "dt": null,
+          "conditions": ""
+        },
+        "weaponType": "simpleM",
+        "baseItem": "",
+        "properties": {
+          "lgt": true,
+          "amm": false,
+          "fin": false,
+          "fir": false,
+          "foc": false,
+          "hvy": false,
+          "lod": false,
+          "rch": false,
+          "rel": false,
+          "ret": false,
+          "spc": false,
+          "thr": false,
+          "two": false,
+          "ver": false
+        },
+        "proficient": true
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 300001,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      }
+    },
+    {
+      "_id": "Bnn9Nzajixvow9xi",
       "name": "Light",
+      "ownership": {
+        "default": 0
+      },
       "type": "spell",
-      "img": "systems/dnd5e/icons/spells/light-sky-1.jpg",
       "system": {
         "description": {
           "value": "<p>You touch one object that is no larger than 10 feet in any dimension. Until the spell ends, the object sheds bright light in a 20-foot radius and dim light for an additional 20 feet. The light can be colored as you like. Completely covering the object with something opaque blocks the light. The spell ends if you cast it again or dismiss it as an action.</p><p>If you target an object held or worn by a hostile creature, that creature must succeed on a Dexterity saving throw to avoid the spell.</p>",
@@ -758,26 +889,33 @@
         "scaling": {
           "mode": "none",
           "formula": ""
-        },
-        "attunement": 0
+        }
       },
-      "effects": [],
-      "folder": null,
       "sort": 100001,
-      "ownership": {
-        "default": 0
-      },
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.spells.Bnn9Nzajixvow9xi"
         }
+      },
+      "img": "icons/magic/light/explosion-star-small-blue-yellow.webp",
+      "effects": [],
+      "folder": null,
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.0",
+        "coreVersion": "10.279",
+        "createdTime": 1661787234093,
+        "modifiedTime": 1661791116300,
+        "lastModifiedBy": "dnd5ebuilder0000"
       }
     },
     {
-      "_id": "lCbFAxmmdZq5iNPI",
+      "_id": "n9pJzTDsAwQxJVRl",
       "name": "Sacred Flame",
+      "ownership": {
+        "default": 0
+      },
       "type": "spell",
-      "img": "systems/dnd5e/icons/spells/beam-orange-2.jpg",
       "system": {
         "description": {
           "value": "<p>Flame-like radiance descends on a creature that you can see within range. The target must succeed on a Dexterity saving throw or take 1d8 radiant damage. The target gains no benefit from cover for this saving throw.</p><p>The spell's damage increases by 1d8 when you reach 5th level (2d8), 11th level (3d8), and 17th level (4d8).</p>",
@@ -861,26 +999,33 @@
         "scaling": {
           "mode": "cantrip",
           "formula": ""
-        },
-        "attunement": 0
+        }
       },
-      "effects": [],
-      "folder": null,
       "sort": 100001,
-      "ownership": {
-        "default": 0
-      },
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.spells.n9pJzTDsAwQxJVRl"
         }
+      },
+      "img": "icons/magic/light/beam-rays-orange.webp",
+      "effects": [],
+      "folder": null,
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.0",
+        "coreVersion": "10.279",
+        "createdTime": 1661787234221,
+        "modifiedTime": 1661791116301,
+        "lastModifiedBy": "dnd5ebuilder0000"
       }
     },
     {
-      "_id": "kQ7NemFFPEtQUZgc",
+      "_id": "MUO1uYN7JR1hm4dR",
       "name": "Thaumaturgy",
+      "ownership": {
+        "default": 0
+      },
       "type": "spell",
-      "img": "systems/dnd5e/icons/spells/explosion-royal-1.jpg",
       "system": {
         "description": {
           "value": "<p>You create one of the following magical effects within range:</p>\n<ul>\n<li>Your voice booms up to three times as loud as normal for 1 minute.</li>\n<li>You cause flames to flicker, brighten, dim, or change color for 1 minute.</li>\n<li>You cause harmless tremors in the ground for 1 minute.</li>\n<li>You create a sound that originates from a point of your choice within range.</li>\n<li>You cause an unlocked door or window to fly open or slam shut.</li>\n<li>You alter the appearance of your eyes for 1 minute.</li>\n</ul>\n<p>If you cast this spell multiple times, you can have up to three of its 1-minute effects active at a time, and you can dismiss such an effect as an action.</p>",
@@ -961,26 +1106,31 @@
         "scaling": {
           "mode": "none",
           "formula": ""
-        },
-        "attunement": 0
+        }
       },
-      "effects": [],
-      "folder": null,
       "sort": 100001,
-      "ownership": {
-        "default": 0
-      },
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.spells.MUO1uYN7JR1hm4dR"
         }
+      },
+      "img": "icons/magic/fire/explosion-fireball-small-purple-orange.webp",
+      "effects": [],
+      "folder": null,
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.0",
+        "coreVersion": "10.279",
+        "createdTime": 1661787234127,
+        "modifiedTime": 1661791116301,
+        "lastModifiedBy": "dnd5ebuilder0000"
       }
     },
     {
-      "_id": "SZu6KvZ5jyNqamsF",
+      "_id": "8dzaICjGy6mTUaUr",
       "name": "Bless",
       "type": "spell",
-      "img": "systems/dnd5e/icons/spells/haste-sky-1.jpg",
+      "img": "icons/magic/control/buff-flight-wings-blue.webp",
       "system": {
         "description": {
           "value": "<p>You bless up to three creatures of your choice within range. Whenever a target makes an attack roll or a saving throw before the spell ends, the target can roll 1d4 and add the number rolled to the attack roll or saving throw.</p>\n<p><strong>Higher Levels.</strong> When you cast this spell using a spell slot of 2nd level or higher, you can target one additional creature for each slot level above 1st.</p>",
@@ -1061,8 +1211,7 @@
         "scaling": {
           "mode": "level",
           "formula": ""
-        },
-        "attunement": 0
+        }
       },
       "effects": [
         {
@@ -1070,38 +1219,47 @@
           "flags": {},
           "changes": [
             {
-              "key": "data.bonuses.abilities.save",
+              "key": "system.bonuses.abilities.save",
               "mode": 2,
-              "value": "+1d4"
+              "value": "+1d4",
+              "priority": null
             },
             {
-              "key": "data.bonuses.mwak.attack",
+              "key": "system.bonuses.mwak.attack",
               "mode": 2,
-              "value": "+1d4"
+              "value": "+1d4",
+              "priority": null
             },
             {
-              "key": "data.bonuses.msak.attack",
+              "key": "system.bonuses.msak.attack",
               "mode": 2,
-              "value": "+1d4"
+              "value": "+1d4",
+              "priority": null
             },
             {
-              "key": "data.bonuses.rsak.attack",
+              "key": "system.bonuses.rsak.attack",
               "mode": 2,
-              "value": "+1d4"
+              "value": "+1d4",
+              "priority": null
             },
             {
-              "key": "data.bonuses.rwak.attack",
+              "key": "system.bonuses.rwak.attack",
               "mode": 2,
-              "value": "+1d4"
+              "value": "+1d4",
+              "priority": null
             }
           ],
           "disabled": true,
           "duration": {
             "startTime": null,
             "seconds": 60,
-            "rounds": 10
+            "rounds": 10,
+            "combat": null,
+            "turns": null,
+            "startRound": null,
+            "startTurn": null
           },
-          "icon": "systems/dnd5e/icons/spells/haste-sky-1.jpg",
+          "icon": "icons/magic/control/buff-flight-wings-blue.webp",
           "label": "Bless",
           "origin": "Item.kZZAZ6kp9YzgPQEe",
           "tint": null,
@@ -1117,13 +1275,23 @@
         "core": {
           "sourceId": "Compendium.dnd5e.spells.8dzaICjGy6mTUaUr"
         }
+      },
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.0",
+        "coreVersion": "10.279",
+        "createdTime": 1661787234081,
+        "modifiedTime": 1661791116301,
+        "lastModifiedBy": "dnd5ebuilder0000"
       }
     },
     {
-      "_id": "CebfFzlNbHsUEd3I",
+      "_id": "gvdA9nPuWLck4tBl",
       "name": "Sanctuary",
+      "ownership": {
+        "default": 0
+      },
       "type": "spell",
-      "img": "systems/dnd5e/icons/spells/protect-sky-2.jpg",
       "system": {
         "description": {
           "value": "<p>You ward a creature within range against attack. Until the spell ends, any creature who targets the warded creature with an attack or a harmful spell must first make a Wisdom saving throw. On a failed save, the creature must choose a new target or lose the attack or spell. This spell doesn't protect the warded creature from area effects, such as the explosion of a Fireball.</p><p>If the warded creature makes an attack or casts a spell that affects an enemy creature, this spell ends.</p>",
@@ -1188,7 +1356,7 @@
           "somatic": true,
           "material": true,
           "ritual": false,
-          "concentration": true
+          "concentration": false
         },
         "materials": {
           "value": "A small silver mirror",
@@ -1203,136 +1371,33 @@
         "scaling": {
           "mode": "none",
           "formula": ""
-        },
-        "attunement": 0
+        }
       },
-      "effects": [],
-      "folder": null,
       "sort": 100001,
-      "ownership": {
-        "default": 0
-      },
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.spells.gvdA9nPuWLck4tBl"
         }
+      },
+      "img": "icons/magic/defensive/shield-barrier-flaming-diamond-blue-yellow.webp",
+      "effects": [],
+      "folder": null,
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.0",
+        "coreVersion": "10.279",
+        "createdTime": 1661787234193,
+        "modifiedTime": 1661791116302,
+        "lastModifiedBy": "dnd5ebuilder0000"
       }
     },
     {
-      "_id": "swpThURVHnaQRjfY",
-      "name": "Club",
-      "type": "weapon",
-      "img": "icons/weapons/clubs/club-simple-barbed.webp",
-      "system": {
-        "description": {
-          "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+2 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>2 (1d4) <em>bludgeoning damage</em></strong>.</p></section>\n<p>The Acolyte attacks with their Club.</p>",
-          "chat": "",
-          "unidentified": ""
-        },
-        "source": "PHB pg. 149",
-        "quantity": 1,
-        "weight": 2,
-        "price": 1,
-        "attunement": 0,
-        "equipped": true,
-        "rarity": "Common",
-        "identified": true,
-        "activation": {
-          "type": "action",
-          "cost": 1,
-          "condition": ""
-        },
-        "duration": {
-          "value": null,
-          "units": ""
-        },
-        "target": {
-          "value": null,
-          "width": null,
-          "units": "",
-          "type": ""
-        },
-        "range": {
-          "value": 5,
-          "long": null,
-          "units": "ft"
-        },
-        "uses": {
-          "value": 0,
-          "max": 0,
-          "per": ""
-        },
-        "consume": {
-          "type": "",
-          "target": "",
-          "amount": null
-        },
-        "ability": "str",
-        "actionType": "mwak",
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "critical": {
-          "threshold": null,
-          "damage": ""
-        },
-        "damage": {
-          "parts": [
-            [
-              "1d4",
-              "bludgeoning"
-            ]
-          ],
-          "versatile": ""
-        },
-        "formula": "",
-        "save": {
-          "ability": "",
-          "dc": null,
-          "scaling": "spell"
-        },
-        "armor": {
-          "value": 10
-        },
-        "hp": {
-          "value": 0,
-          "max": 0,
-          "dt": null,
-          "conditions": ""
-        },
-        "weaponType": "simpleM",
-        "baseItem": "",
-        "properties": {
-          "lgt": true,
-          "amm": false,
-          "fin": false,
-          "fir": false,
-          "foc": false,
-          "hvy": false,
-          "lod": false,
-          "rch": false,
-          "rel": false,
-          "ret": false,
-          "spc": false,
-          "thr": false,
-          "two": false,
-          "ver": false
-        },
-        "proficient": true,
-        "attuned": false
-      },
-      "effects": [],
-      "folder": null,
-      "sort": 300001,
+      "_id": "uUWb1wZgtMou0TVP",
+      "name": "Cure Wounds",
       "ownership": {
         "default": 0
       },
-      "flags": {}
-    },
-    {
-      "_id": "fVvLFaAC7IPVx7LX",
-      "name": "Cure Wounds",
       "type": "spell",
-      "img": "systems/dnd5e/icons/spells/heal-jade-1.jpg",
       "system": {
         "description": {
           "value": "<p>A creature you touch regains a number of hit points equal to 1d8 + your spellcasting ability modifier. This spell has no effect on undead or constructs.</p><p><strong>Higher Levels.</strong> When you cast this spell using a spell slot of 2nd level or higher, the healing increases by 1d8 for each slot level above 1st.</p>",
@@ -1412,31 +1477,97 @@
         },
         "preparation": {
           "mode": "prepared",
-          "prepared": false
+          "prepared": true
         },
         "scaling": {
           "mode": "level",
           "formula": "1d8"
         }
       },
-      "effects": [],
-      "folder": null,
       "sort": 100001,
-      "ownership": {
-        "default": 0
-      },
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.spells.uUWb1wZgtMou0TVP"
         }
+      },
+      "img": "icons/magic/life/heart-cross-green.webp",
+      "effects": [],
+      "folder": null,
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.0",
+        "coreVersion": "10.279",
+        "createdTime": 1661787234236,
+        "modifiedTime": 1661791116302,
+        "lastModifiedBy": "dnd5ebuilder0000"
       }
     }
   ],
-  "effects": [],
+  "effects": [
+    {
+      "_id": "8rP3gwmXVTgZqYZE",
+      "flags": {},
+      "changes": [
+        {
+          "key": "system.bonuses.abilities.save",
+          "mode": 2,
+          "value": "+1d4",
+          "priority": null
+        },
+        {
+          "key": "system.bonuses.mwak.attack",
+          "mode": 2,
+          "value": "+1d4",
+          "priority": null
+        },
+        {
+          "key": "system.bonuses.msak.attack",
+          "mode": 2,
+          "value": "+1d4",
+          "priority": null
+        },
+        {
+          "key": "system.bonuses.rsak.attack",
+          "mode": 2,
+          "value": "+1d4",
+          "priority": null
+        },
+        {
+          "key": "system.bonuses.rwak.attack",
+          "mode": 2,
+          "value": "+1d4",
+          "priority": null
+        }
+      ],
+      "disabled": true,
+      "duration": {
+        "startTime": 678,
+        "seconds": 60,
+        "rounds": 10,
+        "combat": null,
+        "turns": null,
+        "startRound": 2,
+        "startTurn": 1
+      },
+      "icon": "icons/magic/control/buff-flight-wings-blue.webp",
+      "label": "Bless",
+      "origin": "Compendium.dnd5e.monsters.CHEUjiYrVM9X0vIT.Item.8dzaICjGy6mTUaUr",
+      "tint": null,
+      "transfer": false
+    }
+  ],
   "folder": "6DauPtHPdkuwtDcK",
   "sort": 0,
   "ownership": {
     "default": 0
   },
-  "flags": {}
+  "flags": {},
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.0.0",
+    "coreVersion": "10.279",
+    "createdTime": 1661787232667,
+    "modifiedTime": 1661878730116,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  }
 }

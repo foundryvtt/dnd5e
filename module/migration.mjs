@@ -275,7 +275,7 @@ export const migrateItemData = function(item, migrationData) {
   _migrateItemSpellcasting(item, updateData);
   _migrateArmorType(item, updateData);
   _migrateItemCriticalData(item, updateData);
-  _migrateItemIcon(item, updateData, migrationData);
+  _migrateDocumentIcon(item, updateData, migrationData);
 
   // Migrate embedded effects
   if ( item.effects ) {
@@ -317,6 +317,7 @@ export const migrateEffects = function(parent, migrationData) {
  */
 export const migrateEffectData = function(effect, migrationData) {
   const updateData = {};
+  _migrateDocumentIcon(effect, updateData, {...migrationData, field: "icon"});
   _migrateEffectArmorClass(effect, updateData);
   return updateData;
 };
@@ -331,7 +332,7 @@ export const migrateEffectData = function(effect, migrationData) {
  */
 export const migrateMacroData = function(macro, migrationData) {
   const updateData = {};
-  _migrateItemIcon(macro, updateData, migrationData);
+  _migrateDocumentIcon(macro, updateData, migrationData);
   _migrateMacroCommands(macro, updateData);
   return updateData;
 };
@@ -409,7 +410,7 @@ export const getMigrationData = async function() {
  * @private
  */
 function _migrateActorMovement(actorData, updateData) {
-  const attrs = actorData.system.attributes || {};
+  const attrs = actorData.system?.attributes || {};
 
   // Work is needed if old data is present
   const old = actorData.type === "vehicle" ? attrs.speed : attrs.speed?.value;
@@ -439,7 +440,7 @@ function _migrateActorMovement(actorData, updateData) {
  * @private
  */
 function _migrateActorSenses(actor, updateData) {
-  const oldSenses = actor.system.traits?.senses;
+  const oldSenses = actor.system?.traits?.senses;
   if ( oldSenses === undefined ) return;
   if ( typeof oldSenses !== "string" ) return;
 
@@ -479,7 +480,7 @@ function _migrateActorSenses(actor, updateData) {
  * @private
  */
 function _migrateActorType(actor, updateData) {
-  const original = actor.system.details?.type;
+  const original = actor.system?.details?.type;
   if ( typeof original !== "string" ) return;
 
   // New default data structure
@@ -510,7 +511,7 @@ function _migrateActorType(actor, updateData) {
     actorTypeData.subtype = match.groups.subtype?.trim().titleCase() || "";
 
     // Match a swarm
-    const isNamedSwarm = actor.name.startsWith(game.i18n.localize("DND5E.CreatureSwarm"));
+    const isNamedSwarm = actor.name?.startsWith(game.i18n.localize("DND5E.CreatureSwarm"));
     if ( match.groups.size || isNamedSwarm ) {
       const sizeLc = match.groups.size ? match.groups.size.trim().toLowerCase() : "tiny";
       const sizeMatch = Object.entries(CONFIG.DND5E.actorSizes).find(([k, v]) => {
@@ -574,7 +575,7 @@ function _migrateActorAC(actorData, updateData) {
  * @private
  */
 function _migrateTokenImage(actorData, updateData) {
-  const oldSystemPNG = /^systems\/dnd5e\/tokens\/([a-z]+)\/([A-z]+).png$/
+  const oldSystemPNG = /^systems\/dnd5e\/tokens\/([a-z]+)\/([A-z]+).png$/;
   for ( const path of ["texture.src", "prototypeToken.texture.src"] ) {
     const v = foundry.utils.getProperty(actorData, path);
     if ( oldSystemPNG.test(v) ) {
@@ -675,17 +676,20 @@ function _migrateItemCriticalData(item, updateData) {
 
 /**
  * Convert system icons to use bundled core webp icons.
- * @param {object} item                                     Item data to migrate
+ * @param {object} document                                 Document data to migrate
  * @param {object} updateData                               Existing update to expand upon
  * @param {object} [migrationData={}]                       Additional data to perform the migration
  * @param {Object<string, string>} [migrationData.iconMap]  A mapping of system icons to core foundry icons
+ * @param {string} [migrationData.field]                    The document field to migrate
  * @returns {object}                                        The updateData to apply
  * @private
  */
-function _migrateItemIcon(item, updateData, {iconMap}={}) {
-  if ( iconMap && item.img?.startsWith("systems/dnd5e/icons/") ) {
-    const rename = iconMap[item.img];
-    if ( rename ) updateData.img = rename;
+function _migrateDocumentIcon(document, updateData, {iconMap, field="img"}={}) {
+  let path = document?.[field];
+  if ( path && iconMap ) {
+    if ( path.startsWith("/") || path.startsWith("\\") ) path = path.substring(1);
+    const rename = iconMap[path];
+    if ( rename ) updateData[field] = rename;
   }
   return updateData;
 }

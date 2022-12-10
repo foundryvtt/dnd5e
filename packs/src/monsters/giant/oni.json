@@ -542,46 +542,27 @@
     "name": "Oni",
     "displayName": 20,
     "actorLink": false,
-    "tint": null,
     "width": 2,
     "height": 2,
-    "scale": 2,
-    "mirrorX": false,
-    "mirrorY": false,
     "lockRotation": false,
     "rotation": 0,
-    "vision": false,
-    "dimSight": 60,
-    "brightSight": 0,
-    "dimLight": 0,
-    "brightLight": 0,
-    "sightAngle": 0,
-    "lightAngle": 0,
-    "lightAlpha": 1,
-    "lightAnimation": {
-      "speed": 5,
-      "intensity": 5
-    },
     "disposition": -1,
     "displayBars": 40,
     "bar1": {
       "attribute": "attributes.hp"
     },
     "bar2": {
-      "attribute": ""
+      "attribute": null
     },
     "flags": {},
     "randomImg": false,
-    "img": "systems/dnd5e/tokens/giant/Oni.webp",
-    "actorId": "L1w8yBkInMscfJ3F",
     "alpha": 1,
     "light": {
-      "alpha": 0.5,
-      "angle": 0,
+      "alpha": 1,
+      "angle": 360,
       "bright": 0,
       "coloration": 1,
       "dim": 0,
-      "gradual": true,
       "luminosity": 0.5,
       "saturation": 0,
       "contrast": 0,
@@ -589,622 +570,39 @@
       "animation": {
         "speed": 5,
         "intensity": 5,
+        "type": null,
         "reverse": false
       },
       "darkness": {
         "min": 0,
         "max": 1
-      }
-    }
+      },
+      "attenuation": 0.5,
+      "color": null
+    },
+    "texture": {
+      "src": "systems/dnd5e/tokens/giant/Oni.webp",
+      "tint": null,
+      "scaleX": 2,
+      "scaleY": 2,
+      "offsetX": 0,
+      "offsetY": 0,
+      "rotation": 0
+    },
+    "sight": {
+      "angle": 360,
+      "enabled": false,
+      "range": 60,
+      "brightness": 0,
+      "visionMode": "basic",
+      "color": null,
+      "attenuation": 0.1,
+      "saturation": 0,
+      "contrast": 0
+    },
+    "detectionModes": []
   },
   "items": [
-    {
-      "_id": "iQ9oMvkYdGiLbOm7",
-      "name": "Darkness",
-      "type": "spell",
-      "img": "systems/dnd5e/icons/spells/evil-eye-red-2.jpg",
-      "system": {
-        "description": {
-          "value": "<p>Magical darkness spreads from a point you choose within range to fill a 15-foot-radius sphere for the duration. The darkness spreads around corners. A creature with darkvision can't see through this darkness, and nonmagical light can't illuminate it.</p><p>If the point you choose is on an object you are holding or one that isn't being worn or carried, the darkness emanates from the object and moves with it. Completely covering the source of the darkness with an opaque object, such as a bowl or a helm, blocks the darkness.</p><p>If any of this spell's area overlaps with an area of light created by a spell of 2nd level or lower, the spell that created the light is dispelled.</p>",
-          "chat": "",
-          "unidentified": ""
-        },
-        "source": "PHB pg. 230",
-        "activation": {
-          "type": "action",
-          "cost": 1,
-          "condition": ""
-        },
-        "duration": {
-          "value": 10,
-          "units": "minute"
-        },
-        "target": {
-          "value": 15,
-          "width": null,
-          "units": "ft",
-          "type": "sphere"
-        },
-        "range": {
-          "value": 60,
-          "long": 0,
-          "units": "ft"
-        },
-        "uses": {
-          "value": 0,
-          "max": 0,
-          "per": ""
-        },
-        "consume": {
-          "type": "",
-          "target": null,
-          "amount": null
-        },
-        "ability": "",
-        "actionType": "util",
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "critical": {
-          "threshold": null,
-          "damage": ""
-        },
-        "damage": {
-          "parts": [],
-          "versatile": "",
-          "value": ""
-        },
-        "formula": "",
-        "save": {
-          "ability": "",
-          "dc": null,
-          "scaling": "spell",
-          "value": ""
-        },
-        "level": 2,
-        "school": "evo",
-        "components": {
-          "value": "",
-          "vocal": true,
-          "somatic": false,
-          "material": false,
-          "ritual": false,
-          "concentration": true
-        },
-        "materials": {
-          "value": "Bat fur and a drop of pitch or piece of coal",
-          "consumed": false,
-          "cost": 0,
-          "supply": 0
-        },
-        "preparation": {
-          "mode": "atwill",
-          "prepared": true
-        },
-        "scaling": {
-          "mode": "none",
-          "formula": ""
-        },
-        "attunement": 0
-      },
-      "effects": [],
-      "folder": null,
-      "sort": 100001,
-      "ownership": {
-        "default": 0
-      },
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.dnd5e.spells.S7VbUetIfVT7B6Eq"
-        }
-      }
-    },
-    {
-      "_id": "bv3JBxBKqZC8v8nn",
-      "name": "Invisibility",
-      "type": "spell",
-      "img": "systems/dnd5e/icons/spells/fog-sky-2.jpg",
-      "system": {
-        "description": {
-          "value": "<p>A creature you touch becomes invisible until the spell ends. Anything the target is wearing or carrying is invisible as long as it is on the target's person. The spell ends for a target that attacks or casts a spell.</p><p><strong>At Higher Levels.</strong> When you cast this spell using a spell slot of 3rd level or higher, you can target one additional creature for each slot level above 2nd.</p>",
-          "chat": "",
-          "unidentified": ""
-        },
-        "source": "PHB pg. 254",
-        "activation": {
-          "type": "action",
-          "cost": 1,
-          "condition": ""
-        },
-        "duration": {
-          "value": 1,
-          "units": "hour"
-        },
-        "target": {
-          "value": 1,
-          "width": null,
-          "units": "",
-          "type": "creature"
-        },
-        "range": {
-          "value": null,
-          "long": null,
-          "units": "touch"
-        },
-        "uses": {
-          "value": 0,
-          "max": 0,
-          "per": ""
-        },
-        "consume": {
-          "type": "",
-          "target": null,
-          "amount": null
-        },
-        "ability": "",
-        "actionType": "util",
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "critical": {
-          "threshold": null,
-          "damage": ""
-        },
-        "damage": {
-          "parts": [],
-          "versatile": "",
-          "value": ""
-        },
-        "formula": "",
-        "save": {
-          "ability": "",
-          "dc": null,
-          "scaling": "spell",
-          "value": ""
-        },
-        "level": 2,
-        "school": "ill",
-        "components": {
-          "value": "",
-          "vocal": true,
-          "somatic": true,
-          "material": false,
-          "ritual": false,
-          "concentration": true
-        },
-        "materials": {
-          "value": "An eyelash encased in gum arabic",
-          "consumed": false,
-          "cost": 0,
-          "supply": 0
-        },
-        "preparation": {
-          "mode": "atwill",
-          "prepared": true
-        },
-        "scaling": {
-          "mode": "level",
-          "formula": ""
-        },
-        "attunement": 0
-      },
-      "effects": [],
-      "folder": null,
-      "sort": 100001,
-      "ownership": {
-        "default": 0
-      },
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.dnd5e.spells.1N8dDMMgZ1h1YJ3B"
-        }
-      }
-    },
-    {
-      "_id": "Agqr1hnuqnhBNgYq",
-      "name": "Charm Person",
-      "type": "spell",
-      "img": "systems/dnd5e/icons/spells/explosion-magenta-2.jpg",
-      "system": {
-        "description": {
-          "value": "<p>You attempt to charm a humanoid you can see within range. It must make a Wisdom saving throw, and does so with advantage if you or your companions are fighting it. If it fails the saving throw, it is charmed by you until the spell ends or until you or your companions do anything harmful to it. The charmed creature regards you as a friendly acquaintance. When the spell ends, the creature knows it was charmed by you.</p>\n        <p><strong>At Higher Levels.</strong> When you cast this spell using a spell slot of 2nd level or higher, you can target one additional creature for each slot level above 1st. The creatures must be within 30 feet of each other when you target them.</p>",
-          "chat": "",
-          "unidentified": ""
-        },
-        "source": "PHB pg. 221",
-        "activation": {
-          "type": "action",
-          "cost": 1,
-          "condition": ""
-        },
-        "duration": {
-          "value": 1,
-          "units": "hour"
-        },
-        "target": {
-          "value": 1,
-          "width": null,
-          "units": "",
-          "type": "creature"
-        },
-        "range": {
-          "value": 30,
-          "long": 0,
-          "units": "ft"
-        },
-        "uses": {
-          "value": 1,
-          "max": 1,
-          "per": "day"
-        },
-        "consume": {
-          "type": "",
-          "target": "",
-          "amount": null
-        },
-        "ability": "",
-        "actionType": "save",
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "critical": {
-          "threshold": null,
-          "damage": ""
-        },
-        "damage": {
-          "parts": [],
-          "versatile": "",
-          "value": ""
-        },
-        "formula": "",
-        "save": {
-          "ability": "wis",
-          "dc": 13,
-          "scaling": "spell"
-        },
-        "level": 1,
-        "school": "enc",
-        "components": {
-          "value": "",
-          "vocal": true,
-          "somatic": true,
-          "material": false,
-          "ritual": false,
-          "concentration": false
-        },
-        "materials": {
-          "value": "",
-          "consumed": false,
-          "cost": 0,
-          "supply": 0
-        },
-        "preparation": {
-          "mode": "innate",
-          "prepared": true
-        },
-        "scaling": {
-          "mode": "level",
-          "formula": ""
-        },
-        "attunement": 0
-      },
-      "effects": [],
-      "folder": null,
-      "sort": 100001,
-      "ownership": {
-        "default": 0
-      },
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.dnd5e.spells.eS7XnnApoxRxYXPs"
-        }
-      }
-    },
-    {
-      "_id": "yHQn7ZK82eaESdZ9",
-      "name": "Cone of Cold",
-      "type": "spell",
-      "img": "systems/dnd5e/icons/spells/ice-blue-3.jpg",
-      "system": {
-        "description": {
-          "value": "<p>A blast of cold air erupts from your hands. Each creature in a 60-foot cone must make a Constitution saving throw. A creature takes 8d8 cold damage on a failed save, or half as much damage on a successful one.</p><p>A creature killed by this spell becomes a frozen statue until it thaws.</p><p><strong>Higher Levels.&nbsp;</strong>When you cast this spell using a spell slot of 6th level or higher, the damage increases by 1d8 for each slot level above 5th.</p>",
-          "chat": "",
-          "unidentified": ""
-        },
-        "source": "PHB pg. 224",
-        "activation": {
-          "type": "action",
-          "cost": 1,
-          "condition": ""
-        },
-        "duration": {
-          "value": null,
-          "units": "inst"
-        },
-        "target": {
-          "value": 60,
-          "width": null,
-          "units": "ft",
-          "type": "cone"
-        },
-        "range": {
-          "value": null,
-          "long": null,
-          "units": "self"
-        },
-        "uses": {
-          "value": 1,
-          "max": 1,
-          "per": "day"
-        },
-        "consume": {
-          "type": "",
-          "target": null,
-          "amount": null
-        },
-        "ability": "",
-        "actionType": "save",
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "critical": {
-          "threshold": null,
-          "damage": ""
-        },
-        "damage": {
-          "parts": [
-            [
-              "8d8",
-              "cold"
-            ]
-          ],
-          "versatile": ""
-        },
-        "formula": "",
-        "save": {
-          "ability": "con",
-          "dc": 13,
-          "scaling": "spell"
-        },
-        "level": 5,
-        "school": "evo",
-        "components": {
-          "value": "",
-          "vocal": true,
-          "somatic": true,
-          "material": false,
-          "ritual": false,
-          "concentration": false
-        },
-        "materials": {
-          "value": "A small crystal or glass cone",
-          "consumed": false,
-          "cost": 0,
-          "supply": 0
-        },
-        "preparation": {
-          "mode": "innate",
-          "prepared": true
-        },
-        "scaling": {
-          "mode": "level",
-          "formula": "1d8"
-        },
-        "attunement": 0
-      },
-      "effects": [],
-      "folder": null,
-      "sort": 100001,
-      "ownership": {
-        "default": 0
-      },
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.dnd5e.spells.RpKjTlYASrfqUPVA"
-        }
-      }
-    },
-    {
-      "_id": "GmktgRgXDpGbMXMX",
-      "name": "Gaseous Form",
-      "type": "spell",
-      "img": "systems/dnd5e/icons/spells/fog-acid-2.jpg",
-      "system": {
-        "description": {
-          "value": "<p>You transform a willing creature you touch, along with everything it's wearing and carrying, into a misty cloud for the duration. The spell ends if the creature drops to 0 hit points. An incorporeal creature isn't affected.</p><p>While in this form, the target's only method of movement is a flying speed of 10 feet. The target can enter and occupy the space of another creature. The target has resistance to nonmagical damage, and it has advantage on Strength, Dexterity, and Constitution saving throws. The target can pass through small holes, narrow openings, and even mere cracks, though it treats liquids as though they were solid surfaces. The target can't fall and remains hovering in the air even when stunned or otherwise incapacitated.</p><p>While in the form of a misty cloud, the target can't talk or manipulate objects, and any objects it was carrying or holding can't be dropped, used, or otherwise interacted with. The target can't attack or cast spells.</p>",
-          "chat": "",
-          "unidentified": ""
-        },
-        "source": "PHB pg. 244",
-        "activation": {
-          "type": "action",
-          "cost": 1,
-          "condition": ""
-        },
-        "duration": {
-          "value": 1,
-          "units": "hour"
-        },
-        "target": {
-          "value": 1,
-          "width": null,
-          "units": "",
-          "type": "creature"
-        },
-        "range": {
-          "value": null,
-          "long": null,
-          "units": "touch"
-        },
-        "uses": {
-          "value": 1,
-          "max": 1,
-          "per": "day"
-        },
-        "consume": {
-          "type": "",
-          "target": null,
-          "amount": null
-        },
-        "ability": "",
-        "actionType": "util",
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "critical": {
-          "threshold": null,
-          "damage": ""
-        },
-        "damage": {
-          "parts": [],
-          "versatile": "",
-          "value": ""
-        },
-        "formula": "",
-        "save": {
-          "ability": "",
-          "dc": null,
-          "scaling": "spell",
-          "value": ""
-        },
-        "level": 3,
-        "school": "trs",
-        "components": {
-          "value": "",
-          "vocal": true,
-          "somatic": true,
-          "material": false,
-          "ritual": false,
-          "concentration": true
-        },
-        "materials": {
-          "value": "A bit of gauze and a wisp of smoke",
-          "consumed": false,
-          "cost": 0,
-          "supply": 0
-        },
-        "preparation": {
-          "mode": "innate",
-          "prepared": true
-        },
-        "scaling": {
-          "mode": "none",
-          "formula": ""
-        },
-        "attunement": 0
-      },
-      "effects": [],
-      "folder": null,
-      "sort": 100001,
-      "ownership": {
-        "default": 0
-      },
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.dnd5e.spells.2IWiZAJtOGDoKjiz"
-        }
-      }
-    },
-    {
-      "_id": "X7zpSL5rrVWY6gco",
-      "name": "Sleep",
-      "type": "spell",
-      "img": "systems/dnd5e/icons/spells/light-magenta-1.jpg",
-      "system": {
-        "description": {
-          "value": "<p>This spell sends creatures into a magical slumber. Roll 5d8; the total is how many hit points of creatures this spell can affect. Creatures within 20 feet of a point you choose within range are affected in ascending order of their current hit points (ignoring unconscious creatures).</p><p>Starting with the creature that has the lowest current hit points, each creature affected by this spell falls unconscious until the spell ends, the sleeper takes damage, or someone uses an action to shake or slap the sleeper awake. Subtract each creature's hit points from the total before moving on to the creature with the next lowest hit points. A creature's hit points must be equal to or less than the remaining total for that creature to be affected.</p><p>Undead and creatures immune to being charmed aren't affected by this spell.</p><p><strong>Higher Levels.</strong> When you cast this spell using a spell slot of 2nd level or higher, roll an additional 2d8 for each slot level above 1st.</p>",
-          "chat": "",
-          "unidentified": ""
-        },
-        "source": "PHB pg. 276",
-        "activation": {
-          "type": "action",
-          "cost": 1,
-          "condition": ""
-        },
-        "duration": {
-          "value": 1,
-          "units": "minute"
-        },
-        "target": {
-          "value": 20,
-          "width": null,
-          "units": "ft",
-          "type": "sphere"
-        },
-        "range": {
-          "value": 90,
-          "long": 0,
-          "units": "ft"
-        },
-        "uses": {
-          "value": 1,
-          "max": 1,
-          "per": "day"
-        },
-        "consume": {
-          "type": "",
-          "target": "",
-          "amount": null
-        },
-        "ability": "",
-        "actionType": "other",
-        "attackBonus": "0",
-        "chatFlavor": "",
-        "critical": {
-          "threshold": null,
-          "damage": ""
-        },
-        "damage": {
-          "parts": [
-            [
-              "5d8",
-              ""
-            ]
-          ],
-          "versatile": "",
-          "value": ""
-        },
-        "formula": "",
-        "save": {
-          "ability": "",
-          "dc": null,
-          "scaling": "spell",
-          "value": ""
-        },
-        "level": 1,
-        "school": "enc",
-        "components": {
-          "value": "",
-          "vocal": true,
-          "somatic": true,
-          "material": false,
-          "ritual": false,
-          "concentration": false
-        },
-        "materials": {
-          "value": "A pinch of fine sand, rose petals, or a cricket.",
-          "consumed": false,
-          "cost": 0,
-          "supply": 0
-        },
-        "preparation": {
-          "mode": "innate",
-          "prepared": true
-        },
-        "scaling": {
-          "mode": "level",
-          "formula": "2d8"
-        },
-        "attunement": 0
-      },
-      "effects": [],
-      "folder": null,
-      "sort": 100001,
-      "ownership": {
-        "default": 0
-      },
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.dnd5e.spells.KhwiSi9fwVfUPtku"
-        }
-      }
-    },
     {
       "_id": "m65uENAa93Pz8lLl",
       "name": "Chain Mail",
@@ -1222,7 +620,7 @@
         "price": 75,
         "attunement": 0,
         "equipped": true,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
         "activation": {
           "type": "",
@@ -1290,8 +688,7 @@
         },
         "strength": 13,
         "stealth": true,
-        "proficient": true,
-        "attuned": false
+        "proficient": true
       },
       "effects": [],
       "folder": null,
@@ -1299,7 +696,15 @@
       "ownership": {
         "default": 0
       },
-      "flags": {}
+      "flags": {},
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      }
     },
     {
       "_id": "FC0FNE8O4rnbth8s",
@@ -1318,7 +723,7 @@
         "price": 20,
         "attunement": 0,
         "equipped": true,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
         "activation": {
           "type": "action",
@@ -1400,8 +805,7 @@
           "two": true,
           "ver": false
         },
-        "proficient": true,
-        "attuned": false
+        "proficient": true
       },
       "effects": [],
       "folder": null,
@@ -1409,7 +813,15 @@
       "ownership": {
         "default": 0
       },
-      "flags": {}
+      "flags": {},
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      }
     },
     {
       "_id": "q7J7PERrJb2vxtlt",
@@ -1510,8 +922,7 @@
           "two": false,
           "ver": false
         },
-        "proficient": true,
-        "attuned": false
+        "proficient": true
       },
       "effects": [],
       "folder": null,
@@ -1519,7 +930,15 @@
       "ownership": {
         "default": 0
       },
-      "flags": {}
+      "flags": {},
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      }
     },
     {
       "_id": "HiGvFK1bT8zkJA3r",
@@ -1594,7 +1013,15 @@
       "ownership": {
         "default": 0
       },
-      "flags": {}
+      "flags": {},
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      }
     },
     {
       "_id": "7YSwI62Budsr6HzO",
@@ -1669,7 +1096,15 @@
       "ownership": {
         "default": 0
       },
-      "flags": {}
+      "flags": {},
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      }
     },
     {
       "_id": "8liUuXPhjNLKYMMx",
@@ -1749,7 +1184,15 @@
       "ownership": {
         "default": 0
       },
-      "flags": {}
+      "flags": {},
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      }
     },
     {
       "_id": "HJDOmnRX2zQuXraB",
@@ -1824,7 +1267,15 @@
       "ownership": {
         "default": 0
       },
-      "flags": {}
+      "flags": {},
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      }
     },
     {
       "_id": "QGNzJqfTHnbhjzFN",
@@ -1899,7 +1350,664 @@
       "ownership": {
         "default": 0
       },
-      "flags": {}
+      "flags": {},
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      }
+    },
+    {
+      "_id": "S7VbUetIfVT7B6Eq",
+      "name": "Darkness",
+      "ownership": {
+        "default": 0
+      },
+      "type": "spell",
+      "system": {
+        "description": {
+          "value": "<p>Magical darkness spreads from a point you choose within range to fill a 15-foot-radius sphere for the duration. The darkness spreads around corners. A creature with darkvision can't see through this darkness, and nonmagical light can't illuminate it.</p><p>If the point you choose is on an object you are holding or one that isn't being worn or carried, the darkness emanates from the object and moves with it. Completely covering the source of the darkness with an opaque object, such as a bowl or a helm, blocks the darkness.</p><p>If any of this spell's area overlaps with an area of light created by a spell of 2nd level or lower, the spell that created the light is dispelled.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "PHB pg. 230",
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": 10,
+          "units": "minute"
+        },
+        "target": {
+          "value": 15,
+          "width": null,
+          "units": "ft",
+          "type": "sphere"
+        },
+        "range": {
+          "value": 60,
+          "long": 0,
+          "units": "ft"
+        },
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": ""
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null
+        },
+        "ability": "",
+        "actionType": "util",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": "",
+          "value": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell",
+          "value": ""
+        },
+        "level": 2,
+        "school": "evo",
+        "components": {
+          "value": "",
+          "vocal": true,
+          "somatic": false,
+          "material": true,
+          "ritual": false,
+          "concentration": true
+        },
+        "materials": {
+          "value": "Bat fur and a drop of pitch or piece of coal",
+          "consumed": false,
+          "cost": 0,
+          "supply": 0
+        },
+        "preparation": {
+          "mode": "atwill",
+          "prepared": true
+        },
+        "scaling": {
+          "mode": "none",
+          "formula": ""
+        }
+      },
+      "sort": 100001,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.S7VbUetIfVT7B6Eq"
+        }
+      },
+      "img": "icons/magic/perception/eye-ringed-glow-angry-red.webp",
+      "effects": [],
+      "folder": null,
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.0",
+        "coreVersion": "10.279",
+        "createdTime": 1661787234139,
+        "modifiedTime": 1661791116422,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      }
+    },
+    {
+      "_id": "1N8dDMMgZ1h1YJ3B",
+      "name": "Invisibility",
+      "ownership": {
+        "default": 0
+      },
+      "type": "spell",
+      "system": {
+        "description": {
+          "value": "<p>A creature you touch becomes invisible until the spell ends. Anything the target is wearing or carrying is invisible as long as it is on the target's person. The spell ends for a target that attacks or casts a spell.</p><p><strong>At Higher Levels.</strong> When you cast this spell using a spell slot of 3rd level or higher, you can target one additional creature for each slot level above 2nd.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "PHB pg. 254",
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": 1,
+          "units": "hour"
+        },
+        "target": {
+          "value": 1,
+          "width": null,
+          "units": "",
+          "type": "creature"
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": "touch"
+        },
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": ""
+        },
+        "consume": {
+          "type": "",
+          "target": "",
+          "amount": null
+        },
+        "ability": "",
+        "actionType": "util",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": "",
+          "value": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell",
+          "value": ""
+        },
+        "level": 2,
+        "school": "ill",
+        "components": {
+          "value": "",
+          "vocal": true,
+          "somatic": true,
+          "material": true,
+          "ritual": false,
+          "concentration": true
+        },
+        "materials": {
+          "value": "An eyelash encased in gum arabic",
+          "consumed": false,
+          "cost": 0,
+          "supply": 0
+        },
+        "preparation": {
+          "mode": "atwill",
+          "prepared": true
+        },
+        "scaling": {
+          "mode": "level",
+          "formula": ""
+        }
+      },
+      "sort": 100001,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.1N8dDMMgZ1h1YJ3B"
+        }
+      },
+      "img": "icons/magic/air/fog-gas-smoke-dense-gray.webp",
+      "effects": [],
+      "folder": null,
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.0",
+        "coreVersion": "10.279",
+        "createdTime": 1661787234056,
+        "modifiedTime": 1661791116423,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      }
+    },
+    {
+      "_id": "eS7XnnApoxRxYXPs",
+      "name": "Charm Person",
+      "ownership": {
+        "default": 0
+      },
+      "type": "spell",
+      "system": {
+        "description": {
+          "value": "<p>You attempt to charm a humanoid you can see within range. It must make a Wisdom saving throw, and does so with advantage if you or your companions are fighting it. If it fails the saving throw, it is charmed by you until the spell ends or until you or your companions do anything harmful to it. The charmed creature regards you as a friendly acquaintance. When the spell ends, the creature knows it was charmed by you.</p>\n        <p><strong>At Higher Levels.</strong> When you cast this spell using a spell slot of 2nd level or higher, you can target one additional creature for each slot level above 1st. The creatures must be within 30 feet of each other when you target them.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "PHB pg. 221",
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": 1,
+          "units": "hour"
+        },
+        "target": {
+          "value": 1,
+          "width": null,
+          "units": "",
+          "type": "creature"
+        },
+        "range": {
+          "value": 30,
+          "long": 0,
+          "units": "ft"
+        },
+        "uses": {
+          "value": 1,
+          "max": 1,
+          "per": "day"
+        },
+        "consume": {
+          "type": "",
+          "target": "",
+          "amount": null
+        },
+        "ability": "",
+        "actionType": "save",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": "",
+          "value": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "wis",
+          "dc": 13,
+          "scaling": "spell"
+        },
+        "level": 1,
+        "school": "enc",
+        "components": {
+          "value": "",
+          "vocal": true,
+          "somatic": true,
+          "material": false,
+          "ritual": false,
+          "concentration": false
+        },
+        "materials": {
+          "value": "",
+          "consumed": false,
+          "cost": 0,
+          "supply": 0
+        },
+        "preparation": {
+          "mode": "innate",
+          "prepared": true
+        },
+        "scaling": {
+          "mode": "level",
+          "formula": ""
+        }
+      },
+      "sort": 100001,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.eS7XnnApoxRxYXPs"
+        }
+      },
+      "img": "icons/magic/fire/explosion-fireball-medium-purple-pink.webp",
+      "effects": [],
+      "folder": null,
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.0",
+        "coreVersion": "10.279",
+        "createdTime": 1661787234185,
+        "modifiedTime": 1661791116423,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      }
+    },
+    {
+      "_id": "RpKjTlYASrfqUPVA",
+      "name": "Cone of Cold",
+      "ownership": {
+        "default": 0
+      },
+      "type": "spell",
+      "system": {
+        "description": {
+          "value": "<p>A blast of cold air erupts from your hands. Each creature in a 60-foot cone must make a Constitution saving throw. A creature takes 8d8 cold damage on a failed save, or half as much damage on a successful one.</p><p>A creature killed by this spell becomes a frozen statue until it thaws.</p><p><strong>Higher Levels. </strong>When you cast this spell using a spell slot of 6th level or higher, the damage increases by 1d8 for each slot level above 5th.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "PHB pg. 224",
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": null,
+          "units": "inst"
+        },
+        "target": {
+          "value": 60,
+          "width": null,
+          "units": "ft",
+          "type": "cone"
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": "self"
+        },
+        "uses": {
+          "value": 1,
+          "max": 1,
+          "per": "day"
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null
+        },
+        "ability": "",
+        "actionType": "save",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [
+            [
+              "8d8",
+              "cold"
+            ]
+          ],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "con",
+          "dc": 13,
+          "scaling": "spell"
+        },
+        "level": 5,
+        "school": "evo",
+        "components": {
+          "value": "",
+          "vocal": true,
+          "somatic": true,
+          "material": true,
+          "ritual": false,
+          "concentration": false
+        },
+        "materials": {
+          "value": "A small crystal or glass cone",
+          "consumed": false,
+          "cost": 0,
+          "supply": 0
+        },
+        "preparation": {
+          "mode": "innate",
+          "prepared": true
+        },
+        "scaling": {
+          "mode": "level",
+          "formula": "1d8"
+        }
+      },
+      "sort": 100001,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.RpKjTlYASrfqUPVA"
+        }
+      },
+      "img": "icons/magic/water/projectiles-ice-faceted-shard-salvo-blue.webp",
+      "effects": [],
+      "folder": null,
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.0",
+        "coreVersion": "10.279",
+        "createdTime": 1661787234138,
+        "modifiedTime": 1661791116423,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      }
+    },
+    {
+      "_id": "2IWiZAJtOGDoKjiz",
+      "name": "Gaseous Form",
+      "ownership": {
+        "default": 0
+      },
+      "type": "spell",
+      "system": {
+        "description": {
+          "value": "<p>You transform a willing creature you touch, along with everything it's wearing and carrying, into a misty cloud for the duration. The spell ends if the creature drops to 0 hit points. An incorporeal creature isn't affected.</p><p>While in this form, the target's only method of movement is a flying speed of 10 feet. The target can enter and occupy the space of another creature. The target has resistance to nonmagical damage, and it has advantage on Strength, Dexterity, and Constitution saving throws. The target can pass through small holes, narrow openings, and even mere cracks, though it treats liquids as though they were solid surfaces. The target can't fall and remains hovering in the air even when stunned or otherwise incapacitated.</p><p>While in the form of a misty cloud, the target can't talk or manipulate objects, and any objects it was carrying or holding can't be dropped, used, or otherwise interacted with. The target can't attack or cast spells.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "PHB pg. 244",
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": 1,
+          "units": "hour"
+        },
+        "target": {
+          "value": 1,
+          "width": null,
+          "units": "",
+          "type": "creature"
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": "touch"
+        },
+        "uses": {
+          "value": 1,
+          "max": 1,
+          "per": "day"
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null
+        },
+        "ability": "",
+        "actionType": "util",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": "",
+          "value": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell",
+          "value": ""
+        },
+        "level": 3,
+        "school": "trs",
+        "components": {
+          "value": "",
+          "vocal": true,
+          "somatic": true,
+          "material": true,
+          "ritual": false,
+          "concentration": true
+        },
+        "materials": {
+          "value": "A bit of gauze and a wisp of smoke",
+          "consumed": false,
+          "cost": 0,
+          "supply": 0
+        },
+        "preparation": {
+          "mode": "innate",
+          "prepared": true
+        },
+        "scaling": {
+          "mode": "none",
+          "formula": ""
+        }
+      },
+      "sort": 100001,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.2IWiZAJtOGDoKjiz"
+        }
+      },
+      "img": "icons/magic/air/fog-gas-smoke-dense-green.webp",
+      "effects": [],
+      "folder": null,
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.0",
+        "coreVersion": "10.279",
+        "createdTime": 1661787234058,
+        "modifiedTime": 1661791116423,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      }
+    },
+    {
+      "_id": "KhwiSi9fwVfUPtku",
+      "name": "Sleep",
+      "type": "spell",
+      "img": "icons/magic/light/explosion-star-small-pink.webp",
+      "system": {
+        "description": {
+          "value": "<p>This spell sends creatures into a magical slumber. Roll 5d8; the total is how many hit points of creatures this spell can affect. Creatures within 20 feet of a point you choose within range are affected in ascending order of their current hit points (ignoring unconscious creatures).</p><p>Starting with the creature that has the lowest current hit points, each creature affected by this spell falls unconscious until the spell ends, the sleeper takes damage, or someone uses an action to shake or slap the sleeper awake. Subtract each creature's hit points from the total before moving on to the creature with the next lowest hit points. A creature's hit points must be equal to or less than the remaining total for that creature to be affected.</p><p>Undead and creatures immune to being charmed aren't affected by this spell.</p><p><strong>Higher Levels.</strong> When you cast this spell using a spell slot of 2nd level or higher, roll an additional 2d8 for each slot level above 1st.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "PHB pg. 276",
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": 1,
+          "units": "minute"
+        },
+        "target": {
+          "value": 20,
+          "width": null,
+          "units": "ft",
+          "type": "sphere"
+        },
+        "range": {
+          "value": 90,
+          "long": 0,
+          "units": "ft"
+        },
+        "uses": {
+          "value": 1,
+          "max": 1,
+          "per": "day"
+        },
+        "consume": {
+          "type": "",
+          "target": "",
+          "amount": null
+        },
+        "ability": "",
+        "actionType": "other",
+        "attackBonus": "0",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [
+            [
+              "5d8",
+              ""
+            ]
+          ],
+          "versatile": "",
+          "value": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell",
+          "value": ""
+        },
+        "level": 1,
+        "school": "enc",
+        "components": {
+          "value": "",
+          "vocal": true,
+          "somatic": true,
+          "material": true,
+          "ritual": false,
+          "concentration": false
+        },
+        "materials": {
+          "value": "A pinch of fine sand, rose petals, or a cricket.",
+          "consumed": false,
+          "cost": 0,
+          "supply": 0
+        },
+        "preparation": {
+          "mode": "innate",
+          "prepared": true
+        },
+        "scaling": {
+          "mode": "level",
+          "formula": "2d8"
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 100001,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.KhwiSi9fwVfUPtku"
+        }
+      },
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.0",
+        "coreVersion": "10.279",
+        "createdTime": 1661787234117,
+        "modifiedTime": 1661791116424,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      }
     }
   ],
   "effects": [],
@@ -1908,5 +2016,13 @@
   "ownership": {
     "default": 0
   },
-  "flags": {}
+  "flags": {},
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.0.0",
+    "coreVersion": "10.279",
+    "createdTime": 1661787232765,
+    "modifiedTime": 1661878731004,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  }
 }

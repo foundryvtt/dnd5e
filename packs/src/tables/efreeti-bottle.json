@@ -1,0 +1,65 @@
+{
+  "name": "Efreeti Bottle",
+  "img": "icons/consumables/potions/potion-flask-corked-orange.webp",
+  "description": "",
+  "results": [
+    {
+      "type": 0,
+      "weight": 1,
+      "range": [
+        1,
+        10
+      ],
+      "drawn": false,
+      "documentCollection": "",
+      "_id": "IbW9tnuEZDC3Bjpq",
+      "text": "The efreeti attacks you. After fighting for 5 rounds, the efreeti disappears, and the bottle loses its magic.",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {}
+    },
+    {
+      "type": 0,
+      "weight": 1,
+      "range": [
+        11,
+        90
+      ],
+      "drawn": false,
+      "documentCollection": "",
+      "_id": "L0smkZOWXxK2uo2j",
+      "text": "The efreeti serves you for 1 hour, doing as you command. Then the efreeti returns to the bottle, and a new stopper contains it. The stopper can't be removed for 24 hours. The next two times the bottle is opened, the same effect occurs. If the bottle is opened a fourth time, the efreeti escapes and disappears, and the bottle loses its magic.",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {}
+    },
+    {
+      "type": 0,
+      "weight": 1,
+      "range": [
+        91,
+        100
+      ],
+      "drawn": false,
+      "documentCollection": "",
+      "_id": "ivzals5foQfjXWSo",
+      "text": "The efreeti can cast the wish spell three times for you. It disappears when it grants the final wish or after 1 hour, and the bottle loses its magic.",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {}
+    }
+  ],
+  "formula": "1d100",
+  "replacement": true,
+  "displayRoll": true,
+  "flags": {},
+  "_id": "yZMFNfocj5qyVuOC",
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.0.1",
+    "coreVersion": "10.284",
+    "createdTime": 1662760812331,
+    "modifiedTime": 1662761239502,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  }
+}

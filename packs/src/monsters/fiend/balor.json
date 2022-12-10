@@ -107,7 +107,7 @@
         "value": 262,
         "min": 0,
         "max": 262,
-        "temp": 0,
+        "temp": null,
         "tempmax": 0,
         "formula": "21d12 + 126"
       },
@@ -178,17 +178,25 @@
           "fire",
           "poison"
         ],
+        "bypasses": [],
         "custom": ""
       },
       "dr": {
         "value": [
+          "bludgeoning",
           "cold",
-          "lightning"
+          "lightning",
+          "piercing",
+          "slashing"
         ],
-        "custom": "bludgeoning, piercing, and slashing from non-magical attacks"
+        "bypasses": [
+          "mgc"
+        ],
+        "custom": ""
       },
       "dv": {
         "value": [],
+        "bypasses": [],
         "custom": ""
       },
       "ci": {
@@ -547,46 +555,27 @@
     "name": "Balor",
     "displayName": 20,
     "actorLink": false,
-    "tint": null,
     "width": 3,
     "height": 3,
-    "scale": 2.3,
-    "mirrorX": false,
-    "mirrorY": false,
     "lockRotation": false,
     "rotation": 0,
-    "vision": false,
-    "dimSight": 0,
-    "brightSight": 120,
-    "dimLight": 0,
-    "brightLight": 0,
-    "sightAngle": 0,
-    "lightAngle": 0,
-    "lightAlpha": 1,
-    "lightAnimation": {
-      "speed": 5,
-      "intensity": 5
-    },
     "disposition": -1,
     "displayBars": 40,
     "bar1": {
       "attribute": "attributes.hp"
     },
     "bar2": {
-      "attribute": ""
+      "attribute": null
     },
     "flags": {},
     "randomImg": false,
-    "img": "systems/dnd5e/tokens/fiend/Balor.webp",
-    "actorId": "uZ8NrRenwYZ4qNf6",
     "alpha": 1,
     "light": {
-      "alpha": 0.5,
-      "angle": 0,
+      "alpha": 1,
+      "angle": 360,
       "bright": 0,
       "coloration": 1,
       "dim": 0,
-      "gradual": true,
       "luminosity": 0.5,
       "saturation": 0,
       "contrast": 0,
@@ -594,20 +583,44 @@
       "animation": {
         "speed": 5,
         "intensity": 5,
+        "type": null,
         "reverse": false
       },
       "darkness": {
         "min": 0,
         "max": 1
-      }
-    }
+      },
+      "attenuation": 0.5,
+      "color": null
+    },
+    "texture": {
+      "src": "systems/dnd5e/tokens/fiend/Balor.webp",
+      "tint": null,
+      "scaleX": 2.3,
+      "scaleY": 2.3,
+      "offsetX": 0,
+      "offsetY": 0,
+      "rotation": 0
+    },
+    "sight": {
+      "angle": 360,
+      "enabled": false,
+      "range": 120,
+      "brightness": 1,
+      "visionMode": "basic",
+      "color": null,
+      "attenuation": 0.1,
+      "saturation": 0,
+      "contrast": 0
+    },
+    "detectionModes": []
   },
   "items": [
     {
       "_id": "nzkZgDrDq0RwWUao",
       "name": "Death Throes",
       "type": "feat",
-      "img": "systems/dnd5e/icons/spells/explosion-red-3.jpg",
+      "img": "icons/magic/fire/explosion-fireball-large-red-orange.webp",
       "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p>When the balor dies, it explodes, and each creature within 30 feet of it must make a  <strong>DC 20 Dexterity</strong> saving throw, taking <strong>70 (20d6) <em>fire damage</em></strong> on a failed save, or half as much damage on a successful one.</p>\n<p>The explosion ignites flammable objects in that area that aren't being worn or carried, and it destroys the balor's weapons.</p>\n</section>\n<p>When the balor dies, it explodes, and each creature within 30 feet of it must make a <strong>Dexterity</strong> saving throw. The explosion ignites flammable objects in that area that aren't being worn or carried, and it destroys the balor's weapons.</p>",
@@ -681,13 +694,21 @@
       "ownership": {
         "default": 0
       },
-      "flags": {}
+      "flags": {},
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      }
     },
     {
       "_id": "FWSzSLqeIDq7meXC",
       "name": "Fire Aura",
       "type": "feat",
-      "img": "systems/dnd5e/icons/spells/fog-orange-3.jpg",
+      "img": "icons/magic/air/fog-gas-smoke-swirling-orange.webp",
       "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p>At the start of each of the balor's turns, each creature within 5 feet of it takes <strong>10 (3d6) <em>fire damage</em></strong>, and flammable objects in the aura that aren't being worn or carried ignite.</p>\n<p>A creature that touches the balor or hits it with a melee attack while within 5 feet of it takes <strong>10 (3d6) <em>fire damage</em></strong>.</p>\n</section>\n<p>At the start of each of the balor's turns, each creature within 5 feet of it takes <em>fire damage</em>, and flammable objects in the aura that aren't being worn or carried ignite. A creature that touches the balor or hits it with a melee attack while within 5 feet of it takes <em>fire damage</em>.</p>",
@@ -761,7 +782,15 @@
       "ownership": {
         "default": 0
       },
-      "flags": {}
+      "flags": {},
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      }
     },
     {
       "_id": "0Y2ThqWytMPb9RlR",
@@ -838,7 +867,15 @@
       "ownership": {
         "default": 0
       },
-      "flags": {}
+      "flags": {},
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      }
     },
     {
       "_id": "5TGqX6bI8BdLEvTk",
@@ -915,7 +952,15 @@
       "ownership": {
         "default": 0
       },
-      "flags": {}
+      "flags": {},
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      }
     },
     {
       "_id": "qzphlErr2D2mRpxT",
@@ -992,13 +1037,21 @@
       "ownership": {
         "default": 0
       },
-      "flags": {}
+      "flags": {},
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      }
     },
     {
       "_id": "mw93amZDA4ctKqvQ",
       "name": "Teleport",
       "type": "feat",
-      "img": "systems/dnd5e/icons/spells/runes-magenta-3.jpg",
+      "img": "icons/magic/symbols/runes-star-pentagon-magenta.webp",
       "system": {
         "description": {
           "value": "<p>The balor magically teleports, along with any equipment it is wearing or carrying, up to 120 feet to an unoccupied space it can see.</p>",
@@ -1070,7 +1123,15 @@
       "ownership": {
         "default": 0
       },
-      "flags": {}
+      "flags": {},
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      }
     },
     {
       "_id": "6ZAh5TkiXwQMUfDB",
@@ -1089,7 +1150,7 @@
         "price": 15,
         "attunement": 0,
         "equipped": true,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
         "activation": {
           "type": "action",
@@ -1175,8 +1236,7 @@
           "thr": false,
           "two": false
         },
-        "proficient": true,
-        "attuned": false
+        "proficient": true
       },
       "effects": [],
       "folder": null,
@@ -1184,7 +1244,15 @@
       "ownership": {
         "default": 0
       },
-      "flags": {}
+      "flags": {},
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      }
     },
     {
       "_id": "1oGgJQB1ItqyKoZ5",
@@ -1203,7 +1271,7 @@
         "price": 2,
         "attunement": 0,
         "equipped": true,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
         "activation": {
           "type": "action",
@@ -1290,7 +1358,6 @@
           "ver": false
         },
         "proficient": true,
-        "attuned": false,
         "attributes": {
           "spelldc": 10
         }
@@ -1301,7 +1368,15 @@
       "ownership": {
         "default": 0
       },
-      "flags": {}
+      "flags": {},
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      }
     }
   ],
   "effects": [],
@@ -1310,5 +1385,13 @@
   "ownership": {
     "default": 0
   },
-  "flags": {}
+  "flags": {},
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.0.1",
+    "coreVersion": "10.284",
+    "createdTime": 1661787233232,
+    "modifiedTime": 1662079081400,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  }
 }

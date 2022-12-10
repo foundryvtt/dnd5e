@@ -1,0 +1,80 @@
+{
+  "name": "Confusion",
+  "img": "icons/magic/air/wind-tornado-cyclone-purple-pink.webp",
+  "description": "",
+  "results": [
+    {
+      "type": 0,
+      "weight": 1,
+      "range": [
+        1,
+        1
+      ],
+      "drawn": false,
+      "documentCollection": "",
+      "_id": "JJjhhU1Br9ThNEWA",
+      "text": "The creature uses all its movement to move in a random direction. To determine the direction, roll a [[/r d8]] and assign a direction to each die face. The creature doesn't take an action this turn.",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {}
+    },
+    {
+      "type": 0,
+      "weight": 1,
+      "range": [
+        2,
+        6
+      ],
+      "drawn": false,
+      "documentCollection": "",
+      "_id": "p1PpjMO47bT41JH7",
+      "text": "The creature doesn't move or take actions this turn.",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {}
+    },
+    {
+      "type": 0,
+      "weight": 1,
+      "range": [
+        7,
+        8
+      ],
+      "drawn": false,
+      "documentCollection": "",
+      "_id": "d8WgsQzLYbVXdtPj",
+      "text": "The creature uses its action to make a melee attack against a randomly determined creature within its reach. If there is no creature within its reach, the creature does nothing this turn.",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {}
+    },
+    {
+      "type": 0,
+      "weight": 1,
+      "range": [
+        9,
+        10
+      ],
+      "drawn": false,
+      "documentCollection": "",
+      "_id": "f4VYbhVsLT7q72ih",
+      "text": "The creature can act and move normally.",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {}
+    }
+  ],
+  "formula": "1d10",
+  "replacement": true,
+  "displayRoll": true,
+  "flags": {},
+  "_id": "LHEts1oDaDwcehuj",
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.0.1",
+    "coreVersion": "10.284",
+    "createdTime": 1662407554257,
+    "modifiedTime": 1662407814327,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  }
+}

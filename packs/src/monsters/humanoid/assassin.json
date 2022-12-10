@@ -2,7 +2,7 @@
   "_id": "EMvcuOpu7ABCmBWi",
   "name": "Assassin",
   "type": "npc",
-  "img": "icons/svg/mystery-man.svg",
+  "img": "systems/dnd5e/tokens/humanoid/Assassin.webp",
   "system": {
     "abilities": {
       "str": {
@@ -107,7 +107,7 @@
         "value": 78,
         "min": 0,
         "max": 78,
-        "temp": 0,
+        "temp": null,
         "tempmax": 0,
         "formula": "12d8 + 24"
       },
@@ -151,7 +151,7 @@
     },
     "details": {
       "biography": {
-        "value": "<p>Trained in the use of poison, <strong>assassins </strong>are remorseless killers who work for nobles, guildmasters, sovereigns, and anyone else who can afford them.</p>",
+        "value": "<p>Trained in the use of poison, <strong>assassins </strong>are remorseless killers who work for nobles, guildmasters, sovereigns, and anyone else who can afford them.</p><p><em>Token artwork by Forgotten Adventures.</em></p>",
         "public": ""
       },
       "alignment": "Any non-good",
@@ -544,46 +544,27 @@
     "name": "Assassin",
     "displayName": 20,
     "actorLink": false,
-    "tint": null,
     "width": 1,
     "height": 1,
-    "scale": 1,
-    "mirrorX": false,
-    "mirrorY": false,
     "lockRotation": false,
     "rotation": 0,
-    "vision": false,
-    "dimSight": 0,
-    "brightSight": 0,
-    "dimLight": 0,
-    "brightLight": 0,
-    "sightAngle": 0,
-    "lightAngle": 0,
-    "lightAlpha": 1,
-    "lightAnimation": {
-      "speed": 5,
-      "intensity": 5
-    },
     "disposition": -1,
     "displayBars": 40,
     "bar1": {
       "attribute": "attributes.hp"
     },
     "bar2": {
-      "attribute": ""
+      "attribute": null
     },
     "flags": {},
     "randomImg": false,
-    "img": "icons/svg/mystery-man.svg",
-    "actorId": "EMvcuOpu7ABCmBWi",
     "alpha": 1,
     "light": {
-      "alpha": 0.5,
-      "angle": 0,
+      "alpha": 1,
+      "angle": 360,
       "bright": 0,
       "coloration": 1,
       "dim": 0,
-      "gradual": true,
       "luminosity": 0.5,
       "saturation": 0,
       "contrast": 0,
@@ -591,13 +572,37 @@
       "animation": {
         "speed": 5,
         "intensity": 5,
+        "type": null,
         "reverse": false
       },
       "darkness": {
         "min": 0,
         "max": 1
-      }
-    }
+      },
+      "attenuation": 0.5,
+      "color": null
+    },
+    "texture": {
+      "src": "systems/dnd5e/tokens/humanoid/Assassin.webp",
+      "tint": null,
+      "scaleX": 1,
+      "scaleY": 1,
+      "offsetX": 0,
+      "offsetY": 0,
+      "rotation": 0
+    },
+    "sight": {
+      "angle": 360,
+      "enabled": false,
+      "range": 0,
+      "brightness": 1,
+      "visionMode": "basic",
+      "color": null,
+      "attenuation": 0.1,
+      "saturation": 0,
+      "contrast": 0
+    },
+    "detectionModes": []
   },
   "items": [
     {
@@ -617,7 +622,7 @@
         "price": "45",
         "attunement": 0,
         "equipped": true,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
         "activation": {
           "type": "",
@@ -685,8 +690,7 @@
         },
         "strength": "",
         "stealth": false,
-        "proficient": true,
-        "attuned": false
+        "proficient": true
       },
       "effects": [],
       "folder": null,
@@ -694,7 +698,15 @@
       "ownership": {
         "default": 0
       },
-      "flags": {}
+      "flags": {},
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      }
     },
     {
       "_id": "Ld00NpZe8Zl4J4Pi",
@@ -772,7 +784,15 @@
       "ownership": {
         "default": 0
       },
-      "flags": {}
+      "flags": {},
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      }
     },
     {
       "_id": "crRphULq6iIdlq88",
@@ -850,7 +870,15 @@
       "ownership": {
         "default": 0
       },
-      "flags": {}
+      "flags": {},
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      }
     },
     {
       "_id": "EcECOhaJIpCtN2o7",
@@ -932,7 +960,15 @@
       "ownership": {
         "default": 0
       },
-      "flags": {}
+      "flags": {},
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      }
     },
     {
       "_id": "zaYTSI1nKtzBnQwf",
@@ -1010,7 +1046,15 @@
       "ownership": {
         "default": 0
       },
-      "flags": {}
+      "flags": {},
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      }
     },
     {
       "_id": "Kbg12IJ0YW79vP06",
@@ -1029,7 +1073,7 @@
         "price": 10,
         "attunement": 0,
         "equipped": true,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
         "activation": {
           "type": "action",
@@ -1111,8 +1155,7 @@
           "two": false,
           "ver": false
         },
-        "proficient": true,
-        "attuned": false
+        "proficient": true
       },
       "effects": [],
       "folder": null,
@@ -1120,7 +1163,15 @@
       "ownership": {
         "default": 0
       },
-      "flags": {}
+      "flags": {},
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      }
     },
     {
       "_id": "rNQK7okIBNZ2zDvD",
@@ -1139,7 +1190,7 @@
         "price": 25,
         "attunement": 0,
         "equipped": true,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
         "activation": {
           "type": "action",
@@ -1221,8 +1272,7 @@
           "thr": false,
           "ver": false
         },
-        "proficient": true,
-        "attuned": false
+        "proficient": true
       },
       "effects": [],
       "folder": null,
@@ -1230,7 +1280,15 @@
       "ownership": {
         "default": 0
       },
-      "flags": {}
+      "flags": {},
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      }
     }
   ],
   "effects": [],
@@ -1239,5 +1297,13 @@
   "ownership": {
     "default": 0
   },
-  "flags": {}
+  "flags": {},
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.0.1",
+    "coreVersion": "10.285",
+    "createdTime": 1661787232691,
+    "modifiedTime": 1662755686859,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  }
 }

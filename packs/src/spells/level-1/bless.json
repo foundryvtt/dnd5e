@@ -91,38 +91,47 @@
       "flags": {},
       "changes": [
         {
-          "key": "data.bonuses.abilities.save",
+          "key": "system.bonuses.abilities.save",
           "mode": 2,
-          "value": "+1d4"
+          "value": "+1d4",
+          "priority": null
         },
         {
-          "key": "data.bonuses.mwak.attack",
+          "key": "system.bonuses.mwak.attack",
           "mode": 2,
-          "value": "+1d4"
+          "value": "+1d4",
+          "priority": null
         },
         {
-          "key": "data.bonuses.msak.attack",
+          "key": "system.bonuses.msak.attack",
           "mode": 2,
-          "value": "+1d4"
+          "value": "+1d4",
+          "priority": null
         },
         {
-          "key": "data.bonuses.rsak.attack",
+          "key": "system.bonuses.rsak.attack",
           "mode": 2,
-          "value": "+1d4"
+          "value": "+1d4",
+          "priority": null
         },
         {
-          "key": "data.bonuses.rwak.attack",
+          "key": "system.bonuses.rwak.attack",
           "mode": 2,
-          "value": "+1d4"
+          "value": "+1d4",
+          "priority": null
         }
       ],
       "disabled": true,
       "duration": {
         "startTime": null,
         "seconds": 60,
-        "rounds": 10
+        "rounds": 10,
+        "combat": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
       },
-      "icon": "systems/dnd5e/icons/spells/haste-sky-1.jpg",
+      "icon": "icons/magic/control/buff-flight-wings-blue.webp",
       "label": "Bless",
       "origin": "Item.kZZAZ6kp9YzgPQEe",
       "tint": null,
@@ -134,5 +143,13 @@
   "ownership": {
     "default": 0
   },
-  "flags": {}
+  "flags": {},
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.0.0",
+    "coreVersion": "10.279",
+    "createdTime": 1661787234081,
+    "modifiedTime": 1661787234081,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  }
 }

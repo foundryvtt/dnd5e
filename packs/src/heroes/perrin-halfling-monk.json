@@ -574,29 +574,10 @@
     "flags": {},
     "name": "Perrin",
     "displayName": 30,
-    "img": "systems/dnd5e/tokens/heroes/MonkStaff.webp",
-    "tint": null,
     "width": 1,
     "height": 1,
-    "scale": 0.8,
-    "mirrorX": false,
-    "mirrorY": false,
     "lockRotation": false,
     "rotation": 0,
-    "vision": true,
-    "dimSight": 5,
-    "brightSight": 0,
-    "dimLight": 0,
-    "brightLight": 0,
-    "sightAngle": 0,
-    "lightAngle": 0,
-    "lightColor": null,
-    "lightAlpha": 1,
-    "lightAnimation": {
-      "speed": 5,
-      "intensity": 5
-    },
-    "actorId": "9ICdqUHFaeTzuIr8",
     "actorLink": true,
     "disposition": 1,
     "displayBars": 40,
@@ -609,12 +590,11 @@
     "randomImg": false,
     "alpha": 1,
     "light": {
-      "alpha": 0.5,
-      "angle": 0,
+      "alpha": 1,
+      "angle": 360,
       "bright": 0,
       "coloration": 1,
       "dim": 0,
-      "gradual": true,
       "luminosity": 0.5,
       "saturation": 0,
       "contrast": 0,
@@ -622,13 +602,37 @@
       "animation": {
         "speed": 5,
         "intensity": 5,
+        "type": null,
         "reverse": false
       },
       "darkness": {
         "min": 0,
         "max": 1
-      }
-    }
+      },
+      "color": null,
+      "attenuation": 0.5
+    },
+    "texture": {
+      "src": "systems/dnd5e/tokens/heroes/MonkStaff.webp",
+      "tint": null,
+      "scaleX": 0.8,
+      "scaleY": 0.8,
+      "offsetX": 0,
+      "offsetY": 0,
+      "rotation": 0
+    },
+    "sight": {
+      "angle": 360,
+      "enabled": true,
+      "range": 5,
+      "brightness": 0,
+      "visionMode": "basic",
+      "color": null,
+      "attenuation": 0.1,
+      "saturation": 0,
+      "contrast": 0
+    },
+    "detectionModes": []
   },
   "items": [
     {
@@ -723,6 +727,14 @@
       "folder": null,
       "ownership": {
         "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -741,7 +753,7 @@
         "price": 10,
         "attunement": 0,
         "equipped": true,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
         "activation": {
           "type": "action",
@@ -823,8 +835,7 @@
           "two": false,
           "ver": false
         },
-        "proficient": true,
-        "attuned": false
+        "proficient": true
       },
       "sort": 1000001,
       "flags": {},
@@ -833,6 +844,14 @@
       "folder": null,
       "ownership": {
         "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -851,7 +870,7 @@
         "price": 0.05,
         "attunement": 0,
         "equipped": false,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
         "activation": {
           "type": "action",
@@ -933,8 +952,7 @@
           "ver": false,
           "lod": false
         },
-        "proficient": true,
-        "attuned": false
+        "proficient": true
       },
       "sort": 1100001,
       "flags": {},
@@ -943,6 +961,14 @@
       "folder": null,
       "ownership": {
         "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -961,7 +987,7 @@
         "price": 0.05,
         "attunement": 0,
         "equipped": false,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
         "activation": {
           "type": "",
@@ -1012,8 +1038,7 @@
           "dc": null,
           "scaling": "spell"
         },
-        "consumableType": "ammo",
-        "attuned": false
+        "consumableType": "ammo"
       },
       "sort": 100001,
       "flags": {},
@@ -1022,6 +1047,14 @@
       "folder": null,
       "ownership": {
         "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -1040,7 +1073,7 @@
         "price": 5,
         "attunement": 0,
         "equipped": false,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
         "activation": {
           "type": "special",
@@ -1108,8 +1141,7 @@
         },
         "strength": 0,
         "stealth": false,
-        "proficient": false,
-        "attuned": false
+        "proficient": false
       },
       "sort": 2300000,
       "flags": {},
@@ -1118,6 +1150,14 @@
       "folder": null,
       "ownership": {
         "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -1136,7 +1176,7 @@
         "price": 0.5,
         "attunement": 0,
         "equipped": true,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
         "activation": {
           "type": "none",
@@ -1204,8 +1244,7 @@
         },
         "strength": 0,
         "stealth": false,
-        "proficient": false,
-        "attuned": false
+        "proficient": false
       },
       "sort": 800000,
       "flags": {},
@@ -1214,6 +1253,14 @@
       "folder": null,
       "ownership": {
         "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -1232,7 +1279,7 @@
         "price": 1,
         "attunement": 0,
         "equipped": true,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
         "activation": {
           "type": "none",
@@ -1300,16 +1347,23 @@
         },
         "strength": 0,
         "stealth": false,
-        "proficient": false,
-        "attuned": false
+        "proficient": false
       },
       "sort": 1550000,
       "flags": {},
-      "img": "systems/dnd5e/icons/items/armor/robe.jpg",
+      "img": "icons/equipment/back/mantle-collared-black.webp",
       "effects": [],
       "folder": null,
       "ownership": {
         "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -1328,7 +1382,7 @@
         "price": 2,
         "attunement": 0,
         "equipped": false,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
         "capacity": {
           "type": "weight",
@@ -1342,7 +1396,6 @@
           "gp": 0,
           "pp": 0
         },
-        "attuned": false,
         "damage": {
           "parts": []
         }
@@ -1354,6 +1407,14 @@
       "folder": null,
       "ownership": {
         "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -1372,7 +1433,7 @@
         "price": 0.5,
         "attunement": 0,
         "equipped": false,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
         "capacity": {
           "type": "weight",
@@ -1386,7 +1447,6 @@
           "gp": 0,
           "pp": 0
         },
-        "attuned": false,
         "damage": {
           "parts": []
         }
@@ -1398,6 +1458,14 @@
       "folder": null,
       "ownership": {
         "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -1416,7 +1484,7 @@
         "price": 0.5,
         "attunement": 0,
         "equipped": false,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
         "activation": {
           "type": "action",
@@ -1468,8 +1536,7 @@
           "dc": null,
           "scaling": "spell"
         },
-        "consumableType": "food",
-        "attuned": false
+        "consumableType": "food"
       },
       "sort": 1400000,
       "flags": {},
@@ -1478,6 +1545,14 @@
       "folder": null,
       "ownership": {
         "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -1496,7 +1571,7 @@
         "price": 0.2,
         "attunement": 0,
         "equipped": false,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
         "activation": {
           "type": "action",
@@ -1548,8 +1623,7 @@
           "dc": null,
           "scaling": "spell"
         },
-        "consumableType": "food",
-        "attuned": false
+        "consumableType": "food"
       },
       "sort": 500000,
       "flags": {},
@@ -1558,6 +1632,14 @@
       "folder": null,
       "ownership": {
         "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -1576,9 +1658,8 @@
         "price": 25,
         "attunement": 0,
         "equipped": false,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
-        "attuned": false,
         "damage": {
           "parts": []
         }
@@ -1590,6 +1671,14 @@
       "folder": null,
       "ownership": {
         "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -1608,9 +1697,8 @@
         "price": 0.2,
         "attunement": 0,
         "equipped": false,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
-        "attuned": false,
         "damage": {
           "parts": []
         }
@@ -1622,6 +1710,14 @@
       "folder": null,
       "ownership": {
         "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -1640,9 +1736,8 @@
         "price": 2,
         "attunement": 0,
         "equipped": false,
-        "rarity": "Common",
-        "identified": true,
-        "attuned": false
+        "rarity": "common",
+        "identified": true
       },
       "sort": 100001,
       "flags": {},
@@ -1651,6 +1746,14 @@
       "folder": null,
       "ownership": {
         "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -1669,9 +1772,8 @@
         "price": 1,
         "attunement": 0,
         "equipped": false,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
-        "attuned": false,
         "damage": {
           "parts": []
         }
@@ -1683,6 +1785,14 @@
       "folder": null,
       "ownership": {
         "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -1701,7 +1811,7 @@
         "price": 0.05,
         "attunement": 0,
         "equipped": false,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
         "activation": {
           "type": "action",
@@ -1753,8 +1863,7 @@
           "dc": null,
           "scaling": "spell"
         },
-        "consumableType": "trinket",
-        "attuned": false
+        "consumableType": "trinket"
       },
       "sort": 1700000,
       "flags": {},
@@ -1763,6 +1872,14 @@
       "folder": null,
       "ownership": {
         "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -1781,7 +1898,7 @@
         "price": 0.01,
         "attunement": 0,
         "equipped": false,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
         "activation": {
           "type": "action",
@@ -1838,8 +1955,7 @@
           "dc": null,
           "scaling": "spell"
         },
-        "consumableType": "trinket",
-        "attuned": false
+        "consumableType": "trinket"
       },
       "sort": 1900000,
       "flags": {},
@@ -1848,6 +1964,14 @@
       "folder": null,
       "ownership": {
         "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -1866,9 +1990,8 @@
         "price": 0.5,
         "attunement": 0,
         "equipped": false,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
-        "attuned": false,
         "damage": {
           "parts": []
         }
@@ -1880,6 +2003,14 @@
       "folder": null,
       "ownership": {
         "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -1898,7 +2029,7 @@
         "price": 1,
         "attunement": 0,
         "equipped": false,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
         "activation": {
           "type": "action",
@@ -1950,8 +2081,7 @@
           "dc": 17,
           "scaling": "flat"
         },
-        "consumableType": "trinket",
-        "attuned": false
+        "consumableType": "trinket"
       },
       "sort": 1000000,
       "flags": {},
@@ -1960,6 +2090,14 @@
       "folder": null,
       "ownership": {
         "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -2055,6 +2193,14 @@
       "folder": null,
       "ownership": {
         "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -2130,6 +2276,14 @@
       "folder": null,
       "ownership": {
         "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -2224,6 +2378,14 @@
       "folder": null,
       "ownership": {
         "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -2319,6 +2481,14 @@
       "folder": null,
       "ownership": {
         "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -2389,11 +2559,19 @@
       },
       "sort": 5525000,
       "flags": {},
-      "img": "systems/dnd5e/icons/spells/lightning-jade-1.jpg",
+      "img": "icons/magic/lightning/bolt-forked-teal.webp",
       "effects": [],
       "folder": null,
       "ownership": {
         "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -2464,11 +2642,19 @@
       },
       "sort": 5450000,
       "flags": {},
-      "img": "systems/dnd5e/icons/spells/lightning-jade-2.jpg",
+      "img": "icons/magic/lightning/bolt-forked-large-teal.webp",
       "effects": [],
       "folder": null,
       "ownership": {
         "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -2794,6 +2980,14 @@
         "core": {
           "sourceId": "Compendium.dnd5e.classes.6VoZrWxhOEKGYhnq"
         }
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -2867,14 +3061,21 @@
           "_id": "R5ro4AuNjcdWD56O",
           "changes": [
             {
-              "key": "data.attributes.ac.calc",
+              "key": "system.attributes.ac.calc",
               "mode": 5,
-              "value": "unarmoredMonk"
+              "value": "unarmoredMonk",
+              "priority": null
             }
           ],
           "disabled": false,
           "duration": {
-            "startTime": null
+            "startTime": null,
+            "seconds": null,
+            "combat": null,
+            "rounds": null,
+            "turns": null,
+            "startRound": null,
+            "startTurn": null
           },
           "icon": "icons/magic/control/silhouette-hold-change-blue.webp",
           "label": "Unarmored Defense",
@@ -2894,6 +3095,14 @@
           "sourceId": "Compendium.dnd5e.classfeatures.UAvV7N7T4zJhxdfI",
           "advancementOrigin": "nkdcq1w0tirh8oq1.lyabhwu4tbop4wh7"
         }
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -2973,6 +3182,14 @@
           "sourceId": "Compendium.dnd5e.classfeatures.l50hjTxO2r0iecKw",
           "advancementOrigin": "nkdcq1w0tirh8oq1.lyabhwu4tbop4wh7"
         }
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -3090,6 +3307,14 @@
           "sourceId": "Compendium.dnd5e.classfeatures.eGxoNmSMWKNzChCO",
           "advancementOrigin": "nkdcq1w0tirh8oq1.lyabhwu4tbop4wh7"
         }
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     }
   ],
@@ -3098,14 +3323,21 @@
       "_id": "R5ro4AuNjcdWD56O",
       "changes": [
         {
-          "key": "data.attributes.ac.calc",
+          "key": "system.attributes.ac.calc",
           "mode": 5,
-          "value": "unarmoredMonk"
+          "value": "unarmoredMonk",
+          "priority": null
         }
       ],
       "disabled": false,
       "duration": {
-        "startTime": 0
+        "startTime": 0,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
       },
       "icon": "icons/magic/control/silhouette-hold-change-blue.webp",
       "label": "Unarmored Defense",
@@ -3125,5 +3357,13 @@
       "halflingLucky": true
     }
   },
-  "_id": "125qFnXvT9z0iOic"
+  "_id": "125qFnXvT9z0iOic",
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.0.0",
+    "coreVersion": "10.279",
+    "createdTime": 1661787232144,
+    "modifiedTime": 1661878142161,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  }
 }

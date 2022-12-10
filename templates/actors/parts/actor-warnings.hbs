@@ -1,5 +1,9 @@
 <ol class="warnings">
 {{#each warnings}}
-    <li class="notification warning">{{localize this}}</li>
+  <li class="notification {{this.type}}">
+    {{#if this.link}}<a data-target="{{this.link}}">{{/if}}
+    {{this.message}}
+    {{#if this.link}}</a>{{/if}}
+  </li>
 {{/each}}
 </ol>

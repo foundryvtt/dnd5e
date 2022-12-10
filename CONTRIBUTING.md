@@ -21,7 +21,7 @@ Runs all relevant build scripts:
 - Converts LESS -> CSS
 - Converts JSON -> DB (compendia)
 
-### `npm run build:css` / `gulp css`
+### `npm run build:css` / `gulp buildCSS`
 
 Converts the LESS in `./less` to the final `dnd5e.css`.
 

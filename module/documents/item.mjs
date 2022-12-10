@@ -639,15 +639,50 @@ export default class Item5e extends Item {
     if ( !uses?.max ) return;
     let max = uses.max;
     if ( this.isOwned && !Number.isNumeric(max) ) {
+      const property = game.i18n.localize("DND5E.UsesMax");
       try {
         const rollData = this.actor.getRollData({ deterministic: true });
-        max = Roll.safeEval(Roll.replaceFormulaData(max, rollData, {missing: 0, warn: true}));
+        max = Roll.safeEval(this.replaceFormulaData(max, rollData, { property }));
       } catch(e) {
-        console.error("Problem preparing Max uses for", this.name, e);
+        const message = game.i18n.format("DND5E.FormulaMalformedError", { property, name: this.name });
+        this.actor._preparationWarnings.push({ message, link: this.uuid, type: "error" });
+        console.error(message, e);
         return;
       }
     }
     uses.max = Number(max);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Replace referenced data attributes in the roll formula with values from the provided data.
+   * If the attribute is not found in the provided data, display a warning on the actor.
+   * @param {string} formula           The original formula within which to replace.
+   * @param {object} data              The data object which provides replacements.
+   * @param {object} options
+   * @param {string} options.property  Name of the property to which this formula belongs.
+   * @returns {string}                 Formula with replaced data.
+   */
+  replaceFormulaData(formula, data, { property }) {
+    const dataRgx = new RegExp(/@([a-z.0-9_-]+)/gi);
+    const missingReferences = new Set();
+    formula = formula.replace(dataRgx, (match, term) => {
+      let value = foundry.utils.getProperty(data, term);
+      if ( value == null ) {
+        missingReferences.add(match);
+        return "0";
+      }
+      return String(value).trim();
+    });
+    if ( (missingReferences.size > 0) && this.actor ) {
+      const listFormatter = new Intl.ListFormat(game.i18n.lang, { style: "long", type: "conjunction" });
+      const message = game.i18n.format("DND5E.FormulaMissingReferenceWarn", {
+        property, name: this.name, references: listFormatter.format(missingReferences)
+      });
+      this.actor._preparationWarnings.push({ message, link: this.uuid, type: "warning" });
+    }
+    return formula;
   }
 
   /* -------------------------------------------- */
@@ -756,6 +791,7 @@ export default class Item5e extends Item {
       if ( upcastLevel && (upcastLevel !== is.level) ) {
         item = item.clone({"system.level": upcastLevel}, {keepId: true});
         item.prepareData();
+        item.prepareFinalAttributes();
       }
     }
 
@@ -798,23 +834,26 @@ export default class Item5e extends Item {
     if ( resourceUpdates.length ) await this.actor.updateEmbeddedDocuments("Item", resourceUpdates);
 
     // Prepare card data & display it if options.createMessage is true
-    const cardData = item.displayCard(options);
+    const cardData = await item.displayCard(options);
 
     // Initiate measured template creation
+    let templates;
     if ( config.createMeasuredTemplate ) {
-      const template = dnd5e.canvas.AbilityTemplate.fromItem(item);
-      if ( template ) await template.drawPreview();
+      try {
+        templates = await (dnd5e.canvas.AbilityTemplate.fromItem(item))?.drawPreview();
+      } catch(err) {}
     }
 
     /**
      * A hook event that fires when an item is used, after the measured template has been created if one is needed.
      * @function dnd5e.useItem
      * @memberof hookEvents
-     * @param {Item5e} item                  Item being used.
-     * @param {ItemUseConfiguration} config  Configuration data for the roll.
-     * @param {ItemUseOptions} options       Additional options for configuring item usage.
+     * @param {Item5e} item                                Item being used.
+     * @param {ItemUseConfiguration} config                Configuration data for the roll.
+     * @param {ItemUseOptions} options                     Additional options for configuring item usage.
+     * @param {MeasuredTemplateDocument[]|null} templates  The measured templates if they were created.
      */
-    Hooks.callAll("dnd5e.useItem", item, config, options);
+    Hooks.callAll("dnd5e.useItem", item, config, options, templates ?? null);
 
     return cardData;
   }
@@ -1067,9 +1106,9 @@ export default class Item5e extends Item {
      * A hook event that fires after an item chat card is created.
      * @function dnd5e.displayCard
      * @memberof hookEvents
-     * @param {Item5e} item         Item for which the chat card is being displayed.
-     * @param {ChatMessage|object}  The created ChatMessage instance or ChatMessageData depending on whether
-     *                              options.createMessage was set to `true`.
+     * @param {Item5e} item              Item for which the chat card is being displayed.
+     * @param {ChatMessage|object} card  The created ChatMessage instance or ChatMessageData depending on whether
+     *                                   options.createMessage was set to `true`.
      */
     Hooks.callAll("dnd5e.displayCard", this, card);
 
@@ -1090,7 +1129,11 @@ export default class Item5e extends Item {
     const labels = this.labels;
 
     // Rich text description
-    data.description.value = await TextEditor.enrichHTML(data.description.value, {async: true, ...htmlOptions});
+    data.description.value = await TextEditor.enrichHTML(data.description.value, {
+      async: true,
+      relativeTo: this,
+      ...htmlOptions
+    });
 
     // Item type specific properties
     const props = [];
@@ -1167,7 +1210,7 @@ export default class Item5e extends Item {
     props.push(
       CONFIG.DND5E.equipmentTypes[data.armor.type],
       labels.armor || null,
-      data.stealth.value ? game.i18n.localize("DND5E.StealthDisadvantage") : null
+      data.stealth ? game.i18n.localize("DND5E.StealthDisadvantage") : null
     );
   }
 
@@ -1274,7 +1317,7 @@ export default class Item5e extends Item {
     const consume = this.system.consume;
     if ( consume?.type === "ammo" ) {
       ammo = this.actor.items.get(consume.target);
-      if ( ammo?.data ) {
+      if ( ammo?.system ) {
         const q = ammo.system.quantity;
         const consumeAmount = consume.amount ?? 0;
         if ( q && (q - consumeAmount >= 0) ) {
@@ -1578,8 +1621,8 @@ export default class Item5e extends Item {
      * A hook event that fires after a formula has been rolled for an Item.
      * @function dnd5e.rollFormula
      * @memberof hookEvents
-     * @param {Item5e} item           Item for which the roll was performed.
-     * @param {D20Roll} roll          The resulting roll.
+     * @param {Item5e} item  Item for which the roll was performed.
+     * @param {Roll} roll    The resulting roll.
      */
     Hooks.callAll("dnd5e.rollFormula", this, roll);
 
@@ -1629,12 +1672,12 @@ export default class Item5e extends Item {
     }
 
     /**
-     * A hook event that fires after the Item has rolled to recharge.
+     * A hook event that fires after the Item has rolled to recharge, but before any changes have been performed.
      * @function dnd5e.rollRecharge
      * @memberof hookEvents
-     * @param {Item5e} item           Item for which the roll was performed.
-     * @param {D20Roll} roll          The resulting roll.
-     * @returns {boolean}             Explicitly return false to prevent the item from being recharged.
+     * @param {Item5e} item  Item for which the roll was performed.
+     * @param {Roll} roll    The resulting roll.
+     * @returns {boolean}    Explicitly return false to prevent the item from being recharged.
      */
     if ( Hooks.call("dnd5e.rollRecharge", this, roll) === false ) return roll;
 
@@ -1920,6 +1963,10 @@ export default class Item5e extends Item {
     const Advancement = dnd5e.advancement.types[`${type}Advancement`];
     if ( !Advancement ) throw new Error(`${type}Advancement not found in dnd5e.advancement.types`);
     data = foundry.utils.mergeObject(Advancement.defaultData, data);
+
+    if ( !Advancement.metadata.validItemTypes.has(this.type) || !Advancement.availableForItem(this) ) {
+      throw new Error(`${type} advancement cannot be added to ${this.name}`);
+    }
 
     const advancement = this.toObject().system.advancement;
     if ( !data._id ) data._id = foundry.utils.randomID();

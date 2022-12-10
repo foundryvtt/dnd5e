@@ -40,7 +40,8 @@
     "uses": {
       "value": 20,
       "max": 20,
-      "per": "charges"
+      "per": "charges",
+      "recovery": "2d8 + 4"
     },
     "consume": {
       "type": "",
@@ -80,6 +81,7 @@
       "conditions": ""
     },
     "weaponType": "simpleM",
+    "baseItem": "",
     "properties": {
       "amm": false,
       "hvy": false,
@@ -107,20 +109,28 @@
       "_id": "313kehq7ifkqiz2u",
       "changes": [
         {
-          "key": "data.attributes.ac.bonus",
+          "key": "system.attributes.ac.bonus",
           "mode": 2,
-          "value": "2"
+          "value": "2",
+          "priority": null
         }
       ],
       "disabled": false,
       "duration": {
-        "startTime": null
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
       },
       "icon": "icons/weapons/staves/staff-skull-brown.webp",
       "label": "+2 to AC",
       "origin": "Compendium.dnd5e.items.eM5gEe4SEOvA2Y9t",
       "transfer": true,
-      "flags": {}
+      "flags": {},
+      "tint": null
     }
   ],
   "folder": null,
@@ -128,5 +138,13 @@
   "ownership": {
     "default": 0
   },
-  "flags": {}
+  "flags": {},
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.0.2",
+    "coreVersion": "10.286",
+    "createdTime": 1661787233783,
+    "modifiedTime": 1663775408715,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  }
 }

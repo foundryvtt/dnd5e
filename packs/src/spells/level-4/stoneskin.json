@@ -23,6 +23,7 @@
     },
     "target": {
       "value": 1,
+      "width": null,
       "units": "",
       "type": "creature"
     },
@@ -33,8 +34,13 @@
     },
     "uses": {
       "value": 0,
-      "max": 0,
+      "max": "0",
       "per": ""
+    },
+    "consume": {
+      "type": "",
+      "target": "",
+      "amount": null
     },
     "ability": "",
     "actionType": "util",
@@ -53,6 +59,7 @@
     "save": {
       "ability": "",
       "dc": null,
+      "scaling": "spell",
       "value": ""
     },
     "level": 4,
@@ -83,5 +90,60 @@
   "sort": 100001,
   "flags": {},
   "img": "icons/magic/defensive/shield-barrier-flaming-diamond-orange.webp",
-  "effects": []
+  "effects": [
+    {
+      "label": "Stoneskin",
+      "icon": "icons/magic/defensive/shield-barrier-flaming-diamond-orange.webp",
+      "origin": "Compendium.dnd5e.spells.ReMbjfeOKoSj3O79",
+      "duration": {
+        "startTime": null,
+        "seconds": 3600,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "disabled": true,
+      "_id": "cSVCA9h5OEo5lfBE",
+      "changes": [
+        {
+          "key": "system.traits.dr.value",
+          "mode": 2,
+          "value": "bludgeoning",
+          "priority": null
+        },
+        {
+          "key": "system.traits.dr.value",
+          "mode": 2,
+          "value": "piercing",
+          "priority": null
+        },
+        {
+          "key": "system.traits.dr.value",
+          "mode": 2,
+          "value": "slashing",
+          "priority": null
+        },
+        {
+          "key": "system.traits.dr.bypasses",
+          "mode": 2,
+          "value": "mgc",
+          "priority": null
+        }
+      ],
+      "tint": null,
+      "transfer": true,
+      "flags": {}
+    }
+  ],
+  "folder": null,
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.0.1",
+    "coreVersion": "10.284",
+    "createdTime": 1661787234137,
+    "modifiedTime": 1662079772208,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  }
 }

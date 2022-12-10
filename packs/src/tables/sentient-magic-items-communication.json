@@ -1,0 +1,65 @@
+{
+  "name": "Sentient Magic Items Communication",
+  "img": "icons/weapons/polearms/spear-flared-silver-pink.webp",
+  "description": "",
+  "results": [
+    {
+      "type": 0,
+      "weight": 1,
+      "range": [
+        1,
+        60
+      ],
+      "drawn": false,
+      "documentCollection": "",
+      "_id": "fHUcqEyH5hT8iqVk",
+      "text": "The item communicates by transmitting emotion to the creature carrying or wielding it.",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {}
+    },
+    {
+      "type": 0,
+      "weight": 1,
+      "range": [
+        61,
+        90
+      ],
+      "drawn": false,
+      "documentCollection": "",
+      "_id": "gukhzxpdk9xa4Ewy",
+      "text": "The item can speak, read, and understand one or more languages.",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {}
+    },
+    {
+      "type": 0,
+      "weight": 1,
+      "range": [
+        91,
+        100
+      ],
+      "drawn": false,
+      "documentCollection": "",
+      "_id": "PneqV9OL9QdLzSZR",
+      "text": "The item can speak, read, and understand one or more languages. In addition, the item can communicate telepathically with any character that carries or wields it.",
+      "img": "icons/svg/d20-black.svg",
+      "documentId": null,
+      "flags": {}
+    }
+  ],
+  "formula": "1d100",
+  "replacement": true,
+  "displayRoll": true,
+  "flags": {},
+  "_id": "BHckoLKDwoL9d5p3",
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.0.1",
+    "coreVersion": "10.284",
+    "createdTime": 1662769053829,
+    "modifiedTime": 1662769206967,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  }
+}

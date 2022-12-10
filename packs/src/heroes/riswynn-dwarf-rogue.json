@@ -579,29 +579,10 @@
     "flags": {},
     "name": "Riswynn",
     "displayName": 30,
-    "img": "systems/dnd5e/tokens/heroes/RogueHalfling.webp",
-    "tint": null,
     "width": 1,
     "height": 1,
-    "scale": 1,
-    "mirrorX": false,
-    "mirrorY": false,
     "lockRotation": false,
     "rotation": 0,
-    "vision": true,
-    "dimSight": 30,
-    "brightSight": 0,
-    "dimLight": 0,
-    "brightLight": 0,
-    "sightAngle": 0,
-    "lightAngle": 0,
-    "lightColor": null,
-    "lightAlpha": 1,
-    "lightAnimation": {
-      "speed": 5,
-      "intensity": 5
-    },
-    "actorId": "u1AgS9XSMjfuWKkz",
     "actorLink": true,
     "disposition": 1,
     "displayBars": 40,
@@ -614,12 +595,11 @@
     "randomImg": false,
     "alpha": 1,
     "light": {
-      "alpha": 0.5,
-      "angle": 0,
+      "alpha": 1,
+      "angle": 360,
       "bright": 0,
       "coloration": 1,
       "dim": 0,
-      "gradual": true,
       "luminosity": 0.5,
       "saturation": 0,
       "contrast": 0,
@@ -627,13 +607,37 @@
       "animation": {
         "speed": 5,
         "intensity": 5,
+        "type": null,
         "reverse": false
       },
       "darkness": {
         "min": 0,
         "max": 1
-      }
-    }
+      },
+      "color": null,
+      "attenuation": 0.5
+    },
+    "texture": {
+      "src": "systems/dnd5e/tokens/heroes/RogueHalfling.webp",
+      "tint": null,
+      "scaleX": 1,
+      "scaleY": 1,
+      "offsetX": 0,
+      "offsetY": 0,
+      "rotation": 0
+    },
+    "sight": {
+      "angle": 360,
+      "enabled": true,
+      "range": 30,
+      "brightness": 0,
+      "visionMode": "basic",
+      "color": null,
+      "attenuation": 0.1,
+      "saturation": 0,
+      "contrast": 0
+    },
+    "detectionModes": []
   },
   "items": [
     {
@@ -729,6 +733,14 @@
       "folder": null,
       "ownership": {
         "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -747,7 +759,7 @@
         "price": 15,
         "attunement": 0,
         "equipped": false,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
         "activation": {
           "type": "none",
@@ -816,7 +828,6 @@
         "strength": 0,
         "stealth": false,
         "proficient": false,
-        "attuned": false,
         "armorType": {
           "value": "",
           "_deprecated": true
@@ -832,6 +843,14 @@
       "folder": null,
       "ownership": {
         "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -935,8 +954,7 @@
           "mgc": false,
           "sil": false
         },
-        "proficient": true,
-        "attuned": false
+        "proficient": true
       },
       "sort": 500000,
       "flags": {},
@@ -945,6 +963,14 @@
       "folder": null,
       "ownership": {
         "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -963,7 +989,7 @@
         "price": 0.05,
         "attunement": 0,
         "equipped": true,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
         "activation": {
           "type": "action",
@@ -1021,7 +1047,6 @@
           "scaling": "spell"
         },
         "consumableType": "ammo",
-        "attuned": false,
         "attributes": {
           "spelldc": 10
         }
@@ -1033,6 +1058,14 @@
       "folder": null,
       "ownership": {
         "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -1051,7 +1084,7 @@
         "price": 25,
         "attunement": 0,
         "equipped": true,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
         "activation": {
           "type": "action",
@@ -1133,8 +1166,7 @@
           "ver": false,
           "lod": false
         },
-        "proficient": true,
-        "attuned": false
+        "proficient": true
       },
       "sort": 2600001,
       "flags": {},
@@ -1143,6 +1175,14 @@
       "folder": null,
       "ownership": {
         "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -1161,7 +1201,7 @@
         "price": 2,
         "attunement": 0,
         "equipped": false,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
         "activation": {
           "type": "action",
@@ -1243,8 +1283,7 @@
           "two": false,
           "ver": false
         },
-        "proficient": true,
-        "attuned": false
+        "proficient": true
       },
       "sort": 2000000,
       "flags": {},
@@ -1253,6 +1292,14 @@
       "folder": null,
       "ownership": {
         "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -1271,7 +1318,7 @@
         "price": 10,
         "attunement": 0,
         "equipped": true,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
         "activation": {
           "type": "",
@@ -1339,8 +1386,7 @@
         },
         "strength": null,
         "stealth": false,
-        "proficient": true,
-        "attuned": false
+        "proficient": true
       },
       "sort": 200000,
       "flags": {},
@@ -1349,6 +1395,14 @@
       "folder": null,
       "ownership": {
         "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -1367,7 +1421,7 @@
         "price": 25,
         "attunement": 0,
         "equipped": false,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
         "toolType": "",
         "baseItem": "",
@@ -1375,7 +1429,6 @@
         "chatFlavor": "",
         "proficient": 1,
         "bonus": "",
-        "attuned": false,
         "damage": {
           "parts": []
         }
@@ -1387,6 +1440,14 @@
       "folder": null,
       "ownership": {
         "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -1405,7 +1466,7 @@
         "price": 2,
         "attunement": 0,
         "equipped": false,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
         "capacity": {
           "type": "weight",
@@ -1419,7 +1480,6 @@
           "gp": 0,
           "pp": 0
         },
-        "attuned": false,
         "damage": {
           "parts": []
         }
@@ -1431,6 +1491,14 @@
       "folder": null,
       "ownership": {
         "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -1449,7 +1517,7 @@
         "price": 0.5,
         "attunement": 0,
         "equipped": false,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
         "capacity": {
           "type": "weight",
@@ -1463,7 +1531,6 @@
           "gp": 0,
           "pp": 0
         },
-        "attuned": false,
         "damage": {
           "parts": []
         }
@@ -1475,6 +1542,14 @@
       "folder": null,
       "ownership": {
         "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -1493,7 +1568,7 @@
         "price": 1,
         "attunement": 0,
         "equipped": true,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
         "capacity": {
           "type": "items",
@@ -1507,7 +1582,6 @@
           "gp": 0,
           "pp": 0
         },
-        "attuned": false,
         "damage": {
           "parts": []
         }
@@ -1519,6 +1593,14 @@
       "folder": null,
       "ownership": {
         "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -1537,9 +1619,8 @@
         "price": 1,
         "attunement": 0,
         "equipped": false,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
-        "attuned": false,
         "damage": {
           "parts": []
         }
@@ -1551,6 +1632,14 @@
       "folder": null,
       "ownership": {
         "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -1569,7 +1658,7 @@
         "price": 1,
         "attunement": 0,
         "equipped": false,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
         "activation": {
           "type": "action",
@@ -1621,8 +1710,7 @@
           "dc": 17,
           "scaling": "flat"
         },
-        "consumableType": "trinket",
-        "attuned": false
+        "consumableType": "trinket"
       },
       "sort": 4000000,
       "flags": {},
@@ -1631,6 +1719,14 @@
       "folder": null,
       "ownership": {
         "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -1649,7 +1745,7 @@
         "price": 0.05,
         "attunement": 0,
         "equipped": false,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
         "activation": {
           "type": "action",
@@ -1701,8 +1797,7 @@
           "dc": null,
           "scaling": "spell"
         },
-        "consumableType": "trinket",
-        "attuned": false
+        "consumableType": "trinket"
       },
       "sort": 4300000,
       "flags": {},
@@ -1711,6 +1806,14 @@
       "folder": null,
       "ownership": {
         "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -1729,7 +1832,7 @@
         "price": 0.5,
         "attunement": 0,
         "equipped": false,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
         "activation": {
           "type": "action",
@@ -1781,8 +1884,7 @@
           "dc": null,
           "scaling": "spell"
         },
-        "consumableType": "food",
-        "attuned": false
+        "consumableType": "food"
       },
       "sort": 1800000,
       "flags": {},
@@ -1791,6 +1893,14 @@
       "folder": null,
       "ownership": {
         "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -1809,9 +1919,8 @@
         "price": 0.5,
         "attunement": 0,
         "equipped": false,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
-        "attuned": false,
         "damage": {
           "parts": []
         }
@@ -1823,6 +1932,14 @@
       "folder": null,
       "ownership": {
         "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -1841,7 +1958,7 @@
         "price": 0.01,
         "attunement": 0,
         "equipped": false,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
         "activation": {
           "type": "action",
@@ -1898,8 +2015,7 @@
           "dc": null,
           "scaling": "spell"
         },
-        "consumableType": "trinket",
-        "attuned": false
+        "consumableType": "trinket"
       },
       "sort": 4700000,
       "flags": {},
@@ -1908,6 +2024,14 @@
       "folder": null,
       "ownership": {
         "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -1926,7 +2050,7 @@
         "price": 0.2,
         "attunement": 0,
         "equipped": false,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
         "activation": {
           "type": "action",
@@ -1978,8 +2102,7 @@
           "dc": null,
           "scaling": "spell"
         },
-        "consumableType": "food",
-        "attuned": false
+        "consumableType": "food"
       },
       "sort": 1900000,
       "flags": {},
@@ -1988,6 +2111,14 @@
       "folder": null,
       "ownership": {
         "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -2006,9 +2137,8 @@
         "price": 0.2,
         "attunement": 0,
         "equipped": false,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
-        "attuned": false,
         "damage": {
           "parts": []
         }
@@ -2020,6 +2150,14 @@
       "folder": null,
       "ownership": {
         "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -2038,9 +2176,8 @@
         "price": 1,
         "attunement": 0,
         "equipped": false,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
-        "attuned": false,
         "damage": {
           "parts": []
         }
@@ -2052,6 +2189,14 @@
       "folder": null,
       "ownership": {
         "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -2070,7 +2215,7 @@
         "price": 2,
         "attunement": 0,
         "equipped": false,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
         "activation": {
           "type": "action",
@@ -2152,8 +2297,7 @@
           "two": false,
           "ver": false
         },
-        "proficient": true,
-        "attuned": false
+        "proficient": true
       },
       "sort": 2000000,
       "flags": {},
@@ -2162,6 +2306,14 @@
       "folder": null,
       "ownership": {
         "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -2180,9 +2332,8 @@
         "price": 2,
         "attunement": 0,
         "equipped": false,
-        "rarity": "Common",
-        "identified": true,
-        "attuned": false
+        "rarity": "common",
+        "identified": true
       },
       "sort": 100001,
       "flags": {},
@@ -2191,6 +2342,14 @@
       "folder": null,
       "ownership": {
         "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -2286,6 +2445,14 @@
       "folder": null,
       "ownership": {
         "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -2380,6 +2547,14 @@
       "folder": null,
       "ownership": {
         "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -2450,11 +2625,19 @@
       },
       "sort": 5025001,
       "flags": {},
-      "img": "systems/dnd5e/icons/spells/protect-magenta-1.jpg",
+      "img": "icons/magic/defensive/shield-barrier-glowing-triangle-magenta.webp",
       "effects": [],
       "folder": null,
       "ownership": {
         "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -2525,11 +2708,19 @@
       },
       "sort": 4850001,
       "flags": {},
-      "img": "systems/dnd5e/icons/spells/protect-eerie-1.jpg",
+      "img": "icons/magic/defensive/shield-barrier-glowing-triangle-teal-purple.webp",
       "effects": [],
       "folder": null,
       "ownership": {
         "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -2803,6 +2994,14 @@
         "core": {
           "sourceId": "Compendium.dnd5e.classes.xEb8jmA5HlNs7xTF"
         }
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -2882,6 +3081,14 @@
           "sourceId": "Compendium.dnd5e.classfeatures.3sYPftQKnbbVnHrh",
           "advancementOrigin": "h6m126ftvfila0o3.fib976ht1gf1ntxv"
         }
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -2966,6 +3173,14 @@
           "sourceId": "Compendium.dnd5e.classfeatures.DPN2Gfk8yi1Z5wp7",
           "advancementOrigin": "h6m126ftvfila0o3.fib976ht1gf1ntxv"
         }
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -3039,14 +3254,21 @@
           "_id": "VN7GnGzVwmBM7YCU",
           "changes": [
             {
-              "key": "data.traits.languages.value",
+              "key": "system.traits.languages.value",
               "mode": 2,
-              "value": "cant"
+              "value": "cant",
+              "priority": null
             }
           ],
           "disabled": false,
           "duration": {
-            "startTime": null
+            "startTime": null,
+            "seconds": null,
+            "combat": null,
+            "rounds": null,
+            "turns": null,
+            "startRound": null,
+            "startTurn": null
           },
           "icon": "icons/sundries/documents/document-torn-diagram-tan.webp",
           "label": "Thieves' Cant",
@@ -3066,6 +3288,14 @@
           "sourceId": "Compendium.dnd5e.classfeatures.ohwfuwnvuoBWlSQr",
           "advancementOrigin": "h6m126ftvfila0o3.fib976ht1gf1ntxv"
         }
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     }
   ],
@@ -3074,14 +3304,21 @@
       "_id": "VN7GnGzVwmBM7YCU",
       "changes": [
         {
-          "key": "data.traits.languages.value",
+          "key": "system.traits.languages.value",
           "mode": 2,
-          "value": "cant"
+          "value": "cant",
+          "priority": null
         }
       ],
       "disabled": false,
       "duration": {
-        "startTime": 0
+        "startTime": 0,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
       },
       "icon": "icons/sundries/documents/document-torn-diagram-tan.webp",
       "label": "Thieves' Cant",
@@ -3097,5 +3334,13 @@
     "default": 0
   },
   "flags": {},
-  "_id": "bzlxBO5km3zCQA8G"
+  "_id": "bzlxBO5km3zCQA8G",
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.0.0",
+    "coreVersion": "10.279",
+    "createdTime": 1661787232177,
+    "modifiedTime": 1661878142475,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  }
 }

@@ -543,47 +543,27 @@
     "name": "Deep Gnome",
     "displayName": 20,
     "actorLink": false,
-    "tint": null,
     "width": 1,
     "height": 1,
-    "scale": 1,
-    "mirrorX": false,
-    "mirrorY": false,
     "lockRotation": false,
     "rotation": 0,
-    "vision": false,
-    "dimSight": 120,
-    "brightSight": 0,
-    "dimLight": 0,
-    "brightLight": 0,
-    "sightAngle": 0,
-    "lightAngle": 0,
-    "lightColor": null,
-    "lightAlpha": 1,
-    "lightAnimation": {
-      "speed": 5,
-      "intensity": 5
-    },
     "disposition": -1,
     "displayBars": 40,
     "bar1": {
       "attribute": "attributes.hp"
     },
     "bar2": {
-      "attribute": ""
+      "attribute": null
     },
     "flags": {},
     "randomImg": false,
-    "img": "systems/dnd5e/tokens/humanoid/DeepGnome.webp",
-    "actorId": "ZM1P6LoYSwMiIJN9",
     "alpha": 1,
     "light": {
-      "alpha": 0.5,
-      "angle": 0,
+      "alpha": 1,
+      "angle": 360,
       "bright": 0,
       "coloration": 1,
       "dim": 0,
-      "gradual": true,
       "luminosity": 0.5,
       "saturation": 0,
       "contrast": 0,
@@ -591,13 +571,37 @@
       "animation": {
         "speed": 5,
         "intensity": 5,
+        "type": null,
         "reverse": false
       },
       "darkness": {
         "min": 0,
         "max": 1
-      }
-    }
+      },
+      "color": null,
+      "attenuation": 0.5
+    },
+    "texture": {
+      "src": "systems/dnd5e/tokens/humanoid/DeepGnome.webp",
+      "tint": null,
+      "scaleX": 1,
+      "scaleY": 1,
+      "offsetX": 0,
+      "offsetY": 0,
+      "rotation": 0
+    },
+    "sight": {
+      "angle": 360,
+      "enabled": false,
+      "range": 120,
+      "brightness": 0,
+      "visionMode": "basic",
+      "color": null,
+      "attenuation": 0.1,
+      "saturation": 0,
+      "contrast": 0
+    },
+    "detectionModes": []
   },
   "items": [
     {
@@ -617,7 +621,7 @@
         "price": "50",
         "attunement": 0,
         "equipped": true,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
         "activation": {
           "type": "",
@@ -685,8 +689,7 @@
         },
         "strength": "",
         "stealth": false,
-        "proficient": true,
-        "attuned": false
+        "proficient": true
       },
       "effects": [],
       "folder": null,
@@ -694,7 +697,15 @@
       "ownership": {
         "default": 0
       },
-      "flags": {}
+      "flags": {},
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      }
     },
     {
       "_id": "8Yo6JM2NfjkpC8Hz",
@@ -772,7 +783,15 @@
       "ownership": {
         "default": 0
       },
-      "flags": {}
+      "flags": {},
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      }
     },
     {
       "_id": "JCSej95QR8svWsYz",
@@ -850,7 +869,15 @@
       "ownership": {
         "default": 0
       },
-      "flags": {}
+      "flags": {},
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      }
     },
     {
       "_id": "AqLTSMp6MlcNK666",
@@ -869,7 +896,7 @@
         "price": 5,
         "attunement": 0,
         "equipped": true,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
         "activation": {
           "type": "action",
@@ -952,8 +979,7 @@
           "two": false,
           "ver": false
         },
-        "proficient": true,
-        "attuned": false
+        "proficient": true
       },
       "effects": [],
       "folder": null,
@@ -961,7 +987,15 @@
       "ownership": {
         "default": 0
       },
-      "flags": {}
+      "flags": {},
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      }
     },
     {
       "_id": "pnfC0DIa1eqXGjku",
@@ -1039,405 +1073,14 @@
       "ownership": {
         "default": 0
       },
-      "flags": {}
-    },
-    {
-      "_id": "8kDrJUpRr23a7B04",
-      "name": "Nondetection",
-      "type": "spell",
-      "img": "systems/dnd5e/icons/spells/evil-eye-red-2.jpg",
-      "system": {
-        "description": {
-          "value": "<p>For the Duration, you hide a target that you touch from Divination magic. The target can be a willing creature or a place or an object no larger than 10 feet in any dimension. The target can't be targeted by any divination magic or perceived through magical Scrying sensors.</p>",
-          "chat": "",
-          "unidentified": ""
-        },
-        "source": "PHB pg. 263",
-        "activation": {
-          "type": "action",
-          "cost": 1,
-          "condition": ""
-        },
-        "duration": {
-          "value": 8,
-          "units": "hour"
-        },
-        "target": {
-          "value": 1,
-          "width": null,
-          "units": "",
-          "type": "creature"
-        },
-        "range": {
-          "value": null,
-          "long": null,
-          "units": "touch"
-        },
-        "uses": {
-          "value": 0,
-          "max": 0,
-          "per": ""
-        },
-        "consume": {
-          "type": "",
-          "target": null,
-          "amount": null
-        },
-        "ability": "",
-        "actionType": "util",
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "critical": {
-          "threshold": null,
-          "damage": ""
-        },
-        "damage": {
-          "parts": [],
-          "versatile": "",
-          "value": ""
-        },
-        "formula": "",
-        "save": {
-          "ability": "",
-          "dc": null,
-          "scaling": "spell",
-          "value": ""
-        },
-        "level": 3,
-        "school": "abj",
-        "components": {
-          "value": "",
-          "vocal": true,
-          "somatic": true,
-          "material": false,
-          "ritual": false,
-          "concentration": false
-        },
-        "materials": {
-          "value": "A pinch of diamond dust worth 25 gp sprinkled over the target, which the spell consumes",
-          "consumed": true,
-          "cost": 25,
-          "supply": 0
-        },
-        "preparation": {
-          "mode": "atwill",
-          "prepared": true
-        },
-        "scaling": {
-          "mode": "none",
-          "formula": ""
-        },
-        "attunement": 0
-      },
-      "effects": [],
-      "folder": null,
-      "sort": 100001,
-      "ownership": {
-        "default": 0
-      },
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.dnd5e.spells.aU62xVUBYkAQWIHv"
-        }
-      }
-    },
-    {
-      "_id": "Bq1CUSerPuxoAObn",
-      "name": "Blindness/Deafness",
-      "type": "spell",
-      "img": "systems/dnd5e/icons/spells/evil-eye-red-2.jpg",
-      "system": {
-        "description": {
-          "value": "<p>You can blind or deafen a foe. Choose one creature that you can see within range to make a Constitution saving throw. If it fails, the target is either blinded or deafened (your choice) for the duration. At the end of each of its turns, the target can make a Constitution saving throw. On a success, the spell ends.</p><p><strong>At Higher Levels.</strong> When you cast this spell using a spell slot of 3rd level or higher, you can target one additional creature for each slot level above 2nd.</p>",
-          "chat": "",
-          "unidentified": ""
-        },
-        "source": "PHB pg. 219",
-        "activation": {
-          "type": "action",
-          "cost": 1,
-          "condition": ""
-        },
-        "duration": {
-          "value": 1,
-          "units": "minute"
-        },
-        "target": {
-          "value": 1,
-          "width": null,
-          "units": "",
-          "type": "creature"
-        },
-        "range": {
-          "value": 30,
-          "long": 0,
-          "units": "ft"
-        },
-        "uses": {
-          "value": 1,
-          "max": 1,
-          "per": "day"
-        },
-        "consume": {
-          "type": "",
-          "target": null,
-          "amount": null
-        },
-        "ability": "",
-        "actionType": "save",
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "critical": {
-          "threshold": null,
-          "damage": ""
-        },
-        "damage": {
-          "parts": [],
-          "versatile": "",
-          "value": ""
-        },
-        "formula": "",
-        "save": {
-          "ability": "con",
-          "dc": 11,
-          "scaling": "spell"
-        },
-        "level": 2,
-        "school": "nec",
-        "components": {
-          "value": "",
-          "vocal": true,
-          "somatic": false,
-          "material": false,
-          "ritual": false,
-          "concentration": false
-        },
-        "materials": {
-          "value": "",
-          "consumed": false,
-          "cost": 0,
-          "supply": 0
-        },
-        "preparation": {
-          "mode": "innate",
-          "prepared": true
-        },
-        "scaling": {
-          "mode": "level",
-          "formula": ""
-        },
-        "attunement": 0
-      },
-      "effects": [],
-      "folder": null,
-      "sort": 100001,
-      "ownership": {
-        "default": 0
-      },
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.dnd5e.spells.zwGsAv6kmwzYGhh3"
-        }
-      }
-    },
-    {
-      "_id": "oGw5u15d1SZaw3o0",
-      "name": "Blur",
-      "type": "spell",
-      "img": "systems/dnd5e/icons/spells/air-burst-sky-2.jpg",
-      "system": {
-        "description": {
-          "value": "<p>Your body becomes blurred, shifting and wavering to all who can see you. For the duration, any creature has disadvantage on attack rolls against you. An attacker is immune to this effect if it doesn't rely on sight, as with blindsight, or can see through illusions, as with truesight.</p>",
-          "chat": "",
-          "unidentified": ""
-        },
-        "source": "PHB pg. 219",
-        "activation": {
-          "type": "action",
-          "cost": 1,
-          "condition": ""
-        },
-        "duration": {
-          "value": 1,
-          "units": "minute"
-        },
-        "target": {
-          "value": null,
-          "width": null,
-          "units": null,
-          "type": "self"
-        },
-        "range": {
-          "value": null,
-          "long": null,
-          "units": "self"
-        },
-        "uses": {
-          "value": 1,
-          "max": 1,
-          "per": "day"
-        },
-        "consume": {
-          "type": "",
-          "target": null,
-          "amount": null
-        },
-        "ability": "",
-        "actionType": "util",
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "critical": {
-          "threshold": null,
-          "damage": ""
-        },
-        "damage": {
-          "parts": [],
-          "versatile": "",
-          "value": ""
-        },
-        "formula": "",
-        "save": {
-          "ability": "",
-          "dc": null,
-          "scaling": "spell",
-          "value": ""
-        },
-        "level": 2,
-        "school": "ill",
-        "components": {
-          "value": "",
-          "vocal": true,
-          "somatic": false,
-          "material": false,
-          "ritual": false,
-          "concentration": true
-        },
-        "materials": {
-          "value": "",
-          "consumed": false,
-          "cost": 0,
-          "supply": 0
-        },
-        "preparation": {
-          "mode": "innate",
-          "prepared": true
-        },
-        "scaling": {
-          "mode": "none",
-          "formula": ""
-        },
-        "attunement": 0
-      },
-      "effects": [],
-      "folder": null,
-      "sort": 100001,
-      "ownership": {
-        "default": 0
-      },
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.dnd5e.spells.UDUnlfPsOAbq2RSE"
-        }
-      }
-    },
-    {
-      "_id": "4ParUzoYd3cJTzLr",
-      "name": "Disguise Self",
-      "type": "spell",
-      "img": "systems/dnd5e/icons/spells/wind-grasp-eerie-2.jpg",
-      "system": {
-        "description": {
-          "value": "<p>You make yourself—including your clothing, armor, weapons, and other belongings on your person—look different until the spell ends or until you use your action to dismiss it. You can seem 1 foot shorter or taller and can appear thin, fat, or in between. You can't change your body type, so you must adopt a form that has the same basic arrangement of limbs. Otherwise, the extent of the illusion is up to you.</p><p>The changes wrought by this spell fail to hold up to physical inspection. For example, if you use this spell to add a hat to your outfit, objects pass through the hat, and anyone who touches it would feel nothing or would feel your head and hair. If you use this spell to appear thinner than you are, the hand of someone who reaches out to touch you would bump into you while it was seemingly still in midair.</p><p>To discern that you are disguised, a creature can use its action to inspect your appearance and must succeed on an Intelligence (Investigation) check against your spell save DC.</p>",
-          "chat": "",
-          "unidentified": ""
-        },
-        "source": "PHB pg. 233",
-        "activation": {
-          "type": "action",
-          "cost": 1,
-          "condition": ""
-        },
-        "duration": {
-          "value": 1,
-          "units": "hour"
-        },
-        "target": {
-          "value": null,
-          "width": null,
-          "units": null,
-          "type": "self"
-        },
-        "range": {
-          "value": null,
-          "long": null,
-          "units": "self"
-        },
-        "uses": {
-          "value": 1,
-          "max": 1,
-          "per": "day"
-        },
-        "consume": {
-          "type": "",
-          "target": null,
-          "amount": null
-        },
-        "ability": "",
-        "actionType": "util",
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "critical": {
-          "threshold": null,
-          "damage": ""
-        },
-        "damage": {
-          "parts": [],
-          "versatile": "",
-          "value": ""
-        },
-        "formula": "",
-        "save": {
-          "ability": "",
-          "dc": 11,
-          "scaling": "spell",
-          "value": ""
-        },
-        "level": 1,
-        "school": "ill",
-        "components": {
-          "value": "",
-          "vocal": true,
-          "somatic": true,
-          "material": false,
-          "ritual": false,
-          "concentration": false
-        },
-        "materials": {
-          "value": "",
-          "consumed": false,
-          "cost": 0,
-          "supply": 0
-        },
-        "preparation": {
-          "mode": "innate",
-          "prepared": true
-        },
-        "scaling": {
-          "mode": "none",
-          "formula": ""
-        },
-        "attunement": 0
-      },
-      "effects": [],
-      "folder": null,
-      "sort": 100001,
-      "ownership": {
-        "default": 0
-      },
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.dnd5e.spells.A3q2gTNqG6fvNGrv"
-        }
+      "flags": {},
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -1457,7 +1100,7 @@
         "price": null,
         "attunement": 0,
         "equipped": true,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
         "activation": {
           "type": "action",
@@ -1539,8 +1182,7 @@
           "two": false,
           "ver": false
         },
-        "proficient": true,
-        "attuned": false
+        "proficient": true
       },
       "effects": [],
       "folder": null,
@@ -1548,7 +1190,442 @@
       "ownership": {
         "default": 0
       },
-      "flags": {}
+      "flags": {},
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      }
+    },
+    {
+      "_id": "aU62xVUBYkAQWIHv",
+      "name": "Nondetection",
+      "ownership": {
+        "default": 0
+      },
+      "type": "spell",
+      "system": {
+        "description": {
+          "value": "<p>For the Duration, you hide a target that you touch from Divination magic. The target can be a willing creature or a place or an object no larger than 10 feet in any dimension. The target can't be targeted by any divination magic or perceived through magical Scrying sensors.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "PHB pg. 263",
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": 8,
+          "units": "hour"
+        },
+        "target": {
+          "value": 1,
+          "width": null,
+          "units": "",
+          "type": "creature"
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": "touch"
+        },
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": ""
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null
+        },
+        "ability": "",
+        "actionType": "util",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": "",
+          "value": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell",
+          "value": ""
+        },
+        "level": 3,
+        "school": "abj",
+        "components": {
+          "value": "",
+          "vocal": true,
+          "somatic": true,
+          "material": true,
+          "ritual": false,
+          "concentration": false
+        },
+        "materials": {
+          "value": "A pinch of diamond dust worth 25 gp sprinkled over the target, which the spell consumes",
+          "consumed": true,
+          "cost": 25,
+          "supply": 0
+        },
+        "preparation": {
+          "mode": "atwill",
+          "prepared": true
+        },
+        "scaling": {
+          "mode": "none",
+          "formula": ""
+        }
+      },
+      "sort": 100001,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.aU62xVUBYkAQWIHv"
+        }
+      },
+      "img": "icons/magic/perception/eye-ringed-glow-angry-red.webp",
+      "effects": [],
+      "folder": null,
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.0",
+        "coreVersion": "10.279",
+        "createdTime": 1661787234168,
+        "modifiedTime": 1661791116635,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      }
+    },
+    {
+      "_id": "zwGsAv6kmwzYGhh3",
+      "name": "Blindness/Deafness",
+      "ownership": {
+        "default": 0
+      },
+      "type": "spell",
+      "system": {
+        "description": {
+          "value": "<p>You can blind or deafen a foe. Choose one creature that you can see within range to make a Constitution saving throw. If it fails, the target is either blinded or deafened (your choice) for the duration. At the end of each of its turns, the target can make a Constitution saving throw. On a success, the spell ends.</p><p><strong>At Higher Levels.</strong> When you cast this spell using a spell slot of 3rd level or higher, you can target one additional creature for each slot level above 2nd.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "PHB pg. 219",
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": 1,
+          "units": "minute"
+        },
+        "target": {
+          "value": 1,
+          "width": null,
+          "units": "",
+          "type": "creature"
+        },
+        "range": {
+          "value": 30,
+          "long": 0,
+          "units": "ft"
+        },
+        "uses": {
+          "value": 1,
+          "max": 1,
+          "per": "day"
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null
+        },
+        "ability": "",
+        "actionType": "save",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": "",
+          "value": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "con",
+          "dc": 11,
+          "scaling": "spell"
+        },
+        "level": 2,
+        "school": "nec",
+        "components": {
+          "value": "",
+          "vocal": true,
+          "somatic": false,
+          "material": false,
+          "ritual": false,
+          "concentration": false
+        },
+        "materials": {
+          "value": "",
+          "consumed": false,
+          "cost": 0,
+          "supply": 0
+        },
+        "preparation": {
+          "mode": "innate",
+          "prepared": true
+        },
+        "scaling": {
+          "mode": "level",
+          "formula": ""
+        }
+      },
+      "sort": 100001,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.zwGsAv6kmwzYGhh3"
+        }
+      },
+      "img": "icons/magic/perception/eye-ringed-glow-angry-red.webp",
+      "effects": [],
+      "folder": null,
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.0",
+        "coreVersion": "10.279",
+        "createdTime": 1661787234247,
+        "modifiedTime": 1661791116636,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      }
+    },
+    {
+      "_id": "UDUnlfPsOAbq2RSE",
+      "name": "Blur",
+      "ownership": {
+        "default": 0
+      },
+      "type": "spell",
+      "system": {
+        "description": {
+          "value": "<p>Your body becomes blurred, shifting and wavering to all who can see you. For the duration, any creature has disadvantage on attack rolls against you. An attacker is immune to this effect if it doesn't rely on sight, as with blindsight, or can see through illusions, as with truesight.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "PHB pg. 219",
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": 1,
+          "units": "minute"
+        },
+        "target": {
+          "value": null,
+          "width": null,
+          "units": null,
+          "type": "self"
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": "self"
+        },
+        "uses": {
+          "value": 1,
+          "max": 1,
+          "per": "day"
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null
+        },
+        "ability": "",
+        "actionType": "util",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": "",
+          "value": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell",
+          "value": ""
+        },
+        "level": 2,
+        "school": "ill",
+        "components": {
+          "value": "",
+          "vocal": true,
+          "somatic": false,
+          "material": false,
+          "ritual": false,
+          "concentration": true
+        },
+        "materials": {
+          "value": "",
+          "consumed": false,
+          "cost": 0,
+          "supply": 0
+        },
+        "preparation": {
+          "mode": "innate",
+          "prepared": true
+        },
+        "scaling": {
+          "mode": "none",
+          "formula": ""
+        }
+      },
+      "sort": 100001,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.UDUnlfPsOAbq2RSE"
+        }
+      },
+      "img": "icons/magic/air/air-burst-spiral-blue-gray.webp",
+      "effects": [],
+      "folder": null,
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.0",
+        "coreVersion": "10.279",
+        "createdTime": 1661787234147,
+        "modifiedTime": 1661791116636,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      }
+    },
+    {
+      "_id": "A3q2gTNqG6fvNGrv",
+      "name": "Disguise Self",
+      "ownership": {
+        "default": 0
+      },
+      "type": "spell",
+      "system": {
+        "description": {
+          "value": "<p>You make yourself—including your clothing, armor, weapons, and other belongings on your person—look different until the spell ends or until you use your action to dismiss it. You can seem 1 foot shorter or taller and can appear thin, fat, or in between. You can't change your body type, so you must adopt a form that has the same basic arrangement of limbs. Otherwise, the extent of the illusion is up to you.</p><p>The changes wrought by this spell fail to hold up to physical inspection. For example, if you use this spell to add a hat to your outfit, objects pass through the hat, and anyone who touches it would feel nothing or would feel your head and hair. If you use this spell to appear thinner than you are, the hand of someone who reaches out to touch you would bump into you while it was seemingly still in midair.</p><p>To discern that you are disguised, a creature can use its action to inspect your appearance and must succeed on an Intelligence (Investigation) check against your spell save DC.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "PHB pg. 233",
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": 1,
+          "units": "hour"
+        },
+        "target": {
+          "value": null,
+          "width": null,
+          "units": null,
+          "type": "self"
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": "self"
+        },
+        "uses": {
+          "value": 1,
+          "max": 1,
+          "per": "day"
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null
+        },
+        "ability": "",
+        "actionType": "util",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": "",
+          "value": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": 11,
+          "scaling": "spell",
+          "value": ""
+        },
+        "level": 1,
+        "school": "ill",
+        "components": {
+          "value": "",
+          "vocal": true,
+          "somatic": true,
+          "material": false,
+          "ritual": false,
+          "concentration": false
+        },
+        "materials": {
+          "value": "",
+          "consumed": false,
+          "cost": 0,
+          "supply": 0
+        },
+        "preparation": {
+          "mode": "innate",
+          "prepared": true
+        },
+        "scaling": {
+          "mode": "none",
+          "formula": ""
+        }
+      },
+      "sort": 100001,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.A3q2gTNqG6fvNGrv"
+        }
+      },
+      "img": "icons/magic/control/debuff-energy-hold-teal-blue.webp",
+      "effects": [],
+      "folder": null,
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.0",
+        "coreVersion": "10.279",
+        "createdTime": 1661787234086,
+        "modifiedTime": 1661791116636,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      }
     }
   ],
   "effects": [],
@@ -1557,5 +1634,13 @@
   "ownership": {
     "default": 0
   },
-  "flags": {}
+  "flags": {},
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.0.0",
+    "coreVersion": "10.279",
+    "createdTime": 1661787232890,
+    "modifiedTime": 1661878732722,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  }
 }

@@ -90,20 +90,28 @@
       "_id": "cfwMU7LuOJ619Lny",
       "changes": [
         {
-          "key": "data.attributes.ac.calc",
+          "key": "system.attributes.ac.calc",
           "value": "mage",
-          "mode": 5
+          "mode": 5,
+          "priority": null
         }
       ],
       "disabled": true,
       "duration": {
-        "startTime": null
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
       },
-      "icon": "systems/dnd5e/icons/spells/protect-blue-1.jpg",
+      "icon": "icons/magic/defensive/shield-barrier-glowing-triangle-blue.webp",
       "label": "Mage Armor",
       "origin": "Compendium.dnd5e.spells.CKZTpZlxj7hjjo2H",
       "transfer": true,
-      "flags": {}
+      "flags": {},
+      "tint": null
     }
   ],
   "folder": null,
@@ -111,5 +119,13 @@
   "ownership": {
     "default": 0
   },
-  "flags": {}
+  "flags": {},
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.0.0",
+    "coreVersion": "10.279",
+    "createdTime": 1661787234095,
+    "modifiedTime": 1661787234095,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  }
 }

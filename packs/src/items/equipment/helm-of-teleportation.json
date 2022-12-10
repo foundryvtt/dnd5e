@@ -40,7 +40,8 @@
     "uses": {
       "value": 3,
       "max": 3,
-      "per": "charges"
+      "per": "charges",
+      "recovery": "1d3"
     },
     "consume": {
       "type": "",
@@ -76,6 +77,7 @@
       "dt": null,
       "conditions": ""
     },
+    "baseItem": "",
     "speed": {
       "value": null,
       "conditions": ""
@@ -93,5 +95,13 @@
   "ownership": {
     "default": 0
   },
-  "flags": {}
+  "flags": {},
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.0.2",
+    "coreVersion": "10.286",
+    "createdTime": 1661787233521,
+    "modifiedTime": 1663775408542,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  }
 }

@@ -15,7 +15,7 @@
     "quantity": 1,
     "weight": 0,
     "price": 0,
-    "attuned": false,
+    "attunement": 0,
     "equipped": true,
     "rarity": "",
     "identified": true,
@@ -30,6 +30,7 @@
     },
     "target": {
       "value": 1,
+      "width": null,
       "units": "",
       "type": ""
     },
@@ -76,6 +77,7 @@
       "conditions": ""
     },
     "weaponType": "natural",
+    "baseItem": "",
     "properties": {
       "amm": false,
       "fin": false,
@@ -92,9 +94,20 @@
       "two": false,
       "ver": false
     },
-    "proficient": true
+    "proficient": true,
+    "attuned": false
   },
   "flags": {},
   "img": "icons/creatures/abilities/mouth-teeth-long-red.webp",
-  "effects": []
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.0.0",
+    "coreVersion": "10.279",
+    "createdTime": 1661787234559,
+    "modifiedTime": 1661787234559,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  }
 }

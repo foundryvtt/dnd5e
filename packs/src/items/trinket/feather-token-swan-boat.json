@@ -5,7 +5,7 @@
   "img": "icons/commodities/materials/feather-blue-grey.webp",
   "system": {
     "description": {
-      "value": "<p><em>Wondrous item</em></p>\n<p>This tiny object looks like a feather. Different types of feather tokens exist, each with a different single-use effect. The GM chooses the kind of token or determines it randomly.</p>\n<table>\n<thead>\n<tr>\n<th>d100</th>\n<th>Feather Token</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>01-20</td>\n<td>Anchor</td>\n</tr>\n<tr>\n<td>21-35</td>\n<td>Bird</td>\n</tr>\n<tr>\n<td>36-50</td>\n<td>Fan</td>\n</tr>\n<tr>\n<td>51-65</td>\n<td>Swan boat</td>\n</tr>\n<tr>\n<td>66-90</td>\n<td>Tree</td>\n</tr>\n<tr>\n<td>91-00</td>\n<td>Whip</td>\n</tr>\n</tbody>\n</table>\n<p><strong>Swan Boat.</strong> You can use an action to touch the token to a body of water at least 60 feet in diameter. The token disappears, and a 50-foot-long, 20-foot- wide boat shaped like a swan takes its place. The boat is self-propelled and moves across water at a speed of 6 miles per hour. You can use an action while on the boat to command it to move or to turn up to 90 degrees. The boat can carry up to thirty-two Medium or smaller creatures. A Large creature counts as four Medium creatures, while a Huge creature counts as nine. The boat remains for 24 hours and then disappears. You can dismiss the boat as an action.</p>",
+      "value": "<p><em>Wondrous item</em></p>\n<p>This tiny object looks like a feather. Different types of feather tokens exist, each with a different single-use effect. The GM chooses the kind of token or determines it randomly from the @Compendium[dnd5e.tables.OEdr086W61t1DRJo]{Feather Token} table.</p>\n<p><strong>Swan Boat.</strong> You can use an action to touch the token to a body of water at least 60 feet in diameter. The token disappears, and a 50-foot-long, 20-foot- wide boat shaped like a swan takes its place. The boat is self-propelled and moves across water at a speed of 6 miles per hour. You can use an action while on the boat to command it to move or to turn up to 90 degrees. The boat can carry up to thirty-two Medium or smaller creatures. A Large creature counts as four Medium creatures, while a Huge creature counts as nine. The boat remains for 24 hours and then disappears. You can dismiss the boat as an action.</p>",
       "chat": "",
       "unidentified": ""
     },
@@ -78,5 +78,13 @@
   "ownership": {
     "default": 0
   },
-  "flags": {}
+  "flags": {},
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.0.0",
+    "coreVersion": "10.279",
+    "createdTime": 1661787233679,
+    "modifiedTime": 1661787233679,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  }
 }

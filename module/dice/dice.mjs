@@ -86,14 +86,14 @@ export async function d20Roll({
     const configured = await roll.configureDialog({
       title,
       chooseModifier,
-      defaultRollMode: defaultRollMode,
+      defaultRollMode,
       defaultAction: advantageMode,
       defaultAbility: data?.item?.ability || data?.defaultAbility,
       skillId: messageData["flags.dnd5e.roll"]?.skillId,
       template
     }, dialogOptions);
     if ( configured === null ) return null;
-  }
+  } else roll.options.rollMode ??= defaultRollMode;
 
   // Evaluate the configured roll
   await roll.evaluate({async: true});

@@ -580,29 +580,10 @@
     "flags": {},
     "name": "Akra",
     "displayName": 30,
-    "img": "systems/dnd5e/tokens/heroes/ClericDragonborn.webp",
-    "tint": null,
     "width": 1,
     "height": 1,
-    "scale": 1,
-    "mirrorX": false,
-    "mirrorY": false,
     "lockRotation": false,
     "rotation": 0,
-    "vision": true,
-    "dimSight": 5,
-    "brightSight": 0,
-    "dimLight": 0,
-    "brightLight": 0,
-    "sightAngle": 0,
-    "lightAngle": 0,
-    "lightColor": null,
-    "lightAlpha": 1,
-    "lightAnimation": {
-      "speed": 5,
-      "intensity": 5
-    },
-    "actorId": "b15eyTxZX0mFpxke",
     "actorLink": true,
     "disposition": 1,
     "displayBars": 40,
@@ -615,12 +596,11 @@
     "randomImg": false,
     "alpha": 1,
     "light": {
-      "alpha": 0.5,
-      "angle": 0,
+      "alpha": 1,
+      "angle": 360,
       "bright": 0,
       "coloration": 1,
       "dim": 0,
-      "gradual": true,
       "luminosity": 0.5,
       "saturation": 0,
       "contrast": 0,
@@ -628,13 +608,37 @@
       "animation": {
         "speed": 5,
         "intensity": 5,
+        "type": null,
         "reverse": false
       },
       "darkness": {
         "min": 0,
         "max": 1
-      }
-    }
+      },
+      "color": null,
+      "attenuation": 0.5
+    },
+    "texture": {
+      "src": "systems/dnd5e/tokens/heroes/ClericDragonborn.webp",
+      "tint": null,
+      "scaleX": 1,
+      "scaleY": 1,
+      "offsetX": 0,
+      "offsetY": 0,
+      "rotation": 0
+    },
+    "sight": {
+      "angle": 360,
+      "enabled": true,
+      "range": 5,
+      "brightness": 0,
+      "visionMode": "basic",
+      "color": null,
+      "attenuation": 0.1,
+      "saturation": 0,
+      "contrast": 0
+    },
+    "detectionModes": []
   },
   "items": [
     {
@@ -729,6 +733,14 @@
       "folder": null,
       "ownership": {
         "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -748,8 +760,7 @@
         "attunement": 0,
         "equipped": true,
         "rarity": "",
-        "identified": true,
-        "attuned": false
+        "identified": true
       },
       "sort": 5500000,
       "flags": {},
@@ -758,6 +769,14 @@
       "folder": null,
       "ownership": {
         "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -776,9 +795,8 @@
         "price": 0.2,
         "attunement": 0,
         "equipped": false,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
-        "attuned": false,
         "damage": {
           "parts": []
         }
@@ -790,6 +808,14 @@
       "folder": null,
       "ownership": {
         "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -808,9 +834,8 @@
         "price": 1,
         "attunement": 0,
         "equipped": false,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
-        "attuned": false,
         "damage": {
           "parts": []
         }
@@ -829,6 +854,14 @@
       "folder": null,
       "ownership": {
         "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -847,7 +880,7 @@
         "price": 1,
         "attunement": 0,
         "equipped": false,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
         "activation": {
           "type": "action",
@@ -899,8 +932,7 @@
           "dc": 17,
           "scaling": "flat"
         },
-        "consumableType": "trinket",
-        "attuned": false
+        "consumableType": "trinket"
       },
       "sort": 1000000,
       "flags": {
@@ -916,6 +948,14 @@
       "folder": null,
       "ownership": {
         "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -934,9 +974,8 @@
         "price": 0.5,
         "attunement": 0,
         "equipped": false,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
-        "attuned": false,
         "damage": {
           "parts": []
         }
@@ -948,6 +987,14 @@
       "folder": null,
       "ownership": {
         "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -966,9 +1013,8 @@
         "price": 0.2,
         "attunement": 0,
         "equipped": false,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
-        "attuned": false,
         "damage": {
           "parts": []
         }
@@ -987,6 +1033,14 @@
       "folder": null,
       "ownership": {
         "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -1005,7 +1059,7 @@
         "price": 0.2,
         "attunement": 0,
         "equipped": false,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
         "activation": {
           "type": "action",
@@ -1057,8 +1111,7 @@
           "dc": null,
           "scaling": "spell"
         },
-        "consumableType": "food",
-        "attuned": false
+        "consumableType": "food"
       },
       "sort": 500000,
       "flags": {},
@@ -1067,6 +1120,14 @@
       "folder": null,
       "ownership": {
         "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -1085,7 +1146,7 @@
         "price": 2,
         "attunement": 0,
         "equipped": false,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
         "capacity": {
           "type": "weight",
@@ -1099,7 +1160,6 @@
           "gp": 0,
           "pp": 0
         },
-        "attuned": false,
         "damage": {
           "parts": []
         }
@@ -1111,6 +1171,14 @@
       "folder": null,
       "ownership": {
         "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -1129,7 +1197,7 @@
         "price": 0.5,
         "attunement": 0,
         "equipped": true,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
         "capacity": {
           "type": "weight",
@@ -1143,7 +1211,6 @@
           "gp": 0,
           "pp": 0
         },
-        "attuned": false,
         "damage": {
           "parts": []
         }
@@ -1155,6 +1222,14 @@
       "folder": null,
       "ownership": {
         "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -1173,7 +1248,7 @@
         "price": 1,
         "attunement": 0,
         "equipped": true,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
         "capacity": {
           "type": "items",
@@ -1187,7 +1262,6 @@
           "gp": 0,
           "pp": 0
         },
-        "attuned": false,
         "damage": {
           "parts": []
         }
@@ -1199,6 +1273,14 @@
       "folder": null,
       "ownership": {
         "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -1217,7 +1299,7 @@
         "price": 50,
         "attunement": 0,
         "equipped": true,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
         "activation": {
           "type": "",
@@ -1285,8 +1367,7 @@
         },
         "strength": null,
         "stealth": true,
-        "proficient": true,
-        "attuned": false
+        "proficient": true
       },
       "sort": 400000,
       "flags": {},
@@ -1295,6 +1376,14 @@
       "folder": null,
       "ownership": {
         "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -1313,7 +1402,7 @@
         "price": 0.5,
         "attunement": 0,
         "equipped": false,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
         "activation": {
           "type": "none",
@@ -1381,8 +1470,7 @@
         },
         "strength": 0,
         "stealth": false,
-        "proficient": false,
-        "attuned": false
+        "proficient": false
       },
       "sort": 800000,
       "flags": {},
@@ -1391,6 +1479,14 @@
       "folder": null,
       "ownership": {
         "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -1409,7 +1505,7 @@
         "price": 1,
         "attunement": 0,
         "equipped": false,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
         "activation": {
           "type": "none",
@@ -1477,16 +1573,23 @@
         },
         "strength": 0,
         "stealth": false,
-        "proficient": false,
-        "attuned": false
+        "proficient": false
       },
       "sort": 3800000,
       "flags": {},
-      "img": "systems/dnd5e/icons/items/armor/robe.jpg",
+      "img": "icons/equipment/back/mantle-collared-black.webp",
       "effects": [],
       "folder": null,
       "ownership": {
         "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -1505,7 +1608,7 @@
         "price": "10",
         "attunement": 0,
         "equipped": true,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
         "activation": {
           "type": "",
@@ -1573,8 +1676,7 @@
         },
         "strength": "",
         "stealth": false,
-        "proficient": false,
-        "attuned": false
+        "proficient": false
       },
       "sort": 500000,
       "flags": {},
@@ -1583,6 +1685,14 @@
       "folder": null,
       "ownership": {
         "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -1601,7 +1711,7 @@
         "price": 5,
         "attunement": 0,
         "equipped": true,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
         "activation": {
           "type": "action",
@@ -1684,8 +1794,7 @@
           "ver": false,
           "lod": false
         },
-        "proficient": true,
-        "attuned": false
+        "proficient": true
       },
       "sort": 1000000,
       "flags": {},
@@ -1694,6 +1803,14 @@
       "folder": null,
       "ownership": {
         "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -1712,7 +1829,7 @@
         "price": 0.02,
         "attunement": 0,
         "equipped": true,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
         "activation": {
           "type": "action",
@@ -1770,7 +1887,6 @@
           "scaling": "spell"
         },
         "consumableType": "ammo",
-        "attuned": false,
         "attributes": {
           "spelldc": 10
         }
@@ -1782,6 +1898,14 @@
       "folder": null,
       "ownership": {
         "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -1800,7 +1924,7 @@
         "price": 25,
         "attunement": 0,
         "equipped": false,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
         "activation": {
           "type": "action",
@@ -1882,8 +2006,7 @@
           "ver": false,
           "lod": true
         },
-        "proficient": true,
-        "attuned": false
+        "proficient": true
       },
       "sort": 1800001,
       "flags": {},
@@ -1892,1908 +2015,14 @@
       "folder": null,
       "ownership": {
         "default": 0
-      }
-    },
-    {
-      "_id": "NnGvgSxLYDmJ2dQg",
-      "name": "Guidance",
-      "type": "spell",
-      "system": {
-        "description": {
-          "value": "<p>You touch one willing creature. Once before the spell ends, the target can roll a d4 and add the number rolled to one ability check of its choice. It can roll the die before or after making the ability check. The spell then ends.</p>",
-          "chat": "",
-          "unidentified": ""
-        },
-        "source": "PHB pg. 248",
-        "activation": {
-          "type": "action",
-          "cost": 1,
-          "condition": ""
-        },
-        "duration": {
-          "value": 1,
-          "units": "minute"
-        },
-        "target": {
-          "value": 1,
-          "width": null,
-          "units": "",
-          "type": "creature"
-        },
-        "range": {
-          "value": null,
-          "long": null,
-          "units": "touch"
-        },
-        "uses": {
-          "value": 0,
-          "max": 0,
-          "per": ""
-        },
-        "consume": {
-          "type": "",
-          "target": null,
-          "amount": null
-        },
-        "ability": "",
-        "actionType": "util",
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "critical": {
-          "threshold": null,
-          "damage": ""
-        },
-        "damage": {
-          "parts": [],
-          "versatile": "",
-          "value": ""
-        },
-        "formula": "1d4",
-        "save": {
-          "ability": "",
-          "dc": null,
-          "scaling": "spell",
-          "value": ""
-        },
-        "level": 0,
-        "school": "div",
-        "components": {
-          "value": "",
-          "vocal": true,
-          "somatic": true,
-          "material": false,
-          "ritual": false,
-          "concentration": true
-        },
-        "materials": {
-          "value": "",
-          "consumed": false,
-          "cost": 0,
-          "supply": 0
-        },
-        "preparation": {
-          "mode": "prepared",
-          "prepared": false
-        },
-        "scaling": {
-          "mode": "none",
-          "formula": ""
-        },
-        "attunement": 0
       },
-      "sort": 100001,
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.dnd5e.spells.P7mF2MxSuVJwHRRY"
-        }
-      },
-      "img": "systems/dnd5e/icons/spells/haste-sky-1.jpg",
-      "effects": [],
-      "folder": null,
-      "ownership": {
-        "default": 0
-      }
-    },
-    {
-      "_id": "uBh2T53zkVF9TAVK",
-      "name": "Sacred Flame",
-      "type": "spell",
-      "system": {
-        "description": {
-          "value": "<p>Flame-like radiance descends on a creature that you can see within range. The target must succeed on a Dexterity saving throw or take 1d8 radiant damage. The target gains no benefit from cover for this saving throw.</p><p>The spell's damage increases by 1d8 when you reach 5th level (2d8), 11th level (3d8), and 17th level (4d8).</p>",
-          "chat": "",
-          "unidentified": ""
-        },
-        "source": "PHB pg. 272",
-        "activation": {
-          "type": "action",
-          "cost": 1,
-          "condition": ""
-        },
-        "duration": {
-          "value": null,
-          "units": "inst"
-        },
-        "target": {
-          "value": 1,
-          "width": null,
-          "units": "",
-          "type": "creature"
-        },
-        "range": {
-          "value": 60,
-          "long": 0,
-          "units": "ft"
-        },
-        "uses": {
-          "value": 0,
-          "max": 0,
-          "per": ""
-        },
-        "consume": {
-          "type": "",
-          "target": null,
-          "amount": null
-        },
-        "ability": "",
-        "actionType": "save",
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "critical": {
-          "threshold": null,
-          "damage": ""
-        },
-        "damage": {
-          "parts": [
-            [
-              "1d8",
-              "radiant"
-            ]
-          ],
-          "versatile": ""
-        },
-        "formula": "",
-        "save": {
-          "ability": "dex",
-          "dc": 12,
-          "scaling": "spell"
-        },
-        "level": 0,
-        "school": "evo",
-        "components": {
-          "value": "",
-          "vocal": true,
-          "somatic": true,
-          "material": false,
-          "ritual": false,
-          "concentration": false
-        },
-        "materials": {
-          "value": "",
-          "consumed": false,
-          "cost": 0,
-          "supply": 0
-        },
-        "preparation": {
-          "mode": "prepared",
-          "prepared": false
-        },
-        "scaling": {
-          "mode": "cantrip",
-          "formula": ""
-        },
-        "attunement": 0
-      },
-      "sort": 100001,
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.dnd5e.spells.n9pJzTDsAwQxJVRl"
-        }
-      },
-      "img": "systems/dnd5e/icons/spells/beam-orange-2.jpg",
-      "effects": [],
-      "folder": null,
-      "ownership": {
-        "default": 0
-      }
-    },
-    {
-      "_id": "s6BnEHmPxHUILOGY",
-      "name": "Thaumaturgy",
-      "type": "spell",
-      "system": {
-        "description": {
-          "value": "<p>You create one of the following magical effects within range:</p>\n<ul>\n<li>Your voice booms up to three times as loud as normal for 1 minute.</li>\n<li>You cause flames to flicker, brighten, dim, or change color for 1 minute.</li>\n<li>You cause harmless tremors in the ground for 1 minute.</li>\n<li>You create a sound that originates from a point of your choice within range.</li>\n<li>You cause an unlocked door or window to fly open or slam shut.</li>\n<li>You alter the appearance of your eyes for 1 minute.</li>\n</ul>\n<p>If you cast this spell multiple times, you can have up to three of its 1-minute effects active at a time, and you can dismiss such an effect as an action.</p>",
-          "chat": "",
-          "unidentified": ""
-        },
-        "source": "PHB pg. 282",
-        "activation": {
-          "type": "action",
-          "cost": 1,
-          "condition": ""
-        },
-        "duration": {
-          "value": 1,
-          "units": "minute"
-        },
-        "target": {
-          "value": 0,
-          "width": null,
-          "units": "",
-          "type": ""
-        },
-        "range": {
-          "value": 30,
-          "long": 0,
-          "units": "ft"
-        },
-        "uses": {
-          "value": 0,
-          "max": 0,
-          "per": ""
-        },
-        "consume": {
-          "type": "",
-          "target": null,
-          "amount": null
-        },
-        "ability": "",
-        "actionType": "util",
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "critical": {
-          "threshold": null,
-          "damage": ""
-        },
-        "damage": {
-          "parts": [],
-          "versatile": "",
-          "value": ""
-        },
-        "formula": "",
-        "save": {
-          "ability": "",
-          "dc": null,
-          "scaling": "spell",
-          "value": ""
-        },
-        "level": 0,
-        "school": "trs",
-        "components": {
-          "value": "",
-          "vocal": true,
-          "somatic": false,
-          "material": false,
-          "ritual": false,
-          "concentration": false
-        },
-        "materials": {
-          "value": "",
-          "consumed": false,
-          "cost": 0,
-          "supply": 0
-        },
-        "preparation": {
-          "mode": "prepared",
-          "prepared": false
-        },
-        "scaling": {
-          "mode": "none",
-          "formula": ""
-        },
-        "attunement": 0
-      },
-      "sort": 100001,
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.dnd5e.spells.MUO1uYN7JR1hm4dR"
-        }
-      },
-      "img": "systems/dnd5e/icons/spells/explosion-royal-1.jpg",
-      "effects": [],
-      "folder": null,
-      "ownership": {
-        "default": 0
-      }
-    },
-    {
-      "_id": "3Y12TEquZ0Vahjp4",
-      "name": "Bless",
-      "type": "spell",
-      "system": {
-        "description": {
-          "value": "<p>You bless up to three creatures of your choice within range. Whenever a target makes an attack roll or a saving throw before the spell ends, the target can roll 1d4 and add the number rolled to the attack roll or saving throw.</p>\n<p><strong>Higher Levels.</strong> When you cast this spell using a spell slot of 2nd level or higher, you can target one additional creature for each slot level above 1st.</p>",
-          "chat": "",
-          "unidentified": ""
-        },
-        "source": "PHB pg. 219",
-        "activation": {
-          "type": "action",
-          "cost": 1,
-          "condition": ""
-        },
-        "duration": {
-          "value": 1,
-          "units": "minute"
-        },
-        "target": {
-          "value": 3,
-          "width": null,
-          "units": "",
-          "type": "creature"
-        },
-        "range": {
-          "value": 30,
-          "long": 0,
-          "units": "ft"
-        },
-        "uses": {
-          "value": 0,
-          "max": 0,
-          "per": ""
-        },
-        "consume": {
-          "type": "",
-          "target": "",
-          "amount": null
-        },
-        "ability": "",
-        "actionType": "util",
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "critical": {
-          "threshold": null,
-          "damage": ""
-        },
-        "damage": {
-          "parts": [],
-          "versatile": "",
-          "value": ""
-        },
-        "formula": "1d4",
-        "save": {
-          "ability": "",
-          "dc": null,
-          "scaling": "spell",
-          "value": ""
-        },
-        "level": 1,
-        "school": "enc",
-        "components": {
-          "value": "",
-          "vocal": true,
-          "somatic": true,
-          "material": true,
-          "ritual": false,
-          "concentration": true
-        },
-        "materials": {
-          "value": "A sprinkling of holy water",
-          "consumed": false,
-          "cost": 0,
-          "supply": 0
-        },
-        "preparation": {
-          "mode": "always",
-          "prepared": true
-        },
-        "scaling": {
-          "mode": "level",
-          "formula": ""
-        },
-        "attunement": 0
-      },
-      "sort": 100001,
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.dnd5e.spells.8dzaICjGy6mTUaUr"
-        }
-      },
-      "img": "systems/dnd5e/icons/spells/haste-sky-1.jpg",
-      "effects": [
-        {
-          "_id": "8rP3gwmXVTgZqYZE",
-          "flags": {},
-          "changes": [
-            {
-              "key": "data.bonuses.abilities.save",
-              "mode": 2,
-              "value": "+1d4"
-            },
-            {
-              "key": "data.bonuses.mwak.attack",
-              "mode": 2,
-              "value": "+1d4"
-            },
-            {
-              "key": "data.bonuses.msak.attack",
-              "mode": 2,
-              "value": "+1d4"
-            },
-            {
-              "key": "data.bonuses.rsak.attack",
-              "mode": 2,
-              "value": "+1d4"
-            },
-            {
-              "key": "data.bonuses.rwak.attack",
-              "mode": 2,
-              "value": "+1d4"
-            }
-          ],
-          "disabled": true,
-          "duration": {
-            "startTime": null,
-            "seconds": 60,
-            "rounds": 10
-          },
-          "icon": "systems/dnd5e/icons/spells/haste-sky-1.jpg",
-          "label": "Bless",
-          "origin": "Item.kZZAZ6kp9YzgPQEe",
-          "tint": null,
-          "transfer": true
-        }
-      ],
-      "folder": null,
-      "ownership": {
-        "default": 0
-      }
-    },
-    {
-      "_id": "zE8iRfvZzzkBRyNq",
-      "name": "Cure Wounds",
-      "type": "spell",
-      "system": {
-        "description": {
-          "value": "<p>A creature you touch regains a number of hit points equal to 1d8 + your spellcasting ability modifier. This spell has no effect on undead or constructs.</p><p><strong>Higher Levels.</strong> When you cast this spell using a spell slot of 2nd level or higher, the healing increases by 1d8 for each slot level above 1st.</p>",
-          "chat": "",
-          "unidentified": ""
-        },
-        "source": "PHB pg. 230",
-        "activation": {
-          "type": "action",
-          "cost": 1,
-          "condition": ""
-        },
-        "duration": {
-          "value": null,
-          "units": "inst"
-        },
-        "target": {
-          "value": 1,
-          "width": null,
-          "units": "",
-          "type": "creature"
-        },
-        "range": {
-          "value": null,
-          "long": null,
-          "units": "touch"
-        },
-        "uses": {
-          "value": 0,
-          "max": 0,
-          "per": ""
-        },
-        "consume": {
-          "type": "",
-          "target": null,
-          "amount": null
-        },
-        "ability": "",
-        "actionType": "heal",
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "critical": {
-          "threshold": null,
-          "damage": ""
-        },
-        "damage": {
-          "parts": [
-            [
-              "1d8 + @mod + 2 + @item.level",
-              "healing"
-            ]
-          ],
-          "versatile": ""
-        },
-        "formula": "",
-        "save": {
-          "ability": "",
-          "dc": null,
-          "scaling": "spell",
-          "value": ""
-        },
-        "level": 1,
-        "school": "evo",
-        "components": {
-          "value": "",
-          "vocal": true,
-          "somatic": true,
-          "material": false,
-          "ritual": false,
-          "concentration": false
-        },
-        "materials": {
-          "value": "",
-          "consumed": false,
-          "cost": 0,
-          "supply": 0
-        },
-        "preparation": {
-          "mode": "always",
-          "prepared": true
-        },
-        "scaling": {
-          "mode": "level",
-          "formula": "1d8"
-        },
-        "attunement": 0
-      },
-      "sort": 100001,
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.dnd5e.spells.uUWb1wZgtMou0TVP"
-        }
-      },
-      "img": "systems/dnd5e/icons/spells/heal-jade-1.jpg",
-      "effects": [],
-      "folder": null,
-      "ownership": {
-        "default": 0
-      }
-    },
-    {
-      "_id": "0aSxNKhMIZNukfYu",
-      "name": "Sanctuary",
-      "type": "spell",
-      "system": {
-        "description": {
-          "value": "<p>You ward a creature within range against attack. Until the spell ends, any creature who targets the warded creature with an attack or a harmful spell must first make a Wisdom saving throw. On a failed save, the creature must choose a new target or lose the attack or spell. This spell doesn't protect the warded creature from area effects, such as the explosion of a Fireball.</p><p>If the warded creature makes an attack or casts a spell that affects an enemy creature, this spell ends.</p>",
-          "chat": "",
-          "unidentified": ""
-        },
-        "source": "PHB pg. 272",
-        "activation": {
-          "type": "bonus",
-          "cost": 1,
-          "condition": ""
-        },
-        "duration": {
-          "value": 1,
-          "units": "minute"
-        },
-        "target": {
-          "value": 1,
-          "width": null,
-          "units": "",
-          "type": "creature"
-        },
-        "range": {
-          "value": 30,
-          "long": 0,
-          "units": "ft"
-        },
-        "uses": {
-          "value": 0,
-          "max": 0,
-          "per": ""
-        },
-        "consume": {
-          "type": "",
-          "target": null,
-          "amount": null
-        },
-        "ability": "",
-        "actionType": "save",
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "critical": {
-          "threshold": null,
-          "damage": ""
-        },
-        "damage": {
-          "parts": [],
-          "versatile": "",
-          "value": ""
-        },
-        "formula": "",
-        "save": {
-          "ability": "wis",
-          "dc": 12,
-          "scaling": "spell"
-        },
-        "level": 1,
-        "school": "abj",
-        "components": {
-          "value": "",
-          "vocal": true,
-          "somatic": true,
-          "material": true,
-          "ritual": false,
-          "concentration": false
-        },
-        "materials": {
-          "value": "A small silver mirror",
-          "consumed": false,
-          "cost": 0,
-          "supply": 0
-        },
-        "preparation": {
-          "mode": "prepared",
-          "prepared": false
-        },
-        "scaling": {
-          "mode": "none",
-          "formula": ""
-        },
-        "attunement": 0
-      },
-      "sort": 100001,
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.dnd5e.spells.gvdA9nPuWLck4tBl"
-        }
-      },
-      "img": "systems/dnd5e/icons/spells/protect-sky-2.jpg",
-      "effects": [],
-      "folder": null,
-      "ownership": {
-        "default": 0
-      }
-    },
-    {
-      "_id": "RktqEnEKCfJFX6lb",
-      "name": "Command",
-      "type": "spell",
-      "system": {
-        "description": {
-          "value": "<p>You speak a one-word command to a creature you can see within range. The target must succeed on a Wisdom saving throw or follow the command on its next turn. The spell has no effect if the target is undead, if it doesn't understand your language, or if your command is directly harmful to it.</p><p>Some typical commands and their effects follow. You might issue a command other than one described here. If you do so, the DM determines how the target behaves. If the target can't follow your command, the spell ends.</p><p><strong>Approach.</strong> The target moves toward you by the shortest and most direct route, ending its turn if it moves within 5 feet of you.</p><p><strong>Drop.</strong> The target drops whatever it is holding and then ends its turn.</p><p><strong>Flee.</strong> The target spends its turn moving away from you by the fastest available means.</p><p><strong>Grovel.</strong> The target falls prone and then ends its turn.</p><p><strong>Halt.</strong> The target doesn't move and takes no actions. A flying creature stays aloft, provided that it is able to do so. If it must move to stay aloft, it flies the minimum distance needed to remain in the air.</p><p><strong>Higher Levels.&nbsp;</strong>When you cast this spell using a spell slot of 2nd level or higher, you can affect one additional creature for each slot level above 1st. The creatures must be within 30 feet of each other when you target them.</p>",
-          "chat": "",
-          "unidentified": ""
-        },
-        "source": "PHB pg. 223",
-        "activation": {
-          "type": "action",
-          "cost": 1,
-          "condition": ""
-        },
-        "duration": {
-          "value": 1,
-          "units": "round"
-        },
-        "target": {
-          "value": 1,
-          "width": null,
-          "units": "",
-          "type": "creature"
-        },
-        "range": {
-          "value": 60,
-          "long": 0,
-          "units": "ft"
-        },
-        "uses": {
-          "value": 0,
-          "max": 0,
-          "per": ""
-        },
-        "consume": {
-          "type": "",
-          "target": null,
-          "amount": null
-        },
-        "ability": "",
-        "actionType": "save",
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "critical": {
-          "threshold": null,
-          "damage": ""
-        },
-        "damage": {
-          "parts": [],
-          "versatile": "",
-          "value": ""
-        },
-        "formula": "",
-        "save": {
-          "ability": "wis",
-          "dc": 12,
-          "scaling": "spell"
-        },
-        "level": 1,
-        "school": "enc",
-        "components": {
-          "value": "",
-          "vocal": true,
-          "somatic": false,
-          "material": false,
-          "ritual": false,
-          "concentration": false
-        },
-        "materials": {
-          "value": "",
-          "consumed": false,
-          "cost": 0,
-          "supply": 0
-        },
-        "preparation": {
-          "mode": "prepared",
-          "prepared": true
-        },
-        "scaling": {
-          "mode": "none",
-          "formula": ""
-        },
-        "attunement": 0
-      },
-      "sort": 100001,
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.dnd5e.spells.arzCrMRgcNiQuh43"
-        }
-      },
-      "img": "systems/dnd5e/icons/spells/explosion-magenta-1.jpg",
-      "effects": [],
-      "folder": null,
-      "ownership": {
-        "default": 0
-      }
-    },
-    {
-      "_id": "UtOW9aMCSRpBq7bm",
-      "name": "Create or Destroy Water",
-      "type": "spell",
-      "system": {
-        "description": {
-          "value": "<p>You either create or destroy water.</p><p><strong>Create Water.</strong> You create up to 10 gallons of clean water within range in an open container. Alternatively, the water falls as rain in a 30-foot cube within range.</p><p><strong>Destroy Water.</strong> You destroy up to 10 gallons of water in an open container within range. Alternatively, you destroy fog in a 30-foot cube within range.</p><p><strong>Higher Levels.&nbsp;</strong>When you cast this spell using a spell slot of 2nd level or higher, you create or destroy 10 additional gallons of water, or the size of the cube increases by 5 feet, for each slot level above 1st.</p>",
-          "chat": "",
-          "unidentified": ""
-        },
-        "source": "PHB pg. 229",
-        "activation": {
-          "type": "action",
-          "cost": 1,
-          "condition": ""
-        },
-        "duration": {
-          "value": null,
-          "units": "inst"
-        },
-        "target": {
-          "value": 30,
-          "width": null,
-          "units": "ft",
-          "type": "cube"
-        },
-        "range": {
-          "value": 30,
-          "long": 0,
-          "units": "ft"
-        },
-        "uses": {
-          "value": 0,
-          "max": 0,
-          "per": ""
-        },
-        "consume": {
-          "type": "",
-          "target": null,
-          "amount": null
-        },
-        "ability": "",
-        "actionType": "util",
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "critical": {
-          "threshold": null,
-          "damage": ""
-        },
-        "damage": {
-          "parts": [],
-          "versatile": "",
-          "value": ""
-        },
-        "formula": "",
-        "save": {
-          "ability": "",
-          "dc": null,
-          "scaling": "spell",
-          "value": ""
-        },
-        "level": 1,
-        "school": "trs",
-        "components": {
-          "value": "",
-          "vocal": true,
-          "somatic": true,
-          "material": true,
-          "ritual": false,
-          "concentration": false
-        },
-        "materials": {
-          "value": "A drop of water if creating water or a few grains of sand if destroying it.",
-          "consumed": false,
-          "cost": 0,
-          "supply": 0
-        },
-        "preparation": {
-          "mode": "prepared",
-          "prepared": false
-        },
-        "scaling": {
-          "mode": "level",
-          "formula": ""
-        },
-        "attunement": 0
-      },
-      "sort": 100001,
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.dnd5e.spells.a3XtAO5n2GrqiAh5"
-        }
-      },
-      "img": "systems/dnd5e/icons/spells/wind-blue-2.jpg",
-      "effects": [],
-      "folder": null,
-      "ownership": {
-        "default": 0
-      }
-    },
-    {
-      "_id": "sSeKgFZ2Vy04Ylpd",
-      "name": "Bane",
-      "type": "spell",
-      "system": {
-        "description": {
-          "value": "<p>Up to three creatures of your choice that you can see within range must make Charisma saving throws. Whenever a target that fails this saving throw makes an attack roll or a saving throw before the spell ends, the target must roll a d4 and subtract the number rolled from the attack roll or saving throw.</p>\n<p><strong>Higher Levels.</strong> When you cast this spell using a spell slot of 2nd level or higher, you can target one additional creature for each slot level above 1st.</p>",
-          "chat": "",
-          "unidentified": ""
-        },
-        "source": "PHB pg. 216",
-        "activation": {
-          "type": "action",
-          "cost": 1,
-          "condition": ""
-        },
-        "duration": {
-          "value": 1,
-          "units": "minute"
-        },
-        "target": {
-          "value": 3,
-          "width": null,
-          "units": "",
-          "type": "creature"
-        },
-        "range": {
-          "value": 30,
-          "long": 0,
-          "units": "ft"
-        },
-        "uses": {
-          "value": 0,
-          "max": 0,
-          "per": ""
-        },
-        "consume": {
-          "type": "",
-          "target": "",
-          "amount": null
-        },
-        "ability": "",
-        "actionType": "save",
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "critical": {
-          "threshold": null,
-          "damage": ""
-        },
-        "damage": {
-          "parts": [],
-          "versatile": "",
-          "value": ""
-        },
-        "formula": "",
-        "save": {
-          "ability": "cha",
-          "dc": 12,
-          "scaling": "spell"
-        },
-        "level": 1,
-        "school": "enc",
-        "components": {
-          "value": "",
-          "vocal": true,
-          "somatic": true,
-          "material": true,
-          "ritual": false,
-          "concentration": true
-        },
-        "materials": {
-          "value": "A drop of blood",
-          "consumed": false,
-          "cost": 0,
-          "supply": 0
-        },
-        "preparation": {
-          "mode": "prepared",
-          "prepared": false
-        },
-        "scaling": {
-          "mode": "level",
-          "formula": ""
-        },
-        "attunement": 0
-      },
-      "sort": 100001,
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.dnd5e.spells.95K2aUhAGV9qXjnf"
-        }
-      },
-      "img": "systems/dnd5e/icons/spells/rip-magenta-2.jpg",
-      "effects": [
-        {
-          "_id": "potjmpJPeUA1U4oe",
-          "flags": {},
-          "changes": [
-            {
-              "key": "data.bonuses.abilities.save",
-              "value": "-1d4",
-              "mode": 2
-            },
-            {
-              "key": "data.bonuses.mwak.attack",
-              "value": "-1d4",
-              "mode": 2
-            },
-            {
-              "key": "data.bonuses.msak.attack",
-              "value": "-1d4",
-              "mode": 2
-            },
-            {
-              "key": "data.bonuses.rsak.attack",
-              "value": "-1d4",
-              "mode": 2
-            },
-            {
-              "key": "data.bonuses.rwak.attack",
-              "value": "-1d4",
-              "mode": 2
-            }
-          ],
-          "disabled": true,
-          "duration": {
-            "startTime": null,
-            "seconds": 60,
-            "rounds": 10
-          },
-          "icon": "systems/dnd5e/icons/spells/rip-magenta-2.jpg",
-          "label": "Bane",
-          "origin": "Item.KkaQm4OQJxc6z3to",
-          "tint": null,
-          "transfer": true
-        }
-      ],
-      "folder": null,
-      "ownership": {
-        "default": 0
-      }
-    },
-    {
-      "_id": "qDRrsexxXkGgrPwk",
-      "name": "Detect Evil and Good",
-      "type": "spell",
-      "system": {
-        "description": {
-          "value": "<p>For the duration, you know if there is an aberration, celestial, elemental, fey, fiend, or undead within 30 feet of you, as well as where the creature is located. Similarly, you know if there is a place or object within 30 feet of you that has been magically consecrated or desecrated.</p><p>The spell can penetrate most barriers, but it is blocked by 1 foot of stone, 1 inch of common metal, a thin sheet of lead, or 3 feet of wood or dirt.</p>",
-          "chat": "",
-          "unidentified": ""
-        },
-        "source": "PHB pg. 231",
-        "activation": {
-          "type": "action",
-          "cost": 1,
-          "condition": ""
-        },
-        "duration": {
-          "value": 10,
-          "units": "minute"
-        },
-        "target": {
-          "value": 30,
-          "width": null,
-          "units": "ft",
-          "type": "radius"
-        },
-        "range": {
-          "value": null,
-          "long": null,
-          "units": "self"
-        },
-        "uses": {
-          "value": 0,
-          "max": 0,
-          "per": ""
-        },
-        "consume": {
-          "type": "",
-          "target": null,
-          "amount": null
-        },
-        "ability": "",
-        "actionType": "util",
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "critical": {
-          "threshold": null,
-          "damage": ""
-        },
-        "damage": {
-          "parts": [],
-          "versatile": "",
-          "value": ""
-        },
-        "formula": "",
-        "save": {
-          "ability": "",
-          "dc": null,
-          "scaling": "spell",
-          "value": ""
-        },
-        "level": 1,
-        "school": "div",
-        "components": {
-          "value": "",
-          "vocal": true,
-          "somatic": true,
-          "material": false,
-          "ritual": false,
-          "concentration": true
-        },
-        "materials": {
-          "value": "",
-          "consumed": false,
-          "cost": 0,
-          "supply": 0
-        },
-        "preparation": {
-          "mode": "prepared",
-          "prepared": false
-        },
-        "scaling": {
-          "mode": "none",
-          "formula": ""
-        },
-        "attunement": 0
-      },
-      "sort": 100001,
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.dnd5e.spells.Mzh95utKDPIrjiH8"
-        }
-      },
-      "img": "systems/dnd5e/icons/spells/air-burst-sky-2.jpg",
-      "effects": [],
-      "folder": null,
-      "ownership": {
-        "default": 0
-      }
-    },
-    {
-      "_id": "ETkAIY1M1daUtN59",
-      "name": "Detect Magic",
-      "type": "spell",
-      "system": {
-        "description": {
-          "value": "<p>For the duration, you sense the presence of magic within 30 feet of you. If you sense magic in this way, you can use your action to see a faint aura around any visible creature or object in the area that bears magic, and you learn its school of magic, if any.</p><p>The spell can penetrate most barriers, but it is blocked by 1 foot of stone, 1 inch of common metal, a thin sheet of lead, or 3 feet of wood or dirt.</p>",
-          "chat": "",
-          "unidentified": ""
-        },
-        "source": "PHB pg. 231",
-        "activation": {
-          "type": "action",
-          "cost": 1,
-          "condition": ""
-        },
-        "duration": {
-          "value": 10,
-          "units": "minute"
-        },
-        "target": {
-          "value": 30,
-          "width": null,
-          "units": "ft",
-          "type": "radius"
-        },
-        "range": {
-          "value": null,
-          "long": null,
-          "units": "self"
-        },
-        "uses": {
-          "value": 0,
-          "max": 0,
-          "per": ""
-        },
-        "consume": {
-          "type": "",
-          "target": null,
-          "amount": null
-        },
-        "ability": "",
-        "actionType": "util",
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "critical": {
-          "threshold": null,
-          "damage": ""
-        },
-        "damage": {
-          "parts": [],
-          "versatile": "",
-          "value": ""
-        },
-        "formula": "",
-        "save": {
-          "ability": "",
-          "dc": null,
-          "scaling": "spell",
-          "value": ""
-        },
-        "level": 1,
-        "school": "div",
-        "components": {
-          "value": "",
-          "vocal": true,
-          "somatic": true,
-          "material": false,
-          "ritual": true,
-          "concentration": true
-        },
-        "materials": {
-          "value": "",
-          "consumed": false,
-          "cost": 0,
-          "supply": 0
-        },
-        "preparation": {
-          "mode": "prepared",
-          "prepared": true
-        },
-        "scaling": {
-          "mode": "none",
-          "formula": ""
-        },
-        "attunement": 0
-      },
-      "sort": 100001,
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.dnd5e.spells.ghXTfe7sgCbgf1Q8"
-        }
-      },
-      "img": "systems/dnd5e/icons/spells/light-blue-2.jpg",
-      "effects": [],
-      "folder": null,
-      "ownership": {
-        "default": 0
-      }
-    },
-    {
-      "_id": "pyo9tvOJwNTB1kxn",
-      "name": "Detect Poison and Disease",
-      "type": "spell",
-      "system": {
-        "description": {
-          "value": "<p>For the duration, you can sense the presence and location of poisons, poisonous creatures, and diseases within 30 feet of you. You also identify the kind of poison, poisonous creature, or disease in each case.</p><p>The spell can penetrate most barriers, but it is blocked by 1 foot of stone, 1 inch of common metal, a thin sheet of lead, or 3 feet of wood or dirt.</p>",
-          "chat": "",
-          "unidentified": ""
-        },
-        "source": "PHB pg. 231",
-        "activation": {
-          "type": "action",
-          "cost": 1,
-          "condition": ""
-        },
-        "duration": {
-          "value": 10,
-          "units": "minute"
-        },
-        "target": {
-          "value": 30,
-          "width": null,
-          "units": "ft",
-          "type": "radius"
-        },
-        "range": {
-          "value": null,
-          "long": null,
-          "units": "self"
-        },
-        "uses": {
-          "value": 0,
-          "max": 0,
-          "per": ""
-        },
-        "consume": {
-          "type": "",
-          "target": null,
-          "amount": null
-        },
-        "ability": "",
-        "actionType": "util",
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "critical": {
-          "threshold": null,
-          "damage": ""
-        },
-        "damage": {
-          "parts": [],
-          "versatile": "",
-          "value": ""
-        },
-        "formula": "",
-        "save": {
-          "ability": "",
-          "dc": null,
-          "scaling": "spell",
-          "value": ""
-        },
-        "level": 1,
-        "school": "div",
-        "components": {
-          "value": "",
-          "vocal": true,
-          "somatic": true,
-          "material": true,
-          "ritual": false,
-          "concentration": true
-        },
-        "materials": {
-          "value": "A yew leaf",
-          "consumed": false,
-          "cost": 0,
-          "supply": 0
-        },
-        "preparation": {
-          "mode": "prepared",
-          "prepared": false
-        },
-        "scaling": {
-          "mode": "none",
-          "formula": ""
-        },
-        "attunement": 0
-      },
-      "sort": 100001,
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.dnd5e.spells.2skfDtglk1mGrb3l"
-        }
-      },
-      "img": "systems/dnd5e/icons/spells/air-burst-jade-2.jpg",
-      "effects": [],
-      "folder": null,
-      "ownership": {
-        "default": 0
-      }
-    },
-    {
-      "_id": "1sm00rrZ5bvUhwxG",
-      "name": "Guiding Bolt",
-      "type": "spell",
-      "system": {
-        "description": {
-          "value": "<p>A flash of light streaks toward a creature of your choice within range. Make a ranged spell attack against the target. On a hit, the target takes 4d6 radiant damage, and the next attack roll made against this target before the end of your next turn has advantage, thanks to the mystical dim light glittering on the target until then.</p><p><strong>Higher Levels.</strong> When you cast this spell using a spell slot of 2nd level or higher, the damage increases by 1d6 for each slot level above 1st.</p>",
-          "chat": "",
-          "unidentified": ""
-        },
-        "source": "PHB pg. 248",
-        "activation": {
-          "type": "action",
-          "cost": 1,
-          "condition": ""
-        },
-        "duration": {
-          "value": 1,
-          "units": "round"
-        },
-        "target": {
-          "value": 1,
-          "width": null,
-          "units": "",
-          "type": "creature"
-        },
-        "range": {
-          "value": 120,
-          "long": 0,
-          "units": "ft"
-        },
-        "uses": {
-          "value": 0,
-          "max": 0,
-          "per": ""
-        },
-        "consume": {
-          "type": "",
-          "target": null,
-          "amount": null
-        },
-        "ability": "",
-        "actionType": "rsak",
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "critical": {
-          "threshold": null,
-          "damage": ""
-        },
-        "damage": {
-          "parts": [
-            [
-              "4d6",
-              "radiant"
-            ]
-          ],
-          "versatile": ""
-        },
-        "formula": "",
-        "save": {
-          "ability": "",
-          "dc": null,
-          "scaling": "spell",
-          "value": ""
-        },
-        "level": 1,
-        "school": "evo",
-        "components": {
-          "value": "",
-          "vocal": true,
-          "somatic": true,
-          "material": false,
-          "ritual": false,
-          "concentration": false
-        },
-        "materials": {
-          "value": "",
-          "consumed": false,
-          "cost": 0,
-          "supply": 0
-        },
-        "preparation": {
-          "mode": "prepared",
-          "prepared": false
-        },
-        "scaling": {
-          "mode": "level",
-          "formula": "1d6"
-        },
-        "attunement": 0
-      },
-      "sort": 100001,
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.dnd5e.spells.7buEm5KhI5lP8m1z"
-        }
-      },
-      "img": "systems/dnd5e/icons/spells/fireball-sky-2.jpg",
-      "effects": [],
-      "folder": null,
-      "ownership": {
-        "default": 0
-      }
-    },
-    {
-      "_id": "SU3BfRRtmHIiHhbR",
-      "name": "Healing Word",
-      "type": "spell",
-      "system": {
-        "description": {
-          "value": "<p>A creature of your choice that you can see within range regains hit points equal to 1d4 + your spellcasting ability modifier. This spell has no effect on undead or constructs.</p><p><strong>Higher Levels.</strong> When you cast this spell using a spell slot of 2nd level or higher, the healing increases by 1d4 for each slot level above 1st.</p>",
-          "chat": "",
-          "unidentified": ""
-        },
-        "source": "PHB pg. 250",
-        "activation": {
-          "type": "bonus",
-          "cost": 1,
-          "condition": ""
-        },
-        "duration": {
-          "value": null,
-          "units": "inst"
-        },
-        "target": {
-          "value": 1,
-          "width": null,
-          "units": "",
-          "type": "creature"
-        },
-        "range": {
-          "value": 60,
-          "long": 0,
-          "units": "ft"
-        },
-        "uses": {
-          "value": 0,
-          "max": 0,
-          "per": ""
-        },
-        "consume": {
-          "type": "",
-          "target": null,
-          "amount": null
-        },
-        "ability": "",
-        "actionType": "heal",
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "critical": {
-          "threshold": null,
-          "damage": ""
-        },
-        "damage": {
-          "parts": [
-            [
-              "1d4 + @mod + 2 + @item.level",
-              "healing"
-            ]
-          ],
-          "versatile": ""
-        },
-        "formula": "",
-        "save": {
-          "ability": "",
-          "dc": null,
-          "scaling": "spell",
-          "value": ""
-        },
-        "level": 1,
-        "school": "evo",
-        "components": {
-          "value": "",
-          "vocal": true,
-          "somatic": false,
-          "material": false,
-          "ritual": false,
-          "concentration": false
-        },
-        "materials": {
-          "value": "",
-          "consumed": false,
-          "cost": 0,
-          "supply": 0
-        },
-        "preparation": {
-          "mode": "prepared",
-          "prepared": true
-        },
-        "scaling": {
-          "mode": "level",
-          "formula": "1d4"
-        },
-        "attunement": 0
-      },
-      "sort": 100001,
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.dnd5e.spells.o8Dh7fblk1d16tnO"
-        }
-      },
-      "img": "systems/dnd5e/icons/spells/heal-jade-1.jpg",
-      "effects": [],
-      "folder": null,
-      "ownership": {
-        "default": 0
-      }
-    },
-    {
-      "_id": "EkWX2kgmkPYtVMyZ",
-      "name": "Inflict Wounds",
-      "type": "spell",
-      "system": {
-        "description": {
-          "value": "<p>Make a melee spell Attack against a creature you can reach. On a hit, the target takes 3d10 necrotic damage.</p><p><strong>At Higher Levels.</strong> When you cast this spell using a spell slot of 2nd level or higher, the damage increases by 1d10 for each slot level above 1st.</p>",
-          "chat": "",
-          "unidentified": ""
-        },
-        "source": "PHB pg. 253",
-        "activation": {
-          "type": "action",
-          "cost": 1,
-          "condition": ""
-        },
-        "duration": {
-          "value": null,
-          "units": "inst"
-        },
-        "target": {
-          "value": 1,
-          "width": null,
-          "units": "",
-          "type": "creature"
-        },
-        "range": {
-          "value": null,
-          "long": null,
-          "units": "touch"
-        },
-        "uses": {
-          "value": 0,
-          "max": 0,
-          "per": ""
-        },
-        "consume": {
-          "type": "",
-          "target": null,
-          "amount": null
-        },
-        "ability": "",
-        "actionType": "msak",
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "critical": {
-          "threshold": null,
-          "damage": ""
-        },
-        "damage": {
-          "parts": [
-            [
-              "3d10",
-              "necrotic"
-            ]
-          ],
-          "versatile": ""
-        },
-        "formula": "",
-        "save": {
-          "ability": "",
-          "dc": null,
-          "scaling": "spell",
-          "value": ""
-        },
-        "level": 1,
-        "school": "nec",
-        "components": {
-          "value": "",
-          "vocal": true,
-          "somatic": true,
-          "material": false,
-          "ritual": false,
-          "concentration": false
-        },
-        "materials": {
-          "value": "",
-          "consumed": false,
-          "cost": 0,
-          "supply": 0
-        },
-        "preparation": {
-          "mode": "prepared",
-          "prepared": false
-        },
-        "scaling": {
-          "mode": "level",
-          "formula": "1d10"
-        },
-        "attunement": 0
-      },
-      "sort": 100001,
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.dnd5e.spells.ksaaTxIbKx2sJfia"
-        }
-      },
-      "img": "systems/dnd5e/icons/spells/rip-jade-2.jpg",
-      "effects": [],
-      "folder": null,
-      "ownership": {
-        "default": 0
-      }
-    },
-    {
-      "_id": "TNxLsKRriJmXKVxa",
-      "name": "Protection from Evil and Good",
-      "type": "spell",
-      "system": {
-        "description": {
-          "value": "<p>Until the spell ends, one willing creature you touch is protected against certain types of creatures: aberrations, celestials, elementals, fey, fiends, and undead.</p><p>The protection grants several benefits. Creatures of those types have disadvantage on attack rolls against the target. The target also can't be charmed, frightened, or possessed by them. If the target is already charmed, frightened, or possessed by such a creature, the target has advantage on any new saving throw against the relevant effect.</p>",
-          "chat": "",
-          "unidentified": ""
-        },
-        "source": "PHB pg. 270",
-        "activation": {
-          "type": "action",
-          "cost": 1,
-          "condition": ""
-        },
-        "duration": {
-          "value": 10,
-          "units": "minute"
-        },
-        "target": {
-          "value": 1,
-          "width": null,
-          "units": "",
-          "type": "creature"
-        },
-        "range": {
-          "value": null,
-          "long": null,
-          "units": "touch"
-        },
-        "uses": {
-          "value": 0,
-          "max": 0,
-          "per": ""
-        },
-        "consume": {
-          "type": "",
-          "target": null,
-          "amount": null
-        },
-        "ability": "",
-        "actionType": "util",
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "critical": {
-          "threshold": null,
-          "damage": ""
-        },
-        "damage": {
-          "parts": [],
-          "versatile": "",
-          "value": ""
-        },
-        "formula": "",
-        "save": {
-          "ability": "",
-          "dc": null,
-          "scaling": "spell",
-          "value": ""
-        },
-        "level": 1,
-        "school": "abj",
-        "components": {
-          "value": "",
-          "vocal": true,
-          "somatic": true,
-          "material": true,
-          "ritual": false,
-          "concentration": true
-        },
-        "materials": {
-          "value": "Holy water or powdered silver and iron, which the spell consumes",
-          "consumed": true,
-          "cost": 0,
-          "supply": 0
-        },
-        "preparation": {
-          "mode": "prepared",
-          "prepared": false
-        },
-        "scaling": {
-          "mode": "none",
-          "formula": ""
-        },
-        "attunement": 0
-      },
-      "sort": 100001,
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.dnd5e.spells.xmDBqZhRVrtLP8h2"
-        }
-      },
-      "img": "systems/dnd5e/icons/spells/protect-sky-2.jpg",
-      "effects": [],
-      "folder": null,
-      "ownership": {
-        "default": 0
-      }
-    },
-    {
-      "_id": "RP4tFwCKWdxyu6Ir",
-      "name": "Purify Food and Drink",
-      "type": "spell",
-      "system": {
-        "description": {
-          "value": "<p>All nonmagical food and drink within a 5-foot-radius sphere centered on a point of your choice within range is purified and rendered free of poison and disease.</p>",
-          "chat": "",
-          "unidentified": ""
-        },
-        "source": "PHB pg. 270",
-        "activation": {
-          "type": "action",
-          "cost": 1,
-          "condition": ""
-        },
-        "duration": {
-          "value": null,
-          "units": "inst"
-        },
-        "target": {
-          "value": 5,
-          "width": null,
-          "units": "ft",
-          "type": "sphere"
-        },
-        "range": {
-          "value": 10,
-          "long": 0,
-          "units": "ft"
-        },
-        "uses": {
-          "value": 0,
-          "max": 0,
-          "per": ""
-        },
-        "consume": {
-          "type": "",
-          "target": null,
-          "amount": null
-        },
-        "ability": "",
-        "actionType": "util",
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "critical": {
-          "threshold": null,
-          "damage": ""
-        },
-        "damage": {
-          "parts": [],
-          "versatile": "",
-          "value": ""
-        },
-        "formula": "",
-        "save": {
-          "ability": "",
-          "dc": null,
-          "scaling": "spell",
-          "value": ""
-        },
-        "level": 1,
-        "school": "trs",
-        "components": {
-          "value": "",
-          "vocal": true,
-          "somatic": true,
-          "material": false,
-          "ritual": false,
-          "concentration": false
-        },
-        "materials": {
-          "value": "",
-          "consumed": false,
-          "cost": 0,
-          "supply": 0
-        },
-        "preparation": {
-          "mode": "prepared",
-          "prepared": false
-        },
-        "scaling": {
-          "mode": "none",
-          "formula": ""
-        },
-        "attunement": 0
-      },
-      "sort": 100001,
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.dnd5e.spells.Kn7K5PtYUJAKZTTp"
-        }
-      },
-      "img": "systems/dnd5e/icons/spells/light-jade-1.jpg",
-      "effects": [],
-      "folder": null,
-      "ownership": {
-        "default": 0
-      }
-    },
-    {
-      "_id": "1qiq0PXvtZ0scBk3",
-      "name": "Shield of Faith",
-      "type": "spell",
-      "system": {
-        "description": {
-          "value": "<p>A shimmering field appears and surrounds a creature of your choice within range, granting it a +2 bonus to AC for the duration.</p>",
-          "chat": "",
-          "unidentified": ""
-        },
-        "source": "PHB pg. 275",
-        "activation": {
-          "type": "bonus",
-          "cost": 1,
-          "condition": ""
-        },
-        "duration": {
-          "value": 10,
-          "units": "minute"
-        },
-        "target": {
-          "value": 1,
-          "width": null,
-          "units": "",
-          "type": "creature"
-        },
-        "range": {
-          "value": 60,
-          "long": 0,
-          "units": "ft"
-        },
-        "uses": {
-          "value": 0,
-          "max": 0,
-          "per": ""
-        },
-        "consume": {
-          "type": "",
-          "target": null,
-          "amount": null
-        },
-        "ability": "",
-        "actionType": "util",
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "critical": {
-          "threshold": null,
-          "damage": ""
-        },
-        "damage": {
-          "parts": [],
-          "versatile": "",
-          "value": ""
-        },
-        "formula": "",
-        "save": {
-          "ability": "",
-          "dc": null,
-          "scaling": "spell",
-          "value": ""
-        },
-        "level": 1,
-        "school": "abj",
-        "components": {
-          "value": "",
-          "vocal": true,
-          "somatic": true,
-          "material": true,
-          "ritual": false,
-          "concentration": true
-        },
-        "materials": {
-          "value": "A small parchment with a bit of holy text written on it.",
-          "consumed": false,
-          "cost": 0,
-          "supply": 0
-        },
-        "preparation": {
-          "mode": "prepared",
-          "prepared": false
-        },
-        "scaling": {
-          "mode": "none",
-          "formula": ""
-        },
-        "attunement": 0
-      },
-      "sort": 100001,
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.dnd5e.spells.jZ6JNykRtdQ90MOo"
-        }
-      },
-      "img": "systems/dnd5e/icons/spells/protect-sky-2.jpg",
-      "effects": [],
-      "folder": null,
-      "ownership": {
-        "default": 0
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -3812,7 +2041,7 @@
         "price": 0.5,
         "attunement": 0,
         "equipped": false,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
         "activation": {
           "type": "action",
@@ -3864,8 +2093,7 @@
           "dc": null,
           "scaling": "spell"
         },
-        "consumableType": "food",
-        "attuned": false
+        "consumableType": "food"
       },
       "sort": 1800000,
       "flags": {},
@@ -3874,6 +2102,14 @@
       "folder": null,
       "ownership": {
         "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -3892,7 +2128,7 @@
         "price": 0.01,
         "attunement": 0,
         "equipped": false,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
         "activation": {
           "type": "action",
@@ -3949,8 +2185,7 @@
           "dc": null,
           "scaling": "spell"
         },
-        "consumableType": "trinket",
-        "attuned": false
+        "consumableType": "trinket"
       },
       "sort": 4700000,
       "flags": {
@@ -3966,6 +2201,14 @@
       "folder": null,
       "ownership": {
         "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -3984,9 +2227,8 @@
         "price": 25,
         "attunement": 0,
         "equipped": false,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
-        "attuned": false,
         "damage": {
           "parts": []
         }
@@ -3998,6 +2240,14 @@
       "folder": null,
       "ownership": {
         "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -4093,6 +2343,14 @@
       "folder": null,
       "ownership": {
         "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -4168,6 +2426,14 @@
       "folder": null,
       "ownership": {
         "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -4238,11 +2504,19 @@
       },
       "sort": 5850000,
       "flags": {},
-      "img": "systems/dnd5e/icons/spells/evil-eye-red-1.jpg",
+      "img": "icons/magic/perception/eye-ringed-glow-angry-small-red.webp",
       "effects": [],
       "folder": null,
       "ownership": {
         "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -4423,6 +2697,14 @@
         "core": {
           "sourceId": "Compendium.dnd5e.classes.tlwBnN8GmqJcTgub"
         }
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -4432,7 +2714,7 @@
       "img": "icons/magic/life/ankh-gold-blue.webp",
       "system": {
         "description": {
-          "value": "<p>As a conduit for divine power, you can cast cleric spells.</p>\n<h3>Cantrips</h3>\n<p>At 1st level, you know three cantrips of your choice from the cleric spell list. You learn additional cleric cantrips of your choice at higher levels, as shown in the Cantrips Known column of the Cleric table.</p>\n<h3>Preparing and Casting Spells</h3>\n<p>The Cleric table shows how many spell slots you have to cast your spells of 1st level and higher. To cast one of these spells, you must expend a slot of the spell's level or higher. You regain all expended spell slots when you finish a long rest.</p><p>You prepare the list of cleric spells that are available for you to cast, choosing from the cleric spell list. When you do so, choose a number of cleric spells equal to your Wisdom modifier + your cleric level (minimum of one spell). The spells must be of a level for which you have spell slots.</p><p>For example, if you are a 3rd-level cleric, you have four 1st-level and two 2nd-level spell slots. With a Wisdom of 16, your list of prepared spells can include six spells of 1st or 2nd level, in any combination. If you prepare the 1st-level spell cure wounds, you can cast it using a 1st-level or 2nd-level slot. Casting the spell doesn't remove it from your list of prepared spells.</p><p>You can change your list of prepared spells when you finish a long rest. Preparing a new list of cleric spells requires time spent in prayer and meditation: at least 1 minute per spell level for each spell on your list.</p>\n<table border=\"1\">\n<thead>\n<tr>\n<td rowspan=\"2\">Level</td>\n<td rowspan=\"2\">Cantrips Known</td>\n<td colspan=\"9\">—Spell Slots per Spell Level—</td>\n</tr>\n<tr>\n<td>1st</td>\n<td>2nd</td>\n<td>3rd</td>\n<td>4th</td>\n<td>5th</td>\n<td>6th</td>\n<td>7th</td>\n<td>8th</td>\n<td>9th</td>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>1st</td>\n<td>3</td>\n<td>2</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>2nd</td>\n<td>3</td>\n<td>3</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>3rd</td>\n<td>3</td>\n<td>4</td>\n<td>2</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>4th</td>\n<td>4</td>\n<td>4</td>\n<td>3</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>5th</td>\n<td>4</td>\n<td>4</td>\n<td>3</td>\n<td>2</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>6th</td>\n<td>4</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>7th</td>\n<td>4</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>1</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>8th</td>\n<td>4</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>2</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>9th</td>\n<td>4</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>1</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>10th</td>\n<td>5</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>2</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>11th</td>\n<td>5</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>2</td>\n<td>1</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>12th</td>\n<td>5</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>2</td>\n<td>1</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>13th</td>\n<td>5</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>2</td>\n<td>1</td>\n<td>1</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>14th</td>\n<td>5</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>2</td>\n<td>1</td>\n<td>1</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>15th</td>\n<td>5</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>2</td>\n<td>1</td>\n<td>1</td>\n<td>1</td>\n<td>-</td>\n</tr>\n<tr>\n<td>16th</td>\n<td>5</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>2</td>\n<td>1</td>\n<td>1</td>\n<td>1</td>\n<td>-</td>\n</tr>\n<tr>\n<td>17th</td>\n<td>5</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>2</td>\n<td>1</td>\n<td>1</td>\n<td>1</td>\n<td>1</td>\n</tr>\n<tr>\n<td>18th</td>\n<td>5</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>1</td>\n<td>1</td>\n<td>1</td>\n<td>1</td>\n</tr>\n<tr>\n<td>19th</td>\n<td>5</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>2</td>\n<td>1</td>\n<td>1</td>\n<td>1</td>\n</tr>\n<tr>\n<td>20th</td>\n<td>5</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>2</td>\n<td>2</td>\n<td>1</td>\n<td>1</td>\n</tr>\n</tbody>\n</table>\n<h3>Spellcasting Ability</h3>\n<p>Wisdom is your spellcasting ability for your cleric spells. The power of your spells comes from your devotion to your deity. You use your Wisdom whenever a cleric spell refers to your spellcasting ability. In addition, you use your Wisdom modifier when setting the saving throw DC for a cleric spell you cast and when making an attack roll with one.</p><p><strong>Spell save DC</strong>= 8 + your proficiency bonus + your Wisdom modifier</p><p><strong>Spell attack modifier</strong> = your proficiency bonus + your Wisdom modifier</p>\n<h3>Ritual Casting</h3>\n<p>You can cast a cleric spell as a ritual if that spell has the ritual tag and you have the spell prepared.</p>\n<h3>Spellcasting Focus</h3>\n<p>You can use a holy symbol (see @Compendium[dnd5e.rules.bogWrnJqoNlBd0O8]{Adventuring Gear}) as a spellcasting focus for your cleric spells.</p>",
+          "value": "<p>As a conduit for divine power, you can cast cleric spells.</p>\n<h3>Cantrips</h3>\n<p>At 1st level, you know three cantrips of your choice from the cleric spell list. You learn additional cleric cantrips of your choice at higher levels, as shown in the Cantrips Known column of the Cleric table.</p>\n<h3>Preparing and Casting Spells</h3>\n<p>The Cleric table shows how many spell slots you have to cast your spells of 1st level and higher. To cast one of these spells, you must expend a slot of the spell's level or higher. You regain all expended spell slots when you finish a long rest.</p><p>You prepare the list of cleric spells that are available for you to cast, choosing from the cleric spell list. When you do so, choose a number of cleric spells equal to your Wisdom modifier + your cleric level (minimum of one spell). The spells must be of a level for which you have spell slots.</p><p>For example, if you are a 3rd-level cleric, you have four 1st-level and two 2nd-level spell slots. With a Wisdom of 16, your list of prepared spells can include six spells of 1st or 2nd level, in any combination. If you prepare the 1st-level spell cure wounds, you can cast it using a 1st-level or 2nd-level slot. Casting the spell doesn't remove it from your list of prepared spells.</p><p>You can change your list of prepared spells when you finish a long rest. Preparing a new list of cleric spells requires time spent in prayer and meditation: at least 1 minute per spell level for each spell on your list.</p>\n<table border=\"1\">\n<thead>\n<tr>\n<td rowspan=\"2\">Level</td>\n<td rowspan=\"2\">Cantrips Known</td>\n<td colspan=\"9\">—Spell Slots per Spell Level—</td>\n</tr>\n<tr>\n<td>1st</td>\n<td>2nd</td>\n<td>3rd</td>\n<td>4th</td>\n<td>5th</td>\n<td>6th</td>\n<td>7th</td>\n<td>8th</td>\n<td>9th</td>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>1st</td>\n<td>3</td>\n<td>2</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>2nd</td>\n<td>3</td>\n<td>3</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>3rd</td>\n<td>3</td>\n<td>4</td>\n<td>2</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>4th</td>\n<td>4</td>\n<td>4</td>\n<td>3</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>5th</td>\n<td>4</td>\n<td>4</td>\n<td>3</td>\n<td>2</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>6th</td>\n<td>4</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>7th</td>\n<td>4</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>1</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>8th</td>\n<td>4</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>2</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>9th</td>\n<td>4</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>1</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>10th</td>\n<td>5</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>2</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>11th</td>\n<td>5</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>2</td>\n<td>1</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>12th</td>\n<td>5</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>2</td>\n<td>1</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>13th</td>\n<td>5</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>2</td>\n<td>1</td>\n<td>1</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>14th</td>\n<td>5</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>2</td>\n<td>1</td>\n<td>1</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>15th</td>\n<td>5</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>2</td>\n<td>1</td>\n<td>1</td>\n<td>1</td>\n<td>-</td>\n</tr>\n<tr>\n<td>16th</td>\n<td>5</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>2</td>\n<td>1</td>\n<td>1</td>\n<td>1</td>\n<td>-</td>\n</tr>\n<tr>\n<td>17th</td>\n<td>5</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>2</td>\n<td>1</td>\n<td>1</td>\n<td>1</td>\n<td>1</td>\n</tr>\n<tr>\n<td>18th</td>\n<td>5</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>1</td>\n<td>1</td>\n<td>1</td>\n<td>1</td>\n</tr>\n<tr>\n<td>19th</td>\n<td>5</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>2</td>\n<td>1</td>\n<td>1</td>\n<td>1</td>\n</tr>\n<tr>\n<td>20th</td>\n<td>5</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>2</td>\n<td>2</td>\n<td>1</td>\n<td>1</td>\n</tr>\n</tbody>\n</table>\n<h3>Spellcasting Ability</h3>\n<p>Wisdom is your spellcasting ability for your cleric spells. The power of your spells comes from your devotion to your deity. You use your Wisdom whenever a cleric spell refers to your spellcasting ability. In addition, you use your Wisdom modifier when setting the saving throw DC for a cleric spell you cast and when making an attack roll with one.</p><p><strong>Spell save DC</strong>= 8 + your proficiency bonus + your Wisdom modifier</p><p><strong>Spell attack modifier</strong> = your proficiency bonus + your Wisdom modifier</p>\n<h3>Ritual Casting</h3>\n<p>You can cast a cleric spell as a ritual if that spell has the ritual tag and you have the spell prepared.</p>\n<h3>Spellcasting Focus</h3>\n<p>You can use a holy symbol (see @UUID[Compendium.dnd5e.rules.BYFd9hiJGo9L5aOM.JournalEntryPage.AjavRU4yPfI9hfaI]{Adventuring Gear}) as a spellcasting focus for your cleric spells.</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -4502,6 +2784,14 @@
           "sourceId": "Compendium.dnd5e.classfeatures.v4gKwLhAq9vuqza7",
           "advancementOrigin": "nol9m3zejhgkpted.x1zumbrnbhqlrrs6"
         }
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -4581,6 +2871,14 @@
           "sourceId": "Compendium.dnd5e.classfeatures.x637K2Icp2ZFM1TB",
           "advancementOrigin": "nol9m3zejhgkpted.x1zumbrnbhqlrrs6"
         }
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -4686,6 +2984,14 @@
         "core": {
           "sourceId": "Compendium.dnd5e.subclasses.H3RYLGqCiqm8BP3q"
         }
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -4759,14 +3065,21 @@
           "_id": "Dk95lqbXXCUlefZW",
           "changes": [
             {
-              "key": "data.traits.armorProf.value",
+              "key": "system.traits.armorProf.value",
               "mode": 2,
-              "value": "hvy"
+              "value": "hvy",
+              "priority": null
             }
           ],
           "disabled": false,
           "duration": {
-            "startTime": null
+            "startTime": null,
+            "seconds": null,
+            "combat": null,
+            "rounds": null,
+            "turns": null,
+            "startRound": null,
+            "startTurn": null
           },
           "icon": "icons/equipment/chest/breastplate-layered-steel.webp",
           "label": "Heavy Armor Proficiency",
@@ -4786,6 +3099,14 @@
           "sourceId": "Compendium.dnd5e.classfeatures.68bYIOvx6rIqnlOW",
           "advancementOrigin": "6srkb2hvbgbrjzi3.9fyr5t01nhdg0u8n"
         }
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -4865,6 +3186,2060 @@
           "sourceId": "Compendium.dnd5e.classfeatures.jF8AFfEMICIJnAkR",
           "advancementOrigin": "6srkb2hvbgbrjzi3.9fyr5t01nhdg0u8n"
         }
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      }
+    },
+    {
+      "_id": "P7mF2MxSuVJwHRRY",
+      "name": "Guidance",
+      "ownership": {
+        "default": 0
+      },
+      "type": "spell",
+      "system": {
+        "description": {
+          "value": "<p>You touch one willing creature. Once before the spell ends, the target can roll a d4 and add the number rolled to one ability check of its choice. It can roll the die before or after making the ability check. The spell then ends.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "PHB pg. 248",
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": 1,
+          "units": "minute"
+        },
+        "target": {
+          "value": 1,
+          "width": null,
+          "units": "",
+          "type": "creature"
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": "touch"
+        },
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": ""
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null
+        },
+        "ability": "",
+        "actionType": "util",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": "",
+          "value": ""
+        },
+        "formula": "1d4",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell",
+          "value": ""
+        },
+        "level": 0,
+        "school": "div",
+        "components": {
+          "value": "",
+          "vocal": true,
+          "somatic": true,
+          "material": false,
+          "ritual": false,
+          "concentration": true
+        },
+        "materials": {
+          "value": "",
+          "consumed": false,
+          "cost": 0,
+          "supply": 0
+        },
+        "preparation": {
+          "mode": "prepared",
+          "prepared": false
+        },
+        "scaling": {
+          "mode": "none",
+          "formula": ""
+        }
+      },
+      "sort": 100001,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.P7mF2MxSuVJwHRRY"
+        }
+      },
+      "img": "icons/magic/control/buff-flight-wings-blue.webp",
+      "effects": [],
+      "folder": null,
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.0",
+        "coreVersion": "10.279",
+        "createdTime": 1661603486203,
+        "modifiedTime": 1661603486203,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      }
+    },
+    {
+      "_id": "n9pJzTDsAwQxJVRl",
+      "name": "Sacred Flame",
+      "ownership": {
+        "default": 0
+      },
+      "type": "spell",
+      "system": {
+        "description": {
+          "value": "<p>Flame-like radiance descends on a creature that you can see within range. The target must succeed on a Dexterity saving throw or take 1d8 radiant damage. The target gains no benefit from cover for this saving throw.</p><p>The spell's damage increases by 1d8 when you reach 5th level (2d8), 11th level (3d8), and 17th level (4d8).</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "PHB pg. 272",
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": null,
+          "units": "inst"
+        },
+        "target": {
+          "value": 1,
+          "width": null,
+          "units": "",
+          "type": "creature"
+        },
+        "range": {
+          "value": 60,
+          "long": 0,
+          "units": "ft"
+        },
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": ""
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null
+        },
+        "ability": "",
+        "actionType": "save",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [
+            [
+              "1d8",
+              "radiant"
+            ]
+          ],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "dex",
+          "dc": 12,
+          "scaling": "spell"
+        },
+        "level": 0,
+        "school": "evo",
+        "components": {
+          "value": "",
+          "vocal": true,
+          "somatic": true,
+          "material": false,
+          "ritual": false,
+          "concentration": false
+        },
+        "materials": {
+          "value": "",
+          "consumed": false,
+          "cost": 0,
+          "supply": 0
+        },
+        "preparation": {
+          "mode": "prepared",
+          "prepared": false
+        },
+        "scaling": {
+          "mode": "cantrip",
+          "formula": ""
+        }
+      },
+      "sort": 100001,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.n9pJzTDsAwQxJVRl"
+        }
+      },
+      "img": "icons/magic/light/beam-rays-orange.webp",
+      "effects": [],
+      "folder": null,
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.0",
+        "coreVersion": "10.279",
+        "createdTime": 1661603486203,
+        "modifiedTime": 1661603486203,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      }
+    },
+    {
+      "_id": "MUO1uYN7JR1hm4dR",
+      "name": "Thaumaturgy",
+      "ownership": {
+        "default": 0
+      },
+      "type": "spell",
+      "system": {
+        "description": {
+          "value": "<p>You create one of the following magical effects within range:</p>\n<ul>\n<li>Your voice booms up to three times as loud as normal for 1 minute.</li>\n<li>You cause flames to flicker, brighten, dim, or change color for 1 minute.</li>\n<li>You cause harmless tremors in the ground for 1 minute.</li>\n<li>You create a sound that originates from a point of your choice within range.</li>\n<li>You cause an unlocked door or window to fly open or slam shut.</li>\n<li>You alter the appearance of your eyes for 1 minute.</li>\n</ul>\n<p>If you cast this spell multiple times, you can have up to three of its 1-minute effects active at a time, and you can dismiss such an effect as an action.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "PHB pg. 282",
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": 1,
+          "units": "minute"
+        },
+        "target": {
+          "value": 0,
+          "width": null,
+          "units": "",
+          "type": ""
+        },
+        "range": {
+          "value": 30,
+          "long": 0,
+          "units": "ft"
+        },
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": ""
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null
+        },
+        "ability": "",
+        "actionType": "util",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": "",
+          "value": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell",
+          "value": ""
+        },
+        "level": 0,
+        "school": "trs",
+        "components": {
+          "value": "",
+          "vocal": true,
+          "somatic": false,
+          "material": false,
+          "ritual": false,
+          "concentration": false
+        },
+        "materials": {
+          "value": "",
+          "consumed": false,
+          "cost": 0,
+          "supply": 0
+        },
+        "preparation": {
+          "mode": "prepared",
+          "prepared": false
+        },
+        "scaling": {
+          "mode": "none",
+          "formula": ""
+        }
+      },
+      "sort": 100001,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.MUO1uYN7JR1hm4dR"
+        }
+      },
+      "img": "icons/magic/fire/explosion-fireball-small-purple-orange.webp",
+      "effects": [],
+      "folder": null,
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.0",
+        "coreVersion": "10.279",
+        "createdTime": 1661603486205,
+        "modifiedTime": 1661603486205,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      }
+    },
+    {
+      "_id": "8dzaICjGy6mTUaUr",
+      "name": "Bless",
+      "type": "spell",
+      "img": "icons/magic/control/buff-flight-wings-blue.webp",
+      "system": {
+        "description": {
+          "value": "<p>You bless up to three creatures of your choice within range. Whenever a target makes an attack roll or a saving throw before the spell ends, the target can roll 1d4 and add the number rolled to the attack roll or saving throw.</p>\n<p><strong>Higher Levels.</strong> When you cast this spell using a spell slot of 2nd level or higher, you can target one additional creature for each slot level above 1st.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "PHB pg. 219",
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": 1,
+          "units": "minute"
+        },
+        "target": {
+          "value": 3,
+          "width": null,
+          "units": "",
+          "type": "creature"
+        },
+        "range": {
+          "value": 30,
+          "long": 0,
+          "units": "ft"
+        },
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": ""
+        },
+        "consume": {
+          "type": "",
+          "target": "",
+          "amount": null
+        },
+        "ability": "",
+        "actionType": "util",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": "",
+          "value": ""
+        },
+        "formula": "1d4",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell",
+          "value": ""
+        },
+        "level": 1,
+        "school": "enc",
+        "components": {
+          "value": "",
+          "vocal": true,
+          "somatic": true,
+          "material": true,
+          "ritual": false,
+          "concentration": true
+        },
+        "materials": {
+          "value": "A sprinkling of holy water",
+          "consumed": false,
+          "cost": 0,
+          "supply": 0
+        },
+        "preparation": {
+          "mode": "always",
+          "prepared": true
+        },
+        "scaling": {
+          "mode": "level",
+          "formula": ""
+        }
+      },
+      "effects": [
+        {
+          "_id": "8rP3gwmXVTgZqYZE",
+          "flags": {},
+          "changes": [
+            {
+              "key": "system.bonuses.abilities.save",
+              "mode": 2,
+              "value": "+1d4",
+              "priority": null
+            },
+            {
+              "key": "system.bonuses.mwak.attack",
+              "mode": 2,
+              "value": "+1d4",
+              "priority": null
+            },
+            {
+              "key": "system.bonuses.msak.attack",
+              "mode": 2,
+              "value": "+1d4",
+              "priority": null
+            },
+            {
+              "key": "system.bonuses.rsak.attack",
+              "mode": 2,
+              "value": "+1d4",
+              "priority": null
+            },
+            {
+              "key": "system.bonuses.rwak.attack",
+              "mode": 2,
+              "value": "+1d4",
+              "priority": null
+            }
+          ],
+          "disabled": true,
+          "duration": {
+            "startTime": null,
+            "seconds": 60,
+            "rounds": 10,
+            "combat": null,
+            "turns": null,
+            "startRound": null,
+            "startTurn": null
+          },
+          "icon": "icons/magic/control/buff-flight-wings-blue.webp",
+          "label": "Bless",
+          "origin": "Item.kZZAZ6kp9YzgPQEe",
+          "tint": null,
+          "transfer": true
+        }
+      ],
+      "folder": null,
+      "sort": 100001,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.8dzaICjGy6mTUaUr"
+        }
+      },
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.0",
+        "coreVersion": "10.279",
+        "createdTime": 1661603486205,
+        "modifiedTime": 1661603486205,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      }
+    },
+    {
+      "_id": "uUWb1wZgtMou0TVP",
+      "name": "Cure Wounds",
+      "ownership": {
+        "default": 0
+      },
+      "type": "spell",
+      "system": {
+        "description": {
+          "value": "<p>A creature you touch regains a number of hit points equal to 1d8 + your spellcasting ability modifier. This spell has no effect on undead or constructs.</p><p><strong>Higher Levels.</strong> When you cast this spell using a spell slot of 2nd level or higher, the healing increases by 1d8 for each slot level above 1st.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "PHB pg. 230",
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": null,
+          "units": "inst"
+        },
+        "target": {
+          "value": 1,
+          "width": null,
+          "units": "",
+          "type": "creature"
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": "touch"
+        },
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": ""
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null
+        },
+        "ability": "",
+        "actionType": "heal",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [
+            [
+              "1d8 + @mod",
+              "healing"
+            ]
+          ],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell",
+          "value": ""
+        },
+        "level": 1,
+        "school": "evo",
+        "components": {
+          "value": "",
+          "vocal": true,
+          "somatic": true,
+          "material": false,
+          "ritual": false,
+          "concentration": false
+        },
+        "materials": {
+          "value": "",
+          "consumed": false,
+          "cost": 0,
+          "supply": 0
+        },
+        "preparation": {
+          "mode": "always",
+          "prepared": true
+        },
+        "scaling": {
+          "mode": "level",
+          "formula": "1d8"
+        }
+      },
+      "sort": 100001,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.uUWb1wZgtMou0TVP"
+        }
+      },
+      "img": "icons/magic/life/heart-cross-green.webp",
+      "effects": [],
+      "folder": null,
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.0",
+        "coreVersion": "10.279",
+        "createdTime": 1661603486206,
+        "modifiedTime": 1661603486206,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      }
+    },
+    {
+      "_id": "gvdA9nPuWLck4tBl",
+      "name": "Sanctuary",
+      "ownership": {
+        "default": 0
+      },
+      "type": "spell",
+      "system": {
+        "description": {
+          "value": "<p>You ward a creature within range against attack. Until the spell ends, any creature who targets the warded creature with an attack or a harmful spell must first make a Wisdom saving throw. On a failed save, the creature must choose a new target or lose the attack or spell. This spell doesn't protect the warded creature from area effects, such as the explosion of a Fireball.</p><p>If the warded creature makes an attack or casts a spell that affects an enemy creature, this spell ends.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "PHB pg. 272",
+        "activation": {
+          "type": "bonus",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": 1,
+          "units": "minute"
+        },
+        "target": {
+          "value": 1,
+          "width": null,
+          "units": "",
+          "type": "creature"
+        },
+        "range": {
+          "value": 30,
+          "long": 0,
+          "units": "ft"
+        },
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": ""
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null
+        },
+        "ability": "",
+        "actionType": "save",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": "",
+          "value": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "wis",
+          "dc": 12,
+          "scaling": "spell"
+        },
+        "level": 1,
+        "school": "abj",
+        "components": {
+          "value": "",
+          "vocal": true,
+          "somatic": true,
+          "material": true,
+          "ritual": false,
+          "concentration": false
+        },
+        "materials": {
+          "value": "A small silver mirror",
+          "consumed": false,
+          "cost": 0,
+          "supply": 0
+        },
+        "preparation": {
+          "mode": "prepared",
+          "prepared": false
+        },
+        "scaling": {
+          "mode": "none",
+          "formula": ""
+        }
+      },
+      "sort": 100001,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.gvdA9nPuWLck4tBl"
+        }
+      },
+      "img": "icons/magic/defensive/shield-barrier-flaming-diamond-blue-yellow.webp",
+      "effects": [],
+      "folder": null,
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.0",
+        "coreVersion": "10.279",
+        "createdTime": 1661603486206,
+        "modifiedTime": 1661603486206,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      }
+    },
+    {
+      "_id": "arzCrMRgcNiQuh43",
+      "name": "Command",
+      "ownership": {
+        "default": 0
+      },
+      "type": "spell",
+      "system": {
+        "description": {
+          "value": "<p>You speak a one-word command to a creature you can see within range. The target must succeed on a Wisdom saving throw or follow the command on its next turn. The spell has no effect if the target is undead, if it doesn't understand your language, or if your command is directly harmful to it.</p><p>Some typical commands and their effects follow. You might issue a command other than one described here. If you do so, the DM determines how the target behaves. If the target can't follow your command, the spell ends.</p><p><strong>Approach.</strong> The target moves toward you by the shortest and most direct route, ending its turn if it moves within 5 feet of you.</p><p><strong>Drop.</strong> The target drops whatever it is holding and then ends its turn.</p><p><strong>Flee.</strong> The target spends its turn moving away from you by the fastest available means.</p><p><strong>Grovel.</strong> The target falls prone and then ends its turn.</p><p><strong>Halt.</strong> The target doesn't move and takes no actions. A flying creature stays aloft, provided that it is able to do so. If it must move to stay aloft, it flies the minimum distance needed to remain in the air.</p><p><strong>Higher Levels. </strong>When you cast this spell using a spell slot of 2nd level or higher, you can affect one additional creature for each slot level above 1st. The creatures must be within 30 feet of each other when you target them.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "PHB pg. 223",
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": 1,
+          "units": "round"
+        },
+        "target": {
+          "value": 1,
+          "width": null,
+          "units": "",
+          "type": "creature"
+        },
+        "range": {
+          "value": 60,
+          "long": 0,
+          "units": "ft"
+        },
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": ""
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null
+        },
+        "ability": "",
+        "actionType": "save",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": "",
+          "value": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "wis",
+          "dc": 12,
+          "scaling": "spell"
+        },
+        "level": 1,
+        "school": "enc",
+        "components": {
+          "value": "",
+          "vocal": true,
+          "somatic": false,
+          "material": false,
+          "ritual": false,
+          "concentration": false
+        },
+        "materials": {
+          "value": "",
+          "consumed": false,
+          "cost": 0,
+          "supply": 0
+        },
+        "preparation": {
+          "mode": "prepared",
+          "prepared": true
+        },
+        "scaling": {
+          "mode": "none",
+          "formula": ""
+        }
+      },
+      "sort": 100001,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.arzCrMRgcNiQuh43"
+        }
+      },
+      "img": "icons/magic/fire/explosion-fireball-small-purple.webp",
+      "effects": [],
+      "folder": null,
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.0",
+        "coreVersion": "10.279",
+        "createdTime": 1661603486207,
+        "modifiedTime": 1661603486207,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      }
+    },
+    {
+      "_id": "a3XtAO5n2GrqiAh5",
+      "name": "Create or Destroy Water",
+      "ownership": {
+        "default": 0
+      },
+      "type": "spell",
+      "system": {
+        "description": {
+          "value": "<p>You either create or destroy water.</p><p><strong>Create Water.</strong> You create up to 10 gallons of clean water within range in an open container. Alternatively, the water falls as rain in a 30-foot cube within range.</p><p><strong>Destroy Water.</strong> You destroy up to 10 gallons of water in an open container within range. Alternatively, you destroy fog in a 30-foot cube within range.</p><p><strong>Higher Levels. </strong>When you cast this spell using a spell slot of 2nd level or higher, you create or destroy 10 additional gallons of water, or the size of the cube increases by 5 feet, for each slot level above 1st.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "PHB pg. 229",
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": null,
+          "units": "inst"
+        },
+        "target": {
+          "value": 30,
+          "width": null,
+          "units": "ft",
+          "type": "cube"
+        },
+        "range": {
+          "value": 30,
+          "long": 0,
+          "units": "ft"
+        },
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": ""
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null
+        },
+        "ability": "",
+        "actionType": "util",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": "",
+          "value": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell",
+          "value": ""
+        },
+        "level": 1,
+        "school": "trs",
+        "components": {
+          "value": "",
+          "vocal": true,
+          "somatic": true,
+          "material": true,
+          "ritual": false,
+          "concentration": false
+        },
+        "materials": {
+          "value": "A drop of water if creating water or a few grains of sand if destroying it.",
+          "consumed": false,
+          "cost": 0,
+          "supply": 0
+        },
+        "preparation": {
+          "mode": "prepared",
+          "prepared": false
+        },
+        "scaling": {
+          "mode": "level",
+          "formula": ""
+        }
+      },
+      "sort": 100001,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.a3XtAO5n2GrqiAh5"
+        }
+      },
+      "img": "icons/magic/air/wind-swirl-purple-blue.webp",
+      "effects": [],
+      "folder": null,
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.0",
+        "coreVersion": "10.279",
+        "createdTime": 1661603486207,
+        "modifiedTime": 1661603486207,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      }
+    },
+    {
+      "_id": "95K2aUhAGV9qXjnf",
+      "name": "Bane",
+      "ownership": {
+        "default": 0
+      },
+      "type": "spell",
+      "system": {
+        "description": {
+          "value": "<p>Up to three creatures of your choice that you can see within range must make Charisma saving throws. Whenever a target that fails this saving throw makes an attack roll or a saving throw before the spell ends, the target must roll a d4 and subtract the number rolled from the attack roll or saving throw.</p>\n<p><strong>Higher Levels.</strong> When you cast this spell using a spell slot of 2nd level or higher, you can target one additional creature for each slot level above 1st.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "PHB pg. 216",
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": 1,
+          "units": "minute"
+        },
+        "target": {
+          "value": 3,
+          "width": null,
+          "units": "",
+          "type": "creature"
+        },
+        "range": {
+          "value": 30,
+          "long": 0,
+          "units": "ft"
+        },
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": ""
+        },
+        "consume": {
+          "type": "",
+          "target": "",
+          "amount": null
+        },
+        "ability": "",
+        "actionType": "save",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": "",
+          "value": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "cha",
+          "dc": 12,
+          "scaling": "spell"
+        },
+        "level": 1,
+        "school": "enc",
+        "components": {
+          "value": "",
+          "vocal": true,
+          "somatic": true,
+          "material": true,
+          "ritual": false,
+          "concentration": true
+        },
+        "materials": {
+          "value": "A drop of blood",
+          "consumed": false,
+          "cost": 0,
+          "supply": 0
+        },
+        "preparation": {
+          "mode": "prepared",
+          "prepared": false
+        },
+        "scaling": {
+          "mode": "level",
+          "formula": ""
+        }
+      },
+      "sort": 100001,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.95K2aUhAGV9qXjnf"
+        }
+      },
+      "img": "icons/magic/unholy/strike-beam-blood-red-purple.webp",
+      "effects": [
+        {
+          "_id": "potjmpJPeUA1U4oe",
+          "flags": {},
+          "changes": [
+            {
+              "key": "system.bonuses.abilities.save",
+              "value": "-1d4",
+              "mode": 2,
+              "priority": null
+            },
+            {
+              "key": "system.bonuses.mwak.attack",
+              "value": "-1d4",
+              "mode": 2,
+              "priority": null
+            },
+            {
+              "key": "system.bonuses.msak.attack",
+              "value": "-1d4",
+              "mode": 2,
+              "priority": null
+            },
+            {
+              "key": "system.bonuses.rsak.attack",
+              "value": "-1d4",
+              "mode": 2,
+              "priority": null
+            },
+            {
+              "key": "system.bonuses.rwak.attack",
+              "value": "-1d4",
+              "mode": 2,
+              "priority": null
+            }
+          ],
+          "disabled": true,
+          "duration": {
+            "startTime": null,
+            "seconds": 60,
+            "rounds": 10,
+            "turns": null,
+            "startRound": null,
+            "startTurn": null,
+            "combat": null
+          },
+          "icon": "icons/magic/unholy/strike-beam-blood-red-purple.webp",
+          "label": "Bane",
+          "origin": "Item.KkaQm4OQJxc6z3to",
+          "tint": null,
+          "transfer": true
+        }
+      ],
+      "folder": null,
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.0",
+        "coreVersion": "10.279",
+        "createdTime": 1661603486208,
+        "modifiedTime": 1661603486208,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      }
+    },
+    {
+      "_id": "Mzh95utKDPIrjiH8",
+      "name": "Detect Evil and Good",
+      "ownership": {
+        "default": 0
+      },
+      "type": "spell",
+      "system": {
+        "description": {
+          "value": "<p>For the duration, you know if there is an aberration, celestial, elemental, fey, fiend, or undead within 30 feet of you, as well as where the creature is located. Similarly, you know if there is a place or object within 30 feet of you that has been magically consecrated or desecrated.</p><p>The spell can penetrate most barriers, but it is blocked by 1 foot of stone, 1 inch of common metal, a thin sheet of lead, or 3 feet of wood or dirt.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "PHB pg. 231",
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": 10,
+          "units": "minute"
+        },
+        "target": {
+          "value": 30,
+          "width": null,
+          "units": "ft",
+          "type": "radius"
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": "self"
+        },
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": ""
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null
+        },
+        "ability": "",
+        "actionType": "util",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": "",
+          "value": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell",
+          "value": ""
+        },
+        "level": 1,
+        "school": "div",
+        "components": {
+          "value": "",
+          "vocal": true,
+          "somatic": true,
+          "material": false,
+          "ritual": false,
+          "concentration": true
+        },
+        "materials": {
+          "value": "",
+          "consumed": false,
+          "cost": 0,
+          "supply": 0
+        },
+        "preparation": {
+          "mode": "prepared",
+          "prepared": false
+        },
+        "scaling": {
+          "mode": "none",
+          "formula": ""
+        }
+      },
+      "sort": 100001,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.Mzh95utKDPIrjiH8"
+        }
+      },
+      "img": "icons/magic/air/air-burst-spiral-blue-gray.webp",
+      "effects": [],
+      "folder": null,
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.0",
+        "coreVersion": "10.279",
+        "createdTime": 1661603486209,
+        "modifiedTime": 1661603486209,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      }
+    },
+    {
+      "_id": "ghXTfe7sgCbgf1Q8",
+      "name": "Detect Magic",
+      "ownership": {
+        "default": 0
+      },
+      "type": "spell",
+      "system": {
+        "description": {
+          "value": "<p>For the duration, you sense the presence of magic within 30 feet of you. If you sense magic in this way, you can use your action to see a faint aura around any visible creature or object in the area that bears magic, and you learn its school of magic, if any.</p><p>The spell can penetrate most barriers, but it is blocked by 1 foot of stone, 1 inch of common metal, a thin sheet of lead, or 3 feet of wood or dirt.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "PHB pg. 231",
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": 10,
+          "units": "minute"
+        },
+        "target": {
+          "value": 30,
+          "width": null,
+          "units": "ft",
+          "type": "radius"
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": "self"
+        },
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": ""
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null
+        },
+        "ability": "",
+        "actionType": "util",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": "",
+          "value": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell",
+          "value": ""
+        },
+        "level": 1,
+        "school": "div",
+        "components": {
+          "value": "",
+          "vocal": true,
+          "somatic": true,
+          "material": false,
+          "ritual": true,
+          "concentration": true
+        },
+        "materials": {
+          "value": "",
+          "consumed": false,
+          "cost": 0,
+          "supply": 0
+        },
+        "preparation": {
+          "mode": "prepared",
+          "prepared": true
+        },
+        "scaling": {
+          "mode": "none",
+          "formula": ""
+        }
+      },
+      "sort": 100001,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.ghXTfe7sgCbgf1Q8"
+        }
+      },
+      "img": "icons/magic/light/explosion-star-blue.webp",
+      "effects": [],
+      "folder": null,
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.0",
+        "coreVersion": "10.279",
+        "createdTime": 1661603486210,
+        "modifiedTime": 1661603486210,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      }
+    },
+    {
+      "_id": "2skfDtglk1mGrb3l",
+      "name": "Detect Poison and Disease",
+      "ownership": {
+        "default": 0
+      },
+      "type": "spell",
+      "system": {
+        "description": {
+          "value": "<p>For the duration, you can sense the presence and location of poisons, poisonous creatures, and diseases within 30 feet of you. You also identify the kind of poison, poisonous creature, or disease in each case.</p><p>The spell can penetrate most barriers, but it is blocked by 1 foot of stone, 1 inch of common metal, a thin sheet of lead, or 3 feet of wood or dirt.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "PHB pg. 231",
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": 10,
+          "units": "minute"
+        },
+        "target": {
+          "value": 30,
+          "width": null,
+          "units": "ft",
+          "type": "radius"
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": "self"
+        },
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": ""
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null
+        },
+        "ability": "",
+        "actionType": "util",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": "",
+          "value": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell",
+          "value": ""
+        },
+        "level": 1,
+        "school": "div",
+        "components": {
+          "value": "",
+          "vocal": true,
+          "somatic": true,
+          "material": true,
+          "ritual": false,
+          "concentration": true
+        },
+        "materials": {
+          "value": "A yew leaf",
+          "consumed": false,
+          "cost": 0,
+          "supply": 0
+        },
+        "preparation": {
+          "mode": "prepared",
+          "prepared": false
+        },
+        "scaling": {
+          "mode": "none",
+          "formula": ""
+        }
+      },
+      "sort": 100001,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.2skfDtglk1mGrb3l"
+        }
+      },
+      "img": "icons/magic/air/air-burst-spiral-teal-green.webp",
+      "effects": [],
+      "folder": null,
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.0",
+        "coreVersion": "10.279",
+        "createdTime": 1661603486210,
+        "modifiedTime": 1661603486210,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      }
+    },
+    {
+      "_id": "7buEm5KhI5lP8m1z",
+      "name": "Guiding Bolt",
+      "ownership": {
+        "default": 0
+      },
+      "type": "spell",
+      "system": {
+        "description": {
+          "value": "<p>A flash of light streaks toward a creature of your choice within range. Make a ranged spell attack against the target. On a hit, the target takes 4d6 radiant damage, and the next attack roll made against this target before the end of your next turn has advantage, thanks to the mystical dim light glittering on the target until then.</p><p><strong>Higher Levels.</strong> When you cast this spell using a spell slot of 2nd level or higher, the damage increases by 1d6 for each slot level above 1st.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "PHB pg. 248",
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": 1,
+          "units": "round"
+        },
+        "target": {
+          "value": 1,
+          "width": null,
+          "units": "",
+          "type": "creature"
+        },
+        "range": {
+          "value": 120,
+          "long": 0,
+          "units": "ft"
+        },
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": ""
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null
+        },
+        "ability": "",
+        "actionType": "rsak",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [
+            [
+              "4d6",
+              "radiant"
+            ]
+          ],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell",
+          "value": ""
+        },
+        "level": 1,
+        "school": "evo",
+        "components": {
+          "value": "",
+          "vocal": true,
+          "somatic": true,
+          "material": false,
+          "ritual": false,
+          "concentration": false
+        },
+        "materials": {
+          "value": "",
+          "consumed": false,
+          "cost": 0,
+          "supply": 0
+        },
+        "preparation": {
+          "mode": "prepared",
+          "prepared": false
+        },
+        "scaling": {
+          "mode": "level",
+          "formula": "1d6"
+        }
+      },
+      "sort": 100001,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.7buEm5KhI5lP8m1z"
+        }
+      },
+      "img": "icons/magic/fire/projectile-fireball-smoke-large-blue.webp",
+      "effects": [],
+      "folder": null,
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.0",
+        "coreVersion": "10.279",
+        "createdTime": 1661603486210,
+        "modifiedTime": 1661603486210,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      }
+    },
+    {
+      "_id": "o8Dh7fblk1d16tnO",
+      "name": "Healing Word",
+      "ownership": {
+        "default": 0
+      },
+      "type": "spell",
+      "system": {
+        "description": {
+          "value": "<p>A creature of your choice that you can see within range regains hit points equal to 1d4 + your spellcasting ability modifier. This spell has no effect on undead or constructs.</p><p><strong>Higher Levels.</strong> When you cast this spell using a spell slot of 2nd level or higher, the healing increases by 1d4 for each slot level above 1st.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "PHB pg. 250",
+        "activation": {
+          "type": "bonus",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": null,
+          "units": "inst"
+        },
+        "target": {
+          "value": 1,
+          "width": null,
+          "units": "",
+          "type": "creature"
+        },
+        "range": {
+          "value": 60,
+          "long": 0,
+          "units": "ft"
+        },
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": ""
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null
+        },
+        "ability": "",
+        "actionType": "heal",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [
+            [
+              "1d4 + @mod",
+              "healing"
+            ]
+          ],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell",
+          "value": ""
+        },
+        "level": 1,
+        "school": "evo",
+        "components": {
+          "value": "",
+          "vocal": true,
+          "somatic": false,
+          "material": false,
+          "ritual": false,
+          "concentration": false
+        },
+        "materials": {
+          "value": "",
+          "consumed": false,
+          "cost": 0,
+          "supply": 0
+        },
+        "preparation": {
+          "mode": "prepared",
+          "prepared": true
+        },
+        "scaling": {
+          "mode": "level",
+          "formula": "1d4"
+        }
+      },
+      "sort": 100001,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.o8Dh7fblk1d16tnO"
+        }
+      },
+      "img": "icons/magic/life/heart-cross-green.webp",
+      "effects": [],
+      "folder": null,
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.0",
+        "coreVersion": "10.279",
+        "createdTime": 1661603486211,
+        "modifiedTime": 1661603486211,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      }
+    },
+    {
+      "_id": "ksaaTxIbKx2sJfia",
+      "name": "Inflict Wounds",
+      "ownership": {
+        "default": 0
+      },
+      "type": "spell",
+      "system": {
+        "description": {
+          "value": "<p>Make a melee spell Attack against a creature you can reach. On a hit, the target takes 3d10 necrotic damage.</p><p><strong>At Higher Levels.</strong> When you cast this spell using a spell slot of 2nd level or higher, the damage increases by 1d10 for each slot level above 1st.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "PHB pg. 253",
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": null,
+          "units": "inst"
+        },
+        "target": {
+          "value": 1,
+          "width": null,
+          "units": "",
+          "type": "creature"
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": "touch"
+        },
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": ""
+        },
+        "consume": {
+          "type": "",
+          "target": "",
+          "amount": null
+        },
+        "ability": "",
+        "actionType": "msak",
+        "attackBonus": "0",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [
+            [
+              "3d10",
+              "necrotic"
+            ]
+          ],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell",
+          "value": ""
+        },
+        "level": 1,
+        "school": "nec",
+        "components": {
+          "value": "",
+          "vocal": true,
+          "somatic": true,
+          "material": false,
+          "ritual": false,
+          "concentration": false
+        },
+        "materials": {
+          "value": "",
+          "consumed": false,
+          "cost": 0,
+          "supply": 0
+        },
+        "preparation": {
+          "mode": "prepared",
+          "prepared": false
+        },
+        "scaling": {
+          "mode": "level",
+          "formula": "1d10"
+        }
+      },
+      "sort": 100001,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.ksaaTxIbKx2sJfia"
+        }
+      },
+      "img": "icons/magic/unholy/strike-beam-blood-red-teal.webp",
+      "effects": [],
+      "folder": null,
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.0",
+        "coreVersion": "10.279",
+        "createdTime": 1661603486211,
+        "modifiedTime": 1661603486211,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      }
+    },
+    {
+      "_id": "xmDBqZhRVrtLP8h2",
+      "name": "Protection from Evil and Good",
+      "ownership": {
+        "default": 0
+      },
+      "type": "spell",
+      "system": {
+        "description": {
+          "value": "<p>Until the spell ends, one willing creature you touch is protected against certain types of creatures: aberrations, celestials, elementals, fey, fiends, and undead.</p><p>The protection grants several benefits. Creatures of those types have disadvantage on attack rolls against the target. The target also can't be charmed, frightened, or possessed by them. If the target is already charmed, frightened, or possessed by such a creature, the target has advantage on any new saving throw against the relevant effect.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "PHB pg. 270",
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": 10,
+          "units": "minute"
+        },
+        "target": {
+          "value": 1,
+          "width": null,
+          "units": "",
+          "type": "creature"
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": "touch"
+        },
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": ""
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null
+        },
+        "ability": "",
+        "actionType": "util",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": "",
+          "value": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell",
+          "value": ""
+        },
+        "level": 1,
+        "school": "abj",
+        "components": {
+          "value": "",
+          "vocal": true,
+          "somatic": true,
+          "material": true,
+          "ritual": false,
+          "concentration": true
+        },
+        "materials": {
+          "value": "Holy water or powdered silver and iron, which the spell consumes",
+          "consumed": true,
+          "cost": 0,
+          "supply": 0
+        },
+        "preparation": {
+          "mode": "prepared",
+          "prepared": false
+        },
+        "scaling": {
+          "mode": "none",
+          "formula": ""
+        }
+      },
+      "sort": 100001,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.xmDBqZhRVrtLP8h2"
+        }
+      },
+      "img": "icons/magic/defensive/shield-barrier-flaming-diamond-blue-yellow.webp",
+      "effects": [],
+      "folder": null,
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.0",
+        "coreVersion": "10.279",
+        "createdTime": 1661603486212,
+        "modifiedTime": 1661603486212,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      }
+    },
+    {
+      "_id": "Kn7K5PtYUJAKZTTp",
+      "name": "Purify Food and Drink",
+      "ownership": {
+        "default": 0
+      },
+      "type": "spell",
+      "system": {
+        "description": {
+          "value": "<p>All nonmagical food and drink within a 5-foot-radius sphere centered on a point of your choice within range is purified and rendered free of poison and disease.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "PHB pg. 270",
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": null,
+          "units": "inst"
+        },
+        "target": {
+          "value": 5,
+          "width": null,
+          "units": "ft",
+          "type": "sphere"
+        },
+        "range": {
+          "value": 10,
+          "long": 0,
+          "units": "ft"
+        },
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": ""
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null
+        },
+        "ability": "",
+        "actionType": "util",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": "",
+          "value": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell",
+          "value": ""
+        },
+        "level": 1,
+        "school": "trs",
+        "components": {
+          "value": "",
+          "vocal": true,
+          "somatic": true,
+          "material": false,
+          "ritual": true,
+          "concentration": false
+        },
+        "materials": {
+          "value": "",
+          "consumed": false,
+          "cost": 0,
+          "supply": 0
+        },
+        "preparation": {
+          "mode": "prepared",
+          "prepared": false
+        },
+        "scaling": {
+          "mode": "none",
+          "formula": ""
+        }
+      },
+      "sort": 100001,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.Kn7K5PtYUJAKZTTp"
+        }
+      },
+      "img": "icons/magic/light/explosion-star-small-teal.webp",
+      "effects": [],
+      "folder": null,
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.0",
+        "coreVersion": "10.279",
+        "createdTime": 1661603486212,
+        "modifiedTime": 1661603486212,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      }
+    },
+    {
+      "_id": "jZ6JNykRtdQ90MOo",
+      "name": "Shield of Faith",
+      "ownership": {
+        "default": 0
+      },
+      "type": "spell",
+      "system": {
+        "description": {
+          "value": "<p>A shimmering field appears and surrounds a creature of your choice within range, granting it a +2 bonus to AC for the duration.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "PHB pg. 275",
+        "activation": {
+          "type": "bonus",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": 10,
+          "units": "minute"
+        },
+        "target": {
+          "value": 1,
+          "width": null,
+          "units": "",
+          "type": "creature"
+        },
+        "range": {
+          "value": 60,
+          "long": 0,
+          "units": "ft"
+        },
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": ""
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null
+        },
+        "ability": "",
+        "actionType": "util",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": "",
+          "value": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell",
+          "value": ""
+        },
+        "level": 1,
+        "school": "abj",
+        "components": {
+          "value": "",
+          "vocal": true,
+          "somatic": true,
+          "material": true,
+          "ritual": false,
+          "concentration": true
+        },
+        "materials": {
+          "value": "A small parchment with a bit of holy text written on it.",
+          "consumed": false,
+          "cost": 0,
+          "supply": 0
+        },
+        "preparation": {
+          "mode": "prepared",
+          "prepared": false
+        },
+        "scaling": {
+          "mode": "none",
+          "formula": ""
+        }
+      },
+      "sort": 100001,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.jZ6JNykRtdQ90MOo"
+        }
+      },
+      "img": "icons/magic/defensive/shield-barrier-flaming-diamond-blue-yellow.webp",
+      "effects": [],
+      "folder": null,
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.0",
+        "coreVersion": "10.279",
+        "createdTime": 1661603486213,
+        "modifiedTime": 1661603486213,
+        "lastModifiedBy": "dnd5ebuilder0000"
       }
     }
   ],
@@ -4873,16 +5248,21 @@
       "_id": "Dk95lqbXXCUlefZW",
       "changes": [
         {
-          "key": "data.traits.armorProf.value",
+          "key": "system.traits.armorProf.value",
           "mode": 2,
-          "value": "hvy"
+          "value": "hvy",
+          "priority": null
         }
       ],
       "disabled": false,
       "duration": {
         "startTime": 0,
         "startRound": 0,
-        "startTurn": 1
+        "startTurn": 1,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null
       },
       "icon": "icons/equipment/chest/breastplate-layered-steel.webp",
       "label": "Heavy Armor Proficiency",
@@ -4890,6 +5270,108 @@
       "tint": null,
       "transfer": false,
       "flags": {}
+    },
+    {
+      "_id": "8rP3gwmXVTgZqYZE",
+      "flags": {},
+      "changes": [
+        {
+          "key": "system.bonuses.abilities.save",
+          "mode": 2,
+          "value": "+1d4",
+          "priority": null
+        },
+        {
+          "key": "system.bonuses.mwak.attack",
+          "mode": 2,
+          "value": "+1d4",
+          "priority": null
+        },
+        {
+          "key": "system.bonuses.msak.attack",
+          "mode": 2,
+          "value": "+1d4",
+          "priority": null
+        },
+        {
+          "key": "system.bonuses.rsak.attack",
+          "mode": 2,
+          "value": "+1d4",
+          "priority": null
+        },
+        {
+          "key": "system.bonuses.rwak.attack",
+          "mode": 2,
+          "value": "+1d4",
+          "priority": null
+        }
+      ],
+      "disabled": true,
+      "duration": {
+        "startTime": 648,
+        "seconds": 60,
+        "rounds": 10,
+        "combat": null,
+        "turns": null,
+        "startRound": 0,
+        "startTurn": 0
+      },
+      "icon": "icons/magic/control/buff-flight-wings-blue.webp",
+      "label": "Bless",
+      "origin": "Compendium.dnd5e.heroes.kfzBL0q1Y7LgGs2x.Item.8dzaICjGy6mTUaUr",
+      "tint": null,
+      "transfer": false
+    },
+    {
+      "_id": "potjmpJPeUA1U4oe",
+      "flags": {},
+      "changes": [
+        {
+          "key": "system.bonuses.abilities.save",
+          "value": "-1d4",
+          "mode": 2,
+          "priority": null
+        },
+        {
+          "key": "system.bonuses.mwak.attack",
+          "value": "-1d4",
+          "mode": 2,
+          "priority": null
+        },
+        {
+          "key": "system.bonuses.msak.attack",
+          "value": "-1d4",
+          "mode": 2,
+          "priority": null
+        },
+        {
+          "key": "system.bonuses.rsak.attack",
+          "value": "-1d4",
+          "mode": 2,
+          "priority": null
+        },
+        {
+          "key": "system.bonuses.rwak.attack",
+          "value": "-1d4",
+          "mode": 2,
+          "priority": null
+        }
+      ],
+      "disabled": true,
+      "duration": {
+        "startTime": 648,
+        "seconds": 60,
+        "rounds": 10,
+        "turns": null,
+        "startRound": 0,
+        "startTurn": 0,
+        "combat": null
+      },
+      "icon": "icons/magic/unholy/strike-beam-blood-red-purple.webp",
+      "label": "Bane",
+      "origin": "Compendium.dnd5e.heroes.kfzBL0q1Y7LgGs2x.Item.95K2aUhAGV9qXjnf",
+      "tint": null,
+      "transfer": false
     }
   ],
   "folder": null,
@@ -4897,5 +5379,13 @@
   "ownership": {
     "default": 0
   },
-  "flags": {}
+  "flags": {},
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.0.0",
+    "coreVersion": "10.279",
+    "createdTime": 1661787232189,
+    "modifiedTime": 1661878142585,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  }
 }

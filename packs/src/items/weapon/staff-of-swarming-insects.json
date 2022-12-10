@@ -40,7 +40,8 @@
     "uses": {
       "value": 10,
       "max": 10,
-      "per": "charges"
+      "per": "charges",
+      "recovery": "1d6 + 4"
     },
     "consume": {
       "type": "",
@@ -75,6 +76,7 @@
       "conditions": ""
     },
     "weaponType": "simpleM",
+    "baseItem": "",
     "properties": {
       "amm": false,
       "hvy": false,
@@ -103,5 +105,13 @@
   "ownership": {
     "default": 0
   },
-  "flags": {}
+  "flags": {},
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.0.2",
+    "coreVersion": "10.286",
+    "createdTime": 1661787233733,
+    "modifiedTime": 1663775408695,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  }
 }

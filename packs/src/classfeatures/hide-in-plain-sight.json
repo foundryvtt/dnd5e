@@ -23,6 +23,7 @@
     },
     "target": {
       "value": null,
+      "width": null,
       "units": null,
       "type": "self"
     },
@@ -72,21 +73,38 @@
       "_id": "7if4vIkT84Sw2zFm",
       "changes": [
         {
-          "key": "data.skills.ste.bonuses.check",
+          "key": "system.skills.ste.bonuses.check",
           "mode": 2,
-          "value": "+10"
+          "value": "+10",
+          "priority": null
         }
       ],
       "disabled": true,
       "duration": {
-        "startTime": null
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
       },
       "icon": "icons/magic/nature/stealth-hide-eyes-green.webp",
       "label": "Hide in Plain Sight",
       "origin": "Item.r0unvWK0lPsDthDx",
       "transfer": true,
       "flags": {},
-      "tint": ""
+      "tint": null
     }
-  ]
+  ],
+  "folder": null,
+  "sort": 0,
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.0.0",
+    "coreVersion": "10.279",
+    "createdTime": 1661787234428,
+    "modifiedTime": 1661787234428,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  }
 }

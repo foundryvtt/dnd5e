@@ -575,29 +575,10 @@
     "flags": {},
     "name": "Merric",
     "displayName": 30,
-    "img": "systems/dnd5e/tokens/heroes/BarbarianMaul.webp",
-    "tint": null,
     "width": 1,
     "height": 1,
-    "scale": 0.8,
-    "mirrorX": false,
-    "mirrorY": false,
     "lockRotation": false,
     "rotation": 0,
-    "vision": true,
-    "dimSight": 5,
-    "brightSight": 0,
-    "dimLight": 0,
-    "brightLight": 0,
-    "sightAngle": 0,
-    "lightAngle": 0,
-    "lightColor": null,
-    "lightAlpha": 1,
-    "lightAnimation": {
-      "speed": 5,
-      "intensity": 5
-    },
-    "actorId": "1tAXamEdCqcLQwpM",
     "actorLink": true,
     "disposition": 1,
     "displayBars": 40,
@@ -610,12 +591,11 @@
     "randomImg": false,
     "alpha": 1,
     "light": {
-      "alpha": 0.5,
-      "angle": 0,
+      "alpha": 1,
+      "angle": 360,
       "bright": 0,
       "coloration": 1,
       "dim": 0,
-      "gradual": true,
       "luminosity": 0.5,
       "saturation": 0,
       "contrast": 0,
@@ -623,13 +603,37 @@
       "animation": {
         "speed": 5,
         "intensity": 5,
+        "type": null,
         "reverse": false
       },
       "darkness": {
         "min": 0,
         "max": 1
-      }
-    }
+      },
+      "color": null,
+      "attenuation": 0.5
+    },
+    "texture": {
+      "src": "systems/dnd5e/tokens/heroes/BarbarianMaul.webp",
+      "tint": null,
+      "scaleX": 0.8,
+      "scaleY": 0.8,
+      "offsetX": 0,
+      "offsetY": 0,
+      "rotation": 0
+    },
+    "sight": {
+      "angle": 360,
+      "enabled": true,
+      "range": 5,
+      "brightness": 0,
+      "visionMode": "basic",
+      "color": null,
+      "attenuation": 0.1,
+      "saturation": 0,
+      "contrast": 0
+    },
+    "detectionModes": []
   },
   "items": [
     {
@@ -725,6 +729,14 @@
       "folder": null,
       "ownership": {
         "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -743,7 +755,7 @@
         "price": 0.5,
         "attunement": 0,
         "equipped": false,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
         "activation": {
           "type": "action",
@@ -826,7 +838,6 @@
           "lod": false
         },
         "proficient": true,
-        "attuned": false,
         "attributes": {
           "spelldc": 10
         }
@@ -838,6 +849,14 @@
       "folder": null,
       "ownership": {
         "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -856,7 +875,7 @@
         "price": 0.5,
         "attunement": 0,
         "equipped": false,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
         "activation": {
           "type": "action",
@@ -939,7 +958,6 @@
           "lod": false
         },
         "proficient": true,
-        "attuned": false,
         "attributes": {
           "spelldc": 10
         }
@@ -951,6 +969,14 @@
       "folder": null,
       "ownership": {
         "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -969,7 +995,7 @@
         "price": 0.5,
         "attunement": 0,
         "equipped": false,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
         "activation": {
           "type": "",
@@ -1020,8 +1046,7 @@
           "dc": null,
           "scaling": "spell"
         },
-        "consumableType": "ammo",
-        "attuned": false
+        "consumableType": "ammo"
       },
       "sort": 100001,
       "flags": {},
@@ -1030,6 +1055,14 @@
       "folder": null,
       "ownership": {
         "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -1048,7 +1081,7 @@
         "price": 30,
         "attunement": 0,
         "equipped": true,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
         "activation": {
           "type": "action",
@@ -1131,7 +1164,6 @@
           "ver": false
         },
         "proficient": true,
-        "attuned": false,
         "attributes": {
           "spelldc": 10
         }
@@ -1143,6 +1175,14 @@
       "folder": null,
       "ownership": {
         "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -1161,7 +1201,7 @@
         "price": 2,
         "attunement": 0,
         "equipped": false,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
         "capacity": {
           "type": "weight",
@@ -1175,7 +1215,6 @@
           "gp": 0,
           "pp": 0
         },
-        "attuned": false,
         "damage": {
           "parts": []
         }
@@ -1187,6 +1226,14 @@
       "folder": null,
       "ownership": {
         "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -1205,9 +1252,8 @@
         "price": 1,
         "attunement": 0,
         "equipped": false,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
-        "attuned": false,
         "damage": {
           "parts": []
         }
@@ -1219,6 +1265,14 @@
       "folder": null,
       "ownership": {
         "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -1237,7 +1291,7 @@
         "price": 1,
         "attunement": 0,
         "equipped": false,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
         "activation": {
           "type": "action",
@@ -1289,8 +1343,7 @@
           "dc": 17,
           "scaling": "flat"
         },
-        "consumableType": "trinket",
-        "attuned": false
+        "consumableType": "trinket"
       },
       "sort": 1000000,
       "flags": {},
@@ -1299,6 +1352,14 @@
       "folder": null,
       "ownership": {
         "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -1317,7 +1378,7 @@
         "price": 0.5,
         "attunement": 0,
         "equipped": false,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
         "activation": {
           "type": "action",
@@ -1369,8 +1430,7 @@
           "dc": null,
           "scaling": "spell"
         },
-        "consumableType": "food",
-        "attuned": false
+        "consumableType": "food"
       },
       "sort": 1800000,
       "flags": {},
@@ -1379,6 +1439,14 @@
       "folder": null,
       "ownership": {
         "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -1397,9 +1465,8 @@
         "price": 0.2,
         "attunement": 0,
         "equipped": false,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
-        "attuned": false,
         "damage": {
           "parts": []
         }
@@ -1411,6 +1478,14 @@
       "folder": null,
       "ownership": {
         "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -1429,9 +1504,8 @@
         "price": 0.5,
         "attunement": 0,
         "equipped": false,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
-        "attuned": false,
         "damage": {
           "parts": []
         }
@@ -1443,6 +1517,14 @@
       "folder": null,
       "ownership": {
         "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -1461,7 +1543,7 @@
         "price": 0.01,
         "attunement": 0,
         "equipped": false,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
         "activation": {
           "type": "action",
@@ -1518,8 +1600,7 @@
           "dc": null,
           "scaling": "spell"
         },
-        "consumableType": "trinket",
-        "attuned": false
+        "consumableType": "trinket"
       },
       "sort": 4700000,
       "flags": {},
@@ -1528,6 +1609,14 @@
       "folder": null,
       "ownership": {
         "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -1546,7 +1635,7 @@
         "price": 0.2,
         "attunement": 0,
         "equipped": false,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
         "activation": {
           "type": "action",
@@ -1598,8 +1687,7 @@
           "dc": null,
           "scaling": "spell"
         },
-        "consumableType": "food",
-        "attuned": false
+        "consumableType": "food"
       },
       "sort": 500000,
       "flags": {},
@@ -1608,6 +1696,14 @@
       "folder": null,
       "ownership": {
         "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -1626,7 +1722,7 @@
         "price": 5,
         "attunement": 0,
         "equipped": false,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
         "activation": {
           "type": "action",
@@ -1709,7 +1805,6 @@
           "ver": false
         },
         "proficient": true,
-        "attuned": false,
         "attributes": {
           "spelldc": 10
         }
@@ -1721,6 +1816,14 @@
       "folder": null,
       "ownership": {
         "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -1739,7 +1842,7 @@
         "price": 5,
         "attunement": 0,
         "equipped": false,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
         "activation": {
           "type": "action",
@@ -1822,7 +1925,6 @@
           "ver": false
         },
         "proficient": true,
-        "attuned": false,
         "attributes": {
           "spelldc": 10
         }
@@ -1834,6 +1936,14 @@
       "folder": null,
       "ownership": {
         "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -1929,6 +2039,14 @@
       "folder": null,
       "ownership": {
         "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -2004,6 +2122,14 @@
       "folder": null,
       "ownership": {
         "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -2098,6 +2224,14 @@
       "folder": null,
       "ownership": {
         "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -2193,6 +2327,14 @@
       "folder": null,
       "ownership": {
         "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -2263,11 +2405,19 @@
       },
       "sort": 4875000,
       "flags": {},
-      "img": "systems/dnd5e/icons/spells/lightning-jade-2.jpg",
+      "img": "icons/magic/lightning/bolt-forked-large-teal.webp",
       "effects": [],
       "folder": null,
       "ownership": {
         "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -2338,11 +2488,19 @@
       },
       "sort": 4987500,
       "flags": {},
-      "img": "systems/dnd5e/icons/spells/lightning-jade-1.jpg",
+      "img": "icons/magic/lightning/bolt-forked-teal.webp",
       "effects": [],
       "folder": null,
       "ownership": {
         "default": 0
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -2635,6 +2793,14 @@
         "core": {
           "sourceId": "Compendium.dnd5e.classes.pvEzGSv71zBhaolc"
         }
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -2709,30 +2875,39 @@
           "flags": {},
           "changes": [
             {
-              "key": "data.bonuses.mwak.damage",
+              "key": "system.bonuses.mwak.damage",
               "mode": 2,
-              "value": "+@scale.barbarian.rage-damage"
+              "value": "+@scale.barbarian.rage-damage",
+              "priority": null
             },
             {
-              "key": "data.traits.dr.value",
+              "key": "system.traits.dr.value",
               "mode": 2,
-              "value": "slashing"
+              "value": "slashing",
+              "priority": null
             },
             {
-              "key": "data.traits.dr.value",
+              "key": "system.traits.dr.value",
               "mode": 2,
-              "value": "piercing"
+              "value": "piercing",
+              "priority": null
             },
             {
-              "key": "data.traits.dr.value",
+              "key": "system.traits.dr.value",
               "mode": 2,
-              "value": "bludgeoning"
+              "value": "bludgeoning",
+              "priority": null
             }
           ],
           "disabled": true,
           "duration": {
             "startTime": null,
-            "rounds": 10
+            "rounds": 10,
+            "seconds": null,
+            "combat": null,
+            "turns": null,
+            "startRound": null,
+            "startTurn": null
           },
           "icon": "icons/creatures/abilities/mouth-teeth-human.webp",
           "label": "Rage",
@@ -2751,6 +2926,14 @@
           "sourceId": "Compendium.dnd5e.classfeatures.VoR0SUrNX5EJVPIO",
           "advancementOrigin": "2wfeg14piijtgdr1.amez6rlose3eoigo"
         }
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     },
     {
@@ -2824,14 +3007,21 @@
           "_id": "hEgUnQNVxtBo2zkK",
           "changes": [
             {
-              "key": "data.attributes.ac.calc",
+              "key": "system.attributes.ac.calc",
               "mode": 5,
-              "value": "unarmoredBarb"
+              "value": "unarmoredBarb",
+              "priority": null
             }
           ],
           "disabled": false,
           "duration": {
-            "startTime": null
+            "startTime": null,
+            "seconds": null,
+            "combat": null,
+            "rounds": null,
+            "turns": null,
+            "startRound": null,
+            "startTurn": null
           },
           "icon": "icons/magic/control/silhouette-hold-change-blue.webp",
           "label": "Unarmored Defense",
@@ -2851,6 +3041,14 @@
           "sourceId": "Compendium.dnd5e.classfeatures.SZbsNbaxFFGwBpNK",
           "advancementOrigin": "2wfeg14piijtgdr1.amez6rlose3eoigo"
         }
+      },
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     }
   ],
@@ -2859,30 +3057,39 @@
       "_id": "eWhL8hUr0c2ujDUm",
       "changes": [
         {
-          "key": "data.bonuses.mwak.damage",
+          "key": "system.bonuses.mwak.damage",
           "mode": 2,
-          "value": "+@scale.barbarian.rage-damage"
+          "value": "+@scale.barbarian.rage-damage",
+          "priority": null
         },
         {
-          "key": "data.traits.dr.value",
+          "key": "system.traits.dr.value",
           "mode": 2,
-          "value": "slashing"
+          "value": "slashing",
+          "priority": null
         },
         {
-          "key": "data.traits.dr.value",
+          "key": "system.traits.dr.value",
           "mode": 2,
-          "value": "piercing"
+          "value": "piercing",
+          "priority": null
         },
         {
-          "key": "data.traits.dr.value",
+          "key": "system.traits.dr.value",
           "mode": 2,
-          "value": "bludgeoning"
+          "value": "bludgeoning",
+          "priority": null
         }
       ],
       "disabled": true,
       "duration": {
         "startTime": 0,
-        "rounds": 10
+        "rounds": 10,
+        "seconds": null,
+        "combat": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
       },
       "icon": "icons/creatures/abilities/mouth-teeth-human.webp",
       "label": "Rage",
@@ -2895,14 +3102,21 @@
       "_id": "hEgUnQNVxtBo2zkK",
       "changes": [
         {
-          "key": "data.attributes.ac.calc",
+          "key": "system.attributes.ac.calc",
           "mode": 5,
-          "value": "unarmoredBarb"
+          "value": "unarmoredBarb",
+          "priority": null
         }
       ],
       "disabled": false,
       "duration": {
-        "startTime": 0
+        "startTime": 0,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
       },
       "icon": "icons/magic/control/silhouette-hold-change-blue.webp",
       "label": "Unarmored Defense",
@@ -2922,5 +3136,13 @@
       "halflingLucky": true
     }
   },
-  "_id": "irWonyO6ZLh47sN7"
+  "_id": "irWonyO6ZLh47sN7",
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.0.0",
+    "coreVersion": "10.279",
+    "createdTime": 1661787232184,
+    "modifiedTime": 1661878142540,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  }
 }

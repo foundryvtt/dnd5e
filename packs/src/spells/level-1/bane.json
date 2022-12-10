@@ -23,9 +23,9 @@
     },
     "target": {
       "value": 3,
+      "width": null,
       "units": "",
-      "type": "creature",
-      "width": null
+      "type": "creature"
     },
     "range": {
       "value": 30,
@@ -36,6 +36,11 @@
       "value": 0,
       "max": "0",
       "per": ""
+    },
+    "consume": {
+      "type": "",
+      "target": "",
+      "amount": null
     },
     "ability": "",
     "actionType": "save",
@@ -79,11 +84,6 @@
     "scaling": {
       "mode": "level",
       "formula": ""
-    },
-    "consume": {
-      "type": "",
-      "target": "",
-      "amount": null
     }
   },
   "sort": 100001,
@@ -95,29 +95,34 @@
       "flags": {},
       "changes": [
         {
-          "key": "data.bonuses.abilities.save",
+          "key": "system.bonuses.abilities.save",
           "value": "-1d4",
-          "mode": 2
+          "mode": 2,
+          "priority": null
         },
         {
-          "key": "data.bonuses.mwak.attack",
+          "key": "system.bonuses.mwak.attack",
           "value": "-1d4",
-          "mode": 2
+          "mode": 2,
+          "priority": null
         },
         {
-          "key": "data.bonuses.msak.attack",
+          "key": "system.bonuses.msak.attack",
           "value": "-1d4",
-          "mode": 2
+          "mode": 2,
+          "priority": null
         },
         {
-          "key": "data.bonuses.rsak.attack",
+          "key": "system.bonuses.rsak.attack",
           "value": "-1d4",
-          "mode": 2
+          "mode": 2,
+          "priority": null
         },
         {
-          "key": "data.bonuses.rwak.attack",
+          "key": "system.bonuses.rwak.attack",
           "value": "-1d4",
-          "mode": 2
+          "mode": 2,
+          "priority": null
         }
       ],
       "disabled": true,
@@ -127,13 +132,23 @@
         "rounds": 10,
         "turns": null,
         "startRound": null,
-        "startTurn": null
+        "startTurn": null,
+        "combat": null
       },
-      "icon": "systems/dnd5e/icons/spells/rip-magenta-2.jpg",
+      "icon": "icons/magic/unholy/strike-beam-blood-red-purple.webp",
       "label": "Bane",
       "origin": "Item.KkaQm4OQJxc6z3to",
-      "tint": "",
+      "tint": null,
       "transfer": true
     }
-  ]
+  ],
+  "folder": null,
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.0.0",
+    "coreVersion": "10.279",
+    "createdTime": 1661787234084,
+    "modifiedTime": 1661787234084,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  }
 }

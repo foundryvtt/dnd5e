@@ -2,7 +2,7 @@
   "_id": "45Z5kogZEhawX1Ey",
   "name": "Fire Giant",
   "type": "npc",
-  "img": "icons/svg/mystery-man.svg",
+  "img": "systems/dnd5e/tokens/giant/FireGiant.webp",
   "system": {
     "abilities": {
       "str": {
@@ -107,7 +107,7 @@
         "value": 162,
         "min": 0,
         "max": 162,
-        "temp": 0,
+        "temp": null,
         "tempmax": 0,
         "formula": "13d12 + 78"
       },
@@ -151,7 +151,7 @@
     },
     "details": {
       "biography": {
-        "value": "",
+        "value": "<p><em>Token artwork by Forgotten Adventures.</em></p>",
         "public": ""
       },
       "alignment": "Lawful Evil",
@@ -543,46 +543,27 @@
     "name": "Fire Giant",
     "displayName": 20,
     "actorLink": false,
-    "tint": null,
     "width": 3,
     "height": 3,
-    "scale": 1,
-    "mirrorX": false,
-    "mirrorY": false,
     "lockRotation": false,
     "rotation": 0,
-    "vision": false,
-    "dimSight": 0,
-    "brightSight": 0,
-    "dimLight": 0,
-    "brightLight": 0,
-    "sightAngle": 0,
-    "lightAngle": 0,
-    "lightAlpha": 1,
-    "lightAnimation": {
-      "speed": 5,
-      "intensity": 5
-    },
     "disposition": -1,
     "displayBars": 40,
     "bar1": {
       "attribute": "attributes.hp"
     },
     "bar2": {
-      "attribute": ""
+      "attribute": null
     },
     "flags": {},
     "randomImg": false,
-    "img": "icons/svg/mystery-man.svg",
-    "actorId": "45Z5kogZEhawX1Ey",
     "alpha": 1,
     "light": {
-      "alpha": 0.5,
-      "angle": 0,
+      "alpha": 1,
+      "angle": 360,
       "bright": 0,
       "coloration": 1,
       "dim": 0,
-      "gradual": true,
       "luminosity": 0.5,
       "saturation": 0,
       "contrast": 0,
@@ -590,13 +571,37 @@
       "animation": {
         "speed": 5,
         "intensity": 5,
+        "type": null,
         "reverse": false
       },
       "darkness": {
         "min": 0,
         "max": 1
-      }
-    }
+      },
+      "attenuation": 0.5,
+      "color": null
+    },
+    "texture": {
+      "src": "systems/dnd5e/tokens/giant/FireGiant.webp",
+      "tint": null,
+      "scaleX": 1.6,
+      "scaleY": 1.6,
+      "offsetX": 0,
+      "offsetY": 0,
+      "rotation": 0
+    },
+    "sight": {
+      "angle": 360,
+      "enabled": false,
+      "range": 0,
+      "brightness": 1,
+      "visionMode": "basic",
+      "color": null,
+      "attenuation": 0.1,
+      "saturation": 0,
+      "contrast": 0
+    },
+    "detectionModes": []
   },
   "items": [
     {
@@ -616,7 +621,7 @@
         "price": "1500",
         "attunement": 0,
         "equipped": true,
-        "rarity": "Common",
+        "rarity": "common",
         "identified": true,
         "activation": {
           "type": "",
@@ -684,8 +689,7 @@
         },
         "strength": "15",
         "stealth": true,
-        "proficient": true,
-        "attuned": false
+        "proficient": true
       },
       "effects": [],
       "folder": null,
@@ -693,7 +697,15 @@
       "ownership": {
         "default": 0
       },
-      "flags": {}
+      "flags": {},
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      }
     },
     {
       "_id": "vgN2DlqQtt77mxKO",
@@ -768,7 +780,15 @@
       "ownership": {
         "default": 0
       },
-      "flags": {}
+      "flags": {},
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      }
     },
     {
       "_id": "c8b8jy3sM3Z8gxm0",
@@ -869,8 +889,7 @@
           "two": true,
           "ver": false
         },
-        "proficient": true,
-        "attuned": false
+        "proficient": true
       },
       "effects": [],
       "folder": null,
@@ -878,13 +897,21 @@
       "ownership": {
         "default": 0
       },
-      "flags": {}
+      "flags": {},
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      }
     },
     {
       "_id": "DgNvJ2F0HSMya3hp",
       "name": "Rock",
       "type": "weapon",
-      "img": "systems/dnd5e/icons/spells/rock-plain-1.jpg",
+      "img": "icons/magic/earth/projectile-stone-ball-brown.webp",
       "system": {
         "description": {
           "value": "<section class=\"secret\"><p>Ranged Weapon Attack: +11 to hit, range 60/240 ft., one target. Hit: <strong>29 (4d10 + 7) <em>bludgeoning damage</em></strong>.</p><p></p></section><p>The Fire Giant attacks with its Rock.</p>",
@@ -979,8 +1006,7 @@
           "two": false,
           "ver": false
         },
-        "proficient": true,
-        "attuned": false
+        "proficient": true
       },
       "effects": [],
       "folder": null,
@@ -988,7 +1014,15 @@
       "ownership": {
         "default": 0
       },
-      "flags": {}
+      "flags": {},
+      "_stats": {
+        "systemId": null,
+        "systemVersion": null,
+        "coreVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      }
     }
   ],
   "effects": [],
@@ -997,5 +1031,13 @@
   "ownership": {
     "default": 0
   },
-  "flags": {}
+  "flags": {},
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.0.2",
+    "coreVersion": "10.285",
+    "createdTime": 1661787232577,
+    "modifiedTime": 1662756217316,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  }
 }

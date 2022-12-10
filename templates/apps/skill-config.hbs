@@ -2,7 +2,7 @@
   <p class="notes">{{localize "DND5E.SkillConfigurationHint"}}</p>
   <div class="form-group">
     <label>{{ localize "DND5E.ProficiencyLevel" }}</label>
-    <select name="system.skills.{{skillId}}.value">
+    <select name="system.skills.{{skillId}}.value" data-dtype="Number">
       {{selectOptions proficiencyLevels selected=skill.value}}
     </select>
   </div>
@@ -24,5 +24,5 @@
     <input name="system.bonuses.abilities.skill" type="text" value="{{bonusGlobal}}">
     <p class="notes">{{localize "DND5E.SkillGlobalBonusCheckHint"}}</p>
   </div>
-  <button type="submit" name="submit" value="1"><i class="far fa-save"></i> {{ localize "Submit"}}</button>
+  <button type="submit"><i class="far fa-save"></i> {{ localize "Submit"}}</button>
 </form>

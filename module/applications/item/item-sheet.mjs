@@ -30,7 +30,8 @@ export default class ItemSheet5e extends ItemSheet {
       classes: ["dnd5e", "sheet", "item"],
       resizable: true,
       scrollY: [".tab.details"],
-      tabs: [{navSelector: ".tabs", contentSelector: ".sheet-body", initial: "description"}]
+      tabs: [{navSelector: ".tabs", contentSelector: ".sheet-body", initial: "description"}],
+      dragDrop: [{dragSelector: "[data-effect-id]", dropSelector: ".effects-list"}],
     });
   }
 
@@ -77,11 +78,9 @@ export default class ItemSheet5e extends ItemSheet {
       // Enrich HTML description
       descriptionHTML: await TextEditor.enrichHTML(item.system.description.value, {
         secrets: item.isOwner,
-        async: true
+        async: true,
+        relativeTo: this.item
       }),
-
-      // Potential consumption targets
-      abilityConsumptionTargets: this._getItemConsumptionTargets(item),
 
       // Action Details
       hasAttackRoll: item.hasAttack,
@@ -104,6 +103,9 @@ export default class ItemSheet5e extends ItemSheet {
       // Prepare Active Effects
       effects: ActiveEffect5e.prepareActiveEffectCategories(item.effects)
     });
+
+    // Potential consumption targets
+    context.abilityConsumptionTargets = this._getItemConsumptionTargets(item);
 
     /** @deprecated */
     Object.defineProperty(context, "data", {
@@ -355,6 +357,21 @@ export default class ItemSheet5e extends ItemSheet {
   }
 
   /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  async activateEditor(name, options={}, initialContent="") {
+    options.relativeLinks = true;
+    options.plugins = {
+      menu: ProseMirror.ProseMirrorMenu.build(ProseMirror.defaultSchema, {
+        compact: true,
+        destroyOnSave: true,
+        onSave: () => this.saveEditor(name, {remove: true})
+      })
+    };
+    return super.activateEditor(name, options, initialContent);
+  }
+
+  /* -------------------------------------------- */
   /*  Form Submission                             */
   /* -------------------------------------------- */
 
@@ -385,7 +402,7 @@ export default class ItemSheet5e extends ItemSheet {
       const match = formData.system.identifier.match(dataRgx);
       if ( !match ) {
         formData.system.identifier = this.item._source.system.identifier;
-        this.form.querySelector("input[name='data.identifier']").value = formData.system.identifier;
+        this.form.querySelector("input[name='system.identifier']").value = formData.system.identifier;
         return ui.notifications.error(game.i18n.localize("DND5E.IdentifierError"));
       }
     }
@@ -413,7 +430,7 @@ export default class ItemSheet5e extends ItemSheet {
     }
 
     // Advancement context menu
-    const contextOptions = this.#getAdvancementContextMenuOptions();
+    const contextOptions = this._getAdvancementContextMenuOptions();
     /**
      * A hook event that fires when the context menu for the advancements list is constructed.
      * @function dnd5e.getItemAdvancementContext
@@ -430,9 +447,9 @@ export default class ItemSheet5e extends ItemSheet {
   /**
    * Get the set of ContextMenu options which should be applied for advancement entries.
    * @returns {ContextMenuEntry[]}  Context menu entries.
-   * @private
+   * @protected
    */
-  #getAdvancementContextMenuOptions() {
+  _getAdvancementContextMenuOptions() {
     const condition = li => (this.advancementConfigurationMode || !this.isEmbedded) && this.isEditable;
     return [
       {
@@ -444,7 +461,11 @@ export default class ItemSheet5e extends ItemSheet {
       {
         name: "DND5E.AdvancementControlDuplicate",
         icon: "<i class='fas fa-copy fa-fw'></i>",
-        condition,
+        condition: li => {
+          const id = li[0].closest(".advancement-item")?.dataset.id;
+          const advancement = this.item.advancement.byId[id];
+          return condition(li) && advancement?.constructor.availableForItem(this.item);
+        },
         callback: li => this._onAdvancementAction(li[0], "duplicate")
       },
       {
@@ -484,6 +505,71 @@ export default class ItemSheet5e extends ItemSheet {
       return this.item.update({"system.damage.parts": damage.parts});
     }
   }
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  _onDragStart(event) {
+    const li = event.currentTarget;
+    if ( event.target.classList.contains("content-link") ) return;
+
+    // Create drag data
+    let dragData;
+
+    // Active Effect
+    if ( li.dataset.effectId ) {
+      const effect = this.item.effects.get(li.dataset.effectId);
+      dragData = effect.toDragData();
+    }
+
+    if ( !dragData ) return;
+
+    // Set data transfer
+    event.dataTransfer.setData("text/plain", JSON.stringify(dragData));
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  _onDrop(event) {
+    const data = TextEditor.getDragEventData(event);
+    const item = this.item;
+    
+    /**
+     * A hook event that fires when some useful data is dropped onto an ItemSheet5e.
+     * @function dnd5e.dropItemSheetData
+     * @memberof hookEvents
+     * @param {Item5e} item                  The Item5e
+     * @param {ItemSheet5e} sheet            The ItemSheet5e application
+     * @param {object} data                  The data that has been dropped onto the sheet
+     * @returns {boolean}                    Explicitly return `false` to prevent normal drop handling.
+     */
+    const allowed = Hooks.call("dnd5e.dropItemSheetData", item, this, data);
+    if ( allowed === false ) return;
+
+    switch ( data.type ) {
+      case "ActiveEffect":
+        return this._onDropActiveEffect(event, data);
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle the dropping of ActiveEffect data onto an Item Sheet
+   * @param {DragEvent} event                  The concluding DragEvent which contains drop data
+   * @param {object} data                      The data transfer extracted from the event
+   * @returns {Promise<ActiveEffect|boolean>}  The created ActiveEffect object or false if it couldn't be created.
+   * @protected
+   */
+  async _onDropActiveEffect(event, data) {
+    const effect = await ActiveEffect.implementation.fromDropData(data);
+    if ( !this.item.isOwner || !effect ) return false;
+    if ( (this.item.uuid === effect.parent.uuid) || (this.item.uuid === effect.origin) ) return false;
+    return ActiveEffect.create({
+      ...effect.toObject(),
+      origin: this.item.uuid,
+    }, {parent: this.item});
+  }
 
   /* -------------------------------------------- */
 
@@ -509,12 +595,14 @@ export default class ItemSheet5e extends ItemSheet {
       case "skills.choices":
         options.choices = CONFIG.DND5E.skills;
         options.valueKey = null;
+        options.labelKey = "label";
         break;
       case "skills":
         const skills = this.item.system.skills;
         const choices = skills.choices?.length ? skills.choices : Object.keys(CONFIG.DND5E.skills);
         options.choices = Object.fromEntries(Object.entries(CONFIG.DND5E.skills).filter(([s]) => choices.includes(s)));
         options.maximum = skills.number;
+        options.labelKey = "label";
         break;
     }
     new TraitSelector(this.item, options).render(true);

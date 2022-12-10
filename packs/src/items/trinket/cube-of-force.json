@@ -42,7 +42,8 @@
       "max": 36,
       "per": "charges",
       "autoDestroy": false,
-      "autoUse": false
+      "autoUse": false,
+      "recovery": "1d20"
     },
     "consume": {
       "type": "",
@@ -78,5 +79,13 @@
   "ownership": {
     "default": 0
   },
-  "flags": {}
+  "flags": {},
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.0.2",
+    "coreVersion": "10.286",
+    "createdTime": 1661787233895,
+    "modifiedTime": 1663775408819,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  }
 }
