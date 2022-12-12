@@ -153,7 +153,7 @@ export default class JournalClassPageSheet extends JournalPageSheet {
       const cells = [{class: "level", content: level.ordinalString()}];
       if ( item.type === "class" ) cells.push({class: "prof", content: `+${Math.floor((level + 7) / 4)}`});
       if ( hasFeatures ) cells.push({class: "features", content: features.join(", ")});
-      scaleValues.forEach(s => cells.push({class: "scale", content: s.formatValue(level)}));
+      scaleValues.forEach(s => cells.push({class: "scale", content: s.valueForLevel(level)?.display}));
       const spellCells = spellProgression?.rows[rows.length];
       if ( spellCells ) cells.push(...spellCells);
 
