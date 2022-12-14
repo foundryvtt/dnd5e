@@ -1,8 +1,8 @@
 {{!-- Action Type --}}
 <div class="form-group select">
     <label>{{ localize "DND5E.ItemActionType" }}</label>
-    <select name="system.usage.0.actionType">
-        {{#select system.usage.0.actionType}}
+    <select name="system.actionType">
+        {{#select system.actionType}}
         <option value=""></option>
         {{#each config.itemActionTypes as |name type|}}
         <option value="{{type}}">{{name}}</option>
@@ -10,13 +10,13 @@
         {{/select}}
     </select>
 </div>
-{{#if system.usage.0.actionType}}
+{{#if system.actionType}}
 
 {{!-- Ability Modifier --}}
 <div class="form-group select">
     <label>{{ localize "DND5E.AbilityModifier" }}</label>
-    <select name="system.usage.0.ability">
-        {{#select system.usage.0.ability}}
+    <select name="system.ability">
+        {{#select system.ability}}
         <option value="">{{ localize "DND5E.Default" }}</option>
         {{#each config.abilities as |ability a|}}
         <option value="{{a}}">{{ability}}</option>
@@ -30,7 +30,7 @@
 <div class="form-group">
     <label>{{ localize "DND5E.ItemAttackBonus" }}</label>
     <div class="form-fields">
-        <input type="text" name="system.usage.0.attackBonus" value="{{system.usage.0.attackBonus}}"/>
+        <input type="text" name="system.attackBonus" value="{{system.attackBonus}}"/>
     </div>
 </div>
 {{/if}}
@@ -40,7 +40,7 @@
 <div class="form-group">
     <label>{{ localize "DND5E.ItemCritThreshold" }}</label>
     <div class="form-fields">
-        {{ numberInput system.usage.0.critical.threshold name="system.usage.0.critical.threshold" placeholder="20" max=20 min=1 step=1 }}
+        {{ numberInput system.critical.threshold name="system.critical.threshold" placeholder="20" max=20 min=1 step=1 }}
     </div>
 </div>
 {{/if}}
@@ -50,7 +50,7 @@
 <div class="form-group">
     <label>{{ localize "DND5E.ItemCritExtraDamage" }}</label>
     <div class="form-fields">
-        <input type="text" name="system.usage.0.critical.damage" value="{{system.usage.0.critical.damage}}">
+        <input type="text" name="system.critical.damage" value="{{system.critical.damage}}">
     </div>
 </div>
 {{/if}}
@@ -61,10 +61,10 @@
     <a class="damage-control add-damage"><i class="fas fa-plus"></i></a>
 </h4>
 <ol class="damage-parts form-group">
-    {{#each system.usage.0.damage.parts as |part i| }}
+    {{#each system.damage.parts as |part i| }}
     <li class="damage-part flexrow" data-damage-part="{{i}}">
-        <input type="text" name="system.usage.0.damage.parts.{{i}}.0" value="{{lookup this "0"}}"/>
-        <select name="system.usage.0.damage.parts.{{i}}.1">
+        <input type="text" name="system.damage.parts.{{i}}.0" value="{{lookup this "0"}}"/>
+        <select name="system.damage.parts.{{i}}.1">
             {{#select (lookup this "1") }}
             <option value="">{{ localize "DND5E.None" }}</option>
             {{#each ../config.damageTypes as |name type|}}
@@ -81,11 +81,11 @@
 </ol>
 
 {{!-- Versatile Damage --}}
-{{#if system.usage.0.damage.parts.length }}
+{{#if system.damage.parts.length }}
 <div class="form-group">
     <label>{{ localize "DND5E.VersatileDamage" }}</label>
     <div class="form-fields">
-        <input type="text" name="system.usage.0.damage.versatile" value="{{system.usage.0.damage.versatile}}" placeholder="{{ localize 'DND5E.Formula' }}"/>
+        <input type="text" name="system.damage.versatile" value="{{system.damage.versatile}}" placeholder="{{ localize 'DND5E.Formula' }}"/>
     </div>
 </div>
 {{/if}}
@@ -94,7 +94,7 @@
 <div class="form-group">
     <label>{{ localize "DND5E.OtherFormula" }}</label>
     <div class="form-fields">
-        <input type="text" name="system.usage.0.formula" value="{{system.usage.0.formula}}" placeholder="{{ localize 'DND5E.Formula' }}"/>
+        <input type="text" name="system.formula" value="{{system.formula}}" placeholder="{{ localize 'DND5E.Formula' }}"/>
     </div>
 </div>
 
@@ -102,8 +102,8 @@
 <div class="form-group input-select">
     <label>{{ localize "DND5E.ActionSave" }}</label>
     <div class="form-fields">
-        <select name="system.usage.0.save.ability">
-            {{#select system.usage.0.save.ability}}
+        <select name="system.save.ability">
+            {{#select system.save.ability}}
             <option value=""></option>
             {{#each config.abilities as |ability a|}}
             <option value="{{a}}">{{ability}}</option>
@@ -111,11 +111,11 @@
             {{/select}}
         </select>
         <span>{{ localize "DND5E.VsDC" }}</span>
-        <input type="number" step="any" name="system.usage.0.save.dc"
-            value="{{#if system.usage.0.save.dc}}{{system.usage.0.save.dc}}{{/if}}"
+        <input type="number" step="any" name="system.save.dc"
+            value="{{#if system.save.dc}}{{system.save.dc}}{{/if}}"
             placeholder="{{ localize 'DND5E.AbbreviationDC' }}" {{#unless isFlatDC}}disabled{{/unless}}>
-        <select name="system.usage.0.save.scaling">
-            {{#select system.usage.0.save.scaling}}
+        <select name="system.save.scaling">
+            {{#select system.save.scaling}}
             <option value="spell">{{ localize "DND5E.Spellcasting" }}</option>
             {{#each config.abilities as |ability a|}}
             <option value="{{a}}">{{ability}}</option>
@@ -129,6 +129,6 @@
 {{!-- Chat Message Flavor --}}
 <div class="form-group stacked">
     <label>{{ localize "DND5E.ChatFlavor" }}</label>
-    <input type="text" name="system.usage.0.chatFlavor" value="{{system.usage.0.chatFlavor}}"/>
+    <input type="text" name="system.chatFlavor" value="{{system.chatFlavor}}"/>
 </div>
 {{/if}}
