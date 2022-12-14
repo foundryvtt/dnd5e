@@ -18,6 +18,34 @@ export default class ItemSheet5e extends ItemSheet {
     else if ( this.object.type === "subclass" ) {
       this.options.height = this.position.height = 540;
     }
+
+    // TEMP - This should be built into the packs etc
+    // Transform Weapon/Spell usage data structure
+    else if ( ["weapon", "spell"].includes(this.object.type) ) {
+
+      // TODO - Likely needs consideration for feat, vehicle, tool, etc
+
+      // Create usage array
+      this.object.system.usage = [
+        {
+          activation: this.object.system.activation,
+          duration: this.object.system.duration,
+          target: this.object.system.target,
+          range: this.object.system.range,
+          uses: this.object.system.uses,
+          consume: this.object.system.consume,
+          ability: this.object.system.ability,
+          actionType: this.object.system.actionType,
+          attackBonus: this.object.system.attackBonus,
+          chatFlavor: this.object.system.chatFlavor,
+          critical: this.object.system.critical,
+          damage: this.object.system.damage,
+          formula: this.object.system.formula,
+          save: this.object.system.save,
+          scaling: this.object.system.scaling
+        }
+      ];
+    }
   }
 
   /* -------------------------------------------- */
