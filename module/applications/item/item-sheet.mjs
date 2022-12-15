@@ -19,32 +19,75 @@ export default class ItemSheet5e extends ItemSheet {
       this.options.height = this.position.height = 540;
     }
 
-    // TEMP - This should be built into the packs etc
+    // TEMP: This should be built into the packs etc
+    // TODO: Likely needs consideration for feat, vehicle, tool, etc
     // Transform Weapon/Spell usage data structure
     else if ( ["weapon", "spell"].includes(this.object.type) ) {
 
-      // TODO - Likely needs consideration for feat, vehicle, tool, etc
+      // IF no usageProfile property is present, generate one
+      if (!Reflect.has(this.object.system, "usageProfiles")) {
 
-      // Create usage array
-      this.object.system.usage = [
-        {
-          activation: this.object.system.activation,
-          duration: this.object.system.duration,
-          target: this.object.system.target,
-          range: this.object.system.range,
-          uses: this.object.system.uses,
-          consume: this.object.system.consume,
-          ability: this.object.system.ability,
-          actionType: this.object.system.actionType,
-          attackBonus: this.object.system.attackBonus,
-          chatFlavor: this.object.system.chatFlavor,
-          critical: this.object.system.critical,
-          damage: this.object.system.damage,
-          formula: this.object.system.formula,
-          save: this.object.system.save,
-          scaling: this.object.system.scaling
+        const buildDamageObject = (damage, fromVersatile = false) => {
+
+          if (damage && damage?.parts) {
+
+            // This just takes the parts and defines a new one with versatile damage
+            return {
+              parts: (fromVersatile) ? (
+                [
+                  damage.versatile,
+                  damage.parts[0][1]
+                ]
+              ) : damage.parts
+            };
+          }
+        };
+
+        const usageProfiles = [
+          {
+            profileName: "",
+            activation: this.object.system.activation,
+            duration: this.object.system.duration,
+            target: this.object.system.target,
+            range: this.object.system.range,
+            uses: this.object.system.uses,
+            consume: this.object.system.consume,
+            ability: this.object.system.ability,
+            actionType: this.object.system.actionType,
+            attackBonus: this.object.system.attackBonus,
+            chatFlavor: this.object.system.chatFlavor,
+            critical: this.object.system.critical,
+            damage: buildDamageObject(this.object.system.damage),
+            formula: this.object.system.formula,
+            save: this.object.system.save,
+            scaling: this.object.system.scaling
+          }
+        ];
+
+        if (this.object.system.damage.versatile) {
+
+          usageProfiles.push({
+            profileName: "Versatile",
+            activation: this.object.system.activation,
+            duration: this.object.system.duration,
+            target: this.object.system.target,
+            range: this.object.system.range,
+            uses: this.object.system.uses,
+            consume: this.object.system.consume,
+            ability: this.object.system.ability,
+            actionType: this.object.system.actionType,
+            attackBonus: this.object.system.attackBonus,
+            chatFlavor: this.object.system.chatFlavor,
+            critical: this.object.system.critical,
+            damage: buildDamageObject(this.object.system.damage, true),
+            formula: this.object.system.formula,
+            save: this.object.system.save,
+            scaling: this.object.system.scaling
+          });
         }
-      ];
+
+        this.object.system.usageProfiles = usageProfiles;
+      }
     }
   }
 
@@ -59,7 +102,7 @@ export default class ItemSheet5e extends ItemSheet {
       resizable: true,
       scrollY: [".tab.details"],
       tabs: [{navSelector: ".tabs", contentSelector: ".sheet-body", initial: "description"}],
-      dragDrop: [{dragSelector: "[data-effect-id]", dropSelector: ".effects-list"}],
+      dragDrop: [{dragSelector: "[data-effect-id]", dropSelector: ".effects-list"}]
     });
   }
 
@@ -138,7 +181,7 @@ export default class ItemSheet5e extends ItemSheet {
     /** @deprecated */
     Object.defineProperty(context, "data", {
       get() {
-        const msg = `You are accessing the "data" attribute within the rendering context provided by the ItemSheet5e 
+        const msg = `You are accessing the "data" attribute within the rendering context provided by the ItemSheet5e
         class. This attribute has been deprecated in favor of "system" and will be removed in a future release`;
         foundry.utils.logCompatibilityWarning(msg, { since: "DnD5e 2.0", until: "DnD5e 2.2" });
         return context.system;
@@ -561,7 +604,7 @@ export default class ItemSheet5e extends ItemSheet {
   _onDrop(event) {
     const data = TextEditor.getDragEventData(event);
     const item = this.item;
-    
+
     /**
      * A hook event that fires when some useful data is dropped onto an ItemSheet5e.
      * @function dnd5e.dropItemSheetData
@@ -595,7 +638,7 @@ export default class ItemSheet5e extends ItemSheet {
     if ( (this.item.uuid === effect.parent.uuid) || (this.item.uuid === effect.origin) ) return false;
     return ActiveEffect.create({
       ...effect.toObject(),
-      origin: this.item.uuid,
+      origin: this.item.uuid
     }, {parent: this.item});
   }
 

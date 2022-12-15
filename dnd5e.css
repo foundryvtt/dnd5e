@@ -1512,6 +1512,9 @@
   /*  Item Details Form                        */
   /* ----------------------------------------- */
   /* ----------------------------------------- */
+  /*  Item Usage Profiles                      */
+  /* ----------------------------------------- */
+  /* ----------------------------------------- */
   /*  Item Actions                             */
   /* ----------------------------------------- */
   /* ----------------------------------------- */
@@ -1647,6 +1650,34 @@
 .dnd5e.sheet.item .details .spell-materials input[type="number"] {
   flex: 0 0 48px;
   margin-right: 10px;
+}
+.dnd5e.sheet.item .usage-profile-navigation {
+  margin: 0;
+  padding: 5px 0;
+  border-top: 2px groove #eeede0;
+  border-bottom: 2px groove #eeede0;
+  justify-content: left;
+  overflow-x: auto;
+}
+.dnd5e.sheet.item .usage-profile-navigation-header,
+.dnd5e.sheet.item .usage-profile-navigation-tab {
+  color: #191813;
+  font-family: "Modesto Condensed", "Palatino Linotype", serif;
+  font-size: 20px;
+  font-weight: 700;
+}
+.dnd5e.sheet.item .usage-profile-navigation-header {
+  margin: 0 12px 0 0;
+  padding: 5px 0;
+  line-height: 20px;
+}
+.dnd5e.sheet.item .usage-profile-navigation-tab {
+  margin: 0 12px 0 5px;
+  padding: 5px 0;
+  line-height: 20px;
+}
+.dnd5e.sheet.item .usage-profile-container {
+  padding: 15px 0 0 15px;
 }
 .dnd5e.sheet.item h4.damage-header {
   margin: 0;
