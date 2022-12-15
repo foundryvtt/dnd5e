@@ -22,7 +22,7 @@ export default class ItemSheet5e extends ItemSheet {
     // TEMP: This should be built into the packs etc
     // TODO: Likely needs consideration for feat, vehicle, tool, etc
     // Transform Weapon/Spell usage data structure
-    else if ( ["weapon", "spell"].includes(this.object.type) ) {
+    else if ( ["weapon", "spell", "feat", "equipment", "consumable"].includes(this.object.type) ) {
 
       // IF no usageProfile property is present, generate one
       if (!Reflect.has(this.object.system, "usageProfiles")) {
@@ -43,9 +43,11 @@ export default class ItemSheet5e extends ItemSheet {
           }
         };
 
+        // TODO: ProfileNames should be localised by default? How do Item Names do this?
+
         const usageProfiles = [
           {
-            profileName: "",
+            profileName: "Default",
             activation: this.object.system.activation,
             duration: this.object.system.duration,
             target: this.object.system.target,

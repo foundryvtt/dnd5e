@@ -14,6 +14,8 @@
         </select>
     </div>
 </div>
+
+{{!-- Hides every subsequent field if there's no Activation Cost --}}
 {{#if usageProfile.activation.type}}
 
 {{!-- Activation Condition --}}
@@ -164,4 +166,5 @@
         <input type="number" step="any" name="usageProfile.consume.amount" value="{{usageProfile.consume.amount}}">
     </div>
 </div>
+
 {{/if}}

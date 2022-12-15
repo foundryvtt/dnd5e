@@ -10,6 +10,8 @@
         {{/select}}
     </select>
 </div>
+
+{{!-- Hides every subsequent field if there's no Action Type --}}
 {{#if usageProfile.actionType}}
 
 {{!-- Ability Modifier --}}
@@ -61,7 +63,7 @@
     <a class="damage-control add-damage"><i class="fas fa-plus"></i></a>
 </h4>
 <ol class="damage-parts form-group">
-    {{#each system.damage.parts as |part i| }}
+    {{#each usageProfile.damage.parts as |part i| }}
     <li class="damage-part flexrow" data-damage-part="{{i}}">
         <input type="text" name="usageProfile.damage.parts.{{i}}.0" value="{{lookup this "0"}}"/>
         <select name="usageProfile.damage.parts.{{i}}.1">
@@ -121,4 +123,5 @@
     <label>{{ localize "DND5E.ChatFlavor" }}</label>
     <input type="text" name="usageProfile.chatFlavor" value="{{usageProfile.chatFlavor}}"/>
 </div>
+
 {{/if}}
