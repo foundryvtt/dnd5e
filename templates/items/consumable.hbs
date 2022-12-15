@@ -72,22 +72,60 @@
                 </label>
             </div>
 
-            <h3 class="form-header">{{ localize "DND5E.ItemConsumableUsage" }}</h3>
+             {{!-- Item Usage Profiles --}}
+            <div class="usage-profiles">
 
-            {{!-- Item Activation Template --}}
-            {{> "dnd5e.item-activation"}}
-            {{#if system.activation.type}}
-            <div class="form-group">
-                <label class="checkbox">
-                    <input type="checkbox" name="system.uses.autoDestroy" {{checked system.uses.autoDestroy}}/> {{ localize "DND5E.ItemDestroyEmpty" }}
-                </label>
+                {{!-- Item Usage Navigation --}}
+                <nav class="usage-profile-navigation sheet-navigation tabs" data-group="primary">
+
+                    <h3 class="usage-profile-navigation-header">{{ localize "DND5E.ItemUsageProfilesTypeConsumable" }}</h3>
+
+                    {{#each system.usageProfiles as |usageProfile|}}
+
+                    {{#if usageProfile.profileName}}
+                    <a class="usage-profile-navigation-tab item">{{ usageProfile.profileName }}</a>
+                    {{else}}
+                    <a class="usage-profile-navigation-tab item">{{ localize "DND5E.Untitled" }}</a>
+                    {{/if}}
+
+                    {{/each}}
+
+                    <a class="usage-profile-navigation-tab item">{{ localize "DND5E.ItemUsageProfileAdd" }}</a>
+                </nav>
+
+                {{#if system.usageProfiles.length}}
+                {{#with (lookup system.usageProfiles 0) as |usageProfile|}}
+                <div class="usage-profile-container">
+
+                    <h3 class="form-header">{{ localize "DND5E.ItemUsageProfileTypeConsumable" }}</h3>
+
+                    {{!-- Item Usage Profile Template --}}
+                    {{> "dnd5e.item-usage-profile" usageProfile=usageProfile config=../config}}
+
+                    <h3 class="form-header">{{ localize "DND5E.ItemConsumableUsage" }}</h3>
+
+                    {{!-- Item Activation Template --}}
+                    {{> "dnd5e.item-activation" usageProfile=usageProfile config=../config}}
+
+                    {{!-- Auto-Destroy Configuration --}}
+                    {{#if usageProfile.activation.type}}
+                    <div class="form-group">
+                        <label class="checkbox">
+                            <input type="checkbox" name="usageProfile.uses.autoDestroy" {{checked usageProfile.uses.autoDestroy}}/> {{ localize "DND5E.ItemDestroyEmpty" }}
+                        </label>
+                    </div>
+                    {{/if}}
+
+                    <h3 class="form-header">{{ localize "DND5E.ItemConsumableActivation" }}</h3>
+
+                    {{!-- Item Action Template --}}
+                    {{> "dnd5e.item-action" usageProfile=usageProfile config=../config}}
+
+                </div>
+                {{/with}}
+                {{/if}}
+
             </div>
-            {{/if}}
-
-            <h3 class="form-header">{{ localize "DND5E.ItemConsumableActivation" }}</h3>
-
-            {{!-- Item Action Template --}}
-            {{> "dnd5e.item-action"}}
         </div>
 
         {{!-- Effects Tab --}}
