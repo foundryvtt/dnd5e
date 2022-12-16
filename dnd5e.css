@@ -1658,6 +1658,7 @@
   border-bottom: 2px groove #eeede0;
   justify-content: left;
   overflow-x: auto;
+  overflow-y: hidden;
 }
 .dnd5e.sheet.item .usage-profile-navigation-header,
 .dnd5e.sheet.item .usage-profile-navigation-tab {
@@ -1680,9 +1681,20 @@
   margin: 0 12px 0 5px;
   padding: 5px 0;
   line-height: 20px;
+  white-space: nowrap;
 }
 .dnd5e.sheet.item .usage-profile-container {
   padding: 15px 0 0 15px;
+}
+.dnd5e.sheet.item .usage-profile-name {
+  flex: 1;
+}
+.dnd5e.sheet.item .usage-profile-delete {
+  flex: 0;
+  aspect-ratio: 1;
+  height: 20px;
+  line-height: 20px;
+  text-align: center;
 }
 .dnd5e.sheet.item h4.damage-header {
   margin: 0;

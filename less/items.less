@@ -184,6 +184,7 @@
     border-bottom: @borderGroove;
     justify-content: left;
     overflow-x: auto;
+    overflow-y: hidden;
   }
 
   .usage-profile-navigation-header, .usage-profile-navigation-tab {
@@ -209,10 +210,23 @@
     margin: 0 12px 0 5px;
     padding: 5px 0;
     line-height: 20px;
+    white-space: nowrap;
   }
 
   .usage-profile-container {
     padding: 15px 0 0 15px;
+  }
+
+  .usage-profile-name {
+    flex: 1;
+  }
+
+  .usage-profile-delete {
+    flex: 0;
+    aspect-ratio: 1;
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
   }
 
   /* ----------------------------------------- */

@@ -1,20 +1,24 @@
-{{!-- Profile Name --}}
 <div class="form-group input-select">
     <label>{{ localize "DND5E.ItemUsageProfileName" }}</label>
-    <div class="form-fields">
+    <div class="form-fields flexrow">
+
+        {{!-- Profile Name --}}
         <input
+            class="usage-profile-name"
             type="text"
             name="system.usageProfiles.{{system.usageProfileIndex}}.profileName"
             value="{{ getProperty (lookup system.usageProfiles system.usageProfileIndex) "profileName" }}"
             placeholder="{{ localize 'DND5E.Untitled' }}"
         />
+
+        {{!-- Delete Profile --}}
+        {{#if editable}}
+        <a
+            class="usage-profile-control usage-profile-delete"
+            title="{{ localize "DND5E.ItemUsageProfileDelete" }}"
+            data-usage-profile-delete-id={{ getProperty (lookup system.usageProfiles system.usageProfileIndex) "_id" }}
+        ><i class="fas fa-trash"></i></a>
+        {{/if}}
+
     </div>
 </div>
-
-{{#if editable}}
-{{!-- Delete Profile --}}
-<div class="form-group input-select">
-    <label>{{ localize "DND5E.ItemUsageProfileDelete" }}</label>
-    <a class="usage-profile-control usage-profile-delete" title="{{ localize "DND5E.ItemDelete" }}" data-usage-profile-delete-id={{ getProperty (lookup system.usageProfiles system.usageProfileIndex) "_id" }}><i class="fas fa-trash"></i></a>
-</div>
-{{/if}}
