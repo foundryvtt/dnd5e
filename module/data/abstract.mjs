@@ -12,8 +12,8 @@
  *
  * Here we have opted to instead create a separate Data Model for each template available. These define their own
  * schemas which are then mixed-in to the final schema for the Document type's Data Model. A Document type Data Model
- * can define its own schema unique to it, and then add templates in direct correspondence to those in template.json via
- * SystemDataModel.mixin.
+ * can define its own schema unique to it, and then add templates in direct correspondence to those in template.json
+ * via SystemDataModel.mixin.
  */
 export default class SystemDataModel extends foundry.abstract.DataModel {
 
@@ -51,9 +51,9 @@ export default class SystemDataModel extends foundry.abstract.DataModel {
 
   /**
    * Merge two schema definitions together as well as possible.
-   * @param {object} a  First schema that forms the basis for the merge. *Will be mutated.*
-   * @param {object} b  Second schema that will be merged in, overwriting any non-mergeable properties.
-   * @returns {object}  Fully merged schema.
+   * @param {DataSchema} a  First schema that forms the basis for the merge. *Will be mutated.*
+   * @param {DataSchema} b  Second schema that will be merged in, overwriting any non-mergeable properties.
+   * @returns {DataSchema}  Fully merged schema.
    */
   static mergeSchema(a, b) {
     Object.assign(a, b);
