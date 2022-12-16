@@ -176,12 +176,12 @@ export default class ItemSheet5e extends ItemSheet {
 
       // Action Details
       hasAttackRoll: item.hasAttack,
-      isHealing: item.system?.usageProfiles?.at(0)?.actionType === "heal",
-      isFlatDC: item.system?.usageProfiles?.at(0)?.save?.scaling === "flat",
-      isLine: ["line", "wall"].includes(item.system?.usageProfiles?.at(0)?.target?.type),
+      isHealing: item.system?.usageProfiles?.[0]?.actionType === "heal",
+      isFlatDC: item.system?.usageProfiles?.[0]?.save?.scaling === "flat",
+      isLine: ["line", "wall"].includes(item.system?.usageProfiles?.[0]?.target?.type),
 
       // Vehicles
-      isCrewed: item.system?.usageProfiles?.at(0)?.activation?.type === "crew",
+      isCrewed: item.system?.usageProfiles?.[0]?.activation?.type === "crew",
       isMountable,
 
       // Armor Class
@@ -298,7 +298,7 @@ export default class ItemSheet5e extends ItemSheet {
    * @private
    */
   _getItemConsumptionTargets() {
-    const consume = this.item.system?.usageProfiles?.at(0)?.consume || {};
+    const consume = this.item.system?.usageProfiles?.[0]?.consume || {};
     if ( !consume.type ) return [];
     const actor = this.item.actor;
     if ( !actor ) return {};
@@ -334,7 +334,7 @@ export default class ItemSheet5e extends ItemSheet {
     // Materials
     else if ( consume.type === "material" ) {
       return actor.items.reduce((obj, i) => {
-        if ( ["consumable", "loot"].includes(i.type) && !i.system?.usageProfiles?.at(0)?.activation ) {
+        if ( ["consumable", "loot"].includes(i.type) && !i.system?.usageProfiles?.[0]?.activation ) {
           obj[i.id] = `${i.name} (${i.system.quantity})`;
         }
         return obj;
@@ -346,7 +346,7 @@ export default class ItemSheet5e extends ItemSheet {
       return actor.items.reduce((obj, i) => {
 
         // Limited-use items
-        const uses = i.system?.usageProfiles?.at(0)?.uses || {};
+        const uses = i.system?.usageProfiles?.[0]?.uses || {};
         if ( uses.per && uses.max ) {
           const label = uses.per === "charges"
             ? ` (${game.i18n.format("DND5E.AbilityUseChargesLabel", {value: uses.value})})`
@@ -413,12 +413,12 @@ export default class ItemSheet5e extends ItemSheet {
     }
 
     // Action type
-    if ( this.item.system?.usageProfiles?.at(0)?.actionType ) {
-      props.push(CONFIG.DND5E.itemActionTypes[this.item.system?.usageProfiles?.at(0)?.actionType]);
+    if ( this.item.system?.usageProfiles?.[0]?.actionType ) {
+      props.push(CONFIG.DND5E.itemActionTypes[this.item.system?.usageProfiles?.[0]?.actionType]);
     }
 
     // Action usage
-    if ( (this.item.type !== "weapon") && !foundry.utils.isEmpty(this.item.system?.usageProfiles?.at(0)?.activation) ) {
+    if ( (this.item.type !== "weapon") && !foundry.utils.isEmpty(this.item.system?.usageProfiles?.[0]?.activation) ) {
       props.push(labels.activation, labels.range, labels.target, labels.duration);
     }
     return props.filter(p => !!p);
@@ -657,7 +657,7 @@ export default class ItemSheet5e extends ItemSheet {
     // Add new damage component
     if ( a.classList.contains("add-damage") ) {
       await this._onSubmit(event);  // Submit any unsaved changes
-      const damage = this.item.system?.usageProfiles?.at(0)?.damage;
+      const damage = this.item.system?.usageProfiles?.[0]?.damage;
       return this.item.update({"system.usageProfiles.0.damage.parts": damage.parts.concat([["", ""]])});
     }
 
@@ -665,7 +665,7 @@ export default class ItemSheet5e extends ItemSheet {
     if ( a.classList.contains("delete-damage") ) {
       await this._onSubmit(event);  // Submit any unsaved changes
       const li = a.closest(".damage-part");
-      const damage = foundry.utils.deepClone(this.item.system?.usageProfiles?.at(0)?.damage);
+      const damage = foundry.utils.deepClone(this.item.system?.usageProfiles?.[0]?.damage);
       damage.parts.splice(Number(li.dataset.damagePart), 1);
       return this.item.update({"system.usageProfiles.0.damage.parts": damage.parts});
     }
