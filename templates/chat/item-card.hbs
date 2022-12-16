@@ -24,27 +24,31 @@
     </div>
 
     <div class="card-buttons">
-        {{#if hasAttack}}<button data-action="attack">{{ localize "DND5E.Attack" }}</button>{{/if}}
+        {{#if hasAttack}}
+        <button data-usage-profile-id="{{itemUsageProfile._id}}" data-action="attack">
+            {{ localize "DND5E.Attack" }}
+        </button>
+        {{/if}}
 
         {{#if hasDamage}}
-        <button data-action="damage">
+        <button data-usage-profile-id="{{itemUsageProfile._id}}" data-action="damage">
             {{#if isHealing}}{{ localize "DND5E.Healing" }}
             {{else}}{{localize "DND5E.Damage" }}{{/if}}
         </button>
         {{/if}}
 
         {{#if hasSave}}
-        <button data-action="save" data-ability="{{itemUsageProfile.save.ability}}">
+        <button data-usage-profile-id="{{itemUsageProfile._id}}" data-action="save" data-ability="{{itemUsageProfile.save.ability}}">
             {{ localize "DND5E.SavingThrow" }} {{labels.save}}
         </button>
         {{/if}}
 
         {{#if itemUsageProfile.formula}}
-        <button data-action="formula">{{ localize "DND5E.OtherFormula"}}</button>
+        <button data-usage-profile-id="{{itemUsageProfile._id}}" data-action="formula">{{ localize "DND5E.OtherFormula"}}</button>
         {{/if}}
 
         {{#if hasAreaTarget}}
-        <button data-action="placeTemplate">{{ localize "DND5E.PlaceTemplate" }}</button>
+        <button data-usage-profile-id="{{itemUsageProfile._id}}" data-action="placeTemplate">{{ localize "DND5E.PlaceTemplate" }}</button>
         {{/if}}
 
         {{#if isTool}}
@@ -52,7 +56,7 @@
         {{/if}}
 
         {{#if hasAbilityCheck}}
-        <button data-action="abilityCheck" data-ability="{{itemUsageProfile.ability}}">{{labels.abilityCheck}}</button>
+        <button data-usage-profile-id="{{itemUsageProfile._id}}" data-action="abilityCheck" data-ability="{{itemUsageProfile.ability}}">{{labels.abilityCheck}}</button>
         {{/if}}
     </div>
 

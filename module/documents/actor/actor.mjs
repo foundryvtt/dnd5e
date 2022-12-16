@@ -1,5 +1,5 @@
 import Proficiency from "./proficiency.mjs";
-import { d20Roll, damageRoll } from "../../dice/dice.mjs";
+import { d20Roll } from "../../dice/dice.mjs";
 import { simplifyBonus } from "../../utils.mjs";
 import ShortRestDialog from "../../applications/actor/short-rest.mjs";
 import LongRestDialog from "../../applications/actor/long-rest.mjs";
@@ -1745,7 +1745,7 @@ export default class Actor5e extends Actor {
         let total = 0;
         try {
           total = (await roll.evaluate({async: true})).total;
-        } catch (err) {
+        } catch(err) {
           ui.notifications.warn(game.i18n.format("DND5E.ItemRecoveryFormulaWarning", {
             name: item.name,
             formula: uses.recovery

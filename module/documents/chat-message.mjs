@@ -127,7 +127,7 @@ function applyChatCardDamage(li, multiplier) {
 }
 
 /* -------------------------------------------- */
- 
+
 /**
  * Apply rolled dice as temporary hit points to the controlled token(s).
  * @param {HTMLElement} li  The chat entry which contains the roll data
