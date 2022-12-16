@@ -1220,6 +1220,7 @@ export default class Actor5e extends Actor {
       data.saveBonus = Roll.replaceFormulaData(globalBonuses.save, data);
     }
 
+    // Ability-specific check bonus
     const abilitySaveMinimum = abl?.minimum?.save;
 
     // Roll and return
