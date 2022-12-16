@@ -31,6 +31,7 @@ import { FormulaField } from "../../fields.mjs";
  * @mixin
  */
 export default class ActivatedEffectTemplate extends foundry.abstract.DataModel {
+  /** @inheritdoc */
   static defineSchema() {
     return {
       activation: new foundry.data.fields.SchemaField({

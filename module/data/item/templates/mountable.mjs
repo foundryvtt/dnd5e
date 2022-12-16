@@ -11,6 +11,7 @@
  * @mixin
  */
 export default class MountableTemplate extends foundry.abstract.DataModel {
+  /** @inheritdoc */
   static defineSchema() {
     return {
       armor: new foundry.data.fields.SchemaField({

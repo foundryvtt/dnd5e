@@ -9,6 +9,7 @@
  * @mixin
  */
 export default class ItemDescriptionTemplate extends foundry.abstract.DataModel {
+  /** @inheritdoc */
   static defineSchema() {
     return {
       description: new foundry.data.fields.SchemaField({

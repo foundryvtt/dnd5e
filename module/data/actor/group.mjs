@@ -1,6 +1,9 @@
+import SystemDataModel from "../abstract.mjs";
+import CurrencyTemplate from "../shared/currency.mjs";
 
 /**
  * A data model and API layer which handles the schema and functionality of "group" type Actors in the dnd5e system.
+ * @mixes CurrencyTemplate
  *
  * @example Create a new Group
  * const g = new dnd5e.documents.Actor5e({
@@ -11,9 +14,8 @@
  *  }
  * });
  */
-export default class GroupActor extends foundry.abstract.DataModel {
-
-  /** @override */
+export default class GroupActor extends SystemDataModel.mixin(CurrencyTemplate) {
+  /** @inheritdoc */
   static defineSchema() {
     const fields = foundry.data.fields;
     return {

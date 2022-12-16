@@ -21,6 +21,7 @@ import { FormulaField } from "../../fields.mjs";
  * @mixin
  */
 export default class ActionTemplate extends foundry.abstract.DataModel {
+  /** @inheritdoc */
   static defineSchema() {
     return {
       ability: new foundry.data.fields.StringField({

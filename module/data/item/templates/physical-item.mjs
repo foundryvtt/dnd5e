@@ -11,6 +11,7 @@
  * @mixin
  */
 export default class PhysicalItemTemplate extends foundry.abstract.DataModel {
+  /** @inheritdoc */
   static defineSchema() {
     return {
       quantity: new foundry.data.fields.NumberField({
