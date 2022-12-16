@@ -658,6 +658,15 @@
   overflow-y: auto;
 }
 /* ----------------------------------------- */
+/*  Item Usage Profile Prompt Specifically   */
+/* ----------------------------------------- */
+.dnd5e.item-use-dialog {
+  height: auto;
+}
+.dnd5e.item-use-dialog > .window-content > .dialog-buttons {
+  flex-direction: column;
+}
+/* ----------------------------------------- */
 /*  SRD Compendium                           */
 /* ----------------------------------------- */
 .srd-compendium article {
@@ -1822,6 +1831,21 @@
 .dnd5e.chat-card .card-header h3:hover {
   color: #111;
   text-shadow: 0 0 10px red;
+}
+.dnd5e.chat-card .card-subheader {
+  padding: 0;
+  margin: 0;
+  border-bottom: 2px groove #FFF;
+}
+.dnd5e.chat-card .card-subheader h4 {
+  padding: 0;
+  margin: 2px 0 2px 0;
+  font-family: "Modesto Condensed", "Palatino Linotype", serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: #4b4a44;
+  font-size: 18px;
+  line-height: 18px;
 }
 .dnd5e.chat-card .card-content {
   margin: 5px 0;

@@ -1,6 +1,6 @@
 import {d20Roll, damageRoll} from "../dice/dice.mjs";
 import simplifyRollFormula from "../dice/simplify-roll-formula.mjs";
-import AbilityUseDialog from "../applications/item/ability-use-dialog.mjs";
+import {AbilityUseDialog, ItemProfileSelectDialog} from "../applications/item/_module.mjs";
 import Proficiency from "./actor/proficiency.mjs";
 
 /**
@@ -1038,12 +1038,45 @@ export default class Item5e extends Item {
    */
   async displayCard(options={}) {
 
+    // TODO: Consumables and Spells reach roll first, how do we deal with that?
+
+    let usageProfileIndex = 0;
+    if (this?.system?.usageProfiles?.length > 1) {
+
+      /**
+       * A hook event that fires before an item profile selection dialog is created.
+       * @function dnd5e.preItemProfileSelectDialog
+       * @memberof hookEvents
+       * @param {Item5e} item Item for which the usageProfiles are being drawn from.
+       */
+      Hooks.callAll("dnd5e.preItemProfileSelectDialog", this);
+
+      usageProfileIndex = await ItemProfileSelectDialog.create(this);
+
+      /**
+       * A hook event that fires after an item profile selection dialog is created.
+       * @function dnd5e.itemProfileSelectDialog
+       * @memberof hookEvents
+       * @param {Item5e} item               Item for which the usageProfiles are being drawn from.
+       * @param {number} usageProfileIndex  The selected usageProfile that will be used to create an item card.
+       */
+      Hooks.callAll("dnd5e.itemProfileSelectDialog", this, usageProfileIndex);
+    }
+
+    // If dialog was closed we can just exit without continuing
+    if (usageProfileIndex === null) { return null; }
+
+    // TODO: Use this selection to define what rolls take place?
+    console.debug("TODO: Act on selected profile", usageProfileIndex);
+
     // Render the chat card template
     const token = this.actor.token;
     const templateData = {
       actor: this.actor.toObject(false),
       tokenId: token?.uuid || null,
       item: this.toObject(false),
+      itemUsageProfileIndex: usageProfileIndex,
+      itemUsageProfile: this?.system?.usageProfiles?.[usageProfileIndex],
       data: await this.getChatData(),
       labels: this.labels,
       hasAttack: this.hasAttack,

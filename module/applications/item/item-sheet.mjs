@@ -606,9 +606,10 @@ export default class ItemSheet5e extends ItemSheet {
     // Add new usage-profile component
     if ( a.classList.contains("usage-profile-add") ) {
       await this._onSubmit(event);  // Submit any unsaved changes
-      console.log("ADD USAGE PROFILE");
+      const id = foundry.utils.randomID();
+      console.debug("ADD USAGE PROFILE", id);
       this.object.system.usageProfiles.push({
-        _id: foundry.utils.randomID()
+        _id: id
       });
       this.object.system.usageProfileIndex = this.object.system.usageProfiles.length - 1;
       return this.object.update({
@@ -620,7 +621,7 @@ export default class ItemSheet5e extends ItemSheet {
     // Remove a usage-profile component
     else if ( a.classList.contains("usage-profile-delete") ) {
       await this._onSubmit(event);  // Submit any unsaved changes
-      console.log("DELETE USAGE PROFILE", a.dataset, this.object.system.usageProfiles);
+      console.debug("DELETE USAGE PROFILE", a.dataset, this.object.system.usageProfiles);
       if (this.object.system.usageProfiles.length) {
         this.object.system.usageProfileIndex = this.object.system.usageProfileIndex - 1 || 0; // Reduce index by 1 if possible
         this.object.system.usageProfiles = this.object.system.usageProfiles
@@ -635,7 +636,7 @@ export default class ItemSheet5e extends ItemSheet {
     // Navigate to a usage-profile
     else if ( a.classList.contains("usage-profile-navigate") ) {
       await this._onSubmit(event);  // Submit any unsaved changes
-      console.log("NAVIGATE USAGE PROFILE");
+      console.debug("NAVIGATE USAGE PROFILE", parseInt(a.dataset.usageProfileIndex || 0));
       this.object.system.usageProfileIndex = parseInt(a.dataset.usageProfileIndex || 0);
       return this.object.update({"system.usageProfileIndex": this.object.system.usageProfileIndex});
     }
