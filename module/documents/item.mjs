@@ -1066,6 +1066,8 @@ export default class Item5e extends Item {
     // If dialog was closed we can just exit without continuing
     if (usageProfileIndex === null) { return null; }
 
+    const usageProfile = this?.system?.usageProfiles?.[usageProfileIndex];
+
     // TODO: Use this selection to define what rolls take place?
     console.debug("TODO: Act on selected profile", usageProfileIndex);
 
@@ -1076,7 +1078,8 @@ export default class Item5e extends Item {
       tokenId: token?.uuid || null,
       item: this.toObject(false),
       itemUsageProfileIndex: usageProfileIndex,
-      itemUsageProfile: this?.system?.usageProfiles?.[usageProfileIndex],
+      itemUsageProfile: usageProfile,
+      itemUsageProfileSubheader: `${game.i18n.localize(`DND5E.ItemUsageProfileType${this.type.titleCase()}`)} - ${usageProfile.profileName || game.i18n.localize("DND5E.Untitled")}`,
       data: await this.getChatData(),
       labels: this.labels,
       hasAttack: this.hasAttack,
