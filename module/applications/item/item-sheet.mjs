@@ -624,7 +624,6 @@ export default class ItemSheet5e extends ItemSheet {
     // Navigate to a usage-profile
     else if ( a.classList.contains("usage-profile-navigate") ) {
       await this._onSubmit(event);  // Submit any unsaved changes
-      console.log("TODO: DELETE USAGE NAVIGATE", this.object.system.usageProfileIndex, "=>", a.dataset, a.dataset.usageProfileIndex, parseInt(a.dataset.usageProfileIndex || 0));
       this.object.system.usageProfileIndex = parseInt(a.dataset.usageProfileIndex || 0);
       return this.item.update({"system.usageProfileIndex": this.object.system.usageProfileIndex});
     }

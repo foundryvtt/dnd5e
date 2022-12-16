@@ -65,8 +65,8 @@
 <ol class="damage-parts form-group">
     {{#each (getProperty (lookup system.usageProfiles system.usageProfileIndex) "damage.parts") as |part i| }}
     <li class="damage-part flexrow" data-damage-part="{{i}}">
-        <input type="text" name="system.usageProfiles.{{system.usageProfileIndex}}.damage.parts.{{i}}.0" value="{{lookup this "0"}}"/>
-        <select name="system.usageProfiles.{{system.usageProfileIndex}}.damage.parts.{{i}}.1">
+        <input type="text" name="system.usageProfiles.{{../system.usageProfileIndex}}.damage.parts.{{i}}.0" value="{{lookup this "0"}}"/>
+        <select name="system.usageProfiles.{{../system.usageProfileIndex}}.damage.parts.{{i}}.1">
             {{#select (lookup this "1") }}
             <option value="">{{ localize "DND5E.None" }}</option>
             {{#each ../config.damageTypes as |name type|}}
