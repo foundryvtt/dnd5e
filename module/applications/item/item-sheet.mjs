@@ -473,25 +473,26 @@ export default class ItemSheet5e extends ItemSheet {
 
     // TODO: Having to merge my object input into the original item just feels wrong
     // Having to apply the new changed usageProfile over the existing item data myself
-    const usageProfileUpdate = formData.system?.usageProfiles?.[this.object.system.usageProfileIndex];
+    const usageProfileUpdate = formData.system?.usageProfiles?.[this.item.system.usageProfileIndex];
     if ( usageProfileUpdate ) {
-      const newUsageProfiles = foundry.utils.deepClone(this.object.system.usageProfiles);
-      newUsageProfiles[this.object.system.usageProfileIndex] = usageProfileUpdate;
+      const newUsageProfiles = foundry.utils.deepClone(this.item.system.usageProfiles);
+      newUsageProfiles[this.item.system.usageProfileIndex] = usageProfileUpdate;
       formData.system.usageProfiles = newUsageProfiles;
     }
 
     // TODO: Damage is majorly broken
 
     // Handle Damage array
-    const damage = formData.system?.usageProfiles?.at(this.object.system.usageProfileIndex)?.damage;
+    console.log("formData.system?.usageProfiles", formData.system?.usageProfiles);
+    const damage = formData.system?.usageProfiles?.[this.item.system.usageProfileIndex]?.damage;
     if ( damage ) damage.parts = Object.values(damage?.parts || {}).map(d => [d[0] || "", d[1] || ""]);
 
     // Check max uses formula
-    const uses = formData.system?.usageProfiles?.at(this.object.system.usageProfileIndex)?.uses;
+    const uses = formData.system?.usageProfiles?.[this.item.system.usageProfileIndex]?.uses;
     if ( uses?.max ) {
       const maxRoll = new Roll(uses.max);
       if ( !maxRoll.isDeterministic ) {
-        uses.max = this.item._source.system?.usageProfiles?.at(this.object.system.usageProfileIndex)?.uses.max;
+        uses.max = this.item._source.system?.usageProfiles?.[this.item.system.usageProfileIndex]?.uses.max;
         this.form.querySelector("input[name='system.uses.max']").value = uses.max;
         return ui.notifications.error(game.i18n.format("DND5E.FormulaCannotContainDiceError", {
           name: game.i18n.localize("DND5E.LimitedUses")
@@ -515,7 +516,7 @@ export default class ItemSheet5e extends ItemSheet {
 
     // Return the flattened submission data
     return foundry.utils.flattenObject(
-      foundry.utils.mergeObject(this.object, formData)
+      foundry.utils.mergeObject(this.item, formData)
     );
 
     // // Return the flattened submission data
@@ -606,39 +607,41 @@ export default class ItemSheet5e extends ItemSheet {
     // Add new usage-profile component
     if ( a.classList.contains("usage-profile-add") ) {
       await this._onSubmit(event);  // Submit any unsaved changes
+
       const id = foundry.utils.randomID();
       console.debug("ADD USAGE PROFILE", id);
-      this.object.system.usageProfiles.push({
-        _id: id
-      });
-      this.object.system.usageProfileIndex = this.object.system.usageProfiles.length - 1;
-      return this.object.update({
-        "system.usageProfileIndex": this.object.system.usageProfileIndex,
-        "system.usageProfiles": this.object.system.usageProfiles
+
+      return this.item.update({
+        "system.usageProfileIndex": this.item.system.usageProfiles.length,
+        "system.usageProfiles": this.item.system.usageProfiles.concat({ _id: id })
       });
     }
 
     // Remove a usage-profile component
     else if ( a.classList.contains("usage-profile-delete") ) {
       await this._onSubmit(event);  // Submit any unsaved changes
-      console.debug("DELETE USAGE PROFILE", a.dataset, this.object.system.usageProfiles);
-      if (this.object.system.usageProfiles.length) {
-        this.object.system.usageProfileIndex = this.object.system.usageProfileIndex - 1 || 0; // Reduce index by 1 if possible
-        this.object.system.usageProfiles = this.object.system.usageProfiles
-          .filter(e => e._id !== a.dataset.usageProfileDeleteId); // Filter out element
+
+      console.debug("DELETE USAGE PROFILE", a.dataset, this.item.system.usageProfiles);
+
+      if (this.item.system.usageProfiles.length) {
+
+        const usageProfiles = foundry.utils.deepClone(this.item.system.usageProfiles);
+        usageProfiles.splice(usageProfiles.findIndex(e => e._id === a.dataset.usageProfileDeleteId), 1);
+
+        return this.item.update({
+          "system.usageProfileIndex": this.item.system.usageProfileIndex - 1 || 0, // Reduce index by 1 if possible
+          "system.usageProfiles": usageProfiles
+        });
       }
-      return this.object.update({
-        "system.usageProfileIndex": this.object.system.usageProfileIndex,
-        "system.usageProfiles": this.object.system.usageProfiles
-      });
     }
 
     // Navigate to a usage-profile
     else if ( a.classList.contains("usage-profile-navigate") ) {
       await this._onSubmit(event);  // Submit any unsaved changes
-      console.debug("NAVIGATE USAGE PROFILE", parseInt(a.dataset.usageProfileIndex || 0));
-      this.object.system.usageProfileIndex = parseInt(a.dataset.usageProfileIndex || 0);
-      return this.object.update({"system.usageProfileIndex": this.object.system.usageProfileIndex});
+
+      console.debug("NAVIGATE USAGE PROFILE", this.item.system?.usageProfiles?.[parseInt(a.dataset.usageProfileIndex || 0)]);
+
+      return this.item.update({"system.usageProfileIndex": parseInt(a.dataset.usageProfileIndex || 0)});
     }
   }
 
@@ -657,17 +660,22 @@ export default class ItemSheet5e extends ItemSheet {
     // Add new damage component
     if ( a.classList.contains("add-damage") ) {
       await this._onSubmit(event);  // Submit any unsaved changes
-      const damage = this.item.system?.usageProfiles?.[0]?.damage;
-      return this.item.update({"system.usageProfiles.0.damage.parts": damage.parts.concat([["", ""]])});
+
+      const usageProfiles = foundry.utils.deepClone(this.item.system.usageProfiles);
+      usageProfiles[this.item.system.usageProfileIndex].damage.parts.push(["", ""]);
+
+      return this.item.update({"system.usageProfiles": usageProfiles});
     }
 
     // Remove a damage component
-    if ( a.classList.contains("delete-damage") ) {
+    else if ( a.classList.contains("delete-damage") ) {
       await this._onSubmit(event);  // Submit any unsaved changes
       const li = a.closest(".damage-part");
-      const damage = foundry.utils.deepClone(this.item.system?.usageProfiles?.[0]?.damage);
-      damage.parts.splice(Number(li.dataset.damagePart), 1);
-      return this.item.update({"system.usageProfiles.0.damage.parts": damage.parts});
+
+      const usageProfiles = foundry.utils.deepClone(this.item.system.usageProfiles);
+      usageProfiles[this.item.system.usageProfileIndex].damage.parts.splice(li.dataset.damagePart, 1);
+
+      return this.item.update({"system.usageProfiles": usageProfiles});
     }
   }
 
