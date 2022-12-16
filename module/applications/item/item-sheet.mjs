@@ -469,38 +469,25 @@ export default class ItemSheet5e extends ItemSheet {
   _getSubmitData(updateData={}) {
     const formData = foundry.utils.expandObject(super._getSubmitData(updateData));
 
-    // // TODO: Handle UsageProfile array? I'm so confused by formdata
-    // console.log("- 0");
-    // console.log("\tformData.usageProfile", formData.usageProfile);
-    // console.log("- 1");
-    // console.log("\tthis.object.system.usageProfiles[this.object.system.usageProfileIndex]", this.object.system.usageProfiles[this.object.system.usageProfileIndex]);
-
-    // const idontunderstand = foundry.utils.mergeObject(
-    //   this.object.system.usageProfiles[this.object.system.usageProfileIndex],
-    //   formData.usageProfile
-    // );
-    // console.log("- 3");
-    // console.log("\tidontunderstand", idontunderstand);
-    // console.log("-");
-
-    // this.object.system.usageProfiles[this.object.system.usageProfileIndex] = idontunderstand;
-
-    // Reflect.deleteProperty(formData.system, "usageProfile");
-
-    // console.log("- 4 ");
-    // console.log("\tformData", formData);
-    // console.log("-");
+    // TODO: This drops other data not included in the formData, like usageProfileIndex...
+    // Having to apply the new changed usageProfile over the existing item data myself
+    const usageProfileUpdate = formData.system?.usageProfiles?.[0];
+    if ( usageProfileUpdate ) {
+      const newUsageProfiles = foundry.utils.deepClone(this.object.system.usageProfiles);
+      newUsageProfiles[0] = usageProfileUpdate;
+      formData.system.usageProfiles = newUsageProfiles;
+    }
 
     // Handle Damage array
-    const damage = formData.system?.damage;
+    const damage = formData.system?.usageProfiles?.at(0)?.damage;
     if ( damage ) damage.parts = Object.values(damage?.parts || {}).map(d => [d[0] || "", d[1] || ""]);
 
     // Check max uses formula
-    const uses = formData.system?.uses;
+    const uses = formData.system?.usageProfiles?.at(0)?.uses;
     if ( uses?.max ) {
       const maxRoll = new Roll(uses.max);
       if ( !maxRoll.isDeterministic ) {
-        uses.max = this.item._source.system.uses.max;
+        uses.max = this.item._source.system?.usageProfiles?.at(0)?.uses.max;
         this.form.querySelector("input[name='system.uses.max']").value = uses.max;
         return ui.notifications.error(game.i18n.format("DND5E.FormulaCannotContainDiceError", {
           name: game.i18n.localize("DND5E.LimitedUses")
@@ -520,7 +507,12 @@ export default class ItemSheet5e extends ItemSheet {
     }
 
     // Return the flattened submission data
-    return foundry.utils.flattenObject(formData);
+    return foundry.utils.flattenObject(
+      foundry.utils.mergeObject(this.object, formData) // TODO: Merge original object into updated version? Something si clearly incorrect in my approach
+    );
+
+    // // Return the flattened submission data
+    // return foundry.utils.flattenObject(formData);
   }
 
   /* -------------------------------------------- */
@@ -639,7 +631,7 @@ export default class ItemSheet5e extends ItemSheet {
     if ( a.classList.contains("add-damage") ) {
       await this._onSubmit(event);  // Submit any unsaved changes
       const damage = this.item.system?.usageProfiles?.at(0)?.damage;
-      return this.item.update({"system.damage.parts": damage.parts.concat([["", ""]])});
+      return this.item.update({"system.usageProfiles.0.damage.parts": damage.parts.concat([["", ""]])});
     }
 
     // Remove a damage component
@@ -648,7 +640,7 @@ export default class ItemSheet5e extends ItemSheet {
       const li = a.closest(".damage-part");
       const damage = foundry.utils.deepClone(this.item.system?.usageProfiles?.at(0)?.damage);
       damage.parts.splice(Number(li.dataset.damagePart), 1);
-      return this.item.update({"system.damage.parts": damage.parts});
+      return this.item.update({"system.usageProfiles.0.damage.parts": damage.parts});
     }
   }
 

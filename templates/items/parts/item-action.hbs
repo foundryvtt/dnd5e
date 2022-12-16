@@ -1,7 +1,7 @@
 {{!-- Action Type --}}
 <div class="form-group select">
     <label>{{ localize "DND5E.ItemActionType" }}</label>
-    <select name="usageProfile.actionType">
+    <select name="system.usageProfiles.0.actionType">
         {{#select system.usageProfiles.0.actionType}}
         <option value=""></option>
         {{#each config.itemActionTypes as |name type|}}
@@ -17,7 +17,7 @@
 {{!-- Ability Modifier --}}
 <div class="form-group select">
     <label>{{ localize "DND5E.AbilityModifier" }}</label>
-    <select name="usageProfile.ability">
+    <select name="system.usageProfiles.0.ability">
         {{#select system.usageProfiles.0.ability}}
         <option value="">{{ localize "DND5E.Default" }}</option>
         {{#each config.abilities as |ability a|}}
@@ -32,7 +32,7 @@
 <div class="form-group">
     <label>{{ localize "DND5E.ItemAttackBonus" }}</label>
     <div class="form-fields">
-        <input type="text" name="usageProfile.attackBonus" value="{{system.usageProfiles.0.attackBonus}}"/>
+        <input type="text" name="system.usageProfiles.0.attackBonus" value="{{system.usageProfiles.0.attackBonus}}"/>
     </div>
 </div>
 {{/if}}
@@ -42,7 +42,7 @@
 <div class="form-group">
     <label>{{ localize "DND5E.ItemCritThreshold" }}</label>
     <div class="form-fields">
-        {{ numberInput system.usageProfiles.0.critical.threshold name="usageProfile.critical.threshold" placeholder="20" max=20 min=1 step=1 }}
+        {{ numberInput system.usageProfiles.0.critical.threshold name="system.usageProfiles.0.critical.threshold" placeholder="20" max=20 min=1 step=1 }}
     </div>
 </div>
 {{/if}}
@@ -52,7 +52,7 @@
 <div class="form-group">
     <label>{{ localize "DND5E.ItemCritExtraDamage" }}</label>
     <div class="form-fields">
-        <input type="text" name="usageProfile.critical.damage" value="{{system.usageProfiles.0.critical.damage}}">
+        <input type="text" name="system.usageProfiles.0.critical.damage" value="{{system.usageProfiles.0.critical.damage}}">
     </div>
 </div>
 {{/if}}
@@ -65,8 +65,8 @@
 <ol class="damage-parts form-group">
     {{#each system.usageProfiles.0.damage.parts as |part i| }}
     <li class="damage-part flexrow" data-damage-part="{{i}}">
-        <input type="text" name="usageProfile.damage.parts.{{i}}.0" value="{{lookup this "0"}}"/>
-        <select name="usageProfile.damage.parts.{{i}}.1">
+        <input type="text" name="system.usageProfiles.{{0}}.damage.parts.{{i}}.0" value="{{lookup this "0"}}"/>
+        <select name="system.usageProfiles.{{0}}.damage.parts.{{i}}.1">
             {{#select (lookup this "1") }}
             <option value="">{{ localize "DND5E.None" }}</option>
             {{#each ../config.damageTypes as |name type|}}
@@ -86,7 +86,7 @@
 <div class="form-group">
     <label>{{ localize "DND5E.OtherFormula" }}</label>
     <div class="form-fields">
-        <input type="text" name="usageProfile.formula" value="{{system.usageProfiles.0.formula}}" placeholder="{{ localize 'DND5E.Formula' }}"/>
+        <input type="text" name="system.usageProfiles.0.formula" value="{{system.usageProfiles.0.formula}}" placeholder="{{ localize 'DND5E.Formula' }}"/>
     </div>
 </div>
 
@@ -94,7 +94,7 @@
 <div class="form-group input-select">
     <label>{{ localize "DND5E.ActionSave" }}</label>
     <div class="form-fields">
-        <select name="usageProfile.save.ability">
+        <select name="system.usageProfiles.0.save.ability">
             {{#select system.usageProfiles.0.save.ability}}
             <option value=""></option>
             {{#each config.abilities as |ability a|}}
@@ -103,10 +103,10 @@
             {{/select}}
         </select>
         <span>{{ localize "DND5E.VsDC" }}</span>
-        <input type="number" step="any" name="usageProfile.save.dc"
+        <input type="number" step="any" name="system.usageProfiles.0.save.dc"
             value="{{#if system.usageProfiles.0.save.dc}}{{system.usageProfiles.0.save.dc}}{{/if}}"
             placeholder="{{ localize 'DND5E.AbbreviationDC' }}" {{#unless isFlatDC}}disabled{{/unless}}>
-        <select name="usageProfile.save.scaling">
+        <select name="system.usageProfiles.0.save.scaling">
             {{#select system.usageProfiles.0.save.scaling}}
             <option value="spell">{{ localize "DND5E.Spellcasting" }}</option>
             {{#each config.abilities as |ability a|}}
@@ -121,7 +121,7 @@
 {{!-- Chat Message Flavor --}}
 <div class="form-group stacked">
     <label>{{ localize "DND5E.ChatFlavor" }}</label>
-    <input type="text" name="usageProfile.chatFlavor" value="{{system.usageProfiles.0.chatFlavor}}"/>
+    <input type="text" name="system.usageProfiles.0.chatFlavor" value="{{system.usageProfiles.0.chatFlavor}}"/>
 </div>
 
 {{/if}}

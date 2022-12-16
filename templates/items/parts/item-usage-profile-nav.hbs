@@ -1,10 +1,6 @@
 {{!-- Item Usage Navigation --}}
 <nav class="usage-profile-navigation sheet-navigation tabs" data-group="primary">
 
-    {{log "this" this level="info"}}
-    {{log "itemType" itemType level="info"}}
-    {{log "item.type" item.type level="info"}}
-
     {{!-- Profile List Heading --}}
     {{#if (eq item.type "weapon")}}
     <h3 class="usage-profile-navigation-header">{{ localize "DND5E.ItemUsageProfilesTypeWeapon" }}</h3>

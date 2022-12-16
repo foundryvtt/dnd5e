@@ -582,7 +582,8 @@ export default class Item5e extends Item {
       const ammoItem = this.actor.items.get(this.system?.usageProfiles?.at(0)?.consume.target);
       if ( ammoItem ) {
         const ammoItemQuantity = ammoItem.system.quantity;
-        const ammoCanBeConsumed = ammoItemQuantity && (ammoItemQuantity - (this.system?.usageProfiles?.at(0)?.consume.amount ?? 0) >= 0);
+        const ammoAfterConsumption = ammoItemQuantity - (this.system?.usageProfiles?.at(0)?.consume.amount ?? 0);
+        const ammoCanBeConsumed = ammoItemQuantity && (ammoAfterConsumption >= 0);
         const ammoItemAttackBonus = ammoItem.system?.usageProfiles?.at(0)?.attackBonus;
         const ammoIsTypeConsumable = (ammoItem.type === "consumable") && (ammoItem.system.consumableType === "ammo");
         if ( ammoCanBeConsumed && ammoItemAttackBonus && ammoIsTypeConsumable ) {
