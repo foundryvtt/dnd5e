@@ -47,6 +47,7 @@ export default class ItemSheet5e extends ItemSheet {
 
         const usageProfiles = [
           {
+            _id: foundry.utils.randomID(),
             profileName: "Default",
             activation: this.object.system.activation,
             duration: this.object.system.duration,
@@ -69,6 +70,7 @@ export default class ItemSheet5e extends ItemSheet {
         if (this.object.system.damage.versatile) {
 
           usageProfiles.push({
+            _id: foundry.utils.randomID(),
             profileName: "Versatile",
             activation: this.object.system.activation,
             duration: this.object.system.duration,
@@ -604,28 +606,38 @@ export default class ItemSheet5e extends ItemSheet {
     // Add new usage-profile component
     if ( a.classList.contains("usage-profile-add") ) {
       await this._onSubmit(event);  // Submit any unsaved changes
-      console.log("TODO: ADD USAGE PROFILE");
-      // TODO: ADD USAGE PROFILE
-      // const damage = this.item.system?.usageProfiles?.at(0)?.damage;
-      // return this.item.update({"system.damage.parts": damage.parts.concat([["", ""]])});
+      console.log("ADD USAGE PROFILE");
+      this.object.system.usageProfiles.push({
+        _id: foundry.utils.randomID()
+      });
+      this.object.system.usageProfileIndex = this.object.system.usageProfiles.length - 1;
+      return this.object.update({
+        "system.usageProfileIndex": this.object.system.usageProfileIndex,
+        "system.usageProfiles": this.object.system.usageProfiles
+      });
     }
 
     // Remove a usage-profile component
     else if ( a.classList.contains("usage-profile-delete") ) {
       await this._onSubmit(event);  // Submit any unsaved changes
-      console.log("TODO: DELETE USAGE PROFILE");
-      // TODO: DELETE USAGE PROFILE
-      // const li = a.closest(".damage-part");
-      // const damage = foundry.utils.deepClone(this.item.system?.usageProfiles?.at(0)?.damage);
-      // damage.parts.splice(Number(li.dataset.damagePart), 1);
-      // return this.item.update({"system.damage.parts": damage.parts});
+      console.log("DELETE USAGE PROFILE", a.dataset, this.object.system.usageProfiles);
+      if (this.object.system.usageProfiles.length) {
+        this.object.system.usageProfileIndex = this.object.system.usageProfileIndex - 1 || 0; // Reduce index by 1 if possible
+        this.object.system.usageProfiles = this.object.system.usageProfiles
+          .filter(e => e._id !== a.dataset.usageProfileDeleteId); // Filter out element
+      }
+      return this.object.update({
+        "system.usageProfileIndex": this.object.system.usageProfileIndex,
+        "system.usageProfiles": this.object.system.usageProfiles
+      });
     }
 
     // Navigate to a usage-profile
     else if ( a.classList.contains("usage-profile-navigate") ) {
       await this._onSubmit(event);  // Submit any unsaved changes
+      console.log("NAVIGATE USAGE PROFILE");
       this.object.system.usageProfileIndex = parseInt(a.dataset.usageProfileIndex || 0);
-      return this.item.update({"system.usageProfileIndex": this.object.system.usageProfileIndex});
+      return this.object.update({"system.usageProfileIndex": this.object.system.usageProfileIndex});
     }
   }
 
