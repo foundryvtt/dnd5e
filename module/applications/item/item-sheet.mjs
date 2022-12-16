@@ -483,7 +483,6 @@ export default class ItemSheet5e extends ItemSheet {
     // TODO: Damage is majorly broken
 
     // Handle Damage array
-    console.log("formData.system?.usageProfiles", formData.system?.usageProfiles);
     const damage = formData.system?.usageProfiles?.[this.item.system.usageProfileIndex]?.damage;
     if ( damage ) damage.parts = Object.values(damage?.parts || {}).map(d => [d[0] || "", d[1] || ""]);
 
@@ -609,7 +608,7 @@ export default class ItemSheet5e extends ItemSheet {
       await this._onSubmit(event);  // Submit any unsaved changes
 
       const id = foundry.utils.randomID();
-      console.debug("ADD USAGE PROFILE", id);
+      console.debug(`${this.actor.name} added a new Usage-Profile to ${this.item.name}`);
 
       return this.item.update({
         "system.usageProfileIndex": this.item.system.usageProfiles.length,
@@ -621,7 +620,7 @@ export default class ItemSheet5e extends ItemSheet {
     else if ( a.classList.contains("usage-profile-delete") ) {
       await this._onSubmit(event);  // Submit any unsaved changes
 
-      console.debug("DELETE USAGE PROFILE", a.dataset, this.item.system.usageProfiles);
+      console.debug(`${this.actor.name} removed a Usage-Profile from ${this.item.name}`);
 
       if (this.item.system.usageProfiles.length) {
 
@@ -639,7 +638,7 @@ export default class ItemSheet5e extends ItemSheet {
     else if ( a.classList.contains("usage-profile-navigate") ) {
       await this._onSubmit(event);  // Submit any unsaved changes
 
-      console.debug("NAVIGATE USAGE PROFILE", this.item.system?.usageProfiles?.[parseInt(a.dataset.usageProfileIndex || 0)]);
+      console.debug(`${this.actor.name} navigated to a different Usage-Profile within ${this.item.name}`);
 
       return this.item.update({"system.usageProfileIndex": parseInt(a.dataset.usageProfileIndex || 0)});
     }
