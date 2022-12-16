@@ -32,9 +32,9 @@
     {{else}}
 
     {{#if usageProfile.profileName}}
-    <a class="usage-profile-navigation-tab item">{{ usageProfile.profileName }}</a>
+    <a class="usage-profile-navigation-tab usage-profile-control usage-profile-navigate item" data-usage-profile-index={{index}}>{{ usageProfile.profileName }}</a>
     {{else}}
-    <a class="usage-profile-navigation-tab item">{{ localize "DND5E.Untitled" }}</a>
+    <a class="usage-profile-navigation-tab usage-profile-control usage-profile-navigate item" data-usage-profile-index={{index}}>{{ localize "DND5E.Untitled" }}</a>
     {{/if}}
 
     {{/if}}

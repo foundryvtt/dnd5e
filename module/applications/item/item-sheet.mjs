@@ -469,12 +469,12 @@ export default class ItemSheet5e extends ItemSheet {
   _getSubmitData(updateData={}) {
     const formData = foundry.utils.expandObject(super._getSubmitData(updateData));
 
-    // TODO: This drops other data not included in the formData, like usageProfileIndex...
+    // TODO: Having to merge my object input into the original item just feels wrong
     // Having to apply the new changed usageProfile over the existing item data myself
-    const usageProfileUpdate = formData.system?.usageProfiles?.[0];
+    const usageProfileUpdate = formData.system?.usageProfiles?.[this.object.system.usageProfileIndex];
     if ( usageProfileUpdate ) {
       const newUsageProfiles = foundry.utils.deepClone(this.object.system.usageProfiles);
-      newUsageProfiles[0] = usageProfileUpdate;
+      newUsageProfiles[this.object.system.usageProfileIndex] = usageProfileUpdate;
       formData.system.usageProfiles = newUsageProfiles;
     }
 
@@ -506,9 +506,12 @@ export default class ItemSheet5e extends ItemSheet {
       }
     }
 
+    // TODO: This drops other data not included in the formData, like usageProfileIndex...
+    // TODO: Merge original object into updated version? Something is clearly incorrect in my approach
+
     // Return the flattened submission data
     return foundry.utils.flattenObject(
-      foundry.utils.mergeObject(this.object, formData) // TODO: Merge original object into updated version? Something si clearly incorrect in my approach
+      foundry.utils.mergeObject(this.object, formData)
     );
 
     // // Return the flattened submission data
@@ -520,6 +523,8 @@ export default class ItemSheet5e extends ItemSheet {
   /** @inheritDoc */
   activateListeners(html) {
     super.activateListeners(html);
+
+    html.find(".usage-profile-control").click(this._onUsageProfileControl.bind(this));
     if ( this.isEditable ) {
       html.find(".usage-profile-control").click(this._onUsageProfileControl.bind(this));
       html.find(".damage-control").click(this._onDamageControl.bind(this));
@@ -604,7 +609,7 @@ export default class ItemSheet5e extends ItemSheet {
     }
 
     // Remove a usage-profile component
-    if ( a.classList.contains("usage-profile-delete") ) {
+    else if ( a.classList.contains("usage-profile-delete") ) {
       await this._onSubmit(event);  // Submit any unsaved changes
       console.log("TODO: DELETE USAGE PROFILE");
       // TODO: DELETE USAGE PROFILE
@@ -612,6 +617,14 @@ export default class ItemSheet5e extends ItemSheet {
       // const damage = foundry.utils.deepClone(this.item.system?.usageProfiles?.at(0)?.damage);
       // damage.parts.splice(Number(li.dataset.damagePart), 1);
       // return this.item.update({"system.damage.parts": damage.parts});
+    }
+
+    // Navigate to a usage-profile
+    else if ( a.classList.contains("usage-profile-navigate") ) {
+      await this._onSubmit(event);  // Submit any unsaved changes
+      console.log("TODO: DELETE USAGE NAVIGATE", this.object.system.usageProfileIndex, "=>", a.dataset, a.dataset.usageProfileIndex, parseInt(a.dataset.usageProfileIndex || 0));
+      this.object.system.usageProfileIndex = parseInt(a.dataset.usageProfileIndex || 0);
+      return this.item.update({"system.usageProfileIndex": this.object.system.usageProfileIndex});
     }
   }
 

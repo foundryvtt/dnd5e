@@ -2,10 +2,12 @@
 <div class="form-group input-select">
     <label>{{ localize "DND5E.ItemActivationCost" }}</label>
     <div class="form-fields">
-        <input type="number" step="any" name="system.usageProfiles.0.activation.cost"
-            value="{{system.usageProfiles.0.activation.cost}}" placeholder="&mdash;">
-        <select name="system.usageProfiles.0.activation.type">
-            {{#select system.usageProfiles.0.activation.type}}
+        <input type="number" step="any" name="system.usageProfiles.{{system.usageProfileIndex}}.activation.cost"
+            value="{{ getProperty (lookup system.usageProfiles system.usageProfileIndex) "activation.cost" }}"
+            placeholder="&mdash;"
+        />
+        <select name="system.usageProfiles.{{system.usageProfileIndex}}.activation.type">
+            {{#select (getProperty (lookup system.usageProfiles system.usageProfileIndex) "activation.type")}}
             <option value=""></option>
             {{#each config.abilityActivationTypes as |name key|}}
             <option value="{{key}}">{{name}}</option>
@@ -16,13 +18,15 @@
 </div>
 
 {{!-- Hides every subsequent field if there's no Activation Cost --}}
-{{#if system.usageProfiles.0.activation.type}}
+{{#if (getProperty (lookup system.usageProfiles system.usageProfileIndex) "activation.type")}}
 
 {{!-- Activation Condition --}}
 <div class="form-group">
     <label>{{ localize "DND5E.ItemActivationCondition" }}</label>
     <div class="form-fields">
-        <input type="text" name="system.usageProfiles.0.activation.condition" value="{{system.usageProfiles.0.activation.condition}}"/>
+        <input type="text" name="system.usageProfiles.{{system.usageProfileIndex}}.activation.condition"
+            value="{{ getProperty (lookup system.usageProfiles system.usageProfileIndex) "activation.condition" }}"
+        />
     </div>
 </div>
 
@@ -30,8 +34,8 @@
 <div class="form-group">
     <label>{{localize 'DND5E.Cover'}}</label>
     <div class="form-fields">
-        <select name="system.usageProfiles.0.cover" data-dtype="Number">
-            {{#select system.usageProfiles.0.cover}}
+        <select name="system.usageProfiles.{{system.usageProfileIndex}}.cover" data-dtype="Number">
+            {{#select (getProperty (lookup system.usageProfiles system.usageProfileIndex) "cover")}}
                 <option value="">&mdash;</option>
                 {{#each config.cover as |v k|}}
                     <option value="{{k}}">{{v}}</option>
@@ -46,18 +50,18 @@
 <div class="form-group input-select-select">
     <label>{{ localize "DND5E.Target" }}</label>
     <div class="form-fields">
-        <input type="number" step="any" name="system.usageProfiles.0.target.value"
-            value="{{system.usageProfiles.0.target.value}}" placeholder="&mdash;">
-        <select name="system.usageProfiles.0.target.units">
-            {{#select system.usageProfiles.0.target.units}}
+        <input type="number" step="any" name="system.usageProfiles.{{system.usageProfileIndex}}.target.value"
+            value="{{ getProperty (lookup system.usageProfiles system.usageProfileIndex) "target.value" }}" placeholder="&mdash;">
+        <select name="system.usageProfiles.{{system.usageProfileIndex}}.target.units">
+            {{#select (getProperty (lookup system.usageProfiles system.usageProfileIndex) "target.units")}}
             <option value=""></option>
             {{#each config.distanceUnits as |name key|}}
             <option value="{{key}}">{{name}}</option>
             {{/each}}
             {{/select}}
         </select>
-        <select name="system.usageProfiles.0.target.type">
-            {{#select system.usageProfiles.0.target.type}}
+        <select name="system.usageProfiles.{{system.usageProfileIndex}}.target.type">
+            {{#select (getProperty (lookup system.usageProfiles system.usageProfileIndex) "target.type")}}
             <option value=""></option>
             {{#each config.targetTypes as |name key|}}
             <option value="{{key}}">{{name}}</option>
@@ -72,8 +76,8 @@
 <div class="form-group input-select-select">
     <label>{{ localize "DND5E.TargetWidth" }}</label>
     <div class="form-fields">
-        <input type="number" step="any" name="system.usageProfiles.0.target.width"
-            value="{{system.usageProfiles.0.target.width}}" placeholder="&mdash;">
+        <input type="number" step="any" name="system.usageProfiles.{{system.usageProfileIndex}}.target.width"
+            value="{{ getProperty (lookup system.usageProfiles system.usageProfileIndex) "target.width" }}" placeholder="&mdash;">
     </div>
 </div>
 {{/if}}
@@ -82,13 +86,13 @@
 <div class="form-group input-select">
     <label>{{ localize "DND5E.Range" }}</label>
     <div class="form-fields">
-        <input type="number" step="any" name="system.usageProfiles.0.range.value"
-            value="{{system.usageProfiles.0.range.value}}" placeholder="{{localize 'DND5E.Normal'}}">
+        <input type="number" step="any" name="system.usageProfiles.{{system.usageProfileIndex}}.range.value"
+            value="{{ getProperty (lookup system.usageProfiles system.usageProfileIndex) "range.value" }}" placeholder="{{localize 'DND5E.Normal'}}">
         <span class="sep">/</span>
-        <input type="number" step="any" name="system.usageProfiles.0.range.long"
-            value="{{system.usageProfiles.0.range.long}}" placeholder="{{localize 'DND5E.Max'}}">
-        <select name="system.usageProfiles.0.range.units">
-            {{#select system.usageProfiles.0.range.units}}
+        <input type="number" step="any" name="system.usageProfiles.{{system.usageProfileIndex}}.range.long"
+            value="{{ getProperty (lookup system.usageProfiles system.usageProfileIndex) "range.long" }}" placeholder="{{localize 'DND5E.Max'}}">
+        <select name="system.usageProfiles.{{system.usageProfileIndex}}.range.units">
+            {{#select (getProperty (lookup system.usageProfiles system.usageProfileIndex) "range.units")}}
             <option value=""></option>
             {{#each config.distanceUnits as |name key|}}
             <option value="{{key}}">{{name}}</option>
@@ -102,10 +106,10 @@
 <div class="form-group input-select">
     <label>{{ localize "DND5E.Duration" }}</label>
     <div class="form-fields">
-        <input type="number" step="any" name="system.usageProfiles.0.duration.value" value="{{system.usageProfiles.0.duration.value}}"
+        <input type="number" step="any" name="system.usageProfiles.{{system.usageProfileIndex}}.duration.value" value="{{ getProperty (lookup system.usageProfiles system.usageProfileIndex) "duration.value" }}"
             placeholder="&mdash;">
-        <select name="system.usageProfiles.0.duration.units">
-            {{#select system.usageProfiles.0.duration.units}}
+        <select name="system.usageProfiles.{{system.usageProfileIndex}}.duration.units">
+            {{#select (getProperty (lookup system.usageProfiles system.usageProfileIndex) "duration.units")}}
             <option value=""></option>
             {{#each config.timePeriods as |name key|}}
             <option value="{{key}}">{{name}}</option>
@@ -119,12 +123,12 @@
 <div class="form-group uses-per">
     <label>{{ localize "DND5E.LimitedUses" }}</label>
     <div class="form-fields">
-        <input type="number" step="any" name="system.usageProfiles.0.uses.value" value="{{system.usageProfiles.0.uses.value}}">
+        <input type="number" step="any" name="system.usageProfiles.{{system.usageProfileIndex}}.uses.value" value="{{ getProperty (lookup system.usageProfiles system.usageProfileIndex) "uses.value" }}">
         <span class="sep">{{ localize "DND5E.of" }}</span>
-        <input type="text" name="system.usageProfiles.0.uses.max" value="{{source.uses.max}}">
+        <input type="text" name="system.usageProfiles.{{system.usageProfileIndex}}.uses.max" value="{{source.uses.max}}">
         <span class="sep">{{ localize "DND5E.per" }}</span>
-        <select name="system.usageProfiles.0.uses.per">
-            {{#select system.usageProfiles.0.uses.per}}
+        <select name="system.usageProfiles.{{system.usageProfileIndex}}.uses.per">
+            {{#select (getProperty (lookup system.usageProfiles system.usageProfileIndex) "uses.per")}}
             <option value=""></option>
             {{#each config.limitedUsePeriods as |name key|}}
             <option value="{{key}}">{{name}}</option>
@@ -134,11 +138,13 @@
     </div>
 </div>
 
-{{#if (eq system.usageProfiles.0.uses.per "charges")}}
+{{#if (eq (getProperty (lookup system.usageProfiles system.usageProfileIndex) "uses.per") "charges")}}
 <div class="form-group">
     <label>{{localize "DND5E.RecoveryFormula"}}</label>
     <div class="form-fields">
-        <input type="text" name="system.usageProfiles.0.uses.recovery" value="{{system.usageProfiles.0.uses.recovery}}">
+        <input type="text" name="system.usageProfiles.{{system.usageProfileIndex}}.uses.recovery"
+            value="{{ getProperty (lookup system.usageProfiles system.usageProfileIndex) "uses.recovery" }}"
+        />
     </div>
 </div>
 {{/if}}
@@ -147,23 +153,25 @@
 <div class="form-group uses-per">
     <label>{{ localize "DND5E.ConsumeTitle" }}</label>
     <div class="form-fields">
-        <select name="system.usageProfiles.0.consume.type">
-            {{#select system.usageProfiles.0.consume.type}}
+        <select name="system.usageProfiles.{{system.usageProfileIndex}}.consume.type">
+            {{#select (getProperty (lookup system.usageProfiles system.usageProfileIndex) "consume.type")}}
             <option value=""></option>
             {{#each config.abilityConsumptionTypes as |name key|}}
             <option value="{{key}}">{{name}}</option>
             {{/each}}
             {{/select}}
         </select>
-        <select name="system.usageProfiles.0.consume.target">
-            {{#select system.usageProfiles.0.consume.target}}
+        <select name="system.usageProfiles.{{system.usageProfileIndex}}.consume.target">
+            {{#select (getProperty (lookup system.usageProfiles system.usageProfileIndex) "consume.target")}}
             <option value=""></option>
             {{#each abilityConsumptionTargets as |name key|}}
             <option value="{{key}}">{{name}}</option>
             {{/each}}
             {{/select}}
         </select>
-        <input type="number" step="any" name="system.usageProfiles.0.consume.amount" value="{{system.usageProfiles.0.consume.amount}}">
+        <input type="number" step="any" name="system.usageProfiles.{{system.usageProfileIndex}}.consume.amount"
+            value="{{ getProperty (lookup system.usageProfiles system.usageProfileIndex) "consume.amount" }}"
+        />
     </div>
 </div>
 
