@@ -102,6 +102,7 @@ export async function preloadHandlebarsTemplates() {
     "systems/dnd5e/templates/actors/parts/actor-warnings.hbs",
 
     // Item Sheet Partials
+    "systems/dnd5e/templates/items/parts/item-usage-profile-nav.hbs",
     "systems/dnd5e/templates/items/parts/item-usage-profile.hbs",
     "systems/dnd5e/templates/items/parts/item-action.hbs",
     "systems/dnd5e/templates/items/parts/item-activation.hbs",

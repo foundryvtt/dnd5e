@@ -1,0 +1,52 @@
+{{!-- Item Usage Navigation --}}
+<nav class="usage-profile-navigation sheet-navigation tabs" data-group="primary">
+
+    {{log "this" this level="info"}}
+    {{log "itemType" itemType level="info"}}
+    {{log "item.type" item.type level="info"}}
+
+    {{!-- Profile List Heading --}}
+    {{#if (eq item.type "weapon")}}
+    <h3 class="usage-profile-navigation-header">{{ localize "DND5E.ItemUsageProfilesTypeWeapon" }}</h3>
+    {{/if}}
+    {{#if (eq item.type "spell")}}
+    <h3 class="usage-profile-navigation-header">{{ localize "DND5E.ItemUsageProfilesTypeSpell" }}</h3>
+    {{/if}}
+    {{#if (eq item.type "feature")}}
+    <h3 class="usage-profile-navigation-header">{{ localize "DND5E.ItemUsageProfilesTypeFeature" }}</h3>
+    {{/if}}
+    {{#if (eq item.type "equipment")}}
+    <h3 class="usage-profile-navigation-header">{{ localize "DND5E.ItemUsageProfilesTypeEquipment" }}</h3>
+    {{/if}}
+    {{#if (eq item.type "consumable")}}
+    <h3 class="usage-profile-navigation-header">{{ localize "DND5E.ItemUsageProfilesTypeConsumable" }}</h3>
+    {{/if}}
+
+    {{!-- Profile List Content --}}
+    {{#each system.usageProfiles as |usageProfile index|}}
+
+    {{#if (eq ../system.usageProfileIndex index)}}
+
+    {{#if usageProfile.profileName}}
+    <a class="usage-profile-navigation-tab item active">{{ usageProfile.profileName }}</a>
+    {{else}}
+    <a class="usage-profile-navigation-tab item active">{{ localize "DND5E.Untitled" }}</a>
+    {{/if}}
+
+    {{else}}
+
+    {{#if usageProfile.profileName}}
+    <a class="usage-profile-navigation-tab item">{{ usageProfile.profileName }}</a>
+    {{else}}
+    <a class="usage-profile-navigation-tab item">{{ localize "DND5E.Untitled" }}</a>
+    {{/if}}
+
+    {{/if}}
+
+    {{/each}}
+
+    {{!-- Profile List Add Button --}}
+    {{#if editable}}
+    <a class="usage-profile-navigation-tab item usage-profile-control usage-profile-add"><i class="fas fa-plus"></i></a>
+    {{/if}}
+</nav>

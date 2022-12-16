@@ -3,9 +3,9 @@
     <label>{{ localize "DND5E.ItemActivationCost" }}</label>
     <div class="form-fields">
         <input type="number" step="any" name="usageProfile.activation.cost"
-            value="{{usageProfile.activation.cost}}" placeholder="&mdash;">
+            value="{{system.usageProfiles.0.activation.cost}}" placeholder="&mdash;">
         <select name="usageProfile.activation.type">
-            {{#select usageProfile.activation.type}}
+            {{#select system.usageProfiles.0.activation.type}}
             <option value=""></option>
             {{#each config.abilityActivationTypes as |name key|}}
             <option value="{{key}}">{{name}}</option>
@@ -16,13 +16,13 @@
 </div>
 
 {{!-- Hides every subsequent field if there's no Activation Cost --}}
-{{#if usageProfile.activation.type}}
+{{#if system.usageProfiles.0.activation.type}}
 
 {{!-- Activation Condition --}}
 <div class="form-group">
     <label>{{ localize "DND5E.ItemActivationCondition" }}</label>
     <div class="form-fields">
-        <input type="text" name="usageProfile.activation.condition" value="{{usageProfile.activation.condition}}"/>
+        <input type="text" name="usageProfile.activation.condition" value="{{system.usageProfiles.0.activation.condition}}"/>
     </div>
 </div>
 
@@ -31,7 +31,7 @@
     <label>{{localize 'DND5E.Cover'}}</label>
     <div class="form-fields">
         <select name="usageProfile.cover" data-dtype="Number">
-            {{#select usageProfile.cover}}
+            {{#select system.usageProfiles.0.cover}}
                 <option value="">&mdash;</option>
                 {{#each config.cover as |v k|}}
                     <option value="{{k}}">{{v}}</option>
@@ -47,9 +47,9 @@
     <label>{{ localize "DND5E.Target" }}</label>
     <div class="form-fields">
         <input type="number" step="any" name="usageProfile.target.value"
-            value="{{usageProfile.target.value}}" placeholder="&mdash;">
+            value="{{system.usageProfiles.0.target.value}}" placeholder="&mdash;">
         <select name="usageProfile.target.units">
-            {{#select usageProfile.target.units}}
+            {{#select system.usageProfiles.0.target.units}}
             <option value=""></option>
             {{#each config.distanceUnits as |name key|}}
             <option value="{{key}}">{{name}}</option>
@@ -57,7 +57,7 @@
             {{/select}}
         </select>
         <select name="usageProfile.target.type">
-            {{#select usageProfile.target.type}}
+            {{#select system.usageProfiles.0.target.type}}
             <option value=""></option>
             {{#each config.targetTypes as |name key|}}
             <option value="{{key}}">{{name}}</option>
@@ -73,7 +73,7 @@
     <label>{{ localize "DND5E.TargetWidth" }}</label>
     <div class="form-fields">
         <input type="number" step="any" name="usageProfile.target.width"
-            value="{{usageProfile.target.width}}" placeholder="&mdash;">
+            value="{{system.usageProfiles.0.target.width}}" placeholder="&mdash;">
     </div>
 </div>
 {{/if}}
@@ -83,12 +83,12 @@
     <label>{{ localize "DND5E.Range" }}</label>
     <div class="form-fields">
         <input type="number" step="any" name="usageProfile.range.value"
-            value="{{usageProfile.range.value}}" placeholder="{{localize 'DND5E.Normal'}}">
+            value="{{system.usageProfiles.0.range.value}}" placeholder="{{localize 'DND5E.Normal'}}">
         <span class="sep">/</span>
         <input type="number" step="any" name="usageProfile.range.long"
-            value="{{usageProfile.range.long}}" placeholder="{{localize 'DND5E.Max'}}">
+            value="{{system.usageProfiles.0.range.long}}" placeholder="{{localize 'DND5E.Max'}}">
         <select name="usageProfile.range.units">
-            {{#select usageProfile.range.units}}
+            {{#select system.usageProfiles.0.range.units}}
             <option value=""></option>
             {{#each config.distanceUnits as |name key|}}
             <option value="{{key}}">{{name}}</option>
@@ -102,10 +102,10 @@
 <div class="form-group input-select">
     <label>{{ localize "DND5E.Duration" }}</label>
     <div class="form-fields">
-        <input type="number" step="any" name="usageProfile.duration.value" value="{{usageProfile.duration.value}}"
+        <input type="number" step="any" name="usageProfile.duration.value" value="{{system.usageProfiles.0.duration.value}}"
             placeholder="&mdash;">
         <select name="usageProfile.duration.units">
-            {{#select usageProfile.duration.units}}
+            {{#select system.usageProfiles.0.duration.units}}
             <option value=""></option>
             {{#each config.timePeriods as |name key|}}
             <option value="{{key}}">{{name}}</option>
@@ -119,12 +119,12 @@
 <div class="form-group uses-per">
     <label>{{ localize "DND5E.LimitedUses" }}</label>
     <div class="form-fields">
-        <input type="number" step="any" name="usageProfile.uses.value" value="{{usageProfile.uses.value}}">
+        <input type="number" step="any" name="usageProfile.uses.value" value="{{system.usageProfiles.0.uses.value}}">
         <span class="sep">{{ localize "DND5E.of" }}</span>
         <input type="text" name="usageProfile.uses.max" value="{{source.uses.max}}">
         <span class="sep">{{ localize "DND5E.per" }}</span>
         <select name="usageProfile.uses.per">
-            {{#select usageProfile.uses.per}}
+            {{#select system.usageProfiles.0.uses.per}}
             <option value=""></option>
             {{#each config.limitedUsePeriods as |name key|}}
             <option value="{{key}}">{{name}}</option>
@@ -134,11 +134,11 @@
     </div>
 </div>
 
-{{#if (eq usageProfile.uses.per "charges")}}
+{{#if (eq system.usageProfiles.0.uses.per "charges")}}
 <div class="form-group">
     <label>{{localize "DND5E.RecoveryFormula"}}</label>
     <div class="form-fields">
-        <input type="text" name="usageProfile.uses.recovery" value="{{usageProfile.uses.recovery}}">
+        <input type="text" name="usageProfile.uses.recovery" value="{{system.usageProfiles.0.uses.recovery}}">
     </div>
 </div>
 {{/if}}
@@ -148,7 +148,7 @@
     <label>{{ localize "DND5E.ConsumeTitle" }}</label>
     <div class="form-fields">
         <select name="usageProfile.consume.type">
-            {{#select usageProfile.consume.type}}
+            {{#select system.usageProfiles.0.consume.type}}
             <option value=""></option>
             {{#each config.abilityConsumptionTypes as |name key|}}
             <option value="{{key}}">{{name}}</option>
@@ -156,14 +156,14 @@
             {{/select}}
         </select>
         <select name="usageProfile.consume.target">
-            {{#select usageProfile.consume.target}}
+            {{#select system.usageProfiles.0.consume.target}}
             <option value=""></option>
             {{#each abilityConsumptionTargets as |name key|}}
             <option value="{{key}}">{{name}}</option>
             {{/each}}
             {{/select}}
         </select>
-        <input type="number" step="any" name="usageProfile.consume.amount" value="{{usageProfile.consume.amount}}">
+        <input type="number" step="any" name="usageProfile.consume.amount" value="{{system.usageProfiles.0.consume.amount}}">
     </div>
 </div>
 

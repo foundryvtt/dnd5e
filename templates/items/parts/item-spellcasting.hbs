@@ -2,7 +2,7 @@
   <label>{{localize "DND5E.SpellProgression"}}</label>
   <div class="form-fields">
     <select name="usageProfile.spellcasting.progression">
-      {{selectOptions config.spellProgression selected=usageProfile.spellcasting.progression}}
+      {{selectOptions config.spellProgression selected=system.usageProfiles.0.spellcasting.progression}}
     </select>
   </div>
 </div>
@@ -11,7 +11,7 @@
   <label>{{localize "DND5E.SpellAbility"}}</label>
   <div class="form-fields">
     <select name="usageProfile.spellcasting.ability">
-      {{selectOptions config.abilities selected=usageProfile.spellcasting.ability blank=""}}
+      {{selectOptions config.abilities selected=system.usageProfiles.0.spellcasting.ability blank=""}}
     </select>
   </div>
 </div>

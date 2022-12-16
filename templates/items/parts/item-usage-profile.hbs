@@ -2,18 +2,14 @@
 <div class="form-group input-select">
     <label>{{ localize "DND5E.ItemUsageProfileName" }}</label>
     <div class="form-fields">
-        <input type="text" name="system.usageProfiles.0.profileName" value="{{system.usageProfiles.0.profileName}}" placeholder="{{ localize 'DND5E.Default' }}"/>
+        <input type="text" name="usageProfile.profileName" value="{{system.usageProfiles.0.profileName}}" placeholder="{{ localize 'DND5E.Default' }}"/>
     </div>
 </div>
 
+{{#if editable}}
 {{!-- Delete Profile --}}
 <div class="form-group input-select">
     <label>{{ localize "DND5E.ItemUsageProfileDelete" }}</label>
-    <a class="item-control item-delete" title='{{localize "DND5E.ItemDelete"}}'><i class="fas fa-trash"></i></a>
+    <a class="usage-profile-control usage-profile-delete" title="{{ localize "DND5E.ItemDelete" }}"><i class="fas fa-trash"></i></a>
 </div>
-
-{{!-- Duplicate Profile --}}
-<div class="form-group input-select">
-    <label>{{ localize "DND5E.ItemUsageProfileDuplicate" }}</label>
-    <a class="item-control item-delete" title='{{localize "DND5E.ItemDelete"}}'><i class="fas fa-trash"></i></a>
-</div>
+{{/if}}

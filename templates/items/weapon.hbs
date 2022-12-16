@@ -111,45 +111,28 @@
             {{!-- Item Usage Profiles --}}
             <div class="usage-profiles">
 
-                {{!-- Item Usage Navigation --}}
-                <nav class="usage-profile-navigation sheet-navigation tabs" data-group="primary">
-
-                    <h3 class="usage-profile-navigation-header">{{ localize "DND5E.ItemUsageProfilesTypeWeapon" }}</h3>
-
-                    {{#each system.usageProfiles as |usageProfile|}}
-
-                    {{#if usageProfile.profileName}}
-                    <a class="usage-profile-navigation-tab item active">{{ usageProfile.profileName }}</a>
-                    {{else}}
-                    <a class="usage-profile-navigation-tab item active">{{ localize "DND5E.Untitled" }}</a>
-                    {{/if}}
-
-                    {{/each}}
-
-                    <a class="usage-profile-navigation-tab item">{{ localize "DND5E.ItemUsageProfileAdd" }}</a>
-                </nav>
+                {{!-- Item Usage Profile Navigation Template --}}
+                {{> "dnd5e.item-usage-profile-nav"}}
 
                 {{#if system.usageProfiles.length}}
-                {{#with (lookup system.usageProfiles 0) as |usageProfile|}}
                 <div class="usage-profile-container">
 
                     <h3 class="form-header">{{ localize "DND5E.ItemUsageProfileTypeWeapon" }}</h3>
 
                     {{!-- Item Usage Profile Template --}}
-                    {{> "dnd5e.item-usage-profile" usageProfile=usageProfile config=../config}}
+                    {{> "dnd5e.item-usage-profile"}}
 
                     <h3 class="form-header">{{ localize "DND5E.ItemWeaponUsage" }}</h3>
 
                     {{!-- Item Activation Template --}}
-                    {{> "dnd5e.item-activation" usageProfile=usageProfile config=../config}}
+                    {{> "dnd5e.item-activation"}}
 
                     <h3 class="form-header">{{ localize "DND5E.ItemWeaponAttack" }}</h3>
 
                     {{!-- Item Action Template --}}
-                    {{> "dnd5e.item-action" usageProfile=usageProfile config=../config}}
+                    {{> "dnd5e.item-action"}}
 
                 </div>
-                {{/with}}
                 {{/if}}
 
             </div>

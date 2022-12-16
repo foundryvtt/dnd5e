@@ -93,7 +93,7 @@ export default class Item5e extends Item {
    * @type {boolean}
    */
   get hasAttack() {
-    return ["mwak", "rwak", "msak", "rsak"].includes(this.system.actionType);
+    return ["mwak", "rwak", "msak", "rsak"].includes(this.system?.usageProfiles?.at(0)?.actionType);
   }
 
   /* -------------------------------------------- */
@@ -103,7 +103,7 @@ export default class Item5e extends Item {
    * @type {boolean}
    */
   get hasDamage() {
-    return !!(this.system.damage && this.system.damage.parts.length);
+    return !!(this.system?.usageProfiles?.at(0)?.damage && this.system?.usageProfiles?.at(0)?.damage.parts.length);
   }
 
   /* -------------------------------------------- */
@@ -113,7 +113,7 @@ export default class Item5e extends Item {
    * @type {boolean}
    */
   get isVersatile() {
-    return !!(this.hasDamage && this.system.damage.versatile);
+    return !!(this.hasDamage && this.system?.usageProfiles?.at(0)?.damage.versatile);
   }
 
   /* -------------------------------------------- */
@@ -123,7 +123,7 @@ export default class Item5e extends Item {
    * @type {boolean}
    */
   get isHealing() {
-    return (this.system.actionType === "heal") && this.system.damage.parts.length;
+    return (this.system?.usageProfiles?.at(0)?.actionType === "heal") && this.system?.usageProfiles?.at(0)?.damage.parts.length;
   }
 
   /* -------------------------------------------- */
@@ -170,7 +170,7 @@ export default class Item5e extends Item {
    * @type {boolean}
    */
   get hasSave() {
-    const save = this.system.save || {};
+    const save = this.system?.usageProfiles?.at(0)?.save || {};
     return !!(save.ability && save.scaling);
   }
 
@@ -181,7 +181,7 @@ export default class Item5e extends Item {
    * @type {boolean}
    */
   get hasAbilityCheck() {
-    return (this.system.actionType === "abil") && this.system.ability;
+    return (this.system?.usageProfiles?.at(0)?.actionType === "abil") && this.system?.usageProfiles?.at(0)?.ability;
   }
 
   /* -------------------------------------------- */
@@ -191,7 +191,7 @@ export default class Item5e extends Item {
    * @type {boolean}
    */
   get hasTarget() {
-    const target = this.system.target;
+    const target = this.system?.usageProfiles?.at(0)?.target;
     return target && !["none", ""].includes(target.type);
   }
 
@@ -202,7 +202,7 @@ export default class Item5e extends Item {
    * @type {boolean}
    */
   get hasAreaTarget() {
-    const target = this.system.target;
+    const target = this.system?.usageProfiles?.at(0)?.target;
     return target && (target.type in CONFIG.DND5E.areaTargetTypes);
   }
 
@@ -214,7 +214,7 @@ export default class Item5e extends Item {
    */
   get hasLimitedUses() {
     let recharge = this.system.recharge || {};
-    let uses = this.system.uses || {};
+    let uses = this.system?.usageProfiles?.at(0)?.uses || {};
     return !!recharge.value || (uses.per && (uses.max > 0));
   }
 
@@ -252,11 +252,11 @@ export default class Item5e extends Item {
    * @type {object}  Spellcasting object containing progression & ability.
    */
   get spellcasting() {
-    const spellcasting = this.system.spellcasting;
+    const spellcasting = this.system?.usageProfiles?.at(0)?.spellcasting;
     if ( !spellcasting ) return spellcasting;
     const isSubclass = this.type === "subclass";
-    const classSpellcasting = isSubclass ? this.class?.system.spellcasting : spellcasting;
-    const subclassSpellcasting = isSubclass ? spellcasting : this.subclass?.system.spellcasting;
+    const classSpellcasting = isSubclass ? this.class?.system?.usageProfiles?.at(0)?.spellcasting : spellcasting;
+    const subclassSpellcasting = isSubclass ? spellcasting : this.subclass?.system?.usageProfiles?.at(0)?.spellcasting;
     if ( subclassSpellcasting && subclassSpellcasting.progression !== "none" ) return subclassSpellcasting;
     return classSpellcasting;
   }
@@ -324,12 +324,12 @@ export default class Item5e extends Item {
    * @protected
    */
   _prepareFeat() {
-    const act = this.system.activation;
+    const act = this.system?.usageProfiles?.at(0)?.activation;
     const types = CONFIG.DND5E.abilityActivationTypes;
     if ( act?.type === types.legendary ) this.labels.featType = game.i18n.localize("DND5E.LegendaryActionLabel");
     else if ( act?.type === types.lair ) this.labels.featType = game.i18n.localize("DND5E.LairActionLabel");
     else if ( act?.type ) {
-      this.labels.featType = game.i18n.localize(this.system.damage.length ? "DND5E.Attack" : "DND5E.Action");
+      this.labels.featType = game.i18n.localize(this.system?.usageProfiles?.at(0)?.damage.length ? "DND5E.Attack" : "DND5E.Action");
     }
     else this.labels.featType = game.i18n.localize("DND5E.Passive");
   }
@@ -373,11 +373,11 @@ export default class Item5e extends Item {
     const C = CONFIG.DND5E;
 
     // Ability Activation Label
-    const act = this.system.activation ?? {};
+    const act = this.system?.usageProfiles?.at(0)?.activation ?? {};
     this.labels.activation = [act.cost, C.abilityActivationTypes[act.type]].filterJoin(" ");
 
     // Target Label
-    let tgt = this.system.target ?? {};
+    let tgt = this.system?.usageProfiles?.at(0)?.target ?? {};
     if ( ["none", "touch", "self"].includes(tgt.units) ) tgt.value = null;
     if ( ["none", "self"].includes(tgt.type) ) {
       tgt.value = null;
@@ -386,7 +386,7 @@ export default class Item5e extends Item {
     this.labels.target = [tgt.value, C.distanceUnits[tgt.units], C.targetTypes[tgt.type]].filterJoin(" ");
 
     // Range Label
-    let rng = this.system.range ?? {};
+    let rng = this.system?.usageProfiles?.at(0)?.range ?? {};
     if ( ["none", "touch", "self"].includes(rng.units) ) {
       rng.value = null;
       rng.long = null;
@@ -394,7 +394,7 @@ export default class Item5e extends Item {
     this.labels.range = [rng.value, rng.long ? `/ ${rng.long}` : null, C.distanceUnits[rng.units]].filterJoin(" ");
 
     // Duration Label
-    let dur = this.system.duration ?? {};
+    let dur = this.system?.usageProfiles?.at(0)?.duration ?? {};
     if ( ["inst", "perm"].includes(dur.units) ) dur.value = null;
     this.labels.duration = [dur.value, C.timePeriods[dur.units]].filterJoin(" ");
 
@@ -412,7 +412,7 @@ export default class Item5e extends Item {
    */
   _prepareAction() {
     if ( !("actionType" in this.system) ) return;
-    let dmg = this.system.damage || {};
+    let dmg = this.system?.usageProfiles?.at(0)?.damage || {};
     if ( dmg.parts ) {
       const types = CONFIG.DND5E.damageTypes;
       this.labels.damage = dmg.parts.map(d => d[0]).join(" + ").replace(/\+ -/g, "- ");
@@ -470,7 +470,7 @@ export default class Item5e extends Item {
     // Action usage
     if ( "actionType" in this.system ) {
       this.labels.abilityCheck = game.i18n.format("DND5E.AbilityPromptTitle", {
-        ability: CONFIG.DND5E.abilities[this.system.ability]
+        ability: CONFIG.DND5E.abilities[this.system?.usageProfiles?.at(0)?.ability]
       });
 
       // Saving throws
@@ -498,7 +498,7 @@ export default class Item5e extends Item {
     if ( !this.hasDamage || !this.isOwned ) return [];
     const rollData = this.getRollData();
     const damageLabels = { ...CONFIG.DND5E.damageTypes, ...CONFIG.DND5E.healingTypes };
-    const derivedDamage = this.system.damage?.parts?.map(damagePart => {
+    const derivedDamage = this.system?.usageProfiles?.at(0)?.damage?.parts?.map(damagePart => {
       let formula;
       try {
         const roll = new Roll(damagePart[0], rollData);
@@ -521,7 +521,7 @@ export default class Item5e extends Item {
    */
   getSaveDC() {
     if ( !this.hasSave ) return null;
-    const save = this.system.save;
+    const save = this.system?.usageProfiles?.at(0)?.save;
 
     // Actor spell-DC based scaling
     if ( save.scaling === "spell" ) {
@@ -574,16 +574,16 @@ export default class Item5e extends Item {
     }
 
     // Actor-level global bonus to attack rolls
-    const actorBonus = this.actor.system.bonuses?.[this.system.actionType] || {};
+    const actorBonus = this.actor.system.bonuses?.[this.system?.usageProfiles?.at(0)?.actionType] || {};
     if ( actorBonus.attack ) parts.push(actorBonus.attack);
 
     // One-time bonus provided by consumed ammunition
     if ( (this.system.consume?.type === "ammo") && this.actor.items ) {
-      const ammoItem = this.actor.items.get(this.system.consume.target);
+      const ammoItem = this.actor.items.get(this.system?.usageProfiles?.at(0)?.consume.target);
       if ( ammoItem ) {
         const ammoItemQuantity = ammoItem.system.quantity;
-        const ammoCanBeConsumed = ammoItemQuantity && (ammoItemQuantity - (this.system.consume.amount ?? 0) >= 0);
-        const ammoItemAttackBonus = ammoItem.system.attackBonus;
+        const ammoCanBeConsumed = ammoItemQuantity && (ammoItemQuantity - (this.system?.usageProfiles?.at(0)?.consume.amount ?? 0) >= 0);
+        const ammoItemAttackBonus = ammoItem.system?.usageProfiles?.at(0)?.attackBonus;
         const ammoIsTypeConsumable = (ammoItem.type === "consumable") && (ammoItem.system.consumableType === "ammo");
         if ( ammoCanBeConsumed && ammoItemAttackBonus && ammoIsTypeConsumable ) {
           parts.push("@ammo");
@@ -614,7 +614,7 @@ export default class Item5e extends Item {
     let actorThreshold = null;
     if ( this.type === "weapon" ) actorThreshold = actorFlags.weaponCriticalThreshold;
     else if ( this.type === "spell" ) actorThreshold = actorFlags.spellCriticalThreshold;
-    return Math.min(this.system.critical?.threshold ?? 20, actorThreshold ?? 20);
+    return Math.min(this.system?.usageProfiles?.at(0)?.critical?.threshold ?? 20, actorThreshold ?? 20);
   }
 
   /* -------------------------------------------- */
@@ -624,7 +624,7 @@ export default class Item5e extends Item {
    * If the item is an owned item and the `max` is not numeric, calculate based on actor data.
    */
   prepareMaxUses() {
-    const uses = this.system.uses;
+    const uses = this.system?.usageProfiles?.at(0)?.uses;
     if ( !uses?.max ) return;
     let max = uses.max;
     if ( this.isOwned && !Number.isNumeric(max) ) {
@@ -895,7 +895,7 @@ export default class Item5e extends Item {
 
     // Consume Limited Usage
     if ( consumeUsage ) {
-      const uses = this.system.uses || {};
+      const uses = this.system?.usageProfiles?.at(0)?.uses || {};
       const available = Number(uses.value ?? 0);
       let used = false;
       const remaining = Math.max(available - 1, 0);
@@ -936,7 +936,7 @@ export default class Item5e extends Item {
    * @protected
    */
   _handleConsumeResource(itemUpdates, actorUpdates, resourceUpdates) {
-    const consume = this.system.consume || {};
+    const consume = this.system?.usageProfiles?.at(0)?.consume || {};
     if ( !consume.type ) return;
 
     // No consumed target
@@ -968,7 +968,7 @@ export default class Item5e extends Item {
       case "charges":
         resource = this.actor.items.get(consume.target);
         if ( !resource ) break;
-        const uses = resource.system.uses;
+        const uses = resource.system?.usageProfiles?.at(0)?.uses;
         if ( uses.per && uses.max ) quantity = uses.value;
         else if ( resource.system.recharge?.value ) {
           quantity = resource.system.recharge.charged ? 1 : 0;
@@ -1017,7 +1017,7 @@ export default class Item5e extends Item {
         }
         break;
       case "charges":
-        const uses = resource.system.uses || {};
+        const uses = resource.system?.usageProfiles?.at(0)?.uses || {};
         const recharge = resource.system.recharge || {};
         const update = {_id: consume.target};
         if ( uses.per && uses.max ) update["system.uses.value"] = remaining;
@@ -1062,7 +1062,7 @@ export default class Item5e extends Item {
       user: game.user.id,
       type: CONST.CHAT_MESSAGE_TYPES.OTHER,
       content: html,
-      flavor: this.system.chatFlavor || this.name,
+      flavor: this.system?.usageProfiles?.at(0)?.chatFlavor || this.name,
       speaker: ChatMessage.getSpeaker({actor: this.actor, token}),
       flags: {"core.canPopout": true}
     };
@@ -1303,7 +1303,7 @@ export default class Item5e extends Item {
     delete this._ammo;
     let ammo = null;
     let ammoUpdate = [];
-    const consume = this.system.consume;
+    const consume = this.system?.usageProfiles?.at(0)?.consume;
     if ( consume?.type === "ammo" ) {
       ammo = this.actor.items.get(consume.target);
       if ( ammo?.system ) {
@@ -1381,6 +1381,7 @@ export default class Item5e extends Item {
    * Rely upon the damageRoll logic for the core implementation.
    * @param {object} [config]
    * @param {MouseEvent} [config.event]    An event which triggered this roll, if any
+   * @param {number} [config.usageProfileIndex]    Which Item UsageProfile is being rolled
    * @param {boolean} [config.critical]    Should damage be rolled as a critical hit?
    * @param {number} [config.spellLevel]   If the item is a spell, override the level for damage scaling
    * @param {boolean} [config.versatile]   If the item is a weapon, roll damage using the versatile formula
@@ -1388,21 +1389,24 @@ export default class Item5e extends Item {
    * @returns {Promise<DamageRoll>}        A Promise which resolves to the created Roll instance, or null if the action
    *                                       cannot be performed.
    */
-  async rollDamage({critical=false, event=null, spellLevel=null, versatile=false, options={}}={}) {
+  async rollDamage({usageProfileIndex=0, critical=false, event=null, spellLevel=null, versatile=false, options={}}={}) {
     if ( !this.hasDamage ) throw new Error("You may not make a Damage Roll with this Item.");
     const messageData = {
       "flags.dnd5e.roll": {type: "damage", itemId: this.id},
       speaker: ChatMessage.getSpeaker({actor: this.actor})
     };
 
+    // Establish which usage-profile is being used
+    const usageProfile = this.system.updateProfiles[usageProfileIndex];
+
     // Get roll data
-    const dmg = this.system.damage;
+    const dmg = usageProfile.damage;
     const parts = dmg.parts.map(d => d[0]);
     const rollData = this.getRollData();
     if ( spellLevel ) rollData.item.level = spellLevel;
 
     // Configure the damage roll
-    const actionFlavor = game.i18n.localize(this.system.actionType === "heal" ? "DND5E.Healing" : "DND5E.DamageRoll");
+    const actionFlavor = game.i18n.localize(usageProfile.actionType === "heal" ? "DND5E.Healing" : "DND5E.DamageRoll");
     const title = `${this.name} - ${actionFlavor}`;
     const rollConfig = {
       actor: this.actor,
@@ -1428,7 +1432,7 @@ export default class Item5e extends Item {
     }
 
     // Scale damage from up-casting spells
-    const scaling = this.system.scaling;
+    const scaling = usageProfile.scaling;
     if ( (this.type === "spell") ) {
       if ( scaling.mode === "cantrip" ) {
         let level;
@@ -1443,7 +1447,7 @@ export default class Item5e extends Item {
     }
 
     // Add damage bonus formula
-    const actorBonus = foundry.utils.getProperty(this.actor.system, `bonuses.${this.system.actionType}`) || {};
+    const actorBonus = foundry.utils.getProperty(this.actor.system, `bonuses.${usageProfile.actionType}`) || {};
     if ( actorBonus.damage && (parseInt(actorBonus.damage) !== 0) ) {
       parts.push(actorBonus.damage);
     }
@@ -1451,18 +1455,18 @@ export default class Item5e extends Item {
     // Only add the ammunition damage if the ammunition is a consumable with type 'ammo'
     if ( this._ammo && (this._ammo.type === "consumable") && (this._ammo.system.consumableType === "ammo") ) {
       parts.push("@ammo");
-      rollData.ammo = this._ammo.system.damage.parts.map(p => p[0]).join("+");
+      rollData.ammo = this._ammo.system?.usageProfiles?.at(0)?.damage.parts.map(p => p[0]).join("+");
       rollConfig.flavor += ` [${this._ammo.name}]`;
       delete this._ammo;
     }
 
     // Factor in extra critical damage dice from the Barbarian's "Brutal Critical"
-    if ( this.system.actionType === "mwak" ) {
+    if ( usageProfile.actionType === "mwak" ) {
       rollConfig.criticalBonusDice = this.actor.getFlag("dnd5e", "meleeCriticalDamageDice") ?? 0;
     }
 
     // Factor in extra weapon-specific critical damage
-    if ( this.system.critical?.damage ) rollConfig.criticalBonusDamage = this.system.critical.damage;
+    if ( usageProfile.critical?.damage ) rollConfig.criticalBonusDamage = usageProfile.critical.damage;
 
     foundry.utils.mergeObject(rollConfig, options);
 
@@ -1569,10 +1573,10 @@ export default class Item5e extends Item {
    * @returns {Promise<Roll>}   A Promise which resolves to the created Roll instance.
    */
   async rollFormula({spellLevel}={}) {
-    if ( !this.system.formula ) throw new Error("This Item does not have a formula to roll!");
+    if ( !this.system?.usageProfiles?.at(0)?.formula ) throw new Error("This Item does not have a formula to roll!");
 
     const rollConfig = {
-      formula: this.system.formula,
+      formula: this.system?.usageProfiles?.at(0)?.formula,
       data: this.getRollData(),
       chatMessage: true
     };
@@ -1684,7 +1688,7 @@ export default class Item5e extends Item {
 
     // Prepare roll data
     const rollData = this.getRollData();
-    const abl = this.system.ability;
+    const abl = this.system?.usageProfiles?.at(0)?.ability;
     const parts = ["@mod", "@abilityCheckBonus"];
     const title = `${this.name} - ${game.i18n.localize("DND5E.ToolCheck")}`;
 

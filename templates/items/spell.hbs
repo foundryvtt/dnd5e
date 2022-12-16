@@ -112,60 +112,43 @@
             {{!-- Item Usage Profiles --}}
             <div class="usage-profiles">
 
-                {{!-- Item Usage Navigation --}}
-                <nav class="usage-profile-navigation sheet-navigation tabs" data-group="primary">
-
-                    <h3 class="usage-profile-navigation-header">{{ localize "DND5E.ItemUsageProfilesTypeSpell" }}</h3>
-
-                    {{#each system.usageProfiles as |usageProfile|}}
-
-                    {{#if usageProfile.profileName}}
-                    <a class="usage-profile-navigation-tab item">{{ usageProfile.profileName }}</a>
-                    {{else}}
-                    <a class="usage-profile-navigation-tab item">{{ localize "DND5E.Untitled" }}</a>
-                    {{/if}}
-
-                    {{/each}}
-
-                    <a class="usage-profile-navigation-tab item">{{ localize "DND5E.ItemUsageProfileAdd" }}</a>
-                </nav>
+                {{!-- Item Usage Profile Navigation Template --}}
+                {{> "dnd5e.item-usage-profile-nav"}}
 
                 {{#if system.usageProfiles.length}}
-                {{#with (lookup system.usageProfiles 0) as |usageProfile|}}
                 <div class="usage-profile-container">
 
                     <h3 class="form-header">{{ localize "DND5E.ItemUsageProfileTypeSpell" }}</h3>
 
                     {{!-- Item Usage Profile Template --}}
-                    {{> "dnd5e.item-usage-profile" usageProfile=usageProfile config=../config}}
+                    {{> "dnd5e.item-usage-profile"}}
 
                     <h3 class="form-header">{{ localize "DND5E.SpellCastingHeader" }}</h3>
 
                     {{!-- Item Activation Template --}}
-                    {{> "dnd5e.item-activation" usageProfile=usageProfile config=../config}}
+                    {{> "dnd5e.item-activation"}}
 
                     <h3 class="form-header">{{ localize "DND5E.SpellEffects" }}</h3>
 
                     {{!-- Item Action Template --}}
-                    {{> "dnd5e.item-action" usageProfile=usageProfile config=../config}}
+                    {{> "dnd5e.item-action"}}
 
                     {{!-- Spell Level Scaling --}}
                     <div class="form-group">
                         <label>{{ localize "DND5E.LevelScaling" }}</label>
                         <div class="form-fields">
-                            <select name="system.scaling.mode">
-                                {{#select usageProfile.scaling.mode}}
+                            <select name="usageProfile.scaling.mode">
+                                {{#select system.usageProfiles.0.scaling.mode}}
                                 {{#each ../config.spellScalingModes as |name key|}}
                                 <option value="{{key}}">{{name}}</option>
                                 {{/each}}
                                 {{/select}}
                             </select>
-                            <input type="text" name="system.scaling.formula" value="{{usageProfile.scaling.formula}}" placeholder="{{ localize 'DND5E.ScalingFormula' }}"/>
+                            <input type="text" name="system.scaling.formula" value="{{system.usageProfiles.0.scaling.formula}}" placeholder="{{ localize 'DND5E.ScalingFormula' }}"/>
                         </div>
                     </div>
 
                 </div>
-                {{/with}}
                 {{/if}}
 
             </div>

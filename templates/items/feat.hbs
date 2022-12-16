@@ -47,49 +47,33 @@
             {{!-- Item Usage Profiles --}}
             <div class="usage-profiles">
 
-                {{!-- Item Usage Navigation --}}
-                <nav class="usage-profile-navigation sheet-navigation tabs" data-group="primary">
-
-                    <h3 class="usage-profile-navigation-header">{{ localize "DND5E.ItemUsageProfilesTypeFeature" }}</h3>
-
-                    {{#each system.usageProfiles as |usageProfile|}}
-
-                    {{#if usageProfile.profileName}}
-                    <a class="usage-profile-navigation-tab item">{{ usageProfile.profileName }}</a>
-                    {{else}}
-                    <a class="usage-profile-navigation-tab item">{{ localize "DND5E.Untitled" }}</a>
-                    {{/if}}
-
-                    {{/each}}
-
-                    <a class="usage-profile-navigation-tab item">{{ localize "DND5E.ItemUsageProfileAdd" }}</a>
-                </nav>
+                {{!-- Item Usage Profile Navigation Template --}}
+                {{> "dnd5e.item-usage-profile-nav"}}
 
                 {{#if system.usageProfiles.length}}
-                {{#with (lookup system.usageProfiles 0) as |usageProfile|}}
                 <div class="usage-profile-container">
 
                     <h3 class="form-header">{{ localize "DND5E.ItemUsageProfileTypeFeature" }}</h3>
 
                     {{!-- Item Usage Profile Template --}}
-                    {{> "dnd5e.item-usage-profile" usageProfile=usageProfile config=../config}}
+                    {{> "dnd5e.item-usage-profile"}}
 
                     <h3 class="form-header">{{ localize "DND5E.FeatureUsage" }}</h3>
 
                     {{!-- Item Activation Template --}}
-                    {{> "dnd5e.item-activation" usageProfile=usageProfile config=../config}}
+                    {{> "dnd5e.item-activation"}}
 
                     {{!-- Recharge Requirement --}}
-                    {{#if usageProfile.activation.type}}
+                    {{#if system.usageProfiles.0.activation.type}}
                     <div class="form-group recharge">
                         <label>{{ localize "DND5E.FeatureActionRecharge" }}</label>
                         <div class="form-fields">
                             <span>{{ localize "DND5E.FeatureRechargeOn" }}</span>
-                            {{numberInput usageProfile.recharge.value name="usageProfile.recharge.value"
+                            {{numberInput system.recharge.value name="system.recharge.value"
                                 placeholder=(localize "DND5E.FeatureRechargeResult")}}
                             <label class="checkbox">
                                 {{ localize "DND5E.Charged" }}
-                                <input type="checkbox" name="usageProfile.recharge.charged" {{checked system.recharge.charged}}/>
+                                <input type="checkbox" name="system.recharge.charged" {{checked system.recharge.charged}}/>
                             </label>
                         </div>
                     </div>
@@ -98,10 +82,9 @@
                     <h3 class="form-header">{{ localize "DND5E.FeatureAttack" }}</h3>
 
                     {{!-- Item Action Template --}}
-                    {{> "dnd5e.item-action" usageProfile=usageProfile config=../config}}
+                    {{> "dnd5e.item-action"}}
 
                 </div>
-                {{/with}}
                 {{/if}}
 
             </div>

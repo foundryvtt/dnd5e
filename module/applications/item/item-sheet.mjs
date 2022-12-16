@@ -88,6 +88,23 @@ export default class ItemSheet5e extends ItemSheet {
           });
         }
 
+        Reflect.deleteProperty(this.object.system, "activation");
+        Reflect.deleteProperty(this.object.system, "duration");
+        Reflect.deleteProperty(this.object.system, "target");
+        Reflect.deleteProperty(this.object.system, "range");
+        Reflect.deleteProperty(this.object.system, "uses");
+        Reflect.deleteProperty(this.object.system, "consume");
+        Reflect.deleteProperty(this.object.system, "ability");
+        Reflect.deleteProperty(this.object.system, "actionType");
+        Reflect.deleteProperty(this.object.system, "attackBonus");
+        Reflect.deleteProperty(this.object.system, "chatFlavor");
+        Reflect.deleteProperty(this.object.system, "critical");
+        Reflect.deleteProperty(this.object.system, "damage");
+        Reflect.deleteProperty(this.object.system, "formula");
+        Reflect.deleteProperty(this.object.system, "save");
+        Reflect.deleteProperty(this.object.system, "scaling");
+
+        this.object.system.usageProfileIndex = 0;
         this.object.system.usageProfiles = usageProfiles;
       }
     }
@@ -157,12 +174,12 @@ export default class ItemSheet5e extends ItemSheet {
 
       // Action Details
       hasAttackRoll: item.hasAttack,
-      isHealing: item.system.actionType === "heal",
-      isFlatDC: item.system.save?.scaling === "flat",
-      isLine: ["line", "wall"].includes(item.system.target?.type),
+      isHealing: item.system?.usageProfiles?.at(0)?.actionType === "heal",
+      isFlatDC: item.system?.usageProfiles?.at(0)?.save?.scaling === "flat",
+      isLine: ["line", "wall"].includes(item.system?.usageProfiles?.at(0)?.target?.type),
 
       // Vehicles
-      isCrewed: item.system.activation?.type === "crew",
+      isCrewed: item.system?.usageProfiles?.at(0)?.activation?.type === "crew",
       isMountable,
 
       // Armor Class
@@ -279,7 +296,7 @@ export default class ItemSheet5e extends ItemSheet {
    * @private
    */
   _getItemConsumptionTargets() {
-    const consume = this.item.system.consume || {};
+    const consume = this.item.system?.usageProfiles?.at(0)?.consume || {};
     if ( !consume.type ) return [];
     const actor = this.item.actor;
     if ( !actor ) return {};
@@ -315,7 +332,7 @@ export default class ItemSheet5e extends ItemSheet {
     // Materials
     else if ( consume.type === "material" ) {
       return actor.items.reduce((obj, i) => {
-        if ( ["consumable", "loot"].includes(i.type) && !i.system.activation ) {
+        if ( ["consumable", "loot"].includes(i.type) && !i.system?.usageProfiles?.at(0)?.activation ) {
           obj[i.id] = `${i.name} (${i.system.quantity})`;
         }
         return obj;
@@ -327,7 +344,7 @@ export default class ItemSheet5e extends ItemSheet {
       return actor.items.reduce((obj, i) => {
 
         // Limited-use items
-        const uses = i.system.uses || {};
+        const uses = i.system?.usageProfiles?.at(0)?.uses || {};
         if ( uses.per && uses.max ) {
           const label = uses.per === "charges"
             ? ` (${game.i18n.format("DND5E.AbilityUseChargesLabel", {value: uses.value})})`
@@ -394,12 +411,12 @@ export default class ItemSheet5e extends ItemSheet {
     }
 
     // Action type
-    if ( this.item.system.actionType ) {
-      props.push(CONFIG.DND5E.itemActionTypes[this.item.system.actionType]);
+    if ( this.item.system?.usageProfiles?.at(0)?.actionType ) {
+      props.push(CONFIG.DND5E.itemActionTypes[this.item.system?.usageProfiles?.at(0)?.actionType]);
     }
 
     // Action usage
-    if ( (this.item.type !== "weapon") && !foundry.utils.isEmpty(this.item.system.activation) ) {
+    if ( (this.item.type !== "weapon") && !foundry.utils.isEmpty(this.item.system?.usageProfiles?.at(0)?.activation) ) {
       props.push(labels.activation, labels.range, labels.target, labels.duration);
     }
     return props.filter(p => !!p);
@@ -452,6 +469,28 @@ export default class ItemSheet5e extends ItemSheet {
   _getSubmitData(updateData={}) {
     const formData = foundry.utils.expandObject(super._getSubmitData(updateData));
 
+    // // TODO: Handle UsageProfile array? I'm so confused by formdata
+    // console.log("- 0");
+    // console.log("\tformData.usageProfile", formData.usageProfile);
+    // console.log("- 1");
+    // console.log("\tthis.object.system.usageProfiles[this.object.system.usageProfileIndex]", this.object.system.usageProfiles[this.object.system.usageProfileIndex]);
+
+    // const idontunderstand = foundry.utils.mergeObject(
+    //   this.object.system.usageProfiles[this.object.system.usageProfileIndex],
+    //   formData.usageProfile
+    // );
+    // console.log("- 3");
+    // console.log("\tidontunderstand", idontunderstand);
+    // console.log("-");
+
+    // this.object.system.usageProfiles[this.object.system.usageProfileIndex] = idontunderstand;
+
+    // Reflect.deleteProperty(formData.system, "usageProfile");
+
+    // console.log("- 4 ");
+    // console.log("\tformData", formData);
+    // console.log("-");
+
     // Handle Damage array
     const damage = formData.system?.damage;
     if ( damage ) damage.parts = Object.values(damage?.parts || {}).map(d => [d[0] || "", d[1] || ""]);
@@ -490,6 +529,7 @@ export default class ItemSheet5e extends ItemSheet {
   activateListeners(html) {
     super.activateListeners(html);
     if ( this.isEditable ) {
+      html.find(".usage-profile-control").click(this._onUsageProfileControl.bind(this));
       html.find(".damage-control").click(this._onDamageControl.bind(this));
       html.find(".trait-selector").click(this._onConfigureTraits.bind(this));
       html.find(".effect-control").click(ev => {
@@ -558,6 +598,39 @@ export default class ItemSheet5e extends ItemSheet {
    * @returns {Promise<Item5e>|null}  Item with updates applied.
    * @private
    */
+  async _onUsageProfileControl(event) {
+    event.preventDefault();
+    const a = event.currentTarget;
+
+    // Add new usage-profile component
+    if ( a.classList.contains("usage-profile-add") ) {
+      await this._onSubmit(event);  // Submit any unsaved changes
+      console.log("TODO: ADD USAGE PROFILE");
+      // TODO: ADD USAGE PROFILE
+      // const damage = this.item.system?.usageProfiles?.at(0)?.damage;
+      // return this.item.update({"system.damage.parts": damage.parts.concat([["", ""]])});
+    }
+
+    // Remove a usage-profile component
+    if ( a.classList.contains("usage-profile-delete") ) {
+      await this._onSubmit(event);  // Submit any unsaved changes
+      console.log("TODO: DELETE USAGE PROFILE");
+      // TODO: DELETE USAGE PROFILE
+      // const li = a.closest(".damage-part");
+      // const damage = foundry.utils.deepClone(this.item.system?.usageProfiles?.at(0)?.damage);
+      // damage.parts.splice(Number(li.dataset.damagePart), 1);
+      // return this.item.update({"system.damage.parts": damage.parts});
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Add or remove a damage part from the damage formula.
+   * @param {Event} event             The original click event.
+   * @returns {Promise<Item5e>|null}  Item with updates applied.
+   * @private
+   */
   async _onDamageControl(event) {
     event.preventDefault();
     const a = event.currentTarget;
@@ -565,7 +638,7 @@ export default class ItemSheet5e extends ItemSheet {
     // Add new damage component
     if ( a.classList.contains("add-damage") ) {
       await this._onSubmit(event);  // Submit any unsaved changes
-      const damage = this.item.system.damage;
+      const damage = this.item.system?.usageProfiles?.at(0)?.damage;
       return this.item.update({"system.damage.parts": damage.parts.concat([["", ""]])});
     }
 
@@ -573,11 +646,12 @@ export default class ItemSheet5e extends ItemSheet {
     if ( a.classList.contains("delete-damage") ) {
       await this._onSubmit(event);  // Submit any unsaved changes
       const li = a.closest(".damage-part");
-      const damage = foundry.utils.deepClone(this.item.system.damage);
+      const damage = foundry.utils.deepClone(this.item.system?.usageProfiles?.at(0)?.damage);
       damage.parts.splice(Number(li.dataset.damagePart), 1);
       return this.item.update({"system.damage.parts": damage.parts});
     }
   }
+
   /* -------------------------------------------- */
 
   /** @inheritdoc */
