@@ -109,16 +109,6 @@ export default class Item5e extends Item {
   /* -------------------------------------------- */
 
   /**
-   * Does the Item implement a versatile damage roll as part of its usage?
-   * @type {boolean}
-   */
-  get isVersatile() {
-    return !!(this.hasDamage && this.system?.usageProfiles?.[0]?.damage.versatile);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
    * Does the item provide an amount of healing instead of conventional damage?
    * @type {boolean}
    */
@@ -1085,7 +1075,6 @@ export default class Item5e extends Item {
       hasAttack: this.hasAttack,
       isHealing: this.isHealing,
       hasDamage: this.hasDamage,
-      isVersatile: this.isVersatile,
       isSpell: this.type === "spell",
       hasSave: this.hasSave,
       hasAreaTarget: this.hasAreaTarget,

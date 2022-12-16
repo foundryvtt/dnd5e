@@ -33,17 +33,13 @@
         </button>
         {{/if}}
 
-        {{#if isVersatile}}
-        <button data-action="versatile">{{ localize "DND5E.Versatile" }}</button>
-        {{/if}}
-
         {{#if hasSave}}
-        <button data-action="save" data-ability="{{data.save.ability}}">
+        <button data-action="save" data-ability="{{itemUsageProfile.save.ability}}">
             {{ localize "DND5E.SavingThrow" }} {{labels.save}}
         </button>
         {{/if}}
 
-        {{#if data.formula}}
+        {{#if itemUsageProfile.formula}}
         <button data-action="formula">{{ localize "DND5E.OtherFormula"}}</button>
         {{/if}}
 
@@ -52,11 +48,11 @@
         {{/if}}
 
         {{#if isTool}}
-        <button data-action="toolCheck" data-ability="{{data.ability.value}}">{{ localize "DND5E.Use" }} {{item.name}}</button>
+        <button data-action="toolCheck" data-ability="{{itemUsageProfile.ability.value}}">{{ localize "DND5E.Use" }} {{item.name}}</button>
         {{/if}}
 
         {{#if hasAbilityCheck}}
-        <button data-action="abilityCheck" data-ability="{{data.ability}}">{{labels.abilityCheck}}</button>
+        <button data-action="abilityCheck" data-ability="{{itemUsageProfile.ability}}">{{labels.abilityCheck}}</button>
         {{/if}}
     </div>
 
