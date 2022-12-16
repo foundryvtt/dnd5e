@@ -31,7 +31,7 @@ export default class ItemSheet5e extends ItemSheet {
       resizable: true,
       scrollY: [".tab.details"],
       tabs: [{navSelector: ".tabs", contentSelector: ".sheet-body", initial: "description"}],
-      dragDrop: [{dragSelector: "[data-effect-id]", dropSelector: ".effects-list"}],
+      dragDrop: [{dragSelector: "[data-effect-id]", dropSelector: ".effects-list"}]
     });
   }
 
@@ -110,7 +110,7 @@ export default class ItemSheet5e extends ItemSheet {
     /** @deprecated */
     Object.defineProperty(context, "data", {
       get() {
-        const msg = `You are accessing the "data" attribute within the rendering context provided by the ItemSheet5e 
+        const msg = `You are accessing the "data" attribute within the rendering context provided by the ItemSheet5e
         class. This attribute has been deprecated in favor of "system" and will be removed in a future release`;
         foundry.utils.logCompatibilityWarning(msg, { since: "DnD5e 2.0", until: "DnD5e 2.2" });
         return context.system;
@@ -133,6 +133,7 @@ export default class ItemSheet5e extends ItemSheet {
    * @returns {object}     Object with advancement data grouped by levels.
    */
   _getItemAdvancement(item) {
+    if ( !item.system.advancement ) return;
     const advancement = {};
     const configMode = !item.parent || this.advancementConfigurationMode;
     const maxLevel = !configMode
@@ -146,7 +147,7 @@ export default class ItemSheet5e extends ItemSheet {
           order: a.constructor.order,
           title: a.title,
           icon: a.icon,
-          classRestriction: a.data.classRestriction,
+          classRestriction: a.classRestriction,
           configured: false
         })),
         configured: "partial"
@@ -161,7 +162,7 @@ export default class ItemSheet5e extends ItemSheet {
         order: advancement.sortingValueForLevel(level),
         title: advancement.titleForLevel(level, { configMode }),
         icon: advancement.icon,
-        classRestriction: advancement.data.classRestriction,
+        classRestriction: advancement.classRestriction,
         summary: advancement.summaryForLevel(level, { configMode }),
         configured: advancement.configuredForLevel(level)
       }));
@@ -351,7 +352,7 @@ export default class ItemSheet5e extends ItemSheet {
   /** @inheritDoc */
   setPosition(position={}) {
     if ( !(this._minimized || position.height) ) {
-      position.height = (this._tabs[0].active === "details") ? "auto" : this.options.height;
+      position.height = (this._tabs[0].active === "details") ? "auto" : Math.max(this.height, this.options.height);
     }
     return super.setPosition(position);
   }
@@ -396,15 +397,24 @@ export default class ItemSheet5e extends ItemSheet {
       }
     }
 
-    // Check class identifier
-    if ( formData.system?.identifier ) {
-      const dataRgx = new RegExp(/^([a-z0-9_-]+)$/i);
-      const match = formData.system.identifier.match(dataRgx);
-      if ( !match ) {
-        formData.system.identifier = this.item._source.system.identifier;
-        this.form.querySelector("input[name='system.identifier']").value = formData.system.identifier;
-        return ui.notifications.error(game.i18n.localize("DND5E.IdentifierError"));
+    // Check duration value formula
+    const duration = formData.system?.duration;
+    if ( duration?.value ) {
+      const durationRoll = new Roll(duration.value);
+      if ( !durationRoll.isDeterministic ) {
+        duration.value = this.item._source.system.duration.value;
+        this.form.querySelector("input[name='system.duration.value']").value = duration.value;
+        return ui.notifications.error(game.i18n.format("DND5E.FormulaCannotContainDiceError", {
+          name: game.i18n.localize("DND5E.Duration")
+        }));
       }
+    }
+
+    // Check class identifier
+    if ( formData.system?.identifier && !dnd5e.utils.validators.isValidIdentifier(formData.system.identifier) ) {
+      formData.system.identifier = this.item._source.system.identifier;
+      this.form.querySelector("input[name='system.identifier']").value = formData.system.identifier;
+      return ui.notifications.error(game.i18n.localize("DND5E.IdentifierError"));
     }
 
     // Return the flattened submission data
@@ -533,7 +543,7 @@ export default class ItemSheet5e extends ItemSheet {
   _onDrop(event) {
     const data = TextEditor.getDragEventData(event);
     const item = this.item;
-    
+
     /**
      * A hook event that fires when some useful data is dropped onto an ItemSheet5e.
      * @function dnd5e.dropItemSheetData
@@ -567,7 +577,7 @@ export default class ItemSheet5e extends ItemSheet {
     if ( (this.item.uuid === effect.parent.uuid) || (this.item.uuid === effect.origin) ) return false;
     return ActiveEffect.create({
       ...effect.toObject(),
-      origin: this.item.uuid,
+      origin: this.item.uuid
     }, {parent: this.item});
   }
 

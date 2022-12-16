@@ -2,7 +2,7 @@
   "_id": "5TmstVMURpVtmNR3",
   "name": "Half-Red Dragon Veteran",
   "type": "npc",
-  "img": "icons/svg/mystery-man.svg",
+  "img": "systems/dnd5e/tokens/humanoid/HalfRedDragonVeteran.webp",
   "system": {
     "abilities": {
       "str": {
@@ -151,7 +151,7 @@
     },
     "details": {
       "biography": {
-        "value": "",
+        "value": "<p><em>Token artwork by Forgotten Adventures.</em></p>",
         "public": ""
       },
       "alignment": "Any Alignment",
@@ -583,7 +583,7 @@
       "color": null
     },
     "texture": {
-      "src": "icons/svg/mystery-man.svg",
+      "src": "systems/dnd5e/tokens/humanoid/HalfRedDragonVeteran.web",
       "tint": null,
       "scaleX": 1,
       "scaleY": 1,
@@ -805,7 +805,10 @@
         "source": "",
         "quantity": 1,
         "weight": 3,
-        "price": 0,
+        "price": {
+          "value": 0,
+          "denomination": "gp"
+        },
         "attunement": 0,
         "equipped": true,
         "rarity": "",
@@ -922,7 +925,10 @@
         "source": "",
         "quantity": 1,
         "weight": 2,
-        "price": 0,
+        "price": {
+          "value": 0,
+          "denomination": "gp"
+        },
         "attunement": 0,
         "equipped": true,
         "rarity": "",
@@ -1039,7 +1045,10 @@
         "source": "",
         "quantity": 1,
         "weight": 18,
-        "price": 0,
+        "price": {
+          "value": 0,
+          "denomination": "gp"
+        },
         "attunement": 0,
         "equipped": true,
         "rarity": "",

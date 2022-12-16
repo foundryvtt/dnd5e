@@ -1,6 +1,6 @@
 {
   "Actor": {
-    "types": ["character", "npc", "vehicle"],
+    "types": ["character", "npc", "vehicle", "group"],
     "templates": {
       "common": {
         "abilities": {
@@ -399,7 +399,7 @@
         }
       }
     },
-    "htmlFields": ["details.biography.value", "details.biography.public"],
+    "htmlFields": ["details.biography.value", "details.biography.public", "description.full", "description.summary"],
     "character": {
       "templates": ["common", "creature"],
       "attributes": {
@@ -554,6 +554,27 @@
         "crew": [],
         "passengers": []
       }
+    },
+    "group": {
+      "description": {
+        "full": "",
+        "summary": ""
+      },
+      "members": [],
+      "attributes": {
+        "movement": {
+          "land": 0,
+          "water": 0,
+          "air": 0
+        }
+      },
+      "currency": {
+        "pp": 0,
+        "gp": 0,
+        "ep": 0,
+        "sp": 0,
+        "cp": 0
+      }
     }
   },
   "Item": {
@@ -570,7 +591,10 @@
       "physicalItem": {
         "quantity": 1,
         "weight": 0,
-        "price": 0,
+        "price": {
+          "value": 0,
+          "denomination": "gp"
+        },
         "attunement": 0,
         "equipped": false,
         "rarity": "",
@@ -586,6 +610,7 @@
           "value": null,
           "units": ""
         },
+        "cover": null,
         "target": {
           "value": null,
           "width": null,
@@ -612,7 +637,7 @@
       "action": {
         "ability": null,
         "actionType": null,
-        "attackBonus": 0,
+        "attackBonus": "",
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -631,11 +656,11 @@
       },
       "mountable": {
         "armor": {
-          "value": 10
+          "value": null
         },
         "hp": {
-          "value": 0,
-          "max": 0,
+          "value": null,
+          "max": null,
           "dt": null,
           "conditions": ""
         }
@@ -727,7 +752,6 @@
       "level": 1,
       "school": "",
       "components": {
-        "value": "",
         "vocal": false,
         "somatic": false,
         "material": false,
@@ -765,6 +789,22 @@
       "baseItem": "",
       "properties": {},
       "proficient": true
+    }
+  },
+  "JournalEntryPage": {
+    "types": ["class"],
+    "htmlFields": ["description.value", "description.additionalHitPoints", "description.additionalTraits", "description.additionalEquipment", "description.subclass"],
+    "class": {
+      "item": "",
+      "description": {
+        "value": "",
+        "additionalHitPoints": "",
+        "additionalTraits": "",
+        "additionalEquipment": "",
+        "subclass": ""
+      },
+      "subclassHeader": "",
+      "subclassItems": []
     }
   }
 }

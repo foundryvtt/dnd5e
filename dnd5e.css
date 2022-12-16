@@ -69,6 +69,11 @@
 /* ----------------------------------------- */
 /*  All DnD5e Apps                           */
 /* ----------------------------------------- */
+h5 {
+  margin-block-start: 1em;
+  margin-block-end: 0;
+  font-size: var(--font-size-13);
+}
 .dnd5e {
   /* ----------------------------------------- */
   /*  Element Styles                           */
@@ -119,6 +124,13 @@
 .dnd5e button {
   background: rgba(0, 0, 0, 0.1);
   border: 2px groove #eeede0;
+}
+.dnd5e .secret .reveal {
+  border: 1px dashed var(--color-border-light-primary);
+  background: rgba(255, 255, 240, 0.8);
+}
+.dnd5e .locked .secret .reveal {
+  display: none;
 }
 .dnd5e .form-group label {
   flex: 2;
@@ -658,59 +670,17 @@
   overflow-y: auto;
 }
 /* ----------------------------------------- */
-/*  SRD Compendium                           */
+/*  Polymorph Features                       */
 /* ----------------------------------------- */
-.srd-compendium article {
-  display: flex;
-  flex-direction: column;
-  padding: 1rem;
-  gap: 1rem;
+.polymorph {
+  /* ----------------------------------------- */
+  /*  Two Column Configurations                */
+  /* ----------------------------------------- */
 }
-.srd-compendium article aside,
-.srd-compendium article .contents {
-  border: 4px solid #ba2828;
-  background: #efefef99;
-}
-.srd-compendium article aside header h2,
-.srd-compendium article .contents header h2 {
-  border: none;
-  background: #ba2828;
-  color: var(--color-text-light-1);
-  padding: 0 0.25rem 0.25rem 0.25rem;
-  margin: 0;
-}
-.srd-compendium article aside section,
-.srd-compendium article .contents section {
-  padding: 0.625rem 1rem;
-}
-.srd-compendium article aside blockquote {
-  border: none;
-  margin: 0;
-  padding: 0;
-}
-.srd-compendium article .contents {
-  flex-grow: 1;
-}
-.srd-compendium article .contents .chapter {
-  margin-bottom: 0.5rem;
-  break-inside: avoid-column;
-}
-.srd-compendium article .contents h3 {
-  border: none;
-  font-weight: bold;
-  font-size: var(--font-size-18);
-  color: var(--color-text-hyperlink);
-}
-.srd-compendium article .contents ul {
-  list-style-type: none;
-  margin: 0 0 0 0.375rem;
-  padding: 0;
-}
-.srd-compendium article .contents ul li {
-  font-size: var(--font-size-16);
-}
-.srd-compendium article .contents section {
-  column-count: 3;
+.polymorph.two-column {
+  display: grid;
+  grid-template-columns: 45% 55%;
+  grid-gap: 0.4em;
 }
 .dnd5e.sheet.actor {
   /* ----------------------------------------- */
@@ -1127,6 +1097,7 @@
   line-height: 20px;
   color: #7a7971;
 }
+.dnd5e.sheet.actor .inventory-filters .currency input[type="text"],
 .dnd5e.sheet.actor .inventory-filters .currency input[type="number"] {
   flex: 0 0 48px;
   text-align: center;
@@ -1597,6 +1568,9 @@
   margin: 0.5em 0 0 0;
   font-size: 1em;
 }
+.dnd5e.sheet.item .sheet-body .item-properties [name="system.price.denomination"] {
+  border: none;
+}
 .dnd5e.sheet.item .details input[type="text"],
 .dnd5e.sheet.item .details input[type="number"],
 .dnd5e.sheet.item .details select {
@@ -1745,6 +1719,102 @@
 }
 .dnd5e.sheet.item .loot-header {
   margin-bottom: 10px;
+}
+/* ----------------------------------------- */
+/*  SRD Compendium                           */
+/* ----------------------------------------- */
+.srd-compendium article {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  gap: 1rem;
+}
+.srd-compendium article aside,
+.srd-compendium article .contents {
+  border: 4px solid #ba2828;
+  background: #efefef99;
+}
+.srd-compendium article aside header h2,
+.srd-compendium article .contents header h2 {
+  border: none;
+  background: #ba2828;
+  color: var(--color-text-light-1);
+  padding: 0 0.25rem 0.25rem 0.25rem;
+  margin: 0;
+}
+.srd-compendium article aside section,
+.srd-compendium article .contents section {
+  padding: 0.625rem 1rem;
+}
+.srd-compendium article aside blockquote {
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+.srd-compendium article .contents {
+  flex-grow: 1;
+}
+.srd-compendium article .contents .chapter {
+  margin-bottom: 0.5rem;
+  break-inside: avoid-column;
+}
+.srd-compendium article .contents h3 {
+  border: none;
+  font-weight: bold;
+  font-size: var(--font-size-18);
+  color: var(--color-text-hyperlink);
+}
+.srd-compendium article .contents ul {
+  list-style-type: none;
+  margin: 0 0 0 0.375rem;
+  padding: 0;
+}
+.srd-compendium article .contents ul li {
+  font-size: var(--font-size-16);
+}
+.srd-compendium article .contents section {
+  column-count: 3;
+}
+/* ----------------------------------------- */
+/*  Journal Pages                            */
+/* ----------------------------------------- */
+.journal-editor .tox-tinymce {
+  height: 100% !important;
+}
+.journal-entry-page.class h4,
+.class-journal h4 {
+  border-block-end: 1px solid var(--color-underline-header);
+  font-weight: bold;
+}
+.journal-entry-page.class table th[scope="col"],
+.class-journal table th[scope="col"] {
+  padding-inline: 0.25em;
+}
+.journal-entry-page.class table td:is(.level, .prof, .scale, .spell-slots),
+.class-journal table td:is(.level, .prof, .scale, .spell-slots) {
+  text-align: center;
+}
+.journal-entry-page.class form .form-group,
+.class-journal form .form-group {
+  align-items: start;
+}
+.journal-entry-page.class form button.launch-text-editor,
+.class-journal form button.launch-text-editor {
+  flex: 0.35;
+}
+.journal-entry-page.class form .items-list .item,
+.class-journal form .items-list .item {
+  align-items: center;
+  padding-block: 0.35em 0;
+  padding-inline: 2px;
+}
+.journal-entry-page.class form .items-list .item .item-controls,
+.class-journal form .items-list .item .item-controls {
+  flex: 0;
+}
+.journal-entry-page.class form .items-list .item:not(:last-of-type),
+.class-journal form .items-list .item:not(:last-of-type) {
+  border-bottom: 1px solid var(--color-border-light-secondary);
 }
 /* ----------------------------------------- */
 /*  Chat Cards
@@ -2063,5 +2133,60 @@
 }
 .dnd5e.sheet.actor.vehicle .counters .counter.cargo-cap input {
   max-width: 40px;
+  text-align: right;
+}
+.dnd5e.sheet.group {
+  /** Members Directory */
+}
+.dnd5e.sheet.group .attribute.health span.value {
+  line-height: 64px;
+  flex: 0 0 64px;
+}
+.dnd5e.sheet.group .members .directory-header {
+  height: 28px;
+  margin: 2px 0;
+  padding: 0 0.5rem;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.05);
+  border: 2px groove #eeede0;
+}
+.dnd5e.sheet.group .members .directory-header > * {
+  margin: 0;
+  font-family: "Modesto Condensed", "Palatino Linotype", serif;
+  font-size: 20px;
+  font-weight: 700;
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 20px;
+  text-align: left;
+}
+.dnd5e.sheet.group .members .group-member {
+  padding: 0 0.5rem;
+}
+.dnd5e.sheet.group .members .group-member .name {
+  cursor: pointer;
+}
+.dnd5e.sheet.group .members .hp {
+  flex: 2;
+  align-items: center;
+}
+.dnd5e.sheet.group .members .hp .current,
+.dnd5e.sheet.group .members .hp .max {
+  flex: 0 0 40px;
+  text-align: center;
+}
+.dnd5e.sheet.group .members .hp .bar-container {
+  background: #111;
+  height: 20px;
+  padding: 1px;
+  border: 1px solid #000;
+  border-radius: 6px;
+}
+.dnd5e.sheet.group .members .hp .bar {
+  height: 16px;
+  border-radius: 4px;
+}
+.dnd5e.sheet.group .members .controls {
+  flex: 0 0 64px;
   text-align: right;
 }

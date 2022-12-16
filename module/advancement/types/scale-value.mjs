@@ -2,6 +2,8 @@ import Advancement from "../advancement.mjs";
 import AdvancementConfig from "../advancement-config.mjs";
 import AdvancementFlow from "../advancement-flow.mjs";
 
+import { ScaleValueConfigurationData, TYPES } from "../../data/advancement/scale-value.mjs";
+
 /**
  * Advancement that represents a value that scales with class level. **Can only be added to classes or subclasses.**
  */
@@ -10,13 +12,8 @@ export class ScaleValueAdvancement extends Advancement {
   /** @inheritdoc */
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
-      defaults: {
-        configuration: {
-          identifier: "",
-          type: "string",
-          distance: {units: ""},
-          scale: {}
-        }
+      dataModels: {
+        configuration: ScaleValueConfigurationData
       },
       order: 60,
       icon: "systems/dnd5e/icons/svg/scale-value.svg",
@@ -35,14 +32,9 @@ export class ScaleValueAdvancement extends Advancement {
 
   /**
    * The available types of scaling value.
-   * @enum {object}
+   * @enum {ScaleValueType}
    */
-  static TYPES = {
-    string: "DND5E.AdvancementScaleValueTypeString",
-    number: "DND5E.AdvancementScaleValueTypeNumber",
-    dice: "DND5E.AdvancementScaleValueTypeDice",
-    distance: "DND5E.AdvancementScaleValueTypeDistance"
-  };
+  static TYPES = TYPES;
 
   /* -------------------------------------------- */
   /*  Instance Properties                         */
@@ -50,7 +42,7 @@ export class ScaleValueAdvancement extends Advancement {
 
   /** @inheritdoc */
   get levels() {
-    return Array.from(Object.keys(this.data.configuration.scale).map(l => Number(l)));
+    return Array.from(Object.keys(this.configuration.scale).map(l => Number(l)));
   }
 
   /* -------------------------------------------- */
@@ -60,7 +52,7 @@ export class ScaleValueAdvancement extends Advancement {
    * @type {string}
    */
   get identifier() {
-    return this.data.configuration.identifier || this.title.slugify();
+    return this.configuration.identifier || this.title.slugify();
   }
 
   /* -------------------------------------------- */
@@ -69,7 +61,7 @@ export class ScaleValueAdvancement extends Advancement {
 
   /** @inheritdoc */
   titleForLevel(level, { configMode=false }={}) {
-    const value = this.formatValue(level);
+    const value = this.valueForLevel(level)?.display;
     if ( !value ) return this.title;
     return `${this.title}: <strong>${value}</strong>`;
   }
@@ -78,12 +70,15 @@ export class ScaleValueAdvancement extends Advancement {
 
   /**
    * Scale value for the given level.
-   * @param {number} level  Level for which to get the scale value.
-   * @returns {*}           Scale value at the given level or null if none exists.
+   * @param {number} level      Level for which to get the scale value.
+   * @returns {ScaleValueType}  Scale value at the given level or null if none exists.
    */
   valueForLevel(level) {
-    const key = Object.keys(this.data.configuration.scale).reverse().find(l => Number(l) <= level);
-    return this.data.configuration.scale[key] ?? null;
+    const key = Object.keys(this.configuration.scale).reverse().find(l => Number(l) <= level);
+    const data = this.configuration.scale[key];
+    const TypeClass = this.constructor.TYPES[this.configuration.type];
+    if ( !data || !TypeClass ) return null;
+    return new TypeClass(data, { parent: this });
   }
 
   /* -------------------------------------------- */
@@ -101,34 +96,6 @@ export class ScaleValueAdvancement extends Advancement {
       if ( a[k] !== b[k] ) return false;
     }
     return true;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Prepare a scale value for use in actor data.
-   * @param {number} level  Level for which to get the scale value.
-   * @returns {string|null}
-   */
-  prepareValue(level) {
-    const value = this.valueForLevel(level);
-    if ( value == null ) return null;
-    if ( this.data.configuration.type === "dice" ) return `${value.n ?? ""}d${value.die}`;
-    return `${value.value}`;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Format a scale value for display.
-   * @param {number} level  Level for which to get the scale value.
-   * @returns {string|null}
-   */
-  formatValue(level) {
-    if ( this.data.configuration.type !== "distance" ) return this.prepareValue(level);
-    const value = this.valueForLevel(level);
-    if ( value == null ) return null;
-    return `${value.value} ${CONFIG.DND5E.movementUnits[this.data.configuration.distance.units]}`;
   }
 
 }
@@ -152,20 +119,20 @@ export class ScaleValueConfig extends AdvancementConfig {
 
   /** @inheritdoc */
   getData() {
-    const data = super.getData();
-    const config = this.advancement.data.configuration;
-    data.classIdentifier = this.item.identifier;
-    data.previewIdentifier = config.identifier || this.advancement.data.title?.slugify()
-      || this.advancement.constructor.metadata.title.slugify();
-    data.typeHint = game.i18n.localize(`DND5E.AdvancementScaleValueTypeHint${config.type.capitalize()}`);
-    data.types =
-      Object.fromEntries(
-        Object.entries(ScaleValueAdvancement.TYPES).map(([key, label]) => [key, game.i18n.localize(label)]));
-    data.faces = Object.fromEntries([2, 3, 4, 6, 8, 10, 12, 20].map(die => [die, `d${die}`]));
-    data.levels = this._prepareLevelData();
-    data.isNumeric = ["number", "distance"].includes(config.type);
-    data.movementUnits = CONFIG.DND5E.movementUnits;
-    return data;
+    const config = this.advancement.configuration;
+    const type = ScaleValueAdvancement.TYPES[config.type];
+    return foundry.utils.mergeObject(super.getData(), {
+      classIdentifier: this.item.identifier,
+      previewIdentifier: config.identifier || this.advancement.title?.slugify()
+        || this.advancement.constructor.metadata.title.slugify(),
+      type: type.metadata,
+      types: Object.fromEntries(
+        Object.entries(ScaleValueAdvancement.TYPES).map(([key, d]) => [key, game.i18n.localize(d.metadata.label)])
+      ),
+      faces: Object.fromEntries(TYPES.dice.FACES.map(die => [die, `d${die}`])),
+      levels: this._prepareLevelData(),
+      movementUnits: CONFIG.DND5E.movementUnits
+    });
   }
 
   /* -------------------------------------------- */
@@ -179,7 +146,7 @@ export class ScaleValueConfig extends AdvancementConfig {
     let lastValue = null;
     return Array.fromRange(CONFIG.DND5E.maxLevel + 1).slice(1).reduce((obj, level) => {
       obj[level] = { placeholder: this._formatPlaceholder(lastValue), value: null };
-      const value = this.advancement.data.configuration.scale[level];
+      const value = this.advancement.configuration.scale[level];
       if ( value ) {
         this._mergeScaleValues(value, lastValue);
         obj[level].className = "new-scale-value";
@@ -199,8 +166,8 @@ export class ScaleValueConfig extends AdvancementConfig {
    * @protected
    */
   _formatPlaceholder(placeholder) {
-    if ( this.advancement.data.configuration.type === "dice" ) {
-      return { n: placeholder?.n ?? "", die: placeholder?.die ? `d${placeholder.die}` : "" };
+    if ( this.advancement.configuration.type === "dice" ) {
+      return { number: placeholder?.number ?? "", faces: placeholder?.faces ? `d${placeholder.faces}` : "" };
     }
     return { value: placeholder?.value ?? "" };
   }
@@ -251,7 +218,21 @@ export class ScaleValueConfig extends AdvancementConfig {
   /** @inheritdoc */
   activateListeners(html) {
     super.activateListeners(html);
-    this.form.querySelector("input[name='data.title']").addEventListener("input", this._onChangeTitle.bind(this));
+    this.form.querySelector("input[name='title']").addEventListener("input", this._onChangeTitle.bind(this));
+    this.form.querySelector(".identifier-hint-copy").addEventListener("click", this._onIdentifierHintCopy.bind(this));
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Copies the full scale identifier hint to the clipboard.
+   * @param {Event} event  The triggering click event.
+   * @protected
+   */
+  _onIdentifierHintCopy(event) {
+    const data = this.getData();
+    game.clipboard.copyPlainText(`@scale.${data.classIdentifier}.${data.previewIdentifier}`);
+    game.tooltip.activate(event.target, {text: game.i18n.localize("DND5E.IdentifierCopied"), direction: "UP"});
   }
 
   /* -------------------------------------------- */
@@ -262,23 +243,30 @@ export class ScaleValueConfig extends AdvancementConfig {
    */
   _onChangeTitle(event) {
     const slug = (event.target.value || this.advancement.constructor.metadata.title).slugify();
-    this.form.querySelector("input[name='data.configuration.identifier']").placeholder = slug;
+    this.form.querySelector("input[name='configuration.identifier']").placeholder = slug;
   }
 
   /* -------------------------------------------- */
 
   /** @inheritdoc */
   async _updateObject(event, formData) {
-    const typeChange = "data.configuration.type" in formData;
-    if ( typeChange && (formData["data.configuration.type"] !== this.advancement.data.configuration.type) ) {
-      for ( const key in formData ) { // Clear scale values if we're changing type.
-        if ( key.startsWith("data.configuration.scale.") ) delete formData[key];
-      }
-      for ( const l of Array.fromRange(CONFIG.DND5E.maxLevel, 1) ) {
-        formData[`data.configuration.scale.${l}`] = null;
+    const updates = foundry.utils.expandObject(formData);
+    const typeChange = "configuration.type" in formData;
+    if ( typeChange && (updates.configuration.type !== this.advancement.configuration.type) ) {
+      // Clear existing scale value data to prevent error during type update
+      await this.advancement.update(Array.fromRange(CONFIG.DND5E.maxLevel, 1).reduce((obj, lvl) => {
+        obj[`configuration.scale.-=${lvl}`] = null;
+        return obj;
+      }, {}));
+      updates.configuration.scale ??= {};
+      const OriginalType = ScaleValueAdvancement.TYPES[this.advancement.configuration.type];
+      const NewType = ScaleValueAdvancement.TYPES[updates.configuration.type];
+      for ( const [lvl, data] of Object.entries(updates.configuration.scale) ) {
+        const original = new OriginalType(data, { parent: this.advancement });
+        updates.configuration.scale[lvl] = NewType.convertFrom(original)?.toObject();
       }
     }
-    return super._updateObject(event, formData);
+    return super._updateObject(event, foundry.utils.flattenObject(updates));
   }
 }
 
@@ -300,8 +288,8 @@ export class ScaleValueFlow extends AdvancementFlow {
   /** @inheritdoc */
   getData() {
     return foundry.utils.mergeObject(super.getData(), {
-      initial: this.advancement.formatValue(this.level - 1),
-      final: this.advancement.formatValue(this.level)
+      initial: this.advancement.valueForLevel(this.level - 1)?.display,
+      final: this.advancement.valueForLevel(this.level).display
     });
   }
 

@@ -30,20 +30,20 @@
                 <li class="attribute health">
                     <h4 class="attribute-name box-title">{{localize 'DND5E.HitPoints'}}</h4>
                     <div class="attribute-value multiple">
-                        <input name="system.attributes.hp.value" type="number" step="any"
+                        <input name="system.attributes.hp.value" type="text" data-dtype="Number"
                             value="{{system.attributes.hp.value}}" placeholder="&mdash;"
                             title="{{localize 'DND5E.HitPointsCurrent'}}">
                         <span class="sep"> &sol; </span>
-                        <input name="system.attributes.hp.max" type="number" step="any"
+                        <input name="system.attributes.hp.max" type="text" data-dtype="Number"
                             value="{{system.attributes.hp.max}}" placeholder="&mdash;"
                             title="{{localize 'DND5E.HitPointsMax'}}">
                     </div>
                     <footer class="attribute-footer">
-                        <input class="temphp" name="system.attributes.hp.dt" type="number" step="any"
+                        <input class="temphp" name="system.attributes.hp.dt" type="text" data-dtype="Number"
                             placeholder="{{localize 'DND5E.Threshold'}}"
                             value="{{system.attributes.hp.dt}}"
                             title="{{localize 'DND5E.DamageThreshold'}}">
-                        <input class="temphp" name="system.attributes.hp.mt" type="number" step="any"
+                        <input class="temphp" name="system.attributes.hp.mt" type="text" data-dtype="Number"
                             placeholder="{{localize 'DND5E.VehicleMishap'}}"
                             value="{{system.attributes.hp.mt}}"
                             title="{{localize 'DND5E.VehicleMishapThreshold'}}">
@@ -52,8 +52,8 @@
                 <li class="attribute">
                     <h4 class="attribute-name box-title">{{localize 'DND5E.ArmorClass'}}</h4>
                     <div class="attribute-value">
-                        {{numberInput system.attributes.ac.flat name="system.attributes.ac.flat"
-                            placeholder="&mdash;"}}
+                        {{numberInput system.attributes.ac.flat name="system.attributes.ac.flat" min=0 step=1
+                                      placeholder="&mdash;"}}
                     </div>
                     <footer class="attribute-footer">
                         <input type="text" name="system.attributes.ac.motionless"
@@ -91,8 +91,8 @@
             {{#each system.abilities as |ability id|}}
                 <li class="ability" data-ability="{{id}}">
                     <h4 class="ability-name box-title rollable">{{ability.label}}</h4>
-                    {{numberInput ability.value name=(concat "system.abilities." id ".value")
-                        class="ability-score" placeholder="0"}}
+                    <input type="text" name="system.abilities.{{id}}.value" value="{{ability.value}}"
+                           class="ability-score"  placeholder="0" data-dtype="Number">
                     <div class="ability-modifiers flexrow">
                         <span class="ability-mod" title="{{localize 'DND5E.Modifier'}}">
                             {{numberFormat ability.mod decimals=0 sign=true}}
@@ -114,8 +114,8 @@
                     <div class="counter flexrow cargo-cap">
                         <h4>{{localize 'DND5E.VehicleCargoCapacity'}}</h4>
                         <div class="counter-value">
-                            {{numberInput system.attributes.capacity.cargo name="system.attributes.capacity.cargo"
-                                placeholder="0"}}
+                            {{numberInput system.attributes.capacity.cargo name="system.attributes.capacity.cargo" min=0
+                                          placeholder=0}}
                         </div>
                     </div>
                     <div class="counter flexrow stations">
@@ -129,26 +129,25 @@
                     <div class="counter flexrow actions">
                         <h4>{{localize 'DND5E.ActionPl'}}</h4>
                         <div class="counter-value">
-                            <input name="system.attributes.actions.value" type="number" step="any"
-                                value="{{system.attributes.actions.value}}" placeholder="0"
-                                title="{{localize 'DND5E.VehicleActionsHint'}}">
+                            {{numberInput system.attributes.actions.value name="system.attributes.actions.value" min=0
+                                          step=1 placeholder=0 title=(localize "DND5E.VehicleActionsHint")}}
                         </div>
                     </div>
                     <div class="counter flexrow action-thresholds">
                         <h4>{{localize 'DND5E.VehicleActionThresholds'}}</h4>
                         <div class="counter-value">
                             <span class="sep">&lt;</span>
-                            <input name="system.attributes.actions.thresholds.2" type="number" step="any"
-                                value="{{system.attributes.actions.thresholds.[2]}}" placeholder="&mdash;"
-                                title="{{localize 'DND5E.VehicleActionThresholdsFull'}}">
+                            {{numberInput system.attributes.actions.thresholds.[2] min=0 step=1 placeholder="&mdash;"
+                                          name="system.attributes.actions.thresholds.2"
+                                          title=(localize "DND5E.VehicleActionThresholdsFull")}}
                             <span class="sep">&lt;</span>
-                            <input name="system.attributes.actions.thresholds.1" type="number" step="any"
-                                value="{{system.attributes.actions.thresholds.[1]}}" placeholder="&mdash;"
-                                title="{{localize 'DND5E.VehicleActionThresholdsMid'}}">
+                            {{numberInput system.attributes.actions.thresholds.[1] min=0 step=1 placeholder="&mdash;"
+                                          name="system.attributes.actions.thresholds.1"
+                                          title=(localize "DND5E.VehicleActionThresholdsMid")}}
                             <span class="sep">&lt;</span>
-                            <input name="system.attributes.actions.thresholds.0" type="number" step="any"
-                                value="{{system.attributes.actions.thresholds.[0]}}" placeholder="&mdash;"
-                                title="{{localize 'DND5E.VehicleActionThresholdsMin'}}">
+                            {{numberInput system.attributes.actions.thresholds.[0] min=0 step=1 placeholder="&mdash;"
+                                          name="system.attributes.actions.thresholds.0"
+                                          title=(localize "DND5E.VehicleActionThresholdsMin")}}
                         </div>
                     </div>
                 </div>

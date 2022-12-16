@@ -2,7 +2,7 @@
   "_id": "KLCkHep28HBfdsky",
   "name": "Ettin",
   "type": "npc",
-  "img": "icons/svg/mystery-man.svg",
+  "img": "systems/dnd5e/tokens/giant/Ettin.webp",
   "system": {
     "abilities": {
       "str": {
@@ -151,7 +151,7 @@
     },
     "details": {
       "biography": {
-        "value": "",
+        "value": "<p><em>Token artwork by Forgotten Adventures.</em></p>",
         "public": ""
       },
       "alignment": "Chaotic Evil",
@@ -581,7 +581,7 @@
       "color": null
     },
     "texture": {
-      "src": "icons/svg/mystery-man.svg",
+      "src": "systems/dnd5e/tokens/giant/Ettin.webp",
       "tint": null,
       "scaleX": 1,
       "scaleY": 1,
@@ -866,7 +866,10 @@
         "source": "",
         "quantity": 1,
         "weight": 4,
-        "price": 0,
+        "price": {
+          "value": 0,
+          "denomination": "gp"
+        },
         "attunement": 0,
         "equipped": true,
         "rarity": "",
@@ -983,7 +986,10 @@
         "source": "",
         "quantity": 1,
         "weight": 4,
-        "price": 0,
+        "price": {
+          "value": 0,
+          "denomination": "gp"
+        },
         "attunement": 0,
         "equipped": true,
         "rarity": "",

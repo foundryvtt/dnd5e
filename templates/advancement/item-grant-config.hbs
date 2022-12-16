@@ -3,7 +3,7 @@
   <div class="form-group">
     <label>{{localize "DND5E.AdvancementItemGrantOptional"}}</label>
     <div class="form-fields">
-      <input type="checkbox" name="data.configuration.optional" {{checked data.configuration.optional}}>
+      <input type="checkbox" name="configuration.optional" {{checked configuration.optional}}>
     </div>
     <p class="hint">{{localize "DND5E.AdvancementItemGrantOptionalHint"}}</p>
   </div>
@@ -16,7 +16,7 @@
     <ol class="items-list">
       <li class="items-header flexrow"><h3 class="item-name">{{localize "DOCUMENT.Items"}}</h3></li>
       <ol class="item-list">
-      {{#each data.configuration.items}}
+      {{#each configuration.items}}
         <li class="item flexrow" data-item-uuid="{{this}}">
           <div class="item-name">{{{dnd5e-linkForUuid this}}}</div>
           <div class="item-controls flexrow">

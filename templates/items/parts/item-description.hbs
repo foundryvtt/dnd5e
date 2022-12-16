@@ -14,7 +14,10 @@
 
         <div class="form-group">
             <label>{{ localize "DND5E.Price" }}</label>
-            {{numberInput system.price name="system.price"}}
+            {{numberInput system.price.value name="system.price.value"}}
+            <select name="system.price.denomination">
+                {{selectOptions config.currencies selected=system.price.denomination labelAttr="abbreviation"}}
+            </select>
         </div>
         {{/if}}
 

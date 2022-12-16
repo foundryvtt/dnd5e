@@ -5,14 +5,17 @@
   "img": "icons/commodities/materials/liquid-orange.webp",
   "system": {
     "description": {
-      "value": "<p><em>Wondrous item</em></p>\n<p>This glass jar, 3 inches in diameter, contains 1d4 + 1 doses of a thick mixture that smells faintly of aloe. The jar and its contents weigh 1/2 pound.</p>\n<p>As an action, one dose of the ointment can be swallowed or applied to the skin. The creature that receives it regains 2d8 + 2 hit points, ceases to be poisoned, and is cured of any disease.</p>\n<p><em>Foundry note: the 5 charges reflect the maximum number of doses possible. </em><em>Similarly, the guide price of 600 gp is calculated at 120 gp per dose. A</em><em>djust both as required.</em></p>",
+      "value": "<p><em>Wondrous item</em></p><p>This glass jar, 3 inches in diameter, contains 1d4 + 1 doses of a thick mixture that smells faintly of aloe. The jar and its contents weigh 1/2 pound.</p><p>As an action, one dose of the ointment can be swallowed or applied to the skin. The creature that receives it regains 2d8 + 2 hit points, ceases to be poisoned, and is cured of any disease.</p><section class=\"secret foundry-note\" id=\"secret-hzyPBoWppRXYnf9A\"><p><strong>Foundry Note</strong></p><p>The 5 charges reflect the maximum number of doses possible. Similarly, the guide price of 600 gp is calculated at 120 gp per dose. Adjust both as required.</p></section>",
       "chat": "",
       "unidentified": ""
     },
     "source": "DMG pg. 179",
     "quantity": 1,
     "weight": 0.5,
-    "price": 600,
+    "price": {
+      "value": 600,
+      "denomination": "gp"
+    },
     "attunement": 0,
     "equipped": false,
     "rarity": "uncommon",
@@ -39,14 +42,15 @@
     },
     "uses": {
       "value": 5,
-      "max": 5,
+      "max": "5",
       "per": "charges",
+      "recovery": "",
       "autoDestroy": true,
       "autoUse": true
     },
     "consume": {
       "type": "",
-      "target": null,
+      "target": "",
       "amount": null
     },
     "ability": "",
@@ -86,10 +90,10 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.0.0",
-    "coreVersion": "10.279",
+    "systemVersion": "2.0.3",
+    "coreVersion": "10.286",
     "createdTime": 1661787233687,
-    "modifiedTime": 1661787233687,
+    "modifiedTime": 1663991454110,
     "lastModifiedBy": "dnd5ebuilder0000"
   }
 }

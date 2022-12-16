@@ -12,7 +12,10 @@
     "source": "PHB pg. 151",
     "quantity": 1,
     "weight": 0,
-    "price": 0.01,
+    "price": {
+      "value": 1,
+      "denomination": "cp"
+    },
     "attunement": 0,
     "equipped": false,
     "rarity": "common",
@@ -26,6 +29,7 @@
       "value": 1,
       "units": "hour"
     },
+    "cover": null,
     "target": {
       "value": 10,
       "width": null,
@@ -41,6 +45,7 @@
       "value": 1,
       "max": 1,
       "per": "charges",
+      "recovery": "",
       "autoDestroy": false,
       "autoUse": true
     },
@@ -81,10 +86,10 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.0.0",
-    "coreVersion": "10.279",
+    "systemVersion": "2.0.3",
+    "coreVersion": "10.290",
     "createdTime": 1661787233435,
-    "modifiedTime": 1661787233435,
+    "modifiedTime": 1670010904127,
     "lastModifiedBy": "dnd5ebuilder0000"
   }
 }

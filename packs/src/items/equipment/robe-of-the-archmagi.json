@@ -12,7 +12,10 @@
     "source": "DMG pg. 194",
     "quantity": 1,
     "weight": 1,
-    "price": 34000,
+    "price": {
+      "value": 34000,
+      "denomination": "gp"
+    },
     "attunement": 1,
     "equipped": false,
     "rarity": "legendary",

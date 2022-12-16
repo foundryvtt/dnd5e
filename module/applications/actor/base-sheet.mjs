@@ -105,6 +105,7 @@ export default class ActorSheet5e extends ActorSheet {
       isNPC: this.actor.type === "npc",
       isVehicle: this.actor.type === "vehicle",
       config: CONFIG.DND5E,
+      rollableClass: this.isEditable ? "rollable" : "",
       rollData: this.actor.getRollData.bind(this.actor)
     };
 
@@ -213,7 +214,7 @@ export default class ActorSheet5e extends ActorSheet {
     }
 
     // Filter and sort speeds on their values
-    speeds = speeds.filter(s => !!s[0]).sort((a, b) => b[0] - a[0]);
+    speeds = speeds.filter(s => s[0]).sort((a, b) => b[0] - a[0]);
 
     // Case 1: Largest as primary
     if ( largestPrimary ) {
@@ -593,7 +594,6 @@ export default class ActorSheet5e extends ActorSheet {
 
   /** @inheritdoc */
   activateListeners(html) {
-
     // Activate Item Filters
     const filterLists = html.find(".filter-list");
     filterLists.each(this._initializeFilterItemList.bind(this));
@@ -613,11 +613,10 @@ export default class ActorSheet5e extends ActorSheet {
 
     // Editable Only Listeners
     if ( this.isEditable ) {
-
       // Input focus and update
       const inputs = html.find("input");
       inputs.focus(ev => ev.currentTarget.select());
-      inputs.addBack().find('[type="number"]').change(this._onChangeInputDelta.bind(this));
+      inputs.addBack().find('[type="text"][data-dtype="Number"]').change(this._onChangeInputDelta.bind(this));
 
       // Ability Proficiency
       html.find(".ability-proficiency").click(this._onToggleAbilityProficiency.bind(this));
@@ -686,18 +685,17 @@ export default class ActorSheet5e extends ActorSheet {
   /* -------------------------------------------- */
 
   /**
-   * Handle input changes to numeric form fields, allowing them to accept delta-typed inputs
+   * Handle input changes to numeric form fields, allowing them to accept delta-typed inputs.
    * @param {Event} event  Triggering event.
-   * @private
+   * @protected
    */
   _onChangeInputDelta(event) {
     const input = event.target;
     const value = input.value;
     if ( ["+", "-"].includes(value[0]) ) {
-      let delta = parseFloat(value);
-      input.value = foundry.utils.getProperty(this.actor, input.name) + delta;
-    }
-    else if ( value[0] === "=" ) input.value = value.slice(1);
+      const delta = parseFloat(value);
+      input.value = Number(foundry.utils.getProperty(this.actor, input.name)) + delta;
+    } else if ( value[0] === "=" ) input.value = value.slice(1);
   }
 
   /* -------------------------------------------- */
@@ -797,7 +795,8 @@ export default class ActorSheet5e extends ActorSheet {
       title: game.i18n.localize("DND5E.PolymorphPromptTitle"),
       content: {
         options: game.settings.get("dnd5e", "polymorphSettings"),
-        i18n: CONFIG.DND5E.polymorphSettings,
+        settings: CONFIG.DND5E.polymorphSettings,
+        effectSettings: CONFIG.DND5E.polymorphEffectSettings,
         isToken: this.actor.isToken
       },
       default: "accept",
@@ -808,23 +807,28 @@ export default class ActorSheet5e extends ActorSheet {
           callback: html => this.actor.transformInto(sourceActor, rememberOptions(html))
         },
         wildshape: {
-          icon: '<i class="fas fa-paw"></i>',
-          label: game.i18n.localize("DND5E.PolymorphWildShape"),
-          callback: html => this.actor.transformInto(sourceActor, {
-            keepBio: true,
-            keepClass: true,
-            keepMental: true,
-            mergeSaves: true,
-            mergeSkills: true,
-            transformTokens: rememberOptions(html).transformTokens
-          })
+          icon: CONFIG.DND5E.transformationPresets.wildshape.icon,
+          label: CONFIG.DND5E.transformationPresets.wildshape.label,
+          callback: html => this.actor.transformInto(sourceActor, foundry.utils.mergeObject(
+            CONFIG.DND5E.transformationPresets.wildshape.options,
+            { transformTokens: rememberOptions(html).transformTokens }
+          ))
         },
         polymorph: {
-          icon: '<i class="fas fa-pastafarianism"></i>',
-          label: game.i18n.localize("DND5E.Polymorph"),
-          callback: html => this.actor.transformInto(sourceActor, {
-            transformTokens: rememberOptions(html).transformTokens
-          })
+          icon: CONFIG.DND5E.transformationPresets.polymorph.icon,
+          label: CONFIG.DND5E.transformationPresets.polymorph.label,
+          callback: html => this.actor.transformInto(sourceActor, foundry.utils.mergeObject(
+            CONFIG.DND5E.transformationPresets.polymorph.options,
+            { transformTokens: rememberOptions(html).transformTokens }
+          ))
+        },
+        self: {
+          icon: CONFIG.DND5E.transformationPresets.polymorphSelf.icon,
+          label: CONFIG.DND5E.transformationPresets.polymorphSelf.label,
+          callback: html => this.actor.transformInto(sourceActor, foundry.utils.mergeObject(
+            CONFIG.DND5E.transformationPresets.polymorphSelf.options,
+            { transformTokens: rememberOptions(html).transformTokens }
+          ))
         },
         cancel: {
           icon: '<i class="fas fa-times"></i>',
@@ -832,8 +836,8 @@ export default class ActorSheet5e extends ActorSheet {
         }
       }
     }, {
-      classes: ["dialog", "dnd5e"],
-      width: 600,
+      classes: ["dialog", "dnd5e", "polymorph"],
+      width: 900,
       template: "systems/dnd5e/templates/apps/polymorph-prompt.hbs"
     }).render(true);
   }
@@ -991,7 +995,7 @@ export default class ActorSheet5e extends ActorSheet {
     event.preventDefault();
     const itemId = event.currentTarget.closest(".item").dataset.itemId;
     const item = this.actor.items.get(itemId);
-    if ( item ) return item.use();
+    if ( item ) return item.use({}, {event});
   }
 
   /* -------------------------------------------- */
@@ -1057,9 +1061,9 @@ export default class ActorSheet5e extends ActorSheet {
     }
 
     const itemData = {
-      name: game.i18n.format("DND5E.ItemNew", {type: game.i18n.localize(`DND5E.ItemType${type.capitalize()}`)}),
+      name: game.i18n.format("DND5E.ItemNew", {type: game.i18n.localize(`ITEM.Type${type.capitalize()}`)}),
       type: type,
-      system: foundry.utils.deepClone(header.dataset)
+      system: { ...header.dataset }
     };
     delete itemData.system.type;
     return this.actor.createEmbeddedDocuments("Item", [itemData]);
@@ -1112,7 +1116,7 @@ export default class ActorSheet5e extends ActorSheet {
       }
     }
 
-    return item.delete();
+    return item.deleteDialog();
   }
 
   /* -------------------------------------------- */

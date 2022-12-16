@@ -12,7 +12,10 @@
     "source": "PHB pg. 149",
     "quantity": 1,
     "weight": 2,
-    "price": 0.1,
+    "price": {
+      "value": 1,
+      "denomination": "sp"
+    },
     "attunement": 0,
     "equipped": false,
     "rarity": "common",
@@ -26,6 +29,7 @@
       "value": null,
       "units": ""
     },
+    "cover": null,
     "target": {
       "value": null,
       "width": null,
@@ -40,7 +44,8 @@
     "uses": {
       "value": null,
       "max": "",
-      "per": ""
+      "per": "",
+      "recovery": ""
     },
     "consume": {
       "type": "",
@@ -111,10 +116,10 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.0.0",
-    "coreVersion": "10.279",
+    "systemVersion": "2.0.3",
+    "coreVersion": "10.290",
     "createdTime": 1661787233863,
-    "modifiedTime": 1661787233863,
+    "modifiedTime": 1670010878072,
     "lastModifiedBy": "dnd5ebuilder0000"
   }
 }

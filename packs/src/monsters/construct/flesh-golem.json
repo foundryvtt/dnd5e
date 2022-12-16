@@ -2,7 +2,7 @@
   "_id": "Hm4o2FgPZsdbXjLq",
   "name": "Flesh Golem",
   "type": "npc",
-  "img": "icons/svg/mystery-man.svg",
+  "img": "systems/dnd5e/tokens/construct/FleshGolem.webp",
   "system": {
     "abilities": {
       "str": {
@@ -151,7 +151,7 @@
     },
     "details": {
       "biography": {
-        "value": "",
+        "value": "<p><em>Token artwork by Forgotten Adventures.</em></p>",
         "public": ""
       },
       "alignment": "Neutral",
@@ -599,7 +599,7 @@
       "color": null
     },
     "texture": {
-      "src": "icons/svg/mystery-man.svg",
+      "src": "systems/dnd5e/tokens/construct/FleshGolem.webp",
       "tint": null,
       "scaleX": 1,
       "scaleY": 1,
@@ -1216,7 +1216,10 @@
         "source": "",
         "quantity": 1,
         "weight": 0,
-        "price": 0,
+        "price": {
+          "value": 0,
+          "denomination": "gp"
+        },
         "attunement": 0,
         "equipped": true,
         "rarity": "",

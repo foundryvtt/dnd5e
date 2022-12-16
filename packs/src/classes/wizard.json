@@ -16,6 +16,15 @@
     "hitDiceUsed": 0,
     "advancement": [
       {
+        "_id": "6x1gwvf02qraedhe",
+        "type": "HitPoints",
+        "configuration": {},
+        "value": {},
+        "title": "",
+        "icon": "",
+        "classRestriction": ""
+      },
+      {
         "_id": "9ojqd2dejdsffabi",
         "type": "ItemGrant",
         "configuration": {
@@ -74,11 +83,28 @@
         "classRestriction": ""
       },
       {
-        "_id": "6x1gwvf02qraedhe",
-        "type": "HitPoints",
-        "configuration": {},
+        "_id": "87B6Xy0bCdddGTau",
+        "type": "ScaleValue",
+        "configuration": {
+          "identifier": "cantrips-known",
+          "type": "number",
+          "distance": {
+            "units": ""
+          },
+          "scale": {
+            "1": {
+              "value": 3
+            },
+            "4": {
+              "value": 4
+            },
+            "10": {
+              "value": 5
+            }
+          }
+        },
         "value": {},
-        "title": "",
+        "title": "Cantrips Known",
         "icon": "",
         "classRestriction": ""
       }
