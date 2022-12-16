@@ -33,12 +33,12 @@ export default class ItemSheet5e extends ItemSheet {
 
             // This just takes the parts and defines a new one with versatile damage
             return {
-              parts: (fromVersatile) ? (
+              parts: (fromVersatile) ? ([
                 [
                   damage.versatile,
                   damage.parts[0][1]
                 ]
-              ) : damage.parts
+              ]) : damage.parts
             };
           }
         };
