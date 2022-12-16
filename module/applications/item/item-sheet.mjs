@@ -104,7 +104,7 @@ export default class ItemSheet5e extends ItemSheet {
         Reflect.deleteProperty(this.object.system, "save");
         Reflect.deleteProperty(this.object.system, "scaling");
 
-        this.object.system.usageProfileIndex = 0;
+        this.object.system.usageProfileIndex = 0; // TODO: This is not editable on locked resources, can it be stored elsewhere?
         this.object.system.usageProfiles = usageProfiles;
       }
     }
@@ -478,16 +478,18 @@ export default class ItemSheet5e extends ItemSheet {
       formData.system.usageProfiles = newUsageProfiles;
     }
 
+    // TODO: Damage is majorly broken
+
     // Handle Damage array
-    const damage = formData.system?.usageProfiles?.at(0)?.damage;
+    const damage = formData.system?.usageProfiles?.at(this.object.system.usageProfileIndex)?.damage;
     if ( damage ) damage.parts = Object.values(damage?.parts || {}).map(d => [d[0] || "", d[1] || ""]);
 
     // Check max uses formula
-    const uses = formData.system?.usageProfiles?.at(0)?.uses;
+    const uses = formData.system?.usageProfiles?.at(this.object.system.usageProfileIndex)?.uses;
     if ( uses?.max ) {
       const maxRoll = new Roll(uses.max);
       if ( !maxRoll.isDeterministic ) {
-        uses.max = this.item._source.system?.usageProfiles?.at(0)?.uses.max;
+        uses.max = this.item._source.system?.usageProfiles?.at(this.object.system.usageProfileIndex)?.uses.max;
         this.form.querySelector("input[name='system.uses.max']").value = uses.max;
         return ui.notifications.error(game.i18n.format("DND5E.FormulaCannotContainDiceError", {
           name: game.i18n.localize("DND5E.LimitedUses")
