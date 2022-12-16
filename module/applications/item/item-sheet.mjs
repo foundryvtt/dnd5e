@@ -471,32 +471,38 @@ export default class ItemSheet5e extends ItemSheet {
   _getSubmitData(updateData={}) {
     const formData = foundry.utils.expandObject(super._getSubmitData(updateData));
 
-    // TODO: Having to merge my object input into the original item just feels wrong
-    // Having to apply the new changed usageProfile over the existing item data myself
-    const usageProfileUpdate = formData.system?.usageProfiles?.[this.item.system.usageProfileIndex];
-    if ( usageProfileUpdate ) {
-      const newUsageProfiles = foundry.utils.deepClone(this.item.system.usageProfiles);
-      newUsageProfiles[this.item.system.usageProfileIndex] = usageProfileUpdate;
-      formData.system.usageProfiles = newUsageProfiles;
-    }
+    // Handle usageProfiles distinctly as merging arrays is difficult for this
+    const changesToUsageProfiles = formData.system?.usageProfiles;
+    if ( changesToUsageProfiles ) {
 
-    // TODO: Damage is majorly broken
+      // For every usageProfile apply submission changes
+      formData.system.usageProfiles = foundry.utils.deepClone(this.item.system.usageProfiles)
+        .map((currentUsageProfile, index) => {
+          const changesToUsageProfile = changesToUsageProfiles[index];
 
-    // Handle Damage array
-    const damage = formData.system?.usageProfiles?.[this.item.system.usageProfileIndex]?.damage;
-    if ( damage ) damage.parts = Object.values(damage?.parts || {}).map(d => [d[0] || "", d[1] || ""]);
+          // IF the usageProfile hasn't been updated - skip
+          if (!changesToUsageProfile) { return currentUsageProfile; }
 
-    // Check max uses formula
-    const uses = formData.system?.usageProfiles?.[this.item.system.usageProfileIndex]?.uses;
-    if ( uses?.max ) {
-      const maxRoll = new Roll(uses.max);
-      if ( !maxRoll.isDeterministic ) {
-        uses.max = this.item._source.system?.usageProfiles?.[this.item.system.usageProfileIndex]?.uses.max;
-        this.form.querySelector("input[name='system.uses.max']").value = uses.max;
-        return ui.notifications.error(game.i18n.format("DND5E.FormulaCannotContainDiceError", {
-          name: game.i18n.localize("DND5E.LimitedUses")
-        }));
-      }
+          // Handle Damage array
+          const damage = changesToUsageProfile?.damage;
+          if ( damage ) damage.parts = Object.values(damage?.parts || {}).map(d => [d[0] || "", d[1] || ""]);
+
+          // Handle max uses formula
+          const uses = changesToUsageProfile?.uses;
+          if ( uses?.max ) {
+            const maxRoll = new Roll(uses.max);
+            if ( !maxRoll.isDeterministic ) {
+              uses.max = this.item._source.system?.usageProfiles?.[this.item.system.usageProfileIndex]?.uses.max;
+              this.form.querySelector("input[name='system.uses.max']").value = uses.max;
+              return ui.notifications.error(game.i18n.format("DND5E.FormulaCannotContainDiceError", {
+                name: game.i18n.localize("DND5E.LimitedUses")
+              }));
+            }
+          }
+
+          // Merge existing usageProfile into this update
+          return foundry.utils.mergeObject(currentUsageProfile, changesToUsageProfile);
+        });
     }
 
     // Check class identifier
@@ -510,16 +516,8 @@ export default class ItemSheet5e extends ItemSheet {
       }
     }
 
-    // TODO: This drops other data not included in the formData, like usageProfileIndex...
-    // TODO: Merge original object into updated version? Something is clearly incorrect in my approach
-
     // Return the flattened submission data
-    return foundry.utils.flattenObject(
-      foundry.utils.mergeObject(this.item, formData)
-    );
-
-    // // Return the flattened submission data
-    // return foundry.utils.flattenObject(formData);
+    return foundry.utils.flattenObject(formData);
   }
 
   /* -------------------------------------------- */
