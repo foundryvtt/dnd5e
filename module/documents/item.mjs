@@ -814,16 +814,16 @@ export default class Item5e extends Item {
     }, options);
 
     // Reference aspects of the item data necessary for usage
-    const resource = is.consume || {};        // Resource consumption
+    const resource = is?.usageProfiles[usageProfileIndex]?.consume || {};        // Resource consumption
     const isSpell = item.type === "spell";    // Does the item require a spell slot?
     const requireSpellSlot = isSpell && (is.level > 0) && CONFIG.DND5E.spellUpcastModes.includes(is.preparation.mode);
 
     // Define follow-up actions resulting from the item usage
     config = foundry.utils.mergeObject({
-      createMeasuredTemplate: item?.usageProfiles?.some((_, index) => item.hasAreaTarget(index)),
-      consumeQuantity: is.uses?.autoDestroy ?? false,
+      createMeasuredTemplate: item.hasAreaTarget(usageProfileIndex),
+      consumeQuantity: usageProfile?.uses?.autoDestroy ?? false,
       consumeRecharge: !!is.recharge?.value,
-      consumeResource: !!resource.target && (!item?.usageProfiles?.some((_, index) => item.hasAttack(index)) || (resource.type !== "ammo")),
+      consumeResource: !!resource.target && (!item.hasAttack(usageProfileIndex) || (resource.type !== "ammo")),
       consumeSpellLevel: requireSpellSlot ? is.preparation.mode === "pact" ? "pact" : is.level : null,
       consumeSpellSlot: requireSpellSlot,
       consumeUsage: !!is.uses?.per
