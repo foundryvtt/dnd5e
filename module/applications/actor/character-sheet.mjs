@@ -47,6 +47,8 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
   /** @override */
   _prepareItems(context) {
 
+    console.log("CHARACTER SHEET _prepareItems", context);
+
     // Categorize items as inventory, spellbook, features, and classes
     const inventory = {
       weapon: { label: "DND5E.ItemTypeWeaponPl", items: [], dataset: {type: "weapon"} },
@@ -56,6 +58,8 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
       backpack: { label: "DND5E.ItemTypeContainerPl", items: [], dataset: {type: "backpack"} },
       loot: { label: "DND5E.ItemTypeLootPl", items: [], dataset: {type: "loot"} }
     };
+
+    // TODO: usageProfileIndex work in-progress - This item.system stuff is hella broken
 
     // Partition items by category
     let {items, spells, feats, backgrounds, classes, subclasses} = context.items.reduce((obj, item) => {

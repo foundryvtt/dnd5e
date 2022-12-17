@@ -64,7 +64,7 @@
                     {{> "dnd5e.item-activation"}}
 
                     {{!-- Recharge Requirement --}}
-                    {{#if system.usageProfiles.0.activation.type}}
+                    {{#if (getProperty (lookup system.usageProfiles options.selectedUsageProfile) "activation.type")}}
                     <div class="form-group recharge">
                         <label>{{ localize "DND5E.FeatureActionRecharge" }}</label>
                         <div class="form-fields">

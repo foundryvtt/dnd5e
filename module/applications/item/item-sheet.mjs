@@ -20,36 +20,60 @@ export default class ItemSheet5e extends ItemSheet {
     }
 
     // TEMP: This should be built into the packs etc
-    // Transform Weapon/Spell usage data structure
-    else if ( ["weapon", "spell", "feat", "equipment", "consumable"].includes(this.object.type) ) {
+    // IF usageProfile property is empty - Try to generate one?
+    else if (this.object.system.usageProfiles.length <= 0) {
 
-      // IF usageProfile property is empty - Try to generate one?
-      if (this.object.system.usageProfiles.length <= 0) {
+      const buildDamageObject = (damage, fromVersatile = false) => {
 
-        const buildDamageObject = (damage, fromVersatile = false) => {
+        if (damage && damage?.parts) {
 
-          if (damage && damage?.parts) {
+          // This just takes the parts and defines a new one with versatile damage
+          return {
+            parts: (fromVersatile) ? ([
+              [
+                damage.versatile,
+                damage.parts[0][1]
+              ]
+            ]) : damage.parts
+          };
+        }
+      };
 
-            // This just takes the parts and defines a new one with versatile damage
-            return {
-              parts: (fromVersatile) ? ([
-                [
-                  damage.versatile,
-                  damage.parts[0][1]
-                ]
-              ]) : damage.parts
-            };
+      // Items seemingly aren't localised so profileNames are fine in EN?
+
+      const usageProfiles = [
+        foundry.utils.mergeObject(
+          foundry.utils.deepClone(game.system.template.Item.templates.usageProfile),
+          {
+            _id: foundry.utils.randomID(),
+            profileName: "Default",
+            activation: this.object.system.activation,
+            duration: this.object.system.duration,
+            target: this.object.system.target,
+            range: this.object.system.range,
+            uses: this.object.system.uses,
+            consume: this.object.system.consume,
+            ability: this.object.system.ability,
+            actionType: this.object.system.actionType,
+            attackBonus: this.object.system.attackBonus,
+            chatFlavor: this.object.system.chatFlavor,
+            critical: this.object.system.critical,
+            damage: buildDamageObject(this.object.system.damage),
+            formula: this.object.system.formula,
+            save: this.object.system.save,
+            scaling: this.object.system.scaling
           }
-        };
+        )
+      ];
 
-        // Items seemingly aren't localised so profileNames are fine in EN?
+      if (this.object.system.properties?.ver === true) {
 
-        const usageProfiles = [
+        usageProfiles.push(
           foundry.utils.mergeObject(
             foundry.utils.deepClone(game.system.template.Item.templates.usageProfile),
             {
               _id: foundry.utils.randomID(),
-              profileName: "Default",
+              profileName: "Versatile",
               activation: this.object.system.activation,
               duration: this.object.system.duration,
               target: this.object.system.target,
@@ -61,60 +85,32 @@ export default class ItemSheet5e extends ItemSheet {
               attackBonus: this.object.system.attackBonus,
               chatFlavor: this.object.system.chatFlavor,
               critical: this.object.system.critical,
-              damage: buildDamageObject(this.object.system.damage),
+              damage: buildDamageObject(this.object.system.damage, true),
               formula: this.object.system.formula,
               save: this.object.system.save,
               scaling: this.object.system.scaling
             }
           )
-        ];
-
-        if (this.object.system.properties?.ver === true) {
-
-          usageProfiles.push(
-            foundry.utils.mergeObject(
-              foundry.utils.deepClone(game.system.template.Item.templates.usageProfile),
-              {
-                _id: foundry.utils.randomID(),
-                profileName: "Versatile",
-                activation: this.object.system.activation,
-                duration: this.object.system.duration,
-                target: this.object.system.target,
-                range: this.object.system.range,
-                uses: this.object.system.uses,
-                consume: this.object.system.consume,
-                ability: this.object.system.ability,
-                actionType: this.object.system.actionType,
-                attackBonus: this.object.system.attackBonus,
-                chatFlavor: this.object.system.chatFlavor,
-                critical: this.object.system.critical,
-                damage: buildDamageObject(this.object.system.damage, true),
-                formula: this.object.system.formula,
-                save: this.object.system.save,
-                scaling: this.object.system.scaling
-              }
-            )
-          );
-        }
-
-        Reflect.deleteProperty(this.object.system, "activation");
-        Reflect.deleteProperty(this.object.system, "duration");
-        Reflect.deleteProperty(this.object.system, "target");
-        Reflect.deleteProperty(this.object.system, "range");
-        Reflect.deleteProperty(this.object.system, "uses");
-        Reflect.deleteProperty(this.object.system, "consume");
-        Reflect.deleteProperty(this.object.system, "ability");
-        Reflect.deleteProperty(this.object.system, "actionType");
-        Reflect.deleteProperty(this.object.system, "attackBonus");
-        Reflect.deleteProperty(this.object.system, "chatFlavor");
-        Reflect.deleteProperty(this.object.system, "critical");
-        Reflect.deleteProperty(this.object.system, "damage");
-        Reflect.deleteProperty(this.object.system, "formula");
-        Reflect.deleteProperty(this.object.system, "save");
-        Reflect.deleteProperty(this.object.system, "scaling");
-
-        this.object.system.usageProfiles = usageProfiles;
+        );
       }
+
+      Reflect.deleteProperty(this.object.system, "activation");
+      Reflect.deleteProperty(this.object.system, "duration");
+      Reflect.deleteProperty(this.object.system, "target");
+      Reflect.deleteProperty(this.object.system, "range");
+      Reflect.deleteProperty(this.object.system, "uses");
+      Reflect.deleteProperty(this.object.system, "consume");
+      Reflect.deleteProperty(this.object.system, "ability");
+      Reflect.deleteProperty(this.object.system, "actionType");
+      Reflect.deleteProperty(this.object.system, "attackBonus");
+      Reflect.deleteProperty(this.object.system, "chatFlavor");
+      Reflect.deleteProperty(this.object.system, "critical");
+      Reflect.deleteProperty(this.object.system, "damage");
+      Reflect.deleteProperty(this.object.system, "formula");
+      Reflect.deleteProperty(this.object.system, "save");
+      Reflect.deleteProperty(this.object.system, "scaling");
+
+      this.object.system.usageProfiles = usageProfiles;
     }
   }
 
@@ -130,7 +126,7 @@ export default class ItemSheet5e extends ItemSheet {
       scrollY: [".tab.details"],
       tabs: [{navSelector: ".tabs", contentSelector: ".sheet-body", initial: "description"}],
       dragDrop: [{dragSelector: "[data-effect-id]", dropSelector: ".effects-list"}],
-      selectedUsageProfile: 0 // TODO: Can this be stored on options and used throughout?
+      selectedUsageProfile: 0 // TODO: usageProfileIndex work in-progress - Can this be stored on options and used throughout?
     });
   }
 
@@ -160,6 +156,9 @@ export default class ItemSheet5e extends ItemSheet {
     const source = item.toObject();
     const isMountable = this._isItemMountable(item);
 
+    // TODO: usageProfileIndex work in-progress
+    const usageProfileIndex = 0;
+
     foundry.utils.mergeObject(context, {
       source: source.system,
       system: item.system,
@@ -182,13 +181,13 @@ export default class ItemSheet5e extends ItemSheet {
       }),
 
       // Action Details
-      hasAttackRoll: item.hasAttack,
-      isHealing: item.system?.usageProfiles?.[0]?.actionType === "heal",
-      isFlatDC: item.system?.usageProfiles?.[0]?.save?.scaling === "flat",
-      isLine: ["line", "wall"].includes(item.system?.usageProfiles?.[0]?.target?.type),
+      hasAttackRoll: item.hasAttack(usageProfileIndex),
+      isHealing: item.isHealing(usageProfileIndex),
+      isFlatDC: item.isFlatDC(usageProfileIndex),
+      isLine: item.hasLineTarget(usageProfileIndex),
 
       // Vehicles
-      isCrewed: item.system?.usageProfiles?.[0]?.activation?.type === "crew",
+      isCrewed: item.system?.usageProfiles?.[usageProfileIndex]?.activation?.type === "crew",
       isMountable,
 
       // Armor Class
@@ -204,7 +203,7 @@ export default class ItemSheet5e extends ItemSheet {
     });
 
     // Potential consumption targets
-    context.abilityConsumptionTargets = this._getItemConsumptionTargets(item);
+    context.abilityConsumptionTargets = this._getItemConsumptionTargets(usageProfileIndex);
 
     /** @deprecated */
     Object.defineProperty(context, "data", {
@@ -303,9 +302,11 @@ export default class ItemSheet5e extends ItemSheet {
    * Get the valid item consumption targets which exist on the actor
    * @returns {Object<string>}   An object of potential consumption targets
    * @private
+   * @param {number} usageProfileIndex Which Usage-Profile is being used to roll
    */
-  _getItemConsumptionTargets() {
-    const consume = this.item.system?.usageProfiles?.[0]?.consume || {};
+  _getItemConsumptionTargets(usageProfileIndex) {
+    const usageProfile = this.item.system?.usageProfiles?.[usageProfileIndex];
+    const consume = usageProfile?.consume || {};
     if ( !consume.type ) return [];
     const actor = this.item.actor;
     if ( !actor ) return {};

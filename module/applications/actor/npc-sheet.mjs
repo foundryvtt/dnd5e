@@ -44,6 +44,8 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
   /** @override */
   _prepareItems(context) {
 
+    console.log("NPC SHEET _prepareItems", context);
+
     // Categorize Items as Features and Spells
     const features = {
       weapons: { label: game.i18n.localize("DND5E.AttackPl"), items: [], hasActions: true,
@@ -53,6 +55,8 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
       passive: { label: game.i18n.localize("DND5E.Features"), items: [], dataset: {type: "feat"} },
       equipment: { label: game.i18n.localize("DND5E.Inventory"), items: [], dataset: {type: "loot"}}
     };
+
+    // TODO: usageProfileIndex work in-progress - This item.system stuff is hella broken
 
     // Start by classifying items into groups for rendering
     let [spells, other] = context.items.reduce((arr, item) => {

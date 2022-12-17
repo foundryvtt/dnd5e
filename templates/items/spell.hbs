@@ -137,14 +137,14 @@
                     <div class="form-group">
                         <label>{{ localize "DND5E.LevelScaling" }}</label>
                         <div class="form-fields">
-                            <select name="system.usageProfiles.0.scaling.mode">
-                                {{#select system.usageProfiles.0.scaling.mode}}
+                            <select name="system.usageProfiles.{{options.selectedUsageProfile}}.scaling.mode">
+                                {{#select (getProperty (lookup system.usageProfiles options.selectedUsageProfile) "scaling.mode")}}
                                 {{#each ../config.spellScalingModes as |name key|}}
                                 <option value="{{key}}">{{name}}</option>
                                 {{/each}}
                                 {{/select}}
                             </select>
-                            <input type="text" name="system.usageProfiles.0.scaling.formula" value="{{system.usageProfiles.0.scaling.formula}}" placeholder="{{ localize 'DND5E.ScalingFormula' }}"/>
+                            <input type="text" name="system.usageProfiles.{{options.selectedUsageProfile}}.scaling.formula" value="{{ getProperty (lookup system.usageProfiles options.selectedUsageProfile) "scaling.formula" }}" placeholder="{{ localize 'DND5E.ScalingFormula' }}"/>
                         </div>
                     </div>
 
