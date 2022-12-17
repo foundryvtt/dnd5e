@@ -125,7 +125,7 @@
     <div class="form-fields">
         <input type="number" step="any" name="system.usageProfiles.{{options.selectedUsageProfile}}.uses.value" value="{{ getProperty (lookup system.usageProfiles options.selectedUsageProfile) "uses.value" }}">
         <span class="sep">{{ localize "DND5E.of" }}</span>
-        <input type="text" name="system.usageProfiles.{{options.selectedUsageProfile}}.uses.max" value="{{source.uses.max}}">
+        <input type="text" name="system.usageProfiles.{{options.selectedUsageProfile}}.uses.max" value="{{ getProperty (lookup system.usageProfiles options.selectedUsageProfile) "uses.max" }}">
         <span class="sep">{{ localize "DND5E.per" }}</span>
         <select name="system.usageProfiles.{{options.selectedUsageProfile}}.uses.per">
             {{#select (getProperty (lookup system.usageProfiles options.selectedUsageProfile) "uses.per")}}

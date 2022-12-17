@@ -156,6 +156,8 @@ export default class ItemSheet5e extends ItemSheet {
     const source = item.toObject();
     const isMountable = this._isItemMountable(item);
 
+    console.log("ITEMSHEET getData", context);
+
     // TODO: usageProfileIndex work in-progress
     const usageProfileIndex = 0;
 
@@ -500,9 +502,9 @@ export default class ItemSheet5e extends ItemSheet {
           if ( uses?.max ) {
             const maxRoll = new Roll(uses.max);
             if ( !maxRoll.isDeterministic ) {
-              uses.max = this.item._source.system?.usageProfiles?.[this.options.selectedUsageProfile]?.uses.max;
-              this.form.querySelector("input[name='system.uses.max']").value = uses.max;
-              return ui.notifications.error(game.i18n.format("DND5E.FormulaCannotContainDiceError", {
+              uses.max = currentUsageProfile.uses.max;
+              this.form.querySelector(`input[name='system.usageProfiles.${this.options.selectedUsageProfile}.uses.max']`).value = uses.max;
+              ui.notifications.error(game.i18n.format("DND5E.FormulaCannotContainDiceError", {
                 name: game.i18n.localize("DND5E.LimitedUses")
               }));
             }

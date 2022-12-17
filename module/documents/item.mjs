@@ -1117,10 +1117,6 @@ export default class Item5e extends Item {
    */
   async displayCard(options={}) {
 
-    // TODO: usageProfileIndex work in-progress - Consumables and Spells reach roll first, how do we deal with that?
-
-    console.log("displayCard options", options);
-
     // Render the chat card template
     const token = this.actor.token;
     const templateData = {
