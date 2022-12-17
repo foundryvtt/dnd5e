@@ -43,7 +43,7 @@ export default class ItemSheet5e extends ItemSheet {
           }
         };
 
-        // TODO: ProfileNames should be localised by default? How do Item Names do this?
+        // Items seemingly aren't localised so profileNames are fine in EN?
 
         const usageProfiles = [
           {
@@ -67,7 +67,7 @@ export default class ItemSheet5e extends ItemSheet {
           }
         ];
 
-        if (this.object.system.damage.versatile) {
+        if (this.object.system.properties?.ver === true) {
 
           usageProfiles.push({
             _id: foundry.utils.randomID(),
