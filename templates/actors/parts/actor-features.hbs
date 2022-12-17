@@ -52,11 +52,11 @@
                 {{else if item.system.recharge.value}}
                     {{localize "DND5E.Charged"}}
                 {{else if item.hasUses}}
-                    <input type="text" value="{{item.system.uses.value}}" placeholder="0"/>/ {{item.system.uses.max}}
+                    <input type="text" value="{{item.system.usageProfiles.0.uses.value}}" placeholder="0"/>/ {{item.system.usageProfiles.0.uses.max}}
                 {{/if}}
             </div>
             <div class="item-detail item-action">
-                {{#if item.system.activation.type}}
+                {{#if item.system.usageProfiles.0.activation.type}}
                     {{item.labels.activation}}
                 {{/if}}
             </div>

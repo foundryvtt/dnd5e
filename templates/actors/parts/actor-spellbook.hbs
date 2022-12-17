@@ -71,8 +71,8 @@
             <div class="item-name flexrow rollable">
                 <div class="item-image" tabindex="0" role="button" aria-label="{{item.name}}" style="background-image: url('{{item.img}}')"></div>
                 <h4>{{item.name}}</h4>
-                {{#if item.system.uses.per }}
-                <div class="item-detail spell-uses">Uses {{item.system.uses.value}} / {{item.system.uses.max}}</div>
+                {{#if item.system.usageProfiles.0.uses.per }}
+                <div class="item-detail spell-uses">Uses {{item.system.usageProfiles.0.uses.value}} / {{item.system.usageProfiles.0.uses.max}}</div>
                 {{/if}}
                 <div class="spell-comps">
                     {{#each labels.components.all}}

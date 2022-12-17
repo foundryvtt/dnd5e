@@ -20,60 +20,36 @@ export default class ItemSheet5e extends ItemSheet {
     }
 
     // TEMP: This should be built into the packs etc
-    // IF usageProfile property is empty - Try to generate one?
-    else if (this.object.system.usageProfiles.length <= 0) {
+    // Transform Weapon/Spell usage data structure
+    else if ( ["weapon", "spell", "feat", "equipment", "consumable"].includes(this.object.type) ) {
 
-      const buildDamageObject = (damage, fromVersatile = false) => {
+      // IF usageProfile property is empty - Try to generate one?
+      if (this.object.system.usageProfiles.length <= 0) {
 
-        if (damage && damage?.parts) {
+        const buildDamageObject = (damage, fromVersatile = false) => {
 
-          // This just takes the parts and defines a new one with versatile damage
-          return {
-            parts: (fromVersatile) ? ([
-              [
-                damage.versatile,
-                damage.parts[0][1]
-              ]
-            ]) : damage.parts
-          };
-        }
-      };
+          if (damage && damage?.parts) {
 
-      // Items seemingly aren't localised so profileNames are fine in EN?
-
-      const usageProfiles = [
-        foundry.utils.mergeObject(
-          foundry.utils.deepClone(game.system.template.Item.templates.usageProfile),
-          {
-            _id: foundry.utils.randomID(),
-            profileName: "Default",
-            activation: this.object.system.activation,
-            duration: this.object.system.duration,
-            target: this.object.system.target,
-            range: this.object.system.range,
-            uses: this.object.system.uses,
-            consume: this.object.system.consume,
-            ability: this.object.system.ability,
-            actionType: this.object.system.actionType,
-            attackBonus: this.object.system.attackBonus,
-            chatFlavor: this.object.system.chatFlavor,
-            critical: this.object.system.critical,
-            damage: buildDamageObject(this.object.system.damage),
-            formula: this.object.system.formula,
-            save: this.object.system.save,
-            scaling: this.object.system.scaling
+            // This just takes the parts and defines a new one with versatile damage
+            return {
+              parts: (fromVersatile) ? ([
+                [
+                  damage.versatile,
+                  damage.parts[0][1]
+                ]
+              ]) : damage.parts
+            };
           }
-        )
-      ];
+        };
 
-      if (this.object.system.properties?.ver === true) {
+        // Items seemingly aren't localised so profileNames are fine in EN?
 
-        usageProfiles.push(
+        const usageProfiles = [
           foundry.utils.mergeObject(
             foundry.utils.deepClone(game.system.template.Item.templates.usageProfile),
             {
               _id: foundry.utils.randomID(),
-              profileName: "Versatile",
+              profileName: "Default",
               activation: this.object.system.activation,
               duration: this.object.system.duration,
               target: this.object.system.target,
@@ -85,32 +61,60 @@ export default class ItemSheet5e extends ItemSheet {
               attackBonus: this.object.system.attackBonus,
               chatFlavor: this.object.system.chatFlavor,
               critical: this.object.system.critical,
-              damage: buildDamageObject(this.object.system.damage, true),
+              damage: buildDamageObject(this.object.system.damage),
               formula: this.object.system.formula,
               save: this.object.system.save,
               scaling: this.object.system.scaling
             }
           )
-        );
+        ];
+
+        if (this.object.system.properties?.ver === true) {
+
+          usageProfiles.push(
+            foundry.utils.mergeObject(
+              foundry.utils.deepClone(game.system.template.Item.templates.usageProfile),
+              {
+                _id: foundry.utils.randomID(),
+                profileName: "Versatile",
+                activation: this.object.system.activation,
+                duration: this.object.system.duration,
+                target: this.object.system.target,
+                range: this.object.system.range,
+                uses: this.object.system.uses,
+                consume: this.object.system.consume,
+                ability: this.object.system.ability,
+                actionType: this.object.system.actionType,
+                attackBonus: this.object.system.attackBonus,
+                chatFlavor: this.object.system.chatFlavor,
+                critical: this.object.system.critical,
+                damage: buildDamageObject(this.object.system.damage, true),
+                formula: this.object.system.formula,
+                save: this.object.system.save,
+                scaling: this.object.system.scaling
+              }
+            )
+          );
+        }
+
+        Reflect.deleteProperty(this.object.system, "activation");
+        Reflect.deleteProperty(this.object.system, "duration");
+        Reflect.deleteProperty(this.object.system, "target");
+        Reflect.deleteProperty(this.object.system, "range");
+        Reflect.deleteProperty(this.object.system, "uses");
+        Reflect.deleteProperty(this.object.system, "consume");
+        Reflect.deleteProperty(this.object.system, "ability");
+        Reflect.deleteProperty(this.object.system, "actionType");
+        Reflect.deleteProperty(this.object.system, "attackBonus");
+        Reflect.deleteProperty(this.object.system, "chatFlavor");
+        Reflect.deleteProperty(this.object.system, "critical");
+        Reflect.deleteProperty(this.object.system, "damage");
+        Reflect.deleteProperty(this.object.system, "formula");
+        Reflect.deleteProperty(this.object.system, "save");
+        Reflect.deleteProperty(this.object.system, "scaling");
+
+        this.object.system.usageProfiles = usageProfiles;
       }
-
-      Reflect.deleteProperty(this.object.system, "activation");
-      Reflect.deleteProperty(this.object.system, "duration");
-      Reflect.deleteProperty(this.object.system, "target");
-      Reflect.deleteProperty(this.object.system, "range");
-      Reflect.deleteProperty(this.object.system, "uses");
-      Reflect.deleteProperty(this.object.system, "consume");
-      Reflect.deleteProperty(this.object.system, "ability");
-      Reflect.deleteProperty(this.object.system, "actionType");
-      Reflect.deleteProperty(this.object.system, "attackBonus");
-      Reflect.deleteProperty(this.object.system, "chatFlavor");
-      Reflect.deleteProperty(this.object.system, "critical");
-      Reflect.deleteProperty(this.object.system, "damage");
-      Reflect.deleteProperty(this.object.system, "formula");
-      Reflect.deleteProperty(this.object.system, "save");
-      Reflect.deleteProperty(this.object.system, "scaling");
-
-      this.object.system.usageProfiles = usageProfiles;
     }
   }
 
@@ -155,8 +159,6 @@ export default class ItemSheet5e extends ItemSheet {
     const item = context.item;
     const source = item.toObject();
     const isMountable = this._isItemMountable(item);
-
-    console.log("ITEMSHEET getData", context);
 
     // TODO: usageProfileIndex work in-progress
     const usageProfileIndex = 0;

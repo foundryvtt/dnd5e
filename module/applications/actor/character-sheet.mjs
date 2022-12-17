@@ -47,8 +47,6 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
   /** @override */
   _prepareItems(context) {
 
-    console.log("CHARACTER SHEET _prepareItems", context);
-
     // Categorize items as inventory, spellbook, features, and classes
     const inventory = {
       weapon: { label: "DND5E.ItemTypeWeaponPl", items: [], dataset: {type: "weapon"} },
@@ -63,7 +61,8 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
 
     // Partition items by category
     let {items, spells, feats, backgrounds, classes, subclasses} = context.items.reduce((obj, item) => {
-      const {quantity, uses, recharge, target} = item.system;
+      const {quantity, recharge} = item.system;
+      const {uses, target} = item.system?.usageProfiles?.[0] || {};
 
       // Item details
       item.img = item.img || CONST.DEFAULT_TOKEN;
@@ -158,7 +157,7 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
         hasActions: false, dataset: {type: "feat"} }
     };
     for ( const feat of feats ) {
-      if ( feat.system.activation?.type ) features.active.items.push(feat);
+      if ( feat.system?.usageProfiles?.[0]?.activation?.type ) features.active.items.push(feat);
       else features.passive.items.push(feat);
     }
 

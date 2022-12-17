@@ -86,7 +86,7 @@ export async function d20Roll({
       chooseModifier,
       defaultRollMode,
       defaultAction: advantageMode,
-      defaultAbility: data?.item?.ability || data?.defaultAbility,
+      defaultAbility: data?.itemUsageProfile?.ability || data?.defaultAbility,
       template
     }, dialogOptions);
     if ( configured === null ) return null;

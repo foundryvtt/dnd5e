@@ -15,7 +15,7 @@
         {{#if editable}}
         <a
             class="usage-profile-control usage-profile-clone"
-            title="{{ localize "DND5E.ItemUsageProfileDelete" }}"
+            title="{{ localize "DND5E.ItemUsageProfileDuplicate" }}"
             data-usage-profile-clone-id={{ getProperty (lookup system.usageProfiles options.selectedUsageProfile) "_id" }}
         ><i class="fas fa-clone"></i></a>
         {{/if}}
