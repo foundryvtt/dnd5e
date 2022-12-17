@@ -1446,12 +1446,11 @@ export default class Item5e extends Item {
    * @param {MouseEvent} [config.event]    An event which triggered this roll, if any
    * @param {boolean} [config.critical]    Should damage be rolled as a critical hit?
    * @param {number} [config.spellLevel]   If the item is a spell, override the level for damage scaling
-   * @param {boolean} [config.versatile]   If the item is a weapon, roll damage using the versatile formula
    * @param {DamageRollConfiguration} [config.options]  Additional options passed to the damageRoll function
    * @returns {Promise<DamageRoll>}        A Promise which resolves to the created Roll instance, or null if the action
    *                                       cannot be performed.
    */
-  async rollDamage({critical=false, event=null, spellLevel=null, versatile=false, options={}}={}) {
+  async rollDamage({critical=false, event=null, spellLevel=null, options={}}={}) {
     if ( !this.hasDamage ) throw new Error("You may not make a Damage Roll with this Item.");
     const messageData = {
       "flags.dnd5e.roll": {type: "damage", itemId: this.id},
@@ -1462,7 +1461,6 @@ export default class Item5e extends Item {
     console.log("critical", critical);
     console.log("event", event);
     console.log("spellLevel", spellLevel);
-    console.log("versatile", versatile);
     console.log("options", options);
     console.log("this", this);
 
@@ -1497,12 +1495,6 @@ export default class Item5e extends Item {
       },
       messageData
     };
-
-    // Adjust damage from versatile usage
-    if ( versatile && dmg.versatile ) {
-      parts[0] = dmg.versatile;
-      messageData["flags.dnd5e.roll"].versatile = true;
-    }
 
     // Scale damage from up-casting spells
     const scaling = usageProfile.scaling;
@@ -1915,12 +1907,10 @@ export default class Item5e extends Item {
       case "attack":
         await item.rollAttack({event}); break;
       case "damage":
-      case "versatile":
         await item.rollDamage({
           critical: event.altKey,
           event: event,
-          spellLevel: spellLevel,
-          versatile: action === "versatile"
+          spellLevel: spellLevel
         });
         break;
       case "formula":

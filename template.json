@@ -534,7 +534,20 @@
         "rarity": "",
         "identified": true
       },
-      "activatedEffect": {
+      "mountable": {
+        "armor": {
+          "value": 10
+        },
+        "hp": {
+          "value": 0,
+          "max": 0,
+          "dt": null,
+          "conditions": ""
+        }
+      },
+      "usageProfile": {
+        "_id": "",
+        "profileName": "",
         "activation": {
           "type": "",
           "cost": 0,
@@ -565,9 +578,7 @@
           "type": "",
           "target": null,
           "amount": null
-        }
-      },
-      "action": {
+        },
         "ability": null,
         "actionType": null,
         "attackBonus": 0,
@@ -577,25 +588,17 @@
           "damage": ""
         },
         "damage": {
-          "parts": [],
-          "versatile": ""
+          "parts": []
         },
         "formula": "",
         "save": {
           "ability": "",
           "dc": null,
           "scaling": "spell"
-        }
-      },
-      "mountable": {
-        "armor": {
-          "value": 10
         },
-        "hp": {
-          "value": 0,
-          "max": 0,
-          "dt": null,
-          "conditions": ""
+        "scaling": {
+          "mode": "none",
+          "formula": null
         }
       }
     },
@@ -638,14 +641,15 @@
       }
     },
     "consumable": {
-      "templates": ["itemDescription", "physicalItem", "activatedEffect", "action"],
+      "templates": ["itemDescription", "physicalItem"],
       "consumableType": "potion",
       "uses": {
         "autoDestroy": false
-      }
+      },
+      "usageProfiles": []
     },
     "equipment": {
-      "templates": ["itemDescription", "physicalItem", "activatedEffect", "action", "mountable"],
+      "templates": ["itemDescription", "physicalItem", "mountable"],
       "armor": {
         "type": "light",
         "value": null,
@@ -658,15 +662,17 @@
       },
       "strength": 0,
       "stealth": false,
-      "proficient": true
+      "proficient": true,
+      "usageProfiles": []
     },
     "feat": {
-      "templates": ["itemDescription", "activatedEffect", "action"],
+      "templates": ["itemDescription"],
       "requirements": "",
       "recharge": {
         "value": null,
         "charged": false
-      }
+      },
+      "usageProfiles": []
     },
     "loot": {
       "templates": ["itemDescription", "physicalItem"]
@@ -681,7 +687,7 @@
       "bonus": ""
     },
     "spell": {
-      "templates": ["itemDescription", "activatedEffect", "action"],
+      "templates": ["itemDescription"],
       "level": 1,
       "school": "",
       "components": {
@@ -702,10 +708,7 @@
         "mode": "prepared",
         "prepared": false
       },
-      "scaling": {
-        "mode": "none",
-        "formula": null
-      }
+      "usageProfiles": []
     },
     "subclass": {
       "templates": ["itemDescription"],
@@ -718,11 +721,12 @@
       }
     },
     "weapon": {
-      "templates": ["itemDescription", "physicalItem" ,"activatedEffect", "action", "mountable"],
+      "templates": ["itemDescription", "physicalItem", "mountable"],
       "weaponType": "simpleM",
       "baseItem": "",
       "properties": {},
-      "proficient": true
+      "proficient": true,
+      "usageProfiles": []
     }
   }
 }

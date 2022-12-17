@@ -24,8 +24,8 @@ export default class ItemSheet5e extends ItemSheet {
     // Transform Weapon/Spell usage data structure
     else if ( ["weapon", "spell", "feat", "equipment", "consumable"].includes(this.object.type) ) {
 
-      // IF no usageProfile property is present, generate one
-      if (!Reflect.has(this.object.system, "usageProfiles")) {
+      // IF usageProfile property is empty - Try to generate one?
+      if (this.object.system.usageProfiles.length <= 0) {
 
         const buildDamageObject = (damage, fromVersatile = false) => {
 
@@ -46,48 +46,56 @@ export default class ItemSheet5e extends ItemSheet {
         // Items seemingly aren't localised so profileNames are fine in EN?
 
         const usageProfiles = [
-          {
-            _id: foundry.utils.randomID(),
-            profileName: "Default",
-            activation: this.object.system.activation,
-            duration: this.object.system.duration,
-            target: this.object.system.target,
-            range: this.object.system.range,
-            uses: this.object.system.uses,
-            consume: this.object.system.consume,
-            ability: this.object.system.ability,
-            actionType: this.object.system.actionType,
-            attackBonus: this.object.system.attackBonus,
-            chatFlavor: this.object.system.chatFlavor,
-            critical: this.object.system.critical,
-            damage: buildDamageObject(this.object.system.damage),
-            formula: this.object.system.formula,
-            save: this.object.system.save,
-            scaling: this.object.system.scaling
-          }
+          foundry.utils.mergeObject(
+            foundry.utils.deepClone(game.system.template.Item.templates.usageProfile),
+            {
+              _id: foundry.utils.randomID(),
+              profileName: "Default",
+              activation: this.object.system.activation,
+              duration: this.object.system.duration,
+              target: this.object.system.target,
+              range: this.object.system.range,
+              uses: this.object.system.uses,
+              consume: this.object.system.consume,
+              ability: this.object.system.ability,
+              actionType: this.object.system.actionType,
+              attackBonus: this.object.system.attackBonus,
+              chatFlavor: this.object.system.chatFlavor,
+              critical: this.object.system.critical,
+              damage: buildDamageObject(this.object.system.damage),
+              formula: this.object.system.formula,
+              save: this.object.system.save,
+              scaling: this.object.system.scaling
+            }
+          )
         ];
 
         if (this.object.system.properties?.ver === true) {
 
-          usageProfiles.push({
-            _id: foundry.utils.randomID(),
-            profileName: "Versatile",
-            activation: this.object.system.activation,
-            duration: this.object.system.duration,
-            target: this.object.system.target,
-            range: this.object.system.range,
-            uses: this.object.system.uses,
-            consume: this.object.system.consume,
-            ability: this.object.system.ability,
-            actionType: this.object.system.actionType,
-            attackBonus: this.object.system.attackBonus,
-            chatFlavor: this.object.system.chatFlavor,
-            critical: this.object.system.critical,
-            damage: buildDamageObject(this.object.system.damage, true),
-            formula: this.object.system.formula,
-            save: this.object.system.save,
-            scaling: this.object.system.scaling
-          });
+          usageProfiles.push(
+            foundry.utils.mergeObject(
+              foundry.utils.deepClone(game.system.template.Item.templates.usageProfile),
+              {
+                _id: foundry.utils.randomID(),
+                profileName: "Versatile",
+                activation: this.object.system.activation,
+                duration: this.object.system.duration,
+                target: this.object.system.target,
+                range: this.object.system.range,
+                uses: this.object.system.uses,
+                consume: this.object.system.consume,
+                ability: this.object.system.ability,
+                actionType: this.object.system.actionType,
+                attackBonus: this.object.system.attackBonus,
+                chatFlavor: this.object.system.chatFlavor,
+                critical: this.object.system.critical,
+                damage: buildDamageObject(this.object.system.damage, true),
+                formula: this.object.system.formula,
+                save: this.object.system.save,
+                scaling: this.object.system.scaling
+              }
+            )
+          );
         }
 
         Reflect.deleteProperty(this.object.system, "activation");
