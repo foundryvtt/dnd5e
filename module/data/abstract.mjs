@@ -56,27 +56,28 @@ export default class SystemDataModel extends foundry.abstract.DataModel {
    * @returns {DataSchema}  Fully merged schema.
    */
   static mergeSchema(a, b) {
-    for ( const key of Object.keys(b) ) {
-      if ( !(key in a) || (a[key].constructor !== b[key].constructor) ) {
-        a[key] = b[key];
-        continue;
-      }
-      const mergedOptions = foundry.utils.mergeObject(a[key].options, b[key].options);
-      switch (b[key].constructor) {
-        case foundry.data.fields.SchemaField:
-          const fields = this.mergeSchema(a[key].fields, b[key].fields);
-          Object.values(fields).forEach(f => f.parent = undefined);
-          a[key] = new foundry.data.fields.SchemaField(fields, mergedOptions);
-          break;
-        case foundry.data.fields.ArrayField:
-        case foundry.data.fields.SetField:
-          const mergedElementOptions = foundry.utils.mergeObject(a[key].element.options, b[key].element.options);
-          a[key] = new b[key].constructor(new b[key].element.constructor(mergedElementOptions), mergedOptions);
-          break;
-        default:
-          a[key] = new b[key].constructor(mergedOptions);
-      }
-    }
+    Object.assign(a, b);
+    // for ( const key of Object.keys(b) ) {
+    //   if ( !(key in a) || (a[key].constructor !== b[key].constructor) ) {
+    //     a[key] = b[key];
+    //     continue;
+    //   }
+    //   const mergedOptions = foundry.utils.mergeObject(a[key].options, b[key].options);
+    //   switch (b[key].constructor) {
+    //     case foundry.data.fields.SchemaField:
+    //       const fields = this.mergeSchema(a[key].fields, b[key].fields);
+    //       Object.values(fields).forEach(f => f.parent = undefined);
+    //       a[key] = new foundry.data.fields.SchemaField(fields, mergedOptions);
+    //       break;
+    //     case foundry.data.fields.ArrayField:
+    //     case foundry.data.fields.SetField:
+    //       const mergedElementOptions = foundry.utils.mergeObject(a[key].element.options, b[key].element.options);
+    //       a[key] = new b[key].constructor(new b[key].element.constructor(mergedElementOptions), mergedOptions);
+    //       break;
+    //     default:
+    //       a[key] = new b[key].constructor(mergedOptions);
+    //   }
+    // }
     return a;
   }
 

@@ -1,5 +1,8 @@
 import { makeSimpleTrait } from "../fields.mjs";
+import AttributesField from "./templates/attributes.mjs";
 import CreatureTemplate from "./templates/creature.mjs";
+import DetailsField from "./templates/details.mjs";
+import TraitsField from "./templates/traits.mjs";
 
 /**
  * System data definition for Characters.
@@ -32,13 +35,14 @@ import CreatureTemplate from "./templates/creature.mjs";
  * @property {CharacterResourceData}            resources.tertiary   Resource number three.
  */
 export default class CharacterData extends CreatureTemplate {
+
+  static #actorType = "character";
+
+  /* -------------------------------------------- */
+
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
-      attributes: new foundry.data.fields.SchemaField({
-        hp: new foundry.data.fields.SchemaField({
-          value: new foundry.data.fields.NumberField({initial: 0}),
-          max: new foundry.data.fields.NumberField({initial: 0})
-        }),
+      attributes: new AttributesField({
         death: new foundry.data.fields.SchemaField({
           success: new foundry.data.fields.NumberField({
             required: true, nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.DeathSaveSuccesses"
@@ -51,8 +55,8 @@ export default class CharacterData extends CreatureTemplate {
           required: true, nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.Exhaustion"
         }),
         inspiration: new foundry.data.fields.BooleanField({required: true, label: "DND5E.Inspiration"})
-      }),
-      details: new foundry.data.fields.SchemaField({
+      }, {type: this.#actorType, label: "DND5E.Attributes"}),
+      details: new DetailsField({
         background: new foundry.data.fields.StringField({required: true, label: "DND5E.Background"}),
         originalClass: new foundry.data.fields.StringField({required: true, label: "DND5E.ClassOriginal"}),
         xp: new foundry.data.fields.SchemaField({
@@ -74,12 +78,12 @@ export default class CharacterData extends CreatureTemplate {
         ideal: new foundry.data.fields.StringField({required: true, label: "DND5E.Ideals"}),
         bond: new foundry.data.fields.StringField({required: true, label: "DND5E.Bonds"}),
         flaw: new foundry.data.fields.StringField({required: true, label: "DND5E.Flaws"})
-      }),
-      traits: new foundry.data.fields.SchemaField({
+      }, {type: this.#actorType, label: "DND5E.Details"}),
+      traits: new TraitsField({
         weaponProf: makeSimpleTrait({label: "DND5E.TraitWeaponProf"}),
         armorProf: makeSimpleTrait({label: "DND5E.TraitArmorProf"}),
         toolProf: makeSimpleTrait({label: "DND5E.TraitToolProf"})
-      }),
+      }, {type: this.#actorType, label: "DND5E.Traits"}),
       resources: new foundry.data.fields.SchemaField({
         primary: makeResourceField({label: "DND5E.ResourcePrimary"}),
         secondary: makeResourceField({label: "DND5E.ResourceSecondary"}),

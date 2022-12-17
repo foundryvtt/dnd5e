@@ -1,4 +1,4 @@
-import { FormulaField, makeSimpleTrait, MappingField } from "../../fields.mjs";
+import { FormulaField, MappingField } from "../../fields.mjs";
 import SkillData from "../skill.mjs";
 import CommonTemplate from "./common.mjs";
 
@@ -38,32 +38,6 @@ import CommonTemplate from "./common.mjs";
 export default class CreatureTemplate extends CommonTemplate {
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
-      attributes: new foundry.data.fields.SchemaField({
-        attunement: new foundry.data.fields.SchemaField({
-          max: new foundry.data.fields.NumberField({
-            required: true, nullable: false, integer: true, min: 0, initial: 3, label: "DND5E.AttunementMax"
-          })
-        }, {label: "DND5E.Attunement"}),
-        senses: new foundry.data.fields.SchemaField({
-          darkvision: new foundry.data.fields.NumberField({
-            required: true, nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.SenseDarkvision"
-          }),
-          blindsight: new foundry.data.fields.NumberField({
-            required: true, nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.SenseBlindsight"
-          }),
-          tremorsense: new foundry.data.fields.NumberField({
-            required: true, nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.SenseTremorsense"
-          }),
-          truesight: new foundry.data.fields.NumberField({
-            required: true, nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.SenseTruesight"
-          }),
-          units: new foundry.data.fields.StringField({required: true, initial: "ft", label: "DND5E.SenseUnits"}),
-          special: new foundry.data.fields.StringField({required: true, label: "DND5E.SenseSpecial"})
-        }, {label: "DND5E.Senses"}),
-        spellcasting: new foundry.data.fields.StringField({
-          required: true, blank: true, initial: "int", label: "DND5E.SpellAbility"
-        })
-      }),
       bonuses: new foundry.data.fields.SchemaField({
         mwak: makeAttackBonuses({label: "DND5E.BonusMWAttack"}),
         rwak: makeAttackBonuses({label: "DND5E.BonusRWAttack"}),
@@ -78,10 +52,6 @@ export default class CreatureTemplate extends CommonTemplate {
           dc: new FormulaField({required: true, deterministic: true, label: "DND5E.BonusSpellDC"})
         }, {label: "DND5E.BonusSpell"})
       }, {label: "DND5E.Bonuses"}),
-      details: new foundry.data.fields.SchemaField({
-        alignment: new foundry.data.fields.StringField({required: true, label: "DND5E.Alignment"}),
-        race: new foundry.data.fields.StringField({required: true, label: "DND5E.Race"})
-      }),
       skills: new MappingField(new foundry.data.fields.EmbeddedDataField(SkillData), {
         initialKeys: CONFIG.DND5E.skills, initialValue: this._initialSkillValue
       }),
@@ -92,10 +62,7 @@ export default class CreatureTemplate extends CommonTemplate {
         override: new foundry.data.fields.NumberField({
           integer: true, min: 0, label: "DND5E.SpellProgOverride"
         })
-      }), {initialKeys: this._spellLevels, label: "DND5E.SpellLevels"}),
-      traits: new foundry.data.fields.SchemaField({
-        languages: makeSimpleTrait({label: "DND5E.Languages"})
-      })
+      }), {initialKeys: this._spellLevels, label: "DND5E.SpellLevels"})
     });
   }
 

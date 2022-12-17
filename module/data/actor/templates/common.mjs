@@ -1,6 +1,6 @@
 import SystemDataModel from "../../abstract.mjs";
-import { FormulaField, makeSimpleTrait, MappingField } from "../../fields.mjs";
-import CurrencyData from "../../shared/currency.mjs";
+import { MappingField } from "../../fields.mjs";
+import CurrencyTemplate from "../../shared/currency.mjs";
 import AbilityData from "../ability.mjs";
 
 /**
@@ -42,77 +42,13 @@ import AbilityData from "../ability.mjs";
  * @property {CurrencyData} currency              Currency being held by this actor.
  * @mixin
  */
-export default class CommonTemplate extends SystemDataModel {
+export default class CommonTemplate extends SystemDataModel.mixin(CurrencyTemplate) {
   static defineSchema() {
-    return {
+    return this.mergeSchema(super.defineSchema(), {
       abilities: new MappingField(new foundry.data.fields.EmbeddedDataField(AbilityData), {
         initialKeys: CONFIG.DND5E.abilities
-      }, {label: "DND5E.Abilities"}),
-      attributes: new foundry.data.fields.SchemaField({
-        ac: new foundry.data.fields.SchemaField({
-          flat: new foundry.data.fields.NumberField({integer: true, min: 0, label: "DND5E.ArmorClassFlat"}),
-          calc: new foundry.data.fields.StringField({initial: "default", label: "DND5E.ArmorClassCalculation"}),
-          formula: new FormulaField({deterministic: true, label: "DND5E.ArmorClassFormula"})
-        }),
-        hp: new foundry.data.fields.SchemaField({
-          value: new foundry.data.fields.NumberField({
-            nullable: false, integer: true, min: 0, initial: 10, label: "DND5E.HitPointsCurrent"
-          }),
-          min: new foundry.data.fields.NumberField({
-            nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.HitPointsMin"
-          }),
-          max: new foundry.data.fields.NumberField({
-            nullable: false, integer: true, min: 0, initial: 10, label: "DND5E.HitPointsMax"
-          }),
-          temp: new foundry.data.fields.NumberField({integer: true, initial: 0, min: 0, label: "DND5E.HitPointsTemp"}),
-          tempmax: new foundry.data.fields.NumberField({integer: true, initial: 0, label: "DND5E.HitPointsTempMax"})
-        }, {
-          label: "DND5E.HitPoints", validate: d => d.min <= d.max,
-          validationError: "HP minimum must be less than HP maximum"
-        }),
-        init: new foundry.data.fields.SchemaField({
-          value: new foundry.data.fields.NumberField({
-            nullable: false, integer: true, initial: 0, label: "DND5E.Initiative"
-          }),
-          bonus: new foundry.data.fields.NumberField({
-            nullable: false, integer: true, initial: 0, label: "DND5E.InitiativeBonus"
-          })
-        }, { label: "DND5E.Initiative" }),
-        movement: new foundry.data.fields.SchemaField({
-          burrow: new foundry.data.fields.NumberField({
-            nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.MovementBurrow"
-          }),
-          climb: new foundry.data.fields.NumberField({
-            nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.MovementClimb"
-          }),
-          fly: new foundry.data.fields.NumberField({
-            nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.MovementFly"
-          }),
-          swim: new foundry.data.fields.NumberField({
-            nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.MovementSwim"
-          }),
-          walk: new foundry.data.fields.NumberField({
-            nullable: false, integer: true, min: 0, initial: 30, label: "DND5E.MovementWalk"
-          }),
-          units: new foundry.data.fields.StringField({initial: "ft", label: "DND5E.MovementUnits"}),
-          hover: new foundry.data.fields.BooleanField({label: "DND5E.MovementHover"})
-        }, {label: "DND5E.Movement"})
-      }, {label: "DND5E.Attributes"}),
-      details: new foundry.data.fields.SchemaField({
-        biography: new foundry.data.fields.SchemaField({
-          value: new foundry.data.fields.HTMLField({label: "DND5E.Biography"}),
-          public: new foundry.data.fields.HTMLField({label: "DND5E.BiographyPublic"})
-        }, {label: "DND5E.Biography"})
-      }, {label: "DND5E.Details"}),
-      traits: new foundry.data.fields.SchemaField({
-        size: new foundry.data.fields.StringField({required: true, initial: "med", label: "DND5E.Size"}),
-        di: makeSimpleTrait({label: "DND5E.DamImm"}), // TODO: Add "bypasses" here
-        dr: makeSimpleTrait({label: "DND5E.DamRes"}), // TODO: Add "bypasses" here
-        dv: makeSimpleTrait({label: "DND5E.DamVuln"}), // TODO: Add "bypasses" here
-        ci: makeSimpleTrait({label: "DND5E.ConImm"})
-      }, {label: "DND5E.Traits"}),
-      currency: new foundry.data.fields.EmbeddedDataField(CurrencyData, {label: "DND5E.Currency"})
-    };
+      }, {label: "DND5E.Abilities"})
+    });
   }
 
   /* -------------------------------------------- */
@@ -132,7 +68,7 @@ export default class CommonTemplate extends SystemDataModel {
   static migrateACData(source) {
     if ( !source.attributes?.ac ) return;
     const ac = source.attributes.ac;
-  
+
     // If the actor has a numeric ac.value, then their AC has not been migrated to the auto-calculation schema yet.
     if ( Number.isNumeric(ac.value) ) {
       // TODO: Figure out how to determine if this is an NPC properly
@@ -142,7 +78,7 @@ export default class CommonTemplate extends SystemDataModel {
       ac.calc = isNPC ? "natural" : "flat";
       return;
     }
-  
+
     // Migrate ac.base in custom formulas to ac.armor
     if ( (typeof ac.formula === "string") && ac.formula.includes("@attributes.ac.base") ) {
       ac.formula = ac.formula.replaceAll("@attributes.ac.base", "@attributes.ac.armor");

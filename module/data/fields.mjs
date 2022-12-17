@@ -259,13 +259,14 @@ export class MappingField extends foundry.data.fields.ObjectField {
 
 /**
  * Produce the schema field for a simple trait.
- * @param {object} schemaOptions  Options passed to the outer schema.
+ * @param {object} [schemaOptions={}]  Options passed to the outer schema.
+ * @param {string[]} [initial={}]      The initial value for the value set.
  * @returns {SchemaField}
  */
-export function makeSimpleTrait(schemaOptions={}) {
+export function makeSimpleTrait(schemaOptions={}, initial=[]) {
   return new foundry.data.fields.SchemaField({
     value: new foundry.data.fields.SetField(
-      new foundry.data.fields.StringField({blank: false}), {label: "DND5E.TraitsChosen"}
+      new foundry.data.fields.StringField({blank: false}), {label: "DND5E.TraitsChosen", initial}
     ),
     custom: new foundry.data.fields.StringField({required: true, label: "DND5E.Special"})
   }, schemaOptions);

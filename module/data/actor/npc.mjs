@@ -1,5 +1,7 @@
-import { FormulaField } from "../fields.mjs";
+import AttributesField from "./templates/attributes.mjs";
 import CreatureTemplate from "./templates/creature.mjs";
+import DetailsField from "./templates/details.mjs";
+import TraitsField from "./templates/traits.mjs";
 
 /**
  * System data definition for NPCs.
@@ -29,14 +31,15 @@ import CreatureTemplate from "./templates/creature.mjs";
  * @property {number} resources.lair.initiative  Initiative count when lair actions are triggered.
  */
 export default class NPCData extends CreatureTemplate {
+
+  static #actorType = "npc";
+
+  /* -------------------------------------------- */
+
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
-      attributes: new foundry.data.fields.SchemaField({
-        hp: new foundry.data.fields.SchemaField({
-          formula: new FormulaField({required: true, label: ""})
-        })
-      }),
-      details: new foundry.data.fields.SchemaField({
+      attributes: new AttributesField({}, {type: this.#actorType, label: "DND5E.Attributes"}),
+      details: new DetailsField({
         type: new foundry.data.fields.SchemaField({
           value: new foundry.data.fields.StringField({required: true, blank: true, label: "DND5E.CreatureType"}),
           subtype: new foundry.data.fields.StringField({required: true, label: "DND5E.CreatureTypeSelectorSubtype"}),
@@ -51,7 +54,7 @@ export default class NPCData extends CreatureTemplate {
           required: true, nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.SpellcasterLevel"
         }),
         source: new foundry.data.fields.StringField({required: true, label: "DND5E.Source"})
-      }),
+      }, {type: this.#actorType, label: "DND5E.Details"}),
       resources: new foundry.data.fields.SchemaField({
         legact: new foundry.data.fields.SchemaField({
           value: new foundry.data.fields.NumberField({
@@ -75,7 +78,8 @@ export default class NPCData extends CreatureTemplate {
             required: true, integer: true, label: "DND5E.LairActionInitiative"
           })
         }, {label: "DND5E.LairActionLabel"})
-      }, {label: "DND5E.Resources"})
+      }, {label: "DND5E.Resources"}),
+      traits: new TraitsField({}, {type: this.#actorType, label: "DND5E.Traits"})
     });
   }
 
