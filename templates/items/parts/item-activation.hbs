@@ -75,6 +75,9 @@
 <div class="form-group input-select">
     <label>{{ localize "DND5E.Range" }}</label>
     <div class="form-fields">
+        <input type="number" step="any" name="system.usageProfiles.{{options.selectedUsageProfile}}.range.value"
+            value="{{ getProperty (lookup system.usageProfiles options.selectedUsageProfile) "range.value" }}" placeholder="{{localize 'DND5E.Normal'}}"
+            title="{{localize 'DND5E.RangeNormal'}}">
         <span class="sep">/</span>
         <input type="number" step="any" name="system.usageProfiles.{{options.selectedUsageProfile}}.range.long"
             value="{{ getProperty (lookup system.usageProfiles options.selectedUsageProfile) "range.long" }}" placeholder="{{localize 'DND5E.Long'}}"
@@ -92,7 +95,7 @@
         <input type="text" name="system.usageProfiles.{{options.selectedUsageProfile}}.duration.value" value="{{ getProperty (lookup system.usageProfiles options.selectedUsageProfile) "duration.value" }}"
                placeholder="&mdash;" title="{{localize 'DND5E.DurationValue'}}">
         <select name="system.usageProfiles.{{options.selectedUsageProfile}}.duration.units" title="{{localize 'DND5E.DurationType'}}">
-            {{#select (getProperty (lookup system.usageProfiles options.selectedUsageProfile) "duration.units"}}
+            {{#select (getProperty (lookup system.usageProfiles options.selectedUsageProfile) "duration.units")}}
                 <option value=""></option>
                 {{#each config.timePeriods as |name key|}}
                 <option value="{{key}}">{{name}}</option>

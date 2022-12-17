@@ -24,7 +24,7 @@ export default class ItemSheet5e extends ItemSheet {
     else if ( ["weapon", "spell", "feat", "equipment", "consumable"].includes(this.object.type) ) {
 
       // IF usageProfile property is empty - Try to generate one?
-      if (this.object.system.usageProfiles.length <= 0) {
+      if (!Reflect.has(this.object.system, 'usageProfiles') || this.object.system.usageProfiles.length <= 0) {
 
         const buildDamageObject = (damage, fromVersatile = false) => {
 
@@ -96,22 +96,6 @@ export default class ItemSheet5e extends ItemSheet {
             )
           );
         }
-
-        Reflect.deleteProperty(this.object.system, "activation");
-        Reflect.deleteProperty(this.object.system, "duration");
-        Reflect.deleteProperty(this.object.system, "target");
-        Reflect.deleteProperty(this.object.system, "range");
-        Reflect.deleteProperty(this.object.system, "uses");
-        Reflect.deleteProperty(this.object.system, "consume");
-        Reflect.deleteProperty(this.object.system, "ability");
-        Reflect.deleteProperty(this.object.system, "actionType");
-        Reflect.deleteProperty(this.object.system, "attackBonus");
-        Reflect.deleteProperty(this.object.system, "chatFlavor");
-        Reflect.deleteProperty(this.object.system, "critical");
-        Reflect.deleteProperty(this.object.system, "damage");
-        Reflect.deleteProperty(this.object.system, "formula");
-        Reflect.deleteProperty(this.object.system, "save");
-        Reflect.deleteProperty(this.object.system, "scaling");
 
         this.object.system.usageProfiles = usageProfiles;
       }
@@ -687,7 +671,7 @@ export default class ItemSheet5e extends ItemSheet {
 
       // Apply new profile and re-render the sheet
       this.options.selectedUsageProfile = targetUsageProfileIndex;
-      this._render();
+      this.render(true); // TODO: usageProfileIndex work in-progress - This deletes every usageProfile in the process since rebasing on 2.1.x
     }
 
     return null;

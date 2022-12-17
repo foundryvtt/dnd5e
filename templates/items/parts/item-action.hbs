@@ -1,14 +1,16 @@
 {{!-- Action Type --}}
 <div class="form-group select">
     <label>{{ localize "DND5E.ItemActionType" }}</label>
-    <select name="system.usageProfiles.{{options.selectedUsageProfile}}.actionType">
-        {{#select (getProperty (lookup system.usageProfiles options.selectedUsageProfile) "actionType")}}
-        <option value=""></option>
-        {{#each config.itemActionTypes as |name type|}}
-        <option value="{{type}}">{{name}}</option>
-        {{/each}}
-        {{/select}}
-    </select>
+    <div class="form-fields">
+        <select name="system.usageProfiles.{{options.selectedUsageProfile}}.actionType">
+            {{#select (getProperty (lookup system.usageProfiles options.selectedUsageProfile) "actionType")}}
+            <option value=""></option>
+            {{#each config.itemActionTypes as |name type|}}
+            <option value="{{type}}">{{name}}</option>
+            {{/each}}
+            {{/select}}
+        </select>
+    </div>
 </div>
 
 {{!-- Hides every subsequent field if there's no Action Type --}}
@@ -17,14 +19,16 @@
 {{!-- Ability Modifier --}}
 <div class="form-group select">
     <label>{{ localize "DND5E.AbilityModifier" }}</label>
-    <select name="system.usageProfiles.{{options.selectedUsageProfile}}.ability">
-        {{#select (getProperty (lookup system.usageProfiles options.selectedUsageProfile) "ability")}}
-        <option value="">{{ localize "DND5E.Default" }}</option>
-        {{#each config.abilities as |ability a|}}
-        <option value="{{a}}">{{ability}}</option>
-        {{/each}}
-        {{/select}}
-    </select>
+    <div class="form-fields">
+        <select name="system.usageProfiles.{{options.selectedUsageProfile}}.ability">
+            {{#select (getProperty (lookup system.usageProfiles options.selectedUsageProfile) "ability")}}
+            <option value="">{{ localize "DND5E.Default" }}</option>
+            {{#each config.abilities as |ability a|}}
+            <option value="{{a}}">{{ability}}</option>
+            {{/each}}
+            {{/select}}
+        </select>
+    </div>
 </div>
 
 {{!-- Attack Roll Bonus --}}
