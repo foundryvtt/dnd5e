@@ -607,6 +607,9 @@ export default class ItemSheet5e extends ItemSheet {
       const id = foundry.utils.randomID();
       console.debug(`ItemSheet5e | Added a new Usage-Profile to ${JSON.stringify(this?.item?.name)}`);
 
+      // Navigate to new page
+      this.options.selectedUsageProfile = this.item.system.usageProfiles.length;
+
       return this.item.update({ "system.usageProfiles": this.item.system.usageProfiles.concat({ _id: id }) });
     }
 
@@ -620,6 +623,9 @@ export default class ItemSheet5e extends ItemSheet {
 
         const usageProfiles = foundry.utils.deepClone(this.item.system.usageProfiles);
         usageProfiles.splice(usageProfiles.findIndex(e => e._id === a.dataset.usageProfileDeleteId), 1);
+
+        // Navigate to previous page if it exists
+        this.options.selectedUsageProfile = this.options.selectedUsageProfile - 1 || 0;
 
         return this.item.update({ "system.usageProfiles": usageProfiles });
       }
@@ -639,9 +645,9 @@ export default class ItemSheet5e extends ItemSheet {
       // Apply new profile and re-render the sheet
       this.options.selectedUsageProfile = targetUsageProfileIndex;
       this._render();
-
-      return null;
     }
+
+    return null;
   }
 
   /* -------------------------------------------- */
