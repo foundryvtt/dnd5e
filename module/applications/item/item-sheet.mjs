@@ -667,7 +667,9 @@ export default class ItemSheet5e extends ItemSheet {
       await this._onSubmit(event);  // Submit any unsaved changes
 
       const usageProfiles = foundry.utils.deepClone(this.item.system.usageProfiles);
-      usageProfiles[this.options.selectedUsageProfile].damage.parts.push(["", ""]);
+      const usageProfile = usageProfiles?.[this.options.selectedUsageProfile];
+      if ( !usageProfile?.damage ) usageProfile.damage = { parts: [] };
+      usageProfile.damage.parts.push(["", ""]);
 
       return this.item.update({"system.usageProfiles": usageProfiles});
     }
