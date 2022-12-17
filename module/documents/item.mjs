@@ -20,6 +20,59 @@ export default class Item5e extends Item {
   /* -------------------------------------------- */
 
   /**
+   * Which ability score modifier is used by this item?
+   * @type {string|null}
+   * @param {number} [usageProfileIndex=null] Which Usage-Profile is being used to roll
+   */
+  abilityMod(usageProfileIndex = null) {
+
+    // TODO: usageProfileIndex work in-progress - Need to really verify null is for types outside of weapon, spell, etc
+
+    // Skip checks if the item doesn't have an ability property
+    if ( usageProfileIndex === null && !Reflect.has(this.system, "ability") ) return null;
+    else if ( !Reflect.has(this.system?.usageProfiles?.[usageProfileIndex], "ability") ) return null;
+
+    // Case 1 - defined directly by the item
+    if ( this.system.ability ) return this.system.ability;
+
+    // Case 2 - inferred from a parent actor
+    if ( this.actor ) {
+      const abilities = this.actor.system.abilities;
+      const spellcasting = this.actor.system.attributes.spellcasting;
+
+      // Special rules per item type
+      switch ( this.type ) {
+        case "consumable":
+          if ( this.system.consumableType === "scroll" ) return spellcasting || "int";
+          break;
+        case "spell":
+          return spellcasting || "int";
+        case "tool":
+          return "int";
+        case "weapon":
+          // Finesse weapons - Str or Dex (PHB pg. 147)
+          if ( this.system.properties.fin === true ) {
+            return abilities.dex.mod >= abilities.str.mod ? "dex" : "str";
+          }
+          // Ranged weapons - Dex (PH p.194)
+          if ( ["simpleR", "martialR"].includes(this.system.weaponType) ) return "dex";
+          break;
+      }
+
+      // If a specific attack type is defined
+      if ( this.hasAttack(usageProfileIndex) ) return {
+        mwak: "str",
+        rwak: "dex",
+        msak: spellcasting || "int",
+        rsak: spellcasting || "int"
+      }[this.system?.[usageProfileIndex]?.actionType];
+    }
+
+    // Case 3 - unknown
+    return null;
+  }
+
+  /**
    * Return an item's identifier.
    * @type {string}
    */
@@ -35,6 +88,41 @@ export default class Item5e extends Item {
    */
   get hasAdvancement() {
     return !!this.system.advancement?.length;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Does the Item implement an attack roll as part of its usage?
+   * @type {boolean}
+   * @param {number} [usageProfileIndex=null] Which Usage-Profile is being used to roll
+   */
+  hasAttack(usageProfileIndex = null) {
+    return ["mwak", "rwak", "msak", "rsak"].includes(this.system?.usageProfiles?.[usageProfileIndex]?.actionType);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Does the Item implement a damage roll as part of its usage?
+   * @type {boolean}
+   * @param {number} [usageProfileIndex=null] Which Usage-Profile is being used to roll
+   */
+  hasDamage(usageProfileIndex = null) {
+    const usageProfile = this.system?.usageProfiles?.[usageProfileIndex];
+    return !!(usageProfile?.damage && usageProfile?.damage.parts.length);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Does the item provide an amount of healing instead of conventional damage?
+   * @type {boolean}
+   * @param {number} [usageProfileIndex=null] Which Usage-Profile is being used to roll
+   */
+  isHealing(usageProfileIndex = null) {
+    const usageProfile = this.system?.usageProfiles?.[usageProfileIndex];
+    return (usageProfile?.actionType === "heal") && usageProfile?.damage.parts.length;
   }
 
   /* -------------------------------------------- */
@@ -77,136 +165,6 @@ export default class Item5e extends Item {
   /* -------------------------------------------- */
 
   /**
-   * Is this item any of the armor subtypes?
-   * @type {boolean}
-   */
-  get isArmor() {
-    return this.system.armor?.type in CONFIG.DND5E.armorTypes;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Retrieve scale values for current level from advancement data.
-   * @type {object}
-   */
-  get scaleValues() {
-    if ( !["class", "subclass"].includes(this.type) || !this.advancement.byType.ScaleValue ) return {};
-    const level = this.type === "class" ? this.system.levels : this.class?.system.levels ?? 0;
-    return this.advancement.byType.ScaleValue.reduce((obj, advancement) => {
-      obj[advancement.identifier] = advancement.prepareValue(level);
-      return obj;
-    }, {});
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Should this item's active effects be suppressed.
-   * @type {boolean}
-   */
-  get areEffectsSuppressed() {
-    const requireEquipped = (this.type !== "consumable")
-      || ["rod", "trinket", "wand"].includes(this.system.consumableType);
-    if ( requireEquipped && (this.system.equipped === false) ) return true;
-    return this.system.attunement === CONFIG.DND5E.attunementTypes.REQUIRED;
-  }
-
-  /* -------------------------------------------- */
-  /*  Item Properties Based On Usage-Profiles     */
-  /* -------------------------------------------- */
-
-  /**
-   * Which ability score modifier is used by this item?
-   * @type {string|null}
-   * @param {number} [usageProfileIndex=null] Which Usage-Profile is being used to roll
-   */
-  abilityMod(usageProfileIndex = null) {
-
-    // TODO: usageProfileIndex work in-progress - Need to really verify null is for types outside of weapon, spell, etc
-
-    // Skip checks if the item doesn't have an ability property
-    if ( usageProfileIndex === null && Reflect.has(this.system, "ability") ) return null;
-    else if ( Reflect.has(this.system?.usageProfiles?.[usageProfileIndex], "ability") ) return null;
-
-    // Case 1 - defined directly by the item
-    if ( this.system.ability ) return this.system.ability;
-
-    // Case 2 - inferred from a parent actor
-    if ( this.actor ) {
-      const abilities = this.actor.system.abilities;
-      const spellcasting = this.actor.system.attributes.spellcasting;
-
-      // Special rules per item type
-      switch ( this.type ) {
-        case "consumable":
-          if ( this.system.consumableType === "scroll" ) return spellcasting || "int";
-          break;
-        case "spell":
-          return spellcasting || "int";
-        case "tool":
-          return "int";
-        case "weapon":
-          // Finesse weapons - Str or Dex (PHB pg. 147)
-          if ( this.system.properties.fin === true ) {
-            return abilities.dex.mod >= abilities.str.mod ? "dex" : "str";
-          }
-          // Ranged weapons - Dex (PH p.194)
-          if ( ["simpleR", "martialR"].includes(this.system.weaponType) ) return "dex";
-          break;
-      }
-
-      // If a specific attack type is defined
-      if ( this.hasAttack(usageProfileIndex) ) return {
-        mwak: "str",
-        rwak: "dex",
-        msak: spellcasting || "int",
-        rsak: spellcasting || "int"
-      }[this.system?.[usageProfileIndex]?.actionType];
-    }
-
-    // Case 3 - unknown
-    return null;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Does the Item implement an attack roll as part of its usage?
-   * @type {boolean}
-   * @param {number} [usageProfileIndex=null] Which Usage-Profile is being used to roll
-   */
-  hasAttack(usageProfileIndex = null) {
-    return ["mwak", "rwak", "msak", "rsak"].includes(this.system?.usageProfiles?.[usageProfileIndex]?.actionType);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Does the Item implement a damage roll as part of its usage?
-   * @type {boolean}
-   * @param {number} [usageProfileIndex=null] Which Usage-Profile is being used to roll
-   */
-  hasDamage(usageProfileIndex = null) {
-    const usageProfile = this.system?.usageProfiles?.[usageProfileIndex];
-    return !!(usageProfile?.damage && usageProfile?.damage.parts.length);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Does the item provide an amount of healing instead of conventional damage?
-   * @type {boolean}
-   * @param {number} [usageProfileIndex=null] Which Usage-Profile is being used to roll
-   */
-  isHealing(usageProfileIndex = null) {
-    const usageProfile = this.system?.usageProfiles?.[usageProfileIndex];
-    return (usageProfile?.actionType === "heal") && usageProfile?.damage.parts.length;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
    * Does the Item implement a saving throw as part of its usage?
    * @type {boolean}
    * @param {number} [usageProfileIndex=null] Which Usage-Profile is being used to roll
@@ -214,18 +172,6 @@ export default class Item5e extends Item {
   hasSave(usageProfileIndex = null) {
     const save = this.system?.usageProfiles?.[usageProfileIndex]?.save || {};
     return !!(save.ability && save.scaling);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Does the Item implement a saving throw with a flat DC as part of its usage?
-   * @type {boolean}
-   * @param {number} [usageProfileIndex=null] Which Usage-Profile is being used to roll
-   */
-  isFlatDC(usageProfileIndex = null) {
-    const save = this.system?.usageProfiles?.[usageProfileIndex]?.save || {};
-    return save?.scaling === "flat";
   }
 
   /* --------------------------------------------- */
@@ -293,6 +239,31 @@ export default class Item5e extends Item {
   /* -------------------------------------------- */
 
   /**
+   * Is this item any of the armor subtypes?
+   * @type {boolean}
+   */
+  get isArmor() {
+    return this.system.armor?.type in CONFIG.DND5E.armorTypes;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Retrieve scale values for current level from advancement data.
+   * @type {object}
+   */
+  get scaleValues() {
+    if ( !["class", "subclass"].includes(this.type) || !this.advancement.byType.ScaleValue ) return {};
+    const level = this.type === "class" ? this.system.levels : this.class?.system.levels ?? 0;
+    return this.advancement.byType.ScaleValue.reduce((obj, advancement) => {
+      obj[advancement.identifier] = advancement.prepareValue(level);
+      return obj;
+    }, {});
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Retrieve the spellcasting for a class or subclass. For classes, this will return the spellcasting
    * of the subclass if it overrides the class. For subclasses, this will return the class's spellcasting
    * if no spellcasting is defined on the subclass.
@@ -307,6 +278,31 @@ export default class Item5e extends Item {
     const subclassSpellcasting = isSubclass ? spellcasting : this.subclass?.system.spellcasting;
     if ( subclassSpellcasting && subclassSpellcasting.progression !== "none" ) return subclassSpellcasting;
     return classSpellcasting;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Does the Item implement a saving throw with a flat DC as part of its usage?
+   * @type {boolean}
+   * @param {number} [usageProfileIndex=null] Which Usage-Profile is being used to roll
+   */
+  isFlatDC(usageProfileIndex = null) {
+    const save = this.system?.usageProfiles?.[usageProfileIndex]?.save || {};
+    return save?.scaling === "flat";
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Should this item's active effects be suppressed.
+   * @type {boolean}
+   */
+  get areEffectsSuppressed() {
+    const requireEquipped = (this.type !== "consumable")
+      || ["rod", "trinket", "wand"].includes(this.system.consumableType);
+    if ( requireEquipped && (this.system.equipped === false) ) return true;
+    return this.system.attunement === CONFIG.DND5E.attunementTypes.REQUIRED;
   }
 
   /* -------------------------------------------- */
@@ -1733,7 +1729,6 @@ export default class Item5e extends Item {
    * @returns {Promise<Roll>}   A Promise which resolves to the created Roll instance
    */
   async rollRecharge() {
-
     const recharge = this.system.recharge ?? {};
     if ( !recharge.value ) return;
 
@@ -1793,7 +1788,6 @@ export default class Item5e extends Item {
    * @returns {Promise<Roll>}                 A Promise which resolves to the created Roll instance.
    */
   async rollToolCheck(options={}) {
-
     if ( this.type !== "tool" ) throw new Error("Wrong item type!");
 
     // Prepare roll data
