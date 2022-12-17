@@ -87,6 +87,7 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
     }
 
     // Assign and return
+    context.inventoryFilters = true;
     context.features = Object.values(features);
     context.spellbook = spellbook;
   }

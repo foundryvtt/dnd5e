@@ -12,7 +12,10 @@
     "source": "PHB pg. 145",
     "quantity": 1,
     "weight": 65,
-    "price": 1500,
+    "price": {
+      "value": 1500,
+      "denomination": "gp"
+    },
     "attunement": 0,
     "equipped": false,
     "rarity": "common",

@@ -1,4 +1,5 @@
 import ClassFeatures from "./advancement/class-features.mjs";
+import * as advancement from "./advancement/types/_module.mjs";
 import { preLocalize } from "./utils.mjs";
 
 // Namespace Configuration Values
@@ -304,7 +305,7 @@ DND5E.abilityActivationTypes = {
   lair: "DND5E.LairActionLabel",
   crew: "DND5E.VehicleCrewAction"
 };
-preLocalize("abilityActivationTypes", { sort: true });
+preLocalize("abilityActivationTypes");
 
 /* -------------------------------------------- */
 
@@ -706,6 +707,18 @@ preLocalize("damageResistanceTypes", { sort: true });
 /* -------------------------------------------- */
 
 /**
+ * Different types of healing that can be applied using abilities.
+ * @enum {string}
+ */
+DND5E.healingTypes = {
+  healing: "DND5E.Healing",
+  temphp: "DND5E.HealingTemp"
+};
+preLocalize("healingTypes");
+
+/* -------------------------------------------- */
+
+/**
  * The valid units of measure for movement distances in the game system.
  * By default this uses the imperial units of feet and miles.
  * @enum {string}
@@ -718,6 +731,10 @@ DND5E.movementTypes = {
   walk: "DND5E.MovementWalk"
 };
 preLocalize("movementTypes", { sort: true });
+
+/* -------------------------------------------- */
+/*  Measurement                                 */
+/* -------------------------------------------- */
 
 /**
  * The valid units of measure for movement distances in the game system.
@@ -732,18 +749,31 @@ DND5E.movementUnits = {
 };
 preLocalize("movementUnits");
 
+/* -------------------------------------------- */
+
 /**
- * The valid units of measure for the range of an action or effect.
- * This object automatically includes the movement units from `DND5E.movementUnits`.
+ * The types of range that are used for measuring actions and effects.
+ * @enum {string}
+ */
+DND5E.rangeTypes = {
+  self: "DND5E.DistSelf",
+  touch: "DND5E.DistTouch",
+  spec: "DND5E.Special",
+  any: "DND5E.DistAny"
+};
+preLocalize("rangeTypes");
+
+/* -------------------------------------------- */
+
+/**
+ * The valid units of measure for the range of an action or effect. A combination of `DND5E.movementUnits` and
+ * `DND5E.rangeUnits`.
  * @enum {string}
  */
 DND5E.distanceUnits = {
   none: "DND5E.None",
-  self: "DND5E.DistSelf",
-  touch: "DND5E.DistTouch",
-  spec: "DND5E.Special",
-  any: "DND5E.DistAny",
-  ...DND5E.movementUnits
+  ...DND5E.movementUnits,
+  ...DND5E.rangeTypes
 };
 preLocalize("distanceUnits");
 
@@ -769,6 +799,75 @@ DND5E.encumbrance = {
 };
 
 /* -------------------------------------------- */
+/*  Targeting                                   */
+/* -------------------------------------------- */
+
+/**
+ * Targeting types that apply to one or more distinct targets.
+ * @enum {string}
+ */
+DND5E.individualTargetTypes = {
+  self: "DND5E.TargetSelf",
+  ally: "DND5E.TargetAlly",
+  enemy: "DND5E.TargetEnemy",
+  creature: "DND5E.TargetCreature",
+  object: "DND5E.TargetObject",
+  space: "DND5E.TargetSpace"
+};
+preLocalize("individualTargetTypes");
+
+/* -------------------------------------------- */
+
+/**
+ * Information needed to represent different area of effect target types.
+ *
+ * @typedef {object} AreaTargetDefinition
+ * @property {string} label     Localized label for this type.
+ * @property {string} template  Type of `MeasuredTemplate` create for this target type.
+ */
+
+/**
+ * Targeting types that cover an area.
+ * @enum {AreaTargetDefinition}
+ */
+DND5E.areaTargetTypes = {
+  radius: {
+    label: "DND5E.TargetRadius",
+    template: "circle"
+  },
+  sphere: {
+    label: "DND5E.TargetSphere",
+    template: "circle"
+  },
+  cylinder: {
+    label: "DND5E.TargetCylinder",
+    template: "circle"
+  },
+  cone: {
+    label: "DND5E.TargetCone",
+    template: "cone"
+  },
+  square: {
+    label: "DND5E.TargetSquare",
+    template: "rect"
+  },
+  cube: {
+    label: "DND5E.TargetCube",
+    template: "rect"
+  },
+  line: {
+    label: "DND5E.TargetLine",
+    template: "ray"
+  },
+  wall: {
+    label: "DND5E.TargetWall",
+    template: "ray"
+  }
+};
+preLocalize("areaTargetTypes", { key: "label", sort: true });
+patchConfig("areaTargetTypes", "template", { since: 2.0, until: 2.2 });
+
+/* -------------------------------------------- */
 
 /**
  * The types of single or area targets which can be applied to abilities.
@@ -776,52 +875,10 @@ DND5E.encumbrance = {
  */
 DND5E.targetTypes = {
   none: "DND5E.None",
-  self: "DND5E.TargetSelf",
-  creature: "DND5E.TargetCreature",
-  ally: "DND5E.TargetAlly",
-  enemy: "DND5E.TargetEnemy",
-  object: "DND5E.TargetObject",
-  space: "DND5E.TargetSpace",
-  radius: "DND5E.TargetRadius",
-  sphere: "DND5E.TargetSphere",
-  cylinder: "DND5E.TargetCylinder",
-  cone: "DND5E.TargetCone",
-  square: "DND5E.TargetSquare",
-  cube: "DND5E.TargetCube",
-  line: "DND5E.TargetLine",
-  wall: "DND5E.TargetWall"
+  ...DND5E.individualTargetTypes,
+  ...Object.fromEntries(Object.entries(DND5E.areaTargetTypes).map(([k, v]) => [k, v.label]))
 };
 preLocalize("targetTypes", { sort: true });
-
-/* -------------------------------------------- */
-
-/**
- * Mapping between `DND5E.targetTypes` and `MeasuredTemplate` shape types to define
- * which templates are produced by which area of effect target type.
- * @enum {string}
- */
-DND5E.areaTargetTypes = {
-  cone: "cone",
-  cube: "rect",
-  cylinder: "circle",
-  line: "ray",
-  radius: "circle",
-  sphere: "circle",
-  square: "rect",
-  wall: "ray"
-};
-
-/* -------------------------------------------- */
-
-/**
- * Different types of healing that can be applied using abilities.
- * @enum {string}
- */
-DND5E.healingTypes = {
-  healing: "DND5E.Healing",
-  temphp: "DND5E.HealingTemp"
-};
-preLocalize("healingTypes");
 
 /* -------------------------------------------- */
 
@@ -846,6 +903,38 @@ DND5E.senses = {
 preLocalize("senses", { sort: true });
 
 /* -------------------------------------------- */
+/*  Spellcasting                                */
+/* -------------------------------------------- */
+
+/**
+ * Define the standard slot progression by character level.
+ * The entries of this array represent the spell slot progression for a full spell-caster.
+ * @type {number[][]}
+ */
+DND5E.SPELL_SLOT_TABLE = [
+  [2],
+  [3],
+  [4, 2],
+  [4, 3],
+  [4, 3, 2],
+  [4, 3, 3],
+  [4, 3, 3, 1],
+  [4, 3, 3, 2],
+  [4, 3, 3, 3, 1],
+  [4, 3, 3, 3, 2],
+  [4, 3, 3, 3, 2, 1],
+  [4, 3, 3, 3, 2, 1],
+  [4, 3, 3, 3, 2, 1, 1],
+  [4, 3, 3, 3, 2, 1, 1],
+  [4, 3, 3, 3, 2, 1, 1, 1],
+  [4, 3, 3, 3, 2, 1, 1, 1],
+  [4, 3, 3, 3, 2, 1, 1, 1, 1],
+  [4, 3, 3, 3, 3, 1, 1, 1, 1],
+  [4, 3, 3, 3, 3, 2, 1, 1, 1],
+  [4, 3, 3, 3, 3, 2, 2, 1, 1]
+];
+
+/* -------------------------------------------- */
 
 /**
  * Various different ways a spell can be prepared.
@@ -859,11 +948,68 @@ DND5E.spellPreparationModes = {
 };
 preLocalize("spellPreparationModes");
 
+/* -------------------------------------------- */
+
 /**
  * Subset of `DND5E.spellPreparationModes` that consume spell slots.
  * @type {boolean[]}
  */
 DND5E.spellUpcastModes = ["always", "pact", "prepared"];
+
+/* -------------------------------------------- */
+
+/**
+ * Configuration data for different types of spellcasting supported.
+ *
+ * @typedef {object} SpellcastingTypeConfiguration
+ * @property {string} label                                                        Localized label.
+ * @property {Object<string, SpellcastingProgressionConfiguration>} [progression]  Any progression modes for this type.
+ */
+
+/**
+ * Configuration data for a spellcasting progression mode.
+ *
+ * @typedef {object} SpellcastingProgressionConfiguration
+ * @property {string} label             Localized label.
+ * @property {number} [divisor=1]       Value by which the class levels are divided to determine spellcasting level.
+ * @property {boolean} [roundUp=false]  Should fractional values should be rounded up by default?
+ */
+
+/**
+ * Different spellcasting types and their progression.
+ * @type {SpellcastingTypeConfiguration}
+ */
+DND5E.spellcastingTypes = {
+  leveled: {
+    label: "DND5E.SpellProgLeveled",
+    progression: {
+      full: {
+        label: "DND5E.SpellProgFull",
+        divisor: 1
+      },
+      half: {
+        label: "DND5E.SpellProgHalf",
+        divisor: 2
+      },
+      third: {
+        label: "DND5E.SpellProgThird",
+        divisor: 3
+      },
+      artificer: {
+        label: "DND5E.SpellProgArt",
+        divisor: 2,
+        roundUp: true
+      }
+    }
+  },
+  pact: {
+    label: "DND5E.SpellProgPact"
+  }
+};
+preLocalize("spellcastingTypes", { key: "label", sort: true });
+preLocalize("spellcastingTypes.leveled.progression", { key: "label" });
+
+/* -------------------------------------------- */
 
 /**
  * Ways in which a class can contribute to spellcasting levels.
@@ -877,7 +1023,27 @@ DND5E.spellProgression = {
   pact: "DND5E.SpellProgPact",
   artificer: "DND5E.SpellProgArt"
 };
-preLocalize("spellProgression");
+preLocalize("spellProgression", { key: "label" });
+
+/* -------------------------------------------- */
+
+/**
+ * Valid spell levels.
+ * @enum {string}
+ */
+DND5E.spellLevels = {
+  0: "DND5E.SpellLevel0",
+  1: "DND5E.SpellLevel1",
+  2: "DND5E.SpellLevel2",
+  3: "DND5E.SpellLevel3",
+  4: "DND5E.SpellLevel4",
+  5: "DND5E.SpellLevel5",
+  6: "DND5E.SpellLevel6",
+  7: "DND5E.SpellLevel7",
+  8: "DND5E.SpellLevel8",
+  9: "DND5E.SpellLevel9"
+};
+preLocalize("spellLevels");
 
 /* -------------------------------------------- */
 
@@ -891,6 +1057,83 @@ DND5E.spellScalingModes = {
   level: "DND5E.SpellLevel"
 };
 preLocalize("spellScalingModes", { sort: true });
+
+/* -------------------------------------------- */
+
+/**
+ * Types of components that can be required when casting a spell.
+ * @enum {object}
+ */
+DND5E.spellComponents = {
+  vocal: {
+    label: "DND5E.ComponentVerbal",
+    abbr: "DND5E.ComponentVerbalAbbr"
+  },
+  somatic: {
+    label: "DND5E.ComponentSomatic",
+    abbr: "DND5E.ComponentSomaticAbbr"
+  },
+  material: {
+    label: "DND5E.ComponentMaterial",
+    abbr: "DND5E.ComponentMaterialAbbr"
+  }
+};
+preLocalize("spellComponents", {keys: ["label", "abbr"]});
+
+/* -------------------------------------------- */
+
+/**
+ * Supplementary rules keywords that inform a spell's use.
+ * @enum {object}
+ */
+DND5E.spellTags = {
+  concentration: {
+    label: "DND5E.Concentration",
+    abbr: "DND5E.ConcentrationAbbr"
+  },
+  ritual: {
+    label: "DND5E.Ritual",
+    abbr: "DND5E.RitualAbbr"
+  }
+};
+preLocalize("spellTags", {keys: ["label", "abbr"]});
+
+/* -------------------------------------------- */
+
+/**
+ * Schools to which a spell can belong.
+ * @enum {string}
+ */
+DND5E.spellSchools = {
+  abj: "DND5E.SchoolAbj",
+  con: "DND5E.SchoolCon",
+  div: "DND5E.SchoolDiv",
+  enc: "DND5E.SchoolEnc",
+  evo: "DND5E.SchoolEvo",
+  ill: "DND5E.SchoolIll",
+  nec: "DND5E.SchoolNec",
+  trs: "DND5E.SchoolTrs"
+};
+preLocalize("spellSchools", { sort: true });
+
+/* -------------------------------------------- */
+
+/**
+ * Spell scroll item ID within the `DND5E.sourcePacks` compendium for each level.
+ * @enum {string}
+ */
+DND5E.spellScrollIds = {
+  0: "rQ6sO7HDWzqMhSI3",
+  1: "9GSfMg0VOA2b4uFN",
+  2: "XdDp6CKh9qEvPTuS",
+  3: "hqVKZie7x9w3Kqds",
+  4: "DM7hzgL836ZyUFB1",
+  5: "wa1VF8TXHmkrrR35",
+  6: "tI3rWx4bxefNCexS",
+  7: "mtyw4NS1s7j2EJaD",
+  8: "aOrinPg7yuDZEuWr",
+  9: "O4YbkJkLlnsgUszZ"
+};
 
 /* -------------------------------------------- */
 /*  Weapon Details                              */
@@ -951,95 +1194,6 @@ DND5E.weaponProperties = {
 preLocalize("weaponProperties", { sort: true });
 
 /* -------------------------------------------- */
-/*  Spell Details                               */
-/* -------------------------------------------- */
-
-/**
- * Types of components that can be required when casting a spell.
- * @enum {object}
- */
-DND5E.spellComponents = {
-  vocal: {
-    label: "DND5E.ComponentVerbal",
-    abbr: "DND5E.ComponentVerbalAbbr"
-  },
-  somatic: {
-    label: "DND5E.ComponentSomatic",
-    abbr: "DND5E.ComponentSomaticAbbr"
-  },
-  material: {
-    label: "DND5E.ComponentMaterial",
-    abbr: "DND5E.ComponentMaterialAbbr"
-  }
-};
-preLocalize("spellComponents", {keys: ["label", "abbr"]});
-
-/**
- * Supplementary rules keywords that inform a spell's use.
- * @enum {object}
- */
-DND5E.spellTags = {
-  concentration: {
-    label: "DND5E.Concentration",
-    abbr: "DND5E.ConcentrationAbbr"
-  },
-  ritual: {
-    label: "DND5E.Ritual",
-    abbr: "DND5E.RitualAbbr"
-  }
-};
-preLocalize("spellTags", {keys: ["label", "abbr"]});
-
-/**
- * Schools to which a spell can belong.
- * @enum {string}
- */
-DND5E.spellSchools = {
-  abj: "DND5E.SchoolAbj",
-  con: "DND5E.SchoolCon",
-  div: "DND5E.SchoolDiv",
-  enc: "DND5E.SchoolEnc",
-  evo: "DND5E.SchoolEvo",
-  ill: "DND5E.SchoolIll",
-  nec: "DND5E.SchoolNec",
-  trs: "DND5E.SchoolTrs"
-};
-preLocalize("spellSchools", { sort: true });
-
-/**
- * Valid spell levels.
- * @enum {string}
- */
-DND5E.spellLevels = {
-  0: "DND5E.SpellLevel0",
-  1: "DND5E.SpellLevel1",
-  2: "DND5E.SpellLevel2",
-  3: "DND5E.SpellLevel3",
-  4: "DND5E.SpellLevel4",
-  5: "DND5E.SpellLevel5",
-  6: "DND5E.SpellLevel6",
-  7: "DND5E.SpellLevel7",
-  8: "DND5E.SpellLevel8",
-  9: "DND5E.SpellLevel9"
-};
-preLocalize("spellLevels");
-
-/**
- * Spell scroll item ID within the `DND5E.sourcePacks` compendium for each level.
- * @enum {string}
- */
-DND5E.spellScrollIds = {
-  0: "rQ6sO7HDWzqMhSI3",
-  1: "9GSfMg0VOA2b4uFN",
-  2: "XdDp6CKh9qEvPTuS",
-  3: "hqVKZie7x9w3Kqds",
-  4: "DM7hzgL836ZyUFB1",
-  5: "wa1VF8TXHmkrrR35",
-  6: "tI3rWx4bxefNCexS",
-  7: "mtyw4NS1s7j2EJaD",
-  8: "aOrinPg7yuDZEuWr",
-  9: "O4YbkJkLlnsgUszZ"
-};
 
 /**
  * Compendium packs used for localized items.
@@ -1048,34 +1202,6 @@ DND5E.spellScrollIds = {
 DND5E.sourcePacks = {
   ITEMS: "dnd5e.items"
 };
-
-/**
- * Define the standard slot progression by character level.
- * The entries of this array represent the spell slot progression for a full spell-caster.
- * @type {number[][]}
- */
-DND5E.SPELL_SLOT_TABLE = [
-  [2],
-  [3],
-  [4, 2],
-  [4, 3],
-  [4, 3, 2],
-  [4, 3, 3],
-  [4, 3, 3, 1],
-  [4, 3, 3, 2],
-  [4, 3, 3, 3, 1],
-  [4, 3, 3, 3, 2],
-  [4, 3, 3, 3, 2, 1],
-  [4, 3, 3, 3, 2, 1],
-  [4, 3, 3, 3, 2, 1, 1],
-  [4, 3, 3, 3, 2, 1, 1],
-  [4, 3, 3, 3, 2, 1, 1, 1],
-  [4, 3, 3, 3, 2, 1, 1, 1],
-  [4, 3, 3, 3, 2, 1, 1, 1, 1],
-  [4, 3, 3, 3, 3, 1, 1, 1, 1],
-  [4, 3, 3, 3, 3, 2, 1, 1, 1],
-  [4, 3, 3, 3, 3, 2, 2, 1, 1]
-];
 
 /* -------------------------------------------- */
 
@@ -1095,9 +1221,63 @@ DND5E.polymorphSettings = {
   keepSpells: "DND5E.PolymorphKeepSpells",
   keepItems: "DND5E.PolymorphKeepItems",
   keepBio: "DND5E.PolymorphKeepBio",
-  keepVision: "DND5E.PolymorphKeepVision"
+  keepVision: "DND5E.PolymorphKeepVision",
+  keepSelf: "DND5E.PolymorphKeepSelf"
 };
 preLocalize("polymorphSettings", { sort: true });
+
+/**
+ * Settings to configure how actors are effects are merged when polymorphing is applied.
+ * @enum {string}
+ */
+DND5E.polymorphEffectSettings = {
+  keepAE: "DND5E.PolymorphKeepAE",
+  keepOtherOriginAE: "DND5E.PolymorphKeepOtherOriginAE",
+  keepOriginAE: "DND5E.PolymorphKeepOriginAE",
+  keepEquipmentAE: "DND5E.PolymorphKeepEquipmentAE",
+  keepFeatAE: "DND5E.PolymorphKeepFeatureAE",
+  keepSpellAE: "DND5E.PolymorphKeepSpellAE",
+  keepClassAE: "DND5E.PolymorphKeepClassAE",
+  keepBackgroundAE: "DND5E.PolymorphKeepBackgroundAE"
+};
+preLocalize("polymorphEffectSettings", { sort: true });
+
+/**
+ * Settings to configure how actors are merged when preset polymorphing is applied.
+ * @enum {object}
+ */
+DND5E.transformationPresets = {
+  wildshape: {
+    icon: '<i class="fas fa-paw"></i>',
+    label: "DND5E.PolymorphWildShape",
+    options: {
+      keepBio: true,
+      keepClass: true,
+      keepMental: true,
+      mergeSaves: true,
+      mergeSkills: true,
+      keepEquipmentAE: false
+    }
+  },
+  polymorph: {
+    icon: '<i class="fas fa-pastafarianism"></i>',
+    label: "DND5E.Polymorph",
+    options: {
+      keepEquipmentAE: false,
+      keepClassAE: false,
+      keepFeatAE: false,
+      keepBackgroundAE: false
+    }
+  },
+  polymorphSelf: {
+    icon: '<i class="fas fa-eye"></i>',
+    label: "DND5E.PolymorphSelf",
+    options: {
+      keepSelf: true
+    }
+  }
+};
+preLocalize("transformationPresets", { sort: true, keys: ["label"] });
 
 /* -------------------------------------------- */
 
@@ -1349,6 +1529,18 @@ preLocalize("characterFlags", { keys: ["name", "hint", "section"] });
  * @type {string[]}
  */
 DND5E.allowedActorFlags = ["isPolymorphed", "originalActor"].concat(Object.keys(DND5E.characterFlags));
+
+/* -------------------------------------------- */
+
+/**
+ * Advancement types that can be added to items.
+ * @enum {*}
+ */
+DND5E.advancementTypes = {
+  HitPoints: advancement.HitPointsAdvancement,
+  ItemGrant: advancement.ItemGrantAdvancement,
+  ScaleValue: advancement.ScaleValueAdvancement
+};
 
 /* -------------------------------------------- */
 

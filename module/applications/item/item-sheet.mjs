@@ -235,6 +235,7 @@ export default class ItemSheet5e extends ItemSheet {
    * @returns {object}     Object with advancement data grouped by levels.
    */
   _getItemAdvancement(item) {
+    if ( !item.system.advancement ) return;
     const advancement = {};
     const configMode = !item.parent || this.advancementConfigurationMode;
     const maxLevel = !configMode
@@ -248,7 +249,7 @@ export default class ItemSheet5e extends ItemSheet {
           order: a.constructor.order,
           title: a.title,
           icon: a.icon,
-          classRestriction: a.data.classRestriction,
+          classRestriction: a.classRestriction,
           configured: false
         })),
         configured: "partial"
@@ -263,7 +264,7 @@ export default class ItemSheet5e extends ItemSheet {
         order: advancement.sortingValueForLevel(level),
         title: advancement.titleForLevel(level, { configMode }),
         icon: advancement.icon,
-        classRestriction: advancement.data.classRestriction,
+        classRestriction: advancement.classRestriction,
         summary: advancement.summaryForLevel(level, { configMode }),
         configured: advancement.configuredForLevel(level)
       }));
@@ -455,7 +456,7 @@ export default class ItemSheet5e extends ItemSheet {
   /** @inheritDoc */
   setPosition(position={}) {
     if ( !(this._minimized || position.height) ) {
-      position.height = (this._tabs[0].active === "details") ? "auto" : this.options.height;
+      position.height = (this._tabs[0].active === "details") ? "auto" : Math.max(this.height, this.options.height);
     }
     return super.setPosition(position);
   }
@@ -517,15 +518,24 @@ export default class ItemSheet5e extends ItemSheet {
         });
     }
 
-    // Check class identifier
-    if ( formData.system?.identifier ) {
-      const dataRgx = new RegExp(/^([a-z0-9_-]+)$/i);
-      const match = formData.system.identifier.match(dataRgx);
-      if ( !match ) {
-        formData.system.identifier = this.item._source.system.identifier;
-        this.form.querySelector("input[name='system.identifier']").value = formData.system.identifier;
-        return ui.notifications.error(game.i18n.localize("DND5E.IdentifierError"));
+    // Check duration value formula
+    const duration = formData.system?.duration;
+    if ( duration?.value ) {
+      const durationRoll = new Roll(duration.value);
+      if ( !durationRoll.isDeterministic ) {
+        duration.value = this.item._source.system.duration.value;
+        this.form.querySelector("input[name='system.duration.value']").value = duration.value;
+        return ui.notifications.error(game.i18n.format("DND5E.FormulaCannotContainDiceError", {
+          name: game.i18n.localize("DND5E.Duration")
+        }));
       }
+    }
+
+    // Check class identifier
+    if ( formData.system?.identifier && !dnd5e.utils.validators.isValidIdentifier(formData.system.identifier) ) {
+      formData.system.identifier = this.item._source.system.identifier;
+      this.form.querySelector("input[name='system.identifier']").value = formData.system.identifier;
+      return ui.notifications.error(game.i18n.localize("DND5E.IdentifierError"));
     }
 
     // Return the flattened submission data

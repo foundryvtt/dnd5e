@@ -16,6 +16,15 @@
     "hitDiceUsed": 0,
     "advancement": [
       {
+        "_id": "9oz3k13fa953sdiq",
+        "type": "HitPoints",
+        "configuration": {},
+        "value": {},
+        "title": "",
+        "icon": "",
+        "classRestriction": ""
+      },
+      {
         "_id": "rpmaepj0rdbnnrzd",
         "type": "ItemGrant",
         "configuration": {
@@ -117,15 +126,6 @@
         "classRestriction": ""
       },
       {
-        "_id": "9oz3k13fa953sdiq",
-        "type": "HitPoints",
-        "configuration": {},
-        "value": {},
-        "title": "",
-        "icon": "",
-        "classRestriction": ""
-      },
-      {
         "_id": "vc31v6423jmiex1p",
         "type": "ScaleValue",
         "configuration": {
@@ -182,6 +182,97 @@
         },
         "value": {},
         "title": "Song of Rest Die",
+        "icon": "",
+        "classRestriction": ""
+      },
+      {
+        "_id": "XqVWKlXYIk9A39le",
+        "type": "ScaleValue",
+        "configuration": {
+          "identifier": "cantrips-known",
+          "type": "number",
+          "distance": {
+            "units": ""
+          },
+          "scale": {
+            "1": {
+              "value": 2
+            },
+            "4": {
+              "value": 3
+            },
+            "10": {
+              "value": 4
+            }
+          }
+        },
+        "value": {},
+        "title": "Cantrips Known",
+        "icon": "",
+        "classRestriction": ""
+      },
+      {
+        "_id": "sZl8eAmx0M2KXdRA",
+        "type": "ScaleValue",
+        "configuration": {
+          "identifier": "spells-known",
+          "type": "number",
+          "distance": {
+            "units": ""
+          },
+          "scale": {
+            "1": {
+              "value": 4
+            },
+            "2": {
+              "value": 5
+            },
+            "3": {
+              "value": 6
+            },
+            "4": {
+              "value": 7
+            },
+            "5": {
+              "value": 8
+            },
+            "6": {
+              "value": 9
+            },
+            "7": {
+              "value": 10
+            },
+            "8": {
+              "value": 11
+            },
+            "9": {
+              "value": 12
+            },
+            "10": {
+              "value": 14
+            },
+            "11": {
+              "value": 15
+            },
+            "13": {
+              "value": 16
+            },
+            "14": {
+              "value": 18
+            },
+            "15": {
+              "value": 19
+            },
+            "17": {
+              "value": 20
+            },
+            "18": {
+              "value": 22
+            }
+          }
+        },
+        "value": {},
+        "title": "Spells Known",
         "icon": "",
         "classRestriction": ""
       }

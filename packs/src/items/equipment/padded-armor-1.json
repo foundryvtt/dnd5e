@@ -12,7 +12,10 @@
     "source": "DMG pg. 152",
     "quantity": 1,
     "weight": 8,
-    "price": 1505,
+    "price": {
+      "value": 1505,
+      "denomination": "gp"
+    },
     "attunement": 0,
     "equipped": false,
     "rarity": "rare",

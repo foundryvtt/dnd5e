@@ -7,7 +7,7 @@
  */
 export function _getInitiativeFormula() {
   const actor = this.actor;
-  if ( !actor ) return "1d20";
+  if ( !actor || (actor.type === "group") ) return "1d20";
   const init = actor.system.attributes.init;
   const rollData = actor.getRollData();
 

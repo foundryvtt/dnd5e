@@ -80,6 +80,23 @@ export function linkForUuid(uuid) {
 }
 
 /* -------------------------------------------- */
+/*  Validators                                  */
+/* -------------------------------------------- */
+
+/**
+ * Ensure the provided string contains only the characters allowed in identifiers.
+ * @param {string} identifier
+ * @returns {boolean}
+ */
+function isValidIdentifier(identifier) {
+  return /^([a-z0-9_-]+)$/i.test(identifier);
+}
+
+export const validators = {
+  isValidIdentifier: isValidIdentifier
+};
+
+/* -------------------------------------------- */
 /*  Handlebars Template Helpers                 */
 /* -------------------------------------------- */
 
@@ -110,6 +127,9 @@ export async function preloadHandlebarsTemplates() {
     "systems/dnd5e/templates/items/parts/item-description.hbs",
     "systems/dnd5e/templates/items/parts/item-mountable.hbs",
     "systems/dnd5e/templates/items/parts/item-spellcasting.hbs",
+
+    // Journal Partials
+    "systems/dnd5e/templates/journal/parts/journal-table.hbs",
 
     // Advancement Partials
     "systems/dnd5e/templates/advancement/parts/advancement-controls.hbs",
@@ -150,7 +170,7 @@ const _preLocalizationRegistrations = {};
 
 /**
  * Mark the provided config key to be pre-localized during the init stage.
- * @param {string} configKey              Key within `CONFIG.DND5E` to localize.
+ * @param {string} configKeyPath          Key path within `CONFIG.DND5E` to localize.
  * @param {object} [options={}]
  * @param {string} [options.key]          If each entry in the config enum is an object,
  *                                        localize and sort using this property.
@@ -158,9 +178,9 @@ const _preLocalizationRegistrations = {};
  *                                        if multiple are provided.
  * @param {boolean} [options.sort=false]  Sort this config enum, using the key if set.
  */
-export function preLocalize(configKey, { key, keys=[], sort=false }={}) {
+export function preLocalize(configKeyPath, { key, keys=[], sort=false }={}) {
   if ( key ) keys.unshift(key);
-  _preLocalizationRegistrations[configKey] = { keys, sort };
+  _preLocalizationRegistrations[configKeyPath] = { keys, sort };
 }
 
 /* -------------------------------------------- */
@@ -170,9 +190,10 @@ export function preLocalize(configKey, { key, keys=[], sort=false }={}) {
  * @param {object} config  The `CONFIG.DND5E` object to localize and sort. *Will be mutated.*
  */
 export function performPreLocalization(config) {
-  for ( const [key, settings] of Object.entries(_preLocalizationRegistrations) ) {
-    _localizeObject(config[key], settings.keys);
-    if ( settings.sort ) config[key] = sortObjectEntries(config[key], settings.keys[0]);
+  for ( const [keyPath, settings] of Object.entries(_preLocalizationRegistrations) ) {
+    const target = foundry.utils.getProperty(config, keyPath);
+    _localizeObject(target, settings.keys);
+    if ( settings.sort ) foundry.utils.setProperty(config, keyPath, sortObjectEntries(target, settings.keys[0]));
   }
 }
 

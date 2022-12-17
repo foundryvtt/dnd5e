@@ -16,6 +16,15 @@
     "hitDiceUsed": 0,
     "advancement": [
       {
+        "_id": "qv0gbr1rb5889ubd",
+        "type": "HitPoints",
+        "configuration": {},
+        "value": {},
+        "title": "",
+        "icon": "",
+        "classRestriction": ""
+      },
+      {
         "_id": "6pdotglp4hy4zlvb",
         "type": "ItemGrant",
         "configuration": {
@@ -75,20 +84,11 @@
         "classRestriction": ""
       },
       {
-        "_id": "qv0gbr1rb5889ubd",
-        "type": "HitPoints",
-        "configuration": {},
-        "value": {},
-        "title": "",
-        "icon": "",
-        "classRestriction": ""
-      },
-      {
         "_id": "6vytnom37pkazgld",
         "type": "ScaleValue",
         "configuration": {
           "identifier": "wild-shape",
-          "type": "number",
+          "type": "cr",
           "scale": {
             "2": {
               "value": 0.25
@@ -99,10 +99,39 @@
             "8": {
               "value": 1
             }
+          },
+          "distance": {
+            "units": ""
           }
         },
         "value": {},
         "title": "Wild Shape CR",
+        "icon": "",
+        "classRestriction": ""
+      },
+      {
+        "_id": "K8ShWezgK90dp1uk",
+        "type": "ScaleValue",
+        "configuration": {
+          "identifier": "cantrips-known",
+          "type": "number",
+          "distance": {
+            "units": ""
+          },
+          "scale": {
+            "1": {
+              "value": 2
+            },
+            "4": {
+              "value": 3
+            },
+            "10": {
+              "value": 4
+            }
+          }
+        },
+        "value": {},
+        "title": "Cantrips Known",
         "icon": "",
         "classRestriction": ""
       }
@@ -142,10 +171,10 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.0.0",
-    "coreVersion": "10.279",
+    "systemVersion": "2.0.3",
+    "coreVersion": "10.286",
     "createdTime": 1661787234284,
-    "modifiedTime": 1661787234284,
+    "modifiedTime": 1664049296255,
     "lastModifiedBy": "dnd5ebuilder0000"
   }
 }

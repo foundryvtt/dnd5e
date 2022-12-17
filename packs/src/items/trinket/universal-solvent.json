@@ -12,7 +12,10 @@
     "source": "DMG pg. 209",
     "quantity": 1,
     "weight": 0.1,
-    "price": 300,
+    "price": {
+      "value": 300,
+      "denomination": "gp"
+    },
     "attunement": 0,
     "equipped": false,
     "rarity": "legendary",

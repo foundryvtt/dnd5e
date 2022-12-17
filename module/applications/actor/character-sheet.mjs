@@ -49,12 +49,12 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
 
     // Categorize items as inventory, spellbook, features, and classes
     const inventory = {
-      weapon: { label: "DND5E.ItemTypeWeaponPl", items: [], dataset: {type: "weapon"} },
-      equipment: { label: "DND5E.ItemTypeEquipmentPl", items: [], dataset: {type: "equipment"} },
-      consumable: { label: "DND5E.ItemTypeConsumablePl", items: [], dataset: {type: "consumable"} },
-      tool: { label: "DND5E.ItemTypeToolPl", items: [], dataset: {type: "tool"} },
-      backpack: { label: "DND5E.ItemTypeContainerPl", items: [], dataset: {type: "backpack"} },
-      loot: { label: "DND5E.ItemTypeLootPl", items: [], dataset: {type: "loot"} }
+      weapon: { label: "ITEM.TypeWeaponPl", items: [], dataset: {type: "weapon"} },
+      equipment: { label: "ITEM.TypeEquipmentPl", items: [], dataset: {type: "equipment"} },
+      consumable: { label: "ITEM.TypeConsumablePl", items: [], dataset: {type: "consumable"} },
+      tool: { label: "ITEM.TypeToolPl", items: [], dataset: {type: "tool"} },
+      backpack: { label: "ITEM.TypeContainerPl", items: [], dataset: {type: "backpack"} },
+      loot: { label: "ITEM.TypeLootPl", items: [], dataset: {type: "loot"} }
     };
 
     // TODO: usageProfileIndex work in-progress - This item.system stuff is hella broken
@@ -144,10 +144,10 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
     // Organize Features
     const features = {
       background: {
-        label: "DND5E.ItemTypeBackground", items: backgrounds,
+        label: "ITEM.TypeBackground", items: backgrounds,
         hasActions: false, dataset: {type: "background"} },
       classes: {
-        label: "DND5E.ItemTypeClassPl", items: classes,
+        label: "ITEM.TypeClassPl", items: classes,
         hasActions: false, dataset: {type: "class"}, isClass: true },
       active: {
         label: "DND5E.FeatureActive", items: [],
@@ -162,6 +162,7 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
     }
 
     // Assign and return
+    context.inventoryFilters = true;
     context.inventory = Object.values(inventory);
     context.spellbook = spellbook;
     context.preparedSpells = nPrepared;

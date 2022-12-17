@@ -2,6 +2,8 @@ import Advancement from "../advancement.mjs";
 import AdvancementFlow from "../advancement-flow.mjs";
 import AdvancementConfig from "../advancement-config.mjs";
 
+import ItemGrantConfigurationData from "../../data/advancement/item-grant.mjs";
+
 /**
  * Advancement that automatically grants one or more items to the player. Presents the player with the option of
  * skipping any or all of the items.
@@ -11,12 +13,8 @@ export class ItemGrantAdvancement extends Advancement {
   /** @inheritdoc */
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
-      defaults: {
-        configuration: {
-          items: [],
-          optional: false,
-          spell: null
-        }
+      dataModels: {
+        configuration: ItemGrantConfigurationData
       },
       order: 40,
       icon: "systems/dnd5e/icons/svg/item-grant.svg",
@@ -43,7 +41,7 @@ export class ItemGrantAdvancement extends Advancement {
 
   /** @inheritdoc */
   configuredForLevel(level) {
-    return !foundry.utils.isEmpty(this.data.value);
+    return !foundry.utils.isEmpty(this.value);
   }
 
   /* -------------------------------------------- */
@@ -51,13 +49,13 @@ export class ItemGrantAdvancement extends Advancement {
   /** @inheritdoc */
   summaryForLevel(level, { configMode=false }={}) {
     // Link to compendium items
-    if ( !this.data.value.added || configMode ) {
-      return this.data.configuration.items.reduce((html, uuid) => html + dnd5e.utils.linkForUuid(uuid), "");
+    if ( !this.value.added || configMode ) {
+      return this.configuration.items.reduce((html, uuid) => html + dnd5e.utils.linkForUuid(uuid), "");
     }
 
     // Link to items on the actor
     else {
-      return Object.keys(this.data.value.added).map(id => {
+      return Object.keys(this.value.added).map(id => {
         const item = this.actor.items.get(id);
         return item?.toAnchor({classes: ["content-link"]}).outerHTML ?? "";
       }).join("");
@@ -78,7 +76,7 @@ export class ItemGrantAdvancement extends Advancement {
   async apply(level, data, retainedData={}) {
     const items = [];
     const updates = {};
-    const spellChanges = this.data.configuration.spell ? this._prepareSpellChanges(this.data.configuration.spell) : {};
+    const spellChanges = this.configuration.spell?.spellChanges ?? {};
     for ( const [uuid, selected] of Object.entries(data) ) {
       if ( !selected ) continue;
 
@@ -95,7 +93,6 @@ export class ItemGrantAdvancement extends Advancement {
       if ( itemData.type === "spell" ) foundry.utils.mergeObject(itemData, spellChanges);
 
       items.push(itemData);
-      // TODO: Trigger any additional advancement steps for added items
       updates[itemData._id] = uuid;
     }
     this.actor.updateSource({items});
@@ -109,7 +106,6 @@ export class ItemGrantAdvancement extends Advancement {
     const updates = {};
     for ( const item of data.items ) {
       this.actor.updateSource({items: [item]});
-      // TODO: Restore any additional advancement data here
       updates[item._id] = item.flags.dnd5e.sourceId;
     }
     this.updateSource({"value.added": updates});
@@ -120,12 +116,10 @@ export class ItemGrantAdvancement extends Advancement {
   /** @inheritdoc */
   reverse(level) {
     const items = [];
-    for ( const id of Object.keys(this.data.value.added ?? {}) ) {
+    for ( const id of Object.keys(this.value.added ?? {}) ) {
       const item = this.actor.items.get(id);
       if ( item ) items.push(item.toObject());
       this.actor.items.delete(id);
-      // TODO: Ensure any advancement data attached to these items is properly reversed
-      // and store any advancement data for these items in case they need to be restored
     }
     this.updateSource({ "value.-=added": null });
     return { items };
@@ -153,7 +147,7 @@ export class ItemGrantConfig extends AdvancementConfig {
   /** @inheritdoc */
   getData() {
     const context = super.getData();
-    context.showSpellConfig = context.data.configuration.items.map(fromUuidSync).some(i => i.type === "spell");
+    context.showSpellConfig = context.configuration.items.map(fromUuidSync).some(i => i.type === "spell");
     return context;
   }
 
@@ -184,14 +178,14 @@ export class ItemGrantFlow extends AdvancementFlow {
 
   /** @inheritdoc */
   async getData() {
-    const config = this.advancement.data.configuration.items;
+    const config = this.advancement.configuration.items;
     const added = this.retainedData?.items.map(i => foundry.utils.getProperty(i, "flags.dnd5e.sourceId"))
-      ?? this.advancement.data.value.added;
+      ?? this.advancement.value.added;
     const checked = new Set(Object.values(added ?? {}));
 
     const items = await Promise.all(config.map(fromUuid));
     return foundry.utils.mergeObject(super.getData(), {
-      optional: this.advancement.data.configuration.optional,
+      optional: this.advancement.configuration.optional,
       items: items.reduce((arr, item) => {
         if ( !item ) return arr;
         item.checked = added ? checked.has(item.uuid) : true;

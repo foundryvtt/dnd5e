@@ -80,14 +80,14 @@ export class HitPointsAdvancement extends Advancement {
    * @returns {number|null}  Hit points for level or null if none have been taken.
    */
   valueForLevel(level) {
-    return this.constructor.valueForLevel(this.data.value, this.hitDieValue, level);
+    return this.constructor.valueForLevel(this.value, this.hitDieValue, level);
   }
 
   /* -------------------------------------------- */
 
   /**
    * Hit points given at the provided level.
-   * @param {object} data         Contents of `data.value` used to determine this value.
+   * @param {object} data         Contents of `value` used to determine this value.
    * @param {number} hitDieValue  Face value of the hit die used by this advancement.
    * @param {number} level        Level for which to get hit points.
    * @returns {number|null}       Hit points for level or null if none have been taken.
@@ -108,7 +108,7 @@ export class HitPointsAdvancement extends Advancement {
    * @returns {number}  Hit points currently selected.
    */
   total() {
-    return Object.keys(this.data.value).reduce((total, level) => total + this.valueForLevel(parseInt(level)), 0);
+    return Object.keys(this.value).reduce((total, level) => total + this.valueForLevel(parseInt(level)), 0);
   }
 
   /* -------------------------------------------- */
@@ -158,7 +158,7 @@ export class HitPointsAdvancement extends Advancement {
       "system.attributes.hp.max": hp.max - value,
       "system.attributes.hp.value": hp.value - value
     });
-    const source = { [level]: this.data.value[level] };
+    const source = { [level]: this.value[level] };
     this.updateSource({ [`value.-=${level}`]: null });
     return source;
   }
@@ -203,7 +203,7 @@ export class HitPointsFlow extends AdvancementFlow {
 
   /** @inheritdoc */
   getData() {
-    const source = this.retainedData ?? this.advancement.data.value;
+    const source = this.retainedData ?? this.advancement.value;
     const value = source[this.level];
 
     // If value is empty, `useAverage` should default to the value selected at the previous level

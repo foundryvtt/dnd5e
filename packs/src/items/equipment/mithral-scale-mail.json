@@ -14,7 +14,10 @@
     "source": "DMG pg. 182",
     "quantity": 1,
     "weight": 45,
-    "price": 850,
+    "price": {
+      "value": 850,
+      "denomination": "gp"
+    },
     "attunement": 0,
     "equipped": false,
     "rarity": "uncommon",

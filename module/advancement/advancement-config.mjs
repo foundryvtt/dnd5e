@@ -54,9 +54,10 @@ export default class AdvancementConfig extends FormApplication {
     const levels = Object.fromEntries(Array.fromRange(CONFIG.DND5E.maxLevel + 1).map(l => [l, l]));
     if ( ["class", "subclass"].includes(this.item.type) ) delete levels[0];
     else levels[0] = game.i18n.localize("DND5E.AdvancementLevelAnyHeader");
-    return {
+    const context = {
       CONFIG: CONFIG.DND5E,
-      data: this.advancement.data,
+      ...this.advancement.toObject(false),
+      src: this.advancement.toObject(),
       default: {
         title: this.advancement.constructor.metadata.title,
         icon: this.advancement.constructor.metadata.icon
@@ -65,6 +66,18 @@ export default class AdvancementConfig extends FormApplication {
       showClassRestrictions: this.item.type === "class",
       showLevelSelector: !this.advancement.constructor.metadata.multiLevel
     };
+    Object.defineProperty(context, "data", {
+      get() {
+        foundry.utils.logCompatibilityWarning(
+          `You are accessing the ${this.constructor.name}#data object which is no longer used. `
+          + "Since 2.1 the Advancement class and its contained DataModel are merged into a combined data structure. "
+          + "You should now reference keys which were previously contained within the data object directly.",
+          { since: "DnD5e 2.1", until: "DnD5e 2.2" }
+        );
+        return context;
+      }
+    });
+    return context;
   }
 
   /* -------------------------------------------- */
@@ -80,6 +93,7 @@ export default class AdvancementConfig extends FormApplication {
 
   /* -------------------------------------------- */
 
+  /** @inheritdoc */
   activateListeners(html) {
     super.activateListeners(html);
 
@@ -91,7 +105,17 @@ export default class AdvancementConfig extends FormApplication {
 
   /** @inheritdoc */
   async _updateObject(event, formData) {
-    let updates = foundry.utils.expandObject(formData).data;
+    let updates = foundry.utils.expandObject(formData);
+    if ( updates.data ) {
+      foundry.utils.logCompatibilityWarning(
+        "An update being performed on an advancement points to `data`. Advancement data has moved to the top level so the"
+        + " leading `data.` is no longer required.",
+        { since: "DnD5e 2.1", until: "DnD5e 2.2" }
+      );
+      const data = updates.data;
+      delete updates.data;
+      updates = { ...updates, ...data };
+    }
     if ( updates.configuration ) updates.configuration = this.prepareConfigurationUpdate(updates.configuration);
     await this.advancement.update(updates);
     this.render();
@@ -128,7 +152,7 @@ export default class AdvancementConfig extends FormApplication {
     event.preventDefault();
     const uuidToDelete = event.currentTarget.closest("[data-item-uuid]")?.dataset.itemUuid;
     if ( !uuidToDelete ) return;
-    const items = foundry.utils.getProperty(this.advancement.data.configuration, this.options.dropKeyPath);
+    const items = foundry.utils.getProperty(this.advancement.configuration, this.options.dropKeyPath);
     const updates = { configuration: await this.prepareConfigurationUpdate({
       [this.options.dropKeyPath]: items.filter(uuid => uuid !== uuidToDelete)
     }) };
@@ -153,14 +177,9 @@ export default class AdvancementConfig extends FormApplication {
     );
 
     // Try to extract the data
-    let data;
-    try {
-      data = JSON.parse(event.dataTransfer.getData("text/plain"));
-    } catch(err) {
-      return false;
-    }
+    const data = TextEditor.getDragEventData(event);
 
-    if ( data.type !== "Item" ) return false;
+    if ( data?.type !== "Item" ) return false;
     const item = await Item.implementation.fromDropData(data);
 
     try {
@@ -169,7 +188,7 @@ export default class AdvancementConfig extends FormApplication {
       return ui.notifications.error(err.message);
     }
 
-    const existingItems = foundry.utils.getProperty(this.advancement.data.configuration, this.options.dropKeyPath);
+    const existingItems = foundry.utils.getProperty(this.advancement.configuration, this.options.dropKeyPath);
 
     // Abort if this uuid is the parent item
     if ( item.uuid === this.item.uuid ) {

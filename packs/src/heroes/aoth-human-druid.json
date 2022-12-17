@@ -176,14 +176,17 @@
       "size": "med",
       "di": {
         "value": [],
+        "bypasses": [],
         "custom": ""
       },
       "dr": {
         "value": [],
+        "bypasses": [],
         "custom": ""
       },
       "dv": {
         "value": [],
+        "bypasses": [],
         "custom": ""
       },
       "ci": {
@@ -649,7 +652,10 @@
         "source": "PHB pg. 150",
         "quantity": 1,
         "weight": 0,
-        "price": 1,
+        "price": {
+          "value": 1,
+          "denomination": "gp"
+        },
         "attunement": 0,
         "equipped": false,
         "rarity": "common",
@@ -698,6 +704,7 @@
           "value": "",
           "units": ""
         },
+        "cover": null,
         "target": {
           "value": "",
           "width": null,
@@ -713,6 +720,7 @@
           "value": 2,
           "max": 2,
           "per": null,
+          "recovery": "",
           "type": "sr"
         },
         "consume": {
@@ -794,7 +802,10 @@
         "source": "PHB pg. 150",
         "quantity": 1,
         "weight": 3,
-        "price": 0.5,
+        "price": {
+          "value": 5,
+          "denomination": "sp"
+        },
         "attunement": 0,
         "equipped": false,
         "rarity": "common",
@@ -812,12 +823,12 @@
         "default": 0
       },
       "_stats": {
-        "systemId": null,
-        "systemVersion": null,
-        "coreVersion": null,
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.3",
+        "coreVersion": "10.290",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1670011640659,
+        "lastModifiedBy": "dnd5ebuilder0000"
       }
     },
     {
@@ -833,7 +844,10 @@
         "source": "PHB pg. 151",
         "quantity": 1,
         "weight": 1,
-        "price": 1,
+        "price": {
+          "value": 1,
+          "denomination": "gp"
+        },
         "attunement": 0,
         "equipped": false,
         "rarity": "common",
@@ -884,7 +898,10 @@
         "source": "PHB pg. 150",
         "quantity": 1,
         "weight": 3,
-        "price": 0.5,
+        "price": {
+          "value": 5,
+          "denomination": "sp"
+        },
         "attunement": 0,
         "equipped": false,
         "rarity": "common",
@@ -898,6 +915,7 @@
           "value": null,
           "units": ""
         },
+        "cover": null,
         "target": {
           "value": null,
           "width": null,
@@ -912,7 +930,8 @@
         "uses": {
           "value": 0,
           "max": 0,
-          "per": ""
+          "per": "",
+          "recovery": ""
         },
         "consume": {
           "type": "",
@@ -966,12 +985,12 @@
         "default": 0
       },
       "_stats": {
-        "systemId": null,
-        "systemVersion": null,
-        "coreVersion": null,
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.3",
+        "coreVersion": "10.290",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1670011640674,
+        "lastModifiedBy": "dnd5ebuilder0000"
       }
     },
     {
@@ -987,7 +1006,10 @@
         "source": "PHB pg. 154",
         "quantity": 1,
         "weight": 5,
-        "price": 3,
+        "price": {
+          "value": 3,
+          "denomination": "gp"
+        },
         "attunement": 0,
         "equipped": false,
         "rarity": "common",
@@ -1032,7 +1054,10 @@
         "source": "PHB pg. 144",
         "quantity": 1,
         "weight": 10,
-        "price": 10,
+        "price": {
+          "value": 10,
+          "denomination": "gp"
+        },
         "attunement": 0,
         "equipped": true,
         "rarity": "common",
@@ -1046,6 +1071,7 @@
           "value": null,
           "units": ""
         },
+        "cover": null,
         "target": {
           "value": null,
           "width": null,
@@ -1060,7 +1086,8 @@
         "uses": {
           "value": 0,
           "max": 0,
-          "per": null
+          "per": null,
+          "recovery": ""
         },
         "consume": {
           "type": "",
@@ -1135,7 +1162,10 @@
         "source": "PHB pg. 149",
         "quantity": 1,
         "weight": 4,
-        "price": 0.2,
+        "price": {
+          "value": 2,
+          "denomination": "sp"
+        },
         "attunement": 0,
         "equipped": true,
         "rarity": "common",
@@ -1149,6 +1179,7 @@
           "value": null,
           "units": ""
         },
+        "cover": null,
         "target": {
           "value": null,
           "width": null,
@@ -1163,7 +1194,8 @@
         "uses": {
           "value": 0,
           "max": 0,
-          "per": ""
+          "per": "",
+          "recovery": ""
         },
         "consume": {
           "type": "",
@@ -1234,12 +1266,12 @@
         "default": 0
       },
       "_stats": {
-        "systemId": null,
-        "systemVersion": null,
-        "coreVersion": null,
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.3",
+        "coreVersion": "10.290",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1670011640689,
+        "lastModifiedBy": "dnd5ebuilder0000"
       }
     },
     {
@@ -1255,7 +1287,10 @@
         "source": "PHB pg. 149",
         "quantity": 1,
         "weight": 2,
-        "price": 0.1,
+        "price": {
+          "value": 1,
+          "denomination": "sp"
+        },
         "attunement": 0,
         "equipped": false,
         "rarity": "common",
@@ -1269,6 +1304,7 @@
           "value": null,
           "units": ""
         },
+        "cover": null,
         "target": {
           "value": null,
           "width": null,
@@ -1283,7 +1319,8 @@
         "uses": {
           "value": 0,
           "max": 0,
-          "per": ""
+          "per": "",
+          "recovery": ""
         },
         "consume": {
           "type": "",
@@ -1354,12 +1391,12 @@
         "default": 0
       },
       "_stats": {
-        "systemId": null,
-        "systemVersion": null,
-        "coreVersion": null,
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.3",
+        "coreVersion": "10.290",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1670011640698,
+        "lastModifiedBy": "dnd5ebuilder0000"
       }
     },
     {
@@ -1375,7 +1412,10 @@
         "source": "PHB pg. 153",
         "quantity": 1,
         "weight": 5,
-        "price": 2,
+        "price": {
+          "value": 2,
+          "denomination": "gp"
+        },
         "attunement": 0,
         "equipped": false,
         "rarity": "common",
@@ -1426,7 +1466,10 @@
         "source": "PHB pg. 150",
         "quantity": 1,
         "weight": 7,
-        "price": 1,
+        "price": {
+          "value": 1,
+          "denomination": "gp"
+        },
         "attunement": 0,
         "equipped": false,
         "rarity": "common",
@@ -1465,7 +1508,10 @@
         "source": "PHB pg. 152",
         "quantity": 1,
         "weight": 1,
-        "price": 0.2,
+        "price": {
+          "value": 2,
+          "denomination": "sp"
+        },
         "attunement": 0,
         "equipped": false,
         "rarity": "common",
@@ -1483,12 +1529,12 @@
         "default": 0
       },
       "_stats": {
-        "systemId": null,
-        "systemVersion": null,
-        "coreVersion": null,
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.3",
+        "coreVersion": "10.290",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1670011640705,
+        "lastModifiedBy": "dnd5ebuilder0000"
       }
     },
     {
@@ -1504,7 +1550,10 @@
         "source": "PHB pg. 153",
         "quantity": 1,
         "weight": 1,
-        "price": 0.5,
+        "price": {
+          "value": 5,
+          "denomination": "sp"
+        },
         "attunement": 0,
         "equipped": false,
         "rarity": "common",
@@ -1522,12 +1571,12 @@
         "default": 0
       },
       "_stats": {
-        "systemId": null,
-        "systemVersion": null,
-        "coreVersion": null,
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.3",
+        "coreVersion": "10.290",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1670011640713,
+        "lastModifiedBy": "dnd5ebuilder0000"
       }
     },
     {
@@ -1543,7 +1592,10 @@
         "source": "PHB pg. 153",
         "quantity": 1,
         "weight": 10,
-        "price": 1,
+        "price": {
+          "value": 1,
+          "denomination": "gp"
+        },
         "attunement": 0,
         "equipped": false,
         "rarity": "common",
@@ -1557,6 +1609,7 @@
           "value": null,
           "units": ""
         },
+        "cover": null,
         "target": {
           "value": null,
           "width": null,
@@ -1572,6 +1625,7 @@
           "value": 1,
           "max": 1,
           "per": "charges",
+          "recovery": "",
           "autoDestroy": false,
           "autoUse": true
         },
@@ -1630,7 +1684,10 @@
         "source": "PHB pg. 153",
         "quantity": 1,
         "weight": 5,
-        "price": 0.2,
+        "price": {
+          "value": 2,
+          "denomination": "sp"
+        },
         "attunement": 0,
         "equipped": false,
         "rarity": "common",
@@ -1644,6 +1701,7 @@
           "value": 0,
           "units": ""
         },
+        "cover": null,
         "target": {
           "value": 0,
           "width": null,
@@ -1659,6 +1717,7 @@
           "value": 4,
           "max": 4,
           "per": "charges",
+          "recovery": "",
           "autoDestroy": false,
           "autoUse": true
         },
@@ -1696,12 +1755,12 @@
         "default": 0
       },
       "_stats": {
-        "systemId": null,
-        "systemVersion": null,
-        "coreVersion": null,
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.3",
+        "coreVersion": "10.290",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1670011640727,
+        "lastModifiedBy": "dnd5ebuilder0000"
       }
     },
     {
@@ -1717,7 +1776,10 @@
         "source": "PHB pg. 153",
         "quantity": 10,
         "weight": 1,
-        "price": 0.01,
+        "price": {
+          "value": 1,
+          "denomination": "cp"
+        },
         "attunement": 0,
         "equipped": false,
         "rarity": "common",
@@ -1731,6 +1793,7 @@
           "value": 1,
           "units": "hour"
         },
+        "cover": null,
         "target": {
           "value": 40,
           "width": null,
@@ -1746,6 +1809,7 @@
           "value": 1,
           "max": 1,
           "per": "charges",
+          "recovery": "",
           "autoDestroy": true,
           "autoUse": true
         },
@@ -1788,12 +1852,12 @@
         "default": 0
       },
       "_stats": {
-        "systemId": null,
-        "systemVersion": null,
-        "coreVersion": null,
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.3",
+        "coreVersion": "10.290",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1670011647558,
+        "lastModifiedBy": "dnd5ebuilder0000"
       }
     },
     {
@@ -1809,7 +1873,10 @@
         "source": "PHB pg. 153",
         "quantity": 10,
         "weight": 2,
-        "price": 0.5,
+        "price": {
+          "value": 5,
+          "denomination": "sp"
+        },
         "attunement": 0,
         "equipped": false,
         "rarity": "common",
@@ -1823,6 +1890,7 @@
           "value": 0,
           "units": ""
         },
+        "cover": null,
         "target": {
           "value": 1,
           "width": null,
@@ -1838,6 +1906,7 @@
           "value": 1,
           "max": 1,
           "per": "charges",
+          "recovery": "",
           "autoDestroy": true,
           "autoUse": true
         },
@@ -1875,12 +1944,12 @@
         "default": 0
       },
       "_stats": {
-        "systemId": null,
-        "systemVersion": null,
-        "coreVersion": null,
+        "systemId": "dnd5e",
+        "systemVersion": "2.0.3",
+        "coreVersion": "10.290",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1670011640749,
+        "lastModifiedBy": "dnd5ebuilder0000"
       }
     },
     {
@@ -1903,6 +1972,7 @@
           "value": null,
           "units": ""
         },
+        "cover": null,
         "target": {
           "value": null,
           "width": null,
@@ -1917,7 +1987,8 @@
         "uses": {
           "value": 0,
           "max": 0,
-          "per": null
+          "per": null,
+          "recovery": ""
         },
         "consume": {
           "type": "",
@@ -2150,6 +2221,7 @@
           "value": null,
           "units": ""
         },
+        "cover": null,
         "target": {
           "value": null,
           "width": null,
@@ -2164,7 +2236,8 @@
         "uses": {
           "value": null,
           "max": "",
-          "per": null
+          "per": null,
+          "recovery": ""
         },
         "consume": {
           "type": "",
@@ -2265,6 +2338,7 @@
           "value": null,
           "units": ""
         },
+        "cover": null,
         "target": {
           "value": null,
           "width": null,
@@ -2279,7 +2353,8 @@
         "uses": {
           "value": null,
           "max": "",
-          "per": null
+          "per": null,
+          "recovery": ""
         },
         "consume": {
           "type": "",
@@ -2354,6 +2429,7 @@
           "value": null,
           "units": "inst"
         },
+        "cover": null,
         "target": {
           "value": 0,
           "width": null,
@@ -2368,7 +2444,8 @@
         "uses": {
           "value": 0,
           "max": 0,
-          "per": ""
+          "per": "",
+          "recovery": ""
         },
         "consume": {
           "type": "",
@@ -2398,12 +2475,12 @@
         "level": 0,
         "school": "trs",
         "components": {
-          "value": "",
           "vocal": true,
           "somatic": true,
           "material": false,
           "ritual": false,
-          "concentration": false
+          "concentration": false,
+          "value": ""
         },
         "materials": {
           "value": "",
@@ -2461,6 +2538,7 @@
           "value": 1,
           "units": "minute"
         },
+        "cover": null,
         "target": {
           "value": 1,
           "width": null,
@@ -2475,7 +2553,8 @@
         "uses": {
           "value": 0,
           "max": 0,
-          "per": ""
+          "per": "",
+          "recovery": ""
         },
         "consume": {
           "type": "",
@@ -2510,12 +2589,12 @@
         "level": 0,
         "school": "trs",
         "components": {
-          "value": "",
           "vocal": true,
           "somatic": true,
           "material": true,
           "ritual": false,
-          "concentration": false
+          "concentration": false,
+          "value": ""
         },
         "materials": {
           "value": "A shamrock leaf, and a club or quarterstaff",
@@ -2573,6 +2652,7 @@
           "value": 24,
           "units": "hour"
         },
+        "cover": null,
         "target": {
           "value": 1,
           "width": null,
@@ -2587,7 +2667,8 @@
         "uses": {
           "value": 0,
           "max": 0,
-          "per": ""
+          "per": "",
+          "recovery": ""
         },
         "consume": {
           "type": "",
@@ -2616,12 +2697,12 @@
         "level": 1,
         "school": "enc",
         "components": {
-          "value": "",
           "vocal": true,
           "somatic": true,
           "material": true,
           "ritual": false,
-          "concentration": false
+          "concentration": false,
+          "value": ""
         },
         "materials": {
           "value": "A morsel of food.",
@@ -2679,6 +2760,7 @@
           "value": 1,
           "units": "hour"
         },
+        "cover": null,
         "target": {
           "value": 1,
           "width": null,
@@ -2693,7 +2775,8 @@
         "uses": {
           "value": 0,
           "max": 0,
-          "per": ""
+          "per": "",
+          "recovery": ""
         },
         "consume": {
           "type": "",
@@ -2722,12 +2805,12 @@
         "level": 1,
         "school": "enc",
         "components": {
-          "value": "",
           "vocal": true,
           "somatic": true,
           "material": false,
           "ritual": false,
-          "concentration": false
+          "concentration": false,
+          "value": ""
         },
         "materials": {
           "value": "",
@@ -2785,6 +2868,7 @@
           "value": null,
           "units": "inst"
         },
+        "cover": null,
         "target": {
           "value": 30,
           "width": null,
@@ -2799,7 +2883,8 @@
         "uses": {
           "value": 0,
           "max": 0,
-          "per": ""
+          "per": "",
+          "recovery": ""
         },
         "consume": {
           "type": "",
@@ -2829,12 +2914,12 @@
         "level": 1,
         "school": "trs",
         "components": {
-          "value": "",
           "vocal": true,
           "somatic": true,
           "material": true,
           "ritual": false,
-          "concentration": false
+          "concentration": false,
+          "value": ""
         },
         "materials": {
           "value": "A drop of water if creating water or a few grains of sand if destroying it.",
@@ -2892,6 +2977,7 @@
           "value": null,
           "units": "inst"
         },
+        "cover": null,
         "target": {
           "value": 1,
           "width": null,
@@ -2906,7 +2992,8 @@
         "uses": {
           "value": 0,
           "max": 0,
-          "per": ""
+          "per": "",
+          "recovery": ""
         },
         "consume": {
           "type": "",
@@ -2940,12 +3027,12 @@
         "level": 1,
         "school": "evo",
         "components": {
-          "value": "",
           "vocal": true,
           "somatic": true,
           "material": false,
           "ritual": false,
-          "concentration": false
+          "concentration": false,
+          "value": ""
         },
         "materials": {
           "value": "",
@@ -3003,6 +3090,7 @@
           "value": 10,
           "units": "minute"
         },
+        "cover": null,
         "target": {
           "value": 30,
           "width": null,
@@ -3017,7 +3105,8 @@
         "uses": {
           "value": 0,
           "max": 0,
-          "per": ""
+          "per": "",
+          "recovery": ""
         },
         "consume": {
           "type": "",
@@ -3047,12 +3136,12 @@
         "level": 1,
         "school": "div",
         "components": {
-          "value": "",
           "vocal": true,
           "somatic": true,
           "material": false,
           "ritual": true,
-          "concentration": true
+          "concentration": true,
+          "value": ""
         },
         "materials": {
           "value": "",
@@ -3110,6 +3199,7 @@
           "value": 10,
           "units": "minute"
         },
+        "cover": null,
         "target": {
           "value": 30,
           "width": null,
@@ -3124,7 +3214,8 @@
         "uses": {
           "value": 0,
           "max": 0,
-          "per": ""
+          "per": "",
+          "recovery": ""
         },
         "consume": {
           "type": "",
@@ -3154,12 +3245,12 @@
         "level": 1,
         "school": "div",
         "components": {
-          "value": "",
           "vocal": true,
           "somatic": true,
           "material": true,
           "ritual": false,
-          "concentration": true
+          "concentration": true,
+          "value": ""
         },
         "materials": {
           "value": "A yew leaf",
@@ -3214,6 +3305,7 @@
           "value": 1,
           "units": "minute"
         },
+        "cover": null,
         "target": {
           "value": 20,
           "width": null,
@@ -3228,7 +3320,8 @@
         "uses": {
           "value": 0,
           "max": 0,
-          "per": ""
+          "per": "",
+          "recovery": ""
         },
         "consume": {
           "type": "",
@@ -3257,12 +3350,12 @@
         "level": 1,
         "school": "con",
         "components": {
-          "value": "",
           "vocal": true,
           "somatic": true,
           "material": false,
           "ritual": false,
-          "concentration": true
+          "concentration": true,
+          "value": ""
         },
         "materials": {
           "value": "",
@@ -3324,6 +3417,7 @@
           "value": 1,
           "units": "minute"
         },
+        "cover": null,
         "target": {
           "value": 20,
           "width": null,
@@ -3338,7 +3432,8 @@
         "uses": {
           "value": 0,
           "max": 0,
-          "per": ""
+          "per": "",
+          "recovery": ""
         },
         "consume": {
           "type": "",
@@ -3367,12 +3462,12 @@
         "level": 1,
         "school": "evo",
         "components": {
-          "value": "",
           "vocal": true,
           "somatic": false,
           "material": false,
           "ritual": false,
-          "concentration": true
+          "concentration": true,
+          "value": ""
         },
         "materials": {
           "value": "",
@@ -3430,6 +3525,7 @@
           "value": 1,
           "units": "hour"
         },
+        "cover": null,
         "target": {
           "value": 20,
           "width": null,
@@ -3444,7 +3540,8 @@
         "uses": {
           "value": 0,
           "max": 0,
-          "per": ""
+          "per": "",
+          "recovery": ""
         },
         "consume": {
           "type": "",
@@ -3474,12 +3571,12 @@
         "level": 1,
         "school": "con",
         "components": {
-          "value": "",
           "vocal": true,
           "somatic": true,
           "material": false,
           "ritual": false,
-          "concentration": true
+          "concentration": true,
+          "value": ""
         },
         "materials": {
           "value": "",
@@ -3537,6 +3634,7 @@
           "value": null,
           "units": "inst"
         },
+        "cover": null,
         "target": {
           "value": 0,
           "width": null,
@@ -3551,7 +3649,8 @@
         "uses": {
           "value": 0,
           "max": 0,
-          "per": ""
+          "per": "",
+          "recovery": ""
         },
         "consume": {
           "type": "",
@@ -3585,12 +3684,12 @@
         "level": 1,
         "school": "trs",
         "components": {
-          "value": "",
           "vocal": true,
           "somatic": true,
           "material": true,
           "ritual": false,
-          "concentration": false
+          "concentration": false,
+          "value": ""
         },
         "materials": {
           "value": "A spring of mistletoe",
@@ -3648,6 +3747,7 @@
           "value": null,
           "units": "inst"
         },
+        "cover": null,
         "target": {
           "value": 1,
           "width": null,
@@ -3662,7 +3762,8 @@
         "uses": {
           "value": 0,
           "max": 0,
-          "per": ""
+          "per": "",
+          "recovery": ""
         },
         "consume": {
           "type": "",
@@ -3696,12 +3797,12 @@
         "level": 1,
         "school": "evo",
         "components": {
-          "value": "",
           "vocal": true,
           "somatic": false,
           "material": false,
           "ritual": false,
-          "concentration": false
+          "concentration": false,
+          "value": ""
         },
         "materials": {
           "value": "",
@@ -3759,6 +3860,7 @@
           "value": 1,
           "units": "minute"
         },
+        "cover": null,
         "target": {
           "value": 1,
           "width": null,
@@ -3773,7 +3875,8 @@
         "uses": {
           "value": 0,
           "max": 0,
-          "per": ""
+          "per": "",
+          "recovery": ""
         },
         "consume": {
           "type": "",
@@ -3803,12 +3906,12 @@
         "level": 1,
         "school": "trs",
         "components": {
-          "value": "",
           "vocal": true,
           "somatic": true,
           "material": true,
           "ritual": false,
-          "concentration": false
+          "concentration": false,
+          "value": ""
         },
         "materials": {
           "value": "A grasshopper's hind leg",
@@ -3866,6 +3969,7 @@
           "value": 1,
           "units": "hour"
         },
+        "cover": null,
         "target": {
           "value": 1,
           "width": null,
@@ -3880,7 +3984,8 @@
         "uses": {
           "value": 0,
           "max": 0,
-          "per": ""
+          "per": "",
+          "recovery": ""
         },
         "consume": {
           "type": "",
@@ -3910,12 +4015,12 @@
         "level": 1,
         "school": "trs",
         "components": {
-          "value": "",
           "vocal": true,
           "somatic": true,
           "material": true,
           "ritual": false,
-          "concentration": false
+          "concentration": false,
+          "value": ""
         },
         "materials": {
           "value": "A pinch of dirt",
@@ -3973,6 +4078,7 @@
           "value": null,
           "units": "inst"
         },
+        "cover": null,
         "target": {
           "value": 5,
           "width": null,
@@ -3987,7 +4093,8 @@
         "uses": {
           "value": 0,
           "max": 0,
-          "per": ""
+          "per": "",
+          "recovery": ""
         },
         "consume": {
           "type": "",
@@ -4017,12 +4124,12 @@
         "level": 1,
         "school": "trs",
         "components": {
-          "value": "",
           "vocal": true,
           "somatic": true,
           "material": false,
           "ritual": true,
-          "concentration": false
+          "concentration": false,
+          "value": ""
         },
         "materials": {
           "value": "",
@@ -4080,6 +4187,7 @@
           "value": 10,
           "units": "minute"
         },
+        "cover": null,
         "target": {
           "value": null,
           "width": null,
@@ -4094,7 +4202,8 @@
         "uses": {
           "value": 0,
           "max": 0,
-          "per": ""
+          "per": "",
+          "recovery": ""
         },
         "consume": {
           "type": "",
@@ -4124,12 +4233,12 @@
         "level": 1,
         "school": "div",
         "components": {
-          "value": "",
           "vocal": true,
           "somatic": true,
           "material": false,
           "ritual": true,
-          "concentration": false
+          "concentration": false,
+          "value": ""
         },
         "materials": {
           "value": "",
@@ -4187,6 +4296,7 @@
           "value": null,
           "units": "inst"
         },
+        "cover": null,
         "target": {
           "value": 15,
           "width": null,
@@ -4201,7 +4311,8 @@
         "uses": {
           "value": 0,
           "max": 0,
-          "per": ""
+          "per": "",
+          "recovery": ""
         },
         "consume": {
           "type": "",
@@ -4234,12 +4345,12 @@
         "level": 1,
         "school": "evo",
         "components": {
-          "value": "",
           "vocal": true,
           "somatic": true,
           "material": false,
           "ritual": false,
-          "concentration": false
+          "concentration": false,
+          "value": ""
         },
         "materials": {
           "value": "",
@@ -4313,10 +4424,10 @@
   "_id": "ZGDys30OS76uYaIO",
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.0.0",
-    "coreVersion": "10.279",
+    "systemVersion": "2.0.3",
+    "coreVersion": "10.290",
     "createdTime": 1661787232171,
-    "modifiedTime": 1661878142437,
+    "modifiedTime": 1670011647558,
     "lastModifiedBy": "dnd5ebuilder0000"
   }
 }

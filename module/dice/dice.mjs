@@ -26,7 +26,7 @@
  * @property {boolean} [reliableTalent]  Allow Reliable Talent to modify this roll?
  *
  * ## Roll Configuration Dialog
- * @property {boolean} [fastForward=false]     Should the roll configuration dialog be skipped?
+ * @property {boolean} [fastForward]           Should the roll configuration dialog be skipped?
  * @property {boolean} [chooseModifier=false]  If the configuration dialog is shown, should the ability modifier be
  *                                             configurable within that interface?
  * @property {string} [template]               The HTML template used to display the roll configuration dialog.
@@ -52,7 +52,7 @@ export async function d20Roll({
   parts=[], data={}, event,
   advantage, disadvantage, critical=20, fumble=1, targetValue,
   elvenAccuracy, halflingLucky, reliableTalent,
-  fastForward=false, chooseModifier=false, template, title, dialogOptions,
+  fastForward, chooseModifier=false, template, title, dialogOptions,
   chatMessage=true, messageData={}, rollMode, flavor
 }={}) {
 
@@ -111,14 +111,14 @@ export async function d20Roll({
  * @param {boolean} [config.fastForward]   Should the roll dialog be skipped?
  * @returns {{isFF: boolean, advantageMode: number}}  Whether the roll is fast-forward, and its advantage mode.
  */
-function _determineAdvantageMode({event, advantage=false, disadvantage=false, fastForward=false}={}) {
-  const isFF = fastForward || (event && (event.shiftKey || event.altKey || event.ctrlKey || event.metaKey));
+function _determineAdvantageMode({event, advantage=false, disadvantage=false, fastForward}={}) {
+  const isFF = fastForward ?? (event && (event.shiftKey || event.altKey || event.ctrlKey || event.metaKey));
   let advantageMode = CONFIG.Dice.D20Roll.ADV_MODE.NORMAL;
   if ( advantage || event?.altKey ) advantageMode = CONFIG.Dice.D20Roll.ADV_MODE.ADVANTAGE;
   else if ( disadvantage || event?.ctrlKey || event?.metaKey ) {
     advantageMode = CONFIG.Dice.D20Roll.ADV_MODE.DISADVANTAGE;
   }
-  return {isFF, advantageMode};
+  return {isFF: !!isFF, advantageMode};
 }
 
 /* -------------------------------------------- */
@@ -136,7 +136,7 @@ function _determineAdvantageMode({event, advantage=false, disadvantage=false, fa
  *
  * ## Critical Handling
  * @property {boolean} [allowCritical=true]  Is this damage roll allowed to be rolled as critical?
- * @property {boolean} [critical=false]      Apply critical to this roll (unless overridden by modifier key or dialog)?
+ * @property {boolean} [critical]            Apply critical to this roll (unless overridden by modifier key or dialog)?
  * @property {number} [criticalBonusDice]    A number of bonus damage dice that are added for critical hits.
  * @property {number} [criticalMultiplier]   Multiplier to use when calculating critical damage.
  * @property {boolean} [multiplyNumeric]     Should numeric terms be multiplied when this roll criticals?
@@ -144,7 +144,7 @@ function _determineAdvantageMode({event, advantage=false, disadvantage=false, fa
  * @property {string} [criticalBonusDamage]  An extra damage term that is applied only on a critical hit.
  *
  * ## Roll Configuration Dialog
- * @property {boolean} [fastForward=false]  Should the roll configuration dialog be skipped?
+ * @property {boolean} [fastForward]        Should the roll configuration dialog be skipped?
  * @property {string} [template]            The HTML template used to render the roll configuration dialog.
  * @property {string} [title]               Title of the roll configuration dialog.
  * @property {object} [dialogOptions]       Additional options passed to the roll configuration dialog.
@@ -166,9 +166,9 @@ function _determineAdvantageMode({event, advantage=false, disadvantage=false, fa
  */
 export async function damageRoll({
   parts=[], data={}, event,
-  allowCritical=true, critical=false, criticalBonusDice, criticalMultiplier,
+  allowCritical=true, critical, criticalBonusDice, criticalMultiplier,
   multiplyNumeric, powerfulCritical, criticalBonusDamage,
-  fastForward=false, template, title, dialogOptions,
+  fastForward, template, title, dialogOptions,
   chatMessage=true, messageData={}, rollMode, flavor
 }={}) {
 
@@ -219,8 +219,8 @@ export async function damageRoll({
  * @param {boolean} [config.fastForward]  Should the roll dialog be skipped?
  * @returns {{isFF: boolean, isCritical: boolean}}  Whether the roll is fast-forward, and whether it is a critical hit
  */
-function _determineCriticalMode({event, critical=false, fastForward=false}={}) {
-  const isFF = fastForward || (event && (event.shiftKey || event.altKey || event.ctrlKey || event.metaKey));
+function _determineCriticalMode({event, critical=false, fastForward}={}) {
+  const isFF = fastForward ?? (event && (event.shiftKey || event.altKey || event.ctrlKey || event.metaKey));
   if ( event?.altKey ) critical = true;
-  return {isFF, isCritical: critical};
+  return {isFF: !!isFF, isCritical: critical};
 }

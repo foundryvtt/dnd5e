@@ -5,14 +5,17 @@
   "img": "icons/skills/ranged/bullets-triple-ball-yellow.webp",
   "system": {
     "description": {
-      "value": "<p>A hardened pebble of stone, bone, or metal which can be flung at high velocity using a sling.</p>\n<p><em>**Foundry note: It will usually be impossible to buy one sling bullet because they are worth less than a copper piece (5 bullets = 1 cp).</em></p>",
+      "value": "<p>A hardened pebble of stone, bone, or metal which can be flung at high velocity using a sling.</p><section class=\"secret foundry-note\" id=\"secret-nfge79saW8cFjJrx\"><p><strong>Foundry Note</strong></p><p>It will usually be impossible to buy one sling bullet because they are worth less than a copper piece (5 bullets = 1 cp).</p></section>",
       "chat": "",
       "unidentified": ""
     },
     "source": "PHB pg. 150",
     "quantity": 1,
     "weight": 0.075,
-    "price": 0.002,
+    "price": {
+      "value": 0.2,
+      "denomination": "cp"
+    },
     "attunement": 0,
     "equipped": false,
     "rarity": "common",
@@ -26,6 +29,7 @@
       "value": 0,
       "units": ""
     },
+    "cover": null,
     "target": {
       "value": 0,
       "width": null,
@@ -41,6 +45,7 @@
       "value": null,
       "max": "",
       "per": "",
+      "recovery": "",
       "autoDestroy": false
     },
     "consume": {
@@ -50,7 +55,7 @@
     },
     "ability": "",
     "actionType": "rwak",
-    "attackBonus": 0,
+    "attackBonus": "0",
     "chatFlavor": "",
     "critical": {
       "threshold": null,
@@ -81,10 +86,10 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.0.0",
-    "coreVersion": "10.279",
+    "systemVersion": "2.0.3",
+    "coreVersion": "10.290",
     "createdTime": 1661787233974,
-    "modifiedTime": 1661787233974,
+    "modifiedTime": 1670010904169,
     "lastModifiedBy": "dnd5ebuilder0000"
   }
 }

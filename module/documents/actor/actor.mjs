@@ -82,6 +82,12 @@ export default class Actor5e extends Actor {
 
   /** @inheritDoc */
   prepareBaseData() {
+
+    // Delegate preparation to type-subclass
+    if ( this.type === "group" ) {  // Eventually other types will also support this
+      return this.system._prepareBaseData();
+    }
+
     const updates = {};
     this._prepareBaseAbilities(updates);
     this._prepareBaseSkills(updates);
@@ -91,6 +97,8 @@ export default class Actor5e extends Actor {
     }
 
     this._prepareBaseArmorClass();
+
+    // Type-specific preparation
     switch ( this.type ) {
       case "character":
         return this._prepareCharacterData();
@@ -115,6 +123,12 @@ export default class Actor5e extends Actor {
 
   /** @inheritDoc */
   prepareDerivedData() {
+
+    // Delegate preparation to type-subclass
+    if ( this.type === "group" ) {  // Eventually other types will also support this
+      return this.system._prepareDerivedData();
+    }
+
     const flags = this.flags.dnd5e || {};
     this.labels = {};
 
@@ -182,7 +196,7 @@ export default class Actor5e extends Actor {
 
     data.classes = {};
     for ( const [identifier, cls] of Object.entries(this.classes) ) {
-      data.classes[identifier] = cls.system;
+      data.classes[identifier] = foundry.utils.deepClone(cls.system);
       if ( cls.subclass ) data.classes[identifier].subclass = cls.subclass.system;
     }
     return data;
@@ -199,6 +213,7 @@ export default class Actor5e extends Actor {
    * @protected
    */
   _prepareBaseAbilities(updates) {
+    if ( !("abilities" in this.system) ) return;
     const abilities = {};
     for ( const key of Object.keys(CONFIG.DND5E.abilities) ) {
       abilities[key] = this.system.abilities[key];
@@ -232,7 +247,7 @@ export default class Actor5e extends Actor {
    * @private
    */
   _prepareBaseSkills(updates) {
-    if ( this.type === "vehicle") return;
+    if ( !("skills" in this.system) ) return;
     const skills = {};
     for ( const [key, skill] of Object.entries(CONFIG.DND5E.skills) ) {
       skills[key] = this.system.skills[key];
@@ -597,6 +612,8 @@ export default class Actor5e extends Actor {
   }
 
   /* -------------------------------------------- */
+  /*  Spellcasting Preparation                    */
+  /* -------------------------------------------- */
 
   /**
    * Prepare data related to the spell-casting capabilities of the Actor.
@@ -605,73 +622,197 @@ export default class Actor5e extends Actor {
    */
   _prepareSpellcasting() {
     if ( this.type === "vehicle" ) return;
-    const isNPC = this.type === "npc";
-    const spells = this.system.spells;
 
     // Spellcasting DC
     const spellcastingAbility = this.system.abilities[this.system.attributes.spellcasting];
     this.system.attributes.spelldc = spellcastingAbility ? spellcastingAbility.dc : 8 + this.system.attributes.prof;
 
-    // Translate the list of classes into spell-casting progression
-    const progression = {total: 0, slot: 0, pact: 0};
+    // Translate the list of classes into spellcasting progression
+    const progression = { slot: 0, pact: 0 };
+    const types = {};
 
-    // Keep track of the last seen caster in case we're in a single-caster situation.
-    let caster = null;
-
-    // Tabulate the total spell-casting progression
-    for ( let cls of Object.values(this.classes) ) {
-      const prog = cls.spellcasting.progression;
-      if ( prog === "none" ) continue;
-      const levels = cls.system.levels;
-
-      // Accumulate levels
-      if ( prog !== "pact" ) {
-        caster = cls;
-        progression.total++;
-      }
-      switch (prog) {
-        case "third": progression.slot += Math.floor(levels / 3); break;
-        case "half": progression.slot += Math.floor(levels / 2); break;
-        case "full": progression.slot += levels; break;
-        case "artificer": progression.slot += Math.ceil(levels / 2); break;
-        case "pact": progression.pact += levels; break;
-      }
+    // NPCs don't get spell levels from classes
+    if ( this.type === "npc" ) {
+      progression.slot = this.system.details.spellLevel ?? 0;
     }
 
-    // EXCEPTION: single-classed non-full progression rounds up, rather than down
-    const isSingleClass = (progression.total === 1) && (progression.slot > 0);
-    if ( !isNPC && isSingleClass && ["half", "third"].includes(caster.spellcasting.progression) ) {
-      const denom = caster.spellcasting.progression === "third" ? 3 : 2;
-      progression.slot = Math.ceil(caster.system.levels / denom);
+    else {
+      // Grab all classes with spellcasting
+      const classes = this.items.filter(cls => {
+        if ( cls.type !== "class" ) return false;
+        const type = cls.spellcasting.type;
+        if ( !type ) return false;
+        types[type] ??= 0;
+        types[type] += 1;
+        return true;
+      });
+
+      for ( const cls of classes ) this.constructor.computeClassProgression(
+        progression, cls, { actor: this, count: types[cls.spellcasting.type] }
+      );
     }
 
-    // EXCEPTION: NPC with an explicit spell-caster level
-    if ( isNPC && this.system.details.spellLevel ) progression.slot = this.system.details.spellLevel;
+    for ( const type of Object.keys(types) ) {
+      this.constructor.prepareSpellcastingSlots(this.system.spells, type, progression, { actor: this });
+    }
+  }
 
-    // Look up the number of slots per level from the progression table
+  /* -------------------------------------------- */
+
+  /**
+   * Contribute to the actor's spellcasting progression.
+   * @param {object} progression                             Spellcasting progression data. *Will be mutated.*
+   * @param {Item5e} cls                                     Class for whom this progression is being computed.
+   * @param {object} [config={}]
+   * @param {Actor5e|null} [config.actor]                    Actor for whom the data is being prepared.
+   * @param {SpellcastingDescription} [config.spellcasting]  Spellcasting descriptive object.
+   * @param {number} [config.count=1]                        Number of classes with this type of spellcasting.
+   */
+  static computeClassProgression(progression, cls, {actor, spellcasting, count=1}={}) {
+    const type = cls.spellcasting.type;
+    spellcasting = spellcasting ?? cls.spellcasting;
+
+    /**
+     * A hook event that fires while computing the spellcasting progression for each class on each actor.
+     * The actual hook names include the spellcasting type (e.g. `dnd5e.computeLeveledProgression`).
+     * @param {object} progression                    Spellcasting progression data. *Will be mutated.*
+     * @param {Actor5e|null} [actor]                  Actor for whom the data is being prepared.
+     * @param {Item5e} cls                            Class for whom this progression is being computed.
+     * @param {SpellcastingDescription} spellcasting  Spellcasting descriptive object.
+     * @param {number} count                          Number of classes with this type of spellcasting.
+     * @returns {boolean}  Explicitly return false to prevent default progression from being calculated.
+     * @function dnd5e.computeSpellcastingProgression
+     * @memberof hookEvents
+     */
+    const allowed = Hooks.call(
+      `dnd5e.compute${type.capitalize()}Progression`, progression, actor, cls, spellcasting, count
+    );
+
+    if ( allowed && (type === "pact") ) {
+      this.computePactProgression(progression, actor, cls, spellcasting, count);
+    } else if ( allowed && (type === "leveled") ) {
+      this.computeLeveledProgression(progression, actor, cls, spellcasting, count);
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Contribute to the actor's spellcasting progression for a class with leveled spellcasting.
+   * @param {object} progression                    Spellcasting progression data. *Will be mutated.*
+   * @param {Actor5e} actor                         Actor for whom the data is being prepared.
+   * @param {Item5e} cls                            Class for whom this progression is being computed.
+   * @param {SpellcastingDescription} spellcasting  Spellcasting descriptive object.
+   * @param {number} count                          Number of classes with this type of spellcasting.
+   */
+  static computeLeveledProgression(progression, actor, cls, spellcasting, count) {
+    const prog = CONFIG.DND5E.spellcastingTypes.leveled.progression[spellcasting.progression];
+    if ( !prog ) return;
+    const rounding = prog.roundUp ? Math.ceil : Math.floor;
+    progression.slot += rounding(spellcasting.levels / prog.divisor ?? 1);
+    // Single-classed, non-full progression rounds up, rather than down.
+    if ( (count === 1) && (prog.divisor > 1) && progression.slot ) {
+      progression.slot = Math.ceil(spellcasting.levels / prog.divisor);
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Contribute to the actor's spellcasting progression for a class with pact spellcasting.
+   * @param {object} progression                    Spellcasting progression data. *Will be mutated.*
+   * @param {Actor5e} actor                         Actor for whom the data is being prepared.
+   * @param {Item5e} cls                            Class for whom this progression is being computed.
+   * @param {SpellcastingDescription} spellcasting  Spellcasting descriptive object.
+   * @param {number} count                          Number of classes with this type of spellcasting.
+   */
+  static computePactProgression(progression, actor, cls, spellcasting, count) {
+    progression.pact += spellcasting.levels;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare actor's spell slots using progression data.
+   * @param {object} spells           The `data.spells` object within actor's data. *Will be mutated.*
+   * @param {string} type             Type of spellcasting slots being prepared.
+   * @param {object} progression      Spellcasting progression data.
+   * @param {object} [config]
+   * @param {Actor5e} [config.actor]  Actor for whom the data is being prepared.
+   */
+  static prepareSpellcastingSlots(spells, type, progression, {actor}={}) {
+    /**
+     * A hook event that fires to convert the provided spellcasting progression into spell slots.
+     * The actual hook names include the spellcasting type (e.g. `dnd5e.prepareLeveledSlots`).
+     * @param {object} spells        The `data.spells` object within actor's data. *Will be mutated.*
+     * @param {Actor5e} actor        Actor for whom the data is being prepared.
+     * @param {object} progression   Spellcasting progression data.
+     * @returns {boolean}            Explicitly return false to prevent default preparation from being performed.
+     * @function dnd5e.prepareSpellcastingSlots
+     * @memberof hookEvents
+     */
+    const allowed = Hooks.call(`dnd5e.prepare${type.capitalize()}Slots`, spells, actor, progression);
+
+    if ( allowed && (type === "pact") ) this.preparePactSlots(spells, actor, progression);
+    else if ( allowed && (type === "leveled") ) this.prepareLeveledSlots(spells, actor, progression);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare leveled spell slots using progression data.
+   * @param {object} spells        The `data.spells` object within actor's data. *Will be mutated.*
+   * @param {Actor5e} actor        Actor for whom the data is being prepared.
+   * @param {object} progression   Spellcasting progression data.
+   */
+  static prepareLeveledSlots(spells, actor, progression) {
     const levels = Math.clamped(progression.slot, 0, CONFIG.DND5E.maxLevel);
-    const slots = CONFIG.DND5E.SPELL_SLOT_TABLE[Math.min(levels, CONFIG.DND5E.SPELL_SLOT_TABLE.length) - 1] || [];
-    for ( let [n, lvl] of Object.entries(spells) ) {
-      let i = parseInt(n.slice(-1));
-      if ( Number.isNaN(i) ) continue;
-      if ( Number.isNumeric(lvl.override) ) lvl.max = Math.max(parseInt(lvl.override), 0);
-      else lvl.max = slots[i-1] || 0;
-      lvl.value = parseInt(lvl.value);
+    const slots = CONFIG.DND5E.SPELL_SLOT_TABLE[Math.min(levels, CONFIG.DND5E.SPELL_SLOT_TABLE.length) - 1] ?? [];
+    for ( const [n, slot] of Object.entries(spells) ) {
+      const level = parseInt(n.slice(-1));
+      if ( Number.isNaN(level) ) continue;
+      slot.max = Number.isNumeric(slot.override) ? Math.max(parseInt(slot.override), 0) : slots[level - 1] ?? 0;
+      slot.value = parseInt(slot.value); // TODO: DataModels should remove the need for this
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare pact spell slots using progression data.
+   * @param {object} spells        The `data.spells` object within actor's data. *Will be mutated.*
+   * @param {Actor5e} actor        Actor for whom the data is being prepared.
+   * @param {object} progression   Spellcasting progression data.
+   */
+  static preparePactSlots(spells, actor, progression) {
+    // Pact spell data:
+    // - pact.level: Slot level for pact casting
+    // - pact.max: Total number of pact slots
+    // - pact.value: Currently available pact slots
+    // - pact.override: Override number of available spell slots
+
+    let pactLevel = Math.clamped(progression.pact, 0, CONFIG.DND5E.maxLevel);
+    spells.pact ??= {};
+    const override = Number.isNumeric(spells.pact.override) ? parseInt(spells.pact.override) : null;
+
+    // Pact slot override
+    if ( (pactLevel === 0) && (actor.type === "npc") && (override !== null) ) {
+      pactLevel = actor.system.details.spellLevel;
     }
 
-    // Determine the Actor's pact magic level (if any)
-    let pl = Math.clamped(progression.pact, 0, CONFIG.DND5E.maxLevel);
-    spells.pact = spells.pact || {};
-    if ( (pl === 0) && isNPC && Number.isNumeric(spells.pact.override) ) pl = this.system.details.spellLevel;
-
-    // Determine the number of Warlock pact slots per level
-    if ( pl > 0 ) {
-      spells.pact.level = Math.ceil(Math.min(10, pl) / 2);
-      if ( Number.isNumeric(spells.pact.override) ) spells.pact.max = Math.max(parseInt(spells.pact.override), 1);
-      else spells.pact.max = Math.max(1, Math.min(pl, 2), Math.min(pl - 8, 3), Math.min(pl - 13, 4));
+    // TODO: Allow pact level and slot count to be configured
+    if ( pactLevel > 0 ) {
+      spells.pact.level = Math.ceil(Math.min(10, pactLevel) / 2); // TODO: Allow custom max pact level
+      if ( override === null ) {
+        spells.pact.max = Math.max(1, Math.min(pactLevel, 2), Math.min(pactLevel - 8, 3), Math.min(pactLevel - 13, 4));
+      } else {
+        spells.pact.max = Math.max(override, 1);
+      }
       spells.pact.value = Math.min(spells.pact.value, spells.pact.max);
-    } else {
-      spells.pact.max = parseInt(spells.pact.override) || 0;
+    }
+
+    else {
+      spells.pact.max = override || 0;
       spells.pact.level = spells.pact.max > 0 ? 1 : 0;
     }
   }
@@ -687,10 +828,14 @@ export default class Actor5e extends Actor {
     if ( sourceId?.startsWith("Compendium.") ) return;
 
     // Configure prototype token settings
-    const s = CONFIG.DND5E.tokenSizes[this.system.traits.size || "med"];
-    const prototypeToken = {width: s, height: s};
-    if ( this.type === "character" ) Object.assign(prototypeToken, {vision: true, actorLink: true, disposition: 1});
-    this.updateSource({prototypeToken});
+    if ( "size" in (this.system.traits || {}) ) {
+      const s = CONFIG.DND5E.tokenSizes[this.system.traits.size || "med"];
+      const prototypeToken = {width: s, height: s};
+      if ( this.type === "character" ) Object.assign(prototypeToken, {
+        sight: { enabled: true }, actorLink: true, disposition: 1
+      });
+      this.updateSource({prototypeToken});
+    }
   }
 
   /* -------------------------------------------- */
@@ -700,21 +845,25 @@ export default class Actor5e extends Actor {
     await super._preUpdate(changed, options, user);
 
     // Apply changes in Actor size to Token width/height
-    const newSize = foundry.utils.getProperty(changed, "system.traits.size");
-    if ( newSize && (newSize !== this.system.traits?.size) ) {
-      let size = CONFIG.DND5E.tokenSizes[newSize];
-      if ( !foundry.utils.hasProperty(changed, "prototypeToken.width") ) {
-        changed.prototypeToken ||= {};
-        changed.prototypeToken.height = size;
-        changed.prototypeToken.width = size;
+    if ( "size" in (this.system.traits || {}) ) {
+      const newSize = foundry.utils.getProperty(changed, "system.traits.size");
+      if ( newSize && (newSize !== this.system.traits?.size) ) {
+        let size = CONFIG.DND5E.tokenSizes[newSize];
+        if ( !foundry.utils.hasProperty(changed, "prototypeToken.width") ) {
+          changed.prototypeToken ||= {};
+          changed.prototypeToken.height = size;
+          changed.prototypeToken.width = size;
+        }
       }
     }
 
     // Reset death save counters
-    const isDead = this.system.attributes.hp.value <= 0;
-    if ( isDead && (foundry.utils.getProperty(changed, "system.attributes.hp.value") > 0) ) {
-      foundry.utils.setProperty(changed, "system.attributes.death.success", 0);
-      foundry.utils.setProperty(changed, "system.attributes.death.failure", 0);
+    if ( "hp" in (this.system.attributes || {}) ) {
+      const isDead = this.system.attributes.hp.value <= 0;
+      if ( isDead && (foundry.utils.getProperty(changed, "system.attributes.hp.value") > 0) ) {
+        foundry.utils.setProperty(changed, "system.attributes.death.success", 0);
+        foundry.utils.setProperty(changed, "system.attributes.death.failure", 0);
+      }
     }
   }
 
@@ -756,6 +905,7 @@ export default class Actor5e extends Actor {
   async applyDamage(amount=0, multiplier=1) {
     amount = Math.floor(parseInt(amount) * multiplier);
     const hp = this.system.attributes.hp;
+    if ( !hp ) return this; // Group actors don't have HP at the moment
 
     // Deduct damage from temp HP first
     const tmp = parseInt(hp.temp) || 0;
@@ -796,6 +946,19 @@ export default class Actor5e extends Actor {
     // Update the actor if the new amount is greater than the current
     const tmp = parseInt(hp.temp) || 0;
     return amount > tmp ? this.update({"system.attributes.hp.temp": amount}) : this;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Get a color used to represent the current hit points of an Actor.
+   * @param {number} current        The current HP value
+   * @param {number} max            The maximum HP value
+   * @returns {Color}               The color used to represent the HP percentage
+   */
+  static getHPColor(current, max) {
+    const pct = Math.clamped(current, 0, max) / max;
+    return Color.fromRGB([(1-(pct/2)), pct, 0]);
   }
 
   /* -------------------------------------------- */
@@ -860,16 +1023,12 @@ export default class Actor5e extends Actor {
       data.skillBonus = Roll.replaceFormulaData(globalBonuses.skill, data);
     }
 
-    // Add provided extra roll parts now because they will get clobbered by mergeObject below
-    if ( options.parts?.length > 0 ) parts.push(...options.parts);
-
     // Reliable Talent applies to any skill check we have full or better proficiency in
     const reliableTalent = (skl.value >= 1 && this.getFlag("dnd5e", "reliableTalent"));
 
     // Roll and return
     const flavor = game.i18n.format("DND5E.SkillPromptTitle", {skill: CONFIG.DND5E.skills[skillId]?.label ?? ""});
     const rollData = foundry.utils.mergeObject({
-      parts: parts,
       data: data,
       title: `${flavor}: ${this.name}`,
       flavor,
@@ -881,6 +1040,7 @@ export default class Actor5e extends Actor {
         "flags.dnd5e.roll": {type: "skill", skillId }
       }
     }, options);
+    rollData.parts = parts.concat(options.parts ?? []);
 
     /**
      * A hook event that fires before a skill check is rolled for an Actor.
@@ -973,13 +1133,9 @@ export default class Actor5e extends Actor {
       data.checkBonus = Roll.replaceFormulaData(globalBonuses.check, data);
     }
 
-    // Add provided extra roll parts now because they will get clobbered by mergeObject below
-    if ( options.parts?.length > 0 ) parts.push(...options.parts);
-
     // Roll and return
     const flavor = game.i18n.format("DND5E.AbilityPromptTitle", {ability: label});
     const rollData = foundry.utils.mergeObject({
-      parts,
       data,
       title: `${flavor}: ${this.name}`,
       flavor,
@@ -989,6 +1145,7 @@ export default class Actor5e extends Actor {
         "flags.dnd5e.roll": {type: "ability", abilityId }
       }
     }, options);
+    rollData.parts = parts.concat(options.parts ?? []);
 
     /**
      * A hook event that fires before an ability test is rolled for an Actor.
@@ -1055,13 +1212,9 @@ export default class Actor5e extends Actor {
       data.saveBonus = Roll.replaceFormulaData(globalBonuses.save, data);
     }
 
-    // Add provided extra roll parts now because they will get clobbered by mergeObject below
-    if ( options.parts?.length > 0 ) parts.push(...options.parts);
-
     // Roll and return
     const flavor = game.i18n.format("DND5E.SavePromptTitle", {ability: label});
     const rollData = foundry.utils.mergeObject({
-      parts,
       data,
       title: `${flavor}: ${this.name}`,
       flavor,
@@ -1071,6 +1224,7 @@ export default class Actor5e extends Actor {
         "flags.dnd5e.roll": {type: "save", abilityId }
       }
     }, options);
+    rollData.parts = parts.concat(options.parts ?? []);
 
     /**
      * A hook event that fires before an ability save is rolled for an Actor.
@@ -1135,7 +1289,6 @@ export default class Actor5e extends Actor {
     // Evaluate the roll
     const flavor = game.i18n.localize("DND5E.DeathSavingThrow");
     const rollData = foundry.utils.mergeObject({
-      parts,
       data,
       title: `${flavor}: ${this.name}`,
       flavor,
@@ -1146,6 +1299,7 @@ export default class Actor5e extends Actor {
         "flags.dnd5e.roll": {type: "death"}
       }
     }, options);
+    rollData.parts = parts.concat(options.parts ?? []);
 
     /**
      * A hook event that fires before a death saving throw is rolled for an Actor.
@@ -1309,8 +1463,11 @@ export default class Actor5e extends Actor {
      */
     if ( Hooks.call("dnd5e.rollHitDie", this, roll, updates) === false ) return roll;
 
+    // Re-evaluate dhp in the event that it was changed in the previous hook
+    const updateOptions = { dhp: (updates.actor?.["system.attributes.hp.value"] ?? hp.value) - hp.value };
+
     // Perform updates
-    if ( !foundry.utils.isEmpty(updates.actor) ) await this.update(updates.actor);
+    if ( !foundry.utils.isEmpty(updates.actor) ) await this.update(updates.actor, updateOptions);
     if ( !foundry.utils.isEmpty(updates.class) ) await cls.update(updates.class);
 
     return roll;
@@ -1491,7 +1648,7 @@ export default class Actor5e extends Actor {
       },
       updateItems: [
         ...hitDiceUpdates,
-        ...await this._getRestItemUsesRecovery({ recoverLongRestUses: longRest, recoverDailyUses: newDay, rolls })
+        ...(await this._getRestItemUsesRecovery({ recoverLongRestUses: longRest, recoverDailyUses: newDay, rolls }))
       ],
       longRest,
       newDay
@@ -1800,19 +1957,28 @@ export default class Actor5e extends Actor {
    * the target actor.
    *
    * @typedef {object} TransformationOptions
-   * @property {boolean} [keepPhysical=false]    Keep physical abilities (str, dex, con)
-   * @property {boolean} [keepMental=false]      Keep mental abilities (int, wis, cha)
-   * @property {boolean} [keepSaves=false]       Keep saving throw proficiencies
-   * @property {boolean} [keepSkills=false]      Keep skill proficiencies
-   * @property {boolean} [mergeSaves=false]      Take the maximum of the save proficiencies
-   * @property {boolean} [mergeSkills=false]     Take the maximum of the skill proficiencies
-   * @property {boolean} [keepClass=false]       Keep proficiency bonus
-   * @property {boolean} [keepFeats=false]       Keep features
-   * @property {boolean} [keepSpells=false]      Keep spells
-   * @property {boolean} [keepItems=false]       Keep items
-   * @property {boolean} [keepBio=false]         Keep biography
-   * @property {boolean} [keepVision=false]      Keep vision
-   * @property {boolean} [transformTokens=true]  Transform linked tokens too
+   * @property {boolean} [keepPhysical=false]       Keep physical abilities (str, dex, con)
+   * @property {boolean} [keepMental=false]         Keep mental abilities (int, wis, cha)
+   * @property {boolean} [keepSaves=false]          Keep saving throw proficiencies
+   * @property {boolean} [keepSkills=false]         Keep skill proficiencies
+   * @property {boolean} [mergeSaves=false]         Take the maximum of the save proficiencies
+   * @property {boolean} [mergeSkills=false]        Take the maximum of the skill proficiencies
+   * @property {boolean} [keepClass=false]          Keep proficiency bonus
+   * @property {boolean} [keepFeats=false]          Keep features
+   * @property {boolean} [keepSpells=false]         Keep spells
+   * @property {boolean} [keepItems=false]          Keep items
+   * @property {boolean} [keepBio=false]            Keep biography
+   * @property {boolean} [keepVision=false]         Keep vision
+   * @property {boolean} [keepSelf=false]           Keep self
+   * @property {boolean} [keepAE=false]             Keep all effects
+   * @property {boolean} [keepOriginAE=true]        Keep effects which originate on this actor
+   * @property {boolean} [keepOtherOriginAE=true]   Keep effects which originate on another actor
+   * @property {boolean} [keepSpellAE=true]         Keep effects which originate from actors spells
+   * @property {boolean} [keepFeatAE=true]          Keep effects which originate from actors features
+   * @property {boolean} [keepEquipmentAE=true]     Keep effects which originate on actors equipment
+   * @property {boolean} [keepClassAE=true]         Keep effects which originate from actors class/subclass
+   * @property {boolean} [keepBackgroundAE=true]    Keep effects which originate from actors background
+   * @property {boolean} [transformTokens=true]     Transform linked tokens too
    */
 
   /**
@@ -1820,11 +1986,15 @@ export default class Actor5e extends Actor {
    *
    * @param {Actor5e} target                      The target Actor.
    * @param {TransformationOptions} [options={}]  Options that determine how the transformation is performed.
+   * @param {object} [options]
+   * @param {boolean} [options.renderSheet=true]  Render the sheet of the transformed actor after the polymorph
    * @returns {Promise<Array<Token>>|null}        Updated token if the transformation was performed.
    */
   async transformInto(target, { keepPhysical=false, keepMental=false, keepSaves=false, keepSkills=false,
-    mergeSaves=false, mergeSkills=false, keepClass=false, keepFeats=false, keepSpells=false,
-    keepItems=false, keepBio=false, keepVision=false, transformTokens=true }={}) {
+    mergeSaves=false, mergeSkills=false, keepClass=false, keepFeats=false, keepSpells=false, keepItems=false,
+    keepBio=false, keepVision=false, keepSelf=false, keepAE=false, keepOriginAE=true, keepOtherOriginAE=true,
+    keepSpellAE=true, keepEquipmentAE=true, keepFeatAE=true, keepClassAE=true, keepBackgroundAE=true,
+    transformTokens=true}={}, {renderSheet=true}={}) {
 
     // Ensure the player is allowed to polymorph
     const allowed = game.settings.get("dnd5e", "allowPolymorphing");
@@ -1838,8 +2008,13 @@ export default class Actor5e extends Actor {
     o.flags.dnd5e.transformOptions = {mergeSkills, mergeSaves};
     const source = target.toObject();
 
+    if ( keepSelf ) {
+      o.img = source.img;
+      o.name = `${o.name} (${game.i18n.localize("DND5E.PolymorphSelf")})`;
+    }
+
     // Prepare new data to merge from the source
-    const d = {
+    const d = foundry.utils.mergeObject({
       type: o.type, // Remain the same actor type
       name: `${o.name} (${source.name})`, // Append the new shape to your old name
       system: source.system, // Get the systemdata model of your new form
@@ -1848,8 +2023,9 @@ export default class Actor5e extends Actor {
       img: source.img, // New appearance
       ownership: o.ownership, // Use the original actor permissions
       folder: o.folder, // Be displayed in the same sidebar folder
-      flags: o.flags // Use the original actor flags
-    };
+      flags: o.flags, // Use the original actor flags
+      prototypeToken: { name: `${o.name} (${source.name})`, texture: {}, sight: {}, detectionModes: [] } // Set a new empty token
+    }, keepSelf ? o : {}); // Keeps most of original actor
 
     // Specifically delete some data attributes
     delete d.system.resources; // Don't change your resource pools
@@ -1864,78 +2040,115 @@ export default class Actor5e extends Actor {
     d.system.attributes.ac.flat = target.system.attributes.ac.value; // Override AC
 
     // Token appearance updates
-    d.prototypeToken = {name: d.name, texture: {}};
     for ( const k of ["width", "height", "alpha", "lockRotation"] ) {
       d.prototypeToken[k] = source.prototypeToken[k];
     }
     for ( const k of ["offsetX", "offsetY", "scaleX", "scaleY", "src", "tint"] ) {
       d.prototypeToken.texture[k] = source.prototypeToken.texture[k];
     }
-    const vision = keepVision ? o.prototypeToken : source.prototypeToken;
-    for ( const k of ["dimSight", "brightSight", "dimLight", "brightLight", "vision", "sightAngle"] ) {
-      d.prototypeToken[k] = vision[k];
+    for ( const k of ["bar1", "bar2", "displayBars", "displayName", "disposition", "rotation", "elevation"] ) {
+      d.prototypeToken[k] = o.prototypeToken[k];
     }
+
+    if ( !keepSelf ) {
+      const sightSource = keepVision ? o.prototypeToken : source.prototypeToken;
+      for ( const k of ["range", "angle", "visionMode", "color", "attenuation", "brightness", "saturation", "contrast", "enabled"] ) {
+        d.prototypeToken.sight[k] = sightSource.sight[k];
+      }
+      d.prototypeToken.detectionModes = sightSource.detectionModes;
+
+      // Transfer ability scores
+      const abilities = d.system.abilities;
+      for ( let k of Object.keys(abilities) ) {
+        const oa = o.system.abilities[k];
+        const prof = abilities[k].proficient;
+        if ( keepPhysical && ["str", "dex", "con"].includes(k) ) abilities[k] = oa;
+        else if ( keepMental && ["int", "wis", "cha"].includes(k) ) abilities[k] = oa;
+        if ( keepSaves ) abilities[k].proficient = oa.proficient;
+        else if ( mergeSaves ) abilities[k].proficient = Math.max(prof, oa.proficient);
+      }
+
+      // Transfer skills
+      if ( keepSkills ) d.system.skills = o.system.skills;
+      else if ( mergeSkills ) {
+        for ( let [k, s] of Object.entries(d.system.skills) ) {
+          s.value = Math.max(s.value, o.system.skills[k].value);
+        }
+      }
+
+      // Keep specific items from the original data
+      d.items = d.items.concat(o.items.filter(i => {
+        if ( ["class", "subclass"].includes(i.type) ) return keepClass;
+        else if ( i.type === "feat" ) return keepFeats;
+        else if ( i.type === "spell" ) return keepSpells;
+        else return keepItems;
+      }));
+
+      // Transfer classes for NPCs
+      if ( !keepClass && d.system.details.cr ) {
+        d.items.push({
+          type: "class",
+          name: game.i18n.localize("DND5E.PolymorphTmpClass"),
+          data: { levels: d.system.details.cr }
+        });
+      }
+
+      // Keep biography
+      if ( keepBio ) d.system.details.biography = o.system.details.biography;
+
+      // Keep senses
+      if ( keepVision ) d.system.traits.senses = o.system.traits.senses;
+
+      // Remove active effects
+      const oEffects = foundry.utils.deepClone(d.effects);
+      const originEffectIds = new Set(oEffects.filter(effect => {
+        return !effect.origin || effect.origin === this.uuid;
+      }).map(e => e._id));
+      d.effects = d.effects.filter(e => {
+        if ( keepAE ) return true;
+        const origin = e.origin?.startsWith("Actor") || e.origin?.startsWith("Item") ? fromUuidSync(e.origin) : {};
+        const originIsSelf = origin?.parent?.uuid === this.uuid;
+        const isOriginEffect = originEffectIds.has(e._id);
+        if ( isOriginEffect ) return keepOriginAE;
+        if ( !isOriginEffect && !originIsSelf ) return keepOtherOriginAE;
+        if ( origin.type === "spell" ) return keepSpellAE;
+        if ( origin.type === "feat" ) return keepFeatAE;
+        if ( origin.type === "background" ) return keepBackgroundAE;
+        if ( ["subclass", "feat"].includes(origin.type) ) return keepClassAE;
+        if ( ["equipment", "weapon", "tool", "loot", "backpack"].includes(origin.type) ) return keepEquipmentAE;
+        return true;
+      });
+    }
+
+    // Set a random image if source is configured that way
     if ( source.prototypeToken.randomImg ) {
       const images = await target.getTokenImages();
       d.prototypeToken.texture.src = images[Math.floor(Math.random() * images.length)];
     }
 
-    // Transfer ability scores
-    const abilities = d.system.abilities;
-    for ( let k of Object.keys(abilities) ) {
-      const oa = o.system.abilities[k];
-      const prof = abilities[k].proficient;
-      if ( keepPhysical && ["str", "dex", "con"].includes(k) ) abilities[k] = oa;
-      else if ( keepMental && ["int", "wis", "cha"].includes(k) ) abilities[k] = oa;
-      if ( keepSaves ) abilities[k].proficient = oa.proficient;
-      else if ( mergeSaves ) abilities[k].proficient = Math.max(prof, oa.proficient);
-    }
-
-    // Transfer skills
-    if ( keepSkills ) d.system.skills = o.system.skills;
-    else if ( mergeSkills ) {
-      for ( let [k, s] of Object.entries(d.system.skills) ) {
-        s.value = Math.max(s.value, o.system.skills[k].value);
-      }
-    }
-
-    // Keep specific items from the original data
-    d.items = d.items.concat(o.items.filter(i => {
-      if ( ["class", "subclass"].includes(i.type) ) return keepClass;
-      else if ( i.type === "feat" ) return keepFeats;
-      else if ( i.type === "spell" ) return keepSpells;
-      else return keepItems;
-    }));
-
-    // Transfer classes for NPCs
-    if ( !keepClass && d.system.details.cr ) {
-      d.items.push({
-        type: "class",
-        name: game.i18n.localize("DND5E.PolymorphTmpClass"),
-        data: { levels: d.system.details.cr }
-      });
-    }
-
-    // Keep biography
-    if ( keepBio ) d.system.details.biography = o.system.details.biography;
-
-    // Keep senses
-    if ( keepVision ) d.system.traits.senses = o.system.traits.senses;
-
     // Set new data flags
     if ( !this.isPolymorphed || !d.flags.dnd5e.originalActor ) d.flags.dnd5e.originalActor = this.id;
     d.flags.dnd5e.isPolymorphed = true;
 
-    // Update unlinked Tokens in place since they can simply be re-dropped from the base actor
+    // Gather previous actor data
+    const previousActorIds = this.getFlag("dnd5e", "previousActorIds") || [];
+    previousActorIds.push(this._id);
+    foundry.utils.setProperty(d.flags, "dnd5e.previousActorIds", previousActorIds);
+
+    // Update unlinked Tokens, and grab a copy of any actorData adjustments to re-apply
     if ( this.isToken ) {
       const tokenData = d.prototypeToken;
       delete d.prototypeToken;
       tokenData.actorData = d;
-      return this.token.update(tokenData);
+      setProperty(tokenData, "flags.dnd5e.previousActorData", this.token.toObject().actorData);
+      await this.sheet?.close();
+      const update = await this.token.update(tokenData);
+      if ( renderSheet ) this.sheet?.render(true);
+      return update;
     }
 
     // Close sheet for non-transformed Actor
-    await this.sheet.close();
+    await this.sheet?.close();
 
     /**
      * A hook event that fires just before the actor is transformed.
@@ -1945,11 +2158,13 @@ export default class Actor5e extends Actor {
      * @param {Actor5e} target                 The target actor into which to transform.
      * @param {object} data                    The data that will be used to create the new transformed actor.
      * @param {TransformationOptions} options  Options that determine how the transformation is performed.
+     * @param {object} [options]
      */
     Hooks.callAll("dnd5e.transformActor", this, target, d, {
-      keepPhysical, keepMental, keepSaves, keepSkills, mergeSaves, mergeSkills,
-      keepClass, keepFeats, keepSpells, keepItems, keepBio, keepVision, transformTokens
-    });
+      keepPhysical, keepMental, keepSaves, keepSkills, mergeSaves, mergeSkills, keepClass, keepFeats, keepSpells,
+      keepItems, keepBio, keepVision, keepSelf, keepAE, keepOriginAE, keepOtherOriginAE, keepSpellAE,
+      keepEquipmentAE, keepFeatAE, keepClassAE, keepBackgroundAE, transformTokens
+    }, {renderSheet});
 
     // Create new Actor with transformed data
     const newActor = await this.constructor.create(d, {renderSheet: true});
@@ -1962,6 +2177,10 @@ export default class Actor5e extends Actor {
       newTokenData._id = t.id;
       newTokenData.actorId = newActor.id;
       newTokenData.actorLink = true;
+
+      const dOriginalActor = foundry.utils.getProperty(d, "flags.dnd5e.originalActor");
+      foundry.utils.setProperty(newTokenData, "flags.dnd5e.originalActor", dOriginalActor);
+      foundry.utils.setProperty(newTokenData, "flags.dnd5e.isPolymorphed", true);
       return newTokenData;
     });
     return canvas.scene?.updateEmbeddedDocuments("Token", updates);
@@ -1973,37 +2192,77 @@ export default class Actor5e extends Actor {
    * If this actor was transformed with transformTokens enabled, then its
    * active tokens need to be returned to their original state. If not, then
    * we can safely just delete this actor.
+   * @param {object} [options]
+   * @param {boolean} [options.renderSheet=true]  Render Sheet after revert the transformation.
    * @returns {Promise<Actor>|null}  Original actor if it was reverted.
    */
-  async revertOriginalForm() {
+  async revertOriginalForm({renderSheet=true}={}) {
     if ( !this.isPolymorphed ) return;
-    if ( !this.isOwner ) {
-      return ui.notifications.warn(game.i18n.localize("DND5E.PolymorphRevertWarn"));
-    }
+    if ( !this.isOwner ) return ui.notifications.warn(game.i18n.localize("DND5E.PolymorphRevertWarn"));
 
-    // If we are reverting an unlinked token, simply replace it with the base actor prototype
-    if ( this.isToken ) {
-      const baseActor = game.actors.get(this.token.actorId);
-      const prototypeTokenData = await baseActor.getTokenData();
-      const tokenUpdate = {actorData: {}};
-      for ( let k of ["width", "height", "scale", "img", "mirrorX", "mirrorY", "tint", "alpha", "lockRotation", "name"] ) {
-        tokenUpdate[k] = prototypeTokenData[k];
-      }
-      await this.token.update(tokenUpdate, {recursive: false});
-      await this.sheet.close();
-      const actor = this.token.getActor();
-      actor.sheet.render(true);
-      return actor;
-    }
+    /**
+     * A hook event that fires just before the actor is reverted to original form.
+     * @function dnd5e.revertOriginalForm
+     * @memberof hookEvents
+     * @param {Actor} this                 The original actor before transformation.
+     * @param {object} [options]
+     */
+    Hooks.callAll("dnd5e.revertOriginalForm", this, {renderSheet});
+    const previousActorIds = this.getFlag("dnd5e", "previousActorIds") ?? [];
+    const isOriginalActor = !previousActorIds.length;
+    const isRendered = this.sheet.rendered;
 
     // Obtain a reference to the original actor
     const original = game.actors.get(this.getFlag("dnd5e", "originalActor"));
-    if ( !original ) return;
+
+    // If we are reverting an unlinked token, grab the previous actorData, and create a new token
+    if ( this.isToken ) {
+      const baseActor = original ? original : game.actors.get(this.token.actorId);
+      if ( !baseActor ) {
+        ui.notifications.warn(game.i18n.format("DND5E.PolymorphRevertNoOriginalActorWarn", {
+          reference: this.getFlag("dnd5e", "originalActor")
+        }));
+        return;
+      }
+      const prototypeTokenData = await baseActor.getTokenDocument();
+      const actorData = this.token.getFlag("dnd5e", "previousActorData");
+      const tokenUpdate = this.token.toObject();
+      tokenUpdate.actorData = actorData ? actorData : {};
+
+      for ( const k of ["width", "height", "alpha", "lockRotation", "name"] ) {
+        tokenUpdate[k] = prototypeTokenData[k];
+      }
+      for ( const k of ["offsetX", "offsetY", "scaleX", "scaleY", "src", "tint"] ) {
+        tokenUpdate.texture[k] = prototypeTokenData.texture[k];
+      }
+      tokenUpdate.sight = prototypeTokenData.sight;
+      tokenUpdate.detectionModes = prototypeTokenData.detectionModes;
+
+      await this.sheet.close();
+      await canvas.scene?.deleteEmbeddedDocuments("Token", [this.token._id]);
+      const token = await TokenDocument.implementation.create(tokenUpdate, {
+        parent: canvas.scene, keepId: true, render: true
+      });
+      if ( isOriginalActor ) {
+        await this.unsetFlag("dnd5e", "isPolymorphed");
+        await this.unsetFlag("dnd5e", "previousActorIds");
+        await this.token.unsetFlag("dnd5e", "previousActorData");
+      }
+      if ( isRendered && renderSheet ) token.actor?.sheet?.render(true);
+      return token;
+    }
+
+    if ( !original ) {
+      ui.notifications.warn(game.i18n.format("DND5E.PolymorphRevertNoOriginalActorWarn", {
+        reference: this.getFlag("dnd5e", "originalActor")
+      }));
+      return;
+    }
 
     // Get the Tokens which represent this actor
     if ( canvas.ready ) {
       const tokens = this.getActiveTokens(true);
-      const tokenData = await original.getTokenData();
+      const tokenData = await original.getTokenDocument();
       const tokenUpdates = tokens.map(t => {
         const update = duplicate(tokenData);
         update._id = t.id;
@@ -2011,14 +2270,25 @@ export default class Actor5e extends Actor {
         delete update.y;
         return update;
       });
-      canvas.scene.updateEmbeddedDocuments("Token", tokenUpdates);
+      await canvas.scene.updateEmbeddedDocuments("Token", tokenUpdates);
+    }
+    if ( isOriginalActor ) {
+      await this.unsetFlag("dnd5e", "isPolymorphed");
+      await this.unsetFlag("dnd5e", "previousActorIds");
     }
 
-    // Delete the polymorphed version of the actor, if possible
-    const isRendered = this.sheet.rendered;
-    if ( game.user.isGM ) await this.delete();
-    else if ( isRendered ) this.sheet.close();
-    if ( isRendered ) original.sheet.render(isRendered);
+    // Delete the polymorphed version(s) of the actor, if possible
+    if ( game.user.isGM ) {
+      const idsToDelete = previousActorIds.filter(id =>
+        id !== original.id // Is not original Actor Id
+        && game.actors?.get(id) // Actor still exists
+      ).concat([this.id]); // Add this id
+
+      await Actor.implementation.deleteDocuments(idsToDelete);
+    } else if ( isRendered ) {
+      this.sheet?.close();
+    }
+    if ( isRendered && renderSheet ) original.sheet?.render(isRendered);
     return original;
   }
 

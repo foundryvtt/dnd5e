@@ -5,14 +5,17 @@
   "img": "icons/weapons/staves/staff-simple-brown.webp",
   "system": {
     "description": {
-      "value": "<p><em>(Requires attunement)</em></p>\n<p>This staff can be wielded as a magic quarterstaff that grants a +3 bonus to attack and damage rolls made with it.</p>\n<p>The staff has 10 charges. When you hit with a melee attack using it, you can expend up to 3 of its charges. For each charge you expend, the target takes an extra 1d6 force damage. The staff regains 1d6 + 4 expended charges daily at dawn. If you expend the last charge, roll a d20. On a 1, the staff becomes a nonmagical quarterstaff.</p>\n<p><em>Foundry note: the Other Formula button has been configured to roll 1d6. Use to calculate any additional force damage and the staff's recharge rate at dawn (+4) as required.</em></p>",
+      "value": "<p><em>(Requires attunement)</em></p><p>This staff can be wielded as a magic quarterstaff that grants a +3 bonus to attack and damage rolls made with it.</p><p>The staff has 10 charges. When you hit with a melee attack using it, you can expend up to 3 of its charges. For each charge you expend, the target takes an extra 1d6 force damage. The staff regains 1d6 + 4 expended charges daily at dawn. If you expend the last charge, roll a d20. On a 1, the staff becomes a nonmagical quarterstaff.</p><section class=\"secret foundry-note\" id=\"secret-Fp8PZmbsQFbsmSHS\"><p><strong>Foundry Note</strong></p><p>The Other Formula button has been configured to roll 1d6. Use to calculate any additional force damage.</p></section>",
       "chat": "",
       "unidentified": ""
     },
     "source": "DMG pg. 203",
     "quantity": 1,
     "weight": 4,
-    "price": 21000,
+    "price": {
+      "value": 21000,
+      "denomination": "gp"
+    },
     "attunement": 1,
     "equipped": false,
     "rarity": "veryRare",
@@ -39,18 +42,18 @@
     },
     "uses": {
       "value": 10,
-      "max": 10,
+      "max": "10",
       "per": "charges",
       "recovery": "1d6 + 4"
     },
     "consume": {
       "type": "",
-      "target": null,
+      "target": "",
       "amount": null
     },
-    "ability": null,
+    "ability": "",
     "actionType": "mwak",
-    "attackBonus": 3,
+    "attackBonus": "3",
     "chatFlavor": "",
     "critical": {
       "threshold": null,
@@ -59,11 +62,11 @@
     "damage": {
       "parts": [
         [
-          "1d6 + @mod +3",
+          "1d6 + @mod + 3",
           "bludgeoning"
         ]
       ],
-      "versatile": "1d8 + @mod +3"
+      "versatile": "1d8 + @mod + 3"
     },
     "formula": "1d6",
     "save": {
@@ -97,7 +100,9 @@
       "thr": false,
       "two": false,
       "ver": true,
-      "mgc": true
+      "mgc": true,
+      "ada": false,
+      "sil": false
     },
     "proficient": false,
     "attributes": {
@@ -113,10 +118,10 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.0.2",
+    "systemVersion": "2.0.3",
     "coreVersion": "10.286",
     "createdTime": 1661787233677,
-    "modifiedTime": 1663775408628,
+    "modifiedTime": 1663991753286,
     "lastModifiedBy": "dnd5ebuilder0000"
   }
 }

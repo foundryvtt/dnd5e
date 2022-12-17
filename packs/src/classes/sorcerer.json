@@ -16,6 +16,15 @@
     "hitDiceUsed": 0,
     "advancement": [
       {
+        "_id": "czx84ra36ggluafq",
+        "type": "HitPoints",
+        "configuration": {},
+        "value": {},
+        "title": "",
+        "icon": "",
+        "classRestriction": ""
+      },
+      {
         "_id": "uuxthec7dohzb4wn",
         "type": "ItemGrant",
         "configuration": {
@@ -73,11 +82,87 @@
         "classRestriction": ""
       },
       {
-        "_id": "czx84ra36ggluafq",
-        "type": "HitPoints",
-        "configuration": {},
+        "_id": "uBQrvmekBPhuWdhn",
+        "type": "ScaleValue",
+        "configuration": {
+          "identifier": "cantrips-known",
+          "type": "number",
+          "distance": {
+            "units": ""
+          },
+          "scale": {
+            "1": {
+              "value": 4
+            },
+            "4": {
+              "value": 5
+            },
+            "10": {
+              "value": 6
+            }
+          }
+        },
         "value": {},
-        "title": "",
+        "title": "Cantrips Known",
+        "icon": "",
+        "classRestriction": ""
+      },
+      {
+        "_id": "kqDpgYVXmbFj8k1E",
+        "type": "ScaleValue",
+        "configuration": {
+          "identifier": "spells-known",
+          "type": "number",
+          "distance": {
+            "units": ""
+          },
+          "scale": {
+            "1": {
+              "value": 2
+            },
+            "2": {
+              "value": 3
+            },
+            "3": {
+              "value": 4
+            },
+            "4": {
+              "value": 5
+            },
+            "5": {
+              "value": 6
+            },
+            "6": {
+              "value": 7
+            },
+            "7": {
+              "value": 8
+            },
+            "8": {
+              "value": 9
+            },
+            "9": {
+              "value": 10
+            },
+            "10": {
+              "value": 11
+            },
+            "11": {
+              "value": 12
+            },
+            "13": {
+              "value": 13
+            },
+            "15": {
+              "value": 14
+            },
+            "17": {
+              "value": 15
+            }
+          }
+        },
+        "value": {},
+        "title": "Spells Known",
         "icon": "",
         "classRestriction": ""
       }

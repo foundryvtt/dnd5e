@@ -7,7 +7,7 @@
   "type": "feat",
   "system": {
     "description": {
-      "value": "<p>Starting at 14th level, you can increase the power of your simpler spells. When you cast a wizard spell of 1st through 5th level that deals damage, you can deal maximum damage with that spell.</p><p>The first time you do so, you suffer no adverse effect. If you use this feature again before you finish a long rest, you take 2d12 necrotic damage for each level of the spell, immediately after you cast it. Each time you use this feature again before finishing a long rest, the necrotic damage per spell level increases by 1d12. This damage ignores resistance and immunity.</p><p><em>**Foundry note: Note the limited use is to track the first, safe instance of Overchanneling. The damage formula is set to the base default of 2d12. The Versatile roll is set to 1d12 to add any additional damage.</em></p>",
+      "value": "<p>Starting at 14th level, you can increase the power of your simpler spells. When you cast a wizard spell of 1st through 5th level that deals damage, you can deal maximum damage with that spell.</p><p>The first time you do so, you suffer no adverse effect. If you use this feature again before you finish a long rest, you take 2d12 necrotic damage for each level of the spell, immediately after you cast it. Each time you use this feature again before finishing a long rest, the necrotic damage per spell level increases by 1d12. This damage ignores resistance and immunity.</p><section class=\"secret foundry-note\" id=\"secret-Dyr8peTt64lvnGQN\"><p><strong>Foundry Note</strong></p><p>Limited use is to track the first, safe instance of Overchanneling. The damage formula is set to the base default of 2d12. The Versatile roll is set to 1d12 to add any additional damage.</p></section>",
       "chat": "",
       "unidentified": ""
     },
@@ -24,7 +24,7 @@
     "target": {
       "value": null,
       "width": null,
-      "units": null,
+      "units": "",
       "type": "self"
     },
     "range": {
@@ -34,8 +34,9 @@
     },
     "uses": {
       "value": 1,
-      "max": 1,
-      "per": "lr"
+      "max": "1",
+      "per": "lr",
+      "recovery": ""
     },
     "consume": {
       "type": "",
@@ -78,10 +79,10 @@
   "sort": 0,
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.0.0",
-    "coreVersion": "10.279",
+    "systemVersion": "2.0.3",
+    "coreVersion": "10.286",
     "createdTime": 1661787234383,
-    "modifiedTime": 1661787234383,
+    "modifiedTime": 1663990960045,
     "lastModifiedBy": "dnd5ebuilder0000"
   }
 }

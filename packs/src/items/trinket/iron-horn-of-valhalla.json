@@ -12,7 +12,10 @@
     "source": "DMG pg. 175",
     "quantity": 1,
     "weight": 3,
-    "price": 14000,
+    "price": {
+      "value": 14000,
+      "denomination": "gp"
+    },
     "attunement": 0,
     "equipped": false,
     "rarity": "legendary",

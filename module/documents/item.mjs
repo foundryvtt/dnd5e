@@ -1,5 +1,6 @@
 import {d20Roll, damageRoll} from "../dice/dice.mjs";
 import simplifyRollFormula from "../dice/simplify-roll-formula.mjs";
+import Advancement from "../advancement/advancement.mjs";
 import {AbilityUseDialog, ItemProfileSelectDialog} from "../applications/item/_module.mjs";
 import Proficiency from "./actor/proficiency.mjs";
 
@@ -37,7 +38,7 @@ export default class Item5e extends Item {
     }
 
     // Case 2 - inferred from a parent actor
-    if ( this.actor ) {
+    if ( this.actor && ("ability" in this.actor.system) ) {
       const abilities = this.actor.system.abilities;
       const spellcasting = this.actor.system.attributes.spellcasting;
 
@@ -147,7 +148,7 @@ export default class Item5e extends Item {
   get class() {
     if ( !this.isEmbedded || (this.type !== "subclass") ) return null;
     const cid = this.system.classIdentifier;
-    return this._classLink ??= this.parent.items.find(i => (i.type === "class") && (i.system.identifier === cid));
+    return this._classLink ??= this.parent.items.find(i => (i.type === "class") && (i.identifier === cid));
   }
 
   /* -------------------------------------------- */
@@ -159,7 +160,7 @@ export default class Item5e extends Item {
   get subclass() {
     if ( !this.isEmbedded || (this.type !== "class") ) return null;
     const items = this.parent.items;
-    const cid = this.system.identifier;
+    const cid = this.identifier;
     return this._classLink ??= items.find(i => (i.type === "subclass") && (i.system.classIdentifier === cid));
   }
 
@@ -257,7 +258,7 @@ export default class Item5e extends Item {
     if ( !["class", "subclass"].includes(this.type) || !this.advancement.byType.ScaleValue ) return {};
     const level = this.type === "class" ? this.system.levels : this.class?.system.levels ?? 0;
     return this.advancement.byType.ScaleValue.reduce((obj, advancement) => {
-      obj[advancement.identifier] = advancement.prepareValue(level);
+      obj[advancement.identifier] = advancement.valueForLevel(level);
       return obj;
     }, {});
   }
@@ -265,20 +266,40 @@ export default class Item5e extends Item {
   /* -------------------------------------------- */
 
   /**
+   * Spellcasting details for a class or subclass.
+   *
+   * @typedef {object} SpellcastingDescription
+   * @property {string} type              Spellcasting type as defined in ``CONFIG.DND5E.spellcastingTypes`.
+   * @property {string|null} progression  Progression within the specified spellcasting type if supported.
+   * @property {string} ability           Ability used when casting spells from this class or subclass.
+   * @property {number|null} levels       Number of levels of this class or subclass's class if embedded.
+   */
+
+  /**
    * Retrieve the spellcasting for a class or subclass. For classes, this will return the spellcasting
    * of the subclass if it overrides the class. For subclasses, this will return the class's spellcasting
    * if no spellcasting is defined on the subclass.
-   * @type {object}  Spellcasting object containing progression & ability.
-   * @param {number} usageProfileIndex Which Usage-Profile is being used to roll
+   * @type {SpellcastingDescription|null}  Spellcasting object containing progression & ability.
    */
-  spellcasting(usageProfileIndex) {
-    const spellcasting = this.system?.usageProfiles?.[usageProfileIndex]?.spellcasting;
-    if ( !spellcasting ) return spellcasting;
+  get spellcasting() {
+    const spellcasting = this.system.spellcasting;
+    if ( !spellcasting ) return null;
     const isSubclass = this.type === "subclass";
-    const classSpellcasting = isSubclass ? this.class?.system?.spellcasting : spellcasting;
-    const subclassSpellcasting = isSubclass ? spellcasting : this.subclass?.system.spellcasting;
-    if ( subclassSpellcasting && subclassSpellcasting.progression !== "none" ) return subclassSpellcasting;
-    return classSpellcasting;
+    const classSC = isSubclass ? this.class?.system.spellcasting : spellcasting;
+    const subclassSC = isSubclass ? spellcasting : this.subclass?.system.spellcasting;
+    const finalSC = foundry.utils.deepClone(
+      ( subclassSC && (subclassSC.progression !== "none") ) ? subclassSC : classSC
+    );
+    if ( !finalSC ) return null;
+    finalSC.levels = this.isEmbedded ? (this.system.levels ?? this.class?.system.levels) : null;
+
+    // Temp method for determining spellcasting type until this data is available directly using advancement
+    if ( CONFIG.DND5E.spellcastingTypes[finalSC.progression] ) finalSC.type = finalSC.progression;
+    else finalSC.type = Object.entries(CONFIG.DND5E.spellcastingTypes).find(([type, data]) => {
+      return !!data.progression?.[finalSC.progression];
+    })?.[0];
+
+    return finalSC;
   }
 
   /* -------------------------------------------- */
@@ -476,13 +497,11 @@ export default class Item5e extends Item {
       byType: {},
       needingConfiguration: []
     };
-    for ( const advancementData of this.system.advancement ?? [] ) {
-      const Advancement = dnd5e.advancement.types[`${advancementData.type}Advancement`];
-      if ( !Advancement ) continue;
-      const advancement = new Advancement(this, advancementData);
+    for ( const advancement of this.system.advancement ?? [] ) {
+      if ( !(advancement instanceof Advancement) ) continue;
       this.advancement.byId[advancement.id] = advancement;
-      this.advancement.byType[advancementData.type] ??= [];
-      this.advancement.byType[advancementData.type].push(advancement);
+      this.advancement.byType[advancement.type] ??= [];
+      this.advancement.byType[advancement.type].push(advancement);
       advancement.levels.forEach(l => this.advancement.byLevel[l].push(advancement));
       if ( !advancement.levels.length ) this.advancement.needingConfiguration.push(advancement);
     }
@@ -502,8 +521,10 @@ export default class Item5e extends Item {
   prepareFinalAttributes(usageProfileIndex) {
 
     // Proficiency
-    const isProficient = (this.type === "spell") || this.system.proficient; // Always proficient in spell attacks.
-    this.system.prof = new Proficiency(this.actor?.system.attributes.prof, isProficient);
+    if ( this.actor?.system.attributes?.prof ) {
+      const isProficient = (this.type === "spell") || this.system.proficient; // Always proficient in spell attacks.
+      this.system.prof = new Proficiency(this.actor?.system.attributes.prof, isProficient);
+    }
 
     // Class data
     if ( this.type === "class" ) this.system.isOriginalClass = this.isOriginalClass;
@@ -522,6 +543,9 @@ export default class Item5e extends Item {
 
       // Limited Uses
       this.prepareMaxUses(usageProfileIndex);
+
+      // Duration
+      this.prepareDurationValue();
 
       // Damage Label
       this.getDerivedDamageLabel();
@@ -652,6 +676,7 @@ export default class Item5e extends Item {
    * Retrieve an item's critical hit threshold. Uses the smallest value from among the following sources:
    * - item document
    * - item document's actor (if it has one)
+   * - item document's ammunition (if it has any)
    * - the constant '20'
    * @param {number} usageProfileIndex Which Usage-Profile is being used to roll
    * @returns {number|null}  The minimum value that must be rolled to be considered a critical hit.
@@ -660,9 +685,14 @@ export default class Item5e extends Item {
     const actorFlags = this.actor.flags.dnd5e || {};
     if ( !this.hasAttack(usageProfileIndex) ) return null;
     let actorThreshold = null;
+    let itemThreshold = this.system.critical?.threshold ?? Infinity;
+    let ammoThreshold = Infinity;
     if ( this.type === "weapon" ) actorThreshold = actorFlags.weaponCriticalThreshold;
     else if ( this.type === "spell" ) actorThreshold = actorFlags.spellCriticalThreshold;
-    return Math.min(this.system?.usageProfiles?.[usageProfileIndex]?.critical?.threshold ?? 20, actorThreshold ?? 20);
+    if ( this.system.consume?.type === "ammo" ) {
+      ammoThreshold = this.actor.items.get(this.system?.usageProfiles?.[usageProfileIndex]?.consume.target)?.system?.usageProfiles?.[o]?.critical.threshold ?? Infinity;
+    }
+    return Math.min(itemThreshold, ammoThreshold, actorThreshold ?? 20);
   }
 
   /* -------------------------------------------- */
@@ -689,6 +719,37 @@ export default class Item5e extends Item {
       }
     }
     uses.max = Number(max);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Populate the duration value of an item. If the item is an owned item and the
+   * duration value is not numeric, calculate based on actor data.
+   */
+  prepareDurationValue() {
+    const duration = this.system.duration;
+    if ( !duration?.value ) return;
+    let value = duration.value;
+
+    // If this is an owned item and the value is not numeric, we need to calculate it
+    if ( this.isOwned && !Number.isNumeric(value) ) {
+      const property = game.i18n.localize("DND5E.Duration");
+      try {
+        const rollData = this.actor.getRollData({ deterministic: true });
+        value = Roll.safeEval(this.replaceFormulaData(value, rollData, { property }));
+      } catch(e) {
+        const message = game.i18n.format("DND5E.FormulaMalformedError", { property, name: this.name });
+        this.actor._preparationWarnings.push({ message, link: this.uuid, type: "error" });
+        console.error(message, e);
+        return;
+      }
+    }
+    duration.value = Number(value);
+
+    // Now that duration value is a number, set the label
+    if ( ["inst", "perm"].includes(duration.units) ) duration.value = null;
+    this.labels.duration = [duration.value, CONFIG.DND5E.timePeriods[duration.units]].filterJoin(" ");
   }
 
   /* -------------------------------------------- */
@@ -748,6 +809,7 @@ export default class Item5e extends Item {
    * @property {boolean} createMessage    Whether to automatically create a chat message (if true) or simply return
    *                                      the prepared chat message data (if false).
    * @property {object} flags             Additional flags added to the chat message.
+   * @property {Event} event              The browser event which triggered the item usage, if any.
    */
 
   /**
@@ -809,9 +871,9 @@ export default class Item5e extends Item {
     options = foundry.utils.mergeObject({
       configureDialog: true,
       createMessage: true,
-      flags: {},
       itemUsageProfileIndex: usageProfileIndex,
-      itemUsageProfile: usageProfile
+      itemUsageProfile: usageProfile,
+      "flags.dnd5e.use": {type: this.type, itemId: this.id, itemUuid: this.uuid}
     }, options);
 
     // Reference aspects of the item data necessary for usage
@@ -862,6 +924,7 @@ export default class Item5e extends Item {
         item?.usageProfiles?.forEach((_, index) => item.prepareFinalAttributes(index));
       }
     }
+    if ( isSpell ) foundry.utils.mergeObject(options.flags, {"dnd5e.use.spellLevel": item.system.level});
 
     /**
      * A hook event that fires before an item's resource consumption has been calculated.
@@ -1310,7 +1373,7 @@ export default class Item5e extends Item {
    */
   _lootChatData(data, labels, props) {
     props.push(
-      game.i18n.localize("DND5E.ItemTypeLoot"),
+      game.i18n.localize("ITEM.TypeLoot"),
       data.weight ? `${data.weight} ${game.i18n.localize("DND5E.AbbreviationLbs")}` : null
     );
   }
@@ -1418,7 +1481,6 @@ export default class Item5e extends Item {
 
     // Compose roll options
     const rollConfig = foundry.utils.mergeObject({
-      parts,
       actor: this.actor,
       data: rollData,
       critical: this.getCriticalThreshold(usageProfileIndex),
@@ -1432,10 +1494,11 @@ export default class Item5e extends Item {
         left: window.innerWidth - 710
       },
       messageData: {
-        "flags.dnd5e.roll": {type: "attack", itemId: this.id },
+        "flags.dnd5e.roll": {type: "attack", itemId: this.id, itemUuid: this.uuid},
         speaker: ChatMessage.getSpeaker({actor: this.actor})
       }
     }, options);
+    rollConfig.parts = parts.concat(options.parts ?? []);
 
     /**
      * A hook event that fires before an attack is rolled for an Item.
@@ -1478,7 +1541,7 @@ export default class Item5e extends Item {
    * @returns {Promise<DamageRoll>}        A Promise which resolves to the created Roll instance, or null if the action
    *                                       cannot be performed.
    */
-  async rollDamage({critical=false, event=null, spellLevel=null, options={}}={}) {
+  async rollDamage({critical, event=null, spellLevel=null, versatile=false, options={}}={}) {
 
     // Establish which usage-profile is being used
     const usageProfileId = event?.currentTarget?.dataset?.usageProfileId;
@@ -1487,8 +1550,9 @@ export default class Item5e extends Item {
     const usageProfile = this?.system?.usageProfiles?.[usageProfileIndex];
 
     if ( !this.hasDamage(usageProfileIndex) ) throw new Error("You may not make a Damage Roll with this Item.");
+
     const messageData = {
-      "flags.dnd5e.roll": {type: "damage", itemId: this.id},
+      "flags.dnd5e.roll": {type: "damage", itemId: this.id, itemUuid: this.uuid},
       speaker: ChatMessage.getSpeaker({actor: this.actor})
     };
 
@@ -1503,11 +1567,9 @@ export default class Item5e extends Item {
     const title = `${this.name}${(this?.system?.usageProfiles?.length > 1) ? ` - ${usageProfile.profileName}` : ""} - ${actionFlavor}`;
     const rollConfig = {
       actor: this.actor,
-      critical: critical ?? event?.altKey ?? false,
+      critical,
       data: rollData,
-      event: event,
-      fastForward: event ? event.shiftKey || event.altKey || event.ctrlKey || event.metaKey : false,
-      parts: parts,
+      event,
       title: title,
       flavor: this.labels.damageTypes.length ? `${title} (${this.labels.damageTypes})` : title,
       dialogOptions: {
@@ -1556,6 +1618,7 @@ export default class Item5e extends Item {
     if ( usageProfile.critical?.damage ) rollConfig.criticalBonusDamage = usageProfile.critical.damage;
 
     foundry.utils.mergeObject(rollConfig, options);
+    rollConfig.parts = parts.concat(options.parts ?? []);
 
     /**
      * A hook event that fires before a damage is rolled for an Item.
@@ -1696,7 +1759,7 @@ export default class Item5e extends Item {
         speaker: ChatMessage.getSpeaker({actor: this.actor}),
         flavor: `${this.name} - ${game.i18n.localize("DND5E.OtherFormula")}`,
         rollMode: game.settings.get("core", "rollMode"),
-        messageData: {"flags.dnd5e.roll": {type: "other", itemId: this.id }}
+        messageData: {"flags.dnd5e.roll": {type: "other", itemId: this.id, itemUuid: this.uuid}}
       });
     }
 
@@ -1812,7 +1875,6 @@ export default class Item5e extends Item {
 
     // Compose the roll data
     const rollConfig = foundry.utils.mergeObject({
-      parts: parts,
       data: rollData,
       title: title,
       flavor: title,
@@ -1826,9 +1888,10 @@ export default class Item5e extends Item {
       reliableTalent: (this.system.proficient >= 1) && this.actor.getFlag("dnd5e", "reliableTalent"),
       messageData: {
         speaker: options.speaker || ChatMessage.getSpeaker({actor: this.actor}),
-        "flags.dnd5e.roll": {type: "tool", itemId: this.id }
+        "flags.dnd5e.roll": {type: "tool", itemId: this.id, itemUuid: this.uuid}
       }
     }, options);
+    rollConfig.parts = parts.concat(options.parts ?? []);
 
     /**
      * A hook event that fires before a tool check is rolled for an Item.
@@ -1873,7 +1936,7 @@ export default class Item5e extends Item {
 
     // Include an ability score modifier if one exists
     const abl = this.abilityMod(usageProfileIndex);
-    if ( abl ) {
+    if ( abl && ("abilities" in rollData) ) {
       const ability = rollData.abilities[abl];
       if ( !ability ) {
         console.warn(`Item ${this.name} in Actor ${this.actor.name} has an invalid item ability modifier of ${abl} defined`);
@@ -1915,13 +1978,13 @@ export default class Item5e extends Item {
     const message = game.messages.get(messageId);
     const action = button.dataset.action;
 
-    // Validate permission to proceed with the roll
-    const isTargetted = action === "save";
-    if ( !( isTargetted || game.user.isGM || message.isAuthor ) ) return;
-
     // Recover the actor for the chat card
     const actor = await this._getChatCardActor(card);
     if ( !actor ) return;
+
+    // Validate permission to proceed with the roll
+    const isTargetted = action === "save";
+    if ( !( isTargetted || game.user.isGM || actor.isOwner ) ) return;
 
     // Get the Item from stored flag data or by the item ID on the Actor
     const storedData = message.getFlag("dnd5e", "itemData");
@@ -1939,7 +2002,6 @@ export default class Item5e extends Item {
         await item.rollAttack({event}); break;
       case "damage":
         await item.rollDamage({
-          critical: event.altKey,
           event: event,
           spellLevel: spellLevel
         });
@@ -1956,8 +2018,9 @@ export default class Item5e extends Item {
       case "toolCheck":
         await item.rollToolCheck({event}); break;
       case "placeTemplate":
-        const template = dnd5e.canvas.AbilityTemplate.fromItem(item);
-        if ( template ) template.drawPreview();
+        try {
+          await dnd5e.canvas.AbilityTemplate.fromItem(item)?.drawPreview();
+        } catch(err) {}
         break;
       case "abilityCheck":
         targets = this._getChatCardTargets(card);
@@ -2030,77 +2093,96 @@ export default class Item5e extends Item {
 
   /**
    * Create a new advancement of the specified type.
-   * @param {string} type                        Type of advancement to create.
-   * @param {object} [data]                      Data to use when creating the advancement.
+   * @param {string} type                          Type of advancement to create.
+   * @param {object} [data]                        Data to use when creating the advancement.
    * @param {object} [options]
-   * @param {boolean} [options.showConfig=true]  Should the new advancement's configuration application be shown?
-   * @returns {Promise<AdvancementConfig>}
+   * @param {boolean} [options.showConfig=true]    Should the new advancement's configuration application be shown?
+   * @param {boolean} [options.source=false]       Should a source-only update be performed?
+   * @returns {Promise<AdvancementConfig>|Item5e}  Promise for advancement config for new advancement if local
+   *                                               is `false`, or item with newly added advancement.
    */
-  async createAdvancement(type, data={}, { showConfig=true }={}) {
+  createAdvancement(type, data={}, { showConfig=true, source=false }={}) {
     if ( !this.system.advancement ) return;
 
-    const Advancement = dnd5e.advancement.types[`${type}Advancement`];
-    if ( !Advancement ) throw new Error(`${type}Advancement not found in dnd5e.advancement.types`);
-    data = foundry.utils.mergeObject(Advancement.defaultData, data);
+    const Advancement = CONFIG.DND5E.advancementTypes[type];
+    if ( !Advancement ) throw new Error(`${type} not found in CONFIG.DND5E.advancementTypes`);
 
     if ( !Advancement.metadata.validItemTypes.has(this.type) || !Advancement.availableForItem(this) ) {
       throw new Error(`${type} advancement cannot be added to ${this.name}`);
     }
 
-    const advancement = this.toObject().system.advancement;
-    if ( !data._id ) data._id = foundry.utils.randomID();
-    advancement.push(data);
-    await this.update({"system.advancement": advancement});
-
-    if ( !showConfig ) return;
-    const config = new Advancement.metadata.apps.config(this.advancement.byId[data._id]);
-    return config.render(true);
+    const advancement = new Advancement(data, {parent: this});
+    const advancementCollection = this.toObject().system.advancement;
+    advancementCollection.push(advancement.toObject());
+    if ( source ) return this.updateSource({"system.advancement": advancementCollection});
+    return this.update({"system.advancement": advancementCollection}).then(() => {
+      if ( !showConfig ) return this;
+      const config = new Advancement.metadata.apps.config(this.advancement.byId[advancement.id]);
+      return config.render(true);
+    });
   }
 
   /* -------------------------------------------- */
 
   /**
    * Update an advancement belonging to this item.
-   * @param {string} id          ID of the advancement to update.
-   * @param {object} updates     Updates to apply to this advancement, using the same format as `Document#update`.
-   * @returns {Promise<Item5e>}  This item with the changes applied.
+   * @param {string} id                       ID of the advancement to update.
+   * @param {object} updates                  Updates to apply to this advancement.
+   * @param {object} [options={}]
+   * @param {boolean} [options.source=false]  Should a source-only update be performed?
+   * @returns {Promise<Item5e>|Item5e}        This item with the changes applied, promised if source is `false`.
    */
-  async updateAdvancement(id, updates) {
+  updateAdvancement(id, updates, { source=false }={}) {
     if ( !this.system.advancement ) return;
     const idx = this.system.advancement.findIndex(a => a._id === id);
     if ( idx === -1 ) throw new Error(`Advancement of ID ${id} could not be found to update`);
-    const advancement = this.toObject().system.advancement;
-    foundry.utils.mergeObject(advancement[idx], updates, { performDeletions: true });
-    return this.update({"system.advancement": advancement});
+
+    const advancement = this.advancement.byId[id];
+    advancement.updateSource(updates);
+    if ( source ) return this;
+    const advancementCollection = this.toObject().system.advancement;
+    advancementCollection[idx] = advancement.toObject();
+    return this.update({"system.advancement": advancementCollection});
   }
 
   /* -------------------------------------------- */
 
   /**
    * Remove an advancement from this item.
-   * @param {string} id          ID of the advancement to remove.
-   * @returns {Promise<Item5e>}  This item with the changes applied.
+   * @param {string} id                       ID of the advancement to remove.
+   * @param {object} [options={}]
+   * @param {boolean} [options.source=false]  Should a source-only update be performed?
+   * @returns {Promise<Item5e>|Item5e}        This item with the changes applied.
    */
-  async deleteAdvancement(id) {
+  deleteAdvancement(id, { source=false }={}) {
     if ( !this.system.advancement ) return;
-    return this.update({"system.advancement": this.system.advancement.filter(a => a._id !== id)});
+
+    const advancementCollection = this.system.advancement.filter(a => a._id !== id);
+    if ( source ) return this.updateSource({"system.advancement": advancementCollection});
+    return this.update({"system.advancement": advancementCollection});
   }
 
   /* -------------------------------------------- */
 
   /**
    * Duplicate an advancement, resetting its value to default and giving it a new ID.
-   * @param {string} id                          ID of the advancement to duplicate.
+   * @param {string} id                             ID of the advancement to duplicate.
    * @param {object} [options]
-   * @param {boolean} [options.showConfig=true]  Should the new advancement's configuration application be shown?
-   * @returns {Promise<Item5e>}                  This item with the changes applied.
+   * @param {boolean} [options.showConfig=true]     Should the new advancement's configuration application be shown?
+   * @param {boolean} [options.source=false]        Should a source-only update be performed?
+   * @returns {Promise<AdvancementConfig>|Item5e}   Promise for advancement config for duplicate advancement if source
+   *                                                is `false`, or item with newly duplicated advancement.
    */
-  async duplicateAdvancement(id, options) {
+  duplicateAdvancement(id, options) {
     const original = this.advancement.byId[id];
     if ( !original ) return;
-    const duplicate = foundry.utils.deepClone(original.data);
+    const duplicate = original.toObject();
     delete duplicate._id;
-    duplicate.value = original.constructor.metadata.defaults.value;
+    if ( original.constructor.metadata.dataModels?.value ) {
+      duplicate.value = (new original.constructor.metadata.dataModels.value()).toObject();
+    } else {
+      duplicate.value = original.constructor.metadata.defaults?.value ?? {};
+    }
     return this.createAdvancement(original.constructor.typeName, duplicate, options);
   }
 
@@ -2348,5 +2430,17 @@ export default class Item5e extends Item {
       }
     });
     return new this(spellScrollData);
+  }
+
+  /* -------------------------------------------- */
+  /*  Compatibility                               */
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  static migrateData(source) {
+    // TODO: Temporary patch until https://github.com/foundryvtt/foundryvtt/issues/8366 is resolved
+    const model = this.schema.get("system").getModelForType(source.type);
+    if ( model ) source.system = model.migrateDataSafe(source.system ?? {});
+    return super.migrateData(source);
   }
 }
