@@ -1698,7 +1698,8 @@
 .dnd5e.sheet.item .usage-profile-name {
   flex: 1;
 }
-.dnd5e.sheet.item .usage-profile-delete {
+.dnd5e.sheet.item .usage-profile-delete,
+.dnd5e.sheet.item .usage-profile-clone {
   flex: 0;
   aspect-ratio: 1;
   height: 20px;

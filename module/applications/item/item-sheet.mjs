@@ -607,20 +607,19 @@ export default class ItemSheet5e extends ItemSheet {
     event.preventDefault();
     const a = event.currentTarget;
 
-    // Add new usage-profile component
+    // Add new usage-profile
     if ( this.isEditable && a.classList.contains("usage-profile-add") ) {
       await this._onSubmit(event);  // Submit any unsaved changes
 
-      const id = foundry.utils.randomID();
       console.debug(`ItemSheet5e | Added a new Usage-Profile to ${JSON.stringify(this?.item?.name)}`);
 
       // Navigate to new page
       this.options.selectedUsageProfile = this.item.system.usageProfiles.length;
 
-      return this.item.update({ "system.usageProfiles": this.item.system.usageProfiles.concat({ _id: id }) });
+      return this.item.update({ "system.usageProfiles": this.item.system.usageProfiles.concat([{ _id: foundry.utils.randomID() }]) });
     }
 
-    // Remove a usage-profile component
+    // Remove a usage-profile
     else if ( this.isEditable && a.classList.contains("usage-profile-delete") ) {
       await this._onSubmit(event);  // Submit any unsaved changes
 
@@ -638,12 +637,34 @@ export default class ItemSheet5e extends ItemSheet {
       }
     }
 
-    // Navigate to a usage-profile
+    // Clone a usage-profile
+    else if ( this.isEditable && a.classList.contains("usage-profile-clone") ) {
+      await this._onSubmit(event);  // Submit any unsaved changes
+
+      console.debug(`ItemSheet5e | Cloned a Usage-Profile within ${JSON.stringify(this?.item?.name)}`);
+
+      // Get the Usage-Profile we want to clone
+      const targetUsageProfile = this.item.system.usageProfiles.find(e => e._id === a.dataset.usageProfileCloneId);
+
+      // Navigate to new page
+      this.options.selectedUsageProfile = this.item.system.usageProfiles.length;
+
+      return this.item.update({
+        "system.usageProfiles": this.item.system.usageProfiles.concat([
+          foundry.utils.mergeObject(
+            foundry.utils.deepClone(targetUsageProfile),
+            { _id: foundry.utils.randomID() }
+          )
+        ])
+      });
+    }
+
+    // Navigate usage-profiles
     else if ( a.classList.contains("usage-profile-navigate") ) {
       await this._onSubmit(event);  // Submit any unsaved changes
 
       const targetUsageProfileIndex = parseInt(a.dataset.targetUsageProfileIndex || 0);
-      console.debug(`ItemSheet5e | Navigated usage-profile within ${JSON.stringify(this?.item?.name)} from ${
+      console.debug(`ItemSheet5e | Navigated Usage-Profile within ${JSON.stringify(this?.item?.name)} from ${
         JSON.stringify(this.item?.system?.usageProfiles?.[this.options.selectedUsageProfile]?.profileName || game.i18n.localize("DND5E.Untitled"))
       } to ${
         JSON.stringify(this.item?.system?.usageProfiles?.[targetUsageProfileIndex]?.profileName || game.i18n.localize("DND5E.Untitled"))
