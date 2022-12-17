@@ -20,7 +20,6 @@ export default class ItemSheet5e extends ItemSheet {
     }
 
     // TEMP: This should be built into the packs etc
-    // TODO: Likely needs consideration for feat, vehicle, tool, etc
     // Transform Weapon/Spell usage data structure
     else if ( ["weapon", "spell", "feat", "equipment", "consumable"].includes(this.object.type) ) {
 

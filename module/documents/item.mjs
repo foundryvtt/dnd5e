@@ -1344,8 +1344,6 @@ export default class Item5e extends Item {
   async rollAttack(options={}) {
     const flags = this.actor.flags.dnd5e ?? {};
     if ( !this.hasAttack ) throw new Error("You may not place an Attack Roll with this Item.");
-    let title = `${this.name} - ${game.i18n.localize("DND5E.AttackRoll")}`;
-
     console.log("ROLL_ATTACK()");
     console.log("options", options);
     console.log("this", this);
@@ -1358,6 +1356,8 @@ export default class Item5e extends Item {
 
     console.log("usageProfileId", usageProfileId);
     console.log("usageProfileIndex", usageProfileIndex);
+
+    let title = `${this.name}${(this?.system?.usageProfiles?.length > 1) ? ` - ${usageProfile.profileName}` : ""} - ${game.i18n.localize("DND5E.AttackRoll")}`;
 
     // Get the parts and rollData for this item's attack
     const {parts, rollData} = this.getAttackToHit(usageProfileIndex);
@@ -1478,7 +1478,7 @@ export default class Item5e extends Item {
 
     // Configure the damage roll
     const actionFlavor = game.i18n.localize(usageProfile.actionType === "heal" ? "DND5E.Healing" : "DND5E.DamageRoll");
-    const title = `${this.name} - ${actionFlavor}`;
+    const title = `${this.name}${(this?.system?.usageProfiles?.length > 1) ? ` - ${usageProfile.profileName}` : ""} - ${actionFlavor}`;
     const rollConfig = {
       actor: this.actor,
       critical: critical ?? event?.altKey ?? false,
