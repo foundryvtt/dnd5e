@@ -605,7 +605,7 @@ export default class ItemSheet5e extends ItemSheet {
       await this._onSubmit(event);  // Submit any unsaved changes
 
       const id = foundry.utils.randomID();
-      console.debug(`Added a new Usage-Profile to ${JSON.stringify(this?.item?.name)}`);
+      console.debug(`ItemSheet5e | Added a new Usage-Profile to ${JSON.stringify(this?.item?.name)}`);
 
       return this.item.update({ "system.usageProfiles": this.item.system.usageProfiles.concat({ _id: id }) });
     }
@@ -614,7 +614,7 @@ export default class ItemSheet5e extends ItemSheet {
     else if ( this.isEditable && a.classList.contains("usage-profile-delete") ) {
       await this._onSubmit(event);  // Submit any unsaved changes
 
-      console.debug(`Removed a Usage-Profile from ${JSON.stringify(this?.item?.name)}`);
+      console.debug(`ItemSheet5e | Removed a Usage-Profile from ${JSON.stringify(this?.item?.name)}`);
 
       if (this.item.system.usageProfiles.length) {
 
@@ -630,7 +630,7 @@ export default class ItemSheet5e extends ItemSheet {
       await this._onSubmit(event);  // Submit any unsaved changes
 
       const targetUsageProfileIndex = parseInt(a.dataset.targetUsageProfileIndex || 0);
-      console.debug(`Navigated usage-profile within ${JSON.stringify(this?.item?.name)} from ${
+      console.debug(`ItemSheet5e | Navigated usage-profile within ${JSON.stringify(this?.item?.name)} from ${
         JSON.stringify(this.item?.system?.usageProfiles?.[this.options.selectedUsageProfile]?.profileName || game.i18n.localize("DND5E.Untitled"))
       } to ${
         JSON.stringify(this.item?.system?.usageProfiles?.[targetUsageProfileIndex]?.profileName || game.i18n.localize("DND5E.Untitled"))
@@ -639,6 +639,8 @@ export default class ItemSheet5e extends ItemSheet {
       // Apply new profile and re-render the sheet
       this.options.selectedUsageProfile = targetUsageProfileIndex;
       this._render();
+
+      return null;
     }
   }
 
