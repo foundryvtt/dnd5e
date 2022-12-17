@@ -106,7 +106,6 @@ export default class ItemSheet5e extends ItemSheet {
         Reflect.deleteProperty(this.object.system, "save");
         Reflect.deleteProperty(this.object.system, "scaling");
 
-        this.object.system.usageProfileIndex = 0; // TODO: This is not editable on locked resources, can it be stored elsewhere?
         this.object.system.usageProfiles = usageProfiles;
       }
     }
@@ -123,7 +122,8 @@ export default class ItemSheet5e extends ItemSheet {
       resizable: true,
       scrollY: [".tab.details"],
       tabs: [{navSelector: ".tabs", contentSelector: ".sheet-body", initial: "description"}],
-      dragDrop: [{dragSelector: "[data-effect-id]", dropSelector: ".effects-list"}]
+      dragDrop: [{dragSelector: "[data-effect-id]", dropSelector: ".effects-list"}],
+      selectedUsageProfile: 0 // TODO: Can this be stored on options and used throughout?
     });
   }
 
@@ -492,7 +492,7 @@ export default class ItemSheet5e extends ItemSheet {
           if ( uses?.max ) {
             const maxRoll = new Roll(uses.max);
             if ( !maxRoll.isDeterministic ) {
-              uses.max = this.item._source.system?.usageProfiles?.[this.item.system.usageProfileIndex]?.uses.max;
+              uses.max = this.item._source.system?.usageProfiles?.[this.options.selectedUsageProfile]?.uses.max;
               this.form.querySelector("input[name='system.uses.max']").value = uses.max;
               return ui.notifications.error(game.i18n.format("DND5E.FormulaCannotContainDiceError", {
                 name: game.i18n.localize("DND5E.LimitedUses")
@@ -528,7 +528,6 @@ export default class ItemSheet5e extends ItemSheet {
 
     html.find(".usage-profile-control").click(this._onUsageProfileControl.bind(this));
     if ( this.isEditable ) {
-      html.find(".usage-profile-control").click(this._onUsageProfileControl.bind(this));
       html.find(".damage-control").click(this._onDamageControl.bind(this));
       html.find(".trait-selector").click(this._onConfigureTraits.bind(this));
       html.find(".effect-control").click(ev => {
@@ -592,7 +591,7 @@ export default class ItemSheet5e extends ItemSheet {
   /* -------------------------------------------- */
 
   /**
-   * Add or remove a damage part from the damage formula.
+   * Add, remove, or navigate usage-profiles within the items sheet.
    * @param {Event} event             The original click event.
    * @returns {Promise<Item5e>|null}  Item with updates applied.
    * @private
@@ -602,33 +601,27 @@ export default class ItemSheet5e extends ItemSheet {
     const a = event.currentTarget;
 
     // Add new usage-profile component
-    if ( a.classList.contains("usage-profile-add") ) {
+    if ( this.isEditable && a.classList.contains("usage-profile-add") ) {
       await this._onSubmit(event);  // Submit any unsaved changes
 
       const id = foundry.utils.randomID();
-      console.debug(`${this.actor.name} added a new Usage-Profile to ${this.item.name}`);
+      console.debug(`Added a new Usage-Profile to ${JSON.stringify(this?.item?.name)}`);
 
-      return this.item.update({
-        "system.usageProfileIndex": this.item.system.usageProfiles.length,
-        "system.usageProfiles": this.item.system.usageProfiles.concat({ _id: id })
-      });
+      return this.item.update({ "system.usageProfiles": this.item.system.usageProfiles.concat({ _id: id }) });
     }
 
     // Remove a usage-profile component
-    else if ( a.classList.contains("usage-profile-delete") ) {
+    else if ( this.isEditable && a.classList.contains("usage-profile-delete") ) {
       await this._onSubmit(event);  // Submit any unsaved changes
 
-      console.debug(`${this.actor.name} removed a Usage-Profile from ${this.item.name}`);
+      console.debug(`Removed a Usage-Profile from ${JSON.stringify(this?.item?.name)}`);
 
       if (this.item.system.usageProfiles.length) {
 
         const usageProfiles = foundry.utils.deepClone(this.item.system.usageProfiles);
         usageProfiles.splice(usageProfiles.findIndex(e => e._id === a.dataset.usageProfileDeleteId), 1);
 
-        return this.item.update({
-          "system.usageProfileIndex": this.item.system.usageProfileIndex - 1 || 0, // Reduce index by 1 if possible
-          "system.usageProfiles": usageProfiles
-        });
+        return this.item.update({ "system.usageProfiles": usageProfiles });
       }
     }
 
@@ -636,9 +629,16 @@ export default class ItemSheet5e extends ItemSheet {
     else if ( a.classList.contains("usage-profile-navigate") ) {
       await this._onSubmit(event);  // Submit any unsaved changes
 
-      console.debug(`${this.actor.name} navigated to a different Usage-Profile within ${this.item.name}`);
+      const targetUsageProfileIndex = parseInt(a.dataset.targetUsageProfileIndex || 0);
+      console.debug(`Navigated usage-profile within ${JSON.stringify(this?.item?.name)} from ${
+        JSON.stringify(this.item?.system?.usageProfiles?.[this.options.selectedUsageProfile]?.profileName || game.i18n.localize("DND5E.Untitled"))
+      } to ${
+        JSON.stringify(this.item?.system?.usageProfiles?.[targetUsageProfileIndex]?.profileName || game.i18n.localize("DND5E.Untitled"))
+      }`);
 
-      return this.item.update({"system.usageProfileIndex": parseInt(a.dataset.usageProfileIndex || 0)});
+      // Apply new profile and re-render the sheet
+      this.options.selectedUsageProfile = targetUsageProfileIndex;
+      this._render();
     }
   }
 
@@ -659,7 +659,7 @@ export default class ItemSheet5e extends ItemSheet {
       await this._onSubmit(event);  // Submit any unsaved changes
 
       const usageProfiles = foundry.utils.deepClone(this.item.system.usageProfiles);
-      usageProfiles[this.item.system.usageProfileIndex].damage.parts.push(["", ""]);
+      usageProfiles[this.options.selectedUsageProfile].damage.parts.push(["", ""]);
 
       return this.item.update({"system.usageProfiles": usageProfiles});
     }
@@ -670,7 +670,7 @@ export default class ItemSheet5e extends ItemSheet {
       const li = a.closest(".damage-part");
 
       const usageProfiles = foundry.utils.deepClone(this.item.system.usageProfiles);
-      usageProfiles[this.item.system.usageProfileIndex].damage.parts.splice(li.dataset.damagePart, 1);
+      usageProfiles[this.options.selectedUsageProfile].damage.parts.splice(li.dataset.damagePart, 1);
 
       return this.item.update({"system.usageProfiles": usageProfiles});
     }

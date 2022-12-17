@@ -21,7 +21,7 @@
     {{!-- Profile List Content --}}
     {{#each system.usageProfiles as |usageProfile index|}}
 
-    {{#if (eq ../system.usageProfileIndex index)}}
+    {{#if (eq ../options.selectedUsageProfile index)}}
 
     {{#if usageProfile.profileName}}
     <a class="usage-profile-navigation-tab item active">{{ usageProfile.profileName }}</a>
@@ -32,9 +32,9 @@
     {{else}}
 
     {{#if usageProfile.profileName}}
-    <a class="usage-profile-navigation-tab usage-profile-control usage-profile-navigate item" data-usage-profile-index={{index}}>{{ usageProfile.profileName }}</a>
+    <a class="usage-profile-navigation-tab usage-profile-control usage-profile-navigate item" data-target-usage-profile-index={{index}}>{{ usageProfile.profileName }}</a>
     {{else}}
-    <a class="usage-profile-navigation-tab usage-profile-control usage-profile-navigate item" data-usage-profile-index={{index}}>{{ localize "DND5E.Untitled" }}</a>
+    <a class="usage-profile-navigation-tab usage-profile-control usage-profile-navigate item" data-target-usage-profile-index={{index}}>{{ localize "DND5E.Untitled" }}</a>
     {{/if}}
 
     {{/if}}

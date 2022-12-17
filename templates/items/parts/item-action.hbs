@@ -1,8 +1,8 @@
 {{!-- Action Type --}}
 <div class="form-group select">
     <label>{{ localize "DND5E.ItemActionType" }}</label>
-    <select name="system.usageProfiles.{{system.usageProfileIndex}}.actionType">
-        {{#select (getProperty (lookup system.usageProfiles system.usageProfileIndex) "actionType")}}
+    <select name="system.usageProfiles.{{options.selectedUsageProfile}}.actionType">
+        {{#select (getProperty (lookup system.usageProfiles options.selectedUsageProfile) "actionType")}}
         <option value=""></option>
         {{#each config.itemActionTypes as |name type|}}
         <option value="{{type}}">{{name}}</option>
@@ -12,13 +12,13 @@
 </div>
 
 {{!-- Hides every subsequent field if there's no Action Type --}}
-{{#if (getProperty (lookup system.usageProfiles system.usageProfileIndex) "actionType")}}
+{{#if (getProperty (lookup system.usageProfiles options.selectedUsageProfile) "actionType")}}
 
 {{!-- Ability Modifier --}}
 <div class="form-group select">
     <label>{{ localize "DND5E.AbilityModifier" }}</label>
-    <select name="system.usageProfiles.{{system.usageProfileIndex}}.ability">
-        {{#select (getProperty (lookup system.usageProfiles system.usageProfileIndex) "ability")}}
+    <select name="system.usageProfiles.{{options.selectedUsageProfile}}.ability">
+        {{#select (getProperty (lookup system.usageProfiles options.selectedUsageProfile) "ability")}}
         <option value="">{{ localize "DND5E.Default" }}</option>
         {{#each config.abilities as |ability a|}}
         <option value="{{a}}">{{ability}}</option>
@@ -32,7 +32,7 @@
 <div class="form-group">
     <label>{{ localize "DND5E.ItemAttackBonus" }}</label>
     <div class="form-fields">
-        <input type="text" name="system.usageProfiles.{{system.usageProfileIndex}}.attackBonus" value="{{ getProperty (lookup system.usageProfiles system.usageProfileIndex) "attackBonus" }}"/>
+        <input type="text" name="system.usageProfiles.{{options.selectedUsageProfile}}.attackBonus" value="{{ getProperty (lookup system.usageProfiles options.selectedUsageProfile) "attackBonus" }}"/>
     </div>
 </div>
 {{/if}}
@@ -42,7 +42,7 @@
 <div class="form-group">
     <label>{{ localize "DND5E.ItemCritThreshold" }}</label>
     <div class="form-fields">
-        {{ numberInput (getProperty (lookup system.usageProfiles system.usageProfileIndex) "critical.threshold") name="system.usageProfiles.{{system.usageProfileIndex}}.critical.threshold" placeholder="20" max=20 min=1 step=1 }}
+        {{ numberInput (getProperty (lookup system.usageProfiles options.selectedUsageProfile) "critical.threshold") name="system.usageProfiles.{{options.selectedUsageProfile}}.critical.threshold" placeholder="20" max=20 min=1 step=1 }}
     </div>
 </div>
 {{/if}}
@@ -52,7 +52,7 @@
 <div class="form-group">
     <label>{{ localize "DND5E.ItemCritExtraDamage" }}</label>
     <div class="form-fields">
-        <input type="text" name="system.usageProfiles.{{system.usageProfileIndex}}.critical.damage" value="{{ getProperty (lookup system.usageProfiles system.usageProfileIndex) "critical.damage" }}">
+        <input type="text" name="system.usageProfiles.{{options.selectedUsageProfile}}.critical.damage" value="{{ getProperty (lookup system.usageProfiles options.selectedUsageProfile) "critical.damage" }}">
     </div>
 </div>
 {{/if}}
@@ -63,10 +63,10 @@
     {{#if editable}}<a class="damage-control add-damage"><i class="fas fa-plus"></i></a>{{/if}}
 </h4>
 <ol class="damage-parts form-group">
-    {{#each (getProperty (lookup system.usageProfiles system.usageProfileIndex) "damage.parts") as |part i| }}
+    {{#each (getProperty (lookup system.usageProfiles options.selectedUsageProfile) "damage.parts") as |part i| }}
     <li class="damage-part flexrow" data-damage-part="{{i}}">
-        <input type="text" name="system.usageProfiles.{{../system.usageProfileIndex}}.damage.parts.{{i}}.0" value="{{lookup this "0"}}"/>
-        <select name="system.usageProfiles.{{../system.usageProfileIndex}}.damage.parts.{{i}}.1">
+        <input type="text" name="system.usageProfiles.{{../options.selectedUsageProfile}}.damage.parts.{{i}}.0" value="{{lookup this "0"}}"/>
+        <select name="system.usageProfiles.{{../options.selectedUsageProfile}}.damage.parts.{{i}}.1">
             {{#select (lookup this "1") }}
             <option value="">{{ localize "DND5E.None" }}</option>
             {{#each ../config.damageTypes as |name type|}}
@@ -86,7 +86,7 @@
 <div class="form-group">
     <label>{{ localize "DND5E.OtherFormula" }}</label>
     <div class="form-fields">
-        <input type="text" name="system.usageProfiles.{{system.usageProfileIndex}}.formula" value="{{ getProperty (lookup system.usageProfiles system.usageProfileIndex) "formula" }}" placeholder="{{ localize 'DND5E.Formula' }}"/>
+        <input type="text" name="system.usageProfiles.{{options.selectedUsageProfile}}.formula" value="{{ getProperty (lookup system.usageProfiles options.selectedUsageProfile) "formula" }}" placeholder="{{ localize 'DND5E.Formula' }}"/>
     </div>
 </div>
 
@@ -94,8 +94,8 @@
 <div class="form-group input-select">
     <label>{{ localize "DND5E.ActionSave" }}</label>
     <div class="form-fields">
-        <select name="system.usageProfiles.{{system.usageProfileIndex}}.save.ability">
-            {{#select (getProperty (lookup system.usageProfiles system.usageProfileIndex) "save.ability")}}
+        <select name="system.usageProfiles.{{options.selectedUsageProfile}}.save.ability">
+            {{#select (getProperty (lookup system.usageProfiles options.selectedUsageProfile) "save.ability")}}
             <option value=""></option>
             {{#each config.abilities as |ability a|}}
             <option value="{{a}}">{{ability}}</option>
@@ -103,11 +103,11 @@
             {{/select}}
         </select>
         <span>{{ localize "DND5E.VsDC" }}</span>
-        <input type="number" step="any" name="system.usageProfiles.{{system.usageProfileIndex}}.save.dc"
-            value="{{#if (getProperty (lookup system.usageProfiles system.usageProfileIndex) "save.dc")}}{{ getProperty (lookup system.usageProfiles system.usageProfileIndex) "save.dc" }}{{/if}}"
+        <input type="number" step="any" name="system.usageProfiles.{{options.selectedUsageProfile}}.save.dc"
+            value="{{#if (getProperty (lookup system.usageProfiles options.selectedUsageProfile) "save.dc")}}{{ getProperty (lookup system.usageProfiles options.selectedUsageProfile) "save.dc" }}{{/if}}"
             placeholder="{{ localize 'DND5E.AbbreviationDC' }}" {{#unless isFlatDC}}disabled{{/unless}}>
-        <select name="system.usageProfiles.{{system.usageProfileIndex}}.save.scaling">
-            {{#select (getProperty (lookup system.usageProfiles system.usageProfileIndex) "save.scaling")}}
+        <select name="system.usageProfiles.{{options.selectedUsageProfile}}.save.scaling">
+            {{#select (getProperty (lookup system.usageProfiles options.selectedUsageProfile) "save.scaling")}}
             <option value="spell">{{ localize "DND5E.Spellcasting" }}</option>
             {{#each config.abilities as |ability a|}}
             <option value="{{a}}">{{ability}}</option>
@@ -121,7 +121,7 @@
 {{!-- Chat Message Flavor --}}
 <div class="form-group stacked">
     <label>{{ localize "DND5E.ChatFlavor" }}</label>
-    <input type="text" name="system.usageProfiles.{{system.usageProfileIndex}}.chatFlavor" value="{{ getProperty (lookup system.usageProfiles system.usageProfileIndex) "chatFlavor" }}"/>
+    <input type="text" name="system.usageProfiles.{{options.selectedUsageProfile}}.chatFlavor" value="{{ getProperty (lookup system.usageProfiles options.selectedUsageProfile) "chatFlavor" }}"/>
 </div>
 
 {{/if}}

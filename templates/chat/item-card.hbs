@@ -5,9 +5,6 @@
         <h3 class="item-name">{{item.name}}</h3>
     </header>
 
-    {{log "this" this level="info"}}
-    {{log "item" item level="info"}}
-
     {{#if (gt item.system.usageProfiles.length 1)}}
     {{#if itemUsageProfile}}
     <div class="card-subheader">

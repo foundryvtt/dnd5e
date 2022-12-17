@@ -6,8 +6,8 @@
         <input
             class="usage-profile-name"
             type="text"
-            name="system.usageProfiles.{{system.usageProfileIndex}}.profileName"
-            value="{{ getProperty (lookup system.usageProfiles system.usageProfileIndex) "profileName" }}"
+            name="system.usageProfiles.{{options.selectedUsageProfile}}.profileName"
+            value="{{ getProperty (lookup system.usageProfiles options.selectedUsageProfile) "profileName" }}"
             placeholder="{{ localize 'DND5E.Untitled' }}"
         />
 
@@ -16,7 +16,7 @@
         <a
             class="usage-profile-control usage-profile-delete"
             title="{{ localize "DND5E.ItemUsageProfileDelete" }}"
-            data-usage-profile-delete-id={{ getProperty (lookup system.usageProfiles system.usageProfileIndex) "_id" }}
+            data-usage-profile-delete-id={{ getProperty (lookup system.usageProfiles options.selectedUsageProfile) "_id" }}
         ><i class="fas fa-trash"></i></a>
         {{/if}}
 
