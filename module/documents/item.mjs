@@ -1539,11 +1539,10 @@ export default class Item5e extends Item {
    * @param {boolean} [config.critical]    Should damage be rolled as a critical hit?
    * @param {number} [config.spellLevel]   If the item is a spell, override the level for damage scaling
    * @param {DamageRollConfiguration} [config.options]  Additional options passed to the damageRoll function
-   * @param config.versatile
    * @returns {Promise<DamageRoll>}        A Promise which resolves to the created Roll instance, or null if the action
    *                                       cannot be performed.
    */
-  async rollDamage({critical, event=null, spellLevel=null, versatile=false, options={}}={}) {
+  async rollDamage({critical, event=null, spellLevel=null, options={}}={}) {
 
     // Establish which usage-profile is being used
     const usageProfileId = event?.currentTarget?.dataset?.usageProfileId;
