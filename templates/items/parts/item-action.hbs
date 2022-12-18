@@ -46,7 +46,7 @@
 <div class="form-group">
     <label>{{ localize "DND5E.ItemCritThreshold" }}</label>
     <div class="form-fields">
-        {{ numberInput (getProperty (lookup system.usageProfiles options.selectedUsageProfile) "critical.threshold") name="system.usageProfiles.{{options.selectedUsageProfile}}.critical.threshold" placeholder="20" max=20 min=1 step=1 }}
+        {{ numberInput (getProperty (lookup system.usageProfiles options.selectedUsageProfile) "critical.threshold") name=(concat "system.usageProfiles." options.selectedUsageProfile ".critical.threshold") placeholder="20" max=20 min=1 step=1 }}
     </div>
 </div>
 {{/if}}
