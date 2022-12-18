@@ -2,25 +2,25 @@
 <div class="form-group input-select">
     <label>{{ localize "DND5E.ItemActivationCost" }}</label>
     <div class="form-fields">
-        <input type="number" step="any" name="system.usageProfiles.{{options.selectedUsageProfile}}.activation.cost"
-            value="{{ getProperty (lookup system.usageProfiles options.selectedUsageProfile) "activation.cost" }}"
+        <input type="number" step="any" name="system.usageProfiles.{{options.selectedUsageProfileId}}.activation.cost"
+            value="{{ getProperty (lookup system.usageProfiles options.selectedUsageProfileId) "activation.cost" }}"
             placeholder="&mdash;"
         />
-        <select name="system.usageProfiles.{{options.selectedUsageProfile}}.activation.type" title="{{localize 'DND5E.ItemActivationType'}}">
-            {{selectOptions config.abilityActivationTypes selected=(getProperty (lookup system.usageProfiles options.selectedUsageProfile) "activation.type") blank=""}}
+        <select name="system.usageProfiles.{{options.selectedUsageProfileId}}.activation.type" title="{{localize 'DND5E.ItemActivationType'}}">
+            {{selectOptions config.abilityActivationTypes selected=(getProperty (lookup system.usageProfiles options.selectedUsageProfileId) "activation.type") blank=""}}
         </select>
     </div>
 </div>
 
 {{!-- Hides every subsequent field if there's no Activation Cost --}}
-{{#if (getProperty (lookup system.usageProfiles options.selectedUsageProfile) "activation.type")}}
+{{#if (getProperty (lookup system.usageProfiles options.selectedUsageProfileId) "activation.type")}}
 
 {{!-- Activation Condition --}}
 <div class="form-group">
     <label>{{ localize "DND5E.ItemActivationCondition" }}</label>
     <div class="form-fields">
-        <input type="text" name="system.usageProfiles.{{options.selectedUsageProfile}}.activation.condition"
-            value="{{ getProperty (lookup system.usageProfiles options.selectedUsageProfile) "activation.condition" }}"
+        <input type="text" name="system.usageProfiles.{{options.selectedUsageProfileId}}.activation.condition"
+            value="{{ getProperty (lookup system.usageProfiles options.selectedUsageProfileId) "activation.condition" }}"
         />
     </div>
 </div>
@@ -29,8 +29,8 @@
 <div class="form-group">
     <label>{{ localize "DND5E.Cover" }}</label>
     <div class="form-fields">
-        <select name="system.usageProfiles.{{options.selectedUsageProfile}}.cover" data-dtype="Number">
-            {{selectOptions config.cover selected=(getProperty (lookup system.usageProfiles options.selectedUsageProfile) "cover") blank=""}}
+        <select name="system.usageProfiles.{{options.selectedUsageProfileId}}.cover" data-dtype="Number">
+            {{selectOptions config.cover selected=(getProperty (lookup system.usageProfiles options.selectedUsageProfileId) "cover") blank=""}}
         </select>
     </div>
 </div>
@@ -40,13 +40,13 @@
 <div class="form-group input-select-select">
     <label>{{ localize "DND5E.Target" }}</label>
     <div class="form-fields">
-        <input type="number" step="any" name="system.usageProfiles.{{options.selectedUsageProfile}}.target.value"
-            value="{{ getProperty (lookup system.usageProfiles options.selectedUsageProfile) "target.value" }}" placeholder="&mdash;">
-        <select name="system.usageProfiles.{{options.selectedUsageProfile}}.target.units" title="{{localize 'DND5E.TargetUnits'}}">
-            {{selectOptions config.movementUnits selected=(getProperty (lookup system.usageProfiles options.selectedUsageProfile) "target.units") blank=""}}
+        <input type="number" step="any" name="system.usageProfiles.{{options.selectedUsageProfileId}}.target.value"
+            value="{{ getProperty (lookup system.usageProfiles options.selectedUsageProfileId) "target.value" }}" placeholder="&mdash;">
+        <select name="system.usageProfiles.{{options.selectedUsageProfileId}}.target.units" title="{{localize 'DND5E.TargetUnits'}}">
+            {{selectOptions config.movementUnits selected=(getProperty (lookup system.usageProfiles options.selectedUsageProfileId) "target.units") blank=""}}
         </select>
-        <select name="system.usageProfiles.{{options.selectedUsageProfile}}.target.type" title="{{localize 'DND5E.TargetType'}}">
-            {{#select (getProperty (lookup system.usageProfiles options.selectedUsageProfile) "target.type")}}
+        <select name="system.usageProfiles.{{options.selectedUsageProfileId}}.target.type" title="{{localize 'DND5E.TargetType'}}">
+            {{#select (getProperty (lookup system.usageProfiles options.selectedUsageProfileId) "target.type")}}
                 <option value=""></option>
                 <option value="none">{{localize "DND5E.None"}}</option>
                 <optgroup label="{{localize 'DND5E.TargetTypeIndividual'}}">
@@ -65,8 +65,8 @@
 <div class="form-group input-select-select">
     <label>{{ localize "DND5E.TargetWidth" }}</label>
     <div class="form-fields">
-        <input type="number" step="any" name="system.usageProfiles.{{options.selectedUsageProfile}}.target.width"
-            value="{{ getProperty (lookup system.usageProfiles options.selectedUsageProfile) "target.width" }}" placeholder="&mdash;">
+        <input type="number" step="any" name="system.usageProfiles.{{options.selectedUsageProfileId}}.target.width"
+            value="{{ getProperty (lookup system.usageProfiles options.selectedUsageProfileId) "target.width" }}" placeholder="&mdash;">
     </div>
 </div>
 {{/if}}
@@ -75,15 +75,15 @@
 <div class="form-group input-select">
     <label>{{ localize "DND5E.Range" }}</label>
     <div class="form-fields">
-        <input type="number" step="any" name="system.usageProfiles.{{options.selectedUsageProfile}}.range.value"
-            value="{{ getProperty (lookup system.usageProfiles options.selectedUsageProfile) "range.value" }}" placeholder="{{localize 'DND5E.Normal'}}"
+        <input type="number" step="any" name="system.usageProfiles.{{options.selectedUsageProfileId}}.range.value"
+            value="{{ getProperty (lookup system.usageProfiles options.selectedUsageProfileId) "range.value" }}" placeholder="{{localize 'DND5E.Normal'}}"
             title="{{localize 'DND5E.RangeNormal'}}">
         <span class="sep">/</span>
-        <input type="number" step="any" name="system.usageProfiles.{{options.selectedUsageProfile}}.range.long"
-            value="{{ getProperty (lookup system.usageProfiles options.selectedUsageProfile) "range.long" }}" placeholder="{{localize 'DND5E.Long'}}"
+        <input type="number" step="any" name="system.usageProfiles.{{options.selectedUsageProfileId}}.range.long"
+            value="{{ getProperty (lookup system.usageProfiles options.selectedUsageProfileId) "range.long" }}" placeholder="{{localize 'DND5E.Long'}}"
             title="{{localize 'DND5E.RangeLong'}}">
-        <select name="system.usageProfiles.{{options.selectedUsageProfile}}.range.units" title="{{localize 'DND5E.RangeUnits'}}">
-            {{selectOptions config.distanceUnits selected=(getProperty (lookup system.usageProfiles options.selectedUsageProfile) "range.units") blank=""}}
+        <select name="system.usageProfiles.{{options.selectedUsageProfileId}}.range.units" title="{{localize 'DND5E.RangeUnits'}}">
+            {{selectOptions config.distanceUnits selected=(getProperty (lookup system.usageProfiles options.selectedUsageProfileId) "range.units") blank=""}}
         </select>
     </div>
 </div>
@@ -92,10 +92,10 @@
 <div class="form-group input-select">
     <label>{{ localize "DND5E.Duration" }}</label>
     <div class="form-fields">
-        <input type="text" name="system.usageProfiles.{{options.selectedUsageProfile}}.duration.value" value="{{ getProperty (lookup system.usageProfiles options.selectedUsageProfile) "duration.value" }}"
+        <input type="text" name="system.usageProfiles.{{options.selectedUsageProfileId}}.duration.value" value="{{ getProperty (lookup system.usageProfiles options.selectedUsageProfileId) "duration.value" }}"
                placeholder="&mdash;" title="{{localize 'DND5E.DurationValue'}}">
-        <select name="system.usageProfiles.{{options.selectedUsageProfile}}.duration.units" title="{{localize 'DND5E.DurationType'}}">
-            {{#select (getProperty (lookup system.usageProfiles options.selectedUsageProfile) "duration.units")}}
+        <select name="system.usageProfiles.{{options.selectedUsageProfileId}}.duration.units" title="{{localize 'DND5E.DurationType'}}">
+            {{#select (getProperty (lookup system.usageProfiles options.selectedUsageProfileId) "duration.units")}}
                 <option value=""></option>
                 {{#each config.timePeriods as |name key|}}
                 <option value="{{key}}">{{name}}</option>
@@ -109,24 +109,24 @@
 <div class="form-group uses-per">
     <label>{{ localize "DND5E.LimitedUses" }}</label>
     <div class="form-fields">
-        <input type="number" step="any" name="system.usageProfiles.{{options.selectedUsageProfile}}.uses.value" value="{{ getProperty (lookup system.usageProfiles options.selectedUsageProfile) "uses.value" }}"
+        <input type="number" step="any" name="system.usageProfiles.{{options.selectedUsageProfileId}}.uses.value" value="{{ getProperty (lookup system.usageProfiles options.selectedUsageProfileId) "uses.value" }}"
             title="{{ localize 'DND5E.UsesAvailable' }}">
         <span class="sep">{{localize "DND5E.of"}}</span>
-        <input type="text" name="system.usageProfiles.{{options.selectedUsageProfile}}.uses.max" value="{{ getProperty (lookup system.usageProfiles options.selectedUsageProfile) "uses.max" }}"
+        <input type="text" name="system.usageProfiles.{{options.selectedUsageProfileId}}.uses.max" value="{{ getProperty (lookup system.usageProfiles options.selectedUsageProfileId) "uses.max" }}"
             title="{{localize 'DND5E.UsesMax'}}">
         <span class="sep">{{localize "DND5E.per"}}</span>
-        <select name="system.usageProfiles.{{options.selectedUsageProfile}}.uses.per" title="{{localize 'DND5E.UsesPeriod'}}">
-            {{selectOptions config.limitedUsePeriods selected=(getProperty (lookup system.usageProfiles options.selectedUsageProfile) "uses.per") blank=""}}
+        <select name="system.usageProfiles.{{options.selectedUsageProfileId}}.uses.per" title="{{localize 'DND5E.UsesPeriod'}}">
+            {{selectOptions config.limitedUsePeriods selected=(getProperty (lookup system.usageProfiles options.selectedUsageProfileId) "uses.per") blank=""}}
         </select>
     </div>
 </div>
 
-{{#if (eq (getProperty (lookup system.usageProfiles options.selectedUsageProfile) "uses.per") "charges")}}
+{{#if (eq (getProperty (lookup system.usageProfiles options.selectedUsageProfileId) "uses.per") "charges")}}
 <div class="form-group">
     <label>{{localize "DND5E.RecoveryFormula"}}</label>
     <div class="form-fields">
-        <input type="text" name="system.usageProfiles.{{options.selectedUsageProfile}}.uses.recovery"
-            value="{{ getProperty (lookup system.usageProfiles options.selectedUsageProfile) "uses.recovery" }}"
+        <input type="text" name="system.usageProfiles.{{options.selectedUsageProfileId}}.uses.recovery"
+            value="{{ getProperty (lookup system.usageProfiles options.selectedUsageProfileId) "uses.recovery" }}"
         />
     </div>
 </div>
@@ -136,14 +136,14 @@
 <div class="form-group uses-per">
     <label>{{ localize "DND5E.ConsumeTitle" }}</label>
     <div class="form-fields">
-        <select name="system.usageProfiles.{{options.selectedUsageProfile}}.consume.type" title="{{localize 'DND5E.ConsumeType'}}">
-            {{selectOptions config.abilityConsumptionTypes selected=(getProperty (lookup system.usageProfiles options.selectedUsageProfile) "consume.type") blank=""}}
+        <select name="system.usageProfiles.{{options.selectedUsageProfileId}}.consume.type" title="{{localize 'DND5E.ConsumeType'}}">
+            {{selectOptions config.abilityConsumptionTypes selected=(getProperty (lookup system.usageProfiles options.selectedUsageProfileId) "consume.type") blank=""}}
         </select>
-        <select name="system.usageProfiles.{{options.selectedUsageProfile}}.consume.target" title="{{localize 'DND5E.ConsumeTarget'}}">
-            {{selectOptions abilityConsumptionTargets selected=(getProperty (lookup system.usageProfiles options.selectedUsageProfile) "consume.target") blank=""}}
+        <select name="system.usageProfiles.{{options.selectedUsageProfileId}}.consume.target" title="{{localize 'DND5E.ConsumeTarget'}}">
+            {{selectOptions abilityConsumptionTargets selected=(getProperty (lookup system.usageProfiles options.selectedUsageProfileId) "consume.target") blank=""}}
         </select>
-        <input type="number" step="any" name="system.usageProfiles.{{options.selectedUsageProfile}}.consume.amount"
-            value="{{ getProperty (lookup system.usageProfiles options.selectedUsageProfile) "consume.amount" }}" title="{{localize 'DND5E.ConsumeQuanity'}}">
+        <input type="number" step="any" name="system.usageProfiles.{{options.selectedUsageProfileId}}.consume.amount"
+            value="{{ getProperty (lookup system.usageProfiles options.selectedUsageProfileId) "consume.amount" }}" title="{{localize 'DND5E.ConsumeQuanity'}}">
     </div>
 </div>
 

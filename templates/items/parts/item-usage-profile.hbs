@@ -6,8 +6,8 @@
         <input
             class="usage-profile-name"
             type="text"
-            name="system.usageProfiles.{{options.selectedUsageProfile}}.profileName"
-            value="{{ getProperty (lookup system.usageProfiles options.selectedUsageProfile) "profileName" }}"
+            name="system.usageProfiles.{{options.selectedUsageProfileId}}.name"
+            value="{{ getProperty (lookup system.usageProfiles options.selectedUsageProfileId) "name" }}"
             placeholder="{{ localize 'DND5E.Untitled' }}"
         />
 
@@ -16,7 +16,7 @@
         <a
             class="usage-profile-control usage-profile-clone"
             title="{{ localize "DND5E.ItemUsageProfileDuplicate" }}"
-            data-usage-profile-clone-id={{ getProperty (lookup system.usageProfiles options.selectedUsageProfile) "_id" }}
+            data-usage-profile-clone-id={{ getProperty (lookup system.usageProfiles options.selectedUsageProfileId) "_id" }}
         ><i class="fas fa-clone"></i></a>
         {{/if}}
 
@@ -25,7 +25,7 @@
         <a
             class="usage-profile-control usage-profile-delete"
             title="{{ localize "DND5E.ItemUsageProfileDelete" }}"
-            data-usage-profile-delete-id={{ getProperty (lookup system.usageProfiles options.selectedUsageProfile) "_id" }}
+            data-usage-profile-delete-id={{ getProperty (lookup system.usageProfiles options.selectedUsageProfileId) "_id" }}
         ><i class="fas fa-trash"></i></a>
         {{/if}}
 

@@ -50,7 +50,7 @@
                 {{!-- Item Usage Profile Navigation Template --}}
                 {{> "dnd5e.item-usage-profile-nav"}}
 
-                {{#if system.usageProfiles.length}}
+                {{#if system.usageProfiles._keys.length}}
                 <div class="usage-profile-container">
 
                     <h3 class="form-header">{{ localize "DND5E.ItemUsageProfileTypeFeature" }}</h3>
@@ -64,7 +64,7 @@
                     {{> "dnd5e.item-activation"}}
 
                     {{!-- Recharge Requirement --}}
-                    {{#if (getProperty (lookup system.usageProfiles options.selectedUsageProfile) "activation.type")}}
+                    {{#if (getProperty (lookup system.usageProfiles options.selectedUsageProfileId) "activation.type")}}
                     <div class="form-group recharge">
                         <label>{{ localize "DND5E.FeatureActionRecharge" }}</label>
                         <div class="form-fields">

@@ -18,88 +18,6 @@ export default class ItemSheet5e extends ItemSheet {
     else if ( this.object.type === "subclass" ) {
       this.options.height = this.position.height = 540;
     }
-
-    // TEMP: This should be built into the packs etc
-    // Transform Weapon/Spell usage data structure
-    else if ( ["weapon", "spell", "feat", "equipment", "consumable"].includes(this.object.type) ) {
-
-      // IF usageProfile property is empty - Try to generate one?
-      if (!Reflect.has(this.object.system, 'usageProfiles') || this.object.system.usageProfiles.length <= 0) {
-
-        const buildDamageObject = (damage, fromVersatile = false) => {
-
-          if (damage && damage?.parts) {
-
-            // This just takes the parts and defines a new one with versatile damage
-            return {
-              parts: (fromVersatile) ? ([
-                [
-                  damage.versatile,
-                  damage.parts[0][1]
-                ]
-              ]) : damage.parts
-            };
-          }
-        };
-
-        // Items seemingly aren't localised so profileNames are fine in EN?
-
-        const usageProfiles = [
-          foundry.utils.mergeObject(
-            foundry.utils.deepClone(game.system.template.Item.templates.usageProfile),
-            {
-              _id: foundry.utils.randomID(),
-              profileName: "Default",
-              activation: this.object.system.activation,
-              duration: this.object.system.duration,
-              target: this.object.system.target,
-              range: this.object.system.range,
-              uses: this.object.system.uses,
-              consume: this.object.system.consume,
-              ability: this.object.system.ability,
-              actionType: this.object.system.actionType,
-              attackBonus: this.object.system.attackBonus,
-              chatFlavor: this.object.system.chatFlavor,
-              critical: this.object.system.critical,
-              damage: buildDamageObject(this.object.system.damage),
-              formula: this.object.system.formula,
-              save: this.object.system.save,
-              scaling: this.object.system.scaling
-            }
-          )
-        ];
-
-        if (this.object.system.properties?.ver === true) {
-
-          usageProfiles.push(
-            foundry.utils.mergeObject(
-              foundry.utils.deepClone(game.system.template.Item.templates.usageProfile),
-              {
-                _id: foundry.utils.randomID(),
-                profileName: "Versatile",
-                activation: this.object.system.activation,
-                duration: this.object.system.duration,
-                target: this.object.system.target,
-                range: this.object.system.range,
-                uses: this.object.system.uses,
-                consume: this.object.system.consume,
-                ability: this.object.system.ability,
-                actionType: this.object.system.actionType,
-                attackBonus: this.object.system.attackBonus,
-                chatFlavor: this.object.system.chatFlavor,
-                critical: this.object.system.critical,
-                damage: buildDamageObject(this.object.system.damage, true),
-                formula: this.object.system.formula,
-                save: this.object.system.save,
-                scaling: this.object.system.scaling
-              }
-            )
-          );
-        }
-
-        this.object.system.usageProfiles = usageProfiles;
-      }
-    }
   }
 
   /* -------------------------------------------- */
@@ -113,8 +31,7 @@ export default class ItemSheet5e extends ItemSheet {
       resizable: true,
       scrollY: [".tab.details"],
       tabs: [{navSelector: ".tabs", contentSelector: ".sheet-body", initial: "description"}],
-      dragDrop: [{dragSelector: "[data-effect-id]", dropSelector: ".effects-list"}],
-      selectedUsageProfile: 0 // TODO: usageProfileIndex work in-progress - Can this be stored on options and used throughout?
+      dragDrop: [{dragSelector: "[data-effect-id]", dropSelector: ".effects-list"}]
     });
   }
 
@@ -139,13 +56,17 @@ export default class ItemSheet5e extends ItemSheet {
 
   /** @override */
   async getData(options) {
+
+    console.log("getData", this);
+
     const context = await super.getData(options);
     const item = context.item;
+    this._tempUsageProfileGenerator(item);
     const source = item.toObject();
     const isMountable = this._isItemMountable(item);
 
-    // TODO: usageProfileIndex work in-progress
-    const usageProfileIndex = 0;
+    // TODO: usageProfileId work in-progress
+    const usageProfileId = 0;
 
     foundry.utils.mergeObject(context, {
       source: source.system,
@@ -169,13 +90,13 @@ export default class ItemSheet5e extends ItemSheet {
       }),
 
       // Action Details
-      hasAttackRoll: item.hasAttack(usageProfileIndex),
-      isHealing: item.isHealing(usageProfileIndex),
-      isFlatDC: item.isFlatDC(usageProfileIndex),
-      isLine: item.hasLineTarget(usageProfileIndex),
+      hasAttackRoll: item.hasAttack(usageProfileId),
+      isHealing: item.isHealing(usageProfileId),
+      isFlatDC: item.isFlatDC(usageProfileId),
+      isLine: item.hasLineTarget(usageProfileId),
 
       // Vehicles
-      isCrewed: item.system?.usageProfiles?.[usageProfileIndex]?.activation?.type === "crew",
+      isCrewed: item.system?.usageProfiles?.[usageProfileId]?.activation?.type === "crew",
       isMountable,
 
       // Armor Class
@@ -191,7 +112,7 @@ export default class ItemSheet5e extends ItemSheet {
     });
 
     // Potential consumption targets
-    context.abilityConsumptionTargets = this._getItemConsumptionTargets(usageProfileIndex);
+    context.abilityConsumptionTargets = this._getItemConsumptionTargets(usageProfileId);
 
     /** @deprecated */
     Object.defineProperty(context, "data", {
@@ -209,6 +130,102 @@ export default class ItemSheet5e extends ItemSheet {
     }, {inplace: false});
 
     return context;
+  }
+
+  // TEMP: This should be built into the packs etc
+  _tempUsageProfileGenerator(item) {
+    // Transform Weapon/Spell usage data structure
+    if ( ["weapon", "spell", "feat", "equipment", "consumable"].includes(item.type) ) {
+
+      console.log("GENERATE ITEM SHEET?", !Reflect.has(item.system, "usageProfiles") && !Reflect.has(item.system?.usageProfiles || {}, "_keys"), " from ", !Reflect.has(item.system, "usageProfiles"), !Reflect.has(item.system?.usageProfiles || {}, "_keys"));
+      // IF usageProfile property is empty - Try to generate one?
+      if (!Reflect.has(item.system, "usageProfiles") && !Reflect.has(item.system?.usageProfiles || {}, "_keys")) {
+
+        const buildDamageObject = (damage, fromVersatile = false) => {
+
+          if (damage && damage?.parts) {
+
+            // This just takes the parts and defines a new one with versatile damage
+            return {
+              parts: (fromVersatile) ? ([
+                [
+                  damage.versatile,
+                  damage.parts[0][1]
+                ]
+              ]) : damage.parts
+            };
+          }
+        };
+
+        // Items seemingly aren't localised so profileNames are fine in EN?
+
+        const usageProfiles = {};
+
+        const id = foundry.utils.randomID();
+
+        const usageProfile = foundry.utils.mergeObject(
+          foundry.utils.deepClone(game.system.template.Item.templates.usageProfile),
+          {
+            _id: id,
+            name: "Standard",
+            activation: item.system.activation,
+            duration: item.system.duration,
+            target: item.system.target,
+            range: item.system.range,
+            uses: item.system.uses,
+            consume: item.system.consume,
+            ability: item.system.ability,
+            actionType: item.system.actionType,
+            attackBonus: item.system.attackBonus,
+            chatFlavor: item.system.chatFlavor,
+            critical: item.system.critical,
+            damage: buildDamageObject(item.system.damage),
+            formula: item.system.formula,
+            save: item.system.save,
+            scaling: item.system.scaling
+          }
+        );
+
+        usageProfiles[id] = usageProfile;
+
+        if (item.system.properties?.ver === true) {
+
+          const id2 = foundry.utils.randomID();
+
+          const usageProfile2 = foundry.utils.mergeObject(
+            foundry.utils.deepClone(game.system.template.Item.templates.usageProfile),
+            {
+              _id: id2,
+              name: "Versatile",
+              activation: item.system.activation,
+              duration: item.system.duration,
+              target: item.system.target,
+              range: item.system.range,
+              uses: item.system.uses,
+              consume: item.system.consume,
+              ability: item.system.ability,
+              actionType: item.system.actionType,
+              attackBonus: item.system.attackBonus,
+              chatFlavor: item.system.chatFlavor,
+              critical: item.system.critical,
+              damage: buildDamageObject(item.system.damage, true),
+              formula: item.system.formula,
+              save: item.system.save,
+              scaling: item.system.scaling
+            }
+          );
+
+          usageProfiles[id2] = usageProfile2;
+        }
+
+        item.system.usageProfiles = usageProfiles;
+        this.options.selectedUsageProfileId = id;
+
+        Object.defineProperty(usageProfiles, "_keys", {
+          get() { return Reflect.ownKeys(usageProfiles).filter(key => key !== "_keys"); }
+        });
+      }
+    }
   }
 
   /* -------------------------------------------- */
@@ -291,10 +308,10 @@ export default class ItemSheet5e extends ItemSheet {
    * Get the valid item consumption targets which exist on the actor
    * @returns {Object<string>}   An object of potential consumption targets
    * @private
-   * @param {number} usageProfileIndex Which Usage-Profile is being used to roll
+   * @param {number} usageProfileId Which Usage-Profile is being used to roll
    */
-  _getItemConsumptionTargets(usageProfileIndex) {
-    const usageProfile = this.item.system?.usageProfiles?.[usageProfileIndex];
+  _getItemConsumptionTargets(usageProfileId) {
+    const usageProfile = this.item.system?.usageProfiles?.[usageProfileId];
     const consume = usageProfile?.consume || {};
     if ( !consume.type ) return [];
     const actor = this.item.actor;
@@ -468,52 +485,46 @@ export default class ItemSheet5e extends ItemSheet {
   _getSubmitData(updateData={}) {
     const formData = foundry.utils.expandObject(super._getSubmitData(updateData));
 
-    // Handle usageProfiles distinctly as merging arrays is difficult for this
-    const changesToUsageProfiles = formData.system?.usageProfiles;
-    if ( changesToUsageProfiles ) {
+    console.log("_getSubmitData this.options.selectedUsageProfileId", this.options.selectedUsageProfileId);
+    console.log("_getSubmitData formData?.system?.usageProfiles", formData?.system?.usageProfiles);
+    console.log("_getSubmitData Reflect.ownKeys(formData?.system?.usageProfiles || {})", Reflect.ownKeys(formData?.system?.usageProfiles || {}));
 
-      // For every usageProfile apply submission changes
-      formData.system.usageProfiles = foundry.utils.deepClone(this.item.system.usageProfiles)
-        .map((currentUsageProfile, index) => {
-          const changesToUsageProfile = changesToUsageProfiles[index];
+    Reflect.ownKeys(formData?.system?.usageProfiles || {})
+      .forEach(usageProfileId => {
+        console.log("_getSubmitData usageProfileId", usageProfileId);
+        console.log("_getSubmitData formData.system.usageProfiles", formData.system.usageProfiles);
+        const usageProfile = formData.system.usageProfiles[usageProfileId];
 
-          // IF the usageProfile hasn't been updated - skip
-          if (!changesToUsageProfile) { return currentUsageProfile; }
+        // Handle Damage array
+        const damage = usageProfile?.damage;
+        if ( damage ) damage.parts = Object.values(damage?.parts || {}).map(d => [d[0] || "", d[1] || ""]);
 
-          // Handle Damage array
-          const damage = changesToUsageProfile?.damage;
-          if ( damage ) damage.parts = Object.values(damage?.parts || {}).map(d => [d[0] || "", d[1] || ""]);
-
-          // Handle max uses formula
-          const uses = changesToUsageProfile?.uses;
-          if ( uses?.max ) {
-            const maxRoll = new Roll(uses.max);
-            if ( !maxRoll.isDeterministic ) {
-              uses.max = currentUsageProfile.uses.max;
-              this.form.querySelector(`input[name='system.usageProfiles.${this.options.selectedUsageProfile}.uses.max']`).value = uses.max;
-              ui.notifications.error(game.i18n.format("DND5E.FormulaCannotContainDiceError", {
-                name: game.i18n.localize("DND5E.LimitedUses")
-              }));
-            }
+        // Handle max uses formula
+        const uses = usageProfile?.uses;
+        if ( uses?.max ) {
+          const maxRoll = new Roll(uses.max);
+          if ( !maxRoll.isDeterministic ) {
+            uses.max = usageProfile.uses.max;
+            this.form.querySelector(`input[name='system.usageProfiles.${usageProfileId}.uses.max']`).value = uses.max;
+            ui.notifications.error(game.i18n.format("DND5E.FormulaCannotContainDiceError", {
+              name: game.i18n.localize("DND5E.LimitedUses")
+            }));
           }
+        }
 
-          // Merge existing usageProfile into this update
-          return foundry.utils.mergeObject(currentUsageProfile, changesToUsageProfile);
-        });
-    }
-
-    // Check duration value formula
-    const duration = formData.system?.duration;
-    if ( duration?.value ) {
-      const durationRoll = new Roll(duration.value);
-      if ( !durationRoll.isDeterministic ) {
-        duration.value = this.item._source.system.duration.value;
-        this.form.querySelector("input[name='system.duration.value']").value = duration.value;
-        return ui.notifications.error(game.i18n.format("DND5E.FormulaCannotContainDiceError", {
-          name: game.i18n.localize("DND5E.Duration")
-        }));
-      }
-    }
+        // Check duration value formula
+        const duration = usageProfile?.duration;
+        if ( duration?.value ) {
+          const durationRoll = new Roll(duration.value);
+          if ( !durationRoll.isDeterministic ) {
+            duration.value = this.item._source.system.usageProfiles[usageProfileId].duration.value;
+            this.form.querySelector(`input[name='system.usageProfiles.${usageProfileId}.duration.value']`).value = duration.value;
+            return ui.notifications.error(game.i18n.format("DND5E.FormulaCannotContainDiceError", {
+              name: game.i18n.localize("DND5E.Duration")
+            }));
+          }
+        }
+      });
 
     // Check class identifier
     if ( formData.system?.identifier && !dnd5e.utils.validators.isValidIdentifier(formData.system.identifier) ) {
@@ -522,8 +533,16 @@ export default class ItemSheet5e extends ItemSheet {
       return ui.notifications.error(game.i18n.localize("DND5E.IdentifierError"));
     }
 
-    // Return the flattened submission data
-    return foundry.utils.flattenObject(formData);
+    // TODO: Why is this not working with my setup?
+    // // Return the flattened submission data
+    // return foundry.utils.flattenObject(formData);
+
+    // TODO: This is my workaround?..
+    // TODO: Why am I having to manually render?
+    // TODO: Why am I having to return the entire item, not a diff?
+    return foundry.utils.flattenObject(
+      foundry.utils.mergeObject( this.item, formData )
+    );
   }
 
   /* -------------------------------------------- */
@@ -599,7 +618,7 @@ export default class ItemSheet5e extends ItemSheet {
   /**
    * Add, remove, or navigate usage-profiles within the items sheet.
    * @param {Event} event             The original click event.
-   * @returns {Promise<Item5e>|null}  Item with updates applied.
+   * @returns {Promise<void>}
    * @private
    */
   async _onUsageProfileControl(event) {
@@ -610,71 +629,97 @@ export default class ItemSheet5e extends ItemSheet {
     if ( this.isEditable && a.classList.contains("usage-profile-add") ) {
       await this._onSubmit(event);  // Submit any unsaved changes
 
-      console.debug(`ItemSheet5e | Added a new Usage-Profile to ${JSON.stringify(this?.item?.name)}`);
+      console.debug(`ItemSheet5e | Added a new Usage-Profile to ${JSON.stringify(this.item.name)}`);
 
-      // Navigate to new page
-      this.options.selectedUsageProfile = this.item.system.usageProfiles.length;
+      // Create to new profile
+      const newUsageProfileId = foundry.utils.randomID();
+      const newUsageProfile = foundry.utils.mergeObject(
+        foundry.utils.deepClone(game.system.template.Item.templates.usageProfile),
+        { _id: newUsageProfileId }
+      );
 
-      return this.item.update({ "system.usageProfiles": this.item.system.usageProfiles.concat([{ _id: foundry.utils.randomID() }]) });
-    }
+      // Apply new profile
+      const usageProfiles = this.item.system.usageProfiles;
+      usageProfiles[newUsageProfileId] = newUsageProfile;
+      await this.item.update({ "system.usageProfiles": usageProfiles });
 
-    // Remove a usage-profile
-    else if ( this.isEditable && a.classList.contains("usage-profile-delete") ) {
-      await this._onSubmit(event);  // Submit any unsaved changes
-
-      console.debug(`ItemSheet5e | Removed a Usage-Profile from ${JSON.stringify(this?.item?.name)}`);
-
-      if (this.item.system.usageProfiles.length) {
-
-        const usageProfiles = foundry.utils.deepClone(this.item.system.usageProfiles);
-        usageProfiles.splice(usageProfiles.findIndex(e => e._id === a.dataset.usageProfileDeleteId), 1);
-
-        // Navigate to previous page if it exists
-        this.options.selectedUsageProfile = this.options.selectedUsageProfile - 1 || 0;
-
-        return this.item.update({ "system.usageProfiles": usageProfiles });
-      }
+      // Navigate to new profile
+      this.options.selectedUsageProfileId = newUsageProfileId;
     }
 
     // Clone a usage-profile
     else if ( this.isEditable && a.classList.contains("usage-profile-clone") ) {
       await this._onSubmit(event);  // Submit any unsaved changes
 
-      console.debug(`ItemSheet5e | Cloned a Usage-Profile within ${JSON.stringify(this?.item?.name)}`);
+      console.log("_onUsageProfileControl ----------------");
+      console.debug(`ItemSheet5e | Cloned a Usage-Profile within ${JSON.stringify(this.item.name)}`);
 
-      // Get the Usage-Profile we want to clone
-      const targetUsageProfile = this.item.system.usageProfiles.find(e => e._id === a.dataset.usageProfileCloneId);
+      // Create to new page
+      console.log("_onUsageProfileControl Clone a.dataset.usageProfileCloneId", a.dataset.usageProfileCloneId);
+      const targetUsageProfileId = a.dataset.usageProfileCloneId;
+      console.log("_onUsageProfileControl Clone targetUsageProfileId", targetUsageProfileId);
+      const newUsageProfile = foundry.utils.deepClone(this.item.system.usageProfiles[targetUsageProfileId] || {});
+      const newUsageProfileId = foundry.utils.randomID();
+      newUsageProfile._id = newUsageProfileId;
 
-      // Navigate to new page
-      this.options.selectedUsageProfile = this.item.system.usageProfiles.length;
+      // Apply cloned profile
+      const usageProfiles = this.item.system.usageProfiles;
+      usageProfiles[newUsageProfileId] = newUsageProfile;
+      await this.item.update({ "system.usageProfiles": usageProfiles });
 
-      return this.item.update({
-        "system.usageProfiles": this.item.system.usageProfiles.concat([
-          foundry.utils.mergeObject(
-            foundry.utils.deepClone(targetUsageProfile),
-            { _id: foundry.utils.randomID() }
-          )
-        ])
-      });
+      // Navigate to new profile
+      this.options.selectedUsageProfileId = newUsageProfileId;
+    }
+
+    // Remove a usage-profile
+    else if ( this.isEditable && a.classList.contains("usage-profile-delete") ) {
+      await this._onSubmit(event);  // Submit any unsaved changes
+
+      console.debug(`ItemSheet5e | Removed a Usage-Profile from ${JSON.stringify(this.item.name)}`);
+
+      // Delete target page
+      const targetUsageProfileId = a.dataset.usageProfileDeleteId;
+      const targetUsageProfileIndex = this.item.system.usageProfiles._keys
+        .findIndex(key => key === targetUsageProfileId);
+      console.log("_onUsageProfileControl Remove targetUsageProfileId", targetUsageProfileId);
+      console.log("_onUsageProfileControl Remove targetUsageProfileIndex", targetUsageProfileIndex);
+      const usageProfiles = this.item.system.usageProfiles;
+      Reflect.deleteProperty(usageProfiles, targetUsageProfileId);
+
+      // Apply profile deletion
+      await this.item.update({ "system.usageProfiles": usageProfiles });
+
+      console.log("_onUsageProfileControl Remove usageProfiles._keys.length", usageProfiles._keys.length);
+
+      // Navigate to previous page if it exists
+      this.options.selectedUsageProfileId = (usageProfiles._keys.length)
+        ? usageProfiles._keys[Math.max(targetUsageProfileIndex - 1, 0)]
+        : null;
+
+      console.log("_onUsageProfileControl Remove this.options.selectedUsageProfileId", this.options.selectedUsageProfileId);
     }
 
     // Navigate usage-profiles
     else if ( a.classList.contains("usage-profile-navigate") ) {
       await this._onSubmit(event);  // Submit any unsaved changes
 
-      const targetUsageProfileIndex = parseInt(a.dataset.targetUsageProfileIndex || 0);
-      console.debug(`ItemSheet5e | Navigated Usage-Profile within ${JSON.stringify(this?.item?.name)} from ${
-        JSON.stringify(this.item?.system?.usageProfiles?.[this.options.selectedUsageProfile]?.profileName || game.i18n.localize("DND5E.Untitled"))
+      const targetUsageProfileId = a.dataset.targetUsageProfileId;
+      console.log("_onUsageProfileControl Navigate targetUsageProfileId", targetUsageProfileId);
+      console.log("_onUsageProfileControl Navigate this", this);
+      console.log("_onUsageProfileControl Navigate this.item.system.usageProfiles", this.item.system.usageProfiles);
+      console.log("_onUsageProfileControl Navigate this.options.selectedUsageProfileId", this.options.selectedUsageProfileIds);
+
+      console.debug(`ItemSheet5e | Navigated Usage-Profile within ${JSON.stringify(this.item.name)} from ${
+        JSON.stringify(this.item.system.usageProfiles[this.options.selectedUsageProfileId]?.name || game.i18n.localize("DND5E.Untitled"))
       } to ${
-        JSON.stringify(this.item?.system?.usageProfiles?.[targetUsageProfileIndex]?.profileName || game.i18n.localize("DND5E.Untitled"))
-      }`);
+        JSON.stringify(this.item.system.usageProfiles[targetUsageProfileId]?.name || game.i18n.localize("DND5E.Untitled"))
+      } - Profiles:`, this.item.system.usageProfiles);
 
       // Apply new profile and re-render the sheet
-      this.options.selectedUsageProfile = targetUsageProfileIndex;
-      this.render(true); // TODO: usageProfileIndex work in-progress - This deletes every usageProfile in the process since rebasing on 2.1.x
+      this.options.selectedUsageProfileId = targetUsageProfileId;
     }
 
-    return null;
+    this.render(true); // TODO: usageProfileId work in-progress
   }
 
   /* -------------------------------------------- */
@@ -682,7 +727,7 @@ export default class ItemSheet5e extends ItemSheet {
   /**
    * Add or remove a damage part from the damage formula.
    * @param {Event} event             The original click event.
-   * @returns {Promise<Item5e>|null}  Item with updates applied.
+   * @returns {void}
    * @private
    */
   async _onDamageControl(event) {
@@ -693,12 +738,11 @@ export default class ItemSheet5e extends ItemSheet {
     if ( a.classList.contains("add-damage") ) {
       await this._onSubmit(event);  // Submit any unsaved changes
 
-      const usageProfiles = foundry.utils.deepClone(this.item.system.usageProfiles);
-      const usageProfile = usageProfiles?.[this.options.selectedUsageProfile];
-      if ( !usageProfile?.damage ) usageProfile.damage = { parts: [] };
-      usageProfile.damage.parts.push(["", ""]);
+      const usageProfile = foundry.utils.deepClone(this.item.system.usageProfiles[this.options.selectedUsageProfileId]);
+      const itemUpdate = { [`system.usageProfiles.${this.options.selectedUsageProfileId}.damage.parts`]: usageProfile.damage.parts.concat([["", ""]]) };
 
-      return this.item.update({"system.usageProfiles": usageProfiles});
+      await this.item.update(itemUpdate);
+      this.render(true); // TODO: usageProfileId work in-progress
     }
 
     // Remove a damage component
@@ -706,10 +750,12 @@ export default class ItemSheet5e extends ItemSheet {
       await this._onSubmit(event);  // Submit any unsaved changes
       const li = a.closest(".damage-part");
 
-      const usageProfiles = foundry.utils.deepClone(this.item.system.usageProfiles);
-      usageProfiles[this.options.selectedUsageProfile].damage.parts.splice(li.dataset.damagePart, 1);
+      const usageProfile = foundry.utils.deepClone(this.item.system.usageProfiles[this.options.selectedUsageProfileId]);
+      usageProfile.damage.parts.splice(Number(li.dataset.damagePart), 1);
+      const itemUpdate = { [`system.usageProfiles.${this.options.selectedUsageProfileId}.damage.parts`]: usageProfile.damage.parts };
 
-      return this.item.update({"system.usageProfiles": usageProfiles});
+      await this.item.update(itemUpdate);
+      this.render(true); // TODO: usageProfileId work in-progress
     }
   }
 

@@ -57,7 +57,7 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
       loot: { label: "ITEM.TypeLootPl", items: [], dataset: {type: "loot"} }
     };
 
-    // TODO: usageProfileIndex work in-progress - This item.system stuff is hella broken
+    // TODO: usageProfileId work in-progress - This item.system stuff is hella broken
 
     // Partition items by category
     let {items, spells, feats, backgrounds, classes, subclasses} = context.items.reduce((obj, item) => {

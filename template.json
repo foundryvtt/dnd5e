@@ -571,7 +571,7 @@
       },
       "usageProfile": {
         "_id": "",
-        "profileName": "",
+        "name": "",
         "activation": {
           "type": "",
           "cost": 0,
@@ -671,7 +671,7 @@
       "uses": {
         "autoDestroy": false
       },
-      "usageProfiles": []
+      "usageProfiles": {}
     },
     "equipment": {
       "templates": ["itemDescription", "physicalItem", "mountable"],
@@ -688,7 +688,7 @@
       "strength": 0,
       "stealth": false,
       "proficient": true,
-      "usageProfiles": []
+      "usageProfiles": {}
     },
     "feat": {
       "templates": ["itemDescription"],
@@ -697,7 +697,7 @@
         "value": null,
         "charged": false
       },
-      "usageProfiles": []
+      "usageProfiles": {}
     },
     "loot": {
       "templates": ["itemDescription", "physicalItem"]
@@ -732,7 +732,7 @@
         "mode": "prepared",
         "prepared": false
       },
-      "usageProfiles": []
+      "usageProfiles": {}
     },
     "subclass": {
       "templates": ["itemDescription"],
@@ -750,7 +750,7 @@
       "baseItem": "",
       "properties": {},
       "proficient": true,
-      "usageProfiles": []
+      "usageProfiles": {}
     }
   },
   "JournalEntryPage": {

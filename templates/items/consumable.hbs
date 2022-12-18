@@ -78,7 +78,7 @@
                 {{!-- Item Usage Profile Navigation Template --}}
                 {{> "dnd5e.item-usage-profile-nav"}}
 
-                {{#if system.usageProfiles.length}}
+                {{#if system.usageProfiles._keys.length}}
                 <div class="usage-profile-container">
 
                     <h3 class="form-header">{{ localize "DND5E.ItemUsageProfileTypeConsumable" }}</h3>
@@ -92,10 +92,10 @@
                     {{> "dnd5e.item-activation"}}
 
                     {{!-- Auto-Destroy Configuration --}}
-                    {{#if (getProperty (lookup system.usageProfiles options.selectedUsageProfile) "activation.type")}}
+                    {{#if (getProperty (lookup system.usageProfiles options.selectedUsageProfileId) "activation.type")}}
                     <div class="form-group">
                         <label class="checkbox">
-                            <input type="checkbox" name="system.usageProfiles.{{options.selectedUsageProfile}}.uses.autoDestroy" {{checked (getProperty (lookup system.usageProfiles options.selectedUsageProfile) "uses.autoDestroy")}}/> {{ localize "DND5E.ItemDestroyEmpty" }}
+                            <input type="checkbox" name="system.usageProfiles.{{options.selectedUsageProfileId}}.uses.autoDestroy" {{checked (getProperty (lookup system.usageProfiles options.selectedUsageProfileId) "uses.autoDestroy")}}/> {{ localize "DND5E.ItemDestroyEmpty" }}
                         </label>
                     </div>
                     {{/if}}

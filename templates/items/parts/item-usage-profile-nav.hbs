@@ -1,4 +1,4 @@
-{{#if (or editable system.usageProfiles.length)}}
+{{#if (or editable system.usageProfiles._keys.length)}}
 
 {{!-- Item Usage Navigation --}}
 <nav class="usage-profile-navigation sheet-navigation tabs" data-group="primary">
@@ -20,23 +20,27 @@
     <h3 class="usage-profile-navigation-header">{{ localize "DND5E.ItemUsageProfilesTypeConsumable" }}</h3>
     {{/if}}
 
+    {{log "Render Navigation" system.usageProfiles level="info"}}
+
     {{!-- Profile List Content --}}
-    {{#each system.usageProfiles as |usageProfile index|}}
+    {{#each system.usageProfiles as |usageProfile|}}
 
-    {{#if (eq ../options.selectedUsageProfile index)}}
+    {{log "item-usage-profile-nav" "usageProfile" usageProfile level="info"}}
 
-    {{#if usageProfile.profileName}}
-    <a class="usage-profile-navigation-tab item active">{{ usageProfile.profileName }}</a>
+    {{#if (eq ../options.selectedUsageProfileId usageProfile._id)}}
+
+    {{#if usageProfile.name}}
+    <a class="usage-profile-navigation-tab item active">{{ usageProfile.name }}</a>
     {{else}}
     <a class="usage-profile-navigation-tab item active">{{ localize "DND5E.Untitled" }}</a>
     {{/if}}
 
     {{else}}
 
-    {{#if usageProfile.profileName}}
-    <a class="usage-profile-navigation-tab usage-profile-control usage-profile-navigate item" data-target-usage-profile-index={{index}}>{{ usageProfile.profileName }}</a>
+    {{#if usageProfile.name}}
+    <a class="usage-profile-navigation-tab usage-profile-control usage-profile-navigate item" data-target-usage-profile-id={{usageProfile._id}}>{{ usageProfile.name }}</a>
     {{else}}
-    <a class="usage-profile-navigation-tab usage-profile-control usage-profile-navigate item" data-target-usage-profile-index={{index}}>{{ localize "DND5E.Untitled" }}</a>
+    <a class="usage-profile-navigation-tab usage-profile-control usage-profile-navigate item" data-target-usage-profile-id={{usageProfile._id}}>{{ localize "DND5E.Untitled" }}</a>
     {{/if}}
 
     {{/if}}

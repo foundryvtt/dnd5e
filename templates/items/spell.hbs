@@ -115,7 +115,7 @@
                 {{!-- Item Usage Profile Navigation Template --}}
                 {{> "dnd5e.item-usage-profile-nav"}}
 
-                {{#if system.usageProfiles.length}}
+                {{#if system.usageProfiles._keys.length}}
                 <div class="usage-profile-container">
 
                     <h3 class="form-header">{{ localize "DND5E.ItemUsageProfileTypeSpell" }}</h3>
@@ -137,14 +137,14 @@
                     <div class="form-group">
                         <label>{{ localize "DND5E.LevelScaling" }}</label>
                         <div class="form-fields">
-                            <select name="system.usageProfiles.{{options.selectedUsageProfile}}.scaling.mode">
-                                {{#select (getProperty (lookup system.usageProfiles options.selectedUsageProfile) "scaling.mode")}}
+                            <select name="system.usageProfiles.{{options.selectedUsageProfileId}}.scaling.mode">
+                                {{#select (getProperty (lookup system.usageProfiles options.selectedUsageProfileId) "scaling.mode")}}
                                 {{#each ../config.spellScalingModes as |name key|}}
                                 <option value="{{key}}">{{name}}</option>
                                 {{/each}}
                                 {{/select}}
                             </select>
-                            <input type="text" name="system.usageProfiles.{{options.selectedUsageProfile}}.scaling.formula" value="{{ getProperty (lookup system.usageProfiles options.selectedUsageProfile) "scaling.formula" }}" placeholder="{{ localize 'DND5E.ScalingFormula' }}"/>
+                            <input type="text" name="system.usageProfiles.{{options.selectedUsageProfileId}}.scaling.formula" value="{{ getProperty (lookup system.usageProfiles options.selectedUsageProfileId) "scaling.formula" }}" placeholder="{{ localize 'DND5E.ScalingFormula' }}"/>
                         </div>
                     </div>
 

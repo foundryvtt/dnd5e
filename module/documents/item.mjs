@@ -23,18 +23,18 @@ export default class Item5e extends Item {
   /**
    * Which ability score modifier is used by this item?
    * @type {string|null}
-   * @param {number} [usageProfileIndex=null] Which Usage-Profile is being used to roll
+   * @param {number} [usageProfileId=null] Which Usage-Profile is being used to roll
    */
-  abilityMod(usageProfileIndex = null) {
+  abilityMod(usageProfileId = null) {
 
     // Skip checks if the item doesn't have an ability property
-    if ( usageProfileIndex === null && !Reflect.has(this.system, "ability") ) return null;
+    if ( usageProfileId === null && !Reflect.has(this.system, "ability") ) return null;
 
     // Case 1 - defined directly by the item
     if ( this.system.ability ) return this.system.ability;
 
-    if ( this.system?.usageProfiles?.[usageProfileIndex]?.ability ) {
-      return this.system?.usageProfiles?.[usageProfileIndex]?.ability;
+    if ( this.system?.usageProfiles?.[usageProfileId]?.ability ) {
+      return this.system?.usageProfiles?.[usageProfileId]?.ability;
     }
 
     // Case 2 - inferred from a parent actor
@@ -62,12 +62,12 @@ export default class Item5e extends Item {
       }
 
       // If a specific attack type is defined
-      if ( this.hasAttack(usageProfileIndex) ) return {
+      if ( this.hasAttack(usageProfileId) ) return {
         mwak: "str",
         rwak: "dex",
         msak: spellcasting || "int",
         rsak: spellcasting || "int"
-      }[this.system?.usageProfiles?.[usageProfileIndex]?.actionType];
+      }[this.system?.usageProfiles?.[usageProfileId]?.actionType];
     }
 
     // Case 3 - unknown
@@ -97,10 +97,10 @@ export default class Item5e extends Item {
   /**
    * Does the Item implement an attack roll as part of its usage?
    * @type {boolean}
-   * @param {number} usageProfileIndex Which Usage-Profile is being used to roll
+   * @param {number} usageProfileId Which Usage-Profile is being used to roll
    */
-  hasAttack(usageProfileIndex) {
-    return ["mwak", "rwak", "msak", "rsak"].includes(this.system?.usageProfiles?.[usageProfileIndex]?.actionType);
+  hasAttack(usageProfileId) {
+    return ["mwak", "rwak", "msak", "rsak"].includes(this.system?.usageProfiles?.[usageProfileId]?.actionType);
   }
 
   /* -------------------------------------------- */
@@ -108,10 +108,10 @@ export default class Item5e extends Item {
   /**
    * Does the Item implement a damage roll as part of its usage?
    * @type {boolean}
-   * @param {number} usageProfileIndex Which Usage-Profile is being used to roll
+   * @param {number} usageProfileId Which Usage-Profile is being used to roll
    */
-  hasDamage(usageProfileIndex) {
-    const usageProfile = this.system?.usageProfiles?.[usageProfileIndex];
+  hasDamage(usageProfileId) {
+    const usageProfile = this.system?.usageProfiles?.[usageProfileId];
     return !!(usageProfile?.damage && usageProfile?.damage.parts.length);
   }
 
@@ -120,10 +120,10 @@ export default class Item5e extends Item {
   /**
    * Does the item provide an amount of healing instead of conventional damage?
    * @type {boolean}
-   * @param {number} usageProfileIndex Which Usage-Profile is being used to roll
+   * @param {number} usageProfileId Which Usage-Profile is being used to roll
    */
-  isHealing(usageProfileIndex) {
-    const usageProfile = this.system?.usageProfiles?.[usageProfileIndex];
+  isHealing(usageProfileId) {
+    const usageProfile = this.system?.usageProfiles?.[usageProfileId];
     return (usageProfile?.actionType === "heal") && usageProfile?.damage.parts.length;
   }
 
@@ -169,10 +169,10 @@ export default class Item5e extends Item {
   /**
    * Does the Item implement a saving throw as part of its usage?
    * @type {boolean}
-   * @param {number} usageProfileIndex Which Usage-Profile is being used to roll
+   * @param {number} usageProfileId Which Usage-Profile is being used to roll
    */
-  hasSave(usageProfileIndex) {
-    const save = this.system?.usageProfiles?.[usageProfileIndex]?.save || {};
+  hasSave(usageProfileId) {
+    const save = this.system?.usageProfiles?.[usageProfileId]?.save || {};
     return !!(save.ability && save.scaling);
   }
 
@@ -181,10 +181,10 @@ export default class Item5e extends Item {
   /**
    * Does the Item implement an ability check as part of its usage?
    * @type {boolean}
-   * @param {number} usageProfileIndex Which Usage-Profile is being used to roll
+   * @param {number} usageProfileId Which Usage-Profile is being used to roll
    */
-  hasAbilityCheck(usageProfileIndex) {
-    const usageProfile = this.system?.usageProfiles?.[usageProfileIndex];
+  hasAbilityCheck(usageProfileId) {
+    const usageProfile = this.system?.usageProfiles?.[usageProfileId];
     return (usageProfile?.actionType === "abil") && usageProfile?.ability;
   }
 
@@ -193,10 +193,10 @@ export default class Item5e extends Item {
   /**
    * Does the Item have a target?
    * @type {boolean}
-   * @param {number} usageProfileIndex Which Usage-Profile is being used to roll
+   * @param {number} usageProfileId Which Usage-Profile is being used to roll
    */
-  hasTarget(usageProfileIndex) {
-    const target = this.system?.usageProfiles?.[usageProfileIndex]?.target;
+  hasTarget(usageProfileId) {
+    const target = this.system?.usageProfiles?.[usageProfileId]?.target;
     return target && !["none", ""].includes(target.type);
   }
 
@@ -205,10 +205,10 @@ export default class Item5e extends Item {
   /**
    * Does the Item have an area of effect target?
    * @type {boolean}
-   * @param {number} usageProfileIndex Which Usage-Profile is being used to roll
+   * @param {number} usageProfileId Which Usage-Profile is being used to roll
    */
-  hasAreaTarget(usageProfileIndex) {
-    const target = this.system?.usageProfiles?.[usageProfileIndex]?.target;
+  hasAreaTarget(usageProfileId) {
+    const target = this.system?.usageProfiles?.[usageProfileId]?.target;
     return target && (target.type in CONFIG.DND5E.areaTargetTypes);
   }
 
@@ -217,10 +217,10 @@ export default class Item5e extends Item {
   /**
    * Does the Item have a line target?
    * @type {boolean}
-   * @param {number} usageProfileIndex Which Usage-Profile is being used to roll
+   * @param {number} usageProfileId Which Usage-Profile is being used to roll
    */
-  hasLineTarget(usageProfileIndex) {
-    const target = this.system?.usageProfiles?.[usageProfileIndex]?.target;
+  hasLineTarget(usageProfileId) {
+    const target = this.system?.usageProfiles?.[usageProfileId]?.target;
     return target && (target.type in ["line", "wall"]);
   }
 
@@ -230,11 +230,11 @@ export default class Item5e extends Item {
   /**
    * Is this Item limited in its ability to be used by charges or by recharge?
    * @type {boolean}
-   * @param {number} usageProfileIndex Which Usage-Profile is being used to roll
+   * @param {number} usageProfileId Which Usage-Profile is being used to roll
    */
-  hasLimitedUses(usageProfileIndex) {
+  hasLimitedUses(usageProfileId) {
     let recharge = this.system.recharge || {};
-    let uses = this.system?.usageProfiles?.[usageProfileIndex]?.uses || {};
+    let uses = this.system?.usageProfiles?.[usageProfileId]?.uses || {};
     return !!recharge.value || (uses.per && (uses.max > 0));
   }
 
@@ -307,10 +307,10 @@ export default class Item5e extends Item {
   /**
    * Does the Item implement a saving throw with a flat DC as part of its usage?
    * @type {boolean}
-   * @param {number} usageProfileIndex Which Usage-Profile is being used to roll
+   * @param {number} usageProfileId Which Usage-Profile is being used to roll
    */
-  isFlatDC(usageProfileIndex) {
-    const save = this.system?.usageProfiles?.[usageProfileIndex]?.save || {};
+  isFlatDC(usageProfileId) {
+    const save = this.system?.usageProfiles?.[usageProfileId]?.save || {};
     return save?.scaling === "flat";
   }
 
@@ -342,25 +342,25 @@ export default class Item5e extends Item {
     // Advancement
     this._prepareAdvancement();
 
-    // TODO: usageProfileIndex work in-progress
-    const usageProfileIndex = 0;
+    // TODO: usageProfileId work in-progress
+    const usageProfileId = 0;
 
     // Specialized preparation per Item type
     switch ( this.type ) {
       case "equipment":
         this._prepareEquipment(); break;
       case "feat":
-        this._prepareFeat(usageProfileIndex); break;
+        this._prepareFeat(usageProfileId); break;
       case "spell":
         this._prepareSpell(); break;
     }
 
     // Activated Items
-    this._prepareActivation(usageProfileIndex);
-    this._prepareAction(usageProfileIndex);
+    this._prepareActivation(usageProfileId);
+    this._prepareAction(usageProfileId);
 
     // Un-owned items can have their final preparation done here, otherwise this needs to happen in the owning Actor
-    if ( !this.isOwned ) this.prepareFinalAttributes(usageProfileIndex);
+    if ( !this.isOwned ) this.prepareFinalAttributes(usageProfileId);
   }
 
   /* -------------------------------------------- */
@@ -378,15 +378,15 @@ export default class Item5e extends Item {
   /**
    * Prepare derived data for a feat-type item and define labels.
    * @protected
-   * @param {number} usageProfileIndex Which Usage-Profile is being used to roll
+   * @param {number} usageProfileId Which Usage-Profile is being used to roll
    */
-  _prepareFeat(usageProfileIndex) {
-    const act = this.system?.usageProfiles?.[usageProfileIndex]?.activation;
+  _prepareFeat(usageProfileId) {
+    const act = this.system?.usageProfiles?.[usageProfileId]?.activation;
     const types = CONFIG.DND5E.abilityActivationTypes;
     if ( act?.type === types.legendary ) this.labels.featType = game.i18n.localize("DND5E.LegendaryActionLabel");
     else if ( act?.type === types.lair ) this.labels.featType = game.i18n.localize("DND5E.LairActionLabel");
     else if ( act?.type ) {
-      this.labels.featType = game.i18n.localize(this.system?.usageProfiles?.[usageProfileIndex]?.damage.length ? "DND5E.Attack" : "DND5E.Action");
+      this.labels.featType = game.i18n.localize(this.system?.usageProfiles?.[usageProfileId]?.damage.length ? "DND5E.Attack" : "DND5E.Action");
     }
     else this.labels.featType = game.i18n.localize("DND5E.Passive");
   }
@@ -424,13 +424,13 @@ export default class Item5e extends Item {
   /**
    * Prepare derived data for activated items and define labels.
    * @protected
-   * @param {number} usageProfileIndex Which Usage-Profile is being used to roll
+   * @param {number} usageProfileId Which Usage-Profile is being used to roll
    */
-  _prepareActivation(usageProfileIndex) {
+  _prepareActivation(usageProfileId) {
     if ( !("activation" in this.system) ) return;
     const C = CONFIG.DND5E;
 
-    const usageProfile = this.system?.usageProfiles?.[usageProfileIndex];
+    const usageProfile = this.system?.usageProfiles?.[usageProfileId];
 
     // Ability Activation Label
     const act = usageProfile?.activation ?? {};
@@ -469,11 +469,11 @@ export default class Item5e extends Item {
   /**
    * Prepare derived data and labels for items which have an action which deals damage.
    * @protected
-   * @param {number} usageProfileIndex Which Usage-Profile is being used to roll
+   * @param {number} usageProfileId Which Usage-Profile is being used to roll
    */
-  _prepareAction(usageProfileIndex) {
+  _prepareAction(usageProfileId) {
     if ( !("actionType" in this.system) ) return;
-    let dmg = this.system?.usageProfiles?.[usageProfileIndex]?.damage || {};
+    let dmg = this.system?.usageProfiles?.[usageProfileId]?.damage || {};
     if ( dmg.parts ) {
       const types = CONFIG.DND5E.damageTypes;
       this.labels.damage = dmg.parts.map(d => d[0]).join(" + ").replace(/\+ -/g, "- ");
@@ -516,9 +516,9 @@ export default class Item5e extends Item {
    * Compute item attributes which might depend on prepared actor data. If this item is embedded this method will
    * be called after the actor's data is prepared.
    * Otherwise, it will be called at the end of `Item5e#prepareDerivedData`.
-   * @param {number} usageProfileIndex Which Usage-Profile is being used to roll
+   * @param {number} usageProfileId Which Usage-Profile is being used to roll
    */
-  prepareFinalAttributes(usageProfileIndex) {
+  prepareFinalAttributes(usageProfileId) {
 
     // Proficiency
     if ( this.actor?.system.attributes?.prof ) {
@@ -532,17 +532,17 @@ export default class Item5e extends Item {
     // Action usage
     if ( "actionType" in this.system ) {
       this.labels.abilityCheck = game.i18n.format("DND5E.AbilityPromptTitle", {
-        ability: CONFIG.DND5E.abilities[this.system?.usageProfiles?.[usageProfileIndex]?.ability]
+        ability: CONFIG.DND5E.abilities[this.system?.usageProfiles?.[usageProfileId]?.ability]
       });
 
       // Saving throws
-      this.getSaveDC(usageProfileIndex);
+      this.getSaveDC(usageProfileId);
 
       // To Hit
-      this.getAttackToHit(usageProfileIndex);
+      this.getAttackToHit(usageProfileId);
 
       // Limited Uses
-      this.prepareMaxUses(usageProfileIndex);
+      this.prepareMaxUses(usageProfileId);
 
       // Duration
       this.prepareDurationValue();
@@ -557,14 +557,14 @@ export default class Item5e extends Item {
   /**
    * Populate a label with the compiled and simplified damage formula based on owned item
    * actor data. This is only used for display purposes and is not related to `Item5e#rollDamage`.
-   * @param {number} usageProfileIndex Which Usage-Profile is being used to roll
+   * @param {number} usageProfileId Which Usage-Profile is being used to roll
    * @returns {{damageType: string, formula: string, label: string}[]}
    */
-  getDerivedDamageLabel(usageProfileIndex) {
-    if ( !this.hasDamage(usageProfileIndex) || !this.isOwned ) return [];
-    const rollData = this.getRollData(usageProfileIndex);
+  getDerivedDamageLabel(usageProfileId) {
+    if ( !this.hasDamage(usageProfileId) || !this.isOwned ) return [];
+    const rollData = this.getRollData(usageProfileId);
     const damageLabels = { ...CONFIG.DND5E.damageTypes, ...CONFIG.DND5E.healingTypes };
-    const derivedDamage = this.system?.usageProfiles?.[usageProfileIndex]?.damage?.parts?.map(damagePart => {
+    const derivedDamage = this.system?.usageProfiles?.[usageProfileId]?.damage?.parts?.map(damagePart => {
       let formula;
       try {
         const roll = new Roll(damagePart[0], rollData);
@@ -583,12 +583,12 @@ export default class Item5e extends Item {
 
   /**
    * Update the derived spell DC for an item that requires a saving throw.
-   * @param {number} usageProfileIndex Which Usage-Profile is being used to roll
+   * @param {number} usageProfileId Which Usage-Profile is being used to roll
    * @returns {number|null}
    */
-  getSaveDC(usageProfileIndex) {
-    if ( !this.hasSave(usageProfileIndex) ) return null;
-    const save = this.system?.usageProfiles?.[usageProfileIndex]?.save;
+  getSaveDC(usageProfileId) {
+    if ( !this.hasSave(usageProfileId) ) return null;
+    const save = this.system?.usageProfiles?.[usageProfileId]?.save;
 
     // Actor spell-DC based scaling
     if ( save.scaling === "spell" ) {
@@ -614,15 +614,15 @@ export default class Item5e extends Item {
    * - item's actor's proficiency bonus if applicable
    * - item's actor's global bonuses to the given item type
    * - item's ammunition if applicable
-   * @param {number} usageProfileIndex Which Usage-Profile is being used to roll
+   * @param {number} usageProfileId Which Usage-Profile is being used to roll
    * @returns {{rollData: object, parts: string[]}|null}  Data used in the item's Attack roll.
    */
-  getAttackToHit(usageProfileIndex) {
-    if ( !this.hasAttack(usageProfileIndex) ) return null;
-    const rollData = this.getRollData(usageProfileIndex);
+  getAttackToHit(usageProfileId) {
+    if ( !this.hasAttack(usageProfileId) ) return null;
+    const rollData = this.getRollData(usageProfileId);
     const parts = [];
 
-    const usageProfile = this.system?.usageProfiles?.[usageProfileIndex];
+    const usageProfile = this.system?.usageProfiles?.[usageProfileId];
 
     // Include the item's innate attack bonus as the initial value and label
     const ab = usageProfile?.attackBonus;
@@ -652,7 +652,7 @@ export default class Item5e extends Item {
       const ammoItem = this.actor.items.get(usageProfile?.consume.target);
       if ( ammoItem ) {
         const ammoItemQuantity = ammoItem.system.quantity;
-        const ammoConsumed = this.system?.usageProfiles?.[usageProfileIndex]?.consume.amount ?? 0;
+        const ammoConsumed = this.system?.usageProfiles?.[usageProfileId]?.consume.amount ?? 0;
         const ammoCanBeConsumed = ammoItemQuantity && (ammoItemQuantity - ammoConsumed >= 0);
         const ammoItemAttackBonus = ammoItem.system?.usageProfiles?.[0]?.attackBonus;
         const ammoIsTypeConsumable = (ammoItem.type === "consumable") && (ammoItem.system.consumableType === "ammo");
@@ -678,19 +678,21 @@ export default class Item5e extends Item {
    * - item document's actor (if it has one)
    * - item document's ammunition (if it has any)
    * - the constant '20'
-   * @param {number} usageProfileIndex Which Usage-Profile is being used to roll
+   * @param {number} usageProfileId Which Usage-Profile is being used to roll
    * @returns {number|null}  The minimum value that must be rolled to be considered a critical hit.
    */
-  getCriticalThreshold(usageProfileIndex) {
+  getCriticalThreshold(usageProfileId) {
     const actorFlags = this.actor.flags.dnd5e || {};
-    if ( !this.hasAttack(usageProfileIndex) ) return null;
+    if ( !this.hasAttack(usageProfileId) ) return null;
     let actorThreshold = null;
     let itemThreshold = this.system.critical?.threshold ?? Infinity;
     let ammoThreshold = Infinity;
     if ( this.type === "weapon" ) actorThreshold = actorFlags.weaponCriticalThreshold;
     else if ( this.type === "spell" ) actorThreshold = actorFlags.spellCriticalThreshold;
     if ( this.system.consume?.type === "ammo" ) {
-      ammoThreshold = this.actor.items.get(this.system?.usageProfiles?.[usageProfileIndex]?.consume.target)?.system?.usageProfiles?.[o]?.critical.threshold ?? Infinity;
+      ammoThreshold = this.actor.items.get(
+        this.system?.usageProfiles?.[usageProfileId]?.consume.target
+      )?.system?.usageProfiles?.[0]?.critical.threshold ?? Infinity;
     }
     return Math.min(itemThreshold, ammoThreshold, actorThreshold ?? 20);
   }
@@ -700,10 +702,10 @@ export default class Item5e extends Item {
   /**
    * Populates the max uses of an item.
    * If the item is an owned item and the `max` is not numeric, calculate based on actor data.
-   * @param {number} usageProfileIndex Which Usage-Profile is being used to roll
+   * @param {number} usageProfileId Which Usage-Profile is being used to roll
    */
-  prepareMaxUses(usageProfileIndex) {
-    const uses = this.system?.usageProfiles?.[usageProfileIndex]?.uses;
+  prepareMaxUses(usageProfileId) {
+    const uses = this.system?.usageProfiles?.[usageProfileId]?.uses;
     if ( !uses?.max ) return;
     let max = uses.max;
     if ( this.isOwned && !Number.isNumeric(max) ) {
@@ -840,8 +842,8 @@ export default class Item5e extends Item {
     const is = item.system;
     const as = item.actor.system;
 
-    let usageProfileIndex = 0;
-    if (item?.system?.usageProfiles?.length > 1) {
+    let usageProfileId = 0;
+    if (item?.system?.usageProfiles?._keys?.length > 1) {
 
       /**
        * A hook event that fires before an item profile selection dialog is created.
@@ -851,42 +853,42 @@ export default class Item5e extends Item {
        */
       Hooks.callAll("dnd5e.preUsageProfileSelect", item);
 
-      usageProfileIndex = await ItemProfileSelectDialog.create(item);
+      usageProfileId = await ItemProfileSelectDialog.create(item);
 
       /**
        * A hook event that fires after an item profile selection dialog is created.
        * @function dnd5e.itemProfileSelectDialog
        * @memberof hookEvents
        * @param {Item5e} item               Item for which the usageProfiles are being drawn from.
-       * @param {number} usageProfileIndex  The selected usageProfile that will be used to create an item card.
+       * @param {number} usageProfileId  The selected usageProfile that will be used to create an item card.
        */
-      Hooks.callAll("dnd5e.usageProfileSelect", item, usageProfileIndex);
+      Hooks.callAll("dnd5e.usageProfileSelect", item, usageProfileId);
     }
 
     // If dialog was closed we can just exit without continuing
-    if (usageProfileIndex === null) { return null; }
-    const usageProfile = foundry.utils.deepClone(item?.system?.usageProfiles?.[usageProfileIndex]);
+    if (usageProfileId === null) { return null; }
+    const usageProfile = foundry.utils.deepClone(item?.system?.usageProfiles?.[usageProfileId]);
 
     // Ensure the options object is ready
     options = foundry.utils.mergeObject({
       configureDialog: true,
       createMessage: true,
-      itemUsageProfileIndex: usageProfileIndex,
+      itemusageProfileId: usageProfileId,
       itemUsageProfile: usageProfile,
       "flags.dnd5e.use": {type: this.type, itemId: this.id, itemUuid: this.uuid}
     }, options);
 
     // Reference aspects of the item data necessary for usage
-    const resource = is?.usageProfiles?.[usageProfileIndex]?.consume || {};        // Resource consumption
+    const resource = is?.usageProfiles?.[usageProfileId]?.consume || {};        // Resource consumption
     const isSpell = item.type === "spell";    // Does the item require a spell slot?
     const requireSpellSlot = isSpell && (is.level > 0) && CONFIG.DND5E.spellUpcastModes.includes(is.preparation.mode);
 
     // Define follow-up actions resulting from the item usage
     config = foundry.utils.mergeObject({
-      createMeasuredTemplate: item.hasAreaTarget(usageProfileIndex),
+      createMeasuredTemplate: item.hasAreaTarget(usageProfileId),
       consumeQuantity: usageProfile?.uses?.autoDestroy ?? false,
       consumeRecharge: !!is.recharge?.value,
-      consumeResource: !!resource.target && (!item.hasAttack(usageProfileIndex) || (resource.type !== "ammo")),
+      consumeResource: !!resource.target && (!item.hasAttack(usageProfileId) || (resource.type !== "ammo")),
       consumeSpellLevel: requireSpellSlot ? is.preparation.mode === "pact" ? "pact" : is.level : null,
       consumeSpellSlot: requireSpellSlot,
       consumeUsage: !!is.uses?.per
@@ -938,7 +940,7 @@ export default class Item5e extends Item {
     if ( Hooks.call("dnd5e.preItemUsageConsumption", item, config, options) === false ) return;
 
     // Determine whether the item can be used by testing for resource consumption
-    const usage = item._getUsageUpdates(usageProfileIndex, config);
+    const usage = item._getUsageUpdates(usageProfileId, config);
     if ( !usage ) return;
 
     /**
@@ -994,12 +996,12 @@ export default class Item5e extends Item {
   /**
    * Verify that the consumed resources used by an Item are available and prepare the updates that should
    * be performed. If required resources are not available, display an error and return false.
-   * @param {number} usageProfileIndex     Which Usage-Profile is being used to roll
+   * @param {number} usageProfileId     Which Usage-Profile is being used to roll
    * @param {ItemUseConfiguration} config  Configuration data for an item usage being prepared.
    * @returns {object|boolean}             A set of data changes to apply when the item is used, or false.
    * @protected
    */
-  _getUsageUpdates(usageProfileIndex, {
+  _getUsageUpdates(usageProfileId, {
     consumeQuantity, consumeRecharge, consumeResource, consumeSpellSlot,
     consumeSpellLevel, consumeUsage} = {}) {
     const actorUpdates = {};
@@ -1018,7 +1020,7 @@ export default class Item5e extends Item {
 
     // Consume Limited Resource
     if ( consumeResource ) {
-      const canConsume = this._handleConsumeResource(usageProfileIndex, itemUpdates, actorUpdates, resourceUpdates);
+      const canConsume = this._handleConsumeResource(usageProfileId, itemUpdates, actorUpdates, resourceUpdates);
       if ( canConsume === false ) return false;
     }
 
@@ -1038,7 +1040,7 @@ export default class Item5e extends Item {
 
     // Consume Limited Usage
     if ( consumeUsage ) {
-      const uses = this.system?.usageProfiles?.[usageProfileIndex]?.uses || {};
+      const uses = this.system?.usageProfiles?.[usageProfileId]?.uses || {};
       const available = Number(uses.value ?? 0);
       let used = false;
       const remaining = Math.max(available - 1, 0);
@@ -1072,15 +1074,15 @@ export default class Item5e extends Item {
 
   /**
    * Handle update actions required when consuming an external resource
-   * @param {number} usageProfileIndex  Which Usage-Profile is being used to roll
+   * @param {number} usageProfileId  Which Usage-Profile is being used to roll
    * @param {object} itemUpdates        An object of data updates applied to this item
    * @param {object} actorUpdates       An object of data updates applied to the item owner (Actor)
    * @param {object[]} resourceUpdates  An array of updates to apply to other items owned by the actor
    * @returns {boolean|void}            Return false to block further progress, or return nothing to continue
    * @protected
    */
-  _handleConsumeResource(usageProfileIndex, itemUpdates, actorUpdates, resourceUpdates) {
-    const consume = this.system?.usageProfiles?.[usageProfileIndex]?.consume || {};
+  _handleConsumeResource(usageProfileId, itemUpdates, actorUpdates, resourceUpdates) {
+    const consume = this.system?.usageProfiles?.[usageProfileId]?.consume || {};
     if ( !consume.type ) return;
 
     // No consumed target
@@ -1187,19 +1189,19 @@ export default class Item5e extends Item {
       actor: this.actor.toObject(false),
       tokenId: token?.uuid || null,
       item: this.toObject(false),
-      itemUsageProfileIndex: options.itemUsageProfileIndex,
+      itemusageProfileId: options.itemusageProfileId,
       itemUsageProfile: options.itemUsageProfile || {},
-      itemUsageProfileSubheader: `${game.i18n.localize(`DND5E.ItemUsageProfileType${this.type.titleCase()}`)} - ${options?.itemUsageProfile?.profileName || game.i18n.localize("DND5E.Untitled")}`,
+      itemUsageProfileSubheader: `${game.i18n.localize(`DND5E.ItemUsageProfileType${this.type.titleCase()}`)} - ${options?.itemUsageProfile?.name || game.i18n.localize("DND5E.Untitled")}`,
       data: await this.getChatData(),
       labels: this.labels,
-      hasAttack: this.hasAttack(options.itemUsageProfileIndex),
-      isHealing: this.isHealing(options.itemUsageProfileIndex),
-      hasDamage: this.hasDamage(options.itemUsageProfileIndex),
+      hasAttack: this.hasAttack(options.itemusageProfileId),
+      isHealing: this.isHealing(options.itemusageProfileId),
+      hasDamage: this.hasDamage(options.itemusageProfileId),
       isSpell: this.type === "spell",
-      hasSave: this.hasSave(options.itemUsageProfileIndex),
-      hasAreaTarget: this.hasAreaTarget(options.itemUsageProfileIndex),
+      hasSave: this.hasSave(options.itemusageProfileId),
+      hasAreaTarget: this.hasAreaTarget(options.itemusageProfileId),
       isTool: this.type === "tool",
-      hasAbilityCheck: this.hasAbilityCheck(options.itemUsageProfileIndex)
+      hasAbilityCheck: this.hasAbilityCheck(options.itemusageProfileId)
     };
     const html = await renderTemplate("systems/dnd5e/templates/chat/item-card.hbs", templateData);
 
@@ -1441,17 +1443,16 @@ export default class Item5e extends Item {
 
     // Establish which usage-profile is being used
     const usageProfileId = options?.event?.currentTarget?.dataset?.usageProfileId;
-    const usageProfileIndex = this?.system?.usageProfiles?.findIndex(up => up._id === usageProfileId);
-    if ( usageProfileIndex < 0 ) throw new Error("This Attack-Roll's selected Usage-Profile is missing.");
-    const usageProfile = this?.system?.usageProfiles?.[usageProfileIndex];
+    const usageProfile = this?.system?.usageProfiles?.[usageProfileId];
+    if ( !usageProfile ) throw new Error("This Attack-Roll's selected Usage-Profile is missing.");
 
     const flags = this.actor.flags.dnd5e ?? {};
-    if ( !this.hasAttack(usageProfileIndex) ) throw new Error("You may not place an Attack Roll with this Item.");
+    if ( !this.hasAttack(usageProfileId) ) throw new Error("You may not place an Attack Roll with this Item.");
 
-    let title = `${this.name}${(this?.system?.usageProfiles?.length > 1) ? ` - ${usageProfile.profileName}` : ""} - ${game.i18n.localize("DND5E.AttackRoll")}`;
+    let title = `${this.name}${(this?.system?.usageProfiles?._keys?.length > 1) ? ` - ${usageProfile.name}` : ""} - ${game.i18n.localize("DND5E.AttackRoll")}`;
 
     // Get the parts and rollData for this item's attack
-    const {parts, rollData} = this.getAttackToHit(usageProfileIndex);
+    const {parts, rollData} = this.getAttackToHit(usageProfileId);
 
     // Handle ammunition consumption
     delete this._ammo;
@@ -1470,20 +1471,20 @@ export default class Item5e extends Item {
       }
 
       // Get pending ammunition update
-      const usage = this._getUsageUpdates(usageProfileIndex, {consumeResource: true});
+      const usage = this._getUsageUpdates(usageProfileId, {consumeResource: true});
       if ( usage === false ) return null;
       ammoUpdate = usage.resourceUpdates ?? [];
     }
 
     // Flags
     const elvenAccuracy = (flags.elvenAccuracy
-      && CONFIG.DND5E.characterFlags.elvenAccuracy.abilities.includes(this.abilityMod(usageProfileIndex))) || undefined;
+      && CONFIG.DND5E.characterFlags.elvenAccuracy.abilities.includes(this.abilityMod(usageProfileId))) || undefined;
 
     // Compose roll options
     const rollConfig = foundry.utils.mergeObject({
       actor: this.actor,
       data: rollData,
-      critical: this.getCriticalThreshold(usageProfileIndex),
+      critical: this.getCriticalThreshold(usageProfileId),
       title,
       flavor: title,
       elvenAccuracy,
@@ -1538,6 +1539,7 @@ export default class Item5e extends Item {
    * @param {boolean} [config.critical]    Should damage be rolled as a critical hit?
    * @param {number} [config.spellLevel]   If the item is a spell, override the level for damage scaling
    * @param {DamageRollConfiguration} [config.options]  Additional options passed to the damageRoll function
+   * @param config.versatile
    * @returns {Promise<DamageRoll>}        A Promise which resolves to the created Roll instance, or null if the action
    *                                       cannot be performed.
    */
@@ -1545,11 +1547,10 @@ export default class Item5e extends Item {
 
     // Establish which usage-profile is being used
     const usageProfileId = event?.currentTarget?.dataset?.usageProfileId;
-    const usageProfileIndex = this?.system?.usageProfiles?.findIndex(up => up._id === usageProfileId);
-    if ( usageProfileIndex < 0 ) throw new Error("This Damage-Roll's selected Usage-Profile is missing.");
-    const usageProfile = this?.system?.usageProfiles?.[usageProfileIndex];
+    const usageProfile = this?.system?.usageProfiles?.[usageProfileId];
+    if ( !usageProfile ) throw new Error("This Damage-Roll's selected Usage-Profile is missing.");
 
-    if ( !this.hasDamage(usageProfileIndex) ) throw new Error("You may not make a Damage Roll with this Item.");
+    if ( !this.hasDamage(usageProfileId) ) throw new Error("You may not make a Damage Roll with this Item.");
 
     const messageData = {
       "flags.dnd5e.roll": {type: "damage", itemId: this.id, itemUuid: this.uuid},
@@ -1559,12 +1560,12 @@ export default class Item5e extends Item {
     // Get roll data
     const dmg = usageProfile.damage;
     const parts = dmg.parts.map(d => d[0]);
-    const rollData = this.getRollData(usageProfileIndex);
+    const rollData = this.getRollData(usageProfileId);
     if ( spellLevel ) rollData.item.level = spellLevel;
 
     // Configure the damage roll
     const actionFlavor = game.i18n.localize(usageProfile.actionType === "heal" ? "DND5E.Healing" : "DND5E.DamageRoll");
-    const title = `${this.name}${(this?.system?.usageProfiles?.length > 1) ? ` - ${usageProfile.profileName}` : ""} - ${actionFlavor}`;
+    const title = `${this.name}${(this?.system?.usageProfiles?._keys?.length > 1) ? ` - ${usageProfile.name}` : ""} - ${actionFlavor}`;
     const rollConfig = {
       actor: this.actor,
       critical,
@@ -1726,15 +1727,14 @@ export default class Item5e extends Item {
 
     // Establish which usage-profile is being used
     const usageProfileId = event?.currentTarget?.dataset?.usageProfileId;
-    const usageProfileIndex = this?.system?.usageProfiles?.findIndex(up => up._id === usageProfileId);
-    if ( usageProfileIndex < 0 ) throw new Error("This Formula-Roll's selected Usage-Profile is missing.");
-    const usageProfile = this?.system?.usageProfiles?.[usageProfileIndex];
+    const usageProfile = this?.system?.usageProfiles?.[usageProfileId];
+    if ( !usageProfile ) throw new Error("This Formula-Roll's selected Usage-Profile is missing.");
 
     if ( !usageProfile?.formula ) throw new Error("This Item does not have a formula to roll!");
 
     const rollConfig = {
       formula: usageProfile?.formula,
-      data: this.getRollData(usageProfileIndex),
+      data: this.getRollData(usageProfileId),
       chatMessage: true
     };
     if ( spellLevel ) rollConfig.data.item.level = spellLevel;
@@ -1923,19 +1923,19 @@ export default class Item5e extends Item {
    * Prepare a data object which is passed to any Roll formulas which are created related to this Item.
    * @returns {object}  Data used for @ formula replacement in Roll formulas.
    * @private
-   * @param {number} usageProfileIndex Which Usage-Profile is being used to roll
+   * @param {number} usageProfileId Which Usage-Profile is being used to roll
    */
-  getRollData(usageProfileIndex) {
+  getRollData(usageProfileId) {
     if ( !this.actor ) return null;
     const actorRollData = this.actor.getRollData();
     const rollData = {
       ...actorRollData,
       item: this.toObject().system,
-      itemUsageProfile: this.system?.usageProfiles?.[usageProfileIndex]
+      itemUsageProfile: this.system?.usageProfiles?.[usageProfileId]
     };
 
     // Include an ability score modifier if one exists
-    const abl = this.abilityMod(usageProfileIndex);
+    const abl = this.abilityMod(usageProfileId);
     if ( abl && ("abilities" in rollData) ) {
       const ability = rollData.abilities[abl];
       if ( !ability ) {

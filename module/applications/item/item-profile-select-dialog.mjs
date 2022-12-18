@@ -34,10 +34,10 @@ export default class ItemProfileSelectDialog extends Dialog {
     return new Promise(resolve => {
       const dialog = new this(item, {
         title: `${item.name} - ${game.i18n.localize(`DND5E.ItemUsageProfileType${item.type.titleCase()}Select`)}`,
-        buttons: item.system.usageProfiles.reduce(
+        buttons: Array.from(item.system.usageProfiles).reduce(
           (result, usageProfile, index) => {
             result[`item-use-dialog-button-${index}`] = {
-              label: usageProfile.profileName || game.i18n.localize("DND5E.Untitled"),
+              label: usageProfile.name || game.i18n.localize("DND5E.Untitled"),
               callback: () => resolve(index)
             };
             return result;

@@ -25,14 +25,16 @@ export default class AbilityUseDialog extends Dialog {
    * A constructor function which displays the Spell Cast Dialog app for a given Actor and Item.
    * Returns a Promise which resolves to the dialog FormData once the workflow has been completed.
    * @param {Item5e} item  Item being used.
-   * @param {number} usageProfileIndex Which Usage-Profile is being used to roll
+   * @param {number} usageProfileId Which Usage-Profile is being used to roll
    * @returns {Promise}    Promise that is resolved when the use dialog is acted upon.
    */
-  static async create(item, usageProfileIndex) {
+  static async create(item, usageProfileId) {
     if ( !item.isOwned ) throw new Error("You cannot display an ability usage dialog for an unowned item");
 
+    const usageProfile = item.system?.usageProfiles?.[usageProfileId];
+
     // Prepare data
-    const uses = item.system?.usageProfiles?.[usageProfileIndex]?.uses ?? {};
+    const uses = usageProfile?.uses ?? {};
     const quantity = item.system.quantity ?? 0;
     const recharge = item.system.recharge ?? {};
     const recharges = !!recharge.value;
@@ -45,10 +47,10 @@ export default class AbilityUseDialog extends Dialog {
       note: this._getAbilityUseNote(item, uses, recharge),
       consumeSpellSlot: false,
       consumeRecharge: recharges,
-      consumeResource: !!item.system?.usageProfiles?.[usageProfileIndex]?.consume.target,
+      consumeResource: !!usageProfile?.consume.target,
       consumeUses: uses.per && (uses.max > 0),
       canUse: recharges ? recharge.charged : sufficientUses,
-      createTemplate: game.user.can("TEMPLATE_CREATE") && item.hasAreaTarget(usageProfileIndex),
+      createTemplate: game.user.can("TEMPLATE_CREATE") && item.hasAreaTarget(usageProfileId),
       errors: []
     };
     if ( item.type === "spell" ) this._getSpellData(item.actor.system, item.system, data);
