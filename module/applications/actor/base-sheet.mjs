@@ -1089,8 +1089,8 @@ export default class ActorSheet5e extends ActorSheet {
 
   /**
    * Handle cloning an existing Owned Item for the Actor.
-   * @param {Event} event    The originating click event.
-   * @returns {ItemSheet5e}  The rendered item sheet.
+   * @param {Event} event          The originating click event.
+   * @returns {Promise<Item5e[]>}  The newly cloned item.
    * @private
    */
   _onItemClone(event) {
