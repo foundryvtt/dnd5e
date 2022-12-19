@@ -633,6 +633,7 @@ export default class ActorSheet5e extends ActorSheet {
 
       // Owned Item management
       html.find(".item-create").click(this._onItemCreate.bind(this));
+      html.find(".item-clone").click(this._onItemClone.bind(this));
       html.find(".item-delete").click(this._onItemDelete.bind(this));
       html.find(".item-uses input").click(ev => ev.target.select()).change(this._onUsesChange.bind(this));
       html.find(".slot-max-override").click(this._onSpellSlotOverride.bind(this));
@@ -1082,6 +1083,28 @@ export default class ActorSheet5e extends ActorSheet {
     const li = event.currentTarget.closest(".item");
     const item = this.actor.items.get(li.dataset.itemId);
     return item.sheet.render(true);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle cloning an existing Owned Item for the Actor.
+   * @param {Event} event    The originating click event.
+   * @returns {ItemSheet5e}  The rendered item sheet.
+   * @private
+   */
+  _onItemClone(event) {
+    event.preventDefault();
+    const li = event.currentTarget.closest(".item");
+    const item = this.actor.items.get(li.dataset.itemId);
+
+    // Check to make sure the newly created class doesn't take player over level cap
+    if ( item.type === "class" && (this.actor.system.details.level + 1 > CONFIG.DND5E.maxLevel) ) {
+      const err = game.i18n.format("DND5E.MaxCharacterLevelExceededWarn", {max: CONFIG.DND5E.maxLevel});
+      return ui.notifications.error(err);
+    }
+
+    return this.actor.createEmbeddedDocuments("Item", [foundry.utils.deepClone(item)]);
   }
 
   /* -------------------------------------------- */
