@@ -64,7 +64,6 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
       item.isDepleted = item.isOnCooldown && (uses.per && (uses.value > 0));
       item.isCloneable = !["race", "background", "class", "subclass"].includes(item.type);
       item.hasTarget = !!target && !(["none", ""].includes(target.type));
-
       if ( item.type === "spell" ) arr[0].push(item);
       else arr[1].push(item);
       return arr;
