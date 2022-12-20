@@ -81,6 +81,7 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
       item.hasUses = uses && (uses.max > 0);
       item.isOnCooldown = recharge && !!recharge.value && (recharge.charged === false);
       item.isDepleted = item.isOnCooldown && (uses.per && (uses.value > 0));
+      item.isCloneable = !["race", "background", "class", "subclass"].includes(item.type);
       item.hasTarget = !!target && !(["none", ""].includes(target.type));
 
       // Item toggle state
