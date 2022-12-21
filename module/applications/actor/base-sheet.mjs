@@ -660,19 +660,21 @@ export default class ActorSheet5e extends ActorSheet {
       html.find(".rollable").each((i, el) => el.classList.remove("rollable"));
     }
 
-    console.log("CONFIG", CONFIG);
+    // Configure a context menu for each ItemType
     for (const itemType of Reflect.ownKeys(CONFIG.Item.typeLabels)) {
-      console.log("itemType", itemType);
+
       // Item context menu
       const itemContextOptions = this._getItemContextMenuOptions(itemType);
+
       /**
-       * A hook event that fires when the context menu for an item is constructed.
+       * A hook event that fires when the context menu for an itemType is constructed.
        * @function dnd5e.getItemContext
        * @memberof hookEvents
        * @param {jQuery} html                      The HTML element to which the context options are attached.
        * @param {ContextMenuEntry[]} entryOptions  The context menu entries.
+       * @param {string} itemType                  The ItemType this context menu is configured for.
        */
-      Hooks.call("dnd5e.getItemContext", html, itemContextOptions);
+      Hooks.call("dnd5e.getItemContext", html, itemContextOptions, itemType);
       if ( itemContextOptions ) new ContextMenu(html, `.item-list>.item[data-item-type="${itemType}"]`, itemContextOptions);
     }
 
