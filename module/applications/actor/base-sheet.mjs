@@ -660,17 +660,21 @@ export default class ActorSheet5e extends ActorSheet {
       html.find(".rollable").each((i, el) => el.classList.remove("rollable"));
     }
 
-    // Item context menu
-    const itemContextOptions = this._getItemContextMenuOptions();
-    /**
-     * A hook event that fires when the context menu for an item is constructed.
-     * @function dnd5e.getItemContext
-     * @memberof hookEvents
-     * @param {jQuery} html                      The HTML element to which the context options are attached.
-     * @param {ContextMenuEntry[]} entryOptions  The context menu entries.
-     */
-    Hooks.call("dnd5e.getItemContext", html, itemContextOptions);
-    if ( itemContextOptions ) new ContextMenu(html, ".item-list>.item", itemContextOptions);
+    console.log("CONFIG", CONFIG);
+    for (const itemType of Reflect.ownKeys(CONFIG.Item.typeLabels)) {
+      console.log("itemType", itemType);
+      // Item context menu
+      const itemContextOptions = this._getItemContextMenuOptions(itemType);
+      /**
+       * A hook event that fires when the context menu for an item is constructed.
+       * @function dnd5e.getItemContext
+       * @memberof hookEvents
+       * @param {jQuery} html                      The HTML element to which the context options are attached.
+       * @param {ContextMenuEntry[]} entryOptions  The context menu entries.
+       */
+      Hooks.call("dnd5e.getItemContext", html, itemContextOptions);
+      if ( itemContextOptions ) new ContextMenu(html, `.item-list>.item[data-item-type="${itemType}"]`, itemContextOptions);
+    }
 
     // Handle default listeners last so system listeners are triggered first
     super.activateListeners(html);
@@ -680,19 +684,24 @@ export default class ActorSheet5e extends ActorSheet {
 
   /**
    * Get the set of ContextMenu options which should be applied for item entries.
+   * @param {string} itemType       The item type this context menu is for.
    * @returns {ContextMenuEntry[]}  Context menu entries.
-   * @private
+   * @protected
    */
-  _getItemContextMenuOptions() {
+  _getItemContextMenuOptions(itemType) {
     return [
       {
-        name: "DND5E.ItemEdit",
+        name: game.i18n.format("DND5E.ItemContextEdit", {
+          itemType: game.i18n.localize(CONFIG.Item.typeLabels[itemType])
+        }),
         icon: "<i class='fas fa-edit fa-fw'></i>",
         condition: li => this.isEditable,
         callback: li => this._onItemAction(li[0], "edit")
       },
       {
-        name: "DND5E.ItemDuplicate",
+        name: game.i18n.format("DND5E.ItemContextDuplicate", {
+          itemType: game.i18n.localize(CONFIG.Item.typeLabels[itemType])
+        }),
         icon: "<i class='fas fa-copy fa-fw'></i>",
         condition: li => {
           if (!this.isEditable) return false;
@@ -703,7 +712,9 @@ export default class ActorSheet5e extends ActorSheet {
         callback: li => this._onItemAction(li[0], "duplicate")
       },
       {
-        name: "DND5E.ItemDelete",
+        name: game.i18n.format("DND5E.ItemContextDelete", {
+          itemType: game.i18n.localize(CONFIG.Item.typeLabels[itemType])
+        }),
         icon: "<i class='fas fa-trash fa-fw' style='color: rgb(255, 65, 65);'></i>",
         condition: li => this.isEditable,
         callback: li => this._onItemAction(li[0], "delete")
