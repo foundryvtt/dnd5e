@@ -633,7 +633,6 @@ export default class ActorSheet5e extends ActorSheet {
 
       // Owned Item management
       html.find(".item-create").click(this._onItemCreate.bind(this));
-      html.find(".item-clone").click(this._onItemClone.bind(this));
       html.find(".item-delete").click(this._onItemDelete.bind(this));
       html.find(".item-uses input").click(ev => ev.target.select()).change(this._onUsesChange.bind(this));
       html.find(".slot-max-override").click(this._onSpellSlotOverride.bind(this));
@@ -661,8 +660,72 @@ export default class ActorSheet5e extends ActorSheet {
       html.find(".rollable").each((i, el) => el.classList.remove("rollable"));
     }
 
+    // Item context menu
+    const itemContextOptions = this._getItemContextMenuOptions();
+    /**
+     * A hook event that fires when the context menu for an item is constructed.
+     * @function dnd5e.getItemContext
+     * @memberof hookEvents
+     * @param {jQuery} html                      The HTML element to which the context options are attached.
+     * @param {ContextMenuEntry[]} entryOptions  The context menu entries.
+     */
+    Hooks.call("dnd5e.getItemContext", html, itemContextOptions);
+    if ( itemContextOptions ) new ContextMenu(html, ".item-list>.item", itemContextOptions);
+
     // Handle default listeners last so system listeners are triggered first
     super.activateListeners(html);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Get the set of ContextMenu options which should be applied for item entries.
+   * @returns {ContextMenuEntry[]}  Context menu entries.
+   * @private
+   */
+  _getItemContextMenuOptions() {
+    return [
+      {
+        name: "DND5E.ItemEdit",
+        icon: "<i class='fas fa-edit fa-fw'></i>",
+        condition: li => this.isEditable,
+        callback: li => this._onItemAction(li[0], "edit")
+      },
+      {
+        name: "DND5E.ItemDuplicate",
+        icon: "<i class='fas fa-copy fa-fw'></i>",
+        condition: li => {
+          if (!this.isEditable) return false;
+          const id = li[0]?.dataset.itemId;
+          const item = this.actor.items.get(id);
+          return !["race", "background", "class", "subclass"].includes(item.type);
+        },
+        callback: li => this._onItemAction(li[0], "duplicate")
+      },
+      {
+        name: "DND5E.ItemDelete",
+        icon: "<i class='fas fa-trash fa-fw' style='color: rgb(255, 65, 65);'></i>",
+        condition: li => this.isEditable,
+        callback: li => this._onItemAction(li[0], "delete")
+      }
+    ];
+  }
+
+  /**
+   * Handle one of the advancement actions from the buttons or context menu.
+   * @param {Element} target  Button or context menu entry that triggered this action.
+   * @param {string} action   Action being triggered.
+   * @returns {Promise}
+   */
+  _onItemAction(target, action) {
+    const id = target.closest(".item")?.dataset.itemId;
+    const item = this.actor.items.get(id);
+    if ( ["edit", "delete", "duplicate"].includes(action) && !item ) return;
+    switch (action) {
+      case "edit": return item.sheet.render(true);
+      case "delete": return item.deleteDialog();
+      case "duplicate": return this.actor.createEmbeddedDocuments("Item", [foundry.utils.deepClone(item)]);
+    }
   }
 
   /* -------------------------------------------- */
@@ -1083,28 +1146,6 @@ export default class ActorSheet5e extends ActorSheet {
     const li = event.currentTarget.closest(".item");
     const item = this.actor.items.get(li.dataset.itemId);
     return item.sheet.render(true);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Handle cloning an existing Owned Item for the Actor.
-   * @param {Event} event          The originating click event.
-   * @returns {Promise<Item5e[]>}  The newly cloned item.
-   * @private
-   */
-  _onItemClone(event) {
-    event.preventDefault();
-    const li = event.currentTarget.closest(".item");
-    const item = this.actor.items.get(li.dataset.itemId);
-
-    // Check to make sure the newly created class doesn't take player over level cap
-    if ( item.type === "class" && (this.actor.system.details.level + item.system.levels > CONFIG.DND5E.maxLevel) ) {
-      const err = game.i18n.format("DND5E.MaxCharacterLevelExceededWarn", {max: CONFIG.DND5E.maxLevel});
-      return ui.notifications.error(err);
-    }
-
-    return this.actor.createEmbeddedDocuments("Item", [foundry.utils.deepClone(item)]);
   }
 
   /* -------------------------------------------- */
