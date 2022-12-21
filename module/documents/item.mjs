@@ -1355,6 +1355,7 @@ export default class Item5e extends Item {
 
     // Get the parts and rollData for this item's attack
     const {parts, rollData} = this.getAttackToHit();
+    if ( options.spellLevel ) rollData.item.level = options.spellLevel;
 
     // Handle ammunition consumption
     delete this._ammo;
@@ -1892,7 +1893,11 @@ export default class Item5e extends Item {
     let targets;
     switch ( action ) {
       case "attack":
-        await item.rollAttack({event}); break;
+        await item.rollAttack({
+          event: event,
+          spellLevel: spellLevel
+        });
+        break;
       case "damage":
       case "versatile":
         await item.rollDamage({
