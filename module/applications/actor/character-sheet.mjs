@@ -209,66 +209,6 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
 
   /* -------------------------------------------- */
 
-  /** @override */
-  _getItemContextMenuOptions(item) {
-    const itemContextOptions = super._getItemContextMenuOptions(item);
-
-    const isItemEquipped = item.system?.equipped;
-    if (isItemEquipped === true || isItemEquipped === false) {
-
-      itemContextOptions.unshift({
-        name: game.i18n.format(
-          isItemEquipped ? "DND5E.ItemContextEquippableRemove" : "DND5E.ItemContextEquippableAdd",
-          {
-            itemType: game.i18n.localize(CONFIG.Item.typeLabels[item.type])
-          }
-        ),
-        icon: "<i class='fas fa-shield-alt fa-fw'></i>",
-        condition: li => this.isEditable,
-        callback: li => this._onItemAction(item, isItemEquipped ? "unequip" : "equip")
-      });
-    }
-
-    const itemAttune = item.system?.attunement;
-    if (itemAttune === CONFIG.DND5E.attunementTypes.ATTUNED || itemAttune === CONFIG.DND5E.attunementTypes.REQUIRED) {
-
-      itemContextOptions.unshift({
-        name: game.i18n.format(
-          itemAttune === CONFIG.DND5E.attunementTypes.ATTUNED ? "DND5E.ItemContextAttunementRemove" : "DND5E.ItemContextAttunementAdd",
-          {
-            itemType: game.i18n.localize(CONFIG.Item.typeLabels[item.type])
-          }
-        ),
-        icon: "<i class='fas fa-sun fa-fw'></i>",
-        condition: li => this.isEditable,
-        callback: li => this._onItemAction(item, itemAttune === CONFIG.DND5E.attunementTypes.ATTUNED ? "unattune" : "attune")
-      });
-    }
-
-    if (item.system?.preparation?.mode === "prepared" && item.system.level > 0) {
-      const isItemPrepared = item.system?.preparation?.prepared;
-      if (isItemPrepared === true || isItemPrepared === false) {
-
-
-        itemContextOptions.unshift({
-          name: game.i18n.format(
-            isItemPrepared ? "DND5E.ItemContextPreparationRemove" : "DND5E.ItemContextPreparationAdd",
-            {
-              itemType: game.i18n.localize(CONFIG.Item.typeLabels[item.type])
-            }
-          ),
-          icon: "<i class='fas fa-sun fa-fw'></i>",
-          condition: li => this.isEditable,
-          callback: li => this._onItemAction(item, isItemPrepared ? "unprepare" : "prepare")
-        });
-      }
-    }
-
-    return itemContextOptions;
-  }
-
-  /* -------------------------------------------- */
-
   /**
    * Handle mouse click events for character sheet actions.
    * @param {MouseEvent} event  The originating click event.
