@@ -661,10 +661,10 @@ export default class ActorSheet5e extends ActorSheet {
     }
 
     // Configure a context menu for each ItemType
-    for (const itemType of Reflect.ownKeys(CONFIG.Item.typeLabels)) {
+    for (const item of this.actor.items) {
 
       // Item context menu
-      const itemContextOptions = this._getItemContextMenuOptions(itemType);
+      const itemContextOptions = this._getItemContextMenuOptions(item);
 
       /**
        * A hook event that fires when the context menu for an itemType is constructed.
@@ -674,8 +674,8 @@ export default class ActorSheet5e extends ActorSheet {
        * @param {ContextMenuEntry[]} entryOptions  The context menu entries.
        * @param {string} itemType                  The ItemType this context menu is configured for.
        */
-      Hooks.call("dnd5e.getItemContext", html, itemContextOptions, itemType);
-      if ( itemContextOptions ) new ContextMenu(html, `.item-list>.item[data-item-type="${itemType}"]`, itemContextOptions);
+      Hooks.call("dnd5e.getItemContext", html, itemContextOptions, item);
+      if ( itemContextOptions ) new ContextMenu(html, `.item-list>.item[data-item-id="${item._id}"]`, itemContextOptions);
     }
 
     // Handle default listeners last so system listeners are triggered first
@@ -686,58 +686,63 @@ export default class ActorSheet5e extends ActorSheet {
 
   /**
    * Get the set of ContextMenu options which should be applied for item entries.
-   * @param {string} itemType       The item type this context menu is for.
+   * @param {Item5e} item           The item this context menu is for.
    * @returns {ContextMenuEntry[]}  Context menu entries.
    * @protected
    */
-  _getItemContextMenuOptions(itemType) {
+  _getItemContextMenuOptions(item) {
     return [
       {
         name: game.i18n.format("DND5E.ItemContextEdit", {
-          itemType: game.i18n.localize(CONFIG.Item.typeLabels[itemType])
+          itemType: game.i18n.localize(CONFIG.Item.typeLabels[item.type])
         }),
         icon: "<i class='fas fa-edit fa-fw'></i>",
         condition: li => this.isEditable,
-        callback: li => this._onItemAction(li[0], "edit")
+        callback: li => this._onItemAction(item, "edit")
       },
       {
         name: game.i18n.format("DND5E.ItemContextDuplicate", {
-          itemType: game.i18n.localize(CONFIG.Item.typeLabels[itemType])
+          itemType: game.i18n.localize(CONFIG.Item.typeLabels[item.type])
         }),
         icon: "<i class='fas fa-copy fa-fw'></i>",
-        condition: li => {
-          if (!this.isEditable) return false;
-          const id = li[0]?.dataset.itemId;
-          const item = this.actor.items.get(id);
-          return !["race", "background", "class", "subclass"].includes(item.type);
-        },
-        callback: li => this._onItemAction(li[0], "duplicate")
+        condition: li => this.isEditable && !["race", "background", "class", "subclass"].includes(item.type),
+        callback: li => this._onItemAction(item, "duplicate")
       },
       {
         name: game.i18n.format("DND5E.ItemContextDelete", {
-          itemType: game.i18n.localize(CONFIG.Item.typeLabels[itemType])
+          itemType: game.i18n.localize(CONFIG.Item.typeLabels[item.type])
         }),
         icon: "<i class='fas fa-trash fa-fw' style='color: rgb(255, 65, 65);'></i>",
         condition: li => this.isEditable,
-        callback: li => this._onItemAction(li[0], "delete")
+        callback: li => this._onItemAction(item, "delete")
       }
     ];
   }
 
+  /* -------------------------------------------- */
+
   /**
-   * Handle one of the advancement actions from the buttons or context menu.
-   * @param {Element} target  Button or context menu entry that triggered this action.
-   * @param {string} action   Action being triggered.
+   * Handle one of the item actions from the context menu.
+   * @param {Item5e} item    The item this action is targetting.
+   * @param {string} action  Action being triggered.
    * @returns {Promise}
    */
-  _onItemAction(target, action) {
-    const id = target.closest(".item")?.dataset.itemId;
-    const item = this.actor.items.get(id);
-    if ( ["edit", "delete", "duplicate"].includes(action) && !item ) return;
+  _onItemAction(item, action) {
+    if ( !item ) return;
     switch (action) {
+
       case "edit": return item.sheet.render(true);
       case "delete": return item.deleteDialog();
       case "duplicate": return this.actor.createEmbeddedDocuments("Item", [foundry.utils.deepClone(item)]);
+
+      case "equip": return item.update({"system.equipped": true});
+      case "unequip": return item.update({"system.equipped": false});
+
+      case "attune": return item.update({"system.attunement": CONFIG.DND5E.attunementTypes.ATTUNED});
+      case "unattune": return item.update({"system.attunement": CONFIG.DND5E.attunementTypes.REQUIRED});
+
+      case "prepare": return item.update({"system.preparation.prepared": true});
+      case "unprepare": return item.update({"system.preparation.prepared": false});
     }
   }
 
