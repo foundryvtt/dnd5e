@@ -245,9 +245,6 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
       });
     }
 
-    if (item.system?.preparation) {
-      console.log(item.name, item.system);
-    }
     if (item.system?.preparation?.mode === "prepared" && item.system.level > 0) {
       const isItemPrepared = item.system?.preparation?.prepared;
       if (isItemPrepared === true || isItemPrepared === false) {
