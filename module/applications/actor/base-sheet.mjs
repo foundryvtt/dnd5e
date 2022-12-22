@@ -710,7 +710,7 @@ export default class ActorSheet5e extends ActorSheet {
           const item = this.actor.items.get(id);
           if (!item) return false;
 
-          const itemAttunement = item.system?.equipped;
+          const itemAttunement = item.system?.attunement;
           return itemAttunement === CONFIG.DND5E.attunementTypes.REQUIRED;
         },
         callback: li => this._onItemContextAction(li[0], "attune")
@@ -724,7 +724,7 @@ export default class ActorSheet5e extends ActorSheet {
           const item = this.actor.items.get(id);
           if (!item) return false;
 
-          const itemAttunement = item.system?.equipped;
+          const itemAttunement = item.system?.attunement;
           return itemAttunement === CONFIG.DND5E.attunementTypes.ATTUNED;
         },
         callback: li => this._onItemContextAction(li[0], "unattune")
