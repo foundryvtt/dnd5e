@@ -814,7 +814,7 @@ export default class ActorSheet5e extends ActorSheet {
       {
         name: "DND5E.ItemContextDuplicate",
         icon: "<i class='fas fa-copy fa-fw'></i>",
-        condition: li => !this.isEditable,
+        condition: li => this.isEditable,
         callback: li => this._onItemContextAction(li[0], "duplicate")
       },
 
@@ -997,7 +997,7 @@ export default class ActorSheet5e extends ActorSheet {
    * @returns {Promise}
    */
   _onSpellContextAction(target, action) {
-    const id = target.closest(".spell")?.dataset.itemId;
+    const id = target.closest(".item")?.dataset.itemId;
     const item = this.actor.items.get(id);
     if ( !item ) return;
     switch (action) {
