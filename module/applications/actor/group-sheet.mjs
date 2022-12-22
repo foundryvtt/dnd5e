@@ -336,11 +336,6 @@ export default class GroupActorSheet extends ActorSheet {
         const editItem = this.actor.items.get(editLi.dataset.itemId);
         editItem.sheet.render(true);
         break;
-      case "itemClone":
-        const cloneLi = event.currentTarget.closest(".item");
-        const cloneItem = this.actor.items.get(cloneLi.dataset.itemId);
-        this.actor.createEmbeddedDocuments("Item", [foundry.utils.deepClone(cloneItem)]);
-        break;
     }
   }
 
