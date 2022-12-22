@@ -673,7 +673,7 @@ export default class ActorSheet5e extends ActorSheet {
     Hooks.call("dnd5e.getItemContext", html, itemContextOptions);
     if ( itemContextOptions ) new ContextMenu(
       html,
-      ["weapon", "equipment", "consumable", "tool", "backpack", "loot"].map(type => `.item[data-item-id].${type}`).join(", "), // Selects all items under the standard 'physical item' type
+      ["weapon", "equipment", "consumable", "tool", "backpack", "loot"].map(type => `.${type}-item`).join(", "), // Selects all items under the standard 'physical item' type
       itemContextOptions
     );
 
@@ -690,7 +690,7 @@ export default class ActorSheet5e extends ActorSheet {
     Hooks.call("dnd5e.getFeatureContext", html, featureContextOptions);
     if ( featureContextOptions ) new ContextMenu(
       html,
-      ["feat", "race", "background", "class", "subclass"].map(type => `.item[data-item-id].${type}`).join(", "), // Selects all items under the 'feat' type
+      ["feat", "race", "background", "class", "subclass"].map(type => `.${type}-item`).join(", "), // Selects all items under the 'feat' type
       featureContextOptions
     );
 
@@ -707,7 +707,7 @@ export default class ActorSheet5e extends ActorSheet {
     Hooks.call("dnd5e.getSpellContext", html, spellContextOptions);
     if ( spellContextOptions ) new ContextMenu(
       html,
-      ".item[data-item-id].spell", // Selects all items under the 'spell' type
+      ".spell-item", // Selects all items under the 'spell' type
       spellContextOptions
     );
 
@@ -724,7 +724,7 @@ export default class ActorSheet5e extends ActorSheet {
     Hooks.call("dnd5e.getEffectContext", html, effectContextOptions);
     if ( itemContextOptions ) new ContextMenu(
       html,
-      ".item[data-effect-id].effect",
+      ".item.effect",
       effectContextOptions
     );
 
