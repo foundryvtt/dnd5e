@@ -664,15 +664,27 @@ export default class ActorSheet5e extends ActorSheet {
     const itemContextOptions = this._getItemContextMenuOptions();
 
     /**
-     * A hook event that fires when the context menu for an itemType is constructed.
+     * A hook event that fires when the context menu for items.
      * @function dnd5e.getItemContext
      * @memberof hookEvents
      * @param {jQuery} html                      The HTML element to which the context options are attached.
      * @param {ContextMenuEntry[]} entryOptions  The context menu entries.
-     * @param {string} itemType                  The ItemType this context menu is configured for.
      */
     Hooks.call("dnd5e.getItemContext", html, itemContextOptions);
-    if ( itemContextOptions ) new ContextMenu(html, ".item-list>.item", itemContextOptions);
+    if ( itemContextOptions ) new ContextMenu(html, ".item-list>.item[data-item-id]", itemContextOptions);
+
+    // Effect context menu
+    const effectContextOptions = this._getEffectContextMenuOptions();
+
+    /**
+     * A hook event that fires when the context menu for effects.
+     * @function dnd5e.getEffectContext
+     * @memberof hookEvents
+     * @param {jQuery} html                      The HTML element to which the context options are attached.
+     * @param {ContextMenuEntry[]} entryOptions  The context menu entries.
+     */
+    Hooks.call("dnd5e.getEffectContext", html, effectContextOptions);
+    if ( itemContextOptions ) new ContextMenu(html, ".item-list>.effect[data-effect-id]", effectContextOptions);
 
     // Handle default listeners last so system listeners are triggered first
     super.activateListeners(html);
@@ -696,10 +708,12 @@ export default class ActorSheet5e extends ActorSheet {
           if (!this.isEditable) return false;
           const id = li[0]?.dataset.itemId;
           const item = this.actor.items.get(id);
+          if (!item) return false;
+
           const itemAttunement = item.system?.equipped;
           return itemAttunement === CONFIG.DND5E.attunementTypes.REQUIRED;
         },
-        callback: li => this._onItemAction(li[0], "attune")
+        callback: li => this._onItemContextAction(li[0], "attune")
       },
       {
         name: "DND5E.ItemContextAttunementRemove",
@@ -708,10 +722,12 @@ export default class ActorSheet5e extends ActorSheet {
           if (!this.isEditable) return false;
           const id = li[0]?.dataset.itemId;
           const item = this.actor.items.get(id);
+          if (!item) return false;
+
           const itemAttunement = item.system?.equipped;
           return itemAttunement === CONFIG.DND5E.attunementTypes.ATTUNED;
         },
-        callback: li => this._onItemAction(li[0], "unattune")
+        callback: li => this._onItemContextAction(li[0], "unattune")
       },
 
       // Equippable Toggle
@@ -722,10 +738,12 @@ export default class ActorSheet5e extends ActorSheet {
           if (!this.isEditable) return false;
           const id = li[0]?.dataset.itemId;
           const item = this.actor.items.get(id);
+          if (!item) return false;
+
           const isItemEquipped = item.system?.equipped;
           return isItemEquipped === false;
         },
-        callback: li => this._onItemAction(li[0], "equip")
+        callback: li => this._onItemContextAction(li[0], "equip")
       },
       {
         name: "DND5E.ItemContextEquippableRemove",
@@ -734,10 +752,12 @@ export default class ActorSheet5e extends ActorSheet {
           if (!this.isEditable) return false;
           const id = li[0]?.dataset.itemId;
           const item = this.actor.items.get(id);
+          if (!item) return false;
+
           const isItemEquipped = item.system?.equipped;
           return isItemEquipped === true;
         },
-        callback: li => this._onItemAction(li[0], "unequip")
+        callback: li => this._onItemContextAction(li[0], "unequip")
       },
 
       // Preparation Toggle
@@ -748,11 +768,13 @@ export default class ActorSheet5e extends ActorSheet {
           if (!this.isEditable) return false;
           const id = li[0]?.dataset.itemId;
           const item = this.actor.items.get(id);
+          if (!item) return false;
+
           if (item.system?.preparation?.mode !== "prepared" || item.system.level < 1) return false;
           const isItemPrepared = item.system?.preparation?.prepared;
           return isItemPrepared === false;
         },
-        callback: li => this._onItemAction(li[0], "prepare")
+        callback: li => this._onItemContextAction(li[0], "prepare")
       },
       {
         name: "DND5E.ItemContextPreparationRemove",
@@ -761,11 +783,13 @@ export default class ActorSheet5e extends ActorSheet {
           if (!this.isEditable) return false;
           const id = li[0]?.dataset.itemId;
           const item = this.actor.items.get(id);
+          if (!item) return false;
+
           if (item.system?.preparation?.mode !== "prepared" || item.system.level < 1) return false;
           const isItemPrepared = item.system?.preparation?.prepared;
           return isItemPrepared === true;
         },
-        callback: li => this._onItemAction(li[0], "unprepare")
+        callback: li => this._onItemContextAction(li[0], "unprepare")
       },
 
       // Edit
@@ -773,7 +797,7 @@ export default class ActorSheet5e extends ActorSheet {
         name: "DND5E.ItemContextEdit",
         icon: "<i class='fas fa-edit fa-fw'></i>",
         condition: li => this.isEditable,
-        callback: li => this._onItemAction(li[0], "edit")
+        callback: li => this._onItemContextAction(li[0], "edit")
       },
 
       // Duplicate
@@ -784,9 +808,11 @@ export default class ActorSheet5e extends ActorSheet {
           if (!this.isEditable) return false;
           const id = li[0]?.dataset.itemId;
           const item = this.actor.items.get(id);
+          if (!item) return false;
+
           return !["race", "background", "class", "subclass"].includes(item.type);
         },
-        callback: li => this._onItemAction(li[0], "duplicate")
+        callback: li => this._onItemContextAction(li[0], "duplicate")
       },
 
       // Delete
@@ -794,7 +820,7 @@ export default class ActorSheet5e extends ActorSheet {
         name: "DND5E.ItemContextDelete",
         icon: "<i class='fas fa-trash fa-fw' style='color: rgb(255, 65, 65);'></i>",
         condition: li => this.isEditable,
-        callback: li => this._onItemAction(li[0], "delete")
+        callback: li => this._onItemContextAction(li[0], "delete")
       }
 
     ];
@@ -803,12 +829,12 @@ export default class ActorSheet5e extends ActorSheet {
   /* -------------------------------------------- */
 
   /**
-   * Handle one of the item actions from the buttons or context menu.
-   * @param {Element} target  Button or context menu entry that triggered this action.
+   * Handle one of the item actions from the context menu.
+   * @param {Element} target  Context menu entry that triggered this action.
    * @param {string} action   Action being triggered.
    * @returns {Promise}
    */
-  _onItemAction(target, action) {
+  _onItemContextAction(target, action) {
     const id = target.closest(".item")?.dataset.itemId;
     const item = this.actor.items.get(id);
     if ( !item ) return;
@@ -826,6 +852,90 @@ export default class ActorSheet5e extends ActorSheet {
 
       case "prepare": return item.update({"system.preparation.prepared": true});
       case "unprepare": return item.update({"system.preparation.prepared": false});
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Get the set of ContextMenu options which should be applied for effect entries.
+   * @returns {ContextMenuEntry[]}  Context menu entries.
+   * @protected
+   */
+  _getEffectContextMenuOptions() {
+    return [
+
+      // Active Toggle
+      {
+        name: "DND5E.EffectContextActiveAdd",
+        icon: "<i class='fas fa-check fa-fw'></i>",
+        condition: li => {
+          if (!this.isEditable) return false;
+          const id = li[0]?.dataset.effectId;
+          const effect = this.actor.effects.get(id);
+          return effect.disabled === true;
+        },
+        callback: li => this._onEffectContextAction(li[0], "activate")
+      },
+      {
+        name: "DND5E.EffectContextActiveRemove",
+        icon: "<i class='fas fa-times fa-fw'></i>",
+        condition: li => {
+          if (!this.isEditable) return false;
+          const id = li[0]?.dataset.effectId;
+          const effect = this.actor.effects.get(id);
+          return effect.disabled === false;
+        },
+        callback: li => this._onEffectContextAction(li[0], "deactivate")
+      },
+
+      // Edit
+      {
+        name: "DND5E.EffectContextEdit",
+        icon: "<i class='fas fa-edit fa-fw'></i>",
+        condition: li => this.isEditable,
+        callback: li => this._onEffectContextAction(li[0], "edit")
+      },
+
+      // Duplicate
+      {
+        name: "DND5E.EffectContextDuplicate",
+        icon: "<i class='fas fa-copy fa-fw'></i>",
+        condition: li => this.isEditable,
+        callback: li => this._onEffectContextAction(li[0], "duplicate")
+      },
+
+      // Delete
+      {
+        name: "DND5E.EffectContextDelete",
+        icon: "<i class='fas fa-trash fa-fw' style='color: rgb(255, 65, 65);'></i>",
+        condition: li => this.isEditable,
+        callback: li => this._onEffectContextAction(li[0], "delete")
+      }
+
+    ];
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle one of the effect actions from the context menu.
+   * @param {Element} target  Context menu entry that triggered this action.
+   * @param {string} action   Action being triggered.
+   * @returns {Promise}
+   */
+  _onEffectContextAction(target, action) {
+    const id = target.closest(".item")?.dataset.effectId;
+    const effect = this.actor.effects.get(id);
+    if ( !effect ) return;
+    switch (action) {
+
+      case "edit": return effect.sheet.render(true);
+      case "delete": return effect.deleteDialog();
+      case "duplicate": return this.actor.createEmbeddedDocuments("ActiveEffect", [foundry.utils.deepClone(effect)]);
+
+      case "activate": return effect.update({disabled: false});
+      case "deactivate": return effect.update({disabled: true});
     }
   }
 
