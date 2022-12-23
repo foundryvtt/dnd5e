@@ -744,7 +744,7 @@ export default class ActorSheet5e extends ActorSheet {
 
       // Attunement Toggle
       {
-        name: "DND5E.ItemContextAttunementAdd",
+        name: game.i18n.format("DND5E.ContextMenuActionAttune", { type: game.i18n.localize("DND5E.Item") }),
         icon: "<i class='fas fa-sun fa-fw'></i>",
         condition: li => {
           if (!this.isEditable) return false;
@@ -758,7 +758,7 @@ export default class ActorSheet5e extends ActorSheet {
         callback: li => this._onItemContextAction(li[0], "attune")
       },
       {
-        name: "DND5E.ItemContextAttunementRemove",
+        name: game.i18n.format("DND5E.ContextMenuActionUnattune", { type: game.i18n.localize("DND5E.Item") }),
         icon: "<i class='fas fa-sun fa-fw'></i>",
         condition: li => {
           if (!this.isEditable) return false;
@@ -774,7 +774,7 @@ export default class ActorSheet5e extends ActorSheet {
 
       // Equippable Toggle
       {
-        name: "DND5E.ItemContextEquippableAdd",
+        name: game.i18n.format("DND5E.ContextMenuActionEquip", { type: game.i18n.localize("DND5E.Item") }),
         icon: "<i class='fas fa-shield-alt fa-fw'></i>",
         condition: li => {
           if (!this.isEditable) return false;
@@ -788,7 +788,7 @@ export default class ActorSheet5e extends ActorSheet {
         callback: li => this._onItemContextAction(li[0], "equip")
       },
       {
-        name: "DND5E.ItemContextEquippableRemove",
+        name: game.i18n.format("DND5E.ContextMenuActionUnequip", { type: game.i18n.localize("DND5E.Item") }),
         icon: "<i class='fas fa-shield-alt fa-fw'></i>",
         condition: li => {
           if (!this.isEditable) return false;
@@ -804,7 +804,7 @@ export default class ActorSheet5e extends ActorSheet {
 
       // Edit
       {
-        name: "DND5E.ItemContextEdit",
+        name: game.i18n.format("DND5E.ContextMenuActionEdit", { type: game.i18n.localize("DND5E.Item") }),
         icon: "<i class='fas fa-edit fa-fw'></i>",
         condition: li => this.isEditable,
         callback: li => this._onItemContextAction(li[0], "edit")
@@ -812,7 +812,7 @@ export default class ActorSheet5e extends ActorSheet {
 
       // Duplicate
       {
-        name: "DND5E.ItemContextDuplicate",
+        name: game.i18n.format("DND5E.ContextMenuActionDuplicate", { type: game.i18n.localize("DND5E.Item") }),
         icon: "<i class='fas fa-copy fa-fw'></i>",
         condition: li => this.isEditable,
         callback: li => this._onItemContextAction(li[0], "duplicate")
@@ -820,7 +820,7 @@ export default class ActorSheet5e extends ActorSheet {
 
       // Delete
       {
-        name: "DND5E.ItemContextDelete",
+        name: game.i18n.format("DND5E.ContextMenuActionDelete", { type: game.i18n.localize("DND5E.Item") }),
         icon: "<i class='fas fa-trash fa-fw' style='color: rgb(255, 65, 65);'></i>",
         condition: li => this.isEditable,
         callback: li => this._onItemContextAction(li[0], "delete")
@@ -867,7 +867,7 @@ export default class ActorSheet5e extends ActorSheet {
 
       // Edit
       {
-        name: "DND5E.FeatureContextEdit",
+        name: game.i18n.format("DND5E.ContextMenuActionEdit", { type: game.i18n.localize("ITEM.TypeFeat") }),
         icon: "<i class='fas fa-edit fa-fw'></i>",
         condition: li => this.isEditable,
         callback: li => this._onFeatureContextAction(li[0], "edit")
@@ -875,7 +875,7 @@ export default class ActorSheet5e extends ActorSheet {
 
       // Duplicate
       {
-        name: "DND5E.FeatureContextDuplicate",
+        name: game.i18n.format("DND5E.ContextMenuActionDuplicate", { type: game.i18n.localize("ITEM.TypeFeat") }),
         icon: "<i class='fas fa-copy fa-fw'></i>",
         condition: li => {
           if (!this.isEditable) return false;
@@ -890,7 +890,7 @@ export default class ActorSheet5e extends ActorSheet {
 
       // Delete
       {
-        name: "DND5E.FeatureContextDelete",
+        name: game.i18n.format("DND5E.ContextMenuActionDelete", { type: game.i18n.localize("ITEM.TypeFeat") }),
         icon: "<i class='fas fa-trash fa-fw' style='color: rgb(255, 65, 65);'></i>",
         condition: li => this.isEditable,
         callback: li => this._onFeatureContextAction(li[0], "delete")
@@ -931,7 +931,7 @@ export default class ActorSheet5e extends ActorSheet {
 
       // Preparation Toggle
       {
-        name: "DND5E.SpellContextPreparationAdd",
+        name: game.i18n.format("DND5E.ContextMenuActionPrepare", { type: game.i18n.localize("ITEM.TypeSpell") }),
         icon: "<i class='fas fa-sun fa-fw'></i>",
         condition: li => {
           if (!this.isEditable) return false;
@@ -946,7 +946,7 @@ export default class ActorSheet5e extends ActorSheet {
         callback: li => this._onSpellContextAction(li[0], "prepare")
       },
       {
-        name: "DND5E.SpellContextPreparationRemove",
+        name: game.i18n.format("DND5E.ContextMenuActionUnprepare", { type: game.i18n.localize("ITEM.TypeSpell") }),
         icon: "<i class='fas fa-sun fa-fw'></i>",
         condition: li => {
           if (!this.isEditable) return false;
@@ -963,7 +963,7 @@ export default class ActorSheet5e extends ActorSheet {
 
       // Edit
       {
-        name: "DND5E.SpellContextEdit",
+        name: game.i18n.format("DND5E.ContextMenuActionEdit", { type: game.i18n.localize("ITEM.TypeSpell") }),
         icon: "<i class='fas fa-edit fa-fw'></i>",
         condition: li => this.isEditable,
         callback: li => this._onSpellContextAction(li[0], "edit")
@@ -971,7 +971,7 @@ export default class ActorSheet5e extends ActorSheet {
 
       // Duplicate
       {
-        name: "DND5E.SpellContextDuplicate",
+        name: game.i18n.format("DND5E.ContextMenuActionDuplicate", { type: game.i18n.localize("ITEM.TypeSpell") }),
         icon: "<i class='fas fa-copy fa-fw'></i>",
         condition: li => this.isEditable,
         callback: li => this._onSpellContextAction(li[0], "duplicate")
@@ -979,7 +979,7 @@ export default class ActorSheet5e extends ActorSheet {
 
       // Delete
       {
-        name: "DND5E.SpellContextDelete",
+        name: game.i18n.format("DND5E.ContextMenuActionDelete", { type: game.i18n.localize("ITEM.TypeSpell") }),
         icon: "<i class='fas fa-trash fa-fw' style='color: rgb(255, 65, 65);'></i>",
         condition: li => this.isEditable,
         callback: li => this._onSpellContextAction(li[0], "delete")
@@ -1023,7 +1023,7 @@ export default class ActorSheet5e extends ActorSheet {
 
       // Active Toggle
       {
-        name: "DND5E.EffectContextActiveAdd",
+        name: game.i18n.format("DND5E.ContextMenuActionEnable", { type: game.i18n.localize("DND5E.Effect") }),
         icon: "<i class='fas fa-check fa-fw'></i>",
         condition: li => {
           if (!this.isEditable) return false;
@@ -1031,10 +1031,10 @@ export default class ActorSheet5e extends ActorSheet {
           const effect = this.actor.effects.get(id);
           return effect.disabled === true;
         },
-        callback: li => this._onEffectContextAction(li[0], "activate")
+        callback: li => this._onEffectContextAction(li[0], "enable")
       },
       {
-        name: "DND5E.EffectContextActiveRemove",
+        name: game.i18n.format("DND5E.ContextMenuActionDisable", { type: game.i18n.localize("DND5E.Effect") }),
         icon: "<i class='fas fa-times fa-fw'></i>",
         condition: li => {
           if (!this.isEditable) return false;
@@ -1042,12 +1042,12 @@ export default class ActorSheet5e extends ActorSheet {
           const effect = this.actor.effects.get(id);
           return effect.disabled === false;
         },
-        callback: li => this._onEffectContextAction(li[0], "deactivate")
+        callback: li => this._onEffectContextAction(li[0], "disable")
       },
 
       // Edit
       {
-        name: "DND5E.EffectContextEdit",
+        name: game.i18n.format("DND5E.ContextMenuActionEdit", { type: game.i18n.localize("DND5E.Effect") }),
         icon: "<i class='fas fa-edit fa-fw'></i>",
         condition: li => this.isEditable,
         callback: li => this._onEffectContextAction(li[0], "edit")
@@ -1055,7 +1055,7 @@ export default class ActorSheet5e extends ActorSheet {
 
       // Duplicate
       {
-        name: "DND5E.EffectContextDuplicate",
+        name: game.i18n.format("DND5E.ContextMenuActionDuplicate", { type: game.i18n.localize("DND5E.Effect") }),
         icon: "<i class='fas fa-copy fa-fw'></i>",
         condition: li => this.isEditable,
         callback: li => this._onEffectContextAction(li[0], "duplicate")
@@ -1063,7 +1063,7 @@ export default class ActorSheet5e extends ActorSheet {
 
       // Delete
       {
-        name: "DND5E.EffectContextDelete",
+        name: game.i18n.format("DND5E.ContextMenuActionDelete", { type: game.i18n.localize("DND5E.Effect") }),
         icon: "<i class='fas fa-trash fa-fw' style='color: rgb(255, 65, 65);'></i>",
         condition: li => this.isEditable,
         callback: li => this._onEffectContextAction(li[0], "delete")
@@ -1090,8 +1090,8 @@ export default class ActorSheet5e extends ActorSheet {
       case "delete": return effect.deleteDialog();
       case "duplicate": return this.actor.createEmbeddedDocuments("ActiveEffect", [foundry.utils.deepClone(effect)]);
 
-      case "activate": return effect.update({disabled: false});
-      case "deactivate": return effect.update({disabled: true});
+      case "enable": return effect.update({disabled: false});
+      case "disable": return effect.update({disabled: true});
     }
   }
 

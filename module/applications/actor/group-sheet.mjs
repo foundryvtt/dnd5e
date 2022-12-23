@@ -238,7 +238,7 @@ export default class GroupActorSheet extends ActorSheet {
 
       // Edit
       {
-        name: "DND5E.ItemContextEdit",
+        name: game.i18n.format("DND5E.ContextMenuActionEdit", { type: game.i18n.localize("DND5E.Item") }),
         icon: "<i class='fas fa-edit fa-fw'></i>",
         condition: li => this.isEditable,
         callback: li => this._onItemContextAction(li[0], "edit")
@@ -246,7 +246,7 @@ export default class GroupActorSheet extends ActorSheet {
 
       // Duplicate
       {
-        name: "DND5E.ItemContextDuplicate",
+        name: game.i18n.format("DND5E.ContextMenuActionDuplicate", { type: game.i18n.localize("DND5E.Item") }),
         icon: "<i class='fas fa-copy fa-fw'></i>",
         condition: li => this.isEditable,
         callback: li => this._onItemContextAction(li[0], "duplicate")
@@ -254,7 +254,7 @@ export default class GroupActorSheet extends ActorSheet {
 
       // Delete
       {
-        name: "DND5E.ItemContextDelete",
+        name: game.i18n.format("DND5E.ContextMenuActionDelete", { type: game.i18n.localize("DND5E.Item") }),
         icon: "<i class='fas fa-trash fa-fw' style='color: rgb(255, 65, 65);'></i>",
         condition: li => this.isEditable,
         callback: li => this._onItemContextAction(li[0], "delete")
