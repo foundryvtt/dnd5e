@@ -1029,6 +1029,8 @@ export default class ActorSheet5e extends ActorSheet {
           if (!this.isEditable) return false;
           const id = li[0]?.dataset.effectId;
           const effect = this.actor.effects.get(id);
+          if (!effect) return false;
+
           return effect.disabled === true;
         },
         callback: li => this._onEffectContextAction(li[0], "enable")
@@ -1040,6 +1042,8 @@ export default class ActorSheet5e extends ActorSheet {
           if (!this.isEditable) return false;
           const id = li[0]?.dataset.effectId;
           const effect = this.actor.effects.get(id);
+          if (!effect) return false;
+
           return effect.disabled === false;
         },
         callback: li => this._onEffectContextAction(li[0], "disable")
