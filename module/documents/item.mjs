@@ -1911,7 +1911,7 @@ export default class Item5e extends Item {
       case "save":
         targets = this._getChatCardTargets(card);
         for ( let token of targets ) {
-          const speaker = ChatMessage.getSpeaker({scene: canvas.scene, token: token});
+          const speaker = ChatMessage.getSpeaker({scene: canvas.scene, token: token.document});
           await token.actor.rollAbilitySave(button.dataset.ability, { event, speaker });
         }
         break;
@@ -1925,7 +1925,7 @@ export default class Item5e extends Item {
       case "abilityCheck":
         targets = this._getChatCardTargets(card);
         for ( let token of targets ) {
-          const speaker = ChatMessage.getSpeaker({scene: canvas.scene, token: token});
+          const speaker = ChatMessage.getSpeaker({scene: canvas.scene, token: token.document});
           await token.actor.rollAbilityTest(button.dataset.ability, { event, speaker });
         }
         break;
