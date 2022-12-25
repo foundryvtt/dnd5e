@@ -69,7 +69,7 @@ export const migrateWorld = async function() {
 
   // Migrate World Compendium Packs
   for ( let p of game.packs ) {
-    if ( p.metadata.package !== "world" ) continue;
+    if ( p.metadata.packageType !== "world" ) continue;
     if ( !["Actor", "Item", "Scene"].includes(p.documentName) ) continue;
     await migrateCompendium(p);
   }
