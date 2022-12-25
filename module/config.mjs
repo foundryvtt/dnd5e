@@ -604,7 +604,7 @@ preLocalize("armorClasses", { key: "label" });
  * @enum {string}
  */
 DND5E.consumableTypes = {
-  ammo: "DND5E.ConsumableAmmunition",
+  ammo: "DND5E.ConsumableAmmo",
   potion: "DND5E.ConsumablePotion",
   poison: "DND5E.ConsumablePoison",
   food: "DND5E.ConsumableFood",
