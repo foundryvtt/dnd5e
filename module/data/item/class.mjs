@@ -26,7 +26,7 @@ export default class ClassData extends SystemDataModel.mixin(ItemDescriptionTemp
     return this.mergeSchema(super.defineSchema(), {
       identifier: new IdentifierField({required: true, label: "DND5E.Identifier"}),
       levels: new foundry.data.fields.NumberField({
-        required: true, nullable: false, integer: true, positive: true, initial: 1, label: "DND5E.ClassLevels"
+        required: true, nullable: false, integer: true, min: 0, initial: 1, label: "DND5E.ClassLevels"
       }),
       hitDice: new foundry.data.fields.StringField({
         required: true, initial: "d6", blank: false, label: "DND5E.HitDice",
