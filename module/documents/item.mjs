@@ -805,7 +805,7 @@ export default class Item5e extends Item {
       consumeResource: !!resource.target && (!item.hasAttack || (resource.type !== "ammo")),
       consumeSpellLevel: requireSpellSlot ? is.preparation.mode === "pact" ? "pact" : is.level : null,
       consumeSpellSlot: requireSpellSlot,
-      consumeUsage: !!is.uses?.per
+      consumeUsage: !!is.uses?.per && (is.uses?.max > 0)
     }, config);
 
     // Display a configuration dialog to customize the usage
