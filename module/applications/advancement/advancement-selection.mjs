@@ -1,4 +1,4 @@
-import Advancement from "./advancement.mjs";
+import Advancement from "../../documents/advancement/advancement.mjs";
 
 /**
  * Presents a list of advancement types to create when clicking the new advancement button.

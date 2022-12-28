@@ -1,4 +1,4 @@
-import * as advancement from "./advancement/types/_module.mjs";
+import * as advancement from "./documents/advancement/_module.mjs";
 import { preLocalize } from "./utils.mjs";
 
 // Namespace Configuration Values
@@ -1468,7 +1468,7 @@ DND5E.CR_EXP_LEVELS = [
 ];
 
 /**
- * @typedef {Object} CharacterFlagConfig
+ * @typedef {object} CharacterFlagConfig
  * @property {string} name
  * @property {string} hint
  * @property {string} section

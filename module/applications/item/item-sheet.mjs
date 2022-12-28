@@ -1,4 +1,4 @@
-import AdvancementManager from "../../advancement/advancement-manager.mjs";
+import AdvancementManager from "../advancement/advancement-manager.mjs";
 import ProficiencySelector from "../proficiency-selector.mjs";
 import TraitSelector from "../trait-selector.mjs";
 import ActiveEffect5e from "../../documents/active-effect.mjs";
@@ -658,7 +658,7 @@ export default class ItemSheet5e extends ItemSheet {
     const advancement = this.item.advancement.byId[id];
     if ( ["edit", "delete", "duplicate"].includes(action) && !advancement ) return;
     switch (action) {
-      case "add": return game.dnd5e.advancement.AdvancementSelection.createDialog(this.item);
+      case "add": return game.dnd5e.applications.advancement.AdvancementSelection.createDialog(this.item);
       case "edit": return new advancement.constructor.metadata.apps.config(advancement).render(true);
       case "delete": return this.item.deleteAdvancement(id);
       case "duplicate": return this.item.duplicateAdvancement(id);

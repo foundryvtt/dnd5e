@@ -1,6 +1,6 @@
 import ActorSheet5e from "./base-sheet.mjs";
-import AdvancementConfirmationDialog from "../../advancement/advancement-confirmation-dialog.mjs";
-import AdvancementManager from "../../advancement/advancement-manager.mjs";
+import AdvancementConfirmationDialog from "../advancement/advancement-confirmation-dialog.mjs";
+import AdvancementManager from "../advancement/advancement-manager.mjs";
 
 /**
  * An Actor sheet for player character type actors.
