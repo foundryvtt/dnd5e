@@ -13,7 +13,6 @@ import DND5E from "./module/config.mjs";
 import registerSystemSettings from "./module/settings.mjs";
 
 // Import Submodules
-import * as advancement from "./module/advancement/_module.mjs";
 import * as applications from "./module/applications/_module.mjs";
 import * as canvas from "./module/canvas/_module.mjs";
 import * as dataModels from "./module/data/_module.mjs";
@@ -27,7 +26,6 @@ import * as utils from "./module/utils.mjs";
 /* -------------------------------------------- */
 
 globalThis.dnd5e = {
-  advancement,
   applications,
   canvas,
   config: DND5E,
@@ -251,7 +249,6 @@ Hooks.on("getActorDirectoryEntryContext", documents.Actor5e.addDirectoryContextO
 /* -------------------------------------------- */
 
 export {
-  advancement,
   applications,
   canvas,
   dataModels,

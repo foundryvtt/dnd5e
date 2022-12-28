@@ -1,6 +1,6 @@
-import AdvancementConfig from "./advancement-config.mjs";
-import AdvancementFlow from "./advancement-flow.mjs";
-import BaseAdvancement from "../data/advancement/base-advancement.mjs";
+import AdvancementConfig from "../../applications/advancement/advancement-config.mjs";
+import AdvancementFlow from "../../applications/advancement/advancement-flow.mjs";
+import BaseAdvancement from "../../data/advancement/base-advancement.mjs";
 
 /**
  * Error that can be thrown during the advancement update preparation process.

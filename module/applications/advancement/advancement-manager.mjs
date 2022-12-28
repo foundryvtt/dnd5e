@@ -1,4 +1,4 @@
-import Advancement from "./advancement.mjs";
+import Advancement from "../../documents/advancement/advancement.mjs";
 
 /**
  * Internal type used to manage each step within the advancement process.

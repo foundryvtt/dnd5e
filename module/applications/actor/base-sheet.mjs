@@ -11,8 +11,8 @@ import ActorSheetFlags from "./sheet-flags.mjs";
 import ActorSkillConfig from "./skill-config.mjs";
 import ActorTypeConfig from "./type-config.mjs";
 
-import AdvancementConfirmationDialog from "../../advancement/advancement-confirmation-dialog.mjs";
-import AdvancementManager from "../../advancement/advancement-manager.mjs";
+import AdvancementConfirmationDialog from "../advancement/advancement-confirmation-dialog.mjs";
+import AdvancementManager from "../advancement/advancement-manager.mjs";
 
 import DamageTraitSelector from "../damage-trait-selector.mjs";
 import ProficiencySelector from "../proficiency-selector.mjs";
