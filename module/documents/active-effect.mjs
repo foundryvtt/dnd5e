@@ -56,13 +56,22 @@ export default class ActiveEffect5e extends ActiveEffect {
    */
   determineSuppression() {
     this.isSuppressed = false;
-    if ( this.disabled || (this.parent.documentName !== "Actor") || !this.origin ) return;
-    try {
-      // Determine if this is an effect from an item
-      const item = fromUuidSync(this.origin);
-      if ( item?.parent !== this.parent ) return;
-      this.isSuppressed = item.areEffectsSuppressed;
-    } catch(e) {}
+    if ( this.disabled || (this.parent.documentName !== "Actor") ) return;
+    const parts = this.origin?.split(".") ?? [];
+    const [parentType, parentId, documentType, documentId, syntheticItem, syntheticItemId] = parts;
+    let item;
+    // Case 1: This is a linked or sidebar actor
+    if ( parentType === "Actor" ) {
+      if ( (parentId !== this.parent.id) || (documentType !== "Item") ) return;
+      item = this.parent.items.get(documentId);
+    }
+    // Case 2: This is a synthetic actor on the scene
+    else if ( parentType === "Scene" ) {
+      if ( (documentId !== this.parent.token?.id) || (syntheticItem !== "Item") ) return;
+      item = this.parent.items.get(syntheticItemId);
+    }
+    if ( !item ) return;
+    this.isSuppressed = item.areEffectsSuppressed;
   }
 
   /* --------------------------------------------- */
