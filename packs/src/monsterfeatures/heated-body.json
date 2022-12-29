@@ -25,7 +25,7 @@
     "target": {
       "value": null,
       "width": null,
-      "units": "any",
+      "units": "",
       "type": "creature"
     },
     "range": {
@@ -62,6 +62,10 @@
       "dc": null,
       "scaling": "spell"
     },
+    "type": {
+      "value": "monster",
+      "subtype": ""
+    },
     "requirements": "",
     "recharge": {
       "value": null,
@@ -78,7 +82,7 @@
     "systemVersion": "2.1.0",
     "coreVersion": "10.291",
     "createdTime": 1661787234587,
-    "modifiedTime": 1671220981035,
+    "modifiedTime": 1672335909941,
     "lastModifiedBy": "dnd5ebuilder0000"
   }
 }

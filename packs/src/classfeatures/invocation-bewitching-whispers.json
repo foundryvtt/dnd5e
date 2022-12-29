@@ -25,7 +25,7 @@
     "target": {
       "value": null,
       "width": null,
-      "units": "any",
+      "units": "",
       "type": "creature"
     },
     "range": {
@@ -62,6 +62,10 @@
       "dc": null,
       "scaling": "cha"
     },
+    "type": {
+      "value": "class",
+      "subtype": "eldritchInvocation"
+    },
     "requirements": "Warlock 7",
     "recharge": {
       "value": null,
@@ -78,7 +82,7 @@
     "systemVersion": "2.1.0",
     "coreVersion": "10.291",
     "createdTime": 1661787234362,
-    "modifiedTime": 1671220975210,
+    "modifiedTime": 1672334800107,
     "lastModifiedBy": "dnd5ebuilder0000"
   }
 }

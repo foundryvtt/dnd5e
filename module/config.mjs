@@ -644,6 +644,7 @@ DND5E.featureTypes = {
       maneuver: "DND5E.ClassFeature.Maneuver",
       metamagic: "DND5E.ClassFeature.Metamagic",
       multiattack: "DND5E.ClassFeature.Multiattack",
+      pact: "DND5E.ClassFeature.PactBoon",
       psionicPower: "DND5E.ClassFeature.PsionicPower",
       rune: "DND5E.ClassFeature.Rune",
       superiorHuntersDefense: "DND5E.ClassFeature.SuperiorHuntersDefense"
