@@ -1947,7 +1947,7 @@ export default class Actor5e extends Actor {
     }
 
     // Save the updated currency object
-    return this.update({"data.currency": currency});
+    return this.update({"system.currency": currency});
   }
 
   /* -------------------------------------------- */
