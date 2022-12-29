@@ -1,5 +1,6 @@
 import SystemDataModel from "../abstract.mjs";
 import { FormulaField } from "../fields.mjs";
+import EquippableItemTemplate from "./templates/equippable-item.mjs";
 import ItemDescriptionTemplate from "./templates/item-description.mjs";
 import PhysicalItemTemplate from "./templates/physical-item.mjs";
 
@@ -7,6 +8,7 @@ import PhysicalItemTemplate from "./templates/physical-item.mjs";
  * Data definition for Tool items.
  * @mixes ItemDescriptionTemplate
  * @mixes PhysicalItemTemplate
+ * @mixes EquippableItemTemplate
  *
  * @property {string} toolType    Tool category as defined in `DND5E.toolTypes`.
  * @property {string} baseItem    Base tool as defined in `DND5E.toolIds` for determining proficiency.
@@ -15,7 +17,9 @@ import PhysicalItemTemplate from "./templates/physical-item.mjs";
  * @property {number} proficient  Level of proficiency in this tool as defined in `DND5E.proficiencyLevels`.
  * @property {string} bonus       Bonus formula added to tool rolls.
  */
-export default class ToolData extends SystemDataModel.mixin(ItemDescriptionTemplate, PhysicalItemTemplate) {
+export default class ToolData extends SystemDataModel.mixin(
+  ItemDescriptionTemplate, PhysicalItemTemplate, EquippableItemTemplate
+) {
   /** @inheritdoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
