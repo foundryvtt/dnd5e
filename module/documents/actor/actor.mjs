@@ -1932,34 +1932,31 @@ export default class Actor5e extends Actor {
   /* -------------------------------------------- */
 
   /**
-   * Convert all carried currency to the highest possible denomination to reduce the number of raw coins being
-   * carried by an Actor.
+   * Convert all carried currency to the highest possible denomination using configured conversion rates.
+   * See CONFIG.DND5E.currencies for configuration.
    * @returns {Promise<Actor5e>}
    */
-
   convertCurrency() {
-    const curr = foundry.utils.deepClone(this.system.currency);
-    const conversion = Object.entries(CONFIG.DND5E.currencies);
-    conversion.sort((a, b) => a[1].conversion - b[1].conversion);
+    const currency = foundry.utils.deepClone(this.system.currency);
+    const currencies = Object.entries(CONFIG.DND5E.currencies);
+    currencies.sort((a, b) => a[1].conversion - b[1].conversion);
 
-    var change = 0;
-    for ( let [c, data] of conversion) {
-      const rate = data.conversion;
-      if ( !rate ) continue;
+    // Count total converted units of the base currency
+    let basis = currencies.reduce((change, [denomination, config]) => {
+      if ( !config.conversion ) return change;
+      return change + (currency[denomination] / config.conversion);
+    }, 0);
 
-      change = change + curr[c] / rate;
+    // Convert base units into the highest denomination possible
+    for ( const [denomination, config] of currencies) {
+      if ( !config.conversion ) continue;
+      const amount = Math.floor(basis * config.conversion);
+      currency[denomination] = amount;
+      basis -= (amount / config.conversion);
     }
 
-    for ( let [c, data] of conversion) {
-      const rate = data.conversion;
-      if ( !rate ) continue;
-
-      let amt = Math.floor(change * rate);
-      curr[c] = amt;
-      change = (change - amt / rate);
-    }
-
-    return this.update({"data.currency": curr});
+    // Save the updated currency object
+    return this.update({"data.currency": currency});
   }
 
   /* -------------------------------------------- */

@@ -617,14 +617,16 @@ preLocalize("consumableTypes", { sort: true });
 /* -------------------------------------------- */
 
 /**
+ * @typedef {object} CurrencyConfiguration
+ * @property {string} label         Localized label for the currency.
+ * @property {string} abbreviation  Localized abbreviation for the currency.
+ * @property {number} conversion    Number by which this currency should be multiplied to arrive at a standard value.
+ */
+
+/**
  * The valid currency denominations with localized labels, abbreviations, and conversions.
- * The conversion number defines how many of that currency are equal to one GP (according
- * to the rules as written).
- * @enum {{
- *   label: string,
- *   abbreviation: string,
- *   conversion: number,
- * }}
+ * The conversion number defines how many of that currency are equal to one GP.
+ * @enum {CurrencyConfiguration}
  */
 DND5E.currencies = {
   pp: {
