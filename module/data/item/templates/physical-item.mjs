@@ -1,13 +1,13 @@
 /**
  * Data model template with information on physical items.
  *
- * @property {number} quantity     Number of items in a stack.
- * @property {number} weight       Item's weight in pounds or kilograms (depending on system setting).
- * @property {number} price        Item's cost in GP.
- * @property {number} attunement   Attunement information as defined in `DND5E.attunementTypes`.
- * @property {boolean} equipped    Is this item equipped on its owning actor.
- * @property {string} rarity       Item rarity as defined in `DND5E.itemRarity`.
- * @property {boolean} identified  Has this item been identified?
+ * @property {number} quantity            Number of items in a stack.
+ * @property {number} weight              Item's weight in pounds or kilograms (depending on system setting).
+ * @property {object} price
+ * @property {number} price.value         Item's cost in the specified denomination.
+ * @property {string} price.denomination  Currency denomination used to determine price.
+ * @property {string} rarity              Item rarity as defined in `DND5E.itemRarity`.
+ * @property {boolean} identified         Has this item been identified?
  * @mixin
  */
 export default class PhysicalItemTemplate extends foundry.abstract.DataModel {
@@ -28,10 +28,6 @@ export default class PhysicalItemTemplate extends foundry.abstract.DataModel {
           required: true, blank: false, initial: "gp", label: "DND5E.Currency"
         })
       }, {label: "DND5E.Price"}),
-      attunement: new foundry.data.fields.NumberField({
-        required: true, integer: true, initial: CONFIG.DND5E.attunementTypes.NONE, label: "DND5E.Attunement"
-      }),
-      equipped: new foundry.data.fields.BooleanField({required: true, label: "DND5E.Equipped"}),
       rarity: new foundry.data.fields.StringField({required: true, blank: true, label: "DND5E.Rarity"}),
       identified: new foundry.data.fields.BooleanField({required: true, initial: true, label: "DND5E.Identified"})
     };
@@ -41,20 +37,8 @@ export default class PhysicalItemTemplate extends foundry.abstract.DataModel {
 
   /** @inheritdoc */
   static migrateData(source) {
-    this.migrateAttunement(source);
     this.migratePrice(source);
     this.migrateRarity(source);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Migrate the item's attuned boolean to attunement string.
-   * @param {object} source  The candidate source data from which the model will be constructed.
-   */
-  static migrateAttunement(source) {
-    if ( (source.attuned === undefined) || (source.attunement !== undefined) ) return;
-    source.attunement = source.attuned ? CONFIG.DND5E.attunementTypes.ATTUNED : CONFIG.DND5E.attunementTypes.NONE;
   }
 
   /* -------------------------------------------- */

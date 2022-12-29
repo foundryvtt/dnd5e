@@ -2,6 +2,7 @@ import SystemDataModel from "../abstract.mjs";
 import { MappingField } from "../fields.mjs";
 import ActionTemplate from "./templates/action.mjs";
 import ActivatedEffectTemplate from "./templates/activated-effect.mjs";
+import EquippableItemTemplate from "./templates/equippable-item.mjs";
 import ItemDescriptionTemplate from "./templates/item-description.mjs";
 import PhysicalItemTemplate from "./templates/physical-item.mjs";
 import MountableTemplate from "./templates/mountable.mjs";
@@ -10,6 +11,7 @@ import MountableTemplate from "./templates/mountable.mjs";
  * Data definition for Weapon items.
  * @mixes ItemDescriptionTemplate
  * @mixes PhysicalItemTemplate
+ * @mixes EquippableItemTemplate
  * @mixes ActivatedEffectTemplate
  * @mixes ActionTemplate
  * @mixes MountableTemplate
@@ -20,7 +22,8 @@ import MountableTemplate from "./templates/mountable.mjs";
  * @property {boolean} proficient  Does the weapon's owner have proficiency?
  */
 export default class WeaponData extends SystemDataModel.mixin(
-  ItemDescriptionTemplate, PhysicalItemTemplate, ActivatedEffectTemplate, ActionTemplate, MountableTemplate
+  ItemDescriptionTemplate, PhysicalItemTemplate, EquippableItemTemplate,
+  ActivatedEffectTemplate, ActionTemplate, MountableTemplate
 ) {
   /** @inheritdoc */
   static defineSchema() {
