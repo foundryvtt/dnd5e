@@ -35,7 +35,7 @@
 
     <ol class="item-list">
     {{#each section.items as |item iid|}}
-        <li class="{{item.type}}-item item flexrow {{#if isDepleted}}depleted{{/if}}" data-item-id="{{item._id}}">
+        <li class="item flexrow {{#if isDepleted}}depleted{{/if}}" data-item-id="{{item._id}}">
             <div class="item-name flexrow rollable">
                 <div class="item-image" tabindex="0" role="button" aria-label="{{item.name}}" style="background-image: url('{{item.img}}')"></div>
                 <h4>

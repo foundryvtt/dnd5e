@@ -653,80 +653,15 @@ export default class ActorSheet5e extends ActorSheet {
       // Item Rolling
       html.find(".rollable .item-image").click(event => this._onItemUse(event));
       html.find(".item .item-recharge").click(event => this._onItemRecharge(event));
+
+      // Item Context Menu
+      new ContextMenu(html, ".item-list .item", [], {onOpen: this._onItemContext.bind(this)});
     }
 
     // Otherwise, remove rollable classes
     else {
       html.find(".rollable").each((i, el) => el.classList.remove("rollable"));
     }
-
-    // Item context menu
-    const itemContextOptions = this._getItemContextMenuOptions();
-
-    /**
-     * A hook event that fires when the context menu for items.
-     * @function dnd5e.getItemContext
-     * @memberof hookEvents
-     * @param {jQuery} html                      The HTML element to which the context options are attached.
-     * @param {ContextMenuEntry[]} entryOptions  The context menu entries.
-     */
-    Hooks.call("dnd5e.getItemContext", html, itemContextOptions);
-    if ( itemContextOptions ) new ContextMenu(
-      html,
-      ["weapon", "equipment", "consumable", "tool", "backpack", "loot"].map(type => `.${type}-item`).join(", "), // Selects all items under the standard 'physical item' type
-      itemContextOptions
-    );
-
-    // Feature context menu
-    const featureContextOptions = this._getFeatureContextMenuOptions();
-
-    /**
-     * A hook event that fires when the context menu for features.
-     * @function dnd5e.getFeatureContext
-     * @memberof hookEvents
-     * @param {jQuery} html                      The HTML element to which the context options are attached.
-     * @param {ContextMenuEntry[]} entryOptions  The context menu entries.
-     */
-    Hooks.call("dnd5e.getFeatureContext", html, featureContextOptions);
-    if ( featureContextOptions ) new ContextMenu(
-      html,
-      ["feat", "race", "background", "class", "subclass"].map(type => `.${type}-item`).join(", "), // Selects all items under the 'feat' type
-      featureContextOptions
-    );
-
-    // Spell context menu
-    const spellContextOptions = this._getSpellContextMenuOptions();
-
-    /**
-     * A hook event that fires when the context menu for spells.
-     * @function dnd5e.getSpellContext
-     * @memberof hookEvents
-     * @param {jQuery} html                      The HTML element to which the context options are attached.
-     * @param {ContextMenuEntry[]} entryOptions  The context menu entries.
-     */
-    Hooks.call("dnd5e.getSpellContext", html, spellContextOptions);
-    if ( spellContextOptions ) new ContextMenu(
-      html,
-      ".spell-item", // Selects all items under the 'spell' type
-      spellContextOptions
-    );
-
-    // Effect context menu
-    const effectContextOptions = this._getEffectContextMenuOptions();
-
-    /**
-     * A hook event that fires when the context menu for effects.
-     * @function dnd5e.getEffectContext
-     * @memberof hookEvents
-     * @param {jQuery} html                      The HTML element to which the context options are attached.
-     * @param {ContextMenuEntry[]} entryOptions  The context menu entries.
-     */
-    Hooks.call("dnd5e.getEffectContext", html, effectContextOptions);
-    if ( itemContextOptions ) new ContextMenu(
-      html,
-      ".item.effect",
-      effectContextOptions
-    );
 
     // Handle default listeners last so system listeners are triggered first
     super.activateListeners(html);
@@ -735,368 +670,118 @@ export default class ActorSheet5e extends ActorSheet {
   /* -------------------------------------------- */
 
   /**
-   * Get the set of ContextMenu options which should be applied for item entries.
-   * @returns {ContextMenuEntry[]}  Context menu entries.
+   * Handle activation of a context menu for an embedded Item or ActiveEffect document.
+   * Dynamically populate the array of context menu options.
+   * @param {HTMLElement} element       The HTML element for which the context menu is activated
    * @protected
    */
-  _getItemContextMenuOptions() {
-    return [
+  _onItemContext(element) {
 
-      // Attunement Toggle
-      {
-        name: game.i18n.format("DND5E.ContextMenuActionAttune", { type: game.i18n.localize("DND5E.Item") }),
-        icon: "<i class='fas fa-sun fa-fw'></i>",
-        condition: li => {
-          if (!this.isEditable) return false;
-          const id = li[0]?.dataset.itemId;
-          const item = this.actor.items.get(id);
-          if (!item) return false;
+    // Active Effects
+    if ( element.classList.contains("effect") ) {
+      const effect = this.actor.effects.get(element.dataset.effectId);
+      if ( !effect ) return;
+      ui.context.menuItems = this._getActiveEffectContextOptions(effect);
+      Hooks.call("dnd5e.getActiveEffectContextOptions", effect, ui.context.menuItems);
+    }
 
-          const itemAttunement = item.system?.attunement;
-          return itemAttunement === CONFIG.DND5E.attunementTypes.REQUIRED;
-        },
-        callback: li => this._onItemContextAction(li[0], "attune")
-      },
-      {
-        name: game.i18n.format("DND5E.ContextMenuActionUnattune", { type: game.i18n.localize("DND5E.Item") }),
-        icon: "<i class='fas fa-sun fa-fw'></i>",
-        condition: li => {
-          if (!this.isEditable) return false;
-          const id = li[0]?.dataset.itemId;
-          const item = this.actor.items.get(id);
-          if (!item) return false;
-
-          const itemAttunement = item.system?.attunement;
-          return itemAttunement === CONFIG.DND5E.attunementTypes.ATTUNED;
-        },
-        callback: li => this._onItemContextAction(li[0], "unattune")
-      },
-
-      // Equippable Toggle
-      {
-        name: game.i18n.format("DND5E.ContextMenuActionEquip", { type: game.i18n.localize("DND5E.Item") }),
-        icon: "<i class='fas fa-shield-alt fa-fw'></i>",
-        condition: li => {
-          if (!this.isEditable) return false;
-          const id = li[0]?.dataset.itemId;
-          const item = this.actor.items.get(id);
-          if (!item) return false;
-
-          const isItemEquipped = item.system?.equipped;
-          return isItemEquipped === false;
-        },
-        callback: li => this._onItemContextAction(li[0], "equip")
-      },
-      {
-        name: game.i18n.format("DND5E.ContextMenuActionUnequip", { type: game.i18n.localize("DND5E.Item") }),
-        icon: "<i class='fas fa-shield-alt fa-fw'></i>",
-        condition: li => {
-          if (!this.isEditable) return false;
-          const id = li[0]?.dataset.itemId;
-          const item = this.actor.items.get(id);
-          if (!item) return false;
-
-          const isItemEquipped = item.system?.equipped;
-          return isItemEquipped === true;
-        },
-        callback: li => this._onItemContextAction(li[0], "unequip")
-      },
-
-      // Edit
-      {
-        name: game.i18n.format("DND5E.ContextMenuActionEdit", { type: game.i18n.localize("DND5E.Item") }),
-        icon: "<i class='fas fa-edit fa-fw'></i>",
-        condition: li => this.isEditable,
-        callback: li => this._onItemContextAction(li[0], "edit")
-      },
-
-      // Duplicate
-      {
-        name: game.i18n.format("DND5E.ContextMenuActionDuplicate", { type: game.i18n.localize("DND5E.Item") }),
-        icon: "<i class='fas fa-copy fa-fw'></i>",
-        condition: li => this.isEditable,
-        callback: li => this._onItemContextAction(li[0], "duplicate")
-      },
-
-      // Delete
-      {
-        name: game.i18n.format("DND5E.ContextMenuActionDelete", { type: game.i18n.localize("DND5E.Item") }),
-        icon: "<i class='fas fa-trash fa-fw' style='color: rgb(255, 65, 65);'></i>",
-        condition: li => this.isEditable,
-        callback: li => this._onItemContextAction(li[0], "delete")
-      }
-
-    ];
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Handle one of the item actions from the context menu.
-   * @param {Element} target  Context menu entry that triggered this action.
-   * @param {string} action   Action being triggered.
-   * @returns {Promise}
-   */
-  _onItemContextAction(target, action) {
-    const id = target.closest(".item")?.dataset.itemId;
-    const item = this.actor.items.get(id);
-    if ( !item ) return;
-    switch (action) {
-
-      case "edit": return item.sheet.render(true);
-      case "delete": return item.deleteDialog();
-      case "duplicate": return this.actor.createEmbeddedDocuments("Item", [foundry.utils.deepClone(item)]);
-
-      case "equip": return item.update({"system.equipped": true});
-      case "unequip": return item.update({"system.equipped": false});
-
-      case "attune": return item.update({"system.attunement": CONFIG.DND5E.attunementTypes.ATTUNED});
-      case "unattune": return item.update({"system.attunement": CONFIG.DND5E.attunementTypes.REQUIRED});
+    // Items
+    else {
+      const item = this.actor.items.get(element.dataset.itemId);
+      if ( !item ) return;
+      ui.context.menuItems = this._getItemContextOptions(item);
+      Hooks.call("dnd5e.getItemContextOptions", item, ui.context.menuItems);
     }
   }
 
   /* -------------------------------------------- */
 
   /**
-   * Get the set of ContextMenu options which should be applied for feature entries.
-   * @returns {ContextMenuEntry[]}  Context menu entries.
+   * Prepare an array of context menu options which are available for owned ActiveEffect documents.
+   * @param {ActiveEffect5e} effect         The ActiveEffect for which the context menu is activated
+   * @returns {ContextMenuEntry[]}          An array of context menu options offered for the ActiveEffect
    * @protected
    */
-  _getFeatureContextMenuOptions() {
+  _getActiveEffectContextOptions(effect) {
     return [
-
-      // Edit
       {
-        name: game.i18n.format("DND5E.ContextMenuActionEdit", { type: game.i18n.localize("ITEM.TypeFeat") }),
+        name: "DND5E.ContextMenuActionEdit",
         icon: "<i class='fas fa-edit fa-fw'></i>",
-        condition: li => this.isEditable,
-        callback: li => this._onFeatureContextAction(li[0], "edit")
+        callback: () => effect.sheet.render(true)
       },
-
-      // Duplicate
       {
-        name: game.i18n.format("DND5E.ContextMenuActionDuplicate", { type: game.i18n.localize("ITEM.TypeFeat") }),
+        name: "DND5E.ContextMenuActionDuplicate",
         icon: "<i class='fas fa-copy fa-fw'></i>",
-        condition: li => {
-          if (!this.isEditable) return false;
-          const id = li[0]?.dataset.itemId;
-          const item = this.actor.items.get(id);
-          if (!item) return false;
-
-          return !["race", "background", "class", "subclass"].includes(item.type);
-        },
-        callback: li => this._onFeatureContextAction(li[0], "duplicate")
+        callback: () => effect.clone({label: game.i18n.format("DOCUMENT.CopyOf", {name: effect.label})}, {save: true})
       },
-
-      // Delete
       {
-        name: game.i18n.format("DND5E.ContextMenuActionDelete", { type: game.i18n.localize("ITEM.TypeFeat") }),
-        icon: "<i class='fas fa-trash fa-fw' style='color: rgb(255, 65, 65);'></i>",
-        condition: li => this.isEditable,
-        callback: li => this._onFeatureContextAction(li[0], "delete")
+        name: "DND5E.ContextMenuActionDelete",
+        icon: "<i class='fas fa-trash fa-fw'></i>",
+        callback: () => effect.deleteDialog()
+      },
+      {
+        name: effect.disabled ? "DND5E.ContextMenuActionEnable" : "DND5E.ContextMenuActionDisable",
+        icon: effect.disabled ? "<i class='fas fa-check fa-fw'></i>" : "<i class='fas fa-times fa-fw'></i>",
+        callback: () => effect.update({disabled: !effect.disabled})
       }
-
     ];
   }
 
   /* -------------------------------------------- */
 
   /**
-   * Handle one of the feature actions from the context menu.
-   * @param {Element} target  Context menu entry that triggered this action.
-   * @param {string} action   Action being triggered.
-   * @returns {Promise}
-   */
-  _onFeatureContextAction(target, action) {
-    const id = target.closest(".item")?.dataset.itemId;
-    const item = this.actor.items.get(id);
-    if ( !item ) return;
-    switch (action) {
-
-      case "edit": return item.sheet.render(true);
-      case "delete": return item.deleteDialog();
-      case "duplicate": return this.actor.createEmbeddedDocuments("Item", [foundry.utils.deepClone(item)]);
-    }
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Get the set of ContextMenu options which should be applied for spell entries.
-   * @returns {ContextMenuEntry[]}  Context menu entries.
+   * Prepare an array of context menu options which are available for owned Item documents.
+   * @param {Item5e} item                   The Item for which the context menu is activated
+   * @returns {ContextMenuEntry[]}          An array of context menu options offered for the Item
    * @protected
    */
-  _getSpellContextMenuOptions() {
-    return [
+  _getItemContextOptions(item) {
 
-      // Preparation Toggle
+    // Standard Options
+    const options = [
       {
-        name: game.i18n.format("DND5E.ContextMenuActionPrepare", { type: game.i18n.localize("ITEM.TypeSpell") }),
-        icon: "<i class='fas fa-sun fa-fw'></i>",
-        condition: li => {
-          if (!this.isEditable) return false;
-          const id = li[0]?.dataset.itemId;
-          const item = this.actor.items.get(id);
-          if (!item) return false;
-
-          if (item.system?.preparation?.mode !== "prepared" || item.system.level < 1) return false;
-          const isSpellPrepared = item.system?.preparation?.prepared;
-          return isSpellPrepared === false;
-        },
-        callback: li => this._onSpellContextAction(li[0], "prepare")
-      },
-      {
-        name: game.i18n.format("DND5E.ContextMenuActionUnprepare", { type: game.i18n.localize("ITEM.TypeSpell") }),
-        icon: "<i class='fas fa-sun fa-fw'></i>",
-        condition: li => {
-          if (!this.isEditable) return false;
-          const id = li[0]?.dataset.itemId;
-          const item = this.actor.items.get(id);
-          if (!item) return false;
-
-          if (item.system?.preparation?.mode !== "prepared" || item.system.level < 1) return false;
-          const isSpellPrepared = item.system?.preparation?.prepared;
-          return isSpellPrepared === true;
-        },
-        callback: li => this._onSpellContextAction(li[0], "unprepare")
-      },
-
-      // Edit
-      {
-        name: game.i18n.format("DND5E.ContextMenuActionEdit", { type: game.i18n.localize("ITEM.TypeSpell") }),
+        name: "DND5E.ContextMenuActionEdit",
         icon: "<i class='fas fa-edit fa-fw'></i>",
-        condition: li => this.isEditable,
-        callback: li => this._onSpellContextAction(li[0], "edit")
+        callback: () => item.sheet.render(true)
       },
-
-      // Duplicate
       {
-        name: game.i18n.format("DND5E.ContextMenuActionDuplicate", { type: game.i18n.localize("ITEM.TypeSpell") }),
+        name: "DND5E.ContextMenuActionDuplicate",
         icon: "<i class='fas fa-copy fa-fw'></i>",
-        condition: li => this.isEditable,
-        callback: li => this._onSpellContextAction(li[0], "duplicate")
+        condition: () => !["race", "background", "class", "subclass"].includes(item.type),
+        callback: () => item.clone({name: game.i18n.format("DOCUMENT.CopyOf", {name: item.name})}, {save: true})
       },
-
-      // Delete
       {
-        name: game.i18n.format("DND5E.ContextMenuActionDelete", { type: game.i18n.localize("ITEM.TypeSpell") }),
-        icon: "<i class='fas fa-trash fa-fw' style='color: rgb(255, 65, 65);'></i>",
-        condition: li => this.isEditable,
-        callback: li => this._onSpellContextAction(li[0], "delete")
+        name: "DND5E.ContextMenuActionDelete",
+        icon: "<i class='fas fa-trash fa-fw'></i>",
+        callback: () => item.deleteDialog()
       }
-
     ];
-  }
 
-  /* -------------------------------------------- */
-
-  /**
-   * Handle one of the spell actions from the context menu.
-   * @param {Element} target  Context menu entry that triggered this action.
-   * @param {string} action   Action being triggered.
-   * @returns {Promise}
-   */
-  _onSpellContextAction(target, action) {
-    const id = target.closest(".item")?.dataset.itemId;
-    const item = this.actor.items.get(id);
-    if ( !item ) return;
-    switch (action) {
-
-      case "edit": return item.sheet.render(true);
-      case "delete": return item.deleteDialog();
-      case "duplicate": return this.actor.createEmbeddedDocuments("Item", [foundry.utils.deepClone(item)]);
-
-      case "prepare": return item.update({"system.preparation.prepared": true});
-      case "unprepare": return item.update({"system.preparation.prepared": false});
+    // Toggle Attunement State
+    if ( ("attunement" in item.system) && (item.system.attunement !== CONFIG.DND5E.attunementTypes.NONE) ) {
+      const isAttuned = item.system.attunement === CONFIG.DND5E.attunementsTypes.ATTUNED;
+      options.push({
+          name: isAttuned ? "DND5E.ContextMenuActionUnattune" : "DND5E.ContextMenuActionAttune",
+          icon: "<i class='fas fa-sun fa-fw'></i>",
+          callback: item.update({"system.attunement": CONFIG.DND5E.attunementTypes[isAttuned ? "ATTUNED" : "REQUIRED"]})
+        }
+      );
     }
-  }
 
-  /* -------------------------------------------- */
+    // Toggle Equipped State
+    if ( "equipped" in item.system ) options.push({
+      name: item.system.equipped ? "DND5E.ContextMenuActionUnequip" : "DND5E.ContextMenuActionEquip",
+      icon: "<i class='fas fa-shield-alt fa-fw'></i>",
+      callback: () => item.update({"system.equipped": !item.system.equipped})
+    });
 
-  /**
-   * Get the set of ContextMenu options which should be applied for effect entries.
-   * @returns {ContextMenuEntry[]}  Context menu entries.
-   * @protected
-   */
-  _getEffectContextMenuOptions() {
-    return [
-
-      // Active Toggle
-      {
-        name: game.i18n.format("DND5E.ContextMenuActionEnable", { type: game.i18n.localize("DND5E.Effect") }),
-        icon: "<i class='fas fa-check fa-fw'></i>",
-        condition: li => {
-          if (!this.isEditable) return false;
-          const id = li[0]?.dataset.effectId;
-          const effect = this.actor.effects.get(id);
-          if (!effect) return false;
-
-          return effect.disabled === true;
-        },
-        callback: li => this._onEffectContextAction(li[0], "enable")
-      },
-      {
-        name: game.i18n.format("DND5E.ContextMenuActionDisable", { type: game.i18n.localize("DND5E.Effect") }),
-        icon: "<i class='fas fa-times fa-fw'></i>",
-        condition: li => {
-          if (!this.isEditable) return false;
-          const id = li[0]?.dataset.effectId;
-          const effect = this.actor.effects.get(id);
-          if (!effect) return false;
-
-          return effect.disabled === false;
-        },
-        callback: li => this._onEffectContextAction(li[0], "disable")
-      },
-
-      // Edit
-      {
-        name: game.i18n.format("DND5E.ContextMenuActionEdit", { type: game.i18n.localize("DND5E.Effect") }),
-        icon: "<i class='fas fa-edit fa-fw'></i>",
-        condition: li => this.isEditable,
-        callback: li => this._onEffectContextAction(li[0], "edit")
-      },
-
-      // Duplicate
-      {
-        name: game.i18n.format("DND5E.ContextMenuActionDuplicate", { type: game.i18n.localize("DND5E.Effect") }),
-        icon: "<i class='fas fa-copy fa-fw'></i>",
-        condition: li => this.isEditable,
-        callback: li => this._onEffectContextAction(li[0], "duplicate")
-      },
-
-      // Delete
-      {
-        name: game.i18n.format("DND5E.ContextMenuActionDelete", { type: game.i18n.localize("DND5E.Effect") }),
-        icon: "<i class='fas fa-trash fa-fw' style='color: rgb(255, 65, 65);'></i>",
-        condition: li => this.isEditable,
-        callback: li => this._onEffectContextAction(li[0], "delete")
-      }
-
-    ];
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Handle one of the effect actions from the context menu.
-   * @param {Element} target  Context menu entry that triggered this action.
-   * @param {string} action   Action being triggered.
-   * @returns {Promise}
-   */
-  _onEffectContextAction(target, action) {
-    const id = target.closest(".item")?.dataset.effectId;
-    const effect = this.actor.effects.get(id);
-    if ( !effect ) return;
-    switch (action) {
-
-      case "edit": return effect.sheet.render(true);
-      case "delete": return effect.deleteDialog();
-      case "duplicate": return this.actor.createEmbeddedDocuments("ActiveEffect", [foundry.utils.deepClone(effect)]);
-
-      case "enable": return effect.update({disabled: false});
-      case "disable": return effect.update({disabled: true});
-    }
+    // Toggle Prepared State
+    if ( ("preparation" in item.system) && (item.system.preparation?.mode === "prepared") ) options.push({
+      name: item.system?.preparation?.prepared ? "DND5E.ContextMenuActionUnprepare" : "DND5E.ContextMenuActionPrepare",
+      icon: "<i class='fas fa-sun fa-fw'></i>",
+      callback: () => item.update({"system.preparation.prepared": !item.system.preparation?.prepared})
+    });
+    return options;
   }
 
   /* -------------------------------------------- */
