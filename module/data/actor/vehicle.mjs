@@ -116,31 +116,33 @@ export default class VehicleData extends CommonTemplate {
         dimensions: new foundry.data.fields.StringField({required: true, label: "DND5E.Dimensions"})
       }, {label: "DND5E.Traits"}),
       cargo: new foundry.data.fields.SchemaField({
-        crew: new foundry.data.fields.ArrayField(
-          new foundry.data.fields.EmbeddedDataField(PassengerData), {label: "DND5E.VehicleCrew"}
-        ),
-        passengers: new foundry.data.fields.ArrayField(
-          new foundry.data.fields.EmbeddedDataField(PassengerData), {label: "DND5E.VehiclePassengers"}
-        )
+        crew: new foundry.data.fields.ArrayField(makePassengerData(), {label: "DND5E.VehicleCrew"}),
+        passengers: new foundry.data.fields.ArrayField(makePassengerData(), {label: "DND5E.VehiclePassengers"})
       }, {label: "DND5E.VehicleCrewPassengers"})
     });
   }
 }
 
+/* -------------------------------------------- */
+
 /**
- * An embedded data structure representing an entry in the crew or passenger lists.
- * @see VehicleData
+ * Data structure for an entry in a vehicle's crew or passenger lists.
  *
+ * @typedef {object} PassengerData
  * @property {string} name      Name of individual or type of creature.
  * @property {number} quantity  How many of this creature are onboard?
  */
-export class PassengerData extends foundry.abstract.DataModel {
-  static defineSchema() {
-    return {
-      name: new foundry.data.fields.StringField({required: true, label: "DND5E.VehiclePassengerName"}),
-      quantity: new foundry.data.fields.NumberField({
-        required: true, nullable: false, integer: true, initial: 0, min: 0, label: "DND5E.VehiclePassengerQuantity"
-      })
-    };
-  }
+
+/**
+ * Produce the schema field for a simple trait.
+ * @param {object} schemaOptions  Options passed to the outer schema.
+ * @returns {PassengerData}
+ */
+function makePassengerData(schemaOptions={}) {
+  return new foundry.data.fields.SchemaField({
+    name: new foundry.data.fields.StringField({required: true, label: "DND5E.VehiclePassengerName"}),
+    quantity: new foundry.data.fields.NumberField({
+      required: true, nullable: false, integer: true, initial: 0, min: 0, label: "DND5E.VehiclePassengerQuantity"
+    })
+  }, schemaOptions);
 }

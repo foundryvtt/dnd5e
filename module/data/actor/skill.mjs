@@ -13,7 +13,6 @@ export default class SkillData extends foundry.abstract.DataModel {
   static defineSchema() {
     return {
       value: new foundry.data.fields.NumberField({required: true, initial: 0, label: "DND5E.ProficiencyLevel"}),
-      // TODO: Default abilities for skills are not filled properly
       ability: new foundry.data.fields.StringField({required: true, initial: "dex", label: "DND5E.Ability"}),
       bonuses: new foundry.data.fields.SchemaField({
         check: new FormulaField({required: true, label: "DND5E.SkillBonusCheck"}),

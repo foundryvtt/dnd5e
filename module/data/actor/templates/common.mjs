@@ -7,7 +7,6 @@ import AbilityData from "../ability.mjs";
  * A template for all actors that share the common template.
  *
  * @property {Object<string, AbilityData>} abilities  Actor's abilities.
- * @property {CurrencyData} currency              Currency being held by this actor.
  * @mixin
  */
 export default class CommonTemplate extends SystemDataModel.mixin(CurrencyTemplate) {

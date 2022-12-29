@@ -14,7 +14,6 @@ import CurrencyTemplate from "../shared/currency.mjs";
  * @property {number} attributes.movement.land   Base movement speed over land.
  * @property {number} attributes.movement.water  Base movement speed over water.
  * @property {number} attributes.movement.air    Base movement speed through the air.
- * @property {CurrencyData} currency             Any money currently held in this group's shared pool.
  *
  * @example Create a new Group
  * const g = new dnd5e.documents.Actor5e({
