@@ -78,6 +78,11 @@ export default class Actor5e extends Actor {
       source.img = art.actor;
       if ( typeof art.token === "string" ) source.prototypeToken.texture.src = art.token;
       else foundry.utils.mergeObject(source.prototypeToken, art.token);
+      const biography = source.system.details?.biography;
+      if ( art.credit && biography ) {
+        if ( typeof biography.value !== "string" ) biography.value = "";
+        biography.value += `<p>${art.credit}</p>`;
+      }
     }
     return source;
   }

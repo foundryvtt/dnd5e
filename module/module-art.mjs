@@ -26,11 +26,12 @@ export default class ModuleArt {
   async registerModuleArt() {
     this.map.clear();
     for ( const module of game.modules ) {
-      const artPath = module.flags?.[module.id]?.["dnd5e-art"];
+      const flags = module.flags?.[module.id];
+      const artPath = flags?.["dnd5e-art"];
       if ( !artPath || !module.active ) continue;
       try {
         const mapping = await foundry.utils.fetchJsonWithTimeout(artPath);
-        await this.#parseArtMapping(mapping);
+        await this.#parseArtMapping(mapping, flags["dnd5e-art-credit"]);
       } catch ( e ) {
         console.error(e);
       }
@@ -41,11 +42,12 @@ export default class ModuleArt {
 
   /**
    * Parse a provided module art mapping and store it for reference later.
-   * @param {object} mapping  A mapping containing pack names, a list of actor IDs, and paths to the art provided by
-   *                          the module for them.
+   * @param {object} mapping   A mapping containing pack names, a list of actor IDs, and paths to the art provided by
+   *                           the module for them.
+   * @param {string} [credit]  An optional credit line to attach to the Actor's biography.
    * @returns {Promise<void>}
    */
-  async #parseArtMapping(mapping) {
+  async #parseArtMapping(mapping, credit) {
     for ( const [packName, actors] of Object.entries(mapping) ) {
       const pack = game.packs.get(packName);
       if ( !pack ) continue;
@@ -53,6 +55,7 @@ export default class ModuleArt {
         const entry = pack.index.get(actorId);
         if ( !entry ) continue;
         entry.img = info.actor;
+        if ( credit ) info.credit = credit;
         this.map.set(`Compendium.${packName}.${actorId}`, info);
       }
     }
