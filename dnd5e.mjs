@@ -21,6 +21,7 @@ import * as dice from "./module/dice/_module.mjs";
 import * as documents from "./module/documents/_module.mjs";
 import * as migrations from "./module/migration.mjs";
 import * as utils from "./module/utils.mjs";
+import ModuleArt from "./module/module-art.mjs";
 
 /* -------------------------------------------- */
 /*  Define Module Structure                     */
@@ -97,6 +98,9 @@ Hooks.once("init", function() {
   // Register System Settings
   registerSystemSettings();
 
+  // Configure module art.
+  game.dnd5e.moduleArt = new ModuleArt();
+
   // Remove honor & sanity from configuration if they aren't enabled
   if ( !game.settings.get("dnd5e", "honorScore") ) {
     delete DND5E.abilities.hon;
@@ -169,6 +173,7 @@ Hooks.once("init", function() {
 Hooks.once("setup", function() {
   CONFIG.DND5E.trackableAttributes = expandAttributeList(CONFIG.DND5E.trackableAttributes);
   CONFIG.DND5E.consumableResources = expandAttributeList(CONFIG.DND5E.consumableResources);
+  game.dnd5e.moduleArt.registerModuleArt();
 });
 
 /* --------------------------------------------- */
