@@ -68,6 +68,27 @@ export default class Actor5e extends Actor {
   /*  Methods                                     */
   /* -------------------------------------------- */
 
+  /** @inheritdoc */
+  _initializeSource(source, options={}) {
+    source = super._initializeSource(source, options);
+    if ( !source._id || !options.pack ) return source;
+    const uuid = `Compendium.${options.pack}.${source._id}`;
+    const art = game.dnd5e.moduleArt.map.get(uuid);
+    if ( art ) {
+      source.img = art.actor;
+      if ( typeof art.token === "string" ) source.prototypeToken.texture.src = art.token;
+      else foundry.utils.mergeObject(source.prototypeToken, art.token);
+      const biography = source.system.details?.biography;
+      if ( art.credit && biography ) {
+        if ( typeof biography.value !== "string" ) biography.value = "";
+        biography.value += `<p>${art.credit}</p>`;
+      }
+    }
+    return source;
+  }
+
+  /* -------------------------------------------- */
+
   /** @inheritDoc */
   prepareData() {
     this._classes = undefined;
