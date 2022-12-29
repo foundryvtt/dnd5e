@@ -41,7 +41,13 @@
         </select>
         <select name="system.target.type" title="{{localize 'DND5E.TargetType'}}">
             {{#select system.target.type}}
-                {{selectOptions config.targetTypes blank=(localize "DND5E.None")}}
+                 <option value="">{{localize "DND5E.None"}}</option>
+                 <optgroup label="{{localize 'DND5E.TargetTypeIndividual'}}">
+                     {{selectOptions config.individualTargetTypes}}
+                 </optgroup>
+                 <optgroup label="{{localize 'DND5E.TargetTypeArea'}}">
+                     {{selectOptions config.areaTargetTypes labelAttr="label"}}
+                 </optgroup>
             {{/select}}
         </select>
     </div>
