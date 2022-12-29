@@ -1,48 +1,83 @@
-import { makeSimpleTrait } from "../fields.mjs";
-import AttributesField from "./templates/attributes.mjs";
+import { FormulaField } from "../fields.mjs";
+import AttributesFields from "./templates/attributes.mjs";
 import CreatureTemplate from "./templates/creature.mjs";
-import DetailsField from "./templates/details.mjs";
-import TraitsField from "./templates/traits.mjs";
+import DetailsFields from "./templates/details.mjs";
+import TraitsFields from "./templates/traits.mjs";
 
 /**
  * System data definition for Characters.
  *
  * @property {object} attributes
- * @property {object} attributes.death          Information on death saving throws.
- * @property {number} attributes.death.success  Number of successful death saves.
- * @property {number} attributes.death.failure  Number of failed death saves.
- * @property {number} attributes.exhaustion     Number of levels of exhaustion.
- * @property {number} attributes.inspiration    Does this character have inspiration?
+ * @property {object} attributes.ac
+ * @property {number} attributes.ac.flat                  Flat value used for flat or natural armor calculation.
+ * @property {string} attributes.ac.calc                  Name of one of the built-in formulas to use.
+ * @property {string} attributes.ac.formula               Custom formula to use.
+ * @property {object} attributes.hp
+ * @property {number} attributes.hp.value                 Current hit points.
+ * @property {number} attributes.hp.min                   Minimum allowed HP value.
+ * @property {number} attributes.hp.max                   Maximum allowed HP value.
+ * @property {number} attributes.hp.temp                  Temporary HP applied on top of value.
+ * @property {number} attributes.hp.tempmax               Temporary change to the maximum HP.
+ * @property {object} attributes.death
+ * @property {number} attributes.death.success            Number of successful death saves.
+ * @property {number} attributes.death.failure            Number of failed death saves.
+ * @property {number} attributes.exhaustion               Number of levels of exhaustion.
+ * @property {number} attributes.inspiration              Does this character have inspiration?
  * @property {object} details
- * @property {string} details.background        Name of character's background.
- * @property {string} details.originalClass     ID of first class taken by character.
- * @property {XPData} details.xp                Experience points gained.
- * @property {number} details.xp.value          Total experience points earned.
- * @property {number} details.xp.min            Minimum experience points for current level.
- * @property {number} details.xp.max            Maximum experience points for current level.
- * @property {string} details.appearance        Description of character's appearance.
- * @property {string} details.trait             Character's personality traits.
- * @property {string} details.ideal             Character's ideals.
- * @property {string} details.bond              Character's bonds.
- * @property {string} details.flaw              Character's flaws.
+ * @property {string} details.background                  Name of character's background.
+ * @property {string} details.originalClass               ID of first class taken by character.
+ * @property {XPData} details.xp                          Experience points gained.
+ * @property {number} details.xp.value                    Total experience points earned.
+ * @property {number} details.xp.min                      Minimum experience points for current level.
+ * @property {number} details.xp.max                      Maximum experience points for current level.
+ * @property {string} details.appearance                  Description of character's appearance.
+ * @property {string} details.trait                       Character's personality traits.
+ * @property {string} details.ideal                       Character's ideals.
+ * @property {string} details.bond                        Character's bonds.
+ * @property {string} details.flaw                        Character's flaws.
  * @property {object} traits
- * @property {object} traits.weaponProf         Character's weapon proficiencies.
- * @property {object} traits.armorProf          Character's armor proficiencies.
- * @property {object} traits.toolProf           Character's tool proficiencies.
+ * @property {SimpleTraitData} traits.weaponProf          Character's weapon proficiencies.
+ * @property {SimpleTraitData} traits.armorProf           Character's armor proficiencies.
+ * @property {SimpleTraitData} traits.toolProf            Character's tool proficiencies.
  * @property {object} resources
- * @property {CharacterResourceData}            resources.primary    Resource number one.
- * @property {CharacterResourceData}            resources.secondary  Resource number two.
- * @property {CharacterResourceData}            resources.tertiary   Resource number three.
+ * @property {CharacterResourceData} resources.primary    Resource number one.
+ * @property {CharacterResourceData} resources.secondary  Resource number two.
+ * @property {CharacterResourceData} resources.tertiary   Resource number three.
  */
 export default class CharacterData extends CreatureTemplate {
 
-  static #actorType = "character";
+  /** @inheritdoc */
+  static _systemType = "character";
 
   /* -------------------------------------------- */
 
+  /** @inheritdoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
-      attributes: new AttributesField({
+      attributes: new foundry.data.fields.SchemaField({
+        ...AttributesFields.common,
+        ...AttributesFields.creature,
+        ac: new foundry.data.fields.SchemaField({
+          flat: new foundry.data.fields.NumberField({integer: true, min: 0, label: "DND5E.ArmorClassFlat"}),
+          calc: new foundry.data.fields.StringField({initial: "default", label: "DND5E.ArmorClassCalculation"}),
+          formula: new FormulaField({deterministic: true, label: "DND5E.ArmorClassFormula"})
+        }, {label: "DND5E.ArmorClass"}),
+        hp: new foundry.data.fields.SchemaField({
+          value: new foundry.data.fields.NumberField({
+            nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.HitPointsCurrent"
+          }),
+          min: new foundry.data.fields.NumberField({
+            nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.HitPointsMin"
+          }),
+          max: new foundry.data.fields.NumberField({
+            nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.HitPointsMax"
+          }),
+          temp: new foundry.data.fields.NumberField({integer: true, initial: 0, min: 0, label: "DND5E.HitPointsTemp"}),
+          tempmax: new foundry.data.fields.NumberField({integer: true, initial: 0, label: "DND5E.HitPointsTempMax"})
+        }, {
+          label: "DND5E.HitPoints", validate: d => d.min <= d.max,
+          validationError: "HP minimum must be less than HP maximum"
+        }),
         death: new foundry.data.fields.SchemaField({
           success: new foundry.data.fields.NumberField({
             required: true, nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.DeathSaveSuccesses"
@@ -55,8 +90,10 @@ export default class CharacterData extends CreatureTemplate {
           required: true, nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.Exhaustion"
         }),
         inspiration: new foundry.data.fields.BooleanField({required: true, label: "DND5E.Inspiration"})
-      }, {type: this.#actorType, label: "DND5E.Attributes"}),
-      details: new DetailsField({
+      }, {label: "DND5E.Attributes"}),
+      details: new foundry.data.fields.SchemaField({
+        ...DetailsFields.common,
+        ...DetailsFields.character,
         background: new foundry.data.fields.StringField({required: true, label: "DND5E.Background"}),
         originalClass: new foundry.data.fields.StringField({required: true, label: "DND5E.ClassOriginal"}),
         xp: new foundry.data.fields.SchemaField({
@@ -78,12 +115,14 @@ export default class CharacterData extends CreatureTemplate {
         ideal: new foundry.data.fields.StringField({required: true, label: "DND5E.Ideals"}),
         bond: new foundry.data.fields.StringField({required: true, label: "DND5E.Bonds"}),
         flaw: new foundry.data.fields.StringField({required: true, label: "DND5E.Flaws"})
-      }, {type: this.#actorType, label: "DND5E.Details"}),
-      traits: new TraitsField({
-        weaponProf: makeSimpleTrait({label: "DND5E.TraitWeaponProf"}),
-        armorProf: makeSimpleTrait({label: "DND5E.TraitArmorProf"}),
-        toolProf: makeSimpleTrait({label: "DND5E.TraitToolProf"})
-      }, {type: this.#actorType, label: "DND5E.Traits"}),
+      }, {label: "DND5E.Details"}),
+      traits: new foundry.data.fields.SchemaField({
+        ...TraitsFields.common,
+        ...TraitsFields.creature,
+        weaponProf: TraitsFields.makeSimpleTrait({label: "DND5E.TraitWeaponProf"}),
+        armorProf: TraitsFields.makeSimpleTrait({label: "DND5E.TraitArmorProf"}),
+        toolProf: TraitsFields.makeSimpleTrait({label: "DND5E.TraitToolProf"})
+      }, {label: "DND5E.Traits"}),
       resources: new foundry.data.fields.SchemaField({
         primary: makeResourceField({label: "DND5E.ResourcePrimary"}),
         secondary: makeResourceField({label: "DND5E.ResourceSecondary"}),

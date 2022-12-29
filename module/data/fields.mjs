@@ -242,32 +242,9 @@ export class MappingField extends foundry.data.fields.ObjectField {
   /** @override */
   initialize(value, model, options={}) {
     if ( !value ) return value;
-    Object.values(value).forEach(v => this.model.initialize(v, model, options));
-    return value;
+    return Object.entries(value).reduce((obj, [k, v]) => {
+      obj[k] = this.model.initialize(v, model, options);
+      return obj;
+    }, {});
   }
-}
-
-/* -------------------------------------------- */
-
-/**
- * Data structure for a standard actor trait.
- *
- * @typedef {object} SimpleTraitData
- * @property {Set<string>} value  Keys for currently selected traits.
- * @property {string} custom      Semicolon-separated list of custom traits.
- */
-
-/**
- * Produce the schema field for a simple trait.
- * @param {object} [schemaOptions={}]  Options passed to the outer schema.
- * @param {string[]} [initial={}]      The initial value for the value set.
- * @returns {SchemaField}
- */
-export function makeSimpleTrait(schemaOptions={}, initial=[]) {
-  return new foundry.data.fields.SchemaField({
-    value: new foundry.data.fields.SetField(
-      new foundry.data.fields.StringField({blank: false}), {label: "DND5E.TraitsChosen", initial}
-    ),
-    custom: new foundry.data.fields.StringField({required: true, label: "DND5E.Special"})
-  }, schemaOptions);
 }

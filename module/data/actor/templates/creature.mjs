@@ -5,17 +5,6 @@ import CommonTemplate from "./common.mjs";
 /**
  * A template for all actors that are creatures
  *
- * @property {object} attributes
- * @property {object} attributes.attunement
- * @property {number} attributes.attunement.max      Maximum number of attuned items.
- * @property {object} attributes.senses
- * @property {number} attributes.senses.darkvision   Creature's darkvision range.
- * @property {number} attributes.senses.blindsight   Creature's blindsight range.
- * @property {number} attributes.senses.tremorsense  Creature's tremorsense range.
- * @property {number} attributes.senses.truesight    Creature's truesight range.
- * @property {string} attributes.senses.units        Distance units used to measure senses.
- * @property {string} attributes.senses.special      Description of any special senses or restrictions.
- * @property {string} attributes.spellcasting        Primary spellcasting ability.
  * @property {object} bonuses
  * @property {AttackBonusesData} bonuses.mwak        Bonuses to melee weapon attacks.
  * @property {AttackBonusesData} bonuses.rwak        Bonuses to ranged weapon attacks.
@@ -27,13 +16,8 @@ import CommonTemplate from "./common.mjs";
  * @property {string} bonuses.abilities.skill        Numeric or dice bonus to skill checks.
  * @property {object} bonuses.spell                  Bonuses to spells.
  * @property {string} bonuses.spell.dc               Numeric bonus to spellcasting DC.
- * @property {object} details
- * @property {string} details.alignment              Creature's alignment.
- * @property {string} details.race                   Creature's race.
  * @property {Object<string, SkillData>} skills      Actor's skills.
  * @property {Object<string, SpellSlotData>} spells  Actor's spell slots.
- * @property {object} traits
- * @property {SimpleTraitData} traits.languages      Languages known by this creature.
  */
 export default class CreatureTemplate extends CommonTemplate {
   static defineSchema() {

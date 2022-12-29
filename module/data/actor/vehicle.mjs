@@ -1,14 +1,27 @@
-import AttributesField from "./templates/attributes.mjs";
+import { FormulaField } from "../fields.mjs";
+import AttributesFields from "./templates/attributes.mjs";
 import CommonTemplate from "./templates/common.mjs";
-import DetailsField from "./templates/details.mjs";
-import TraitsField from "./templates/traits.mjs";
+import DetailsFields from "./templates/details.mjs";
+import TraitsFields from "./templates/traits.mjs";
 
 /**
  * System data definition for Vehicles.
  *
  * @property {string} vehicleType                      Type of vehicle as defined in `DND5E.vehicleTypes`.
  * @property {object} attributes
+ * @property {object} attributes.ac
+ * @property {number} attributes.ac.flat               Flat value used for flat or natural armor calculation.
+ * @property {string} attributes.ac.calc               Name of one of the built-in formulas to use.
+ * @property {string} attributes.ac.formula            Custom formula to use.
  * @property {string} attributes.ac.motionless         Changes to vehicle AC when not moving.
+ * @property {object} attributes.hp
+ * @property {number} attributes.hp.value              Current hit points.
+ * @property {number} attributes.hp.min                Minimum allowed HP value.
+ * @property {number} attributes.hp.max                Maximum allowed HP value.
+ * @property {number} attributes.hp.temp               Temporary HP applied on top of value.
+ * @property {number} attributes.hp.tempmax            Temporary change to the maximum HP.
+ * @property {number} attributes.hp.dt                 Damage threshold.
+ * @property {number} attributes.hp.mt                 Mishap threshold.
  * @property {object} attributes.actions               Information on how the vehicle performs actions.
  * @property {boolean} attributes.actions.stations     Does this vehicle rely on action stations that required
  *                                                     individual crewing rather than general crew thresholds?
@@ -17,28 +30,57 @@ import TraitsField from "./templates/traits.mjs";
  * @property {number} attributes.actions.thresholds.2  Minimum crew needed to take full action complement.
  * @property {number} attributes.actions.thresholds.1  Minimum crew needed to take reduced action complement.
  * @property {number} attributes.actions.thresholds.0  Minimum crew needed to perform any actions.
- * @property {object} attributes.hp                    Vehicle's hit point data.
- * @property {number} attributes.hp.dt                 Damage threshold.
- * @property {number} attributes.hp.mt                 Mishap threshold.
  * @property {object} attributes.capacity              Information on the vehicle's carrying capacity.
  * @property {string} attributes.capacity.creature     Description of the number of creatures the vehicle can carry.
  * @property {number} attributes.capacity.cargo        Cargo carrying capacity measured in tons.
  * @property {object} traits
+ * @property {string} traits.dimensions                Width and length of the vehicle.
  * @property {object} cargo                            Details on this vehicle's crew and cargo capacities.
  * @property {PassengerData[]} cargo.crew              Creatures responsible for operating the vehicle.
  * @property {PassengerData[]} cargo.passengers        Creatures just takin' a ride.
  */
 export default class VehicleData extends CommonTemplate {
 
-  static #actorType = "vehicle";
+  /** @inheritdoc */
+  static _systemType = "vehicle";
 
   /* -------------------------------------------- */
 
+  /** @inheritdoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
       vehicleType: new foundry.data.fields.StringField({required: true, initial: "water", label: "DND5E.VehicleType"}),
-      attributes: new AttributesField({
-        action: new foundry.data.fields.SchemaField({
+      attributes: new foundry.data.fields.SchemaField({
+        ...AttributesFields.common,
+        ac: new foundry.data.fields.SchemaField({
+          flat: new foundry.data.fields.NumberField({integer: true, min: 0, label: "DND5E.ArmorClassFlat"}),
+          calc: new foundry.data.fields.StringField({initial: "default", label: "DND5E.ArmorClassCalculation"}),
+          formula: new FormulaField({deterministic: true, label: "DND5E.ArmorClassFormula"}),
+          motionless: new foundry.data.fields.StringField({required: true, label: "DND5E.ArmorClassMotionless"})
+        }, {label: "DND5E.ArmorClass"}),
+        hp: new foundry.data.fields.SchemaField({
+          value: new foundry.data.fields.NumberField({
+            nullable: true, integer: true, min: 0, initial: null, label: "DND5E.HitPointsCurrent"
+          }),
+          min: new foundry.data.fields.NumberField({
+            nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.HitPointsMin"
+          }),
+          max: new foundry.data.fields.NumberField({
+            nullable: true, integer: true, min: 0, initial: null, label: "DND5E.HitPointsMax"
+          }),
+          temp: new foundry.data.fields.NumberField({integer: true, initial: 0, min: 0, label: "DND5E.HitPointsTemp"}),
+          tempmax: new foundry.data.fields.NumberField({integer: true, initial: 0, label: "DND5E.HitPointsTempMax"}),
+          dt: new foundry.data.fields.NumberField({
+            required: true, integer: true, min: 0, label: "DND5E.DamageThreshold"
+          }),
+          mt: new foundry.data.fields.NumberField({
+            required: true, integer: true, min: 0, label: "DND5E.VehicleMishapThreshold"
+          })
+        }, {
+          label: "DND5E.HitPoints", validate: d => d.min <= d.max,
+          validationError: "HP minimum must be less than HP maximum"
+        }),
+        actions: new foundry.data.fields.SchemaField({
           stations: new foundry.data.fields.BooleanField({required: true, label: "DND5E.VehicleActionStations"}),
           value: new foundry.data.fields.NumberField({
             required: true, nullable: false, integer: true, initial: 0, min: 0, label: "DND5E.VehicleActionMax"
@@ -61,11 +103,18 @@ export default class VehicleData extends CommonTemplate {
             required: true, nullable: false, integer: true, initial: 0, min: 0, label: "DND5E.VehicleCargoCapacity"
           })
         }, {label: "DND5E.VehicleCargoCrew"})
-      }, {type: this.#actorType, label: "DND5E.Attributes"}),
-      details: new DetailsField({}, {type: this.#actorType, label: "DND5E.Details"}),
-      traits: new TraitsField({
+      }, {label: "DND5E.Attributes"}),
+      details: new foundry.data.fields.SchemaField(DetailsFields.common, {label: "DND5E.Details"}),
+      traits: new foundry.data.fields.SchemaField({
+        ...TraitsFields.common,
+        size: new foundry.data.fields.StringField({required: true, initial: "lg", label: "DND5E.Size"}),
+        di: TraitsFields.makeDamageTrait({label: "DND5E.DamImm"}, {initial: ["poison", "psychic"]}),
+        ci: TraitsFields.makeSimpleTrait({label: "DND5E.ConImm"}, {initial: [
+          "blinded", "charmed", "deafened", "frightened", "paralyzed",
+          "petrified", "poisoned", "stunned", "unconscious"
+        ]}),
         dimensions: new foundry.data.fields.StringField({required: true, label: "DND5E.Dimensions"})
-      }, {type: this.#actorType, label: "DND5E.Traits"}),
+      }, {label: "DND5E.Traits"}),
       cargo: new foundry.data.fields.SchemaField({
         crew: new foundry.data.fields.ArrayField(
           new foundry.data.fields.EmbeddedDataField(PassengerData), {label: "DND5E.VehicleCrew"}

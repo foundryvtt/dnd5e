@@ -7,42 +7,12 @@ import AbilityData from "../ability.mjs";
  * A template for all actors that share the common template.
  *
  * @property {Object<string, AbilityData>} abilities  Actor's abilities.
- * @property {object} attributes
- * @property {object} attributes.ac
- * @property {number} attributes.ac.flat          Flat value used for flat or natural armor calculation.
- * @property {string} attributes.ac.calc          Name of one of the built-in formulas to use.
- * @property {string} attributes.ac.formula       Custom formula to use.
- * @property {object} attributes.hp
- * @property {number} attributes.hp.value         Current hit points.
- * @property {number} attributes.hp.min           Minimum allowed HP value.
- * @property {number} attributes.hp.max           Maximum allowed HP value.
- * @property {number} attributes.hp.temp          Temporary HP applied on top of value.
- * @property {number} attributes.hp.tempmax       Temporary change to the maximum HP.
- * @property {object} attributes.init
- * @property {number} attributes.init.value       Calculated initiative modifier.
- * @property {number} attributes.init.bonus       Fixed bonus provided to initiative rolls.
- * @property {object} attributes.movement
- * @property {number} attributes.movement.burrow  Actor burrowing speed.
- * @property {number} attributes.movement.climb   Actor climbing speed.
- * @property {number} attributes.movement.fly     Actor flying speed.
- * @property {number} attributes.movement.swim    Actor swimming speed.
- * @property {number} attributes.movement.walk    Actor walking speed.
- * @property {string} attributes.movement.units   Movement used to measure the various speeds.
- * @property {boolean} attributes.movement.hover  Is this flying creature able to hover in place.
- * @property {object} details
- * @property {object} details.biography           Actor's biography data.
- * @property {string} details.biography.value     Full HTML biography information.
- * @property {string} details.biography.public    Biography that will be displayed to players with observer privileges.
- * @property {object} traits
- * @property {string} traits.size                 Actor's size.
- * @property {SimpleTraitData} traits.di          Damage immunities.
- * @property {SimpleTraitData} traits.dr          Damage resistances.
- * @property {SimpleTraitData} traits.dv          Damage vulnerabilities.
- * @property {SimpleTraitData} traits.ci          Condition immunities.
  * @property {CurrencyData} currency              Currency being held by this actor.
  * @mixin
  */
 export default class CommonTemplate extends SystemDataModel.mixin(CurrencyTemplate) {
+
+  /** @inheritdoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
       abilities: new MappingField(new foundry.data.fields.EmbeddedDataField(AbilityData), {
@@ -71,11 +41,8 @@ export default class CommonTemplate extends SystemDataModel.mixin(CurrencyTempla
 
     // If the actor has a numeric ac.value, then their AC has not been migrated to the auto-calculation schema yet.
     if ( Number.isNumeric(ac.value) ) {
-      // TODO: Figure out how to determine if this is an NPC properly
-      // const isNPC = this.defineSchema().hp.schema.formula !== undefined;
-      const isNPC = false;
       ac.flat = parseInt(ac.value);
-      ac.calc = isNPC ? "natural" : "flat";
+      ac.calc = this._systemType === "npc" ? "natural" : "flat";
       return;
     }
 
