@@ -207,6 +207,80 @@ export default class GroupActorSheet extends ActorSheet {
     html.find(".action-button").click(this._onClickActionButton.bind(this));
     html.find(".item-control").click(this._onClickItemControl.bind(this));
     html.find(".item .rollable h4").click(event => this._onClickItemName(event));
+
+    // Item context menu
+    const itemContextOptions = this._getItemContextMenuOptions();
+
+    /**
+     * A hook event that fires when the context menu for items.
+     * @function dnd5e.getItemContext
+     * @memberof hookEvents
+     * @param {jQuery} html                      The HTML element to which the context options are attached.
+     * @param {ContextMenuEntry[]} entryOptions  The context menu entries.
+     */
+    Hooks.call("dnd5e.getItemContext", html, itemContextOptions);
+    if ( itemContextOptions ) new ContextMenu(
+      html,
+      ["weapon", "equipment", "consumable", "tool", "backpack", "loot"].map(type => `.${type}-item`).join(", "), // Selects all items under the standard 'physical item' type
+      itemContextOptions
+    );
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Get the set of ContextMenu options which should be applied for item entries.
+   * @returns {ContextMenuEntry[]}  Context menu entries.
+   * @protected
+   */
+  _getItemContextMenuOptions() {
+    return [
+
+      // Edit
+      {
+        name: game.i18n.format("DND5E.ContextMenuActionEdit", { type: game.i18n.localize("DND5E.Item") }),
+        icon: "<i class='fas fa-edit fa-fw'></i>",
+        condition: li => this.isEditable,
+        callback: li => this._onItemContextAction(li[0], "edit")
+      },
+
+      // Duplicate
+      {
+        name: game.i18n.format("DND5E.ContextMenuActionDuplicate", { type: game.i18n.localize("DND5E.Item") }),
+        icon: "<i class='fas fa-copy fa-fw'></i>",
+        condition: li => this.isEditable,
+        callback: li => this._onItemContextAction(li[0], "duplicate")
+      },
+
+      // Delete
+      {
+        name: game.i18n.format("DND5E.ContextMenuActionDelete", { type: game.i18n.localize("DND5E.Item") }),
+        icon: "<i class='fas fa-trash fa-fw' style='color: rgb(255, 65, 65);'></i>",
+        condition: li => this.isEditable,
+        callback: li => this._onItemContextAction(li[0], "delete")
+      }
+
+    ];
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle one of the item actions from the context menu.
+   * @param {Element} target  Context menu entry that triggered this action.
+   * @param {string} action   Action being triggered.
+   * @returns {Promise}
+   */
+  _onItemContextAction(target, action) {
+    const id = target.closest(".item")?.dataset.itemId;
+    const item = this.actor.items.get(id);
+    if ( !item ) return;
+    switch (action) {
+
+      case "edit": return item.sheet.render(true);
+      case "delete": return item.deleteDialog();
+      case "duplicate": return this.actor.createEmbeddedDocuments("Item", [foundry.utils.deepClone(item)]);
+    }
   }
 
   /* -------------------------------------------- */
