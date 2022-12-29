@@ -91,7 +91,7 @@
       "formula": ""
     }
   },
-  "sort": 100001,
+  "sort": 0,
   "flags": {},
   "img": "icons/magic/defensive/shield-barrier-flaming-pentagon-red.webp",
   "effects": [
@@ -120,7 +120,8 @@
       "label": "Warm Shield",
       "origin": "Item.OtcTsffCQaOFkr9K",
       "tint": null,
-      "transfer": true
+      "transfer": true,
+      "sort": 0
     },
     {
       "_id": "UUXwEKSPX4nYfDzo",
@@ -147,7 +148,8 @@
       "label": "Chill Shield",
       "origin": "Item.OtcTsffCQaOFkr9K",
       "tint": null,
-      "transfer": true
+      "transfer": true,
+      "sort": 0
     }
   ],
   "folder": null,

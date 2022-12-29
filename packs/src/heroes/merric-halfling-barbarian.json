@@ -706,7 +706,7 @@
           "charged": false
         }
       },
-      "sort": 4650000,
+      "sort": 0,
       "flags": {},
       "img": "icons/magic/fire/flame-burning-fist-strike.webp",
       "effects": [],
@@ -828,7 +828,7 @@
         },
         "proficient": true
       },
-      "sort": 225000,
+      "sort": 0,
       "flags": {},
       "img": "icons/weapons/ammunition/arrows-bodkin-yellow-red.webp",
       "effects": [],
@@ -950,7 +950,7 @@
         },
         "proficient": true
       },
-      "sort": 250000,
+      "sort": 0,
       "flags": {},
       "img": "icons/weapons/ammunition/arrows-bodkin-yellow-red.webp",
       "effects": [],
@@ -1041,7 +1041,7 @@
         },
         "consumableType": "ammo"
       },
-      "sort": 100001,
+      "sort": 0,
       "flags": {},
       "img": "icons/weapons/ammunition/arrows-bodkin-yellow-red.webp",
       "effects": [],
@@ -1163,7 +1163,7 @@
         },
         "proficient": true
       },
-      "sort": 200000,
+      "sort": 0,
       "flags": {},
       "img": "icons/weapons/axes/axe-double.webp",
       "effects": [],
@@ -1214,7 +1214,7 @@
           "pp": 0
         }
       },
-      "sort": 100000,
+      "sort": 0,
       "flags": {},
       "img": "icons/containers/bags/pack-simple-leather.webp",
       "effects": [],
@@ -1253,7 +1253,7 @@
         "rarity": "common",
         "identified": true
       },
-      "sort": 800000,
+      "sort": 0,
       "flags": {},
       "img": "icons/sundries/flags/banner-worn-blue.webp",
       "effects": [],
@@ -1344,7 +1344,7 @@
         },
         "consumableType": "trinket"
       },
-      "sort": 1000000,
+      "sort": 0,
       "flags": {},
       "img": "icons/sundries/survival/rope-wrapped-brown.webp",
       "effects": [],
@@ -1435,7 +1435,7 @@
         },
         "consumableType": "food"
       },
-      "sort": 1800000,
+      "sort": 0,
       "flags": {},
       "img": "icons/consumables/meat/hock-leg-pink-brown.webp",
       "effects": [],
@@ -1474,7 +1474,7 @@
         "rarity": "common",
         "identified": true
       },
-      "sort": 900000,
+      "sort": 0,
       "flags": {},
       "img": "icons/tools/cooking/fork-steel-grey.webp",
       "effects": [],
@@ -1513,7 +1513,7 @@
         "rarity": "common",
         "identified": true
       },
-      "sort": 1400000,
+      "sort": 0,
       "flags": {},
       "img": "icons/sundries/lights/torch-black.webp",
       "effects": [],
@@ -1609,7 +1609,7 @@
         },
         "consumableType": "trinket"
       },
-      "sort": 4700000,
+      "sort": 0,
       "flags": {},
       "img": "icons/sundries/lights/torch-black.webp",
       "effects": [],
@@ -1700,7 +1700,7 @@
         },
         "consumableType": "food"
       },
-      "sort": 500000,
+      "sort": 0,
       "flags": {},
       "img": "icons/sundries/survival/wetskin-leather-purple.webp",
       "effects": [],
@@ -1822,7 +1822,7 @@
         },
         "proficient": true
       },
-      "sort": 287500,
+      "sort": 0,
       "flags": {},
       "img": "icons/weapons/axes/axe-broad-black.webp",
       "effects": [],
@@ -1944,7 +1944,7 @@
         },
         "proficient": true
       },
-      "sort": 325000,
+      "sort": 0,
       "flags": {},
       "img": "icons/weapons/axes/axe-broad-black.webp",
       "effects": [],
@@ -2028,7 +2028,7 @@
           "charged": false
         }
       },
-      "sort": 5100000,
+      "sort": 0,
       "flags": {},
       "img": "icons/skills/melee/unarmed-punch-fist.webp",
       "effects": [],
@@ -2112,7 +2112,7 @@
           "charged": false
         }
       },
-      "sort": 5200000,
+      "sort": 0,
       "flags": {},
       "img": "icons/sundries/gaming/dice-runed-brown.webp",
       "effects": [],
@@ -2196,7 +2196,7 @@
           "charged": false
         }
       },
-      "sort": 5300000,
+      "sort": 0,
       "flags": {},
       "img": "icons/magic/perception/silhouette-stealth-shadow.webp",
       "effects": [],
@@ -2280,7 +2280,7 @@
           "charged": false
         }
       },
-      "sort": 5400000,
+      "sort": 0,
       "flags": {},
       "img": "icons/skills/movement/feet-winged-boots-brown.webp",
       "effects": [],
@@ -2364,7 +2364,7 @@
           "charged": false
         }
       },
-      "sort": 4875000,
+      "sort": 0,
       "flags": {},
       "img": "icons/magic/lightning/bolt-forked-large-teal.webp",
       "effects": [],
@@ -2448,7 +2448,7 @@
           "charged": false
         }
       },
-      "sort": 4987500,
+      "sort": 0,
       "flags": {},
       "img": "icons/magic/lightning/bolt-forked-teal.webp",
       "effects": [],
@@ -2944,7 +2944,8 @@
           "label": "Rage",
           "origin": "Item.bdfYHJstcltQC7SZ",
           "tint": null,
-          "transfer": true
+          "transfer": true,
+          "sort": 0
         }
       ],
       "folder": null,
@@ -3061,7 +3062,8 @@
           "origin": "Item.aIMXb43ACIxMItbh",
           "transfer": true,
           "flags": {},
-          "tint": null
+          "tint": null,
+          "sort": 0
         }
       ],
       "folder": null,
@@ -3129,7 +3131,8 @@
       "origin": "Actor.jPzWH8sy3PbuB5OV.Item.ntkxu3ypcgozbl37",
       "tint": null,
       "transfer": false,
-      "flags": {}
+      "flags": {},
+      "sort": 0
     },
     {
       "_id": "hEgUnQNVxtBo2zkK",
@@ -3156,7 +3159,8 @@
       "origin": "Actor.jPzWH8sy3PbuB5OV.Item.kk4n0n0k7lke3dn1",
       "tint": null,
       "transfer": false,
-      "flags": {}
+      "flags": {},
+      "sort": 0
     }
   ],
   "folder": null,
