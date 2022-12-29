@@ -41,7 +41,7 @@
     },
     "consume": {
       "type": "attribute",
-      "target": "resources.legact.value",
+      "target": null,
       "amount": 2
     },
     "ability": "",
@@ -71,6 +71,10 @@
       "dc": 23,
       "scaling": "flat"
     },
+    "type": {
+      "value": "monster",
+      "subtype": ""
+    },
     "requirements": "",
     "recharge": {
       "value": null,
@@ -87,7 +91,7 @@
     "systemVersion": "2.1.0",
     "coreVersion": "10.291",
     "createdTime": 1661787234504,
-    "modifiedTime": 1671220979286,
+    "modifiedTime": 1672335991907,
     "lastModifiedBy": "dnd5ebuilder0000"
   }
 }
