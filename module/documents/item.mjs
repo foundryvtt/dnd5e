@@ -395,24 +395,23 @@ export default class Item5e extends Item {
 
     // Ability Activation Label
     const act = this.system.activation ?? {};
-    this.labels.activation = [act.cost, C.abilityActivationTypes[act.type]].filterJoin(" ");
+    if ( ["none", ""].includes(act.type) ) act.type = null;   // Backwards compatibility
+    this.labels.activation = act.type ? [act.cost, C.abilityActivationTypes[act.type]].filterJoin(" ") : "";
 
     // Target Label
     let tgt = this.system.target ?? {};
-    if ( ["none", "touch", "self"].includes(tgt.units) ) tgt.value = null;
-    if ( ["none", "self"].includes(tgt.type) ) {
-      tgt.value = null;
-      tgt.units = null;
-    }
-    this.labels.target = [tgt.value, C.distanceUnits[tgt.units], C.targetTypes[tgt.type]].filterJoin(" ");
+    if ( ["none", ""].includes(tgt.type) ) tgt.type = null;   // Backwards compatibility
+    if ( [null, "self"].includes(tgt.type) ) tgt.value = tgt.units = null;
+    else if ( tgt.units === "touch" ) tgt.value = null;
+    this.labels.target = tgt.type ?
+      [tgt.value, C.distanceUnits[tgt.units], C.targetTypes[tgt.type]].filterJoin(" ") : "";
 
     // Range Label
     let rng = this.system.range ?? {};
-    if ( ["none", "touch", "self"].includes(rng.units) ) {
-      rng.value = null;
-      rng.long = null;
-    }
-    this.labels.range = [rng.value, rng.long ? `/ ${rng.long}` : null, C.distanceUnits[rng.units]].filterJoin(" ");
+    if ( ["none", ""].includes(rng.units) ) rng.units = null; // Backwards compatibility
+    if ( [null, "touch", "self"].includes(rng.units) ) rng.value = rng.long = null;
+    this.labels.range = rng.units ?
+      [rng.value, rng.long ? `/ ${rng.long}` : null, C.distanceUnits[rng.units]].filterJoin(" ") : "";
 
     // Recharge Label
     let chg = this.system.recharge ?? {};

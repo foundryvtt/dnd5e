@@ -5,7 +5,7 @@
         <input type="number" step="any" name="system.activation.cost"
             value="{{system.activation.cost}}" placeholder="&mdash;">
         <select name="system.activation.type" title="{{localize 'DND5E.ItemActivationType'}}">
-            {{selectOptions config.abilityActivationTypes selected=system.activation.type blank=""}}
+            {{selectOptions config.abilityActivationTypes selected=system.activation.type blank=(localize "DND5E.None")}}
         </select>
     </div>
 </div>
@@ -41,14 +41,7 @@
         </select>
         <select name="system.target.type" title="{{localize 'DND5E.TargetType'}}">
             {{#select system.target.type}}
-                <option value=""></option>
-                <option value="none">{{localize "DND5E.None"}}</option>
-                <optgroup label="{{localize 'DND5E.TargetTypeIndividual'}}">
-                    {{selectOptions config.individualTargetTypes}}
-                </optgroup>
-                <optgroup label="{{localize 'DND5E.TargetTypeArea'}}">
-                    {{selectOptions config.areaTargetTypes labelAttr="label"}}
-                </optgroup>
+                {{selectOptions config.targetTypes blank=(localize "DND5E.None")}}
             {{/select}}
         </select>
     </div>
@@ -77,7 +70,7 @@
             value="{{system.range.long}}" placeholder="{{localize 'DND5E.Long'}}"
             title="{{localize 'DND5E.RangeLong'}}">
         <select name="system.range.units" title="{{localize 'DND5E.RangeUnits'}}">
-            {{selectOptions config.distanceUnits selected=system.range.units blank=""}}
+            {{selectOptions config.distanceUnits selected=system.range.units blank=(localize "DND5E.None")}}
         </select>
     </div>
 </div>

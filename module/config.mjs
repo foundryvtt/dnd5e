@@ -291,7 +291,6 @@ preLocalize("timePeriods");
  * @enum {string}
  */
 DND5E.abilityActivationTypes = {
-  none: "DND5E.None",
   action: "DND5E.Action",
   bonus: "DND5E.BonusAction",
   reaction: "DND5E.Reaction",
@@ -774,7 +773,6 @@ preLocalize("rangeTypes");
  * @enum {string}
  */
 DND5E.distanceUnits = {
-  none: "DND5E.None",
   ...DND5E.movementUnits,
   ...DND5E.rangeTypes
 };
@@ -877,7 +875,6 @@ patchConfig("areaTargetTypes", "template", { since: 2.0, until: 2.2 });
  * @enum {string}
  */
 DND5E.targetTypes = {
-  none: "DND5E.None",
   ...DND5E.individualTargetTypes,
   ...Object.fromEntries(Object.entries(DND5E.areaTargetTypes).map(([k, v]) => [k, v.label]))
 };
