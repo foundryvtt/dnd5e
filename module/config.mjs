@@ -1420,17 +1420,20 @@ DND5E.CR_EXP_LEVELS = [
 ];
 
 /**
+ * @typedef {Object} CharacterFlagConfig
+ * @property {string} name
+ * @property {string} hint
+ * @property {string} section
+ * @property {typeof Boolean|String|Number} type
+ * @property {string} placeholder
+ * @property {string[]} [abilities]
+ * @property {Object<string, string>} [choices]
+ * @property {string[]} [skills]
+ */
+
+/**
  * Special character flags.
- * @enum {{
- *   name: string,
- *   hint: string,
- *   [abilities]: string[],
- *   [choices]: object<string, string>,
- *   [skills]: string[],
- *   section: string,
- *   type: any,
- *   placeholder: any
- * }}
+ * @enum {CharacterFlagConfig}
  */
 DND5E.characterFlags = {
   diamondSoul: {
