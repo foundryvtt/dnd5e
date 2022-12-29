@@ -72,7 +72,7 @@
             {{!-- Spell Components --}}
             <div class="spell-components form-group stacked">
                 <label>{{ localize "DND5E.SpellComponents" }}</label>
-                {{#each config.spellComponents as |component key|}}
+                {{#each spellComponents as |component key|}}
                 <label class="checkbox">
                     <input type="checkbox" name="system.components.{{key}}" {{checked (lookup ../system.components key)}}>
                     {{component.label}}

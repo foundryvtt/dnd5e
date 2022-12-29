@@ -44,7 +44,7 @@
         {{!-- Details Tab --}}
         <div class="tab details" data-group="primary" data-tab="details">
             <h3 class="form-header">{{localize "DND5E.ItemFeatureDetails"}}</h3>
-            
+
             {{!-- Feature Type --}}
             <div class="form-group">
                 <label>{{localize "DND5E.ItemFeatureType"}}</label>
@@ -53,14 +53,14 @@
                 </select>
             </div>
 
-            {{#if config.featureSubtypes}}
+            {{#if featureSubtypes}}
             <div class="form-group">
                 <label>
                     {{localize "DND5E.ItemFeatureSubtype"
                         category=(lookup (lookup config.featureTypes system.type.value) "label")}}
                 </label>
                 <select name="system.type.subtype">
-                    {{selectOptions config.featureSubtypes selected=system.type.subtype blank=""}}
+                    {{selectOptions featureSubtypes selected=system.type.subtype blank=""}}
                 </select>
             </div>
             {{/if}}

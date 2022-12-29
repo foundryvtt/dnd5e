@@ -61,6 +61,10 @@ export default class ItemSheet5e extends ItemSheet {
     const source = item.toObject();
     const isMountable = this._isItemMountable(item);
 
+    // Game system configuration
+    context.config = CONFIG.DND5E;
+
+    // Item rendering data
     foundry.utils.mergeObject(context, {
       source: source.system,
       system: item.system,
@@ -69,7 +73,7 @@ export default class ItemSheet5e extends ItemSheet {
       advancementEditable: (this.advancementConfigurationMode || !item.isEmbedded) && context.editable,
 
       // Item Type, Status, and Details
-      itemType: this._getItemType(),
+      itemType: game.i18n.localize(`ITEM.Type${this.item.type.titleCase()}`),
       itemStatus: this._getItemStatus(),
       itemProperties: this._getItemProperties(),
       baseItems: await this._getItemBaseTypes(),
@@ -87,6 +91,7 @@ export default class ItemSheet5e extends ItemSheet {
       isHealing: item.system.actionType === "heal",
       isFlatDC: item.system.save?.scaling === "flat",
       isLine: ["line", "wall"].includes(item.system.target?.type),
+      abilityConsumptionTargets: this._getItemConsumptionTargets(),
 
       // Vehicles
       isCrewed: item.system.activation?.type === "crew",
@@ -104,9 +109,6 @@ export default class ItemSheet5e extends ItemSheet {
       effects: ActiveEffect5e.prepareActiveEffectCategories(item.effects)
     });
 
-    // Potential consumption targets
-    context.abilityConsumptionTargets = this._getItemConsumptionTargets(item);
-
     /** @deprecated */
     Object.defineProperty(context, "data", {
       get() {
@@ -117,12 +119,19 @@ export default class ItemSheet5e extends ItemSheet {
       }
     });
 
-    // Set up config with proper spell components
-    context.config = foundry.utils.mergeObject(CONFIG.DND5E, {
-      featureSubtypes: CONFIG.DND5E.featureTypes[item.system.type?.value]?.subtypes,
-      spellComponents: {...CONFIG.DND5E.spellComponents, ...CONFIG.DND5E.spellTags}
-    }, {inplace: false});
-
+    // Special handling for specific item types
+    switch ( item.type ) {
+      case "feat":
+        const featureType = CONFIG.DND5E.featureTypes[item.system.type?.value];
+        if ( featureType ) {
+          context.itemType = featureType.label;
+          context.featureSubtypes = featureType.subtypes;
+        }
+        break;
+      case "spell":
+        context.spellComponents = {...CONFIG.DND5E.spellComponents, ...CONFIG.DND5E.spellTags};
+        break;
+    }
     return context;
   }
 
@@ -184,9 +193,8 @@ export default class ItemSheet5e extends ItemSheet {
    * @protected
    */
   _getItemType() {
-    const featureType = CONFIG.DND5E.featureTypes[this.item.system.type?.value];
-    if ( featureType ) return featureType.label;
-    return game.i18n.localize(`ITEM.Type${this.item.type.titleCase()}`);
+
+    return ;
   }
 
   /* -------------------------------------------- */
