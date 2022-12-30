@@ -61,7 +61,7 @@ export default class ActionTemplate extends foundry.abstract.DataModel {
 
   /** @inheritdoc */
   static migrateData(source) {
-    this.#migrateAttackBonus(source);
+    ActionTemplate.#migrateAttackBonus(source);
   }
 
   /* -------------------------------------------- */

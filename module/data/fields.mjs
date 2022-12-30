@@ -160,7 +160,7 @@ export class IdentifierField extends foundry.data.fields.StringField {
 /**
  * A subclass of ObjectField that represents a mapping of keys to the provided DataField type.
  *
- * @param {DataField} type                     The class of DataField which should be embedded in this field.
+ * @param {DataField} model                    The class of DataField which should be embedded in this field.
  * @param {MappingFieldOptions} [options={}]   Options which configure the behavior of the field.
  * @property {string[]} [initialKeys]          Keys that will be created if no data is provided.
  */

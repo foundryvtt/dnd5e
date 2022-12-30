@@ -74,10 +74,7 @@ export default class CharacterData extends CreatureTemplate {
           }),
           temp: new foundry.data.fields.NumberField({integer: true, initial: 0, min: 0, label: "DND5E.HitPointsTemp"}),
           tempmax: new foundry.data.fields.NumberField({integer: true, initial: 0, label: "DND5E.HitPointsTempMax"})
-        }, {
-          label: "DND5E.HitPoints", validate: d => d.min <= d.max,
-          validationError: "HP minimum must be less than HP maximum"
-        }),
+        }, {label: "DND5E.HitPoints"}),
         death: new foundry.data.fields.SchemaField({
           success: new foundry.data.fields.NumberField({
             required: true, nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.DeathSaveSuccesses"
@@ -106,10 +103,7 @@ export default class CharacterData extends CreatureTemplate {
           max: new foundry.data.fields.NumberField({
             required: true, nullable: false, integer: true, min: 0, initial: 300, label: "DND5E.ExperiencePointsMax"
           })
-        }, {
-          label: "DND5E.ExperiencePoints", validate: d => d.min <= d.max,
-          validationError: "XP minimum must be less than XP maximum"
-        }),
+        }, {label: "DND5E.ExperiencePoints"}),
         appearance: new foundry.data.fields.StringField({required: true, label: "DND5E.Appearance"}),
         trait: new foundry.data.fields.StringField({required: true, label: "DND5E.PersonalityTraits"}),
         ideal: new foundry.data.fields.StringField({required: true, label: "DND5E.Ideals"}),
@@ -129,6 +123,40 @@ export default class CharacterData extends CreatureTemplate {
         tertiary: makeResourceField({label: "DND5E.ResourceTertiary"})
       }, {label: "DND5E.Resources"})
     });
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  _validateModel(data) {
+    this._validateHP(data);
+    this._validateXP(data);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Ensure HP min is less than HP max.
+   * @param {object} data  The source data to validate.
+   * @throws If the HP data is invalid.
+   * @protected
+   */
+  _validateHP(data) {
+    const hp = data.attributes.hp;
+    if ( hp.min >= hp.max ) throw new Error("HP minimum must be less than HP maximum");
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Ensure XP min is less than XP max.
+   * @param {object} data  The source data to validate.
+   * @throws If the XP data is invalid.
+   * @protected
+   */
+  _validateXP(data) {
+    const xp = data.details.xp;
+    if ( xp.min >= xp.max ) throw new Error("XP minimum must be less than XP maximum");
   }
 }
 

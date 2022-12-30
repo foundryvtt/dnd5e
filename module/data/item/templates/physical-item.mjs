@@ -37,8 +37,8 @@ export default class PhysicalItemTemplate extends foundry.abstract.DataModel {
 
   /** @inheritdoc */
   static migrateData(source) {
-    this.#migratePrice(source);
-    this.#migrateRarity(source);
+    PhysicalItemTemplate.#migratePrice(source);
+    PhysicalItemTemplate.#migrateRarity(source);
   }
 
   /* -------------------------------------------- */

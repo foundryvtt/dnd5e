@@ -92,8 +92,8 @@ export default class ActivatedEffectTemplate extends foundry.abstract.DataModel 
 
   /** @inheritdoc */
   static migrateData(source) {
-    this.#migrateFormulaFields(source);
-    this.#migrateRanges(source);
+    ActivatedEffectTemplate.#migrateFormulaFields(source);
+    ActivatedEffectTemplate.#migrateRanges(source);
   }
 
   /* -------------------------------------------- */

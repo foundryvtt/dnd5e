@@ -1,6 +1,14 @@
 import { FormulaField, MappingField } from "../../fields.mjs";
-import SkillData from "../skill.mjs";
 import CommonTemplate from "./common.mjs";
+
+/**
+ * @typedef {object} SkillData
+ * @property {number} value            Proficiency level creature has in this skill.
+ * @property {string} ability          Default ability used for this skill.
+ * @property {object} bonuses          Bonuses for this skill.
+ * @property {string} bonuses.check    Numeric or dice bonus to skill's check.
+ * @property {string} bonuses.passive  Numeric bonus to skill's passive check.
+ */
 
 /**
  * A template for all actors that are creatures
@@ -36,9 +44,14 @@ export default class CreatureTemplate extends CommonTemplate {
           dc: new FormulaField({required: true, deterministic: true, label: "DND5E.BonusSpellDC"})
         }, {label: "DND5E.BonusSpell"})
       }, {label: "DND5E.Bonuses"}),
-      skills: new MappingField(new foundry.data.fields.EmbeddedDataField(SkillData), {
-        initialKeys: CONFIG.DND5E.skills, initialValue: this._initialSkillValue
-      }),
+      skills: new MappingField(new foundry.data.fields.SchemaField({
+        value: new foundry.data.fields.NumberField({required: true, initial: 0, label: "DND5E.ProficiencyLevel"}),
+        ability: new foundry.data.fields.StringField({required: true, initial: "dex", label: "DND5E.Ability"}),
+        bonuses: new foundry.data.fields.SchemaField({
+          check: new FormulaField({required: true, label: "DND5E.SkillBonusCheck"}),
+          passive: new FormulaField({required: true, label: "DND5E.SkillBonusPassive"})
+        }, {label: "DND5E.SkillBonuses"})
+      }), {initialKeys: CONFIG.DND5E.skills, initialValue: this._initialSkillValue}),
       spells: new MappingField(new foundry.data.fields.SchemaField({
         value: new foundry.data.fields.NumberField({
           nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.SpellProfAvailable"
@@ -80,7 +93,7 @@ export default class CreatureTemplate extends CommonTemplate {
 
   /** @inheritdoc */
   static migrateData(source) {
-    this.#migrateSensesData(source);
+    CreatureTemplate.#migrateSensesData(source);
   }
 
   /* -------------------------------------------- */

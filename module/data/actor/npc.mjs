@@ -71,10 +71,7 @@ export default class NPCData extends CreatureTemplate {
           temp: new foundry.data.fields.NumberField({integer: true, initial: 0, min: 0, label: "DND5E.HitPointsTemp"}),
           tempmax: new foundry.data.fields.NumberField({integer: true, initial: 0, label: "DND5E.HitPointsTempMax"}),
           formula: new FormulaField({required: true, label: "DND5E.HPFormula"})
-        }, {
-          label: "DND5E.HitPoints", validate: d => d.min <= d.max,
-          validationError: "HP minimum must be less than HP maximum"
-        })
+        }, {label: "DND5E.HitPoints"})
       }, {label: "DND5E.Attributes"}),
       details: new foundry.data.fields.SchemaField({
         ...DetailsFields.common,
@@ -128,8 +125,28 @@ export default class NPCData extends CreatureTemplate {
   /* -------------------------------------------- */
 
   /** @inheritdoc */
+  _validateModel(data) {
+    this._validateHP(data);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Ensure HP min is less than HP max.
+   * @param {object} data  The source data to validate.
+   * @throws If the HP data is invalid.
+   * @protected
+   */
+  _validateHP(data) {
+    const hp = data.attributes.hp;
+    if ( hp.min >= hp.max ) throw new Error("HP minimum must be less than HP maximum");
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
   static migrateData(source) {
-    this.#migrateTypeData(source);
+    NPCData.#migrateTypeData(source);
     return super.migrateData(source);
   }
 

@@ -76,10 +76,7 @@ export default class VehicleData extends CommonTemplate {
           mt: new foundry.data.fields.NumberField({
             required: true, integer: true, min: 0, label: "DND5E.VehicleMishapThreshold"
           })
-        }, {
-          label: "DND5E.HitPoints", validate: d => d.min <= d.max,
-          validationError: "HP minimum must be less than HP maximum"
-        }),
+        }, {label: "DND5E.HitPoints"}),
         actions: new foundry.data.fields.SchemaField({
           stations: new foundry.data.fields.BooleanField({required: true, label: "DND5E.VehicleActionStations"}),
           value: new foundry.data.fields.NumberField({
@@ -120,6 +117,26 @@ export default class VehicleData extends CommonTemplate {
         passengers: new foundry.data.fields.ArrayField(makePassengerData(), {label: "DND5E.VehiclePassengers"})
       }, {label: "DND5E.VehicleCrewPassengers"})
     });
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  _validateModel(data) {
+    this._validateHP(data);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Ensure HP min is less than HP max.
+   * @param {object} data  The source data to validate.
+   * @throws If the HP data is invalid.
+   * @protected
+   */
+  _validateHP(data) {
+    const hp = data.attributes.hp;
+    if ( hp.min >= hp.max ) throw new Error("HP minimum must be less than HP maximum");
   }
 }
 

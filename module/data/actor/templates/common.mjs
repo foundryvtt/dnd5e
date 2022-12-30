@@ -1,7 +1,15 @@
 import SystemDataModel from "../../abstract.mjs";
-import { MappingField } from "../../fields.mjs";
+import { FormulaField, MappingField } from "../../fields.mjs";
 import CurrencyTemplate from "../../shared/currency.mjs";
-import AbilityData from "../ability.mjs";
+
+/**
+ * @typedef {object} AbilityData
+ * @property {number} value          Ability score.
+ * @property {number} proficient     Proficiency value for saves.
+ * @property {object} bonuses        Bonuses that modify ability checks and saves.
+ * @property {string} bonuses.check  Numeric or dice bonus to ability checks.
+ * @property {string} bonuses.save   Numeric or dice bonus to ability saving throws.
+ */
 
 /**
  * A template for all actors that share the common template.
@@ -14,9 +22,16 @@ export default class CommonTemplate extends SystemDataModel.mixin(CurrencyTempla
   /** @inheritdoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
-      abilities: new MappingField(new foundry.data.fields.EmbeddedDataField(AbilityData), {
-        initialKeys: CONFIG.DND5E.abilities
-      }, {label: "DND5E.Abilities"})
+      abilities: new MappingField(new foundry.data.fields.SchemaField({
+        value: new foundry.data.fields.NumberField({
+          required: true, nullable: false, integer: true, min: 0, initial: 10, label: "DND5E.AbilityScore"
+        }),
+        proficient: new foundry.data.fields.NumberField({required: true, initial: 0, label: "DND5E.ProficiencyLevel"}),
+        bonuses: new foundry.data.fields.SchemaField({
+          check: new FormulaField({required: true, label: "DND5E.AbilityCheckBonus"}),
+          save: new FormulaField({required: true, label: "DND5E.SaveBonus"})
+        }, {label: "DND5E.AbilityBonuses"})
+      }), {initialKeys: CONFIG.DND5E.abilities, label: "DND5E.Abilities"})
     });
   }
 
@@ -24,8 +39,8 @@ export default class CommonTemplate extends SystemDataModel.mixin(CurrencyTempla
 
   /** @inheritdoc */
   static migrateData(source) {
-    this.#migrateACData(source);
-    this.#migrateMovementData(source);
+    CommonTemplate.#migrateACData(source);
+    CommonTemplate.#migrateMovementData(source);
   }
 
   /* -------------------------------------------- */

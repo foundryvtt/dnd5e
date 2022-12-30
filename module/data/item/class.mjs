@@ -61,7 +61,7 @@ export default class ClassData extends SystemDataModel.mixin(ItemDescriptionTemp
 
   /** @inheritdoc */
   static migrateData(source) {
-    this.#migrateSpellcastingData(source);
+    ClassData.#migrateSpellcastingData(source);
     return super.migrateData(source);
   }
 
