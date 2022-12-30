@@ -1658,6 +1658,7 @@ export default class Actor5e extends Actor {
     Hooks.callAll("dnd5e.preRollClassHitPoints", this, item, rollData, messageData);
 
     const roll = new Roll(rollData.formula, rollData.data);
+    await roll.evaluate({async: true});
 
     /**
      * A hook event that fires after hit points haven been rolled for a character's class.
@@ -1709,6 +1710,7 @@ export default class Actor5e extends Actor {
     Hooks.callAll("dnd5e.preRollNPCHitPoints", this, rollData, messageData);
 
     const roll = new Roll(rollData.formula, rollData.data);
+    await roll.evaluate({async: true});
 
     /**
      * A hook event that fires after hit points are rolled for an NPC.
