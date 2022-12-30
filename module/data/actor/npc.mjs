@@ -1,5 +1,6 @@
 import { FormulaField } from "../fields.mjs";
 import AttributesFields from "./templates/attributes.mjs";
+import CommonTemplate from "./templates/common.mjs";
 import CreatureTemplate from "./templates/creature.mjs";
 import DetailsFields from "./templates/details.mjs";
 import TraitsFields from "./templates/traits.mjs";
