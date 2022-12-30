@@ -30,7 +30,7 @@
 <div class="form-group">
     <label>{{ localize "DND5E.ItemAttackBonus" }}</label>
     <div class="form-fields">
-        <input type="text" name="system.attackBonus" value="{{system.attackBonus}}"/>
+        <input type="text" name="system.attackBonus" value="{{system.attackBonus}}" data-formula-editor/>
     </div>
 </div>
 {{/if}}
@@ -63,7 +63,7 @@
 <ol class="damage-parts form-group">
     {{#each system.damage.parts as |part i| }}
     <li class="damage-part flexrow" data-damage-part="{{i}}">
-        <input type="text" name="system.damage.parts.{{i}}.0" value="{{lookup this "0"}}"/>
+        <input type="text" name="system.damage.parts.{{i}}.0" value="{{lookup this "0"}}" data-formula-editor/>
         <select name="system.damage.parts.{{i}}.1">
             {{#select (lookup this "1") }}
             <option value="">{{ localize "DND5E.None" }}</option>
@@ -85,7 +85,8 @@
 <div class="form-group">
     <label>{{ localize "DND5E.VersatileDamage" }}</label>
     <div class="form-fields">
-        <input type="text" name="system.damage.versatile" value="{{system.damage.versatile}}" placeholder="{{ localize 'DND5E.Formula' }}"/>
+        <input type="text" name="system.damage.versatile" value="{{system.damage.versatile}}"
+               placeholder="{{ localize 'DND5E.Formula' }}" data-formula-editor/>
     </div>
 </div>
 {{/if}}
@@ -94,7 +95,8 @@
 <div class="form-group">
     <label>{{ localize "DND5E.OtherFormula" }}</label>
     <div class="form-fields">
-        <input type="text" name="system.formula" value="{{system.formula}}" placeholder="{{ localize 'DND5E.Formula' }}"/>
+        <input type="text" name="system.formula" value="{{system.formula}}" placeholder="{{ localize 'DND5E.Formula' }}"
+        data-formula-editor/>
     </div>
 </div>
 
