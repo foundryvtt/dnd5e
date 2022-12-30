@@ -160,7 +160,7 @@ export class IdentifierField extends foundry.data.fields.StringField {
 /**
  * A subclass of ObjectField that represents a mapping of keys to the provided DataField type.
  *
- * @param {DataField} type                     The class of DataField which should be embedded in this field.
+ * @param {DataField} model                    The class of DataField which should be embedded in this field.
  * @param {MappingFieldOptions} [options={}]   Options which configure the behavior of the field.
  * @property {string[]} [initialKeys]          Keys that will be created if no data is provided.
  */
@@ -183,7 +183,8 @@ export class MappingField extends foundry.data.fields.ObjectField {
   /** @inheritdoc */
   static get _defaults() {
     return foundry.utils.mergeObject(super._defaults, {
-      initialKeys: undefined
+      initialKeys: null,
+      initialValue: null
     });
   }
 
@@ -203,7 +204,10 @@ export class MappingField extends foundry.data.fields.ObjectField {
     const initial = super.getInitialValue(data);
     if ( !keys || !foundry.utils.isEmpty(initial) ) return initial;
     if ( !(keys instanceof Array) ) keys = Object.keys(keys);
-    for ( const key of keys ) initial[key] = this.model.getInitialValue();
+    for ( const key of keys ) {
+      const modelInitial = this.model.getInitialValue();
+      initial[key] = this.initialValue?.(key, modelInitial) ?? modelInitial;
+    }
     return initial;
   }
 
@@ -238,7 +242,9 @@ export class MappingField extends foundry.data.fields.ObjectField {
   /** @override */
   initialize(value, model, options={}) {
     if ( !value ) return value;
-    Object.values(value).forEach(v => this.model.initialize(v, model, options));
-    return value;
+    return Object.entries(value).reduce((obj, [k, v]) => {
+      obj[k] = this.model.initialize(v, model, options);
+      return obj;
+    }, {});
   }
 }

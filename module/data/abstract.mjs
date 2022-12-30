@@ -18,11 +18,19 @@
 export default class SystemDataModel extends foundry.abstract.DataModel {
 
   /**
+   * System type that this system data model represents (e.g. "character", "npc", "vehicle").
+   * @type {string}
+   */
+  static _systemType;
+
+  /* -------------------------------------------- */
+
+  /**
    * Base templates used for construction.
    * @type {*[]}
    * @private
    */
-  static _schemaTemplates;
+  static _schemaTemplates = [];
 
   /* -------------------------------------------- */
 
@@ -74,13 +82,13 @@ export default class SystemDataModel extends foundry.abstract.DataModel {
 
   /**
    * Mix multiple templates with the base type.
-   * @param {...*} templates     Template classes to mix.
-   * @returns {SystemDataModel}  Final prepared type.
+   * @param {...*} templates            Template classes to mix.
+   * @returns {typeof SystemDataModel}  Final prepared type.
    */
   static mixin(...templates) {
     const Base = class extends this {};
     Object.defineProperty(Base, "_schemaTemplates", {
-      value: Object.seal(templates),
+      value: Object.seal([...this._schemaTemplates, ...templates]),
       writable: false,
       configurable: false
     });
@@ -100,5 +108,14 @@ export default class SystemDataModel extends foundry.abstract.DataModel {
     }
 
     return Base;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  toObject(source=true) {
+    let obj = super.toObject(source);
+    if ( !source ) obj = foundry.utils.mergeObject(this, obj, {inplace: false});
+    return obj;
   }
 }

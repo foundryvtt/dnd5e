@@ -194,6 +194,7 @@ export const migrateArmorClass = async function(pack) {
 
       // Perform the normal migration.
       _migrateActorAC(src, update);
+      // TODO: See if AC migration within DataModel is enough to handle this
       updates.push(update);
 
       // CASE 1: Armor is equipped
@@ -230,12 +231,6 @@ export const migrateActorData = function(actor, migrationData) {
   const updateData = {};
   _migrateTokenImage(actor, updateData);
 
-  // Actor Data Updates
-  _migrateActorMovement(actor, updateData);
-  _migrateActorSenses(actor, updateData);
-  _migrateActorType(actor, updateData);
-  _migrateActorAC(actor, updateData);
-
   // Migrate embedded effects
   if ( actor.effects ) {
     const effects = migrateEffects(actor, migrationData);
@@ -268,33 +263,6 @@ export const migrateActorData = function(actor, migrationData) {
 
   return updateData;
 };
-
-/* -------------------------------------------- */
-
-/**
- * Scrub an Actor's system data, removing all keys which are not explicitly defined in the system template
- * @param {object} actorData    The data object for an Actor
- * @returns {object}            The scrubbed Actor data
- */
-function cleanActorData(actorData) {
-
-  // Scrub system data
-  const model = game.system.model.Actor[actorData.type];
-  actorData.system = foundry.utils.filterObject(actorData.system, model);
-
-  // Scrub system flags
-  const allowedFlags = CONFIG.DND5E.allowedActorFlags.reduce((obj, f) => {
-    obj[f] = null;
-    return obj;
-  }, {});
-  if ( actorData.flags.dnd5e ) {
-    actorData.flags.dnd5e = foundry.utils.filterObject(actorData.flags.dnd5e, allowedFlags);
-  }
-
-  // Return the scrubbed data
-  return actorData;
-}
-
 
 /* -------------------------------------------- */
 
@@ -432,139 +400,6 @@ export const getMigrationData = async function() {
 
 /* -------------------------------------------- */
 /*  Low level migration utilities
-/* -------------------------------------------- */
-
-/**
- * Migrate the actor speed string to movement object
- * @param {object} actorData   Actor data being migrated.
- * @param {object} updateData  Existing updates being applied to actor. *Will be mutated.*
- * @returns {object}           Modified version of update data.
- * @private
- */
-function _migrateActorMovement(actorData, updateData) {
-  const attrs = actorData.system?.attributes || {};
-
-  // Work is needed if old data is present
-  const old = actorData.type === "vehicle" ? attrs.speed : attrs.speed?.value;
-  const hasOld = old !== undefined;
-  if ( hasOld ) {
-
-    // If new data is not present, migrate the old data
-    const hasNew = attrs.movement?.walk !== undefined;
-    if ( !hasNew && (typeof old === "string") ) {
-      const s = (old || "").split(" ");
-      if ( s.length > 0 ) updateData["system.attributes.movement.walk"] = Number.isNumeric(s[0]) ? parseInt(s[0]) : null;
-    }
-
-    // Remove the old attribute
-    updateData["system.attributes.-=speed"] = null;
-  }
-  return updateData;
-}
-
-/* -------------------------------------------- */
-
-/**
- * Migrate the actor traits.senses string to attributes.senses object
- * @param {object} actor       Actor data being migrated.
- * @param {object} updateData  Existing updates being applied to actor. *Will be mutated.*
- * @returns {object}           Modified version of update data.
- * @private
- */
-function _migrateActorSenses(actor, updateData) {
-  const oldSenses = actor.system?.traits?.senses;
-  if ( oldSenses === undefined ) return;
-  if ( typeof oldSenses !== "string" ) return;
-
-  // Try to match old senses with the format like "Darkvision 60 ft, Blindsight 30 ft"
-  const pattern = /([A-z]+)\s?([0-9]+)\s?([A-z]+)?/;
-  let wasMatched = false;
-
-  // Match each comma-separated term
-  for ( let s of oldSenses.split(",") ) {
-    s = s.trim();
-    const match = s.match(pattern);
-    if ( !match ) continue;
-    const type = match[1].toLowerCase();
-    if ( type in CONFIG.DND5E.senses ) {
-      updateData[`system.attributes.senses.${type}`] = Number(match[2]).toNearest(0.5);
-      wasMatched = true;
-    }
-  }
-
-  // If nothing was matched, but there was an old string - put the whole thing in "special"
-  if ( !wasMatched && oldSenses ) {
-    updateData["system.attributes.senses.special"] = oldSenses;
-  }
-
-  // Remove the old traits.senses string once the migration is complete
-  updateData["system.traits.-=senses"] = null;
-  return updateData;
-}
-
-/* -------------------------------------------- */
-
-/**
- * Migrate the actor details.type string to object
- * @param {object} actor       Actor data being migrated.
- * @param {object} updateData  Existing updates being applied to actor. *Will be mutated.*
- * @returns {object}           Modified version of update data.
- * @private
- */
-function _migrateActorType(actor, updateData) {
-  const original = actor.system?.details?.type;
-  if ( typeof original !== "string" ) return;
-
-  // New default data structure
-  let actorTypeData = {
-    value: "",
-    subtype: "",
-    swarm: "",
-    custom: ""
-  };
-
-  // Match the existing string
-  const pattern = /^(?:swarm of (?<size>[\w-]+) )?(?<type>[^(]+?)(?:\((?<subtype>[^)]+)\))?$/i;
-  const match = original.trim().match(pattern);
-  if ( match ) {
-
-    // Match a known creature type
-    const typeLc = match.groups.type.trim().toLowerCase();
-    const typeMatch = Object.entries(CONFIG.DND5E.creatureTypes).find(([k, v]) => {
-      return (typeLc === k)
-        || (typeLc === game.i18n.localize(v).toLowerCase())
-        || (typeLc === game.i18n.localize(`${v}Pl`).toLowerCase());
-    });
-    if (typeMatch) actorTypeData.value = typeMatch[0];
-    else {
-      actorTypeData.value = "custom";
-      actorTypeData.custom = match.groups.type.trim().titleCase();
-    }
-    actorTypeData.subtype = match.groups.subtype?.trim().titleCase() || "";
-
-    // Match a swarm
-    const isNamedSwarm = actor.name?.startsWith(game.i18n.localize("DND5E.CreatureSwarm"));
-    if ( match.groups.size || isNamedSwarm ) {
-      const sizeLc = match.groups.size ? match.groups.size.trim().toLowerCase() : "tiny";
-      const sizeMatch = Object.entries(CONFIG.DND5E.actorSizes).find(([k, v]) => {
-        return (sizeLc === k) || (sizeLc === game.i18n.localize(v).toLowerCase());
-      });
-      actorTypeData.swarm = sizeMatch ? sizeMatch[0] : "tiny";
-    }
-    else actorTypeData.swarm = "";
-  }
-
-  // No match found
-  else {
-    actorTypeData.value = "custom";
-    actorTypeData.custom = original;
-  }
-
-  // Update the actor data
-  updateData["system.details.type"] = actorTypeData;
-  return updateData;
-}
-
 /* -------------------------------------------- */
 
 /**

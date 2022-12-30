@@ -37,8 +37,8 @@ export default class PhysicalItemTemplate extends foundry.abstract.DataModel {
 
   /** @inheritdoc */
   static migrateData(source) {
-    this.migratePrice(source);
-    this.migrateRarity(source);
+    PhysicalItemTemplate.#migratePrice(source);
+    PhysicalItemTemplate.#migrateRarity(source);
   }
 
   /* -------------------------------------------- */
@@ -47,7 +47,7 @@ export default class PhysicalItemTemplate extends foundry.abstract.DataModel {
    * Migrate the item's price from a single field to an object with currency.
    * @param {object} source  The candidate source data from which the model will be constructed.
    */
-  static migratePrice(source) {
+  static #migratePrice(source) {
     if ( foundry.utils.getType(source.price) === "Object" ) return;
     source.price = {
       value: Number.isNumeric(source.price) ? Number(source.price) : 0,
@@ -61,7 +61,7 @@ export default class PhysicalItemTemplate extends foundry.abstract.DataModel {
    * Migrate the item's rarity from freeform string to enum value.
    * @param {object} source  The candidate source data from which the model will be constructed.
    */
-  static migrateRarity(source) {
+  static #migrateRarity(source) {
     if ( !source.rarity || CONFIG.DND5E.itemRarity[source.rarity] ) return;
     const rarity = Object.keys(CONFIG.DND5E.itemRarity).find(key =>
       CONFIG.DND5E.itemRarity[key].toLowerCase() === source.rarity.toLowerCase()

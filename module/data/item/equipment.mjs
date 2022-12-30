@@ -59,7 +59,7 @@ export default class EquipmentData extends SystemDataModel.mixin(
 
   /** @inheritdoc */
   static migrateData(source) {
-    this.migrateArmorTypeData(source);
+    EquipmentData.#migrateArmorTypeData(source);
     return super.migrateData(source);
   }
 
@@ -69,7 +69,7 @@ export default class EquipmentData extends SystemDataModel.mixin(
    * Migrate "bonus" armor subtypes to "trinket".
    * @param {object} source  The candidate source data from which the model will be constructed.
    */
-  static migrateArmorTypeData(source) {
+  static #migrateArmorTypeData(source) {
     if ( source.armor?.type !== "bonus" ) return;
     source.armor ??= {};
     source.armor.type = "trinket";

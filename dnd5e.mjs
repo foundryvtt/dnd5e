@@ -117,7 +117,7 @@ Hooks.once("init", function() {
   CONFIG.Dice.rolls.push(dice.DamageRoll);
 
   // Hook up system data types
-  CONFIG.Actor.systemDataModels.group = dataModels.actor.GroupActor;
+  CONFIG.Actor.systemDataModels = dataModels.actor.config;
   CONFIG.Item.systemDataModels = dataModels.item.config;
   CONFIG.JournalEntryPage.systemDataModels = dataModels.journal.config;
 

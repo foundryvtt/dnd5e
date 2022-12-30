@@ -71,7 +71,7 @@ export default class SpellData extends SystemDataModel.mixin(
 
   /** @inheritdoc */
   static migrateData(source) {
-    this.migrateComponentData(source);
+    SpellData.#migrateComponentData(source);
     return super.migrateData(source);
   }
 
@@ -81,7 +81,7 @@ export default class SpellData extends SystemDataModel.mixin(
    * Migrate the spell's component object to remove any old, non-boolean values.
    * @param {object} source  The candidate source data from which the model will be constructed.
    */
-  static migrateComponentData(source) {
+  static #migrateComponentData(source) {
     if ( !source.components ) return;
     for ( const [key, value] of Object.entries(source.components) ) {
       if ( typeof value !== "boolean" ) delete source.components[key];

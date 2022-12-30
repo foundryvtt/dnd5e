@@ -92,8 +92,8 @@ export default class ActivatedEffectTemplate extends foundry.abstract.DataModel 
 
   /** @inheritdoc */
   static migrateData(source) {
-    this.migrateFormulaFields(source);
-    this.migrateRanges(source);
+    ActivatedEffectTemplate.#migrateFormulaFields(source);
+    ActivatedEffectTemplate.#migrateRanges(source);
   }
 
   /* -------------------------------------------- */
@@ -102,7 +102,7 @@ export default class ActivatedEffectTemplate extends foundry.abstract.DataModel 
    * Ensure a 0 in max uses & durations are converted to an empty string rather than "0".
    * @param {object} source  The candidate source data from which the model will be constructed.
    */
-  static migrateFormulaFields(source) {
+  static #migrateFormulaFields(source) {
     if ( (source.uses?.max === 0) || (source.uses?.max === "0") ) source.uses.max = "";
     if ( (source.duration?.value === 0) || (source.duration?.value === "0") ) source.duration.value = "";
   }
@@ -114,7 +114,7 @@ export default class ActivatedEffectTemplate extends foundry.abstract.DataModel 
    * rather than splitting it between "range.value" & "range.long".
    * @param {object} source  The candidate source data from which the model will be constructed.
    */
-  static migrateRanges(source) {
+  static #migrateRanges(source) {
     if ( typeof source.range?.value !== "string" ) return;
     const [value, long] = source.range.value.split("/");
     if ( Number.isNumeric(value) ) source.range.value = Number(value);

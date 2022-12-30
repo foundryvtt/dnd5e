@@ -43,7 +43,7 @@ export default class WeaponData extends SystemDataModel.mixin(
 
   /** @inheritdoc */
   static migrateData(source) {
-    this.migratePropertiesData(source);
+    WeaponData.#migratePropertiesData(source);
     return super.migrateData(source);
   }
 
@@ -53,7 +53,7 @@ export default class WeaponData extends SystemDataModel.mixin(
    * Migrate the weapons's properties object to remove any old, non-boolean values.
    * @param {object} source  The candidate source data from which the model will be constructed.
    */
-  static migratePropertiesData(source) {
+  static #migratePropertiesData(source) {
     if ( !source.properties ) return;
     for ( const [key, value] of Object.entries(source.properties) ) {
       if ( typeof value !== "boolean" ) delete source.properties[key];
