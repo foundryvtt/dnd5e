@@ -1,4 +1,5 @@
 import ActorMovementConfig from "./movement-config.mjs";
+import ActorSheet5e from "./base-sheet.mjs";
 
 /**
  * A character sheet for group-type Actors.
@@ -204,82 +205,11 @@ export default class GroupActorSheet extends ActorSheet {
   activateListeners(html) {
     super.activateListeners(html);
     html.find(".group-member .name").click(this._onClickMemberName.bind(this));
-    html.find(".action-button").click(this._onClickActionButton.bind(this));
-    html.find(".item-control").click(this._onClickItemControl.bind(this));
-    html.find(".item .rollable h4").click(event => this._onClickItemName(event));
-
-    // Item context menu
-    const itemContextOptions = this._getItemContextMenuOptions();
-
-    /**
-     * A hook event that fires when the context menu for items.
-     * @function dnd5e.getItemContext
-     * @memberof hookEvents
-     * @param {jQuery} html                      The HTML element to which the context options are attached.
-     * @param {ContextMenuEntry[]} entryOptions  The context menu entries.
-     */
-    Hooks.call("dnd5e.getItemContext", html, itemContextOptions);
-    if ( itemContextOptions ) new ContextMenu(
-      html,
-      ["weapon", "equipment", "consumable", "tool", "backpack", "loot"].map(type => `.${type}-item`).join(", "), // Selects all items under the standard 'physical item' type
-      itemContextOptions
-    );
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Get the set of ContextMenu options which should be applied for item entries.
-   * @returns {ContextMenuEntry[]}  Context menu entries.
-   * @protected
-   */
-  _getItemContextMenuOptions() {
-    return [
-
-      // Edit
-      {
-        name: game.i18n.format("DND5E.ContextMenuActionEdit", { type: game.i18n.localize("DND5E.Item") }),
-        icon: "<i class='fas fa-edit fa-fw'></i>",
-        condition: li => this.isEditable,
-        callback: li => this._onItemContextAction(li[0], "edit")
-      },
-
-      // Duplicate
-      {
-        name: game.i18n.format("DND5E.ContextMenuActionDuplicate", { type: game.i18n.localize("DND5E.Item") }),
-        icon: "<i class='fas fa-copy fa-fw'></i>",
-        condition: li => this.isEditable,
-        callback: li => this._onItemContextAction(li[0], "duplicate")
-      },
-
-      // Delete
-      {
-        name: game.i18n.format("DND5E.ContextMenuActionDelete", { type: game.i18n.localize("DND5E.Item") }),
-        icon: "<i class='fas fa-trash fa-fw' style='color: rgb(255, 65, 65);'></i>",
-        condition: li => this.isEditable,
-        callback: li => this._onItemContextAction(li[0], "delete")
-      }
-
-    ];
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Handle one of the item actions from the context menu.
-   * @param {Element} target  Context menu entry that triggered this action.
-   * @param {string} action   Action being triggered.
-   * @returns {Promise}
-   */
-  _onItemContextAction(target, action) {
-    const id = target.closest(".item")?.dataset.itemId;
-    const item = this.actor.items.get(id);
-    if ( !item ) return;
-    switch (action) {
-
-      case "edit": return item.sheet.render(true);
-      case "delete": return item.deleteDialog();
-      case "duplicate": return this.actor.createEmbeddedDocuments("Item", [foundry.utils.deepClone(item)]);
+    if ( this.isEditable ) {
+      html.find(".action-button").click(this._onClickActionButton.bind(this));
+      html.find(".item-control").click(this._onClickItemControl.bind(this));
+      html.find(".item .rollable h4").click(event => this._onClickItemName(event));
+      new ContextMenu(html, ".item-list .item", [], {onOpen: this._onItemContext.bind(this)});
     }
   }
 
@@ -354,6 +284,22 @@ export default class GroupActorSheet extends ActorSheet {
     const name = game.i18n.format("DND5E.ItemNew", {type: game.i18n.localize(`ITEM.Type${type.capitalize()}`)});
     const itemData = {name, type, system};
     return this.actor.createEmbeddedDocuments("Item", [itemData]);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle activation of a context menu for an embedded Item document.
+   * Dynamically populate the array of context menu options.
+   * Reuse the item context options provided by the base ActorSheet5e class.
+   * @param {HTMLElement} element       The HTML element for which the context menu is activated
+   * @protected
+   */
+  _onItemContext(element) {
+    const item = this.actor.items.get(element.dataset.itemId);
+    if ( !item ) return;
+    ui.context.menuItems = ActorSheet5e.prototype._getItemContextOptions.call(this, item);
+    Hooks.call("dnd5e.getItemContextOptions", item, ui.context.menuItems);
   }
 
   /* -------------------------------------------- */
