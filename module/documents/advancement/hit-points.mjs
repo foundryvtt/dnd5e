@@ -129,8 +129,8 @@ export default class HitPointsAdvancement extends Advancement {
   apply(level, data) {
     let value = this.constructor.valueForLevel(data, this.hitDieValue, level);
     if ( value === undefined ) return;
-
-    value += this.actor.system.abilities.con?.mod ?? 0;
+    const abilityId = CONFIG.DND5E.hitPointsAbility || "con";
+    value += this.actor.system.abilities[abilityId]?.mod ?? 0;
     value += simplifyBonus(this.actor.system.attributes.hp.bonuses.level, this.actor.getRollData());
     this.actor.updateSource({"system.attributes.hp.value": this.actor.system.attributes.hp.value + value});
     this.updateSource({ value: data });
@@ -149,8 +149,8 @@ export default class HitPointsAdvancement extends Advancement {
   reverse(level) {
     let value = this.valueForLevel(level);
     if ( value === undefined ) return;
-
-    value += this.actor.system.abilities.con?.mod ?? 0;
+    const abilityId = CONFIG.DND5E.hitPointsAbility || "con";
+    value += this.actor.system.abilities[abilityId]?.mod ?? 0;
     value += simplifyBonus(this.actor.system.attributes.hp.bonuses.level, this.actor.getRollData());
     this.actor.updateSource({"system.attributes.hp.value": this.actor.system.attributes.hp.value - value});
     const source = { [level]: this.value[level] };

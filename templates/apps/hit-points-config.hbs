@@ -2,7 +2,7 @@
   {{#if isCharacter}}
 
     <div class="hp-field form-group">
-      <input type="number" name="hp.override" value="{{hp.override}}"
+      <input type="number" name="hp.max" value="{{source.max}}"
         placeholder="{{hp.max}}" title="{{localize 'DND5E.HitPointsOverride'}}">
     </div>
 
@@ -32,6 +32,6 @@
   {{/if}}
 
   <button type="submit">
-    <i class="far fa-save"></i> {{localize "DND5E.TraitSave"}}
+    <i class="far fa-save"></i> {{localize "Save"}}
   </button>
 </form>

@@ -587,18 +587,15 @@ export default class Actor5e extends Actor {
    * @protected
    */
   _prepareHitPoints(bonusData) {
-    if ( this.type !== "character" ) return;
+    if ( this.type !== "character" || (this.system._source.attributes.hp.max !== null) ) return;
     const hp = this.system.attributes.hp;
-    if ( hp.override !== null ) {
-      hp.max = hp.override;
-      return;
-    }
 
     const base = Object.values(this.classes).reduce((total, item) => {
       const advancement = item.advancement.byType.HitPoints?.[0];
       return total + (advancement?.total() ?? 0);
     }, 0);
-    const constitution = (this.system.abilities.con?.mod ?? 0) * this.system.details.level;
+    const abilityId = CONFIG.DND5E.hitPointsAbility || "con";
+    const constitution = (this.system.abilities[abilityId]?.mod ?? 0) * this.system.details.level;
     const levelBonus = simplifyBonus(hp.bonuses.level, bonusData) * this.system.details.level;
     const overallBonus = simplifyBonus(hp.bonuses.overall, bonusData);
 
@@ -633,7 +630,7 @@ export default class Actor5e extends Actor {
     const abilityBonus = simplifyBonus(ability.bonuses?.check, bonusData);
     init.total = init.mod + initBonus + abilityBonus + globalCheckBonus
       + (flags.initiativeAlert ? 5 : 0)
-      + (Number.isNumeric(init.prof.term) ? init.prof.flat : 0)
+      + (Number.isNumeric(init.prof.term) ? init.prof.flat : 0);
   }
 
   /* -------------------------------------------- */
@@ -2203,7 +2200,6 @@ export default class Actor5e extends Actor {
    *
    * @param {Actor5e} target                      The target Actor.
    * @param {TransformationOptions} [options={}]  Options that determine how the transformation is performed.
-   * @param {object} [options]
    * @param {boolean} [options.renderSheet=true]  Render the sheet of the transformed actor after the polymorph
    * @returns {Promise<Array<Token>>|null}        Updated token if the transformation was performed.
    */

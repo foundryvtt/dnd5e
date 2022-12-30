@@ -71,14 +71,14 @@ export default class CharacterData extends CreatureTemplate {
           min: new foundry.data.fields.NumberField({
             nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.HitPointsMin"
           }),
-          override: new foundry.data.fields.NumberField({
+          max: new foundry.data.fields.NumberField({
             nullable: true, integer: true, min: 0, initial: null, label: "DND5E.HitPointsOverride"
           }),
           temp: new foundry.data.fields.NumberField({integer: true, initial: 0, min: 0, label: "DND5E.HitPointsTemp"}),
           tempmax: new foundry.data.fields.NumberField({integer: true, initial: 0, label: "DND5E.HitPointsTempMax"}),
           bonuses: new foundry.data.fields.SchemaField({
-            level: new FormulaField({label: "DND5E.HitPointsBonusLevel"}),
-            overall: new FormulaField({label: "DND5E.HitPointsBonusOverall"})
+            level: new FormulaField({deterministic: true, label: "DND5E.HitPointsBonusLevel"}),
+            overall: new FormulaField({deterministic: true, label: "DND5E.HitPointsBonusOverall"})
           })
         }, {label: "DND5E.HitPoints"}),
         death: new foundry.data.fields.SchemaField({
