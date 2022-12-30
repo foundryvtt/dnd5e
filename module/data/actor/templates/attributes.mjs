@@ -1,3 +1,5 @@
+import { FormulaField } from "../../fields.mjs";
+
 /**
  * Shared contents of the attributes schema between various actor types.
  */
@@ -21,12 +23,8 @@ export default class AttributesFields {
   static get common() {
     return {
       init: new foundry.data.fields.SchemaField({
-        value: new foundry.data.fields.NumberField({
-          nullable: false, integer: true, initial: 0, label: "DND5E.Initiative"
-        }),
-        bonus: new foundry.data.fields.NumberField({
-          nullable: false, integer: true, initial: 0, label: "DND5E.InitiativeBonus"
-        })
+        ability: new foundry.data.fields.StringField({label: "DND5E.AbilityModifier"}),
+        bonus: new FormulaField({label: "DND5E.InitiativeBonus"})
       }, { label: "DND5E.Initiative" }),
       movement: new foundry.data.fields.SchemaField({
         burrow: new foundry.data.fields.NumberField({
@@ -94,5 +92,19 @@ export default class AttributesFields {
         required: true, blank: true, initial: "int", label: "DND5E.SpellAbility"
       })
     };
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Migrate the old init.value and incorporate it into init.bonus.
+   * @param {object} source  The source attributes object.
+   * @internal
+   */
+  static _migrateInitiative(source) {
+    const init = source.init;
+    if ( !init?.value ) return;
+    if ( init.bonus ) init.bonus += init.value < 0 ? ` - ${init.value * -1}` : ` + ${init.value}`;
+    else init.bonus = `${init.value}`;
   }
 }

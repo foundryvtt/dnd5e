@@ -138,6 +138,14 @@ export default class VehicleData extends CommonTemplate {
     const hp = data.attributes.hp;
     if ( hp.min >= hp.max ) throw new Error("HP minimum must be less than HP maximum");
   }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  static migrateData(source) {
+    AttributesFields._migrateInitiative(source.attributes);
+    return super.migrateData(source);
+  }
 }
 
 /* -------------------------------------------- */

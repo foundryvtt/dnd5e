@@ -158,6 +158,14 @@ export default class CharacterData extends CreatureTemplate {
     const xp = data.details.xp;
     if ( xp.min >= xp.max ) throw new Error("XP minimum must be less than XP maximum");
   }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  static migrateData(source) {
+    AttributesFields._migrateInitiative(source.attributes);
+    return super.migrateData(source);
+  }
 }
 
 /* -------------------------------------------- */
