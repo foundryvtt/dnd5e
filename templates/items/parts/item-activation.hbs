@@ -86,7 +86,7 @@
     <label>{{ localize "DND5E.Duration" }}</label>
     <div class="form-fields">
         <input type="text" name="system.duration.value" value="{{source.duration.value}}"
-               placeholder="&mdash;" title="{{localize 'DND5E.DurationValue'}}">
+               placeholder="&mdash;" title="{{localize 'DND5E.DurationValue'}}" data-formula-editor>
         <select name="system.duration.units" title="{{localize 'DND5E.DurationType'}}">
             {{#select system.duration.units}}
                 <option value=""></option>
@@ -106,7 +106,7 @@
             title="{{ localize 'DND5E.UsesAvailable' }}">
         <span class="sep">{{localize "DND5E.of"}}</span>
         <input type="text" name="system.uses.max" value="{{source.uses.max}}"
-            title="{{localize 'DND5E.UsesMax'}}">
+               title="{{localize 'DND5E.UsesMax'}}" data-formula-editor>
         <span class="sep">{{localize "DND5E.per"}}</span>
         <select name="system.uses.per" title="{{localize 'DND5E.UsesPeriod'}}">
             {{selectOptions config.limitedUsePeriods selected=system.uses.per blank=""}}
@@ -118,7 +118,7 @@
 <div class="form-group">
     <label>{{localize "DND5E.RecoveryFormula"}}</label>
     <div class="form-fields">
-        <input type="text" name="system.uses.recovery" value="{{system.uses.recovery}}">
+        <input type="text" name="system.uses.recovery" value="{{system.uses.recovery}}" data-formula-editor>
     </div>
 </div>
 {{/if}}
