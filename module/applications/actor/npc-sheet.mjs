@@ -141,12 +141,13 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
    * @param {Event} event  The original click event.
    * @private
    */
-  _onRollHPFormula(event) {
+  async _onRollHPFormula(event) {
     event.preventDefault();
-    const formula = this.actor.system.attributes.hp.formula;
+    const formula = this.actor.system.attributes.hp?.formula;
     if ( !formula ) return;
-    const hp = new Roll(formula).roll({async: false}).total;
+    const roll = new Roll(formula, this.actor.getRollData());
+    await roll.evaluate();
     AudioHelper.play({src: CONFIG.sounds.dice});
-    this.actor.update({"system.attributes.hp.value": hp, "system.attributes.hp.max": hp});
+    this.actor.update({"system.attributes.hp.value": roll.total, "system.attributes.hp.max": roll.total});
   }
 }

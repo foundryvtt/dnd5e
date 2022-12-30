@@ -14,9 +14,7 @@ export function simplifyBonus(bonus, data={}) {
   if ( Number.isNumeric(bonus) ) return Number(bonus);
   try {
     const roll = new Roll(bonus, data);
-    if ( !roll.isDeterministic ) return 0;
-    roll.evaluate({ async: false });
-    return roll.total;
+    return roll.isDeterministic ? Roll.safeEval(roll.formula) : 0;
   } catch(error) {
     console.error(error);
     return 0;

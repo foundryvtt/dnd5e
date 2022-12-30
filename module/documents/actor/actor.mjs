@@ -212,9 +212,7 @@ export default class Actor5e extends Actor {
     const data = foundry.utils.deepClone(super.getRollData());
     data.prof = new Proficiency(this.system.attributes.prof, 1);
     if ( deterministic ) data.prof = data.prof.flat;
-
     data.attributes.spellmod = data.abilities[data.attributes.spellcasting || "int"]?.mod ?? 0;
-
     data.classes = {};
     for ( const [identifier, cls] of Object.entries(this.classes) ) {
       data.classes[identifier] = foundry.utils.deepClone(cls.system);
