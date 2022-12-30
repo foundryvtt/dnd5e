@@ -61,7 +61,7 @@ export default class ActionTemplate extends foundry.abstract.DataModel {
 
   /** @inheritdoc */
   static migrateData(source) {
-    this.migrateAttackBonus(source);
+    this.#migrateAttackBonus(source);
   }
 
   /* -------------------------------------------- */
@@ -70,7 +70,7 @@ export default class ActionTemplate extends foundry.abstract.DataModel {
    * Ensure a 0 in attack bonus is converted to an empty string rather than "0".
    * @param {object} source  The candidate source data from which the model will be constructed.
    */
-  static migrateAttackBonus(source) {
+  static #migrateAttackBonus(source) {
     if ( (source.attackBonus === 0) || (source.attackBonus === "0") ) source.attackBonus = "";
   }
 }

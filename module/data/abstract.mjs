@@ -82,8 +82,8 @@ export default class SystemDataModel extends foundry.abstract.DataModel {
 
   /**
    * Mix multiple templates with the base type.
-   * @param {...*} templates     Template classes to mix.
-   * @returns {SystemDataModel}  Final prepared type.
+   * @param {...*} templates            Template classes to mix.
+   * @returns {typeof SystemDataModel}  Final prepared type.
    */
   static mixin(...templates) {
     const Base = class extends this {};

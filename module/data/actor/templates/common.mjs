@@ -24,8 +24,8 @@ export default class CommonTemplate extends SystemDataModel.mixin(CurrencyTempla
 
   /** @inheritdoc */
   static migrateData(source) {
-    this.migrateACData(source);
-    this.migrateMovementData(source);
+    this.#migrateACData(source);
+    this.#migrateMovementData(source);
   }
 
   /* -------------------------------------------- */
@@ -34,7 +34,7 @@ export default class CommonTemplate extends SystemDataModel.mixin(CurrencyTempla
    * Migrate the actor ac.value to new ac.flat override field.
    * @param {object} source  The candidate source data from which the model will be constructed.
    */
-  static migrateACData(source) {
+  static #migrateACData(source) {
     if ( !source.attributes?.ac ) return;
     const ac = source.attributes.ac;
 
@@ -57,7 +57,7 @@ export default class CommonTemplate extends SystemDataModel.mixin(CurrencyTempla
    * Migrate the actor speed string to movement object.
    * @param {object} source  The candidate source data from which the model will be constructed.
    */
-  static migrateMovementData(source) {
+  static #migrateMovementData(source) {
     const original = source.attributes?.speed?.value ?? source.attributes?.speed;
     if ( (typeof original !== "string") || (source.attributes.movement?.walk !== undefined) ) return;
     source.attributes.movement ??= {};

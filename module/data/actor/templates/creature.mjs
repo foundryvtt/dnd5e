@@ -80,7 +80,7 @@ export default class CreatureTemplate extends CommonTemplate {
 
   /** @inheritdoc */
   static migrateData(source) {
-    this.migrateSensesData(source);
+    this.#migrateSensesData(source);
   }
 
   /* -------------------------------------------- */
@@ -89,7 +89,7 @@ export default class CreatureTemplate extends CommonTemplate {
    * Migrate the actor traits.senses string to attributes.senses object.
    * @param {object} source  The candidate source data from which the model will be constructed.
    */
-  static migrateSensesData(source) {
+  static #migrateSensesData(source) {
     const original = source.traits?.senses;
     if ( (original === undefined) || (typeof original !== "string") ) return;
     source.attributes ??= {};

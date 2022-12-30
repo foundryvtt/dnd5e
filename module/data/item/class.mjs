@@ -61,7 +61,7 @@ export default class ClassData extends SystemDataModel.mixin(ItemDescriptionTemp
 
   /** @inheritdoc */
   static migrateData(source) {
-    this.migrateSpellcastingData(source);
+    this.#migrateSpellcastingData(source);
     return super.migrateData(source);
   }
 
@@ -71,7 +71,7 @@ export default class ClassData extends SystemDataModel.mixin(ItemDescriptionTemp
    * Migrate the class's spellcasting string to object.
    * @param {object} source  The candidate source data from which the model will be constructed.
    */
-  static migrateSpellcastingData(source) {
+  static #migrateSpellcastingData(source) {
     if ( typeof source.spellcasting !== "string" ) return;
     source.spellcasting = {
       progression: source.spellcasting,

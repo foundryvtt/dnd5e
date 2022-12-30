@@ -129,7 +129,7 @@ export default class NPCData extends CreatureTemplate {
 
   /** @inheritdoc */
   static migrateData(source) {
-    this.migrateTypeData(source);
+    this.#migrateTypeData(source);
     return super.migrateData(source);
   }
 
@@ -139,7 +139,7 @@ export default class NPCData extends CreatureTemplate {
    * Migrate the actor type string to type object.
    * @param {object} source  The candidate source data from which the model will be constructed.
    */
-  static migrateTypeData(source) {
+  static #migrateTypeData(source) {
     const original = source.type;
     if ( typeof original !== "string" ) return;
 

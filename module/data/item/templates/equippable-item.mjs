@@ -20,7 +20,7 @@ export default class EquippableItemTemplate extends foundry.abstract.DataModel {
 
   /** @inheritdoc */
   static migrateData(source) {
-    this.migrateAttunement(source);
+    this.#migrateAttunement(source);
   }
 
   /* -------------------------------------------- */
@@ -29,7 +29,7 @@ export default class EquippableItemTemplate extends foundry.abstract.DataModel {
    * Migrate the item's attuned boolean to attunement string.
    * @param {object} source  The candidate source data from which the model will be constructed.
    */
-  static migrateAttunement(source) {
+  static #migrateAttunement(source) {
     if ( (source.attuned === undefined) || (source.attunement !== undefined) ) return;
     source.attunement = source.attuned ? CONFIG.DND5E.attunementTypes.ATTUNED : CONFIG.DND5E.attunementTypes.NONE;
   }
