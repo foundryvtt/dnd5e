@@ -46,6 +46,12 @@ DND5E.abilityAbbreviations = {
 };
 preLocalize("abilityAbbreviations");
 
+/**
+ * Configure which ability score is used as the default modifier for initiative rolls.
+ * @type {string}
+ */
+DND5E.initiativeAbility = "dex";
+
 /* -------------------------------------------- */
 
 /**

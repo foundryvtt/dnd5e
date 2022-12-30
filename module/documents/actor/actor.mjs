@@ -592,27 +592,33 @@ export default class Actor5e extends Actor {
 
   /**
    * Prepare the initiative data for an actor.
-   * Mutates the value of the `system.attributes.init` object.
-   * @param {object} bonusData         Data produced by `getRollData` to be applied to bonus formulas.
-   * @param {number} globalCheckBonus  Global ability check bonus.
+   * Mutates the value of the system.attributes.init object.
+   * @param {object} bonusData         Data produced by getRollData to be applied to bonus formulas
+   * @param {number} globalCheckBonus  Global ability check bonus
    * @protected
    */
-  _prepareInitiative(bonusData, globalCheckBonus) {
+  _prepareInitiative(bonusData, globalCheckBonus=0) {
     const init = this.system.attributes.init ??= {};
-    const { initiativeAlert, jackOfAllTrades, remarkableAthlete } = this.flags.dnd5e ?? {};
-
-    // Initiative modifiers
-    const dexCheckBonus = simplifyBonus(this.system.abilities.dex?.bonuses?.check, bonusData);
+    const flags = this.flags.dnd5e || {};
+    const abilityId = init.ability || CONFIG.DND5E.initiativeAbility;
+    const ability = this.system.abilities?.[abilityId] || {};
 
     // Compute initiative modifier
-    init.mod = this.system.abilities.dex?.mod ?? 0;
-    init.prof = new Proficiency(
-      this.system.attributes.prof, (jackOfAllTrades || remarkableAthlete) ? 0.5 : 0, !remarkableAthlete
-    );
-    init.value = init.value ?? 0;
-    init.bonus = init.value + (initiativeAlert ? 5 : 0);
-    init.total = init.mod + init.bonus + dexCheckBonus + globalCheckBonus;
-    if ( Number.isNumeric(init.prof.term) ) init.total += init.prof.flat;
+    init.value ??= 0;
+    init.mod = ability.mod ?? 0;
+
+    // Initiative proficiency
+    const prof = this.system.attributes.prof ?? 0;
+    const ra = flags.remarkableAthlete && ["str", "dex", "con"].includes(abilityId);
+    init.prof = new Proficiency(prof, (flags.jackOfAllTrades || ra) ? 0.5 : 0, !ra);
+
+    // Initiative bonus
+    init.bonus = init.value + (flags.initiativeAlert ? 5 : 0);
+
+    // Total initiative includes all numeric terms
+    const abilityBonus = simplifyBonus(ability.bonuses?.check, bonusData);
+    init.total = init.mod + init.bonus + abilityBonus + globalCheckBonus
+      + (Number.isNumeric(init.prof.term) ? init.prof.flat : 0)
   }
 
   /* -------------------------------------------- */
@@ -1414,7 +1420,9 @@ export default class Actor5e extends Actor {
     // Use a temporarily cached initiative roll
     if ( this._cachedInitiativeRoll ) return this._cachedInitiativeRoll.clone();
 
-    // Prepare roll data
+    // Obtain required data
+    const init = this.system.attributes?.init;
+    const abilityId = init?.ability || CONFIG.DND5E.initiativeAbility;
     const data = this.getRollData();
     const flags = this.flags.dnd5e || {};
     if ( flags.initiativeAdv ) advantageMode ??= dnd5e.dice.D20Roll.ADV_MODE.ADVANTAGE;
@@ -1423,8 +1431,7 @@ export default class Actor5e extends Actor {
     const parts = ["1d20"];
 
     // Special initiative bonuses
-    if ( "init" in this.system.attributes ) {
-      const init = this.system.attributes.init;
+    if ( init ) {
       parts.push(init.mod);
       if ( init.prof.term !== "0" ) {
         parts.push("@prof");
@@ -1438,8 +1445,8 @@ export default class Actor5e extends Actor {
 
     // Ability check bonuses
     if ( "abilities" in this.system ) {
-      const dexCheckBonus = this.system.abilities.dex.bonuses?.check;
-      if ( dexCheckBonus ) parts.push(dexCheckBonus);
+      const abilityBonus = this.system.abilities[abilityId]?.bonuses?.check;
+      if ( abilityBonus ) parts.push(abilityBonus);
     }
 
     // Global check bonus
@@ -1448,9 +1455,12 @@ export default class Actor5e extends Actor {
       if ( globalCheckBonus ) parts.push(globalCheckBonus);
     }
 
-    // Optional Dexterity tiebreaker
+    // Ability score tiebreaker
     const tiebreaker = game.settings.get("dnd5e", "initiativeDexTiebreaker");
-    if ( tiebreaker && ("abilities" in this.system) ) parts.push((this.system.abilities.dex.value ?? 0) / 100);
+    if ( tiebreaker && ("abilities" in this.system) ) {
+      const abilityValue = this.system.abilities[abilityId]?.value;
+      if ( Number.isNumeric(abilityValue) ) parts.push(String(abilityValue / 100));
+    }
 
     // Create the d20 roll
     const formula = parts.join(" + ");
