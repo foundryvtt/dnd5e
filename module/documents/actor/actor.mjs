@@ -600,11 +600,10 @@ export default class Actor5e extends Actor {
   _prepareInitiative(bonusData, globalCheckBonus=0) {
     const init = this.system.attributes.init ??= {};
     const flags = this.flags.dnd5e || {};
-    const abilityId = init.ability || CONFIG.DND5E.initiativeAbility;
-    const ability = this.system.abilities?.[abilityId] || {};
 
     // Compute initiative modifier
-    init.value ??= 0;
+    const abilityId = init.ability || CONFIG.DND5E.initiativeAbility;
+    const ability = this.system.abilities?.[abilityId] || {};
     init.mod = ability.mod ?? 0;
 
     // Initiative proficiency
@@ -612,12 +611,11 @@ export default class Actor5e extends Actor {
     const ra = flags.remarkableAthlete && ["str", "dex", "con"].includes(abilityId);
     init.prof = new Proficiency(prof, (flags.jackOfAllTrades || ra) ? 0.5 : 0, !ra);
 
-    // Initiative bonus
-    init.bonus = init.value + (flags.initiativeAlert ? 5 : 0);
-
     // Total initiative includes all numeric terms
+    const initBonus = simplifyBonus(init.bonus, bonusData);
     const abilityBonus = simplifyBonus(ability.bonuses?.check, bonusData);
-    init.total = init.mod + init.bonus + abilityBonus + globalCheckBonus
+    init.total = init.mod + initBonus + abilityBonus + globalCheckBonus
+      + (flags.initiativeAlert ? 5 : 0)
       + (Number.isNumeric(init.prof.term) ? init.prof.flat : 0)
   }
 
@@ -1446,13 +1444,25 @@ export default class Actor5e extends Actor {
     // Ability check bonuses
     if ( "abilities" in this.system ) {
       const abilityBonus = this.system.abilities[abilityId]?.bonuses?.check;
-      if ( abilityBonus ) parts.push(abilityBonus);
+      if ( abilityBonus ) {
+        parts.push("@abilityBonus");
+        data.abilityBonus = abilityBonus;
+      }
     }
 
     // Global check bonus
     if ( "bonuses" in this.system ) {
       const globalCheckBonus = this.system.bonuses.abilities?.check;
-      if ( globalCheckBonus ) parts.push(globalCheckBonus);
+      if ( globalCheckBonus ) {
+        parts.push("@globalBonus");
+        data.globalBonus = globalCheckBonus;
+      }
+    }
+
+    // Alert feat
+    if ( flags.initiativeAlert ) {
+      parts.push("@alertBonus");
+      data.alertBonus = 5;
     }
 
     // Ability score tiebreaker

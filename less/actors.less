@@ -11,8 +11,6 @@
   // Attribute Configuration
   .config-button {
     color: @colorOlive;
-    right: -6px;
-    top: -3px;
     font-size: 10px;
     font-weight: normal;
   }
@@ -75,6 +73,7 @@
       margin: 0;
 
       .attribute {
+        position: relative;
         height: 70px;
         margin: 0;
         border: none;
@@ -96,6 +95,9 @@
 
         .config-button {
           position: absolute;
+          padding: 4px;
+          right: 0;
+          top: 0;
           display: none;
         }
 

@@ -5,6 +5,7 @@ import Item5e from "../../documents/item.mjs";
 import ActorAbilityConfig from "./ability-config.mjs";
 import ActorArmorConfig from "./armor-config.mjs";
 import ActorHitDiceConfig from "./hit-dice-config.mjs";
+import ActorInitiativeConfig from "./initiative-config.mjs";
 import ActorMovementConfig from "./movement-config.mjs";
 import ActorSensesConfig from "./senses-config.mjs";
 import ActorSheetFlags from "./sheet-flags.mjs";
@@ -827,6 +828,7 @@ export default class ActorSheet5e extends ActorSheet {
    */
   _onConfigMenu(event) {
     event.preventDefault();
+    event.stopPropagation();
     const button = event.currentTarget;
     let app;
     switch ( button.dataset.action ) {
@@ -835,6 +837,9 @@ export default class ActorSheet5e extends ActorSheet {
         break;
       case "hit-dice":
         app = new ActorHitDiceConfig(this.actor);
+        break;
+      case "initiative":
+        app = new ActorInitiativeConfig(this.actor);
         break;
       case "movement":
         app = new ActorMovementConfig(this.actor);

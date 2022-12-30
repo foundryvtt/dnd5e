@@ -724,8 +724,6 @@ h5 {
 }
 .dnd5e.sheet.actor .config-button {
   color: #4b4a44;
-  right: -6px;
-  top: -3px;
   font-size: 10px;
   font-weight: normal;
 }
@@ -774,6 +772,7 @@ h5 {
   margin: 0;
 }
 .dnd5e.sheet.actor .sheet-header .attributes .attribute {
+  position: relative;
   height: 70px;
   margin: 0;
   border: none;
@@ -792,6 +791,9 @@ h5 {
 }
 .dnd5e.sheet.actor .sheet-header .attributes .attribute .config-button {
   position: absolute;
+  padding: 4px;
+  right: 0;
+  top: 0;
   display: none;
 }
 .dnd5e.sheet.actor .sheet-header .attributes .attribute:hover .config-button {
