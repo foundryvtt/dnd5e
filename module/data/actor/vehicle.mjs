@@ -123,20 +123,7 @@ export default class VehicleData extends CommonTemplate {
 
   /** @inheritdoc */
   _validateModel(data) {
-    this._validateHP(data);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Ensure HP min is less than HP max.
-   * @param {object} data  The source data to validate.
-   * @throws If the HP data is invalid.
-   * @protected
-   */
-  _validateHP(data) {
-    const hp = data.attributes.hp;
-    if ( hp.min >= hp.max ) throw new Error("HP minimum must be less than HP maximum");
+    CommonTemplate._validateHP(data);
   }
 
   /* -------------------------------------------- */

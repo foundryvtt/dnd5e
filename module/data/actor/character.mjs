@@ -3,6 +3,7 @@ import AttributesFields from "./templates/attributes.mjs";
 import CreatureTemplate from "./templates/creature.mjs";
 import DetailsFields from "./templates/details.mjs";
 import TraitsFields from "./templates/traits.mjs";
+import { CommonTemplate } from "./_module.mjs";
 
 /**
  * System data definition for Characters.
@@ -129,21 +130,8 @@ export default class CharacterData extends CreatureTemplate {
 
   /** @inheritdoc */
   _validateModel(data) {
-    this._validateHP(data);
+    CommonTemplate._validateHP(data);
     this._validateXP(data);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Ensure HP min is less than HP max.
-   * @param {object} data  The source data to validate.
-   * @throws If the HP data is invalid.
-   * @protected
-   */
-  _validateHP(data) {
-    const hp = data.attributes.hp;
-    if ( hp.min >= hp.max ) throw new Error("HP minimum must be less than HP maximum");
   }
 
   /* -------------------------------------------- */
