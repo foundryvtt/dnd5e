@@ -110,8 +110,7 @@ Hooks.once("init", function() {
   }
 
   // Patch Core Functions
-  CONFIG.Combat.initiative.formula = "1d20 + @attributes.init.mod + @attributes.init.prof + @attributes.init.bonus + @abilities.dex.bonuses.check + @bonuses.abilities.check";
-  Combatant.prototype._getInitiativeFormula = documents.combat._getInitiativeFormula;
+  Combatant.prototype.getInitiativeRoll = documents.combat.getInitiativeRoll;
 
   // Register Roll Extensions
   CONFIG.Dice.rolls.push(dice.D20Roll);

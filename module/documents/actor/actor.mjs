@@ -1403,6 +1403,94 @@ export default class Actor5e extends Actor {
   /* -------------------------------------------- */
 
   /**
+   * Get an un-evaluated D20Roll instance used to roll initiative for this Actor.
+   * @param {object} [options]                        Options which modify the roll
+   * @param {D20Roll.ADV_MODE} [options.advantageMode]    A specific advantage mode to apply
+   * @param {string} [options.flavor]                     Special flavor text to apply
+   * @returns {D20Roll}                               The constructed but unevaluated D20Roll
+   */
+  getInitiativeRoll({advantageMode, flavor}={}) {
+
+    // Use a temporarily cached initiative roll
+    if ( this._cachedInitiativeRoll ) return this._cachedInitiativeRoll.clone();
+
+    // Prepare roll data
+    const data = this.getRollData();
+    const flags = this.flags.dnd5e || {};
+    if ( flags.initiativeAdv ) advantageMode ??= dnd5e.dice.D20Roll.ADV_MODE.ADVANTAGE;
+
+    // Standard initiative formula
+    const parts = ["1d20"];
+
+    // Special initiative bonuses
+    if ( "init" in this.system.attributes ) {
+      const init = this.system.attributes.init;
+      parts.push(init.mod);
+      if ( init.prof.term !== "0" ) {
+        parts.push("@prof");
+        data.prof = init.prof.term;
+      }
+      if ( init.bonus !== 0 ) {
+        parts.push("@bonus");
+        data.bonus = init.bonus;
+      }
+    }
+
+    // Ability check bonuses
+    if ( "abilities" in this.system ) {
+      const dexCheckBonus = this.system.abilities.dex.bonuses?.check;
+      if ( dexCheckBonus ) parts.push(dexCheckBonus);
+    }
+
+    // Global check bonus
+    if ( "bonuses" in this.system ) {
+      const globalCheckBonus = this.system.bonuses.abilities?.check;
+      if ( globalCheckBonus ) parts.push(globalCheckBonus);
+    }
+
+    // Optional Dexterity tiebreaker
+    const tiebreaker = game.settings.get("dnd5e", "initiativeDexTiebreaker");
+    if ( tiebreaker && ("abilities" in this.system) ) parts.push((this.system.abilities.dex.value ?? 0) / 100);
+
+    // Create the d20 roll
+    const formula = parts.join(" + ");
+    return new CONFIG.Dice.D20Roll(formula, data, {
+      flavor: flavor ?? game.i18n.localize("DND5E.Initiative"),
+      advantageMode: advantageMode,
+      halflingLucky: flags.halflingLucky ?? false,
+      critical: null,
+      fumble: null
+    });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Roll initiative for this Actor with a dialog that provides an opportunity to elect advantage or other bonuses.
+   * @param {object} [rollOptions]      Options forwarded to the Actor#getInitiativeRoll method
+   * @returns {Promise<void>}           A promise which resolves once initiative has been rolled for the Actor
+   */
+  async rollInitiativeDialog(rollOptions={}) {
+
+    // Create and configure the Initiative roll
+    const roll = this.getInitiativeRoll(rollOptions);
+    const choice = await roll.configureDialog({
+      title: `${game.i18n.localize("DND5E.InitiativeRoll")}: ${this.name}`,
+      chooseModifier: false,
+      defaultRollMode: game.settings.get("core", "rollMode"),
+      defaultAction: rollOptions.advantageMode ?? dnd5e.dice.D20Roll.ADV_MODE.NORMAL
+    });
+    if ( choice === null ) return; // Closed dialog
+
+    // Temporarily cache the configured roll and use it to roll initiative for the Actor
+    this._cachedInitiativeRoll = roll;
+    await this.rollInitiative({createCombatants: true});
+    delete this._cachedInitiativeRoll;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Roll a hit die of the appropriate type, gaining hit points equal to the die roll plus your CON modifier.
    * @param {string} [denomination]  The hit denomination of hit die to roll. Example "d8".
    *                                 If no denomination is provided, the first available HD will be used
