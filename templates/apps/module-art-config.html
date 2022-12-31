@@ -1,0 +1,22 @@
+<form>
+    {{#each config}}
+    <div class="form-group-stacked" data-id="{{id}}">
+        <label>{{label}}</label>
+        <div class="form-fields">
+            <label>
+                {{localize "DND5E.ModuleArtConfigPortraits"}}
+                <input type="checkbox" name="{{id}}.portraits" {{checked portraits}}>
+            </label>
+            <label>
+                {{localize "DND5E.ModuleArtConfigTokens"}}
+                <input type="checkbox" name="{{id}}.tokens" {{checked tokens}}>
+            </label>
+        </div>
+    </div>
+    {{/each}}
+    <footer class="sheet-footer flexrow">
+        <button type="submit">
+            <i class="far fa-save"></i> {{localize "Save Changes"}}
+        </button>
+    </footer>
+</form>

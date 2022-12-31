@@ -2,7 +2,7 @@
   "_id": "VBkp2rGQKvMcCOus",
   "name": "Worg",
   "type": "npc",
-  "img": "systems/dnd5e/tokens/monstrosity/Worg.webp",
+  "img": "icons/svg/mystery-man.svg",
   "system": {
     "abilities": {
       "str": {
@@ -154,7 +154,7 @@
     },
     "details": {
       "biography": {
-        "value": "<p>A worg is an evil predator that delights in hunting and devouring creatures weaker than itself. Cunning and malevolent, worgs roam across the remote wilderness or are raised by goblins and hobgoblins. Those creatures use worgs as mounts, but a worg will turn on its rider if it feels mistreated or malnourished. Worgs speak in their own language and Goblin, and a few learn to speak Common as well.</p>\n<p><em>Token artwork by Forgotten Adventures.</em></p>",
+        "value": "<p>A worg is an evil predator that delights in hunting and devouring creatures weaker than itself. Cunning and malevolent, worgs roam across the remote wilderness or are raised by goblins and hobgoblins. Those creatures use worgs as mounts, but a worg will turn on its rider if it feels mistreated or malnourished. Worgs speak in their own language and Goblin, and a few learn to speak Common as well.</p>\n",
         "public": ""
       },
       "alignment": "Neutral Evil",
@@ -587,10 +587,10 @@
       "attenuation": 0.5
     },
     "texture": {
-      "src": "systems/dnd5e/tokens/monstrosity/Worg.webp",
+      "src": "icons/svg/mystery-man.svg",
       "tint": null,
-      "scaleX": 1.5,
-      "scaleY": 1.5,
+      "scaleX": 1,
+      "scaleY": 1,
       "offsetX": 0,
       "offsetY": 0,
       "rotation": 0
