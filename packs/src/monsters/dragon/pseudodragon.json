@@ -11,13 +11,7 @@
         "bonuses": {
           "check": "",
           "save": ""
-        },
-        "mod": -2,
-        "prof": 0,
-        "saveBonus": 0,
-        "checkBonus": 0,
-        "save": -2,
-        "dc": 8
+        }
       },
       "dex": {
         "value": 15,
@@ -25,13 +19,7 @@
         "bonuses": {
           "check": "",
           "save": ""
-        },
-        "mod": 2,
-        "prof": 0,
-        "saveBonus": 0,
-        "checkBonus": 0,
-        "save": 2,
-        "dc": 12
+        }
       },
       "con": {
         "value": 13,
@@ -39,13 +27,7 @@
         "bonuses": {
           "check": "",
           "save": ""
-        },
-        "mod": 1,
-        "prof": 0,
-        "saveBonus": 0,
-        "checkBonus": 0,
-        "save": 1,
-        "dc": 11
+        }
       },
       "int": {
         "value": 10,
@@ -53,13 +35,7 @@
         "bonuses": {
           "check": "",
           "save": ""
-        },
-        "mod": 0,
-        "prof": 0,
-        "saveBonus": 0,
-        "checkBonus": 0,
-        "save": 0,
-        "dc": 10
+        }
       },
       "wis": {
         "value": 12,
@@ -67,13 +43,7 @@
         "bonuses": {
           "check": "",
           "save": ""
-        },
-        "mod": 1,
-        "prof": 0,
-        "saveBonus": 0,
-        "checkBonus": 0,
-        "save": 1,
-        "dc": 11
+        }
       },
       "cha": {
         "value": 10,
@@ -81,13 +51,7 @@
         "bonuses": {
           "check": "",
           "save": ""
-        },
-        "mod": 0,
-        "prof": 0,
-        "saveBonus": 0,
-        "checkBonus": 0,
-        "save": 0,
-        "dc": 10
+        }
       }
     },
     "attributes": {
@@ -105,11 +69,8 @@
         "formula": "2d4+2"
       },
       "init": {
-        "value": 0,
-        "bonus": 0,
-        "mod": 2,
-        "prof": 0,
-        "total": 2
+        "ability": "",
+        "bonus": "0"
       },
       "movement": {
         "burrow": 0,
@@ -131,18 +92,7 @@
         "units": "ft",
         "special": ""
       },
-      "spellcasting": "int",
-      "prof": 2,
-      "spelldc": 10,
-      "encumbrance": {
-        "value": 0,
-        "max": 45,
-        "pct": 0,
-        "encumbered": false
-      },
-      "speed": {
-        "_deprecated": true
-      }
+      "spellcasting": "int"
     },
     "details": {
       "biography": {
@@ -158,11 +108,8 @@
         "custom": ""
       },
       "environment": "",
-      "cr": 0.25,
+      "cr": 0,
       "spellLevel": 0,
-      "xp": {
-        "value": 50
-      },
       "source": "MM pg. 254"
     },
     "traits": {
@@ -208,12 +155,7 @@
         "bonuses": {
           "check": "",
           "passive": ""
-        },
-        "bonus": 0,
-        "mod": 2,
-        "prof": 0,
-        "total": 2,
-        "passive": 12
+        }
       },
       "ani": {
         "value": 0,
@@ -221,12 +163,7 @@
         "bonuses": {
           "check": "",
           "passive": ""
-        },
-        "bonus": 0,
-        "mod": 1,
-        "prof": 0,
-        "total": 1,
-        "passive": 11
+        }
       },
       "arc": {
         "value": 0,
@@ -234,12 +171,7 @@
         "bonuses": {
           "check": "",
           "passive": ""
-        },
-        "bonus": 0,
-        "mod": 0,
-        "prof": 0,
-        "total": 0,
-        "passive": 10
+        }
       },
       "ath": {
         "value": 0,
@@ -247,12 +179,7 @@
         "bonuses": {
           "check": "",
           "passive": ""
-        },
-        "bonus": 0,
-        "mod": -2,
-        "prof": 0,
-        "total": -2,
-        "passive": 8
+        }
       },
       "dec": {
         "value": 0,
@@ -260,12 +187,7 @@
         "bonuses": {
           "check": "",
           "passive": ""
-        },
-        "bonus": 0,
-        "mod": 0,
-        "prof": 0,
-        "total": 0,
-        "passive": 10
+        }
       },
       "his": {
         "value": 0,
@@ -273,12 +195,7 @@
         "bonuses": {
           "check": "",
           "passive": ""
-        },
-        "bonus": 0,
-        "mod": 0,
-        "prof": 0,
-        "total": 0,
-        "passive": 10
+        }
       },
       "ins": {
         "value": 0,
@@ -286,12 +203,7 @@
         "bonuses": {
           "check": "",
           "passive": ""
-        },
-        "bonus": 0,
-        "mod": 1,
-        "prof": 0,
-        "total": 1,
-        "passive": 11
+        }
       },
       "itm": {
         "value": 0,
@@ -299,12 +211,7 @@
         "bonuses": {
           "check": "",
           "passive": ""
-        },
-        "bonus": 0,
-        "mod": 0,
-        "prof": 0,
-        "total": 0,
-        "passive": 10
+        }
       },
       "inv": {
         "value": 0,
@@ -312,12 +219,7 @@
         "bonuses": {
           "check": "",
           "passive": ""
-        },
-        "bonus": 0,
-        "mod": 0,
-        "prof": 0,
-        "total": 0,
-        "passive": 10
+        }
       },
       "med": {
         "value": 0,
@@ -325,12 +227,7 @@
         "bonuses": {
           "check": "",
           "passive": ""
-        },
-        "bonus": 0,
-        "mod": 1,
-        "prof": 0,
-        "total": 1,
-        "passive": 11
+        }
       },
       "nat": {
         "value": 0,
@@ -338,12 +235,7 @@
         "bonuses": {
           "check": "",
           "passive": ""
-        },
-        "bonus": 0,
-        "mod": 0,
-        "prof": 0,
-        "total": 0,
-        "passive": 10
+        }
       },
       "prc": {
         "value": 1,
@@ -351,12 +243,7 @@
         "bonuses": {
           "check": "",
           "passive": ""
-        },
-        "bonus": 0,
-        "mod": 1,
-        "prof": 2,
-        "total": 3,
-        "passive": 13
+        }
       },
       "prf": {
         "value": 0,
@@ -364,12 +251,7 @@
         "bonuses": {
           "check": "",
           "passive": ""
-        },
-        "bonus": 0,
-        "mod": 0,
-        "prof": 0,
-        "total": 0,
-        "passive": 10
+        }
       },
       "per": {
         "value": 0,
@@ -377,12 +259,7 @@
         "bonuses": {
           "check": "",
           "passive": ""
-        },
-        "bonus": 0,
-        "mod": 0,
-        "prof": 0,
-        "total": 0,
-        "passive": 10
+        }
       },
       "rel": {
         "value": 0,
@@ -390,12 +267,7 @@
         "bonuses": {
           "check": "",
           "passive": ""
-        },
-        "bonus": 0,
-        "mod": 0,
-        "prof": 0,
-        "total": 0,
-        "passive": 10
+        }
       },
       "slt": {
         "value": 0,
@@ -403,12 +275,7 @@
         "bonuses": {
           "check": "",
           "passive": ""
-        },
-        "bonus": 0,
-        "mod": 2,
-        "prof": 0,
-        "total": 2,
-        "passive": 12
+        }
       },
       "ste": {
         "value": 1,
@@ -416,12 +283,7 @@
         "bonuses": {
           "check": "",
           "passive": ""
-        },
-        "bonus": 0,
-        "mod": 2,
-        "prof": 2,
-        "total": 4,
-        "passive": 14
+        }
       },
       "sur": {
         "value": 0,
@@ -429,65 +291,49 @@
         "bonuses": {
           "check": "",
           "passive": ""
-        },
-        "bonus": 0,
-        "mod": 1,
-        "prof": 0,
-        "total": 1,
-        "passive": 11
+        }
       }
     },
     "spells": {
       "spell1": {
         "value": 0,
-        "override": null,
-        "max": 0
+        "override": null
       },
       "spell2": {
         "value": 0,
-        "override": null,
-        "max": 0
+        "override": null
       },
       "spell3": {
         "value": 0,
-        "override": null,
-        "max": 0
+        "override": null
       },
       "spell4": {
         "value": 0,
-        "override": null,
-        "max": 0
+        "override": null
       },
       "spell5": {
         "value": 0,
-        "override": null,
-        "max": 0
+        "override": null
       },
       "spell6": {
         "value": 0,
-        "override": null,
-        "max": 0
+        "override": null
       },
       "spell7": {
         "value": 0,
-        "override": null,
-        "max": 0
+        "override": null
       },
       "spell8": {
         "value": 0,
-        "override": null,
-        "max": 0
+        "override": null
       },
       "spell9": {
         "value": 0,
-        "override": null,
-        "max": 0
+        "override": null
       },
       "pact": {
         "value": 0,
-        "override": null,
-        "max": 0,
-        "level": 0
+        "override": null
       }
     },
     "bonuses": {
@@ -574,7 +420,7 @@
       "attenuation": 0.5
     },
     "texture": {
-      "src": "",
+      "src": "icons/svg/mystery-man.svg",
       "tint": null,
       "scaleX": 1,
       "scaleY": 1,
@@ -657,6 +503,10 @@
           "ability": "",
           "dc": null,
           "scaling": "spell"
+        },
+        "type": {
+          "value": "",
+          "subtype": ""
         },
         "requirements": "",
         "recharge": {
@@ -742,6 +592,10 @@
           "dc": null,
           "scaling": "spell"
         },
+        "type": {
+          "value": "",
+          "subtype": ""
+        },
         "requirements": "",
         "recharge": {
           "value": null,
@@ -825,6 +679,10 @@
           "ability": "",
           "dc": null,
           "scaling": "spell"
+        },
+        "type": {
+          "value": "",
+          "subtype": ""
         },
         "requirements": "",
         "recharge": {
@@ -1105,7 +963,7 @@
     "systemVersion": "2.1.0",
     "coreVersion": "10.291",
     "createdTime": 1661787232958,
-    "modifiedTime": 1671220950155,
+    "modifiedTime": 1672524229006,
     "lastModifiedBy": "dnd5ebuilder0000"
   }
 }

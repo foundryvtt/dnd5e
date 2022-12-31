@@ -76,7 +76,7 @@ export default class NPCData extends CreatureTemplate {
       }, {label: "DND5E.Attributes"}),
       details: new foundry.data.fields.SchemaField({
         ...DetailsFields.common,
-        ...DetailsFields.character,
+        ...DetailsFields.creature,
         type: new foundry.data.fields.SchemaField({
           value: new foundry.data.fields.StringField({required: true, blank: true, label: "DND5E.CreatureType"}),
           subtype: new foundry.data.fields.StringField({required: true, label: "DND5E.CreatureTypeSelectorSubtype"}),

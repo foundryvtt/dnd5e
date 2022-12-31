@@ -89,7 +89,7 @@ export default class CharacterData extends CreatureTemplate {
       }, {label: "DND5E.Attributes"}),
       details: new foundry.data.fields.SchemaField({
         ...DetailsFields.common,
-        ...DetailsFields.character,
+        ...DetailsFields.creature,
         background: new foundry.data.fields.StringField({required: true, label: "DND5E.Background"}),
         originalClass: new foundry.data.fields.StringField({required: true, label: "DND5E.ClassOriginal"}),
         xp: new foundry.data.fields.SchemaField({
