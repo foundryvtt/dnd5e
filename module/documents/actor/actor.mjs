@@ -594,7 +594,7 @@ export default class Actor5e extends Actor {
     const abilityMod = (this.system.abilities[abilityId]?.mod ?? 0);
     const base = Object.values(this.classes).reduce((total, item) => {
       const advancement = item.advancement.byType.HitPoints?.[0];
-      return total + (advancement?.adjustedTotal(abilityMod) ?? 0);
+      return total + (advancement?.getAdjustedTotal(abilityMod) ?? 0);
     }, 0);
     const levelBonus = simplifyBonus(hp.bonuses.level, rollData) * this.system.details.level;
     const overallBonus = simplifyBonus(hp.bonuses.overall, rollData);

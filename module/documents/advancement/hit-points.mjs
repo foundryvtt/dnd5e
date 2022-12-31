@@ -119,7 +119,7 @@ export default class HitPointsAdvancement extends Advancement {
    * @param {number} mod  Modifier to add per level.
    * @returns {number}    Total hit points plus modifier.
    */
-  adjustedTotal(mod) {
+  getAdjustedTotal(mod) {
     return Object.keys(this.value).reduce((total, level) => {
       return total + Math.max(this.valueForLevel(parseInt(level)) + mod, 1);
     }, 0);
@@ -143,7 +143,7 @@ export default class HitPointsAdvancement extends Advancement {
    * @param {number} value  Hit points taken at a given level.
    * @returns {number}      Hit points adjusted with ability modifier and per-level bonuses.
    */
-  #applicableValue(value) {
+  #getApplicableValue(value) {
     const abilityId = CONFIG.DND5E.hitPointsAbility || "con";
     value = Math.max(value + (this.actor.system.abilities[abilityId]?.mod ?? 0), 1);
     value += simplifyBonus(this.actor.system.attributes.hp.bonuses.level, this.actor.getRollData());
@@ -157,7 +157,7 @@ export default class HitPointsAdvancement extends Advancement {
     let value = this.constructor.valueForLevel(data, this.hitDieValue, level);
     if ( value === undefined ) return;
     this.actor.updateSource({
-      "system.attributes.hp.value": this.actor.system.attributes.hp.value + this.#applicableValue(value)
+      "system.attributes.hp.value": this.actor.system.attributes.hp.value + this.#getApplicableValue(value)
     });
     this.updateSource({ value: data });
   }
@@ -176,7 +176,7 @@ export default class HitPointsAdvancement extends Advancement {
     let value = this.valueForLevel(level);
     if ( value === undefined ) return;
     this.actor.updateSource({
-      "system.attributes.hp.value": this.actor.system.attributes.hp.value - this.#applicableValue(value)
+      "system.attributes.hp.value": this.actor.system.attributes.hp.value - this.#getApplicableValue(value)
     });
     const source = { [level]: this.value[level] };
     this.updateSource({ [`value.-=${level}`]: null });
