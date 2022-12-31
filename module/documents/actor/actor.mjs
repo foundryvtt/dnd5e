@@ -107,14 +107,8 @@ export default class Actor5e extends Actor {
       return this.system._prepareBaseData();
     }
 
-    const updates = {};
-    this._prepareBaseAbilities(updates);
-    this._prepareBaseSkills(updates);
-    if ( !foundry.utils.isEmpty(updates) ) {
-      if ( !this.id ) this.updateSource(updates);
-      else this.update(updates);
-    }
-
+    this._prepareBaseAbilities();
+    this._prepareBaseSkills();
     this._prepareBaseArmorClass();
 
     // Type-specific preparation
@@ -228,10 +222,9 @@ export default class Actor5e extends Actor {
   /**
    * Update the actor's abilities list to match the abilities configured in `DND5E.abilities`.
    * Mutates the system.abilities object.
-   * @param {object} updates  Updates to be applied to the actor. *Will be mutated.*
    * @protected
    */
-  _prepareBaseAbilities(updates) {
+  _prepareBaseAbilities() {
     if ( !("abilities" in this.system) ) return;
     const abilities = {};
     for ( const key of Object.keys(CONFIG.DND5E.abilities) ) {
@@ -250,8 +243,6 @@ export default class Actor5e extends Actor {
           if ( this.type === "vehicle" ) abilities[key].value = 0;
           else if ( this.type === "npc" ) abilities[key].value = this.system.abilities.wis?.value ?? 10;
         }
-
-        updates[`system.abilities.${key}`] = foundry.utils.deepClone(abilities[key]);
       }
     }
     this.system.abilities = abilities;
@@ -262,10 +253,9 @@ export default class Actor5e extends Actor {
   /**
    * Update the actor's skill list to match the skills configured in `DND5E.skills`.
    * Mutates the system.skills object.
-   * @param {object} updates  Updates to be applied to the actor. *Will be mutated*.
-   * @private
+   * @protected
    */
-  _prepareBaseSkills(updates) {
+  _prepareBaseSkills() {
     if ( !("skills" in this.system) ) return;
     const skills = {};
     for ( const [key, skill] of Object.entries(CONFIG.DND5E.skills) ) {
@@ -273,7 +263,6 @@ export default class Actor5e extends Actor {
       if ( !skills[key] ) {
         skills[key] = foundry.utils.deepClone(game.system.template.Actor.templates.creature.skills.acr);
         skills[key].ability = skill.ability;
-        updates[`system.skills.${key}`] = foundry.utils.deepClone(skills[key]);
       }
     }
     this.system.skills = skills;
