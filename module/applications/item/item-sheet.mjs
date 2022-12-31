@@ -215,7 +215,7 @@ export default class ItemSheet5e extends ItemSheet {
     const items = {};
     for ( const [name, id] of Object.entries(baseIds) ) {
       const baseItem = await ProficiencySelector.getBaseItem(id);
-      if ( baseType !== foundry.utils.getProperty(baseItem.system, typeProperty) ) continue;
+      if ( baseType !== foundry.utils.getProperty(baseItem?.system, typeProperty) ) continue;
       items[name] = baseItem.name;
     }
     return Object.fromEntries(Object.entries(items).sort((lhs, rhs) => lhs[1].localeCompare(rhs[1])));
