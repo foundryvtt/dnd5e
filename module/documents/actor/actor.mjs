@@ -159,13 +159,14 @@ export default class Actor5e extends Actor {
 
     // Prepare abilities, skills, & everything else
     const globalBonuses = this.system.bonuses?.abilities ?? {};
-    const bonusData = this.getRollData();
-    const checkBonus = simplifyBonus(globalBonuses?.check, bonusData);
-    this._prepareAbilities(bonusData, globalBonuses, checkBonus, originalSaves);
-    this._prepareSkills(bonusData, globalBonuses, checkBonus, originalSkills);
+    const rollData = this.getRollData();
+    const checkBonus = simplifyBonus(globalBonuses?.check, rollData);
+    this._prepareAbilities(rollData, globalBonuses, checkBonus, originalSaves);
+    this._prepareSkills(rollData, globalBonuses, checkBonus, originalSkills);
     this._prepareArmorClass();
     this._prepareEncumbrance();
-    this._prepareInitiative(bonusData, checkBonus);
+    this._prepareHitPoints(rollData);
+    this._prepareInitiative(rollData, checkBonus);
     this._prepareScaleValues();
     this._prepareSpellcasting();
   }
@@ -581,6 +582,29 @@ export default class Actor5e extends Actor {
   /* -------------------------------------------- */
 
   /**
+   * Prepare hit points for characters.
+   * @param {object} rollData  Data produced by `getRollData` to be applied to bonus formulas.
+   * @protected
+   */
+  _prepareHitPoints(rollData) {
+    if ( this.type !== "character" || (this.system._source.attributes.hp.max !== null) ) return;
+    const hp = this.system.attributes.hp;
+
+    const abilityId = CONFIG.DND5E.hitPointsAbility || "con";
+    const abilityMod = (this.system.abilities[abilityId]?.mod ?? 0);
+    const base = Object.values(this.classes).reduce((total, item) => {
+      const advancement = item.advancement.byType.HitPoints?.[0];
+      return total + (advancement?.getAdjustedTotal(abilityMod) ?? 0);
+    }, 0);
+    const levelBonus = simplifyBonus(hp.bonuses.level, rollData) * this.system.details.level;
+    const overallBonus = simplifyBonus(hp.bonuses.overall, rollData);
+
+    hp.max = base + levelBonus + overallBonus;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Prepare the initiative data for an actor.
    * Mutates the value of the system.attributes.init object.
    * @param {object} bonusData         Data produced by getRollData to be applied to bonus formulas
@@ -606,7 +630,7 @@ export default class Actor5e extends Actor {
     const abilityBonus = simplifyBonus(ability.bonuses?.check, bonusData);
     init.total = init.mod + initBonus + abilityBonus + globalCheckBonus
       + (flags.initiativeAlert ? 5 : 0)
-      + (Number.isNumeric(init.prof.term) ? init.prof.flat : 0)
+      + (Number.isNumeric(init.prof.term) ? init.prof.flat : 0);
   }
 
   /* -------------------------------------------- */
@@ -987,6 +1011,8 @@ export default class Actor5e extends Actor {
       && CONFIG.DND5E.characterFlags.remarkableAthlete.abilities.includes(ability);
   }
 
+  /* -------------------------------------------- */
+  /*  Rolling                                     */
   /* -------------------------------------------- */
 
   /**
@@ -1594,13 +1620,19 @@ export default class Actor5e extends Actor {
 
   /**
    * Roll hit points for a specific class as part of a level-up workflow.
-   * @param {Item5e} item      The class item whose hit dice to roll.
-   * @returns {Promise<Roll>}  The completed roll.
+   * @param {Item5e} item                         The class item whose hit dice to roll.
+   * @param {object} options
+   * @param {boolean} [options.chatMessage=true]  Display the chat message for this roll.
+   * @returns {Promise<Roll>}                     The completed roll.
    * @see {@link dnd5e.preRollClassHitPoints}
    */
-  async rollClassHitPoints(item) {
+  async rollClassHitPoints(item, { chatMessage=true }={}) {
     if ( item.type !== "class" ) throw new Error("Hit points can only be rolled for a class item.");
-    const rollData = { formula: `1${item.system.hitDice}`, data: item.getRollData() };
+    const rollData = {
+      formula: `1${item.system.hitDice}`,
+      data: item.getRollData(),
+      chatMessage
+    };
     const flavor = game.i18n.format("DND5E.AdvancementHitPointsRollMessage", { class: item.name });
     const messageData = {
       title: `${flavor}: ${this.name}`,
@@ -1623,7 +1655,70 @@ export default class Actor5e extends Actor {
     Hooks.callAll("dnd5e.preRollClassHitPoints", this, item, rollData, messageData);
 
     const roll = new Roll(rollData.formula, rollData.data);
-    await roll.toMessage(messageData);
+    await roll.evaluate({async: true});
+
+    /**
+     * A hook event that fires after hit points haven been rolled for a character's class.
+     * @function dnd5e.rollClassHitPoints
+     * @memberof hookEvents
+     * @param {Actor5e} actor  Actor for which the hit points have been rolled.
+     * @param {Roll} roll      The resulting roll.
+     */
+    Hooks.callAll("dnd5e.rollClassHitPoints", this, roll);
+
+    if ( rollData.chatMessage ) await roll.toMessage(messageData);
+    return roll;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Roll hit points for an NPC based on the HP formula.
+   * @param {object} options
+   * @param {boolean} [options.chatMessage=true]  Display the chat message for this roll.
+   * @returns {Promise<Roll>}                     The completed roll.
+   * @see {@link dnd5e.preRollNPCHitPoints}
+   */
+  async rollNPCHitPoints({ chatMessage=true }={}) {
+    if ( this.type !== "npc" ) throw new Error("NPC hit points can only be rolled for NPCs");
+    const rollData = {
+      formula: this.system.attributes.hp.formula,
+      data: this.getRollData(),
+      chatMessage
+    };
+    const flavor = game.i18n.format("DND5E.HPFormulaRollMessage");
+    const messageData = {
+      title: `${flavor}: ${this.name}`,
+      flavor,
+      speaker: ChatMessage.getSpeaker({ actor: this }),
+      "flags.dnd5e.roll": { type: "hitPoints" }
+    };
+
+    /**
+     * A hook event that fires before hit points are rolled for an NPC.
+     * @function dnd5e.preRollNPCHitPoints
+     * @memberof hookEvents
+     * @param {Actor5e} actor            Actor for which the hit points are being rolled.
+     * @param {object} rollData
+     * @param {string} rollData.formula  The string formula to parse.
+     * @param {object} rollData.data     The data object against which to parse attributes within the formula.
+     * @param {object} messageData       The data object to use when creating the message.
+     */
+    Hooks.callAll("dnd5e.preRollNPCHitPoints", this, rollData, messageData);
+
+    const roll = new Roll(rollData.formula, rollData.data);
+    await roll.evaluate({async: true});
+
+    /**
+     * A hook event that fires after hit points are rolled for an NPC.
+     * @function dnd5e.rollNPCHitPoints
+     * @memberof hookEvents
+     * @param {Actor5e} actor  Actor for which the hit points have been rolled.
+     * @param {Roll} roll      The resulting roll.
+     */
+    Hooks.callAll("dnd5e.rollNPCHitPoints", this, roll);
+
+    if ( rollData.chatMessage ) await roll.toMessage(messageData);
     return roll;
   }
 
@@ -2105,7 +2200,6 @@ export default class Actor5e extends Actor {
    *
    * @param {Actor5e} target                      The target Actor.
    * @param {TransformationOptions} [options={}]  Options that determine how the transformation is performed.
-   * @param {object} [options]
    * @param {boolean} [options.renderSheet=true]  Render the sheet of the transformed actor after the polymorph
    * @returns {Promise<Array<Token>>|null}        Updated token if the transformation was performed.
    */

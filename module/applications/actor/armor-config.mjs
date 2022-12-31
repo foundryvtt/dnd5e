@@ -6,10 +6,10 @@ export default class ActorArmorConfig extends DocumentSheet {
     super(...args);
 
     /**
-     * Cloned copy of the actor for previewing change.s
+     * Cloned copy of the actor for previewing changes.
      * @type {Actor5e}
      */
-    this.clone = this.object.clone();
+    this.clone = this.document.clone();
   }
 
   /* -------------------------------------------- */
@@ -17,11 +17,11 @@ export default class ActorArmorConfig extends DocumentSheet {
   /** @inheritdoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
-      id: "actor-armor-config",
       classes: ["dnd5e", "actor-armor-config"],
       template: "systems/dnd5e/templates/apps/actor-armor.hbs",
       width: 320,
-      height: "auto"
+      height: "auto",
+      sheetConfig: false
     });
   }
 
@@ -60,7 +60,7 @@ export default class ActorArmorConfig extends DocumentSheet {
   /** @inheritdoc */
   async _updateObject(event, formData) {
     const ac = foundry.utils.expandObject(formData).ac;
-    return this.object.update({"system.attributes.ac": ac});
+    return this.document.update({"system.attributes.ac": ac});
   }
 
   /* -------------------------------------------- */

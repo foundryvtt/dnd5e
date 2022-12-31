@@ -644,7 +644,10 @@ h5 {
 /* ----------------------------------------- */
 /*  Armor Config Sheet Specifically          */
 /* ----------------------------------------- */
-.dnd5e.actor-armor-config .ac-field input {
+.dnd5e.actor-armor-config .ac-field input,
+.dnd5e.actor-hit-points-config .ac-field input,
+.dnd5e.actor-armor-config .hp-field input,
+.dnd5e.actor-hit-points-config .hp-field input {
   font-size: 3em;
   text-align: center;
 }
@@ -879,7 +882,8 @@ h5 {
   font-weight: 400;
   font-size: 24px;
 }
-.dnd5e.sheet.actor ul.attributes li.attribute .attribute-value.multiple input {
+.dnd5e.sheet.actor ul.attributes li.attribute .attribute-value.multiple input,
+.dnd5e.sheet.actor ul.attributes li.attribute .attribute-value.multiple span:not(.sep) {
   flex: 0 0 33%;
 }
 .dnd5e.sheet.actor ul.attributes li.attribute .attribute-footer {

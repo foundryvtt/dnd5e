@@ -52,6 +52,12 @@ preLocalize("abilityAbbreviations");
  */
 DND5E.initiativeAbility = "dex";
 
+/**
+ * Configure which ability score is used when calculating hit points per level.
+ * @type {string}
+ */
+DND5E.hitPointsAbility = "con";
+
 /* -------------------------------------------- */
 
 /**

@@ -52,15 +52,16 @@
             {{!-- Header Attributes --}}
             <ul class="attributes flexrow">
                 <li class="attribute health">
-                    <h4 class="attribute-name box-title">{{ localize "DND5E.HitPoints" }}</h4>
+                    <h4 class="attribute-name box-title">{{localize "DND5E.HitPoints"}}</h4>
+                    <a class="config-button" data-action="hit-points"
+                        data-tooltip="{{localize 'DND5E.HitPointsConfig'}}"><i class="fas fa-cog"></i></a>
                     <div class="attribute-value multiple">
                         <input name="system.attributes.hp.value" type="text"
                             value="{{system.attributes.hp.value}}" placeholder="10"
-                            title="{{localize 'DND5E.HitPointsCurrent'}}" data-dtype="Number">
+                            data-tooltip="{{localize 'DND5E.HitPointsCurrent'}}" data-dtype="Number">
                         <span class="sep"> / </span>
-                        <input name="system.attributes.hp.max" type="text"
-                            value="{{system.attributes.hp.max}}" placeholder="10"
-                            title="{{localize 'DND5E.HitPointsMax'}}" data-dtype="Number">
+                        <span data-tooltip="{{#if source.attributes.hp.max}}{{localize 'DND5E.HitPointsOverride'}}
+                          {{~ else}}{{localize 'DND5E.HitPointsMax'}}{{/if}}">{{system.attributes.hp.max}}</span>
                     </div>
                     <footer class="attribute-footer">
                         <input name="system.attributes.hp.temp" type="text" class="temphp"

@@ -16,9 +16,12 @@ import TraitsFields from "./templates/traits.mjs";
  * @property {object} attributes.hp
  * @property {number} attributes.hp.value                 Current hit points.
  * @property {number} attributes.hp.min                   Minimum allowed HP value.
- * @property {number} attributes.hp.max                   Maximum allowed HP value.
+ * @property {number} attributes.hp.max                   Override for maximum HP.
  * @property {number} attributes.hp.temp                  Temporary HP applied on top of value.
  * @property {number} attributes.hp.tempmax               Temporary change to the maximum HP.
+ * @property {object} attributes.hp.bonuses
+ * @property {string} attributes.hp.bonuses.level         Bonus formula applied for each class level.
+ * @property {string} attributes.hp.bonuses.overall       Bonus formula applied to total HP.
  * @property {object} attributes.death
  * @property {number} attributes.death.success            Number of successful death saves.
  * @property {number} attributes.death.failure            Number of failed death saves.
@@ -69,10 +72,14 @@ export default class CharacterData extends CreatureTemplate {
             nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.HitPointsMin"
           }),
           max: new foundry.data.fields.NumberField({
-            nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.HitPointsMax"
+            nullable: true, integer: true, min: 0, initial: null, label: "DND5E.HitPointsOverride"
           }),
           temp: new foundry.data.fields.NumberField({integer: true, initial: 0, min: 0, label: "DND5E.HitPointsTemp"}),
-          tempmax: new foundry.data.fields.NumberField({integer: true, initial: 0, label: "DND5E.HitPointsTempMax"})
+          tempmax: new foundry.data.fields.NumberField({integer: true, initial: 0, label: "DND5E.HitPointsTempMax"}),
+          bonuses: new foundry.data.fields.SchemaField({
+            level: new FormulaField({deterministic: true, label: "DND5E.HitPointsBonusLevel"}),
+            overall: new FormulaField({deterministic: true, label: "DND5E.HitPointsBonusOverall"})
+          })
         }, {label: "DND5E.HitPoints"}),
         death: new foundry.data.fields.SchemaField({
           success: new foundry.data.fields.NumberField({
