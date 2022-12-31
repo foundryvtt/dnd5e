@@ -199,4 +199,12 @@ export default function registerSystemSettings() {
     type: Boolean,
     default: false
   });
+
+  // Strict validation
+  game.settings.register("dnd5e", "strictValidation", {
+    scope: "world",
+    config: false,
+    type: Boolean,
+    default: true
+  });
 }

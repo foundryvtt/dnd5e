@@ -96,6 +96,9 @@ Hooks.once("init", function() {
   // Register System Settings
   registerSystemSettings();
 
+  // Validation strictness.
+  _determineValidationStrictness();
+
   // Configure module art.
   game.dnd5e.moduleArt = new ModuleArt();
 
@@ -159,6 +162,28 @@ Hooks.once("init", function() {
   utils.preloadHandlebarsTemplates();
 });
 
+/**
+ * Determine if this is a 'legacy' world with permissive validation, or one where strict validation is enabled.
+ * @internal
+ */
+function _determineValidationStrictness() {
+  dataModels.SystemDataModel._enableV10Validation = game.settings.get("dnd5e", "strictValidation");
+}
+
+/**
+ * Update the world's validation strictness setting based on whether validation errors were encountered.
+ * @internal
+ */
+async function _configureValidationStrictness() {
+  if ( !game.user.isGM ) return;
+  const invalidDocuments = game.actors.invalidDocumentIds.size + game.items.invalidDocumentIds.size;
+  const strictValidation = game.settings.get("dnd5e", "strictValidation");
+  if ( invalidDocuments && strictValidation ) {
+    await game.settings.set("dnd5e", "strictValidation", false);
+    game.socket.emit("reload");
+    foundry.utils.debouncedReload();
+  }
+}
 
 /* -------------------------------------------- */
 /*  Foundry VTT Setup                           */
@@ -202,6 +227,9 @@ Hooks.once("i18nInit", () => utils.performPreLocalization(CONFIG.DND5E));
  * Once the entire VTT framework is initialized, check to see if we should perform a data migration
  */
 Hooks.once("ready", function() {
+  // Configure validation strictness.
+  _configureValidationStrictness();
+
   // Apply custom compendium styles to the SRD rules compendium.
   const rules = game.packs.get("dnd5e.rules");
   rules.apps = [new applications.journal.SRDCompendium(rules)];
