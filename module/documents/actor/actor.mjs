@@ -74,10 +74,10 @@ export default class Actor5e extends Actor {
     if ( !source._id || !options.pack ) return source;
     const uuid = `Compendium.${options.pack}.${source._id}`;
     const art = game.dnd5e.moduleArt.map.get(uuid);
-    if ( art ) {
-      source.img = art.actor;
+    if ( art?.actor || art?.token ) {
+      if ( art.actor ) source.img = art.actor;
       if ( typeof art.token === "string" ) source.prototypeToken.texture.src = art.token;
-      else foundry.utils.mergeObject(source.prototypeToken, art.token);
+      else if ( art.token ) foundry.utils.mergeObject(source.prototypeToken, art.token);
       const biography = source.system.details?.biography;
       if ( art.credit && biography ) {
         if ( typeof biography.value !== "string" ) biography.value = "";

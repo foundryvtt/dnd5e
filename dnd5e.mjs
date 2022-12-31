@@ -20,7 +20,7 @@ import * as dice from "./module/dice/_module.mjs";
 import * as documents from "./module/documents/_module.mjs";
 import * as migrations from "./module/migration.mjs";
 import * as utils from "./module/utils.mjs";
-import ModuleArt from "./module/module-art.mjs";
+import {ModuleArt} from "./module/module-art.mjs";
 
 /* -------------------------------------------- */
 /*  Define Module Structure                     */
