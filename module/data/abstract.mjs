@@ -17,6 +17,9 @@
  */
 export default class SystemDataModel extends foundry.abstract.DataModel {
 
+  /** @inheritdoc */
+  static _enableV10Validation = true;
+
   /**
    * System type that this system data model represents (e.g. "character", "npc", "vehicle").
    * @type {string}
