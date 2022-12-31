@@ -18,7 +18,6 @@ export default class HitPointsFlow extends AdvancementFlow {
   getData() {
     const source = this.retainedData ?? this.advancement.value;
     const value = source[this.level];
-    // TODO: Also preview CON mod + per-level bonuses
 
     // If value is empty, `useAverage` should default to the value selected at the previous level
     let useAverage = value === "avg";
