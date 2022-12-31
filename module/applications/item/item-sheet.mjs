@@ -147,7 +147,7 @@ export default class ItemSheet5e extends ItemSheet {
     const advancement = {};
     const configMode = !item.parent || this.advancementConfigurationMode;
     const maxLevel = !configMode
-      ? (item.system.levels ?? item.class?.system.levels ?? item.parent.system.details.level) : -1;
+      ? (item.system.levels ?? item.class?.system.levels ?? item.parent.system.details?.level ?? -1) : -1;
 
     // Improperly configured advancements
     if ( item.advancement.needingConfiguration.length ) {
