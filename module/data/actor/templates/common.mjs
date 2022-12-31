@@ -45,7 +45,7 @@ export default class CommonTemplate extends SystemDataModel.mixin(CurrencyTempla
    */
   static _validateHP(data) {
     const hp = data.attributes.hp;
-    if ( hp.min >= hp.max ) throw new Error("HP minimum must be less than HP maximum");
+    if ( hp.min > hp.max ) throw new Error("HP minimum must be less than HP maximum");
   }
 
   /* -------------------------------------------- */

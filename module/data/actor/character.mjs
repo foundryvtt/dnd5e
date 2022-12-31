@@ -29,8 +29,6 @@ import TraitsFields from "./templates/traits.mjs";
  * @property {string} details.originalClass               ID of first class taken by character.
  * @property {XPData} details.xp                          Experience points gained.
  * @property {number} details.xp.value                    Total experience points earned.
- * @property {number} details.xp.min                      Minimum experience points for current level.
- * @property {number} details.xp.max                      Maximum experience points for current level.
  * @property {string} details.appearance                  Description of character's appearance.
  * @property {string} details.trait                       Character's personality traits.
  * @property {string} details.ideal                       Character's ideals.
@@ -97,12 +95,6 @@ export default class CharacterData extends CreatureTemplate {
         xp: new foundry.data.fields.SchemaField({
           value: new foundry.data.fields.NumberField({
             required: true, nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.ExperiencePointsCurrent"
-          }),
-          min: new foundry.data.fields.NumberField({
-            required: true, nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.ExperiencePointsMin"
-          }),
-          max: new foundry.data.fields.NumberField({
-            required: true, nullable: false, integer: true, min: 0, initial: 300, label: "DND5E.ExperiencePointsMax"
           })
         }, {label: "DND5E.ExperiencePoints"}),
         appearance: new foundry.data.fields.StringField({required: true, label: "DND5E.Appearance"}),
@@ -131,20 +123,6 @@ export default class CharacterData extends CreatureTemplate {
   /** @inheritdoc */
   _validateModel(data) {
     CommonTemplate._validateHP(data);
-    this._validateXP(data);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Ensure XP min is less than XP max.
-   * @param {object} data  The source data to validate.
-   * @throws If the XP data is invalid.
-   * @protected
-   */
-  _validateXP(data) {
-    const xp = data.details.xp;
-    if ( xp.min >= xp.max ) throw new Error("XP minimum must be less than XP maximum");
   }
 
   /* -------------------------------------------- */
