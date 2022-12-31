@@ -91,7 +91,6 @@ export default class ItemSheet5e extends ItemSheet {
       isHealing: item.system.actionType === "heal",
       isFlatDC: item.system.save?.scaling === "flat",
       isLine: ["line", "wall"].includes(item.system.target?.type),
-      abilityConsumptionTargets: this._getItemConsumptionTargets(),
 
       // Vehicles
       isCrewed: item.system.activation?.type === "crew",
@@ -108,6 +107,7 @@ export default class ItemSheet5e extends ItemSheet {
       // Prepare Active Effects
       effects: ActiveEffect5e.prepareActiveEffectCategories(item.effects)
     });
+    context.abilityConsumptionTargets = this._getItemConsumptionTargets();
 
     /** @deprecated */
     Object.defineProperty(context, "data", {
@@ -239,7 +239,7 @@ export default class ItemSheet5e extends ItemSheet {
       return actor.itemTypes.consumable.reduce((ammo, i) => {
         if ( i.system.consumableType === "ammo" ) ammo[i.id] = `${i.name} (${i.system.quantity})`;
         return ammo;
-      }, {[this.item.id]: `${this.item.name} (${this.item.system.quantity})`});
+      }, {});
     }
 
     // Attributes
