@@ -159,14 +159,14 @@ export default class Actor5e extends Actor {
 
     // Prepare abilities, skills, & everything else
     const globalBonuses = this.system.bonuses?.abilities ?? {};
-    const bonusData = this.getRollData();
-    const checkBonus = simplifyBonus(globalBonuses?.check, bonusData);
-    this._prepareAbilities(bonusData, globalBonuses, checkBonus, originalSaves);
-    this._prepareSkills(bonusData, globalBonuses, checkBonus, originalSkills);
+    const rollData = this.getRollData();
+    const checkBonus = simplifyBonus(globalBonuses?.check, rollData);
+    this._prepareAbilities(rollData, globalBonuses, checkBonus, originalSaves);
+    this._prepareSkills(rollData, globalBonuses, checkBonus, originalSkills);
     this._prepareArmorClass();
     this._prepareEncumbrance();
-    this._prepareHitPoints(bonusData);
-    this._prepareInitiative(bonusData, checkBonus);
+    this._prepareHitPoints(rollData);
+    this._prepareInitiative(rollData, checkBonus);
     this._prepareScaleValues();
     this._prepareSpellcasting();
   }
@@ -583,10 +583,10 @@ export default class Actor5e extends Actor {
 
   /**
    * Prepare hit points for characters.
-   * @param {object} bonusData  Data produced by `getRollData` to be applied to bonus formulas.
+   * @param {object} rollData  Data produced by `getRollData` to be applied to bonus formulas.
    * @protected
    */
-  _prepareHitPoints(bonusData) {
+  _prepareHitPoints(rollData) {
     if ( this.type !== "character" || (this.system._source.attributes.hp.max !== null) ) return;
     const hp = this.system.attributes.hp;
 
@@ -596,8 +596,8 @@ export default class Actor5e extends Actor {
     }, 0);
     const abilityId = CONFIG.DND5E.hitPointsAbility || "con";
     const constitution = (this.system.abilities[abilityId]?.mod ?? 0) * this.system.details.level;
-    const levelBonus = simplifyBonus(hp.bonuses.level, bonusData) * this.system.details.level;
-    const overallBonus = simplifyBonus(hp.bonuses.overall, bonusData);
+    const levelBonus = simplifyBonus(hp.bonuses.level, rollData) * this.system.details.level;
+    const overallBonus = simplifyBonus(hp.bonuses.overall, rollData);
 
     hp.max = base + constitution + levelBonus + overallBonus;
   }

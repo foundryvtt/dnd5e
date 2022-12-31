@@ -60,8 +60,8 @@
                             value="{{system.attributes.hp.value}}" placeholder="10"
                             data-tooltip="{{localize 'DND5E.HitPointsCurrent'}}" data-dtype="Number">
                         <span class="sep"> / </span>
-                        <div data-tooltip="{{#if source.attributes.hp.max}}{{localize 'DND5E.HitPointsOverride'}}
-                          {{~ else}}{{localize 'DND5E.HitPointsMax'}}{{/if}}">{{system.attributes.hp.max}}</div>
+                        <span data-tooltip="{{#if source.attributes.hp.max}}{{localize 'DND5E.HitPointsOverride'}}
+                          {{~ else}}{{localize 'DND5E.HitPointsMax'}}{{/if}}">{{system.attributes.hp.max}}</span>
                     </div>
                     <footer class="attribute-footer">
                         <input name="system.attributes.hp.temp" type="text" class="temphp"
