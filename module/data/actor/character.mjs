@@ -16,7 +16,7 @@ import TraitsFields from "./templates/traits.mjs";
  * @property {object} attributes.hp
  * @property {number} attributes.hp.value                 Current hit points.
  * @property {number} attributes.hp.min                   Minimum allowed HP value.
- * @property {number} attributes.hp.override              Override for maximum HP.
+ * @property {number} attributes.hp.max                   Override for maximum HP.
  * @property {number} attributes.hp.temp                  Temporary HP applied on top of value.
  * @property {number} attributes.hp.tempmax               Temporary change to the maximum HP.
  * @property {object} attributes.hp.bonuses
