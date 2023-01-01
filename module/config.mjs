@@ -1484,7 +1484,7 @@ DND5E.CR_EXP_LEVELS = [
  * @property {string} name
  * @property {string} hint
  * @property {string} section
- * @property {typeof Boolean|String|Number} type
+ * @property {typeof boolean|string|number} type
  * @property {string} placeholder
  * @property {string[]} [abilities]
  * @property {Object<string, string>} [choices]

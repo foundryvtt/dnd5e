@@ -44,7 +44,7 @@ export default class ActorMovementConfig extends DocumentSheet {
       climb: "DND5E.MovementClimb",
       fly: "DND5E.MovementFly",
       swim: "DND5E.MovementSwim"
-    }
+    };
 
     // Return rendering context
     return {

@@ -188,18 +188,6 @@ export default class ItemSheet5e extends ItemSheet {
   /* -------------------------------------------- */
 
   /**
-   * Get the item type label which is shown next to the name on the top-right corner of the sheet.
-   * @returns {string}  Localized item type.
-   * @protected
-   */
-  _getItemType() {
-
-    return ;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
    * Get the base weapons and tools based on the selected type.
    * @returns {Promise<object>}  Object with base items for this type formatted for selectOptions.
    * @protected

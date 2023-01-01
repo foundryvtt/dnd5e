@@ -324,7 +324,7 @@ export default class GroupActorSheet extends ActorSheet {
    * @protected
    */
   _onClickItemName(event) {
-    return game.system.applications.actor.ActorSheet5e.prototype._onItemSummary.call(this, event);
+    game.system.applications.actor.ActorSheet5e.prototype._onItemSummary.call(this, event);
   }
 
   /* -------------------------------------------- */

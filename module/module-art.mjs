@@ -40,7 +40,7 @@ export class ModuleArt {
       try {
         const mapping = await foundry.utils.fetchJsonWithTimeout(artPath);
         await this.#parseArtMapping(module.id, mapping, flags["dnd5e-art-credit"]);
-      } catch ( e ) {
+      } catch( e ) {
         console.error(e);
       }
     }
@@ -55,7 +55,7 @@ export class ModuleArt {
         </em>
       `;
       await this.#parseArtMapping(game.system.id, mapping, credit);
-    } catch ( e ) {
+    } catch( e ) {
       console.error(e);
     }
   }

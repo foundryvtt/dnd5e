@@ -763,11 +763,10 @@ export default class ActorSheet5e extends ActorSheet {
     if ( ("attunement" in item.system) && (item.system.attunement !== CONFIG.DND5E.attunementTypes.NONE) ) {
       const isAttuned = item.system.attunement === CONFIG.DND5E.attunementsTypes.ATTUNED;
       options.push({
-          name: isAttuned ? "DND5E.ContextMenuActionUnattune" : "DND5E.ContextMenuActionAttune",
-          icon: "<i class='fas fa-sun fa-fw'></i>",
-          callback: item.update({"system.attunement": CONFIG.DND5E.attunementTypes[isAttuned ? "ATTUNED" : "REQUIRED"]})
-        }
-      );
+        name: isAttuned ? "DND5E.ContextMenuActionUnattune" : "DND5E.ContextMenuActionAttune",
+        icon: "<i class='fas fa-sun fa-fw'></i>",
+        callback: item.update({"system.attunement": CONFIG.DND5E.attunementTypes[isAttuned ? "ATTUNED" : "REQUIRED"]})
+      });
     }
 
     // Toggle Equipped State
