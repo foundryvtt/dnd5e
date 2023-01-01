@@ -71,7 +71,7 @@ export default class Actor5e extends Actor {
   /** @inheritdoc */
   _initializeSource(source, options={}) {
     source = super._initializeSource(source, options);
-    if ( !source._id || !options.pack ) return source;
+    if ( !source._id || !options.pack || dnd5e.moduleArt.suppressArt ) return source;
     const uuid = `Compendium.${options.pack}.${source._id}`;
     const art = game.dnd5e.moduleArt.map.get(uuid);
     if ( art?.actor || art?.token ) {

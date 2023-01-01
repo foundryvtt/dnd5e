@@ -20,6 +20,14 @@ export class ModuleArt {
   /* -------------------------------------------- */
 
   /**
+   * Set to true to temporarily prevent actors from loading module art.
+   * @type {boolean}
+   */
+  suppressArt = false;
+
+  /* -------------------------------------------- */
+
+  /**
    * Register any art mapping information included in active modules.
    * @returns {Promise<void>}
    */
