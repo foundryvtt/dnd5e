@@ -122,7 +122,10 @@
           "psychic",
           "slashing"
         ],
-        "bypasses": [],
+        "bypasses": [
+          "ada",
+          "mgc"
+        ],
         "custom": ""
       },
       "dr": {
@@ -1031,7 +1034,7 @@
     "systemVersion": "2.1.0",
     "coreVersion": "10.291",
     "createdTime": 1661787233254,
-    "modifiedTime": 1672524492121,
+    "modifiedTime": 1672596109220,
     "lastModifiedBy": "dnd5ebuilder0000"
   }
 }

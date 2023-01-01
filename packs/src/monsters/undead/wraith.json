@@ -133,7 +133,10 @@
           "slashing",
           "thunder"
         ],
-        "bypasses": [],
+        "bypasses": [
+          "mgc",
+          "sil"
+        ],
         "custom": ""
       },
       "dv": {
@@ -868,7 +871,7 @@
     "systemVersion": "2.1.0",
     "coreVersion": "10.291",
     "createdTime": 1661787232695,
-    "modifiedTime": 1672524480103,
+    "modifiedTime": 1672596095283,
     "lastModifiedBy": "dnd5ebuilder0000"
   }
 }

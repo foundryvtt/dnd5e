@@ -120,7 +120,10 @@
           "piercing",
           "slashing"
         ],
-        "bypasses": [],
+        "bypasses": [
+          "mgc",
+          "sil"
+        ],
         "custom": ""
       },
       "dr": {
@@ -1092,7 +1095,7 @@
     "systemVersion": "2.1.0",
     "coreVersion": "10.291",
     "createdTime": 1661787232613,
-    "modifiedTime": 1672524478010,
+    "modifiedTime": 1672596093030,
     "lastModifiedBy": "dnd5ebuilder0000"
   }
 }

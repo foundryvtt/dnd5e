@@ -121,7 +121,9 @@
           "poison",
           "slashing"
         ],
-        "bypasses": [],
+        "bypasses": [
+          "mgc"
+        ],
         "custom": ""
       },
       "dr": {
@@ -4433,7 +4435,7 @@
     "systemVersion": "2.1.0",
     "coreVersion": "10.291",
     "createdTime": 1661787232912,
-    "modifiedTime": 1672524485254,
+    "modifiedTime": 1672596102266,
     "lastModifiedBy": "dnd5ebuilder0000"
   }
 }
