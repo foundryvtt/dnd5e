@@ -57,6 +57,12 @@ function cleanPackEntry(data, { clearSourceId=true }={}) {
     if ( Object.keys(contents).length === 0 ) delete data.flags[key];
   });
 
+  // Remove mystery-man.svg from Actors
+  if ( ["character", "npc"].includes(data.type) && data.img === "icons/svg/mystery-man.svg" ) {
+    data.img = "";
+    data.prototypeToken.texture.src = "";
+  }
+
   if ( data.effects ) data.effects.forEach(i => cleanPackEntry(i, { clearSourceId: false }));
   if ( data.items ) data.items.forEach(i => cleanPackEntry(i, { clearSourceId: false }));
   if ( data.system?.description?.value ) data.system.description.value = cleanString(data.system.description.value);

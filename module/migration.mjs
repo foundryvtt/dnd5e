@@ -153,6 +153,7 @@ export async function refreshAllCompendiums() {
  */
 export async function refreshCompendium(pack) {
   if ( !pack?.documentName ) return;
+  dnd5e.moduleArt.suppressArt = true;
   const DocumentClass = CONFIG[pack.documentName].documentClass;
   const wasLocked = pack.locked;
   await pack.configure({locked: false});
@@ -166,6 +167,7 @@ export async function refreshCompendium(pack) {
     await DocumentClass.create(data, {keepId: true, keepEmbeddedIds: true, pack: pack.collection});
   }
   await pack.configure({locked: wasLocked});
+  dnd5e.moduleArt.suppressArt = false;
   ui.notifications.info(`Refreshed all documents from Compendium ${pack.collection}`);
 }
 
