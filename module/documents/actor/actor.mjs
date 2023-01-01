@@ -1,5 +1,5 @@
 import Proficiency from "./proficiency.mjs";
-import { d20Roll } from "../../dice/dice.mjs";
+import { _determineAdvantageMode, d20Roll } from "../../dice/dice.mjs";
 import { simplifyBonus } from "../../utils.mjs";
 import ShortRestDialog from "../../applications/actor/short-rest.mjs";
 import LongRestDialog from "../../applications/actor/long-rest.mjs";
@@ -1428,7 +1428,7 @@ export default class Actor5e extends Actor {
    * @param {string} [options.flavor]                     Special flavor text to apply
    * @returns {D20Roll}                               The constructed but unevaluated D20Roll
    */
-  getInitiativeRoll({advantageMode, flavor}={}) {
+  getInitiativeRoll(options={}) {
 
     // Use a temporarily cached initiative roll
     if ( this._cachedInitiativeRoll ) return this._cachedInitiativeRoll.clone();
@@ -1438,7 +1438,7 @@ export default class Actor5e extends Actor {
     const abilityId = init?.ability || CONFIG.DND5E.initiativeAbility;
     const data = this.getRollData();
     const flags = this.flags.dnd5e || {};
-    if ( flags.initiativeAdv ) advantageMode ??= dnd5e.dice.D20Roll.ADV_MODE.ADVANTAGE;
+    if ( flags.initiativeAdv ) options.advantageMode ??= dnd5e.dice.D20Roll.ADV_MODE.ADVANTAGE;
 
     // Standard initiative formula
     const parts = ["1d20"];
@@ -1487,15 +1487,27 @@ export default class Actor5e extends Actor {
       if ( Number.isNumeric(abilityValue) ) parts.push(String(abilityValue / 100));
     }
 
-    // Create the d20 roll
-    const formula = parts.join(" + ");
-    return new CONFIG.Dice.D20Roll(formula, data, {
-      flavor: flavor ?? game.i18n.localize("DND5E.Initiative"),
-      advantageMode: advantageMode,
+    options = foundry.utils.mergeObject({
+      flavor: options.flavor ?? game.i18n.localize("DND5E.Initiative"),
       halflingLucky: flags.halflingLucky ?? false,
       critical: null,
       fumble: null
-    });
+    }, options);
+
+    /**
+     * A hook event that fires before initiative is rolled for an Actor.
+     * @function dnd5e.preRollInitiative
+     * @memberof hookEvents
+     * @param {Actor5e} actor                The Actor that is rolling initiative.
+     * @param {object} data                  The roll data.
+     * @param {string[]} parts               The roll parts.
+     * @param {D20RollConfiguration} config  Configuration data for the pending roll.
+     */
+    Hooks.callAll("dnd5e.preRollInitiative", this, data, parts, options);
+
+    // Create the d20 roll
+    const formula = parts.join(" + ");
+    return new CONFIG.Dice.D20Roll(formula, data, options);
   }
 
   /* -------------------------------------------- */
@@ -1506,21 +1518,47 @@ export default class Actor5e extends Actor {
    * @returns {Promise<void>}           A promise which resolves once initiative has been rolled for the Actor
    */
   async rollInitiativeDialog(rollOptions={}) {
+    let {advantageMode, fastForward, event} = rollOptions;
+    const ff = _determineAdvantageMode({fastForward, event});
+    if ( ff.isFF ) advantageMode ??= ff.advantageMode;
+    if ( advantageMode !== undefined ) rollOptions.advantageMode = advantageMode;
+    const defaultRollMode = game.settings.get("core", "rollMode");
 
     // Create and configure the Initiative roll
     const roll = this.getInitiativeRoll(rollOptions);
-    const choice = await roll.configureDialog({
-      title: `${game.i18n.localize("DND5E.InitiativeRoll")}: ${this.name}`,
-      chooseModifier: false,
-      defaultRollMode: game.settings.get("core", "rollMode"),
-      defaultAction: rollOptions.advantageMode ?? dnd5e.dice.D20Roll.ADV_MODE.NORMAL
-    });
-    if ( choice === null ) return; // Closed dialog
+    if ( ff.isFF ) roll.options.rollMode ??= defaultRollMode;
+    else {
+      const choice = await roll.configureDialog({
+        defaultRollMode,
+        title: `${game.i18n.localize("DND5E.InitiativeRoll")}: ${this.name}`,
+        chooseModifier: false,
+        defaultAction: rollOptions.advantageMode ?? dnd5e.dice.D20Roll.ADV_MODE.NORMAL
+      });
+      if ( choice === null ) return; // Closed dialog
+    }
 
     // Temporarily cache the configured roll and use it to roll initiative for the Actor
     this._cachedInitiativeRoll = roll;
     await this.rollInitiative({createCombatants: true});
     delete this._cachedInitiativeRoll;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  async rollInitiative(options={}) {
+    const combat = await super.rollInitiative(options);
+    const combatant = this.isToken ? combat.getCombatantByToken(this.token.id) : combat.getCombatantByActor(this.id);
+
+    /**
+     * A hook event that fires after an Actor has rolled for initiative.
+     * @function dnd5e.rollInitiative
+     * @memberof hookEvents
+     * @param {Actor5e} actor        The Actor that rolled initiative.
+     * @param {Combatant} combatant  The associated Combatant in the Combat.
+     */
+    Hooks.callAll("dnd5e.rollInitiative", this, combatant);
+    return combat;
   }
 
   /* -------------------------------------------- */

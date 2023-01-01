@@ -110,8 +110,9 @@ export async function d20Roll({
  * @param {boolean} [config.disadvantage]  Is something granting this roll disadvantage?
  * @param {boolean} [config.fastForward]   Should the roll dialog be skipped?
  * @returns {{isFF: boolean, advantageMode: number}}  Whether the roll is fast-forward, and its advantage mode.
+ * @internal
  */
-function _determineAdvantageMode({event, advantage=false, disadvantage=false, fastForward}={}) {
+export function _determineAdvantageMode({event, advantage=false, disadvantage=false, fastForward}={}) {
   const isFF = fastForward ?? (event && (event.shiftKey || event.altKey || event.ctrlKey || event.metaKey));
   let advantageMode = CONFIG.Dice.D20Roll.ADV_MODE.NORMAL;
   if ( advantage || event?.altKey ) advantageMode = CONFIG.Dice.D20Roll.ADV_MODE.ADVANTAGE;
