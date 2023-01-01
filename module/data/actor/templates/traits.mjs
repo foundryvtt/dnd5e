@@ -67,6 +67,7 @@ export default class TraitsField {
    */
   static makeSimpleTrait(schemaOptions={}, {initial=[], extraFields={}}={}) {
     return new foundry.data.fields.SchemaField({
+      ...extraFields,
       value: new foundry.data.fields.SetField(
         new foundry.data.fields.StringField(), {label: "DND5E.TraitsChosen", initial}
       ),
