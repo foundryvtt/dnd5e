@@ -76,7 +76,7 @@ export default class NPCData extends CreatureTemplate {
       }, {label: "DND5E.Attributes"}),
       details: new foundry.data.fields.SchemaField({
         ...DetailsFields.common,
-        ...DetailsFields.character,
+        ...DetailsFields.creature,
         type: new foundry.data.fields.SchemaField({
           value: new foundry.data.fields.StringField({required: true, blank: true, label: "DND5E.CreatureType"}),
           subtype: new foundry.data.fields.StringField({required: true, label: "DND5E.CreatureTypeSelectorSubtype"}),
@@ -85,7 +85,7 @@ export default class NPCData extends CreatureTemplate {
         }, {label: "DND5E.CreatureType"}),
         environment: new foundry.data.fields.StringField({required: true, label: "DND5E.Environment"}),
         cr: new foundry.data.fields.NumberField({
-          required: true, nullable: false, integer: true, min: 0, initial: 1, label: "DND5E.ChallengeRating"
+          required: true, nullable: false, min: 0, initial: 1, label: "DND5E.ChallengeRating"
         }),
         spellLevel: new foundry.data.fields.NumberField({
           required: true, nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.SpellcasterLevel"
