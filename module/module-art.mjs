@@ -40,7 +40,13 @@ export class ModuleArt {
     // Load system mapping.
     try {
       const mapping = await foundry.utils.fetchJsonWithTimeout("systems/dnd5e/json/fa-token-mapping.json");
-      await this.#parseArtMapping(game.system.id, mapping, "<em>Token artwork by Forgotten Adventures.</em>")
+      const credit = `
+        <em>
+          Token artwork by
+          <a href="https://www.forgotten-adventures.net/" target="_blank" rel="noopener">Forgotten Adventures</a>.
+        </em>
+      `;
+      await this.#parseArtMapping(game.system.id, mapping, credit);
     } catch ( e ) {
       console.error(e);
     }
