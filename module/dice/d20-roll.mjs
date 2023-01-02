@@ -35,6 +35,26 @@ export default class D20Roll extends Roll {
   /* -------------------------------------------- */
 
   /**
+   * Determine whether a d20 roll should be fast-forwarded, and whether advantage or disadvantage should be applied.
+   * @param {object} [options]
+   * @param {Event} [options.event]                               The Event that triggered the roll.
+   * @param {boolean} [options.advantage]                         Is something granting this roll advantage?
+   * @param {boolean} [options.disadvantage]                      Is something granting this roll disadvantage?
+   * @param {boolean} [options.fastForward]                       Should the roll dialog be skipped?
+   * @returns {{advantageMode: D20Roll.ADV_MODE, isFF: boolean}}  Whether the roll is fast-forwarded, and its advantage
+   *                                                              mode.
+   */
+  static determineAdvantageMode({event, advantage=false, disadvantage=false, fastForward}={}) {
+    const isFF = fastForward ?? (event?.shiftKey || event?.altKey || event?.ctrlKey || event?.metaKey);
+    let advantageMode = this.ADV_MODE.NORMAL;
+    if ( advantage || event?.altKey ) advantageMode = this.ADV_MODE.ADVANTAGE;
+    else if ( disadvantage || event?.ctrlKey || event?.metaKey ) advantageMode = this.ADV_MODE.DISADVANTAGE;
+    return {isFF: !!isFF, advantageMode};
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Advantage mode of a 5e d20 roll
    * @enum {number}
    */
