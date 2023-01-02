@@ -1,27 +1,18 @@
 <form autocomplete="off" onsubmit="event.preventDefault();">
+    {{> "dnd5e.trait-list" prefix="choices"}}
 
-    {{#*inline "traitList"}}
-    <ol class="trait-list">
-        {{#each choices as |choice key|}}
-        <li>
-            <label class="checkbox">
-                <input type="checkbox" name="{{key}}" data-dtype="Boolean" {{checked choice.chosen}}>
-                {{choice.label}}
-            </label>
-            {{#if choice.children}}
-              {{> traitList choices=choice.children}}
-            {{/if}}
-        </li>
-        {{/each}}
-    </ol>
-    {{/inline}}
-
-    {{> traitList}}
-    {{#if allowCustom}}
-    <div class="form-group stacked">
-        <label>{{ localize "DND5E.TraitSelectorSpecial" }}</label>
-        <input type="text" name="custom" value="{{custom}}" data-dtype="String"/>
-    </div>
+    {{#if customPath}}
+        <div class="form-group stacked">
+            <label>{{localize "DND5E.TraitSelectorSpecial"}}</label>
+            <input type="text" name="{{customPath}}" value="{{custom}}">
+        </div>
     {{/if}}
+
+    {{#if bypassesPath}}
+        <h3>{{localize "DND5E.DamagePhysicalBypass"}}</h3>
+        <p class="note">{{localize "DND5E.DamagePhysicalBypassHint"}}</p>
+        {{> "dnd5e.trait-list" choices=bypasses prefix="bypasses"}}
+    {{/if}}
+
     <button type="submit"><i class="far fa-save"></i> {{localize "DND5E.TraitSave"}}</button>
 </form>

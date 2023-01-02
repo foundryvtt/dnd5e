@@ -1,24 +1,17 @@
 import TraitSelector from "./trait-selector.mjs";
+import * as Trait from "../documents/actor/trait.mjs";
 
 /**
  * An application for selecting proficiencies with categories that can contain children.
+ * @deprecated since dnd5e 2.1, targeted for removal in 2.3
  */
 export default class ProficiencySelector extends TraitSelector {
-
-  /**
-   * Cached version of the base items compendia indices with the needed subtype fields.
-   * @type {object}
-   */
-  static _cachedIndices = {};
-
-  /* -------------------------------------------- */
 
   /** @inheritdoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       title: "Actor Proficiency Selection",
-      type: "",
-      sortCategories: false
+      type: ""
     });
   }
 
@@ -30,73 +23,26 @@ export default class ProficiencySelector extends TraitSelector {
     const chosen = (this.options.valueKey) ? foundry.utils.getProperty(attr, this.options.valueKey) ?? [] : attr;
 
     const data = super.getData();
-    data.choices = await this.constructor.getChoices(this.options.type, chosen, this.options.sortCategories);
+    data.choices = await Trait.choices(this.options.type, chosen);
     return data;
   }
 
   /* -------------------------------------------- */
 
   /**
-   * Structure representing proficiency choices split into categories.
-   *
-   * @typedef {object} ProficiencyChoice
-   * @property {string} label                    Localized label for the choice.
-   * @property {boolean} chosen                  Should this choice be selected by default?
-   * @property {ProficiencyChoice[]} [children]  Array of children if this is a category.
-   */
-
-  /**
    * A static helper method to get a list of choices for a proficiency type.
    *
    * @param {string} type               Proficiency type to select, either `armor`, `tool`, or `weapon`.
    * @param {string[]} [chosen]         Optional list of items to be marked as chosen.
-   * @returns {Object<string, ProficiencyChoice>}  Object mapping proficiency ids to choice objects.
+   * @returns {Object<string, SelectChoices>}  Object mapping proficiency ids to choice objects.
+   * @deprecated since dnd5e 2.1, targeted for removal in 2.3
    */
   static async getChoices(type, chosen=[]) {
-    let data = Object.entries(CONFIG.DND5E[`${type}Proficiencies`]).reduce((obj, [key, label]) => {
-      obj[key] = { label: label, chosen: chosen.includes(key) };
-      return obj;
-    }, {});
-
-    const ids = CONFIG.DND5E[`${type}Ids`];
-    const map = CONFIG.DND5E[`${type}ProficienciesMap`];
-    if ( ids !== undefined ) {
-      const typeProperty = (type !== "armor") ? `${type}Type` : "armor.type";
-      for ( const [key, id] of Object.entries(ids) ) {
-        const item = await this.getBaseItem(id);
-        if ( !item ) continue;
-
-        let type = foundry.utils.getProperty(item.system, typeProperty);
-        if ( map && map[type] ) type = map[type];
-        const entry = {
-          label: item.name,
-          chosen: chosen.includes(key)
-        };
-        if ( data[type] === undefined ) {
-          data[key] = entry;
-        } else {
-          if ( data[type].children === undefined ) {
-            data[type].children = {};
-          }
-          data[type].children[key] = entry;
-        }
-      }
-    }
-
-    if ( type === "tool" ) {
-      data.vehicle.children = Object.entries(CONFIG.DND5E.vehicleTypes).reduce((obj, [key, label]) => {
-        obj[key] = { label: label, chosen: chosen.includes(key) };
-        return obj;
-      }, {});
-      data = dnd5e.utils.sortObjectEntries(data, "label");
-    }
-
-    for ( const category of Object.values(data) ) {
-      if ( !category.children ) continue;
-      category.children = dnd5e.utils.sortObjectEntries(category.children, "label");
-    }
-
-    return data;
+    foundry.utils.logCompatibilityWarning(
+      "ProficiencySelector#getChoices has been deprecated in favor of Trait#choices.",
+      { since: "DnD5e 2.1", until: "DnD5e 2.3" }
+    );
+    return Trait.choices(type, chosen);
   }
 
   /* -------------------------------------------- */
@@ -114,47 +60,14 @@ export default class ProficiencySelector extends TraitSelector {
    *                                       false.
    * @returns {Promise<Item5e>|object}     Promise for a `Document` if `indexOnly` is false & `fullItem` is true,
    *                                       otherwise else a simple object containing the minimal index data.
+   * @deprecated since dnd5e 2.1, targeted for removal in 2.3
    */
-  static getBaseItem(identifier, { indexOnly=false, fullItem=false }={}) {
-    let pack = CONFIG.DND5E.sourcePacks.ITEMS;
-    let [scope, collection, id] = identifier.split(".");
-    if ( scope && collection ) pack = `${scope}.${collection}`;
-    if ( !id ) id = identifier;
-
-    const packObject = game.packs.get(pack);
-
-    // Full Item5e document required, always async.
-    if ( fullItem && !indexOnly ) {
-      return packObject?.getDocument(id);
-    }
-
-    const cache = this._cachedIndices[pack];
-    const loading = cache instanceof Promise;
-
-    // Return extended index if cached, otherwise normal index, guaranteed to never be async.
-    if ( indexOnly ) {
-      const index = packObject?.index.get(id);
-      return loading ? index : cache?.[id] ?? index;
-    }
-
-    // Returned cached version of extended index if available.
-    if ( loading ) return cache.then(() => this._cachedIndices[pack][id]);
-    else if ( cache ) return cache[id];
-    if ( !packObject ) return;
-
-    // Build the extended index and return a promise for the data
-    const promise = packObject.getIndex({
-      fields: ["system.armor.type", "system.toolType", "system.weaponType"]
-    }).then(index => {
-      const store = index.reduce((obj, entry) => {
-        obj[entry._id] = entry;
-        return obj;
-      }, {});
-      this._cachedIndices[pack] = store;
-      return store[id];
-    });
-    this._cachedIndices[pack] = promise;
-    return promise;
+  static getBaseItem(identifier, options) {
+    foundry.utils.logCompatibilityWarning(
+      "ProficiencySelector#getChoices has been deprecated in favor of Trait#getBaseItem.",
+      { since: "DnD5e 2.1", until: "DnD5e 2.3" }
+    );
+    return Trait.getBaseItem(identifier, options);
   }
 
   /* -------------------------------------------- */

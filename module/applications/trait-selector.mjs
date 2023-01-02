@@ -1,7 +1,20 @@
 /**
- * A specialized form used to select from a checklist of attributes, traits, or properties
+ * A specialized form used to select from a checklist of attributes, traits, or properties.
+ * @deprecated since dnd5e 2.1, targeted for removal in 2.3
  */
 export default class TraitSelector extends DocumentSheet {
+  constructor(...args) {
+    super(...args);
+
+    if ( !this.options.suppressWarning ) foundry.utils.logCompatibilityWarning(
+      `${this.constructor.name} has been deprecated in favor of a more specialized TraitSelector `
+      + "available at 'dnd5e.applications.actor.TraitSelector'. Support for the old application will "
+      + "be removed in a future version.",
+      { since: "DnD5e 2.1", until: "DnD5e 2.3" }
+    );
+  }
+
+  /* -------------------------------------------- */
 
   /** @inheritDoc */
   static get defaultOptions() {
@@ -58,9 +71,9 @@ export default class TraitSelector extends DocumentSheet {
 
     // Return data
     return {
-      allowCustom: o.allowCustom,
       choices: choices,
-      custom: custom
+      custom: custom,
+      customPath: o.allowCustom ? "custom" : null
     };
   }
 
@@ -73,9 +86,10 @@ export default class TraitSelector extends DocumentSheet {
    */
   _prepareUpdateData(formData) {
     const o = this.options;
+    formData = foundry.utils.expandObject(formData);
 
     // Obtain choices
-    const chosen = Object.entries(formData).filter(([k, v]) => (k !== "custom") && v).map(([k]) => k);
+    const chosen = Object.entries(formData.choices).filter(([, v]) => v).map(([k]) => k);
 
     // Object including custom data
     const updateData = {};

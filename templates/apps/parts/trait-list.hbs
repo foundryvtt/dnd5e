@@ -1,0 +1,13 @@
+<ol class="trait-list">
+  {{#each choices as |choice key|}}
+    <li>
+      <label class="checkbox">
+        <input type="checkbox" name="{{#if ../prefix}}{{../prefix}}.{{/if}}{{key}}" {{checked choice.chosen}}>
+        {{choice.label}}
+      </label>
+      {{#if choice.children}}
+        {{> "dnd5e.trait-list" choices=choice.children prefix=../prefix}}
+      {{/if}}
+    </li>
+  {{/each}}
+</ol>

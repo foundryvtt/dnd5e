@@ -1491,6 +1491,82 @@ DND5E.CR_EXP_LEVELS = [
  * @property {string[]} [skills]
  */
 
+/* -------------------------------------------- */
+
+/**
+ * Trait configuration information.
+ *
+ * @typedef {object} TraitConfiguration
+ * @property {string} label               Localization key for the trait name.
+ * @property {string} [actorKeyPath]      If the trait doesn't directly map to an entry as `traits.[key]`, where is
+ *                                        this trait's data stored on the actor?
+ * @property {string} [configKey]         If the list of trait options doesn't match the name of the trait, where can
+ *                                        the options be found within `CONFIG.DND5E`?
+ * @property {string} [labelKey]          If config is an enum of objects, where can the label be found?
+ * @property {object} [subtypes]          Configuration for traits that take some sort of base item.
+ * @property {string} [subtypes.keyPath]  Path to subtype value on base items, should match a category key.
+ * @property {string[]} [subtypes.ids]    Key for base item ID objects within `CONFIG.DND5E`.
+ * @property {object} [children]          Mapping of category key to an object defining its children.
+ * @property {boolean} [sortCategories]   Whether top-level categories should be sorted.
+ */
+
+/**
+ * Configurable traits on actors.
+ * @enum {TraitConfiguration}
+ */
+DND5E.traits = {
+  saves: {
+    label: "DND5E.ClassSaves",
+    configKey: "abilities"
+  },
+  skills: {
+    label: "DND5E.TraitSkillProf",
+    labelKey: "label"
+  },
+  languages: {
+    label: "DND5E.Languages"
+  },
+  di: {
+    label: "DND5E.DamImm",
+    configKey: "damageTypes"
+  },
+  dr: {
+    label: "DND5E.DamRes",
+    configKey: "damageTypes"
+  },
+  dv: {
+    label: "DND5E.DamVuln",
+    configKey: "damageTypes"
+  },
+  ci: {
+    label: "DND5E.ConImm",
+    configKey: "conditionTypes"
+  },
+  weapon: {
+    label: "DND5E.TraitWeaponProf",
+    actorKeyPath: "traits.weaponProf",
+    configKey: "weaponProficiencies",
+    subtypes: { keyPath: "weaponType", ids: ["weaponIds"] }
+  },
+  armor: {
+    label: "DND5E.TraitArmorProf",
+    actorKeyPath: "traits.armorProf",
+    configKey: "armorProficiencies",
+    subtypes: { keyPath: "armor.type", ids: ["armorIds", "shieldIds"] }
+  },
+  tool: {
+    label: "DND5E.TraitToolProf",
+    actorKeyPath: "traits.toolProf",
+    configKey: "toolProficiencies",
+    subtypes: { keyPath: "toolType", ids: ["toolIds"] },
+    children: { vehicle: "vehicleTypes" },
+    sortCategories: true
+  }
+};
+preLocalize("traits", { key: "label" });
+
+/* -------------------------------------------- */
+
 /**
  * Special character flags.
  * @enum {CharacterFlagConfig}
