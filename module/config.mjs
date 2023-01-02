@@ -1528,15 +1528,15 @@ DND5E.traits = {
   },
   di: {
     label: "DND5E.DamImm",
-    configKey: "damageResistanceTypes"
+    configKey: "damageTypes"
   },
   dr: {
     label: "DND5E.DamRes",
-    configKey: "damageResistanceTypes"
+    configKey: "damageTypes"
   },
   dv: {
     label: "DND5E.DamVuln",
-    configKey: "damageResistanceTypes"
+    configKey: "damageTypes"
   },
   ci: {
     label: "DND5E.ConImm",

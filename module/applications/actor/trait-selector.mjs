@@ -10,8 +10,6 @@ import * as Trait from "../../documents/actor/trait.mjs";
  */
 export default class TraitSelector extends DocumentSheet {
   constructor(actor, trait, options) {
-    super(actor, options);
-
     if ( !CONFIG.DND5E.traits[trait] ) throw new Error(
       `Cannot instantiate TraitSelector with a trait not defined in CONFIG.DND5E.traits: ${trait}.`
     );
@@ -19,6 +17,8 @@ export default class TraitSelector extends DocumentSheet {
       `TraitSelector does not support selection of ${trait}. That should be handled through `
       + "that type's more specialized configuration application."
     );
+
+    super(actor, options);
 
     /**
      * Trait key as defined in CONFIG.traits.
@@ -93,7 +93,7 @@ export default class TraitSelector extends DocumentSheet {
   async _onChangeInput(event) {
     super._onChangeInput(event);
 
-    if ( event.target.tagName === "INPUT" ) this._onToggleCategory(event.target);
+    if ( event.target.name?.startsWith("choices") ) this._onToggleCategory(event.target);
   }
 
   /* -------------------------------------------- */

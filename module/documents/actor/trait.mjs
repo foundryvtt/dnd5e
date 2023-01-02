@@ -60,9 +60,7 @@ export async function choices(trait, chosen=[]) {
   }
 
   if ( traitConfig.subtypes ) {
-    const keyPath = game.release.generation < 10
-      ? `data.${traitConfig.subtypes.keyPath}`
-      : `system.${traitConfig.subtypes.keyPath}`;
+    const keyPath = `system.${traitConfig.subtypes.keyPath}`;
     const map = CONFIG.DND5E[`${trait}ProficienciesMap`];
 
     // Merge all IDs lists together
@@ -99,12 +97,12 @@ export async function choices(trait, chosen=[]) {
   }
 
   // Sort Categories
-  if ( traitConfig.sortCategories ) data = game.dnd5e.utils.sortObjectEntries(data, "label");
+  if ( traitConfig.sortCategories ) data = dnd5e.utils.sortObjectEntries(data, "label");
 
   // Sort Children
   for ( const category of Object.values(data) ) {
     if ( !category.children ) continue;
-    category.children = game.dnd5e.utils.sortObjectEntries(category.children, "label");
+    category.children = dnd5e.utils.sortObjectEntries(category.children, "label");
   }
 
   return data;
@@ -134,9 +132,7 @@ export function getBaseItem(identifier, { indexOnly=false, fullItem=false }={}) 
   const packObject = game.packs.get(pack);
 
   // Full Item5e document required, always async.
-  if ( fullItem && !indexOnly ) {
-    return packObject?.getDocument(id);
-  }
+  if ( fullItem && !indexOnly ) return packObject?.getDocument(id);
 
   const cache = _cachedIndices[pack];
   const loading = cache instanceof Promise;
@@ -176,7 +172,6 @@ export function traitIndexFields() {
   const fields = [];
   for ( const traitConfig of Object.values(CONFIG.DND5E.traits) ) {
     if ( !traitConfig.subtypes ) continue;
-    fields.push(`data.${traitConfig.subtypes.keyPath}`);
     fields.push(`system.${traitConfig.subtypes.keyPath}`);
   }
   return fields;
@@ -196,7 +191,7 @@ export function traitIndexFields() {
 export function traitLabel(trait, count) {
   let typeCap;
   if ( trait.length === 2 ) typeCap = trait.toUpperCase();
-  else typeCap = trait.charAt(0).toUpperCase() + trait.slice(1).toLowerCase();
+  else typeCap = trait.capitalize();
 
   const pluralRule = ( count !== undefined ) ? new Intl.PluralRules(game.i18n.lang).select(count) : "other";
   return game.i18n.localize(`DND5E.Trait${typeCap}Plural.${pluralRule}`);
