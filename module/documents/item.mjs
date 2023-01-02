@@ -2039,10 +2039,17 @@ export default class Item5e extends Item {
 
     const advancement = this.advancement.byId[id];
     advancement.updateSource(updates);
-    if ( source ) return this;
+    if ( source ) {
+      advancement.render();
+      return this;
+    }
+
     const advancementCollection = this.toObject().system.advancement;
     advancementCollection[idx] = advancement.toObject();
-    return this.update({"system.advancement": advancementCollection});
+    return this.update({"system.advancement": advancementCollection}).then(r => {
+      advancement.render();
+      return r;
+    });
   }
 
   /* -------------------------------------------- */

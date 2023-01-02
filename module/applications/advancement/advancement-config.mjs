@@ -2,7 +2,7 @@
  * Base configuration application for advancements that can be extended by other types to implement custom
  * editing interfaces.
  *
- * @property {Advancement} advancement         The advancement item being edited.
+ * @param {Advancement} advancement            The advancement item being edited.
  * @param {object} [options={}]                Additional options passed to FormApplication.
  * @param {string} [options.dropKeyPath=null]  Path within advancement configuration where dropped items are stored.
  *                                             If populated, will enable default drop & delete behavior.
@@ -10,19 +10,25 @@
 export default class AdvancementConfig extends FormApplication {
   constructor(advancement, options={}) {
     super(advancement, options);
-
-    /**
-     * The advancement being created or edited.
-     * @type {Advancement}
-     */
-    this.advancement = advancement;
-
-    /**
-     * Parent item to which this advancement belongs.
-     * @type {Item5e}
-     */
+    this.#advancementId = advancement.id;
     this.item = advancement.item;
   }
+
+  /* -------------------------------------------- */
+
+  /**
+   * The ID of the advancement being created or edited.
+   * @type {string}
+   */
+  #advancementId;
+
+  /* -------------------------------------------- */
+
+  /**
+   * Parent item to which this advancement belongs.
+   * @type {Item5e}
+   */
+  item;
 
   /* -------------------------------------------- */
 
@@ -41,10 +47,28 @@ export default class AdvancementConfig extends FormApplication {
 
   /* -------------------------------------------- */
 
+  /**
+   * The advancement being created or edited.
+   * @type {Advancement}
+   */
+  get advancement() {
+    return this.item.advancement.byId[this.#advancementId];
+  }
+
+  /* -------------------------------------------- */
+
   /** @inheritDoc */
   get title() {
     const type = this.advancement.constructor.metadata.title;
     return `${game.i18n.format("DND5E.AdvancementConfigureTitle", { item: this.item.name })}: ${type}`;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  async close(options={}) {
+    await super.close(options);
+    delete this.advancement.apps[this.appId];
   }
 
   /* -------------------------------------------- */
@@ -104,6 +128,14 @@ export default class AdvancementConfig extends FormApplication {
   /* -------------------------------------------- */
 
   /** @inheritdoc */
+  render(force=false, options={}) {
+    this.advancement.apps[this.appId] = this;
+    return super.render(force, options);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
   async _updateObject(event, formData) {
     let updates = foundry.utils.expandObject(formData);
     if ( updates.data ) {
@@ -118,7 +150,6 @@ export default class AdvancementConfig extends FormApplication {
     }
     if ( updates.configuration ) updates.configuration = this.prepareConfigurationUpdate(updates.configuration);
     await this.advancement.update(updates);
-    this.render();
   }
 
   /* -------------------------------------------- */
@@ -157,7 +188,6 @@ export default class AdvancementConfig extends FormApplication {
       [this.options.dropKeyPath]: items.filter(uuid => uuid !== uuidToDelete)
     }) };
     await this.advancement.update(updates);
-    this.render();
   }
 
   /* -------------------------------------------- */
@@ -201,7 +231,6 @@ export default class AdvancementConfig extends FormApplication {
     }
 
     await this.advancement.update({[`configuration.${this.options.dropKeyPath}`]: [...existingItems, item.uuid]});
-    this.render();
   }
 
   /* -------------------------------------------- */
