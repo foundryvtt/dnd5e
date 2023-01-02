@@ -189,7 +189,7 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
       const isActive = !!item.system.equipped;
       item.toggleClass = isActive ? "active" : "";
       item.toggleTitle = game.i18n.localize(isActive ? "DND5E.Equipped" : "DND5E.Unequipped");
-      item.canToggle = true;
+      item.canToggle = "equipped" in item.system;
     }
   }
 

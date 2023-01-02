@@ -743,7 +743,7 @@ export default class ActorSheet5e extends ActorSheet {
 
     // Toggle Attunement State
     if ( ("attunement" in item.system) && (item.system.attunement !== CONFIG.DND5E.attunementTypes.NONE) ) {
-      const isAttuned = item.system.attunement === CONFIG.DND5E.attunementsTypes.ATTUNED;
+      const isAttuned = item.system.attunement === CONFIG.DND5E.attunementTypes.ATTUNED;
       options.push({
         name: isAttuned ? "DND5E.ContextMenuActionUnattune" : "DND5E.ContextMenuActionAttune",
         icon: "<i class='fas fa-sun fa-fw'></i>",

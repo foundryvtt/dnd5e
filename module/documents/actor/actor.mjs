@@ -3,7 +3,6 @@ import { d20Roll } from "../../dice/dice.mjs";
 import { simplifyBonus } from "../../utils.mjs";
 import ShortRestDialog from "../../applications/actor/short-rest.mjs";
 import LongRestDialog from "../../applications/actor/long-rest.mjs";
-import ProficiencySelector from "../../applications/proficiency-selector.mjs";
 
 /**
  * Extend the base Actor class to implement additional system-specific logic.

@@ -1,7 +1,7 @@
 import AdvancementManager from "../advancement/advancement-manager.mjs";
-import ProficiencySelector from "../proficiency-selector.mjs";
 import TraitSelector from "../trait-selector.mjs";
 import ActiveEffect5e from "../../documents/active-effect.mjs";
+import * as Trait from "../../documents/actor/trait.mjs";
 
 /**
  * Override and extend the core ItemSheet implementation to handle specific item types.
@@ -202,7 +202,7 @@ export default class ItemSheet5e extends ItemSheet {
 
     const items = {};
     for ( const [name, id] of Object.entries(baseIds) ) {
-      const baseItem = await ProficiencySelector.getBaseItem(id);
+      const baseItem = await Trait.getBaseItem(id);
       if ( baseType !== foundry.utils.getProperty(baseItem?.system, typeProperty) ) continue;
       items[name] = baseItem.name;
     }

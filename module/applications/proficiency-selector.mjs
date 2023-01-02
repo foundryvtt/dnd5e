@@ -64,7 +64,7 @@ export default class ProficiencySelector extends TraitSelector {
    */
   static getBaseItem(identifier, options) {
     foundry.utils.logCompatibilityWarning(
-      "ProficiencySelector#getChoices has been deprecated in favor of Trait#getBaseItem.",
+      "ProficiencySelector#getBaseItem has been deprecated in favor of Trait#getBaseItem.",
       { since: "DnD5e 2.1", until: "DnD5e 2.3" }
     );
     return Trait.getBaseItem(identifier, options);
