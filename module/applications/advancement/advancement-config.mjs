@@ -2,7 +2,7 @@
  * Base configuration application for advancements that can be extended by other types to implement custom
  * editing interfaces.
  *
- * @property {Advancement} advancement         The advancement item being edited.
+ * @param {Advancement} advancement            The advancement item being edited.
  * @param {object} [options={}]                Additional options passed to FormApplication.
  * @param {string} [options.dropKeyPath=null]  Path within advancement configuration where dropped items are stored.
  *                                             If populated, will enable default drop & delete behavior.
@@ -10,19 +10,25 @@
 export default class AdvancementConfig extends FormApplication {
   constructor(advancement, options={}) {
     super(advancement, options);
-
-    /**
-     * The ID of the advancement being created or edited.
-     * @type {string}
-     */
-    this._advancementId = advancement.id;
-
-    /**
-     * Parent item to which this advancement belongs.
-     * @type {Item5e}
-     */
+    this.#advancementId = advancement.id;
     this.item = advancement.item;
   }
+
+  /* -------------------------------------------- */
+
+  /**
+   * The ID of the advancement being created or edited.
+   * @type {string}
+   */
+  #advancementId;
+
+  /* -------------------------------------------- */
+
+  /**
+   * Parent item to which this advancement belongs.
+   * @type {Item5e}
+   */
+  item;
 
   /* -------------------------------------------- */
 
@@ -46,7 +52,7 @@ export default class AdvancementConfig extends FormApplication {
    * @type {Advancement}
    */
   get advancement() {
-    return this.item.advancement.byId[this._advancementId];
+    return this.item.advancement.byId[this.#advancementId];
   }
 
   /* -------------------------------------------- */

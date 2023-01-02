@@ -2046,7 +2046,7 @@ export default class Item5e extends Item {
 
     const advancementCollection = this.toObject().system.advancement;
     advancementCollection[idx] = advancement.toObject();
-    this.update({"system.advancement": advancementCollection}).then(r => {
+    return this.update({"system.advancement": advancementCollection}).then(r => {
       advancement.render();
       return r;
     });
