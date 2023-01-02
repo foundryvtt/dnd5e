@@ -23,6 +23,18 @@ export default class Advancement extends BaseAdvancement {
   constructor(data, {parent=null, ...options}={}) {
     if ( parent instanceof Item ) parent = parent.system;
     super(data, {parent, ...options});
+
+    /**
+     * A collection of Application instances which should be re-rendered whenever this document is updated.
+     * The keys of this object are the application ids and the values are Application instances. Each
+     * Application in this object will have its render method called by {@link Document#render}.
+     * @type {Object<Application>}
+     */
+    Object.defineProperty(this, "apps", {
+      value: {},
+      writable: false,
+      enumerable: false
+    });
   }
 
   /* -------------------------------------------- */
@@ -209,6 +221,17 @@ export default class Advancement extends BaseAdvancement {
    */
   summaryForLevel(level, { configMode=false }={}) {
     return "";
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Render all of the Application instances which are connected to this advancement.
+   * @param {boolean} [force=false]     Force rendering
+   * @param {object} [context={}]       Optional context
+   */
+  render(force=false, context={}) {
+    for ( const app of Object.values(this.apps) ) app.render(force, context);
   }
 
   /* -------------------------------------------- */

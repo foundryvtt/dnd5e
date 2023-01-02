@@ -12,10 +12,10 @@ export default class AdvancementConfig extends FormApplication {
     super(advancement, options);
 
     /**
-     * The advancement being created or edited.
-     * @type {Advancement}
+     * The ID of the advancement being created or edited.
+     * @type {string}
      */
-    this.advancement = advancement;
+    this._advancementId = advancement.id;
 
     /**
      * Parent item to which this advancement belongs.
@@ -41,10 +41,28 @@ export default class AdvancementConfig extends FormApplication {
 
   /* -------------------------------------------- */
 
+  /**
+   * The advancement being created or edited.
+   * @type {Advancement}
+   */
+  get advancement() {
+    return this.item.advancement.byId[this._advancementId];
+  }
+
+  /* -------------------------------------------- */
+
   /** @inheritDoc */
   get title() {
     const type = this.advancement.constructor.metadata.title;
     return `${game.i18n.format("DND5E.AdvancementConfigureTitle", { item: this.item.name })}: ${type}`;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  async close(options={}) {
+    await super.close(options);
+    delete this.advancement.apps[this.appId];
   }
 
   /* -------------------------------------------- */
@@ -104,6 +122,14 @@ export default class AdvancementConfig extends FormApplication {
   /* -------------------------------------------- */
 
   /** @inheritdoc */
+  render(force=false, options={}) {
+    this.advancement.apps[this.appId] = this;
+    return super.render(force, options);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
   async _updateObject(event, formData) {
     let updates = foundry.utils.expandObject(formData);
     if ( updates.data ) {
@@ -118,7 +144,6 @@ export default class AdvancementConfig extends FormApplication {
     }
     if ( updates.configuration ) updates.configuration = this.prepareConfigurationUpdate(updates.configuration);
     await this.advancement.update(updates);
-    this.render();
   }
 
   /* -------------------------------------------- */
@@ -157,7 +182,6 @@ export default class AdvancementConfig extends FormApplication {
       [this.options.dropKeyPath]: items.filter(uuid => uuid !== uuidToDelete)
     }) };
     await this.advancement.update(updates);
-    this.render();
   }
 
   /* -------------------------------------------- */
@@ -201,7 +225,6 @@ export default class AdvancementConfig extends FormApplication {
     }
 
     await this.advancement.update({[`configuration.${this.options.dropKeyPath}`]: [...existingItems, item.uuid]});
-    this.render();
   }
 
   /* -------------------------------------------- */
