@@ -92,6 +92,7 @@ export default class Actor5e extends Actor {
   prepareData() {
     this._classes = undefined;
     this._preparationWarnings = [];
+    this.items.forEach(item => item.prepareInitialAttributes());
     super.prepareData();
     this.items.forEach(item => item.prepareFinalAttributes());
   }
@@ -109,6 +110,7 @@ export default class Actor5e extends Actor {
     this._prepareBaseAbilities();
     this._prepareBaseSkills();
     this._prepareBaseArmorClass();
+    this._prepareScaleValues();
 
     // Type-specific preparation
     switch ( this.type ) {
@@ -166,7 +168,6 @@ export default class Actor5e extends Actor {
     this._prepareEncumbrance();
     this._prepareHitPoints(rollData);
     this._prepareInitiative(rollData, checkBonus);
-    this._prepareScaleValues();
     this._prepareSpellcasting();
   }
 
@@ -281,6 +282,21 @@ export default class Actor5e extends Actor {
     const ac = this.system.attributes.ac;
     ac.armor = 10;
     ac.shield = ac.bonus = ac.cover = 0;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Derive any values that have been scaled by the Advancement system.
+   * Mutates the value of the `system.scale` object.
+   * @protected
+   */
+  _prepareScaleValues() {
+    this.system.scale = Object.entries(this.classes).reduce((scale, [identifier, cls]) => {
+      scale[identifier] = cls.scaleValues;
+      if ( cls.subclass ) scale[cls.subclass.identifier] = cls.subclass.scaleValues;
+      return scale;
+    }, {});
   }
 
   /* -------------------------------------------- */
@@ -632,21 +648,6 @@ export default class Actor5e extends Actor {
     init.total = init.mod + initBonus + abilityBonus + globalCheckBonus
       + (flags.initiativeAlert ? 5 : 0)
       + (Number.isNumeric(init.prof.term) ? init.prof.flat : 0);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Derive any values that have been scaled by the Advancement system.
-   * Mutates the value of the `system.scale` object.
-   * @protected
-   */
-  _prepareScaleValues() {
-    this.system.scale = Object.entries(this.classes).reduce((scale, [identifier, cls]) => {
-      scale[identifier] = cls.scaleValues;
-      if ( cls.subclass ) scale[cls.subclass.identifier] = cls.subclass.scaleValues;
-      return scale;
-    }, {});
   }
 
   /* -------------------------------------------- */
