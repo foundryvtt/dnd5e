@@ -36,9 +36,7 @@ export default class ActivatedEffectTemplate extends foundry.abstract.DataModel 
     return {
       activation: new foundry.data.fields.SchemaField({
         type: new foundry.data.fields.StringField({required: true, blank: true, label: "DND5E.ItemActivationType"}),
-        cost: new foundry.data.fields.NumberField({
-          required: true, nullable: false, initial: 0, label: "DND5E.ItemActivationCost"
-        }),
+        cost: new foundry.data.fields.NumberField({required: true, label: "DND5E.ItemActivationCost"}),
         condition: new foundry.data.fields.StringField({required: true, label: "DND5E.ItemActivationCondition"})
       }, {label: "DND5E.ItemActivation"}),
       duration: new foundry.data.fields.SchemaField({
