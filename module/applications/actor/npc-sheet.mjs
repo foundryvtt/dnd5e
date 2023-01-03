@@ -57,13 +57,13 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
     // Start by classifying items into groups for rendering
     let [spells, other] = context.items.reduce((arr, item) => {
       const {quantity, uses, recharge, target} = item.system;
-      item.img = item.img || CONST.DEFAULT_TOKEN;
-      item.isStack = Number.isNumeric(quantity) && (quantity !== 1);
-      item.hasUses = uses && (uses.max > 0);
-      item.isOnCooldown = recharge && !!recharge.value && (recharge.charged === false);
-      item.isDepleted = item.isOnCooldown && (uses.per && (uses.value > 0));
-      item.hasTarget = !!target && !(["none", ""].includes(target.type));
-      item.canToggle = false;
+      const ctx = context.itemContext[item.id] ??= {};
+      ctx.isStack = Number.isNumeric(quantity) && (quantity !== 1);
+      ctx.hasUses = uses && (uses.max > 0);
+      ctx.isOnCooldown = recharge && !!recharge.value && (recharge.charged === false);
+      ctx.isDepleted = item.isOnCooldown && (uses.per && (uses.value > 0));
+      ctx.hasTarget = !!target && !(["none", ""].includes(target.type));
+      ctx.canToggle = false;
       if ( item.type === "spell" ) arr[0].push(item);
       else arr[1].push(item);
       return arr;

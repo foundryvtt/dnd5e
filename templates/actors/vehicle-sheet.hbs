@@ -31,22 +31,18 @@
                     <h4 class="attribute-name box-title">{{localize 'DND5E.HitPoints'}}</h4>
                     <div class="attribute-value multiple">
                         <input name="system.attributes.hp.value" type="text" data-dtype="Number"
-                            value="{{system.attributes.hp.value}}" placeholder="&mdash;"
-                            title="{{localize 'DND5E.HitPointsCurrent'}}">
+                            value="{{hp.value}}" placeholder="&mdash;" title="{{localize 'DND5E.HitPointsCurrent'}}">
                         <span class="sep"> &sol; </span>
                         <input name="system.attributes.hp.max" type="text" data-dtype="Number"
-                            value="{{system.attributes.hp.max}}" placeholder="&mdash;"
-                            title="{{localize 'DND5E.HitPointsMax'}}">
+                            value="{{hp.max}}" placeholder="&mdash;" title="{{localize 'DND5E.HitPointsMax'}}">
                     </div>
                     <footer class="attribute-footer">
                         <input class="temphp" name="system.attributes.hp.dt" type="text" data-dtype="Number"
                             placeholder="{{localize 'DND5E.Threshold'}}"
-                            value="{{system.attributes.hp.dt}}"
-                            title="{{localize 'DND5E.DamageThreshold'}}">
+                            value="{{hp.dt}}" title="{{localize 'DND5E.DamageThreshold'}}">
                         <input class="temphp" name="system.attributes.hp.mt" type="text" data-dtype="Number"
                             placeholder="{{localize 'DND5E.VehicleMishap'}}"
-                            value="{{system.attributes.hp.mt}}"
-                            title="{{localize 'DND5E.VehicleMishapThreshold'}}">
+                            value="{{hp.mt}}" title="{{localize 'DND5E.VehicleMishapThreshold'}}">
                     </footer>
                 </li>
                 <li class="attribute">
@@ -88,7 +84,7 @@
     <section class="sheet-body">
         <div class="tab attributes flexrow" data-group="primary" data-tab="attributes">
             <ul class="ability-scores flexrow">
-            {{#each system.abilities as |ability id|}}
+            {{#each abilities as |ability id|}}
                 <li class="ability" data-ability="{{id}}">
                     <h4 class="ability-name box-title rollable">{{ability.label}}</h4>
                     <input type="text" name="system.abilities.{{id}}.value" value="{{ability.value}}"

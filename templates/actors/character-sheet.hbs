@@ -56,21 +56,18 @@
                     <a class="config-button" data-action="hit-points"
                         data-tooltip="{{localize 'DND5E.HitPointsConfig'}}"><i class="fas fa-cog"></i></a>
                     <div class="attribute-value multiple">
-                        <input name="system.attributes.hp.value" type="text"
-                            value="{{system.attributes.hp.value}}" placeholder="10"
+                        <input name="system.attributes.hp.value" type="text" value="{{hp.value}}" placeholder="10"
                             data-tooltip="{{localize 'DND5E.HitPointsCurrent'}}" data-dtype="Number">
                         <span class="sep"> / </span>
-                        <span data-tooltip="{{#if source.attributes.hp.max}}{{localize 'DND5E.HitPointsOverride'}}
-                          {{~ else}}{{localize 'DND5E.HitPointsMax'}}{{/if}}">{{system.attributes.hp.max}}</span>
+                        <span data-tooltip="{{#if hp.max}}{{localize 'DND5E.HitPointsOverride'}}
+                          {{~ else}}{{localize 'DND5E.HitPointsMax'}}{{/if}}">{{hp.max}}</span>
                     </div>
                     <footer class="attribute-footer">
                         <input name="system.attributes.hp.temp" type="text" class="temphp"
-                            placeholder="+{{ localize 'DND5E.Temp' }}"
-                            value="{{system.attributes.hp.temp}}"
+                            placeholder="+{{ localize 'DND5E.Temp' }}" value="{{hp.temp}}"
                             title="{{localize 'DND5E.HitPointsTemp'}}" data-dtype="Number">
                         <input name="system.attributes.hp.tempmax" type="text" class="temphp"
-                            placeholder="+{{ localize 'DND5E.Max' }}"
-                            value="{{system.attributes.hp.tempmax}}"
+                            placeholder="+{{ localize 'DND5E.Max' }}" value="{{hp.tempmax}}"
                             title="{{localize 'DND5E.HitPointsTempMax'}}" data-dtype="Number">
                     </footer>
                 </li>
@@ -151,7 +148,7 @@
 
             {{!-- Ability Scores --}}
             <ul class="ability-scores flexrow">
-            {{#each system.abilities as |ability id|}}
+            {{#each abilities as |ability id|}}
                 <li class="ability {{#if ability.proficient}}proficient{{/if}}" data-ability="{{id}}">
                     <h4 class="ability-name box-title rollable">{{ability.label}}</h4>
                     <input type="text" name="system.abilities.{{id}}.value" value="{{ability.value}}"
@@ -172,7 +169,7 @@
             {{!-- Skills --}}
             <ul class="skills-list">
             {{#each config.skills as |obj s|}}
-            {{#with (lookup ../system.skills s) as |skill|}}
+            {{#with (lookup ../skills s) as |skill|}}
                 <li class="skill flexrow {{#if skill.value}}proficient{{/if}}" data-skill="{{s}}">
                     <input type="hidden" name="system.skills.{{s}}.value" value="{{skill.baseValue}}" data-dtype="Number"/>
                     <a class="proficiency-toggle skill-proficiency" title="{{skill.hover}}">{{{skill.icon}}}</a>

@@ -35,7 +35,8 @@
 
     <ol class="item-list">
     {{#each section.items as |item iid|}}
-        <li class="item flexrow {{#if isDepleted}}depleted{{/if}}" data-item-id="{{item._id}}">
+    {{#with (lookup @root.itemContext item.id) as |ctx|}}
+        <li class="item flexrow {{#if ctx.isDepleted}}depleted{{/if}}" data-item-id="{{item.id}}">
             <div class="item-name flexrow rollable">
                 <div class="item-image" tabindex="0" role="button" aria-label="{{item.name}}" style="background-image: url('{{item.img}}')"></div>
                 <h4>
@@ -47,11 +48,11 @@
 
             {{#if section.hasActions}}
             <div class="item-detail item-uses">
-                {{#if item.isOnCooldown}}
+                {{#if ctx.isOnCooldown}}
                     <a class="item-recharge rollable">{{item.labels.recharge}}</a>
                 {{else if item.system.recharge.value}}
                     {{localize "DND5E.Charged"}}
-                {{else if item.hasUses}}
+                {{else if ctx.hasUses}}
                     <input type="text" value="{{item.system.uses.value}}" placeholder="0"/>/ {{item.system.uses.max}}
                 {{/if}}
             </div>
@@ -65,7 +66,7 @@
             <div class="item-detail item-action">
                 <select class="level-selector">
                     {{#select 0}}
-                    {{#each item.availableLevels}}
+                    {{#each ctx.availableLevels}}
                         <option value="{{this.delta}}" {{disabled this.disabled}}>
                             {{localize "DND5E.LevelNumber" level=this.level}}
                             {{#if this.delta}}({{numberFormat this.delta sign=true}}){{/if}}
@@ -89,11 +90,11 @@
                 {{/each}}
             {{/if}}
 
-            {{#if ../../owner}}
+            {{#if @root.owner}}
             <div class="item-controls flexrow">
                 {{#if section.crewable}}
-                <a class="item-control item-toggle {{item.toggleClass}}"
-                   title="{{item.toggleTitle}}">
+                <a class="item-control item-toggle {{ctx.toggleClass}}"
+                   title="{{ctx.toggleTitle}}">
                     <i class="fas fa-sun"></i>
                 </a>
                 {{/if}}
@@ -102,6 +103,7 @@
             </div>
             {{/if}}
         </li>
+    {{/with}}
     {{/each}}
     </ol>
 {{/each}}

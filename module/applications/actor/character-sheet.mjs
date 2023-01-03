@@ -38,7 +38,8 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
       classLabels: classes.map(c => c.name).join(", "),
       multiclassLabels: classes.map(c => [c.subclass?.name ?? "", c.name, c.system.levels].filterJoin(" ")).join(", "),
       weightUnit: game.i18n.localize(`DND5E.Abbreviation${
-        game.settings.get("dnd5e", "metricWeightUnits") ? "Kgs" : "Lbs"}`)
+        game.settings.get("dnd5e", "metricWeightUnits") ? "Kgs" : "Lbs"}`),
+      encumbrance: context.system.attributes.encumbrance
     });
   }
 
@@ -62,9 +63,9 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
       const {quantity, uses, recharge, target} = item.system;
 
       // Item details
-      item.img = item.img || CONST.DEFAULT_TOKEN;
-      item.isStack = Number.isNumeric(quantity) && (quantity !== 1);
-      item.attunement = {
+      const ctx = context.itemContext[item.id] ??= {};
+      ctx.isStack = Number.isNumeric(quantity) && (quantity !== 1);
+      ctx.attunement = {
         [CONFIG.DND5E.attunementTypes.REQUIRED]: {
           icon: "fa-sun",
           cls: "not-attuned",
@@ -78,13 +79,13 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
       }[item.system.attunement];
 
       // Item usage
-      item.hasUses = uses && (uses.max > 0);
-      item.isOnCooldown = recharge && !!recharge.value && (recharge.charged === false);
-      item.isDepleted = item.isOnCooldown && (uses.per && (uses.value > 0));
-      item.hasTarget = !!target && !(["none", ""].includes(target.type));
+      ctx.hasUses = uses && (uses.max > 0);
+      ctx.isOnCooldown = recharge && !!recharge.value && (recharge.charged === false);
+      ctx.isDepleted = ctx.isOnCooldown && (uses.per && (uses.value > 0));
+      ctx.hasTarget = !!target && !(["none", ""].includes(target.type));
 
       // Item toggle state
-      this._prepareItemToggleState(item);
+      this._prepareItemToggleState(item, ctx);
 
       // Classify items into types
       if ( item.type === "spell" ) obj.spells.push(item);
@@ -103,9 +104,8 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
 
     // Organize items
     for ( let i of items ) {
-      i.system.quantity = i.system.quantity || 0;
-      i.system.weight = i.system.weight || 0;
-      i.totalWeight = (i.system.quantity * i.system.weight).toNearest(0.1);
+      const ctx = context.itemContext[i.id] ??= {};
+      ctx.totalWeight = (i.system.quantity * i.system.weight).toNearest(0.1);
       inventory[i.type].items.push(i);
     }
 
@@ -120,7 +120,8 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
     classes.sort((a, b) => b.system.levels - a.system.levels);
     const maxLevelDelta = CONFIG.DND5E.maxLevel - this.actor.system.details.level;
     classes = classes.reduce((arr, cls) => {
-      cls.availableLevels = Array.fromRange(CONFIG.DND5E.maxLevel + 1).slice(1).map(level => {
+      const ctx = context.itemContext[cls.id] ??= {};
+      ctx.availableLevels = Array.fromRange(CONFIG.DND5E.maxLevel + 1).slice(1).map(level => {
         const delta = level - cls.system.levels;
         return { level, delta, disabled: delta > maxLevelDelta };
       });
@@ -171,25 +172,26 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
 
   /**
    * A helper method to establish the displayed preparation state for an item.
-   * @param {Item5e} item  Item being prepared for display. *Will be mutated.*
-   * @private
+   * @param {Item5e} item     Item being prepared for display.
+   * @param {object} context  Context data for display.
+   * @protected
    */
-  _prepareItemToggleState(item) {
-    if (item.type === "spell") {
+  _prepareItemToggleState(item, context) {
+    if ( item.type === "spell" ) {
       const prep = item.system.preparation || {};
       const isAlways = prep.mode === "always";
       const isPrepared = !!prep.prepared;
-      item.toggleClass = isPrepared ? "active" : "";
-      if ( isAlways ) item.toggleClass = "fixed";
-      if ( isAlways ) item.toggleTitle = CONFIG.DND5E.spellPreparationModes.always;
-      else if ( isPrepared ) item.toggleTitle = CONFIG.DND5E.spellPreparationModes.prepared;
-      else item.toggleTitle = game.i18n.localize("DND5E.SpellUnprepared");
+      context.toggleClass = isPrepared ? "active" : "";
+      if ( isAlways ) context.toggleClass = "fixed";
+      if ( isAlways ) context.toggleTitle = CONFIG.DND5E.spellPreparationModes.always;
+      else if ( isPrepared ) context.toggleTitle = CONFIG.DND5E.spellPreparationModes.prepared;
+      else context.toggleTitle = game.i18n.localize("DND5E.SpellUnprepared");
     }
     else {
       const isActive = !!item.system.equipped;
-      item.toggleClass = isActive ? "active" : "";
-      item.toggleTitle = game.i18n.localize(isActive ? "DND5E.Equipped" : "DND5E.Unequipped");
-      item.canToggle = "equipped" in item.system;
+      context.toggleClass = isActive ? "active" : "";
+      context.toggleTitle = game.i18n.localize(isActive ? "DND5E.Equipped" : "DND5E.Unequipped");
+      context.canToggle = "equipped" in item.system;
     }
   }
 
