@@ -25,6 +25,29 @@
       <p class="hint">{{localize "DND5E.AdvancementItemChoiceTypeHint"}}</p>
     </div>
 
+    {{#if typeRestriction}}
+      <div class="form-group">
+        <label>{{typeRestriction.typeLabel}}</label>
+        <div class="form-fields">
+          <select name="configuration.restriction.type">
+            {{selectOptions typeRestriction.typeOptions selected=configuration.restriction.type
+              labelAttr="label" blank="—"}}
+          </select>
+        </div>
+      </div>
+      
+      {{#if typeRestriction.subtypeOptions}}
+        <div class="form-group">
+          <label>{{typeRestriction.subtypeLabel}}</label>
+          <div class="form-fields">
+            <select name="configuration.restriction.subtype">
+              {{selectOptions typeRestriction.subtypeOptions selected=configuration.restriction.subtype blank="—"}}
+            </select>
+          </div>
+        </div>
+      {{/if}}
+    {{/if}}
+
     {{#if showSpellConfig}}
       <div class="form-group">
         <label>{{localize "DND5E.SpellLevel"}}</label>

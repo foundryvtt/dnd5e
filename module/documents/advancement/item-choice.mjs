@@ -76,27 +76,40 @@ export default class ItemChoiceAdvancement extends ItemGrantAdvancement {
    * Verify that the provided item can be used with this advancement based on the configuration.
    * @param {Item5e} item                  Item that needs to be tested.
    * @param {object} config
-   * @param {string} config.restriction    Type restriction on this advancement.
-   * @param {string} config.spellLevel     Spell level limitation.
+   * @param {string} config.type           Type restriction on this advancement.
+   * @param {object} config.restriction    Additional restrictions to be applied.
    * @param {boolean} [config.error=true]  Should an error be thrown when an invalid type is encountered?
    * @returns {boolean}                    Is this type valid?
    * @throws An error if the item is invalid and warn is `true`.
    */
-  _validateItemType(item, { restriction, spellLevel, error=true }={}) {
+  _validateItemType(item, { type, restriction, error=true }={}) {
     super._validateItemType(item, { error });
-    restriction ??= this.configuration.type;
-    spellLevel ??= this.configuration.restriction.level;
+    type ??= this.configuration.type;
+    restriction ??= this.configuration.restriction;
 
     // Type restriction is set and the item type does not match the selected type
-    if ( restriction && (restriction !== item.type) ) {
-      const type = game.i18n.localize(`ITEM.Type${restriction.capitalize()}`);
-      if ( error ) throw new Error(game.i18n.format("DND5E.AdvancementItemChoiceTypeWarning", { type }));
+    if ( type && (type !== item.type) ) {
+      const typeLabel = game.i18n.localize(`ITEM.Type${restriction.capitalize()}`);
+      if ( error ) throw new Error(game.i18n.format("DND5E.AdvancementItemChoiceTypeWarning", { type: typeLabel }));
       return false;
     }
 
+    // If additional type restrictions applied, make sure they are valid
+    if ( (type === "feat") && restriction.type ) {
+      const typeConfig = CONFIG.DND5E.featureTypes[restriction.type];
+      const subtype = typeConfig.subtypes?.[restriction.subtype];
+      let errorLabel;
+      if ( restriction.type !== item.system.type.value ) errorLabel = typeConfig.label;
+      else if ( subtype && (restriction.subtype !== item.system.type.subtype) ) errorLabel = subtype;
+      if ( errorLabel ) {
+        if ( error ) throw new Error(game.i18n.format("DND5E.AdvancementItemChoiceTypeWarning", { type: errorLabel }));
+        return false;
+      }
+    }
+
     // If spell level is restricted, ensure the spell is of the appropriate level
-    const l = parseInt(spellLevel);
-    if ( (restriction === "spell") && Number.isNumeric(l) && (item.system.level !== l) ) {
+    const l = parseInt(restriction.level);
+    if ( (type === "spell") && Number.isNumeric(l) && (item.system.level !== l) ) {
       const level = CONFIG.DND5E.spellLevels[l];
       if ( error ) throw new Error(game.i18n.format("DND5E.AdvancementItemChoiceSpellLevelSpecificWarning", { level }));
       return false;

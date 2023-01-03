@@ -20,7 +20,7 @@ export default class ItemChoiceConfig extends AdvancementConfig {
 
   /** @inheritdoc */
   getData(options={}) {
-    return {
+    const context = {
       ...super.getData(options),
       showSpellConfig: this.advancement.configuration.type === "spell",
       validTypes: this.advancement.constructor.VALID_TYPES.reduce((obj, type) => {
@@ -28,6 +28,16 @@ export default class ItemChoiceConfig extends AdvancementConfig {
         return obj;
       }, {})
     };
+    if ( this.advancement.configuration.type === "feat" ) {
+      const selectedType = CONFIG.DND5E.featureTypes[this.advancement.configuration.restriction.type];
+      context.typeRestriction = {
+        typeLabel: game.i18n.localize("DND5E.ItemFeatureType"),
+        typeOptions: CONFIG.DND5E.featureTypes,
+        subtypeLabel: game.i18n.format("DND5E.ItemFeatureSubtype", {category: selectedType?.label}),
+        subtypeOptions: selectedType?.subtypes
+      };
+    }
+    return context;
   }
 
   /* -------------------------------------------- */
@@ -41,7 +51,7 @@ export default class ItemChoiceConfig extends AdvancementConfig {
     configuration.pool = await configuration.pool.reduce(async (pool, uuid) => {
       const item = await fromUuid(uuid);
       if ( this.advancement._validateItemType(item, {
-        restriction: configuration.type, spellLevel: configuration.restriction.level ?? false, error: false
+        type: configuration.type, restriction: configuration.restriction ?? {}, error: false
       }) ) return [...await pool, uuid];
       return pool;
     }, []);
