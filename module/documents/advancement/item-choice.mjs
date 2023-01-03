@@ -85,7 +85,7 @@ export default class ItemChoiceAdvancement extends ItemGrantAdvancement {
   _validateItemType(item, { restriction, spellLevel, error=true }={}) {
     super._validateItemType(item, { error });
     restriction ??= this.configuration.type;
-    spellLevel ??= this.configuration.spellLevel;
+    spellLevel ??= this.configuration.restriction.level;
 
     // Type restriction is set and the item type does not match the selected type
     if ( restriction && (restriction !== item.type) ) {

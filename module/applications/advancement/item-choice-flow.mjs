@@ -125,7 +125,7 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
     const item = await Item.implementation.fromDropData(data);
 
     try {
-      this.advancement._verifyItemType(item);
+      this.advancement._validateItemType(item);
     } catch(err) {
       return ui.notifications.error(err.message);
     }
@@ -140,7 +140,7 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
     }
 
     // If spell level is restricted to available level, ensure the spell is of the appropriate level
-    const spellLevel = this.advancement.configuration.spellLevel;
+    const spellLevel = this.advancement.configuration.restriction.level;
     if ( (this.advancement.configuration.type === "spell") && spellLevel === "available" ) {
       const maxSlot = this._maxSpellSlotLevel();
       if ( item.system.level > maxSlot ) return ui.notifications.error(game.i18n.format(

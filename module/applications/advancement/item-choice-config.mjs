@@ -41,7 +41,7 @@ export default class ItemChoiceConfig extends AdvancementConfig {
     configuration.pool = await configuration.pool.reduce(async (pool, uuid) => {
       const item = await fromUuid(uuid);
       if ( this.advancement._validateItemType(item, {
-        restriction: configuration.type, spellLevel: configuration.spellLevel ?? false, error: false
+        restriction: configuration.type, spellLevel: configuration.restriction.level ?? false, error: false
       }) ) return [...await pool, uuid];
       return pool;
     }, []);

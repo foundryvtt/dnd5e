@@ -29,8 +29,8 @@
       <div class="form-group">
         <label>{{localize "DND5E.SpellLevel"}}</label>
         <div class="form-fields">
-          <select name="configuration.spellLevel">
-            {{#select configuration.spellLevel}}
+          <select name="configuration.restriction.level">
+            {{#select configuration.restriction.level}}
               <option value="">&mdash;</option>
               {{#each CONFIG.spellLevels as |label key|}}
                 <option value="{{key}}">{{label}}</option>
