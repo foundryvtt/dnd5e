@@ -38,7 +38,8 @@ export default class GroupActorSheet extends ActorSheet {
     context.movement = this.#prepareMovementSpeed();
 
     // Inventory
-    context.inventory = this.#prepareInventory(context.items);
+    context.itemContext = {};
+    context.inventory = this.#prepareInventory(context);
     context.inventoryFilters = false;
     context.rollableClass = this.isEditable ? "rollable" : "";
 
@@ -150,10 +151,10 @@ export default class GroupActorSheet extends ActorSheet {
 
   /**
    * Prepare inventory items for rendering on the sheet.
-   * @param {object[]} items      Prepared rendering data for owned items
+   * @param {object} context  Prepared rendering context.
    * @returns {Object<string,object>}
    */
-  #prepareInventory(items) {
+  #prepareInventory(context) {
 
     // Categorize as weapons, equipment, containers, and loot
     const sections = {
@@ -165,10 +166,11 @@ export default class GroupActorSheet extends ActorSheet {
     };
 
     // Classify items
-    for ( const item of items ) {
+    for ( const item of context.items ) {
+      const ctx = context.itemContext[item.id] ??= {};
       const {quantity} = item.system;
-      item.isStack = Number.isNumeric(quantity) && (quantity > 1);
-      item.canToggle = false;
+      ctx.isStack = Number.isNumeric(quantity) && (quantity > 1);
+      ctx.canToggle = false;
       if ( (item.type in sections) && (item.type !== "loot") ) sections[item.type].items.push(item);
       else sections.loot.items.push(item);
     }

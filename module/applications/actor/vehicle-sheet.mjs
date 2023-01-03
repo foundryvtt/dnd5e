@@ -70,27 +70,28 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
 
   /**
    * Prepare items that are mounted to a vehicle and require one or more crew to operate.
-   * @param {object} item  Copy of the item data being prepared for display. *Will be mutated.*
-   * @private
+   * @param {object} item     Copy of the item data being prepared for display.
+   * @param {object} context  Display context for the item.
+   * @protected
    */
-  _prepareCrewedItem(item) {
+  _prepareCrewedItem(item, context) {
 
     // Determine crewed status
     const isCrewed = item.system.crewed;
-    item.toggleClass = isCrewed ? "active" : "";
-    item.toggleTitle = game.i18n.localize(`DND5E.${isCrewed ? "Crewed" : "Uncrewed"}`);
+    context.toggleClass = isCrewed ? "active" : "";
+    context.toggleTitle = game.i18n.localize(`DND5E.${isCrewed ? "Crewed" : "Uncrewed"}`);
 
     // Handle crew actions
-    if (item.type === "feat" && item.system.activation.type === "crew") {
-      item.cover = game.i18n.localize(`DND5E.${item.system.cover ? "CoverTotal" : "None"}`);
-      if (item.system.cover === .5) item.cover = "½";
-      else if (item.system.cover === .75) item.cover = "¾";
-      else if (item.system.cover === null) item.cover = "—";
+    if ( item.type === "feat" && item.system.activation.type === "crew" ) {
+      context.cover = game.i18n.localize(`DND5E.${item.system.cover ? "CoverTotal" : "None"}`);
+      if ( item.system.cover === .5 ) context.cover = "½";
+      else if ( item.system.cover === .75 ) context.cover = "¾";
+      else if ( item.system.cover === null ) context.cover = "—";
     }
 
     // Prepare vehicle weapons
     if ( (item.type === "equipment") || (item.type === "weapon") ) {
-      item.threshold = item.system.hp.dt ? item.system.hp.dt : "—";
+      context.threshold = item.system.hp.dt ? item.system.hp.dt : "—";
     }
   }
 
@@ -166,10 +167,11 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
 
     context.items.forEach(item => {
       const {uses, recharge} = item.system;
-      item.canToggle = false;
-      item.hasUses = uses && (uses.max > 0);
-      item.isOnCooldown = recharge && !!recharge.value && (recharge.charged === false);
-      item.isDepleted = item.isOnCooldown && (uses.per && (uses.value > 0));
+      const ctx = context.itemContext[item.id] ??= {};
+      ctx.canToggle = false;
+      ctx.hasUses = uses && (uses.max > 0);
+      ctx.isOnCooldown = recharge && !!recharge.value && (recharge.charged === false);
+      ctx.isDepleted = item.isOnCooldown && (uses.per && (uses.value > 0));
     });
 
     const cargo = {
@@ -214,8 +216,9 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
 
     // Classify items owned by the vehicle and compute total cargo weight
     let totalWeight = 0;
-    for (const item of context.items) {
-      this._prepareCrewedItem(item);
+    for ( const item of context.items ) {
+      const ctx = context.itemContext[item.id] ??= {};
+      this._prepareCrewedItem(item, ctx);
 
       // Handle cargo explicitly
       const isCargo = item.flags.dnd5e?.vehicleCargo === true;
@@ -249,7 +252,7 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
     context.inventoryFilters = false;
     context.features = Object.values(features);
     context.cargo = Object.values(cargo);
-    context.system.attributes.encumbrance = this._computeEncumbrance(totalWeight, context);
+    context.encumbrance = this._computeEncumbrance(totalWeight, context);
   }
 
   /* -------------------------------------------- */

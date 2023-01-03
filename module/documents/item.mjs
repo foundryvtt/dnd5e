@@ -30,7 +30,7 @@ export default class Item5e extends Item {
     if ( this.system.ability ) return this.system.ability;
 
     // Case 2 - inferred from a parent actor
-    if ( this.actor && ("ability" in this.actor.system) ) {
+    if ( this.actor && ("abilities" in this.actor.system) ) {
       const abilities = this.actor.system.abilities;
       const spellcasting = this.actor.system.attributes.spellcasting;
 
@@ -1097,9 +1097,9 @@ export default class Item5e extends Item {
     // Render the chat card template
     const token = this.actor.token;
     const templateData = {
-      actor: this.actor.toObject(false),
+      actor: this.actor,
       tokenId: token?.uuid || null,
-      item: this.toObject(false),
+      item: this,
       data: await this.getChatData(),
       labels: this.labels,
       hasAttack: this.hasAttack,
@@ -1126,7 +1126,7 @@ export default class Item5e extends Item {
 
     // If the Item was destroyed in the process of displaying its card - embed the item data in the chat message
     if ( (this.type === "consumable") && !this.actor.items.has(this.id) ) {
-      chatData.flags["dnd5e.itemData"] = templateData.item;
+      chatData.flags["dnd5e.itemData"] = templateData.item.toObject();
     }
 
     // Merge in the flags from options

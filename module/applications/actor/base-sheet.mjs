@@ -82,17 +82,19 @@ export default class ActorSheet5e extends ActorSheet {
 
     // The Actor's data
     const source = this.actor.toObject();
-    const actorData = this.actor.toObject(false);
 
     // Basic data
     const context = {
-      actor: actorData,
+      actor: this.actor,
       source: source.system,
-      system: actorData.system,
-      items: actorData.items,
-      labels: this._getLabels(actorData.system),
-      movement: this._getMovementSpeed(actorData.system),
-      senses: this._getSenses(actorData.system),
+      system: this.actor.system,
+      items: Array.from(this.actor.items),
+      itemContext: {},
+      abilities: foundry.utils.deepClone(this.actor.system.abilities),
+      skills: foundry.utils.deepClone(this.actor.system.skills ?? {}),
+      labels: this._getLabels(),
+      movement: this._getMovementSpeed(this.actor.system),
+      senses: this._getSenses(this.actor.system),
       effects: ActiveEffect5e.prepareActiveEffectCategories(this.actor.effects),
       warnings: foundry.utils.deepClone(this.actor._preparationWarnings),
       filters: this._filters,
@@ -120,19 +122,16 @@ export default class ActorSheet5e extends ActorSheet {
     });
 
     // Sort Owned Items
-    for ( let i of context.items ) {
-      const item = this.actor.items.get(i._id);
-      i.labels = item.labels;
-    }
     context.items.sort((a, b) => (a.sort || 0) - (b.sort || 0));
 
     // Temporary HP
-    const hp = context.system.attributes.hp;
+    const hp = {...context.system.attributes.hp};
     if ( hp.temp === 0 ) delete hp.temp;
     if ( hp.tempmax === 0 ) delete hp.tempmax;
+    context.hp = hp;
 
     // Ability Scores
-    for ( const [a, abl] of Object.entries(context.system.abilities) ) {
+    for ( const [a, abl] of Object.entries(context.abilities) ) {
       abl.icon = this._getProficiencyIcon(abl.proficient);
       abl.hover = CONFIG.DND5E.proficiencyLevels[abl.proficient];
       abl.label = CONFIG.DND5E.abilities[a];
@@ -140,7 +139,7 @@ export default class ActorSheet5e extends ActorSheet {
     }
 
     // Skills
-    for ( const [s, skl] of Object.entries(context.system.skills ?? {}) ) {
+    for ( const [s, skl] of Object.entries(context.skills) ) {
       skl.ability = CONFIG.DND5E.abilityAbbreviations[skl.ability];
       skl.icon = this._getProficiencyIcon(skl.value);
       skl.hover = CONFIG.DND5E.proficiencyLevels[skl.value];
@@ -149,7 +148,7 @@ export default class ActorSheet5e extends ActorSheet {
     }
 
     // Update traits
-    this._prepareTraits(context.system);
+    context.traits = this._prepareTraits(context.system);
 
     // Prepare owned items
     this._prepareItems(context);
@@ -169,12 +168,11 @@ export default class ActorSheet5e extends ActorSheet {
 
   /**
    * Prepare labels object for the context.
-   * @param {object} systemData  System data for the Actor being prepared.
    * @returns {object}           Object containing various labels.
    * @protected
    */
-  _getLabels(systemData) {
-    const labels = this.actor.labels ?? {};
+  _getLabels() {
+    const labels = {...this.actor.labels};
 
     // Currency Labels
     labels.currencies = Object.entries(CONFIG.DND5E.currencies).reduce((obj, [k, c]) => {
@@ -184,8 +182,8 @@ export default class ActorSheet5e extends ActorSheet {
 
     // Proficiency
     labels.proficiency = game.settings.get("dnd5e", "proficiencyModifier") === "dice"
-      ? `d${systemData.attributes.prof * 2}`
-      : `+${systemData.attributes.prof}`;
+      ? `d${this.actor.system.attributes.prof * 2}`
+      : `+${this.actor.system.attributes.prof}`;
 
     return labels;
   }
@@ -197,7 +195,7 @@ export default class ActorSheet5e extends ActorSheet {
    * @param {object} systemData               System data for the Actor being prepared.
    * @param {boolean} [largestPrimary=false]  Show the largest movement speed as "primary", otherwise show "walk".
    * @returns {{primary: string, special: string}}
-   * @private
+   * @protected
    */
   _getMovementSpeed(systemData, largestPrimary=false) {
     const movement = systemData.attributes.movement ?? {};
@@ -370,19 +368,26 @@ export default class ActorSheet5e extends ActorSheet {
   /**
    * Prepare the data structure for traits data like languages, resistances & vulnerabilities, and proficiencies.
    * @param {object} systemData  System data for the Actor being prepared.
+   * @returns {object}           Prepared trait data.
    * @protected
    */
   _prepareTraits(systemData) {
+    const traits = {};
     for ( const [trait, traitConfig] of Object.entries(CONFIG.DND5E.traits) ) {
-      const data = foundry.utils.getProperty(systemData, traitConfig.actorKeyPath ?? `traits.${trait}`);
+      const key = traitConfig.actorKeyPath ?? `traits.${trait}`;
+      let data = foundry.utils.getProperty(systemData, key);
       const choices = CONFIG.DND5E[traitConfig.configKey];
       if ( !data ) continue;
 
-      let values = data.value ? data.value instanceof Array ? data.value : [data.value] : [];
+      foundry.utils.setProperty(traits, key, data);
+      let values = data.value;
+      if ( !values ) values = [];
+      else if ( values instanceof Set ) values = Array.from(values);
+      else if ( !Array.isArray(values) ) values = [values];
 
       // Split physical damage types from others if bypasses is set
       const physical = [];
-      if ( data.bypasses?.length ) {
+      if ( data.bypasses?.size ) {
         values = values.filter(t => {
           if ( !CONFIG.DND5E.physicalDamageTypes[t] ) return true;
           physical.push(t);
@@ -409,6 +414,7 @@ export default class ActorSheet5e extends ActorSheet {
       if ( data.custom ) data.custom.split(";").forEach((c, i) => data.selected[`custom${i+1}`] = c.trim());
       data.cssClass = !foundry.utils.isEmpty(data.selected) ? "" : "inactive";
     }
+    return traits;
   }
 
   /* -------------------------------------------- */
