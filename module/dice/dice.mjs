@@ -58,7 +58,9 @@ export async function d20Roll({
 
   // Handle input arguments
   const formula = ["1d20"].concat(parts).join(" + ");
-  const {advantageMode, isFF} = _determineAdvantageMode({advantage, disadvantage, fastForward, event});
+  const {advantageMode, isFF} = CONFIG.Dice.D20Roll.determineAdvantageMode({
+    advantage, disadvantage, fastForward, event
+  });
   const defaultRollMode = rollMode || game.settings.get("core", "rollMode");
   if ( chooseModifier && !isFF ) {
     data.mod = "@mod";
@@ -98,27 +100,6 @@ export async function d20Roll({
   // Create a Chat Message
   if ( roll && chatMessage ) await roll.toMessage(messageData);
   return roll;
-}
-
-/* -------------------------------------------- */
-
-/**
- * Determines whether this d20 roll should be fast-forwarded, and whether advantage or disadvantage should be applied
- * @param {object} [config]
- * @param {Event} [config.event]           Event that triggered the roll.
- * @param {boolean} [config.advantage]     Is something granting this roll advantage?
- * @param {boolean} [config.disadvantage]  Is something granting this roll disadvantage?
- * @param {boolean} [config.fastForward]   Should the roll dialog be skipped?
- * @returns {{isFF: boolean, advantageMode: number}}  Whether the roll is fast-forward, and its advantage mode.
- */
-function _determineAdvantageMode({event, advantage=false, disadvantage=false, fastForward}={}) {
-  const isFF = fastForward ?? (event && (event.shiftKey || event.altKey || event.ctrlKey || event.metaKey));
-  let advantageMode = CONFIG.Dice.D20Roll.ADV_MODE.NORMAL;
-  if ( advantage || event?.altKey ) advantageMode = CONFIG.Dice.D20Roll.ADV_MODE.ADVANTAGE;
-  else if ( disadvantage || event?.ctrlKey || event?.metaKey ) {
-    advantageMode = CONFIG.Dice.D20Roll.ADV_MODE.DISADVANTAGE;
-  }
-  return {isFF: !!isFF, advantageMode};
 }
 
 /* -------------------------------------------- */
