@@ -112,13 +112,4 @@ export default class SystemDataModel extends foundry.abstract.DataModel {
 
     return Base;
   }
-
-  /* -------------------------------------------- */
-
-  /** @inheritdoc */
-  toObject(source=true) {
-    let obj = super.toObject(source);
-    if ( !source ) obj = foundry.utils.mergeObject(this, obj, {inplace: false});
-    return obj;
-  }
 }
