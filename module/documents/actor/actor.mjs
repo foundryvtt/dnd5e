@@ -204,6 +204,7 @@ export default class Actor5e extends Actor {
    */
   getRollData({ deterministic=false }={}) {
     const data = {...super.getRollData()};
+    if ( this.type === "group" ) return data;
     data.prof = new Proficiency(this.system.attributes.prof, 1);
     if ( deterministic ) data.prof = data.prof.flat;
     data.attributes = foundry.utils.deepClone(data.attributes);
