@@ -1,5 +1,6 @@
 import ActorMovementConfig from "./movement-config.mjs";
 import ActorSheet5e from "./base-sheet.mjs";
+import Item5e from "../../documents/item.mjs";
 
 /**
  * A character sheet for group-type Actors.
@@ -21,6 +22,14 @@ export default class GroupActorSheet extends ActorSheet {
   }
 
   /* -------------------------------------------- */
+
+  /**
+   * A set of item types that should be prevented from being dropped on this type of actor sheet.
+   * @type {Set<string>}
+   */
+  static unsupportedItemTypes = new Set(["background", "class", "subclass", "feat"]);
+
+  /* -------------------------------------------- */
   /*  Context Preparation                         */
   /* -------------------------------------------- */
 
@@ -28,6 +37,7 @@ export default class GroupActorSheet extends ActorSheet {
   async getData(options={}) {
     const context = super.getData(options);
     context.system = context.data.system;
+    context.items = Array.from(this.actor.items);
 
     // Membership
     const {sections, stats} = this.#prepareMembers();
@@ -338,5 +348,52 @@ export default class GroupActorSheet extends ActorSheet {
     const sourceActor = await cls.fromDropData(data);
     if ( !sourceActor ) return;
     return this.object.system.addMember(sourceActor);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  async _onDropItemCreate(itemData) {
+    let items = itemData instanceof Array ? itemData : [itemData];
+
+    const toCreate = [];
+    for ( const item of items ) {
+      const result = await this._onDropSingleItem(item);
+      if ( result ) toCreate.push(result);
+    }
+
+    // Create the owned items as normal
+    return this.actor.createEmbeddedDocuments("Item", toCreate);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handles dropping of a single item onto this group sheet.
+   * @param {object} itemData            The item data to create.
+   * @returns {Promise<object|boolean>}  The item data to create after processing, or false if the item should not be
+   *                                     created or creation has been otherwise handled.
+   * @protected
+   */
+  async _onDropSingleItem(itemData) {
+
+    // Check to make sure items of this type are allowed on this actor
+    if ( this.constructor.unsupportedItemTypes.has(itemData.type) ) {
+      ui.notifications.warn(game.i18n.format("DND5E.ActorWarningInvalidItem", {
+        itemType: game.i18n.localize(CONFIG.Item.typeLabels[itemData.type]),
+        actorType: game.i18n.localize(CONFIG.Actor.typeLabels[this.actor.type])
+      }));
+      return false;
+    }
+
+    // Create a Consumable spell scroll on the Inventory tab
+    if ( itemData.type === "spell" ) {
+      const scroll = await Item5e.createScrollFromSpell(itemData);
+      return scroll.toObject();
+    }
+
+    // TODO: Stack identical consumables
+
+    return itemData;
   }
 }
