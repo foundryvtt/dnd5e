@@ -671,6 +671,7 @@ export default class Actor5e extends Actor {
     // NPCs don't get spell levels from classes
     if ( this.type === "npc" ) {
       progression.slot = this.system.details.spellLevel ?? 0;
+      types.leveled = 1;
     }
 
     else {
