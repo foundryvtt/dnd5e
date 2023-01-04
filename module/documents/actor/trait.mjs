@@ -36,15 +36,16 @@ export function categories(trait) {
 
 /**
  * Get a list of choices for a specific trait.
- * @param {string} trait          Trait as defined in `CONFIG.DND5E.traits`.
- * @param {string[]} [chosen=[]]  Optional list of keys to be marked as chosen.
- * @returns {object}              Object mapping proficiency ids to choice objects.
+ * @param {string} trait             Trait as defined in `CONFIG.DND5E.traits`.
+ * @param {Set<string>} [chosen=[]]  Optional list of keys to be marked as chosen.
+ * @returns {object}                 Object mapping proficiency ids to choice objects.
  */
-export async function choices(trait, chosen=[]) {
+export async function choices(trait, chosen=new Set()) {
   const traitConfig = CONFIG.DND5E.traits[trait];
+  if ( foundry.utils.getType(chosen) === "Array" ) chosen = new Set(chosen);
 
   let data = Object.entries(categories(trait)).reduce((obj, [key, label]) => {
-    obj[key] = { label, chosen: chosen.includes(key) };
+    obj[key] = { label, chosen: chosen.has(key) };
     return obj;
   }, {});
 
@@ -53,7 +54,7 @@ export async function choices(trait, chosen=[]) {
       const children = CONFIG.DND5E[childrenKey];
       if ( !children || !data[categoryKey] ) continue;
       data[categoryKey].children = Object.entries(children).reduce((obj, [key, label]) => {
-        obj[key] = { label, chosen: chosen.includes(key) };
+        obj[key] = { label, chosen: chosen.has(key) };
         return obj;
       }, {});
     }
@@ -83,7 +84,7 @@ export async function choices(trait, chosen=[]) {
       let type = foundry.utils.getProperty(index, keyPath);
       if ( map?.[type] ) type = map[type];
 
-      const entry = { label: index.name, chosen: chosen.includes(key) };
+      const entry = { label: index.name, chosen: chosen.has(key) };
 
       // No category for this type, add at top level
       if ( !data[type] ) data[key] = entry;
