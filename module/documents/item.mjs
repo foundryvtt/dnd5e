@@ -2213,9 +2213,9 @@ export default class Item5e extends Item {
         updates["system.proficient"] = true;  // NPCs automatically have equipment proficiency
       } else {
         const armorProf = CONFIG.DND5E.armorProficienciesMap[this.system.armor?.type]; // Player characters check proficiency
-        const actorArmorProfs = this.parent.system.traits?.armorProf?.value || [];
-        updates["system.proficient"] = (armorProf === true) || actorArmorProfs.includes(armorProf)
-          || actorArmorProfs.includes(this.system.baseItem);
+        const actorArmorProfs = this.parent.system.traits?.armorProf?.value || new Set();
+        updates["system.proficient"] = (armorProf === true) || actorArmorProfs.has(armorProf)
+          || actorArmorProfs.has(this.system.baseItem);
       }
     }
     return updates;
@@ -2253,9 +2253,8 @@ export default class Item5e extends Item {
     if ( data.system?.proficient === undefined ) {
       if ( isNPC ) updates["system.proficient"] = 1;
       else {
-        const actorToolProfs = this.parent.system.traits?.toolProf?.value;
-        const proficient = actorToolProfs.includes(this.system.toolType)
-          || actorToolProfs.includes(this.system.baseItem);
+        const actorToolProfs = this.parent.system.traits?.toolProf?.value || new Set();
+        const proficient = actorToolProfs.has(this.system.toolType) || actorToolProfs.has(this.system.baseItem);
         updates["system.proficient"] = Number(proficient);
       }
     }
@@ -2289,8 +2288,8 @@ export default class Item5e extends Item {
 
     // Characters may have proficiency in this weapon type (or specific base weapon)
     else {
-      const actorProfs = this.parent.system.traits?.weaponProf?.value || [];
-      updates["system.proficient"] = actorProfs.includes(weaponProf) || actorProfs.includes(this.system.baseItem);
+      const actorProfs = this.parent.system.traits?.weaponProf?.value || new Set();
+      updates["system.proficient"] = actorProfs.has(weaponProf) || actorProfs.has(this.system.baseItem);
     }
     return updates;
   }

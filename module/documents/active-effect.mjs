@@ -18,6 +18,31 @@ export default class ActiveEffect5e extends ActiveEffect {
     return super.apply(actor, change);
   }
 
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  _applyAdd(actor, change, current, delta, changes) {
+    if ( current instanceof Set ) {
+      if ( Array.isArray(delta) ) delta.forEach(item => current.add(item));
+      else current.add(delta);
+      return;
+    }
+    super._applyAdd(actor, change, current, delta, changes);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  _applyOverride(actor, change, current, delta, changes) {
+    if ( current instanceof Set ) {
+      current.clear();
+      if ( Array.isArray(delta) ) delta.forEach(item => current.add(item));
+      else current.add(delta);
+      return;
+    }
+    return super._applyOverride(actor, change, current, delta, changes);
+  }
+
   /* --------------------------------------------- */
 
   /**
