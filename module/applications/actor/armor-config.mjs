@@ -37,6 +37,7 @@ export default class ActorArmorConfig extends DocumentSheet {
   /** @inheritdoc */
   async getData() {
     const ac = this.clone.system.attributes.ac;
+    const isFlat = ["flat", "natural"].includes(ac.calc);
 
     // Get configuration data for the calculation mode, reset to flat if configuration is unavailable
     let cfg = CONFIG.DND5E.armorClasses[ac.calc];
@@ -47,9 +48,9 @@ export default class ActorArmorConfig extends DocumentSheet {
     }
 
     return {
-      ac,
+      ac, isFlat,
       calculations: CONFIG.DND5E.armorClasses,
-      valueDisabled: !["flat", "natural"].includes(ac.calc),
+      valueDisabled: !isFlat,
       formula: ac.calc === "custom" ? ac.formula : cfg.formula,
       formulaDisabled: ac.calc !== "custom"
     };
