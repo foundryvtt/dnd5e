@@ -61,11 +61,7 @@
             <div class="form-group">
                 <label>{{ localize "DND5E.SpellSchool" }}</label>
                 <select name="system.school">
-                    {{#select system.school}}
-                    {{#each config.spellSchools as |name sch|}}
-                    <option value="{{sch}}">{{name}}</option>
-                    {{/each}}
-                    {{/select}}
+                    {{selectOptions config.spellSchools selected=system.school blank=""}}
                 </select>
             </div>
 
