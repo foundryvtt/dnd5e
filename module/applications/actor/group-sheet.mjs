@@ -354,7 +354,7 @@ export default class GroupActorSheet extends ActorSheet {
 
   /** @override */
   async _onDropItemCreate(itemData) {
-    let items = itemData instanceof Array ? itemData : [itemData];
+    const items = itemData instanceof Array ? itemData : [itemData];
 
     const toCreate = [];
     for ( const item of items ) {
