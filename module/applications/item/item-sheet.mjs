@@ -71,6 +71,7 @@ export default class ItemSheet5e extends ItemSheet {
       labels: item.labels,
       isEmbedded: item.isEmbedded,
       advancementEditable: (this.advancementConfigurationMode || !item.isEmbedded) && context.editable,
+      rollData: this.item.getRollData.bind(this.item),
 
       // Item Type, Status, and Details
       itemType: game.i18n.localize(`ITEM.Type${this.item.type.titleCase()}`),
@@ -78,13 +79,6 @@ export default class ItemSheet5e extends ItemSheet {
       itemProperties: this._getItemProperties(),
       baseItems: await this._getItemBaseTypes(),
       isPhysical: item.system.hasOwnProperty("quantity"),
-
-      // Enrich HTML description
-      descriptionHTML: await TextEditor.enrichHTML(item.system.description.value, {
-        secrets: item.isOwner,
-        async: true,
-        relativeTo: this.item
-      }),
 
       // Action Details
       hasAttackRoll: item.hasAttack,
@@ -132,6 +126,14 @@ export default class ItemSheet5e extends ItemSheet {
         context.spellComponents = {...CONFIG.DND5E.spellComponents, ...CONFIG.DND5E.spellTags};
         break;
     }
+
+    // Enrich HTML description
+    context.descriptionHTML = await TextEditor.enrichHTML(item.system.description.value, {
+      secrets: item.isOwner,
+      async: true,
+      relativeTo: this.item,
+      rollData: context.rollData
+    })
     return context;
   }
 
