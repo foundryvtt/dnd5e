@@ -2307,8 +2307,9 @@ export default class Item5e extends Item {
 
     // Get spell data
     const itemData = (spell instanceof Item5e) ? spell.toObject() : spell;
-    const { actionType, description, source, activation, duration, target,
-      range, damage, formula, save, level} = itemData.system;
+    let {
+      actionType, description, source, activation, duration, target, range, damage, formula, save, level, attackBonus
+    } = itemData.system;
 
     // Get scroll data
     const scrollUuid = `Compendium.${CONFIG.DND5E.sourcePacks.ITEMS}.${CONFIG.DND5E.spellScrollIds[level]}`;
@@ -2326,13 +2327,22 @@ export default class Item5e extends Item {
     // Create a composite description from the scroll description and the spell details
     const desc = `${scrollIntro}<hr/><h3>${itemData.name} (Level ${level})</h3><hr/>${description.value}<hr/><h3>Scroll Details</h3><hr/>${scrollDetails}`;
 
+    // Used a fixed attack modifier and saving throw according to the level of spell scroll.
+    if ( ["mwak", "rwak", "msak", "rsak"].includes(actionType) ) {
+      attackBonus = `${scrollData.system.attackBonus} - @mod`;
+    }
+    if ( save.ability ) {
+      save.scaling = "flat";
+      save.dc = scrollData.system.save.dc;
+    }
+
     // Create the spell scroll data
     const spellScrollData = foundry.utils.mergeObject(scrollData, {
       name: `${game.i18n.localize("DND5E.SpellScroll")}: ${itemData.name}`,
       img: itemData.img,
       system: {
         "description.value": desc.trim(), source, actionType, activation, duration, target, range, damage, formula,
-        save, level
+        save, level, attackBonus
       }
     });
     return new this(spellScrollData);
