@@ -32,6 +32,7 @@ export default class AbilityUseDialog extends Dialog {
 
     // Prepare data
     const uses = item.system.uses ?? {};
+    const resource = item.system.consume ?? {};
     const quantity = item.system.quantity ?? 0;
     const recharge = item.system.recharge ?? {};
     const recharges = !!recharge.value;
@@ -44,7 +45,7 @@ export default class AbilityUseDialog extends Dialog {
       note: this._getAbilityUseNote(item, uses, recharge),
       consumeSpellSlot: false,
       consumeRecharge: recharges,
-      consumeResource: !!item.system.consume.target,
+      consumeResource: resource.target && (!item.hasAttack || (resource.type !== "ammo")),
       consumeUses: uses.per && (uses.max > 0),
       canUse: recharges ? recharge.charged : sufficientUses,
       createTemplate: game.user.can("TEMPLATE_CREATE") && item.hasAreaTarget,
