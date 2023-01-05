@@ -61,6 +61,14 @@ export default class DamageRoll extends Roll {
       const nextTerm = this.terms[i + 1];
       const prevTerm = this.terms[i - 1];
 
+      // Convert shorthand dX terms to 1dX pre-emptively to allow them to be appropriately doubled for criticals.
+      if ( (term instanceof StringTerm) && /^d\d+/.test(term.term) ) {
+        const formula = `1${term.term}`;
+        const newTerm = new Roll(formula).terms[0];
+        this.terms.splice(i, 1, newTerm);
+        term = newTerm;
+      }
+
       // Merge parenthetical terms that follow string terms to build a dice term (to allow criticals)
       if ( (term instanceof ParentheticalTerm) && (prevTerm instanceof StringTerm)
         && prevTerm.term.match(/^[0-9]*d$/)) {
