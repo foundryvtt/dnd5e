@@ -108,7 +108,7 @@ export default class ActorSheet5e extends ActorSheet {
       isVehicle: this.actor.type === "vehicle",
       config: CONFIG.DND5E,
       rollableClass: this.isEditable ? "rollable" : "",
-      rollData: this.actor.getRollData.bind(this.actor)
+      rollData: this.actor.getRollData()
     };
 
     /** @deprecated */

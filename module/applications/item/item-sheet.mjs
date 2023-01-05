@@ -71,7 +71,7 @@ export default class ItemSheet5e extends ItemSheet {
       labels: item.labels,
       isEmbedded: item.isEmbedded,
       advancementEditable: (this.advancementConfigurationMode || !item.isEmbedded) && context.editable,
-      rollData: this.item.getRollData.bind(this.item),
+      rollData: this.item.getRollData(),
 
       // Item Type, Status, and Details
       itemType: game.i18n.localize(`ITEM.Type${this.item.type.titleCase()}`),
