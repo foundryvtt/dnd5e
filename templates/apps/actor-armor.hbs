@@ -1,6 +1,7 @@
 <form>
     <div class="ac-field form-group">
-        <input type="number" name="ac.flat" value="{{ac.value}}" {{#if valueDisabled}}disabled{{/if}}>
+        <input type="number" name="ac.flat" {{disabled valueDisabled}}
+               value="{{#if isFlat}}{{ac.flat}}{{else}}{{ac.value}}{{/if}}">
     </div>
 
     <div class="form-group select">
@@ -12,7 +13,7 @@
 
     <div class="form-group stacked">
         <label>{{localize "DND5E.ArmorClassFormula"}}</label>
-        <input type="text" name="ac.formula" value="{{formula}}" {{#if formulaDisabled}}disabled{{/if}}>
+        <input type="text" name="ac.formula" value="{{formula}}" {{disabled formulaDisabled}}>
     </div>
 
     <button type="submit">
