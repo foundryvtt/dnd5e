@@ -58,7 +58,7 @@ export default class ActivatedEffectTemplate extends foundry.abstract.DataModel 
       consume: new foundry.data.fields.SchemaField({
         type: new foundry.data.fields.StringField({required: true, blank: true, label: "DND5E.ConsumeType"}),
         target: new foundry.data.fields.StringField({
-          required: true, blank: false, nullable: true, initial: null, label: "DND5E.ConsumeTarget"
+          required: true, nullable: true, initial: null, label: "DND5E.ConsumeTarget"
         }),
         amount: new foundry.data.fields.NumberField({required: true, integer: true, label: "DND5E.ConsumeAmount"})
       }, {label: "DND5E.ConsumeTitle"})
@@ -79,7 +79,7 @@ export default class ActivatedEffectTemplate extends foundry.abstract.DataModel 
         }),
         max: new FormulaField({required: true, deterministic: true, label: "DND5E.LimitedUsesMax"}),
         per: new foundry.data.fields.StringField({
-          required: true, blank: false, nullable: true, initial: null, label: "DND5E.LimitedUsesPer"
+          required: true, nullable: true, initial: null, label: "DND5E.LimitedUsesPer"
         }),
         recovery: new FormulaField({required: true, label: "DND5E.RecoveryFormula"})
       }, extraSchema), options);
@@ -92,17 +92,21 @@ export default class ActivatedEffectTemplate extends foundry.abstract.DataModel 
   static migrateData(source) {
     ActivatedEffectTemplate.#migrateFormulaFields(source);
     ActivatedEffectTemplate.#migrateRanges(source);
+    ActivatedEffectTemplate.#migrateTargets(source);
   }
 
   /* -------------------------------------------- */
 
   /**
-   * Ensure a 0 in max uses & durations are converted to an empty string rather than "0".
+   * Ensure a 0 or null in max uses & durations are converted to an empty string rather than "0". Convert numbers into
+   * strings.
    * @param {object} source  The candidate source data from which the model will be constructed.
    */
   static #migrateFormulaFields(source) {
-    if ( (source.uses?.max === 0) || (source.uses?.max === "0") ) source.uses.max = "";
-    if ( (source.duration?.value === 0) || (source.duration?.value === "0") ) source.duration.value = "";
+    if ( [0, "0", null].includes(source.uses?.max) ) source.uses.max = "";
+    else if ( typeof source.uses?.max === "number" ) source.uses.max = source.uses.max.toString();
+    if ( [0, "0", null].includes(source.duration?.value) ) source.duration.value = "";
+    else if ( typeof source.duration?.value === "number" ) source.duration.value = source.duration.value.toString();
   }
 
   /* -------------------------------------------- */
@@ -114,8 +118,20 @@ export default class ActivatedEffectTemplate extends foundry.abstract.DataModel 
    */
   static #migrateRanges(source) {
     if ( typeof source.range?.value !== "string" ) return;
+    if ( source.range?.value === "" ) return source.range.value = null;
     const [value, long] = source.range.value.split("/");
     if ( Number.isNumeric(value) ) source.range.value = Number(value);
     if ( Number.isNumeric(long) ) source.range.long = Number(long);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Ensure blank strings in targets are converted to null.
+   * @param {object} source  The candidate source data from which the model will be constructed.
+   */
+  static #migrateTargets(source) {
+    if ( source.target?.value === "" ) source.target.value = null;
+    if ( source.target?.units === null ) source.target.units = "";
   }
 }

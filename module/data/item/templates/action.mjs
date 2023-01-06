@@ -67,10 +67,11 @@ export default class ActionTemplate extends foundry.abstract.DataModel {
   /* -------------------------------------------- */
 
   /**
-   * Ensure a 0 in attack bonus is converted to an empty string rather than "0".
+   * Ensure a 0 or null in attack bonus is converted to an empty string rather than "0".
    * @param {object} source  The candidate source data from which the model will be constructed.
    */
   static #migrateAttackBonus(source) {
-    if ( (source.attackBonus === 0) || (source.attackBonus === "0") ) source.attackBonus = "";
+    if ( [0, "0", null].includes(source.attackBonus) ) source.attackBonus = "";
+    else if ( typeof source.attackBonus === "number" ) source.attackBonus = source.attackBonus.toString();
   }
 }

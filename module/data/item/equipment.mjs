@@ -60,6 +60,7 @@ export default class EquipmentData extends SystemDataModel.mixin(
   /** @inheritdoc */
   static migrateData(source) {
     EquipmentData.#migrateArmorTypeData(source);
+    EquipmentData.#migrateStrength(source);
     return super.migrateData(source);
   }
 
@@ -73,5 +74,17 @@ export default class EquipmentData extends SystemDataModel.mixin(
     if ( source.armor?.type !== "bonus" ) return;
     source.armor ??= {};
     source.armor.type = "trinket";
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Ensure blank strength values are migrated to null, and string values are converted to numbers.
+   * @param {object} source  The candidate source data from which the model will be constructed.
+   */
+  static #migrateStrength(source) {
+    if ( typeof source.strength !== "string" ) return;
+    if ( source.strength === "" ) source.strength = null;
+    if ( Number.isNumeric(source.strength) ) source.strength = Number(source.strength);
   }
 }

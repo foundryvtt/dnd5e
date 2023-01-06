@@ -39,6 +39,7 @@ export default class PhysicalItemTemplate extends foundry.abstract.DataModel {
   static migrateData(source) {
     PhysicalItemTemplate.#migratePrice(source);
     PhysicalItemTemplate.#migrateRarity(source);
+    PhysicalItemTemplate.#migrateWeight(source);
   }
 
   /* -------------------------------------------- */
@@ -67,5 +68,15 @@ export default class PhysicalItemTemplate extends foundry.abstract.DataModel {
       CONFIG.DND5E.itemRarity[key].toLowerCase() === source.rarity.toLowerCase()
     );
     source.rarity = rarity;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Convert null weights to 0.
+   * @param {object} source  The candidate source data from which the model will be constructed.
+   */
+  static #migrateWeight(source) {
+    if ( source.weight === null ) source.weight = 0;
   }
 }

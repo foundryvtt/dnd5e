@@ -36,4 +36,22 @@ export default class FeatData extends SystemDataModel.mixin(
       }, {label: "DND5E.FeatureActionRecharge"})
     });
   }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  static migrateData(source) {
+    FeatData.#migrateRecharge(source);
+    return super.migrateData(source);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Migrate 0 values to null.
+   * @param {object} source The candidate source data from which the model will be constructed.
+   */
+  static #migrateRecharge(source) {
+    if ( source.recharge?.value === 0 ) source.recharge.value = null;
+  }
 }
