@@ -27,7 +27,7 @@ import CurrencyTemplate from "../shared/currency.mjs";
 export default class GroupActor extends SystemDataModel.mixin(CurrencyTemplate) {
   /** @inheritdoc */
   static defineSchema() {
-    return {
+    return this.mergeSchema(super.defineSchema(), {
       description: new foundry.data.fields.SchemaField({
         full: new foundry.data.fields.HTMLField({label: "DND5E.Description"}),
         summary: new foundry.data.fields.HTMLField({label: "DND5E.DescriptionSummary"})
@@ -49,7 +49,7 @@ export default class GroupActor extends SystemDataModel.mixin(CurrencyTemplate) 
           })
         })
       }, {label: "DND5E.Attributes"})
-    };
+    });
   }
 
   /* -------------------------------------------- */
