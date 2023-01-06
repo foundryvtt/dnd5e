@@ -1178,6 +1178,7 @@ export default class Item5e extends Item {
     data.description.value = await TextEditor.enrichHTML(data.description.value, {
       async: true,
       relativeTo: this,
+      rollData: this.getRollData(),
       ...htmlOptions
     });
 
