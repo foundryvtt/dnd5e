@@ -46,10 +46,10 @@
             {{!-- Header Attributes --}}
             <ul class="attributes flexrow">
                 <li class="attribute health">
-                    <h4 class="attribute-name box-title">
-                        {{ localize "DND5E.HitPoints" }}
-                        <a class="config-button" data-action="hit-points" title="{{localize 'DND5E.HitPointsConfig'}}"><i class="fas fa-cog"></i></a>
-                    </h4>
+                    <h4 class="attribute-name box-title">{{ localize "DND5E.HitPoints" }}</h4>
+                    <a class="config-button" data-action="hit-points" title="{{localize 'DND5E.HitPointsConfig'}}">
+                        <i class="fas fa-cog"></i>
+                    </a>
                     <div class="attribute-value multiple">
                         <input name="system.attributes.hp.value" type="text" value="{{hp.value}}" placeholder="10"
                             title="{{localize 'DND5E.HitPointsCurrent'}}" data-dtype="Number">
