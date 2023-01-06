@@ -64,7 +64,11 @@
         "min": 0,
         "max": null,
         "temp": null,
-        "tempmax": null
+        "tempmax": null,
+        "bonuses": {
+          "level": "",
+          "overall": ""
+        }
       },
       "init": {
         "ability": "",
@@ -105,7 +109,7 @@
       },
       "alignment": "Chaotic Neutral",
       "race": "Half Elf",
-      "background": "Musician",
+      "background": "",
       "originalClass": "5trn1skegukwezch",
       "xp": {
         "value": 0
@@ -476,94 +480,6 @@
     "detectionModes": []
   },
   "items": [
-    {
-      "_id": "66SkRt2mqOrVkiON",
-      "name": "Background: Musician",
-      "type": "feat",
-      "system": {
-        "description": {
-          "value": "<ul>\n<li>Skill Proficiencies: Acrobatics, Performance</li>\n<li>Tool Proficiencies: Disguise kit, one type of musical instrument</li>\n<li>Equipment: A musical instrument, a note from an admirer, and a pouch containing 15 gp</li>\n</ul>",
-          "chat": "",
-          "unidentified": ""
-        },
-        "source": "Custom",
-        "activation": {
-          "type": "",
-          "cost": null,
-          "condition": ""
-        },
-        "duration": {
-          "value": "",
-          "units": ""
-        },
-        "cover": null,
-        "target": {
-          "value": null,
-          "width": null,
-          "units": "",
-          "type": ""
-        },
-        "range": {
-          "value": null,
-          "long": null,
-          "units": ""
-        },
-        "uses": {
-          "value": 2,
-          "max": "2",
-          "per": null,
-          "recovery": ""
-        },
-        "consume": {
-          "type": "",
-          "target": null,
-          "amount": null
-        },
-        "ability": "",
-        "actionType": "",
-        "attackBonus": "",
-        "chatFlavor": "",
-        "critical": {
-          "threshold": null,
-          "damage": ""
-        },
-        "damage": {
-          "parts": [],
-          "versatile": ""
-        },
-        "formula": "",
-        "save": {
-          "ability": "",
-          "dc": null,
-          "scaling": "spell"
-        },
-        "type": {
-          "value": "",
-          "subtype": ""
-        },
-        "requirements": "",
-        "recharge": {
-          "value": null,
-          "charged": false
-        }
-      },
-      "sort": 0,
-      "flags": {},
-      "img": "icons/magic/light/explosion-beam-impact-silhouette.webp",
-      "effects": [],
-      "folder": null,
-      "ownership": {
-        "default": 0
-      },
-      "_stats": {
-        "systemId": null,
-        "systemVersion": null,
-        "coreVersion": null,
-        "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
-      }
-    },
     {
       "_id": "iWdMYgNBkGiajzc4",
       "name": "Musical Instrument: Lute",
@@ -3456,6 +3372,40 @@
         "modifiedTime": 1661603486306,
         "lastModifiedBy": "dnd5ebuilder0000"
       }
+    },
+    {
+      "name": "Musician",
+      "type": "background",
+      "system": {
+        "description": {
+          "value": "<ul><li><strong>Skill Proficiencies:</strong> Acrobatics, Performance</li><li><strong>Tool Proficiencies:</strong> Disguise kit, one type of musical instrument</li><li><strong>Equipment:</strong> A musical instrument, a note from an admirer, and a pouch containing 15 gp</li></ul>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "",
+        "advancement": []
+      },
+      "img": "icons/tools/instruments/harp-gold-glowing.webp",
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Item.VY4Dc9uJPNVlvu1D"
+        }
+      },
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.1.0",
+        "coreVersion": "10.291",
+        "createdTime": 1673040183979,
+        "modifiedTime": 1673040818193,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_id": "VgrH5nkz2SER0YhR"
     }
   ],
   "effects": [],
@@ -3471,7 +3421,7 @@
     "systemVersion": "2.1.0",
     "coreVersion": "10.291",
     "createdTime": 1661787232198,
-    "modifiedTime": 1672524237933,
+    "modifiedTime": 1673040820446,
     "lastModifiedBy": "dnd5ebuilder0000"
   }
 }

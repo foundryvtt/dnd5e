@@ -64,7 +64,11 @@
         "min": 0,
         "max": null,
         "temp": null,
-        "tempmax": null
+        "tempmax": null,
+        "bonuses": {
+          "level": "",
+          "overall": ""
+        }
       },
       "init": {
         "ability": "",
@@ -105,7 +109,7 @@
       },
       "alignment": "True Neutral",
       "race": "Lightfoot Halfling",
-      "background": "Priest",
+      "background": "",
       "originalClass": "nkdcq1w0tirh8oq1",
       "xp": {
         "value": 0
@@ -477,94 +481,6 @@
     "detectionModes": []
   },
   "items": [
-    {
-      "_id": "iTaTqbag5cbbIV89",
-      "name": "Background: Priest",
-      "type": "feat",
-      "system": {
-        "description": {
-          "value": "<ul>\n<li>Skill Proficiencies: Insight, Religion</li>\n<li>Languages: Two of your choice</li>\n<li>Equipment: A holy symbol, 5 sticks of incense, prayer book, vestments, a set of common clothes, and a pouch containing 15 gp.</li>\n</ul>",
-          "chat": "",
-          "unidentified": ""
-        },
-        "source": "Custom",
-        "activation": {
-          "type": "",
-          "cost": null,
-          "condition": ""
-        },
-        "duration": {
-          "value": "",
-          "units": ""
-        },
-        "cover": null,
-        "target": {
-          "value": null,
-          "width": null,
-          "units": "",
-          "type": ""
-        },
-        "range": {
-          "value": null,
-          "long": null,
-          "units": ""
-        },
-        "uses": {
-          "value": null,
-          "max": "",
-          "per": null,
-          "recovery": ""
-        },
-        "consume": {
-          "type": "",
-          "target": null,
-          "amount": null
-        },
-        "ability": "",
-        "actionType": "",
-        "attackBonus": "",
-        "chatFlavor": "",
-        "critical": {
-          "threshold": null,
-          "damage": ""
-        },
-        "damage": {
-          "parts": [],
-          "versatile": ""
-        },
-        "formula": "",
-        "save": {
-          "ability": "",
-          "dc": null,
-          "scaling": "spell"
-        },
-        "type": {
-          "value": "",
-          "subtype": ""
-        },
-        "requirements": "",
-        "recharge": {
-          "value": null,
-          "charged": false
-        }
-      },
-      "sort": 0,
-      "flags": {},
-      "img": "icons/sundries/documents/document-torn-diagram-tan.webp",
-      "effects": [],
-      "folder": null,
-      "ownership": {
-        "default": 0
-      },
-      "_stats": {
-        "systemId": null,
-        "systemVersion": null,
-        "coreVersion": null,
-        "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
-      }
-    },
     {
       "_id": "T46tnnPLPLqZD4y6",
       "name": "Shortsword",
@@ -3367,6 +3283,40 @@
         "modifiedTime": null,
         "lastModifiedBy": null
       }
+    },
+    {
+      "name": "Priest",
+      "type": "background",
+      "system": {
+        "description": {
+          "value": "<ul><li><strong>Skill Proficiencies:</strong> Insight, Religion</li><li><strong>Languages:</strong> Two of your choice</li><li><strong>Equipment:</strong> A holy symbol, 5 sticks of incense, prayer book, vestments, a set of common clothes, and a pouch containing 15 gp.</li></ul>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "",
+        "advancement": []
+      },
+      "img": "icons/sundries/documents/document-torn-diagram-tan.webp",
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Item.VY4Dc9uJPNVlvu1D"
+        }
+      },
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.1.0",
+        "coreVersion": "10.291",
+        "createdTime": 1673040183979,
+        "modifiedTime": 1673040726622,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_id": "q4tr1vTU8RxtU1UZ"
     }
   ],
   "effects": [
@@ -3415,7 +3365,7 @@
     "systemVersion": "2.1.0",
     "coreVersion": "10.291",
     "createdTime": 1661787232144,
-    "modifiedTime": 1672524236115,
+    "modifiedTime": 1673040729419,
     "lastModifiedBy": "dnd5ebuilder0000"
   }
 }

@@ -64,7 +64,11 @@
         "min": 0,
         "max": null,
         "temp": null,
-        "tempmax": null
+        "tempmax": null,
+        "bonuses": {
+          "level": "",
+          "overall": ""
+        }
       },
       "init": {
         "ability": "",
@@ -105,7 +109,7 @@
       },
       "alignment": "Chaotic Good",
       "race": "Lightfoot Halfling",
-      "background": "Vigilante",
+      "background": "",
       "originalClass": "2wfeg14piijtgdr1",
       "xp": {
         "value": 0
@@ -478,94 +482,6 @@
     "detectionModes": []
   },
   "items": [
-    {
-      "_id": "U69Wo1zpr7xpWBdH",
-      "name": "Background: Vigilante",
-      "type": "feat",
-      "system": {
-        "description": {
-          "value": "<ul>\n<li>Skill Proficiencies: Insight, Investigation, Perception</li>\n<li>Equipment: Explorer's Pack, 2 gp</li>\n</ul>",
-          "chat": "",
-          "unidentified": ""
-        },
-        "source": "Custom",
-        "activation": {
-          "type": "",
-          "cost": null,
-          "condition": ""
-        },
-        "duration": {
-          "value": "",
-          "units": ""
-        },
-        "cover": null,
-        "target": {
-          "value": null,
-          "width": null,
-          "units": "",
-          "type": ""
-        },
-        "range": {
-          "value": null,
-          "long": null,
-          "units": ""
-        },
-        "uses": {
-          "value": null,
-          "max": "",
-          "per": null,
-          "recovery": ""
-        },
-        "consume": {
-          "type": "",
-          "target": null,
-          "amount": null
-        },
-        "ability": "",
-        "actionType": "",
-        "attackBonus": "",
-        "chatFlavor": "",
-        "critical": {
-          "threshold": null,
-          "damage": ""
-        },
-        "damage": {
-          "parts": [],
-          "versatile": ""
-        },
-        "formula": "",
-        "save": {
-          "ability": "",
-          "dc": null,
-          "scaling": "spell"
-        },
-        "type": {
-          "value": "",
-          "subtype": ""
-        },
-        "requirements": "",
-        "recharge": {
-          "value": null,
-          "charged": false
-        }
-      },
-      "sort": 0,
-      "flags": {},
-      "img": "icons/magic/fire/flame-burning-fist-strike.webp",
-      "effects": [],
-      "folder": null,
-      "ownership": {
-        "default": 0
-      },
-      "_stats": {
-        "systemId": null,
-        "systemVersion": null,
-        "coreVersion": null,
-        "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
-      }
-    },
     {
       "_id": "l87HKTUcZRp0PohR",
       "name": "Javelin (melee)",
@@ -3030,6 +2946,40 @@
         "modifiedTime": null,
         "lastModifiedBy": null
       }
+    },
+    {
+      "name": "Vigilante",
+      "type": "background",
+      "system": {
+        "description": {
+          "value": "<ul><li><strong>Skill Proficiencies:</strong> Insight, Investigation, Perception</li><li><strong>Equipment:</strong> Explorer's Pack, 2 gp</li></ul>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "",
+        "advancement": []
+      },
+      "img": "icons/magic/fire/flame-burning-fist-strike.webp",
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Item.VY4Dc9uJPNVlvu1D"
+        }
+      },
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.1.0",
+        "coreVersion": "10.291",
+        "createdTime": 1673040183979,
+        "modifiedTime": 1673040848723,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_id": "XIVdS0HZI5lOG5bx"
     }
   ],
   "effects": [
@@ -3124,7 +3074,7 @@
     "systemVersion": "2.1.0",
     "coreVersion": "10.291",
     "createdTime": 1661787232184,
-    "modifiedTime": 1672524237284,
+    "modifiedTime": 1673040848723,
     "lastModifiedBy": "dnd5ebuilder0000"
   }
 }
