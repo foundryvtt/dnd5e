@@ -28,7 +28,7 @@ export default class ContainerData extends SystemDataModel.mixin(
           required: true, initial: "weight", blank: false, label: "DND5E.ItemContainerCapacityType"
         }),
         value: new foundry.data.fields.NumberField({
-          required: true, nullable: false, initial: 0, min: 0, label: "DND5E.ItemContainerCapacityMax"
+          required: true, min: 0, label: "DND5E.ItemContainerCapacityMax"
         }),
         weightless: new foundry.data.fields.BooleanField({required: true, label: "DND5E.ItemContainerWeightless"})
       }, {label: "DND5E.ItemContainerCapacity"})

@@ -48,7 +48,7 @@ export default class EquipmentData extends SystemDataModel.mixin(
         conditions: new foundry.data.fields.StringField({required: true, label: "DND5E.SpeedConditions"})
       }, {label: "DND5E.Speed"}),
       strength: new foundry.data.fields.NumberField({
-        required: true, nullable: false, integer: true, initial: 0, min: 0, label: "DND5E.ItemRequiredStr"
+        required: true, integer: true, min: 0, label: "DND5E.ItemRequiredStr"
       }),
       stealth: new foundry.data.fields.BooleanField({required: true, label: "DND5E.ItemEquipmentStealthDisav"}),
       proficient: new foundry.data.fields.BooleanField({required: true, initial: true, label: "DND5E.Proficient"})
