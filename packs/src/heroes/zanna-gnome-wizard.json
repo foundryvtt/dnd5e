@@ -486,7 +486,7 @@
         "source": "Custom",
         "activation": {
           "type": "",
-          "cost": 0,
+          "cost": null,
           "condition": ""
         },
         "duration": {
@@ -495,18 +495,18 @@
         },
         "cover": null,
         "target": {
-          "value": 0,
+          "value": null,
           "width": null,
           "units": "",
           "type": ""
         },
         "range": {
-          "value": 0,
+          "value": null,
           "long": null,
           "units": ""
         },
         "uses": {
-          "value": 0,
+          "value": null,
           "max": "",
           "per": null,
           "recovery": ""
@@ -604,7 +604,7 @@
           "units": ""
         },
         "uses": {
-          "value": 0,
+          "value": null,
           "max": "",
           "per": null,
           "recovery": "",
@@ -699,7 +699,7 @@
           "units": "ft"
         },
         "uses": {
-          "value": 0,
+          "value": null,
           "max": "",
           "per": null,
           "recovery": ""
@@ -805,7 +805,7 @@
         "identified": true,
         "activation": {
           "type": "none",
-          "cost": 0,
+          "cost": null,
           "condition": ""
         },
         "duration": {
@@ -825,7 +825,7 @@
           "units": ""
         },
         "uses": {
-          "value": 0,
+          "value": null,
           "max": "",
           "per": null,
           "recovery": ""
@@ -1479,7 +1479,7 @@
         },
         "cover": null,
         "target": {
-          "value": 0,
+          "value": null,
           "width": null,
           "units": "",
           "type": ""
@@ -1813,7 +1813,7 @@
         "source": "SRD 5.1",
         "activation": {
           "type": "",
-          "cost": 0,
+          "cost": null,
           "condition": ""
         },
         "duration": {
@@ -1822,18 +1822,18 @@
         },
         "cover": null,
         "target": {
-          "value": 0,
+          "value": null,
           "width": null,
           "units": "",
           "type": ""
         },
         "range": {
-          "value": 0,
+          "value": null,
           "long": null,
           "units": ""
         },
         "uses": {
-          "value": 0,
+          "value": null,
           "max": "",
           "per": null,
           "recovery": ""
@@ -1905,7 +1905,7 @@
         "source": "SRD 5.1",
         "activation": {
           "type": "",
-          "cost": 0,
+          "cost": null,
           "condition": ""
         },
         "duration": {
@@ -1914,18 +1914,18 @@
         },
         "cover": null,
         "target": {
-          "value": 0,
+          "value": null,
           "width": null,
           "units": "",
           "type": ""
         },
         "range": {
-          "value": 0,
+          "value": null,
           "long": null,
           "units": ""
         },
         "uses": {
-          "value": 0,
+          "value": null,
           "max": "",
           "per": null,
           "recovery": ""
@@ -2017,7 +2017,7 @@
           "units": ""
         },
         "uses": {
-          "value": 0,
+          "value": null,
           "max": "",
           "per": null,
           "recovery": ""
@@ -2089,7 +2089,7 @@
         "source": "SRD 5.1",
         "activation": {
           "type": "",
-          "cost": 0,
+          "cost": null,
           "condition": ""
         },
         "duration": {
@@ -2109,7 +2109,7 @@
           "units": ""
         },
         "uses": {
-          "value": 0,
+          "value": null,
           "max": "",
           "per": null,
           "recovery": ""
@@ -2181,7 +2181,7 @@
         "source": "SRD 5.1",
         "activation": {
           "type": "",
-          "cost": 0,
+          "cost": null,
           "condition": ""
         },
         "duration": {
@@ -2201,7 +2201,7 @@
           "units": ""
         },
         "uses": {
-          "value": 0,
+          "value": null,
           "max": "",
           "per": null,
           "recovery": ""
@@ -2433,7 +2433,7 @@
         "source": "SRD 5.1",
         "activation": {
           "type": "",
-          "cost": 0,
+          "cost": null,
           "condition": ""
         },
         "duration": {
@@ -2529,7 +2529,7 @@
         "source": "SRD 5.1",
         "activation": {
           "type": "special",
-          "cost": 0,
+          "cost": null,
           "condition": ""
         },
         "duration": {
@@ -2643,11 +2643,11 @@
         },
         "range": {
           "value": 120,
-          "long": 0,
+          "long": null,
           "units": "ft"
         },
         "uses": {
-          "value": 0,
+          "value": null,
           "max": "",
           "per": null,
           "recovery": ""
@@ -2758,7 +2758,7 @@
           "units": "touch"
         },
         "uses": {
-          "value": 0,
+          "value": null,
           "max": "",
           "per": null,
           "recovery": ""
@@ -2860,11 +2860,11 @@
         },
         "range": {
           "value": 30,
-          "long": 0,
+          "long": null,
           "units": "ft"
         },
         "uses": {
-          "value": 0,
+          "value": null,
           "max": "",
           "per": null,
           "recovery": ""
@@ -2966,11 +2966,11 @@
         },
         "range": {
           "value": 30,
-          "long": 0,
+          "long": null,
           "units": "ft"
         },
         "uses": {
-          "value": 0,
+          "value": null,
           "max": "",
           "per": null,
           "recovery": ""
@@ -3074,7 +3074,7 @@
           "units": "self"
         },
         "uses": {
-          "value": 0,
+          "value": null,
           "max": "",
           "per": null,
           "recovery": ""
@@ -3207,11 +3207,11 @@
         },
         "range": {
           "value": 10,
-          "long": 0,
+          "long": null,
           "units": "ft"
         },
         "uses": {
-          "value": 0,
+          "value": null,
           "max": "",
           "per": null,
           "recovery": ""
@@ -3315,7 +3315,7 @@
           "units": "touch"
         },
         "uses": {
-          "value": 0,
+          "value": null,
           "max": "",
           "per": null,
           "recovery": ""
@@ -3446,11 +3446,11 @@
         },
         "range": {
           "value": 90,
-          "long": 0,
+          "long": null,
           "units": "ft"
         },
         "uses": {
-          "value": 0,
+          "value": null,
           "max": "",
           "per": null,
           "recovery": ""
@@ -3559,11 +3559,11 @@
         },
         "range": {
           "value": 120,
-          "long": 0,
+          "long": null,
           "units": "ft"
         },
         "uses": {
-          "value": 0,
+          "value": null,
           "max": "",
           "per": null,
           "recovery": ""
