@@ -66,9 +66,9 @@
                     {{item.name~}}
                     {{~#if ctx.isStack}} ({{item.system.quantity}}){{/if}}
                 </h4>
-                {{#if item.attunement}}
+                {{#if ctx.attunement}}
                 <div class="item-detail attunement">
-                    <i class="fas {{item.attunement.icon}} {{item.attunement.cls}}" title="{{localize item.attunement.title}}"></i>
+                    <i class="fas {{ctx.attunement.icon}} {{ctx.attunement.cls}}" title="{{localize ctx.attunement.title}}"></i>
                 </div>
                 {{/if}}
                 {{/if}}
