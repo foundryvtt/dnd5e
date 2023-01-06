@@ -69,7 +69,7 @@ export default class TraitSelector extends DocumentSheet {
       custom: data.custom,
       customPath: "custom" in data ? `${path}.custom` : null,
       bypasses: "bypasses" in data ? Object.entries(CONFIG.DND5E.physicalWeaponProperties).reduce((obj, [k, v]) => {
-        obj[k] = { label: v, chosen: data.bypasses.includes(k) };
+        obj[k] = { label: v, chosen: data.bypasses.has(k) };
         return obj;
       }, {}) : null,
       bypassesPath: "bypasses" in data ? `${path}.bypasses` : null

@@ -753,7 +753,9 @@ export default class ActorSheet5e extends ActorSheet {
       options.push({
         name: isAttuned ? "DND5E.ContextMenuActionUnattune" : "DND5E.ContextMenuActionAttune",
         icon: "<i class='fas fa-sun fa-fw'></i>",
-        callback: item.update({"system.attunement": CONFIG.DND5E.attunementTypes[isAttuned ? "ATTUNED" : "REQUIRED"]})
+        callback: () => item.update({
+          "system.attunement": CONFIG.DND5E.attunementTypes[isAttuned ? "REQUIRED" : "ATTUNED"]
+        })
       });
     }
 
