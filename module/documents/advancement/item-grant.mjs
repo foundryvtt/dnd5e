@@ -140,16 +140,16 @@ export default class ItemGrantAdvancement extends Advancement {
 
   /**
    * Verify that the provided item can be used with this advancement based on the configuration.
-   * @param {Item5e} item                  Item that needs to be tested.
+   * @param {Item5e} item                   Item that needs to be tested.
    * @param {object} config
-   * @param {boolean} [config.error=true]  Should an error be thrown when an invalid type is encountered?
-   * @returns {boolean}                    Is this type valid?
-   * @throws An error if the item is invalid and warn is `true`.
+   * @param {boolean} [config.strict=true]  Should an error be thrown when an invalid type is encountered?
+   * @returns {boolean}                     Is this type valid?
+   * @throws An error if the item is invalid and strict is `true`.
    */
-  _validateItemType(item, { error=true }={}) {
+  _validateItemType(item, { strict=true }={}) {
     if ( this.constructor.VALID_TYPES.has(item.type) ) return true;
     const type = game.i18n.localize(`ITEM.Type${item.type.capitalize()}`);
-    if ( error ) throw new Error(game.i18n.format("DND5E.AdvancementItemTypeInvalidWarning", { type }));
+    if ( strict ) throw new Error(game.i18n.format("DND5E.AdvancementItemTypeInvalidWarning", {type}));
     return false;
   }
 }

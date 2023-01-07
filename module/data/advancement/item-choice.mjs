@@ -22,7 +22,7 @@ export default class ItemChoiceConfigurationData extends foundry.abstract.DataMo
         type: new foundry.data.fields.StringField({label: "DND5E.Type"}),
         subtype: new foundry.data.fields.StringField({label: "DND5E.Subtype"}),
         level: new foundry.data.fields.StringField({label: "DND5E.SpellLevel"})
-      }, {label: ""})
+      })
     };
   }
 }

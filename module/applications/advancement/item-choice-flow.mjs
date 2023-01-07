@@ -13,13 +13,13 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
 
   /**
    * Cached items from the advancement's pool.
-   * @type {Array<Item5e>}
+   * @type {Item5e[]}
    */
   pool;
 
   /**
    * List of dropped items.
-   * @type {Array<Item5e>}
+   * @type {Item5e[]}
    */
   dropped;
 
@@ -42,16 +42,16 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
         ?? Object.values(this.advancement.value[this.level] ?? {})
     );
     this.pool ??= await Promise.all(this.advancement.configuration.pool.map(fromUuid));
-    this.dropped ??= await (this.retainedData?.items ?? []).reduce(async (arrP, data) => {
-      const arr = await arrP;
-      const uuid = foundry.utils.getProperty(data, "flags.dnd5e.sourceId");
-      if ( !this.pool.find(i => uuid === i.uuid) ) {
+    if ( !this.dropped ) {
+      this.dropped = [];
+      for ( const data of this.retainedData?.items ?? [] ) {
+        const uuid = foundry.utils.getProperty(data, "flags.dnd5e.sourceId");
+        if ( this.pool.find(i => uuid === i.uuid) ) continue;
         const item = await fromUuid(uuid);
         item.dropped = true;
-        arr.push(item);
+        this.dropped.push(item);
       }
-      return arr;
-    }, []);
+    }
 
     const max = this.advancement.configuration.choices[this.level];
     const choices = { max, current: this.selected.size, full: this.selected.size >= max };
