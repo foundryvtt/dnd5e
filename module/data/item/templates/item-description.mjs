@@ -20,4 +20,21 @@ export default class ItemDescriptionTemplate extends foundry.abstract.DataModel 
       source: new foundry.data.fields.StringField({required: true, label: "DND5E.Source"})
     };
   }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  static migrateData(source) {
+    ItemDescriptionTemplate.#migrateSource(source);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Convert null source to the blank string.
+   * @param {object} source  The candidate source data from which the model will be constructed.
+   */
+  static #migrateSource(source) {
+    if ( source.source === null ) source.source = "";
+  }
 }
