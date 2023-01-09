@@ -64,7 +64,11 @@
         "min": 0,
         "max": null,
         "temp": null,
-        "tempmax": null
+        "tempmax": null,
+        "bonuses": {
+          "level": "",
+          "overall": ""
+        }
       },
       "init": {
         "ability": "",
@@ -105,7 +109,7 @@
       },
       "alignment": "True Neutral",
       "race": "HUMAN",
-      "background": "Recluse",
+      "background": "",
       "originalClass": "wu0878mk64sgvd9z",
       "xp": {
         "value": 0
@@ -503,94 +507,6 @@
       "sort": 0,
       "flags": {},
       "img": "icons/tools/instruments/bell-brass-brown.webp",
-      "effects": [],
-      "folder": null,
-      "ownership": {
-        "default": 0
-      },
-      "_stats": {
-        "systemId": null,
-        "systemVersion": null,
-        "coreVersion": null,
-        "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
-      }
-    },
-    {
-      "_id": "L8hf4HtRF3hpT14e",
-      "name": "Background: Recluse",
-      "type": "feat",
-      "system": {
-        "description": {
-          "value": "<ul>\n<li>Skill Proficiencies: Medicine, Religion</li>\n<li>Tool Proficiencies: Herbalism kit</li>\n<li>Languages: One of your choice</li>\n<li>Equipment: A scroll case, a blanket, common clothes, an herbalism kit, and 5 gp</li>\n</ul>",
-          "chat": "",
-          "unidentified": ""
-        },
-        "source": "Custom",
-        "activation": {
-          "type": "",
-          "cost": null,
-          "condition": ""
-        },
-        "duration": {
-          "value": "",
-          "units": ""
-        },
-        "cover": null,
-        "target": {
-          "value": null,
-          "width": null,
-          "units": "",
-          "type": ""
-        },
-        "range": {
-          "value": null,
-          "long": null,
-          "units": ""
-        },
-        "uses": {
-          "value": 2,
-          "max": "2",
-          "per": null,
-          "recovery": ""
-        },
-        "consume": {
-          "type": "",
-          "target": null,
-          "amount": null
-        },
-        "ability": "",
-        "actionType": "",
-        "attackBonus": "",
-        "chatFlavor": "",
-        "critical": {
-          "threshold": null,
-          "damage": ""
-        },
-        "damage": {
-          "parts": [],
-          "versatile": ""
-        },
-        "formula": "",
-        "save": {
-          "ability": "",
-          "dc": null,
-          "scaling": "spell"
-        },
-        "type": {
-          "value": "",
-          "subtype": ""
-        },
-        "requirements": "",
-        "recharge": {
-          "value": null,
-          "charged": false
-        }
-      },
-      "sort": 0,
-      "flags": {},
-      "img": "icons/magic/light/explosion-beam-impact-silhouette.webp",
       "effects": [],
       "folder": null,
       "ownership": {
@@ -2008,7 +1924,7 @@
             "type": "ScaleValue",
             "configuration": {
               "identifier": "wild-shape",
-              "type": "number",
+              "type": "cr",
               "scale": {
                 "2": {
                   "value": 0.25
@@ -2063,12 +1979,12 @@
         }
       },
       "_stats": {
-        "systemId": null,
-        "systemVersion": null,
-        "coreVersion": null,
+        "systemId": "dnd5e",
+        "systemVersion": "2.1.0",
+        "coreVersion": "10.291",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1673040078280,
+        "lastModifiedBy": "dnd5ebuilder0000"
       }
     },
     {
@@ -4224,6 +4140,36 @@
         "modifiedTime": 1661603486131,
         "lastModifiedBy": "dnd5ebuilder0000"
       }
+    },
+    {
+      "name": "Recluse",
+      "type": "background",
+      "system": {
+        "description": {
+          "value": "<ul><li><strong>Skill Proficiencies:</strong> Medicine, Religion</li><li><strong>Tool Proficiencies:</strong> Herbalism kit</li><li><strong>Languages:</strong> One of your choice</li><li><strong>Equipment:</strong> A scroll case, a blanket, common clothes, an herbalism kit, and 5 gp</li></ul>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "",
+        "advancement": []
+      },
+      "img": "icons/magic/light/explosion-beam-impact-silhouette.webp",
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.1.0",
+        "coreVersion": "10.291",
+        "createdTime": 1673040183979,
+        "modifiedTime": 1673040344468,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_id": "lMobFB5hSFEGtkrq"
     }
   ],
   "effects": [
@@ -4268,7 +4214,7 @@
     "systemVersion": "2.1.0",
     "coreVersion": "10.291",
     "createdTime": 1661787232171,
-    "modifiedTime": 1672524236857,
+    "modifiedTime": 1673040344468,
     "lastModifiedBy": "dnd5ebuilder0000"
   }
 }

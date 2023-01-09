@@ -64,7 +64,11 @@
         "min": 0,
         "max": null,
         "temp": null,
-        "tempmax": null
+        "tempmax": null,
+        "bonuses": {
+          "level": "",
+          "overall": ""
+        }
       },
       "init": {
         "ability": "",
@@ -105,7 +109,7 @@
       },
       "alignment": "Lawful Good",
       "race": "Half Orc",
-      "background": "Local Champion",
+      "background": "",
       "originalClass": "hp3q5dyegfnxgf5p",
       "xp": {
         "value": 0
@@ -575,94 +579,6 @@
       "sort": 0,
       "flags": {},
       "img": "icons/equipment/neck/pendant-bronze-gem-blue.webp",
-      "effects": [],
-      "folder": null,
-      "ownership": {
-        "default": 0
-      },
-      "_stats": {
-        "systemId": null,
-        "systemVersion": null,
-        "coreVersion": null,
-        "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
-      }
-    },
-    {
-      "_id": "z5rKywjIFzidberh",
-      "name": "Background: Local Champion",
-      "type": "feat",
-      "system": {
-        "description": {
-          "value": "<ul>\n<li>Skill Proficiencies: Animal Handling, Survival</li>\n<li>Tool Proficiencies: Artisan&rsquo;s tools, vehicles (land)</li>\n<li>Equipment: A set of artisan&rsquo;s tools, common clothes, and a pouch containing 10 gp</li>\n</ul>",
-          "chat": "",
-          "unidentified": ""
-        },
-        "source": "Custom",
-        "activation": {
-          "type": "",
-          "cost": null,
-          "condition": ""
-        },
-        "duration": {
-          "value": "",
-          "units": ""
-        },
-        "cover": null,
-        "target": {
-          "value": null,
-          "width": null,
-          "units": "",
-          "type": ""
-        },
-        "range": {
-          "value": null,
-          "long": null,
-          "units": ""
-        },
-        "uses": {
-          "value": 2,
-          "max": "2",
-          "per": null,
-          "recovery": ""
-        },
-        "consume": {
-          "type": "",
-          "target": null,
-          "amount": null
-        },
-        "ability": "",
-        "actionType": "",
-        "attackBonus": "",
-        "chatFlavor": "",
-        "critical": {
-          "threshold": null,
-          "damage": ""
-        },
-        "damage": {
-          "parts": [],
-          "versatile": ""
-        },
-        "formula": "",
-        "save": {
-          "ability": "",
-          "dc": null,
-          "scaling": "spell"
-        },
-        "type": {
-          "value": "",
-          "subtype": ""
-        },
-        "requirements": "",
-        "recharge": {
-          "value": null,
-          "charged": false
-        }
-      },
-      "sort": 0,
-      "flags": {},
-      "img": "icons/magic/light/explosion-beam-impact-silhouette.webp",
       "effects": [],
       "folder": null,
       "ownership": {
@@ -2764,6 +2680,36 @@
         "modifiedTime": null,
         "lastModifiedBy": null
       }
+    },
+    {
+      "name": "Local Champion",
+      "type": "background",
+      "system": {
+        "description": {
+          "value": "<ul><li><strong>Skill Proficiencies:</strong> Animal Handling, Survival</li><li><strong>Tool Proficiencies:</strong> Artisan's tools, vehicles (land)</li><li><strong>Equipment:</strong> A set of artisan's tools, common clothes, and a pouch containing 10 gp</li></ul>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "",
+        "advancement": []
+      },
+      "img": "icons/environment/people/infantry-armored.webp",
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.1.0",
+        "coreVersion": "10.291",
+        "createdTime": 1673040183979,
+        "modifiedTime": 1673040912446,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_id": "gfQ9BWSZtm6WJyZr"
     }
   ],
   "effects": [],
@@ -2783,7 +2729,7 @@
     "systemVersion": "2.1.0",
     "coreVersion": "10.291",
     "createdTime": 1661787232161,
-    "modifiedTime": 1672524236566,
+    "modifiedTime": 1673040914609,
     "lastModifiedBy": "dnd5ebuilder0000"
   }
 }

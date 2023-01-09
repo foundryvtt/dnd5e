@@ -65,7 +65,11 @@
         "min": 0,
         "max": null,
         "temp": null,
-        "tempmax": null
+        "tempmax": null,
+        "bonuses": {
+          "level": "",
+          "overall": ""
+        }
       },
       "init": {
         "ability": "",
@@ -106,7 +110,7 @@
       },
       "alignment": "Chaotic Neutral",
       "race": "Half-elf",
-      "background": "Burglar",
+      "background": "",
       "originalClass": "idbg35ipjfs0tl4o",
       "xp": {
         "value": 0
@@ -480,94 +484,6 @@
     "detectionModes": []
   },
   "items": [
-    {
-      "_id": "ARnFQMtJ9j0GCjIR",
-      "name": "Background: Burglar",
-      "type": "feat",
-      "system": {
-        "description": {
-          "value": "<ul>\n<li>\n<p>Skill Proficiencies: Deception, Stealth</p>\n</li>\n<li>\n<p>Tool Proficiencies: One type of gaming set, thieves' tools</p>\n</li>\n<li>\n<p>Equipment: A crowbar, hooded common clothes, thieves' tools, and a belt pouch containing 15 gp</p>\n</li>\n</ul>",
-          "chat": "",
-          "unidentified": ""
-        },
-        "source": "Custom",
-        "activation": {
-          "type": "",
-          "cost": null,
-          "condition": ""
-        },
-        "duration": {
-          "value": "",
-          "units": ""
-        },
-        "cover": null,
-        "target": {
-          "value": null,
-          "width": null,
-          "units": "",
-          "type": ""
-        },
-        "range": {
-          "value": null,
-          "long": null,
-          "units": ""
-        },
-        "uses": {
-          "value": null,
-          "max": "",
-          "per": null,
-          "recovery": ""
-        },
-        "consume": {
-          "type": "",
-          "target": null,
-          "amount": null
-        },
-        "ability": "",
-        "actionType": "",
-        "attackBonus": "",
-        "chatFlavor": "",
-        "critical": {
-          "threshold": null,
-          "damage": ""
-        },
-        "damage": {
-          "parts": [],
-          "versatile": ""
-        },
-        "formula": "",
-        "save": {
-          "ability": "",
-          "dc": null,
-          "scaling": "spell"
-        },
-        "type": {
-          "value": "",
-          "subtype": ""
-        },
-        "requirements": "",
-        "recharge": {
-          "value": null,
-          "charged": false
-        }
-      },
-      "sort": 0,
-      "flags": {},
-      "img": "icons/magic/perception/silhouette-stealth-shadow.webp",
-      "effects": [],
-      "folder": null,
-      "ownership": {
-        "default": 0
-      },
-      "_stats": {
-        "systemId": null,
-        "systemVersion": null,
-        "coreVersion": null,
-        "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
-      }
-    },
     {
       "_id": "s6ksFNAiSR2Wy20f",
       "name": "Expanded Spell List",
@@ -3389,6 +3305,36 @@
         "modifiedTime": 1661603486086,
         "lastModifiedBy": "dnd5ebuilder0000"
       }
+    },
+    {
+      "name": "Burglar",
+      "type": "background",
+      "system": {
+        "description": {
+          "value": "<ul><li><strong>Skill Proficiencies:</strong> Deception, Stealth</li><li><strong>Tool Proficiencies:</strong> One type of gaming set, thieves' tools</li><li><strong>Equipment:</strong> A crowbar, hooded common clothes, thieves' tools, and a belt pouch containing 15 gp</li></ul>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "",
+        "advancement": []
+      },
+      "img": "icons/magic/perception/silhouette-stealth-shadow.webp",
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.1.0",
+        "coreVersion": "10.291",
+        "createdTime": 1673040183979,
+        "modifiedTime": 1673040964521,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_id": "8uFLMKLwRO7Y5Xl2"
     }
   ],
   "effects": [],
@@ -3403,7 +3349,7 @@
     "systemVersion": "2.1.0",
     "coreVersion": "10.291",
     "createdTime": 1661787232167,
-    "modifiedTime": 1672524236730,
+    "modifiedTime": 1673040964521,
     "lastModifiedBy": "dnd5ebuilder0000"
   }
 }

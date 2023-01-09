@@ -65,7 +65,11 @@
         "min": 0,
         "max": null,
         "temp": null,
-        "tempmax": null
+        "tempmax": null,
+        "bonuses": {
+          "level": "",
+          "overall": ""
+        }
       },
       "init": {
         "ability": "",
@@ -106,7 +110,7 @@
       },
       "alignment": "Neutral Evil",
       "race": "Tiefling",
-      "background": "Scholar",
+      "background": "",
       "originalClass": "blu8155lcbwm8o1s",
       "xp": {
         "value": 0
@@ -475,94 +479,6 @@
     "detectionModes": []
   },
   "items": [
-    {
-      "_id": "YXRnHS46shcsNZn2",
-      "name": "Background: Scholar",
-      "type": "feat",
-      "system": {
-        "description": {
-          "value": "<ul>\n<li>\n<p>Skill Proficiencies: History, plus your choice of one from among Arcana, Nature, and Religion</p>\n</li>\n<li>\n<p>Languages: Two of your choice</p>\n</li>\n<li>\n<p>Equipment: Scholar's robes, a writing kit, a book of lore, and a pouch containing 10 gp</p>\n</li>\n</ul>",
-          "chat": "",
-          "unidentified": ""
-        },
-        "source": "Custom",
-        "activation": {
-          "type": "",
-          "cost": null,
-          "condition": ""
-        },
-        "duration": {
-          "value": "",
-          "units": ""
-        },
-        "cover": null,
-        "target": {
-          "value": null,
-          "width": null,
-          "units": "",
-          "type": ""
-        },
-        "range": {
-          "value": null,
-          "long": null,
-          "units": ""
-        },
-        "uses": {
-          "value": null,
-          "max": "",
-          "per": null,
-          "recovery": ""
-        },
-        "consume": {
-          "type": "",
-          "target": null,
-          "amount": null
-        },
-        "ability": "",
-        "actionType": "",
-        "attackBonus": "",
-        "chatFlavor": "",
-        "critical": {
-          "threshold": null,
-          "damage": ""
-        },
-        "damage": {
-          "parts": [],
-          "versatile": ""
-        },
-        "formula": "",
-        "save": {
-          "ability": "",
-          "dc": null,
-          "scaling": "spell"
-        },
-        "type": {
-          "value": "",
-          "subtype": ""
-        },
-        "requirements": "",
-        "recharge": {
-          "value": null,
-          "charged": false
-        }
-      },
-      "sort": 0,
-      "flags": {},
-      "img": "icons/magic/light/hand-sparks-smoke-teal.webp",
-      "effects": [],
-      "folder": null,
-      "ownership": {
-        "default": 0
-      },
-      "_stats": {
-        "systemId": null,
-        "systemVersion": null,
-        "coreVersion": null,
-        "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
-      }
-    },
     {
       "_id": "4oZOGoQdZ0qipEn9",
       "name": "Orb",
@@ -3740,6 +3656,36 @@
         "modifiedTime": 1661603486274,
         "lastModifiedBy": "dnd5ebuilder0000"
       }
+    },
+    {
+      "name": "Scholar",
+      "type": "background",
+      "system": {
+        "description": {
+          "value": "<ul><li><strong>Skill Proficiencies:</strong> History, plus your choice of one from among Arcana, Nature, and Religion</li><li><strong>Languages:</strong> Two of your choice</li><li><strong>Equipment:</strong> Scholar's robes, a writing kit, a book of lore, and a pouch containing 10 gp</li></ul>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "",
+        "advancement": []
+      },
+      "img": "icons/sundries/documents/blueprint-recipe-alchemical.webp",
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.1.0",
+        "coreVersion": "10.291",
+        "createdTime": 1673040183979,
+        "modifiedTime": 1673040768566,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_id": "38phJIpUGf6pPv1e"
     }
   ],
   "effects": [
@@ -3811,7 +3757,7 @@
     "systemVersion": "2.1.0",
     "coreVersion": "10.291",
     "createdTime": 1661787232194,
-    "modifiedTime": 1672524237711,
+    "modifiedTime": 1673040770386,
     "lastModifiedBy": "dnd5ebuilder0000"
   }
 }
