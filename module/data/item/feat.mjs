@@ -27,7 +27,7 @@ export default class FeatData extends SystemDataModel.mixin(
         value: new foundry.data.fields.StringField({required: true}),
         subtype: new foundry.data.fields.StringField({required: true})
       }, {label: "DND5E.ItemFeatureType"}),
-      requirements: new foundry.data.fields.StringField({required: true, label: "DND5E.Requirements"}),
+      requirements: new foundry.data.fields.StringField({required: true, nullable: true, label: "DND5E.Requirements"}),
       recharge: new foundry.data.fields.SchemaField({
         value: new foundry.data.fields.NumberField({
           required: true, integer: true, min: 1, label: "DND5E.FeatureRechargeOn"
@@ -41,8 +41,19 @@ export default class FeatData extends SystemDataModel.mixin(
 
   /** @inheritdoc */
   static migrateData(source) {
+    FeatData.#migrateType(source);
     FeatData.#migrateRecharge(source);
     return super.migrateData(source);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Ensure feats have a type object.
+   * @param {object} source The candidate source data from which the model will be constructed.
+   */
+  static #migrateType(source) {
+    if ( !source.type ) source.type = {value: "", subtype: ""};
   }
 
   /* -------------------------------------------- */
@@ -52,6 +63,9 @@ export default class FeatData extends SystemDataModel.mixin(
    * @param {object} source The candidate source data from which the model will be constructed.
    */
   static #migrateRecharge(source) {
-    if ( source.recharge?.value === 0 ) source.recharge.value = null;
+    if ( !("recharge" in source) ) return;
+    const value = source.recharge.value;
+    if ( (value === 0) || (value === "") ) source.recharge.value = null;
+    else if ( (typeof value === "string") && Number.isNumeric(value) ) source.recharge.value = Number(value);
   }
 }

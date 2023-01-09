@@ -37,7 +37,7 @@ export default class EquipmentData extends SystemDataModel.mixin(
     return this.mergeSchema(super.defineSchema(), {
       armor: new foundry.data.fields.SchemaField({
         type: new foundry.data.fields.StringField({
-          required: true, initial: "light", blank: false, label: "DND5E.ItemEquipmentType"
+          required: true, initial: "light", label: "DND5E.ItemEquipmentType"
         }),
         value: new foundry.data.fields.NumberField({required: true, integer: true, min: 0, label: "DND5E.ArmorClass"}),
         dex: new foundry.data.fields.NumberField({required: true, integer: true, label: "DND5E.ItemEquipmentDexMod"})
@@ -59,7 +59,7 @@ export default class EquipmentData extends SystemDataModel.mixin(
 
   /** @inheritdoc */
   static migrateData(source) {
-    EquipmentData.#migrateArmorTypeData(source);
+    EquipmentData.#migrateArmor(source);
     EquipmentData.#migrateStrength(source);
     return super.migrateData(source);
   }
@@ -67,13 +67,17 @@ export default class EquipmentData extends SystemDataModel.mixin(
   /* -------------------------------------------- */
 
   /**
-   * Migrate "bonus" armor subtypes to "trinket".
+   * Apply migrations to the armor field.
    * @param {object} source  The candidate source data from which the model will be constructed.
    */
-  static #migrateArmorTypeData(source) {
-    if ( source.armor?.type !== "bonus" ) return;
+  static #migrateArmor(source) {
     source.armor ??= {};
-    source.armor.type = "trinket";
+    if ( source.armor.type === "bonus" ) source.armor.type = "trinket";
+    if ( (typeof source.armor.dex === "string") ) {
+      const dex = source.armor.dex;
+      if ( dex === "" ) source.armor.dex = null;
+      else if ( Number.isNumeric(dex) ) source.armor.dex = Number(dex);
+    }
   }
 
   /* -------------------------------------------- */

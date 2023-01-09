@@ -63,6 +63,8 @@ export default class ActionTemplate extends foundry.abstract.DataModel {
   static migrateData(source) {
     ActionTemplate.#migrateAttackBonus(source);
     ActionTemplate.#migrateCritical(source);
+    ActionTemplate.#migrateSave(source);
+    ActionTemplate.#migrateDamage(source);
   }
 
   /* -------------------------------------------- */
@@ -84,9 +86,30 @@ export default class ActionTemplate extends foundry.abstract.DataModel {
    */
   static #migrateCritical(source) {
     if ( !("critical" in source) ) return;
+    if ( source.critical?.damage === null ) source.critical.damage = "";
     if ( (typeof source.critical !== "object") || (source.critical === null) ) source.critical = {
       threshold: null,
       damage: ""
     };
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Migrate the save field.
+   * @param {object} source  The candidate source data from which the model will be constructed.
+   */
+  static #migrateSave(source) {
+    if ( source.save?.scaling === "" ) source.save.scaling = "spell";
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Migrate damage parts.
+   * @param {object} source  The candidate source data from which the model will be constructed.
+   */
+  static #migrateDamage(source) {
+    if ( source.damage?.parts === null ) source.damage.parts = [];
   }
 }

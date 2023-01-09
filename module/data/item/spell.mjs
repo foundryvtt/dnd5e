@@ -72,6 +72,7 @@ export default class SpellData extends SystemDataModel.mixin(
   /** @inheritdoc */
   static migrateData(source) {
     SpellData.#migrateComponentData(source);
+    SpellData.#migrateScaling(source);
     return super.migrateData(source);
   }
 
@@ -86,5 +87,16 @@ export default class SpellData extends SystemDataModel.mixin(
     for ( const [key, value] of Object.entries(source.components) ) {
       if ( typeof value !== "boolean" ) delete source.components[key];
     }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Migrate spell scaling.
+   * @param {object} source  The candidate source data from which the model will be constructed.
+   */
+  static #migrateScaling(source) {
+    if ( !("scaling" in source) ) return;
+    if ( (source.scaling.mode === "") || (source.scaling.mode === null) ) source.scaling.mode = "none";
   }
 }

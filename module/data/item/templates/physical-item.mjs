@@ -63,11 +63,10 @@ export default class PhysicalItemTemplate extends foundry.abstract.DataModel {
    * @param {object} source  The candidate source data from which the model will be constructed.
    */
   static #migrateRarity(source) {
-    if ( !source.rarity || CONFIG.DND5E.itemRarity[source.rarity] ) return;
-    const rarity = Object.keys(CONFIG.DND5E.itemRarity).find(key =>
+    if ( !("rarity" in source) || CONFIG.DND5E.itemRarity[source.rarity] ) return;
+    source.rarity = Object.keys(CONFIG.DND5E.itemRarity).find(key =>
       CONFIG.DND5E.itemRarity[key].toLowerCase() === source.rarity.toLowerCase()
-    );
-    source.rarity = rarity;
+    ) ?? "";
   }
 
   /* -------------------------------------------- */
