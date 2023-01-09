@@ -62,6 +62,7 @@ export default class ActionTemplate extends foundry.abstract.DataModel {
   /** @inheritdoc */
   static migrateData(source) {
     ActionTemplate.#migrateAttackBonus(source);
+    ActionTemplate.#migrateCritical(source);
   }
 
   /* -------------------------------------------- */
@@ -73,5 +74,19 @@ export default class ActionTemplate extends foundry.abstract.DataModel {
   static #migrateAttackBonus(source) {
     if ( [0, "0", null].includes(source.attackBonus) ) source.attackBonus = "";
     else if ( typeof source.attackBonus === "number" ) source.attackBonus = source.attackBonus.toString();
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Ensure the critical field is an object.
+   * @param {object} source  The candidate source data from which the model will be constructed.
+   */
+  static #migrateCritical(source) {
+    if ( !("critical" in source) ) return;
+    if ( (typeof source.critical !== "object") || (source.critical === null) ) source.critical = {
+      threshold: null,
+      damage: ""
+    };
   }
 }

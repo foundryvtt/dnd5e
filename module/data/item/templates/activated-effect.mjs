@@ -93,6 +93,7 @@ export default class ActivatedEffectTemplate extends foundry.abstract.DataModel 
     ActivatedEffectTemplate.#migrateFormulaFields(source);
     ActivatedEffectTemplate.#migrateRanges(source);
     ActivatedEffectTemplate.#migrateTargets(source);
+    ActivatedEffectTemplate.#migrateUses(source);
   }
 
   /* -------------------------------------------- */
@@ -117,6 +118,7 @@ export default class ActivatedEffectTemplate extends foundry.abstract.DataModel 
    * @param {object} source  The candidate source data from which the model will be constructed.
    */
   static #migrateRanges(source) {
+    if ( source.range?.long === "" ) source.range.long = null;
     if ( typeof source.range?.value !== "string" ) return;
     if ( source.range?.value === "" ) return source.range.value = null;
     const [value, long] = source.range.value.split("/");
@@ -133,5 +135,15 @@ export default class ActivatedEffectTemplate extends foundry.abstract.DataModel 
   static #migrateTargets(source) {
     if ( source.target?.value === "" ) source.target.value = null;
     if ( source.target?.units === null ) source.target.units = "";
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Ensure a blank string in uses.value is converted to null.
+   * @param {object} source  The candidate source data from which the model will be constructed.
+   */
+  static #migrateUses(source) {
+    if ( source.uses?.value === "" ) source.uses.value = null;
   }
 }
