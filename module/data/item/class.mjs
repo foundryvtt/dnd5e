@@ -85,6 +85,7 @@ export default class ClassData extends SystemDataModel.mixin(ItemDescriptionTemp
    * @param {object} source  The candidate source data from which the model will be constructed.
    */
   static #migrateSpellcastingData(source) {
+    if ( source.spellcasting?.progression === "" ) source.spellcasting.progression = "none";
     if ( typeof source.spellcasting !== "string" ) return;
     source.spellcasting = {
       progression: source.spellcasting,

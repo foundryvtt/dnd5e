@@ -67,5 +67,6 @@ export default class FeatData extends SystemDataModel.mixin(
     const value = source.recharge.value;
     if ( (value === 0) || (value === "") ) source.recharge.value = null;
     else if ( (typeof value === "string") && Number.isNumeric(value) ) source.recharge.value = Number(value);
+    if ( source.recharge.charged === null ) source.recharge.charged = false;
   }
 }

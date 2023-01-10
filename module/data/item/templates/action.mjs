@@ -101,6 +101,7 @@ export default class ActionTemplate extends foundry.abstract.DataModel {
    */
   static #migrateSave(source) {
     if ( source.save?.scaling === "" ) source.save.scaling = "spell";
+    if ( source.save?.ability === null ) source.save.ability = "";
     if ( typeof source.save?.dc === "string" ) {
       if ( source.save.dc === "" ) source.save.dc = null;
       else if ( Number.isNumeric(source.save.dc) ) source.save.dc = Number(source.save.dc);

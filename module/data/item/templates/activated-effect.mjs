@@ -119,10 +119,14 @@ export default class ActivatedEffectTemplate extends foundry.abstract.DataModel 
    * @param {object} source  The candidate source data from which the model will be constructed.
    */
   static #migrateRanges(source) {
-    if ( source.range?.long === "" ) source.range.long = null;
-    if ( source.range?.units === null ) source.range.units = "";
-    if ( typeof source.range?.value !== "string" ) return;
-    if ( source.range?.value === "" ) return source.range.value = null;
+    if ( !("range" in source) ) return;
+    if ( source.range.units === null ) source.range.units = "";
+    if ( typeof source.range.long === "string" ) {
+      if ( source.range.long === "" ) source.range.long = null;
+      else if ( Number.isNumeric(source.range.long) ) source.range.long = Number(source.range.long);
+    }
+    if ( typeof source.range.value !== "string" ) return;
+    if ( source.range.value === "" ) return source.range.value = null;
     const [value, long] = source.range.value.split("/");
     if ( Number.isNumeric(value) ) source.range.value = Number(value);
     if ( Number.isNumeric(long) ) source.range.long = Number(long);
@@ -147,7 +151,13 @@ export default class ActivatedEffectTemplate extends foundry.abstract.DataModel 
    * @param {object} source  The candidate source data from which the model will be constructed.
    */
   static #migrateUses(source) {
-    if ( source.uses?.value === "" ) source.uses.value = null;
+    if ( !("uses" in source) ) return;
+    const value = source.uses.value;
+    if ( typeof value === "string" ) {
+      if ( value === "" ) source.uses.value = null;
+      else if ( Number.isNumeric(value) ) source.uses.value = Number(source.uses.value);
+    }
+    if ( source.uses.recovery === undefined ) source.uses.recovery = "";
   }
 
   /* -------------------------------------------- */
