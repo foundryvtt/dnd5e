@@ -61,10 +61,21 @@ export default class ActionTemplate extends foundry.abstract.DataModel {
 
   /** @inheritdoc */
   static migrateData(source) {
+    ActionTemplate.#migrateAbility(source);
     ActionTemplate.#migrateAttackBonus(source);
     ActionTemplate.#migrateCritical(source);
     ActionTemplate.#migrateSave(source);
     ActionTemplate.#migrateDamage(source);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Migrate the ability field.
+   * @param {object} source  The candidate source data from which the model will be constructed.
+   */
+  static #migrateAbility(source) {
+    if ( Array.isArray(source.ability) ) source.ability = source.ability[0];
   }
 
   /* -------------------------------------------- */
