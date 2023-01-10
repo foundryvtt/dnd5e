@@ -76,6 +76,6 @@ export default class PhysicalItemTemplate extends foundry.abstract.DataModel {
    * @param {object} source  The candidate source data from which the model will be constructed.
    */
   static #migrateWeight(source) {
-    if ( source.weight === null ) source.weight = 0;
+    if ( (source.weight === null) || (source.weight === undefined) ) source.weight = 0;
   }
 }

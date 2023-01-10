@@ -40,7 +40,7 @@ export default class ActionTemplate extends foundry.abstract.DataModel {
       }),
       damage: new foundry.data.fields.SchemaField({
         parts: new foundry.data.fields.ArrayField(new foundry.data.fields.ArrayField(
-          new foundry.data.fields.StringField()
+          new foundry.data.fields.StringField({nullable: true})
         ), {required: true}),
         versatile: new FormulaField({required: true, label: "DND5E.VersatileDamage"})
       }, {label: "DND5E.Damage"}),
@@ -101,6 +101,10 @@ export default class ActionTemplate extends foundry.abstract.DataModel {
    */
   static #migrateSave(source) {
     if ( source.save?.scaling === "" ) source.save.scaling = "spell";
+    if ( typeof source.save?.dc === "string" ) {
+      if ( source.save.dc === "" ) source.save.dc = null;
+      else if ( Number.isNumeric(source.save.dc) ) source.save.dc = Number(source.save.dc);
+    }
   }
 
   /* -------------------------------------------- */
@@ -110,6 +114,7 @@ export default class ActionTemplate extends foundry.abstract.DataModel {
    * @param {object} source  The candidate source data from which the model will be constructed.
    */
   static #migrateDamage(source) {
-    if ( source.damage?.parts === null ) source.damage.parts = [];
+    if ( !("damage" in source) ) return;
+    source.damage.parts ??= [];
   }
 }

@@ -35,4 +35,22 @@ export default class ToolData extends SystemDataModel.mixin(
       bonus: new FormulaField({required: true, label: "DND5E.ItemToolBonus"})
     });
   }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  static migrateData(source) {
+    ToolData.#migrateAbility(source);
+    return super.migrateData(source);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Migrate the ability field.
+   * @param {object} source  The candidate source data from which the model will be constructed.
+   */
+  static #migrateAbility(source) {
+    if ( Array.isArray(source.ability) ) source.ability = source.ability[0];
+  }
 }

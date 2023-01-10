@@ -44,6 +44,8 @@ export default class WeaponData extends SystemDataModel.mixin(
   /** @inheritdoc */
   static migrateData(source) {
     WeaponData.#migratePropertiesData(source);
+    WeaponData.#migrateProficient(source);
+    WeaponData.#migrateWeaponType(source);
     return super.migrateData(source);
   }
 
@@ -58,5 +60,25 @@ export default class WeaponData extends SystemDataModel.mixin(
     for ( const [key, value] of Object.entries(source.properties) ) {
       if ( typeof value !== "boolean" ) delete source.properties[key];
     }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Migrate the proficient field to remove non-boolean values.
+   * @param {object} source  The candidate source data from which the model will be constructed.
+   */
+  static #migrateProficient(source) {
+    if ( typeof source.proficient === "number" ) source.proficient = Boolean(source.proficient);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Migrate the weapon type.
+   * @param {object} source  The candidate source data from which the model will be constructed.
+   */
+  static #migrateWeaponType(source) {
+    if ( source.weaponType === null ) source.weaponType = "simpleM";
   }
 }

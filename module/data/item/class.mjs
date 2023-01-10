@@ -61,8 +61,21 @@ export default class ClassData extends SystemDataModel.mixin(ItemDescriptionTemp
 
   /** @inheritdoc */
   static migrateData(source) {
+    ClassData.#migrateLevels(source);
     ClassData.#migrateSpellcastingData(source);
     return super.migrateData(source);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Migrate the class levels.
+   * @param {object} source  The candidate source data from which the model will be constructed.
+   */
+  static #migrateLevels(source) {
+    if ( typeof source.levels !== "string" ) return;
+    if ( source.levels === "" ) source.levels = 1;
+    else if ( Number.isNumeric(source.levels) ) source.levels = Number(source.levels);
   }
 
   /* -------------------------------------------- */
