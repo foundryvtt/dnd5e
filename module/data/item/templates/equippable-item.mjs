@@ -21,6 +21,7 @@ export default class EquippableItemTemplate extends foundry.abstract.DataModel {
   /** @inheritdoc */
   static migrateData(source) {
     EquippableItemTemplate.#migrateAttunement(source);
+    EquippableItemTemplate.#migrateEquipped(source);
   }
 
   /* -------------------------------------------- */
@@ -32,5 +33,15 @@ export default class EquippableItemTemplate extends foundry.abstract.DataModel {
   static #migrateAttunement(source) {
     if ( (source.attuned === undefined) || (source.attunement !== undefined) ) return;
     source.attunement = source.attuned ? CONFIG.DND5E.attunementTypes.ATTUNED : CONFIG.DND5E.attunementTypes.NONE;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Migrate the equipped field.
+   * @param {object} source  The candidate source data from which the model will be constructed.
+   */
+  static #migrateEquipped(source) {
+    if ( source.equipped === null ) source.equipped = false;
   }
 }

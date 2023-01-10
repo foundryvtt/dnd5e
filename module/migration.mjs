@@ -350,7 +350,7 @@ export const migrateMacroData = function(macro, migrationData) {
  */
 export const migrateSceneData = function(scene, migrationData) {
   const tokens = scene.tokens.map(token => {
-    const t = token.toObject();
+    const t = token instanceof foundry.abstract.DataModel ? token.toObject() : token;
     const update = {};
     _migrateTokenImage(t, update);
     if ( Object.keys(update).length ) foundry.utils.mergeObject(t, update);
@@ -487,7 +487,7 @@ function _migrateDocumentIcon(document, updateData, {iconMap, field="img"}={}) {
  */
 function _migrateEffectArmorClass(effect, updateData) {
   let containsUpdates = false;
-  const changes = effect.changes.map(c => {
+  const changes = (effect.changes || []).map(c => {
     if ( c.key !== "system.attributes.ac.base" ) return c;
     c.key = "system.attributes.ac.armor";
     containsUpdates = true;
