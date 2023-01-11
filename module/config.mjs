@@ -635,6 +635,7 @@ DND5E.resourceOptions = {
   secondary: "DND5E.ResourceSecondary",
   tertiary: "DND5E.ResourceTertiary"
 };
+preLocalize("resourceOptions");
 
 /* -------------------------------------------- */
 
