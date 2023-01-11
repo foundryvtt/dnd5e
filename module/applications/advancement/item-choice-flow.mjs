@@ -1,3 +1,4 @@
+import Actor5e from "../../documents/actor/actor.mjs";
 import ItemGrantFlow from "./item-grant-flow.mjs";
 
 /**
@@ -134,9 +135,11 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
     if ( this.selected.has(item.uuid) ) return false;
 
     // Check to ensure the dropped item hasn't been selected at a lower level
-    for ( const [level, data] of Object.entries(this.advancement.value) ) {
+    for ( const [level, data] of Object.entries(this.advancement.value.added ?? {}) ) {
       if ( level >= this.level ) continue;
-      if ( Object.values(data).includes(item.uuid) ) return;
+      if ( Object.values(data).includes(item.uuid) ) {
+        return ui.notifications.error(game.i18n.localize("DND5E.AdvancementItemChoicePreviouslyChosenWarning"));
+      }
     }
 
     // If spell level is restricted to available level, ensure the spell is of the appropriate level
@@ -167,12 +170,27 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
    * @returns {number}
    */
   _maxSpellSlotLevel() {
-    const largestSlot = Object.entries(this.advancement.actor.system.spells).reduce((slot, [key, data]) => {
+    const spellcasting = this.advancement.item.spellcasting;
+    let spells;
+
+    // For advancements on classes or subclasses, use the largest slot available for that class
+    if ( spellcasting ) {
+      const progression = { slot: 0, pact: {} };
+      const maxSpellLevel = CONFIG.DND5E.SPELL_SLOT_TABLE[CONFIG.DND5E.SPELL_SLOT_TABLE.length - 1].length;
+      spells = Object.fromEntries(Array.fromRange(maxSpellLevel, 1).map(l => [`spell${l}`, {}]));
+      Actor5e.computeClassProgression(progression, this.advancement.item, { spellcasting });
+      Actor5e.prepareSpellcastingSlots(spells, spellcasting.type, progression);
+    }
+
+    // For all other items, use the largest slot possible
+    else spells = this.advancement.actor.system.spells;
+
+    const largestSlot = Object.entries(spells).reduce((slot, [key, data]) => {
       if ( data.max === 0 ) return slot;
       const level = parseInt(key.replace("spell", ""));
       if ( !Number.isNaN(level) && level > slot ) return level;
       return slot;
     }, -1);
-    return Math.max(this.advancement.actor.system.spells.pact.level, largestSlot);
+    return Math.max(spells.pact?.level ?? 0, largestSlot);
   }
 }
