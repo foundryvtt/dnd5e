@@ -16,6 +16,7 @@ import ItemDescriptionTemplate from "./templates/item-description.mjs";
  * @property {object} recharge           Details on how a feature can roll for recharges.
  * @property {number} recharge.value     Minimum number needed to roll on a d6 to recharge this feature.
  * @property {boolean} recharge.charged  Does this feature have a charge remaining?
+ * @property {string} resourceLink     Linked resources to the item.
  */
 export default class FeatData extends SystemDataModel.mixin(
   ItemDescriptionTemplate, ActivatedEffectTemplate, ActionTemplate
@@ -33,7 +34,10 @@ export default class FeatData extends SystemDataModel.mixin(
           required: true, integer: true, min: 1, label: "DND5E.FeatureRechargeOn"
         }),
         charged: new foundry.data.fields.BooleanField({required: true, label: "DND5E.Charged"})
-      }, {label: "DND5E.FeatureActionRecharge"})
+      }, {label: "DND5E.FeatureActionRecharge"}),
+      resourceLink: new foundry.data.fields.StringField({
+        required: false, initial: "", label: "DND5E.resourceLink"
+      })
     });
   }
 

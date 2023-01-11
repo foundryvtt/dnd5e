@@ -29,6 +29,7 @@ import ItemDescriptionTemplate from "./templates/item-description.mjs";
  * @property {object} scaling                    Details on how casting at higher levels affects this spell.
  * @property {string} scaling.mode               Spell scaling mode as defined in `DND5E.spellScalingModes`.
  * @property {string} scaling.formula            Dice formula used for scaling.
+ * @property {string} resourceLink     Linked resources to the item.
  */
 export default class SpellData extends SystemDataModel.mixin(
   ItemDescriptionTemplate, ActivatedEffectTemplate, ActionTemplate
@@ -63,7 +64,10 @@ export default class SpellData extends SystemDataModel.mixin(
       scaling: new foundry.data.fields.SchemaField({
         mode: new foundry.data.fields.StringField({required: true, initial: "none", label: "DND5E.ScalingMode"}),
         formula: new FormulaField({required: true, nullable: true, initial: null, label: "DND5E.ScalingFormula"})
-      }, {label: "DND5E.LevelScaling"})
+      }, {label: "DND5E.LevelScaling"}),
+      resourceLink: new foundry.data.fields.StringField({
+        required: false, initial: "", label: "DND5E.resourceLink"
+      })
     });
   }
 

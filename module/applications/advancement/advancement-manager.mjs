@@ -560,6 +560,29 @@ export default class AdvancementManager extends Application {
       return obj;
     }, { toCreate: [], toUpdate: [], toDelete: this.actor.items.map(i => i.id) });
 
+    // Handles advancements setting an actor's resources in the final update data,
+    // nulling out the quantities of overriden item resources.
+    // Mutates `updates` to remove any nullifications that would happen
+    const { resourceOverrides: currentOverrides } = this.actor._getResourceOverrides(items);
+
+    if (currentOverrides) {
+      const resourceUpdates = foundry.utils.getProperty(updates, "system.resources");
+
+      // Array of resource keys which are being updated that have overrides
+      const updatesToOverriddenResources = Object.keys(resourceUpdates)
+        .filter(resource => !!currentOverrides[resource]);
+
+      // Abort if there's none we care about
+      if (!updatesToOverriddenResources.length) {
+        return;
+      }
+
+      // Set the overridden resource update to undefined
+      updatesToOverriddenResources.forEach(resourceKey => {
+        foundry.utils.setProperty(updateData, `system.resources.${resourceKey}`, undefined);
+      });
+    }
+
     /**
      * A hook event that fires at the final stage of a character's advancement process, before actor and item updates
      * are applied.

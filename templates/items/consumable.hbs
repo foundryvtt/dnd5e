@@ -55,6 +55,16 @@
                 </select>
             </div>
 
+            {{#if isResourceLinkIsConsumableType}}
+            <div class="form-group">
+                <label>{{localize "DND5E.resourceLink"}}</label>
+                <select name="system.resourceLink">
+                    <!--<option value=""><em>No Override</em></option>-->
+                    {{selectOptions resourceLinkResourceOptions selected=resourceLinkCurrentValue blank=""}}
+                </select>
+            </div>
+            {{/if}}
+
             <div class="form-group">
                 <label>{{localize "DND5E.Attunement"}}</label>
                 <select name="system.attunement" data-dtype="Number">

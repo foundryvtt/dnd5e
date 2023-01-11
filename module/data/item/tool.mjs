@@ -16,6 +16,7 @@ import PhysicalItemTemplate from "./templates/physical-item.mjs";
  * @property {string} chatFlavor  Additional text added to chat when this tool is used.
  * @property {number} proficient  Level of proficiency in this tool as defined in `DND5E.proficiencyLevels`.
  * @property {string} bonus       Bonus formula added to tool rolls.
+ * @property {string} resourceLink     Linked resources to the item.
  */
 export default class ToolData extends SystemDataModel.mixin(
   ItemDescriptionTemplate, PhysicalItemTemplate, EquippableItemTemplate
@@ -32,7 +33,10 @@ export default class ToolData extends SystemDataModel.mixin(
       proficient: new foundry.data.fields.NumberField({
         required: true, nullable: false, initial: 0, min: 0, label: "DND5E.ItemToolProficiency"
       }),
-      bonus: new FormulaField({required: true, label: "DND5E.ItemToolBonus"})
+      bonus: new FormulaField({required: true, label: "DND5E.ItemToolBonus"}),
+      resourceLink: new foundry.data.fields.StringField({
+        required: false, initial: "", label: "DND5E.resourceLink"
+      })
     });
   }
 

@@ -14,6 +14,7 @@ import PhysicalItemTemplate from "./templates/physical-item.mjs";
  * @mixes ActionTemplate
  *
  * @property {string} consumableType     Type of consumable as defined in `DND5E.consumableTypes`.
+ * @property {string} resourceLink     Linked resources to the item.
  * @property {object} uses
  * @property {boolean} uses.autoDestroy  Should this item be destroyed when it runs out of uses.
  */
@@ -28,7 +29,10 @@ export default class ConsumableData extends SystemDataModel.mixin(
       }),
       uses: new ActivatedEffectTemplate.ItemUsesField({
         autoDestroy: new foundry.data.fields.BooleanField({required: true, label: "DND5E.ItemDestroyEmpty"})
-      }, {label: "DND5E.LimitedUses"})
+      }, {label: "DND5E.LimitedUses"}),
+      resourceLink: new foundry.data.fields.StringField({
+        required: false, initial: "", label: "DND5E.resourceLink"
+      })
     });
   }
 }

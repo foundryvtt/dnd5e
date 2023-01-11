@@ -23,7 +23,7 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
     const context = await super.getData(options);
 
     // Resources
-    context.resources = ["primary", "secondary", "tertiary"].reduce((arr, r) => {
+    context.resources = Object.keys(CONFIG.DND5E.resourceOptions).reduce((arr, r) => {
       const res = context.actor.system.resources[r] || {};
       res.name = r;
       res.placeholder = game.i18n.localize(`DND5E.Resource${r.titleCase()}`);
@@ -208,6 +208,54 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
     html.find(".short-rest").click(this._onShortRest.bind(this));
     html.find(".long-rest").click(this._onLongRest.bind(this));
     html.find(".rollable[data-action]").click(this._onSheetAction.bind(this));
+
+    const { resourceOverrides } = this.actor._getResourceOverrides();
+    const sheetResources = Object.keys(CONFIG.DND5E.resourceOptions);
+
+    //  Disables all inputs in an overriden resource fieldset except `value`.
+    const indexesToDisable = Object.keys(resourceOverrides).map(resourceName => {
+      return {
+        index: sheetResources.indexOf(resourceName),
+        itemId: resourceOverrides[resourceName]
+      };
+    });
+    const resourceElements = html.find(".resource");
+
+    // Get the resources which have overrides to disable inputs
+    for (const indexToDisable of Object.values(indexesToDisable)) {
+      const index = indexToDisable.index;
+      const itemId = indexToDisable.itemId;
+      const element = $(resourceElements[index]);
+
+      // Disable every input except the `value` input
+      element.find("[name]").filter((index, el) => !el.name.includes("value"))
+        .prop("disabled", true)
+        .prop("title", game.i18n.localize("DND5E.resourceLinkDisabledResourceHelperText"));
+
+      // For cases where this isn't showing charges, delete the separator and max
+      if (!this.actor.items.get(itemId).hasLimitedUses) {
+        element.find(".sep").remove();
+        element.find("[name*='max']").remove();
+      }
+    }
+
+    // Disables the Item Uses inputs on the inventory level for items which override resource.
+    // This is necessary to avoid a double-update which results in no actual change.
+    const itemIdsToDisable = Object.values(resourceOverrides);
+
+    // Get the resources which have overrides to disable inputs
+    for (const itemId of itemIdsToDisable) {
+      html.find(`[data-item-id=${itemId}] .item-uses input, [data-item-id=${itemId}] .item-charges input`)
+        .prop("disabled", true)
+        .prop("title", game.i18n.localize("DND5E.resourceLinkDisabledItemHelperText"));
+
+      // For cases where this isn't showing charges, delete the separator and max
+      if (!this.actor.items.get(itemId).hasLimitedUses) {
+        html.find(`[data-item-id=${itemId}] .item-quantity input`)
+          .prop("disabled", true)
+          .prop("title", game.i18n.localize("DND5E.resourceLinkDisabledItemHelperText"));
+      }
+    }
   }
 
   /* -------------------------------------------- */

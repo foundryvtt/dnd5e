@@ -58,8 +58,32 @@ export default class ItemSheet5e extends ItemSheet {
   async getData(options) {
     const context = await super.getData(options);
     const item = context.item;
+    const actor = item.actor;
     const source = item.toObject();
     const isMountable = this._isItemMountable(item);
+
+    // Javelins for example might be set to consume ammo of themselves
+    const isSelfConsumingAmmo = item.system.consume?.type === "ammo" && item.system.consume?.target === item.id;
+
+    // Consumables with the subtype "ammo" include arrows
+    const isConsumableAmmo = (item.type === "consumable") && (item.system.consumableType === "ammo");
+
+    const itemCanBeResource = item.hasLimitedUses || isSelfConsumingAmmo || isConsumableAmmo;
+
+    let canBeLinkedToAResource = true;
+    if (item.parent?.type !== "character" || !itemCanBeResource || !actor) {
+      canBeLinkedToAResource = false;
+    }
+
+    const resourceOptions = Object.keys(actor.system.resources)
+      .reduce((acc, resourceKey) => {
+        // Capitalize first letter
+        const resourceKeyCap = resourceKey.charAt(0).toUpperCase() + resourceKey.slice(1);
+        acc[resourceKey] = game.i18n.localize(`DND5E.Resource${resourceKeyCap}`);
+        return acc;
+      }, {});
+
+    const resourceLinkCurrentValue = item.system.resourceLink;
 
     // Game system configuration
     context.config = CONFIG.DND5E;
@@ -99,7 +123,13 @@ export default class ItemSheet5e extends ItemSheet {
       advancement: this._getItemAdvancement(item),
 
       // Prepare Active Effects
-      effects: ActiveEffect5e.prepareActiveEffectCategories(item.effects)
+      effects: ActiveEffect5e.prepareActiveEffectCategories(item.effects),
+
+      resourceLinkResourceOptions: resourceOptions,
+      resourceLinkCurrentValue: resourceLinkCurrentValue,
+      isResourceLinkHasLimitedUses: canBeLinkedToAResource && item.hasLimitedUses && !isSelfConsumingAmmo,
+      isResourceLinkIsSelfConsumingAmmo: canBeLinkedToAResource && !item.hasLimitedUses && isSelfConsumingAmmo,
+      isResourceLinkIsConsumableType: canBeLinkedToAResource && !item.hasLimitedUses && !isSelfConsumingAmmo
     });
     context.abilityConsumptionTargets = this._getItemConsumptionTargets();
 

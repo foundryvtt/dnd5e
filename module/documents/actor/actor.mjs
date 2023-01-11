@@ -92,6 +92,7 @@ export default class Actor5e extends Actor {
   prepareData() {
     this._classes = undefined;
     this._preparationWarnings = [];
+    this._prepareDerivedResources(this.system, this.items);
     super.prepareData();
     this.items.forEach(item => item.prepareFinalAttributes());
   }
@@ -119,6 +120,95 @@ export default class Actor5e extends Actor {
       case "vehicle":
         return this._prepareVehicleData();
     }
+  }
+
+  /**
+   * Overrides the flagged resources with item details.
+   * Has to run after all the owned items have run `prepareFinalAttributes` so items have numerical charges
+   * @param data
+   * @param items
+   * @type {object|null}
+   */
+  _prepareDerivedResources(data, items) {
+    // Record<resourceName, itemId>
+    const { resourceOverrides, warnings } = this._getResourceOverrides(items);
+
+    this._preparationWarnings.push(...warnings);
+
+    if (!resourceOverrides) {
+      return;
+    }
+
+    Object.entries(resourceOverrides).forEach(([resource, itemId]) => {
+      const relevantItem = items.get(itemId)
+      if (!relevantItem) return;
+      const { quantity, uses } = relevantItem.system;
+      const { value, max, per } = uses;
+
+      // put the quantity in the name if relevant
+      const composedName = [relevantItem.name, (relevantItem.hasLimitedUses && quantity > 1) ? `(${quantity})` : undefined].filterJoin(' ');
+
+      // any item with charges -> Use the charges
+      if (relevantItem.hasLimitedUses) {
+        data.resources[resource] = {
+          label: composedName,
+          value,
+          max,
+          sr: per === 'sr',
+          lr: ['sr', 'lr'].includes(per),
+        }
+        return;
+      }
+
+      // in these cases we want to display the quantity as the value and max
+      // we also need special logic to adjust the quantity of the item when the resource numbers are updated
+      // we also also need to ensure the item fields are disabled
+
+      data.resources[resource] = {
+        label: composedName,
+        value: quantity,
+        max: quantity,
+        sr: false,
+        lr: false,
+      }
+    });
+  }
+
+  /**
+   * Builds resource overrides from actor item list
+   * @param {object|null} items
+   * @type {resourceOverrides:object, warnings:array}
+   */
+  _getResourceOverrides(items) {
+    if (items === undefined || items === null) {
+      items = this.items;
+    }
+    let warnings = new Set();
+
+    const filteredItems = items.filter(item => !!item.system.resourceLink);
+
+    if (!filteredItems.length) {
+      return {
+        resourceOverrides: {},
+        warnings: []
+      };
+    }
+
+    const resourceOverrides = filteredItems.reduce((acc, item) => {
+      const resourceOverride = item.system.resourceLink;
+
+      if (acc[resourceOverride]) {
+        warnings.add("DND5E.resourceLinkWarnMultipleOverrides");
+      }
+
+      acc[resourceOverride] = item.id;
+      return acc;
+    }, {});
+
+    return {
+      resourceOverrides,
+      warnings: [...warnings.values()]
+    };
   }
 
   /* --------------------------------------------- */
@@ -881,6 +971,7 @@ export default class Actor5e extends Actor {
 
   /** @inheritdoc */
   async _preUpdate(changed, options, user) {
+    changed = this._prePreUpdateDerivedResources(changed, options, user);
     await super._preUpdate(changed, options, user);
 
     // Apply changes in Actor size to Token width/height
@@ -904,6 +995,76 @@ export default class Actor5e extends Actor {
         foundry.utils.setProperty(changed, "system.attributes.death.failure", 0);
       }
     }
+  }
+
+  /**
+   * So we can attack the update before it is diffed.
+   * @param {object} updateRequest
+   * @param {object|null} options
+   * @param {user|null} user @type {ser}
+   * @type {object|null}
+   */
+  _prePreUpdateDerivedResources(updateRequest, options, user) {
+    const { resourceOverrides: currentOverrides } = this._getResourceOverrides(this.items);
+
+    if (!currentOverrides) {
+      // Do nothing, move on
+      return updateRequest;
+    }
+
+    const newUpdateRequest = { ...foundry.utils.expandObject(updateRequest) };
+    const resourceUpdates = foundry.utils.getProperty(newUpdateRequest, "system.resources");
+
+    if (!resourceUpdates) {
+      // Do nothing, move on
+      return updateRequest;
+    }
+
+    // Array of resource keys which are being updated that have overrides
+    const updatesToOverriddenResources = Object.keys(resourceUpdates)
+      .filter(resource => !!currentOverrides[resource]);
+
+    // Abort if there's none we care about
+    if (!updatesToOverriddenResources.length) {
+      return updateRequest;
+    }
+
+    // Construct item updates based on the updateData
+    const itemUpdates = updatesToOverriddenResources
+      .map(resourceKey => {
+        const itemId = currentOverrides[resourceKey];
+        const relevantItem = this.items.get(itemId);
+
+        // If the item has charges, update its charges
+        if (relevantItem.hasLimitedUses) {
+          return {
+            _id: currentOverrides[resourceKey],
+            system: {
+              uses: {
+                value: resourceUpdates[resourceKey].value
+              }
+            }
+          };
+        }
+
+        // Else update its quantity
+        return {
+          _id: currentOverrides[resourceKey],
+          system: {
+            quantity: resourceUpdates[resourceKey].value
+          }
+        };
+      });
+
+    // Add the item updates to this update operation
+    newUpdateRequest.items = [...(updateRequest?.items ?? []), ...itemUpdates];
+
+    // Set the overridden resource update to undefined
+    updatesToOverriddenResources.forEach(resourceKey => {
+      foundry.utils.setProperty(newUpdateRequest, `system.resources.${resourceKey}`, undefined);
+    });
+
+    return newUpdateRequest;
   }
 
   /* -------------------------------------------- */
