@@ -9,29 +9,35 @@ export const migrateWorld = async function() {
   const migrationData = await getMigrationData();
 
   // Migrate World Actors
-  for ( let a of game.actors ) {
+  const actors = game.actors.map(a => [a, true])
+    .concat(Array.from(game.actors.invalidDocumentIds).map(id => [game.actors.getInvalid(id), false]));
+  for ( const [actor, valid] of actors ) {
     try {
-      const updateData = migrateActorData(a.toObject(), migrationData);
+      const source = valid ? actor.toObject() : game.data.actors.find(a => a._id === actor.id);
+      const updateData = migrateActorData(source, migrationData);
       if ( !foundry.utils.isEmpty(updateData) ) {
-        console.log(`Migrating Actor document ${a.name}`);
-        await a.update(updateData, {enforceTypes: false});
+        console.log(`Migrating Actor document ${actor.name}`);
+        await actor.update(updateData, {enforceTypes: false, diff: valid});
       }
     } catch(err) {
-      err.message = `Failed dnd5e system migration for Actor ${a.name}: ${err.message}`;
+      err.message = `Failed dnd5e system migration for Actor ${actor.name}: ${err.message}`;
       console.error(err);
     }
   }
 
   // Migrate World Items
-  for ( let i of game.items ) {
+  const items = game.items.map(i => [i, true])
+    .concat(Array.from(game.items.invalidDocumentIds).map(id => [game.items.getInvalid(id), false]));
+  for ( const [item, valid] of items ) {
     try {
-      const updateData = migrateItemData(i.toObject(), migrationData);
+      const source = valid ? item.toObject() : game.data.items.find(i => i._id === item.id);
+      const updateData = migrateItemData(source, migrationData);
       if ( !foundry.utils.isEmpty(updateData) ) {
-        console.log(`Migrating Item document ${i.name}`);
-        await i.update(updateData, {enforceTypes: false});
+        console.log(`Migrating Item document ${item.name}`);
+        await item.update(updateData, {enforceTypes: false, diff: valid});
       }
     } catch(err) {
-      err.message = `Failed dnd5e system migration for Item ${i.name}: ${err.message}`;
+      err.message = `Failed dnd5e system migration for Item ${item.name}: ${err.message}`;
       console.error(err);
     }
   }
@@ -232,6 +238,7 @@ export const migrateArmorClass = async function(pack) {
 export const migrateActorData = function(actor, migrationData) {
   const updateData = {};
   _migrateTokenImage(actor, updateData);
+  _migrateActorAC(actor, updateData);
 
   // Migrate embedded effects
   if ( actor.effects ) {
@@ -429,6 +436,16 @@ function _migrateActorAC(actorData, updateData) {
   // Protect against string values created by character sheets or importers that don't enforce data types
   if ( (typeof ac?.flat === "string") && Number.isNumeric(ac.flat) ) {
     updateData["system.attributes.ac.flat"] = parseInt(ac.flat);
+  }
+
+  // Remove invalid AC formula strings.
+  if ( ac?.formula ) {
+    try {
+      const roll = new Roll(ac.formula);
+      Roll.safeEval(roll.formula);
+    } catch ( e ) {
+      updateData["system.attributes.ac.formula"] = "";
+    }
   }
 
   return updateData;
