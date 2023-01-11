@@ -117,11 +117,7 @@ export default class CharacterData extends CreatureTemplate {
         armorProf: TraitsFields.makeSimpleTrait({label: "DND5E.TraitArmorProf"}),
         toolProf: TraitsFields.makeSimpleTrait({label: "DND5E.TraitToolProf"})
       }, {label: "DND5E.Traits"}),
-      resources: new foundry.data.fields.SchemaField({
-        primary: makeResourceField({label: "DND5E.ResourcePrimary"}),
-        secondary: makeResourceField({label: "DND5E.ResourceSecondary"}),
-        tertiary: makeResourceField({label: "DND5E.ResourceTertiary"})
-      }, {label: "DND5E.Resources"})
+      resources: makeResourcesField()
     });
   }
 
@@ -155,7 +151,7 @@ export default class CharacterData extends CreatureTemplate {
  */
 
 /**
- * Produce the schema field for a simple trait.
+ * Produce the schema field for a resource.
  * @param {object} schemaOptions  Options passed to the outer schema.
  * @returns {ResourceData}
  */
@@ -171,4 +167,17 @@ function makeResourceField(schemaOptions={}) {
     lr: new foundry.data.fields.BooleanField({required: true, labels: "DND5E.LongRestRecovery"}),
     label: new foundry.data.fields.StringField({required: true, labels: "DND5E.ResourceLabel"})
   }, schemaOptions);
+}
+
+/**
+ * Produce the schema field for all the resources.
+ * @param {object} schemaOptions  Options passed to the outer schema.
+ * @returns {ResourceData}
+ */
+function makeResourcesField() {
+    const resources = {};
+    for(const [key, value] of Object.entries(CONFIG.DND5E.resourceOptions)) {
+      resources[key] = makeResourceField({label: value});
+    }
+    return new foundry.data.fields.SchemaField(resources, {label: "DND5E.Resources"});
 }
