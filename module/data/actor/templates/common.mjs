@@ -37,19 +37,6 @@ export default class CommonTemplate extends SystemDataModel.mixin(CurrencyTempla
 
   /* -------------------------------------------- */
 
-  /**
-   * Ensure HP min is less than HP max.
-   * @param {object} data  The source data to validate.
-   * @throws If the HP data is invalid.
-   * @internal
-   */
-  static _validateHP(data) {
-    const hp = data.attributes.hp;
-    if ( hp.min > hp.max ) throw new Error("HP minimum must be less than HP maximum");
-  }
-
-  /* -------------------------------------------- */
-
   /** @inheritdoc */
   static migrateData(source) {
     CommonTemplate.#migrateACData(source);
