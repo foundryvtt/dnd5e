@@ -2166,6 +2166,8 @@ h5 {
   text-align: right;
 }
 .dnd5e.sheet.group {
+  min-width: 620px;
+  min-height: 620px;
   /** Members Directory */
 }
 .dnd5e.sheet.group .attribute.health span.value {
