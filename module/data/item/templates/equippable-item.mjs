@@ -42,6 +42,6 @@ export default class EquippableItemTemplate extends foundry.abstract.DataModel {
    * @param {object} source  The candidate source data from which the model will be constructed.
    */
   static #migrateEquipped(source) {
-    if ( source.equipped === null ) source.equipped = false;
+    if ( (source.equipped === null) || (source.equipped === undefined) ) source.equipped = false;
   }
 }
