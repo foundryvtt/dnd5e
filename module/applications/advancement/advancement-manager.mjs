@@ -136,15 +136,14 @@ export default class AdvancementManager extends Application {
     const clonedItem = manager.clone.items.get(itemId);
     if ( !clonedItem || !advancements.length ) return manager;
 
-    const currentLevel = clonedItem.system.levels ?? cloneItem.class?.system.levels
-      ?? manager.clone.system.details.level;
+    const currentLevel = this.currentLevel(clonedItem);
     const minimumLevel = advancements.reduce((min, a) => Math.min(a.levels[0] ?? Infinity, min), Infinity);
     if ( minimumLevel > currentLevel ) return manager;
 
     const oldFlows = Array.fromRange(currentLevel + 1).slice(minimumLevel)
       .flatMap(l => this.flowsForLevel(clonedItem, l));
 
-    // Revert advancements trough minimum level
+    // Revert advancements through minimum level
     oldFlows.reverse().forEach(flow => manager.steps.push({ type: "reverse", flow, automatic: true }));
 
     // Add new advancements
@@ -163,11 +162,8 @@ export default class AdvancementManager extends Application {
     // Restore existing advancements and apply new advancements
     newFlows.forEach(flow => {
       const matchingFlow = oldFlows.find(f => (f.advancement.id === flow.advancement.id) && (f.level === flow.level));
-      if ( matchingFlow ) {
-        manager.steps.push({ type: "restore", flow: matchingFlow, automatic: true });
-      } else {
-        manager.steps.push({ type: "forward", flow });
-      }
+      if ( matchingFlow ) manager.steps.push({ type: "restore", flow: matchingFlow, automatic: true });
+      else manager.steps.push({ type: "forward", flow });
     });
 
     return manager;
@@ -229,10 +225,7 @@ export default class AdvancementManager extends Application {
     const clonedItem = manager.clone.items.get(itemId);
     if ( !clonedItem ) return manager;
 
-    const currentLevel = clonedItem.system.levels ?? clonedItem.class?.system.levels
-      ?? manager.clone.system.details.level;
-
-    const flows = Array.fromRange(currentLevel + 1).slice(level)
+    const flows = Array.fromRange(this.currentLevel(clonedItem) + 1).slice(level)
       .flatMap(l => this.flowsForLevel(clonedItem, l));
 
     // Revert advancements through changed level
@@ -264,8 +257,7 @@ export default class AdvancementManager extends Application {
     if ( !advancement ) return manager;
 
     const minimumLevel = advancement.levels[0];
-    const currentLevel = clonedItem.system.levels ?? cloneItem.class?.system.levels
-      ?? manager.clone.system.details.level;
+    const currentLevel = this.currentLevel(clonedItem);
 
     // If minimum level is greater than current level, no changes to remove
     if ( (minimumLevel > currentLevel) || !advancement.appliesToClass ) return manager;
@@ -387,6 +379,17 @@ export default class AdvancementManager extends Application {
     return (item?.advancement.byLevel[level] ?? [])
       .filter(a => a.appliesToClass)
       .map(a => new a.constructor.metadata.apps.flow(item, a.id, level));
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Determine the proper working level either from the provided item or from the cloned actor.
+   * @param {Item5e} item  Item being advanced. If class or subclass, its level will be used.
+   * @returns {number}     Working level.
+   */
+  currentLevel(item) {
+    return item.system.levels ?? item.class?.system.levels ?? manager.clone.system.details.level;
   }
 
   /* -------------------------------------------- */
