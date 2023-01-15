@@ -659,7 +659,7 @@ export default class Actor5e extends Actor {
    * @protected
    */
   _prepareSpellcasting() {
-    if ( this.type === "vehicle" ) return;
+    if ( !this.system.spells ) return;
 
     // Spellcasting DC
     const spellcastingAbility = this.system.abilities[this.system.attributes.spellcasting];
@@ -691,7 +691,7 @@ export default class Actor5e extends Actor {
       );
     }
 
-    for ( const type of Object.keys(types) ) {
+    for ( const type of Object.keys(CONFIG.DND5E.spellcastingTypes) ) {
       this.constructor.prepareSpellcastingSlots(this.system.spells, type, progression, { actor: this });
     }
   }
