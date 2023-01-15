@@ -28,6 +28,19 @@ export default class Proficiency {
     this.rounding = roundDown ? "down" : "up";
   }
 
+  /* -------------------------------------------- */
+
+  /**
+   * Calculate an actor's proficiency modifier based on level or CR.
+   * @param {number} level  Level or CR To use for calculating proficiency modifier.
+   * @returns {number}      Proficiency modifier.
+   */
+  static calculateMod(level) {
+    return Math.floor((level + 7) / 4);
+  }
+
+  /* -------------------------------------------- */
+
   /**
    * Flat proficiency value regardless of proficiency mode.
    * @type {number}
@@ -36,6 +49,8 @@ export default class Proficiency {
     const roundMethod = (this.rounding === "down") ? Math.floor : Math.ceil;
     return roundMethod(this.multiplier * this._baseProficiency);
   }
+
+  /* -------------------------------------------- */
 
   /**
    * Dice-based proficiency value regardless of proficiency mode.
@@ -51,6 +66,8 @@ export default class Proficiency {
     }
   }
 
+  /* -------------------------------------------- */
+
   /**
    * Either flat or dice proficiency term based on configured setting.
    * @type {string}
@@ -59,6 +76,8 @@ export default class Proficiency {
     return (game.settings.get("dnd5e", "proficiencyModifier") === "dice") ? this.dice : String(this.flat);
   }
 
+  /* -------------------------------------------- */
+
   /**
    * Whether the proficiency is greater than zero.
    * @type {boolean}
@@ -66,6 +85,8 @@ export default class Proficiency {
   get hasProficiency() {
     return (this._baseProficiency > 0) && (this.multiplier > 0);
   }
+
+  /* -------------------------------------------- */
 
   /**
    * Override the default `toString` method to return flat proficiency for backwards compatibility in formula.
