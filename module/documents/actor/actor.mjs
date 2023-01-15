@@ -310,7 +310,7 @@ export default class Actor5e extends Actor {
     }
 
     // Character proficiency bonus
-    this.system.attributes.prof = Math.floor((this.system.details.level + 7) / 4);
+    this.system.attributes.prof = Proficiency.calculateMod(this.system.details.level);
 
     // Experience required for next level
     const xp = this.system.details.xp;
@@ -341,7 +341,7 @@ export default class Actor5e extends Actor {
     this.system.details.xp.value = this.getCRExp(cr);
 
     // Proficiency
-    this.system.attributes.prof = Math.floor((Math.max(cr, 1) + 7) / 4);
+    this.system.attributes.prof = Proficiency.calculateMod(Math.max(cr, 1));
 
     // Spellcaster Level
     if ( this.system.attributes.spellcasting && !Number.isNumeric(this.system.details.spellLevel) ) {
