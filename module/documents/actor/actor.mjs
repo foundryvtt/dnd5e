@@ -93,7 +93,6 @@ export default class Actor5e extends Actor {
   prepareData() {
     this._classes = undefined;
     this._preparationWarnings = [];
-    this.items.forEach(item => item.prepareInitialAttributes());
     super.prepareData();
     this.items.forEach(item => item.prepareFinalAttributes());
   }
@@ -111,7 +110,6 @@ export default class Actor5e extends Actor {
     this._prepareBaseAbilities();
     this._prepareBaseSkills();
     this._prepareBaseArmorClass();
-    this._prepareScaleValues();
 
     // Type-specific preparation
     switch ( this.type ) {
@@ -122,6 +120,15 @@ export default class Actor5e extends Actor {
       case "vehicle":
         return this._prepareVehicleData();
     }
+  }
+
+  /* --------------------------------------------- */
+
+  /** @override */
+  prepareEmbeddedDocuments() {
+    super.prepareEmbeddedDocuments();
+    this._prepareScaleValues();
+    this.applyActiveEffects();
   }
 
   /* --------------------------------------------- */

@@ -299,25 +299,16 @@ export default class Item5e extends Item {
   /*  Data Preparation                            */
   /* -------------------------------------------- */
 
-  /**
-   * Initial preparation steps that performed before other actor data preparation. If the item is not embedded
-   * these steps will be called at the start of `Item5e#prepareDerivedData`.
-   */
-  prepareInitialAttributes() {
-    this._prepareAdvancement();
-  }
-
-  /* -------------------------------------------- */
-
   /** @inheritDoc */
   prepareDerivedData() {
-    if ( !this.isOwned ) this.prepareInitialAttributes();
-
     super.prepareDerivedData();
     this.labels = {};
 
     // Clear out linked item cache
     this._classLink = undefined;
+
+    // Advancement
+    this._prepareAdvancement();
 
     // Specialized preparation per Item type
     switch ( this.type ) {
