@@ -1422,9 +1422,12 @@ h5 {
 .dnd5e.advancement.item-choice .level-list .hint {
   text-align: end;
 }
+.dnd5e.advancement.item-choice .form-group:has(textarea) {
+  align-items: flex-start;
+}
 .dnd5e.advancement.item-choice textarea {
   margin-inline-start: 8px;
-  border: none;
+  border: 1px solid var(--color-border-light-tertiary);
   font-family: var(--font-primary);
   font-size: var(--font-size-12);
   height: 100px;
