@@ -1423,7 +1423,11 @@ h5 {
   text-align: end;
 }
 .dnd5e.advancement.item-choice textarea {
-  margin-inline-start: 9px;
+  margin-inline-start: 8px;
+  border: none;
+  font-family: var(--font-primary);
+  font-size: var(--font-size-12);
+  height: 100px;
 }
 .dnd5e.advancement.scale-value {
   --grid-two-column-right-size: 0.6fr;
