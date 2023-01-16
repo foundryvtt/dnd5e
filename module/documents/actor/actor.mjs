@@ -123,17 +123,9 @@ export default class Actor5e extends Actor {
 
   /* --------------------------------------------- */
 
-  /** @override */
-  prepareEmbeddedDocuments() {
-    super.prepareEmbeddedDocuments();
-    this._prepareScaleValues();
-    this.applyActiveEffects();
-  }
-
-  /* --------------------------------------------- */
-
   /** @inheritDoc */
   applyActiveEffects() {
+    this._prepareScaleValues();
     // The Active Effects do not have access to their parent at preparation time, so we wait until this stage to
     // determine whether they are suppressed or not.
     this.effects.forEach(e => e.determineSuppression());
