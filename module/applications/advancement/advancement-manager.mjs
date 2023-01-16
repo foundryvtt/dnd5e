@@ -136,7 +136,7 @@ export default class AdvancementManager extends Application {
     const clonedItem = manager.clone.items.get(itemId);
     if ( !clonedItem || !advancements.length ) return manager;
 
-    const currentLevel = this.currentLevel(clonedItem);
+    const currentLevel = this.currentLevel(clonedItem, manager.clone);
     const minimumLevel = advancements.reduce((min, a) => Math.min(a.levels[0] ?? Infinity, min), Infinity);
     if ( minimumLevel > currentLevel ) return manager;
 
@@ -225,7 +225,7 @@ export default class AdvancementManager extends Application {
     const clonedItem = manager.clone.items.get(itemId);
     if ( !clonedItem ) return manager;
 
-    const flows = Array.fromRange(this.currentLevel(clonedItem) + 1).slice(level)
+    const flows = Array.fromRange(this.currentLevel(clonedItem, manager.clone) + 1).slice(level)
       .flatMap(l => this.flowsForLevel(clonedItem, l));
 
     // Revert advancements through changed level
@@ -257,7 +257,7 @@ export default class AdvancementManager extends Application {
     if ( !advancement ) return manager;
 
     const minimumLevel = advancement.levels[0];
-    const currentLevel = this.currentLevel(clonedItem);
+    const currentLevel = this.currentLevel(clonedItem, manager.clone);
 
     // If minimum level is greater than current level, no changes to remove
     if ( (minimumLevel > currentLevel) || !advancement.appliesToClass ) return manager;
@@ -385,11 +385,12 @@ export default class AdvancementManager extends Application {
 
   /**
    * Determine the proper working level either from the provided item or from the cloned actor.
-   * @param {Item5e} item  Item being advanced. If class or subclass, its level will be used.
-   * @returns {number}     Working level.
+   * @param {Item5e} item    Item being advanced. If class or subclass, its level will be used.
+   * @param {Actor5e} actor  Actor being advanced.
+   * @returns {number}       Working level.
    */
-  currentLevel(item) {
-    return item.system.levels ?? item.class?.system.levels ?? manager.clone.system.details.level;
+  static currentLevel(item, actor) {
+    return item.system.levels ?? item.class?.system.levels ?? actor.system.details.level;
   }
 
   /* -------------------------------------------- */
