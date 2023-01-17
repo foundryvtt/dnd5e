@@ -13,7 +13,7 @@
     {{#unless isVehicle}}
     <div class="form-group">
         <label>{{localize "DND5E.Senses"}}</label>
-        <a class="config-button" data-action="senses" title="{{localize 'DND5E.SensesConfig'}}">
+        <a class="config-button" data-action="senses" data-tooltip="{{localize 'DND5E.SensesConfig'}}">
             <i class="fas fa-cog"></i>
         </a>
         <ul class="traits-list">
@@ -26,7 +26,7 @@
     <div class="form-group {{traits.traits.languages.cssClass}}">
         <label>{{localize "DND5E.Languages"}}</label>
         <a class="trait-selector" data-trait="languages"
-           title="{{localize 'DND5E.TraitConfig' trait=(localize 'DND5E.Languages')}}" tabindex="0">
+           data-tooltip="{{localize 'DND5E.TraitConfig' trait=(localize 'DND5E.Languages')}}" tabindex="0">
             <i class="fas fa-edit"></i>
         </a>
         <ul class="traits-list">
@@ -40,7 +40,7 @@
     <div class="form-group {{traits.traits.di.cssClass}}">
         <label>{{localize "DND5E.DamImm"}}</label>
         <a class="trait-selector" data-trait="di"
-           title="{{localize 'DND5E.TraitConfig' trait=(localize 'DND5E.DamImm')}}" tabindex="0">
+           data-tooltip="{{localize 'DND5E.TraitConfig' trait=(localize 'DND5E.DamImm')}}" tabindex="0">
             <i class="fas fa-edit"></i>
         </a>
         <ul class="traits-list">
@@ -53,7 +53,7 @@
     <div class="form-group {{traits.traits.dr.cssClass}}">
         <label>{{localize "DND5E.DamRes"}}</label>
         <a class="trait-selector" data-trait="dr"
-           title="{{localize 'DND5E.TraitConfig' trait=(localize 'DND5E.DamRes')}}" tabindex="0">
+           data-tooltip="{{localize 'DND5E.TraitConfig' trait=(localize 'DND5E.DamRes')}}" tabindex="0">
             <i class="fas fa-edit"></i>
         </a>
         <ul class="traits-list">
@@ -66,7 +66,7 @@
     <div class="form-group {{traits.traits.dv.cssClass}}">
         <label>{{localize "DND5E.DamVuln"}}</label>
         <a class="trait-selector" data-trait="dv"
-           title="{{localize 'DND5E.TraitConfig' trait=(localize 'DND5E.DamVuln')}}">
+           data-tooltip="{{localize 'DND5E.TraitConfig' trait=(localize 'DND5E.DamVuln')}}">
             <i class="fas fa-edit"></i>
         </a>
         <ul class="traits-list">
@@ -79,7 +79,7 @@
     <div class="form-group {{traits.traits.ci.cssClass}}">
         <label>{{localize "DND5E.ConImm"}}</label>
         <a class="trait-selector" data-trait="ci"
-           title="{{localize 'DND5E.TraitConfig' trait=(localize 'DND5E.ConImm')}}">
+           data-tooltip="{{localize 'DND5E.TraitConfig' trait=(localize 'DND5E.ConImm')}}">
             <i class="fas fa-edit"></i>
         </a>
         <ul class="traits-list">
@@ -93,7 +93,7 @@
     <div class="form-group {{traits.traits.weaponProf.cssClass}}">
         <label>{{localize "DND5E.TraitWeaponProf"}}</label>
         <a class="trait-selector" data-trait="weapon"
-           title="{{localize 'DND5E.TraitConfig' trait=(localize 'DND5E.TraitWeaponProf')}}">
+           data-tooltip="{{localize 'DND5E.TraitConfig' trait=(localize 'DND5E.TraitWeaponProf')}}">
             <i class="fas fa-edit"></i>
         </a>
         <ul class="traits-list">
@@ -106,7 +106,7 @@
     <div class="form-group {{traits.traits.armorProf.cssClass}}">
         <label>{{localize "DND5E.TraitArmorProf"}}</label>
         <a class="trait-selector" data-trait="armor"
-           title="{{localize 'DND5E.TraitConfig' trait=(localize 'DND5E.TraitArmorProf')}}">
+           data-tooltip="{{localize 'DND5E.TraitConfig' trait=(localize 'DND5E.TraitArmorProf')}}">
             <i class="fas fa-edit"></i>
         </a>
         <ul class="traits-list">
@@ -119,7 +119,7 @@
     <div class="form-group {{traits.traits.toolProf.cssClass}}">
         <label>{{localize "DND5E.TraitToolProf"}}</label>
         <a class="trait-selector" data-trait="tool"
-           title="{{localize 'DND5E.TraitConfig' trait=(localize 'DND5E.TraitToolProf')}}">
+           data-tooltip="{{localize 'DND5E.TraitConfig' trait=(localize 'DND5E.TraitToolProf')}}">
             <i class="fas fa-edit"></i>
         </a>
         <ul class="traits-list">
@@ -134,7 +134,7 @@
     <div class="form-group ">
         <label>{{localize "DND5E.SpecialTraits"}}</label>
         <a class="config-button" data-action="flags"
-           title="{{localize 'DND5E.TraitConfig' trait=(localize 'DND5E.SpecialTraits')}}">
+           data-tooltip="{{localize 'DND5E.TraitConfig' trait=(localize 'DND5E.SpecialTraits')}}">
             <i class="fas fa-cog"></i>
         </a>
     </div>

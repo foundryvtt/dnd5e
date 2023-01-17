@@ -3,7 +3,7 @@
 
     <div class="hp-field form-group">
       <input type="number" name="hp.max" value="{{source.max}}"
-        placeholder="{{hp.max}}" title="{{localize 'DND5E.HitPointsOverride'}}">
+        placeholder="{{hp.max}}" data-tooltip="{{localize 'DND5E.HitPointsOverride'}}">
     </div>
 
     <div class="form-group">
@@ -18,7 +18,7 @@
   {{else}}
 
     <div class="hp-field form-group">
-      <input type="number" name="hp.max" value="{{hp.max}}" title="{{localize 'DND5E.HitPointsMax'}}">
+      <input type="number" name="hp.max" value="{{hp.max}}" data-tooltip="{{localize 'DND5E.HitPointsMax'}}">
     </div>
 
     <div class="form-group">
