@@ -1182,7 +1182,7 @@ export default class ActorSheet5e extends ActorSheet {
     const itemData = {
       name: game.i18n.format("DND5E.ItemNew", {type: game.i18n.localize(`ITEM.Type${type.capitalize()}`)}),
       type: type,
-      system: { ...header.dataset }
+      system: foundry.utils.expandObject({ ...header.dataset })
     };
     delete itemData.system.type;
     return this.actor.createEmbeddedDocuments("Item", [itemData]);
