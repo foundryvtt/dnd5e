@@ -28,19 +28,19 @@ export default class AttributesFields {
       }, { label: "DND5E.Initiative" }),
       movement: new foundry.data.fields.SchemaField({
         burrow: new foundry.data.fields.NumberField({
-          nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.MovementBurrow"
+          nullable: false, min: 0, step: 0.1, initial: 0, label: "DND5E.MovementBurrow"
         }),
         climb: new foundry.data.fields.NumberField({
-          nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.MovementClimb"
+          nullable: false, min: 0, step: 0.1, initial: 0, label: "DND5E.MovementClimb"
         }),
         fly: new foundry.data.fields.NumberField({
-          nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.MovementFly"
+          nullable: false, min: 0, step: 0.1, initial: 0, label: "DND5E.MovementFly"
         }),
         swim: new foundry.data.fields.NumberField({
-          nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.MovementSwim"
+          nullable: false, min: 0, step: 0.1, initial: 0, label: "DND5E.MovementSwim"
         }),
         walk: new foundry.data.fields.NumberField({
-          nullable: false, integer: true, min: 0, initial: 30, label: "DND5E.MovementWalk"
+          nullable: false, min: 0, step: 0.1, initial: 30, label: "DND5E.MovementWalk"
         }),
         units: new foundry.data.fields.StringField({initial: "ft", label: "DND5E.MovementUnits"}),
         hover: new foundry.data.fields.BooleanField({label: "DND5E.MovementHover"})
