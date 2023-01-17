@@ -69,7 +69,7 @@
 
     <ol class="item-list">
     {{#each section.spells as |item i|}}
-    {{#with (lookup @root.itemContext item.id) as |ctx|}}
+    {{#dnd5e-itemContext item as |ctx|}}
         <li class="item flexrow" data-item-id="{{item.id}}">
             <div class="item-name flexrow rollable">
                 <div class="item-image" tabindex="0" role="button" aria-label="{{item.name}}" style="background-image: url('{{item.img}}')"></div>
@@ -108,7 +108,7 @@
             </div>
             {{/if}}
         </li>
-    {{/with}}
+    {{/dnd5e-itemContext}}
     {{/each}}
     </ol>
 {{else}}

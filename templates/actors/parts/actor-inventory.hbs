@@ -55,7 +55,7 @@
 
     <ol class="item-list">
     {{#each section.items as |item iid|}}
-    {{#with (lookup @root.itemContext item.id) as |ctx|}}
+    {{#dnd5e-itemContext item as |ctx|}}
         <li class="item flexrow {{section.css}}" data-item-id="{{item.id}}"
             {{#if section.editableName}}data-item-index="{{iid}}"{{/if}}>
             <div class="item-name flexrow {{@root.rollableClass}}">
@@ -130,7 +130,7 @@
             </div>
             {{/if}}
         </li>
-    {{/with}}
+    {{/dnd5e-itemContext}}
     {{/each}}
     </ol>
 {{/each}}
