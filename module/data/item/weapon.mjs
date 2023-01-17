@@ -43,10 +43,10 @@ export default class WeaponData extends SystemDataModel.mixin(
 
   /** @inheritdoc */
   static migrateData(source) {
+    super.migrateData(source);
     WeaponData.#migratePropertiesData(source);
     WeaponData.#migrateProficient(source);
     WeaponData.#migrateWeaponType(source);
-    return super.migrateData(source);
   }
 
   /* -------------------------------------------- */

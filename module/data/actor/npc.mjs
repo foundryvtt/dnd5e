@@ -123,9 +123,9 @@ export default class NPCData extends CreatureTemplate {
 
   /** @inheritdoc */
   static migrateData(source) {
+    super.migrateData(source);
     NPCData.#migrateTypeData(source);
     AttributesFields._migrateInitiative(source.attributes);
-    return super.migrateData(source);
   }
 
   /* -------------------------------------------- */

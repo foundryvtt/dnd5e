@@ -59,9 +59,9 @@ export default class EquipmentData extends SystemDataModel.mixin(
 
   /** @inheritdoc */
   static migrateData(source) {
+    super.migrateData(source);
     EquipmentData.#migrateArmor(source);
     EquipmentData.#migrateStrength(source);
-    return super.migrateData(source);
   }
 
   /* -------------------------------------------- */
