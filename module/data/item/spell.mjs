@@ -71,9 +71,9 @@ export default class SpellData extends SystemDataModel.mixin(
 
   /** @inheritdoc */
   static migrateData(source) {
+    super.migrateData(source);
     SpellData.#migrateComponentData(source);
     SpellData.#migrateScaling(source);
-    return super.migrateData(source);
   }
 
   /* -------------------------------------------- */

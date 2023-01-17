@@ -102,7 +102,7 @@ export default class AttributesFields {
    * @internal
    */
   static _migrateInitiative(source) {
-    const init = source.init;
+    const init = source?.init;
     if ( !init?.value ) return;
     if ( init.bonus ) init.bonus += init.value < 0 ? ` - ${init.value * -1}` : ` + ${init.value}`;
     else init.bonus = `${init.value}`;

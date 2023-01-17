@@ -41,9 +41,9 @@ export default class FeatData extends SystemDataModel.mixin(
 
   /** @inheritdoc */
   static migrateData(source) {
+    super.migrateData(source);
     FeatData.#migrateType(source);
     FeatData.#migrateRecharge(source);
-    return super.migrateData(source);
   }
 
   /* -------------------------------------------- */
