@@ -519,6 +519,19 @@ export function convertWeight(value, from, to) {
 }
 
 /* -------------------------------------------- */
+
+/**
+ * Default units to use depending on system setting.
+ * @param {"length"|"weight"} type  Type of units to select.
+ * @returns {string}
+ */
+export function defaultUnits(type) {
+  return CONFIG.DND5E.defaultUnits[type]?.[
+    game.settings.get("dnd5e", `metric${type.capitalize()}Units`) ? "metric" : "imperial"
+  ];
+}
+
+/* -------------------------------------------- */
 /*  Validators                                  */
 /* -------------------------------------------- */
 

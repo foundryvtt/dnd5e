@@ -4008,8 +4008,6 @@
 "SETTINGS.5eHonorN": "Honor Ability Score",
 "SETTINGS.5eInitTBL": "Append the raw Dexterity ability score to break ties in Initiative.",
 "SETTINGS.5eInitTBN": "Initiative Dexterity Tiebreaker",
-"SETTINGS.5eMetricN": "Use Metric Weight Units",
-"SETTINGS.5eMetricL": "Replaces all reference to lbs with kgs and updates the encumbrance calculations to use metric weight units.",
 "SETTINGS.5eNoAdvancementsN": "Disable level-up automation",
 "SETTINGS.5eNoAdvancementsL": "Do not prompt for level-up or character creation choices.",
 "SETTINGS.5eNoConcentrationN": "Disable concentration tracking",
@@ -4069,6 +4067,16 @@
     "NoXP": "Level Advancement without XP",
     "XP": "Experience Points",
     "XPBoons": "Experience Points with Epic Boons"
+  },
+  "METRIC": {
+    "LengthUnits": {
+      "Name": "Use Metric Length Units",
+      "Hint": "Defaults to using meters instead of feet for movement and senses."
+    },
+    "WeightUnits": {
+      "Name": "Use Metric Weight Units",
+      "Hint": "Replaces all reference to lbs with kgs and updates the encumbrance calculations to use metric weight units."
+    }
   },
   "THEME": {
     "Name": "Theme",

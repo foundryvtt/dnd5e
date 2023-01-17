@@ -345,10 +345,20 @@ export function registerSystemSettings() {
     type: Boolean
   });
 
+  // Metric Length Weights
+  game.settings.register("dnd5e", "metricLengthUnits", {
+    name: "SETTINGS.DND5E.METRIC.LengthUnits.Name",
+    hint: "SETTINGS.DND5E.METRIC.LengthUnits.Hint",
+    scope: "world",
+    config: true,
+    type: Boolean,
+    default: false
+  });
+
   // Metric Unit Weights
   game.settings.register("dnd5e", "metricWeightUnits", {
-    name: "SETTINGS.5eMetricN",
-    hint: "SETTINGS.5eMetricL",
+    name: "SETTINGS.DND5E.METRIC.WeightUnits.Name",
+    hint: "SETTINGS.DND5E.METRIC.WeightUnits.Hint",
     scope: "world",
     config: true,
     type: Boolean,

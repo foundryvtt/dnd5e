@@ -1,4 +1,4 @@
-import { convertWeight } from "../../../utils.mjs";
+import { convertWeight, defaultUnits } from "../../../utils.mjs";
 import SystemDataModel from "../../abstract.mjs";
 
 const { ForeignDocumentField, NumberField, SchemaField, StringField } = foundry.data.fields;
@@ -32,8 +32,7 @@ export default class PhysicalItemTemplate extends SystemDataModel {
           required: true, nullable: false, initial: 0, min: 0, label: "DND5E.Weight"
         }),
         units: new StringField({
-          required: true, label: "DND5E.UNITS.WEIGHT.Label",
-          initial: () => game.settings.get("dnd5e", "metricWeightUnits") ? "kg" : "lb"
+          required: true, label: "DND5E.UNITS.WEIGHT.Label", initial: () => defaultUnits("weight")
         })
       }, {label: "DND5E.Weight"}),
       price: new SchemaField({
@@ -195,7 +194,7 @@ export default class PhysicalItemTemplate extends SystemDataModel {
     if ( !("weight" in source) || (foundry.utils.getType(source.weight) === "Object") ) return;
     source.weight = {
       value: Number.isNumeric(source.weight) ? Number(source.weight) : 0,
-      units: game.settings.get("dnd5e", "metricWeightUnits") ? "kg" : "lb"
+      units: defaultUnits("weight")
     };
   }
 
