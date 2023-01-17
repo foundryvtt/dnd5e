@@ -1003,7 +1003,8 @@ export default class ActorSheet5e extends ActorSheet {
     }
 
     // Create a Consumable spell scroll on the Inventory tab
-    if ( (itemData.type === "spell") && (this._tabs[0].active === "inventory") ) {
+    if ( (itemData.type === "spell")
+      && (this._tabs[0].active === "inventory" || this.actor.type === "vehicle") ) {
       const scroll = await Item5e.createScrollFromSpell(itemData);
       return scroll.toObject();
     }
