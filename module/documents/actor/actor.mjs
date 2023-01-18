@@ -2332,10 +2332,11 @@ export default class Actor5e extends Actor {
 
       // Transfer classes for NPCs
       if ( !keepClass && d.system.details.cr ) {
+        const cls = new dnd5e.dataModels.item.ClassData({levels: d.system.details.cr});
         d.items.push({
           type: "class",
           name: game.i18n.localize("DND5E.PolymorphTmpClass"),
-          data: { levels: d.system.details.cr }
+          system: cls.toObject()
         });
       }
 
