@@ -31,19 +31,18 @@
                     <h4 class="attribute-name box-title">{{localize 'DND5E.HitPoints'}}</h4>
                     <div class="attribute-value multiple">
                         <input name="system.attributes.hp.value" type="text" data-dtype="Number"
-                            value="{{hp.value}}" placeholder="&mdash;"
-                            data-tooltip="{{localize 'DND5E.HitPointsCurrent'}}">
+                            value="{{hp.value}}" placeholder="&mdash;" data-tooltip="DND5E.HitPointsCurrent">
                         <span class="sep"> &sol; </span>
                         <input name="system.attributes.hp.max" type="text" data-dtype="Number"
-                            value="{{hp.max}}" placeholder="&mdash;" data-tooltip="{{localize 'DND5E.HitPointsMax'}}">
+                            value="{{hp.max}}" placeholder="&mdash;" data-tooltip="DND5E.HitPointsMax">
                     </div>
                     <footer class="attribute-footer">
                         <input class="temphp" name="system.attributes.hp.dt" type="text" data-dtype="Number"
                             placeholder="{{localize 'DND5E.Threshold'}}"
-                            value="{{hp.dt}}" data-tooltip="{{localize 'DND5E.DamageThreshold'}}">
+                            value="{{hp.dt}}" data-tooltip="DND5E.DamageThreshold">
                         <input class="temphp" name="system.attributes.hp.mt" type="text" data-dtype="Number"
                             placeholder="{{localize 'DND5E.VehicleMishap'}}"
-                            value="{{hp.mt}}" data-tooltip="{{localize 'DND5E.VehicleMishapThreshold'}}">
+                            value="{{hp.mt}}" data-tooltip="DND5E.VehicleMishapThreshold">
                     </footer>
                 </li>
                 <li class="attribute">
@@ -55,13 +54,12 @@
                     <footer class="attribute-footer">
                         <input type="text" name="system.attributes.ac.motionless"
                                placeholder="&mdash;" value="{{system.attributes.ac.motionless}}"
-                               data-tooltip="{{localize 'DND5E.ArmorClassMotionless'}}">
+                               data-tooltip="DND5E.ArmorClassMotionless">
                     </footer>
                 </li>
                 <li class="attribute movement">
                     <h4 class="attribute-name box-title">{{ localize "DND5E.Movement" }}</h4>
-                    <a class="config-button" data-action="movement"
-                        data-tooltip="{{localize 'DND5E.MovementConfig'}}">
+                    <a class="config-button" data-action="movement" data-tooltip="DND5E.MovementConfig">
                         <i class="fas fa-cog"></i>
                     </a>
                     <div class="attribute-value">
@@ -92,7 +90,7 @@
                     <input type="text" name="system.abilities.{{id}}.value" value="{{ability.value}}"
                            class="ability-score"  placeholder="0" data-dtype="Number">
                     <div class="ability-modifiers flexrow">
-                        <span class="ability-mod" data-tooltip="{{localize 'DND5E.Modifier'}}">
+                        <span class="ability-mod" data-tooltip="DND5E.Modifier">
                             {{numberFormat ability.mod decimals=0 sign=true}}
                         </span>
                     </div>

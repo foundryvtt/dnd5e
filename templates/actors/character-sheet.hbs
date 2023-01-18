@@ -36,7 +36,7 @@
                 </li>
                 <li>
                     {{#if labels.background}}
-                        <span data-tooltip="{{localize 'DND5E.Background'}}">{{labels.background}}</span>
+                        <span data-tooltip="DND5E.Background">{{labels.background}}</span>
                     {{else}}
                         <input type="text" name="system.details.background" value="{{system.details.background}}" placeholder="{{ localize 'DND5E.Background' }}"/>
                     {{/if}}
@@ -53,51 +53,48 @@
             <ul class="attributes flexrow">
                 <li class="attribute health">
                     <h4 class="attribute-name box-title">{{localize "DND5E.HitPoints"}}</h4>
-                    <a class="config-button" data-action="hit-points" data-tooltip="{{localize 'DND5E.HitPointsConfig'}}">
+                    <a class="config-button" data-action="hit-points" data-tooltip="DND5E.HitPointsConfig">
                         <i class="fas fa-cog"></i>
                     </a>
                     <div class="attribute-value multiple">
                         <input name="system.attributes.hp.value" type="text" value="{{hp.value}}" placeholder="10"
-                            data-tooltip="{{localize 'DND5E.HitPointsCurrent'}}" data-dtype="Number">
+                            data-tooltip="DND5E.HitPointsCurrent" data-dtype="Number">
                         <span class="sep"> / </span>
-                        <span data-tooltip="{{#if hp.max}}{{localize 'DND5E.HitPointsOverride'}}
-                          {{~ else}}{{localize 'DND5E.HitPointsMax'}}{{/if}}">{{hp.max}}</span>
+                        <span data-tooltip="{{#if hp.max}}DND5E.HitPointsOverride{{else}}DND5E.HitPointsMax{{/if}}">
+                            {{hp.max}}
+                        </span>
                     </div>
                     <footer class="attribute-footer">
                         <input name="system.attributes.hp.temp" type="text" class="temphp"
                             placeholder="+{{ localize 'DND5E.Temp' }}" value="{{hp.temp}}"
-                            data-tooltip="{{localize 'DND5E.HitPointsTemp'}}" data-dtype="Number">
+                            data-tooltip="DND5E.HitPointsTemp" data-dtype="Number">
                         <input name="system.attributes.hp.tempmax" type="text" class="temphp"
                             placeholder="+{{ localize 'DND5E.Max' }}" value="{{hp.tempmax}}"
-                            data-tooltip="{{localize 'DND5E.HitPointsTempMax'}}" data-dtype="Number">
+                            data-tooltip="DND5E.HitPointsTempMax" data-dtype="Number">
                     </footer>
                 </li>
 
                 <li class="attribute hit-dice">
                     <h4 class="attribute-name box-title">{{ localize "DND5E.HitDice" }}</h4>
-                    <a class="config-button" data-action="hit-dice" data-tooltip="{{localize 'DND5E.HitDiceConfig'}}">
+                    <a class="config-button" data-action="hit-dice" data-tooltip="DND5E.HitDiceConfig">
                         <i class="fas fa-cog"></i>
                     </a>
                     <div class="attribute-value multiple">
                         <label class="hit-dice">
-                            <span data-tooltip="{{localize 'DND5E.HitDiceRemaining'}}">{{system.attributes.hd}}</span>
+                            <span data-tooltip="DND5E.HitDiceRemaining">{{system.attributes.hd}}</span>
                             <span class="sep"> / </span>
-                            <span data-tooltip="{{localize 'DND5E.HitDiceMax'}}">{{system.details.level}}</span>
+                            <span data-tooltip="DND5E.HitDiceMax">{{system.details.level}}</span>
                         </label>
                     </div>
                     <footer class="attribute-footer">
-                        <a class="rest short-rest" data-tooltip="{{localize 'DND5E.ShortRest'}}">
-                            {{ localize "DND5E.RestS" }}
-                        </a>
-                        <a class="rest long-rest" data-tooltip="{{localize 'DND5E.LongRest'}}">
-                            {{ localize "DND5E.RestL" }}
-                        </a>
+                        <a class="rest short-rest" data-tooltip="DND5E.ShortRest">{{localize "DND5E.RestS"}}</a>
+                        <a class="rest long-rest" data-tooltip="DND5E.LongRest">{{localize "DND5E.RestL"}}</a>
                     </footer>
                 </li>
 
                 <li class="attribute armor">
                     <h4 class="attribute-name box-title">{{ localize "DND5E.ArmorClass" }}</h4>
-                    <a class="config-button" data-action="armor" data-tooltip="{{localize 'DND5E.ArmorConfig'}}">
+                    <a class="config-button" data-action="armor" data-tooltip="DND5E.ArmorConfig">
                         <i class="fas fa-cog"></i>
                     </a>
                     <div class="attribute-value attributable" data-property="attributes.ac">
@@ -110,7 +107,7 @@
 
                 <li class="attribute movement">
                     <h4 class="attribute-name box-title">{{ localize "DND5E.Movement" }}</h4>
-                    <a class="config-button" data-action="movement" data-tooltip="{{localize 'DND5E.MovementConfig'}}">
+                    <a class="config-button" data-action="movement" data-tooltip="DND5E.MovementConfig">
                         <i class="fas fa-cog"></i>
                     </a>
                     <div class="attribute-value">
@@ -125,7 +122,7 @@
                     <h4 class="attribute-name box-title rollable" data-action="rollInitiative">
                         {{ localize "DND5E.Initiative" }}
                     </h4>
-                    <a class="config-button" data-action="initiative" data-tooltip="{{localize 'DND5E.InitiativeConfig'}}">
+                    <a class="config-button" data-action="initiative" data-tooltip="DND5E.InitiativeConfig">
                         <i class="fas fa-cog"></i>
                     </a>
                     <div class="attribute-value">
@@ -159,17 +156,17 @@
                     <input type="text" name="system.abilities.{{id}}.value" value="{{ability.value}}"
                         class="ability-score" placeholder="10" data-dtype="Number">
                     <div class="ability-modifiers flexrow">
-                        <span class="ability-mod" data-tooltip="{{ localize 'DND5E.Modifier' }}">
+                        <span class="ability-mod" data-tooltip="DND5E.Modifier">
                             {{numberFormat ability.mod decimals=0 sign=true}}
                         </span>
                         <input type="hidden" name="system.abilities.{{id}}.proficient" value="{{ability.baseProf}}" data-dtype="Number"/>
                         <a class="proficiency-toggle ability-proficiency"
-                            data-tooltip="{{ localize 'DND5E.Proficiency' }}">{{{ability.icon}}}</a>
-                        <span class="ability-save" data-tooltip="{{ localize 'DND5E.SavingThrow' }}">
+                            data-tooltip="DND5E.Proficiency">{{{ability.icon}}}</a>
+                        <span class="ability-save" data-tooltip="DND5E.SavingThrow">
                             {{numberFormat ability.save decimals=0 sign=true}}
                         </span>
                     </div>
-                    <a class="config-button" data-action="ability" data-tooltip="{{localize 'DND5E.AbilityConfigure'}}">
+                    <a class="config-button" data-action="ability" data-tooltip="DND5E.AbilityConfigure">
                         <i class="fas fa-cog"></i>
                     </a>
                 </li>
@@ -181,21 +178,20 @@
             {{#each config.skills as |obj s|}}
             {{#with (lookup ../skills s) as |skill|}}
                 <li class="skill flexrow {{#if skill.value}}proficient{{/if}}" data-skill="{{s}}">
-                    <input type="hidden" name="system.skills.{{s}}.value" value="{{skill.baseValue}}"
-                        data-dtype="Number"/>
+                    <input type="hidden" name="system.skills.{{s}}.value"
+                        value="{{skill.baseValue}}" data-dtype="Number">
                     <a class="proficiency-toggle skill-proficiency" data-tooltip="{{skill.hover}}">{{{skill.icon}}}</a>
                     <div class="skill-name-controls">
                       <h4 class="skill-name rollable">{{skill.label}}</h4>
-                      <a class="config-button" data-action="skill" data-tooltip="{{localize 'DND5E.SkillConfigure'}}">
+                      <a class="config-button" data-action="skill" data-tooltip="DND5E.SkillConfigure">
                           <i class="fas fa-cog"></i>
                       </a>
                     </div>
                     <span class="skill-ability">{{skill.ability}}</span>
-                    <span class="skill-mod" data-tooltip="{{ localize 'DND5E.SkillModifierHint' skill=skill.label }}">
+                    <span class="skill-mod" data-tooltip="{{localize 'DND5E.SkillModifierHint' skill=skill.label}}">
                         {{numberFormat skill.total decimals=0 sign=true}}
                     </span>
-                    <span class="skill-passive"
-                        data-tooltip="{{ localize 'DND5E.SkillPassiveHint' skill=skill.label }}">
+                    <span class="skill-passive" data-tooltip="{{localize 'DND5E.SkillPassiveHint' skill=skill.label}}">
                         ({{skill.passive}})
                     </span>
                 </li>
