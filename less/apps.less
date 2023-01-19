@@ -561,21 +561,22 @@ h5 {
 /*  Property Attribution                     */
 /* ----------------------------------------- */
 
-.property-attribution {
-  display: none;
-  position: absolute;
+#tooltip.property-attribution {
+  min-width: 150px;
   padding: 3px;
-  border: 1px solid #000;
-  border-radius: 3px;
   background-color: rgba(0, 0, 0, .8);
   backdrop-filter: blur(4px);
-  color: @colorFaint;
-  text-align: left;
-  z-index: 1;
+  text-align: left !important;
 
   table {
     margin: 0;
     border: 0;
+    font-size: var(--font-size-14);
+
+    caption {
+      padding-block: 0.25em 0.5em;
+      font-size: var(--font-size-16);
+    }
     tr {
       background-color: inherit;
     }

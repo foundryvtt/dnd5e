@@ -562,56 +562,56 @@ h5 {
 /* ----------------------------------------- */
 /*  Property Attribution                     */
 /* ----------------------------------------- */
-.property-attribution {
-  display: none;
-  position: absolute;
+#tooltip.property-attribution {
+  min-width: 150px;
   padding: 3px;
-  border: 1px solid #000;
-  border-radius: 3px;
   background-color: rgba(0, 0, 0, 0.8);
   backdrop-filter: blur(4px);
-  color: #c9c7b8;
-  text-align: left;
-  z-index: 1;
+  text-align: left !important;
 }
-.property-attribution table {
+#tooltip.property-attribution table {
   margin: 0;
   border: 0;
+  font-size: var(--font-size-14);
 }
-.property-attribution table tr {
+#tooltip.property-attribution table caption {
+  padding-block: 0.25em 0.5em;
+  font-size: var(--font-size-16);
+}
+#tooltip.property-attribution table tr {
   background-color: inherit;
 }
-.property-attribution table td {
+#tooltip.property-attribution table td {
   padding: 3px;
 }
-.property-attribution table tr.total > td {
+#tooltip.property-attribution table tr.total > td {
   font-weight: 600;
   padding-top: 5px;
   border-top: 1px solid #7a7971;
 }
-.property-attribution table td.attribution-value {
+#tooltip.property-attribution table td.attribution-value {
   width: 20%;
   padding-right: 5px;
   text-align: right;
   font-weight: 600;
 }
-.property-attribution table td::before {
+#tooltip.property-attribution table td::before {
   opacity: 0.6;
 }
-.property-attribution table td.mode-1::before {
+#tooltip.property-attribution table td.mode-1::before {
   content: "×";
 }
-.property-attribution table td.mode-2::before {
+#tooltip.property-attribution table td.mode-2::before {
   content: "+";
 }
-.property-attribution table td.mode-2.negative::before {
+#tooltip.property-attribution table td.mode-2.negative::before {
   content: "−";
   margin-right: -1px;
 }
-.property-attribution table td.mode-3::before {
+#tooltip.property-attribution table td.mode-3::before {
   content: "↓";
 }
-.property-attribution table td.mode-4::before {
+#tooltip.property-attribution table td.mode-4::before {
   content: "↑";
 }
 /* ----------------------------------------- */
@@ -828,14 +828,6 @@ h5 {
 .dnd5e.sheet.actor .sheet-header .attributes .attribute input.temphp {
   width: 48%;
 }
-.dnd5e.sheet.actor .sheet-header .attributes .attribute .property-attribution {
-  min-width: 150px;
-  top: 50px;
-  font-family: Signika, sans-serif;
-  font-size: 14px;
-  font-weight: normal;
-  line-height: 1rem;
-}
 .dnd5e.sheet.actor h4.box-title {
   height: 18px;
   line-height: 16px;
@@ -894,12 +886,6 @@ h5 {
   font-size: 12px;
   font-weight: 400;
   white-space: nowrap;
-}
-.dnd5e.sheet.actor .attributable {
-  position: relative;
-}
-.dnd5e.sheet.actor .attributable:hover .tooltip {
-  display: block;
 }
 .dnd5e.sheet.actor .ability-scores {
   flex: 0 0 100px;

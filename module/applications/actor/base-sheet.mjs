@@ -597,6 +597,7 @@ export default class ActorSheet5e extends ActorSheet {
     html.find(".item-edit").click(this._onItemEdit.bind(this));
 
     // Property attributions
+    html.find("[data-attribution]").mouseover(this._onPropertyAttribution.bind(this));
     html.find(".attributable").mouseover(this._onPropertyAttribution.bind(this));
 
     // Preparation Warnings
@@ -1245,18 +1246,27 @@ export default class ActorSheet5e extends ActorSheet {
    * @private
    */
   async _onPropertyAttribution(event) {
-    const existingTooltip = event.currentTarget.querySelector("div.tooltip");
-    const property = event.currentTarget.dataset.property;
-    if ( existingTooltip || !property ) return;
+    const element = event.target;
+    let property = element.dataset.attribution;
+    if ( !property ) {
+      property = element.dataset.property;
+      if ( !property ) return;
+      foundry.utils.logCompatibilityWarning(
+        "Defining attributable properties on sheets with the `.attributable` class and `data-property` value"
+        + " has been deprecated in favor of a single `data-attribution` value.",
+        { since: "DnD5e 2.2", until: "DnD5e 2.4" }
+      );
+    }
+
     const rollData = this.actor.getRollData({ deterministic: true });
+    const title = game.i18n.localize(element.dataset.attributionCaption);
     let attributions;
     switch ( property ) {
       case "attributes.ac":
         attributions = this._prepareArmorClassAttribution(rollData); break;
     }
     if ( !attributions ) return;
-    const html = await new PropertyAttribution(this.actor, attributions, property).renderTooltip();
-    event.currentTarget.insertAdjacentElement("beforeend", html[0]);
+    new PropertyAttribution(this.actor, attributions, property, {title}).renderTooltip(element);
   }
 
   /* -------------------------------------------- */
