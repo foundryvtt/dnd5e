@@ -34,9 +34,9 @@ export default class ActorAbilityConfig extends DocumentSheet {
 
   /** @override */
   getData(options) {
-    const src = this.object.toObject();
+    const src = this.document.toObject();
     return {
-      ability: src.system.abilities[this._abilityId] || {},
+      ability: src.system.abilities[this._abilityId] ?? this.document.system.abilities[this._abilityId] ?? {},
       labelSaves: game.i18n.format("DND5E.AbilitySaveConfigure", {ability: CONFIG.DND5E.abilities[this._abilityId]}),
       labelChecks: game.i18n.format("DND5E.AbilityCheckConfigure", {ability: CONFIG.DND5E.abilities[this._abilityId]}),
       abilityId: this._abilityId,
