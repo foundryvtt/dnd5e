@@ -229,22 +229,25 @@ export default class Actor5e extends Actor {
   _prepareBaseAbilities() {
     if ( !("abilities" in this.system) ) return;
     const abilities = {};
+    const abilityField = dnd5e.utils.getSchemaField(this.system, "abilities.*");
     for ( const key of Object.keys(CONFIG.DND5E.abilities) ) {
       abilities[key] = this.system.abilities[key];
       if ( !abilities[key] ) {
-        abilities[key] = foundry.utils.deepClone(game.system.template.Actor.templates.common.abilities.cha);
+        const initial = abilityField.initial();
 
         // Honor: Charisma for NPC, 0 for vehicles
         if ( key === "hon" ) {
-          if ( this.type === "vehicle" ) abilities[key].value = 0;
-          else if ( this.type === "npc" ) abilities[key].value = this.system.abilities.cha?.value ?? 10;
+          if ( this.type === "vehicle" ) initial.value = 0;
+          else if ( this.type === "npc" ) initial.value = this.system.abilities.cha?.value ?? 10;
         }
 
         // Sanity: Wisdom for NPC, 0 for vehicles
         else if ( key === "san" ) {
-          if ( this.type === "vehicle" ) abilities[key].value = 0;
-          else if ( this.type === "npc" ) abilities[key].value = this.system.abilities.wis?.value ?? 10;
+          if ( this.type === "vehicle" ) initial.value = 0;
+          else if ( this.type === "npc" ) initial.value = this.system.abilities.wis?.value ?? 10;
         }
+
+        abilities[key] = abilityField.initialize(initial, this.system);
       }
     }
     this.system.abilities = abilities;
@@ -260,11 +263,13 @@ export default class Actor5e extends Actor {
   _prepareBaseSkills() {
     if ( !("skills" in this.system) ) return;
     const skills = {};
+    const skillField = dnd5e.utils.getSchemaField(this.system, "skills.*");
     for ( const [key, skill] of Object.entries(CONFIG.DND5E.skills) ) {
       skills[key] = this.system.skills[key];
       if ( !skills[key] ) {
-        skills[key] = foundry.utils.deepClone(game.system.template.Actor.templates.creature.skills.acr);
-        skills[key].ability = skill.ability;
+        const initial = skillField.initial();
+        initial.ability = skill.ability;
+        skills[key] = skillField.initialize(initial, this.system);
       }
     }
     this.system.skills = skills;

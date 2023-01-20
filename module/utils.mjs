@@ -78,6 +78,51 @@ export function linkForUuid(uuid) {
 }
 
 /* -------------------------------------------- */
+/*  Schema Helpers                              */
+/* -------------------------------------------- */
+
+/**
+ * Find a schema field within the provided data model based on a dot-separated key path.
+ * @param {DataModel|typeof DataModel} model  Document instance or DataModel within which to search for the field.
+ * @param {string} keyPath                    Path on the data model where the field should be located.
+ * @returns {DataField|void}                  Field found if it exists, otherwise undefined.
+ */
+export function getSchemaField(model, keyPath) {
+  if ( foundry.utils.getType(keyPath) !== "string" ) throw new Error(
+    `Valid key path must be provided to getSchemaField, '${keyPath}' provided`
+  );
+
+  // Get the specific type if an DataModel instance is provided, needed to resolve SystemDataFields
+  let type;
+  if ( model instanceof foundry.abstract.DataModel ) {
+    type = model.type;
+    model = model.constructor;
+  }
+
+  let target = model.schema;
+  for ( const p of keyPath.split(".") ) {
+    if ( target instanceof foundry.data.fields.ArrayField
+      || target instanceof foundry.data.fields.SetField
+      || target instanceof dnd5e.dataModels.fields.MappingField ) {
+      target = target.model;
+      continue;
+    } else if ( target instanceof foundry.data.fields.EmbeddedDataField ) {
+      target = target.model;
+    } else if ( target instanceof foundry.data.fields.SystemDataField ) {
+      if ( !type ) throw new Error(
+        "SystemDataField cannot be resolved without providing an instance to getSchemaField"
+      );
+      target = target.getModelForType(type);
+    }
+    if ( target.prototype instanceof foundry.abstract.DataModel ) target = target.schema;
+    if ( target instanceof foundry.data.fields.SchemaField ) target = target.fields;
+    if ( p in target ) target = target[p];
+    else return undefined;
+  }
+  return target;
+}
+
+/* -------------------------------------------- */
 /*  Validators                                  */
 /* -------------------------------------------- */
 
