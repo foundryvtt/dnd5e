@@ -13,7 +13,8 @@
             </li>
             {{/each}}
             <li class="custom-type form-group">
-                <input type="radio" name="value" value="custom" title="{{custom.label}}" {{checked custom.chosen}}/>
+                <input type="radio" name="value" value="custom"
+                       data-tooltip="{{custom.label}}" {{checked custom.chosen}}>
                 <label>{{custom.label}}</label>
                 <input type="text" name="custom" value="{{custom.value}}"/>
             </li>

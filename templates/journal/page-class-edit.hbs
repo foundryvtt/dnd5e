@@ -9,7 +9,7 @@
           <li class="item flexrow" data-item-uuid="{{document.system.item}}" data-item-type="class">
             <div clas="item.name">{{{dnd5e-linkForUuid document.system.item}}}</div>
             <div class="item-controls flexrow">
-              <a class="item-control item-delete" title="{{localize 'DND5E.ItemDelete'}}">
+              <a class="item-control item-delete" data-tooltip="DND5E.ItemDelete">
                 <i class="fas fa-trash"></i>
               </a>
             </div>
@@ -86,7 +86,9 @@
           <li class="item flexrow" data-item-uuid="{{this.document.uuid}}" data-item-type="subclass">
             <div clas="item-name">{{{dnd5e-linkForUuid this.document.uuid}}}</div>
             <div class="item-controls flexrow">
-              <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+              <a class="item-control item-delete" data-tooltip="DND5E.ItemDelete">
+                <i class="fas fa-trash"></i>
+              </a>
             </div>
           </li>
         {{else}}

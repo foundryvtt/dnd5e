@@ -1,6 +1,6 @@
 <form class="{{cssClass}} flexcol" autocomplete="off">
     <header class="sheet-header flexrow">
-        <img class="profile" src="{{actor.img}}" title="{{actor.name}}" alt="{{actor.name}}" data-edit="img">
+        <img class="profile" src="{{actor.img}}" data-tooltip="{{actor.name}}" alt="{{actor.name}}" data-edit="img">
         <section class="header-details flexrow">
             <h1 class="charname">
                 <input name="name" type="text" value="{{actor.name}}" placeholder="{{localize 'DND5E.Name'}}">
@@ -13,16 +13,17 @@
 
             <ul class="attributes flexrow">
                 <li class="attribute health">
-                    <h4 class="attribute-name box-title">{{localize 'DND5E.GroupHP'}}</h4>
+                    <h4 class="attribute-name box-title">{{localize "DND5E.GroupHP"}}</h4>
                     <div class="attribute-value">
-                        <span class="value" data-tooltip="{{localize 'DND5E.HitPointsCurrent'}}">{{currentHP}}</span>
+                        <span class="value" data-tooltip="DND5E.HitPointsCurrent">{{currentHP}}</span>
                         <span class="sep"> &sol; </span>
-                        <span class="value" data-tooltip="{{localize 'DND5E.HitPointsMax'}}">{{maxHP}}</span>
+                        <span class="value" data-tooltip="DND5E.HitPointsMax">{{maxHP}}</span>
                     </div>
                 </li>
                 <li class="attribute movement">
-                    <h4 class="attribute-name box-title">{{ localize "DND5E.Movement" }}</h4>
-                    <a class="action-button config-button" data-action="movementConfig" data-tooltip="{{localize 'DND5E.MovementConfig'}}">
+                    <h4 class="attribute-name box-title">{{localize "DND5E.Movement"}}</h4>
+                    <a class="action-button config-button" data-action="movementConfig"
+                       data-tooltip="DND5E.MovementConfig">
                         <i class="fas fa-cog"></i>
                     </a>
                     <div class="attribute-value">
