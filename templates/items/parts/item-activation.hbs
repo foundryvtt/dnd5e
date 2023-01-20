@@ -69,10 +69,10 @@
     <label>{{ localize "DND5E.Range" }}</label>
     <div class="form-fields">
         <input type="number" step="any" name="system.range.value" value="{{system.range.value}}"
-            placeholder="{{localize 'DND5E.Normal'}}" data-tooltip="DND5E.RangeNormal">
+               placeholder="{{localize 'DND5E.Normal'}}" data-tooltip="DND5E.RangeNormal">
         <span class="sep">/</span>
         <input type="number" step="any" name="system.range.long" value="{{system.range.long}}"
-            placeholder="{{localize 'DND5E.Long'}}" data-tooltip="DND5E.RangeLong">
+               placeholder="{{localize 'DND5E.Long'}}" data-tooltip="DND5E.RangeLong">
         <select name="system.range.units" data-tooltip="DND5E.RangeUnits">
             {{selectOptions config.distanceUnits selected=system.range.units blank=(localize "DND5E.None")}}
         </select>
@@ -101,7 +101,7 @@
     <label>{{ localize "DND5E.LimitedUses" }}</label>
     <div class="form-fields">
         <input type="number" step="any" name="system.uses.value"
-            value="{{system.uses.value}}" data-tooltip="DND5E.UsesAvailable">
+               value="{{system.uses.value}}" data-tooltip="DND5E.UsesAvailable">
         <span class="sep">{{localize "DND5E.of"}}</span>
         <input type="text" name="system.uses.max" value="{{source.uses.max}}"
                data-tooltip="DND5E.UsesMax" data-formula-editor>

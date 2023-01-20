@@ -42,7 +42,7 @@
                 </li>
                 <li>
                     <input type="text" name="system.details.source" value="{{system.details.source}}"
-                        placeholder="{{ localize 'DND5E.Source' }}"/>
+                           placeholder="{{ localize 'DND5E.Source' }}"/>
                 </li>
             </ul>
 
@@ -124,11 +124,13 @@
                             {{numberFormat ability.mod decimals=0 sign=true}}
                         </span>
                         <input type="hidden" name="system.abilities.{{id}}.proficient" value="{{ability.baseProf}}"
-                            data-dtype="Number"/>
-                        <a class="proficiency-toggle ability-proficiency"
-                            data-tooltip="DND5E.Proficiency">{{{ability.icon}}}</a>
+                               data-dtype="Number"/>
+                        <a class="proficiency-toggle ability-proficiency" data-tooltip="DND5E.Proficiency">
+                            {{{ability.icon}}}
+                        </a>
                         <span class="ability-save" data-tooltip="DND5E.SavingThrow">
-                            {{numberFormat ability.save decimals=0 sign=true}}</span>
+                            {{numberFormat ability.save decimals=0 sign=true}}
+                        </span>
                     </div>
                     <a class="config-button" data-action="ability" data-tooltip="DND5E.AbilityConfigure">
                         <i class="fas fa-cog"></i>
@@ -170,8 +172,8 @@
                         <h4>{{ localize "DND5E.LegAct" }}</h4>
                         <div class="counter-value">
                             <input name="system.resources.legact.value" type="text" step="any"
-                                value="{{system.resources.legact.value}}" placeholder="0"
-                                data-tooltip="DND5E.LegActRemaining" data-dtype="Number">
+                                   value="{{system.resources.legact.value}}" placeholder="0"
+                                   data-tooltip="DND5E.LegActRemaining" data-dtype="Number">
                             <span class="sep">/</span>
                             {{numberInput system.resources.legact.max name="system.resources.legact.max" min=0 step=1
                                           placeholder=0}}
@@ -181,8 +183,8 @@
                         <h4>{{ localize "DND5E.LegRes" }}</h4>
                         <div class="counter-value">
                             <input name="system.resources.legres.value" type="text" step="any"
-                                value="{{system.resources.legres.value}}" placeholder="0"
-                                data-tooltip="DND5E.LegResRemaining" data-dtype="Number">
+                                   value="{{system.resources.legres.value}}" placeholder="0"
+                                   data-tooltip="DND5E.LegResRemaining" data-dtype="Number">
                             <span class="sep">/</span>
                             {{numberInput system.resources.legres.max name="system.resources.legres.max" min=0 step=1
                                           placeholder=0}}
@@ -192,11 +194,11 @@
                         <h4>{{ localize "DND5E.LairAct" }}</h4>
                         <div class="counter-value">
                             <input name="system.resources.lair.value" type="checkbox"
-                                value="{{system.resources.lair.value}}"
-                                data-dtype="Boolean" {{checked system.resources.lair.value}}>
+                                   value="{{system.resources.lair.value}}"
+                                   data-dtype="Boolean" {{checked system.resources.lair.value}}>
                             <input name="system.resources.lair.initiative" type="number" step="any"
-                                value="{{system.resources.lair.initiative}}"
-                                placeholder="20" data-tooltip="DND5E.LairActionInitiative">
+                                   value="{{system.resources.lair.initiative}}"
+                                   placeholder="20" data-tooltip="DND5E.LairActionInitiative">
                         </div>
                     </div>
                 </div>
