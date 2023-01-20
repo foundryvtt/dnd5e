@@ -1254,7 +1254,7 @@ export default class ActorSheet5e extends ActorSheet {
       foundry.utils.logCompatibilityWarning(
         "Defining attributable properties on sheets with the `.attributable` class and `data-property` value"
         + " has been deprecated in favor of a single `data-attribution` value.",
-        { since: "DnD5e 2.2", until: "DnD5e 2.4" }
+        { since: "DnD5e 2.1.3", until: "DnD5e 2.4" }
       );
     }
 
