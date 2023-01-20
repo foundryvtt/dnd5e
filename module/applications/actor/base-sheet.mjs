@@ -886,12 +886,11 @@ export default class ActorSheet5e extends ActorSheet {
     event.preventDefault();
     const field = event.currentTarget.previousElementSibling;
     const skillName = field.parentElement.dataset.skill;
-    const source = this.actor._source.system.skills[skillName];
-    if ( !source ) return;
+    const value = this.actor._source.system.skills[skillName]?.value ?? 0;
 
     // Cycle to the next or previous skill level
     const levels = [0, 1, 0.5, 2];
-    let idx = levels.indexOf(source.value);
+    let idx = levels.indexOf(value);
     const next = idx + (event.type === "click" ? 1 : 3);
     field.value = levels[next % 4];
 

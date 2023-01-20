@@ -38,7 +38,7 @@ export default class ActorSkillConfig extends DocumentSheet {
     const src = this.document.toObject();
     return {
       abilities: CONFIG.DND5E.abilities,
-      skill: src.system.skills?.[this._skillId] || {},
+      skill: src.system.skills?.[this._skillId] ?? this.document.system.skills[this._skillId] ?? {},
       skillId: this._skillId,
       proficiencyLevels: CONFIG.DND5E.proficiencyLevels,
       bonusGlobal: src.system.bonuses?.abilities.skill
