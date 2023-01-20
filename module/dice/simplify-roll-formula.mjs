@@ -22,7 +22,7 @@ export default function simplifyRollFormula(formula, { preserveFlavor=false } = 
 
   // If the formula contains multiplication or division we cannot easily simplify
   if ( /[*/]/.test(roll.formula) ) {
-    if (( roll.isDeterministic ) && ( !/\[/.test(roll.formula) || !preserveFlavor )) {
+    if ( roll.isDeterministic && !/d\(/.test(roll.formula) && (!/\[/.test(roll.formula) || !preserveFlavor) ) {
       return Roll.safeEval(roll.formula).toString();
     }
     else return roll.constructor.getFormula(roll.terms);
