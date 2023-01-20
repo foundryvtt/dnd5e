@@ -241,7 +241,7 @@ export default class DamageRoll extends Roll {
 
     // Append a situational bonus term
     if ( form.bonus.value ) {
-      const bonus = new Roll(form.bonus.value, this.data);
+      const bonus = new DamageRoll(form.bonus.value, this.data);
       if ( !(bonus.terms[0] instanceof OperatorTerm) ) this.terms.push(new OperatorTerm({operator: "+"}));
       this.terms = this.terms.concat(bonus.terms);
     }
