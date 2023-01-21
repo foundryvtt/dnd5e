@@ -39,6 +39,15 @@ export default class ActorSheet5e extends ActorSheet {
 
   /* -------------------------------------------- */
 
+  /**
+   * IDs for items on the sheet that have been expanded.
+   * @type {Set<string>}
+   * @protected
+   */
+  _expanded = new Set();
+
+  /* -------------------------------------------- */
+
   /** @override */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
@@ -152,6 +161,10 @@ export default class ActorSheet5e extends ActorSheet {
 
     // Prepare owned items
     this._prepareItems(context);
+    context.expandedData = {};
+    for ( const id of this._expanded ) {
+      context.expandedData[id] = await this.actor.items.get(id).getChatData({secrets: this.actor.isOwner});
+    }
 
     // Biography HTML enrichment
     context.biographyHTML = await TextEditor.enrichHTML(context.system.details.biography.value, {
@@ -1148,15 +1161,14 @@ export default class ActorSheet5e extends ActorSheet {
 
     // Toggle summary
     if ( li.hasClass("expanded") ) {
-      let summary = li.children(".item-summary");
+      const summary = li.children(".item-summary");
       summary.slideUp(200, () => summary.remove());
+      this._expanded.delete(item.id);
     } else {
-      let div = $(`<div class="item-summary">${chatData.description.value}</div>`);
-      let props = $('<div class="item-properties"></div>');
-      chatData.properties.forEach(p => props.append(`<span class="tag">${p}</span>`));
-      div.append(props);
-      li.append(div.hide());
-      div.slideDown(200);
+      const summary = $(await renderTemplate("systems/dnd5e/templates/items/parts/item-summary.hbs", chatData));
+      li.append(summary.hide());
+      summary.slideDown(200);
+      this._expanded.add(item.id);
     }
     li.toggleClass("expanded");
   }
