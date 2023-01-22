@@ -1513,7 +1513,7 @@ export default class Actor5e extends Actor {
     // Create and configure the Initiative roll
     const roll = this.getInitiativeRoll(rollOptions);
 
-    if (rollOptions.advantageMode === null) {
+    if (!rollOptions.isFF) {
       const choice = await roll.configureDialog({
         defaultRollMode: game.settings.get("core", "rollMode"),
         title: `${game.i18n.localize("DND5E.InitiativeRoll")}: ${this.name}`,
