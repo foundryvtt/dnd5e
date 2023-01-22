@@ -97,8 +97,12 @@
         {
           "key": "system.attributes.ac.bonus",
           "mode": 2,
-          "value": "1",
-          "priority": null
+          "value": "+1"
+        },
+        {
+          "key": "system.bonuses.abilities.save",
+          "mode": 2,
+          "value": "+1"
         }
       ],
       "disabled": false,
@@ -112,7 +116,7 @@
         "startTurn": null
       },
       "icon": "icons/equipment/back/cloak-heavy-fur-blue.webp",
-      "label": "+1 to AC",
+      "label": "+1 to AC & Saves",
       "origin": "Compendium.dnd5e.items.lvaMqEhfidfHDGf5",
       "transfer": true,
       "flags": {},
@@ -128,10 +132,10 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.1.0",
+    "systemVersion": "2.1.2",
     "coreVersion": "10.291",
     "createdTime": 1661787233851,
-    "modifiedTime": 1671220963935,
+    "modifiedTime": 1674424596069,
     "lastModifiedBy": "dnd5ebuilder0000"
   }
 }
