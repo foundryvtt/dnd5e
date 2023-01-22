@@ -1512,13 +1512,16 @@ export default class Actor5e extends Actor {
   async rollInitiativeDialog(rollOptions={}) {
     // Create and configure the Initiative roll
     const roll = this.getInitiativeRoll(rollOptions);
-    const choice = await roll.configureDialog({
-      defaultRollMode: game.settings.get("core", "rollMode"),
-      title: `${game.i18n.localize("DND5E.InitiativeRoll")}: ${this.name}`,
-      chooseModifier: false,
-      defaultAction: rollOptions.advantageMode ?? dnd5e.dice.D20Roll.ADV_MODE.NORMAL
-    });
-    if ( choice === null ) return; // Closed dialog
+
+    if (rollOptions.advantageMode === null) {
+      const choice = await roll.configureDialog({
+        defaultRollMode: game.settings.get("core", "rollMode"),
+        title: `${game.i18n.localize("DND5E.InitiativeRoll")}: ${this.name}`,
+        chooseModifier: false,
+        defaultAction: rollOptions.advantageMode ?? dnd5e.dice.D20Roll.ADV_MODE.NORMAL
+      });
+      if ( choice === null ) return; // Closed dialog
+    }
 
     // Temporarily cache the configured roll and use it to roll initiative for the Actor
     this._cachedInitiativeRoll = roll;

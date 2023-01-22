@@ -90,6 +90,16 @@ export default function registerSystemSettings() {
     type: Boolean
   });
 
+  // Use keyboard controls to set initiative advantage
+  game.settings.register("dnd5e", "initiativeAdvantageKeyboardControl", {
+    name: "SETTINGS.5eInitKBDN",
+    hint: "SETTINGS.5eInitKBDL",
+    scope: "client",
+    config: true,
+    default: false,
+    type: Boolean
+  });
+
   // Record Currency Weight
   game.settings.register("dnd5e", "currencyWeight", {
     name: "SETTINGS.5eCurWtN",
