@@ -40,6 +40,8 @@ export default class WeaponData extends SystemDataModel.mixin(
   }
 
   /* -------------------------------------------- */
+  /*  Migrations                                  */
+  /* -------------------------------------------- */
 
   /** @inheritdoc */
   static migrateData(source) {
@@ -80,5 +82,30 @@ export default class WeaponData extends SystemDataModel.mixin(
    */
   static #migrateWeaponType(source) {
     if ( source.weaponType === null ) source.weaponType = "simpleM";
+  }
+
+  /* -------------------------------------------- */
+  /*  Getters                                     */
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  get _typeAbilityMod() {
+    // Ranged weapons - Dex (PHB pg. 194)
+    if ( ["simpleR", "martialR"].includes(this.weaponType) ) return "dex";
+
+    // Finesse weapons - Str or Dex (PHB pg. 147)
+    const abilities = this.parent?.actor?.system.abilities;
+    if ( this.properties.fin && abilities ) {
+      return (abilities.dex?.mod ?? 0) >= (abilities.str?.mod ?? 0) ? "dex" : "str";
+    }
+
+    return null;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  get _typeCriticalThreshold() {
+    return this.parent?.actor?.flags.dnd5e?.weaponCriticalThreshold ?? Infinity;
   }
 }

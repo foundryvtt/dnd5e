@@ -87,6 +87,8 @@ export default class ActivatedEffectTemplate extends foundry.abstract.DataModel 
   };
 
   /* -------------------------------------------- */
+  /*  Migrations                                  */
+  /* -------------------------------------------- */
 
   /** @inheritdoc */
   static migrateData(source) {
@@ -178,4 +180,47 @@ export default class ActivatedEffectTemplate extends foundry.abstract.DataModel 
       else if ( Number.isNumeric(amount) ) source.consume.amount = Number(amount);
     }
   }
+
+  /* -------------------------------------------- */
+  /*  Getters                                     */
+  /* -------------------------------------------- */
+
+  /**
+   * Does the Item have an area of effect target?
+   * @type {boolean}
+   */
+  get hasAreaTarget() {
+    return this.target.type in CONFIG.DND5E.areaTargetTypes;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Does the Item target one or more distinct targets?
+   * @type {boolean}
+   */
+  get hasIndividualTarget() {
+    return this.target.type in CONFIG.DND5E.individualTargetTypes;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Is this Item limited in its ability to be used by charges or by recharge?
+   * @type {boolean}
+   */
+  get hasLimitedUses() {
+    return !!this.uses.per && (this.uses.max > 0);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Does the Item have a target?
+   * @type {boolean}
+   */
+  get hasTarget() {
+    return !["", null].includes(this.target.type);
+  }
+
 }

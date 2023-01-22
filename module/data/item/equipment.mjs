@@ -56,6 +56,8 @@ export default class EquipmentData extends SystemDataModel.mixin(
   }
 
   /* -------------------------------------------- */
+  /*  Migrations                                  */
+  /* -------------------------------------------- */
 
   /** @inheritdoc */
   static migrateData(source) {
@@ -91,4 +93,17 @@ export default class EquipmentData extends SystemDataModel.mixin(
     if ( source.strength === "" ) source.strength = null;
     if ( Number.isNumeric(source.strength) ) source.strength = Number(source.strength);
   }
+
+  /* -------------------------------------------- */
+  /*  Getters                                     */
+  /* -------------------------------------------- */
+
+  /**
+   * Is this Item any of the armor subtypes?
+   * @type {boolean}
+   */
+  get isArmor() {
+    return this.armor.type in CONFIG.DND5E.armorTypes;
+  }
+
 }

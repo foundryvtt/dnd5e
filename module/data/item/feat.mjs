@@ -38,6 +38,8 @@ export default class FeatData extends SystemDataModel.mixin(
   }
 
   /* -------------------------------------------- */
+  /*  Migrations                                  */
+  /* -------------------------------------------- */
 
   /** @inheritdoc */
   static migrateData(source) {
@@ -68,5 +70,14 @@ export default class FeatData extends SystemDataModel.mixin(
     if ( (value === 0) || (value === "") ) source.recharge.value = null;
     else if ( (typeof value === "string") && Number.isNumeric(value) ) source.recharge.value = Number(value);
     if ( source.recharge.charged === null ) source.recharge.charged = false;
+  }
+
+  /* -------------------------------------------- */
+  /*  Getters                                     */
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  get hasLimitedUses() {
+    return !!this.recharge.value || super.hasLimitedUses;
   }
 }

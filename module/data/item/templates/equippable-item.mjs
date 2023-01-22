@@ -17,6 +17,8 @@ export default class EquippableItemTemplate extends foundry.abstract.DataModel {
   }
 
   /* -------------------------------------------- */
+  /*  Migrations                                  */
+  /* -------------------------------------------- */
 
   /** @inheritdoc */
   static migrateData(source) {

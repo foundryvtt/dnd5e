@@ -37,6 +37,8 @@ export default class ToolData extends SystemDataModel.mixin(
   }
 
   /* -------------------------------------------- */
+  /*  Migrations                                  */
+  /* -------------------------------------------- */
 
   /** @inheritdoc */
   static migrateData(source) {
@@ -52,5 +54,17 @@ export default class ToolData extends SystemDataModel.mixin(
    */
   static #migrateAbility(source) {
     if ( Array.isArray(source.ability) ) source.ability = source.ability[0];
+  }
+
+  /* -------------------------------------------- */
+  /*  Getters                                     */
+  /* -------------------------------------------- */
+
+  /**
+   * Which ability score modifier is used by this item?
+   * @type {string|null}
+   */
+  get abilityMod() {
+    return this.ability || "int";
   }
 }

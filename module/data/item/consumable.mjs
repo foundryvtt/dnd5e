@@ -31,4 +31,14 @@ export default class ConsumableData extends SystemDataModel.mixin(
       }, {label: "DND5E.LimitedUses"})
     });
   }
+
+  /* -------------------------------------------- */
+  /*  Getters                                     */
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  get _typeAbilityMod() {
+    if ( this.consumableType !== "scroll" ) return null;
+    return this.parent?.actor?.system.attributes.spellcasting || "int";
+  }
 }
