@@ -116,6 +116,41 @@
         "value": {},
         "level": 18,
         "title": "Features"
+      },
+      {
+        "_id": "DDqfOiw4IQMv4bAi",
+        "type": "ItemChoice",
+        "configuration": {
+          "hint": "Choose a second option from the Fighting Style class feature.",
+          "choices": {
+            "10": 1
+          },
+          "allowDrops": true,
+          "type": "feat",
+          "pool": [
+            "Compendium.dnd5e.classfeatures.8YwPFv3UAPjWVDNf",
+            "Compendium.dnd5e.classfeatures.zSlV0O2rQMdoq6pB",
+            "Compendium.dnd5e.classfeatures.hCop9uJrWhF1QPb4",
+            "Compendium.dnd5e.classfeatures.3Nc6u9pyStByuJsm",
+            "Compendium.dnd5e.classfeatures.06NVMYf58Z76O85O",
+            "Compendium.dnd5e.classfeatures.mHcSjcHJ8oZu3hkb"
+          ],
+          "spell": {
+            "ability": "",
+            "preparation": "",
+            "uses": {
+              "max": "",
+              "per": ""
+            }
+          },
+          "restriction": {
+            "type": "class",
+            "subtype": "fightingStyle",
+            "level": ""
+          }
+        },
+        "value": {},
+        "title": "Additional Fighting Style"
       }
     ],
     "spellcasting": {
@@ -133,10 +168,10 @@
   "_id": "sprHbe7cRg9osTzf",
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.1.0",
+    "systemVersion": "2.1.2",
     "coreVersion": "10.291",
     "createdTime": 1661787234296,
-    "modifiedTime": 1671220973526,
+    "modifiedTime": 1674435503196,
     "lastModifiedBy": "dnd5ebuilder0000"
   }
 }

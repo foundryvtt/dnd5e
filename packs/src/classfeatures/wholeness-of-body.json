@@ -41,7 +41,7 @@
     },
     "consume": {
       "type": "",
-      "target": null,
+      "target": "",
       "amount": null
     },
     "ability": "",
@@ -55,7 +55,7 @@
     "damage": {
       "parts": [
         [
-          "3* @classes.monk.levels",
+          "3 * @classes.monk.levels",
           "healing"
         ]
       ],
@@ -84,10 +84,10 @@
   "sort": 0,
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.1.0",
+    "systemVersion": "2.1.2",
     "coreVersion": "10.291",
     "createdTime": 1661787234372,
-    "modifiedTime": 1672335359227,
+    "modifiedTime": 1674436155963,
     "lastModifiedBy": "dnd5ebuilder0000"
   }
 }

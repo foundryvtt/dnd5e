@@ -16,6 +16,13 @@
     "hitDiceUsed": 0,
     "advancement": [
       {
+        "_id": "ebo3padd7vg4jg3g",
+        "type": "HitPoints",
+        "configuration": {},
+        "value": {},
+        "title": ""
+      },
+      {
         "_id": "z2d0fxi8e24gradq",
         "type": "ItemGrant",
         "configuration": {
@@ -189,11 +196,37 @@
         "title": "Features"
       },
       {
-        "_id": "ebo3padd7vg4jg3g",
-        "type": "HitPoints",
-        "configuration": {},
+        "_id": "YnpUAoLofte4D28t",
+        "type": "ItemChoice",
+        "configuration": {
+          "hint": "Choose one of the following options. You can’t take a Fighting Style option more than once, even if you later get to choose again.",
+          "choices": {
+            "2": 1
+          },
+          "allowDrops": true,
+          "type": "feat",
+          "pool": [
+            "Compendium.dnd5e.classfeatures.zSlV0O2rQMdoq6pB",
+            "Compendium.dnd5e.classfeatures.hCop9uJrWhF1QPb4",
+            "Compendium.dnd5e.classfeatures.3Nc6u9pyStByuJsm",
+            "Compendium.dnd5e.classfeatures.06NVMYf58Z76O85O"
+          ],
+          "spell": {
+            "ability": "",
+            "preparation": "",
+            "uses": {
+              "max": "",
+              "per": ""
+            }
+          },
+          "restriction": {
+            "type": "class",
+            "subtype": "fightingStyle",
+            "level": ""
+          }
+        },
         "value": {},
-        "title": ""
+        "title": "Fighting Style"
       }
     ],
     "saves": [
@@ -226,10 +259,10 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.1.0",
+    "systemVersion": "2.1.2",
     "coreVersion": "10.291",
     "createdTime": 1661787234280,
-    "modifiedTime": 1671220972841,
+    "modifiedTime": 1674434916798,
     "lastModifiedBy": "dnd5ebuilder0000"
   }
 }

@@ -95,6 +95,133 @@
         "value": {},
         "level": 15,
         "title": "Features"
+      },
+      {
+        "_id": "Xr04szY7gFqZKBxP",
+        "type": "ItemChoice",
+        "configuration": {
+          "hint": "",
+          "choices": {
+            "3": 1
+          },
+          "allowDrops": false,
+          "type": "feat",
+          "pool": [
+            "Compendium.dnd5e.classfeatures.5gx1O0sxK08awEO9",
+            "Compendium.dnd5e.classfeatures.StfmqK1twVfukpa0",
+            "Compendium.dnd5e.classfeatures.C6sHdDGmCMo0cYHd"
+          ],
+          "spell": {
+            "ability": "",
+            "preparation": "",
+            "uses": {
+              "max": "",
+              "per": ""
+            }
+          },
+          "restriction": {
+            "type": "class",
+            "subtype": "huntersPrey",
+            "level": ""
+          }
+        },
+        "value": {},
+        "title": "Hunter's Prey"
+      },
+      {
+        "_id": "3UE5ZrBP2hCi52mC",
+        "type": "ItemChoice",
+        "configuration": {
+          "hint": "",
+          "choices": {
+            "7": 1
+          },
+          "allowDrops": false,
+          "type": "feat",
+          "pool": [
+            "Compendium.dnd5e.classfeatures.pAQMJU5R9SGUmzHU",
+            "Compendium.dnd5e.classfeatures.slelvrm83v9UAKZU",
+            "Compendium.dnd5e.classfeatures.zbHu0NvHuII8lR7W"
+          ],
+          "spell": {
+            "ability": "",
+            "preparation": "",
+            "uses": {
+              "max": "",
+              "per": ""
+            }
+          },
+          "restriction": {
+            "type": "class",
+            "subtype": "defensiveTactic",
+            "level": ""
+          }
+        },
+        "value": {},
+        "title": "Defensive Tactics"
+      },
+      {
+        "_id": "rKt0QvE4kJO06u9c",
+        "type": "ItemChoice",
+        "configuration": {
+          "hint": "",
+          "choices": {
+            "11": 1
+          },
+          "allowDrops": false,
+          "type": "feat",
+          "pool": [
+            "Compendium.dnd5e.classfeatures.l7W6JB9yWLLLtQKP",
+            "Compendium.dnd5e.classfeatures.1DY8w3CXeD7PHDXF"
+          ],
+          "spell": {
+            "ability": "",
+            "preparation": "",
+            "uses": {
+              "max": "",
+              "per": ""
+            }
+          },
+          "restriction": {
+            "type": "class",
+            "subtype": "multiattack",
+            "level": ""
+          }
+        },
+        "value": {},
+        "title": "Multiattack"
+      },
+      {
+        "_id": "8Ssyn9fPrW1TgBN5",
+        "type": "ItemChoice",
+        "configuration": {
+          "hint": "",
+          "choices": {
+            "15": 1
+          },
+          "allowDrops": false,
+          "type": "feat",
+          "pool": [
+            "Compendium.dnd5e.classfeatures.laVHAIOKIsUeezWd",
+            "Compendium.dnd5e.classfeatures.Xf763cJoDHPPWSGG",
+            "Compendium.dnd5e.classfeatures.7pyZjz5vlUWV01qQ"
+          ],
+          "spell": {
+            "ability": "",
+            "preparation": "",
+            "uses": {
+              "max": "",
+              "per": ""
+            }
+          },
+          "restriction": {
+            "type": "class",
+            "subtype": "",
+            "level": ""
+          }
+        },
+        "value": {},
+        "title": "Superior Hunter's Defense"
       }
     ],
     "spellcasting": {
@@ -112,10 +239,10 @@
   "_id": "uqd2q6WjVfcsaaGb",
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.1.0",
+    "systemVersion": "2.1.2",
     "coreVersion": "10.291",
     "createdTime": 1661787234297,
-    "modifiedTime": 1671220973544,
+    "modifiedTime": 1674435665133,
     "lastModifiedBy": "dnd5ebuilder0000"
   }
 }
