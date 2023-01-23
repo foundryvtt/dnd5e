@@ -124,6 +124,7 @@ export async function preloadHandlebarsTemplates() {
     "systems/dnd5e/templates/items/parts/item-description.hbs",
     "systems/dnd5e/templates/items/parts/item-mountable.hbs",
     "systems/dnd5e/templates/items/parts/item-spellcasting.hbs",
+    "systems/dnd5e/templates/items/parts/item-summary.hbs",
 
     // Journal Partials
     "systems/dnd5e/templates/journal/parts/journal-table.hbs",

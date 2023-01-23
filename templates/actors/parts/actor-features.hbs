@@ -37,7 +37,8 @@
     <ol class="item-list">
     {{#each section.items as |item iid|}}
     {{#dnd5e-itemContext item as |ctx|}}
-        <li class="item flexrow {{#if ctx.isDepleted}}depleted{{/if}}" data-item-id="{{item.id}}">
+        <li class="item flexrow {{#if ctx.isDepleted}}depleted{{/if}} {{#if ctx.isExpanded}}expanded{{/if}}"
+            data-item-id="{{item.id}}">
             <div class="item-name flexrow rollable">
                 <div class="item-image" tabindex="0" role="button" aria-label="{{item.name}}" style="background-image: url('{{item.img}}')"></div>
                 <h4>
@@ -107,6 +108,10 @@
                     <i class="fas fa-trash"></i>
                 </a>
             </div>
+            {{/if}}
+
+            {{#if ctx.isExpanded}}
+                {{> "dnd5e.item-summary" (lookup @root.expandedData item.id)}}
             {{/if}}
         </li>
     {{/dnd5e-itemContext}}

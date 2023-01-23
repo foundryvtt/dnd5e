@@ -78,6 +78,9 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
         }
       }[item.system.attunement];
 
+      // Prepare data needed to display expanded sections
+      ctx.isExpanded = this._expanded.has(item.id);
+
       // Item usage
       ctx.hasUses = uses && (uses.max > 0);
       ctx.isOnCooldown = recharge && !!recharge.value && (recharge.charged === false);

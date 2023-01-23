@@ -56,7 +56,7 @@
     <ol class="item-list">
     {{#each section.items as |item iid|}}
     {{#dnd5e-itemContext item as |ctx|}}
-        <li class="item flexrow {{section.css}}" data-item-id="{{item.id}}"
+        <li class="item flexrow {{section.css}} {{#if ctx.isExpanded}}expanded{{/if}}" data-item-id="{{item.id}}"
             {{#if section.editableName}}data-item-index="{{iid}}"{{/if}}>
             <div class="item-name flexrow {{@root.rollableClass}}">
                 {{#if section.editableName}}
@@ -128,6 +128,10 @@
                     <i class="fas fa-trash"></i>
                 </a>
             </div>
+            {{/if}}
+
+            {{#if ctx.isExpanded}}
+                {{> "dnd5e.item-summary" (lookup @root.expandedData item.id)}}
             {{/if}}
         </li>
     {{/dnd5e-itemContext}}
