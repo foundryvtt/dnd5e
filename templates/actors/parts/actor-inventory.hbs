@@ -3,7 +3,8 @@
     <ol class="currency flexrow">
         <h3>
             {{localize "DND5E.Currency"}}
-            <a class="action-button currency-convert {{rollableClass}}" data-action="convertCurrency" data-tooltip="DND5E.CurrencyConvert">
+            <a class="action-button currency-convert {{rollableClass}}" data-action="convertCurrency"
+               data-tooltip="DND5E.CurrencyConvert">
                 <i class="fas fa-coins"></i>
             </a>
         </h3>
@@ -68,7 +69,8 @@
                 </h4>
                 {{#if ctx.attunement}}
                 <div class="item-detail attunement">
-                    <i class="fas {{ctx.attunement.icon}} {{ctx.attunement.cls}}" title="{{localize ctx.attunement.title}}"></i>
+                    <i class="fas {{ctx.attunement.icon}} {{ctx.attunement.cls}}"
+                       data-tooltip="{{ctx.attunement.title}}"></i>
                 </div>
                 {{/if}}
                 {{/if}}

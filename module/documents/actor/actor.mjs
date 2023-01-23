@@ -215,6 +215,7 @@ export default class Actor5e extends Actor {
 
   /** @inheritDoc */
   applyActiveEffects() {
+    this._prepareScaleValues();
     // The Active Effects do not have access to their parent at preparation time, so we wait until this stage to
     // determine whether they are suppressed or not.
     this.effects.forEach(e => e.determineSuppression());
@@ -256,7 +257,6 @@ export default class Actor5e extends Actor {
     this._prepareEncumbrance();
     this._prepareHitPoints(rollData);
     this._prepareInitiative(rollData, checkBonus);
-    this._prepareScaleValues();
     this._prepareSpellcasting();
   }
 
@@ -376,6 +376,21 @@ export default class Actor5e extends Actor {
   /* -------------------------------------------- */
 
   /**
+   * Derive any values that have been scaled by the Advancement system.
+   * Mutates the value of the `system.scale` object.
+   * @protected
+   */
+  _prepareScaleValues() {
+    this.system.scale = Object.entries(this.classes).reduce((scale, [identifier, cls]) => {
+      scale[identifier] = cls.scaleValues;
+      if ( cls.subclass ) scale[cls.subclass.identifier] = cls.subclass.scaleValues;
+      return scale;
+    }, {});
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Perform any Character specific preparation.
    * Mutates several aspects of the system data object.
    * @protected
@@ -400,7 +415,7 @@ export default class Actor5e extends Actor {
     }
 
     // Character proficiency bonus
-    this.system.attributes.prof = Math.floor((this.system.details.level + 7) / 4);
+    this.system.attributes.prof = Proficiency.calculateMod(this.system.details.level);
 
     // Experience required for next level
     const xp = this.system.details.xp;
@@ -431,7 +446,7 @@ export default class Actor5e extends Actor {
     this.system.details.xp.value = this.getCRExp(cr);
 
     // Proficiency
-    this.system.attributes.prof = Math.floor((Math.max(cr, 1) + 7) / 4);
+    this.system.attributes.prof = Proficiency.calculateMod(Math.max(cr, 1));
 
     // Spellcaster Level
     if ( this.system.attributes.spellcasting && !Number.isNumeric(this.system.details.spellLevel) ) {
@@ -725,21 +740,6 @@ export default class Actor5e extends Actor {
   }
 
   /* -------------------------------------------- */
-
-  /**
-   * Derive any values that have been scaled by the Advancement system.
-   * Mutates the value of the `system.scale` object.
-   * @protected
-   */
-  _prepareScaleValues() {
-    this.system.scale = Object.entries(this.classes).reduce((scale, [identifier, cls]) => {
-      scale[identifier] = cls.scaleValues;
-      if ( cls.subclass ) scale[cls.subclass.identifier] = cls.subclass.scaleValues;
-      return scale;
-    }, {});
-  }
-
-  /* -------------------------------------------- */
   /*  Spellcasting Preparation                    */
   /* -------------------------------------------- */
 
@@ -749,7 +749,7 @@ export default class Actor5e extends Actor {
    * @protected
    */
   _prepareSpellcasting() {
-    if ( this.type === "vehicle" ) return;
+    if ( !this.system.spells ) return;
 
     // Spellcasting DC
     const spellcastingAbility = this.system.abilities[this.system.attributes.spellcasting];
@@ -781,7 +781,7 @@ export default class Actor5e extends Actor {
       );
     }
 
-    for ( const type of Object.keys(types) ) {
+    for ( const type of Object.keys(CONFIG.DND5E.spellcastingTypes) ) {
       this.constructor.prepareSpellcastingSlots(this.system.spells, type, progression, { actor: this });
     }
   }
@@ -2493,10 +2493,11 @@ export default class Actor5e extends Actor {
 
       // Transfer classes for NPCs
       if ( !keepClass && d.system.details.cr ) {
+        const cls = new dnd5e.dataModels.item.ClassData({levels: d.system.details.cr});
         d.items.push({
           type: "class",
           name: game.i18n.localize("DND5E.PolymorphTmpClass"),
-          data: { levels: d.system.details.cr }
+          system: cls.toObject()
         });
       }
 

@@ -124,6 +124,54 @@ export default class AdvancementManager extends Application {
   /* -------------------------------------------- */
 
   /**
+   * Construct a manager for a newly added advancement from drag-drop.
+   * @param {Actor5e} actor               Actor from which the advancement should be updated.
+   * @param {string} itemId               ID of the item to which the advancements are being dropped.
+   * @param {Advancement[]} advancements  Dropped advancements to add.
+   * @param {object} options              Rendering options passed to the application.
+   * @returns {AdvancementManager}  Prepared manager. Steps count can be used to determine if advancements are needed.
+   */
+  static forNewAdvancement(actor, itemId, advancements, options) {
+    const manager = new this(actor, options);
+    const clonedItem = manager.clone.items.get(itemId);
+    if ( !clonedItem || !advancements.length ) return manager;
+
+    const currentLevel = this.currentLevel(clonedItem, manager.clone);
+    const minimumLevel = advancements.reduce((min, a) => Math.min(a.levels[0] ?? Infinity, min), Infinity);
+    if ( minimumLevel > currentLevel ) return manager;
+
+    const oldFlows = Array.fromRange(currentLevel + 1).slice(minimumLevel)
+      .flatMap(l => this.flowsForLevel(clonedItem, l));
+
+    // Revert advancements through minimum level
+    oldFlows.reverse().forEach(flow => manager.steps.push({ type: "reverse", flow, automatic: true }));
+
+    // Add new advancements
+    const advancementArray = clonedItem.toObject().system.advancement;
+    advancementArray.push(...advancements.map(a => {
+      const obj = a.toObject();
+      if ( obj.constructor.dataModels?.value ) a.value = (new a.constructor.metadata.dataModels.value()).toObject();
+      else obj.value = foundry.utils.deepClone(a.constructor.metadata.defaults?.value ?? {});
+      return obj;
+    }));
+    clonedItem.updateSource({"system.advancement": advancementArray});
+
+    const newFlows = Array.fromRange(currentLevel + 1).slice(minimumLevel)
+      .flatMap(l => this.flowsForLevel(clonedItem, l));
+
+    // Restore existing advancements and apply new advancements
+    newFlows.forEach(flow => {
+      const matchingFlow = oldFlows.find(f => (f.advancement.id === flow.advancement.id) && (f.level === flow.level));
+      if ( matchingFlow ) manager.steps.push({ type: "restore", flow: matchingFlow, automatic: true });
+      else manager.steps.push({ type: "forward", flow });
+    });
+
+    return manager;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Construct a manager for a newly added item.
    * @param {Actor5e} actor         Actor to which the item is being added.
    * @param {object} itemData       Data for the item being added.
@@ -177,10 +225,7 @@ export default class AdvancementManager extends Application {
     const clonedItem = manager.clone.items.get(itemId);
     if ( !clonedItem ) return manager;
 
-    const currentLevel = clonedItem.system.levels ?? clonedItem.class?.system.levels
-      ?? manager.clone.system.details.level;
-
-    const flows = Array.fromRange(currentLevel + 1).slice(level)
+    const flows = Array.fromRange(this.currentLevel(clonedItem, manager.clone) + 1).slice(level)
       .flatMap(l => this.flowsForLevel(clonedItem, l));
 
     // Revert advancements through changed level
@@ -198,9 +243,42 @@ export default class AdvancementManager extends Application {
   /* -------------------------------------------- */
 
   /**
+   * Construct a manager for an advancement that needs to be deleted.
+   * @param {Actor5e} actor         Actor from which the advancement should be unapplied.
+   * @param {string} itemId         ID of the item from which the advancement should be deleted.
+   * @param {string} advancementId  ID of the advancement to delete.
+   * @param {object} options        Rendering options passed to the application.
+   * @returns {AdvancementManager}  Prepared manager. Steps count can be used to determine if advancements are needed.
+   */
+  static forDeletedAdvancement(actor, itemId, advancementId, options) {
+    const manager = new this(actor, options);
+    const clonedItem = manager.clone.items.get(itemId);
+    const advancement = clonedItem?.advancement.byId[advancementId];
+    if ( !advancement ) return manager;
+
+    const minimumLevel = advancement.levels[0];
+    const currentLevel = this.currentLevel(clonedItem, manager.clone);
+
+    // If minimum level is greater than current level, no changes to remove
+    if ( (minimumLevel > currentLevel) || !advancement.appliesToClass ) return manager;
+
+    advancement.levels
+      .reverse()
+      .filter(l => l <= currentLevel)
+      .map(l => new advancement.constructor.metadata.apps.flow(clonedItem, advancementId, l))
+      .forEach(flow => manager.steps.push({ type: "reverse", flow, automatic: true }));
+
+    if ( manager.steps.length ) manager.steps.push({ type: "delete", advancement, automatic: true });
+
+    return manager;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Construct a manager for an item that needs to be deleted.
    * @param {Actor5e} actor         Actor from which the item should be deleted.
-   * @param {object} itemId         ID of the item to be deleted.
+   * @param {string} itemId         ID of the item to be deleted.
    * @param {object} options        Rendering options passed to the application.
    * @returns {AdvancementManager}  Prepared manager. Steps count can be used to determine if advancements are needed.
    */
@@ -301,6 +379,18 @@ export default class AdvancementManager extends Application {
     return (item?.advancement.byLevel[level] ?? [])
       .filter(a => a.appliesToClass)
       .map(a => new a.constructor.metadata.apps.flow(item, a.id, level));
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Determine the proper working level either from the provided item or from the cloned actor.
+   * @param {Item5e} item    Item being advanced. If class or subclass, its level will be used.
+   * @param {Actor5e} actor  Actor being advanced.
+   * @returns {number}       Working level.
+   */
+  static currentLevel(item, actor) {
+    return item.system.levels ?? item.class?.system.levels ?? actor.system.details.level;
   }
 
   /* -------------------------------------------- */
@@ -449,7 +539,10 @@ export default class AdvancementManager extends Application {
         const flow = this.step.flow;
 
         // Apply changes based on step type
-        if ( this.step.type === "delete" ) this.clone.items.delete(this.step.item.id);
+        if ( (this.step.type === "delete") && this.step.item ) this.clone.items.delete(this.step.item.id);
+        else if ( (this.step.type === "delete") && this.step.advancement ) {
+          this.step.advancement.item.deleteAdvancement(this.step.advancement.id, { source: true });
+        }
         else if ( this.step.type === "restore" ) await flow.advancement.restore(flow.level, flow.retainedData);
         else if ( this.step.type === "reverse" ) flow.retainedData = await flow.advancement.reverse(flow.level);
         else if ( flow ) await flow._updateObject(event, flow._getSubmitData());
@@ -497,7 +590,10 @@ export default class AdvancementManager extends Application {
         const flow = this.step.flow;
 
         // Reverse step based on step type
-        if ( this.step.type === "delete" ) this.clone.updateSource({items: [this.step.item]});
+        if ( (this.step.type === "delete") && this.step.item ) this.clone.updateSource({items: [this.step.item]});
+        else if ( (this.step.type === "delete") && this.step.advancement ) this.advancement.item.createAdvancement(
+          this.advancement.typeName, this.advancement._source, { source: true }
+        );
         else if ( this.step.type === "reverse" ) await flow.advancement.restore(flow.level, flow.retainedData);
         else if ( flow ) flow.retainedData = await flow.advancement.reverse(flow.level);
         this.clone.reset();

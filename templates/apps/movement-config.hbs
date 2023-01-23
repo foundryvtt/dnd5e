@@ -6,7 +6,7 @@
         {{numberInput (lookup @root.movement id) name=(concat "system.attributes.movement." id) placeholder=0 step=0.1 min=0}}
     </div>
     {{/each}}
-    {{#if chooseUnits}}
+    {{#if selectUnits}}
     <div class="form-group">
         <label>{{localize "DND5E.MovementUnits"}}</label>
         <select name="system.attributes.movement.units">

@@ -1,4 +1,6 @@
 import AdvancementManager from "../advancement/advancement-manager.mjs";
+import AdvancementMigrationDialog from "../advancement/advancement-migration-dialog.mjs";
+import ProficiencySelector from "../proficiency-selector.mjs";
 import TraitSelector from "../trait-selector.mjs";
 import ActiveEffect5e from "../../documents/active-effect.mjs";
 import * as Trait from "../../documents/actor/trait.mjs";
@@ -31,7 +33,10 @@ export default class ItemSheet5e extends ItemSheet {
       resizable: true,
       scrollY: [".tab.details"],
       tabs: [{navSelector: ".tabs", contentSelector: ".sheet-body", initial: "description"}],
-      dragDrop: [{dragSelector: "[data-effect-id]", dropSelector: ".effects-list"}]
+      dragDrop: [
+        {dragSelector: "[data-effect-id]", dropSelector: ".effects-list"},
+        {dragSelector: ".advancement-item", dropSelector: ".advancement"}
+      ]
     });
   }
 
@@ -576,6 +581,8 @@ export default class ItemSheet5e extends ItemSheet {
     if ( li.dataset.effectId ) {
       const effect = this.item.effects.get(li.dataset.effectId);
       dragData = effect.toDragData();
+    } else if ( li.classList.contains("advancement-item") ) {
+      dragData = this.item.advancement.byId[li.dataset.id]?.toDragData();
     }
 
     if ( !dragData ) return;
@@ -606,6 +613,9 @@ export default class ItemSheet5e extends ItemSheet {
     switch ( data.type ) {
       case "ActiveEffect":
         return this._onDropActiveEffect(event, data);
+      case "Advancement":
+      case "Item":
+        return this._onDropAdvancement(event, data);
     }
   }
 
@@ -626,6 +636,53 @@ export default class ItemSheet5e extends ItemSheet {
       ...effect.toObject(),
       origin: this.item.uuid
     }, {parent: this.item});
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle the dropping of an advancement or item with advancements onto the advancements tab.
+   * @param {DragEvent} event                  The concluding DragEvent which contains drop data.
+   * @param {object} data                      The data transfer extracted from the event.
+   */
+  async _onDropAdvancement(event, data) {
+    let advancements;
+    let showDialog = false;
+    if ( data.type === "Advancement" ) {
+      advancements = [await fromUuid(data.uuid)];
+    } else if ( data.type === "Item" ) {
+      const item = await Item.implementation.fromDropData(data);
+      if ( !item ) return false;
+      advancements = Object.values(item.advancement.byId);
+      showDialog = true;
+    } else {
+      return false;
+    }
+    advancements = advancements.filter(a => {
+      return !this.item.advancement.byId[a.id]
+        && a.constructor.metadata.validItemTypes.has(this.item.type)
+        && a.constructor.availableForItem(this.item);
+    });
+
+    // Display dialog prompting for which advancements to add
+    if ( showDialog ) {
+      try {
+        advancements = await AdvancementMigrationDialog.createDialog(this.item, advancements);
+      } catch(err) {
+        return false;
+      }
+    }
+
+    if ( !advancements.length ) return false;
+    if ( this.item.isEmbedded && !game.settings.get("dnd5e", "disableAdvancements") ) {
+      const manager = AdvancementManager.forNewAdvancement(this.item.actor, this.item.id, advancements);
+      if ( manager.steps.length ) return manager.render(true);
+    }
+
+    // If no advancements need to be applied, just add them to the item
+    const advancementArray = foundry.utils.deepClone(this.item.system.advancement);
+    advancementArray.push(...advancements.map(a => a.toObject()));
+    this.item.update({"system.advancement": advancementArray});
   }
 
   /* -------------------------------------------- */
@@ -677,15 +734,21 @@ export default class ItemSheet5e extends ItemSheet {
   _onAdvancementAction(target, action) {
     const id = target.closest(".advancement-item")?.dataset.id;
     const advancement = this.item.advancement.byId[id];
+    let manager;
     if ( ["edit", "delete", "duplicate"].includes(action) && !advancement ) return;
     switch (action) {
       case "add": return game.dnd5e.applications.advancement.AdvancementSelection.createDialog(this.item);
       case "edit": return new advancement.constructor.metadata.apps.config(advancement).render(true);
-      case "delete": return this.item.deleteAdvancement(id);
+      case "delete":
+        if ( this.item.isEmbedded && !game.settings.get("dnd5e", "disableAdvancements") ) {
+          manager = AdvancementManager.forDeletedAdvancement(this.item.actor, this.item.id, id);
+          if ( manager.steps.length ) return manager.render(true);
+        }
+        return this.item.deleteAdvancement(id);
       case "duplicate": return this.item.duplicateAdvancement(id);
       case "modify-choices":
         const level = target.closest("li")?.dataset.level;
-        const manager = AdvancementManager.forModifyChoices(this.item.actor, this.item.id, Number(level));
+        manager = AdvancementManager.forModifyChoices(this.item.actor, this.item.id, Number(level));
         if ( manager.steps.length ) manager.render(true);
         return;
       case "toggle-configuration":

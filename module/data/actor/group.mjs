@@ -39,13 +39,13 @@ export default class GroupActor extends SystemDataModel.mixin(CurrencyTemplate) 
       attributes: new foundry.data.fields.SchemaField({
         movement: new foundry.data.fields.SchemaField({
           land: new foundry.data.fields.NumberField({
-            initial: 0, nullable: false, integer: true, min: 0, label: "DND5E.MovementLand"
+            nullable: false, min: 0, step: 0.1, initial: 0, label: "DND5E.MovementLand"
           }),
           water: new foundry.data.fields.NumberField({
-            initial: 0, nullable: false, integer: true, min: 0, label: "DND5E.MovementWater"
+            nullable: false, min: 0, step: 0.1, initial: 0, label: "DND5E.MovementWater"
           }),
           air: new foundry.data.fields.NumberField({
-            initial: 0, nullable: false, integer: true, min: 0, label: "DND5E.MovementAir"
+            nullable: false, min: 0, step: 0.1, initial: 0, label: "DND5E.MovementAir"
           })
         })
       }, {label: "DND5E.Attributes"})

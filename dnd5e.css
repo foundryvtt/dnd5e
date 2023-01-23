@@ -562,56 +562,56 @@ h5 {
 /* ----------------------------------------- */
 /*  Property Attribution                     */
 /* ----------------------------------------- */
-.property-attribution {
-  display: none;
-  position: absolute;
+#tooltip.property-attribution {
+  min-width: 150px;
   padding: 3px;
-  border: 1px solid #000;
-  border-radius: 3px;
   background-color: rgba(0, 0, 0, 0.8);
   backdrop-filter: blur(4px);
-  color: #c9c7b8;
-  text-align: left;
-  z-index: 1;
+  text-align: left !important;
 }
-.property-attribution table {
+#tooltip.property-attribution table {
   margin: 0;
   border: 0;
+  font-size: var(--font-size-14);
 }
-.property-attribution table tr {
+#tooltip.property-attribution table caption {
+  padding-block: 0.25em 0.5em;
+  font-size: var(--font-size-16);
+}
+#tooltip.property-attribution table tr {
   background-color: inherit;
 }
-.property-attribution table td {
+#tooltip.property-attribution table td {
   padding: 3px;
 }
-.property-attribution table tr.total > td {
+#tooltip.property-attribution table tr.total > td {
   font-weight: 600;
   padding-top: 5px;
   border-top: 1px solid #7a7971;
 }
-.property-attribution table td.attribution-value {
+#tooltip.property-attribution table td.attribution-value {
   width: 20%;
   padding-right: 5px;
   text-align: right;
   font-weight: 600;
 }
-.property-attribution table td::before {
+#tooltip.property-attribution table td::before {
   opacity: 0.6;
 }
-.property-attribution table td.mode-1::before {
+#tooltip.property-attribution table td.mode-1::before {
   content: "×";
 }
-.property-attribution table td.mode-2::before {
+#tooltip.property-attribution table td.mode-2::before {
   content: "+";
 }
-.property-attribution table td.mode-2.negative::before {
+#tooltip.property-attribution table td.mode-2.negative::before {
   content: "−";
   margin-right: -1px;
 }
-.property-attribution table td.mode-3::before {
+#tooltip.property-attribution table td.mode-3::before {
   content: "↓";
 }
-.property-attribution table td.mode-4::before {
+#tooltip.property-attribution table td.mode-4::before {
   content: "↑";
 }
 /* ----------------------------------------- */
@@ -828,14 +828,6 @@ h5 {
 .dnd5e.sheet.actor .sheet-header .attributes .attribute input.temphp {
   width: 48%;
 }
-.dnd5e.sheet.actor .sheet-header .attributes .attribute .property-attribution {
-  min-width: 150px;
-  top: 50px;
-  font-family: Signika, sans-serif;
-  font-size: 14px;
-  font-weight: normal;
-  line-height: 1rem;
-}
 .dnd5e.sheet.actor h4.box-title {
   height: 18px;
   line-height: 16px;
@@ -894,12 +886,6 @@ h5 {
   font-size: 12px;
   font-weight: 400;
   white-space: nowrap;
-}
-.dnd5e.sheet.actor .attributable {
-  position: relative;
-}
-.dnd5e.sheet.actor .attributable:hover .tooltip {
-  display: block;
 }
 .dnd5e.sheet.actor .ability-scores {
   flex: 0 0 100px;
@@ -1422,6 +1408,9 @@ h5 {
 .dnd5e.advancement.scale-value select option[value=""] {
   color: var(--color-text-light-6);
 }
+.dnd5e.advancement-migration .items-list {
+  margin-block-end: 1em;
+}
 /* ----------------------------------------- */
 /*  Advancement Flow                         */
 /* ----------------------------------------- */
@@ -1516,9 +1505,6 @@ h5 {
   /* ----------------------------------------- */
   /* ----------------------------------------- */
   /*  Item Actions                             */
-  /* ----------------------------------------- */
-  /* ----------------------------------------- */
-  /*  Item Advancement                         */
   /* ----------------------------------------- */
   /* ----------------------------------------- */
   /*  Loot Sheet (No Tabs)                     */
@@ -1702,37 +1688,43 @@ h5 {
 .dnd5e.sheet.item .weapon-properties label.checkbox {
   flex: 0 0 98px;
 }
-.dnd5e.sheet.item .advancement .items-list {
+.dnd5e.sheet.item .loot-header {
+  margin-bottom: 10px;
+}
+/* ----------------------------------------- */
+/*  Item Advancement                         */
+/* ----------------------------------------- */
+.dnd5e .advancement .items-list {
   height: 100%;
 }
-.dnd5e.sheet.item .advancement .items-list .main-controls .configuration-mode-control {
+.dnd5e .advancement .items-list .main-controls .configuration-mode-control {
   flex: 1 0;
   margin-inline-start: 0.5em;
 }
-.dnd5e.sheet.item .advancement .items-list .main-controls .configuration-mode-control a {
+.dnd5e .advancement .items-list .main-controls .configuration-mode-control a {
   text-align: start;
 }
-.dnd5e.sheet.item .advancement .items-list .main-controls .item-add {
+.dnd5e .advancement .items-list .main-controls .item-add {
   padding-block-start: 0.2em;
 }
-.dnd5e.sheet.item .advancement .items-list .items-header .item-checkmark {
+.dnd5e .advancement .items-list .items-header .item-checkmark {
   flex: 0 0 44px;
   color: #119111;
   text-shadow: white 0 0 1px;
 }
-.dnd5e.sheet.item .advancement .items-list .items-header .item-warning {
+.dnd5e .advancement .items-list .items-header .item-warning {
   flex: 0 0 44px;
   color: #faff23;
   text-shadow: black 0 0 1px;
 }
-.dnd5e.sheet.item .advancement .items-list .item-name {
+.dnd5e .advancement .items-list .item-name {
   flex: 1 0 10em;
 }
-.dnd5e.sheet.item .advancement .items-list .item-controls {
+.dnd5e .advancement .items-list .item-controls {
   border-left: 1px solid #c9c7b8;
   flex: 0 0 44px;
 }
-.dnd5e.sheet.item .advancement .items-list .item-summary {
+.dnd5e .advancement .items-list .item-summary {
   flex: 0 0 100%;
   font-size: 12px;
   line-height: 16px;
@@ -1740,15 +1732,12 @@ h5 {
   margin-top: -4px;
   color: #191813;
 }
-.dnd5e.sheet.item .advancement .items-list .item-summary .item-list .item-name {
+.dnd5e .advancement .items-list .item-summary .item-list .item-name {
   display: flex;
 }
-.dnd5e.sheet.item .advancement .items-list .tag {
+.dnd5e .advancement .items-list .tag {
   font-size: 0.7rem;
   padding: 0.1em 0.5em;
-}
-.dnd5e.sheet.item .loot-header {
-  margin-bottom: 10px;
 }
 /* ----------------------------------------- */
 /*  SRD Compendium                           */
@@ -2166,6 +2155,8 @@ h5 {
   text-align: right;
 }
 .dnd5e.sheet.group {
+  min-width: 620px;
+  min-height: 620px;
   /** Members Directory */
 }
 .dnd5e.sheet.group .attribute.health span.value {

@@ -654,7 +654,7 @@ export default class Item5e extends Item {
     if ( this.isOwned && !Number.isNumeric(max) ) {
       const property = game.i18n.localize("DND5E.UsesMax");
       try {
-        const rollData = this.actor.getRollData({ deterministic: true });
+        const rollData = this.getRollData({ deterministic: true });
         max = Roll.safeEval(this.replaceFormulaData(max, rollData, { property }));
       } catch(e) {
         const message = game.i18n.format("DND5E.FormulaMalformedError", { property, name: this.name });
@@ -681,7 +681,7 @@ export default class Item5e extends Item {
     if ( this.isOwned && !Number.isNumeric(value) ) {
       const property = game.i18n.localize("DND5E.Duration");
       try {
-        const rollData = this.actor.getRollData({ deterministic: true });
+        const rollData = this.getRollData({ deterministic: true });
         value = Roll.safeEval(this.replaceFormulaData(value, rollData, { property }));
       } catch(e) {
         const message = game.i18n.format("DND5E.FormulaMalformedError", { property, name: this.name });
@@ -1817,13 +1817,14 @@ export default class Item5e extends Item {
   /* -------------------------------------------- */
 
   /**
-   * Prepare a data object which is passed to any Roll formulas which are created related to this Item.
-   * @returns {object}  Data used for @ formula replacement in Roll formulas.
-   * @private
+   * @inheritdoc
+   * @param {object} [options]
+   * @param {boolean} [options.deterministic] Whether to force deterministic values for data properties that could be
+   *                                          either a die term or a flat term.
    */
-  getRollData() {
+  getRollData({ deterministic=false }={}) {
     if ( !this.actor ) return null;
-    const actorRollData = this.actor.getRollData();
+    const actorRollData = this.actor.getRollData({ deterministic });
     const rollData = {
       ...actorRollData,
       item: this.toObject().system
@@ -2347,17 +2348,5 @@ export default class Item5e extends Item {
       }
     });
     return new this(spellScrollData);
-  }
-
-  /* -------------------------------------------- */
-  /*  Compatibility                               */
-  /* -------------------------------------------- */
-
-  /** @inheritdoc */
-  static migrateData(source) {
-    // TODO: Temporary patch until https://github.com/foundryvtt/foundryvtt/issues/8366 is resolved
-    const model = this.schema.get("system").getModelForType(source.type);
-    if ( model ) source.system = model.migrateDataSafe(source.system ?? {});
-    return super.migrateData(source);
   }
 }

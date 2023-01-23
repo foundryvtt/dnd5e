@@ -28,9 +28,9 @@ export class ScaleValueConfigurationData extends foundry.abstract.DataModel {
 
   /** @inheritdoc */
   static migrateData(source) {
+    super.migrateData(source);
     if ( source.type === "numeric" ) source.type = "number";
     Object.values(source.scale ?? {}).forEach(v => TYPES[source.type].migrateData(v));
-    super.migrateData(source);
   }
 }
 

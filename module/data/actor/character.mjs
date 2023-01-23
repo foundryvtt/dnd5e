@@ -15,7 +15,6 @@ import TraitsFields from "./templates/traits.mjs";
  * @property {string} attributes.ac.formula               Custom formula to use.
  * @property {object} attributes.hp
  * @property {number} attributes.hp.value                 Current hit points.
- * @property {number} attributes.hp.min                   Minimum allowed HP value.
  * @property {number} attributes.hp.max                   Override for maximum HP.
  * @property {number} attributes.hp.temp                  Temporary HP applied on top of value.
  * @property {number} attributes.hp.tempmax               Temporary change to the maximum HP.
@@ -67,9 +66,6 @@ export default class CharacterData extends CreatureTemplate {
         hp: new foundry.data.fields.SchemaField({
           value: new foundry.data.fields.NumberField({
             nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.HitPointsCurrent"
-          }),
-          min: new foundry.data.fields.NumberField({
-            nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.HitPointsMin"
           }),
           max: new foundry.data.fields.NumberField({
             nullable: true, integer: true, min: 0, initial: null, label: "DND5E.HitPointsOverride"
@@ -124,16 +120,9 @@ export default class CharacterData extends CreatureTemplate {
   /* -------------------------------------------- */
 
   /** @inheritdoc */
-  _validateModel(data) {
-    CommonTemplate._validateHP(data);
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritdoc */
   static migrateData(source) {
+    super.migrateData(source);
     AttributesFields._migrateInitiative(source.attributes);
-    return super.migrateData(source);
   }
 }
 

@@ -6,12 +6,12 @@
           {{#if isEmbedded}}
             {{#if advancementEditable}}
               <a class="item-control" data-action="toggle-configuration"
-                title="{{localize 'DND5E.AdvancementConfigurationActionDisable'}}">
+                 data-tooltip="DND5E.AdvancementConfigurationActionDisable">
                 <i class="fas fa-lock-open"></i> {{localize "DND5E.AdvancementConfigurationModeEnabled"}}
               </a>
             {{else}}
               <a class="item-control" data-action="toggle-configuration"
-                title="{{localize 'DND5E.AdvancementConfigurationActionEnable'}}">
+                 data-tooltip="DND5E.AdvancementConfigurationActionEnable">
                 <i class="fas fa-lock"></i> {{localize "DND5E.AdvancementConfigurationModeDisabled"}}
               </a>
             {{/if}}
@@ -19,7 +19,7 @@
         </div>
         {{#if advancementEditable}}
           <div class="item-controls flexrow add-button">
-            <a class="item-control" data-action="add" title="{{localize 'DND5E.AdvancementControlCreate'}}">
+            <a class="item-control" data-action="add" data-tooltip="DND5E.AdvancementControlCreate">
               <i class="fas fa-plus"></i>
             </a>
           </div>
@@ -46,11 +46,11 @@
         {{/if}}
 
         {{#if (eq data.configured "full")}}
-          <div class="item-checkmark" title="{{localize 'DND5E.AdvancementConfiguredComplete'}}">
+          <div class="item-checkmark" data-tooltip="DND5E.AdvancementConfiguredComplete">
             <i class="fas fa-check-circle"></i>
           </div>
         {{else if (eq data.configured "partial")}}
-          <div class="item-warning" title="{{localize 'DND5E.AdvancementConfiguredIncomplete'}}">
+          <div class="item-warning" data-tooltip="DND5E.AdvancementConfiguredIncomplete">
             <i class="fas fa-exclamation-triangle"></i>
           </div>
         {{/if}}
@@ -73,10 +73,10 @@
             {{/if}}
             {{#if @root.advancementEditable}}
               <div class="item-controls flexrow">
-                  <a class="item-control" data-action="edit" title="{{localize 'DND5E.AdvancementControlEdit'}}">
+                  <a class="item-control" data-action="edit" data-tooltip="DND5E.AdvancementControlEdit">
                     <i class="fas fa-edit"></i>
                   </a>
-                  <a class="item-control" data-action="delete" title="{{localize 'DND5E.AdvancementControlDelete'}}">
+                  <a class="item-control" data-action="delete" data-tooltip="DND5E.AdvancementControlDelete">
                     <i class="fas fa-trash"></i>
                   </a>
               </div>
