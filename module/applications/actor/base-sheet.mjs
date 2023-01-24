@@ -459,6 +459,7 @@ export default class ActorSheet5e extends ActorSheet {
 
     // Format a spellbook entry for a certain indexed level
     const registerSection = (sl, i, label, {prepMode="prepared", value, max, override}={}) => {
+      const aeOverride = foundry.utils.hasProperty(this.actor.overrides, `system.spells.spell${i}.override`);
       spellbook[i] = {
         order: i,
         label: label,
@@ -470,7 +471,8 @@ export default class ActorSheet5e extends ActorSheet {
         slots: useLabels[i] || max || 0,
         override: override || 0,
         dataset: {type: "spell", level: prepMode in sections ? 1 : i, "preparation.mode": prepMode},
-        prop: sl
+        prop: sl,
+        editable: context.editable && !aeOverride
       };
     };
 
@@ -643,13 +645,7 @@ export default class ActorSheet5e extends ActorSheet {
 
       // Active Effect management
       html.find(".effect-control").click(ev => ActiveEffect5e.onManageActiveEffect(ev, this.actor));
-
-      for ( const override of Object.keys(foundry.utils.flattenObject(this.actor.overrides)) ) {
-        html.find(`input[name="${override}"],select[name="${override}"]`).each((i, el) => {
-          el.disabled = true;
-          el.dataset.tooltip = "DND5E.ActiveEffectOverrideWarning";
-        });
-      }
+      this._disableOverriddenFields(html);
     }
 
     // Owner Only Listeners
@@ -676,6 +672,41 @@ export default class ActorSheet5e extends ActorSheet {
 
     // Handle default listeners last so system listeners are triggered first
     super.activateListeners(html);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Disable any fields that are overridden by active effects and display an informative tooltip.
+   * @param {jQuery} html  The sheet's rendered HTML.
+   * @protected
+   */
+  _disableOverriddenFields(html) {
+    for ( const override of Object.keys(foundry.utils.flattenObject(this.actor.overrides)) ) {
+      html.find(`input[name="${override}"],select[name="${override}"]`).each((i, el) => {
+        el.disabled = true;
+        el.dataset.tooltip = "DND5E.ActiveEffectOverrideWarning";
+      });
+
+      const [, ability] = override.match(/system\.abilities\.([^.]+)\.proficient/) || [];
+      if ( ability ) {
+        const toggle = html.find(`li[data-ability="${ability}"] .proficiency-toggle`);
+        toggle.addClass("disabled");
+        toggle.attr("data-tooltip", "DND5E.ActiveEffectOverrideWarning");
+      }
+
+      const [, skill] = override.match(/system\.skills\.([^.]+)\.value/) || [];
+      if ( skill ) {
+        const toggle = html.find(`li[data-skill="${skill}"] .proficiency-toggle`);
+        toggle.addClass("disabled");
+        toggle.attr("data-tooltip", "DND5E.ActiveEffectOverrideWarning");
+      }
+
+      const [, spell] = override.match(/system\.spells\.(spell\d)\.override/) || [];
+      if ( spell ) {
+        html.find(`.spell-max[data-level="${spell}"]`).attr("data-tooltip", "DND5E.ActiveEffectOverrideWarning");
+      }
+    }
   }
 
   /* -------------------------------------------- */
@@ -890,6 +921,7 @@ export default class ActorSheet5e extends ActorSheet {
    * @private
    */
   _onCycleSkillProficiency(event) {
+    if ( event.currentTarget.classList.contains("disabled") ) return;
     event.preventDefault();
     const parent = event.currentTarget.closest(".skill");
     const field = parent.querySelector('[name$=".value"]');
@@ -1324,6 +1356,7 @@ export default class ActorSheet5e extends ActorSheet {
    * @private
    */
   _onToggleAbilityProficiency(event) {
+    if ( event.currentTarget.classList.contains("disabled") ) return;
     event.preventDefault();
     const field = event.currentTarget.previousElementSibling;
     return this.actor.update({[field.name]: 1 - parseInt(field.value)});
