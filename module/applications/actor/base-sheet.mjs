@@ -643,6 +643,13 @@ export default class ActorSheet5e extends ActorSheet {
 
       // Active Effect management
       html.find(".effect-control").click(ev => ActiveEffect5e.onManageActiveEffect(ev, this.actor));
+
+      for ( const override of Object.keys(foundry.utils.flattenObject(this.actor.overrides)) ) {
+        html.find(`input[name="${override}"],select[name="${override}"]`).each((i, el) => {
+          el.disabled = true;
+          el.dataset.tooltip = "DND5E.ActiveEffectOverrideWarning";
+        });
+      }
     }
 
     // Owner Only Listeners
@@ -884,9 +891,9 @@ export default class ActorSheet5e extends ActorSheet {
    */
   _onCycleSkillProficiency(event) {
     event.preventDefault();
-    const field = event.currentTarget.previousElementSibling;
-    const skillName = field.parentElement.dataset.skill;
-    const value = this.actor._source.system.skills[skillName]?.value ?? 0;
+    const parent = event.currentTarget.closest(".skill");
+    const field = parent.querySelector('[name$=".value"]');
+    const value = this.actor._source.system.skills[parent.dataset.skill]?.value ?? 0;
 
     // Cycle to the next or previous skill level
     const levels = [0, 1, 0.5, 2];
