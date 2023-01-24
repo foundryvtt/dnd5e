@@ -1,6 +1,5 @@
 import AdvancementManager from "../advancement/advancement-manager.mjs";
 import AdvancementMigrationDialog from "../advancement/advancement-migration-dialog.mjs";
-import ProficiencySelector from "../proficiency-selector.mjs";
 import TraitSelector from "../trait-selector.mjs";
 import ActiveEffect5e from "../../documents/active-effect.mjs";
 import * as Trait from "../../documents/actor/trait.mjs";
@@ -138,7 +137,7 @@ export default class ItemSheet5e extends ItemSheet {
       async: true,
       relativeTo: this.item,
       rollData: context.rollData
-    })
+    });
     return context;
   }
 
@@ -150,7 +149,7 @@ export default class ItemSheet5e extends ItemSheet {
    * @returns {object}     Object with advancement data grouped by levels.
    */
   _getItemAdvancement(item) {
-    if ( !item.system.advancement ) return;
+    if ( !item.system.advancement ) return {};
     const advancement = {};
     const configMode = !item.parent || this.advancementConfigurationMode;
     const maxLevel = !configMode
@@ -699,7 +698,7 @@ export default class ItemSheet5e extends ItemSheet {
    * Handle one of the advancement actions from the buttons or context menu.
    * @param {Element} target  Button or context menu entry that triggered this action.
    * @param {string} action   Action being triggered.
-   * @returns {Promise}
+   * @returns {Promise|void}
    */
   _onAdvancementAction(target, action) {
     const id = target.closest(".advancement-item")?.dataset.id;
