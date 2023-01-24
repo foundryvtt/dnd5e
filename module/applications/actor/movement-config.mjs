@@ -1,7 +1,9 @@
+import BaseConfigSheet from "./base-config.mjs";
+
 /**
  * A simple form to set actor movement speeds.
  */
-export default class ActorMovementConfig extends DocumentSheet {
+export default class ActorMovementConfig extends BaseConfigSheet {
 
   /** @override */
   static get defaultOptions() {

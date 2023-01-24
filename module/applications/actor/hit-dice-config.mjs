@@ -1,7 +1,9 @@
+import BaseConfigSheet from "./base-config.mjs";
+
 /**
  * A simple form to set actor hit dice amounts.
  */
-export default class ActorHitDiceConfig extends DocumentSheet {
+export default class ActorHitDiceConfig extends BaseConfigSheet {
 
   /** @inheritDoc */
   static get defaultOptions() {
