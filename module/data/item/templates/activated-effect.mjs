@@ -126,7 +126,10 @@ export default class ActivatedEffectTemplate extends foundry.abstract.DataModel 
       else if ( Number.isNumeric(source.range.long) ) source.range.long = Number(source.range.long);
     }
     if ( typeof source.range.value !== "string" ) return;
-    if ( source.range.value === "" ) return source.range.value = null;
+    if ( source.range.value === "" ) {
+      source.range.value = null;
+      return;
+    }
     const [value, long] = source.range.value.split("/");
     if ( Number.isNumeric(value) ) source.range.value = Number(value);
     if ( Number.isNumeric(long) ) source.range.long = Number(long);

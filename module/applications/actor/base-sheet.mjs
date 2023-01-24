@@ -1166,7 +1166,7 @@ export default class ActorSheet5e extends ActorSheet {
     event.preventDefault();
     const itemId = event.currentTarget.closest(".item").dataset.itemId;
     const item = this.actor.items.get(itemId);
-    if ( item ) return item.use({}, {event});
+    return item.use({}, {event});
   }
 
   /* -------------------------------------------- */

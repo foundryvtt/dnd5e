@@ -2004,7 +2004,7 @@ export default class Item5e extends Item {
    *                                               is `false`, or item with newly added advancement.
    */
   createAdvancement(type, data={}, { showConfig=true, source=false }={}) {
-    if ( !this.system.advancement ) return;
+    if ( !this.system.advancement ) return this;
 
     const Advancement = CONFIG.DND5E.advancementTypes[type];
     if ( !Advancement ) throw new Error(`${type} not found in CONFIG.DND5E.advancementTypes`);
@@ -2035,7 +2035,7 @@ export default class Item5e extends Item {
    * @returns {Promise<Item5e>|Item5e}        This item with the changes applied, promised if source is `false`.
    */
   updateAdvancement(id, updates, { source=false }={}) {
-    if ( !this.system.advancement ) return;
+    if ( !this.system.advancement ) return this;
     const idx = this.system.advancement.findIndex(a => a._id === id);
     if ( idx === -1 ) throw new Error(`Advancement of ID ${id} could not be found to update`);
 
@@ -2064,7 +2064,7 @@ export default class Item5e extends Item {
    * @returns {Promise<Item5e>|Item5e}        This item with the changes applied.
    */
   deleteAdvancement(id, { source=false }={}) {
-    if ( !this.system.advancement ) return;
+    if ( !this.system.advancement ) return this;
 
     const advancementCollection = this.system.advancement.filter(a => a._id !== id);
     if ( source ) return this.updateSource({"system.advancement": advancementCollection});
@@ -2084,7 +2084,7 @@ export default class Item5e extends Item {
    */
   duplicateAdvancement(id, options) {
     const original = this.advancement.byId[id];
-    if ( !original ) return;
+    if ( !original ) return this;
     const duplicate = original.toObject();
     delete duplicate._id;
     if ( original.constructor.metadata.dataModels?.value ) {

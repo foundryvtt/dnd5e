@@ -443,7 +443,7 @@ function _migrateActorAC(actorData, updateData) {
     try {
       const roll = new Roll(ac.formula);
       Roll.safeEval(roll.formula);
-    } catch ( e ) {
+    } catch( e ) {
       updateData["system.attributes.ac.formula"] = "";
     }
   }
