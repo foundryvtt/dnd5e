@@ -1,4 +1,5 @@
 import * as Trait from "../../documents/actor/trait.mjs";
+import BaseConfigSheet from "./base-config.mjs";
 
 /**
  * A specialized application used to modify actor traits.
@@ -8,7 +9,7 @@ import * as Trait from "../../documents/actor/trait.mjs";
  * @param {object} [options={}]
  * @param {boolean} [options.allowCustom=true]  Support user custom trait entries.
  */
-export default class TraitSelector extends DocumentSheet {
+export default class TraitSelector extends BaseConfigSheet {
   constructor(actor, trait, options) {
     if ( !CONFIG.DND5E.traits[trait] ) throw new Error(
       `Cannot instantiate TraitSelector with a trait not defined in CONFIG.DND5E.traits: ${trait}.`
@@ -85,6 +86,21 @@ export default class TraitSelector extends DocumentSheet {
     for ( const checkbox of html[0].querySelectorAll("input[type='checkbox']") ) {
       if ( checkbox.checked ) this._onToggleCategory(checkbox);
     }
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  _getActorOverrides() {
+    const overrides = super._getActorOverrides();
+    const path = `system.${Trait.actorKeyPath(this.trait)}.value`;
+    const src = new Set(foundry.utils.getProperty(this.document._source, path));
+    const current = foundry.utils.getProperty(this.document, path);
+    const delta = current.difference(src);
+    for ( const choice of delta ) {
+      overrides.push(`choices.${choice}`);
+    }
+    return overrides;
   }
 
   /* -------------------------------------------- */

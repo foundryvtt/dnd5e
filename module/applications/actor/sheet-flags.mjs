@@ -1,7 +1,9 @@
+import BaseConfigSheet from "./base-config.mjs";
+
 /**
  * An application class which provides advanced configuration for special character flags which modify an Actor.
  */
-export default class ActorSheetFlags extends DocumentSheet {
+export default class ActorSheetFlags extends BaseConfigSheet {
 
   /** @inheritDoc */
   static get defaultOptions() {

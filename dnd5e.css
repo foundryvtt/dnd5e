@@ -950,6 +950,10 @@ h5 {
   color: #b5b3a4;
   font-size: 12px;
 }
+.dnd5e.sheet.actor .proficiency-toggle.disabled {
+  cursor: default;
+  text-shadow: none;
+}
 .dnd5e.sheet.actor .proficient .proficiency-toggle {
   color: #4b4a44;
 }

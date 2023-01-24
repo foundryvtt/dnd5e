@@ -1,7 +1,9 @@
+import BaseConfigSheet from "./base-config.mjs";
+
 /**
  * A form for configuring actor hit points and bonuses.
  */
-export default class ActorHitPointsConfig extends DocumentSheet {
+export default class ActorHitPointsConfig extends BaseConfigSheet {
   constructor(...args) {
     super(...args);
 
@@ -41,6 +43,13 @@ export default class ActorHitPointsConfig extends DocumentSheet {
       source: this.clone.toObject().system.attributes.hp,
       isCharacter: this.document.type === "character"
     };
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  _getActorOverrides() {
+    return Object.keys(foundry.utils.flattenObject(this.object.overrides?.system?.attributes || {}));
   }
 
   /* -------------------------------------------- */

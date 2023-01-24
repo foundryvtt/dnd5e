@@ -1,3 +1,5 @@
+import BaseConfigSheet from "./base-config.mjs";
+
 /**
  * A simple form to set skill configuration for a given skill.
  *
@@ -5,7 +7,7 @@
  * @param {ApplicationOptions} options  Additional application configuration options.
  * @param {string} skillId              The skill key as defined in CONFIG.DND5E.skills.
  */
-export default class ActorSkillConfig extends DocumentSheet {
+export default class ActorSkillConfig extends BaseConfigSheet {
   constructor(actor, options, skillId) {
     super(actor, options);
     this._skillId = skillId;

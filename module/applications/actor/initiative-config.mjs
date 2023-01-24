@@ -1,7 +1,9 @@
+import BaseConfigSheet from "./base-config.mjs";
+
 /**
  * A simple sub-application of the ActorSheet which is used to configure properties related to initiative.
  */
-export default class ActorInitiativeConfig extends DocumentSheet {
+export default class ActorInitiativeConfig extends BaseConfigSheet {
 
   /** @override */
   static get defaultOptions() {

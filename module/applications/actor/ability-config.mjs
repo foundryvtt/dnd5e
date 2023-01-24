@@ -1,3 +1,5 @@
+import BaseConfigSheet from "./base-config.mjs";
+
 /**
  * A simple form to set save throw configuration for a given ability score.
  *
@@ -5,7 +7,7 @@
  * @param {ApplicationOptions} options  Additional application configuration options.
  * @param {string} abilityId            The ability key as defined in CONFIG.DND5E.abilities.
  */
-export default class ActorAbilityConfig extends DocumentSheet {
+export default class ActorAbilityConfig extends BaseConfigSheet {
   constructor(actor, options, abilityId) {
     super(actor, options);
     this._abilityId = abilityId;

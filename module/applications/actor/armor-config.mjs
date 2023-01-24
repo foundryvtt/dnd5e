@@ -1,7 +1,9 @@
+import BaseConfigSheet from "./base-config.mjs";
+
 /**
  * Interface for managing a character's armor calculation.
  */
-export default class ActorArmorConfig extends DocumentSheet {
+export default class ActorArmorConfig extends BaseConfigSheet {
   constructor(...args) {
     super(...args);
 
@@ -54,6 +56,13 @@ export default class ActorArmorConfig extends DocumentSheet {
       formula: ac.calc === "custom" ? ac.formula : cfg.formula,
       formulaDisabled: ac.calc !== "custom"
     };
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  _getActorOverrides() {
+    return Object.keys(foundry.utils.flattenObject(this.object.overrides?.system?.attributes || {}));
   }
 
   /* -------------------------------------------- */
