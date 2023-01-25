@@ -728,6 +728,9 @@ h5 {
   /*  Skills                                   */
   /* ----------------------------------------- */
   /* ----------------------------------------- */
+  /*  Tools                                    */
+  /* ----------------------------------------- */
+  /* ----------------------------------------- */
   /*  Statuses                                 */
   /* ----------------------------------------- */
   /* ----------------------------------------- */
@@ -1010,6 +1013,25 @@ h5 {
   flex: 0 0 26px;
   text-align: center;
   color: #7a7971;
+}
+.dnd5e.sheet.actor .tag.tool {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 1px 4px;
+}
+.dnd5e.sheet.actor .tag.tool a:is(.proficiency-toggle, .config-button) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 13px;
+  height: 13px;
+}
+.dnd5e.sheet.actor .tag.tool a:is(.proficiency-toggle, .config-button) > i {
+  margin: 0;
+}
+.dnd5e.sheet.actor .tag.tool h4 {
+  margin: 0;
 }
 .dnd5e.sheet.actor .counters {
   flex: none;
