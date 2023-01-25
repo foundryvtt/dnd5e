@@ -200,7 +200,7 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  activateListeners(html) {
+  async activateListeners(html) {
     super.activateListeners(html);
     if ( !this.isEditable ) return;
     html.find(".level-selector").change(this._onLevelChange.bind(this));
@@ -209,6 +209,7 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
     html.find(".long-rest").click(this._onLongRest.bind(this));
     html.find(".rollable[data-action]").click(this._onSheetAction.bind(this));
 
+    // Start resource link integration
     const { resourceOverrides } = this.actor._getResourceOverrides();
     const sheetResources = Object.keys(CONFIG.DND5E.resourceOptions);
 
@@ -256,6 +257,53 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
           .prop("title", game.i18n.localize("DND5E.resourceLinkDisabledItemHelperText"));
       }
     }
+
+    const boxAddResource = html[0].querySelector("form > .sheet-body > .tab.attributes.flexrow > .center-pane.flexcol > .attributes.flexrow");
+    const divAddResource = document.createElement("DIV");
+    const data = Object.entries(this.object.system.resources ?? {});
+    for (const [id, vals] of data) {
+      const inner = await this._addResource(id, vals);
+      if (!inner) {
+        continue;
+      }
+      divAddResource.innerHTML = inner;
+      const res = boxAddResource.appendChild(divAddResource.firstElementChild);
+      res.querySelector("[data-id]").addEventListener("click", async (event) => {
+        if(Object.keys(CONFIG.DND5E.resourceOptions).includes(event.currentTarget.dataset.id)){
+            // Can't delete original resources
+            return;
+        }
+        delete this.object.system.resources[event.currentTarget.dataset.id];
+      });
+    }
+
+    divAddResource.innerHTML = `<a class="addar add-resource" data-tooltip="DND5E.addResource"><i class="fa-solid fa-plus"></i></a>`;
+    const addResource = boxAddResource.appendChild(divAddResource.firstElementChild);
+    addResource.addEventListener("click", async (event) => {
+       this.object.system.resources[foundry.utils.randomID()] = {};
+    });
+  }
+
+  _addResource(key, data) {
+    if (!key) {
+        return false;
+    }
+
+    const name = this.system.resources[key];
+    const newName = name ? name : game.i18n.localize("DND5E.resource");
+
+    const props = {
+      label: foundry.utils.getProperty(data, "label") ?? "",
+      sr: !!foundry.utils.getProperty(data, "sr"),
+      lr: !!foundry.utils.getProperty(data, "lr"),
+      value: foundry.utils.getProperty(data, "value") ?? "",
+      max: foundry.utils.getProperty(data, "max") ?? "",
+      name: newName,
+      id: key
+    };
+
+    const template = "systems/dnd5e/templates/actors/actor-add-new-resource.hbs";
+    return renderTemplate(template, props);
   }
 
   /* -------------------------------------------- */

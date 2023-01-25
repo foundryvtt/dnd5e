@@ -1319,6 +1319,27 @@ h5 {
 .dnd5e.sheet.actor .editor {
   padding: 0 8px;
 }
+.dnd5e.sheet.actor .addar.attribute.resource {
+  position: relative;
+}
+.dnd5e.sheet.actor .addar.attribute.resource a.delete-resource.config-button {
+  position: absolute;
+  padding: 4px;
+  right: 0;
+  top: 0;
+  display: none;
+}
+.dnd5e.sheet.actor .addar.attribute.resource:hover a.delete-resource.config-button {
+  display: block;
+}
+.dnd5e.sheet.actor a.addar.add-resource {
+  max-width: fit-content;
+  display: flex;
+  align-items: center;
+}
+.dnd5e.sheet.actor ul.attributes li.attribute.resource {
+  min-width: 115px;
+}
 #actor-flags .window-content {
   overflow-y: hidden;
 }

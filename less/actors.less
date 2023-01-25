@@ -710,6 +710,36 @@
   .editor {
     padding: 0 8px;
   }
+
+
+  /* ----------------------------------------- */
+  /*  Resource Link                            */
+  /* ----------------------------------------- */
+
+  .addar.attribute.resource {
+	position: relative;
+	a.delete-resource.config-button {
+		position: absolute;
+		padding: 4px;
+		right: 0;
+		top: 0;
+		display: none;
+	}
+	&:hover {
+		a.delete-resource.config-button {
+			display: block;
+		}
+	}
+  }
+  a.addar.add-resource {
+	max-width: fit-content;
+	display: flex;
+	align-items: center;
+  }
+
+  ul.attributes li.attribute.resource {
+    min-width: 115px;
+  }
 }
 
 #actor-flags {
@@ -727,3 +757,4 @@
     scrollbar-width: thin;
   }
 }
+

@@ -1,0 +1,19 @@
+<li class="addar attribute resource">
+  <h4 class="attribute-name box-title">
+    <input name="{{name}}.label" type="text" value="{{label}}" placeholder="{{localize 'DND5E.resource'}}">
+  </h4>
+  <a class="delete-resource config-button" data-id="{{id}}" data-tooltip="DND5E.deleteResource">
+    <i class="fa-solid fa-trash"></i>
+  </a>
+  <div class="attribute-value">
+    <label class="recharge checkbox flexcol">
+      <span>SR</span><input name="{{name}}.sr" type="checkbox" {{checked sr}}>
+    </label>
+    <input type="text" name="{{name}}.value" value="{{value}}" placeholder="0" data-dtype="Number">
+    <span class="sep"> / </span>
+    <input type="text" name="{{name}}.max" value="{{max}}" placeholder="0" data-dtype="Number">
+    <label class="recharge checkbox flexcol">
+      <span>LR</span><input name="{{name}}.lr" type="checkbox" {{checked lr}}>
+    </label>
+  </div>
+</li>
