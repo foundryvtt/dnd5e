@@ -14,23 +14,31 @@ export default class ItemGrantFlow extends AdvancementFlow {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
-  async getData() {
+  /**
+   * Produce the rendering context for this flow.
+   * @returns {object}
+   */
+  async getContext() {
     const config = this.advancement.configuration.items;
     const added = this.retainedData?.items.map(i => foundry.utils.getProperty(i, "flags.dnd5e.sourceId"))
       ?? this.advancement.value.added;
     const checked = new Set(Object.values(added ?? {}));
-
-    const items = await Promise.all(config.map(fromUuid));
-    return foundry.utils.mergeObject(super.getData(), {
+    return {
       optional: this.advancement.configuration.optional,
-      items: items.reduce((arr, item) => {
+      items: (await Promise.all(config.map(fromUuid))).reduce((arr, item) => {
         if ( !item ) return arr;
         item.checked = added ? checked.has(item.uuid) : true;
         arr.push(item);
         return arr;
       }, [])
-    });
+    };
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  async getData(options={}) {
+    return foundry.utils.mergeObject(super.getData(options), await this.getContext());
   }
 
   /* -------------------------------------------- */
