@@ -485,7 +485,7 @@ export default class Item5e extends Item {
     // Action usage
     if ( "actionType" in this.system ) {
       this.labels.abilityCheck = game.i18n.format("DND5E.AbilityPromptTitle", {
-        ability: CONFIG.DND5E.abilities[this.system.ability]
+        ability: CONFIG.DND5E.abilities[this.system.ability]?.label ?? ""
       });
 
       // Saving throws
@@ -552,7 +552,7 @@ export default class Item5e extends Item {
     }
 
     // Update labels
-    const abl = CONFIG.DND5E.abilities[save.ability] ?? "";
+    const abl = CONFIG.DND5E.abilities[save.ability]?.label ?? "";
     this.labels.save = game.i18n.format("DND5E.SaveDC", {dc: save.dc || "", ability: abl});
     return save.dc;
   }
@@ -1318,7 +1318,7 @@ export default class Item5e extends Item {
    */
   _toolChatData(data, labels, props) {
     props.push(
-      CONFIG.DND5E.abilities[data.ability] || null,
+      CONFIG.DND5E.abilities[data.ability]?.label || null,
       CONFIG.DND5E.proficiencyLevels[data.proficient || 0]
     );
   }

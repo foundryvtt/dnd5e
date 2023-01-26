@@ -229,22 +229,16 @@ export default class Actor5e extends Actor {
   _prepareBaseAbilities() {
     if ( !("abilities" in this.system) ) return;
     const abilities = {};
-    for ( const key of Object.keys(CONFIG.DND5E.abilities) ) {
+    for ( const [key, config] of Object.entries(CONFIG.DND5E.abilities) ) {
       abilities[key] = this.system.abilities[key];
       if ( !abilities[key] ) {
         abilities[key] = foundry.utils.deepClone(game.system.template.Actor.templates.common.abilities.cha);
 
-        // Honor: Charisma for NPC, 0 for vehicles
-        if ( key === "hon" ) {
-          if ( this.type === "vehicle" ) abilities[key].value = 0;
-          else if ( this.type === "npc" ) abilities[key].value = this.system.abilities.cha?.value ?? 10;
+        let defaultValue = config.defaults?.[this.type] ?? 10;
+        if ( typeof defaultValue === "string" ) {
+          defaultValue = abilities[defaultValue].value ?? this.system.abilities[defaultValue] ?? 10;
         }
-
-        // Sanity: Wisdom for NPC, 0 for vehicles
-        else if ( key === "san" ) {
-          if ( this.type === "vehicle" ) abilities[key].value = 0;
-          else if ( this.type === "npc" ) abilities[key].value = this.system.abilities.wis?.value ?? 10;
-        }
+        abilities[key].value = defaultValue;
       }
     }
     this.system.abilities = abilities;
@@ -1118,7 +1112,7 @@ export default class Actor5e extends Actor {
    * @param {object} options      Options which configure how ability tests or saving throws are rolled
    */
   rollAbility(abilityId, options={}) {
-    const label = CONFIG.DND5E.abilities[abilityId] ?? "";
+    const label = CONFIG.DND5E.abilities[abilityId]?.label ?? "";
     new Dialog({
       title: `${game.i18n.format("DND5E.AbilityPromptTitle", {ability: label})}: ${this.name}`,
       content: `<p>${game.i18n.format("DND5E.AbilityPromptText", {ability: label})}</p>`,
@@ -1145,7 +1139,7 @@ export default class Actor5e extends Actor {
    * @returns {Promise<D20Roll>}  A Promise which resolves to the created Roll instance
    */
   async rollAbilityTest(abilityId, options={}) {
-    const label = CONFIG.DND5E.abilities[abilityId] ?? "";
+    const label = CONFIG.DND5E.abilities[abilityId]?.label ?? "";
     const abl = this.system.abilities[abilityId];
     const globalBonuses = this.system.bonuses?.abilities ?? {};
     const parts = [];
@@ -1224,7 +1218,7 @@ export default class Actor5e extends Actor {
    * @returns {Promise<D20Roll>}  A Promise which resolves to the created Roll instance
    */
   async rollAbilitySave(abilityId, options={}) {
-    const label = CONFIG.DND5E.abilities[abilityId] ?? "";
+    const label = CONFIG.DND5E.abilities[abilityId]?.label ?? "";
     const abl = this.system.abilities[abilityId];
     const globalBonuses = this.system.bonuses?.abilities ?? {};
     const parts = [];
@@ -2308,8 +2302,9 @@ export default class Actor5e extends Actor {
       for ( let k of Object.keys(abilities) ) {
         const oa = o.system.abilities[k];
         const prof = abilities[k].proficient;
-        if ( keepPhysical && ["str", "dex", "con"].includes(k) ) abilities[k] = oa;
-        else if ( keepMental && ["int", "wis", "cha"].includes(k) ) abilities[k] = oa;
+        const type = CONFIG.DND5E.abilities[k]?.type;
+        if ( keepPhysical && (type === "physical") ) abilities[k] = oa;
+        else if ( keepMental && (type === "mental") ) abilities[k] = oa;
         if ( keepSaves ) abilities[k].proficient = oa.proficient;
         else if ( mergeSaves ) abilities[k].proficient = Math.max(prof, oa.proficient);
       }

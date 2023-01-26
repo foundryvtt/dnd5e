@@ -104,14 +104,8 @@ Hooks.once("init", function() {
   game.dnd5e.moduleArt = new ModuleArt();
 
   // Remove honor & sanity from configuration if they aren't enabled
-  if ( !game.settings.get("dnd5e", "honorScore") ) {
-    delete DND5E.abilities.hon;
-    delete DND5E.abilityAbbreviations.hon;
-  }
-  if ( !game.settings.get("dnd5e", "sanityScore") ) {
-    delete DND5E.abilities.san;
-    delete DND5E.abilityAbbreviations.san;
-  }
+  if ( !game.settings.get("dnd5e", "honorScore") ) delete DND5E.abilities.hon;
+  if ( !game.settings.get("dnd5e", "sanityScore") ) delete DND5E.abilities.san;
 
   // Patch Core Functions
   Combatant.prototype.getInitiativeRoll = documents.combat.getInitiativeRoll;
