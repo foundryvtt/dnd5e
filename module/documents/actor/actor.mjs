@@ -2302,8 +2302,9 @@ export default class Actor5e extends Actor {
       for ( let k of Object.keys(abilities) ) {
         const oa = o.system.abilities[k];
         const prof = abilities[k].proficient;
-        if ( keepPhysical && (CONFIG.DND5E.abilities[k]?.type === "physical") ) abilities[k] = oa;
-        else if ( keepMental && (CONFIG.DND5E.abilities[k]?.type === "mental") ) abilities[k] = oa;
+        const type = CONFIG.DND5E.abilities[k]?.type;
+        if ( keepPhysical && (type === "physical") ) abilities[k] = oa;
+        else if ( keepMental && (type === "mental") ) abilities[k] = oa;
         if ( keepSaves ) abilities[k].proficient = oa.proficient;
         else if ( mergeSaves ) abilities[k].proficient = Math.max(prof, oa.proficient);
       }
