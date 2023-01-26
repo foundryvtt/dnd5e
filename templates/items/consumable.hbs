@@ -62,6 +62,7 @@
                 </select>
             </div>
 
+            {{!-- Consumable Status --}}
             <div class="form-group stacked">
                 <label>{{ localize "DND5E.ItemConsumableStatus" }}</label>
                 <label class="checkbox">
@@ -71,6 +72,18 @@
                     <input type="checkbox" name="system.identified" {{checked system.identified}}/> {{ localize "DND5E.Identified" }}
                 </label>
             </div>
+
+            {{#if (eq system.consumableType "ammo")}}
+            {{!-- Consumable Properties --}}
+            <div class="form-group stacked weapon-properties">
+                <label>{{ localize "DND5E.ItemAmmoProperties" }}</label>
+                {{#each config.physicalWeaponProperties as |name prop|}}
+                <label class="checkbox">
+                    <input type="checkbox" name="system.properties.{{prop}}" {{checked (lookup ../system.properties prop)}}/> {{ name }}
+                </label>
+                {{/each}}
+            </div>
+            {{/if}}
 
             <h3 class="form-header">{{ localize "DND5E.ItemConsumableUsage" }}</h3>
 
