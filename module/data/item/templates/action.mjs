@@ -217,7 +217,7 @@ export default class ActionTemplate extends foundry.abstract.DataModel {
    * @type {boolean}
    */
   get hasDamage() {
-    return this.damage.parts.length > 0;
+    return this.actionType && (this.damage.parts.length > 0);
   }
 
   /* -------------------------------------------- */
@@ -227,7 +227,7 @@ export default class ActionTemplate extends foundry.abstract.DataModel {
    * @type {boolean}
    */
   get hasSave() {
-    return !!(this.save.ability && this.save.scaling);
+    return this.actionType && !!(this.save.ability && this.save.scaling);
   }
 
   /* -------------------------------------------- */
@@ -247,7 +247,7 @@ export default class ActionTemplate extends foundry.abstract.DataModel {
    * @type {boolean}
    */
   get isVersatile() {
-    return !!(this.hasDamage && this.damage.versatile);
+    return this.actionType && !!(this.hasDamage && this.damage.versatile);
   }
 
 }
