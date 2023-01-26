@@ -37,11 +37,11 @@
 <div class="form-group input-select-select">
     <label>{{ localize "DND5E.Target" }}</label>
     <div class="form-fields">
-        {{#if hasScalarTarget}}
+        {{#if system.hasScalarTarget}}
             <input type="number" step="any" name="system.target.value"
                    value="{{system.target.value}}" placeholder="&mdash;">
         {{/if}}
-        {{#if item.hasAreaTarget}}
+        {{#if system.hasAreaTarget}}
             <select name="system.target.units" data-tooltip="DND5E.TargetUnits">
                 {{selectOptions config.movementUnits selected=system.target.units blank=""}}
             </select>
@@ -75,7 +75,7 @@
 <div class="form-group input-select">
     <label>{{ localize "DND5E.Range" }}</label>
     <div class="form-fields">
-        {{#if (lookup config.movementUnits system.range.units)}}
+        {{#if system.hasScalarRange}}
             <input type="number" step="any" name="system.range.value" value="{{system.range.value}}"
                    placeholder="{{localize 'DND5E.Normal'}}" data-tooltip="DND5E.RangeNormal">
             <span class="sep">/</span>
@@ -98,7 +98,7 @@
 <div class="form-group input-select">
     <label>{{ localize "DND5E.Duration" }}</label>
     <div class="form-fields">
-        {{#if (lookup config.scalarTimePeriods system.duration.units)}}
+        {{#if system.hasScalarDuration}}
             <input type="text" name="system.duration.value" value="{{source.duration.value}}"
                    placeholder="&mdash;" data-tooltip="DND5E.DurationValue" data-formula-editor>
         {{/if}}

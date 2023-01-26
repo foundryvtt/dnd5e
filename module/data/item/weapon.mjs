@@ -108,4 +108,15 @@ export default class WeaponData extends SystemDataModel.mixin(
   get _typeCriticalThreshold() {
     return this.parent?.actor?.flags.dnd5e?.weaponCriticalThreshold ?? Infinity;
   }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Is this item a separate large object like a siege engine or vehicle component that is
+   * usually mounted on fixtures rather than equipped, and has its own AC and HP?
+   * @type {boolean}
+   */
+  get isMountable() {
+    return this.weaponType === "siege";
+  }
 }

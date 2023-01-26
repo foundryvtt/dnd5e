@@ -106,4 +106,15 @@ export default class EquipmentData extends SystemDataModel.mixin(
     return this.armor.type in CONFIG.DND5E.armorTypes;
   }
 
+  /* -------------------------------------------- */
+
+  /**
+   * Is this item a separate large object like a siege engine or vehicle component that is
+   * usually mounted on fixtures rather than equipped, and has its own AC and HP?
+   * @type {boolean}
+   */
+  get isMountable() {
+    return this.armor.type === "vehicle";
+  }
+
 }

@@ -174,6 +174,19 @@ export default class Item5e extends Item {
   /* -------------------------------------------- */
 
   /**
+   * Is this item a separate large object like a siege engine or vehicle component that is
+   * usually mounted on fixtures rather than equipped, and has its own AC and HP?
+   * @type {boolean}
+   * @see {@link EquipmentData#isMountable}
+   * @see {@link WeaponData#isMountable}
+   */
+  get isMountable() {
+    return this.system.isMountable ?? false;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Is this class item the original class for the containing actor? If the item is not a class or it is not
    * embedded in an actor then this will return `null`.
    * @type {boolean|null}

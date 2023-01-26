@@ -216,6 +216,36 @@ export default class ActivatedEffectTemplate extends foundry.abstract.DataModel 
   /* -------------------------------------------- */
 
   /**
+   * Does the Item duration accept an associated numeric value or formula?
+   * @type {boolean}
+   */
+  get hasScalarDuration() {
+    return this.duration.units in CONFIG.DND5E.scalarTimePeriods;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Does the Item range accept an associated numeric value?
+   * @type {boolean}
+   */
+  get hasScalarRange() {
+    return this.range.units in CONFIG.DND5E.movementUnits;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Does the Item target accept an associated numeric value?
+   * @type {boolean}
+   */
+  get hasScalarTarget() {
+    return ![null, "", "self"].includes(this.target.type);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Does the Item have a target?
    * @type {boolean}
    */
