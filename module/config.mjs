@@ -296,12 +296,24 @@ preLocalize("scalarTimePeriods");
 /* -------------------------------------------- */
 
 /**
+ * Time periods for spells that don't have a defined ending.
+ * @enum {string}
+ */
+DND5E.permanentTimePeriods = {
+  disp: "DND5E.TimeDisp",
+  dstr: "DND5E.TimeDispTrig",
+  perm: "DND5E.TimePerm"
+};
+preLocalize("permanentTimePeriods");
+
+/* -------------------------------------------- */
+
+/**
  * Time periods that don't accept a numeric value.
  * @enum {string}
  */
 DND5E.specialTimePeriods = {
   inst: "DND5E.TimeInst",
-  perm: "DND5E.TimePerm",
   spec: "DND5E.Special"
 };
 preLocalize("specialTimePeriods");
@@ -314,6 +326,7 @@ preLocalize("specialTimePeriods");
  */
 DND5E.timePeriods = {
   ...DND5E.specialTimePeriods,
+  ...DND5E.permanentTimePeriods,
   ...DND5E.scalarTimePeriods
 };
 preLocalize("timePeriods");

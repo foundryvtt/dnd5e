@@ -105,10 +105,13 @@
         <select name="system.duration.units" data-tooltip="DND5E.DurationType">
             {{#select system.duration.units}}
                 <option value="">{{localize "DND5E.None"}}</option>
-                {{selectOptions config.specialTimePeriods}}
                 <optgroup label="{{localize 'DND5E.DurationTime'}}">
                     {{selectOptions config.scalarTimePeriods}}
                 </optgroup>
+                <optgroup label="{{localize 'DND5E.DurationPermanent'}}">
+                    {{selectOptions config.permanentTimePeriods}}
+                </optgroup>
+                {{selectOptions config.specialTimePeriods}}
             {{/select}}
         </select>
     </div>
