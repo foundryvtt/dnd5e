@@ -84,6 +84,9 @@ export default class ItemSheet5e extends ItemSheet {
       baseItems: await this._getItemBaseTypes(),
       isPhysical: item.system.hasOwnProperty("quantity"),
 
+      // Activation Details
+      hasScalarTarget: ![null, "", "self"].includes(item.system.target.type),
+
       // Action Details
       hasAttackRoll: item.hasAttack,
       isHealing: item.system.actionType === "heal",

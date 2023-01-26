@@ -279,20 +279,55 @@ DND5E.toolIds = {
 /* -------------------------------------------- */
 
 /**
- * The various lengths of time over which effects can occur.
+ * Time periods that accept a numeric value.
  * @enum {string}
  */
-DND5E.timePeriods = {
-  inst: "DND5E.TimeInst",
+DND5E.scalarTimePeriods = {
   turn: "DND5E.TimeTurn",
   round: "DND5E.TimeRound",
   minute: "DND5E.TimeMinute",
   hour: "DND5E.TimeHour",
   day: "DND5E.TimeDay",
   month: "DND5E.TimeMonth",
-  year: "DND5E.TimeYear",
-  perm: "DND5E.TimePerm",
+  year: "DND5E.TimeYear"
+};
+preLocalize("scalarTimePeriods");
+
+/* -------------------------------------------- */
+
+/**
+ * Time periods for spells that don't have a defined ending.
+ * @enum {string}
+ */
+DND5E.permanentTimePeriods = {
+  disp: "DND5E.TimeDisp",
+  dstr: "DND5E.TimeDispTrig",
+  perm: "DND5E.TimePerm"
+};
+preLocalize("permanentTimePeriods");
+
+/* -------------------------------------------- */
+
+/**
+ * Time periods that don't accept a numeric value.
+ * @enum {string}
+ */
+DND5E.specialTimePeriods = {
+  inst: "DND5E.TimeInst",
   spec: "DND5E.Special"
+};
+preLocalize("specialTimePeriods");
+
+/* -------------------------------------------- */
+
+/**
+ * The various lengths of time over which effects can occur.
+ * @enum {string}
+ */
+DND5E.timePeriods = {
+  ...DND5E.specialTimePeriods,
+  ...DND5E.permanentTimePeriods,
+  ...DND5E.scalarTimePeriods
 };
 preLocalize("timePeriods");
 
