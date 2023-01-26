@@ -79,7 +79,7 @@ export default class ActivatedEffectTemplate extends foundry.abstract.DataModel 
         }),
         max: new FormulaField({required: true, deterministic: true, label: "DND5E.LimitedUsesMax"}),
         per: new foundry.data.fields.StringField({
-          required: true, nullable: true, initial: null, label: "DND5E.LimitedUsesPer"
+          required: true, nullable: true, blank: false, initial: null, label: "DND5E.LimitedUsesPer"
         }),
         recovery: new FormulaField({required: true, label: "DND5E.RecoveryFormula"})
       }, extraSchema), options);
