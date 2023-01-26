@@ -1719,7 +1719,11 @@ export default class Item5e extends Item {
    */
   async rollToolCheck(options={}) {
     if ( this.type !== "tool" ) throw new Error("Wrong item type!");
-    return this.actor?.rollToolCheck(this.system.baseItem, {ability: this.system.ability, ...options});
+    return this.actor?.rollToolCheck(this.system.baseItem, {
+      ability: this.system.ability,
+      bonus: this.system.bonus,
+      ...options
+    });
   }
 
   /* -------------------------------------------- */

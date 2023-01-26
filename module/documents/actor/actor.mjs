@@ -1177,9 +1177,12 @@ export default class Actor5e extends Actor {
     else data.abilityCheckBonus = 0;
 
     // Tool-specific check bonus.
-    if ( tool?.bonuses.check ) {
+    if ( tool?.bonuses.check || options.bonus ) {
       parts.push("@toolBonus");
-      data.toolBonus = Roll.replaceFormulaData(tool.bonuses.check, data);
+      const bonus = [];
+      if ( tool?.bonuses.check ) bonus.push(Roll.replaceFormulaData(tool.bonuses.check, data));
+      if ( options.bonus ) bonus.push(Roll.replaceFormulaData(options.bonus, data));
+      data.toolBonus = bonus.join(" + ");
     }
 
     const flavor = game.i18n.format("DND5E.ToolPromptTitle", {tool: Trait.keyLabel("tool", toolId) ?? ""});

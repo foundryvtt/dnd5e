@@ -62,6 +62,13 @@ export default class ProficiencyConfig extends BaseConfigSheet {
   /* -------------------------------------------- */
 
   /** @inheritdoc */
+  get id() {
+    return `ProficiencyConfig-${this.document.documentName}-${this.document.id}-${this.options.key}`;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
   getData(options={}) {
     return {
       abilities: CONFIG.DND5E.abilities,
