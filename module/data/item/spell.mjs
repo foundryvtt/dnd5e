@@ -68,6 +68,8 @@ export default class SpellData extends SystemDataModel.mixin(
   }
 
   /* -------------------------------------------- */
+  /*  Migrations                                  */
+  /* -------------------------------------------- */
 
   /** @inheritdoc */
   static migrateData(source) {
@@ -99,4 +101,21 @@ export default class SpellData extends SystemDataModel.mixin(
     if ( !("scaling" in source) ) return;
     if ( (source.scaling.mode === "") || (source.scaling.mode === null) ) source.scaling.mode = "none";
   }
+
+  /* -------------------------------------------- */
+  /*  Getters                                     */
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  get _typeAbilityMod() {
+    return this.parent?.actor?.system.attributes.spellcasting || "int";
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  get _typeCriticalThreshold() {
+    return this.parent?.actor?.flags.dnd5e?.spellCriticalThreshold ?? Infinity;
+  }
+
 }

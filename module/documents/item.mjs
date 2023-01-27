@@ -23,57 +23,32 @@ export default class Item5e extends Item {
   /**
    * Which ability score modifier is used by this item?
    * @type {string|null}
+   * @see {@link ActionTemplate#abilityMod}
    */
   get abilityMod() {
-
-    // Case 1 - defined directly by the item
-    if ( this.system.ability ) return this.system.ability;
-
-    // Case 2 - inferred from a parent actor
-    if ( this.actor && ("abilities" in this.actor.system) ) {
-      const abilities = this.actor.system.abilities;
-      const spellcasting = this.actor.system.attributes.spellcasting;
-
-      // Special rules per item type
-      switch ( this.type ) {
-        case "consumable":
-          if ( this.system.consumableType === "scroll" ) return spellcasting || "int";
-          break;
-        case "spell":
-          return spellcasting || "int";
-        case "tool":
-          return "int";
-        case "weapon":
-          // Finesse weapons - Str or Dex (PHB pg. 147)
-          if ( this.system.properties.fin === true ) {
-            return abilities.dex.mod >= abilities.str.mod ? "dex" : "str";
-          }
-          // Ranged weapons - Dex (PH p.194)
-          if ( ["simpleR", "martialR"].includes(this.system.weaponType) ) return "dex";
-          break;
-      }
-
-      // If a specific attack type is defined
-      if ( this.hasAttack ) return {
-        mwak: "str",
-        rwak: "dex",
-        msak: spellcasting || "int",
-        rsak: spellcasting || "int"
-      }[this.system.actionType];
-    }
-
-    // Case 3 - unknown
-    return null;
+    return this.system.abilityMod ?? null;
   }
 
-  /* -------------------------------------------- */
+  /* --------------------------------------------- */
 
   /**
-   * Return an item's identifier.
-   * @type {string}
+   * What is the critical hit threshold for this item, if applicable?
+   * @type {number|null}
+   * @see {@link ActionTemplate#criticalThreshold}
    */
-  get identifier() {
-    return this.system.identifier || this.name.slugify({strict: true});
+  get criticalThreshold() {
+    return this.system.criticalThreshold ?? null;
+  }
+
+  /* --------------------------------------------- */
+
+  /**
+   * Does the Item implement an ability check as part of its usage?
+   * @type {boolean}
+   * @see {@link ActionTemplate#hasAbilityCheck}
+   */
+  get hasAbilityCheck() {
+    return this.system.hasAbilityCheck ?? false;
   }
 
   /* -------------------------------------------- */
@@ -89,11 +64,23 @@ export default class Item5e extends Item {
   /* -------------------------------------------- */
 
   /**
+   * Does the Item have an area of effect target?
+   * @type {boolean}
+   * @see {@link ActivatedEffectTemplate#hasAreaTarget}
+   */
+  get hasAreaTarget() {
+    return this.system.hasAreaTarget ?? false;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Does the Item implement an attack roll as part of its usage?
    * @type {boolean}
+   * @see {@link ActionTemplate#hasAttack}
    */
   get hasAttack() {
-    return ["mwak", "rwak", "msak", "rsak"].includes(this.system.actionType);
+    return this.system.hasAttack ?? false;
   }
 
   /* -------------------------------------------- */
@@ -101,19 +88,76 @@ export default class Item5e extends Item {
   /**
    * Does the Item implement a damage roll as part of its usage?
    * @type {boolean}
+   * @see {@link ActionTemplate#hasDamage}
    */
   get hasDamage() {
-    return !!(this.system.damage && this.system.damage.parts.length);
+    return this.system.hasDamage ?? false;
   }
 
   /* -------------------------------------------- */
 
   /**
-   * Does the Item implement a versatile damage roll as part of its usage?
+   * Does the Item target one or more distinct targets?
    * @type {boolean}
+   * @see {@link ActivatedEffectTemplate#hasIndividualTarget}
    */
-  get isVersatile() {
-    return !!(this.hasDamage && this.system.damage.versatile);
+  get hasIndividualTarget() {
+    return this.system.hasIndividualTarget ?? false;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Is this Item limited in its ability to be used by charges or by recharge?
+   * @type {boolean}
+   * @see {@link ActivatedEffectTemplate#hasLimitedUses}
+   * @see {@link FeatData#hasLimitedUses}
+   */
+  get hasLimitedUses() {
+    return this.system.hasLimitedUses ?? false;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Does the Item implement a saving throw as part of its usage?
+   * @type {boolean}
+   * @see {@link ActionTemplate#hasSave}
+   */
+  get hasSave() {
+    return this.system.hasSave ?? false;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Does the Item have a target?
+   * @type {boolean}
+   * @see {@link ActivatedEffectTemplate#hasTarget}
+   */
+  get hasTarget() {
+    return this.system.hasTarget ?? false;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Return an item's identifier.
+   * @type {string}
+   */
+  get identifier() {
+    return this.system.identifier || this.name.slugify({strict: true});
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Is this item any of the armor subtypes?
+   * @type {boolean}
+   * @see {@link EquipmentTemplate#isArmor}
+   */
+  get isArmor() {
+    return this.system.isArmor ?? false;
   }
 
   /* -------------------------------------------- */
@@ -121,9 +165,23 @@ export default class Item5e extends Item {
   /**
    * Does the item provide an amount of healing instead of conventional damage?
    * @type {boolean}
+   * @see {@link ActionTemplate#isHealing}
    */
   get isHealing() {
-    return (this.system.actionType === "heal") && this.system.damage.parts.length;
+    return this.system.isHealing ?? false;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Is this item a separate large object like a siege engine or vehicle component that is
+   * usually mounted on fixtures rather than equipped, and has its own AC and HP?
+   * @type {boolean}
+   * @see {@link EquipmentData#isMountable}
+   * @see {@link WeaponData#isMountable}
+   */
+  get isMountable() {
+    return this.system.isMountable ?? false;
   }
 
   /* -------------------------------------------- */
@@ -136,6 +194,17 @@ export default class Item5e extends Item {
   get isOriginalClass() {
     if ( this.type !== "class" || !this.isEmbedded ) return null;
     return this.id === this.parent.system.details.originalClass;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Does the Item implement a versatile damage roll as part of its usage?
+   * @type {boolean}
+   * @see {@link ActionTemplate#isVersatile}
+   */
+  get isVersatile() {
+    return this.system.isVersatile ?? false;
   }
 
   /* -------------------------------------------- */
@@ -161,71 +230,6 @@ export default class Item5e extends Item {
     const items = this.parent.items;
     const cid = this.identifier;
     return this._classLink ??= items.find(i => (i.type === "subclass") && (i.system.classIdentifier === cid));
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Does the Item implement a saving throw as part of its usage?
-   * @type {boolean}
-   */
-  get hasSave() {
-    const save = this.system.save || {};
-    return !!(save.ability && save.scaling);
-  }
-
-  /* --------------------------------------------- */
-
-  /**
-   * Does the Item implement an ability check as part of its usage?
-   * @type {boolean}
-   */
-  get hasAbilityCheck() {
-    return (this.system.actionType === "abil") && this.system.ability;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Does the Item have a target?
-   * @type {boolean}
-   */
-  get hasTarget() {
-    const target = this.system.target;
-    return target && !["none", ""].includes(target.type);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Does the Item have an area of effect target?
-   * @type {boolean}
-   */
-  get hasAreaTarget() {
-    const target = this.system.target;
-    return target && (target.type in CONFIG.DND5E.areaTargetTypes);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Is this Item limited in its ability to be used by charges or by recharge?
-   * @type {boolean}
-   */
-  get hasLimitedUses() {
-    let recharge = this.system.recharge || {};
-    let uses = this.system.uses || {};
-    return !!recharge.value || (uses.per && (uses.max > 0));
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Is this item any of the armor subtypes?
-   * @type {boolean}
-   */
-  get isArmor() {
-    return this.system.armor?.type in CONFIG.DND5E.armorTypes;
   }
 
   /* -------------------------------------------- */
@@ -615,30 +619,6 @@ export default class Item5e extends Item {
     const formula = simplifyRollFormula(roll.formula) || "0";
     this.labels.toHit = !/^[+-]/.test(formula) ? `+ ${formula}` : formula;
     return {rollData, parts};
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Retrieve an item's critical hit threshold. Uses the smallest value from among the following sources:
-   * - item document
-   * - item document's actor (if it has one)
-   * - item document's ammunition (if it has any)
-   * - the constant '20'
-   * @returns {number|null}  The minimum value that must be rolled to be considered a critical hit.
-   */
-  getCriticalThreshold() {
-    const actorFlags = this.actor.flags.dnd5e || {};
-    if ( !this.hasAttack ) return null;
-    let actorThreshold = null;
-    let itemThreshold = this.system.critical?.threshold ?? Infinity;
-    let ammoThreshold = Infinity;
-    if ( this.type === "weapon" ) actorThreshold = actorFlags.weaponCriticalThreshold;
-    else if ( this.type === "spell" ) actorThreshold = actorFlags.spellCriticalThreshold;
-    if ( this.system.consume?.type === "ammo" ) {
-      ammoThreshold = this.actor.items.get(this.system.consume.target)?.system.critical.threshold ?? Infinity;
-    }
-    return Math.min(itemThreshold, ammoThreshold, actorThreshold ?? 20);
   }
 
   /* -------------------------------------------- */
@@ -2348,5 +2328,26 @@ export default class Item5e extends Item {
       }
     });
     return new this(spellScrollData);
+  }
+
+  /* -------------------------------------------- */
+  /*  Deprecations                                */
+  /* -------------------------------------------- */
+
+  /**
+   * Retrieve an item's critical hit threshold. Uses the smallest value from among the following sources:
+   * - item document
+   * - item document's actor (if it has one)
+   * - item document's ammunition (if it has any)
+   * - the constant '20'
+   * @returns {number|null}  The minimum value that must be rolled to be considered a critical hit.
+   * @deprecated since dnd5e 2.2, targeted for removal in 2.4
+   */
+  getCriticalThreshold() {
+    foundry.utils.logCompatibilityWarning(
+      "Item5e#getCriticalThreshold has been replaced with the Item5e#criticalThreshold getter.",
+      { since: "DnD5e 2.2", until: "DnD5e 2.4" }
+    );
+    return this.criticalThreshold;
   }
 }

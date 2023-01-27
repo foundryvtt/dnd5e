@@ -63,7 +63,6 @@ export default class ItemSheet5e extends ItemSheet {
     const context = await super.getData(options);
     const item = context.item;
     const source = item.toObject();
-    const isMountable = this._isItemMountable(item);
 
     // Game system configuration
     context.config = CONFIG.DND5E;
@@ -84,22 +83,15 @@ export default class ItemSheet5e extends ItemSheet {
       baseItems: await this._getItemBaseTypes(),
       isPhysical: item.system.hasOwnProperty("quantity"),
 
-      // Activation Details
-      hasScalarTarget: ![null, "", "self"].includes(item.system.target.type),
-
       // Action Details
-      hasAttackRoll: item.hasAttack,
       isHealing: item.system.actionType === "heal",
       isFlatDC: item.system.save?.scaling === "flat",
       isLine: ["line", "wall"].includes(item.system.target?.type),
 
       // Vehicles
       isCrewed: item.system.activation?.type === "crew",
-      isMountable,
 
       // Armor Class
-      isArmor: item.isArmor,
-      hasAC: item.isArmor || isMountable,
       hasDexModifier: item.isArmor && (item.system.armor?.type !== "shield"),
 
       // Advancement
@@ -330,7 +322,7 @@ export default class ItemSheet5e extends ItemSheet {
     switch ( this.item.type ) {
       case "equipment":
         props.push(CONFIG.DND5E.equipmentTypes[this.item.system.armor.type]);
-        if ( this.item.isArmor || this._isItemMountable(this.item) ) props.push(labels.armor);
+        if ( this.item.isArmor || this.item.isMountable ) props.push(labels.armor);
         break;
       case "feat":
         props.push(labels.featType);
@@ -355,20 +347,6 @@ export default class ItemSheet5e extends ItemSheet {
       props.push(labels.activation, labels.range, labels.target, labels.duration);
     }
     return props.filter(p => !!p);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Is this item a separate large object like a siege engine or vehicle component that is
-   * usually mounted on fixtures rather than equipped, and has its own AC and HP.
-   * @param {object} item  Copy of item data being prepared for display.
-   * @returns {boolean}    Is item siege weapon or vehicle equipment?
-   * @private
-   */
-  _isItemMountable(item) {
-    return ((item.type === "weapon") && (item.system.weaponType === "siege"))
-      || (item.type === "equipment" && (item.system.armor.type === "vehicle"));
   }
 
   /* -------------------------------------------- */
