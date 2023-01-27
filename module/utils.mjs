@@ -332,24 +332,35 @@ function _synchronizeActorSpells(actor, spellsMap) {
 /**
  * For unidentified items, returns a localized masked name based on the item type and base item, where appropriate.
  * @param {object} item   The item to evaluate.
- * @returns {string}      The localized name to show for the unidentified item.
+ * @returns {string}      The localized text to show for the unidentified item (including item type)
  * @private
  */
  export function unidentifiedName(item) {
-  let type = item.type;
   const systemData = item.system;
+  let baseType;
+  let subtype;
   switch(item.type) {
     case 'weapon':
-      type = systemData.baseItem || systemData.weaponType;
+      subtype = systemData.weaponType;
+      baseType = systemData.baseItem;
       break;
     case 'equipment':
-      type = systemData.baseItem || systemData.armor.type;
+      subtype = systemData.armor.type;
+      baseType = systemData.baseItem;
       break;
     case 'consumable':
-      type = systemData.consumableType || item.type;
+      subtype = item.type;
+      baseType = systemData.consumableType;
       break;
   }
+  const postType = baseType != subtype 
+    ? subtype.capitalize() + baseType.capitalize()
+    : (subtype ?? baseType).capitalize();
+  const i18nKey = postType
+    ? `DND5E.${item.type.capitalize() + postType}` // e.g "DND5E.EquipmentShield": "Shield",
+    : `ITEM.Type${item.type.capitalize()}` ; // e.g "ITEM.TypeEquipment": "Equipment",
+  const localizedType = game.i18n.localize(i18nKey) ?? baseType;
   return game.user.isGM
-    ? game.i18n.format('DND5E.UnidentifiedGM', {type, trueName: item.name})
-    : game.i18n.format('DND5E.Unidentified', {type});
+    ? game.i18n.format('DND5E.UnidentifiedGM', {localizedType, trueName: item.name})
+    : game.i18n.format('DND5E.Unidentified', {localizedType});
 }

@@ -65,6 +65,10 @@ export default class ItemSheet5e extends ItemSheet {
     return this.displayName;
   }
 
+  /** 
+   * Name shown for the item; normally it's the item's, but if unidentified, it is masked as "Unidentified {type}"
+   * @type {string}
+   */
   displayName;
 
   /* -------------------------------------------- */
