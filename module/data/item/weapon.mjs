@@ -90,10 +90,8 @@ export default class WeaponData extends SystemDataModel.mixin(
 
   /** @inheritdoc */
   get _typeAbilityMod() {
-    // Ranged weapons - Dex (PHB pg. 194)
     if ( ["simpleR", "martialR"].includes(this.weaponType) ) return "dex";
 
-    // Finesse weapons - Str or Dex (PHB pg. 147)
     const abilities = this.parent?.actor?.system.abilities;
     if ( this.properties.fin && abilities ) {
       return (abilities.dex?.mod ?? 0) >= (abilities.str?.mod ?? 0) ? "dex" : "str";
