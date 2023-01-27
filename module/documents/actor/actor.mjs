@@ -827,14 +827,12 @@ export default class Actor5e extends Actor {
       pactLevel = actor.system.details.spellLevel;
     }
 
-    // TODO: Allow pact level and slot count to be configured
-    if ( pactLevel > 0 ) {
-      spells.pact.level = Math.ceil(Math.min(10, pactLevel) / 2); // TODO: Allow custom max pact level
-      if ( override === null ) {
-        spells.pact.max = Math.max(1, Math.min(pactLevel, 2), Math.min(pactLevel - 8, 3), Math.min(pactLevel - 13, 4));
-      } else {
-        spells.pact.max = Math.max(override, 1);
-      }
+    const [, pactConfig] = Object.entries(CONFIG.DND5E.pactCastingProgression)
+      .reverse().find(([l]) => Number(l) <= pactLevel) ?? [];
+    if ( pactConfig ) {
+      spells.pact.level = pactConfig.level;
+      if ( override === null ) spells.pact.max = pactConfig.slots;
+      else spells.pact.max = Math.max(override, 1);
       spells.pact.value = Math.min(spells.pact.value, spells.pact.max);
     }
 
