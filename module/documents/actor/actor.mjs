@@ -632,7 +632,7 @@ export default class Actor5e extends Actor {
 
     // Initiative proficiency
     const prof = this.system.attributes.prof ?? 0;
-    const ra = flags.remarkableAthlete && ["str", "dex", "con"].includes(abilityId);
+    const ra = this._isRemarkableAthlete(abilityId);
     init.prof = new Proficiency(prof, (flags.jackOfAllTrades || ra) ? 0.5 : 0, !ra);
 
     // Total initiative includes all numeric terms
@@ -1014,81 +1014,90 @@ export default class Actor5e extends Actor {
   /**
    * Roll a Skill Check
    * Prompt the user for input regarding Advantage/Disadvantage and any Situational Bonus
-   * @param {string} skillId      The skill id (e.g. "ins")
-   * @param {object} options      Options which configure how the skill check is rolled
-   * @returns {Promise<D20Roll>}  A Promise which resolves to the created Roll instance
+   * @param {string} skillId                            The skill id (e.g. "ins")
+   * @param {D20DialogConfiguration} [dialogConfig={}]  Configuration options for the user roll prompt.
+   * @param {D20RollConfiguration} [rollConfig={}]      Configuration options for the D20Roll instance.
+   * @param {D20MessageOptions} [messageOptions={}]     Options related to the creation of a chat message for the roll.
+   * @returns {Promise<D20Roll|null>}                   A Promise which resolves to the created Roll instance, or null
+   *                                                    if the user cancelled the workflow.
    */
-  async rollSkill(skillId, options={}) {
+  async rollSkill(skillId, dialogConfig={}, rollConfig={}, messageOptions={}) {
     const skl = this.system.skills[skillId];
-    const abl = this.system.abilities[skl.ability];
     const globalBonuses = this.system.bonuses?.abilities ?? {};
-    const parts = ["@mod", "@abilityCheckBonus"];
     const data = this.getRollData();
-
-    // Add ability modifier
-    data.mod = skl.mod;
-    data.defaultAbility = skl.ability;
-
-    // Include proficiency bonus
-    if ( skl.prof.hasProficiency ) {
-      parts.push("@prof");
-      data.prof = skl.prof.term;
-    }
-
-    // Global ability check bonus
-    if ( globalBonuses.check ) {
-      parts.push("@checkBonus");
-      data.checkBonus = Roll.replaceFormulaData(globalBonuses.check, data);
-    }
-
-    // Ability-specific check bonus
-    if ( abl?.bonuses?.check ) data.abilityCheckBonus = Roll.replaceFormulaData(abl.bonuses.check, data);
-    else data.abilityCheckBonus = 0;
-
-    // Skill-specific skill bonus
-    if ( skl.bonuses?.check ) {
-      const checkBonusKey = `${skillId}CheckBonus`;
-      parts.push(`@${checkBonusKey}`);
-      data[checkBonusKey] = Roll.replaceFormulaData(skl.bonuses.check, data);
-    }
-
-    // Global skill check bonus
-    if ( globalBonuses.skill ) {
-      parts.push("@skillBonus");
-      data.skillBonus = Roll.replaceFormulaData(globalBonuses.skill, data);
-    }
+    const flavor = game.i18n.format("DND5E.SkillPromptTitle", {skill: CONFIG.DND5E.skills[skillId]?.label ?? ""});
 
     // Reliable Talent applies to any skill check we have full or better proficiency in
-    const reliableTalent = (skl.value >= 1 && this.getFlag("dnd5e", "reliableTalent"));
+    const reliableTalent = (skl.value >= 1) && this.getFlag("dnd5e", "reliableTalent");
 
-    // Roll and return
-    const flavor = game.i18n.format("DND5E.SkillPromptTitle", {skill: CONFIG.DND5E.skills[skillId]?.label ?? ""});
-    const rollData = foundry.utils.mergeObject({
-      data: data,
+    // Configure the dialog.
+    dialogConfig = foundry.utils.mergeObject({
+      defaultAbility: skl.ability,
       title: `${flavor}: ${this.name}`,
-      flavor,
-      chooseModifier: true,
-      halflingLucky: this.getFlag("dnd5e", "halflingLucky"),
-      reliableTalent,
+      chooseModifier: true
+    }, dialogConfig);
+
+    // Configure the roll.
+    rollConfig = foundry.utils.mergeObject({
+      flavor, reliableTalent,
+      halflingLucky: this.getFlag("dnd5e", "halflingLucky")
+    }, rollConfig);
+
+    // Configure the chat message.
+    messageOptions = foundry.utils.mergeObject({
       messageData: {
-        speaker: options.speaker || ChatMessage.getSpeaker({actor: this}),
-        "flags.dnd5e.roll": {type: "skill", skillId }
+        speaker: ChatMessage.getSpeaker({actor: this}),
+        "flags.dnd5e.roll": {type: "skill", skillId}
       }
-    }, options);
-    rollData.parts = parts.concat(options.parts ?? []);
+    }, messageOptions);
+
+    // Marshal roll parts and data.
+    const {parts=[]} = dialogConfig;
+    parts.unshift("@mod", "@checkBonus", "@skillBonus", "@abilityCheckBonus", "@skillCheckBonus", "@bonus");
+    if ( skl.prof.hasProficiency ) parts.push("@prof");
+    foundry.utils.mergeObject(data, rollConfig.data ?? {});
 
     /**
      * A hook event that fires before a skill check is rolled for an Actor.
      * @function dnd5e.preRollSkill
      * @memberof hookEvents
      * @param {Actor5e} actor                Actor for which the skill check is being rolled.
+     * @param {string[]} parts               An array of bonuses that will be applied to the roll.
+     * @param {object} data                  The data to retrieve the bonus values from.
      * @param {D20RollConfiguration} config  Configuration data for the pending roll.
      * @param {string} skillId               ID of the skill being rolled as defined in `DND5E.skills`.
      * @returns {boolean}                    Explicitly return `false` to prevent skill check from being rolled.
      */
-    if ( Hooks.call("dnd5e.preRollSkill", this, rollData, skillId) === false ) return;
+    if ( Hooks.call("dnd5e.preRollSkill", this, parts, data, rollConfig, skillId) === false ) return null;
 
-    const roll = await d20Roll(rollData);
+    const config = await CONFIG.Dice.D20Roll.configureDialog({...dialogConfig, parts}, rollConfig);
+    if ( !config ) return null;
+    const {bonus, ability, rollMode, advantageMode} = config;
+    const abl = this.system.abilities[ability];
+    data.mod = abl.mod;
+    data.bonus = bonus;
+
+    if ( globalBonuses.check ) data.checkBonus = Roll.replaceFormulaData(globalBonuses.check, data);
+    if ( globalBonuses.skill ) data.skillBonus = Roll.replaceFormulaData(globalBonuses.skill, data);
+    if ( abl?.bonuses?.check ) data.abilityCheckBonus = Roll.replaceFormulaData(abl.bonuses.check, data);
+    if ( skl.bonuses.check ) data.skillCheckBonus = Roll.replaceFormulaData(skl.bonuses.check, data);
+
+    // If the character has full proficiency in a skill, then JoAT or RA cannot apply.
+    if ( skl.value >= 1 ) data.prof = skl.prof.term;
+
+    // Otherwise, RA may have become applicable, if the user has changed the ability used for the roll.
+    else {
+      const ra = this._isRemarkableAthlete(ability);
+      const joat = this.getFlag("dnd5e", "jackOfAllTrades");
+      const halfProf = skl.value > 0;
+      if ( ra || joat || halfProf ) {
+        if ( !parts.includes("@prof") ) parts.push("@prof");
+        const prof = new Proficiency(this.system.attributes.prof, .5, !ra);
+        data.prof = prof.term;
+      }
+    }
+
+    const roll = await d20Roll(parts, data, {...rollConfig, rollMode, advantageMode}, messageOptions);
 
     /**
      * A hook event that fires after a skill check has been rolled for an Actor.
