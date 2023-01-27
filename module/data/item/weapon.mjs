@@ -88,6 +88,16 @@ export default class WeaponData extends SystemDataModel.mixin(
   /*  Getters                                     */
   /* -------------------------------------------- */
 
+  /**
+   * Properties displayed in chat.
+   * @type {string[]}
+   */
+  get chatProperties() {
+    return [CONFIG.DND5E.weaponTypes[this.weaponType]];
+  }
+
+  /* -------------------------------------------- */
+
   /** @inheritdoc */
   get _typeAbilityMod() {
     if ( ["simpleR", "martialR"].includes(this.weaponType) ) return "dex";

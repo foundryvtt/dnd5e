@@ -99,6 +99,20 @@ export default class EquipmentData extends SystemDataModel.mixin(
   /* -------------------------------------------- */
 
   /**
+   * Properties displayed in chat.
+   * @type {string[]}
+   */
+  get chatProperties() {
+    return [
+      CONFIG.DND5E.equipmentTypes[this.armor.type],
+      this.parent.labels?.armor ?? null,
+      this.stealth ? game.i18n.localize("DND5E.StealthDisadvantage") : null
+    ];
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Is this Item any of the armor subtypes?
    * @type {boolean}
    */

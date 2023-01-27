@@ -61,6 +61,16 @@ export default class ToolData extends SystemDataModel.mixin(
   /* -------------------------------------------- */
 
   /**
+   * Properties displayed in chat.
+   * @type {string[]}
+   */
+  get chatProperties() {
+    return [CONFIG.DND5E.abilities[this.ability]?.label];
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Which ability score modifier is used by this item?
    * @type {string|null}
    */
