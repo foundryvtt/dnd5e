@@ -473,7 +473,7 @@ export default class ActorSheet5e extends ActorSheet {
     };
 
     // Determine the maximum spell level which has a slot
-    const maxLevel = Array.fromRange(10).reduce((max, i) => {
+    const maxLevel = Array.fromRange(Object.keys(CONFIG.DND5E.spellLevels).length).reduce((max, i) => {
       if ( i === 0 ) return max;
       const level = levels[`spell${i}`];
       if ( (level.max || level.override ) && ( i > max ) ) max = i;

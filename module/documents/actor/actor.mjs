@@ -795,7 +795,8 @@ export default class Actor5e extends Actor {
     const levels = Math.clamped(progression.slot, 0, CONFIG.DND5E.maxLevel);
     const slots = CONFIG.DND5E.SPELL_SLOT_TABLE[Math.min(levels, CONFIG.DND5E.SPELL_SLOT_TABLE.length) - 1] ?? [];
     for ( const [n, slot] of Object.entries(spells) ) {
-      const level = parseInt(n.slice(-1));
+      if ( !n.startsWith("spell") ) continue;
+      const level = parseInt(n.replace("spell", ""));
       if ( Number.isNaN(level) ) continue;
       slot.max = Number.isNumeric(slot.override) ? Math.max(parseInt(slot.override), 0) : slots[level - 1] ?? 0;
       slot.value = parseInt(slot.value); // TODO: DataModels should remove the need for this
