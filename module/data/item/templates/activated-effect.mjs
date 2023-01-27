@@ -186,6 +186,21 @@ export default class ActivatedEffectTemplate extends foundry.abstract.DataModel 
   /* -------------------------------------------- */
 
   /**
+   * Chat properties for activated effects.
+   * @type {string[]}
+   */
+  get activatedEffectChatProperties() {
+    return [
+      this.parent.labels.activation + (this.activation.condition ? ` (${this.activation.condition})` : ""),
+      this.parent.labels.target,
+      this.parent.labels.range,
+      this.parent.labels.duration
+    ];
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Does the Item have an area of effect target?
    * @type {boolean}
    */

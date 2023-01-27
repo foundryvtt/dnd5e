@@ -1152,7 +1152,6 @@ export default class Item5e extends Item {
    */
   async getChatData(htmlOptions={}) {
     const data = this.toObject().system;
-    const labels = this.labels;
 
     // Rich text description
     data.description.value = await TextEditor.enrichHTML(data.description.value, {
@@ -1162,160 +1161,14 @@ export default class Item5e extends Item {
       ...htmlOptions
     });
 
-    // Item type specific properties
-    const props = [];
-    switch ( this.type ) {
-      case "consumable":
-        this._consumableChatData(data, labels, props); break;
-      case "equipment":
-        this._equipmentChatData(data, labels, props); break;
-      case "feat":
-        this._featChatData(data, labels, props); break;
-      case "loot":
-        this._lootChatData(data, labels, props); break;
-      case "spell":
-        this._spellChatData(data, labels, props); break;
-      case "tool":
-        this._toolChatData(data, labels, props); break;
-      case "weapon":
-        this._weaponChatData(data, labels, props); break;
-    }
+    // Type specific properties
+    data.properties = [
+      ...this.system.chatProperties ?? [],
+      ...this.system.equippableItemChatProperties ?? [],
+      ...this.system.activatedEffectChatProperties ?? []
+    ].filter(p => p);
 
-    // Equipment properties
-    if ( data.hasOwnProperty("equipped") && !["loot", "tool"].includes(this.type) ) {
-      if ( data.attunement === CONFIG.DND5E.attunementTypes.REQUIRED ) {
-        props.push(CONFIG.DND5E.attunements[CONFIG.DND5E.attunementTypes.REQUIRED]);
-      }
-      props.push(
-        game.i18n.localize(data.equipped ? "DND5E.Equipped" : "DND5E.Unequipped"),
-        game.i18n.localize(data.proficient ? "DND5E.Proficient" : "DND5E.NotProficient")
-      );
-    }
-
-    // Ability activation properties
-    if ( data.hasOwnProperty("activation") ) {
-      props.push(
-        labels.activation + (data.activation?.condition ? ` (${data.activation.condition})` : ""),
-        labels.target,
-        labels.range,
-        labels.duration
-      );
-    }
-
-    // Filter properties and return
-    data.properties = props.filter(p => !!p);
     return data;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Prepare chat card data for consumable type items.
-   * @param {object} data     Copy of item data being use to display the chat message.
-   * @param {object} labels   Specially prepared item labels.
-   * @param {string[]} props  Existing list of properties to be displayed. *Will be mutated.*
-   * @private
-   */
-  _consumableChatData(data, labels, props) {
-    props.push(
-      CONFIG.DND5E.consumableTypes[data.consumableType],
-      `${data.uses.value}/${data.uses.max} ${game.i18n.localize("DND5E.Charges")}`
-    );
-    data.hasCharges = data.uses.value >= 0;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Prepare chat card data for equipment type items.
-   * @param {object} data     Copy of item data being use to display the chat message.
-   * @param {object} labels   Specially prepared item labels.
-   * @param {string[]} props  Existing list of properties to be displayed. *Will be mutated.*
-   * @private
-   */
-  _equipmentChatData(data, labels, props) {
-    props.push(
-      CONFIG.DND5E.equipmentTypes[data.armor.type],
-      labels.armor || null,
-      data.stealth ? game.i18n.localize("DND5E.StealthDisadvantage") : null
-    );
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Prepare chat card data for items of the Feat type.
-   * @param {object} data     Copy of item data being use to display the chat message.
-   * @param {object} labels   Specially prepared item labels.
-   * @param {string[]} props  Existing list of properties to be displayed. *Will be mutated.*
-   * @private
-   */
-  _featChatData(data, labels, props) {
-    props.push(data.requirements);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Prepare chat card data for loot type items.
-   * @param {object} data     Copy of item data being use to display the chat message.
-   * @param {object} labels   Specially prepared item labels.
-   * @param {string[]} props  Existing list of properties to be displayed. *Will be mutated.*
-   * @private
-   */
-  _lootChatData(data, labels, props) {
-    props.push(
-      game.i18n.localize("ITEM.TypeLoot"),
-      data.weight ? `${data.weight} ${game.i18n.localize("DND5E.AbbreviationLbs")}` : null
-    );
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Render a chat card for Spell type data.
-   * @param {object} data     Copy of item data being use to display the chat message.
-   * @param {object} labels   Specially prepared item labels.
-   * @param {string[]} props  Existing list of properties to be displayed. *Will be mutated.*
-   * @private
-   */
-  _spellChatData(data, labels, props) {
-    props.push(
-      labels.level,
-      labels.components.vsm + (labels.materials ? ` (${labels.materials})` : ""),
-      ...labels.components.tags
-    );
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Prepare chat card data for tool type items.
-   * @param {object} data     Copy of item data being use to display the chat message.
-   * @param {object} labels   Specially prepared item labels.
-   * @param {string[]} props  Existing list of properties to be displayed. *Will be mutated.*
-   * @private
-   */
-  _toolChatData(data, labels, props) {
-    props.push(
-      CONFIG.DND5E.abilities[data.ability]?.label || null,
-      CONFIG.DND5E.proficiencyLevels[data.proficient || 0]
-    );
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Prepare chat card data for weapon type items.
-   * @param {object} data     Copy of item data being use to display the chat message.
-   * @param {object} labels   Specially prepared item labels.
-   * @param {string[]} props  Existing list of properties to be displayed. *Will be mutated.*
-   * @private
-   */
-  _weaponChatData(data, labels, props) {
-    props.push(
-      CONFIG.DND5E.weaponTypes[data.weaponType]
-    );
   }
 
   /* -------------------------------------------- */
