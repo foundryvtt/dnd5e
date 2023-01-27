@@ -794,12 +794,9 @@ export default class Actor5e extends Actor {
   static prepareLeveledSlots(spells, actor, progression) {
     const levels = Math.clamped(progression.slot, 0, CONFIG.DND5E.maxLevel);
     const slots = CONFIG.DND5E.SPELL_SLOT_TABLE[Math.min(levels, CONFIG.DND5E.SPELL_SLOT_TABLE.length) - 1] ?? [];
-    for ( const [n, slot] of Object.entries(spells) ) {
-      if ( !n.startsWith("spell") ) continue;
-      const level = parseInt(n.replace("spell", ""));
-      if ( Number.isNaN(level) ) continue;
+    for ( const level of Array.fromRange(Object.keys(CONFIG.DND5E.spellLevels).length - 1, 1) ) {
+      const slot = spells[`spell${level}`] ??= { value: 0 };
       slot.max = Number.isNumeric(slot.override) ? Math.max(parseInt(slot.override), 0) : slots[level - 1] ?? 0;
-      slot.value = parseInt(slot.value); // TODO: DataModels should remove the need for this
     }
   }
 
