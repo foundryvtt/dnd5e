@@ -137,7 +137,6 @@ DND5E.skills = {
   sur: { label: "DND5E.SkillSur", ability: "wis" }
 };
 preLocalize("skills", { key: "label", sort: true });
-patchConfig("skills", "label", { since: 2.0, until: 2.2 });
 
 /* -------------------------------------------- */
 
@@ -1008,7 +1007,6 @@ DND5E.areaTargetTypes = {
   }
 };
 preLocalize("areaTargetTypes", { key: "label", sort: true });
-patchConfig("areaTargetTypes", "template", { since: 2.0, until: 2.2 });
 
 /* -------------------------------------------- */
 
