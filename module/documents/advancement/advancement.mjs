@@ -244,7 +244,6 @@ export default class Advancement extends BaseAdvancement {
    * @returns {Promise<Advancement>}  This advancement after updates have been applied.
    */
   async update(updates) {
-    this.constructor._migrateUpdateData(updates);
     await this.item.updateAdvancement(this.id, updates);
     return this;
   }
@@ -257,7 +256,6 @@ export default class Advancement extends BaseAdvancement {
    * @returns {Advancement}   This advancement after updates have been applied.
    */
   updateSource(updates) {
-    this.constructor._migrateUpdateData(updates);
     super.updateSource(updates);
     return this;
   }
@@ -318,53 +316,5 @@ export default class Advancement extends BaseAdvancement {
    * @abstract
    */
   async reverse(level) { }
-
-  /* -------------------------------------------- */
-  /*  Deprecations and Compatibility              */
-  /* -------------------------------------------- */
-
-  /**
-   * @deprecated since 2.1.0
-   * @ignore
-   */
-  get data() {
-    foundry.utils.logCompatibilityWarning(
-      `You are accessing the ${this.constructor.name}#data object which is no longer used. `
-      + "Since 2.1 the Advancement class and its contained DataModel are merged into a combined data structure. "
-      + "You should now reference keys which were previously contained within the data object directly.",
-      { since: "DnD5e 2.1", until: "DnD5e 2.2" }
-    );
-    const data = {};
-    for ( const k of this.schema.keys() ) {
-      data[k] = this[k];
-    }
-    return this.constructor.shimData(data, {embedded: false});
-  }
-
-  /**
-   * Shim to remove leading `data.` from updates.
-   * @ignore
-   */
-  static _migrateUpdateData(updates) {
-    let logWarning = false;
-    for ( const [key, value] of Object.entries(updates) ) {
-      if ( key.startsWith("data.") ) {
-        updates[key.substring(5)] = value;
-        delete updates[key];
-        logWarning = true;
-      }
-    }
-    if ( updates.data ) {
-      Object.assign(updates, updates.data);
-      delete updates.data;
-      logWarning = true;
-    }
-    if ( logWarning ) foundry.utils.logCompatibilityWarning(
-      "An update being performed on an advancement points to `data`. Advancement data has moved to the top level so the"
-      + " leading `data.` is no longer required.",
-      { since: "DnD5e 2.1", until: "DnD5e 2.2" }
-    );
-    return updates;
-  }
 
 }
