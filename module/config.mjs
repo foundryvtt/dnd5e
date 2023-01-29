@@ -1596,7 +1596,8 @@ DND5E.CR_EXP_LEVELS = [
 DND5E.traits = {
   saves: {
     label: "DND5E.ClassSaves",
-    configKey: "abilities"
+    configKey: "abilities",
+    labelKey: "label"
   },
   skills: {
     label: "DND5E.TraitSkillProf",

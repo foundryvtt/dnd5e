@@ -656,6 +656,7 @@ export default class ItemSheet5e extends ItemSheet {
       case "saves":
         options.choices = CONFIG.DND5E.abilities;
         options.valueKey = null;
+        options.labelKey = "label";
         break;
       case "skills.choices":
         options.choices = CONFIG.DND5E.skills;

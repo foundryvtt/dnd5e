@@ -92,7 +92,7 @@
                 <div class="form-fields">
                     <ul class="traits-list">
                         {{#each system.saves}}
-                            <li class="tag {{this}}">{{lookup ../config.abilities this}}</li>
+                            <li class="tag {{this}}">{{lookup (lookup ../config.abilities this) "label"}}</li>
                         {{/each}}
                     </ul>
                 </div>
