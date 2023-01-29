@@ -123,7 +123,7 @@ export default class ActorSheet5e extends ActorSheet {
     /** @deprecated */
     Object.defineProperty(context, "data", {
       get() {
-        const msg = `You are accessing the "data" attribute within the rendering context provided by the ActorSheet5e 
+        const msg = `You are accessing the "data" attribute within the rendering context provided by the ActorSheet5e
         class. This attribute has been deprecated in favor of "system" and will be removed in a future release`;
         foundry.utils.logCompatibilityWarning(msg, { since: "DnD5e 2.0", until: "DnD5e 2.2" });
         return context.system;
@@ -641,6 +641,7 @@ export default class ActorSheet5e extends ActorSheet {
       html.find(".item-create").click(this._onItemCreate.bind(this));
       html.find(".item-delete").click(this._onItemDelete.bind(this));
       html.find(".item-uses input").click(ev => ev.target.select()).change(this._onUsesChange.bind(this));
+      html.find(".item-quantity input").click(ev => ev.target.select()).change(this._onQuantityChange.bind(this));
       html.find(".slot-max-override").click(this._onSpellSlotOverride.bind(this));
 
       // Active Effect management
@@ -1152,6 +1153,23 @@ export default class ActorSheet5e extends ActorSheet {
     const uses = Math.clamped(0, parseInt(event.target.value), item.system.uses.max);
     event.target.value = uses;
     return item.update({"system.uses.value": uses});
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Change the quantity of an Owned Item within the actor.
+   * @param {Event} event        The triggering click event.
+   * @returns {Promise<Item5e>}  Updated item.
+   * @private
+   */
+  async _onQuantityChange(event) {
+    event.preventDefault();
+    const itemId = event.currentTarget.closest(".item").dataset.itemId;
+    const item = this.actor.items.get(itemId);
+    const quantity = Math.max(0, parseInt(event.target.value));
+    event.target.value = quantity;
+    return item.update({"system.quantity": quantity});
   }
 
   /* -------------------------------------------- */
