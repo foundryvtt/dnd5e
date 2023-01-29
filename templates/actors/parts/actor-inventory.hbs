@@ -79,17 +79,12 @@
                 {{else}}
                 <div class="item-image" tabindex="0" role="button" aria-label="{{item.name}}" style="background-image: url('{{item.img}}')"></div>
                 <h4>
-<<<<<<< HEAD
-                    {{item.name~}}
-                    {{~#if ctx.isStack}} ({{item.system.quantity}}){{/if}}
-=======
                     {{#if item.system.identified}}
                         {{item.name~}}
                     {{else}}
                         {{dnd5e-unidentifiedName item ~}}
                     {{/if}}
                     {{~#if item.isStack}} ({{item.system.quantity}}){{/if}}
->>>>>>> b2785ae2 (Hides name and description for players if item is unidentified - shows description.unidentified instead; GM sees true name and both descriptions)
                 </h4>
                 {{#if ctx.attunement}}
                 <div class="item-detail attunement">

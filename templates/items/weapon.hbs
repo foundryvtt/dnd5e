@@ -9,7 +9,7 @@
                 {{#if system.identified}}
                 <input name="name" type="text" value="{{item.name}}" placeholder="{{ localize 'DND5E.ItemName' }}"/>
                 {{else}}
-                <input disabled name="ignored" type="text" value="{{ localize (dnd5e-unidentifiedName item) }}"/>
+                <input type="text" value="{{ localize (dnd5e-unidentifiedName item) }}" disabled/>
                 {{/if}}
             </h1>
 

@@ -114,12 +114,6 @@ export default class ItemSheet5e extends ItemSheet {
       }),
 
       showUnidentifiedDesc: isIdentifiable && (game.user.isGM || !source.system.identified),
-      // Enrich HTML unidentified description
-      unidentifiedDescriptionHTML: await TextEditor.enrichHTML(item.system.description.unidentified, {
-        secrets: item.isOwner,
-        async: true,
-        relativeTo: this.item
-      }),
 
       // Action Details
       isHealing: item.system.actionType === "heal",
@@ -161,6 +155,13 @@ export default class ItemSheet5e extends ItemSheet {
       relativeTo: this.item,
       rollData: context.rollData
     });
+    // Enrich HTML unidentified description
+    context.unidentifiedDescriptionHTML = await TextEditor.enrichHTML(item.system.description.unidentified, {
+      secrets: item.isOwner,
+      async: true,
+      relativeTo: this.item,
+      rollData: context.rollData
+    })
     return context;
   }
 

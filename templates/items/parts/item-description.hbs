@@ -55,19 +55,14 @@
     </div>
 
     <div class="flexcol">
-        {{#unless isIdentifiable}}
-            {{editor descriptionHTML target="system.description.value"
-                button=true editable=editable engine="prosemirror" collaborate=false}}
-        {{/unless}}
-        {{#if showIdentifiedDesc}}
+        {{#if (or showIdentifiedDesc (not isIdentifiable))}}
             {{editor descriptionHTML target="system.description.value"
                 button=true editable=editable engine="prosemirror" collaborate=false}}
         {{/if}}
         {{#if showUnidentifiedDesc}}
             {{#if isGM}}
-                <hr class="flex0">
                 <div class="unidentified-description">
-                <h3 class="flex0" >{{localize "DND5E.UnidentifiedDesc"}}</h3>
+                <h3>{{localize "DND5E.UnidentifiedDesc"}}</h3>
             {{/if}}
             {{editor unidentifiedDescriptionHTML target="system.description.unidentified"
                 button=true editable=editable engine="prosemirror" collaborate=false}}
