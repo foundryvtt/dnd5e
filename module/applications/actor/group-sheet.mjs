@@ -221,6 +221,7 @@ export default class GroupActorSheet extends ActorSheet {
       html.find(".action-button").click(this._onClickActionButton.bind(this));
       html.find(".item-control").click(this._onClickItemControl.bind(this));
       html.find(".item .rollable h4").click(event => this._onClickItemName(event));
+      html.find(".item-quantity input").click(ev => ev.target.select()).change(this._onQuantityChange.bind(this));
       new ContextMenu(html, ".item-list .item", [], {onOpen: this._onItemContext.bind(this)});
     }
   }
@@ -337,6 +338,18 @@ export default class GroupActorSheet extends ActorSheet {
    */
   _onClickItemName(event) {
     game.system.applications.actor.ActorSheet5e.prototype._onItemSummary.call(this, event);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Change the quantity of an Owned Item within the actor.
+   * @param {Event} event        The triggering click event.
+   * @returns {Promise<Item5e>}  Updated item.
+   * @private
+   */
+  async _onQuantityChange(event) {
+    return game.system.applications.actor.ActorSheet5e.prototype._onQuantityChange.call(this, event);
   }
 
   /* -------------------------------------------- */
