@@ -1012,93 +1012,138 @@ export default class Actor5e extends Actor {
   /* -------------------------------------------- */
 
   /**
-   * Roll a Skill Check
-   * Prompt the user for input regarding Advantage/Disadvantage and any Situational Bonus
-   * @param {string} skillId      The skill id (e.g. "ins")
-   * @param {object} options      Options which configure how the skill check is rolled
-   * @returns {Promise<D20Roll>}  A Promise which resolves to the created Roll instance
+   * Get an unevaluated D20Roll used to roll a skill check for this actor.
+   * @param {string} skillId            The skill identifier.
+   * @param {object} [options={}]       Additional options to configure the roll.
+   * @param {string} [options.ability]  An alternative ability to use for the skill check.
+   * @returns {D20Roll}
    */
-  async rollSkill(skillId, options={}) {
+  getSkillRoll(skillId, {ability, parts=[], data={}, ...rollConfig}={}) {
     const skl = this.system.skills[skillId];
-    const abl = this.system.abilities[skl.ability];
+    const abl = this.system.abilities[ability ?? skl.ability];
     const globalBonuses = this.system.bonuses?.abilities ?? {};
-    const parts = ["@mod", "@abilityCheckBonus"];
-    const data = this.getRollData();
+    data = foundry.utils.mergeObject(this.getRollData(), data);
+    parts = ["1d20", "@mod"].concat(parts);
+    data.mod = abl?.mod;
 
-    // Add ability modifier
-    data.mod = skl.mod;
-    data.defaultAbility = skl.ability;
-
-    // Include proficiency bonus
-    if ( skl.prof.hasProficiency ) {
+    // If the character has full proficiency in a skill, then JoAT or RA cannot apply.
+    if ( skl.value >= 1 ) {
       parts.push("@prof");
       data.prof = skl.prof.term;
     }
 
-    // Global ability check bonus
+    // Otherwise, RA may have become applicable, if we are using a non-default ability.
+    else {
+      const ra = this._isRemarkableAthlete(ability ?? skl.ability);
+      const joat = this.getFlag("dnd5e", "jackOfAllTrades");
+      const halfProf = skl.value > 0;
+      if ( ra || joat || halfProf ) {
+        parts.push("@prof");
+        const prof = new Proficiency(this.system.attributes.prof, .5, !ra);
+        data.prof = prof.term;
+      }
+    }
+
+    // Global ability check bonus.
     if ( globalBonuses.check ) {
       parts.push("@checkBonus");
       data.checkBonus = Roll.replaceFormulaData(globalBonuses.check, data);
     }
 
-    // Ability-specific check bonus
-    if ( abl?.bonuses?.check ) data.abilityCheckBonus = Roll.replaceFormulaData(abl.bonuses.check, data);
-    else data.abilityCheckBonus = 0;
-
-    // Skill-specific skill bonus
-    if ( skl.bonuses?.check ) {
-      const checkBonusKey = `${skillId}CheckBonus`;
-      parts.push(`@${checkBonusKey}`);
-      data[checkBonusKey] = Roll.replaceFormulaData(skl.bonuses.check, data);
+    // Ability-specific check bonus.
+    if ( abl?.bonuses?.check ) {
+      parts.push("@abilityCheckBonus");
+      data.abilityCheckBonus = Roll.replaceFormulaData(abl.bonuses.check, data);
     }
 
-    // Global skill check bonus
+    // Global skill check bonus.
     if ( globalBonuses.skill ) {
       parts.push("@skillBonus");
       data.skillBonus = Roll.replaceFormulaData(globalBonuses.skill, data);
     }
 
-    // Reliable Talent applies to any skill check we have full or better proficiency in
-    const reliableTalent = (skl.value >= 1 && this.getFlag("dnd5e", "reliableTalent"));
+    // Skill-specific skill bonus.
+    if ( skl.bonuses?.check ) {
+      parts.push("@skillCheckBonus");
+      data.skillCheckBonus = Roll.replaceFormulaData(skl.bonuses.check, data);
+    }
 
-    // Roll and return
+    rollConfig = foundry.utils.mergeObject({
+      flavor: game.i18n.format("DND5E.SkillPromptTitle", {skill: CONFIG.DND5E.skills[skillId]?.label ?? ""}),
+      reliableTalent: (skl.value >= 1) && this.getFlag("dnd5e", "reliableTalent"),
+      halflingLucky: this.getFlag("dnd5e", "halflingLucky")
+    }, rollConfig);
+
+    /**
+     * A hook event that fires whenever a skill check roll is prepared.
+     * @function dnd5e.prepareSkillRoll
+     * @memberof hookEvents
+     * @param {Actor5e} actor                Actor for which the skill check is being rolled.
+     * @param {string} skillId               The identifier of the skill being rolled.
+     * @param {string[]} parts               The roll parts.
+     * @param {object} data                  The roll data.
+     * @param {D20RollConfiguration} config  The D20Roll configuration options.
+     */
+    Hooks.callAll("dnd5e.prepareSkillRoll", this, skillId, parts, data, rollConfig);
+
+    // Create the d20 roll.
+    const formula = parts.join(" + ");
+    return new CONFIG.Dice.D20Roll(formula, data, rollConfig);
+  }
+
+  /**
+   * Roll a Skill Check
+   * Prompt the user for input regarding Advantage/Disadvantage and any Situational Bonus
+   * @param {string} skillId      The skill id (e.g. "ins")
+   * @param {D20DialogConfiguration} [dialogConfig={}]  Configuration options for the user roll prompt.
+   * @param {D20RollConfiguration} [rollConfig={}]      Configuration options for the D20Roll instance.
+   * @param {D20MessageOptions} [messageOptions={}]     Options related to the creation of a chat message for the roll.
+   * @return {Promise<D20Roll|null>}                    A Promise which resolves to the created Roll instance, or null
+   *                                                    if the user cancelled the workflow.
+   */
+  async rollSkill(skillId, dialogConfig={}, rollConfig={}, messageOptions={}) {
+    const buildRoll = this.getSkillRoll.bind(this, skillId);
+
+    // Configure roll dialog.
     const flavor = game.i18n.format("DND5E.SkillPromptTitle", {skill: CONFIG.DND5E.skills[skillId]?.label ?? ""});
-    const rollData = foundry.utils.mergeObject({
-      data: data,
+    dialogConfig = foundry.utils.mergeObject({
       title: `${flavor}: ${this.name}`,
-      flavor,
       chooseModifier: true,
-      halflingLucky: this.getFlag("dnd5e", "halflingLucky"),
-      reliableTalent,
-      messageData: {
-        speaker: options.speaker || ChatMessage.getSpeaker({actor: this}),
-        "flags.dnd5e.roll": {type: "skill", skillId }
-      }
-    }, options);
-    rollData.parts = parts.concat(options.parts ?? []);
+      defaultAbility: this.system.skills[skillId]?.ability
+    }, dialogConfig);
+    const roll = await CONFIG.Dice.D20Roll.configureDialog(buildRoll, dialogConfig, rollConfig);
+    if ( !roll ) return null;
 
     /**
      * A hook event that fires before a skill check is rolled for an Actor.
      * @function dnd5e.preRollSkill
      * @memberof hookEvents
-     * @param {Actor5e} actor                Actor for which the skill check is being rolled.
-     * @param {D20RollConfiguration} config  Configuration data for the pending roll.
-     * @param {string} skillId               ID of the skill being rolled as defined in `DND5E.skills`.
-     * @returns {boolean}                    Explicitly return `false` to prevent skill check from being rolled.
+     * @param {Actor5e} actor   Actor for which the skill check is being rolled.
+     * @param {D20Roll} roll    The pending roll.
+     * @param {string} skillId  ID of the skill being rolled as defined in `DND5E.skills`.
+     * @returns {boolean}       Explicitly return `false` to prevent skill check from being rolled.
      */
-    if ( Hooks.call("dnd5e.preRollSkill", this, rollData, skillId) === false ) return;
+    if ( Hooks.call("dnd5e.preRollSkill", this, roll, skillId) === false ) return null;
 
-    const roll = await d20Roll(rollData);
+    // Configure the chat message.
+    messageOptions = foundry.utils.mergeObject({
+      messageData: {
+        speaker: ChatMessage.getSpeaker({actor: this}),
+        "flags.dnd5e.roll": {type: "skill", skillId}
+      }
+    }, messageOptions);
+
+    await d20Roll(roll, messageOptions);
 
     /**
      * A hook event that fires after a skill check has been rolled for an Actor.
      * @function dnd5e.rollSkill
      * @memberof hookEvents
      * @param {Actor5e} actor   Actor for which the skill check has been rolled.
-     * @param {D20Roll} roll    The resulting roll.
+     * @param {D20Roll} roll    The evaluated roll.
      * @param {string} skillId  ID of the skill that was rolled as defined in `DND5E.skills`.
      */
-    if ( roll ) Hooks.callAll("dnd5e.rollSkill", this, roll, skillId);
+    Hooks.callAll("dnd5e.rollSkill", this, roll, skillId);
 
     return roll;
   }

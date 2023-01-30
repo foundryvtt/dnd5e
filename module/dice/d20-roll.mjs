@@ -1,20 +1,37 @@
+import D20RollConfig from "../applications/dice/d20-roll-config.mjs";
+
+/**
+ * @typedef {object} D20RollConfiguration
+ *
+ * ## Flags
+ * @property {boolean} [halflingLucky=false]   Is Halfling Luck modifying this roll?
+ * @property {boolean} [reliableTalent=false]  Is Reliable Talent modifying this roll?
+ * @property {boolean} [elvenAccuracy=false]   Is Elven Accuracy modifying this roll?
+ *
+ * ## D20Roll
+ * @property {string} [flavor]                 The roll's flavor string.
+ * @property {object} [data={}]                Formula data.
+ * @property {number} [advantageMode]          What advantage modifier to apply to the roll (none, advantage, or
+ *                                             disadvantage). See {@link D20Roll.ADV_MODE}.
+ * @property {number} [critical=20]            The d20 result which represents a critical success.
+ * @property {number} [fumble=1]               The d20 result which represents a critical failure.
+ * @property {number} [options.targetValue]    Assign a target value against which the result of this roll should be
+ *                                             compared.
+ *
+ * ## Chat Message
+ * @property {string} [rollMode]               The default roll mode to use for the roll. See CONST.DICE_ROLL_MODES.
+ */
+
 /**
  * A type of Roll specific to a d20-based check, save, or attack roll in the 5e system.
- * @param {string} formula                       The string formula to parse
- * @param {object} data                          The data object against which to parse attributes within the formula
- * @param {object} [options={}]                  Extra optional arguments which describe or modify the D20Roll
- * @param {number} [options.advantageMode]       What advantage modifier to apply to the roll (none, advantage,
- *                                               disadvantage)
- * @param {number} [options.critical]            The value of d20 result which represents a critical success
- * @param {number} [options.fumble]              The value of d20 result which represents a critical failure
- * @param {(number)} [options.targetValue]       Assign a target value against which the result of this roll should be
- *                                               compared
- * @param {boolean} [options.elvenAccuracy=false]      Allow Elven Accuracy to modify this roll?
- * @param {boolean} [options.halflingLucky=false]      Allow Halfling Luck to modify this roll?
- * @param {boolean} [options.reliableTalent=false]     Allow Reliable Talent to modify this roll?
  */
 export default class D20Roll extends Roll {
-  constructor(formula, data, options) {
+  /**
+   * @param {string} formula                     The string formula to parse.
+   * @param {object} data                        The data object containing formula data.
+   * @param {D20RollConfiguration} [options={}]  Additional options to configure the roll.
+   */
+  constructor(formula, data, options={}) {
     super(formula, data, options);
     if ( !this.options.configured ) this.configureModifiers();
   }
@@ -30,6 +47,58 @@ export default class D20Roll extends Roll {
     const newRoll = new this(roll.formula, roll.data, roll.options);
     Object.assign(newRoll, roll);
     return newRoll;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * @callback D20RollBuilder
+   * @param {object} [options={}]  Options to configure the roll generation.
+   * @returns {D20Roll}
+   */
+
+  /**
+   * Configuration for the d20 roll dialog.
+   * @typedef {object} D20DialogConfiguration
+   * @property {Event} [event]                   The triggering event for this roll.
+   * @property {string[]} [parts=[]]             Additional roll parts.
+   * @property {object} [data={}]                Additional roll data.
+   *
+   * ## D20 Properties
+   * @property {boolean} [advantage]             Apply advantage to the roll, unless overridden by the user.
+   * @property {boolean} [disadvantage]          Apply disadvantage to the roll, unless overridden by the user.
+   *
+   * ## Roll Configuration Dialog
+   * @property {boolean} [fastForward]           Should the roll configuration dialog be skipped?
+   * @property {boolean} [chooseModifier=false]  Allow the user to choose an ability modifier to use with the roll.
+   * @property {string} [defaultAbility]         The default ability to use if selection is possible.
+   * @property {string} [template]               A path to an alternative template to use for the configuration dialog.
+   * @property {string} [title]                  The title of the configuration dialog.
+   * @property {object} [dialogOptions={}]       Options to pass directly to the dialog.
+   */
+
+  /**
+   * Determine configuration options for an upcoming roll based on user input.
+   * Holding SHIFT, ALT, or CTRL when the roll is made will "fast-forward".
+   * This chooses the default options of a normal d20 roll with no bonus, advantage, or disadvantage respectively.
+   * @param {D20RollBuilder} buildRoll                  A function that constructs the appropriate D20Roll.
+   * @param {D20DialogConfiguration} [dialogConfig={}]  Options to configure the dialog.
+   * @param {D20RollConfiguration} [rollConfig={}]      Options forwarded to the D20Roll constructor.
+   * @returns {Promise<D20Roll|null>}                   A resulting D20Roll object constructed with the dialog, or null
+   *                                                    if the dialog was closed.
+   */
+  static async configureDialog(buildRoll, dialogConfig={}, rollConfig={}) {
+    const {
+      event, advantage, disadvantage, fastForward, chooseModifier=false, defaultAbility, template, title
+    } = dialogConfig;
+    const {isFF, advantageMode} = this.determineAdvantageMode({event, advantage, disadvantage, fastForward});
+    const defaultRollMode = rollConfig.rollMode || game.settings.get("core", "rollMode");
+    if ( isFF ) return buildRoll({...rollConfig, advantageMode, rollMode: defaultRollMode});
+    return new Promise(resolve => {
+      new D20RollConfig(buildRoll, rollConfig, {
+        resolve, chooseModifier, defaultAbility, defaultRollMode, template, title
+      }).render(true);
+    });
   }
 
   /* -------------------------------------------- */
