@@ -62,7 +62,7 @@ export default class GroupActorSheet extends ActorSheet {
     context.expandedData = {};
     for ( const id of this._expanded ) {
       const item = this.actor.items.get(id);
-      if (item) context.expandedData[id] = await item.getChatData({secrets: this.actor.isOwner});
+      if ( item ) context.expandedData[id] = await item.getChatData({secrets: this.actor.isOwner});
     }
     context.inventoryFilters = false;
     context.rollableClass = this.isEditable ? "rollable" : "";
@@ -100,6 +100,7 @@ export default class GroupActorSheet extends ActorSheet {
     const members = [];
     if ( stats.nMembers ) members.push(`${stats.nMembers} ${game.i18n.localize("DND5E.GroupMembers")}`);
     if ( stats.nVehicles ) members.push(`${stats.nVehicles} ${game.i18n.localize("DND5E.GroupVehicles")}`);
+    if ( !members.length ) return game.i18n.localize("DND5E.GroupSummaryEmpty");
     return game.i18n.format("DND5E.GroupSummary", {members: formatter.format(members)});
   }
 
