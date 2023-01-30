@@ -38,7 +38,7 @@
             {{#if ../isCharacter}}
                 <div class="item-detail item-weight">{{localize "DND5E.Weight"}}</div>
             {{/if}}
-            <div class="item-detail item-quantity">{{localize "DND5E.Quantity"}}</div>
+            <div class="item-detail item-quantity">{{localize "DND5E.QuantityAbbr"}}</div>
             <div class="item-detail item-uses">{{localize "DND5E.Charges"}}</div>
             <div class="item-detail item-action">{{localize "DND5E.Usage"}}</div>
         {{/if}}
@@ -63,7 +63,10 @@
                 <input type="text" value="{{item.name}}">
                 {{else}}
                 <div class="item-image" tabindex="0" role="button" aria-label="{{item.name}}" style="background-image: url('{{item.img}}')"></div>
-                <h4>{{item.name}}</h4>
+                <h4>
+                    {{item.name~}}
+                    {{~#if ctx.isStack}} ({{item.system.quantity}}){{/if}}
+                </h4>
                 {{#if ctx.attunement}}
                 <div class="item-detail attunement">
                     <i class="fas {{ctx.attunement.icon}} {{ctx.attunement.cls}}"
