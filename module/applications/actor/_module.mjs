@@ -16,5 +16,7 @@ export {default as ActorSensesConfig} from "./senses-config.mjs";
 export {default as ActorSheetFlags} from "./sheet-flags.mjs";
 export {default as ShortRestDialog} from "./short-rest.mjs";
 export {default as ActorSkillConfig} from "./skill-config.mjs";
+export {default as ProficiencyConfig} from "./proficiency-config.mjs";
 export {default as TraitSelector} from "./trait-selector.mjs";
+export {default as ToolSelector} from "./tool-selector.mjs";
 export {default as ActorTypeConfig} from "./type-config.mjs";

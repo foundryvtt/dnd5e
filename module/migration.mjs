@@ -266,6 +266,12 @@ export const migrateActorData = function(actor, migrationData) {
       arr.push(foundry.utils.expandObject(itemUpdate));
     }
 
+    // Update tool expertise.
+    const hasToolProf = itemData.system.baseItem in actor.system.tools;
+    if ( (itemData.type === "tool") && (itemData.system.proficient > 1) && hasToolProf ) {
+      updateData[`system.tools.${itemData.system.baseItem}.value`] = itemData.system.proficient;
+    }
+
     return arr;
   }, []);
   if ( items.length > 0 ) updateData.items = items;

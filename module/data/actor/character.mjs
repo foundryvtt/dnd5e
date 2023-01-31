@@ -109,8 +109,7 @@ export default class CharacterData extends CreatureTemplate {
         ...TraitsFields.common,
         ...TraitsFields.creature,
         weaponProf: TraitsFields.makeSimpleTrait({label: "DND5E.TraitWeaponProf"}),
-        armorProf: TraitsFields.makeSimpleTrait({label: "DND5E.TraitArmorProf"}),
-        toolProf: TraitsFields.makeSimpleTrait({label: "DND5E.TraitToolProf"})
+        armorProf: TraitsFields.makeSimpleTrait({label: "DND5E.TraitArmorProf"})
       }, {label: "DND5E.Traits"}),
       resources: new foundry.data.fields.SchemaField({
         primary: makeResourceField({label: "DND5E.ResourcePrimary"}),

@@ -6,11 +6,16 @@ import BaseConfigSheet from "./base-config.mjs";
  * @param {Actor} actor                 The Actor instance being displayed within the sheet.
  * @param {ApplicationOptions} options  Additional application configuration options.
  * @param {string} skillId              The skill key as defined in CONFIG.DND5E.skills.
+ * @deprecated since dnd5e 2.2, targeted for removal in 2.4
  */
 export default class ActorSkillConfig extends BaseConfigSheet {
   constructor(actor, options, skillId) {
     super(actor, options);
     this._skillId = skillId;
+
+    foundry.utils.logCompatibilityWarning("ActorSkillConfig has been deprecated in favor of the more general "
+      + "ProficiencyConfig available at 'dnd5e.applications.actor.ProficiencyConfig'. Support for the old application "
+      + "will be removed in a future version.", {since: "DnD5e 2.2", until: "DnD5e 2.4"});
   }
 
   /* -------------------------------------------- */

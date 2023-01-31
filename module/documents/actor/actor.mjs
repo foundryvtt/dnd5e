@@ -3,6 +3,7 @@ import { d20Roll } from "../../dice/dice.mjs";
 import { simplifyBonus } from "../../utils.mjs";
 import ShortRestDialog from "../../applications/actor/short-rest.mjs";
 import LongRestDialog from "../../applications/actor/long-rest.mjs";
+import * as Trait from "./trait.mjs";
 
 /**
  * Extend the base Actor class to implement additional system-specific logic.
@@ -163,6 +164,7 @@ export default class Actor5e extends Actor {
     const checkBonus = simplifyBonus(globalBonuses?.check, rollData);
     this._prepareAbilities(rollData, globalBonuses, checkBonus, originalSaves);
     this._prepareSkills(rollData, globalBonuses, checkBonus, originalSkills);
+    this._prepareTools(rollData, globalBonuses, checkBonus);
     this._prepareArmorClass();
     this._prepareEncumbrance();
     this._prepareHitPoints(rollData);
@@ -426,7 +428,6 @@ export default class Actor5e extends Actor {
     const skillBonus = simplifyBonus(globalBonuses.skill, bonusData);
     for ( const [id, skl] of Object.entries(this.system.skills) ) {
       const ability = this.system.abilities[skl.ability];
-      skl.value = Math.clamped(Number(skl.value).toNearest(0.5), 0, 2) ?? 0;
       const baseBonus = simplifyBonus(skl.bonuses?.check, bonusData);
       let roundDown = true;
 
@@ -459,6 +460,41 @@ export default class Actor5e extends Actor {
       const passive = flags.observantFeat && (feats.observantFeat.skills.includes(id)) ? 5 : 0;
       const passiveBonus = simplifyBonus(skl.bonuses?.passive, bonusData);
       skl.passive = 10 + skl.mod + skl.bonus + skl.prof.flat + passive + passiveBonus;
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare tool checks. Mutates the values of system.tools.
+   * @param {object} bonusData       Data produced by `getRollData` to be applied to bonus formulae.
+   * @param {object} globalBonuses   Global bonus data.
+   * @param {number} checkBonus      Global ability check bonus.
+   * @protected
+   */
+  _prepareTools(bonusData, globalBonuses, checkBonus) {
+    if ( this.type === "vehicle" ) return;
+    const flags = this.flags.dnd5e ?? {};
+    for ( const tool of Object.values(this.system.tools) ) {
+      const ability = this.system.abilities[tool.ability];
+      const baseBonus = simplifyBonus(tool.bonuses.check, bonusData);
+      let roundDown = true;
+
+      // Remarkable Athlete.
+      if ( this._isRemarkableAthlete(tool.ability) && (tool.value < 0.5) ) {
+        tool.value = 0.5;
+        roundDown = false;
+      }
+
+      // Jack of All Trades.
+      else if ( flags.jackOfAllTrades && (tool.value < 0.5) ) tool.value = 0.5;
+
+      const checkBonusAbl = simplifyBonus(ability?.bonuses?.check, bonusData);
+      tool.bonus = baseBonus + checkBonus + checkBonusAbl;
+      tool.mod = ability?.mod ?? 0;
+      tool.prof = new Proficiency(this.system.attributes.prof, tool.value, roundDown);
+      tool.total = tool.mod + tool.bonus;
+      if ( Number.isNumeric(tool.prof.term) ) tool.total += tool.prof.flat;
     }
   }
 
@@ -1099,6 +1135,91 @@ export default class Actor5e extends Actor {
      * @param {string} skillId  ID of the skill that was rolled as defined in `DND5E.skills`.
      */
     if ( roll ) Hooks.callAll("dnd5e.rollSkill", this, roll, skillId);
+
+    return roll;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Roll a Tool Check.
+   * Prompt the user for input regarding Advantage/Disadvantage and any Situational Bonuses.
+   * @param {string} toolId       The identifier of the tool being rolled.
+   * @param {object} options      Options which configure how the tool check is rolled.
+   * @returns {Promise<D20Roll>}  A Promise which resolves to the created Roll instance.
+   */
+  async rollToolCheck(toolId, options={}) {
+    // Prepare roll data.
+    const tool = this.system.tools[toolId];
+    const ability = this.system.abilities[tool?.ability ?? "int"];
+    const globalBonuses = this.system.bonuses?.abilities ?? {};
+    const parts = ["@mod", "@abilityCheckBonus"];
+    const data = this.getRollData();
+
+    // Add ability modifier.
+    data.mod = tool?.mod ?? 0;
+    data.defaultAbility = options.ability || (tool?.ability ?? "int");
+
+    // Add proficiency.
+    if ( tool?.prof.hasProficiency ) {
+      parts.push("@prof");
+      data.prof = tool.prof.term;
+    }
+
+    // Global ability check bonus.
+    if ( globalBonuses.check ) {
+      parts.push("@checkBonus");
+      data.checkBonus = Roll.replaceFormulaData(globalBonuses.check, data);
+    }
+
+    // Ability-specific check bonus.
+    if ( ability?.bonuses.check ) data.abilityCheckBonus = Roll.replaceFormulaData(ability.bonuses.check, data);
+    else data.abilityCheckBonus = 0;
+
+    // Tool-specific check bonus.
+    if ( tool?.bonuses.check || options.bonus ) {
+      parts.push("@toolBonus");
+      const bonus = [];
+      if ( tool?.bonuses.check ) bonus.push(Roll.replaceFormulaData(tool.bonuses.check, data));
+      if ( options.bonus ) bonus.push(Roll.replaceFormulaData(options.bonus, data));
+      data.toolBonus = bonus.join(" + ");
+    }
+
+    const flavor = game.i18n.format("DND5E.ToolPromptTitle", {tool: Trait.keyLabel("tool", toolId) ?? ""});
+    const rollData = foundry.utils.mergeObject({
+      data, flavor,
+      title: `${flavor}: ${this.name}`,
+      chooseModifier: true,
+      halflingLucky: this.getFlag("dnd5e", "halflingLucky"),
+      messageData: {
+        speaker: options.speaker || ChatMessage.implementation.getSpeaker({actor: this}),
+        "flags.dnd5e.roll": {type: "tool", toolId}
+      }
+    }, options);
+    rollData.parts = parts.concat(options.parts ?? []);
+
+    /**
+     * A hook event that fires before a tool check is rolled for an Actor.
+     * @function dnd5e.preRollRool
+     * @memberof hookEvents
+     * @param {Actor5e} actor                Actor for which the tool check is being rolled.
+     * @param {D20RollConfiguration} config  Configuration data for the pending roll.
+     * @param {string} toolId                Identifier of the tool being rolled.
+     * @returns {boolean}                    Explicitly return `false` to prevent skill check from being rolled.
+     */
+    if ( Hooks.call("dnd5e.preRollToolCheck", this, rollData, toolId) === false ) return;
+
+    const roll = await d20Roll(rollData);
+
+    /**
+     * A hook event that fires after a tool check has been rolled for an Actor.
+     * @function dnd5e.rollTool
+     * @memberof hookEvents
+     * @param {Actor5e} actor   Actor for which the tool check has been rolled.
+     * @param {D20Roll} roll    The resulting roll.
+     * @param {string} toolId   Identifier of the tool that was rolled.
+     */
+    if ( roll ) Hooks.callAll("dnd5e.rollToolCheck", this, roll, toolId);
 
     return roll;
   }
