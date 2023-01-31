@@ -46,7 +46,7 @@ export default class CreatureTemplate extends CommonTemplate {
       }, {label: "DND5E.Bonuses"}),
       skills: new MappingField(new foundry.data.fields.SchemaField({
         value: new foundry.data.fields.NumberField({
-          required: true, min: 0, max: 2, step: 0.5, initial: 0, label: "DND5E.ProficiencyLevel"
+          required: true, nullable: false, min: 0, max: 2, step: 0.5, initial: 0, label: "DND5E.ProficiencyLevel"
         }),
         ability: new foundry.data.fields.StringField({required: true, initial: "dex", label: "DND5E.Ability"}),
         bonuses: new foundry.data.fields.SchemaField({
@@ -59,7 +59,7 @@ export default class CreatureTemplate extends CommonTemplate {
       }),
       tools: new MappingField(new foundry.data.fields.SchemaField({
         value: new foundry.data.fields.NumberField({
-          required: true, min: 0, max: 2, step: 0.5, initial: 1, label: "DND5E.ProficiencyLevel"
+          required: true, nullable: false, min: 0, max: 2, step: 0.5, initial: 1, label: "DND5E.ProficiencyLevel"
         }),
         ability: new foundry.data.fields.StringField({required: true, initial: "int", label: "DND5E.Ability"}),
         bonuses: new foundry.data.fields.SchemaField({

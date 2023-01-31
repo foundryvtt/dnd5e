@@ -30,7 +30,7 @@ export default class ToolData extends SystemDataModel.mixin(
       }),
       chatFlavor: new foundry.data.fields.StringField({required: true, label: "DND5E.ChatFlavor"}),
       proficient: new foundry.data.fields.NumberField({
-        required: true, nullable: false, initial: 0, min: 0, label: "DND5E.ItemToolProficiency"
+        required: true, initial: null, min: 0, max: 2, step: 0.5, label: "DND5E.ItemToolProficiency"
       }),
       bonus: new FormulaField({required: true, label: "DND5E.ItemToolBonus"})
     });
@@ -76,5 +76,22 @@ export default class ToolData extends SystemDataModel.mixin(
    */
   get abilityMod() {
     return this.ability || "int";
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * The proficiency multiplier for this item.
+   * @returns {number}
+   * @protected
+   */
+  get _proficiencyMultiplier() {
+    if ( Number.isFinite(this.proficient) ) return this.proficient;
+    const actor = this.parent.actor;
+    if ( !actor ) return 0;
+    if ( actor.type === "npc" ) return 1;
+    const baseItemProf = actor.system.tools?.[this.baseItem];
+    const categoryProf = actor.system.tools?.[this.toolType];
+    return Math.max(baseItemProf?.value ?? 0, categoryProf?.value ?? 0);
   }
 }

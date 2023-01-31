@@ -295,7 +295,7 @@ export default class ItemSheet5e extends ItemSheet {
       case "spell":
         return CONFIG.DND5E.spellPreparationModes[this.item.system.preparation];
       case "tool":
-        return game.i18n.localize(this.item.system.proficient ? "DND5E.Proficient" : "DND5E.NotProficient");
+        return CONFIG.DND5E.proficiencyLevels[this.item.system.prof?.multiplier || 0];
     }
     return null;
   }

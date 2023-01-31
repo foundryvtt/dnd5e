@@ -1106,7 +1106,7 @@ export default class Actor5e extends Actor {
   async rollToolCheck(toolId, options={}) {
     // Prepare roll data.
     const tool = this.system.tools[toolId];
-    const ability = this.system.abilities[tool?.ability ?? "int"];
+    const ability = this.system.abilities[options.ability || (tool?.ability ?? "int")];
     const globalBonuses = this.system.bonuses?.abilities ?? {};
     const parts = ["@mod", "@abilityCheckBonus"];
     const data = this.getRollData();
@@ -1116,9 +1116,10 @@ export default class Actor5e extends Actor {
     data.defaultAbility = options.ability || (tool?.ability ?? "int");
 
     // Add proficiency.
-    if ( tool?.prof.hasProficiency ) {
+    const prof = options.prof ?? tool?.prof;
+    if ( prof?.hasProficiency ) {
       parts.push("@prof");
-      data.prof = tool.prof.term;
+      data.prof = prof.term;
     }
 
     // Global ability check bonus.

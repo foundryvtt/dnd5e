@@ -132,4 +132,14 @@ export default class SpellData extends SystemDataModel.mixin(
     return this.parent?.actor?.flags.dnd5e?.spellCriticalThreshold ?? Infinity;
   }
 
+  /* -------------------------------------------- */
+
+  /**
+   * The proficiency multiplier for this item.
+   * @returns {number}
+   * @protected
+   */
+  get _proficiencyMultiplier() {
+    return 1;
+  }
 }
