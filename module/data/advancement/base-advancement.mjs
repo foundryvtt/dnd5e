@@ -45,7 +45,8 @@ export default class BaseAdvancementData extends SparseDataModel {
       }),
       classRestriction: new StringField({
         initial: undefined, choices: ["primary", "secondary"], label: "DND5E.AdvancementClassRestriction"
-      })
+      }),
+      flags: new foundry.data.fields.ObjectField()
     };
   }
 
