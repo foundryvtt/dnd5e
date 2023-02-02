@@ -30,8 +30,7 @@ export function actorKeyPath(trait) {
  * @returns {object}      Trait categories defined within `CONFIG.DND5E`.
  */
 export function categories(trait) {
-  const traitConfig = CONFIG.DND5E.traits[trait];
-  return CONFIG.DND5E[traitConfig.configKey ?? trait];
+  return CONFIG.DND5E[CONFIG.DND5E.traits[trait]?.configKey ?? trait] ?? {};
 }
 
 /* -------------------------------------------- */
@@ -44,6 +43,7 @@ export function categories(trait) {
  */
 export async function choices(trait, chosen=new Set()) {
   const traitConfig = CONFIG.DND5E.traits[trait];
+  if ( !traitConfig ) return new SelectChoices();
   if ( foundry.utils.getType(chosen) === "Array" ) chosen = new Set(chosen);
 
   let data = Object.entries(categories(trait)).reduce((obj, [key, data]) => {
@@ -211,6 +211,8 @@ export function traitLabel(trait, count) {
  */
 export function keyLabel(trait, key) {
   const traitConfig = CONFIG.DND5E.traits[trait];
+  if ( !traitConfig ) return key;
+
   if ( categories(trait)[key] ) {
     const category = categories(trait)[key];
     if ( !traitConfig.labelKey ) return category;

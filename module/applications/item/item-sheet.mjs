@@ -627,9 +627,9 @@ export default class ItemSheet5e extends ItemSheet {
     }
 
     // If no advancements need to be applied, just add them to the item
-    const advancementArray = foundry.utils.deepClone(this.item.system.advancement);
-    advancementArray.push(...advancements.map(a => a.toObject()));
-    this.item.update({"system.advancement": advancementArray});
+    const advancementCollection = this.item.toObject().system.advancement;
+    advancementCollection.push(...advancements.map(a => a.toObject()));
+    this.item.update({"system.advancement": advancementCollection});
   }
 
   /* -------------------------------------------- */
