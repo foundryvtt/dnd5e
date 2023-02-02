@@ -1595,6 +1595,7 @@ DND5E.CR_EXP_LEVELS = [
  *
  * @typedef {object} TraitConfiguration
  * @property {string} label               Localization key for the trait name.
+ * @property {string} icon                Path to the icon used to represent this trait.
  * @property {string} [actorKeyPath]      If the trait doesn't directly map to an entry as `traits.[key]`, where is
  *                                        this trait's data stored on the actor?
  * @property {string} [configKey]         If the list of trait options doesn't match the name of the trait, where can

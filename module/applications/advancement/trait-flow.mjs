@@ -33,6 +33,42 @@ export default class TraitFlow extends AdvancementFlow {
 
   /* -------------------------------------------- */
 
+  /**
+   * Get currently selected traits for the actor.
+   * @type {Set<string>}
+   */
+  get selectedTraits() {
+    const type = this.advancement.configuration.type;
+    return this.constructor.selectedTraits(this.advancement.actor, type);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Get selected traits for the provided actor.
+   * @param {Actor5e} actor         Actor from which to gather the trait information.
+   * @param {string} type           Trait as defined in `CONFIG.DND5E.traits`.
+   * @returns {Set<string>}         Set of trait keys.
+   */
+  static selectedTraits(actor, type) {
+    if ( type === "skills" ) return new Set(
+      Object.keys(CONFIG.DND5E.skills).filter(key => actor.system.skills[key].value >= 1)
+    );
+
+    if ( type === "tool" ) return new Set(
+      Object.entries(actor.system.tools).filter(([k, v]) => v.value >= 1).map(([k]) => k)
+    );
+
+    if ( type === "saves" ) return new Set(
+      Object.keys(CONFIG.DND5E.abilities).filter(key => actor.system.abilities[key].proficient >= 1)
+    );
+
+    const keyPath = `${Trait.actorKeyPath(type)}.value`;
+    return new Set(foundry.utils.getProperty(actor.system, keyPath));
+  }
+
+  /* -------------------------------------------- */
+
   /** @inheritdoc */
   async getData() {
     this.chosen ??= await this.prepareInitialValue();
@@ -101,7 +137,7 @@ export default class TraitFlow extends AdvancementFlow {
     const existingChosen = this.retainedData?.chosen ?? this.advancement.value.chosen;
     if ( existingChosen && existingChosen.size ) return new Set(existingChosen);
     const { available } = await this.constructor.prepareUnfulfilledTraits(
-      this.advancement.configuration, this.getSelectedTraits(), new Set()
+      this.advancement.configuration, {actor: this.selectedTraits}
     );
     const chosen = new Set();
     for ( const { set } of available ) {
@@ -139,32 +175,6 @@ export default class TraitFlow extends AdvancementFlow {
   /* -------------------------------------------- */
 
   /**
-   * Get currently selected traits for the actor.
-   * @returns {Set<string>}  Set of trait keys.
-   */
-  getSelectedTraits() {
-    const type = this.advancement.configuration.type;
-    const system = this.advancement.actor.system;
-
-    if ( type === "skills" ) return new Set(
-      Object.keys(CONFIG.DND5E.skills).filter(key => system.skills[key].value >= 1)
-    );
-
-    if ( type === "tool" ) return new Set(
-      Object.entries(system.tools).filter(([k, v]) => v.value >= 1).map(([k]) => k)
-    );
-
-    if ( type === "saves" ) return new Set(
-      Object.keys(CONFIG.DND5E.abilities).filter(key => system.abilities[key].proficient >= 1)
-    );
-
-    const keyPath = `${Trait.actorKeyPath(type)}.value`;
-    return new Set(foundry.utils.getProperty(system, keyPath));
-  }
-
-  /* -------------------------------------------- */
-
-  /**
    * Prepare the list of available traits that the player can choose.
    * @param {Set<string>} chosen  List of trait keys that have been selected.
    * @returns {{
@@ -175,7 +185,7 @@ export default class TraitFlow extends AdvancementFlow {
   async prepareAvailableTraits(chosen) {
     const config = this.advancement.configuration;
     let { available, choices } = await this.constructor.prepareUnfulfilledTraits(
-      config, this.getSelectedTraits(), chosen
+      config, {actor: this.selectedTraits, item: chosen}
     );
 
     // If all traits of this type are already assigned, then nothing new can be selected
@@ -222,14 +232,16 @@ export default class TraitFlow extends AdvancementFlow {
   /**
    * Determine which of the provided grants, if any, still needs to be fulfilled.
    * @param {TraitAdvancementConfig} config  Configuration data for the TraitAdvancement.
-   * @param {Set<string>} actorSelected      Values that have already been selected on the actor.
-   * @param {Set<string>} itemSelected       Values that have already been selected on this advancement.
+   * @param {object} selected
+   * @param {Set<string>} [selected.actor]  Values that have already been selected on the actor.
+   * @param {Set<string>} [selected.item]   Values that have already been selected on this advancement.
    * @returns {{
    *   available: SelectChoices[],
    *   choices: SelectChoices
    * }}  List of grants to be fulfilled and available choices.
    */
-  static async prepareUnfulfilledTraits(config, actorSelected, itemSelected) {
+  static async prepareUnfulfilledTraits(config, selected) {
+    selected.item ??= new Set();
     const choices = config.choices.reduce((arr, choice) => {
       let count = choice.count;
       while ( count > 0 ) {
@@ -240,7 +252,7 @@ export default class TraitFlow extends AdvancementFlow {
     }, []);
 
     // If all of the grants have been selected, no need to go further
-    if ( (config.grants.size + choices.length) <= itemSelected.size ) return { available: [], choices: {} };
+    if ( (config.grants.size + choices.length) <= selected.item.size ) return { available: [], choices: {} };
 
     // Figure out how many choices each grant & choice provides and sort by most restrictive first
     const allChoices = await Trait.choices(config.type);
@@ -251,10 +263,10 @@ export default class TraitFlow extends AdvancementFlow {
     available.sort((lhs, rhs) => lhs.set.size - rhs.set.size);
 
     // Remove any fulfilled grants
-    for ( const selected of itemSelected ) available.findSplice(grant => grant.set.has(selected));
+    for ( const key of selected.item ) available.findSplice(grant => grant.set.has(key));
 
     // Filter out any traits that have already been selected
-    allChoices.exclude(new Set([...actorSelected, ...itemSelected]));
+    allChoices.exclude(new Set([...(selected.actor ?? []), ...selected.item]));
     available = available.map(a => allChoices.filtered(a));
 
     return { available, choices: allChoices };

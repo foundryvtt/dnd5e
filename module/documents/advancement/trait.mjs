@@ -46,7 +46,7 @@ export default class TraitAdvancement extends Advancement {
 
   /** @inheritdoc */
   configuredForLevel(level) {
-    return !foundry.utils.isEmpty(this.value);
+    return !this.value.chosen?.size;
   }
 
   /* -------------------------------------------- */
