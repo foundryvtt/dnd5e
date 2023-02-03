@@ -858,7 +858,9 @@ export default class ActorSheet5e extends ActorSheet {
     const value = input.value;
     if ( ["+", "-"].includes(value[0]) ) {
       const delta = parseFloat(value);
-      input.value = Number(foundry.utils.getProperty(this.actor, input.name)) + delta;
+      const item = this.actor.items.get(input.closest("[data-item-id]")?.dataset.itemId);
+      if ( !item ) input.value = Number(foundry.utils.getProperty(this.actor, input.name)) + delta;
+      else input.value = Number(foundry.utils.getProperty(item, input.dataset.name)) + delta;
     } else if ( value[0] === "=" ) input.value = value.slice(1);
   }
 

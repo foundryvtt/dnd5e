@@ -101,13 +101,13 @@
                 {{/if}}
 
                 <div class="item-detail item-quantity">
-                    <input type="text" value="{{item.system.quantity}}" placeholder="0">
+                    <input type="text" value="{{item.system.quantity}}" placeholder="0" data-dtype="Number" data-name="system.quantity">
                 </div>
 
                 {{#if @root.isCharacter}}
                 <div class="item-detail item-uses">
                     {{#if ctx.hasUses }}
-                        <input type="text" value="{{item.system.uses.value}}" placeholder="0"/>
+                        <input type="text" value="{{item.system.uses.value}}" placeholder="0" data-dtype="Number" data-name="system.uses.value">
                         / {{item.system.uses.max}}
                     {{/if}}
                 </div>
