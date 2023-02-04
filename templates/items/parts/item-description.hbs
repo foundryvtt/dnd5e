@@ -54,21 +54,48 @@
         {{/if}}
     </div>
 
-    <div class="flexcol">
-        {{#if (or showIdentifiedDesc (not isIdentifiable))}}
+    <div>
+        {{!-- {{#unless (or editingIdentifiedDesc editingUnidentifiedDesc)}}
             {{editor descriptionHTML target="system.description.value"
+            button=true editable=editable engine="prosemirror" collaborate=false}}
+            <div class="unidentified-description">
+                <h3>{{localize "DND5E.UnidentifiedDesc"}}</h3>
+                {{editor unidentifiedDescriptionHTML target="system.description.unidentified"
                 button=true editable=editable engine="prosemirror" collaborate=false}}
+            </div>
+        {{/unless}} --}}
+        {{#unless editingUnidentifiedDesc}}
+            {{editor descriptionHTML target="system.description.value"
+            button=(not editingIdentifiedDesc) editable=editable engine="prosemirror" collaborate=false}}
+        {{/unless}}
+        {{#unless editingIdentifiedDesc}}
+            {{#unless editingUnidentifiedDesc}}
+            <div class="unidentified-description">
+                <h3>{{localize "DND5E.UnidentifiedDesc"}}</h3>
+            {{/unless}}
+            {{editor unidentifiedDescriptionHTML target="system.description.unidentified"
+            button=(not editingUnidentifiedDesc) editable=editable engine="prosemirror" collaborate=false}}
+            {{#unless editingUnidentifiedDesc}}
+            </div>
+            {{/unless}}
+
+        {{/unless}}
+
+        {{!-- {{#if (or showIdentifiedDesc (not isIdentifiable))}}
+        {{editor descriptionHTML target="system.description.value"
+        button=true editable=editable engine="prosemirror" collaborate=false}}
         {{/if}}
         {{#if showUnidentifiedDesc}}
-            {{#if isGM}}
-                <div class="unidentified-description">
-                <h3>{{localize "DND5E.UnidentifiedDesc"}}</h3>
+        {{#if isGM}}
+        <div class="unidentified-description">
+            <h3>{{localize "DND5E.UnidentifiedDesc"}}</h3>
             {{/if}}
             {{editor unidentifiedDescriptionHTML target="system.description.unidentified"
-                button=true editable=editable engine="prosemirror" collaborate=false}}
+            button=true editable=editable engine="prosemirror" collaborate=false}}
             {{#if isGM}}
-                </div>
-            {{/if}}
+        </div>
         {{/if}}
+        {{/if}} --}}
     </div>
+
 </div>

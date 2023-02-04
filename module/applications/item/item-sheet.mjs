@@ -9,6 +9,9 @@ import { unidentifiedName } from "../../utils.mjs";
  * Override and extend the core ItemSheet implementation to handle specific item types.
  */
 export default class ItemSheet5e extends ItemSheet {
+
+  currentlyBeingEdited = false;
+
   constructor(...args) {
     super(...args);
 
@@ -162,6 +165,8 @@ export default class ItemSheet5e extends ItemSheet {
       relativeTo: this.item,
       rollData: context.rollData
     })
+    context.editingIdentifiedDesc = this.currentlyBeingEdited === 'system.description.value';
+    context.editingUnidentifiedDesc = this.currentlyBeingEdited === 'system.description.unidentified';
     return context;
   }
 
@@ -402,15 +407,25 @@ export default class ItemSheet5e extends ItemSheet {
 
   /** @inheritdoc */
   async activateEditor(name, options={}, initialContent="") {
-    options.relativeLinks = true;
-    options.plugins = {
-      menu: ProseMirror.ProseMirrorMenu.build(ProseMirror.defaultSchema, {
-        compact: true,
-        destroyOnSave: true,
-        onSave: () => this.saveEditor(name, {remove: true})
-      })
-    };
-    return super.activateEditor(name, options, initialContent);
+    console.log(name, options, initialContent);
+    
+    if(!this.currentlyBeingEdited &&  (name === 'system.description.value' || name ==='system.description.unidentified')) { 
+      this.currentlyBeingEdited = name;
+      this.render(); 
+    } else {
+      options.relativeLinks = true;
+      options.plugins = {
+        menu: ProseMirror.ProseMirrorMenu.build(ProseMirror.defaultSchema, {
+          compact: true,
+          destroyOnSave: true,
+          onSave: () =>{
+            this.saveEditor(name, {remove: true}) 
+            this.currentlyBeingEdited = false;
+          }
+        })
+      };
+      return super.activateEditor(name, options, initialContent);
+    }
   }
 
   /* -------------------------------------------- */
