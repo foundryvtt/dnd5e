@@ -54,7 +54,7 @@ export default class CreatureTemplate extends CommonTemplate {
       }), {initialKeys: CONFIG.DND5E.skills, initialValue: this._initialSkillValue}),
       spells: new MappingField(new foundry.data.fields.SchemaField({
         value: new foundry.data.fields.NumberField({
-          nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.SpellProfAvailable"
+          nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.SpellProgAvailable"
         }),
         override: new foundry.data.fields.NumberField({
           integer: true, min: 0, label: "DND5E.SpellProgOverride"
