@@ -234,6 +234,10 @@ export default class GroupActorSheet extends ActorSheet {
     super.activateListeners(html);
     html.find(".group-member .name").click(this._onClickMemberName.bind(this));
     if ( this.isEditable ) {
+      // Input focus and update
+      const inputs = html.find("input");
+      inputs.focus(ev => ev.currentTarget.select());
+      inputs.addBack().find('[type="text"][data-dtype="Number"]').change(ActorSheet5e.prototype._onChangeInputDelta.bind(this));
       html.find(".action-button").click(this._onClickActionButton.bind(this));
       html.find(".item-control").click(this._onClickItemControl.bind(this));
       html.find(".item .rollable h4").click(event => this._onClickItemName(event));
