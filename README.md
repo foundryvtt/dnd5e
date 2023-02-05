@@ -23,11 +23,11 @@ The software component of this system is distributed under the MIT license.
 To install and use the DnD5e system for Foundry Virtual Tabletop, simply paste the following URL into the 
 **Install System** dialog on the Setup menu of the application.
 
-https://raw.githubusercontent.com/foundryvtt/dnd5e/master/system.json
+https://raw.githubusercontent.com/righthandofvecna/dnd5e-foundry-vtt/master/system.json
 
 If you wish to manually install the system, you must clone or extract it into the ``Data/systems/dnd5e`` folder. You
 may do this by cloning the repository or downloading a zip archive from the
-[Releases Page](https://github.com/foundryvtt/dnd5e/releases).
+[Releases Page](https://github.com/righthandofvecna/dnd5e-foundry-vtt/releases).
 
 ## Community Contribution
 
