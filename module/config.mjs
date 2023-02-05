@@ -90,6 +90,7 @@ DND5E.skills = {
   rel: { label: "DND5E.SkillRel", ability: "int" },
   slt: { label: "DND5E.SkillSlt", ability: "dex" },
   ste: { label: "DND5E.SkillSte", ability: "dex" },
+  stw: { label: "DND5E.SkillStw", ability: "cha" },
   sur: { label: "DND5E.SkillSur", ability: "wis" }
 };
 preLocalize("skills", { key: "label", sort: true });
