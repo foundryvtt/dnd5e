@@ -315,7 +315,7 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
   /* -------------------------------------------- */
 
   /** @override */
-  async _onDropSingleItem(itemData) {
+  async _onDropSingleItem(event, itemData) {
 
     // Increment the number of class levels a character instead of creating a new item
     if ( itemData.type === "class" ) {
@@ -357,6 +357,6 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
         return false;
       }
     }
-    return super._onDropSingleItem(itemData);
+    return super._onDropSingleItem(event, itemData);
   }
 }
