@@ -39,8 +39,7 @@ export default class AbilityScoreImprovementAdvancement extends Advancement {
    * @type {boolean}
    */
   get allowFeat() {
-    // TODO: Since feats replacing ASIs is technically an optional rule, should there also be a system setting?
-    return this.item.type === "class";
+    return (this.item.type === "class") && game.settings.get("dnd5e", "allowFeats");
   }
 
   /* -------------------------------------------- */
