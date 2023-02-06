@@ -2,9 +2,9 @@
 
 from functools import reduce
 from random import randint as random, choice as choice
-import re, string
+import re, string, json
 
-from typing import List, Dict, Union
+from typing import List, Dict, Iterable
 
 #
 # Define common exceptions
@@ -57,7 +57,7 @@ def escape(txt:str, toescape:list=['\'','\"'], escapechar:str="\\"):
         ret = ret.replace(te,escapechar+te)
     return ret
 
-def replaceList(txt:str, replacelist:List[str], replacewith:str=""):
+def replaceList(txt:str, replacelist:Iterable[str], replacewith:str=""):
     for r in replacelist:
         txt = txt.replace(r,replacewith)
     return txt
@@ -67,7 +67,7 @@ def cmdize(potentialInvoke):
     if potentialInvoke is None:
         return None
     if isinstance(potentialInvoke, str):
-        return reduce(lambda i,r: i.replace(r[0], r[1]), [(' ','-'),('.','-'),(',',''),('\'',''),('\\','-'),('/','-')], potentialInvoke.lower()).strip()
+        return replaceList(replaceList(potentialInvoke.lower().strip(), ",\'():", ""), " .\\/", "-")
     return [cmdize(x) for x in potentialInvoke]
 
 def title(text:str):
@@ -308,6 +308,14 @@ def xpToCR(xp:int)->float:
 
 def id_generator(size=16, chars=string.ascii_uppercase + string.digits):
         return ''.join(choice(chars) for _ in range(size))    
+
+
+def equalsWithoutUpdate(a, b):
+    a = {**a}
+    b = {**b}
+    del a["_stats"]
+    del b["_stats"]
+    return json.dumps(a, sort_keys=True) == json.dumps(b, sort_keys=True)
 
 
 # eof
