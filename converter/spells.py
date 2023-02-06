@@ -96,6 +96,8 @@ class Spell(object):
     _icon       = None
     effects     = []
     createdtime = None
+    formula     = ""
+    _damage     = None
 
     
     def __init__(self,spell_element):
@@ -299,7 +301,7 @@ class Spell(object):
             result["type"]  = "line"
             return result
         
-        CYLINDER_RE = re.compile("(?P<value>[0-9]+)-(?P<units>foot|mile)-radius, [0-9]+-(foot|mile)-high cylinder", re.IGNORECASE)
+        CYLINDER_RE = re.compile("(?P<value>[0-9]+)-(?P<units>foot|mile)[- ]radius, [0-9]+-(foot|mile)[- ]high cylinder", re.IGNORECASE)
         match = CYLINDER_RE.search(self.paragraphs)
         if match:
             result["value"] = int(match.group("value"))
@@ -429,13 +431,20 @@ class Spell(object):
     
     @property
     def parsedDamage(self)->list:
-        return [(m.group("dice"), nvl(m.group("type"),"")) for m in re.finditer(f"(?P<dice>[0-9]+d[0-9]+([\\+\\-][0-9]+)?) (?P<type>{'|'.join(DAMAGE_TYPES)})? ?damage", self.mainBodyText)]
+        parsed = [(m.group("dice"), nvl(m.group("type"),"")) for m in re.finditer(f"(?P<dice>[0-9]+d[0-9]+([\\+\\-][0-9]+)?) (?P<type>{'|'.join(DAMAGE_TYPES)})? ?damage", self.mainBodyText)]
+        if self._damage and len(self._damage) > len(parsed):
+            return self._damage
+        return parsed
+    
+    @parsedDamage.setter
+    def parsedDamage(self, value):
+        self._damage = value
     
     @property
     def scalingMode(self)->str:
         if self.scaling:
             return "level"
-        if self.level == 0 and self.parsedDamage:
+        if self.level == 0 and self.parsedDamage and "when you reach 5th level" in self.paragraphs:
             return "cantrip"
         return "none"
     
@@ -551,7 +560,7 @@ class Spell(object):
         return html.replace("\n","")
 
     def toDb(self):
-        now = int(time.time())
+        now = int(time.time()*1000)
         dbSpell = {
             "_id": self.originalId,
             "name": self.name,
@@ -603,7 +612,7 @@ class Spell(object):
                     "parts": self.parsedDamage,
                     "versatile": ""
                 },
-                "formula": "",
+                "formula": self.formula,
                 "save": {
                     "ability": self.saveType,
                     "dc": None,

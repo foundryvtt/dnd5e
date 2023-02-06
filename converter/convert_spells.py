@@ -20,6 +20,8 @@ def updateNew(all_spells, spellMap):
             spell.icon = originalSpell["img"]
             spell.effects = originalSpell["effects"]
             spell.createdtime = originalSpell["_stats"]["createdTime"]
+            spell.formula = originalSpell["system"]["formula"]
+            spell.parsedDamage = originalSpell["system"]["damage"]["parts"]
 
 
 def main():
