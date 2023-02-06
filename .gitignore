@@ -1,6 +1,7 @@
 # Build Artifacts
 dnd5e-compiled*
 dnd5e.lock
+dnd5e-release-*
 
 # IDE
 .idea/
@@ -12,6 +13,10 @@ dnd5e.lock
 
 # Node Modules
 node_modules/
+
+# Python
+
+__pycache__/
 
 # OS Specific
 .DS_Store
