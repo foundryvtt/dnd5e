@@ -668,7 +668,10 @@ def loadSpells(xml: str):
         if child.tag.lower() == 'spell':
             name=child.find('name').text
             accessor=cmdize(name)
-            spellData[accessor] = Spell(child)
+            spell = Spell(child)
+            if spell.deleted:
+                continue
+            spellData[accessor] = spell
     return spellData
 
 
