@@ -1,27 +1,25 @@
 
 from .spells import loadSpells
 from .common_lib import cmdize
-import argparse, json, os
+import argparse, json, os, shutil
 
 def readOriginals(idFp):
-    spellIdMap = {}
-    spellIconMap = {}
+    spellMap = {}
     for line in idFp:
         spell = json.loads(line)
-        spellIdMap[spell["name"]] = spell["_id"]
-        spellIconMap[spell["name"]] = spell["img"]
-    return spellIdMap, spellIconMap
+        spellMap[spell["name"]] = spell
+    return spellMap
 
-def updateNew(all_spells, spellIds, spellIcons):
+def updateNew(all_spells, spellMap):
     for spell in all_spells.values():
-        originalId = spellIds[spell.name] if spell.name in spellIds else None
-        originalIcon = spellIcons[spell.name] if spell.name in spellIcons else None
-        if originalId is None:
-            originalId = spellIds[spell.brandedname] if spell.brandedname in spellIds else None
-            originalIcon = spellIcons[spell.brandedname] if spell.brandedname in spellIcons else None
-        if originalId is not None:
-            spell.originalId = originalId
-            spell.icon = originalIcon
+        originalSpell = spellMap[spell.name] if spell.name in spellMap else None
+        if originalSpell is None:
+            originalSpell = spellMap[spell.brandedname] if spell.brandedname in spellMap else None
+        if originalSpell is not None:
+            spell.originalId = originalSpell["_id"]
+            spell.icon = originalSpell["img"]
+            spell.effects = originalSpell["effects"]
+            spell.createdtime = originalSpell["_stats"]["createdTime"]
 
 
 def main():
@@ -29,21 +27,21 @@ def main():
     parser.add_argument(
         "filepath",
         type=str,
-        default="../dm-helper-data/dnd-5e/spells.xml",
+        default=os.path.join("..","dm-helper-data","dnd-5e","spells.xml"),
         nargs="?",
         help="the spell XML file to use"
         )
     parser.add_argument(
         "original",
         type=str,
-        default="packs/spells.db",
+        default=os.path.join("packs","spells.db"),
         nargs="?",
         help="the original spell.db file to pull IDs from"
         )
     parser.add_argument(
         "out",
         type=str,
-        default="packs/src/spells",
+        default=os.path.join("packs","src","spells"),
         nargs="?",
         help="the spell folder to write to"
         )
@@ -54,9 +52,14 @@ def main():
         all_spells = loadSpells(loadFp)
 
     with open(args.original, 'r', encoding="utf-8") as loadFp:
-        updateNew(all_spells, *readOriginals(loadFp))
+        updateNew(all_spells, readOriginals(loadFp))
     
-    
+    shutil.rmtree(args.out)
+    os.mkdir(args.out)
+    os.mkdir(os.path.join(args.out,"cantrip"))
+    for l in range(1, 10):
+        os.mkdir(os.path.join(args.out,f"level-{l}"))
+
     for spell_key in sorted(all_spells.keys()):
         spell = all_spells[spell_key]
         subfolder = f"level-{spell.level}" if spell.level else "cantrip"

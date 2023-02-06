@@ -94,6 +94,8 @@ class Spell(object):
     scaling     = []
     statblocks  = []
     _icon       = None
+    effects     = []
+    createdtime = None
 
     
     def __init__(self,spell_element):
@@ -549,6 +551,7 @@ class Spell(object):
         return html.replace("\n","")
 
     def toDb(self):
+        now = int(time.time())
         dbSpell = {
             "_id": self.originalId,
             "name": self.name,
@@ -633,14 +636,14 @@ class Spell(object):
             "sort": 0,
             "flags": {},
             "img": self.icon,
-            "effects": [],
+            "effects": self.effects,
             "folder": None,
             "_stats": {
                 "systemId": "dnd5e",
                 "systemVersion": "2.1.0",
                 "coreVersion": "10.291",
-                "createdTime": 1661787234052,
-                "modifiedTime": int(time.time()),
+                "createdTime": nvl(self.createdtime, now),
+                "modifiedTime": now,
                 "lastModifiedBy": "RightHandOfVecna"
             }
         }
