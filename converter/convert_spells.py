@@ -1,6 +1,7 @@
 
 from .spells import loadSpells
-import argparse, json
+from .common_lib import cmdize
+import argparse, json, os
 
 def readOriginals(idFp):
     spellIdMap = {}
@@ -10,6 +11,17 @@ def readOriginals(idFp):
         spellIdMap[spell["name"]] = spell["_id"]
         spellIconMap[spell["name"]] = spell["img"]
     return spellIdMap, spellIconMap
+
+def updateNew(all_spells, spellIds, spellIcons):
+    for spell in all_spells.values():
+        originalId = spellIds[spell.name] if spell.name in spellIds else None
+        originalIcon = spellIcons[spell.name] if spell.name in spellIcons else None
+        if originalId is None:
+            originalId = spellIds[spell.brandedname] if spell.brandedname in spellIds else None
+            originalIcon = spellIcons[spell.brandedname] if spell.brandedname in spellIcons else None
+        if originalId is not None:
+            spell.originalId = originalId
+            spell.icon = originalIcon
 
 
 def main():
@@ -31,9 +43,9 @@ def main():
     parser.add_argument(
         "out",
         type=str,
-        default="packs/spells.new.db",
+        default="packs/src/spells",
         nargs="?",
-        help="the spell db file to write to"
+        help="the spell folder to write to"
         )
     
     args = parser.parse_args()
@@ -42,21 +54,15 @@ def main():
         all_spells = loadSpells(loadFp)
 
     with open(args.original, 'r', encoding="utf-8") as loadFp:
-        spellIds, spellIcons = readOriginals(loadFp)
+        updateNew(all_spells, *readOriginals(loadFp))
     
-    for spell in all_spells.values():
-        originalId = spellIds[spell.name] if spell.name in spellIds else None
-        originalIcon = spellIcons[spell.name] if spell.name in spellIcons else None
-        if originalId is None:
-            originalId = spellIds[spell.brandedname] if spell.brandedname in spellIds else None
-            originalIcon = spellIcons[spell.brandedname] if spell.brandedname in spellIcons else None
-        if originalId is not None:
-            spell.originalId = originalId
-            spell.icon = originalIcon
     
-    with open(args.out, 'w', encoding="utf-8") as saveFp:
-        for spell_key in sorted(all_spells.keys()):
-            saveFp.write(json.dumps(all_spells[spell_key].toDb())+"\n")
+    for spell_key in sorted(all_spells.keys()):
+        spell = all_spells[spell_key]
+        subfolder = f"level-{spell.level}" if spell.level else "cantrip"
+        filename=cmdize(spell.name)+".json"
+        with open(os.path.join(args.out, subfolder, filename), 'w', encoding="utf-8") as saveFp:
+            saveFp.write(json.dumps(spell.toDb(), indent=2)+"\n")
     
 
 if __name__ == "__main__":

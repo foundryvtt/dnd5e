@@ -67,7 +67,7 @@ def cmdize(potentialInvoke):
     if potentialInvoke is None:
         return None
     if isinstance(potentialInvoke, str):
-        return reduce(lambda i,r: i.replace(r[0], r[1]), [(' ','_'),('.','_'),(',',''),('\'',''),('-','_')], potentialInvoke.lower()).strip()
+        return reduce(lambda i,r: i.replace(r[0], r[1]), [(' ','-'),('.','-'),(',',''),('\'',''),('\\','-'),('/','-')], potentialInvoke.lower()).strip()
     return [cmdize(x) for x in potentialInvoke]
 
 def title(text:str):

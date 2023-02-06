@@ -72,7 +72,7 @@ def ratoi(rstr:str)->int:
     except:
         return 0
 
-DURATION_RE = re.compile("(?P<val>[0-9]+) (?P<unit>(action|bonus action|reaction|minute|hour|day))(, )?(?P<condition>.*)", re.IGNORECASE)
+DURATION_RE = re.compile("(?P<val>[0-9]+) (?P<unit>(action|bonus action|reaction|round|minute|hour|day))s?(, )?(?P<condition>.*)", re.IGNORECASE)
 RANGE_RE = re.compile("(?P<val>[0-9]+) (?P<unit>(ft|feet|foot|mi|mile|miles))", re.IGNORECASE)
 
 class Spell(object):
@@ -164,6 +164,23 @@ class Spell(object):
                         self.statblocks.append(sbe.text)
     
     @property
+    def mainBodyText(self)->str:
+        return makeParagraphs(self.text).strip()
+    
+    @property
+    def scalingText(self)->str:
+        if self.scaling:
+            return makeParagraphs(self.scaling).strip()
+        return ""
+
+    @property
+    def paragraphs(self)->str:
+        md = self.mainBodyText
+        if len(self.scaling) > 0:
+            md += "\n\n" + self.scalingText
+        return md.strip()
+
+    @property
     def _components(self)->tuple:
         return tuple(x.strip() for x in self.components.split("(")[0].split(","))
 
@@ -180,11 +197,11 @@ class Spell(object):
         return "M" in self._components
 
     @property
-    def componentText(self)->Union[str,None]:
+    def componentText(self)->str:
         match = re.search("\(.*\)", self.components)
         if match:
-            return match.group(0)[1:-1]
-        return None
+            return match.group(0)[1].upper()+match.group(0)[2:-1]
+        return ""
 
     @property
     def isConcentration(self)->bool:
@@ -205,6 +222,24 @@ class Spell(object):
         return (0, "", "")
 
     @property
+    def parsedDuration(self)->Tuple[str, str, str]:
+        if self.duration.lower() == "instantaneous":
+            return ("","inst","")
+        if self.duration.lower().startswith("until dispelled"):
+            return ("","perm","")
+        match = DURATION_RE.search(self.duration)
+        if match is not None:
+            val = match.group("val")
+            unit = match.group("unit").lower()
+            condition = match.group("condition")
+
+            if unit == "bonus action":
+                unit = "bonus"
+
+            return (val, unit, condition)
+        return ("", "", "")
+
+    @property
     def parsedRange(self)->Tuple[int, str]:
         match = RANGE_RE.match(self.range)
         if match is not None:
@@ -216,13 +251,6 @@ class Spell(object):
         if self.range.lower().startswith("self"):
             return (None, "self")
         return (None, "any")
-
-    @property
-    def paragraphs(self)->str:
-        md = makeParagraphs(self.text)
-        if len(self.scaling) > 0:
-            md += "\n\n" + makeParagraphs(self.scaling)
-        return md.strip()
     
     @property
     def cost(self)->int:
@@ -237,8 +265,13 @@ class Spell(object):
             "value":None,
             "width":None,
             "units":"",
-            "type": "unset"
+            "type": ""
             }
+        
+        if self.range.lower() == "self":
+            result["type"] = "self"
+            return result
+
         UNITS = "(ft|feet|foot|mi|mile|miles|in|inch|inches)"
         WALL_RE = re.compile(f"(?P<value>[0-9]+) (?P<units>{UNITS}) long, [0-9]+ {UNITS} high, and [0-9]+ {UNITS} thick")
         match = WALL_RE.search(self.paragraphs)
@@ -272,7 +305,7 @@ class Spell(object):
             result["type"]  = "cylinder"
             return result
         
-        SPHERE_RE = re.compile("(?P<value>[0-9]+)-(?P<units>foot|mile)-radius sphere", re.IGNORECASE)
+        SPHERE_RE = re.compile("(?P<value>[0-9]+)-(?P<units>foot|mile)[- ]radius sphere", re.IGNORECASE)
         match = SPHERE_RE.search(self.paragraphs)
         if match:
             result["value"] = int(match.group("value"))
@@ -280,16 +313,8 @@ class Spell(object):
             result["type"]  = "sphere"
             return result
         
-        RADIUS_RE = re.compile("(?P<value>[0-9]+)-(?P<units>foot|mile) radius", re.IGNORECASE)
+        RADIUS_RE = re.compile("(?P<value>[0-9]+)-(?P<units>foot|mile)[- ](radius|circle)", re.IGNORECASE)
         match = RADIUS_RE.search(self.paragraphs)
-        if match:
-            result["value"] = int(match.group("value"))
-            result["units"] = unitize(match.group("units"))
-            result["type"]  = "radius"
-            return result
-        
-        WITHIN_RE = re.compile("within (?P<value>[0-9]+) (?P<units>ft|foot|feet|mi|mile|miles)", re.IGNORECASE)
-        match = WITHIN_RE.search(self.paragraphs)
         if match:
             result["value"] = int(match.group("value"))
             result["units"] = unitize(match.group("units"))
@@ -323,8 +348,12 @@ class Spell(object):
             return result
         
         CREATURE_TARGET_2_RE = re.compile(f"(?P<num>{NUM_LIST}) ((tiny|small|medium|large|huge|gargantuan) (or smaller )?)?(?P<willing>willing )?{CREATURE_LIST}s?", re.IGNORECASE)
-        match = CREATURE_TARGET_2_RE.search(self.paragraphs)
-        if match:
+        matches = list(CREATURE_TARGET_2_RE.finditer(self.paragraphs))
+        if matches:
+            match = matches[0]
+            for m in matches:
+                if ratoi(m.group("num").lower()) > ratoi(match.group("num").lower()):
+                    match = m
             val = ratoi(match.group("num").lower())
             if val > 0:
                 result["value"] = val
@@ -339,6 +368,14 @@ class Spell(object):
         if match:
             result["value"] = 1
             result["type"] = "object"
+            return result
+        
+        WITHIN_RE = re.compile("within (?P<value>[0-9]+) (?P<units>ft|foot|feet|mi|mile|miles)", re.IGNORECASE)
+        match = WITHIN_RE.search(self.paragraphs)
+        if match:
+            result["value"] = int(match.group("value"))
+            result["units"] = unitize(match.group("units"))
+            result["type"]  = "radius"
             return result
         
         AREA_TARGET_RE = re.compile(f"Each {CREATURE_LIST} that (starts|ends) (its|their) turn", re.IGNORECASE)
@@ -384,7 +421,28 @@ class Spell(object):
             return "mwak"
         if "ranged attack" in self.paragraphs:
             return "rwak"
+        if "healing" in self.keywords:
+            return "heal"
         return "util"
+    
+    @property
+    def parsedDamage(self)->list:
+        return [(m.group("dice"), nvl(m.group("type"),"")) for m in re.finditer(f"(?P<dice>[0-9]+d[0-9]+([\\+\\-][0-9]+)?) (?P<type>{'|'.join(DAMAGE_TYPES)})? ?damage", self.mainBodyText)]
+    
+    @property
+    def scalingMode(self)->str:
+        if self.scaling:
+            return "level"
+        if self.level == 0 and self.parsedDamage:
+            return "cantrip"
+        return "none"
+    
+    @property
+    def scalingAmount(self)->str:
+        scaleMatch = re.search("[0-9]+d[0-9]+([\\+\\-][0-9]+)?", self.scalingText)
+        if scaleMatch:
+            return scaleMatch.group(0)
+        return ""
     
     @property
     def keywords(self):
@@ -429,7 +487,7 @@ class Spell(object):
         
         # check for healing magic
         for t in self.text:
-            if "healing" in t.lower() or "regains a number of hit points" in t.lower() or "regains hit points" in t.lower():
+            if "healing" in t.lower() or "regains a number of hit points" in t.lower() or "regains hit points" in t.lower() or "becomes stable" in t.lower():
                 kw.add("healing")
                 break
         
@@ -509,8 +567,8 @@ class Spell(object):
                     "condition": self.parsedCastingTime[2]
                 },
                 "duration": {
-                    "value": "1",
-                    "units": "hour"
+                    "value": str(self.parsedDuration[0]),
+                    "units": self.parsedDuration[1]
                 },
                 "cover": None,
                 "target": self.parsedTargets,
@@ -539,7 +597,7 @@ class Spell(object):
                     "damage": ""
                 },
                 "damage": {
-                    "parts": [],
+                    "parts": self.parsedDamage,
                     "versatile": ""
                 },
                 "formula": "",
@@ -568,8 +626,8 @@ class Spell(object):
                     "prepared": False
                 },
                 "scaling": {
-                    "mode": "none",
-                    "formula": ""
+                    "mode": self.scalingMode,
+                    "formula": self.scalingAmount
                 }
             },
             "sort": 0,
