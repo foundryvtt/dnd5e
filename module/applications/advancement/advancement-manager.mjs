@@ -553,7 +553,7 @@ export default class AdvancementManager extends Application {
         // Ensure the level on the class item matches the specified level
         if ( this.step?.class ) {
           let level = this.step.class.level;
-          if ( type === "reverse" ) level -= 1;
+          if ( this.step.type === "reverse" ) level -= 1;
           this.step.class.item.updateSource({"system.levels": level});
         }
         this.clone.reset();
