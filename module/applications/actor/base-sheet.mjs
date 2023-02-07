@@ -1093,32 +1093,7 @@ export default class ActorSheet5e extends ActorSheet {
     }
 
     // Adjust the preparation mode of a leveled spell depending on the section on which it is dropped.
-    if ( itemData.type === "spell" && itemData.system.level != 0 ) {
-      // Determine the section it is dropped on, if any.
-      const mode = event.target.closest("div[data-type='spell']")?.dataset;
-
-      // If the spell is dropped on a section, set the mode to be that type.
-      if ( mode && mode.level > 0 ) {
-        itemData.system.preparation.mode = mode["preparation.mode"];
-      }
-
-      // If the spell is not dropped on a section, and on an NPC with no caster levels, set the spell to be innate.
-      else if ( this.document.type === "npc" ) {
-        if ( !this.document.system.details.spellLevel ) {
-          itemData.system.preparation.mode = "innate";
-        }
-      }
-
-      // If the spell is dropped on an actor with only pact magic (and other classes having 'none'), set the spell to be pact.
-      else if ( this.document.type === "character" ) {
-        const modes = this.document.itemTypes.class.reduce((acc, cls) => {
-          if ( cls.spellcasting?.type === "pact" ) acc.pact = true;
-          else if ( cls.spellcasting?.type === "leveled" ) acc.leveled = true;
-          return acc;
-        }, {pact: false, leveled: false});
-        if ( modes.pact && !modes.leveled ) itemData.system.preparation.mode = "pact";
-      }
-    }
+    this._onDropSpell(itemData, event);
 
     return itemData;
   }
@@ -1155,6 +1130,38 @@ export default class ActorSheet5e extends ActorSheet {
     return similarItem.update({
       "system.quantity": similarItem.system.quantity + Math.max(itemData.system.quantity, 1)
     });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Adjust the preparation mode of a dropped spell depending on the drop location on the sheet.
+   * @param {object} itemData    The item data requested for creation. **Will be mutated.**
+   * @param {DragEvent} event    The original drag event.
+   */
+  _onDropSpell(itemData, event) {
+    if ( itemData.type !== "spell" || itemData.system.level == 0 ) return;
+
+    // Determine the section it is dropped on, if any.
+    const mode = event.target.closest("div[data-type='spell']")?.dataset;
+
+    // If the spell is dropped on a section, set the mode to be that type.
+    if ( mode && mode.level > 0 ) itemData.system.preparation.mode = mode["preparation.mode"];
+
+    // If the spell is not dropped on a section, and on an NPC with no caster levels, set the spell to be innate.
+    else if ( this.document.type === "npc" && !this.document.system.details.spellLevel ) {
+      itemData.system.preparation.mode = "innate";
+    }
+
+    // If the spell is dropped on an actor with only pact magic (and other classes having 'none'), set the spell to be pact.
+    else if ( this.document.type === "character" ) {
+      const modes = this.document.itemTypes.class.reduce((acc, cls) => {
+        if ( cls.spellcasting?.type === "pact" ) acc.pact = true;
+        else if ( cls.spellcasting?.type === "leveled" ) acc.leveled = true;
+        return acc;
+      }, {pact: false, leveled: false});
+      if ( modes.pact && !modes.leveled ) itemData.system.preparation.mode = "pact";
+    }
   }
 
   /* -------------------------------------------- */
