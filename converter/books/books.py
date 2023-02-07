@@ -1,7 +1,7 @@
 
 
 import re
-from copy import deepcopy
+from copy import copy, deepcopy
 from enum import IntEnum
 from functools import cache, cached_property
 from typing import Any, Dict, Generator, List, Tuple, Union
@@ -97,6 +97,14 @@ class Collection(object):
         if rx.search(self.text) is not None:
             return True
         return False
+    
+    def promoteHeadings(self, amount=1):
+        new = copy(self)
+        for _ in range(amount):
+            if CollectionLevel.P > new.level > CollectionLevel.CHAPTER:
+                new.level = CollectionLevel.fromMarkdown(new.level.markdownLevel() - 1)
+        new.subcollections = [child.promoteHeadings(amount) for child in new.children()]
+        return new
         
     def findall(self, rx:Union[re.Pattern, str])->Generator['Collection', None, None]:
         """
@@ -123,7 +131,7 @@ class Collection(object):
             return match
         return None
 
-    def markdown(self, include_formatting:bool=True):
+    def markdown(self, include_formatting:bool=False):
         ret = ""
         if self.level < CollectionLevel.P and self.text != "":
             ret += ("#"*(self.level.markdownLevel())+" ") + self.text

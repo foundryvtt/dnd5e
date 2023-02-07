@@ -1,5 +1,5 @@
 
-from .books import Collection
+from .books import Collection, CollectionLevel
 from ..common_lib import id_generator, nvl
 from markdown import markdown
 import time, re
@@ -52,10 +52,14 @@ class Feature(object):
     featureType    = "class"
     featureSubType = ""
 
+    originalCollection = None
+
     def __init__(self, collection:Collection):
         self.originalId = id_generator()
         self.name = collection.text
-        self.paragraphs = "\n\n".join(c.markdown(include_formatting=False) for c in collection.children()).strip()
+        self.paragraphs = "\n\n".join(c.markdown() for c in collection.children() if c.level <= CollectionLevel.P).strip()
+
+        self.originalCollection = collection
     
     @property
     def descriptionHTML(self)->str:

@@ -65,7 +65,7 @@ class RpgClass(object):
             if featureC.level >= CollectionLevel.P:
                 continue
             if featureC.text not in ("Hit Points", "Proficiencies", "Equipment"):
-                feature = Feature(featureC)
+                feature = Feature(featureC.promoteHeadings(1))
                 shouldAddClassName = feature.name == "Ability Score Improvement" and self.name in ("Fighter","Rogue","Bard")
                 shouldAddClassName = shouldAddClassName or (feature.name == "Extra Attack" and self.name in ("Fighter","Monk"))
                 shouldAddClassName = shouldAddClassName or feature.name in CLASS_SPECIFIC_FEATURES
@@ -247,7 +247,7 @@ class RpgSubClass(RpgClass):
         for featureC in collection.children():
             if featureC.level >= CollectionLevel.P:
                 continue
-            feature = Feature(featureC)
+            feature = Feature(featureC.promoteHeadings(2))
             shouldAddClassName = feature.name in CLASS_SPECIFIC_FEATURES
             shouldAddClassName = shouldAddClassName or (feature.name == "Extra Attack" and self.name in ("College of Valor", "Bladesinger"))
             if shouldAddClassName:

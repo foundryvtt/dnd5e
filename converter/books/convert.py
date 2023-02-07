@@ -140,6 +140,27 @@ def main():
                     continue
                 canonical_features[key] = f
     
+    # split out fighting styles
+    for feature_key in list(canonical_features.keys()):
+        if not feature_key.startswith(cmdize("Fighting Style")):
+            continue
+        feature = canonical_features[feature_key]
+        feature.paragraphs = feature.originalCollection.children()[0].markdown()
+        allowedStyles = []
+        for styles in feature.originalCollection.children()[1:]:
+            style_name = f"Fighting Style: {styles.text}"
+            style_key = cmdize(style_name)
+            if style_key in canonical_features:
+                allowedStyles.append(canonical_features[style_key])
+                continue
+            fightingStyle = Feature(styles)
+            fightingStyle.name = style_name
+            fightingStyle.featureSubType = "fightingStyle"
+            canonical_features[style_key] = fightingStyle
+            allowedStyles.append(fightingStyle)
+        feature.paragraphs += "\n\n".join("@Compendium[dnd5e.classfeatures."+style.originalId+"]{"+style.name[16:]+"}" for style in allowedStyles)
+
+    
     # update classes to reflect squished canonical features
     for cl in classes.values():
         cl.features = [canonical_features[cmdize(f.name)] for f in cl.features]
@@ -185,7 +206,7 @@ def main():
 
 
     # print(classes["bard"].name, ":--:", ", ".join(f.name for f in classes["bard"].subclasses.values()))
-    print(phb.fromPath("Chapter 3: Classes", "Bard").hierarchy(2))
+    print(phb.fromPath("Chapter 3: Classes", "Warlock", "Class Features", "Eldritch Invocations").markdown())
     # print(phb.fromPath("Chapter 3: Classes", "Artificer", "Class Features", "Ability Score Improvement").markdown())
     # print(RpgClass(phb.fromPath("Chapter 3: Classes", "Artificer")).features[4].descriptionHTML)
     # print(json.dumps(classes["wizard"].toDb(), indent=2))
