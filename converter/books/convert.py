@@ -99,19 +99,11 @@ def updateNewClasses(all_classes, classesMap):
             classes.advancement = originalClasses["system"]["advancement"]
 
 
-def main():
-    parser = argparse.ArgumentParser(description="Update the spell lists and descriptions")
-    parser.add_argument(
-        "filepath",
-        type=str,
-        default=os.path.join("..","dnd5e-phb"),
-        nargs="?",
-        help="the source phb folder to use"
-        )
-    
-    args = parser.parse_args()
-
-    phb = load_5e_phb(args.filepath)
+def loadClasses(filepath:str, all_spells:dict={}):
+    """
+    Returns (class_map, subclass_map, feature_map)
+    """
+    phb = load_5e_phb(filepath)
     classes = {}
 
     for cc in phb.fromPath("Chapter 3: Classes").children():
@@ -140,6 +132,10 @@ def main():
                     continue
                 canonical_features[key] = f
     
+    # load original features for purposes of consistency with IDs
+    with open(os.path.join("packs","classfeatures.db"), 'r', encoding="utf-8") as loadFp:
+        original_features = readOriginals(loadFp)
+    
     # split out fighting styles
     for feature_key in list(canonical_features.keys()):
         if not feature_key.startswith(cmdize("Fighting Style")):
@@ -158,7 +154,26 @@ def main():
             fightingStyle.featureSubType = "fightingStyle"
             canonical_features[style_key] = fightingStyle
             allowedStyles.append(fightingStyle)
-        feature.paragraphs += "\n\n".join("@Compendium[dnd5e.classfeatures."+style.originalId+"]{"+style.name[16:]+"}" for style in allowedStyles)
+        updateNewClassFeatures({cmdize(f.name):f for f in allowedStyles}, original_features)
+        feature.paragraphs += "\n\n"+"\n\n".join("@Compendium[dnd5e.classfeatures."+style.originalId+"]{"+style.name[16:]+"}" for style in allowedStyles)
+
+    # split out Pact Boons
+    parentPactBoon = canonical_features[cmdize("Pact Boon")]
+    parentPactBoon.paragraphs = parentPactBoon.originalCollection.children()[0].markdown()
+    pacts = []
+    for pact in parentPactBoon.originalCollection.children()[1:]:
+        pactBoon = Feature(pact)
+        pactBoon.featureSubType = "pact"
+        pactBoon.requirements = f"Warlock {parentPactBoon.startingLevel}"
+        canonical_features[cmdize(pact.text)] = pactBoon
+        pacts.append(pactBoon)
+    updateNewClassFeatures({cmdize(f.name):f for f in pacts}, original_features)
+    parentPactBoon.paragraphs += "\n\n"+"\n\n".join("@UUID[Compendium.dnd5e.classfeatures."+pact.originalId+"]{"+pact.name+"}" for pact in pacts)
+    parentPactBoon.paragraphs += "\n\nYou can drag your choice from the above onto your character sheet and it will automatically update."
+
+    
+    # add Warlock Invocations
+    # invocationCollection = phb.fromPath("Chapter 3: Classes", "Warlock", "Eldritch Invocations")
 
     
     # update classes to reflect squished canonical features
@@ -168,9 +183,20 @@ def main():
             scl.features = [canonical_features[cmdize(f.name)] for f in scl.features]
     
     # update canonical features to reflect old Ids and other fields
+    updateNewClassFeatures(canonical_features, original_features)
+
+    # update new classes to reflect old Ids and other fields
+    with open(os.path.join("packs","classes.db"), 'r', encoding="utf-8") as loadFp:
+        originalClasses = readOriginals(loadFp)
+        updateNewClasses(classes, originalClasses)
+
+    return classes, None, canonical_features
+
+
+def writeFeatures(canonical_features):
+    # load original features for purposes of consistency with IDs
     with open(os.path.join("packs","classfeatures.db"), 'r', encoding="utf-8") as loadFp:
-        originalFeatures = readOriginals(loadFp)
-        updateNewClassFeatures(canonical_features, originalFeatures)
+        original_features = readOriginals(loadFp)
 
     # write out the canonical features
     classFeaturesDir = os.path.join("packs","src","classfeatures")
@@ -180,17 +206,17 @@ def main():
     for feature_key in sorted(canonical_features.keys()):
         feature = canonical_features[feature_key]
         featureJson = feature.toDb()
-        if feature_key in originalFeatures and equalsWithout(featureJson, originalFeatures[feature_key]):
-            featureJson = originalFeatures[feature_key]
+        if feature_key in original_features and equalsWithout(featureJson, original_features[feature_key]):
+            featureJson = original_features[feature_key]
         with open(os.path.join(classFeaturesDir, f"{feature_key}.json"), 'w', encoding="utf-8") as saveFp:
             saveFp.write(json.dumps(featureJson, indent=2)+"\n")
-    
 
+
+def writeClasses(classes):
     # update new classes to reflect old Ids and other fields
     with open(os.path.join("packs","classes.db"), 'r', encoding="utf-8") as loadFp:
         originalClasses = readOriginals(loadFp)
-        updateNewClasses(classes, originalClasses)
-    
+
     # write out the new classes
     classesDir = os.path.join("packs","src","classes")
     shutil.rmtree(classesDir)
@@ -200,13 +226,30 @@ def main():
         cls = classes[class_key]
         clsJson = cls.toDb()
         if class_key in originalClasses and equalsWithout(clsJson, originalClasses[class_key]):
-            clsJson = originalClasses[feature_key]
+            clsJson = originalClasses[class_key]
         with open(os.path.join(classesDir, f"{class_key}.json"), 'w', encoding="utf-8") as saveFp:
             saveFp.write(json.dumps(clsJson, indent=2)+"\n")
 
 
+def main():
+    parser = argparse.ArgumentParser(description="Update the spell lists and descriptions")
+    parser.add_argument(
+        "filepath",
+        type=str,
+        default=os.path.join("..","dnd5e-phb"),
+        nargs="?",
+        help="the source phb folder to use"
+        )
+    
+    args = parser.parse_args()
+
+    classes, _, features = loadClasses(args.filepath)
+
+    writeClasses(classes)
+    writeFeatures(features)
+    
     # print(classes["bard"].name, ":--:", ", ".join(f.name for f in classes["bard"].subclasses.values()))
-    print(phb.fromPath("Chapter 3: Classes", "Warlock", "Class Features", "Eldritch Invocations").markdown())
+    # print(phb.fromPath("Chapter 3: Classes", "Warlock", "Class Features", "Eldritch Invocations").markdown())
     # print(phb.fromPath("Chapter 3: Classes", "Artificer", "Class Features", "Ability Score Improvement").markdown())
     # print(RpgClass(phb.fromPath("Chapter 3: Classes", "Artificer")).features[4].descriptionHTML)
     # print(json.dumps(classes["wizard"].toDb(), indent=2))
