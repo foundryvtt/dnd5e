@@ -67,7 +67,7 @@ def cmdize(potentialInvoke):
     if potentialInvoke is None:
         return None
     if isinstance(potentialInvoke, str):
-        return replaceList(replaceList(potentialInvoke.lower().strip(), ",\'():", ""), " .\\/", "-")
+        return replaceList(replaceList(potentialInvoke.lower().strip(), ",\'():*", ""), " .\\/", "-")
     return [cmdize(x) for x in potentialInvoke]
 
 def title(text:str):
@@ -310,12 +310,24 @@ def id_generator(size=16, chars=string.ascii_uppercase + string.digits):
         return ''.join(choice(chars) for _ in range(size))    
 
 
-def equalsWithoutUpdate(a, b):
+def equalsWithout(a, b, without=("_stats",)):
     a = {**a}
     b = {**b}
-    del a["_stats"]
-    del b["_stats"]
+    for x in without:
+        del a[x]
+        del b[x]
     return json.dumps(a, sort_keys=True) == json.dumps(b, sort_keys=True)
+
+def ratoi(rstr:str)->int:
+    try:
+        return int(rstr)
+    except: pass
+    try:
+        if rstr.lower() in ("a","the"):
+            return 1
+        return ["zero","one","two","three","four","five","six","seven","eight","nine"].index(rstr.lower())
+    except:
+        return 0
 
 
 # eof

@@ -2,7 +2,7 @@
 from .books import Book, Collection, CollectionLevel
 from .features import Feature
 from .classes import RpgClass
-from ..common_lib import cmdize, naturalSort, equalsWithoutUpdate
+from ..common_lib import cmdize, naturalSort, equalsWithout
 import argparse, json, os, shutil
 
 def load_5e_phb(
@@ -89,6 +89,15 @@ def updateNewClassFeatures(all_features, featureMap):
             feature.requirements = originalFeature["system"]["requirements"]
             feature.recharge = originalFeature["system"]["recharge"]
 
+def updateNewClasses(all_classes, classesMap):
+    for classes in all_classes.values():
+        originalClasses = classesMap[cmdize(classes.name)] if cmdize(classes.name) in classesMap else None
+        if originalClasses is not None:
+            classes.originalId = originalClasses["_id"]
+            classes.img = originalClasses["img"]
+            classes.createdTime = originalClasses["_stats"]["createdTime"]
+            classes.advancement = originalClasses["system"]["advancement"]
+
 
 def main():
     parser = argparse.ArgumentParser(description="Update the spell lists and descriptions")
@@ -113,17 +122,29 @@ def main():
     
     # combine identical features
     canonical_features = {}
-    for cl in classes.values():
+    for cl in list(classes.values()):
         for f in cl.features:
             key = cmdize(f.name)
             if key in canonical_features:
-                print(f"duplicate feature '{key}' from {cl.name}")
+                if canonical_features[key].descriptionHTML != f.descriptionHTML:
+                    print(f"duplicate non-identical feature '{key}' from {cl.name}")
                 continue
             canonical_features[key] = f
+        
+        for scl in list(cl.subclasses.values()):
+            for f in scl.features:
+                key = cmdize(f.name)
+                if key in canonical_features:
+                    if canonical_features[key].descriptionHTML != f.descriptionHTML:
+                        print(f"duplicate non-identical feature '{key}' from {cl.name}: {scl.name}")
+                    continue
+                canonical_features[key] = f
     
     # update classes to reflect squished canonical features
     for cl in classes.values():
         cl.features = [canonical_features[cmdize(f.name)] for f in cl.features]
+        for scl in cl.subclasses.values():
+            scl.features = [canonical_features[cmdize(f.name)] for f in scl.features]
     
     # update canonical features to reflect old Ids and other fields
     with open(os.path.join("packs","classfeatures.db"), 'r', encoding="utf-8") as loadFp:
@@ -138,16 +159,36 @@ def main():
     for feature_key in sorted(canonical_features.keys()):
         feature = canonical_features[feature_key]
         featureJson = feature.toDb()
-        if feature_key in originalFeatures and equalsWithoutUpdate(featureJson, originalFeatures[feature_key]):
+        if feature_key in originalFeatures and equalsWithout(featureJson, originalFeatures[feature_key]):
             featureJson = originalFeatures[feature_key]
         with open(os.path.join(classFeaturesDir, f"{feature_key}.json"), 'w', encoding="utf-8") as saveFp:
             saveFp.write(json.dumps(featureJson, indent=2)+"\n")
     
 
-    print(", ".join(f.name for f in classes["fighter"].features))
-    # print(phb.fromPath("Chapter 3: Classes").text)
+    # update new classes to reflect old Ids and other fields
+    with open(os.path.join("packs","classes.db"), 'r', encoding="utf-8") as loadFp:
+        originalClasses = readOriginals(loadFp)
+        updateNewClasses(classes, originalClasses)
+    
+    # write out the new classes
+    classesDir = os.path.join("packs","src","classes")
+    shutil.rmtree(classesDir)
+    os.mkdir(classesDir)
+
+    for class_key in sorted(classes.keys()):
+        cls = classes[class_key]
+        clsJson = cls.toDb()
+        if class_key in originalClasses and equalsWithout(clsJson, originalClasses[class_key]):
+            clsJson = originalClasses[feature_key]
+        with open(os.path.join(classesDir, f"{class_key}.json"), 'w', encoding="utf-8") as saveFp:
+            saveFp.write(json.dumps(clsJson, indent=2)+"\n")
+
+
+    # print(classes["bard"].name, ":--:", ", ".join(f.name for f in classes["bard"].subclasses.values()))
+    print(phb.fromPath("Chapter 3: Classes", "Bard").hierarchy(2))
     # print(phb.fromPath("Chapter 3: Classes", "Artificer", "Class Features", "Ability Score Improvement").markdown())
     # print(RpgClass(phb.fromPath("Chapter 3: Classes", "Artificer")).features[4].descriptionHTML)
+    # print(json.dumps(classes["wizard"].toDb(), indent=2))
     
     
 

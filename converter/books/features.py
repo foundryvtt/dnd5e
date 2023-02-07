@@ -2,7 +2,8 @@
 from .books import Collection
 from ..common_lib import id_generator, nvl
 from markdown import markdown
-import time
+import time, re
+from typing import Union
 
 CLASS_SPECIFIC_FEATURES = (
     "Fighting Style",
@@ -11,8 +12,21 @@ CLASS_SPECIFIC_FEATURES = (
     "Bonus Proficiencies",
     "Channel Divinity",
     "Unarmored Defense",
-    "Spellcasting"
+    "Spellcasting",
+    "Expertise",
+    "Evasion",
+    "Expanded Spell List",
+    "Bloodline Spells",
+    "Oath Spells",
+    "Circle Spells",
+    "Divine Strike",
+    "Potent Spellcasting",
+    "Tool Proficiency",
+    "Improved Abjuration",
+    "Timeless Body"
 )
+
+LEVEL_RE = re.compile("((by|at|reach) (?P<lv1>[1-9][0-9]?).. level)|((by|at|reach) level (?P<lv2>[1-9][0-9]?))", re.IGNORECASE)
 
 class Feature(object):
     originalId     = None
@@ -45,7 +59,16 @@ class Feature(object):
     
     @property
     def descriptionHTML(self)->str:
-        return markdown(self.paragraphs, extensions=['markdown.extensions.extra']).replace("\n","")
+        return markdown(self.paragraphs, extensions=['markdown.extensions.extra'])
+
+    @property
+    def startingLevel(self)->int:
+        match = LEVEL_RE.search(self.paragraphs[:100])
+        if match and match.group("lv1"):
+            return int(match.group("lv1"))
+        if match and match.group("lv2"):
+            return int(match.group("lv2"))
+        return 1
 
     def toDb(self)->dict:
         now = int(time.time()*1000)

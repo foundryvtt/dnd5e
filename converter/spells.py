@@ -5,7 +5,7 @@ import xml.etree.ElementTree as ET
 from markdown import markdown
 from typing import Any, Dict, Set, Tuple, Union
 
-from .common_lib import cmdize, nvl, id_generator, likeIntersection
+from .common_lib import cmdize, nvl, id_generator, ratoi
 from .xml_lib import getAttr
 
 from .constants import *
@@ -61,16 +61,6 @@ def unitize(unit:str)->str:
         return "mi"
     return "any"
 
-def ratoi(rstr:str)->int:
-    try:
-        return int(rstr)
-    except: pass
-    try:
-        if rstr.lower() in ("a","the"):
-            return 1
-        return ["zero","one","two","three","four","five","six","seven","eight","nine"].index(rstr.lower())
-    except:
-        return 0
 
 DURATION_RE = re.compile("(?P<val>[0-9]+) (?P<unit>(action|bonus action|reaction|round|minute|hour|day))s?(, )?(?P<condition>.*)", re.IGNORECASE)
 RANGE_RE = re.compile("(?P<val>[0-9]+) (?P<unit>(ft|feet|foot|mi|mile|miles))", re.IGNORECASE)
@@ -337,8 +327,6 @@ class Spell(object):
             result["type"] = "self"
             return result
         
-        CREATURE_LIST = "(creature|beast|aberration|celestial|elemental)"
-        NUM_LIST = "([0-9]+|a|the|one|two|three|four|five|six|seven|eight|nine)"
         CREATURE_TARGET_RE = re.compile(f"(?P<you>you and )?up to (?P<num>{NUM_LIST}) (?P<willing>willing )?{CREATURE_LIST}s?", re.IGNORECASE)
         match = CREATURE_TARGET_RE.search(self.paragraphs)
         if match:
