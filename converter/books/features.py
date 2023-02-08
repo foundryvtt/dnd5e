@@ -27,6 +27,8 @@ CLASS_SPECIFIC_FEATURES = (
 )
 
 LEVEL_RE = re.compile("((by|at|reach) (?P<lv1>[1-9][0-9]?).. level)|((by|at|reach) level (?P<lv2>[1-9][0-9]?))", re.IGNORECASE)
+PREREQUISITE_RE = re.compile("\\*?Prerequisites?[:\\.] (?P<prereqs>.+)", re.IGNORECASE)
+LEVEL_PREREQ_RE = re.compile("(?P<lv>[1-9][0-9]?).. level (?P<class>.+)", re.IGNORECASE)
 
 class Feature(object):
     originalId     = None
@@ -58,6 +60,16 @@ class Feature(object):
         self.originalId = id_generator()
         self.name = collection.text
         self.paragraphs = "\n\n".join(c.markdown() for c in collection.children() if c.level <= CollectionLevel.P).strip()
+        # check if there's a prerequisite
+        match = PREREQUISITE_RE.match(collection.children()[0].text)
+        if match:
+            prereqs = [p.replace("*","").strip() for p in match.group("prereqs").split(",")]
+            for i in range(len(prereqs)):
+                if LEVEL_PREREQ_RE.match(prereqs[i]):
+                    m = LEVEL_PREREQ_RE.match(prereqs[i])
+                    prereqs[i] = f"{m.group('class').title()} {m.group('lv')}"
+            self.requirements = ", ".join(prereqs)
+            self.paragraphs = self.paragraphs[len(match.group(0))+1+collection.children()[0].level.markdownLevel():].strip()
 
         self.originalCollection = collection
     
