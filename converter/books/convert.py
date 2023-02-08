@@ -537,7 +537,7 @@ def loadClasses(filepath:str, all_spells:dict={}):
         invocationCollection,
         "eldritchInvocation",
         None,
-        name_to="Eldritch Invocation"
+        name_to="Invocation"
     )
     writeOptionsToFeature(
         canonical_features[cmdize("Eldritch Invocations")],
