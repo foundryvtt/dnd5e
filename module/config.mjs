@@ -253,6 +253,19 @@ DND5E.weaponIds = {
 /* -------------------------------------------- */
 
 /**
+ * The basic ammunition types.
+ * @enum {string}
+ */
+DND5E.ammoIds = {
+  arrow: "3c7JXOzsv55gqJS5",
+  blowgunNeedle: "gBQ8xqTA5f8wP5iu",
+  crossbowBolt: "SItCnYBqhzqBoaWG",
+  slingBullet: "z9SbsMIBZzuhZOqT"
+};
+
+/* -------------------------------------------- */
+
+/**
  * The categories into which Tool items can be grouped.
  *
  * @enum {string}
@@ -701,6 +714,77 @@ DND5E.consumableTypes = {
   trinket: "DND5E.ConsumableTrinket"
 };
 preLocalize("consumableTypes", { sort: true });
+
+/* -------------------------------------------- */
+
+/**
+ * Types of containers.
+ * @enum {string}
+ */
+DND5E.containerTypes = {
+  backpack: "H8YCd689ezlD26aT",
+  barrel: "7Yqbqg5EtVW16wfT",
+  basket: "Wv7HzD6dv1P0q78N",
+  boltcase: "eJtPBiZtr2pp6ynt",
+  bottle: "HZp69hhyNZUUCipF",
+  bucket: "mQVYcHmMSoCUnBnM",
+  case: "5mIeX824uMklU3xq",
+  chest: "2YbuclKfhDL0bU4u",
+  flask: "lHS63sC6bypENNlR",
+  jug: "0ZBWwjFz3nIAXMLW",
+  pot: "M8xM8BLK4tpUayEE",
+  pitcher: "nXWdGtzi8DXDLLsL",
+  pouch: "9bWTRRDym06PzSAf",
+  quiver: "4MtQKPn9qMWCFjDA",
+  sack: "CNdDj8dsXVpRVpXt",
+  saddlebags: "TmfaFUSZJAotndn9",
+  tankard: "uw6fINSmZ2j2o57A",
+  vial: "meJEfX3gZgtMX4x2"
+};
+
+/* -------------------------------------------- */
+
+/**
+ * Configuration data for spellcasting foci.
+ *
+ * @typedef {object} SpellcastingFocusConfiguration
+ * @property {string} label                    Localized label for this category.
+ * @property {Object<string, string>} itemIds  Item IDs or UUIDs.
+ */
+
+/**
+ * Type of spellcasting foci.
+ * @enum {SpellcastingFocusConfiguration}
+ */
+DND5E.focusTypes = {
+  arcane: {
+    label: "DND5E.Focus.Arcane",
+    itemIds: {
+      crystal: "uXOT4fYbgPY8DGdd",
+      orb: "tH5Rn0JVRG1zdmPa",
+      rod: "OojyyGfh91iViuMF",
+      staff: "BeKIrNIvNHRPQ4t5",
+      wand: "KA2P6I48iOWlnboO"
+    }
+  },
+  druidic: {
+    label: "DND5E.Focus.Druidic",
+    itemIds: {
+      mistletoe: "xDK9GQd2iqOGH8Sd",
+      totem: "PGL6aaM0wE5h0VN5",
+      woodenstaff: "FF1ktpb2YSiyv896",
+      yewwand: "t5yP0d7YaKwuKKiH"
+    }
+  },
+  holy: {
+    label: "DND5E.Focus.Holy",
+    itemIds: {
+      amulet: "paqlMjggWkBIAeCe",
+      emblem: "laVqttkGMW4B9654",
+      reliquary: "gP1URGq3kVIIFHJ7"
+    }
+  }
+};
 
 /* -------------------------------------------- */
 
