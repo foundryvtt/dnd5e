@@ -40,6 +40,15 @@ export default class ActorSheet5e extends ActorSheet {
   /* -------------------------------------------- */
 
   /**
+   * Track the most recent drag event.
+   * @type {DragEvent}
+   * @protected
+   */
+  _event = null;
+
+  /* -------------------------------------------- */
+
+  /**
    * IDs for items on the sheet that have been expanded.
    * @type {Set<string>}
    * @protected
@@ -940,21 +949,6 @@ export default class ActorSheet5e extends ActorSheet {
   /* -------------------------------------------- */
 
   /** @override */
-  async _onDropItem(event, data) {
-    if ( !this.actor.isOwner ) return false;
-    const item = await Item.implementation.fromDropData(data);
-    const itemData = item.toObject();
-
-    // Handle item sorting within the same Actor
-    if ( this.actor.uuid === item.parent?.uuid ) return this._onSortItem(event, itemData);
-
-    // Create the owned item
-    return this._onDropItemCreate(event, itemData);
-  }
-
-  /* -------------------------------------------- */
-
-  /** @override */
   async _onDropActor(event, data) {
     const canPolymorph = game.user.isGM || (this.actor.isOwner && game.settings.get("dnd5e", "allowPolymorphing"));
     if ( !canPolymorph ) return false;
@@ -1030,7 +1024,15 @@ export default class ActorSheet5e extends ActorSheet {
   /* -------------------------------------------- */
 
   /** @override */
-  async _onDropItemCreate(event, itemData) {
+  async _onDrop(event) {
+    this._event = event;
+    return super._onDrop(event);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  async _onDropItemCreate(itemData) {
     let items = itemData instanceof Array ? itemData : [itemData];
     const itemsWithoutAdvancement = items.filter(i => !i.system.advancement?.length);
     const multipleAdvancements = (items.length - itemsWithoutAdvancement.length) > 1;
@@ -1041,7 +1043,7 @@ export default class ActorSheet5e extends ActorSheet {
 
     const toCreate = [];
     for ( const item of items ) {
-      const result = await this._onDropSingleItem(event, item);
+      const result = await this._onDropSingleItem(item);
       if ( result ) toCreate.push(result);
     }
 
@@ -1053,13 +1055,12 @@ export default class ActorSheet5e extends ActorSheet {
 
   /**
    * Handles dropping of a single item onto this character sheet.
-   * @param {DragEvent} event            The original drag event.
    * @param {object} itemData            The item data to create.
    * @returns {Promise<object|boolean>}  The item data to create after processing, or false if the item should not be
    *                                     created or creation has been otherwise handled.
    * @protected
    */
-  async _onDropSingleItem(event, itemData) {
+  async _onDropSingleItem(itemData) {
     // Check to make sure items of this type are allowed on this actor
     if ( this.constructor.unsupportedItemTypes.has(itemData.type) ) {
       ui.notifications.warn(game.i18n.format("DND5E.ActorWarningInvalidItem", {
@@ -1093,7 +1094,7 @@ export default class ActorSheet5e extends ActorSheet {
     }
 
     // Adjust the preparation mode of a leveled spell depending on the section on which it is dropped.
-    this._onDropSpell(itemData, event);
+    this._onDropSpell(itemData);
 
     return itemData;
   }
@@ -1137,13 +1138,12 @@ export default class ActorSheet5e extends ActorSheet {
   /**
    * Adjust the preparation mode of a dropped spell depending on the drop location on the sheet.
    * @param {object} itemData    The item data requested for creation. **Will be mutated.**
-   * @param {DragEvent} event    The original drag event.
    */
-  _onDropSpell(itemData, event) {
+  _onDropSpell(itemData) {
     if ( itemData.type !== "spell" || itemData.system.level == 0 ) return;
 
     // Determine the section it is dropped on, if any.
-    const mode = event.target.closest("div[data-type='spell']")?.dataset;
+    const mode = this._event.target.closest("div[data-type='spell']")?.dataset;
 
     // If the spell is dropped on a section, set the mode to be that type.
     if ( mode && mode.level > 0 ) itemData.system.preparation.mode = mode["preparation.mode"];
