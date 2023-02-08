@@ -56,8 +56,9 @@ class Collection(object):
         self.text = text
         self.subcollections = []
     
-    def add(self, subcollection:'Collection'):
+    def add(self, subcollection:'Collection')->'Collection':
         self.subcollections.append(subcollection)
+        return self
 
     def children(self)->List['Collection']:
         return self.subcollections
@@ -138,6 +139,16 @@ class Collection(object):
         elif self.text != "":
             ret += self.text
         for sc in self.children():
+            if not include_formatting and sc.level is CollectionLevel.FORMATTING_DIRECTIVE:
+                continue
+            ret += "\n" + sc.markdown(include_formatting=include_formatting) + "\n"
+        return ret.strip()
+    
+    def immediateMarkdown(self, include_formatting:bool=False):
+        ret = ""
+        for sc in self.children():
+            if sc.level < CollectionLevel.P:
+                break
             if not include_formatting and sc.level is CollectionLevel.FORMATTING_DIRECTIVE:
                 continue
             ret += "\n" + sc.markdown(include_formatting=include_formatting) + "\n"

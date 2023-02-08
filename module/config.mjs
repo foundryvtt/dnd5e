@@ -646,9 +646,12 @@ DND5E.featureTypes = {
   class: {
     label: "DND5E.Feature.Class",
     subtypes: {
+      arcaneShot: "DND5E.ClassFeature.ArcaneShot",
+      archdruid: "DND5E.ClassFeature.Archdruid",
       artificerInfusion: "DND5E.ClassFeature.ArtificerInfusion",
       channelDivinity: "DND5E.ClassFeature.ChannelDivinity",
       defensiveTactic: "DND5E.ClassFeature.DefensiveTactic",
+      eldritchCannon: "DND5E.ClassFeature.EldritchCannon",
       eldritchInvocation: "DND5E.ClassFeature.EldritchInvocation",
       elementalDiscipline: "DND5E.ClassFeature.ElementalDiscipline",
       fightingStyle: "DND5E.ClassFeature.FightingStyle",
@@ -660,7 +663,8 @@ DND5E.featureTypes = {
       pact: "DND5E.ClassFeature.PactBoon",
       psionicPower: "DND5E.ClassFeature.PsionicPower",
       rune: "DND5E.ClassFeature.Rune",
-      superiorHuntersDefense: "DND5E.ClassFeature.SuperiorHuntersDefense"
+      superiorHuntersDefense: "DND5E.ClassFeature.SuperiorHuntersDefense",
+      totem: "DND5E.ClassFeature.Totem",
     }
   },
   monster: {

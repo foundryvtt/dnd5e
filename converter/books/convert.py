@@ -3,7 +3,8 @@ from .books import Book, Collection, CollectionLevel
 from .features import Feature
 from .classes import RpgClass
 from ..common_lib import cmdize, naturalSort, equalsWithout
-import argparse, json, os, shutil
+from copy import deepcopy
+import argparse, json, os, shutil, re
 
 def load_5e_phb(
         root:str,
@@ -99,6 +100,109 @@ def updateNewClasses(all_classes, classesMap):
             classes.advancement = originalClasses["system"]["advancement"]
 
 
+DRAG_AND_DROP_NOTE = "\n\n<section class=\"secret foundry-note\">\n<p><strong>Foundry Note</strong></p>\n<p>You can drag your choices from the above onto your character sheet and it will automatically update.</p>\n</section>"
+
+INLINE_OPTION_RX = re.compile("(?P<enc>\\*\\*\\*?)(?P<title>[^\\*]+)\\.(?P=enc) ", re.IGNORECASE)
+
+
+def splitOptionsWithHeading(canonical_features, original_features, sourceFeature, featureSubType, requirements, name_to=None):
+    if name_to is None:
+        name_to = sourceFeature
+    parentFeature = canonical_features[cmdize(sourceFeature)]
+    parentFeature.paragraphs = parentFeature.originalCollection.immediateMarkdown()
+    featureOptions = []
+    for featureOption in parentFeature.originalCollection.children()[1:]:
+        if featureOption.level >= CollectionLevel.P:
+            continue
+        feature = Feature(featureOption)
+        if ": " not in feature.name:
+            feature.name = f"{name_to}: {feature.name}"
+        feature.featureSubType = featureSubType
+        if requirements is not None:
+            feature.requirements = requirements
+        if cmdize(feature.name) in canonical_features:
+            if canonical_features[cmdize(feature.name)].descriptionHTML != feature.descriptionHTML:
+                print(f"duplicate non-identical feature {feature.name}")
+            feature = canonical_features[cmdize(feature.name)]
+        canonical_features[cmdize(feature.name)] = feature
+        featureOptions.append(feature)
+    updateNewClassFeatures({cmdize(f.name):f for f in featureOptions}, original_features)
+    parentFeature.paragraphs += "\n\n"+"\n\n".join("@UUID[Compendium.dnd5e.classfeatures."+featureOption.originalId+"]{"+featureOption.name.split(": ")[-1]+"}" for featureOption in featureOptions)
+    parentFeature.paragraphs += DRAG_AND_DROP_NOTE
+
+    return featureOptions
+
+def splitOptionsWithoutHeading(canonical_features, original_features, sourceFeature, featureSubType, requirements, name_to=None):
+    if name_to is None:
+        name_to = sourceFeature
+    parentFeature = canonical_features[cmdize(sourceFeature)]
+    firstOptionIdx = 0
+    parentFeature.paragraphs = ""
+    for para in parentFeature.originalCollection.children():
+        if INLINE_OPTION_RX.match(para.markdown()):
+            break
+        parentFeature.paragraphs += "\n\n" + para.markdown()
+        firstOptionIdx += 1
+
+    featureCollections = []
+    featureCollection = None
+    for para in parentFeature.originalCollection.children()[firstOptionIdx:]:
+        para = deepcopy(para)
+        match = INLINE_OPTION_RX.match(para.text)
+        if match:
+            if featureCollection is not None:
+                featureCollections.append(featureCollection)
+            para.text = para.text[len(match.group(0)):]
+            featureCollection = Collection(CollectionLevel.H3, match.group("title")).add(para)
+        elif featureCollection is not None:
+            featureCollection.add(para)
+        else:
+            raise Exception("The first option doesn't match the inline options regex")
+    featureCollections.append(featureCollection)
+    
+    # convert from Collection to Feature
+    featureOptions = []
+    for featureOption in featureCollections:
+        feature = Feature(featureOption)
+        if ": " not in feature.name:
+            feature.name = f"{name_to}: {feature.name}"
+        feature.featureSubType = featureSubType
+        if requirements is not None:
+            feature.requirements = requirements
+        if cmdize(feature.name) in canonical_features:
+            if canonical_features[cmdize(feature.name)].descriptionHTML != feature.descriptionHTML:
+                print(f"duplicate non-identical feature {feature.name}")
+            feature = canonical_features[cmdize(feature.name)]
+        canonical_features[cmdize(feature.name)] = feature
+        featureOptions.append(feature)
+    updateNewClassFeatures({cmdize(f.name):f for f in featureOptions}, original_features)
+    parentFeature.paragraphs += "\n\n"+"\n\n".join("@UUID[Compendium.dnd5e.classfeatures."+featureOption.originalId+"]{"+featureOption.name.split(": ")[-1]+"}" for featureOption in featureOptions)
+    parentFeature.paragraphs += DRAG_AND_DROP_NOTE
+
+    return featureOptions
+
+def renameOptionGroups(canonical_features, original_features, to_rename:list, optionParent, newOptionParent, name_from=None, name_to=None, consumers:list=[]):
+    if name_from is None:
+        name_from = optionParent
+    if name_to is None:
+        name_to = newOptionParent
+    for f in to_rename:
+        del canonical_features[cmdize(f.name)]
+        f.name = f.name.replace(f"{name_from}:",f"{name_to}:")
+        if cmdize(f.name) in canonical_features:
+            if canonical_features[cmdize(f.name)].descriptionHTML != f.descriptionHTML:
+                raise Exception(f"duplicate non-identical feature {f.name}")
+            raise Exception(f"duplicate identical feature on rename {f.name}")        
+        canonical_features[cmdize(f.name)] = f
+    featureOptionsParent = canonical_features[cmdize(optionParent)]
+    featureParent = canonical_features[cmdize(newOptionParent)]
+    featureParent.paragraphs += "\n\n" + featureOptionsParent.paragraphs
+    for c in consumers:
+        c.remove(featureOptionsParent)
+    del canonical_features[cmdize(optionParent)]
+    
+    updateNewClassFeatures({cmdize(f.name):f for f in to_rename}, original_features)
+
 def loadClasses(filepath:str, all_spells:dict={}):
     """
     Returns (class_map, subclass_map, feature_map)
@@ -157,19 +261,166 @@ def loadClasses(filepath:str, all_spells:dict={}):
         updateNewClassFeatures({cmdize(f.name):f for f in allowedStyles}, original_features)
         feature.paragraphs += "\n\n"+"\n\n".join("@Compendium[dnd5e.classfeatures."+style.originalId+"]{"+style.name[16:]+"}" for style in allowedStyles)
 
+    # split out Eldritch Cannon options
+    splitOptionsWithHeading(
+        canonical_features,
+        original_features,
+        "Eldritch Cannon",
+        "eldritchCannon",
+        "Artillerist 3"
+    )
+
+    # split out Totem Spirit/Aspect/Attunement options
+    splitOptionsWithoutHeading(
+        canonical_features,
+        original_features,
+        "Totem Spirit",
+        "totem",
+        "Barbarian 3"
+    )
+    splitOptionsWithoutHeading(
+        canonical_features,
+        original_features,
+        "Aspect of the Beast",
+        "totem",
+        "Path of the Totem Warrior 6"
+    )
+    splitOptionsWithoutHeading(
+        canonical_features,
+        original_features,
+        "Totemic Attunement",
+        "totem",
+        "Path of the Totem Warrior 14"
+    )
+
+    # split out Cleric Channel Divinities
+    splitOptionsWithHeading(
+        canonical_features,
+        original_features,
+        "Channel Divinity (Cleric)",
+        "channelDivinity",
+        "Cleric 2"
+    )
+
+    # TODO: Cleric Subclass Channel Divinities
+
+    # split out Archdruid options
+    splitOptionsWithHeading(
+        canonical_features,
+        original_features,
+        "Archdruid",
+        "archdruid",
+        "Druid 20"
+    )
+    
+    # split out Arcane Shot Options
+    shots = splitOptionsWithHeading(
+        canonical_features,
+        original_features,
+        "Arcane Shot Options",
+        "arcaneShot",
+        "Arcane Archer 3"
+    )
+    renameOptionGroups(
+        canonical_features,
+        original_features,
+        shots,
+        "Arcane Shot Options",
+        "Arcane Shot",
+        consumers=[classes[cmdize("Fighter")].subclasses[cmdize("Arcane Archer")].features]
+    )
+
+    # split out Battle Master Maneuvers
+    maneuvers = splitOptionsWithHeading(
+        canonical_features,
+        original_features,
+        "Maneuvers",
+        "maneuver",
+        None # TODO: set these manually
+    )
+    renameOptionGroups(
+        canonical_features,
+        original_features,
+        maneuvers,
+        "Maneuvers",
+        "Combat Superiority",
+        name_to="Maneuver",
+        consumers=[classes[cmdize("Fighter")].subclasses[cmdize("Battle Master")].features]
+    )
+
+    # split out Rune Knight: Runes
+    runes = splitOptionsWithHeading(
+        canonical_features,
+        original_features,
+        "Runes",
+        "rune",
+        "Rune Knight 3"
+    )
+    renameOptionGroups(
+        canonical_features,
+        original_features,
+        runes,
+        "Runes",
+        "Rune Carver",
+        name_to="Rune",
+        consumers=[classes[cmdize("Fighter")].subclasses[cmdize("Rune Knight")].features]
+    )
+
+    # split out Monk: Ki options
+    runes = splitOptionsWithHeading(
+        canonical_features,
+        original_features,
+        "Ki",
+        "ki",
+        "Monk 2"
+    )
+
+    # split out Monk: Elemental Disciplines
+    elementalDisciplines = splitOptionsWithHeading(
+        canonical_features,
+        original_features,
+        "Elemental Disciplines",
+        "elementalDiscipline",
+        None # TODO: set these manually
+    )
+    renameOptionGroups(
+        canonical_features,
+        original_features,
+        elementalDisciplines,
+        "Elemental Disciplines",
+        "Disciple of the Elements",
+        name_to="Elemental Discipline",
+        consumers=[classes[cmdize("Monk")].subclasses[cmdize("Way of the Four Elements")].features]
+    )
+
+    # split out Paladin: subclass Channel Divinity
+    for sc in classes[cmdize("Paladin")].subclasses.values():
+        splitOptionsWithoutHeading(
+            canonical_features,
+            original_features,
+            f"Channel Divinity ({sc.name})",
+            "channelDivinity",
+            f"{sc.name} 3",
+            name_to="Channel Divinity"
+        )
+
+    # split out Metamagics
+    splitOptionsWithHeading(
+        canonical_features,
+        original_features,
+        "Metamagic",
+        "metamagic",
+        "Sorcerer 3"
+    )
+
     # split out Pact Boons
-    parentPactBoon = canonical_features[cmdize("Pact Boon")]
-    parentPactBoon.paragraphs = parentPactBoon.originalCollection.children()[0].markdown()
-    pacts = []
-    for pact in parentPactBoon.originalCollection.children()[1:]:
-        pactBoon = Feature(pact)
-        pactBoon.featureSubType = "pact"
-        pactBoon.requirements = f"Warlock {parentPactBoon.startingLevel}"
-        canonical_features[cmdize(pact.text)] = pactBoon
-        pacts.append(pactBoon)
-    updateNewClassFeatures({cmdize(f.name):f for f in pacts}, original_features)
-    parentPactBoon.paragraphs += "\n\n"+"\n\n".join("@UUID[Compendium.dnd5e.classfeatures."+pact.originalId+"]{"+pact.name+"}" for pact in pacts)
-    parentPactBoon.paragraphs += "\n\nYou can drag your choice from the above onto your character sheet and it will automatically update."
+    splitOptionsWithHeading(
+        canonical_features,
+        original_features,
+        "Pact Boon",
+        "pact",
+        f"Warlock {canonical_features[cmdize('Pact Boon')].startingLevel}"
+    )
 
     
     # add Warlock Invocations
