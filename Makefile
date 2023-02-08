@@ -13,5 +13,5 @@ release: build
 	python -m http.server 43516
 
 unbuild:
-	git checkout -- "*.json"
+	git checkout -- "packs/**.json"
 	git ls-files -o --exclude-standard | grep 'packs/.*\.json$$' | xargs rm

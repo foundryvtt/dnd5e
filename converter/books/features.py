@@ -26,7 +26,7 @@ CLASS_SPECIFIC_FEATURES = (
     "Timeless Body"
 )
 
-LEVEL_RE = re.compile("((by|at|reach) (?P<lv1>[1-9][0-9]?).. level)|((by|at|reach) level (?P<lv2>[1-9][0-9]?))", re.IGNORECASE)
+LEVEL_RE = re.compile("((by|at|reach) (?P<lv1>[1-9][0-9]?)..(,( and)? [1-9][0-9]?..)* level)|((by|at|reach) level (?P<lv2>[1-9][0-9]?))", re.IGNORECASE)
 PREREQUISITE_RE = re.compile("\\*?Prerequisites?[:\\.] (?P<prereqs>.+)", re.IGNORECASE)
 LEVEL_PREREQ_RE = re.compile("(?P<lv>[1-9][0-9]?).. level (?P<class>.+)", re.IGNORECASE)
 
@@ -79,7 +79,7 @@ class Feature(object):
 
     @property
     def startingLevel(self)->int:
-        match = LEVEL_RE.search(self.paragraphs[:100])
+        match = LEVEL_RE.search(". ".join(p for _,p in zip(range(3), self.paragraphs.split(". "))))
         if match and match.group("lv1"):
             return int(match.group("lv1"))
         if match and match.group("lv2"):
