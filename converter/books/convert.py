@@ -110,14 +110,9 @@ DRAG_AND_DROP_NOTE = "\n\n<section class=\"secret foundry-note\">\n<p><strong>Fo
 
 INLINE_OPTION_RX = re.compile("(?P<enc>\\*\\*\\*?)(?P<title>[^\\*]+)\\.(?P=enc) ", re.IGNORECASE)
 
-
-def splitOptionsWithHeading(canonical_features, original_features, sourceFeature, featureSubType, requirements, name_to=None):
-    if name_to is None:
-        name_to = sourceFeature
-    parentFeature = canonical_features[cmdize(sourceFeature)]
-    parentFeature.paragraphs = parentFeature.originalCollection.immediateMarkdown()
+def collectOptionsFromHeading(canonical_features, original_features, originalCollection, featureSubType, requirements, name_to=None):
     featureOptions = []
-    for featureOption in parentFeature.originalCollection.children()[1:]:
+    for featureOption in originalCollection.children()[1:]:
         if featureOption.level >= CollectionLevel.P:
             continue
         feature = Feature(featureOption)
@@ -133,8 +128,26 @@ def splitOptionsWithHeading(canonical_features, original_features, sourceFeature
         canonical_features[cmdize(feature.name)] = feature
         featureOptions.append(feature)
     updateNewClassFeatures({cmdize(f.name):f for f in featureOptions}, original_features)
-    parentFeature.paragraphs += "\n\n"+"\n\n".join("@UUID[Compendium.dnd5e.classfeatures."+featureOption.originalId+"]{"+featureOption.name.split(": ")[-1]+"}" for featureOption in featureOptions)
+    return featureOptions
+
+def writeOptionsToFeature(parentFeature, options:list):
+    parentFeature.paragraphs += "\n\n"+"\n\n".join("@UUID[Compendium.dnd5e.classfeatures."+featureOption.originalId+"]{"+featureOption.name.split(": ")[-1]+"}" for featureOption in options)
     parentFeature.paragraphs += DRAG_AND_DROP_NOTE
+
+def splitOptionsWithHeading(canonical_features, original_features, sourceFeature, featureSubType, requirements, name_to=None):
+    if name_to is None:
+        name_to = sourceFeature
+    parentFeature = canonical_features[cmdize(sourceFeature)]
+    parentFeature.paragraphs = parentFeature.originalCollection.immediateMarkdown()
+    featureOptions = collectOptionsFromHeading(
+        canonical_features,
+        original_features,
+        parentFeature.originalCollection,
+        featureSubType,
+        requirements,
+        name_to=name_to
+    )
+    writeOptionsToFeature(parentFeature, featureOptions)
 
     return featureOptions
 
@@ -182,8 +195,7 @@ def splitOptionsWithoutHeading(canonical_features, original_features, sourceFeat
         canonical_features[cmdize(feature.name)] = feature
         featureOptions.append(feature)
     updateNewClassFeatures({cmdize(f.name):f for f in featureOptions}, original_features)
-    parentFeature.paragraphs += "\n\n"+"\n\n".join("@UUID[Compendium.dnd5e.classfeatures."+featureOption.originalId+"]{"+featureOption.name.split(": ")[-1]+"}" for featureOption in featureOptions)
-    parentFeature.paragraphs += DRAG_AND_DROP_NOTE
+    writeOptionsToFeature(parentFeature, featureOptions)
 
     return featureOptions
 
@@ -501,9 +513,36 @@ def loadClasses(filepath:str, all_spells:dict={}):
         f"Warlock {canonical_features[cmdize('Pact Boon')].startingLevel}"
     )
 
+
+    # add Artificer Infusions
+    infusionCollection = phb.fromPath("Chapter 3: Classes", "Artificer", "Artificer Infusions")
+    infusions = collectOptionsFromHeading(
+        canonical_features,
+        original_features,
+        infusionCollection,
+        "artificerInfusion",
+        None,
+        name_to="Artificer Infusion"
+    )
+    writeOptionsToFeature(
+        canonical_features[cmdize("Infuse Item")],
+        infusions
+    )
     
     # add Warlock Invocations
-    # invocationCollection = phb.fromPath("Chapter 3: Classes", "Warlock", "Eldritch Invocations")
+    invocationCollection = phb.fromPath("Chapter 3: Classes", "Warlock", "Eldritch Invocations")
+    invocations = collectOptionsFromHeading(
+        canonical_features,
+        original_features,
+        invocationCollection,
+        "eldritchInvocation",
+        None,
+        name_to="Eldritch Invocation"
+    )
+    writeOptionsToFeature(
+        canonical_features[cmdize("Eldritch Invocations")],
+        invocations
+    )
 
     
     # update classes to reflect squished canonical features
