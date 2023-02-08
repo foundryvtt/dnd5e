@@ -2,7 +2,7 @@
 from .books import Book, Collection, CollectionLevel
 from .features import Feature
 from .classes import RpgClass
-from ..common_lib import cmdize, naturalSort, equalsWithout
+from ..common_lib import cmdize, naturalSort, equalsWithout, nvl
 from copy import deepcopy
 import argparse, json, os, shutil, re
 
@@ -65,30 +65,36 @@ def readOriginals(idFp):
         featureMap[cmdize(feature["name"])] = feature
     return featureMap
 
+def _promoteIfLonger(obj, dictionary, key):
+    if len(nvl(getattr(obj,key),tuple())) <= len(nvl(dictionary[key],tuple())):
+        setattr(obj, key, dictionary[key])
+
 def updateNewClassFeatures(all_features, featureMap):
     for feature in all_features.values():
         originalFeature = featureMap[cmdize(feature.name)] if cmdize(feature.name) in featureMap else None
         if originalFeature is not None:
             feature.originalId = originalFeature["_id"]
-            feature.img = originalFeature["img"]
-            feature.effects = originalFeature["effects"]
+            _promoteIfLonger(feature, originalFeature, "img")
+            _promoteIfLonger(feature, originalFeature, "effects")
             feature.createdTime = originalFeature["_stats"]["createdTime"]
 
-            feature.actionType = originalFeature["system"]["actionType"]
-            feature.chatFlavor = originalFeature["system"]["chatFlavor"]
-            feature.activation = originalFeature["system"]["activation"]
-            feature.duration = originalFeature["system"]["duration"]
-            feature.target = originalFeature["system"]["target"]
-            feature.fRange = originalFeature["system"]["range"]
-            feature.uses = originalFeature["system"]["uses"]
-            feature.consume = originalFeature["system"]["consume"]
-            feature.ability = originalFeature["system"]["ability"]
-            feature.critical = originalFeature["system"]["critical"]
-            feature.damage = originalFeature["system"]["damage"]
-            feature.formula = originalFeature["system"]["formula"]
-            feature.save = originalFeature["system"]["save"]
-            feature.requirements = originalFeature["system"]["requirements"]
-            feature.recharge = originalFeature["system"]["recharge"]
+            if len(nvl(feature.fRange,tuple())) <= len(nvl(originalFeature["system"]["range"],tuple())):
+                feature.fRange = originalFeature["system"]["range"]
+            
+            _promoteIfLonger(feature, originalFeature["system"], "actionType")
+            _promoteIfLonger(feature, originalFeature["system"], "chatFlavor")
+            _promoteIfLonger(feature, originalFeature["system"], "activation")
+            _promoteIfLonger(feature, originalFeature["system"], "duration")
+            _promoteIfLonger(feature, originalFeature["system"], "target")
+            _promoteIfLonger(feature, originalFeature["system"], "uses")
+            _promoteIfLonger(feature, originalFeature["system"], "consume")
+            _promoteIfLonger(feature, originalFeature["system"], "ability")
+            _promoteIfLonger(feature, originalFeature["system"], "critical")
+            _promoteIfLonger(feature, originalFeature["system"], "damage")
+            _promoteIfLonger(feature, originalFeature["system"], "formula")
+            _promoteIfLonger(feature, originalFeature["system"], "save")
+            _promoteIfLonger(feature, originalFeature["system"], "requirements")
+            _promoteIfLonger(feature, originalFeature["system"], "recharge")
 
 def updateNewClasses(all_classes, classesMap):
     for classes in all_classes.values():
@@ -347,6 +353,24 @@ def loadClasses(filepath:str, all_spells:dict={}):
         name_to="Maneuver",
         consumers=[classes[cmdize("Fighter")].subclasses[cmdize("Battle Master")].features]
     )
+    
+    # split out Fighter: Psi Knight psi powers
+    splitOptionsWithoutHeading(
+        canonical_features,
+        original_features,
+        "Psionic Power",
+        "psionicPower",
+        "Psi Knight 3",
+        name_to="Psionic Power"
+    )
+    splitOptionsWithoutHeading(
+        canonical_features,
+        original_features,
+        "Telekinetic Adept",
+        "psionicPower",
+        "Psi Knight 7",
+        name_to="Psionic Power"
+    )
 
     # split out Rune Knight: Runes
     runes = splitOptionsWithHeading(
@@ -403,6 +427,61 @@ def loadClasses(filepath:str, all_spells:dict={}):
             f"{sc.name} 3",
             name_to="Channel Divinity"
         )
+    
+    # split out Ranger: Hunter Conclave: Hunter's Prey
+    splitOptionsWithoutHeading(
+        canonical_features,
+        original_features,
+        "Hunter's Prey",
+        "huntersPrey",
+        "Hunter Conclave 3"
+    )
+    
+    # split out Ranger: Hunter Conclave: Defensive Tactics
+    splitOptionsWithoutHeading(
+        canonical_features,
+        original_features,
+        "Defensive Tactics",
+        "defensiveTactic",
+        "Hunter Conclave 7",
+        name_to="Defensive Tactic"
+    )
+    
+    # split out Ranger: Hunter Conclave: Multiattack
+    splitOptionsWithoutHeading(
+        canonical_features,
+        original_features,
+        "Multiattack",
+        "multiattack",
+        "Hunter Conclave 11"
+    )
+    
+    # split out Ranger: Hunter Conclave: Superior Hunter's Defense
+    splitOptionsWithoutHeading(
+        canonical_features,
+        original_features,
+        "Superior Hunter's Defense",
+        "superiorHuntersDefense",
+        "Hunter Conclave 15"
+    )
+    
+    # split out Rogue: Soulknife psi powers
+    splitOptionsWithoutHeading(
+        canonical_features,
+        original_features,
+        "Psychic Power",
+        "psionicPower",
+        "Soulknife 3",
+        name_to="Psionic Power"
+    )
+    splitOptionsWithoutHeading(
+        canonical_features,
+        original_features,
+        "Soul Blades",
+        "psionicPower",
+        "Soulknife 9",
+        name_to="Psionic Power"
+    )
 
     # split out Metamagics
     splitOptionsWithHeading(
