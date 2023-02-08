@@ -243,6 +243,7 @@ class RpgSubClass(RpgClass):
         self.originalId = id_generator()
         self.name = collection.text
         self.features = []
+        self._description = collection.immediateMarkdown()
 
         for featureC in collection.children():
             if featureC.level >= CollectionLevel.P:
@@ -263,7 +264,7 @@ class RpgSubClass(RpgClass):
             "img": self.img,
             "system": {
                 "description": {
-                    "value": "??",
+                    "value": self.description,
                     "chat": "",
                     "unidentified": ""
                 },
