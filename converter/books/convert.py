@@ -74,7 +74,7 @@ def updateNewClassFeatures(all_features, featureMap):
         originalFeature = featureMap[cmdize(feature.name)] if cmdize(feature.name) in featureMap else None
         if originalFeature is not None:
             feature.originalId = originalFeature["_id"]
-            _promoteIfLonger(feature, originalFeature, "img")
+            feature.img = originalFeature["img"]
             _promoteIfLonger(feature, originalFeature, "effects")
             feature.createdTime = originalFeature["_stats"]["createdTime"]
 
@@ -106,17 +106,21 @@ def updateNewClasses(all_classes, classesMap):
             classes.advancement = originalClasses["system"]["advancement"]
 
 
+def updateNewSubclasses(all_subclasses, subclassesMap):
+    updateNewClasses(all_subclasses, subclassesMap)
+
+
 DRAG_AND_DROP_NOTE = "\n\n<section class=\"secret foundry-note\">\n<p><strong>Foundry Note</strong></p>\n<p>You can drag your choices from the above onto your character sheet and it will automatically update.</p>\n</section>"
 
 INLINE_OPTION_RX = re.compile("(?P<enc>\\*\\*\\*?)(?P<title>[^\\*]+)\\.(?P=enc) ", re.IGNORECASE)
 
-def collectOptionsFromHeading(canonical_features, original_features, originalCollection, featureSubType, requirements, name_to=None):
+def collectOptionsFromHeading(canonical_features, original_features, originalCollection, featureSubType, requirements, name_to):
     featureOptions = []
     for featureOption in originalCollection.children()[1:]:
         if featureOption.level >= CollectionLevel.P:
             continue
         feature = Feature(featureOption)
-        if ": " not in feature.name:
+        if name_to != "" and ": " not in feature.name:
             feature.name = f"{name_to}: {feature.name}"
         feature.featureSubType = featureSubType
         if requirements is not None:
@@ -431,7 +435,7 @@ def loadClasses(filepath:str, all_spells:dict={}):
 
     # split out Paladin: subclass Channel Divinity
     for sc in classes[cmdize("Paladin")].subclasses.values():
-        splitOptionsWithoutHeading(
+        divinities = splitOptionsWithoutHeading(
             canonical_features,
             original_features,
             f"Channel Divinity ({sc.name})",
@@ -439,6 +443,9 @@ def loadClasses(filepath:str, all_spells:dict={}):
             f"{sc.name} 3",
             name_to="Channel Divinity"
         )
+        for d in divinities:
+            if not d.img:
+                d.img = "icons/magic/fire/projectile-wave-arrow.webp"
     
     # split out Ranger: Hunter Conclave: Hunter's Prey
     splitOptionsWithoutHeading(
@@ -504,13 +511,14 @@ def loadClasses(filepath:str, all_spells:dict={}):
         "Sorcerer 3"
     )
 
-    # split out Pact Boons
+    # split out Warlock: Pact Boons
     splitOptionsWithHeading(
         canonical_features,
         original_features,
         "Pact Boon",
         "pact",
-        f"Warlock {canonical_features[cmdize('Pact Boon')].startingLevel}"
+        f"Warlock {canonical_features[cmdize('Pact Boon')].startingLevel}",
+        name_to=""
     )
 
 
@@ -559,6 +567,14 @@ def loadClasses(filepath:str, all_spells:dict={}):
         originalClasses = readOriginals(loadFp)
         updateNewClasses(classes, originalClasses)
 
+    # update new subclasses to reflect old Ids and other fields
+    with open(os.path.join("packs","subclasses.db"), 'r', encoding="utf-8") as loadFp:
+        originalSubclasses = readOriginals(loadFp)
+        subclasses = {}
+        for c in classes.values():
+            subclasses.update(c.subclasses)
+        updateNewSubclasses(subclasses, originalSubclasses)
+
     return classes, None, canonical_features
 
 
@@ -582,9 +598,13 @@ def writeFeatures(canonical_features):
 
 
 def writeClasses(classes):
-    # update new classes to reflect old Ids and other fields
+    # load original classes so they can be compared with the new ones
     with open(os.path.join("packs","classes.db"), 'r', encoding="utf-8") as loadFp:
         originalClasses = readOriginals(loadFp)
+    
+    # load original subclasses so they can be compared with the new ones
+    with open(os.path.join("packs","subclasses.db"), 'r', encoding="utf-8") as loadFp:
+        originalSubclasses = readOriginals(loadFp)
 
     # write out the new classes
     classesDir = os.path.join("packs","src","classes")
@@ -598,6 +618,21 @@ def writeClasses(classes):
             clsJson = originalClasses[class_key]
         with open(os.path.join(classesDir, f"{class_key}.json"), 'w', encoding="utf-8") as saveFp:
             saveFp.write(json.dumps(clsJson, indent=2)+"\n")
+
+    # write out the new subclasses
+    subclassesDir = os.path.join("packs","src","subclasses")
+    shutil.rmtree(subclassesDir)
+    os.mkdir(subclassesDir)
+
+    for class_key in sorted(classes.keys()):
+        cls = classes[class_key]
+        for subclass_key in sorted(cls.subclasses.keys()):
+            scls = cls.subclasses[subclass_key]
+            sclsJson = scls.toDb()
+            if subclass_key in originalSubclasses and equalsWithout(sclsJson, originalSubclasses[subclass_key]):
+                sclsJson = originalSubclasses[subclass_key]
+            with open(os.path.join(subclassesDir, f"{subclass_key}.json"), 'w', encoding="utf-8") as saveFp:
+                saveFp.write(json.dumps(sclsJson, indent=2)+"\n")
 
 
 def main():
