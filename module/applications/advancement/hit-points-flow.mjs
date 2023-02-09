@@ -30,6 +30,7 @@ export default class HitPointsFlow extends AdvancementFlow {
       isFirstClassLevel: (this.level === 1) && this.advancement.item.isOriginalClass,
       hitDie: this.advancement.hitDie,
       dieValue: this.advancement.hitDieValue,
+      startingValue: 10+this.advancement.hitDieValue,
       data: {
         value: Number.isInteger(value) ? value : "",
         useAverage
