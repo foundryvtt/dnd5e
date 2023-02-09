@@ -789,7 +789,7 @@ export default class ActorSheet5e extends ActorSheet {
       {
         name: "DND5E.ContextMenuActionDuplicate",
         icon: "<i class='fas fa-copy fa-fw'></i>",
-        condition: () => !["race", "background", "class", "subclass"].includes(item.type),
+        condition: () => !["ancestry", "background", "class", "culture", "subclass"].includes(item.type),
         callback: () => item.clone({name: game.i18n.format("DOCUMENT.CopyOf", {name: item.name})}, {save: true})
       },
       {

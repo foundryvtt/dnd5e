@@ -26,12 +26,14 @@ export default class DetailsField {
    *
    * @type {object}
    * @property {string} alignment  Creature's alignment.
-   * @property {string} race       Creature's race.
+   * @property {string} ancestry   Creature's ancestry.
+   * @property {string} culture    Creature's culture.
    */
   static get creature() {
     return {
+      ancestry: new foundry.data.fields.StringField({required: true, label: "DND5E.Ancestry"}),
       alignment: new foundry.data.fields.StringField({required: true, label: "DND5E.Alignment"}),
-      race: new foundry.data.fields.StringField({required: true, label: "DND5E.Race"})
+      culture: new foundry.data.fields.StringField({required: true, label: "DND5E.Culture"})
     };
   }
 }

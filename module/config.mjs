@@ -640,6 +640,9 @@ preLocalize("consumableTypes", { sort: true });
  * @enum {FeatureTypeConfiguration}
  */
 DND5E.featureTypes = {
+  ancestry: {
+    label: "DND5E.Feature.Ancestry"
+  },
   background: {
     label: "DND5E.Feature.Background"
   },
@@ -667,11 +670,11 @@ DND5E.featureTypes = {
       totem: "DND5E.ClassFeature.Totem",
     }
   },
+  culture: {
+    label: "DND5E.Feature.Culture"
+  },
   monster: {
     label: "DND5E.Feature.Monster"
-  },
-  race: {
-    label: "DND5E.Feature.Race"
   },
   feat: {
     label: "DND5E.Feature.Feat"
