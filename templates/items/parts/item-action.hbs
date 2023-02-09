@@ -11,7 +11,15 @@
 <div class="form-group select">
     <label>{{ localize "DND5E.AbilityModifier" }}</label>
     <select name="system.ability">
-        {{selectOptions config.abilities selected=system.ability labelAttr="label" blank=(localize "DND5E.Default")}}
+        {{#select system.ability}}
+        <option value="">{{ localize "DND5E.Default" }}</option>
+        <option value="flat">{{ localize "DND5E.Flat" }}</option>
+        <optgroup label="{{ localize 'DND5E.Ability' }}">
+            {{#each config.abilities as |ability a|}}
+            <option value="{{a}}">{{ability}}</option>
+            {{/each}}
+        </optgroup>
+        {{/select}}
     </select>
 </div>
 

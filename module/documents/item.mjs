@@ -599,8 +599,9 @@ export default class Item5e extends Item {
     // Take no further action for un-owned items
     if ( !this.isOwned ) return {rollData, parts};
 
-    // Ability score modifier
-    parts.push("@mod");
+    if( this.system.ability !== "flat" ) {
+      // Ability score modifier
+      parts.push("@mod");
 
     // Add proficiency bonus.
     if ( this.system.prof?.hasProficiency ) {
@@ -608,9 +609,10 @@ export default class Item5e extends Item {
       rollData.prof = this.system.prof.term;
     }
 
-    // Actor-level global bonus to attack rolls
-    const actorBonus = this.actor.system.bonuses?.[this.system.actionType] || {};
-    if ( actorBonus.attack ) parts.push(actorBonus.attack);
+      // Actor-level global bonus to attack rolls
+      const actorBonus = this.actor.system.bonuses?.[this.system.actionType] || {};
+      if ( actorBonus.attack ) parts.push(actorBonus.attack);
+    }
 
     // One-time bonus provided by consumed ammunition
     if ( (this.system.consume?.type === "ammo") && this.actor.items ) {
