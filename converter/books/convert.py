@@ -555,7 +555,22 @@ def loadClasses(filepath:str, all_spells:dict={}):
         invocations
     )
 
-    
+    # replace spell references in features
+    if all_spells:
+        maxSpellLength = max((len(s.name) for s in all_spells.values()), default=10)
+        SPELL_RX = re.compile("(?<!\*)(?P<boundary>\\*+)(?P<spell>[^\\*]{3,"+str(maxSpellLength)+"})(?P=boundary)", re.IGNORECASE)
+        def _spell_sub(match):
+            boundary = match.group("boundary")
+            if len(boundary) > 1:
+                return match.group(0)
+            spellCode = cmdize(match.group("spell"))
+            if spellCode in all_spells:
+                spell = all_spells[spellCode]
+                return "@Compendium[dnd5e.spells."+spell.originalId+"]{"+spell.name+"}"
+            return match.group(0)
+        for feature in canonical_features.values():
+            feature.paragraphs = SPELL_RX.sub(_spell_sub, feature.paragraphs)
+
     # update classes to reflect squished canonical features
     for cl in classes.values():
         cl.features = [canonical_features[cmdize(f.name)] for f in cl.features]

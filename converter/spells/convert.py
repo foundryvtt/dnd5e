@@ -1,6 +1,6 @@
 
-from .spells import loadSpells
-from .common_lib import cmdize
+from .spells import Spell, loadSpells as loadSpellsFromFile
+from ..common_lib import cmdize
 import argparse, json, os, shutil
 
 def readOriginals(idFp):
@@ -23,6 +23,30 @@ def updateNew(all_spells, spellMap):
             spell.formula = originalSpell["system"]["formula"]
             spell.parsedDamage = originalSpell["system"]["damage"]["parts"]
 
+def loadSpells(filepath)->dict:
+    with open(filepath, 'r', encoding="utf-8") as loadFp:
+        all_spells = loadSpellsFromFile(loadFp)
+    Spell._all_spells = all_spells
+
+    with open(os.path.join("packs","spells.db"), 'r', encoding="utf-8") as loadFp:
+        updateNew(all_spells, readOriginals(loadFp))
+
+    return all_spells
+
+def writeSpells(all_spells):
+    spellsDir = os.path.join("packs","src","spells")
+    shutil.rmtree(spellsDir)
+    os.mkdir(spellsDir)
+    os.mkdir(os.path.join(spellsDir,"cantrip"))
+    for l in range(1, 10):
+        os.mkdir(os.path.join(spellsDir,f"level-{l}"))
+
+    for spell_key in sorted(all_spells.keys()):
+        spell = all_spells[spell_key]
+        subfolder = f"level-{spell.level}" if spell.level else "cantrip"
+        filename=cmdize(spell.name)+".json"
+        with open(os.path.join(spellsDir, subfolder, filename), 'w', encoding="utf-8") as saveFp:
+            saveFp.write(json.dumps(spell.toDb(), indent=2)+"\n")
 
 def main():
     parser = argparse.ArgumentParser(description="Update the spell lists and descriptions")
@@ -33,41 +57,12 @@ def main():
         nargs="?",
         help="the spell XML file to use"
         )
-    parser.add_argument(
-        "original",
-        type=str,
-        default=os.path.join("packs","spells.db"),
-        nargs="?",
-        help="the original spell.db file to pull IDs from"
-        )
-    parser.add_argument(
-        "out",
-        type=str,
-        default=os.path.join("packs","src","spells"),
-        nargs="?",
-        help="the spell folder to write to"
-        )
     
     args = parser.parse_args()
 
-    with open(args.filepath, 'r', encoding="utf-8") as loadFp:
-        all_spells = loadSpells(loadFp)
-
-    with open(args.original, 'r', encoding="utf-8") as loadFp:
-        updateNew(all_spells, readOriginals(loadFp))
+    all_spells = loadSpells(args.filepath)
     
-    shutil.rmtree(args.out)
-    os.mkdir(args.out)
-    os.mkdir(os.path.join(args.out,"cantrip"))
-    for l in range(1, 10):
-        os.mkdir(os.path.join(args.out,f"level-{l}"))
-
-    for spell_key in sorted(all_spells.keys()):
-        spell = all_spells[spell_key]
-        subfolder = f"level-{spell.level}" if spell.level else "cantrip"
-        filename=cmdize(spell.name)+".json"
-        with open(os.path.join(args.out, subfolder, filename), 'w', encoding="utf-8") as saveFp:
-            saveFp.write(json.dumps(spell.toDb(), indent=2)+"\n")
+    writeSpells(all_spells)
     
 
 if __name__ == "__main__":

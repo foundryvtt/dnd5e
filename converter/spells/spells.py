@@ -5,10 +5,10 @@ import xml.etree.ElementTree as ET
 from markdown import markdown
 from typing import Any, Dict, Set, Tuple, Union
 
-from .common_lib import cmdize, nvl, id_generator, ratoi
-from .xml_lib import getAttr
+from ..common_lib import cmdize, nvl, id_generator, ratoi
+from ..xml_lib import getAttr
 
-from .constants import *
+from ..constants import *
 
 # Table Data
 spellData = {}
@@ -65,6 +65,8 @@ def unitize(unit:str)->str:
 DURATION_RE = re.compile("(?P<val>[0-9]+) (?P<unit>(action|bonus action|reaction|round|minute|hour|day))s?(, )?(?P<condition>.*)", re.IGNORECASE)
 RANGE_RE = re.compile("(?P<val>[0-9]+) (?P<unit>(ft|feet|foot|mi|mile|miles))", re.IGNORECASE)
 
+SPELL_TOKEN_RE = re.compile("\[(?P<plus>\+?)SPELL +spell=(?P<quot>[\"'])(?P<spell>([^\\]]*))(?P=quot)(?P=plus)\]")
+
 class Spell(object):
     originalId  = None
     name        = ''
@@ -88,6 +90,8 @@ class Spell(object):
     createdtime = None
     formula     = ""
     _damage     = None
+
+    _all_spells = {}
 
     
     def __init__(self,spell_element):
@@ -543,8 +547,13 @@ class Spell(object):
 
     def descriptionHTML(self):
         html = markdown(self.paragraphs, extensions=['markdown.extensions.extra'])
-        spellToken = re.compile("\[(?P<plus>\+?)SPELL +spell=(?P<quot>[\"'])(?P<spell>(.*))(?P=quot)(?P=plus)\]")
-        html = spellToken.sub(lambda m: "<em>"+m.group("spell")+"</em>", html)
+        def _spell_sub(m):
+            spellCode = cmdize(m.group("spell"))
+            if spellCode in Spell._all_spells:
+                spell = Spell._all_spells[spellCode]
+                return "@Compendium[dnd5e.spells."+spell.originalId+"]{"+spell.name+"}"
+            return "<em>"+m.group("spell")+"</em>"
+        html = SPELL_TOKEN_RE.sub(_spell_sub, html)
         return html.replace("\n","")
 
     def toDb(self):
