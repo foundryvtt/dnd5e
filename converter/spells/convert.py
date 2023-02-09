@@ -1,6 +1,6 @@
 
 from .spells import Spell, loadSpells as loadSpellsFromFile
-from ..common_lib import cmdize
+from ..common_lib import cmdize, equalsWithout
 import argparse, json, os, shutil
 
 def readOriginals(idFp):
@@ -44,9 +44,12 @@ def writeSpells(all_spells):
     for spell_key in sorted(all_spells.keys()):
         spell = all_spells[spell_key]
         subfolder = f"level-{spell.level}" if spell.level else "cantrip"
+        spellJson = spell.toDb()
+        if spell_key in all_spells and equalsWithout(spellJson, all_spells[spell_key]):
+            spellJson = all_spells[spell_key]
         filename=cmdize(spell.name)+".json"
         with open(os.path.join(spellsDir, subfolder, filename), 'w', encoding="utf-8") as saveFp:
-            saveFp.write(json.dumps(spell.toDb(), indent=2)+"\n")
+            saveFp.write(json.dumps(spellJson, indent=2)+"\n")
 
 def main():
     parser = argparse.ArgumentParser(description="Update the spell lists and descriptions")
