@@ -599,7 +599,7 @@ export default class Item5e extends Item {
     // Take no further action for un-owned items
     if ( !this.isOwned ) return {rollData, parts};
 
-    if( this.system.ability !== "flat" ) {
+    if ( this.system.ability !== "flat" ) {
       // Ability score modifier
       parts.push("@mod");
 
