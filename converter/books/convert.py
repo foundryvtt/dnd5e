@@ -2,7 +2,7 @@
 from .books import Book, Collection, CollectionLevel
 from .features import Feature
 from .classes import RpgClass
-from ..common_lib import cmdize, naturalSort, equalsWithout, nvl
+from ..common_lib import cmdize, naturalSort, equalsWithout, nvl, th
 from copy import deepcopy
 import argparse, json, os, shutil, re
 
@@ -227,6 +227,8 @@ def renameOptionGroups(canonical_features, original_features, to_rename:list, op
     del canonical_features[cmdize(optionParent)]
     
     updateNewClassFeatures({cmdize(f.name):f for f in to_rename}, original_features)
+
+SPELL_LIST_RX = re.compile("\\b(?P<class>\\w+) spell list", re.IGNORECASE)
 
 def loadClasses(filepath:str, all_spells:dict={}):
     """
@@ -555,8 +557,8 @@ def loadClasses(filepath:str, all_spells:dict={}):
         invocations
     )
 
-    # replace spell references in features
     if all_spells:
+        # replace spell references in features
         maxSpellLength = max((len(s.name) for s in all_spells.values()), default=10)
         SPELL_RX = re.compile("(?<!\*)(?P<boundary>\\*+)(?P<spell>[^\\*]{3,"+str(maxSpellLength)+"})(?P=boundary)", re.IGNORECASE)
         def _spell_sub(match):
@@ -570,6 +572,48 @@ def loadClasses(filepath:str, all_spells:dict={}):
             return match.group(0)
         for feature in canonical_features.values():
             feature.paragraphs = SPELL_RX.sub(_spell_sub, feature.paragraphs)
+    
+        # build spell lists
+        sl = {}
+        for spell in all_spells.values():
+            for c in spell.classes:
+                if c not in sl:
+                    sl[c] = []
+                sl[c].append(spell)
+        spellListFeatures = {}
+        for slk in sl:
+            lvs = {l:[] for l in range(10)}
+            for spell in sl[slk]:
+                lvs[spell.level].append(spell)
+            md = "## Spell List ("+slk.title()+")\n\n"
+            for l in range(10):
+                lvs[l].sort(key=lambda s:s.level)
+                if not lvs[l]:
+                    continue
+                if l == 0:
+                    md += "### Cantrips\n"
+                else:
+                    md += f"### {th(l)} Level\n"
+                for spell in lvs[l]:
+                    md += " * @Compendium[dnd5e.spells."+spell.originalId+"]{"+spell.name+"}\n"
+                md += "\n"
+            feature = Feature(Collection.loadFromMarkdown(md)[0])
+            spellListFeatures[cmdize(feature.name)] = feature
+        updateNewClassFeatures(spellListFeatures, original_features)
+        canonical_features.update(spellListFeatures)
+
+        # add spell lists to spellcasting
+        for scf in canonical_features.values():
+            if not scf.name.startswith("Spellcasting") and not scf.name.startswith("Pact Magic"):
+                continue
+            def _spell_list_sub(m):
+                spellClass = m.group("class")
+                if cmdize(f"Spell List ({spellClass.title()})") in spellListFeatures:
+                    slf = spellListFeatures[cmdize(f"Spell List ({spellClass.title()})")]
+                    return "@UUID[Compendium.dnd5e.classfeatures."+slf.originalId+"]{"+f"{spellClass.title()} spell list"+"}"
+                return m.group(0)
+            scf.paragraphs = SPELL_LIST_RX.sub(_spell_list_sub, scf.paragraphs)
+
 
     # update classes to reflect squished canonical features
     for cl in classes.values():

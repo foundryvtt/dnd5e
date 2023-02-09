@@ -72,7 +72,7 @@ class Spell(object):
     name        = ''
     brandedname = None
     new         = False
-    level       = ''
+    level       = 0
     school      = ''
     ritual      = False
     castingtime = ''
@@ -98,7 +98,7 @@ class Spell(object):
         self.name   = ''
         self.brandedname = None
         self.new         = False
-        self.level       = ''
+        self.level       = 0
         self.school      = ''
         self.ritual      = False
         self.castingtime = ''

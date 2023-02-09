@@ -34,6 +34,9 @@ def loadSpells(filepath)->dict:
     return all_spells
 
 def writeSpells(all_spells):
+    with open(os.path.join("packs","spells.db"), 'r', encoding="utf-8") as loadFp:
+        original_spells = readOriginals(loadFp)
+
     spellsDir = os.path.join("packs","src","spells")
     shutil.rmtree(spellsDir)
     os.mkdir(spellsDir)
@@ -45,8 +48,8 @@ def writeSpells(all_spells):
         spell = all_spells[spell_key]
         subfolder = f"level-{spell.level}" if spell.level else "cantrip"
         spellJson = spell.toDb()
-        if spell_key in all_spells and equalsWithout(spellJson, all_spells[spell_key]):
-            spellJson = all_spells[spell_key]
+        if spell_key in original_spells and equalsWithout(spellJson, original_spells[spell_key]):
+            spellJson = original_spells[spell_key]
         filename=cmdize(spell.name)+".json"
         with open(os.path.join(spellsDir, subfolder, filename), 'w', encoding="utf-8") as saveFp:
             saveFp.write(json.dumps(spellJson, indent=2)+"\n")
