@@ -30,7 +30,7 @@
 
 <ol class="items-list inventory-list">
 {{#each spellbook as |section|}}
-    <div {{#each section.dataset as |v k|}}data-{{k}}="{{v}}"{{/each}}>
+    <div class="spellbook-section" {{#each section.dataset as |v k|}}data-{{k}}="{{v}}"{{/each}}>
         <li class="items-header spellbook-header flexrow">
             <div class="item-name flexrow">
                 <h3>{{section.label}}</h3>
@@ -61,7 +61,6 @@
             <div class="item-controls flexrow">
                 {{#if section.canCreate}}
                 <a class="item-control item-create" data-tooltip="DND5E.SpellCreate"
-                    {{#each section.dataset as |v k|}}data-{{k}}="{{v}}"{{/each}}>
                     <i class="fas fa-plus"></i> {{localize "DND5E.Add"}}
                 </a>
                 {{/if}}

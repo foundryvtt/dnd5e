@@ -1140,29 +1140,42 @@ export default class ActorSheet5e extends ActorSheet {
    * @param {object} itemData    The item data requested for creation. **Will be mutated.**
    */
   _onDropSpell(itemData) {
-    if ( itemData.system.level == 0 || !["npc", "character"].includes(this.document.type) ) return;
+    if ( !["npc", "character"].includes(this.document.type) ) return;
 
     // Determine the section it is dropped on, if any.
-    const mode = this._event.target.closest("div[data-type='spell']")?.dataset;
+    const mode = this._event.target.closest(".spellbook-section")?.dataset ?? {};
 
-    // If the spell is dropped on a section, set the mode to be that type.
-    if ( mode && mode.level > 0 ) {
-      itemData.system.preparation.mode = mode["preparation.mode"];
+    // Determine the actor's spell slot progressions, if any.
+    const progs = Object.values(this.document.classes).reduce((acc, cls) => {
+      if ( cls.spellcasting?.type === "pact" ) acc.pact = true;
+      else if ( cls.spellcasting?.type === "leveled" ) acc.leveled = true;
+      return acc;
+    }, {pact: false, leveled: false});
+
+    // Case 1: Drop a cantrip.
+    if ( itemData.system.level == 0 ) {
+      if ( ["pact", "prepared"].includes(mode["preparation.mode"]) ) {
+        itemData.system.preparation.mode = "prepared";
+      } else if ( !mode["preparation.mode"] ) {
+        const isCaster = this.document.system.details.spellLevel || progs.pact || progs.leveled;
+        itemData.system.preparation.mode = isCaster ? "prepared" : "innate";
+      } else {
+        itemData.system.preparation.mode = mode["preparation.mode"];
+      }
     }
 
-    // If the spell is not dropped on a section, and on an NPC with no caster levels, set the spell to be innate.
-    else if ( this.document.type === "npc" && !this.document.system.details.spellLevel ) {
-      itemData.system.preparation.mode = "innate";
-    }
-
-    // If the spell is dropped on an actor with only pact magic (and other classes having 'none'), set the spell to be pact.
-    else if ( this.document.type === "character" ) {
-      const modes = this.document.itemTypes.class.reduce((acc, cls) => {
-        if ( cls.spellcasting?.type === "pact" ) acc.pact = true;
-        else if ( cls.spellcasting?.type === "leveled" ) acc.leveled = true;
-        return acc;
-      }, {pact: false, leveled: false});
-      if ( modes.pact && !modes.leveled ) itemData.system.preparation.mode = "pact";
+    // Case 2: Drop a leveled spell.
+    else {
+      if ( (mode.level == 0) || !mode["preparation.mode"] ) {
+        if ( this.document.type === "npc" ) {
+          const npcLevel = this.document.system.details.spellLevel;
+          itemData.system.preparation.mode = npcLevel ? "prepared" : "innate";
+        } else {
+          itemData.system.preparation.mode = progs.pact ? "pact" : progs.leveled ? "prepared" : "innate";
+        }
+      } else {
+        itemData.system.preparation.mode = mode["preparation.mode"];
+      }
     }
   }
 
@@ -1274,8 +1287,8 @@ export default class ActorSheet5e extends ActorSheet {
    */
   _onItemCreate(event) {
     event.preventDefault();
-    const header = event.currentTarget;
-    const type = header.dataset.type;
+    const dataset = (event.currentTarget.closest(".spellbook-section") ?? event.currentTarget).dataset;
+    const type = dataset.type;
 
     // Check to make sure the newly created class doesn't take player over level cap
     if ( type === "class" && (this.actor.system.details.level + 1 > CONFIG.DND5E.maxLevel) ) {
@@ -1286,7 +1299,7 @@ export default class ActorSheet5e extends ActorSheet {
     const itemData = {
       name: game.i18n.format("DND5E.ItemNew", {type: game.i18n.localize(`ITEM.Type${type.capitalize()}`)}),
       type: type,
-      system: foundry.utils.expandObject({ ...header.dataset })
+      system: foundry.utils.expandObject(dataset)
     };
     delete itemData.system.type;
     return this.actor.createEmbeddedDocuments("Item", [itemData]);
