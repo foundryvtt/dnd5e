@@ -1057,12 +1057,15 @@ DND5E.spellcastingTypes = {
       },
       half: {
         label: "DND5E.SpellProgHalf",
-        divisor: 2,
-        roundUp: true
+        divisor: 2
       },
       third: {
         label: "DND5E.SpellProgThird",
-        divisor: 3,
+        divisor: 3
+      },
+      artificer: {
+        label: "DND5E.SpellProgArt",
+        divisor: 2,
         roundUp: true
       }
     }
@@ -1085,7 +1088,8 @@ DND5E.spellProgression = {
   full: "DND5E.SpellProgFull",
   half: "DND5E.SpellProgHalf",
   third: "DND5E.SpellProgThird",
-  pact: "DND5E.SpellProgPact"
+  pact: "DND5E.SpellProgPact",
+  artificer: "DND5E.SpellProgArt"
 };
 preLocalize("spellProgression", { key: "label" });
 
