@@ -2038,7 +2038,8 @@ export default class Item5e extends Item {
     // Get spell data
     const itemData = (spell instanceof Item5e) ? spell.toObject() : spell;
     let {
-      actionType, description, source, activation, duration, target, range, damage, formula, save, level, attackBonus
+      actionType, description, source, activation, duration, target,
+      range, damage, formula, save, level, attackBonus, ability
     } = itemData.system;
 
     // Get scroll data
@@ -2059,7 +2060,8 @@ export default class Item5e extends Item {
 
     // Used a fixed attack modifier and saving throw according to the level of spell scroll.
     if ( ["mwak", "rwak", "msak", "rsak"].includes(actionType) ) {
-      attackBonus = `${scrollData.system.attackBonus} - @mod`;
+      attackBonus = scrollData.system.attackBonus;
+      ability = "flat";
     }
     if ( save.ability ) {
       save.scaling = "flat";
@@ -2071,8 +2073,8 @@ export default class Item5e extends Item {
       name: `${game.i18n.localize("DND5E.SpellScroll")}: ${itemData.name}`,
       img: itemData.img,
       system: {
-        description: {value: desc.trim()}, source, actionType, activation, duration, target, range, damage, formula,
-        save, level, attackBonus
+        description: {value: desc.trim()}, source, actionType, activation, duration, target,
+        range, damage, formula, save, level, attackBonus, ability
       }
     });
     return new this(spellScrollData);
