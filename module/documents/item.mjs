@@ -600,7 +600,7 @@ export default class Item5e extends Item {
     if ( !this.isOwned ) return {rollData, parts};
 
     // Ability score modifier
-    if ( this.system.ability !== "flat" ) parts.push("@mod");
+    if ( this.system.ability !== "none" ) parts.push("@mod");
 
     // Add proficiency bonus.
     if ( this.system.prof?.hasProficiency ) {
@@ -2061,7 +2061,7 @@ export default class Item5e extends Item {
     // Used a fixed attack modifier and saving throw according to the level of spell scroll.
     if ( ["mwak", "rwak", "msak", "rsak"].includes(actionType) ) {
       attackBonus = scrollData.system.attackBonus;
-      ability = "flat";
+      ability = "none";
     }
     if ( save.ability ) {
       save.scaling = "flat";

@@ -13,10 +13,10 @@
     <select name="system.ability">
         {{#select system.ability}}
         <option value="">{{ localize "DND5E.Default" }}</option>
-        <option value="flat">{{ localize "DND5E.Flat" }}</option>
+        <option value="none">{{ localize "DND5E.None" }}</option>
         <optgroup label="{{ localize 'DND5E.Ability' }}">
             {{#each config.abilities as |ability a|}}
-            <option value="{{a}}">{{ability}}</option>
+            <option value="{{a}}">{{ability.label}}</option>
             {{/each}}
         </optgroup>
         {{/select}}
