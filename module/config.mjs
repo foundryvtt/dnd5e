@@ -1066,7 +1066,7 @@ DND5E.spellcastingTypes = {
       artificer: {
         label: "DND5E.SpellProgArt",
         divisor: 2,
-        roundUp: true
+        startinglevel:1
       }
     }
   },

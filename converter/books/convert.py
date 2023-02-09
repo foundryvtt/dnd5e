@@ -105,6 +105,9 @@ def updateNewClasses(all_classes, classesMap):
             classes.createdTime = originalClasses["_stats"]["createdTime"]
             classes.advancement = originalClasses["system"]["advancement"]
 
+            classes.spellcasting = originalClasses["system"]["spellcasting"]["progression"]
+            classes.spellAbility = originalClasses["system"]["spellcasting"]["ability"]
+
 
 def updateNewSubclasses(all_subclasses, subclassesMap):
     updateNewClasses(all_subclasses, subclassesMap)

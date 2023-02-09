@@ -11,6 +11,7 @@ HIT_DIE_RX = re.compile("\\**Hit Dice:\\** 1(?P<die>d[1-9][0-9]?)")
 SAVE_PROFICIENCY_RX = re.compile(f"\\**Saving Throws:\\** (?P<save1>{'|'.join(ABILITY_SCORES)}), (?P<save2>{'|'.join(ABILITY_SCORES)})", re.IGNORECASE)
 SKILL_PROFICIENCY_RX = re.compile(f"\\**Skills:\\** Choose (?P<num>{NUM_LIST}) from (?P<list>.*)", re.IGNORECASE)
 SKILL_PROFICIENCY_2_RX = re.compile(f"\\**Skills:\\** Choose any (?P<num>{NUM_LIST})", re.IGNORECASE)
+SPELL_ABILITY_RX = re.compile(f"(?P<ability>({'|'.join(ABILITY_SCORES)})) is your spellcasting ability", re.IGNORECASE)
 
 ALL_SKILLS = ("acr", "ani", "arc", "ath", "dec", "his", "ins", "inv", "itm", "med", "nat", "per", "prc", "prf", "rel", "slt", "ste", "stw", "sur",)
 
@@ -48,6 +49,8 @@ class RpgClass(object):
     saves          = []
     skillNumbers   = 0
     skillChoices   = []
+    _spellcasting  = ""
+    _spellAbility  = ""
 
     _description   = ""
     features       = None
@@ -185,6 +188,47 @@ class RpgClass(object):
     @property
     def description(self)->str:
         return markdown(self._description, extensions=['markdown.extensions.extra'])
+    
+    @property
+    def spellcasting(self):
+        if self._spellcasting:
+            return self._spellcasting
+        if self.name == "Artificer":
+            return "artificer"
+        try:
+            sc = next(f for f in self.features if f.name.startswith("Spellcasting"))
+            if sc.startingLevel == 1:
+                return "full"
+            if sc.startingLevel == 2:
+                return "half"
+            if sc.startingLevel == 3:
+                return "third"
+        except: pass
+        try:
+            next(f for f in self.features if f.name.startswith("Pact Magic"))
+            return "pact"
+        except: pass
+        return "none"
+    
+    @spellcasting.setter
+    def spellcasting(self, value):
+        self._spellcasting = value
+    
+    @property
+    def spellAbility(self):
+        if self._spellAbility:
+            return self._spellAbility
+        try:
+            sc = next(f for f in self.features if f.name.startswith("Spellcasting") or f.name.startswith("Pact Magic"))
+            rematch = SPELL_ABILITY_RX.search(sc.paragraphs)
+            if rematch:
+                return rematch.group("ability")[:3].lower()
+        except: pass
+        return ""
+    
+    @spellAbility.setter
+    def spellAbility(self, value):
+        self._spellAbility = value
 
     def toDb(self)->dict:
         now = int(time.time()*1000)
@@ -212,8 +256,8 @@ class RpgClass(object):
                     "value": []
                 },
                 "spellcasting": {
-                    "progression": "none",
-                    "ability": ""
+                    "progression": self.spellcasting,
+                    "ability": self.spellAbility
                 }
             },
             "effects": [],
@@ -273,8 +317,8 @@ class RpgSubClass(RpgClass):
                 "classIdentifier": cmdize(self.parent.name),
                 "advancement": self.advancement,
                 "spellcasting": {
-                    "progression": "none",
-                    "ability": ""
+                    "progression": self.spellcasting,
+                    "ability": self.spellAbility
                 }
             },
             "effects": [],
