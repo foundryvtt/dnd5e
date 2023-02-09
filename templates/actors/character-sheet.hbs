@@ -32,7 +32,10 @@
             {{!-- Character Summary --}}
             <ul class="summary flexrow">
                 <li>
-                    <input type="text" name="system.details.race" value="{{system.details.race}}" placeholder="{{ localize 'DND5E.Race' }}"/>
+                    <input type="text" name="system.details.ancestry" value="{{system.details.ancestry}}" placeholder="{{ localize 'DND5E.Ancestry' }}"/>
+                </li>
+                <li>
+                    <input type="text" name="system.details.culture" value="{{system.details.culture}}" placeholder="{{ localize 'DND5E.Culture' }}"/>
                 </li>
                 <li>
                     {{#if labels.background}}
