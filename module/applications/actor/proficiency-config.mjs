@@ -9,17 +9,11 @@ import * as Trait from "../../documents/actor/trait.mjs";
 
 /**
  * An application responsible for configuring proficiencies and bonuses in tools and skills.
+ *
+ * @param {Actor5e} actor                     The Actor being configured.
+ * @param {ProficiencyConfigOptions} options  Additional configuration options.
  */
 export default class ProficiencyConfig extends BaseConfigSheet {
-  /**
-   * @param {Actor5e} actor                     The Actor being configured.
-   * @param {ProficiencyConfigOptions} options  Additional configuration options.
-   */
-  constructor(actor, options={}) {
-    super(actor, options);
-  }
-
-  /* -------------------------------------------- */
 
   /** @inheritdoc */
   static get defaultOptions() {

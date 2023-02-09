@@ -924,8 +924,8 @@ export default class ActorSheet5e extends ActorSheet {
 
   /**
    * Handle cycling proficiency in a skill or tool.
-   * @param {Event} event  A click or contextmenu event which triggered this action.
-   * @returns {Promise}    Updated data for this actor after changes are applied.
+   * @param {Event} event     A click or contextmenu event which triggered this action.
+   * @returns {Promise|void}  Updated data for this actor after changes are applied.
    * @protected
    */
   _onCycleProficiency(event) {
@@ -1368,8 +1368,8 @@ export default class ActorSheet5e extends ActorSheet {
 
   /**
    * Handle toggling Ability score proficiency level.
-   * @param {Event} event         The originating click event.
-   * @returns {Promise<Actor5e>}  Updated actor instance.
+   * @param {Event} event              The originating click event.
+   * @returns {Promise<Actor5e>|void}  Updated actor instance.
    * @private
    */
   _onToggleAbilityProficiency(event) {

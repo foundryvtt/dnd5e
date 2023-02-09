@@ -4,7 +4,7 @@ export {default as ActorSheet5eNPC} from "./npc-sheet.mjs";
 export {default as ActorSheet5eVehicle} from "./vehicle-sheet.mjs";
 export {default as GroupActorSheet} from "./group-sheet.mjs";
 
-export {default as BaseConfigSheet} from "./base-sheet.mjs";
+export {default as BaseConfigSheet} from "./base-config.mjs";
 export {default as ActorAbilityConfig} from "./ability-config.mjs";
 export {default as ActorArmorConfig} from "./armor-config.mjs";
 export {default as ActorHitDiceConfig} from "./hit-dice-config.mjs";
