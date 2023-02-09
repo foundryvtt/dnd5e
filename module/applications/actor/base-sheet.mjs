@@ -1094,7 +1094,7 @@ export default class ActorSheet5e extends ActorSheet {
     }
 
     // Adjust the preparation mode of a leveled spell depending on the section on which it is dropped.
-    this._onDropSpell(itemData);
+    if ( itemData.type === "spell" ) this._onDropSpell(itemData);
 
     return itemData;
   }
@@ -1140,13 +1140,15 @@ export default class ActorSheet5e extends ActorSheet {
    * @param {object} itemData    The item data requested for creation. **Will be mutated.**
    */
   _onDropSpell(itemData) {
-    if ( itemData.type !== "spell" || itemData.system.level == 0 ) return;
+    if ( itemData.system.level == 0 || !["npc", "character"].includes(this.document.type) ) return;
 
     // Determine the section it is dropped on, if any.
     const mode = this._event.target.closest("div[data-type='spell']")?.dataset;
 
     // If the spell is dropped on a section, set the mode to be that type.
-    if ( mode && mode.level > 0 ) itemData.system.preparation.mode = mode["preparation.mode"];
+    if ( mode && mode.level > 0 ) {
+      itemData.system.preparation.mode = mode["preparation.mode"];
+    }
 
     // If the spell is not dropped on a section, and on an NPC with no caster levels, set the spell to be innate.
     else if ( this.document.type === "npc" && !this.document.system.details.spellLevel ) {
