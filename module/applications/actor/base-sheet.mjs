@@ -1153,7 +1153,7 @@ export default class ActorSheet5e extends ActorSheet {
     }, {pact: false, leveled: false});
 
     // Case 1: Drop a cantrip.
-    if ( itemData.system.level == 0 ) {
+    if ( itemData.system.level === 0 ) {
       if ( ["pact", "prepared"].includes(mode["preparation.mode"]) ) {
         itemData.system.preparation.mode = "prepared";
       } else if ( !mode["preparation.mode"] ) {
