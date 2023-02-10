@@ -1164,18 +1164,18 @@ export default class ActorSheet5e extends ActorSheet {
       }
     }
 
-    // Case 2: Drop a leveled spell.
-    else {
-      if ( (mode.level == 0) || !mode["preparation.mode"] ) {
-        if ( this.document.type === "npc" ) {
-          const npcLevel = this.document.system.details.spellLevel;
-          itemData.system.preparation.mode = npcLevel ? "prepared" : "innate";
-        } else {
-          itemData.system.preparation.mode = progs.pact ? "pact" : progs.leveled ? "prepared" : "innate";
-        }
+    // Case 2: Drop a leveled spell in a section without a mode.
+    else if ( (mode.level === 0) || !mode["preparation.mode"] ) {
+      if ( this.document.type === "npc" ) {
+        itemData.system.preparation.mode = this.document.system.details.spellLevel ? "prepared" : "innate";
       } else {
-        itemData.system.preparation.mode = mode["preparation.mode"];
+        itemData.system.preparation.mode = progs.pact ? "pact" : progs.leveled ? "prepared" : "innate";
       }
+    }
+
+    // Case 3: Drop a leveled spell in a specific section.
+    else {
+      itemData.system.preparation.mode = mode["preparation.mode"];
     }
   }
 
