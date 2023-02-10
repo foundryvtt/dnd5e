@@ -107,8 +107,6 @@ export default class Actor5e extends Actor {
       return this.system._prepareBaseData();
     }
 
-    this._prepareBaseAbilities();
-    this._prepareBaseSkills();
     this._prepareBaseArmorClass();
 
     // Type-specific preparation
@@ -221,51 +219,6 @@ export default class Actor5e extends Actor {
 
   /* -------------------------------------------- */
   /*  Base Data Preparation Helpers               */
-  /* -------------------------------------------- */
-
-  /**
-   * Update the actor's abilities list to match the abilities configured in `DND5E.abilities`.
-   * Mutates the system.abilities object.
-   * @protected
-   */
-  _prepareBaseAbilities() {
-    if ( !("abilities" in this.system) ) return;
-    const abilities = {};
-    for ( const [key, config] of Object.entries(CONFIG.DND5E.abilities) ) {
-      abilities[key] = this.system.abilities[key];
-      if ( !abilities[key] ) {
-        abilities[key] = foundry.utils.deepClone(game.system.template.Actor.templates.common.abilities.cha);
-
-        let defaultValue = config.defaults?.[this.type] ?? 10;
-        if ( typeof defaultValue === "string" ) {
-          defaultValue = abilities[defaultValue].value ?? this.system.abilities[defaultValue] ?? 10;
-        }
-        abilities[key].value = defaultValue;
-      }
-    }
-    this.system.abilities = abilities;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Update the actor's skill list to match the skills configured in `DND5E.skills`.
-   * Mutates the system.skills object.
-   * @protected
-   */
-  _prepareBaseSkills() {
-    if ( !("skills" in this.system) ) return;
-    const skills = {};
-    for ( const [key, skill] of Object.entries(CONFIG.DND5E.skills) ) {
-      skills[key] = this.system.skills[key];
-      if ( !skills[key] ) {
-        skills[key] = foundry.utils.deepClone(game.system.template.Actor.templates.creature.skills.acr);
-        skills[key].ability = skill.ability;
-      }
-    }
-    this.system.skills = skills;
-  }
-
   /* -------------------------------------------- */
 
   /**
