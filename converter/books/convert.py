@@ -66,7 +66,7 @@ def readOriginals(idFp):
     return featureMap
 
 def _promoteIfLonger(obj, dictionary, key):
-    if len(nvl(getattr(obj,key),tuple())) <= len(nvl(dictionary[key],tuple())):
+    if len(nvl(getattr(obj,key),"")) <= len(nvl(dictionary[key],"")):
         setattr(obj, key, dictionary[key])
 
 def updateNewClassFeatures(all_features, featureMap):
@@ -141,7 +141,7 @@ def writeOptionsToFeature(parentFeature, options:list):
     parentFeature.paragraphs += "\n\n"+"\n\n".join("@UUID[Compendium.dnd5e.classfeatures."+featureOption.originalId+"]{"+featureOption.name.split(": ")[-1]+"}" for featureOption in options)
     parentFeature.paragraphs += DRAG_AND_DROP_NOTE
 
-def splitOptionsWithHeading(canonical_features, original_features, sourceFeature, featureSubType, requirements, name_to=None):
+def splitOptionsWithHeading(canonical_features, original_features, sourceFeature, featureSubType, requirements, name_to=None, doWrite=True):
     if name_to is None:
         name_to = sourceFeature
     parentFeature = canonical_features[cmdize(sourceFeature)]
@@ -154,7 +154,8 @@ def splitOptionsWithHeading(canonical_features, original_features, sourceFeature
         requirements,
         name_to=name_to
     )
-    writeOptionsToFeature(parentFeature, featureOptions)
+    if doWrite:
+        writeOptionsToFeature(parentFeature, featureOptions)
 
     return featureOptions
 
@@ -251,6 +252,10 @@ def loadClasses(filepath:str, all_spells:dict={}):
             if key in canonical_features:
                 if canonical_features[key].descriptionHTML != f.descriptionHTML:
                     print(f"duplicate non-identical feature '{key}' from {cl.name}")
+                canonical_features[key].requirements = ", ".join(
+                    set(canonical_features[key].requirements.split(", "))|
+                    set(f.requirements.split(", "))
+                )
                 continue
             canonical_features[key] = f
         
@@ -260,6 +265,10 @@ def loadClasses(filepath:str, all_spells:dict={}):
                 if key in canonical_features:
                     if canonical_features[key].descriptionHTML != f.descriptionHTML:
                         print(f"duplicate non-identical feature '{key}' from {cl.name}: {scl.name}")
+                    canonical_features[key].requirements = ", ".join(
+                        set(canonical_features[key].requirements.split(", "))|
+                        set(f.requirements.split(", "))
+                    )
                     continue
                 canonical_features[key] = f
     
@@ -412,13 +421,18 @@ def loadClasses(filepath:str, all_spells:dict={}):
     )
 
     # split out Monk: Ki options
-    runes = splitOptionsWithHeading(
+    kiOptions = splitOptionsWithHeading(
         canonical_features,
         original_features,
         "Ki",
         "ki",
-        "Monk 2"
+        "Monk 2",
+        doWrite=False
     )
+    kiIndex = classes[cmdize("Monk")].features.index(canonical_features["ki"])
+    for ko in reversed(kiOptions):
+        ko.startingLevel = 2
+        classes[cmdize("Monk")].features.insert(kiIndex+1, ko)
 
     # split out Monk: Elemental Disciplines
     elementalDisciplines = splitOptionsWithHeading(
@@ -467,8 +481,7 @@ def loadClasses(filepath:str, all_spells:dict={}):
         original_features,
         "Defensive Tactics",
         "defensiveTactic",
-        "Hunter Conclave 7",
-        name_to="Defensive Tactic"
+        "Hunter Conclave 7"
     )
     
     # split out Ranger: Hunter Conclave: Multiattack

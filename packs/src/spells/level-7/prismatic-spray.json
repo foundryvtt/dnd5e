@@ -7,7 +7,7 @@
   "type": "spell",
   "system": {
     "description": {
-      "value": "<p>Eight multicolored rays of light flash from your hand. Each ray is a different color and has a different power and purpose. Each creature in a 60-foot cone must make a Dexterity saving throw. For each target, roll a d8 to determine which color ray affects it.</p>\n<ol>\n<li><strong>Red</strong>. The target takes 10d6 fire damage on a failed save, or half as much damage on a successful one.</li>\n<li><strong>Orange</strong>. The target takes 10d6 acid damage on a failed save, or half as much damage on a successful one.</li>\n<li><strong>Yellow</strong>. The target takes 10d6 lightning damage on a failed save, or half as much damage on a successful one.</li>\n<li><strong>Green</strong>. The target takes 10d6 poison damage on a failed save, or half as much damage on a successful one.</li>\n<li><strong>Blue</strong>. The target takes 10d6 cold damage on a failed save, or half as much damage on a successful one.</li>\n<li><strong>Indigo</strong>. On a failed save, the target is Restrained. It must then make a Constitution saving throw at the end of each of its turns. If it successfully saves three times, the spell ends. If it fails its save three times, it permanently turns to stone and is subjected to the Petrified condition. The successes and failures don't need to be consecutive; keep track of both until the target collects three of a kind.</li>\n<li><strong>Violet</strong>. On a failed save, the target is Blinded. It must then make a Wisdom saving throw at the start of your next turn. A successful save ends the blindness. If it fails that save, the creature is transported to another plane of existence of the DM's choosing and is no longer Blinded. (Typically, a creature that is on a plane that isn't its home plane is banished home, while other creatures are usually cast into the Astral or Ethereal planes.)</li>\n<li><strong>Special</strong>. The target is struck by two rays. Roll twice more, rerolling any 8.</li>\n</ol>",
+      "value": "<p>Eight multicolored rays of light flash from your hand. Each ray is a different color and has a different power and purpose. Each creature in a 60-foot cone must make a <strong>Dexterity saving throw</strong>. For each target, roll a d8 to determine which color ray affects it.</p><table><thead><tr><th align=\"center\">1d8</th><th align=\"center\">Color</th><th align=\"left\">Effect</th></tr></thead><tbody><tr><td align=\"center\">1</td><td align=\"center\">Red</td><td align=\"left\">The target takes <strong>10d6 fire damage</strong> on a failed save, or half as much damage on a successful one.</td></tr><tr><td align=\"center\">2</td><td align=\"center\">Orange</td><td align=\"left\">The target takes <strong>10d6 acid damage</strong> on a failed save, or half as much damage on a successful one.</td></tr><tr><td align=\"center\">3</td><td align=\"center\">Yellow</td><td align=\"left\">The target takes <strong>10d6 lightning damage</strong> on a failed save, or half as much damage on a successful one.</td></tr><tr><td align=\"center\">4</td><td align=\"center\">Green</td><td align=\"left\">The target takes <strong>10d6 poison damage</strong> on a failed save, or half as much damage on a successful one.</td></tr><tr><td align=\"center\">5</td><td align=\"center\">Blue</td><td align=\"left\">The target takes <strong>10d6 cold damage</strong> on a failed save, or half as much damage on a successful one.</td></tr><tr><td align=\"center\">6</td><td align=\"center\">Indigo</td><td align=\"left\">On a failed save, the target is restrained. It must then make a <strong>Constitution saving throw</strong> at the end of each of its turns. If it successfully saves three times, the spell ends. If it fails its save three times, it permanently turns to stone and is subjected to the petrified condition. The successes and failures don't need to be consecutive, keep track of both until the target collects three of a kind.</td></tr><tr><td align=\"center\">7</td><td align=\"center\">Violet</td><td align=\"left\">On a failed save, the target is blinded. It must then make a <strong>Wisdom saving throw</strong> at the start of your next turn. A successful save ends the blindness. If it fails that save, the creature is transported to another plane of existence of the DM's choosing and is no longer blinded. (Typically, a creature that is on a plane that isn't its home plane is banished home, while other creatures are usually cast into the Astral or Ethereal planes.)</td></tr><tr><td align=\"center\">8</td><td align=\"center\">Special</td><td align=\"left\">The target is struck by two rays. Roll twice more, rerolling any 8.</td></tr></tbody></table>",
       "chat": "",
       "unidentified": ""
     },
@@ -56,7 +56,23 @@
       "parts": [
         [
           "10d6",
-          ""
+          "fire"
+        ],
+        [
+          "10d6",
+          "acid"
+        ],
+        [
+          "10d6",
+          "lightning"
+        ],
+        [
+          "10d6",
+          "poison"
+        ],
+        [
+          "10d6",
+          "cold"
         ]
       ],
       "versatile": ""
@@ -101,7 +117,7 @@
     "systemVersion": "2.1.0",
     "coreVersion": "10.291",
     "createdTime": 1661787234184,
-    "modifiedTime": 1671220970498,
-    "lastModifiedBy": "dnd5ebuilder0000"
+    "modifiedTime": 1675989934710,
+    "lastModifiedBy": "RightHandOfVecna"
   }
 }

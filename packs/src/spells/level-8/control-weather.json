@@ -7,7 +7,7 @@
   "type": "spell",
   "system": {
     "description": {
-      "value": "<p>You take control of the weather within 5 miles of you for the duration. You must be outdoors to cast this spell. Moving to a place where you don't have a clear path to the sky ends the spell early.</p><p>When you cast the spell, you change the current weather conditions, which are determined by the DM based on the climate and season. You can change precipitation, temperature, and wind. It takes 1d4 x 10 minutes for the new conditions to take effect. Once they do so, you can change the conditions again. When the spell ends, the weather gradually returns to normal.</p><p>When you change the weather conditions, find a current condition on the following tables and change its stage by one, up or down. When changing the wind, you can change its direction.</p><p><strong>Conditions</strong></p>\n<ol>\n<li>Clear</li>\n<li>Light clouds</li>\n<li>Overcast or ground fog</li>\n<li>Rain, hail, or snow</li>\n<li>Torrential rain, driving hail, or blizzard</li>\n</ol>\n<p><strong>Temperature</strong></p>\n<ol>\n<li>Unbearable heat</li>\n<li>Hot</li>\n<li>Warm</li>\n<li>Cool</li>\n<li>Cold</li>\n<li>Arctic cold</li>\n</ol>\n<p><strong>Wind</strong></p>\n<ol>\n<li>Calm</li>\n<li>Moderate wind</li>\n<li>Strong wind</li>\n<li>Gale</li>\n<li>Storm</li>\n</ol>",
+      "value": "<p>You take control of the weather within 5 miles of you for the duration. You must be outdoors to cast this spell. Moving to a place where you don't have a clear path to the sky ends the spell early.</p><p>When you cast the spell, you change the current weather conditions, which are determined by the DM based on the climate and season. You can change precipitation, temperature, and wind. It takes 1d4 x 10 minutes for the new conditions to take effect. Once they do so, you can change the conditions again. When the spell ends, the weather gradually returns to normal.</p><p>When you change the weather conditions, find a current condition on the following table and change its stage by one, up or down. When changing the wind, you can change its direction.</p><table><thead><tr><th align=\"center\">Stage</th><th align=\"left\">Precipitation</th><th align=\"left\">Temperature</th><th align=\"left\">Wind</th></tr></thead><tbody><tr><td align=\"center\">1</td><td align=\"left\">Clear</td><td align=\"left\">Unbearable Heat</td><td align=\"left\">Calm</td></tr><tr><td align=\"center\">2</td><td align=\"left\">Light clouds</td><td align=\"left\">Hot</td><td align=\"left\">Moderate wind</td></tr><tr><td align=\"center\">3</td><td align=\"left\">Overcast or ground fog</td><td align=\"left\">Warm</td><td align=\"left\">Strong wind</td></tr><tr><td align=\"center\">4</td><td align=\"left\">Rain, hail, or snow</td><td align=\"left\">Cool</td><td align=\"left\">Gale</td></tr><tr><td align=\"center\">5</td><td align=\"left\">Torrential rain</td><td align=\"left\">Cold</td><td align=\"left\">Storm</td></tr><tr><td align=\"center\">6</td><td align=\"left\">\u2014</td><td align=\"left\">Arctic Cold</td><td align=\"left\">\u2014</td></tr></tbody></table>",
       "chat": "",
       "unidentified": ""
     },
@@ -72,7 +72,7 @@
       "concentration": true
     },
     "materials": {
-      "value": "Burning incense and bits of earth and wood mixed in water.",
+      "value": "Burning incense and bits of earth and wood mixed in water",
       "consumed": false,
       "cost": 0,
       "supply": 0
@@ -96,7 +96,7 @@
     "systemVersion": "2.1.0",
     "coreVersion": "10.291",
     "createdTime": 1661787234163,
-    "modifiedTime": 1671220970238,
-    "lastModifiedBy": "dnd5ebuilder0000"
+    "modifiedTime": 1675989933984,
+    "lastModifiedBy": "RightHandOfVecna"
   }
 }

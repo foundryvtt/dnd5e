@@ -1,0 +1,122 @@
+{
+  "_id": "87OLGW351ZW1BUUD",
+  "name": "Arcane Trickster",
+  "type": "subclass",
+  "img": "",
+  "system": {
+    "description": {
+      "value": "<p>Some rogues enhance their fine-honed skills of stealth and agility with magic, learning tricks of enchantment and illusion. These rogues include pick pockets and burglars, but also pranksters, mischief-makers, and a significant number of adventurers.</p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "SRD 5.1",
+    "identifier": "arcane-trickster",
+    "classIdentifier": "rogue",
+    "advancement": [
+      {
+        "_id": "7SVNFZBFO2UW25E3",
+        "type": "ItemGrant",
+        "configuration": {
+          "items": [
+            "Compendium.dnd5e.classfeatures.QFYHPG2Z07R51PN6",
+            "Compendium.dnd5e.classfeatures.CUUGLHUYSL7INTDA"
+          ],
+          "optional": false,
+          "spell": {
+            "ability": "",
+            "preparation": "",
+            "uses": {
+              "max": "",
+              "per": ""
+            }
+          }
+        },
+        "value": {},
+        "level": 3,
+        "title": "Features"
+      },
+      {
+        "_id": "CMJEHRHEJEC3Y4DF",
+        "type": "ItemGrant",
+        "configuration": {
+          "items": [
+            "Compendium.dnd5e.classfeatures.YM6VSMI0SXKWU6LT"
+          ],
+          "optional": false,
+          "spell": {
+            "ability": "",
+            "preparation": "",
+            "uses": {
+              "max": "",
+              "per": ""
+            }
+          }
+        },
+        "value": {},
+        "level": 9,
+        "title": "Features"
+      },
+      {
+        "_id": "8IEYK6CMNH8Q347U",
+        "type": "ItemGrant",
+        "configuration": {
+          "items": [
+            "Compendium.dnd5e.classfeatures.BDXQCLCXCGAEQ11U"
+          ],
+          "optional": false,
+          "spell": {
+            "ability": "",
+            "preparation": "",
+            "uses": {
+              "max": "",
+              "per": ""
+            }
+          }
+        },
+        "value": {},
+        "level": 13,
+        "title": "Features"
+      },
+      {
+        "_id": "NMZKI7XXAETOC7IC",
+        "type": "ItemGrant",
+        "configuration": {
+          "items": [
+            "Compendium.dnd5e.classfeatures.BHOMASUHKZHDXVHU"
+          ],
+          "optional": false,
+          "spell": {
+            "ability": "",
+            "preparation": "",
+            "uses": {
+              "max": "",
+              "per": ""
+            }
+          }
+        },
+        "value": {},
+        "level": 17,
+        "title": "Features"
+      }
+    ],
+    "spellcasting": {
+      "progression": "third",
+      "ability": "int"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.1.0",
+    "coreVersion": "10.291",
+    "createdTime": 1675986801388,
+    "modifiedTime": 1675986801388,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  }
+}

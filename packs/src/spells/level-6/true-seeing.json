@@ -26,7 +26,7 @@
       "value": 1,
       "width": null,
       "units": "",
-      "type": "creature"
+      "type": "ally"
     },
     "range": {
       "value": null,
@@ -72,8 +72,8 @@
       "concentration": false
     },
     "materials": {
-      "value": "An ointment for the eyes that costs 25gp; is made from mushroom powder, saffron, and fat; and is consumed by the spell",
-      "consumed": true,
+      "value": "An ointment for the eyes that costs 25 gp, is made from mushroom powder, saffron, and fat, and is consumed by the spell",
+      "consumed": false,
       "cost": 25,
       "supply": 0
     },
@@ -96,7 +96,7 @@
     "systemVersion": "2.1.0",
     "coreVersion": "10.291",
     "createdTime": 1661787234160,
-    "modifiedTime": 1671220970206,
-    "lastModifiedBy": "dnd5ebuilder0000"
+    "modifiedTime": 1675989935134,
+    "lastModifiedBy": "RightHandOfVecna"
   }
 }

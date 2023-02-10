@@ -1,0 +1,125 @@
+{
+  "_id": "4JL1MPUOH1LJGOX8",
+  "name": "Inquisitive",
+  "type": "subclass",
+  "img": "",
+  "system": {
+    "description": {
+      "value": "<p>As an archetypal Inquisitive, you excel at rooting out secrets and unraveling mysteries. You rely on your sharp eye for detail, but also on your finely honed ability to read the words and deeds of other creatures to determine their true intent. You excel at defeating creatures that hide among and prey upon ordinary folk, and your mastery of lore and your keen deductions make you well equipped to expose and end hidden evils.</p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "SRD 5.1",
+    "identifier": "inquisitive",
+    "classIdentifier": "rogue",
+    "advancement": [
+      {
+        "_id": "IFFTKQ9XYDS9DQ1K",
+        "type": "ItemGrant",
+        "configuration": {
+          "items": [
+            "Compendium.dnd5e.classfeatures.STRL3R8Y5H1URU3Y",
+            "Compendium.dnd5e.classfeatures.NPBGHDJXV31THXNE",
+            "Compendium.dnd5e.classfeatures.4QZU9V2HOVFDS3VZ"
+          ],
+          "optional": false,
+          "spell": {
+            "ability": "",
+            "preparation": "",
+            "uses": {
+              "max": "",
+              "per": ""
+            }
+          }
+        },
+        "value": {},
+        "level": 3,
+        "title": "Features"
+      },
+      {
+        "_id": "C4FLDRU52XCVZ4RI",
+        "type": "ItemGrant",
+        "configuration": {
+          "items": [
+            "Compendium.dnd5e.classfeatures.LAJJB022IE114BF5"
+          ],
+          "optional": false,
+          "spell": {
+            "ability": "",
+            "preparation": "",
+            "uses": {
+              "max": "",
+              "per": ""
+            }
+          }
+        },
+        "value": {},
+        "level": 9,
+        "title": "Features"
+      },
+      {
+        "_id": "421AITBC25R9192N",
+        "type": "ItemGrant",
+        "configuration": {
+          "items": [
+            "Compendium.dnd5e.classfeatures.0D1UE04NE75E25AK",
+            "Compendium.dnd5e.classfeatures.8N5LZDXREXVBJFK7"
+          ],
+          "optional": false,
+          "spell": {
+            "ability": "",
+            "preparation": "",
+            "uses": {
+              "max": "",
+              "per": ""
+            }
+          }
+        },
+        "value": {},
+        "level": 13,
+        "title": "Features"
+      },
+      {
+        "_id": "DAZLZBFFTGCN9DOT",
+        "type": "ItemGrant",
+        "configuration": {
+          "items": [
+            "Compendium.dnd5e.classfeatures.XAL2DGNJ0Z9MCCNG",
+            "Compendium.dnd5e.classfeatures.WYKXKVW44W31SDT4"
+          ],
+          "optional": false,
+          "spell": {
+            "ability": "",
+            "preparation": "",
+            "uses": {
+              "max": "",
+              "per": ""
+            }
+          }
+        },
+        "value": {},
+        "level": 17,
+        "title": "Features"
+      }
+    ],
+    "spellcasting": {
+      "progression": "none",
+      "ability": ""
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.1.0",
+    "coreVersion": "10.291",
+    "createdTime": 1675986801391,
+    "modifiedTime": 1675986801391,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  }
+}

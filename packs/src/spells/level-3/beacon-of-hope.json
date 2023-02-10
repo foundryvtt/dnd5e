@@ -7,7 +7,7 @@
   "type": "spell",
   "system": {
     "description": {
-      "value": "<p>This spell bestows hope and vitality. Choose any number of creatures within range. For the duration, each target has advantage on Wisdom saving throws and death saving throws, and regains the maximum number of hit points possible from any healing.</p>",
+      "value": "<p>This spell bestows hope and vitality. Choose any number of creatures within range. For the duration, each target has advantage on <strong>Wisdom saving throw</strong>s and death saving throws, and regains the maximum number of hit points possible from any healing.</p>",
       "chat": "",
       "unidentified": ""
     },
@@ -26,7 +26,7 @@
       "value": null,
       "width": null,
       "units": "any",
-      "type": "creature"
+      "type": "space"
     },
     "range": {
       "value": 30,
@@ -45,7 +45,7 @@
       "amount": null
     },
     "ability": "",
-    "actionType": "util",
+    "actionType": "save",
     "attackBonus": "",
     "chatFlavor": "",
     "critical": {
@@ -58,7 +58,7 @@
     },
     "formula": "",
     "save": {
-      "ability": "",
+      "ability": "wis",
       "dc": null,
       "scaling": "spell"
     },
@@ -96,7 +96,7 @@
     "systemVersion": "2.1.0",
     "coreVersion": "10.291",
     "createdTime": 1661787234164,
-    "modifiedTime": 1671220970270,
-    "lastModifiedBy": "dnd5ebuilder0000"
+    "modifiedTime": 1675989933823,
+    "lastModifiedBy": "RightHandOfVecna"
   }
 }

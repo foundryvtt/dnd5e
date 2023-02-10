@@ -1,0 +1,88 @@
+{
+  "_id": "EKWL32Q509YDCNFB",
+  "name": "Fey Wanderer Magic",
+  "ownership": {
+    "default": 0
+  },
+  "type": "feat",
+  "system": {
+    "description": {
+      "value": "<p>You learn an additional spell when you reach certain levels in this class, as shown in the Fey Wanderer Spells table. Each spell counts as a ranger spell for you, but it doesn't count against the number of ranger spells you know.</p>\n<h3>Fey Wanderer Spells</h3>\n<table>\n<thead>\n<tr>\n<th align=\"center\">Ranger Level</th>\n<th align=\"left\">Spell</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td align=\"center\">3rd</td>\n<td align=\"left\">@Compendium[dnd5e.spells.eS7XnnApoxRxYXPs]{Charm Person}</td>\n</tr>\n<tr>\n<td align=\"center\">5th</td>\n<td align=\"left\">@Compendium[dnd5e.spells.wqfAVANuQonNBgnL]{Misty Step}</td>\n</tr>\n<tr>\n<td align=\"center\">9th</td>\n<td align=\"left\">@Compendium[dnd5e.spells.15Fa6q1nH27XfbR8]{Dispel Magic}</td>\n</tr>\n<tr>\n<td align=\"center\">13th</td>\n<td align=\"left\">@Compendium[dnd5e.spells.A4RsPuSvB9wFtz1j]{Dimension Door}</td>\n</tr>\n<tr>\n<td align=\"center\">17th</td>\n<td align=\"left\">@Compendium[dnd5e.spells.MBMaQLwoy05qzMJ3]{Mislead}</td>\n</tr>\n</tbody>\n</table>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "SRD 5.1",
+    "activation": {
+      "type": "",
+      "cost": null,
+      "condition": ""
+    },
+    "duration": {
+      "value": "",
+      "units": ""
+    },
+    "cover": null,
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": ""
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": ""
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": null,
+      "recovery": ""
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
+    "ability": null,
+    "actionType": "",
+    "attackBonus": "",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "type": {
+      "value": "class",
+      "subtype": ""
+    },
+    "requirements": "Fey Wanderer Conclave 1",
+    "recharge": {
+      "value": null,
+      "charged": false
+    }
+  },
+  "flags": {},
+  "img": "",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.1.0",
+    "coreVersion": "10.291",
+    "createdTime": 1675986803020,
+    "modifiedTime": 1675988226337,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  }
+}

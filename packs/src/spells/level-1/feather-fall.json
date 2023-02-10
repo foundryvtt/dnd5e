@@ -7,7 +7,7 @@
   "type": "spell",
   "system": {
     "description": {
-      "value": "<p>Choose up to five falling creatures within range. A falling creature's rate of descent slows to 60 feet per round until the spell ends. If the creature lands before the spell ends, it takes no falling damage and can land on its feet, and the spell ends for that creature.</p>",
+      "value": "<p>When you or a creature within 60 feet of you falls Choose up to five falling creatures within range. A falling creature's rate of descent slows to 60 feet per round until the spell ends. If the creature lands before the spell ends, it takes no falling damage and can land on its feet, and the spell ends for that creature.</p>",
       "chat": "",
       "unidentified": ""
     },
@@ -23,7 +23,7 @@
     },
     "cover": null,
     "target": {
-      "value": 5,
+      "value": 1,
       "width": null,
       "units": "",
       "type": "creature"
@@ -72,7 +72,7 @@
       "concentration": false
     },
     "materials": {
-      "value": "A small feather or piece of down",
+      "value": "A white feather or the heart of a hen",
       "consumed": false,
       "cost": 0,
       "supply": 0
@@ -96,7 +96,7 @@
     "systemVersion": "2.1.0",
     "coreVersion": "10.291",
     "createdTime": 1661787234229,
-    "modifiedTime": 1671220971309,
-    "lastModifiedBy": "dnd5ebuilder0000"
+    "modifiedTime": 1675989934212,
+    "lastModifiedBy": "RightHandOfVecna"
   }
 }

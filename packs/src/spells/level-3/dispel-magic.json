@@ -7,7 +7,7 @@
   "type": "spell",
   "system": {
     "description": {
-      "value": "<p>Choose one creature, object, or magical effect within range. Any spell of 3rd level or lower on the target ends. For each spell of 4th level or higher on the target, make an ability check using your spellcasting ability. The DC equals 10 + the spell's level. On a successful check, the spell ends.</p><p><strong>Higher Levels.</strong> When you cast this spell using a spell slot of 4th level or higher, you automatically end the effects of a spell on the target if the spell's level is equal to or less than the level of the spell slot you used.</p>",
+      "value": "<p>Choose any creature, object, or magical effect within range. Any spell of 3rd level or lower on the target ends. For each spell of or higher on the target, make an ability check using your spellcasting ability. The DC equals 10+the spell's level. On a successful check, the spell ends.</p><p><strong><em>At Higher Levels:</em></strong> When you cast this spell using a spell slot of 4th level or higher, you automatically end the effects of a spell on the target if the spell's level is equal to or less than the level of the spell slot you used.</p>",
       "chat": "",
       "unidentified": ""
     },
@@ -26,7 +26,7 @@
       "value": 1,
       "width": null,
       "units": "",
-      "type": "creature"
+      "type": "object"
     },
     "range": {
       "value": 120,
@@ -96,7 +96,7 @@
     "systemVersion": "2.1.0",
     "coreVersion": "10.291",
     "createdTime": 1661787234054,
-    "modifiedTime": 1671220968331,
-    "lastModifiedBy": "dnd5ebuilder0000"
+    "modifiedTime": 1675989934084,
+    "lastModifiedBy": "RightHandOfVecna"
   }
 }

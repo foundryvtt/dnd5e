@@ -7,7 +7,7 @@
   "type": "spell",
   "system": {
     "description": {
-      "value": "<p>Divine light washes out from you and coalesces in a soft radiance in a 30-foot radius around you. Creatures of your choice in that radius when you cast this spell shed dim light in a 5-foot radius and have advantage on all Saving Throws, and other creatures have disadvantage on Attack rolls against them until the spell ends. In addition, when a fiend or an Undead hits an affected creature with a melee attack, the aura flashes with brilliant light. The attacker must succeed on a Constitution saving throw or be Blinded until the spell ends.</p>",
+      "value": "<p>Divine light washes out from you and coalesces in a soft radiance in a 30-foot radius around you. Creatures of your choice in that radius when you cast this spell shed dim light in a 5-foot radius and have advantage on all saving throws, and other creatures have disadvantage on attack rolls against them until the spell ends. In addition, when a fiend or an undead hits an affected creature with a melee attack, the aura flashes with brilliant light. The attacker must succeed on a <strong>Constitution saving throw</strong> or be blinded until the spell ends.</p>",
       "chat": "",
       "unidentified": ""
     },
@@ -23,10 +23,10 @@
     },
     "cover": null,
     "target": {
-      "value": 30,
+      "value": null,
       "width": null,
-      "units": "ft",
-      "type": "radius"
+      "units": "",
+      "type": "self"
     },
     "range": {
       "value": null,
@@ -45,7 +45,7 @@
       "amount": null
     },
     "ability": "",
-    "actionType": "util",
+    "actionType": "save",
     "attackBonus": "",
     "chatFlavor": "",
     "critical": {
@@ -96,7 +96,7 @@
     "systemVersion": "2.1.0",
     "coreVersion": "10.291",
     "createdTime": 1661787234212,
-    "modifiedTime": 1671220971091,
-    "lastModifiedBy": "dnd5ebuilder0000"
+    "modifiedTime": 1675989934412,
+    "lastModifiedBy": "RightHandOfVecna"
   }
 }

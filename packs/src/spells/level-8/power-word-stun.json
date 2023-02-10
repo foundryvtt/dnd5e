@@ -7,7 +7,7 @@
   "type": "spell",
   "system": {
     "description": {
-      "value": "<p>You speak a word of power that can overwhelm the mind of one creature you can see within range, leaving it dumbfounded. If the target has 150 Hit Points or fewer, it is Stunned. Otherwise, the spell has no effect.</p><p>The stunned target must make a Constitution saving throw at the end of each of its turns. On a successful save, this stunning effect ends.</p>",
+      "value": "<p>You speak a word of power that can overwhelm the mind of one creature you can see within range, leaving it dumbfounded. If the target has 150 hit points or fewer, it is stunned. Otherwise, the spell has no effect, and the spell slot used is not expended.</p><p>The stunned target must make a <strong>Constitution saving throw</strong> at the end of each of its turns. On a successful save, this stunning effect ends.</p>",
       "chat": "",
       "unidentified": ""
     },
@@ -96,7 +96,7 @@
     "systemVersion": "2.1.0",
     "coreVersion": "10.291",
     "createdTime": 1661787234062,
-    "modifiedTime": 1671220968561,
-    "lastModifiedBy": "dnd5ebuilder0000"
+    "modifiedTime": 1675989934697,
+    "lastModifiedBy": "RightHandOfVecna"
   }
 }

@@ -7,7 +7,7 @@
   "type": "spell",
   "system": {
     "description": {
-      "value": "<p>This spell repairs a single break or tear in an object you touch, such as a broken chain link, two halves of a broken key, a torn cloak, or a leaking wineskin. As long as the break or tear is no larger than 1 foot in any dimension, you mend it, leaving no trace of the former damage.</p><p>This spell can physically repair a magic item or construct, but the spell can't restore magic to such an object.</p>",
+      "value": "<p>This spell repairs an object you touch, such as broken chain link, two halves of a broken key, a broken piece of wall, a damaged boat, or a shattered glass. As long as the damage can be contained within a 5 foot cube, you mend it, leaving no trace of the former damage.</p><p>This spell cannot create material. The broken pieces of the object you attempt to mend \u2014 or an equivalent amount of the correct material \u2014 must be within 10 feet of the piece you touch, otherwise the spell fails.</p><p>This spell can physically repair a magic item or construct, but the spell can't restore magic to such an object.</p>",
       "chat": "",
       "unidentified": ""
     },
@@ -96,7 +96,7 @@
     "systemVersion": "2.1.0",
     "coreVersion": "10.291",
     "createdTime": 1661787234215,
-    "modifiedTime": 1671220971126,
-    "lastModifiedBy": "dnd5ebuilder0000"
+    "modifiedTime": 1675989934577,
+    "lastModifiedBy": "RightHandOfVecna"
   }
 }

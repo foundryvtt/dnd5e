@@ -1,0 +1,107 @@
+{
+  "_id": "D6EB3ZJOSDCGAEC4",
+  "name": "Chaos Bolt",
+  "ownership": {
+    "default": 0
+  },
+  "type": "spell",
+  "system": {
+    "description": {
+      "value": "<p>You hurl an undulating, warbling mass of chaotic energy at one creature in range. Make a <strong>ranged spell attack</strong> against the target. On a hit, the target takes 2d8 + 1d6 damage. Choose one of the d8s. The number rolled on that die determines the type of damage, as shown below.</p><table><thead><tr><th align=\"center\">d8</th><th align=\"left\">Damage Type</th></tr></thead><tbody><tr><td align=\"center\">1</td><td align=\"left\">Acid</td></tr><tr><td align=\"center\">2</td><td align=\"left\">Cold</td></tr><tr><td align=\"center\">3</td><td align=\"left\">Fire</td></tr><tr><td align=\"center\">4</td><td align=\"left\">Force</td></tr><tr><td align=\"center\">5</td><td align=\"left\">Lightning</td></tr><tr><td align=\"center\">6</td><td align=\"left\">Poison</td></tr><tr><td align=\"center\">7</td><td align=\"left\">Psychic</td></tr><tr><td align=\"center\">8</td><td align=\"left\">Thunder</td></tr></tbody></table><p>If you roll the same number on both d8s, the chaotic energy leaps from the target to a different creature of your choice within 30 feet of it. Make a new attack roll against the new target, and make a new damage roll, which could cause the chaotic energy to leap again.</p><p>A creature can be targeted only once by this mass of chaotic energy.</p><p><strong><em>At Higher Levels:</em></strong> When you cast this spell using a spell slot of 2nd level or higher, each target takes 1d6 extra damage of the type rolled for each slot level above first.</p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "SRD 5.1",
+    "activation": {
+      "type": "action",
+      "cost": 1,
+      "condition": ""
+    },
+    "duration": {
+      "value": "",
+      "units": "inst"
+    },
+    "cover": null,
+    "target": {
+      "value": 1,
+      "width": null,
+      "units": "",
+      "type": "creature"
+    },
+    "range": {
+      "value": 120,
+      "long": null,
+      "units": "ft"
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": null,
+      "recovery": ""
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
+    "ability": "",
+    "actionType": "rsak",
+    "attackBonus": "",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [
+        [
+          "1d6",
+          ""
+        ]
+      ],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "level": 1,
+    "school": "evo",
+    "components": {
+      "vocal": true,
+      "somatic": true,
+      "material": false,
+      "ritual": false,
+      "concentration": false
+    },
+    "materials": {
+      "value": "",
+      "consumed": false,
+      "cost": 0,
+      "supply": 0
+    },
+    "preparation": {
+      "mode": "prepared",
+      "prepared": false
+    },
+    "scaling": {
+      "mode": "level",
+      "formula": "1d6"
+    }
+  },
+  "sort": 0,
+  "flags": {},
+  "img": "icons/magic/fire/blast-jet-stream-embers-yellow.webp",
+  "effects": [],
+  "folder": null,
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.1.0",
+    "coreVersion": "10.291",
+    "createdTime": 1675986797326,
+    "modifiedTime": 1675989933899,
+    "lastModifiedBy": "RightHandOfVecna"
+  }
+}

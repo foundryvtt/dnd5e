@@ -7,7 +7,7 @@
   "type": "spell",
   "system": {
     "description": {
-      "value": "<p>An invisible wall of force springs into existence at a point you choose within range. The wall appears in any orientation you choose, as a horizontal or vertical barrier or at an angle. It can be free floating or resting on a solid surface. You can form it into a hemispherical dome or a sphere with a radius of up to 10 feet, or you can shape a flat surface made up of ten 10-foot-by-10-foot panels. Each panel must be contiguous with another panel. In any form, the wall is 1/4 inch thick. It lasts for the Duration. If the wall cuts through a creature's space when it appears, the creature is pushed to one side of the wall (your choice which side).</p><p>Nothing can physically pass through the wall. It is immune to all damage and can't be dispelled by Dispel Magic. A Disintegrate spell destroys the wall instantly, however. The wall also extends into the Ethereal Plane, blocking ethereal travel through the wall.</p>",
+      "value": "<p>An invisible wall of force springs into existence at a point you choose within range. The wall appears in any orientation you choose, as a horizontal or vertical barrier or at an angle. It can be free floating or resting on a solid surface. You can form it into a hemispherical dome or a sphere with a radius of up to 10 feet, or you can shape a flat surface made up of ten 10-foot-by-10-foot panels. Each panel must be contiguous with another panel. In any form, the wall is 1/4 inch thick. It lasts for the duration. If the wall cuts through a creature's space when it appears, the creature is pushed to one side of the wall (your choice which side).</p><p>Nothing can physically pass through the wall. It is immune to all damage and can't be dispelled by @Compendium[dnd5e.spells.15Fa6q1nH27XfbR8]{Dispel Magic}. A @Compendium[dnd5e.spells.HBHbOGKNVVprSlwn]{Disintegrate} spell destroys the wall instantly, however. The wall also extends into the Ethereal Plane, blocking ethereal travel through the wall.</p>",
       "chat": "",
       "unidentified": ""
     },
@@ -23,10 +23,10 @@
     },
     "cover": null,
     "target": {
-      "value": 100,
+      "value": 1,
       "width": null,
-      "units": "ft",
-      "type": "wall"
+      "units": "",
+      "type": "creature"
     },
     "range": {
       "value": 120,
@@ -72,7 +72,7 @@
       "concentration": true
     },
     "materials": {
-      "value": "A pinch of powder made by crushing clear gemstone",
+      "value": "A pinch of powder made by crushing a clear gemstone",
       "consumed": false,
       "cost": 0,
       "supply": 0
@@ -96,7 +96,7 @@
     "systemVersion": "2.1.0",
     "coreVersion": "10.291",
     "createdTime": 1661787234223,
-    "modifiedTime": 1671220971223,
-    "lastModifiedBy": "dnd5ebuilder0000"
+    "modifiedTime": 1675989935180,
+    "lastModifiedBy": "RightHandOfVecna"
   }
 }

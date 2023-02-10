@@ -1,0 +1,122 @@
+{
+  "_id": "WSGOSFJU9IAKV2H2",
+  "name": "The Undying",
+  "type": "subclass",
+  "img": "",
+  "system": {
+    "description": {
+      "value": "<p>Death holds no sway over your patron, who has unlocked the secrets of everlasting life, although such a prize \u2014 like all power \u2014 comes at a price. Once mortal, the Undying has seen mortal lifetimes pass like the seasons, like the flicker of endless days and nights. It has the secrets of the ages to share, secrets of life and death.</p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "SRD 5.1",
+    "identifier": "the-undying",
+    "classIdentifier": "warlock",
+    "advancement": [
+      {
+        "_id": "P1U0D5F42DEDHTCU",
+        "type": "ItemGrant",
+        "configuration": {
+          "items": [
+            "Compendium.dnd5e.classfeatures.G5CW086RB7HZNLRT",
+            "Compendium.dnd5e.classfeatures.C2DZCNX8T47KZH2V"
+          ],
+          "optional": false,
+          "spell": {
+            "ability": "",
+            "preparation": "",
+            "uses": {
+              "max": "",
+              "per": ""
+            }
+          }
+        },
+        "value": {},
+        "level": 1,
+        "title": "Features"
+      },
+      {
+        "_id": "N36A92GIXUERHHIT",
+        "type": "ItemGrant",
+        "configuration": {
+          "items": [
+            "Compendium.dnd5e.classfeatures.70BPX5H6V44YBTCE"
+          ],
+          "optional": false,
+          "spell": {
+            "ability": "",
+            "preparation": "",
+            "uses": {
+              "max": "",
+              "per": ""
+            }
+          }
+        },
+        "value": {},
+        "level": 6,
+        "title": "Features"
+      },
+      {
+        "_id": "ICNWQVTJE35DW2OH",
+        "type": "ItemGrant",
+        "configuration": {
+          "items": [
+            "Compendium.dnd5e.classfeatures.B1JGFD6WSVWUKUYD"
+          ],
+          "optional": false,
+          "spell": {
+            "ability": "",
+            "preparation": "",
+            "uses": {
+              "max": "",
+              "per": ""
+            }
+          }
+        },
+        "value": {},
+        "level": 10,
+        "title": "Features"
+      },
+      {
+        "_id": "Q0Q33IG1ZXW2NRLP",
+        "type": "ItemGrant",
+        "configuration": {
+          "items": [
+            "Compendium.dnd5e.classfeatures.EO1MI25WERL55TWO"
+          ],
+          "optional": false,
+          "spell": {
+            "ability": "",
+            "preparation": "",
+            "uses": {
+              "max": "",
+              "per": ""
+            }
+          }
+        },
+        "value": {},
+        "level": 14,
+        "title": "Features"
+      }
+    ],
+    "spellcasting": {
+      "progression": "none",
+      "ability": ""
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.1.0",
+    "coreVersion": "10.291",
+    "createdTime": 1675986801475,
+    "modifiedTime": 1675986801475,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  }
+}

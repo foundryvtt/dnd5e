@@ -7,7 +7,7 @@
   "type": "spell",
   "system": {
     "description": {
-      "value": "<p>You touch a length of rope that is up to 60 feet long. One end of the rope then rises into the air until the whole rope hangs perpendicular to the ground. At the upper end of the rope, an invisible entrance opens to an extradimensional space that lasts until the spell ends.</p><p>The extradimensional space can be reached by climbing to the top of the rope. The space can hold as many as eight Medium or smaller creatures. The rope can be pulled into the space, making the rope disappear from view outside the space.</p><p>Attacks and spells can't cross through the entrance into or out of the extradimensional space, but those inside can see out of it as if through a 3-foot-by-5-foot window centered on the rope.</p><p>Anything inside the extradimensional space drops out when the spell ends.</p>",
+      "value": "<p>You touch a length of rope that is up to 60 feet long. One end of the rope then rises into the air until the whole rope hangs perpendicular to the ground. At the upper end of the rope, an invisible entrance opens to an extradimensional space that lasts until the spell ends.</p><p>The extradimensional space can be reached by climbing to the top of the rope. The space can hold as many as eight Medium or smaller creatures. The rope can be pulled into the space, making the rope disappear from view outside the space.</p><p>Attacks and spells can't cross through the entrance into or out of the extradimensional space, but those inside can see out of it as if through a 3-foot-by-5-foot window centered on the rope.</p><p>A creature that enters the extradimensional space within 1 minute of its casting and stays inside for the full duration gains the benefits of a short rest.</p><p>Anything inside the extradimensional space drops out when the spell ends.</p>",
       "chat": "",
       "unidentified": ""
     },
@@ -23,10 +23,10 @@
     },
     "cover": null,
     "target": {
-      "value": 1,
+      "value": 8,
       "width": null,
-      "units": "spec",
-      "type": "object"
+      "units": "",
+      "type": "creature"
     },
     "range": {
       "value": null,
@@ -96,7 +96,7 @@
     "systemVersion": "2.1.0",
     "coreVersion": "10.291",
     "createdTime": 1661787234169,
-    "modifiedTime": 1671220970312,
-    "lastModifiedBy": "dnd5ebuilder0000"
+    "modifiedTime": 1675989934802,
+    "lastModifiedBy": "RightHandOfVecna"
   }
 }

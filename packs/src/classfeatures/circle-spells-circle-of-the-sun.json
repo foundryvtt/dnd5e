@@ -1,0 +1,88 @@
+{
+  "_id": "C516OAWEJGA5Q93L",
+  "name": "Circle Spells (Circle of the Sun)",
+  "ownership": {
+    "default": 0
+  },
+  "type": "feat",
+  "system": {
+    "description": {
+      "value": "<p>You draw strength from the burning light of the sun, which grants you access to certain spells. At 2nd level, you learn the @Compendium[dnd5e.spells.n9pJzTDsAwQxJVRl]{Sacred Flame} cantrip. At 3rd, 5th, 7th, and 9th level you gain access to the spells listed for that level in the Circle of the Sun Spells table.</p>\n<p>Once you gain access to one of these spells, you always have it prepared, and it doesn't count against the number of spells you can prepare each day. If you gain access to a spell that doesn't appear on the druid spell list, the spell is nonetheless a druid spell for you.</p>\n<h3>Circle of the Sun Spells</h3>\n<table>\n<thead>\n<tr>\n<th align=\"center\">Druid Level</th>\n<th align=\"left\">Spells</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td align=\"center\">3rd</td>\n<td align=\"left\">@Compendium[dnd5e.spells.FjYE214HTERCRZNm]{Flaming Sphere}, @Compendium[dnd5e.spells.7u2obDvuvtZBkTfq]{Scorching Ray}</td>\n</tr>\n<tr>\n<td align=\"center\">5th</td>\n<td align=\"left\">@Compendium[dnd5e.spells.BP3GCwa66IAw1yTG]{Daylight}, @Compendium[dnd5e.spells.LmRHHMtplpxr9fX6]{Revivify}</td>\n</tr>\n<tr>\n<td align=\"center\">7th</td>\n<td align=\"left\">@Compendium[dnd5e.spells.4OSNOLJJSMH87P6F]{Aura of Life}, @Compendium[dnd5e.spells.X3DrXgxjwI2dvkD6]{Wall of Fire}</td>\n</tr>\n<tr>\n<td align=\"center\">9th</td>\n<td align=\"left\">@Compendium[dnd5e.spells.5e1xTohkzqFqbYH4]{Flame Strike}, @Compendium[dnd5e.spells.KPZEDP6PFCK0HTJ7]{Immolation}</td>\n</tr>\n</tbody>\n</table>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "SRD 5.1",
+    "activation": {
+      "type": "",
+      "cost": null,
+      "condition": ""
+    },
+    "duration": {
+      "value": "",
+      "units": ""
+    },
+    "cover": null,
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": ""
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": ""
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": null,
+      "recovery": ""
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
+    "ability": null,
+    "actionType": "",
+    "attackBonus": "",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "type": {
+      "value": "class",
+      "subtype": ""
+    },
+    "requirements": "Circle of the Sun 2",
+    "recharge": {
+      "value": null,
+      "charged": false
+    }
+  },
+  "flags": {},
+  "img": "",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.1.0",
+    "coreVersion": "10.291",
+    "createdTime": 1675986802175,
+    "modifiedTime": 1675988226035,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  }
+}

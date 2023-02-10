@@ -7,7 +7,7 @@
   "type": "spell",
   "system": {
     "description": {
-      "value": "<p>You create a ward against magical travel that protects up to 40,000 square feet of floor space to a height of 30 feet above the floor. For the Duration, creatures can't teleport into the area or use portals, such as those created by the gate spell, to enter the area. The spell proofs the area against Planar Travel, and therefore prevents creatures from accessing the area by way of the Astral Plane, Ethereal Plane, Feywild, Shadowfell, or the Plane Shift spell.</p><p>In addition, the spell damages types of creatures that you choose when you cast it. Choose one or more of the following: Celestials, Elementals, fey, Fiends, and Undead. When a chosen creature enters the spell's area for the first time on a turn or starts its turn there, the creature takes 5d10 radiant or necrotic damage (your choice when you cast this spell).</p><p>When you cast this spell, you can designate a password. A creature that speaks the password as it enters the area takes no damage from the spell.</p><p>The spell's area can't overlap with the area of another forbiddance spell. If you cast forbiddance every day for 30 days in the same location, the spell lasts until it is dispelled, and the material Components are consumed on the last casting.</p>",
+      "value": "<p>You create a ward against magical travel that protects up to 40,000 square feet of floor space to a height of 30 feet above the floor. For the duration, creatures can't teleport into the area or use portals, such as those created by the gate spell, to enter the area. The spell proofs the area against planar travel, and therefore prevents creatures from accessing the area by way of the Astral Plane, Ethereal Plane, Feywild, Shadowfell, or the @Compendium[dnd5e.spells.J6Jpw5XzB5aTeqnz]{Plane Shift} spell.</p><p>In addition, the spell damages types of creatures that you choose when you cast it. Choose one or more of the following: celestials, elementals, fey, fiends, and undead. When a chosen creature enters the spell's area for the first time on a turn or starts its turn there, the creature takes 5d10 radiant or necrotic damage (your choice when you cast this spell).</p><p>When you cast this spell, you can designate a password. A creature that speaks the password as it enters the area takes no damage from the spell.</p><p>The spell's area can't overlap with the area of another @Compendium[dnd5e.spells.64D1gNZ4hx7SWG2x]{Forbiddance} spell. If you cast @Compendium[dnd5e.spells.64D1gNZ4hx7SWG2x]{Forbiddance} every day for 30 days in the same location, the spell lasts until it is dispelled, and the material components are consumed on the last casting.</p>",
       "chat": "",
       "unidentified": ""
     },
@@ -23,10 +23,10 @@
     },
     "cover": null,
     "target": {
-      "value": null,
+      "value": 1,
       "width": null,
       "units": "",
-      "type": ""
+      "type": "creature"
     },
     "range": {
       "value": null,
@@ -72,7 +72,7 @@
       "concentration": false
     },
     "materials": {
-      "value": "A sprinkle of holy water, rare incense, and powdered ruby worth at least 1000gp",
+      "value": "A sprinkling of holy water, rare incense, and powdered ruby worth at least 1,000 gp",
       "consumed": false,
       "cost": 1000,
       "supply": 0
@@ -96,7 +96,7 @@
     "systemVersion": "2.1.0",
     "coreVersion": "10.291",
     "createdTime": 1661787234071,
-    "modifiedTime": 1671220968662,
-    "lastModifiedBy": "dnd5ebuilder0000"
+    "modifiedTime": 1675989934269,
+    "lastModifiedBy": "RightHandOfVecna"
   }
 }

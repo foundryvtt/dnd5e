@@ -7,7 +7,7 @@
   "type": "spell",
   "system": {
     "description": {
-      "value": "<p>This spell lets you convince a beast that you mean it no harm. Choose a beast that you can see within range. It must see and hear you. If the beast's Intelligence is 4 or higher, the spell fails. Otherwise, the beast must succeed on a Wisdom saving throw or be charmed by you for the spell's duration. If you or one of your companions harms the target, the spell ends.</p><p><strong>At Higher Levels.</strong> When you cast this spell using a spell slot of 2nd level or higher, you can affect one additional beast for each slot level above 1st.</p>",
+      "value": "<p>This spell lets you convince a beast that you mean it no harm. Choose a beast that you can see within range. It must see and hear you. If the beast's Intelligence is 4 or higher, the spell fails. Otherwise, the beast must succeed on a <strong>Wisdom saving throw</strong> or be charmed by you for the spell's duration. If you or one of your companions harms the target, the spell ends.</p><p><strong><em>At Higher Levels:</em></strong> When you cast this spell using a 2nd level spell slot or higher, you can affect one additional beast for each slot level above 1st.</p>",
       "chat": "",
       "unidentified": ""
     },
@@ -72,7 +72,7 @@
       "concentration": false
     },
     "materials": {
-      "value": "A morsel of food.",
+      "value": "A morsel of food",
       "consumed": false,
       "cost": 0,
       "supply": 0
@@ -96,7 +96,7 @@
     "systemVersion": "2.1.0",
     "coreVersion": "10.291",
     "createdTime": 1661787234194,
-    "modifiedTime": 1671220970603,
-    "lastModifiedBy": "dnd5ebuilder0000"
+    "modifiedTime": 1675989933713,
+    "lastModifiedBy": "RightHandOfVecna"
   }
 }

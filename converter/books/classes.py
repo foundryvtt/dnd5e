@@ -74,6 +74,8 @@ class RpgClass(object):
                 shouldAddClassName = shouldAddClassName or feature.name in CLASS_SPECIFIC_FEATURES
                 if shouldAddClassName:
                     feature.name = f"{feature.name} ({self.name})"
+                if not feature.requirements:
+                    feature.requirements = self.name + " " + str(feature.startingLevel)
                 self.features.append(feature)
             elif featureC.text == "Hit Points":
                 self._description += "\n\n" + featureC.markdown(include_formatting=False)
@@ -297,6 +299,8 @@ class RpgSubClass(RpgClass):
             shouldAddClassName = shouldAddClassName or (feature.name == "Extra Attack" and self.name in ("College of Valor", "Bladesinger"))
             if shouldAddClassName:
                 feature.name = f"{feature.name} ({self.name})"
+            if not feature.requirements:
+                feature.requirements = self.name + " " + str(feature.startingLevel)
             self.features.append(feature)
     
     def toDb(self)->dict:

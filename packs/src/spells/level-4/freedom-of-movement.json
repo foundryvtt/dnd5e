@@ -7,7 +7,7 @@
   "type": "spell",
   "system": {
     "description": {
-      "value": "<p>You touch a willing creature. For the Duration, the target's Movement is unaffected by difficult terrain, and Spells and other magical Effects can neither reduce the target's speed nor cause the target to be Paralyzed or Restrained.</p><p>The target can also spend 5 feet of Movement to automatically escape from nonmagical restraints, such as Manacles or a creature that has it Grappled. Finally, being Underwater imposes no penalties on the target's movement or attacks.</p>",
+      "value": "<p>You touch a willing creature. For the duration, the target's movement is unaffected by difficult terrain, and spells and other magical effects can neither reduce the target's speed nor cause the target to be paralyzed or restrained.</p><p>The target can also spend 5 feet of movement to automatically escape from nonmagical restraints, such as manacles or a creature that has it grappled. Finally, being underwater imposes no penalties on the target's movement or attacks.</p>",
       "chat": "",
       "unidentified": ""
     },
@@ -26,7 +26,7 @@
       "value": 1,
       "width": null,
       "units": "",
-      "type": "creature"
+      "type": "ally"
     },
     "range": {
       "value": null,
@@ -96,7 +96,7 @@
     "systemVersion": "2.1.0",
     "coreVersion": "10.291",
     "createdTime": 1661787234180,
-    "modifiedTime": 1671220970446,
-    "lastModifiedBy": "dnd5ebuilder0000"
+    "modifiedTime": 1675989934281,
+    "lastModifiedBy": "RightHandOfVecna"
   }
 }

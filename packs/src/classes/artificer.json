@@ -1,0 +1,275 @@
+{
+  "_id": "TU21M2HNX00MXG4H",
+  "name": "Artificer",
+  "type": "class",
+  "img": "",
+  "system": {
+    "description": {
+      "value": "<p>As a artificer, you gain the following class features.</p>\n<h5>Hit Points</h5>\n<p><strong>Hit Dice:</strong> 1d8 per artificer level</p>\n<p><strong>Hit Points at 1st Level:</strong> 18 + your Constitution modifier</p>\n<p><strong>Hit Points at Higher Levels:</strong> 1d8 (or 5) + your Constitution modifier per artificer level after 1st</p>\n<h5>Proficiencies</h5>\n<p><strong>Armor:</strong> Light armor, medium armor</p>\n<p><strong>Weapons:</strong> Simple weapons</p>\n<p><strong>Tools:</strong> Artificer's tools, tinker's tools, and one other type of tools of your choice</p>\n<p><strong>Saving Throws:</strong> Constitution, Intelligence</p>\n<p><strong>Skills:</strong> Choose two from Arcana, History, Investigation, Medicine, Nature, Perception, Sleight of Hand</p>\n<h5>Equipment</h5>\n<p>You start one of the following equipment options, in addition to the equipment granted by your background:</p>\n<ul>\n<li>An arcane focus, a spellbook, a dagger, a light crossbow with 20 bolts, a lorekeeper's pack, and 20 gp</li>\n<li>100 gp worth of equipment, and an equipment pack</li>\n</ul>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "SRD 5.1",
+    "identifier": "artificer",
+    "levels": 1,
+    "hitDice": "d8",
+    "hitDiceUsed": 0,
+    "advancement": [
+      {
+        "_id": "RBKCGWROPFX1C2MD",
+        "type": "HitPoints",
+        "configuration": {},
+        "value": {},
+        "title": ""
+      },
+      {
+        "_id": "U586GOLHMYSM37RV",
+        "type": "ItemGrant",
+        "configuration": {
+          "items": [
+            "Compendium.dnd5e.classfeatures.43TFP1XDH58IXN3H",
+            "Compendium.dnd5e.classfeatures.RKIU8MUU42VB7JZB"
+          ],
+          "optional": false,
+          "spell": {
+            "ability": "",
+            "preparation": "",
+            "uses": {
+              "max": "",
+              "per": ""
+            }
+          }
+        },
+        "value": {},
+        "level": 1,
+        "title": "Features"
+      },
+      {
+        "_id": "WFCROI7CALXFBCJ8",
+        "type": "ItemGrant",
+        "configuration": {
+          "items": [
+            "Compendium.dnd5e.classfeatures.QA6SS1G0UD290Q2P"
+          ],
+          "optional": false,
+          "spell": {
+            "ability": "",
+            "preparation": "",
+            "uses": {
+              "max": "",
+              "per": ""
+            }
+          }
+        },
+        "value": {},
+        "level": 2,
+        "title": "Features"
+      },
+      {
+        "_id": "4Z739UEC38EUJCR4",
+        "type": "ItemGrant",
+        "configuration": {
+          "items": [
+            "Compendium.dnd5e.classfeatures.EFMNQ1ZYXKDMSPS5",
+            "Compendium.dnd5e.classfeatures.XCEG7TQ3I0LIJO8N"
+          ],
+          "optional": false,
+          "spell": {
+            "ability": "",
+            "preparation": "",
+            "uses": {
+              "max": "",
+              "per": ""
+            }
+          }
+        },
+        "value": {},
+        "level": 3,
+        "title": "Features"
+      },
+      {
+        "_id": "S7IDYGZR98M9GTP0",
+        "type": "ItemGrant",
+        "configuration": {
+          "items": [
+            "Compendium.dnd5e.classfeatures.ZZQHF6JPMNSV7J61"
+          ],
+          "optional": false,
+          "spell": {
+            "ability": "",
+            "preparation": "",
+            "uses": {
+              "max": "",
+              "per": ""
+            }
+          }
+        },
+        "value": {},
+        "level": 6,
+        "title": "Features"
+      },
+      {
+        "_id": "HT4VPLB4O1KICC9E",
+        "type": "ItemGrant",
+        "configuration": {
+          "items": [
+            "Compendium.dnd5e.classfeatures.2POAZKUO55UHI7C4"
+          ],
+          "optional": false,
+          "spell": {
+            "ability": "",
+            "preparation": "",
+            "uses": {
+              "max": "",
+              "per": ""
+            }
+          }
+        },
+        "value": {},
+        "level": 7,
+        "title": "Features"
+      },
+      {
+        "_id": "IUTQ16B2O9PNO6BM",
+        "type": "ItemGrant",
+        "configuration": {
+          "items": [
+            "Compendium.dnd5e.classfeatures.IP06ALGDK1WN48UI"
+          ],
+          "optional": false,
+          "spell": {
+            "ability": "",
+            "preparation": "",
+            "uses": {
+              "max": "",
+              "per": ""
+            }
+          }
+        },
+        "value": {},
+        "level": 10,
+        "title": "Features"
+      },
+      {
+        "_id": "4YFH5I2ZZQCZCX61",
+        "type": "ItemGrant",
+        "configuration": {
+          "items": [
+            "Compendium.dnd5e.classfeatures.HD2QIJ5FYP2OYYRK"
+          ],
+          "optional": false,
+          "spell": {
+            "ability": "",
+            "preparation": "",
+            "uses": {
+              "max": "",
+              "per": ""
+            }
+          }
+        },
+        "value": {},
+        "level": 11,
+        "title": "Features"
+      },
+      {
+        "_id": "YUEBY3GG8TEKJ4WZ",
+        "type": "ItemGrant",
+        "configuration": {
+          "items": [
+            "Compendium.dnd5e.classfeatures.WVEMUOVHPIZ1AS0B"
+          ],
+          "optional": false,
+          "spell": {
+            "ability": "",
+            "preparation": "",
+            "uses": {
+              "max": "",
+              "per": ""
+            }
+          }
+        },
+        "value": {},
+        "level": 14,
+        "title": "Features"
+      },
+      {
+        "_id": "S3T57RN8ELKCJYDX",
+        "type": "ItemGrant",
+        "configuration": {
+          "items": [
+            "Compendium.dnd5e.classfeatures.P7DNSLL1UJ3OJZ06"
+          ],
+          "optional": false,
+          "spell": {
+            "ability": "",
+            "preparation": "",
+            "uses": {
+              "max": "",
+              "per": ""
+            }
+          }
+        },
+        "value": {},
+        "level": 18,
+        "title": "Features"
+      },
+      {
+        "_id": "VANFSY0YGM9I89L4",
+        "type": "ItemGrant",
+        "configuration": {
+          "items": [
+            "Compendium.dnd5e.classfeatures.O3XT0J8G9UMCZ0V2"
+          ],
+          "optional": false,
+          "spell": {
+            "ability": "",
+            "preparation": "",
+            "uses": {
+              "max": "",
+              "per": ""
+            }
+          }
+        },
+        "value": {},
+        "level": 20,
+        "title": "Features"
+      }
+    ],
+    "saves": [
+      "con",
+      "int"
+    ],
+    "skills": {
+      "number": 2,
+      "choices": [
+        "arc",
+        "his",
+        "inv",
+        "med",
+        "nat",
+        "prc",
+        "slt"
+      ],
+      "value": []
+    },
+    "spellcasting": {
+      "progression": "artificer",
+      "ability": "int"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.1.0",
+    "coreVersion": "10.291",
+    "createdTime": 1675986801087,
+    "modifiedTime": 1675986801087,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  }
+}

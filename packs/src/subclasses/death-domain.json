@@ -1,0 +1,144 @@
+{
+  "_id": "B8PS0DMQZI59VS26",
+  "name": "Death Domain",
+  "type": "subclass",
+  "img": "",
+  "system": {
+    "description": {
+      "value": "<p>The Death domain is concerned with the forces that cause death, as well as the negative energy that gives rise to undead creatures. Such deities are patrons of necromancers, death knights, liches, mummy lords, and vampires. Gods of the Death domain also embody murder, pain, disease or poison, and the underworld.</p>\n<p>Some followers of these deities seek to put wandering spirits to rest, destroy the undead, and ease the suffering of the dying. Their magic also allows them to stave off death for a time, particularly for a person who still has some great work to accomplish in the world. This is a delay of death, not a denial of it, for death will eventually get its due.</p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "SRD 5.1",
+    "identifier": "death-domain",
+    "classIdentifier": "cleric",
+    "advancement": [
+      {
+        "_id": "DVV8SLSZ0KJUJ9BC",
+        "type": "ItemGrant",
+        "configuration": {
+          "items": [
+            "Compendium.dnd5e.classfeatures.EJD0535AQ6NCS2J9",
+            "Compendium.dnd5e.classfeatures.Z5D4DYBORZB8NWAT",
+            "Compendium.dnd5e.classfeatures.F444CZ9R1JJD9YTO"
+          ],
+          "optional": false,
+          "spell": {
+            "ability": "",
+            "preparation": "",
+            "uses": {
+              "max": "",
+              "per": ""
+            }
+          }
+        },
+        "value": {},
+        "level": 1,
+        "title": "Features"
+      },
+      {
+        "_id": "G6EAOHHDQHA3DLIJ",
+        "type": "ItemGrant",
+        "configuration": {
+          "items": [
+            "Compendium.dnd5e.classfeatures.K8H4FWBY9RUVMZWX"
+          ],
+          "optional": false,
+          "spell": {
+            "ability": "",
+            "preparation": "",
+            "uses": {
+              "max": "",
+              "per": ""
+            }
+          }
+        },
+        "value": {},
+        "level": 2,
+        "title": "Features"
+      },
+      {
+        "_id": "8FCJNAFVFQTDE3Z7",
+        "type": "ItemGrant",
+        "configuration": {
+          "items": [
+            "Compendium.dnd5e.classfeatures.B23056D6E25QILO2"
+          ],
+          "optional": false,
+          "spell": {
+            "ability": "",
+            "preparation": "",
+            "uses": {
+              "max": "",
+              "per": ""
+            }
+          }
+        },
+        "value": {},
+        "level": 6,
+        "title": "Features"
+      },
+      {
+        "_id": "I4H0CHUHR22DIMSL",
+        "type": "ItemGrant",
+        "configuration": {
+          "items": [
+            "Compendium.dnd5e.classfeatures.0I8TWLVHL2T7N8A6"
+          ],
+          "optional": false,
+          "spell": {
+            "ability": "",
+            "preparation": "",
+            "uses": {
+              "max": "",
+              "per": ""
+            }
+          }
+        },
+        "value": {},
+        "level": 8,
+        "title": "Features"
+      },
+      {
+        "_id": "6BA0TBP1ZP2AN81B",
+        "type": "ItemGrant",
+        "configuration": {
+          "items": [
+            "Compendium.dnd5e.classfeatures.4C6Y4E9377O8L4VV"
+          ],
+          "optional": false,
+          "spell": {
+            "ability": "",
+            "preparation": "",
+            "uses": {
+              "max": "",
+              "per": ""
+            }
+          }
+        },
+        "value": {},
+        "level": 17,
+        "title": "Features"
+      }
+    ],
+    "spellcasting": {
+      "progression": "none",
+      "ability": ""
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.1.0",
+    "coreVersion": "10.291",
+    "createdTime": 1675986801281,
+    "modifiedTime": 1675986801281,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  }
+}

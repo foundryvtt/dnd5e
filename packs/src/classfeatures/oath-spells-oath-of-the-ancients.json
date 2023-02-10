@@ -1,0 +1,88 @@
+{
+  "_id": "LF4IDS7KGNFL76CV",
+  "name": "Oath Spells (Oath of the Ancients)",
+  "ownership": {
+    "default": 0
+  },
+  "type": "feat",
+  "system": {
+    "description": {
+      "value": "<p>You gain oath spells at the paladin levels listed.</p>\n<h3>Oath of the Ancients Spells</h3>\n<table>\n<thead>\n<tr>\n<th align=\"center\">Paladin Level</th>\n<th align=\"left\">Spells</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td align=\"center\">3rd</td>\n<td align=\"left\">@Compendium[dnd5e.spells.XQPBBTCZ8NTUSR1O]{Ensnaring Strike}, @Compendium[dnd5e.spells.aL1F8fvYLtNzUbKu]{Speak with Animals}</td>\n</tr>\n<tr>\n<td align=\"center\">5th</td>\n<td align=\"left\">@Compendium[dnd5e.spells.bV3yun6MIuFj71Er]{Moonbeam}, @Compendium[dnd5e.spells.wqfAVANuQonNBgnL]{Misty Step}</td>\n</tr>\n<tr>\n<td align=\"center\">9th</td>\n<td align=\"left\">@Compendium[dnd5e.spells.YWtwzp6ZnQJMEmVW]{Plant Growth}, @Compendium[dnd5e.spells.j8NtLXOOJ3GAKF8I]{Protection from Energy}</td>\n</tr>\n<tr>\n<td align=\"center\">13th</td>\n<td align=\"left\">@Compendium[dnd5e.spells.WN2LWEljYU6QqnRH]{Ice Storm}, @Compendium[dnd5e.spells.ReMbjfeOKoSj3O79]{Stoneskin}</td>\n</tr>\n<tr>\n<td align=\"center\">17th</td>\n<td align=\"left\">@Compendium[dnd5e.spells.dp6xny4v8PDoIGjh]{Commune with Nature}, @Compendium[dnd5e.spells.DUBgwHPakcLDkB6W]{Tree Stride}</td>\n</tr>\n</tbody>\n</table>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "SRD 5.1",
+    "activation": {
+      "type": "",
+      "cost": null,
+      "condition": ""
+    },
+    "duration": {
+      "value": "",
+      "units": ""
+    },
+    "cover": null,
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": ""
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": ""
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": null,
+      "recovery": ""
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
+    "ability": null,
+    "actionType": "",
+    "attackBonus": "",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "type": {
+      "value": "class",
+      "subtype": ""
+    },
+    "requirements": "Oath of the Ancients 1",
+    "recharge": {
+      "value": null,
+      "charged": false
+    }
+  },
+  "flags": {},
+  "img": "",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.1.0",
+    "coreVersion": "10.291",
+    "createdTime": 1675986803883,
+    "modifiedTime": 1675988226850,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  }
+}

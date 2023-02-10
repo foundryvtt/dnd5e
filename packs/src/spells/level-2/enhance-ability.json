@@ -7,7 +7,7 @@
   "type": "spell",
   "system": {
     "description": {
-      "value": "<p>You touch a creature and bestow upon it a magical enhancement. Choose one of the following effects; the target gains that effect until the spell ends.</p>\n<ul>\n<li><strong>Bear's Endurance</strong>. The target has advantage on Constitution Checks. It also gains 2d6 Temporary Hit Points, which are lost when the spell ends.</li>\n<li><strong>Bull's Strength</strong>. The target has advantage on Strength Checks, and his or her carrying capacity doubles.</li>\n<li><strong>Cat's Grace</strong>. The target has advantage on Dexterity Checks. It also doesn't take damage from Falling 20 feet or less if it isn't Incapacitated.</li>\n<li><strong>Eagle's Splendor</strong>. The target has advantage on Charisma Checks.</li>\n<li><strong>Fox's Cunning</strong>. The target has advantage on Intelligence Checks.</li>\n<li><strong>Owl's Wisdom</strong>. The target has advantage on Wisdom Checks.</li>\n</ul>\n<p><strong>At Higher Levels.</strong> When you cast this spell using a spell slot of 3rd level or higher, you can target one additional creature for each slot level above 2nd.</p>",
+      "value": "<p>You touch a creature and bestow upon it a magical enhancement. Choose one of the following effects: the target gains the effect until the spell ends.</p><p><strong>Bear's Endurance:</strong> The target has advantage on Constitution checks. It also gains 2d6 temporary hit points, which are lost when the spell ends.</p><p><strong>Bull's Strength:</strong> The target has advantage on Strength checks, and his or her carrying capacity doubles.</p><p><strong>Cat's Grace:</strong> The target has advantage on Dexterity checks. It also doesn't take damage from falling 20 feet or less if it isn't incapacitated.</p><p><strong>Eagle's Splendor:</strong> The target has advantage on Charisma checks.</p><p><strong>Fox's Cunning:</strong> The target has advantage on Intelligence checks.</p><p><strong>Owl's Wisdom:</strong> The target has advantage on Wisdom checks.</p><p><strong><em>At Higher Levels:</em></strong> When you cast this spell using a spell slot of 3rd level or higher, you can target one additional creature for each slot level above 2nd.</p>",
       "chat": "",
       "unidentified": ""
     },
@@ -45,7 +45,7 @@
       "amount": null
     },
     "ability": "",
-    "actionType": "heal",
+    "actionType": "util",
     "attackBonus": "",
     "chatFlavor": "",
     "critical": {
@@ -101,7 +101,7 @@
     "systemVersion": "2.1.0",
     "coreVersion": "10.291",
     "createdTime": 1661787234084,
-    "modifiedTime": 1671220968836,
-    "lastModifiedBy": "dnd5ebuilder0000"
+    "modifiedTime": 1675989934172,
+    "lastModifiedBy": "RightHandOfVecna"
   }
 }

@@ -7,7 +7,7 @@
   "type": "spell",
   "system": {
     "description": {
-      "value": "<p>Squirming, ebony tentacles fill a 20-foot square on ground that you can see within range. For the Duration, these tentacles turn the ground in the area into difficult terrain.</p><p>When a creature enters the affected area for the first time on a turn or starts its turn there, the creature must succeed on a Dexterity saving throw or take 3d6 bludgeoning damage and be @UUID[Compendium.dnd5e.rules.w7eitkpD7QQTB6j0.JournalEntryPage.cSVcyZyNe2iG1fIc]{Restrained} by the tentacles until the spell ends. A creature that starts its turn in the area and is already @UUID[Compendium.dnd5e.rules.w7eitkpD7QQTB6j0.JournalEntryPage.cSVcyZyNe2iG1fIc]{Restrained} by the tentacles takes 3d6 bludgeoning damage.</p><p>A creature @UUID[Compendium.dnd5e.rules.w7eitkpD7QQTB6j0.JournalEntryPage.cSVcyZyNe2iG1fIc]{Restrained} by the tentacles can use its action to make a Strength or Dexterity check (its choice) against your spell save DC. On a success, it frees itself.</p>",
+      "value": "<p>Squirming, ebony tentacles fill a 20-foot square on ground that you can see within range. For the duration, these tentacles turn the ground in the area into difficult terrain.</p><p>When a creature enters the affected area for the first time on a turn or starts its turn there, the creature must succeed on a <strong>Dexterity saving throw</strong> or take <strong>3d6 bludgeoning damage</strong> and be restrained by the tentacles until the spell ends. A creature that starts its turn in the area and is already restrained by the tentacles takes <strong>3d6 bludgeoning damage</strong>.</p><p>A creature restrained by the tentacles can use its action to make a Strength or Dexterity check (its choice) against your spell save DC. On a success, it frees itself.</p>",
       "chat": "",
       "unidentified": ""
     },
@@ -57,6 +57,10 @@
         [
           "3d6",
           "bludgeoning"
+        ],
+        [
+          "3d6",
+          "bludgeoning"
         ]
       ],
       "versatile": ""
@@ -101,7 +105,7 @@
     "systemVersion": "2.1.0",
     "coreVersion": "10.291",
     "createdTime": 1661787234098,
-    "modifiedTime": 1671220968954,
-    "lastModifiedBy": "dnd5ebuilder0000"
+    "modifiedTime": 1675989933834,
+    "lastModifiedBy": "RightHandOfVecna"
   }
 }

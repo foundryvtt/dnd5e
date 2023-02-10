@@ -7,7 +7,7 @@
   "type": "spell",
   "system": {
     "description": {
-      "value": "<p>You create three rays of fire and hurl them at targets within range. You can hurl them at one target or several.</p><p>Make a ranged Spell Attack for each ray. On a hit, the target takes 2d6 fire damage.</p><p><strong>Higher Levels.</strong> When you cast this spell using a spell slot of 3rd level or higher, you create one additional ray for each slot level above 2nd.</p>",
+      "value": "<p>You create three rays of fire and hurl them at targets within range. You can hurl them at one target or several.</p><p>Make a <strong>ranged spell attack</strong> for each ray. On a hit, the target takes <strong>2d6 fire damage</strong>.</p><p><strong><em>At Higher Levels:</em></strong> When you cast this spell using a spell slot of 3rd level or higher, you create one additional ray for each slot level above 2nd.</p>",
       "chat": "",
       "unidentified": ""
     },
@@ -23,10 +23,10 @@
     },
     "cover": null,
     "target": {
-      "value": 3,
+      "value": null,
       "width": null,
-      "units": "",
-      "type": "creature"
+      "units": "any",
+      "type": "space"
     },
     "range": {
       "value": 120,
@@ -87,7 +87,7 @@
       "prepared": false
     },
     "scaling": {
-      "mode": "none",
+      "mode": "level",
       "formula": ""
     }
   },
@@ -101,7 +101,7 @@
     "systemVersion": "2.1.0",
     "coreVersion": "10.291",
     "createdTime": 1661787234077,
-    "modifiedTime": 1671220968765,
-    "lastModifiedBy": "dnd5ebuilder0000"
+    "modifiedTime": 1675989934814,
+    "lastModifiedBy": "RightHandOfVecna"
   }
 }

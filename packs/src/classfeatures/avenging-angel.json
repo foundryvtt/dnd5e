@@ -1,0 +1,88 @@
+{
+  "_id": "DI50G441I1S0QKLZ",
+  "name": "Avenging Angel",
+  "ownership": {
+    "default": 0
+  },
+  "type": "feat",
+  "system": {
+    "description": {
+      "value": "<p>At 20th level, you can assume the form of an angelic avenger. As a bonus action, you undergo a transformation. For 1 hour, you gain the following benefits:</p>\n<ul>\n<li>Wings sprout from your back and grant you a flying speed of 60 feet.</li>\n<li>You can use your Abjure Enemy and Vow of Enmity an unlimited number of times.</li>\n<li>You emanate an aura of menace in a 30-foot radius. While you are not incapacitated, each hostile creature in the aura at the start of each of your turns must succeed on a Wisdom saving throw or become frightened of you for 1 minute or until it takes any damage. Attack rolls against the frightened creature have advantage.</li>\n</ul>\n<p>Once you use this feature, you can't use it again until you finish a long rest, unless you expend a 5th-level spell slot to use it again.</p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "SRD 5.1",
+    "activation": {
+      "type": "",
+      "cost": null,
+      "condition": ""
+    },
+    "duration": {
+      "value": "",
+      "units": ""
+    },
+    "cover": null,
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": ""
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": ""
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": null,
+      "recovery": ""
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
+    "ability": null,
+    "actionType": "",
+    "attackBonus": "",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "type": {
+      "value": "class",
+      "subtype": ""
+    },
+    "requirements": "Oath of Vengeance 20",
+    "recharge": {
+      "value": null,
+      "charged": false
+    }
+  },
+  "flags": {},
+  "img": "",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.1.0",
+    "coreVersion": "10.291",
+    "createdTime": 1675986801916,
+    "modifiedTime": 1675988225869,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "_id": "MVDHWMPLCW3ZXJAZ",
+  "name": "Oath Spells (Oath of Vengeance)",
+  "ownership": {
+    "default": 0
+  },
+  "type": "feat",
+  "system": {
+    "description": {
+      "value": "<p>You gain oath spells at the paladin levels listed.</p>\n<h3>Oath of Vengeance Spells</h3>\n<table>\n<thead>\n<tr>\n<th align=\"center\">Paladin Level</th>\n<th align=\"left\">Spells</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td align=\"center\">3rd</td>\n<td align=\"left\">@Compendium[dnd5e.spells.95K2aUhAGV9qXjnf]{Bane}, @Compendium[dnd5e.spells.0xmXiPiuYws1OGcX]{Hunter's Mark}</td>\n</tr>\n<tr>\n<td align=\"center\">5th</td>\n<td align=\"left\">@Compendium[dnd5e.spells.3Lo9boi7P2ro6QV4]{Hold Person}, @Compendium[dnd5e.spells.wqfAVANuQonNBgnL]{Misty Step}</td>\n</tr>\n<tr>\n<td align=\"center\">9th</td>\n<td align=\"left\">@Compendium[dnd5e.spells.Szvk5FEVQW3uhJi5]{Haste}, @Compendium[dnd5e.spells.j8NtLXOOJ3GAKF8I]{Protection from Energy}</td>\n</tr>\n<tr>\n<td align=\"center\">13th</td>\n<td align=\"left\">@Compendium[dnd5e.spells.pxpb2eOB6bv4phAf]{Banishment}, @Compendium[dnd5e.spells.A4RsPuSvB9wFtz1j]{Dimension Door}</td>\n</tr>\n<tr>\n<td align=\"center\">17th</td>\n<td align=\"left\">@Compendium[dnd5e.spells.l9Ju5KE7bbn3WpTm]{Hold Monster}, @Compendium[dnd5e.spells.fVbCxFRaORalHB20]{Scrying}</td>\n</tr>\n</tbody>\n</table>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "SRD 5.1",
+    "activation": {
+      "type": "",
+      "cost": null,
+      "condition": ""
+    },
+    "duration": {
+      "value": "",
+      "units": ""
+    },
+    "cover": null,
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": ""
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": ""
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": null,
+      "recovery": ""
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
+    "ability": null,
+    "actionType": "",
+    "attackBonus": "",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "type": {
+      "value": "class",
+      "subtype": ""
+    },
+    "requirements": "Oath of Vengeance 1",
+    "recharge": {
+      "value": null,
+      "charged": false
+    }
+  },
+  "flags": {},
+  "img": "",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.1.0",
+    "coreVersion": "10.291",
+    "createdTime": 1675986803890,
+    "modifiedTime": 1675988226864,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "_id": "V8NVFT3INUM76LQZ",
+  "name": "Expanded Spell List (The Genie)",
+  "ownership": {
+    "default": 0
+  },
+  "type": "feat",
+  "system": {
+    "description": {
+      "value": "<p>The Genie lets you choose from an expanded list of spells when you learn a warlock spell. The Genie Expanded Spells table shows the genie spells that are added to the warlock spell list for you, along with the spells associated in the table with your patron's kind: dao, djinni, efreeti, or marid.</p>\n<h3>Genie Expanded Spells</h3>\n<table>\n<thead>\n<tr>\n<th align=\"center\">Spell Level</th>\n<th align=\"left\">Genie Spells</th>\n<th align=\"left\">Dao Spells</th>\n<th align=\"left\">Djinni Spels</th>\n<th align=\"left\">Efreeti Spells</th>\n<th align=\"left\">Marid Spells</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td align=\"center\">1st</td>\n<td align=\"left\">@Compendium[dnd5e.spells.Mzh95utKDPIrjiH8]{Detect Evil and Good}</td>\n<td align=\"left\">@Compendium[dnd5e.spells.gvdA9nPuWLck4tBl]{Sanctuary}</td>\n<td align=\"left\">@Compendium[dnd5e.spells.WTbOQBsarsL1LuXJ]{Thunderwave}</td>\n<td align=\"left\">@Compendium[dnd5e.spells.5SuJewoa1CRWaj1F]{Burning Hands}</td>\n<td align=\"left\">@Compendium[dnd5e.spells.IBJmWjzbQGu7M4UX]{Fog Cloud}</td>\n</tr>\n<tr>\n<td align=\"center\">2nd</td>\n<td align=\"left\">@Compendium[dnd5e.spells.U8S7C36ECFRJ7FVY]{Phantasmal Force}</td>\n<td align=\"left\">@Compendium[dnd5e.spells.9gYGkrL6qFTsE6fw]{Spike Growth}</td>\n<td align=\"left\">@Compendium[dnd5e.spells.FSMy6VAjDnXY9vWz]{Gust of Wind}</td>\n<td align=\"left\">@Compendium[dnd5e.spells.7u2obDvuvtZBkTfq]{Scorching Ray}</td>\n<td align=\"left\">@Compendium[dnd5e.spells.UDUnlfPsOAbq2RSE]{Blur}</td>\n</tr>\n<tr>\n<td align=\"center\">3rd</td>\n<td align=\"left\">@Compendium[dnd5e.spells.BV0mpbHh29IbbIj5]{Create Food and Water}</td>\n<td align=\"left\">@Compendium[dnd5e.spells.64uo4fHriHLjRUrX]{Meld into Stone}</td>\n<td align=\"left\">@Compendium[dnd5e.spells.ew6GA8dJy2spQmFW]{Wind Wall}</td>\n<td align=\"left\">@Compendium[dnd5e.spells.ztgcdrWPshKRpFd0]{Fireball}</td>\n<td align=\"left\">@Compendium[dnd5e.spells.dhqBY4TvVjxVmOZd]{Sleet Storm}</td>\n</tr>\n<tr>\n<td align=\"center\">4th</td>\n<td align=\"left\">@Compendium[dnd5e.spells.BYNvBJzHcF5VJhXw]{Phantasmal Killer}</td>\n<td align=\"left\">@Compendium[dnd5e.spells.QvGcdRUSNRKEQJlK]{Stone Shape}</td>\n<td align=\"left\">@Compendium[dnd5e.spells.tEpDmYZNGc9f5OhJ]{Greater Invisibility}</td>\n<td align=\"left\">@Compendium[dnd5e.spells.avD5XUtkBPQQR97c]{Fire Shield}</td>\n<td align=\"left\">@Compendium[dnd5e.spells.7fFHlBk3UNX8gPKL]{Control Water}</td>\n</tr>\n<tr>\n<td align=\"center\">5th</td>\n<td align=\"left\">@Compendium[dnd5e.spells.lnaGnxMzpYnbw1uU]{Creation}</td>\n<td align=\"left\">@Compendium[dnd5e.spells.NmoRmM1mhuM3pqnY]{Wall of Stone}</td>\n<td align=\"left\">@Compendium[dnd5e.spells.mbFw57uyfLkyiw5k]{Seeming}</td>\n<td align=\"left\">@Compendium[dnd5e.spells.5e1xTohkzqFqbYH4]{Flame Strike}</td>\n<td align=\"left\">@Compendium[dnd5e.spells.RpKjTlYASrfqUPVA]{Cone of Cold}</td>\n</tr>\n<tr>\n<td align=\"center\">9th</td>\n<td align=\"left\">@Compendium[dnd5e.spells.3okM6Gn63zzEULkz]{Wish}</td>\n<td align=\"left\">&mdash;</td>\n<td align=\"left\">&mdash;</td>\n<td align=\"left\">&mdash;</td>\n<td align=\"left\">&mdash;</td>\n</tr>\n</tbody>\n</table>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "SRD 5.1",
+    "activation": {
+      "type": "",
+      "cost": null,
+      "condition": ""
+    },
+    "duration": {
+      "value": "",
+      "units": ""
+    },
+    "cover": null,
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": ""
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": ""
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": null,
+      "recovery": ""
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
+    "ability": null,
+    "actionType": "",
+    "attackBonus": "",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "type": {
+      "value": "class",
+      "subtype": ""
+    },
+    "requirements": "The Genie 1",
+    "recharge": {
+      "value": null,
+      "charged": false
+    }
+  },
+  "flags": {},
+  "img": "",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.1.0",
+    "coreVersion": "10.291",
+    "createdTime": 1675986802962,
+    "modifiedTime": 1675988226285,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  }
+}

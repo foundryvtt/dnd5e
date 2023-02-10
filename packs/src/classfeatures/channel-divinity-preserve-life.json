@@ -7,7 +7,7 @@
   "type": "feat",
   "system": {
     "description": {
-      "value": "<p>Starting at 2nd level, you can use your Channel Divinity to heal the badly injured.</p><p>As an action, you present your holy symbol and evoke healing energy that can restore a number of hit points equal to five times your cleric level.</p><p>Choose any creatures within 30 feet of you, and divide those hit points among them. This feature can restore a creature to no more than half of its hit point maximum. You can't use this feature on an undead or a construct.</p>",
+      "value": "<p>Starting at 2nd level, you can use your Channel Divinity to heal the badly injured.</p>\n<p>As an action, you present your holy symbol and evoke healing energy that can restore a number of hit points equal to five times your cleric level. Choose any creatures within 30 feet of you, and divide those hit points among them. This feature can restore a creature to no more than half of its hit point maximum. You can't use this feature on an undead or a construct.</p>",
       "chat": "",
       "unidentified": ""
     },
@@ -69,7 +69,7 @@
     },
     "type": {
       "value": "class",
-      "subtype": "channelDivinity"
+      "subtype": ""
     },
     "requirements": "Life Domain 2",
     "recharge": {
@@ -87,7 +87,7 @@
     "systemVersion": "2.1.0",
     "coreVersion": "10.291",
     "createdTime": 1661787234408,
-    "modifiedTime": 1672334357483,
+    "modifiedTime": 1675986802084,
     "lastModifiedBy": "dnd5ebuilder0000"
   }
 }

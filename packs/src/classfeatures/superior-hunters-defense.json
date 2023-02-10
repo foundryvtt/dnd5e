@@ -7,7 +7,7 @@
   "type": "feat",
   "system": {
     "description": {
-      "value": "<p>At 15th level, you gain one of the following features of your choice.</p><p>@Compendium[dnd5e.classfeatures.laVHAIOKIsUeezWd]{Evasion}</p><p>@Compendium[dnd5e.classfeatures.Xf763cJoDHPPWSGG]{Stand Against the Tide}</p><p>@Compendium[dnd5e.classfeatures.7pyZjz5vlUWV01qQ]{Uncanny Dodge}</p><p>You can drag your choice from the above onto your character sheet and it will automatically update.</p>",
+      "value": "<p>At 15th level, you gain one of the following features of your choice.</p>\n<p>@UUID[Compendium.dnd5e.classfeatures.laVHAIOKIsUeezWd]{Evasion}</p>\n<p>@UUID[Compendium.dnd5e.classfeatures.Xf763cJoDHPPWSGG]{Stand Against the Tide}</p>\n<p>@UUID[Compendium.dnd5e.classfeatures.7pyZjz5vlUWV01qQ]{Uncanny Dodge}</p>\n<section class=\"secret foundry-note\">\n<p><strong>Foundry Note</strong></p>\n<p>You can drag your choices from the above onto your character sheet and it will automatically update.</p>\n</section>",
       "chat": "",
       "unidentified": ""
     },
@@ -66,7 +66,7 @@
       "value": "class",
       "subtype": ""
     },
-    "requirements": "Hunter 15",
+    "requirements": "Hunter Conclave 15",
     "recharge": {
       "value": null,
       "charged": false
@@ -82,7 +82,7 @@
     "systemVersion": "2.1.0",
     "coreVersion": "10.291",
     "createdTime": 1661787234391,
-    "modifiedTime": 1672335273253,
+    "modifiedTime": 1675988227382,
     "lastModifiedBy": "dnd5ebuilder0000"
   }
 }

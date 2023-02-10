@@ -7,7 +7,7 @@
   "type": "spell",
   "system": {
     "description": {
-      "value": "<p>You touch a corpse or other remains. For the duration, the target is protected from decay and can't become undead.</p><p>The spell also effectively extends the time limit on raising the target from the dead, since days spent under the influence of this spell don't count against the time limit of spells such as raise dead.</p>",
+      "value": "<p>You touch a corpse or other remains. For the duration, the target is protected from decay and can't become undead.</p><p>The spell also effectively extends the time limit on raising the target from the dead, since days spent under the influence of this spell don't count against the time limit of spells such as @Compendium[dnd5e.spells.AGFMPAmuzwWO6Dfz]{Raise Dead}.</p>",
       "chat": "",
       "unidentified": ""
     },
@@ -26,7 +26,7 @@
       "value": 1,
       "width": null,
       "units": "",
-      "type": "creature"
+      "type": "object"
     },
     "range": {
       "value": null,
@@ -96,7 +96,7 @@
     "systemVersion": "2.1.0",
     "coreVersion": "10.291",
     "createdTime": 1661787234221,
-    "modifiedTime": 1671220971191,
-    "lastModifiedBy": "dnd5ebuilder0000"
+    "modifiedTime": 1675989934305,
+    "lastModifiedBy": "RightHandOfVecna"
   }
 }

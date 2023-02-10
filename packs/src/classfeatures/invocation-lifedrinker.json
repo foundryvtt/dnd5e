@@ -7,7 +7,7 @@
   "type": "feat",
   "system": {
     "description": {
-      "value": "<p>When you hit a creature with your pact weapon, the creature takes extra necrotic damage equal to your Charisma modifier (minimum 1).</p>",
+      "value": "<p>When you hit a creature with your pact weapon, the creature takes extra necrotic damage equal to your spellcasting ability modifier (minimum 1).</p>",
       "chat": "",
       "unidentified": ""
     },
@@ -66,7 +66,7 @@
       "value": "class",
       "subtype": "eldritchInvocation"
     },
-    "requirements": "Warlock 12, Pact of the Blade",
+    "requirements": "Warlock 12, Pact of the Blade feature",
     "recharge": {
       "value": null,
       "charged": false
@@ -82,7 +82,7 @@
     "systemVersion": "2.1.0",
     "coreVersion": "10.291",
     "createdTime": 1661787234446,
-    "modifiedTime": 1672334750254,
+    "modifiedTime": 1675986803469,
     "lastModifiedBy": "dnd5ebuilder0000"
   }
 }

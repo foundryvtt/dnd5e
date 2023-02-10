@@ -1,0 +1,88 @@
+{
+  "_id": "042NJ66PQ0TL9P53",
+  "name": "Peace Domain Spells",
+  "ownership": {
+    "default": 0
+  },
+  "type": "feat",
+  "system": {
+    "description": {
+      "value": "<table>\n<thead>\n<tr>\n<th align=\"center\">Cleric Level</th>\n<th align=\"left\">Spells</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td align=\"center\">1st</td>\n<td align=\"left\">@Compendium[dnd5e.spells.ge3Saet9zPTDyaoL]{Heroism}, @Compendium[dnd5e.spells.gvdA9nPuWLck4tBl]{Sanctuary}</td>\n</tr>\n<tr>\n<td align=\"center\">3rd</td>\n<td align=\"left\">@Compendium[dnd5e.spells.Opwh2PdX4runSBlm]{Aid}, @Compendium[dnd5e.spells.JVhKeanAXZH62DrF]{Warding Bond}</td>\n</tr>\n<tr>\n<td align=\"center\">5th</td>\n<td align=\"left\">@Compendium[dnd5e.spells.ZU9d6woBdUP8pIPt]{Beacon of Hope}, @Compendium[dnd5e.spells.GtGjNjPBgUHxGYAD]{Sending}</td>\n</tr>\n<tr>\n<td align=\"center\">7th</td>\n<td align=\"left\">@Compendium[dnd5e.spells.O6HFTNLVUF5XMP8M]{Aura of Purity}, @Compendium[dnd5e.spells.1ADstb0Xec6HHRcU]{Resilient Sphere}</td>\n</tr>\n<tr>\n<td align=\"center\">9th</td>\n<td align=\"left\">@Compendium[dnd5e.spells.WzvJ7G3cqvIubsLk]{Greater Restoration}, @Compendium[dnd5e.spells.uAwtVZkiSTyP6ORB]{Telepathic Bond}</td>\n</tr>\n</tbody>\n</table>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "SRD 5.1",
+    "activation": {
+      "type": "",
+      "cost": null,
+      "condition": ""
+    },
+    "duration": {
+      "value": "",
+      "units": ""
+    },
+    "cover": null,
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": ""
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": ""
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": null,
+      "recovery": ""
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
+    "ability": null,
+    "actionType": "",
+    "attackBonus": "",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "type": {
+      "value": "class",
+      "subtype": ""
+    },
+    "requirements": "Peace Domain 1",
+    "recharge": {
+      "value": null,
+      "charged": false
+    }
+  },
+  "flags": {},
+  "img": "",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.1.0",
+    "coreVersion": "10.291",
+    "createdTime": 1675986803932,
+    "modifiedTime": 1675988226903,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  }
+}

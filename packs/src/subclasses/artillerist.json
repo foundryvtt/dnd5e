@@ -1,0 +1,123 @@
+{
+  "_id": "SBJG5MXRJYJK32FB",
+  "name": "Artillerist",
+  "type": "subclass",
+  "img": "",
+  "system": {
+    "description": {
+      "value": "<p>An Artillerist specializes in using magic to create explosions and defensive positions, as well as magic-infused sidearms \u2014 especially wands \u2014 that can be used on the battlefield. Artillerists are highly valued by many armies for that reason.</p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "SRD 5.1",
+    "identifier": "artillerist",
+    "classIdentifier": "artificer",
+    "advancement": [
+      {
+        "_id": "MFG2ZRJAA9ATN1Z5",
+        "type": "ItemGrant",
+        "configuration": {
+          "items": [
+            "Compendium.dnd5e.classfeatures.CPMJ1C3YTBU3XSCU",
+            "Compendium.dnd5e.classfeatures.VYGRTBTO7ZUM3XAE",
+            "Compendium.dnd5e.classfeatures.3BPBUXK9R26WMMNQ"
+          ],
+          "optional": false,
+          "spell": {
+            "ability": "",
+            "preparation": "",
+            "uses": {
+              "max": "",
+              "per": ""
+            }
+          }
+        },
+        "value": {},
+        "level": 3,
+        "title": "Features"
+      },
+      {
+        "_id": "HXLKF57BLFVUIPAR",
+        "type": "ItemGrant",
+        "configuration": {
+          "items": [
+            "Compendium.dnd5e.classfeatures.QREFC718VAEQQHX3"
+          ],
+          "optional": false,
+          "spell": {
+            "ability": "",
+            "preparation": "",
+            "uses": {
+              "max": "",
+              "per": ""
+            }
+          }
+        },
+        "value": {},
+        "level": 5,
+        "title": "Features"
+      },
+      {
+        "_id": "0M038OGCBEY2T8KC",
+        "type": "ItemGrant",
+        "configuration": {
+          "items": [
+            "Compendium.dnd5e.classfeatures.37NPBIRNA5AJ8L31"
+          ],
+          "optional": false,
+          "spell": {
+            "ability": "",
+            "preparation": "",
+            "uses": {
+              "max": "",
+              "per": ""
+            }
+          }
+        },
+        "value": {},
+        "level": 9,
+        "title": "Features"
+      },
+      {
+        "_id": "3H5534OFZ45KGR1T",
+        "type": "ItemGrant",
+        "configuration": {
+          "items": [
+            "Compendium.dnd5e.classfeatures.URYQSBBM0UK9NZQ2"
+          ],
+          "optional": false,
+          "spell": {
+            "ability": "",
+            "preparation": "",
+            "uses": {
+              "max": "",
+              "per": ""
+            }
+          }
+        },
+        "value": {},
+        "level": 15,
+        "title": "Features"
+      }
+    ],
+    "spellcasting": {
+      "progression": "none",
+      "ability": ""
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.1.0",
+    "coreVersion": "10.291",
+    "createdTime": 1675986801240,
+    "modifiedTime": 1675986801240,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  }
+}

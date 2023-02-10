@@ -7,7 +7,7 @@
   "type": "feat",
   "system": {
     "description": {
-      "value": "<p>When you cast a spell that forces a creature to make a saving throw to resist its effects, you can spend 3 sorcery points to give one target of the spell disadvantage on its first saving throw made against the spell.</p>",
+      "value": "<p>When you cast a spell that forces a creature to make a saving throw to resist its effects, you can spend 3 sorcery points (1 sorcery point if the spell is a cantrip) to give a number of targets equal to your Charisma modifier (minimum of one) disadvantage on their first saving throw made against the spell.</p>\n<p>If a target can make another saving throw against the spell on subsequent turns, you can spend 1 additional sorcery point each time to give that target disadvantage on their save.</p>",
       "chat": "",
       "unidentified": ""
     },
@@ -82,7 +82,7 @@
     "systemVersion": "2.1.0",
     "coreVersion": "10.291",
     "createdTime": 1661787234433,
-    "modifiedTime": 1672334958321,
+    "modifiedTime": 1675986803804,
     "lastModifiedBy": "dnd5ebuilder0000"
   }
 }

@@ -1,0 +1,88 @@
+{
+  "_id": "J72586K4M1D5QF7V",
+  "name": "Order Domain Spells",
+  "ownership": {
+    "default": 0
+  },
+  "type": "feat",
+  "system": {
+    "description": {
+      "value": "<table>\n<thead>\n<tr>\n<th align=\"center\">Cleric Level</th>\n<th align=\"left\">Spells</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td align=\"center\">1st</td>\n<td align=\"left\">@Compendium[dnd5e.spells.arzCrMRgcNiQuh43]{Command}, @Compendium[dnd5e.spells.ge3Saet9zPTDyaoL]{Heroism}</td>\n</tr>\n<tr>\n<td align=\"center\">3rd</td>\n<td align=\"left\">@Compendium[dnd5e.spells.3Lo9boi7P2ro6QV4]{Hold Person}, @Compendium[dnd5e.spells.CylBa7jR8DSbo8Z3]{Zone of Truth}</td>\n</tr>\n<tr>\n<td align=\"center\">5th</td>\n<td align=\"left\">@Compendium[dnd5e.spells.34ddoYIrnOZ2GFYi]{Mass Healing Word}, @Compendium[dnd5e.spells.yqUDoxk4x0NWG5Bz]{Slow}</td>\n</tr>\n<tr>\n<td align=\"center\">7th</td>\n<td align=\"left\">@Compendium[dnd5e.spells.P6f1PPKPd9BCb742]{Compulsion}, @Compendium[dnd5e.spells.gXtzz9t1DTzJeLr4]{Locate Creature}</td>\n</tr>\n<tr>\n<td align=\"center\">9th</td>\n<td align=\"left\">@Compendium[dnd5e.spells.d54VDyFulD9xxY7J]{Commune}, @Compendium[dnd5e.spells.91Sw6vOIaO7U8DvM]{Dominate Person}</td>\n</tr>\n</tbody>\n</table>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "SRD 5.1",
+    "activation": {
+      "type": "",
+      "cost": null,
+      "condition": ""
+    },
+    "duration": {
+      "value": "",
+      "units": ""
+    },
+    "cover": null,
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": ""
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": ""
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": null,
+      "recovery": ""
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
+    "ability": null,
+    "actionType": "",
+    "attackBonus": "",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "type": {
+      "value": "class",
+      "subtype": ""
+    },
+    "requirements": "Order Domain 1",
+    "recharge": {
+      "value": null,
+      "charged": false
+    }
+  },
+  "flags": {},
+  "img": "",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.1.0",
+    "coreVersion": "10.291",
+    "createdTime": 1675986803902,
+    "modifiedTime": 1675988226876,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  }
+}

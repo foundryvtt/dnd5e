@@ -1,11 +1,13 @@
 {
   "_id": "JbxsYXxSOTZbf9I0",
   "name": "Spiritual Weapon",
+  "ownership": {
+    "default": 0
+  },
   "type": "spell",
-  "img": "icons/magic/fire/dagger-rune-enchant-flame-purple.webp",
   "system": {
     "description": {
-      "value": "<p>You create a floating, spectral weapon within range that lasts for the duration or until you cast this spell again. When you cast the spell, you can make a melee spell attack against a creature within 5 feet of the weapon. On a hit, the target takes force damage equal to 1d8 + your spellcasting ability modifier.</p><p>As a bonus action on your turn, you can move the weapon up to 20 feet and repeat the attack against a creature within 5 feet of it.</p><p>The weapon can take whatever form you choose. Clerics of deities who are associated with a particular weapon (as St. Cuthbert is known for his mace and Thor for his hammer) make this spell's effect resemble that weapon.</p><p><strong>Higher Levels.</strong> When you cast this spell using a spell slot of 3rd level or higher, the damage increases by 1d8 for every two slot levels above the 2nd.</p>",
+      "value": "<p>You create a floating, spectral weapon within range that lasts for the duration or until you cast this spell again. When you cast the spell, you can make a <strong>melee spell attack</strong> against a creature within 5 feet of the weapon. On a hit, the target takes force damage equal to 1d8 + your spellcasting ability modifier.</p><p>As a bonus action on your turn, you can move the weapon up to 20 feet and repeat the attack against a creature within 5 feet of it.</p><p>The weapon can take whatever form you choose. Clerics of deities who are associated with a particular weapon (as St. Cuthbert is known for his mace and Thor for his hammer) make this spell's effect resemble that weapon.</p><p><strong><em>At Higher Levels:</em></strong> When you cast this spell using a spell slot 4th level of or higher, the damage increases by 1d8 for every two slot levels above 2nd.</p>",
       "chat": "",
       "unidentified": ""
     },
@@ -21,10 +23,10 @@
     },
     "cover": null,
     "target": {
-      "value": 5,
+      "value": 1,
       "width": null,
-      "units": "ft",
-      "type": "square"
+      "units": "",
+      "type": "creature"
     },
     "range": {
       "value": 60,
@@ -85,23 +87,21 @@
       "prepared": false
     },
     "scaling": {
-      "mode": "none",
-      "formula": ""
+      "mode": "level",
+      "formula": "1d8"
     }
   },
+  "sort": 0,
+  "flags": {},
+  "img": "icons/magic/fire/dagger-rune-enchant-flame-purple.webp",
   "effects": [],
   "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0
-  },
-  "flags": {},
   "_stats": {
     "systemId": "dnd5e",
     "systemVersion": "2.1.0",
     "coreVersion": "10.291",
     "createdTime": 1661787234115,
-    "modifiedTime": 1671220969123,
-    "lastModifiedBy": "dnd5ebuilder0000"
+    "modifiedTime": 1675989934929,
+    "lastModifiedBy": "RightHandOfVecna"
   }
 }

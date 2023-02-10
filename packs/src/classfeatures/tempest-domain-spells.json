@@ -1,0 +1,88 @@
+{
+  "_id": "O2LWSXD1S3NT6ZSU",
+  "name": "Tempest Domain Spells",
+  "ownership": {
+    "default": 0
+  },
+  "type": "feat",
+  "system": {
+    "description": {
+      "value": "<table>\n<thead>\n<tr>\n<th align=\"center\">Cleric Level</th>\n<th align=\"left\">Spells</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td align=\"center\">1st</td>\n<td align=\"left\">@Compendium[dnd5e.spells.IBJmWjzbQGu7M4UX]{Fog Cloud}, @Compendium[dnd5e.spells.WTbOQBsarsL1LuXJ]{Thunderwave}</td>\n</tr>\n<tr>\n<td align=\"center\">3rd</td>\n<td align=\"left\">@Compendium[dnd5e.spells.FSMy6VAjDnXY9vWz]{Gust of Wind}, @Compendium[dnd5e.spells.wJKpSvSTbSkTjqyb]{Shatter}</td>\n</tr>\n<tr>\n<td align=\"center\">5th</td>\n<td align=\"left\">@Compendium[dnd5e.spells.ehvmg9U9fcMEhE4z]{Call Lightning}, @Compendium[dnd5e.spells.dhqBY4TvVjxVmOZd]{Sleet Storm}</td>\n</tr>\n<tr>\n<td align=\"center\">7th</td>\n<td align=\"left\">@Compendium[dnd5e.spells.7fFHlBk3UNX8gPKL]{Control Water}, @Compendium[dnd5e.spells.WN2LWEljYU6QqnRH]{Ice Storm}</td>\n</tr>\n<tr>\n<td align=\"center\">9th</td>\n<td align=\"left\">@Compendium[dnd5e.spells.FDMOQPAQ35GA048O]{Destructive Wave}, @Compendium[dnd5e.spells.OVikYmSdHliAG2YD]{Insect Plague}</td>\n</tr>\n</tbody>\n</table>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "SRD 5.1",
+    "activation": {
+      "type": "",
+      "cost": null,
+      "condition": ""
+    },
+    "duration": {
+      "value": "",
+      "units": ""
+    },
+    "cover": null,
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": ""
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": ""
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": null,
+      "recovery": ""
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
+    "ability": null,
+    "actionType": "",
+    "attackBonus": "",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "type": {
+      "value": "class",
+      "subtype": ""
+    },
+    "requirements": "Tempest Domain 1",
+    "recharge": {
+      "value": null,
+      "charged": false
+    }
+  },
+  "flags": {},
+  "img": "",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.1.0",
+    "coreVersion": "10.291",
+    "createdTime": 1675986804626,
+    "modifiedTime": 1675988227406,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  }
+}

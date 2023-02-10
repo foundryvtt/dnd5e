@@ -1,0 +1,88 @@
+{
+  "_id": "QA6SS1G0UD290Q2P",
+  "name": "Infuse Item",
+  "ownership": {
+    "default": 0
+  },
+  "type": "feat",
+  "system": {
+    "description": {
+      "value": "<p>At 2nd level, you gain the ability to imbue mundane items with certain magical infusions. The magic items you create with this feature are effectively prototypes of permanent items.</p>\n<h3>Infusions Known</h3>\n<p>When you gain this feature, pick four artificer infusions to learn, choosing from the \"Artificer Infusions\" section at the end of the class's description. You learn additional infusions of your choice when you reach certain levels in this class, as shown in the Infusions Known column of the Artificer table.</p>\n<p>Whenever you gain a level in this class, you can replace one of the artificer infusions you learned with a new one.</p>\n<h3>Infusing an Item</h3>\n<p>Whenever you finish a long rest, you can touch a nonmagical object and imbue it with one of your artificer infusions, turning it into a magic item. An infusion works on only certain kinds of objects, as specified in the infusion's description. If the item requires attunement, you can attune yourself to it the instant you infuse the item, or you can forgo attunement so that someone else can attune to the item. If you decide to attune to the item later, you must do so using the normal process for attunement (see \"Attunement\" in chapter 13).</p>\n<p>Your infusion remains in an item indefinitely, but when you die, the infusion vanishes after a number of days have passed equal to your Intelligence modifier (minimum of 1 day). The infusion also vanishes if you give up your knowledge of the infusion for another one.</p>\n<p>You can infuse more than one nonmagical object at the end of a long rest; the maximum number of objects appears in the Infused Items column of the Artificer table. You must touch each of the objects, and each of your infusions can be in only one object at a time. Moreover, no object can bear more than one of your infusions at a time. If you try to exceed your maximum number of infusions, the oldest infusion immediately ends, and then the new infusion applies.</p>\n<p>@UUID[Compendium.dnd5e.classfeatures.HSS26AQLFV8NC09F]{Arcane Propulsion Armor}</p>\n<p>@UUID[Compendium.dnd5e.classfeatures.1E22FVVOV1ISX7K5]{Armor of Magical Strength}</p>\n<p>@UUID[Compendium.dnd5e.classfeatures.M72ZY35ZS544L2F0]{Boots of the Winding Path}</p>\n<p>@UUID[Compendium.dnd5e.classfeatures.M95MIR0580I3WTD2]{Enhanced Arcane Focus}</p>\n<p>@UUID[Compendium.dnd5e.classfeatures.TUJ4OGOGRG2Y2M1S]{Enhanced Defense}</p>\n<p>@UUID[Compendium.dnd5e.classfeatures.GCF3M4ZVNDO25VCB]{Enhanced Weapon}</p>\n<p>@UUID[Compendium.dnd5e.classfeatures.MLEZRMWL8SVNRZWZ]{Helm of Awareness}</p>\n<p>@UUID[Compendium.dnd5e.classfeatures.B2JTQ9NP46QMFA97]{Homunculus Servant}</p>\n<p>@UUID[Compendium.dnd5e.classfeatures.1N9WVUJOIL3IWNAC]{Mind Sharpener}</p>\n<p>@UUID[Compendium.dnd5e.classfeatures.HLKANEDD2560XI4U]{Radiant Weapon}</p>\n<p>@UUID[Compendium.dnd5e.classfeatures.HWCWBPQQ1UGAPN5L]{Repeating Shot}</p>\n<p>@UUID[Compendium.dnd5e.classfeatures.OCCJ8VRVDISXNX3E]{Replicate Magic Item}</p>\n<p>@UUID[Compendium.dnd5e.classfeatures.AHKYJ401KAVSO8BP]{Repulsion Shield}</p>\n<p>@UUID[Compendium.dnd5e.classfeatures.0M7EV8GJ7RUF71JT]{Resistant Armor}</p>\n<p>@UUID[Compendium.dnd5e.classfeatures.6220P0JLTN46RS9W]{Returning Weapon}</p>\n<section class=\"secret foundry-note\">\n<p><strong>Foundry Note</strong></p>\n<p>You can drag your choices from the above onto your character sheet and it will automatically update.</p>\n</section>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "SRD 5.1",
+    "activation": {
+      "type": "",
+      "cost": null,
+      "condition": ""
+    },
+    "duration": {
+      "value": "",
+      "units": ""
+    },
+    "cover": null,
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": ""
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": ""
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": null,
+      "recovery": ""
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
+    "ability": null,
+    "actionType": "",
+    "attackBonus": "",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "type": {
+      "value": "class",
+      "subtype": ""
+    },
+    "requirements": "Artificer 2",
+    "recharge": {
+      "value": null,
+      "charged": false
+    }
+  },
+  "flags": {},
+  "img": "",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.1.0",
+    "coreVersion": "10.291",
+    "createdTime": 1675986803240,
+    "modifiedTime": 1675988226489,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  }
+}

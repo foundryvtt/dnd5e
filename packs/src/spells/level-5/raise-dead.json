@@ -7,7 +7,7 @@
   "type": "spell",
   "system": {
     "description": {
-      "value": "<p>You return a dead creature you touch to life, provided that it has been dead no longer than 10 days. If the creature's soul is both willing and at liberty to rejoin the body, the creature returns to life with 1 hit point.</p><p>This spell also neutralizes any poisons and cures nonmagical diseases that affected the creature at the time it died. This spell doesn't, however, remove magical diseases, curses, or similar effects; if these aren't first removed prior to casting the spell, they take effect when the creature returns to life. The spell can't return an undead creature to life.</p><p>This spell closes all mortal wounds, but it doesn't restore missing body parts. If the creature is lacking body parts or organs integral for its survival—its head, for instance—the spell automatically fails.</p><p>Coming back from the dead is an ordeal. The target takes a −4 penalty to all attack rolls, saving throws, and ability checks. Every time the target finishes a long rest, the penalty is reduced by 1 until it disappears.</p>",
+      "value": "<p>You return a dead creature you touch to life, provided that it has been dead no longer than 10 days and did not die of old age. If the creature's soul is both willing and at liberty to rejoin the body, the creature returns to life with 1 hit point.</p><p>This spell also neutralizes any poison and cures nonmagical diseases that affected the creature at the time it died. This spell doesn't, however, remove magical diseases, curses, or similar effects, if these aren't first removed prior to casting the spell, they take effect when the creature returns to life. The spell can't return an undead creature to life.</p><p>This spell closes all mortal wounds, but it doesn't restore missing body parts. If the creature is lacking body parts or organs integral for its survival \u2014 its head, for instance \u2014 the spell automatically fails.</p><p>Coming back from the dead is an ordeal. The target takes a -4 penalty to all attack rolls, saving throws, and ability checks. Every time the target finishes a long rest, the penalty is reduced by 1 until it disappears.</p><p><strong><em>At Higher Levels:</em></strong> When you cast this spell using a spell slot of 7th level or higher and use material components worth at least 5,000 gp, you can choose a creature that has been dead no longer than a century. The spell also restores all the target's hit points and can restore missing body parts.</p><p>Casting this spell to restore life to a creature that has been dead for one year or longer taxes you greatly. Until you finish a long rest, you can't cast spells again, and you have disadvantage on all attack rolls, ability checks, and saving throws.</p>",
       "chat": "",
       "unidentified": ""
     },
@@ -25,7 +25,7 @@
     "target": {
       "value": 1,
       "width": null,
-      "units": "spec",
+      "units": "",
       "type": "creature"
     },
     "range": {
@@ -45,7 +45,7 @@
       "amount": null
     },
     "ability": "",
-    "actionType": "heal",
+    "actionType": "util",
     "attackBonus": "",
     "chatFlavor": "",
     "critical": {
@@ -77,9 +77,9 @@
       "concentration": false
     },
     "materials": {
-      "value": "A diamond worth at least 500gp, which the spell consumes.",
+      "value": "A diamond worth at least 1,000 gp, which the spell consumes",
       "consumed": true,
-      "cost": 500,
+      "cost": 1000,
       "supply": 0
     },
     "preparation": {
@@ -87,7 +87,7 @@
       "prepared": false
     },
     "scaling": {
-      "mode": "none",
+      "mode": "level",
       "formula": ""
     }
   },
@@ -101,7 +101,7 @@
     "systemVersion": "2.1.0",
     "coreVersion": "10.291",
     "createdTime": 1661787234087,
-    "modifiedTime": 1671220968863,
-    "lastModifiedBy": "dnd5ebuilder0000"
+    "modifiedTime": 1675989934763,
+    "lastModifiedBy": "RightHandOfVecna"
   }
 }

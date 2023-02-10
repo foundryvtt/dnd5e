@@ -1,0 +1,88 @@
+{
+  "_id": "I9HGA9JVTYDAWUAE",
+  "name": "Know Your Enemy",
+  "ownership": {
+    "default": 0
+  },
+  "type": "feat",
+  "system": {
+    "description": {
+      "value": "<p>Starting at 7th level, as a bonus action you learn certain information about your opponent's capabilities compared to your own. The DM tells you two of the following characteristics of your choice:</p>\n<ul>\n<li>Strength modifier</li>\n<li>Dexterity modifier</li>\n<li>Constitution modifier</li>\n<li>Armor Class</li>\n<li>Current hit points</li>\n<li>Total class levels (if any)</li>\n<li>One damage resistance, immunity, or vulnerability</li>\n</ul>\n<p>You can use this feature a number of times equal to your proficiency bonus. You regain all expended uses when you finish a short or long rest.</p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "SRD 5.1",
+    "activation": {
+      "type": "",
+      "cost": null,
+      "condition": ""
+    },
+    "duration": {
+      "value": "",
+      "units": ""
+    },
+    "cover": null,
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": ""
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": ""
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": null,
+      "recovery": ""
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
+    "ability": null,
+    "actionType": "",
+    "attackBonus": "",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "type": {
+      "value": "class",
+      "subtype": ""
+    },
+    "requirements": "Battle Master 7",
+    "recharge": {
+      "value": null,
+      "charged": false
+    }
+  },
+  "flags": {},
+  "img": "",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.1.0",
+    "coreVersion": "10.291",
+    "createdTime": 1675986803549,
+    "modifiedTime": 1675988226684,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  }
+}

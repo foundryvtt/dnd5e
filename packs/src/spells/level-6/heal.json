@@ -7,7 +7,7 @@
   "type": "spell",
   "system": {
     "description": {
-      "value": "<p>Choose a creature that you can see within range. A surge of positive energy washes through the creature, causing it to regain 70 Hit Points. This spell also ends blindness, deafness, and any Diseases affecting the target. This spell has no effect on constructs or Undead.</p><p><strong>At Higher Levels.</strong> When you cast this spell using a spell slot of 7th level or higher, the amount of Healing increases by 10 for each slot level above 6th.</p>",
+      "value": "<p>Choose a creature that you can see within range. A surge of positive energy washes through the creature, causing it to regain 70 hit points. The spell also ends blindness, deafness, and any diseases affecting the target. This spell has no effect on constructs or undead.</p><p><strong><em>At Higher Levels:</em></strong> When you cast this spell using a spell slot of 7th level or higher, the amount of healing increases by 10 for each slot level above 6th.</p>",
       "chat": "",
       "unidentified": ""
     },
@@ -45,7 +45,7 @@
       "amount": null
     },
     "ability": "",
-    "actionType": "heal",
+    "actionType": "util",
     "attackBonus": "",
     "chatFlavor": "",
     "critical": {
@@ -68,7 +68,7 @@
       "scaling": "spell"
     },
     "level": 6,
-    "school": "evo",
+    "school": "nec",
     "components": {
       "vocal": true,
       "somatic": true,
@@ -88,7 +88,7 @@
     },
     "scaling": {
       "mode": "level",
-      "formula": "10"
+      "formula": ""
     }
   },
   "sort": 0,
@@ -101,7 +101,7 @@
     "systemVersion": "2.1.0",
     "coreVersion": "10.291",
     "createdTime": 1661787234231,
-    "modifiedTime": 1671220971327,
-    "lastModifiedBy": "dnd5ebuilder0000"
+    "modifiedTime": 1675989934377,
+    "lastModifiedBy": "RightHandOfVecna"
   }
 }

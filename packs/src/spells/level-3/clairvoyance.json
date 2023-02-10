@@ -23,10 +23,10 @@
     },
     "cover": null,
     "target": {
-      "value": null,
+      "value": 1,
       "width": null,
-      "units": "any",
-      "type": "space"
+      "units": "",
+      "type": "creature"
     },
     "range": {
       "value": 1,
@@ -72,7 +72,7 @@
       "concentration": true
     },
     "materials": {
-      "value": "A focus worth at least 100gp, either a jeweled horn for hearing or a glass eye for seeing.",
+      "value": "A focus worth at least 100 gp, either a jeweled horn for hearing or a glass eye for scrying",
       "consumed": false,
       "cost": 100,
       "supply": 0
@@ -96,7 +96,7 @@
     "systemVersion": "2.1.0",
     "coreVersion": "10.291",
     "createdTime": 1661787234175,
-    "modifiedTime": 1671220970384,
-    "lastModifiedBy": "dnd5ebuilder0000"
+    "modifiedTime": 1675989933924,
+    "lastModifiedBy": "RightHandOfVecna"
   }
 }

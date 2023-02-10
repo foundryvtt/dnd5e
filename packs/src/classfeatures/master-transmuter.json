@@ -1,0 +1,88 @@
+{
+  "_id": "J8PEIMES92LCTNF4",
+  "name": "Master Transmuter",
+  "ownership": {
+    "default": 0
+  },
+  "type": "feat",
+  "system": {
+    "description": {
+      "value": "<p>Starting at 14th level, you can use your action to consume the reserve of transmutation magic stored within your transmuter's stone in a single burst. When you do so, choose one of the following effects. Your transmuter's stone is destroyed and can't be remade until you finish a long rest.</p>\n<p><strong><em>Major Transformation.</em></strong> You can transmute one object \u2014 no larger than a 5-foot cube \u2014 into another object of similar size and mass and of equal or lesser value. You must spend 10 minutes handling the object to transform it.</p>\n<p><strong><em>Panacea.</em></strong> You remove all harmful spells, curses, diseases, and poisons affecting a creature that you touch with the transmuter's stone. The creature also regains all its hit points.</p>\n<p><strong><em>Restore Energy.</em></strong> You touch the transmuter's stone to a willing creature, and that creature regains some expended spell slots. The spell slots can have a combined level that is equal to or less than half your wizard level (rounded up), and none of the slots can be 6th level or higher.</p>\n<p><strong><em>Restore Life.</em></strong> You cast the @Compendium[dnd5e.spells.AGFMPAmuzwWO6Dfz]{Raise Dead} spell on a creature you touch with the transmuter's stone, without expending a spell slot or needing to have the spell in your spellbook.</p>\n<p><strong><em>Restore Youth.</em></strong> You touch the transmuter's stone to a willing creature, and that creature's physical age is reduced by 3d10 years, to a minimum of 13 years.</p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "SRD 5.1",
+    "activation": {
+      "type": "",
+      "cost": null,
+      "condition": ""
+    },
+    "duration": {
+      "value": "",
+      "units": ""
+    },
+    "cover": null,
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": ""
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": ""
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": null,
+      "recovery": ""
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
+    "ability": null,
+    "actionType": "",
+    "attackBonus": "",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "type": {
+      "value": "class",
+      "subtype": ""
+    },
+    "requirements": "School of Transmutation 14",
+    "recharge": {
+      "value": null,
+      "charged": false
+    }
+  },
+  "flags": {},
+  "img": "",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.1.0",
+    "coreVersion": "10.291",
+    "createdTime": 1675986803774,
+    "modifiedTime": 1675988226780,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  }
+}

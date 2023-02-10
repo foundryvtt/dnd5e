@@ -1,0 +1,115 @@
+{
+  "_id": "MBOEY8T1NPPPSU2K",
+  "name": "Blade of Disaster",
+  "ownership": {
+    "default": 0
+  },
+  "type": "spell",
+  "system": {
+    "description": {
+      "value": "<p>You create a blade-shaped planar rift about 3 feet long in an unoccupied space you can see within range. The blade lasts for the duration. When you cast this spell, you can make up to two <strong>melee spell attack</strong>s with the blade, each one against a creature, loose object, or structure within 5 feet of the blade. On a hit, the target takes <strong>4d12 force damage</strong>. This attack scores a critical hit if the number on the d20 is 18 or higher. On a critical hit, the blade deals an extra <strong>8d12 force damage</strong> (for a total of <strong>12d12 force damage</strong>).</p><p>As a bonus action on your turn, you can move the blade up to 30 feet to an unoccupied space you can see and then make up to two <strong>melee spell attack</strong>s with it again.</p><p>The blade can harmlessly pass through any barrier, including a @Compendium[dnd5e.spells.o9ZCvuD2B1OTcubb]{Wall of Force}.</p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "SRD 5.1",
+    "activation": {
+      "type": "bonus",
+      "cost": 1,
+      "condition": ""
+    },
+    "duration": {
+      "value": "1",
+      "units": "minute"
+    },
+    "cover": null,
+    "target": {
+      "value": 1,
+      "width": null,
+      "units": "",
+      "type": "creature"
+    },
+    "range": {
+      "value": 60,
+      "long": null,
+      "units": "ft"
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": null,
+      "recovery": ""
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
+    "ability": "",
+    "actionType": "msak",
+    "attackBonus": "",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [
+        [
+          "4d12",
+          "force"
+        ],
+        [
+          "8d12",
+          "force"
+        ],
+        [
+          "12d12",
+          "force"
+        ]
+      ],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "level": 9,
+    "school": "con",
+    "components": {
+      "vocal": true,
+      "somatic": true,
+      "material": false,
+      "ritual": false,
+      "concentration": true
+    },
+    "materials": {
+      "value": "",
+      "consumed": false,
+      "cost": 0,
+      "supply": 0
+    },
+    "preparation": {
+      "mode": "prepared",
+      "prepared": false
+    },
+    "scaling": {
+      "mode": "none",
+      "formula": ""
+    }
+  },
+  "sort": 0,
+  "flags": {},
+  "img": "icons/magic/nature/wolf-paw-glow-large-orange.webp",
+  "effects": [],
+  "folder": null,
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.1.0",
+    "coreVersion": "10.291",
+    "createdTime": 1675986797265,
+    "modifiedTime": 1675989933838,
+    "lastModifiedBy": "RightHandOfVecna"
+  }
+}

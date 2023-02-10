@@ -7,7 +7,7 @@
   "type": "spell",
   "system": {
     "description": {
-      "value": "<p>You create a wall of fire on a solid surface within range. You can make the wall up to 60 feet long, 20 feet high, and 1 foot thick, or a ringed wall up to 20 feet in diameter, 20 feet high, and 1 foot thick. The wall is opaque and lasts for the duration.</p><p>When the wall appears, each creature within its area must make a Dexterity saving throw. On a failed save, a creature takes 5d8 fire damage, or half as much damage on a successful save.</p><p>One side of the wall, selected by you when you cast this spell, deals 5d8 fire damage to each creature that ends its turn within 10 feet of that side or inside the wall. A creature takes the same damage when it enters the wall for the first time on a turn or ends its turn there. The other side of the wall deals no damage.</p><p><strong>At Higher Levels.</strong> When you cast this spell using a spell slot of 5th level or higher, the damage increases by 1d8 for each slot level above 4th.</p>",
+      "value": "<p>You create a wall of fire on a solid surface within range. You can make the wall up to 60 feet long, 20 feet high, and 1 foot think, or a ringed wall up to 20 feet in diameter, 20 feet high, and 1 foot think. The wall is opaque and lasts for the duration.</p><p>When the wall appears, each creature within its area must make a <strong>Dexterity saving throw</strong>. On a failed save, a creature takes <strong>5d8 fire damage</strong>, or half as much damage on a successful save.</p><p>One side of the wall, selected by you when you cast this spell, deals <strong>5d8 fire damage</strong> to each creature that ends its turn within 10 feet of that side or inside the wall. A creature takes the same damage when it enters the wall for the first time on a turn or ends its turn there. The other side of the wall deals no damage.</p><p><strong><em>At Higher Levels:</em></strong> When you cast this spell using a spell slot of 5th level or higher, the damage increases by 1d8 for each slot level above 4th.</p>",
       "chat": "",
       "unidentified": ""
     },
@@ -23,10 +23,10 @@
     },
     "cover": null,
     "target": {
-      "value": 60,
+      "value": 1,
       "width": null,
-      "units": "ft",
-      "type": "wall"
+      "units": "",
+      "type": "creature"
     },
     "range": {
       "value": 120,
@@ -57,6 +57,10 @@
         [
           "5d8",
           "fire"
+        ],
+        [
+          "5d8",
+          "fire"
         ]
       ],
       "versatile": ""
@@ -77,7 +81,7 @@
       "concentration": true
     },
     "materials": {
-      "value": "A small piece of phosphorous",
+      "value": "A small piece of phosphorus",
       "consumed": false,
       "cost": 0,
       "supply": 0
@@ -101,7 +105,7 @@
     "systemVersion": "2.1.0",
     "coreVersion": "10.291",
     "createdTime": 1661787234155,
-    "modifiedTime": 1671220970136,
-    "lastModifiedBy": "dnd5ebuilder0000"
+    "modifiedTime": 1675989935177,
+    "lastModifiedBy": "RightHandOfVecna"
   }
 }

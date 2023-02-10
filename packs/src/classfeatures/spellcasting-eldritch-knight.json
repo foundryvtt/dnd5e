@@ -1,0 +1,88 @@
+{
+  "_id": "UO4RMDM0XOCHSBVG",
+  "name": "Spellcasting (Eldritch Knight)",
+  "ownership": {
+    "default": 0
+  },
+  "type": "feat",
+  "system": {
+    "description": {
+      "value": "<p>When you reach 3rd level, you augment your martial prowess with the ability to cast spells.</p>\n<p><strong><em>Cantrips.</em></strong> You learn two cantrips of your choice from the @UUID[Compendium.dnd5e.classfeatures.DMDW9DRUUN56GZ0C]{Wizard spell list}. You learn an additional wizard cantrip of your choice at 10th level.</p>\n<p><strong><em>Spell Slots.</em></strong> The Eldritch Knight Spellcasting table shows how many spell slots you have to cast your spells of 1st level and higher. To cast one of these spells, you must expend a slot of the spell's level or higher. You regain all expended spell slots when you finish a long rest.</p>\n<p>For example, if you know the 1st-level spell @Compendium[dnd5e.spells.z1mx84ONwkXKUZd7]{Shield} and have a 1st-level and a 2nd-level spell slot available, you can cast @Compendium[dnd5e.spells.z1mx84ONwkXKUZd7]{Shield} using either slot.</p>\n<p><strong><em>Spells Known of 1st-Level and Higher.</em></strong> You know three 1st-level wizard spells of your choice, two of which you must choose from the abjuration and evocation spells on the @UUID[Compendium.dnd5e.classfeatures.DMDW9DRUUN56GZ0C]{Wizard spell list}.</p>\n<p>The Spells Known column of the Eldritch Knight Spellcasting table shows when you learn more wizard spells of 1st level or higher. Each of these spells must be an abjuration, conjuration, or evocation spell of your choice, and must be of a level for which you have spell slots. For instance, when you reach 7th level in this class, you can learn one new spell of 1st or 2nd level.</p>\n<p>The spells you learn at 8th, 14th, and 20th level can come from any school of magic.</p>\n<p>Whenever you gain a level in this class, you can replace one of the wizard spells you know with another spell of your choice from the @UUID[Compendium.dnd5e.classfeatures.DMDW9DRUUN56GZ0C]{Wizard spell list}. The new spell must be of a level for which you have spell slots, and it must be an abjuration, conjuration, or evocation spell, unless you're replacing the spell you gained at 8th, 14th, or 20th level.</p>\n<p><strong><em>Spellcasting Ability</em></strong>. Intelligence is your spellcasting ability for your wizard spells, since you learn your spells through study and memorization. You use your Intelligence whenever a spell refers to your spellcasting ability. In addition, you use your Intelligence modifier when setting the saving throw DC for a wizard spell you cast and when making an attack roll with one.</p>\n<p><strong>Spell save DC</strong> = 8 + your proficiency bonus + your Intelligence modifier</p>\n<p><strong>Spell attack modifier</strong> = your proficiency bonus + your Intelligence modifier</p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "SRD 5.1",
+    "activation": {
+      "type": "",
+      "cost": null,
+      "condition": ""
+    },
+    "duration": {
+      "value": "",
+      "units": ""
+    },
+    "cover": null,
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": ""
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": ""
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": null,
+      "recovery": ""
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
+    "ability": null,
+    "actionType": "",
+    "attackBonus": "",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "type": {
+      "value": "class",
+      "subtype": ""
+    },
+    "requirements": "Eldritch Knight 3",
+    "recharge": {
+      "value": null,
+      "charged": false
+    }
+  },
+  "flags": {},
+  "img": "",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.1.0",
+    "coreVersion": "10.291",
+    "createdTime": 1675986804522,
+    "modifiedTime": 1675988227322,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  }
+}

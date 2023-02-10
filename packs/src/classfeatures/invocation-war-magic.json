@@ -1,0 +1,88 @@
+{
+  "_id": "X7BW539P9OUS9QRQ",
+  "name": "Invocation: War Magic",
+  "ownership": {
+    "default": 0
+  },
+  "type": "feat",
+  "system": {
+    "description": {
+      "value": "<p>You learn the following spells, which are warlock spells for you.</p>\n<table>\n<thead>\n<tr>\n<th align=\"center\">Warlock Level</th>\n<th align=\"left\">Spells</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td align=\"center\">1st</td>\n<td align=\"left\">@Compendium[dnd5e.spells.z1mx84ONwkXKUZd7]{Shield}, @Compendium[dnd5e.spells.CJZ286CT647VL1AX]{Wrathful Smite}</td>\n</tr>\n<tr>\n<td align=\"center\">3rd</td>\n<td align=\"left\">@Compendium[dnd5e.spells.UDUnlfPsOAbq2RSE]{Blur}, @Compendium[dnd5e.spells.7UwUjJ6owIQkEPrs]{Branding Smite}</td>\n</tr>\n<tr>\n<td align=\"center\">5th</td>\n<td align=\"left\">@Compendium[dnd5e.spells.GSvLWcdCZLQkilXT]{Blink}, @Compendium[dnd5e.spells.FNSTK1Z9R6T6KTE6]{Elemental Weapon}</td>\n</tr>\n<tr>\n<td align=\"center\">7th</td>\n<td align=\"left\">@Compendium[dnd5e.spells.BYNvBJzHcF5VJhXw]{Phantasmal Killer}, @Compendium[dnd5e.spells.EG3WN4NGI0KVF46S]{Staggering Smite}</td>\n</tr>\n<tr>\n<td align=\"center\">9th</td>\n<td align=\"left\">@Compendium[dnd5e.spells.RSXWAW02QJGETEL5]{Banishing Smite}, @Compendium[dnd5e.spells.RpKjTlYASrfqUPVA]{Cone of Cold}</td>\n</tr>\n</tbody>\n</table>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "SRD 5.1",
+    "activation": {
+      "type": "",
+      "cost": null,
+      "condition": ""
+    },
+    "duration": {
+      "value": "",
+      "units": ""
+    },
+    "cover": null,
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": ""
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": ""
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": null,
+      "recovery": ""
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
+    "ability": null,
+    "actionType": "",
+    "attackBonus": "",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "type": {
+      "value": "class",
+      "subtype": "eldritchInvocation"
+    },
+    "requirements": "Pact of the Blade feature",
+    "recharge": {
+      "value": null,
+      "charged": false
+    }
+  },
+  "flags": {},
+  "img": "",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.1.0",
+    "coreVersion": "10.291",
+    "createdTime": 1675986803521,
+    "modifiedTime": 1675986803521,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  }
+}

@@ -7,7 +7,7 @@
   "type": "spell",
   "system": {
     "description": {
-      "value": "<p>Choose one creature that you can see within range. The target begins a comic dance in place: shuffling, tapping its feet, and capering for the duration. Creatures taht can't be charmed are immune to this spell.</p><p>A dancing creature must use all its movement to dance without leaving its space and has disadvantage on Dexterity saving throws and attack rolls. While the target is affected by this spell, other creatures have advantage on attack rolls against it. As an action, a dancing creature makes a Wisdom saving throw to regain control of itself. On a successful save, the spell ends.</p>",
+      "value": "<p>Choose one creature that you can see within range. The target begins a comic dance in place: shuffling, tapping its feet, and capering for the duration. Creatures that can't be charmed are immune to this spell.</p><p>A dancing creature must use all its movement to dance without leaving its space and has disadvantage on <strong>Dexterity saving throw</strong>s and attack rolls. While the target is affected by this spell, other creatures have advantage on attack rolls against it. As an action, a dancing creature makes a <strong>Wisdom saving throw</strong> to regain control of itself. On a successful save, the spell ends.</p>",
       "chat": "",
       "unidentified": ""
     },
@@ -58,7 +58,7 @@
     },
     "formula": "",
     "save": {
-      "ability": "wis",
+      "ability": "dex",
       "dc": null,
       "scaling": "spell"
     },
@@ -96,7 +96,7 @@
     "systemVersion": "2.1.0",
     "coreVersion": "10.291",
     "createdTime": 1661787234145,
-    "modifiedTime": 1671220970033,
-    "lastModifiedBy": "dnd5ebuilder0000"
+    "modifiedTime": 1675989934482,
+    "lastModifiedBy": "RightHandOfVecna"
   }
 }

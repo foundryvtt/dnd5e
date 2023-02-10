@@ -7,7 +7,7 @@
   "type": "feat",
   "system": {
     "description": {
-      "value": "<p>When you roll damage for a spell, you can spend 1 sorcery point to reroll a number of the damage dice up to your Charisma modifier (minimum of one). You must use the new rolls.</p><p>You can use Empowered Spell even if you have already used a different Metamagic option during the casting of the spell.</p>",
+      "value": "<p>When you cast a spell, you can spend 2 sorcery points to increase the spell's raw force. If you roll damage for the spell when you cast it, increase the damage against every target by 2d10 damage. If the spell can deal damage more than once, you only add the extra damage on the first damage roll.</p>\n<p>You can use Empowered Spell even if you have already used a different Metamagic option during the casting of the spell.</p>",
       "chat": "",
       "unidentified": ""
     },
@@ -82,7 +82,7 @@
     "systemVersion": "2.1.0",
     "coreVersion": "10.291",
     "createdTime": 1661787234358,
-    "modifiedTime": 1672334966310,
+    "modifiedTime": 1675986803801,
     "lastModifiedBy": "dnd5ebuilder0000"
   }
 }

@@ -1,0 +1,88 @@
+{
+  "_id": "DQ60M57TARQ3Z7Q0",
+  "name": "Horizon Walker Magic",
+  "ownership": {
+    "default": 0
+  },
+  "type": "feat",
+  "system": {
+    "description": {
+      "value": "<p>You learn an additional spell when you reach certain levels in this class, as shown in the Horizon Walker Spells table. The spell counts as a ranger spell for you, but it doesn't count against the number of ranger spells you can prepare.</p>\n<h3>Horizon Walker Spells</h3>\n<table>\n<thead>\n<tr>\n<th align=\"center\">Ranger Level</th>\n<th align=\"center\">Spell</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td align=\"center\">3rd</td>\n<td align=\"center\">@Compendium[dnd5e.spells.xmDBqZhRVrtLP8h2]{Protection from Evil and Good}</td>\n</tr>\n<tr>\n<td align=\"center\">5th</td>\n<td align=\"center\">@Compendium[dnd5e.spells.wqfAVANuQonNBgnL]{Misty Step}</td>\n</tr>\n<tr>\n<td align=\"center\">9th</td>\n<td align=\"center\">@Compendium[dnd5e.spells.Szvk5FEVQW3uhJi5]{Haste}</td>\n</tr>\n<tr>\n<td align=\"center\">13th</td>\n<td align=\"center\">@Compendium[dnd5e.spells.pxpb2eOB6bv4phAf]{Banishment}</td>\n</tr>\n<tr>\n<td align=\"center\">17th</td>\n<td align=\"center\">@Compendium[dnd5e.spells.8aWtP5hcrmcEesBW]{Teleportation Circle}</td>\n</tr>\n</tbody>\n</table>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "SRD 5.1",
+    "activation": {
+      "type": "",
+      "cost": null,
+      "condition": ""
+    },
+    "duration": {
+      "value": "",
+      "units": ""
+    },
+    "cover": null,
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": ""
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": ""
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": null,
+      "recovery": ""
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
+    "ability": null,
+    "actionType": "",
+    "attackBonus": "",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "type": {
+      "value": "class",
+      "subtype": ""
+    },
+    "requirements": "Horizon Walker Conclave 1",
+    "recharge": {
+      "value": null,
+      "charged": false
+    }
+  },
+  "flags": {},
+  "img": "",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.1.0",
+    "coreVersion": "10.291",
+    "createdTime": 1675986803148,
+    "modifiedTime": 1675988226439,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  }
+}

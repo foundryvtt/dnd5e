@@ -1,11 +1,13 @@
 {
   "_id": "Advtckpz1B733bu9",
   "name": "Flame Blade",
+  "ownership": {
+    "default": 0
+  },
   "type": "spell",
-  "img": "icons/magic/fire/dagger-rune-enchant-flame-orange.webp",
   "system": {
     "description": {
-      "value": "<p>You evoke a fiery blade in your free hand. The blade is similar in size and shape to a Scimitar, and it lasts for the Duration. If you let go of the blade, it disappears, but you can evoke the blade again as a Bonus Action.</p><p>You can use your action to make a melee spell Attack with the fiery blade. On a hit, the target takes 3d6 fire damage.</p><p>The flaming blade sheds bright light in a 10-foot radius and dim light for an additional 10 feet.</p><p><strong>At Higher Levels.</strong> When you cast this spell using a spell slot of 4th level or higher, the damage increases by 1d6 for every two slot levels above 2nd.</p>",
+      "value": "<p>You evoke a fiery blade in your free hand. The blade is similar in size and shape to a scimitar, and it lasts for the duration. If you let go of the blade, it disappears, but you can evoke the blade again as a bonus action.</p><p>This magic sword lasts until the spell ends. It counts as a simple melee weapon with which you are proficient, has the finesse and light properties, and deals <strong>3d6 fire damage</strong> on a hit.</p><p>The flaming blade sheds bright light in a 10-foot radius and dim light for an additional 10 feet.</p><p><strong><em>At Higher Levels:</em></strong> When you cast this spell using a spell slot of 4th level or higher, the damage increases by 1d6 for every two slot levels above 2nd.</p>",
       "chat": "",
       "unidentified": ""
     },
@@ -43,7 +45,7 @@
       "amount": null
     },
     "ability": "",
-    "actionType": "msak",
+    "actionType": "util",
     "attackBonus": "",
     "chatFlavor": "",
     "critical": {
@@ -53,7 +55,7 @@
     "damage": {
       "parts": [
         [
-          "floor(2 + @item.level / 2)d6",
+          "3d6",
           "fire"
         ]
       ],
@@ -85,23 +87,21 @@
       "prepared": false
     },
     "scaling": {
-      "mode": "none",
-      "formula": ""
+      "mode": "level",
+      "formula": "1d6"
     }
   },
+  "sort": 0,
+  "flags": {},
+  "img": "icons/magic/fire/dagger-rune-enchant-flame-orange.webp",
   "effects": [],
   "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0
-  },
-  "flags": {},
   "_stats": {
     "systemId": "dnd5e",
     "systemVersion": "2.1.0",
     "coreVersion": "10.291",
     "createdTime": 1661787234089,
-    "modifiedTime": 1671220968875,
-    "lastModifiedBy": "dnd5ebuilder0000"
+    "modifiedTime": 1675989934250,
+    "lastModifiedBy": "RightHandOfVecna"
   }
 }

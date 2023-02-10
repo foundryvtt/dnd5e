@@ -1,0 +1,102 @@
+{
+  "_id": "YGCEQMHZWEUFRH19",
+  "name": "Redirect Projectile",
+  "ownership": {
+    "default": 0
+  },
+  "type": "spell",
+  "system": {
+    "description": {
+      "value": "<p>When a creature within range is the target of a <strong>ranged weapon attack</strong> or a <strong>ranged spell attack</strong>, and the attack misses, you can use your reaction to momentarily open a small portal. The portal catches the projectile, and you make a <strong>ranged spell attack</strong> against one creature also in range of this spell. On a hit, the target suffers the effects of the original weapon attack or spell.</p><p><strong><em>At Higher Levels:</em></strong> When you cast this spell using a spell slot of 3rd level or higher, the attack does not need to miss in order to cast this spell, and the effect of the projectile is negated against the original target.</p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "SRD 5.1",
+    "activation": {
+      "type": "reaction",
+      "cost": 1,
+      "condition": "which you take when a creature within range is missed by a ranged attack"
+    },
+    "duration": {
+      "value": "",
+      "units": "inst"
+    },
+    "cover": null,
+    "target": {
+      "value": 1,
+      "width": null,
+      "units": "",
+      "type": "creature"
+    },
+    "range": {
+      "value": 60,
+      "long": null,
+      "units": "ft"
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": null,
+      "recovery": ""
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
+    "ability": "",
+    "actionType": "rsak",
+    "attackBonus": "",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "level": 1,
+    "school": "con",
+    "components": {
+      "vocal": true,
+      "somatic": true,
+      "material": true,
+      "ritual": false,
+      "concentration": false
+    },
+    "materials": {
+      "value": "A small mirror",
+      "consumed": false,
+      "cost": 0,
+      "supply": 0
+    },
+    "preparation": {
+      "mode": "prepared",
+      "prepared": false
+    },
+    "scaling": {
+      "mode": "level",
+      "formula": ""
+    }
+  },
+  "sort": 0,
+  "flags": {},
+  "img": "icons/magic/nature/wolf-paw-glow-large-orange.webp",
+  "effects": [],
+  "folder": null,
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.1.0",
+    "coreVersion": "10.291",
+    "createdTime": 1675986798228,
+    "modifiedTime": 1675989934777,
+    "lastModifiedBy": "RightHandOfVecna"
+  }
+}

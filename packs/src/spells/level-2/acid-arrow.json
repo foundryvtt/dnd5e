@@ -7,7 +7,7 @@
   "type": "spell",
   "system": {
     "description": {
-      "value": "<p>A shimmering green arrow streaks toward a target within range and bursts in a spray of acid. Make a ranged spell Attack against the target. On a hit, the target takes 4d4 acid damage immediately and 2d4 acid damage at the end of its next turn. On a miss, the arrow splashes the target with acid for half as much of the initial damage and no damage at the end of its next turn.</p><p><strong>At Higher Levels.</strong> When you cast this spell using a spell slot of 3rd level or higher, the damage (both initial and later) increases by 1d4 for each slot level above 2nd.</p>",
+      "value": "<p>A shimmering green arrow streaks toward a target within range and bursts in a spray of acid. Make a <strong>ranged spell attack</strong> against the target. On a hit, the target takes <strong>4d4 acid damage</strong> immediately and <strong>2d4 acid damage</strong> at the end of its next turn. On a miss, the arrow splashes the target with acid for half as much of the initial damage and no damage at the end of its next turn.</p><p><strong><em>At Higher Levels:</em></strong> When you cast this spell using a spell slot of 3rd level or higher, the damage (both initial and later) increases by 1d4 for each slot level above 2nd.</p>",
       "chat": "",
       "unidentified": ""
     },
@@ -23,10 +23,10 @@
     },
     "cover": null,
     "target": {
-      "value": 1,
+      "value": null,
       "width": null,
-      "units": "",
-      "type": "creature"
+      "units": "any",
+      "type": "space"
     },
     "range": {
       "value": 90,
@@ -57,9 +57,13 @@
         [
           "4d4",
           "acid"
+        ],
+        [
+          "2d4",
+          "acid"
         ]
       ],
-      "versatile": "2d4"
+      "versatile": ""
     },
     "formula": "",
     "save": {
@@ -77,14 +81,14 @@
       "concentration": false
     },
     "materials": {
-      "value": "powdered rhubarb leaf and an adder's stomach",
+      "value": "Powdered rhubarb leaf and an adder's stomach",
       "consumed": false,
       "cost": 0,
       "supply": 0
     },
     "preparation": {
       "mode": "prepared",
-      "prepared": true
+      "prepared": false
     },
     "scaling": {
       "mode": "level",
@@ -101,7 +105,7 @@
     "systemVersion": "2.1.0",
     "coreVersion": "10.291",
     "createdTime": 1661787234066,
-    "modifiedTime": 1671220968622,
-    "lastModifiedBy": "dnd5ebuilder0000"
+    "modifiedTime": 1675989933694,
+    "lastModifiedBy": "RightHandOfVecna"
   }
 }

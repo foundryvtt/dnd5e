@@ -7,7 +7,7 @@
   "type": "spell",
   "system": {
     "description": {
-      "value": "<p>The touch of your shadow-wreathed hand can siphon life force from others to heal your wounds. Make a melee spell attack against a creature within your reach. On a hit, the target takes 3d6 necrotic damage, and you regain hit points equal to half the amount of necrotic damage dealt. Until the spell ends, you can make the attack again on each of your turns as an action.</p><p><strong>Higher Levels.</strong> When you cast this spell using a spell slot of 4th level or higher, the damage increases by 1d6 for each slot level above 3rd.</p>",
+      "value": "<p>The touch of your shadow-wreathed hand can siphon force from others to heal your wounds. Make a <strong>melee spell attack</strong> against a creature within your reach. On a hit, the target takes <strong>3d6 necrotic damage</strong>, and you regain hit points equal to half the amount of necrotic damage dealt. Until the spell ends, you can make the attack again on each of your turns as an action.</p><p><strong><em>At Higher Levels:</em></strong> When you cast this spell using a spell slot of 4th level or higher, the damage increases by 1d6 for each slot level above 3rd.</p>",
       "chat": "",
       "unidentified": ""
     },
@@ -23,10 +23,10 @@
     },
     "cover": null,
     "target": {
-      "value": 1,
+      "value": null,
       "width": null,
       "units": "",
-      "type": "creature"
+      "type": "self"
     },
     "range": {
       "value": null,
@@ -101,7 +101,7 @@
     "systemVersion": "2.1.0",
     "coreVersion": "10.291",
     "createdTime": 1661787234148,
-    "modifiedTime": 1671220970083,
-    "lastModifiedBy": "dnd5ebuilder0000"
+    "modifiedTime": 1675989935159,
+    "lastModifiedBy": "RightHandOfVecna"
   }
 }

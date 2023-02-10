@@ -1,0 +1,88 @@
+{
+  "_id": "5JWEFOLG54QLG5LH",
+  "name": "Psionic Spells",
+  "ownership": {
+    "default": 0
+  },
+  "type": "feat",
+  "system": {
+    "description": {
+      "value": "<p>You learn additional spells when you reach certain levels in this class, as shown on the Psionic Spells table. Each of these spells counts as a sorcerer spell for you, but it doesn't count against the number of sorcerer spells you know.</p>\n<p>Whenever you gain a sorcerer level, you can replace one spell you gained from this feature with another spell of 5th level or lower. The new spell must be a divination or an enchantment spell from the sorcerer, warlock, or wizard spell list.</p>\n<h3>Psionic Spells</h3>\n<table>\n<thead>\n<tr>\n<th align=\"center\">Sorcerer Level</th>\n<th align=\"left\">Spells</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td align=\"center\">1st</td>\n<td align=\"left\">@Compendium[dnd5e.spells.02YWG7SFYVQ2T31P]{Arms of Hadar}, @Compendium[dnd5e.spells.IAP3DSC2U4ZESJ7Y]{Dissonant Whispers}, @Compendium[dnd5e.spells.VR0GU6G4Y2HK2HNG]{Mind Sliver}</td>\n</tr>\n<tr>\n<td align=\"center\">3rd</td>\n<td align=\"left\">@Compendium[dnd5e.spells.3MYDjS6k9IYL0aTj]{Calm Emotions}, @Compendium[dnd5e.spells.ppWAAEul0QHtm4er]{Detect Thoughts}</td>\n</tr>\n<tr>\n<td align=\"center\">5th</td>\n<td align=\"left\">@Compendium[dnd5e.spells.NBTD4H4INIB6C4EL]{Hunger of Hadar}, @Compendium[dnd5e.spells.GtGjNjPBgUHxGYAD]{Sending}</td>\n</tr>\n<tr>\n<td align=\"center\">7th</td>\n<td align=\"left\">@Compendium[dnd5e.spells.DGONTFbk5eORs5qv]{Black Tentacles}, @Compendium[dnd5e.spells.K4E2SG3P5F79QUU3]{Summon Aberration}</td>\n</tr>\n<tr>\n<td align=\"center\">9th</td>\n<td align=\"left\">@Compendium[dnd5e.spells.uAwtVZkiSTyP6ORB]{Telepathic Bond}, @Compendium[dnd5e.spells.HQfd7jJyULIoGxrZ]{Telekinesis}</td>\n</tr>\n</tbody>\n</table>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "SRD 5.1",
+    "activation": {
+      "type": "",
+      "cost": null,
+      "condition": ""
+    },
+    "duration": {
+      "value": "",
+      "units": ""
+    },
+    "cover": null,
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": ""
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": ""
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": null,
+      "recovery": ""
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
+    "ability": null,
+    "actionType": "",
+    "attackBonus": "",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "type": {
+      "value": "class",
+      "subtype": ""
+    },
+    "requirements": "Aberrant Mind 1",
+    "recharge": {
+      "value": null,
+      "charged": false
+    }
+  },
+  "flags": {},
+  "img": "",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.1.0",
+    "coreVersion": "10.291",
+    "createdTime": 1675986804117,
+    "modifiedTime": 1675988226982,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  }
+}

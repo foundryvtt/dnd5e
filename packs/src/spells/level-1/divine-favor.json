@@ -7,7 +7,7 @@
   "type": "spell",
   "system": {
     "description": {
-      "value": "<p>Your prayer empowers you with divine radiance. Until the spell ends, your weapon attacks deal an extra 1d4 radiant damage on a hit.</p>",
+      "value": "<p>Your prayer empowers you with divine radiance. Until the spell ends, your weapon attacks deal an extra <strong>1d4 radiant damage</strong> on a hit.</p>",
       "chat": "",
       "unidentified": ""
     },
@@ -45,7 +45,7 @@
       "amount": null
     },
     "ability": "",
-    "actionType": "other",
+    "actionType": "util",
     "attackBonus": "",
     "chatFlavor": "",
     "critical": {
@@ -101,7 +101,7 @@
     "systemVersion": "2.1.0",
     "coreVersion": "10.291",
     "createdTime": 1661787234079,
-    "modifiedTime": 1671220968776,
-    "lastModifiedBy": "dnd5ebuilder0000"
+    "modifiedTime": 1675989934093,
+    "lastModifiedBy": "RightHandOfVecna"
   }
 }

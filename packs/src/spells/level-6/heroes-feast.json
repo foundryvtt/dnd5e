@@ -7,7 +7,7 @@
   "type": "spell",
   "system": {
     "description": {
-      "value": "<p>You bring forth a great feast, including magnificent food and drink. The feast takes 1 Hour to consume and disappears at the end of that time, and the beneficial Effects don't set in until this hour is over. Up to twelve creatures can partake of the feast.</p><p>A creature that partakes of the feast gains several benefits. The creature is cured of all Diseases and poison, becomes immune to poison and being Frightened, and makes all Wisdom Saving Throws with advantage. Its hit point maximum also increases by 2d10, and it gains the same number of Hit Points. These benefits last for 24 hours.</p>",
+      "value": "<p>You bring forth a great feast, including magnificent food and drink. The feast takes 1 hour to consume and disappears at the end of that time, and the beneficial effects don't set in until this hour is over. Up to twelve other creatures can partake of the feast.</p><p>A creature that partakes of the feast gains several benefits. The creature is cured of all diseases and poison, becomes immune to poison and being frightened, and makes all <strong>Wisdom saving throw</strong>s with advantage. Its hit point maximum also increases by 2d10, and it gains the same number of hit points. These benefits last for 24 hours.</p>",
       "chat": "",
       "unidentified": ""
     },
@@ -23,10 +23,10 @@
     },
     "cover": null,
     "target": {
-      "value": null,
+      "value": 1,
       "width": null,
       "units": "",
-      "type": ""
+      "type": "creature"
     },
     "range": {
       "value": 30,
@@ -45,7 +45,7 @@
       "amount": null
     },
     "ability": "",
-    "actionType": "util",
+    "actionType": "save",
     "attackBonus": "",
     "chatFlavor": "",
     "critical": {
@@ -58,7 +58,7 @@
     },
     "formula": "",
     "save": {
-      "ability": "",
+      "ability": "wis",
       "dc": null,
       "scaling": "spell"
     },
@@ -72,9 +72,9 @@
       "concentration": false
     },
     "materials": {
-      "value": "A gem-encrusted bowl worth at least 1000gp, which the spell consumes",
+      "value": "A gem-encrusted bowl worth at least 500 gp, which the spell consumes",
       "consumed": true,
-      "cost": 1000,
+      "cost": 500,
       "supply": 0
     },
     "preparation": {
@@ -96,7 +96,7 @@
     "systemVersion": "2.1.0",
     "coreVersion": "10.291",
     "createdTime": 1661787234220,
-    "modifiedTime": 1671220971185,
-    "lastModifiedBy": "dnd5ebuilder0000"
+    "modifiedTime": 1675989934394,
+    "lastModifiedBy": "RightHandOfVecna"
   }
 }

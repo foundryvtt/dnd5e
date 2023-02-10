@@ -7,7 +7,7 @@
   "type": "spell",
   "system": {
     "description": {
-      "value": "<p>You touch a dead humanoid or a piece of a dead humanoid. Provided that the creature has been dead no longer than 10 days, the spell forms a new adult body for it and then calls the soul to enter that body. If the target's soul isn't free or willing to do so, the spell fails.</p><p>The magic fashions a new body for the creature to inhabit, which likely causes the creature's race to change. The DM rolls on the @Compendium[dnd5e.tables.eXu1QFMsFtTtoJBZ]{Reincarnate} table to determine what form the creature takes when restored to life, or the DM chooses a form.</p>\n<p>The reincarnated creature recalls its former life and experiences. It retains the capabilities it had in its original form, except it exchanges its original race for the new one and changes its Racial Traits accordingly.</p>",
+      "value": "<p>You touch a dead humanoid or a piece of a dead humanoid. Provided that the creature has been dead no longer than 10 days and didn't die of old age, the spell forms a new adult body for it and then calls the soul to enter that body. If the target's soul isn't free or willing to do so, the spell fails.</p><p>The magic fashions a new body for the creature to inhabit, which likely causes the creature's ancestry to change. The DM can consult the following table to determine what form the creature takes when restored to life, or the DM chooses a form.</p><table><thead><tr><th align=\"center\">1d1000</th><th align=\"left\">Ancestry</th></tr></thead><tbody><tr><td align=\"center\">001\u2013313</td><td align=\"left\">Human</td></tr><tr><td align=\"center\">314\u2013488</td><td align=\"left\">Elf</td></tr><tr><td align=\"center\">489\u2013665</td><td align=\"left\">Dwarf</td></tr><tr><td align=\"center\">666\u2013792</td><td align=\"left\">Halfing</td></tr><tr><td align=\"center\">793\u2013823</td><td align=\"left\">Dragonborn</td></tr><tr><td align=\"center\">824\u2013854</td><td align=\"left\">Lizardfolk</td></tr><tr><td align=\"center\">855\u2013875</td><td align=\"left\">Tabaxi</td></tr><tr><td align=\"center\">876\u2013896</td><td align=\"left\">Triton</td></tr><tr><td align=\"center\">897\u2013912</td><td align=\"left\">Goliath</td></tr><tr><td align=\"center\">913\u2013941</td><td align=\"left\">Kenku</td></tr><tr><td align=\"center\">942\u2013954</td><td align=\"left\">Aarakocra</td></tr><tr><td align=\"center\">955\u2013957</td><td align=\"left\">Genasi, fire</td></tr><tr><td align=\"center\">958\u2013960</td><td align=\"left\">Genasi, water</td></tr><tr><td align=\"center\">961\u2013963</td><td align=\"left\">Genasi, earth</td></tr><tr><td align=\"center\">964\u2013966</td><td align=\"left\">Genasi, air</td></tr><tr><td align=\"center\">967\u2013979</td><td align=\"left\">Tiefling</td></tr><tr><td align=\"center\">980\u2013983</td><td align=\"left\">Aasimar, protector</td></tr><tr><td align=\"center\">984\u2013987</td><td align=\"left\">Aasimar, scourge</td></tr><tr><td align=\"center\">988\u2013990</td><td align=\"left\">Aasimar, fallen</td></tr><tr><td align=\"center\">991\u2013994</td><td align=\"left\">Gith</td></tr><tr><td align=\"center\">995\u2013997</td><td align=\"left\">Changeling</td></tr><tr><td align=\"center\">998\u2013000</td><td align=\"left\">Tortle</td></tr></tbody></table><p>The reincarnated creature recalls its former life and experiences. It retains the capabilities it had in its original form, except it exchanges its original ancestry for the new one and changes its ancestral traits accordingly.</p><p>Coming back from the dead is an ordeal. The target takes a -4 penalty to all attack rolls, saving throws, and ability checks. Every time the target finishes a long rest, the penalty is reduced by 1 until it disappears.</p><p><strong><em>At Higher Levels:</em></strong> When you cast this spell using a spell slot of 7th level or higher and use material components worth at least 5,000 gp, you can choose a creature that has been dead no longer than a century.</p><p>Casting this spell to restore life to a creature that has been dead for one year or longer taxes you greatly. Until you finish a long rest, you can't cast spells again, and you have disadvantage on all attack rolls, ability checks, and saving throws.</p>",
       "chat": "",
       "unidentified": ""
     },
@@ -25,7 +25,7 @@
     "target": {
       "value": 1,
       "width": null,
-      "units": "spec",
+      "units": "",
       "type": "creature"
     },
     "range": {
@@ -82,7 +82,7 @@
       "prepared": false
     },
     "scaling": {
-      "mode": "none",
+      "mode": "level",
       "formula": ""
     }
   },
@@ -96,7 +96,7 @@
     "systemVersion": "2.1.0",
     "coreVersion": "10.291",
     "createdTime": 1661787234245,
-    "modifiedTime": 1671220971512,
-    "lastModifiedBy": "dnd5ebuilder0000"
+    "modifiedTime": 1675989934781,
+    "lastModifiedBy": "RightHandOfVecna"
   }
 }

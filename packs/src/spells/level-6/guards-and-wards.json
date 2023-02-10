@@ -7,7 +7,7 @@
   "type": "spell",
   "system": {
     "description": {
-      "value": "<p>You create a ward that protects up to 2,500 square feet of floor space (an area 50 feet square, or one hundred 5-foot squares or twenty-five 10-foot squares). The warded area can be up to 20 feet tall, and shaped as you desire. You can ward several stories of a stronghold by dividing the area among them, as long as you can walk into each contiguous area while you are casting the spell.</p><p>When you cast this spell, you can specify individuals that are unaffected by any or all of the Effects that you choose. You can also specify a password that, when spoken aloud, makes the speaker immune to these Effects.</p><p>Guards and wards creates the following Effects within the warded area.</p><p><strong>Corridors</strong>. Fog fills all the warded corridors, making them heavily obscured. In addition, at each intersection or branching passage offering a choice of direction, there is a 50 percent chance that a creature other than you will believe it is going in the opposite direction from the one it chooses.</p><p><strong>Doors</strong>. All doors in the warded area are magically locked, as if sealed by an Arcane Lock spell. In addition, you can cover up to ten doors with an Illusion (equivalent to the illusory object function of the Minor Illusion spell) to make them appear as plain sections of wall.</p><p><strong>Stairs</strong>. Webs fill all stairs in the warded area from top to bottom, as the web spell. These strands regrow in 10 minutes if they are burned or torn away while guards and wards lasts.</p><p><strong>Other Spell Effect</strong>. You can place your choice of one of the following magical Effects within the warded area of the stronghold.</p>\n<ul>\n<li>Place Dancing Lights in four corridors. You can designate a simple program that the lights repeat as long as guards and wards lasts.</li>\n<li>Place Magic Mouth in two locations.</li>\n<li>Place Stinking Cloud in two locations. The vapors appear in the places you designate; they return within 10 minutes if dispersed by wind while guards and wards lasts.</li>\n<li>Place a constant Gust of Wind in one corridor or room.</li>\n<li>Place a Suggestion in one location. You select an area of up to 5 feet square, and any creature that enters or passes through the area receives the Suggestion mentally.</li>\n</ul>\n<p>The whole warded area radiates magic. A Dispel Magic cast on a specific effect, if successful, removes only that effect.</p><p>You can create a permanently guarded and warded structure by casting this spell there every day for one year.</p>",
+      "value": "<p>You create a ward that protects up to 2,500 square feet of floor space (an area 50 feet square, or one hundred 5-foot squares or twenty-five 10-foot squares). The warded area can be up to 20 feet tall, and shaped as you desire. You can ward several stories of a stronghold by dividing the area among them, as long as you can walk into each contiguous area while you are casting the spell.</p><p>When you cast this spell, you can specify individuals that are unaffected by any or all of the effects that you choose. You can also specify a password that, when spoken aloud, makes the speaker immune to these effects.</p><p>Guards and wards creates the following effects within the warded area.</p><p><strong>Corridors:</strong> Fog fills all the warded corridors, making them heavily obscured. In addition, at each intersection or branching passage offering a choice of direction, there is a 50 percent chance that a creature other than you will believe it is going in the opposite direction from the one it chooses.</p><p><strong>Doors:</strong> All doors in the warded area are magically locked, as if sealed by an @Compendium[dnd5e.spells.8cse7rit0oswRPUP]{Arcane Lock} spell. In addition, you can cover up to ten doors with an illusion (equivalent to the illusory object function of the @Compendium[dnd5e.spells.oIzA2MEHwxhtQneU]{Minor Illusion} spell) to make them appear as plain sections of wall.</p><p><strong>Stairs:</strong> Webs fill all stairs in the warded area from top to bottom, as the @Compendium[dnd5e.spells.UJJu9c2UvCzVljiP]{Web} spell. These strands regrow in 10 minutes if they are burned or torn away while guards and wards lasts.</p><p><strong>Other Spell Effect:</strong> You can place your choice of one of the following magical effects within the warded area of the stronghold.</p><ul><li>Place @Compendium[dnd5e.spells.CAxSzHWizrafT033]{Dancing Lights} in four corridors. You can designate a simple program that the lights repeat as long as @Compendium[dnd5e.spells.yw0tYQkOMCgKZ8Ur]{Guards and Wards} lasts.</li><li>Place @Compendium[dnd5e.spells.7v06rdmUakoTk1LQ]{Magic Mouth} in two locations.</li><li>Place @Compendium[dnd5e.spells.TwlD4PLcltv7Xh7j]{Stinking Cloud} in two locations. The vapors appear in the places you designate they return within 10 minutes if dispersed by wind while @Compendium[dnd5e.spells.yw0tYQkOMCgKZ8Ur]{Guards and Wards} lasts.</li><li>Place a constant @Compendium[dnd5e.spells.FSMy6VAjDnXY9vWz]{Gust of Wind} in one corridor or room.</li><li>Place a @Compendium[dnd5e.spells.zMAWdyc8UVb37BK4]{Suggestion} in one location. You select an area of up to 5 feet square, and any creature that enters or passes through the area receives the suggestion mentally.</li></ul><p>The whole warded area radiates magic. A @Compendium[dnd5e.spells.15Fa6q1nH27XfbR8]{Dispel Magic} cast on a specific effect, if successful, removes only that effect.</p><p>You can create a permanently guarded and warded structure by casting this spell there every day for one year.</p>",
       "chat": "",
       "unidentified": ""
     },
@@ -23,10 +23,10 @@
     },
     "cover": null,
     "target": {
-      "value": null,
+      "value": 5,
       "width": null,
-      "units": "",
-      "type": ""
+      "units": "ft",
+      "type": "square"
     },
     "range": {
       "value": null,
@@ -72,7 +72,7 @@
       "concentration": false
     },
     "materials": {
-      "value": "Burning incense, a small measure of brimstone and oil, a knotted string, a small amount of umber hulk blood, and a small silver rod worth at least 10gp",
+      "value": "Burning incense, a small measure of brimstone and oil, a knotted string, a small amount of umber hulk blood, and a small silver rod worth at least 10 gp",
       "consumed": false,
       "cost": 10,
       "supply": 0
@@ -96,7 +96,7 @@
     "systemVersion": "2.1.0",
     "coreVersion": "10.291",
     "createdTime": 1661787234244,
-    "modifiedTime": 1671220971489,
-    "lastModifiedBy": "dnd5ebuilder0000"
+    "modifiedTime": 1675989934345,
+    "lastModifiedBy": "RightHandOfVecna"
   }
 }

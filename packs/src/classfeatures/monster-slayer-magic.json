@@ -1,0 +1,88 @@
+{
+  "_id": "SFK4MZVAWOP74CPF",
+  "name": "Monster Slayer Magic",
+  "ownership": {
+    "default": 0
+  },
+  "type": "feat",
+  "system": {
+    "description": {
+      "value": "<p>You learn an additional spell when you reach certain levels in this class, as shown in the Monster Slayer Spells table. The spell counts as a ranger spell for you, but it doesn't count against the number of ranger spells you can prepare.</p>\n<h3>Monster Slayer Spells</h3>\n<table>\n<thead>\n<tr>\n<th align=\"center\">Ranger Level</th>\n<th align=\"center\">Spell</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td align=\"center\">3rd</td>\n<td align=\"center\">@Compendium[dnd5e.spells.xmDBqZhRVrtLP8h2]{Protection from Evil and Good}</td>\n</tr>\n<tr>\n<td align=\"center\">5th</td>\n<td align=\"center\">@Compendium[dnd5e.spells.CylBa7jR8DSbo8Z3]{Zone of Truth}</td>\n</tr>\n<tr>\n<td align=\"center\">9th</td>\n<td align=\"center\">@Compendium[dnd5e.spells.y8A4HfTwd93ypdEz]{Magic Circle}</td>\n</tr>\n<tr>\n<td align=\"center\">13th</td>\n<td align=\"center\">@Compendium[dnd5e.spells.pxpb2eOB6bv4phAf]{Banishment}</td>\n</tr>\n<tr>\n<td align=\"center\">17th</td>\n<td align=\"center\">@Compendium[dnd5e.spells.l9Ju5KE7bbn3WpTm]{Hold Monster}</td>\n</tr>\n</tbody>\n</table>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "SRD 5.1",
+    "activation": {
+      "type": "",
+      "cost": null,
+      "condition": ""
+    },
+    "duration": {
+      "value": "",
+      "units": ""
+    },
+    "cover": null,
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": ""
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": ""
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": null,
+      "recovery": ""
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
+    "ability": null,
+    "actionType": "",
+    "attackBonus": "",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "type": {
+      "value": "class",
+      "subtype": ""
+    },
+    "requirements": "Monster Slayer Conclave 1",
+    "recharge": {
+      "value": null,
+      "charged": false
+    }
+  },
+  "flags": {},
+  "img": "",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.1.0",
+    "coreVersion": "10.291",
+    "createdTime": 1675986803836,
+    "modifiedTime": 1675988226820,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  }
+}

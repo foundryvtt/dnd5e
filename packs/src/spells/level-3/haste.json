@@ -7,7 +7,7 @@
   "type": "spell",
   "system": {
     "description": {
-      "value": "<p>Choose a willing creature that you can see within range. Until the spell ends, the target's speed is doubled, it gains a +2 bonus to AC, it has advantage on Dexterity Saving Throws, and it gains an additional action on each of its turns. That action can be used only to take the Attack (one weapon attack only), Dash, Disengage, Hide, or Use an Object action.</p><p>When the spell ends, the target can't move or take Actions until after its next turn, as a wave of lethargy sweeps over it.</p>",
+      "value": "<p>Choose a willing creature that you can see within range. Until the spell ends, the target's speed is doubled, it gains a +2 bonus to AC, it has advantage on <strong>Dexterity saving throw</strong>s, and it gains an additional action on each of its turns. That action can be used only to take the Attack (one weapon attack only), Dash, Disengage, Hide, or Use an Object action.</p><p>When the spell ends, the target can't move or take actions until after its next turn, as a wave of lethargy sweeps over it.</p>",
       "chat": "",
       "unidentified": ""
     },
@@ -26,7 +26,7 @@
       "value": 1,
       "width": null,
       "units": "",
-      "type": "creature"
+      "type": "ally"
     },
     "range": {
       "value": 30,
@@ -45,7 +45,7 @@
       "amount": null
     },
     "ability": "",
-    "actionType": "util",
+    "actionType": "save",
     "attackBonus": "",
     "chatFlavor": "",
     "critical": {
@@ -58,7 +58,7 @@
     },
     "formula": "",
     "save": {
-      "ability": "",
+      "ability": "dex",
       "dc": null,
       "scaling": "spell"
     },
@@ -96,7 +96,7 @@
     "systemVersion": "2.1.0",
     "coreVersion": "10.291",
     "createdTime": 1661787234143,
-    "modifiedTime": 1671220970012,
-    "lastModifiedBy": "dnd5ebuilder0000"
+    "modifiedTime": 1675989934375,
+    "lastModifiedBy": "RightHandOfVecna"
   }
 }

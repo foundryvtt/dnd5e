@@ -7,7 +7,7 @@
   "type": "spell",
   "system": {
     "description": {
-      "value": "<p>Bolstering yourself with a necromantic facsimile of life, you gain 1d4 + 4 Temporary Hit Points for the Duration.</p><p><strong>At Higher Levels.</strong> When you cast this spell using a spell slot of 2nd level or higher, you gain 5 additional Temporary Hit Points for each slot level above 1st.</p>",
+      "value": "<p>Bolstering yourself with a necromantic facsimile of life, you gain 1d4+4 temporary hit points for the duration.</p><p><strong><em>At Higher Levels:</em></strong> When you cast this spell using a spell slot of 2nd level or higher, you gain 5 additional temporary hit points for each slot level above 1st.</p>",
       "chat": "",
       "unidentified": ""
     },
@@ -45,7 +45,7 @@
       "amount": null
     },
     "ability": "",
-    "actionType": "heal",
+    "actionType": "util",
     "attackBonus": "",
     "chatFlavor": "",
     "critical": {
@@ -88,7 +88,7 @@
     },
     "scaling": {
       "mode": "level",
-      "formula": "(@item.level - 1) * 5"
+      "formula": ""
     }
   },
   "sort": 0,
@@ -101,7 +101,7 @@
     "systemVersion": "2.1.0",
     "coreVersion": "10.291",
     "createdTime": 1661787234075,
-    "modifiedTime": 1671220968751,
-    "lastModifiedBy": "dnd5ebuilder0000"
+    "modifiedTime": 1675989934207,
+    "lastModifiedBy": "RightHandOfVecna"
   }
 }

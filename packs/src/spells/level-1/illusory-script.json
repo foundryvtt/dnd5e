@@ -7,7 +7,7 @@
   "type": "spell",
   "system": {
     "description": {
-      "value": "<p>You write on Parchment, paper, or some other suitable writing material and imbue it with a potent Illusion that lasts for the Duration.</p><p>To you and any creatures you designate when you cast the spell, the writing appears normal, written in your hand, and conveys whatever meaning you intended when you wrote the text. To all others, the writing appears as if it were written in an unknown or magical script that is unintelligible. Alternatively, you can cause the writing to appear to be an entirely different message, written in a different hand and language, though the language must be one you know.</p><p>Should the spell be dispelled, the original script and the Illusion both disappear.</p><p>A creature with Truesight can read the hidden message.</p>",
+      "value": "<p>You write on parchment, paper, or some other suitable writing material and imbue it with a potent illusion that lasts for the duration.</p><p>To you and any creatures you designate when you cast the spell, the writing appears normal, written in your hand, and conveys whatever meaning you intended when you wrote the text. To all others, the writing appears as if it were written in an unknown or magical script that is unintelligible. Alternatively, you can cause the writing to appear to be an entirely different message, written in a different hand and language, though the language must be one you know.</p><p>Should the spell be dispelled, the original script and the illusion both disappear.</p><p>A creature with truesight can read the hidden message.</p>",
       "chat": "",
       "unidentified": ""
     },
@@ -18,15 +18,15 @@
       "condition": ""
     },
     "duration": {
-      "value": "10",
-      "units": "day"
+      "value": "",
+      "units": "perm"
     },
     "cover": null,
     "target": {
-      "value": null,
+      "value": 1,
       "width": null,
       "units": "",
-      "type": ""
+      "type": "creature"
     },
     "range": {
       "value": null,
@@ -72,7 +72,7 @@
       "concentration": false
     },
     "materials": {
-      "value": "A lead-based ink worth at least 10gp, which the spell consumes",
+      "value": "A lead-based ink worth at least 10 gp, which the spell consumes",
       "consumed": true,
       "cost": 10,
       "supply": 0
@@ -96,7 +96,7 @@
     "systemVersion": "2.1.0",
     "coreVersion": "10.291",
     "createdTime": 1661787234078,
-    "modifiedTime": 1671220968772,
-    "lastModifiedBy": "dnd5ebuilder0000"
+    "modifiedTime": 1675989934440,
+    "lastModifiedBy": "RightHandOfVecna"
   }
 }

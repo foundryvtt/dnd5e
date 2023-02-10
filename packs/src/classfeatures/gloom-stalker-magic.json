@@ -1,0 +1,88 @@
+{
+  "_id": "6DCQPNI3UHUDSZF7",
+  "name": "Gloom Stalker Magic",
+  "ownership": {
+    "default": 0
+  },
+  "type": "feat",
+  "system": {
+    "description": {
+      "value": "<p>You learn an additional spell when you reach certain levels in this class, as shown in the Gloom Stalker Spells table. The spell counts as a ranger spell for you, but it doesn't count against the number of ranger spells you can prepare.</p>\n<h3>Gloom Stalker Spells</h3>\n<table>\n<thead>\n<tr>\n<th align=\"center\">Ranger Level</th>\n<th align=\"left\">Spell</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td align=\"center\">3rd</td>\n<td align=\"left\">@Compendium[dnd5e.spells.A3q2gTNqG6fvNGrv]{Disguise Self}</td>\n</tr>\n<tr>\n<td align=\"center\">5th</td>\n<td align=\"left\">@Compendium[dnd5e.spells.ap4dmtshjEbwU3Ts]{Rope Trick}</td>\n</tr>\n<tr>\n<td align=\"center\">9th</td>\n<td align=\"left\">@Compendium[dnd5e.spells.XXUDGFELgoskdOD0]{Fear}</td>\n</tr>\n<tr>\n<td align=\"center\">13th</td>\n<td align=\"left\">@Compendium[dnd5e.spells.tEpDmYZNGc9f5OhJ]{Greater Invisibility}</td>\n</tr>\n<tr>\n<td align=\"center\">17th</td>\n<td align=\"left\">@Compendium[dnd5e.spells.mbFw57uyfLkyiw5k]{Seeming}</td>\n</tr>\n</tbody>\n</table>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "SRD 5.1",
+    "activation": {
+      "type": "",
+      "cost": null,
+      "condition": ""
+    },
+    "duration": {
+      "value": "",
+      "units": ""
+    },
+    "cover": null,
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": ""
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": ""
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": null,
+      "recovery": ""
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
+    "ability": null,
+    "actionType": "",
+    "attackBonus": "",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "type": {
+      "value": "class",
+      "subtype": ""
+    },
+    "requirements": "Gloom Stalker Conclave 1",
+    "recharge": {
+      "value": null,
+      "charged": false
+    }
+  },
+  "flags": {},
+  "img": "",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.1.0",
+    "coreVersion": "10.291",
+    "createdTime": 1675986803104,
+    "modifiedTime": 1675988226409,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  }
+}

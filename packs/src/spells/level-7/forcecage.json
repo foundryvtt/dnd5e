@@ -7,7 +7,7 @@
   "type": "spell",
   "system": {
     "description": {
-      "value": "<p>An immobile, Invisible, cube-shaped prison composed of magical force springs into existence around an area you choose within range. The prison can be a cage or a solid box, as you choose.</p><p>A prison in the shape of a cage can be up to 20 feet on a side and is made from 1/2-inch diameter bars spaced 1/2 inch apart.</p><p>A prison in the shape of a box can be up to 10 feet on a side, creating a solid barrier that prevents any matter from passing through it and blocking any Spells cast into or out from the area.</p><p>When you cast the spell, any creature that is completely inside the cage's area is trapped. Creatures only partially within the area, or those too large to fit inside the area, are pushed away from the center of the area until they are completely outside the area.</p><p>A creature inside the cage can't leave it by nonmagical means. If the creature tries to use teleportation or interplanar travel to leave the cage, it must first make a Charisma saving throw. On a success, the creature can use that magic to exit the cage. On a failure, the creature can't exit the cage and wastes the use of the spell or effect. The cage also extends into the Ethereal Plane, blocking ethereal travel.</p><p>This spell can't be dispelled by Dispel Magic.</p>",
+      "value": "<p>An immobile, invisible, cube-shaped prison composed of magical force springs into existence around an area you choose within range. The prison can be a cage or a solid box as you choose.</p><p>A prison in the shape of a cage can be up to 20 feet on a side and is made from 1/2-inch diameter bars spaced 1/2 inch apart.</p><p>A prison in the shape of a box can be up to 10 feet on a side, creating a solid barrier that prevents any matter from passing through it and blocking any spells cast into or out of the area.</p><p>When you cast the spell, any creature that is completely inside the cage's area is trapped. Creatures only partially within the area, or those too large to fit inside the area, are pushed away from the center of the area until they are completely outside the area.</p><p>A creature inside the cage can't leave it by nonmagical means. If the creature tries to use teleportation or interplanar travel to leave the cage, it must first make a <strong>Charisma saving throw</strong>. On a success, the creature can use that magic to exit the cage. On a failure, the creature can't exit the cage and wastes the use of the spell or effect. The cage also extends into the Ethereal Plane, blocking ethereal travel.</p><p>The prison is an object with an AC of 20 and 100 hit points. If reduced to 0 hit points, the spell ends.</p><p>This spell can't be dispelled by @Compendium[dnd5e.spells.15Fa6q1nH27XfbR8]{Dispel Magic}, but is instantly destroyed by @Compendium[dnd5e.spells.HBHbOGKNVVprSlwn]{Disintegrate} or @Compendium[dnd5e.spells.Eon0jzGzQRNluTPQ]{Antimagic Field}.</p>",
       "chat": "",
       "unidentified": ""
     },
@@ -23,10 +23,10 @@
     },
     "cover": null,
     "target": {
-      "value": 20,
+      "value": 1,
       "width": null,
-      "units": "ft",
-      "type": "cube"
+      "units": "",
+      "type": "creature"
     },
     "range": {
       "value": 100,
@@ -72,7 +72,7 @@
       "concentration": false
     },
     "materials": {
-      "value": "Ruby dust worth 1500gp",
+      "value": "Ruby dust worth 1,500 gp",
       "consumed": false,
       "cost": 1500,
       "supply": 0
@@ -96,7 +96,7 @@
     "systemVersion": "2.1.0",
     "coreVersion": "10.291",
     "createdTime": 1661787234161,
-    "modifiedTime": 1671220970220,
-    "lastModifiedBy": "dnd5ebuilder0000"
+    "modifiedTime": 1675989934273,
+    "lastModifiedBy": "RightHandOfVecna"
   }
 }

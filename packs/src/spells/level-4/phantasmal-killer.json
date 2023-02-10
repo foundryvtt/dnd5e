@@ -7,7 +7,7 @@
   "type": "spell",
   "system": {
     "description": {
-      "value": "<p>You tap into the nightmares of a creature you can see within range and create an illusory manifestation of its deepest fears, visible only to that creature. The target must make a Wisdom saving throw. On a failed save, the target becomes Frightened for the Duration. At the end of each of the target's turns before the spell ends, the target must succeed on a Wisdom saving throw or take 4d10 psychic damage. On a successful save, the spell ends.</p><p><strong>At Higher Levels</strong>. When you cast this spell using a spell slot of 5th level or higher, the damage increases by 1d10 for each slot level above 4th.</p>",
+      "value": "<p>You tap into the nightmares of a creature you can see within range and create an illusory manifestation of its deepest fears, visible only to that creature. The target must make an <strong>Intelligence saving throw</strong>. On a failed save, the target becomes frightened for the duration. At the start of each of the target's turns before the spell ends, the target takes <strong>4d10 psychic damage</strong>.</p><p>As an action, the target can inspect the illusion and make an Intelligence (Investigation) check against your spell save DC. On a success, the spell ends.</p><p><strong><em>At Higher Levels:</em></strong> When you cast this spell using a spell slot of 5th level or higher, the damage increases by 1d10 for each slot level above 4th.</p>",
       "chat": "",
       "unidentified": ""
     },
@@ -63,7 +63,7 @@
     },
     "formula": "",
     "save": {
-      "ability": "wis",
+      "ability": "int",
       "dc": null,
       "scaling": "spell"
     },
@@ -101,7 +101,7 @@
     "systemVersion": "2.1.0",
     "coreVersion": "10.291",
     "createdTime": 1661787234093,
-    "modifiedTime": 1671220968922,
-    "lastModifiedBy": "dnd5ebuilder0000"
+    "modifiedTime": 1675989934658,
+    "lastModifiedBy": "RightHandOfVecna"
   }
 }

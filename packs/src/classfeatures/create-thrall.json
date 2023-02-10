@@ -1,0 +1,88 @@
+{
+  "_id": "ZYMI4EV32Y7KO3X3",
+  "name": "Create Thrall",
+  "ownership": {
+    "default": 0
+  },
+  "type": "feat",
+  "system": {
+    "description": {
+      "value": "<p>At 14th level, you gain the ability to infect a humanoid's mind with the alien magic of your patron. You can use your action to touch an incapacitated humanoid. That creature is then charmed by you until a @Compendium[dnd5e.spells.XZhdgVK3cLoxNCQl]{Remove Curse} spell is cast on it or the charmed condition is removed from it. While charmed in this way, the creature obeys your commands as in the @Compendium[dnd5e.spells.zMAWdyc8UVb37BK4]{Suggestion} spell.</p>\n<p>You can communicate telepathically with the charmed creature as long as the two of you are on the same plane of existence.</p>\n<p>When you create a new thrall, each of your existing thralls make a Charisma saving throw against your spell save DC. On a successful save, the creature breaks free of the charm in 1d100 minutes.</p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "SRD 5.1",
+    "activation": {
+      "type": "",
+      "cost": null,
+      "condition": ""
+    },
+    "duration": {
+      "value": "",
+      "units": ""
+    },
+    "cover": null,
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": ""
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": ""
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": null,
+      "recovery": ""
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
+    "ability": null,
+    "actionType": "",
+    "attackBonus": "",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "type": {
+      "value": "class",
+      "subtype": ""
+    },
+    "requirements": "The Great Old One 14",
+    "recharge": {
+      "value": null,
+      "charged": false
+    }
+  },
+  "flags": {},
+  "img": "",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.1.0",
+    "coreVersion": "10.291",
+    "createdTime": 1675986802209,
+    "modifiedTime": 1675988226065,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "_id": "D8PHUMFD3CPOORIV",
+  "name": "Exalted Champion",
+  "ownership": {
+    "default": 0
+  },
+  "type": "feat",
+  "system": {
+    "description": {
+      "value": "<p>At 20th level, your presence on the field of battle is an inspiration to those dedicated to your cause. You can use a bonus action to gain the following benefits for 1 hour:</p>\n<ul>\n<li>You have resistance to bludgeoning, piercing, and slashing damage.</li>\n<li>Your allies have advantage on death saving throws while within 30 feet of you.</li>\n<li>You have advantage on Wisdom saving throws, as do your allies within 30 feet of you.</li>\n</ul>\n<p>This effect ends early if you are incapacitated or die. Once you use this feature, you can't use it again until you finish a long rest, unless you expend a 5th-level spell slot to use it again.</p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "SRD 5.1",
+    "activation": {
+      "type": "",
+      "cost": null,
+      "condition": ""
+    },
+    "duration": {
+      "value": "",
+      "units": ""
+    },
+    "cover": null,
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": ""
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": ""
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": null,
+      "recovery": ""
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
+    "ability": null,
+    "actionType": "",
+    "attackBonus": "",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "type": {
+      "value": "class",
+      "subtype": ""
+    },
+    "requirements": "Oath of the Crown 20",
+    "recharge": {
+      "value": null,
+      "charged": false
+    }
+  },
+  "flags": {},
+  "img": "",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.1.0",
+    "coreVersion": "10.291",
+    "createdTime": 1675986802947,
+    "modifiedTime": 1675988226275,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  }
+}

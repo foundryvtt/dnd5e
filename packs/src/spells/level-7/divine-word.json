@@ -7,7 +7,7 @@
   "type": "spell",
   "system": {
     "description": {
-      "value": "<p>You utter a divine word, imbued with the power that shaped the world at the dawn of Creation. Choose any number of creatures you can see within range. Each creature that can hear you must make a Charisma saving throw. On a failed save, a creature suffers an effect based on its current hit points:</p>\n<ul>\n<li>50 Hit Points or fewer: Deafened for 1 minute</li>\n<li>40 Hit Points or fewer: Deafened and Blinded for 10 minutes</li>\n<li>30 Hit Points or fewer: Blinded, Deafened, and Stunned for 1 Hour</li>\n<li>20 Hit Points or fewer: killed instantly</li>\n</ul>\n<p>Regardless of its current Hit Points, a Celestial, an elemental, a fey, or a fiend that fails its save is forced back to its plane of Origin (if it isn't there already) and can't return to your current plane for 24 hours by any means short of a wish spell.</p>",
+      "value": "<p>You utter a divine word, imbued with the power that shaped the world at the dawn of creation. Choose any number of creatures you can see within range. Each creature that can hear you must make a <strong>Charisma saving throw</strong>. On a failed save, a creature suffers an effect based on its current hit points:</p><ul><li>50 hit points or fewer: deafened for 1 minute</li><li>40 hit points or fewer: deafened and blinded for 10 minutes</li><li>30 hit points or fewer: blinded, deafened, and stunned for 1 hour</li><li>20 hit points or fewer: killed instantly</li></ul><p>Regardless of its current hit points, a celestial, an elemental, a fey, or a fiend that fails its save is forced back to its plane of origin (if it isn't there already) and can't return to your current plane for 24 hours by any means short of a @Compendium[dnd5e.spells.3okM6Gn63zzEULkz]{Wish} spell.</p>",
       "chat": "",
       "unidentified": ""
     },
@@ -23,9 +23,9 @@
     },
     "cover": null,
     "target": {
-      "value": null,
+      "value": 1,
       "width": null,
-      "units": "any",
+      "units": "",
       "type": "creature"
     },
     "range": {
@@ -96,7 +96,7 @@
     "systemVersion": "2.1.0",
     "coreVersion": "10.291",
     "createdTime": 1661787234144,
-    "modifiedTime": 1671220970020,
-    "lastModifiedBy": "dnd5ebuilder0000"
+    "modifiedTime": 1675989934095,
+    "lastModifiedBy": "RightHandOfVecna"
   }
 }

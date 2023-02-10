@@ -1,0 +1,88 @@
+{
+  "_id": "QOAD9Q26GXKHQRWP",
+  "name": "Warmth of the Sun",
+  "ownership": {
+    "default": 0
+  },
+  "type": "feat",
+  "system": {
+    "description": {
+      "value": "<p>Beginning at 2nd level, when you use a druid spell to heal one or more creatures, those creatures gain temporary hit points equal to 1d4 + your Wisdom modifier if they have more than half of their maximum hit points. These temporary hit points remain until the affected creature completes a short or long rest.</p>\n<p>Additionally, when you deal fire or radiant damage with a druid spell, you gain temporary hit points equal to 1d4 + your Wisdom modifier.</p>\n<p>The number of temporary hit points gained in both instances increases to 1d6 + your Wisdom modifier when you reach 5th druid level, 1d8 + your Wisdom modifier when you reach 11th druid level, and 1d10 + your Wisdom modifier when you reach 17th druid level.</p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "SRD 5.1",
+    "activation": {
+      "type": "",
+      "cost": null,
+      "condition": ""
+    },
+    "duration": {
+      "value": "",
+      "units": ""
+    },
+    "cover": null,
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": ""
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": ""
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": null,
+      "recovery": ""
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
+    "ability": null,
+    "actionType": "",
+    "attackBonus": "",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "type": {
+      "value": "class",
+      "subtype": ""
+    },
+    "requirements": "Circle of the Sun 2",
+    "recharge": {
+      "value": null,
+      "charged": false
+    }
+  },
+  "flags": {},
+  "img": "",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.1.0",
+    "coreVersion": "10.291",
+    "createdTime": 1675986804789,
+    "modifiedTime": 1675988227545,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  }
+}

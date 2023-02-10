@@ -1,0 +1,88 @@
+{
+  "_id": "NEZNUGAZUA51FNDE",
+  "name": "Arcane Shot",
+  "ownership": {
+    "default": 0
+  },
+  "type": "feat",
+  "system": {
+    "description": {
+      "value": "<p>At 3rd level, you learn to unleash special magical effects with some of your shots. When you gain this feature, you learn two Arcane Shot options of your choice (see \"Arcane Shot Options\" below).</p>\n<p>Once per turn when you fire an arrow from a shortbow or longbow as part of the Attack action, you can apply one of your Arcane Shot options to that arrow. You decide to use the option when the arrow hits a creature, unless the option doesn't involve an attack roll. You begin with two uses of this ability, and you regain all expended uses of it when you finish a short or long rest.</p>\n<p>You gain an additional Arcane Shot option of your choice when you reach certain levels in this class: 7th, 10th, 15th, and 18th level. Each option also improves when you become an 18th-level fighter. When you gain an additional option in this way, you also gain an additional use of this ability.</p>\n<p>The Arcane Shot feature lets you choose options for it at certain levels. The options are presented here in alphabetical order. They are all magical effects, and each one is associated with one of the schools of magic.</p>\n<p>If an option requires a saving throw, your Arcane Shot save DC equals 8 + your proficiency bonus + your Intelligence modifier.</p>\n<p>@UUID[Compendium.dnd5e.classfeatures.P1OAOH87NP24QICC]{Banishing Arrow}</p>\n<p>@UUID[Compendium.dnd5e.classfeatures.OOE042FW1T9THR6W]{Beguiling Arrow}</p>\n<p>@UUID[Compendium.dnd5e.classfeatures.MBGBRLIWDP67F2O0]{Bursting Arrow}</p>\n<p>@UUID[Compendium.dnd5e.classfeatures.QHTAJBL9YCMSMA2Q]{Enfeebling Arrow}</p>\n<p>@UUID[Compendium.dnd5e.classfeatures.OKOFJU4EF6MNOW40]{Grasping Arrow}</p>\n<p>@UUID[Compendium.dnd5e.classfeatures.IJK1FCHUVQCVWXDU]{Piercing Arrow}</p>\n<p>@UUID[Compendium.dnd5e.classfeatures.9QO6HYY1E1LTW557]{Seeking Arrow}</p>\n<p>@UUID[Compendium.dnd5e.classfeatures.OBHMGO81HQ5WQVPC]{Shadow Arrow}</p>\n<section class=\"secret foundry-note\">\n<p><strong>Foundry Note</strong></p>\n<p>You can drag your choices from the above onto your character sheet and it will automatically update.</p>\n</section>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "SRD 5.1",
+    "activation": {
+      "type": "",
+      "cost": null,
+      "condition": ""
+    },
+    "duration": {
+      "value": "",
+      "units": ""
+    },
+    "cover": null,
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": ""
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": ""
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": null,
+      "recovery": ""
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
+    "ability": null,
+    "actionType": "",
+    "attackBonus": "",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "type": {
+      "value": "class",
+      "subtype": ""
+    },
+    "requirements": "Arcane Archer 3",
+    "recharge": {
+      "value": null,
+      "charged": false
+    }
+  },
+  "flags": {},
+  "img": "",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.1.0",
+    "coreVersion": "10.291",
+    "createdTime": 1675986801804,
+    "modifiedTime": 1675989937929,
+    "lastModifiedBy": "RightHandOfVecna"
+  }
+}

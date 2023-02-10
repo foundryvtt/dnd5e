@@ -1,0 +1,102 @@
+{
+  "_id": "7NPLYPESNCZV7U64",
+  "name": "Draconic Mischief",
+  "ownership": {
+    "default": 0
+  },
+  "type": "spell",
+  "system": {
+    "description": {
+      "value": "<p>You fill a 20-foot cube you can see within range with fey and draconic magic. Roll on the Mischievous Surge table to determine the magical effect produced, and roll again at the start of each of your turns until the spell ends. You can move the cube up to 10 feet before you roll.</p><h5>Mischievous Surge</h5><table><thead><tr><th align=\"center\">d4</th><th align=\"left\">Effect</th></tr></thead><tbody><tr><td align=\"center\">1</td><td align=\"left\">The smell of apple pie fills the air, and each creature in the cube must succeed on a <strong>Wisdom saving throw</strong> or become charmed by you until the start of your next turn.</td></tr><tr><td align=\"center\">2</td><td align=\"left\">Bouquets of flowers appear all around, and each creature in the cube must succeed on a <strong>Dexterity saving throw</strong> or be blinded until the start of your next turn as the flowers spray water in their faces.</td></tr><tr><td align=\"center\">3</td><td align=\"left\">Each creature in the cube must succeed on a <strong>Wisdom saving throw</strong> or begin giggling until the start of your next turn. A giggling creature is incapacitated and uses all its movement to move in a random direction.</td></tr><tr><td align=\"center\">4</td><td align=\"left\">Drops of molasses hover in the cube, making it difficult terrain until the start of your next turn.</td></tr></tbody></table>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "SRD 5.1",
+    "activation": {
+      "type": "action",
+      "cost": 1,
+      "condition": ""
+    },
+    "duration": {
+      "value": "1",
+      "units": "minute"
+    },
+    "cover": null,
+    "target": {
+      "value": 20,
+      "width": null,
+      "units": "ft",
+      "type": "cube"
+    },
+    "range": {
+      "value": 60,
+      "long": null,
+      "units": "ft"
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": null,
+      "recovery": ""
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
+    "ability": "",
+    "actionType": "save",
+    "attackBonus": "",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "wis",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "level": 2,
+    "school": "ill",
+    "components": {
+      "vocal": false,
+      "somatic": true,
+      "material": true,
+      "ritual": false,
+      "concentration": true
+    },
+    "materials": {
+      "value": "A piece of crust from an apple pie",
+      "consumed": false,
+      "cost": 0,
+      "supply": 0
+    },
+    "preparation": {
+      "mode": "prepared",
+      "prepared": false
+    },
+    "scaling": {
+      "mode": "none",
+      "formula": ""
+    }
+  },
+  "sort": 0,
+  "flags": {},
+  "img": "icons/magic/control/hypnosis-mesmerism-eye.webp",
+  "effects": [],
+  "folder": null,
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.1.0",
+    "coreVersion": "10.291",
+    "createdTime": 1675986797515,
+    "modifiedTime": 1675989934110,
+    "lastModifiedBy": "RightHandOfVecna"
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "_id": "G5CW086RB7HZNLRT",
+  "name": "Expanded Spell List (The Undying)",
+  "ownership": {
+    "default": 0
+  },
+  "type": "feat",
+  "system": {
+    "description": {
+      "value": "<p>The Undying lets you choose from an expanded list of spells when you learn a warlock spell. The following spells are added to the warlock spell list for you.</p>\n<h3>Undying Expanded Spells</h3>\n<table>\n<thead>\n<tr>\n<th align=\"center\">Spell Level</th>\n<th align=\"left\">Spells</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td align=\"center\">1st</td>\n<td align=\"left\">@Compendium[dnd5e.spells.7e3QXF10hLNDEdr6]{False Life}, @Compendium[dnd5e.spells.E9J7WRW1WOWKJXGX]{Ray of Sickness}</td>\n</tr>\n<tr>\n<td align=\"center\">2nd</td>\n<td align=\"left\">@Compendium[dnd5e.spells.zwGsAv6kmwzYGhh3]{Blindness/Deafness}, @Compendium[dnd5e.spells.5VhqFROQYjr1P9lp]{Silence}</td>\n</tr>\n<tr>\n<td align=\"center\">3rd</td>\n<td align=\"left\">@Compendium[dnd5e.spells.L840N7DS5O1GZCNA]{Feign Death}, @Compendium[dnd5e.spells.I2LUSF5ogc7Bj62e]{Speak with Dead}</td>\n</tr>\n<tr>\n<td align=\"center\">4th</td>\n<td align=\"left\">@Compendium[dnd5e.spells.4OSNOLJJSMH87P6F]{Aura of Life}, @Compendium[dnd5e.spells.VtCXMdyM6mAdIJZb]{Death Ward}</td>\n</tr>\n<tr>\n<td align=\"center\">5th</td>\n<td align=\"left\">@Compendium[dnd5e.spells.CjIq8Ed7bu3vVwT1]{Contagion}, @Compendium[dnd5e.spells.W4Qx5z0id6da0vqg]{Legend Lore}</td>\n</tr>\n</tbody>\n</table>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "SRD 5.1",
+    "activation": {
+      "type": "",
+      "cost": null,
+      "condition": ""
+    },
+    "duration": {
+      "value": "",
+      "units": ""
+    },
+    "cover": null,
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": ""
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": ""
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": null,
+      "recovery": ""
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
+    "ability": null,
+    "actionType": "",
+    "attackBonus": "",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "type": {
+      "value": "class",
+      "subtype": ""
+    },
+    "requirements": "The Undying 1",
+    "recharge": {
+      "value": null,
+      "charged": false
+    }
+  },
+  "flags": {},
+  "img": "",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.1.0",
+    "coreVersion": "10.291",
+    "createdTime": 1675986802969,
+    "modifiedTime": 1675988226292,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  }
+}

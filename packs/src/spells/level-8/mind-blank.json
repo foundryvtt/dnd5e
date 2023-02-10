@@ -7,7 +7,7 @@
   "type": "spell",
   "system": {
     "description": {
-      "value": "<p>Until the spell ends, one willing creature you touch is immune to psychic damage, any effect that would sense its emotions or read its thoughts, Divination Spells, and the Charmed condition. The spell even foils Wish spells and Spells or Effects of similar power used to affect the target's mind or to gain information about the target.</p>",
+      "value": "<p>Until the spell ends, one willing creature you touch is immune to psychic damage, any effect that would sense its emotions or read its thoughts, divination spells, and the charmed condition. The spell even foils wish spells and spells or effects of similar power used to affect the target's mind or to gain information about the target.</p>",
       "chat": "",
       "unidentified": ""
     },
@@ -26,12 +26,12 @@
       "value": 1,
       "width": null,
       "units": "",
-      "type": "creature"
+      "type": "ally"
     },
     "range": {
-      "value": null,
+      "value": 60,
       "long": null,
-      "units": "touch"
+      "units": "ft"
     },
     "uses": {
       "value": null,
@@ -96,7 +96,7 @@
     "systemVersion": "2.1.0",
     "coreVersion": "10.291",
     "createdTime": 1661787234171,
-    "modifiedTime": 1671220970334,
-    "lastModifiedBy": "dnd5ebuilder0000"
+    "modifiedTime": 1675989934594,
+    "lastModifiedBy": "RightHandOfVecna"
   }
 }

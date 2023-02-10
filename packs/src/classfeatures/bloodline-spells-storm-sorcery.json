@@ -1,0 +1,88 @@
+{
+  "_id": "9W54BC16EIQ3QFTS",
+  "name": "Bloodline Spells (Storm Sorcery)",
+  "ownership": {
+    "default": 0
+  },
+  "type": "feat",
+  "system": {
+    "description": {
+      "value": "<p>Your association with the elemental magic of air grants you access to certain spells. Starting at 1st level when you choose this origin, and again at 3rd, 5th, 7th, and 9th level, you learn the spells listed for that level in the Storm Sorcery Spells table. The spells count as sorcerer spells for you, but don't count against the number of sorcerer spells you know.</p>\n<h3>Storm Sorcery Spells</h3>\n<table>\n<thead>\n<tr>\n<th align=\"center\">Sorcerer Level</th>\n<th align=\"left\">Spells</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td align=\"center\">1st</td>\n<td align=\"left\">@Compendium[dnd5e.spells.IBJmWjzbQGu7M4UX]{Fog Cloud}, @Compendium[dnd5e.spells.WTbOQBsarsL1LuXJ]{Thunderwave}</td>\n</tr>\n<tr>\n<td align=\"center\">3rd</td>\n<td align=\"left\">@Compendium[dnd5e.spells.FSMy6VAjDnXY9vWz]{Gust of Wind}, @Compendium[dnd5e.spells.MRxldJd6C4bsBo3O]{Levitate}</td>\n</tr>\n<tr>\n<td align=\"center\">5th</td>\n<td align=\"left\">@Compendium[dnd5e.spells.ehvmg9U9fcMEhE4z]{Call Lightning}, @Compendium[dnd5e.spells.AXF8FC77X03I6OHS]{Thunder Step}</td>\n</tr>\n<tr>\n<td align=\"center\">7th</td>\n<td align=\"left\">@Compendium[dnd5e.spells.62U29TP1TZ0UXU5T]{Summon Elemental}, @Compendium[dnd5e.spells.VWY728O3B37B7AO6]{Storm Sphere}</td>\n</tr>\n<tr>\n<td align=\"center\">9th</td>\n<td align=\"left\">@Compendium[dnd5e.spells.VZM3TIJW1UO5DI0L]{Control Winds}, @Compendium[dnd5e.spells.OM5VDEON05735N07]{Maelstrom}</td>\n</tr>\n</tbody>\n</table>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "SRD 5.1",
+    "activation": {
+      "type": "",
+      "cost": null,
+      "condition": ""
+    },
+    "duration": {
+      "value": "",
+      "units": ""
+    },
+    "cover": null,
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": ""
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": ""
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": null,
+      "recovery": ""
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
+    "ability": null,
+    "actionType": "",
+    "attackBonus": "",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "type": {
+      "value": "class",
+      "subtype": ""
+    },
+    "requirements": "Storm Sorcery 1",
+    "recharge": {
+      "value": null,
+      "charged": false
+    }
+  },
+  "flags": {},
+  "img": "",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.1.0",
+    "coreVersion": "10.291",
+    "createdTime": 1675986801974,
+    "modifiedTime": 1675988225917,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  }
+}

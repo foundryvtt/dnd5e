@@ -1,0 +1,88 @@
+{
+  "_id": "S1F22LM7SR5XRYE2",
+  "name": "Oath Spells (Oath of the Crown)",
+  "ownership": {
+    "default": 0
+  },
+  "type": "feat",
+  "system": {
+    "description": {
+      "value": "<p>You gain oath spells at the paladin levels listed.</p>\n<h3>Oath of the Crown Spells</h3>\n<table>\n<thead>\n<tr>\n<th align=\"center\">Paladin Level</th>\n<th align=\"left\">Spells</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td align=\"center\">3rd</td>\n<td align=\"left\">@Compendium[dnd5e.spells.arzCrMRgcNiQuh43]{Command}, @Compendium[dnd5e.spells.CB00F1SJ48BQ9MVZ]{Compelled Duel}</td>\n</tr>\n<tr>\n<td align=\"center\">5th</td>\n<td align=\"left\">@Compendium[dnd5e.spells.JVhKeanAXZH62DrF]{Warding Bond}, @Compendium[dnd5e.spells.CylBa7jR8DSbo8Z3]{Zone of Truth}</td>\n</tr>\n<tr>\n<td align=\"center\">9th</td>\n<td align=\"left\">@Compendium[dnd5e.spells.OH8CQXDUQ29S3PSG]{Aura of Vitality}, @Compendium[dnd5e.spells.uCud2s4TjMfjiXUb]{Spirit Guardians}</td>\n</tr>\n<tr>\n<td align=\"center\">13th</td>\n<td align=\"left\">@Compendium[dnd5e.spells.pxpb2eOB6bv4phAf]{Banishment}, @Compendium[dnd5e.spells.TgHsuhNasPbhu8MO]{Guardian of Faith}</td>\n</tr>\n<tr>\n<td align=\"center\">17th</td>\n<td align=\"left\">@Compendium[dnd5e.spells.9UW9WRQ6ME45VET4]{Circle of Power}, @Compendium[dnd5e.spells.JQyigMNPiDnGI18b]{Geas}</td>\n</tr>\n</tbody>\n</table>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "SRD 5.1",
+    "activation": {
+      "type": "",
+      "cost": null,
+      "condition": ""
+    },
+    "duration": {
+      "value": "",
+      "units": ""
+    },
+    "cover": null,
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": ""
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": ""
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": null,
+      "recovery": ""
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
+    "ability": null,
+    "actionType": "",
+    "attackBonus": "",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "type": {
+      "value": "class",
+      "subtype": ""
+    },
+    "requirements": "Oath of the Crown 1",
+    "recharge": {
+      "value": null,
+      "charged": false
+    }
+  },
+  "flags": {},
+  "img": "",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.1.0",
+    "coreVersion": "10.291",
+    "createdTime": 1675986803885,
+    "modifiedTime": 1675988226852,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  }
+}

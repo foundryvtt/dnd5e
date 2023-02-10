@@ -7,7 +7,7 @@
   "type": "feat",
   "system": {
     "description": {
-      "value": "<p>At 20th level, as an action, you can emanate an aura of sunlight. For 1 minute, bright light shines from you in a 30-foot radius, and dim light shines 30 feet beyond that. Whenever an enemy creature starts its turn in the bright light, the creature takes 10 radiant damage.</p><p>In addition, for the duration, you have advantage on saving throws against spells cast by fiends or undead.</p><p>Once you use this feature, you can't use it again until you finish a long rest.</p>",
+      "value": "<p>At 20th level, as a bonus action, you can emanate an aura of sunlight. For 1 minute, bright light shines from you in a 30-foot radius, and dim light shines 30 feet beyond that. If you are knocked unconscious, the aura ends early.</p>\n<p>At the end of your turn, all enemy creatures in the bright light take 20 radiant damage. In addition, for the duration, you have advantage on saving throws against spells cast by fiends or undead.</p>\n<p>Once you use this feature, you can't use it again until you finish a long rest, unless you expend a 5th-level spell slot to use it again.</p>",
       "chat": "",
       "unidentified": ""
     },
@@ -87,7 +87,7 @@
     "systemVersion": "2.1.0",
     "coreVersion": "10.291",
     "createdTime": 1661787234345,
-    "modifiedTime": 1672334581365,
+    "modifiedTime": 1675986803142,
     "lastModifiedBy": "dnd5ebuilder0000"
   }
 }

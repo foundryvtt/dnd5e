@@ -1,0 +1,102 @@
+{
+  "_id": "0KD8ELTKS4YJN326",
+  "name": "Permanency",
+  "ownership": {
+    "default": 0
+  },
+  "type": "spell",
+  "system": {
+    "description": {
+      "value": "<p>You bind the threads of magic to greatly extend the duration of a spell. Choose one spell in range which is listed below, and expend an amount of residuum dust equal to 1,000 gp \u00d7 the level of the slot used for the other spell. That casting of the spell now lasts until it's dispelled.</p><p>You can make the following spells permanent: @Compendium[dnd5e.spells.7p9IuWrSWFgfyQo2]{Alarm}, @Compendium[dnd5e.spells.ATo0Eb63TDtnu6iA]{Animate Objects}, @Compendium[dnd5e.spells.4dSvfvTy2ZIJ3K4k]{Comprehend Languages}, @Compendium[dnd5e.spells.CAxSzHWizrafT033]{Dancing Lights}, @Compendium[dnd5e.spells.hJ6ZiA3fpoY8v9cp]{Darkvision}, @Compendium[dnd5e.spells.ghXTfe7sgCbgf1Q8]{Detect Magic}, @Compendium[dnd5e.spells.WahI41a3goVUg0x1]{Enlarge/Reduce}, @Compendium[dnd5e.spells.64D1gNZ4hx7SWG2x]{Forbiddance}, @Compendium[dnd5e.spells.n4JDcFKe5ikzYmAc]{Gentle Repose}, @Compendium[dnd5e.spells.yw0tYQkOMCgKZ8Ur]{Guards and Wards}, @Compendium[dnd5e.spells.FSMy6VAjDnXY9vWz]{Gust of Wind}, @Compendium[dnd5e.spells.0QPIFDNKNJNKVDKF]{Mighty Fortress}, @Compendium[dnd5e.spells.jmfu8zj4zjjzUbeh]{Prismatic Wall}, @Compendium[dnd5e.spells.NJgxf7pmSsBArIG7]{Private Sanctum}, @Compendium[dnd5e.spells.TASTMVE90TGJFHND]{Protection from Spell}, @Compendium[dnd5e.spells.DQzlB5Y3k791W5bH]{See Invisibility}, @Compendium[dnd5e.spells.TwlD4PLcltv7Xh7j]{Stinking Cloud}, @Compendium[dnd5e.spells.ZLI7ZO88H801BW96]{Temple of the Gods}, @Compendium[dnd5e.spells.gopnZvS0c2jD5FP8]{Tongues}, @Compendium[dnd5e.spells.uAwtVZkiSTyP6ORB]{Telepathic Bond}, @Compendium[dnd5e.spells.8aWtP5hcrmcEesBW]{Teleportation Circle}, @Compendium[dnd5e.spells.X3DrXgxjwI2dvkD6]{Wall of Fire}, @Compendium[dnd5e.spells.fzZnVKLmBMo2f5up]{Wall of Ice}, @Compendium[dnd5e.spells.o9ZCvuD2B1OTcubb]{Wall of Force}, @Compendium[dnd5e.spells.4251RI9M19OIQ7ZR]{Wall of Light}, @Compendium[dnd5e.spells.H7I209WVMAWLB4RC]{Wall of Sand}, @Compendium[dnd5e.spells.W2CPO4ABA3D0WW5I]{Wall of Water}, and @Compendium[dnd5e.spells.UJJu9c2UvCzVljiP]{Web}.</p><p>Alternatively, you can affect the @Compendium[dnd5e.spells.pB7XVYwdGNcUG935]{Glyph of Warding} or @Compendium[dnd5e.spells.B2kbmgbA2WQR00kx]{Symbol} spells. Once they are triggered they are suppressed for 24 hours, rather than being dispelled.</p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "SRD 5.1",
+    "activation": {
+      "type": "action",
+      "cost": 1,
+      "condition": ""
+    },
+    "duration": {
+      "value": "",
+      "units": "inst"
+    },
+    "cover": null,
+    "target": {
+      "value": 1,
+      "width": null,
+      "units": "",
+      "type": "object"
+    },
+    "range": {
+      "value": 10,
+      "long": null,
+      "units": "ft"
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": null,
+      "recovery": ""
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
+    "ability": "",
+    "actionType": "util",
+    "attackBonus": "",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "level": 5,
+    "school": "trs",
+    "components": {
+      "vocal": true,
+      "somatic": true,
+      "material": true,
+      "ritual": true,
+      "concentration": false
+    },
+    "materials": {
+      "value": "Residuum dust, which the spell consumes",
+      "consumed": true,
+      "cost": 0,
+      "supply": 0
+    },
+    "preparation": {
+      "mode": "prepared",
+      "prepared": false
+    },
+    "scaling": {
+      "mode": "none",
+      "formula": ""
+    }
+  },
+  "sort": 0,
+  "flags": {},
+  "img": "icons/magic/symbols/runes-star-pentagon-magenta.webp",
+  "effects": [],
+  "folder": null,
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.1.0",
+    "coreVersion": "10.291",
+    "createdTime": 1675986798083,
+    "modifiedTime": 1675989934649,
+    "lastModifiedBy": "RightHandOfVecna"
+  }
+}

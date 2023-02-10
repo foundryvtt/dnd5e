@@ -1,0 +1,88 @@
+{
+  "_id": "9J82PBZOOO9XJ26L",
+  "name": "Storm Aura",
+  "ownership": {
+    "default": 0
+  },
+  "type": "feat",
+  "system": {
+    "description": {
+      "value": "<p>Starting at 3rd level, you emanate a stormy, magical aura while you rage. The aura extends 10 feet from you in every direction, but not through total cover.</p>\n<p>Choose desert, sea, or tundra whenever you enter your rage. Your aura has an effect that activates when you enter your rage, and you can activate the effect again on each of your turns as a bonus action. Your aura's effect depends on that chosen environment, as detailed below.</p>\n<p>If your aura's effects require a saving throw, the DC equals 8 + your proficiency bonus + your Constitution modifier.</p>\n<p><strong><em>Desert.</em></strong> When this effect is activated, all other creatures in your aura take fire damage equal to your rage damage, as shown in the Rage Damage column of the Barbarian table.</p>\n<p><strong><em>Sea.</em></strong> When this effect is activated, you can choose one other creature you can see in your aura. The target must make a Dexterity saving throw. The target takes 1d6 lightning damage on a failed save, or half as much damage on a successful one. The damage increases when you reach certain levels in this class, increasing to 2d6 at 10th level, 3d6 at 15th level, and 4d6 at 20th level.</p>\n<p><strong><em>Tundra.</em></strong> When this effect is activated, each creature of your choice in your aura gains temporary hit points, as icy spirits inure it to suffering. The temporary hit points gained are equal to your rage damage, as shown in the Rage Damage column of the Barbarian table.</p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "SRD 5.1",
+    "activation": {
+      "type": "",
+      "cost": null,
+      "condition": ""
+    },
+    "duration": {
+      "value": "",
+      "units": ""
+    },
+    "cover": null,
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": ""
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": ""
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": null,
+      "recovery": ""
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
+    "ability": null,
+    "actionType": "",
+    "attackBonus": "",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "type": {
+      "value": "class",
+      "subtype": ""
+    },
+    "requirements": "Path of the Storm Herald 3",
+    "recharge": {
+      "value": null,
+      "charged": false
+    }
+  },
+  "flags": {},
+  "img": "",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.1.0",
+    "coreVersion": "10.291",
+    "createdTime": 1675986804561,
+    "modifiedTime": 1675988227355,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  }
+}

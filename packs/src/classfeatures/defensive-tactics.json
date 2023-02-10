@@ -7,7 +7,7 @@
   "type": "feat",
   "system": {
     "description": {
-      "value": "<p>At 7th level, you gain on of the following features of your choice.</p><p>@Compendium[dnd5e.classfeatures.pAQMJU5R9SGUmzHU]{Escape the Horde}</p><p>@Compendium[dnd5e.classfeatures.slelvrm83v9UAKZU]{Multiattack Defense}</p><p>@Compendium[dnd5e.classfeatures.zbHu0NvHuII8lR7W]{Steel Will}</p><p>You can drag your choice from the above onto your character sheet and it will automatically update.</p>",
+      "value": "<p>At 7th level, you gain one of the following features of your choice.</p>\n<p>@UUID[Compendium.dnd5e.classfeatures.pAQMJU5R9SGUmzHU]{Escape the Horde}</p>\n<p>@UUID[Compendium.dnd5e.classfeatures.slelvrm83v9UAKZU]{Multiattack Defense}</p>\n<p>@UUID[Compendium.dnd5e.classfeatures.zbHu0NvHuII8lR7W]{Steel Will}</p>\n<section class=\"secret foundry-note\">\n<p><strong>Foundry Note</strong></p>\n<p>You can drag your choices from the above onto your character sheet and it will automatically update.</p>\n</section>",
       "chat": "",
       "unidentified": ""
     },
@@ -66,7 +66,7 @@
       "value": "class",
       "subtype": ""
     },
-    "requirements": "Hunter 7",
+    "requirements": "Hunter Conclave 7",
     "recharge": {
       "value": null,
       "charged": false
@@ -82,7 +82,7 @@
     "systemVersion": "2.1.0",
     "coreVersion": "10.291",
     "createdTime": 1661787234384,
-    "modifiedTime": 1672334428063,
+    "modifiedTime": 1675989509161,
     "lastModifiedBy": "dnd5ebuilder0000"
   }
 }

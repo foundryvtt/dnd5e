@@ -1,0 +1,88 @@
+{
+  "_id": "QLILUSTSOOF67YRS",
+  "name": "Oath Spells (Oath of the Watchers)",
+  "ownership": {
+    "default": 0
+  },
+  "type": "feat",
+  "system": {
+    "description": {
+      "value": "<p>You gain oath spells at the paladin levels listed.</p>\n<h3>Oath of the Watchers Spells</h3>\n<table>\n<thead>\n<tr>\n<th align=\"center\">Paladin Level</th>\n<th align=\"left\">Spells</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td align=\"center\">3rd</td>\n<td align=\"left\">@Compendium[dnd5e.spells.7p9IuWrSWFgfyQo2]{Alarm}, @Compendium[dnd5e.spells.ghXTfe7sgCbgf1Q8]{Detect Magic}</td>\n</tr>\n<tr>\n<td align=\"center\">5th</td>\n<td align=\"left\">@Compendium[dnd5e.spells.bV3yun6MIuFj71Er]{Moonbeam}, @Compendium[dnd5e.spells.DQzlB5Y3k791W5bH]{See Invisibility}</td>\n</tr>\n<tr>\n<td align=\"center\">9th</td>\n<td align=\"left\">@Compendium[dnd5e.spells.15Fa6q1nH27XfbR8]{Dispel Magic}, @Compendium[dnd5e.spells.aU62xVUBYkAQWIHv]{Nondetection}</td>\n</tr>\n<tr>\n<td align=\"center\">13th</td>\n<td align=\"left\">@Compendium[dnd5e.spells.O6HFTNLVUF5XMP8M]{Aura of Purity}, @Compendium[dnd5e.spells.pxpb2eOB6bv4phAf]{Banishment}</td>\n</tr>\n<tr>\n<td align=\"center\">17th</td>\n<td align=\"left\">@Compendium[dnd5e.spells.l9Ju5KE7bbn3WpTm]{Hold Monster}, @Compendium[dnd5e.spells.fVbCxFRaORalHB20]{Scrying}</td>\n</tr>\n</tbody>\n</table>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "SRD 5.1",
+    "activation": {
+      "type": "",
+      "cost": null,
+      "condition": ""
+    },
+    "duration": {
+      "value": "",
+      "units": ""
+    },
+    "cover": null,
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": ""
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": ""
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": null,
+      "recovery": ""
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
+    "ability": null,
+    "actionType": "",
+    "attackBonus": "",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "type": {
+      "value": "class",
+      "subtype": ""
+    },
+    "requirements": "Oath of the Watchers 1",
+    "recharge": {
+      "value": null,
+      "charged": false
+    }
+  },
+  "flags": {},
+  "img": "",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.1.0",
+    "coreVersion": "10.291",
+    "createdTime": 1675986803887,
+    "modifiedTime": 1675988226854,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  }
+}

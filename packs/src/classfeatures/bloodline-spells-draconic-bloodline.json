@@ -1,0 +1,88 @@
+{
+  "_id": "6FYQ5AZTAGV7ROR9",
+  "name": "Bloodline Spells (Draconic Bloodline)",
+  "ownership": {
+    "default": 0
+  },
+  "type": "feat",
+  "system": {
+    "description": {
+      "value": "<p>Your association with the magic of dragons grants you access to certain spells. Starting at 1st level when you choose this origin, and again at 3rd, 5th, 7th, and 9th level, you learn the spells listed for that level in the Draconic Spells table. The spells count as sorcerer spells for you, but don't count against the number of sorcerer spells you know.</p>\n<h3>Draconic Spells</h3>\n<table>\n<thead>\n<tr>\n<th align=\"center\">Sorcerer Level</th>\n<th align=\"left\">Spells</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td align=\"center\">1st</td>\n<td align=\"left\">@Compendium[dnd5e.spells.W8PMMSESNGER9IH7]{Cause Fear}, @Compendium[dnd5e.spells.JP9HGWXH920PQ15Z]{Chromatic Orb}</td>\n</tr>\n<tr>\n<td align=\"center\">3rd</td>\n<td align=\"left\">@Compendium[dnd5e.spells.HMLDWBDO71VFLVSX]{Dragon's Breath}, @Compendium[dnd5e.spells.DQzlB5Y3k791W5bH]{See Invisibility}</td>\n</tr>\n<tr>\n<td align=\"center\">5th</td>\n<td align=\"left\">@Compendium[dnd5e.spells.yfbK8gZqESlaoY5t]{Fly}, @Compendium[dnd5e.spells.j8NtLXOOJ3GAKF8I]{Protection from Energy}</td>\n</tr>\n<tr>\n<td align=\"center\">7th</td>\n<td align=\"left\">@Compendium[dnd5e.spells.481AJ58VSK9TEKAN]{Elemental Bane}, @Compendium[dnd5e.spells.ReMbjfeOKoSj3O79]{Stoneskin}</td>\n</tr>\n<tr>\n<td align=\"center\">9th</td>\n<td align=\"left\">@Compendium[dnd5e.spells.91Sw6vOIaO7U8DvM]{Dominate Person}, @Compendium[dnd5e.spells.W4Qx5z0id6da0vqg]{Legend Lore}</td>\n</tr>\n</tbody>\n</table>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "SRD 5.1",
+    "activation": {
+      "type": "",
+      "cost": null,
+      "condition": ""
+    },
+    "duration": {
+      "value": "",
+      "units": ""
+    },
+    "cover": null,
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": ""
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": ""
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": null,
+      "recovery": ""
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
+    "ability": null,
+    "actionType": "",
+    "attackBonus": "",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "type": {
+      "value": "class",
+      "subtype": ""
+    },
+    "requirements": "Draconic Bloodline 1",
+    "recharge": {
+      "value": null,
+      "charged": false
+    }
+  },
+  "flags": {},
+  "img": "",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.1.0",
+    "coreVersion": "10.291",
+    "createdTime": 1675986801970,
+    "modifiedTime": 1675988225913,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  }
+}

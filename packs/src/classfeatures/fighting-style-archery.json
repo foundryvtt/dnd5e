@@ -1,11 +1,13 @@
 {
   "_id": "8YwPFv3UAPjWVDNf",
   "name": "Fighting Style: Archery",
+  "ownership": {
+    "default": 0
+  },
   "type": "feat",
-  "img": "icons/weapons/bows/shortbow-recurve-yellow.webp",
   "system": {
     "description": {
-      "value": "<p>You gain a +2 bonus to attack rolls you make with ranged weapons</p>",
+      "value": "<p>You gain a +2 bonus to attack rolls you make with ranged weapons.</p>",
       "chat": "",
       "unidentified": ""
     },
@@ -70,6 +72,8 @@
       "charged": false
     }
   },
+  "flags": {},
+  "img": "icons/weapons/bows/shortbow-recurve-yellow.webp",
   "effects": [
     {
       "_id": "F0Bh4n8Tu1ZZnwSr",
@@ -102,16 +106,12 @@
   ],
   "folder": null,
   "sort": 0,
-  "ownership": {
-    "default": 0
-  },
-  "flags": {},
   "_stats": {
     "systemId": "dnd5e",
     "systemVersion": "2.1.0",
     "coreVersion": "10.291",
     "createdTime": 1661787234341,
-    "modifiedTime": 1672334637061,
+    "modifiedTime": 1675986803025,
     "lastModifiedBy": "dnd5ebuilder0000"
   }
 }

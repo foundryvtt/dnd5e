@@ -1,0 +1,88 @@
+{
+  "_id": "UH3W98ORHZRT46CZ",
+  "name": "Arcana Domain Spells",
+  "ownership": {
+    "default": 0
+  },
+  "type": "feat",
+  "system": {
+    "description": {
+      "value": "<table>\n<thead>\n<tr>\n<th align=\"center\">Cleric Level</th>\n<th align=\"left\">Spells</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td align=\"center\">1st</td>\n<td align=\"left\">@Compendium[dnd5e.spells.ghXTfe7sgCbgf1Q8]{Detect Magic}, @Compendium[dnd5e.spells.41JIhpDyM9Anm7cs]{Magic Missile}</td>\n</tr>\n<tr>\n<td align=\"center\">3rd</td>\n<td align=\"left\">@Compendium[dnd5e.spells.Sgjrf8qqv97CCWM4]{Magic Weapon}, @Compendium[dnd5e.spells.3ISDQSAQGBB4A1IE]{Magic Aura}</td>\n</tr>\n<tr>\n<td align=\"center\">5th</td>\n<td align=\"left\">@Compendium[dnd5e.spells.15Fa6q1nH27XfbR8]{Dispel Magic}, @Compendium[dnd5e.spells.y8A4HfTwd93ypdEz]{Magic Circle}</td>\n</tr>\n<tr>\n<td align=\"center\">7th</td>\n<td align=\"left\">@Compendium[dnd5e.spells.ImlCJQwR1VL40Qem]{Arcane Eye}, @Compendium[dnd5e.spells.8sgwRh8NUNkn9Vi0]{Secret Chest}</td>\n</tr>\n<tr>\n<td align=\"center\">9th</td>\n<td align=\"left\">@Compendium[dnd5e.spells.42O2aNBW7vK90gTL]{Planar Binding}, @Compendium[dnd5e.spells.8aWtP5hcrmcEesBW]{Teleportation Circle}</td>\n</tr>\n</tbody>\n</table>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "SRD 5.1",
+    "activation": {
+      "type": "",
+      "cost": null,
+      "condition": ""
+    },
+    "duration": {
+      "value": "",
+      "units": ""
+    },
+    "cover": null,
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": ""
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": ""
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": null,
+      "recovery": ""
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
+    "ability": null,
+    "actionType": "",
+    "attackBonus": "",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "type": {
+      "value": "class",
+      "subtype": ""
+    },
+    "requirements": "Arcana Domain 1",
+    "recharge": {
+      "value": null,
+      "charged": false
+    }
+  },
+  "flags": {},
+  "img": "",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.1.0",
+    "coreVersion": "10.291",
+    "createdTime": 1675986801784,
+    "modifiedTime": 1675988225763,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  }
+}

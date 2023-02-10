@@ -14,7 +14,6 @@ CLASS_SPECIFIC_FEATURES = (
     "Unarmored Defense",
     "Spellcasting",
     "Expertise",
-    "Evasion",
     "Expanded Spell List",
     "Bloodline Spells",
     "Oath Spells",
@@ -53,6 +52,7 @@ class Feature(object):
     effects        = []
     featureType    = "class"
     featureSubType = ""
+    _startingLevel = None
 
     originalCollection = None
 
@@ -79,12 +79,18 @@ class Feature(object):
 
     @property
     def startingLevel(self)->int:
+        if self._startingLevel is not None:
+            return self._startingLevel
         match = LEVEL_RE.search(". ".join(p for _,p in zip(range(3), self.paragraphs.split(". "))))
         if match and match.group("lv1"):
             return int(match.group("lv1"))
         if match and match.group("lv2"):
             return int(match.group("lv2"))
         return 1
+
+    @startingLevel.setter
+    def startingLevel(self, value):
+        self._startingLevel = value
 
     def toDb(self)->dict:
         now = int(time.time()*1000)

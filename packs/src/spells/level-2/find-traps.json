@@ -7,7 +7,7 @@
   "type": "spell",
   "system": {
     "description": {
-      "value": "<p>You sense the presence of any trap within range that is within line of sight. A trap, for the purpose of this spell, includes anything that would inflict a sudden or unexpected effect you consider harmful or undesirable, which was specifically intended as such by its creator. Thus, the spell would sense an area affected by the alarm spell, a glyph of warding, or a mechanical pit trap, but it would not reveal a natural weakness in the floor, an unstable ceiling, or a hidden sinkhole.</p><p>This spell merely reveals that a trap is present. You don't learn the location of each trap, but you do learn the general nature of the danger posed by a trap you sense.</p>",
+      "value": "<p>You sense the presence of any trap within range that is within line of sight. A trap, for the purpose of this spell, includes anything that would inflict a sudden or unexpected effect you consider harmful or undesirable, which was specifically intended as such by its creator. Thus, the spell would sense an area affected by the @Compendium[dnd5e.spells.7p9IuWrSWFgfyQo2]{Alarm} spell, a @Compendium[dnd5e.spells.pB7XVYwdGNcUG935]{Glyph of Warding}, or a mechanical pit trap, but it would not reveal a natural weakness in the floor, an unstable ceiling, or a hidden sinkhole.</p><p>This spell reveals that a trap is present, its location, and the general nature of the danger posed by a trap you sense.</p>",
       "chat": "",
       "unidentified": ""
     },
@@ -25,13 +25,13 @@
     "target": {
       "value": null,
       "width": null,
-      "units": "",
-      "type": ""
+      "units": "any",
+      "type": "space"
     },
     "range": {
-      "value": 120,
+      "value": null,
       "long": null,
-      "units": "ft"
+      "units": "self"
     },
     "uses": {
       "value": null,
@@ -96,7 +96,7 @@
     "systemVersion": "2.1.0",
     "coreVersion": "10.291",
     "createdTime": 1661787234118,
-    "modifiedTime": 1671220969148,
-    "lastModifiedBy": "dnd5ebuilder0000"
+    "modifiedTime": 1675989934233,
+    "lastModifiedBy": "RightHandOfVecna"
   }
 }

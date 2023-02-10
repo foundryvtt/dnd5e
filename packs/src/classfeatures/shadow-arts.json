@@ -1,0 +1,88 @@
+{
+  "_id": "NOVILJPE1AS6JYF8",
+  "name": "Shadow Arts",
+  "ownership": {
+    "default": 0
+  },
+  "type": "feat",
+  "system": {
+    "description": {
+      "value": "<p>Starting when you choose this tradition at 3rd level, you can use your ki to duplicate the effects of certain spells. As an action, you can spend 2 ki points to cast @Compendium[dnd5e.spells.S7VbUetIfVT7B6Eq]{Darkness}, @Compendium[dnd5e.spells.hJ6ZiA3fpoY8v9cp]{Darkvision}, @Compendium[dnd5e.spells.6UYMI5U6F1FHSGBH]{Pass Without Trace}, or @Compendium[dnd5e.spells.5VhqFROQYjr1P9lp]{Silence}, without providing material components. Additionally, you gain the @Compendium[dnd5e.spells.oIzA2MEHwxhtQneU]{Minor Illusion} cantrip if you don't already know it.</p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "SRD 5.1",
+    "activation": {
+      "type": "",
+      "cost": null,
+      "condition": ""
+    },
+    "duration": {
+      "value": "",
+      "units": ""
+    },
+    "cover": null,
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": ""
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": ""
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": null,
+      "recovery": ""
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
+    "ability": null,
+    "actionType": "",
+    "attackBonus": "",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "type": {
+      "value": "class",
+      "subtype": ""
+    },
+    "requirements": "Way of the Shadow 3",
+    "recharge": {
+      "value": null,
+      "charged": false
+    }
+  },
+  "flags": {},
+  "img": "",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.1.0",
+    "coreVersion": "10.291",
+    "createdTime": 1675986804225,
+    "modifiedTime": 1675988227063,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "_id": "ZQ8W7Z0LGWR636K0",
+  "name": "Oath Spells (Oath of Redemption)",
+  "ownership": {
+    "default": 0
+  },
+  "type": "feat",
+  "system": {
+    "description": {
+      "value": "<p>You gain oath spells at the paladin levels listed.</p>\n<h3>Oath of Conquest Spells</h3>\n<table>\n<thead>\n<tr>\n<th align=\"center\">Paladin Level</th>\n<th align=\"left\">Spells</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td align=\"center\">3rd</td>\n<td align=\"left\">@Compendium[dnd5e.spells.gvdA9nPuWLck4tBl]{Sanctuary}, @Compendium[dnd5e.spells.KhwiSi9fwVfUPtku]{Sleep}</td>\n</tr>\n<tr>\n<td align=\"center\">5th</td>\n<td align=\"left\">@Compendium[dnd5e.spells.3MYDjS6k9IYL0aTj]{Calm Emotions}, @Compendium[dnd5e.spells.3Lo9boi7P2ro6QV4]{Hold Person}</td>\n</tr>\n<tr>\n<td align=\"center\">9th</td>\n<td align=\"left\"><em>counterspell</em>, @Compendium[dnd5e.spells.6g3WLOZ2u0EbaLAd]{Hypnotic Pattern}</td>\n</tr>\n<tr>\n<td align=\"center\">13th</td>\n<td align=\"left\">@Compendium[dnd5e.spells.1ADstb0Xec6HHRcU]{Resilient Sphere}, @Compendium[dnd5e.spells.ReMbjfeOKoSj3O79]{Stoneskin}</td>\n</tr>\n<tr>\n<td align=\"center\">17th</td>\n<td align=\"left\">@Compendium[dnd5e.spells.l9Ju5KE7bbn3WpTm]{Hold Monster}, @Compendium[dnd5e.spells.o9ZCvuD2B1OTcubb]{Wall of Force}</td>\n</tr>\n</tbody>\n</table>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "SRD 5.1",
+    "activation": {
+      "type": "",
+      "cost": null,
+      "condition": ""
+    },
+    "duration": {
+      "value": "",
+      "units": ""
+    },
+    "cover": null,
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": ""
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": ""
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": null,
+      "recovery": ""
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
+    "ability": null,
+    "actionType": "",
+    "attackBonus": "",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "type": {
+      "value": "class",
+      "subtype": ""
+    },
+    "requirements": "Oath of Redemption 1",
+    "recharge": {
+      "value": null,
+      "charged": false
+    }
+  },
+  "flags": {},
+  "img": "",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.1.0",
+    "coreVersion": "10.291",
+    "createdTime": 1675986803878,
+    "modifiedTime": 1675988226847,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  }
+}

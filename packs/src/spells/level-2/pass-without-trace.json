@@ -1,13 +1,13 @@
 {
-  "_id": "pRMvmknwLf2tdMTj",
-  "name": "Pass without Trace",
+  "_id": "6UYMI5U6F1FHSGBH",
+  "name": "Pass Without Trace",
   "ownership": {
     "default": 0
   },
   "type": "spell",
   "system": {
     "description": {
-      "value": "<p>A veil of shadows and Silence radiates from you, masking you and your companions from detection. For the Duration, each creature you choose within 30 feet of you (including you) has a +10 bonus to Dexterity (Stealth) checks and can't be tracked except by magical means. A creature that receives this bonus leaves behind no tracks or other traces of its passage.</p>",
+      "value": "<p>A veil of shadows and silence radiates from you, masking you and your companions from detection. For the duration, each creature you choose within 30 feet of you (including you) has a +10 bonus to Dexterity (Stealth) checks and can't be tracked except by magical means. A creature that receives this bonus leaves behind no tracks or other traces of its passage.</p>",
       "chat": "",
       "unidentified": ""
     },
@@ -23,10 +23,10 @@
     },
     "cover": null,
     "target": {
-      "value": 30,
+      "value": null,
       "width": null,
-      "units": "ft",
-      "type": "radius"
+      "units": "",
+      "type": "self"
     },
     "range": {
       "value": null,
@@ -88,15 +88,15 @@
   },
   "sort": 0,
   "flags": {},
-  "img": "icons/magic/air/fog-gas-smoke-brown.webp",
+  "img": "icons/magic/nature/leaf-drip-light-green.webp",
   "effects": [],
   "folder": null,
   "_stats": {
     "systemId": "dnd5e",
     "systemVersion": "2.1.0",
     "coreVersion": "10.291",
-    "createdTime": 1661787234227,
-    "modifiedTime": 1671220971291,
-    "lastModifiedBy": "dnd5ebuilder0000"
+    "createdTime": 1675986798079,
+    "modifiedTime": 1675989934645,
+    "lastModifiedBy": "RightHandOfVecna"
   }
 }

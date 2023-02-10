@@ -1,0 +1,88 @@
+{
+  "_id": "B2JTQ9NP46QMFA97",
+  "name": "Artificer Infusion: Homunculus Servant",
+  "ownership": {
+    "default": 0
+  },
+  "type": "feat",
+  "system": {
+    "description": {
+      "value": "<h6><em>Item: A gem worth at least 100 gp</em></h6>\n<p>You learn intricate methods for magically creating a special homunculus that serves you as a familiar (see chapter 10). The item you infuse serves as the creature's heart, around which the creature's body instantly forms.</p>\n<p>You determine the homunculus's appearance. Some artificers prefer mechanical-looking birds, whereas some like winged vials or miniature, animate cauldrons.</p>\n<p>The homunculus is either a <strong>crafter homunculus</strong> or a <strong>scout homunculus</strong>. The homunculus has hit points equal to your Constitution modifier plus your Intelligence modifier plus your level in this class, and adds your proficiency bonus to its damage rolls. You can also use a bonus action to command your homunculus to attack using its action.</p>\n<p>The homunculus regains 2d6 hit points if the @Compendium[dnd5e.spells.kjmjY0zlE6IEiQVL]{Mending} spell is cast on it. If it dies, it vanishes, leaving its heart in its space.</p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "SRD 5.1",
+    "activation": {
+      "type": "",
+      "cost": null,
+      "condition": ""
+    },
+    "duration": {
+      "value": "",
+      "units": ""
+    },
+    "cover": null,
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": ""
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": ""
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": null,
+      "recovery": ""
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
+    "ability": null,
+    "actionType": "",
+    "attackBonus": "",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "type": {
+      "value": "class",
+      "subtype": "artificerInfusion"
+    },
+    "requirements": "6th-level artificer",
+    "recharge": {
+      "value": null,
+      "charged": false
+    }
+  },
+  "flags": {},
+  "img": "",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.1.0",
+    "coreVersion": "10.291",
+    "createdTime": 1675986801854,
+    "modifiedTime": 1675986801854,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  }
+}

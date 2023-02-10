@@ -1,8 +1,10 @@
 {
   "_id": "JPwIEfgUPVebr5AH",
   "name": "Barkskin",
+  "ownership": {
+    "default": 0
+  },
   "type": "spell",
-  "img": "icons/magic/defensive/shield-barrier-flaming-diamond-orange.webp",
   "system": {
     "description": {
       "value": "<p>You touch a willing creature. Until the spell ends, the target's skin has a rough, bark-like appearance, and the target's AC can't be less than 16, regardless of what kind of armor it is wearing.</p>",
@@ -24,7 +26,7 @@
       "value": 1,
       "width": null,
       "units": "",
-      "type": "creature"
+      "type": "ally"
     },
     "range": {
       "value": null,
@@ -84,6 +86,9 @@
       "formula": ""
     }
   },
+  "sort": 0,
+  "flags": {},
+  "img": "icons/magic/defensive/shield-barrier-flaming-diamond-orange.webp",
   "effects": [
     {
       "_id": "uM6rgctYpcbCVSkn",
@@ -121,17 +126,12 @@
     }
   ],
   "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0
-  },
-  "flags": {},
   "_stats": {
     "systemId": "dnd5e",
     "systemVersion": "2.1.0",
     "coreVersion": "10.291",
     "createdTime": 1661787234113,
-    "modifiedTime": 1671220969102,
-    "lastModifiedBy": "dnd5ebuilder0000"
+    "modifiedTime": 1675989933819,
+    "lastModifiedBy": "RightHandOfVecna"
   }
 }

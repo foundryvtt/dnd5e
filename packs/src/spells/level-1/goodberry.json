@@ -23,10 +23,10 @@
     },
     "cover": null,
     "target": {
-      "value": null,
+      "value": 1,
       "width": null,
       "units": "",
-      "type": ""
+      "type": "creature"
     },
     "range": {
       "value": null,
@@ -45,7 +45,7 @@
       "amount": null
     },
     "ability": "",
-    "actionType": "heal",
+    "actionType": "util",
     "attackBonus": "",
     "chatFlavor": "",
     "critical": {
@@ -77,7 +77,7 @@
       "concentration": false
     },
     "materials": {
-      "value": "A spring of mistletoe",
+      "value": "A sprig of mistletoe",
       "consumed": false,
       "cost": 0,
       "supply": 0
@@ -101,7 +101,7 @@
     "systemVersion": "2.1.0",
     "coreVersion": "10.291",
     "createdTime": 1661787234136,
-    "modifiedTime": 1671220969923,
-    "lastModifiedBy": "dnd5ebuilder0000"
+    "modifiedTime": 1675989934323,
+    "lastModifiedBy": "RightHandOfVecna"
   }
 }

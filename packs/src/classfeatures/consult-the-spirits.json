@@ -1,0 +1,88 @@
+{
+  "_id": "FLJ5Y4M0QPSSEC91",
+  "name": "Consult the Spirits",
+  "ownership": {
+    "default": 0
+  },
+  "type": "feat",
+  "system": {
+    "description": {
+      "value": "<p>At 10th level, you gain the ability to consult with your ancestral spirits. When you do so, you cast the @Compendium[dnd5e.spells.4v2H3hHb3Ph9XLNd]{Augury} or @Compendium[dnd5e.spells.cg50KpBkBdPK6vPL]{Clairvoyance} spell, without using a spell slot or material components. Rather than creating a spherical sensor, this use of @Compendium[dnd5e.spells.cg50KpBkBdPK6vPL]{Clairvoyance} invisibly summons one of your ancestral spirits to the chosen location. Wisdom is your spellcasting ability for these spells.</p>\n<p>After you cast either spell in this way, you can't use this feature again until you finish a short or long rest.</p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "SRD 5.1",
+    "activation": {
+      "type": "",
+      "cost": null,
+      "condition": ""
+    },
+    "duration": {
+      "value": "",
+      "units": ""
+    },
+    "cover": null,
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": ""
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": ""
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": null,
+      "recovery": ""
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
+    "ability": null,
+    "actionType": "",
+    "attackBonus": "",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "type": {
+      "value": "class",
+      "subtype": ""
+    },
+    "requirements": "Path of the Ancestral Guardian 10",
+    "recharge": {
+      "value": null,
+      "charged": false
+    }
+  },
+  "flags": {},
+  "img": "",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.1.0",
+    "coreVersion": "10.291",
+    "createdTime": 1675986802200,
+    "modifiedTime": 1675988226055,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  }
+}

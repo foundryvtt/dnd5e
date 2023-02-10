@@ -1,0 +1,107 @@
+{
+  "_id": "GKC7S442C9YTRXJP",
+  "name": "Wrath of Nature",
+  "ownership": {
+    "default": 0
+  },
+  "type": "spell",
+  "system": {
+    "description": {
+      "value": "<p>You call out to the spirits of nature to rouse them against your enemies. Choose a point you can see within range. The spirits cause trees, rocks, and grasses in a 60-foot cube centered on that point to become animated until the spell ends.</p><p><strong>Grasses and Undergrowth:</strong> Any area of ground in the cube that is covered by grass or undergrowth is difficult terrain for your enemies.</p><p><strong>Trees:</strong> At the start of each of your turns, each of your enemies within 10 feet of any tree in the cube must succeed on a <strong>Dexterity saving throw</strong> or take <strong>4d6 slashing damage</strong> from whipping branches.</p><p><strong>Roots and Vines:</strong> At the end of each of your turns, one creature of your choice that is on the ground in the cube must succeed on a <strong>Strength saving throw</strong> or become restrained until the spell ends. A restrained creature can use an action to make a Strength (Athletics) check against your spell save DC, ending the effect on itself on a success.</p><p><strong>Rock:</strong> As a bonus action on your turn, you can cause a loose rock in the cube to launch at a creature you can see in the cube. Make a <strong>ranged spell attack</strong> against the target. On a hit, the target takes 3d8 nonmagical bludgeoning damage, and it must succeed on a <strong>Strength saving throw</strong> or fall prone.</p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "SRD 5.1",
+    "activation": {
+      "type": "action",
+      "cost": 1,
+      "condition": ""
+    },
+    "duration": {
+      "value": "1",
+      "units": "minute"
+    },
+    "cover": null,
+    "target": {
+      "value": 60,
+      "width": null,
+      "units": "ft",
+      "type": "cube"
+    },
+    "range": {
+      "value": 120,
+      "long": null,
+      "units": "ft"
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": null,
+      "recovery": ""
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
+    "ability": "",
+    "actionType": "save",
+    "attackBonus": "",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [
+        [
+          "4d6",
+          "slashing"
+        ]
+      ],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "dex",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "level": 5,
+    "school": "evo",
+    "components": {
+      "vocal": true,
+      "somatic": true,
+      "material": false,
+      "ritual": false,
+      "concentration": true
+    },
+    "materials": {
+      "value": "",
+      "consumed": false,
+      "cost": 0,
+      "supply": 0
+    },
+    "preparation": {
+      "mode": "prepared",
+      "prepared": false
+    },
+    "scaling": {
+      "mode": "none",
+      "formula": ""
+    }
+  },
+  "sort": 0,
+  "flags": {},
+  "img": "icons/magic/nature/leaf-drip-light-green.webp",
+  "effects": [],
+  "folder": null,
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.1.0",
+    "coreVersion": "10.291",
+    "createdTime": 1675986798669,
+    "modifiedTime": 1675989935249,
+    "lastModifiedBy": "RightHandOfVecna"
+  }
+}

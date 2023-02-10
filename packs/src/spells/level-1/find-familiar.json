@@ -7,26 +7,26 @@
   "type": "spell",
   "system": {
     "description": {
-      "value": "<p>Your familiar acts independently of you, but it always obeys your commands. In combat, it rolls its own initiative and acts on its own turn. A familiar can't attack, but it can take other actions as normal.</p><p>When the familiar drops to 0 hit points, it disappears, leaving behind no physical form. It reappears after you cast this spell again.</p><p>While your familiar is within 100 feet of you, you can communicate with it telepathically. Additionally, as an action, you can see through your familiar's eyes and hear what it hears until the start of your next turn, gaining the benefits of any special senses that the familiar has. During this time, you are deaf and blind with regard to your own senses.</p><p>As an action, you can temporarily dismiss your familiar. It disappears into a pocket dimension where it awaits your summons. Alternatively, you can dismiss it forever. As an action while it is temporarily dismissed, you can cause it to reappear in any unoccupied space within 30 feet of you.</p><p>You can't have more than one familiar at a time. If you cast this spell while you already have a familiar, you instead cause it to adopt a new form. Choose one of the forms from the above list. Your familiar transforms into the chosen creature.</p><p>Finally, when you cast a spell with a range of touch, your familiar can deliver the spell as if it had cast the spell. Your familiar must be within 100 feet of you, and it must use its reaction to deliver the spell when you cast it. If the spell requires an attack roll, you use your action modifier for the roll.</p>",
+      "value": "<p>You summon a common or uncommon familiar, a spirit that takes an animal form you choose, which are described in chapter 10: bat, cat, crab, frog (toad), hawk. lizard, octopus, owl, poisonous snake, fish (quipper), rat, raven, sea horse, spider, or weasel. Appearing in an unoccupied space within range, the familiar has the statistics of the chosen form, though it is a celestial, fey, or fiend (your choice) instead of a beast.</p><p>When you cast this spell for the first time, its casting time is 1 hour.</p>",
       "chat": "",
       "unidentified": ""
     },
     "source": "SRD 5.1",
     "activation": {
-      "type": "hour",
+      "type": "action",
       "cost": 1,
       "condition": ""
     },
     "duration": {
-      "value": "",
-      "units": "inst"
+      "value": "24",
+      "units": "hour"
     },
     "cover": null,
     "target": {
-      "value": null,
+      "value": 1,
       "width": null,
-      "units": "any",
-      "type": "space"
+      "units": "",
+      "type": "creature"
     },
     "range": {
       "value": 10,
@@ -67,14 +67,14 @@
     "components": {
       "vocal": true,
       "somatic": true,
-      "material": true,
-      "ritual": true,
+      "material": false,
+      "ritual": false,
       "concentration": false
     },
     "materials": {
-      "value": "10 gp worth of charcoal, incense, and herbs that must be consumed by fire in a brass brazier",
-      "consumed": true,
-      "cost": 10,
+      "value": "",
+      "consumed": false,
+      "cost": 0,
       "supply": 0
     },
     "preparation": {
@@ -96,7 +96,7 @@
     "systemVersion": "2.1.0",
     "coreVersion": "10.291",
     "createdTime": 1661787234112,
-    "modifiedTime": 1671220969093,
-    "lastModifiedBy": "dnd5ebuilder0000"
+    "modifiedTime": 1675989934221,
+    "lastModifiedBy": "RightHandOfVecna"
   }
 }

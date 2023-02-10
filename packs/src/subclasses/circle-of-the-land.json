@@ -1,10 +1,11 @@
 {
+  "_id": "4Ae2SPZRXEVbVs0M",
   "name": "Circle of the Land",
   "type": "subclass",
   "img": "icons/environment/wilderness/tree-oak.webp",
   "system": {
     "description": {
-      "value": "<p>The Circle of the Land is made up of mystics and sages who safeguard ancient knowledge and rites through a vast oral tradition. These druids meet within sacred circles of trees or standing stones to whisper primal secrets in Druidic. The circle's wisest members preside as the chief priests of communities that hold to the Old Faith and serve as advisors to the rulers of those folk. As a member of this circle, your magic is influenced by the land where you were initiated into the circle's mysterious rites.</p>",
+      "value": "<p>The Circle of the Land is made up of mystics and sages who safeguard ancient knowledge and rites through a vast oral tradition. These druids meet within sacred circles of trees or standing stones to whisper primal secrets in Druidic. The circle's wisest members preside as the chief priests of communities that hold to the Old Faith and serve as advisors to the rulers of those folk. As a member of this circle, your magic is influenced by the lands you inhabit.</p>",
       "chat": "",
       "unidentified": ""
     },
@@ -17,7 +18,7 @@
         "type": "ItemGrant",
         "configuration": {
           "items": [
-            "Compendium.dnd5e.classfeatures.lT8GsPOPgRzDC3QJ",
+            "Compendium.dnd5e.classfeatures.6WESEFZLNNMK53ES",
             "Compendium.dnd5e.classfeatures.wKdRtFsvGfMKQHLY"
           ],
           "optional": false,
@@ -39,7 +40,7 @@
         "type": "ItemGrant",
         "configuration": {
           "items": [
-            "Compendium.dnd5e.classfeatures.YiK59gWSlcQ6Mbdz"
+            "Compendium.dnd5e.classfeatures.RECC98RLXJV7NB76"
           ],
           "optional": false,
           "spell": {
@@ -60,7 +61,7 @@
         "type": "ItemGrant",
         "configuration": {
           "items": [
-            "Compendium.dnd5e.classfeatures.3FB25qKxmkmxcxuC"
+            "Compendium.dnd5e.classfeatures.9SMCSMV22VDZSEVJ"
           ],
           "optional": false,
           "spell": {
@@ -131,13 +132,12 @@
     "default": 0
   },
   "flags": {},
-  "_id": "4Ae2SPZRXEVbVs0M",
   "_stats": {
     "systemId": "dnd5e",
     "systemVersion": "2.1.0",
     "coreVersion": "10.291",
     "createdTime": 1661787234293,
-    "modifiedTime": 1671220973426,
+    "modifiedTime": 1675986801317,
     "lastModifiedBy": "dnd5ebuilder0000"
   }
 }

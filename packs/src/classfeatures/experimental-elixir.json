@@ -1,0 +1,88 @@
+{
+  "_id": "3SIKQKY5IG28EDNZ",
+  "name": "Experimental Elixir",
+  "ownership": {
+    "default": 0
+  },
+  "type": "feat",
+  "system": {
+    "description": {
+      "value": "<p>Beginning at 3rd level, whenever you finish a long rest, you can magically produce an <em>experimental elixir</em> in an empty flask you touch. Roll on the Experimental Elixir table for the elixir's effect, which is triggered when someone drinks the elixir. As an action, a creature can drink the elixir or administer it to an incapacitated creature.</p>\n<p>Creating an <em>experimental elixir</em> requires you to have alchemist supplies on your person, and any elixir you create with this feature lasts until it is drunk or until the end of your next long rest.</p>\n<p>When you reach certain levels in this class, you can make more elixirs at the end of a long rest: two at 6th level and three at 15th level. Roll for each elixir's effect separately. Each elixir requires its own flask.</p>\n<p>You can create additional <em>experimental elixirs</em> by expending a spell slot of 1st level or higher for each one. When you do so, you use your action to create the elixir in an empty flask you touch, and you choose the elixir's effect from the Experimental Elixir table.</p>\n<h3>Experimental Elixir</h3>\n<table>\n<thead>\n<tr>\n<th align=\"center\">d6</th>\n<th align=\"left\">Effect</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td align=\"center\">1</td>\n<td align=\"left\"><strong>Healing.</strong> The drinker regains a number of hit points equal to 2d4 + your Intelligence modifier.</td>\n</tr>\n<tr>\n<td align=\"center\">2</td>\n<td align=\"left\"><strong>Swiftness.</strong> The drinker's walking speed increases by 10 feet for 1 hour.</td>\n</tr>\n<tr>\n<td align=\"center\">3</td>\n<td align=\"left\"><strong>Resilience.</strong> The drinker gains a +1 bonus to AC for 10 minutes.</td>\n</tr>\n<tr>\n<td align=\"center\">4</td>\n<td align=\"left\"><strong>Boldness.</strong> The drinker can roll a d4 and add the number rolled to every attack roll and saving throw they make for the next minute.</td>\n</tr>\n<tr>\n<td align=\"center\">5</td>\n<td align=\"left\"><strong>Flight.</strong> The drinker gains a flying speed of 10 feet for 10 minutes.</td>\n</tr>\n<tr>\n<td align=\"center\">6</td>\n<td align=\"left\"><strong>Transformation.</strong> The drinker's body is transformed as if by the @Compendium[dnd5e.spells.8RTDOt80u8aBv9qx]{Alter Self} spell. The drinker determines the transformation caused by the spell, the effects of which last for 10 minutes.</td>\n</tr>\n</tbody>\n</table>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "SRD 5.1",
+    "activation": {
+      "type": "",
+      "cost": null,
+      "condition": ""
+    },
+    "duration": {
+      "value": "",
+      "units": ""
+    },
+    "cover": null,
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": ""
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": ""
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": null,
+      "recovery": ""
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
+    "ability": null,
+    "actionType": "",
+    "attackBonus": "",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "type": {
+      "value": "class",
+      "subtype": ""
+    },
+    "requirements": "Alchemist 3",
+    "recharge": {
+      "value": null,
+      "charged": false
+    }
+  },
+  "flags": {},
+  "img": "",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.1.0",
+    "coreVersion": "10.291",
+    "createdTime": 1675986802974,
+    "modifiedTime": 1675988226296,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  }
+}

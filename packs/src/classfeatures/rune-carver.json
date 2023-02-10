@@ -1,0 +1,88 @@
+{
+  "_id": "9QWNB2G8CMPW7U6L",
+  "name": "Rune Carver",
+  "ownership": {
+    "default": 0
+  },
+  "type": "feat",
+  "system": {
+    "description": {
+      "value": "<p>Beginning at 3rd level, you can use magic runes to enhance your gear. You learn two runes of your choice, from among the runes described below, and each time you gain a level in this class, you can replace one rune you know with a different one from this feature. When you reach certain levels in this class, you learn additional runes, as shown in the Runes Known table.</p>\n<h3>Runes Known</h3>\n<table>\n<thead>\n<tr>\n<th align=\"center\">Fighter Level</th>\n<th align=\"center\">Number of Runes</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td align=\"center\">3rd</td>\n<td align=\"center\">2</td>\n</tr>\n<tr>\n<td align=\"center\">7th</td>\n<td align=\"center\">3</td>\n</tr>\n<tr>\n<td align=\"center\">10th</td>\n<td align=\"center\">4</td>\n</tr>\n<tr>\n<td align=\"center\">17th</td>\n<td align=\"center\">5</td>\n</tr>\n</tbody>\n</table>\n<p>Whenever you finish a long rest, you can touch a number of objects equal to the number of runes you know, and you inscribe a different rune onto each of the objects. To be eligible, an object must be a weapon, a suit of armor, a shield, a piece of jewelry, or something else you can wear or hold in a hand. Your rune remains on an object until you finish a long rest, and an object can bear only one of your runes at a time.</p>\n<p>The following runes are available to you when you learn a rune. If a rune has a level requirement, you must be at least that level in this class to learn the rune. If a rune requires a saving throw, your Rune Magic save DC equals 8 + your proficiency bonus + your Constitution modifier.</p>\n<p>The runes are presented in alphabetical order.</p>\n<p>@UUID[Compendium.dnd5e.classfeatures.PMQJUXNLH9DNNQDW]{Agility Rune}</p>\n<p>@UUID[Compendium.dnd5e.classfeatures.WC74IS6ASY1N06LM]{Endurance Rune}</p>\n<p>@UUID[Compendium.dnd5e.classfeatures.02HMQEW08NKFTQS8]{Forge Rune}</p>\n<p>@UUID[Compendium.dnd5e.classfeatures.61JA0K049VA4BIL2]{Greed Rune}</p>\n<p>@UUID[Compendium.dnd5e.classfeatures.WFHVRSH6HIM3RHDT]{Prophecy Rune}</p>\n<p>@UUID[Compendium.dnd5e.classfeatures.N7W6X3V2IOGTLZKA]{Resilience Rune}</p>\n<p>@UUID[Compendium.dnd5e.classfeatures.3C7QFC9EAL4E2CPK]{Shrewdness Rune}</p>\n<p>@UUID[Compendium.dnd5e.classfeatures.4EZ9IYO8R3V2YRQ6]{Trickery Rune}</p>\n<section class=\"secret foundry-note\">\n<p><strong>Foundry Note</strong></p>\n<p>You can drag your choices from the above onto your character sheet and it will automatically update.</p>\n</section>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "SRD 5.1",
+    "activation": {
+      "type": "",
+      "cost": null,
+      "condition": ""
+    },
+    "duration": {
+      "value": "",
+      "units": ""
+    },
+    "cover": null,
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": ""
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": ""
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": null,
+      "recovery": ""
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
+    "ability": null,
+    "actionType": "",
+    "attackBonus": "",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "type": {
+      "value": "class",
+      "subtype": ""
+    },
+    "requirements": "Rune Knight 3",
+    "recharge": {
+      "value": null,
+      "charged": false
+    }
+  },
+  "flags": {},
+  "img": "",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.1.0",
+    "coreVersion": "10.291",
+    "createdTime": 1675986804180,
+    "modifiedTime": 1675989939334,
+    "lastModifiedBy": "RightHandOfVecna"
+  }
+}

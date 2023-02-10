@@ -1,0 +1,88 @@
+{
+  "_id": "LMSN146PMBHWUBAJ",
+  "name": "Expanded Spell List (The Great Old One)",
+  "ownership": {
+    "default": 0
+  },
+  "type": "feat",
+  "system": {
+    "description": {
+      "value": "<p>The Great Old One lets you choose from an expanded list of spells when you learn a warlock spell. The following spells are added to the warlock spell list for you.</p>\n<h3>Great Old One Expanded Spells</h3>\n<table>\n<thead>\n<tr>\n<th align=\"center\">Spell Level</th>\n<th align=\"left\">Spells</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td align=\"center\">1st</td>\n<td align=\"left\">@Compendium[dnd5e.spells.IAP3DSC2U4ZESJ7Y]{Dissonant Whispers}, @Compendium[dnd5e.spells.BQk5Row4NymMnUQl]{Hideous Laughter}</td>\n</tr>\n<tr>\n<td align=\"center\">2nd</td>\n<td align=\"left\">@Compendium[dnd5e.spells.ppWAAEul0QHtm4er]{Detect Thoughts}, @Compendium[dnd5e.spells.U8S7C36ECFRJ7FVY]{Phantasmal Force}</td>\n</tr>\n<tr>\n<td align=\"center\">3rd</td>\n<td align=\"left\">@Compendium[dnd5e.spells.cg50KpBkBdPK6vPL]{Clairvoyance}, @Compendium[dnd5e.spells.GtGjNjPBgUHxGYAD]{Sending}</td>\n</tr>\n<tr>\n<td align=\"center\">4th</td>\n<td align=\"left\">@Compendium[dnd5e.spells.LrPvWHBPmiMQQsKB]{Dominate Beast}, @Compendium[dnd5e.spells.DGONTFbk5eORs5qv]{Black Tentacles}</td>\n</tr>\n<tr>\n<td align=\"center\">5th</td>\n<td align=\"left\">@Compendium[dnd5e.spells.91Sw6vOIaO7U8DvM]{Dominate Person}, @Compendium[dnd5e.spells.HQfd7jJyULIoGxrZ]{Telekinesis}</td>\n</tr>\n</tbody>\n</table>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "SRD 5.1",
+    "activation": {
+      "type": "",
+      "cost": null,
+      "condition": ""
+    },
+    "duration": {
+      "value": "",
+      "units": ""
+    },
+    "cover": null,
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": ""
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": ""
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": null,
+      "recovery": ""
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
+    "ability": null,
+    "actionType": "",
+    "attackBonus": "",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "type": {
+      "value": "class",
+      "subtype": ""
+    },
+    "requirements": "The Great Old One 1",
+    "recharge": {
+      "value": null,
+      "charged": false
+    }
+  },
+  "flags": {},
+  "img": "",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.1.0",
+    "coreVersion": "10.291",
+    "createdTime": 1675986802966,
+    "modifiedTime": 1675988226290,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  }
+}

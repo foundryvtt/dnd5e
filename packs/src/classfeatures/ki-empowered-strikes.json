@@ -7,7 +7,7 @@
   "type": "feat",
   "system": {
     "description": {
-      "value": "<p>Starting at 6th level, your unarmed strikes count as magical for the purpose of overcoming resistance and immunity to nonmagical attacks and damage.</p>",
+      "value": "<p>Starting at 6th level, your unarmed strikes count as magical for the purpose of overcoming resistance and immunity to nonmagical attacks and damage.</p>\n<p>Beginning when you reach 15th level in this class, when you hit a creature with an unarmed strike, you can expend 1 ki point to deal an additional 1d6 damage.</p>",
       "chat": "",
       "unidentified": ""
     },
@@ -64,7 +64,7 @@
     },
     "type": {
       "value": "class",
-      "subtype": ""
+      "subtype": "ki"
     },
     "requirements": "Monk 6",
     "recharge": {
@@ -82,7 +82,7 @@
     "systemVersion": "2.1.0",
     "coreVersion": "10.291",
     "createdTime": 1661787234337,
-    "modifiedTime": 1672334901681,
+    "modifiedTime": 1675986803540,
     "lastModifiedBy": "dnd5ebuilder0000"
   }
 }

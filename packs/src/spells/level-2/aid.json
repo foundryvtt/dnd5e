@@ -7,7 +7,7 @@
   "type": "spell",
   "system": {
     "description": {
-      "value": "<p>Your spell bolsters your allies with toughness and resolve. Choose up to three creatures within range. Each target's hit point maximum and current hit points increase by 5 for the duration.</p><p><strong>At Higher Levels.</strong> When you cast this spell using a spell slot of 3rd level or higher, a target's hit points increase by an additional 5 for each slot level above 2nd.</p>",
+      "value": "<p>Your spell bolsters your allies with toughness and resolve. Choose up to three creatures within range. Each target's hit point maximum and current hit points increase by 5 for the duration.</p><p><strong><em>At Higher Levels:</em></strong> When you cast this spell using a spell slot of 3rd level or higher, a target's hit points increase by an additional 5 for each slot level above 2nd.</p>",
       "chat": "",
       "unidentified": ""
     },
@@ -45,7 +45,7 @@
       "amount": null
     },
     "ability": "",
-    "actionType": "heal",
+    "actionType": "util",
     "attackBonus": "",
     "chatFlavor": "",
     "critical": {
@@ -77,7 +77,7 @@
       "concentration": false
     },
     "materials": {
-      "value": "A tiny strip of white cloth.",
+      "value": "A tiny strip of white cloth",
       "consumed": false,
       "cost": 0,
       "supply": 0
@@ -88,7 +88,7 @@
     },
     "scaling": {
       "mode": "level",
-      "formula": "(@item.level - 2) * 5"
+      "formula": ""
     }
   },
   "sort": 0,
@@ -101,7 +101,7 @@
     "systemVersion": "2.1.0",
     "coreVersion": "10.291",
     "createdTime": 1661787234131,
-    "modifiedTime": 1671220969879,
-    "lastModifiedBy": "dnd5ebuilder0000"
+    "modifiedTime": 1675989933702,
+    "lastModifiedBy": "RightHandOfVecna"
   }
 }

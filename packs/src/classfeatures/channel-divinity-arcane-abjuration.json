@@ -1,0 +1,88 @@
+{
+  "_id": "XLSGUW00Z3AB26Q5",
+  "name": "Channel Divinity: Arcane Abjuration",
+  "ownership": {
+    "default": 0
+  },
+  "type": "feat",
+  "system": {
+    "description": {
+      "value": "<p>Starting at 2nd level, you can use your Channel Divinity to abjure otherworldly creatures.</p>\n<p>As an action, you present your holy symbol, and one celestial, elemental, fey, or fiend of your choice that is within 30 feet of you must make a Wisdom saving throw, provided that the creature can see or hear you. If the creature fails its saving throw, it is turned for 1 minute or until it takes any damage.</p>\n<p>After you reach 5th level, when a creature fails its saving throw against your Arcane Abjuration feature, the creature is banished for 1 minute (as in the @Compendium[dnd5e.spells.pxpb2eOB6bv4phAf]{Banishment} spell, no concentration required) if it isn't on its plane of origin and its challenge rating is at or below a certain threshold, as shown on the Arcane Banishment table.</p>\n<h3>Arcane Banishment</h3>\n<table>\n<thead>\n<tr>\n<th align=\"center\">Cleric Level</th>\n<th align=\"left\">Banishes Creatures of CR ...</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td align=\"center\">5th</td>\n<td align=\"left\">1/2 or lower</td>\n</tr>\n<tr>\n<td align=\"center\">8th</td>\n<td align=\"left\">1 or lower</td>\n</tr>\n<tr>\n<td align=\"center\">11th</td>\n<td align=\"left\">2 or lower</td>\n</tr>\n<tr>\n<td align=\"center\">14th</td>\n<td align=\"left\">3 or lower</td>\n</tr>\n<tr>\n<td align=\"center\">17th</td>\n<td align=\"left\">4 or lower</td>\n</tr>\n</tbody>\n</table>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "SRD 5.1",
+    "activation": {
+      "type": "",
+      "cost": null,
+      "condition": ""
+    },
+    "duration": {
+      "value": "",
+      "units": ""
+    },
+    "cover": null,
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": ""
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": ""
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": null,
+      "recovery": ""
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
+    "ability": null,
+    "actionType": "",
+    "attackBonus": "",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "type": {
+      "value": "class",
+      "subtype": ""
+    },
+    "requirements": "Arcana Domain 2",
+    "recharge": {
+      "value": null,
+      "charged": false
+    }
+  },
+  "flags": {},
+  "img": "",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.1.0",
+    "coreVersion": "10.291",
+    "createdTime": 1675986802033,
+    "modifiedTime": 1675988225961,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  }
+}

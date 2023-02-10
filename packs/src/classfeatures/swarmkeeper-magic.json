@@ -1,0 +1,88 @@
+{
+  "_id": "LAT72X0YZDQGLS5G",
+  "name": "Swarmkeeper Magic",
+  "ownership": {
+    "default": 0
+  },
+  "type": "feat",
+  "system": {
+    "description": {
+      "value": "<p>You learn the @Compendium[dnd5e.spells.Utk1OQRwYkMkFRD3]{Mage Hand} cantrip if you don't already know it. When you cast it, the hand takes the form of your swarming nature spirits.</p>\n<p>You also learn an additional spell when you reach certain levels in this class, as shown in the Swarmkeeper Spells table. The spell counts as a ranger spell for you, but it doesn't count against the number of ranger spells you can prepare.</p>\n<h3>Swarmkeeper Spells</h3>\n<table>\n<thead>\n<tr>\n<th align=\"center\">Ranger Level</th>\n<th align=\"center\">Spell</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td align=\"center\">3rd</td>\n<td align=\"center\">@Compendium[dnd5e.spells.Utk1OQRwYkMkFRD3]{Mage Hand}, @Compendium[dnd5e.spells.nqBDWkVOfcGZt4YU]{Faerie Fire}</td>\n</tr>\n<tr>\n<td align=\"center\">5th</td>\n<td align=\"center\">@Compendium[dnd5e.spells.UJJu9c2UvCzVljiP]{Web}</td>\n</tr>\n<tr>\n<td align=\"center\">9th</td>\n<td align=\"center\">@Compendium[dnd5e.spells.2IWiZAJtOGDoKjiz]{Gaseous Form}</td>\n</tr>\n<tr>\n<td align=\"center\">13th</td>\n<td align=\"center\">@Compendium[dnd5e.spells.ImlCJQwR1VL40Qem]{Arcane Eye}</td>\n</tr>\n<tr>\n<td align=\"center\">17th</td>\n<td align=\"center\">@Compendium[dnd5e.spells.OVikYmSdHliAG2YD]{Insect Plague}</td>\n</tr>\n</tbody>\n</table>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "SRD 5.1",
+    "activation": {
+      "type": "",
+      "cost": null,
+      "condition": ""
+    },
+    "duration": {
+      "value": "",
+      "units": ""
+    },
+    "cover": null,
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": ""
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": ""
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": null,
+      "recovery": ""
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
+    "ability": null,
+    "actionType": "",
+    "attackBonus": "",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "type": {
+      "value": "class",
+      "subtype": ""
+    },
+    "requirements": "Swarmkeeper Conclave 1",
+    "recharge": {
+      "value": null,
+      "charged": false
+    }
+  },
+  "flags": {},
+  "img": "",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.1.0",
+    "coreVersion": "10.291",
+    "createdTime": 1675986804616,
+    "modifiedTime": 1675988227397,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  }
+}

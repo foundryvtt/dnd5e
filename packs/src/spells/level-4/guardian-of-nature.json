@@ -1,0 +1,107 @@
+{
+  "_id": "95JLN24EBUT2ZPD3",
+  "name": "Guardian of Nature",
+  "ownership": {
+    "default": 0
+  },
+  "type": "spell",
+  "system": {
+    "description": {
+      "value": "<p>A nature spirit answers your call and transforms you into a powerful guardian. The transformation lasts until the spell ends. You choose one of the following forms to assume: Primal Beast or Great Tree.</p><p><strong>Primal Beast:</strong> Bestial fur covers your body, your facial features become feral, and you gain the following benefits:</p><ul><li>Your walking speed increases by 10 feet.</li><li>You gain darkvision with a range of 120 feet.</li><li>You make Strength-based attack rolls with advantage.</li><li>Your <strong>melee weapon attack</strong>s deal an extra <strong>1d6 force damage</strong> on a hit.</li></ul><p><strong>Great Tree:</strong> Your skin appears barky, leaves sprout from your hair, and you gain the following benefits:</p><ul><li>You gain 10 temporary hit points.</li><li>You make <strong>Constitution saving throw</strong>s with advantage.</li><li>You make Dexterity- and Wisdom-based attack rolls with advantage.</li><li>While you are on the ground, the ground within 15 feet of you is difficult terrain for your enemies.</li></ul>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "SRD 5.1",
+    "activation": {
+      "type": "bonus",
+      "cost": 1,
+      "condition": ""
+    },
+    "duration": {
+      "value": "1",
+      "units": "minute"
+    },
+    "cover": null,
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": "self"
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": "self"
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": null,
+      "recovery": ""
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
+    "ability": "",
+    "actionType": "save",
+    "attackBonus": "",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [
+        [
+          "1d6",
+          "force"
+        ]
+      ],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "con",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "level": 4,
+    "school": "trs",
+    "components": {
+      "vocal": true,
+      "somatic": false,
+      "material": false,
+      "ritual": false,
+      "concentration": true
+    },
+    "materials": {
+      "value": "",
+      "consumed": false,
+      "cost": 0,
+      "supply": 0
+    },
+    "preparation": {
+      "mode": "prepared",
+      "prepared": false
+    },
+    "scaling": {
+      "mode": "none",
+      "formula": ""
+    }
+  },
+  "sort": 0,
+  "flags": {},
+  "img": "icons/magic/nature/leaf-drip-light-green.webp",
+  "effects": [],
+  "folder": null,
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.1.0",
+    "coreVersion": "10.291",
+    "createdTime": 1675986797746,
+    "modifiedTime": 1675989934342,
+    "lastModifiedBy": "RightHandOfVecna"
+  }
+}

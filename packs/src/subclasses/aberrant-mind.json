@@ -1,0 +1,123 @@
+{
+  "_id": "WEESF7E0R8YCNIB4",
+  "name": "Aberrant Mind",
+  "type": "subclass",
+  "img": "",
+  "system": {
+    "description": {
+      "value": "<p>An alien influence has wrapped its tendrils around your mind, giving you psionic power. You can now touch other minds with that power and alter the world around you by using it to control the magical energy of the multiverse. This power might shine from you as a hopeful beacon to others, or may be a source of terror to those who feel the stab of your mind and witness the strange manifestations of your might.</p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "SRD 5.1",
+    "identifier": "aberrant-mind",
+    "classIdentifier": "sorcerer",
+    "advancement": [
+      {
+        "_id": "V4B4FJFQG6CRPWVK",
+        "type": "ItemGrant",
+        "configuration": {
+          "items": [
+            "Compendium.dnd5e.classfeatures.5JWEFOLG54QLG5LH",
+            "Compendium.dnd5e.classfeatures.BYKRSE7XISBZC5KB"
+          ],
+          "optional": false,
+          "spell": {
+            "ability": "",
+            "preparation": "",
+            "uses": {
+              "max": "",
+              "per": ""
+            }
+          }
+        },
+        "value": {},
+        "level": 1,
+        "title": "Features"
+      },
+      {
+        "_id": "LT1VDQZD20NB0SXJ",
+        "type": "ItemGrant",
+        "configuration": {
+          "items": [
+            "Compendium.dnd5e.classfeatures.UJVZGWTVBK9GUL9U",
+            "Compendium.dnd5e.classfeatures.B68BTZMLK2D1AUEL"
+          ],
+          "optional": false,
+          "spell": {
+            "ability": "",
+            "preparation": "",
+            "uses": {
+              "max": "",
+              "per": ""
+            }
+          }
+        },
+        "value": {},
+        "level": 6,
+        "title": "Features"
+      },
+      {
+        "_id": "R1UQDIV09GLZPCD0",
+        "type": "ItemGrant",
+        "configuration": {
+          "items": [
+            "Compendium.dnd5e.classfeatures.OLBRV577D8GBGVIP"
+          ],
+          "optional": false,
+          "spell": {
+            "ability": "",
+            "preparation": "",
+            "uses": {
+              "max": "",
+              "per": ""
+            }
+          }
+        },
+        "value": {},
+        "level": 14,
+        "title": "Features"
+      },
+      {
+        "_id": "TRDTQYSENQRYQKTS",
+        "type": "ItemGrant",
+        "configuration": {
+          "items": [
+            "Compendium.dnd5e.classfeatures.63TIGVIGMZFR9L2A"
+          ],
+          "optional": false,
+          "spell": {
+            "ability": "",
+            "preparation": "",
+            "uses": {
+              "max": "",
+              "per": ""
+            }
+          }
+        },
+        "value": {},
+        "level": 18,
+        "title": "Features"
+      }
+    ],
+    "spellcasting": {
+      "progression": "none",
+      "ability": ""
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.1.0",
+    "coreVersion": "10.291",
+    "createdTime": 1675986801413,
+    "modifiedTime": 1675986801413,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  }
+}

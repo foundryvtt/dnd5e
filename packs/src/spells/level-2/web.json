@@ -1,11 +1,13 @@
 {
   "_id": "UJJu9c2UvCzVljiP",
   "name": "Web",
+  "ownership": {
+    "default": 0
+  },
   "type": "spell",
-  "img": "icons/magic/control/debuff-chains-ropes-net-white.webp",
   "system": {
     "description": {
-      "value": "<p>You conjure a mass of thick, sticky webbing at a point of your choice within range. The webs fill a 20-foot cube from that point for the Duration. The webs are difficult terrain and lightly obscure their area.</p>\n        <p>If the webs aren't anchored between two solid masses (such as walls or trees) or layered across a floor, wall, or ceiling, the conjured web collapses on itself, and the spell ends at the start of your next turn. Webs layered over a flat surface have a depth of 5 feet.</p>\n        <p>Each creature that starts its turn in the webs or that enters them during its turn must make a Dexterity saving throw. On a failed save, the creature is Restrained as long as it remains in the webs or until it breaks free.</p>\n        <p>A creature Restrained by the webs can use its action to make a Strength check against your spell save DC. If it succeeds, it is no longer Restrained.</p>\n        <p>The webs are flammable. Any 5-foot cube of webs exposed to fire burns away in 1 round, dealing 2d4 fire damage to any creature that starts its turn in the fire.</p>",
+      "value": "<p>You conjure a mass of thick, sticky webbing at a point of your choice within range. The webs fill a 20-foot cube from that point for the duration. The webs are difficult terrain and lightly obscure their area.</p><p>If the webs aren't anchored between two solid masses (such as walls or trees) or layered across a floor, wall, or ceiling, the conjured web collapses on itself, and the spell ends at the start of your next turn. Webs layered over a flat surface have a depth of 5 feet.</p><p>Each creature that starts its turn in the webs or that enters them during its turn must make a <strong>Dexterity saving throw</strong>. On a failed save, the creature is restrained as long as it remains in the webs or until it breaks free.</p><p>A creature restrained by the webs can use its actions to make a Strength check against your spell save DC. If it succeeds, it is no longer restrained.</p><p>The webs are flammable. Any 5-foot cube of webs exposed to fire burns away in 1 round, dealing <strong>2d4 fire damage</strong> to any creature that starts its turn in the fire.</p>",
       "chat": "",
       "unidentified": ""
     },
@@ -51,7 +53,12 @@
       "damage": ""
     },
     "damage": {
-      "parts": [],
+      "parts": [
+        [
+          "2d4",
+          "fire"
+        ]
+      ],
       "versatile": ""
     },
     "formula": "2d4[fire]",
@@ -70,7 +77,7 @@
       "concentration": true
     },
     "materials": {
-      "value": "A bit of spiderweb",
+      "value": "A bit of spider web",
       "consumed": false,
       "cost": 0,
       "supply": 0
@@ -84,19 +91,17 @@
       "formula": ""
     }
   },
+  "sort": 0,
+  "flags": {},
+  "img": "icons/magic/control/debuff-chains-ropes-net-white.webp",
   "effects": [],
   "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0
-  },
-  "flags": {},
   "_stats": {
     "systemId": "dnd5e",
     "systemVersion": "2.1.0",
     "coreVersion": "10.291",
     "createdTime": 1661787234147,
-    "modifiedTime": 1671220970079,
-    "lastModifiedBy": "dnd5ebuilder0000"
+    "modifiedTime": 1675989935213,
+    "lastModifiedBy": "RightHandOfVecna"
   }
 }

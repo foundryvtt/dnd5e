@@ -7,13 +7,13 @@
   "type": "spell",
   "system": {
     "description": {
-      "value": "<p>You choose one object that you must touch throughout the casting of the spell. If it is a magic item or some other magic-imbued object, you learn its properties and how to use them, whether it requires attunement to use, and how many charges it has, if any. You learn whether any spells are affecting the item and what they are. If the item was created by a spell, you learn which spell created it.</p><p>If you instead touch a creature throughout the casting, you learn what spells, if any, are currently affecting it.</p>",
+      "value": "<p>You choose one object that you must touch throughout the casting of the spell. You learn whether any spells are affecting the item and what they are. If the item was created by a spell, you learn which spell created it. If you instead touch a creature throughout the casting, you learn what spells, if any, are currently affecting it.</p><p>If you cast this spell as part of identifying a magic item or some other magic-imbued object, you gain a +10 bonus to your Intelligence (Arcana) check to learn its properties and how to use them.</p><p><strong><em>At Higher Levels:</em></strong> When you cast this spell using a spell slot of 2nd level or higher, the bonus to Intelligence (Arcana) checks increases by +2 for each slot level above 1st.</p>",
       "chat": "",
       "unidentified": ""
     },
     "source": "SRD 5.1",
     "activation": {
-      "type": "minute",
+      "type": "action",
       "cost": 1,
       "condition": ""
     },
@@ -26,7 +26,7 @@
       "value": 1,
       "width": null,
       "units": "",
-      "type": "object"
+      "type": "creature"
     },
     "range": {
       "value": null,
@@ -72,7 +72,7 @@
       "concentration": false
     },
     "materials": {
-      "value": "A pearl worth at least 100gp and an owl feather",
+      "value": "A pearl worth at least 100 gp and an owl feather",
       "consumed": false,
       "cost": 100,
       "supply": 0
@@ -82,7 +82,7 @@
       "prepared": false
     },
     "scaling": {
-      "mode": "none",
+      "mode": "level",
       "formula": ""
     }
   },
@@ -96,7 +96,7 @@
     "systemVersion": "2.1.0",
     "coreVersion": "10.291",
     "createdTime": 1661787234064,
-    "modifiedTime": 1671220968588,
-    "lastModifiedBy": "dnd5ebuilder0000"
+    "modifiedTime": 1675989934434,
+    "lastModifiedBy": "RightHandOfVecna"
   }
 }

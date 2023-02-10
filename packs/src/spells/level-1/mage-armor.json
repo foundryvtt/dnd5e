@@ -1,11 +1,13 @@
 {
   "_id": "CKZTpZlxj7hjjo2H",
   "name": "Mage Armor",
+  "ownership": {
+    "default": 0
+  },
   "type": "spell",
-  "img": "icons/magic/defensive/shield-barrier-glowing-triangle-blue.webp",
   "system": {
     "description": {
-      "value": "<p>You touch a willing creature who isn't wearing armor, and a protective magical force surrounds it until the spell ends. The target's base AC becomes 13 + its Dexterity modifier. The spell ends if the target dons armor or if you dismiss the spell as an action.</p>",
+      "value": "<p>You touch a willing creature who isn't wearing armor, and a protective magical force surrounds it until the spell ends. The target's base AC becomes 13 + its Dexterity modifier. The spell ends it if the target dons armor or if you dismiss the spell as an action.</p>",
       "chat": "",
       "unidentified": ""
     },
@@ -24,7 +26,7 @@
       "value": 1,
       "width": null,
       "units": "",
-      "type": "creature"
+      "type": "ally"
     },
     "range": {
       "value": null,
@@ -84,6 +86,9 @@
       "formula": ""
     }
   },
+  "sort": 0,
+  "flags": {},
+  "img": "icons/magic/defensive/shield-barrier-glowing-triangle-blue.webp",
   "effects": [
     {
       "_id": "cfwMU7LuOJ619Lny",
@@ -115,17 +120,12 @@
     }
   ],
   "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0
-  },
-  "flags": {},
   "_stats": {
     "systemId": "dnd5e",
     "systemVersion": "2.1.0",
     "coreVersion": "10.291",
     "createdTime": 1661787234095,
-    "modifiedTime": 1671220968939,
-    "lastModifiedBy": "dnd5ebuilder0000"
+    "modifiedTime": 1675989934520,
+    "lastModifiedBy": "RightHandOfVecna"
   }
 }

@@ -1,0 +1,122 @@
+{
+  "_id": "3KG5E5FIU2CN0CT2",
+  "name": "Circle of the Sun",
+  "type": "subclass",
+  "img": "",
+  "system": {
+    "description": {
+      "value": "<p>Druids of the Circle of the Sun embrace the life-giving power of the sun, typically learning spells that emulate it in some way. These druids wield fire and light both to harm their foes and to bolster their allies. These druids are more at home in cities and towns than other druids, since the object of their reverence is no less plentiful there, but these druids dislike subterranean environments for obvious reasons.</p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "SRD 5.1",
+    "identifier": "circle-of-the-sun",
+    "classIdentifier": "druid",
+    "advancement": [
+      {
+        "_id": "UGGA5ZIIYPJDT2T1",
+        "type": "ItemGrant",
+        "configuration": {
+          "items": [
+            "Compendium.dnd5e.classfeatures.C516OAWEJGA5Q93L",
+            "Compendium.dnd5e.classfeatures.QOAD9Q26GXKHQRWP"
+          ],
+          "optional": false,
+          "spell": {
+            "ability": "",
+            "preparation": "",
+            "uses": {
+              "max": "",
+              "per": ""
+            }
+          }
+        },
+        "value": {},
+        "level": 2,
+        "title": "Features"
+      },
+      {
+        "_id": "F5C2L8IBW7BP34B3",
+        "type": "ItemGrant",
+        "configuration": {
+          "items": [
+            "Compendium.dnd5e.classfeatures.TYSCM9ECSIEVKX5E"
+          ],
+          "optional": false,
+          "spell": {
+            "ability": "",
+            "preparation": "",
+            "uses": {
+              "max": "",
+              "per": ""
+            }
+          }
+        },
+        "value": {},
+        "level": 6,
+        "title": "Features"
+      },
+      {
+        "_id": "DD12FJD9GHJ71QAL",
+        "type": "ItemGrant",
+        "configuration": {
+          "items": [
+            "Compendium.dnd5e.classfeatures.87XWV77HBRNSWBPZ"
+          ],
+          "optional": false,
+          "spell": {
+            "ability": "",
+            "preparation": "",
+            "uses": {
+              "max": "",
+              "per": ""
+            }
+          }
+        },
+        "value": {},
+        "level": 10,
+        "title": "Features"
+      },
+      {
+        "_id": "3XSH6SR3WO4YT3XF",
+        "type": "ItemGrant",
+        "configuration": {
+          "items": [
+            "Compendium.dnd5e.classfeatures.FBHYN01B67X8PQG4"
+          ],
+          "optional": false,
+          "spell": {
+            "ability": "",
+            "preparation": "",
+            "uses": {
+              "max": "",
+              "per": ""
+            }
+          }
+        },
+        "value": {},
+        "level": 14,
+        "title": "Features"
+      }
+    ],
+    "spellcasting": {
+      "progression": "none",
+      "ability": ""
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.1.0",
+    "coreVersion": "10.291",
+    "createdTime": 1675986801322,
+    "modifiedTime": 1675986801322,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  }
+}

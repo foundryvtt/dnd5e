@@ -1,0 +1,111 @@
+{
+  "_id": "9XUUODGBEJDIVOHY",
+  "name": "Blood Oath",
+  "ownership": {
+    "default": 0
+  },
+  "type": "spell",
+  "system": {
+    "description": {
+      "value": "<p>You bind one willing creature to a written or verbal agreement with a specific penalty for violating it. The spell fails if the target is coerced \u2014 such as with blackmail, violence, or an enchantment \u2014 into agreeing, or if the terms of the agreement are not clearly stated. Choose one of the following penalties:</p><ul><li>The effects of a spell that you cast as part of casting this spell, which only takes effect when a creature breaks the oath. If the spell targets creatures, it targets only the creature who made the oath, and if it requires a saving throw, the target automatically fails. Once this penalty is enacted, the spell ends.</li><li>The target feels pain each time it attempts to break the oath, taking <strong>5d6 psychic damage</strong>. A creature can take this damage no more often than once per minute.</li><li>The target is weakened each time it attempts to break the oath, gaining a level of exhaustion. This can occur no more often than once per minute.</li><li>The target is poisoned until they fulfil the oath.</li><li>The target's hit point maximum is halved until they fulfil the oath.</li></ul><p>At the DM's option, you may choose an alternative penalty, but it should be no more powerful than those described above.</p><p>You can end the spell early by using an action to dismiss it. A @Compendium[dnd5e.spells.XZhdgVK3cLoxNCQl]{Remove Curse}, @Compendium[dnd5e.spells.WzvJ7G3cqvIubsLk]{Greater Restoration}, or @Compendium[dnd5e.spells.3okM6Gn63zzEULkz]{Wish} spell also ends it. If the spell is dispelled or if the penalty is foiled in any way, the target takes <strong>20d6 psychic damage</strong> and their hit point maximum is reduced by the same amount. Ending this spell with a @Compendium[dnd5e.spells.3okM6Gn63zzEULkz]{Wish} avoids the psychic damage.</p><p><strong><em>At Higher Levels:</em></strong> When you cast this spell using a spell slot of 3rd level or higher, the damage for ending the spell early increases by 5d6 for each slot level above 2nd.</p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "SRD 5.1",
+    "activation": {
+      "type": "minute",
+      "cost": 1,
+      "condition": ""
+    },
+    "duration": {
+      "value": "",
+      "units": "perm"
+    },
+    "cover": null,
+    "target": {
+      "value": 1,
+      "width": null,
+      "units": "",
+      "type": "ally"
+    },
+    "range": {
+      "value": 10,
+      "long": null,
+      "units": "ft"
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": null,
+      "recovery": ""
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
+    "ability": "",
+    "actionType": "util",
+    "attackBonus": "",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [
+        [
+          "5d6",
+          "psychic"
+        ],
+        [
+          "20d6",
+          "psychic"
+        ]
+      ],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "level": 1,
+    "school": "enc",
+    "components": {
+      "vocal": true,
+      "somatic": true,
+      "material": true,
+      "ritual": true,
+      "concentration": false
+    },
+    "materials": {
+      "value": "A drop of blood from the target, and 500 gp of crushed pearls, which the spell consumes",
+      "consumed": true,
+      "cost": 500,
+      "supply": 0
+    },
+    "preparation": {
+      "mode": "prepared",
+      "prepared": false
+    },
+    "scaling": {
+      "mode": "level",
+      "formula": "5d6"
+    }
+  },
+  "sort": 0,
+  "flags": {},
+  "img": "icons/magic/air/fog-gas-smoke-swirling-pink.webp",
+  "effects": [],
+  "folder": null,
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.1.0",
+    "coreVersion": "10.291",
+    "createdTime": 1675986797279,
+    "modifiedTime": 1675989933854,
+    "lastModifiedBy": "RightHandOfVecna"
+  }
+}

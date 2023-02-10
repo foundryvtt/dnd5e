@@ -1,0 +1,88 @@
+{
+  "_id": "EKRC77JE4B25HYZA",
+  "name": "Gathered Swarm",
+  "ownership": {
+    "default": 0
+  },
+  "type": "feat",
+  "system": {
+    "description": {
+      "value": "<p>Beginning at 3rd level, a swarm of intangible nature spirits has bonded itself to you and can assist you in battle. While you're alive, the swarm remains in your space, crawling on you or flying and skittering around you within your space. You determine its appearance, or you generate its appearance by rolling on the Swarm Appearance table.</p>\n<h3>Swarm Appearance</h3>\n<table>\n<thead>\n<tr>\n<th align=\"center\">d4</th>\n<th align=\"left\">Appearance</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td align=\"center\">1</td>\n<td align=\"left\">Swarming insects</td>\n</tr>\n<tr>\n<td align=\"center\">2</td>\n<td align=\"left\">Miniature twig blights</td>\n</tr>\n<tr>\n<td align=\"center\">3</td>\n<td align=\"left\">Fluttering birds</td>\n</tr>\n<tr>\n<td align=\"center\">4</td>\n<td align=\"left\">Playful pixies</td>\n</tr>\n</tbody>\n</table>\n<p>Once on each of your turns, you can cause the swarm to assist you in one of the following ways, immediately after you hit a creature with an attack:</p>\n<ul>\n<li>The attack's target takes 1d6 piercing damage from the swarm.</li>\n<li>The attack's target must succeed on a Strength saving throw against your spell save DC or be moved by the swarm up to 15 feet horizontally in a direction of your choice.</li>\n<li>You are moved by the swarm 5 feet horizontally in a direction of your choice.</li>\n</ul>\n<blockquote>\n<h5>It's Your Swarm</h5>\n<p>A Swarmkeeper's swarm and spells are reflections of the character's bond with nature spirits. Take the opportunity to describe the swarm and the ranger's magic in play. For example, when your ranger casts @Compendium[dnd5e.spells.2IWiZAJtOGDoKjiz]{Gaseous Form}, they might appear to melt into the swarm, instead of a cloud of mist, or the @Compendium[dnd5e.spells.ImlCJQwR1VL40Qem]{Arcane Eye} spell could create an extension of your swarm that spies for you. Such descriptions don't change the effects of spells, but they are an exciting opportunity to explore your character through their class abilities.</p>\n<p>Also, remember that the swarm's appearance is yours to customize, and don't feel confined to a single appearance. Perhaps the spirits' look changes with the ranger's mood or with the seasons. You decide!</p>\n</blockquote>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "SRD 5.1",
+    "activation": {
+      "type": "",
+      "cost": null,
+      "condition": ""
+    },
+    "duration": {
+      "value": "",
+      "units": ""
+    },
+    "cover": null,
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": ""
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": ""
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": null,
+      "recovery": ""
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
+    "ability": null,
+    "actionType": "",
+    "attackBonus": "",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "type": {
+      "value": "class",
+      "subtype": ""
+    },
+    "requirements": "Swarmkeeper Conclave 3",
+    "recharge": {
+      "value": null,
+      "charged": false
+    }
+  },
+  "flags": {},
+  "img": "",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.1.0",
+    "coreVersion": "10.291",
+    "createdTime": 1675986803087,
+    "modifiedTime": 1675988226395,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  }
+}

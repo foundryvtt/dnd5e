@@ -1,4 +1,5 @@
 {
+  "_id": "2nadB2MBSHTQ0kcl",
   "name": "Draconic Bloodline",
   "type": "subclass",
   "img": "icons/creatures/reptiles/dragon-horned-blue.webp",
@@ -17,6 +18,7 @@
         "type": "ItemGrant",
         "configuration": {
           "items": [
+            "Compendium.dnd5e.classfeatures.6FYQ5AZTAGV7ROR9",
             "Compendium.dnd5e.classfeatures.EZsonMThTNLZq35j",
             "Compendium.dnd5e.classfeatures.MW1ExvBLm8Hg82aA"
           ],
@@ -110,13 +112,12 @@
     "default": 0
   },
   "flags": {},
-  "_id": "2nadB2MBSHTQ0kcl",
   "_stats": {
     "systemId": "dnd5e",
     "systemVersion": "2.1.0",
     "coreVersion": "10.291",
     "createdTime": 1661787234292,
-    "modifiedTime": 1671220973417,
+    "modifiedTime": 1675986801423,
     "lastModifiedBy": "dnd5ebuilder0000"
   }
 }

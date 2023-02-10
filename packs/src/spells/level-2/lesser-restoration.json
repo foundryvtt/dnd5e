@@ -7,7 +7,7 @@
   "type": "spell",
   "system": {
     "description": {
-      "value": "<p>You touch a creature and can end either one disease or one condition afflicting it. The condition can be blinded, deafened, paralyzed, or poisoned.</p>",
+      "value": "<p>You touch a creature and can end one of the following conditions afflicting it: blinded, deafened, paralyzed, or poisoned.</p><p>Certain diseases can also be cured in this way. If a disease cannot be cured with this spell, you learn the requirements of one possible cure if the disease is curable.</p>",
       "chat": "",
       "unidentified": ""
     },
@@ -96,7 +96,7 @@
     "systemVersion": "2.1.0",
     "coreVersion": "10.291",
     "createdTime": 1661787234103,
-    "modifiedTime": 1671220969005,
-    "lastModifiedBy": "dnd5ebuilder0000"
+    "modifiedTime": 1675989934494,
+    "lastModifiedBy": "RightHandOfVecna"
   }
 }

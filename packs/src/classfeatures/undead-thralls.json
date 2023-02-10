@@ -1,0 +1,88 @@
+{
+  "_id": "VD3Q8O24KODNT6JT",
+  "name": "Undead Thralls",
+  "ownership": {
+    "default": 0
+  },
+  "type": "feat",
+  "system": {
+    "description": {
+      "value": "<p>At 6th level, you add the @Compendium[dnd5e.spells.oyE5nVppa5mde5gT]{Animate Dead} spell to your spellbook if it is not there already. When you cast @Compendium[dnd5e.spells.oyE5nVppa5mde5gT]{Animate Dead}, you can animate two corpses instead of one.</p>\n<p>Whenever you create an undead using a necromancy spell, it has additional benefits:</p>\n<ul>\n<li>The creature's hit point maximum is increased by an amount equal to your wizard level.</li>\n<li>The creature adds your proficiency bonus to its weapon damage rolls.</li>\n</ul>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "SRD 5.1",
+    "activation": {
+      "type": "",
+      "cost": null,
+      "condition": ""
+    },
+    "duration": {
+      "value": "",
+      "units": ""
+    },
+    "cover": null,
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": ""
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": ""
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": null,
+      "recovery": ""
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
+    "ability": null,
+    "actionType": "",
+    "attackBonus": "",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "type": {
+      "value": "class",
+      "subtype": ""
+    },
+    "requirements": "School of Necromancy 6",
+    "recharge": {
+      "value": null,
+      "charged": false
+    }
+  },
+  "flags": {},
+  "img": "",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.1.0",
+    "coreVersion": "10.291",
+    "createdTime": 1675986804746,
+    "modifiedTime": 1675988227502,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  }
+}

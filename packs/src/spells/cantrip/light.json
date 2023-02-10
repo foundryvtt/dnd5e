@@ -7,7 +7,7 @@
   "type": "spell",
   "system": {
     "description": {
-      "value": "<p>You touch one object that is no larger than 10 feet in any dimension. Until the spell ends, the object sheds bright light in a 20-foot radius and dim light for an additional 20 feet. The light can be colored as you like. Completely covering the object with something opaque blocks the light. The spell ends if you cast it again or dismiss it as an action.</p><p>If you target an object held or worn by a hostile creature, that creature must succeed on a Dexterity saving throw to avoid the spell.</p>",
+      "value": "<p>You touch one object that is no larger than 10 feet in any dimension. Until the spell ends, the object sheds bright light in a 20-foot radius and dim light for an additional 20 feet. The light can be colored as you like. Completely covering the object with something opaque blocks the light. The spell ends if you cast it again or dismiss it as an action.</p><p>If you target an object held or worn by a hostile creature, that creature must succeed on a <strong>Dexterity saving throw</strong> to avoid the spell.</p>",
       "chat": "",
       "unidentified": ""
     },
@@ -23,10 +23,10 @@
     },
     "cover": null,
     "target": {
-      "value": 1,
+      "value": 20,
       "width": null,
-      "units": "",
-      "type": "object"
+      "units": "ft",
+      "type": "radius"
     },
     "range": {
       "value": null,
@@ -72,7 +72,7 @@
       "concentration": false
     },
     "materials": {
-      "value": "A firefly or phosphorescent moss.",
+      "value": "A firefly or phosphorescent moss",
       "consumed": false,
       "cost": 0,
       "supply": 0
@@ -96,7 +96,7 @@
     "systemVersion": "2.1.0",
     "coreVersion": "10.291",
     "createdTime": 1661787234093,
-    "modifiedTime": 1671220968926,
-    "lastModifiedBy": "dnd5ebuilder0000"
+    "modifiedTime": 1675989934500,
+    "lastModifiedBy": "RightHandOfVecna"
   }
 }

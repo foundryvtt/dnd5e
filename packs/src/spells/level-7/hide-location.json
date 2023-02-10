@@ -1,0 +1,102 @@
+{
+  "_id": "EY65K5XJT680IQ6F",
+  "name": "Hide Location",
+  "ownership": {
+    "default": 0
+  },
+  "type": "spell",
+  "system": {
+    "description": {
+      "value": "<p>When you cast this spell, you ward an immobile, hidden location (such as a town, a building, a grotto, or a geographic feature) known only to yourself and willing creatures within range. If this location is known to any creature not targeted by this spell, the spell fails.</p><p>The targets of this spell are bound to secrecy, unable to divulge the secret location directly or indirectly, even through spells such as @Compendium[dnd5e.spells.ppWAAEul0QHtm4er]{Detect Thoughts}. The location cannot be discovered with any divination magic. Only you can divulge the secret, and anyone you divulge it to is similarly affected by this spell.</p><p>A creature unaffected by this spell who would happen upon the secret location accidentally must make an <strong>Intelligence saving throw</strong>. On a failed save, the creature is incapable of perceiving the location, rationalizing away anything that might lead it to suspect the truth. On a successful save, the creature becomes subject to this spell.</p><p>You can dismiss this spell as an action, and the spell ends if you die. If you spend more than 1 consecutive hour in any location hidden by @Compendium[dnd5e.spells.EY65K5XJT680IQ6F]{Hide Location}, then your spell has a cumulative 5% chance of ending early every hour.</p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "SRD 5.1",
+    "activation": {
+      "type": "hour",
+      "cost": 8,
+      "condition": ""
+    },
+    "duration": {
+      "value": "",
+      "units": "perm"
+    },
+    "cover": null,
+    "target": {
+      "value": 1,
+      "width": null,
+      "units": "",
+      "type": "creature"
+    },
+    "range": {
+      "value": 120,
+      "long": null,
+      "units": "ft"
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": null,
+      "recovery": ""
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
+    "ability": "",
+    "actionType": "save",
+    "attackBonus": "",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "int",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "level": 7,
+    "school": "ill",
+    "components": {
+      "vocal": true,
+      "somatic": true,
+      "material": true,
+      "ritual": false,
+      "concentration": false
+    },
+    "materials": {
+      "value": "An uncut onyx worth 5,000 gp, which the spell consumes",
+      "consumed": true,
+      "cost": 5000,
+      "supply": 0
+    },
+    "preparation": {
+      "mode": "prepared",
+      "prepared": false
+    },
+    "scaling": {
+      "mode": "none",
+      "formula": ""
+    }
+  },
+  "sort": 0,
+  "flags": {},
+  "img": "icons/magic/control/hypnosis-mesmerism-eye.webp",
+  "effects": [],
+  "folder": null,
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.1.0",
+    "coreVersion": "10.291",
+    "createdTime": 1675986797801,
+    "modifiedTime": 1675989934402,
+    "lastModifiedBy": "RightHandOfVecna"
+  }
+}

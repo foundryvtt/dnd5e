@@ -1,0 +1,88 @@
+{
+  "_id": "M4GGZTX90FQR8UW9",
+  "name": "Invocation: Investment of the Chain Master",
+  "ownership": {
+    "default": 0
+  },
+  "type": "feat",
+  "system": {
+    "description": {
+      "value": "<p>When you cast @Compendium[dnd5e.spells.JGT5bNqu9REL7Fuz]{Find Familiar}, you infuse the summoned familiar with a measure of your eldritch power, granting the creature the following benefits:</p>\n<ul>\n<li>The familiar gains either a flying speed or a swimming speed (your choice) of 40 feet.</li>\n<li>The familiar no longer needs to breathe.</li>\n<li>The familiar's weapon attacks are considered magical for the purpose of overcoming immunity and resistance to nonmagical attacks.</li>\n<li>If the familiar forces a creature to make a saving throw, it uses your spell save DC.</li>\n</ul>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "SRD 5.1",
+    "activation": {
+      "type": "",
+      "cost": null,
+      "condition": ""
+    },
+    "duration": {
+      "value": "",
+      "units": ""
+    },
+    "cover": null,
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": ""
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": ""
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": null,
+      "recovery": ""
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
+    "ability": null,
+    "actionType": "",
+    "attackBonus": "",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "type": {
+      "value": "class",
+      "subtype": "eldritchInvocation"
+    },
+    "requirements": "Pact of the Chain feature",
+    "recharge": {
+      "value": null,
+      "charged": false
+    }
+  },
+  "flags": {},
+  "img": "",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.1.0",
+    "coreVersion": "10.291",
+    "createdTime": 1675986803465,
+    "modifiedTime": 1675986803465,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  }
+}

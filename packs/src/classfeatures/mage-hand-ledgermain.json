@@ -1,0 +1,88 @@
+{
+  "_id": "CUUGLHUYSL7INTDA",
+  "name": "*Mage Hand* Ledgermain",
+  "ownership": {
+    "default": 0
+  },
+  "type": "feat",
+  "system": {
+    "description": {
+      "value": "<p>Starting at 3rd level, when you cast @Compendium[dnd5e.spells.Utk1OQRwYkMkFRD3]{Mage Hand}, you can make the spectral hand invisible, and you can perform the following additional tasks with it:</p>\n<ul>\n<li>You can stow one object the hand is holding in a container worn or carried by another creature.</li>\n<li>You can retrieve an object in a container worn or carried by another creature.</li>\n<li>You can use thieves' tools to pick locks and disarm traps at range.</li>\n<li>You can designate a creature within 5 feet of the hand, granting you advantage on attack rolls against that creature until the end of your turn.</li>\n</ul>\n<p>You can perform one of these tasks without being noticed by a creature if you succeed on a Dexterity (Sleight of Hand) check contested by the creature's Wisdom (Perception) check.</p>\n<p>In addition, you can use the bonus action granted by your Cunning Action to control the hand.</p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "SRD 5.1",
+    "activation": {
+      "type": "",
+      "cost": null,
+      "condition": ""
+    },
+    "duration": {
+      "value": "",
+      "units": ""
+    },
+    "cover": null,
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": ""
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": ""
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": null,
+      "recovery": ""
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
+    "ability": null,
+    "actionType": "",
+    "attackBonus": "",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "type": {
+      "value": "class",
+      "subtype": ""
+    },
+    "requirements": "Arcane Trickster 3",
+    "recharge": {
+      "value": null,
+      "charged": false
+    }
+  },
+  "flags": {},
+  "img": "",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.1.0",
+    "coreVersion": "10.291",
+    "createdTime": 1675986803566,
+    "modifiedTime": 1675988226698,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  }
+}

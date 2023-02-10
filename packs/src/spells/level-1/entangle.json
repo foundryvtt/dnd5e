@@ -1,10 +1,13 @@
 {
+  "_id": "gMrWeG8fMDPRFiVe",
   "name": "Entangle",
+  "ownership": {
+    "default": 0
+  },
   "type": "spell",
-  "img": "icons/magic/nature/vines-thorned-curled-glow-green.webp",
   "system": {
     "description": {
-      "value": "<p>Grasping weeds and vines sprout from the ground in a 20-foot square starting from a point within range. For the Duration, these Plants turn the ground in the area into difficult terrain.</p><p>A creature in the area when you cast the spell must succeed on a Strength saving throw or be Restrained by the entangling Plants until the spell ends. A creature restrained by the plants can use its action to make a Strength check against your spell save DC. On a success, it frees itself.</p><p>When the spell ends, the conjured Plants wilt away.</p>",
+      "value": "<p>Grasping weeds and vines sprout from the ground in a 20-foot square starting from a point within range. For the duration, these plants turn the ground in the area into difficult terrain.</p><p>A creature in the area when you cast the spell must succeed on a <strong>Strength saving throw</strong> or be restrained by the entangling plants until the spell ends. A creature restrained by the plants can use its action to make a Strength check against your spell save DC. On a success, it frees itself.</p><p>When the spell ends, the conjured plants wilt away.</p>",
       "chat": "",
       "unidentified": ""
     },
@@ -83,20 +86,17 @@
       "formula": ""
     }
   },
-  "effects": [],
-  "flags": {},
-  "_id": "gMrWeG8fMDPRFiVe",
-  "folder": null,
   "sort": 0,
-  "ownership": {
-    "default": 0
-  },
+  "flags": {},
+  "img": "icons/magic/nature/vines-thorned-curled-glow-green.webp",
+  "effects": [],
+  "folder": null,
   "_stats": {
     "systemId": "dnd5e",
     "systemVersion": "2.1.0",
     "coreVersion": "10.291",
     "createdTime": 1661787234191,
-    "modifiedTime": 1671220970568,
-    "lastModifiedBy": "dnd5ebuilder0000"
+    "modifiedTime": 1675989934182,
+    "lastModifiedBy": "RightHandOfVecna"
   }
 }

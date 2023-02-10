@@ -7,7 +7,7 @@
   "type": "spell",
   "system": {
     "description": {
-      "value": "<p>You touch a closed door, window, gate, chest, or other entryway, and it becomes locked for the duration. You and the creatures you designate when you cast this spell can open the object normally. You can also set a password that, when spoken within 5 feet of the object, suppresses this spell for 1 minute. Otherwise, it is impassable until it is broken or the spell is dispelled or suppressed. Casting knock on the object suppresses arcane lock for 10 minutes.</p><p>While affected by this spell, the object is more difficult to break or force open; the DC to break it or pick any locks on it increases by 10.</p>",
+      "value": "<p>You touch a closed door, window, gate, chest, or other entryway, and it becomes locked for the duration. You and the creatures you designate when you cast this spell can open the object normally. You can also set a password that, when spoken within 5 feet of the object, suppresses this spell for 1 minute. Otherwise, it is impassable until it is broken or the spell is dispelled or suppressed. Casting @Compendium[dnd5e.spells.1nhIxh0DsJsntCfj]{Knock} on the object suppresses @Compendium[dnd5e.spells.8cse7rit0oswRPUP]{Arcane Lock} for 10 minutes.</p><p>While affected by this spell, the object is more difficult to break or force open; the DC to break it or pick any locks on it increases by 10.</p>",
       "chat": "",
       "unidentified": ""
     },
@@ -25,8 +25,8 @@
     "target": {
       "value": 1,
       "width": null,
-      "units": "spec",
-      "type": "object"
+      "units": "",
+      "type": "creature"
     },
     "range": {
       "value": null,
@@ -72,9 +72,9 @@
       "concentration": false
     },
     "materials": {
-      "value": "Gold dust worth at least 25 gp, which the spell consumes.",
+      "value": "Gold dust worth at least 5 gp, which the spell consumes",
       "consumed": true,
-      "cost": 25,
+      "cost": 5,
       "supply": 0
     },
     "preparation": {
@@ -96,7 +96,7 @@
     "systemVersion": "2.1.0",
     "coreVersion": "10.291",
     "createdTime": 1661787234081,
-    "modifiedTime": 1671220968808,
-    "lastModifiedBy": "dnd5ebuilder0000"
+    "modifiedTime": 1675989933764,
+    "lastModifiedBy": "RightHandOfVecna"
   }
 }

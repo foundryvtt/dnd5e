@@ -1,0 +1,88 @@
+{
+  "_id": "V5C3Z36KBYGLP8L7",
+  "name": "Animal Companion",
+  "ownership": {
+    "default": 0
+  },
+  "type": "feat",
+  "system": {
+    "description": {
+      "value": "<p>At 3rd level, you learn to use your magic to create a powerful bond with a creature of the natural world. With 8 hours of work, you call forth an animal from the wilderness to serve as your faithful companion. You normally select your companion from the <strong>animal companion</strong> stat block (choosing Air, Land, or Water). However, your DM might allow other creatures to act as animal companions.</p>\n<p>At the end of the 8 hours, your animal companion appears and gains all the benefits of your Companion's Bond ability. You can have only one animal companion at a time.</p>\n<p>If your animal companion is ever slain, the magical bond you share allows you to return it to life. With 8 hours of work, you call forth your companion's spirit and use your magic to create a new body for it. You can return an animal companion to life in this manner even if you do not possess any part of its body. If you use this ability to return a former animal companion to life while you have a current animal companion, your current companion leaves you and is replaced by the restored companion.</p>\n<hr />\n<blockquote>\n<h2>Animal Companion</h2>\n<p><em>Medium or smaller beast</em></p>\n<hr />\n<ul>\n<li><strong>Armor Class</strong> 10 + your proficiency bonus</li>\n<li><strong>Hit Points</strong> 10 + 3 times your ranger level + 2 times your character level</li>\n<li><strong>Speed</strong> 30 ft.; fly 30 ft. (Air only); swim 30 ft. (Water only)</li>\n</ul>\n<hr />\n<table>\n<thead>\n<tr>\n<th align=\"center\">STR</th>\n<th align=\"center\">DEX</th>\n<th align=\"center\">CON</th>\n<th align=\"center\">INT</th>\n<th align=\"center\">WIS</th>\n<th align=\"center\">CHA</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td align=\"center\">18 (+4)</td>\n<td align=\"center\">11 (+0)</td>\n<td align=\"center\">16 (+3)</td>\n<td align=\"center\">4 (-3)</td>\n<td align=\"center\">14 (+2)</td>\n<td align=\"center\">5 (-3)</td>\n</tr>\n</tbody>\n</table>\n<hr />\n<ul>\n<li><strong>Senses</strong> darkvision 60 ft., passive Perception 12</li>\n<li><strong>Languages</strong> understands the languages you speak</li>\n<li><strong>Challenge</strong> \u2014</li>\n</ul>\n<hr />\n<p><strong><em>Flyby (Air Only).</em></strong> The beast doesn't provoke opportunity attacks when it flies out of an enemy's reach.</p>\n<p><strong><em>Pack Tactics (Land and Water Only).</em></strong> The beast has advantage on an attack roll against a creature if at least one of the beast's allies is within 5 feet of the creature and the ally isn't incapacitated.</p>\n<p><strong><em>Water Breathing (Water Only).</em></strong> The beast can breathe only underwater.</p>\n<h3>Actions</h3>\n<p><strong><em>Maul.</em></strong> <em>Melee Weapon Attack:</em> your spell attack bonus to hit, reach 5 ft., one target. <em>Hit:</em> 1d8 + your proficiency bonus piercing damage.</p>\n</blockquote>\n<h3>Companion's Bond</h3>\n<p>Your animal companion gains a variety of benefits while it is linked to you.</p>\n<ul>\n<li>The animal companion loses its Multiattack action, if it has one.</li>\n<li>The companion obeys your commands as best it can. In combat, the creature shares your initiative count, but it takes its turn immediately after yours, and you determine its actions, decisions, attitudes, and so on. If you are incapacitated or absent, your companion acts on its own.</li>\n<li>When using your Natural Explorer feature, you and your animal companion can both move stealthily at a normal pace.</li>\n<li>Your companion shares your alignment, and has a personality trait and a flaw that you can roll for or select from the tables below. Your companion shares your ideal, and its bond is always, \"The ranger who travels with me is a beloved companion for whom I would gladly give my life.\"</li>\n<li>Your animal companion gains the benefits of your Favored Enemy feature, and of your Greater Favored Enemy feature when you gain that feature at 10th level. It uses your favored enemies.</li>\n</ul>\n<h3>Companion Traits and Flaws</h3>\n<table>\n<thead>\n<tr>\n<th align=\"center\">d6</th>\n<th align=\"left\">Personality Trait</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td align=\"center\">1</td>\n<td align=\"left\">I'm dauntless in the face of adversity.</td>\n</tr>\n<tr>\n<td align=\"center\">2</td>\n<td align=\"left\">Threaten my friends, threaten me.</td>\n</tr>\n<tr>\n<td align=\"center\">3</td>\n<td align=\"left\">I stay on alert so others can rest.</td>\n</tr>\n<tr>\n<td align=\"center\">4</td>\n<td align=\"left\">People see an animal and underestimate me. I use that to my advantage.</td>\n</tr>\n<tr>\n<td align=\"center\">5</td>\n<td align=\"left\">I have a knack for showing up in the nick of time.</td>\n</tr>\n<tr>\n<td align=\"center\">6</td>\n<td align=\"left\">I put my friends' needs before my own in all things.</td>\n</tr>\n</tbody>\n</table>\n<table>\n<thead>\n<tr>\n<th align=\"center\">d6</th>\n<th align=\"left\">Flaw</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td align=\"center\">1</td>\n<td align=\"left\">If there's food left unattended, I'll eat it.</td>\n</tr>\n<tr>\n<td align=\"center\">2</td>\n<td align=\"left\">I growl at strangers, and all people except my ranger are strangers to me.</td>\n</tr>\n<tr>\n<td align=\"center\">3</td>\n<td align=\"left\">Any time is a good time for a belly rub.</td>\n</tr>\n<tr>\n<td align=\"center\">4</td>\n<td align=\"left\">I'm deathly afraid of water.</td>\n</tr>\n<tr>\n<td align=\"center\">5</td>\n<td align=\"left\">My idea of hello is a flurry of licks to the face.</td>\n</tr>\n<tr>\n<td align=\"center\">6</td>\n<td align=\"left\">I jump on creatures to tell them how much I love them.</td>\n</tr>\n</tbody>\n</table>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "SRD 5.1",
+    "activation": {
+      "type": "",
+      "cost": null,
+      "condition": ""
+    },
+    "duration": {
+      "value": "",
+      "units": ""
+    },
+    "cover": null,
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": ""
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": ""
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": null,
+      "recovery": ""
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
+    "ability": null,
+    "actionType": "",
+    "attackBonus": "",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "type": {
+      "value": "class",
+      "subtype": ""
+    },
+    "requirements": "Beastmaster Conclave 3",
+    "recharge": {
+      "value": null,
+      "charged": false
+    }
+  },
+  "flags": {},
+  "img": "",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.1.0",
+    "coreVersion": "10.291",
+    "createdTime": 1675986801774,
+    "modifiedTime": 1675988225755,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  }
+}

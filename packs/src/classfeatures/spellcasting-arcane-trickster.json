@@ -1,0 +1,88 @@
+{
+  "_id": "QFYHPG2Z07R51PN6",
+  "name": "Spellcasting (Arcane Trickster)",
+  "ownership": {
+    "default": 0
+  },
+  "type": "feat",
+  "system": {
+    "description": {
+      "value": "<p>When you reach 3rd level, you gain the ability to cast spells.</p>\n<p><strong><em>Cantrips.</em></strong> You learn three cantrips: @Compendium[dnd5e.spells.Utk1OQRwYkMkFRD3]{Mage Hand} and two other cantrips of your choice from the @UUID[Compendium.dnd5e.classfeatures.DMDW9DRUUN56GZ0C]{Wizard spell list}. You learn another wizard cantrip of your choice at 10th level.</p>\n<p><strong><em>Spell Slots.</em></strong> The Arcane Trickster Spellcasting table shows how many spell slots you have to cast your spells of 1st level and higher. To cast one of these spells, you must expend a slot of the spell's level or higher. You regain all expended spell slots when you finish a long rest.</p>\n<p>For example, if you know the 1st-level spell @Compendium[dnd5e.spells.eS7XnnApoxRxYXPs]{Charm Person} and have a 1st-level and a 2nd-level spell slot available, you can cast @Compendium[dnd5e.spells.eS7XnnApoxRxYXPs]{Charm Person} using either slot.</p>\n<p><strong><em>Spells Known of 1st-Level and Higher.</em></strong> You know three 1st-level wizard spells of your choice, two of which you must choose from the enchantment and illusion spells on the @UUID[Compendium.dnd5e.classfeatures.DMDW9DRUUN56GZ0C]{Wizard spell list}.</p>\n<p>The Spells Known column of the Arcane Trickster Spellcasting table shows when you learn more wizard spells of 1st level or higher. Each of these spells must be an conjuration, enchantment, or illusion spell of your choice, and must be of a level for which you have spell slots. For instance, when you reach 7th level in this class, you can learn one new spell of 1st or 2nd level.</p>\n<p>The spells you learn at 8th, 14th, and 20th level can come from any school of magic.</p>\n<p>Whenever you gain a level in this class, you can replace one of the wizard spells you know with another spell of your choice from the @UUID[Compendium.dnd5e.classfeatures.DMDW9DRUUN56GZ0C]{Wizard spell list}. The new spell must be of a level for which you have spell slots, and it must be an conjuration, enchantment, or illusion spell, unless you're replacing the spell you gained at 8th, 14th, or 20th level.</p>\n<p><strong><em>Spellcasting Ability</em></strong>. Intelligence is your spellcasting ability for your wizard spells, since you learn your spells through dedicated study and memorization. You use your Intelligence whenever a spell refers to your spellcasting ability. In addition, you use your Intelligence modifier when setting the saving throw DC for a wizard spell you cast and when making an attack roll with one.</p>\n<p><strong>Spell save DC</strong> = 8 + your proficiency bonus + your Intelligence modifier</p>\n<p><strong>Spell attack modifier</strong> = your proficiency bonus + your Intelligence modifier</p>\n<h3>Arcane Trickster Spellcasting</h3>\n<table>\n<thead>\n<tr>\n<th align=\"center\">Rogue Level</th>\n<th align=\"center\">Cantrips Known</th>\n<th align=\"center\">Spells Known</th>\n<th align=\"center\">1st</th>\n<th align=\"center\">2nd</th>\n<th align=\"center\">3rd</th>\n<th align=\"center\">4th</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td align=\"center\">3rd</td>\n<td align=\"center\">3</td>\n<td align=\"center\">3</td>\n<td align=\"center\">2</td>\n<td align=\"center\">\u2014</td>\n<td align=\"center\">\u2014</td>\n<td align=\"center\">\u2014</td>\n</tr>\n<tr>\n<td align=\"center\">4th</td>\n<td align=\"center\">3</td>\n<td align=\"center\">4</td>\n<td align=\"center\">3</td>\n<td align=\"center\">\u2014</td>\n<td align=\"center\">\u2014</td>\n<td align=\"center\">\u2014</td>\n</tr>\n<tr>\n<td align=\"center\">5th</td>\n<td align=\"center\">3</td>\n<td align=\"center\">4</td>\n<td align=\"center\">3</td>\n<td align=\"center\">\u2014</td>\n<td align=\"center\">\u2014</td>\n<td align=\"center\">\u2014</td>\n</tr>\n<tr>\n<td align=\"center\">6th</td>\n<td align=\"center\">3</td>\n<td align=\"center\">4</td>\n<td align=\"center\">3</td>\n<td align=\"center\">\u2014</td>\n<td align=\"center\">\u2014</td>\n<td align=\"center\">\u2014</td>\n</tr>\n<tr>\n<td align=\"center\">7th</td>\n<td align=\"center\">3</td>\n<td align=\"center\">5</td>\n<td align=\"center\">4</td>\n<td align=\"center\">2</td>\n<td align=\"center\">\u2014</td>\n<td align=\"center\">\u2014</td>\n</tr>\n<tr>\n<td align=\"center\">8th</td>\n<td align=\"center\">3</td>\n<td align=\"center\">6</td>\n<td align=\"center\">4</td>\n<td align=\"center\">2</td>\n<td align=\"center\">\u2014</td>\n<td align=\"center\">\u2014</td>\n</tr>\n<tr>\n<td align=\"center\">9th</td>\n<td align=\"center\">3</td>\n<td align=\"center\">6</td>\n<td align=\"center\">4</td>\n<td align=\"center\">2</td>\n<td align=\"center\">\u2014</td>\n<td align=\"center\">\u2014</td>\n</tr>\n<tr>\n<td align=\"center\">10th</td>\n<td align=\"center\">4</td>\n<td align=\"center\">7</td>\n<td align=\"center\">4</td>\n<td align=\"center\">3</td>\n<td align=\"center\">\u2014</td>\n<td align=\"center\">\u2014</td>\n</tr>\n<tr>\n<td align=\"center\">11th</td>\n<td align=\"center\">4</td>\n<td align=\"center\">8</td>\n<td align=\"center\">4</td>\n<td align=\"center\">3</td>\n<td align=\"center\">\u2014</td>\n<td align=\"center\">\u2014</td>\n</tr>\n<tr>\n<td align=\"center\">12th</td>\n<td align=\"center\">4</td>\n<td align=\"center\">8</td>\n<td align=\"center\">4</td>\n<td align=\"center\">3</td>\n<td align=\"center\">\u2014</td>\n<td align=\"center\">\u2014</td>\n</tr>\n<tr>\n<td align=\"center\">13th</td>\n<td align=\"center\">4</td>\n<td align=\"center\">9</td>\n<td align=\"center\">4</td>\n<td align=\"center\">3</td>\n<td align=\"center\">2</td>\n<td align=\"center\">\u2014</td>\n</tr>\n<tr>\n<td align=\"center\">14th</td>\n<td align=\"center\">4</td>\n<td align=\"center\">10</td>\n<td align=\"center\">4</td>\n<td align=\"center\">3</td>\n<td align=\"center\">2</td>\n<td align=\"center\">\u2014</td>\n</tr>\n<tr>\n<td align=\"center\">15th</td>\n<td align=\"center\">4</td>\n<td align=\"center\">10</td>\n<td align=\"center\">4</td>\n<td align=\"center\">3</td>\n<td align=\"center\">2</td>\n<td align=\"center\">\u2014</td>\n</tr>\n<tr>\n<td align=\"center\">16th</td>\n<td align=\"center\">4</td>\n<td align=\"center\">11</td>\n<td align=\"center\">4</td>\n<td align=\"center\">3</td>\n<td align=\"center\">3</td>\n<td align=\"center\">\u2014</td>\n</tr>\n<tr>\n<td align=\"center\">17th</td>\n<td align=\"center\">4</td>\n<td align=\"center\">11</td>\n<td align=\"center\">4</td>\n<td align=\"center\">3</td>\n<td align=\"center\">3</td>\n<td align=\"center\">\u2014</td>\n</tr>\n<tr>\n<td align=\"center\">18th</td>\n<td align=\"center\">4</td>\n<td align=\"center\">11</td>\n<td align=\"center\">4</td>\n<td align=\"center\">3</td>\n<td align=\"center\">3</td>\n<td align=\"center\">\u2014</td>\n</tr>\n<tr>\n<td align=\"center\">19th</td>\n<td align=\"center\">4</td>\n<td align=\"center\">12</td>\n<td align=\"center\">4</td>\n<td align=\"center\">3</td>\n<td align=\"center\">3</td>\n<td align=\"center\">1</td>\n</tr>\n<tr>\n<td align=\"center\">20th</td>\n<td align=\"center\">4</td>\n<td align=\"center\">13</td>\n<td align=\"center\">4</td>\n<td align=\"center\">3</td>\n<td align=\"center\">3</td>\n<td align=\"center\">1</td>\n</tr>\n</tbody>\n</table>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "SRD 5.1",
+    "activation": {
+      "type": "",
+      "cost": null,
+      "condition": ""
+    },
+    "duration": {
+      "value": "",
+      "units": ""
+    },
+    "cover": null,
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": ""
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": ""
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": null,
+      "recovery": ""
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
+    "ability": null,
+    "actionType": "",
+    "attackBonus": "",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "type": {
+      "value": "class",
+      "subtype": ""
+    },
+    "requirements": "Arcane Trickster 3",
+    "recharge": {
+      "value": null,
+      "charged": false
+    }
+  },
+  "flags": {},
+  "img": "",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.1.0",
+    "coreVersion": "10.291",
+    "createdTime": 1675986804490,
+    "modifiedTime": 1675988227302,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  }
+}

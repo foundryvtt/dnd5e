@@ -7,7 +7,7 @@
   "type": "spell",
   "system": {
     "description": {
-      "value": "<p>At your touch, all curses affecting one creature or object end. If the object is a cursed magic item, its curse remains, but the spell breaks its owner's Attunement to the object so it can be removed or discarded.</p>",
+      "value": "<p>At your touch, minor curses affecting one creature or object end. If the object is a cursed magic item, its curse remains, but the spell breaks its owner's attunement to the object so it can be removed or discarded.</p><p>More powerful curses might require special material components or conditions to break.</p>",
       "chat": "",
       "unidentified": ""
     },
@@ -67,14 +67,14 @@
     "components": {
       "vocal": true,
       "somatic": true,
-      "material": false,
+      "material": true,
       "ritual": false,
       "concentration": false
     },
     "materials": {
-      "value": "",
-      "consumed": false,
-      "cost": 0,
+      "value": "Diamond dust worth 100 gp, which the spell consumes",
+      "consumed": true,
+      "cost": 100,
       "supply": 0
     },
     "preparation": {
@@ -96,7 +96,7 @@
     "systemVersion": "2.1.0",
     "coreVersion": "10.291",
     "createdTime": 1661787234157,
-    "modifiedTime": 1671220970178,
-    "lastModifiedBy": "dnd5ebuilder0000"
+    "modifiedTime": 1675989934789,
+    "lastModifiedBy": "RightHandOfVecna"
   }
 }

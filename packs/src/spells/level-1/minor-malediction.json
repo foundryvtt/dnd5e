@@ -1,0 +1,102 @@
+{
+  "_id": "A0RDGP0L8DG50B2A",
+  "name": "Minor Malediction",
+  "ownership": {
+    "default": 0
+  },
+  "type": "spell",
+  "system": {
+    "description": {
+      "value": "<p>You touch a creature, and that creature must succeed on a <strong>Wisdom saving throw</strong> or become cursed for the duration of the spell. When you cast this spell, choose the nature of the curse from the following options:</p><ul><li>Choose one skill or tool proficiency. While cursed, the target loses proficiency with that skill or tool.</li><li>While cursed, the target has disadvantage on Wisdom (Perception) checks made to notice dangerous situations.</li><li>While cursed, each time the target rolls a 1 on any d20, it is incapacitated until the start of its next turn due to violent coughing and sneezing.</li><li>While cursed, the target has disadvantage on saving throws made to resist nonmagical diseases.</li><li>While cursed, the target has bad luck with one of the following: family, romance, or profession.</li></ul><p>A @Compendium[dnd5e.spells.XZhdgVK3cLoxNCQl]{Remove Curse} spell ends this effect. At the DM's option, you may choose an alternative curse effect, but it should be no more powerful than those described above. The DM has final say on such a curse's effect.</p><p>A creature with a specially prepared protective amulet \u2014 an engraved gem, a statue, a lucky coin, a pendant, a plant or animal part, or a written incantation censuring evil \u2014 on their person has advantage on their saving throws made to resist this spell.</p><p><strong><em>At Higher Levels:</em></strong> If you cast this spell using a spell slot of 2nd level, the duration is 7 days. If you use a spell slot of 3rd level, the duration is 1 month. If you use a spell slot of 4th level, the duration is 1 year. If you use a spell slot of 5th level or higher, the spell lasts until it is dispelled.</p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "SRD 5.1",
+    "activation": {
+      "type": "action",
+      "cost": 1,
+      "condition": ""
+    },
+    "duration": {
+      "value": "24",
+      "units": "hour"
+    },
+    "cover": null,
+    "target": {
+      "value": 1,
+      "width": null,
+      "units": "",
+      "type": "creature"
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": "touch"
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": null,
+      "recovery": ""
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
+    "ability": "",
+    "actionType": "save",
+    "attackBonus": "",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "wis",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "level": 1,
+    "school": "nec",
+    "components": {
+      "vocal": true,
+      "somatic": false,
+      "material": false,
+      "ritual": false,
+      "concentration": false
+    },
+    "materials": {
+      "value": "",
+      "consumed": false,
+      "cost": 0,
+      "supply": 0
+    },
+    "preparation": {
+      "mode": "prepared",
+      "prepared": false
+    },
+    "scaling": {
+      "mode": "level",
+      "formula": ""
+    }
+  },
+  "sort": 0,
+  "flags": {},
+  "img": "icons/magic/death/skeleton-bird-skull-gray.webp",
+  "effects": [],
+  "folder": null,
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.1.0",
+    "coreVersion": "10.291",
+    "createdTime": 1675986798016,
+    "modifiedTime": 1675989934605,
+    "lastModifiedBy": "RightHandOfVecna"
+  }
+}

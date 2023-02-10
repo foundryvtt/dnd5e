@@ -7,7 +7,7 @@
   "type": "spell",
   "system": {
     "description": {
-      "value": "<p>This spell creates a magical link between a Large or larger inanimate plant within range and another plant, at any distance, on the same plane of existence. You must have seen or touched the destination plant at least once before. For the Duration, any creature can step into the target plant and exit from the destination plant by using 5 feet of Movement.</p>",
+      "value": "<p>This spell creates a magical link between a Large or larger inanimate plant within range and another plant, at any distance, on the same plane of existence. You must have seen or touched the destination plant at least once before. For the duration, any creature can step into the target plant and exit from the destination plant by using 5 feet of movement.</p>",
       "chat": "",
       "unidentified": ""
     },
@@ -23,10 +23,10 @@
     },
     "cover": null,
     "target": {
-      "value": 2,
+      "value": null,
       "width": null,
-      "units": "spec",
-      "type": "object"
+      "units": "any",
+      "type": "space"
     },
     "range": {
       "value": 10,
@@ -96,7 +96,7 @@
     "systemVersion": "2.1.0",
     "coreVersion": "10.291",
     "createdTime": 1661787234233,
-    "modifiedTime": 1671220971335,
-    "lastModifiedBy": "dnd5ebuilder0000"
+    "modifiedTime": 1675989935119,
+    "lastModifiedBy": "RightHandOfVecna"
   }
 }

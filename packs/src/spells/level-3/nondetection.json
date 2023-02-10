@@ -7,7 +7,7 @@
   "type": "spell",
   "system": {
     "description": {
-      "value": "<p>For the Duration, you hide a target that you touch from Divination magic. The target can be a willing creature or a place or an object no larger than 10 feet in any dimension. The target can't be targeted by any divination magic or perceived through magical Scrying sensors.</p>",
+      "value": "<p>For the duration, you hide a target that you touch from divination magic. The target can be a willing creature or a place or an object no larger than 10 feet in any dimension. The target can't be targeted by any divination magic or perceived through magical scrying sensors.</p>",
       "chat": "",
       "unidentified": ""
     },
@@ -26,7 +26,7 @@
       "value": 1,
       "width": null,
       "units": "",
-      "type": "creature"
+      "type": "ally"
     },
     "range": {
       "value": null,
@@ -72,9 +72,9 @@
       "concentration": false
     },
     "materials": {
-      "value": "A pinch of diamond dust worth 25 gp sprinkled over the target, which the spell consumes",
+      "value": "A pinch of diamond dust worth 5 gp sprinkled over the target, which the spell consumes",
       "consumed": true,
-      "cost": 25,
+      "cost": 5,
       "supply": 0
     },
     "preparation": {
@@ -96,7 +96,7 @@
     "systemVersion": "2.1.0",
     "coreVersion": "10.291",
     "createdTime": 1661787234168,
-    "modifiedTime": 1671220970308,
-    "lastModifiedBy": "dnd5ebuilder0000"
+    "modifiedTime": 1675989934638,
+    "lastModifiedBy": "RightHandOfVecna"
   }
 }

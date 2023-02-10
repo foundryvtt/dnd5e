@@ -1,0 +1,88 @@
+{
+  "_id": "YNSE0N32I7QIKF7M",
+  "name": "Maneuver: All-Out Attack",
+  "ownership": {
+    "default": 0
+  },
+  "type": "feat",
+  "system": {
+    "description": {
+      "value": "<p>When you hit a creature with a weapon attack on your turn, you can expend any number of superiority dice and use a bonus action to tell your allies that now is the time to strike. Add all superiority dice you spend to the attack's damage roll.</p>\n<p>For each die you spend, choose a creature friendly to you that can see and hear you. On that creature's next turn, it gains an additional action, which it can use only to take the Attack (one weapon attack only), Dash, Disengage, Hide, or Use an Object action. You can only grant a given creature one additional action when you use this maneuver.</p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "SRD 5.1",
+    "activation": {
+      "type": "",
+      "cost": null,
+      "condition": ""
+    },
+    "duration": {
+      "value": "",
+      "units": ""
+    },
+    "cover": null,
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": ""
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": ""
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": null,
+      "recovery": ""
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
+    "ability": null,
+    "actionType": "",
+    "attackBonus": "",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "type": {
+      "value": "class",
+      "subtype": "maneuver"
+    },
+    "requirements": "Fighter 15, Charisma 13 or higher",
+    "recharge": {
+      "value": null,
+      "charged": false
+    }
+  },
+  "flags": {},
+  "img": "",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.1.0",
+    "coreVersion": "10.291",
+    "createdTime": 1675986803588,
+    "modifiedTime": 1675986803588,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  }
+}

@@ -7,7 +7,7 @@
   "type": "spell",
   "system": {
     "description": {
-      "value": "<p>You send negative energy coursing through a creature that you can see within range, causing it searing pain. The target must make a Constitution saving throw. It takes 7d8 + 30 necrotic damage on a failed save, or half as much damage on a successful one.</p><p>A humanoid killed by this spell rises at the start of your next turn as a Zombie that is permanently under your command, following your verbal orders to the best of its ability.</p>",
+      "value": "<p>You send negative energy coursing through a creature that you can see within range, causing it searing pain. The target must make a <strong>Constitution saving throw</strong>. It takes 7d8+30 necrotic damage on a failed save, or half as much damage on a successful one.</p><p>A humanoid killed by this spell rises at the start of your next turn as a <strong>zombie</strong> that is permanently under your command, following your verbal orders to the best of its ability.</p>",
       "chat": "",
       "unidentified": ""
     },
@@ -55,7 +55,7 @@
     "damage": {
       "parts": [
         [
-          "7d8 + 30",
+          "7d8+30",
           "necrotic"
         ]
       ],
@@ -101,7 +101,7 @@
     "systemVersion": "2.1.0",
     "coreVersion": "10.291",
     "createdTime": 1661787234107,
-    "modifiedTime": 1671220969040,
-    "lastModifiedBy": "dnd5ebuilder0000"
+    "modifiedTime": 1675989934236,
+    "lastModifiedBy": "RightHandOfVecna"
   }
 }

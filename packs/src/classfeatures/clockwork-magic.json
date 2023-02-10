@@ -1,0 +1,88 @@
+{
+  "_id": "ZVU3XPMLCVAGXOHT",
+  "name": "Clockwork Magic",
+  "ownership": {
+    "default": 0
+  },
+  "type": "feat",
+  "system": {
+    "description": {
+      "value": "<p>You learn additional spells when you reach certain levels in this class, as shown on the Clockwork Spells table. Each of these spells counts as a sorcerer spell for you, but it doesn't count against the\nnumber of sorcerer spells you know.</p>\n<p>Whenever you gain a sorcerer level, you can replace one spell you gained from this feature with another spell of 5th level or lower. The new spell must be an abjuration or a transmutation spell from the sorcerer, warlock, or wizard spell list.</p>\n<h3>Clockwork Spells</h3>\n<table>\n<thead>\n<tr>\n<th align=\"center\">Sorcerer Level</th>\n<th align=\"left\">Spells</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td align=\"center\">1st</td>\n<td align=\"left\">@Compendium[dnd5e.spells.7p9IuWrSWFgfyQo2]{Alarm}, @Compendium[dnd5e.spells.xmDBqZhRVrtLP8h2]{Protection from Evil and Good}</td>\n</tr>\n<tr>\n<td align=\"center\">3rd</td>\n<td align=\"left\">@Compendium[dnd5e.spells.Opwh2PdX4runSBlm]{Aid}, @Compendium[dnd5e.spells.F0GsG0SJzsIOacwV]{Lesser Restoration}</td>\n</tr>\n<tr>\n<td align=\"center\">5th</td>\n<td align=\"left\">@Compendium[dnd5e.spells.15Fa6q1nH27XfbR8]{Dispel Magic}, @Compendium[dnd5e.spells.j8NtLXOOJ3GAKF8I]{Protection from Energy}</td>\n</tr>\n<tr>\n<td align=\"center\">7th</td>\n<td align=\"left\">@Compendium[dnd5e.spells.da0a1t2FqaTjRZGT]{Freedom of Movement}, @Compendium[dnd5e.spells.0J2VFC6IA11U8ZYR]{Summon Construct}</td>\n</tr>\n<tr>\n<td align=\"center\">9th</td>\n<td align=\"left\">@Compendium[dnd5e.spells.WzvJ7G3cqvIubsLk]{Greater Restoration}, @Compendium[dnd5e.spells.o9ZCvuD2B1OTcubb]{Wall of Force}</td>\n</tr>\n</tbody>\n</table>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "SRD 5.1",
+    "activation": {
+      "type": "",
+      "cost": null,
+      "condition": ""
+    },
+    "duration": {
+      "value": "",
+      "units": ""
+    },
+    "cover": null,
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": ""
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": ""
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": null,
+      "recovery": ""
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
+    "ability": null,
+    "actionType": "",
+    "attackBonus": "",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "type": {
+      "value": "class",
+      "subtype": ""
+    },
+    "requirements": "Clockwork Soul 1",
+    "recharge": {
+      "value": null,
+      "charged": false
+    }
+  },
+  "flags": {},
+  "img": "",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.1.0",
+    "coreVersion": "10.291",
+    "createdTime": 1675986802185,
+    "modifiedTime": 1675988226041,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  }
+}

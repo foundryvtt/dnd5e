@@ -7,7 +7,7 @@
   "type": "spell",
   "system": {
     "description": {
-      "value": "<p>A hail of rock-hard ice pounds to the ground in a 20-foot-radius, 40-foot-high Cylinder centered on a point within range. Each creature in the cylinder must make a Dexterity saving throw. A creature takes 2d8 bludgeoning damage and 4d6 cold damage on a failed save, or half as much damage on a successful one.</p><p>Hailstones turn the storm's area of effect into difficult terrain until the end of your next turn.</p><p><strong>At Higher Levels.</strong> When you cast this spell using a spell slot of 5th level or higher, the bludgeoning damage increases by 1d8 for each slot level above 4th.</p>",
+      "value": "<p>A hail of rock-hard ice pounds to the ground in a 20-foot-radius, 40-foot-high cylinder centered on a point within range. Each creature in the cylinder must make a <strong>Dexterity saving throw</strong>. A creature takes <strong>4d8 bludgeoning damage</strong> and <strong>4d6 cold damage</strong> on a failed save, or half as much damage on a successful one.</p><p>Hailstones turn the storm's area of effect into difficult terrain until the end of your next turn.</p><p><strong><em>At Higher Levels:</em></strong> When you cast this spell using a spell slot of 5th level or higher, the cold damage increases by 1d6 for each slot level above 4th.</p>",
       "chat": "",
       "unidentified": ""
     },
@@ -55,7 +55,7 @@
     "damage": {
       "parts": [
         [
-          "2d8",
+          "4d8",
           "bludgeoning"
         ],
         [
@@ -92,7 +92,7 @@
     },
     "scaling": {
       "mode": "level",
-      "formula": "1d8"
+      "formula": "1d6"
     }
   },
   "sort": 0,
@@ -105,7 +105,7 @@
     "systemVersion": "2.1.0",
     "coreVersion": "10.291",
     "createdTime": 1661787234152,
-    "modifiedTime": 1671220970107,
-    "lastModifiedBy": "dnd5ebuilder0000"
+    "modifiedTime": 1675989934432,
+    "lastModifiedBy": "RightHandOfVecna"
   }
 }

@@ -1,0 +1,88 @@
+{
+  "_id": "BDXQCLCXCGAEQ11U",
+  "name": "*Mage Hand* Trickster",
+  "ownership": {
+    "default": 0
+  },
+  "type": "feat",
+  "system": {
+    "description": {
+      "value": "<p>Starting at 13th level, you can perform the following additional tasks with your @Compendium[dnd5e.spells.Utk1OQRwYkMkFRD3]{Mage Hand} spell:</p>\n<ul>\n<li>You can attempt to trip one creature within 5 feet of the hand. The creature must make a Dexterity saving throw against your spell save DC or be knocked prone.</li>\n<li>You can attempt to blind a creature within 5 feet of the hand. The creature must make a Constitution saving throw against your spell save DC or be blinded until the start of your next turn.</li>\n<li>You can deliver the effects of the @Compendium[dnd5e.spells.udsLtG0BugXHR2JQ]{Prestidigitation} spell originating from the hand.</li>\n</ul>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "SRD 5.1",
+    "activation": {
+      "type": "",
+      "cost": null,
+      "condition": ""
+    },
+    "duration": {
+      "value": "",
+      "units": ""
+    },
+    "cover": null,
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": ""
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": ""
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": null,
+      "recovery": ""
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
+    "ability": null,
+    "actionType": "",
+    "attackBonus": "",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "type": {
+      "value": "class",
+      "subtype": ""
+    },
+    "requirements": "Arcane Trickster 13",
+    "recharge": {
+      "value": null,
+      "charged": false
+    }
+  },
+  "flags": {},
+  "img": "",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.1.0",
+    "coreVersion": "10.291",
+    "createdTime": 1675986803569,
+    "modifiedTime": 1675988226700,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  }
+}

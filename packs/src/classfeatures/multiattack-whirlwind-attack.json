@@ -7,7 +7,7 @@
   "type": "feat",
   "system": {
     "description": {
-      "value": "<p>You can use your action to make a melee attack against any number of creatures within 5 feet of you, with a separate attack roll for each target.</p>",
+      "value": "<p>You can use your action to make melee attacks against any number of creatures within 5 feet of you, with a separate attack roll for each target.</p>",
       "chat": "",
       "unidentified": ""
     },
@@ -66,7 +66,7 @@
       "value": "class",
       "subtype": "multiattack"
     },
-    "requirements": "Hunter 11",
+    "requirements": "Hunter Conclave 11",
     "recharge": {
       "value": null,
       "charged": false
@@ -82,7 +82,7 @@
     "systemVersion": "2.1.0",
     "coreVersion": "10.291",
     "createdTime": 1661787234322,
-    "modifiedTime": 1672334926871,
+    "modifiedTime": 1675986803851,
     "lastModifiedBy": "dnd5ebuilder0000"
   }
 }

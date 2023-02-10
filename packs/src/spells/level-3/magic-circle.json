@@ -7,7 +7,7 @@
   "type": "spell",
   "system": {
     "description": {
-      "value": "<p>You create a 10-foot-radius, 20-foot-tall Cylinder of magical energy centered on a point on the ground that you can see within range. Glowing runes appear wherever the cylinder intersects with the floor or other surface.</p><p>Choose one or more of the following types of creatures: Celestials, Elementals, fey, Fiends, or Undead. The circle affects a creature of the chosen type in the following ways:</p>\n<ul>\n<li>The creature can't willingly enter the cylinder by nonmagical means. If the creature tries to use teleportation or interplanar travel to do so, it must first succeed on a Charisma saving throw.</li>\n<li>The creature has disadvantage on Attack rolls against Targets within the Cylinder.</li>\n<li>Targets within the cylinder can't be Charmed, Frightened, or possessed by the creature.</li>\n</ul>\n<p>When you cast this spell, you can elect to cause its magic to operate in the reverse direction, preventing a creature of the specified type from leaving the cylinder and protecting targets outside it.</p><p><strong>At Higher Levels.</strong> When you cast this spell using a spell slot of 4th level or higher, the Duration increases by 1 Hour for each slot level above 3rd.</p>",
+      "value": "<p>You create a 10-foot-radius, 20-foot-tall cylinder of magical energy centered on a point on the ground that you can see within range. Glowing runes appear wherever the cylinder intersects with the floor or other surface.</p><p>Choose one or more of the following types of creatures: celestials, elementals, fey, fiends, or undead. The circle affects a creature of the chosen type in the following ways:</p><ul><li>The creature can't willingly enter the cylinder by nonmagical means. If the creature tries to use teleportation or interplanar travel to do so, it must first succeed on a <strong>Charisma saving throw</strong>.</li><li>The creature has disadvantage on attack rolls against targets within the cylinder.</li><li>Targets within the cylinder can't be charmed, frightened, or possessed by the creature.</li></ul><p>When you cast this spell, you can elect to cause its magic to operate in the reverse direction, preventing a creature of the specified type from leaving the cylinder and protecting targets outside it.</p><p><strong><em>At Higher Levels:</em></strong> When you cast this spell using a spell slot of 4th level or higher, the duration increases by 1 hour for each slot level above 3rd.</p>",
       "chat": "",
       "unidentified": ""
     },
@@ -18,7 +18,7 @@
       "condition": ""
     },
     "duration": {
-      "value": "@item.level - 2",
+      "value": "1",
       "units": "hour"
     },
     "cover": null,
@@ -26,7 +26,7 @@
       "value": 10,
       "width": null,
       "units": "ft",
-      "type": "cylinder"
+      "type": "radius"
     },
     "range": {
       "value": 10,
@@ -72,9 +72,9 @@
       "concentration": false
     },
     "materials": {
-      "value": "Holy water or powdered silver and iron worth at least 100gp, which the spell consumes",
+      "value": "Holy water or powdered silver and iron worth at least 25 gp, which the spell consumes",
       "consumed": true,
-      "cost": 100,
+      "cost": 25,
       "supply": 0
     },
     "preparation": {
@@ -96,7 +96,7 @@
     "systemVersion": "2.1.0",
     "coreVersion": "10.291",
     "createdTime": 1661787234241,
-    "modifiedTime": 1671220971432,
-    "lastModifiedBy": "dnd5ebuilder0000"
+    "modifiedTime": 1675989934529,
+    "lastModifiedBy": "RightHandOfVecna"
   }
 }

@@ -1,8 +1,10 @@
 {
   "_id": "z1mx84ONwkXKUZd7",
   "name": "Shield",
+  "ownership": {
+    "default": 0
+  },
   "type": "spell",
-  "img": "icons/magic/defensive/shield-barrier-glowing-triangle-magenta.webp",
   "system": {
     "description": {
       "value": "<p>An invisible barrier of magical force appears and protects you. Until the start of your next turn, you have a +5 bonus to AC, including against the triggering attack, and you take no damage from magic missile.</p>",
@@ -13,7 +15,7 @@
     "activation": {
       "type": "reaction",
       "cost": 1,
-      "condition": "Which you take when you are hit by an attack or targeted by the magic missile spell"
+      "condition": "which you take when you are hit by an attack or targeted by the *magic missile* spell"
     },
     "duration": {
       "value": "1",
@@ -84,6 +86,9 @@
       "formula": ""
     }
   },
+  "sort": 0,
+  "flags": {},
+  "img": "icons/magic/defensive/shield-barrier-glowing-triangle-magenta.webp",
   "effects": [
     {
       "_id": "6pbotGIvqQkraPva",
@@ -115,17 +120,12 @@
     }
   ],
   "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0
-  },
-  "flags": {},
   "_stats": {
     "systemId": "dnd5e",
     "systemVersion": "2.1.0",
     "coreVersion": "10.291",
     "createdTime": 1661787234244,
-    "modifiedTime": 1671220971502,
-    "lastModifiedBy": "dnd5ebuilder0000"
+    "modifiedTime": 1675989934853,
+    "lastModifiedBy": "RightHandOfVecna"
   }
 }

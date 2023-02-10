@@ -7,7 +7,7 @@
   "type": "spell",
   "system": {
     "description": {
-      "value": "<p>You extend your hand and point a finger at a target in range. Your magic grants you a brief insight into the target's defenses. On your next turn, you gain advantage on your first attack roll against the target, provided that this spell hasn't ended.</p>",
+      "value": "<p>You extend your hand and point a finger at a creature in range. Your magic grants you a brief insight into the target's defenses. You gain advantage on all attack rolls made against the target, provided that this spell hasn't ended. This spell ends when you hit the target.</p>",
       "chat": "",
       "unidentified": ""
     },
@@ -19,7 +19,7 @@
     },
     "duration": {
       "value": "1",
-      "units": "round"
+      "units": "minute"
     },
     "cover": null,
     "target": {
@@ -29,7 +29,7 @@
       "type": "creature"
     },
     "range": {
-      "value": 30,
+      "value": 60,
       "long": null,
       "units": "ft"
     },
@@ -69,7 +69,7 @@
       "somatic": true,
       "material": false,
       "ritual": false,
-      "concentration": true
+      "concentration": false
     },
     "materials": {
       "value": "",
@@ -96,7 +96,7 @@
     "systemVersion": "2.1.0",
     "coreVersion": "10.291",
     "createdTime": 1661787234219,
-    "modifiedTime": 1671220971177,
-    "lastModifiedBy": "dnd5ebuilder0000"
+    "modifiedTime": 1675989935136,
+    "lastModifiedBy": "RightHandOfVecna"
   }
 }

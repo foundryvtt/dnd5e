@@ -7,7 +7,7 @@
   "type": "spell",
   "system": {
     "description": {
-      "value": "<p>A flood of Healing energy flows from you into injured creatures around you. You restore up to 700 Hit Points, divided as you choose among any number of creatures that you can see within range. Creatures healed by this spell are also cured of all Diseases and any effect making them Blinded or Deafened. This spell has no effect on Undead or constructs.</p>",
+      "value": "<p>A flood of healing energy flows from you into injured creatures around you. You restore up to 700 hit points, divided as you choose among any number of creatures that you can see within range. Creatures healed by this spell are also cured of all diseases and any effect making them blinded or deafened. This spell has no effect on undead or constructs.</p>",
       "chat": "",
       "unidentified": ""
     },
@@ -25,8 +25,8 @@
     "target": {
       "value": null,
       "width": null,
-      "units": "",
-      "type": ""
+      "units": "any",
+      "type": "space"
     },
     "range": {
       "value": 60,
@@ -101,7 +101,7 @@
     "systemVersion": "2.1.0",
     "coreVersion": "10.291",
     "createdTime": 1661787234160,
-    "modifiedTime": 1671220970213,
-    "lastModifiedBy": "dnd5ebuilder0000"
+    "modifiedTime": 1675989934557,
+    "lastModifiedBy": "RightHandOfVecna"
   }
 }

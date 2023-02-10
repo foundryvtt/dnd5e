@@ -7,7 +7,7 @@
   "type": "spell",
   "system": {
     "description": {
-      "value": "<p>Until the spell ends, freezing rain and sleet fall in a 20-foot-tall cylinder with a 40-foot radius centered on a point you choose within range. The area is heavily obscured, and exposed flames in the area are doused.</p><p>The ground in the area is covered with slick ice, making it difficult terrain. When a creature enters the spell's area for the first time on a turn or starts its turn there, it must make a Dexterity saving throw. On a failed save, it falls Prone.</p><p>If a creature is concentrating in the spell's area, the creature must make a successful Constitution saving throw against your spell save DC or lose concentration.</p>",
+      "value": "<p>Until the spell ends, freezing rain and sleet fall in a 20-foot-tall cylinder with a 40-foot radius centered on a point you choose within range. The area is heavily obscured, and exposed flames in the area are doused.</p><p>The ground in the area is covered with slick ice, making it difficult terrain. When a creature enters the spell's area for the first time on a turn or starts its turn there, it must make a <strong>Dexterity saving throw</strong>. On a failed save, it falls prone.</p><p>If a creature is concentrating in the spell's area, the creature must make a successful <strong>Constitution saving throw</strong> against your spell save DC or lose concentration.</p>",
       "chat": "",
       "unidentified": ""
     },
@@ -26,7 +26,7 @@
       "value": 40,
       "width": null,
       "units": "ft",
-      "type": "cylinder"
+      "type": "radius"
     },
     "range": {
       "value": 150,
@@ -72,7 +72,7 @@
       "concentration": true
     },
     "materials": {
-      "value": "A pinch of dust and a few drops of water.",
+      "value": "A pinch of dust and a few drops of water",
       "consumed": false,
       "cost": 0,
       "supply": 0
@@ -96,7 +96,7 @@
     "systemVersion": "2.1.0",
     "coreVersion": "10.291",
     "createdTime": 1661787234181,
-    "modifiedTime": 1671220970452,
-    "lastModifiedBy": "dnd5ebuilder0000"
+    "modifiedTime": 1675989934887,
+    "lastModifiedBy": "RightHandOfVecna"
   }
 }

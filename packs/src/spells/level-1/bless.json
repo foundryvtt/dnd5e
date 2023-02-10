@@ -1,11 +1,13 @@
 {
   "_id": "8dzaICjGy6mTUaUr",
   "name": "Bless",
+  "ownership": {
+    "default": 0
+  },
   "type": "spell",
-  "img": "icons/magic/control/buff-flight-wings-blue.webp",
   "system": {
     "description": {
-      "value": "<p>You bless up to three creatures of your choice within range. Whenever a target makes an attack roll or a saving throw before the spell ends, the target can roll 1d4 and add the number rolled to the attack roll or saving throw.</p>\n<p><strong>Higher Levels.</strong> When you cast this spell using a spell slot of 2nd level or higher, you can target one additional creature for each slot level above 1st.</p>",
+      "value": "<p>You bless up to three creatures of your choice within range. Whenever a target makes an attack roll or a saving throw before the spell ends, the target can roll a d4 and add the number rolled to the attack roll or saving throw.</p><p><strong><em>At Higher Levels:</em></strong> When you cast this spell using a spell slot of 2nd level or higher, you can target one additional creature for each slot level above 1st.</p>",
       "chat": "",
       "unidentified": ""
     },
@@ -84,6 +86,9 @@
       "formula": ""
     }
   },
+  "sort": 0,
+  "flags": {},
+  "img": "icons/magic/control/buff-flight-wings-blue.webp",
   "effects": [
     {
       "_id": "8rP3gwmXVTgZqYZE",
@@ -139,17 +144,12 @@
     }
   ],
   "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0
-  },
-  "flags": {},
   "_stats": {
     "systemId": "dnd5e",
     "systemVersion": "2.1.0",
     "coreVersion": "10.291",
     "createdTime": 1661787234081,
-    "modifiedTime": 1671220968815,
-    "lastModifiedBy": "dnd5ebuilder0000"
+    "modifiedTime": 1675989933842,
+    "lastModifiedBy": "RightHandOfVecna"
   }
 }

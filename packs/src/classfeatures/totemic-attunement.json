@@ -1,0 +1,88 @@
+{
+  "_id": "E5IJCH55NVZKTNWC",
+  "name": "Totemic Attunement",
+  "ownership": {
+    "default": 0
+  },
+  "type": "feat",
+  "system": {
+    "description": {
+      "value": "<p>At 14th level, you gain a magical benefit based on the totem animal of your choice. You can choose the same animal you selected at 3rd level or a different one.</p>\n<p>@UUID[Compendium.dnd5e.classfeatures.XVRSO0S9TO4Q0TK3]{Bear}</p>\n<p>@UUID[Compendium.dnd5e.classfeatures.D5HSJYWI9B8R4UXM]{Eagle}</p>\n<p>@UUID[Compendium.dnd5e.classfeatures.00DLP9U0ILRKFGCA]{Wolf}</p>\n<p>@UUID[Compendium.dnd5e.classfeatures.6RCWU1JSVM7QUAY8]{Elk}</p>\n<p>@UUID[Compendium.dnd5e.classfeatures.85FE9XZWRR8C6VFY]{Tiger}</p>\n<section class=\"secret foundry-note\">\n<p><strong>Foundry Note</strong></p>\n<p>You can drag your choices from the above onto your character sheet and it will automatically update.</p>\n</section>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "SRD 5.1",
+    "activation": {
+      "type": "",
+      "cost": null,
+      "condition": ""
+    },
+    "duration": {
+      "value": "",
+      "units": ""
+    },
+    "cover": null,
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": ""
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": ""
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": null,
+      "recovery": ""
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
+    "ability": null,
+    "actionType": "",
+    "attackBonus": "",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "type": {
+      "value": "class",
+      "subtype": ""
+    },
+    "requirements": "Path of the Totem Warrior 14",
+    "recharge": {
+      "value": null,
+      "charged": false
+    }
+  },
+  "flags": {},
+  "img": "",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.1.0",
+    "coreVersion": "10.291",
+    "createdTime": 1675986804696,
+    "modifiedTime": 1675988227467,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  }
+}
