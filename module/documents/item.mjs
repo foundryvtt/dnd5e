@@ -2058,7 +2058,7 @@ export default class Item5e extends Item {
     // Create a composite description from the scroll description and the spell details
     const desc = scrollIntro
     + `<hr/><h3>${itemData.name} (${game.i18n.format("DND5E.LevelNumber", {level})})</h3>`
-    + (components.concentration ? `<em>${game.i18n.localize("DND5E.ScrollRequiresConcentration")}</em>` : "")
+    + (components.concentration ? `<p><em>${game.i18n.localize("DND5E.ScrollRequiresConcentration")}</em></p>` : "")
     + `<hr/>${description.value}<hr/>`
     + `<h3>${game.i18n.localize("DND5E.ScrollDetails")}</h3><hr/>${scrollDetails}`;
 
@@ -2079,8 +2079,7 @@ export default class Item5e extends Item {
       system: {
         description: {value: desc.trim()}, source, actionType, activation, duration, target,
         range, damage, formula, save, level, attackBonus, ability
-      },
-      flags: {dnd5e: {concentration: components.concentration}}
+      }
     });
 
     /**
