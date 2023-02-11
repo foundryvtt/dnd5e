@@ -2030,8 +2030,8 @@ export default class Item5e extends Item {
 
   /**
    * Create a consumable spell scroll Item from a spell Item.
-   * @param {Item5e} spell      The spell to be made into a scroll
-   * @returns {Item5e}          The created scroll consumable item
+   * @param {Item5e|object} spell     The spell or item data to be made into a scroll
+   * @returns {Item5e}                The created scroll consumable item
    */
   static async createScrollFromSpell(spell) {
 
@@ -2086,11 +2086,10 @@ export default class Item5e extends Item {
      * A hook event that fires after the item data for a scroll is created but before the item is returned.
      * @function dnd5e.createScrollFromSpell
      * @memberof hookEvents
-     * @param {Item5e|object} spell       The spell or item data triggering this function.
-     * @param {object} itemData           The item data of the spell triggering this function.
+     * @param {Item5e|object} spell       The spell or item data to be made into a scroll.
      * @param {object} spellScrollData    The final item data used to make the scroll.
      */
-    Hooks.callAll("dnd5e.createScrollFromSpell", spell, itemData, spellScrollData);
+    Hooks.callAll("dnd5e.createScrollFromSpell", spell, spellScrollData);
     return new this(spellScrollData);
   }
 
