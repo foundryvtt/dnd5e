@@ -306,7 +306,7 @@ def xpToCR(xp:int)->float:
 #     elif level >=  3:  return "journeyman"
 #     else:              return "apprentice"
 
-def id_generator(size=16, chars=string.ascii_uppercase + string.digits):
+def id_generator(size=16, chars=string.ascii_letters + string.digits):
         return ''.join(choice(chars) for _ in range(size))    
 
 

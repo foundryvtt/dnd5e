@@ -652,6 +652,25 @@ def loadClasses(filepath:str, all_spells:dict={}):
 
     return classes, None, canonical_features
 
+def loadFeats(filepath:str)->dict:
+    phb = load_5e_phb(filepath)
+
+    feats = {}
+    for featCollection in phb.fromPath("Chapter 6: Customization Options", "Feats").children():
+        if featCollection.level != CollectionLevel.H3:
+            continue
+        feat = Feature(featCollection)
+        feat.name = f"Feat: {feat.name}"
+        feat.featureType = "feat"
+        feats[cmdize(feat.name)] = feat
+    
+    # load original features for purposes of consistency with IDs
+    with open(os.path.join("packs","classfeatures.db"), 'r', encoding="utf-8") as loadFp:
+        original_features = readOriginals(loadFp)
+
+    updateNewClassFeatures(feats, original_features)
+    
+    return feats
 
 def writeFeatures(canonical_features):
     # load original features for purposes of consistency with IDs
@@ -665,7 +684,7 @@ def writeFeatures(canonical_features):
 
     for feature_key in sorted(canonical_features.keys()):
         feature = canonical_features[feature_key]
-        featureJson = feature.toDb()
+        featureJson = feature.toDb() if isinstance(feature,Feature) else feature
         if feature_key in original_features and equalsWithout(featureJson, original_features[feature_key]):
             featureJson = original_features[feature_key]
         with open(os.path.join(classFeaturesDir, f"{feature_key}.json"), 'w', encoding="utf-8") as saveFp:
@@ -723,6 +742,8 @@ def main():
     args = parser.parse_args()
 
     classes, _, features = loadClasses(args.filepath)
+    feats = loadFeats(args.filepath)
+    features.update(feats)
 
     writeClasses(classes)
     writeFeatures(features)
