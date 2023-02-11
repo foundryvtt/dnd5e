@@ -772,6 +772,7 @@ h5 {
 }
 .dnd5e.sheet.actor .sheet-header .header-exp {
   flex: 0 0 150px;
+  max-width: 18em;
   margin-right: 3px;
   height: 60px;
   justify-content: flex-end;
@@ -789,8 +790,9 @@ h5 {
   line-height: 24px;
 }
 .dnd5e.sheet.actor .sheet-header .summary span {
-  margin-inline-start: 4px;
+  margin-inline: 4px;
   border-block-start: 1px solid transparent;
+  white-space: nowrap;
 }
 .dnd5e.sheet.actor .sheet-header .summary select {
   position: relative;
@@ -2001,6 +2003,8 @@ h5 {
 .dnd5e.sheet.actor.character .sheet-header .charlevel {
   flex: 0 0 20px;
   height: 20px;
+  overflow: hidden;
+  text-overflow: ellipsis;
   font-size: 18px;
   color: #7a7971;
   white-space: nowrap;
@@ -2047,7 +2051,6 @@ h5 {
 }
 .dnd5e.sheet.actor.character .sheet-header .summary .proficiency {
   text-align: right;
-  padding-right: 5px;
 }
 .dnd5e.sheet.actor.character .resource .attribute-value > input {
   flex: 0 0 25%;
