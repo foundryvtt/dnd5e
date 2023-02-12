@@ -1119,11 +1119,11 @@ export default class Actor5e extends Actor {
       buttons: {
         test: {
           label: game.i18n.localize("DND5E.ActionAbil"),
-          callback: () => this.rollAbilityTest(abilityId, options)
+          callback: (_, event) => this.rollAbilityTest(abilityId, {...options, event})
         },
         save: {
           label: game.i18n.localize("DND5E.ActionSave"),
-          callback: () => this.rollAbilitySave(abilityId, options)
+          callback: (_, event) => this.rollAbilitySave(abilityId, {...options, event})
         }
       }
     }).render(true);
@@ -1169,7 +1169,7 @@ export default class Actor5e extends Actor {
     }
 
     // Roll and return
-    const flavor = game.i18n.format("DND5E.AbilityPromptTitle", {ability: label});
+    const flavor = game.i18n.format("DND5E.AbilityPromptTestTitle", {ability: label});
     const rollData = foundry.utils.mergeObject({
       data,
       title: `${flavor}: ${this.name}`,

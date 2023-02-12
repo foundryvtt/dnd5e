@@ -488,7 +488,7 @@ export default class Item5e extends Item {
 
     // Action usage
     if ( "actionType" in this.system ) {
-      this.labels.abilityCheck = game.i18n.format("DND5E.AbilityPromptTitle", {
+      this.labels.abilityCheck = game.i18n.format("DND5E.AbilityPromptTestTitle", {
         ability: CONFIG.DND5E.abilities[this.system.ability]?.label ?? ""
       });
 

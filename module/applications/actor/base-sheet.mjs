@@ -1330,8 +1330,8 @@ export default class ActorSheet5e extends ActorSheet {
    */
   _onRollAbilityTest(event) {
     event.preventDefault();
-    let ability = event.currentTarget.parentElement.dataset.ability;
-    this.actor.rollAbility(ability, {event: event});
+    const ability = event.currentTarget.parentElement.dataset.ability;
+    this.actor.rollAbility(ability);
   }
 
   /* -------------------------------------------- */
