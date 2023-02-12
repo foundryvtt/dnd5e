@@ -637,6 +637,18 @@
         "Hint": "Use this if you are unsure of the type of the scale values, or if the type does not matter.",
         "Identifier": "This scale value for the current level will be available in a formula using:<br><copyable-text>@scale.{class}.{identifier}</copyable-text>",
         "Label": "Anything"
+      },
+      "Usage": {
+        "FIELDS": {
+          "per": {
+            "label": "Period"
+          },
+          "value": {
+            "label": "Uses"
+          }
+        },
+        "Hint": "Use this to represent item uses over a certain period.",
+        "Label": "Usage"
       }
     }
   },

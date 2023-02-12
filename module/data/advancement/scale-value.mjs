@@ -8,7 +8,7 @@ const { BooleanField, NumberField, ObjectField, SchemaField, SetField, StringFie
 /**
  * @import {
  *   ScaleValueAdvancementConfigurationData, ScaleValueDiceTypeData, ScaleValueNumberTypeData,
- *   ScaleValueStringTypeData, ScaleValueTypeMetadata
+ *   ScaleValueStringTypeData, ScaleValueTypeMetadata, ScaleValueUsesTypeData
  * } from "./_types.mjs";
  */
 
@@ -485,6 +485,83 @@ export class ScaleValueTypeDistance extends ScaleValueTypeNumber {
 
 
 /**
+ * Scale value data that stores a feature's usage number.
+ * @extends {ScaleValueType<ScaleValueUsesTypeData>}
+ * @mixes ScaleValueUsesTypeData
+ */
+export class ScaleValueTypeUsage extends ScaleValueTypeNumber {
+
+  /* -------------------------------------------- */
+  /*  Model Configuration                         */
+  /* -------------------------------------------- */
+
+  /** @override */
+  static LOCALIZATION_PREFIXES = ["DND5E.ADVANCEMENT.ScaleValue.Type.Usage"];
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  static defineSchema() {
+    return {
+      value: new NumberField({ nullable: true, integer: true, min: 0 }),
+      per: new StringField({ blank: false })
+    };
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  static get metadata() {
+    return foundry.utils.mergeObject(super.metadata, {
+      label: "DND5E.ADVANCEMENT.ScaleValue.Type.Usage.Label",
+      hint: "DND5E.ADVANCEMENT.ScaleValue.Type.Usage.Hint"
+    });
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  static convertFrom(original, options) {
+    let value = parseInt(original.formula);
+    if ( Number.isNaN(value) ) return null;
+    if ( value < 1 ) value = 1;
+    return new this({ value }, options);
+  }
+
+  /* -------------------------------------------- */
+  /*  Properties                                  */
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  get display() {
+    return `${this.value}/${CONFIG.DND5E.limitedUsePeriods[this.per]?.abbreviation ?? ""}`;
+  }
+
+  /* -------------------------------------------- */
+  /*  Helpers                                     */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  static getFields(level, value, lastValue) {
+    const fields = super.getFields(level, value, lastValue);
+    fields.per.options = [
+      { value: "", label: fields.per.placeholder, rule: true },
+      ...CONFIG.DND5E.limitedUsePeriods.recoveryOptions.filter(r => r.value !== "recharge")
+    ];
+    return fields;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  static getPlaceholder(name, lastValue) {
+    if ( (name === "per") && lastValue?.per ) return CONFIG.DND5E.limitedUsePeriods[lastValue.per]?.label;
+    return super.getPlaceholder(name, lastValue);
+  }
+}
+
+
+/**
  * The available types of scaling value.
  * @enum {ScaleValueType}
  */
@@ -493,5 +570,6 @@ export const TYPES = {
   number: ScaleValueTypeNumber,
   cr: ScaleValueTypeCR,
   dice: ScaleValueTypeDice,
-  distance: ScaleValueTypeDistance
+  distance: ScaleValueTypeDistance,
+  usage: ScaleValueTypeUsage
 };
