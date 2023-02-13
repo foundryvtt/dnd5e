@@ -2031,9 +2031,10 @@ export default class Item5e extends Item {
   /**
    * Create a consumable spell scroll Item from a spell Item.
    * @param {Item5e|object} spell     The spell or item data to be made into a scroll
+   * @param {object} options          Additional options that modify the created scroll
    * @returns {Item5e}                The created scroll consumable item
    */
-  static async createScrollFromSpell(spell) {
+  static async createScrollFromSpell(spell, options={}) {
 
     // Get spell data
     const itemData = (spell instanceof Item5e) ? spell.toObject() : spell;
@@ -2081,6 +2082,7 @@ export default class Item5e extends Item {
         range, damage, formula, save, level, attackBonus, ability
       }
     });
+    foundry.utils.mergeObject(spellScrollData, options);
 
     /**
      * A hook event that fires after the item data for a scroll is created but before the item is returned.
