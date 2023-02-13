@@ -58,10 +58,12 @@ def load_5e_phb(
     return Book(phb5e)
 
 
-def readOriginals(idFp):
+def readOriginals(folder):
     featureMap = {}
-    for line in idFp:
-        feature = json.loads(line)
+    dp, _, filenames = next(os.walk(folder))
+    for fname in filenames:
+        with open(os.path.join(dp,fname), "r") as fFp:
+            feature = json.load(fFp)
         featureMap[cmdize(feature["name"])] = feature
     return featureMap
 
@@ -95,6 +97,11 @@ def updateNewClassFeatures(all_features, featureMap):
             _promoteIfLonger(feature, originalFeature["system"], "save")
             _promoteIfLonger(feature, originalFeature["system"], "requirements")
             _promoteIfLonger(feature, originalFeature["system"], "recharge")
+
+            if len(nvl(feature.featureType,"")) <= len(nvl(originalFeature["system"]["type"]["value"],"")):
+                feature.featureType = originalFeature["system"]["type"]["value"]
+            if len(nvl(feature.featureSubType,"")) <= len(nvl(originalFeature["system"]["type"]["value"],"")):
+                feature.featureSubType = originalFeature["system"]["type"]["subtype"]
 
 def updateNewClasses(all_classes, classesMap):
     for classes in all_classes.values():
@@ -220,14 +227,15 @@ def renameOptionGroups(canonical_features, original_features, to_rename:list, op
                 raise Exception(f"duplicate non-identical feature {f.name}")
             raise Exception(f"duplicate identical feature on rename {f.name}")        
         canonical_features[cmdize(f.name)] = f
+    updateNewClassFeatures({cmdize(f.name):f for f in to_rename}, original_features)
+
     featureOptionsParent = canonical_features[cmdize(optionParent)]
     featureParent = canonical_features[cmdize(newOptionParent)]
-    featureParent.paragraphs += "\n\n" + featureOptionsParent.paragraphs
+    featureParent.paragraphs += "\n\n" + featureOptionsParent.originalCollection.immediateMarkdown()
+    writeOptionsToFeature(featureParent, to_rename)
     for c in consumers:
         c.remove(featureOptionsParent)
     del canonical_features[cmdize(optionParent)]
-    
-    updateNewClassFeatures({cmdize(f.name):f for f in to_rename}, original_features)
 
 SPELL_LIST_RX = re.compile("\\b(?P<class>\\w+) spell list", re.IGNORECASE)
 
@@ -273,8 +281,7 @@ def loadClasses(filepath:str, all_spells:dict={}):
                 canonical_features[key] = f
     
     # load original features for purposes of consistency with IDs
-    with open(os.path.join("packs","classfeatures.db"), 'r', encoding="utf-8") as loadFp:
-        original_features = readOriginals(loadFp)
+    original_features = readOriginals(os.path.join("packs","src","classfeatures"))
     
     # split out fighting styles
     for feature_key in list(canonical_features.keys()):
@@ -638,17 +645,16 @@ def loadClasses(filepath:str, all_spells:dict={}):
     updateNewClassFeatures(canonical_features, original_features)
 
     # update new classes to reflect old Ids and other fields
-    with open(os.path.join("packs","classes.db"), 'r', encoding="utf-8") as loadFp:
-        originalClasses = readOriginals(loadFp)
-        updateNewClasses(classes, originalClasses)
+    originalClasses = readOriginals(os.path.join("packs","src","classes"))
+    updateNewClasses(classes, originalClasses)
 
     # update new subclasses to reflect old Ids and other fields
-    with open(os.path.join("packs","subclasses.db"), 'r', encoding="utf-8") as loadFp:
-        originalSubclasses = readOriginals(loadFp)
-        subclasses = {}
-        for c in classes.values():
-            subclasses.update(c.subclasses)
-        updateNewSubclasses(subclasses, originalSubclasses)
+    originalSubclasses = readOriginals(os.path.join("packs","src","subclasses"))
+    updateNewClasses(classes, originalSubclasses)
+    subclasses = {}
+    for c in classes.values():
+        subclasses.update(c.subclasses)
+    updateNewSubclasses(subclasses, originalSubclasses)
 
     return classes, None, canonical_features
 
@@ -665,17 +671,14 @@ def loadFeats(filepath:str)->dict:
         feats[cmdize(feat.name)] = feat
     
     # load original features for purposes of consistency with IDs
-    with open(os.path.join("packs","classfeatures.db"), 'r', encoding="utf-8") as loadFp:
-        original_features = readOriginals(loadFp)
-
+    original_features = readOriginals(os.path.join("packs","src","classfeatures"))
     updateNewClassFeatures(feats, original_features)
     
     return feats
 
 def writeFeatures(canonical_features):
     # load original features for purposes of consistency with IDs
-    with open(os.path.join("packs","classfeatures.db"), 'r', encoding="utf-8") as loadFp:
-        original_features = readOriginals(loadFp)
+    original_features = readOriginals(os.path.join("packs","src","classfeatures"))
 
     # write out the canonical features
     classFeaturesDir = os.path.join("packs","src","classfeatures")
@@ -693,12 +696,10 @@ def writeFeatures(canonical_features):
 
 def writeClasses(classes):
     # load original classes so they can be compared with the new ones
-    with open(os.path.join("packs","classes.db"), 'r', encoding="utf-8") as loadFp:
-        originalClasses = readOriginals(loadFp)
+    originalClasses = readOriginals(os.path.join("packs","src","classes"))
     
     # load original subclasses so they can be compared with the new ones
-    with open(os.path.join("packs","subclasses.db"), 'r', encoding="utf-8") as loadFp:
-        originalSubclasses = readOriginals(loadFp)
+    originalSubclasses = readOriginals(os.path.join("packs","src","subclasses"))
 
     # write out the new classes
     classesDir = os.path.join("packs","src","classes")

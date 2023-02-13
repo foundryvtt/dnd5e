@@ -3,18 +3,22 @@ from .spells import Spell, loadSpells as loadSpellsFromFile
 from ..common_lib import cmdize, equalsWithout
 import argparse, json, os, shutil
 
-def readOriginals(idFp):
+def readOriginals(folder):
     spellMap = {}
-    for line in idFp:
-        spell = json.loads(line)
-        spellMap[spell["name"]] = spell
+    for l in range(10):
+        directory = f"level-{l}" if l else "cantrip"
+        dp, _, filenames = next(os.walk(os.path.join(folder, directory)))
+        for fname in filenames:
+            with open(os.path.join(dp,fname), "r") as sFp:
+                spell = json.load(sFp)
+            spellMap[cmdize(spell["name"])] = spell
     return spellMap
 
 def updateNew(all_spells, spellMap):
     for spell in all_spells.values():
-        originalSpell = spellMap[spell.name] if spell.name in spellMap else None
+        originalSpell = spellMap[cmdize(spell.name)] if cmdize(spell.name) in spellMap else None
         if originalSpell is None:
-            originalSpell = spellMap[spell.brandedname] if spell.brandedname in spellMap else None
+            originalSpell = spellMap[cmdize(spell.brandedname)] if cmdize(spell.brandedname) in spellMap else None
         if originalSpell is not None:
             spell.originalId = originalSpell["_id"]
             spell.icon = originalSpell["img"]
@@ -28,16 +32,13 @@ def loadSpells(filepath)->dict:
         all_spells = loadSpellsFromFile(loadFp)
     Spell._all_spells = all_spells
 
-    with open(os.path.join("packs","spells.db"), 'r', encoding="utf-8") as loadFp:
-        updateNew(all_spells, readOriginals(loadFp))
+    updateNew(all_spells, readOriginals(os.path.join("packs","src","spells")))
 
     return all_spells
 
 def writeSpells(all_spells):
-    with open(os.path.join("packs","spells.db"), 'r', encoding="utf-8") as loadFp:
-        original_spells = readOriginals(loadFp)
-
     spellsDir = os.path.join("packs","src","spells")
+    original_spells = readOriginals(spellsDir)
     shutil.rmtree(spellsDir)
     os.mkdir(spellsDir)
     os.mkdir(os.path.join(spellsDir,"cantrip"))
