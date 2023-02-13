@@ -1,0 +1,88 @@
+{
+  "_id": "8eoya5rA1AW7Qo5p",
+  "name": "Feat: Charger",
+  "ownership": {
+    "default": 0
+  },
+  "type": "feat",
+  "system": {
+    "description": {
+      "value": "<p>When you take the Dash action on your turn and move at least 10 feet in a straight line towards a creature, you can either shove that creature or make one melee weapon attack against that creature as part of that action. You either gain a +5 bonus to the attack's damage roll (if you chose to make a melee attack and hit) or push the target up to 10 feet away from you (if you chose to shove and you succeed). You can use this feature only once per turn.</p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "SRD 5.1",
+    "activation": {
+      "type": "",
+      "cost": null,
+      "condition": ""
+    },
+    "duration": {
+      "value": "",
+      "units": ""
+    },
+    "cover": null,
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": ""
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": ""
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": null,
+      "recovery": ""
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
+    "ability": null,
+    "actionType": "",
+    "attackBonus": "",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "type": {
+      "value": "feat",
+      "subtype": ""
+    },
+    "requirements": "",
+    "recharge": {
+      "value": null,
+      "charged": false
+    }
+  },
+  "flags": {},
+  "img": "",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.1.0",
+    "coreVersion": "10.291",
+    "createdTime": 1676257596682,
+    "modifiedTime": 1676257596682,
+    "lastModifiedBy": "RightHandOfVecna"
+  }
+}

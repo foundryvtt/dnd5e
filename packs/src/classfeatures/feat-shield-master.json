@@ -1,0 +1,88 @@
+{
+  "_id": "WSFKLpLuPRX6miNZ",
+  "name": "Feat: Shield Master",
+  "ownership": {
+    "default": 0
+  },
+  "type": "feat",
+  "system": {
+    "description": {
+      "value": "<p>You use shields not just for protection but also for offense. You gain the following benefits while you are wielding a shield:</p>\n<ul>\n<li>If you take the Attack action on your turn, you can use a bonus action to try to shove a creature within 5 feet of you with your shield.</li>\n<li>If you aren't incapacitated, you can add your shield's AC bonus to any Dexterity saving throw you make against a spell or other harmful effect.</li>\n<li>If you are subjected to an effect that allows you to make a Dexterity saving throw to take only half damage, you can use your reaction to take no damage if you succeed on the saving throw, interposing your shield between yourself and the source of the effect.</li>\n</ul>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "SRD 5.1",
+    "activation": {
+      "type": "",
+      "cost": null,
+      "condition": ""
+    },
+    "duration": {
+      "value": "",
+      "units": ""
+    },
+    "cover": null,
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": ""
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": ""
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": null,
+      "recovery": ""
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
+    "ability": null,
+    "actionType": "",
+    "attackBonus": "",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "type": {
+      "value": "feat",
+      "subtype": ""
+    },
+    "requirements": "Proficiency with any armor",
+    "recharge": {
+      "value": null,
+      "charged": false
+    }
+  },
+  "flags": {},
+  "img": "",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.1.0",
+    "coreVersion": "10.291",
+    "createdTime": 1676257596927,
+    "modifiedTime": 1676257596927,
+    "lastModifiedBy": "RightHandOfVecna"
+  }
+}

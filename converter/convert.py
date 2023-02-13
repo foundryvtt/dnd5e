@@ -1,6 +1,6 @@
 import argparse, os
 from .spells.convert import loadSpells, writeSpells
-from .books.convert import loadClasses, loadFeats, writeClasses, writeFeatures
+from .books.convert import loadClasses, loadFeats, replaceSpellsInFeatures, writeClasses, writeFeatures
 
 
 def main():
@@ -28,6 +28,7 @@ def main():
     classes, _, features = loadClasses(args.phb_filepath, all_spells)
     feats = loadFeats(args.phb_filepath)
     features.update(feats)
+    replaceSpellsInFeatures(features, all_spells)
 
     writeClasses(classes)
     writeFeatures(features)

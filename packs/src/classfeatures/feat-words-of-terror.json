@@ -1,0 +1,88 @@
+{
+  "_id": "aUlK9Hv0f8SNNdso",
+  "name": "Feat: Words of Terror",
+  "ownership": {
+    "default": 0
+  },
+  "type": "feat",
+  "system": {
+    "description": {
+      "value": "<p>If you speak to a humanoid alone for at least 1 minute, you can attempt to seed paranoia in its mind. At the end of the conversation, the target must succeed on a Wisdom saving throw against your spell save DC or be frightened of you or another creature of your choice. The target is frightened in this way for 1 hour, until it is attacked or damaged, or until it witnesses its allies being attacked or damaged.</p>\n<p>If the target succeeds on its saving throw, the target has no hint that you tried to frighten it.</p>\n<p>Once you use this feature, you can't use it again until you finish a long rest.</p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "SRD 5.1",
+    "activation": {
+      "type": "",
+      "cost": null,
+      "condition": ""
+    },
+    "duration": {
+      "value": "",
+      "units": ""
+    },
+    "cover": null,
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": ""
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": ""
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": null,
+      "recovery": ""
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
+    "ability": null,
+    "actionType": "",
+    "attackBonus": "",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "type": {
+      "value": "feat",
+      "subtype": ""
+    },
+    "requirements": "3rd-level Bard",
+    "recharge": {
+      "value": null,
+      "charged": false
+    }
+  },
+  "flags": {},
+  "img": "",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.1.0",
+    "coreVersion": "10.291",
+    "createdTime": 1676257596996,
+    "modifiedTime": 1676257596996,
+    "lastModifiedBy": "RightHandOfVecna"
+  }
+}

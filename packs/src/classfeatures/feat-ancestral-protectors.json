@@ -1,0 +1,88 @@
+{
+  "_id": "QlfV6LNhVzkxruKV",
+  "name": "Feat: Ancestral Protectors",
+  "ownership": {
+    "default": 0
+  },
+  "type": "feat",
+  "system": {
+    "description": {
+      "value": "<p>Spectral warriors appear when you enter your rage. While you're raging, the first creature you hit with an attack on your turn becomes the target of the warriors, which hinder its attacks. Until the start of your next turn, that target has disadvantage on any attack roll that isn't against you. The effect on the target ends early if your rage ends.</p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "SRD 5.1",
+    "activation": {
+      "type": "",
+      "cost": null,
+      "condition": ""
+    },
+    "duration": {
+      "value": "",
+      "units": ""
+    },
+    "cover": null,
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": ""
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": ""
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": null,
+      "recovery": ""
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
+    "ability": null,
+    "actionType": "",
+    "attackBonus": "",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "type": {
+      "value": "feat",
+      "subtype": ""
+    },
+    "requirements": "3rd-level Barbarian",
+    "recharge": {
+      "value": null,
+      "charged": false
+    }
+  },
+  "flags": {},
+  "img": "",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.1.0",
+    "coreVersion": "10.291",
+    "createdTime": 1676257596648,
+    "modifiedTime": 1676257596648,
+    "lastModifiedBy": "RightHandOfVecna"
+  }
+}

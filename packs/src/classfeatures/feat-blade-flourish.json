@@ -1,0 +1,88 @@
+{
+  "_id": "aG5U3BtEAbvdKazw",
+  "name": "Feat: Blade Flourish",
+  "ownership": {
+    "default": 0
+  },
+  "type": "feat",
+  "system": {
+    "description": {
+      "value": "<p>Whenever you take the Attack action on your turn, your walking speed increases by 10 feet until the end of the turn, and if a weapon attack that you make as part of this action hits a creature, you can use one of the following Blade Flourish options of your choice. You can use only one Blade Flourish option per turn.</p>\n<p><strong><em>Defensive Flourish.</em></strong> You can expend one use of your Bardic Inspiration to cause the weapon to deal extra damage to the target you hit. The damage equals the number you roll on the Bardic Inspiration die. You also add the number rolled to your AC until the start of your next turn.</p>\n<p><strong><em>Slashing Flourish.</em></strong> You can expend one use of your Bardic Inspiration to cause the weapon to deal extra damage to the target you hit and to any other creature of your choice that you can see within 5 feet of you. The damage equals the number you roll on the Bardic Inspiration die.</p>\n<p><strong><em>Mobile Flourish.</em></strong> You can expend one use of your Bardic Inspiration to cause the weapon to deal extra damage to the target you hit. The damage equals the number you roll on the Bardic Inspiration die. You can also push the target up to 5 feet away from you, plus a number of feet equal to the number you roll on that die. You can then immediately use your reaction to move up to your walking speed to an unoccupied space within 5 feet of the target.</p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "SRD 5.1",
+    "activation": {
+      "type": "",
+      "cost": null,
+      "condition": ""
+    },
+    "duration": {
+      "value": "",
+      "units": ""
+    },
+    "cover": null,
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": ""
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": ""
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": null,
+      "recovery": ""
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
+    "ability": null,
+    "actionType": "",
+    "attackBonus": "",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "type": {
+      "value": "feat",
+      "subtype": ""
+    },
+    "requirements": "3rd-level Bard",
+    "recharge": {
+      "value": null,
+      "charged": false
+    }
+  },
+  "flags": {},
+  "img": "",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.1.0",
+    "coreVersion": "10.291",
+    "createdTime": 1676257596670,
+    "modifiedTime": 1676257596670,
+    "lastModifiedBy": "RightHandOfVecna"
+  }
+}

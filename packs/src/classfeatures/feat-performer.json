@@ -1,0 +1,88 @@
+{
+  "_id": "ukuhM9wBGs1MiAtF",
+  "name": "Feat: Performer",
+  "ownership": {
+    "default": 0
+  },
+  "type": "feat",
+  "system": {
+    "description": {
+      "value": "<p>You master performance so that you can command any stage. You gain the following benefits:</p>\n<ul>\n<li>Increase your Charisma score by 1, to a maximum of 20.</li>\n<li>You double your proficiency bonus for checks you make with the Performance skill.</li>\n<li>While performing, you can try to distract one humanoid you can see, who can also see and hear you. As an action, make a Performance check contested by the humanoid's Insight check. If your check succeeds, you grab the humanoid's attention enough that it makes Perception and Investigation checks with disadvantage until you stop performing.</li>\n</ul>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "SRD 5.1",
+    "activation": {
+      "type": "",
+      "cost": null,
+      "condition": ""
+    },
+    "duration": {
+      "value": "",
+      "units": ""
+    },
+    "cover": null,
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": ""
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": ""
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": null,
+      "recovery": ""
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
+    "ability": null,
+    "actionType": "",
+    "attackBonus": "",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "type": {
+      "value": "feat",
+      "subtype": ""
+    },
+    "requirements": "Proficiency in Performance",
+    "recharge": {
+      "value": null,
+      "charged": false
+    }
+  },
+  "flags": {},
+  "img": "",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.1.0",
+    "coreVersion": "10.291",
+    "createdTime": 1676257596896,
+    "modifiedTime": 1676257596896,
+    "lastModifiedBy": "RightHandOfVecna"
+  }
+}

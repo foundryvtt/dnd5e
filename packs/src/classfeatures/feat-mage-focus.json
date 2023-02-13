@@ -1,0 +1,88 @@
+{
+  "_id": "QL6tNgQ634JU3v3Q",
+  "name": "Feat: Mage Focus",
+  "ownership": {
+    "default": 0
+  },
+  "type": "feat",
+  "system": {
+    "description": {
+      "value": "<p>Your focus and connection to magic have increased. You gain the following benefits:</p>\n<ul>\n<li>You no longer require material components to cast spells, unless a cost is indicated for the component or the component is consumed.</li>\n<li>When you cast a spell as a ritual, the casting time increases by 1 minute instead of 10 minutes.</li>\n<li>You have advantage on Intelligence (Arcana) checks made to identify spells.</li>\n<li>As a bonus action, you can cast a spell that has a casting time of 1 action that targets only you.</li>\n</ul>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "SRD 5.1",
+    "activation": {
+      "type": "",
+      "cost": null,
+      "condition": ""
+    },
+    "duration": {
+      "value": "",
+      "units": ""
+    },
+    "cover": null,
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": ""
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": ""
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": null,
+      "recovery": ""
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
+    "ability": null,
+    "actionType": "",
+    "attackBonus": "",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "type": {
+      "value": "feat",
+      "subtype": ""
+    },
+    "requirements": "the ability to cast at least one spell",
+    "recharge": {
+      "value": null,
+      "charged": false
+    }
+  },
+  "flags": {},
+  "img": "",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.1.0",
+    "coreVersion": "10.291",
+    "createdTime": 1676257596845,
+    "modifiedTime": 1676257596845,
+    "lastModifiedBy": "RightHandOfVecna"
+  }
+}

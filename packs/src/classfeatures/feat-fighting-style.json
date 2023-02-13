@@ -1,0 +1,88 @@
+{
+  "_id": "4ln6V68cyrcsh0TR",
+  "name": "Feat: Fighting Style",
+  "ownership": {
+    "default": 0
+  },
+  "type": "feat",
+  "system": {
+    "description": {
+      "value": "<p>You adopt a style of fighting as your specialty. Choose one of the following options. You can take this feat multiple times, selecting a different option each time. You can't take a Fighting Style option more than once.</p>\n<ul>\n<li><strong><em>Archery.</em></strong> You gain a +2 bonus to attack rolls you make with ranged weapons.</li>\n<li><strong><em>Defense.</em></strong> While you are wearing armor, you gain a +1 bonus to AC.</li>\n<li><strong><em>Dueling.</em></strong> When you are wielding a melee weapon in one hand and no other weapons, you gain a +2 bonus to damage rolls with that weapon.</li>\n<li><strong><em>Great Weapon Fighting.</em></strong> When you roll a 1 or 2 on a damage die for an attack you make with a melee weapon that you are wielding with two hands, you can reroll the die and must use the new roll, even if the new roll is a 1 or a 2. The weapon must have the two-handed or versatile property for you to gain this benefit.</li>\n<li><strong><em>Pack Tactician.</em></strong> When an ally makes an attack against a creature within 5 feet of you, you can use your reaction to grant your ally advantage on their attack roll.</li>\n<li><strong><em>Protection.</em></strong> When a creature you can see attacks a target other than you that is within 5 feet of you, you can use your reaction to impose disadvantage on the attack roll. You must be wielding a shield.</li>\n<li><strong><em>Thrown Weapon Fighting.</em></strong> When you make a ranged attack with a thrown weapon, you double its short range and gain a +2 bonus to the attack roll.</li>\n<li><strong><em>Two-Weapon Fighting.</em></strong> When you engage in two-weapon fighting, you can add your ability modifier to the damage of the second attack.</li>\n<li><strong><em>Unarmed Fighting.</em></strong> Your unarmed strikes can deal bludgeoning damage equal to 1d6 + your Strength modifier on a hit. If you aren't wielding any weapons or a shield when you make the attack roll, the d6 becomes a d8.<br/>At the start of each of your turns, you can deal 1d4 bludgeoning damage to one creature grappled by you.</li>\n</ul>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "SRD 5.1",
+    "activation": {
+      "type": "",
+      "cost": null,
+      "condition": ""
+    },
+    "duration": {
+      "value": "",
+      "units": ""
+    },
+    "cover": null,
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": ""
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": ""
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": null,
+      "recovery": ""
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
+    "ability": null,
+    "actionType": "",
+    "attackBonus": "",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "type": {
+      "value": "feat",
+      "subtype": ""
+    },
+    "requirements": "Proficiency with a martial weapon",
+    "recharge": {
+      "value": null,
+      "charged": false
+    }
+  },
+  "flags": {},
+  "img": "",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.1.0",
+    "coreVersion": "10.291",
+    "createdTime": 1676257596772,
+    "modifiedTime": 1676257596772,
+    "lastModifiedBy": "RightHandOfVecna"
+  }
+}

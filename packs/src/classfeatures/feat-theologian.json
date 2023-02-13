@@ -1,0 +1,88 @@
+{
+  "_id": "fWDf5v5IpUsAQmQO",
+  "name": "Feat: Theologian",
+  "ownership": {
+    "default": 0
+  },
+  "type": "feat",
+  "system": {
+    "description": {
+      "value": "<p>Your extensive study of religion rewards you with the following benefits:</p>\n<ul>\n<li>Increase your Intelligence score by 1, to a maximum of 20.</li>\n<li>You double your proficiency bonus for checks you make with the Religion skill.</li>\n<li>You learn the @Compendium[dnd5e.spells.MUO1uYN7JR1hm4dR]{Thaumaturgy} and @Compendium[dnd5e.spells.Mzh95utKDPIrjiH8]{Detect Evil and Good} spells. You can cast @Compendium[dnd5e.spells.Mzh95utKDPIrjiH8]{Detect Evil and Good} once without expending a spell slot, and you regain the ability to do so when you finish a long rest.</li>\n</ul>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "SRD 5.1",
+    "activation": {
+      "type": "",
+      "cost": null,
+      "condition": ""
+    },
+    "duration": {
+      "value": "",
+      "units": ""
+    },
+    "cover": null,
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": ""
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": ""
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": null,
+      "recovery": ""
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
+    "ability": null,
+    "actionType": "",
+    "attackBonus": "",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "type": {
+      "value": "feat",
+      "subtype": ""
+    },
+    "requirements": "Proficiency in Religion",
+    "recharge": {
+      "value": null,
+      "charged": false
+    }
+  },
+  "flags": {},
+  "img": "",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.1.0",
+    "coreVersion": "10.291",
+    "createdTime": 1676257596974,
+    "modifiedTime": 1676265083585,
+    "lastModifiedBy": "RightHandOfVecna"
+  }
+}

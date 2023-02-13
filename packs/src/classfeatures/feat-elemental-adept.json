@@ -1,0 +1,88 @@
+{
+  "_id": "KcAxn7dmlPpC7btU",
+  "name": "Feat: Elemental Adept",
+  "ownership": {
+    "default": 0
+  },
+  "type": "feat",
+  "system": {
+    "description": {
+      "value": "<p>When you gain this feat, choose one of the following damage types: acid, cold, fire, lightning, or thunder.</p>\n<p>Spells you cast ignore resistance and immunity to damage of the chosen type. A creature immune to the chosen damage type takes half of the normal damage instead of none, as if they were resistant. In addition, when you roll damage for a spell you cast that deals damage of that type, you can re-roll any 1 on a damage die once.</p>\n<p>You can select this feat multiple times. Each time you do so, you must choose a different damage type.</p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "SRD 5.1",
+    "activation": {
+      "type": "",
+      "cost": null,
+      "condition": ""
+    },
+    "duration": {
+      "value": "",
+      "units": ""
+    },
+    "cover": null,
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": ""
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": ""
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": null,
+      "recovery": ""
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
+    "ability": null,
+    "actionType": "",
+    "attackBonus": "",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "type": {
+      "value": "feat",
+      "subtype": ""
+    },
+    "requirements": "The ability to cast at least one spell",
+    "recharge": {
+      "value": null,
+      "charged": false
+    }
+  },
+  "flags": {},
+  "img": "",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.1.0",
+    "coreVersion": "10.291",
+    "createdTime": 1676257596750,
+    "modifiedTime": 1676257596750,
+    "lastModifiedBy": "RightHandOfVecna"
+  }
+}

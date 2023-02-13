@@ -1,0 +1,88 @@
+{
+  "_id": "qcPe5dr8718GXYle",
+  "name": "Feat: Diplomat",
+  "ownership": {
+    "default": 0
+  },
+  "type": "feat",
+  "system": {
+    "description": {
+      "value": "<p>You master the art of diplomacy, gaining the following benefits:</p>\n<ul>\n<li>Increase your Charisma score by 1, to a maximum of 20.</li>\n<li>You double your proficiency bonus for checks you make with the Persuasion skill.</li>\n<li>If you spend 1 minute talking to someone who can understand what you say, you can make a Persuasion check contested by the creature's Insight check. If you or your companions are hostile to the creature, your check automatically fails. If you win the contest, the target is charmed by you as long as it remains within 60 feet of you and for 1 minute thereafter. This effect ends if you become hostile to the creature.</li>\n</ul>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "SRD 5.1",
+    "activation": {
+      "type": "",
+      "cost": null,
+      "condition": ""
+    },
+    "duration": {
+      "value": "",
+      "units": ""
+    },
+    "cover": null,
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": ""
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": ""
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": null,
+      "recovery": ""
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
+    "ability": null,
+    "actionType": "",
+    "attackBonus": "",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "type": {
+      "value": "feat",
+      "subtype": ""
+    },
+    "requirements": "Proficiency in Persuasion",
+    "recharge": {
+      "value": null,
+      "charged": false
+    }
+  },
+  "flags": {},
+  "img": "",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.1.0",
+    "coreVersion": "10.291",
+    "createdTime": 1676257596713,
+    "modifiedTime": 1676257596713,
+    "lastModifiedBy": "RightHandOfVecna"
+  }
+}

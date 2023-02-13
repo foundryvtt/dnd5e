@@ -237,6 +237,22 @@ def renameOptionGroups(canonical_features, original_features, to_rename:list, op
         c.remove(featureOptionsParent)
     del canonical_features[cmdize(optionParent)]
 
+def replaceSpellsInFeatures(canonical_features, all_spells):
+    # replace spell references in features
+    maxSpellLength = max((len(s.name) for s in all_spells.values()), default=10)
+    SPELL_RX = re.compile("(?<!\*)(?P<boundary>\\*+)(?P<spell>[^\\*]{3,"+str(maxSpellLength)+"})(?P=boundary)", re.IGNORECASE)
+    def _spell_sub(match):
+        boundary = match.group("boundary")
+        if len(boundary) > 1:
+            return match.group(0)
+        spellCode = cmdize(match.group("spell"))
+        if spellCode in all_spells:
+            spell = all_spells[spellCode]
+            return "@Compendium[dnd5e.spells."+spell.originalId+"]{"+spell.name+"}"
+        return match.group(0)
+    for feature in canonical_features.values():
+        feature.paragraphs = SPELL_RX.sub(_spell_sub, feature.paragraphs)
+
 SPELL_LIST_RX = re.compile("\\b(?P<class>\\w+) spell list", re.IGNORECASE)
 
 def loadClasses(filepath:str, all_spells:dict={}):
@@ -578,21 +594,6 @@ def loadClasses(filepath:str, all_spells:dict={}):
     )
 
     if all_spells:
-        # replace spell references in features
-        maxSpellLength = max((len(s.name) for s in all_spells.values()), default=10)
-        SPELL_RX = re.compile("(?<!\*)(?P<boundary>\\*+)(?P<spell>[^\\*]{3,"+str(maxSpellLength)+"})(?P=boundary)", re.IGNORECASE)
-        def _spell_sub(match):
-            boundary = match.group("boundary")
-            if len(boundary) > 1:
-                return match.group(0)
-            spellCode = cmdize(match.group("spell"))
-            if spellCode in all_spells:
-                spell = all_spells[spellCode]
-                return "@Compendium[dnd5e.spells."+spell.originalId+"]{"+spell.name+"}"
-            return match.group(0)
-        for feature in canonical_features.values():
-            feature.paragraphs = SPELL_RX.sub(_spell_sub, feature.paragraphs)
-    
         # build spell lists
         sl = {}
         for spell in all_spells.values():

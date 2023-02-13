@@ -1,0 +1,88 @@
+{
+  "_id": "LTejTNB5O1AbmjwC",
+  "name": "Feat: Wonder Maker",
+  "ownership": {
+    "default": 0
+  },
+  "type": "feat",
+  "system": {
+    "description": {
+      "value": "<p>You master a plethora of tinkering techniques. You gain the following benefits:</p>\n<ul>\n<li>Increase your Dexterity or Intelligence score by 1, to a maximum of 20.</li>\n<li>When you make a check using your proficiency with tinker's tools, you add double your proficiency bonus to the check.</li>\n<li>Using tinker's tools, you can spend 1 hour and 10 gp worth of materials to construct a Tiny clockwork device (AC 5, 1 hp). The device ceases to function when you use your action to dismantle it; at that time, you can reclaim the materials used to create it. When you create a device, choose one of the following options: <ul><li><strong>Alarm.</strong> This device senses when a creature moves to within 15 feet of it without speaking aloud a password chosen when you create it. One round after a creature moves into range, the alarm makes a shrill ringing that lasts for 1 minute and can be heard from up to 300 feet away.</li><li><strong>Calculator.</strong> This device makes doing sums easy.</li><li><strong>Clockwork Toy.</strong> This toy is a clockwork animal, monster, or person, such as a frog, mouse, bird, dragon, or soldier. When placed on the ground, the toy moves 5 feet across the ground on each of your turns in a random direction. It makes noises as appropriate to the creature it represents.</li><li><strong>Fire Starter.</strong> The device produces a miniature flame, which you can use to light a candle, torch, or campfire. Using the device requires your action.</li><li><strong>Lifter.</strong> This device can be used as a block and tackle, allowing its user to hoist five times the weight the user can normally lift.</li><li><strong>Music Box.</strong> When opened, this music box plays a single song at a moderate volume. The box stops playing when it reaches the song's end or when it is closed.</li><li><strong>Timekeeper.</strong> This pocket watch keeps accurate time.</li><li><strong>Weather Sensor.</strong> When used as an action, this device predicts weather conditions in a 1-mile radius over the next 4 hours, showing one symbol (clouds, sun/moon, rain, or snow) for each hour.</li></ul></li>\n</ul>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "SRD 5.1",
+    "activation": {
+      "type": "",
+      "cost": null,
+      "condition": ""
+    },
+    "duration": {
+      "value": "",
+      "units": ""
+    },
+    "cover": null,
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": ""
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": ""
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": null,
+      "recovery": ""
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
+    "ability": null,
+    "actionType": "",
+    "attackBonus": "",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "type": {
+      "value": "feat",
+      "subtype": ""
+    },
+    "requirements": "proficiency with tinker's tools",
+    "recharge": {
+      "value": null,
+      "charged": false
+    }
+  },
+  "flags": {},
+  "img": "",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.1.0",
+    "coreVersion": "10.291",
+    "createdTime": 1676257596989,
+    "modifiedTime": 1676257596989,
+    "lastModifiedBy": "RightHandOfVecna"
+  }
+}

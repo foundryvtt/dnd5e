@@ -1,0 +1,88 @@
+{
+  "_id": "IE3qsL1BdfichAFz",
+  "name": "Feat: Healer",
+  "ownership": {
+    "default": 0
+  },
+  "type": "feat",
+  "system": {
+    "description": {
+      "value": "<p>You are an able physician, allowing you to mend wounds quickly and get your allies back in the fight. You gain the following benefits:</p>\n<ul>\n<li>When you use a healer's kit to stabilize a dying creature, that creature also regains 1 hit point.</li>\n<li>As an action, you can spend one use of a healer's kit to tend to a conscious creature and restore 1d6 + 4 hit points to it, plus additional hit points equal to twice the creature's maximum number of hit dice. The creature can't regain hit points from this feat again until it finishes a short or long rest.</li>\n</ul>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "SRD 5.1",
+    "activation": {
+      "type": "",
+      "cost": null,
+      "condition": ""
+    },
+    "duration": {
+      "value": "",
+      "units": ""
+    },
+    "cover": null,
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": ""
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": ""
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": null,
+      "recovery": ""
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
+    "ability": null,
+    "actionType": "",
+    "attackBonus": "",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "type": {
+      "value": "feat",
+      "subtype": ""
+    },
+    "requirements": "",
+    "recharge": {
+      "value": null,
+      "charged": false
+    }
+  },
+  "flags": {},
+  "img": "",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.1.0",
+    "coreVersion": "10.291",
+    "createdTime": 1676257596803,
+    "modifiedTime": 1676257596803,
+    "lastModifiedBy": "RightHandOfVecna"
+  }
+}
