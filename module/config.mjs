@@ -1056,15 +1056,18 @@ DND5E.spellcastingTypes = {
     progression: {
       full: {
         label: "DND5E.SpellProgFull",
-        divisor: 1
+        divisor: 1,
+        startinglevel: 1
       },
       half: {
         label: "DND5E.SpellProgHalf",
-        divisor: 2
+        divisor: 2,
+        startinglevel: 2
       },
       third: {
         label: "DND5E.SpellProgThird",
-        divisor: 3
+        divisor: 3,
+        startinglevel: 3
       },
       artificer: {
         label: "DND5E.SpellProgArt",

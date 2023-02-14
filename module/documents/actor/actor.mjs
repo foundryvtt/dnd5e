@@ -747,7 +747,7 @@ export default class Actor5e extends Actor {
   static computeLeveledProgression(progression, actor, cls, spellcasting, count) {
     const prog = CONFIG.DND5E.spellcastingTypes.leveled.progression[spellcasting.progression];
     if ( !prog ) return;
-    if ( spellcasting.levels >= prog.startinglevel ?? prog.divisor ) {
+    if ( spellcasting.levels >= prog.startinglevel ) {
       progression.slot += Math.ceil(spellcasting.levels / prog.divisor);
     }
   }

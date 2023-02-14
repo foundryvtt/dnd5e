@@ -43,7 +43,7 @@ class RpgClass(object):
     originalId     = None
     name           = ""
     createdTime    = None
-    img            = ""
+    _img           = None
 
     hitDie         = "d4"
     saves          = []
@@ -187,6 +187,19 @@ class RpgClass(object):
     def advancement(self, value):
         self._advancement = value
     
+    @property
+    def img(self)->str:
+        if self._img:
+            return self._img
+        return ""
+    
+    @img.setter
+    def img(self, value):
+        self._img = value
+        for f in self.features:
+            if not f.img:
+                f.img = value
+
     @property
     def description(self)->str:
         return markdown(self._description, extensions=['markdown.extensions.extra'])
