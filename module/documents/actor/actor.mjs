@@ -1587,11 +1587,15 @@ export default class Actor5e extends Actor {
     }
 
     // Prepare roll data
+    const parts = [`1${denomination}`, `@mod`].concat(options.parts ?? []);
     const flavor = game.i18n.localize("DND5E.HitDiceRoll");
+    const data = this.getRollData();
+    data.mod = data.abilities[CONFIG.DND5E.hitPointsAbility || "con"]?.mod ?? 0;
     const rollConfig = foundry.utils.mergeObject({
-      formula: `max(0, 1${denomination} + @abilities.con.mod)`,
-      data: this.getRollData(),
+      data,
       chatMessage: true,
+      maximize: this.getFlag("dnd5e", "hitDieMaximize"),
+      minimum: this.getFlag("dnd5e", "hitDieMinimum") || 0,
       messageData: {
         speaker: ChatMessage.getSpeaker({actor: this}),
         flavor,
@@ -1600,6 +1604,7 @@ export default class Actor5e extends Actor {
         "flags.dnd5e.roll": {type: "hitDie"}
       }
     }, options);
+    rollConfig.parts = parts;
 
     /**
      * A hook event that fires before a hit die is rolled for an Actor.
@@ -1607,8 +1612,10 @@ export default class Actor5e extends Actor {
      * @memberof hookEvents
      * @param {Actor5e} actor               Actor for which the hit die is to be rolled.
      * @param {object} config               Configuration data for the pending roll.
-     * @param {string} config.formula       Formula that will be rolled.
      * @param {object} config.data          Data used when evaluating the roll.
+     * @param {array} config.parts          Parts that will form the roll's formula.
+     * @param {boolean} config.maximize     Whether to maximize the value of all dice involved.
+     * @param {number} config.minimum       The minimum total of the roll.
      * @param {boolean} config.chatMessage  Should a chat message be created for this roll?
      * @param {object} config.messageData   Data used to create the chat message.
      * @param {string} denomination         Size of hit die to be rolled.
@@ -1616,7 +1623,10 @@ export default class Actor5e extends Actor {
      */
     if ( Hooks.call("dnd5e.preRollHitDie", this, rollConfig, denomination) === false ) return;
 
-    const roll = await new Roll(rollConfig.formula, rollConfig.data).roll({async: true});
+    const formula = `max(${rollConfig.minimum}, ${rollConfig.parts.join(" + ")})`;
+    const roll = await new Roll(formula, rollConfig.data).evaluate({
+      maximize: rollConfig.maximize === true, async: true
+    });
     if ( rollConfig.chatMessage ) roll.toMessage(rollConfig.messageData);
 
     const hp = this.system.attributes.hp;

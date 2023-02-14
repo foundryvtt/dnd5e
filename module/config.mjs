@@ -1655,7 +1655,20 @@ DND5E.characterFlags = {
     section: "DND5E.Feats",
     type: Number,
     placeholder: 0
-  }
+  },
+  hitDieMinimum: {
+    name: "DND5E.FlagsHitDieMinimum",
+    hint: "DND5E.FlagsHitDieMinimumHint",
+    section: "DND5E.Feats",
+    type: String,
+    placeholder: "0"
+  },
+  hitDieMaximize: {
+    name: "DND5E.FlagsHitDieMaximize",
+    hint: "DND5E.FlagsHitDieMaximizeHint",
+    section: "DND5E.Feats",
+    type: Boolean
+  },
 };
 preLocalize("characterFlags", { keys: ["name", "hint", "section"] });
 
