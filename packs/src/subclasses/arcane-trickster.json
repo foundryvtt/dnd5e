@@ -97,6 +97,27 @@
         "value": {},
         "level": 17,
         "title": "Features"
+      },
+      {
+        "_id": "tO7UPlTBxBJRSM1N",
+        "type": "ScaleValue",
+        "configuration": {
+          "identifier": "cantrips-known",
+          "type": "number",
+          "distance": {
+            "units": ""
+          },
+          "scale": {
+            "3": {
+              "value": 3
+            },
+            "10": {
+              "value": 4
+            }
+          }
+        },
+        "value": {},
+        "title": "Cantrips Known"
       }
     ],
     "spellcasting": {

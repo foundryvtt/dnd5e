@@ -233,6 +233,90 @@
         "value": {},
         "level": 20,
         "title": "Features"
+      },
+      {
+        "_id": "h1bBZQAqEwEJJxF7",
+        "type": "ScaleValue",
+        "configuration": {
+          "identifier": "infusions-known",
+          "type": "number",
+          "distance": {
+            "units": ""
+          },
+          "scale": {
+            "2": {
+              "value": 4
+            },
+            "5": {
+              "value": 6
+            },
+            "9": {
+              "value": 8
+            },
+            "13": {
+              "value": 10
+            },
+            "17": {
+              "value": 12
+            }
+          }
+        },
+        "value": {},
+        "title": "Infusions Known"
+      },
+      {
+        "_id": "8eXyo9lWbaQxYnYg",
+        "type": "ScaleValue",
+        "configuration": {
+          "identifier": "infused-items",
+          "type": "number",
+          "distance": {
+            "units": ""
+          },
+          "scale": {
+            "2": {
+              "value": 3
+            },
+            "5": {
+              "value": 4
+            },
+            "9": {
+              "value": 5
+            },
+            "13": {
+              "value": 6
+            },
+            "17": {
+              "value": 7
+            }
+          }
+        },
+        "value": {},
+        "title": "Infused Items"
+      },
+      {
+        "_id": "jZFMSICDOq9agNMp",
+        "type": "ScaleValue",
+        "configuration": {
+          "identifier": "cantrips-known",
+          "type": "number",
+          "distance": {
+            "units": ""
+          },
+          "scale": {
+            "1": {
+              "value": 2
+            },
+            "10": {
+              "value": 3
+            },
+            "14": {
+              "value": 4
+            }
+          }
+        },
+        "value": {},
+        "title": "Cantrips Known"
       }
     ],
     "saves": [

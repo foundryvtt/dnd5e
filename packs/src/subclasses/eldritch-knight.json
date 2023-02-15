@@ -139,6 +139,27 @@
         "value": {},
         "level": 18,
         "title": "Features"
+      },
+      {
+        "_id": "kb8lNPKcau5kpIiE",
+        "type": "ScaleValue",
+        "configuration": {
+          "identifier": "cantrips-known",
+          "type": "number",
+          "distance": {
+            "units": ""
+          },
+          "scale": {
+            "3": {
+              "value": 3
+            },
+            "10": {
+              "value": 4
+            }
+          }
+        },
+        "value": {},
+        "title": "Cantrips Known"
       }
     ],
     "spellcasting": {
