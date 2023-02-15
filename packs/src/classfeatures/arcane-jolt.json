@@ -7,7 +7,7 @@
   "type": "feat",
   "system": {
     "description": {
-      "value": "<p>At 9th level, you learn new ways to channel arcane energy to harm or heal. When either you hit a target with a magic weapon attack or your steel defender hits a target, you can channel magical energy through the strike to create one of the following effects:</p>\n<ul>\n<li>The target takes an extra 2d6 force damage.</li>\n<li>Choose one creature or object you can see within 30 feet of the target. Healing energy flows into the chosen recipient, restoring 2d6 hit points to it.</li>\n</ul>\n<p>You can use this energy a number of times equal to your proficiency bonus, but you can do so no more than once on a turn. You regain all expended uses when you finish a long rest.</p>",
+      "value": "<p>At 9th level, you learn new ways to channel arcane energy to harm or heal. When either you hit a target with a magic weapon attack or your steel defender hits a target, you can channel magical energy through the strike to create one of the following effects:</p>\n<ul>\n<li>The target takes an extra 2d6 force damage.</li>\n<li>Choose one creature or object you can see within 30 feet of the target. Healing energy flows into the chosen recipient, restoring 2d6 hit points to it.</li>\n</ul>\n<p>Once you use this feature, you can't do so again until you complete a short or long rest.</p>",
       "chat": "",
       "unidentified": ""
     },
@@ -73,7 +73,7 @@
     }
   },
   "flags": {},
-  "img": "",
+  "img": "icons/creatures/magical/construct-golem-stone-blue.webp",
   "effects": [],
   "folder": null,
   "sort": 0,
@@ -82,7 +82,7 @@
     "systemVersion": "2.1.0",
     "coreVersion": "10.291",
     "createdTime": 1675986801798,
-    "modifiedTime": 1675988225775,
-    "lastModifiedBy": "dnd5ebuilder0000"
+    "modifiedTime": 1676491014711,
+    "lastModifiedBy": "RightHandOfVecna"
   }
 }

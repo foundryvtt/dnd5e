@@ -34,8 +34,8 @@
       "units": "ft"
     },
     "uses": {
-      "value": 1,
-      "max": "max(1, @abilities.cha.mod)",
+      "value": 2,
+      "max": "@prof",
       "per": "lr",
       "recovery": ""
     },

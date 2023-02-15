@@ -7,7 +7,7 @@
   "type": "feat",
   "system": {
     "description": {
-      "value": "<p>At 6th level, your spores gain the ability to infest a corpse and animate it. If a beast or a humanoid that is Small or Medium dies within 10 feet of you, you can use your reaction to animate it, causing it to stand up immediately with 1 hit point. The creature uses the <strong>zombie</strong> stat block. It remains animate for 1 hour, after which time it collapses and dies.</p>\n<p>In combat, the zombie's turn comes immediately after yours. It obeys your mental commands, and the only action it can take is the Attack action, making one melee attack.</p>\n<p>You can use this feature a number of times equal to your proficiency bonus, and you regain all expended uses of it when you finish a long rest.</p>\n<hr />\n<blockquote>\n<h2>Zombie</h2>\n<p><em>Small or Medium undead</em></p>\n<hr />\n<ul>\n<li><strong>Armor Class</strong> 8</li>\n<li><strong>Hit Points</strong> 22 (3d8+9)</li>\n<li><strong>Speed</strong> 20 ft.</li>\n</ul>\n<hr />\n<table>\n<thead>\n<tr>\n<th align=\"center\">STR</th>\n<th align=\"center\">DEX</th>\n<th align=\"center\">CON</th>\n<th align=\"center\">INT</th>\n<th align=\"center\">WIS</th>\n<th align=\"center\">CHA</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td align=\"center\">13 (+1)</td>\n<td align=\"center\">6 (-2)</td>\n<td align=\"center\">16 (+3)</td>\n<td align=\"center\">3 (-4)</td>\n<td align=\"center\">6 (-2)</td>\n<td align=\"center\">5 (-3)</td>\n</tr>\n</tbody>\n</table>\n<hr />\n<ul>\n<li><strong>Saving Throws</strong> Wis +0</li>\n<li><strong>Damage Immunities</strong> poison</li>\n<li><strong>Condition Immunities</strong> poisoned</li>\n<li><strong>Senses</strong> darkvision 60 ft., passive Perception 8</li>\n<li><strong>Languages</strong> understands the languages it knew in life but can't speak</li>\n</ul>\n<hr />\n<p><strong><em>Undead Fortitude.</em></strong> If damage reduces the zombie to 0 hit points, it must make a Constitution saving throw with a DC of 5 + the damage taken, unless the damage is radiant or from a critical hit. On a success, the zombie drops to 1 hit point instead.</p>\n<h3>Actions</h3>\n<p><strong><em>Slam.</em></strong> Melee Weapon Attack: +3 to hit, reach 5 ft., one target. Hit: 1d6+1 bludgeoning damage.</p>\n</blockquote>",
+      "value": "<p>At 6th level, your spores gain the ability to infest a corpse and animate it. If a beast or a humanoid that is Small or Medium dies within 10 feet of you, you can use your reaction to animate it, causing it to stand up immediately with 1 hit point. The creature uses the <strong>zombie</strong> stat block. It remains animate for 1 hour, after which time it collapses and dies.</p>\n<p>In combat, the zombie's turn comes immediately after yours. It obeys your mental commands, and the only action it can take is the Attack action, making one melee attack.</p>\n<p>Once you use this feature, you can't do so again until you complete a short or long rest.</p>\n<hr />\n<blockquote>\n<h2>Zombie</h2>\n<p><em>Small or Medium undead</em></p>\n<hr />\n<ul>\n<li><strong>Armor Class</strong> 8</li>\n<li><strong>Hit Points</strong> 22 (3d8+9)</li>\n<li><strong>Speed</strong> 20 ft.</li>\n</ul>\n<hr />\n<table>\n<thead>\n<tr>\n<th align=\"center\">STR</th>\n<th align=\"center\">DEX</th>\n<th align=\"center\">CON</th>\n<th align=\"center\">INT</th>\n<th align=\"center\">WIS</th>\n<th align=\"center\">CHA</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td align=\"center\">13 (+1)</td>\n<td align=\"center\">6 (-2)</td>\n<td align=\"center\">16 (+3)</td>\n<td align=\"center\">3 (-4)</td>\n<td align=\"center\">6 (-2)</td>\n<td align=\"center\">5 (-3)</td>\n</tr>\n</tbody>\n</table>\n<hr />\n<ul>\n<li><strong>Saving Throws</strong> Wis +0</li>\n<li><strong>Damage Immunities</strong> poison</li>\n<li><strong>Condition Immunities</strong> poisoned</li>\n<li><strong>Senses</strong> darkvision 60 ft., passive Perception 8</li>\n<li><strong>Languages</strong> understands the languages it knew in life but can't speak</li>\n</ul>\n<hr />\n<p><strong><em>Undead Fortitude.</em></strong> If damage reduces the zombie to 0 hit points, it must make a Constitution saving throw with a DC of 5 + the damage taken, unless the damage is radiant or from a critical hit. On a success, the zombie drops to 1 hit point instead.</p>\n<h3>Actions</h3>\n<p><strong><em>Slam.</em></strong> Melee Weapon Attack: +3 to hit, reach 5 ft., one target. Hit: 1d6+1 bludgeoning damage.</p>\n</blockquote>",
       "chat": "",
       "unidentified": ""
     },
@@ -73,7 +73,7 @@
     }
   },
   "flags": {},
-  "img": "",
+  "img": "icons/magic/nature/mushrooms-fire-glow-blue.webp",
   "effects": [],
   "folder": null,
   "sort": 0,
@@ -82,7 +82,7 @@
     "systemVersion": "2.1.0",
     "coreVersion": "10.291",
     "createdTime": 1675986803083,
-    "modifiedTime": 1675988226391,
-    "lastModifiedBy": "dnd5ebuilder0000"
+    "modifiedTime": 1676491015683,
+    "lastModifiedBy": "RightHandOfVecna"
   }
 }

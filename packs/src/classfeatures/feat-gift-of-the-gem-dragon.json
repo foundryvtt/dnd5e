@@ -7,7 +7,7 @@
   "type": "feat",
   "system": {
     "description": {
-      "value": "<p>You've manifested some of the power of gem dragons, granting you the following benefits:</p>\n<ul>\n<li><strong>Ability Score Increase.</strong> Increase your Intelligence, Wisdom, or Charisma by 1, to a maximum of 20.</li>\n<li><strong>Telekinetic Reprisal.</strong> When you take damage from a creature that is within 10 feet of you, you can use your reaction to emanate telekinetic energy. The creature that dealt damage to you must make a Strength saving throw (DC equals 8 + your proficiency bonus + the ability modifier of the score increased by this feat). On a failed save, the creature takes 2d8 force damage and is pushed up to 10 feet away from you. On a successful save, the creature takes half as much damage and isn't pushed. You can use this reaction a number of times equal to your proficiency bonus, and you regain all expended uses when you finish a long rest.</li>\n</ul>",
+      "value": "<p>You've manifested some of the power of gem dragons, granting you the following benefits:</p>\n<ul>\n<li><strong>Ability Score Increase.</strong> Increase your Intelligence, Wisdom, or Charisma by 1, to a maximum of 20.</li>\n<li><strong>Telekinetic Reprisal.</strong> When you take damage from a creature that is within 10 feet of you, you can use your reaction to emanate telekinetic energy. The creature that dealt damage to you must make a Strength saving throw (DC equals 8 + your proficiency bonus + the ability modifier of the score increased by this feat). On a failed save, the creature takes 2d8 force damage and is pushed up to 10 feet away from you. On a successful save, the creature takes half as much damage and isn't pushed. Once you use this reaction, you can't do so again until you complete a short or long rest.</li>\n</ul>",
       "chat": "",
       "unidentified": ""
     },
@@ -82,7 +82,7 @@
     "systemVersion": "2.1.0",
     "coreVersion": "10.291",
     "createdTime": 1676257596788,
-    "modifiedTime": 1676257596788,
+    "modifiedTime": 1676491015374,
     "lastModifiedBy": "RightHandOfVecna"
   }
 }

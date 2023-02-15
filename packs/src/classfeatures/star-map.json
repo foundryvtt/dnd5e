@@ -7,7 +7,7 @@
   "type": "feat",
   "system": {
     "description": {
-      "value": "<p>At 2nd level, you've created a star map as part of your study of the heavens. The map is a Tiny object and can serve as a spellcasting focus for your druid spells. You decide what form the object takes, or you can determine what it is by rolling on the Star Map table or by choosing one.</p>\n<p>While holding this map, you have the following benefits:</p>\n<ul>\n<li>You know the @Compendium[dnd5e.spells.P7mF2MxSuVJwHRRY]{Guidance} cantrip.</li>\n<li>You have the @Compendium[dnd5e.spells.7buEm5KhI5lP8m1z]{Guiding Bolt} and @Compendium[dnd5e.spells.4v2H3hHb3Ph9XLNd]{Augury} spells prepared. They count as druid spells for you, and don't count against the number of spells you can have prepared.</li>\n<li>You can cast @Compendium[dnd5e.spells.7buEm5KhI5lP8m1z]{Guiding Bolt} without expending a spell slot. You can do so a number of times equal to your proficiency bonus, and you regain all expended uses when you finish a long rest.</li>\n</ul>\n<h3>Star Map</h3>\n<table>\n<thead>\n<tr>\n<th align=\"center\">d6</th>\n<th align=\"left\">Map Form</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td align=\"center\">1</td>\n<td align=\"left\">A scroll covered with depictions of constellations</td>\n</tr>\n<tr>\n<td align=\"center\">2</td>\n<td align=\"left\">A stone tablet with fine holes drilled through it</td>\n</tr>\n<tr>\n<td align=\"center\">3</td>\n<td align=\"left\">A speckled owlbear hide, tooled with raised marks</td>\n</tr>\n<tr>\n<td align=\"center\">4</td>\n<td align=\"left\">A collection of maps bound in an ebony cover</td>\n</tr>\n<tr>\n<td align=\"center\">5</td>\n<td align=\"left\">A crystal that projects starry patterns when placed before a light</td>\n</tr>\n<tr>\n<td align=\"center\">6</td>\n<td align=\"left\">Glass disks that depict constellations</td>\n</tr>\n</tbody>\n</table>",
+      "value": "<p>At 2nd level, you've created a star map as part of your study of the heavens. The map is a Tiny object and can serve as a spellcasting focus for your druid spells. You decide what form the object takes, or you can determine what it is by rolling on the Star Map table or by choosing one.</p>\n<p>While holding this map, you have the following benefits:</p>\n<ul>\n<li>You know the @Compendium[dnd5e.spells.P7mF2MxSuVJwHRRY]{Guidance} cantrip.</li>\n<li>You have the @Compendium[dnd5e.spells.7buEm5KhI5lP8m1z]{Guiding Bolt} and @Compendium[dnd5e.spells.4v2H3hHb3Ph9XLNd]{Augury} spells prepared. They count as druid spells for you, and don't count against the number of spells you can have prepared.</li>\n<li>You can cast @Compendium[dnd5e.spells.7buEm5KhI5lP8m1z]{Guiding Bolt} without expending a spell slot. Once you use this feature, you can't do so again until you complete a short or long rest.</li>\n</ul>\n<h3>Star Map</h3>\n<table>\n<thead>\n<tr>\n<th align=\"center\">d6</th>\n<th align=\"left\">Map Form</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td align=\"center\">1</td>\n<td align=\"left\">A scroll covered with depictions of constellations</td>\n</tr>\n<tr>\n<td align=\"center\">2</td>\n<td align=\"left\">A stone tablet with fine holes drilled through it</td>\n</tr>\n<tr>\n<td align=\"center\">3</td>\n<td align=\"left\">A speckled owlbear hide, tooled with raised marks</td>\n</tr>\n<tr>\n<td align=\"center\">4</td>\n<td align=\"left\">A collection of maps bound in an ebony cover</td>\n</tr>\n<tr>\n<td align=\"center\">5</td>\n<td align=\"left\">A crystal that projects starry patterns when placed before a light</td>\n</tr>\n<tr>\n<td align=\"center\">6</td>\n<td align=\"left\">Glass disks that depict constellations</td>\n</tr>\n</tbody>\n</table>",
       "chat": "",
       "unidentified": ""
     },
@@ -73,7 +73,7 @@
     }
   },
   "flags": {},
-  "img": "",
+  "img": "icons/skills/trades/academics-astronomy-navigation-purple.webp",
   "effects": [],
   "folder": null,
   "sort": 0,
@@ -82,7 +82,7 @@
     "systemVersion": "2.1.0",
     "coreVersion": "10.291",
     "createdTime": 1675986804552,
-    "modifiedTime": 1675988227346,
-    "lastModifiedBy": "dnd5ebuilder0000"
+    "modifiedTime": 1676491016554,
+    "lastModifiedBy": "RightHandOfVecna"
   }
 }

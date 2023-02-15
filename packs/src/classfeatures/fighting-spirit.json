@@ -7,7 +7,7 @@
   "type": "feat",
   "system": {
     "description": {
-      "value": "<p>Starting at 3rd level, your intensity in battle can shield you and help you strike true. As a bonus action on your turn, you can give yourself advantage on weapon attack rolls until the end of the current turn. When you do so, you also gain a number of temporary hit points equal to 5 + your fighter level.</p>\n<p>You can use this feature a number of times equal to your proficiency bonus, and you regain all expended uses of it when you finish a long rest.</p>",
+      "value": "<p>Starting at 3rd level, your intensity in battle can shield you and help you strike true. As a bonus action on your turn, you can give yourself advantage on weapon attack rolls until the end of the current turn. When you do so, you also gain a number of temporary hit points equal to 5 + your fighter level.</p>\n<p>Once you use this bonus action, you can't do so again until you complete a short or long rest.</p>",
       "chat": "",
       "unidentified": ""
     },
@@ -73,7 +73,7 @@
     }
   },
   "flags": {},
-  "img": "",
+  "img": "icons/skills/melee/maneuver-sword-katana-yellow.webp",
   "effects": [],
   "folder": null,
   "sort": 0,
@@ -82,7 +82,7 @@
     "systemVersion": "2.1.0",
     "coreVersion": "10.291",
     "createdTime": 1675986803024,
-    "modifiedTime": 1675988226340,
-    "lastModifiedBy": "dnd5ebuilder0000"
+    "modifiedTime": 1676491015614,
+    "lastModifiedBy": "RightHandOfVecna"
   }
 }
