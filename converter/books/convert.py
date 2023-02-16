@@ -62,7 +62,7 @@ def readOriginals(folder):
     featureMap = {}
     dp, _, filenames = next(os.walk(folder))
     for fname in filenames:
-        with open(os.path.join(dp,fname), "r") as fFp:
+        with open(os.path.join(dp,fname), "r", encoding="utf-8") as fFp:
             feature = json.load(fFp)
         featureMap[cmdize(feature["name"])] = feature
     return featureMap
@@ -123,6 +123,7 @@ def updateNewSubclasses(all_subclasses, subclassesMap):
 DRAG_AND_DROP_NOTE = "\n\n<section class=\"secret foundry-note\">\n<p><strong>Foundry Note</strong></p>\n<p>You can drag your choices from the above onto your character sheet and it will automatically update.</p>\n</section>"
 
 INLINE_OPTION_RX = re.compile("(?P<enc>\\*\\*\\*?)(?P<title>[^\\*]+)\\.(?P=enc) ", re.IGNORECASE)
+INLINE_RACIAL_OPTION_RX = re.compile(" *-? *(?P<enc>\\*\\*\\*?)(?P<title>[^\\*]+)\\.(?P=enc) ", re.IGNORECASE)
 
 def collectOptionsFromHeading(canonical_features, original_features, originalCollection, featureSubType, requirements, name_to):
     featureOptions = []
@@ -252,6 +253,81 @@ def replaceSpellsInFeatures(canonical_features, all_spells):
         return match.group(0)
     for feature in canonical_features.values():
         feature.paragraphs = SPELL_RX.sub(_spell_sub, feature.paragraphs)
+
+def splitRacialFeatures(canonical_features, original_features, sourceFeature:str, featureSubType, requirements, name_to=None, original_ancestry="NONE"):
+    if name_to is None:
+        name_to = sourceFeature
+    parentFeature = canonical_features[cmdize(sourceFeature)]
+    firstOptionIdx = 0
+    parentFeature.paragraphs = ""
+    for para in parentFeature.originalCollection.children():
+        if INLINE_RACIAL_OPTION_RX.match(para.markdown()):
+            break
+        parentFeature.paragraphs += "\n\n" + para.markdown()
+        firstOptionIdx += 1
+
+    featureCollections = []
+    featureCollection = None
+    for para in parentFeature.originalCollection.children()[firstOptionIdx:]:
+        para = deepcopy(para)
+        match = INLINE_RACIAL_OPTION_RX.match(para.text)
+        if match:
+            if featureCollection is not None:
+                featureCollections.append(featureCollection)
+            para.text = para.text[len(match.group(0)):]
+            featureCollection = Collection(CollectionLevel.H3, match.group("title")).add(para)
+        elif featureCollection is not None:
+            featureCollection.add(para)
+        else:
+            raise Exception("The first option doesn't match the inline options regex")
+    featureCollections.append(featureCollection)
+
+    # remove age, size, speed, languages
+    age = ""
+    size = ""
+    speed = ""
+    languages = ""
+    for rf in list(featureCollections):
+        if rf.text.endswith("Age"):
+            age = rf.immediateMarkdown()
+            featureCollections.remove(rf)
+        elif rf.text.endswith("Size"):
+            size = rf.immediateMarkdown()
+            featureCollections.remove(rf)
+        elif rf.text.endswith("Speed"):
+            speed = rf.immediateMarkdown()
+            featureCollections.remove(rf)
+        elif rf.text.endswith("Languages"):
+            languages = rf.immediateMarkdown()
+            featureCollections.remove(rf)
+    
+    # convert from Collection to Feature
+    featureOptions = []
+    for featureOption in featureCollections:
+        feature = Feature(featureOption)
+        if ": " not in feature.name and not feature.name.startswith(name_to) and not feature.name.startswith(original_ancestry):
+            feature.name = f"{name_to}: {feature.name}"
+        feature.featureSubType = featureSubType
+        if requirements is not None:
+            feature.requirements = requirements
+        if cmdize(feature.name) in canonical_features:
+            if canonical_features[cmdize(feature.name)].descriptionHTML != feature.descriptionHTML:
+                print(f"duplicate non-identical feature {feature.name}")
+            feature = canonical_features[cmdize(feature.name)]
+        canonical_features[cmdize(feature.name)] = feature
+        featureOptions.append(feature)
+    updateNewClassFeatures({cmdize(f.name):f for f in featureOptions}, original_features)
+    def _addIfNotEmpty(l, t):
+        if t:
+            parentFeature.paragraphs += f"\n\n***{l}.*** {t}"
+    _addIfNotEmpty("Age", age)
+    _addIfNotEmpty("Size", size)
+    _addIfNotEmpty("Speed", speed)
+    parentFeature.paragraphs += "\n\n"+"\n\n".join("***"+featureOption.name.split(": ")[-1]+".*** @UUID[Compendium.dnd5e.classfeatures."+featureOption.originalId+"]{"+featureOption.name.split(": ")[-1]+"} "+featureOption.paragraphs for featureOption in featureOptions)
+    _addIfNotEmpty("Languages", languages)
+    parentFeature.paragraphs += DRAG_AND_DROP_NOTE
+
+    return featureOptions
 
 SPELL_LIST_RX = re.compile("\\b(?P<class>\\w+) spell list", re.IGNORECASE)
 
@@ -642,6 +718,9 @@ def loadClasses(filepath:str, all_spells:dict={}):
         for scl in cl.subclasses.values():
             scl.features = [canonical_features[cmdize(f.name)] for f in scl.features]
     
+    if all_spells:
+        replaceSpellsInFeatures(canonical_features, all_spells)
+    
     # update canonical features to reflect old Ids and other fields
     updateNewClassFeatures(canonical_features, original_features)
 
@@ -659,7 +738,7 @@ def loadClasses(filepath:str, all_spells:dict={}):
 
     return classes, None, canonical_features
 
-def loadFeats(filepath:str)->dict:
+def loadFeats(filepath:str, all_spells:dict={})->dict:
     phb = load_5e_phb(filepath)
 
     feats = {}
@@ -671,28 +750,93 @@ def loadFeats(filepath:str)->dict:
         feat.featureType = "feat"
         feats[cmdize(feat.name)] = feat
     
+    if all_spells:
+        replaceSpellsInFeatures(feats, all_spells)
+
     # load original features for purposes of consistency with IDs
     original_features = readOriginals(os.path.join("packs","src","classfeatures"))
     updateNewClassFeatures(feats, original_features)
     
     return feats
 
-def writeFeatures(canonical_features):
+def loadRaces(filepath:str, all_spells:dict={}):
+    
+    """
+    Returns (races_map)
+    """
+    phb = load_5e_phb(filepath)
+
+    RACIAL_RX = re.compile("(?P<ancestry>.*) (?P<type>Ancestral|Cultural) Traits", re.IGNORECASE)
+    races = {}
+    for raceCollection in phb.fromPath("Chapter 2: Ancestries &amp; Cultures").children():
+        if raceCollection.level < CollectionLevel.SUBCHAPTER or raceCollection.text == "Choosing an Ancestry":
+            continue
+        for subraceCollection in raceCollection.children():
+            if subraceCollection.level != CollectionLevel.H3:
+                continue
+            m = RACIAL_RX.match(subraceCollection.text)
+            if not m:
+                continue
+            ancestry = m.group("ancestry")
+            ancestryType = m.group("type")
+            f = Feature(subraceCollection)
+            ancestryAdj = ancestry.lower()\
+                .replace("elf","elven")\
+                .replace("dwarf","dwarven")\
+                .title()
+            ancestryNoun = ancestry.lower()\
+                .replace("elven","elf")\
+                .replace("dwarven","dwarf")\
+                .replace("orcish","orc")\
+                .replace("aaracokran","aaracokra")\
+                .title()
+            if ancestryType.lower() == "ancestral":
+                ancestryType="ancestry"
+            else:
+                ancestryType="culture"
+            f.name = f"{ancestryType.title()}: {ancestryNoun}"
+            races[cmdize(f.name)] = f
+            splitRacialFeatures(
+                races,
+                {},
+                f.name,
+                ancestryType,
+                f"{ancestryAdj} {ancestryType}",
+                name_to=ancestryNoun,
+                original_ancestry=ancestryAdj
+            )
+    
+    if all_spells:
+        replaceSpellsInFeatures(races, all_spells)
+    
     # load original features for purposes of consistency with IDs
-    original_features = readOriginals(os.path.join("packs","src","classfeatures"))
+    original_features = readOriginals(os.path.join("packs","src","races"))
+    updateNewClassFeatures(races, original_features)
+
+    return races
+
+
+def _writeFeatures(path, canonical_features):
+    # load original features for purposes of consistency with IDs
+    original_features = readOriginals(path)
 
     # write out the canonical features
-    classFeaturesDir = os.path.join("packs","src","classfeatures")
-    shutil.rmtree(classFeaturesDir)
-    os.mkdir(classFeaturesDir)
+    shutil.rmtree(path)
+    os.mkdir(path)
 
     for feature_key in sorted(canonical_features.keys()):
         feature = canonical_features[feature_key]
         featureJson = feature.toDb() if isinstance(feature,Feature) else feature
         if feature_key in original_features and equalsWithout(featureJson, original_features[feature_key]):
             featureJson = original_features[feature_key]
-        with open(os.path.join(classFeaturesDir, f"{feature_key}.json"), 'w', encoding="utf-8") as saveFp:
+        with open(os.path.join(path, f"{feature_key}.json"), 'w', encoding="utf-8") as saveFp:
             saveFp.write(json.dumps(featureJson, indent=2)+"\n")
+
+def writeFeatures(canonical_features):
+    _writeFeatures(os.path.join("packs","src","classfeatures"), canonical_features)
+
+def writeRaces(canonical_features):
+    _writeFeatures(os.path.join("packs","src","races"), canonical_features)
 
 
 def writeClasses(classes):
@@ -747,8 +891,11 @@ def main():
     feats = loadFeats(args.filepath)
     features.update(feats)
 
+    races = loadRaces(args.filepath)
+
     writeClasses(classes)
     writeFeatures(features)
+    writeRaces(races)
     
     # print(classes["bard"].name, ":--:", ", ".join(f.name for f in classes["bard"].subclasses.values()))
     # print(phb.fromPath("Chapter 3: Classes", "Warlock", "Class Features", "Eldritch Invocations").markdown())
