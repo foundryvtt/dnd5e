@@ -1,13 +1,13 @@
 {
-  "_id": "ufysTkqet2Ctmtyi",
-  "name": "Dwarven Resilience",
+  "_id": "y9123a3f9W1ADN8Z",
+  "name": "Eladrin: Autumn",
   "ownership": {
     "default": 0
   },
   "type": "feat",
   "system": {
     "description": {
-      "value": "<p>You have advantage on saving throws against poison and being knocked prone, and you have resistance against poison damage.</p>",
+      "value": "<p>Immediately after you use your Fey Step, up to two creatures of your choice that you can see within 10 feet of you must succeed on a Wisdom saving throw or be charmed by you for 1 minute, or until you or your companions deal any damage to it.\n- <strong>Winter.</strong> When you use your Fey Step, one creature of your choice that you can see within 5 feet of you before you teleport must succeed on a Wisdom saving throw or be frightened of you until the end of your next turn.\n- <strong>Spring.</strong> When you use your Fey Step, you can touch one willing creature within 5 feet of you. That creature then teleports instead of you, appearing in an unoccupied space of your choice that you can see within 30 feet of you.\n- <strong>Summer.</strong> Immediately after you use your Fey Step, each creature of your choice that you can see within 5 feet of you takes fire damage equal to your proficiency bonus.</p>",
       "chat": "",
       "unidentified": ""
     },
@@ -44,7 +44,7 @@
       "target": null,
       "amount": null
     },
-    "ability": "",
+    "ability": null,
     "actionType": "",
     "attackBonus": "",
     "chatFlavor": "",
@@ -63,55 +63,26 @@
       "scaling": "spell"
     },
     "type": {
-      "value": "ancestry",
-      "subtype": ""
+      "value": "class",
+      "subtype": "culture"
     },
-    "requirements": "Dwarven ancestry",
+    "requirements": "Eladrin culture",
     "recharge": {
       "value": null,
       "charged": false
     }
   },
   "flags": {},
-  "img": "icons/creatures/abilities/stinger-poison-green.webp",
-  "effects": [
-    {
-      "_id": "hIaIpLxcMZSY3qXi",
-      "changes": [
-        {
-          "key": "system.traits.dr.value",
-          "mode": 2,
-          "value": "poison",
-          "priority": null
-        }
-      ],
-      "disabled": false,
-      "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
-      },
-      "icon": "icons/creatures/abilities/stinger-poison-green.webp",
-      "label": "Dwarven Resilience",
-      "origin": "Item.ufysTkqet2Ctmtyi",
-      "transfer": true,
-      "flags": {},
-      "tint": null,
-      "sort": 0
-    }
-  ],
+  "img": "",
+  "effects": [],
   "folder": null,
   "sort": 0,
   "_stats": {
     "systemId": "dnd5e",
     "systemVersion": "2.1.0",
     "coreVersion": "10.291",
-    "createdTime": 1661787234474,
-    "modifiedTime": 1676598660132,
+    "createdTime": 1676598660138,
+    "modifiedTime": 1676598660138,
     "lastModifiedBy": "RightHandOfVecna"
   }
 }

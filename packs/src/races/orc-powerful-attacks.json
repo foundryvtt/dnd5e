@@ -1,13 +1,13 @@
 {
-  "_id": "ufysTkqet2Ctmtyi",
-  "name": "Dwarven Resilience",
+  "_id": "1yKRvf6gWzGjg8gu",
+  "name": "Orc: Powerful Attacks",
   "ownership": {
     "default": 0
   },
   "type": "feat",
   "system": {
     "description": {
-      "value": "<p>You have advantage on saving throws against poison and being knocked prone, and you have resistance against poison damage.</p>",
+      "value": "<p>When you score a critical hit with a melee weapon attack, you can roll one of the weapon's damage dice one additional time and add it to the extra damage of the critical hit.</p>",
       "chat": "",
       "unidentified": ""
     },
@@ -44,7 +44,7 @@
       "target": null,
       "amount": null
     },
-    "ability": "",
+    "ability": null,
     "actionType": "",
     "attackBonus": "",
     "chatFlavor": "",
@@ -63,55 +63,26 @@
       "scaling": "spell"
     },
     "type": {
-      "value": "ancestry",
-      "subtype": ""
+      "value": "class",
+      "subtype": "ancestry"
     },
-    "requirements": "Dwarven ancestry",
+    "requirements": "Orcish ancestry",
     "recharge": {
       "value": null,
       "charged": false
     }
   },
   "flags": {},
-  "img": "icons/creatures/abilities/stinger-poison-green.webp",
-  "effects": [
-    {
-      "_id": "hIaIpLxcMZSY3qXi",
-      "changes": [
-        {
-          "key": "system.traits.dr.value",
-          "mode": 2,
-          "value": "poison",
-          "priority": null
-        }
-      ],
-      "disabled": false,
-      "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
-      },
-      "icon": "icons/creatures/abilities/stinger-poison-green.webp",
-      "label": "Dwarven Resilience",
-      "origin": "Item.ufysTkqet2Ctmtyi",
-      "transfer": true,
-      "flags": {},
-      "tint": null,
-      "sort": 0
-    }
-  ],
+  "img": "",
+  "effects": [],
   "folder": null,
   "sort": 0,
   "_stats": {
     "systemId": "dnd5e",
     "systemVersion": "2.1.0",
     "coreVersion": "10.291",
-    "createdTime": 1661787234474,
-    "modifiedTime": 1676598660132,
+    "createdTime": 1676598660225,
+    "modifiedTime": 1676598660225,
     "lastModifiedBy": "RightHandOfVecna"
   }
 }

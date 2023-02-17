@@ -1,0 +1,88 @@
+{
+  "_id": "K5o5AfP9pqTHP1LB",
+  "name": "Ancestry: Centaur",
+  "ownership": {
+    "default": 0
+  },
+  "type": "feat",
+  "system": {
+    "description": {
+      "value": "<p>As a centaur, you have the following racial traits.</p>\n<p><strong><em>Size.</em></strong> Your size is Medium.</p>\n<p><strong><em>Speed.</em></strong> Your walking speed is 40 feet.</p>\n<p><strong><em>Creature Type.</em></strong> @UUID[Compendium.dnd5e.classfeatures.OjEBgwTy7vnvvE5P]{Creature Type} You are a Fey.</p>\n<p><strong><em>Charge.</em></strong> @UUID[Compendium.dnd5e.classfeatures.xaQF0wu0EZpoJWyn]{Charge} If you move at least 30 feet straight toward a target and then hit it with a melee weapon attack on the same turn, you can immediately follow that attack with a bonus action, making one attack against the target with your hooves.</p>\n<p><strong><em>Equine Build.</em></strong> @UUID[Compendium.dnd5e.classfeatures.5x63Aqs73NUDD51s]{Equine Build} You count as one size larger when determining your carrying capacity and the weight you can push or drag.</p>\n<p>In addition, any climb that requires hands and feet is especially difficult for you because of your equine legs. When you make such a climb, each foot of movement costs you 4 extra feet instead of the normal 1 extra foot.</p>\n<p><strong><em>Hooves.</em></strong> @UUID[Compendium.dnd5e.classfeatures.R5Pm0qZPk1Qj9dNk]{Hooves} You have hooves that you can use to make unarmed strikes. When you hit with them, the strike deals 1d6 bludgeoning damage, instead of the bludgeoning damage normal for an unarmed strike.</p>\n<section class=\"secret foundry-note\">\n<p><strong>Foundry Note</strong></p>\n<p>You can drag your choices from the above onto your character sheet and it will automatically update.</p>\n</section>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "SRD 5.1",
+    "activation": {
+      "type": "",
+      "cost": null,
+      "condition": ""
+    },
+    "duration": {
+      "value": "",
+      "units": ""
+    },
+    "cover": null,
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": ""
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": ""
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": null,
+      "recovery": ""
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
+    "ability": null,
+    "actionType": "",
+    "attackBonus": "",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "type": {
+      "value": "class",
+      "subtype": ""
+    },
+    "requirements": "",
+    "recharge": {
+      "value": null,
+      "charged": false
+    }
+  },
+  "flags": {},
+  "img": "icons/skills/ranged/arrow-strike-apple-orange.webp",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.1.0",
+    "coreVersion": "10.291",
+    "createdTime": 1676598659851,
+    "modifiedTime": 1676598659851,
+    "lastModifiedBy": "RightHandOfVecna"
+  }
+}

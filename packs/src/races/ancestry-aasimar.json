@@ -1,0 +1,88 @@
+{
+  "_id": "sD1V4R5HAEZTx2B2",
+  "name": "Ancestry: Aasimar",
+  "ownership": {
+    "default": 0
+  },
+  "type": "feat",
+  "system": {
+    "description": {
+      "value": "<p>Your aasimar character has the following ancestral traits.</p>\n<p><strong><em>Age.</em></strong> Aasimar mature at the same rate as humans, but they can live up to 160 years.</p>\n<p><strong><em>Size.</em></strong> Aasimar have the same range of height and weight as humans. Your size is Medium.</p>\n<p><strong><em>Speed.</em></strong> Your base walking speed is 30 feet.</p>\n<p><strong><em>Celestial Resistance.</em></strong> @UUID[Compendium.dnd5e.classfeatures.JQE7gjzQSHE5sthb]{Celestial Resistance} You have resistance to radiant damage.</p>\n<p><strong><em>Healing Hands.</em></strong> @UUID[Compendium.dnd5e.classfeatures.lyxZ4GxqFjTqaBNt]{Healing Hands} As an action, you can touch a creature and roll a number of d4s equal to your proficiency bonus. The creature regains a number of hit points equal to the total rolled. Once you use this trait, you can't use it again until you finish a long rest.</p>\n<p><strong><em>Innate Language.</em></strong> @UUID[Compendium.dnd5e.classfeatures.CdTX3eV5VHJ1ugUg]{Innate Language} You can speak, read, and write Celestial.</p>\n<p><strong><em>Celestial Revelation.</em></strong> @UUID[Compendium.dnd5e.classfeatures.C6joL7HSIgzZFrsN]{Celestial Revelation} When you reach 3rd level, choose one of the revelation options below. Thereafter, you can use a bonus action to unleash the celestial energy within yourself, gaining the benefits of that revelation. Your transformation lasts for 1 minute or until you end it as a bonus action. Once you transform using your revelation below, you can't use it again until you finish a long rest:</p>\n<p><strong><em>Necrotic Shroud.</em></strong> @UUID[Compendium.dnd5e.classfeatures.ZBLfYAdnK9ry4B3N]{Necrotic Shroud} Your eyes briefly become pools of darkness, and ghostly, flightless wings sprout from your back temporarily. The instant you transform, creatures other than your allies within 10 feet of you that can see you must each succeed on a Charisma saving throw (DC 8 + your proficiency bonus + your Charisma modifier) or become frightened of you until the end of your next turn. Until the transformation ends, once on each of your turns, you can deal extra necrotic damage to one target when you deal damage to it with an attack or a spell. The extra necrotic damage equals your level.\n- <strong>Radiant Consumption.</strong> Searing light temporarily radiates from your eyes and mouth. For the duration, you shed bright light in a 10-foot radius and dim light for an additional 10 feet, and at the end of each of your turns, you and each creature within 10 feet of you take radiant damage equal to half your level (rounded up). In addition, once on each of your turns, you can deal extra radiant damage to one target when you deal damage to it with an attack or a spell. The extra radiant damage equals your level.\n- <strong>Radiant Soul.</strong> Two luminous, spectral wings sprout from your back temporarily. Until the transformation ends, you have a flying speed of 30 feet, and once on each of your turns you can deal extra radiant damage to one target when you deal damage to it with an attack or a spell. The extra radiant damage equals your level.</p>\n<section class=\"secret foundry-note\">\n<p><strong>Foundry Note</strong></p>\n<p>You can drag your choices from the above onto your character sheet and it will automatically update.</p>\n</section>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "SRD 5.1",
+    "activation": {
+      "type": "",
+      "cost": null,
+      "condition": ""
+    },
+    "duration": {
+      "value": "",
+      "units": ""
+    },
+    "cover": null,
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": ""
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": ""
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": null,
+      "recovery": ""
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
+    "ability": null,
+    "actionType": "",
+    "attackBonus": "",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "type": {
+      "value": "class",
+      "subtype": ""
+    },
+    "requirements": "",
+    "recharge": {
+      "value": null,
+      "charged": false
+    }
+  },
+  "flags": {},
+  "img": "icons/magic/holy/angel-winged-humanoid-blue.webp",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.1.0",
+    "coreVersion": "10.291",
+    "createdTime": 1676598659847,
+    "modifiedTime": 1676598659847,
+    "lastModifiedBy": "RightHandOfVecna"
+  }
+}

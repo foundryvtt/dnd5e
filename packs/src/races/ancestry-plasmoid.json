@@ -1,0 +1,88 @@
+{
+  "_id": "DIf4OrMfAqB1RrUz",
+  "name": "Ancestry: Plasmoid",
+  "ownership": {
+    "default": 0
+  },
+  "type": "feat",
+  "system": {
+    "description": {
+      "value": "<p>As a plasmoid, you have the following ancestral traits.</p>\n<p><strong><em>Size.</em></strong> You are Medium or Small. You choose the size when you select this race.</p>\n<p><strong><em>Speed.</em></strong> Your walking speed is 30 feet.</p>\n<p><strong><em>Creature Type.</em></strong> @UUID[Compendium.dnd5e.classfeatures.6MRJfqC7T4N83NE8]{Creature Type} You are an Ooze.</p>\n<p><strong><em>Amorphous.</em></strong> @UUID[Compendium.dnd5e.classfeatures.6HTe10PMOrLSAKP2]{Amorphous} You can squeeze through a space as narrow as 1 inch wide, provided you are wearing and carrying nothing. You have advantage on ability checks you make to initiate or escape a grapple.</p>\n<p><strong><em>Hold Breath.</em></strong> @UUID[Compendium.dnd5e.classfeatures.AhuI8E8oe7aJcPAC]{Hold Breath} You can hold your breath for 1 hour.</p>\n<p><strong><em>Natural Resilience.</em></strong> @UUID[Compendium.dnd5e.classfeatures.WkhGH1KnftVVVjQE]{Natural Resilience} You have resistance to acid and poison damage, and you have advantage on saving throws against being poisoned.</p>\n<p><strong><em>Shape Self.</em></strong> @UUID[Compendium.dnd5e.classfeatures.cZ3A1CRd1dFzV2u6]{Shape Self} As an action, you can reshape your body to give yourself a head, one or two arms, one or two legs, and makeshift hands and feet, or you can revert to a limbless blob. While you have a humanlike shape, you can wear clothing and armor made for a Humanoid of your size. You revert to a limbless blob while unconscious.</p>\n<p>As a bonus action, you can extrude a pseudopod that is up to 6 inches wide and 10 feet long or reabsorb it into your body. As part of the same bonus action, you can use this pseudopod to manipulate an object, open or close a door or container, or pick up or set down a Tiny object. The pseudopod contains no sensory organs and can't attack, activate magic items, or lift more than 10 pounds.</p>\n<section class=\"secret foundry-note\">\n<p><strong>Foundry Note</strong></p>\n<p>You can drag your choices from the above onto your character sheet and it will automatically update.</p>\n</section>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "SRD 5.1",
+    "activation": {
+      "type": "",
+      "cost": null,
+      "condition": ""
+    },
+    "duration": {
+      "value": "",
+      "units": ""
+    },
+    "cover": null,
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": ""
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": ""
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": null,
+      "recovery": ""
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
+    "ability": null,
+    "actionType": "",
+    "attackBonus": "",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "type": {
+      "value": "class",
+      "subtype": ""
+    },
+    "requirements": "",
+    "recharge": {
+      "value": null,
+      "charged": false
+    }
+  },
+  "flags": {},
+  "img": "icons/creatures/slimes/slime-face-hollow-green.webp",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.1.0",
+    "coreVersion": "10.291",
+    "createdTime": 1676598659928,
+    "modifiedTime": 1676598659928,
+    "lastModifiedBy": "RightHandOfVecna"
+  }
+}

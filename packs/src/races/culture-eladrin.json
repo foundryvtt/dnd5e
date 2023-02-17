@@ -1,0 +1,88 @@
+{
+  "_id": "ZeFmiOOd30ypnMFd",
+  "name": "Culture: Eladrin",
+  "ownership": {
+    "default": 0
+  },
+  "type": "feat",
+  "system": {
+    "description": {
+      "value": "<p>Eladrin are an elven culture native to the Feywild, a realm of beauty, unpredictable emotion, and boundless magic. An eladrin is associated with one of the four seasons and has coloration reminiscent of that season, which can also shape (or be affected by) the eladrin's mood:</p>\n<p><strong>Autumn</strong> is the season of peace and goodwill, when summer's harvest is shared with all.</p>\n<p><strong>Winter</strong> is the season of contemplation and dolor, when the vibrant energy of the world slumbers.</p>\n<p><strong>Spring</strong> is the season of cheerfulness and celebration, marked by merriment as winter's sorrow passes.</p>\n<p><strong>Summer</strong> is the season of boldness and aggression, a time of unfettered energy.</p>\n<p>Some eladrin remain associated with a particular season for their entire lives, whereas other eladrin transform, adopting characteristics of a new season.</p>\n<p><strong><em>Fey Step.</em></strong> @UUID[Compendium.dnd5e.classfeatures.ciqw5knypTtTLBpE]{Fey Step} You can cast the @Compendium[dnd5e.spells.wqfAVANuQonNBgnL]{Misty Step} spell once without expending a spell slot. You must finish a short or long rest before you can use this feature again.</p>\n<p>When you reach 3rd level, your Fey Step gains an additional effect based on your season; if the effect requires a saving throw, the DC equals 8 + your proficiency bonus + your Charisma modifier:</p>\n<p><strong><em>Autumn.</em></strong> @UUID[Compendium.dnd5e.classfeatures.y9123a3f9W1ADN8Z]{Autumn} Immediately after you use your Fey Step, up to two creatures of your choice that you can see within 10 feet of you must succeed on a Wisdom saving throw or be charmed by you for 1 minute, or until you or your companions deal any damage to it.\n- <strong>Winter.</strong> When you use your Fey Step, one creature of your choice that you can see within 5 feet of you before you teleport must succeed on a Wisdom saving throw or be frightened of you until the end of your next turn.\n- <strong>Spring.</strong> When you use your Fey Step, you can touch one willing creature within 5 feet of you. That creature then teleports instead of you, appearing in an unoccupied space of your choice that you can see within 30 feet of you.\n- <strong>Summer.</strong> Immediately after you use your Fey Step, each creature of your choice that you can see within 5 feet of you takes fire damage equal to your proficiency bonus.</p>\n<p><strong><em>Languages.</em></strong> You can speak, read, and write Common, Elvish, and Sylvan.</p>\n<section class=\"secret foundry-note\">\n<p><strong>Foundry Note</strong></p>\n<p>You can drag your choices from the above onto your character sheet and it will automatically update.</p>\n</section>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "SRD 5.1",
+    "activation": {
+      "type": "",
+      "cost": null,
+      "condition": ""
+    },
+    "duration": {
+      "value": "",
+      "units": ""
+    },
+    "cover": null,
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": ""
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": ""
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": null,
+      "recovery": ""
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
+    "ability": null,
+    "actionType": "",
+    "attackBonus": "",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "type": {
+      "value": "class",
+      "subtype": ""
+    },
+    "requirements": "",
+    "recharge": {
+      "value": null,
+      "charged": false
+    }
+  },
+  "flags": {},
+  "img": "",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.1.0",
+    "coreVersion": "10.291",
+    "createdTime": 1676598660024,
+    "modifiedTime": 1676598660024,
+    "lastModifiedBy": "RightHandOfVecna"
+  }
+}

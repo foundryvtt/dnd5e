@@ -1,13 +1,13 @@
 {
-  "_id": "ufysTkqet2Ctmtyi",
-  "name": "Dwarven Resilience",
+  "_id": "A0e0DIw8RBKxs8Hq",
+  "name": "Culture: Tabaxi",
   "ownership": {
     "default": 0
   },
   "type": "feat",
   "system": {
     "description": {
-      "value": "<p>You have advantage on saving throws against poison and being knocked prone, and you have resistance against poison damage.</p>",
+      "value": "<p>Tabaxi communities are small and remote. Sustained by hunting, crafting, and trading, members of these communities value artists and storytellers &mdash;whether their stories be true or not.</p>\n<p><strong><em>Tabaxi Art.</em></strong> @UUID[Compendium.dnd5e.classfeatures.R0B64NXw7yI8H051]{Tabaxi Art} You have proficiency with one of the following tools of your choice: calligrapher's supplies, a musical instrument, smith's tools, and woodcarver's tools.</p>\n<p><strong><em>Storytelling.</em></strong> @UUID[Compendium.dnd5e.classfeatures.MJlpdAwquWQ40hFJ]{Storytelling} You have proficiency in one of the following skills of your choice: Deception, Performance, and Persuasion.</p>\n<p><strong><em>Languages.</em></strong> You can speak, read, and write Common and one other language of your choice.</p>\n<section class=\"secret foundry-note\">\n<p><strong>Foundry Note</strong></p>\n<p>You can drag your choices from the above onto your character sheet and it will automatically update.</p>\n</section>",
       "chat": "",
       "unidentified": ""
     },
@@ -44,7 +44,7 @@
       "target": null,
       "amount": null
     },
-    "ability": "",
+    "ability": null,
     "actionType": "",
     "attackBonus": "",
     "chatFlavor": "",
@@ -63,55 +63,26 @@
       "scaling": "spell"
     },
     "type": {
-      "value": "ancestry",
+      "value": "class",
       "subtype": ""
     },
-    "requirements": "Dwarven ancestry",
+    "requirements": "",
     "recharge": {
       "value": null,
       "charged": false
     }
   },
   "flags": {},
-  "img": "icons/creatures/abilities/stinger-poison-green.webp",
-  "effects": [
-    {
-      "_id": "hIaIpLxcMZSY3qXi",
-      "changes": [
-        {
-          "key": "system.traits.dr.value",
-          "mode": 2,
-          "value": "poison",
-          "priority": null
-        }
-      ],
-      "disabled": false,
-      "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
-      },
-      "icon": "icons/creatures/abilities/stinger-poison-green.webp",
-      "label": "Dwarven Resilience",
-      "origin": "Item.ufysTkqet2Ctmtyi",
-      "transfer": true,
-      "flags": {},
-      "tint": null,
-      "sort": 0
-    }
-  ],
+  "img": "",
+  "effects": [],
   "folder": null,
   "sort": 0,
   "_stats": {
     "systemId": "dnd5e",
     "systemVersion": "2.1.0",
     "coreVersion": "10.291",
-    "createdTime": 1661787234474,
-    "modifiedTime": 1676598660132,
+    "createdTime": 1676598660111,
+    "modifiedTime": 1676598660111,
     "lastModifiedBy": "RightHandOfVecna"
   }
 }

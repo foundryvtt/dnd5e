@@ -1,0 +1,88 @@
+{
+  "_id": "jx3Ss3J3ULKe7ONJ",
+  "name": "Ancestry: Lizardfolk",
+  "ownership": {
+    "default": 0
+  },
+  "type": "feat",
+  "system": {
+    "description": {
+      "value": "<p>Your lizardfolk character has the following ancestral traits.</p>\n<p><strong><em>Age.</em></strong> Lizardfolk reach maturity around age 14 and rarely live longer than 60 years.</p>\n<p><strong><em>Size.</em></strong> Lizardfolk are a little bulkier and taller than humans, and their colorful frills make them appear even larger. Your size is Medium.</p>\n<p><strong><em>Speed.</em></strong> Your base walking speed is 30 feet, and you have a swimming speed of 30 feet.</p>\n<p><strong><em>Bite.</em></strong> @UUID[Compendium.dnd5e.classfeatures.ljY2ItBgDHH6700z]{Bite} Your fanged maw is a natural weapon, which you can use to make unarmed strikes. If you hit with it, you deal piercing damage equal to 1d6 + your Strength modifier, instead of the bludgeoning damage normal for an unarmed strike.</p>\n<p><strong><em>Hold Breath.</em></strong> @UUID[Compendium.dnd5e.classfeatures.8OlF0LMgL8nmkmZX]{Hold Breath} You can hold your breath for up to 15 minutes at a time.</p>\n<p><strong><em>Fearless.</em></strong> @UUID[Compendium.dnd5e.classfeatures.NwpFFNZwLiKO3CkF]{Fearless} You cannot be frightened.</p>\n<p><strong><em>Natural Armor.</em></strong> @UUID[Compendium.dnd5e.classfeatures.3LNyQg0NONSnbcM3]{Natural Armor} You have tough, scaly skin. When you aren't wearing armor, your AC is 13 + your Dexterity modifier. You can use your natural armor to determine your AC if the armor you wear would leave you with a lower AC. A shield's benefits apply as normal while you use your natural armor.</p>\n<p><strong><em>Hungry Jaws.</em></strong> @UUID[Compendium.dnd5e.classfeatures.krqyOq54f8eBZuUh]{Hungry Jaws} In battle, you can throw yourself into a vicious feeding frenzy. As a bonus action, you can make a special attack with your bite. If the attack hits, it deals its normal damage, and you gain temporary hit points equal to your proficiency bonus, and you can't use this trait again until you finish a short or long rest.</p>\n<section class=\"secret foundry-note\">\n<p><strong>Foundry Note</strong></p>\n<p>You can drag your choices from the above onto your character sheet and it will automatically update.</p>\n</section>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "SRD 5.1",
+    "activation": {
+      "type": "",
+      "cost": null,
+      "condition": ""
+    },
+    "duration": {
+      "value": "",
+      "units": ""
+    },
+    "cover": null,
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": ""
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": ""
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": null,
+      "recovery": ""
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
+    "ability": null,
+    "actionType": "",
+    "attackBonus": "",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "type": {
+      "value": "class",
+      "subtype": ""
+    },
+    "requirements": "",
+    "recharge": {
+      "value": null,
+      "charged": false
+    }
+  },
+  "flags": {},
+  "img": "icons/creatures/reptiles/lizard-iguana-green.webp",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.1.0",
+    "coreVersion": "10.291",
+    "createdTime": 1676598659918,
+    "modifiedTime": 1676598659918,
+    "lastModifiedBy": "RightHandOfVecna"
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "_id": "GEE2MxpdCZDmWjVX",
+  "name": "Ancestry: Dwarf",
+  "ownership": {
+    "default": 0
+  },
+  "type": "feat",
+  "system": {
+    "description": {
+      "value": "<p>Your dwarf character has an assortment of inborn abilities, part and parcel of dwarven nature.</p>\n<p><strong><em>Age.</em></strong> Dwarves mature at the same rate as humans, but they're considered young until they reach the age of 50. On average, they live about 350 years.</p>\n<p><strong><em>Size.</em></strong> Dwarves stand between 4 and 5 feet tall and average about 150 pounds. Your size is Medium.</p>\n<p><strong><em>Speed.</em></strong> Your base walking speed is 25 feet. Your speed is not reduced by wearing heavy armor.</p>\n<p><strong><em>Dwarven Resilience.</em></strong> @UUID[Compendium.dnd5e.classfeatures.lJrC3KgiwR2bCQGN]{Dwarven Resilience} You have advantage on saving throws against poison and being knocked prone, and you have resistance against poison damage.</p>\n<p><strong><em>Dwarven Defense.</em></strong> @UUID[Compendium.dnd5e.classfeatures.KWr8okpoGEXY1L8D]{Dwarven Defense} You can take a moment to focus entirely on survival. As an action, you gain +5 to your AC until the start of your next turn, and you can spend a number of Hit Dice up to to your proficiency bonus to heal yourself. Roll the dice, add your Constitution modifier to each die, and regain a number of hit points equal to the total (minimum of 1).</p>\n<p><strong><em>Dwarven Toughness.</em></strong> @UUID[Compendium.dnd5e.classfeatures.3tT82rcu5XoW6EyH]{Dwarven Toughness} Your hit point maximum increases by 1, and it increases by 1 every time you gain a level.</p>\n<section class=\"secret foundry-note\">\n<p><strong>Foundry Note</strong></p>\n<p>You can drag your choices from the above onto your character sheet and it will automatically update.</p>\n</section>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "SRD 5.1",
+    "activation": {
+      "type": "",
+      "cost": null,
+      "condition": ""
+    },
+    "duration": {
+      "value": "",
+      "units": ""
+    },
+    "cover": null,
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": ""
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": ""
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": null,
+      "recovery": ""
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
+    "ability": null,
+    "actionType": "",
+    "attackBonus": "",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "type": {
+      "value": "class",
+      "subtype": ""
+    },
+    "requirements": "",
+    "recharge": {
+      "value": null,
+      "charged": false
+    }
+  },
+  "flags": {},
+  "img": "icons/skills/trades/smithing-anvil-silver-red.webp",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.1.0",
+    "coreVersion": "10.291",
+    "createdTime": 1676598659863,
+    "modifiedTime": 1676598659863,
+    "lastModifiedBy": "RightHandOfVecna"
+  }
+}
