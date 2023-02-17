@@ -2,9 +2,11 @@
 from .books import Book, Collection, CollectionLevel
 from .features import Feature
 from .classes import RpgClass
-from ..common_lib import cmdize, naturalSort, equalsWithout, nvl, th
-from copy import deepcopy
+from ..common_lib import cmdize, naturalSort, equalsWithout, nvl, th, id_generator
+from copy import copy, deepcopy
 import argparse, json, os, shutil, re
+
+from typing import Tuple, List
 
 def load_5e_phb(
         root:str,
@@ -167,23 +169,20 @@ def splitOptionsWithHeading(canonical_features, original_features, sourceFeature
 
     return featureOptions
 
-def splitOptionsWithoutHeading(canonical_features, original_features, sourceFeature, featureSubType, requirements, name_to=None):
-    if name_to is None:
-        name_to = sourceFeature
-    parentFeature = canonical_features[cmdize(sourceFeature)]
+def _collectOptionsWithoutHeading(collection:Collection, rx=INLINE_OPTION_RX)->Tuple[str, List[Collection]]:
+    preamble = ""
     firstOptionIdx = 0
-    parentFeature.paragraphs = ""
-    for para in parentFeature.originalCollection.children():
+    for para in collection.children():
         if INLINE_OPTION_RX.match(para.markdown()):
             break
-        parentFeature.paragraphs += "\n\n" + para.markdown()
+        preamble += "\n\n" + para.markdown()
         firstOptionIdx += 1
 
     featureCollections = []
     featureCollection = None
-    for para in parentFeature.originalCollection.children()[firstOptionIdx:]:
+    for para in collection.children()[firstOptionIdx:]:
         para = deepcopy(para)
-        match = INLINE_OPTION_RX.match(para.text)
+        match = rx.match(para.text)
         if match:
             if featureCollection is not None:
                 featureCollections.append(featureCollection)
@@ -193,13 +192,16 @@ def splitOptionsWithoutHeading(canonical_features, original_features, sourceFeat
             featureCollection.add(para)
         else:
             raise Exception("The first option doesn't match the inline options regex")
-    featureCollections.append(featureCollection)
-    
-    # convert from Collection to Feature
+    if featureCollection is not None:
+        featureCollections.append(featureCollection)
+
+    return preamble, featureCollections
+
+def _convertToFeature(collections:List[Collection], canonical_features, featureSubType, requirements=None, name_to="", exclude_rename=tuple()):
     featureOptions = []
-    for featureOption in featureCollections:
+    for featureOption in collections:
         feature = Feature(featureOption)
-        if ": " not in feature.name:
+        if ": " not in feature.name and not any(feature.name.startswith(x) for x in exclude_rename):
             feature.name = f"{name_to}: {feature.name}"
         feature.featureSubType = featureSubType
         if requirements is not None:
@@ -210,6 +212,17 @@ def splitOptionsWithoutHeading(canonical_features, original_features, sourceFeat
             feature = canonical_features[cmdize(feature.name)]
         canonical_features[cmdize(feature.name)] = feature
         featureOptions.append(feature)
+    return featureOptions
+
+def splitOptionsWithoutHeading(canonical_features, original_features, sourceFeature, featureSubType, requirements, name_to=None):
+    if name_to is None:
+        name_to = sourceFeature
+    parentFeature = canonical_features[cmdize(sourceFeature)]
+    preamble, featureCollections = _collectOptionsWithoutHeading(parentFeature.originalCollection)
+    parentFeature.paragraphs = preamble
+    
+    # convert from Collection to Feature
+    featureOptions = _convertToFeature(featureCollections, canonical_features, featureSubType, requirements, name_to=name_to)
     updateNewClassFeatures({cmdize(f.name):f for f in featureOptions}, original_features)
     writeOptionsToFeature(parentFeature, featureOptions)
 
@@ -267,6 +280,7 @@ def splitRacialFeatures(canonical_features, original_features, sourceFeature:str
         firstOptionIdx += 1
 
     featureCollections = []
+    subraceCollections = []
     featureCollection = None
     for para in parentFeature.originalCollection.children()[firstOptionIdx:]:
         para = deepcopy(para)
@@ -276,11 +290,21 @@ def splitRacialFeatures(canonical_features, original_features, sourceFeature:str
                 featureCollections.append(featureCollection)
             para.text = para.text[len(match.group(0)):]
             featureCollection = Collection(CollectionLevel.H3, match.group("title")).add(para)
-        elif featureCollection is not None:
+        elif para.level >= CollectionLevel.P and featureCollection is not None:
             featureCollection.add(para)
+        elif para.level < CollectionLevel.P:
+            if "Variant" in para.text:
+                continue
+            # sub-ancestry
+            if featureCollection is not None:
+                featureCollections.append(featureCollection)
+            featureCollection = None
+            preamble, sro = _collectOptionsWithoutHeading(para, rx=INLINE_RACIAL_OPTION_RX)
+            subraceCollections.append((para.text, preamble, sro))
         else:
             raise Exception("The first option doesn't match the inline options regex")
-    featureCollections.append(featureCollection)
+    if featureCollection is not None:
+        featureCollections.append(featureCollection)
 
     # remove age, size, speed, languages
     age = ""
@@ -302,32 +326,49 @@ def splitRacialFeatures(canonical_features, original_features, sourceFeature:str
             featureCollections.remove(rf)
     
     # convert from Collection to Feature
-    featureOptions = []
-    for featureOption in featureCollections:
-        feature = Feature(featureOption)
-        if ": " not in feature.name and not feature.name.startswith(name_to) and not feature.name.startswith(original_ancestry):
-            feature.name = f"{name_to}: {feature.name}"
-        feature.featureSubType = featureSubType
-        if requirements is not None:
-            feature.requirements = requirements
-        if cmdize(feature.name) in canonical_features:
-            if canonical_features[cmdize(feature.name)].descriptionHTML != feature.descriptionHTML:
-                print(f"duplicate non-identical feature {feature.name}")
-            feature = canonical_features[cmdize(feature.name)]
-        canonical_features[cmdize(feature.name)] = feature
-        featureOptions.append(feature)
+    featureOptions = _convertToFeature(
+        featureCollections,
+        canonical_features,
+        featureSubType,
+        requirements,
+        name_to=name_to,
+        exclude_rename=(name_to, original_ancestry)
+    )
     updateNewClassFeatures({cmdize(f.name):f for f in featureOptions}, original_features)
+
+    subraceOptions = []
+    for soName, soPreamble, soCollections in subraceCollections:
+        soo = _convertToFeature(
+            soCollections,
+            canonical_features,
+            featureSubType,
+            requirements,
+            name_to=soName,
+            exclude_rename=(soName, name_to, original_ancestry)
+        )
+        subraceOptions.append((soName, soPreamble, soo))
+
     def _addIfNotEmpty(l, t):
         if t:
             parentFeature.paragraphs += f"\n\n***{l}.*** {t}"
     _addIfNotEmpty("Age", age)
     _addIfNotEmpty("Size", size)
     _addIfNotEmpty("Speed", speed)
-    parentFeature.paragraphs += "\n\n"+"\n\n".join("***"+featureOption.name.split(": ")[-1]+".*** @UUID[Compendium.dnd5e.classfeatures."+featureOption.originalId+"]{"+featureOption.name.split(": ")[-1]+"} "+featureOption.paragraphs for featureOption in featureOptions)
+    def _featureText(f:Feature):
+        return "***"+f.name.split(": ")[-1]+".*** @UUID[Compendium.dnd5e.classfeatures."+f.originalId+"]{"+f.name.split(": ")[-1]+"} "+f.paragraphs
+    parentFeature.paragraphs += "\n\n"+"\n\n".join(_featureText(featureOption) for featureOption in featureOptions)
     _addIfNotEmpty("Languages", languages)
-    parentFeature.paragraphs += DRAG_AND_DROP_NOTE
 
-    return featureOptions
+    for soName, soPreamble, soFeatures in subraceOptions:
+        srFeature = copy(parentFeature)
+        srFeature.originalId = id_generator()
+        srFeature.name = parentFeature.name + ": " + soName
+        srFeature.paragraphs += f"\n\n#### {soName}\n\n{soPreamble}"
+        srFeature.paragraphs += "\n\n"+"\n\n".join(_featureText(x) for x in soFeatures)
+        srFeature.paragraphs += DRAG_AND_DROP_NOTE
+        canonical_features[cmdize(srFeature.name)] = srFeature
+    
+    parentFeature.paragraphs += DRAG_AND_DROP_NOTE
 
 SPELL_LIST_RX = re.compile("\\b(?P<class>\\w+) spell list", re.IGNORECASE)
 

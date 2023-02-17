@@ -24,8 +24,8 @@ removemanual:
 	git checkout -- packs/src/classfeatures/mystic-arcanum-7th-level-spell.json
 	git checkout -- packs/src/classfeatures/mystic-arcanum-8th-level-spell.json
 	git checkout -- packs/src/classfeatures/mystic-arcanum-9th-level-spell.json
-	rm packs/src/classfeatures/mystic-arcanum.json
+	-rm packs/src/classfeatures/mystic-arcanum.json 2> /dev/null
 	git checkout -- packs/src/classfeatures/signature-spells-first-spell.json
 	git checkout -- packs/src/classfeatures/signature-spells-second-spell.json
-	rm packs/src/classfeatures/signature-spells.json
+	-rm packs/src/classfeatures/signature-spells.json 2> /dev/null
 	git checkout -- packs/src/classfeatures/unarmed-strike-monk.json
