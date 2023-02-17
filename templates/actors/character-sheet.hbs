@@ -60,7 +60,7 @@
                         <input name="system.attributes.hp.value" type="text" value="{{hp.value}}" placeholder="10"
                             data-tooltip="DND5E.HitPointsCurrent" data-dtype="Number">
                         <span class="sep"> / </span>
-                        <span data-tooltip="{{#if hp.max}}DND5E.HitPointsOverride{{else}}DND5E.HitPointsMax{{/if}}">
+                        <span data-tooltip="{{#if source.attributes.hp.max}}DND5E.HitPointsOverride{{else}}DND5E.HitPointsMax{{/if}}">
                             {{hp.max}}
                         </span>
                     </div>
