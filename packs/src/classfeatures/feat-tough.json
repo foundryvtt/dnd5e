@@ -74,7 +74,36 @@
   },
   "flags": {},
   "img": "",
-  "effects": [],
+  "effects": [
+    {
+      "_id": "ttKWSPDmcWcj65RF",
+      "changes": [
+        {
+          "key": "system.attributes.hp.bonuses.level",
+          "mode": 2,
+          "value": "+2",
+          "priority": null
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "icon": "icons/commodities/biological/organ-heart-pink.webp",
+      "label": "Feat: Tough",
+      "origin": "Item.r6wkdVMwTuBmkgNW",
+      "transfer": true,
+      "flags": {},
+      "tint": null,
+      "sort": 0
+    }
+  ],
   "folder": null,
   "sort": 0,
   "_stats": {

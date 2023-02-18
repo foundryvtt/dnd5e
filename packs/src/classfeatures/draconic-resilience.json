@@ -83,6 +83,12 @@
           "mode": 5,
           "value": "draconic",
           "priority": null
+        },
+        {
+          "key": "system.attributes.hp.bonuses.overall",
+          "mode": 2,
+          "value": "+@classes.sorcerer.levels",
+          "priority": null
         }
       ],
       "disabled": false,

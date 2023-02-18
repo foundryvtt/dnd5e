@@ -74,7 +74,36 @@
   },
   "flags": {},
   "img": "",
-  "effects": [],
+  "effects": [
+    {
+      "_id": "Aha8p0qmrProTbO3",
+      "changes": [
+        {
+          "key": "system.attributes.hp.bonuses.level",
+          "mode": 2,
+          "value": "+1",
+          "priority": null
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "icon": "icons/skills/trades/smithing-anvil-silver-red.webp",
+      "label": "Dwarven Toughness",
+      "origin": "Item.3tT82rcu5XoW6EyH",
+      "transfer": true,
+      "flags": {},
+      "tint": null,
+      "sort": 0
+    }
+  ],
   "folder": null,
   "sort": 0,
   "_stats": {
