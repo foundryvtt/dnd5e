@@ -73,8 +73,37 @@
     }
   },
   "flags": {},
-  "img": "",
-  "effects": [],
+  "img": "icons/skills/targeting/target-strike-triple-blue.webp",
+  "effects": [
+    {
+      "_id": "hu2CZ7FSZk0O6xR5",
+      "changes": [
+        {
+          "key": "flags.dnd5e.remarkableAthlete",
+          "mode": 5,
+          "value": "true",
+          "priority": null
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "icon": "icons/skills/targeting/target-strike-triple-blue.webp",
+      "label": "Elven Accuracy",
+      "origin": "Item.7vPH2ZjgSYzahTIW",
+      "transfer": true,
+      "flags": {},
+      "tint": null,
+      "sort": 0
+    }
+  ],
   "folder": null,
   "sort": 0,
   "_stats": {

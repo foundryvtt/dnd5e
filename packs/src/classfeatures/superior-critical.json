@@ -74,7 +74,36 @@
   },
   "flags": {},
   "img": "icons/skills/melee/strike-axe-blood-red.webp",
-  "effects": [],
+  "effects": [
+    {
+      "_id": "Elq4apymupaLPhPN",
+      "changes": [
+        {
+          "key": "flags.dnd5e.weaponCriticalThreshold",
+          "mode": 3,
+          "value": "18",
+          "priority": null
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "icon": "icons/skills/melee/strike-axe-blood-red.webp",
+      "label": "Superior Critical",
+      "origin": "Item.aVKH6TLn1AG9hPSA",
+      "transfer": true,
+      "flags": {},
+      "tint": null,
+      "sort": 0
+    }
+  ],
   "folder": null,
   "sort": 0,
   "_stats": {

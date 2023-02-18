@@ -74,7 +74,36 @@
   },
   "flags": {},
   "img": "icons/skills/movement/feet-winged-boots-brown.webp",
-  "effects": [],
+  "effects": [
+    {
+      "_id": "FU0lgtZeAlKhcm5Q",
+      "changes": [
+        {
+          "key": "flags.dnd5e.remarkableAthlete",
+          "mode": 5,
+          "value": "true",
+          "priority": null
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "icon": "icons/skills/movement/feet-winged-boots-brown.webp",
+      "label": "Remarkable Athlete",
+      "origin": "Item.dHu1yzIjD38BvGGd",
+      "transfer": true,
+      "flags": {},
+      "tint": null,
+      "sort": 0
+    }
+  ],
   "folder": null,
   "sort": 0,
   "_stats": {

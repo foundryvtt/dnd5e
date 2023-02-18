@@ -73,8 +73,37 @@
     }
   },
   "flags": {},
-  "img": "icons/weapons/swords/scimitar-guard-gold.webp",
-  "effects": [],
+  "img": "icons/skills/movement/feet-winged-boots-brown.webp",
+  "effects": [
+    {
+      "_id": "ttKWSPDmcWcj65RF",
+      "changes": [
+        {
+          "key": "system.attributes.init.bonus",
+          "mode": 2,
+          "value": "+max(0, @abilities.cha.mod)",
+          "priority": null
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "icon": "icons/skills/movement/feet-winged-boots-brown.webp",
+      "label": "Rakish Audacity",
+      "origin": "Item.Z23RWJIDGOYY1Q5A",
+      "transfer": true,
+      "flags": {},
+      "tint": null,
+      "sort": 0
+    }
+  ],
   "folder": null,
   "sort": 0,
   "_stats": {

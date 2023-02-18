@@ -13,8 +13,8 @@
     },
     "source": "SRD 5.1",
     "activation": {
-      "type": "",
-      "cost": null,
+      "type": "hour",
+      "cost": 1,
       "condition": ""
     },
     "duration": {
@@ -45,7 +45,7 @@
       "amount": null
     },
     "ability": null,
-    "actionType": "",
+    "actionType": "utility",
     "attackBonus": "",
     "chatFlavor": "",
     "critical": {
@@ -73,7 +73,7 @@
     }
   },
   "flags": {},
-  "img": "icons/magic/symbols/cog-orange-red.webp",
+  "img": "icons/tools/smithing/anvil.webp",
   "effects": [],
   "folder": null,
   "sort": 0,

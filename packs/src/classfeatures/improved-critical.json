@@ -74,7 +74,36 @@
   },
   "flags": {},
   "img": "icons/skills/melee/blade-tip-chipped-blood-red.webp",
-  "effects": [],
+  "effects": [
+    {
+      "_id": "VUTzog5c9qUfan0d",
+      "changes": [
+        {
+          "key": "flags.dnd5e.weaponCriticalThreshold",
+          "mode": 3,
+          "value": "19",
+          "priority": null
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "icon": "icons/skills/melee/blade-tip-chipped-blood-red.webp",
+      "label": "Improved Critical",
+      "origin": "Item.YgLQV1O849wE5TgM",
+      "transfer": true,
+      "flags": {},
+      "tint": null,
+      "sort": 0
+    }
+  ],
   "folder": null,
   "sort": 0,
   "_stats": {

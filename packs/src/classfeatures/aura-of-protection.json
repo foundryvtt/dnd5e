@@ -23,15 +23,15 @@
     },
     "cover": null,
     "target": {
-      "value": null,
+      "value": "@scale.paladin.aura-radius",
       "width": null,
-      "units": "",
-      "type": "self"
+      "units": "ft",
+      "type": "radius"
     },
     "range": {
-      "value": 10,
-      "long": 30,
-      "units": "ft"
+      "value": null,
+      "long": null,
+      "units": "self"
     },
     "uses": {
       "value": null,
@@ -74,7 +74,36 @@
   },
   "flags": {},
   "img": "icons/magic/air/wind-tornado-wall-blue.webp",
-  "effects": [],
+  "effects": [
+    {
+      "_id": "dyoEM3RQA9lRmo1D",
+      "changes": [
+        {
+          "key": "system.bonuses.abilities.save",
+          "mode": 2,
+          "value": "+max(1, @abilities.cha.mod)",
+          "priority": null
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "icon": "icons/magic/air/wind-tornado-wall-blue.webp",
+      "label": "Aura of Protection",
+      "origin": "Item.carGDhkIdoduTC0I",
+      "transfer": true,
+      "flags": {},
+      "tint": null,
+      "sort": 0
+    }
+  ],
   "folder": null,
   "sort": 0,
   "_stats": {

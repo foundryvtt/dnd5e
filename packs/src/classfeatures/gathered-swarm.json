@@ -13,7 +13,7 @@
     },
     "source": "SRD 5.1",
     "activation": {
-      "type": "",
+      "type": "special",
       "cost": null,
       "condition": ""
     },
@@ -45,7 +45,7 @@
       "amount": null
     },
     "ability": null,
-    "actionType": "",
+    "actionType": "save",
     "attackBonus": "",
     "chatFlavor": "",
     "critical": {
@@ -58,7 +58,7 @@
     },
     "formula": "",
     "save": {
-      "ability": "",
+      "ability": "str",
       "dc": null,
       "scaling": "spell"
     },

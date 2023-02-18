@@ -74,7 +74,36 @@
   },
   "flags": {},
   "img": "icons/magic/nature/tree-roots-glow-yellow.webp",
-  "effects": [],
+  "effects": [
+    {
+      "_id": "p9Yy83RmW4vWeJDI",
+      "changes": [
+        {
+          "key": "flags.dnd5e.initiativeAdv",
+          "mode": 5,
+          "value": "true",
+          "priority": null
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "icon": "icons/magic/nature/tree-roots-glow-yellow.webp",
+      "label": "Natural Explorer",
+      "origin": "Item.8fbZt2Qh7ZttwIan",
+      "transfer": true,
+      "flags": {},
+      "tint": null,
+      "sort": 0
+    }
+  ],
   "folder": null,
   "sort": 0,
   "_stats": {
