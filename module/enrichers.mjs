@@ -10,6 +10,11 @@ export function registerCustomEnrichers() {
     enricher: enrichString
   });
 
+  CONFIG.TextEditor.enrichers.push({
+    pattern: /@(?<type>Reference){(?<config>[^}]+)}(?:{(?<label>[^}]+)})?/gi,
+    enricher: enrichString
+  });
+
   document.body.addEventListener("click", rollAction);
 }
 
@@ -24,13 +29,14 @@ export function registerCustomEnrichers() {
  */
 export async function enrichString(match, options) {
   let { type, config, label } = match.groups;
-  config = parseConfig(config, match.input);
+  config = parseConfig(config);
   config.input = match.input;
   switch ( type.toLowerCase() ) {
     case "check":
     case "skill":
     case "tool": return enrichCheck(config, label, options);
     case "save": return enrichSave(config, label, options);
+    case "reference": return enrichReference(config, label, options);
   }
   return match.input;
 }
@@ -176,6 +182,40 @@ export async function enrichCheck(config, label, options) {
   if ( config.passive ) return createPassiveTag(label, config);
   const type = config.skill ? "skill" : config.tool ? "tool" : "check";
   return createRollLink(label, { type, ...config });
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Enrich a reference link to provide a link to the appropriate journal entry.
+ * @param {object} config                Configuration data.
+ * @param {string} label                 Optional label to replace default text.
+ * @param {EnrichmentOptions} options  Options provided to customize text enrichment.
+ * @returns {Promise<HTMLElement|null>}  A HTML link if the rule was found, otherwise null.
+ *
+ * @example Convert a reference to a condition into a link to its journal entry:
+ * `@Reference{condition=prone}`
+ * becomes
+ * ```html
+ * <a class="content-link reference" draggable="true" data-uuid="Compendium.dnd5e.rules.w7eitkpD7QQTB6j0">
+ *   <i class="fa-solid fa-circle-info"></i> Prone
+ * </a>
+ * ```
+ *
+ */
+export async function enrichReference(config, label, options) {
+  const [type, identifier] = Object.entries(config).filter(([k, v]) => k !== "input")[0] ?? [];
+  if ( !type ) return config.input;
+  const typeConfig = CONFIG.DND5E.referenceTypes[type]?.[identifier];
+  if ( !typeConfig ) {
+    console.warn(`Unrecognized reference ${identifier} (${type}) found when enriching ${config.input}.`);
+    return config.input;
+  }
+
+  const uuid = foundry.utils.getType(typeConfig) === "string" ? typeConfig : typeConfig.reference;
+  const link = await TextEditor._createContentLink(["", "UUID", uuid], options);
+  link.classList.add("reference-link");
+  return link;
 }
 
 /* -------------------------------------------- */
