@@ -1871,58 +1871,6 @@ export default class Actor5e extends Actor {
   }
 
   /* -------------------------------------------- */
-
-  /**
-   * Roll hit points for an Vehicle based on the HP formula.
-   * @param {object} options
-   * @param {boolean} [options.chatMessage=true]  Display the chat message for this roll.
-   * @returns {Promise<Roll>}                     The completed roll.
-   * @see {@link dnd5e.preRollVehicleHitPoints}
-   */
-  async rollVehicleHitPoints({ chatMessage=true }={}) {
-    if ( this.type !== "vehicle" ) throw new Error("Vehicle hit points can only be rolled for Vehicles");
-    const rollData = {
-      formula: this.system.attributes.hp.formula,
-      data: this.getRollData(),
-      chatMessage
-    };
-    const flavor = game.i18n.format("DND5E.HPFormulaRollMessage");
-    const messageData = {
-      title: `${flavor}: ${this.name}`,
-      flavor,
-      speaker: ChatMessage.getSpeaker({ actor: this }),
-      "flags.dnd5e.roll": { type: "hitPoints" }
-    };
-
-    /**
-     * A hook event that fires before hit points are rolled for an Vehicle.
-     * @function dnd5e.preRollVehicleHitPoints
-     * @memberof hookEvents
-     * @param {Actor5e} actor            Actor for which the hit points are being rolled.
-     * @param {object} rollData
-     * @param {string} rollData.formula  The string formula to parse.
-     * @param {object} rollData.data     The data object against which to parse attributes within the formula.
-     * @param {object} messageData       The data object to use when creating the message.
-     */
-    Hooks.callAll("dnd5e.preRollVehicleHitPoints", this, rollData, messageData);
-
-    const roll = new Roll(rollData.formula, rollData.data);
-    await roll.evaluate({async: true});
-
-    /**
-     * A hook event that fires after hit points are rolled for an Vehicle.
-     * @function dnd5e.rollVehicleHitPoints
-     * @memberof hookEvents
-     * @param {Actor5e} actor  Actor for which the hit points have been rolled.
-     * @param {Roll} roll      The resulting roll.
-     */
-    Hooks.callAll("dnd5e.rollVehicleHitPoints", this, roll);
-
-    if ( rollData.chatMessage ) await roll.toMessage(messageData);
-    return roll;
-  }
-
-  /* -------------------------------------------- */
   /*  Resting                                     */
   /* -------------------------------------------- */
 

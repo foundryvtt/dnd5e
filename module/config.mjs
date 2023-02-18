@@ -955,7 +955,6 @@ DND5E.individualTargetTypes = {
   creature: "DND5E.TargetCreature",
   object: "DND5E.TargetObject",
   space: "DND5E.TargetSpace",
-  single: "DND5E.TargetSingle",
   creatureOrObject: "DND5E.TargetCreatureOrObject",
   any: "DND5E.TargetAny"
 };
