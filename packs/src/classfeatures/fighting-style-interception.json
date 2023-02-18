@@ -13,8 +13,8 @@
     },
     "source": "SRD 5.1",
     "activation": {
-      "type": "",
-      "cost": null,
+      "type": "reaction",
+      "cost": 1,
       "condition": ""
     },
     "duration": {
@@ -23,10 +23,10 @@
     },
     "cover": null,
     "target": {
-      "value": null,
+      "value": 5,
       "width": null,
-      "units": "",
-      "type": ""
+      "units": "ft",
+      "type": "ally"
     },
     "range": {
       "value": null,
@@ -56,7 +56,7 @@
       "parts": [],
       "versatile": ""
     },
-    "formula": "",
+    "formula": "1d10 + @prof",
     "save": {
       "ability": "",
       "dc": null,
@@ -73,7 +73,7 @@
     }
   },
   "flags": {},
-  "img": "",
+  "img": "icons/skills/melee/shield-block-bash-blue.webp",
   "effects": [],
   "folder": null,
   "sort": 0,
