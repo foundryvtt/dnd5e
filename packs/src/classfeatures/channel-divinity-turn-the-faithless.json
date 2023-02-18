@@ -13,25 +13,25 @@
     },
     "source": "SRD 5.1",
     "activation": {
-      "type": "",
-      "cost": null,
+      "type": "action",
+      "cost": 1,
       "condition": ""
     },
     "duration": {
-      "value": "",
-      "units": ""
+      "value": "1",
+      "units": "minute"
     },
     "cover": null,
     "target": {
-      "value": null,
+      "value": 30,
       "width": null,
-      "units": "",
-      "type": ""
+      "units": "ft",
+      "type": "radius"
     },
     "range": {
       "value": null,
       "long": null,
-      "units": ""
+      "units": "self"
     },
     "uses": {
       "value": null,
@@ -45,7 +45,7 @@
       "amount": null
     },
     "ability": null,
-    "actionType": "",
+    "actionType": "save",
     "attackBonus": "",
     "chatFlavor": "",
     "critical": {
@@ -58,7 +58,7 @@
     },
     "formula": "",
     "save": {
-      "ability": "",
+      "ability": "wis",
       "dc": null,
       "scaling": "spell"
     },
@@ -73,7 +73,7 @@
     }
   },
   "flags": {},
-  "img": "icons/magic/fire/projectile-wave-arrow.webp",
+  "img": "icons/magic/light/beam-rays-yellow.webp",
   "effects": [],
   "folder": null,
   "sort": 0,

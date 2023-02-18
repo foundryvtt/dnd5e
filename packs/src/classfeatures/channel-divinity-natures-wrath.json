@@ -13,8 +13,8 @@
     },
     "source": "SRD 5.1",
     "activation": {
-      "type": "",
-      "cost": null,
+      "type": "action",
+      "cost": 1,
       "condition": ""
     },
     "duration": {
@@ -23,10 +23,10 @@
     },
     "cover": null,
     "target": {
-      "value": null,
+      "value": 10,
       "width": null,
       "units": "",
-      "type": ""
+      "type": "creature"
     },
     "range": {
       "value": null,
@@ -58,7 +58,7 @@
     },
     "formula": "",
     "save": {
-      "ability": "",
+      "ability": "str",
       "dc": null,
       "scaling": "spell"
     },
@@ -73,7 +73,7 @@
     }
   },
   "flags": {},
-  "img": "icons/magic/fire/projectile-wave-arrow.webp",
+  "img": "icons/magic/nature/root-vine-entangled-hand.webp",
   "effects": [],
   "folder": null,
   "sort": 0,
