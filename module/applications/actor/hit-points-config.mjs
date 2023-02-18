@@ -88,15 +88,25 @@ export default class ActorHitPointsConfig extends BaseConfigSheet {
   /* -------------------------------------------- */
 
   /**
-   * Handle rolling NPC health values using the provided formula.
+   * Handle rolling health values using the provided formula.
    * @param {Event} event  The original click event.
    * @protected
    */
   async _onRollHPFormula(event) {
     event.preventDefault();
     try {
-      const roll = await this.clone.rollNPCHitPoints();
-      this.clone.updateSource({"system.attributes.hp.max": roll.total});
+      if(this.clone.type === "npc") {
+        const roll = await this.clone.rollNPCHitPoints();
+        this.clone.updateSource({"system.attributes.hp.max": roll.total});
+      }
+      else if(this.clone.type === "vehicle") {
+        const roll = await this.clone.rollVehicleHitPoints();
+        this.clone.updateSource({"system.attributes.hp.max": roll.total});
+      }
+      else {
+        ui.notifications.error(game.i18n.localize("DND5E.HPFormulaError"));
+        throw error;
+      }
       this.render();
     } catch(error) {
       ui.notifications.error(game.i18n.localize("DND5E.HPFormulaError"));
