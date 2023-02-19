@@ -1011,14 +1011,14 @@ export default class Actor5e extends Actor {
    */
   async rollSkill(skillId, options={}) {
     const skl = this.system.skills[skillId];
-    const abl = this.system.abilities[skl.ability];
+    const abl = this.system.abilities[options.ability ?? skl.ability];
     const globalBonuses = this.system.bonuses?.abilities ?? {};
     const parts = ["@mod", "@abilityCheckBonus"];
     const data = this.getRollData();
 
     // Add ability modifier
-    data.mod = skl.mod;
-    data.defaultAbility = skl.ability;
+    data.mod = abl?.mod ?? 0;
+    data.defaultAbility = options.ability ?? skl.ability;
 
     // Include proficiency bonus
     if ( skl.prof.hasProficiency ) {
@@ -1058,7 +1058,7 @@ export default class Actor5e extends Actor {
       data: data,
       title: `${flavor}: ${this.name}`,
       flavor,
-      chooseModifier: true,
+      chooseModifier: !options.ability,
       halflingLucky: this.getFlag("dnd5e", "halflingLucky"),
       reliableTalent,
       messageData: {
