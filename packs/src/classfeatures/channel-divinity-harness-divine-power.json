@@ -13,8 +13,8 @@
     },
     "source": "SRD 5.1",
     "activation": {
-      "type": "",
-      "cost": null,
+      "type": "bonus",
+      "cost": 1,
       "condition": ""
     },
     "duration": {
@@ -45,7 +45,7 @@
       "amount": null
     },
     "ability": null,
-    "actionType": "",
+    "actionType": "util",
     "attackBonus": "",
     "chatFlavor": "",
     "critical": {
@@ -56,7 +56,7 @@
       "parts": [],
       "versatile": ""
     },
-    "formula": "",
+    "formula": "floor(@prof/2)",
     "save": {
       "ability": "",
       "dc": null,

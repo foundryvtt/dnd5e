@@ -73,8 +73,65 @@
     }
   },
   "flags": {},
-  "img": "icons/magic/symbols/cog-orange-red.webp",
-  "effects": [],
+  "img": "icons/commodities/treasure/puzzle-box-glowing-blue.webp",
+  "effects": [
+    {
+      "_id": "dnErjOmbdc4UtX16",
+      "changes": [
+        {
+          "key": "system.attributes.attunement.max",
+          "mode": 4,
+          "value": "6",
+          "priority": null
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "icon": "icons/commodities/treasure/puzzle-box-glowing-blue.webp",
+      "label": "Magic Item Master",
+      "origin": "Item.P7DNSLL1UJ3OJZ06",
+      "transfer": true,
+      "flags": {},
+      "tint": null,
+      "sort": 0
+    },
+    {
+      "_id": "uVsPHk7ZMYY2u6rm",
+      "changes": [
+        {
+          "key": "system.bonuses.abilities.save",
+          "mode": 2,
+          "value": "+@attributes.attunement.value",
+          "priority": null
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "icon": "icons/commodities/treasure/puzzle-box-glowing-blue.webp",
+      "label": "Magic Item Master",
+      "origin": "Item.P7DNSLL1UJ3OJZ06",
+      "transfer": true,
+      "flags": {},
+      "tint": null,
+      "sort": 0
+    }
+  ],
   "folder": null,
   "sort": 0,
   "_stats": {

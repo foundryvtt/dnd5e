@@ -73,8 +73,37 @@
     }
   },
   "flags": {},
-  "img": "icons/magic/symbols/cog-orange-red.webp",
-  "effects": [],
+  "img": "icons/commodities/treasure/puzzle-box-glowing-blue.webp",
+  "effects": [
+    {
+      "_id": "r0FLKc1bMUfqy3aE",
+      "changes": [
+        {
+          "key": "system.attributes.attunement.max",
+          "mode": 4,
+          "value": "5",
+          "priority": null
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "icon": "icons/commodities/treasure/puzzle-box-glowing-blue.webp",
+      "label": "Magic Item Savant",
+      "origin": "Item.WVEMUOVHPIZ1AS0B",
+      "transfer": true,
+      "flags": {},
+      "tint": null,
+      "sort": 0
+    }
+  ],
   "folder": null,
   "sort": 0,
   "_stats": {
