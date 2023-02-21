@@ -2414,7 +2414,7 @@ export default class Actor5e extends Actor {
     }, {renderSheet});
 
     // Create new Actor with transformed data
-    const newActor = await this.constructor.create(d, {renderSheet: true});
+    const newActor = await this.constructor.create(d, {renderSheet});
 
     // Update placed Token instances
     if ( !transformTokens ) return;
