@@ -104,6 +104,7 @@ export default class CreatureTemplate extends CommonTemplate {
 
   /** @inheritdoc */
   static migrateData(source) {
+    super.migrateData(source);
     CreatureTemplate.#migrateSensesData(source);
     CreatureTemplate.#migrateToolData(source);
   }

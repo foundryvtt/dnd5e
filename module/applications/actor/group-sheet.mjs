@@ -9,6 +9,15 @@ import Item5e from "../../documents/item.mjs";
  */
 export default class GroupActorSheet extends ActorSheet {
 
+  /**
+   * IDs for items on the sheet that have been expanded.
+   * @type {Set<string>}
+   * @protected
+   */
+  _expanded = new Set();
+
+  /* -------------------------------------------- */
+
   /** @inheritDoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
@@ -50,6 +59,11 @@ export default class GroupActorSheet extends ActorSheet {
     // Inventory
     context.itemContext = {};
     context.inventory = this.#prepareInventory(context);
+    context.expandedData = {};
+    for ( const id of this._expanded ) {
+      const item = this.actor.items.get(id);
+      if ( item ) context.expandedData[id] = await item.getChatData({secrets: this.actor.isOwner});
+    }
     context.inventoryFilters = false;
     context.rollableClass = this.isEditable ? "rollable" : "";
 
@@ -181,6 +195,7 @@ export default class GroupActorSheet extends ActorSheet {
       const {quantity} = item.system;
       ctx.isStack = Number.isNumeric(quantity) && (quantity > 1);
       ctx.canToggle = false;
+      ctx.isExpanded = this._expanded.has(item.id);
       if ( (item.type in sections) && (item.type !== "loot") ) sections[item.type].items.push(item);
       else sections.loot.items.push(item);
     }
