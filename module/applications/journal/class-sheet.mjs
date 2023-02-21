@@ -41,6 +41,8 @@ export default class JournalClassPageSheet extends JournalPageSheet {
     );
 
     const linked = await fromUuid(this.document.system.item);
+    context.subclasses = await this._getSubclasses(this.document.system.subclassItems);
+
     if ( !linked ) return context;
     context.linked = {
       document: linked,
@@ -54,7 +56,6 @@ export default class JournalClassPageSheet extends JournalPageSheet {
     context.optionalTable = await this._getOptionalTable(linked);
     context.features = await this._getFeatures(linked);
     context.optionalFeatures = await this._getFeatures(linked, true);
-    context.subclasses = await this._getSubclasses(this.document.system.subclassItems);
     context.subclasses?.sort((lhs, rhs) => lhs.name.localeCompare(rhs.name));
 
     return context;
@@ -439,15 +440,14 @@ export default class JournalClassPageSheet extends JournalPageSheet {
     switch ( item.type ) {
       case "class":
         await this.document.update({"system.item": item.uuid});
-        this.render();
+        return this.render();
       case "subclass":
         const itemSet = this.document.system.subclassItems;
         itemSet.add(item.uuid);
         await this.document.update({"system.subclassItems": Array.from(itemSet)});
-        this.render();
+        return this.render();
       default:
         return false;
     }
   }
-
 }
