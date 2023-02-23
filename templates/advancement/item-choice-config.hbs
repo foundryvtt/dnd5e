@@ -91,9 +91,9 @@
 
   <div class="right-column level-list">
     <p class="hint">{{localize "DND5E.AdvancementItemChoiceLevelsHint"}}</p>
-    {{#each levels as |level|}}
+    {{#each levels as |label level|}}
       <div class="form-group">
-        <label>{{level}}</label>
+        <label>{{label}}</label>
         <div class="form-fields">
           {{numberInput (lookup ../configuration.choices level) placeholder="0"
             name=(concat "configuration.choices." level) min=1 step=1}}

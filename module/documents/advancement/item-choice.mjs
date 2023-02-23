@@ -33,7 +33,7 @@ export default class ItemChoiceAdvancement extends ItemGrantAdvancement {
 
   /** @inheritdoc */
   get levels() {
-    return Array.from(Object.keys(this.configuration.choices));
+    return Array.from(Object.keys(this.configuration.choices).map(l => Number(l)));
   }
 
   /* -------------------------------------------- */
