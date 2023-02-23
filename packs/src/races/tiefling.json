@@ -1,84 +1,97 @@
 {
   "_id": "aHTokZ151W0ASSmo",
   "name": "Tiefling",
-  "ownership": {
-    "default": 0
-  },
-  "type": "feat",
+  "type": "race",
+  "img": "icons/creatures/unholy/demon-female-succubus-orange.webp",
   "system": {
     "description": {
-      "value": "<p><em>Tieflings share certain racial traits as a result of their infernal descent. </em></p>\n<p><em><strong>Ability Score Increase.</strong></em> Your Intelligence score increases by 1, and your Charisma score increases by 2.</p>\n<p><em><strong>Age.</strong></em> Tieflings mature at the same rate as humans but live a few years longer.</p>\n<p><em><strong>Alignment.</strong></em> Tieflings might not have an innate tendency toward evil, but many of them end up there. Evil or not, an independent nature inclines many tieflings toward a chaotic alignment.</p>\n<p><em><strong>Size.</strong></em> Tieflings are about the same size and build as humans. Your size is Medium.</p>\n<p><em><strong>Speed. </strong></em>Your base walking speed is 30 feet.</p>\n<p><em><strong>Darkvision.</strong></em> Thanks to your infernal heritage, you have superior vision in dark and dim conditions. You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can't discern color in darkness, only shades of gray.</p>\n<p><em><strong>Hellish Resistance. </strong></em>@Compendium[dnd5e.races.q71Pe1F8RRtEJt8Q]{Hellish Resistance} You have resistance to fire damage.</p>\n<p><em><strong>Infernal Legacy.</strong></em> @Compendium[dnd5e.races.wJc88B8OP1y1xzMw]{Infernal Legacy} You know the @Compendium[dnd5e.spells.MUO1uYN7JR1hm4dR]{Thaumaturgy} cantrip. When you reach 3rd level, you can cast the @Compendium[dnd5e.spells.22dPoeXfaaAv4K3h]{Hellish Rebuke} spell as a 2nd‑level spell once with this trait and regain the ability to do so when you finish a long rest. When you reach 5th level, you can cast the @Compendium[dnd5e.spells.S7VbUetIfVT7B6Eq]{Darkness} spell once with this trait and regain the ability to do so when you finish a long rest. Charisma is your spellcasting ability for these spells.</p>\n<p><em><strong>Languages.</strong></em> You can speak, read, and write Common and Infernal.</p>",
+      "value": "<p>Tieflings share certain racial traits as a result of their infernal descent.</p><p><em><strong>Ability Score Increase.</strong></em> Your Intelligence score increases by 1, and your Charisma score increases by 2.</p><p><em><strong>Age.</strong></em> Tieflings mature at the same rate as humans but live a few years longer.</p><p><em><strong>Alignment.</strong></em> Tieflings might not have an innate tendency toward evil, but many of them end up there. Evil or not, an independent nature inclines many tieflings toward a chaotic alignment.</p><p><em><strong>Size.</strong></em> Tieflings are about the same size and build as humans. Your size is Medium.</p><p><em><strong>Speed.</strong></em> Your base walking speed is 30 feet.</p><p><em><strong>Darkvision.</strong></em> Thanks to your infernal heritage, you have superior vision in dark and dim conditions. You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can't discern color in darkness, only shades of gray.</p><p><em><strong>Hellish Resistance.</strong></em> You have resistance to fire damage.</p><p><em><strong>Infernal Legacy.</strong></em> You know the thaumaturgy cantrip. When you reach 3rd level, you can cast the hellish rebuke spell as a 2nd-­level spell once with this trait and regain the ability to do so when you finish a long rest. When you reach 5th level, you can cast the darkness spell once with this trait and regain the ability to do so when you finish a long rest. Charisma is your spellcasting ability for these spells.</p><p><em><strong>Languages.</strong></em> You can speak, read, and write Common and Infernal.</p>",
       "chat": "",
       "unidentified": ""
     },
     "source": "SRD 5.1",
-    "activation": {
-      "type": "",
-      "cost": null,
-      "condition": ""
-    },
-    "duration": {
-      "value": "",
-      "units": ""
-    },
-    "cover": null,
-    "target": {
-      "value": null,
-      "width": null,
-      "units": "",
-      "type": ""
-    },
-    "range": {
-      "value": null,
-      "long": null,
-      "units": ""
-    },
-    "uses": {
-      "value": null,
-      "max": "",
-      "per": null,
-      "recovery": ""
-    },
-    "consume": {
-      "type": "",
-      "target": null,
-      "amount": null
-    },
-    "ability": null,
-    "actionType": "",
-    "attackBonus": "",
-    "chatFlavor": "",
-    "critical": {
-      "threshold": null,
-      "damage": ""
-    },
-    "damage": {
-      "parts": [],
-      "versatile": ""
-    },
-    "formula": "",
-    "save": {
-      "ability": "",
-      "dc": null,
-      "scaling": "spell"
-    },
-    "requirements": "",
-    "recharge": {
-      "value": null,
-      "charged": false
-    }
+    "identifier": "tiefling",
+    "advancement": [
+      {
+        "_id": "1TyE6rcEq01VWRZc",
+        "type": "ItemGrant",
+        "configuration": {
+          "items": [
+            "Compendium.dnd5e.races.q71Pe1F8RRtEJt8Q",
+            "Compendium.dnd5e.races.wJc88B8OP1y1xzMw",
+            "Compendium.dnd5e.spells.MUO1uYN7JR1hm4dR"
+          ],
+          "optional": false,
+          "spell": {
+            "ability": "cha",
+            "preparation": "innate",
+            "uses": {
+              "max": "",
+              "per": ""
+            }
+          }
+        },
+        "value": {},
+        "level": 0,
+        "title": ""
+      },
+      {
+        "_id": "d8rqpB59h8lfbnva",
+        "type": "ItemGrant",
+        "configuration": {
+          "items": [
+            "Compendium.dnd5e.spells.22dPoeXfaaAv4K3h"
+          ],
+          "optional": false,
+          "spell": {
+            "ability": "cha",
+            "preparation": "innate",
+            "uses": {
+              "max": "1",
+              "per": "lr"
+            }
+          }
+        },
+        "value": {},
+        "level": 3,
+        "title": ""
+      },
+      {
+        "_id": "p2AP4Rn6S8A8Xu5L",
+        "type": "ItemGrant",
+        "configuration": {
+          "items": [
+            "Compendium.dnd5e.spells.S7VbUetIfVT7B6Eq"
+          ],
+          "optional": false,
+          "spell": {
+            "ability": "cha",
+            "preparation": "innate",
+            "uses": {
+              "max": "1",
+              "per": "lr"
+            }
+          }
+        },
+        "value": {},
+        "level": 5,
+        "title": ""
+      }
+    ]
+  },
+  "effects": [],
+  "ownership": {
+    "default": 0
   },
   "flags": {},
-  "img": "icons/magic/air/wind-tornado-cyclone-red-orange.webp",
-  "effects": [],
-  "folder": null,
-  "sort": 0,
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.1.0",
+    "systemVersion": "2.2.0",
     "coreVersion": "10.291",
-    "createdTime": 1661787234471,
-    "modifiedTime": 1671220977578,
+    "createdTime": 1677181073037,
+    "modifiedTime": 1677181873684,
     "lastModifiedBy": "dnd5ebuilder0000"
-  }
+  },
+  "folder": null,
+  "sort": 0
 }

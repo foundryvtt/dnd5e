@@ -1,84 +1,71 @@
 {
   "_id": "K4DNDcR6vngbp0pf",
   "name": "Dragonborn",
-  "ownership": {
-    "default": 0
-  },
-  "type": "feat",
+  "type": "race",
+  "img": "icons/creatures/eyes/lizard-single-slit-green.webp",
   "system": {
     "description": {
-      "value": "<p><em>Your draconic heritage manifests in a variety of traits you share with other dragonborn. </em></p>\n<p><em><strong>Ability Score Increase. </strong></em>Your Strength score increases by 2, and your Charisma score increases by 1.</p>\n<p><em><strong>Age.</strong></em> Young dragonborn grow quickly. They walk hours after hatching, attain the size and development of a 10-year-old human child by the age of 3, and reach adulthood by 15. They live to be around 80.</p>\n<p><em><strong>Alignment.</strong></em> Dragonborn tend to extremes, making a conscious choice for one side or the other in the cosmic war between good and evil. Most dragonborn are good, but those who side with evil can be terrible villains.</p>\n<p><em><strong>Size.</strong></em> Dragonborn are taller and heavier than humans, standing well over 6 feet tall and averaging almost 250 pounds. Your size is Medium.</p>\n<p><em><strong>Speed.</strong></em> Your base walking speed is 30 feet.</p>\n<p><em><strong>Draconic Ancestry.</strong></em> You have draconic ancestry. Choose one type of dragon from the Draconic Ancestry table. Your breath weapon and damage resistance are determined by the dragon type, as shown in the table.</p>\n<table>\n<thead>\n<tr>\n<td>Dragon</td>\n<td>Damage Type</td>\n<td>Breath Weapon</td>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>Black</td>\n<td>Acid</td>\n<td>5 by 30 ft. line (Dex. save)</td>\n</tr>\n<tr>\n<td>Blue</td>\n<td>Lightning</td>\n<td>5 by 30 ft. line (Dex. save)</td>\n</tr>\n<tr>\n<td>Brass</td>\n<td>Fire</td>\n<td>5 by 30 ft. line (Dex. save)</td>\n</tr>\n<tr>\n<td>Bronze</td>\n<td>Lightning</td>\n<td>5 by 30 ft. line (Dex. save)</td>\n</tr>\n<tr>\n<td>Copper</td>\n<td>Acid</td>\n<td>5 by 30 ft. line (Dex. save)</td>\n</tr>\n<tr>\n<td>Gold</td>\n<td>Fire</td>\n<td>15 ft. cone (Dex. save)</td>\n</tr>\n<tr>\n<td>Green</td>\n<td>Poison</td>\n<td>15 ft. cone (Con. save)</td>\n</tr>\n<tr>\n<td>Red</td>\n<td>Fire</td>\n<td>15 ft. cone (Dex. save)</td>\n</tr>\n<tr>\n<td>Silver</td>\n<td>Cold</td>\n<td>15 ft. cone (Con. save)</td>\n</tr>\n<tr>\n<td>White</td>\n<td>Cold</td>\n<td>15 ft. cone (Con. save)</td>\n</tr>\n</tbody>\n</table>\n<p><em><strong>Breath Weapon. </strong></em>@Compendium[dnd5e.races.KL7wx9Q8XNJQir0k]{Breath Weapon} You can use your action to exhale destructive energy. Your draconic ancestry determines the size, shape, and damage type of the exhalation.</p>\n<p>When you use your breath weapon, each creature in the area of the exhalation must make a saving throw, the type of which is determined by your draconic ancestry. The DC for this saving throw equals 8 + your Constitution modifier + your proficiency bonus. A creature takes 2d6 damage on a failed save, and half as much damage on a successful one. The damage increases to 3d6 at 6th level, 4d6 at 11th level, and 5d6 at 16th level.</p>\n<p>After you use your breath weapon, you can't use it again until you complete a short or long rest.</p>\n<p><em><strong>Damage Resistance.</strong></em> @Compendium[dnd5e.races.XxCuhIk6hAu6rNB0]{Damage Resistance} You have resistance to the damage type associated with your draconic ancestry.</p>\n<p><em><strong>Languages. </strong></em>You can speak, read, and write Common and Draconic. Draconic is thought to be one of the oldest languages and is often used in the study of magic. The language sounds harsh to most other creatures and includes numerous hard consonants and sibilants.</p>",
+      "value": "<p>Your draconic heritage manifests in a variety of traits you share with other dragonborn.</p><p><em><strong>Ability Score Increase.</strong></em> Your Strength score increases by 2, and your Charisma score increases by 1.</p><p><em><strong>Age.</strong></em> Young dragonborn grow quickly. They walk hours after hatching, attain the size and development of a 10-­year-­old human child by the age of 3, and reach adulthood by 15. They live to be around 80.</p><p><em><strong>Alignment.</strong></em> Dragonborn tend to extremes, making a conscious choice for one side or the other in the cosmic war between good and evil. Most dragonborn are good, but those who side with evil can be terrible villains.</p><p><em><strong>Size.</strong></em> Dragonborn are taller and heavier than humans, standing well over 6 feet tall and averaging almost 250 pounds. Your size is Medium.</p><p><em><strong>Speed.</strong></em> Your base walking speed is 30 feet.</p><table><caption>Draconic Ancestry</caption><thead><tr><td>Dragon</td><td>Damage Type</td><td>Breath Weapon</td></tr></thead><tbody><tr><td>Black</td><td>Acid</td><td>5 by 30 ft. line (Dex. save)</td></tr><tr><td>Blue</td><td>Lightning</td><td>5 by 30 ft. line (Dex. save)</td></tr><tr><td>Brass</td><td>Fire</td><td>5 by 30 ft. line (Dex. save)</td></tr><tr><td>Bronze</td><td>Lightning</td><td>5 by 30 ft. line (Dex. save)</td></tr><tr><td>Copper</td><td>Acid</td><td>5 by 30 ft. line (Dex. save)</td></tr><tr><td>Gold</td><td>Fire</td><td>15 ft. cone (Dex. save)</td></tr><tr><td>Green</td><td>Poison</td><td>15 ft. cone (Con. save)</td></tr><tr><td>Red</td><td>Fire</td><td>15 ft. cone (Dex. save)</td></tr><tr><td>Silver</td><td>Cold</td><td>15 ft. cone (Con. save)</td></tr><tr><td>White</td><td>Cold</td><td>15 ft. cone (Con. save)</td></tr></tbody></table><p><em><strong>Draconic Ancestry.</strong></em> You have draconic ancestry. Choose one type of dragon from the Draconic Ancestry table. Your breath weapon and damage resistance are determined by the dragon type, as shown in the table.</p><p><em><strong>Breath Weapon.</strong></em> You can use your action to exhale destructive energy. Your draconic ancestry determines the size, shape, and damage type of the exhalation.</p><p>When you use your breath weapon, each creature in the area of the exhalation must make a saving throw, the type of which is determined by your draconic ancestry. The DC for this saving throw equals 8 + your Constitution modifier + your proficiency bonus. A creature takes 2d6 damage on a failed save, and half as much damage on a successful one. The damage increases to 3d6 at 6th level, 4d6 at 11th level, and 5d6 at 16th level.</p><p>After you use your breath weapon, you can't use it again until you complete a short or long rest.</p><p><em><strong>Damage Resistance.</strong></em> You have resistance to the damage type associated with your draconic ancestry.</p><p><em><strong>Languages.</strong></em> You can speak, read, and write Common and Draconic. Draconic is thought to be one of the oldest languages and is often used in the study of magic. The language sounds harsh to most other creatures and includes numerous hard consonants and sibilants.</p>",
       "chat": "",
       "unidentified": ""
     },
     "source": "SRD 5.1",
-    "activation": {
-      "type": "",
-      "cost": null,
-      "condition": ""
-    },
-    "duration": {
-      "value": "",
-      "units": ""
-    },
-    "cover": null,
-    "target": {
-      "value": null,
-      "width": null,
-      "units": "",
-      "type": ""
-    },
-    "range": {
-      "value": null,
-      "long": null,
-      "units": ""
-    },
-    "uses": {
-      "value": null,
-      "max": "",
-      "per": null,
-      "recovery": ""
-    },
-    "consume": {
-      "type": "",
-      "target": null,
-      "amount": null
-    },
-    "ability": null,
-    "actionType": "",
-    "attackBonus": "",
-    "chatFlavor": "",
-    "critical": {
-      "threshold": null,
-      "damage": ""
-    },
-    "damage": {
-      "parts": [],
-      "versatile": ""
-    },
-    "formula": "",
-    "save": {
-      "ability": "",
-      "dc": null,
-      "scaling": "spell"
-    },
-    "requirements": "",
-    "recharge": {
-      "value": null,
-      "charged": false
-    }
+    "identifier": "dragonborn",
+    "advancement": [
+      {
+        "_id": "QIrBmvSmNOTEJLWn",
+        "type": "ItemChoice",
+        "configuration": {
+          "hint": "You have draconic ancestry. Choose one type of dragon from the list. Your breath weapon and damage resistance are determined by the dragon type.",
+          "choices": {
+            "0": 1
+          },
+          "allowDrops": false,
+          "type": "feat",
+          "pool": [
+            "Compendium.dnd5e.races.NnSZlrsHCFeH3cCq",
+            "Compendium.dnd5e.races.KVgvW5yhKcmQUanz",
+            "Compendium.dnd5e.races.JrUcwLR2aQC09iUM",
+            "Compendium.dnd5e.races.pJzMSk9qYywYy65w",
+            "Compendium.dnd5e.races.bFpLM0N3uTeHLdzu",
+            "Compendium.dnd5e.races.YPQQBZAuRiSwuBfh",
+            "Compendium.dnd5e.races.lXIxndsBaQglHBtO",
+            "Compendium.dnd5e.races.kB61JPKQrDBbSNU7",
+            "Compendium.dnd5e.races.pAYTdRGftNr8AitK",
+            "Compendium.dnd5e.races.zRt374bEnkdP0OEw"
+          ],
+          "spell": {
+            "ability": "",
+            "preparation": "",
+            "uses": {
+              "max": "",
+              "per": ""
+            }
+          },
+          "restriction": {
+            "type": "race",
+            "subtype": "",
+            "level": ""
+          }
+        },
+        "value": {},
+        "title": "Draconic Ancestry"
+      }
+    ]
+  },
+  "effects": [],
+  "ownership": {
+    "default": 0
   },
   "flags": {},
-  "img": "icons/magic/perception/eye-ringed-glow-angry-small-red.webp",
-  "effects": [],
-  "folder": null,
-  "sort": 0,
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.1.0",
+    "systemVersion": "2.2.0",
     "coreVersion": "10.291",
-    "createdTime": 1661787234466,
-    "modifiedTime": 1671220977499,
+    "createdTime": 1677180157568,
+    "modifiedTime": 1677181879976,
     "lastModifiedBy": "dnd5ebuilder0000"
-  }
+  },
+  "folder": null,
+  "sort": 0
 }

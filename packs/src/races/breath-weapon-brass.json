@@ -1,13 +1,13 @@
 {
-  "_id": "KL7wx9Q8XNJQir0k",
-  "name": "Breath Weapon",
+  "_id": "JrUcwLR2aQC09iUM",
+  "name": "Breath Weapon - Brass",
   "ownership": {
     "default": 0
   },
   "type": "feat",
   "system": {
     "description": {
-      "value": "<p>You can use your action to exhale destructive energy. Your draconic ancestry determines the size, shape, and damage type of the exhalation.</p><p>When you use your breath weapon, each creature in the area of the exhalation must make a saving throw, the type of which is determined by your draconic ancestry. The DC for this saving throw equals 8 + your Constitution modifier + your proficiency bonus. A creature takes 2d6 damage on a failed save, and half as much damage on a successful one. The damage increases to 3d6 at 6th level, 4d6 at 11th level, and 5d6 at 16th level.</p><p>After you use your breath weapon, you can't use it again until you complete a short or long rest.</p><section class=\"secret foundry-note\" id=\"secret-bTTAXItqCqmVPlTG\"><p><strong>Foundry Note</strong></p><p>Edit the Details for this feat, so that the damage type, saving throw, and area of effect match those of your Draconic Ancestry.</p></section>",
+      "value": "<p>You can use your action to exhale destructive energy. Your draconic ancestry determines the size, shape, and damage type of the exhalation.</p><p>When you use your breath weapon, each creature in the area of the exhalation must make a dexterity saving throw. The DC for this saving throw equals 8 + your Constitution modifier + your proficiency bonus. A creature takes 2d6 fire damage on a failed save, and half as much damage on a successful one. The damage increases to 3d6 at 6th level, 4d6 at 11th level, and 5d6 at 16th level.</p><p>After you use your breath weapon, you can't use it again until you complete a short or long rest.</p>",
       "chat": "",
       "unidentified": ""
     },
@@ -23,10 +23,10 @@
     },
     "cover": null,
     "target": {
-      "value": 15,
-      "width": null,
+      "value": 30,
+      "width": 5,
       "units": "ft",
-      "type": "cone"
+      "type": "line"
     },
     "range": {
       "value": null,
@@ -44,7 +44,7 @@
       "target": null,
       "amount": null
     },
-    "ability": "con",
+    "ability": "dex",
     "actionType": "save",
     "attackBonus": "",
     "chatFlavor": "",
@@ -56,7 +56,7 @@
       "parts": [
         [
           "((ceil((@details.level - 5)/5)) +2)d6",
-          "cold"
+          "fire"
         ]
       ],
       "versatile": ""
@@ -71,23 +71,23 @@
       "value": "race",
       "subtype": ""
     },
-    "requirements": "Dragonborn",
+    "requirements": "Brass Dragonborn",
     "recharge": {
       "value": null,
       "charged": false
     }
   },
   "flags": {},
-  "img": "icons/magic/acid/projectile-smoke-glowing.webp",
+  "img": "icons/magic/fire/beam-jet-stream-trails-orange.webp",
   "effects": [],
-  "folder": null,
-  "sort": 0,
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.1.0",
+    "systemVersion": "2.2.0",
     "coreVersion": "10.291",
     "createdTime": 1661787234466,
-    "modifiedTime": 1672336385274,
+    "modifiedTime": 1677180943601,
     "lastModifiedBy": "dnd5ebuilder0000"
-  }
+  },
+  "folder": null,
+  "sort": 0
 }
