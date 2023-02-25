@@ -1237,8 +1237,10 @@ preLocalize("weaponTypes");
  */
 DND5E.physicalWeaponProperties = {
   ada: "DND5E.WeaponPropertiesAda",
+  cli: "DND5E.WeaponPropertiesCli",
   mgc: "DND5E.WeaponPropertiesMgc",
-  sil: "DND5E.WeaponPropertiesSil"
+  sil: "DND5E.WeaponPropertiesSil",
+  sta: "DND5E.WeaponPropertiesSta"
 };
 preLocalize("physicalWeaponProperties", { sort: true });
 
@@ -1251,15 +1253,22 @@ preLocalize("physicalWeaponProperties", { sort: true });
 DND5E.weaponProperties = {
   ...DND5E.physicalWeaponProperties,
   amm: "DND5E.WeaponPropertiesAmm",
+  att: "DND5E.WeaponPropertiesAtt",
+  cov: "DND5E.WeaponPropertiesCov",
+  def: "DND5E.WeaponPropertiesDef",
   fin: "DND5E.WeaponPropertiesFin",
   fir: "DND5E.WeaponPropertiesFir",
   foc: "DND5E.WeaponPropertiesFoc",
+  haf: "DND5E.WeaponPropertiesHaf",
+  hic: "DND5E.WeaponPropertiesHic",
   hvy: "DND5E.WeaponPropertiesHvy",
+  jgd: "DND5E.WeaponPropertiesJgd",
   lgt: "DND5E.WeaponPropertiesLgt",
   lod: "DND5E.WeaponPropertiesLod",
   rch: "DND5E.WeaponPropertiesRch",
   rel: "DND5E.WeaponPropertiesRel",
   ret: "DND5E.WeaponPropertiesRet",
+  shb: "DND5E.WeaponPropertiesShb",
   spc: "DND5E.WeaponPropertiesSpc",
   thr: "DND5E.WeaponPropertiesThr",
   two: "DND5E.WeaponPropertiesTwo",
