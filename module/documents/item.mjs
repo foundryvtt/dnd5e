@@ -996,9 +996,24 @@ export default class Item5e extends Item {
     const consume = this.system.consume || {};
     if ( !consume.type ) return;
 
+    // default to equipped ammunition if empty
+    let target = consume.target;
+    if ( !target && consume.type == "ammo" ) {
+      const possibleAmmunition = this.actor.itemTypes.consumable.filter((i) => {
+        if ( i.system.consumableType != "ammo" )
+          return false;
+        if ( i.system.quantity <= 0 )
+          return false;
+        return i.system.equipped;
+      });
+      if (possibleAmmunition.length > 0) {
+        target = possibleAmmunition[0]._id;
+      }
+    }
+
     // No consumed target
     const typeLabel = CONFIG.DND5E.abilityConsumptionTypes[consume.type];
-    if ( !consume.target ) {
+    if ( !target ) {
       ui.notifications.warn(game.i18n.format("DND5E.ConsumeWarningNoResource", {name: this.name, type: typeLabel}));
       return false;
     }
@@ -1009,21 +1024,21 @@ export default class Item5e extends Item {
     let quantity = 0;
     switch ( consume.type ) {
       case "attribute":
-        resource = foundry.utils.getProperty(this.actor.system, consume.target);
+        resource = foundry.utils.getProperty(this.actor.system, target);
         quantity = resource || 0;
         break;
       case "ammo":
       case "material":
-        resource = this.actor.items.get(consume.target);
+        resource = this.actor.items.get(target);
         quantity = resource ? resource.system.quantity : 0;
         break;
       case "hitDice":
-        const denom = !["smallest", "largest"].includes(consume.target) ? consume.target : false;
+        const denom = !["smallest", "largest"].includes(target) ? target : false;
         resource = Object.values(this.actor.classes).filter(cls => !denom || (cls.system.hitDice === denom));
         quantity = resource.reduce((count, cls) => count + cls.system.levels - cls.system.hitDiceUsed, 0);
         break;
       case "charges":
-        resource = this.actor.items.get(consume.target);
+        resource = this.actor.items.get(target);
         if ( !resource ) break;
         const uses = resource.system.uses;
         if ( uses.per && uses.max ) quantity = uses.value;
@@ -1050,14 +1065,14 @@ export default class Item5e extends Item {
     // Define updates to provided data objects
     switch ( consume.type ) {
       case "attribute":
-        actorUpdates[`system.${consume.target}`] = remaining;
+        actorUpdates[`system.${target}`] = remaining;
         break;
       case "ammo":
       case "material":
-        resourceUpdates.push({_id: consume.target, "system.quantity": remaining});
+        resourceUpdates.push({_id: target, "system.quantity": remaining});
         break;
       case "hitDice":
-        if ( ["smallest", "largest"].includes(consume.target) ) resource = resource.sort((lhs, rhs) => {
+        if ( ["smallest", "largest"].includes(target) ) resource = resource.sort((lhs, rhs) => {
           let sort = lhs.system.hitDice.localeCompare(rhs.system.hitDice, "en", {numeric: true});
           if ( consume.target === "largest" ) sort *= -1;
           return sort;
@@ -1076,7 +1091,7 @@ export default class Item5e extends Item {
       case "charges":
         const uses = resource.system.uses || {};
         const recharge = resource.system.recharge || {};
-        const update = {_id: consume.target};
+        const update = {_id: target};
         if ( uses.per && uses.max ) update["system.uses.value"] = remaining;
         else if ( recharge.value ) update["system.recharge.charged"] = false;
         resourceUpdates.push(update);
