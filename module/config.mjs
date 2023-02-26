@@ -564,9 +564,9 @@ DND5E.armorIds = {
  * @enum {string}
  */
 DND5E.shieldIds = {
-  lightshield: "sSs3hSzkKBMNBgTs",
+  lightshield: "8z0HaF1hIALUttYW",
   shield: "sSs3hSzkKBMNBgTs",
-  shieldheavy: "sSs3hSzkKBMNBgTs"
+  shieldheavy: "qTYk4Pzb4VOpP0fL"
 };
 
 /**
@@ -1238,7 +1238,7 @@ preLocalize("weaponTypes");
  */
 DND5E.physicalWeaponProperties = {
   ada: "DND5E.WeaponPropertiesAda",
-  cli: "DND5E.WeaponPropertiesCli",
+  cld: "DND5E.WeaponPropertiesCld",
   mgc: "DND5E.WeaponPropertiesMgc",
   sil: "DND5E.WeaponPropertiesSil",
   sta: "DND5E.WeaponPropertiesSta"
