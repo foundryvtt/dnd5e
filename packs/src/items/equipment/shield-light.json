@@ -1,17 +1,17 @@
 {
-  "_id": "sSs3hSzkKBMNBgTs",
-  "name": "Shield",
+  "_id": "8z0HaF1hIALUttYW",
+  "name": "Light Shield",
   "type": "equipment",
   "img": "icons/equipment/shield/oval-wooden-boss-steel.webp",
   "system": {
     "description": {
-      "value": "<p>A shield is made from wood or metal and is carried in one hand. Wielding a shield increases your Armor Class by 2. You can benefit from only one shield at a time.</p>",
+      "value": "<p>A shield is made from wood or metal and is carried in one hand. Wielding a light shield increases your Armor Class by 1. You can benefit from only one shield at a time.</p>",
       "chat": "",
       "unidentified": ""
     },
     "source": "SRD 5.1",
     "quantity": 1,
-    "weight": 6,
+    "weight": 3,
     "price": {
       "value": 10,
       "denomination": "gp"
@@ -71,7 +71,7 @@
       "scaling": "spell"
     },
     "armor": {
-      "value": 2,
+      "value": 1,
       "type": "shield",
       "dex": null
     },

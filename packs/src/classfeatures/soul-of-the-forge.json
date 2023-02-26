@@ -74,7 +74,42 @@
   },
   "flags": {},
   "img": "icons/skills/trades/smithing-anvil-silver-red.webp",
-  "effects": [],
+  "effects": [
+    {
+      "_id": "x51TPvEVxf4ubPjr",
+      "changes": [
+        {
+          "key": "system.traits.dr.value",
+          "mode": 2,
+          "value": "fire",
+          "priority": null
+        },
+        {
+          "key": "system.attributes.ac.bonus",
+          "mode": 2,
+          "value": "+1",
+          "priority": null
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "icon": "icons/skills/trades/smithing-anvil-silver-red.webp",
+      "label": "Soul of the Forge",
+      "origin": "Item.R151CALFNM3AKF0V",
+      "transfer": true,
+      "flags": {},
+      "tint": null,
+      "sort": 0
+    }
+  ],
   "folder": null,
   "sort": 0,
   "_stats": {

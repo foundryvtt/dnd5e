@@ -556,8 +556,7 @@ DND5E.armorIds = {
   plate: "OjkIqlW2UpgFcjZa",
   ringmail: "nsXZejlmgalj4he9",
   scalemail: "XmnlF5fgIO3tg6TG",
-  splint: "cKpJmsJmU8YaiuqG",
-  studded: "TIV3B1vbrVHIhQAm"
+  splint: "cKpJmsJmU8YaiuqG"
 };
 
 /**
@@ -565,7 +564,9 @@ DND5E.armorIds = {
  * @enum {string}
  */
 DND5E.shieldIds = {
-  shield: "sSs3hSzkKBMNBgTs"
+  lightshield: "sSs3hSzkKBMNBgTs",
+  shield: "sSs3hSzkKBMNBgTs",
+  shieldheavy: "sSs3hSzkKBMNBgTs"
 };
 
 /**

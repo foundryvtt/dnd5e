@@ -74,7 +74,36 @@
   },
   "flags": {},
   "img": "icons/magic/unholy/orb-swirling-teal.webp",
-  "effects": [],
+  "effects": [
+    {
+      "_id": "b1szP0IS8EmSspur",
+      "changes": [
+        {
+          "key": "system.traits.dr.value",
+          "mode": 2,
+          "value": "psychic",
+          "priority": null
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "icon": "icons/magic/unholy/orb-swirling-teal.webp",
+      "label": "Guarded Mind",
+      "origin": "Item.VV6LP34GAXUL5AHE",
+      "transfer": true,
+      "flags": {},
+      "tint": null,
+      "sort": 0
+    }
+  ],
   "folder": null,
   "sort": 0,
   "_stats": {

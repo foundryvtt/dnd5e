@@ -74,7 +74,36 @@
   },
   "flags": {},
   "img": "icons/creatures/tentacles/tentacles-suctioncups-pink.webp",
-  "effects": [],
+  "effects": [
+    {
+      "_id": "j9Vap5Lvl81VKfbF",
+      "changes": [
+        {
+          "key": "system.traits.dr.value",
+          "mode": 2,
+          "value": "cold",
+          "priority": null
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "icon": "icons/creatures/tentacles/tentacles-suctioncups-pink.webp",
+      "label": "Oceanic Soul",
+      "origin": "Item.9C1TT3G15PLZFN2C",
+      "transfer": true,
+      "flags": {},
+      "tint": null,
+      "sort": 0
+    }
+  ],
   "folder": null,
   "sort": 0,
   "_stats": {

@@ -74,7 +74,36 @@
   },
   "flags": {},
   "img": "",
-  "effects": [],
+  "effects": [
+    {
+      "_id": "FiZDiIrtjIN8Sna2",
+      "changes": [
+        {
+          "key": "system.traits.dr.value",
+          "mode": 2,
+          "value": "radiant",
+          "priority": null
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "icon": "",
+      "label": "Celestial Resistance",
+      "origin": "Item.JQE7gjzQSHE5sthb",
+      "transfer": true,
+      "flags": {},
+      "tint": null,
+      "sort": 0
+    }
+  ],
   "folder": null,
   "sort": 0,
   "_stats": {

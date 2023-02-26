@@ -90,7 +90,36 @@
     "stealth": false,
     "proficient": false
   },
-  "effects": [],
+  "effects": [
+    {
+      "_id": "sqycQ9gMeXRE8Zr3",
+      "changes": [
+        {
+          "key": "system.abilities.str.value",
+          "mode": 5,
+          "value": "21",
+          "priority": null
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "icon": "icons/equipment/waist/belt-buckle-square-leather-brown.webp",
+      "label": "21 Strength",
+      "origin": "Compendium.dnd5e.items.ER75WHewYN04Zp11",
+      "transfer": true,
+      "flags": {},
+      "tint": null,
+      "sort": 0
+    }
+  ],
   "folder": null,
   "sort": 0,
   "ownership": {

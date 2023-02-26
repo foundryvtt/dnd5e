@@ -74,7 +74,36 @@
   },
   "flags": {},
   "img": "icons/magic/holy/angel-winged-humanoid-blue.webp",
-  "effects": [],
+  "effects": [
+    {
+      "_id": "GFCDkYSYoainnotg",
+      "changes": [
+        {
+          "key": "system.traits.dr.value",
+          "mode": 2,
+          "value": "radiant",
+          "priority": null
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "icon": "icons/magic/holy/angel-winged-humanoid-blue.webp",
+      "label": "Radiant Soul",
+      "origin": "Item.WRFUT3ZHE4DIVRKY",
+      "transfer": true,
+      "flags": {},
+      "tint": null,
+      "sort": 0
+    }
+  ],
   "folder": null,
   "sort": 0,
   "_stats": {

@@ -74,7 +74,48 @@
   },
   "flags": {},
   "img": "icons/tools/laboratory/vials-blue-pink.webp",
-  "effects": [],
+  "effects": [
+    {
+      "_id": "ZT5QuAES3zm8p998",
+      "changes": [
+        {
+          "key": "system.traits.dr.value",
+          "mode": 2,
+          "value": "acid",
+          "priority": null
+        },
+        {
+          "key": "system.traits.dr.value",
+          "mode": 2,
+          "value": "poison",
+          "priority": null
+        },
+        {
+          "key": "system.traits.ci.value",
+          "mode": 2,
+          "value": "poisoned",
+          "priority": null
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "icon": "icons/tools/laboratory/vials-blue-pink.webp",
+      "label": "Chemical Mastery",
+      "origin": "Item.QLQHDT79SQ90LIL8",
+      "transfer": true,
+      "flags": {},
+      "tint": null,
+      "sort": 0
+    }
+  ],
   "folder": null,
   "sort": 0,
   "_stats": {

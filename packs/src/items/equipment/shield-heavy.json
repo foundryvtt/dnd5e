@@ -1,24 +1,24 @@
 {
-  "_id": "FZixEM5voQkH84xP",
-  "name": "Studded Leather Armor +2",
+  "_id": "qTYk4Pzb4VOpP0fL",
+  "name": "Heavy Shield",
   "type": "equipment",
-  "img": "icons/equipment/chest/breastplate-rivited-red.webp",
+  "img": "icons/equipment/shield/oval-wooden-boss-steel.webp",
   "system": {
     "description": {
-      "value": "<p><em>This armor has been embellished with powerful runes, crafted in sorcerous fires, blessed by a powerful being, or some other event has seen it bequeathed with enhanced protection for the wearer.</em></p>\n<p>You have a bonus to AC while wearing this armor.</p>",
+      "value": "<p>A shield is made from wood or metal and is carried in one hand. Wielding a heavy shield increases your Armor Class by 3. You can benefit from only one shield at a time.</p>",
       "chat": "",
       "unidentified": ""
     },
     "source": "SRD 5.1",
     "quantity": 1,
-    "weight": 13,
+    "weight": 12,
     "price": {
-      "value": 6045,
+      "value": 100,
       "denomination": "gp"
     },
     "attunement": 0,
     "equipped": false,
-    "rarity": "veryRare",
+    "rarity": "common",
     "identified": true,
     "activation": {
       "type": "",
@@ -53,7 +53,7 @@
       "amount": null
     },
     "ability": null,
-    "actionType": "",
+    "actionType": null,
     "attackBonus": "",
     "chatFlavor": "",
     "critical": {
@@ -71,8 +71,8 @@
       "scaling": "spell"
     },
     "armor": {
-      "value": 14,
-      "type": "light",
+      "value": 3,
+      "type": "shield",
       "dex": null
     },
     "hp": {
@@ -81,13 +81,13 @@
       "dt": null,
       "conditions": ""
     },
-    "baseItem": "studded",
+    "baseItem": "",
     "speed": {
       "value": null,
       "conditions": ""
     },
-    "strength": null,
-    "stealth": false,
+    "strength": 15,
+    "stealth": true,
     "proficient": false
   },
   "effects": [],
@@ -101,8 +101,8 @@
     "systemId": "dnd5e",
     "systemVersion": "2.1.0",
     "coreVersion": "10.291",
-    "createdTime": 1661787233547,
-    "modifiedTime": 1671220958977,
+    "createdTime": 1661787233897,
+    "modifiedTime": 1671220964688,
     "lastModifiedBy": "dnd5ebuilder0000"
   }
 }

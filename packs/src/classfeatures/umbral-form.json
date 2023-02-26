@@ -73,8 +73,97 @@
     }
   },
   "flags": {},
-  "img": "icons/magic/unholy/hand-marked-pink.webp",
-  "effects": [],
+  "img": "icons/magic/perception/silhouette-stealth-shadow.webp",
+  "effects": [
+    {
+      "_id": "vE1in5MsiyE0nMDF",
+      "flags": {},
+      "changes": [
+        {
+          "key": "system.traits.dr.value",
+          "value": "fire",
+          "mode": 2,
+          "priority": null
+        },
+        {
+          "key": "system.traits.dr.value",
+          "value": "cold",
+          "mode": 2,
+          "priority": null
+        },
+        {
+          "key": "system.traits.dr.value",
+          "value": "acid",
+          "mode": 2,
+          "priority": null
+        },
+        {
+          "key": "system.traits.dr.value",
+          "value": "bludgeoning",
+          "mode": 2,
+          "priority": null
+        },
+        {
+          "key": "system.traits.dr.value",
+          "value": "lightning",
+          "mode": 2,
+          "priority": null
+        },
+        {
+          "key": "system.traits.dr.value",
+          "value": "necrotic",
+          "mode": 2,
+          "priority": null
+        },
+        {
+          "key": "system.traits.dr.value",
+          "value": "piercing",
+          "mode": 2,
+          "priority": null
+        },
+        {
+          "key": "system.traits.dr.value",
+          "value": "psychic",
+          "mode": 2,
+          "priority": null
+        },
+        {
+          "key": "system.traits.dr.value",
+          "value": "slashing",
+          "mode": 2,
+          "priority": null
+        },
+        {
+          "key": "system.traits.dr.value",
+          "value": "thunder",
+          "mode": 2,
+          "priority": null
+        },
+        {
+          "key": "system.traits.dr.value",
+          "value": "poison",
+          "mode": 2,
+          "priority": null
+        }
+      ],
+      "disabled": true,
+      "duration": {
+        "startTime": null,
+        "seconds": 60,
+        "rounds": 10,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null,
+        "combat": null
+      },
+      "icon": "icons/magic/perception/silhouette-stealth-shadow.webp",
+      "label": "Umbral Form",
+      "origin": "Item.Y59GJXK79KW0YAB0",
+      "tint": null,
+      "transfer": true,
+      "sort": 0
+    }
+  ],
   "folder": null,
   "sort": 0,
   "_stats": {

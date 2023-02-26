@@ -5,7 +5,7 @@
   "img": "icons/equipment/finger/ring-cabochon-silver-gold-red.webp",
   "system": {
     "description": {
-      "value": "<p><em>(Requires attunement)</em></p>\n<p>You gain a +1 bonus to AC and saving throws while wearing this ring.</p>",
+      "value": "<p>You gain a +1 bonus to AC and saving throws while wearing this ring.</p>",
       "chat": "",
       "unidentified": ""
     },
@@ -16,7 +16,7 @@
       "value": 3500,
       "denomination": "gp"
     },
-    "attunement": 1,
+    "attunement": 0,
     "equipped": false,
     "rarity": "rare",
     "identified": true,
@@ -97,7 +97,13 @@
         {
           "key": "system.attributes.ac.bonus",
           "mode": 2,
-          "value": "1",
+          "value": "+1",
+          "priority": null
+        },
+        {
+          "key": "system.bonuses.abilities.save",
+          "mode": 2,
+          "value": "+1",
           "priority": null
         }
       ],
@@ -112,7 +118,7 @@
         "startTurn": null
       },
       "icon": "icons/equipment/finger/ring-cabochon-silver-gold-red.webp",
-      "label": "+1 to AC",
+      "label": "+1 to AC & Saves",
       "origin": "Compendium.dnd5e.items.QtmVEreNIWEVOoLR",
       "transfer": true,
       "flags": {},

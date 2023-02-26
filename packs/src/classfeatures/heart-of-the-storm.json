@@ -74,7 +74,42 @@
   },
   "flags": {},
   "img": "icons/magic/lightning/bolt-strike-clouds-blue.webp",
-  "effects": [],
+  "effects": [
+    {
+      "_id": "1x5UKLIpHXaM9EMS",
+      "changes": [
+        {
+          "key": "system.traits.dr.value",
+          "mode": 2,
+          "value": "lightning",
+          "priority": null
+        },
+        {
+          "key": "system.traits.dr.value",
+          "mode": 2,
+          "value": "thunder",
+          "priority": null
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "icon": "icons/magic/lightning/bolt-strike-clouds-blue.webp",
+      "label": "Heart of the Storm",
+      "origin": "Item.AH7V987R9QNFE4VX",
+      "transfer": true,
+      "flags": {},
+      "tint": null,
+      "sort": 0
+    }
+  ],
   "folder": null,
   "sort": 0,
   "_stats": {

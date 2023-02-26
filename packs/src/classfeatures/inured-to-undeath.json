@@ -74,7 +74,36 @@
   },
   "flags": {},
   "img": "icons/magic/death/skeleton-bird-skull-gray.webp",
-  "effects": [],
+  "effects": [
+    {
+      "_id": "r4XEmMeYQfQtA6jH",
+      "changes": [
+        {
+          "key": "system.traits.dr.value",
+          "mode": 2,
+          "value": "necrotic",
+          "priority": null
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "icon": "icons/magic/death/skeleton-bird-skull-gray.webp",
+      "label": "Inured to Undeath",
+      "origin": "Item.B08R4D3927XCKTZ5",
+      "transfer": true,
+      "flags": {},
+      "tint": null,
+      "sort": 0
+    }
+  ],
   "folder": null,
   "sort": 0,
   "_stats": {

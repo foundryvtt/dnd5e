@@ -74,7 +74,36 @@
   },
   "flags": {},
   "img": "icons/commodities/biological/eye-tentacle-green-yellow.webp",
-  "effects": [],
+  "effects": [
+    {
+      "_id": "UWpSnBwn7VcjnFLC",
+      "changes": [
+        {
+          "key": "system.traits.dr.value",
+          "mode": 2,
+          "value": "psychic",
+          "priority": null
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "icon": "icons/commodities/biological/eye-tentacle-green-yellow.webp",
+      "label": "Thought Shield",
+      "origin": "Item.VKIVPW43X1PN6QCP",
+      "transfer": true,
+      "flags": {},
+      "tint": null,
+      "sort": 0
+    }
+  ],
   "folder": null,
   "sort": 0,
   "_stats": {

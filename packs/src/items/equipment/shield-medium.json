@@ -1,19 +1,19 @@
 {
-  "_id": "TIV3B1vbrVHIhQAm",
-  "name": "Studded Leather Armor",
+  "_id": "sSs3hSzkKBMNBgTs",
+  "name": "Medium Shield",
   "type": "equipment",
-  "img": "icons/equipment/chest/breastplate-rivited-red.webp",
+  "img": "icons/equipment/shield/oval-wooden-boss-steel.webp",
   "system": {
     "description": {
-      "value": "<p>Made from tough but flexible leather, studded leather is reinforced with close-set rivets or spikes.</p>",
+      "value": "<p>A shield is made from wood or metal and is carried in one hand. Wielding a medium shield increases your Armor Class by 2. You can benefit from only one shield at a time.</p>",
       "chat": "",
       "unidentified": ""
     },
     "source": "SRD 5.1",
     "quantity": 1,
-    "weight": 13,
+    "weight": 6,
     "price": {
-      "value": 45,
+      "value": 10,
       "denomination": "gp"
     },
     "attunement": 0,
@@ -53,7 +53,7 @@
       "amount": null
     },
     "ability": null,
-    "actionType": "",
+    "actionType": null,
     "attackBonus": "",
     "chatFlavor": "",
     "critical": {
@@ -71,8 +71,8 @@
       "scaling": "spell"
     },
     "armor": {
-      "value": 12,
-      "type": "light",
+      "value": 2,
+      "type": "shield",
       "dex": null
     },
     "hp": {
@@ -81,7 +81,7 @@
       "dt": null,
       "conditions": ""
     },
-    "baseItem": "studded",
+    "baseItem": "",
     "speed": {
       "value": null,
       "conditions": ""
@@ -101,8 +101,8 @@
     "systemId": "dnd5e",
     "systemVersion": "2.1.0",
     "coreVersion": "10.291",
-    "createdTime": 1661787233668,
-    "modifiedTime": 1671220960626,
+    "createdTime": 1661787233897,
+    "modifiedTime": 1671220964688,
     "lastModifiedBy": "dnd5ebuilder0000"
   }
 }

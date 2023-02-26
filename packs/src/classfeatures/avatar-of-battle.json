@@ -74,7 +74,54 @@
   },
   "flags": {},
   "img": "icons/environment/people/infantry-army.webp",
-  "effects": [],
+  "effects": [
+    {
+      "_id": "CgaEPgnQxX7AMmRd",
+      "changes": [
+        {
+          "key": "system.traits.dr.value",
+          "mode": 2,
+          "value": "bludgeoning",
+          "priority": null
+        },
+        {
+          "key": "system.traits.dr.value",
+          "mode": 2,
+          "value": "piercing",
+          "priority": null
+        },
+        {
+          "key": "system.traits.dr.value",
+          "mode": 2,
+          "value": "slashing",
+          "priority": null
+        },
+        {
+          "key": "system.traits.dr.bypasses",
+          "mode": 2,
+          "value": "mgc",
+          "priority": null
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "icon": "icons/environment/people/infantry-army.webp",
+      "label": "Avatar of Battle",
+      "origin": "Item.N6I2CJMXMGJJZFMU",
+      "transfer": true,
+      "flags": {},
+      "tint": null,
+      "sort": 0
+    }
+  ],
   "folder": null,
   "sort": 0,
   "_stats": {

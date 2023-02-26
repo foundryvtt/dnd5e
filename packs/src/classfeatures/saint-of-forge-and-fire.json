@@ -74,7 +74,60 @@
   },
   "flags": {},
   "img": "icons/skills/trades/smithing-anvil-silver-red.webp",
-  "effects": [],
+  "effects": [
+    {
+      "_id": "x51TPvEVxf4ubPjr",
+      "changes": [
+        {
+          "key": "system.traits.im.value",
+          "mode": 2,
+          "value": "fire",
+          "priority": null
+        },
+        {
+          "key": "system.traits.dr.value",
+          "mode": 2,
+          "value": "bludgeoning",
+          "priority": null
+        },
+        {
+          "key": "system.traits.dr.value",
+          "mode": 2,
+          "value": "piercing",
+          "priority": null
+        },
+        {
+          "key": "system.traits.dr.value",
+          "mode": 2,
+          "value": "slashing",
+          "priority": null
+        },
+        {
+          "key": "system.traits.dr.bypasses",
+          "mode": 2,
+          "value": "mgc",
+          "priority": null
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "icon": "icons/skills/trades/smithing-anvil-silver-red.webp",
+      "label": "Saint of Forge and Fire",
+      "origin": "Item.VQB5GXTSS6LSNUHH",
+      "transfer": true,
+      "flags": {},
+      "tint": null,
+      "sort": 0
+    }
+  ],
   "folder": null,
   "sort": 0,
   "_stats": {

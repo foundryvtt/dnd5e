@@ -90,7 +90,36 @@
     "stealth": false,
     "proficient": false
   },
-  "effects": [],
+  "effects": [
+    {
+      "_id": "I6xdmDbW88bp6bh9",
+      "changes": [
+        {
+          "key": "system.abilities.str.value",
+          "mode": 5,
+          "value": "25",
+          "priority": null
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "icon": "icons/equipment/waist/belt-coiled-leather-steel.webp",
+      "label": "25 Strength",
+      "origin": "Compendium.dnd5e.items.bq9YKwEHLQ7p7ric",
+      "transfer": true,
+      "flags": {},
+      "tint": null,
+      "sort": 0
+    }
+  ],
   "folder": null,
   "sort": 0,
   "ownership": {

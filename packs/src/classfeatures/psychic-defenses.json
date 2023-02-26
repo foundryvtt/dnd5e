@@ -74,7 +74,36 @@
   },
   "flags": {},
   "img": "icons/creatures/tentacles/tentacle-eyes-yellow-pink.webp",
-  "effects": [],
+  "effects": [
+    {
+      "_id": "TjhhpUR2hZ5F22WH",
+      "changes": [
+        {
+          "key": "system.traits.dr.value",
+          "mode": 2,
+          "value": "psychic",
+          "priority": null
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "icon": "icons/creatures/tentacles/tentacle-eyes-yellow-pink.webp",
+      "label": "Psychic Defenses",
+      "origin": "Item.B68BTZMLK2D1AUEL",
+      "transfer": true,
+      "flags": {},
+      "tint": null,
+      "sort": 0
+    }
+  ],
   "folder": null,
   "sort": 0,
   "_stats": {
