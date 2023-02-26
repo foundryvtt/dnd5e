@@ -73,8 +73,43 @@
     }
   },
   "flags": {},
-  "img": "",
-  "effects": [],
+  "img": "icons/skills/melee/strike-axe-blood-red.webp",
+  "effects": [
+    {
+      "_id": "dHJqLYN10c1dKTPr",
+      "changes": [
+        {
+          "key": "system.bonuses.mwak.attack",
+          "mode": 2,
+          "value": "-5",
+          "priority": null
+        },
+        {
+          "key": "system.bonuses.mwak.damage",
+          "mode": 2,
+          "value": "+10",
+          "priority": null
+        }
+      ],
+      "disabled": true,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "icon": "icons/skills/melee/strike-axe-blood-red.webp",
+      "label": "Great Weapon Master",
+      "origin": "Compendium.dnd5e.classfeatures.pHKXatxYunN3wXXm",
+      "transfer": true,
+      "flags": {},
+      "tint": null,
+      "sort": 0
+    }
+  ],
   "folder": null,
   "sort": 0,
   "_stats": {

@@ -73,8 +73,37 @@
     }
   },
   "flags": {},
-  "img": "",
-  "effects": [],
+  "img": "icons/magic/perception/eye-ringed-glow-angry-red.webp",
+  "effects": [
+    {
+      "_id": "MP2lWAmznLDH7Tv6",
+      "changes": [
+        {
+          "key": "system.attributes.senses.blindsight",
+          "mode": 5,
+          "value": "10",
+          "priority": null
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "icon": "icons/magic/perception/eye-ringed-glow-angry-red.webp",
+      "label": "Blind Fighting",
+      "origin": "Compendium.dnd5e.classfeatures.MQJEJDPTC00H6YSR",
+      "transfer": true,
+      "flags": {},
+      "tint": null,
+      "sort": 0
+    }
+  ],
   "folder": null,
   "sort": 0,
   "_stats": {

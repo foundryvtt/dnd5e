@@ -73,8 +73,43 @@
     }
   },
   "flags": {},
-  "img": "",
-  "effects": [],
+  "img": "icons/skills/ranged/target-bullseye-archer-orange.webp",
+  "effects": [
+    {
+      "_id": "bV7jH1K8ODN3qR4V",
+      "changes": [
+        {
+          "key": "system.bonuses.rwak.attack",
+          "mode": 2,
+          "value": "-5",
+          "priority": null
+        },
+        {
+          "key": "system.bonuses.rwak.damage",
+          "mode": 2,
+          "value": "+10",
+          "priority": null
+        }
+      ],
+      "disabled": true,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "icon": "icons/skills/ranged/target-bullseye-archer-orange.webp",
+      "label": "Sharpshooter",
+      "origin": "Compendium.dnd5e.classfeatures.s2zHxjEAfa0gAwzM",
+      "transfer": true,
+      "flags": {},
+      "tint": null,
+      "sort": 0
+    }
+  ],
   "folder": null,
   "sort": 0,
   "_stats": {

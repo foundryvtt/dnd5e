@@ -13,20 +13,20 @@
     },
     "source": "SRD 5.1",
     "activation": {
-      "type": "",
-      "cost": null,
-      "condition": ""
+      "type": "reaction",
+      "cost": "1",
+      "condition": "immediately after you take damage"
     },
     "duration": {
-      "value": "",
-      "units": ""
+      "value": "1",
+      "units": "round"
     },
     "cover": null,
     "target": {
       "value": null,
       "width": null,
       "units": "",
-      "type": ""
+      "type": "self"
     },
     "range": {
       "value": null,
@@ -34,9 +34,9 @@
       "units": ""
     },
     "uses": {
-      "value": null,
-      "max": "",
-      "per": null,
+      "value": "1",
+      "max": "1",
+      "per": "sr",
       "recovery": ""
     },
     "consume": {
@@ -73,7 +73,7 @@
     }
   },
   "flags": {},
-  "img": "",
+  "img": "icons/magic/air/wind-swirl-gray-blue.webp",
   "effects": [],
   "folder": null,
   "sort": 0,
