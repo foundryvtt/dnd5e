@@ -13,8 +13,8 @@
     },
     "source": "SRD 5.1",
     "activation": {
-      "type": "",
-      "cost": null,
+      "type": "action",
+      "cost": "1",
       "condition": ""
     },
     "duration": {
@@ -34,9 +34,9 @@
       "units": ""
     },
     "uses": {
-      "value": null,
-      "max": "",
-      "per": null,
+      "value": "1",
+      "max": "1",
+      "per": "sr",
       "recovery": ""
     },
     "consume": {
@@ -53,7 +53,12 @@
       "damage": ""
     },
     "damage": {
-      "parts": [],
+      "parts": [
+        [
+          "(2+@details.level/2)d6",
+          ""
+        ]
+      ],
       "versatile": ""
     },
     "formula": "",
@@ -73,7 +78,7 @@
     }
   },
   "flags": {},
-  "img": "",
+  "img": "icons/magic/fire/beam-jet-stream-trails-orange.webp",
   "effects": [],
   "folder": null,
   "sort": 0,
