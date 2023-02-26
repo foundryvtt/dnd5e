@@ -13,7 +13,7 @@
     },
     "source": "SRD 5.1",
     "activation": {
-      "type": "",
+      "type": "special",
       "cost": null,
       "condition": ""
     },
@@ -34,9 +34,9 @@
       "units": ""
     },
     "uses": {
-      "value": null,
-      "max": "",
-      "per": null,
+      "value": "3",
+      "max": "3",
+      "per": "lr",
       "recovery": ""
     },
     "consume": {
@@ -73,7 +73,7 @@
     }
   },
   "flags": {},
-  "img": "",
+  "img": "icons/sundries/misc/horseshoe-iron.webp",
   "effects": [],
   "folder": null,
   "sort": 0,
