@@ -3,7 +3,7 @@
  * A system for playing the fifth edition of the world's most popular role-playing game.
  * Author: Atropos
  * Software License: MIT
- * Content License: https://media.wizards.com/2016/downloads/DND/SRD-OGL_V5.1.pdf
+ * Content License: https://www.dndbeyond.com/attachments/39j2li89/SRD5.1-CCBY4.0License.pdf
  * Repository: https://github.com/foundryvtt/dnd5e
  * Issue Tracker: https://github.com/foundryvtt/dnd5e/issues
  */

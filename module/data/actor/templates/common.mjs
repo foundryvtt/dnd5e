@@ -39,6 +39,7 @@ export default class CommonTemplate extends SystemDataModel.mixin(CurrencyTempla
 
   /** @inheritdoc */
   static migrateData(source) {
+    super.migrateData(source);
     CommonTemplate.#migrateACData(source);
     CommonTemplate.#migrateMovementData(source);
   }
