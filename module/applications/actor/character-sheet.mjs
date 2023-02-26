@@ -112,6 +112,14 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
       inventory[i.type].items.push(i);
     }
 
+    // check attunement limit
+    if (context.system.attributes.attunement.value > context.system.attributes.attunement.max) {
+      const message = game.i18n.format("DND5E.TooManyItemsAttuned", {
+        value: context.system.attributes.attunement.value, max: context.system.attributes.attunement.max
+      });
+      context.warnings.push({ message, type: "warning" });
+    }
+
     // Organize Spellbook and count the number of prepared spells (excluding always, at will, etc...)
     const spellbook = this._prepareSpellbook(context, spells);
     const nPrepared = spells.filter(spell => {
