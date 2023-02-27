@@ -267,7 +267,7 @@ def replaceSpellsInFeatures(canonical_features, all_spells):
     for feature in canonical_features.values():
         feature.paragraphs = SPELL_RX.sub(_spell_sub, feature.paragraphs)
 
-def splitRacialFeatures(canonical_features, original_features, sourceFeature:str, featureSubType, requirements, name_to=None, original_ancestry="NONE"):
+def splitRacialFeatures(canonical_features, original_features, sourceFeature:str, featureType, requirements, name_to=None, original_ancestry="NONE"):
     if name_to is None:
         name_to = sourceFeature
     parentFeature = canonical_features[cmdize(sourceFeature)]
@@ -329,11 +329,13 @@ def splitRacialFeatures(canonical_features, original_features, sourceFeature:str
     featureOptions = _convertToFeature(
         featureCollections,
         canonical_features,
-        featureSubType,
+        None,
         requirements,
         name_to=name_to,
         exclude_rename=(name_to, original_ancestry)
     )
+    for f in featureOptions:
+        f.featureType = featureType
     updateNewClassFeatures({cmdize(f.name):f for f in featureOptions}, original_features)
 
     subraceOptions = []
@@ -341,11 +343,13 @@ def splitRacialFeatures(canonical_features, original_features, sourceFeature:str
         soo = _convertToFeature(
             soCollections,
             canonical_features,
-            featureSubType,
+            None,
             requirements,
             name_to=soName,
             exclude_rename=(soName, name_to, original_ancestry)
         )
+        for f in soo:
+            f.featureType = featureType
         subraceOptions.append((soName, soPreamble, soo))
 
     def _addIfNotEmpty(l, t):
