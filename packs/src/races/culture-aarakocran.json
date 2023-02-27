@@ -7,7 +7,7 @@
   "type": "feat",
   "system": {
     "description": {
-      "value": "<p>Aarakocran culture is founded on the ideals of personal freedom. Often very isolationist, these settlements are mostly comprised of extended family members, with the eldest acting as leader.</p>\n<p><strong><em>Eagle Eye.</em></strong> @UUID[Compendium.dnd5e.races.rjELMUxzuHTCOB9t]{Eagle Eye} You have proficiency in the Perception skill.</p>\n<p><strong><em>Flyby.</em></strong> @UUID[Compendium.dnd5e.races.5JZN7hiDXKAyB2aK]{Flyby} You do not provoke opportunity attacks when you leave an enemy's reach.</p>\n<p><strong><em>Languages.</em></strong> You can speak, read, and write Common and Auran.</p>\n<section class=\"secret foundry-note\">\n<p><strong>Foundry Note</strong></p>\n<p>You can drag your choices from the above onto your character sheet and it will automatically update.</p>\n</section>",
+      "value": "<p>Aarakocran culture is founded on the ideals of personal freedom. Often very isolationist, these settlements are mostly comprised of extended family members, with the eldest acting as leader.</p>\n<p><strong><em>Eagle Eye.</em></strong> You have proficiency in the Perception skill.</p>\n<p><strong><em>Flyby.</em></strong> @UUID[Compendium.dnd5e.races.5JZN7hiDXKAyB2aK]{Flyby} You do not provoke opportunity attacks when you leave an enemy's reach.</p>\n<p><strong><em>Languages.</em></strong> You can speak, read, and write Common and Auran.</p>\n<section class=\"secret foundry-note\">\n<p><strong>Foundry Note</strong></p>\n<p>You can drag your choices from the above onto your character sheet and it will automatically update.</p>\n</section>",
       "chat": "",
       "unidentified": ""
     },
@@ -73,8 +73,49 @@
     }
   },
   "flags": {},
-  "img": "",
-  "effects": [],
+  "img": "icons/creatures/birds/birds-flock-fly-yellow.webp",
+  "effects": [
+    {
+      "_id": "NfUDMt5JBnEZ2deh",
+      "changes": [
+        {
+          "key": "system.skills.per.value",
+          "mode": 5,
+          "value": "1",
+          "priority": null
+        },
+        {
+          "key": "system.traits.languages.value",
+          "mode": 2,
+          "value": "common",
+          "priority": null
+        },
+        {
+          "key": "system.traits.languages.value",
+          "mode": 2,
+          "value": "auran",
+          "priority": null
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "icon": "icons/creatures/birds/birds-flock-fly-yellow.webp",
+      "label": "Aarakocran Culture",
+      "origin": "Item.CJcifmn5gJMpDL8O",
+      "transfer": true,
+      "flags": {},
+      "tint": null,
+      "sort": 0
+    }
+  ],
   "folder": null,
   "sort": 0,
   "_stats": {

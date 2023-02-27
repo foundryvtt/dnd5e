@@ -73,8 +73,43 @@
     }
   },
   "flags": {},
-  "img": "",
-  "effects": [],
+  "img": "icons/creatures/magical/spirit-undead-masked-blue.webp",
+  "effects": [
+    {
+      "_id": "tOPX7WcDo7dvLRKl",
+      "changes": [
+        {
+          "key": "system.traits.languages.value",
+          "mode": 2,
+          "value": "common",
+          "priority": null
+        },
+        {
+          "key": "system.traits.languages.value",
+          "mode": 2,
+          "value": "elvish",
+          "priority": null
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "icon": "icons/creatures/magical/spirit-undead-masked-blue.webp",
+      "label": "Shadar-kai Culture",
+      "origin": "Item.BQiIM9qnvcpJS8ZA",
+      "transfer": true,
+      "flags": {},
+      "tint": null,
+      "sort": 0
+    }
+  ],
   "folder": null,
   "sort": 0,
   "_stats": {

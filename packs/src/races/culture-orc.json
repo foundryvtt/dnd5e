@@ -7,7 +7,7 @@
   "type": "feat",
   "system": {
     "description": {
-      "value": "<p>Some orcish communities exhibit a traditional culture, one that values physical ability, competition, and confidence. Others embrace technology and mechanical industry. Orcish society often has a focus on family, conquest, military training, or construction.</p>\n<p><strong><em>Aggressive.</em></strong> @UUID[Compendium.dnd5e.races.kruthk0TbnOhXAXo]{Aggressive} As a bonus action, you can move up to your speed toward an enemy of your choice that you can see or hear. You must end this move closer to the enemy than you started.</p>\n<p><strong><em>Confident.</em></strong> @UUID[Compendium.dnd5e.races.XcKhowf50nWrMt4k]{Confident} You gain proficiency in the Intimidation skill.</p>\n<p><strong><em>Languages.</em></strong> You can speak, read, and write Common and Orc.</p>\n<section class=\"secret foundry-note\">\n<p><strong>Foundry Note</strong></p>\n<p>You can drag your choices from the above onto your character sheet and it will automatically update.</p>\n</section>",
+      "value": "<p>Some orcish communities exhibit a traditional culture, one that values physical ability, competition, and confidence. Others embrace technology and mechanical industry. Orcish society often has a focus on family, conquest, military training, or construction.</p>\n<p><strong><em>Aggressive.</em></strong> @UUID[Compendium.dnd5e.races.kruthk0TbnOhXAXo]{Aggressive} As a bonus action, you can move up to your speed toward an enemy of your choice that you can see or hear. You must end this move closer to the enemy than you started.</p>\n<p><strong><em>Confident.</em></strong> You gain proficiency in the Intimidation skill.</p>\n<p><strong><em>Languages.</em></strong> You can speak, read, and write Common and Orc.</p>\n<section class=\"secret foundry-note\">\n<p><strong>Foundry Note</strong></p>\n<p>You can drag your choices from the above onto your character sheet and it will automatically update.</p>\n</section>",
       "chat": "",
       "unidentified": ""
     },
@@ -73,8 +73,49 @@
     }
   },
   "flags": {},
-  "img": "",
-  "effects": [],
+  "img": "icons/skills/trades/woodcutting-logging-saw.webp",
+  "effects": [
+    {
+      "_id": "sRQ8ZkkjeJ8rwOC3",
+      "changes": [
+        {
+          "key": "system.skills.itm.value",
+          "mode": 5,
+          "value": "1",
+          "priority": null
+        },
+        {
+          "key": "system.traits.languages.value",
+          "mode": 2,
+          "value": "common",
+          "priority": null
+        },
+        {
+          "key": "system.traits.languages.value",
+          "mode": 2,
+          "value": "orc",
+          "priority": null
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "icon": "icons/skills/trades/woodcutting-logging-saw.webp",
+      "label": "Orcish Culture",
+      "origin": "Item.yzpf6z0Qt748jzvb",
+      "transfer": true,
+      "flags": {},
+      "tint": null,
+      "sort": 0
+    }
+  ],
   "folder": null,
   "sort": 0,
   "_stats": {

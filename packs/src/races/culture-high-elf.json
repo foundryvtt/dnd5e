@@ -7,7 +7,7 @@
   "type": "feat",
   "system": {
     "description": {
-      "value": "<p>High elven culture is rich in traditions and history, celebrating their long legacy of scholarship, acumen, and art. Those who grow up immersed in this culture often take on certain traits.</p>\n<p><strong><em>Elven Schooling.</em></strong> @UUID[Compendium.dnd5e.races.bOBTbSfKXhwWR2Yc]{Elven Schooling} You gain proficiency with one of the following skills of your choice: Arcana, History, or Nature.</p>\n<p><strong><em>Elven Magic.</em></strong> @UUID[Compendium.dnd5e.races.EYe9IXcktPz6D5Fi]{Elven Magic} You know one cantrip of your choice from the wizard spell list. When you reach 3rd level, you learn a 1st-level spell of your choice from the wizard spell list, and can cast it once without expending a spell slot. When you reach 5th level, you learn a 2nd-level spell of your choice from the wizard spell list, and can also cast it once without expending a spell slot. You regain the ability to cast these spells without a spell slot when you finish a long rest, and Intelligence is your spellcasting ability for these spells.</p>\n<p><strong><em>Languages.</em></strong> You can speak, read, and write Common, Elvish, and one extra language of your choice.</p>\n<section class=\"secret foundry-note\">\n<p><strong>Foundry Note</strong></p>\n<p>You can drag your choices from the above onto your character sheet and it will automatically update.</p>\n</section>",
+      "value": "<p>High elven culture is rich in traditions and history, celebrating their long legacy of scholarship, acumen, and art. Those who grow up immersed in this culture often take on certain traits.</p>\n<p><strong><em>Elven Schooling.</em></strong> You gain proficiency with one of the following skills of your choice: Arcana, History, or Nature.</p>\n<p><strong><em>Elven Magic.</em></strong> @UUID[Compendium.dnd5e.races.EYe9IXcktPz6D5Fi]{Elven Magic} You know one cantrip of your choice from the wizard spell list. When you reach 3rd level, you learn a 1st-level spell of your choice from the wizard spell list, and can cast it once without expending a spell slot. When you reach 5th level, you learn a 2nd-level spell of your choice from the wizard spell list, and can also cast it once without expending a spell slot. You regain the ability to cast these spells without a spell slot when you finish a long rest, and Intelligence is your spellcasting ability for these spells.</p>\n<p><strong><em>Languages.</em></strong> You can speak, read, and write Common, Elvish, and one extra language of your choice.</p>\n<section class=\"secret foundry-note\">\n<p><strong>Foundry Note</strong></p>\n<p>You can drag your choices from the above onto your character sheet and it will automatically update. For your Elven Schooling skill and your language of choice, select them manually on your character sheet.</p>\n</section>",
       "chat": "",
       "unidentified": ""
     },
@@ -73,8 +73,43 @@
     }
   },
   "flags": {},
-  "img": "",
-  "effects": [],
+  "img": "icons/magic/symbols/runes-star-blue.webp",
+  "effects": [
+    {
+      "_id": "8OPOI73O8pNTeGBc",
+      "changes": [
+        {
+          "key": "system.traits.languages.value",
+          "mode": 2,
+          "value": "common",
+          "priority": null
+        },
+        {
+          "key": "system.traits.languages.value",
+          "mode": 2,
+          "value": "elvish",
+          "priority": null
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "icon": "icons/magic/symbols/runes-star-blue.webp",
+      "label": "High Elf Culture",
+      "origin": "Item.5RmvDX9cCPySRXaw",
+      "transfer": true,
+      "flags": {},
+      "tint": null,
+      "sort": 0
+    }
+  ],
   "folder": null,
   "sort": 0,
   "_stats": {

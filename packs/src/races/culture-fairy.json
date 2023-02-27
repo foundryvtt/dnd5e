@@ -7,7 +7,7 @@
   "type": "feat",
   "system": {
     "description": {
-      "value": "<p>Fairy culture focuses on beauty and harmony with the natural world, reveling in joy and amusement.</p>\n<p><strong><em>Fairy Magic.</em></strong> @UUID[Compendium.dnd5e.races.6C9dGOjAouC1mXP7]{Fairy Magic} You know the @Compendium[dnd5e.spells.SbSvZKkJASyk8jKo]{Druidcraft} cantrip.</p>\n<p>Starting at 3rd level, you can cast the @Compendium[dnd5e.spells.nqBDWkVOfcGZt4YU]{Faerie Fire} spell with this trait. Starting at 5th level, you can also cast the @Compendium[dnd5e.spells.WahI41a3goVUg0x1]{Enlarge/Reduce} spell with this trait. Once you cast @Compendium[dnd5e.spells.nqBDWkVOfcGZt4YU]{Faerie Fire} or @Compendium[dnd5e.spells.WahI41a3goVUg0x1]{Enlarge/Reduce} with this trait, you can't cast that spell with it again until you finish a long rest.</p>\n<p>Intelligence, Wisdom, or Charisma is your spellcasting ability for these spells when you cast them with this trait (choose when you select this race).</p>\n<p><strong><em>Reveler's Splendor.</em></strong> @UUID[Compendium.dnd5e.races.1pgrqIr3AF8ncRPq]{Reveler's Splendor} You have proficiency in the Performance skill.</p>\n<p><strong><em>Languages.</em></strong> You can speak, read, and write Common and Sylvan.</p>\n<section class=\"secret foundry-note\">\n<p><strong>Foundry Note</strong></p>\n<p>You can drag your choices from the above onto your character sheet and it will automatically update.</p>\n</section>",
+      "value": "<p>Fairy culture focuses on beauty and harmony with the natural world, reveling in joy and amusement.</p>\n<p><strong><em>Fairy Magic.</em></strong> @UUID[Compendium.dnd5e.races.6C9dGOjAouC1mXP7]{Fairy Magic} You know the @Compendium[dnd5e.spells.SbSvZKkJASyk8jKo]{Druidcraft} cantrip.</p>\n<p>Starting at 3rd level, you can cast the @Compendium[dnd5e.spells.nqBDWkVOfcGZt4YU]{Faerie Fire} spell with this trait. Starting at 5th level, you can also cast the @Compendium[dnd5e.spells.WahI41a3goVUg0x1]{Enlarge/Reduce} spell with this trait. Once you cast @Compendium[dnd5e.spells.nqBDWkVOfcGZt4YU]{Faerie Fire} or @Compendium[dnd5e.spells.WahI41a3goVUg0x1]{Enlarge/Reduce} with this trait, you can't cast that spell with it again until you finish a long rest.</p>\n<p>Intelligence, Wisdom, or Charisma is your spellcasting ability for these spells when you cast them with this trait (choose when you select this culture).</p>\n<p><strong><em>Reveler's Splendor.</em></strong> You have proficiency in the Performance skill.</p>\n<p><strong><em>Languages.</em></strong> You can speak, read, and write Common and Sylvan.</p>\n<section class=\"secret foundry-note\">\n<p><strong>Foundry Note</strong></p>\n<p>You can drag your choices from the above onto your character sheet and it will automatically update.</p>\n</section>",
       "chat": "",
       "unidentified": ""
     },
@@ -73,8 +73,49 @@
     }
   },
   "flags": {},
-  "img": "",
-  "effects": [],
+  "img": "icons/creatures/magical/fae-fairy-winged-glowing-green.webp",
+  "effects": [
+    {
+      "_id": "DYbMWkWpgBnntPzW",
+      "changes": [
+        {
+          "key": "system.skills.per.value",
+          "mode": 5,
+          "value": "1",
+          "priority": null
+        },
+        {
+          "key": "system.traits.languages.value",
+          "mode": 2,
+          "value": "common",
+          "priority": null
+        },
+        {
+          "key": "system.traits.languages.value",
+          "mode": 2,
+          "value": "sylvan",
+          "priority": null
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "icon": "icons/creatures/magical/fae-fairy-winged-glowing-green.webp",
+      "label": "Fairy Culture",
+      "origin": "Item.OhlAYOAmhR9LuqpT",
+      "transfer": true,
+      "flags": {},
+      "tint": null,
+      "sort": 0
+    }
+  ],
   "folder": null,
   "sort": 0,
   "_stats": {

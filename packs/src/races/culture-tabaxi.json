@@ -7,7 +7,7 @@
   "type": "feat",
   "system": {
     "description": {
-      "value": "<p>Tabaxi communities are small and remote. Sustained by hunting, crafting, and trading, members of these communities value artists and storytellers &mdash;whether their stories be true or not.</p>\n<p><strong><em>Tabaxi Art.</em></strong> @UUID[Compendium.dnd5e.races.R0B64NXw7yI8H051]{Tabaxi Art} You have proficiency with one of the following tools of your choice: calligrapher's supplies, a musical instrument, smith's tools, and woodcarver's tools.</p>\n<p><strong><em>Storytelling.</em></strong> @UUID[Compendium.dnd5e.races.MJlpdAwquWQ40hFJ]{Storytelling} You have proficiency in one of the following skills of your choice: Deception, Performance, and Persuasion.</p>\n<p><strong><em>Languages.</em></strong> You can speak, read, and write Common and one other language of your choice.</p>\n<section class=\"secret foundry-note\">\n<p><strong>Foundry Note</strong></p>\n<p>You can drag your choices from the above onto your character sheet and it will automatically update.</p>\n</section>",
+      "value": "<p>Tabaxi communities are small and remote. Sustained by hunting, crafting, and trading, members of these communities value artists and storytellers &mdash;whether their stories be true or not.</p>\n<p><strong><em>Tabaxi Art.</em></strong> You have proficiency with one of the following tools of your choice: calligrapher's supplies, a musical instrument, smith's tools, and woodcarver's tools.</p>\n<p><strong><em>Storytelling.</em></strong> You have proficiency in one of the following skills of your choice: Deception, Performance, and Persuasion.</p>\n<p><strong><em>Languages.</em></strong> You can speak, read, and write Common and one other language of your choice.</p>\n<section class=\"secret foundry-note\">\n<p><strong>Foundry Note</strong></p>\n<p>For your proficiencies from Tabaxi Art, Storytelling, and languages, select them manually on your character sheet.</p>\n</section>",
       "chat": "",
       "unidentified": ""
     },
@@ -73,8 +73,37 @@
     }
   },
   "flags": {},
-  "img": "",
-  "effects": [],
+  "img": "icons/creatures/mammals/cat-hunched-glowing-red.webp",
+  "effects": [
+    {
+      "_id": "IKVVzVyWC000bJSQ",
+      "changes": [
+        {
+          "key": "system.traits.languages.value",
+          "mode": 2,
+          "value": "common",
+          "priority": null
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "icon": "icons/creatures/mammals/cat-hunched-glowing-red.webp",
+      "label": "Tabaxi Culture",
+      "origin": "Item.A0e0DIw8RBKxs8Hq",
+      "transfer": true,
+      "flags": {},
+      "tint": null,
+      "sort": 0
+    }
+  ],
   "folder": null,
   "sort": 0,
   "_stats": {

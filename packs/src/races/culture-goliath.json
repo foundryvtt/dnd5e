@@ -7,7 +7,7 @@
   "type": "feat",
   "system": {
     "description": {
-      "value": "<p>Goliath society is based on the principle of survival of the fittest, taken to an extreme. Every member of these nomadic tribes must be able to keep up with the others, or risk being left behind. Individuals that don't contribute to the success of the group are exiled, making those who survive this brutal gauntlet driven and indomitable.</p>\n<p><strong><em>Driven Athlete.</em></strong> @UUID[Compendium.dnd5e.races.Tmcz9btNKSc13OJs]{Driven Athlete} You have proficiency in the Athletics skill.</p>\n<p><strong><em>Desperate Measures.</em></strong> @UUID[Compendium.dnd5e.races.c4S6w2OKSMuXqqBX]{Desperate Measures} When you fail an attack roll, ability check, or saving throw, you can instead choose to succeed. When you do so, you gain a level of exhaustion.</p>\n<p><strong><em>Unshakable.</em></strong> @UUID[Compendium.dnd5e.races.JsPnf9VEkTsopjud]{Unshakable} You have advantage on saving throws against being stunned or paralyzed.</p>\n<p><strong><em>Languages.</em></strong> You can speak, read, and write Common and Giant.</p>\n<section class=\"secret foundry-note\">\n<p><strong>Foundry Note</strong></p>\n<p>You can drag your choices from the above onto your character sheet and it will automatically update.</p>\n</section>",
+      "value": "<p>Goliath society is based on the principle of survival of the fittest, taken to an extreme. Every member of these nomadic tribes must be able to keep up with the others, or risk being left behind. Individuals that don't contribute to the success of the group are exiled, making those who survive this brutal gauntlet driven and indomitable.</p>\n<p><strong><em>Driven Athlete.</em></strong> You have proficiency in the Athletics skill.</p>\n<p><strong><em>Desperate Measures.</em></strong> @UUID[Compendium.dnd5e.races.c4S6w2OKSMuXqqBX]{Desperate Measures} When you fail an attack roll, ability check, or saving throw, you can instead choose to succeed. When you do so, you gain a level of exhaustion.</p>\n<p><strong><em>Unshakable.</em></strong> @UUID[Compendium.dnd5e.races.JsPnf9VEkTsopjud]{Unshakable} You have advantage on saving throws against being stunned or paralyzed.</p>\n<p><strong><em>Languages.</em></strong> You can speak, read, and write Common and Giant.</p>\n<section class=\"secret foundry-note\">\n<p><strong>Foundry Note</strong></p>\n<p>You can drag your choices from the above onto your character sheet and it will automatically update.</p>\n</section>",
       "chat": "",
       "unidentified": ""
     },
@@ -73,8 +73,49 @@
     }
   },
   "flags": {},
-  "img": "",
-  "effects": [],
+  "img": "icons/magic/earth/strike-fist-stone-gray.webp",
+  "effects": [
+    {
+      "_id": "3DYygXWIsMYJ46hB",
+      "changes": [
+        {
+          "key": "system.skills.ath.value",
+          "mode": 5,
+          "value": "1",
+          "priority": null
+        },
+        {
+          "key": "system.traits.languages.value",
+          "mode": 2,
+          "value": "common",
+          "priority": null
+        },
+        {
+          "key": "system.traits.languages.value",
+          "mode": 2,
+          "value": "giant",
+          "priority": null
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "icon": "icons/magic/earth/strike-fist-stone-gray.webp",
+      "label": "Goliath Culture",
+      "origin": "Item.fyfMvTMBPgHCXzNo",
+      "transfer": true,
+      "flags": {},
+      "tint": null,
+      "sort": 0
+    }
+  ],
   "folder": null,
   "sort": 0,
   "_stats": {

@@ -73,8 +73,43 @@
     }
   },
   "flags": {},
-  "img": "",
-  "effects": [],
+  "img": "icons/magic/light/explosion-star-glow-silhouette.webp",
+  "effects": [
+    {
+      "_id": "dXBNajENlzJqMnF3",
+      "changes": [
+        {
+          "key": "system.traits.languages.value",
+          "mode": 2,
+          "value": "common",
+          "priority": null
+        },
+        {
+          "key": "system.traits.languages.value",
+          "mode": 2,
+          "value": "gith",
+          "priority": null
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "icon": "icons/magic/light/explosion-star-glow-silhouette.webp",
+      "label": "Githzerai Culture",
+      "origin": "Item.0JXXcIIHt30SgSsE",
+      "transfer": true,
+      "flags": {},
+      "tint": null,
+      "sort": 0
+    }
+  ],
   "folder": null,
   "sort": 0,
   "_stats": {

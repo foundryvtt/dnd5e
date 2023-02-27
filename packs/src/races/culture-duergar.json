@@ -7,7 +7,7 @@
   "type": "feat",
   "system": {
     "description": {
-      "value": "<p>Characters who grow up in duergar communities take on several distinctive cultural traits. Duergar society is rigid and pragmatic above all else, surviving unchanged in the deepest depths of the earth. The duergar value resilience and fortitude, and condition themselves to resist the strength and deception of others. Near strongholds of the dark elves, such resilience is a prerequisite for survival.</p>\n<p><strong><em>Darkvision.</em></strong> @UUID[Compendium.dnd5e.races.dLTcJPa5Z3SKdN3q]{Darkvision} Accustomed to life underground, you have superior vision in dark and dim conditions. You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can't discern color in darkness, only shades of gray.</p>\n<p><strong><em>Duergar Weapon Training.</em></strong> @UUID[Compendium.dnd5e.races.fxk87rdq7eESQQrs]{Duergar Weapon Training} You have proficiency with the battleaxe, handaxe, heavy crossbow, and war pick.</p>\n<p><strong><em>Duergar Resilience.</em></strong> @UUID[Compendium.dnd5e.races.fIfiLL0c2UxtDybP]{Duergar Resilience} You have advantage on saving throws against illusions and against being charmed or paralyzed.</p>\n<p><strong><em>Languages.</em></strong> You can speak, read, and write Common, Dwarvish, and Undercommon.</p>\n<section class=\"secret foundry-note\">\n<p><strong>Foundry Note</strong></p>\n<p>You can drag your choices from the above onto your character sheet and it will automatically update.</p>\n</section>",
+      "value": "<p>Characters who grow up in duergar communities take on several distinctive cultural traits. Duergar society is rigid and pragmatic above all else, surviving unchanged in the deepest depths of the earth. The duergar value resilience and fortitude, and condition themselves to resist the strength and deception of others. Near strongholds of the dark elves, such resilience is a prerequisite for survival.</p>\n<p><strong><em>Darkvision.</em></strong> Accustomed to life underground, you have superior vision in dark and dim conditions. You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can't discern color in darkness, only shades of gray.</p>\n<p><strong><em>Duergar Weapon Training.</em></strong> You have proficiency with the battleaxe, handaxe, heavy crossbow, and war pick.</p>\n<p><strong><em>Duergar Resilience.</em></strong> @UUID[Compendium.dnd5e.races.fIfiLL0c2UxtDybP]{Duergar Resilience} You have advantage on saving throws against illusions and against being charmed or paralyzed.</p>\n<p><strong><em>Languages.</em></strong> You can speak, read, and write Common, Dwarvish, and Undercommon.</p>\n<section class=\"secret foundry-note\">\n<p><strong>Foundry Note</strong></p>\n<p>You can drag your choices from the above onto your character sheet and it will automatically update.</p>\n</section>",
       "chat": "",
       "unidentified": ""
     },
@@ -73,8 +73,79 @@
     }
   },
   "flags": {},
-  "img": "",
-  "effects": [],
+  "img": "icons/tools/smithing/crucible-round.webp",
+  "effects": [
+    {
+      "_id": "O2OZlmcvcvqreVKc",
+      "changes": [
+        {
+          "key": "system.attributes.senses.darkvision",
+          "mode": 5,
+          "value": "60",
+          "priority": null
+        },
+        {
+          "key": "system.traits.weaponProf.value",
+          "mode": 2,
+          "value": "battleaxe",
+          "priority": null
+        },
+        {
+          "key": "system.traits.weaponProf.value",
+          "mode": 2,
+          "value": "handaxe",
+          "priority": null
+        },
+        {
+          "key": "system.traits.weaponProf.value",
+          "mode": 2,
+          "value": "heavycrossbow",
+          "priority": null
+        },
+        {
+          "key": "system.traits.weaponProf.value",
+          "mode": 2,
+          "value": "warpick",
+          "priority": null
+        },
+        {
+          "key": "system.traits.languages.value",
+          "mode": 2,
+          "value": "common",
+          "priority": null
+        },
+        {
+          "key": "system.traits.languages.value",
+          "mode": 2,
+          "value": "dwarvish",
+          "priority": null
+        },
+        {
+          "key": "system.traits.languages.value",
+          "mode": 2,
+          "value": "undercommon",
+          "priority": null
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "icon": "icons/tools/smithing/crucible-round.webp",
+      "label": "Duergar Culture",
+      "origin": "Item.CQvOFn5zHZi2xOFc",
+      "transfer": true,
+      "flags": {},
+      "tint": null,
+      "sort": 0
+    }
+  ],
   "folder": null,
   "sort": 0,
   "_stats": {

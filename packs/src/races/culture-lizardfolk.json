@@ -7,7 +7,7 @@
   "type": "feat",
   "system": {
     "description": {
-      "value": "<p>Lizardfolk communities are often loose associations of families living in hostile jungles, swamps, and bogs. These communities prize self-sufficiency and survival skills above all else, and decry wasting energy on non-essential skills.</p>\n<p><strong><em>Cunning Artisan.</em></strong> @UUID[Compendium.dnd5e.races.gthhXXcQefoGTEWx]{Cunning Artisan} As part of a short rest, you can harvest bone and hide from a slain beast, construct, dragon, monstrosity, or plant creature of size Small or larger to create one of the following items: a shield, a club, a javelin, or 1d4 darts or blowgun needles. To use this trait, you need a blade, such as a dagger, or appropriate artisan's tools, such as leatherworker's tools.</p>\n<p><strong><em>Hunter's Lore.</em></strong> @UUID[Compendium.dnd5e.races.PlWaTRDWILqQEF9j]{Hunter's Lore} You have proficiency in one of the following skills of your choice: Animal Handling, Nature, Perception, Stealth, and Survival.</p>\n<p><strong><em>Languages.</em></strong> You can speak Common, Draconic, and two additional languages of your choice.</p>\n<section class=\"secret foundry-note\">\n<p><strong>Foundry Note</strong></p>\n<p>You can drag your choices from the above onto your character sheet and it will automatically update.</p>\n</section>",
+      "value": "<p>Lizardfolk communities are often loose associations of families living in hostile jungles, swamps, and bogs. These communities prize self-sufficiency and survival skills above all else, and decry wasting energy on non-essential skills.</p>\n<p><strong><em>Cunning Artisan.</em></strong> @UUID[Compendium.dnd5e.races.gthhXXcQefoGTEWx]{Cunning Artisan} As part of a short rest, you can harvest bone and hide from a slain beast, construct, dragon, monstrosity, or plant creature of size Small or larger to create one of the following items: a shield, a club, a javelin, or 1d4 darts or blowgun needles. To use this trait, you need a blade, such as a dagger, or appropriate artisan's tools, such as leatherworker's tools.</p>\n<p><strong><em>Hunter's Lore.</em></strong> You have proficiency in one of the following skills of your choice: Animal Handling, Nature, Perception, Stealth, and Survival.</p>\n<p><strong><em>Languages.</em></strong> You can speak Common, Draconic, and two additional languages of your choice.</p>\n<section class=\"secret foundry-note\">\n<p><strong>Foundry Note</strong></p>\n<p>You can drag your choices from the above onto your character sheet and it will automatically update. For your skill from Hunter's Lore, and your additional languages, select them manually on your character sheet.</p>\n</section>",
       "chat": "",
       "unidentified": ""
     },
@@ -73,8 +73,43 @@
     }
   },
   "flags": {},
-  "img": "",
-  "effects": [],
+  "img": "icons/creatures/reptiles/lizard-iguana-green.webp",
+  "effects": [
+    {
+      "_id": "n5uPtctHIO0wPdRp",
+      "changes": [
+        {
+          "key": "system.traits.languages.value",
+          "mode": 2,
+          "value": "common",
+          "priority": null
+        },
+        {
+          "key": "system.traits.languages.value",
+          "mode": 2,
+          "value": "draconic",
+          "priority": null
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "icon": "icons/creatures/reptiles/lizard-iguana-green.webp",
+      "label": "Lizardfolk Culture",
+      "origin": "Item.JNo14tuDSc7kNRsP",
+      "transfer": true,
+      "flags": {},
+      "tint": null,
+      "sort": 0
+    }
+  ],
   "folder": null,
   "sort": 0,
   "_stats": {

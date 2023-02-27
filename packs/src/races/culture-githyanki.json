@@ -7,7 +7,7 @@
   "type": "feat",
   "system": {
     "description": {
-      "value": "<p>Githyanki culture venerates strength, martial prowess, and domination. Conditioned to fight and die for their Queen, they are trained from birth as warriors.</p>\n<p><strong><em>Martial Prodigy.</em></strong> @UUID[Compendium.dnd5e.races.GC7talgp20wh90A4]{Martial Prodigy} You are proficient with light and medium armor, and with shortswords and longswords.</p>\n<p><strong><em>Githyanki Psionics.</em></strong> @UUID[Compendium.dnd5e.races.ISVWd8FTNfIE3LDp]{Githyanki Psionics} If you are a gith, your innate psionics are strengthened with practice.</p>\n<p>When you reach 3rd level, you can cast the @Compendium[dnd5e.spells.OMDXBJQ5NCFPBX37]{Surge} spell once with this trait, and you regain the ability to do so when you finish a long rest. When you reach 5th level, you can cast the @Compendium[dnd5e.spells.wqfAVANuQonNBgnL]{Misty Step} spell once with this trait, and you regain the ability to do so when you finish a long rest.</p>\n<p>Intelligence is your spellcasting ability for these spells. When you cast them with this trait, they don't require components.</p>\n<p><strong><em>Languages.</em></strong> You can speak, read, and write Common, Gith, and one language of your choice.</p>\n<section class=\"secret foundry-note\">\n<p><strong>Foundry Note</strong></p>\n<p>You can drag your choices from the above onto your character sheet and it will automatically update.</p>\n</section>",
+      "value": "<p>Githyanki culture venerates strength, martial prowess, and domination. Conditioned to fight and die for their Queen, they are trained from birth as warriors.</p>\n<p><strong><em>Martial Prodigy.</em></strong> You are proficient with light and medium armor, and with shortswords and longswords.</p>\n<p><strong><em>Githyanki Psionics.</em></strong> @UUID[Compendium.dnd5e.races.ISVWd8FTNfIE3LDp]{Githyanki Psionics} If you are a gith, your innate psionics are strengthened with practice.</p>\n<p>When you reach 3rd level, you can cast the @Compendium[dnd5e.spells.OMDXBJQ5NCFPBX37]{Surge} spell once with this trait, and you regain the ability to do so when you finish a long rest. When you reach 5th level, you can cast the @Compendium[dnd5e.spells.wqfAVANuQonNBgnL]{Misty Step} spell once with this trait, and you regain the ability to do so when you finish a long rest.</p>\n<p>Intelligence is your spellcasting ability for these spells. When you cast them with this trait, they don't require components.</p>\n<p><strong><em>Languages.</em></strong> You can speak, read, and write Common, Gith, and one language of your choice.</p>\n<section class=\"secret foundry-note\">\n<p><strong>Foundry Note</strong></p>\n<p>You can drag your choices from the above onto your character sheet and it will automatically update. For your language of your choice, select it manually on your character sheet.</p>\n</section>",
       "chat": "",
       "unidentified": ""
     },
@@ -73,8 +73,79 @@
     }
   },
   "flags": {},
-  "img": "",
-  "effects": [],
+  "img": "icons/magic/light/explosion-star-glow-silhouette.webp",
+  "effects": [
+    {
+      "_id": "3Za2UoqEGPRZamRi",
+      "changes": [
+        {
+          "key": "system.traits.armorProf.value",
+          "mode": 2,
+          "value": "lgt",
+          "priority": null
+        },
+        {
+          "key": "system.traits.armorProf.value",
+          "mode": 2,
+          "value": "med",
+          "priority": null
+        },
+        {
+          "key": "system.traits.armorProf.value",
+          "mode": 2,
+          "value": "lightshield",
+          "priority": null
+        },
+        {
+          "key": "system.traits.armorProf.value",
+          "mode": 2,
+          "value": "mediumshield",
+          "priority": null
+        },
+        {
+          "key": "system.traits.weaponProf.value",
+          "mode": 2,
+          "value": "shortsword",
+          "priority": null
+        },
+        {
+          "key": "system.traits.weaponProf.value",
+          "mode": 2,
+          "value": "longsword",
+          "priority": null
+        },
+        {
+          "key": "system.traits.languages.value",
+          "mode": 2,
+          "value": "common",
+          "priority": null
+        },
+        {
+          "key": "system.traits.languages.value",
+          "mode": 2,
+          "value": "gith",
+          "priority": null
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "icon": "icons/magic/light/explosion-star-glow-silhouette.webp",
+      "label": "Githyanki Culture",
+      "origin": "Item.D0kmlociVfuK5wdd",
+      "transfer": true,
+      "flags": {},
+      "tint": null,
+      "sort": 0
+    }
+  ],
   "folder": null,
   "sort": 0,
   "_stats": {

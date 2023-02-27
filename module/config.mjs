@@ -565,8 +565,8 @@ DND5E.armorIds = {
  */
 DND5E.shieldIds = {
   lightshield: "8z0HaF1hIALUttYW",
-  shield: "sSs3hSzkKBMNBgTs",
-  shieldheavy: "qTYk4Pzb4VOpP0fL"
+  mediumshield: "sSs3hSzkKBMNBgTs",
+  heavyshield: "qTYk4Pzb4VOpP0fL"
 };
 
 /**

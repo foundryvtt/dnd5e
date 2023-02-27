@@ -7,7 +7,7 @@
   "type": "feat",
   "system": {
     "description": {
-      "value": "<p>Centaur culture values excellence in physical skills such as archery, hunting, and tracking.</p>\n<p><strong><em>Centaur Weapon Training.</em></strong> @UUID[Compendium.dnd5e.races.vwesPLNtrYm8GkQr]{Centaur Weapon Training} You have proficiency with the longbow.</p>\n<p><strong><em>Survivor.</em></strong> @UUID[Compendium.dnd5e.races.LOJlRiVZDNSN4tDh]{Survivor} You have proficiency in one of the following skills of your choice: Animal Handling, Medicine, Nature, or Survival.</p>\n<p><strong><em>Languages.</em></strong> You can speak, read, and write Common and Sylvan.</p>\n<section class=\"secret foundry-note\">\n<p><strong>Foundry Note</strong></p>\n<p>You can drag your choices from the above onto your character sheet and it will automatically update.</p>\n</section>",
+      "value": "<p>Centaur culture values excellence in physical skills such as archery, hunting, and tracking.</p>\n<p><strong><em>Centaur Weapon Training.</em></strong> You have proficiency with the longbow.</p>\n<p><strong><em>Survivor.</em></strong> You have proficiency in one of the following skills of your choice: Animal Handling, Medicine, Nature, or Survival.</p>\n<p><strong><em>Languages.</em></strong> You can speak, read, and write Common and Sylvan.</p>\n<section class=\"secret foundry-note\">\n<p><strong>Foundry Note</strong></p>\n<p>You should update the skill given by the Survivor feature manually.</p>\n</section>",
       "chat": "",
       "unidentified": ""
     },
@@ -73,8 +73,49 @@
     }
   },
   "flags": {},
-  "img": "",
-  "effects": [],
+  "img": "icons/weapons/bows/longbow-recurve-brown.webp",
+  "effects": [
+    {
+      "_id": "SyvGEqp4ujwrDbKp",
+      "changes": [
+        {
+          "key": "system.traits.weaponProf.value",
+          "mode": 2,
+          "value": "longbow",
+          "priority": null
+        },
+        {
+          "key": "system.traits.languages.value",
+          "mode": 2,
+          "value": "common",
+          "priority": null
+        },
+        {
+          "key": "system.traits.languages.value",
+          "mode": 2,
+          "value": "sylvan",
+          "priority": null
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "icon": "icons/weapons/bows/longbow-recurve-brown.webp",
+      "label": "Centaur Culture",
+      "origin": "Item.BwER7dzQkOMMjjQp",
+      "transfer": true,
+      "flags": {},
+      "tint": null,
+      "sort": 0
+    }
+  ],
   "folder": null,
   "sort": 0,
   "_stats": {

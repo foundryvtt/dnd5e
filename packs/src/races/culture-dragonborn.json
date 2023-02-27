@@ -7,7 +7,7 @@
   "type": "feat",
   "system": {
     "description": {
-      "value": "<p>Dragonborn culture is intense and exciting, leading those raised within it to be striking and remarkable individuals.</p>\n<p><strong><em>Draconic Lore.</em></strong> @UUID[Compendium.dnd5e.races.QxG6sMhZ35eTBC4P]{Draconic Lore} You gain proficiency with one of the following skills of your choice: Arcana, History, Nature, or Survival.</p>\n<p><strong><em>Dragon Sorcery.</em></strong> @UUID[Compendium.dnd5e.races.Bo9tmqqNVBjrwzIJ]{Dragon Sorcery} You know the @Compendium[dnd5e.spells.Z9FETGPT6M1R0JBX]{Gust} cantrip. Once you reach 3rd level, you can cast the @Compendium[dnd5e.spells.MI9FS18LGRMV16S6]{Absorb Elements} spell as a 2nd-level spell once with this trait and regain the ability to do so when you finish a long rest. Once you reach 5th level, you can also cast the @Compendium[dnd5e.spells.HMLDWBDO71VFLVSX]{Dragon's Breath} spell once with this trait and regain the ability to do so when you finish a long rest. Charisma is your spellcasting ability for these spells.</p>\n<p><strong><em>Languages.</em></strong> You can speak, read, and write Common and Draconic.</p>\n<section class=\"secret foundry-note\">\n<p><strong>Foundry Note</strong></p>\n<p>You can drag your choices from the above onto your character sheet and it will automatically update.</p>\n</section>",
+      "value": "<p>Dragonborn culture is intense and exciting, leading those raised within it to be striking and remarkable individuals.</p>\n<p><strong><em>Draconic Lore.</em></strong> You gain proficiency with one of the following skills of your choice: Arcana, History, Nature, or Survival.</p>\n<p><strong><em>Dragon Sorcery.</em></strong> @UUID[Compendium.dnd5e.races.Bo9tmqqNVBjrwzIJ]{Dragon Sorcery} You know the @Compendium[dnd5e.spells.Z9FETGPT6M1R0JBX]{Gust} cantrip. Once you reach 3rd level, you can cast the @Compendium[dnd5e.spells.MI9FS18LGRMV16S6]{Absorb Elements} spell as a 2nd-level spell once with this trait and regain the ability to do so when you finish a long rest. Once you reach 5th level, you can also cast the @Compendium[dnd5e.spells.HMLDWBDO71VFLVSX]{Dragon's Breath} spell once with this trait and regain the ability to do so when you finish a long rest. Charisma is your spellcasting ability for these spells.</p>\n<p><strong><em>Languages.</em></strong> You can speak, read, and write Common and Draconic.</p>\n<section class=\"secret foundry-note\">\n<p><strong>Foundry Note</strong></p>\n<p>You should update the skill given by the Draconic Lore feature manually.</p>\n</section>",
       "chat": "",
       "unidentified": ""
     },
@@ -74,7 +74,42 @@
   },
   "flags": {},
   "img": "",
-  "effects": [],
+  "effects": [
+    {
+      "_id": "5krkv2oMQOHdJscn",
+      "changes": [
+        {
+          "key": "system.traits.languages.value",
+          "mode": 2,
+          "value": "common",
+          "priority": null
+        },
+        {
+          "key": "system.traits.languages.value",
+          "mode": 2,
+          "value": "draconic",
+          "priority": null
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "icon": "icons/weapons/bows/longbow-recurve-brown.webp",
+      "label": "Dragonborn Culture",
+      "origin": "Item.YWX8bbQOZaxPciMU",
+      "transfer": true,
+      "flags": {},
+      "tint": null,
+      "sort": 0
+    }
+  ],
   "folder": null,
   "sort": 0,
   "_stats": {

@@ -7,7 +7,7 @@
   "type": "feat",
   "system": {
     "description": {
-      "value": "<p>Kenku communities are usually small, located on the outskirts of human cities or in abandoned ruins. Such communities are often dominated by criminal gangs or thieves guilds.</p>\n<p><strong><em>Kenku Training.</em></strong> @UUID[Compendium.dnd5e.races.qmb8TttM8TkxRmx6]{Kenku Training} You have proficiency with thieves' tools, the Stealth skill, and the Sleight of Hand skill.</p>\n<p><strong><em>Languages.</em></strong> You can read and write Common and Auran, and are fairly adept at mimicking sounds you have heard before. Most communication in kenku communities is made through such mimicry, and each community builds their own unique lexicon of \"words\".</p>\n<section class=\"secret foundry-note\">\n<p><strong>Foundry Note</strong></p>\n<p>You can drag your choices from the above onto your character sheet and it will automatically update.</p>\n</section>",
+      "value": "<p>Kenku communities are usually small, located on the outskirts of human cities or in abandoned ruins. Such communities are often dominated by criminal gangs or thieves guilds.</p>\n<p><strong><em>Kenku Training.</em></strong> You have proficiency with thieves' tools, the Stealth skill, and the Sleight of Hand skill.</p>\n<p><strong><em>Languages.</em></strong> You can read and write Common and Auran, and are fairly adept at mimicking sounds you have heard before. Most communication in kenku communities is made through such mimicry, and each community builds their own unique lexicon of \"words\".</p>",
       "chat": "",
       "unidentified": ""
     },
@@ -74,7 +74,60 @@
   },
   "flags": {},
   "img": "",
-  "effects": [],
+  "effects": [
+    {
+      "_id": "5axc7HZYuddHBmJE",
+      "changes": [
+        {
+          "key": "system.skills.slt.value",
+          "mode": 5,
+          "value": "1",
+          "priority": null
+        },
+        {
+          "key": "system.skills.ste.value",
+          "mode": 5,
+          "value": "1",
+          "priority": null
+        },
+        {
+          "key": "system.traits.toolProf.value",
+          "mode": 2,
+          "value": "thief",
+          "priority": null
+        },
+        {
+          "key": "system.traits.languages.value",
+          "mode": 2,
+          "value": "common",
+          "priority": null
+        },
+        {
+          "key": "system.traits.languages.value",
+          "mode": 2,
+          "value": "auran",
+          "priority": null
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "icon": "icons/creatures/mammals/rabbit-movement-glowing-green.webp",
+      "label": "Harengon Culture",
+      "origin": "Item.OdjXeyh32vd9PZnA",
+      "transfer": true,
+      "flags": {},
+      "tint": null,
+      "sort": 0
+    }
+  ],
   "folder": null,
   "sort": 0,
   "_stats": {

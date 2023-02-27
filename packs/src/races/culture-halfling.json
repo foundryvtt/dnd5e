@@ -7,7 +7,7 @@
   "type": "feat",
   "system": {
     "description": {
-      "value": "<p>Halfling culture is warm and welcoming, placing value in hospitality and good neighborliness. Those who grew up among halflings often make good comrades and allies.</p>\n<p><strong><em>Friendly Folk.</em></strong> @UUID[Compendium.dnd5e.races.RKCpoQOo6vXnORK4]{Friendly Folk} You are proficient in the Persuasion skill and with cook's tools.</p>\n<p><strong><em>Halfling Endurance.</em></strong> @UUID[Compendium.dnd5e.races.CmRd0zVxJKxKCKPH]{Halfling Endurance} You are proficient in the Athletics skill.</p>\n<p><strong><em>Brave.</em></strong> @UUID[Compendium.dnd5e.races.iQslcWHnjQ3HvC04]{Brave} You have advantage on saving throws against being frightened.</p>\n<p><strong><em>Languages.</em></strong> You can speak, read, and write Common and Halfling.</p>\n<section class=\"secret foundry-note\">\n<p><strong>Foundry Note</strong></p>\n<p>You can drag your choices from the above onto your character sheet and it will automatically update.</p>\n</section>",
+      "value": "<p>Halfling culture is warm and welcoming, placing value in hospitality and good neighborliness. Those who grew up among halflings often make good comrades and allies.</p>\n<p><strong><em>Friendly Folk.</em></strong> You are proficient in the Persuasion skill and with cook's tools.</p>\n<p><strong><em>Halfling Endurance.</em></strong> You are proficient in the Athletics skill.</p>\n<p><strong><em>Brave.</em></strong> @UUID[Compendium.dnd5e.races.iQslcWHnjQ3HvC04]{Brave} You have advantage on saving throws against being frightened.</p>\n<p><strong><em>Languages.</em></strong> You can speak, read, and write Common and Halfling.</p>\n<section class=\"secret foundry-note\">\n<p><strong>Foundry Note</strong></p>\n<p>You can drag your choices from the above onto your character sheet and it will automatically update.</p>\n</section>",
       "chat": "",
       "unidentified": ""
     },
@@ -73,8 +73,61 @@
     }
   },
   "flags": {},
-  "img": "",
-  "effects": [],
+  "img": "icons/magic/nature/cornucopia-orange.webp",
+  "effects": [
+    {
+      "_id": "DNkHeVUbAxkEsFlA",
+      "changes": [
+        {
+          "key": "system.skills.per.value",
+          "mode": 5,
+          "value": "1",
+          "priority": null
+        },
+        {
+          "key": "system.traits.toolProf.value",
+          "mode": 5,
+          "value": "cook",
+          "priority": null
+        },
+        {
+          "key": "system.skills.ath.value",
+          "mode": 5,
+          "value": "1",
+          "priority": null
+        },
+        {
+          "key": "system.traits.languages.value",
+          "mode": 2,
+          "value": "common",
+          "priority": null
+        },
+        {
+          "key": "system.traits.languages.value",
+          "mode": 2,
+          "value": "halfling",
+          "priority": null
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "icon": "icons/magic/nature/cornucopia-orange.webp",
+      "label": "Halfling Culture",
+      "origin": "Item.uJv6ZsZSokGzNerU",
+      "transfer": true,
+      "flags": {},
+      "tint": null,
+      "sort": 0
+    }
+  ],
   "folder": null,
   "sort": 0,
   "_stats": {
