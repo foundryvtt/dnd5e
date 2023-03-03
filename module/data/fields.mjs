@@ -245,4 +245,14 @@ export class MappingField extends foundry.data.fields.ObjectField {
       return obj;
     }, {});
   }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  _getField(path) {
+    if ( path.length === 0 ) return this;
+    else if ( path.length === 1 ) return this.model;
+    path.shift();
+    return this.model._getField(path);
+  }
 }
