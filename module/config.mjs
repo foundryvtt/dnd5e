@@ -1618,6 +1618,12 @@ DND5E.characterFlags = {
     section: "DND5E.Feats",
     type: Boolean
   },
+  initiativeProficient: {
+    name: "DND5E.FlagsInitiativeProficient",
+    hint: "DND5E.FlagsInitiativeProficientHint",
+    section: "DND5E.Feats",
+    type: Boolean
+  },
   initiativeAlert: {
     name: "DND5E.FlagsAlert",
     hint: "DND5E.FlagsAlertHint",

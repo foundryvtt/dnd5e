@@ -639,7 +639,8 @@ export default class Actor5e extends Actor {
     // Initiative proficiency
     const prof = this.system.attributes.prof ?? 0;
     const ra = flags.remarkableAthlete && ["str", "dex", "con"].includes(abilityId);
-    init.prof = new Proficiency(prof, (flags.jackOfAllTrades || ra) ? 0.5 : 0, !ra);
+    let profMultiplier = Math.max((flags.jackOfAllTrades || ra) ? 0.5 : 0, flags.initiativeProficient ? 1 : 0);
+    init.prof = new Proficiency(prof, profMultiplier, !ra);
 
     // Total initiative includes all numeric terms
     const initBonus = simplifyBonus(init.bonus, bonusData);
