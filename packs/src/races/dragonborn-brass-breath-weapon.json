@@ -1,5 +1,5 @@
 {
-  "_id": "vwK9orr85tqom6nQ",
+  "_id": "TAsdoFFXjgtXj5XS",
   "name": "Dragonborn: Breath Weapon",
   "ownership": {
     "default": 0
@@ -7,7 +7,7 @@
   "type": "feat",
   "system": {
     "description": {
-      "value": "<p>You can use your action to exhale destructive energy. Your draconic ancestry determines the size, shape, and damage type of the exhalation.</p>\n<p>When you use your breath weapon, each creature in the area of the exhalation must make a saving throw, the type of which is determined by your draconic ancestry. The DC for this saving throw equals 8 + your Constitution modifier + your proficiency bonus. Roll a number of d6s equal to 2 + half your level (rounded down) as damage. A creature takes full damage on a failed save, and half as much on a successful one.</p>\n<p>After you use your breath weapon, you can't use it again until you finish a short or long rest.</p>",
+      "value": "<p>You can use your action to exhale destructive fire in a 5 by 30 foot line. When you use your breath weapon, each creature in the area of the exhalation must make a Dexterity saving throw. The DC for this saving throw equals 8 + your Constitution modifier + your proficiency bonus. Roll a number of d6s equal to 2 + half your level (rounded down) as fire damage. A creature takes full damage on a failed save, and half as much on a successful one.</p>\n<p>After you use your breath weapon, you can't use it again until you finish a short or long rest.</p>",
       "chat": "",
       "unidentified": ""
     },
@@ -23,13 +23,13 @@
     },
     "cover": null,
     "target": {
-      "value": null,
-      "width": null,
-      "units": "",
-      "type": ""
+      "value": "30",
+      "width": "5",
+      "units": "ft",
+      "type": "line"
     },
     "range": {
-      "value": null,
+      "value": "self",
       "long": null,
       "units": ""
     },
@@ -56,7 +56,7 @@
       "parts": [
         [
           "(2+@details.level/2)d6",
-          ""
+          "fire"
         ]
       ],
       "versatile": ""

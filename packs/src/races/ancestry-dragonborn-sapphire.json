@@ -1,0 +1,117 @@
+{
+  "_id": "9JQNJPB9d7Ron8GU",
+  "name": "Ancestry: Sapphire Dragonborn",
+  "ownership": {
+    "default": 0
+  },
+  "type": "feat",
+  "system": {
+    "description": {
+      "value": "<p>Your draconic heritage manifests in a variety of traits you share with other dragonborn.</p>\n<p><strong><em>Age.</em></strong> Young dragonborn grow quickly. They walk hours after hatching, attain the size and development of a 10-year-old human child by the age of 3, and reach adulthood by 15. They live to be around 80.</p>\n<p><strong><em>Size.</em></strong> Dragonborn are taller and heavier than humans, standing well over 6 feet tall and averaging almost 250 pounds. Your size is Medium.</p>\n<p><strong><em>Speed.</em></strong> Your base walking speed is 30 feet.</p>\n<p><strong><em>Breath Weapon.</em></strong> @UUID[Compendium.dnd5e.races.eRUapr0kLMMF2wQP]{Breath Weapon} You can use your action to exhale destructive thunder energy in a 15 foot cone. When you use your breath weapon, each creature in the area of the exhalation must make a Dexterity saving throw. The DC for this saving throw equals 8 + your Constitution modifier + your proficiency bonus. Roll a number of d6s equal to 2 + half your level (rounded down) as thunder damage. A creature takes full damage on a failed save, and half as much on a successful one.</p>\n<p>After you use your breath weapon, you can't use it again until you finish a short or long rest.</p>\n<p><strong><em>Damage Resistance.</em></strong> You have resistance to thunder damage.</p>\n<section class=\"secret foundry-note\">\n<p><strong>Foundry Note</strong></p>\n<p>You can drag your choices from the above onto your character sheet and it will automatically update.</p>\n</section>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "SRD 5.1",
+    "activation": {
+      "type": "",
+      "cost": null,
+      "condition": ""
+    },
+    "duration": {
+      "value": "",
+      "units": ""
+    },
+    "cover": null,
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": ""
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": ""
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": null,
+      "recovery": ""
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
+    "ability": null,
+    "actionType": "",
+    "attackBonus": "",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "type": {
+      "value": "class",
+      "subtype": ""
+    },
+    "requirements": "",
+    "recharge": {
+      "value": null,
+      "charged": false
+    }
+  },
+  "flags": {},
+  "img": "icons/creatures/reptiles/lizard-iguana-green.webp",
+  "effects": [
+    {
+      "_id": "rzcP3tWvjHFhn4XC",
+      "changes": [
+        {
+          "key": "system.traits.dr.value",
+          "mode": 2,
+          "value": "thunder",
+          "priority": null
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "icon": "icons/creatures/reptiles/lizard-iguana-green.webp",
+      "label": "Sapphire Dragonborn Resistance",
+      "origin": "Item.9JQNJPB9d7Ron8GU",
+      "transfer": true,
+      "flags": {},
+      "tint": null,
+      "sort": 0
+    }
+  ],
+  "folder": null,
+  "sort": 0,
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.1.0",
+    "coreVersion": "10.291",
+    "createdTime": 1676598659859,
+    "modifiedTime": 1676598659859,
+    "lastModifiedBy": "RightHandOfVecna"
+  }
+}

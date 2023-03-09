@@ -1,20 +1,20 @@
 {
-  "_id": "Uy5U09xXUjHfp10p",
-  "name": "Earth Genasi: Earth Walk",
+  "_id": "QO1BPXIUZLPMwpm6",
+  "name": "Dragonborn: Breath Weapon",
   "ownership": {
     "default": 0
   },
   "type": "feat",
   "system": {
     "description": {
-      "value": "<p>You can move across difficult terrain made of earth or stone without expending extra movement.</p>",
+      "value": "<p>You can use your action to exhale destructive lightning in a 5 by 30 foot line. When you use your breath weapon, each creature in the area of the exhalation must make a Dexterity saving throw. The DC for this saving throw equals 8 + your Constitution modifier + your proficiency bonus. Roll a number of d6s equal to 2 + half your level (rounded down) as lightning damage. A creature takes full damage on a failed save, and half as much on a successful one.</p>\n<p>After you use your breath weapon, you can't use it again until you finish a short or long rest.</p>",
       "chat": "",
       "unidentified": ""
     },
     "source": "SRD 5.1",
     "activation": {
-      "type": "",
-      "cost": null,
+      "type": "action",
+      "cost": "1",
       "condition": ""
     },
     "duration": {
@@ -23,20 +23,20 @@
     },
     "cover": null,
     "target": {
-      "value": null,
-      "width": null,
-      "units": "",
-      "type": ""
+      "value": "30",
+      "width": "5",
+      "units": "ft",
+      "type": "line"
     },
     "range": {
-      "value": null,
+      "value": "self",
       "long": null,
       "units": ""
     },
     "uses": {
-      "value": null,
-      "max": "",
-      "per": null,
+      "value": "1",
+      "max": "1",
+      "per": "sr",
       "recovery": ""
     },
     "consume": {
@@ -53,7 +53,12 @@
       "damage": ""
     },
     "damage": {
-      "parts": [],
+      "parts": [
+        [
+          "(2+@details.level/2)d6",
+          "lightning"
+        ]
+      ],
       "versatile": ""
     },
     "formula": "",
@@ -66,14 +71,14 @@
       "value": "ancestry",
       "subtype": null
     },
-    "requirements": "Genasi ancestry",
+    "requirements": "Dragonborn ancestry",
     "recharge": {
       "value": null,
       "charged": false
     }
   },
   "flags": {},
-  "img": "",
+  "img": "icons/magic/fire/beam-jet-stream-trails-orange.webp",
   "effects": [],
   "folder": null,
   "sort": 0,
@@ -81,8 +86,8 @@
     "systemId": "dnd5e",
     "systemVersion": "2.1.0",
     "coreVersion": "10.291",
-    "createdTime": 1676598660134,
-    "modifiedTime": 1676598660134,
+    "createdTime": 1676598660118,
+    "modifiedTime": 1676598660118,
     "lastModifiedBy": "RightHandOfVecna"
   }
 }

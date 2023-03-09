@@ -1,13 +1,13 @@
 {
   "_id": "ET8BrzfIxiynz9lu",
-  "name": "Ancestry: Genasi: Earth Genasi",
+  "name": "Ancestry: Earth Genasi",
   "ownership": {
     "default": 0
   },
   "type": "feat",
   "system": {
     "description": {
-      "value": "<p>Your genasi character has certain characteristics in common with all other genasi.</p>\n<p><strong><em>Age.</em></strong> Genasi mature at about the same rate as humans and reach adulthood in their late teens. They live somewhat longer than humans do, up to 120 years.</p>\n<p><strong><em>Size.</em></strong> Genasi are as varied as their mortal parents but are generally built like humans, standing anywhere from 5 feet to over 6 feet tall. Your size is Medium.</p>\n<p><strong><em>Speed.</em></strong> Your base walking speed is 30 feet.</p>\n<p><strong><em>Elemental Scion.</em></strong> @UUID[Compendium.dnd5e.races.HjYmUqZdQhES0G5M]{Elemental Scion} Four major types of genasi are found among the worlds of D&amp;D: air genasi, earth genasi, fire genasi, and water genasi. Choose one of these types.</p>\n<h4>Earth Genasi</h4>\n<p>As an earth genasi, you are descended from the cruel and greedy dao, though you aren't necessarily evil. You have inherited some measure of control over earth, reveling in superior strength and solid power. You tend to avoid rash decisions, pausing long enough to consider your options before taking action.</p>\n<p>Elemental earth manifests differently from one individual to the next. Some earth genasi always have bits of dust falling from their bodies and mud clinging to their clothes, never getting clean no matter how often they bathe. Others are as shiny and polished as gemstones, with skin tones of deep brown or black, eyes sparkling like agates. Earth genasi can also have smooth metallic flesh, dull iron skin spotted with rust, a pebbled and rough hide, or even a coating of tiny embedded crystals. The most arresting have fissures in their flesh, from which faint light shines.</p>\n<p><strong><em>Earth Walk.</em></strong> @UUID[Compendium.dnd5e.races.Uy5U09xXUjHfp10p]{Earth Walk} You can move across difficult terrain made of earth or stone without expending extra movement.</p>\n<p><strong><em>Stone Hide.</em></strong> @UUID[Compendium.dnd5e.races.IqCEKHZlfURvWHhE]{Stone Hide} Your hit point maximum increases by 1, and it increases by 1 each time you gain a level.</p>\n<p><strong><em>Merge with Stone.</em></strong> @UUID[Compendium.dnd5e.races.w1ZXtCTnnKlrccrX]{Merge with Stone} You can cast the @Compendium[dnd5e.spells.6UYMI5U6F1FHSGBH]{Pass Without Trace} spell once with this trait, requiring no material components, and you regain the ability to cast it this way when you finish a short or long rest. Constitution is your spellcasting ability for this spell.</p>\n<section class=\"secret foundry-note\">\n<p><strong>Foundry Note</strong></p>\n<p>You can drag your choices from the above onto your character sheet and it will automatically update.</p>\n</section>",
+      "value": "<p>Your genasi character has certain characteristics in common with all other genasi.</p>\n<p><strong><em>Age.</em></strong> Genasi mature at about the same rate as humans and reach adulthood in their late teens. They live somewhat longer than humans do, up to 120 years.</p>\n<p><strong><em>Size.</em></strong> Genasi are as varied as their mortal parents but are generally built like humans, standing anywhere from 5 feet to over 6 feet tall. Your size is Medium.</p>\n<p><strong><em>Speed.</em></strong> Your base walking speed is 30 feet.</p>\n<p><strong><em>Elemental Scion.</em></strong> Four major types of genasi are found among the worlds of D&amp;D: air genasi, earth genasi, fire genasi, and water genasi. Choose one of these types.</p>\n<h4>Earth Genasi</h4>\n<p>As an earth genasi, you are descended from the cruel and greedy dao, though you aren't necessarily evil. You have inherited some measure of control over earth, reveling in superior strength and solid power. You tend to avoid rash decisions, pausing long enough to consider your options before taking action.</p>\n<p>Elemental earth manifests differently from one individual to the next. Some earth genasi always have bits of dust falling from their bodies and mud clinging to their clothes, never getting clean no matter how often they bathe. Others are as shiny and polished as gemstones, with skin tones of deep brown or black, eyes sparkling like agates. Earth genasi can also have smooth metallic flesh, dull iron skin spotted with rust, a pebbled and rough hide, or even a coating of tiny embedded crystals. The most arresting have fissures in their flesh, from which faint light shines.</p>\n<p><strong><em>Earth Walk.</em></strong> You can move across difficult terrain made of earth or stone without expending extra movement.</p>\n<p><strong><em>Stone Hide.</em></strong> Your hit point maximum increases by 1, and it increases by 1 each time you gain a level.</p>\n<p><strong><em>Merge with Stone.</em></strong> You can cast the @Compendium[dnd5e.spells.6UYMI5U6F1FHSGBH]{Pass Without Trace} spell once with this trait, requiring no material components, and you regain the ability to cast it this way when you finish a short or long rest. Constitution is your spellcasting ability for this spell.</p>\n<section class=\"secret foundry-note\">\n<p><strong>Foundry Note</strong></p>\n<p>You can drag your choices from the above onto your character sheet and it will automatically update.</p>\n</section>",
       "chat": "",
       "unidentified": ""
     },
@@ -74,7 +74,36 @@
   },
   "flags": {},
   "img": "icons/magic/earth/strike-fist-stone.webp",
-  "effects": [],
+  "effects": [
+    {
+      "_id": "8eZJoZmyFeosHBx7",
+      "changes": [
+        {
+          "key": "system.attributes.hp.bonuses.level",
+          "mode": 2,
+          "value": "+1",
+          "priority": null
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "icon": "icons/magic/earth/strike-fist-stone.webp",
+      "label": "Earth Genasi Ancestry",
+      "origin": "Item.ET8BrzfIxiynz9lu",
+      "transfer": true,
+      "flags": {},
+      "tint": null,
+      "sort": 0
+    }
+  ],
   "folder": null,
   "sort": 0,
   "_stats": {

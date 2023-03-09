@@ -7,7 +7,7 @@
   "type": "feat",
   "system": {
     "description": {
-      "value": "<p>Goliaths share a number of traits in common with each other.</p>\n<p><strong><em>Age.</em></strong> Goliaths have lifespans comparable to humans. They enter adulthood in their late teens and usually live less than a century.</p>\n<p><strong><em>Size.</em></strong> Goliaths are between 7 and 8 feet tall and weigh between 280 and 340 pounds. Your size is Medium.</p>\n<p><strong><em>Speed.</em></strong> Your base walking speed is 30 feet.</p>\n<p><strong><em>Stone's Endurance.</em></strong> @UUID[Compendium.dnd5e.races.RZzClbmnTYV1Uhpw]{Stone's Endurance} You can focus yourself to occasionally shrug off injury. When you take damage, you can use your reaction to roll a d12. Add your Constitution score to the number rolled, and reduce the damage by that total. After you use this trait, you can't use it again until you finish a short or long rest.</p>\n<p><strong><em>Powerful Build.</em></strong> @UUID[Compendium.dnd5e.races.Gu3XzUVMLkk6Uzc8]{Powerful Build} You count as one size larger when determining your carrying capacity and the weight you can push, drag, or lift.</p>\n<p><strong><em>Mountain Born.</em></strong> @UUID[Compendium.dnd5e.races.ikTxCJH1kBot8mna]{Mountain Born} You're acclimated to high altitude, including elevations about 20,000 feet. You're also naturally adapted to cold climates, and have resistance to cold damage.</p>\n<section class=\"secret foundry-note\">\n<p><strong>Foundry Note</strong></p>\n<p>You can drag your choices from the above onto your character sheet and it will automatically update.</p>\n</section>",
+      "value": "<p>Goliaths share a number of traits in common with each other.</p>\n<p><strong><em>Age.</em></strong> Goliaths have lifespans comparable to humans. They enter adulthood in their late teens and usually live less than a century.</p>\n<p><strong><em>Size.</em></strong> Goliaths are between 7 and 8 feet tall and weigh between 280 and 340 pounds. Your size is Medium.</p>\n<p><strong><em>Speed.</em></strong> Your base walking speed is 30 feet.</p>\n<p><strong><em>Stone's Endurance.</em></strong> @UUID[Compendium.dnd5e.races.RZzClbmnTYV1Uhpw]{Stone's Endurance} You can focus yourself to occasionally shrug off injury. When you take damage, you can use your reaction to roll a d12. Add your Constitution score to the number rolled, and reduce the damage by that total. After you use this trait, you can't use it again until you finish a short or long rest.</p>\n<p><strong><em>Powerful Build.</em></strong> You count as one size larger when determining your carrying capacity and the weight you can push, drag, or lift.</p>\n<p><strong><em>Mountain Born.</em></strong> You're acclimated to high altitude, including elevations about 20,000 feet. You're also naturally adapted to cold climates, and have resistance to cold damage.</p>\n<section class=\"secret foundry-note\">\n<p><strong>Foundry Note</strong></p>\n<p>You can drag your choices from the above onto your character sheet and it will automatically update.</p>\n</section>",
       "chat": "",
       "unidentified": ""
     },
@@ -74,7 +74,42 @@
   },
   "flags": {},
   "img": "icons/magic/earth/projectile-stone-landslide.webp",
-  "effects": [],
+  "effects": [
+    {
+      "_id": "A6OvA4WmUH6Jvb00",
+      "changes": [
+        {
+          "key": "flags.dnd5e.powerfulBuild",
+          "mode": 5,
+          "value": "true",
+          "priority": null
+        },
+        {
+          "key": "system.traits.dr.value",
+          "mode": 2,
+          "value": "cold",
+          "priority": null
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "icon": "icons/magic/earth/projectile-stone-landslide.webp",
+      "label": "Goliath Ancestry",
+      "origin": "Item.bo6DDiY8zjCnTC49",
+      "transfer": true,
+      "flags": {},
+      "tint": null,
+      "sort": 0
+    }
+  ],
   "folder": null,
   "sort": 0,
   "_stats": {

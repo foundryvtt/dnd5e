@@ -74,7 +74,36 @@
   },
   "flags": {},
   "img": "icons/magic/nature/leaf-juggle-humanoid-green.webp",
-  "effects": [],
+  "effects": [
+    {
+      "_id": "Fsg6BqrSKga0G068",
+      "changes": [
+        {
+          "key": "system.attributes.movement.walk",
+          "mode": 5,
+          "value": "35",
+          "priority": null
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "icon": "icons/magic/nature/leaf-juggle-humanoid-green.webp",
+      "label": "Elven Ancestry",
+      "origin": "Item.eMVCnZMppYWnQEZv",
+      "transfer": true,
+      "flags": {},
+      "tint": null,
+      "sort": 0
+    }
+  ],
   "folder": null,
   "sort": 0,
   "_stats": {

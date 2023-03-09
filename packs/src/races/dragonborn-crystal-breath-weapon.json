@@ -1,20 +1,20 @@
 {
-  "_id": "U2YXPTgiP5KQG9xT",
-  "name": "Fire Genasi: Fire Resistance",
+  "_id": "sGHiXnpPLm2AVem9",
+  "name": "Dragonborn: Breath Weapon",
   "ownership": {
     "default": 0
   },
   "type": "feat",
   "system": {
     "description": {
-      "value": "<p>You have resistance to fire damage.</p>",
+      "value": "<p>You can use your action to exhale destructive radiant in a 15 foot cone. When you use your breath weapon, each creature in the area of the exhalation must make a Constitution saving throw. The DC for this saving throw equals 8 + your Constitution modifier + your proficiency bonus. Roll a number of d6s equal to 2 + half your level (rounded down) as radiant damage. A creature takes full damage on a failed save, and half as much on a successful one.</p>\n<p>After you use your breath weapon, you can't use it again until you finish a short or long rest.</p>",
       "chat": "",
       "unidentified": ""
     },
     "source": "SRD 5.1",
     "activation": {
-      "type": "",
-      "cost": null,
+      "type": "action",
+      "cost": "1",
       "condition": ""
     },
     "duration": {
@@ -23,20 +23,20 @@
     },
     "cover": null,
     "target": {
-      "value": null,
+      "value": "15",
       "width": null,
-      "units": "",
-      "type": ""
+      "units": "ft",
+      "type": "cone"
     },
     "range": {
-      "value": null,
+      "value": "self",
       "long": null,
       "units": ""
     },
     "uses": {
-      "value": null,
-      "max": "",
-      "per": null,
+      "value": "1",
+      "max": "1",
+      "per": "sr",
       "recovery": ""
     },
     "consume": {
@@ -53,7 +53,12 @@
       "damage": ""
     },
     "damage": {
-      "parts": [],
+      "parts": [
+        [
+          "(2+@details.level/2)d6",
+          "radiant"
+        ]
+      ],
       "versatile": ""
     },
     "formula": "",
@@ -66,52 +71,23 @@
       "value": "ancestry",
       "subtype": null
     },
-    "requirements": "Genasi ancestry",
+    "requirements": "Dragonborn ancestry",
     "recharge": {
       "value": null,
       "charged": false
     }
   },
   "flags": {},
-  "img": "",
-  "effects": [
-    {
-      "_id": "yxp7zqy4DitfTX9X",
-      "changes": [
-        {
-          "key": "system.traits.dr.value",
-          "mode": 2,
-          "value": "fire",
-          "priority": null
-        }
-      ],
-      "disabled": false,
-      "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
-      },
-      "icon": "",
-      "label": "Fire Resistance",
-      "origin": "Item.U2YXPTgiP5KQG9xT",
-      "transfer": true,
-      "flags": {},
-      "tint": null,
-      "sort": 0
-    }
-  ],
+  "img": "icons/magic/fire/beam-jet-stream-trails-orange.webp",
+  "effects": [],
   "folder": null,
   "sort": 0,
   "_stats": {
     "systemId": "dnd5e",
     "systemVersion": "2.1.0",
     "coreVersion": "10.291",
-    "createdTime": 1676598660153,
-    "modifiedTime": 1676598660153,
+    "createdTime": 1676598660118,
+    "modifiedTime": 1676598660118,
     "lastModifiedBy": "RightHandOfVecna"
   }
 }
