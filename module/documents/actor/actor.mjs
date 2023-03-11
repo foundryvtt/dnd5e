@@ -2477,7 +2477,7 @@ export default class Actor5e extends Actor {
         if ( origin.type === "spell" ) return keepSpellAE;
         if ( origin.type === "feat" ) return keepFeatAE;
         if ( origin.type === "background" ) return keepBackgroundAE;
-        if ( ["subclass", "feat"].includes(origin.type) ) return keepClassAE;
+        if ( ["subclass", "class"].includes(origin.type) ) return keepClassAE;
         if ( ["equipment", "weapon", "tool", "loot", "backpack"].includes(origin.type) ) return keepEquipmentAE;
         return true;
       });
