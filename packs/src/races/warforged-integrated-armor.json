@@ -73,8 +73,43 @@
     }
   },
   "flags": {},
-  "img": "",
-  "effects": [],
+  "img": "icons/magic/symbols/cog-glowing-green.webp",
+  "effects": [
+    {
+      "_id": "cwILHWWDuIiFMB9d",
+      "changes": [
+        {
+          "key": "system.attributes.ac.calc",
+          "mode": 5,
+          "value": "natural",
+          "priority": null
+        },
+        {
+          "key": "system.attributes.ac.flat",
+          "mode": 5,
+          "value": "12 + @abilities.dex.mod",
+          "priority": null
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "icon": "icons/magic/symbols/cog-glowing-green.webp",
+      "label": "Warforged: Integrated Armor",
+      "origin": "Item.sNvaYSTqojLrPdxs",
+      "transfer": true,
+      "flags": {},
+      "tint": null,
+      "sort": 0
+    }
+  ],
   "folder": null,
   "sort": 0,
   "_stats": {

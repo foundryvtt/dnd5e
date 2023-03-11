@@ -1,13 +1,13 @@
 {
-  "_id": "GfzYIri908M1dIFA",
-  "name": "Human Curiosity",
+  "_id": "xm1Ra6kSroiKIHAL",
+  "name": "Tiefling: Infernal Wings",
   "ownership": {
     "default": 0
   },
   "type": "feat",
   "system": {
     "description": {
-      "value": "<p>Your natural curiosity leads you to dabble in a variety of activities. You gain proficiency with one tool of your choice.</p>",
+      "value": "<p>You have bat-like wings sprouting from your shoulder blades. While you are not wearing medium or heavy armor and you are not encumbered, you have a flying speed of 30 feet.</p>",
       "chat": "",
       "unidentified": ""
     },
@@ -66,23 +66,52 @@
       "value": "ancestry",
       "subtype": null
     },
-    "requirements": "Human ancestry",
+    "requirements": "Tiefling ancestry",
     "recharge": {
       "value": null,
       "charged": false
     }
   },
   "flags": {},
-  "img": "",
-  "effects": [],
+  "img": "icons/creatures/unholy/demon-female-succubus-orange.webp",
+  "effects": [
+    {
+      "_id": "4yyuf8cB5ZBVtM0g",
+      "changes": [
+        {
+          "key": "system.attributes.movement.fly",
+          "mode": 5,
+          "value": "30",
+          "priority": null
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "icon": "icons/creatures/unholy/demon-female-succubus-orange.webp",
+      "label": "Tiefling: Infernal Wings",
+      "origin": "Item.xm1Ra6kSroiKIHAL",
+      "transfer": true,
+      "flags": {},
+      "tint": null,
+      "sort": 0
+    }
+  ],
   "folder": null,
   "sort": 0,
   "_stats": {
     "systemId": "dnd5e",
     "systemVersion": "2.1.0",
     "coreVersion": "10.291",
-    "createdTime": 1676598660191,
-    "modifiedTime": 1676598660191,
+    "createdTime": 1676598660247,
+    "modifiedTime": 1676598660247,
     "lastModifiedBy": "RightHandOfVecna"
   }
 }

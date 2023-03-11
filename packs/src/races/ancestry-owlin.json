@@ -7,7 +7,7 @@
   "type": "feat",
   "system": {
     "description": {
-      "value": "<p>As an owlin, you have certain traits in common with your people.</p>\n<p><strong><em>Age.</em></strong> Owlin reach maturity by age 3. Short-lived compared to humans, owlin don't usually live longer than 30 years.</p>\n<p><strong><em>Size.</em></strong> You are Medium or Small. You choose the size when you select this race.</p>\n<p><strong><em>Speed.</em></strong> Your walking speed is 30 feet.</p>\n<p><strong><em>Creature Type.</em></strong> @UUID[Compendium.dnd5e.races.f4JiPsoK1CMOkGxU]{Creature Type} You are a Humanoid.</p>\n<p><strong><em>Flight.</em></strong> @UUID[Compendium.dnd5e.races.BkngoWTDpQbRwwj9]{Flight} Thanks to your wings, you have a flying speed equal to your walking speed. You can't use this flying speed if you're wearing armor, or if you're encumbered.</p>\n<p><strong><em>Silent Feathers.</em></strong> @UUID[Compendium.dnd5e.races.IrzZeChIYLYJy23n]{Silent Feathers} While you aren't wearing armor, you have advantage on Stealth checks made to remain silent.</p>\n<section class=\"secret foundry-note\">\n<p><strong>Foundry Note</strong></p>\n<p>You can drag your choices from the above onto your character sheet and it will automatically update.</p>\n</section>",
+      "value": "<p>As an owlin, you have certain traits in common with your people.</p>\n<p><strong><em>Age.</em></strong> Owlin reach maturity by age 3. Short-lived compared to humans, owlin don't usually live longer than 30 years.</p>\n<p><strong><em>Size.</em></strong> You are Medium or Small. You choose the size when you select this race.</p>\n<p><strong><em>Speed.</em></strong> Your walking speed is 30 feet.</p>\n<p><strong><em>Creature Type.</em></strong> You are a Humanoid.</p>\n<p><strong><em>Flight.</em></strong> Thanks to your wings, you have a flying speed equal to your walking speed. You can't use this flying speed if you're wearing armor, or if you're encumbered.</p>\n<p><strong><em>Silent Feathers.</em></strong> @UUID[Compendium.dnd5e.races.IrzZeChIYLYJy23n]{Silent Feathers} While you aren't wearing armor, you have advantage on Stealth checks made to remain silent.</p>\n<section class=\"secret foundry-note\">\n<p><strong>Foundry Note</strong></p>\n<p>You can drag your choices from the above onto your character sheet and it will automatically update.</p>\n</section>",
       "chat": "",
       "unidentified": ""
     },
@@ -74,7 +74,36 @@
   },
   "flags": {},
   "img": "icons/creatures/birds/raptor-hawk-flying.webp",
-  "effects": [],
+  "effects": [
+    {
+      "_id": "Kw0tIV0bHTLDTbRd",
+      "changes": [
+        {
+          "key": "system.attributes.movement.fly",
+          "mode": 5,
+          "value": "30",
+          "priority": null
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "icon": "icons/creatures/birds/raptor-hawk-flying.webp",
+      "label": "Owlin Ancestry",
+      "origin": "Item.UoteEorezC4KosHv",
+      "transfer": true,
+      "flags": {},
+      "tint": null,
+      "sort": 0
+    }
+  ],
   "folder": null,
   "sort": 0,
   "_stats": {

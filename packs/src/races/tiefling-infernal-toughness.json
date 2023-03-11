@@ -1,13 +1,13 @@
 {
-  "_id": "kQB7zxUcGWZV96zn",
-  "name": "Kenku: Speech",
+  "_id": "FQIZttqmkFSc5BMw",
+  "name": "Tiefling: Infernal Toughness",
   "ownership": {
     "default": 0
   },
   "type": "feat",
   "system": {
     "description": {
-      "value": "<p>You can speak only by using your Mimicry trait.</p>",
+      "value": "<p>Your hit point maximum increases by 1, and it increases by 1 every time you gain a level.</p>",
       "chat": "",
       "unidentified": ""
     },
@@ -66,23 +66,52 @@
       "value": "ancestry",
       "subtype": null
     },
-    "requirements": "Kenku ancestry",
+    "requirements": "Tiefling ancestry",
     "recharge": {
       "value": null,
       "charged": false
     }
   },
   "flags": {},
-  "img": "",
-  "effects": [],
+  "img": "icons/creatures/unholy/demon-female-succubus-orange.webp",
+  "effects": [
+    {
+      "_id": "q4NtbByz0VYKsfA9",
+      "changes": [
+        {
+          "key": "system.attributes.hp.bonuses.level",
+          "mode": 2,
+          "value": "+1",
+          "priority": null
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "icon": "icons/creatures/unholy/demon-female-succubus-orange.webp",
+      "label": "Tiefling: Infernal Toughness",
+      "origin": "Item.FQIZttqmkFSc5BMw",
+      "transfer": true,
+      "flags": {},
+      "tint": null,
+      "sort": 0
+    }
+  ],
   "folder": null,
   "sort": 0,
   "_stats": {
     "systemId": "dnd5e",
     "systemVersion": "2.1.0",
     "coreVersion": "10.291",
-    "createdTime": 1676598660200,
-    "modifiedTime": 1676598660200,
+    "createdTime": 1676598660247,
+    "modifiedTime": 1676598660247,
     "lastModifiedBy": "RightHandOfVecna"
   }
 }

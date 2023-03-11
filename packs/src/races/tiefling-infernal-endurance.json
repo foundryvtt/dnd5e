@@ -1,13 +1,13 @@
 {
-  "_id": "NwpFFNZwLiKO3CkF",
-  "name": "Lizardfolk: Fearless",
+  "_id": "n0yS6MsRNJtVpaL9",
+  "name": "Tiefling: Infernal Endurance",
   "ownership": {
     "default": 0
   },
   "type": "feat",
   "system": {
     "description": {
-      "value": "<p>You cannot be frightened.</p>",
+      "value": "<p>When you are reduced to 0 hit points but not killed outright, you can drop to 1 hit point instead. You can't use this feature again until you finish a long rest.</p>",
       "chat": "",
       "unidentified": ""
     },
@@ -34,9 +34,9 @@
       "units": ""
     },
     "uses": {
-      "value": null,
-      "max": "",
-      "per": null,
+      "value": "1",
+      "max": "1",
+      "per": "lr",
       "recovery": ""
     },
     "consume": {
@@ -66,14 +66,14 @@
       "value": "ancestry",
       "subtype": null
     },
-    "requirements": "Lizardfolk ancestry",
+    "requirements": "Tiefling ancestry",
     "recharge": {
       "value": null,
       "charged": false
     }
   },
   "flags": {},
-  "img": "",
+  "img": "icons/creatures/unholy/demon-female-succubus-orange.webp",
   "effects": [],
   "folder": null,
   "sort": 0,
@@ -81,8 +81,8 @@
     "systemId": "dnd5e",
     "systemVersion": "2.1.0",
     "coreVersion": "10.291",
-    "createdTime": 1676598660209,
-    "modifiedTime": 1676598660209,
+    "createdTime": 1676598660247,
+    "modifiedTime": 1676598660247,
     "lastModifiedBy": "RightHandOfVecna"
   }
 }
