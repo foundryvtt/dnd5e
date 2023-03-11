@@ -699,8 +699,12 @@
         },
         "armor": {
           "value": null,
-          "type": "clothing",
           "dex": null
+        },
+        "type": {
+          "value": "clothing",
+          "subtype": "",
+          "baseItem": ""
         },
         "hp": {
           "value": 0,
@@ -708,7 +712,6 @@
           "dt": null,
           "conditions": ""
         },
-        "baseItem": "",
         "speed": {
           "value": null,
           "conditions": ""
@@ -759,8 +762,7 @@
         "equipped": false,
         "rarity": "common",
         "identified": true,
-        "toolType": "",
-        "baseItem": "",
+        "type": { "value": "", "subtype": "", "baseItem": "" },
         "ability": "wis",
         "chatFlavor": "",
         "proficient": 1,
@@ -860,8 +862,12 @@
         },
         "armor": {
           "value": 11,
-          "type": "light",
           "dex": null
+        },
+        "type": {
+          "value": "light",
+          "subtype": "",
+          "baseItem": ""
         },
         "hp": {
           "value": 0,
@@ -869,7 +875,6 @@
           "dt": null,
           "conditions": ""
         },
-        "baseItem": "",
         "speed": {
           "value": null,
           "conditions": ""
@@ -984,8 +989,7 @@
           "dt": null,
           "conditions": ""
         },
-        "weaponType": "simpleM",
-        "baseItem": "",
+        "type": { "value": "simpleM", "subtype": "", "baseItem": "" },
         "properties": {
           "ver": true,
           "amm": false,
@@ -1110,8 +1114,7 @@
           "dt": null,
           "conditions": ""
         },
-        "weaponType": "simpleM",
-        "baseItem": "",
+        "type": { "value": "simpleM", "subtype": "", "baseItem": "" },
         "properties": {
           "lgt": true,
           "amm": false,
@@ -1407,7 +1410,7 @@
           "dc": 17,
           "scaling": "flat"
         },
-        "consumableType": "trinket"
+        "type": {"value":"trinket","subtype":"","baseItem":""}
       },
       "sort": 0,
       "flags": {
@@ -1502,7 +1505,7 @@
           "dc": null,
           "scaling": "spell"
         },
-        "consumableType": "food"
+        "type": {"value":"food","subtype":"","baseItem":""}
       },
       "sort": 0,
       "flags": {
@@ -1602,7 +1605,7 @@
           "dc": null,
           "scaling": "spell"
         },
-        "consumableType": "trinket"
+        "type": {"value":"trinket","subtype":"","baseItem":""}
       },
       "sort": 0,
       "flags": {
@@ -1697,7 +1700,7 @@
           "dc": null,
           "scaling": "spell"
         },
-        "consumableType": "food"
+        "type": {"value":"food","subtype":"","baseItem":""}
       },
       "sort": 0,
       "flags": {

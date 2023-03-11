@@ -529,8 +529,7 @@
           "dt": null,
           "conditions": ""
         },
-        "weaponType": "martialM",
-        "baseItem": "",
+        "type": { "value": "martialM", "subtype": "", "baseItem": "" },
         "properties": {
           "fin": true,
           "lgt": true,
@@ -655,8 +654,7 @@
           "dt": null,
           "conditions": ""
         },
-        "weaponType": "simpleR",
-        "baseItem": "",
+        "type": { "value": "simpleR", "subtype": "", "baseItem": "" },
         "properties": {
           "lgt": true,
           "two": true,
@@ -769,8 +767,12 @@
         },
         "armor": {
           "value": 11,
-          "type": "light",
           "dex": null
+        },
+        "type": {
+          "value": "light",
+          "subtype": "",
+          "baseItem": ""
         },
         "hp": {
           "value": 0,
@@ -778,7 +780,6 @@
           "dt": null,
           "conditions": ""
         },
-        "baseItem": "",
         "speed": {
           "value": null,
           "conditions": ""

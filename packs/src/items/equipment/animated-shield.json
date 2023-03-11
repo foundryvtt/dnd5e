@@ -72,8 +72,12 @@
     },
     "armor": {
       "value": 2,
-      "type": "shield",
       "dex": 0
+    },
+    "type": {
+      "value": "shield",
+      "subtype": "",
+      "baseItem": ""
     },
     "hp": {
       "value": 0,
@@ -81,7 +85,6 @@
       "dt": null,
       "conditions": ""
     },
-    "baseItem": "",
     "speed": {
       "value": null,
       "conditions": ""

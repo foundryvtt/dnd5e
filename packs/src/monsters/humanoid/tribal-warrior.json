@@ -517,8 +517,12 @@
         },
         "armor": {
           "value": 12,
-          "type": "light",
           "dex": null
+        },
+        "type": {
+          "value": "light",
+          "subtype": "",
+          "baseItem": ""
         },
         "hp": {
           "value": 0,
@@ -526,7 +530,6 @@
           "dt": null,
           "conditions": ""
         },
-        "baseItem": "",
         "speed": {
           "value": null,
           "conditions": ""
@@ -733,8 +736,7 @@
           "dt": null,
           "conditions": ""
         },
-        "weaponType": "simpleM",
-        "baseItem": "",
+        "type": { "value": "simpleM", "subtype": "", "baseItem": "" },
         "properties": {
           "thr": true,
           "ver": true,

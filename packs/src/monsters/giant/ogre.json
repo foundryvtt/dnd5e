@@ -532,8 +532,7 @@
           "dt": null,
           "conditions": ""
         },
-        "weaponType": "simpleM",
-        "baseItem": "",
+        "type": { "value": "simpleM", "subtype": "", "baseItem": "" },
         "properties": {
           "amm": false,
           "fin": false,
@@ -658,8 +657,7 @@
           "dt": null,
           "conditions": ""
         },
-        "weaponType": "simpleM",
-        "baseItem": "",
+        "type": { "value": "simpleM", "subtype": "", "baseItem": "" },
         "properties": {
           "amm": false,
           "fin": false,
@@ -772,8 +770,12 @@
         },
         "armor": {
           "value": 12,
-          "type": "medium",
           "dex": 2
+        },
+        "type": {
+          "value": "medium",
+          "subtype": "",
+          "baseItem": ""
         },
         "hp": {
           "value": 0,
@@ -781,7 +783,6 @@
           "dt": null,
           "conditions": ""
         },
-        "baseItem": "",
         "speed": {
           "value": null,
           "conditions": ""

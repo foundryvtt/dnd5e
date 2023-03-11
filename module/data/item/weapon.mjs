@@ -4,34 +4,30 @@ import ActionTemplate from "./templates/action.mjs";
 import ActivatedEffectTemplate from "./templates/activated-effect.mjs";
 import EquippableItemTemplate from "./templates/equippable-item.mjs";
 import ItemDescriptionTemplate from "./templates/item-description.mjs";
+import ItemTypeTemplate from "./templates/item-type.mjs";
 import PhysicalItemTemplate from "./templates/physical-item.mjs";
 import MountableTemplate from "./templates/mountable.mjs";
 
 /**
  * Data definition for Weapon items.
  * @mixes ItemDescriptionTemplate
+ * @mixes ItemTypeTemplate
  * @mixes PhysicalItemTemplate
  * @mixes EquippableItemTemplate
  * @mixes ActivatedEffectTemplate
  * @mixes ActionTemplate
  * @mixes MountableTemplate
  *
- * @property {string} weaponType   Weapon category as defined in `DND5E.weaponTypes`.
- * @property {string} baseItem     Base weapon as defined in `DND5E.weaponIds` for determining proficiency.
  * @property {object} properties   Mapping of various weapon property booleans.
  * @property {boolean} proficient  Does the weapon's owner have proficiency?
  */
 export default class WeaponData extends SystemDataModel.mixin(
-  ItemDescriptionTemplate, PhysicalItemTemplate, EquippableItemTemplate,
+  ItemDescriptionTemplate, ItemTypeTemplate, PhysicalItemTemplate, EquippableItemTemplate,
   ActivatedEffectTemplate, ActionTemplate, MountableTemplate
 ) {
   /** @inheritdoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
-      weaponType: new foundry.data.fields.StringField({
-        required: true, initial: "simpleM", label: "DND5E.ItemWeaponType"
-      }),
-      baseItem: new foundry.data.fields.StringField({required: true, blank: true, label: "DND5E.ItemWeaponBase"}),
       properties: new MappingField(new foundry.data.fields.BooleanField(), {
         required: true, initialKeys: CONFIG.DND5E.weaponProperties, label: "DND5E.ItemWeaponProperties"
       }),
@@ -81,7 +77,7 @@ export default class WeaponData extends SystemDataModel.mixin(
    * @param {object} source  The candidate source data from which the model will be constructed.
    */
   static #migrateWeaponType(source) {
-    if ( source.weaponType === null ) source.weaponType = "simpleM";
+    if ( source.type.value === null ) source.type.value = "simpleM";
   }
 
   /* -------------------------------------------- */
@@ -93,14 +89,14 @@ export default class WeaponData extends SystemDataModel.mixin(
    * @type {string[]}
    */
   get chatProperties() {
-    return [CONFIG.DND5E.weaponTypes[this.weaponType]];
+    return [CONFIG.DND5E.weaponTypes[this.type.value]];
   }
 
   /* -------------------------------------------- */
 
   /** @inheritdoc */
   get _typeAbilityMod() {
-    if ( ["simpleR", "martialR"].includes(this.weaponType) ) return "dex";
+    if ( ["simpleR", "martialR"].includes(this.type.value) ) return "dex";
 
     const abilities = this.parent?.actor?.system.abilities;
     if ( this.properties.fin && abilities ) {
@@ -125,6 +121,6 @@ export default class WeaponData extends SystemDataModel.mixin(
    * @type {boolean}
    */
   get isMountable() {
-    return this.weaponType === "siege";
+    return this.type.value === "siege";
   }
 }

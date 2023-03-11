@@ -294,7 +294,7 @@ export default class Item5e extends Item {
    */
   get areEffectsSuppressed() {
     const requireEquipped = (this.type !== "consumable")
-      || ["rod", "trinket", "wand"].includes(this.system.consumableType);
+      || ["rod", "trinket", "wand"].includes(this.system.type.value);
     if ( requireEquipped && (this.system.equipped === false) ) return true;
     return this.system.attunement === CONFIG.DND5E.attunementTypes.REQUIRED;
   }
@@ -606,7 +606,7 @@ export default class Item5e extends Item {
         const ammoItemQuantity = ammoItem.system.quantity;
         const ammoCanBeConsumed = ammoItemQuantity && (ammoItemQuantity - (this.system.consume.amount ?? 0) >= 0);
         const ammoItemAttackBonus = ammoItem.system.attackBonus;
-        const ammoIsTypeConsumable = (ammoItem.type === "consumable") && (ammoItem.system.consumableType === "ammo");
+        const ammoIsTypeConsumable = (ammoItem.type === "consumable") && (ammoItem.system.type.value === "ammo");
         if ( ammoCanBeConsumed && ammoItemAttackBonus && ammoIsTypeConsumable ) {
           parts.push("@ammo");
           rollData.ammo = ammoItemAttackBonus;
@@ -1339,7 +1339,7 @@ export default class Item5e extends Item {
     }
 
     // Only add the ammunition damage if the ammunition is a consumable with type 'ammo'
-    if ( this._ammo && (this._ammo.type === "consumable") && (this._ammo.system.consumableType === "ammo") ) {
+    if ( this._ammo && (this._ammo.type === "consumable") && (this._ammo.system.type.value === "ammo") ) {
       parts.push("@ammo");
       rollData.ammo = this._ammo.system.damage.parts.map(p => p[0]).join("+");
       rollConfig.flavor += ` [${this._ammo.name}]`;
@@ -1572,7 +1572,7 @@ export default class Item5e extends Item {
    */
   async rollToolCheck(options={}) {
     if ( this.type !== "tool" ) throw new Error("Wrong item type!");
-    return this.actor?.rollToolCheck(this.system.baseItem, {
+    return this.actor?.rollToolCheck(this.system.type.baseItem, {
       ability: this.system.ability,
       bonus: this.system.bonus,
       ...options
@@ -1982,7 +1982,7 @@ export default class Item5e extends Item {
         const armorProf = CONFIG.DND5E.armorProficienciesMap[this.system.armor?.type]; // Player characters check proficiency
         const actorArmorProfs = this.parent.system.traits?.armorProf?.value || new Set();
         updates["system.proficient"] = (armorProf === true) || actorArmorProfs.has(armorProf)
-          || actorArmorProfs.has(this.system.baseItem);
+          || actorArmorProfs.has(this.system.type.baseItem);
       }
     }
     return updates;
@@ -2021,7 +2021,7 @@ export default class Item5e extends Item {
       if ( isNPC ) updates["system.proficient"] = 1;
       else {
         const actorToolProfs = this.parent.system.traits?.toolProf?.value || new Set();
-        const proficient = actorToolProfs.has(this.system.toolType) || actorToolProfs.has(this.system.baseItem);
+        const proficient = actorToolProfs.has(this.system.type.value) || actorToolProfs.has(this.system.type.baseItem);
         updates["system.proficient"] = Number(proficient);
       }
     }
@@ -2049,14 +2049,14 @@ export default class Item5e extends Item {
     if ( data.system?.proficient !== undefined ) return {};
 
     // Some weapon types are always proficient
-    const weaponProf = CONFIG.DND5E.weaponProficienciesMap[this.system.weaponType];
+    const weaponProf = CONFIG.DND5E.weaponProficienciesMap[this.system.type.value];
     const updates = {};
     if ( weaponProf === true ) updates["system.proficient"] = true;
 
     // Characters may have proficiency in this weapon type (or specific base weapon)
     else {
       const actorProfs = this.parent.system.traits?.weaponProf?.value || new Set();
-      updates["system.proficient"] = actorProfs.has(weaponProf) || actorProfs.has(this.system.baseItem);
+      updates["system.proficient"] = actorProfs.has(weaponProf) || actorProfs.has(this.system.type.baseItem);
     }
     return updates;
   }

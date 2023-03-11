@@ -665,19 +665,26 @@
     },
     "consumable": {
       "templates": ["itemDescription", "physicalItem", "activatedEffect", "action"],
-      "consumableType": "potion",
+      "type": {
+        "value": "potion",
+        "subtype": "",
+        "baseItem": ""
+      },
       "uses": {
         "autoDestroy": false
       }
     },
     "equipment": {
       "templates": ["itemDescription", "physicalItem", "activatedEffect", "action", "mountable"],
+      "type": {
+        "value": "light",
+        "subtype": "",
+        "baseItem": ""
+      },
       "armor": {
-        "type": "light",
         "value": null,
         "dex": null
       },
-      "baseItem": "",
       "speed": {
         "value": null,
         "conditions": ""
@@ -690,7 +697,8 @@
       "templates": ["itemDescription", "activatedEffect", "action"],
       "type": {
         "value": "",
-        "subtype": ""
+        "subtype": "",
+        "baseItem": ""
       },
       "requirements": "",
       "recharge": {
@@ -703,8 +711,11 @@
     },
     "tool": {
       "templates": ["itemDescription", "physicalItem"],
-      "toolType": "",
-      "baseItem": "",
+      "type": {
+        "value": "",
+        "subtype": "",
+        "baseItem": ""
+      },
       "ability": "int",
       "chatFlavor": "",
       "proficient": 0,
@@ -748,8 +759,11 @@
     },
     "weapon": {
       "templates": ["itemDescription", "physicalItem" ,"activatedEffect", "action", "mountable"],
-      "weaponType": "simpleM",
-      "baseItem": "",
+      "type": {
+        "value": "simpleM",
+        "subtype": "",
+        "baseItem": ""
+      },
       "properties": {},
       "proficient": true
     }

@@ -505,8 +505,7 @@
         "equipped": false,
         "rarity": "common",
         "identified": true,
-        "toolType": "",
-        "baseItem": "",
+        "type": { "value": "", "subtype": "", "baseItem": "" },
         "ability": "cha",
         "chatFlavor": "",
         "proficient": 1,
@@ -550,8 +549,7 @@
         "equipped": false,
         "rarity": "common",
         "identified": true,
-        "toolType": "",
-        "baseItem": "",
+        "type": { "value": "", "subtype": "", "baseItem": "" },
         "ability": "cha",
         "chatFlavor": "",
         "proficient": 1,
@@ -815,8 +813,7 @@
         "equipped": false,
         "rarity": "common",
         "identified": true,
-        "toolType": "",
-        "baseItem": "",
+        "type": { "value": "", "subtype": "", "baseItem": "" },
         "ability": "int",
         "chatFlavor": "",
         "proficient": 1,
@@ -928,8 +925,7 @@
           "dt": null,
           "conditions": ""
         },
-        "weaponType": "simpleM",
-        "baseItem": "",
+        "type": { "value": "simpleM", "subtype": "", "baseItem": "" },
         "properties": {
           "fin": true,
           "lgt": true,
@@ -1054,8 +1050,7 @@
           "dt": null,
           "conditions": ""
         },
-        "weaponType": "martialM",
-        "baseItem": "",
+        "type": { "value": "martialM", "subtype": "", "baseItem": "" },
         "properties": {
           "fin": true,
           "amm": false,
@@ -1168,8 +1163,12 @@
         },
         "armor": {
           "value": 11,
-          "type": "light",
           "dex": null
+        },
+        "type": {
+          "value": "light",
+          "subtype": "",
+          "baseItem": ""
         },
         "hp": {
           "value": 0,
@@ -1177,7 +1176,6 @@
           "dt": null,
           "conditions": ""
         },
-        "baseItem": "",
         "speed": {
           "value": null,
           "conditions": ""
@@ -1280,8 +1278,12 @@
         },
         "armor": {
           "value": null,
-          "type": "clothing",
           "dex": null
+        },
+        "type": {
+          "value": "clothing",
+          "subtype": "",
+          "baseItem": ""
         },
         "hp": {
           "value": 0,
@@ -1289,7 +1291,6 @@
           "dt": null,
           "conditions": ""
         },
-        "baseItem": "",
         "speed": {
           "value": null,
           "conditions": ""
@@ -1392,8 +1393,12 @@
         },
         "armor": {
           "value": null,
-          "type": "clothing",
           "dex": null
+        },
+        "type": {
+          "value": "clothing",
+          "subtype": "",
+          "baseItem": ""
         },
         "hp": {
           "value": 0,
@@ -1401,7 +1406,6 @@
           "dt": null,
           "conditions": ""
         },
-        "baseItem": "",
         "speed": {
           "value": null,
           "conditions": ""
@@ -1508,7 +1512,7 @@
           "dc": null,
           "scaling": "spell"
         },
-        "consumableType": "trinket"
+        "type": {"value":"trinket","subtype":"","baseItem":""}
       },
       "sort": 0,
       "flags": {
@@ -1603,7 +1607,7 @@
           "dc": null,
           "scaling": "spell"
         },
-        "consumableType": "trinket"
+        "type": {"value":"trinket","subtype":"","baseItem":""}
       },
       "sort": 0,
       "flags": {
@@ -1647,8 +1651,7 @@
         "equipped": false,
         "rarity": "common",
         "identified": true,
-        "toolType": "",
-        "baseItem": "",
+        "type": { "value": "", "subtype": "", "baseItem": "" },
         "ability": "cha",
         "chatFlavor": "",
         "proficient": 1,
@@ -2040,7 +2043,7 @@
           "dc": null,
           "scaling": "spell"
         },
-        "consumableType": "food"
+        "type": {"value":"food","subtype":"","baseItem":""}
       },
       "sort": 0,
       "flags": {

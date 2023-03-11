@@ -567,8 +567,7 @@
           "dt": null,
           "conditions": ""
         },
-        "weaponType": "martialM",
-        "baseItem": "",
+        "type": { "value": "martialM", "subtype": "", "baseItem": "" },
         "properties": {
           "fin": true,
           "lgt": true,
@@ -693,8 +692,7 @@
           "dt": null,
           "conditions": ""
         },
-        "weaponType": "simpleR",
-        "baseItem": "",
+        "type": { "value": "simpleR", "subtype": "", "baseItem": "" },
         "properties": {
           "fin": true,
           "thr": true,
@@ -806,7 +804,7 @@
           "dc": null,
           "scaling": "spell"
         },
-        "consumableType": "ammo"
+        "type": {"value":"ammo","subtype":"","baseItem":""}
       },
       "sort": 0,
       "flags": {},
@@ -898,8 +896,12 @@
         },
         "armor": {
           "value": null,
-          "type": "trinket",
           "dex": null
+        },
+        "type": {
+          "value": "trinket",
+          "subtype": "",
+          "baseItem": ""
         },
         "hp": {
           "value": 0,
@@ -907,7 +909,6 @@
           "dt": null,
           "conditions": ""
         },
-        "baseItem": "",
         "speed": {
           "value": null,
           "conditions": ""
@@ -1010,8 +1011,12 @@
         },
         "armor": {
           "value": null,
-          "type": "clothing",
           "dex": null
+        },
+        "type": {
+          "value": "clothing",
+          "subtype": "",
+          "baseItem": ""
         },
         "hp": {
           "value": 0,
@@ -1019,7 +1024,6 @@
           "dt": null,
           "conditions": ""
         },
-        "baseItem": "",
         "speed": {
           "value": null,
           "conditions": ""
@@ -1122,8 +1126,12 @@
         },
         "armor": {
           "value": null,
-          "type": "clothing",
           "dex": null
+        },
+        "type": {
+          "value": "clothing",
+          "subtype": "",
+          "baseItem": ""
         },
         "hp": {
           "value": 0,
@@ -1131,7 +1139,6 @@
           "dt": null,
           "conditions": ""
         },
-        "baseItem": "",
         "speed": {
           "value": null,
           "conditions": ""
@@ -1343,7 +1350,7 @@
           "dc": null,
           "scaling": "spell"
         },
-        "consumableType": "food"
+        "type": {"value":"food","subtype":"","baseItem":""}
       },
       "sort": 0,
       "flags": {
@@ -1438,7 +1445,7 @@
           "dc": null,
           "scaling": "spell"
         },
-        "consumableType": "food"
+        "type": {"value":"food","subtype":"","baseItem":""}
       },
       "sort": 0,
       "flags": {
@@ -1705,7 +1712,7 @@
           "dc": null,
           "scaling": "spell"
         },
-        "consumableType": "trinket"
+        "type": {"value":"trinket","subtype":"","baseItem":""}
       },
       "sort": 0,
       "flags": {
@@ -1805,7 +1812,7 @@
           "dc": null,
           "scaling": "spell"
         },
-        "consumableType": "trinket"
+        "type": {"value":"trinket","subtype":"","baseItem":""}
       },
       "sort": 0,
       "flags": {
@@ -1943,7 +1950,7 @@
           "dc": 17,
           "scaling": "flat"
         },
-        "consumableType": "trinket"
+        "type": {"value":"trinket","subtype":"","baseItem":""}
       },
       "sort": 0,
       "flags": {
@@ -3238,8 +3245,7 @@
           "dt": null,
           "conditions": ""
         },
-        "weaponType": "natural",
-        "baseItem": "",
+        "type": { "value": "natural", "subtype": "", "baseItem": "" },
         "properties": {
           "ada": false,
           "amm": false,

@@ -143,7 +143,7 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
         label: game.i18n.localize("ITEM.TypeEquipment"),
         items: [],
         crewable: true,
-        dataset: {type: "equipment", "armor.type": "vehicle"},
+        dataset: {type: "equipment", "type.value": "vehicle"},
         columns: equipmentColumns
       },
       passive: {

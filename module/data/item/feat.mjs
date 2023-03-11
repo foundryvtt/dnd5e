@@ -2,10 +2,12 @@ import SystemDataModel from "../abstract.mjs";
 import ActionTemplate from "./templates/action.mjs";
 import ActivatedEffectTemplate from "./templates/activated-effect.mjs";
 import ItemDescriptionTemplate from "./templates/item-description.mjs";
+import ItemTypeTemplate from "./templates/item-type.mjs";
 
 /**
  * Data definition for Feature items.
  * @mixes ItemDescriptionTemplate
+ * @mixes ItemTypeTemplate
  * @mixes ActivatedEffectTemplate
  * @mixes ActionTemplate
  *
@@ -18,15 +20,11 @@ import ItemDescriptionTemplate from "./templates/item-description.mjs";
  * @property {boolean} recharge.charged  Does this feature have a charge remaining?
  */
 export default class FeatData extends SystemDataModel.mixin(
-  ItemDescriptionTemplate, ActivatedEffectTemplate, ActionTemplate
+  ItemDescriptionTemplate, ItemTypeTemplate, ActivatedEffectTemplate, ActionTemplate
 ) {
   /** @inheritdoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
-      type: new foundry.data.fields.SchemaField({
-        value: new foundry.data.fields.StringField({required: true, label: "DND5E.Type"}),
-        subtype: new foundry.data.fields.StringField({required: true, label: "DND5E.Subtype"})
-      }, {label: "DND5E.ItemFeatureType"}),
       requirements: new foundry.data.fields.StringField({required: true, nullable: true, label: "DND5E.Requirements"}),
       recharge: new foundry.data.fields.SchemaField({
         value: new foundry.data.fields.NumberField({
@@ -44,18 +42,7 @@ export default class FeatData extends SystemDataModel.mixin(
   /** @inheritdoc */
   static migrateData(source) {
     super.migrateData(source);
-    FeatData.#migrateType(source);
     FeatData.#migrateRecharge(source);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Ensure feats have a type object.
-   * @param {object} source The candidate source data from which the model will be constructed.
-   */
-  static #migrateType(source) {
-    if ( !source.type ) source.type = {value: "", subtype: ""};
   }
 
   /* -------------------------------------------- */

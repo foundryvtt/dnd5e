@@ -520,7 +520,7 @@ export default class Actor5e extends Actor {
     const {armors, shields} = this.itemTypes.equipment.reduce((obj, equip) => {
       const armor = equip.system.armor;
       if ( !equip.system.equipped || !armorTypes.has(armor?.type) ) return obj;
-      if ( armor.type === "shield" ) obj.shields.push(equip);
+      if ( equip.system.type.value === "shield" ) obj.shields.push(equip);
       else obj.armors.push(equip);
       return obj;
     }, {armors: [], shields: []});

@@ -184,17 +184,16 @@ export default class ItemSheet5e extends ItemSheet {
    * @protected
    */
   async _getItemBaseTypes() {
-    const type = this.item.type === "equipment" ? "armor" : this.item.type;
-    const baseIds = CONFIG.DND5E[`${type}Ids`];
+    const idType = this.item.type === "equipment" ? "armor" : this.item.type;
+    const baseIds = CONFIG.DND5E[`${idType}Ids`];
     if ( baseIds === undefined ) return {};
 
-    const typeProperty = type === "armor" ? "armor.type" : `${type}Type`;
-    const baseType = foundry.utils.getProperty(this.item.system, typeProperty);
+    const type = this.item.system.type.value;
 
     const items = {};
     for ( const [name, id] of Object.entries(baseIds) ) {
       const baseItem = await Trait.getBaseItem(id);
-      if ( baseType !== foundry.utils.getProperty(baseItem?.system, typeProperty) ) continue;
+      if ( type !== baseItem.system.type.value ) continue;
       items[name] = baseItem.name;
     }
     return Object.fromEntries(Object.entries(items).sort((lhs, rhs) => lhs[1].localeCompare(rhs[1])));
@@ -216,7 +215,7 @@ export default class ItemSheet5e extends ItemSheet {
     // Ammunition
     if ( consume.type === "ammo" ) {
       return actor.itemTypes.consumable.reduce((ammo, i) => {
-        if ( i.system.consumableType === "ammo" ) ammo[i.id] = `${i.name} (${i.system.quantity})`;
+        if ( i.system.type.value === "ammo" ) ammo[i.id] = `${i.name} (${i.system.quantity})`;
         return ammo;
       }, {});
     }
@@ -311,7 +310,7 @@ export default class ItemSheet5e extends ItemSheet {
     const labels = this.item.labels;
     switch ( this.item.type ) {
       case "equipment":
-        props.push(CONFIG.DND5E.equipmentTypes[this.item.system.armor.type]);
+        props.push(CONFIG.DND5E.equipmentTypes[this.item.system.type.value]);
         if ( this.item.isArmor || this.item.isMountable ) props.push(labels.armor);
         break;
       case "feat":

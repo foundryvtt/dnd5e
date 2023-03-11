@@ -567,8 +567,7 @@
           "dt": null,
           "conditions": ""
         },
-        "weaponType": "simpleM",
-        "baseItem": "",
+        "type": { "value": "simpleM", "subtype": "", "baseItem": "" },
         "properties": {
           "thr": true,
           "amm": false,
@@ -689,8 +688,7 @@
           "dt": null,
           "conditions": ""
         },
-        "weaponType": "simpleR",
-        "baseItem": "",
+        "type": { "value": "simpleR", "subtype": "", "baseItem": "" },
         "properties": {
           "thr": true,
           "amm": false,
@@ -798,7 +796,7 @@
           "dc": null,
           "scaling": "spell"
         },
-        "consumableType": "ammo"
+        "type": {"value":"ammo","subtype":"","baseItem":""}
       },
       "sort": 0,
       "flags": {
@@ -906,8 +904,7 @@
           "dt": null,
           "conditions": ""
         },
-        "weaponType": "martialM",
-        "baseItem": "",
+        "type": { "value": "martialM", "subtype": "", "baseItem": "" },
         "properties": {
           "hvy": true,
           "two": true,
@@ -1117,7 +1114,7 @@
           "dc": 17,
           "scaling": "flat"
         },
-        "consumableType": "trinket"
+        "type": {"value":"trinket","subtype":"","baseItem":""}
       },
       "sort": 0,
       "flags": {
@@ -1212,7 +1209,7 @@
           "dc": null,
           "scaling": "spell"
         },
-        "consumableType": "food"
+        "type": {"value":"food","subtype":"","baseItem":""}
       },
       "sort": 0,
       "flags": {
@@ -1398,7 +1395,7 @@
           "dc": null,
           "scaling": "spell"
         },
-        "consumableType": "trinket"
+        "type": {"value":"trinket","subtype":"","baseItem":""}
       },
       "sort": 0,
       "flags": {
@@ -1493,7 +1490,7 @@
           "dc": null,
           "scaling": "spell"
         },
-        "consumableType": "food"
+        "type": {"value":"food","subtype":"","baseItem":""}
       },
       "sort": 0,
       "flags": {
@@ -1601,8 +1598,7 @@
           "dt": null,
           "conditions": ""
         },
-        "weaponType": "simpleM",
-        "baseItem": "",
+        "type": { "value": "simpleM", "subtype": "", "baseItem": "" },
         "properties": {
           "lgt": true,
           "thr": true,
@@ -1727,8 +1723,7 @@
           "dt": null,
           "conditions": ""
         },
-        "weaponType": "simpleM",
-        "baseItem": "",
+        "type": { "value": "simpleM", "subtype": "", "baseItem": "" },
         "properties": {
           "lgt": true,
           "thr": true,

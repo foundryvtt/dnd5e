@@ -1624,19 +1624,19 @@ DND5E.traits = {
     label: "DND5E.TraitWeaponProf",
     actorKeyPath: "traits.weaponProf",
     configKey: "weaponProficiencies",
-    subtypes: { keyPath: "weaponType", ids: ["weaponIds"] }
+    subtypes: { keyPath: "type.value", ids: ["weaponIds"] }
   },
   armor: {
     label: "DND5E.TraitArmorProf",
     actorKeyPath: "traits.armorProf",
     configKey: "armorProficiencies",
-    subtypes: { keyPath: "armor.type", ids: ["armorIds", "shieldIds"] }
+    subtypes: { keyPath: "type.value", ids: ["armorIds", "shieldIds"] }
   },
   tool: {
     label: "DND5E.TraitToolProf",
     actorKeyPath: "traits.toolProf",
     configKey: "toolProficiencies",
-    subtypes: { keyPath: "toolType", ids: ["toolIds"] },
+    subtypes: { keyPath: "type.value", ids: ["toolIds"] },
     children: { vehicle: "vehicleTypes" },
     sortCategories: true
   }

@@ -600,7 +600,7 @@
           "dc": 17,
           "scaling": "flat"
         },
-        "consumableType": "trinket"
+        "type": {"value":"trinket","subtype":"","baseItem":""}
       },
       "sort": 0,
       "flags": {
@@ -781,7 +781,7 @@
           "dc": null,
           "scaling": "spell"
         },
-        "consumableType": "food"
+        "type": {"value":"food","subtype":"","baseItem":""}
       },
       "sort": 0,
       "flags": {
@@ -881,7 +881,7 @@
           "dc": null,
           "scaling": "spell"
         },
-        "consumableType": "ammo"
+        "type": {"value":"ammo","subtype":"","baseItem":""}
       },
       "sort": 0,
       "flags": {},
@@ -1083,8 +1083,12 @@
         },
         "armor": {
           "value": 11,
-          "type": "light",
           "dex": null
+        },
+        "type": {
+          "value": "light",
+          "subtype": "",
+          "baseItem": ""
         },
         "hp": {
           "value": 0,
@@ -1092,7 +1096,6 @@
           "dt": null,
           "conditions": ""
         },
-        "baseItem": "",
         "speed": {
           "value": null,
           "conditions": ""
@@ -1207,8 +1210,7 @@
           "dt": null,
           "conditions": ""
         },
-        "weaponType": "martialR",
-        "baseItem": "",
+        "type": { "value": "martialR", "subtype": "", "baseItem": "" },
         "properties": {
           "amm": true,
           "hvy": true,
@@ -1333,8 +1335,7 @@
           "dt": null,
           "conditions": ""
         },
-        "weaponType": "martialM",
-        "baseItem": "",
+        "type": { "value": "martialM", "subtype": "", "baseItem": "" },
         "properties": {
           "fin": true,
           "lgt": true,
@@ -1459,8 +1460,7 @@
           "dt": null,
           "conditions": ""
         },
-        "weaponType": "martialM",
-        "baseItem": "",
+        "type": { "value": "martialM", "subtype": "", "baseItem": "" },
         "properties": {
           "fin": true,
           "lgt": true,
@@ -1568,7 +1568,7 @@
           "dc": null,
           "scaling": "spell"
         },
-        "consumableType": "food"
+        "type": {"value":"food","subtype":"","baseItem":""}
       },
       "sort": 0,
       "flags": {
@@ -1668,7 +1668,7 @@
           "dc": null,
           "scaling": "spell"
         },
-        "consumableType": "trinket"
+        "type": {"value":"trinket","subtype":"","baseItem":""}
       },
       "sort": 0,
       "flags": {

@@ -3,12 +3,14 @@ import ActionTemplate from "./templates/action.mjs";
 import ActivatedEffectTemplate from "./templates/activated-effect.mjs";
 import EquippableItemTemplate from "./templates/equippable-item.mjs";
 import ItemDescriptionTemplate from "./templates/item-description.mjs";
+import ItemTypeTemplate from "./templates/item-type.mjs";
 import PhysicalItemTemplate from "./templates/physical-item.mjs";
 import MountableTemplate from "./templates/mountable.mjs";
 
 /**
  * Data definition for Equipment items.
  * @mixes ItemDescriptionTemplate
+ * @mixes ItemTypeTemplate
  * @mixes PhysicalItemTemplate
  * @mixes EquippableItemTemplate
  * @mixes ActivatedEffectTemplate
@@ -16,10 +18,8 @@ import MountableTemplate from "./templates/mountable.mjs";
  * @mixes MountableTemplate
  *
  * @property {object} armor             Armor details and equipment type information.
- * @property {string} armor.type        Equipment type as defined in `DND5E.equipmentTypes`.
  * @property {number} armor.value       Base armor class or shield bonus.
  * @property {number} armor.dex         Maximum dex bonus added to armor class.
- * @property {string} baseItem          Base armor as defined in `DND5E.armorIds` for determining proficiency.
  * @property {object} speed             Speed granted by a piece of vehicle equipment.
  * @property {number} speed.value       Speed granted by this piece of equipment measured in feet or meters
  *                                      depending on system setting.
@@ -29,20 +29,16 @@ import MountableTemplate from "./templates/mountable.mjs";
  * @property {boolean} proficient       Does the owner have proficiency in this piece of equipment?
  */
 export default class EquipmentData extends SystemDataModel.mixin(
-  ItemDescriptionTemplate, PhysicalItemTemplate, EquippableItemTemplate,
+  ItemDescriptionTemplate, ItemTypeTemplate, PhysicalItemTemplate, EquippableItemTemplate,
   ActivatedEffectTemplate, ActionTemplate, MountableTemplate
 ) {
   /** @inheritdoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
       armor: new foundry.data.fields.SchemaField({
-        type: new foundry.data.fields.StringField({
-          required: true, initial: "light", label: "DND5E.ItemEquipmentType"
-        }),
         value: new foundry.data.fields.NumberField({required: true, integer: true, min: 0, label: "DND5E.ArmorClass"}),
         dex: new foundry.data.fields.NumberField({required: true, integer: true, label: "DND5E.ItemEquipmentDexMod"})
       }, {label: ""}),
-      baseItem: new foundry.data.fields.StringField({required: true, label: "DND5E.ItemEquipmentBase"}),
       speed: new foundry.data.fields.SchemaField({
         value: new foundry.data.fields.NumberField({required: true, min: 0, label: "DND5E.Speed"}),
         conditions: new foundry.data.fields.StringField({required: true, label: "DND5E.SpeedConditions"})
@@ -74,7 +70,7 @@ export default class EquipmentData extends SystemDataModel.mixin(
    */
   static #migrateArmor(source) {
     source.armor ??= {};
-    if ( source.armor.type === "bonus" ) source.armor.type = "trinket";
+    if ( source.armor.bonus === "bonus" ) source.type.value = "trinket";
     if ( (typeof source.armor.dex === "string") ) {
       const dex = source.armor.dex;
       if ( dex === "" ) source.armor.dex = null;
@@ -104,7 +100,7 @@ export default class EquipmentData extends SystemDataModel.mixin(
    */
   get chatProperties() {
     return [
-      CONFIG.DND5E.equipmentTypes[this.armor.type],
+      CONFIG.DND5E.equipmentTypes[this.type.value],
       this.parent.labels?.armor ?? null,
       this.stealth ? game.i18n.localize("DND5E.StealthDisadvantage") : null
     ];
@@ -117,7 +113,7 @@ export default class EquipmentData extends SystemDataModel.mixin(
    * @type {boolean}
    */
   get isArmor() {
-    return this.armor.type in CONFIG.DND5E.armorTypes;
+    return this.type.value in CONFIG.DND5E.armorTypes;
   }
 
   /* -------------------------------------------- */
@@ -128,7 +124,7 @@ export default class EquipmentData extends SystemDataModel.mixin(
    * @type {boolean}
    */
   get isMountable() {
-    return this.armor.type === "vehicle";
+    return this.type.value === "vehicle";
   }
 
 }

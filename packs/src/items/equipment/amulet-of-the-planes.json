@@ -72,8 +72,12 @@
     },
     "armor": {
       "value": 0,
-      "type": "light",
       "dex": 0
+    },
+    "type": {
+      "value": "light",
+      "subtype": "",
+      "baseItem": ""
     },
     "hp": {
       "value": 0,
@@ -81,7 +85,6 @@
       "dt": null,
       "conditions": ""
     },
-    "baseItem": "",
     "speed": {
       "value": null,
       "conditions": ""

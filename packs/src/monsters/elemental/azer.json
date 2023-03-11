@@ -524,8 +524,12 @@
         },
         "armor": {
           "value": 2,
-          "type": "shield",
           "dex": null
+        },
+        "type": {
+          "value": "shield",
+          "subtype": "",
+          "baseItem": ""
         },
         "hp": {
           "value": 0,
@@ -533,7 +537,6 @@
           "dt": null,
           "conditions": ""
         },
-        "baseItem": "",
         "speed": {
           "value": null,
           "conditions": ""
@@ -933,8 +936,7 @@
           "dt": null,
           "conditions": ""
         },
-        "weaponType": "martialM",
-        "baseItem": "",
+        "type": { "value": "martialM", "subtype": "", "baseItem": "" },
         "properties": {
           "ver": true,
           "amm": false,

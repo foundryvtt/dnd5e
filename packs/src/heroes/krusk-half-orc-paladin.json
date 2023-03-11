@@ -558,8 +558,12 @@
         },
         "armor": {
           "value": null,
-          "type": "trinket",
           "dex": null
+        },
+        "type": {
+          "value": "trinket",
+          "subtype": "",
+          "baseItem": ""
         },
         "hp": {
           "value": 0,
@@ -567,7 +571,6 @@
           "dt": null,
           "conditions": ""
         },
-        "baseItem": "",
         "speed": {
           "value": null,
           "conditions": ""
@@ -678,8 +681,7 @@
           "dt": null,
           "conditions": ""
         },
-        "weaponType": "simpleM",
-        "baseItem": "",
+        "type": { "value": "simpleM", "subtype": "", "baseItem": "" },
         "properties": {
           "thr": true,
           "amm": false,
@@ -800,8 +802,7 @@
           "dt": null,
           "conditions": ""
         },
-        "weaponType": "simpleR",
-        "baseItem": "",
+        "type": { "value": "simpleR", "subtype": "", "baseItem": "" },
         "properties": {
           "thr": true,
           "amm": false,
@@ -909,7 +910,7 @@
           "dc": null,
           "scaling": "spell"
         },
-        "consumableType": "ammo"
+        "type": {"value":"ammo","subtype":"","baseItem":""}
       },
       "sort": 0,
       "flags": {
@@ -1044,8 +1045,12 @@
         },
         "armor": {
           "value": 16,
-          "type": "heavy",
           "dex": 0
+        },
+        "type": {
+          "value": "heavy",
+          "subtype": "",
+          "baseItem": ""
         },
         "hp": {
           "value": 0,
@@ -1053,7 +1058,6 @@
           "dt": null,
           "conditions": ""
         },
-        "baseItem": "",
         "speed": {
           "value": null,
           "conditions": ""
@@ -1156,8 +1160,12 @@
         },
         "armor": {
           "value": 2,
-          "type": "shield",
           "dex": null
+        },
+        "type": {
+          "value": "shield",
+          "subtype": "",
+          "baseItem": ""
         },
         "hp": {
           "value": 0,
@@ -1165,7 +1173,6 @@
           "dt": null,
           "conditions": ""
         },
-        "baseItem": "",
         "speed": {
           "value": null,
           "conditions": ""
@@ -1280,8 +1287,7 @@
           "dt": null,
           "conditions": ""
         },
-        "weaponType": "martialM",
-        "baseItem": "",
+        "type": { "value": "martialM", "subtype": "", "baseItem": "" },
         "properties": {
           "ver": true,
           "amm": false,
@@ -1393,7 +1399,7 @@
           "dc": 17,
           "scaling": "flat"
         },
-        "consumableType": "trinket"
+        "type": {"value":"trinket","subtype":"","baseItem":""}
       },
       "sort": 0,
       "flags": {
@@ -1592,7 +1598,7 @@
           "dc": null,
           "scaling": "spell"
         },
-        "consumableType": "food"
+        "type": {"value":"food","subtype":"","baseItem":""}
       },
       "sort": 0,
       "flags": {
@@ -1691,8 +1697,7 @@
         "equipped": false,
         "rarity": "common",
         "identified": true,
-        "toolType": "",
-        "baseItem": "",
+        "type": { "value": "", "subtype": "", "baseItem": "" },
         "ability": "str",
         "chatFlavor": "",
         "proficient": 1,
@@ -1839,7 +1844,7 @@
           "dc": null,
           "scaling": "spell"
         },
-        "consumableType": "trinket"
+        "type": {"value":"trinket","subtype":"","baseItem":""}
       },
       "sort": 0,
       "flags": {
@@ -1940,7 +1945,7 @@
           "dc": null,
           "scaling": "spell"
         },
-        "consumableType": "food"
+        "type": {"value":"food","subtype":"","baseItem":""}
       },
       "sort": 0,
       "flags": {

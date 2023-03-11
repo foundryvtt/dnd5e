@@ -517,8 +517,12 @@
         },
         "armor": {
           "value": 11,
-          "type": "light",
           "dex": null
+        },
+        "type": {
+          "value": "light",
+          "subtype": "",
+          "baseItem": ""
         },
         "hp": {
           "value": 0,
@@ -526,7 +530,6 @@
           "dt": null,
           "conditions": ""
         },
-        "baseItem": "",
         "speed": {
           "value": null,
           "conditions": ""
@@ -825,8 +828,7 @@
           "dt": null,
           "conditions": ""
         },
-        "weaponType": "martialR",
-        "baseItem": "",
+        "type": { "value": "martialR", "subtype": "", "baseItem": "" },
         "properties": {
           "amm": true,
           "hvy": true,
@@ -951,8 +953,7 @@
           "dt": null,
           "conditions": ""
         },
-        "weaponType": "martialM",
-        "baseItem": "",
+        "type": { "value": "martialM", "subtype": "", "baseItem": "" },
         "properties": {
           "amm": false,
           "fin": false,

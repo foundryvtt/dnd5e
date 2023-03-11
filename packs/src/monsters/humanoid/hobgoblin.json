@@ -629,8 +629,7 @@
           "dt": null,
           "conditions": ""
         },
-        "weaponType": "martialM",
-        "baseItem": "",
+        "type": { "value": "martialM", "subtype": "", "baseItem": "" },
         "properties": {
           "ver": true,
           "amm": false,
@@ -755,8 +754,7 @@
           "dt": null,
           "conditions": ""
         },
-        "weaponType": "martialR",
-        "baseItem": "",
+        "type": { "value": "martialR", "subtype": "", "baseItem": "" },
         "properties": {
           "amm": true,
           "hvy": true,
@@ -869,8 +867,12 @@
         },
         "armor": {
           "value": 16,
-          "type": "heavy",
           "dex": 0
+        },
+        "type": {
+          "value": "heavy",
+          "subtype": "",
+          "baseItem": ""
         },
         "hp": {
           "value": 0,
@@ -878,7 +880,6 @@
           "dt": null,
           "conditions": ""
         },
-        "baseItem": "",
         "speed": {
           "value": null,
           "conditions": ""
@@ -981,8 +982,12 @@
         },
         "armor": {
           "value": 2,
-          "type": "shield",
           "dex": null
+        },
+        "type": {
+          "value": "shield",
+          "subtype": "",
+          "baseItem": ""
         },
         "hp": {
           "value": 0,
@@ -990,7 +995,6 @@
           "dt": null,
           "conditions": ""
         },
-        "baseItem": "",
         "speed": {
           "value": null,
           "conditions": ""
