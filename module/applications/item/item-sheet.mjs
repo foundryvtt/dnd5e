@@ -184,16 +184,16 @@ export default class ItemSheet5e extends ItemSheet {
    * @protected
    */
   async _getItemBaseTypes() {
-    const idType = this.item.type === "equipment" ? "armor" : this.item.type;
-    const baseIds = CONFIG.DND5E[`${idType}Ids`];
+    const type = this.item.type === "equipment" ? "armor" : this.item.type;
+    const baseIds = CONFIG.DND5E[`${type}Ids`];
     if ( baseIds === undefined ) return {};
 
-    const type = this.item.system.type.value;
+    const baseType = this.item.system.type.value;
 
     const items = {};
     for ( const [name, id] of Object.entries(baseIds) ) {
       const baseItem = await Trait.getBaseItem(id);
-      if ( type !== baseItem.system.type.value ) continue;
+      if ( baseType !== baseItem?.system?.type?.value ) continue;
       items[name] = baseItem.name;
     }
     return Object.fromEntries(Object.entries(items).sort((lhs, rhs) => lhs[1].localeCompare(rhs[1])));
