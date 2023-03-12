@@ -1,5 +1,6 @@
 {{#unless isVehicle}}
 <div class="inventory-filters flexrow">
+    {{#if isNPC}}
     <ol class="currency flexrow">
         <h3>
             {{localize "DND5E.Currency"}}
@@ -13,6 +14,7 @@
         <input type="text" name="system.currency.{{k}}" value="{{v}}" data-dtype="Number">
         {{/each}}
     </ol>
+    {{/if}}
 
     <ul class="filter-list flexrow" data-filter="features">
         <li class="filter-item" data-filter="action">{{localize "DND5E.Action"}}</li>
