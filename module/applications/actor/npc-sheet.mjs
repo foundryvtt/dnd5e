@@ -9,7 +9,7 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ["dnd5e", "sheet", "actor", "npc"],
-      width: 600
+      width: 610
     });
   }
 
@@ -106,6 +106,38 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
     else label.push(game.i18n.localize(CONFIG.DND5E.armorClasses[ac.calc].label));
     if ( this.actor.shield ) label.push(this.actor.shield.name);
     return label.filterJoin(", ");
+  }
+
+  /* -------------------------------------------- */
+  /*  Event Listeners and Handlers
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  activateListeners(html) {
+    super.activateListeners(html);
+    if ( !this.isEditable ) return;
+    html.find(".rollable[data-action]").click(this._onSheetAction.bind(this));
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle mouse click events for character sheet actions.
+   * @param {MouseEvent} event  The originating click event.
+   * @returns {Promise}         Dialog or roll result.
+   * @private
+   */
+  _onSheetAction(event) {
+    event.preventDefault();
+    const button = event.currentTarget;
+    switch ( button.dataset.action ) {
+      case "convertCurrency":
+        return Dialog.confirm({
+          title: `${game.i18n.localize("DND5E.CurrencyConvert")}`,
+          content: `<p>${game.i18n.localize("DND5E.CurrencyConvertHint")}</p>`,
+          yes: () => this.actor.convertCurrency()
+        });
+    }
   }
 
   /* -------------------------------------------- */
