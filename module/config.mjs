@@ -73,27 +73,27 @@ DND5E.hitPointsAbility = "con";
  * @enum {SkillConfiguration}
  */
 DND5E.skills = {
-  acr: { label: "DND5E.SkillAcr", ability: "dex" },
-  ani: { label: "DND5E.SkillAni", ability: "wis" },
-  arc: { label: "DND5E.SkillArc", ability: "int" },
   ath: { label: "DND5E.SkillAth", ability: "str" },
-  dec: { label: "DND5E.SkillDec", ability: "cha" },
-  his: { label: "DND5E.SkillHis", ability: "int" },
-  ins: { label: "DND5E.SkillIns", ability: "wis" },
-  itm: { label: "DND5E.SkillItm", ability: "cha" },
-  inv: { label: "DND5E.SkillInv", ability: "int" },
-  med: { label: "DND5E.SkillMed", ability: "wis" },
-  nat: { label: "DND5E.SkillNat", ability: "int" },
-  prc: { label: "DND5E.SkillPrc", ability: "wis" },
-  prf: { label: "DND5E.SkillPrf", ability: "cha" },
-  per: { label: "DND5E.SkillPer", ability: "cha" },
-  rel: { label: "DND5E.SkillRel", ability: "int" },
+  acr: { label: "DND5E.SkillAcr", ability: "dex" },
   slt: { label: "DND5E.SkillSlt", ability: "dex" },
   ste: { label: "DND5E.SkillSte", ability: "dex" },
-  stw: { label: "DND5E.SkillStw", ability: "cha" },
-  sur: { label: "DND5E.SkillSur", ability: "wis" }
+  arc: { label: "DND5E.SkillArc", ability: "int" },
+  his: { label: "DND5E.SkillHis", ability: "int" },
+  inv: { label: "DND5E.SkillInv", ability: "int" },
+  nat: { label: "DND5E.SkillNat", ability: "int" },
+  rel: { label: "DND5E.SkillRel", ability: "int" },
+  ani: { label: "DND5E.SkillAni", ability: "wis" },
+  ins: { label: "DND5E.SkillIns", ability: "wis" },
+  med: { label: "DND5E.SkillMed", ability: "wis" },
+  prc: { label: "DND5E.SkillPrc", ability: "wis" },
+  sur: { label: "DND5E.SkillSur", ability: "wis" },
+  dec: { label: "DND5E.SkillDec", ability: "cha" },
+  itm: { label: "DND5E.SkillItm", ability: "cha" },
+  prf: { label: "DND5E.SkillPrf", ability: "cha" },
+  per: { label: "DND5E.SkillPer", ability: "cha" },
+  stw: { label: "DND5E.SkillStw", ability: "cha" }
 };
-preLocalize("skills", { key: "label", sort: true });
+preLocalize("skills", { key: "label", sort: false });
 patchConfig("skills", "label", { since: 2.0, until: 2.2 });
 
 /* -------------------------------------------- */
