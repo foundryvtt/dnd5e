@@ -996,9 +996,13 @@ export default class Item5e extends Item {
     const consume = this.system.consume || {};
     if ( !consume.type ) return;
 
-    // default to equipped ammunition if empty
     let target = consume.target;
     if ( !target && consume.type == "ammo" ) {
+      // check if an infinite quiver is equipped and attuned
+      const infiniteQuivers = this.actor.itemTypes.equipment.filter(i=>i.name.includes("Infinite Quiver") && i.system.attunement != 1).length > 0;
+      if (infiniteQuivers)
+        return
+      // default to equipped ammunition if empty
       const possibleAmmunition = this.actor.itemTypes.consumable.filter((i) => {
         if ( i.system.consumableType != "ammo" )
           return false;
