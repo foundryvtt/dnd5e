@@ -297,7 +297,7 @@ function _createDamageList({ roll, item, versatile, defaultType = "none", ammo }
     // we can always add since the +/- will be recorded in the evalString
     damageParts[damageType || defaultType] = (damageParts[damageType || defaultType] || 0) + damage;
   }
-  const bypasses = Object.keys(CONFIG.DND5E.physicalWeaponProperties).filter(pwp=>item?.system.properties[pwp]);
+  const bypasses = Object.keys(CONFIG.DND5E.physicalWeaponProperties).filter(pwp=>(item?.system.properties[pwp] ?? false)||(ammo?.system.properties[pwp] ?? false));
   const damageList = Object.entries(damageParts).map(([type, damage]) => {
     if (Object.keys(CONFIG.DND5E.physicalDamageTypes).includes(type)) {
       return { damage, type, bypasses }
@@ -331,7 +331,7 @@ function applyChatCardDamage(li, multiplier) {
   if (message?.flags?.dnd5e?.roll?.ammoUuid !== undefined) {
     ammoPromise = fromUuid(message.flags.dnd5e.roll.ammoUuid).then((amo)=>ammo = amo);;
   }
-  
+
   Promise.all([itemPromise, ammoPromise]).then(()=>{
     const damageList = _createDamageList({
       roll: roll,

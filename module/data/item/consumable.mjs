@@ -26,6 +26,9 @@ export default class ConsumableData extends SystemDataModel.mixin(
       consumableType: new foundry.data.fields.StringField({
         required: true, initial: "potion", label: "DND5E.ItemConsumableType"
       }),
+      properties: new MappingField(new foundry.data.fields.BooleanField(), {
+        required: false, initialKeys: CONFIG.DND5E.physicalWeaponProperties, label: "DND5E.ItemAmmunitionProperties"
+      }),
       uses: new ActivatedEffectTemplate.ItemUsesField({
         autoDestroy: new foundry.data.fields.BooleanField({required: true, label: "DND5E.ItemDestroyEmpty"})
       }, {label: "DND5E.LimitedUses"})

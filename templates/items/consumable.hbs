@@ -71,6 +71,18 @@
                     <input type="checkbox" name="system.identified" {{checked system.identified}}/> {{ localize "DND5E.Identified" }}
                 </label>
             </div>
+            
+            {{!-- Ammunition Properties --}}
+            {{#if (eq system.consumableType "ammo")}}
+            <div class="form-group stacked ammunition-properties">
+                <label>{{ localize "DND5E.ItemAmmunitionProperties" }}</label>
+                {{#each config.physicalWeaponProperties as |name prop|}}
+                <label class="checkbox">
+                    <input type="checkbox" name="system.properties.{{prop}}" {{checked (lookup ../system.properties prop)}}/> {{ name }}
+                </label>
+                {{/each}}
+            </div>
+            {{/if}}
 
             <h3 class="form-header">{{ localize "DND5E.ItemConsumableUsage" }}</h3>
 
