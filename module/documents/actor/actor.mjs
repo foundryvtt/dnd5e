@@ -980,8 +980,7 @@ export default class Actor5e extends Actor {
     if ( !hp ) return this; // Group actors don't have HP at the moment
 
     // Deduct damage from temp HP first
-    const tmp = parseInt(hp.temp) || 0;
-    let dt = tmp;
+    let dt = parseInt(hp.temp) || 0;
     // const dt = amount > 0 ? Math.min(tmp, amount) : 0;
 
     // Remaining goes to health
@@ -989,12 +988,24 @@ export default class Actor5e extends Actor {
     let dh = hp.value;
     // const dh = Math.clamped(hp.value - (amount - dt), 0, hp.max + tmpMax);
 
-    let amount = 0;
-    console.log(typedDamages);
     for (let td of typedDamages) {
       let damage = Math.floor(parseInt(td?.damage ?? "0") * multiplier);
       const type = td?.type ?? "none";
       const bypasses = td?.bypasses ?? [];
+      if (type == "healing" && multiplier > 0) {
+        dh += Math.max(damage, 0);
+        continue;
+      } else if (type == "healing" && multiplier < 0) {
+        dh += Math.max(-damage, 0);
+        continue;
+      } else if (type == "temphp" && multiplier > 0 && damage < 0) {
+        dt = Math.max(dt + damage, 0);
+        continue;
+      } else if (type == "temphp") {
+        dt = Math.max(dt, damage);
+        continue;
+      }
+
       if (this.system.traits.di.value.has(type) && !bypasses.some(dt=>this.system.traits.di.bypasses.has(dt))) {
         damage = 0;
       } else if (this.system.traits.dr.value.has(type) && !bypasses.some(dt=>this.system.traits.dr.bypasses.has(dt))) {
@@ -1015,10 +1026,11 @@ export default class Actor5e extends Actor {
     };
     dt = Math.max(dt, 0);
     dh = Math.clamped(dh, 0, hp.max + tmpMax);
+    let amount = (parseInt(hp.tempmax) || 0) + hp.value - (dt + dh);
 
     // Update the Actor
     const updates = {
-      "system.attributes.hp.temp": tmp - dt,
+      "system.attributes.hp.temp": dt,
       "system.attributes.hp.value": dh
     };
 
