@@ -1418,7 +1418,7 @@ export default class Item5e extends Item {
         left: window.innerWidth - 710
       },
       messageData: {
-        "flags.dnd5e.roll": {type: "attack", itemId: this.id, itemUuid: this.uuid},
+        "flags.dnd5e.roll": {type: "attack", itemId: this.id, itemUuid: this.uuid, ammoUuid: this._ammo.uuid},
         speaker: ChatMessage.getSpeaker({actor: this.actor})
       }
     }, options);
@@ -1469,7 +1469,7 @@ export default class Item5e extends Item {
   async rollDamage({critical, event=null, spellLevel=null, versatile=false, options={}}={}) {
     if ( !this.hasDamage ) throw new Error("You may not make a Damage Roll with this Item.");
     const messageData = {
-      "flags.dnd5e.roll": {type: "damage", itemId: this.id, itemUuid: this.uuid},
+      "flags.dnd5e.roll": {type: "damage", itemId: this.id, itemUuid: this.uuid, ammoUuid: this._ammo?.uuid},
       speaker: ChatMessage.getSpeaker({actor: this.actor})
     };
 

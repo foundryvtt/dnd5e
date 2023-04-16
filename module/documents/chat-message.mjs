@@ -320,16 +320,24 @@ function _createDamageList({ roll, item, versatile, defaultType = "none", ammo }
 function applyChatCardDamage(li, multiplier) {
   const message = game.messages.get(li.data("messageId"));
   const roll = message.rolls[0];
-  let itemPromise = new Promise((resolve, reject)=>{resolve(null);});
+  let item = null;
+  let ammo = null
+
+  let itemPromise = new Promise((resolve, reject)=>{resolve();});
   if (message?.flags?.dnd5e?.roll?.itemUuid !== undefined) {
-    itemPromise = fromUuid(message.flags.dnd5e.roll.itemUuid);
+    itemPromise = fromUuid(message.flags.dnd5e.roll.itemUuid).then((itm)=>item = itm);
   }
-  itemPromise.then((item)=>{
+  let ammoPromise = new Promise((resolve, reject)=>{resolve();});
+  if (message?.flags?.dnd5e?.roll?.ammoUuid !== undefined) {
+    ammoPromise = fromUuid(message.flags.dnd5e.roll.ammoUuid).then((amo)=>ammo = amo);;
+  }
+  
+  Promise.all([itemPromise, ammoPromise]).then(()=>{
     const damageList = _createDamageList({
       roll: roll,
       item: item,
       versatile: message?.flags?.dnd5e?.roll?.versatile ?? false,
-      ammo: null,
+      ammo: ammo,
     });
     // find solution for non-magic weapons
     return Promise.all(canvas.tokens.controlled.map(t=>t.actor.applyTypedDamage(damageList, multiplier)));
