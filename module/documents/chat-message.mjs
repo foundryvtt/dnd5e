@@ -136,7 +136,7 @@ function _getDamageFlavor(damageType) {
  *  return a list of {damage: number, type: string} for the roll and the item
  */
 function _createDamageList({ roll, item, versatile, defaultType = "none", ammo }) {
-  const debugEnabled = true;
+  const debugEnabled = 0;
   let damageParts = {};
   const rollTerms = roll.terms;
   let evalString = "";
@@ -297,7 +297,14 @@ function _createDamageList({ roll, item, versatile, defaultType = "none", ammo }
     // we can always add since the +/- will be recorded in the evalString
     damageParts[damageType || defaultType] = (damageParts[damageType || defaultType] || 0) + damage;
   }
-  const damageList = Object.entries(damageParts).map(([type, damage]) => { return { damage, type } });
+  const bypasses = Object.keys(CONFIG.DND5E.physicalWeaponProperties).filter(pwp=>item?.system.properties[pwp]);
+  const damageList = Object.entries(damageParts).map(([type, damage]) => {
+    if (Object.keys(CONFIG.DND5E.physicalDamageTypes).includes(type)) {
+      return { damage, type, bypasses }
+    } else {
+      return { damage, type }
+    }
+  });
   if (debugEnabled > 1) debug("CreateDamageList: Final damage list is ", damageList);
   return damageList;
 }
@@ -313,16 +320,22 @@ function _createDamageList({ roll, item, versatile, defaultType = "none", ammo }
 function applyChatCardDamage(li, multiplier) {
   const message = game.messages.get(li.data("messageId"));
   const roll = message.rolls[0];
-  fromUuid(message.flags.dnd5e.roll.itemUuid).then((item)=>{
+  let itemPromise = new Promise((resolve, reject)=>{resolve(null);});
+  if (message?.flags?.dnd5e?.roll?.itemUuid !== undefined) {
+    itemPromise = fromUuid(message.flags.dnd5e.roll.itemUuid);
+  }
+  itemPromise.then((item)=>{
     const damageList = _createDamageList({
       roll: roll,
       item: item,
-      versatile: message.flags.dnd5e.roll.versatile ?? false,
+      versatile: message?.flags?.dnd5e?.roll?.versatile ?? false,
       ammo: null,
     });
     // find solution for non-magic weapons
     return Promise.all(canvas.tokens.controlled.map(t=>t.actor.applyTypedDamage(damageList, multiplier)));
-  }, (rejection)=>{});
+  }, (rejection)=>{
+    console.log(rejection);
+  });
 }
 
 /* -------------------------------------------- */
