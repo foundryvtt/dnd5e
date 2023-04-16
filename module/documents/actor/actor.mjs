@@ -969,6 +969,70 @@ export default class Actor5e extends Actor {
     return allowed !== false ? this.update(updates, {dhp: -amount}) : this;
   }
 
+  /**
+   * Apply a certain amount of damage or healing to the health pool for Actor
+   * @param {list<{damage:number,type:string}>} typedDamages       The damage/type pairs
+   * @param {number} multiplier   A multiplier which allows for resistance, vulnerability, or healing
+   * @returns {Promise<Actor5e>}  A Promise which resolves once the damage has been applied
+   */
+  async applyTypedDamage(typedDamages, multiplier=1) {
+    const hp = this.system.attributes.hp;
+    if ( !hp ) return this; // Group actors don't have HP at the moment
+
+    // Deduct damage from temp HP first
+    const tmp = parseInt(hp.temp) || 0;
+    let dt = tmp;
+    // const dt = amount > 0 ? Math.min(tmp, amount) : 0;
+
+    // Remaining goes to health
+    const tmpMax = parseInt(hp.tempmax) || 0;
+    let dh = hp.value;
+    // const dh = Math.clamped(hp.value - (amount - dt), 0, hp.max + tmpMax);
+
+    let amount = 0;
+    console.log(typedDamages);
+    for (let td of typedDamages) {
+      let damage = Math.floor(parseInt(td?.damage ?? "0") * multiplier);
+      const type = td?.type ?? "none";
+      const bypasses = td?.bypasses ?? [];
+      if (this.system.traits.di.value.has(type) && !bypasses.some(dt=>this.system.traits.di.bypasses.has(dt))) {
+        damage = 0;
+      } else if (this.system.traits.dr.value.has(type) && !bypasses.some(dt=>this.system.traits.dr.bypasses.has(dt))) {
+        damage = Math.floor(damage / 2);
+      } else if (this.system.traits.dv.value.has(type) && !bypasses.some(dt=>this.system.traits.dv.bypasses.has(dt))) {
+        damage *= 2;
+      }
+
+      if (damage <= dt) {
+        dt -= damage;
+      }
+      else if (dt > 0) {
+        dh -= (damage - dt);
+        dt = 0;
+      } else {
+        dh -= damage;
+      }
+    };
+    dt = Math.max(dt, 0);
+    dh = Math.clamped(dh, 0, hp.max + tmpMax);
+
+    // Update the Actor
+    const updates = {
+      "system.attributes.hp.temp": tmp - dt,
+      "system.attributes.hp.value": dh
+    };
+
+    // Delegate damage application to a hook
+    // TODO replace this in the future with a better modifyTokenAttribute function in the core
+    const allowed = Hooks.call("modifyTokenAttribute", {
+      attribute: "attributes.hp",
+      value: amount,
+      isDelta: false,
+      isBar: true
+    }, updates);
+    return allowed !== false ? this.update(updates, {dhp: -amount}) : this;
+  }
+
   /* -------------------------------------------- */
 
   /**
