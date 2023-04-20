@@ -82,4 +82,13 @@ export default class Token5e extends Token {
       canvas.perception.update({refreshVision: true}, true);
     }
   }
+
+  /** @override */
+  _onUpdate(data, options, userId) {
+    super._onUpdate(data, options, userId);
+    if ( options.toggleEffect === CONFIG.specialStatusEffects.DISEASE
+      || options.toggleEffect === CONFIG.specialStatusEffects.POISON ) {
+      canvas.perception.update({refreshVision: true}, true);
+    }
+  }
 }
