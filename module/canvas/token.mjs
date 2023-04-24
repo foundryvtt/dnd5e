@@ -57,7 +57,7 @@ export default class Token5e extends Token {
 
     // Maximum HP penalty
     else if (tempmax < 0) {
-      const pct = (max + tempmax) / max;
+      const pct = Math.max((max + tempmax) / max, 0);
       bar.beginFill(c.negmax, 1.0).lineStyle(1, blk, 1.0).drawRoundedRect(pct*w, 0, (1-pct)*w, h, 2);
     }
 
