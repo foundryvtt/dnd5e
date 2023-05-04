@@ -3,7 +3,7 @@
 
   <p>
     <span class="initial-scale-value {{#unless initial}}none{{/unless}}">
-      {{#if initial}}{{{initial}}}{{else}}{{localize "DND5E.None"}}{{/if}}
+      {{{ifThen initial initial (localize "DND5E.None")}}}
     </span>
     &#x27A1;
     <span class="new-scale-value">{{{final}}}</span>

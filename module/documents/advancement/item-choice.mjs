@@ -89,7 +89,7 @@ export default class ItemChoiceAdvancement extends ItemGrantAdvancement {
 
     // Type restriction is set and the item type does not match the selected type
     if ( type && (type !== item.type) ) {
-      const typeLabel = game.i18n.localize(`ITEM.Type${restriction.capitalize()}`);
+      const typeLabel = game.i18n.localize(`TYPES.Item.${restriction}`);
       if ( strict ) throw new Error(game.i18n.format("DND5E.AdvancementItemChoiceTypeWarning", {type: typeLabel}));
       return false;
     }

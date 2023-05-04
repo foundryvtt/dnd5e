@@ -79,9 +79,9 @@ Hooks.once("init", function() {
   CONFIG.Dice.rolls.push(dice.DamageRoll);
 
   // Hook up system data types
-  CONFIG.Actor.systemDataModels = dataModels.actor.config;
-  CONFIG.Item.systemDataModels = dataModels.item.config;
-  CONFIG.JournalEntryPage.systemDataModels = dataModels.journal.config;
+  CONFIG.Actor.dataModels = dataModels.actor.config;
+  CONFIG.Item.dataModels = dataModels.item.config;
+  CONFIG.JournalEntryPage.dataModels = dataModels.journal.config;
 
   // Register sheet application classes
   Actors.unregisterSheet("core", ActorSheet);
@@ -191,7 +191,7 @@ Hooks.once("ready", function() {
 
   // Apply custom compendium styles to the SRD rules compendium.
   const rules = game.packs.get("dnd5e.rules");
-  rules.apps = [new applications.journal.SRDCompendium(rules)];
+  rules.apps = [new applications.journal.SRDCompendium({collection: rules})];
 
   // Wait to register hotbar drop hook on ready so that modules could register earlier if they want to
   Hooks.on("hotbarDrop", (bar, data, slot) => {

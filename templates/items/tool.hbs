@@ -15,13 +15,7 @@
             </div>
 
             <ul class="summary flexrow">
-                <li>
-                    {{#if system.toolType}}
-                      {{lookup config.toolTypes system.toolType}}
-                    {{else}}
-                      {{localize "ITEM.TypeTool"}}
-                    {{/if}}
-                </li>
+                <li>{{ifThen system.toolType (lookup config.toolTypes system.toolType) (localize "TYPES.Item.tool")}}</li>
                 <li>
                     <select name="system.rarity">
                         {{selectOptions config.itemRarity selected=system.rarity blank=""}}

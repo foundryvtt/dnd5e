@@ -20,9 +20,9 @@ export async function create5eMacro(dropData, slot) {
       const effectData = await ActiveEffect.implementation.fromDropData(dropData);
       if ( !effectData ) return ui.notifications.warn(game.i18n.localize("MACRO.5eUnownedWarn"));
       foundry.utils.mergeObject(macroData, {
-        name: effectData.label,
+        name: effectData.name,
         img: effectData.icon,
-        command: `dnd5e.documents.macro.toggleEffect("${effectData.label}")`,
+        command: `dnd5e.documents.macro.toggleEffect("${effectData.name}")`,
         flags: {"dnd5e.effectMacro": true}
       });
       break;
@@ -52,10 +52,9 @@ function getMacroTarget(name, documentType) {
   if ( !actor ) return ui.notifications.warn(game.i18n.localize("MACRO.5eNoActorSelected"));
 
   const collection = (documentType === "Item") ? actor.items : actor.effects;
-  const nameKeyPath = (documentType === "Item") ? "name" : "label";
 
   // Find item in collection
-  const documents = collection.filter(i => foundry.utils.getProperty(i, nameKeyPath) === name);
+  const documents = collection.filter(i => i.name === name);
   const type = game.i18n.localize(`DOCUMENT.${documentType}`);
   if ( documents.length === 0 ) {
     return ui.notifications.warn(game.i18n.format("MACRO.5eMissingTargetWarn", { actor: actor.name, type, name }));
@@ -81,10 +80,10 @@ export function rollItem(itemName) {
 
 /**
  * Toggle an effect on and off when a macro is clicked.
- * @param {string} effectLabel       Label for the effect to be toggled.
+ * @param {string} effectName        Name of the effect to be toggled.
  * @returns {Promise<ActiveEffect>}  The effect after it has been toggled.
  */
-export function toggleEffect(effectLabel) {
-  const effect = getMacroTarget(effectLabel, "ActiveEffect");
+export function toggleEffect(effectName) {
+  const effect = getMacroTarget(effectName, "ActiveEffect");
   return effect?.update({disabled: !effect.disabled});
 }

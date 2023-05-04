@@ -49,14 +49,10 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
   _prepareItems(context) {
 
     // Categorize items as inventory, spellbook, features, and classes
-    const inventory = {
-      weapon: { label: "ITEM.TypeWeaponPl", items: [], dataset: {type: "weapon"} },
-      equipment: { label: "ITEM.TypeEquipmentPl", items: [], dataset: {type: "equipment"} },
-      consumable: { label: "ITEM.TypeConsumablePl", items: [], dataset: {type: "consumable"} },
-      tool: { label: "ITEM.TypeToolPl", items: [], dataset: {type: "tool"} },
-      backpack: { label: "ITEM.TypeContainerPl", items: [], dataset: {type: "backpack"} },
-      loot: { label: "ITEM.TypeLootPl", items: [], dataset: {type: "loot"} }
-    };
+    const inventory = {};
+    for(const type of ["weapon", "equipment", "consumable", "tool", "backpack", "loot"]){
+      inventory[type] = {label: `TYPES.Item.${type}Pl`, items: [], dataset: {type}};
+    }
 
     // Partition items by category
     let {items, spells, feats, backgrounds, classes, subclasses} = context.items.reduce((obj, item) => {
@@ -145,10 +141,10 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
     // Organize Features
     const features = {
       background: {
-        label: "ITEM.TypeBackground", items: backgrounds,
+        label: "TYPES.Item.background", items: backgrounds,
         hasActions: false, dataset: {type: "background"} },
       classes: {
-        label: "ITEM.TypeClassPl", items: classes,
+        label: "TYPES.Item.classPl", items: classes,
         hasActions: false, dataset: {type: "class"}, isClass: true },
       active: {
         label: "DND5E.FeatureActive", items: [],
