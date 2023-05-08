@@ -1794,6 +1794,10 @@ h5 {
 /* ----------------------------------------- */
 /*  SRD Compendium                           */
 /* ----------------------------------------- */
+.srd-compendium.app .window-content {
+  background: url(../ui/parchment.jpg) repeat;
+  color: var(--color-text-dark-primary);
+}
 .srd-compendium article {
   display: flex;
   flex-direction: column;
