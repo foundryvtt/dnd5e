@@ -57,6 +57,7 @@ Hooks.once("init", function() {
   CONFIG.Dice.D20Roll = dice.D20Roll;
   CONFIG.MeasuredTemplate.defaults.angle = 53.13; // 5e cone RAW should be 53.13 degrees
   CONFIG.ui.combat = applications.combat.CombatTracker5e;
+  CONFIG.compatibility.excludePatterns.push(/\bActiveEffect5e#label\b/);
 
   // Register System Settings
   registerSystemSettings();
