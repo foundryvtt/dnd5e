@@ -57,7 +57,7 @@ Hooks.once("init", function() {
   CONFIG.Dice.D20Roll = dice.D20Roll;
   CONFIG.MeasuredTemplate.defaults.angle = 53.13; // 5e cone RAW should be 53.13 degrees
   CONFIG.ui.combat = applications.combat.CombatTracker5e;
-  CONFIG.compatibility.excludePatterns.push(/\bActiveEffect5e#label\b/);
+  CONFIG.compatibility.excludePatterns.push(/\bActiveEffect5e#label\b/); // backwards compatibility with v10
 
   // Register System Settings
   registerSystemSettings();
@@ -80,9 +80,10 @@ Hooks.once("init", function() {
   CONFIG.Dice.rolls.push(dice.DamageRoll);
 
   // Hook up system data types
-  CONFIG.Actor.dataModels = dataModels.actor.config;
-  CONFIG.Item.dataModels = dataModels.item.config;
-  CONFIG.JournalEntryPage.dataModels = dataModels.journal.config;
+  const modelType = !foundry.utils.isNewerVersion(game.version, "10.291") ? "systemDataModels" : "dataModels";
+  CONFIG.Actor[modelType] = dataModels.actor.config;
+  CONFIG.Item[modelType] = dataModels.item.config;
+  CONFIG.JournalEntryPage[modelType] = dataModels.journal.config;
 
   // Register sheet application classes
   Actors.unregisterSheet("core", ActorSheet);
@@ -191,8 +192,9 @@ Hooks.once("ready", function() {
   _configureValidationStrictness();
 
   // Apply custom compendium styles to the SRD rules compendium.
-  const rules = game.packs.get("dnd5e.rules");
-  rules.apps = [new applications.journal.SRDCompendium({collection: rules})];
+  const rules = {collection: game.packs.get("dnd5e.rules")};
+  const isV10 = !foundry.utils.isNewerVersion(game.version, "10.291")
+  rules.apps = [new applications.journal.SRDCompendium(isV10 ? rules.collection : rules)];
 
   // Wait to register hotbar drop hook on ready so that modules could register earlier if they want to
   Hooks.on("hotbarDrop", (bar, data, slot) => {
