@@ -24,7 +24,7 @@ export default class ItemChoiceConfig extends AdvancementConfig {
       ...super.getData(options),
       showSpellConfig: this.advancement.configuration.type === "spell",
       validTypes: this.advancement.constructor.VALID_TYPES.reduce((obj, type) => {
-        obj[type] = game.i18n.localize(`TYPES.Item.${type}`);
+        obj[type] = game.i18n.localize(CONFIG.Item.typeLabels[type]);
         return obj;
       }, {})
     };

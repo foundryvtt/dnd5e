@@ -51,7 +51,7 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
     // Categorize items as inventory, spellbook, features, and classes
     const inventory = {};
     for ( const type of ["weapon", "equipment", "consumable", "tool", "backpack", "loot"] ) {
-      inventory[type] = {label: `TYPES.Item.${type}Pl`, items: [], dataset: {type}};
+      inventory[type] = {label: `${CONFIG.Item.typeLabels[type]}Pl`, items: [], dataset: {type}};
     }
 
     // Partition items by category
@@ -141,10 +141,10 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
     // Organize Features
     const features = {
       background: {
-        label: "TYPES.Item.background", items: backgrounds,
+        label: CONFIG.Item.typeLabels.background, items: backgrounds,
         hasActions: false, dataset: {type: "background"} },
       classes: {
-        label: "TYPES.Item.classPl", items: classes,
+        label: `${CONFIG.Item.typeLabels.class}Pl`, items: classes,
         hasActions: false, dataset: {type: "class"}, isClass: true },
       active: {
         label: "DND5E.FeatureActive", items: [],

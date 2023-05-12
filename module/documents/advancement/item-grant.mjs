@@ -148,7 +148,7 @@ export default class ItemGrantAdvancement extends Advancement {
    */
   _validateItemType(item, { strict=true }={}) {
     if ( this.constructor.VALID_TYPES.has(item.type) ) return true;
-    const type = game.i18n.localize(`TYPES.Item.${item.type}`);
+    const type = game.i18n.localize(CONFIG.Item.typeLabels[item.type]);
     if ( strict ) throw new Error(game.i18n.format("DND5E.AdvancementItemTypeInvalidWarning", {type}));
     return false;
   }

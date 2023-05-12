@@ -117,9 +117,9 @@ export default class GroupActorSheet extends ActorSheet {
       nVehicles: 0
     };
     const sections = {
-      character: {label: "TYPES.Actor.characterPl", members: []},
-      npc: {label: "TYPES.Actor.npcPl", members: []},
-      vehicle: {label: "TYPES.Actor.vehiclePl", members: []}
+      character: {label: `${CONFIG.Actor.typeLabels.character}Pl`, members: []},
+      npc: {label: `${CONFIG.Actor.typeLabels.npc}Pl`, members: []},
+      vehicle: {label: `${CONFIG.Actor.typeLabels.vehicle}Pl`, members: []}
     };
     for ( const member of this.object.system.members ) {
       const m = {
@@ -183,7 +183,7 @@ export default class GroupActorSheet extends ActorSheet {
     // Categorize as weapons, equipment, containers, and loot
     const sections = {};
     for ( const type of ["weapon", "equipment", "consumable", "backpack", "loot"] ) {
-      sections[type] = {label: `TYPES.Item.${type}Pl`, items: [], hasActions: false, dataset: {type}};
+      sections[type] = {label: `${CONFIG.Item.typeLabels[type]}Pl`, items: [], hasActions: false, dataset: {type}};
     }
 
     // Classify items
@@ -305,7 +305,7 @@ export default class GroupActorSheet extends ActorSheet {
     const type = button.dataset.type;
     const system = {...button.dataset};
     delete system.type;
-    const name = game.i18n.format("DND5E.ItemNew", {type: game.i18n.localize(`TYPES.Item.${type}`)});
+    const name = game.i18n.format("DND5E.ItemNew", {type: game.i18n.localize(CONFIG.Item.typeLabels[type])});
     const itemData = {name, type, system};
     return this.actor.createEmbeddedDocuments("Item", [itemData]);
   }

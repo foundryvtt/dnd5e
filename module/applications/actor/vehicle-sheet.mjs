@@ -140,7 +140,7 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
         }]
       },
       equipment: {
-        label: game.i18n.localize("TYPES.Item.equipment"),
+        label: game.i18n.localize(CONFIG.Item.typeLabels.equipment),
         items: [],
         crewable: true,
         dataset: {type: "equipment", "armor.type": "vehicle"},
@@ -157,7 +157,7 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
         dataset: {type: "feat", "activation.type": "reaction"}
       },
       weapons: {
-        label: game.i18n.localize("TYPES.Item.weaponPl"),
+        label: game.i18n.localize(`${CONFIG.Item.typeLabels}Pl`),
         items: [],
         crewable: true,
         dataset: {type: "weapon", "weapon-type": "siege"},
