@@ -27,15 +27,15 @@
         <li class="item effect flexrow" data-effect-id="{{effect.id}}">
             <div class="item-name effect-name flexrow">
                 <img class="item-image" src="{{effect.icon}}"/>
-                <h4>{{effect.name}}</h4>
+                <h4>{{effect.label}}</h4>
             </div>
             <div class="effect-source">{{effect.sourceName}}</div>
             <div class="effect-duration">{{effect.duration.label}}</div>
             <div class="item-controls effect-controls flexrow">
                 {{#if @root.editable}}
                 <a class="effect-control" data-action="toggle"
-                   data-tooltip="{{ifThen effect.disabled 'DND5E.EffectEnable' 'DND5E.EffectDisable'}}">
-                    <i class="fas {{ifThen effect.disabled 'fa-check' 'fa-times'}}"></i>
+                   data-tooltip="{{#if effect.disabled}}DND5E.EffectEnable{{else}}DND5E.EffectDisable{{/if}}">
+                    <i class="fas {{#if effect.disabled}}fa-check{{else}}fa-times{{/if}}"></i>
                 </a>
                 <a class="effect-control" data-action="edit" data-tooltip="DND5E.EffectEdit">
                     <i class="fas fa-edit"></i>

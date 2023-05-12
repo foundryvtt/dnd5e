@@ -17,7 +17,8 @@
 
         {{#if hasDamage}}
         <button data-action="damage">
-            {{ifThen isHealing (localize "DND5E.Healing") (localize "DND5E.Damage")}}
+            {{#if isHealing}}{{ localize "DND5E.Healing" }}
+            {{else}}{{localize "DND5E.Damage" }}{{/if}}
         </button>
         {{/if}}
 

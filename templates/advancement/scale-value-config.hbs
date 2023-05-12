@@ -46,7 +46,7 @@
               {{selectOptions @root.faces selected=data.value.faces blank=data.placeholder.faces}}
             </select>
           {{else}}
-            <input type="{{ifThen @root.type.isNumeric 'number' 'text'}}" step="any"
+            <input type="{{#if @root.type.isNumeric}}number{{else}}text{{/if}}" step="any"
                    name="configuration.scale.{{level}}.value" value="{{data.value.value}}"
                    data-level="{{level}}" placeholder="{{data.placeholder.value}}">
           {{/if}}

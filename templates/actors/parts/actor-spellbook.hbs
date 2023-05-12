@@ -86,7 +86,10 @@
             <div class="spell-school">{{item.labels.school}}</div>
             <div class="spell-action">{{item.labels.activation}}</div>
             <div class="spell-target" data-tooltip="{{localize 'DND5E.Range'}}: {{item.labels.range}}">
-                {{ifThen item.labels.target item.labels.target (localize 'DND5E.None')}}
+                {{#if item.labels.target}}
+                {{item.labels.target}}
+                {{else}}{{localize 'DND5E.None'}}
+                {{/if}}
             </div>
 
             {{#if @root.owner}}
