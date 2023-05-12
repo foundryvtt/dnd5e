@@ -182,7 +182,7 @@ export default class GroupActorSheet extends ActorSheet {
 
     // Categorize as weapons, equipment, containers, and loot
     const sections = {};
-    for(const type of ["weapon", "equipment", "consumable", "backpack", "loot"]){
+    for ( const type of ["weapon", "equipment", "consumable", "backpack", "loot"] ) {
       sections[type] = {label: `TYPES.Item.${type}Pl`, items: [], hasActions: false, dataset: {type}};
     }
 
