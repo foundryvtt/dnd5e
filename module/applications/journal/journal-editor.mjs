@@ -14,7 +14,8 @@ export default class JournalEditor extends DocumentSheet {
       template: "systems/dnd5e/templates/journal/journal-editor.hbs",
       width: 520,
       height: 640,
-      textKeyPath: null
+      textKeyPath: null,
+      resizable: true
     });
   }
 

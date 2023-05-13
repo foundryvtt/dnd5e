@@ -1849,8 +1849,18 @@ h5 {
 /* ----------------------------------------- */
 /*  Journal Pages                            */
 /* ----------------------------------------- */
-.journal-editor .tox-tinymce {
-  height: 100% !important;
+.journal-editor {
+  min-width: 340px;
+  min-height: 260px;
+}
+.journal-editor .window-content {
+  padding: 0;
+}
+.journal-editor .prosemirror menu {
+  border-radius: 0;
+}
+.journal-editor .prosemirror .editor-container {
+  overflow-y: auto;
 }
 .journal-entry-page.class h4,
 .class-journal h4 {

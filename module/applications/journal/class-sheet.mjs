@@ -71,7 +71,7 @@ export default class JournalClassPageSheet extends JournalPageSheet {
   _getAdvancement(item) {
     const advancement = {};
 
-    const hp = item.advancement.byType.HitPoints[0];
+    const hp = item.advancement.byType.HitPoints?.[0];
     if ( hp ) {
       advancement.hp = {
         hitDice: `1${hp.hitDie}`,
@@ -423,7 +423,7 @@ export default class JournalClassPageSheet extends JournalPageSheet {
    */
   _onLaunchTextEditor(event) {
     event.preventDefault();
-    const textKeyPath = event.target.dataset.target;
+    const textKeyPath = event.currentTarget.dataset.target;
     const label = event.target.closest(".form-group").querySelector("label");
     const editor = new JournalEditor(this.document, { textKeyPath, title: label?.innerText });
     editor.render(true);
