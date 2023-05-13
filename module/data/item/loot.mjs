@@ -19,7 +19,7 @@ export default class LootData extends SystemDataModel.mixin(ItemDescriptionTempl
    */
   get chatProperties() {
     return [
-      game.i18n.localize("ITEM.TypeLoot"),
+      game.i18n.localize(CONFIG.Item.typeLabels.loot),
       this.weight ? `${this.weight} ${game.i18n.localize("DND5E.AbbreviationLbs")}` : null
     ];
   }

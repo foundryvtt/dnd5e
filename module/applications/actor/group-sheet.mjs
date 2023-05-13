@@ -117,9 +117,9 @@ export default class GroupActorSheet extends ActorSheet {
       nVehicles: 0
     };
     const sections = {
-      character: {label: "ACTOR.TypeCharacterPl", members: []},
-      npc: {label: "ACTOR.TypeNpcPl", members: []},
-      vehicle: {label: "ACTOR.TypeVehiclePl", members: []}
+      character: {label: `${CONFIG.Actor.typeLabels.character}Pl`, members: []},
+      npc: {label: `${CONFIG.Actor.typeLabels.npc}Pl`, members: []},
+      vehicle: {label: `${CONFIG.Actor.typeLabels.vehicle}Pl`, members: []}
     };
     for ( const member of this.object.system.members ) {
       const m = {
@@ -181,13 +181,10 @@ export default class GroupActorSheet extends ActorSheet {
   #prepareInventory(context) {
 
     // Categorize as weapons, equipment, containers, and loot
-    const sections = {
-      weapon: {label: "ITEM.TypeWeaponPl", items: [], hasActions: false, dataset: {type: "weapon"}},
-      equipment: {label: "ITEM.TypeEquipmentPl", items: [], hasActions: false, dataset: {type: "equipment"}},
-      consumable: {label: "ITEM.TypeConsumablePl", items: [], hasActions: false, dataset: {type: "consumable"}},
-      backpack: {label: "ITEM.TypeContainerPl", items: [], hasActions: false, dataset: {type: "backpack"}},
-      loot: {label: "ITEM.TypeLootPl", items: [], hasActions: false, dataset: {type: "loot"}}
-    };
+    const sections = {};
+    for ( const type of ["weapon", "equipment", "consumable", "backpack", "loot"] ) {
+      sections[type] = {label: `${CONFIG.Item.typeLabels[type]}Pl`, items: [], hasActions: false, dataset: {type}};
+    }
 
     // Classify items
     for ( const item of context.items ) {
@@ -308,7 +305,7 @@ export default class GroupActorSheet extends ActorSheet {
     const type = button.dataset.type;
     const system = {...button.dataset};
     delete system.type;
-    const name = game.i18n.format("DND5E.ItemNew", {type: game.i18n.localize(`ITEM.Type${type.capitalize()}`)});
+    const name = game.i18n.format("DND5E.ItemNew", {type: game.i18n.localize(CONFIG.Item.typeLabels[type])});
     const itemData = {name, type, system};
     return this.actor.createEmbeddedDocuments("Item", [itemData]);
   }
