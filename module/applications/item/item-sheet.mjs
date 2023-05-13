@@ -422,7 +422,7 @@ export default class ItemSheet5e extends ItemSheet {
       html.find(".damage-control").click(this._onDamageControl.bind(this));
       html.find(".trait-selector").click(this._onConfigureTraits.bind(this));
       html.find(".effect-control").click(ev => {
-        const unsupported = !foundry.utils.isNewerVersion(game.version, "10.291") && this.item.isOwned;
+        const unsupported = game.dnd5e.isV10 && this.item.isOwned;
         if ( unsupported ) return ui.notifications.warn("Managing Active Effects within an Owned Item is not currently supported and will be added in a subsequent update.");
         ActiveEffect5e.onManageActiveEffect(ev, this.item);
       });
