@@ -91,6 +91,8 @@ export default class Actor5e extends Actor {
 
   /** @inheritDoc */
   prepareData() {
+    // Do not attempt to prepare non-system types.
+    if ( !game.template.Actor.types.includes(this.type) ) return;
     this._classes = undefined;
     this._preparationWarnings = [];
     super.prepareData();
