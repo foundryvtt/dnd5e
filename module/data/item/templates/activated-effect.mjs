@@ -11,6 +11,7 @@ import { FormulaField } from "../../fields.mjs";
  * @property {object} duration              Effect's duration.
  * @property {number} duration.value        How long the effect lasts.
  * @property {string} duration.units        Time duration period as defined in `DND5E.timePeriods`.
+ * @property {number} cover                 Amount of cover does this item affords to its crew on a vehicle.
  * @property {object} target                Effect's valid targets.
  * @property {number} target.value          Length or radius of target depending on targeting mode selected.
  * @property {number} target.width          Width of line when line type is selected.
@@ -43,6 +44,10 @@ export default class ActivatedEffectTemplate extends foundry.abstract.DataModel 
         value: new FormulaField({required: true, deterministic: true, label: "DND5E.Duration"}),
         units: new foundry.data.fields.StringField({required: true, blank: true, label: "DND5E.DurationType"})
       }, {label: "DND5E.Duration"}),
+      cover: new foundry.data.fields.NumberField({
+        required: true, nullable: true, min: 0, max: 1, label: "DND5E.Cover"
+      }),
+      crewed: new foundry.data.fields.BooleanField({label: "DND5E.Crewed"}),
       target: new foundry.data.fields.SchemaField({
         value: new foundry.data.fields.NumberField({required: true, min: 0, label: "DND5E.TargetValue"}),
         width: new foundry.data.fields.NumberField({required: true, min: 0, label: "DND5E.TargetWidth"}),
