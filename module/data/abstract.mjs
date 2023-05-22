@@ -83,6 +83,14 @@ export default class SystemDataModel extends foundry.abstract.DataModel {
 
   /* -------------------------------------------- */
 
+  /** @inheritdoc */
+  validate(options={}) {
+    if ( this.constructor._enableV10Validation === false ) return true;
+    return super.validate(options);
+  }
+
+  /* -------------------------------------------- */
+
   /**
    * Mix multiple templates with the base type.
    * @param {...*} templates            Template classes to mix.

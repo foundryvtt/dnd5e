@@ -24,6 +24,8 @@ export default class ItemDescriptionTemplate extends foundry.abstract.DataModel 
   }
 
   /* -------------------------------------------- */
+  /*  Migrations                                  */
+  /* -------------------------------------------- */
 
   /** @inheritdoc */
   static migrateData(source) {

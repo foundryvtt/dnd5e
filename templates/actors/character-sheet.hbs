@@ -31,17 +31,17 @@
 
             {{!-- Character Summary --}}
             <ul class="summary flexrow">
-                <li>
+                <li class="race">
                     <input type="text" name="system.details.race" value="{{system.details.race}}" placeholder="{{ localize 'DND5E.Race' }}"/>
                 </li>
-                <li>
+                <li class="background">
                     {{#if labels.background}}
                         <span data-tooltip="DND5E.Background">{{labels.background}}</span>
                     {{else}}
                         <input type="text" name="system.details.background" value="{{system.details.background}}" placeholder="{{ localize 'DND5E.Background' }}"/>
                     {{/if}}
                 </li>
-                <li>
+                <li class="alignment">
                     <input type="text" name="system.details.alignment" value="{{system.details.alignment}}" placeholder="{{ localize 'DND5E.Alignment' }}"/>
                 </li>
                 <li class="proficiency">
@@ -60,7 +60,7 @@
                         <input name="system.attributes.hp.value" type="text" value="{{hp.value}}" placeholder="10"
                             data-tooltip="DND5E.HitPointsCurrent" data-dtype="Number">
                         <span class="sep"> / </span>
-                        <span data-tooltip="{{#if hp.max}}DND5E.HitPointsOverride{{else}}DND5E.HitPointsMax{{/if}}">
+                        <span data-tooltip="{{#if source.attributes.hp.max}}DND5E.HitPointsOverride{{else}}DND5E.HitPointsMax{{/if}}">
                             {{hp.max}}
                         </span>
                     </div>
@@ -180,7 +180,8 @@
             <ul class="skills-list">
             {{#each config.skills as |obj s|}}
             {{#with (lookup ../skills s) as |skill|}}
-                <li class="skill flexrow {{#if skill.value}}proficient{{/if}}" data-skill="{{s}}">
+                <li class="proficiency-row skill flexrow {{#if skill.value}}proficient{{/if}}"
+                    data-property="skills" data-key="{{s}}">
                     <input type="hidden" name="system.skills.{{s}}.value"
                            value="{{skill.baseValue}}" data-dtype="Number">
                     <input type="hidden" name="system.skills.{{s}}.ability" value="{{skill.ability}}">

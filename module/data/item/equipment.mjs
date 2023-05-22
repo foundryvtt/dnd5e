@@ -56,6 +56,8 @@ export default class EquipmentData extends SystemDataModel.mixin(
   }
 
   /* -------------------------------------------- */
+  /*  Migrations                                  */
+  /* -------------------------------------------- */
 
   /** @inheritdoc */
   static migrateData(source) {
@@ -91,4 +93,42 @@ export default class EquipmentData extends SystemDataModel.mixin(
     if ( source.strength === "" ) source.strength = null;
     if ( Number.isNumeric(source.strength) ) source.strength = Number(source.strength);
   }
+
+  /* -------------------------------------------- */
+  /*  Getters                                     */
+  /* -------------------------------------------- */
+
+  /**
+   * Properties displayed in chat.
+   * @type {string[]}
+   */
+  get chatProperties() {
+    return [
+      CONFIG.DND5E.equipmentTypes[this.armor.type],
+      this.parent.labels?.armor ?? null,
+      this.stealth ? game.i18n.localize("DND5E.StealthDisadvantage") : null
+    ];
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Is this Item any of the armor subtypes?
+   * @type {boolean}
+   */
+  get isArmor() {
+    return this.armor.type in CONFIG.DND5E.armorTypes;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Is this item a separate large object like a siege engine or vehicle component that is
+   * usually mounted on fixtures rather than equipped, and has its own AC and HP?
+   * @type {boolean}
+   */
+  get isMountable() {
+    return this.armor.type === "vehicle";
+  }
+
 }

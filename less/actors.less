@@ -41,6 +41,7 @@
     // Character Level
     .header-exp {
       flex: 0 0 150px;
+      max-width: 18em;
       margin-right: 3px;
       height: @actorNameHeight;
       justify-content: flex-end;
@@ -58,8 +59,9 @@
         line-height: 24px;
       }
       span {
-        margin-inline-start: 4px;
+        margin-inline: 4px;
         border-block-start: 1px solid transparent;
+        white-space: nowrap;
       }
       select {
         position: relative;
@@ -339,6 +341,29 @@
         color: @colorTan;
       }
     }
+  }
+
+  /* ----------------------------------------- */
+  /*  Tools                                    */
+  /* ----------------------------------------- */
+
+  .tag.tool {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 1px 4px;
+
+    a:is(.proficiency-toggle, .config-button) {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 13px;
+      height: 13px;
+
+      > i { margin: 0; }
+    }
+
+    h4 { margin: 0; }
   }
 
   /* ----------------------------------------- */

@@ -2,6 +2,11 @@
 /*  SRD Compendium                           */
 /* ----------------------------------------- */
 
+.srd-compendium.app .window-content {
+  background: url(../ui/parchment.jpg) repeat;
+  color: var(--color-text-dark-primary);
+}
+
 .srd-compendium article {
   display: flex;
   flex-direction: column;
@@ -67,8 +72,19 @@
 /* ----------------------------------------- */
 
 .journal-editor {
-  .tox-tinymce {
-    height: 100% !important;
+  min-width: 340px;
+  min-height: 260px;
+
+  .window-content {
+    padding: 0;
+  }
+  .prosemirror {
+    menu {
+      border-radius: 0;
+    }
+    .editor-container {
+      overflow-y: auto;
+    }
   }
 }
 
@@ -96,7 +112,7 @@
     button.launch-text-editor {
       flex: 0.35;
     }
-    
+
     .items-list .item {
       align-items: center;
       padding-block: 0.35em 0;

@@ -15,36 +15,80 @@ ______      ______ _____ _____
 _______________________________`;
 
 /**
- * The set of Ability Scores used within the system.
- * @enum {string}
+ * Configuration data for abilities.
+ *
+ * @typedef {object} AbilityConfiguration
+ * @property {string} label                               Localized label.
+ * @property {string} abbreviation                        Localized abbreviation.
+ * @property {string} [type]                              Whether this is a "physical" or "mental" ability.
+ * @property {Object<string, number|string>}  [defaults]  Default values for this ability based on actor type.
+ *                                                        If a string is used, the system will attempt to fetch.
+ *                                                        the value of the specified ability.
  */
-DND5E.abilities = {
-  str: "DND5E.AbilityStr",
-  dex: "DND5E.AbilityDex",
-  con: "DND5E.AbilityCon",
-  int: "DND5E.AbilityInt",
-  wis: "DND5E.AbilityWis",
-  cha: "DND5E.AbilityCha",
-  hon: "DND5E.AbilityHon",
-  san: "DND5E.AbilitySan"
-};
-preLocalize("abilities");
 
 /**
- * Localized abbreviations for Ability Scores.
- * @enum {string}
+ * The set of Ability Scores used within the system.
+ * @enum {AbilityConfiguration}
  */
-DND5E.abilityAbbreviations = {
-  str: "DND5E.AbilityStrAbbr",
-  dex: "DND5E.AbilityDexAbbr",
-  con: "DND5E.AbilityConAbbr",
-  int: "DND5E.AbilityIntAbbr",
-  wis: "DND5E.AbilityWisAbbr",
-  cha: "DND5E.AbilityChaAbbr",
-  hon: "DND5E.AbilityHonAbbr",
-  san: "DND5E.AbilitySanAbbr"
+DND5E.abilities = {
+  str: {
+    label: "DND5E.AbilityStr",
+    abbreviation: "DND5E.AbilityStrAbbr",
+    type: "physical"
+  },
+  dex: {
+    label: "DND5E.AbilityDex",
+    abbreviation: "DND5E.AbilityDexAbbr",
+    type: "physical"
+  },
+  con: {
+    label: "DND5E.AbilityCon",
+    abbreviation: "DND5E.AbilityConAbbr",
+    type: "physical"
+  },
+  int: {
+    label: "DND5E.AbilityInt",
+    abbreviation: "DND5E.AbilityIntAbbr",
+    type: "mental",
+    defaults: { vehicle: 0 }
+  },
+  wis: {
+    label: "DND5E.AbilityWis",
+    abbreviation: "DND5E.AbilityWisAbbr",
+    type: "mental",
+    defaults: { vehicle: 0 }
+  },
+  cha: {
+    label: "DND5E.AbilityCha",
+    abbreviation: "DND5E.AbilityChaAbbr",
+    type: "mental",
+    defaults: { vehicle: 0 }
+  },
+  hon: {
+    label: "DND5E.AbilityHon",
+    abbreviation: "DND5E.AbilityHonAbbr",
+    type: "mental",
+    defaults: { npc: "cha", vehicle: 0 }
+  },
+  san: {
+    label: "DND5E.AbilitySan",
+    abbreviation: "DND5E.AbilitySanAbbr",
+    type: "mental",
+    defaults: { npc: "wis", vehicle: 0 }
+  }
 };
-preLocalize("abilityAbbreviations");
+preLocalize("abilities", { keys: ["label", "abbreviation"] });
+patchConfig("abilities", "label", { since: 2.2, until: 2.4 });
+
+Object.defineProperty(DND5E, "abilityAbbreviations", {
+  get() {
+    foundry.utils.logCompatibilityWarning(
+      "The `abilityAbbreviations` configuration object has been merged with `abilities`.",
+      { since: "DnD5e 2.2", until: "DnD5e 2.4" }
+    );
+    return Object.fromEntries(Object.entries(DND5E.abilities).map(([k, v]) => [k, v.abbreviation]));
+  }
+});
 
 /**
  * Configure which ability score is used as the default modifier for initiative rolls.
@@ -93,7 +137,6 @@ DND5E.skills = {
   sur: { label: "DND5E.SkillSur", ability: "wis" }
 };
 preLocalize("skills", { key: "label", sort: true });
-patchConfig("skills", "label", { since: 2.0, until: 2.2 });
 
 /* -------------------------------------------- */
 
@@ -279,20 +322,55 @@ DND5E.toolIds = {
 /* -------------------------------------------- */
 
 /**
- * The various lengths of time over which effects can occur.
+ * Time periods that accept a numeric value.
  * @enum {string}
  */
-DND5E.timePeriods = {
-  inst: "DND5E.TimeInst",
+DND5E.scalarTimePeriods = {
   turn: "DND5E.TimeTurn",
   round: "DND5E.TimeRound",
   minute: "DND5E.TimeMinute",
   hour: "DND5E.TimeHour",
   day: "DND5E.TimeDay",
   month: "DND5E.TimeMonth",
-  year: "DND5E.TimeYear",
-  perm: "DND5E.TimePerm",
+  year: "DND5E.TimeYear"
+};
+preLocalize("scalarTimePeriods");
+
+/* -------------------------------------------- */
+
+/**
+ * Time periods for spells that don't have a defined ending.
+ * @enum {string}
+ */
+DND5E.permanentTimePeriods = {
+  disp: "DND5E.TimeDisp",
+  dstr: "DND5E.TimeDispTrig",
+  perm: "DND5E.TimePerm"
+};
+preLocalize("permanentTimePeriods");
+
+/* -------------------------------------------- */
+
+/**
+ * Time periods that don't accept a numeric value.
+ * @enum {string}
+ */
+DND5E.specialTimePeriods = {
+  inst: "DND5E.TimeInst",
   spec: "DND5E.Special"
+};
+preLocalize("specialTimePeriods");
+
+/* -------------------------------------------- */
+
+/**
+ * The various lengths of time over which effects can occur.
+ * @enum {string}
+ */
+DND5E.timePeriods = {
+  ...DND5E.specialTimePeriods,
+  ...DND5E.permanentTimePeriods,
+  ...DND5E.scalarTimePeriods
 };
 preLocalize("timePeriods");
 
@@ -929,7 +1007,6 @@ DND5E.areaTargetTypes = {
   }
 };
 preLocalize("areaTargetTypes", { key: "label", sort: true });
-patchConfig("areaTargetTypes", "template", { since: 2.0, until: 2.2 });
 
 /* -------------------------------------------- */
 
@@ -1377,6 +1454,7 @@ preLocalize("cover");
 /**
  * A selection of actor attributes that can be tracked on token resource bars.
  * @type {string[]}
+ * @deprecated since v10
  */
 DND5E.trackableAttributes = [
   "attributes.ac.value", "attributes.init.bonus", "attributes.movement", "attributes.senses", "attributes.spelldc",
@@ -1399,7 +1477,7 @@ DND5E.consumableResources = [
 /* -------------------------------------------- */
 
 /**
- * Conditions that can effect an actor.
+ * Conditions that can affect an actor.
  * @enum {string}
  */
 DND5E.conditionTypes = {
@@ -1517,7 +1595,8 @@ DND5E.CR_EXP_LEVELS = [
 DND5E.traits = {
   saves: {
     label: "DND5E.ClassSaves",
-    configKey: "abilities"
+    configKey: "abilities",
+    labelKey: "label"
   },
   skills: {
     label: "DND5E.TraitSkillProf",
@@ -1673,6 +1752,7 @@ DND5E.allowedActorFlags = ["isPolymorphed", "originalActor"].concat(Object.keys(
  */
 DND5E.advancementTypes = {
   HitPoints: advancement.HitPointsAdvancement,
+  ItemChoice: advancement.ItemChoiceAdvancement,
   ItemGrant: advancement.ItemGrantAdvancement,
   ScaleValue: advancement.ScaleValueAdvancement
 };

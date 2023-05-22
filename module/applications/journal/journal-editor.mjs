@@ -12,9 +12,10 @@ export default class JournalEditor extends DocumentSheet {
     return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ["journal-editor"],
       template: "systems/dnd5e/templates/journal/journal-editor.hbs",
-      width: 520,
+      width: 550,
       height: 640,
-      textKeyPath: null
+      textKeyPath: null,
+      resizable: true
     });
   }
 

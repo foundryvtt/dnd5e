@@ -63,7 +63,6 @@ export default class ItemSheet5e extends ItemSheet {
     const context = await super.getData(options);
     const item = context.item;
     const source = item.toObject();
-    const isMountable = this._isItemMountable(item);
 
     // Game system configuration
     context.config = CONFIG.DND5E;
@@ -78,25 +77,21 @@ export default class ItemSheet5e extends ItemSheet {
       rollData: this.item.getRollData(),
 
       // Item Type, Status, and Details
-      itemType: game.i18n.localize(`ITEM.Type${this.item.type.titleCase()}`),
+      itemType: game.i18n.localize(CONFIG.Item.typeLabels[this.item.type]),
       itemStatus: this._getItemStatus(),
       itemProperties: this._getItemProperties(),
       baseItems: await this._getItemBaseTypes(),
       isPhysical: item.system.hasOwnProperty("quantity"),
 
       // Action Details
-      hasAttackRoll: item.hasAttack,
       isHealing: item.system.actionType === "heal",
       isFlatDC: item.system.save?.scaling === "flat",
       isLine: ["line", "wall"].includes(item.system.target?.type),
 
       // Vehicles
       isCrewed: item.system.activation?.type === "crew",
-      isMountable,
 
       // Armor Class
-      isArmor: item.isArmor,
-      hasAC: item.isArmor || isMountable,
       hasDexModifier: item.isArmor && (item.system.armor?.type !== "shield"),
 
       // Advancement
@@ -106,16 +101,6 @@ export default class ItemSheet5e extends ItemSheet {
       effects: ActiveEffect5e.prepareActiveEffectCategories(item.effects)
     });
     context.abilityConsumptionTargets = this._getItemConsumptionTargets();
-
-    /** @deprecated */
-    Object.defineProperty(context, "data", {
-      get() {
-        const msg = `You are accessing the "data" attribute within the rendering context provided by the ItemSheet5e
-        class. This attribute has been deprecated in favor of "system" and will be removed in a future release`;
-        foundry.utils.logCompatibilityWarning(msg, { since: "DnD5e 2.0", until: "DnD5e 2.2" });
-        return context.system;
-      }
-    });
 
     // Special handling for specific item types
     switch ( item.type ) {
@@ -238,7 +223,8 @@ export default class ItemSheet5e extends ItemSheet {
 
     // Attributes
     else if ( consume.type === "attribute" ) {
-      const attributes = TokenDocument.implementation.getConsumedAttributes(actor.system);
+      const attrData = game.dnd5e.isV10 ? actor.system : actor.type;
+      const attributes = TokenDocument.implementation.getConsumedAttributes(attrData);
       attributes.bar.forEach(a => a.push("value"));
       return attributes.bar.concat(attributes.value).reduce((obj, a) => {
         let k = a.join(".");
@@ -327,7 +313,7 @@ export default class ItemSheet5e extends ItemSheet {
     switch ( this.item.type ) {
       case "equipment":
         props.push(CONFIG.DND5E.equipmentTypes[this.item.system.armor.type]);
-        if ( this.item.isArmor || this._isItemMountable(this.item) ) props.push(labels.armor);
+        if ( this.item.isArmor || this.item.isMountable ) props.push(labels.armor);
         break;
       case "feat":
         props.push(labels.featType);
@@ -352,20 +338,6 @@ export default class ItemSheet5e extends ItemSheet {
       props.push(labels.activation, labels.range, labels.target, labels.duration);
     }
     return props.filter(p => !!p);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Is this item a separate large object like a siege engine or vehicle component that is
-   * usually mounted on fixtures rather than equipped, and has its own AC and HP.
-   * @param {object} item  Copy of item data being prepared for display.
-   * @returns {boolean}    Is item siege weapon or vehicle equipment?
-   * @private
-   */
-  _isItemMountable(item) {
-    return ((item.type === "weapon") && (item.system.weaponType === "siege"))
-      || (item.type === "equipment" && (item.system.armor.type === "vehicle"));
   }
 
   /* -------------------------------------------- */
@@ -451,7 +423,8 @@ export default class ItemSheet5e extends ItemSheet {
       html.find(".damage-control").click(this._onDamageControl.bind(this));
       html.find(".trait-selector").click(this._onConfigureTraits.bind(this));
       html.find(".effect-control").click(ev => {
-        if ( this.item.isOwned ) return ui.notifications.warn("Managing Active Effects within an Owned Item is not currently supported and will be added in a subsequent update.");
+        const unsupported = game.dnd5e.isV10 && this.item.isOwned;
+        if ( unsupported ) return ui.notifications.warn("Managing Active Effects within an Owned Item is not currently supported and will be added in a subsequent update.");
         ActiveEffect5e.onManageActiveEffect(ev, this.item);
       });
       html.find(".advancement .item-control").click(event => {
@@ -675,6 +648,7 @@ export default class ItemSheet5e extends ItemSheet {
       case "saves":
         options.choices = CONFIG.DND5E.abilities;
         options.valueKey = null;
+        options.labelKey = "label";
         break;
       case "skills.choices":
         options.choices = CONFIG.DND5E.skills;

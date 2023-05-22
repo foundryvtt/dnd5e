@@ -82,10 +82,15 @@
                 {{#each section.columns}}
                     <div class="item-detail {{css}}">
                         {{#if editable}}
-                            <input type="text" value="{{getProperty item property}}" placeholder="&mdash;"
-                                   data-dtype="{{editable}}" data-property="{{property}}">
+                            <input type="text" data-dtype="{{editable}}" data-property="{{property}}"
+                                   value="{{#if (getProperty item property)}}{{getProperty item property}}
+                                   {{~else}}{{getProperty ctx property}}{{/if}}" placeholder="&mdash;">
                         {{else}}
-                            {{getProperty item property}}
+                            {{#if (getProperty item property)}}
+                                {{getProperty item property}}
+                            {{else}}
+                                {{getProperty ctx property}}
+                            {{/if}}
                         {{/if}}
                     </div>
                 {{/each}}

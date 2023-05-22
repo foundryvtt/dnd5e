@@ -40,6 +40,8 @@ export default class WeaponData extends SystemDataModel.mixin(
   }
 
   /* -------------------------------------------- */
+  /*  Migrations                                  */
+  /* -------------------------------------------- */
 
   /** @inheritdoc */
   static migrateData(source) {
@@ -80,5 +82,49 @@ export default class WeaponData extends SystemDataModel.mixin(
    */
   static #migrateWeaponType(source) {
     if ( source.weaponType === null ) source.weaponType = "simpleM";
+  }
+
+  /* -------------------------------------------- */
+  /*  Getters                                     */
+  /* -------------------------------------------- */
+
+  /**
+   * Properties displayed in chat.
+   * @type {string[]}
+   */
+  get chatProperties() {
+    return [CONFIG.DND5E.weaponTypes[this.weaponType]];
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  get _typeAbilityMod() {
+    if ( ["simpleR", "martialR"].includes(this.weaponType) ) return "dex";
+
+    const abilities = this.parent?.actor?.system.abilities;
+    if ( this.properties.fin && abilities ) {
+      return (abilities.dex?.mod ?? 0) >= (abilities.str?.mod ?? 0) ? "dex" : "str";
+    }
+
+    return null;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  get _typeCriticalThreshold() {
+    return this.parent?.actor?.flags.dnd5e?.weaponCriticalThreshold ?? Infinity;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Is this item a separate large object like a siege engine or vehicle component that is
+   * usually mounted on fixtures rather than equipped, and has its own AC and HP?
+   * @type {boolean}
+   */
+  get isMountable() {
+    return this.weaponType === "siege";
   }
 }

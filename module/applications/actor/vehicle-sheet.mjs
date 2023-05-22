@@ -140,7 +140,7 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
         }]
       },
       equipment: {
-        label: game.i18n.localize("ITEM.TypeEquipment"),
+        label: game.i18n.localize(CONFIG.Item.typeLabels.equipment),
         items: [],
         crewable: true,
         dataset: {type: "equipment", "armor.type": "vehicle"},
@@ -157,7 +157,7 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
         dataset: {type: "feat", "activation.type": "reaction"}
       },
       weapons: {
-        label: game.i18n.localize("ITEM.TypeWeaponPl"),
+        label: game.i18n.localize(`${CONFIG.Item.typeLabels}Pl`),
         items: [],
         crewable: true,
         dataset: {type: "weapon", "weapon-type": "siege"},
@@ -394,8 +394,8 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
     event.preventDefault();
     const itemID = event.currentTarget.closest(".item").dataset.itemId;
     const item = this.actor.items.get(itemID);
-    const hp = Math.clamped(0, parseInt(event.currentTarget.value), item.system.hp.max);
-    event.currentTarget.value = hp;
+    let hp = Math.clamped(0, parseInt(event.currentTarget.value), item.system.hp.max);
+    if ( Number.isNaN(hp) ) hp = 0;
     return item.update({"system.hp.value": hp});
   }
 
@@ -411,8 +411,8 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
     event.preventDefault();
     const itemID = event.currentTarget.closest(".item").dataset.itemId;
     const item = this.actor.items.get(itemID);
-    const qty = parseInt(event.currentTarget.value);
-    event.currentTarget.value = qty;
+    let qty = parseInt(event.currentTarget.value);
+    if ( Number.isNaN(qty) ) qty = 0;
     return item.update({"system.quantity": qty});
   }
 

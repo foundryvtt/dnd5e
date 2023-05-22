@@ -2,14 +2,14 @@
   "id": "dnd5e",
   "title": "DnD5e - Fifth Edition System",
   "description": "A system for playing the fifth edition of the worlds most popular role-playing game in the Foundry Virtual Tabletop environment.",
-  "version": "2.1.5",
+  "version": "2.2.0",
   "compatibility": {
     "minimum": "10.291",
-    "verified": "10"
+    "verified": "11"
   },
   "url": "https://github.com/foundryvtt/dnd5e/",
   "manifest": "https://raw.githubusercontent.com/foundryvtt/dnd5e/master/system.json",
-  "download": "https://github.com/foundryvtt/dnd5e/releases/download/release-2.1.5/dnd5e-release-2.1.5.zip",
+  "download": "https://github.com/foundryvtt/dnd5e/releases/download/release-2.2.0/dnd5e-release-2.2.0.zip",
   "authors": [
     {
       "name": "Atropos",
@@ -162,7 +162,7 @@
   "gridUnits": "ft",
   "primaryTokenAttribute": "attributes.hp",
   "flags": {
-    "needsMigrationVersion": "2.1.2",
+    "needsMigrationVersion": "2.2.0",
     "compatibleMigrationVersion": "0.8"
   }
 }
