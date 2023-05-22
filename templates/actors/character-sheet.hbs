@@ -31,17 +31,17 @@
 
             {{!-- Character Summary --}}
             <ul class="summary flexrow">
-                <li>
+                <li class="race">
                     <input type="text" name="system.details.race" value="{{system.details.race}}" placeholder="{{ localize 'DND5E.Race' }}"/>
                 </li>
-                <li>
+                <li class="background">
                     {{#if labels.background}}
                         <span data-tooltip="DND5E.Background">{{labels.background}}</span>
                     {{else}}
                         <input type="text" name="system.details.background" value="{{system.details.background}}" placeholder="{{ localize 'DND5E.Background' }}"/>
                     {{/if}}
                 </li>
-                <li>
+                <li class="alignment">
                     <input type="text" name="system.details.alignment" value="{{system.details.alignment}}" placeholder="{{ localize 'DND5E.Alignment' }}"/>
                 </li>
                 <li class="proficiency">

@@ -28,10 +28,10 @@
 
             {{!-- Character Summary --}}
             <ul class="summary flexrow">
-                <li>
+                <li class="size">
                     <span>{{lookup config.actorSizes system.traits.size}}</span>
                 </li>
-                <li>
+                <li class="alignment">
                     <input type="text" name="system.details.alignment" value="{{system.details.alignment}}" placeholder="{{ localize 'DND5E.Alignment' }}"/>
                 </li>
                 <li class="creature-type">
@@ -40,7 +40,7 @@
                         <i class="fas fa-cog"></i>
                     </a>
                 </li>
-                <li>
+                <li class="source">
                     <input type="text" name="system.details.source" value="{{system.details.source}}"
                            placeholder="{{ localize 'DND5E.Source' }}"/>
                 </li>

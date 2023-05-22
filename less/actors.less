@@ -41,6 +41,7 @@
     // Character Level
     .header-exp {
       flex: 0 0 150px;
+      max-width: 18em;
       margin-right: 3px;
       height: @actorNameHeight;
       justify-content: flex-end;
@@ -58,8 +59,9 @@
         line-height: 24px;
       }
       span {
-        margin-inline-start: 4px;
+        margin-inline: 4px;
         border-block-start: 1px solid transparent;
+        white-space: nowrap;
       }
       select {
         position: relative;
