@@ -147,7 +147,7 @@ export default class JournalClassPageSheet extends JournalPageSheet {
           case "ItemGrant":
             if ( advancement.configuration.optional ) continue;
             features.push(...await Promise.all(advancement.configuration.items.map(makeLink)));
-            continue;
+            break;
         }
       }
 
@@ -282,7 +282,7 @@ export default class JournalClassPageSheet extends JournalPageSheet {
           case "ItemGrant":
             if ( !advancement.configuration.optional ) continue;
             features.push(...await Promise.all(advancement.configuration.items.map(makeLink)));
-            continue;
+            break;
         }
       }
       if ( !features.length ) continue;
