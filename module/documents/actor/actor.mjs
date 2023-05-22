@@ -91,6 +91,8 @@ export default class Actor5e extends Actor {
 
   /** @inheritDoc */
   prepareData() {
+    // Do not attempt to prepare non-system types.
+    if ( !game.template.Actor.types.includes(this.type) ) return;
     this._classes = undefined;
     this._preparationWarnings = [];
     super.prepareData();
@@ -2502,8 +2504,15 @@ export default class Actor5e extends Actor {
     if ( this.isToken ) {
       const tokenData = d.prototypeToken;
       delete d.prototypeToken;
-      tokenData.actorData = d;
-      setProperty(tokenData, "flags.dnd5e.previousActorData", this.token.toObject().actorData);
+      let previousActorData;
+      if ( game.dnd5e.isV10 ) {
+        tokenData.actorData = d;
+        previousActorData = this.token.toObject().actorData;
+      } else {
+        tokenData.delta = d;
+        previousActorData = this.token.delta.toObject();
+      }
+      foundry.utils.setProperty(tokenData, "flags.dnd5e.previousActorData", previousActorData);
       await this.sheet?.close();
       const update = await this.token.update(tokenData);
       if ( renderSheet ) this.sheet?.render(true);
@@ -2590,7 +2599,11 @@ export default class Actor5e extends Actor {
       const prototypeTokenData = await baseActor.getTokenDocument();
       const actorData = this.token.getFlag("dnd5e", "previousActorData");
       const tokenUpdate = this.token.toObject();
-      tokenUpdate.actorData = actorData ? actorData : {};
+      if ( game.dnd5e.isV10 ) tokenUpdate.actorData = actorData ?? {};
+      else {
+        actorData._id = tokenUpdate.delta._id;
+        tokenUpdate.delta = actorData;
+      }
 
       for ( const k of ["width", "height", "alpha", "lockRotation", "name"] ) {
         tokenUpdate[k] = prototypeTokenData[k];

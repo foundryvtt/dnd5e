@@ -20,6 +20,7 @@ export default class TokenDocument5e extends TokenDocument {
 
   /** @inheritdoc */
   static getTrackedAttributes(data, _path=[]) {
+    if ( !game.dnd5e.isV10 ) return super.getTrackedAttributes(data, _path);
     if ( data instanceof foundry.abstract.DataModel ) return this._getTrackedAttributesFromSchema(data.schema, _path);
     const attributes = super.getTrackedAttributes(data, _path);
     if ( _path.length ) return attributes;
@@ -70,6 +71,7 @@ export default class TokenDocument5e extends TokenDocument {
    */
   static getConsumedAttributes(data) {
     const attributes = super.getTrackedAttributes(data);
+    attributes.value.push(...Object.keys(CONFIG.DND5E.currencies).map(denom => ["currency", denom]));
     const allowed = CONFIG.DND5E.consumableResources;
     attributes.value = attributes.value.filter(attrs => this._isAllowedAttribute(allowed, attrs));
     return attributes;

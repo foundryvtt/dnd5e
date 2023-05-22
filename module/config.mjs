@@ -1454,6 +1454,7 @@ preLocalize("cover");
 /**
  * A selection of actor attributes that can be tracked on token resource bars.
  * @type {string[]}
+ * @deprecated since v10
  */
 DND5E.trackableAttributes = [
   "attributes.ac.value", "attributes.init.bonus", "attributes.movement", "attributes.senses", "attributes.spelldc",
@@ -1476,7 +1477,7 @@ DND5E.consumableResources = [
 /* -------------------------------------------- */
 
 /**
- * Conditions that can effect an actor.
+ * Conditions that can affect an actor.
  * @enum {string}
  */
 DND5E.conditionTypes = {

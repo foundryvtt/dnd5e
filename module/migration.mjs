@@ -367,28 +367,25 @@ export const migrateSceneData = function(scene, migrationData) {
     const update = {};
     _migrateTokenImage(t, update);
     if ( Object.keys(update).length ) foundry.utils.mergeObject(t, update);
-    if ( !t.actorId || t.actorLink ) {
-      t.actorData = {};
-    }
-    else if ( !game.actors.has(t.actorId) ) {
-      t.actorId = null;
-      t.actorData = {};
-    }
+    if ( !game.actors.has(t.actorId) ) t.actorId = null;
+    if ( !t.actorId || t.actorLink ) t.actorData = {};
     else if ( !t.actorLink ) {
-      const actorData = duplicate(t.actorData);
+      const actorData = token.delta?.toObject() ?? foundry.utils.deepClone(t.actorData);
       actorData.type = token.actor?.type;
       const update = migrateActorData(actorData, migrationData);
-      ["items", "effects"].forEach(embeddedName => {
-        if (!update[embeddedName]?.length) return;
-        const updates = new Map(update[embeddedName].map(u => [u._id, u]));
-        t.actorData[embeddedName].forEach(original => {
-          const update = updates.get(original._id);
-          if (update) foundry.utils.mergeObject(original, update);
+      if ( game.dnd5e.isV10 ) {
+        ["items", "effects"].forEach(embeddedName => {
+          if ( !update[embeddedName]?.length ) return;
+          const updates = new Map(update[embeddedName].map(u => [u._id, u]));
+          t.actorData[embeddedName].forEach(original => {
+            const update = updates.get(original._id);
+            if ( update ) foundry.utils.mergeObject(original, update);
+          });
+          delete update[embeddedName];
         });
-        delete update[embeddedName];
-      });
-
-      foundry.utils.mergeObject(t.actorData, update);
+        foundry.utils.mergeObject(t.actorData, update);
+      }
+      else t.delta = update;
     }
     return t;
   });

@@ -223,7 +223,8 @@ export default class ItemSheet5e extends ItemSheet {
 
     // Attributes
     else if ( consume.type === "attribute" ) {
-      const attributes = TokenDocument.implementation.getConsumedAttributes(actor.system);
+      const attrData = game.dnd5e.isV10 ? actor.system : actor.type;
+      const attributes = TokenDocument.implementation.getConsumedAttributes(attrData);
       attributes.bar.forEach(a => a.push("value"));
       return attributes.bar.concat(attributes.value).reduce((obj, a) => {
         let k = a.join(".");
