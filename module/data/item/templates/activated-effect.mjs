@@ -47,6 +47,7 @@ export default class ActivatedEffectTemplate extends foundry.abstract.DataModel 
       cover: new foundry.data.fields.NumberField({
         required: true, nullable: true, min: 0, max: 1, label: "DND5E.Cover"
       }),
+      crewed: new foundry.data.fields.BooleanField({label: "DND5E.Crewed"}),
       target: new foundry.data.fields.SchemaField({
         value: new foundry.data.fields.NumberField({required: true, min: 0, label: "DND5E.TargetValue"}),
         width: new foundry.data.fields.NumberField({required: true, min: 0, label: "DND5E.TargetWidth"}),
