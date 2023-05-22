@@ -202,6 +202,11 @@ Hooks.once("setup", function() {
   CONFIG.DND5E.trackableAttributes = expandAttributeList(CONFIG.DND5E.trackableAttributes);
   CONFIG.DND5E.consumableResources = expandAttributeList(CONFIG.DND5E.consumableResources);
   game.dnd5e.moduleArt.registerModuleArt();
+
+  // Apply custom compendium styles to the SRD rules compendium.
+  const rules = game.packs.get("dnd5e.rules");
+  if ( game.dnd5e.isV10 ) rules.apps = [new applications.journal.SRDCompendium(rules)];
+  else rules.applicationClass = applications.journal.SRDCompendium;
 });
 
 /* --------------------------------------------- */
@@ -235,10 +240,6 @@ Hooks.once("i18nInit", () => utils.performPreLocalization(CONFIG.DND5E));
 Hooks.once("ready", function() {
   // Configure validation strictness.
   if ( game.dnd5e.isV10 ) _configureValidationStrictness();
-
-  // Apply custom compendium styles to the SRD rules compendium.
-  const rules = {collection: game.packs.get("dnd5e.rules")};
-  rules.apps = [new applications.journal.SRDCompendium(game.dnd5e.isV10 ? rules.collection : rules)];
 
   // Wait to register hotbar drop hook on ready so that modules could register earlier if they want to
   Hooks.on("hotbarDrop", (bar, data, slot) => {
