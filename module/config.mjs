@@ -389,6 +389,7 @@ DND5E.abilityActivationTypes = {
   day: DND5E.timePeriods.day,
   special: DND5E.timePeriods.spec,
   legendary: "DND5E.LegendaryActionLabel",
+  mythic: "DND5E.MythicActionLabel",
   lair: "DND5E.LairActionLabel",
   crew: "DND5E.VehicleCrewAction"
 };

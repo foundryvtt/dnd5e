@@ -85,10 +85,10 @@
         <select name="system.range.units" data-tooltip="DND5E.RangeUnits">
             {{#select system.range.units}}
                 <option value="">{{localize "DND5E.None"}}</option>
-                {{selectOptions config.rangeTypes}}
                 <optgroup label="{{localize 'DND5E.RangeDistance'}}">
                     {{selectOptions config.movementUnits}}
                 </optgroup>
+                {{selectOptions config.rangeTypes}}
             {{/select}}
         </select>
     </div>
