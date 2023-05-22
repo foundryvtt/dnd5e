@@ -72,8 +72,19 @@
 /* ----------------------------------------- */
 
 .journal-editor {
-  .tox-tinymce {
-    height: 100% !important;
+  min-width: 340px;
+  min-height: 260px;
+
+  .window-content {
+    padding: 0;
+  }
+  .prosemirror {
+    menu {
+      border-radius: 0;
+    }
+    .editor-container {
+      overflow-y: auto;
+    }
   }
 }
 
