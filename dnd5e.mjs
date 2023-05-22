@@ -67,7 +67,7 @@ Hooks.once("init", function() {
   registerSystemSettings();
 
   // Validation strictness.
-  _determineValidationStrictness();
+  if ( game.dnd5e.isV10 ) _determineValidationStrictness();
 
   // Configure module art.
   game.dnd5e.moduleArt = new ModuleArt();
@@ -141,7 +141,8 @@ function _determineValidationStrictness() {
  */
 async function _configureValidationStrictness() {
   if ( !game.user.isGM ) return;
-  const invalidDocuments = game.actors.invalidDocumentIds.size + game.items.invalidDocumentIds.size;
+  const invalidDocuments = game.actors.invalidDocumentIds.size + game.items.invalidDocumentIds.size
+    + game.scenes.invalidDocumentIds.size;
   const strictValidation = game.settings.get("dnd5e", "strictValidation");
   if ( invalidDocuments && strictValidation ) {
     await game.settings.set("dnd5e", "strictValidation", false);
@@ -233,7 +234,7 @@ Hooks.once("i18nInit", () => utils.performPreLocalization(CONFIG.DND5E));
  */
 Hooks.once("ready", function() {
   // Configure validation strictness.
-  _configureValidationStrictness();
+  if ( game.dnd5e.isV10 ) _configureValidationStrictness();
 
   // Apply custom compendium styles to the SRD rules compendium.
   const rules = {collection: game.packs.get("dnd5e.rules")};
