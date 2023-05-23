@@ -53,7 +53,10 @@ export default class CreatureTemplate extends CommonTemplate {
           check: new FormulaField({required: true, label: "DND5E.SkillBonusCheck"}),
           passive: new FormulaField({required: true, label: "DND5E.SkillBonusPassive"})
         }, {label: "DND5E.SkillBonuses"})
-      }), {initialKeys: CONFIG.DND5E.skills, initialValue: this._initialSkillValue}),
+      }), {
+        initialKeys: CONFIG.DND5E.skills, initialValue: this._initialSkillValue,
+        initialKeysOnly: true, label: "DND5E.Skills"
+      }),
       tools: new MappingField(new foundry.data.fields.SchemaField({
         value: new foundry.data.fields.NumberField({
           required: true, min: 0, max: 2, step: 0.5, initial: 1, label: "DND5E.ProficiencyLevel"
@@ -100,6 +103,8 @@ export default class CreatureTemplate extends CommonTemplate {
     return [...levels, "pact"];
   }
 
+  /* -------------------------------------------- */
+  /*  Migrations                                  */
   /* -------------------------------------------- */
 
   /** @inheritdoc */
