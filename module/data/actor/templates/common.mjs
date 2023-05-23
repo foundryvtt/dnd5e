@@ -33,7 +33,7 @@ export default class CommonTemplate extends SystemDataModel.mixin(CurrencyTempla
         }, {label: "DND5E.AbilityBonuses"})
       }), {
         initialKeys: CONFIG.DND5E.abilities, initialValue: this._initialAbilityValue.bind(this),
-        prepareKeys: true, label: "DND5E.Abilities"
+        initialKeysOnly: true, label: "DND5E.Abilities"
       })
     });
   }

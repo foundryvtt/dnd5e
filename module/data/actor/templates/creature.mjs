@@ -55,7 +55,7 @@ export default class CreatureTemplate extends CommonTemplate {
         }, {label: "DND5E.SkillBonuses"})
       }), {
         initialKeys: CONFIG.DND5E.skills, initialValue: this._initialSkillValue,
-        prepareKeys: true, label: "DND5E.Skills"
+        initialKeysOnly: true, label: "DND5E.Skills"
       }),
       tools: new MappingField(new foundry.data.fields.SchemaField({
         value: new foundry.data.fields.NumberField({

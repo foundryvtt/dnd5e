@@ -162,8 +162,8 @@ export class IdentifierField extends foundry.data.fields.StringField {
  * @typedef {DataFieldOptions} MappingFieldOptions
  * @property {string[]} [initialKeys]       Keys that will be created if no data is provided.
  * @property {MappingFieldInitialValueBuilder} [initialValue]  Function to calculate the initial value for a key.
- * @property {boolean} [prepareKeys=false]  Should the keys in the initialized data be limited to the keys provided
- *                                          by `options.initialKeys`?
+ * @property {boolean} [initialKeysOnly=false]  Should the keys in the initialized data be limited to the keys provided
+ *                                              by `options.initialKeys`?
  */
 
 /**
@@ -173,8 +173,8 @@ export class IdentifierField extends foundry.data.fields.StringField {
  * @param {MappingFieldOptions} [options={}]   Options which configure the behavior of the field.
  * @property {string[]} [initialKeys]          Keys that will be created if no data is provided.
  * @property {MappingFieldInitialValueBuilder} [initialValue]  Function to calculate the initial value for a key.
- * @property {boolean} [prepareKeys=false]     Should the keys in the initialized data be limited to the keys provided
- *                                             by `options.initialKeys`?
+ * @property {boolean} [initialKeysOnly=false]  Should the keys in the initialized data be limited to the keys provided
+ *                                              by `options.initialKeys`?
  */
 export class MappingField extends foundry.data.fields.ObjectField {
   constructor(model, options) {
@@ -197,7 +197,7 @@ export class MappingField extends foundry.data.fields.ObjectField {
     return foundry.utils.mergeObject(super._defaults, {
       initialKeys: null,
       initialValue: null,
-      prepareKeys: false
+      initialKeysOnly: false
     });
   }
 
@@ -267,7 +267,7 @@ export class MappingField extends foundry.data.fields.ObjectField {
     if ( !value ) return value;
     const obj = {};
     const initialKeys = (this.initialKeys instanceof Array) ? this.initialKeys : Object.keys(this.initialKeys ?? {});
-    const keys = this.prepareKeys ? initialKeys : Object.keys(value);
+    const keys = this.initialKeysOnly ? initialKeys : Object.keys(value);
     for ( const key of keys ) {
       const data = value[key] ?? this._getInitialValueForKey(key, value);
       obj[key] = this.model.initialize(data, model, options);
