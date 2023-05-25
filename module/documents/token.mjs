@@ -50,7 +50,7 @@ export default class TokenDocument5e extends TokenDocument {
         }
       }
       if ( !(field instanceof MappingField) ) continue;
-      if ( foundry.utils.isEmpty(field.initialKeys) ) continue;
+      if ( !field.initialKeys || foundry.utils.isEmpty(field.initialKeys) ) continue;
       if ( !isSchema(field.model) && !isModel(field.model) ) continue;
       const keys = Array.isArray(field.initialKeys) ? field.initialKeys : Object.keys(field.initialKeys);
       for ( const key of keys ) {
