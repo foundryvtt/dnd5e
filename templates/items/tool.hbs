@@ -84,7 +84,8 @@
             <div class="form-group">
                 <label>{{ localize "DND5E.DefaultAbilityCheck" }}</label>
                 <select name="system.ability">
-                    {{selectOptions config.abilities selected=system.ability blank=(localize "DND5E.Default")}}
+                    {{selectOptions config.abilities labelAttr="label" selected=system.ability
+                                    blank=(localize "DND5E.Default")}}
                 </select>
             </div>
 
