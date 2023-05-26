@@ -377,10 +377,12 @@ preLocalize("timePeriods");
 /* -------------------------------------------- */
 
 /**
- * The duration of the 'Gritty Realism' long rest.
- * @type {number}
+ * The duration of resting features.
+ * @enum {number}
  */
-DND5E.grittyRestDuration = 7;
+DND5E.restDurations = {
+  gritty: { long: { value: 7 } }
+};
 
 /* -------------------------------------------- */
 

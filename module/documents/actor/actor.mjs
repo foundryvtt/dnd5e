@@ -2018,12 +2018,14 @@ export default class Actor5e extends Actor {
 
     // Summarize the rest duration
     let restFlavor;
+    let restFlavorData = {};
     switch (game.settings.get("dnd5e", "restVariant")) {
       case "normal":
         restFlavor = (longRest && newDay) ? "DND5E.LongRestOvernight" : `DND5E.${length}RestNormal`;
         break;
       case "gritty":
         restFlavor = (!longRest && newDay) ? "DND5E.ShortRestOvernight" : `DND5E.${length}RestGritty`;
+        restFlavorData = { duration: CONFIG.DND5E.restDurations.gritty.long.value };
         break;
       case "epic":
         restFlavor = `DND5E.${length}RestEpic`;
@@ -2041,7 +2043,7 @@ export default class Actor5e extends Actor {
     let chatData = {
       user: game.user.id,
       speaker: {actor: this, alias: this.name},
-      flavor: game.i18n.format(restFlavor, {duration: CONFIG.DND5E.grittyRestDuration}),
+      flavor: game.i18n.format(restFlavor, restFlavorData),
       rolls: result.rolls,
       content: game.i18n.format(message, {
         name: this.name,
@@ -2204,7 +2206,7 @@ export default class Actor5e extends Actor {
       if ( recoverDailyUses && uses?.recovery && (uses?.per === "charges") ) {
         const roll = new Roll(uses.recovery, item.getRollData());
         if ( recoverLongRestUses && (game.settings.get("dnd5e", "restVariant") === "gritty") ) {
-          roll.alter(CONFIG.DND5E.grittyRestDuration, 0, {multiplyNumeric: true});
+          roll.alter(CONFIG.DND5E.restDurations.gritty.long.value, 0, {multiplyNumeric: true});
         }
 
         let total = 0;
