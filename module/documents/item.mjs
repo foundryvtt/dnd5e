@@ -21,6 +21,14 @@ export default class Item5e extends Item {
   /* -------------------------------------------- */
 
   /**
+   * Is this Item an activatable item?
+   * @type {boolean}
+   */
+  get isActive() {
+    return this.system.isActive ?? false;
+  }
+
+  /**
    * Which ability score modifier is used by this item?
    * @type {string|null}
    * @see {@link ActionTemplate#abilityMod}
@@ -784,7 +792,7 @@ export default class Item5e extends Item {
       consumeResource: !!resource.target && (!item.hasAttack || (resource.type !== "ammo")),
       consumeSpellLevel: requireSpellSlot ? is.preparation.mode === "pact" ? "pact" : is.level : null,
       consumeSpellSlot: requireSpellSlot,
-      consumeUsage: !!is.uses?.per && (is.uses?.max > 0)
+      consumeUsage: item.isActive && !!is.uses?.per && (is.uses?.max > 0)
     }, config);
 
     // Display a configuration dialog to customize the usage
