@@ -1523,7 +1523,7 @@ export default class Actor5e extends Actor {
         parts.push("@prof");
         data.prof = init.prof.term;
       }
-      if ( init.bonus !== 0 ) {
+      if ( init.bonus ) {
         parts.push("@bonus");
         data.bonus = init.bonus;
       }
