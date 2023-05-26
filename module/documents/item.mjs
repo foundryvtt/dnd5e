@@ -796,7 +796,7 @@ export default class Item5e extends Item {
     config = foundry.utils.mergeObject({
       createMeasuredTemplate: item.hasAreaTarget,
       consumeQuantity: is.uses?.autoDestroy ?? false,
-      consumeRecharge: !!is.recharge?.value,
+      consumeRecharge: is.recharge?.value && item.isActive,
       consumeResource: item.hasResource,
       consumeSpellLevel: requireSpellSlot ? is.preparation.mode === "pact" ? "pact" : is.level : null,
       consumeSpellSlot: requireSpellSlot,
