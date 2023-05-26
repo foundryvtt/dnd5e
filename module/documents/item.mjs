@@ -125,6 +125,15 @@ export default class Item5e extends Item {
     return this.system.hasLimitedUses ?? false;
   }
 
+  /**
+   * Does this Item draw from a resource?
+   * @type {boolean}
+   * @see {@link ActivatedEffectTemplate#hasResource}
+   */
+  get hasResource() {
+    return this.system.hasResource ?? false;
+  }
+
   /* -------------------------------------------- */
 
   /**
@@ -780,7 +789,6 @@ export default class Item5e extends Item {
     }, options);
 
     // Reference aspects of the item data necessary for usage
-    const resource = is.consume || {};        // Resource consumption
     const isSpell = item.type === "spell";    // Does the item require a spell slot?
     const requireSpellSlot = isSpell && (is.level > 0) && CONFIG.DND5E.spellUpcastModes.includes(is.preparation.mode);
 
@@ -789,7 +797,7 @@ export default class Item5e extends Item {
       createMeasuredTemplate: item.hasAreaTarget,
       consumeQuantity: is.uses?.autoDestroy ?? false,
       consumeRecharge: !!is.recharge?.value,
-      consumeResource: !!resource.target && (!item.hasAttack || (resource.type !== "ammo")),
+      consumeResource: item.hasResource,
       consumeSpellLevel: requireSpellSlot ? is.preparation.mode === "pact" ? "pact" : is.level : null,
       consumeSpellSlot: requireSpellSlot,
       consumeUsage: item.isActive && !!is.uses?.per && (is.uses?.max > 0)

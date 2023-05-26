@@ -241,6 +241,14 @@ export default class ActivatedEffectTemplate extends foundry.abstract.DataModel 
     return this.isActive && (!!this.uses.per && (this.uses.max > 0));
   }
 
+  /**
+   * Does this Item draw from a resource?
+   * @type {boolean}
+   */
+  get hasResource() {
+    return this.isActive && this.consume.target && this.consume.type && (!this.hasAttack || (this.consume.type !== "ammo"));
+  }
+
   /* -------------------------------------------- */
 
   /**
