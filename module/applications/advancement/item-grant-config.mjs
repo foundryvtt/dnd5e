@@ -20,7 +20,7 @@ export default class ItemGrantConfig extends AdvancementConfig {
   /** @inheritdoc */
   getData(options={}) {
     const context = super.getData(options);
-    context.showSpellConfig = context.configuration.items.map(fromUuidSync).some(i => i.type === "spell");
+    context.showSpellConfig = context.configuration.items.map(uuid => fromUuidSync(uuid)).some(i => i.type === "spell");
     return context;
   }
 
