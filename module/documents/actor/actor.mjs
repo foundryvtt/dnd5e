@@ -1981,7 +1981,7 @@ export default class Actor5e extends Actor {
     if ( Hooks.call("dnd5e.preRestCompleted", this, result) === false ) return result;
 
     // Perform updates
-    await this.update(result.updateData);
+    await this.update(result.updateData, { isRest: true });
     await this.updateEmbeddedDocuments("Item", result.updateItems);
 
     // Display a Chat Message summarizing the rest effects
@@ -2041,7 +2041,7 @@ export default class Actor5e extends Actor {
     let chatData = {
       user: game.user.id,
       speaker: {actor: this, alias: this.name},
-      flavor: game.i18n.localize(restFlavor),
+      flavor: game.i18n.format(restFlavor, {duration: CONFIG.DND5E.grittyRestDuration}),
       rolls: result.rolls,
       content: game.i18n.format(message, {
         name: this.name,
@@ -2204,7 +2204,7 @@ export default class Actor5e extends Actor {
       if ( recoverDailyUses && uses?.recovery && (uses?.per === "charges") ) {
         const roll = new Roll(uses.recovery, item.getRollData());
         if ( recoverLongRestUses && (game.settings.get("dnd5e", "restVariant") === "gritty") ) {
-          roll.alter(7, 0, {multiplyNumeric: true});
+          roll.alter(CONFIG.DND5E.grittyRestDuration, 0, {multiplyNumeric: true});
         }
 
         let total = 0;

@@ -377,6 +377,14 @@ preLocalize("timePeriods");
 /* -------------------------------------------- */
 
 /**
+ * The duration of the 'Gritty Realism' long rest.
+ * @type {number}
+ */
+DND5E.grittyRestDuration = 7;
+
+/* -------------------------------------------- */
+
+/**
  * Various ways in which an item or ability can be activated.
  * @enum {string}
  */
