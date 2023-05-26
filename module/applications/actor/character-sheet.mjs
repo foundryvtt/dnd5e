@@ -78,10 +78,10 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
       ctx.isExpanded = this._expanded.has(item.id);
 
       // Item usage
-      ctx.hasUses = uses && (uses.max > 0);
+      ctx.hasUses = item.hasLimitedUses;
       ctx.isOnCooldown = recharge && !!recharge.value && (recharge.charged === false);
-      ctx.isDepleted = ctx.isOnCooldown && (uses.per && (uses.value > 0));
-      ctx.hasTarget = !!target && !(["none", ""].includes(target.type));
+      ctx.isDepleted = ctx.isOnCooldown && ctx.hasUses && (uses.value > 0);
+      ctx.hasTarget = item.hasAreaTarget || item.hasIndividualTarget;
 
       // Item toggle state
       this._prepareItemToggleState(item, ctx);
