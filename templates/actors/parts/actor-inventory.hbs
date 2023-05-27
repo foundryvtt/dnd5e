@@ -19,7 +19,8 @@
       <label>{{localize "DND5E.Attunement"}}</label>
       <span class="attunement-value">{{system.attributes.attunement.value}}</span>
       <span class="sep"> / </span>
-      <span class="attunement-max">{{system.attributes.attunement.max}}
+      <span class="attunement-max" {{#if overrides.attunement}}data-tooltip="DND5E.ActiveEffectOverrideWarning"{{/if}}>
+        {{system.attributes.attunement.max}}
         {{#unless (or overrides.attunement (not editable))}}
         <a class="attunement-max-override" data-tooltip="{{localize 'DND5E.AttunementOverride'}}">
           <i class="fa-solid fa-edit"></i>

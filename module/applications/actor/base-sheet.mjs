@@ -694,9 +694,7 @@ export default class ActorSheet5e extends ActorSheet {
       tool: /system\.tools\.([^.]+)\.value/
     };
 
-    const overrides = Object.keys(foundry.utils.flattenObject(this.actor.overrides));
-
-    for ( const override of overrides ) {
+    for ( const override of Object.keys(foundry.utils.flattenObject(this.actor.overrides)) ) {
       html.find(`input[name="${override}"],select[name="${override}"]`).each((i, el) => {
         el.disabled = true;
         el.dataset.tooltip = "DND5E.ActiveEffectOverrideWarning";
@@ -714,10 +712,6 @@ export default class ActorSheet5e extends ActorSheet {
       const [, spell] = override.match(/system\.spells\.(spell\d)\.override/) || [];
       if ( spell ) {
         html.find(`.spell-max[data-level="${spell}"]`).attr("data-tooltip", "DND5E.ActiveEffectOverrideWarning");
-      }
-
-      if( overrides.includes("system.attributes.attunement.max") ) {
-        html[0].querySelector(".attunement-max")?.setAttribute("data-tooltip", "DND5E.ActiveEffectOverrideWarning");
       }
     }
   }
