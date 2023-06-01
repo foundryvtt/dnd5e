@@ -27,7 +27,7 @@ may do this by cloning the repository or downloading a zip archive from the
 [Releases Page](https://github.com/foundryvtt/dnd5e/releases).
 
 ## Frequently Asked Questions  
-Check the [Wiki](wiki) for answers to our most [frequently asked questions](faq)
+Check the [Wiki](../../wiki) for answers to our most [frequently asked questions](../../wiki/faq)
 
 ## Community Contribution
 
