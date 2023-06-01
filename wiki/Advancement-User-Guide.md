@@ -90,14 +90,15 @@ This Advancement Type also contains the following options:
 
 ## Leveling Up
 
-![Level Up](assets/AUG-LevellingUp.mp4)
+https://github.com/MaxPat931/dnd5e/assets/86370342/c86f72a7-4441-4dad-ad8e-c1f4dfaf4d7d
+
 
 1. On your Actor's Features tab, find the Level option for your class, click it to open the drop down and select the level you would like to advance to.
 2. The appropriate advancement items will be presented to you, use the steps as described above to move through the process.
 
 ## Modifying a previous advancement choice
 
-![Modifying Choices](assets/AUG-ModifyChoice.mp4)
+https://github.com/MaxPat931/dnd5e/assets/86370342/6994d0bb-9ea9-4822-8c29-e6f532a5db30
 
 1. If you made a mistake on a previous level up, such as selecting the wrong item or accidentally deselecting an item, navigate to the Features tab of your actor, and click the Edit icon for their Class item.
 2. In the Advancements tab, make sure the Configuration is disabled, then find the level to modify and click the Modify Choices button
@@ -105,7 +106,7 @@ This Advancement Type also contains the following options:
 
 ## Leveling Down or Removing a Class
 
-![Level Down](assets/AUG-LevelingDown.mp4)
+https://github.com/MaxPat931/dnd5e/assets/86370342/8a6e69e7-50dd-4640-8304-4ba57c89f525
 
 1. On your Actor's Features tab, find the Level option for your class, click it and select the level you would like to revert to from the drop down, or click the Trash can icon to completely remove the class or subclass.
 2. The system will display a dialog to confirm the change and provide a toggle to remove any advancement items that have been earned up to this level, leaving the box checked will ensure items granted from previous level ups will be removed from the actor. 
@@ -115,7 +116,7 @@ Presently the Subclass advancement type is not available in this release, and wi
 
 The current recommended process is to manually drag and drop the subclass onto the actor after completing the Advancement process for the given level, which will prompt for the appropriate advancements for the character's level in the parent class. 
 
-![Adding a Subclass](assets/AUG-AddSubclass.mp4)
+https://github.com/MaxPat931/dnd5e/assets/86370342/1902e425-720d-4c9a-a0cd-dc7c05f3c4ce
 
 # Updating Advancements for an owned Class item
 If you are building your own custom class, or modifying an existing class record, once a class is added to an actor it is owned by that actor and is separate from the parent class item in the items sidebar or compendium. For example, if you built a class item with advancements to level 5 and added it to an actor, then later updated the class in the compendium to add advancements to level 10, dragging and dropping that class item onto the actor will not provide the new advancement items to the owned class item.
