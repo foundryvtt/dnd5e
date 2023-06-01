@@ -26,6 +26,9 @@ If you wish to manually install the system, you must clone or extract it into th
 may do this by cloning the repository or downloading a zip archive from the
 [Releases Page](https://github.com/foundryvtt/dnd5e/releases).
 
+## Frequently Asked Questions  
+Check the [Wiki](wiki) for answers to our most [frequently asked questions](faq)
+
 ## Community Contribution
 
 See the [CONTRIBUTING](/CONTRIBUTING.md) file for information about how you can help this project.
