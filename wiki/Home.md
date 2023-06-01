@@ -9,3 +9,4 @@
 - [Dynamic Module Art](dynamic-module-art)
 - [Hooks](hooks)
 - [Roll Formulas](roll-formulas)
+- [Frequently Asked Questions](faq)
