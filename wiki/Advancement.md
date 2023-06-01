@@ -6,7 +6,7 @@ The advancement system is a new system in 5e that allows classes, subclasses, an
 
 This page provides an overview of the system and its API. For more specific guides, please visit one of the following pages:
 
-- [Advancement User Guide](User-Guide)
+- [Advancement User Guide](Advancement-User-Guide)
 - [Custom Class Example](Custom-Class-Example)
 
 #### Disabling Advancements
