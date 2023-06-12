@@ -187,6 +187,10 @@ function _configureTrackableAttributes() {
     vehicle: {
       bar: [...common.bar],
       value: [...common.value]
+    },
+    group: {
+      bar: [],
+      value: []
     }
   };
 }
