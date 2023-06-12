@@ -4,17 +4,17 @@ The Hit Points advancement type keeps track of hit point choices for each level 
 
 ## Configuration
 
-![Config](assets/ATHP-config.png)
+<img width="400" alt="Hit Points - Configuration" src="https://user-images.githubusercontent.com/19979839/195448359-c3274376-90e3-4bad-850a-02958039a026.png">
 
 The Hit Points advancement requires no configuration. It will take a custom title and icon like all other advancement types, but everything else is handled automatically including fetching the hit dice type from the class to which it was added.
 
 ## Usage
 
-![First Level](assets/ATHP-firstlevel.png)
+<img width="460" alt="Hit Points - Usage, Initial Level" src="https://user-images.githubusercontent.com/19979839/195448781-1896a3f1-5dd5-4d6d-b6de-c5b870a3e74c.png">
 
 Using the Hit Points advancement is almost as simple as setting it up. At the character's first level there are no options to choose because all level one characters get the maximum hit points allowed by their hit dice. The character's constitution modifier will automatically be added with the hit points, so be sure it is set before adding the first class.
 
-![Level Up](assets/ATHP-avgorroll.png)
+<img width="460" alt="Hit Points - Usage, Higher Level" src="https://user-images.githubusercontent.com/19979839/195449049-1f2a5f64-8836-4990-8198-d2f066a7dced.png">
 
 At higher levels you are given an option between taking the average hit points (half the max + 1) or rolling for hit points. If the "Take Average" option is selected, it will be remembered at future levels but can be changed at any point.
 
