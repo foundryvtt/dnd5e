@@ -142,6 +142,40 @@
       "flags": {}
     }
   ],
+  	"folders": [{
+			"name": "Character Features",
+			"sorting": "m",
+			"color": "#ff0000",
+			"packs": [
+				"classes",
+				"subclasses",
+				"classfeatures",
+				"backgrounds",
+				"races",
+				"heroes"
+			]
+		},
+		{
+			"name": "Items and Spells",
+			"sorting": "m",
+			"color": "#ff0000",
+			"packs": [
+				"items",
+				"spells",
+				"tradegoods",
+				"tables"
+			]
+		},
+		{
+			"name": "Monsters",
+			"sorting": "m",
+			"color": "#ff0000",
+			"packs": [
+				"monsters",
+				"monsterfeatures"
+			]
+		}
+	],
   "languages": [
     {
       "lang": "en",
