@@ -12,9 +12,9 @@ The following section will discuss changes made to the Class item type.
 - **Identifier field**: this will allow you to configure the name of the class that can be used to reference it in roll formulas (useful for classes with spaces, or localizing the class to other languages). The class identifier may only contain letters, numbers, hyphens (`-`), and underscores (`_`).
 - **Level field**: has been removed, class levels will be managed from the actor sheet, see the second screenshot below.
 
-![Class Details](/uploads/bad8b941e33d4723888320099d64dc44/image.png)
+![Class Details](https://github.com/foundryvtt/dnd5e/assets/86370342/1dfac30f-cdcb-4d3e-a71a-694f119b0dc7)
 
-![Class Level Dropdown](uploads/2aaa7e2f13e38c3d437f96532a132fb6/image.png)
+![Class Level Dropdown](https://github.com/foundryvtt/dnd5e/assets/86370342/57d98381-8eaf-40e1-914c-402926bd54f6)
 
 ## The Advancement tab
 This is where you will configure the Advancement items for this class. 
@@ -24,7 +24,7 @@ This is where you will configure the Advancement items for this class.
 - **Modify Choices** - This will only display when the class is placed on an actor, and if Configuration is disabled, this allows a user to change any choices they made for that level.
 - Advancement items are sorted within each level alphabetically by type in the following order: Hit Points, Item Grant, Scale Value.
 
-![Advancement Example](uploads/b1704b651235c8c925876fdab20f32cb/image.png)
+![Advancement Example](https://github.com/foundryvtt/dnd5e/assets/86370342/4b2dbd4d-01fa-4015-9253-54fc3a682776)
 
 # Advancement Item Types
 There are currently 3 types of Advancement Items that can be added to a Class item: Hit Points, Item Grant, and Scale Value.
@@ -36,12 +36,12 @@ All Advancement Items have the following fields:
     * Original Class Only - Only if this class is the initial class.
     * Multiclass Only - Only if this class is chosen as a multiclass.
 
-![Basic Advancement Configuration](uploads/dc08907e9cab90529197561388b410d8/image.png)
+![Basic Advancement Configuration](https://github.com/foundryvtt/dnd5e/assets/86370342/e89f215e-8048-4aa1-a051-1632fbcd970f)
     
 ## Hit Points
 This advancement item will prompt for the user to Roll for HP or use the average, using the Hit Die noted in the Details tab of the Class item.
 
-![Hit Points Advancement Configuration](uploads/831dcea7797820481658830d51514c5d/image.png)
+![Hit Points Advancement Configuration](https://github.com/foundryvtt/dnd5e/assets/86370342/36435978-2bb9-4098-b992-c2dcecc1535e)
 
 ## Item Grant
 This advancement can grant another item on level up (e.g. Class Features, Equipment). It should not be used for Class Spellcasting as a separate Advancement type is planned for that. It can be used for Racial Spellcasting, however.
@@ -51,7 +51,7 @@ This Advancement Type also contains the following options:
 * **Optional**: If you want to give the user the option to decline any items granted by this Advancement, check this box, otherwise all items will be granted automatically.
 * **Items**: Drag and drop an item into this section for that item to be granted when an actor has reached the appropriate level in this class.
 
-![Item Grant Advancement Configuration](uploads/7c0d040d5585185ba9425e46f4904391/image.png)
+![Item Grant Advancement Configuration](https://github.com/foundryvtt/dnd5e/assets/86370342/0121c15c-6a3d-4f16-957f-3c9b81b9674d)
 
 ## Scale Value
 This can be used to track when features get extra uses (e.g. Wild Shape or Channel Divinity), or the die value of a feature increases (e.g. Sneak Attack or Martial Arts)
@@ -59,19 +59,19 @@ This Advancement Type also contains the following options:
 * **Scale Type**: This determines the values accepted on the Level sections on the right hand side
 * Anything - Allows an arbitrary input including text and numbers
 
-![Scale Value: Anything](https://user-images.githubusercontent.com/19979839/198366584-883daa2e-acf1-447d-9128-67db65f79061.png)
+![Scale Value: Anything](https://github.com/foundryvtt/dnd5e/assets/86370342/3d20ec17-a88d-4398-b60a-bc7dda5a9fc0)
 
 * Dice - Allows a configuration of number of die and die size (options include d2, d3, d4, d6, d8, d10, d12, and d20). It is recommended for features that can use a variable number of these dice to leave the count blank, and define the number used in the feature, (e.g. `1@scale.monk.martial-arts`, `2@scale.monk.martial-arts`) this will ensure accurate values if used in the damage field and critical damage is rolled. Values that are a consistent number of die can have the value column populated (e.g. Sneak Attack)
 
-![Scale Value: Dice](https://user-images.githubusercontent.com/19979839/198366623-69fbf202-fa1c-41d6-a454-cd50c4a065da.png)
+![Scale Value: Dice](https://github.com/foundryvtt/dnd5e/assets/86370342/80e49db5-8128-4edc-b2a9-3277ad7d8144)
 
 * Numeric - Allows a configuration of a number value in the level options
 
-![Scale Value: Numeric](https://user-images.githubusercontent.com/19979839/198366669-86c8bab8-0185-4c87-9367-e12657cfca07.png)
+![Scale Value: Numeric](https://github.com/foundryvtt/dnd5e/assets/86370342/f687de1a-c92e-4834-ac00-3170451b7129)
 
 * Distance - Allows for numerical values in the level options, you can choose the units of Feet, Miles, Meters, and Kilometers
 
-![Scale Value: Distance](https://user-images.githubusercontent.com/19979839/198366704-6370cc83-000f-4e9c-a6bd-8592cdd0e00a.png)
+![Scale Value: Distance](https://github.com/foundryvtt/dnd5e/assets/86370342/496109c8-caa7-4185-97f4-bb84ab3a12eb)
 
 * **Identifier**: Defines the identifier to be used in a formula.
 * **1-20**: Used to define the scale value at a given level
