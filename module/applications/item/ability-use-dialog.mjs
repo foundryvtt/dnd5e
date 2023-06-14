@@ -49,7 +49,7 @@ export default class AbilityUseDialog extends Dialog {
       consumeResource: resource.target && (!item.hasAttack || (resource.type !== "ammo")),
       consumeUses: uses.per && (uses.max > 0),
       canUse: recharges ? recharge.charged : sufficientUses,
-      createTemplate: game.user.can("TEMPLATE_CREATE") && (config?.createMeasuredTemplate ?? item.hasAreaTarget),
+      createTemplate: game.user.can("TEMPLATE_CREATE") && item.hasAreaTarget && config?.createMeasuredTemplate !== false,
       errors: []
     };
     if ( item.type === "spell" ) this._getSpellData(item.actor.system, item.system, data);
