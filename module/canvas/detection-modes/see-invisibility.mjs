@@ -7,7 +7,8 @@ export class DetectionModeSeeInvisibility extends DetectionMode {
       id: "seeInvisibility",
       label: "DETECTION.SeeInvisibility",
       type: DetectionMode.DETECTION_TYPES.SIGHT,
-      walls: false
+      walls: false,
+      angle: false
     });
   }
 
@@ -100,8 +101,8 @@ export class DetectionModeSeeInvisibility extends DetectionMode {
 
   /**
    * Temporarily remove the invisible status effects from the target token.
-   * @param {Token} target                 The target token.
-   * @returns {ActiveEffect[]|string[]}    The effects that need to be restored later.
+   * @param {Token} target                           The target token.
+   * @returns {ActiveEffect[]|string[]|undefined}    The effects that need to be restored later.
    */
   #removeInvisibleStatusEffects(target) {
     const document = target.document;
@@ -115,11 +116,7 @@ export class DetectionModeSeeInvisibility extends DetectionMode {
       effects = document.effects;
       document.effects = effects.filter(e => e !== icon);
     } else if (foundry.utils.isNewerVersion(game.version, 11)) {
-      effects = document.actor.effects.filter(e => e.statuses.has(statusId));
-
-      for (const effect of effects) {
-        effect.statuses.delete(statusId);
-      }
+      document.actor.statuses.delete(statusId);
     } else {
       effects = document.actor.effects.filter(e => !e.disabled && e.getFlag("core", "statusId") === statusId);
 
@@ -133,8 +130,8 @@ export class DetectionModeSeeInvisibility extends DetectionMode {
 
   /**
    * Restore the status effects.
-   * @param {Token} target                       The target token.
-   * @param {ActiveEffect[]|string[]} effects    The effects that need to be restored.
+   * @param {Token} target                                 The target token.
+   * @param {ActiveEffect[]|string[]|undefined} effects    The effects that need to be restored.
    */
   #restoreInvisibleStatusEffects(target, effects) {
     const document = target.document;
@@ -142,11 +139,7 @@ export class DetectionModeSeeInvisibility extends DetectionMode {
     if (!document.actor) {
       document.effects = effects;
     } else if (foundry.utils.isNewerVersion(game.version, 11)) {
-      const statusId = CONFIG.specialStatusEffects.INVISIBLE;
-
-      for (const effect of effects) {
-        effect.statuses.add(statusId);
-      }
+      document.actor.statuses.add(CONFIG.specialStatusEffects.INVISIBLE);
     } else {
       for (const effect of effects) {
         effect.disabled = false;
