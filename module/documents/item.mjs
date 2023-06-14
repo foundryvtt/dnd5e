@@ -804,7 +804,7 @@ export default class Item5e extends Item {
 
     // Display configuration dialog
     if ( (options.configureDialog !== false) && config.needsConfiguration ) {
-      const configuration = await AbilityUseDialog.create(item);
+      const configuration = await AbilityUseDialog.create(item, config);
       if ( !configuration ) return;
       foundry.utils.mergeObject(config, configuration);
     }

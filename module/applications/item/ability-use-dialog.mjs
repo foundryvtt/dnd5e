@@ -24,10 +24,11 @@ export default class AbilityUseDialog extends Dialog {
   /**
    * A constructor function which displays the Spell Cast Dialog app for a given Actor and Item.
    * Returns a Promise which resolves to the dialog FormData once the workflow has been completed.
-   * @param {Item5e} item  Item being used.
-   * @returns {Promise}    Promise that is resolved when the use dialog is acted upon.
+   * @param {Item5e} item     Item being used.
+   * @param {object} [config] Initial configuration data for the usage.
+   * @returns {Promise}       Promise that is resolved when the use dialog is acted upon.
    */
-  static async create(item) {
+  static async create(item, config) {
     if ( !item.isOwned ) throw new Error("You cannot display an ability usage dialog for an unowned item");
 
     // Prepare data
@@ -48,7 +49,7 @@ export default class AbilityUseDialog extends Dialog {
       consumeResource: resource.target && (!item.hasAttack || (resource.type !== "ammo")),
       consumeUses: uses.per && (uses.max > 0),
       canUse: recharges ? recharge.charged : sufficientUses,
-      createTemplate: game.user.can("TEMPLATE_CREATE") && item.hasAreaTarget,
+      createTemplate: game.user.can("TEMPLATE_CREATE") && (config?.createMeasuredTemplate ?? item.hasAreaTarget),
       errors: []
     };
     if ( item.type === "spell" ) this._getSpellData(item.actor.system, item.system, data);
