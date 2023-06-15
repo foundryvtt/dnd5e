@@ -42,6 +42,7 @@ All Advancement Items have the following fields:
 This advancement item will prompt for the user to Roll for HP or use the average, using the Hit Die noted in the Details tab of the Class item.  
 For more information, see [Hit Points Advancement](Advancement-Type-Hit-Points.md)
 
+
 ## Item Grant
 This advancement can grant another item on level up (e.g. Class Features, Equipment). It should not be used for Class Spellcasting as a separate Advancement type is planned for that. It can be used for Racial Spellcasting, however.  
 For more information, see [Item Grant Advancement](Advancement-Type-Item-Grant.md)
