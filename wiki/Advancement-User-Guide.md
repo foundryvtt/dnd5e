@@ -44,7 +44,7 @@ For more information, see [Hit Points Advancement](Advancement-Type-Hit-Points.m
 
 ## Item Grant
 This advancement can grant another item on level up (e.g. Class Features, Equipment). It should not be used for Class Spellcasting as a separate Advancement type is planned for that. It can be used for Racial Spellcasting, however.  
-For more information, see [Item Grant Advancement](Advancement-Type-Item Grant.md)
+For more information, see [Item Grant Advancement](Advancement-Type-Item-Grant.md)
 
 ## Scale Value
 This can be used to track when features get extra uses (e.g. Wild Shape or Channel Divinity), or the die value of a feature increases (e.g. Sneak Attack or Martial Arts)
