@@ -47,6 +47,10 @@ For more information, see [Hit Points Advancement](Advancement-Type-Hit-Points.m
 This advancement can grant another item on level up (e.g. Class Features, Equipment). It should not be used for Class Spellcasting as a separate Advancement type is planned for that. It can be used for Racial Spellcasting, however.  
 For more information, see [Item Grant Advancement](Advancement-Type-Item-Grant.md)
 
+## Item Choice
+This advancement type is designed for any feature that gives the player a choice of options to add to their character at a certain level. This covers features with a limited set of options such as Fighting Style and more open ended features such as Magical Secrets.  
+For more information, see [Item Choice Advancement](Advancement-Type-Item-Choice.md)
+
 ## Scale Value
 This can be used to track when features get extra uses (e.g. Wild Shape or Channel Divinity), or the die value of a feature increases (e.g. Sneak Attack or Martial Arts)
 For more information, see [Scale Value Advancement](Advancement-Type-Scale-Value.md)
