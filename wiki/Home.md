@@ -5,6 +5,10 @@
   - [Custom Class Example](Custom-Class-Advancement.md)  
     Advancement Types
     - [Advancement Type: Hit Points](Advancement-Type-Hit-Points.md)
+    - [Advancement Type: Item Grant](Advancement-Type-Item-Grant.md)
+    - [Advancement Type: Item Choice](Advancement-Type-Item-Choice.md)
+    - [Advancement Type: Scale Value](Advancement-Type-Scale-Value.md)
+
 - [Dynamic Module Art](Dynamic-Module-Art.md)
 - [Hooks](Hooks.md)
 - [Roll Formulas](Roll-Formulas.md)
