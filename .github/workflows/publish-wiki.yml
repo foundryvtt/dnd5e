@@ -16,6 +16,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: impresscms-dev/strip-markdown-extensions-from-links-action@v1.0.0
-      with:
-        path: wiki
+        with:
+          path: wiki
       - uses: Andrew-Chen-Wang/github-wiki-action@v4
