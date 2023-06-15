@@ -24,7 +24,7 @@ The [hit points advancement](Advancement-Type-Hit-Points.md) keeps track of hit 
 ### Scale Value *(class or subclass only)*
 [Scale values](Advancement-Type-Scale-Value.md) are formula values that change arbitrarily depending on the level of the class or subclass to which they belong. These values are then made available to be used in roll formulas or elsewhere in the system. A few examples of this include a Bard's inspiration die size, a Rogue's sneak attack value, or a Cleric's channel divinity uses.
 
-## Item Choice
+### Item Choice
 The [item choice advancement](Advancement-Type-Item-Choice.md) defines a list of features, spells, or other items that the player can choose to add to the actor at a certain level.
 
 ### Proposed Types
