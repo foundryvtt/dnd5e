@@ -1,12 +1,15 @@
 # Welcome to the DnD5e FoundryVTT Wiki
 
-- [Advancement Overview](Advancement)
-  - [Advancement User Guide](Advancement-User-Guide)
-  - [Custom Class Example](Custom-Class-Example)
-  - [Grant Item Advancement](Grant-Item-Advancement)
-  - [Hit Points Advancement](Hit-Points-Advancement)
-  - [Scale Value Advancement](Scale-Value-Advancement)
-- [Dynamic Module Art](Dynamic-Module-Art)
-- [Hooks](Hooks)
-- [Roll Formulas](Roll-Formulas)
-- [Frequently Asked Questions](FAQ)
+- [Advancement Overview](Advancement.md)
+  - [Advancement User Guide](Advancement-User-Guide.md)
+  - [Custom Class Example](Custom-Class-Advancement.md)  
+    Advancement Types
+    - [Advancement Type: Hit Points](Advancement-Type-Hit-Points.md)
+    - [Advancement Type: Item Grant](Advancement-Type-Item-Grant.md)
+    - [Advancement Type: Item Choice](Advancement-Type-Item-Choice.md)
+    - [Advancement Type: Scale Value](Advancement-Type-Scale-Value.md)
+
+- [Dynamic Module Art](Dynamic-Module-Art.md)
+- [Hooks](Hooks.md)
+- [Roll Formulas](Roll-Formulas.md)
+- [Frequently Asked Questions](FAQ.md)
