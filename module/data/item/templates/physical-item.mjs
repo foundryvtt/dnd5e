@@ -7,6 +7,7 @@
  * @property {number} price.value         Item's cost in the specified denomination.
  * @property {string} price.denomination  Currency denomination used to determine price.
  * @property {string} rarity              Item rarity as defined in `DND5E.itemRarity`.
+ * @property {boolean} magical            Is this item magical?
  * @property {boolean} identified         Has this item been identified?
  * @mixin
  */
@@ -29,6 +30,7 @@ export default class PhysicalItemTemplate extends foundry.abstract.DataModel {
         })
       }, {label: "DND5E.Price"}),
       rarity: new foundry.data.fields.StringField({required: true, blank: true, label: "DND5E.Rarity"}),
+      magical: new foundry.data.fields.BooleanField({required: true, initial: d => !!d.system?.rarity, label: "DND5E.Magical"}),
       identified: new foundry.data.fields.BooleanField({required: true, initial: true, label: "DND5E.Identified"})
     };
   }
