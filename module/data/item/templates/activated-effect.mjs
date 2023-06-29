@@ -31,7 +31,7 @@ import { FormulaField } from "../../fields.mjs";
  * @property {number} consume.amount        Quantity of the resource to consume per use.
  * @mixin
  */
-export default class ActivatedEffectTemplate extends foundry.abstract.DataModel {
+export default class ActivatedEffectTemplate extends SystemDataModel {
   /** @inheritdoc */
   static defineSchema() {
     return {
@@ -96,7 +96,8 @@ export default class ActivatedEffectTemplate extends foundry.abstract.DataModel 
   /* -------------------------------------------- */
 
   /** @inheritdoc */
-  static migrateData(source) {
+  static _migrateData(source) {
+    super._migrateData(source);
     ActivatedEffectTemplate.#migrateFormulaFields(source);
     ActivatedEffectTemplate.#migrateRanges(source);
     ActivatedEffectTemplate.#migrateTargets(source);

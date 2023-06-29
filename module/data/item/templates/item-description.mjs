@@ -1,3 +1,5 @@
+import SystemDataModel from "../../abstract.mjs";
+
 /**
  * Data model template with item description & source.
  *
@@ -8,7 +10,7 @@
  * @property {string} source                    Adventure or sourcebook where this item originated.
  * @mixin
  */
-export default class ItemDescriptionTemplate extends foundry.abstract.DataModel {
+export default class ItemDescriptionTemplate extends SystemDataModel {
   /** @inheritdoc */
   static defineSchema() {
     return {
@@ -28,7 +30,8 @@ export default class ItemDescriptionTemplate extends foundry.abstract.DataModel 
   /* -------------------------------------------- */
 
   /** @inheritdoc */
-  static migrateData(source) {
+  static _migrateData(source) {
+    super._migrateData(source);
     ItemDescriptionTemplate.#migrateSource(source);
   }
 
