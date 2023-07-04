@@ -1525,7 +1525,7 @@ export default class Actor5e extends Actor {
       }
       if ( init.bonus ) {
         parts.push("@bonus");
-        data.bonus = init.bonus;
+        data.bonus = Roll.replaceFormulaData(init.bonus, data);
       }
     }
 
@@ -1534,7 +1534,7 @@ export default class Actor5e extends Actor {
       const abilityBonus = this.system.abilities[abilityId]?.bonuses?.check;
       if ( abilityBonus ) {
         parts.push("@abilityBonus");
-        data.abilityBonus = abilityBonus;
+        data.abilityBonus = Roll.replaceFormulaData(abilityBonus, data);
       }
     }
 
@@ -1543,7 +1543,7 @@ export default class Actor5e extends Actor {
       const globalCheckBonus = this.system.bonuses.abilities?.check;
       if ( globalCheckBonus ) {
         parts.push("@globalBonus");
-        data.globalBonus = globalCheckBonus;
+        data.globalBonus = Roll.replaceFormulaData(globalCheckBonus, data);
       }
     }
 
