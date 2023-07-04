@@ -52,7 +52,7 @@ export default class CommonTemplate extends SystemDataModel.mixin(CurrencyTempla
     const config = CONFIG.DND5E.abilities[key];
     if ( config ) {
       let defaultValue = config.defaults?.[this._systemType] ?? initial.value;
-      if ( typeof defaultValue === "string" ) defaultValue = existing[defaultValue]?.value ?? initial.value;
+      if ( typeof defaultValue === "string" ) defaultValue = existing?.[defaultValue]?.value ?? initial.value;
       initial.value = defaultValue;
     }
     return initial;
