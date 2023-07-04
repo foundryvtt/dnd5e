@@ -2020,9 +2020,10 @@ export default class Item5e extends Item {
     if ( data.system?.proficient === undefined ) {
       if ( isNPC ) updates["system.proficient"] = 1;
       else {
-        const actorToolProfs = this.parent.system.traits?.toolProf?.value || new Set();
-        const proficient = actorToolProfs.has(this.system.toolType) || actorToolProfs.has(this.system.baseItem);
-        updates["system.proficient"] = Number(proficient);
+        const actorToolProfs = this.parent.system.tools || {};
+        const toolProf = actorToolProfs[this.system.baseItem]?.value;
+        const generalProf = actorToolProfs[this.system.toolType]?.value;
+        updates["system.proficient"] = toolProf ?? generalProf ?? 0;
       }
     }
     return updates;

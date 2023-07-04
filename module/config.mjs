@@ -1636,7 +1636,7 @@ DND5E.traits = {
   },
   tool: {
     label: "DND5E.TraitToolProf",
-    actorKeyPath: "traits.toolProf",
+    actorKeyPath: "tools",
     configKey: "toolProficiencies",
     subtypes: { keyPath: "toolType", ids: ["toolIds"] },
     children: { vehicle: "vehicleTypes" },
