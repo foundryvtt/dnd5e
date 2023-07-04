@@ -73,6 +73,7 @@ export default class EquipmentData extends SystemDataModel.mixin(
    * @param {object} source  The candidate source data from which the model will be constructed.
    */
   static #migrateArmor(source) {
+    if ( !("armor" in source) ) return;
     source.armor ??= {};
     if ( source.armor.type === "bonus" ) source.armor.type = "trinket";
     if ( (typeof source.armor.dex === "string") ) {
