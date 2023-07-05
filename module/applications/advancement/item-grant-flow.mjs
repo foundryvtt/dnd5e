@@ -25,7 +25,7 @@ export default class ItemGrantFlow extends AdvancementFlow {
     const checked = new Set(Object.values(added ?? {}));
     return {
       optional: this.advancement.configuration.optional,
-      items: (await Promise.all(config.map(fromUuid))).reduce((arr, item) => {
+      items: (await Promise.all(config.map(uuid => fromUuid(uuid)))).reduce((arr, item) => {
         if ( !item ) return arr;
         item.checked = added ? checked.has(item.uuid) : true;
         arr.push(item);
