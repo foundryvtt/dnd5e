@@ -1758,6 +1758,7 @@ DND5E.allowedActorFlags = ["isPolymorphed", "originalActor"].concat(Object.keys(
  * @enum {*}
  */
 DND5E.advancementTypes = {
+  AbilityScoreImprovement: advancement.AbilityScoreImprovementAdvancement,
   HitPoints: advancement.HitPointsAdvancement,
   ItemChoice: advancement.ItemChoiceAdvancement,
   ItemGrant: advancement.ItemGrantAdvancement,
