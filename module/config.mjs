@@ -1541,6 +1541,12 @@ preLocalize("languages", { sort: true });
 DND5E.maxLevel = 20;
 
 /**
+ * Maximum ability score value allowed by default.
+ * @type {number}
+ */
+DND5E.maxAbilityScore = 20;
+
+/**
  * XP required to achieve each character level.
  * @type {number[]}
  */

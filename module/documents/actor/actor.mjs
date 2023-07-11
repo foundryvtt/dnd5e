@@ -359,6 +359,8 @@ export default class Actor5e extends Actor {
       if ( Number.isNumeric(abl.saveProf.term) ) abl.save += abl.saveProf.flat;
       abl.dc = 8 + abl.mod + this.system.attributes.prof + dcBonus;
 
+      if ( !Number.isFinite(abl.max) ) abl.max = CONFIG.DND5E.maxAbilityScore;
+
       // If we merged saves when transforming, take the highest bonus here.
       if ( originalSaves && abl.proficient ) abl.save = Math.max(abl.save, originalSaves[id].save);
     }
