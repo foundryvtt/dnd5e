@@ -50,7 +50,7 @@ export default class AbilityScoreImprovementAdvancement extends Advancement {
    */
   get points() {
     return {
-      assigned: Object.values(this.value.improvements ?? {}).reduce((n, c) => n + c, 0),
+      assigned: Object.values(this.value.assignments ?? {}).reduce((n, c) => n + c, 0),
       total: this.configuration.points + Object.values(this.configuration.fixed).reduce((t, v) => t + v, 0)
     };
   }

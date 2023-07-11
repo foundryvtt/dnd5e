@@ -545,7 +545,7 @@ export default class AdvancementManager extends Application {
           this.step.advancement.item.deleteAdvancement(this.step.advancement.id, { source: true });
         }
         else if ( type === "restore" ) await flow.advancement.restore(flow.level, flow.retainedData);
-        else if ( type === "reverse" ) await flow.attachRetainedData(await flow.advancement.reverse(flow.level));
+        else if ( type === "reverse" ) await flow.retainData(await flow.advancement.reverse(flow.level));
         else if ( flow ) await flow._updateObject(event, flow._getSubmitData());
 
         this._stepIndex++;
@@ -597,7 +597,7 @@ export default class AdvancementManager extends Application {
           this.advancement.typeName, this.advancement._source, { source: true }
         );
         else if ( type === "reverse" ) await flow.advancement.restore(flow.level, flow.retainedData);
-        else if ( flow ) await flow.attachRetainedData(await flow.advancement.reverse(flow.level));
+        else if ( flow ) await flow.retainData(await flow.advancement.reverse(flow.level));
         this.clone.reset();
       } while ( this.step?.automatic );
     } catch(error) {

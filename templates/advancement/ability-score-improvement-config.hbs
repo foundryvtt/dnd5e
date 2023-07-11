@@ -2,12 +2,12 @@
   {{> "dnd5e.advancement-controls"}}
 
   <ul class="ability-scores">
-    {{> "dnd5e.advancement-ability-score-control" points}}
+    {{> "dnd5e.advancement-ability-score-control" points canAdjust=true}}
     <li class="hint">
       {{localize "DND5E.AdvancementAbilityScoreImprovementPointsHint"}}
     </li>
     {{#each abilities}}
-      {{> "dnd5e.advancement-ability-score-control" this}}
+      {{> "dnd5e.advancement-ability-score-control" this canAdjust=true}}
     {{/each}}
   </ul>
 </form>

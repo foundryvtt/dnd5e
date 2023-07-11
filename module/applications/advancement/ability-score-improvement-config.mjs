@@ -19,7 +19,7 @@ export default class AbilityScoreImprovementConfig extends AdvancementConfig {
     const abilities = Object.entries(CONFIG.DND5E.abilities).reduce((obj, [key, data]) => {
       const fixed = this.advancement.configuration.fixed[key] ?? 0;
       obj[key] = {
-        key: key,
+        key,
         name: `configuration.fixed.${key}`,
         label: data.label,
         value: fixed,

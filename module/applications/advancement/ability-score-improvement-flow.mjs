@@ -14,7 +14,7 @@ export default class AbilityScoreImprovementFlow extends AdvancementFlow {
   /* -------------------------------------------- */
 
   /**
-   * The dropped feat item..
+   * The dropped feat item.
    * @type {Item5e}
    */
   feat;
@@ -32,8 +32,8 @@ export default class AbilityScoreImprovementFlow extends AdvancementFlow {
   /* -------------------------------------------- */
 
   /** @inheritdoc */
-  async attachRetainedData(data) {
-    super.attachRetainedData(data);
+  async retainData(data) {
+    super.retainData(data);
     this.assignments = this.retainedData.assignments ?? {};
     const featUuid = Object.values(this.retainedData.feat ?? {})[0];
     if ( featUuid ) this.feat = await fromUuid(featUuid);
@@ -44,9 +44,9 @@ export default class AbilityScoreImprovementFlow extends AdvancementFlow {
   /** @inheritdoc */
   async getData() {
     const points = {
-      assigned: Object.keys(CONFIG.DND5E.abilities).reduce((assigned, key) =>
-        assigned + (this.advancement.configuration.fixed[key] ?? 0) + (this.assignments[key] ?? 0)
-      , 0),
+      assigned: Object.keys(CONFIG.DND5E.abilities).reduce((assigned, key) => {
+          return assigned + (this.advancement.configuration.fixed[key] ?? 0) + (this.assignments[key] ?? 0);
+      }, 0),
       total: this.advancement.points.total
     };
     points.available = points.total - points.assigned;
@@ -59,13 +59,11 @@ export default class AbilityScoreImprovementFlow extends AdvancementFlow {
       const value = Math.min(ability.value + ((fixed || this.assignments[key]) ?? 0), ability.max);
       const max = fixed ? value : Math.min(value + points.available, ability.max);
       obj[key] = {
-        key: key,
+        key, max, value,
         name: `abilities.${key}`,
         label: data.label,
         initial: ability.value,
         min: fixed ? max : ability.value,
-        max,
-        value,
         delta: (value - ability.value) ? formatter.format(value - ability.value) : null,
         showDelta: true,
         isDisabled: !!this.feat,
@@ -80,6 +78,7 @@ export default class AbilityScoreImprovementFlow extends AdvancementFlow {
     return foundry.utils.mergeObject(super.getData(), {
       abilities, points,
       feat: this.feat,
+      staticIncrease: !this.advancement.configuration.points,
       pointsRemaining: game.i18n.format(
         `DND5E.AdvancementAbilityScoreImprovementPointsRemaining.${pluralRule}`, {points: points.available}
       )
@@ -103,7 +102,7 @@ export default class AbilityScoreImprovementFlow extends AdvancementFlow {
     super._onChangeInput(event);
     const input = event.currentTarget;
     const key = input.closest("[data-score]").dataset.score;
-    const clampedValue = Math.clamped(Number(input.min), input.valueAsNumber, Number(input.max));
+    const clampedValue = Math.clamped(input.valueAsNumber, Number(input.min), Number(input.max));
     this.assignments[key] = clampedValue - Number(input.dataset.initial);
     this.render();
   }
