@@ -312,7 +312,7 @@ export default class ItemSheet5e extends ItemSheet {
     const labels = this.item.labels;
     switch ( this.item.type ) {
       case "consumable":
-        for ( const [k, v] of Object.entries(this.item.system.properties) ) {
+        for ( const [k, v] of Object.entries(this.item.system.properties ?? {}) ) {
           if ( v === true ) props.push(CONFIG.DND5E.physicalWeaponProperties[k]);
         }
         break;
