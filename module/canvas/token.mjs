@@ -73,4 +73,22 @@ export default class Token5e extends Token {
     let posY = (number === 0) ? (this.h - h) : 0;
     bar.position.set(0, posY);
   }
+
+  /** @override */
+  _onApplyStatusEffect(statusId, active) {
+    super._onApplyStatusEffect(statusId, active);
+    if ( statusId === CONFIG.specialStatusEffects.DISEASE
+      || statusId === CONFIG.specialStatusEffects.POISON ) {
+      canvas.perception.update({refreshVision: true}, true);
+    }
+  }
+
+  /** @override */
+  _onUpdate(data, options, userId) {
+    super._onUpdate(data, options, userId);
+    if ( options.toggleEffect === CONFIG.specialStatusEffects.DISEASE
+      || options.toggleEffect === CONFIG.specialStatusEffects.POISON ) {
+      canvas.perception.update({refreshVision: true}, true);
+    }
+  }
 }
