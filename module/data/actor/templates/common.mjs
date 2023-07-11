@@ -31,7 +31,7 @@ export default class CommonTemplate extends SystemDataModel.mixin(CurrencyTempla
           required: true, integer: true, min: 0, max: 1, initial: 0, label: "DND5E.ProficiencyLevel"
         }),
         max: new foundry.data.fields.NumberField({
-          required: true, integer: true, min: 0, initial: 20, label: "DND5E.AbilityScoreMax"
+          required: true, integer: true, nullable: true, min: 0, initial: null, label: "DND5E.AbilityScoreMax"
         }),
         bonuses: new foundry.data.fields.SchemaField({
           check: new FormulaField({required: true, label: "DND5E.AbilityCheckBonus"}),
