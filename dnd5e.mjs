@@ -185,8 +185,12 @@ function _configureTrackableAttributes() {
       value: [...creature.value, "details.cr", "details.spellLevel", "details.xp.value"]
     },
     vehicle: {
-      bar: [...common.bar],
+      bar: [...common.bar, "attributes.hp"],
       value: [...common.value]
+    },
+    group: {
+      bar: [],
+      value: []
     }
   };
 }

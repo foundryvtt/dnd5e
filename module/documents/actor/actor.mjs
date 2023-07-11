@@ -937,7 +937,7 @@ export default class Actor5e extends Actor {
 
     // Remaining goes to health
     const tmpMax = parseInt(hp.tempmax) || 0;
-    const dh = Math.clamped(hp.value - (amount - dt), 0, hp.max + tmpMax);
+    const dh = Math.clamped(hp.value - (amount - dt), 0, Math.max(0, hp.max + tmpMax));
 
     // Update the Actor
     const updates = {
@@ -1523,9 +1523,9 @@ export default class Actor5e extends Actor {
         parts.push("@prof");
         data.prof = init.prof.term;
       }
-      if ( init.bonus !== 0 ) {
+      if ( init.bonus ) {
         parts.push("@bonus");
-        data.bonus = init.bonus;
+        data.bonus = Roll.replaceFormulaData(init.bonus, data);
       }
     }
 
@@ -1534,7 +1534,7 @@ export default class Actor5e extends Actor {
       const abilityBonus = this.system.abilities[abilityId]?.bonuses?.check;
       if ( abilityBonus ) {
         parts.push("@abilityBonus");
-        data.abilityBonus = abilityBonus;
+        data.abilityBonus = Roll.replaceFormulaData(abilityBonus, data);
       }
     }
 
@@ -1543,7 +1543,7 @@ export default class Actor5e extends Actor {
       const globalCheckBonus = this.system.bonuses.abilities?.check;
       if ( globalCheckBonus ) {
         parts.push("@globalBonus");
-        data.globalBonus = globalCheckBonus;
+        data.globalBonus = Roll.replaceFormulaData(globalCheckBonus, data);
       }
     }
 
@@ -1690,7 +1690,7 @@ export default class Actor5e extends Actor {
     if ( rollConfig.chatMessage ) roll.toMessage(rollConfig.messageData);
 
     const hp = this.system.attributes.hp;
-    const dhp = Math.min(hp.max + (hp.tempmax ?? 0) - hp.value, roll.total);
+    const dhp = Math.min(Math.max(0, hp.max + (hp.tempmax ?? 0)) - hp.value, roll.total);
     const updates = {
       actor: {"system.attributes.hp.value": hp.value + dhp},
       class: {"system.hitDiceUsed": cls.system.hitDiceUsed + 1}
@@ -2063,7 +2063,7 @@ export default class Actor5e extends Actor {
    */
   async autoSpendHitDice({ threshold=3 }={}) {
     const hp = this.system.attributes.hp;
-    const max = hp.max + hp.tempmax;
+    const max = Math.max(0, hp.max + hp.tempmax);
     let diceRolled = 0;
     while ( (this.system.attributes.hp.value + threshold) <= max ) {
       const r = await this.rollHitDie();
@@ -2088,7 +2088,7 @@ export default class Actor5e extends Actor {
     let max = hp.max;
     let updates = {};
     if ( recoverTempMax ) updates["system.attributes.hp.tempmax"] = 0;
-    else max += hp.tempmax;
+    else max = Math.max(0, max + (hp.tempmax || 0));
     updates["system.attributes.hp.value"] = max;
     if ( recoverTemp ) updates["system.attributes.hp.temp"] = 0;
     return { updates, hitPointsRecovered: max - hp.value };
@@ -2432,7 +2432,7 @@ export default class Actor5e extends Actor {
         if ( origin.type === "spell" ) return keepSpellAE;
         if ( origin.type === "feat" ) return keepFeatAE;
         if ( origin.type === "background" ) return keepBackgroundAE;
-        if ( ["subclass", "feat"].includes(origin.type) ) return keepClassAE;
+        if ( ["subclass", "class"].includes(origin.type) ) return keepClassAE;
         if ( ["equipment", "weapon", "tool", "loot", "backpack"].includes(origin.type) ) return keepEquipmentAE;
         return true;
       });

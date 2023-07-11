@@ -11,7 +11,7 @@ export default class TokenDocument5e extends TokenDocument {
     if ( data && (data.attribute === "attributes.hp") ) {
       const hp = this.actor.system.attributes.hp || {};
       data.value += (hp.temp || 0);
-      data.max += (hp.tempmax || 0);
+      data.max = Math.max(0, data.max + (hp.tempmax || 0));
     }
     return data;
   }
