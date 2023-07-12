@@ -38,7 +38,7 @@ Need Help? Feel free to jump in the Foundry VTT discord's [#dnd5e](https://disco
 ## Adding a new Ability
 ```js
 /// Add a new Ability
-Hooks.on("setup", () => {
+Hooks.once("init", () => {
 CONFIG.DND5E.abilities.grt = {
   label: "Grit",
   abbreviation: "grt",
@@ -51,7 +51,7 @@ CONFIG.DND5E.abilities.grt = {
 ## Adding a new Skill
 ```js
 /// Add a new Skill
-Hooks.once("setup", () => {
+Hooks.once("init", () => {
 CONFIG.DND5E.skills.bfp = {
    ability: "dex",
    label: "Backflip"
@@ -64,7 +64,7 @@ CONFIG.DND5E.skills.bfp = {
 // Adds a new "plasma" damage type that will be selectable as a new type of damage for weapons
 // and a new type of resistance for actors.
 // Note that this *might* not play well with modules which auto apply damage and resistances.
-Hooks.on("setup", () => {
+Hooks.once("init", () => {
   CONFIG.DND5E.damageTypes.plasma = "Plasma";
   CONFIG.DND5E.damageResistanceTypes.plasma = "Plasma";
 });
@@ -72,17 +72,17 @@ Hooks.on("setup", () => {
 
 ## Add a new Weapon Property
 ```js
-/// Add Weapon Property and Physical Property for resistance bypass
-Hooks.on("init", () => {
-CONFIG.DND5E.weaponProperties.lazer = "Lazer";
-CONFIG.DND5E.physicalWeaponProperties.lazer = "Lazer";
+/// Adds a new "Laser" Weapon Property and Physical Property for resistance bypass
+Hooks.once("init", () => {
+CONFIG.DND5E.weaponProperties.lazer = "Laser";
+CONFIG.DND5E.physicalWeaponProperties.lazer = "Laser";
 });
 ```
 
 ## Adding a new Spell School  
 ```js
 /// Add a new Spell School that can be selected in Spell Items
-Hooks.once("setup", () => {
+Hooks.once("init", () => {
 CONFIG.DND5E.spellSchools.psi = "Psionics"
 });
 ```
@@ -90,7 +90,7 @@ CONFIG.DND5E.spellSchools.psi = "Psionics"
 ## Add a new Armor Calculation
 ```js
 /// Add a new AC Calculation
-Hooks.once("setup", () => {
+Hooks.once("init", () => {
 CONFIG.DND5E.armorClasses.fortitude = {
    label: "Fortitude",
    formula: "13 + @abilities.con.mod"
@@ -101,7 +101,7 @@ CONFIG.DND5E.armorClasses.fortitude = {
 ## Changing the Max Level Cap
 ```js
 /// Increases the Maximum Level for a Player Actor to 30
-Hooks.on("setup", () => {
+Hooks.once("init", () => {
   CONFIG.DND5E.maxLevel = 30;
 });
 ```
