@@ -39,12 +39,12 @@ Need Help? Feel free to jump in the Foundry VTT discord's [#dnd5e](https://disco
 ```js
 /// Add a new Ability
 Hooks.once("init", () => {
-CONFIG.DND5E.abilities.grt = {
-  label: "Grit",
-  abbreviation: "grt",
-  type: "mental", ///mental or physical
-  defaults: {vehicle: 0} ///Optional
-  }
+  CONFIG.DND5E.abilities.grt = {
+    label: "Grit",
+    abbreviation: "grt",
+    type: "mental", ///mental or physical
+    defaults: {vehicle: 0} ///Optional
+  };
 });
 ```
 
@@ -52,10 +52,10 @@ CONFIG.DND5E.abilities.grt = {
 ```js
 /// Add a new Skill
 Hooks.once("init", () => {
-CONFIG.DND5E.skills.bfp = {
-   ability: "dex",
-   label: "Backflip"
-   }
+  CONFIG.DND5E.skills.bfp = {
+    ability: "dex",
+    label: "Backflip"
+  };
 });
 ```
 
@@ -74,8 +74,8 @@ Hooks.once("init", () => {
 ```js
 /// Adds a new "Laser" Weapon Property and Physical Property for resistance bypass
 Hooks.once("init", () => {
-CONFIG.DND5E.weaponProperties.lazer = "Laser";
-CONFIG.DND5E.physicalWeaponProperties.lazer = "Laser";
+  CONFIG.DND5E.weaponProperties.lazer = "Laser";
+  CONFIG.DND5E.physicalWeaponProperties.lazer = "Laser";
 });
 ```
 
@@ -83,7 +83,7 @@ CONFIG.DND5E.physicalWeaponProperties.lazer = "Laser";
 ```js
 /// Add a new Spell School that can be selected in Spell Items
 Hooks.once("init", () => {
-CONFIG.DND5E.spellSchools.psi = "Psionics"
+  CONFIG.DND5E.spellSchools.psi = "Psionics"
 });
 ```
 
@@ -91,10 +91,10 @@ CONFIG.DND5E.spellSchools.psi = "Psionics"
 ```js
 /// Add a new AC Calculation
 Hooks.once("init", () => {
-CONFIG.DND5E.armorClasses.fortitude = {
-   label: "Fortitude",
-   formula: "13 + @abilities.con.mod"
-   }
+  CONFIG.DND5E.armorClasses.fortitude = {
+    label: "Fortitude",
+    formula: "13 + @abilities.con.mod"
+  };
 });
 ```
 
