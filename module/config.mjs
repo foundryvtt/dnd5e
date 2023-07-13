@@ -1438,6 +1438,18 @@ preLocalize("proficiencyLevels");
 /* -------------------------------------------- */
 
 /**
+ * Weapon and armor item proficiency levels.
+ * @enum {string}
+ */
+DND5E.weaponAndArmorProficiencyLevels = {
+  0: "DND5E.NotProficient",
+  1: "DND5E.Proficient"
+};
+preLocalize("weaponAndArmorProficiencyLevels");
+
+/* -------------------------------------------- */
+
+/**
  * The amount of cover provided by an object. In cases where multiple pieces
  * of cover are in play, we take the highest value.
  * @enum {string}
