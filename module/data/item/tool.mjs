@@ -83,9 +83,8 @@ export default class ToolData extends SystemDataModel.mixin(
   /**
    * The proficiency multiplier for this item.
    * @returns {number}
-   * @protected
    */
-  get _proficiencyMultiplier() {
+  get proficiencyMultiplier() {
     if ( Number.isFinite(this.proficient) ) return this.proficient;
     const actor = this.parent.actor;
     if ( !actor ) return 0;

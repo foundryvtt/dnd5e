@@ -481,7 +481,7 @@ export default class Item5e extends Item {
       return;
     }
 
-    this.system.prof = new Proficiency(this.actor.system.attributes.prof, this.system._proficiencyMultiplier ?? 0);
+    this.system.prof = new Proficiency(this.actor.system.attributes.prof, this.system.proficiencyMultiplier ?? 0);
   }
 
   /* -------------------------------------------- */

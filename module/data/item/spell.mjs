@@ -137,9 +137,8 @@ export default class SpellData extends SystemDataModel.mixin(
   /**
    * The proficiency multiplier for this item.
    * @returns {number}
-   * @protected
    */
-  get _proficiencyMultiplier() {
+  get proficiencyMultiplier() {
     return 1;
   }
 }
