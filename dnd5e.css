@@ -1126,6 +1126,15 @@ h5 {
   flex: 0 0 20px;
   justify-content: flex-end;
 }
+.dnd5e.sheet.actor .inventory-filters .attunement {
+  color: #7a7971;
+  font-size: 12px;
+}
+.dnd5e.sheet.actor .inventory-filters .attunement [name="system.attributes.attunement.max"] {
+  display: inline;
+  max-width: 23px;
+  text-align: center;
+}
 .dnd5e.sheet.actor .inventory-filters .currency {
   flex: 0 0 100%;
   list-style: none;
