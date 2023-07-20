@@ -2030,16 +2030,17 @@ export default class Item5e extends Item {
 
   /**
    * Create a consumable spell scroll Item from a spell Item.
-   * @param {Item5e} spell      The spell to be made into a scroll
-   * @returns {Item5e}          The created scroll consumable item
+   * @param {Item5e|object} spell     The spell or item data to be made into a scroll
+   * @param {object} [options]        Additional options that modify the created scroll
+   * @returns {Item5e}                The created scroll consumable item
    */
-  static async createScrollFromSpell(spell) {
+  static async createScrollFromSpell(spell, options={}) {
 
     // Get spell data
     const itemData = (spell instanceof Item5e) ? spell.toObject() : spell;
     let {
       actionType, description, source, activation, duration, target,
-      range, damage, formula, save, level, attackBonus, ability
+      range, damage, formula, save, level, attackBonus, ability, components
     } = itemData.system;
 
     // Get scroll data
@@ -2056,7 +2057,11 @@ export default class Item5e extends Item {
     const scrollDetails = scrollDescription.slice(scrollIntroEnd + pdel.length);
 
     // Create a composite description from the scroll description and the spell details
-    const desc = `${scrollIntro}<hr/><h3>${itemData.name} (Level ${level})</h3><hr/>${description.value}<hr/><h3>Scroll Details</h3><hr/>${scrollDetails}`;
+    const desc = scrollIntro
+    + `<hr><h3>${itemData.name} (${game.i18n.format("DND5E.LevelNumber", {level})})</h3>`
+    + (components.concentration ? `<p><em>${game.i18n.localize("DND5E.ScrollRequiresConcentration")}</em></p>` : "")
+    + `<hr>${description.value}<hr>`
+    + `<h3>${game.i18n.localize("DND5E.ScrollDetails")}</h3><hr>${scrollDetails}`;
 
     // Used a fixed attack modifier and saving throw according to the level of spell scroll.
     if ( ["mwak", "rwak", "msak", "rsak"].includes(actionType) ) {
@@ -2077,6 +2082,16 @@ export default class Item5e extends Item {
         range, damage, formula, save, level, attackBonus, ability
       }
     });
+    foundry.utils.mergeObject(spellScrollData, options);
+
+    /**
+     * A hook event that fires after the item data for a scroll is created but before the item is returned.
+     * @function dnd5e.createScrollFromSpell
+     * @memberof hookEvents
+     * @param {Item5e|object} spell       The spell or item data to be made into a scroll.
+     * @param {object} spellScrollData    The final item data used to make the scroll.
+     */
+    Hooks.callAll("dnd5e.createScrollFromSpell", spell, spellScrollData);
     return new this(spellScrollData);
   }
 
