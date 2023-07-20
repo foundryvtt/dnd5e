@@ -1,151 +1,161 @@
 {
-    "id": "dnd5e",
-    "title": "DnD5e - Fifth Edition System",
-    "description": "A system for playing the fifth edition of the worlds most popular role-playing game in the Foundry Virtual Tabletop environment.",
-    "version": "2.2.1",
-    "compatibility": {
-      "minimum": "10.291",
-      "verified": "11"
+  "id": "dnd5e",
+  "title": "DnD5e - Fifth Edition System",
+  "description": "A system for playing the fifth edition of the worlds most popular role-playing game in the Foundry Virtual Tabletop environment.",
+  "version": "2.2.1",
+  "compatibility": {
+    "minimum": "10.291",
+    "verified": "11"
+  },
+  "url": "https://github.com/foundryvtt/dnd5e/",
+  "manifest": "https://raw.githubusercontent.com/foundryvtt/dnd5e/master/system.json",
+  "download": "https://github.com/foundryvtt/dnd5e/releases/download/release-2.2.1/dnd5e-release-2.2.1.zip",
+  "authors": [
+    {
+      "name": "Atropos",
+      "url": "https://foundryvtt.com",
+      "flags": {}
+    }
+  ],
+  "esmodules": [
+    "dnd5e.mjs"
+  ],
+  "styles": [
+    "dnd5e.css"
+  ],
+  "packs": [
+    {
+      "name": "heroes",
+      "label": "Starter Heroes",
+      "system": "dnd5e",
+      "path": "packs/heroes.db",
+      "type": "Actor",
+      "private": false,
+      "flags": {}
     },
-    "url": "https://github.com/foundryvtt/dnd5e/",
-    "manifest": "https://raw.githubusercontent.com/foundryvtt/dnd5e/master/system.json",
-    "download": "https://github.com/foundryvtt/dnd5e/releases/download/release-2.2.1/dnd5e-release-2.2.1.zip",
-    "authors": [
-      {
-        "name": "Atropos",
-        "url": "https://foundryvtt.com",
-        "flags": {}
-      }
-    ],
-    "esmodules": [
-      "dnd5e.mjs"
-    ],
-    "styles": [
-      "dnd5e.css"
-    ],
-    "packs": [
-      {
-        "name": "heroes",
-        "label": "Starter Heroes",
-        "system": "dnd5e",
-        "path": "packs/heroes.db",
-        "type": "Actor",
-        "private": false,
-        "flags": {}
-      },
-      {
-        "name": "monsters",
-        "label": "Monsters (SRD)",
-        "system": "dnd5e",
-        "path": "packs/monsters.db",
-        "type": "Actor",
-        "private": false,
-        "flags": {}
-      },
-      {
-        "name": "items",
-        "label": "Items (SRD)",
-        "system": "dnd5e",
-        "path": "packs/items.db",
-        "type": "Item",
-        "private": false,
-        "flags": {}
-      },
-      {
-        "name": "tradegoods",
-        "label": "Trade Goods (SRD)",
-        "system": "dnd5e",
-        "path": "packs/tradegoods.db",
-        "type": "Item",
-        "private": false,
-        "flags": {}
-      },
-      {
-        "name": "spells",
-        "label": "Spells (SRD)",
-        "system": "dnd5e",
-        "path": "packs/spells.db",
-        "type": "Item",
-        "private": false,
-        "flags": {}
-      },
-      {
-        "name": "backgrounds",
-        "label": "Backgrounds (SRD)",
-        "system": "dnd5e",
-        "path": "packs/backgrounds.db",
-        "type": "Item",
-        "private": false,
-        "flags": {}
-      },
-      {
-        "name": "classes",
-        "label": "Classes (SRD)",
-        "system": "dnd5e",
-        "path": "packs/classes.db",
-        "type": "Item",
-        "private": false,
-        "flags": {}
-      },
-      {
-        "name": "subclasses",
-        "label": "Subclasses (SRD)",
-        "system": "dnd5e",
-        "path": "packs/subclasses.db",
-        "type": "Item",
-        "private": false,
-        "flags": {}
-      },
-      {
-        "name": "classfeatures",
-        "label": "Class Features (SRD)",
-        "system": "dnd5e",
-        "path": "packs/classfeatures.db",
-        "type": "Item",
-        "private": false,
-        "flags": {}
-      },
-      {
-        "name": "races",
-        "label": "Racial Features (SRD)",
-        "system": "dnd5e",
-        "path": "packs/races.db",
-        "type": "Item",
-        "private": false,
-        "flags": {}
-      },
-      {
-        "name": "monsterfeatures",
-        "label": "Monster Features (SRD)",
-        "system": "dnd5e",
-        "path": "packs/monsterfeatures.db",
-        "type": "Item",
-        "private": false,
-        "flags": {}
-      },
-      {
-        "name": "rules",
-        "label": "Rules (SRD)",
-        "system": "dnd5e",
-        "path": "packs/rules.db",
-        "type": "JournalEntry",
-        "private": false,
-        "flags": {}
-      },
-      {
-        "name": "tables",
-        "label": "Tables (SRD)",
-        "system": "dnd5e",
-        "path": "packs/tables.db",
-        "type": "RollTable",
-        "private": false,
-        "flags": {}
-      }
-    ],
-    "folders": [{
+    {
+      "name": "monsters",
+      "label": "Monsters (SRD)",
+      "system": "dnd5e",
+      "path": "packs/monsters.db",
+      "type": "Actor",
+      "private": false,
+      "flags": {}
+    },
+    {
+      "name": "items",
+      "label": "Items (SRD)",
+      "system": "dnd5e",
+      "path": "packs/items.db",
+      "type": "Item",
+      "private": false,
+      "flags": {}
+    },
+    {
+      "name": "tradegoods",
+      "label": "Trade Goods (SRD)",
+      "system": "dnd5e",
+      "path": "packs/tradegoods.db",
+      "type": "Item",
+      "private": false,
+      "flags": {}
+    },
+    {
+      "name": "spells",
+      "label": "Spells (SRD)",
+      "system": "dnd5e",
+      "path": "packs/spells.db",
+      "type": "Item",
+      "private": false,
+      "flags": {}
+    },
+    {
+      "name": "backgrounds",
+      "label": "Backgrounds (SRD)",
+      "system": "dnd5e",
+      "path": "packs/backgrounds.db",
+      "type": "Item",
+      "private": false,
+      "flags": {}
+    },
+    {
+      "name": "classes",
+      "label": "Classes (SRD)",
+      "system": "dnd5e",
+      "path": "packs/classes.db",
+      "type": "Item",
+      "private": false,
+      "flags": {}
+    },
+    {
+      "name": "subclasses",
+      "label": "Subclasses (SRD)",
+      "system": "dnd5e",
+      "path": "packs/subclasses.db",
+      "type": "Item",
+      "private": false,
+      "flags": {}
+    },
+    {
+      "name": "classfeatures",
+      "label": "Class Features (SRD)",
+      "system": "dnd5e",
+      "path": "packs/classfeatures.db",
+      "type": "Item",
+      "private": false,
+      "flags": {}
+    },
+    {
+      "name": "races",
+      "label": "Racial Features (SRD)",
+      "system": "dnd5e",
+      "path": "packs/races.db",
+      "type": "Item",
+      "private": false,
+      "flags": {}
+    },
+    {
+      "name": "monsterfeatures",
+      "label": "Monster Features (SRD)",
+      "system": "dnd5e",
+      "path": "packs/monsterfeatures.db",
+      "type": "Item",
+      "private": false,
+      "flags": {}
+    },
+    {
+      "name": "rules",
+      "label": "Rules (SRD)",
+      "system": "dnd5e",
+      "path": "packs/rules.db",
+      "type": "JournalEntry",
+      "private": false,
+      "flags": {}
+    },
+    {
+      "name": "tables",
+      "label": "Tables (SRD)",
+      "system": "dnd5e",
+      "path": "packs/tables.db",
+      "type": "RollTable",
+      "private": false,
+      "flags": {}
+    }
+  ],
+  "packFolders": [{
+      "name": "DnD5e SRD Content",
+      "sorting": "m",
+      "color": "#cd2c1e",
+      "packs": [
+          "rules",
+          "tables",
+          "heroes"
+      ],
+      "folders":[
+        {
         "name": "Character Features",
               "sorting": "m",
-              "color": "#ff0000",
+              "color": "#b72c1f",
               "packs": [
                   "classes",
                   "subclasses",
@@ -156,48 +166,48 @@
               ]
           },
           {
-              "name": "Items and Spells",
+              "name": "Items & Spells",
               "sorting": "m",
-              "color": "#ff0000",
+              "color": "#941919 ",
               "packs": [
                   "items",
                   "spells",
-                  "tradegoods",
-                  "tables"
+                  "tradegoods"
               ]
           },
           {
               "name": "Monsters",
               "sorting": "m",
-              "color": "#ff0000",
+              "color": "#7d160c",
               "packs": [
                   "monsters",
                   "monsterfeatures"
               ]
           }
-      ],
-    "languages": [
-      {
-        "lang": "en",
-        "name": "English",
-        "path": "lang/en.json",
-        "flags": {}
+        ]
       }
     ],
-    "media": [
-      {
-        "type": "cover",
-        "loop": false,
-        "flags": {}
-      }
-    ],
-    "socket": true,
-    "gridDistance": 5,
-    "gridUnits": "ft",
-    "primaryTokenAttribute": "attributes.hp",
-    "flags": {
-      "needsMigrationVersion": "2.2.0",
-      "compatibleMigrationVersion": "0.8"
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "lang/en.json",
+      "flags": {}
     }
+  ],
+  "media": [
+    {
+      "type": "cover",
+      "loop": false,
+      "flags": {}
+    }
+  ],
+  "socket": true,
+  "gridDistance": 5,
+  "gridUnits": "ft",
+  "primaryTokenAttribute": "attributes.hp",
+  "flags": {
+    "needsMigrationVersion": "2.2.0",
+    "compatibleMigrationVersion": "0.8"
   }
-  
+}
