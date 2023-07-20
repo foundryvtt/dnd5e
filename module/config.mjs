@@ -724,6 +724,7 @@ DND5E.featureTypes = {
   class: {
     label: "DND5E.Feature.Class",
     subtypes: {
+      arcaneShot: "DND5E.ClassFeature.ArcaneShot",
       artificerInfusion: "DND5E.ClassFeature.ArtificerInfusion",
       channelDivinity: "DND5E.ClassFeature.ChannelDivinity",
       defensiveTactic: "DND5E.ClassFeature.DefensiveTactic",
