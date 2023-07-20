@@ -794,11 +794,9 @@ export default class Actor5e extends Actor {
   static prepareLeveledSlots(spells, actor, progression) {
     const levels = Math.clamped(progression.slot, 0, CONFIG.DND5E.maxLevel);
     const slots = CONFIG.DND5E.SPELL_SLOT_TABLE[Math.min(levels, CONFIG.DND5E.SPELL_SLOT_TABLE.length) - 1] ?? [];
-    for ( const [n, slot] of Object.entries(spells) ) {
-      const level = parseInt(n.slice(-1));
-      if ( Number.isNaN(level) ) continue;
+    for ( const level of Array.fromRange(Object.keys(CONFIG.DND5E.spellLevels).length - 1, 1) ) {
+      const slot = spells[`spell${level}`] ??= { value: 0 };
       slot.max = Number.isNumeric(slot.override) ? Math.max(parseInt(slot.override), 0) : slots[level - 1] ?? 0;
-      slot.value = parseInt(slot.value); // TODO: DataModels should remove the need for this
     }
   }
 
@@ -826,14 +824,12 @@ export default class Actor5e extends Actor {
       pactLevel = actor.system.details.spellLevel;
     }
 
-    // TODO: Allow pact level and slot count to be configured
-    if ( pactLevel > 0 ) {
-      spells.pact.level = Math.ceil(Math.min(10, pactLevel) / 2); // TODO: Allow custom max pact level
-      if ( override === null ) {
-        spells.pact.max = Math.max(1, Math.min(pactLevel, 2), Math.min(pactLevel - 8, 3), Math.min(pactLevel - 13, 4));
-      } else {
-        spells.pact.max = Math.max(override, 1);
-      }
+    const [, pactConfig] = Object.entries(CONFIG.DND5E.pactCastingProgression)
+      .reverse().find(([l]) => Number(l) <= pactLevel) ?? [];
+    if ( pactConfig ) {
+      spells.pact.level = pactConfig.level;
+      if ( override === null ) spells.pact.max = pactConfig.slots;
+      else spells.pact.max = Math.max(override, 1);
       spells.pact.value = Math.min(spells.pact.value, spells.pact.max);
     }
 

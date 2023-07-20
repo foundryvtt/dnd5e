@@ -1078,6 +1078,31 @@ DND5E.SPELL_SLOT_TABLE = [
 /* -------------------------------------------- */
 
 /**
+ * Configuration data for pact casting progression.
+ *
+ * @typedef {object} PactProgressionConfig
+ * @property {number} slots  Number of spell slots granted.
+ * @property {number} level  Level of spells that can be cast.
+ */
+
+/**
+ * Define the pact slot & level progression by pact caster level.
+ * @enum {PactProgressionConfig}
+ */
+DND5E.pactCastingProgression = {
+  1: { slots: 1, level: 1 },
+  2: { slots: 2, level: 1 },
+  3: { slots: 2, level: 2 },
+  5: { slots: 2, level: 3 },
+  7: { slots: 2, level: 4 },
+  9: { slots: 2, level: 5 },
+  11: { slots: 3, level: 5 },
+  17: { slots: 4, level: 5 }
+};
+
+/* -------------------------------------------- */
+
+/**
  * Various different ways a spell can be prepared.
  */
 DND5E.spellPreparationModes = {

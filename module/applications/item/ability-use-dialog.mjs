@@ -99,13 +99,13 @@ export default class AbilityUseDialog extends Dialog {
     const consumeSpellSlot = (lvl > 0) && CONFIG.DND5E.spellUpcastModes.includes(itemData.preparation.mode);
 
     // If can't upcast, return early and don't bother calculating available spell slots
-    if (!consumeSpellSlot) {
+    if ( !consumeSpellSlot ) {
       return foundry.utils.mergeObject(data, { isSpell: true, consumeSpellSlot });
     }
 
     // Determine the levels which are feasible
     let lmax = 0;
-    const spellLevels = Array.fromRange(10).reduce((arr, i) => {
+    const spellLevels = Array.fromRange(Object.keys(CONFIG.DND5E.spellLevels).length).reduce((arr, i) => {
       if ( i < lvl ) return arr;
       const label = CONFIG.DND5E.spellLevels[i];
       const l = actorData.spells[`spell${i}`] || {max: 0, override: null};
@@ -123,7 +123,7 @@ export default class AbilityUseDialog extends Dialog {
 
     // If this character has pact slots, present them as an option for casting the spell.
     const pact = actorData.spells.pact;
-    if (pact.level >= lvl) {
+    if ( pact.level >= lvl ) {
       spellLevels.push({
         level: "pact",
         label: `${game.i18n.format("DND5E.SpellLevelPact", {level: pact.level, n: pact.value})}`,
