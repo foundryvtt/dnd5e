@@ -22,7 +22,7 @@
       <span class="attunement-max" {{#if overrides.attunement}}data-tooltip="DND5E.ActiveEffectOverrideWarning"{{/if}}>
         {{system.attributes.attunement.max}}
         {{#unless (or overrides.attunement (not editable))}}
-        <a class="attunement-max-override" data-tooltip="{{localize 'DND5E.AttunementOverride'}}">
+        <a class="attunement-max-override" data-tooltip="DND5E.AttunementOverride">
           <i class="fa-solid fa-edit"></i>
         </a>
         {{/unless}}

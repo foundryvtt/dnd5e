@@ -1143,7 +1143,7 @@ export default class ActorSheet5e extends ActorSheet {
     input.value = override;
     input.placeholder = span.dataset.slots;
     input.dataset.dtype = "Number";
-    input.addEventListener("focus", (event) => event.currentTarget.select());
+    input.addEventListener("focus", event => event.currentTarget.select());
 
     // Replace the HTML
     const parent = span.parentElement;
@@ -1166,7 +1166,7 @@ export default class ActorSheet5e extends ActorSheet {
     input.value = this.actor.system.attributes.attunement.max;
     input.placeholder = 3;
     input.dataset.dtype = "Number";
-    input.addEventListener("focus", (event) => event.currentTarget.select());
+    input.addEventListener("focus", event => event.currentTarget.select());
 
     // Replace the HTML
     const parent = span.parentElement;
