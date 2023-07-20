@@ -2031,7 +2031,7 @@ export default class Item5e extends Item {
   /**
    * Create a consumable spell scroll Item from a spell Item.
    * @param {Item5e|object} spell     The spell or item data to be made into a scroll
-   * @param {object} options          Additional options that modify the created scroll
+   * @param {object} [options]        Additional options that modify the created scroll
    * @returns {Item5e}                The created scroll consumable item
    */
   static async createScrollFromSpell(spell, options={}) {
@@ -2058,10 +2058,10 @@ export default class Item5e extends Item {
 
     // Create a composite description from the scroll description and the spell details
     const desc = scrollIntro
-    + `<hr/><h3>${itemData.name} (${game.i18n.format("DND5E.LevelNumber", {level})})</h3>`
+    + `<hr><h3>${itemData.name} (${game.i18n.format("DND5E.LevelNumber", {level})})</h3>`
     + (components.concentration ? `<p><em>${game.i18n.localize("DND5E.ScrollRequiresConcentration")}</em></p>` : "")
-    + `<hr/>${description.value}<hr/>`
-    + `<h3>${game.i18n.localize("DND5E.ScrollDetails")}</h3><hr/>${scrollDetails}`;
+    + `<hr>${description.value}<hr>`
+    + `<h3>${game.i18n.localize("DND5E.ScrollDetails")}</h3><hr>${scrollDetails}`;
 
     // Used a fixed attack modifier and saving throw according to the level of spell scroll.
     if ( ["mwak", "rwak", "msak", "rsak"].includes(actionType) ) {
