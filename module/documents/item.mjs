@@ -1912,6 +1912,9 @@ export default class Item5e extends Item {
       case "weapon":
         updates = this._onCreateOwnedWeapon(data, isNPC);
         break;
+      case "feat":
+        updates = this._onCreateOwnedFeature(data, isNPC);
+        break;
     }
     if ( updates ) return this.updateSource(updates);
   }
@@ -2021,6 +2024,21 @@ export default class Item5e extends Item {
     // NPCs automatically equip items.
     const updates = {};
     if ( !foundry.utils.hasProperty(data, "system.equipped") ) updates["system.equipped"] = true;
+    return updates;
+  }
+
+  /**
+   * Pre-creation logic for the automatic configuration of owned feature type Items.
+   * @param {object} data       Data for the newly created item.
+   * @param {boolean} isNPC     Is this actor an NPC?
+   * @returns {object}          Updates to apply to the item data.
+   * @private
+   */
+  _onCreateOwnedFeature(data, isNPC) {
+    const updates = {};
+    if ( isNPC && !foundry.utils.getProperty(data, "system.type.value") ) {
+      updates["system.type.value"] = "monster"; // Set features on NPCs to be 'monster features'.
+    }
     return updates;
   }
 
