@@ -28,7 +28,7 @@ Always make sure to update the `Home.md` file with a link to your new Markdown f
 
 ### That little version tag?
 ***Do we want to have the version tag at the top of all of our docs to reflect the version the page was last updated?***  
-In order to let readers know when a Wiki page was last updated, please include a Version tag like this one at the top of the page.  
+In order to let readers know when a Wiki page was last updated, please include a Version tag like this one at the top of the page.
 ![](https://img.shields.io/static/v1?label=dnd5e&message=2.0.0&color=informational)    
 `![](https://img.shields.io/static/v1?label=dnd5e&message=2.0.0&color=informational)`  
 
@@ -36,28 +36,29 @@ In order to let readers know when a Wiki page was last updated, please include a
 
 ## Create a Wiki Issue
 Just like any other issue on the repo, the title should reflect a brief description of the task at hand, and the Description should provide us with information about what will be added to the wiki. Make sure to include all of your assets in this issue, as mentioned in the style guide above.  
-Example: Review the Issue created for submitting this document you're currently reading here: `#1999`
+Example: Review the Issue created for submitting this document you're currently reading here: [Wiki - Create a Contributing to the Wiki guide](https://github.com/foundryvtt/dnd5e/issues/2379)
 
 ## Submit a PR
 In order to contribute directly to the Wiki, you will need to fork the dnd5e repo and make a branch from the `publish-wiki` branch of the repo, then you will be able to add your Markdown files or update the existing files, and submit a Pull Request.  
 
 ### Fork the `dnd5e` Repo
-To contribute to the wiki [fork this project](https://docs.github.com/en/get-started/quickstart/fork-a-repo) Once you have forked the dnd5e repo, you will want to create a branch from the `publish-wiki` branch of the dnd5e repo. To do this, click on the branches button, then click on New Branch. Give your new Branch a descriptive name, then make sure to update the Source to the upstream repository `foundryvtt/dnd5e`and select the `publish-wiki` branch.  
+To contribute to the wiki, [fork this project](https://docs.github.com/en/get-started/quickstart/fork-a-repo). Once you have forked the dnd5e repo, you will want to create a branch from the `publish-wiki` branch of the dnd5e repo. To do this, click on the branches button, then click on New Branch. Give your new Branch a descriptive name, then make sure to update the Source to the upstream repository `foundryvtt/dnd5e`and select the `publish-wiki` branch. You only need to fork the `dnd5e` repo once, but you will create a new branch for each new issue/PR.  
 
-![ForkandBranch.mp4](link-to-issue-file)
+https://github.com/foundryvtt/dnd5e/assets/86370342/26c67b33-9260-4bfa-a9be-78054a248d1c
 
 ### Make Your Updates  
 Either edit the existing files, or add your own Markdown files within the `wiki` folder of your newly created branch, when done click the `Commit changes` button, you will be asked to either `Save and Merge` or `Create a New Branch`, choose `Save and Merge`. This will commit the changes to your branch, keep in mind that each commit to the branch will be recorded and listed individually in your PR, so we recommend making sure to `Preview` your changes prior to commiting to catch any minor mistakes, or editing your files in a separate editor such as Notepad ++, VSCode, or your text editor of choice, to keep the PR as clean as possible.  
 
-![SubmitandCommit.mp4](link-to-issue-file)
+https://github.com/foundryvtt/dnd5e/assets/86370342/251f4dc6-9f40-4ec0-966b-e1caeadc31e8
 
 
 ### Submit a PR 
 You will now be able to submit those changes back to the DnD5e system via a [pull request (PR)](https://docs.github.com/en/get-started/quickstart/contributing-to-projects#making-a-pull-request) against the `publish-wiki` branch.  
-From the main page of your repo, click the `Contribute` button and create your PR for the system. When submitting a PR for the wiki, make sure that you are targetting the `publish-wiki` branch of the `dnd5e` repo. Your PR is now submitted and will be reviewed by the Dnd5e team!
-Example: Review the PR created for submitting this document you're currently reading here: `#1999`  
+From the main page of your repo, click the `Contribute` button and `Open pull request` for the system. When submitting a PR for the wiki, make sure the base repository is `foundryvtt/dnd5e` and the base branch is `publish-wiki`. Give the PR a name, and reference your original issue in the description.
+Your PR is now submitted and will be reviewed by the Dnd5e team!
+Example: Review the PR created for submitting this document you're currently reading here: [Create Contributing-to-the-Wiki.md](https://github.com/foundryvtt/dnd5e/pull/2380)  
 
-![RequestaPull.mp4](link-to-issue-file)
+https://github.com/foundryvtt/dnd5e/assets/86370342/ad48b9d5-5d44-4fce-84bf-dbf097b64438
 
 ## Updating your PR
 You may want to make changes to your files, or may be asked to make changes by the DnD5e team. To do this, you will make those changes to the branch that your PR originated from, any new commits to your branch will automatically be applied to the PR for review.
