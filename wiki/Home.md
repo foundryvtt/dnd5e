@@ -14,3 +14,4 @@
 - [Roll Formulas](Roll-Formulas.md)
 - [Frequently Asked Questions](FAQ.md)
 - [Modifying Your Game with World Scripts](Modifying-Your-Game-with-Scripts.md)
+- [Contributing to the Wiki](Contributing-to-the-Wiki.md)
