@@ -2694,6 +2694,7 @@ export default class Actor5e extends Actor {
     dhp = Number(dhp);
     const tokens = this.isToken ? [this.token?.object] : this.getActiveTokens(true);
     for ( const t of tokens ) {
+      if ( !t.visible || !t.renderable ) continue;
       const pct = Math.clamped(Math.abs(dhp) / this.system.attributes.hp.max, 0, 1);
       canvas.interface.createScrollingText(t.center, dhp.signedString(), {
         anchor: CONST.TEXT_ANCHOR_POINTS.TOP,
