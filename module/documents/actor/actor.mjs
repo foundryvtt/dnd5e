@@ -2329,7 +2329,7 @@ export default class Actor5e extends Actor {
     }
 
     // Prepare new data to merge from the source
-    const d = foundry.utils.mergeObject({
+    const d = foundry.utils.mergeObject(foundry.utils.deepClone({
       type: o.type, // Remain the same actor type
       name: `${o.name} (${source.name})`, // Append the new shape to your old name
       system: source.system, // Get the systemdata model of your new form
@@ -2340,7 +2340,7 @@ export default class Actor5e extends Actor {
       folder: o.folder, // Be displayed in the same sidebar folder
       flags: o.flags, // Use the original actor flags
       prototypeToken: { name: `${o.name} (${source.name})`, texture: {}, sight: {}, detectionModes: [] } // Set a new empty token
-    }, keepSelf ? o : {}); // Keeps most of original actor
+    }), keepSelf ? o : {}); // Keeps most of original actor
 
     // Specifically delete some data attributes
     delete d.system.resources; // Don't change your resource pools
@@ -2380,8 +2380,11 @@ export default class Actor5e extends Actor {
         const type = CONFIG.DND5E.abilities[k]?.type;
         if ( keepPhysical && (type === "physical") ) abilities[k] = oa;
         else if ( keepMental && (type === "mental") ) abilities[k] = oa;
+
+        // Set saving throw proficiencies.
         if ( keepSaves ) abilities[k].proficient = oa.proficient;
         else if ( mergeSaves ) abilities[k].proficient = Math.max(prof, oa.proficient);
+        else abilities[k].proficient = source.system.abilities[k].proficient;
       }
 
       // Transfer skills
