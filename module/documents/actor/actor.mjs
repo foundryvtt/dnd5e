@@ -2281,7 +2281,7 @@ export default class Actor5e extends Actor {
    * @property {boolean} [mergeSkills=false]        Take the maximum of the skill proficiencies
    * @property {boolean} [keepClass=false]          Keep proficiency bonus
    * @property {boolean} [keepFeats=false]          Keep features
-   * @property {boolean} [keepSpells=false]         Keep spells
+   * @property {boolean} [keepSpells=false]         Keep spells and spellcasting ability
    * @property {boolean} [keepItems=false]          Keep items
    * @property {boolean} [keepBio=false]            Keep biography
    * @property {boolean} [keepVision=false]         Keep vision
@@ -2346,6 +2346,7 @@ export default class Actor5e extends Actor {
     delete d.system.resources; // Don't change your resource pools
     delete d.system.currency; // Don't lose currency
     delete d.system.bonuses; // Don't lose global bonuses
+    if ( keepSpells ) delete d.system.attributes.spellcasting; // Keep spellcasting ability if retaining spells.
 
     // Specific additional adjustments
     d.system.details.alignment = o.system.details.alignment; // Don't change alignment
