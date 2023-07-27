@@ -1595,9 +1595,7 @@ DND5E.trackableAttributes = [
  * @type {string[]}
  */
 DND5E.consumableResources = [
-  "item.quantity", "item.weight", "item.duration.value", "currency", "details.xp.value", "abilities.*.value",
-  "attributes.senses", "attributes.movement", "attributes.ac.flat", "item.armor.value", "item.target", "item.range",
-  "item.save.dc"
+  // Configured during init.
 ];
 
 /* -------------------------------------------- */

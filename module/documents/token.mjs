@@ -67,14 +67,10 @@ export default class TokenDocument5e extends TokenDocument {
   /**
    * Get an Array of attribute choices which are suitable for being consumed by an item usage.
    * @param {object} data  The actor data.
-   * @returns {{bar: string[], value: string[]}}
+   * @returns {string[]}
    */
   static getConsumedAttributes(data) {
-    const attributes = super.getTrackedAttributes(data);
-    attributes.value.push(...Object.keys(CONFIG.DND5E.currencies).map(denom => ["currency", denom]));
-    const allowed = CONFIG.DND5E.consumableResources;
-    attributes.value = attributes.value.filter(attrs => this._isAllowedAttribute(allowed, attrs));
-    return attributes;
+    return CONFIG.DND5E.consumableResources;
   }
 
   /* -------------------------------------------- */
