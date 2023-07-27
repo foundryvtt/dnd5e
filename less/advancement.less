@@ -49,6 +49,11 @@
 
       .left-column {
         grid-area: left;
+        display: flex;
+        flex-direction: column;
+
+        > .form-group { flex: none; }
+        > .drop-target { flex: 1; }
       }
       .right-column {
         grid-area: right;
