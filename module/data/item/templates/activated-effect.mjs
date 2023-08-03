@@ -86,7 +86,8 @@ export default class ActivatedEffectTemplate extends foundry.abstract.DataModel 
         per: new foundry.data.fields.StringField({
           required: true, nullable: true, blank: false, initial: null, label: "DND5E.LimitedUsesPer"
         }),
-        recovery: new FormulaField({required: true, label: "DND5E.RecoveryFormula"})
+        recovery: new FormulaField({required: true, label: "DND5E.RecoveryFormula"}),
+        prompt: new foundry.data.fields.BooleanField({initial: true, label: "DND5E.UsesPrompt"})
       }, extraSchema), options);
     }
   };

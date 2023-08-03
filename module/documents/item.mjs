@@ -728,14 +728,20 @@ export default class Item5e extends Item {
    * Configuration data for an item usage being prepared.
    *
    * @typedef {object} ItemUseConfiguration
-   * @property {boolean} createMeasuredTemplate  Trigger a template creation
-   * @property {boolean} consumeQuantity         Should the item's quantity be consumed?
-   * @property {boolean} consumeRecharge         Should a recharge be consumed?
-   * @property {boolean} consumeResource         Should a linked (non-ammo) resource be consumed?
-   * @property {number|string|null} consumeSpellLevel  Specific spell level to consume, or "pact" for pact level.
-   * @property {boolean} consumeSpellSlot        Should any spell slot be consumed?
-   * @property {boolean} consumeUsage            Should limited uses be consumed?
-   * @property {boolean} needsConfiguration      Is user-configuration needed?
+   * @property {boolean} template            Can this item create a template?
+   * @property {boolean} quantity            Can this item consume its quantity?
+   * @property {boolean} recharge            Can this item consume its recharge value?
+   * @property {boolean} resource            Can this item consume a (non-ammo) resource?
+   * @property {boolean} slot                Can this item (a spell) consume a spell slot?
+   * @property {boolean} uses                Can this item consume its limited uses?
+   * @property {boolean} needsConfiguration  Is user-configuration needed?
+   * @property {object} value
+   * @property {boolean} value.template      Should this item create a template?
+   * @property {boolean} value.quantity      Should this item consume its quantity?
+   * @property {boolean} value.recharge      Should this item consume its recharge value?
+   * @property {boolean} value.resource      Should this item consume a (non-ammo) resource?
+   * @property {boolean} value.slot          Should this item (a spell) consume a spell slot?
+   * @property {boolean} value.uses          Should this item consume its limited uses?
    */
 
   /**
@@ -784,25 +790,13 @@ export default class Item5e extends Item {
       "flags.dnd5e.use": {type: this.type, itemId: this.id, itemUuid: this.uuid}
     }, options);
 
-    // Reference aspects of the item data necessary for usage
-    const resource = is.consume || {};        // Resource consumption
-    const isSpell = item.type === "spell";    // Does the item require a spell slot?
-    const requireSpellSlot = isSpell && (is.level > 0) && CONFIG.DND5E.spellUpcastModes.includes(is.preparation.mode);
-
     // Define follow-up actions resulting from the item usage
-    config = foundry.utils.mergeObject({
-      createMeasuredTemplate: item.hasAreaTarget,
-      consumeQuantity: is.uses?.autoDestroy ?? false,
-      consumeRecharge: !!is.recharge?.value,
-      consumeResource: !!resource.target && (!item.hasAttack || (resource.type !== "ammo")),
-      consumeSpellLevel: requireSpellSlot ? is.preparation.mode === "pact" ? "pact" : is.level : null,
-      consumeSpellSlot: requireSpellSlot,
-      consumeUsage: !!is.uses?.per && (is.uses?.max > 0)
-    }, config);
+    config = foundry.utils.mergeObject(this._getUsageConfig(), config);
 
     // Display a configuration dialog to customize the usage
-    if ( config.needsConfiguration === undefined ) config.needsConfiguration = config.createMeasuredTemplate
-      || config.consumeRecharge || config.consumeResource || config.consumeSpellSlot || config.consumeUsage;
+    if ( config.needsConfiguration === undefined ) {
+      config.needsConfiguration = Object.values(config.value).includes(true);
+    }
 
     /**
      * A hook event that fires before an item usage is configured.
@@ -817,22 +811,26 @@ export default class Item5e extends Item {
 
     // Display configuration dialog
     if ( (options.configureDialog !== false) && config.needsConfiguration ) {
-      const configuration = await AbilityUseDialog.create(item);
+      const configuration = await AbilityUseDialog.create(item, config);
       if ( !configuration ) return;
-      foundry.utils.mergeObject(config, configuration);
+      foundry.utils.mergeObject(config.value, configuration);
     }
+    const value = config.value;
 
-    // Handle spell upcasting
-    if ( isSpell && (config.consumeSpellSlot || config.consumeSpellLevel) ) {
-      const upcastLevel = config.consumeSpellLevel === "pact" ? as.spells.pact.level
-        : parseInt(config.consumeSpellLevel);
-      if ( upcastLevel && (upcastLevel !== is.level) ) {
-        item = item.clone({"system.level": upcastLevel}, {keepId: true});
+    // Handle upcasting
+    if ( item.type === "spell" ) {
+      let level = null;
+      if ( value.slotLevel ) {
+        // A spell slot was consumed.
+        level = value.slotLevel === "pact" ? as.spells.pact.level : parseInt(value.slotLevel.at(-1));
+      }
+      if ( level && (level !== is.level) ) {
+        item = item.clone({"system.level": level}, {keepId: true});
         item.prepareData();
         item.prepareFinalAttributes();
       }
     }
-    if ( isSpell ) foundry.utils.mergeObject(options.flags, {"dnd5e.use.spellLevel": item.system.level});
+    if ( item.type === "spell" ) foundry.utils.mergeObject(options.flags, {"dnd5e.use.spellLevel": item.system.level});
 
     /**
      * A hook event that fires before an item's resource consumption has been calculated.
@@ -868,7 +866,7 @@ export default class Item5e extends Item {
     // Commit pending data updates
     const { actorUpdates, itemUpdates, resourceUpdates } = usage;
     if ( !foundry.utils.isEmpty(itemUpdates) ) await item.update(itemUpdates);
-    if ( config.consumeQuantity && (item.system.quantity === 0) ) await item.delete();
+    if ( value.quantity && (item.system.quantity === 0) ) await item.delete();
     if ( !foundry.utils.isEmpty(actorUpdates) ) await this.actor.update(actorUpdates);
     if ( resourceUpdates.length ) await this.actor.updateEmbeddedDocuments("Item", resourceUpdates);
 
@@ -877,7 +875,7 @@ export default class Item5e extends Item {
 
     // Initiate measured template creation
     let templates;
-    if ( config.createMeasuredTemplate ) {
+    if ( value.template ) {
       try {
         templates = await (dnd5e.canvas.AbilityTemplate.fromItem(item))?.drawPreview();
       } catch(err) {}
@@ -897,6 +895,62 @@ export default class Item5e extends Item {
     return cardData;
   }
 
+  /**
+   * Prepare an object of possible values for item usage.
+   * @returns {ItemUseConfiguration}  Configuration data for the roll.
+   */
+  _getUsageConfig(){
+    const uses = this.hasLimitedUses;
+    const is = this.system;
+    const consume = is.consume || {};
+    const active = !!is.activation?.type;
+
+    const config = {
+      slot: (this.type === "spell") && (is.level > 0) && CONFIG.DND5E.spellUpcastModes.includes(is.preparation.mode),
+      uses: active && uses,
+      quantity: active && uses && !!is.uses.autoDestroy && (is.uses.value === 1),
+      resource: active && !!consume.type && !!consume.target && (!this.hasAttack || (consume.type !== "ammo")),
+      recharge: active && !!is.recharge?.value,
+      template: active && game.user.can("TEMPLATE_CREATE") && this.hasAreaTarget
+    };
+
+    // For consumable items, quantity takes precedence over consuming uses.
+    if ( config.quantity ) config.uses = false;
+
+    // Do not suggest consuming your own uses if also consuming them through resources.
+    if ( config.resource && (consume.target === this.id) ) config.uses = false;
+
+    // Append the default values.
+    config.value = this._getUsageConfigDefaults(config);
+
+    return config;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare an object of default values for item usage.
+   * @param {ItemUseConfiguration} config  Configuration data for the item.
+   * @returns {object}                     The default values for each key in the config.
+   */
+  _getUsageConfigDefaults(config){
+    const is = this.system;
+
+    const value = {
+      slot: config.slot,
+      uses: config.uses && !!is.uses.prompt,
+      quantity: config.quantity,
+      resource: config.resource,
+      recharge: config.recharge,
+      template: config.template
+    };
+
+    // Default values of selects.
+    if ( value.slot ) value.slotLevel = (is.preparation?.mode === "pact") ? "pact" : `spell${is.level}`;
+
+    return value;
+  }
+
   /* -------------------------------------------- */
 
   /**
@@ -906,15 +960,14 @@ export default class Item5e extends Item {
    * @returns {object|boolean}             A set of data changes to apply when the item is used, or false.
    * @protected
    */
-  _getUsageUpdates({
-    consumeQuantity, consumeRecharge, consumeResource, consumeSpellSlot,
-    consumeSpellLevel, consumeUsage}) {
+  _getUsageUpdates(config) {
     const actorUpdates = {};
     const itemUpdates = {};
     const resourceUpdates = [];
+    const value = config.value;
 
     // Consume Recharge
-    if ( consumeRecharge ) {
+    if ( value.recharge ) {
       const recharge = this.system.recharge || {};
       if ( recharge.charged === false ) {
         ui.notifications.warn(game.i18n.format("DND5E.ItemNoUses", {name: this.name}));
@@ -924,27 +977,26 @@ export default class Item5e extends Item {
     }
 
     // Consume Limited Resource
-    if ( consumeResource ) {
-      const canConsume = this._handleConsumeResource(itemUpdates, actorUpdates, resourceUpdates);
+    if ( value.resource ) {
+      const canConsume = this._handleConsumeResource(itemUpdates, actorUpdates, resourceUpdates, config);
       if ( canConsume === false ) return false;
     }
 
     // Consume Spell Slots
-    if ( consumeSpellSlot && consumeSpellLevel ) {
-      if ( Number.isNumeric(consumeSpellLevel) ) consumeSpellLevel = `spell${consumeSpellLevel}`;
-      const level = this.actor?.system.spells[consumeSpellLevel];
+    if ( value.slot && value.slotLevel ) {
+      const level = this.actor?.system.spells[value.slotLevel];
       const spells = Number(level?.value ?? 0);
       if ( spells === 0 ) {
-        const labelKey = consumeSpellLevel === "pact" ? "DND5E.SpellProgPact" : `DND5E.SpellLevel${this.system.level}`;
+        const labelKey = value.slotLevel === "pact" ? "DND5E.SpellProgPact" : `DND5E.SpellLevel${this.system.level}`;
         const label = game.i18n.localize(labelKey);
         ui.notifications.warn(game.i18n.format("DND5E.SpellCastNoSlots", {name: this.name, level: label}));
         return false;
       }
-      actorUpdates[`system.spells.${consumeSpellLevel}.value`] = Math.max(spells - 1, 0);
+      actorUpdates[`system.spells.${value.slotLevel}.value`] = Math.max(spells - 1, 0);
     }
 
     // Consume Limited Usage
-    if ( consumeUsage ) {
+    if ( value.uses ) {
       const uses = this.system.uses || {};
       const available = Number(uses.value ?? 0);
       let used = false;
@@ -955,7 +1007,7 @@ export default class Item5e extends Item {
       }
 
       // Reduce quantity if not reducing usages or if usages hit zero, and we are set to consumeQuantity
-      if ( consumeQuantity && (!used || (remaining === 0)) ) {
+      if ( value.quantity && (!used || (remaining === 0)) ) {
         const q = Number(this.system.quantity ?? 1);
         if ( q >= 1 ) {
           used = true;
