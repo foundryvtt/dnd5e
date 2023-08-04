@@ -14,23 +14,17 @@ Use [GitHub's Basic Formatting Syntax](https://docs.github.com/en/get-started/wr
 ### Assets
 When taking a screenshot or screen recording, all modules should be disabled. The wiki is intended for core System functionality only.
 When adding an image or video, first upload the asset to the original Issue created for the update. This will provide us with a reliable link to that asset for use between your Fork and the dnd5e system.  
-- Images
-    - I dunno, any guidelines here?
-    - Recommended software for taking and annotating screenshots?
-- Videos
-    - Webm preferred? Does is matter?
-    - Recommended software to capture video?
+Keep in mind that the maximum file size for an embedded file is 10MB, so using webm format or keeping the dimensions of the video small, such as only the size of the dialog box you are demoing, is a good way to keep within the 10M limit.
 
 ### File Names and Links
 The name of your Markdown file is what will be used for the name of the Wiki Page in the table of contents, with hyphens turning into spaces, so `My-first-Wiki-page.md` will become `My first Wiki page`. 
 When you want to link to another page in the wiki, in your file make sure to link to the Markdown file in the `wiki` folder, the GitHub Action will automatically strip the `.md` extension and generate the appropriate link to the wiki page, for example linking to `[Hyperlink Text](Advancement-Type-Hit-Points.md)` in your documents will always generate a link to `[Hyperlink Text](https://github.com/foundryvtt/dnd5e/wiki/Advancement-Type-Hit-Points)` in the Wiki.  
 Always make sure to update the `Home.md` file with a link to your new Markdown file.
 
-### That little version tag?
-***Do we want to have the version tag at the top of all of our docs to reflect the version the page was last updated?***  
-In order to let readers know when a Wiki page was last updated, please include a Version tag like this one at the top of the page.
-![](https://img.shields.io/static/v1?label=dnd5e&message=2.0.0&color=informational)    
-`![](https://img.shields.io/static/v1?label=dnd5e&message=2.0.0&color=informational)`  
+### Version Badges
+In order to let readers know what system release version a Wiki page is accurate for, please include a Version badge like the one below at the top of your page. When updating an existing wiki page, make sure to update this badge when relevant.  
+![](https://img.shields.io/static/v1?label=dnd5e&message=2.2.3&color=informational)    
+`![](https://img.shields.io/static/v1?label=dnd5e&message=2.2.3&color=informational)`  
 
 # Submitting to the Wiki
 
