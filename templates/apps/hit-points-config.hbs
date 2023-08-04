@@ -15,6 +15,15 @@
       <input type="text" name="hp.bonuses.overall" value="{{hp.bonuses.overall}}">
     </div>
 
+    <div class="form-group">
+      <label>{{localize "DND5E.HitPointsDiceMinimum"}}</label>
+      <input type="text" name="hp.dice.minimum" value="{{hp.dice.minimum}}">
+    </div>
+    <div class="form-group">
+      <label>{{localize "DND5E.HitPointsDiceMaximize"}}</label>
+      <input type="checkbox" name="hp.dice.maximize" {{checked hp.dice.maximize}}>
+    </div>
+
   {{else}}
 
     <div class="hp-field form-group">

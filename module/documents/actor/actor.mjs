@@ -1660,12 +1660,13 @@ export default class Actor5e extends Actor {
     const parts = [`1${denomination}`, `@mod`].concat(options.parts ?? []);
     const flavor = game.i18n.localize("DND5E.HitDiceRoll");
     const data = this.getRollData();
+    const hp = this.system.attributes.hp;
     data.mod = data.abilities[CONFIG.DND5E.hitPointsAbility || "con"]?.mod ?? 0;
     const rollConfig = foundry.utils.mergeObject({
       data,
       chatMessage: true,
-      maximize: this.getFlag("dnd5e", "hitDieMaximize"),
-      minimum: this.getFlag("dnd5e", "hitDieMinimum") || 0,
+      maximize: hp.dice.maximize,
+      minimum: dnd5e.utils.simplifyBonus(hp.dice.minimum, data),
       messageData: {
         speaker: ChatMessage.getSpeaker({actor: this}),
         flavor,
@@ -1699,7 +1700,6 @@ export default class Actor5e extends Actor {
     });
     if ( rollConfig.chatMessage ) roll.toMessage(rollConfig.messageData);
 
-    const hp = this.system.attributes.hp;
     const dhp = Math.min(Math.max(0, hp.max + (hp.tempmax ?? 0)) - hp.value, roll.total);
     const updates = {
       actor: {"system.attributes.hp.value": hp.value + dhp},

@@ -20,6 +20,9 @@ import TraitsFields from "./templates/traits.mjs";
  * @property {object} attributes.hp.bonuses
  * @property {string} attributes.hp.bonuses.level         Bonus formula applied for each class level.
  * @property {string} attributes.hp.bonuses.overall       Bonus formula applied to total HP.
+ * @property {object} attributes.hp.dice
+ * @property {string} attributes.hp.dice.minimum          Formula determining the minimum a hit die can roll.
+ * @property {boolean} attributes.hp.dice.maximize        Whether hit die rolls are maximized.
  * @property {object} attributes.death
  * @property {number} attributes.death.success            Number of successful death saves.
  * @property {number} attributes.death.failure            Number of failed death saves.
@@ -73,6 +76,10 @@ export default class CharacterData extends CreatureTemplate {
           bonuses: new foundry.data.fields.SchemaField({
             level: new FormulaField({deterministic: true, label: "DND5E.HitPointsBonusLevel"}),
             overall: new FormulaField({deterministic: true, label: "DND5E.HitPointsBonusOverall"})
+          }),
+          dice: new foundry.data.fields.SchemaField({
+            minimum: new FormulaField({deterministic: true, label: "DND5E.HitPointsDiceMinimum"}),
+            maximize: new foundry.data.fields.BooleanField({label: "DND5E.HitPointsDiceMaximize"})
           })
         }, {label: "DND5E.HitPoints"}),
         death: new foundry.data.fields.SchemaField({
