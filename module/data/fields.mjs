@@ -151,8 +151,19 @@ export class IdentifierField extends foundry.data.fields.StringField {
 /* -------------------------------------------- */
 
 /**
+ * @callback MappingFieldInitialValueBuilder
+ * @param {string} key       The key within the object where this new value is being generated.
+ * @param {*} initial        The generic initial data provided by the contained model.
+ * @param {object} existing  Any existing mapping data.
+ * @returns {object}         Value to use as default for this key.
+ */
+
+/**
  * @typedef {DataFieldOptions} MappingFieldOptions
- * @property {string[]} [initialKeys]  Keys that will be created if no data is provided.
+ * @property {string[]} [initialKeys]       Keys that will be created if no data is provided.
+ * @property {MappingFieldInitialValueBuilder} [initialValue]  Function to calculate the initial value for a key.
+ * @property {boolean} [initialKeysOnly=false]  Should the keys in the initialized data be limited to the keys provided
+ *                                              by `options.initialKeys`?
  */
 
 /**
@@ -161,6 +172,9 @@ export class IdentifierField extends foundry.data.fields.StringField {
  * @param {DataField} model                    The class of DataField which should be embedded in this field.
  * @param {MappingFieldOptions} [options={}]   Options which configure the behavior of the field.
  * @property {string[]} [initialKeys]          Keys that will be created if no data is provided.
+ * @property {MappingFieldInitialValueBuilder} [initialValue]  Function to calculate the initial value for a key.
+ * @property {boolean} [initialKeysOnly=false]  Should the keys in the initialized data be limited to the keys provided
+ *                                              by `options.initialKeys`?
  */
 export class MappingField extends foundry.data.fields.ObjectField {
   constructor(model, options) {
@@ -182,7 +196,8 @@ export class MappingField extends foundry.data.fields.ObjectField {
   static get _defaults() {
     return foundry.utils.mergeObject(super._defaults, {
       initialKeys: null,
-      initialValue: null
+      initialValue: null,
+      initialKeysOnly: false
     });
   }
 
@@ -202,11 +217,21 @@ export class MappingField extends foundry.data.fields.ObjectField {
     const initial = super.getInitialValue(data);
     if ( !keys || !foundry.utils.isEmpty(initial) ) return initial;
     if ( !(keys instanceof Array) ) keys = Object.keys(keys);
-    for ( const key of keys ) {
-      const modelInitial = this.model.getInitialValue();
-      initial[key] = this.initialValue?.(key, modelInitial) ?? modelInitial;
-    }
+    for ( const key of keys ) initial[key] = this._getInitialValueForKey(key);
     return initial;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Get the initial value for the provided key.
+   * @param {string} key       Key within the object being built.
+   * @param {object} [object]  Any existing mapping data.
+   * @returns {*}              Initial value based on provided field type.
+   */
+  _getInitialValueForKey(key, object) {
+    const initial = this.model.getInitialValue();
+    return this.initialValue?.(key, initial, object) ?? initial;
   }
 
   /* -------------------------------------------- */
@@ -240,10 +265,14 @@ export class MappingField extends foundry.data.fields.ObjectField {
   /** @override */
   initialize(value, model, options={}) {
     if ( !value ) return value;
-    return Object.entries(value).reduce((obj, [k, v]) => {
-      obj[k] = this.model.initialize(v, model, options);
-      return obj;
-    }, {});
+    const obj = {};
+    const initialKeys = (this.initialKeys instanceof Array) ? this.initialKeys : Object.keys(this.initialKeys ?? {});
+    const keys = this.initialKeysOnly ? initialKeys : Object.keys(value);
+    for ( const key of keys ) {
+      const data = value[key] ?? this._getInitialValueForKey(key, value);
+      obj[key] = this.model.initialize(data, model, options);
+    }
+    return obj;
   }
 
   /* -------------------------------------------- */

@@ -1221,7 +1221,7 @@ export default class Item5e extends Item {
     const rollConfig = foundry.utils.mergeObject({
       actor: this.actor,
       data: rollData,
-      critical: this.getCriticalThreshold(),
+      critical: this.criticalThreshold,
       title,
       flavor: title,
       elvenAccuracy,
@@ -1831,7 +1831,7 @@ export default class Item5e extends Item {
   deleteAdvancement(id, { source=false }={}) {
     if ( !this.system.advancement ) return this;
 
-    const advancementCollection = this.system.advancement.filter(a => a._id !== id);
+    const advancementCollection = this.toObject().system.advancement.filter(a => a._id !== id);
     if ( source ) return this.updateSource({"system.advancement": advancementCollection});
     return this.update({"system.advancement": advancementCollection});
   }
@@ -2020,9 +2020,10 @@ export default class Item5e extends Item {
     if ( data.system?.proficient === undefined ) {
       if ( isNPC ) updates["system.proficient"] = 1;
       else {
-        const actorToolProfs = this.parent.system.traits?.toolProf?.value || new Set();
-        const proficient = actorToolProfs.has(this.system.toolType) || actorToolProfs.has(this.system.baseItem);
-        updates["system.proficient"] = Number(proficient);
+        const actorToolProfs = this.parent.system.tools || {};
+        const toolProf = actorToolProfs[this.system.baseItem]?.value;
+        const generalProf = actorToolProfs[this.system.toolType]?.value;
+        updates["system.proficient"] = toolProf ?? generalProf ?? 0;
       }
     }
     return updates;

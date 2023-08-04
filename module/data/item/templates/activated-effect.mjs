@@ -127,6 +127,7 @@ export default class ActivatedEffectTemplate extends foundry.abstract.DataModel 
    */
   static #migrateRanges(source) {
     if ( !("range" in source) ) return;
+    source.range ??= {};
     if ( source.range.units === null ) source.range.units = "";
     if ( typeof source.range.long === "string" ) {
       if ( source.range.long === "" ) source.range.long = null;
@@ -149,9 +150,11 @@ export default class ActivatedEffectTemplate extends foundry.abstract.DataModel 
    * @param {object} source  The candidate source data from which the model will be constructed.
    */
   static #migrateTargets(source) {
-    if ( source.target?.value === "" ) source.target.value = null;
-    if ( source.target?.units === null ) source.target.units = "";
-    if ( source.target?.type === null ) source.target.type = "";
+    if ( !("target" in source) ) return;
+    source.target ??= {};
+    if ( source.target.value === "" ) source.target.value = null;
+    if ( source.target.units === null ) source.target.units = "";
+    if ( source.target.type === null ) source.target.type = "";
   }
 
   /* -------------------------------------------- */
@@ -162,6 +165,7 @@ export default class ActivatedEffectTemplate extends foundry.abstract.DataModel 
    */
   static #migrateUses(source) {
     if ( !("uses" in source) ) return;
+    source.uses ??= {};
     const value = source.uses.value;
     if ( typeof value === "string" ) {
       if ( value === "" ) source.uses.value = null;
@@ -178,6 +182,7 @@ export default class ActivatedEffectTemplate extends foundry.abstract.DataModel 
    */
   static #migrateConsume(source) {
     if ( !("consume" in source) ) return;
+    source.consume ??= {};
     if ( source.consume.type === null ) source.consume.type = "";
     const amount = source.consume.amount;
     if ( typeof amount === "string" ) {

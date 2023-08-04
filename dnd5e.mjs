@@ -185,8 +185,12 @@ function _configureTrackableAttributes() {
       value: [...creature.value, "details.cr", "details.spellLevel", "details.xp.value"]
     },
     vehicle: {
-      bar: [...common.bar],
+      bar: [...common.bar, "attributes.hp"],
       value: [...common.value]
+    },
+    group: {
+      bar: [],
+      value: []
     }
   };
 }
@@ -204,9 +208,10 @@ Hooks.once("setup", function() {
   game.dnd5e.moduleArt.registerModuleArt();
 
   // Apply custom compendium styles to the SRD rules compendium.
-  const rules = game.packs.get("dnd5e.rules");
-  if ( game.dnd5e.isV10 ) rules.apps = [new applications.journal.SRDCompendium(rules)];
-  else rules.applicationClass = applications.journal.SRDCompendium;
+  if ( !game.dnd5e.isV10 ) {
+    const rules = game.packs.get("dnd5e.rules");
+    rules.applicationClass = applications.journal.SRDCompendium;
+  }
 });
 
 /* --------------------------------------------- */
@@ -238,8 +243,14 @@ Hooks.once("i18nInit", () => utils.performPreLocalization(CONFIG.DND5E));
  * Once the entire VTT framework is initialized, check to see if we should perform a data migration
  */
 Hooks.once("ready", function() {
-  // Configure validation strictness.
-  if ( game.dnd5e.isV10 ) _configureValidationStrictness();
+  if ( game.dnd5e.isV10 ) {
+    // Configure validation strictness.
+    _configureValidationStrictness();
+
+    // Apply custom compendium styles to the SRD rules compendium.
+    const rules = game.packs.get("dnd5e.rules");
+    rules.apps = [new applications.journal.SRDCompendium(rules)];
+  }
 
   // Wait to register hotbar drop hook on ready so that modules could register earlier if they want to
   Hooks.on("hotbarDrop", (bar, data, slot) => {

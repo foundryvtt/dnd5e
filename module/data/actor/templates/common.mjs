@@ -31,10 +31,35 @@ export default class CommonTemplate extends SystemDataModel.mixin(CurrencyTempla
           check: new FormulaField({required: true, label: "DND5E.AbilityCheckBonus"}),
           save: new FormulaField({required: true, label: "DND5E.SaveBonus"})
         }, {label: "DND5E.AbilityBonuses"})
-      }), {initialKeys: CONFIG.DND5E.abilities, label: "DND5E.Abilities"})
+      }), {
+        initialKeys: CONFIG.DND5E.abilities, initialValue: this._initialAbilityValue.bind(this),
+        initialKeysOnly: true, label: "DND5E.Abilities"
+      })
     });
   }
 
+  /* -------------------------------------------- */
+
+  /**
+   * Populate the proper initial value for abilities.
+   * @param {string} key       Key for which the initial data will be created.
+   * @param {object} initial   The initial skill object created by SkillData.
+   * @param {object} existing  Any existing mapping data.
+   * @returns {object}         Initial ability object.
+   * @private
+   */
+  static _initialAbilityValue(key, initial, existing) {
+    const config = CONFIG.DND5E.abilities[key];
+    if ( config ) {
+      let defaultValue = config.defaults?.[this._systemType] ?? initial.value;
+      if ( typeof defaultValue === "string" ) defaultValue = existing?.[defaultValue]?.value ?? initial.value;
+      initial.value = defaultValue;
+    }
+    return initial;
+  }
+
+  /* -------------------------------------------- */
+  /*  Migrations                                  */
   /* -------------------------------------------- */
 
   /** @inheritdoc */
