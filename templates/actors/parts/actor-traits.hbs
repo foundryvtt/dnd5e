@@ -123,8 +123,16 @@
             <i class="fas fa-edit"></i>
         </a>
         <ul class="traits-list">
-        {{#each traits.traits.toolProf.selected as |v k|}}
-            <li class="tag {{k}}">{{v}}</li>
+        {{#each tools}}
+            <li class="tag tool proficiency-row" data-property="tools" data-key="{{@key}}">
+                <input type="hidden" name="system.tools.{{@key}}.value" value="{{baseValue}}" data-dtype="Number">
+                <input type="hidden" name="system.tools.{{@key}}.ability" value="{{ability}}">
+                <a class="proficiency-toggle tool-proficiency" data-tooltip="{{hover}}">{{{icon}}}</a>
+                <h4 class="tool-name rollable">{{label}}</h4>
+                <a class="config-button" data-action="tool" data-tooltip="DND5E.ToolConfigure">
+                    <i class="fas fa-cog"></i>
+                </a>
+            </li>
         {{/each}}
         </ul>
     </div>

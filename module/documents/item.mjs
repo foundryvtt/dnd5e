@@ -23,57 +23,32 @@ export default class Item5e extends Item {
   /**
    * Which ability score modifier is used by this item?
    * @type {string|null}
+   * @see {@link ActionTemplate#abilityMod}
    */
   get abilityMod() {
-
-    // Case 1 - defined directly by the item
-    if ( this.system.ability ) return this.system.ability;
-
-    // Case 2 - inferred from a parent actor
-    if ( this.actor && ("abilities" in this.actor.system) ) {
-      const abilities = this.actor.system.abilities;
-      const spellcasting = this.actor.system.attributes.spellcasting;
-
-      // Special rules per item type
-      switch ( this.type ) {
-        case "consumable":
-          if ( this.system.consumableType === "scroll" ) return spellcasting || "int";
-          break;
-        case "spell":
-          return spellcasting || "int";
-        case "tool":
-          return "int";
-        case "weapon":
-          // Finesse weapons - Str or Dex (PHB pg. 147)
-          if ( this.system.properties.fin === true ) {
-            return abilities.dex.mod >= abilities.str.mod ? "dex" : "str";
-          }
-          // Ranged weapons - Dex (PH p.194)
-          if ( ["simpleR", "martialR"].includes(this.system.weaponType) ) return "dex";
-          break;
-      }
-
-      // If a specific attack type is defined
-      if ( this.hasAttack ) return {
-        mwak: "str",
-        rwak: "dex",
-        msak: spellcasting || "int",
-        rsak: spellcasting || "int"
-      }[this.system.actionType];
-    }
-
-    // Case 3 - unknown
-    return null;
+    return this.system.abilityMod ?? null;
   }
 
-  /* -------------------------------------------- */
+  /* --------------------------------------------- */
 
   /**
-   * Return an item's identifier.
-   * @type {string}
+   * What is the critical hit threshold for this item, if applicable?
+   * @type {number|null}
+   * @see {@link ActionTemplate#criticalThreshold}
    */
-  get identifier() {
-    return this.system.identifier || this.name.slugify({strict: true});
+  get criticalThreshold() {
+    return this.system.criticalThreshold ?? null;
+  }
+
+  /* --------------------------------------------- */
+
+  /**
+   * Does the Item implement an ability check as part of its usage?
+   * @type {boolean}
+   * @see {@link ActionTemplate#hasAbilityCheck}
+   */
+  get hasAbilityCheck() {
+    return this.system.hasAbilityCheck ?? false;
   }
 
   /* -------------------------------------------- */
@@ -89,11 +64,23 @@ export default class Item5e extends Item {
   /* -------------------------------------------- */
 
   /**
+   * Does the Item have an area of effect target?
+   * @type {boolean}
+   * @see {@link ActivatedEffectTemplate#hasAreaTarget}
+   */
+  get hasAreaTarget() {
+    return this.system.hasAreaTarget ?? false;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Does the Item implement an attack roll as part of its usage?
    * @type {boolean}
+   * @see {@link ActionTemplate#hasAttack}
    */
   get hasAttack() {
-    return ["mwak", "rwak", "msak", "rsak"].includes(this.system.actionType);
+    return this.system.hasAttack ?? false;
   }
 
   /* -------------------------------------------- */
@@ -101,19 +88,76 @@ export default class Item5e extends Item {
   /**
    * Does the Item implement a damage roll as part of its usage?
    * @type {boolean}
+   * @see {@link ActionTemplate#hasDamage}
    */
   get hasDamage() {
-    return !!(this.system.damage && this.system.damage.parts.length);
+    return this.system.hasDamage ?? false;
   }
 
   /* -------------------------------------------- */
 
   /**
-   * Does the Item implement a versatile damage roll as part of its usage?
+   * Does the Item target one or more distinct targets?
    * @type {boolean}
+   * @see {@link ActivatedEffectTemplate#hasIndividualTarget}
    */
-  get isVersatile() {
-    return !!(this.hasDamage && this.system.damage.versatile);
+  get hasIndividualTarget() {
+    return this.system.hasIndividualTarget ?? false;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Is this Item limited in its ability to be used by charges or by recharge?
+   * @type {boolean}
+   * @see {@link ActivatedEffectTemplate#hasLimitedUses}
+   * @see {@link FeatData#hasLimitedUses}
+   */
+  get hasLimitedUses() {
+    return this.system.hasLimitedUses ?? false;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Does the Item implement a saving throw as part of its usage?
+   * @type {boolean}
+   * @see {@link ActionTemplate#hasSave}
+   */
+  get hasSave() {
+    return this.system.hasSave ?? false;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Does the Item have a target?
+   * @type {boolean}
+   * @see {@link ActivatedEffectTemplate#hasTarget}
+   */
+  get hasTarget() {
+    return this.system.hasTarget ?? false;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Return an item's identifier.
+   * @type {string}
+   */
+  get identifier() {
+    return this.system.identifier || this.name.slugify({strict: true});
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Is this item any of the armor subtypes?
+   * @type {boolean}
+   * @see {@link EquipmentTemplate#isArmor}
+   */
+  get isArmor() {
+    return this.system.isArmor ?? false;
   }
 
   /* -------------------------------------------- */
@@ -121,9 +165,23 @@ export default class Item5e extends Item {
   /**
    * Does the item provide an amount of healing instead of conventional damage?
    * @type {boolean}
+   * @see {@link ActionTemplate#isHealing}
    */
   get isHealing() {
-    return (this.system.actionType === "heal") && this.system.damage.parts.length;
+    return this.system.isHealing ?? false;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Is this item a separate large object like a siege engine or vehicle component that is
+   * usually mounted on fixtures rather than equipped, and has its own AC and HP?
+   * @type {boolean}
+   * @see {@link EquipmentData#isMountable}
+   * @see {@link WeaponData#isMountable}
+   */
+  get isMountable() {
+    return this.system.isMountable ?? false;
   }
 
   /* -------------------------------------------- */
@@ -136,6 +194,17 @@ export default class Item5e extends Item {
   get isOriginalClass() {
     if ( this.type !== "class" || !this.isEmbedded ) return null;
     return this.id === this.parent.system.details.originalClass;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Does the Item implement a versatile damage roll as part of its usage?
+   * @type {boolean}
+   * @see {@link ActionTemplate#isVersatile}
+   */
+  get isVersatile() {
+    return this.system.isVersatile ?? false;
   }
 
   /* -------------------------------------------- */
@@ -161,71 +230,6 @@ export default class Item5e extends Item {
     const items = this.parent.items;
     const cid = this.identifier;
     return this._classLink ??= items.find(i => (i.type === "subclass") && (i.system.classIdentifier === cid));
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Does the Item implement a saving throw as part of its usage?
-   * @type {boolean}
-   */
-  get hasSave() {
-    const save = this.system.save || {};
-    return !!(save.ability && save.scaling);
-  }
-
-  /* --------------------------------------------- */
-
-  /**
-   * Does the Item implement an ability check as part of its usage?
-   * @type {boolean}
-   */
-  get hasAbilityCheck() {
-    return (this.system.actionType === "abil") && this.system.ability;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Does the Item have a target?
-   * @type {boolean}
-   */
-  get hasTarget() {
-    const target = this.system.target;
-    return target && !["none", ""].includes(target.type);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Does the Item have an area of effect target?
-   * @type {boolean}
-   */
-  get hasAreaTarget() {
-    const target = this.system.target;
-    return target && (target.type in CONFIG.DND5E.areaTargetTypes);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Is this Item limited in its ability to be used by charges or by recharge?
-   * @type {boolean}
-   */
-  get hasLimitedUses() {
-    let recharge = this.system.recharge || {};
-    let uses = this.system.uses || {};
-    return !!recharge.value || (uses.per && (uses.max > 0));
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Is this item any of the armor subtypes?
-   * @type {boolean}
-   */
-  get isArmor() {
-    return this.system.armor?.type in CONFIG.DND5E.armorTypes;
   }
 
   /* -------------------------------------------- */
@@ -485,7 +489,7 @@ export default class Item5e extends Item {
     // Action usage
     if ( "actionType" in this.system ) {
       this.labels.abilityCheck = game.i18n.format("DND5E.AbilityPromptTitle", {
-        ability: CONFIG.DND5E.abilities[this.system.ability]
+        ability: CONFIG.DND5E.abilities[this.system.ability]?.label ?? ""
       });
 
       // Saving throws
@@ -552,7 +556,7 @@ export default class Item5e extends Item {
     }
 
     // Update labels
-    const abl = CONFIG.DND5E.abilities[save.ability] ?? "";
+    const abl = CONFIG.DND5E.abilities[save.ability]?.label ?? "";
     this.labels.save = game.i18n.format("DND5E.SaveDC", {dc: save.dc || "", ability: abl});
     return save.dc;
   }
@@ -615,30 +619,6 @@ export default class Item5e extends Item {
     const formula = simplifyRollFormula(roll.formula) || "0";
     this.labels.toHit = !/^[+-]/.test(formula) ? `+ ${formula}` : formula;
     return {rollData, parts};
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Retrieve an item's critical hit threshold. Uses the smallest value from among the following sources:
-   * - item document
-   * - item document's actor (if it has one)
-   * - item document's ammunition (if it has any)
-   * - the constant '20'
-   * @returns {number|null}  The minimum value that must be rolled to be considered a critical hit.
-   */
-  getCriticalThreshold() {
-    const actorFlags = this.actor.flags.dnd5e || {};
-    if ( !this.hasAttack ) return null;
-    let actorThreshold = null;
-    let itemThreshold = this.system.critical?.threshold ?? Infinity;
-    let ammoThreshold = Infinity;
-    if ( this.type === "weapon" ) actorThreshold = actorFlags.weaponCriticalThreshold;
-    else if ( this.type === "spell" ) actorThreshold = actorFlags.spellCriticalThreshold;
-    if ( this.system.consume?.type === "ammo" ) {
-      ammoThreshold = this.actor.items.get(this.system.consume.target)?.system.critical.threshold ?? Infinity;
-    }
-    return Math.min(itemThreshold, ammoThreshold, actorThreshold ?? 20);
   }
 
   /* -------------------------------------------- */
@@ -1172,7 +1152,6 @@ export default class Item5e extends Item {
    */
   async getChatData(htmlOptions={}) {
     const data = this.toObject().system;
-    const labels = this.labels;
 
     // Rich text description
     data.description.value = await TextEditor.enrichHTML(data.description.value, {
@@ -1182,160 +1161,14 @@ export default class Item5e extends Item {
       ...htmlOptions
     });
 
-    // Item type specific properties
-    const props = [];
-    switch ( this.type ) {
-      case "consumable":
-        this._consumableChatData(data, labels, props); break;
-      case "equipment":
-        this._equipmentChatData(data, labels, props); break;
-      case "feat":
-        this._featChatData(data, labels, props); break;
-      case "loot":
-        this._lootChatData(data, labels, props); break;
-      case "spell":
-        this._spellChatData(data, labels, props); break;
-      case "tool":
-        this._toolChatData(data, labels, props); break;
-      case "weapon":
-        this._weaponChatData(data, labels, props); break;
-    }
+    // Type specific properties
+    data.properties = [
+      ...this.system.chatProperties ?? [],
+      ...this.system.equippableItemChatProperties ?? [],
+      ...this.system.activatedEffectChatProperties ?? []
+    ].filter(p => p);
 
-    // Equipment properties
-    if ( data.hasOwnProperty("equipped") && !["loot", "tool"].includes(this.type) ) {
-      if ( data.attunement === CONFIG.DND5E.attunementTypes.REQUIRED ) {
-        props.push(CONFIG.DND5E.attunements[CONFIG.DND5E.attunementTypes.REQUIRED]);
-      }
-      props.push(
-        game.i18n.localize(data.equipped ? "DND5E.Equipped" : "DND5E.Unequipped"),
-        game.i18n.localize(data.proficient ? "DND5E.Proficient" : "DND5E.NotProficient")
-      );
-    }
-
-    // Ability activation properties
-    if ( data.hasOwnProperty("activation") ) {
-      props.push(
-        labels.activation + (data.activation?.condition ? ` (${data.activation.condition})` : ""),
-        labels.target,
-        labels.range,
-        labels.duration
-      );
-    }
-
-    // Filter properties and return
-    data.properties = props.filter(p => !!p);
     return data;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Prepare chat card data for consumable type items.
-   * @param {object} data     Copy of item data being use to display the chat message.
-   * @param {object} labels   Specially prepared item labels.
-   * @param {string[]} props  Existing list of properties to be displayed. *Will be mutated.*
-   * @private
-   */
-  _consumableChatData(data, labels, props) {
-    props.push(
-      CONFIG.DND5E.consumableTypes[data.consumableType],
-      `${data.uses.value}/${data.uses.max} ${game.i18n.localize("DND5E.Charges")}`
-    );
-    data.hasCharges = data.uses.value >= 0;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Prepare chat card data for equipment type items.
-   * @param {object} data     Copy of item data being use to display the chat message.
-   * @param {object} labels   Specially prepared item labels.
-   * @param {string[]} props  Existing list of properties to be displayed. *Will be mutated.*
-   * @private
-   */
-  _equipmentChatData(data, labels, props) {
-    props.push(
-      CONFIG.DND5E.equipmentTypes[data.armor.type],
-      labels.armor || null,
-      data.stealth ? game.i18n.localize("DND5E.StealthDisadvantage") : null
-    );
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Prepare chat card data for items of the Feat type.
-   * @param {object} data     Copy of item data being use to display the chat message.
-   * @param {object} labels   Specially prepared item labels.
-   * @param {string[]} props  Existing list of properties to be displayed. *Will be mutated.*
-   * @private
-   */
-  _featChatData(data, labels, props) {
-    props.push(data.requirements);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Prepare chat card data for loot type items.
-   * @param {object} data     Copy of item data being use to display the chat message.
-   * @param {object} labels   Specially prepared item labels.
-   * @param {string[]} props  Existing list of properties to be displayed. *Will be mutated.*
-   * @private
-   */
-  _lootChatData(data, labels, props) {
-    props.push(
-      game.i18n.localize("ITEM.TypeLoot"),
-      data.weight ? `${data.weight} ${game.i18n.localize("DND5E.AbbreviationLbs")}` : null
-    );
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Render a chat card for Spell type data.
-   * @param {object} data     Copy of item data being use to display the chat message.
-   * @param {object} labels   Specially prepared item labels.
-   * @param {string[]} props  Existing list of properties to be displayed. *Will be mutated.*
-   * @private
-   */
-  _spellChatData(data, labels, props) {
-    props.push(
-      labels.level,
-      labels.components.vsm + (labels.materials ? ` (${labels.materials})` : ""),
-      ...labels.components.tags
-    );
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Prepare chat card data for tool type items.
-   * @param {object} data     Copy of item data being use to display the chat message.
-   * @param {object} labels   Specially prepared item labels.
-   * @param {string[]} props  Existing list of properties to be displayed. *Will be mutated.*
-   * @private
-   */
-  _toolChatData(data, labels, props) {
-    props.push(
-      CONFIG.DND5E.abilities[data.ability] || null,
-      CONFIG.DND5E.proficiencyLevels[data.proficient || 0]
-    );
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Prepare chat card data for weapon type items.
-   * @param {object} data     Copy of item data being use to display the chat message.
-   * @param {object} labels   Specially prepared item labels.
-   * @param {string[]} props  Existing list of properties to be displayed. *Will be mutated.*
-   * @private
-   */
-  _weaponChatData(data, labels, props) {
-    props.push(
-      CONFIG.DND5E.weaponTypes[data.weaponType]
-    );
   }
 
   /* -------------------------------------------- */
@@ -1388,7 +1221,7 @@ export default class Item5e extends Item {
     const rollConfig = foundry.utils.mergeObject({
       actor: this.actor,
       data: rollData,
-      critical: this.getCriticalThreshold(),
+      critical: this.criticalThreshold,
       title,
       flavor: title,
       elvenAccuracy,
@@ -1739,79 +1572,11 @@ export default class Item5e extends Item {
    */
   async rollToolCheck(options={}) {
     if ( this.type !== "tool" ) throw new Error("Wrong item type!");
-
-    // Prepare roll data
-    const rollData = this.getRollData();
-    const abl = this.system.ability;
-    const parts = ["@mod", "@abilityCheckBonus"];
-    const title = `${this.name} - ${game.i18n.localize("DND5E.ToolCheck")}`;
-
-    // Add proficiency
-    if ( this.system.prof?.hasProficiency ) {
-      parts.push("@prof");
-      rollData.prof = this.system.prof.term;
-    }
-
-    // Add tool bonuses
-    if ( this.system.bonus ) {
-      parts.push("@toolBonus");
-      rollData.toolBonus = Roll.replaceFormulaData(this.system.bonus, rollData);
-    }
-
-    // Add ability-specific check bonus
-    const checkBonus = foundry.utils.getProperty(rollData, `abilities.${abl}.bonuses.check`);
-    if ( checkBonus ) rollData.abilityCheckBonus = Roll.replaceFormulaData(checkBonus, rollData);
-    else rollData.abilityCheckBonus = 0;
-
-    // Add global actor bonus
-    const globalBonus = this.actor.system.bonuses?.abilities || {};
-    if ( globalBonus.check ) {
-      parts.push("@checkBonus");
-      rollData.checkBonus = Roll.replaceFormulaData(globalBonus.check, rollData);
-    }
-
-    // Compose the roll data
-    const rollConfig = foundry.utils.mergeObject({
-      data: rollData,
-      title: title,
-      flavor: title,
-      dialogOptions: {
-        width: 400,
-        top: options.event ? options.event.clientY - 80 : null,
-        left: window.innerWidth - 710
-      },
-      chooseModifier: true,
-      halflingLucky: this.actor.getFlag("dnd5e", "halflingLucky" ),
-      reliableTalent: (this.system.proficient >= 1) && this.actor.getFlag("dnd5e", "reliableTalent"),
-      messageData: {
-        speaker: options.speaker || ChatMessage.getSpeaker({actor: this.actor}),
-        "flags.dnd5e.roll": {type: "tool", itemId: this.id, itemUuid: this.uuid}
-      }
-    }, options);
-    rollConfig.parts = parts.concat(options.parts ?? []);
-
-    /**
-     * A hook event that fires before a tool check is rolled for an Item.
-     * @function dnd5e.preRollToolCheck
-     * @memberof hookEvents
-     * @param {Item5e} item                  Item for which the roll is being performed.
-     * @param {D20RollConfiguration} config  Configuration data for the pending roll.
-     * @returns {boolean}                    Explicitly return false to prevent the roll from being performed.
-     */
-    if ( Hooks.call("dnd5e.preRollToolCheck", this, rollConfig) === false ) return;
-
-    const roll = await d20Roll(rollConfig);
-
-    /**
-     * A hook event that fires after a tool check has been rolled for an Item.
-     * @function dnd5e.rollToolCheck
-     * @memberof hookEvents
-     * @param {Item5e} item   Item for which the roll was performed.
-     * @param {D20Roll} roll  The resulting roll.
-     */
-    if ( roll ) Hooks.callAll("dnd5e.rollToolCheck", this, roll);
-
-    return roll;
+    return this.actor?.rollToolCheck(this.system.baseItem, {
+      ability: this.system.ability,
+      bonus: this.system.bonus,
+      ...options
+    });
   }
 
   /* -------------------------------------------- */
@@ -2066,7 +1831,7 @@ export default class Item5e extends Item {
   deleteAdvancement(id, { source=false }={}) {
     if ( !this.system.advancement ) return this;
 
-    const advancementCollection = this.system.advancement.filter(a => a._id !== id);
+    const advancementCollection = this.toObject().system.advancement.filter(a => a._id !== id);
     if ( source ) return this.updateSource({"system.advancement": advancementCollection});
     return this.update({"system.advancement": advancementCollection});
   }
@@ -2255,9 +2020,10 @@ export default class Item5e extends Item {
     if ( data.system?.proficient === undefined ) {
       if ( isNPC ) updates["system.proficient"] = 1;
       else {
-        const actorToolProfs = this.parent.system.traits?.toolProf?.value || new Set();
-        const proficient = actorToolProfs.has(this.system.toolType) || actorToolProfs.has(this.system.baseItem);
-        updates["system.proficient"] = Number(proficient);
+        const actorToolProfs = this.parent.system.tools || {};
+        const toolProf = actorToolProfs[this.system.baseItem]?.value;
+        const generalProf = actorToolProfs[this.system.toolType]?.value;
+        updates["system.proficient"] = toolProf ?? generalProf ?? 0;
       }
     }
     return updates;
@@ -2343,10 +2109,31 @@ export default class Item5e extends Item {
       name: `${game.i18n.localize("DND5E.SpellScroll")}: ${itemData.name}`,
       img: itemData.img,
       system: {
-        "description.value": desc.trim(), source, actionType, activation, duration, target, range, damage, formula,
+        description: {value: desc.trim()}, source, actionType, activation, duration, target, range, damage, formula,
         save, level, attackBonus
       }
     });
     return new this(spellScrollData);
+  }
+
+  /* -------------------------------------------- */
+  /*  Deprecations                                */
+  /* -------------------------------------------- */
+
+  /**
+   * Retrieve an item's critical hit threshold. Uses the smallest value from among the following sources:
+   * - item document
+   * - item document's actor (if it has one)
+   * - item document's ammunition (if it has any)
+   * - the constant '20'
+   * @returns {number|null}  The minimum value that must be rolled to be considered a critical hit.
+   * @deprecated since dnd5e 2.2, targeted for removal in 2.4
+   */
+  getCriticalThreshold() {
+    foundry.utils.logCompatibilityWarning(
+      "Item5e#getCriticalThreshold has been replaced with the Item5e#criticalThreshold getter.",
+      { since: "DnD5e 2.2", until: "DnD5e 2.4" }
+    );
+    return this.criticalThreshold;
   }
 }

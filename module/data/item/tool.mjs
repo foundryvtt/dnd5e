@@ -26,7 +26,7 @@ export default class ToolData extends SystemDataModel.mixin(
       toolType: new foundry.data.fields.StringField({required: true, label: "DND5E.ItemToolType"}),
       baseItem: new foundry.data.fields.StringField({required: true, label: "DND5E.ItemToolBase"}),
       ability: new foundry.data.fields.StringField({
-        required: true, initial: "int", blank: false, label: "DND5E.DefaultAbilityCheck"
+        required: true, blank: true, label: "DND5E.DefaultAbilityCheck"
       }),
       chatFlavor: new foundry.data.fields.StringField({required: true, label: "DND5E.ChatFlavor"}),
       proficient: new foundry.data.fields.NumberField({
@@ -36,6 +36,8 @@ export default class ToolData extends SystemDataModel.mixin(
     });
   }
 
+  /* -------------------------------------------- */
+  /*  Migrations                                  */
   /* -------------------------------------------- */
 
   /** @inheritdoc */
@@ -52,5 +54,27 @@ export default class ToolData extends SystemDataModel.mixin(
    */
   static #migrateAbility(source) {
     if ( Array.isArray(source.ability) ) source.ability = source.ability[0];
+  }
+
+  /* -------------------------------------------- */
+  /*  Getters                                     */
+  /* -------------------------------------------- */
+
+  /**
+   * Properties displayed in chat.
+   * @type {string[]}
+   */
+  get chatProperties() {
+    return [CONFIG.DND5E.abilities[this.ability]?.label];
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Which ability score modifier is used by this item?
+   * @type {string|null}
+   */
+  get abilityMod() {
+    return this.ability || "int";
   }
 }

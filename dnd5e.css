@@ -728,6 +728,9 @@ h5 {
   /*  Skills                                   */
   /* ----------------------------------------- */
   /* ----------------------------------------- */
+  /*  Tools                                    */
+  /* ----------------------------------------- */
+  /* ----------------------------------------- */
   /*  Statuses                                 */
   /* ----------------------------------------- */
   /* ----------------------------------------- */
@@ -769,6 +772,7 @@ h5 {
 }
 .dnd5e.sheet.actor .sheet-header .header-exp {
   flex: 0 0 150px;
+  max-width: 18em;
   margin-right: 3px;
   height: 60px;
   justify-content: flex-end;
@@ -786,8 +790,9 @@ h5 {
   line-height: 24px;
 }
 .dnd5e.sheet.actor .sheet-header .summary span {
-  margin-inline-start: 4px;
+  margin-inline: 4px;
   border-block-start: 1px solid transparent;
+  white-space: nowrap;
 }
 .dnd5e.sheet.actor .sheet-header .summary select {
   position: relative;
@@ -1010,6 +1015,25 @@ h5 {
   flex: 0 0 26px;
   text-align: center;
   color: #7a7971;
+}
+.dnd5e.sheet.actor .tag.tool {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 1px 4px;
+}
+.dnd5e.sheet.actor .tag.tool a:is(.proficiency-toggle, .config-button) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 13px;
+  height: 13px;
+}
+.dnd5e.sheet.actor .tag.tool a:is(.proficiency-toggle, .config-button) > i {
+  margin: 0;
+}
+.dnd5e.sheet.actor .tag.tool h4 {
+  margin: 0;
 }
 .dnd5e.sheet.actor .counters {
   flex: none;
@@ -1344,6 +1368,9 @@ h5 {
   /*  Two Column Configurations                */
   /* ----------------------------------------- */
   /* ----------------------------------------- */
+  /*  Item Choice                              */
+  /* ----------------------------------------- */
+  /* ----------------------------------------- */
   /*  Scale Value                              */
   /* ----------------------------------------- */
 }
@@ -1392,19 +1419,35 @@ h5 {
 .dnd5e.advancement.two-column form .right-column {
   grid-area: right;
 }
+.dnd5e.advancement.two-column form .right-column.level-list label {
+  flex: 0.5;
+  padding-right: 0.5rem;
+  text-align: end;
+}
+.dnd5e.advancement.two-column form .right-column.level-list :is(input[type="text"], input[type="number"])::placeholder {
+  opacity: 0.5;
+}
 .dnd5e.advancement.two-column form button[type="submit"] {
   grid-column-end: span 2;
 }
+.dnd5e.advancement.item-choice {
+  --grid-two-column-right-size: 0.5fr;
+}
+.dnd5e.advancement.item-choice .level-list .hint {
+  text-align: end;
+}
+.dnd5e.advancement.item-choice .form-group:has(textarea) {
+  align-items: flex-start;
+}
+.dnd5e.advancement.item-choice textarea {
+  margin-inline-start: 8px;
+  border: 1px solid var(--color-border-light-tertiary);
+  font-family: var(--font-primary);
+  font-size: var(--font-size-12);
+  height: 100px;
+}
 .dnd5e.advancement.scale-value {
   --grid-two-column-right-size: 0.6fr;
-}
-.dnd5e.advancement.scale-value .right-column label {
-  flex: 0.5;
-  padding-right: 0.5rem;
-  text-align: right;
-}
-.dnd5e.advancement.scale-value :is(input[type="text"], input[type="number"])::placeholder {
-  opacity: 0.5;
 }
 .dnd5e.advancement.scale-value select.new-scale-value {
   font-weight: bold;
@@ -1475,6 +1518,10 @@ h5 {
 .dnd5e.advancement.flow form[data-type="HitPoints"] .rolls .rollButton {
   height: calc(var(--form-field-height) + 5px);
   line-height: 1.5em;
+}
+.dnd5e.advancement.flow form[data-type="ItemChoice"] .item-name .item-delete {
+  flex: 0 0 20px;
+  margin-inline-end: 1px;
 }
 .dnd5e.advancement.flow input.error {
   outline: 2px solid red;
@@ -1608,13 +1655,16 @@ h5 {
 .dnd5e.sheet.item .details .form-group.input-select-select select {
   flex: 1.5;
 }
-.dnd5e.sheet.item .details .form-group.uses-per .form-fields {
+.dnd5e.sheet.item .details .form-group.uses-per .form-fields,
+.dnd5e.sheet.item .details .form-group.consumption .form-fields {
   flex-wrap: nowrap;
 }
-.dnd5e.sheet.item .details .form-group.uses-per input {
+.dnd5e.sheet.item .details .form-group.uses-per.consumption input,
+.dnd5e.sheet.item .details .form-group.consumption.consumption input {
   flex: 0 0 32px;
 }
-.dnd5e.sheet.item .details .form-group.uses-per span {
+.dnd5e.sheet.item .details .form-group.uses-per span,
+.dnd5e.sheet.item .details .form-group.consumption span {
   flex: 0 0 16px;
   margin: 0 4px 0 0;
 }
@@ -1746,6 +1796,14 @@ h5 {
 /* ----------------------------------------- */
 /*  SRD Compendium                           */
 /* ----------------------------------------- */
+.srd-compendium.app {
+  min-height: 480px;
+  min-width: 640px;
+}
+.srd-compendium.app .window-content {
+  background: url(ui/parchment.jpg) repeat;
+  color: var(--color-text-dark-primary);
+}
 .srd-compendium article {
   display: flex;
   flex-direction: column;
@@ -1801,8 +1859,18 @@ h5 {
 /* ----------------------------------------- */
 /*  Journal Pages                            */
 /* ----------------------------------------- */
-.journal-editor .tox-tinymce {
-  height: 100% !important;
+.journal-editor {
+  min-width: 340px;
+  min-height: 260px;
+}
+.journal-editor .window-content {
+  padding: 0;
+}
+.journal-editor .prosemirror menu {
+  border-radius: 0;
+}
+.journal-editor .prosemirror .editor-container {
+  overflow-y: auto;
 }
 .journal-entry-page.class h4,
 .class-journal h4 {
@@ -1953,6 +2021,8 @@ h5 {
 .dnd5e.sheet.actor.character .sheet-header .charlevel {
   flex: 0 0 20px;
   height: 20px;
+  overflow: hidden;
+  text-overflow: ellipsis;
   font-size: 18px;
   color: #7a7971;
   white-space: nowrap;
@@ -1999,7 +2069,6 @@ h5 {
 }
 .dnd5e.sheet.actor.character .sheet-header .summary .proficiency {
   text-align: right;
-  padding-right: 5px;
 }
 .dnd5e.sheet.actor.character .resource .attribute-value > input {
   flex: 0 0 25%;

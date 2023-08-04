@@ -47,6 +47,7 @@ const DB_CACHE = {};
 function cleanPackEntry(data, { clearSourceId=true }={}) {
   if ( data.ownership ) data.ownership = { default: 0 };
   if ( clearSourceId ) delete data.flags?.core?.sourceId;
+  if ( typeof data.folder === "string" ) data.folder = null;
   delete data.flags?.importSource;
   delete data.flags?.exportSource;
   if ( data._stats?.lastModifiedBy ) data._stats.lastModifiedBy = "dnd5ebuilder0000";

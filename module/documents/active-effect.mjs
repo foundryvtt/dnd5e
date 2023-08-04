@@ -165,7 +165,7 @@ export default class ActiveEffect5e extends ActiveEffect {
 
     // Iterate over active effects, classifying them into categories
     for ( let e of effects ) {
-      e._getSourceName(); // Trigger a lookup for the source name
+      if ( game.dnd5e.isV10 ) e._getSourceName(); // Trigger a lookup for the source name
       if ( e.isSuppressed ) categories.suppressed.effects.push(e);
       else if ( e.disabled ) categories.inactive.effects.push(e);
       else if ( e.isTemporary ) categories.temporary.effects.push(e);

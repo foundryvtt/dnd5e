@@ -52,6 +52,17 @@
       }
       .right-column {
         grid-area: right;
+
+        &.level-list {
+          label {
+            flex: 0.5;
+            padding-right: 0.5rem;
+            text-align: end;
+          }
+          :is(input[type="text"], input[type="number"])::placeholder {
+            opacity: 0.5;
+          }
+        }
       }
       button[type="submit"] {
         grid-column-end: span 2;
@@ -60,19 +71,33 @@
   }
 
   /* ----------------------------------------- */
+  /*  Item Choice                              */
+  /* ----------------------------------------- */
+  &.item-choice {
+    --grid-two-column-right-size: 0.5fr;
+
+    .level-list .hint {
+      text-align: end;
+    }
+
+    .form-group:has(textarea) {
+      align-items: flex-start;
+    }
+
+    textarea {
+      margin-inline-start: 8px;
+      border: 1px solid var(--color-border-light-tertiary);
+      font-family: var(--font-primary);
+      font-size: var(--font-size-12);
+      height: 100px;
+    }
+  }
+
+  /* ----------------------------------------- */
   /*  Scale Value                              */
   /* ----------------------------------------- */
   &.scale-value {
     --grid-two-column-right-size: 0.6fr;
-
-    .right-column label {
-      flex: 0.5;
-      padding-right: 0.5rem;
-      text-align: right;
-    }
-    :is(input[type="text"], input[type="number"])::placeholder {
-      opacity: 0.5;
-    }
 
     select {
       &.new-scale-value {
@@ -157,6 +182,13 @@
         height: calc(var(--form-field-height) + 5px);
         line-height: 1.5em;
       }
+    }
+  }
+
+  form[data-type="ItemChoice"] {
+    .item-name .item-delete {
+      flex: 0 0 20px;
+      margin-inline-end: 1px;
     }
   }
 

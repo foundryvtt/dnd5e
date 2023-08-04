@@ -24,8 +24,8 @@ export default class FeatData extends SystemDataModel.mixin(
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
       type: new foundry.data.fields.SchemaField({
-        value: new foundry.data.fields.StringField({required: true}),
-        subtype: new foundry.data.fields.StringField({required: true})
+        value: new foundry.data.fields.StringField({required: true, label: "DND5E.Type"}),
+        subtype: new foundry.data.fields.StringField({required: true, label: "DND5E.Subtype"})
       }, {label: "DND5E.ItemFeatureType"}),
       requirements: new foundry.data.fields.StringField({required: true, nullable: true, label: "DND5E.Requirements"}),
       recharge: new foundry.data.fields.SchemaField({
@@ -37,6 +37,8 @@ export default class FeatData extends SystemDataModel.mixin(
     });
   }
 
+  /* -------------------------------------------- */
+  /*  Migrations                                  */
   /* -------------------------------------------- */
 
   /** @inheritdoc */
@@ -53,6 +55,7 @@ export default class FeatData extends SystemDataModel.mixin(
    * @param {object} source The candidate source data from which the model will be constructed.
    */
   static #migrateType(source) {
+    if ( !("type" in source) ) return;
     if ( !source.type ) source.type = {value: "", subtype: ""};
   }
 
@@ -68,5 +71,24 @@ export default class FeatData extends SystemDataModel.mixin(
     if ( (value === 0) || (value === "") ) source.recharge.value = null;
     else if ( (typeof value === "string") && Number.isNumeric(value) ) source.recharge.value = Number(value);
     if ( source.recharge.charged === null ) source.recharge.charged = false;
+  }
+
+  /* -------------------------------------------- */
+  /*  Getters                                     */
+  /* -------------------------------------------- */
+
+  /**
+   * Properties displayed in chat.
+   * @type {string[]}
+   */
+  get chatProperties() {
+    return [this.requirements];
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  get hasLimitedUses() {
+    return !!this.recharge.value || super.hasLimitedUses;
   }
 }

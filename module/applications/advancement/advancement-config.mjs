@@ -90,17 +90,6 @@ export default class AdvancementConfig extends FormApplication {
       showClassRestrictions: this.item.type === "class",
       showLevelSelector: !this.advancement.constructor.metadata.multiLevel
     };
-    Object.defineProperty(context, "data", {
-      get() {
-        foundry.utils.logCompatibilityWarning(
-          `You are accessing the ${this.constructor.name}#data object which is no longer used. `
-          + "Since 2.1 the Advancement class and its contained DataModel are merged into a combined data structure. "
-          + "You should now reference keys which were previously contained within the data object directly.",
-          { since: "DnD5e 2.1", until: "DnD5e 2.2" }
-        );
-        return context;
-      }
-    });
     return context;
   }
 
@@ -111,7 +100,7 @@ export default class AdvancementConfig extends FormApplication {
    * @param {object} configuration  Configuration object.
    * @returns {object}              Modified configuration.
    */
-  prepareConfigurationUpdate(configuration) {
+  async prepareConfigurationUpdate(configuration) {
     return configuration;
   }
 
@@ -138,17 +127,7 @@ export default class AdvancementConfig extends FormApplication {
   /** @inheritdoc */
   async _updateObject(event, formData) {
     let updates = foundry.utils.expandObject(formData);
-    if ( updates.data ) {
-      foundry.utils.logCompatibilityWarning(
-        "An update being performed on an advancement points to `data`. Advancement data has moved to the top level so the"
-        + " leading `data.` is no longer required.",
-        { since: "DnD5e 2.1", until: "DnD5e 2.2" }
-      );
-      const data = updates.data;
-      delete updates.data;
-      updates = { ...updates, ...data };
-    }
-    if ( updates.configuration ) updates.configuration = this.prepareConfigurationUpdate(updates.configuration);
+    if ( updates.configuration ) updates.configuration = await this.prepareConfigurationUpdate(updates.configuration);
     await this.advancement.update(updates);
   }
 

@@ -15,3 +15,13 @@ node_modules/
 
 # OS Specific
 .DS_Store
+
+# Don't commit LevelDB files for now for v10 back-compat
+packs/**/*.log
+packs/**/*.old
+packs/**/*.ldb
+packs/**/LOCK
+packs/**/MANIFEST
+packs/**/CURRENT
+packs/**/LOG
+packs/**/MANIFEST-*

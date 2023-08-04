@@ -62,7 +62,7 @@
                 </select>
             </div>
 
-            {{#unless isMountable}}
+            {{#unless system.isMountable}}
             <div class="form-group">
                 <label>{{localize "DND5E.Attunement"}}</label>
                 <select name="system.attunement" data-dtype="Number">
@@ -97,7 +97,7 @@
                 {{/each}}
             </div>
 
-            {{#if isMountable}}
+            {{#if system.isMountable}}
             <div class="form-group">
                 <label>{{localize 'DND5E.ArmorClass'}}</label>
                 <div class="form-fields">

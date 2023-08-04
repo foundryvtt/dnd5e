@@ -66,6 +66,17 @@ export default class ItemGrantAdvancement extends Advancement {
   /* -------------------------------------------- */
 
   /**
+   * Location where the added items are stored for the specified level.
+   * @param {number} level  Level being advanced.
+   * @returns {string}
+   */
+  storagePath(level) {
+    return "value.added";
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Locally apply this advancement to the actor.
    * @param {number} level              Level being advanced.
    * @param {object} data               Data from the advancement form.
@@ -95,7 +106,7 @@ export default class ItemGrantAdvancement extends Advancement {
       updates[itemData._id] = uuid;
     }
     this.actor.updateSource({items});
-    this.updateSource({"value.added": updates});
+    this.updateSource({[this.storagePath(level)]: updates});
   }
 
   /* -------------------------------------------- */
@@ -107,7 +118,7 @@ export default class ItemGrantAdvancement extends Advancement {
       this.actor.updateSource({items: [item]});
       updates[item._id] = item.flags.dnd5e.sourceId;
     }
-    this.updateSource({"value.added": updates});
+    this.updateSource({[this.storagePath(level)]: updates});
   }
 
   /* -------------------------------------------- */
@@ -115,13 +126,30 @@ export default class ItemGrantAdvancement extends Advancement {
   /** @inheritdoc */
   reverse(level) {
     const items = [];
-    for ( const id of Object.keys(this.value.added ?? {}) ) {
+    const keyPath = this.storagePath(level);
+    for ( const id of Object.keys(foundry.utils.getProperty(this, keyPath) ?? {}) ) {
       const item = this.actor.items.get(id);
       if ( item ) items.push(item.toObject());
       this.actor.items.delete(id);
     }
-    this.updateSource({ "value.-=added": null });
+    this.updateSource({[keyPath.replace(/\.([\w\d]+)$/, ".-=$1")]: null});
     return { items };
   }
 
+  /* -------------------------------------------- */
+
+  /**
+   * Verify that the provided item can be used with this advancement based on the configuration.
+   * @param {Item5e} item                   Item that needs to be tested.
+   * @param {object} config
+   * @param {boolean} [config.strict=true]  Should an error be thrown when an invalid type is encountered?
+   * @returns {boolean}                     Is this type valid?
+   * @throws An error if the item is invalid and strict is `true`.
+   */
+  _validateItemType(item, { strict=true }={}) {
+    if ( this.constructor.VALID_TYPES.has(item.type) ) return true;
+    const type = game.i18n.localize(CONFIG.Item.typeLabels[item.type]);
+    if ( strict ) throw new Error(game.i18n.format("DND5E.AdvancementItemTypeInvalidWarning", {type}));
+    return false;
+  }
 }

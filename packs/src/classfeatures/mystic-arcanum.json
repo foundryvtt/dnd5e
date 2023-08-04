@@ -1,19 +1,19 @@
 {
-  "_id": "31bKbWe9ZGVLEns6",
-  "name": "Signature Spells (Second Spell)",
+  "_id": "zB77V8BcCJvWVxck",
+  "name": "Mystic Arcanum",
   "ownership": {
     "default": 0
   },
   "type": "feat",
   "system": {
     "description": {
-      "value": "<p>When you reach 20th level, you gain mastery over two powerful spells and can cast them with little effort. Choose two 3rd-level wizard spells in your spellbook as your signature spells. You always have these spells prepared, they don't count against the number of spells you have prepared, and you can cast each of them once at 3rd level without expending a spell slot. When you do so, you can't do so again until you finish a short or long rest.</p><p>If you want to cast either spell at a higher level, you must expend a spell slot as normal.</p><p>If you wish, manually edit this entry and make a note of your second choice here:</p>\n<ul>\n<li><em>Second spell choice</em></li>\n</ul>",
+      "value": "<p>At 11th level, your patron bestows upon you a magical secret called an arcanum. Choose one 6th-level spell from the warlock spell list as this arcanum.</p><p>You can cast your arcanum spell once without expending a spell slot. You must finish a long rest before you can do so again.</p><p>At higher levels, you gain more warlock spells of your choice that can be cast in this way: one 7th-level spell at 13th level, one 8th-level spell at 15th level, and one 9th-level spell at 17th level. You regain all uses of your Mystic Arcanum when you finish a long rest.</p>",
       "chat": "",
       "unidentified": ""
     },
     "source": "SRD 5.1",
     "activation": {
-      "type": "special",
+      "type": "",
       "cost": null,
       "condition": ""
     },
@@ -34,14 +34,14 @@
       "units": ""
     },
     "uses": {
-      "value": 1,
-      "max": "1",
-      "per": "sr",
+      "value": null,
+      "max": "",
+      "per": "",
       "recovery": ""
     },
     "consume": {
       "type": "",
-      "target": null,
+      "target": "",
       "amount": null
     },
     "ability": "",
@@ -66,23 +66,23 @@
       "value": "class",
       "subtype": ""
     },
-    "requirements": "Wizard 20",
+    "requirements": "Warlock 11",
     "recharge": {
       "value": null,
       "charged": false
     }
   },
   "flags": {},
-  "img": "icons/magic/fire/projectile-wave-arrow.webp",
+  "img": "icons/sundries/books/book-black-grey.webp",
   "effects": [],
   "folder": null,
   "sort": 0,
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.1.0",
+    "systemVersion": "2.1.2",
     "coreVersion": "10.291",
-    "createdTime": 1661787234323,
-    "modifiedTime": 1672335220613,
+    "createdTime": 1661787234444,
+    "modifiedTime": 1674435967316,
     "lastModifiedBy": "dnd5ebuilder0000"
   }
 }
