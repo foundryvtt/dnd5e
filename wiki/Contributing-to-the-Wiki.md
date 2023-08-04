@@ -53,15 +53,15 @@ https://github.com/foundryvtt/dnd5e/assets/86370342/251f4dc6-9f40-4ec0-966b-e1ca
 
 
 ### Submit a PR 
-You will now be able to submit those changes back to the DnD5e system via a [pull request (PR)](https://docs.github.com/en/get-started/quickstart/contributing-to-projects#making-a-pull-request) against the `publish-wiki` branch.  
+You will now be able to submit those changes back to the dnd5e system via a [pull request (PR)](https://docs.github.com/en/get-started/quickstart/contributing-to-projects#making-a-pull-request) against the `publish-wiki` branch.  
 From the main page of your repo, click the `Contribute` button and `Open pull request` for the system. When submitting a PR for the wiki, make sure the base repository is `foundryvtt/dnd5e` and the base branch is `publish-wiki`. Give the PR a name, and reference your original issue in the description.
-Your PR is now submitted and will be reviewed by the Dnd5e team!
+Your PR is now submitted and will be reviewed by the repo maintainers!
 Example: Review the PR created for submitting this document you're currently reading here: [Create Contributing-to-the-Wiki.md](https://github.com/foundryvtt/dnd5e/pull/2380)  
 
 https://github.com/foundryvtt/dnd5e/assets/86370342/ad48b9d5-5d44-4fce-84bf-dbf097b64438
 
 ## Updating your PR
-You may want to make changes to your files, or may be asked to make changes by the DnD5e team. To do this, you will make those changes to the branch that your PR originated from, any new commits to your branch will automatically be applied to the PR for review.
+You may want to make changes to your files, or may be asked to make changes by the repo maintainers. To do this, you will make those changes to the branch that your PR originated from, any new commits to your branch will automatically be applied to the PR for review.
 
 ## Merging the PR
-The DnD5e team will merge your PR once all appropriate changes are made, the GitHub Action will automatically run, and your submission will be added to the Wiki page!
+The repo maintainers will merge your PR once all appropriate changes are made, the GitHub Action will automatically run, and your submission will be added to the Wiki page!
