@@ -3,7 +3,7 @@ If you're reading this, then you're interested in helping us document the system
 We want to make sure that contributing to the Wiki is as easy as possible so that anyone that would like to help us with this task can do so. In that light, some guidelines to contribute to the Wiki are outlined below.
 
 ## How the Wiki is updated
-Typically, a repository's Wiki can only be updated by the owners of that repo, this made community provided documentation cumbersome to include. In order to easily accept community provided documentation this repository is utilizing a [GitHub Action](https://github.com/Andrew-Chen-Wang/github-wiki-action) which will generate the Wiki from any Markdown files merged to the [`publish-wiki` branch's `/wiki/` folder](https://github.com/foundryvtt/dnd5e/tree/publish-wiki/wiki). If you would like to submit documentation to be included in the Wiki, please review the recommendations below and the steps to open an issue and submit a Pull Request below.
+Typically, a repository's Wiki can only be updated by the owners of that repo, this made community provided documentation cumbersome to include. In order to easily accept community provided documentation this repository is utilizing a [GitHub Action](https://github.com/Andrew-Chen-Wang/github-wiki-action) which will generate the Wiki from any Markdown files merged to the [`publish-wiki` branch's `/wiki/` folder](https://github.com/foundryvtt/dnd5e/tree/publish-wiki/wiki). If you would like to submit documentation to be included in the Wiki, please review the recommendations and the steps to open an Issue and submit a Pull Request below.
 
 ## Style Guide
 When submitting a Markdown file for consideration for the Wiki, we ask you to follow the style guide outlined here, this will ensure consistency between all of our wiki pages.
@@ -19,7 +19,7 @@ Keep in mind that the maximum file size for an embedded file is 10MB, so using w
 ### File Names and Links
 The name of your Markdown file is what will be used for the name of the Wiki Page in the table of contents, with hyphens turning into spaces, so `My-first-Wiki-page.md` will become `My first Wiki page`. 
 When you want to link to another page in the wiki, in your file make sure to link to the Markdown file in the `wiki` folder, the GitHub Action will automatically strip the `.md` extension and generate the appropriate link to the wiki page, for example linking to `[Hyperlink Text](Advancement-Type-Hit-Points.md)` in your documents will always generate a link to `[Hyperlink Text](https://github.com/foundryvtt/dnd5e/wiki/Advancement-Type-Hit-Points)` in the Wiki.  
-Always make sure to update the `Home.md` file with a link to your new Markdown file.
+Always make sure to update the `Home.md` file with a link to your new Markdown file, as it serves ar the Wiki's homepage.
 
 ### Version Badges
 In order to let readers know what system release version a Wiki page is accurate for, please include a Version badge like the one below at the top of your page. When updating an existing wiki page, make sure to update this badge when relevant.  
@@ -29,14 +29,14 @@ In order to let readers know what system release version a Wiki page is accurate
 # Submitting to the Wiki
 
 ## Create a Wiki Issue
-Just like any other issue on the repo, the title should reflect a brief description of the task at hand, and the Description should provide us with information about what will be added to the wiki. Make sure to include all of your assets in this issue, as mentioned in the style guide above.  
+Just like any other Issue on the repo, the title should reflect a brief description of the task at hand, and the description should provide us with information about what will be added to the wiki. Make sure to include all of your assets in this issue, as mentioned in the style guide above.  
 Example: Review the Issue created for submitting this document you're currently reading here: [Wiki - Create a Contributing to the Wiki guide](https://github.com/foundryvtt/dnd5e/issues/2379)
 
 ## Submit a PR
 In order to contribute directly to the Wiki, you will need to fork the dnd5e repo and make a branch from the `publish-wiki` branch of the repo, then you will be able to add your Markdown files or update the existing files, and submit a Pull Request.  
 
 ### Fork the `dnd5e` Repo
-To contribute to the wiki, [fork this project](https://docs.github.com/en/get-started/quickstart/fork-a-repo). Once you have forked the dnd5e repo, you will want to create a branch from the `publish-wiki` branch of the dnd5e repo. To do this, click on the branches button, then click on New Branch. Give your new Branch a descriptive name, then make sure to update the Source to the upstream repository `foundryvtt/dnd5e`and select the `publish-wiki` branch. You only need to fork the `dnd5e` repo once, but you will create a new branch for each new issue/PR.  
+To contribute to the wiki, [fork this project](https://docs.github.com/en/get-started/quickstart/fork-a-repo). Once you have forked the dnd5e repo, you will want to create a branch from the `publish-wiki` branch of the dnd5e repo. To do this, click on the Branches button, then click on New Branch. Give your new Branch a descriptive name, then make sure to update the Source to the upstream repository `foundryvtt/dnd5e`and select the `publish-wiki` branch. You only need to fork the `dnd5e` repo once, but you will create a new branch for each new issue/PR.  
 
 https://github.com/foundryvtt/dnd5e/assets/86370342/26c67b33-9260-4bfa-a9be-78054a248d1c
 
@@ -48,8 +48,8 @@ https://github.com/foundryvtt/dnd5e/assets/86370342/251f4dc6-9f40-4ec0-966b-e1ca
 
 ### Submit a PR 
 You will now be able to submit those changes back to the dnd5e system via a [pull request (PR)](https://docs.github.com/en/get-started/quickstart/contributing-to-projects#making-a-pull-request) against the `publish-wiki` branch.  
-From the main page of your repo, click the `Contribute` button and `Open pull request` for the system. When submitting a PR for the wiki, make sure the base repository is `foundryvtt/dnd5e` and the base branch is `publish-wiki`. Give the PR a name, and reference your original issue in the description.
-Your PR is now submitted and will be reviewed by the repo maintainers!
+From the main page of your repo, click the `Contribute` button and `Open pull request` for the system. When submitting a PR for the wiki, make sure the base repository is `foundryvtt/dnd5e` and the base branch is `publish-wiki`. Give the PR a name, and reference your original issue in the description.  
+Your PR is now submitted and will be reviewed by the repo maintainers!  
 Example: Review the PR created for submitting this document you're currently reading here: [Create Contributing-to-the-Wiki.md](https://github.com/foundryvtt/dnd5e/pull/2380)  
 
 https://github.com/foundryvtt/dnd5e/assets/86370342/ad48b9d5-5d44-4fce-84bf-dbf097b64438
