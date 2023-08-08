@@ -1130,7 +1130,7 @@ export default class ActorSheet5e extends ActorSheet {
   /**
    * Handle enabling editing for a spell slot override value.
    * @param {MouseEvent} event    The originating click event.
-   * @private
+   * @protected
    */
   async _onSpellSlotOverride(event) {
     const span = event.currentTarget.parentElement;
@@ -1155,7 +1155,7 @@ export default class ActorSheet5e extends ActorSheet {
    * Change the uses amount of an Owned Item within the Actor.
    * @param {Event} event        The triggering click event.
    * @returns {Promise<Item5e>}  Updated item.
-   * @private
+   * @protected
    */
   async _onUsesChange(event) {
     event.preventDefault();
@@ -1172,7 +1172,7 @@ export default class ActorSheet5e extends ActorSheet {
    * Change the quantity of an Owned Item within the actor.
    * @param {Event} event        The triggering click event.
    * @returns {Promise<Item5e>}  Updated item.
-   * @private
+   * @protected
    */
   async _onQuantityChange(event) {
     event.preventDefault();
