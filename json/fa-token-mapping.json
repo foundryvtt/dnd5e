@@ -247,8 +247,8 @@
       "token": {
         "texture": {
           "src": "systems/dnd5e/tokens/beast/Camel.webp",
-          "scaleX": 1.2,
-          "scaleY": 1.2
+          "scaleX": 1.5,
+          "scaleY": 1.5
         }
       }
     },
@@ -2039,7 +2039,7 @@
       }
     },
     "M4eX4Mu5IHCr3TMf": {
-      "actor":"systems/dnd5e/tokens/dragon/BlackDragonAdult.webp",
+      "actor": "systems/dnd5e/tokens/dragon/BlackDragonAdult.webp",
       "token": {
         "texture": {
           "src": "systems/dnd5e/tokens/dragon/BlackDragonAdult.webp",
@@ -2049,7 +2049,7 @@
       }
     },
     "cGM3iVYTtCsYXjzO": {
-      "actor":"systems/dnd5e/tokens/dragon/BlueDragonAdult.webp",
+      "actor": "systems/dnd5e/tokens/dragon/BlueDragonAdult.webp",
       "token": {
         "texture": {
           "src": "systems/dnd5e/tokens/dragon/BlueDragonAdult.webp",
@@ -2059,7 +2059,7 @@
       }
     },
     "MO382D2sxtAIuUC5": {
-      "actor":"systems/dnd5e/tokens/dragon/GoldDragonAdult.webp",
+      "actor": "systems/dnd5e/tokens/dragon/GoldDragonAdult.webp",
       "token": {
         "texture": {
           "src": "systems/dnd5e/tokens/dragon/GoldDragonAdult.webp",
@@ -2081,6 +2081,16 @@
     "oDspGxRQFBhE74L2": {
       "actor": "systems/dnd5e/tokens/elemental/InvisibleStalker.webp",
       "token": "systems/dnd5e/tokens/elemental/InvisibleStalker.webp"
+    },
+    "VCuG0Z3MrO8kfDU0": {
+      "actor": "systems/dnd5e/tokens/dragon/BronzeDragonAdult.webp",
+      "token": {
+        "texture": {
+          "src": "systems/dnd5e/tokens/dragon/BronzeDragonAdult.webp",
+          "scaleX": 2.33,
+          "scaleY": 2.33
+        }
+      }
     }
   },
   "dnd5e.heroes": {
