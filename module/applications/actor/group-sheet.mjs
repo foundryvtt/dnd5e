@@ -194,6 +194,7 @@ export default class GroupActorSheet extends ActorSheet {
       ctx.isStack = Number.isNumeric(quantity) && (quantity > 1);
       ctx.canToggle = false;
       ctx.isExpanded = this._expanded.has(item.id);
+      ctx.hasUses = item.hasLimitedUses;
       if ( (item.type in sections) && (item.type !== "loot") ) sections[item.type].items.push(item);
       else sections.loot.items.push(item);
     }
@@ -238,7 +239,7 @@ export default class GroupActorSheet extends ActorSheet {
       html.find(".action-button").click(this._onClickActionButton.bind(this));
       html.find(".item-control").click(this._onClickItemControl.bind(this));
       html.find(".item .rollable h4").click(event => this._onClickItemName(event));
-      html.find(".item-quantity input").click(ev => ev.target.select()).change(this._onQuantityChange.bind(this));
+      html.find(".item-quantity input, .item-uses input").click(ev => ev.target.select()).change(this._onQuantityChange.bind(this));
       new ContextMenu(html, ".item-list .item", [], {onOpen: this._onItemContext.bind(this)});
     }
   }
@@ -360,13 +361,16 @@ export default class GroupActorSheet extends ActorSheet {
   /* -------------------------------------------- */
 
   /**
-   * Change the quantity of an Owned Item within the actor.
+   * Change the quantity or limited uses of an Owned Item within the actor.
    * @param {Event} event        The triggering click event.
    * @returns {Promise<Item5e>}  Updated item.
    * @private
    */
   async _onQuantityChange(event) {
-    return game.system.applications.actor.ActorSheet5e.prototype._onQuantityChange.call(this, event);
+    const proto = game.system.applications.actor.ActorSheet5e.prototype;
+    const parent = event.currentTarget.parentElement;
+    if ( parent.classList.contains("item-quantity") ) return proto._onQuantityChange.call(this, event);
+    else if ( parent.classList.contains("item-uses") ) return proto._onUsesChange.call(this, event);
   }
 
   /* -------------------------------------------- */

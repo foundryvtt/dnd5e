@@ -39,9 +39,7 @@
                 <div class="item-detail item-weight">{{localize "DND5E.Weight"}}</div>
             {{/if}}
             <div class="item-detail item-quantity">{{localize "DND5E.QuantityAbbr"}}</div>
-            {{#if ../isCharacter}}
-                <div class="item-detail item-uses">{{localize "DND5E.Charges"}}</div>
-            {{/if}}
+            <div class="item-detail item-uses">{{localize "DND5E.Charges"}}</div>
             <div class="item-detail item-action">{{localize "DND5E.Usage"}}</div>
         {{/if}}
 
@@ -109,14 +107,12 @@
                     <input type="text" value="{{item.system.quantity}}" placeholder="0" data-dtype="Number" data-name="system.quantity">
                 </div>
 
-                {{#if @root.isCharacter}}
                 <div class="item-detail item-uses">
                     {{#if ctx.hasUses }}
                         <input type="text" value="{{item.system.uses.value}}" placeholder="0" data-dtype="Number" data-name="system.uses.value">
                         / {{item.system.uses.max}}
                     {{/if}}
                 </div>
-                {{/if}}
 
                 <div class="item-detail item-action">
                     {{#if item.system.activation.type }}
