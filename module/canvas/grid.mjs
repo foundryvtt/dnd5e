@@ -29,7 +29,7 @@ export function measureDistances(segments, options={}) {
 
     // Euclidean Measurement
     else if (rule === "EUCL") {
-      return Math.round(Math.hypot(nx, ny) * canvas.scene.grid.distance);
+      return Math.hypot(nx, ny) * canvas.scene.grid.distance;
     }
 
     // Standard PHB Movement
