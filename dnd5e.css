@@ -2357,6 +2357,11 @@ h5 {
 }
 .dnd5e.sheet.group .members .group-member .name {
   cursor: pointer;
+  align-items: center;
+}
+.dnd5e.sheet.group .members .group-member .name h4 {
+  white-space: unset;
+  line-height: 1;
 }
 .dnd5e.sheet.group .members .hp {
   flex: 2;
