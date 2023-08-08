@@ -30,6 +30,7 @@
       "units": ""
     },
     "cover": null,
+    "crewed": false,
     "target": {
       "value": null,
       "width": null,
@@ -53,7 +54,7 @@
       "amount": null
     },
     "ability": null,
-    "actionType": null,
+    "actionType": "",
     "attackBonus": "",
     "chatFlavor": "",
     "critical": {
@@ -99,10 +100,10 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.1.0",
+    "systemVersion": "2.2.2",
     "coreVersion": "10.291",
     "createdTime": 1661787233897,
-    "modifiedTime": 1671220964688,
+    "modifiedTime": 1690539664692,
     "lastModifiedBy": "dnd5ebuilder0000"
   }
 }

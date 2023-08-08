@@ -1,5 +1,4 @@
 {
-  "_id": "3TWT5bv3z5zGUZCe",
   "name": "Gauntlets of Ogre Power",
   "type": "equipment",
   "img": "icons/magic/unholy/strike-hand-glow-pink.webp",
@@ -30,6 +29,7 @@
       "units": ""
     },
     "cover": null,
+    "crewed": false,
     "target": {
       "value": null,
       "width": null,
@@ -88,21 +88,51 @@
     },
     "strength": null,
     "stealth": false,
-    "proficient": false
+    "proficient": 0
   },
-  "effects": [],
-  "folder": null,
-  "sort": 0,
+  "effects": [
+    {
+      "label": "Gauntlets of Ogre Power",
+      "icon": "icons/magic/unholy/strike-hand-glow-pink.webp",
+      "origin": "Item.TnMUksppGhKH4Kp3",
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "disabled": false,
+      "_id": "m7FoXVGKT7C9X7aq",
+      "changes": [
+        {
+          "key": "system.abilities.str.value",
+          "mode": 4,
+          "value": "19",
+          "priority": null
+        }
+      ],
+      "tint": null,
+      "transfer": true,
+      "flags": {},
+      "sort": 0
+    }
+  ],
   "ownership": {
     "default": 0
   },
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.1.0",
-    "coreVersion": "10.291",
+    "systemVersion": "2.2.2",
+    "coreVersion": "10.303",
     "createdTime": 1661787233454,
-    "modifiedTime": 1671220957215,
+    "modifiedTime": 1691500120771,
     "lastModifiedBy": "dnd5ebuilder0000"
-  }
+  },
+  "folder": null,
+  "sort": 0,
+  "_id": "hzyKiGNvj1OdLEVU"
 }
