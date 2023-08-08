@@ -8,6 +8,7 @@
       "str": {
         "value": 12,
         "proficient": 0,
+        "max": null,
         "bonuses": {
           "check": "",
           "save": ""
@@ -16,6 +17,7 @@
       "dex": {
         "value": 14,
         "proficient": 0,
+        "max": null,
         "bonuses": {
           "check": "",
           "save": ""
@@ -24,6 +26,7 @@
       "con": {
         "value": 14,
         "proficient": 0,
+        "max": null,
         "bonuses": {
           "check": "",
           "save": ""
@@ -32,6 +35,7 @@
       "int": {
         "value": 10,
         "proficient": 0,
+        "max": null,
         "bonuses": {
           "check": "",
           "save": ""
@@ -40,6 +44,7 @@
       "wis": {
         "value": 8,
         "proficient": 1,
+        "max": null,
         "bonuses": {
           "check": "",
           "save": ""
@@ -48,6 +53,7 @@
       "cha": {
         "value": 17,
         "proficient": 1,
+        "max": null,
         "bonuses": {
           "check": "",
           "save": ""
@@ -62,14 +68,14 @@
       },
       "hp": {
         "value": 10,
-        "min": 0,
         "max": null,
         "temp": null,
         "tempmax": null,
         "bonuses": {
           "level": "",
           "overall": ""
-        }
+        },
+        "min": 0
       },
       "init": {
         "ability": "",
@@ -111,7 +117,7 @@
       "alignment": "Chaotic Neutral",
       "race": "Half-elf",
       "background": "",
-      "originalClass": "idbg35ipjfs0tl4o",
+      "originalClass": "MuaNnEZkswuhixJP",
       "xp": {
         "value": 0
       },
@@ -323,6 +329,7 @@
         }
       }
     },
+    "tools": {},
     "spells": {
       "spell1": {
         "value": 0,
@@ -505,6 +512,7 @@
           "units": ""
         },
         "cover": null,
+        "crewed": false,
         "target": {
           "value": null,
           "width": null,
@@ -607,6 +615,7 @@
           "units": ""
         },
         "cover": null,
+        "crewed": false,
         "target": {
           "value": null,
           "width": null,
@@ -733,6 +742,7 @@
           "units": ""
         },
         "cover": null,
+        "crewed": false,
         "target": {
           "value": null,
           "width": null,
@@ -828,6 +838,7 @@
           "units": ""
         },
         "cover": null,
+        "crewed": false,
         "target": {
           "value": null,
           "width": null,
@@ -954,6 +965,7 @@
           "units": ""
         },
         "cover": null,
+        "crewed": false,
         "target": {
           "value": null,
           "width": null,
@@ -1066,6 +1078,7 @@
           "units": ""
         },
         "cover": null,
+        "crewed": false,
         "target": {
           "value": null,
           "width": null,
@@ -1178,6 +1191,7 @@
           "units": ""
         },
         "cover": null,
+        "crewed": false,
         "target": {
           "value": null,
           "width": null,
@@ -1486,6 +1500,7 @@
           "units": ""
         },
         "cover": null,
+        "crewed": false,
         "target": {
           "value": null,
           "width": null,
@@ -1624,6 +1639,7 @@
           "units": ""
         },
         "cover": null,
+        "crewed": false,
         "target": {
           "value": 1,
           "width": null,
@@ -1762,6 +1778,7 @@
           "units": "hour"
         },
         "cover": null,
+        "crewed": false,
         "target": {
           "value": 40,
           "width": null,
@@ -1862,6 +1879,7 @@
           "units": ""
         },
         "cover": null,
+        "crewed": false,
         "target": {
           "value": null,
           "width": null,
@@ -2039,6 +2057,7 @@
           "units": ""
         },
         "cover": null,
+        "crewed": false,
         "target": {
           "value": null,
           "width": null,
@@ -2131,6 +2150,7 @@
           "units": ""
         },
         "cover": null,
+        "crewed": false,
         "target": {
           "value": null,
           "width": null,
@@ -2203,441 +2223,6 @@
       }
     },
     {
-      "_id": "idbg35ipjfs0tl4o",
-      "name": "Warlock",
-      "type": "class",
-      "img": "icons/creatures/mammals/bat-giant-tattered-purple.webp",
-      "system": {
-        "description": {
-          "value": "<p>As a warlock, you gain the following class features.</p>\n<h3>Hit Points</h3>\n<p><strong>Hit Dice:</strong> 1d8 per warlock level<br /><strong>Hit Points at 1st Level:</strong> 8 + your Constitution modifier<br /><strong>Hit Points at Higher Levels:</strong> 1d8 (or 5) + your Constitution modifier per warlock level after 1st</p>\n<h3>Proficiencies</h3>\n<p><strong>Armor:</strong> Light armor<br /><strong>Weapons:</strong> Simple weapons<br /><strong>Tools:</strong> None<br /><strong>Saving Throws:</strong> Wisdom, Charisma<br /><strong>Skills:</strong> Choose two skills from Arcana, Deception, History, Intimidation, Investigation, Nature, and Religion</p>\n<h3>Equipment</h3>\n<p>You start with the following equipment, in addition to the equipment granted by your background:</p>\n<ul>\n<li>(a) a light crossbow and 20 bolts or (b) any simple weapon</li>\n<li>(a) a component pouch or (b) an arcane focus</li>\n<li>(a) a scholar's pack or (b) a dungeoneer's pack</li>\n<li>Leather armor, any simple weapon, and two daggers</li>\n</ul>\n<h1>Warlock Advancement</h1>\n<table border=\"0\">\n<thead>\n<tr>\n<td>Level</td>\n<td>Proficiency Bonus</td>\n<td>Features</td>\n<td>Invocations Known</td>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>1st</td>\n<td>+2</td>\n<td>@Compendium[dnd5e.classfeatures.jTXHaK0vvT5DV3uO]{Otherworldly Patron}, @Compendium[dnd5e.classfeatures.x6IJZwr6f0SGral7]{Pact Magic}</td>\n<td>̶</td>\n</tr>\n<tr>\n<td>2nd</td>\n<td>+2</td>\n<td>@Compendium[dnd5e.classfeatures.8MlxM2nEfE3Q0EVk]{Eldritch Invocations}</td>\n<td>2</td>\n</tr>\n<tr>\n<td>3rd</td>\n<td>+2</td>\n<td>@Compendium[dnd5e.classfeatures.QwgfIpCN8VWfoUtX]{Pact Boon}</td>\n<td>2</td>\n</tr>\n<tr>\n<td>4th</td>\n<td>+2</td>\n<td>@Compendium[dnd5e.classfeatures.s0Cc2zcX0JzIgam5]{Ability Score Improvement}</td>\n<td>2</td>\n</tr>\n<tr>\n<td>5th</td>\n<td>+3</td>\n<td>3rd Level Spells, +1 Invocation</td>\n<td>3</td>\n</tr>\n<tr>\n<td>6th</td>\n<td>+3</td>\n<td>Otherworldly Patron feature</td>\n<td>3</td>\n</tr>\n<tr>\n<td>7th</td>\n<td>+3</td>\n<td>4th Level Spells, +1 Invocation</td>\n<td>4</td>\n</tr>\n<tr>\n<td>8th</td>\n<td>+3</td>\n<td>@Compendium[dnd5e.classfeatures.s0Cc2zcX0JzIgam5]{Ability Score Improvement}</td>\n<td>4</td>\n</tr>\n<tr>\n<td>9th</td>\n<td>+4</td>\n<td>5th Level Spells, +1 Invocation</td>\n<td>5</td>\n</tr>\n<tr>\n<td>10th</td>\n<td>+4</td>\n<td>Otherworldly Patron feature</td>\n<td>5</td>\n</tr>\n<tr>\n<td>11th</td>\n<td>+4</td>\n<td>@Compendium[dnd5e.classfeatures.zB77V8BcCJvWVxck]{Mystic Arcanum (6th-Level Spell)}</td>\n<td>5</td>\n</tr>\n<tr>\n<td>12th</td>\n<td>+4</td>\n<td>@Compendium[dnd5e.classfeatures.s0Cc2zcX0JzIgam5]{Ability Score Improvement}, +1 Invocation</td>\n<td>6</td>\n</tr>\n<tr>\n<td>13th</td>\n<td>+5</td>\n<td>@Compendium[dnd5e.classfeatures.HBn6FXLz7Eiudz0V]{Mystic Arcanum (7th-Level Spell)}</td>\n<td>6</td>\n</tr>\n<tr>\n<td>14th</td>\n<td>+5</td>\n<td>Otherworldly Patron feature</td>\n<td>6</td>\n</tr>\n<tr>\n<td>15th</td>\n<td>+5</td>\n<td>@Compendium[dnd5e.classfeatures.knDZR4l4QfLTKinm]{Mystic Arcanum (8th-Level Spell)}, +1 Invocation</td>\n<td>7</td>\n</tr>\n<tr>\n<td>16th</td>\n<td>+5</td>\n<td>@Compendium[dnd5e.classfeatures.s0Cc2zcX0JzIgam5]{Ability Score Improvement}</td>\n<td>7</td>\n</tr>\n<tr>\n<td>17th</td>\n<td>+6</td>\n<td>@Compendium[dnd5e.classfeatures.vMxJQEKeK6WwZFaF]{Mystic Arcanum (9th-Level Spell)}</td>\n<td>7</td>\n</tr>\n<tr>\n<td>18th</td>\n<td>+6</td>\n<td>+1 Invocation</td>\n<td>8</td>\n</tr>\n<tr>\n<td>19th</td>\n<td>+6</td>\n<td>@Compendium[dnd5e.classfeatures.s0Cc2zcX0JzIgam5]{Ability Score Improvement}</td>\n<td>8</td>\n</tr>\n<tr>\n<td>20th</td>\n<td>+6</td>\n<td>@Compendium[dnd5e.classfeatures.0C04rwyvoknvFYiy]{Eldritch Master}</td>\n<td>8</td>\n</tr>\n</tbody>\n</table>\n<hr />\n<h3>Your Pact Boon</h3>\n<p>Each Pact Boon option produces a special creature or an object that reflects your patron's nature.</p>\n<p><em><strong>Pact of the Chain. </strong></em>Your familiar is more cunning than a typical familiar. Its default form can be a reflection of your patron, with imps and quasits tied to the Fiend.</p>\n<p><em><strong>Pact of the Blade. </strong></em>If you serve the Fiend, your weapon could be an axe made of black metal and adorned with decorative flames.</p>\n<p><em><strong>Pact of the Tome. </strong></em>Your Book of Shadows could be a weighty tome bound in demon hide studded with iron, holding spells of conjuration and a wealth of forbidden lore about the sinister regions of the cosmos, a gift of the Fiend.</p>\n<hr />\n<h1>Otherworldly Patrons</h1>\n<p>The beings that serve as patrons for warlocks are mighty inhabitants of other planes of existence—not gods, but almost godlike in their power. Various patrons give their warlocks access to different powers and invocations, and expect significant favors in return.</p>\n<p>Some patrons collect warlocks, doling out mystic knowledge relatively freely or boasting of their ability to bind mortals to their will. Other patrons bestow their power only grudgingly, and might make a pact with only one warlock. Warlocks who serve the same patron might view each other as allies, siblings, or rivals.</p>\n<p>@Compendium[dnd5e.subclasses.WPFVBg589uI8iOMH]{The Fiend}</p>",
-          "chat": "",
-          "unidentified": ""
-        },
-        "source": "SRD 5.1",
-        "identifier": "warlock",
-        "levels": 1,
-        "hitDice": "d8",
-        "hitDiceUsed": 0,
-        "advancement": [
-          {
-            "_id": "6wykf1qry5o7swn1",
-            "type": "ItemGrant",
-            "configuration": {
-              "items": [
-                "Compendium.dnd5e.classfeatures.jTXHaK0vvT5DV3uO",
-                "Compendium.dnd5e.classfeatures.x6IJZwr6f0SGral7"
-              ],
-              "optional": false,
-              "spell": {
-                "ability": "",
-                "preparation": "",
-                "uses": {
-                  "max": "",
-                  "per": ""
-                }
-              }
-            },
-            "value": {
-              "added": {
-                "8eas0z5toxxu5poz": "Compendium.dnd5e.classfeatures.jTXHaK0vvT5DV3uO",
-                "thjhxktqgk0fp7jx": "Compendium.dnd5e.classfeatures.x6IJZwr6f0SGral7"
-              }
-            },
-            "level": 1,
-            "title": "Features"
-          },
-          {
-            "_id": "rhw4wpt4eqn0mg7e",
-            "type": "ItemGrant",
-            "configuration": {
-              "items": [
-                "Compendium.dnd5e.classfeatures.8MlxM2nEfE3Q0EVk"
-              ],
-              "optional": false,
-              "spell": {
-                "ability": "",
-                "preparation": "",
-                "uses": {
-                  "max": "",
-                  "per": ""
-                }
-              }
-            },
-            "value": {},
-            "level": 2,
-            "title": "Features"
-          },
-          {
-            "_id": "uh49ihpbnqvy8jdu",
-            "type": "ItemGrant",
-            "configuration": {
-              "items": [
-                "Compendium.dnd5e.classfeatures.QwgfIpCN8VWfoUtX"
-              ],
-              "optional": false,
-              "spell": {
-                "ability": "",
-                "preparation": "",
-                "uses": {
-                  "max": "",
-                  "per": ""
-                }
-              }
-            },
-            "value": {},
-            "level": 3,
-            "title": "Features"
-          },
-          {
-            "_id": "j2llrpqzdjszdqcr",
-            "type": "ItemGrant",
-            "configuration": {
-              "items": [
-                "Compendium.dnd5e.classfeatures.zB77V8BcCJvWVxck"
-              ],
-              "optional": false,
-              "spell": {
-                "ability": "",
-                "preparation": "",
-                "uses": {
-                  "max": "",
-                  "per": ""
-                }
-              }
-            },
-            "value": {},
-            "level": 11,
-            "title": "Features"
-          },
-          {
-            "_id": "4rqq43u7wtq9vn1k",
-            "type": "ItemGrant",
-            "configuration": {
-              "items": [
-                "Compendium.dnd5e.classfeatures.HBn6FXLz7Eiudz0V"
-              ],
-              "optional": false,
-              "spell": {
-                "ability": "",
-                "preparation": "",
-                "uses": {
-                  "max": "",
-                  "per": ""
-                }
-              }
-            },
-            "value": {},
-            "level": 13,
-            "title": "Features"
-          },
-          {
-            "_id": "05ek6hg9mar50thz",
-            "type": "ItemGrant",
-            "configuration": {
-              "items": [
-                "Compendium.dnd5e.classfeatures.knDZR4l4QfLTKinm"
-              ],
-              "optional": false,
-              "spell": {
-                "ability": "",
-                "preparation": "",
-                "uses": {
-                  "max": "",
-                  "per": ""
-                }
-              }
-            },
-            "value": {},
-            "level": 15,
-            "title": "Features"
-          },
-          {
-            "_id": "85feykdd4eyor8d1",
-            "type": "ItemGrant",
-            "configuration": {
-              "items": [
-                "Compendium.dnd5e.classfeatures.vMxJQEKeK6WwZFaF"
-              ],
-              "optional": false,
-              "spell": {
-                "ability": "",
-                "preparation": "",
-                "uses": {
-                  "max": "",
-                  "per": ""
-                }
-              }
-            },
-            "value": {},
-            "level": 17,
-            "title": "Features"
-          },
-          {
-            "_id": "fd0c4m55mgtb5t8u",
-            "type": "ItemGrant",
-            "configuration": {
-              "items": [
-                "Compendium.dnd5e.classfeatures.0C04rwyvoknvFYiy"
-              ],
-              "optional": false,
-              "spell": {
-                "ability": "",
-                "preparation": "",
-                "uses": {
-                  "max": "",
-                  "per": ""
-                }
-              }
-            },
-            "value": {},
-            "level": 20,
-            "title": "Features"
-          },
-          {
-            "_id": "s35gtvg38bkm24iq",
-            "type": "HitPoints",
-            "configuration": {},
-            "value": {
-              "1": "max"
-            },
-            "title": ""
-          }
-        ],
-        "saves": [
-          "wis",
-          "cha"
-        ],
-        "skills": {
-          "number": 2,
-          "choices": [
-            "arc",
-            "dec",
-            "his",
-            "itm",
-            "inv",
-            "nat",
-            "rel"
-          ],
-          "value": []
-        },
-        "spellcasting": {
-          "progression": "pact",
-          "ability": "cha"
-        }
-      },
-      "effects": [],
-      "folder": null,
-      "sort": 0,
-      "ownership": {
-        "default": 0
-      },
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.dnd5e.classes.7WJp9vhi6F6SlAFa"
-        }
-      },
-      "_stats": {
-        "systemId": null,
-        "systemVersion": null,
-        "coreVersion": null,
-        "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
-      }
-    },
-    {
-      "_id": "8eas0z5toxxu5poz",
-      "name": "Otherworldly Patron",
-      "type": "feat",
-      "img": "icons/sundries/lights/candles-lit-red-evil.webp",
-      "system": {
-        "description": {
-          "value": "<p>At 1st level, you have struck a bargain with an otherworldly being, such as the Fiend. Your choice grants you features at 1st level and again at 6th, 10th, and 14th level.</p>",
-          "chat": "",
-          "unidentified": ""
-        },
-        "source": "SRD 5.1",
-        "activation": {
-          "type": "",
-          "cost": null,
-          "condition": ""
-        },
-        "duration": {
-          "value": "",
-          "units": ""
-        },
-        "cover": null,
-        "target": {
-          "value": null,
-          "width": null,
-          "units": "",
-          "type": ""
-        },
-        "range": {
-          "value": null,
-          "long": null,
-          "units": ""
-        },
-        "uses": {
-          "value": null,
-          "max": "",
-          "per": null,
-          "recovery": ""
-        },
-        "consume": {
-          "type": "",
-          "target": null,
-          "amount": null
-        },
-        "ability": "",
-        "actionType": "",
-        "attackBonus": "",
-        "chatFlavor": "",
-        "critical": {
-          "threshold": null,
-          "damage": ""
-        },
-        "damage": {
-          "parts": [],
-          "versatile": ""
-        },
-        "formula": "",
-        "save": {
-          "ability": "",
-          "dc": null,
-          "scaling": "spell"
-        },
-        "type": {
-          "value": "",
-          "subtype": ""
-        },
-        "requirements": "Warlock 1",
-        "recharge": {
-          "value": null,
-          "charged": false
-        }
-      },
-      "effects": [],
-      "folder": null,
-      "sort": 0,
-      "ownership": {
-        "default": 0
-      },
-      "flags": {
-        "dnd5e": {
-          "sourceId": "Compendium.dnd5e.classfeatures.jTXHaK0vvT5DV3uO",
-          "advancementOrigin": "idbg35ipjfs0tl4o.6wykf1qry5o7swn1"
-        },
-        "core": {
-          "sourceId": "Compendium.dnd5e.classfeatures.jTXHaK0vvT5DV3uO"
-        }
-      },
-      "_stats": {
-        "systemId": null,
-        "systemVersion": null,
-        "coreVersion": null,
-        "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
-      }
-    },
-    {
-      "_id": "thjhxktqgk0fp7jx",
-      "name": "Pact Magic",
-      "type": "feat",
-      "img": "icons/skills/wounds/blood-spurt-spray-red.webp",
-      "system": {
-        "description": {
-          "value": "<p>Your arcane research and the magic bestowed on you by your patron have given you facility with spells.</p>\n<h3>Cantrips</h3>\n<p>You know two cantrips of your choice from the warlock spell list. You learn additional warlock cantrips of your choice at higher levels, as shown in the Cantrips Known column of the Warlock table.</p>\n<h3>Spell Slots</h3>\n<p>The Warlock table shows how many spell slots you have. The table also shows what the level of those slots is; all of your spell slots are the same level. To cast one of your warlock spells of 1st level or higher, you must expend a spell slot. You regain all expended spell slots when you finish a short or long rest.</p><p>For example, when you are 5th level, you have two 3rd-level spell slots. To cast the 1st-level spell thunderwave, you must spend one of those slots, and you cast it as a 3rd-level spell.</p>\n<h3>Spells Known of 1st Level and Higher</h3>\n<p>At 1st level, you know two 1st-level spells of your choice from the warlock spell list.</p><p>The Spells Known column of the Warlock table shows when you learn more warlock spells of your choice of 1st level and higher. A spell you choose must be of a level no higher than what's shown in the table's Slot Level column for your level. When you reach 6th level, for example, you learn a new warlock spell, which can be 1st, 2nd, or 3rd level.</p><p>Additionally, when you gain a level in this class, you can choose one of the warlock spells you know and replace it with another spell from the warlock spell list, which also must be of a level for which you have spell slots.</p>\n<table border=\"0\">\n<thead>\n<tr>\n<td>Level</td>\n<td>Cantrips Known</td>\n<td>Spells Known</td>\n<td>Spell Slots</td>\n<td>Slot Level</td>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>1st</td>\n<td>2</td>\n<td>2</td>\n<td>1</td>\n<td>1st</td>\n</tr>\n<tr>\n<td>2nd</td>\n<td>2</td>\n<td>3</td>\n<td>2</td>\n<td>1st</td>\n</tr>\n<tr>\n<td>3rd</td>\n<td>2</td>\n<td>4</td>\n<td>2</td>\n<td>2nd</td>\n</tr>\n<tr>\n<td>4th</td>\n<td>3</td>\n<td>5</td>\n<td>2</td>\n<td>2nd</td>\n</tr>\n<tr>\n<td>5th</td>\n<td>3</td>\n<td>6</td>\n<td>2</td>\n<td>3rd</td>\n</tr>\n<tr>\n<td>6th</td>\n<td>3</td>\n<td>7</td>\n<td>2</td>\n<td>3rd</td>\n</tr>\n<tr>\n<td>7th</td>\n<td>3</td>\n<td>8</td>\n<td>2</td>\n<td>4th</td>\n</tr>\n<tr>\n<td>8th</td>\n<td>3</td>\n<td>9</td>\n<td>2</td>\n<td>4th</td>\n</tr>\n<tr>\n<td>9th</td>\n<td>3</td>\n<td>10</td>\n<td>2</td>\n<td>5th</td>\n</tr>\n<tr>\n<td>10th</td>\n<td>4</td>\n<td>10</td>\n<td>2</td>\n<td>5th</td>\n</tr>\n<tr>\n<td>11th</td>\n<td>4</td>\n<td>11</td>\n<td>3</td>\n<td>5th</td>\n</tr>\n<tr>\n<td>12th</td>\n<td>4</td>\n<td>11</td>\n<td>3</td>\n<td>5th</td>\n</tr>\n<tr>\n<td>13th</td>\n<td>4</td>\n<td>12</td>\n<td>3</td>\n<td>5th</td>\n</tr>\n<tr>\n<td>14th</td>\n<td>4</td>\n<td>12</td>\n<td>3</td>\n<td>5th</td>\n</tr>\n<tr>\n<td>15th</td>\n<td>4</td>\n<td>13</td>\n<td>3</td>\n<td>5th</td>\n</tr>\n<tr>\n<td>16th</td>\n<td>4</td>\n<td>13</td>\n<td>3</td>\n<td>5th</td>\n</tr>\n<tr>\n<td>17th</td>\n<td>4</td>\n<td>14</td>\n<td>4</td>\n<td>5th</td>\n</tr>\n<tr>\n<td>18th</td>\n<td>4</td>\n<td>14</td>\n<td>4</td>\n<td>5th</td>\n</tr>\n<tr>\n<td>19th</td>\n<td>4</td>\n<td>15</td>\n<td>4</td>\n<td>5th</td>\n</tr>\n<tr>\n<td>20th</td>\n<td>4</td>\n<td>15</td>\n<td>4</td>\n<td>5th</td>\n</tr>\n</tbody>\n</table>\n<h3>Spellcasting Ability</h3>\n<p>Charisma is your spellcasting ability for your warlock spells, so you use your Charisma whenever a spell refers to your spellcasting ability. In addition, you use your Charisma modifier when setting the saving throw DC for a warlock spell you cast and when making an attack roll with one.</p><p><strong>Spell save DC</strong> = 8 + your proficiency bonus + your Charisma modifier</p><p><strong>Spell attack modifier </strong>= your proficiency bonus + your Charisma modifier</p>\n<h3>Spellcasting Focus</h3>\n<p>You can use an arcane focus as a spellcasting focus for your warlock spells.</p>",
-          "chat": "",
-          "unidentified": ""
-        },
-        "source": "SRD 5.1",
-        "activation": {
-          "type": "",
-          "cost": null,
-          "condition": ""
-        },
-        "duration": {
-          "value": "",
-          "units": ""
-        },
-        "cover": null,
-        "target": {
-          "value": null,
-          "width": null,
-          "units": "",
-          "type": ""
-        },
-        "range": {
-          "value": null,
-          "long": null,
-          "units": ""
-        },
-        "uses": {
-          "value": null,
-          "max": "",
-          "per": null,
-          "recovery": ""
-        },
-        "consume": {
-          "type": "",
-          "target": null,
-          "amount": null
-        },
-        "ability": null,
-        "actionType": "",
-        "attackBonus": "",
-        "chatFlavor": "",
-        "critical": {
-          "threshold": null,
-          "damage": ""
-        },
-        "damage": {
-          "parts": [],
-          "versatile": ""
-        },
-        "formula": "",
-        "save": {
-          "ability": "",
-          "dc": null,
-          "scaling": "spell"
-        },
-        "type": {
-          "value": "",
-          "subtype": ""
-        },
-        "requirements": "Warlock 1",
-        "recharge": {
-          "value": null,
-          "charged": false
-        }
-      },
-      "effects": [],
-      "folder": null,
-      "sort": 0,
-      "ownership": {
-        "default": 0
-      },
-      "flags": {
-        "dnd5e": {
-          "sourceId": "Compendium.dnd5e.classfeatures.x6IJZwr6f0SGral7",
-          "advancementOrigin": "idbg35ipjfs0tl4o.6wykf1qry5o7swn1"
-        },
-        "core": {
-          "sourceId": "Compendium.dnd5e.classfeatures.x6IJZwr6f0SGral7"
-        }
-      },
-      "_stats": {
-        "systemId": null,
-        "systemVersion": null,
-        "coreVersion": null,
-        "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
-      }
-    },
-    {
       "_id": "r4vy8utsxo9my9r0",
       "name": "The Fiend",
       "type": "subclass",
@@ -2671,7 +2256,7 @@
             },
             "value": {
               "added": {
-                "59d1unxg1ruc8oyh": "Compendium.dnd5e.classfeatures.Jv0zu4BtUi8bFCqJ"
+                "mbXQrn8QAMAtSSUc": "Compendium.dnd5e.classfeatures.Jv0zu4BtUi8bFCqJ"
               }
             },
             "level": 1,
@@ -2758,113 +2343,12 @@
         }
       },
       "_stats": {
-        "systemId": null,
-        "systemVersion": null,
-        "coreVersion": null,
+        "systemId": "dnd5e",
+        "systemVersion": "2.2.2",
+        "coreVersion": "10.303",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
-      }
-    },
-    {
-      "_id": "59d1unxg1ruc8oyh",
-      "name": "Dark One's Blessing",
-      "type": "feat",
-      "img": "icons/skills/wounds/blood-cells-disease-green.webp",
-      "system": {
-        "description": {
-          "value": "<p>Starting at 1st level, when you reduce a hostile creature to 0 hit points, you gain temporary hit points equal to your Charisma modifier + your warlock level (minimum of 1).</p>",
-          "chat": "",
-          "unidentified": ""
-        },
-        "source": "SRD 5.1",
-        "activation": {
-          "type": "",
-          "cost": null,
-          "condition": ""
-        },
-        "duration": {
-          "value": "",
-          "units": ""
-        },
-        "cover": null,
-        "target": {
-          "value": null,
-          "width": null,
-          "units": "",
-          "type": "self"
-        },
-        "range": {
-          "value": null,
-          "long": null,
-          "units": "self"
-        },
-        "uses": {
-          "value": null,
-          "max": "",
-          "per": null,
-          "recovery": ""
-        },
-        "consume": {
-          "type": "",
-          "target": null,
-          "amount": null
-        },
-        "ability": "cha",
-        "actionType": "heal",
-        "attackBonus": "",
-        "chatFlavor": "",
-        "critical": {
-          "threshold": null,
-          "damage": ""
-        },
-        "damage": {
-          "parts": [
-            [
-              "max(1, @mod + @classes.warlock.levels)",
-              "temphp"
-            ]
-          ],
-          "versatile": ""
-        },
-        "formula": "",
-        "save": {
-          "ability": "",
-          "dc": null,
-          "scaling": "spell"
-        },
-        "type": {
-          "value": "",
-          "subtype": ""
-        },
-        "requirements": "The Fiend 1",
-        "recharge": {
-          "value": null,
-          "charged": false
-        }
-      },
-      "effects": [],
-      "folder": null,
-      "sort": 0,
-      "ownership": {
-        "default": 0
-      },
-      "flags": {
-        "dnd5e": {
-          "sourceId": "Compendium.dnd5e.classfeatures.Jv0zu4BtUi8bFCqJ",
-          "advancementOrigin": "r4vy8utsxo9my9r0.mwpiq5ybhynszxgq"
-        },
-        "core": {
-          "sourceId": "Compendium.dnd5e.classfeatures.Jv0zu4BtUi8bFCqJ"
-        }
-      },
-      "_stats": {
-        "systemId": null,
-        "systemVersion": null,
-        "coreVersion": null,
-        "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1691519206746,
+        "lastModifiedBy": "dnd5ebuilder0000"
       }
     },
     {
@@ -2891,6 +2375,7 @@
           "units": "inst"
         },
         "cover": null,
+        "crewed": false,
         "target": {
           "value": 1,
           "width": null,
@@ -3002,6 +2487,7 @@
           "units": "round"
         },
         "cover": null,
+        "crewed": false,
         "target": {
           "value": 1,
           "width": null,
@@ -3113,6 +2599,7 @@
           "units": "inst"
         },
         "cover": null,
+        "crewed": false,
         "target": {
           "value": 15,
           "width": null,
@@ -3224,6 +2711,7 @@
           "units": "round"
         },
         "cover": null,
+        "crewed": false,
         "target": {
           "value": 1,
           "width": null,
@@ -3335,6 +2823,883 @@
         "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_id": "8uFLMKLwRO7Y5Xl2"
+    },
+    {
+      "_id": "MuaNnEZkswuhixJP",
+      "name": "Warlock",
+      "type": "class",
+      "img": "icons/creatures/mammals/bat-giant-tattered-purple.webp",
+      "system": {
+        "description": {
+          "value": "<p>As a warlock, you gain the following class features.</p><h3>Hit Points</h3><p><strong>Hit Dice:</strong> 1d8 per warlock level<br /><strong>Hit Points at 1st Level:</strong> 8 + your Constitution modifier<br /><strong>Hit Points at Higher Levels:</strong> 1d8 (or 5) + your Constitution modifier per warlock level after 1st</p><h3>Proficiencies</h3><p><strong>Armor:</strong> Light armor<br /><strong>Weapons:</strong> Simple weapons<br /><strong>Tools:</strong> None<br /><strong>Saving Throws:</strong> Wisdom, Charisma<br /><strong>Skills:</strong> Choose two skills from Arcana, Deception, History, Intimidation, Investigation, Nature, and Religion</p><h3>Equipment</h3><p>You start with the following equipment, in addition to the equipment granted by your background:</p><ul><li>(a) a light crossbow and 20 bolts or (b) any simple weapon</li><li>(a) a component pouch or (b) an arcane focus</li><li>(a) a scholar's pack or (b) a dungeoneer's pack</li><li>Leather armor, any simple weapon, and two daggers</li></ul><h1>Warlock Advancement</h1><table border=\"0\"><thead><tr><td>Level</td><td>Proficiency Bonus</td><td>Features</td><td>Invocations Known</td></tr></thead><tbody><tr><td>1st</td><td>+2</td><td>@Compendium[dnd5e.classfeatures.jTXHaK0vvT5DV3uO]{Otherworldly Patron}, @Compendium[dnd5e.classfeatures.x6IJZwr6f0SGral7]{Pact Magic}</td><td>̶</td></tr><tr><td>2nd</td><td>+2</td><td>@Compendium[dnd5e.classfeatures.8MlxM2nEfE3Q0EVk]{Eldritch Invocations}</td><td>2</td></tr><tr><td>3rd</td><td>+2</td><td>@Compendium[dnd5e.classfeatures.QwgfIpCN8VWfoUtX]{Pact Boon}</td><td>2</td></tr><tr><td>4th</td><td>+2</td><td>@Compendium[dnd5e.classfeatures.s0Cc2zcX0JzIgam5]{Ability Score Improvement}</td><td>2</td></tr><tr><td>5th</td><td>+3</td><td>3rd Level Spells, +1 Invocation</td><td>3</td></tr><tr><td>6th</td><td>+3</td><td>Otherworldly Patron feature</td><td>3</td></tr><tr><td>7th</td><td>+3</td><td>4th Level Spells, +1 Invocation</td><td>4</td></tr><tr><td>8th</td><td>+3</td><td>@Compendium[dnd5e.classfeatures.s0Cc2zcX0JzIgam5]{Ability Score Improvement}</td><td>4</td></tr><tr><td>9th</td><td>+4</td><td>5th Level Spells, +1 Invocation</td><td>5</td></tr><tr><td>10th</td><td>+4</td><td>Otherworldly Patron feature</td><td>5</td></tr><tr><td>11th</td><td>+4</td><td>@Compendium[dnd5e.classfeatures.zB77V8BcCJvWVxck]{Mystic Arcanum (6th-Level Spell)}</td><td>5</td></tr><tr><td>12th</td><td>+4</td><td>@Compendium[dnd5e.classfeatures.s0Cc2zcX0JzIgam5]{Ability Score Improvement}, +1 Invocation</td><td>6</td></tr><tr><td>13th</td><td>+5</td><td>@Compendium[dnd5e.classfeatures.zB77V8BcCJvWVxck]{Mystic Arcanum (7th-Level Spell)}</td><td>6</td></tr><tr><td>14th</td><td>+5</td><td>Otherworldly Patron feature</td><td>6</td></tr><tr><td>15th</td><td>+5</td><td>@Compendium[dnd5e.classfeatures.zB77V8BcCJvWVxck]{Mystic Arcanum (8th-Level Spell)}, +1 Invocation</td><td>7</td></tr><tr><td>16th</td><td>+5</td><td>@Compendium[dnd5e.classfeatures.s0Cc2zcX0JzIgam5]{Ability Score Improvement}</td><td>7</td></tr><tr><td>17th</td><td>+6</td><td>@Compendium[dnd5e.classfeatures.zB77V8BcCJvWVxck]{Mystic Arcanum (9th-Level Spell)}</td><td>7</td></tr><tr><td>18th</td><td>+6</td><td>+1 Invocation</td><td>8</td></tr><tr><td>19th</td><td>+6</td><td>@Compendium[dnd5e.classfeatures.s0Cc2zcX0JzIgam5]{Ability Score Improvement}</td><td>8</td></tr><tr><td>20th</td><td>+6</td><td>@Compendium[dnd5e.classfeatures.0C04rwyvoknvFYiy]{Eldritch Master}</td><td>8</td></tr></tbody></table><hr /><h3>Your Pact Boon</h3><p>Each Pact Boon option produces a special creature or an object that reflects your patron's nature.</p><p><em><strong>Pact of the Chain. </strong></em>Your familiar is more cunning than a typical familiar. Its default form can be a reflection of your patron, with imps and quasits tied to the Fiend.</p><p><em><strong>Pact of the Blade. </strong></em>If you serve the Fiend, your weapon could be an axe made of black metal and adorned with decorative flames.</p><p><em><strong>Pact of the Tome. </strong></em>Your Book of Shadows could be a weighty tome bound in demon hide studded with iron, holding spells of conjuration and a wealth of forbidden lore about the sinister regions of the cosmos, a gift of the Fiend.</p><hr /><h1>Otherworldly Patrons</h1><p>The beings that serve as patrons for warlocks are mighty inhabitants of other planes of existence—not gods, but almost godlike in their power. Various patrons give their warlocks access to different powers and invocations, and expect significant favors in return.</p><p>Some patrons collect warlocks, doling out mystic knowledge relatively freely or boasting of their ability to bind mortals to their will. Other patrons bestow their power only grudgingly, and might make a pact with only one warlock. Warlocks who serve the same patron might view each other as allies, siblings, or rivals.</p><p>@Compendium[dnd5e.subclasses.WPFVBg589uI8iOMH]{The Fiend}</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "SRD 5.1",
+        "identifier": "warlock",
+        "levels": 1,
+        "hitDice": "d8",
+        "hitDiceUsed": 0,
+        "advancement": [
+          {
+            "type": "HitPoints",
+            "configuration": {},
+            "value": {
+              "1": "max"
+            },
+            "title": "Hit Points",
+            "icon": "systems/dnd5e/icons/svg/hit-points.svg",
+            "_id": "m04qS9GheCqdni2h"
+          },
+          {
+            "type": "ItemGrant",
+            "configuration": {
+              "items": [
+                "Compendium.dnd5e.classfeatures.jTXHaK0vvT5DV3uO",
+                "Compendium.dnd5e.classfeatures.x6IJZwr6f0SGral7"
+              ],
+              "optional": false,
+              "spell": {
+                "ability": "",
+                "preparation": "",
+                "uses": {
+                  "max": "",
+                  "per": ""
+                }
+              }
+            },
+            "value": {
+              "added": {
+                "O5nhueIb5HIil0eh": "Compendium.dnd5e.classfeatures.jTXHaK0vvT5DV3uO",
+                "uf6mKJJICzDHiWly": "Compendium.dnd5e.classfeatures.x6IJZwr6f0SGral7"
+              }
+            },
+            "level": 1,
+            "title": "Features",
+            "icon": "systems/dnd5e/icons/svg/item-grant.svg",
+            "_id": "AXY5iebZXk6dv5cn"
+          },
+          {
+            "type": "ItemGrant",
+            "configuration": {
+              "items": [
+                "Compendium.dnd5e.classfeatures.8MlxM2nEfE3Q0EVk"
+              ],
+              "optional": false,
+              "spell": {
+                "ability": "",
+                "preparation": "",
+                "uses": {
+                  "max": "",
+                  "per": ""
+                }
+              }
+            },
+            "value": {},
+            "level": 2,
+            "title": "Features",
+            "icon": "systems/dnd5e/icons/svg/item-grant.svg",
+            "_id": "5FXyMXNNqax59haT"
+          },
+          {
+            "type": "ItemGrant",
+            "configuration": {
+              "items": [
+                "Compendium.dnd5e.classfeatures.QwgfIpCN8VWfoUtX"
+              ],
+              "optional": false,
+              "spell": {
+                "ability": "",
+                "preparation": "",
+                "uses": {
+                  "max": "",
+                  "per": ""
+                }
+              }
+            },
+            "value": {},
+            "level": 3,
+            "title": "Features",
+            "icon": "systems/dnd5e/icons/svg/item-grant.svg",
+            "_id": "OuBVlt2PDTT7vBoB"
+          },
+          {
+            "type": "ItemGrant",
+            "configuration": {
+              "items": [
+                "Compendium.dnd5e.classfeatures.zB77V8BcCJvWVxck"
+              ],
+              "optional": false,
+              "spell": {
+                "ability": "",
+                "preparation": "",
+                "uses": {
+                  "max": "",
+                  "per": ""
+                }
+              }
+            },
+            "value": {},
+            "level": 11,
+            "title": "Features",
+            "icon": "systems/dnd5e/icons/svg/item-grant.svg",
+            "_id": "Ah54Qpu2mLCMZNay"
+          },
+          {
+            "type": "ItemGrant",
+            "configuration": {
+              "items": [
+                "Compendium.dnd5e.classfeatures.0C04rwyvoknvFYiy"
+              ],
+              "optional": false,
+              "spell": {
+                "ability": "",
+                "preparation": "",
+                "uses": {
+                  "max": "",
+                  "per": ""
+                }
+              }
+            },
+            "value": {},
+            "level": 20,
+            "title": "Features",
+            "icon": "systems/dnd5e/icons/svg/item-grant.svg",
+            "_id": "sKx7KLPkzjGf2sA1"
+          },
+          {
+            "type": "ItemChoice",
+            "configuration": {
+              "hint": "If an eldritch invocation has prerequisites, you must meet them to learn it. You can learn the invocation at the same time that you meet its prerequisites. A level prerequisite refers to your level in this class.",
+              "choices": {
+                "2": 2,
+                "5": 1,
+                "7": 1,
+                "9": 1,
+                "12": 1,
+                "15": 1,
+                "18": 1
+              },
+              "allowDrops": true,
+              "type": "feat",
+              "pool": [
+                "Compendium.dnd5e.classfeatures.2fyuw7MiCnocDeAU",
+                "Compendium.dnd5e.classfeatures.alUqO6c6OEKFQJdb",
+                "Compendium.dnd5e.classfeatures.QEuH5TeBN4PPYT2g",
+                "Compendium.dnd5e.classfeatures.61kXR1sniXHjvN17",
+                "Compendium.dnd5e.classfeatures.eNvpIaSnJUdF8fHl",
+                "Compendium.dnd5e.classfeatures.KygHql3cTj4IRrvZ",
+                "Compendium.dnd5e.classfeatures.CFIYXDmbmSP8BXjN",
+                "Compendium.dnd5e.classfeatures.Phy02H5x0TKHd7T3",
+                "Compendium.dnd5e.classfeatures.3sN91lT1R3oxcDKd",
+                "Compendium.dnd5e.classfeatures.QBk1RsuTIEF4GEBC",
+                "Compendium.dnd5e.classfeatures.bbUEsCPTLzbbwK6o",
+                "Compendium.dnd5e.classfeatures.r01WtcxTg4yTHm9m",
+                "Compendium.dnd5e.classfeatures.lEZKbWaVrSljRa9n",
+                "Compendium.dnd5e.classfeatures.id0gmGvzNZBEdzbx",
+                "Compendium.dnd5e.classfeatures.65ReXU4ZWqcSs3Cm",
+                "Compendium.dnd5e.classfeatures.zUIAzBnyt0NDvVXb",
+                "Compendium.dnd5e.classfeatures.MhJfdBl1B7PdU4oZ",
+                "Compendium.dnd5e.classfeatures.lxfdjLer3uKjyZqU",
+                "Compendium.dnd5e.classfeatures.QnRKYXb2bXpnNd2k",
+                "Compendium.dnd5e.classfeatures.DjXi0IkCTbJx1gsp",
+                "Compendium.dnd5e.classfeatures.k5DU0mMuYVHejiqz",
+                "Compendium.dnd5e.classfeatures.KfnUyjUWAk0bAAus",
+                "Compendium.dnd5e.classfeatures.8zciiglzEOZo7DDN",
+                "Compendium.dnd5e.classfeatures.rdBPd6CwqXT64iJM",
+                "Compendium.dnd5e.classfeatures.Xa2MLUJGCReJ28B7",
+                "Compendium.dnd5e.classfeatures.dTSV0xZMpY5CxkRk",
+                "Compendium.dnd5e.classfeatures.rhbwDZ9XNTmdkX2u",
+                "Compendium.dnd5e.classfeatures.pJADgAxxefgcATWr",
+                "Compendium.dnd5e.classfeatures.zYIdNAjqRyhS6qWs",
+                "Compendium.dnd5e.classfeatures.k5M8gsl7MMcdjOjs",
+                "Compendium.dnd5e.classfeatures.gFjxo01hAN4c9hDG",
+                "Compendium.dnd5e.classfeatures.snsjxGfmzWfZR5Nh"
+              ],
+              "spell": {
+                "ability": "",
+                "preparation": "",
+                "uses": {
+                  "max": "",
+                  "per": ""
+                }
+              },
+              "restriction": {
+                "type": "class",
+                "subtype": "eldritchInvocation",
+                "level": ""
+              }
+            },
+            "value": {},
+            "title": "Eldritch Invocations",
+            "icon": "systems/dnd5e/icons/svg/item-choice.svg",
+            "_id": "SQoedRgBg4CZ2Twb"
+          },
+          {
+            "type": "ItemChoice",
+            "configuration": {
+              "hint": "",
+              "choices": {
+                "3": 1
+              },
+              "allowDrops": true,
+              "type": "feat",
+              "pool": [
+                "Compendium.dnd5e.classfeatures.9dSSa68mIPoX2ezA",
+                "Compendium.dnd5e.classfeatures.Ic1CSjvbWKudVUv9",
+                "Compendium.dnd5e.classfeatures.MYM908WLZ1lVvA1u"
+              ],
+              "spell": {
+                "ability": "",
+                "preparation": "",
+                "uses": {
+                  "max": "",
+                  "per": ""
+                }
+              },
+              "restriction": {
+                "type": "class",
+                "subtype": "pact",
+                "level": ""
+              }
+            },
+            "value": {},
+            "title": "Pact Boon",
+            "icon": "systems/dnd5e/icons/svg/item-choice.svg",
+            "_id": "iKtAzqSlqwkihQn0"
+          },
+          {
+            "type": "ItemChoice",
+            "configuration": {
+              "hint": "Choose one 6th-level spell from the warlock spell list as this arcanum.",
+              "choices": {
+                "11": 1
+              },
+              "allowDrops": true,
+              "type": "spell",
+              "pool": [],
+              "spell": {
+                "ability": "",
+                "preparation": "atwill",
+                "uses": {
+                  "max": "1",
+                  "per": "lr"
+                }
+              },
+              "restriction": {
+                "type": "",
+                "subtype": "",
+                "level": "6"
+              }
+            },
+            "value": {},
+            "title": "Mystic Arcanum (6th level)",
+            "icon": "systems/dnd5e/icons/svg/item-choice.svg",
+            "_id": "a5VTIGe3lNEp2OYv"
+          },
+          {
+            "type": "ItemChoice",
+            "configuration": {
+              "hint": "Choose one 7th-level spell from the warlock spell list as this arcanum.",
+              "choices": {
+                "13": 1
+              },
+              "allowDrops": true,
+              "type": "spell",
+              "pool": [],
+              "spell": {
+                "ability": "",
+                "preparation": "atwill",
+                "uses": {
+                  "max": "1",
+                  "per": "lr"
+                }
+              },
+              "restriction": {
+                "type": "",
+                "subtype": "",
+                "level": "7"
+              }
+            },
+            "value": {},
+            "title": "Mystic Arcanum (7th level)",
+            "icon": "systems/dnd5e/icons/svg/item-choice.svg",
+            "_id": "hJxRoMZ5YaI2Y9F2"
+          },
+          {
+            "type": "ItemChoice",
+            "configuration": {
+              "hint": "Choose one 8th-level spell from the warlock spell list as this arcanum.",
+              "choices": {
+                "15": 1
+              },
+              "allowDrops": true,
+              "type": "spell",
+              "pool": [],
+              "spell": {
+                "ability": "",
+                "preparation": "atwill",
+                "uses": {
+                  "max": "1",
+                  "per": "lr"
+                }
+              },
+              "restriction": {
+                "type": "",
+                "subtype": "",
+                "level": "8"
+              }
+            },
+            "value": {},
+            "title": "Mystic Arcanum (8th level)",
+            "icon": "systems/dnd5e/icons/svg/item-choice.svg",
+            "_id": "Q3rKUfFElP8Z7cFI"
+          },
+          {
+            "type": "ItemChoice",
+            "configuration": {
+              "hint": "Choose one 9th-level spell from the warlock spell list as this arcanum.",
+              "choices": {
+                "17": 1
+              },
+              "allowDrops": true,
+              "type": "spell",
+              "pool": [],
+              "spell": {
+                "ability": "",
+                "preparation": "atwill",
+                "uses": {
+                  "max": "1",
+                  "per": "lr"
+                }
+              },
+              "restriction": {
+                "type": "",
+                "subtype": "",
+                "level": "9"
+              }
+            },
+            "value": {},
+            "title": "Mystic Arcanum (9th level)",
+            "icon": "systems/dnd5e/icons/svg/item-choice.svg",
+            "_id": "wJntS4cUC6RaV7ie"
+          },
+          {
+            "type": "ScaleValue",
+            "configuration": {
+              "identifier": "cantrips-known",
+              "type": "number",
+              "distance": {
+                "units": ""
+              },
+              "scale": {
+                "1": {
+                  "value": 2
+                },
+                "4": {
+                  "value": 3
+                },
+                "10": {
+                  "value": 4
+                }
+              }
+            },
+            "value": {},
+            "title": "Cantrips Known",
+            "icon": "systems/dnd5e/icons/svg/scale-value.svg",
+            "_id": "OcM7blwWM7CgNbMS"
+          },
+          {
+            "type": "ScaleValue",
+            "configuration": {
+              "identifier": "spells-known",
+              "type": "number",
+              "distance": {
+                "units": ""
+              },
+              "scale": {
+                "1": {
+                  "value": 2
+                },
+                "2": {
+                  "value": 3
+                },
+                "3": {
+                  "value": 4
+                },
+                "4": {
+                  "value": 5
+                },
+                "5": {
+                  "value": 6
+                },
+                "6": {
+                  "value": 7
+                },
+                "7": {
+                  "value": 8
+                },
+                "8": {
+                  "value": 9
+                },
+                "9": {
+                  "value": 10
+                },
+                "11": {
+                  "value": 11
+                },
+                "13": {
+                  "value": 12
+                },
+                "15": {
+                  "value": 13
+                },
+                "17": {
+                  "value": 14
+                },
+                "19": {
+                  "value": 15
+                }
+              }
+            },
+            "value": {},
+            "title": "Spells Known",
+            "icon": "systems/dnd5e/icons/svg/scale-value.svg",
+            "_id": "rdzbe2Dv8SaD3YUS"
+          },
+          {
+            "type": "AbilityScoreImprovement",
+            "configuration": {
+              "points": 2,
+              "fixed": {
+                "str": 0,
+                "dex": 0,
+                "con": 0,
+                "int": 0,
+                "wis": 0,
+                "cha": 0
+              }
+            },
+            "value": {
+              "type": "asi"
+            },
+            "level": 4,
+            "title": "Ability Score Improvement",
+            "icon": "systems/dnd5e/icons/svg/ability-score-improvement.svg",
+            "_id": "X6UIWFe7JZzFry7f"
+          },
+          {
+            "type": "AbilityScoreImprovement",
+            "configuration": {
+              "points": 2,
+              "fixed": {
+                "str": 0,
+                "dex": 0,
+                "con": 0,
+                "int": 0,
+                "wis": 0,
+                "cha": 0
+              }
+            },
+            "value": {
+              "type": "asi"
+            },
+            "level": 8,
+            "title": "Ability Score Improvement",
+            "icon": "systems/dnd5e/icons/svg/ability-score-improvement.svg",
+            "_id": "C4uqRD1mSOxKF11n"
+          },
+          {
+            "type": "AbilityScoreImprovement",
+            "configuration": {
+              "points": 2,
+              "fixed": {
+                "str": 0,
+                "dex": 0,
+                "con": 0,
+                "int": 0,
+                "wis": 0,
+                "cha": 0
+              }
+            },
+            "value": {
+              "type": "asi"
+            },
+            "level": 12,
+            "title": "Ability Score Improvement",
+            "icon": "systems/dnd5e/icons/svg/ability-score-improvement.svg",
+            "_id": "unXUZVn2otlBmtvI"
+          },
+          {
+            "type": "AbilityScoreImprovement",
+            "configuration": {
+              "points": 2,
+              "fixed": {
+                "str": 0,
+                "dex": 0,
+                "con": 0,
+                "int": 0,
+                "wis": 0,
+                "cha": 0
+              }
+            },
+            "value": {
+              "type": "asi"
+            },
+            "level": 16,
+            "title": "Ability Score Improvement",
+            "icon": "systems/dnd5e/icons/svg/ability-score-improvement.svg",
+            "_id": "EZfVebBnXF8yILKN"
+          },
+          {
+            "_id": "puDaUsYrlks0z5gm",
+            "type": "AbilityScoreImprovement",
+            "configuration": {
+              "points": 2,
+              "fixed": {
+                "str": 0,
+                "dex": 0,
+                "con": 0,
+                "int": 0,
+                "wis": 0,
+                "cha": 0
+              }
+            },
+            "value": {
+              "type": "asi"
+            },
+            "level": 19,
+            "title": ""
+          }
+        ],
+        "saves": [
+          "wis",
+          "cha"
+        ],
+        "skills": {
+          "number": 2,
+          "choices": [
+            "arc",
+            "dec",
+            "his",
+            "itm",
+            "inv",
+            "nat",
+            "rel"
+          ],
+          "value": []
+        },
+        "spellcasting": {
+          "progression": "pact",
+          "ability": "cha"
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.classes.7WJp9vhi6F6SlAFa"
+        }
+      },
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.2.2",
+        "coreVersion": "10.303",
+        "createdTime": 1661787234278,
+        "modifiedTime": 1691519206763,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      }
+    },
+    {
+      "_id": "O5nhueIb5HIil0eh",
+      "name": "Otherworldly Patron",
+      "ownership": {
+        "default": 0
+      },
+      "type": "feat",
+      "system": {
+        "description": {
+          "value": "<p>At 1st level, you have struck a bargain with an otherworldly being, such as the Fiend. Your choice grants you features at 1st level and again at 6th, 10th, and 14th level.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "SRD 5.1",
+        "activation": {
+          "type": "",
+          "cost": null,
+          "condition": ""
+        },
+        "duration": {
+          "value": "",
+          "units": ""
+        },
+        "cover": null,
+        "crewed": false,
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": ""
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": ""
+        },
+        "uses": {
+          "value": null,
+          "max": "",
+          "per": null,
+          "recovery": ""
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null
+        },
+        "ability": "",
+        "actionType": "",
+        "attackBonus": "",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "type": {
+          "value": "class",
+          "subtype": ""
+        },
+        "requirements": "Warlock 1",
+        "recharge": {
+          "value": null,
+          "charged": false
+        }
+      },
+      "sort": 0,
+      "flags": {
+        "dnd5e": {
+          "sourceId": "Compendium.dnd5e.classfeatures.jTXHaK0vvT5DV3uO",
+          "advancementOrigin": "MuaNnEZkswuhixJP.AXY5iebZXk6dv5cn"
+        }
+      },
+      "img": "icons/sundries/lights/candles-lit-red-evil.webp",
+      "effects": [],
+      "folder": null,
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.2.2",
+        "coreVersion": "10.303",
+        "createdTime": 1661787234413,
+        "modifiedTime": 1691519206764,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      }
+    },
+    {
+      "_id": "uf6mKJJICzDHiWly",
+      "name": "Pact Magic",
+      "ownership": {
+        "default": 0
+      },
+      "type": "feat",
+      "system": {
+        "description": {
+          "value": "<p>Your arcane research and the magic bestowed on you by your patron have given you facility with spells.</p>\n<h5>Cantrips</h5>\n<p>You know two cantrips of your choice from the warlock spell list. You learn additional warlock cantrips of your choice at higher levels, as shown in the Cantrips Known column of the Warlock table.</p>\n<h5>Spell Slots</h5>\n<p>The Warlock table shows how many spell slots you have. The table also shows what the level of those slots is; all of your spell slots are the same level. To cast one of your warlock spells of 1st level or higher, you must expend a spell slot. You regain all expended spell slots when you finish a short or long rest.</p>\n<p>For example, when you are 5th level, you have two 3rd-level spell slots. To cast the 1st-level spell thunderwave, you must spend one of those slots, and you cast it as a 3rd-level spell.</p>\n<h5>Spells Known of 1st Level and Higher</h5>\n<p>At 1st level, you know two 1st-level spells of your choice from the warlock spell list.</p>\n<p>The Spells Known column of the Warlock table shows when you learn more warlock spells of your choice of 1st level and higher. A spell you choose must be of a level no higher than what's shown in the table's Slot Level column for your level. When you reach 6th level, for example, you learn a new warlock spell, which can be 1st, 2nd, or 3rd level.</p>\n<p>Additionally, when you gain a level in this class, you can choose one of the warlock spells you know and replace it with another spell from the warlock spell list, which also must be of a level for which you have spell slots.</p>\n<h5>Spellcasting Ability</h5>\n<p>Charisma is your spellcasting ability for your warlock spells, so you use your Charisma whenever a spell refers to your spellcasting ability. In addition, you use your Charisma modifier when setting the saving throw DC for a warlock spell you cast and when making an attack roll with one.</p>\n<p><strong>Spell save DC</strong> = 8 + your proficiency bonus + your Charisma modifier</p>\n<p><strong>Spell attack modifier </strong>= your proficiency bonus + your Charisma modifier</p>\n<h5>Spellcasting Focus</h5>\n<p>You can use an arcane focus as a spellcasting focus for your warlock spells.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "SRD 5.1",
+        "activation": {
+          "type": "",
+          "cost": null,
+          "condition": ""
+        },
+        "duration": {
+          "value": "",
+          "units": ""
+        },
+        "cover": null,
+        "crewed": false,
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": ""
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": ""
+        },
+        "uses": {
+          "value": null,
+          "max": "",
+          "per": null,
+          "recovery": ""
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null
+        },
+        "ability": null,
+        "actionType": "",
+        "attackBonus": "",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "type": {
+          "value": "class",
+          "subtype": ""
+        },
+        "requirements": "Warlock 1",
+        "recharge": {
+          "value": null,
+          "charged": false
+        }
+      },
+      "flags": {
+        "dnd5e": {
+          "sourceId": "Compendium.dnd5e.classfeatures.x6IJZwr6f0SGral7",
+          "advancementOrigin": "MuaNnEZkswuhixJP.AXY5iebZXk6dv5cn"
+        }
+      },
+      "img": "icons/skills/wounds/blood-spurt-spray-red.webp",
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.2.2",
+        "coreVersion": "10.303",
+        "createdTime": 1661787234440,
+        "modifiedTime": 1691519206766,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      }
+    },
+    {
+      "_id": "mbXQrn8QAMAtSSUc",
+      "name": "Dark One's Blessing",
+      "ownership": {
+        "default": 0
+      },
+      "type": "feat",
+      "system": {
+        "description": {
+          "value": "<p>Starting at 1st level, when you reduce a hostile creature to 0 hit points, you gain temporary hit points equal to your Charisma modifier + your warlock level (minimum of 1).</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "SRD 5.1",
+        "activation": {
+          "type": "",
+          "cost": null,
+          "condition": ""
+        },
+        "duration": {
+          "value": "",
+          "units": ""
+        },
+        "cover": null,
+        "crewed": false,
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": "self"
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": "self"
+        },
+        "uses": {
+          "value": null,
+          "max": "",
+          "per": null,
+          "recovery": ""
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null
+        },
+        "ability": "cha",
+        "actionType": "heal",
+        "attackBonus": "",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [
+            [
+              "max(1, @mod + @classes.warlock.levels)",
+              "temphp"
+            ]
+          ],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "type": {
+          "value": "class",
+          "subtype": ""
+        },
+        "requirements": "The Fiend 1",
+        "recharge": {
+          "value": null,
+          "charged": false
+        }
+      },
+      "flags": {
+        "dnd5e": {
+          "sourceId": "Compendium.dnd5e.classfeatures.Jv0zu4BtUi8bFCqJ",
+          "advancementOrigin": "r4vy8utsxo9my9r0.mwpiq5ybhynszxgq"
+        }
+      },
+      "img": "icons/skills/wounds/blood-cells-disease-green.webp",
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.2.2",
+        "coreVersion": "10.303",
+        "createdTime": 1661787234360,
+        "modifiedTime": 1691519206767,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      }
     }
   ],
   "effects": [],
@@ -3346,10 +3711,10 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.1.0",
-    "coreVersion": "10.291",
+    "systemVersion": "2.2.2",
+    "coreVersion": "10.303",
     "createdTime": 1661787232167,
-    "modifiedTime": 1673040964521,
+    "modifiedTime": 1691519206781,
     "lastModifiedBy": "dnd5ebuilder0000"
   }
 }

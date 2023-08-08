@@ -20,8 +20,7 @@
         "configuration": {},
         "value": {},
         "title": "Hit Points",
-        "icon": "systems/dnd5e/icons/svg/hit-points.svg",
-        "_id": "JG49SkRWF9gsjjaz"
+        "icon": "systems/dnd5e/icons/svg/hit-points.svg"
       },
       {
         "type": "ItemGrant",
@@ -43,8 +42,7 @@
         "value": {},
         "level": 1,
         "title": "Features",
-        "icon": "systems/dnd5e/icons/svg/item-grant.svg",
-        "_id": "CTXxqx6wWRDPJm3q"
+        "icon": "systems/dnd5e/icons/svg/item-grant.svg"
       },
       {
         "type": "ItemGrant",
@@ -65,8 +63,7 @@
         "value": {},
         "level": 2,
         "title": "Features",
-        "icon": "systems/dnd5e/icons/svg/item-grant.svg",
-        "_id": "PpkmGUiRo0L2w9zJ"
+        "icon": "systems/dnd5e/icons/svg/item-grant.svg"
       },
       {
         "type": "ItemGrant",
@@ -87,8 +84,7 @@
         "value": {},
         "level": 3,
         "title": "Features",
-        "icon": "systems/dnd5e/icons/svg/item-grant.svg",
-        "_id": "l35r7BpWacFCcB55"
+        "icon": "systems/dnd5e/icons/svg/item-grant.svg"
       },
       {
         "type": "ItemGrant",
@@ -109,8 +105,7 @@
         "value": {},
         "level": 11,
         "title": "Features",
-        "icon": "systems/dnd5e/icons/svg/item-grant.svg",
-        "_id": "Uv6gfpKlX7VuUIzV"
+        "icon": "systems/dnd5e/icons/svg/item-grant.svg"
       },
       {
         "type": "ItemGrant",
@@ -131,8 +126,7 @@
         "value": {},
         "level": 20,
         "title": "Features",
-        "icon": "systems/dnd5e/icons/svg/item-grant.svg",
-        "_id": "A4913hve41H0jMBI"
+        "icon": "systems/dnd5e/icons/svg/item-grant.svg"
       },
       {
         "type": "ItemChoice",
@@ -199,11 +193,9 @@
         },
         "value": {},
         "title": "Eldritch Invocations",
-        "icon": "systems/dnd5e/icons/svg/item-choice.svg",
-        "_id": "hgJOlQF2FQFsYLJX"
+        "icon": "systems/dnd5e/icons/svg/item-choice.svg"
       },
       {
-        "_id": "yp6TSLjV1mbXZvxY",
         "type": "ItemChoice",
         "configuration": {
           "hint": "",
@@ -232,7 +224,8 @@
           }
         },
         "value": {},
-        "title": "Pact Boon"
+        "title": "Pact Boon",
+        "icon": "systems/dnd5e/icons/svg/item-choice.svg"
       },
       {
         "type": "ItemChoice",
@@ -260,8 +253,7 @@
         },
         "value": {},
         "title": "Mystic Arcanum (6th level)",
-        "icon": "systems/dnd5e/icons/svg/item-choice.svg",
-        "_id": "uDlTTHDRbXUEzH2d"
+        "icon": "systems/dnd5e/icons/svg/item-choice.svg"
       },
       {
         "type": "ItemChoice",
@@ -289,8 +281,7 @@
         },
         "value": {},
         "title": "Mystic Arcanum (7th level)",
-        "icon": "systems/dnd5e/icons/svg/item-choice.svg",
-        "_id": "iH6VBdqSWfaA6vB3"
+        "icon": "systems/dnd5e/icons/svg/item-choice.svg"
       },
       {
         "type": "ItemChoice",
@@ -318,8 +309,7 @@
         },
         "value": {},
         "title": "Mystic Arcanum (8th level)",
-        "icon": "systems/dnd5e/icons/svg/item-choice.svg",
-        "_id": "4VUigbK2HjMOQhjj"
+        "icon": "systems/dnd5e/icons/svg/item-choice.svg"
       },
       {
         "type": "ItemChoice",
@@ -347,8 +337,7 @@
         },
         "value": {},
         "title": "Mystic Arcanum (9th level)",
-        "icon": "systems/dnd5e/icons/svg/item-choice.svg",
-        "_id": "Su5nSzwebr6lRLFU"
+        "icon": "systems/dnd5e/icons/svg/item-choice.svg"
       },
       {
         "type": "ScaleValue",
@@ -372,8 +361,7 @@
         },
         "value": {},
         "title": "Cantrips Known",
-        "icon": "systems/dnd5e/icons/svg/scale-value.svg",
-        "_id": "AxsRfI4bPLivAYfw"
+        "icon": "systems/dnd5e/icons/svg/scale-value.svg"
       },
       {
         "type": "ScaleValue",
@@ -430,8 +418,107 @@
         },
         "value": {},
         "title": "Spells Known",
-        "icon": "systems/dnd5e/icons/svg/scale-value.svg",
-        "_id": "cylJPEI7kXy37tTb"
+        "icon": "systems/dnd5e/icons/svg/scale-value.svg"
+      },
+      {
+        "type": "AbilityScoreImprovement",
+        "configuration": {
+          "points": 2,
+          "fixed": {
+            "str": 0,
+            "dex": 0,
+            "con": 0,
+            "int": 0,
+            "wis": 0,
+            "cha": 0
+          }
+        },
+        "value": {
+          "type": "asi"
+        },
+        "level": 4,
+        "title": "Ability Score Improvement",
+        "icon": "systems/dnd5e/icons/svg/ability-score-improvement.svg"
+      },
+      {
+        "type": "AbilityScoreImprovement",
+        "configuration": {
+          "points": 2,
+          "fixed": {
+            "str": 0,
+            "dex": 0,
+            "con": 0,
+            "int": 0,
+            "wis": 0,
+            "cha": 0
+          }
+        },
+        "value": {
+          "type": "asi"
+        },
+        "level": 8,
+        "title": "Ability Score Improvement",
+        "icon": "systems/dnd5e/icons/svg/ability-score-improvement.svg"
+      },
+      {
+        "type": "AbilityScoreImprovement",
+        "configuration": {
+          "points": 2,
+          "fixed": {
+            "str": 0,
+            "dex": 0,
+            "con": 0,
+            "int": 0,
+            "wis": 0,
+            "cha": 0
+          }
+        },
+        "value": {
+          "type": "asi"
+        },
+        "level": 12,
+        "title": "Ability Score Improvement",
+        "icon": "systems/dnd5e/icons/svg/ability-score-improvement.svg"
+      },
+      {
+        "type": "AbilityScoreImprovement",
+        "configuration": {
+          "points": 2,
+          "fixed": {
+            "str": 0,
+            "dex": 0,
+            "con": 0,
+            "int": 0,
+            "wis": 0,
+            "cha": 0
+          }
+        },
+        "value": {
+          "type": "asi"
+        },
+        "level": 16,
+        "title": "Ability Score Improvement",
+        "icon": "systems/dnd5e/icons/svg/ability-score-improvement.svg"
+      },
+      {
+        "_id": "puDaUsYrlks0z5gm",
+        "type": "AbilityScoreImprovement",
+        "configuration": {
+          "points": 2,
+          "fixed": {
+            "str": 0,
+            "dex": 0,
+            "con": 0,
+            "int": 0,
+            "wis": 0,
+            "cha": 0
+          }
+        },
+        "value": {
+          "type": "asi"
+        },
+        "level": 19,
+        "title": ""
       }
     ],
     "saves": [
@@ -465,10 +552,10 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.1.2",
-    "coreVersion": "10.291",
+    "systemVersion": "2.2.2",
+    "coreVersion": "10.303",
     "createdTime": 1661787234278,
-    "modifiedTime": 1674436024196,
+    "modifiedTime": 1691518598942,
     "lastModifiedBy": "dnd5ebuilder0000"
   }
 }
