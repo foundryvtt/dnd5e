@@ -12,8 +12,8 @@ export function measureDistances(segments, options={}) {
     let r = s.ray;
 
     // Determine the total distance traveled
-    let nx = Math.abs(Math.ceil(r.dx / d.size));
-    let ny = Math.abs(Math.ceil(r.dy / d.size));
+    let nx = Math.ceil(Math.abs(r.dx / d.size));
+    let ny = Math.ceil(Math.abs(r.dy / d.size));
 
     // Determine the number of straight and diagonal moves
     let nd = Math.min(nx, ny);
