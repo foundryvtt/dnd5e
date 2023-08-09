@@ -359,6 +359,8 @@ export default class Actor5e extends Actor {
       if ( Number.isNumeric(abl.saveProf.term) ) abl.save += abl.saveProf.flat;
       abl.dc = 8 + abl.mod + this.system.attributes.prof + dcBonus;
 
+      if ( !Number.isFinite(abl.max) ) abl.max = CONFIG.DND5E.maxAbilityScore;
+
       // If we merged saves when transforming, take the highest bonus here.
       if ( originalSaves && abl.proficient ) abl.save = Math.max(abl.save, originalSaves[id].save);
     }
@@ -792,11 +794,9 @@ export default class Actor5e extends Actor {
   static prepareLeveledSlots(spells, actor, progression) {
     const levels = Math.clamped(progression.slot, 0, CONFIG.DND5E.maxLevel);
     const slots = CONFIG.DND5E.SPELL_SLOT_TABLE[Math.min(levels, CONFIG.DND5E.SPELL_SLOT_TABLE.length) - 1] ?? [];
-    for ( const [n, slot] of Object.entries(spells) ) {
-      const level = parseInt(n.slice(-1));
-      if ( Number.isNaN(level) ) continue;
+    for ( const level of Array.fromRange(Object.keys(CONFIG.DND5E.spellLevels).length - 1, 1) ) {
+      const slot = spells[`spell${level}`] ??= { value: 0 };
       slot.max = Number.isNumeric(slot.override) ? Math.max(parseInt(slot.override), 0) : slots[level - 1] ?? 0;
-      slot.value = parseInt(slot.value); // TODO: DataModels should remove the need for this
     }
   }
 
@@ -824,14 +824,12 @@ export default class Actor5e extends Actor {
       pactLevel = actor.system.details.spellLevel;
     }
 
-    // TODO: Allow pact level and slot count to be configured
-    if ( pactLevel > 0 ) {
-      spells.pact.level = Math.ceil(Math.min(10, pactLevel) / 2); // TODO: Allow custom max pact level
-      if ( override === null ) {
-        spells.pact.max = Math.max(1, Math.min(pactLevel, 2), Math.min(pactLevel - 8, 3), Math.min(pactLevel - 13, 4));
-      } else {
-        spells.pact.max = Math.max(override, 1);
-      }
+    const [, pactConfig] = Object.entries(CONFIG.DND5E.pactCastingProgression)
+      .reverse().find(([l]) => Number(l) <= pactLevel) ?? [];
+    if ( pactConfig ) {
+      spells.pact.level = pactConfig.level;
+      if ( override === null ) spells.pact.max = pactConfig.slots;
+      else spells.pact.max = Math.max(override, 1);
       spells.pact.value = Math.min(spells.pact.value, spells.pact.max);
     }
 
@@ -852,14 +850,16 @@ export default class Actor5e extends Actor {
     if ( sourceId?.startsWith("Compendium.") ) return;
 
     // Configure prototype token settings
+    const prototypeToken = {};
     if ( "size" in (this.system.traits || {}) ) {
-      const s = CONFIG.DND5E.tokenSizes[this.system.traits.size || "med"];
-      const prototypeToken = {width: s, height: s};
-      if ( this.type === "character" ) Object.assign(prototypeToken, {
-        sight: { enabled: true }, actorLink: true, disposition: 1
-      });
-      this.updateSource({prototypeToken});
+      const size = CONFIG.DND5E.tokenSizes[this.system.traits.size || "med"];
+      if ( !foundry.utils.hasProperty(data, "prototypeToken.width") ) prototypeToken.width = size;
+      if ( !foundry.utils.hasProperty(data, "prototypeToken.height") ) prototypeToken.height = size;
     }
+    if ( this.type === "character" ) Object.assign(prototypeToken, {
+      sight: { enabled: true }, actorLink: true, disposition: CONST.TOKEN_DISPOSITIONS.FRIENDLY
+    });
+    this.updateSource({ prototypeToken });
   }
 
   /* -------------------------------------------- */
@@ -937,7 +937,7 @@ export default class Actor5e extends Actor {
 
     // Remaining goes to health
     const tmpMax = parseInt(hp.tempmax) || 0;
-    const dh = Math.clamped(hp.value - (amount - dt), 0, hp.max + tmpMax);
+    const dh = Math.clamped(hp.value - (amount - dt), 0, Math.max(0, hp.max + tmpMax));
 
     // Update the Actor
     const updates = {
@@ -1106,7 +1106,7 @@ export default class Actor5e extends Actor {
   async rollToolCheck(toolId, options={}) {
     // Prepare roll data.
     const tool = this.system.tools[toolId];
-    const ability = this.system.abilities[tool?.ability ?? "int"];
+    const ability = this.system.abilities[options.ability || (tool?.ability ?? "int")];
     const globalBonuses = this.system.bonuses?.abilities ?? {};
     const parts = ["@mod", "@abilityCheckBonus"];
     const data = this.getRollData();
@@ -1116,9 +1116,10 @@ export default class Actor5e extends Actor {
     data.defaultAbility = options.ability || (tool?.ability ?? "int");
 
     // Add proficiency.
-    if ( tool?.prof.hasProficiency ) {
+    const prof = options.prof ?? tool?.prof;
+    if ( prof?.hasProficiency ) {
       parts.push("@prof");
-      data.prof = tool.prof.term;
+      data.prof = prof.term;
     }
 
     // Global ability check bonus.
@@ -1523,9 +1524,9 @@ export default class Actor5e extends Actor {
         parts.push("@prof");
         data.prof = init.prof.term;
       }
-      if ( init.bonus !== 0 ) {
+      if ( init.bonus ) {
         parts.push("@bonus");
-        data.bonus = init.bonus;
+        data.bonus = Roll.replaceFormulaData(init.bonus, data);
       }
     }
 
@@ -1534,7 +1535,7 @@ export default class Actor5e extends Actor {
       const abilityBonus = this.system.abilities[abilityId]?.bonuses?.check;
       if ( abilityBonus ) {
         parts.push("@abilityBonus");
-        data.abilityBonus = abilityBonus;
+        data.abilityBonus = Roll.replaceFormulaData(abilityBonus, data);
       }
     }
 
@@ -1543,7 +1544,7 @@ export default class Actor5e extends Actor {
       const globalCheckBonus = this.system.bonuses.abilities?.check;
       if ( globalCheckBonus ) {
         parts.push("@globalBonus");
-        data.globalBonus = globalCheckBonus;
+        data.globalBonus = Roll.replaceFormulaData(globalCheckBonus, data);
       }
     }
 
@@ -1690,7 +1691,7 @@ export default class Actor5e extends Actor {
     if ( rollConfig.chatMessage ) roll.toMessage(rollConfig.messageData);
 
     const hp = this.system.attributes.hp;
-    const dhp = Math.min(hp.max + (hp.tempmax ?? 0) - hp.value, roll.total);
+    const dhp = Math.min(Math.max(0, hp.max + (hp.tempmax ?? 0)) - hp.value, roll.total);
     const updates = {
       actor: {"system.attributes.hp.value": hp.value + dhp},
       class: {"system.hitDiceUsed": cls.system.hitDiceUsed + 1}
@@ -2063,7 +2064,7 @@ export default class Actor5e extends Actor {
    */
   async autoSpendHitDice({ threshold=3 }={}) {
     const hp = this.system.attributes.hp;
-    const max = hp.max + hp.tempmax;
+    const max = Math.max(0, hp.max + hp.tempmax);
     let diceRolled = 0;
     while ( (this.system.attributes.hp.value + threshold) <= max ) {
       const r = await this.rollHitDie();
@@ -2088,7 +2089,7 @@ export default class Actor5e extends Actor {
     let max = hp.max;
     let updates = {};
     if ( recoverTempMax ) updates["system.attributes.hp.tempmax"] = 0;
-    else max += hp.tempmax;
+    else max = Math.max(0, max + (hp.tempmax || 0));
     updates["system.attributes.hp.value"] = max;
     if ( recoverTemp ) updates["system.attributes.hp.temp"] = 0;
     return { updates, hitPointsRecovered: max - hp.value };
@@ -2282,7 +2283,7 @@ export default class Actor5e extends Actor {
    * @property {boolean} [mergeSkills=false]        Take the maximum of the skill proficiencies
    * @property {boolean} [keepClass=false]          Keep proficiency bonus
    * @property {boolean} [keepFeats=false]          Keep features
-   * @property {boolean} [keepSpells=false]         Keep spells
+   * @property {boolean} [keepSpells=false]         Keep spells and spellcasting ability
    * @property {boolean} [keepItems=false]          Keep items
    * @property {boolean} [keepBio=false]            Keep biography
    * @property {boolean} [keepVision=false]         Keep vision
@@ -2330,7 +2331,7 @@ export default class Actor5e extends Actor {
     }
 
     // Prepare new data to merge from the source
-    const d = foundry.utils.mergeObject({
+    const d = foundry.utils.mergeObject(foundry.utils.deepClone({
       type: o.type, // Remain the same actor type
       name: `${o.name} (${source.name})`, // Append the new shape to your old name
       system: source.system, // Get the systemdata model of your new form
@@ -2341,12 +2342,13 @@ export default class Actor5e extends Actor {
       folder: o.folder, // Be displayed in the same sidebar folder
       flags: o.flags, // Use the original actor flags
       prototypeToken: { name: `${o.name} (${source.name})`, texture: {}, sight: {}, detectionModes: [] } // Set a new empty token
-    }, keepSelf ? o : {}); // Keeps most of original actor
+    }), keepSelf ? o : {}); // Keeps most of original actor
 
     // Specifically delete some data attributes
     delete d.system.resources; // Don't change your resource pools
     delete d.system.currency; // Don't lose currency
     delete d.system.bonuses; // Don't lose global bonuses
+    if ( keepSpells ) delete d.system.attributes.spellcasting; // Keep spellcasting ability if retaining spells.
 
     // Specific additional adjustments
     d.system.details.alignment = o.system.details.alignment; // Don't change alignment
@@ -2381,8 +2383,11 @@ export default class Actor5e extends Actor {
         const type = CONFIG.DND5E.abilities[k]?.type;
         if ( keepPhysical && (type === "physical") ) abilities[k] = oa;
         else if ( keepMental && (type === "mental") ) abilities[k] = oa;
+
+        // Set saving throw proficiencies.
         if ( keepSaves ) abilities[k].proficient = oa.proficient;
         else if ( mergeSaves ) abilities[k].proficient = Math.max(prof, oa.proficient);
+        else abilities[k].proficient = source.system.abilities[k].proficient;
       }
 
       // Transfer skills
@@ -2432,7 +2437,7 @@ export default class Actor5e extends Actor {
         if ( origin.type === "spell" ) return keepSpellAE;
         if ( origin.type === "feat" ) return keepFeatAE;
         if ( origin.type === "background" ) return keepBackgroundAE;
-        if ( ["subclass", "feat"].includes(origin.type) ) return keepClassAE;
+        if ( ["subclass", "class"].includes(origin.type) ) return keepClassAE;
         if ( ["equipment", "weapon", "tool", "loot", "backpack"].includes(origin.type) ) return keepEquipmentAE;
         return true;
       });
@@ -2695,6 +2700,7 @@ export default class Actor5e extends Actor {
     dhp = Number(dhp);
     const tokens = this.isToken ? [this.token?.object] : this.getActiveTokens(true);
     for ( const t of tokens ) {
+      if ( !t.visible || !t.renderable ) continue;
       const pct = Math.clamped(Math.abs(dhp) / this.system.attributes.hp.max, 0, 1);
       canvas.interface.createScrollingText(t.center, dhp.signedString(), {
         anchor: CONST.TEXT_ANCHOR_POINTS.TOP,

@@ -14,6 +14,21 @@
         {{/each}}
     </ol>
     {{/unless}}
+    {{#if isCharacter}}
+    <div class="attunement">
+      <label>{{localize "DND5E.Attunement"}}</label>
+      <span class="attunement-value">{{system.attributes.attunement.value}}</span>
+      <span class="sep"> / </span>
+      <span class="attunement-max" {{#if overrides.attunement}}data-tooltip="DND5E.ActiveEffectOverrideWarning"{{/if}}>
+        {{system.attributes.attunement.max}}
+        {{#unless (or overrides.attunement (not editable))}}
+        <a class="attunement-max-override" data-tooltip="DND5E.AttunementOverride">
+          <i class="fa-solid fa-edit"></i>
+        </a>
+        {{/unless}}
+      </span>
+    </div>
+    {{/if}}
 
     {{#if inventoryFilters}}
     <ul class="filter-list flexrow" data-filter="inventory">
@@ -38,7 +53,7 @@
             {{#if ../isCharacter}}
                 <div class="item-detail item-weight">{{localize "DND5E.Weight"}}</div>
             {{/if}}
-
+            <div class="item-detail item-quantity">{{localize "DND5E.QuantityAbbr"}}</div>
             <div class="item-detail item-uses">{{localize "DND5E.Charges"}}</div>
             <div class="item-detail item-action">{{localize "DND5E.Usage"}}</div>
         {{/if}}
@@ -103,9 +118,13 @@
                 </div>
                 {{/if}}
 
+                <div class="item-detail item-quantity">
+                    <input type="text" value="{{item.system.quantity}}" placeholder="0" data-dtype="Number" data-name="system.quantity">
+                </div>
+
                 <div class="item-detail item-uses">
                     {{#if ctx.hasUses }}
-                        <input type="text" value="{{item.system.uses.value}}" placeholder="0"/>
+                        <input type="text" value="{{item.system.uses.value}}" placeholder="0" data-dtype="Number" data-name="system.uses.value">
                         / {{item.system.uses.max}}
                     {{/if}}
                 </div>

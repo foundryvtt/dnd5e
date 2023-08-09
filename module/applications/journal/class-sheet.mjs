@@ -144,6 +144,9 @@ export default class JournalClassPageSheet extends JournalPageSheet {
       const features = [];
       for ( const advancement of item.advancement.byLevel[level] ) {
         switch ( advancement.constructor.typeName ) {
+          case "AbilityScoreImprovement":
+            features.push(game.i18n.localize("DND5E.AdvancementAbilityScoreImprovementTitle"));
+            continue;
           case "ItemGrant":
             if ( advancement.configuration.optional ) continue;
             features.push(...await Promise.all(advancement.configuration.items.map(makeLink)));

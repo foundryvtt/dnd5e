@@ -46,7 +46,7 @@ export default class CreatureTemplate extends CommonTemplate {
       }, {label: "DND5E.Bonuses"}),
       skills: new MappingField(new foundry.data.fields.SchemaField({
         value: new foundry.data.fields.NumberField({
-          required: true, min: 0, max: 2, step: 0.5, initial: 0, label: "DND5E.ProficiencyLevel"
+          required: true, nullable: false, min: 0, max: 2, step: 0.5, initial: 0, label: "DND5E.ProficiencyLevel"
         }),
         ability: new foundry.data.fields.StringField({required: true, initial: "dex", label: "DND5E.Ability"}),
         bonuses: new foundry.data.fields.SchemaField({
@@ -59,7 +59,7 @@ export default class CreatureTemplate extends CommonTemplate {
       }),
       tools: new MappingField(new foundry.data.fields.SchemaField({
         value: new foundry.data.fields.NumberField({
-          required: true, min: 0, max: 2, step: 0.5, initial: 1, label: "DND5E.ProficiencyLevel"
+          required: true, nullable: false, min: 0, max: 2, step: 0.5, initial: 1, label: "DND5E.ProficiencyLevel"
         }),
         ability: new foundry.data.fields.StringField({required: true, initial: "int", label: "DND5E.Ability"}),
         bonuses: new foundry.data.fields.SchemaField({
@@ -136,7 +136,7 @@ export default class CreatureTemplate extends CommonTemplate {
       const match = s.match(pattern);
       if ( !match ) continue;
       const type = match[1].toLowerCase();
-      if ( type in CONFIG.DND5E.senses ) {
+      if ( (type in CONFIG.DND5E.senses) && !(type in source.attributes.senses) ) {
         source.attributes.senses[type] = Number(match[2]).toNearest(0.5);
         wasMatched = true;
       }
@@ -157,7 +157,8 @@ export default class CreatureTemplate extends CommonTemplate {
     if ( !original || foundry.utils.isEmpty(original.value) ) return;
     source.tools ??= {};
     for ( const prof of original.value ) {
-      if ( !(prof in CONFIG.DND5E.toolProficiencies) && !(prof in CONFIG.DND5E.toolIds) ) continue;
+      const validProf = (prof in CONFIG.DND5E.toolProficiencies) || (prof in CONFIG.DND5E.toolIds);
+      if ( !validProf || (prof in source.tools) ) continue;
       source.tools[prof] = {
         value: 1,
         ability: "int",

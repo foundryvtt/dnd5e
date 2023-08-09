@@ -8,6 +8,10 @@
     </select>
   </div>
   <div class="form-group">
+    <label>{{ localize "DND5E.AbilityScoreMax" }}</label>
+    <input name="system.abilities.{{abilityId}}.max" type="number" value="{{ability.max}}">
+  </div>
+  <div class="form-group">
     <label>{{localize "DND5E.SaveBonus"}}</label>
     <input name="system.abilities.{{abilityId}}.bonuses.save" type="text" value="{{ability.bonuses.save}}">
   </div>

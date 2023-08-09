@@ -2,7 +2,7 @@
   "_id": "nsXZejlmgalj4he9",
   "name": "Ring Mail",
   "type": "equipment",
-  "img": "icons/equipment/chest/breastplate-metal-scaled-grey.webp",
+  "img": "icons/equipment/chest/breastplate-banded-simple-leather-brown.webp",
   "system": {
     "description": {
       "value": "<p>This armor is leather armor with heavy rings sewn into it. The rings help reinforce the armor against blows from swords and axes. Ring mail is inferior to chain mail, and it's usually worn only by those who can't afford better armor.</p>",
@@ -18,7 +18,7 @@
     },
     "attunement": 0,
     "equipped": false,
-    "rarity": "common",
+    "rarity": "",
     "identified": true,
     "activation": {
       "type": "",
@@ -30,6 +30,7 @@
       "units": ""
     },
     "cover": null,
+    "crewed": false,
     "target": {
       "value": null,
       "width": null,
@@ -99,10 +100,10 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.1.0",
+    "systemVersion": "2.2.2",
     "coreVersion": "10.291",
     "createdTime": 1661787233865,
-    "modifiedTime": 1671220964236,
+    "modifiedTime": 1690539369755,
     "lastModifiedBy": "dnd5ebuilder0000"
   }
 }

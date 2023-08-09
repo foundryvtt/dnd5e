@@ -224,11 +224,8 @@ export default class ItemSheet5e extends ItemSheet {
     // Attributes
     else if ( consume.type === "attribute" ) {
       const attrData = game.dnd5e.isV10 ? actor.system : actor.type;
-      const attributes = TokenDocument.implementation.getConsumedAttributes(attrData);
-      attributes.bar.forEach(a => a.push("value"));
-      return attributes.bar.concat(attributes.value).reduce((obj, a) => {
-        let k = a.join(".");
-        obj[k] = k;
+      return TokenDocument.implementation.getConsumedAttributes(attrData).reduce((obj, attr) => {
+        obj[attr] = attr;
         return obj;
       }, {});
     }
@@ -295,7 +292,7 @@ export default class ItemSheet5e extends ItemSheet {
       case "spell":
         return CONFIG.DND5E.spellPreparationModes[this.item.system.preparation];
       case "tool":
-        return game.i18n.localize(this.item.system.proficient ? "DND5E.Proficient" : "DND5E.NotProficient");
+        return CONFIG.DND5E.proficiencyLevels[this.item.system.prof?.multiplier || 0];
     }
     return null;
   }
@@ -311,6 +308,11 @@ export default class ItemSheet5e extends ItemSheet {
     const props = [];
     const labels = this.item.labels;
     switch ( this.item.type ) {
+      case "consumable":
+        for ( const [k, v] of Object.entries(this.item.system.properties ?? {}) ) {
+          if ( v === true ) props.push(CONFIG.DND5E.physicalWeaponProperties[k]);
+        }
+        break;
       case "equipment":
         props.push(CONFIG.DND5E.equipmentTypes[this.item.system.armor.type]);
         if ( this.item.isArmor || this.item.isMountable ) props.push(labels.armor);

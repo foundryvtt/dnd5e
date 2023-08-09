@@ -253,6 +253,19 @@ DND5E.weaponIds = {
 /* -------------------------------------------- */
 
 /**
+ * The basic ammunition types.
+ * @enum {string}
+ */
+DND5E.ammoIds = {
+  arrow: "3c7JXOzsv55gqJS5",
+  blowgunNeedle: "gBQ8xqTA5f8wP5iu",
+  crossbowBolt: "SItCnYBqhzqBoaWG",
+  slingBullet: "z9SbsMIBZzuhZOqT"
+};
+
+/* -------------------------------------------- */
+
+/**
  * The categories into which Tool items can be grouped.
  *
  * @enum {string}
@@ -706,6 +719,77 @@ preLocalize("consumableTypes", { sort: true });
 /* -------------------------------------------- */
 
 /**
+ * Types of containers.
+ * @enum {string}
+ */
+DND5E.containerTypes = {
+  backpack: "H8YCd689ezlD26aT",
+  barrel: "7Yqbqg5EtVW16wfT",
+  basket: "Wv7HzD6dv1P0q78N",
+  boltcase: "eJtPBiZtr2pp6ynt",
+  bottle: "HZp69hhyNZUUCipF",
+  bucket: "mQVYcHmMSoCUnBnM",
+  case: "5mIeX824uMklU3xq",
+  chest: "2YbuclKfhDL0bU4u",
+  flask: "lHS63sC6bypENNlR",
+  jug: "0ZBWwjFz3nIAXMLW",
+  pot: "M8xM8BLK4tpUayEE",
+  pitcher: "nXWdGtzi8DXDLLsL",
+  pouch: "9bWTRRDym06PzSAf",
+  quiver: "4MtQKPn9qMWCFjDA",
+  sack: "CNdDj8dsXVpRVpXt",
+  saddlebags: "TmfaFUSZJAotndn9",
+  tankard: "uw6fINSmZ2j2o57A",
+  vial: "meJEfX3gZgtMX4x2"
+};
+
+/* -------------------------------------------- */
+
+/**
+ * Configuration data for spellcasting foci.
+ *
+ * @typedef {object} SpellcastingFocusConfiguration
+ * @property {string} label                    Localized label for this category.
+ * @property {Object<string, string>} itemIds  Item IDs or UUIDs.
+ */
+
+/**
+ * Type of spellcasting foci.
+ * @enum {SpellcastingFocusConfiguration}
+ */
+DND5E.focusTypes = {
+  arcane: {
+    label: "DND5E.Focus.Arcane",
+    itemIds: {
+      crystal: "uXOT4fYbgPY8DGdd",
+      orb: "tH5Rn0JVRG1zdmPa",
+      rod: "OojyyGfh91iViuMF",
+      staff: "BeKIrNIvNHRPQ4t5",
+      wand: "KA2P6I48iOWlnboO"
+    }
+  },
+  druidic: {
+    label: "DND5E.Focus.Druidic",
+    itemIds: {
+      mistletoe: "xDK9GQd2iqOGH8Sd",
+      totem: "PGL6aaM0wE5h0VN5",
+      woodenstaff: "FF1ktpb2YSiyv896",
+      yewwand: "t5yP0d7YaKwuKKiH"
+    }
+  },
+  holy: {
+    label: "DND5E.Focus.Holy",
+    itemIds: {
+      amulet: "paqlMjggWkBIAeCe",
+      emblem: "laVqttkGMW4B9654",
+      reliquary: "gP1URGq3kVIIFHJ7"
+    }
+  }
+};
+
+/* -------------------------------------------- */
+
+/**
  * Configuration data for an item with the "feature" type.
  *
  * @typedef {object} FeatureTypeConfiguration
@@ -724,6 +808,7 @@ DND5E.featureTypes = {
   class: {
     label: "DND5E.Feature.Class",
     subtypes: {
+      arcaneShot: "DND5E.ClassFeature.ArcaneShot",
       artificerInfusion: "DND5E.ClassFeature.ArtificerInfusion",
       channelDivinity: "DND5E.ClassFeature.ChannelDivinity",
       defensiveTactic: "DND5E.ClassFeature.DefensiveTactic",
@@ -955,7 +1040,10 @@ DND5E.individualTargetTypes = {
   enemy: "DND5E.TargetEnemy",
   creature: "DND5E.TargetCreature",
   object: "DND5E.TargetObject",
-  space: "DND5E.TargetSpace"
+  space: "DND5E.TargetSpace",
+  creatureOrObject: "DND5E.TargetCreatureOrObject",
+  any: "DND5E.TargetAny",
+  willing: "DND5E.TargetWilling"
 };
 preLocalize("individualTargetTypes");
 
@@ -1074,6 +1162,31 @@ DND5E.SPELL_SLOT_TABLE = [
   [4, 3, 3, 3, 3, 2, 1, 1, 1],
   [4, 3, 3, 3, 3, 2, 2, 1, 1]
 ];
+
+/* -------------------------------------------- */
+
+/**
+ * Configuration data for pact casting progression.
+ *
+ * @typedef {object} PactProgressionConfig
+ * @property {number} slots  Number of spell slots granted.
+ * @property {number} level  Level of spells that can be cast.
+ */
+
+/**
+ * Define the pact slot & level progression by pact caster level.
+ * @enum {PactProgressionConfig}
+ */
+DND5E.pactCastingProgression = {
+  1: { slots: 1, level: 1 },
+  2: { slots: 2, level: 1 },
+  3: { slots: 2, level: 2 },
+  5: { slots: 2, level: 3 },
+  7: { slots: 2, level: 4 },
+  9: { slots: 2, level: 5 },
+  11: { slots: 3, level: 5 },
+  17: { slots: 4, level: 5 }
+};
 
 /* -------------------------------------------- */
 
@@ -1438,6 +1551,18 @@ preLocalize("proficiencyLevels");
 /* -------------------------------------------- */
 
 /**
+ * Weapon and armor item proficiency levels.
+ * @enum {string}
+ */
+DND5E.weaponAndArmorProficiencyLevels = {
+  0: "DND5E.NotProficient",
+  1: "DND5E.Proficient"
+};
+preLocalize("weaponAndArmorProficiencyLevels");
+
+/* -------------------------------------------- */
+
+/**
  * The amount of cover provided by an object. In cases where multiple pieces
  * of cover are in play, we take the highest value.
  * @enum {string}
@@ -1470,9 +1595,7 @@ DND5E.trackableAttributes = [
  * @type {string[]}
  */
 DND5E.consumableResources = [
-  "item.quantity", "item.weight", "item.duration.value", "currency", "details.xp.value", "abilities.*.value",
-  "attributes.senses", "attributes.movement", "attributes.ac.flat", "item.armor.value", "item.target", "item.range",
-  "item.save.dc"
+  // Configured during init.
 ];
 
 /* -------------------------------------------- */
@@ -1539,6 +1662,12 @@ preLocalize("languages", { sort: true });
  * @type {number}
  */
 DND5E.maxLevel = 20;
+
+/**
+ * Maximum ability score value allowed by default.
+ * @type {number}
+ */
+DND5E.maxAbilityScore = 20;
 
 /**
  * XP required to achieve each character level.
@@ -1636,7 +1765,7 @@ DND5E.traits = {
   },
   tool: {
     label: "DND5E.TraitToolProf",
-    actorKeyPath: "traits.toolProf",
+    actorKeyPath: "tools",
     configKey: "toolProficiencies",
     subtypes: { keyPath: "toolType", ids: ["toolIds"] },
     children: { vehicle: "vehicleTypes" },
@@ -1752,6 +1881,7 @@ DND5E.allowedActorFlags = ["isPolymorphed", "originalActor"].concat(Object.keys(
  * @enum {*}
  */
 DND5E.advancementTypes = {
+  AbilityScoreImprovement: advancement.AbilityScoreImprovementAdvancement,
   HitPoints: advancement.HitPointsAdvancement,
   ItemChoice: advancement.ItemChoiceAdvancement,
   ItemGrant: advancement.ItemGrantAdvancement,

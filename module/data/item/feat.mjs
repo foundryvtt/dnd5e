@@ -55,6 +55,7 @@ export default class FeatData extends SystemDataModel.mixin(
    * @param {object} source The candidate source data from which the model will be constructed.
    */
   static #migrateType(source) {
+    if ( !("type" in source) ) return;
     if ( !source.type ) source.type = {value: "", subtype: ""};
   }
 
