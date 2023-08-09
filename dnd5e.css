@@ -1174,6 +1174,9 @@ h5 {
 .dnd5e.sheet.actor .inventory-list .item .item-name i.not-attuned {
   color: #7a7971;
 }
+.dnd5e.sheet.actor .inventory-list .item .item-name h4 {
+  line-height: 30px;
+}
 .dnd5e.sheet.actor .inventory-list .item .item-uses input {
   width: 24px;
   text-align: center;
