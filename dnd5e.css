@@ -893,26 +893,31 @@ h5 {
   white-space: nowrap;
 }
 .dnd5e.sheet.actor .ability-scores {
-  flex: 0 0 100px;
-  align-content: flex-start;
-  list-style: none;
+  flex: 0 0 110px;
   margin: 0;
   padding: 0;
   font-family: "Modesto Condensed", "Palatino Linotype", serif;
   font-size: 20px;
   font-weight: 700;
-  border: 2px groove #eeede0;
-  border-radius: 3px;
+  overflow: hidden auto;
+  height: 100%;
 }
 .dnd5e.sheet.actor .ability-scores .ability {
   height: 70px;
   text-align: center;
   border-bottom: 2px groove #eeede0;
+  border-right: 2px groove #eeede0;
+  border-left: 2px groove #eeede0;
   position: relative;
+  display: inherit;
+  overflow: hidden;
 }
 .dnd5e.sheet.actor .ability-scores .ability:last-child {
-  border-bottom: none;
-  margin-bottom: -3px;
+  border-radius: 3px;
+}
+.dnd5e.sheet.actor .ability-scores .ability:first-child {
+  border-top: 2px groove #eeede0;
+  border-radius: 3px;
 }
 .dnd5e.sheet.actor .ability-scores .ability input.ability-score {
   height: 30px;
@@ -969,18 +974,25 @@ h5 {
 }
 .dnd5e.sheet.actor ul.skills-list {
   flex: 0 0 180px;
-  list-style: none;
   margin: 0 5px 0;
   padding: 0;
-  border: 2px groove #eeede0;
-  border-radius: 3px;
+  overflow: hidden auto;
+  height: 100%;
 }
 .dnd5e.sheet.actor ul.skills-list li.skill {
   height: 24px;
   padding: 3px 2px;
+  border-right: 2px groove #eeede0;
+  border-left: 2px groove #eeede0;
 }
 .dnd5e.sheet.actor ul.skills-list li.skill:nth-child(even) {
   background: rgba(0, 0, 0, 0.05);
+}
+.dnd5e.sheet.actor ul.skills-list li.skill:last-child {
+  border-bottom: 2px groove #eeede0;
+}
+.dnd5e.sheet.actor ul.skills-list li.skill:first-child {
+  border-top: 2px groove #eeede0;
 }
 .dnd5e.sheet.actor ul.skills-list li.skill h4 {
   flex: 1px;

@@ -192,24 +192,31 @@
   /* ----------------------------------------- */
 
   .ability-scores {
-    flex: 0 0 100px;
-    align-content: flex-start;
-    list-style: none;
+    flex: 0 0 110px;
     margin: 0;
     padding: 0;
     .modesto();
-    border: @borderGroove;
-    border-radius: 3px;
+    font-weight: 700;
+    overflow: hidden auto;
+    height: 100%;
 
     .ability {
       height: 70px;
       text-align: center;
       border-bottom: @borderGroove;
+      border-right: @borderGroove;
+      border-left: @borderGroove;
       position: relative;
+      display: inherit;
+      overflow: hidden;
 
       &:last-child {
-        border-bottom: none;
-        margin-bottom: -3px;
+        border-radius: 3px;
+      }
+
+      &:first-child {
+        border-top: @borderGroove;
+        border-radius: 3px;
       }
 
       input.ability-score {
@@ -285,18 +292,27 @@
 
   ul.skills-list {
     flex: 0 0 180px;
-    list-style: none;
     margin: 0 5px 0;
     padding: 0;
-    border: @borderGroove;
-    border-radius: 3px;
+    overflow: hidden auto;
+    height: 100%;
 
     li.skill {
       height: 24px;
       padding: 3px 2px;
+      border-right: @borderGroove;
+      border-left: @borderGroove;
 
       &:nth-child(even) {
         background: rgba(0, 0, 0, 0.05);
+      }
+
+      &:last-child {
+        border-bottom: @borderGroove;
+      }
+
+      &:first-child {
+        border-top: @borderGroove;
       }
 
       h4 {
