@@ -68,13 +68,15 @@ DND5E.abilities = {
     label: "DND5E.AbilityHon",
     abbreviation: "DND5E.AbilityHonAbbr",
     type: "mental",
-    defaults: { npc: "cha", vehicle: 0 }
+    defaults: { npc: "cha", vehicle: 0 },
+    improvement: false
   },
   san: {
     label: "DND5E.AbilitySan",
     abbreviation: "DND5E.AbilitySanAbbr",
     type: "mental",
-    defaults: { npc: "wis", vehicle: 0 }
+    defaults: { npc: "wis", vehicle: 0 },
+    improvement: false
   }
 };
 preLocalize("abilities", { keys: ["label", "abbreviation"] });
