@@ -1,6 +1,10 @@
 .dnd5e.advancement {
   input[type="text"], input[type="number"], select {
     height: var(--form-field-height);
+    &[readonly] {
+      color: var(--color-text-dark-6);
+      box-shadow: none;
+    }
   }
   .form-group .form-fields button {
     flex: 0;
