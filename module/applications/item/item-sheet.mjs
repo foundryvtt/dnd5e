@@ -30,7 +30,12 @@ export default class ItemSheet5e extends ItemSheet {
       height: 400,
       classes: ["dnd5e", "sheet", "item"],
       resizable: true,
-      scrollY: [".tab.details"],
+      scrollY: [
+        ".tab[data-tab=details]",
+        ".tab[data-tab=effects] .items-list",
+        ".tab[data-tab=description] .editor-content",
+        ".tab[data-tab=advancement] .items-list",
+      ],
       tabs: [{navSelector: ".tabs", contentSelector: ".sheet-body", initial: "description"}],
       dragDrop: [
         {dragSelector: "[data-effect-id]", dropSelector: ".effects-list"},
