@@ -426,7 +426,9 @@ export default class GroupActorSheet extends ActorSheet {
       return scroll.toObject();
     }
 
-    // TODO: Stack identical consumables
+    // Stack identical consumables
+    const stacked = game.system.applications.actor.ActorSheet5e.prototype._onDropStackConsumables.call(this, itemData);
+    if ( stacked ) return false;
 
     return itemData;
   }
