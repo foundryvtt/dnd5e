@@ -642,6 +642,7 @@ export default class ActorSheet5e extends ActorSheet {
       html.find(".item-create").click(this._onItemCreate.bind(this));
       html.find(".item-delete").click(this._onItemDelete.bind(this));
       html.find(".item-uses input").click(ev => ev.target.select()).change(this._onUsesChange.bind(this));
+      html.find(".item-quantity input").click(ev => ev.target.select()).change(this._onQuantityChange.bind(this));
       html.find(".slot-max-override").click(this._onSpellSlotOverride.bind(this));
       html.find(".attunement-max-override").click(this._onAttunementOverride.bind(this));
 
@@ -863,7 +864,9 @@ export default class ActorSheet5e extends ActorSheet {
     const value = input.value;
     if ( ["+", "-"].includes(value[0]) ) {
       const delta = parseFloat(value);
-      input.value = Number(foundry.utils.getProperty(this.actor, input.name)) + delta;
+      const item = this.actor.items.get(input.closest("[data-item-id]")?.dataset.itemId);
+      if ( item ) input.value = Number(foundry.utils.getProperty(item, input.dataset.name)) + delta;
+      else input.value = Number(foundry.utils.getProperty(this.actor, input.name)) + delta;
     } else if ( value[0] === "=" ) input.value = value.slice(1);
   }
 
@@ -1130,7 +1133,7 @@ export default class ActorSheet5e extends ActorSheet {
   /**
    * Handle enabling editing for a spell slot override value.
    * @param {MouseEvent} event    The originating click event.
-   * @private
+   * @protected
    */
   async _onSpellSlotOverride(event) {
     const span = event.currentTarget.parentElement;
@@ -1179,7 +1182,7 @@ export default class ActorSheet5e extends ActorSheet {
    * Change the uses amount of an Owned Item within the Actor.
    * @param {Event} event        The triggering click event.
    * @returns {Promise<Item5e>}  Updated item.
-   * @private
+   * @protected
    */
   async _onUsesChange(event) {
     event.preventDefault();
@@ -1188,6 +1191,23 @@ export default class ActorSheet5e extends ActorSheet {
     const uses = Math.clamped(0, parseInt(event.target.value), item.system.uses.max);
     event.target.value = uses;
     return item.update({"system.uses.value": uses});
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Change the quantity of an Owned Item within the actor.
+   * @param {Event} event        The triggering click event.
+   * @returns {Promise<Item5e>}  Updated item.
+   * @protected
+   */
+  async _onQuantityChange(event) {
+    event.preventDefault();
+    const itemId = event.currentTarget.closest(".item").dataset.itemId;
+    const item = this.actor.items.get(itemId);
+    const quantity = Math.max(0, parseInt(event.target.value));
+    event.target.value = quantity;
+    return item.update({"system.quantity": quantity});
   }
 
   /* -------------------------------------------- */

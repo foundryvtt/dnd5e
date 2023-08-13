@@ -2,7 +2,7 @@
   "_id": "3h3ZU6qmQs18FfkA",
   "name": "Mithral Chain Shirt",
   "type": "equipment",
-  "img": "icons/equipment/chest/breastplate-metal-scaled-grey.webp",
+  "img": "icons/equipment/chest/breastplate-scale-grey.webp",
   "system": {
     "description": {
       "value": "<p>Mithral is a light, flexible metal. A mithral chain shirt or breastplate can be worn under normal clothes. If the armor normally imposes disadvantage on Dexterity (Stealth) checks or has a Strength requirement, the mithral version of the armor doesn't.</p>",
@@ -30,6 +30,7 @@
       "units": ""
     },
     "cover": null,
+    "crewed": false,
     "target": {
       "value": null,
       "width": null,
@@ -99,10 +100,10 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.1.0",
+    "systemVersion": "2.2.2",
     "coreVersion": "10.291",
     "createdTime": 1661787233459,
-    "modifiedTime": 1671220957262,
+    "modifiedTime": 1690538796181,
     "lastModifiedBy": "dnd5ebuilder0000"
   }
 }

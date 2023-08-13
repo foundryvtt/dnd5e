@@ -876,7 +876,13 @@ export default class Item5e extends Item {
     if ( value.template ) {
       try {
         templates = await (dnd5e.canvas.AbilityTemplate.fromItem(item))?.drawPreview();
-      } catch(err) {}
+      } catch(err) {
+        Hooks.onError("Item5e#use", err, {
+          msg: game.i18n.localize("DND5E.PlaceTemplateError"),
+          log: "error",
+          notify: "error"
+        });
+      }
     }
 
     /**
@@ -1757,7 +1763,13 @@ export default class Item5e extends Item {
       case "placeTemplate":
         try {
           await dnd5e.canvas.AbilityTemplate.fromItem(item)?.drawPreview();
-        } catch(err) {}
+        } catch(err) {
+          Hooks.onError("Item5e._onChatCardAction", err, {
+            msg: game.i18n.localize("DND5E.PlaceTemplateError"),
+            log: "error",
+            notify: "error"
+          });
+        }
         break;
       case "abilityCheck":
         targets = this._getChatCardTargets(card);

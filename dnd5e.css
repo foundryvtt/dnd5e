@@ -1174,6 +1174,9 @@ h5 {
 .dnd5e.sheet.actor .inventory-list .item .item-name i.not-attuned {
   color: #7a7971;
 }
+.dnd5e.sheet.actor .inventory-list .item .item-name h4 {
+  line-height: 30px;
+}
 .dnd5e.sheet.actor .inventory-list .item .item-uses input {
   width: 24px;
   text-align: center;
@@ -1204,6 +1207,9 @@ h5 {
 }
 .dnd5e.sheet.actor .inventory-list .item-detail.item-action {
   flex: 0 0 100px;
+}
+.dnd5e.sheet.actor .inventory-list .item-detail.item-quantity {
+  flex: 0 0 40px;
 }
 .dnd5e.sheet.actor .inventory-list .item-detail.attunement {
   flex: 0 0 24px;
@@ -2353,6 +2359,11 @@ h5 {
 }
 .dnd5e.sheet.group .members .group-member .name {
   cursor: pointer;
+  align-items: center;
+}
+.dnd5e.sheet.group .members .group-member .name h4 {
+  white-space: unset;
+  line-height: 1;
 }
 .dnd5e.sheet.group .members .hp {
   flex: 2;
