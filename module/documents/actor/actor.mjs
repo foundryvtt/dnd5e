@@ -850,14 +850,16 @@ export default class Actor5e extends Actor {
     if ( sourceId?.startsWith("Compendium.") ) return;
 
     // Configure prototype token settings
+    const prototypeToken = {};
     if ( "size" in (this.system.traits || {}) ) {
-      const s = CONFIG.DND5E.tokenSizes[this.system.traits.size || "med"];
-      const prototypeToken = {width: s, height: s};
-      if ( this.type === "character" ) Object.assign(prototypeToken, {
-        sight: { enabled: true }, actorLink: true, disposition: 1
-      });
-      this.updateSource({prototypeToken});
+      const size = CONFIG.DND5E.tokenSizes[this.system.traits.size || "med"];
+      if ( !foundry.utils.hasProperty(data, "prototypeToken.width") ) prototypeToken.width = size;
+      if ( !foundry.utils.hasProperty(data, "prototypeToken.height") ) prototypeToken.height = size;
     }
+    if ( this.type === "character" ) Object.assign(prototypeToken, {
+      sight: { enabled: true }, actorLink: true, disposition: CONST.TOKEN_DISPOSITIONS.FRIENDLY
+    });
+    this.updateSource({ prototypeToken });
   }
 
   /* -------------------------------------------- */
