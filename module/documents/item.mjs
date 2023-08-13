@@ -793,10 +793,8 @@ export default class Item5e extends Item {
     // Define follow-up actions resulting from the item usage
     config = foundry.utils.mergeObject(this._getUsageConfig(), config);
 
-    // Display a configuration dialog to customize the usage
-    if ( config.needsConfiguration === undefined ) {
-      config.needsConfiguration = Object.values(config.value).includes(true);
-    }
+    // Are any default values necessitating a prompt?
+    const needsConfiguration = Object.values(config.value).includes(true);
 
     /**
      * A hook event that fires before an item usage is configured.
@@ -810,7 +808,7 @@ export default class Item5e extends Item {
     if ( Hooks.call("dnd5e.preUseItem", item, config, options) === false ) return;
 
     // Display configuration dialog
-    if ( (options.configureDialog !== false) && config.needsConfiguration ) {
+    if ( (options.configureDialog !== false) && needsConfiguration ) {
       const configuration = await AbilityUseDialog.create(item, config);
       if ( !configuration ) return;
       foundry.utils.mergeObject(config.value, configuration);
@@ -921,7 +919,9 @@ export default class Item5e extends Item {
     if ( config.resource && (consume.target === this.id) ) config.uses = false;
 
     // Append the default values.
-    config.value = this._getUsageConfigDefaults(config);
+    const {value, defaults} = this._getUsageConfigDefaults(config);
+    config.value = value;
+    config.defaults = defaults;
 
     return config;
   }
@@ -945,10 +945,14 @@ export default class Item5e extends Item {
       template: config.template
     };
 
-    // Default values of selects.
-    if ( value.slot ) value.slotLevel = (is.preparation?.mode === "pact") ? "pact" : `spell${is.level}`;
+    // Default values of variable quantities.
+    const defaults = {
+      slot: value.slot ? ((is.preparation?.mode === "pact") ? "pact" : `spell${is.level}`) : null,
+      quantity: value.quantity ? 1 : null,
+      resource: value.resource ? is.consume.amount : null
+    };
 
-    return value;
+    return {value, defaults};
   }
 
   /* -------------------------------------------- */
@@ -996,7 +1000,7 @@ export default class Item5e extends Item {
     }
 
     // Consume Limited Usage
-    if ( value.uses ) {
+    if ( value.uses || value.quantity ) {
       const uses = this.system.uses || {};
       const available = Number(uses.value ?? 0);
       let used = false;
