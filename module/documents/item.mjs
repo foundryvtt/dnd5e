@@ -959,11 +959,11 @@ export default class Item5e extends Item {
 
     const value = {
       slot: config.slot,
-      uses: config.uses && !!is.uses.prompt,
+      uses: config.uses && is.uses.prompt,
       quantity: config.quantity,
       resource: config.resource,
       recharge: config.recharge,
-      template: config.template
+      template: config.template && is.target.prompt
     };
 
     // Default values of variable quantities.
