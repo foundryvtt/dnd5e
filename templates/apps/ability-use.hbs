@@ -1,7 +1,7 @@
 <form id="ability-use-form">
     <p>{{title}}</p>
     <p class="notes">{{note}}</p>
-    {{#each errors}}
+    {{#each warnings}}
     <p class="notification error">{{this}}</p>
     {{/each}}
 
@@ -10,7 +10,7 @@
         <label>{{ localize "DND5E.SpellCastUpcast" }}</label>
         <div class="form-fields">
             <select name="slotLevel">
-                {{#select config.value.slotLevel}}
+                {{#select config.defaults.slot}}
                 {{#each slotOptions as |l|}}
                 <option value="{{l.level}}" {{disabled (not l.canCast)}}>{{l.label}}</option>
                 {{/each}}

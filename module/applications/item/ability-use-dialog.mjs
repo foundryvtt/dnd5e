@@ -41,17 +41,20 @@ export default class AbilityUseDialog extends Dialog {
       name: item.name
     }));
 
-    // Render the ability usage template
-    const html = await renderTemplate("systems/dnd5e/templates/apps/ability-use.hbs", {
+    const data = {
+      item,
       config,
       slotOptions,
       note: this._getAbilityUseNote(item, config),
-      errors,
       title: game.i18n.format("DND5E.AbilityUseHint", {
         type: game.i18n.localize(CONFIG.Item.typeLabels[item.type]),
         name: item.name
       })
-    });
+    };
+    this._getAbilityUseWarnings(data);
+
+    // Render the ability usage template
+    const html = await renderTemplate("systems/dnd5e/templates/apps/ability-use.hbs", data);
 
     // Create the Dialog and return data as a Promise
     const isSpell = item.type === "spell";
@@ -151,8 +154,7 @@ export default class AbilityUseDialog extends Dialog {
     if ( item.type === "consumable" ) {
       let str = "DND5E.AbilityUseNormalHint";
       if ( uses.value > 1 ) str = "DND5E.AbilityUseConsumableChargeHint";
-      else if ( config.quantity ) str = "DND5E.AbilityUseConsumableDestroyHint";
-      else if ( quantity > 1 ) str = "DND5E.AbilityUseConsumableQuantityHint";
+      else if ( config.quantity && (quantity > 1) ) str = "DND5E.AbilityUseConsumableQuantityHint";
       return game.i18n.format(str, {
         type: game.i18n.localize(`DND5E.Consumable${item.system.consumableType.capitalize()}`),
         value: uses.value,
@@ -171,5 +173,66 @@ export default class AbilityUseDialog extends Dialog {
         per: CONFIG.DND5E.limitedUsePeriods[uses.per]
       });
     }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Get the ability usage warnings to display.
+   * @param {object} data    Template data for the AbilityUseDialog. **will be mutated**
+   * @returns {string[]}     The warnings to display.
+   * @private
+   */
+  static _getAbilityUseWarnings(data) {
+    const warnings = [];
+    const item = data.item;
+    const is = data.item.system;
+    const scale = item.usageScaling;
+    const level = is.level;
+
+    if ( (scale === "slot") && data.slotOptions.every(o => !o.hasSlots) ) {
+      // Warn that the actor has no spell slots of any level with which to use this item.
+      warnings.push(game.i18n.format("DND5E.SpellCastNoSlotsLeft", {
+        name: item.name
+      }));
+    } else if ( (scale === "slot") && !data.slotOptions.some(o => (o.level === level) && o.hasSlots) ) {
+      // Warn that the actor has no spell slots of this particular level with which to use this item.
+      warnings.push(game.i18n.format("DND5E.SpellCastNoSlots", {
+        level: CONFIG.DND5E.spellLevels[level],
+        name: item.name
+      }));
+    }
+
+    // Display warnings that the item or its resource item will be destroyed.
+    const type = game.i18n.localize(`DND5E.Consumable${item.system.consumableType.capitalize()}`)
+    if ( this._willDestroyItem(item) && ( is.quantity === 1) ) {
+      warnings.push(game.i18n.format("DND5E.AbilityUseConsumableDestroyHint", {type}));
+    }
+
+    const consume = item.system.consume;
+    const resource = item.actor.items.get(consume.target);
+    const qty = consume.amount || 1;
+    if ( resource && (resource.system.quantity === 1) && this._willDestroyItem(resource, qty) ) {
+      warnings.push(game.i18n.format("DND5E.AbilityUseConsumableDestroyResourceHint", {type, name: resource.name}));
+    }
+
+    data.warnings = warnings;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Get whether an update for an item's limited uses will result in lowering its quantity.
+   * @param {Item5e} item       The item targeted for updates.
+   * @param {number} consume    The amount of limited uses to subtract.
+   * @returns {boolean}
+   * @private
+   */
+  static _willDestroyItem(item, consume=1){
+    const hasUses = item.hasLimitedUses;
+    const uses = item.system.uses;
+    if ( !hasUses || !uses.autoDestroy ) return false;
+    const value = uses.value - consume;
+    return value <= 0;
   }
 }

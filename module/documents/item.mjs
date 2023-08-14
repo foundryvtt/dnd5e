@@ -250,6 +250,20 @@ export default class Item5e extends Item {
   /* -------------------------------------------- */
 
   /**
+   * Does this item scale with any kind of consumption?
+   * @type {string|null}
+   */
+  get usageScaling() {
+    const is = this.system;
+    if ( (this.type === "spell") && (is.level > 0) && CONFIG.DND5E.spellUpcastModes.includes(is.preparation.mode) ) {
+      return "slot";
+    }
+    return null;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Spellcasting details for a class or subclass.
    *
    * @typedef {object} SpellcastingDescription
@@ -857,16 +871,17 @@ export default class Item5e extends Item {
      * @param {object} usage.actorUpdates       Updates that will be applied to the actor.
      * @param {object} usage.itemUpdates        Updates that will be applied to the item being used.
      * @param {object[]} usage.resourceUpdates  Updates that will be applied to other items on the actor.
+     * @param {string[]} usage.deleteIds        Item ids for those which consumption will delete.
      * @returns {boolean}                       Explicitly return `false` to prevent item from being used.
      */
     if ( Hooks.call("dnd5e.itemUsageConsumption", item, config, options, usage) === false ) return;
 
     // Commit pending data updates
-    const { actorUpdates, itemUpdates, resourceUpdates } = usage;
+    const { actorUpdates, itemUpdates, resourceUpdates, deleteIds } = usage;
     if ( !foundry.utils.isEmpty(itemUpdates) ) await item.update(itemUpdates);
-    if ( value.quantity && (item.system.quantity === 0) ) await item.delete();
+    if ( !foundry.utils.isEmpty(deleteIds) ) await this.actor.deleteEmbeddedDocuments("Item", deleteIds);
     if ( !foundry.utils.isEmpty(actorUpdates) ) await this.actor.update(actorUpdates);
-    if ( resourceUpdates.length ) await this.actor.updateEmbeddedDocuments("Item", resourceUpdates);
+    if ( !foundry.utils.isEmpty(resourceUpdates) ) await this.actor.updateEmbeddedDocuments("Item", resourceUpdates);
 
     // Prepare card data & display it if options.createMessage is true
     const cardData = await item.displayCard(options);
@@ -904,15 +919,15 @@ export default class Item5e extends Item {
    * @returns {ItemUseConfiguration}  Configuration data for the roll.
    */
   _getUsageConfig(){
-    const uses = this.hasLimitedUses;
     const is = this.system;
+    const uses = this.hasLimitedUses && !is.recharge?.value;
     const consume = is.consume || {};
     const active = !!is.activation?.type;
 
     const config = {
-      slot: (this.type === "spell") && (is.level > 0) && CONFIG.DND5E.spellUpcastModes.includes(is.preparation.mode),
+      slot: this.usageScaling === "slot",
       uses: active && uses,
-      quantity: active && uses && !!is.uses.autoDestroy && (is.uses.value === 1),
+      quantity: active && uses && is.uses.autoDestroy && (is.uses.value === 1),
       resource: active && !!consume.type && !!consume.target && (!this.hasAttack || (consume.type !== "ammo")),
       recharge: active && !!is.recharge?.value,
       template: active && game.user.can("TEMPLATE_CREATE") && this.hasAreaTarget
@@ -972,8 +987,9 @@ export default class Item5e extends Item {
    */
   _getUsageUpdates(config) {
     const actorUpdates = {};
-    const itemUpdates = {};
+    let itemUpdates = {};
     const resourceUpdates = [];
+    const deleteIds = [];
     const value = config.value;
 
     // Consume Recharge
@@ -988,7 +1004,7 @@ export default class Item5e extends Item {
 
     // Consume Limited Resource
     if ( value.resource ) {
-      const canConsume = this._handleConsumeResource(itemUpdates, actorUpdates, resourceUpdates, config);
+      const canConsume = this._handleConsumeResource(itemUpdates, actorUpdates, resourceUpdates, deleteIds, config);
       if ( canConsume === false ) return false;
     }
 
@@ -1023,6 +1039,10 @@ export default class Item5e extends Item {
           used = true;
           itemUpdates["system.quantity"] = Math.max(q - 1, 0);
           itemUpdates["system.uses.value"] = uses.max ?? 1;
+          if ( itemUpdates["system.quantity"] === 0 ) {
+            deleteIds.push(this.id);
+            itemUpdates = {};
+          }
         }
       }
 
@@ -1034,7 +1054,7 @@ export default class Item5e extends Item {
     }
 
     // Return the configured usage
-    return {itemUpdates, actorUpdates, resourceUpdates};
+    return {itemUpdates, actorUpdates, resourceUpdates, deleteIds};
   }
 
   /* -------------------------------------------- */
@@ -1044,10 +1064,11 @@ export default class Item5e extends Item {
    * @param {object} itemUpdates        An object of data updates applied to this item
    * @param {object} actorUpdates       An object of data updates applied to the item owner (Actor)
    * @param {object[]} resourceUpdates  An array of updates to apply to other items owned by the actor
+   * @param {string[]} deleteIds        An array of item ids that will be deleted off the actor.
    * @returns {boolean|void}            Return false to block further progress, or return nothing to continue
    * @protected
    */
-  _handleConsumeResource(itemUpdates, actorUpdates, resourceUpdates) {
+  _handleConsumeResource(itemUpdates, actorUpdates, resourceUpdates, deleteIds) {
     const consume = this.system.consume || {};
     if ( !consume.type ) return;
 
@@ -1081,8 +1102,9 @@ export default class Item5e extends Item {
         resource = this.actor.items.get(consume.target);
         if ( !resource ) break;
         const uses = resource.system.uses;
-        if ( uses.per && uses.max ) quantity = uses.value;
-        else if ( resource.system.recharge?.value ) {
+        if ( uses.per && uses.max ) {
+          quantity = uses.value;
+        } else if ( resource.system.recharge?.value ) {
           quantity = resource.system.recharge.charged ? 1 : 0;
           amount = 1;
         }
@@ -1132,6 +1154,16 @@ export default class Item5e extends Item {
         const uses = resource.system.uses || {};
         const recharge = resource.system.recharge || {};
         const update = {_id: consume.target};
+        // Reduce quantity of, or delete, the external resource.
+        if ( uses.per && uses.max && uses.autoDestroy && (remaining === 0) ) {
+          update["system.quantity"] = Math.max(resource.system.quantity - 1, 0);
+          update["system.uses.value"] = uses.max ?? 1;
+          if ( update["system.quantity"] === 0 ) deleteIds.push(resource.id);
+          else resourceUpdates.push(update);
+          break;
+        }
+
+        // Regular consumption.
         if ( uses.per && uses.max ) update["system.uses.value"] = remaining;
         else if ( recharge.value ) update["system.recharge.charged"] = false;
         resourceUpdates.push(update);
