@@ -201,7 +201,7 @@ export default class ActionTemplate extends foundry.abstract.DataModel {
    * @type {boolean}
    */
   get hasAbilityCheck() {
-    return (this.actionType === "abil") && !!this.ability;
+    return (this.actionType === "abil") && (this.ability !== "none");
   }
 
   /* -------------------------------------------- */

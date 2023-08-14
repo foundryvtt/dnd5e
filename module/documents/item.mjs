@@ -501,8 +501,9 @@ export default class Item5e extends Item {
 
     // Action usage
     if ( "actionType" in this.system ) {
+      const abi = this.system.ability || this.actor?.system.attributes?.spellcasting;
       this.labels.abilityCheck = game.i18n.format("DND5E.AbilityPromptTitle", {
-        ability: CONFIG.DND5E.abilities[this.system.ability]?.label ?? ""
+        ability: CONFIG.DND5E.abilities[abi]?.label ?? ""
       });
 
       // Saving throws
@@ -1171,12 +1172,14 @@ export default class Item5e extends Item {
    */
   async getChatData(htmlOptions={}) {
     const data = this.toObject().system;
+    const rollData = this.getRollData();
+    data.ability ||= rollData.attributes?.spellcasting ?? null;
 
     // Rich text description
     data.description.value = await TextEditor.enrichHTML(data.description.value, {
       async: true,
       relativeTo: this,
-      rollData: this.getRollData(),
+      rollData,
       ...htmlOptions
     });
 
