@@ -540,7 +540,8 @@ export default class Item5e extends Item {
         formula = simplifyRollFormula(roll.formula, { preserveFlavor: true });
       }
       catch(err) {
-        console.warn(`Unable to simplify formula for ${this.name}: ${err}`);
+        const parentInfo = this.parent ? ` on ${this.parent.name} (${this.parent.id})` : '';
+        console.warn(`Unable to simplify formula for ${this.name} (${this.id})${parentInfo}`, err);
       }
       const damageType = damagePart[1];
       return { formula, damageType, label: `${formula} ${damageLabels[damageType] ?? ""}` };
