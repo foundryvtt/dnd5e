@@ -50,9 +50,28 @@ export default class AbilityScoreImprovementAdvancement extends Advancement {
    */
   get points() {
     return {
-      assigned: Object.values(this.value.assignments ?? {}).reduce((n, c) => n + c, 0),
-      total: this.configuration.points + Object.values(this.configuration.fixed).reduce((t, v) => t + v, 0)
+      assigned: Object.entries(this.value.assignments ?? {}).reduce((n, [abl, c]) => {
+        if ( this.canImprove(abl) ) n += c;
+        return n;
+      }, 0),
+      total: this.configuration.points + Object.entries(this.configuration.fixed).reduce((t, [abl, v]) => {
+        if ( this.canImprove(abl) ) t += v;
+        return t;
+      }, 0)
     };
+  }
+
+  /* -------------------------------------------- */
+  /*  Instance Methods                            */
+  /* -------------------------------------------- */
+
+  /**
+   * Is this ability allowed to be improved?
+   * @param {string} ability  The ability key.
+   * @returns {boolean}
+   */
+  canImprove(ability) {
+    return CONFIG.DND5E.abilities[ability]?.improvement !== false;
   }
 
   /* -------------------------------------------- */
@@ -99,7 +118,7 @@ export default class AbilityScoreImprovementAdvancement extends Advancement {
       const updates = {};
       for ( const key of Object.keys(assignments) ) {
         const ability = this.actor.system.abilities[key];
-        if ( !ability ) continue;
+        if ( !ability || !this.canImprove(key) ) continue;
         assignments[key] = Math.min(assignments[key], ability.max - ability.value);
         if ( assignments[key] ) updates[`system.abilities.${key}.value`] = ability.value + assignments[key];
         else delete assignments[key];
@@ -149,7 +168,7 @@ export default class AbilityScoreImprovementAdvancement extends Advancement {
       const updates = {};
       for ( const [key, change] of Object.entries(this.value.assignments ?? {}) ) {
         const ability = this.actor.system.abilities[key];
-        if ( !ability ) continue;
+        if ( !ability || !this.canImprove(key) ) continue;
         updates[`system.abilities.${key}.value`] = ability.value - change;
       }
       this.actor.updateSource(updates);
