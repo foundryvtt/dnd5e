@@ -162,7 +162,7 @@ export default class AbilityScoreImprovementAdvancement extends Advancement {
 
   /** @inheritdoc */
   reverse(level) {
-    const source = foundry.utils.deepClone(this.value);
+    const source = this.value.toObject();
 
     if ( this.value.type === "asi" ) {
       const updates = {};
