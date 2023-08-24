@@ -33,7 +33,7 @@ export default class AbilityScoreImprovementFlow extends AdvancementFlow {
 
   /** @inheritdoc */
   async retainData(data) {
-    super.retainData(data);
+    await super.retainData(data);
     this.assignments = this.retainedData.assignments ?? {};
     const featUuid = Object.values(this.retainedData.feat ?? {})[0];
     if ( featUuid ) this.feat = await fromUuid(featUuid);
@@ -45,10 +45,10 @@ export default class AbilityScoreImprovementFlow extends AdvancementFlow {
   async getData() {
     const points = {
       assigned: Object.keys(CONFIG.DND5E.abilities).reduce((assigned, key) => {
-          if ( !this.advancement.canImprove(key) ) return assigned;
-          return assigned + (this.advancement.configuration.fixed[key] ?? 0) + (this.assignments[key] ?? 0);
+        if ( !this.advancement.canImprove(key) || this.advancement.configuration.fixed[key] ) return assigned;
+        return assigned + (this.assignments[key] ?? 0);
       }, 0),
-      total: this.advancement.points.total
+      total: this.advancement.configuration.points
     };
     points.available = points.total - points.assigned;
 
