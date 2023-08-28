@@ -541,6 +541,20 @@ h5 {
 /* ----------------------------------------- */
 
 .trait-selector {
+  max-height: 700px;
+
+  form {
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+
+    >.trait-list {
+      overflow: auto;
+      border-bottom: 2px groove;
+      margin-bottom: 0.5em;
+    }
+  }
+
   .trait-list {
     list-style: none;
     margin: 0;
