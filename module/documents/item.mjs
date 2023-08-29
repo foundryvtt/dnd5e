@@ -3,6 +3,7 @@ import simplifyRollFormula from "../dice/simplify-roll-formula.mjs";
 import Advancement from "./advancement/advancement.mjs";
 import AbilityUseDialog from "../applications/item/ability-use-dialog.mjs";
 import Proficiency from "./actor/proficiency.mjs";
+import ItemUsageFlow from "../applications/item/item-usage-flow.mjs";
 
 /**
  * Override and extend the basic Item implementation.
@@ -729,10 +730,9 @@ export default class Item5e extends Item {
    *
    * @typedef {object} ItemUseConfiguration
    * @property {boolean} createMeasuredTemplate  Trigger a template creation
-   * @property {boolean} consumeQuantity         Should the item's quantity be consumed?
    * @property {boolean} consumeRecharge         Should a recharge be consumed?
    * @property {boolean} consumeResource         Should a linked (non-ammo) resource be consumed?
-   * @property {number|string|null} consumeSpellLevel  Specific spell level to consume, or "pact" for pact level.
+   * @property {number|string|null} currentSlotLevel  Specific spell level to consume, or "pact" for pact level.
    * @property {boolean} consumeSpellSlot        Should any spell slot be consumed?
    * @property {boolean} consumeUsage            Should limited uses be consumed?
    * @property {boolean} needsConfiguration      Is user-configuration needed?
@@ -785,19 +785,15 @@ export default class Item5e extends Item {
     }, options);
 
     // Reference aspects of the item data necessary for usage
-    const resource = is.consume || {};        // Resource consumption
     const isSpell = item.type === "spell";    // Does the item require a spell slot?
-    const requireSpellSlot = isSpell && (is.level > 0) && CONFIG.DND5E.spellUpcastModes.includes(is.preparation.mode);
 
     // Define follow-up actions resulting from the item usage
     config = foundry.utils.mergeObject({
-      createMeasuredTemplate: item.hasAreaTarget,
-      consumeQuantity: is.uses?.autoDestroy ?? false,
-      consumeRecharge: !!is.recharge?.value,
-      consumeResource: !!resource.target && (!item.hasAttack || (resource.type !== "ammo")),
-      consumeSpellLevel: requireSpellSlot ? is.preparation.mode === "pact" ? "pact" : is.level : null,
-      consumeSpellSlot: requireSpellSlot,
-      consumeUsage: !!is.uses?.per && (is.uses?.max > 0)
+      createMeasuredTemplate: true,
+      consumeUsage: true,
+      consumeResource: true,
+      consumeSpellSlot: true,
+      currentSlotLevel: null
     }, config);
 
     // Display a configuration dialog to customize the usage
@@ -816,16 +812,20 @@ export default class Item5e extends Item {
     if ( Hooks.call("dnd5e.preUseItem", item, config, options) === false ) return;
 
     // Display configuration dialog
+    let valid;
+    let usage;
     if ( (options.configureDialog !== false) && config.needsConfiguration ) {
-      const configuration = await AbilityUseDialog.create(item);
+      const configuration = await ItemUsageFlow.create(item, config, options);
       if ( !configuration ) return;
-      foundry.utils.mergeObject(config, configuration);
+      config = configuration.config;
+      valid = configuration.valid;
+      usage = configuration.updates;
     }
 
     // Handle spell upcasting
-    if ( isSpell && (config.consumeSpellSlot || config.consumeSpellLevel) ) {
-      const upcastLevel = config.consumeSpellLevel === "pact" ? as.spells.pact.level
-        : parseInt(config.consumeSpellLevel);
+    if ( isSpell && (config.consumeSpellSlot || config.currentSlotLevel) ) {
+      const upcastLevel = config.currentSlotLevel === "pact" ? as.spells.pact.level
+        : parseInt(config.currentSlotLevel);
       if ( upcastLevel && (upcastLevel !== is.level) ) {
         item = item.clone({"system.level": upcastLevel}, {keepId: true});
         item.prepareData();
@@ -846,8 +846,7 @@ export default class Item5e extends Item {
     if ( Hooks.call("dnd5e.preItemUsageConsumption", item, config, options) === false ) return;
 
     // Determine whether the item can be used by testing for resource consumption
-    const usage = item._getUsageUpdates(config);
-    if ( !usage ) return;
+    if ( !valid ) return;
 
     /**
      * A hook event that fires after an item's resource consumption has been calculated but before any
@@ -866,9 +865,10 @@ export default class Item5e extends Item {
     if ( Hooks.call("dnd5e.itemUsageConsumption", item, config, options, usage) === false ) return;
 
     // Commit pending data updates
-    const { actorUpdates, itemUpdates, resourceUpdates } = usage;
+    // DO THE THING.
+    const { actor:actorUpdates, item:itemUpdates, resources:resourceUpdates, deleteIds} = usage;
     if ( !foundry.utils.isEmpty(itemUpdates) ) await item.update(itemUpdates);
-    if ( config.consumeQuantity && (item.system.quantity === 0) ) await item.delete();
+    if ( !foundry.utils.isEmpty(deleteIds)) await this.actor.deleteEmbeddedDocuments("Item", deleteIds);
     if ( !foundry.utils.isEmpty(actorUpdates) ) await this.actor.update(actorUpdates);
     if ( resourceUpdates.length ) await this.actor.updateEmbeddedDocuments("Item", resourceUpdates);
 
@@ -914,7 +914,7 @@ export default class Item5e extends Item {
    */
   _getUsageUpdates({
     consumeQuantity, consumeRecharge, consumeResource, consumeSpellSlot,
-    consumeSpellLevel, consumeUsage}) {
+    currentSlotLevel, consumeUsage}) {
     const actorUpdates = {};
     const itemUpdates = {};
     const resourceUpdates = [];
@@ -936,17 +936,17 @@ export default class Item5e extends Item {
     }
 
     // Consume Spell Slots
-    if ( consumeSpellSlot && consumeSpellLevel ) {
-      if ( Number.isNumeric(consumeSpellLevel) ) consumeSpellLevel = `spell${consumeSpellLevel}`;
-      const level = this.actor?.system.spells[consumeSpellLevel];
+    if ( consumeSpellSlot && currentSlotLevel ) {
+      if ( Number.isNumeric(currentSlotLevel) ) currentSlotLevel = `spell${currentSlotLevel}`;
+      const level = this.actor?.system.spells[currentSlotLevel];
       const spells = Number(level?.value ?? 0);
       if ( spells === 0 ) {
-        const labelKey = consumeSpellLevel === "pact" ? "DND5E.SpellProgPact" : `DND5E.SpellLevel${this.system.level}`;
+        const labelKey = currentSlotLevel === "pact" ? "DND5E.SpellProgPact" : `DND5E.SpellLevel${this.system.level}`;
         const label = game.i18n.localize(labelKey);
         ui.notifications.warn(game.i18n.format("DND5E.SpellCastNoSlots", {name: this.name, level: label}));
         return false;
       }
-      actorUpdates[`system.spells.${consumeSpellLevel}.value`] = Math.max(spells - 1, 0);
+      actorUpdates[`system.spells.${currentSlotLevel}.value`] = Math.max(spells - 1, 0);
     }
 
     // Consume Limited Usage
