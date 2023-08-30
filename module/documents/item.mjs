@@ -805,7 +805,7 @@ export default class Item5e extends Item {
     } else {
       usage = ItemUsageFlow.getWarningsAndUpdates(item, config);
     }
-    config = usage.config;
+    console.warn("CONFIG", config);
 
     // Handle spell upcasting
     if ( (item.type === "spell") && config.currentSlot ) {
@@ -899,13 +899,13 @@ export default class Item5e extends Item {
   _getUsageMethods() {
     const is = this.system;
     const consume = is.consume ?? {};
-    const active = is.activation.type;
+    const active = !!is.activation?.type;
     const leveled = (this.type === "spell") && (is.level > 0);
 
     return {
       canCreateTemplate: active && game.user.can("TEMPLATE_CREATE") && this.hasAreaTarget,
       canConsumeUses: active && this.hasLimitedUses,
-      canConsumeResource: active && consume.type && consume.target && (consume.type !== "ammo"),
+      canConsumeResource: active && !!consume.type && !!consume.target && (consume.type !== "ammo"),
       canConsumeSlot: leveled && CONFIG.DND5E.spellUpcastModes.includes(is.preparation.mode)
     };
   }

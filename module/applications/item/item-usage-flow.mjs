@@ -2,8 +2,7 @@ export default class ItemUsageFlow extends FormApplication {
   constructor(item, config = {}, fn) {
     super(item);
     this.item = item;
-    this.actor = item.actor;
-    this.config = foundry.utils.deepClone(config);
+    this.config = config;
     this.fn = fn;
   }
 
@@ -27,10 +26,7 @@ export default class ItemUsageFlow extends FormApplication {
 
   async getData() {
     this.notes = [];
-
     this.config = this.constructor.defaultInputs(this.item, this.config);
-
-    const methods = this.item._getUsageMethods();
 
     const data = {
       title: game.i18n.format("DND5E.AbilityUseHint", {
@@ -38,10 +34,12 @@ export default class ItemUsageFlow extends FormApplication {
         name: this.item.name
       }),
       item: this.item,
-      actor: this.actor,
+      actor: this.item.actor,
+      icon: (this.item.type === "spell") ? "fa-magic" : "fa-fist-raised",
+      label: `DND5E.AbilityUse${(this.item.type === "spell") ? "Cast" : "Use"}`,
 
       ...this.config,
-      ...methods,
+      ...this.item._getUsageMethods(),
 
       notes: this.notes,
       ...this.constructor.getWarningsAndUpdates(this.item, this.config),
@@ -52,12 +50,7 @@ export default class ItemUsageFlow extends FormApplication {
     if (this.config.consumeSlot && !data.spellLevels.some(l => l.hasSlots)) {
       data.warnings.add(game.i18n.format("DND5E.SpellCastNoSlots", {name: this.item.name}));
     }
-
-    data.icon = (this.item.type === "spell") ? "fa-magic" : "fa-fist-raised";
-    data.label = `DND5E.AbilityUse${(this.item.type === "spell") ? "Cast" : "Use"}`;
     data.disabled = data.warnings.size > 0;
-
-    console.warn({data});
     return data;
   }
 
@@ -262,7 +255,7 @@ export default class ItemUsageFlow extends FormApplication {
     if (this.item.type !== "spell") return [];
 
     const is = this.item.system;
-    const as = this.actor.system;
+    const as = this.item.actor.system;
 
     // Determine the levels which are feasible
     let lmax = 0;
@@ -338,8 +331,8 @@ export default class ItemUsageFlow extends FormApplication {
   static defaultInputs(item, config = {}) {
     const can = item._getUsageMethods();
     return foundry.utils.mergeObject({
-      createMeasuredTemplate: can.canCreateTemplate,
-      consumeUsage: can.canConsumeUses,
+      createMeasuredTemplate: can.canCreateTemplate && item.system.target.prompt,
+      consumeUsage: can.canConsumeUses && item.system.uses.prompt,
       consumeResource: can.canConsumeResource,
       consumeSlot: can.canConsumeSlot,
       currentSlot: this.defaultSlot(item)
