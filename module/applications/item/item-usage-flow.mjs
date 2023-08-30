@@ -1,6 +1,6 @@
 export default class ItemUsageFlow extends FormApplication {
-  constructor(item, config = {}, options = {}, fn) {
-    super(item, options);
+  constructor(item, config = {}, fn) {
+    super(item);
     this.item = item;
     this.actor = item.actor;
     this.config = foundry.utils.deepClone(config);
@@ -17,21 +17,20 @@ export default class ItemUsageFlow extends FormApplication {
 
   }
 
-  async getData() {
-    this.itemUpdates = {};
-    this.actorUpdates = {};
-    this.resourceUpdates = [];
-    this.deleteUpdates = new Set();
-    this.notes = [];
-    this.warnings = [];
+  get title() {
+    return `${this.item.name}: ${game.i18n.localize("DND5E.AbilityUseConfig")}`;
+  }
 
-    this.config = foundry.utils.mergeObject({
-      createMeasuredTemplate: true,
-      consumeUsage: true,
-      consumeResource: true,
-      consumeSpellSlot: true,
-      currentSlotLevel: null
-    }, this.config);
+  get id() {
+    return `item-usage-flow-${this.item.uuid.replaceAll(".", "-")}`;
+  }
+
+  async getData() {
+    this.notes = [];
+
+    this.config = this.constructor.defaultInputs(this.item, this.config);
+
+    const methods = this.item._getUsageMethods();
 
     const data = {
       title: game.i18n.format("DND5E.AbilityUseHint", {
@@ -40,44 +39,67 @@ export default class ItemUsageFlow extends FormApplication {
       }),
       item: this.item,
       actor: this.actor,
-      spellLevels: this.#getSpellData(),
 
-      itemUpdates: this.itemUpdates,
-      actorUpdates: this.actorUpdates,
-      resourceUpdates: this.resourceUpdates,
-
-      canCreateTemplate: game.user.can("TEMPLATE_CREATE") && this.item.hasAreaTarget,
-      canConsumeUses: this.#updateItemUpdates() === true,
-      canConsumeResource: this.#updateConsumptionUpdates() === true,
-      canConsumeSlot: this.#updateSpellUpdates() === true,
       ...this.config,
+      ...methods,
 
       notes: this.notes,
-      warnings: this.warnings
+      ...this.constructor.getWarningsAndUpdates(this.item, this.config),
+      spellLevels: this.#populateSlotOptions()
     };
 
-    console.warn("------------------------------------------------");
-    console.warn("ITEM UPDATES:", this.itemUpdates);
-    console.warn("ACTOR UPDATES:", this.actorUpdates);
-    console.warn("OTHER ITEMS:", this.resourceUpdates);
-    console.warn("ITEMS TO BE DELETED:", this.deleteUpdates);
-    console.warn("------------------------------------------------");
+    // Warn about zero spell slots of any level.
+    if (this.config.consumeSlot && !data.spellLevels.some(l => l.hasSlots)) {
+      data.warnings.add(game.i18n.format("DND5E.SpellCastNoSlots", {name: this.item.name}));
+    }
 
     data.icon = (this.item.type === "spell") ? "fa-magic" : "fa-fist-raised";
+    data.label = `DND5E.AbilityUse${(this.item.type === "spell") ? "Cast" : "Use"}`;
+    data.disabled = data.warnings.size > 0;
 
+    console.warn({data});
     return data;
   }
 
-  // update consumption thingies and return true if can consume.
-  #updateConsumptionUpdates() {
-    const consume = this.item.system.consume || {};
-    if (!consume.type) return false;
+  get defaultSlot() {
+    return this.constructor.defaultSlot(this.item);
+  }
+  static defaultSlot(item) {
+    const {system: is, type} = item;
+    const upcast = (type === "spell") && (is.level > 0) && CONFIG.DND5E.spellUpcastModes.includes(is.preparation.mode);
+    if (!upcast) return null;
+    const level = (is.preparation.mode === "pact") ? "pact" : is.level;
+    return Number.isNumeric(level) ? `spell${level}` : level;
+  }
 
-    // No consumed target
+  static getWarningsAndUpdates(item, config = {}) {
+    const methods = item._getUsageMethods();
+    const data = {
+      actor: {},
+      item: {},
+      resources: [],
+      deleteIds: new Set(),
+      warnings: new Set()
+    };
+
+    if (methods.canConsumeResource && config.consumeResource) this.#updateConsumptionUpdates(item, config, data);
+    if (methods.canConsumeUses && config.consumeUsage) this.#updateItemUpdates(item, config, data);
+    if (methods.canConsumeSlot && config.consumeSlot) this.#updateSpellUpdates(item, config, data);
+    data.config = config;
+    return data;
+  }
+
+  /**
+   * Populate updates and warnings related to consuming an external resource.
+   */
+  static #updateConsumptionUpdates(item, config, data) {
+    const consume = item.system.consume;
     const typeLabel = CONFIG.DND5E.abilityConsumptionTypes[consume.type];
+
+    // The targeted item is missing.
     if (!consume.target) {
-      this.warnings.push(game.i18n.format("DND5E.ConsumeWarningNoResource", {name: this.item.name, type: typeLabel}));
-      return false;
+      data.warnings.add(game.i18n.format("DND5E.ConsumeWarningNoResource", {name: item.name, type: typeLabel}));
+      return;
     }
 
     // Identify the consumed resource and its current quantity
@@ -86,21 +108,21 @@ export default class ItemUsageFlow extends FormApplication {
     let quantity = 0;
     switch (consume.type) {
       case "attribute":
-        resource = foundry.utils.getProperty(this.actor.system, consume.target);
+        resource = foundry.utils.getProperty(item.actor.system, consume.target);
         quantity = resource || 0;
         break;
       case "ammo":
       case "material":
-        resource = this.actor.items.get(consume.target);
+        resource = item.actor.items.get(consume.target);
         quantity = resource ? resource.system.quantity : 0;
         break;
       case "hitDice":
         const denom = !["smallest", "largest"].includes(consume.target) ? consume.target : false;
-        resource = Object.values(this.actor.classes).filter(cls => !denom || (cls.system.hitDice === denom));
+        resource = Object.values(item.actor.classes).filter(cls => !denom || (cls.system.hitDice === denom));
         quantity = resource.reduce((count, cls) => count + cls.system.levels - cls.system.hitDiceUsed, 0);
         break;
       case "charges":
-        resource = this.actor.items.get(consume.target);
+        resource = item.actor.items.get(consume.target);
         if (!resource) break;
         const uses = resource.system.uses;
         if (uses.per && uses.max) quantity = uses.value;
@@ -113,27 +135,25 @@ export default class ItemUsageFlow extends FormApplication {
 
     // Verify that a consumed resource is available
     if (resource === undefined) {
-      this.warnings.push(game.i18n.format("DND5E.ConsumeWarningNoSource", {name: this.item.name, type: typeLabel}));
-      return false;
+      data.warnings.add(game.i18n.format("DND5E.ConsumeWarningNoSource", {name: item.name, type: typeLabel}));
+      return;
     }
 
     // Verify that the required quantity is available
     let remaining = quantity - amount;
-    if ((remaining < 0) && this.config.consumeResource) {
-      this.warnings.push(game.i18n.format("DND5E.ConsumeWarningNoQuantity", {name: this.item.name, type: typeLabel}));
+    if (remaining < 0) {
+      data.warnings.add(game.i18n.format("DND5E.ConsumeWarningNoQuantity", {name: item.name, type: typeLabel}));
+      return;
     }
-
-    // Do not create any updates if invalid or toggled off.
-    if (!this.config.consumeResource) return true;
 
     // Define updates to provided data objects
     switch (consume.type) {
       case "attribute":
-        this.actorUpdates[`system.${consume.target}`] = remaining;
+        data.actor[`system.${consume.target}`] = remaining;
         break;
       case "ammo":
       case "material":
-        this.resourceUpdates.push({_id: consume.target, "system.quantity": remaining});
+        data.resources.push({_id: consume.target, "system.quantity": remaining});
         break;
       case "hitDice":
         if (["smallest", "largest"].includes(consume.target)) resource = resource.sort((lhs, rhs) => {
@@ -146,7 +166,7 @@ export default class ItemUsageFlow extends FormApplication {
           const available = (toConsume > 0 ? cls.system.levels : 0) - cls.system.hitDiceUsed;
           const delta = toConsume > 0 ? Math.min(toConsume, available) : Math.max(toConsume, available);
           if (delta !== 0) {
-            this.resourceUpdates.push({_id: cls.id, "system.hitDiceUsed": cls.system.hitDiceUsed + delta});
+            data.resources.push({_id: cls.id, "system.hitDiceUsed": cls.system.hitDiceUsed + delta});
             toConsume -= delta;
             if (toConsume === 0) break;
           }
@@ -164,7 +184,7 @@ export default class ItemUsageFlow extends FormApplication {
             update["system.uses.value"] = remaining;
           } else if (uses.autoDestroy) {
             if (quantity === 1) {
-              this.deleteUpdates.add(resource.id);
+              data.deleteIds.add(resource.id);
               push = false;
             } else {
               update["system.uses.value"] = uses.max;
@@ -174,89 +194,75 @@ export default class ItemUsageFlow extends FormApplication {
 
         }
         else if (recharge.value) update["system.recharge.charged"] = false;
-        if (push) this.resourceUpdates.push(update);
+        if (push) data.resources.push(update);
         break;
     }
-    return true;
   }
 
-  // update item's own uses or recharge update, return true if can consume uses/recharge.
-  #updateItemUpdates() {
-    const {recharge, uses, quantity} = this.item.system;
-    const consuming = this.config.consumeUsage;
+  /**
+   * Populate updates and warnings related to consuming the item's own limited uses or recharge.
+   */
+  static #updateItemUpdates(item, config, data) {
+    const {recharge, uses, quantity} = item.system;
 
     // case 1: consume recharge
     if (!!recharge?.value) {
-      // show warning if consuming but can't
-      if (consuming && !recharge.charged) this.warnings.push(game.i18n.format("DND5E.ItemNoUses", {name: this.item.name}));
-      // add update if consuming and can
-      if (consuming && recharge.charged) this.itemUpdates["system.recharge.charged"] = false;
-      return true;
+      if (recharge.charged) data.item["system.recharge.charged"] = false;
+      else data.warnings.add(game.i18n.format("DND5E.ItemNoUses", {name: item.name}));
+      return;
     }
 
     // case 2: consume limited uses
-    if (uses.per && (uses.max > 0)) {
+    if (uses?.per && (uses.max > 0)) {
 
       if (!uses.value) {
-        if (consuming) this.warnings.push(game.i18n.format("DND5E.ItemNoUses", {name: this.item.name}));
-        return true;
+        data.warnings.add(game.i18n.format("DND5E.ItemNoUses", {name: item.name}));
+        return;
       }
 
 
       const remaining = uses.value - 1;
-      if (remaining >= 1) {
-        if (consuming) this.itemUpdates["system.uses.value"] = remaining;
-        return true;
+      if (!uses.autoDestroy || (remaining >= 1)) {
+        data.item["system.uses.value"] = remaining;
+        return;
       }
 
       // case 2B: consume quantity instead of uses if the limited use consumption puts it at 0 uses and destroys it.
-      if (uses.autoDestroy && (remaining === 0)) {
-        if (!consuming) return true;
-
-        if (quantity > 1) {
-          // reduce quantity
-          this.itemUpdates["system.quantity"] = Math.max(quantity - 1, 0);
-          this.itemUpdates["system.uses.value"] = uses.max;
-        } else if (quantity === 1) {
-          // delete item (qty 0)
-          this.deleteUpdates.add(this.item.id);
-          this.itemUpdates = [];
-        }
-        return true;
+      if (uses.autoDestroy && (remaining === 0) && (quantity > 1)) {
+        // reduce quantity
+        data.item["system.quantity"] = Math.max(quantity - 1, 0);
+        data.item["system.uses.value"] = uses.max;
+      } else if (uses.autoDestroy && (remaining === 0) && quantity === 1) {
+        // delete item (qty 0)
+        data.deleteIds.add(item.id);
+        data.item = {};
       }
     }
   }
 
-  // update stuff
-  #updateSpellUpdates() {
-    const is = this.item.system;
-    const isSpell = this.item.type === "spell";
-    const consumeSpellSlot = isSpell && (is.level > 0) && CONFIG.DND5E.spellUpcastModes.includes(is.preparation.mode);
-    let currentLevel = this.config.currentSlotLevel ?? (consumeSpellSlot ? is.preparation.mode === "pact" ? "pact" : is.level : null);
-
-    if (!consumeSpellSlot || !currentLevel) return false;
-
-    if (Number.isNumeric(currentLevel)) currentLevel = `spell${currentLevel}`;
-    const level = this.actor.system.spells[currentLevel];
-    const spells = Number(level?.value ?? 0);
-    if (this.config.consumeSpellSlot) {
-      this.actorUpdates[`system.spells.${currentLevel}.value`] = Math.max(spells - 1, 0);
+  /**
+   * Populate the updates and warnings related to consuming a spell slot with a leveled spell.
+   */
+  static #updateSpellUpdates(item, config, data) {
+    const slot = config.currentSlot ?? this.defaultSlot(item);
+    console.warn({slot, currentSlot: config.currentSlot, defaultSlot: this.defaultSlot(item)})
+    const spells = Number(item.actor.system.spells[slot]?.value ?? 0);
+    if (!spells) {
+      data.warnings.add(game.i18n.format("DND5E.SpellCastNoSlotsOfLevel", {name: item.name}));
+      return;
     }
-
-    return true;
+    data.actor[`system.spells.${slot}.value`] = Math.max(spells - 1, 0);
   }
 
   /**
    * Get spell slot options.
    * @returns {object[]}
    */
-  #getSpellData() {
+  #populateSlotOptions() {
+    if (this.item.type !== "spell") return [];
+
     const is = this.item.system;
     const as = this.actor.system;
-
-    // Determine whether the spell may be up-cast
-    const consumeSpellSlot = (is.level > 0) && CONFIG.DND5E.spellUpcastModes.includes(is.preparation.mode);
-    if (!consumeSpellSlot) return [];
 
     // Determine the levels which are feasible
     let lmax = 0;
@@ -268,13 +274,14 @@ export default class ItemUsageFlow extends FormApplication {
       let slots = Math.clamped(parseInt(l.value || 0), 0, max);
       if (max > 0) lmax = i;
       arr.push({
-        level: i,
+        level: `spell${i}`,
         label: i > 0 ? game.i18n.format("DND5E.SpellLevelSlot", {level: label, n: slots}) : label,
         canCast: max > 0,
-        hasSlots: slots > 0
+        hasSlots: slots > 0,
+        idx: i
       });
       return arr;
-    }, []).filter(sl => sl.level <= lmax);
+    }, []).filter(sl => sl.idx <= lmax);
 
     // If this character has pact slots, present them as an option for casting the spell.
     const pact = as.spells.pact;
@@ -286,12 +293,6 @@ export default class ItemUsageFlow extends FormApplication {
         hasSlots: pact.value > 0
       });
     }
-    const canCast = spellLevels.some(l => l.hasSlots);
-    if (!canCast && this.config.consumeSpellSlot) this.warnings.push(game.i18n.format("DND5E.SpellCastNoSlots", {
-      level: CONFIG.DND5E.spellLevels[is.level],
-      name: this.item.name
-    }));
-
     return spellLevels;
   }
 
@@ -306,13 +307,7 @@ export default class ItemUsageFlow extends FormApplication {
   async _updateObject(event, formData) {
     this.fn({
       config: formData,
-      valid: this.warnings.length > 0,
-      updates: {
-        actor: this.actorUpdates,
-        item: this.itemUpdates,
-        resources: this.resourceUpdates,
-        deleteIds: Array.from(this.deleteUpdates)
-      }
+      ...this.constructor.getWarningsAndUpdates(this.item, formData)
     });
     this.close();
   }
@@ -332,8 +327,22 @@ export default class ItemUsageFlow extends FormApplication {
    * @param {Item5e} item  Item being used.
    * @returns {Promise}    Promise that is resolved when the use dialog is acted upon.
    */
-  static async create(item, options = {}, config = {}) {
+  static async create(item, config = {}) {
     if (!item.isOwned) throw new Error("You cannot display an ability usage dialog for an unowned item");
-    return new Promise(resolve => new this(item, options, config, resolve).render(true));
+    return new Promise(resolve => new this(item, config, resolve).render(true));
+  }
+
+  /**
+   * Default or current values of selections.
+   */
+  static defaultInputs(item, config = {}) {
+    const can = item._getUsageMethods();
+    return foundry.utils.mergeObject({
+      createMeasuredTemplate: can.canCreateTemplate,
+      consumeUsage: can.canConsumeUses,
+      consumeResource: can.canConsumeResource,
+      consumeSlot: can.canConsumeSlot,
+      currentSlot: this.defaultSlot(item)
+    }, config);
   }
 }

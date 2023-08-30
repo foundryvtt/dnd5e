@@ -17,8 +17,8 @@
   <div class="form-group">
     <label>{{ localize "DND5E.SpellCastUpcast" }}</label>
     <div class="form-fields">
-      <select name="currentSlotLevel">
-        {{#select currentSlotLevel}}
+      <select name="currentSlot">
+        {{#select currentSlot}}
         {{#each spellLevels as |l|}}
         <option value="{{l.level}}" {{disabled (not l.canCast)}}>{{l.label}}</option>
         {{/each}}
@@ -29,7 +29,7 @@
 
   <div class="form-group">
     <label class="checkbox">
-      <input type="checkbox" name="consumeSpellSlot" {{checked consumeSpellSlot}}>{{localize "DND5E.SpellCastConsume"}}
+      <input type="checkbox" name="consumeSlot" {{checked consumeSlot}}>{{localize "DND5E.SpellCastConsume"}}
     </label>
   </div>
   {{/if}}
@@ -59,8 +59,8 @@
   {{/if}}
 
   <footer>
-    <button data-type="submit">
-      <i class="fa-solid {{icon}}"></i> Use/Cast
+    <button data-type="submit" {{disabled disabled}}>
+      <i class="fa-solid {{icon}}"></i> {{localize label}}
     </button>
   </footer>
 </form>

@@ -727,15 +727,14 @@ export default class Item5e extends Item {
 
   /**
    * Configuration data for an item usage being prepared.
+   * If none of these are explicitly `true`, configuration will not be performed.
    *
    * @typedef {object} ItemUseConfiguration
    * @property {boolean} createMeasuredTemplate  Trigger a template creation
-   * @property {boolean} consumeRecharge         Should a recharge be consumed?
    * @property {boolean} consumeResource         Should a linked (non-ammo) resource be consumed?
-   * @property {number|string|null} currentSlotLevel  Specific spell level to consume, or "pact" for pact level.
-   * @property {boolean} consumeSpellSlot        Should any spell slot be consumed?
+   * @property {string|null} currentSlot         Specific spell level type to consume, e.g., 'spell3' or 'pact'.
+   * @property {boolean} consumeSlot             Should any spell slot be consumed?
    * @property {boolean} consumeUsage            Should limited uses be consumed?
-   * @property {boolean} needsConfiguration      Is user-configuration needed?
    */
 
   /**
@@ -784,21 +783,8 @@ export default class Item5e extends Item {
       "flags.dnd5e.use": {type: this.type, itemId: this.id, itemUuid: this.uuid}
     }, options);
 
-    // Reference aspects of the item data necessary for usage
-    const isSpell = item.type === "spell";    // Does the item require a spell slot?
-
     // Define follow-up actions resulting from the item usage
-    config = foundry.utils.mergeObject({
-      createMeasuredTemplate: true,
-      consumeUsage: true,
-      consumeResource: true,
-      consumeSpellSlot: true,
-      currentSlotLevel: null
-    }, config);
-
-    // Display a configuration dialog to customize the usage
-    if ( config.needsConfiguration === undefined ) config.needsConfiguration = config.createMeasuredTemplate
-      || config.consumeRecharge || config.consumeResource || config.consumeSpellSlot || config.consumeUsage;
+    config = ItemUsageFlow.defaultInputs(item, config);
 
     /**
      * A hook event that fires before an item usage is configured.
@@ -812,27 +798,25 @@ export default class Item5e extends Item {
     if ( Hooks.call("dnd5e.preUseItem", item, config, options) === false ) return;
 
     // Display configuration dialog
-    let valid;
     let usage;
-    if ( (options.configureDialog !== false) && config.needsConfiguration ) {
-      const configuration = await ItemUsageFlow.create(item, config, options);
-      if ( !configuration ) return;
-      config = configuration.config;
-      valid = configuration.valid;
-      usage = configuration.updates;
+    if ( (options.configureDialog !== false) && Object.values(config).includes(true) ) {
+      usage = await ItemUsageFlow.create(item, config, options);
+      if ( !usage ) return;
+    } else {
+      usage = ItemUsageFlow.getWarningsAndUpdates(item, config);
     }
+    config = usage.config;
 
     // Handle spell upcasting
-    if ( isSpell && (config.consumeSpellSlot || config.currentSlotLevel) ) {
-      const upcastLevel = config.currentSlotLevel === "pact" ? as.spells.pact.level
-        : parseInt(config.currentSlotLevel);
-      if ( upcastLevel && (upcastLevel !== is.level) ) {
+    if ( (item.type === "spell") && config.currentSlot ) {
+      const upcastLevel = config.currentSlot === "pact" ? as.spells.pact.level : parseInt(config.currentSlot.at(-1));
+      if ( upcastLevel !== is.level ) {
         item = item.clone({"system.level": upcastLevel}, {keepId: true});
         item.prepareData();
         item.prepareFinalAttributes();
       }
     }
-    if ( isSpell ) foundry.utils.mergeObject(options.flags, {"dnd5e.use.spellLevel": item.system.level});
+    if ( item.type === "spell" ) foundry.utils.mergeObject(options.flags, {"dnd5e.use.spellLevel": item.system.level});
 
     /**
      * A hook event that fires before an item's resource consumption has been calculated.
@@ -846,7 +830,10 @@ export default class Item5e extends Item {
     if ( Hooks.call("dnd5e.preItemUsageConsumption", item, config, options) === false ) return;
 
     // Determine whether the item can be used by testing for resource consumption
-    if ( !valid ) return;
+    if( usage.warnings.size > 0 ) {
+      for ( const w of usage.warnings ) ui.notifications.warn(w);
+      return null;
+    }
 
     /**
      * A hook event that fires after an item's resource consumption has been calculated but before any
@@ -857,20 +844,19 @@ export default class Item5e extends Item {
      * @param {ItemUseConfiguration} config     Configuration data for the item usage being prepared.
      * @param {ItemUseOptions} options          Additional options used for configuring item usage.
      * @param {object} usage
-     * @param {object} usage.actorUpdates       Updates that will be applied to the actor.
-     * @param {object} usage.itemUpdates        Updates that will be applied to the item being used.
-     * @param {object[]} usage.resourceUpdates  Updates that will be applied to other items on the actor.
+     * @param {object} usage.actor              Updates that will be applied to the actor.
+     * @param {object} usage.item               Updates that will be applied to the item being used.
+     * @param {object[]} usage.resources        Updates that will be applied to other items on the actor.
+     * @param {Set<string>} usage.deleteIds     Item ids for items that will be fully deleted off the actor.
      * @returns {boolean}                       Explicitly return `false` to prevent item from being used.
      */
     if ( Hooks.call("dnd5e.itemUsageConsumption", item, config, options, usage) === false ) return;
 
     // Commit pending data updates
-    // DO THE THING.
-    const { actor:actorUpdates, item:itemUpdates, resources:resourceUpdates, deleteIds} = usage;
-    if ( !foundry.utils.isEmpty(itemUpdates) ) await item.update(itemUpdates);
-    if ( !foundry.utils.isEmpty(deleteIds)) await this.actor.deleteEmbeddedDocuments("Item", deleteIds);
-    if ( !foundry.utils.isEmpty(actorUpdates) ) await this.actor.update(actorUpdates);
-    if ( resourceUpdates.length ) await this.actor.updateEmbeddedDocuments("Item", resourceUpdates);
+    if ( !foundry.utils.isEmpty(usage.item) ) await item.update(usage.item);
+    if ( !foundry.utils.isEmpty(usage.deleteIds) ) await this.actor.deleteEmbeddedDocuments("Item", usage.deleteIds);
+    if ( !foundry.utils.isEmpty(usage.actor) ) await this.actor.update(usage.actor);
+    if ( !foundry.utils.isEmpty(usage.resources) ) await this.actor.updateEmbeddedDocuments("Item", usage.resources);
 
     // Prepare card data & display it if options.createMessage is true
     const cardData = await item.displayCard(options);
@@ -906,181 +892,61 @@ export default class Item5e extends Item {
   /* -------------------------------------------- */
 
   /**
-   * Verify that the consumed resources used by an Item are available and prepare the updates that should
-   * be performed. If required resources are not available, display an error and return false.
-   * @param {ItemUseConfiguration} config  Configuration data for an item usage being prepared.
-   * @returns {object|boolean}             A set of data changes to apply when the item is used, or false.
+   * Stuff an item can do when used.
+   * @returns {object}
    * @protected
    */
-  _getUsageUpdates({
-    consumeQuantity, consumeRecharge, consumeResource, consumeSpellSlot,
-    currentSlotLevel, consumeUsage}) {
-    const actorUpdates = {};
-    const itemUpdates = {};
-    const resourceUpdates = [];
+  _getUsageMethods() {
+    const is = this.system;
+    const consume = is.consume ?? {};
+    const active = is.activation.type;
+    const leveled = (this.type === "spell") && (is.level > 0);
 
-    // Consume Recharge
-    if ( consumeRecharge ) {
-      const recharge = this.system.recharge || {};
-      if ( recharge.charged === false ) {
-        ui.notifications.warn(game.i18n.format("DND5E.ItemNoUses", {name: this.name}));
-        return false;
-      }
-      itemUpdates["system.recharge.charged"] = false;
-    }
-
-    // Consume Limited Resource
-    if ( consumeResource ) {
-      const canConsume = this._handleConsumeResource(itemUpdates, actorUpdates, resourceUpdates);
-      if ( canConsume === false ) return false;
-    }
-
-    // Consume Spell Slots
-    if ( consumeSpellSlot && currentSlotLevel ) {
-      if ( Number.isNumeric(currentSlotLevel) ) currentSlotLevel = `spell${currentSlotLevel}`;
-      const level = this.actor?.system.spells[currentSlotLevel];
-      const spells = Number(level?.value ?? 0);
-      if ( spells === 0 ) {
-        const labelKey = currentSlotLevel === "pact" ? "DND5E.SpellProgPact" : `DND5E.SpellLevel${this.system.level}`;
-        const label = game.i18n.localize(labelKey);
-        ui.notifications.warn(game.i18n.format("DND5E.SpellCastNoSlots", {name: this.name, level: label}));
-        return false;
-      }
-      actorUpdates[`system.spells.${currentSlotLevel}.value`] = Math.max(spells - 1, 0);
-    }
-
-    // Consume Limited Usage
-    if ( consumeUsage ) {
-      const uses = this.system.uses || {};
-      const available = Number(uses.value ?? 0);
-      let used = false;
-      const remaining = Math.max(available - 1, 0);
-      if ( available >= 1 ) {
-        used = true;
-        itemUpdates["system.uses.value"] = remaining;
-      }
-
-      // Reduce quantity if not reducing usages or if usages hit zero, and we are set to consumeQuantity
-      if ( consumeQuantity && (!used || (remaining === 0)) ) {
-        const q = Number(this.system.quantity ?? 1);
-        if ( q >= 1 ) {
-          used = true;
-          itemUpdates["system.quantity"] = Math.max(q - 1, 0);
-          itemUpdates["system.uses.value"] = uses.max ?? 1;
-        }
-      }
-
-      // If the item was not used, return a warning
-      if ( !used ) {
-        ui.notifications.warn(game.i18n.format("DND5E.ItemNoUses", {name: this.name}));
-        return false;
-      }
-    }
-
-    // Return the configured usage
-    return {itemUpdates, actorUpdates, resourceUpdates};
+    return {
+      canCreateTemplate: active && game.user.can("TEMPLATE_CREATE") && this.hasAreaTarget,
+      canConsumeUses: active && this.hasLimitedUses,
+      canConsumeResource: active && consume.type && consume.target && (consume.type !== "ammo"),
+      canConsumeSlot: leveled && CONFIG.DND5E.spellUpcastModes.includes(is.preparation.mode)
+    };
   }
 
   /* -------------------------------------------- */
 
   /**
-   * Handle update actions required when consuming an external resource
-   * @param {object} itemUpdates        An object of data updates applied to this item
-   * @param {object} actorUpdates       An object of data updates applied to the item owner (Actor)
-   * @param {object[]} resourceUpdates  An array of updates to apply to other items owned by the actor
-   * @returns {boolean|void}            Return false to block further progress, or return nothing to continue
+   * Create the update to ammunition being consumed, or return false if unavailable.
+   * @returns {boolean|object[]}      The update to the ammo, or false if erroring.
    * @protected
    */
-  _handleConsumeResource(itemUpdates, actorUpdates, resourceUpdates) {
-    const consume = this.system.consume || {};
-    if ( !consume.type ) return;
+  _handleConsumeAmmo() {
+    const consume = this.system.consume;
 
     // No consumed target
-    const typeLabel = CONFIG.DND5E.abilityConsumptionTypes[consume.type];
+    const typeLabel = CONFIG.DND5E.abilityConsumptionTypes.ammo;
     if ( !consume.target ) {
       ui.notifications.warn(game.i18n.format("DND5E.ConsumeWarningNoResource", {name: this.name, type: typeLabel}));
       return false;
     }
 
-    // Identify the consumed resource and its current quantity
-    let resource = null;
-    let amount = Number(consume.amount ?? 1);
-    let quantity = 0;
-    switch ( consume.type ) {
-      case "attribute":
-        resource = foundry.utils.getProperty(this.actor.system, consume.target);
-        quantity = resource || 0;
-        break;
-      case "ammo":
-      case "material":
-        resource = this.actor.items.get(consume.target);
-        quantity = resource ? resource.system.quantity : 0;
-        break;
-      case "hitDice":
-        const denom = !["smallest", "largest"].includes(consume.target) ? consume.target : false;
-        resource = Object.values(this.actor.classes).filter(cls => !denom || (cls.system.hitDice === denom));
-        quantity = resource.reduce((count, cls) => count + cls.system.levels - cls.system.hitDiceUsed, 0);
-        break;
-      case "charges":
-        resource = this.actor.items.get(consume.target);
-        if ( !resource ) break;
-        const uses = resource.system.uses;
-        if ( uses.per && uses.max ) quantity = uses.value;
-        else if ( resource.system.recharge?.value ) {
-          quantity = resource.system.recharge.charged ? 1 : 0;
-          amount = 1;
-        }
-        break;
-    }
+    // Identify the consumed ammo and its current quantity
+    const resource = this.actor.items.get(consume.target);
+    const amount = Number(consume.amount ?? 1);
+    const quantity = resource?.system.quantity ?? 0;
 
-    // Verify that a consumed resource is available
-    if ( resource === undefined ) {
+    // Verify that a consumed ammo is available
+    if ( !resource ) {
       ui.notifications.warn(game.i18n.format("DND5E.ConsumeWarningNoSource", {name: this.name, type: typeLabel}));
       return false;
     }
 
     // Verify that the required quantity is available
-    let remaining = quantity - amount;
+    const remaining = quantity - amount;
     if ( remaining < 0 ) {
       ui.notifications.warn(game.i18n.format("DND5E.ConsumeWarningNoQuantity", {name: this.name, type: typeLabel}));
       return false;
     }
 
-    // Define updates to provided data objects
-    switch ( consume.type ) {
-      case "attribute":
-        actorUpdates[`system.${consume.target}`] = remaining;
-        break;
-      case "ammo":
-      case "material":
-        resourceUpdates.push({_id: consume.target, "system.quantity": remaining});
-        break;
-      case "hitDice":
-        if ( ["smallest", "largest"].includes(consume.target) ) resource = resource.sort((lhs, rhs) => {
-          let sort = lhs.system.hitDice.localeCompare(rhs.system.hitDice, "en", {numeric: true});
-          if ( consume.target === "largest" ) sort *= -1;
-          return sort;
-        });
-        let toConsume = consume.amount;
-        for ( const cls of resource ) {
-          const available = (toConsume > 0 ? cls.system.levels : 0) - cls.system.hitDiceUsed;
-          const delta = toConsume > 0 ? Math.min(toConsume, available) : Math.max(toConsume, available);
-          if ( delta !== 0 ) {
-            resourceUpdates.push({_id: cls.id, "system.hitDiceUsed": cls.system.hitDiceUsed + delta});
-            toConsume -= delta;
-            if ( toConsume === 0 ) break;
-          }
-        }
-        break;
-      case "charges":
-        const uses = resource.system.uses || {};
-        const recharge = resource.system.recharge || {};
-        const update = {_id: consume.target};
-        if ( uses.per && uses.max ) update["system.uses.value"] = remaining;
-        else if ( recharge.value ) update["system.recharge.charged"] = false;
-        resourceUpdates.push(update);
-        break;
-    }
+    // Define updates to the ammo
+    return [{_id: consume.target, "system.quantity": remaining}];
   }
 
   /* -------------------------------------------- */
@@ -1227,9 +1093,8 @@ export default class Item5e extends Item {
       }
 
       // Get pending ammunition update
-      const usage = this._getUsageUpdates({consumeResource: true});
-      if ( usage === false ) return null;
-      ammoUpdate = usage.resourceUpdates ?? [];
+      ammoUpdate = this._handleConsumeAmmo();
+      if ( ammoUpdate === false ) return null;
     }
 
     // Flags
