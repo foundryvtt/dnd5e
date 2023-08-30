@@ -144,7 +144,9 @@ export default class WeaponData extends SystemDataModel.mixin(
     const config = CONFIG.DND5E.weaponProficienciesMap;
     const itemProf = config[this.weaponType];
     const actorProfs = actor.system.traits?.weaponProf?.value ?? new Set();
-    const isProficient = (itemProf === true) || actorProfs.has(itemProf) || actorProfs.has(this.baseItem);
+    const natural = this.weaponType === "natural";
+    const improvised = (this.weaponType === "improv") && !!actor.getFlag("dnd5e", "tavernBrawlerFeat");
+    const isProficient = natural || improvised || actorProfs.has(itemProf) || actorProfs.has(this.baseItem);
     return Number(isProficient);
   }
 }

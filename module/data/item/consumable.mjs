@@ -58,4 +58,15 @@ export default class ConsumableData extends SystemDataModel.mixin(
     if ( this.consumableType !== "scroll" ) return null;
     return this.parent?.actor?.system.attributes.spellcasting || "int";
   }
+
+  /* -------------------------------------------- */
+
+  /**
+   * The proficiency multiplier for this item.
+   * @returns {number}
+   */
+  get proficiencyMultiplier() {
+    const isProficient = this.parent?.actor?.getFlag("dnd5e", "tavernBrawlerFeat");
+    return isProficient ? 1 : 0;
+  }
 }
