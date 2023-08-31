@@ -784,7 +784,23 @@ export default class Item5e extends Item {
     }, options);
 
     // Define follow-up actions resulting from the item usage
-    config = ItemUsageFlow.defaultInputs(item, config);
+    const isAble = item._getUsageMethods();
+    const defaultSlot = (item) => {
+      const {system: is, type} = item;
+        const upcast = (type === "spell") && (is.level > 0) && CONFIG.DND5E.spellUpcastModes.includes(is.preparation.mode);
+        if (!upcast) return null;
+        const level = (is.preparation.mode === "pact") ? "pact" : is.level;
+        return Number.isNumeric(level) ? `spell${level}` : level;
+    }
+
+    config = foundry.utils.mergeObject({
+      createMeasuredTemplate: isAble.canCreateTemplate && item.system.target.prompt,
+      consumeUsage: isAble.canConsumeUses && item.system.uses.prompt,
+      consumeResource: isAble.canConsumeResource,
+      consumeSlot: isAble.canConsumeSlot,
+      currentSlot: defaultSlot(item)
+    }, config);
+
 
     /**
      * A hook event that fires before an item usage is configured.
@@ -801,11 +817,11 @@ export default class Item5e extends Item {
     let usage;
     if ( (options.configureDialog !== false) && Object.values(config).includes(true) ) {
       usage = await ItemUsageFlow.create(item, config, options);
-      if ( !usage ) return;
     } else {
-      usage = ItemUsageFlow.getWarningsAndUpdates(item, config);
+      usage = ItemUsageFlow.getWarningsAndUpdates(item, config, options);
     }
-    console.warn("CONFIG", config);
+    console.warn({usage})
+    if ( !usage ) return;
 
     // Handle spell upcasting
     if ( (item.type === "spell") && config.currentSlot ) {
@@ -818,39 +834,11 @@ export default class Item5e extends Item {
     }
     if ( item.type === "spell" ) foundry.utils.mergeObject(options.flags, {"dnd5e.use.spellLevel": item.system.level});
 
-    /**
-     * A hook event that fires before an item's resource consumption has been calculated.
-     * @function dnd5e.preItemUsageConsumption
-     * @memberof hookEvents
-     * @param {Item5e} item                  Item being used.
-     * @param {ItemUseConfiguration} config  Configuration data for the item usage being prepared.
-     * @param {ItemUseOptions} options       Additional options used for configuring item usage.
-     * @returns {boolean}                    Explicitly return `false` to prevent item from being used.
-     */
-    if ( Hooks.call("dnd5e.preItemUsageConsumption", item, config, options) === false ) return;
-
-    // Determine whether the item can be used by testing for resource consumption
-    if( usage.warnings.size > 0 ) {
-      for ( const w of usage.warnings ) ui.notifications.warn(w);
+    // Determine whether the item can be used and display all warnings.
+    if( Object.values(usage.warnings).includes(true) ) {
+      for ( const w of ItemUsageFlow.localizeWarnings(item, usage.warnings) ) ui.notifications.warn(w);
       return null;
     }
-
-    /**
-     * A hook event that fires after an item's resource consumption has been calculated but before any
-     * changes have been made.
-     * @function dnd5e.itemUsageConsumption
-     * @memberof hookEvents
-     * @param {Item5e} item                     Item being used.
-     * @param {ItemUseConfiguration} config     Configuration data for the item usage being prepared.
-     * @param {ItemUseOptions} options          Additional options used for configuring item usage.
-     * @param {object} usage
-     * @param {object} usage.actor              Updates that will be applied to the actor.
-     * @param {object} usage.item               Updates that will be applied to the item being used.
-     * @param {object[]} usage.resources        Updates that will be applied to other items on the actor.
-     * @param {Set<string>} usage.deleteIds     Item ids for items that will be fully deleted off the actor.
-     * @returns {boolean}                       Explicitly return `false` to prevent item from being used.
-     */
-    if ( Hooks.call("dnd5e.itemUsageConsumption", item, config, options, usage) === false ) return;
 
     // Commit pending data updates
     if ( !foundry.utils.isEmpty(usage.item) ) await item.update(usage.item);
@@ -901,11 +889,12 @@ export default class Item5e extends Item {
     const consume = is.consume ?? {};
     const active = !!is.activation?.type;
     const leveled = (this.type === "spell") && (is.level > 0);
+    const consumeSelf = consume.target === this.id;
 
     return {
       canCreateTemplate: active && game.user.can("TEMPLATE_CREATE") && this.hasAreaTarget,
       canConsumeUses: active && this.hasLimitedUses,
-      canConsumeResource: active && !!consume.type && !!consume.target && (consume.type !== "ammo"),
+      canConsumeResource: active && !!consume.type && !!consume.target && !consumeSelf && (consume.type !== "ammo"),
       canConsumeSlot: leveled && CONFIG.DND5E.spellUpcastModes.includes(is.preparation.mode)
     };
   }
