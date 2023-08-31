@@ -1,4 +1,5 @@
 export default class AbilityUseDialog extends FormApplication {
+  /** @override */
   constructor(item, config = {}, options = {}, fn) {
     super(item);
     this.item = item;
@@ -8,6 +9,7 @@ export default class AbilityUseDialog extends FormApplication {
     this.fn = fn;
   }
 
+  /** @override */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ["dnd5e", "dialog", "ability-use"],
@@ -19,22 +21,23 @@ export default class AbilityUseDialog extends FormApplication {
 
   }
 
+  /** @override */
   get title() {
     return `${this.item.name}: ${game.i18n.localize("DND5E.AbilityUseConfig")}`;
   }
 
+  /** @override */
   get id() {
     return `item-usage-flow-${this.item.uuid.replaceAll(".", "-")}`;
   }
 
+  /** @override */
   async getData() {
-    this.notes = [];
     const data = {
       title: game.i18n.format("DND5E.AbilityUseHint", {
         type: game.i18n.localize(CONFIG.Item.typeLabels[this.item.type]),
         name: this.item.name
       }),
-      notes: this.notes,
       icon: (this.item.type === "spell") ? "fa-magic" : "fa-fist-raised",
       label: `DND5E.AbilityUse${(this.item.type === "spell") ? "Cast" : "Use"}`,
 
@@ -53,10 +56,26 @@ export default class AbilityUseDialog extends FormApplication {
     return data;
   }
 
+  /**
+   * Format the notes to display on the application, depending on the updates to be performed.
+   * @param {object} actor              Updates to perform on the actor.
+   * @param {object} item               Updates to perform on the item.
+   * @param {object[]} resources        Updates to perform on the actor's owned items.
+   * @param {Set<string>} deleteIds     Ids of items that are to be deleted.
+   * @returns {string[]}
+   */
   getAbilityUseNotes({actor, item, resources, deleteIds}) {
     const notes = [];
 
-    if(Hooks.call("dnd5e.preItemUsageNotes", this.item, notes) === false) return notes;
+    /**
+     * A hook event that fires before an item's usage notes are formatted.
+     * @function dnd5e.preItemUsageNotes
+     * @memberof hookEvents
+     * @param {Item5e} item         Item being used.
+     * @param {string[]} notes      Notes to display.
+     * @returns {boolean}           Explicitly return `false` to prevent default notes.
+     */
+    if (Hooks.call("dnd5e.preItemUsageNotes", this.item, notes) === false) return notes;
 
     for (const id of deleteIds) {
       const item = this.actor.items.get(id);
@@ -96,7 +115,7 @@ export default class AbilityUseDialog extends FormApplication {
           level: matchSpell[1] === "pact" ? this.actor.system.spells.pact.level : CONFIG.DND5E.spellLevels[matchSpell[1].at(-1)]
         });
         notes.push(game.i18n.format("DND5E.AbilityUseConsumeSlot", {amount: actor[key], level: remaining}));
-      } else if(matchResource) {
+      } else if (matchResource) {
         const label = this.actor.system.resources[matchResource[1]].label || game.i18n.localize(`DND5E.Resource${matchResource[1].capitalize()}`);
         notes.push(game.i18n.format("DND5E.AbilityUseConsumeResource", {amount: actor[key], label: label}));
       } else {
@@ -105,15 +124,36 @@ export default class AbilityUseDialog extends FormApplication {
       }
     }
 
+    /**
+     * A hook event that fires after an item's usage notes are formatted.
+     * @function dnd5e.preItemUsageNotes
+     * @memberof hookEvents
+     * @param {Item5e} item         Item being used.
+     * @param {string[]} notes      Notes to display.
+     */
     Hooks.callAll("dnd5e.itemUsageNotes", this.item, notes);
-
     return notes;
   }
 
+  /**
+   * Gather a set of warnings to display in the application depending on given parameters.
+   * @param {Item5e} item         The item being used.
+   * @param {object} warnings     An object of keys for default warnings.
+   * @returns {Set<string>}
+   */
   static localizeWarnings(item, warnings) {
     const set = new Set();
 
-    if(Hooks.call("dnd5e.preItemUsageWarnings", item) === false) return set;
+    /**
+     * A hook event that fires before an item's usage warnings are formatted.
+     * @function dnd5e.preItemUsageWarnings
+     * @memberof hookEvents
+     * @param {Item5e} item         Item being used.
+     * @param {object} warnings     An object of keys for default warnings.
+     * @param {Set<string>} set     The set of formatted warnings.
+     * @returns {boolean}           Explicitly return `false` to prevent default warnings.
+     */
+    if (Hooks.call("dnd5e.preItemUsageWarnings", item, warnings, set) === false) return set;
 
     // No spell slots of any level.
     if (warnings.noSlots) {
@@ -160,13 +200,25 @@ export default class AbilityUseDialog extends FormApplication {
       }));
     }
 
-    const additional = new Set();
-    Hooks.callAll("dnd5e.itemUsageWarnings", item, warnings, additional);
-    additional.forEach(w => set.add(w));
-
+    /**
+     * A hook event that fires after an item's usage warnings are formatted.
+     * @function dnd5e.preItemUsageWarnings
+     * @memberof hookEvents
+     * @param {Item5e} item         Item being used.
+     * @param {object} warnings     An object of keys for default warnings.
+     * @param {Set<string>} set     The set of formatted warnings.
+     */
+    Hooks.callAll("dnd5e.itemUsageWarnings", item, warnings, set);
     return set;
   }
 
+  /**
+   * Configure the warnings object and the updates to perform on the item, actor, and resources.
+   * @param {Item5e} item                     The item being used.
+   * @param {ItemUseConfiguration} config     Configuration data for the item usage being prepared.
+   * @param {ItemUseOptions} options          Additional options used for configuring item usage.
+   * @returns {object}                        The usage configuration.
+   */
   static getWarningsAndUpdates(item, config = {}, options = {}) {
     const methods = item._getUsageMethods();
     const usage = {
@@ -428,12 +480,14 @@ export default class AbilityUseDialog extends FormApplication {
     return this.config;
   }
 
+  /** @override */
   async _updateObject(event, formData) {
     const data = this.constructor.getWarningsAndUpdates(this.item, formData, this.usageOptions);
     this.fn(data);
     this.close();
   }
 
+  /** @override */
   close(...args) {
     this.fn(null);
     return super.close(...args);
@@ -446,8 +500,10 @@ export default class AbilityUseDialog extends FormApplication {
   /**
    * A constructor function which displays the Spell Cast Dialog app for a given Actor and Item.
    * Returns a Promise which resolves to the dialog FormData once the workflow has been completed.
-   * @param {Item5e} item  Item being used.
-   * @returns {Promise}    Promise that is resolved when the use dialog is acted upon.
+   * @param {Item5e} item                     Item being used.
+   * @param {ItemUseConfiguration} config     Configuration data for the item usage being prepared.
+   * @param {ItemUseOptions} options          Additional options used for configuring item usage.
+   * @returns {Promise}                       Promise that is resolved when the use dialog is acted upon.
    */
   static async create(item, config = {}, options = {}) {
     if (!item.isOwned) throw new Error("You cannot display an ability usage dialog for an unowned item");

@@ -740,7 +740,8 @@ export default class Item5e extends Item {
    * Additional options used for configuring item usage.
    *
    * @typedef {object} ItemUseOptions
-   * @property {boolean} configureDialog  Display a configuration dialog for the item usage, if applicable?
+   * @property {boolean} configureDialog  Display a configuration dialog for the item usage, if applicable? If `true` or
+   *                                      `false`, the dialog is forcibly shown or skipped, regardless of need for configuration.
    * @property {string} rollMode          The roll display mode with which to display (or not) the card.
    * @property {boolean} createMessage    Whether to automatically create a chat message (if true) or simply return
    *                                      the prepared chat message data (if false).
@@ -777,7 +778,7 @@ export default class Item5e extends Item {
 
     // Ensure the options object is ready
     options = foundry.utils.mergeObject({
-      configureDialog: true,
+      configureDialog: null,
       createMessage: true,
       "flags.dnd5e.use": {type: this.type, itemId: this.id, itemUuid: this.uuid}
     }, options);
@@ -786,10 +787,10 @@ export default class Item5e extends Item {
     const isAble = item._getUsageMethods();
     const defaultSlot = (item) => {
       const {system: is, type} = item;
-        const upcast = (type === "spell") && (is.level > 0) && CONFIG.DND5E.spellUpcastModes.includes(is.preparation.mode);
-        if (!upcast) return null;
-        const level = (is.preparation.mode === "pact") ? "pact" : is.level;
-        return Number.isNumeric(level) ? `spell${level}` : level;
+      const upcast = ( type === "spell" ) && ( is.level > 0 ) && CONFIG.DND5E.spellUpcastModes.includes(is.preparation.mode);
+      if ( !upcast ) return null;
+      const level = ( is.preparation.mode === "pact" ) ? "pact" : is.level;
+      return Number.isNumeric(level) ? `spell${level}` : level;
     }
 
     config = foundry.utils.mergeObject({
@@ -814,12 +815,12 @@ export default class Item5e extends Item {
 
     // Display configuration dialog
     let usage;
-    if ( (options.configureDialog !== false) && Object.values(config).includes(true) ) {
+    const needsConfiguration = Object.values(config).includes(true);
+    if ( ( (options.configureDialog !== false) && needsConfiguration ) || (options.configureDialog === true) ) {
       usage = await AbilityUseDialog.create(item, config, options);
     } else {
       usage = AbilityUseDialog.getWarningsAndUpdates(item, config, options);
     }
-    console.warn({usage})
     if ( !usage ) return;
 
     // Handle spell upcasting
