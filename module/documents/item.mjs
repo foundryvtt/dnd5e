@@ -3,7 +3,6 @@ import simplifyRollFormula from "../dice/simplify-roll-formula.mjs";
 import Advancement from "./advancement/advancement.mjs";
 import AbilityUseDialog from "../applications/item/ability-use-dialog.mjs";
 import Proficiency from "./actor/proficiency.mjs";
-import ItemUsageFlow from "../applications/item/item-usage-flow.mjs";
 
 /**
  * Override and extend the basic Item implementation.
@@ -816,9 +815,9 @@ export default class Item5e extends Item {
     // Display configuration dialog
     let usage;
     if ( (options.configureDialog !== false) && Object.values(config).includes(true) ) {
-      usage = await ItemUsageFlow.create(item, config, options);
+      usage = await AbilityUseDialog.create(item, config, options);
     } else {
-      usage = ItemUsageFlow.getWarningsAndUpdates(item, config, options);
+      usage = AbilityUseDialog.getWarningsAndUpdates(item, config, options);
     }
     console.warn({usage})
     if ( !usage ) return;
@@ -836,7 +835,7 @@ export default class Item5e extends Item {
 
     // Determine whether the item can be used and display all warnings.
     if( Object.values(usage.warnings).includes(true) ) {
-      for ( const w of ItemUsageFlow.localizeWarnings(item, usage.warnings) ) ui.notifications.warn(w);
+      for ( const w of AbilityUseDialog.localizeWarnings(item, usage.warnings) ) ui.notifications.warn(w);
       return null;
     }
 
