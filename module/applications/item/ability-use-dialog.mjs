@@ -39,56 +39,73 @@ export default class AbilityUseDialog extends FormApplication {
       label: `DND5E.AbilityUse${(this.item.type === "spell") ? "Cast" : "Use"}`,
 
       methods: this.item._getUsageMethods(),
-
-      spellLevels: this.#populateSlotOptions(),
-      config: this.config
+      config: this.config,
+      spellLevels: this.#populateSlotOptions()
     };
-
-    const {
-      warnings,
-      actor: actorUpdates,
-      item: itemUpdates,
-      resources: resourceUpdates,
-      deleteIds
-    } = this.constructor.getWarningsAndUpdates(this.item, this.config, this.usageOptions);
+    const upd = this.constructor.getWarningsAndUpdates(this.item, this.config, this.usageOptions);
 
     // Warn about zero spell slots of any level.
-    if (this.config.consumeSlot && !data.spellLevels.some(l => l.hasSlots)) warnings.noSlots = true;
+    upd.warnings.noSlots = this.config.consumeSlot && !data.spellLevels.some(l => l.hasSlots);
 
-    data.warnings = this.constructor.localizeWarnings(this.item, warnings);
+    data.warnings = this.constructor.localizeWarnings(this.item, upd.warnings);
     data.disabled = data.warnings.size > 0;
-    data.notes = this.getAbilityUseNotes(actorUpdates, itemUpdates, resourceUpdates, deleteIds);
-    console.warn(data);
+    data.notes = this.getAbilityUseNotes(upd);
     return data;
   }
 
-  getAbilityUseNotes(actor, item, resources, deleteIds) {
+  getAbilityUseNotes({actor, item, resources, deleteIds}) {
     const notes = [];
 
+    if(Hooks.call("dnd5e.preItemUsageNotes", this.item, notes) === false) return notes;
+
     for (const id of deleteIds) {
-      notes.push(`WILL BE NUKED AAAHHHH: ${this.actor.items.get(id).name}`);
+      const item = this.actor.items.get(id);
+      if (item) notes.push(game.i18n.format("DND5E.AbilityUseConsumeDestroy", {name: item.name}));
     }
 
+    // Consumes quantity, uses, or recharge.
     for (const r of [item, ...resources]) {
       const item = this.actor.items.get(r._id) ?? this.item;
-      const q = r["system.quantity"];
-      const u = r["system.uses.value"];
-      const c = r["system.recharge.charged"];
+      const qty = r["system.quantity"];
+      const uses = r["system.uses.value"];
+      const charge = r["system.recharge.charged"];
 
-      if (u === 0) {
-        notes.push(`WILL CONSUME LAST USE AHHHH: ${item.name}`);
-      } else if (u > 0) {
-        const deduct = item.system.uses.value - u;
-        notes.push(`WILL CONSUME ${deduct} USES and REDUCE ${item.name} to ${u} USES AHHHH!!!`);
-      } else if (c === false) {
-        notes.push(`WILL CONSUME ${item.name}'S RECHARGE AHHHH`);
-      } else if (q === 0) {
-        notes.push("WILL CONSUME LAST QTY OF ITEM");
-      } else if (q > 0) {
-        const deduct = item.system.quantity - q;
-        notes.push(`WILL CONSUME ${deduct} QTY and REDUCE ${item.name} to ${q} remaining AHHHHH`);
+      if (Number.isNumeric(uses)) {
+        notes.push(game.i18n.format(`DND5E.AbilityUseConsumeUsage${uses !== 1 ? "Pl" : ""}`, {
+          name: item.name,
+          amount: uses
+        }));
+      } else if (charge === false) {
+        notes.push(game.i18n.format("DND5E.AbilityUseConsumeCharge", {name: item.name}));
+      } else if (Number.isNumeric(qty)) {
+        notes.push(game.i18n.format("DND5E.AbilityUseConsumeQuantity", {
+          amount: qty,
+          name: item.name
+        }));
       }
     }
+
+    const regSpell = new RegExp(/system\.spells\.([a-z1-9]+)\.value/);
+    const regResource = new RegExp(/system\.resources\.([a-z]+)\.value/);
+    for (const key in actor) {
+      const matchSpell = key.match(regSpell);
+      const matchResource = key.match(regResource);
+      if (matchSpell) {
+        // consume spell slot.
+        const remaining = game.i18n.format(`DND5E.${matchSpell[1] === "pact" ? "Pact" : "Spell"}Slot${actor[key] !== 1 ? "Pl" : ""}`, {
+          level: matchSpell[1] === "pact" ? this.actor.system.spells.pact.level : CONFIG.DND5E.spellLevels[matchSpell[1].at(-1)]
+        });
+        notes.push(game.i18n.format("DND5E.AbilityUseConsumeSlot", {amount: actor[key], level: remaining}));
+      } else if(matchResource) {
+        const label = this.actor.system.resources[matchResource[1]].label || game.i18n.localize(`DND5E.Resource${matchResource[1].capitalize()}`);
+        notes.push(game.i18n.format("DND5E.AbilityUseConsumeResource", {amount: actor[key], label: label}));
+      } else {
+        // consume any other attribute.
+        notes.push(game.i18n.format("DND5E.AbilityUseConsumePool", {amount: actor[key]}));
+      }
+    }
+
+    Hooks.callAll("dnd5e.itemUsageNotes", this.item, notes);
 
     return notes;
   }
@@ -96,13 +113,15 @@ export default class AbilityUseDialog extends FormApplication {
   static localizeWarnings(item, warnings) {
     const set = new Set();
 
+    if(Hooks.call("dnd5e.preItemUsageWarnings", item) === false) return set;
+
     // No spell slots of any level.
     if (warnings.noSlots) {
       set.add(game.i18n.format("DND5E.SpellCastNoSlots", {name: item.name}));
     }
 
     // Missing spell slots of specific level.
-    if (warnings.levelSlotsUnavailable) {
+    else if (warnings.levelSlotsUnavailable) {
       set.add(game.i18n.format("DND5E.SpellCastNoSlotsOfLevel", {name: item.name}));
     }
 
@@ -140,6 +159,10 @@ export default class AbilityUseDialog extends FormApplication {
         type: CONFIG.DND5E.abilityConsumptionTypes[type]
       }));
     }
+
+    const additional = new Set();
+    Hooks.callAll("dnd5e.itemUsageWarnings", item, warnings, additional);
+    additional.forEach(w => set.add(w));
 
     return set;
   }
