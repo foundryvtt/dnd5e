@@ -824,14 +824,15 @@ export default class Item5e extends Item {
     if ( !usage ) return;
 
     // Handle spell upcasting
+    const update = {};
     if ( (item.type === "spell") && config.currentSlot ) {
       const upcastLevel = config.currentSlot === "pact" ? as.spells.pact.level : parseInt(config.currentSlot.at(-1));
-      if ( upcastLevel !== is.level ) {
-        item = item.clone({"system.level": upcastLevel}, {keepId: true});
-        item.prepareData();
-        item.prepareFinalAttributes();
-      }
+      if ( upcastLevel !== is.level ) update["system.level"] = upcastLevel;
     }
+    item = item.clone(update, {keepId: true});
+    item.prepareData();
+    item.prepareFinalAttributes();
+
     if ( item.type === "spell" ) foundry.utils.mergeObject(options.flags, {"dnd5e.use.spellLevel": item.system.level});
 
     // Determine whether the item can be used and display all warnings.
