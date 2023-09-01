@@ -270,6 +270,9 @@ export default class AbilityUseDialog extends FormApplication {
 
   /**
    * Populate updates and warnings related to consuming an external resource.
+   * @param {Item5e} item                     The item being used.
+   * @param {ItemUseConfiguration} config     Configuration data for the item usage being prepared.
+   * @param {object} data                     Usage data.
    */
   static #updateConsumptionUpdates(item, config, data) {
     const consume = item.system.consume;
@@ -379,6 +382,9 @@ export default class AbilityUseDialog extends FormApplication {
 
   /**
    * Populate updates and warnings related to consuming the item's own limited uses or recharge.
+   * @param {Item5e} item                     The item being used.
+   * @param {ItemUseConfiguration} config     Configuration data for the item usage being prepared.
+   * @param {object} data                     Usage data.
    */
   static #updateItemUpdates(item, config, data) {
     const {recharge, uses, quantity} = item.system;
@@ -419,6 +425,9 @@ export default class AbilityUseDialog extends FormApplication {
 
   /**
    * Populate the updates and warnings related to consuming a spell slot with a leveled spell.
+   * @param {Item5e} item                     The item being used.
+   * @param {ItemUseConfiguration} config     Configuration data for the item usage being prepared.
+   * @param {object} data                     Usage data.
    */
   static #updateSpellUpdates(item, config, data) {
     const slot = config.currentSlot;
