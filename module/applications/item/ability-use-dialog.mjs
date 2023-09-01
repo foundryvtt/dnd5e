@@ -315,7 +315,7 @@ export default class AbilityUseDialog extends FormApplication {
     }
 
     // Verify that a consumed resource is available
-    if (resource === undefined) {
+    if ((consume.type !== "attribute") && (resource === undefined)) {
       data.warnings.resourceMissing = true;
       return;
     }
