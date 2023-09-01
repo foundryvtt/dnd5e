@@ -1,12 +1,12 @@
 export default class AbilityUseDialog extends FormApplication {
   /** @override */
-  constructor(item, config = {}, options = {}, fn) {
+  constructor(item, config = {}, options = {}, resolve) {
     super(item);
     this.item = item;
     this.actor = item.actor;
     this.config = config;
     this.usageOptions = options;
-    this.fn = fn;
+    this.resolve = resolve;
   }
 
   /** @override */
@@ -43,7 +43,7 @@ export default class AbilityUseDialog extends FormApplication {
 
       methods: this.item._getUsageMethods(),
       config: this.config,
-      spellLevels: this.#populateSlotOptions()
+      spellLevels: this.constructor.populateSlotOptions(this.item)
     };
     const upd = this.constructor.getWarningsAndUpdates(this.item, this.config, this.usageOptions);
 
@@ -432,13 +432,14 @@ export default class AbilityUseDialog extends FormApplication {
 
   /**
    * Get spell slot options.
+   * @param {Item5e} item     The item consuming a slot.
    * @returns {object[]}
    */
-  #populateSlotOptions() {
-    if (this.item.type !== "spell") return [];
+  static populateSlotOptions(item) {
+    if (item.type !== "spell") return [];
 
-    const is = this.item.system;
-    const as = this.item.actor.system;
+    const is = item.system;
+    const as = item.actor.system;
 
     // Determine the levels which are feasible
     let lmax = 0;
@@ -483,14 +484,14 @@ export default class AbilityUseDialog extends FormApplication {
   /** @override */
   async _updateObject(event, formData) {
     const data = this.constructor.getWarningsAndUpdates(this.item, formData, this.usageOptions);
-    this.fn(data);
-    this.close();
+    this.resolve?.(data);
+    return this.close();
   }
 
   /** @override */
-  close(...args) {
-    this.fn(null);
-    return super.close(...args);
+  close(options = {}) {
+    this.resolve?.(null);
+    return super.close(options);
   }
 
   /* -------------------------------------------- */
