@@ -27,6 +27,11 @@
         </div>
     </header>
 
+    {{!-- Item Sheet Navigation --}}
+    <nav class="sheet-navigation tabs" data-group="primary">
+        <a class="item active" data-tab="description">{{ localize "DND5E.Description" }}</a>
+    </nav>
+
     {{!-- Item Sheet Body --}}
     <section class="sheet-body">
         {{> "dnd5e.item-description"}}
