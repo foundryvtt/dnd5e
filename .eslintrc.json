@@ -199,7 +199,8 @@
     "jsdoc": {
       "mode": "typescript",
       "preferredTypes": {
-        ".<>": "<>"
+        ".<>": "<>",
+        "Object": "object"
       },
       "tagNamePreference": {
         "auguments": "extends"

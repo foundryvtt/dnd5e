@@ -34,7 +34,7 @@ export default class ItemSheet5e extends ItemSheet {
         ".tab[data-tab=details]",
         ".tab[data-tab=effects] .items-list",
         ".tab[data-tab=description] .editor-content",
-        ".tab[data-tab=advancement] .items-list",
+        ".tab[data-tab=advancement] .items-list"
       ],
       tabs: [{navSelector: ".tabs", contentSelector: ".sheet-body", initial: "description"}],
       dragDrop: [
@@ -593,6 +593,7 @@ export default class ItemSheet5e extends ItemSheet {
    * Handle the dropping of an advancement or item with advancements onto the advancements tab.
    * @param {DragEvent} event                  The concluding DragEvent which contains drop data.
    * @param {object} data                      The data transfer extracted from the event.
+   * @returns {Promise}
    */
   async _onDropAdvancement(event, data) {
     let advancements;

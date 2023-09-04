@@ -2028,7 +2028,7 @@ export default class Item5e extends Item {
    * Pre-creation logic for the automatic configuration of owned weapon type Items.
    * @param {object} data       Data for the newly created item.
    * @param {boolean} isNPC     Is this actor an NPC?
-   * @returns {object}          Updates to apply to the item data.
+   * @returns {object|void}     Updates to apply to the item data.
    * @private
    */
   _onCreateOwnedWeapon(data, isNPC) {
@@ -2087,11 +2087,13 @@ export default class Item5e extends Item {
     const scrollDetails = scrollDescription.slice(scrollIntroEnd + pdel.length);
 
     // Create a composite description from the scroll description and the spell details
-    const desc = scrollIntro
-    + `<hr><h3>${itemData.name} (${game.i18n.format("DND5E.LevelNumber", {level})})</h3>`
-    + (components.concentration ? `<p><em>${game.i18n.localize("DND5E.ScrollRequiresConcentration")}</em></p>` : "")
-    + `<hr>${description.value}<hr>`
-    + `<h3>${game.i18n.localize("DND5E.ScrollDetails")}</h3><hr>${scrollDetails}`;
+    const desc = `
+      ${scrollIntro}
+      <hr><h3>${itemData.name} (${game.i18n.format("DND5E.LevelNumber", {level})})</h3>
+      ${(components.concentration ? `<p><em>${game.i18n.localize("DND5E.ScrollRequiresConcentration")}</em></p>` : "")}
+      <hr>${description.value}<hr>
+      <h3>${game.i18n.localize("DND5E.ScrollDetails")}</h3><hr>${scrollDetails}
+    `;
 
     // Used a fixed attack modifier and saving throw according to the level of spell scroll.
     if ( ["mwak", "rwak", "msak", "rsak"].includes(actionType) ) {

@@ -2,6 +2,7 @@
  * Attempt to create a macro from the dropped data. Will use an existing macro if one exists.
  * @param {object} dropData     The dropped data
  * @param {number} slot         The hotbar slot to use
+ * @returns {Promise}
  */
 export async function create5eMacro(dropData, slot) {
   const macroData = { type: "script", scope: "actor" };

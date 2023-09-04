@@ -1,4 +1,4 @@
-import Datastore from "nedb";
+import Datastore from "nedb-promises";
 import fs from "fs";
 import gulp from "gulp";
 import logger from "fancy-log";
@@ -92,23 +92,16 @@ function cleanPackEntry(data, { clearSourceId=true }={}) {
  * @param {string} pack        Name of the pack to which this item belongs.
  * @returns {Promise<string>}  Resolves once the ID is determined.
  */
-function determineId(data, pack) {
+async function determineId(data, pack) {
   const db_path = path.join(PACK_DEST, `${pack}.db`);
-  if ( !DB_CACHE[db_path] ) {
-    DB_CACHE[db_path] = new Datastore({ filename: db_path, autoload: true });
-    DB_CACHE[db_path].loadDatabase();
-  }
+  if ( !DB_CACHE[db_path] ) DB_CACHE[db_path] = Datastore.create({ filename: db_path, autoload: true });
   const db = DB_CACHE[db_path];
 
-  return new Promise((resolve, reject) => {
-    db.findOne({ name: data.name }, (err, entry) => {
-      if ( entry ) {
-        resolve(entry._id);
-      } else {
-        resolve(db.createNewId());
-      }
-    });
-  });
+  try {
+    return await db.findOne({ name: data.name });
+  } catch ( err ) {
+    return db.createNewId();
+  }
 }
 
 /**
