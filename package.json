@@ -1,13 +1,14 @@
 {
   "scripts": {
-    "build": "gulp buildAll",
-    "build:clean": "gulp cleanPacks",
-    "build:css": "gulp buildCSS",
-    "build:db": "gulp compilePacks",
-    "build:json": "gulp extractPacks",
-    "build:watch": "gulp",
-    "lint": "gulp lint",
-    "lint:fix": "gulp lint --fix"
+    "build": "npm run build:code && npm run build:css && npm run build:db",
+    "build:clean": "node ./utils/packs.mjs package clean",
+    "build:code": "rollup dnd5e.mjs -f es -o dnd5e-compiled.mjs -p node-resolve -m --sourcemapFile dnd5e.mjs",
+    "build:css": "lessc less/dnd5e.less dnd5e.css",
+    "build:db": "node ./utils/packs.mjs package pack --nedb",
+    "build:json": "node ./utils/packs.mjs package unpack --nedb",
+    "lint": "eslint --ext .mjs ./",
+    "lint:fix": "eslint --ext .mjs ./ --fix",
+    "watch": "less-watch-compiler less/ ./ dnd5e.less"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.22.15",
@@ -15,14 +16,10 @@
     "@rollup/plugin-node-resolve": "^15.2.1",
     "eslint-plugin-jsdoc": "^46.5.0",
     "fancy-log": "^2.0.0",
-    "gulp": "^4.0.2",
-    "gulp-eslint-new": "^1.8.3",
-    "gulp-if": "^3.0.0",
-    "gulp-less": "^5.0.0",
-    "merge-stream": "^2.0.0",
+    "less": "^4.2.0",
+    "less-watch-compiler": "^1.16.3",
     "nedb-promises": "^6.2.3",
     "rollup": "^3.28.1",
-    "through2": "^4.0.2",
     "yargs": "^17.7.2"
   }
 }

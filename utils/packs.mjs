@@ -1,11 +1,10 @@
 import Datastore from "nedb-promises";
 import fs from "fs";
-import gulp from "gulp";
+import { readdir, readFile, writeFile } from "node:fs/promises";
 import logger from "fancy-log";
-import mergeStream from "merge-stream";
 import path from "path";
-import through2 from "through2";
 import yargs from "yargs";
+import { hideBin } from "yargs/helpers";
 import { compilePack, extractPack } from "@foundryvtt/foundryvtt-cli";
 
 
@@ -27,6 +26,51 @@ const PACK_DEST = "packs";
  * @type {string}
  */
 const PACK_SRC = "packs/src";
+
+
+const argv = yargs(hideBin(process.argv))
+  .command(packageCommand())
+  .help().alias("help", "h")
+  .argv;
+
+
+function packageCommand() {
+  return {
+    command: "package [action] [pack] [entry]",
+    describe: "Manage packages",
+    builder: yargs => {
+      yargs.positional("action", {
+        describe: "The action to perform.",
+        type: "string",
+        choices: ["unpack", "pack", "clean"]
+      });
+      yargs.positional("pack", {
+        describe: "Name of the pack unpon which to work.",
+        type: "string"
+      });
+      yargs.positional("entry", {
+        describe: "Name of any entry within a pack upon which to work. Only applicable to extract & clean commands.",
+        type: "string"
+      });
+      yargs.option("nedb", {
+        describe: "Should the NeDB database be used instead of ClassicLevel?",
+        type: "boolean"
+      });
+    },
+    handler: async argv => {
+      const { action, pack, entry, ...options } = argv;
+      switch ( action ) {
+        case "clean":
+          return await cleanPacks(pack, entry, options);
+        case "pack":
+          return await compilePacks(pack, options);
+        case "unpack":
+          return await extractPacks(pack, entry, options);
+      }
+    }
+  };
+}
+
 
 /**
  * Cache of DBs so they aren't loaded repeatedly when determining IDs.
@@ -99,13 +143,13 @@ async function determineId(data, pack) {
 
   try {
     return await db.findOne({ name: data.name });
-  } catch ( err ) {
+  } catch(err) {
     return db.createNewId();
   }
 }
 
 /**
- * Removes invisible whitespace characters and normalises single- and double-quotes.
+ * Removes invisible whitespace characters and normalizes single- and double-quotes.
  * @param {string} str  The string to be cleaned.
  * @returns {string}    The cleaned string.
  */
@@ -114,38 +158,45 @@ function cleanString(str) {
 }
 
 /**
- * Cleans and formats source JSON files, removing unnecessary permissions and flags
- * and adding the proper spacing.
+ * Cleans and formats source JSON files, removing unnecessary permissions and flags and adding the proper spacing.
+ * @param {string} [packName]   Name of pack to clean. If none provided, all packs will be cleaned.
+ * @param {string} [entryName]  Name of a specific entry to clean.
  *
- * - `gulp cleanPacks` - Clean all source JSON files.
- * - `gulp cleanPacks --pack classes` - Only clean the source files for the specified compendium.
- * - `gulp cleanPacks --pack classes --name Barbarian` - Only clean a single item from the specified compendium.
+ * - `npm run build:clean` - Clean all source JSON files.
+ * - `npm run build:clean -- classes` - Only clean the source files for the specified compendium.
+ * - `npm run build:clean -- classes Barbarian` - Only clean a single item from the specified compendium.
  */
-function cleanPacks() {
-  const packName = parsedArgs.pack;
-  const entryName = parsedArgs.name?.toLowerCase();
+async function cleanPacks(packName, entryName) {
+  entryName = entryName?.toLowerCase();
   const folders = fs.readdirSync(PACK_SRC, { withFileTypes: true }).filter(file =>
     file.isDirectory() && ( !packName || (packName === file.name) )
   );
 
-  const packs = folders.map(folder => {
-    logger.info(`Cleaning pack ${folder.name}`);
-    return gulp.src(path.join(PACK_SRC, folder.name, "/**/*.json"))
-      .pipe(through2.obj(async (file, enc, callback) => {
-        const json = JSON.parse(file.contents.toString());
-        const name = json.name.toLowerCase();
-        if ( entryName && (entryName !== name) ) return callback(null, file);
-        cleanPackEntry(json);
-        if ( !json._id ) json._id = await determineId(json, folder.name);
-        fs.rmSync(file.path, { force: true });
-        fs.writeFileSync(file.path, `${JSON.stringify(json, null, 2)}\n`, { mode: 0o664 });
-        callback(null, file);
-      }));
-  });
+  const _loadSources = async (directoryPath, files) => {
+    const directory = await readdir(directoryPath, { withFileTypes: true });
+    for ( const entry of directory ) {
+      const entryPath = path.join(directoryPath, entry.name);
+      if ( entry.isDirectory() ) await _loadSources(entryPath, files);
+      else if ( entryPath.endsWith(".json") ) {
+        const file = await readFile(entryPath, { encoding: "utf8" });
+        files[entryPath] = JSON.parse(file);
+      }
+    }
+  };
 
-  return mergeStream(packs);
+  for ( const folder of folders ) {
+    logger.info(`Cleaning pack ${folder.name}`);
+    const files = {};
+    await _loadSources(path.join(PACK_SRC, folder.name), files);
+    for ( const [path, json] of Object.entries(files) ) {
+      if ( entryName && (entryName !== json.name.toLowerCase()) ) continue;
+      cleanPackEntry(json);
+      if ( !json._id ) json._id = await determineId(json, folder.name);
+      fs.rmSync(path, { force: true });
+      writeFile(path, `${JSON.stringify(json, null, 2)}\n`, { mode: 0o664 });
+    }
+  }
 }
-export const clean = cleanPacks;
 
 
 /* ----------------------------------------- */
@@ -154,12 +205,14 @@ export const clean = cleanPacks;
 
 /**
  * Compile the source JSON files into compendium packs.
+ * @param {string} [packName]       Name of pack to compile. If none provided, all packs will be packed.
+ * @param {object} [options={}]
+ * @param {boolean} [options.nedb]  Compile into NeDB?
  *
- * - `gulp compilePacks` - Compile all JSON files into their NEDB files.
- * - `gulp compilePacks --pack classes` - Only compile the specified pack.
+ * - `npm run build:db` - Compile all JSON files into their NEDB files.
+ * - `npm run build:db -- classes` - Only compile the specified pack.
  */
-async function compilePacks() {
-  const packName = parsedArgs.pack;
+async function compilePacks(packName, options={}) {
   // Determine which source folders to process
   const folders = fs.readdirSync(PACK_SRC, { withFileTypes: true }).filter(file =>
     file.isDirectory() && ( !packName || (packName === file.name) )
@@ -167,12 +220,11 @@ async function compilePacks() {
 
   for ( const folder of folders ) {
     const src = path.join(PACK_SRC, folder.name);
-    const dest = path.join(PACK_DEST, `${folder.name}.db`);
+    const dest = path.join(PACK_DEST, `${folder.name}${options.nedb ? ".db" : ""}`);
     logger.info(`Compiling pack ${folder.name}`);
-    await compilePack(src, dest, { nedb: true, recursive: true, log: true, transformEntry: cleanPackEntry });
+    await compilePack(src, dest, { nedb: options.nedb, recursive: true, log: true, transformEntry: cleanPackEntry });
   }
 }
-export const compile = compilePacks;
 
 
 /* ----------------------------------------- */
@@ -181,42 +233,40 @@ export const compile = compilePacks;
 
 /**
  * Extract the contents of compendium packs to JSON files.
+ * @param {string} [packName]       Name of pack to extract. If none provided, all packs will be unpacked.
+ * @param {string} [entryName]      Name of a specific entry to extract.
+ * @param {object} [options={}]
+ * @param {boolean} [options.nedb]  Extract from NeDB?
  *
- * - `gulp extractPacks` - Extract all compendium NEDB files into JSON files.
- * - `gulp extractPacks --pack classes` - Only extract the contents of the specified compendium.
- * - `gulp extractPacks --pack classes --name Barbarian` - Only extract a single item from the specified compendium.
+ * - `npm build:json - Extract all compendium NEDB files into JSON files.
+ * - `npm build:json -- classes` - Only extract the contents of the specified compendium.
+ * - `npm build:json -- classes Barbarian` - Only extract a single item from the specified compendium.
  */
-async function extractPacks() {
-  const packName = parsedArgs.pack;
-  const entryName = parsedArgs.name?.toLowerCase();
+async function extractPacks(packName, entryName, options) {
+  entryName = entryName?.toLowerCase();
 
   // Load system.json.
   const system = JSON.parse(fs.readFileSync("./system.json", { encoding: "utf8" }));
 
   // Determine which source packs to process.
-  const packs = fs.readdirSync(PACK_DEST, { withFileTypes: true }).filter(file => {
-    if ( !file.isFile() || (path.extname(file.name) !== ".db") ) return false;
-    return !packName || (packName === path.basename(file.name, ".db"));
-  });
+  const packs = system.packs.filter(p => !packName || p.name === packName);
 
-  for ( const pack of packs ) {
-    const packName = path.basename(pack.name, ".db");
-    const packInfo = system.packs.find(p => p.name === packName);
-    const src = path.join(PACK_DEST, pack.name);
-    const dest = path.join(PACK_SRC, packName);
-    logger.info(`Extracting pack ${pack.name}`);
-    await extractPack(src, dest, { nedb: true, log: true, documentType: packInfo.type, transformEntry: entry => {
-      if ( entryName && (entryName !== entry.name.toLowerCase()) ) return false;
-      cleanPackEntry(entry);
-    }, transformName: entry => {
-      const name = entry.name.toLowerCase();
-      const outputName = name.replace("'", "").replace(/[^a-z0-9]+/gi, " ").trim().replace(/\s+|-{2,}/g, "-");
-      const subfolder = _getSubfolderName(entry, packName);
-      return path.join(subfolder, `${outputName}.json`);
-    } });
+  for ( const packInfo of packs ) {
+    const dest = path.join(PACK_SRC, packInfo.name);
+    logger.info(`Extracting pack ${packInfo.name}`);
+    await extractPack(packInfo.path, dest, {
+      nedb: options.nedb, log: true, documentType: packInfo.type, transformEntry: entry => {
+        if ( entryName && (entryName !== entry.name.toLowerCase()) ) return false;
+        cleanPackEntry(entry);
+      }, transformName: entry => {
+        const name = entry.name.toLowerCase();
+        const outputName = name.replace("'", "").replace(/[^a-z0-9]+/gi, " ").trim().replace(/\s+|-{2,}/g, "-");
+        const subfolder = _getSubfolderName(entry, packInfo.name);
+        return path.join(subfolder, `${outputName}.json`);
+      }
+    });
   }
 }
-export const extract = extractPacks;
 
 
 /**
