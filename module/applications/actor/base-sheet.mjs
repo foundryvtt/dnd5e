@@ -1158,7 +1158,12 @@ export default class ActorSheet5e extends ActorSheet {
     if ( !["npc", "character"].includes(this.document.type) ) return;
 
     // Determine the section it is dropped on, if any.
-    const mode = this._event.target.closest(".spellbook-section")?.dataset ?? {};
+    let header = this._event.target.closest(".items-header"); // Dropped directly on the header.
+    if ( !header ) {
+      const list = this._event.target.closest(".item-list"); // Dropped inside an existing list.
+      header = list?.previousElementSibling;
+    }
+    const mode = header?.dataset ?? {};
 
     // Determine the actor's spell slot progressions, if any.
     const progs = Object.values(this.document.classes).reduce((acc, cls) => {

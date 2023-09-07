@@ -30,92 +30,90 @@
 
 <ol class="items-list inventory-list">
 {{#each spellbook as |section|}}
-    <div class="spellbook-section" {{#each section.dataset as |v k|}}data-{{k}}="{{v}}"{{/each}}>
-        <li class="items-header spellbook-header flexrow">
-            <div class="item-name flexrow">
-                <h3>{{section.label}}</h3>
-                <div class="spell-slots">
-                    {{#if section.usesSlots}}
-                    <input type="text" name="system.spells.{{section.prop}}.value" value="{{section.uses}}" placeholder="0"
-                          data-dtype="Number">
-                    <span class="sep"> / </span>
-                    <span class="spell-max" data-level="{{section.prop}}" data-slots="{{section.slots}}">
-                        {{{section.slots}}}
-                        {{#if section.editable}}
-                        <a class="slot-max-override" data-tooltip="DND5E.SpellProgOverride">
-                            <i class="fas fa-edit"></i>
-                        </a>
-                        {{/if}}
-                    </span>
-                    {{else}}
-                    <span>{{{section.uses}}}</span>
-                    <span class="sep"> / </span>
-                    <span class="spell-max">{{{section.slots}}}</span>
-                    {{/if}}
-                </div>
-            </div>
-            <div class="spell-school">{{localize "DND5E.SpellSchool"}}</div>
-            <div class="spell-action">{{localize "DND5E.SpellUsage"}}</div>
-            <div class="spell-target">{{localize "DND5E.SpellTarget"}}</div>
-
-            <div class="item-controls flexrow">
-                {{#if section.canCreate}}
-                <a class="item-control item-create" data-tooltip="DND5E.SpellCreate"
-                    <i class="fas fa-plus"></i> {{localize "DND5E.Add"}}
-                </a>
-                {{/if}}
-            </div>
-        </li>
-
-        <ol class="item-list">
-        {{#each section.spells as |item i|}}
-        {{#dnd5e-itemContext item as |ctx|}}
-            <li class="item flexrow {{#if ctx.isExpanded}}expanded{{/if}}" data-item-id="{{item.id}}">
-                <div class="item-name flexrow rollable">
-                    <div class="item-image" tabindex="0" role="button" aria-label="{{item.name}}" style="background-image: url('{{item.img}}')"></div>
-                    <h4>{{item.name}}</h4>
-                    {{#if item.system.uses.per }}
-                    <div class="item-detail spell-uses">Uses {{item.system.uses.value}} / {{item.system.uses.max}}</div>
-                    {{/if}}
-                    <div class="spell-comps">
-                        {{#each item.labels.components.all}}
-                        <span class="spell-component{{#if tag}} tag{{/if}}">{{abbr}}</span>
-                        {{/each}}
-                    </div>
-                </div>
-                <div class="spell-school">{{item.labels.school}}</div>
-                <div class="spell-action">{{item.labels.activation}}</div>
-                <div class="spell-target" data-tooltip="{{localize 'DND5E.Range'}}: {{item.labels.range}}">
-                    {{#if item.labels.target}}
-                    {{item.labels.target}}
-                    {{else}}{{localize 'DND5E.None'}}
-                    {{/if}}
-                </div>
-
-                {{#if @root.owner}}
-                <div class="item-controls flexrow">
-                    {{#if section.canPrepare}}
-                    <a class="item-control item-toggle {{ctx.toggleClass}}" data-tooltip="{{ctx.toggleTitle}}">
-                        <i class="fas fa-sun"></i>
-                    </a>
-                    {{/if}}
-                    <a class="item-control item-edit" data-tooltip="DND5E.ItemEdit">
+    <li class="items-header spellbook-header flexrow" {{#each section.dataset as |v k|}}data-{{k}}="{{v}}"{{/each}}>
+        <div class="item-name flexrow">
+            <h3>{{section.label}}</h3>
+            <div class="spell-slots">
+                {{#if section.usesSlots}}
+                <input type="text" name="system.spells.{{section.prop}}.value" value="{{section.uses}}" placeholder="0"
+                      data-dtype="Number">
+                <span class="sep"> / </span>
+                <span class="spell-max" data-level="{{section.prop}}" data-slots="{{section.slots}}">
+                    {{{section.slots}}}
+                    {{#if section.editable}}
+                    <a class="slot-max-override" data-tooltip="DND5E.SpellProgOverride">
                         <i class="fas fa-edit"></i>
                     </a>
-                    <a class="item-control item-delete" data-tooltip="DND5E.ItemDelete">
-                        <i class="fas fa-trash"></i>
-                    </a>
-                </div>
+                    {{/if}}
+                </span>
+                {{else}}
+                <span>{{{section.uses}}}</span>
+                <span class="sep"> / </span>
+                <span class="spell-max">{{{section.slots}}}</span>
                 {{/if}}
+            </div>
+        </div>
+        <div class="spell-school">{{localize "DND5E.SpellSchool"}}</div>
+        <div class="spell-action">{{localize "DND5E.SpellUsage"}}</div>
+        <div class="spell-target">{{localize "DND5E.SpellTarget"}}</div>
 
-                {{#if ctx.isExpanded}}
-                    {{> "dnd5e.item-summary" (lookup @root.expandedData item.id)}}
+        <div class="item-controls flexrow">
+            {{#if section.canCreate}}
+            <a class="item-control item-create" data-tooltip="DND5E.SpellCreate"
+                <i class="fas fa-plus"></i> {{localize "DND5E.Add"}}
+            </a>
+            {{/if}}
+        </div>
+    </li>
+
+    <ol class="item-list">
+    {{#each section.spells as |item i|}}
+    {{#dnd5e-itemContext item as |ctx|}}
+        <li class="item flexrow {{#if ctx.isExpanded}}expanded{{/if}}" data-item-id="{{item.id}}">
+            <div class="item-name flexrow rollable">
+                <div class="item-image" tabindex="0" role="button" aria-label="{{item.name}}" style="background-image: url('{{item.img}}')"></div>
+                <h4>{{item.name}}</h4>
+                {{#if item.system.uses.per }}
+                <div class="item-detail spell-uses">Uses {{item.system.uses.value}} / {{item.system.uses.max}}</div>
                 {{/if}}
-            </li>
-        {{/dnd5e-itemContext}}
-        {{/each}}
-        </ol>
-    </div>
+                <div class="spell-comps">
+                    {{#each item.labels.components.all}}
+                    <span class="spell-component{{#if tag}} tag{{/if}}">{{abbr}}</span>
+                    {{/each}}
+                </div>
+            </div>
+            <div class="spell-school">{{item.labels.school}}</div>
+            <div class="spell-action">{{item.labels.activation}}</div>
+            <div class="spell-target" data-tooltip="{{localize 'DND5E.Range'}}: {{item.labels.range}}">
+                {{#if item.labels.target}}
+                {{item.labels.target}}
+                {{else}}{{localize 'DND5E.None'}}
+                {{/if}}
+            </div>
+
+            {{#if @root.owner}}
+            <div class="item-controls flexrow">
+                {{#if section.canPrepare}}
+                <a class="item-control item-toggle {{ctx.toggleClass}}" data-tooltip="{{ctx.toggleTitle}}">
+                    <i class="fas fa-sun"></i>
+                </a>
+                {{/if}}
+                <a class="item-control item-edit" data-tooltip="DND5E.ItemEdit">
+                    <i class="fas fa-edit"></i>
+                </a>
+                <a class="item-control item-delete" data-tooltip="DND5E.ItemDelete">
+                    <i class="fas fa-trash"></i>
+                </a>
+            </div>
+            {{/if}}
+
+            {{#if ctx.isExpanded}}
+                {{> "dnd5e.item-summary" (lookup @root.expandedData item.id)}}
+            {{/if}}
+        </li>
+    {{/dnd5e-itemContext}}
+    {{/each}}
+    </ol>
 {{else}}
     {{#if owner}}
     {{#if filters.spellbook.size}}
