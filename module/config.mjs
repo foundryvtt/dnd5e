@@ -391,16 +391,6 @@ preLocalize("timePeriods");
 /* -------------------------------------------- */
 
 /**
- * The duration of resting features.
- * @enum {number}
- */
-DND5E.restDurations = {
-  gritty: { long: { value: 7 } }
-};
-
-/* -------------------------------------------- */
-
-/**
  * Various ways in which an item or ability can be activated.
  * @enum {string}
  */
