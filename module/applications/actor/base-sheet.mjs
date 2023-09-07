@@ -1184,7 +1184,7 @@ export default class ActorSheet5e extends ActorSheet {
       if ( this.document.type === "npc" ) {
         itemData.system.preparation.mode = this.document.system.details.spellLevel ? "prepared" : "innate";
       } else {
-        itemData.system.preparation.mode = progs.pact ? "pact" : progs.leveled ? "prepared" : "innate";
+        itemData.system.preparation.mode = progs.leveled ? progs.pact ? "pact" : "prepared" : "innate";
       }
     }
 
@@ -1355,7 +1355,7 @@ export default class ActorSheet5e extends ActorSheet {
     const itemData = {
       name: game.i18n.format("DND5E.ItemNew", {type: game.i18n.localize(CONFIG.Item.typeLabels[type])}),
       type: type,
-      system: foundry.utils.expandObject(dataset)
+      system: foundry.utils.expandObject({ ...dataset })
     };
     delete itemData.system.type;
     return this.actor.createEmbeddedDocuments("Item", [itemData]);
