@@ -2,7 +2,7 @@
   "_id": "xzZQIIxXjNJwNqnp",
   "name": "Shield +2",
   "type": "equipment",
-  "img": "icons/commodities/tech/metal-blue.webp",
+  "img": "icons/equipment/shield/heater-steel-spiral.webp",
   "system": {
     "description": {
       "value": "<p>While holding this shield, you have a bonus to AC of +2. This bonus is in addition to the shield's normal bonus to AC.</p>",
@@ -21,7 +21,7 @@
     "rarity": "rare",
     "identified": true,
     "activation": {
-      "type": "none",
+      "type": "",
       "cost": null,
       "condition": ""
     },
@@ -30,6 +30,7 @@
       "units": ""
     },
     "cover": null,
+    "crewed": false,
     "target": {
       "value": null,
       "width": null,
@@ -99,10 +100,10 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.1.0",
+    "systemVersion": "2.2.2",
     "coreVersion": "10.291",
     "createdTime": 1661787233970,
-    "modifiedTime": 1671220965758,
+    "modifiedTime": 1690539683046,
     "lastModifiedBy": "dnd5ebuilder0000"
   }
 }

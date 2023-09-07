@@ -7,4 +7,20 @@ import PhysicalItemTemplate from "./templates/physical-item.mjs";
  * @mixes ItemDescriptionTemplate
  * @mixes PhysicalItemTemplate
  */
-export default class LootData extends SystemDataModel.mixin(ItemDescriptionTemplate, PhysicalItemTemplate) {}
+export default class LootData extends SystemDataModel.mixin(ItemDescriptionTemplate, PhysicalItemTemplate) {
+
+  /* -------------------------------------------- */
+  /*  Getters                                     */
+  /* -------------------------------------------- */
+
+  /**
+   * Properties displayed in chat.
+   * @type {string[]}
+   */
+  get chatProperties() {
+    return [
+      game.i18n.localize(CONFIG.Item.typeLabels.loot),
+      this.weight ? `${this.weight} ${game.i18n.localize("DND5E.AbbreviationLbs")}` : null
+    ];
+  }
+}

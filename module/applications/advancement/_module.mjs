@@ -5,8 +5,12 @@ export {default as AdvancementManager} from "./advancement-manager.mjs";
 export {default as AdvancementMigrationDialog} from "./advancement-migration-dialog.mjs";
 export {default as AdvancementSelection} from "./advancement-selection.mjs";
 
+export {default as AbilityScoreImprovementConfig} from "./ability-score-improvement-config.mjs";
+export {default as AbilityScoreImprovementFlow} from "./ability-score-improvement-flow.mjs";
 export {default as HitPointsConfig} from "./hit-points-config.mjs";
 export {default as HitPointsFlow} from "./hit-points-flow.mjs";
+export {default as ItemChoiceConfig} from "./item-choice-config.mjs";
+export {default as ItemChoiceFlow} from "./item-choice-flow.mjs";
 export {default as ItemGrantConfig} from "./item-grant-config.mjs";
 export {default as ItemGrantFlow} from "./item-grant-flow.mjs";
 export {default as ScaleValueConfig} from "./scale-value-config.mjs";

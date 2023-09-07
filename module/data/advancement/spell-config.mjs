@@ -1,6 +1,7 @@
 import { FormulaField } from "../fields.mjs";
 
 export default class SpellConfigurationData extends foundry.abstract.DataModel {
+  /** @inheritdoc */
   static defineSchema() {
     return {
       ability: new foundry.data.fields.StringField({label: "DND5E.AbilityModifier"}),

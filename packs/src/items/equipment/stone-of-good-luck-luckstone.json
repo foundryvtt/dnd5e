@@ -21,7 +21,7 @@
     "rarity": "uncommon",
     "identified": true,
     "activation": {
-      "type": "none",
+      "type": "",
       "cost": null,
       "condition": ""
     },
@@ -30,6 +30,7 @@
       "units": ""
     },
     "cover": null,
+    "crewed": false,
     "target": {
       "value": null,
       "width": null,
@@ -90,7 +91,40 @@
     "stealth": false,
     "proficient": false
   },
-  "effects": [],
+  "effects": [
+    {
+      "label": "Stone of Good Luck",
+      "icon": "icons/commodities/gems/gem-faceted-octagon-yellow.webp",
+      "origin": "Compendium.dnd5e.items.296Zgo9RhltWShE1",
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "disabled": false,
+      "_id": "TghMVbmFnR0t0AoP",
+      "changes": [
+        {
+          "key": "system.bonuses.abilities.save",
+          "mode": 2,
+          "value": "+1"
+        },
+        {
+          "key": "system.bonuses.abilities.check",
+          "mode": 2,
+          "value": "+1"
+        }
+      ],
+      "tint": null,
+      "transfer": true,
+      "flags": {},
+      "sort": 0
+    }
+  ],
   "folder": null,
   "sort": 0,
   "ownership": {
@@ -99,10 +133,10 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.1.0",
-    "coreVersion": "10.291",
+    "systemVersion": "2.2.2",
+    "coreVersion": "10.303",
     "createdTime": 1661787233443,
-    "modifiedTime": 1671220957082,
+    "modifiedTime": 1690481250206,
     "lastModifiedBy": "dnd5ebuilder0000"
   }
 }

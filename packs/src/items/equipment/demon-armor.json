@@ -2,7 +2,7 @@
   "_id": "ejEt6hLQxOux04lS",
   "name": "Demon Armor",
   "type": "equipment",
-  "img": "icons/skills/social/intimidation-impressing.webp",
+  "img": "icons/equipment/chest/breastplate-layered-leather-green.webp",
   "system": {
     "description": {
       "value": "<p><em>(Requires attunement)</em></p>\n<p>While wearing this plate armor, you gain a +1 bonus to AC, and you can understand and speak Abyssal. In addition, the armor's clawed gauntlets turn unarmed strikes with your hands into magic weapons that deal slashing damage, with a +1 bonus to attack rolls and damage rolls and a damage die of 1d8.</p>\n<p><strong>Curse</strong>. Once you don this cursed armor, you can't doff it unless you are targeted by the @Compendium[dnd5e.spells.XZhdgVK3cLoxNCQl]{Remove Curse} spell or similar magic. While wearing the armor, you have disadvantage on attack rolls against demons and on saving throws against their spells and special abilities.</p>",
@@ -30,6 +30,7 @@
       "units": ""
     },
     "cover": null,
+    "crewed": false,
     "target": {
       "value": null,
       "width": null,
@@ -104,10 +105,10 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.1.0",
+    "systemVersion": "2.2.2",
     "coreVersion": "10.291",
     "createdTime": 1661787233789,
-    "modifiedTime": 1671220962708,
+    "modifiedTime": 1690568584853,
     "lastModifiedBy": "dnd5ebuilder0000"
   }
 }

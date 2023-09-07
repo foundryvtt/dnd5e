@@ -16,7 +16,14 @@
     "hitDiceUsed": 0,
     "advancement": [
       {
-        "_id": "fib976ht1gf1ntxv",
+        "type": "HitPoints",
+        "configuration": {},
+        "value": {},
+        "title": "Hit Points",
+        "icon": "systems/dnd5e/icons/svg/hit-points.svg",
+        "_id": "WMbkpELkLBvDaEsL"
+      },
+      {
         "type": "ItemGrant",
         "configuration": {
           "items": [
@@ -36,10 +43,11 @@
         },
         "value": {},
         "level": 1,
-        "title": "Features"
+        "title": "Features",
+        "icon": "systems/dnd5e/icons/svg/item-grant.svg",
+        "_id": "13XHsx4Z3vQ2XYkJ"
       },
       {
-        "_id": "sblo46o8s0jwjh67",
         "type": "ItemGrant",
         "configuration": {
           "items": [
@@ -57,10 +65,11 @@
         },
         "value": {},
         "level": 2,
-        "title": "Features"
+        "title": "Features",
+        "icon": "systems/dnd5e/icons/svg/item-grant.svg",
+        "_id": "5crdJzGJRQIVhbyr"
       },
       {
-        "_id": "wc1k2og5yji410ul",
         "type": "ItemGrant",
         "configuration": {
           "items": [
@@ -78,10 +87,11 @@
         },
         "value": {},
         "level": 3,
-        "title": "Features"
+        "title": "Features",
+        "icon": "systems/dnd5e/icons/svg/item-grant.svg",
+        "_id": "9F1ZUcRqNsBCOFNX"
       },
       {
-        "_id": "gtfype9sk267uzvc",
         "type": "ItemGrant",
         "configuration": {
           "items": [
@@ -99,10 +109,11 @@
         },
         "value": {},
         "level": 5,
-        "title": "Features"
+        "title": "Features",
+        "icon": "systems/dnd5e/icons/svg/item-grant.svg",
+        "_id": "PvQXh3OhvuLhjVoo"
       },
       {
-        "_id": "tdk0rtktni95bzj5",
         "type": "ItemGrant",
         "configuration": {
           "items": [
@@ -120,10 +131,11 @@
         },
         "value": {},
         "level": 7,
-        "title": "Features"
+        "title": "Features",
+        "icon": "systems/dnd5e/icons/svg/item-grant.svg",
+        "_id": "X8G2PrPxOrfWQevi"
       },
       {
-        "_id": "ge802duewa43hun7",
         "type": "ItemGrant",
         "configuration": {
           "items": [
@@ -141,10 +153,11 @@
         },
         "value": {},
         "level": 11,
-        "title": "Features"
+        "title": "Features",
+        "icon": "systems/dnd5e/icons/svg/item-grant.svg",
+        "_id": "MqV3BlQkAZycZ4Ue"
       },
       {
-        "_id": "nz8rkzdx0lhelh3g",
         "type": "ItemGrant",
         "configuration": {
           "items": [
@@ -162,10 +175,11 @@
         },
         "value": {},
         "level": 14,
-        "title": "Features"
+        "title": "Features",
+        "icon": "systems/dnd5e/icons/svg/item-grant.svg",
+        "_id": "sI4nacIwT4B8Y7mb"
       },
       {
-        "_id": "o6x3bn24yzezwu3m",
         "type": "ItemGrant",
         "configuration": {
           "items": [
@@ -183,10 +197,11 @@
         },
         "value": {},
         "level": 15,
-        "title": "Features"
+        "title": "Features",
+        "icon": "systems/dnd5e/icons/svg/item-grant.svg",
+        "_id": "mugszpD8eVZ2jybU"
       },
       {
-        "_id": "nb2phqtzm96upswz",
         "type": "ItemGrant",
         "configuration": {
           "items": [
@@ -204,10 +219,11 @@
         },
         "value": {},
         "level": 18,
-        "title": "Features"
+        "title": "Features",
+        "icon": "systems/dnd5e/icons/svg/item-grant.svg",
+        "_id": "EOVFTUpweDErdpSz"
       },
       {
-        "_id": "yy5a5k0ucklu7dho",
         "type": "ItemGrant",
         "configuration": {
           "items": [
@@ -225,21 +241,18 @@
         },
         "value": {},
         "level": 20,
-        "title": "Features"
+        "title": "Features",
+        "icon": "systems/dnd5e/icons/svg/item-grant.svg",
+        "_id": "GVuwdOHDEDfQX9cl"
       },
       {
-        "_id": "ptvlyyq4usr68cmc",
-        "type": "HitPoints",
-        "configuration": {},
-        "value": {},
-        "title": ""
-      },
-      {
-        "_id": "eramv0kziciek99p",
         "type": "ScaleValue",
         "configuration": {
           "identifier": "sneak-attack",
           "type": "dice",
+          "distance": {
+            "units": ""
+          },
           "scale": {
             "1": {
               "number": 1,
@@ -281,13 +294,136 @@
               "number": 10,
               "faces": 6
             }
-          },
-          "distance": {
-            "units": ""
           }
         },
         "value": {},
-        "title": "Sneak Attack"
+        "title": "Sneak Attack",
+        "icon": "systems/dnd5e/icons/svg/scale-value.svg",
+        "_id": "81nHtANt6Ffg9M4V"
+      },
+      {
+        "type": "AbilityScoreImprovement",
+        "configuration": {
+          "points": 2,
+          "fixed": {
+            "str": 0,
+            "dex": 0,
+            "con": 0,
+            "int": 0,
+            "wis": 0,
+            "cha": 0
+          }
+        },
+        "value": {
+          "type": "asi"
+        },
+        "level": 4,
+        "title": "Ability Score Improvement",
+        "icon": "systems/dnd5e/icons/svg/ability-score-improvement.svg",
+        "_id": "smghqQkObY4OOg30"
+      },
+      {
+        "type": "AbilityScoreImprovement",
+        "configuration": {
+          "points": 2,
+          "fixed": {
+            "str": 0,
+            "dex": 0,
+            "con": 0,
+            "int": 0,
+            "wis": 0,
+            "cha": 0
+          }
+        },
+        "value": {
+          "type": "asi"
+        },
+        "level": 8,
+        "title": "Ability Score Improvement",
+        "icon": "systems/dnd5e/icons/svg/ability-score-improvement.svg",
+        "_id": "WFAAUfKJA9QR46Bw"
+      },
+      {
+        "type": "AbilityScoreImprovement",
+        "configuration": {
+          "points": 2,
+          "fixed": {
+            "str": 0,
+            "dex": 0,
+            "con": 0,
+            "int": 0,
+            "wis": 0,
+            "cha": 0
+          }
+        },
+        "value": {
+          "type": "asi"
+        },
+        "level": 12,
+        "title": "Ability Score Improvement",
+        "icon": "systems/dnd5e/icons/svg/ability-score-improvement.svg",
+        "_id": "ahuQ3gMqz6sCza0m"
+      },
+      {
+        "type": "AbilityScoreImprovement",
+        "configuration": {
+          "points": 2,
+          "fixed": {
+            "str": 0,
+            "dex": 0,
+            "con": 0,
+            "int": 0,
+            "wis": 0,
+            "cha": 0
+          }
+        },
+        "value": {
+          "type": "asi"
+        },
+        "level": 16,
+        "title": "Ability Score Improvement",
+        "icon": "systems/dnd5e/icons/svg/ability-score-improvement.svg",
+        "_id": "iVq9vmwTow7KielM"
+      },
+      {
+        "_id": "puDaUsYrlks0z5gm",
+        "type": "AbilityScoreImprovement",
+        "configuration": {
+          "points": 2,
+          "fixed": {
+            "str": 0,
+            "dex": 0,
+            "con": 0,
+            "int": 0,
+            "wis": 0,
+            "cha": 0
+          }
+        },
+        "value": {
+          "type": "asi"
+        },
+        "level": 19,
+        "title": ""
+      },
+      {
+        "_id": "WhAioX7KT2ZULDHU",
+        "type": "AbilityScoreImprovement",
+        "configuration": {
+          "points": 2,
+          "fixed": {
+            "str": 0,
+            "dex": 0,
+            "con": 0,
+            "int": 0,
+            "wis": 0,
+            "cha": 0
+          }
+        },
+        "value": {
+          "type": "asi"
+        },
+        "level": 10,
+        "title": ""
       }
     ],
     "saves": [
@@ -325,10 +461,10 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.1.0",
-    "coreVersion": "10.291",
+    "systemVersion": "2.2.2",
+    "coreVersion": "10.303",
     "createdTime": 1661787234284,
-    "modifiedTime": 1671220972909,
+    "modifiedTime": 1691518730064,
     "lastModifiedBy": "dnd5ebuilder0000"
   }
 }

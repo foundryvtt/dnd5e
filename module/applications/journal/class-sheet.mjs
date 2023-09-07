@@ -41,6 +41,8 @@ export default class JournalClassPageSheet extends JournalPageSheet {
     );
 
     const linked = await fromUuid(this.document.system.item);
+    context.subclasses = await this._getSubclasses(this.document.system.subclassItems);
+
     if ( !linked ) return context;
     context.linked = {
       document: linked,
@@ -54,7 +56,6 @@ export default class JournalClassPageSheet extends JournalPageSheet {
     context.optionalTable = await this._getOptionalTable(linked);
     context.features = await this._getFeatures(linked);
     context.optionalFeatures = await this._getFeatures(linked, true);
-    context.subclasses = await this._getSubclasses(this.document.system.subclassItems);
     context.subclasses?.sort((lhs, rhs) => lhs.name.localeCompare(rhs.name));
 
     return context;
@@ -70,7 +71,7 @@ export default class JournalClassPageSheet extends JournalPageSheet {
   _getAdvancement(item) {
     const advancement = {};
 
-    const hp = item.advancement.byType.HitPoints[0];
+    const hp = item.advancement.byType.HitPoints?.[0];
     if ( hp ) {
       advancement.hp = {
         hitDice: `1${hp.hitDie}`,
@@ -143,10 +144,13 @@ export default class JournalClassPageSheet extends JournalPageSheet {
       const features = [];
       for ( const advancement of item.advancement.byLevel[level] ) {
         switch ( advancement.constructor.typeName ) {
+          case "AbilityScoreImprovement":
+            features.push(game.i18n.localize("DND5E.AdvancementAbilityScoreImprovementTitle"));
+            continue;
           case "ItemGrant":
             if ( advancement.configuration.optional ) continue;
             features.push(...await Promise.all(advancement.configuration.items.map(makeLink)));
-            continue;
+            break;
         }
       }
 
@@ -281,7 +285,7 @@ export default class JournalClassPageSheet extends JournalPageSheet {
           case "ItemGrant":
             if ( !advancement.configuration.optional ) continue;
             features.push(...await Promise.all(advancement.configuration.items.map(makeLink)));
-            continue;
+            break;
         }
       }
       if ( !features.length ) continue;
@@ -422,7 +426,7 @@ export default class JournalClassPageSheet extends JournalPageSheet {
    */
   _onLaunchTextEditor(event) {
     event.preventDefault();
-    const textKeyPath = event.target.dataset.target;
+    const textKeyPath = event.currentTarget.dataset.target;
     const label = event.target.closest(".form-group").querySelector("label");
     const editor = new JournalEditor(this.document, { textKeyPath, title: label?.innerText });
     editor.render(true);
@@ -439,15 +443,14 @@ export default class JournalClassPageSheet extends JournalPageSheet {
     switch ( item.type ) {
       case "class":
         await this.document.update({"system.item": item.uuid});
-        this.render();
+        return this.render();
       case "subclass":
         const itemSet = this.document.system.subclassItems;
         itemSet.add(item.uuid);
         await this.document.update({"system.subclassItems": Array.from(itemSet)});
-        this.render();
+        return this.render();
       default:
         return false;
     }
   }
-
 }

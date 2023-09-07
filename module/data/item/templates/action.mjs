@@ -58,6 +58,8 @@ export default class ActionTemplate extends foundry.abstract.DataModel {
   }
 
   /* -------------------------------------------- */
+  /*  Migrations                                  */
+  /* -------------------------------------------- */
 
   /** @inheritdoc */
   static migrateData(source) {
@@ -97,11 +99,11 @@ export default class ActionTemplate extends foundry.abstract.DataModel {
    */
   static #migrateCritical(source) {
     if ( !("critical" in source) ) return;
-    if ( source.critical?.damage === null ) source.critical.damage = "";
     if ( (typeof source.critical !== "object") || (source.critical === null) ) source.critical = {
       threshold: null,
       damage: ""
     };
+    if ( source.critical.damage === null ) source.critical.damage = "";
   }
 
   /* -------------------------------------------- */
@@ -111,9 +113,11 @@ export default class ActionTemplate extends foundry.abstract.DataModel {
    * @param {object} source  The candidate source data from which the model will be constructed.
    */
   static #migrateSave(source) {
-    if ( source.save?.scaling === "" ) source.save.scaling = "spell";
-    if ( source.save?.ability === null ) source.save.ability = "";
-    if ( typeof source.save?.dc === "string" ) {
+    if ( !("save" in source) ) return;
+    source.save ??= {};
+    if ( source.save.scaling === "" ) source.save.scaling = "spell";
+    if ( source.save.ability === null ) source.save.ability = "";
+    if ( typeof source.save.dc === "string" ) {
       if ( source.save.dc === "" ) source.save.dc = null;
       else if ( Number.isNumeric(source.save.dc) ) source.save.dc = Number(source.save.dc);
     }
@@ -127,6 +131,127 @@ export default class ActionTemplate extends foundry.abstract.DataModel {
    */
   static #migrateDamage(source) {
     if ( !("damage" in source) ) return;
+    source.damage ??= {};
     source.damage.parts ??= [];
   }
+
+  /* -------------------------------------------- */
+  /*  Getters                                     */
+  /* -------------------------------------------- */
+
+  /**
+   * Which ability score modifier is used by this item?
+   * @type {string|null}
+   */
+  get abilityMod() {
+    if ( this.ability === "none" ) return null;
+    return this.ability || this._typeAbilityMod || {
+      mwak: "str",
+      rwak: "dex",
+      msak: this.parent?.actor?.system.attributes.spellcasting || "int",
+      rsak: this.parent?.actor?.system.attributes.spellcasting || "int"
+    }[this.actionType] || null;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Default ability key defined for this type.
+   * @type {string|null}
+   * @internal
+   */
+  get _typeAbilityMod() {
+    return null;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * What is the critical hit threshold for this item? Uses the smallest value from among the following sources:
+   *  - `critical.threshold` defined on the item
+   *  - `critical.threshold` defined on ammunition, if consumption mode is set to ammo
+   *  - Type-specific critical threshold
+   * @type {number|null}
+   */
+  get criticalThreshold() {
+    if ( !this.hasAttack ) return null;
+    let ammoThreshold = Infinity;
+    if ( this.consume?.type === "ammo" ) {
+      ammoThreshold = this.parent?.actor?.items.get(this.consume.target).system.critical.threshold ?? Infinity;
+    }
+    const threshold = Math.min(this.critical.threshold ?? Infinity, this._typeCriticalThreshold, ammoThreshold);
+    return threshold < Infinity ? threshold : 20;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Default critical threshold for this type.
+   * @type {number}
+   * @internal
+   */
+  get _typeCriticalThreshold() {
+    return Infinity;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Does the Item implement an ability check as part of its usage?
+   * @type {boolean}
+   */
+  get hasAbilityCheck() {
+    return (this.actionType === "abil") && !!this.ability;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Does the Item implement an attack roll as part of its usage?
+   * @type {boolean}
+   */
+  get hasAttack() {
+    return ["mwak", "rwak", "msak", "rsak"].includes(this.actionType);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Does the Item implement a damage roll as part of its usage?
+   * @type {boolean}
+   */
+  get hasDamage() {
+    return this.actionType && (this.damage.parts.length > 0);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Does the Item implement a saving throw as part of its usage?
+   * @type {boolean}
+   */
+  get hasSave() {
+    return this.actionType && !!(this.save.ability && this.save.scaling);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Does the Item provide an amount of healing instead of conventional damage?
+   * @type {boolean}
+   */
+  get isHealing() {
+    return (this.actionType === "heal") && this.hasDamage;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Does the Item implement a versatile damage roll as part of its usage?
+   * @type {boolean}
+   */
+  get isVersatile() {
+    return this.actionType && !!(this.hasDamage && this.damage.versatile);
+  }
+
 }

@@ -2,7 +2,7 @@
   "_id": "WfqBg3yBNoJQtVEB",
   "name": "Shield +3",
   "type": "equipment",
-  "img": "icons/commodities/currency/coin-inset-skull-copper.webp",
+  "img": "icons/equipment/shield/heater-embossed-gold.webp",
   "system": {
     "description": {
       "value": "<p>While holding this shield, you have a bonus to AC of +3. This bonus is in addition to the shield's normal bonus to AC.</p>",
@@ -21,7 +21,7 @@
     "rarity": "veryRare",
     "identified": true,
     "activation": {
-      "type": "none",
+      "type": "",
       "cost": null,
       "condition": ""
     },
@@ -30,6 +30,7 @@
       "units": ""
     },
     "cover": null,
+    "crewed": false,
     "target": {
       "value": null,
       "width": null,
@@ -99,10 +100,10 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.1.0",
+    "systemVersion": "2.2.2",
     "coreVersion": "10.291",
     "createdTime": 1661787233692,
-    "modifiedTime": 1671220961463,
+    "modifiedTime": 1690539777633,
     "lastModifiedBy": "dnd5ebuilder0000"
   }
 }

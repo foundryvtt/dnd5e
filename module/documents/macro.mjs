@@ -31,8 +31,9 @@ export async function create5eMacro(dropData, slot) {
   }
 
   // Assign the macro to the hotbar
-  const macro = game.macros.find(m => (m.name === macroData.name) && (m.command === macroData.command)
-    && m.author.isSelf) || await Macro.create(macroData);
+  const macro = game.macros.find(m => {
+    return (m.name === macroData.name) && (m.command === macroData.command) && m.isAuthor;
+  }) || await Macro.create(macroData);
   game.user.assignHotbarMacro(macro, slot);
 }
 
@@ -81,10 +82,10 @@ export function rollItem(itemName) {
 
 /**
  * Toggle an effect on and off when a macro is clicked.
- * @param {string} effectLabel       Label for the effect to be toggled.
+ * @param {string} effectName        Name of the effect to be toggled.
  * @returns {Promise<ActiveEffect>}  The effect after it has been toggled.
  */
-export function toggleEffect(effectLabel) {
-  const effect = getMacroTarget(effectLabel, "ActiveEffect");
+export function toggleEffect(effectName) {
+  const effect = getMacroTarget(effectName, "ActiveEffect");
   return effect?.update({disabled: !effect.disabled});
 }

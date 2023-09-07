@@ -1,0 +1,47 @@
+<form id="{{appId}}" data-level="{{level}}" data-id="{{advancement.id}}" data-type="{{type}}"
+  data-current="{{choices.current}}" data-max="{{choices.max}}">
+  <h3>{{{title}}}</h3>
+
+  <div class="drop-target">
+    {{#if advancement.configuration.hint}}
+      <p>{{advancement.configuration.hint}}</p>
+    {{/if}}
+
+    {{#each previousLevels}}
+      <h4 class="form-header">{{localize "DND5E.AdvancementLevelHeader" level=@key}}</h4>
+      {{#each this}}
+        <div class="item-name flexrow">
+          <div class="item-image" style="background-image: url('{{this.img}}');"></div>
+          <label class="flexrow"><h4><a data-uuid="{{this.uuid}}">{{this.name}}</a></h4></label>
+        </div>
+      {{/each}}
+    {{/each}}
+
+    <h4 class="form-header">
+      {{localize "DND5E.AdvancementItemChoiceChosen" current=choices.current max=choices.max}}
+    </h4>
+
+    {{#each items}}
+      <div class="item-name flexrow">
+        <div class="item-image" style="background-image: url({{this.img}});"></div>
+        <label class="flexrow">
+          <h4>
+            <a data-uuid="{{this.uuid}}">{{this.name}}</a>
+          </h4>
+          {{#if this.dropped}}
+            <a class="item-control item-delete" title="{{localize 'DND5E.ItemDelete'}}">
+              <i class="fas fa-trash"></i>
+            </a>
+            <input type="hidden" name="{{this.uuid}}" value="true" data-dtype="Boolean">
+          {{else}}
+            <input type="checkbox" name="{{this.uuid}}" {{checked this.checked}} {{disabled this.disabled}}>
+          {{/if}}
+        </label>
+      </div>
+    {{/each}}
+
+    {{#if advancement.configuration.allowDrops}}
+      <p class="hint centered">{{localize "DND5E.AdvancementFlowDropAreaHint"}}</p>
+    {{/if}}
+  </div>
+</form>

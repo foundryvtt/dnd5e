@@ -62,7 +62,7 @@
                 </select>
             </div>
 
-            {{#unless isMountable}}
+            {{#unless system.isMountable}}
             <div class="form-group">
                 <label>{{localize "DND5E.Attunement"}}</label>
                 <select name="system.attunement" data-dtype="Number">
@@ -70,13 +70,18 @@
                 </select>
             </div>
 
+            <div class="form-group">
+                <label>{{localize "DND5E.Proficiency"}}</label>
+                <select name="system.proficient" data-dtype="Number">
+                    {{selectOptions config.weaponAndArmorProficiencyLevels selected=system.proficient
+                                    blank=(localize "DND5E.Automatic")}}
+                </select>
+            </div>
+
             {{!-- Weapon Status --}}
             <div class="form-group stacked">
                 <label>{{ localize "DND5E.ItemWeaponStatus" }}</label>
                 <div class="form-fields">
-                    <label class="checkbox">
-                        <input type="checkbox" name="system.proficient" {{checked system.proficient}}/> {{ localize "DND5E.Proficient" }}
-                    </label>
                     <label class="checkbox">
                         <input type="checkbox" name="system.equipped" {{checked system.equipped}}/> {{ localize "DND5E.Equipped" }}
                     </label>
@@ -97,7 +102,7 @@
                 {{/each}}
             </div>
 
-            {{#if isMountable}}
+            {{#if system.isMountable}}
             <div class="form-group">
                 <label>{{localize 'DND5E.ArmorClass'}}</label>
                 <div class="form-fields">

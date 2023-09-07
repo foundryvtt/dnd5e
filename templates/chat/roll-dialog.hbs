@@ -7,7 +7,7 @@
     <div class="form-group">
         <label>{{ localize "DND5E.AbilityModifier" }}</label>
         <select name="ability">
-            {{selectOptions abilities selected=defaultAbility}}
+            {{selectOptions abilities selected=defaultAbility labelAttr="label"}}
         </select>
     </div>
     {{/if}}

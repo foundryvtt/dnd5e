@@ -9,6 +9,15 @@ import Item5e from "../../documents/item.mjs";
  */
 export default class GroupActorSheet extends ActorSheet {
 
+  /**
+   * IDs for items on the sheet that have been expanded.
+   * @type {Set<string>}
+   * @protected
+   */
+  _expanded = new Set();
+
+  /* -------------------------------------------- */
+
   /** @inheritDoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
@@ -50,6 +59,11 @@ export default class GroupActorSheet extends ActorSheet {
     // Inventory
     context.itemContext = {};
     context.inventory = this.#prepareInventory(context);
+    context.expandedData = {};
+    for ( const id of this._expanded ) {
+      const item = this.actor.items.get(id);
+      if ( item ) context.expandedData[id] = await item.getChatData({secrets: this.actor.isOwner});
+    }
     context.inventoryFilters = false;
     context.rollableClass = this.isEditable ? "rollable" : "";
 
@@ -86,6 +100,7 @@ export default class GroupActorSheet extends ActorSheet {
     const members = [];
     if ( stats.nMembers ) members.push(`${stats.nMembers} ${game.i18n.localize("DND5E.GroupMembers")}`);
     if ( stats.nVehicles ) members.push(`${stats.nVehicles} ${game.i18n.localize("DND5E.GroupVehicles")}`);
+    if ( !members.length ) return game.i18n.localize("DND5E.GroupSummaryEmpty");
     return game.i18n.format("DND5E.GroupSummary", {members: formatter.format(members)});
   }
 
@@ -103,9 +118,9 @@ export default class GroupActorSheet extends ActorSheet {
       nVehicles: 0
     };
     const sections = {
-      character: {label: "ACTOR.TypeCharacterPl", members: []},
-      npc: {label: "ACTOR.TypeNpcPl", members: []},
-      vehicle: {label: "ACTOR.TypeVehiclePl", members: []}
+      character: {label: `${CONFIG.Actor.typeLabels.character}Pl`, members: []},
+      npc: {label: `${CONFIG.Actor.typeLabels.npc}Pl`, members: []},
+      vehicle: {label: `${CONFIG.Actor.typeLabels.vehicle}Pl`, members: []}
     };
     for ( const member of this.object.system.members ) {
       const m = {
@@ -120,7 +135,7 @@ export default class GroupActorSheet extends ActorSheet {
       // HP bar
       const hp = member.system.attributes.hp;
       m.hp.current = hp.value + (hp.temp || 0);
-      m.hp.max = hp.max + (hp.tempmax || 0);
+      m.hp.max = Math.max(0, hp.max + (hp.tempmax || 0));
       m.hp.pct = Math.clamped((m.hp.current / m.hp.max) * 100, 0, 100).toFixed(2);
       m.hp.color = dnd5e.documents.Actor5e.getHPColor(m.hp.current, m.hp.max).css;
       stats.currentHP += m.hp.current;
@@ -167,13 +182,10 @@ export default class GroupActorSheet extends ActorSheet {
   #prepareInventory(context) {
 
     // Categorize as weapons, equipment, containers, and loot
-    const sections = {
-      weapon: {label: "ITEM.TypeWeaponPl", items: [], hasActions: false, dataset: {type: "weapon"}},
-      equipment: {label: "ITEM.TypeEquipmentPl", items: [], hasActions: false, dataset: {type: "equipment"}},
-      consumable: {label: "ITEM.TypeConsumablePl", items: [], hasActions: false, dataset: {type: "consumable"}},
-      backpack: {label: "ITEM.TypeContainerPl", items: [], hasActions: false, dataset: {type: "backpack"}},
-      loot: {label: "ITEM.TypeLootPl", items: [], hasActions: false, dataset: {type: "loot"}}
-    };
+    const sections = {};
+    for ( const type of ["weapon", "equipment", "consumable", "backpack", "loot"] ) {
+      sections[type] = {label: `${CONFIG.Item.typeLabels[type]}Pl`, items: [], hasActions: false, dataset: {type}};
+    }
 
     // Classify items
     for ( const item of context.items ) {
@@ -181,6 +193,8 @@ export default class GroupActorSheet extends ActorSheet {
       const {quantity} = item.system;
       ctx.isStack = Number.isNumeric(quantity) && (quantity > 1);
       ctx.canToggle = false;
+      ctx.isExpanded = this._expanded.has(item.id);
+      ctx.hasUses = item.hasLimitedUses;
       if ( (item.type in sections) && (item.type !== "loot") ) sections[item.type].items.push(item);
       else sections.loot.items.push(item);
     }
@@ -218,9 +232,14 @@ export default class GroupActorSheet extends ActorSheet {
     super.activateListeners(html);
     html.find(".group-member .name").click(this._onClickMemberName.bind(this));
     if ( this.isEditable ) {
+      // Input focus and update
+      const inputs = html.find("input");
+      inputs.focus(ev => ev.currentTarget.select());
+      inputs.addBack().find('[type="text"][data-dtype="Number"]').change(ActorSheet5e.prototype._onChangeInputDelta.bind(this));
       html.find(".action-button").click(this._onClickActionButton.bind(this));
       html.find(".item-control").click(this._onClickItemControl.bind(this));
       html.find(".item .rollable h4").click(event => this._onClickItemName(event));
+      html.find(".item-quantity input, .item-uses input").change(this._onItemPropertyChange.bind(this));
       new ContextMenu(html, ".item-list .item", [], {onOpen: this._onItemContext.bind(this)});
     }
   }
@@ -293,7 +312,7 @@ export default class GroupActorSheet extends ActorSheet {
     const type = button.dataset.type;
     const system = {...button.dataset};
     delete system.type;
-    const name = game.i18n.format("DND5E.ItemNew", {type: game.i18n.localize(`ITEM.Type${type.capitalize()}`)});
+    const name = game.i18n.format("DND5E.ItemNew", {type: game.i18n.localize(CONFIG.Item.typeLabels[type])});
     const itemData = {name, type, system};
     return this.actor.createEmbeddedDocuments("Item", [itemData]);
   }
@@ -337,6 +356,21 @@ export default class GroupActorSheet extends ActorSheet {
    */
   _onClickItemName(event) {
     game.system.applications.actor.ActorSheet5e.prototype._onItemSummary.call(this, event);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Change the quantity or limited uses of an Owned Item within the actor.
+   * @param {Event} event        The triggering click event.
+   * @returns {Promise<Item5e>}  Updated item.
+   * @protected
+   */
+  async _onItemPropertyChange(event) {
+    const proto = game.system.applications.actor.ActorSheet5e.prototype;
+    const parent = event.currentTarget.parentElement;
+    if ( parent.classList.contains("item-quantity") ) return proto._onQuantityChange.call(this, event);
+    else if ( parent.classList.contains("item-uses") ) return proto._onUsesChange.call(this, event);
   }
 
   /* -------------------------------------------- */

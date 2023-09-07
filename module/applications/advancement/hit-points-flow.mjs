@@ -1,4 +1,5 @@
 import AdvancementFlow from "./advancement-flow.mjs";
+import Advancement from "../../documents/advancement/advancement.mjs";
 
 /**
  * Inline application that presents hit points selection upon level up.

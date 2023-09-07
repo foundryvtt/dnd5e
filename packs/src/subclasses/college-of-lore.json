@@ -75,6 +75,34 @@
           }
         },
         "value": {}
+      },
+      {
+        "_id": "zmBtra2UDx5BYyR7",
+        "type": "ItemChoice",
+        "configuration": {
+          "hint": "Learn two spells of your choice from any class. A spell you choose must be of a level you can cast, as shown on the Bard table, or a cantrip.",
+          "choices": {
+            "6": 2
+          },
+          "allowDrops": true,
+          "type": "spell",
+          "pool": [],
+          "spell": {
+            "ability": "",
+            "preparation": "",
+            "uses": {
+              "max": "",
+              "per": ""
+            }
+          },
+          "restriction": {
+            "type": "",
+            "subtype": "",
+            "level": "available"
+          }
+        },
+        "value": {},
+        "title": "Additional Magical Secrets"
       }
     ],
     "spellcasting": {
@@ -92,10 +120,10 @@
   "_id": "MNvsEc4D2ccX7dQT",
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.1.0",
+    "systemVersion": "2.1.2",
     "coreVersion": "10.291",
     "createdTime": 1661787234294,
-    "modifiedTime": 1671220973481,
+    "modifiedTime": 1674435535784,
     "lastModifiedBy": "dnd5ebuilder0000"
   }
 }
