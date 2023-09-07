@@ -36,7 +36,7 @@
             <div class="spell-slots">
                 {{#if section.usesSlots}}
                 <input type="text" name="system.spells.{{section.prop}}.value" value="{{section.uses}}" placeholder="0"
-                      data-dtype="Number">
+                       data-dtype="Number">
                 <span class="sep"> / </span>
                 <span class="spell-max" data-level="{{section.prop}}" data-slots="{{section.slots}}">
                     {{{section.slots}}}
@@ -46,7 +46,7 @@
                     </a>
                     {{/if}}
                 </span>
-                {{else}}
+                {{ else }}
                 <span>{{{section.uses}}}</span>
                 <span class="sep"> / </span>
                 <span class="spell-max">{{{section.slots}}}</span>
@@ -60,6 +60,7 @@
         <div class="item-controls flexrow">
             {{#if section.canCreate}}
             <a class="item-control item-create" data-tooltip="DND5E.SpellCreate"
+                {{#each section.dataset as |v k|}}data-{{k}}="{{v}}"{{/each}}>
                 <i class="fas fa-plus"></i> {{localize "DND5E.Add"}}
             </a>
             {{/if}}
