@@ -48,6 +48,7 @@ export default class AbilityTemplate extends MeasuredTemplate {
       fillColor: game.user.color,
       flags: { dnd5e: { origin: item.uuid } }
     };
+    if ( item.type === "spell" ) foundry.utils.mergeObject(templateData.flags, {"dnd5e.spellLevel": item.system.level});
 
     // Additional type-specific data
     switch ( templateShape ) {
