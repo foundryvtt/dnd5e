@@ -41,15 +41,6 @@ export default class ActorSheet5e extends ActorSheet {
   /* -------------------------------------------- */
 
   /**
-   * Track the most recent drag event.
-   * @type {DragEvent}
-   * @protected
-   */
-  _event = null;
-
-  /* -------------------------------------------- */
-
-  /**
    * IDs for items on the sheet that have been expanded.
    * @type {Set<string>}
    * @protected
@@ -1039,15 +1030,37 @@ export default class ActorSheet5e extends ActorSheet {
   /* -------------------------------------------- */
 
   /** @override */
-  async _onDrop(event) {
-    this._event = event;
-    return super._onDrop(event);
+  async _onDropItem(event, data) {
+    if ( !this.actor.isOwner ) return false;
+    const item = await Item.implementation.fromDropData(data);
+    const itemData = item.toObject();
+
+    // Handle item sorting within the same Actor
+    if ( this.actor.uuid === item.parent?.uuid ) return this._onSortItem(event, itemData);
+
+    // Create the owned item
+    return this._onDropItemCreate(event, itemData);
   }
 
   /* -------------------------------------------- */
 
   /** @override */
-  async _onDropItemCreate(itemData) {
+  async _onDropFolder(event, data) {
+    // TODO: not needed as of v12
+    if ( !this.actor.isOwner ) return [];
+    const folder = await Folder.implementation.fromDropData(data);
+    if ( folder.type !== "Item" ) return [];
+    const droppedItemData = await Promise.all(folder.contents.map(async item => {
+      if ( !(document instanceof Item) ) item = await fromUuid(item.uuid);
+      return item.toObject();
+    }));
+    return this._onDropItemCreate(event, droppedItemData);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  async _onDropItemCreate(event, itemData) {
     let items = itemData instanceof Array ? itemData : [itemData];
     const itemsWithoutAdvancement = items.filter(i => !i.system.advancement?.length);
     const multipleAdvancements = (items.length - itemsWithoutAdvancement.length) > 1;
@@ -1058,7 +1071,7 @@ export default class ActorSheet5e extends ActorSheet {
 
     const toCreate = [];
     for ( const item of items ) {
-      const result = await this._onDropSingleItem(item);
+      const result = await this._onDropSingleItem(event, item);
       if ( result ) toCreate.push(result);
     }
 
@@ -1070,12 +1083,13 @@ export default class ActorSheet5e extends ActorSheet {
 
   /**
    * Handles dropping of a single item onto this character sheet.
+   * @param {Event} event                The initiating drop event.
    * @param {object} itemData            The item data to create.
    * @returns {Promise<object|boolean>}  The item data to create after processing, or false if the item should not be
    *                                     created or creation has been otherwise handled.
    * @protected
    */
-  async _onDropSingleItem(itemData) {
+  async _onDropSingleItem(event, itemData) {
     // Check to make sure items of this type are allowed on this actor
     if ( this.constructor.unsupportedItemTypes.has(itemData.type) ) {
       ui.notifications.warn(game.i18n.format("DND5E.ActorWarningInvalidItem", {
@@ -1109,7 +1123,7 @@ export default class ActorSheet5e extends ActorSheet {
     }
 
     // Adjust the preparation mode of a leveled spell depending on the section on which it is dropped.
-    if ( itemData.type === "spell" ) this._onDropSpell(itemData);
+    if ( itemData.type === "spell" ) this._onDropSpell(event, itemData);
 
     return itemData;
   }
@@ -1152,13 +1166,14 @@ export default class ActorSheet5e extends ActorSheet {
 
   /**
    * Adjust the preparation mode of a dropped spell depending on the drop location on the sheet.
+   * @param {Event} event        The initiating drop event.
    * @param {object} itemData    The item data requested for creation. **Will be mutated.**
    */
-  _onDropSpell(itemData) {
+  _onDropSpell(event, itemData) {
     if ( !["npc", "character"].includes(this.document.type) ) return;
 
     // Determine the section it is dropped on, if any.
-    const mode = this._event.target.closest(".spellbook-section")?.dataset ?? {};
+    const mode = event.target.closest(".spellbook-section")?.dataset ?? {};
 
     // Determine the actor's spell slot progressions, if any.
     const progs = Object.values(this.document.classes).reduce((acc, cls) => {
@@ -1184,7 +1199,7 @@ export default class ActorSheet5e extends ActorSheet {
       if ( this.document.type === "npc" ) {
         itemData.system.preparation.mode = this.document.system.details.spellLevel ? "prepared" : "innate";
       } else {
-        itemData.system.preparation.mode = progs.pact ? "pact" : progs.leveled ? "prepared" : "innate";
+        itemData.system.preparation.mode = progs.leveled ? "prepared" : progs.pact ? "pact" : "innate";
       }
     }
 
@@ -1355,7 +1370,7 @@ export default class ActorSheet5e extends ActorSheet {
     const itemData = {
       name: game.i18n.format("DND5E.ItemNew", {type: game.i18n.localize(CONFIG.Item.typeLabels[type])}),
       type: type,
-      system: foundry.utils.expandObject(dataset)
+      system: foundry.utils.expandObject({ ...dataset })
     };
     delete itemData.system.type;
     return this.actor.createEmbeddedDocuments("Item", [itemData]);

@@ -387,12 +387,12 @@ export default class GroupActorSheet extends ActorSheet {
   /* -------------------------------------------- */
 
   /** @override */
-  async _onDropItemCreate(itemData) {
+  async _onDropItemCreate(event, itemData) {
     const items = itemData instanceof Array ? itemData : [itemData];
 
     const toCreate = [];
     for ( const item of items ) {
-      const result = await this._onDropSingleItem(item);
+      const result = await this._onDropSingleItem(event, item);
       if ( result ) toCreate.push(result);
     }
 
@@ -409,7 +409,7 @@ export default class GroupActorSheet extends ActorSheet {
    *                                     created or creation has been otherwise handled.
    * @protected
    */
-  async _onDropSingleItem(itemData) {
+  async _onDropSingleItem(event, itemData) {
 
     // Check to make sure items of this type are allowed on this actor
     if ( this.constructor.unsupportedItemTypes.has(itemData.type) ) {
