@@ -41,6 +41,15 @@ export default class ActorSheet5e extends ActorSheet {
   /* -------------------------------------------- */
 
   /**
+   * Track the most recent drag event.
+   * @type {DragEvent}
+   * @protected
+   */
+  _event = null;
+
+  /* -------------------------------------------- */
+
+  /**
    * IDs for items on the sheet that have been expanded.
    * @type {Set<string>}
    * @protected
@@ -1030,6 +1039,14 @@ export default class ActorSheet5e extends ActorSheet {
   /* -------------------------------------------- */
 
   /** @override */
+  async _onDrop(event) {
+    this._event = event;
+    return super._onDrop(event);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
   async _onDropItemCreate(itemData) {
     let items = itemData instanceof Array ? itemData : [itemData];
     const itemsWithoutAdvancement = items.filter(i => !i.system.advancement?.length);
@@ -1059,7 +1076,6 @@ export default class ActorSheet5e extends ActorSheet {
    * @protected
    */
   async _onDropSingleItem(itemData) {
-
     // Check to make sure items of this type are allowed on this actor
     if ( this.constructor.unsupportedItemTypes.has(itemData.type) ) {
       ui.notifications.warn(game.i18n.format("DND5E.ActorWarningInvalidItem", {
@@ -1091,6 +1107,10 @@ export default class ActorSheet5e extends ActorSheet {
         return false;
       }
     }
+
+    // Adjust the preparation mode of a leveled spell depending on the section on which it is dropped.
+    if ( itemData.type === "spell" ) this._onDropSpell(itemData);
+
     return itemData;
   }
 
@@ -1126,6 +1146,57 @@ export default class ActorSheet5e extends ActorSheet {
     return similarItem.update({
       "system.quantity": similarItem.system.quantity + Math.max(itemData.system.quantity, 1)
     });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Adjust the preparation mode of a dropped spell depending on the drop location on the sheet.
+   * @param {object} itemData    The item data requested for creation. **Will be mutated.**
+   */
+  _onDropSpell(itemData) {
+    if ( !["npc", "character"].includes(this.document.type) ) return;
+
+    // Determine the section it is dropped on, if any.
+    let header = this._event.target.closest(".items-header"); // Dropped directly on the header.
+    if ( !header ) {
+      const list = this._event.target.closest(".item-list"); // Dropped inside an existing list.
+      header = list?.previousElementSibling;
+    }
+    const mode = header?.dataset ?? {};
+
+    // Determine the actor's spell slot progressions, if any.
+    const progs = Object.values(this.document.classes).reduce((acc, cls) => {
+      if ( cls.spellcasting?.type === "pact" ) acc.pact = true;
+      else if ( cls.spellcasting?.type === "leveled" ) acc.leveled = true;
+      return acc;
+    }, {pact: false, leveled: false});
+
+    // Case 1: Drop a cantrip.
+    if ( itemData.system.level === 0 ) {
+      if ( ["pact", "prepared"].includes(mode["preparation.mode"]) ) {
+        itemData.system.preparation.mode = "prepared";
+      } else if ( !mode["preparation.mode"] ) {
+        const isCaster = this.document.system.details.spellLevel || progs.pact || progs.leveled;
+        itemData.system.preparation.mode = isCaster ? "prepared" : "innate";
+      } else {
+        itemData.system.preparation.mode = mode["preparation.mode"];
+      }
+    }
+
+    // Case 2: Drop a leveled spell in a section without a mode.
+    else if ( (mode.level === 0) || !mode["preparation.mode"] ) {
+      if ( this.document.type === "npc" ) {
+        itemData.system.preparation.mode = this.document.system.details.spellLevel ? "prepared" : "innate";
+      } else {
+        itemData.system.preparation.mode = progs.leveled ? "prepared" : progs.pact ? "pact" : "innate";
+      }
+    }
+
+    // Case 3: Drop a leveled spell in a specific section.
+    else {
+      itemData.system.preparation.mode = mode["preparation.mode"];
+    }
   }
 
   /* -------------------------------------------- */
@@ -1277,8 +1348,8 @@ export default class ActorSheet5e extends ActorSheet {
    */
   _onItemCreate(event) {
     event.preventDefault();
-    const header = event.currentTarget;
-    const type = header.dataset.type;
+    const dataset = (event.currentTarget.closest(".spellbook-header") ?? event.currentTarget).dataset;
+    const type = dataset.type;
 
     // Check to make sure the newly created class doesn't take player over level cap
     if ( type === "class" && (this.actor.system.details.level + 1 > CONFIG.DND5E.maxLevel) ) {
@@ -1289,7 +1360,7 @@ export default class ActorSheet5e extends ActorSheet {
     const itemData = {
       name: game.i18n.format("DND5E.ItemNew", {type: game.i18n.localize(CONFIG.Item.typeLabels[type])}),
       type: type,
-      system: foundry.utils.expandObject({ ...header.dataset })
+      system: foundry.utils.expandObject({ ...dataset })
     };
     delete itemData.system.type;
     return this.actor.createEmbeddedDocuments("Item", [itemData]);
