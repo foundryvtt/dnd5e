@@ -1983,7 +1983,7 @@ export default class Actor5e extends Actor {
 
     // Perform updates
     await this.update(result.updateData, { isRest: true });
-    await this.updateEmbeddedDocuments("Item", result.updateItems);
+    await this.updateEmbeddedDocuments("Item", result.updateItems, { isRest: true });
 
     // Display a Chat Message summarizing the rest effects
     if ( chat ) await this._displayRestResultMessage(result, longRest);
