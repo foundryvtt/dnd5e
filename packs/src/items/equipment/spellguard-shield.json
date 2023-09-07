@@ -2,7 +2,7 @@
   "_id": "kpDbCYgUivh7NApp",
   "name": "Spellguard Shield",
   "type": "equipment",
-  "img": "icons/commodities/currency/coin-engraved-slot-one-copper.webp",
+  "img": "icons/equipment/shield/kite-wooden-sigil-purple.webp",
   "system": {
     "description": {
       "value": "<p><em>(Requires attunement)</em></p>\n<p>While holding this shield, you have advantage on saving throws against spells and other magical effects, and spell attacks have disadvantage against you.</p>",
@@ -21,7 +21,7 @@
     "rarity": "veryRare",
     "identified": true,
     "activation": {
-      "type": "none",
+      "type": "",
       "cost": null,
       "condition": ""
     },
@@ -30,6 +30,7 @@
       "units": ""
     },
     "cover": null,
+    "crewed": false,
     "target": {
       "value": null,
       "width": null,
@@ -99,10 +100,10 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.1.0",
+    "systemVersion": "2.2.2",
     "coreVersion": "10.291",
     "createdTime": 1661787233840,
-    "modifiedTime": 1671220963284,
+    "modifiedTime": 1690540006987,
     "lastModifiedBy": "dnd5ebuilder0000"
   }
 }

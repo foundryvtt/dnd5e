@@ -56,6 +56,20 @@ export const migrateWorld = async function() {
     }
   }
 
+  // Migrate World Roll Tables
+  for ( const table of game.tables ) {
+    try {
+      const updateData = migrateRollTableData(table.toObject(), migrationData);
+      if ( !foundry.utils.isEmpty(updateData) ) {
+        console.log(`Migrating RollTable document ${table.name}`);
+        await table.update(updateData, { enforceTypes: false });
+      }
+    } catch ( err ) {
+      err.message = `Failed dnd5e system migration for RollTable ${table.name}: ${err.message}`;
+      console.error(err);
+    }
+  }
+
   // Migrate Actor Override Tokens
   for ( let s of game.scenes ) {
     try {
@@ -257,7 +271,6 @@ export const migrateActorData = function(actor, migrationData) {
     if ( actor.type === "npc" ) {
       if (foundry.utils.getProperty(itemData.system, "preparation.prepared") === false) itemUpdate["system.preparation.prepared"] = true;
       if (foundry.utils.getProperty(itemData.system, "equipped") === false) itemUpdate["system.equipped"] = true;
-      if (foundry.utils.getProperty(itemData.system, "proficient") === false) itemUpdate["system.proficient"] = true;
     }
 
     // Update the Owned Item
@@ -267,9 +280,11 @@ export const migrateActorData = function(actor, migrationData) {
     }
 
     // Update tool expertise.
-    const hasToolProf = itemData.system.baseItem in actor.system.tools;
-    if ( (itemData.type === "tool") && (itemData.system.proficient > 1) && hasToolProf ) {
-      updateData[`system.tools.${itemData.system.baseItem}.value`] = itemData.system.proficient;
+    if ( actor.system.tools ) {
+      const hasToolProf = itemData.system.baseItem in actor.system.tools;
+      if ( (itemData.type === "tool") && (itemData.system.proficient > 1) && hasToolProf ) {
+        updateData[`system.tools.${itemData.system.baseItem}.value`] = itemData.system.proficient;
+      }
     }
 
     return arr;
@@ -351,6 +366,31 @@ export const migrateMacroData = function(macro, migrationData) {
   _migrateMacroCommands(macro, updateData);
   return updateData;
 };
+
+/* -------------------------------------------- */
+
+/**
+ * Migrate a single RollTable document to incorporate the latest data model changes.
+ * @param {object} table            Roll table data to migrate.
+ * @param {object} [migrationData]  Additional data to perform the migration.
+ * @returns {object}                The update delta to apply.
+ */
+export function migrateRollTableData(table, migrationData) {
+  const updateData = {};
+  _migrateDocumentIcon(table, updateData, migrationData);
+  if ( !table.results?.length ) return updateData;
+  const results = table.results.reduce((arr, result) => {
+    const resultUpdate = {};
+    _migrateDocumentIcon(result, resultUpdate, migrationData);
+    if ( !foundry.utils.isEmpty(resultUpdate) ) {
+      resultUpdate._id = result._id;
+      arr.push(foundry.utils.expandObject(resultUpdate));
+    }
+    return arr;
+  }, []);
+  if ( results.length ) updateData.results = results;
+  return updateData;
+}
 
 /* -------------------------------------------- */
 

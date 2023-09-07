@@ -537,14 +537,15 @@ export default class AdvancementManager extends Application {
     try {
       do {
         const flow = this.step.flow;
+        const type = this.step.type;
 
         // Apply changes based on step type
-        if ( (this.step.type === "delete") && this.step.item ) this.clone.items.delete(this.step.item.id);
-        else if ( (this.step.type === "delete") && this.step.advancement ) {
+        if ( (type === "delete") && this.step.item ) this.clone.items.delete(this.step.item.id);
+        else if ( (type === "delete") && this.step.advancement ) {
           this.step.advancement.item.deleteAdvancement(this.step.advancement.id, { source: true });
         }
-        else if ( this.step.type === "restore" ) await flow.advancement.restore(flow.level, flow.retainedData);
-        else if ( this.step.type === "reverse" ) flow.retainedData = await flow.advancement.reverse(flow.level);
+        else if ( type === "restore" ) await flow.advancement.restore(flow.level, flow.retainedData);
+        else if ( type === "reverse" ) await flow.retainData(await flow.advancement.reverse(flow.level));
         else if ( flow ) await flow._updateObject(event, flow._getSubmitData());
 
         this._stepIndex++;
@@ -588,14 +589,15 @@ export default class AdvancementManager extends Application {
         this._stepIndex--;
         if ( !this.step ) break;
         const flow = this.step.flow;
+        const type = this.step.type;
 
         // Reverse step based on step type
-        if ( (this.step.type === "delete") && this.step.item ) this.clone.updateSource({items: [this.step.item]});
-        else if ( (this.step.type === "delete") && this.step.advancement ) this.advancement.item.createAdvancement(
+        if ( (type === "delete") && this.step.item ) this.clone.updateSource({items: [this.step.item]});
+        else if ( (type === "delete") && this.step.advancement ) this.advancement.item.createAdvancement(
           this.advancement.typeName, this.advancement._source, { source: true }
         );
-        else if ( this.step.type === "reverse" ) await flow.advancement.restore(flow.level, flow.retainedData);
-        else if ( flow ) flow.retainedData = await flow.advancement.reverse(flow.level);
+        else if ( type === "reverse" ) await flow.advancement.restore(flow.level, flow.retainedData);
+        else if ( flow ) await flow.retainData(await flow.advancement.reverse(flow.level));
         this.clone.reset();
       } while ( this.step?.automatic );
     } catch(error) {

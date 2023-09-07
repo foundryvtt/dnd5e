@@ -130,6 +130,7 @@ export async function preloadHandlebarsTemplates() {
     "systems/dnd5e/templates/journal/parts/journal-table.hbs",
 
     // Advancement Partials
+    "systems/dnd5e/templates/advancement/parts/advancement-ability-score-control.hbs",
     "systems/dnd5e/templates/advancement/parts/advancement-controls.hbs",
     "systems/dnd5e/templates/advancement/parts/advancement-spell-config.hbs"
   ];

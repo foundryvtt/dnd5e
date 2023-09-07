@@ -74,6 +74,17 @@ export default class AdvancementFlow extends FormApplication {
 
   /* -------------------------------------------- */
 
+  /**
+   * Set the retained data for this flow. This method gives the flow a chance to do any additional prep
+   * work required for the retained data before the application is rendered.
+   * @param {object} data  Retained data associated with this flow.
+   */
+  async retainData(data) {
+    this.retainedData = data;
+  }
+
+  /* -------------------------------------------- */
+
   /** @inheritdoc */
   getData() {
     return {

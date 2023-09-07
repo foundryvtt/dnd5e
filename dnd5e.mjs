@@ -60,9 +60,6 @@ Hooks.once("init", function() {
   CONFIG.compatibility.excludePatterns.push(/\bActiveEffect5e#label\b/); // backwards compatibility with v10
   game.dnd5e.isV10 = game.release.generation < 11;
 
-  // Configure trackable attributes.
-  _configureTrackableAttributes();
-
   // Register System Settings
   registerSystemSettings();
 
@@ -75,6 +72,10 @@ Hooks.once("init", function() {
   // Remove honor & sanity from configuration if they aren't enabled
   if ( !game.settings.get("dnd5e", "honorScore") ) delete DND5E.abilities.hon;
   if ( !game.settings.get("dnd5e", "sanityScore") ) delete DND5E.abilities.san;
+
+  // Configure trackable & consumable attributes.
+  _configureTrackableAttributes();
+  _configureConsumableAttributes();
 
   // Patch Core Functions
   Combatant.prototype.getInitiativeRoll = documents.combat.getInitiativeRoll;
@@ -166,7 +167,7 @@ function _configureTrackableAttributes() {
   };
 
   const creature = {
-    bar: [...common.bar, "attributes.hp"],
+    bar: [...common.bar, "attributes.hp", "spells.pact"],
     value: [
       ...common.value,
       ...Object.keys(DND5E.skills).map(skill => `skills.${skill}.passive`),
@@ -185,10 +186,34 @@ function _configureTrackableAttributes() {
       value: [...creature.value, "details.cr", "details.spellLevel", "details.xp.value"]
     },
     vehicle: {
-      bar: [...common.bar],
+      bar: [...common.bar, "attributes.hp"],
       value: [...common.value]
+    },
+    group: {
+      bar: [],
+      value: []
     }
   };
+}
+
+/**
+ * Configure which attributes are available for item consumption.
+ * @internal
+ */
+function _configureConsumableAttributes() {
+  CONFIG.DND5E.consumableResources = [
+    ...Object.keys(DND5E.abilities).map(ability => `abilities.${ability}.value`),
+    "attributes.ac.flat",
+    "attributes.hp.value",
+    ...Object.keys(DND5E.senses).map(sense => `attributes.senses.${sense}`),
+    ...Object.keys(DND5E.movementTypes).map(type => `attributes.movement.${type}`),
+    ...Object.keys(DND5E.currencies).map(denom => `currency.${denom}`),
+    "details.xp.value",
+    "resources.primary.value", "resources.secondary.value", "resources.tertiary.value",
+    "resources.legact.value", "resources.legres.value",
+    "spells.pact.value",
+    ...Array.fromRange(Object.keys(DND5E.spellLevels).length - 1, 1).map(level => `spells.spell${level}.value`)
+  ];
 }
 
 /* -------------------------------------------- */
@@ -200,7 +225,6 @@ function _configureTrackableAttributes() {
  */
 Hooks.once("setup", function() {
   CONFIG.DND5E.trackableAttributes = expandAttributeList(CONFIG.DND5E.trackableAttributes);
-  CONFIG.DND5E.consumableResources = expandAttributeList(CONFIG.DND5E.consumableResources);
   game.dnd5e.moduleArt.registerModuleArt();
 
   // Apply custom compendium styles to the SRD rules compendium.
