@@ -1189,7 +1189,7 @@ export default class ActorSheet5e extends ActorSheet {
       if ( this.document.type === "npc" ) {
         itemData.system.preparation.mode = this.document.system.details.spellLevel ? "prepared" : "innate";
       } else {
-        itemData.system.preparation.mode = progs.leveled ? progs.pact ? "pact" : "prepared" : "innate";
+        itemData.system.preparation.mode = progs.leveled ? "prepared" : progs.pact ? "pact" : "innate";
       }
     }
 
@@ -1348,7 +1348,7 @@ export default class ActorSheet5e extends ActorSheet {
    */
   _onItemCreate(event) {
     event.preventDefault();
-    const dataset = (event.currentTarget.closest(".spellbook-section") ?? event.currentTarget).dataset;
+    const dataset = (event.currentTarget.closest(".spellbook-header") ?? event.currentTarget).dataset;
     const type = dataset.type;
 
     // Check to make sure the newly created class doesn't take player over level cap
