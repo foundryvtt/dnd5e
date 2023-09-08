@@ -1769,6 +1769,10 @@ h5 {
 .dnd5e.sheet.item .details .form-group.consumption .form-fields {
   flex-wrap: nowrap;
 }
+.dnd5e.sheet.item .details .form-group.uses-per.consumption input,
+.dnd5e.sheet.item .details .form-group.consumption.consumption input {
+  flex: 0 0 32px;
+}
 .dnd5e.sheet.item .details .form-group.uses-per span,
 .dnd5e.sheet.item .details .form-group.consumption span {
   flex: 0 0 16px;
