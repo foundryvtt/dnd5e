@@ -489,7 +489,7 @@ export default class Item5e extends Item {
    * @protected
    */
   _prepareProficiency() {
-    if ( !["spell", "weapon", "equipment", "tool"].includes(this.type) ) return;
+    if ( !["spell", "weapon", "equipment", "tool", "feat", "consumable"].includes(this.type) ) return;
     if ( !this.actor?.system.attributes?.prof ) {
       this.system.prof = new Proficiency(0, 0);
       return;

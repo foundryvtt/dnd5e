@@ -91,4 +91,14 @@ export default class FeatData extends SystemDataModel.mixin(
   get hasLimitedUses() {
     return !!this.recharge.value || super.hasLimitedUses;
   }
+
+  /* -------------------------------------------- */
+
+  /**
+   * The proficiency multiplier for this item.
+   * @returns {number}
+   */
+  get proficiencyMultiplier() {
+    return 1;
+  }
 }
