@@ -742,20 +742,11 @@ export default class Item5e extends Item {
    * Configuration data for an item usage being prepared.
    *
    * @typedef {object} ItemUseConfiguration
-   * @property {boolean} template            Can this item create a template?
-   * @property {boolean} quantity            Can this item consume its quantity?
-   * @property {boolean} recharge            Can this item consume its recharge value?
-   * @property {boolean} resource            Can this item consume a (non-ammo) resource?
-   * @property {boolean} slot                Can this item (a spell) consume a spell slot?
-   * @property {boolean} uses                Can this item consume its limited uses?
-   * @property {boolean} needsConfiguration  Is user-configuration needed?
-   * @property {object} value
-   * @property {boolean} value.template      Should this item create a template?
-   * @property {boolean} value.quantity      Should this item consume its quantity?
-   * @property {boolean} value.recharge      Should this item consume its recharge value?
-   * @property {boolean} value.resource      Should this item consume a (non-ammo) resource?
-   * @property {boolean} value.slot          Should this item (a spell) consume a spell slot?
-   * @property {boolean} value.uses          Should this item consume its limited uses?
+   * @property {boolean} createTemplate      Should this item create a template?
+   * @property {boolean} consumeResource     Should this item consume a (non-ammo) resource?
+   * @property {boolean} consumeSlot         Should this item (a spell) consume a spell slot?
+   * @property {boolean} consumeUses         Should this item consume its limited uses or recharge?
+   * @property {string} slotLevel            The spell slot type to consume by default.
    */
 
   /**
@@ -805,10 +796,10 @@ export default class Item5e extends Item {
     }, options);
 
     // Define follow-up actions resulting from the item usage
-    config = foundry.utils.mergeObject(this._getUsageConfig(), config);
+    config = foundry.utils.mergeObject(this._getUsageConfigValues(), config);
 
     // Are any default values necessitating a prompt?
-    const needsConfiguration = Object.values(config.value).includes(true);
+    const needsConfiguration = Object.values(config).includes(true);
 
     /**
      * A hook event that fires before an item usage is configured.
@@ -825,16 +816,15 @@ export default class Item5e extends Item {
     if ( (options.configureDialog !== false) && needsConfiguration ) {
       const configuration = await AbilityUseDialog.create(item, config);
       if ( !configuration ) return;
-      foundry.utils.mergeObject(config.value, configuration);
+      foundry.utils.mergeObject(config, configuration);
     }
-    const value = config.value;
 
     // Handle upcasting
     if ( item.type === "spell" ) {
       let level = null;
-      if ( value.slotLevel ) {
+      if ( config.slotLevel ) {
         // A spell slot was consumed.
-        level = value.slotLevel === "pact" ? as.spells.pact.level : parseInt(value.slotLevel.at(-1));
+        level = config.slotLevel === "pact" ? as.spells.pact.level : parseInt(value.slotLevel.at(-1));
       }
       if ( level && (level !== is.level) ) {
         item = item.clone({"system.level": level}, {keepId: true});
@@ -871,7 +861,7 @@ export default class Item5e extends Item {
      * @param {object} usage.actorUpdates       Updates that will be applied to the actor.
      * @param {object} usage.itemUpdates        Updates that will be applied to the item being used.
      * @param {object[]} usage.resourceUpdates  Updates that will be applied to other items on the actor.
-     * @param {string[]} usage.deleteIds        Item ids for those which consumption will delete.
+     * @param {Set<string>} usage.deleteIds     Item ids for those which consumption will delete.
      * @returns {boolean}                       Explicitly return `false` to prevent item from being used.
      */
     if ( Hooks.call("dnd5e.itemUsageConsumption", item, config, options, usage) === false ) return;
@@ -879,7 +869,7 @@ export default class Item5e extends Item {
     // Commit pending data updates
     const { actorUpdates, itemUpdates, resourceUpdates, deleteIds } = usage;
     if ( !foundry.utils.isEmpty(itemUpdates) ) await item.update(itemUpdates);
-    if ( !foundry.utils.isEmpty(deleteIds) ) await this.actor.deleteEmbeddedDocuments("Item", deleteIds);
+    if ( !foundry.utils.isEmpty(deleteIds) ) await this.actor.deleteEmbeddedDocuments("Item", [...deleteIds]);
     if ( !foundry.utils.isEmpty(actorUpdates) ) await this.actor.update(actorUpdates);
     if ( !foundry.utils.isEmpty(resourceUpdates) ) await this.actor.updateEmbeddedDocuments("Item", resourceUpdates);
 
@@ -888,7 +878,7 @@ export default class Item5e extends Item {
 
     // Initiate measured template creation
     let templates;
-    if ( value.template ) {
+    if ( config.createTemplate ) {
       try {
         templates = await (dnd5e.canvas.AbilityTemplate.fromItem(item))?.drawPreview();
       } catch(err) {
@@ -918,31 +908,19 @@ export default class Item5e extends Item {
    * Prepare an object of possible values for item usage.
    * @returns {ItemUseConfiguration}  Configuration data for the roll.
    */
-  _getUsageConfig(){
-    const is = this.system;
-    const uses = this.hasLimitedUses && !is.recharge?.value;
-    const consume = is.consume || {};
-    const active = !!is.activation?.type;
+  _getUsageConfig() {
+    const consume = this.system.consume || {};
+    const active = !!this.system.activation?.type;
 
     const config = {
-      slot: this.usageScaling === "slot",
-      uses: active && uses,
-      quantity: active && uses && is.uses.autoDestroy && (is.uses.value === 1),
-      resource: active && !!consume.type && !!consume.target && (!this.hasAttack || (consume.type !== "ammo")),
-      recharge: active && !!is.recharge?.value,
-      template: active && game.user.can("TEMPLATE_CREATE") && this.hasAreaTarget
+      consumeSlot: this.usageScaling === "slot",
+      consumeUses: active && this.hasLimitedUses,
+      consumeResource: active && !!consume.type && !!consume.target && (!this.hasAttack || (consume.type !== "ammo")),
+      createTemplate: active && game.user.can("TEMPLATE_CREATE") && this.hasAreaTarget
     };
 
-    // For consumable items, quantity takes precedence over consuming uses.
-    if ( config.quantity ) config.uses = false;
-
     // Do not suggest consuming your own uses if also consuming them through resources.
-    if ( config.resource && (consume.target === this.id) ) config.uses = false;
-
-    // Append the default values.
-    const {value, defaults} = this._getUsageConfigDefaults(config);
-    config.value = value;
-    config.defaults = defaults;
+    if ( config.consumeResource && (consume.target === this.id) ) config.consumeUses = false;
 
     return config;
   }
@@ -951,29 +929,19 @@ export default class Item5e extends Item {
 
   /**
    * Prepare an object of default values for item usage.
-   * @param {ItemUseConfiguration} config  Configuration data for the item.
-   * @returns {object}                     The default values for each key in the config.
+   * @returns {object}      The default values for each key in the config.
    */
-  _getUsageConfigDefaults(config){
-    const is = this.system;
+  _getUsageConfigValues() {
+    const isAble = this._getUsageConfig();
+    const {uses, target, level, preparation} = this.system;
 
-    const value = {
-      slot: config.slot,
-      uses: config.uses && is.uses.prompt,
-      quantity: config.quantity,
-      resource: config.resource,
-      recharge: config.recharge,
-      template: config.template && is.target.prompt
+    return {
+      consumeSlot: isAble.consumeSlot,
+      slotLevel: isAble.consumeSlot ? ((preparation?.mode === "pact") ? "pact" : `spell${level}`) : null,
+      consumeUses: isAble.consumeUses && !!uses?.prompt,
+      consumeResource: isAble.consumeResource,
+      createTemplate: isAble.createTemplate && !!target?.prompt
     };
-
-    // Default values of variable quantities.
-    const defaults = {
-      slot: value.slot ? ((is.preparation?.mode === "pact") ? "pact" : `spell${is.level}`) : null,
-      quantity: value.quantity ? 1 : null,
-      resource: value.resource ? is.consume.amount : null
-    };
-
-    return {value, defaults};
   }
 
   /* -------------------------------------------- */
@@ -989,68 +957,31 @@ export default class Item5e extends Item {
     const actorUpdates = {};
     let itemUpdates = {};
     const resourceUpdates = [];
-    const deleteIds = [];
-    const value = config.value;
+    const deleteIds = new Set();
 
-    // Consume Recharge
-    if ( value.recharge ) {
-      const recharge = this.system.recharge || {};
-      if ( recharge.charged === false ) {
-        ui.notifications.warn(game.i18n.format("DND5E.ItemNoUses", {name: this.name}));
-        return false;
-      }
-      itemUpdates["system.recharge.charged"] = false;
+    // Consume own limited uses or recharge
+    if ( config.consumeUses ) {
+      const canConsume = this._handleConsumeUses(itemUpdates, actorUpdates,  resourceUpdates, deleteIds);
+      if ( canConsume === false ) return false;
     }
 
     // Consume Limited Resource
-    if ( value.resource ) {
-      const canConsume = this._handleConsumeResource(itemUpdates, actorUpdates, resourceUpdates, deleteIds, config);
+    if ( config.consumeResource ) {
+      const canConsume = this._handleConsumeResource(itemUpdates, actorUpdates, resourceUpdates, deleteIds);
       if ( canConsume === false ) return false;
     }
 
     // Consume Spell Slots
-    if ( value.slot && value.slotLevel ) {
-      const level = this.actor?.system.spells[value.slotLevel];
+    if ( config.consumeSlot && config.slotLevel ) {
+      const level = this.actor?.system.spells[config.slotLevel];
       const spells = Number(level?.value ?? 0);
       if ( spells === 0 ) {
-        const labelKey = value.slotLevel === "pact" ? "DND5E.SpellProgPact" : `DND5E.SpellLevel${this.system.level}`;
+        const labelKey = config.slotLevel === "pact" ? "DND5E.SpellProgPact" : `DND5E.SpellLevel${this.system.level}`;
         const label = game.i18n.localize(labelKey);
         ui.notifications.warn(game.i18n.format("DND5E.SpellCastNoSlots", {name: this.name, level: label}));
         return false;
       }
-      actorUpdates[`system.spells.${value.slotLevel}.value`] = Math.max(spells - 1, 0);
-    }
-
-    // Consume Limited Usage
-    if ( value.uses || value.quantity ) {
-      const uses = this.system.uses || {};
-      const available = Number(uses.value ?? 0);
-      let used = false;
-      const remaining = Math.max(available - 1, 0);
-      if ( available >= 1 ) {
-        used = true;
-        itemUpdates["system.uses.value"] = remaining;
-      }
-
-      // Reduce quantity if not reducing usages or if usages hit zero, and we are set to consumeQuantity
-      if ( value.quantity && (!used || (remaining === 0)) ) {
-        const q = Number(this.system.quantity ?? 1);
-        if ( q >= 1 ) {
-          used = true;
-          itemUpdates["system.quantity"] = Math.max(q - 1, 0);
-          itemUpdates["system.uses.value"] = uses.max ?? 1;
-          if ( itemUpdates["system.quantity"] === 0 ) {
-            deleteIds.push(this.id);
-            itemUpdates = {};
-          }
-        }
-      }
-
-      // If the item was not used, return a warning
-      if ( !used ) {
-        ui.notifications.warn(game.i18n.format("DND5E.ItemNoUses", {name: this.name}));
-        return false;
-      }
+      actorUpdates[`system.spells.${config.slotLevel}.value`] = Math.max(spells - 1, 0);
     }
 
     // Return the configured usage
@@ -1060,11 +991,60 @@ export default class Item5e extends Item {
   /* -------------------------------------------- */
 
   /**
+   * Handle update actions required when consuming an item's uses or recharge
+   * @param {object} itemUpdates        An object of data updates applied to this item
+   * @param {object} actorUpdates       An object of data updates applied to the item owner (Actor)
+   * @param {object[]} resourceUpdates  An array of updates to apply to other items owned by the actor
+   * @param {Set<string>} deleteIds     A set of item ids that will be deleted off the actor.
+   * @returns {boolean|void}            Return false to block further progress, or return nothing to continue
+   * @protected
+   */
+  _handleConsumeUses(itemUpdates, actorUpdates, resourceUpdates, deleteIds) {
+    const recharge = this.system.recharge || {};
+    const uses = this.system.uses || {};
+    const quantity = this.system.quantity ?? 1;
+    let used = false;
+
+    // Consume recharge.
+    if ( recharge.value ) {
+      if ( recharge.charged ) {
+        itemUpdates["system.recharge.charged"] = false;
+        used = true;
+      }
+    }
+
+    // Consume uses (or quantity).
+    else if ( !!uses.max && !!uses.per && (uses.value > 0) ) {
+      const remaining = Math.max(uses.value - 1, 0);
+
+      if ( remaining > 0 || ( !remaining && !uses.autoDestroy) ) {
+        used = true;
+        itemUpdates["system.uses.value"] = remaining;
+      } else if ( quantity >= 2 ) {
+        used = true;
+        itemUpdates["system.quantity"] = quantity - 1;
+        itemUpdates["system.uses.value"] = uses.max;
+      } else if ( quantity === 1 ) {
+        used = true;
+        deleteIds.add(this.id);
+      }
+    }
+
+    // If the item was not used, return a warning
+    if ( !used ) {
+      ui.notifications.warn(game.i18n.format("DND5E.ItemNoUses", {name: this.name}));
+      return false;
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Handle update actions required when consuming an external resource
    * @param {object} itemUpdates        An object of data updates applied to this item
    * @param {object} actorUpdates       An object of data updates applied to the item owner (Actor)
    * @param {object[]} resourceUpdates  An array of updates to apply to other items owned by the actor
-   * @param {string[]} deleteIds        An array of item ids that will be deleted off the actor.
+   * @param {Set<string>} deleteIds     A set of item ids that will be deleted off the actor.
    * @returns {boolean|void}            Return false to block further progress, or return nothing to continue
    * @protected
    */
@@ -1158,7 +1138,7 @@ export default class Item5e extends Item {
         if ( uses.per && uses.max && uses.autoDestroy && (remaining === 0) ) {
           update["system.quantity"] = Math.max(resource.system.quantity - 1, 0);
           update["system.uses.value"] = uses.max ?? 1;
-          if ( update["system.quantity"] === 0 ) deleteIds.push(resource.id);
+          if ( update["system.quantity"] === 0 ) deleteIds.add(resource.id);
           else resourceUpdates.push(update);
           break;
         }

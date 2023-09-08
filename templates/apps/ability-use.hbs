@@ -5,12 +5,12 @@
     <p class="notification error">{{this}}</p>
     {{/each}}
 
-    {{#if config.slot}}
+    {{#if consumeSlot}}
     <div class="form-group">
         <label>{{ localize "DND5E.SpellCastUpcast" }}</label>
         <div class="form-fields">
             <select name="slotLevel">
-                {{#select config.defaults.slot}}
+                {{#select config.slotLevel}}
                 {{#each slotOptions as |l|}}
                 <option value="{{l.level}}" {{disabled (not l.canCast)}}>{{l.label}}</option>
                 {{/each}}
@@ -21,47 +21,31 @@
 
     <div class="form-group">
         <label class="checkbox">
-            <input type="checkbox" name="slot" {{checked config.value.slot}}>{{localize "DND5E.SpellCastConsume"}}
+            <input type="checkbox" name="consumeSlot" {{checked config.consumeSlot}}>{{localize "DND5E.SpellCastConsume"}}
         </label>
     </div>
     {{/if}}
 
-    {{#if config.uses}}
+    {{#if consumeUses}}
     <div class="form-group">
         <label class="checkbox">
-            <input type="checkbox" name="uses" {{checked config.value.uses}}>{{localize "DND5E.AbilityUseConsume"}}
+            <input type="checkbox" name="consumeUses" {{checked config.consumeUses}}>{{localize "DND5E.AbilityUseConsume"}}
         </label>
     </div>
     {{/if}}
 
-    {{#if config.quantity}}
+    {{#if consumeResource}}
     <div class="form-group">
         <label class="checkbox">
-            <input type="checkbox" name="quantity" {{checked config.value.quantity}}>{{localize "DND5E.AbilityUseConsume"}}
+            <input type="checkbox" name="consumeResource" {{checked config.consumeResource}}>{{localize "DND5E.ConsumeResource"}}
         </label>
     </div>
     {{/if}}
 
-    {{#if config.resource}}
+    {{#if createTemplate}}
     <div class="form-group">
         <label class="checkbox">
-            <input type="checkbox" name="resource" {{checked config.value.resource}}>{{localize "DND5E.ConsumeResource"}}
-        </label>
-    </div>
-    {{/if}}
-
-    {{#if config.recharge}}
-    <div class="form-group">
-        <label class="checkbox">
-            <input type="checkbox" name="recharge" {{checked config.value.recharge}}>{{localize "DND5E.ConsumeRecharge"}}
-        </label>
-    </div>
-    {{/if}}
-
-    {{#if config.template}}
-    <div class="form-group">
-        <label class="checkbox">
-            <input type="checkbox" name="template" {{checked config.value.template}}>{{localize "DND5E.PlaceTemplate"}}
+            <input type="checkbox" name="createTemplate" {{checked config.createTemplate}}>{{localize "DND5E.PlaceTemplate"}}
         </label>
     </div>
     {{/if}}

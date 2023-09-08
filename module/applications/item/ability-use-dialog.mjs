@@ -25,24 +25,26 @@ export default class AbilityUseDialog extends Dialog {
    * A constructor function which displays the Spell Cast Dialog app for a given Actor and Item.
    * Returns a Promise which resolves to the dialog FormData once the workflow has been completed.
    * @param {Item5e} item    Item being used.
-   * @param {object} config  The ability use configuration.
+   * @param {object} config  The ability use configuration's values.
    * @returns {Promise}      Promise that is resolved when the use dialog is acted upon.
    */
   static async create(item, config) {
     if ( !item.isOwned ) throw new Error("You cannot display an ability usage dialog for an unowned item");
-    config ??= item._getUsageConfig();
-    const slotOptions = config.slot ? this._createSpellSlotOptions(item.actor, item.system.level) : [];
+    const isAble = item._getUsageConfig();
+    config ??= item._getUsageConfigValues();
+    const slotOptions = config.slotLevel ? this._createSpellSlotOptions(item.actor, item.system.level) : [];
     const errors = [];
 
     // Create a warning that a spell has no available spell slots.
     const canCast = slotOptions.length && slotOptions.some(l => l.hasSlots);
-    if ( config.slot && !canCast ) errors.push(game.i18n.format("DND5E.SpellCastNoSlots", {
+    if ( isAble.consumeSlot && !canCast ) errors.push(game.i18n.format("DND5E.SpellCastNoSlots", {
       level: CONFIG.DND5E.spellLevels[item.system.level],
       name: item.name
     }));
 
     const data = {
       item,
+      ...isAble,
       config,
       slotOptions,
       note: this._getAbilityUseNote(item, config),
@@ -130,19 +132,19 @@ export default class AbilityUseDialog extends Dialog {
   /**
    * Get the ability usage note that is displayed.
    * @param {object} item    Data for the item being used.
-   * @param {object} config  The ability use configuration.
    * @returns {string}       The note to display.
    * @private
    */
-  static _getAbilityUseNote(item, config) {
+  static _getAbilityUseNote(item) {
     const {quantity, recharge, uses} = item.system;
+    const isAble = item._getUsageConfig();
 
     // Zero quantity
     if ( quantity <= 0 ) return game.i18n.localize("DND5E.AbilityUseUnavailableHint");
 
     // Abilities which use Recharge
-    if ( config.recharge ) {
-      return game.i18n.format(recharge?.charged ? "DND5E.AbilityUseChargedHint" : "DND5E.AbilityUseRechargeHint", {
+    if ( isAble.consumeUses && recharge?.value ) {
+      return game.i18n.format(recharge.charged ? "DND5E.AbilityUseChargedHint" : "DND5E.AbilityUseRechargeHint", {
         type: game.i18n.localize(CONFIG.Item.typeLabels[item.type])
       });
     }
@@ -151,10 +153,10 @@ export default class AbilityUseDialog extends Dialog {
     if ( !uses?.per || !uses?.max ) return "";
 
     // Consumables
-    if ( item.type === "consumable" ) {
+    if ( uses.autoDestroy ) {
       let str = "DND5E.AbilityUseNormalHint";
       if ( uses.value > 1 ) str = "DND5E.AbilityUseConsumableChargeHint";
-      else if ( config.quantity && (quantity > 1) ) str = "DND5E.AbilityUseConsumableQuantityHint";
+      else if ( quantity > 1 ) str = "DND5E.AbilityUseConsumableQuantityHint";
       return game.i18n.format(str, {
         type: game.i18n.localize(`DND5E.Consumable${item.system.consumableType.capitalize()}`),
         value: uses.value,
@@ -204,16 +206,18 @@ export default class AbilityUseDialog extends Dialog {
     }
 
     // Display warnings that the item or its resource item will be destroyed.
-    const type = game.i18n.localize(`DND5E.Consumable${item.system.consumableType.capitalize()}`)
-    if ( this._willDestroyItem(item) && ( is.quantity === 1) ) {
-      warnings.push(game.i18n.format("DND5E.AbilityUseConsumableDestroyHint", {type}));
-    }
+    if ( item.type === "consumable" ) {
+      const type = game.i18n.localize(`DND5E.Consumable${item.system.consumableType.capitalize()}`)
+      if ( this._willDestroyItem(item) && ( is.quantity === 1) ) {
+        warnings.push(game.i18n.format("DND5E.AbilityUseConsumableDestroyHint", {type}));
+      }
 
-    const consume = item.system.consume;
-    const resource = item.actor.items.get(consume.target);
-    const qty = consume.amount || 1;
-    if ( resource && (resource.system.quantity === 1) && this._willDestroyItem(resource, qty) ) {
-      warnings.push(game.i18n.format("DND5E.AbilityUseConsumableDestroyResourceHint", {type, name: resource.name}));
+      const consume = item.system.consume;
+      const resource = item.actor.items.get(consume.target);
+      const qty = consume.amount || 1;
+      if ( resource && (resource.system.quantity === 1) && this._willDestroyItem(resource, qty) ) {
+        warnings.push(game.i18n.format("DND5E.AbilityUseConsumableDestroyResourceHint", {type, name: resource.name}));
+      }
     }
 
     data.warnings = warnings;
