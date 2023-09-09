@@ -405,6 +405,7 @@ DND5E.abilityActivationTypes = {
   action: "DND5E.Action",
   bonus: "DND5E.BonusAction",
   reaction: "DND5E.Reaction",
+  free: "DND5E.FreeActionLabel",
   minute: DND5E.timePeriods.minute,
   hour: DND5E.timePeriods.hour,
   day: DND5E.timePeriods.day,
