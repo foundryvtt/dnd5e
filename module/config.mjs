@@ -77,6 +77,13 @@ DND5E.abilities = {
     type: "mental",
     defaults: { npc: "wis", vehicle: 0 },
     improvement: false
+  },
+  pty: {
+    label: "DND5E.AbilityPty",
+    abbreviation: "DND5E.AbilityPtyAbbr",
+    type: "mental",
+    defaults: { character: 1, npc: 1, vehicle: 0 },
+    improvement: false
   }
 };
 preLocalize("abilities", { keys: ["label", "abbreviation"] });

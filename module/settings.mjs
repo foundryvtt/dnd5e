@@ -90,6 +90,17 @@ export default function registerSystemSettings() {
     requiresReload: true
   });
 
+  // Use Piety ability score
+  game.settings.register("dnd5e", "pietyScore", {
+    name: "SETTINGS.5ePietyN",
+    hint: "SETTINGS.5ePietyL",
+    scope: "world",
+    config: true,
+    default: false,
+    type: Boolean,
+    requiresReload: true
+  });
+
   // Apply Dexterity as Initiative Tiebreaker
   game.settings.register("dnd5e", "initiativeDexTiebreaker", {
     name: "SETTINGS.5eInitTBN",
