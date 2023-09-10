@@ -260,7 +260,7 @@ export default class ActorSheet5e extends ActorSheet {
       if ( v === 0 ) continue;
       tags[k] = `${game.i18n.localize(label)} ${v} ${senses.units}`;
     }
-    if ( senses.special ) tags.special = senses.special;
+    if ( senses.special ) senses.special.split(";").forEach((c, i) => tags[`custom${i+1}`] = c.trim());
     return tags;
   }
 
