@@ -12,7 +12,7 @@
             <select name="slotLevel">
                 {{#select slotLevel}}
                 {{#each slotOptions as |l|}}
-                <option value="{{l.level}}" {{disabled (not l.canCast)}}>{{l.label}}</option>
+                <option value="{{l.key}}" {{disabled (not l.canCast)}}>{{l.label}}</option>
                 {{/each}}
                 {{/select}}
             </select>

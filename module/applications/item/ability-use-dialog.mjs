@@ -103,7 +103,8 @@ export default class AbilityUseDialog extends Dialog {
       if ( max > 0 ) lmax = i;
       arr.push({
         idx: i,
-        level: `spell${i}`,
+        key: `spell${i}`,
+        level: i,
         label: i > 0 ? game.i18n.format("DND5E.SpellLevelSlot", {level: label, n: slots}) : label,
         canCast: max > 0,
         hasSlots: slots > 0
@@ -115,7 +116,8 @@ export default class AbilityUseDialog extends Dialog {
     const pact = actor.system.spells.pact;
     if ( pact.level >= level ) {
       options.push({
-        level: "pact",
+        key: "pact",
+        level: pact.level,
         label: `${game.i18n.format("DND5E.SpellLevelPact", {level: pact.level, n: pact.value})}`,
         canCast: true,
         hasSlots: pact.value > 0
