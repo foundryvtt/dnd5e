@@ -1092,9 +1092,8 @@ export default class Item5e extends Item {
         resource = this.actor.items.get(consume.target);
         if ( !resource ) break;
         const uses = resource.system.uses;
-        if ( uses.per && uses.max ) {
-          quantity = uses.value;
-        } else if ( resource.system.recharge?.value ) {
+        if ( uses.per && uses.max ) quantity = uses.value;
+        else if ( resource.system.recharge?.value ) {
           quantity = resource.system.recharge.charged ? 1 : 0;
           amount = 1;
         }
