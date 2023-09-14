@@ -52,8 +52,7 @@ export default class ActivatedEffectTemplate extends foundry.abstract.DataModel 
         value: new foundry.data.fields.NumberField({required: true, min: 0, label: "DND5E.TargetValue"}),
         width: new foundry.data.fields.NumberField({required: true, min: 0, label: "DND5E.TargetWidth"}),
         units: new foundry.data.fields.StringField({required: true, blank: true, label: "DND5E.TargetUnits"}),
-        type: new foundry.data.fields.StringField({required: true, blank: true, label: "DND5E.TargetType"}),
-        prompt: new foundry.data.fields.BooleanField({initial: true, label: "DND5E.TemplatePrompt"})
+        type: new foundry.data.fields.StringField({required: true, blank: true, label: "DND5E.TargetType"})
       }, {label: "DND5E.Target"}),
       range: new foundry.data.fields.SchemaField({
         value: new foundry.data.fields.NumberField({required: true, min: 0, label: "DND5E.RangeNormal"}),
@@ -87,8 +86,7 @@ export default class ActivatedEffectTemplate extends foundry.abstract.DataModel 
         per: new foundry.data.fields.StringField({
           required: true, nullable: true, blank: false, initial: null, label: "DND5E.LimitedUsesPer"
         }),
-        recovery: new FormulaField({required: true, label: "DND5E.RecoveryFormula"}),
-        prompt: new foundry.data.fields.BooleanField({initial: true, label: "DND5E.LimitedUsesPrompt"})
+        recovery: new FormulaField({required: true, label: "DND5E.RecoveryFormula"})
       }, extraSchema), options);
     }
   };

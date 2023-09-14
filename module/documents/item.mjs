@@ -934,13 +934,13 @@ export default class Item5e extends Item {
       config.consumeSlot = true;
       config.slotLevel = preparation?.mode === "pact" ? "pact" : `spell${level}`;
     }
-    if ( active && this.hasLimitedUses ) config.consumeUsage = !!uses?.prompt;
+    if ( active && this.hasLimitedUses ) config.consumeUsage = true;
     if ( active && !!consume?.type && !!consume?.target && (!this.hasAttack || (consume.type !== "ammo")) ) {
       config.consumeResource = true;
       // Do not suggest consuming your own uses if also consuming them through resources.
       if ( consume.target === this.id ) config.consumeUsage = null;
     }
-    if ( active && game.user.can("TEMPLATE_CREATE") && this.hasAreaTarget ) config.createMeasuredTemplate = !!target?.prompt;
+    if ( active && game.user.can("TEMPLATE_CREATE") && this.hasAreaTarget ) config.createMeasuredTemplate = true;
 
     return config;
   }
