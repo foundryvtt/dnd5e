@@ -824,7 +824,7 @@ export default class Item5e extends Item {
       let level = null;
       if ( config.slotLevel ) {
         // A spell slot was consumed.
-        level = config.slotLevel === "pact" ? as.spells.pact.level : parseInt(config.slotLevel.at(-1));
+        level = config.slotLevel === "pact" ? as.spells.pact.level : parseInt(config.slotLevel.replace("spell", ""));
       }
       if ( level && (level !== is.level) ) {
         item = item.clone({"system.level": level}, {keepId: true});
