@@ -188,9 +188,8 @@ export default class AbilityUseDialog extends Dialog {
   static _getAbilityUseWarnings(data) {
     const warnings = [];
     const item = data.item;
-    const is = data.item.system;
+    const { quantity, level } = data.item.system;
     const scale = item.usageScaling;
-    const level = is.level;
 
     if ( (scale === "slot") && data.slotOptions.every(o => !o.hasSlots) ) {
       // Warn that the actor has no spell slots of any level with which to use this item.
