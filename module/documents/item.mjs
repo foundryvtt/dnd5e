@@ -1017,7 +1017,7 @@ export default class Item5e extends Item {
     else if ( uses.max && uses.per && (uses.value > 0) ) {
       const remaining = Math.max(uses.value - 1, 0);
 
-      if ( remaining > 0 || ( !remaining && !uses.autoDestroy) ) {
+      if ( remaining > 0 || (!remaining && !uses.autoDestroy) ) {
         used = true;
         itemUpdates["system.uses.value"] = remaining;
       } else if ( quantity >= 2 ) {
