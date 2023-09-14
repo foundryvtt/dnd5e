@@ -228,7 +228,7 @@ export default class AbilityUseDialog extends Dialog {
   /**
    * Get whether an update for an item's limited uses will result in lowering its quantity.
    * @param {Item5e} item       The item targeted for updates.
-   * @param {number} consume    The amount of limited uses to subtract.
+   * @param {number} [consume]    The amount of limited uses to subtract.
    * @returns {boolean}
    * @private
    */
