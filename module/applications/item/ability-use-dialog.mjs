@@ -102,7 +102,6 @@ export default class AbilityUseDialog extends Dialog {
       let slots = Math.clamped(parseInt(l.value || 0), 0, max);
       if ( max > 0 ) lmax = i;
       arr.push({
-        idx: i,
         key: `spell${i}`,
         level: i,
         label: i > 0 ? game.i18n.format("DND5E.SpellLevelSlot", {level: label, n: slots}) : label,
@@ -110,7 +109,7 @@ export default class AbilityUseDialog extends Dialog {
         hasSlots: slots > 0
       });
       return arr;
-    }, []).filter(sl => sl.idx <= lmax);
+    }, []).filter(sl => sl.level <= lmax);
 
     // If this character has pact slots, present them as well.
     const pact = actor.system.spells.pact;
