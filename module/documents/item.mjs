@@ -796,6 +796,16 @@ export default class Item5e extends Item {
     }, options);
 
     // Define follow-up actions resulting from the item usage
+    if ( config.consumeSlotLevel ) {
+      console.warn(`You are passing 'consumeSlotLevel' to the ItemUseConfiguration object, which now expects a key as 'slotLevel'.`);
+      config.slotLevel = config.consumeSlotLevel;
+      delete config.consumeSlotLevel;
+    }
+    if ( Number.isNumeric(config.slotLevel) ) {
+      console.warn(`You are passing a numeric value to 'slotLevel' which expects a key from Actor5e#system#spells.`);
+      config.slotLevel = `spell${config.slotLevel}`;
+    }
+
     config = foundry.utils.mergeObject(this._getUsageConfigValues(), config);
 
     // Are any default values necessitating a prompt?
