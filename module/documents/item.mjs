@@ -965,7 +965,7 @@ export default class Item5e extends Item {
    */
   _getUsageUpdates(config) {
     const actorUpdates = {};
-    let itemUpdates = {};
+    const itemUpdates = {};
     const resourceUpdates = [];
     const deleteIds = new Set();
 
