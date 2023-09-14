@@ -24,28 +24,26 @@ export default class AbilityUseDialog extends Dialog {
   /**
    * A constructor function which displays the Spell Cast Dialog app for a given Actor and Item.
    * Returns a Promise which resolves to the dialog FormData once the workflow has been completed.
-   * @param {Item5e} item    Item being used.
-   * @param {object} config  The ability use configuration's values.
-   * @returns {Promise}      Promise that is resolved when the use dialog is acted upon.
+   * @param {Item5e} item                   Item being used.
+   * @param {ItemUseConfiguration} config   The ability use configuration's values.
+   * @returns {Promise}                     Promise that is resolved when the use dialog is acted upon.
    */
   static async create(item, config) {
     if ( !item.isOwned ) throw new Error("You cannot display an ability usage dialog for an unowned item");
-    const isAble = item._getUsageConfig();
-    config ??= item._getUsageConfigValues();
-    const slotOptions = config.slotLevel ? this._createSpellSlotOptions(item.actor, item.system.level) : [];
+    config ??= item._getUsageConfig();
+    const slotOptions = config.consumeSlot ? this._createSpellSlotOptions(item.actor, item.system.level) : [];
     const errors = [];
 
     // Create a warning that a spell has no available spell slots.
     const canCast = slotOptions.length && slotOptions.some(l => l.hasSlots);
-    if ( isAble.consumeSlot && !canCast ) errors.push(game.i18n.format("DND5E.SpellCastNoSlots", {
+    if ( (config.consumeSlot !== null) && !canCast ) errors.push(game.i18n.format("DND5E.SpellCastNoSlots", {
       level: CONFIG.DND5E.spellLevels[item.system.level],
       name: item.name
     }));
 
     const data = {
       item,
-      ...isAble,
-      config,
+      ...config,
       slotOptions,
       note: this._getAbilityUseNote(item, config),
       title: game.i18n.format("DND5E.AbilityUseHint", {

@@ -806,7 +806,7 @@ export default class Item5e extends Item {
       config.slotLevel = `spell${config.slotLevel}`;
     }
 
-    config = foundry.utils.mergeObject(this._getUsageConfigValues(), config);
+    config = foundry.utils.mergeObject(this._getUsageConfig(), config);
 
     // Are any default values necessitating a prompt?
     const needsConfiguration = Object.values(config).includes(true);
@@ -915,43 +915,34 @@ export default class Item5e extends Item {
   }
 
   /**
-   * Prepare an object of possible values for item usage.
+   * Prepare an object of possible and default values for item usage. A value that is `null` is ignored entirely.
    * @returns {ItemUseConfiguration}  Configuration data for the roll.
    */
   _getUsageConfig() {
-    const consume = this.system.consume || {};
-    const active = !!this.system.activation?.type;
+    const { consume, activation, uses, target, level, preparation } = this.system;
+    const active = !!activation?.type;
 
     const config = {
-      consumeSlot: this.usageScaling === "slot",
-      consumeUsage: active && this.hasLimitedUses,
-      consumeResource: active && !!consume.type && !!consume.target && (!this.hasAttack || (consume.type !== "ammo")),
-      createMeasuredTemplate: active && game.user.can("TEMPLATE_CREATE") && this.hasAreaTarget
+      consumeSlot: null,
+      slotLevel: null,
+      consumeUsage: null,
+      consumeResource: null,
+      createMeasuredTemplate: null
     };
 
-    // Do not suggest consuming your own uses if also consuming them through resources.
-    if ( config.consumeResource && (consume.target === this.id) ) config.consumeUsage = false;
+    if ( this.usageScaling === "slot" ) {
+      config.consumeSlot = true;
+      config.slotLevel = preparation?.mode === "pact" ? "pact" : `spell${level}`;
+    }
+    if ( active && this.hasLimitedUses ) config.consumeUsage = !!uses?.prompt;
+    if ( active && !!consume?.type && !!consume?.target && (!this.hasAttack || (consume.type !== "ammo")) ) {
+      config.consumeResource = true;
+      // Do not suggest consuming your own uses if also consuming them through resources.
+      if ( consume.target === this.id ) config.consumeUsage = null;
+    }
+    if ( active && game.user.can("TEMPLATE_CREATE") && this.hasAreaTarget ) config.createMeasuredTemplate = !!target?.prompt;
 
     return config;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Prepare an object of default values for item usage.
-   * @returns {object}      The default values for each key in the config.
-   */
-  _getUsageConfigValues() {
-    const isAble = this._getUsageConfig();
-    const {uses, target, level, preparation} = this.system;
-
-    return {
-      consumeSlot: isAble.consumeSlot,
-      slotLevel: isAble.consumeSlot ? ((preparation?.mode === "pact") ? "pact" : `spell${level}`) : null,
-      consumeUsage: isAble.consumeUsage && !!uses?.prompt,
-      consumeResource: isAble.consumeResource,
-      createMeasuredTemplate: isAble.createMeasuredTemplate && !!target?.prompt
-    };
   }
 
   /* -------------------------------------------- */
