@@ -254,8 +254,8 @@ export default class Item5e extends Item {
    * @type {string|null}
    */
   get usageScaling() {
-    const is = this.system;
-    if ( (this.type === "spell") && (is.level > 0) && CONFIG.DND5E.spellUpcastModes.includes(is.preparation.mode) ) {
+    const { level, preparation } = this.system;
+    if ( (this.type === "spell") && (level > 0) && CONFIG.DND5E.spellUpcastModes.includes(preparation.mode) ) {
       return "slot";
     }
     return null;
