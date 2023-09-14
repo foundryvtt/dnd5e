@@ -31,12 +31,12 @@ export default class AbilityUseDialog extends Dialog {
   static async create(item, config) {
     if ( !item.isOwned ) throw new Error("You cannot display an ability usage dialog for an unowned item");
     config ??= item._getUsageConfig();
-    const slotOptions = config.consumeSlot ? this._createSpellSlotOptions(item.actor, item.system.level) : [];
+    const slotOptions = config.consumeSpellSlot ? this._createSpellSlotOptions(item.actor, item.system.level) : [];
     const errors = [];
 
     // Create a warning that a spell has no available spell slots.
     const canCast = slotOptions.length && slotOptions.some(l => l.hasSlots);
-    if ( (config.consumeSlot !== null) && !canCast ) errors.push(game.i18n.format("DND5E.SpellCastNoSlots", {
+    if ( (config.consumeSpellSlot !== null) && !canCast ) errors.push(game.i18n.format("DND5E.SpellCastNoSlots", {
       level: CONFIG.DND5E.spellLevels[item.system.level],
       name: item.name
     }));

@@ -744,7 +744,7 @@ export default class Item5e extends Item {
    * @typedef {object} ItemUseConfiguration
    * @property {boolean} createMeasuredTemplate     Should this item create a template?
    * @property {boolean} consumeResource            Should this item consume a (non-ammo) resource?
-   * @property {boolean} consumeSlot                Should this item (a spell) consume a spell slot?
+   * @property {boolean} consumeSpellSlot           Should this item (a spell) consume a spell slot?
    * @property {boolean} consumeUsage               Should this item consume its limited uses or recharge?
    * @property {string|null} slotLevel              The spell slot type to consume by default.
    */
@@ -923,7 +923,7 @@ export default class Item5e extends Item {
     const active = !!activation?.type;
 
     const config = {
-      consumeSlot: null,
+      consumeSpellSlot: null,
       slotLevel: null,
       consumeUsage: null,
       consumeResource: null,
@@ -931,7 +931,7 @@ export default class Item5e extends Item {
     };
 
     if ( this.usageScaling === "slot" ) {
-      config.consumeSlot = true;
+      config.consumeSpellSlot = true;
       config.slotLevel = preparation?.mode === "pact" ? "pact" : `spell${level}`;
     }
     if ( active && this.hasLimitedUses ) config.consumeUsage = true;
@@ -973,7 +973,7 @@ export default class Item5e extends Item {
     }
 
     // Consume Spell Slots
-    if ( config.consumeSlot && config.slotLevel ) {
+    if ( config.consumeSpellSlot && config.slotLevel ) {
       const level = this.actor?.system.spells[config.slotLevel];
       const spells = Number(level?.value ?? 0);
       if ( spells === 0 ) {
