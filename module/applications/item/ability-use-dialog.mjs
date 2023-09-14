@@ -129,19 +129,19 @@ export default class AbilityUseDialog extends Dialog {
 
   /**
    * Get the ability usage note that is displayed.
-   * @param {object} item    Data for the item being used.
-   * @returns {string}       The note to display.
+   * @param {object} item                   Data for the item being used.
+   * @param {ItemUseConfiguration} config   The ability use configuration's values.
+   * @returns {string}                      The note to display.
    * @private
    */
-  static _getAbilityUseNote(item) {
-    const {quantity, recharge, uses} = item.system;
-    const isAble = item._getUsageConfig();
+  static _getAbilityUseNote(item, config) {
+    const { quantity, recharge, uses } = item.system;
 
     // Zero quantity
     if ( quantity <= 0 ) return game.i18n.localize("DND5E.AbilityUseUnavailableHint");
 
     // Abilities which use Recharge
-    if ( isAble.consumeUsage && recharge?.value ) {
+    if ( config.consumeUsage && recharge?.value ) {
       return game.i18n.format(recharge.charged ? "DND5E.AbilityUseChargedHint" : "DND5E.AbilityUseRechargeHint", {
         type: game.i18n.localize(CONFIG.Item.typeLabels[item.type])
       });
