@@ -143,7 +143,7 @@ export default class AbilityUseDialog extends Dialog {
     if ( quantity <= 0 ) return game.i18n.localize("DND5E.AbilityUseUnavailableHint");
 
     // Abilities which use Recharge
-    if ( isAble.consumeUses && recharge?.value ) {
+    if ( isAble.consumeUsage && recharge?.value ) {
       return game.i18n.format(recharge.charged ? "DND5E.AbilityUseChargedHint" : "DND5E.AbilityUseRechargeHint", {
         type: game.i18n.localize(CONFIG.Item.typeLabels[item.type])
       });

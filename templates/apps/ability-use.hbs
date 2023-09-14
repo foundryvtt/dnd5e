@@ -26,10 +26,10 @@
     </div>
     {{/if}}
 
-    {{#if consumeUses}}
+    {{#if consumeUsage}}
     <div class="form-group">
         <label class="checkbox">
-            <input type="checkbox" name="consumeUses" {{checked config.consumeUses}}>{{localize "DND5E.AbilityUseConsume"}}
+            <input type="checkbox" name="consumeUsage" {{checked config.consumeUsage}}>{{localize "DND5E.AbilityUseConsume"}}
         </label>
     </div>
     {{/if}}
@@ -42,10 +42,10 @@
     </div>
     {{/if}}
 
-    {{#if createTemplate}}
+    {{#if createMeasuredTemplate}}
     <div class="form-group">
         <label class="checkbox">
-            <input type="checkbox" name="createTemplate" {{checked config.createTemplate}}>{{localize "DND5E.PlaceTemplate"}}
+            <input type="checkbox" name="createMeasuredTemplate" {{checked config.createMeasuredTemplate}}>{{localize "DND5E.PlaceTemplate"}}
         </label>
     </div>
     {{/if}}

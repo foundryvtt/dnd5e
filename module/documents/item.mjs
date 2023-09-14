@@ -742,11 +742,11 @@ export default class Item5e extends Item {
    * Configuration data for an item usage being prepared.
    *
    * @typedef {object} ItemUseConfiguration
-   * @property {boolean} createTemplate      Should this item create a template?
-   * @property {boolean} consumeResource     Should this item consume a (non-ammo) resource?
-   * @property {boolean} consumeSlot         Should this item (a spell) consume a spell slot?
-   * @property {boolean} consumeUses         Should this item consume its limited uses or recharge?
-   * @property {string|null} slotLevel       The spell slot type to consume by default.
+   * @property {boolean} createMeasuredTemplate     Should this item create a template?
+   * @property {boolean} consumeResource            Should this item consume a (non-ammo) resource?
+   * @property {boolean} consumeSlot                Should this item (a spell) consume a spell slot?
+   * @property {boolean} consumeUsage               Should this item consume its limited uses or recharge?
+   * @property {string|null} slotLevel              The spell slot type to consume by default.
    */
 
   /**
@@ -878,7 +878,7 @@ export default class Item5e extends Item {
 
     // Initiate measured template creation
     let templates;
-    if ( config.createTemplate ) {
+    if ( config.createMeasuredTemplate ) {
       try {
         templates = await (dnd5e.canvas.AbilityTemplate.fromItem(item))?.drawPreview();
       } catch(err) {
@@ -914,13 +914,13 @@ export default class Item5e extends Item {
 
     const config = {
       consumeSlot: this.usageScaling === "slot",
-      consumeUses: active && this.hasLimitedUses,
+      consumeUsage: active && this.hasLimitedUses,
       consumeResource: active && !!consume.type && !!consume.target && (!this.hasAttack || (consume.type !== "ammo")),
-      createTemplate: active && game.user.can("TEMPLATE_CREATE") && this.hasAreaTarget
+      createMeasuredTemplate: active && game.user.can("TEMPLATE_CREATE") && this.hasAreaTarget
     };
 
     // Do not suggest consuming your own uses if also consuming them through resources.
-    if ( config.consumeResource && (consume.target === this.id) ) config.consumeUses = false;
+    if ( config.consumeResource && (consume.target === this.id) ) config.consumeUsage = false;
 
     return config;
   }
@@ -938,9 +938,9 @@ export default class Item5e extends Item {
     return {
       consumeSlot: isAble.consumeSlot,
       slotLevel: isAble.consumeSlot ? ((preparation?.mode === "pact") ? "pact" : `spell${level}`) : null,
-      consumeUses: isAble.consumeUses && !!uses?.prompt,
+      consumeUsage: isAble.consumeUsage && !!uses?.prompt,
       consumeResource: isAble.consumeResource,
-      createTemplate: isAble.createTemplate && !!target?.prompt
+      createMeasuredTemplate: isAble.createMeasuredTemplate && !!target?.prompt
     };
   }
 
@@ -960,7 +960,7 @@ export default class Item5e extends Item {
     const deleteIds = new Set();
 
     // Consume own limited uses or recharge
-    if ( config.consumeUses ) {
+    if ( config.consumeUsage ) {
       const canConsume = this._handleConsumeUses(itemUpdates, actorUpdates,  resourceUpdates, deleteIds);
       if ( canConsume === false ) return false;
     }
