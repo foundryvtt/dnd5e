@@ -145,7 +145,6 @@ function _setupStatusConditions() {
   if ("blinded" in CONFIG.DND5E.conditionEffects) {
     CONFIG.specialStatusEffects.BLIND = "blinded";
   }
-  effects.sort((a, b) => game.i18n.localize(a.name).localeCompare(game.i18n.localize(b.name)));
   CONFIG.statusEffects = dead ? [dead, ...effects] : effects;
 }
 
