@@ -1989,7 +1989,8 @@ DND5E.conditionEffects = {
       { key: "system.attributes.movement.swim", mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE, value: 0 },
       { key: "system.attributes.movement.climb", mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE, value: 0 },
       { key: "system.attributes.movement.burrow", mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE, value: 0 }
-    ]
+    ],
+    statuses: ["incapacitated", "silenced"]
   },
   petrified: {
     name: "DND5E.ConPetrified",
