@@ -2001,7 +2001,7 @@ DND5E.conditionEffects = {
       { key: "system.attributes.movement.swim", mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE, value: 0 },
       { key: "system.attributes.movement.climb", mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE, value: 0 },
       { key: "system.attributes.movement.burrow", mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE, value: 0 },
-      { key: "system.traits.dr.custom", mode: CONST.ACTIVE_EFFECT_MODES.ADD, value: "All" },
+      { key: "system.traits.dr.custom", mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE, value: "All" },
       { key: "system.traits.ci.value", mode: CONST.ACTIVE_EFFECT_MODES.ADD, value: "poisoned"},
       { key: "system.traits.ci.value", mode: CONST.ACTIVE_EFFECT_MODES.ADD, value: "diseased"}
     ],

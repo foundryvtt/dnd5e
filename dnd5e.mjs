@@ -137,12 +137,12 @@ Hooks.once("init", function() {
 function _setupStatusConditions() {
   const effects = [];
   let dead = null;
-  for (const id in CONFIG.DND5E.conditionEffects) {
-    const data = {...CONFIG.DND5E.conditionEffects[id], id};
+  for ( const id in CONFIG.DND5E.conditionEffects ) {
+    const data = { ...CONFIG.DND5E.conditionEffects[id], id };
     if ( id !== CONFIG.specialStatusEffects.DEFEATED ) effects.push(data);
     else dead = data;
   }
-  if ("blinded" in CONFIG.DND5E.conditionEffects) {
+  if ( "blinded" in CONFIG.DND5E.conditionEffects ) {
     CONFIG.specialStatusEffects.BLIND = "blinded";
   }
   CONFIG.statusEffects = dead ? [dead, ...effects] : effects;
