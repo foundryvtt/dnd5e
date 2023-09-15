@@ -2036,7 +2036,7 @@ DND5E.conditionEffects = {
       { key: "system.attributes.movement.climb", mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE, value: 0 },
       { key: "system.attributes.movement.burrow", mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE, value: 0 }
     ],
-    statuses: ["unconscious", "incapacitated"]
+    statuses: ["unconscious", "incapacitated", "silenced"]
   },
   stunned: {
     name: "DND5E.ConStunned",
@@ -2062,7 +2062,7 @@ DND5E.conditionEffects = {
       { key: "system.attributes.movement.climb", mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE, value: 0 },
       { key: "system.attributes.movement.burrow", mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE, value: 0 }
     ],
-    statuses: ["incapacitated"]
+    statuses: ["incapacitated", "silenced"]
   },
   // Spell-like effects.
   invisible: {
@@ -2087,7 +2087,7 @@ DND5E.conditionEffects = {
   },
   concentrating: {
     name: "DND5E.ConConcentrating",
-    description: "DND5E.ConConcentrating",
+    description: "DND5E.ConConcentratingText",
     icon: "systems/dnd5e/icons/svg/concentrating.svg"
   },
   transformed: {
