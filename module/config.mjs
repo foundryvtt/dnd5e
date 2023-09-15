@@ -1918,7 +1918,7 @@ DND5E.conditionEffects = {
   charmed: {
     name: "DND5E.ConCharmed",
     description: "DND5E.ConCharmedText",
-    icon: "icons/svg/heal.svg"
+    icon: "systems/dnd5e/icons/svg/charmed.svg"
   },
   cursed: {
     name: "DND5E.ConCursed",
@@ -1965,7 +1965,7 @@ DND5E.conditionEffects = {
   grappled: {
     name: "DND5E.ConGrappled",
     description: "DND5E.ConGrappledText",
-    icon: "icons/svg/anchor.svg",
+    icon: "systems/dnd5e/icons/svg/grappled.svg",
     changes: [
       { key: "system.attributes.movement.walk", mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE, value: 0 },
       { key: "system.attributes.movement.fly", mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE, value: 0 },
@@ -2087,7 +2087,7 @@ DND5E.conditionEffects = {
   concentrating: {
     name: "DND5E.ConConcentrating",
     description: "DND5E.ConConcentrating",
-    icon: "TODO.svg"
+    icon: "systems/dnd5e/icons/svg/concentrating.svg"
   },
   transformed: {
     name: "DND5E.ConTransformed",
