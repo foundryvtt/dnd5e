@@ -1898,6 +1898,170 @@ DND5E.advancementTypes = {
 /* -------------------------------------------- */
 
 /**
+ * Status effects to display on the token HUD. Each internal object contains name, description,
+ * icon, and optionally changes and additional status ids that should apply. For example, if an actor
+ * is petrified, they are also incapacitated and silenced.
+ * @type {object}
+ */
+DND5E.conditionEffects = {
+  dead: {
+    name: "DND5E.ConDead",
+    description: "DND5E.ConDeadText",
+    icon: "icons/svg/skull.svg"
+  },
+  blinded: {
+    name: "DND5E.ConBlinded",
+    description: "DND5E.ConBlindedText",
+    icon: "icons/svg/blind.svg"
+  },
+  bleeding: {
+    name: "DND5E.ConBleeding",
+    description: "DND5E.ConBleedingText",
+    icon: "icons/svg/blood.svg"
+  },
+  charmed: {
+    name: "DND5E.ConCharmed",
+    description: "DND5E.ConCharmedText",
+    icon: "icons/svg/heal.svg"
+  },
+  cursed: {
+    name: "DND5E.ConCursed",
+    description: "DND5E.ConCursedText",
+    icon: "icons/svg/sun.svg"
+  },
+  deafened: {
+    name: "DND5E.ConDeafened",
+    description: "DND5E.ConDeafenedText",
+    icon: "icons/svg/deaf.svg"
+  },
+  diseased: {
+    name: "DND5E.ConDiseased",
+    description: "DND5E.ConDiseasedText",
+    icon: "icons/svg/biohazard.svg"
+  },
+  frightened: {
+    name: "DND5E.ConFrightened",
+    description: "DND5E.ConFrightenedText",
+    icon: "icons/svg/terror.svg"
+  },
+  grappled: {
+    name: "DND5E.ConGrappled",
+    description: "DND5E.ConGrappledText",
+    icon: "icons/svg/anchor.svg",
+    changes: [
+      { key: "system.attributes.movement.walk", mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE, value: 0 },
+      { key: "system.attributes.movement.fly", mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE, value: 0 },
+      { key: "system.attributes.movement.swim", mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE, value: 0 },
+      { key: "system.attributes.movement.climb", mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE, value: 0 },
+      { key: "system.attributes.movement.burrow", mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE, value: 0 }
+    ]
+  },
+  incapacitated: {
+    name: "DND5E.ConIncapacitated",
+    description: "DND5E.ConIncapacitatedText",
+    icon: "icons/svg/daze.svg"
+  },
+  invisible: {
+    name: "DND5E.ConInvisible",
+    description: "DND5E.ConInvisibleText",
+    icon: "icons/svg/invisible.svg"
+  },
+  marked: {
+    name: "DND5E.ConMarked",
+    description: "DND5E.ConMarkedText",
+    icon: "icons/svg/target.svg"
+  },
+  paralyzed: {
+    name: "DND5E.ConParalyzed",
+    description: "DND5E.ConParalyzedText",
+    icon: "icons/svg/paralysis.svg",
+    changes: [
+      { key: "system.attributes.movement.walk", mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE, value: 0 },
+      { key: "system.attributes.movement.fly", mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE, value: 0 },
+      { key: "system.attributes.movement.swim", mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE, value: 0 },
+      { key: "system.attributes.movement.climb", mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE, value: 0 },
+      { key: "system.attributes.movement.burrow", mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE, value: 0 }
+    ]
+  },
+  petrified: {
+    name: "DND5E.ConPetrified",
+    description: "DND5E.ConPetrifiedText",
+    icon: "icons/svg/statue.svg",
+    changes: [
+      { key: "system.attributes.movement.walk", mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE, value: 0 },
+      { key: "system.attributes.movement.fly", mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE, value: 0 },
+      { key: "system.attributes.movement.swim", mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE, value: 0 },
+      { key: "system.attributes.movement.climb", mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE, value: 0 },
+      { key: "system.attributes.movement.burrow", mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE, value: 0 },
+      { key: "system.traits.dr.custom", mode: CONST.ACTIVE_EFFECT_MODES.ADD, value: "All" },
+      { key: "system.traits.ci.value", mode: CONST.ACTIVE_EFFECT_MODES.ADD, value: "poisoned"},
+      { key: "system.traits.ci.value", mode: CONST.ACTIVE_EFFECT_MODES.ADD, value: "diseased"}
+    ],
+    statuses: ["incapacitated", "silenced"]
+  },
+  poisoned: {
+    name: "DND5E.ConPoisoned",
+    description: "DND5E.ConPoisonedText",
+    icon: "icons/svg/poison.svg"
+  },
+  prone: {
+    name: "DND5E.ConProne",
+    description: "DND5E.ConProneText",
+    icon: "icons/svg/falling.svg"
+  },
+  restrained: {
+    name: "DND5E.ConRestrained",
+    description: "DND5E.ConRestrainedText",
+    icon: "icons/svg/net.svg",
+    changes: [
+      { key: "system.attributes.movement.walk", mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE, value: 0 },
+      { key: "system.attributes.movement.fly", mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE, value: 0 },
+      { key: "system.attributes.movement.swim", mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE, value: 0 },
+      { key: "system.attributes.movement.climb", mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE, value: 0 },
+      { key: "system.attributes.movement.burrow", mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE, value: 0 }
+    ]
+  },
+  silenced: {
+    name: "DND5E.ConSilenced",
+    description: "DND5E.ConSilencedText",
+    icon: "icons/svg/silenced.svg"
+  },
+  sleeping: {
+    name: "DND5E.ConSleeping",
+    description: "DND5E.ConSleepingText",
+    icon: "icons/svg/sleep.svg"
+  },
+  stunned: {
+    name: "DND5E.ConStunned",
+    description: "DND5E.ConStunnedText",
+    icon: "icons/svg/stoned.svg",
+    changes: [
+      { key: "system.attributes.movement.walk", mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE, value: 0 },
+      { key: "system.attributes.movement.fly", mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE, value: 0 },
+      { key: "system.attributes.movement.swim", mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE, value: 0 },
+      { key: "system.attributes.movement.climb", mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE, value: 0 },
+      { key: "system.attributes.movement.burrow", mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE, value: 0 }
+    ],
+    statuses: ["incapacitated"]
+  },
+  unconscious: {
+    name: "DND5E.ConUnconscious",
+    description: "DND5E.ConUnconsciousText",
+    icon: "icons/svg/unconscious.svg",
+    changes: [
+      { key: "system.attributes.movement.walk", mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE, value: 0 },
+      { key: "system.attributes.movement.fly", mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE, value: 0 },
+      { key: "system.attributes.movement.swim", mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE, value: 0 },
+      { key: "system.attributes.movement.climb", mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE, value: 0 },
+      { key: "system.attributes.movement.burrow", mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE, value: 0 }
+    ],
+    statuses: ["incapacitated"]
+  }
+};
+
+/* -------------------------------------------- */
+
+/**
  * Patch an existing config enum to allow conversion from string values to object values without
  * breaking existing modules that are expecting strings.
  * @param {string} key          Key within DND5E that has been replaced with an enum of objects.

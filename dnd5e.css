@@ -708,6 +708,12 @@ h5 {
   width: 16px;
   height: 16px;
 }
+/* ----------------------------------------- */
+/*  Token Heads-Up Display                   */
+/* ----------------------------------------- */
+#token-hud .status-effects .effect-control.active:not(.overlay) {
+  border: 1px solid green;
+}
 .dnd5e.sheet.actor {
   /* ----------------------------------------- */
   /*  Shared Styles                            */

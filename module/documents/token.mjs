@@ -92,4 +92,34 @@ export default class TokenDocument5e extends TokenDocument {
     }
     return allow !== undefined;
   }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  async toggleActiveEffect(effectData, {overlay=false, active}={}) {
+    if ( !this.actor || !effectData.id ) return false;
+
+    // Remove existing effects that contain this effect data's primary id as their primary id.
+    const existing = this.actor.effects.reduce((arr, e) => {
+      if ( e.statuses.first() === effectData.id ) arr.push(e.id);
+      return arr;
+    }, []);
+    const state = active ?? !existing.length;
+    if ( !state && existing.length ) await this.actor.deleteEmbeddedDocuments("ActiveEffect", existing);
+
+    // Add a new effect
+    else if ( state ) {
+      const cls = getDocumentClass("ActiveEffect");
+      const createData = foundry.utils.deepClone(effectData);
+      createData.statuses = [effectData.id, ...effectData.statuses ?? []];
+      delete createData.id;
+      cls.migrateDataSafe(createData);
+      cls.cleanData(createData);
+      createData.name = game.i18n.localize(createData.name);
+      createData.description = game.i18n.localize(createData.description);
+      if ( overlay ) createData["flags.core.overlay"] = true;
+      await cls.create(createData, {parent: this.actor});
+    }
+    return state;
+  }
 }

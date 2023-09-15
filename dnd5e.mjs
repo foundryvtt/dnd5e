@@ -69,6 +69,9 @@ Hooks.once("init", function() {
   // Configure module art.
   game.dnd5e.moduleArt = new ModuleArt();
 
+  // Configure core system status conditions.
+  _setupStatusConditions();
+
   // Remove honor & sanity from configuration if they aren't enabled
   if ( !game.settings.get("dnd5e", "honorScore") ) delete DND5E.abilities.hon;
   if ( !game.settings.get("dnd5e", "sanityScore") ) delete DND5E.abilities.san;
@@ -127,6 +130,24 @@ Hooks.once("init", function() {
   utils.registerHandlebarsHelpers();
   utils.preloadHandlebarsTemplates();
 });
+
+/**
+ * Configure dnd5e conditions.
+ */
+function _setupStatusConditions() {
+  const effects = [];
+  let dead = null;
+  for (const id in CONFIG.DND5E.conditionEffects) {
+    const data = {...CONFIG.DND5E.conditionEffects[id], id};
+    if ( id !== CONFIG.specialStatusEffects.DEFEATED ) effects.push(data);
+    else dead = data;
+  }
+  if ("blinded" in CONFIG.DND5E.conditionEffects) {
+    CONFIG.specialStatusEffects.BLIND = "blinded";
+  }
+  effects.sort((a, b) => game.i18n.localize(a.name).localeCompare(game.i18n.localize(b.name)));
+  CONFIG.statusEffects = dead ? [dead, ...effects] : effects;
+}
 
 /**
  * Determine if this is a 'legacy' world with permissive validation, or one where strict validation is enabled.
