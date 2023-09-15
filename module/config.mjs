@@ -1898,21 +1898,17 @@ DND5E.advancementTypes = {
 /* -------------------------------------------- */
 
 /**
- * Status effects to display on the token HUD. Each internal object contains name, description,
- * icon, and optionally changes and additional status ids that should apply. For example, if an actor
- * is petrified, they are also incapacitated and silenced.
+ * Status effects to display on the token HUD. Each internal object contains name, description, icon, and
+ * optionally changes and additional status ids that should apply. For example, if an actor is petrified,
+ * they are also incapacitated and silenced.
  * @type {object}
  */
 DND5E.conditionEffects = {
+  // General afflictions.
   dead: {
     name: "DND5E.ConDead",
     description: "DND5E.ConDeadText",
     icon: "icons/svg/skull.svg"
-  },
-  blinded: {
-    name: "DND5E.ConBlinded",
-    description: "DND5E.ConBlindedText",
-    icon: "icons/svg/blind.svg"
   },
   bleeding: {
     name: "DND5E.ConBleeding",
@@ -1929,21 +1925,43 @@ DND5E.conditionEffects = {
     description: "DND5E.ConCursedText",
     icon: "icons/svg/sun.svg"
   },
-  deafened: {
-    name: "DND5E.ConDeafened",
-    description: "DND5E.ConDeafenedText",
-    icon: "icons/svg/deaf.svg"
-  },
   diseased: {
     name: "DND5E.ConDiseased",
     description: "DND5E.ConDiseasedText",
     icon: "icons/svg/biohazard.svg"
+  },
+  exhaustion: {
+    name: "DND5E.ConExhaustion",
+    description: "DND5E.ConExhaustionText",
+    icon: "icons/svg/degen.svg"
   },
   frightened: {
     name: "DND5E.ConFrightened",
     description: "DND5E.ConFrightenedText",
     icon: "icons/svg/terror.svg"
   },
+  poisoned: {
+    name: "DND5E.ConPoisoned",
+    description: "DND5E.ConPoisonedText",
+    icon: "icons/svg/poison.svg"
+  },
+  // Afflicted senses.
+  blinded: {
+    name: "DND5E.ConBlinded",
+    description: "DND5E.ConBlindedText",
+    icon: "icons/svg/blind.svg"
+  },
+  deafened: {
+    name: "DND5E.ConDeafened",
+    description: "DND5E.ConDeafenedText",
+    icon: "icons/svg/deaf.svg"
+  },
+  silenced: {
+    name: "DND5E.ConSilenced",
+    description: "DND5E.ConSilencedText",
+    icon: "icons/svg/silenced.svg"
+  },
+  // Movement restrictions.
   grappled: {
     name: "DND5E.ConGrappled",
     description: "DND5E.ConGrappledText",
@@ -1960,16 +1978,6 @@ DND5E.conditionEffects = {
     name: "DND5E.ConIncapacitated",
     description: "DND5E.ConIncapacitatedText",
     icon: "icons/svg/daze.svg"
-  },
-  invisible: {
-    name: "DND5E.ConInvisible",
-    description: "DND5E.ConInvisibleText",
-    icon: "icons/svg/invisible.svg"
-  },
-  marked: {
-    name: "DND5E.ConMarked",
-    description: "DND5E.ConMarkedText",
-    icon: "icons/svg/target.svg"
   },
   paralyzed: {
     name: "DND5E.ConParalyzed",
@@ -1999,11 +2007,6 @@ DND5E.conditionEffects = {
     ],
     statuses: ["incapacitated", "silenced"]
   },
-  poisoned: {
-    name: "DND5E.ConPoisoned",
-    description: "DND5E.ConPoisonedText",
-    icon: "icons/svg/poison.svg"
-  },
   prone: {
     name: "DND5E.ConProne",
     description: "DND5E.ConProneText",
@@ -2021,15 +2024,18 @@ DND5E.conditionEffects = {
       { key: "system.attributes.movement.burrow", mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE, value: 0 }
     ]
   },
-  silenced: {
-    name: "DND5E.ConSilenced",
-    description: "DND5E.ConSilencedText",
-    icon: "icons/svg/silenced.svg"
-  },
   sleeping: {
     name: "DND5E.ConSleeping",
     description: "DND5E.ConSleepingText",
-    icon: "icons/svg/sleep.svg"
+    icon: "icons/svg/sleep.svg",
+    changes: [
+      { key: "system.attributes.movement.walk", mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE, value: 0 },
+      { key: "system.attributes.movement.fly", mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE, value: 0 },
+      { key: "system.attributes.movement.swim", mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE, value: 0 },
+      { key: "system.attributes.movement.climb", mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE, value: 0 },
+      { key: "system.attributes.movement.burrow", mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE, value: 0 }
+    ],
+    statuses: ["unconscious", "incapacitated"]
   },
   stunned: {
     name: "DND5E.ConStunned",
@@ -2056,6 +2062,42 @@ DND5E.conditionEffects = {
       { key: "system.attributes.movement.burrow", mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE, value: 0 }
     ],
     statuses: ["incapacitated"]
+  },
+  // Spell-like effects.
+  invisible: {
+    name: "DND5E.ConInvisible",
+    description: "DND5E.ConInvisibleText",
+    icon: "icons/svg/invisible.svg"
+  },
+  marked: {
+    name: "DND5E.ConMarked",
+    description: "DND5E.ConMarkedText",
+    icon: "icons/svg/target.svg"
+  },
+  flying: {
+    name: "DND5E.ConFlying",
+    description: "DND5E.ConFlyingText",
+    icon: "icons/svg/wing.svg"
+  },
+  burrowing: {
+    name: "DND5E.ConBurrowing",
+    description: "DND5E.ConBurrowingText",
+    icon: "icons/svg/cave.svg"
+  },
+  concentrating: {
+    name: "DND5E.ConConcentrating",
+    description: "DND5E.ConConcentrating",
+    icon: "TODO.svg"
+  },
+  transformed: {
+    name: "DND5E.ConTransformed",
+    description: "DND5E.ConTransformedText",
+    icon: "icons/svg/pawprint.svg"
+  },
+  hidden: {
+    name: "DND5E.ConHidden",
+    description: "DND5E.ConHiddenText",
+    icon: "icons/svg/cowled.svg"
   }
 };
 
