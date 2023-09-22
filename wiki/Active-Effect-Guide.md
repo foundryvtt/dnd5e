@@ -1,5 +1,4 @@
 # FoundryVTT dnd5e Active Effects Examples
-###### tags: `active-effects`
 
 ![Up to date as of 2.1.x](https://img.shields.io/badge/dnd5e-v2.1.x-informational)
 
@@ -7,16 +6,12 @@ See [Kandashi's Active Effects Guide](https://docs.google.com/document/d/1DuZaIF
 
 This document only covers Active Effects available to the Core dnd5e System.
 
-### Legend
+## Legend
 
-`[number]`
-
-These square brakets mean "replace this with your value of the type within the brackets".
-
+`[number]` - These square brakets mean "replace this with your value of the type within the brackets".
 So this example: `+[number]` would mean you input `+3`.
 
-`[formula]`
-When `formula` is mentioned in this document it means this value can be populated with any dice formula. For example, Bless adds several effects with the Effect Value of `1d4`.
+`[formula]` - When `formula` is mentioned in this document it means this value can be populated with any dice formula. For example, Bless adds several effects with the Effect Value of `1d4`.
 
 
 As part of this, an Actor's Rolldata is available as ["@attributes."](https://github.com/foundryvtt/dnd5e/wiki/Roll-Formulas) Useful examples:
@@ -28,9 +23,9 @@ As part of this, an Actor's Rolldata is available as ["@attributes."](https://gi
 | `@details.level`           | Actor's overall Level         |
 | `@classes.barbarian.levels` | Actor's Barbarian Class Level |
 
-> [!NOTE]
+  
 > Note that when using formulas in an Active Effect Value, the actor sheet display that corresponds to the changed value will not display the evaluated formula, but it will be applied when rolled.
-> E.g. When adding `@abilities.cha.mod` to `system.bonuses.abilities.save` to simulate a Paladin's Aura of Protection, the actor sheet will not display that bonus applied to saving throws. The bonus will be present when the saving throw is rolled.
+> E.g. When adding `+@abilities.cha.mod` to `system.bonuses.abilities.save` to simulate a Paladin's Aura of Protection, the actor sheet will not display that bonus applied to saving throws. The bonus will be present when the saving throw is rolled.
 
 To find out more about these, this post from Unsoluble in the [FoundryVTT Discord server](https://discord.gg/foundryvtt)'s #core-how-to channel can help:
 
@@ -56,7 +51,7 @@ system.abilities.[abbreviation].value
                                         save
 ```
 
-> [!NOTE]
+
 > <details>
 > <summary>Ability Abbreviations</summary>
 > 
@@ -118,7 +113,6 @@ system.skills.[abbreviation].bonuses.check
                                      passive
 ```
 
-> [!NOTE]
 > <details>
 > <summary>Skill Abbreviations</summary>
 > 
@@ -181,7 +175,6 @@ Initiative is not quite a skill but behaves similarly.
 system.attributes.movement.[movementType]
 ```
 
-> [!NOTE]
 > <details>
 > <summary>Movement Types</summary>
 > 
@@ -254,7 +247,6 @@ system.bonuses.msak.attack
                rwak
 ```
 
-> [!NOTE]
 > <details>
 > <summary>Attack Roll Types</summary>
 > 
@@ -294,7 +286,6 @@ system.bonuses.msak.damage
                rwak
 ```
 
-> [!NOTE]
 > <details>
 > <summary>Attack Roll Types</summary>
 > 
@@ -338,7 +329,7 @@ system.traits.ci.value
 > These only serve as a marker on the actor sheet, the core system has no automations around immunities, resistances, or vulnerabilities.
 
 #### Add a Condition Immunity
-> [!NOTE]
+
 > <details>
 > <summary>Condition Types</summary>
 > 
@@ -370,7 +361,7 @@ system.traits.ci.value
 | `system.traits.ci.value`     | Add     | `[conditionType]`     |
 
 #### Add a Damage Type Immunity
-> [!NOTE]
+
 > <details>
 > <summary>Damage Types</summary>
 > 
