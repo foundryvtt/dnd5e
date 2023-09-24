@@ -9,7 +9,10 @@ export async function create5eMacro(dropData, slot) {
   switch ( dropData.type ) {
     case "Item":
       const itemData = await Item.implementation.fromDropData(dropData);
-      if ( !itemData ) return ui.notifications.warn(game.i18n.localize("MACRO.5eUnownedWarn"));
+      if ( !itemData ) {
+        ui.notifications.warn("MACRO.5eUnownedWarn", {localize: true});
+        return null;
+      }
       foundry.utils.mergeObject(macroData, {
         name: itemData.name,
         img: itemData.img,
@@ -19,7 +22,10 @@ export async function create5eMacro(dropData, slot) {
       break;
     case "ActiveEffect":
       const effectData = await ActiveEffect.implementation.fromDropData(dropData);
-      if ( !effectData ) return ui.notifications.warn(game.i18n.localize("MACRO.5eUnownedWarn"));
+      if ( !effectData ) {
+        ui.notifications.warn("MACRO.5eUnownedWarn", {localize: true});
+        return null;
+      }
       foundry.utils.mergeObject(macroData, {
         name: effectData.label,
         img: effectData.icon,
@@ -51,7 +57,10 @@ function getMacroTarget(name, documentType) {
   const speaker = ChatMessage.getSpeaker();
   if ( speaker.token ) actor = game.actors.tokens[speaker.token];
   actor ??= game.actors.get(speaker.actor);
-  if ( !actor ) return ui.notifications.warn(game.i18n.localize("MACRO.5eNoActorSelected"));
+  if ( !actor ) {
+    ui.notifications.warn("MACRO.5eNoActorSelected", {localize: true});
+    return null;
+  }
 
   const collection = (documentType === "Item") ? actor.items : actor.effects;
   const nameKeyPath = (documentType === "Item") ? "name" : "label";
@@ -60,7 +69,8 @@ function getMacroTarget(name, documentType) {
   const documents = collection.filter(i => foundry.utils.getProperty(i, nameKeyPath) === name);
   const type = game.i18n.localize(`DOCUMENT.${documentType}`);
   if ( documents.length === 0 ) {
-    return ui.notifications.warn(game.i18n.format("MACRO.5eMissingTargetWarn", { actor: actor.name, type, name }));
+    ui.notifications.warn(game.i18n.format("MACRO.5eMissingTargetWarn", { actor: actor.name, type, name }));
+    return null;
   }
   if ( documents.length > 1 ) {
     ui.notifications.warn(game.i18n.format("MACRO.5eMultipleTargetsWarn", { actor: actor.name, type, name }));

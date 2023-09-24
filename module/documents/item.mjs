@@ -1671,8 +1671,10 @@ export default class Item5e extends Item {
     const storedData = message.getFlag("dnd5e", "itemData");
     const item = storedData ? new this(storedData, {parent: actor}) : actor.items.get(card.dataset.itemId);
     if ( !item ) {
-      const err = game.i18n.format("DND5E.ActionWarningNoItem", {item: card.dataset.itemId, name: actor.name});
-      return ui.notifications.error(err);
+      ui.notifications.error(game.i18n.format("DND5E.ActionWarningNoItem", {
+        item: card.dataset.itemId, name: actor.name
+      }));
+      return null;
     }
     const spellLevel = parseInt(card.dataset.spellLevel) || null;
 
@@ -1776,7 +1778,7 @@ export default class Item5e extends Item {
   static _getChatCardTargets(card) {
     let targets = canvas.tokens.controlled.filter(t => !!t.actor);
     if ( !targets.length && game.user.character ) targets = targets.concat(game.user.character.getActiveTokens());
-    if ( !targets.length ) ui.notifications.warn(game.i18n.localize("DND5E.ActionWarningNoToken"));
+    if ( !targets.length ) ui.notifications.warn("DND5E.ActionWarningNoToken", {localize: true});
     return targets;
   }
 
@@ -1954,7 +1956,7 @@ export default class Item5e extends Item {
 
     // Check to make sure the updated class level isn't below zero
     if ( changed.system.levels <= 0 ) {
-      ui.notifications.warn(game.i18n.localize("DND5E.MaxClassLevelMinimumWarn"));
+      ui.notifications.warn("DND5E.MaxClassLevelMinimumWarn", {localize: true});
       changed.system.levels = 1;
     }
 
