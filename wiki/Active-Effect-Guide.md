@@ -399,3 +399,35 @@ system.traits.ci.value
 | Attribute Key | Change Mode | Effect Value |
 | -------- | -------- | -------- |
 | `system.traits.dv.value`     | Add     | `[damageType]`     |
+
+---
+
+### Scale Value
+
+```
+system.scale.[classId].[scaleId]
+                                 .value
+                                 .number
+                                 .die
+                                 .faces
+```
+
+> <details>
+> <summary>Dice Scale Values</summary>
+> 
+> The Dice Scale Values have a few unique keys, here is an example of the result for these keys based on a scale value that is 3d8
+>
+> | Key | Value    |
+> | ------------- | -------- |
+> |`system.scale.[classId].[scaleId]`| 3d8|
+> | `system.scale.[classId].[scaleId].number` | 3 |
+> | `system.scale.[classId].[scaleId].die` | d8  |
+> | `system.scale.[classId].[scaleId].faces` | 8    |
+> </details>
+
+#### Increase the value of a Scale Values
+E.g. An Item or Spell which allows additional use(s) of a Class Feature.
+
+| Attribute Key | Change Mode | Effect Value |
+| -------- | -------- | -------- |
+| `system.scale.[classId].[scaleId].value`     | Add     | `+[number]`     |
