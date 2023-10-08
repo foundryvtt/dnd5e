@@ -434,8 +434,8 @@ export default class Item5e extends Item {
     let dmg = this.system.damage || {};
     if ( dmg.parts ) {
       const types = CONFIG.DND5E.damageTypes;
-      this.labels.damage = dmg.parts.map(d => d[0]).join(" + ").replace(/\+ -/g, "- ");
-      this.labels.damageTypes = dmg.parts.map(d => types[d[1]]).join(", ");
+      this.labels.damage = dmg.parts.map(d => d.formula).join(" + ").replace(/\+ -/g, "- ");
+      this.labels.damageTypes = dmg.parts.map(d => types[d.type]).join(", ");
     }
   }
 
@@ -533,17 +533,16 @@ export default class Item5e extends Item {
     if ( !this.hasDamage || !this.isOwned ) return [];
     const rollData = this.getRollData();
     const damageLabels = { ...CONFIG.DND5E.damageTypes, ...CONFIG.DND5E.healingTypes };
-    const derivedDamage = this.system.damage?.parts?.map(damagePart => {
+    const derivedDamage = this.system.damage?.parts?.map(part => {
       let formula;
       try {
-        const roll = new Roll(damagePart[0], rollData);
+        const roll = new Roll(part.formula, rollData);
         formula = simplifyRollFormula(roll.formula, { preserveFlavor: true });
       }
       catch(err) {
         console.warn(`Unable to simplify formula for ${this.name}: ${err}`);
       }
-      const damageType = damagePart[1];
-      return { formula, damageType, label: `${formula} ${damageLabels[damageType] ?? ""}` };
+      return { formula, damageType: part.type, label: `${formula} ${damageLabels[part.type] ?? ""}` };
     });
     return this.labels.derivedDamage = derivedDamage;
   }
@@ -1308,7 +1307,7 @@ export default class Item5e extends Item {
 
     // Get roll data
     const dmg = this.system.damage;
-    const parts = dmg.parts.map(d => d[0]);
+    const parts = dmg.parts.map(d => d.formula);
     const rollData = this.getRollData();
     if ( spellLevel ) rollData.item.level = spellLevel;
 
@@ -1360,7 +1359,7 @@ export default class Item5e extends Item {
     // Only add the ammunition damage if the ammunition is a consumable with type 'ammo'
     if ( this._ammo && (this._ammo.type === "consumable") && (this._ammo.system.consumableType === "ammo") ) {
       parts.push("@ammo");
-      rollData.ammo = this._ammo.system.damage.parts.map(p => p[0]).join("+");
+      rollData.ammo = this._ammo.system.damage.parts.map(p => p.formula).join("+");
       rollConfig.flavor += ` [${this._ammo.name}]`;
       delete this._ammo;
     }

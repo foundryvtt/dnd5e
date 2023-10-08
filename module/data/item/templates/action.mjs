@@ -4,21 +4,23 @@ import { FormulaField } from "../../fields.mjs";
 /**
  * Data model template for item actions.
  *
- * @property {string} ability             Ability score to use when determining modifier.
- * @property {string} actionType          Action type as defined in `DND5E.itemActionTypes`.
- * @property {string} attackBonus         Numeric or dice bonus to attack rolls.
- * @property {string} chatFlavor          Extra text displayed in chat.
- * @property {object} critical            Information on how critical hits are handled.
- * @property {number} critical.threshold  Minimum number on the dice to roll a critical hit.
- * @property {string} critical.damage     Extra damage on critical hit.
- * @property {object} damage              Item damage formulas.
- * @property {string[][]} damage.parts    Array of damage formula and types.
- * @property {string} damage.versatile    Special versatile damage formula.
- * @property {string} formula             Other roll formula.
- * @property {object} save                Item saving throw data.
- * @property {string} save.ability        Ability required for the save.
- * @property {number} save.dc             Custom saving throw value.
- * @property {string} save.scaling        Method for automatically determining saving throw DC.
+ * @property {string} ability                     Ability score to use when determining modifier.
+ * @property {string} actionType                  Action type as defined in `DND5E.itemActionTypes`.
+ * @property {string} attackBonus                 Numeric or dice bonus to attack rolls.
+ * @property {string} chatFlavor                  Extra text displayed in chat.
+ * @property {object} critical                    Information on how critical hits are handled.
+ * @property {number} critical.threshold          Minimum number on the dice to roll a critical hit.
+ * @property {string} critical.damage             Extra damage on critical hit.
+ * @property {object} damage                      Item damage formulas.
+ * @property {object[]} damage.parts              Array of damage formula and types.
+ * @property {string} damage.parts[].formula      The damage part formula.
+ * @property {string} damage.parts[].type         The damage part type.
+ * @property {string} damage.versatile            Special versatile damage formula.
+ * @property {string} formula                     Other roll formula.
+ * @property {object} save                        Item saving throw data.
+ * @property {string} save.ability                Ability required for the save.
+ * @property {number} save.dc                     Custom saving throw value.
+ * @property {string} save.scaling                Method for automatically determining saving throw DC.
  * @mixin
  */
 export default class ActionTemplate extends SystemDataModel {
@@ -40,9 +42,10 @@ export default class ActionTemplate extends SystemDataModel {
         damage: new FormulaField({required: true, label: "DND5E.ItemCritExtraDamage"})
       }),
       damage: new foundry.data.fields.SchemaField({
-        parts: new foundry.data.fields.ArrayField(new foundry.data.fields.ArrayField(
-          new foundry.data.fields.StringField({nullable: true})
-        ), {required: true}),
+        parts: new foundry.data.fields.ArrayField(new foundry.data.fields.SchemaField({
+          formula: new foundry.data.fields.StringField(),
+          type: new foundry.data.fields.StringField()
+        }), {required: true}),
         versatile: new FormulaField({required: true, label: "DND5E.VersatileDamage"})
       }, {label: "DND5E.Damage"}),
       formula: new FormulaField({required: true, label: "DND5E.OtherFormula"}),
@@ -135,6 +138,17 @@ export default class ActionTemplate extends SystemDataModel {
     if ( !("damage" in source) ) return;
     source.damage ??= {};
     source.damage.parts ??= [];
+
+    // Since form data from the item sheet is also passing through here, ignore objects.
+    const type = foundry.utils.getType(source.damage.parts);
+    if ( type === "Object" ) return;
+
+    // Migrate damage parts from arrays to objects.
+    for ( const part of source.damage.parts ) {
+      if ( Array.isArray(part) ) {
+        source.damage.parts.findSplice(p => p === part, {formula: part[0], type: part[1]});
+      }
+    }
   }
 
   /* -------------------------------------------- */

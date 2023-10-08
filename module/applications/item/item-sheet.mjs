@@ -380,10 +380,6 @@ export default class ItemSheet5e extends ItemSheet {
   _getSubmitData(updateData={}) {
     const formData = foundry.utils.expandObject(super._getSubmitData(updateData));
 
-    // Handle Damage array
-    const damage = formData.system?.damage;
-    if ( damage ) damage.parts = Object.values(damage?.parts || {}).map(d => [d[0] || "", d[1] || ""]);
-
     // Check max uses formula
     const uses = formData.system?.uses;
     if ( uses?.max ) {
@@ -504,7 +500,7 @@ export default class ItemSheet5e extends ItemSheet {
     if ( a.classList.contains("add-damage") ) {
       await this._onSubmit(event);  // Submit any unsaved changes
       const damage = this.item.system.damage;
-      return this.item.update({"system.damage.parts": damage.parts.concat([["", ""]])});
+      return this.item.update({"system.damage.parts": damage.parts.concat([{}])});
     }
 
     // Remove a damage component

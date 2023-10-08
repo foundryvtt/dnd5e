@@ -58,10 +58,10 @@
 <ol class="damage-parts form-group">
     {{#each system.damage.parts as |part i| }}
     <li class="damage-part flexrow" data-damage-part="{{i}}">
-        <input type="text" name="system.damage.parts.{{i}}.0" value="{{lookup this "0"}}" data-formula-editor/>
-        <select name="system.damage.parts.{{i}}.1">
-            {{#select (lookup this "1")}}
-                <option value="">{{ localize "DND5E.None" }}</option>
+        <input type="text" name="system.damage.parts.{{i}}.formula" value="{{part.formula}}" data-formula-editor/>
+        <select name="system.damage.parts.{{i}}.type">
+            {{#select part.type}}
+                <option value="">{{localize "DND5E.None"}}</option>
                 <optgroup label="{{localize 'DND5E.Damage'}}">
                     {{selectOptions @root.config.damageTypes}}
                 </optgroup>
