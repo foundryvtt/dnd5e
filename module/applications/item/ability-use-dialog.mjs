@@ -179,7 +179,7 @@ export default class AbilityUseDialog extends Dialog {
   static _getAbilityUseWarnings(data) {
     const warnings = [];
     const item = data.item;
-    const { quantity, level } = data.item.system;
+    const { quantity, level, consume, consumableType } = item.system;
     const scale = item.usageScaling;
 
     if ( (scale === "slot") && data.slotOptions.every(o => !o.hasSlots) ) {
@@ -197,12 +197,11 @@ export default class AbilityUseDialog extends Dialog {
 
     // Display warnings that the item or its resource item will be destroyed.
     if ( item.type === "consumable" ) {
-      const type = game.i18n.localize(`DND5E.Consumable${item.system.consumableType.capitalize()}`)
-      if ( this._willDestroyItem(item) && (is.quantity === 1) ) {
+      const type = game.i18n.localize(`DND5E.Consumable${consumableType.capitalize()}`)
+      if ( this._willDestroyItem(item) && (quantity === 1) ) {
         warnings.push(game.i18n.format("DND5E.AbilityUseConsumableDestroyHint", {type}));
       }
 
-      const consume = item.system.consume;
       const resource = item.actor.items.get(consume.target);
       const qty = consume.amount || 1;
       if ( resource && (resource.system.quantity === 1) && this._willDestroyItem(resource, qty) ) {
