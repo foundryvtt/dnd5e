@@ -973,7 +973,7 @@ export default class Item5e extends Item {
     }
 
     // Consume Spell Slots
-    if ( config.consumeSpellSlot && config.slotLevel ) {
+    if ( config.consumeSpellSlot ) {
       const level = this.actor?.system.spells[config.slotLevel];
       const spells = Number(level?.value ?? 0);
       if ( spells === 0 ) {
