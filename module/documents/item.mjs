@@ -746,7 +746,7 @@ export default class Item5e extends Item {
    * @property {boolean} consumeResource            Should this item consume a (non-ammo) resource?
    * @property {boolean} consumeSpellSlot           Should this item (a spell) consume a spell slot?
    * @property {boolean} consumeUsage               Should this item consume its limited uses or recharge?
-   * @property {string|null} slotLevel              The spell slot type to consume by default.
+   * @property {string|number|null} slotLevel       The spell slot type or level to consume by default.
    */
 
   /**
@@ -801,11 +801,6 @@ export default class Item5e extends Item {
       config.slotLevel = config.consumeSlotLevel;
       delete config.consumeSlotLevel;
     }
-    if ( Number.isNumeric(config.slotLevel) ) {
-      console.warn(`You are passing a numeric value to 'slotLevel' which expects a key from Actor5e#system#spells.`);
-      config.slotLevel = `spell${config.slotLevel}`;
-    }
-
     config = foundry.utils.mergeObject(this._getUsageConfig(), config);
 
     // Are any default values necessitating a prompt?
@@ -834,7 +829,8 @@ export default class Item5e extends Item {
       let level = null;
       if ( config.slotLevel ) {
         // A spell slot was consumed.
-        level = config.slotLevel === "pact" ? as.spells.pact.level : parseInt(config.slotLevel.replace("spell", ""));
+        level = Number.isInteger(config.slotLevel) ? config.slotLevel :
+        config.slotLevel === "pact" ? as.spells.pact.level : parseInt(config.slotLevel.replace("spell", ""));
       }
       if ( level && (level !== is.level) ) {
         item = item.clone({"system.level": level}, {keepId: true});
