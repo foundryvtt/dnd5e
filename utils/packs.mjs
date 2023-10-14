@@ -1,4 +1,4 @@
-import Datastore from "nedb";
+import Datastore from "nedb-promises";
 import fs from "fs";
 import gulp from "gulp";
 import logger from "fancy-log";
@@ -6,6 +6,7 @@ import mergeStream from "merge-stream";
 import path from "path";
 import through2 from "through2";
 import yargs from "yargs";
+import { compilePack, extractPack } from "@foundryvtt/foundryvtt-cli";
 
 
 /**
@@ -91,23 +92,16 @@ function cleanPackEntry(data, { clearSourceId=true }={}) {
  * @param {string} pack        Name of the pack to which this item belongs.
  * @returns {Promise<string>}  Resolves once the ID is determined.
  */
-function determineId(data, pack) {
+async function determineId(data, pack) {
   const db_path = path.join(PACK_DEST, `${pack}.db`);
-  if ( !DB_CACHE[db_path] ) {
-    DB_CACHE[db_path] = new Datastore({ filename: db_path, autoload: true });
-    DB_CACHE[db_path].loadDatabase();
-  }
+  if ( !DB_CACHE[db_path] ) DB_CACHE[db_path] = Datastore.create({ filename: db_path, autoload: true });
   const db = DB_CACHE[db_path];
 
-  return new Promise((resolve, reject) => {
-    db.findOne({ name: data.name }, (err, entry) => {
-      if ( entry ) {
-        resolve(entry._id);
-      } else {
-        resolve(db.createNewId());
-      }
-    });
-  });
+  try {
+    return await db.findOne({ name: data.name });
+  } catch ( err ) {
+    return db.createNewId();
+  }
 }
 
 /**
@@ -164,32 +158,19 @@ export const clean = cleanPacks;
  * - `gulp compilePacks` - Compile all JSON files into their NEDB files.
  * - `gulp compilePacks --pack classes` - Only compile the specified pack.
  */
-function compilePacks() {
+async function compilePacks() {
   const packName = parsedArgs.pack;
   // Determine which source folders to process
   const folders = fs.readdirSync(PACK_SRC, { withFileTypes: true }).filter(file =>
     file.isDirectory() && ( !packName || (packName === file.name) )
   );
 
-  const packs = folders.map(folder => {
-    const filePath = path.join(PACK_DEST, `${folder.name}.db`);
-    fs.rmSync(filePath, { force: true });
-    const db = fs.createWriteStream(filePath, { flags: "a", mode: 0o664 });
-    const data = [];
+  for ( const folder of folders ) {
+    const src = path.join(PACK_SRC, folder.name);
+    const dest = path.join(PACK_DEST, `${folder.name}.db`);
     logger.info(`Compiling pack ${folder.name}`);
-    return gulp.src(path.join(PACK_SRC, folder.name, "/**/*.json"))
-      .pipe(through2.obj((file, enc, callback) => {
-        const json = JSON.parse(file.contents.toString());
-        cleanPackEntry(json);
-        data.push(json);
-        callback(null, file);
-      }, callback => {
-        data.sort((lhs, rhs) => lhs._id > rhs._id ? 1 : -1);
-        data.forEach(entry => db.write(`${JSON.stringify(entry)}\n`));
-        callback();
-      }));
-  });
-  return mergeStream(packs);
+    await compilePack(src, dest, { nedb: true, recursive: true, log: true, transformEntry: cleanPackEntry });
+  }
 }
 export const compile = compilePacks;
 
@@ -205,36 +186,35 @@ export const compile = compilePacks;
  * - `gulp extractPacks --pack classes` - Only extract the contents of the specified compendium.
  * - `gulp extractPacks --pack classes --name Barbarian` - Only extract a single item from the specified compendium.
  */
-function extractPacks() {
-  const packName = parsedArgs.pack ?? "*";
+async function extractPacks() {
+  const packName = parsedArgs.pack;
   const entryName = parsedArgs.name?.toLowerCase();
-  const packs = gulp.src(`${PACK_DEST}/**/${packName}.db`)
-    .pipe(through2.obj((file, enc, callback) => {
-      const filename = path.parse(file.path).name;
-      const folder = path.join(PACK_SRC, filename);
-      if ( !fs.existsSync(folder) ) fs.mkdirSync(folder, { recursive: true, mode: 0o775 });
 
-      const db = new Datastore({ filename: file.path, autoload: true });
-      db.loadDatabase();
+  // Load system.json.
+  const system = JSON.parse(fs.readFileSync("./system.json", { encoding: "utf8" }));
 
-      db.find({}, (err, entries) => {
-        entries.forEach(entry => {
-          const name = entry.name.toLowerCase();
-          if ( entryName && (entryName !== name) ) return;
-          cleanPackEntry(entry);
-          const output = `${JSON.stringify(entry, null, 2)}\n`;
-          const outputName = name.replace("'", "").replace(/[^a-z0-9]+/gi, " ").trim().replace(/\s+|-{2,}/g, "-");
-          const subfolder = path.join(folder, _getSubfolderName(entry, filename));
-          if ( !fs.existsSync(subfolder) ) fs.mkdirSync(subfolder, { recursive: true, mode: 0o775 });
-          fs.writeFileSync(path.join(subfolder, `${outputName}.json`), output, { mode: 0o664 });
-        });
-      });
+  // Determine which source packs to process.
+  const packs = fs.readdirSync(PACK_DEST, { withFileTypes: true }).filter(file => {
+    if ( !file.isFile() || (path.extname(file.name) !== ".db") ) return false;
+    return !packName || (packName === path.basename(file.name, ".db"));
+  });
 
-      logger.info(`Extracting pack ${filename}`);
-      callback(null, file);
-    }));
-
-  return mergeStream(packs);
+  for ( const pack of packs ) {
+    const packName = path.basename(pack.name, ".db");
+    const packInfo = system.packs.find(p => p.name === packName);
+    const src = path.join(PACK_DEST, pack.name);
+    const dest = path.join(PACK_SRC, packName);
+    logger.info(`Extracting pack ${pack.name}`);
+    await extractPack(src, dest, { nedb: true, log: true, documentType: packInfo.type, transformEntry: entry => {
+      if ( entryName && (entryName !== entry.name.toLowerCase()) ) return false;
+      cleanPackEntry(entry);
+    }, transformName: entry => {
+      const name = entry.name.toLowerCase();
+      const outputName = name.replace("'", "").replace(/[^a-z0-9]+/gi, " ").trim().replace(/\s+|-{2,}/g, "-");
+      const subfolder = _getSubfolderName(entry, packName);
+      return path.join(subfolder, `${outputName}.json`);
+    } });
+  }
 }
 export const extract = extractPacks;
 
@@ -253,7 +233,7 @@ function _getSubfolderName(data, pack) {
       if ( (data.type === "consumable") && data.system.consumableType ) return data.system.consumableType;
       return data.type;
 
-    // Monsters should be grouped by CR
+    // Monsters should be grouped by type
     case "monsters":
       if ( !data.system?.details?.type?.value ) return "";
       return data.system.details.type.value;

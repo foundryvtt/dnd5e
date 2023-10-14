@@ -2,7 +2,7 @@
   "_id": "DevmObXWP9MfwE2c",
   "name": "Adamantine Breastplate",
   "type": "equipment",
-  "img": "icons/equipment/chest/breastplate-layered-steel-black.webp",
+  "img": "icons/equipment/chest/breastplate-collared-steel-grey.webp",
   "system": {
     "description": {
       "value": "<p>This armor is reinforced with adamantine, one of the hardest substances in existence.</p>\n<p>While you're wearing it, any critical hit against you becomes a normal hit.</p>",
@@ -30,6 +30,7 @@
       "units": ""
     },
     "cover": null,
+    "crewed": false,
     "target": {
       "value": null,
       "width": null,
@@ -99,10 +100,11 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.1.0",
+    "systemVersion": "2.2.2",
     "coreVersion": "10.291",
     "createdTime": 1661787233528,
-    "modifiedTime": 1671220958782,
+    "modifiedTime": 1690538946202,
     "lastModifiedBy": "dnd5ebuilder0000"
-  }
+  },
+  "_key": "!items!DevmObXWP9MfwE2c"
 }

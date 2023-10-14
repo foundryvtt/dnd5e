@@ -1,3 +1,4 @@
+import SystemDataModel from "../../abstract.mjs";
 import { FormulaField } from "../../fields.mjs";
 
 /**
@@ -20,7 +21,7 @@ import { FormulaField } from "../../fields.mjs";
  * @property {string} save.scaling        Method for automatically determining saving throw DC.
  * @mixin
  */
-export default class ActionTemplate extends foundry.abstract.DataModel {
+export default class ActionTemplate extends SystemDataModel {
   /** @inheritdoc */
   static defineSchema() {
     return {
@@ -62,7 +63,8 @@ export default class ActionTemplate extends foundry.abstract.DataModel {
   /* -------------------------------------------- */
 
   /** @inheritdoc */
-  static migrateData(source) {
+  static _migrateData(source) {
+    super._migrateData(source);
     ActionTemplate.#migrateAbility(source);
     ActionTemplate.#migrateAttackBonus(source);
     ActionTemplate.#migrateCritical(source);
@@ -99,11 +101,11 @@ export default class ActionTemplate extends foundry.abstract.DataModel {
    */
   static #migrateCritical(source) {
     if ( !("critical" in source) ) return;
-    if ( source.critical?.damage === null ) source.critical.damage = "";
     if ( (typeof source.critical !== "object") || (source.critical === null) ) source.critical = {
       threshold: null,
       damage: ""
     };
+    if ( source.critical.damage === null ) source.critical.damage = "";
   }
 
   /* -------------------------------------------- */
@@ -113,9 +115,11 @@ export default class ActionTemplate extends foundry.abstract.DataModel {
    * @param {object} source  The candidate source data from which the model will be constructed.
    */
   static #migrateSave(source) {
-    if ( source.save?.scaling === "" ) source.save.scaling = "spell";
-    if ( source.save?.ability === null ) source.save.ability = "";
-    if ( typeof source.save?.dc === "string" ) {
+    if ( !("save" in source) ) return;
+    source.save ??= {};
+    if ( source.save.scaling === "" ) source.save.scaling = "spell";
+    if ( source.save.ability === null ) source.save.ability = "";
+    if ( typeof source.save.dc === "string" ) {
       if ( source.save.dc === "" ) source.save.dc = null;
       else if ( Number.isNumeric(source.save.dc) ) source.save.dc = Number(source.save.dc);
     }
@@ -129,6 +133,7 @@ export default class ActionTemplate extends foundry.abstract.DataModel {
    */
   static #migrateDamage(source) {
     if ( !("damage" in source) ) return;
+    source.damage ??= {};
     source.damage.parts ??= [];
   }
 
@@ -141,6 +146,7 @@ export default class ActionTemplate extends foundry.abstract.DataModel {
    * @type {string|null}
    */
   get abilityMod() {
+    if ( this.ability === "none" ) return null;
     return this.ability || this._typeAbilityMod || {
       mwak: "str",
       rwak: "dex",

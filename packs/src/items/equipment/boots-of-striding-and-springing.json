@@ -30,6 +30,7 @@
       "units": ""
     },
     "cover": null,
+    "crewed": false,
     "target": {
       "value": null,
       "width": null,
@@ -90,7 +91,36 @@
     "stealth": false,
     "proficient": false
   },
-  "effects": [],
+  "effects": [
+    {
+      "label": "Boots of Striding and Springing",
+      "icon": "icons/equipment/feet/boots-collared-rounded-brown.webp",
+      "origin": "Compendium.dnd5e.items.hSY1b8yi8JWw2blf",
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "disabled": false,
+      "_id": "ewBIkUaBn4meKsK5",
+      "changes": [
+        {
+          "key": "system.attributes.movement.walk",
+          "mode": 4,
+          "value": "30"
+        }
+      ],
+      "tint": null,
+      "transfer": true,
+      "flags": {},
+      "sort": 0,
+      "_key": "!items.effects!hSY1b8yi8JWw2blf.ewBIkUaBn4meKsK5"
+    }
+  ],
   "folder": null,
   "sort": 0,
   "ownership": {
@@ -99,10 +129,11 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.1.0",
-    "coreVersion": "10.291",
+    "systemVersion": "2.2.2",
+    "coreVersion": "10.303",
     "createdTime": 1661787233814,
-    "modifiedTime": 1671220963000,
+    "modifiedTime": 1690480596552,
     "lastModifiedBy": "dnd5ebuilder0000"
-  }
+  },
+  "_key": "!items!hSY1b8yi8JWw2blf"
 }

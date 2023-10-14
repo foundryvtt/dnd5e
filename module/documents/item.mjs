@@ -267,6 +267,20 @@ export default class Item5e extends Item {
   /* -------------------------------------------- */
 
   /**
+   * Does this item scale with any kind of consumption?
+   * @type {string|null}
+   */
+  get usageScaling() {
+    const { level, preparation } = this.system;
+    if ( (this.type === "spell") && (level > 0) && CONFIG.DND5E.spellUpcastModes.includes(preparation.mode) ) {
+      return "slot";
+    }
+    return null;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Spellcasting details for a class or subclass.
    *
    * @typedef {object} SpellcastingDescription
@@ -488,6 +502,22 @@ export default class Item5e extends Item {
   /* -------------------------------------------- */
 
   /**
+   * Determine an item's proficiency level based on its parent actor's proficiencies.
+   * @protected
+   */
+  _prepareProficiency() {
+    if ( !["spell", "weapon", "equipment", "tool", "feat", "consumable"].includes(this.type) ) return;
+    if ( !this.actor?.system.attributes?.prof ) {
+      this.system.prof = new Proficiency(0, 0);
+      return;
+    }
+
+    this.system.prof = new Proficiency(this.actor.system.attributes.prof, this.system.proficiencyMultiplier ?? 0);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Compute item attributes which might depend on prepared actor data. If this item is embedded this method will
    * be called after the actor's data is prepared.
    * Otherwise, it will be called at the end of `Item5e#prepareDerivedData`.
@@ -495,10 +525,7 @@ export default class Item5e extends Item {
   prepareFinalAttributes() {
 
     // Proficiency
-    if ( this.actor?.system.attributes?.prof ) {
-      const isProficient = (this.type === "spell") || this.system.proficient; // Always proficient in spell attacks.
-      this.system.prof = new Proficiency(this.actor?.system.attributes.prof, isProficient);
-    }
+    this._prepareProficiency();
 
     // Class data
     if ( this.type === "class" ) this.system.isOriginalClass = this.isOriginalClass;
@@ -604,12 +631,12 @@ export default class Item5e extends Item {
     if ( !this.isOwned ) return {rollData, parts};
 
     // Ability score modifier
-    parts.push("@mod");
+    if ( this.system.ability !== "none" ) parts.push("@mod");
 
-    // Add proficiency bonus if an explicit proficiency flag is present or for non-item features
-    if ( !["weapon", "consumable"].includes(this.type) || this.system.proficient ) {
+    // Add proficiency bonus.
+    if ( this.system.prof?.hasProficiency ) {
       parts.push("@prof");
-      if ( this.system.prof?.hasProficiency ) rollData.prof = this.system.prof.term;
+      rollData.prof = this.system.prof.term;
     }
 
     // Actor-level global bonus to attack rolls
@@ -732,14 +759,11 @@ export default class Item5e extends Item {
    * Configuration data for an item usage being prepared.
    *
    * @typedef {object} ItemUseConfiguration
-   * @property {boolean} createMeasuredTemplate  Trigger a template creation
-   * @property {boolean} consumeQuantity         Should the item's quantity be consumed?
-   * @property {boolean} consumeRecharge         Should a recharge be consumed?
-   * @property {boolean} consumeResource         Should a linked (non-ammo) resource be consumed?
-   * @property {number|string|null} consumeSpellLevel  Specific spell level to consume, or "pact" for pact level.
-   * @property {boolean} consumeSpellSlot        Should any spell slot be consumed?
-   * @property {boolean} consumeUsage            Should limited uses be consumed?
-   * @property {boolean} needsConfiguration      Is user-configuration needed?
+   * @property {boolean} createMeasuredTemplate     Should this item create a template?
+   * @property {boolean} consumeResource            Should this item consume a (non-ammo) resource?
+   * @property {boolean} consumeSpellSlot           Should this item (a spell) consume a spell slot?
+   * @property {boolean} consumeUsage               Should this item consume its limited uses or recharge?
+   * @property {string|number|null} slotLevel       The spell slot type or level to consume by default.
    */
 
   /**
@@ -788,24 +812,16 @@ export default class Item5e extends Item {
       "flags.dnd5e.use": {type: this.type, itemId: this.id, itemUuid: this.uuid}
     }, options);
 
-    // Reference aspects of the item data necessary for usage
-    const isSpell = item.type === "spell";    // Does the item require a spell slot?
-    const requireSpellSlot = isSpell && (is.level > 0) && CONFIG.DND5E.spellUpcastModes.includes(is.preparation.mode);
-
     // Define follow-up actions resulting from the item usage
-    config = foundry.utils.mergeObject({
-      createMeasuredTemplate: item.hasAreaTarget,
-      consumeQuantity: is.uses?.autoDestroy ?? false,
-      consumeRecharge: is.recharge?.value && item.isActive,
-      consumeResource: item.hasResource,
-      consumeSpellLevel: requireSpellSlot ? is.preparation.mode === "pact" ? "pact" : is.level : null,
-      consumeSpellSlot: requireSpellSlot,
-      consumeUsage: item.isActive && !!is.uses?.per && (is.uses?.max > 0)
-    }, config);
+    if ( config.consumeSlotLevel ) {
+      console.warn(`You are passing 'consumeSlotLevel' to the ItemUseConfiguration object, which now expects a key as 'slotLevel'.`);
+      config.slotLevel = config.consumeSlotLevel;
+      delete config.consumeSlotLevel;
+    }
+    config = foundry.utils.mergeObject(this._getUsageConfig(), config);
 
-    // Display a configuration dialog to customize the usage
-    if ( config.needsConfiguration === undefined ) config.needsConfiguration = config.createMeasuredTemplate
-      || config.consumeRecharge || config.consumeResource || config.consumeSpellSlot || config.consumeUsage;
+    // Are any default values necessitating a prompt?
+    const needsConfiguration = Object.values(config).includes(true);
 
     /**
      * A hook event that fires before an item usage is configured.
@@ -819,23 +835,27 @@ export default class Item5e extends Item {
     if ( Hooks.call("dnd5e.preUseItem", item, config, options) === false ) return;
 
     // Display configuration dialog
-    if ( (options.configureDialog !== false) && config.needsConfiguration ) {
-      const configuration = await AbilityUseDialog.create(item);
+    if ( (options.configureDialog !== false) && needsConfiguration ) {
+      const configuration = await AbilityUseDialog.create(item, config);
       if ( !configuration ) return;
       foundry.utils.mergeObject(config, configuration);
     }
 
-    // Handle spell upcasting
-    if ( isSpell && (config.consumeSpellSlot || config.consumeSpellLevel) ) {
-      const upcastLevel = config.consumeSpellLevel === "pact" ? as.spells.pact.level
-        : parseInt(config.consumeSpellLevel);
-      if ( upcastLevel && (upcastLevel !== is.level) ) {
-        item = item.clone({"system.level": upcastLevel}, {keepId: true});
+    // Handle upcasting
+    if ( item.type === "spell" ) {
+      let level = null;
+      if ( config.slotLevel ) {
+        // A spell slot was consumed.
+        level = Number.isInteger(config.slotLevel) ? config.slotLevel :
+        config.slotLevel === "pact" ? as.spells.pact.level : parseInt(config.slotLevel.replace("spell", ""));
+      }
+      if ( level && (level !== is.level) ) {
+        item = item.clone({"system.level": level}, {keepId: true});
         item.prepareData();
         item.prepareFinalAttributes();
       }
     }
-    if ( isSpell ) foundry.utils.mergeObject(options.flags, {"dnd5e.use.spellLevel": item.system.level});
+    if ( item.type === "spell" ) foundry.utils.mergeObject(options.flags, {"dnd5e.use.spellLevel": item.system.level});
 
     /**
      * A hook event that fires before an item's resource consumption has been calculated.
@@ -864,16 +884,17 @@ export default class Item5e extends Item {
      * @param {object} usage.actorUpdates       Updates that will be applied to the actor.
      * @param {object} usage.itemUpdates        Updates that will be applied to the item being used.
      * @param {object[]} usage.resourceUpdates  Updates that will be applied to other items on the actor.
+     * @param {Set<string>} usage.deleteIds     Item ids for those which consumption will delete.
      * @returns {boolean}                       Explicitly return `false` to prevent item from being used.
      */
     if ( Hooks.call("dnd5e.itemUsageConsumption", item, config, options, usage) === false ) return;
 
     // Commit pending data updates
-    const { actorUpdates, itemUpdates, resourceUpdates } = usage;
+    const { actorUpdates, itemUpdates, resourceUpdates, deleteIds } = usage;
     if ( !foundry.utils.isEmpty(itemUpdates) ) await item.update(itemUpdates);
-    if ( config.consumeQuantity && (item.system.quantity === 0) ) await item.delete();
+    if ( !foundry.utils.isEmpty(deleteIds) ) await this.actor.deleteEmbeddedDocuments("Item", [...deleteIds]);
     if ( !foundry.utils.isEmpty(actorUpdates) ) await this.actor.update(actorUpdates);
-    if ( resourceUpdates.length ) await this.actor.updateEmbeddedDocuments("Item", resourceUpdates);
+    if ( !foundry.utils.isEmpty(resourceUpdates) ) await this.actor.updateEmbeddedDocuments("Item", resourceUpdates);
 
     // Prepare card data & display it if options.createMessage is true
     const cardData = await item.displayCard(options);
@@ -883,7 +904,13 @@ export default class Item5e extends Item {
     if ( config.createMeasuredTemplate ) {
       try {
         templates = await (dnd5e.canvas.AbilityTemplate.fromItem(item))?.drawPreview();
-      } catch(err) {}
+      } catch(err) {
+        Hooks.onError("Item5e#use", err, {
+          msg: game.i18n.localize("DND5E.PlaceTemplateError"),
+          log: "error",
+          notify: "error"
+        });
+      }
     }
 
     /**
@@ -900,6 +927,37 @@ export default class Item5e extends Item {
     return cardData;
   }
 
+  /**
+   * Prepare an object of possible and default values for item usage. A value that is `null` is ignored entirely.
+   * @returns {ItemUseConfiguration}  Configuration data for the roll.
+   */
+  _getUsageConfig() {
+    const { consume, activation, uses, target, level, preparation } = this.system;
+    const active = !!activation?.type;
+
+    const config = {
+      consumeSpellSlot: null,
+      slotLevel: null,
+      consumeUsage: null,
+      consumeResource: null,
+      createMeasuredTemplate: null
+    };
+
+    if ( this.usageScaling === "slot" ) {
+      config.consumeSpellSlot = true;
+      config.slotLevel = preparation?.mode === "pact" ? "pact" : `spell${level}`;
+    }
+    if ( active && this.hasLimitedUses ) config.consumeUsage = true;
+    if ( active && !!consume?.type && !!consume?.target && (!this.hasAttack || (consume.type !== "ammo")) ) {
+      config.consumeResource = true;
+      // Do not suggest consuming your own uses if also consuming them through resources.
+      if ( consume.target === this.id ) config.consumeUsage = null;
+    }
+    if ( active && game.user.can("TEMPLATE_CREATE") && this.hasAreaTarget ) config.createMeasuredTemplate = true;
+
+    return config;
+  }
+
   /* -------------------------------------------- */
 
   /**
@@ -909,73 +967,88 @@ export default class Item5e extends Item {
    * @returns {object|boolean}             A set of data changes to apply when the item is used, or false.
    * @protected
    */
-  _getUsageUpdates({
-    consumeQuantity, consumeRecharge, consumeResource, consumeSpellSlot,
-    consumeSpellLevel, consumeUsage}) {
+  _getUsageUpdates(config) {
     const actorUpdates = {};
     const itemUpdates = {};
     const resourceUpdates = [];
+    const deleteIds = new Set();
 
-    // Consume Recharge
-    if ( consumeRecharge ) {
-      const recharge = this.system.recharge || {};
-      if ( recharge.charged === false ) {
-        ui.notifications.warn(game.i18n.format("DND5E.ItemNoUses", {name: this.name}));
-        return false;
-      }
-      itemUpdates["system.recharge.charged"] = false;
+    // Consume own limited uses or recharge
+    if ( config.consumeUsage ) {
+      const canConsume = this._handleConsumeUses(itemUpdates, actorUpdates,  resourceUpdates, deleteIds);
+      if ( canConsume === false ) return false;
     }
 
     // Consume Limited Resource
-    if ( consumeResource ) {
-      const canConsume = this._handleConsumeResource(itemUpdates, actorUpdates, resourceUpdates);
+    if ( config.consumeResource ) {
+      const canConsume = this._handleConsumeResource(itemUpdates, actorUpdates, resourceUpdates, deleteIds);
       if ( canConsume === false ) return false;
     }
 
     // Consume Spell Slots
-    if ( consumeSpellSlot && consumeSpellLevel ) {
-      if ( Number.isNumeric(consumeSpellLevel) ) consumeSpellLevel = `spell${consumeSpellLevel}`;
-      const level = this.actor?.system.spells[consumeSpellLevel];
+    if ( config.consumeSpellSlot ) {
+      const level = this.actor?.system.spells[config.slotLevel];
       const spells = Number(level?.value ?? 0);
       if ( spells === 0 ) {
-        const labelKey = consumeSpellLevel === "pact" ? "DND5E.SpellProgPact" : `DND5E.SpellLevel${this.system.level}`;
+        const labelKey = config.slotLevel === "pact" ? "DND5E.SpellProgPact" : `DND5E.SpellLevel${this.system.level}`;
         const label = game.i18n.localize(labelKey);
         ui.notifications.warn(game.i18n.format("DND5E.SpellCastNoSlots", {name: this.name, level: label}));
         return false;
       }
-      actorUpdates[`system.spells.${consumeSpellLevel}.value`] = Math.max(spells - 1, 0);
-    }
-
-    // Consume Limited Usage
-    if ( consumeUsage ) {
-      const uses = this.system.uses || {};
-      const available = Number(uses.value ?? 0);
-      let used = false;
-      const remaining = Math.max(available - 1, 0);
-      if ( available >= 1 ) {
-        used = true;
-        itemUpdates["system.uses.value"] = remaining;
-      }
-
-      // Reduce quantity if not reducing usages or if usages hit zero, and we are set to consumeQuantity
-      if ( consumeQuantity && (!used || (remaining === 0)) ) {
-        const q = Number(this.system.quantity ?? 1);
-        if ( q >= 1 ) {
-          used = true;
-          itemUpdates["system.quantity"] = Math.max(q - 1, 0);
-          itemUpdates["system.uses.value"] = uses.max ?? 1;
-        }
-      }
-
-      // If the item was not used, return a warning
-      if ( !used ) {
-        ui.notifications.warn(game.i18n.format("DND5E.ItemNoUses", {name: this.name}));
-        return false;
-      }
+      actorUpdates[`system.spells.${config.slotLevel}.value`] = Math.max(spells - 1, 0);
     }
 
     // Return the configured usage
-    return {itemUpdates, actorUpdates, resourceUpdates};
+    return {itemUpdates, actorUpdates, resourceUpdates, deleteIds};
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle update actions required when consuming an item's uses or recharge
+   * @param {object} itemUpdates        An object of data updates applied to this item
+   * @param {object} actorUpdates       An object of data updates applied to the item owner (Actor)
+   * @param {object[]} resourceUpdates  An array of updates to apply to other items owned by the actor
+   * @param {Set<string>} deleteIds     A set of item ids that will be deleted off the actor.
+   * @returns {boolean|void}            Return false to block further progress, or return nothing to continue
+   * @protected
+   */
+  _handleConsumeUses(itemUpdates, actorUpdates, resourceUpdates, deleteIds) {
+    const recharge = this.system.recharge || {};
+    const uses = this.system.uses || {};
+    const quantity = this.system.quantity ?? 1;
+    let used = false;
+
+    // Consume recharge.
+    if ( recharge.value ) {
+      if ( recharge.charged ) {
+        itemUpdates["system.recharge.charged"] = false;
+        used = true;
+      }
+    }
+
+    // Consume uses (or quantity).
+    else if ( uses.max && uses.per && (uses.value > 0) ) {
+      const remaining = Math.max(uses.value - 1, 0);
+
+      if ( remaining > 0 || (!remaining && !uses.autoDestroy) ) {
+        used = true;
+        itemUpdates["system.uses.value"] = remaining;
+      } else if ( quantity >= 2 ) {
+        used = true;
+        itemUpdates["system.quantity"] = quantity - 1;
+        itemUpdates["system.uses.value"] = uses.max;
+      } else if ( quantity === 1 ) {
+        used = true;
+        deleteIds.add(this.id);
+      }
+    }
+
+    // If the item was not used, return a warning
+    if ( !used ) {
+      ui.notifications.warn(game.i18n.format("DND5E.ItemNoUses", {name: this.name}));
+      return false;
+    }
   }
 
   /* -------------------------------------------- */
@@ -985,10 +1058,11 @@ export default class Item5e extends Item {
    * @param {object} itemUpdates        An object of data updates applied to this item
    * @param {object} actorUpdates       An object of data updates applied to the item owner (Actor)
    * @param {object[]} resourceUpdates  An array of updates to apply to other items owned by the actor
+   * @param {Set<string>} deleteIds     A set of item ids that will be deleted off the actor.
    * @returns {boolean|void}            Return false to block further progress, or return nothing to continue
    * @protected
    */
-  _handleConsumeResource(itemUpdates, actorUpdates, resourceUpdates) {
+  _handleConsumeResource(itemUpdates, actorUpdates, resourceUpdates, deleteIds) {
     const consume = this.system.consume || {};
     if ( !consume.type ) return;
 
@@ -1073,6 +1147,16 @@ export default class Item5e extends Item {
         const uses = resource.system.uses || {};
         const recharge = resource.system.recharge || {};
         const update = {_id: consume.target};
+        // Reduce quantity of, or delete, the external resource.
+        if ( uses.per && uses.max && uses.autoDestroy && (remaining === 0) ) {
+          update["system.quantity"] = Math.max(resource.system.quantity - 1, 0);
+          update["system.uses.value"] = uses.max ?? 1;
+          if ( update["system.quantity"] === 0 ) deleteIds.add(resource.id);
+          else resourceUpdates.push(update);
+          break;
+        }
+
+        // Regular consumption.
         if ( uses.per && uses.max ) update["system.uses.value"] = remaining;
         else if ( recharge.value ) update["system.recharge.charged"] = false;
         resourceUpdates.push(update);
@@ -1591,6 +1675,7 @@ export default class Item5e extends Item {
     return this.actor?.rollToolCheck(this.system.baseItem, {
       ability: this.system.ability,
       bonus: this.system.bonus,
+      prof: this.system.prof,
       ...options
     });
   }
@@ -1703,7 +1788,13 @@ export default class Item5e extends Item {
       case "placeTemplate":
         try {
           await dnd5e.canvas.AbilityTemplate.fromItem(item)?.drawPreview();
-        } catch(err) {}
+        } catch(err) {
+          Hooks.onError("Item5e._onChatCardAction", err, {
+            msg: game.i18n.localize("DND5E.PlaceTemplateError"),
+            log: "error",
+            notify: "error"
+          });
+        }
         break;
       case "abilityCheck":
         targets = this._getChatCardTargets(card);
@@ -1847,7 +1938,7 @@ export default class Item5e extends Item {
   deleteAdvancement(id, { source=false }={}) {
     if ( !this.system.advancement ) return this;
 
-    const advancementCollection = this.system.advancement.filter(a => a._id !== id);
+    const advancementCollection = this.toObject().system.advancement.filter(a => a._id !== id);
     if ( source ) return this.updateSource({"system.advancement": advancementCollection});
     return this.update({"system.advancement": advancementCollection});
   }
@@ -1911,11 +2002,11 @@ export default class Item5e extends Item {
       case "spell":
         updates = this._onCreateOwnedSpell(data, isNPC);
         break;
-      case "tool":
-        updates = this._onCreateOwnedTool(data, isNPC);
-        break;
       case "weapon":
         updates = this._onCreateOwnedWeapon(data, isNPC);
+        break;
+      case "feat":
+        updates = this._onCreateOwnedFeature(data, isNPC);
         break;
     }
     if ( updates ) return this.updateSource(updates);
@@ -1991,16 +2082,6 @@ export default class Item5e extends Item {
     if ( foundry.utils.getProperty(data, "system.equipped") === undefined ) {
       updates["system.equipped"] = isNPC;  // NPCs automatically equip equipment
     }
-    if ( foundry.utils.getProperty(data, "system.proficient") === undefined ) {
-      if ( isNPC ) {
-        updates["system.proficient"] = true;  // NPCs automatically have equipment proficiency
-      } else {
-        const armorProf = CONFIG.DND5E.armorProficienciesMap[this.system.armor?.type]; // Player characters check proficiency
-        const actorArmorProfs = this.parent.system.traits?.armorProf?.value || new Set();
-        updates["system.proficient"] = (armorProf === true) || actorArmorProfs.has(armorProf)
-          || actorArmorProfs.has(this.system.baseItem);
-      }
-    }
     return updates;
   }
 
@@ -2025,54 +2106,31 @@ export default class Item5e extends Item {
   /* -------------------------------------------- */
 
   /**
-   * Pre-creation logic for the automatic configuration of owned tool type Items.
-   * @param {object} data       Data for the newly created item.
-   * @param {boolean} isNPC     Is this actor an NPC?
-   * @returns {object}          Updates to apply to the item data.
-   * @private
-   */
-  _onCreateOwnedTool(data, isNPC) {
-    const updates = {};
-    if ( data.system?.proficient === undefined ) {
-      if ( isNPC ) updates["system.proficient"] = 1;
-      else {
-        const actorToolProfs = this.parent.system.traits?.toolProf?.value || new Set();
-        const proficient = actorToolProfs.has(this.system.toolType) || actorToolProfs.has(this.system.baseItem);
-        updates["system.proficient"] = Number(proficient);
-      }
-    }
-    return updates;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
    * Pre-creation logic for the automatic configuration of owned weapon type Items.
    * @param {object} data       Data for the newly created item.
    * @param {boolean} isNPC     Is this actor an NPC?
-   * @returns {object}          Updates to apply to the item data.
+   * @returns {object|void}     Updates to apply to the item data.
    * @private
    */
   _onCreateOwnedWeapon(data, isNPC) {
-
-    // NPCs automatically equip items and are proficient with them
-    if ( isNPC ) {
-      const updates = {};
-      if ( !foundry.utils.hasProperty(data, "system.equipped") ) updates["system.equipped"] = true;
-      if ( !foundry.utils.hasProperty(data, "system.proficient") ) updates["system.proficient"] = true;
-      return updates;
-    }
-    if ( data.system?.proficient !== undefined ) return {};
-
-    // Some weapon types are always proficient
-    const weaponProf = CONFIG.DND5E.weaponProficienciesMap[this.system.weaponType];
+    if ( !isNPC ) return;
+    // NPCs automatically equip items.
     const updates = {};
-    if ( weaponProf === true ) updates["system.proficient"] = true;
+    if ( !foundry.utils.hasProperty(data, "system.equipped") ) updates["system.equipped"] = true;
+    return updates;
+  }
 
-    // Characters may have proficiency in this weapon type (or specific base weapon)
-    else {
-      const actorProfs = this.parent.system.traits?.weaponProf?.value || new Set();
-      updates["system.proficient"] = actorProfs.has(weaponProf) || actorProfs.has(this.system.baseItem);
+  /**
+   * Pre-creation logic for the automatic configuration of owned feature type Items.
+   * @param {object} data       Data for the newly created item.
+   * @param {boolean} isNPC     Is this actor an NPC?
+   * @returns {object}          Updates to apply to the item data.
+   * @private
+   */
+  _onCreateOwnedFeature(data, isNPC) {
+    const updates = {};
+    if ( isNPC && !foundry.utils.getProperty(data, "system.type.value") ) {
+      updates["system.type.value"] = "monster"; // Set features on NPCs to be 'monster features'.
     }
     return updates;
   }
@@ -2083,15 +2141,17 @@ export default class Item5e extends Item {
 
   /**
    * Create a consumable spell scroll Item from a spell Item.
-   * @param {Item5e} spell      The spell to be made into a scroll
-   * @returns {Item5e}          The created scroll consumable item
+   * @param {Item5e|object} spell     The spell or item data to be made into a scroll
+   * @param {object} [options]        Additional options that modify the created scroll
+   * @returns {Item5e}                The created scroll consumable item
    */
-  static async createScrollFromSpell(spell) {
+  static async createScrollFromSpell(spell, options={}) {
 
     // Get spell data
     const itemData = (spell instanceof Item5e) ? spell.toObject() : spell;
     let {
-      actionType, description, source, activation, duration, target, range, damage, formula, save, level, attackBonus
+      actionType, description, source, activation, duration, target,
+      range, damage, formula, save, level, attackBonus, ability, components
     } = itemData.system;
 
     // Get scroll data
@@ -2108,11 +2168,18 @@ export default class Item5e extends Item {
     const scrollDetails = scrollDescription.slice(scrollIntroEnd + pdel.length);
 
     // Create a composite description from the scroll description and the spell details
-    const desc = `${scrollIntro}<hr/><h3>${itemData.name} (Level ${level})</h3><hr/>${description.value}<hr/><h3>Scroll Details</h3><hr/>${scrollDetails}`;
+    const desc = `
+      ${scrollIntro}
+      <hr><h3>${itemData.name} (${game.i18n.format("DND5E.LevelNumber", {level})})</h3>
+      ${(components.concentration ? `<p><em>${game.i18n.localize("DND5E.ScrollRequiresConcentration")}</em></p>` : "")}
+      <hr>${description.value}<hr>
+      <h3>${game.i18n.localize("DND5E.ScrollDetails")}</h3><hr>${scrollDetails}
+    `;
 
     // Used a fixed attack modifier and saving throw according to the level of spell scroll.
     if ( ["mwak", "rwak", "msak", "rsak"].includes(actionType) ) {
-      attackBonus = `${scrollData.system.attackBonus} - @mod`;
+      attackBonus = scrollData.system.attackBonus;
+      ability = "none";
     }
     if ( save.ability ) {
       save.scaling = "flat";
@@ -2124,10 +2191,20 @@ export default class Item5e extends Item {
       name: `${game.i18n.localize("DND5E.SpellScroll")}: ${itemData.name}`,
       img: itemData.img,
       system: {
-        description: {value: desc.trim()}, source, actionType, activation, duration, target, range, damage, formula,
-        save, level, attackBonus
+        description: {value: desc.trim()}, source, actionType, activation, duration, target,
+        range, damage, formula, save, level, attackBonus, ability
       }
     });
+    foundry.utils.mergeObject(spellScrollData, options);
+
+    /**
+     * A hook event that fires after the item data for a scroll is created but before the item is returned.
+     * @function dnd5e.createScrollFromSpell
+     * @memberof hookEvents
+     * @param {Item5e|object} spell       The spell or item data to be made into a scroll.
+     * @param {object} spellScrollData    The final item data used to make the scroll.
+     */
+    Hooks.callAll("dnd5e.createScrollFromSpell", spell, spellScrollData);
     return new this(spellScrollData);
   }
 

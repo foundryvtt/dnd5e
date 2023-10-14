@@ -41,6 +41,15 @@ export default class ActorSheet5e extends ActorSheet {
   /* -------------------------------------------- */
 
   /**
+   * Track the most recent drag event.
+   * @type {DragEvent}
+   * @protected
+   */
+  _event = null;
+
+  /* -------------------------------------------- */
+
+  /**
    * IDs for items on the sheet that have been expanded.
    * @type {Set<string>}
    * @protected
@@ -120,7 +129,10 @@ export default class ActorSheet5e extends ActorSheet {
       isVehicle: this.actor.type === "vehicle",
       config: CONFIG.DND5E,
       rollableClass: this.isEditable ? "rollable" : "",
-      rollData: this.actor.getRollData()
+      rollData: this.actor.getRollData(),
+      overrides: {
+        attunement: foundry.utils.hasProperty(this.actor.overrides, "system.attributes.attunement.max")
+      }
     };
 
     // Sort Owned Items
@@ -257,7 +269,7 @@ export default class ActorSheet5e extends ActorSheet {
       if ( v === 0 ) continue;
       tags[k] = `${game.i18n.localize(label)} ${v} ${senses.units}`;
     }
-    if ( senses.special ) tags.special = senses.special;
+    if ( senses.special ) senses.special.split(";").forEach((c, i) => tags[`custom${i+1}`] = c.trim());
     return tags;
   }
 
@@ -473,10 +485,9 @@ export default class ActorSheet5e extends ActorSheet {
     };
 
     // Determine the maximum spell level which has a slot
-    const maxLevel = Array.fromRange(10).reduce((max, i) => {
-      if ( i === 0 ) return max;
+    const maxLevel = Array.fromRange(Object.keys(CONFIG.DND5E.spellLevels).length - 1, 1).reduce((max, i) => {
       const level = levels[`spell${i}`];
-      if ( (level.max || level.override ) && ( i > max ) ) max = i;
+      if ( level && (level.max || level.override ) && ( i > max ) ) max = i;
       return max;
     }, 0);
 
@@ -640,7 +651,9 @@ export default class ActorSheet5e extends ActorSheet {
       html.find(".item-create").click(this._onItemCreate.bind(this));
       html.find(".item-delete").click(this._onItemDelete.bind(this));
       html.find(".item-uses input").click(ev => ev.target.select()).change(this._onUsesChange.bind(this));
+      html.find(".item-quantity input").click(ev => ev.target.select()).change(this._onQuantityChange.bind(this));
       html.find(".slot-max-override").click(this._onSpellSlotOverride.bind(this));
+      html.find(".attunement-max-override").click(this._onAttunementOverride.bind(this));
 
       // Active Effect management
       html.find(".effect-control").click(ev => ActiveEffect5e.onManageActiveEffect(ev, this.actor));
@@ -860,7 +873,9 @@ export default class ActorSheet5e extends ActorSheet {
     const value = input.value;
     if ( ["+", "-"].includes(value[0]) ) {
       const delta = parseFloat(value);
-      input.value = Number(foundry.utils.getProperty(this.actor, input.name)) + delta;
+      const item = this.actor.items.get(input.closest("[data-item-id]")?.dataset.itemId);
+      if ( item ) input.value = Number(foundry.utils.getProperty(item, input.dataset.name)) + delta;
+      else input.value = Number(foundry.utils.getProperty(this.actor, input.name)) + delta;
     } else if ( value[0] === "=" ) input.value = value.slice(1);
   }
 
@@ -1024,6 +1039,14 @@ export default class ActorSheet5e extends ActorSheet {
   /* -------------------------------------------- */
 
   /** @override */
+  async _onDrop(event) {
+    this._event = event;
+    return super._onDrop(event);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
   async _onDropItemCreate(itemData) {
     let items = itemData instanceof Array ? itemData : [itemData];
     const itemsWithoutAdvancement = items.filter(i => !i.system.advancement?.length);
@@ -1053,7 +1076,6 @@ export default class ActorSheet5e extends ActorSheet {
    * @protected
    */
   async _onDropSingleItem(itemData) {
-
     // Check to make sure items of this type are allowed on this actor
     if ( this.constructor.unsupportedItemTypes.has(itemData.type) ) {
       ui.notifications.warn(game.i18n.format("DND5E.ActorWarningInvalidItem", {
@@ -1085,6 +1107,10 @@ export default class ActorSheet5e extends ActorSheet {
         return false;
       }
     }
+
+    // Adjust the preparation mode of a leveled spell depending on the section on which it is dropped.
+    if ( itemData.type === "spell" ) this._onDropSpell(itemData);
+
     return itemData;
   }
 
@@ -1125,9 +1151,60 @@ export default class ActorSheet5e extends ActorSheet {
   /* -------------------------------------------- */
 
   /**
+   * Adjust the preparation mode of a dropped spell depending on the drop location on the sheet.
+   * @param {object} itemData    The item data requested for creation. **Will be mutated.**
+   */
+  _onDropSpell(itemData) {
+    if ( !["npc", "character"].includes(this.document.type) ) return;
+
+    // Determine the section it is dropped on, if any.
+    let header = this._event.target.closest(".items-header"); // Dropped directly on the header.
+    if ( !header ) {
+      const list = this._event.target.closest(".item-list"); // Dropped inside an existing list.
+      header = list?.previousElementSibling;
+    }
+    const mode = header?.dataset ?? {};
+
+    // Determine the actor's spell slot progressions, if any.
+    const progs = Object.values(this.document.classes).reduce((acc, cls) => {
+      if ( cls.spellcasting?.type === "pact" ) acc.pact = true;
+      else if ( cls.spellcasting?.type === "leveled" ) acc.leveled = true;
+      return acc;
+    }, {pact: false, leveled: false});
+
+    // Case 1: Drop a cantrip.
+    if ( itemData.system.level === 0 ) {
+      if ( ["pact", "prepared"].includes(mode["preparation.mode"]) ) {
+        itemData.system.preparation.mode = "prepared";
+      } else if ( !mode["preparation.mode"] ) {
+        const isCaster = this.document.system.details.spellLevel || progs.pact || progs.leveled;
+        itemData.system.preparation.mode = isCaster ? "prepared" : "innate";
+      } else {
+        itemData.system.preparation.mode = mode["preparation.mode"];
+      }
+    }
+
+    // Case 2: Drop a leveled spell in a section without a mode.
+    else if ( (mode.level === 0) || !mode["preparation.mode"] ) {
+      if ( this.document.type === "npc" ) {
+        itemData.system.preparation.mode = this.document.system.details.spellLevel ? "prepared" : "innate";
+      } else {
+        itemData.system.preparation.mode = progs.leveled ? "prepared" : progs.pact ? "pact" : "innate";
+      }
+    }
+
+    // Case 3: Drop a leveled spell in a specific section.
+    else {
+      itemData.system.preparation.mode = mode["preparation.mode"];
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Handle enabling editing for a spell slot override value.
    * @param {MouseEvent} event    The originating click event.
-   * @private
+   * @protected
    */
   async _onSpellSlotOverride(event) {
     const span = event.currentTarget.parentElement;
@@ -1139,6 +1216,30 @@ export default class ActorSheet5e extends ActorSheet {
     input.value = override;
     input.placeholder = span.dataset.slots;
     input.dataset.dtype = "Number";
+    input.addEventListener("focus", event => event.currentTarget.select());
+
+    // Replace the HTML
+    const parent = span.parentElement;
+    parent.removeChild(span);
+    parent.appendChild(input);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle enabling editing for attunement maximum.
+   * @param {MouseEvent} event    The originating click event.
+   * @private
+   */
+  async _onAttunementOverride(event) {
+    const span = event.currentTarget.parentElement;
+    const input = document.createElement("INPUT");
+    input.type = "text";
+    input.name = "system.attributes.attunement.max";
+    input.value = this.actor.system.attributes.attunement.max;
+    input.placeholder = 3;
+    input.dataset.dtype = "Number";
+    input.addEventListener("focus", event => event.currentTarget.select());
 
     // Replace the HTML
     const parent = span.parentElement;
@@ -1152,7 +1253,7 @@ export default class ActorSheet5e extends ActorSheet {
    * Change the uses amount of an Owned Item within the Actor.
    * @param {Event} event        The triggering click event.
    * @returns {Promise<Item5e>}  Updated item.
-   * @private
+   * @protected
    */
   async _onUsesChange(event) {
     event.preventDefault();
@@ -1161,6 +1262,23 @@ export default class ActorSheet5e extends ActorSheet {
     const uses = Math.clamped(0, parseInt(event.target.value), item.system.uses.max);
     event.target.value = uses;
     return item.update({"system.uses.value": uses});
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Change the quantity of an Owned Item within the actor.
+   * @param {Event} event        The triggering click event.
+   * @returns {Promise<Item5e>}  Updated item.
+   * @protected
+   */
+  async _onQuantityChange(event) {
+    event.preventDefault();
+    const itemId = event.currentTarget.closest(".item").dataset.itemId;
+    const item = this.actor.items.get(itemId);
+    const quantity = Math.max(0, parseInt(event.target.value));
+    event.target.value = quantity;
+    return item.update({"system.quantity": quantity});
   }
 
   /* -------------------------------------------- */
@@ -1230,8 +1348,8 @@ export default class ActorSheet5e extends ActorSheet {
    */
   _onItemCreate(event) {
     event.preventDefault();
-    const header = event.currentTarget;
-    const type = header.dataset.type;
+    const dataset = (event.currentTarget.closest(".spellbook-header") ?? event.currentTarget).dataset;
+    const type = dataset.type;
 
     // Check to make sure the newly created class doesn't take player over level cap
     if ( type === "class" && (this.actor.system.details.level + 1 > CONFIG.DND5E.maxLevel) ) {
@@ -1242,7 +1360,7 @@ export default class ActorSheet5e extends ActorSheet {
     const itemData = {
       name: game.i18n.format("DND5E.ItemNew", {type: game.i18n.localize(CONFIG.Item.typeLabels[type])}),
       type: type,
-      system: foundry.utils.expandObject({ ...header.dataset })
+      system: foundry.utils.expandObject({ ...dataset })
     };
     delete itemData.system.type;
     return this.actor.createEmbeddedDocuments("Item", [itemData]);

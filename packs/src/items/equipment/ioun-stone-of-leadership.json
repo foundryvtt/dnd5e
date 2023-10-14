@@ -30,6 +30,7 @@
       "units": ""
     },
     "cover": null,
+    "crewed": false,
     "target": {
       "value": null,
       "width": null,
@@ -95,7 +96,36 @@
     "stealth": false,
     "proficient": false
   },
-  "effects": [],
+  "effects": [
+    {
+      "label": "Ioun Stone of Leadership",
+      "icon": "icons/commodities/stone/ore-pile-purple.webp",
+      "origin": "Compendium.dnd5e.items.hDF4RSCzMO8iI14x",
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "disabled": false,
+      "_id": "3hbyQMgvW8GyQotV",
+      "changes": [
+        {
+          "key": "system.abilities.cha.value",
+          "mode": 2,
+          "value": "+2"
+        }
+      ],
+      "tint": null,
+      "transfer": true,
+      "flags": {},
+      "sort": 0,
+      "_key": "!items.effects!hDF4RSCzMO8iI14x.3hbyQMgvW8GyQotV"
+    }
+  ],
   "folder": null,
   "sort": 0,
   "ownership": {
@@ -104,10 +134,11 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.1.0",
-    "coreVersion": "10.291",
+    "systemVersion": "2.2.2",
+    "coreVersion": "10.303",
     "createdTime": 1661787233810,
-    "modifiedTime": 1671220962976,
+    "modifiedTime": 1690480879261,
     "lastModifiedBy": "dnd5ebuilder0000"
-  }
+  },
+  "_key": "!items!hDF4RSCzMO8iI14x"
 }

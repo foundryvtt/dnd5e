@@ -2,7 +2,7 @@
   "_id": "XmnlF5fgIO3tg6TG",
   "name": "Scale Mail",
   "type": "equipment",
-  "img": "icons/equipment/chest/breastplate-metal-scaled-grey.webp",
+  "img": "icons/equipment/chest/breastplate-banded-steel.webp",
   "system": {
     "description": {
       "value": "<p>This armor consists of a coat and leggings (and perhaps a separate skirt) of leather covered with overlapping pieces of metal, much like the scales of a fish. The suit includes gauntlets.</p>",
@@ -18,7 +18,7 @@
     },
     "attunement": 0,
     "equipped": false,
-    "rarity": "common",
+    "rarity": "",
     "identified": true,
     "activation": {
       "type": "",
@@ -30,6 +30,7 @@
       "units": ""
     },
     "cover": null,
+    "crewed": false,
     "target": {
       "value": null,
       "width": null,
@@ -99,10 +100,11 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.1.0",
+    "systemVersion": "2.2.2",
     "coreVersion": "10.291",
     "createdTime": 1661787233703,
-    "modifiedTime": 1671220961597,
+    "modifiedTime": 1690538860575,
     "lastModifiedBy": "dnd5ebuilder0000"
-  }
+  },
+  "_key": "!items!XmnlF5fgIO3tg6TG"
 }

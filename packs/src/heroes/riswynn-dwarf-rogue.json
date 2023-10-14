@@ -7,6 +7,7 @@
       "str": {
         "value": 10,
         "proficient": 0,
+        "max": null,
         "bonuses": {
           "check": "",
           "save": ""
@@ -15,6 +16,7 @@
       "dex": {
         "value": 15,
         "proficient": 1,
+        "max": null,
         "bonuses": {
           "check": "",
           "save": ""
@@ -23,6 +25,7 @@
       "con": {
         "value": 16,
         "proficient": 0,
+        "max": null,
         "bonuses": {
           "check": "",
           "save": ""
@@ -31,6 +34,7 @@
       "int": {
         "value": 12,
         "proficient": 1,
+        "max": null,
         "bonuses": {
           "check": "",
           "save": ""
@@ -39,6 +43,7 @@
       "wis": {
         "value": 14,
         "proficient": 0,
+        "max": null,
         "bonuses": {
           "check": "",
           "save": ""
@@ -47,6 +52,7 @@
       "cha": {
         "value": 8,
         "proficient": 0,
+        "max": null,
         "bonuses": {
           "check": "",
           "save": ""
@@ -61,14 +67,14 @@
       },
       "hp": {
         "value": 11,
-        "min": 0,
         "max": null,
         "temp": null,
         "tempmax": null,
         "bonuses": {
           "level": "",
           "overall": ""
-        }
+        },
+        "min": 0
       },
       "init": {
         "ability": "",
@@ -110,7 +116,7 @@
       "alignment": "True neutral",
       "race": "Hill Dwarf",
       "background": "",
-      "originalClass": "h6m126ftvfila0o3",
+      "originalClass": "POlGoMp1xwT02K3S",
       "xp": {
         "value": 0
       },
@@ -331,6 +337,7 @@
         }
       }
     },
+    "tools": {},
     "spells": {
       "spell1": {
         "value": 0,
@@ -511,7 +518,7 @@
         },
         "attunement": 0,
         "equipped": false,
-        "rarity": "common",
+        "rarity": "",
         "identified": true,
         "activation": {
           "type": "none",
@@ -523,6 +530,7 @@
           "units": ""
         },
         "cover": null,
+        "crewed": false,
         "target": {
           "value": null,
           "width": null,
@@ -602,7 +610,8 @@
         "createdTime": null,
         "modifiedTime": null,
         "lastModifiedBy": null
-      }
+      },
+      "_key": "!actors.items!bzlxBO5km3zCQA8G.zyNiKfTqZLSjX1Kc"
     },
     {
       "_id": "6xgRF9EHlkdx74gp",
@@ -635,6 +644,7 @@
           "units": ""
         },
         "cover": null,
+        "crewed": false,
         "target": {
           "value": null,
           "width": null,
@@ -731,7 +741,8 @@
         "createdTime": null,
         "modifiedTime": null,
         "lastModifiedBy": null
-      }
+      },
+      "_key": "!actors.items!bzlxBO5km3zCQA8G.6xgRF9EHlkdx74gp"
     },
     {
       "_id": "13NzavzIfxLtAbjF",
@@ -752,7 +763,7 @@
         },
         "attunement": 0,
         "equipped": true,
-        "rarity": "common",
+        "rarity": "",
         "identified": true,
         "activation": {
           "type": "action",
@@ -764,6 +775,7 @@
           "units": ""
         },
         "cover": null,
+        "crewed": false,
         "target": {
           "value": null,
           "width": null,
@@ -827,7 +839,8 @@
         "createdTime": null,
         "modifiedTime": 1670011647567,
         "lastModifiedBy": "dnd5ebuilder0000"
-      }
+      },
+      "_key": "!actors.items!bzlxBO5km3zCQA8G.13NzavzIfxLtAbjF"
     },
     {
       "_id": "tJDTxUqcvlxbZCdo",
@@ -848,7 +861,7 @@
         },
         "attunement": 0,
         "equipped": true,
-        "rarity": "common",
+        "rarity": "",
         "identified": true,
         "activation": {
           "type": "action",
@@ -860,6 +873,7 @@
           "units": ""
         },
         "cover": null,
+        "crewed": false,
         "target": {
           "value": null,
           "width": null,
@@ -953,7 +967,8 @@
         "createdTime": null,
         "modifiedTime": null,
         "lastModifiedBy": null
-      }
+      },
+      "_key": "!actors.items!bzlxBO5km3zCQA8G.tJDTxUqcvlxbZCdo"
     },
     {
       "_id": "NkdFTTiYWTcQykxt",
@@ -974,7 +989,7 @@
         },
         "attunement": 0,
         "equipped": false,
-        "rarity": "common",
+        "rarity": "",
         "identified": true,
         "activation": {
           "type": "action",
@@ -986,6 +1001,7 @@
           "units": ""
         },
         "cover": null,
+        "crewed": false,
         "target": {
           "value": null,
           "width": null,
@@ -1079,7 +1095,8 @@
         "createdTime": null,
         "modifiedTime": null,
         "lastModifiedBy": null
-      }
+      },
+      "_key": "!actors.items!bzlxBO5km3zCQA8G.NkdFTTiYWTcQykxt"
     },
     {
       "_id": "0K1HkL7YtDkM04gh",
@@ -1100,7 +1117,7 @@
         },
         "attunement": 0,
         "equipped": true,
-        "rarity": "common",
+        "rarity": "",
         "identified": true,
         "activation": {
           "type": "",
@@ -1112,6 +1129,7 @@
           "units": ""
         },
         "cover": null,
+        "crewed": false,
         "target": {
           "value": null,
           "width": null,
@@ -1191,7 +1209,8 @@
         "createdTime": null,
         "modifiedTime": null,
         "lastModifiedBy": null
-      }
+      },
+      "_key": "!actors.items!bzlxBO5km3zCQA8G.0K1HkL7YtDkM04gh"
     },
     {
       "_id": "qg7r4WqCCRRBoI7k",
@@ -1212,7 +1231,7 @@
         },
         "attunement": 0,
         "equipped": false,
-        "rarity": "common",
+        "rarity": "",
         "identified": true,
         "toolType": "",
         "baseItem": "",
@@ -1240,7 +1259,8 @@
         "createdTime": null,
         "modifiedTime": null,
         "lastModifiedBy": null
-      }
+      },
+      "_key": "!actors.items!bzlxBO5km3zCQA8G.qg7r4WqCCRRBoI7k"
     },
     {
       "_id": "EKdk3lhxqgPtqHwu",
@@ -1261,7 +1281,7 @@
         },
         "attunement": 0,
         "equipped": false,
-        "rarity": "common",
+        "rarity": "",
         "identified": true,
         "capacity": {
           "type": "weight",
@@ -1295,7 +1315,8 @@
         "createdTime": null,
         "modifiedTime": null,
         "lastModifiedBy": null
-      }
+      },
+      "_key": "!actors.items!bzlxBO5km3zCQA8G.EKdk3lhxqgPtqHwu"
     },
     {
       "_id": "Mf7KLdBXylgqsICW",
@@ -1316,7 +1337,7 @@
         },
         "attunement": 0,
         "equipped": false,
-        "rarity": "common",
+        "rarity": "",
         "identified": true,
         "capacity": {
           "type": "weight",
@@ -1350,7 +1371,8 @@
         "createdTime": null,
         "modifiedTime": 1670011640763,
         "lastModifiedBy": "dnd5ebuilder0000"
-      }
+      },
+      "_key": "!actors.items!bzlxBO5km3zCQA8G.Mf7KLdBXylgqsICW"
     },
     {
       "_id": "PHLBlkV7IoS51P5v",
@@ -1371,7 +1393,7 @@
         },
         "attunement": 0,
         "equipped": true,
-        "rarity": "common",
+        "rarity": "",
         "identified": true,
         "capacity": {
           "type": "items",
@@ -1405,7 +1427,8 @@
         "createdTime": null,
         "modifiedTime": null,
         "lastModifiedBy": null
-      }
+      },
+      "_key": "!actors.items!bzlxBO5km3zCQA8G.PHLBlkV7IoS51P5v"
     },
     {
       "_id": "CHrFwjEiZTbIgkvr",
@@ -1426,7 +1449,7 @@
         },
         "attunement": 0,
         "equipped": false,
-        "rarity": "common",
+        "rarity": "",
         "identified": true
       },
       "sort": 0,
@@ -1448,7 +1471,8 @@
         "createdTime": null,
         "modifiedTime": null,
         "lastModifiedBy": null
-      }
+      },
+      "_key": "!actors.items!bzlxBO5km3zCQA8G.CHrFwjEiZTbIgkvr"
     },
     {
       "_id": "h4ihDUI7MQVznkxm",
@@ -1469,7 +1493,7 @@
         },
         "attunement": 0,
         "equipped": false,
-        "rarity": "common",
+        "rarity": "",
         "identified": true,
         "activation": {
           "type": "action",
@@ -1481,6 +1505,7 @@
           "units": ""
         },
         "cover": null,
+        "crewed": false,
         "target": {
           "value": null,
           "width": null,
@@ -1543,7 +1568,8 @@
         "createdTime": null,
         "modifiedTime": null,
         "lastModifiedBy": null
-      }
+      },
+      "_key": "!actors.items!bzlxBO5km3zCQA8G.h4ihDUI7MQVznkxm"
     },
     {
       "_id": "rpmyWiGevjk354b5",
@@ -1564,7 +1590,7 @@
         },
         "attunement": 0,
         "equipped": false,
-        "rarity": "common",
+        "rarity": "",
         "identified": true,
         "activation": {
           "type": "action",
@@ -1576,6 +1602,7 @@
           "units": ""
         },
         "cover": null,
+        "crewed": false,
         "target": {
           "value": null,
           "width": null,
@@ -1638,7 +1665,8 @@
         "createdTime": null,
         "modifiedTime": 1670011647573,
         "lastModifiedBy": "dnd5ebuilder0000"
-      }
+      },
+      "_key": "!actors.items!bzlxBO5km3zCQA8G.rpmyWiGevjk354b5"
     },
     {
       "_id": "kHtYigIcUQ4IL9PR",
@@ -1659,7 +1687,7 @@
         },
         "attunement": 0,
         "equipped": false,
-        "rarity": "common",
+        "rarity": "",
         "identified": true,
         "activation": {
           "type": "action",
@@ -1671,6 +1699,7 @@
           "units": ""
         },
         "cover": null,
+        "crewed": false,
         "target": {
           "value": 1,
           "width": null,
@@ -1733,7 +1762,8 @@
         "createdTime": null,
         "modifiedTime": 1670011640777,
         "lastModifiedBy": "dnd5ebuilder0000"
-      }
+      },
+      "_key": "!actors.items!bzlxBO5km3zCQA8G.kHtYigIcUQ4IL9PR"
     },
     {
       "_id": "SbWMxygkEp4AlSMl",
@@ -1754,7 +1784,7 @@
         },
         "attunement": 0,
         "equipped": false,
-        "rarity": "common",
+        "rarity": "",
         "identified": true
       },
       "sort": 0,
@@ -1776,7 +1806,8 @@
         "createdTime": null,
         "modifiedTime": 1670011640783,
         "lastModifiedBy": "dnd5ebuilder0000"
-      }
+      },
+      "_key": "!actors.items!bzlxBO5km3zCQA8G.SbWMxygkEp4AlSMl"
     },
     {
       "_id": "8XJJXl8CvQDsNqQo",
@@ -1797,7 +1828,7 @@
         },
         "attunement": 0,
         "equipped": false,
-        "rarity": "common",
+        "rarity": "",
         "identified": true,
         "activation": {
           "type": "action",
@@ -1809,6 +1840,7 @@
           "units": "hour"
         },
         "cover": null,
+        "crewed": false,
         "target": {
           "value": 40,
           "width": null,
@@ -1876,7 +1908,8 @@
         "createdTime": null,
         "modifiedTime": 1670011647579,
         "lastModifiedBy": "dnd5ebuilder0000"
-      }
+      },
+      "_key": "!actors.items!bzlxBO5km3zCQA8G.8XJJXl8CvQDsNqQo"
     },
     {
       "_id": "sKonGCDJxc4cwpuS",
@@ -1897,7 +1930,7 @@
         },
         "attunement": 0,
         "equipped": false,
-        "rarity": "common",
+        "rarity": "",
         "identified": true,
         "activation": {
           "type": "action",
@@ -1909,6 +1942,7 @@
           "units": ""
         },
         "cover": null,
+        "crewed": false,
         "target": {
           "value": null,
           "width": null,
@@ -1971,7 +2005,8 @@
         "createdTime": null,
         "modifiedTime": 1670011640803,
         "lastModifiedBy": "dnd5ebuilder0000"
-      }
+      },
+      "_key": "!actors.items!bzlxBO5km3zCQA8G.sKonGCDJxc4cwpuS"
     },
     {
       "_id": "w1ICCmvrQzvkNA5T",
@@ -1992,7 +2027,7 @@
         },
         "attunement": 0,
         "equipped": false,
-        "rarity": "common",
+        "rarity": "",
         "identified": true
       },
       "sort": 0,
@@ -2014,7 +2049,8 @@
         "createdTime": null,
         "modifiedTime": 1670011640809,
         "lastModifiedBy": "dnd5ebuilder0000"
-      }
+      },
+      "_key": "!actors.items!bzlxBO5km3zCQA8G.w1ICCmvrQzvkNA5T"
     },
     {
       "_id": "OPIqh46EdTrNRiZp",
@@ -2035,7 +2071,7 @@
         },
         "attunement": 0,
         "equipped": false,
-        "rarity": "common",
+        "rarity": "",
         "identified": true
       },
       "sort": 0,
@@ -2057,7 +2093,8 @@
         "createdTime": null,
         "modifiedTime": null,
         "lastModifiedBy": null
-      }
+      },
+      "_key": "!actors.items!bzlxBO5km3zCQA8G.OPIqh46EdTrNRiZp"
     },
     {
       "_id": "kRWtiPib9MRx9JmN",
@@ -2078,7 +2115,7 @@
         },
         "attunement": 0,
         "equipped": false,
-        "rarity": "common",
+        "rarity": "",
         "identified": true,
         "activation": {
           "type": "action",
@@ -2090,6 +2127,7 @@
           "units": ""
         },
         "cover": null,
+        "crewed": false,
         "target": {
           "value": null,
           "width": null,
@@ -2179,7 +2217,8 @@
         "createdTime": null,
         "modifiedTime": null,
         "lastModifiedBy": null
-      }
+      },
+      "_key": "!actors.items!bzlxBO5km3zCQA8G.kRWtiPib9MRx9JmN"
     },
     {
       "_id": "OpfHMuWyqcO7LmSt",
@@ -2200,7 +2239,7 @@
         },
         "attunement": 0,
         "equipped": false,
-        "rarity": "common",
+        "rarity": "",
         "identified": true
       },
       "sort": 0,
@@ -2222,7 +2261,8 @@
         "createdTime": null,
         "modifiedTime": null,
         "lastModifiedBy": null
-      }
+      },
+      "_key": "!actors.items!bzlxBO5km3zCQA8G.OpfHMuWyqcO7LmSt"
     },
     {
       "_id": "VlHHit2a50YCKKTm",
@@ -2245,6 +2285,7 @@
           "units": ""
         },
         "cover": null,
+        "crewed": false,
         "target": {
           "value": null,
           "width": null,
@@ -2314,7 +2355,8 @@
         "createdTime": null,
         "modifiedTime": null,
         "lastModifiedBy": null
-      }
+      },
+      "_key": "!actors.items!bzlxBO5km3zCQA8G.VlHHit2a50YCKKTm"
     },
     {
       "_id": "0Db7KX5wxDYwiem3",
@@ -2337,6 +2379,7 @@
           "units": ""
         },
         "cover": null,
+        "crewed": false,
         "target": {
           "value": null,
           "width": null,
@@ -2406,7 +2449,8 @@
         "createdTime": null,
         "modifiedTime": null,
         "lastModifiedBy": null
-      }
+      },
+      "_key": "!actors.items!bzlxBO5km3zCQA8G.0Db7KX5wxDYwiem3"
     },
     {
       "_id": "loauVqu6iAKv70b7",
@@ -2429,6 +2473,7 @@
           "units": ""
         },
         "cover": null,
+        "crewed": false,
         "target": {
           "value": null,
           "width": null,
@@ -2498,7 +2543,8 @@
         "createdTime": null,
         "modifiedTime": null,
         "lastModifiedBy": null
-      }
+      },
+      "_key": "!actors.items!bzlxBO5km3zCQA8G.loauVqu6iAKv70b7"
     },
     {
       "_id": "HXOtd9EqzXbB3e2c",
@@ -2521,6 +2567,7 @@
           "units": ""
         },
         "cover": null,
+        "crewed": false,
         "target": {
           "value": null,
           "width": null,
@@ -2590,10 +2637,42 @@
         "createdTime": null,
         "modifiedTime": null,
         "lastModifiedBy": null
-      }
+      },
+      "_key": "!actors.items!bzlxBO5km3zCQA8G.HXOtd9EqzXbB3e2c"
     },
     {
-      "_id": "h6m126ftvfila0o3",
+      "name": "Bureaucrat",
+      "type": "background",
+      "system": {
+        "description": {
+          "value": "<ul><li><strong>Skill Proficiencies:</strong> Insight, Persuasion</li><li><strong>Languages:</strong> Two of your choice</li><li><strong>Equipment:</strong> A set of fine clothes and a pouch containing 5 gp</li></ul>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "",
+        "advancement": []
+      },
+      "img": "icons/skills/social/theft-pickpocket-bribery-brown.webp",
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.1.0",
+        "coreVersion": "10.291",
+        "createdTime": 1673040183979,
+        "modifiedTime": 1673040521187,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_id": "kLWeji1tfubIJvfT",
+      "_key": "!actors.items!bzlxBO5km3zCQA8G.kLWeji1tfubIJvfT"
+    },
+    {
+      "_id": "POlGoMp1xwT02K3S",
       "name": "Rogue",
       "type": "class",
       "img": "icons/skills/melee/strike-sword-stabbed-brown.webp",
@@ -2610,7 +2689,16 @@
         "hitDiceUsed": 0,
         "advancement": [
           {
-            "_id": "fib976ht1gf1ntxv",
+            "type": "HitPoints",
+            "configuration": {},
+            "value": {
+              "1": "max"
+            },
+            "title": "Hit Points",
+            "icon": "systems/dnd5e/icons/svg/hit-points.svg",
+            "_id": "WMbkpELkLBvDaEsL"
+          },
+          {
             "type": "ItemGrant",
             "configuration": {
               "items": [
@@ -2630,16 +2718,17 @@
             },
             "value": {
               "added": {
-                "j8bpgyakz8m2x01a": "Compendium.dnd5e.classfeatures.3sYPftQKnbbVnHrh",
-                "dt991x311p44fkdq": "Compendium.dnd5e.classfeatures.DPN2Gfk8yi1Z5wp7",
-                "0n47hgx5tz2lyvxk": "Compendium.dnd5e.classfeatures.ohwfuwnvuoBWlSQr"
+                "GcRC4ZItJPqsIrsm": "Compendium.dnd5e.classfeatures.3sYPftQKnbbVnHrh",
+                "vRhjcnnlifZYB4dy": "Compendium.dnd5e.classfeatures.DPN2Gfk8yi1Z5wp7",
+                "eHh5dHiq9wss2Vq0": "Compendium.dnd5e.classfeatures.ohwfuwnvuoBWlSQr"
               }
             },
             "level": 1,
-            "title": "Features"
+            "title": "Features",
+            "icon": "systems/dnd5e/icons/svg/item-grant.svg",
+            "_id": "13XHsx4Z3vQ2XYkJ"
           },
           {
-            "_id": "sblo46o8s0jwjh67",
             "type": "ItemGrant",
             "configuration": {
               "items": [
@@ -2657,10 +2746,11 @@
             },
             "value": {},
             "level": 2,
-            "title": "Features"
+            "title": "Features",
+            "icon": "systems/dnd5e/icons/svg/item-grant.svg",
+            "_id": "5crdJzGJRQIVhbyr"
           },
           {
-            "_id": "wc1k2og5yji410ul",
             "type": "ItemGrant",
             "configuration": {
               "items": [
@@ -2678,10 +2768,11 @@
             },
             "value": {},
             "level": 3,
-            "title": "Features"
+            "title": "Features",
+            "icon": "systems/dnd5e/icons/svg/item-grant.svg",
+            "_id": "9F1ZUcRqNsBCOFNX"
           },
           {
-            "_id": "gtfype9sk267uzvc",
             "type": "ItemGrant",
             "configuration": {
               "items": [
@@ -2699,10 +2790,11 @@
             },
             "value": {},
             "level": 5,
-            "title": "Features"
+            "title": "Features",
+            "icon": "systems/dnd5e/icons/svg/item-grant.svg",
+            "_id": "PvQXh3OhvuLhjVoo"
           },
           {
-            "_id": "tdk0rtktni95bzj5",
             "type": "ItemGrant",
             "configuration": {
               "items": [
@@ -2720,10 +2812,11 @@
             },
             "value": {},
             "level": 7,
-            "title": "Features"
+            "title": "Features",
+            "icon": "systems/dnd5e/icons/svg/item-grant.svg",
+            "_id": "X8G2PrPxOrfWQevi"
           },
           {
-            "_id": "ge802duewa43hun7",
             "type": "ItemGrant",
             "configuration": {
               "items": [
@@ -2741,10 +2834,11 @@
             },
             "value": {},
             "level": 11,
-            "title": "Features"
+            "title": "Features",
+            "icon": "systems/dnd5e/icons/svg/item-grant.svg",
+            "_id": "MqV3BlQkAZycZ4Ue"
           },
           {
-            "_id": "nz8rkzdx0lhelh3g",
             "type": "ItemGrant",
             "configuration": {
               "items": [
@@ -2762,10 +2856,11 @@
             },
             "value": {},
             "level": 14,
-            "title": "Features"
+            "title": "Features",
+            "icon": "systems/dnd5e/icons/svg/item-grant.svg",
+            "_id": "sI4nacIwT4B8Y7mb"
           },
           {
-            "_id": "o6x3bn24yzezwu3m",
             "type": "ItemGrant",
             "configuration": {
               "items": [
@@ -2783,10 +2878,11 @@
             },
             "value": {},
             "level": 15,
-            "title": "Features"
+            "title": "Features",
+            "icon": "systems/dnd5e/icons/svg/item-grant.svg",
+            "_id": "mugszpD8eVZ2jybU"
           },
           {
-            "_id": "nb2phqtzm96upswz",
             "type": "ItemGrant",
             "configuration": {
               "items": [
@@ -2804,10 +2900,11 @@
             },
             "value": {},
             "level": 18,
-            "title": "Features"
+            "title": "Features",
+            "icon": "systems/dnd5e/icons/svg/item-grant.svg",
+            "_id": "EOVFTUpweDErdpSz"
           },
           {
-            "_id": "yy5a5k0ucklu7dho",
             "type": "ItemGrant",
             "configuration": {
               "items": [
@@ -2825,23 +2922,18 @@
             },
             "value": {},
             "level": 20,
-            "title": "Features"
+            "title": "Features",
+            "icon": "systems/dnd5e/icons/svg/item-grant.svg",
+            "_id": "GVuwdOHDEDfQX9cl"
           },
           {
-            "_id": "ptvlyyq4usr68cmc",
-            "type": "HitPoints",
-            "configuration": {},
-            "value": {
-              "1": "max"
-            },
-            "title": ""
-          },
-          {
-            "_id": "eramv0kziciek99p",
             "type": "ScaleValue",
             "configuration": {
               "identifier": "sneak-attack",
               "type": "dice",
+              "distance": {
+                "units": ""
+              },
               "scale": {
                 "1": {
                   "number": 1,
@@ -2883,13 +2975,136 @@
                   "number": 10,
                   "faces": 6
                 }
-              },
-              "distance": {
-                "units": ""
               }
             },
             "value": {},
-            "title": "Sneak Attack"
+            "title": "Sneak Attack",
+            "icon": "systems/dnd5e/icons/svg/scale-value.svg",
+            "_id": "81nHtANt6Ffg9M4V"
+          },
+          {
+            "type": "AbilityScoreImprovement",
+            "configuration": {
+              "points": 2,
+              "fixed": {
+                "str": 0,
+                "dex": 0,
+                "con": 0,
+                "int": 0,
+                "wis": 0,
+                "cha": 0
+              }
+            },
+            "value": {
+              "type": "asi"
+            },
+            "level": 4,
+            "title": "Ability Score Improvement",
+            "icon": "systems/dnd5e/icons/svg/ability-score-improvement.svg",
+            "_id": "smghqQkObY4OOg30"
+          },
+          {
+            "type": "AbilityScoreImprovement",
+            "configuration": {
+              "points": 2,
+              "fixed": {
+                "str": 0,
+                "dex": 0,
+                "con": 0,
+                "int": 0,
+                "wis": 0,
+                "cha": 0
+              }
+            },
+            "value": {
+              "type": "asi"
+            },
+            "level": 8,
+            "title": "Ability Score Improvement",
+            "icon": "systems/dnd5e/icons/svg/ability-score-improvement.svg",
+            "_id": "WFAAUfKJA9QR46Bw"
+          },
+          {
+            "type": "AbilityScoreImprovement",
+            "configuration": {
+              "points": 2,
+              "fixed": {
+                "str": 0,
+                "dex": 0,
+                "con": 0,
+                "int": 0,
+                "wis": 0,
+                "cha": 0
+              }
+            },
+            "value": {
+              "type": "asi"
+            },
+            "level": 12,
+            "title": "Ability Score Improvement",
+            "icon": "systems/dnd5e/icons/svg/ability-score-improvement.svg",
+            "_id": "ahuQ3gMqz6sCza0m"
+          },
+          {
+            "type": "AbilityScoreImprovement",
+            "configuration": {
+              "points": 2,
+              "fixed": {
+                "str": 0,
+                "dex": 0,
+                "con": 0,
+                "int": 0,
+                "wis": 0,
+                "cha": 0
+              }
+            },
+            "value": {
+              "type": "asi"
+            },
+            "level": 16,
+            "title": "Ability Score Improvement",
+            "icon": "systems/dnd5e/icons/svg/ability-score-improvement.svg",
+            "_id": "iVq9vmwTow7KielM"
+          },
+          {
+            "_id": "puDaUsYrlks0z5gm",
+            "type": "AbilityScoreImprovement",
+            "configuration": {
+              "points": 2,
+              "fixed": {
+                "str": 0,
+                "dex": 0,
+                "con": 0,
+                "int": 0,
+                "wis": 0,
+                "cha": 0
+              }
+            },
+            "value": {
+              "type": "asi"
+            },
+            "level": 19,
+            "title": ""
+          },
+          {
+            "_id": "WhAioX7KT2ZULDHU",
+            "type": "AbilityScoreImprovement",
+            "configuration": {
+              "points": 2,
+              "fixed": {
+                "str": 0,
+                "dex": 0,
+                "con": 0,
+                "int": 0,
+                "wis": 0,
+                "cha": 0
+              }
+            },
+            "value": {
+              "type": "asi"
+            },
+            "level": 10,
+            "title": ""
           }
         ],
         "saves": [
@@ -2930,19 +3145,22 @@
         }
       },
       "_stats": {
-        "systemId": null,
-        "systemVersion": null,
-        "coreVersion": null,
-        "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
-      }
+        "systemId": "dnd5e",
+        "systemVersion": "2.2.2",
+        "coreVersion": "10.303",
+        "createdTime": 1661787234284,
+        "modifiedTime": 1691519191232,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!actors.items!bzlxBO5km3zCQA8G.POlGoMp1xwT02K3S"
     },
     {
-      "_id": "j8bpgyakz8m2x01a",
+      "_id": "GcRC4ZItJPqsIrsm",
       "name": "Expertise (Rogue)",
+      "ownership": {
+        "default": 0
+      },
       "type": "feat",
-      "img": "icons/skills/targeting/target-glowing-yellow.webp",
       "system": {
         "description": {
           "value": "<p>At 1st level, choose two of your skill proficiencies, or one of your skill proficiencies and your proficiency with thieves' tools. Your proficiency bonus is doubled for any ability check you make that uses either of the chosen proficiencies.</p><p>At 6th level, you can choose two more of your proficiencies (in skills or with thieves' tools) to gain this benefit.</p>",
@@ -2960,6 +3178,7 @@
           "units": ""
         },
         "cover": null,
+        "crewed": false,
         "target": {
           "value": null,
           "width": null,
@@ -3001,7 +3220,7 @@
           "scaling": "spell"
         },
         "type": {
-          "value": "",
+          "value": "class",
           "subtype": ""
         },
         "requirements": "Rogue 1",
@@ -3010,35 +3229,33 @@
           "charged": false
         }
       },
-      "effects": [],
-      "folder": null,
-      "sort": 0,
-      "ownership": {
-        "default": 0
-      },
       "flags": {
         "dnd5e": {
           "sourceId": "Compendium.dnd5e.classfeatures.3sYPftQKnbbVnHrh",
-          "advancementOrigin": "h6m126ftvfila0o3.fib976ht1gf1ntxv"
-        },
-        "core": {
-          "sourceId": "Compendium.dnd5e.classfeatures.3sYPftQKnbbVnHrh"
+          "advancementOrigin": "POlGoMp1xwT02K3S.13XHsx4Z3vQ2XYkJ"
         }
       },
+      "img": "icons/skills/targeting/target-glowing-yellow.webp",
+      "effects": [],
+      "folder": null,
+      "sort": 0,
       "_stats": {
-        "systemId": null,
-        "systemVersion": null,
-        "coreVersion": null,
-        "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
-      }
+        "systemId": "dnd5e",
+        "systemVersion": "2.2.2",
+        "coreVersion": "10.303",
+        "createdTime": 1661787234328,
+        "modifiedTime": 1691519191233,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!actors.items!bzlxBO5km3zCQA8G.GcRC4ZItJPqsIrsm"
     },
     {
-      "_id": "dt991x311p44fkdq",
+      "_id": "vRhjcnnlifZYB4dy",
       "name": "Sneak Attack",
+      "ownership": {
+        "default": 0
+      },
       "type": "feat",
-      "img": "icons/skills/melee/strike-dagger-arcane-pink.webp",
       "system": {
         "description": {
           "value": "<p>Beginning at 1st level, you know how to strike subtly and exploit a foe's distraction. Once per turn, you can deal an extra 1d6 damage to one creature you hit with an attack if you have advantage on the attack roll. The attack must use a finesse or a ranged weapon.</p><p>You don't need advantage on the attack roll if another enemy of the target is within 5 feet of it, that enemy isn't incapacitated, and you don't have disadvantage on the attack roll.</p>",
@@ -3056,6 +3273,7 @@
           "units": ""
         },
         "cover": null,
+        "crewed": false,
         "target": {
           "value": null,
           "width": null,
@@ -3102,7 +3320,7 @@
           "scaling": "spell"
         },
         "type": {
-          "value": "",
+          "value": "class",
           "subtype": ""
         },
         "requirements": "Rogue 1",
@@ -3111,35 +3329,33 @@
           "charged": false
         }
       },
-      "effects": [],
-      "folder": null,
-      "sort": 0,
-      "ownership": {
-        "default": 0
-      },
       "flags": {
         "dnd5e": {
           "sourceId": "Compendium.dnd5e.classfeatures.DPN2Gfk8yi1Z5wp7",
-          "advancementOrigin": "h6m126ftvfila0o3.fib976ht1gf1ntxv"
-        },
-        "core": {
-          "sourceId": "Compendium.dnd5e.monsterfeatures.9uKShqfuA73duQsT"
+          "advancementOrigin": "POlGoMp1xwT02K3S.13XHsx4Z3vQ2XYkJ"
         }
       },
+      "img": "icons/skills/melee/strike-dagger-arcane-pink.webp",
+      "effects": [],
+      "folder": null,
+      "sort": 0,
       "_stats": {
-        "systemId": null,
-        "systemVersion": null,
-        "coreVersion": null,
-        "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
-      }
+        "systemId": "dnd5e",
+        "systemVersion": "2.2.2",
+        "coreVersion": "10.303",
+        "createdTime": 1661787234348,
+        "modifiedTime": 1691519191234,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!actors.items!bzlxBO5km3zCQA8G.vRhjcnnlifZYB4dy"
     },
     {
-      "_id": "0n47hgx5tz2lyvxk",
+      "_id": "eHh5dHiq9wss2Vq0",
       "name": "Thieves' Cant",
+      "ownership": {
+        "default": 0
+      },
       "type": "feat",
-      "img": "icons/sundries/documents/document-torn-diagram-tan.webp",
       "system": {
         "description": {
           "value": "<p>During your rogue training you learned thieves' cant, a secret mix of dialect, jargon, and code that allows you to hide messages in seemingly normal conversation. Only another creature that knows thieves' cant understands such messages. It takes four times longer to convey such a message than it does to speak the same idea plainly.</p><p>In addition, you understand a set of secret signs and symbols used to convey short, simple messages, such as whether an area is dangerous or the territory of a thieves' guild, whether loot is nearby, or whether the people in an area are easy marks or will provide a safe house for thieves on the run.</p>",
@@ -3157,6 +3373,7 @@
           "units": ""
         },
         "cover": null,
+        "crewed": false,
         "target": {
           "value": null,
           "width": null,
@@ -3198,7 +3415,7 @@
           "scaling": "spell"
         },
         "type": {
-          "value": "",
+          "value": "class",
           "subtype": ""
         },
         "requirements": "Rogue 1",
@@ -3207,6 +3424,13 @@
           "charged": false
         }
       },
+      "flags": {
+        "dnd5e": {
+          "sourceId": "Compendium.dnd5e.classfeatures.ohwfuwnvuoBWlSQr",
+          "advancementOrigin": "POlGoMp1xwT02K3S.13XHsx4Z3vQ2XYkJ"
+        }
+      },
+      "img": "icons/sundries/documents/document-torn-diagram-tan.webp",
       "effects": [
         {
           "_id": "VN7GnGzVwmBM7YCU",
@@ -3234,61 +3458,21 @@
           "transfer": true,
           "flags": {},
           "tint": null,
-          "sort": 0
+          "sort": 0,
+          "_key": "!actors.items.effects!bzlxBO5km3zCQA8G.eHh5dHiq9wss2Vq0.VN7GnGzVwmBM7YCU"
         }
       ],
       "folder": null,
       "sort": 0,
-      "ownership": {
-        "default": 0
-      },
-      "flags": {
-        "dnd5e": {
-          "sourceId": "Compendium.dnd5e.classfeatures.ohwfuwnvuoBWlSQr",
-          "advancementOrigin": "h6m126ftvfila0o3.fib976ht1gf1ntxv"
-        },
-        "core": {
-          "sourceId": "Compendium.dnd5e.classfeatures.ohwfuwnvuoBWlSQr"
-        }
-      },
-      "_stats": {
-        "systemId": null,
-        "systemVersion": null,
-        "coreVersion": null,
-        "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
-      }
-    },
-    {
-      "name": "Bureaucrat",
-      "type": "background",
-      "system": {
-        "description": {
-          "value": "<ul><li><strong>Skill Proficiencies:</strong> Insight, Persuasion</li><li><strong>Languages:</strong> Two of your choice</li><li><strong>Equipment:</strong> A set of fine clothes and a pouch containing 5 gp</li></ul>",
-          "chat": "",
-          "unidentified": ""
-        },
-        "source": "",
-        "advancement": []
-      },
-      "img": "icons/skills/social/theft-pickpocket-bribery-brown.webp",
-      "effects": [],
-      "folder": null,
-      "sort": 0,
-      "ownership": {
-        "default": 0
-      },
-      "flags": {},
       "_stats": {
         "systemId": "dnd5e",
-        "systemVersion": "2.1.0",
-        "coreVersion": "10.291",
-        "createdTime": 1673040183979,
-        "modifiedTime": 1673040521187,
+        "systemVersion": "2.2.2",
+        "coreVersion": "10.303",
+        "createdTime": 1661787234423,
+        "modifiedTime": 1691519191235,
         "lastModifiedBy": "dnd5ebuilder0000"
       },
-      "_id": "kLWeji1tfubIJvfT"
+      "_key": "!actors.items!bzlxBO5km3zCQA8G.eHh5dHiq9wss2Vq0"
     }
   ],
   "effects": [
@@ -3314,11 +3498,12 @@
       },
       "icon": "icons/sundries/documents/document-torn-diagram-tan.webp",
       "label": "Thieves' Cant",
-      "origin": "Actor.RNvbq3vOad9Ovh2F.Item.0n47hgx5tz2lyvxk",
-      "tint": null,
+      "origin": "Compendium.dnd5e.heroes.bzlxBO5km3zCQA8G.Item.eHh5dHiq9wss2Vq0",
       "transfer": false,
       "flags": {},
-      "sort": 0
+      "tint": null,
+      "sort": 0,
+      "_key": "!actors.effects!bzlxBO5km3zCQA8G.VN7GnGzVwmBM7YCU"
     }
   ],
   "folder": null,
@@ -3330,10 +3515,11 @@
   "_id": "bzlxBO5km3zCQA8G",
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.1.0",
-    "coreVersion": "10.291",
+    "systemVersion": "2.2.2",
+    "coreVersion": "10.303",
     "createdTime": 1661787232177,
-    "modifiedTime": 1673040521187,
+    "modifiedTime": 1691519191272,
     "lastModifiedBy": "dnd5ebuilder0000"
-  }
+  },
+  "_key": "!actors!bzlxBO5km3zCQA8G"
 }

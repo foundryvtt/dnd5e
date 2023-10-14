@@ -2,7 +2,7 @@
   "_id": "dJjdWdaZU30r1zx4",
   "name": "Plate Armor of Etherealness",
   "type": "equipment",
-  "img": "icons/equipment/chest/breastplate-cuirass-steel-grey.webp",
+  "img": "icons/equipment/chest/breastplate-collared-steel.webp",
   "system": {
     "description": {
       "value": "<p><em>(Requires attunement)</em></p>\n<p>Plate consists of shaped, interlocking metal plates to cover the entire body. A suit of plate includes gauntlets, heavy leather boots, a visored helmet, and thick layers of padding underneath the armor. Buckles and straps distribute the weight over the body. This particular armor has been inscribed with certain magical runes or other means to imbue power upon it.</p>\n<p>While you're wearing this armor, you can speak its command word as an action to gain the effect of the @Compendium[dnd5e.spells.PQuEgKyCdovOvhqN]{Etherealness} spell, which last for 10 minutes or until you remove the armor or use an action to speak the command word again. This property of the armor can't be used again until the next dawn.</p>",
@@ -30,6 +30,7 @@
       "units": "minute"
     },
     "cover": null,
+    "crewed": false,
     "target": {
       "value": null,
       "width": null,
@@ -99,10 +100,11 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.1.0",
+    "systemVersion": "2.2.2",
     "coreVersion": "10.291",
     "createdTime": 1661787233742,
-    "modifiedTime": 1671220962034,
+    "modifiedTime": 1690539440733,
     "lastModifiedBy": "dnd5ebuilder0000"
-  }
+  },
+  "_key": "!items!dJjdWdaZU30r1zx4"
 }

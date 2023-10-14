@@ -7,6 +7,7 @@
       "str": {
         "value": 14,
         "proficient": 1,
+        "max": null,
         "bonuses": {
           "check": "",
           "save": ""
@@ -15,6 +16,7 @@
       "dex": {
         "value": 14,
         "proficient": 0,
+        "max": null,
         "bonuses": {
           "check": "",
           "save": ""
@@ -23,6 +25,7 @@
       "con": {
         "value": 15,
         "proficient": 1,
+        "max": null,
         "bonuses": {
           "check": "",
           "save": ""
@@ -31,6 +34,7 @@
       "int": {
         "value": 8,
         "proficient": 0,
+        "max": null,
         "bonuses": {
           "check": "",
           "save": ""
@@ -39,6 +43,7 @@
       "wis": {
         "value": 10,
         "proficient": 0,
+        "max": null,
         "bonuses": {
           "check": "",
           "save": ""
@@ -47,6 +52,7 @@
       "cha": {
         "value": 14,
         "proficient": 0,
+        "max": null,
         "bonuses": {
           "check": "",
           "save": ""
@@ -61,14 +67,14 @@
       },
       "hp": {
         "value": 14,
-        "min": 0,
         "max": null,
         "temp": null,
         "tempmax": null,
         "bonuses": {
           "level": "",
           "overall": ""
-        }
+        },
+        "min": 0
       },
       "init": {
         "ability": "",
@@ -110,7 +116,7 @@
       "alignment": "Chaotic Good",
       "race": "Lightfoot Halfling",
       "background": "",
-      "originalClass": "2wfeg14piijtgdr1",
+      "originalClass": "LX25nsSy2bvul2dp",
       "xp": {
         "value": 0
       },
@@ -321,6 +327,7 @@
         }
       }
     },
+    "tools": {},
     "spells": {
       "spell1": {
         "value": 0,
@@ -501,7 +508,7 @@
         },
         "attunement": 0,
         "equipped": false,
-        "rarity": "common",
+        "rarity": "",
         "identified": true,
         "activation": {
           "type": "action",
@@ -513,6 +520,7 @@
           "units": ""
         },
         "cover": null,
+        "crewed": false,
         "target": {
           "value": null,
           "width": null,
@@ -602,7 +610,8 @@
         "createdTime": null,
         "modifiedTime": 1670011640852,
         "lastModifiedBy": "dnd5ebuilder0000"
-      }
+      },
+      "_key": "!actors.items!irWonyO6ZLh47sN7.l87HKTUcZRp0PohR"
     },
     {
       "_id": "bvHyCpcudXZ2bN7i",
@@ -623,7 +632,7 @@
         },
         "attunement": 0,
         "equipped": false,
-        "rarity": "common",
+        "rarity": "",
         "identified": true,
         "activation": {
           "type": "action",
@@ -635,6 +644,7 @@
           "units": ""
         },
         "cover": null,
+        "crewed": false,
         "target": {
           "value": null,
           "width": null,
@@ -724,7 +734,8 @@
         "createdTime": null,
         "modifiedTime": 1670011640858,
         "lastModifiedBy": "dnd5ebuilder0000"
-      }
+      },
+      "_key": "!actors.items!irWonyO6ZLh47sN7.bvHyCpcudXZ2bN7i"
     },
     {
       "_id": "acFqo6BnGivxj5lE",
@@ -745,7 +756,7 @@
         },
         "attunement": 0,
         "equipped": false,
-        "rarity": "common",
+        "rarity": "",
         "identified": true,
         "activation": {
           "type": "",
@@ -757,6 +768,7 @@
           "units": ""
         },
         "cover": null,
+        "crewed": false,
         "target": {
           "value": null,
           "width": null,
@@ -819,7 +831,8 @@
         "createdTime": null,
         "modifiedTime": 1670011640874,
         "lastModifiedBy": "dnd5ebuilder0000"
-      }
+      },
+      "_key": "!actors.items!irWonyO6ZLh47sN7.acFqo6BnGivxj5lE"
     },
     {
       "_id": "kccU0cngRTiFlfLu",
@@ -840,7 +853,7 @@
         },
         "attunement": 0,
         "equipped": true,
-        "rarity": "common",
+        "rarity": "",
         "identified": true,
         "activation": {
           "type": "action",
@@ -852,6 +865,7 @@
           "units": ""
         },
         "cover": null,
+        "crewed": false,
         "target": {
           "value": null,
           "width": null,
@@ -945,7 +959,8 @@
         "createdTime": null,
         "modifiedTime": null,
         "lastModifiedBy": null
-      }
+      },
+      "_key": "!actors.items!irWonyO6ZLh47sN7.kccU0cngRTiFlfLu"
     },
     {
       "_id": "9hY5bOuPFqGubCEw",
@@ -966,7 +981,7 @@
         },
         "attunement": 0,
         "equipped": false,
-        "rarity": "common",
+        "rarity": "",
         "identified": true,
         "capacity": {
           "type": "weight",
@@ -1000,7 +1015,8 @@
         "createdTime": null,
         "modifiedTime": null,
         "lastModifiedBy": null
-      }
+      },
+      "_key": "!actors.items!irWonyO6ZLh47sN7.9hY5bOuPFqGubCEw"
     },
     {
       "_id": "86aiVMgc7XPJ1z8C",
@@ -1021,7 +1037,7 @@
         },
         "attunement": 0,
         "equipped": false,
-        "rarity": "common",
+        "rarity": "",
         "identified": true
       },
       "sort": 0,
@@ -1043,7 +1059,8 @@
         "createdTime": null,
         "modifiedTime": null,
         "lastModifiedBy": null
-      }
+      },
+      "_key": "!actors.items!irWonyO6ZLh47sN7.86aiVMgc7XPJ1z8C"
     },
     {
       "_id": "SHXoXJMWZywkU7aV",
@@ -1064,7 +1081,7 @@
         },
         "attunement": 0,
         "equipped": false,
-        "rarity": "common",
+        "rarity": "",
         "identified": true,
         "activation": {
           "type": "action",
@@ -1076,6 +1093,7 @@
           "units": ""
         },
         "cover": null,
+        "crewed": false,
         "target": {
           "value": null,
           "width": null,
@@ -1138,7 +1156,8 @@
         "createdTime": null,
         "modifiedTime": null,
         "lastModifiedBy": null
-      }
+      },
+      "_key": "!actors.items!irWonyO6ZLh47sN7.SHXoXJMWZywkU7aV"
     },
     {
       "_id": "pIYHCVrKJLq0D2Jc",
@@ -1159,7 +1178,7 @@
         },
         "attunement": 0,
         "equipped": false,
-        "rarity": "common",
+        "rarity": "",
         "identified": true,
         "activation": {
           "type": "action",
@@ -1171,6 +1190,7 @@
           "units": ""
         },
         "cover": null,
+        "crewed": false,
         "target": {
           "value": 1,
           "width": null,
@@ -1233,7 +1253,8 @@
         "createdTime": null,
         "modifiedTime": 1670011640909,
         "lastModifiedBy": "dnd5ebuilder0000"
-      }
+      },
+      "_key": "!actors.items!irWonyO6ZLh47sN7.pIYHCVrKJLq0D2Jc"
     },
     {
       "_id": "j8eiLPd8bbBYNyC1",
@@ -1254,7 +1275,7 @@
         },
         "attunement": 0,
         "equipped": false,
-        "rarity": "common",
+        "rarity": "",
         "identified": true
       },
       "sort": 0,
@@ -1276,7 +1297,8 @@
         "createdTime": null,
         "modifiedTime": 1670011640919,
         "lastModifiedBy": "dnd5ebuilder0000"
-      }
+      },
+      "_key": "!actors.items!irWonyO6ZLh47sN7.j8eiLPd8bbBYNyC1"
     },
     {
       "_id": "bHPIk24Cq3Z5FO86",
@@ -1297,7 +1319,7 @@
         },
         "attunement": 0,
         "equipped": false,
-        "rarity": "common",
+        "rarity": "",
         "identified": true
       },
       "sort": 0,
@@ -1319,7 +1341,8 @@
         "createdTime": null,
         "modifiedTime": 1670011640925,
         "lastModifiedBy": "dnd5ebuilder0000"
-      }
+      },
+      "_key": "!actors.items!irWonyO6ZLh47sN7.bHPIk24Cq3Z5FO86"
     },
     {
       "_id": "YyXrE0aRDWy4AtwB",
@@ -1340,7 +1363,7 @@
         },
         "attunement": 0,
         "equipped": false,
-        "rarity": "common",
+        "rarity": "",
         "identified": true,
         "activation": {
           "type": "action",
@@ -1352,6 +1375,7 @@
           "units": "hour"
         },
         "cover": null,
+        "crewed": false,
         "target": {
           "value": 40,
           "width": null,
@@ -1419,7 +1443,8 @@
         "createdTime": null,
         "modifiedTime": 1670011647601,
         "lastModifiedBy": "dnd5ebuilder0000"
-      }
+      },
+      "_key": "!actors.items!irWonyO6ZLh47sN7.YyXrE0aRDWy4AtwB"
     },
     {
       "_id": "YvaZVAmilJd26Bfq",
@@ -1440,7 +1465,7 @@
         },
         "attunement": 0,
         "equipped": false,
-        "rarity": "common",
+        "rarity": "",
         "identified": true,
         "activation": {
           "type": "action",
@@ -1452,6 +1477,7 @@
           "units": ""
         },
         "cover": null,
+        "crewed": false,
         "target": {
           "value": null,
           "width": null,
@@ -1514,7 +1540,8 @@
         "createdTime": null,
         "modifiedTime": 1670011640938,
         "lastModifiedBy": "dnd5ebuilder0000"
-      }
+      },
+      "_key": "!actors.items!irWonyO6ZLh47sN7.YvaZVAmilJd26Bfq"
     },
     {
       "_id": "3hJ5vLP7E424pEo4",
@@ -1535,7 +1562,7 @@
         },
         "attunement": 0,
         "equipped": false,
-        "rarity": "common",
+        "rarity": "",
         "identified": true,
         "activation": {
           "type": "action",
@@ -1547,6 +1574,7 @@
           "units": ""
         },
         "cover": null,
+        "crewed": false,
         "target": {
           "value": null,
           "width": null,
@@ -1640,7 +1668,8 @@
         "createdTime": null,
         "modifiedTime": null,
         "lastModifiedBy": null
-      }
+      },
+      "_key": "!actors.items!irWonyO6ZLh47sN7.3hJ5vLP7E424pEo4"
     },
     {
       "_id": "uWLF3Gr976X8vd7n",
@@ -1661,7 +1690,7 @@
         },
         "attunement": 0,
         "equipped": false,
-        "rarity": "common",
+        "rarity": "",
         "identified": true,
         "activation": {
           "type": "action",
@@ -1673,6 +1702,7 @@
           "units": ""
         },
         "cover": null,
+        "crewed": false,
         "target": {
           "value": null,
           "width": null,
@@ -1762,7 +1792,8 @@
         "createdTime": null,
         "modifiedTime": null,
         "lastModifiedBy": null
-      }
+      },
+      "_key": "!actors.items!irWonyO6ZLh47sN7.uWLF3Gr976X8vd7n"
     },
     {
       "_id": "vb4ylO4gijpYubVK",
@@ -1785,6 +1816,7 @@
           "units": ""
         },
         "cover": null,
+        "crewed": false,
         "target": {
           "value": null,
           "width": null,
@@ -1854,7 +1886,8 @@
         "createdTime": null,
         "modifiedTime": null,
         "lastModifiedBy": null
-      }
+      },
+      "_key": "!actors.items!irWonyO6ZLh47sN7.vb4ylO4gijpYubVK"
     },
     {
       "_id": "EEbqVNmOskEeXbAn",
@@ -1877,6 +1910,7 @@
           "units": ""
         },
         "cover": null,
+        "crewed": false,
         "target": {
           "value": null,
           "width": null,
@@ -1946,7 +1980,8 @@
         "createdTime": null,
         "modifiedTime": null,
         "lastModifiedBy": null
-      }
+      },
+      "_key": "!actors.items!irWonyO6ZLh47sN7.EEbqVNmOskEeXbAn"
     },
     {
       "_id": "mdahmK0Ttr26qhV7",
@@ -1969,6 +2004,7 @@
           "units": ""
         },
         "cover": null,
+        "crewed": false,
         "target": {
           "value": null,
           "width": null,
@@ -2038,7 +2074,8 @@
         "createdTime": null,
         "modifiedTime": null,
         "lastModifiedBy": null
-      }
+      },
+      "_key": "!actors.items!irWonyO6ZLh47sN7.mdahmK0Ttr26qhV7"
     },
     {
       "_id": "XUuKHz75EISEhNjB",
@@ -2061,6 +2098,7 @@
           "units": ""
         },
         "cover": null,
+        "crewed": false,
         "target": {
           "value": null,
           "width": null,
@@ -2130,7 +2168,8 @@
         "createdTime": null,
         "modifiedTime": null,
         "lastModifiedBy": null
-      }
+      },
+      "_key": "!actors.items!irWonyO6ZLh47sN7.XUuKHz75EISEhNjB"
     },
     {
       "_id": "DPsowmMZwV6S2dpt",
@@ -2153,6 +2192,7 @@
           "units": ""
         },
         "cover": null,
+        "crewed": false,
         "target": {
           "value": null,
           "width": null,
@@ -2222,7 +2262,8 @@
         "createdTime": null,
         "modifiedTime": null,
         "lastModifiedBy": null
-      }
+      },
+      "_key": "!actors.items!irWonyO6ZLh47sN7.DPsowmMZwV6S2dpt"
     },
     {
       "_id": "1Vk6iVodEGrj12vH",
@@ -2245,6 +2286,7 @@
           "units": ""
         },
         "cover": null,
+        "crewed": false,
         "target": {
           "value": null,
           "width": null,
@@ -2310,10 +2352,42 @@
         "createdTime": null,
         "modifiedTime": null,
         "lastModifiedBy": null
-      }
+      },
+      "_key": "!actors.items!irWonyO6ZLh47sN7.1Vk6iVodEGrj12vH"
     },
     {
-      "_id": "2wfeg14piijtgdr1",
+      "name": "Vigilante",
+      "type": "background",
+      "system": {
+        "description": {
+          "value": "<ul><li><strong>Skill Proficiencies:</strong> Insight, Investigation, Perception</li><li><strong>Equipment:</strong> Explorer's Pack, 2 gp</li></ul>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "",
+        "advancement": []
+      },
+      "img": "icons/magic/fire/flame-burning-fist-strike.webp",
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.1.0",
+        "coreVersion": "10.291",
+        "createdTime": 1673040183979,
+        "modifiedTime": 1673040848723,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_id": "XIVdS0HZI5lOG5bx",
+      "_key": "!actors.items!irWonyO6ZLh47sN7.XIVdS0HZI5lOG5bx"
+    },
+    {
+      "_id": "LX25nsSy2bvul2dp",
       "name": "Barbarian",
       "type": "class",
       "img": "icons/skills/melee/hand-grip-sword-orange.webp",
@@ -2329,6 +2403,15 @@
         "hitDice": "d12",
         "hitDiceUsed": 0,
         "advancement": [
+          {
+            "_id": "5jn0ekktgccyvvpw",
+            "type": "HitPoints",
+            "configuration": {},
+            "value": {
+              "1": "max"
+            },
+            "title": ""
+          },
           {
             "_id": "amez6rlose3eoigo",
             "type": "ItemGrant",
@@ -2349,8 +2432,8 @@
             },
             "value": {
               "added": {
-                "ntkxu3ypcgozbl37": "Compendium.dnd5e.classfeatures.VoR0SUrNX5EJVPIO",
-                "kk4n0n0k7lke3dn1": "Compendium.dnd5e.classfeatures.SZbsNbaxFFGwBpNK"
+                "t9n1JlIt64USZcYm": "Compendium.dnd5e.classfeatures.VoR0SUrNX5EJVPIO",
+                "jq7HHcrrGB4hc9dp": "Compendium.dnd5e.classfeatures.SZbsNbaxFFGwBpNK"
               }
             },
             "level": 1,
@@ -2548,15 +2631,6 @@
             "title": "Features"
           },
           {
-            "_id": "5jn0ekktgccyvvpw",
-            "type": "HitPoints",
-            "configuration": {},
-            "value": {
-              "1": "max"
-            },
-            "title": ""
-          },
-          {
             "_id": "62svnflxsuad7oar",
             "type": "ScaleValue",
             "configuration": {
@@ -2636,6 +2710,106 @@
             },
             "value": {},
             "title": "Brutal Critical Dice"
+          },
+          {
+            "_id": "dZHMy3530RPCjzvD",
+            "type": "AbilityScoreImprovement",
+            "configuration": {
+              "points": 2,
+              "fixed": {
+                "str": 0,
+                "dex": 0,
+                "con": 0,
+                "int": 0,
+                "wis": 0,
+                "cha": 0
+              }
+            },
+            "value": {
+              "type": "asi"
+            },
+            "level": 4,
+            "title": ""
+          },
+          {
+            "_id": "dBMWU3h8MBO4PcEm",
+            "type": "AbilityScoreImprovement",
+            "configuration": {
+              "points": 2,
+              "fixed": {
+                "str": 0,
+                "dex": 0,
+                "con": 0,
+                "int": 0,
+                "wis": 0,
+                "cha": 0
+              }
+            },
+            "value": {
+              "type": "asi"
+            },
+            "level": 8,
+            "title": ""
+          },
+          {
+            "_id": "nROeTbeO8vrGjqAp",
+            "type": "AbilityScoreImprovement",
+            "configuration": {
+              "points": 2,
+              "fixed": {
+                "str": 0,
+                "dex": 0,
+                "con": 0,
+                "int": 0,
+                "wis": 0,
+                "cha": 0
+              }
+            },
+            "value": {
+              "type": "asi"
+            },
+            "level": 12,
+            "title": ""
+          },
+          {
+            "_id": "prZMkvcCNoLvF4yB",
+            "type": "AbilityScoreImprovement",
+            "configuration": {
+              "points": 2,
+              "fixed": {
+                "str": 0,
+                "dex": 0,
+                "con": 0,
+                "int": 0,
+                "wis": 0,
+                "cha": 0
+              }
+            },
+            "value": {
+              "type": "asi"
+            },
+            "level": 16,
+            "title": ""
+          },
+          {
+            "_id": "puDaUsYrlks0z5gm",
+            "type": "AbilityScoreImprovement",
+            "configuration": {
+              "points": 2,
+              "fixed": {
+                "str": 0,
+                "dex": 0,
+                "con": 0,
+                "int": 0,
+                "wis": 0,
+                "cha": 0
+              }
+            },
+            "value": {
+              "type": "asi"
+            },
+            "level": 19,
+            "title": ""
           }
         ],
         "saves": [
@@ -2671,16 +2845,17 @@
         }
       },
       "_stats": {
-        "systemId": null,
-        "systemVersion": null,
-        "coreVersion": null,
-        "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
-      }
+        "systemId": "dnd5e",
+        "systemVersion": "2.2.2",
+        "coreVersion": "10.303",
+        "createdTime": 1661787234281,
+        "modifiedTime": 1691519103295,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!actors.items!irWonyO6ZLh47sN7.LX25nsSy2bvul2dp"
     },
     {
-      "_id": "ntkxu3ypcgozbl37",
+      "_id": "t9n1JlIt64USZcYm",
       "name": "Rage",
       "type": "feat",
       "img": "icons/creatures/abilities/mouth-teeth-human.webp",
@@ -2701,6 +2876,7 @@
           "units": "minute"
         },
         "cover": null,
+        "crewed": false,
         "target": {
           "value": null,
           "width": null,
@@ -2742,7 +2918,7 @@
           "scaling": "spell"
         },
         "type": {
-          "value": "",
+          "value": "class",
           "subtype": ""
         },
         "requirements": "Barbarian 1",
@@ -2796,7 +2972,8 @@
           "origin": "Item.bdfYHJstcltQC7SZ",
           "tint": null,
           "transfer": true,
-          "sort": 0
+          "sort": 0,
+          "_key": "!actors.items.effects!irWonyO6ZLh47sN7.t9n1JlIt64USZcYm.eWhL8hUr0c2ujDUm"
         }
       ],
       "folder": null,
@@ -2807,26 +2984,26 @@
       "flags": {
         "dnd5e": {
           "sourceId": "Compendium.dnd5e.classfeatures.VoR0SUrNX5EJVPIO",
-          "advancementOrigin": "2wfeg14piijtgdr1.amez6rlose3eoigo"
-        },
-        "core": {
-          "sourceId": "Compendium.dnd5e.classfeatures.VoR0SUrNX5EJVPIO"
+          "advancementOrigin": "LX25nsSy2bvul2dp.amez6rlose3eoigo"
         }
       },
       "_stats": {
-        "systemId": null,
-        "systemVersion": null,
-        "coreVersion": null,
-        "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
-      }
+        "systemId": "dnd5e",
+        "systemVersion": "2.2.2",
+        "coreVersion": "10.303",
+        "createdTime": 1661787234384,
+        "modifiedTime": 1691519103297,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!actors.items!irWonyO6ZLh47sN7.t9n1JlIt64USZcYm"
     },
     {
-      "_id": "kk4n0n0k7lke3dn1",
+      "_id": "jq7HHcrrGB4hc9dp",
       "name": "Unarmored Defense (Barbarian)",
+      "ownership": {
+        "default": 0
+      },
       "type": "feat",
-      "img": "icons/magic/control/silhouette-hold-change-blue.webp",
       "system": {
         "description": {
           "value": "<p>While you are not wearing any armor, your Armor Class equals 10 + your Dexterity modifier + your Constitution modifier. You can use a shield and still gain this benefit.</p>",
@@ -2844,6 +3021,7 @@
           "units": ""
         },
         "cover": null,
+        "crewed": false,
         "target": {
           "value": null,
           "width": null,
@@ -2885,7 +3063,7 @@
           "scaling": "spell"
         },
         "type": {
-          "value": "",
+          "value": "class",
           "subtype": ""
         },
         "requirements": "Barbarian 1",
@@ -2894,6 +3072,13 @@
           "charged": false
         }
       },
+      "flags": {
+        "dnd5e": {
+          "sourceId": "Compendium.dnd5e.classfeatures.SZbsNbaxFFGwBpNK",
+          "advancementOrigin": "LX25nsSy2bvul2dp.amez6rlose3eoigo"
+        }
+      },
+      "img": "icons/magic/control/silhouette-hold-change-blue.webp",
       "effects": [
         {
           "_id": "hEgUnQNVxtBo2zkK",
@@ -2921,66 +3106,27 @@
           "transfer": true,
           "flags": {},
           "tint": null,
-          "sort": 0
+          "sort": 0,
+          "_key": "!actors.items.effects!irWonyO6ZLh47sN7.jq7HHcrrGB4hc9dp.hEgUnQNVxtBo2zkK"
         }
       ],
       "folder": null,
       "sort": 0,
-      "ownership": {
-        "default": 0
-      },
-      "flags": {
-        "dnd5e": {
-          "sourceId": "Compendium.dnd5e.classfeatures.SZbsNbaxFFGwBpNK",
-          "advancementOrigin": "2wfeg14piijtgdr1.amez6rlose3eoigo"
-        },
-        "core": {
-          "sourceId": "Compendium.dnd5e.classfeatures.SZbsNbaxFFGwBpNK"
-        }
-      },
-      "_stats": {
-        "systemId": null,
-        "systemVersion": null,
-        "coreVersion": null,
-        "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
-      }
-    },
-    {
-      "name": "Vigilante",
-      "type": "background",
-      "system": {
-        "description": {
-          "value": "<ul><li><strong>Skill Proficiencies:</strong> Insight, Investigation, Perception</li><li><strong>Equipment:</strong> Explorer's Pack, 2 gp</li></ul>",
-          "chat": "",
-          "unidentified": ""
-        },
-        "source": "",
-        "advancement": []
-      },
-      "img": "icons/magic/fire/flame-burning-fist-strike.webp",
-      "effects": [],
-      "folder": null,
-      "sort": 0,
-      "ownership": {
-        "default": 0
-      },
-      "flags": {},
       "_stats": {
         "systemId": "dnd5e",
-        "systemVersion": "2.1.0",
-        "coreVersion": "10.291",
-        "createdTime": 1673040183979,
-        "modifiedTime": 1673040848723,
+        "systemVersion": "2.2.2",
+        "coreVersion": "10.303",
+        "createdTime": 1661787234378,
+        "modifiedTime": 1691519103298,
         "lastModifiedBy": "dnd5ebuilder0000"
       },
-      "_id": "XIVdS0HZI5lOG5bx"
+      "_key": "!actors.items!irWonyO6ZLh47sN7.jq7HHcrrGB4hc9dp"
     }
   ],
   "effects": [
     {
       "_id": "eWhL8hUr0c2ujDUm",
+      "flags": {},
       "changes": [
         {
           "key": "system.bonuses.mwak.damage",
@@ -3019,11 +3165,11 @@
       },
       "icon": "icons/creatures/abilities/mouth-teeth-human.webp",
       "label": "Rage",
-      "origin": "Actor.jPzWH8sy3PbuB5OV.Item.ntkxu3ypcgozbl37",
+      "origin": "Compendium.dnd5e.heroes.irWonyO6ZLh47sN7.Item.t9n1JlIt64USZcYm",
       "tint": null,
       "transfer": false,
-      "flags": {},
-      "sort": 0
+      "sort": 0,
+      "_key": "!actors.effects!irWonyO6ZLh47sN7.eWhL8hUr0c2ujDUm"
     },
     {
       "_id": "hEgUnQNVxtBo2zkK",
@@ -3047,11 +3193,12 @@
       },
       "icon": "icons/magic/control/silhouette-hold-change-blue.webp",
       "label": "Unarmored Defense",
-      "origin": "Actor.jPzWH8sy3PbuB5OV.Item.kk4n0n0k7lke3dn1",
-      "tint": null,
+      "origin": "Compendium.dnd5e.heroes.irWonyO6ZLh47sN7.Item.jq7HHcrrGB4hc9dp",
       "transfer": false,
       "flags": {},
-      "sort": 0
+      "tint": null,
+      "sort": 0,
+      "_key": "!actors.effects!irWonyO6ZLh47sN7.hEgUnQNVxtBo2zkK"
     }
   ],
   "folder": null,
@@ -3067,10 +3214,11 @@
   "_id": "irWonyO6ZLh47sN7",
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.1.0",
-    "coreVersion": "10.291",
+    "systemVersion": "2.2.2",
+    "coreVersion": "10.303",
     "createdTime": 1661787232184,
-    "modifiedTime": 1673040848723,
+    "modifiedTime": 1691519103346,
     "lastModifiedBy": "dnd5ebuilder0000"
-  }
+  },
+  "_key": "!actors!irWonyO6ZLh47sN7"
 }

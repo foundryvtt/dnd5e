@@ -2,7 +2,7 @@
   "_id": "NgwrqNa6kkgoPW2Q",
   "name": "Shield +1",
   "type": "equipment",
-  "img": "icons/equipment/shield/heater-wooden-brown-notched.webp",
+  "img": "icons/equipment/shield/round-wooden-boss-gold-brown.webp",
   "system": {
     "description": {
       "value": "<p>While holding this shield, you have a bonus to AC of +1. This bonus is in addition to the shield's normal bonus to AC.</p>",
@@ -21,7 +21,7 @@
     "rarity": "uncommon",
     "identified": true,
     "activation": {
-      "type": "none",
+      "type": "",
       "cost": null,
       "condition": ""
     },
@@ -30,6 +30,7 @@
       "units": ""
     },
     "cover": null,
+    "crewed": false,
     "target": {
       "value": null,
       "width": null,
@@ -99,10 +100,11 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.1.0",
+    "systemVersion": "2.2.2",
     "coreVersion": "10.291",
     "createdTime": 1661787233633,
-    "modifiedTime": 1671220960307,
+    "modifiedTime": 1690539669653,
     "lastModifiedBy": "dnd5ebuilder0000"
-  }
+  },
+  "_key": "!items!NgwrqNa6kkgoPW2Q"
 }

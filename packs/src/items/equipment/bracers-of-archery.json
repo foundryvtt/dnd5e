@@ -30,6 +30,7 @@
       "units": ""
     },
     "cover": null,
+    "crewed": false,
     "target": {
       "value": null,
       "width": null,
@@ -90,7 +91,41 @@
     "stealth": false,
     "proficient": false
   },
-  "effects": [],
+  "effects": [
+    {
+      "label": "Bracers of Archery",
+      "icon": "icons/equipment/wrist/bracer-studded-leather-steel.webp",
+      "origin": "Compendium.dnd5e.items.ZYEqOSY9BLZs2GPx",
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "disabled": false,
+      "_id": "ChaLjlYldFzDgHHv",
+      "changes": [
+        {
+          "key": "system.traits.weaponProf.value",
+          "mode": 2,
+          "value": "longbow"
+        },
+        {
+          "key": "system.traits.weaponProf.value",
+          "mode": 2,
+          "value": "shortbow"
+        }
+      ],
+      "tint": null,
+      "transfer": true,
+      "flags": {},
+      "sort": 0,
+      "_key": "!items.effects!ZYEqOSY9BLZs2GPx.ChaLjlYldFzDgHHv"
+    }
+  ],
   "folder": null,
   "sort": 0,
   "ownership": {
@@ -99,10 +134,11 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.1.0",
-    "coreVersion": "10.291",
+    "systemVersion": "2.2.2",
+    "coreVersion": "10.303",
     "createdTime": 1661787233715,
-    "modifiedTime": 1671220961732,
+    "modifiedTime": 1690480681414,
     "lastModifiedBy": "dnd5ebuilder0000"
-  }
+  },
+  "_key": "!items!ZYEqOSY9BLZs2GPx"
 }

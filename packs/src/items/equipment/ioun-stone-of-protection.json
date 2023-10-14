@@ -30,6 +30,7 @@
       "units": ""
     },
     "cover": null,
+    "crewed": false,
     "target": {
       "value": null,
       "width": null,
@@ -95,7 +96,36 @@
     "stealth": false,
     "proficient": false
   },
-  "effects": [],
+  "effects": [
+    {
+      "label": "Ioun Stone of Protection",
+      "icon": "icons/commodities/gems/gem-rough-ball-purple.webp",
+      "origin": "Compendium.dnd5e.items.v4uNbmiz4ECTI89n",
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "disabled": false,
+      "_id": "GWrRc9Yfqt7N24I6",
+      "changes": [
+        {
+          "key": "system.attributes.ac.bonus",
+          "mode": 2,
+          "value": "+1"
+        }
+      ],
+      "tint": null,
+      "transfer": true,
+      "flags": {},
+      "sort": 0,
+      "_key": "!items.effects!v4uNbmiz4ECTI89n.GWrRc9Yfqt7N24I6"
+    }
+  ],
   "folder": null,
   "sort": 0,
   "ownership": {
@@ -104,10 +134,11 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.1.0",
-    "coreVersion": "10.291",
+    "systemVersion": "2.2.2",
+    "coreVersion": "10.303",
     "createdTime": 1661787233950,
-    "modifiedTime": 1671220965510,
+    "modifiedTime": 1690481078298,
     "lastModifiedBy": "dnd5ebuilder0000"
-  }
+  },
+  "_key": "!items!v4uNbmiz4ECTI89n"
 }

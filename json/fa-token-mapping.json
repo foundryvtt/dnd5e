@@ -1,5 +1,125 @@
 {
   "dnd5e.monsters": {
+    "1vaBSMUfOy6JPJ14": {
+			"actor":"systems/dnd5e/tokens/humanoid/Drow.webp",
+			"token": "systems/dnd5e/tokens/humanoid/Drow.webp"
+		},
+    "3o2rQBqpzjIHmrBW": {
+			"actor":"systems/dnd5e/tokens/fiend/Erinyes.webp",
+			"token": {
+				"texture": {
+					"src":"systems/dnd5e/tokens/fiend/Erinyes.webp",
+					"scaleX":1.8,
+					"scaleY":1.8
+				}
+			}
+		},
+    "lOYt73eaJojBDxAV": {
+			"actor":"systems/dnd5e/tokens/celestial/Solar.webp",
+			"token": "systems/dnd5e/tokens/celestial/Solar.webp"
+		},
+		"Hm4o2FgPZsdbXjLq": {
+			"actor":"systems/dnd5e/tokens/construct/FleshGolem.webp",
+			"token": "systems/dnd5e/tokens/construct/FleshGolem.webp"
+		},
+		"mNijwXPMhwR7yYfc": {
+			"actor":"systems/dnd5e/tokens/dragon/YoungBlueDragon.webp",
+			"token": {
+				"texture": {
+					"src":"systems/dnd5e/tokens/dragon/YoungBlueDragon.webp",
+					"scaleX":2,
+					"scaleY":2
+				}
+			}
+		},
+		"FzvZ6xl3U9GoL9ju": {
+			"actor":"systems/dnd5e/tokens/dragon/YoungBrassDragon.webp",
+			"token": {
+				"texture": {
+					"src":"systems/dnd5e/tokens/dragon/YoungBrassDragon.webp",
+					"scaleX":2,
+					"scaleY":2
+				}
+			}
+		},
+		"qW8cBwg7ghCA4Cw6": {
+			"actor":"systems/dnd5e/tokens/dragon/YoungCopperDragon.webp",
+      "token": {
+				"texture": {
+					"src": "systems/dnd5e/tokens/dragon/YoungCopperDragon.webp",
+					"scaleX":2,
+					"scaleY":2
+				}
+			}
+		},
+		"7198siHjPJf8g0cG": {
+			"actor":"systems/dnd5e/tokens/dragon/Wyvern.webp",
+			"token": {
+				"texture": {
+					"src":"systems/dnd5e/tokens/dragon/Wyvern.webp",
+					"scaleX":2,
+					"scaleY":2
+				}
+			}
+		},
+		"sLdpiuaZF8lujJQy": {
+			"actor":"systems/dnd5e/tokens/fiend/Barbed.webp",
+			"token": "systems/dnd5e/tokens/fiend/Barbed.webp"
+		},
+		"Aw2wmqGIatxe2ImI": {
+			"actor":"systems/dnd5e/tokens/giant/CloudGiant.webp",
+			"token": {
+				"texture": {
+					"src":"systems/dnd5e/tokens/giant/CloudGiant.webp",
+					"scaleX":1.66,
+					"scaleY":1.66
+				}
+			}
+		},
+		"KLCkHep28HBfdsky": {
+			"actor":"systems/dnd5e/tokens/giant/Ettin.webp",
+			"token": {
+				"texture": {
+					"src":"systems/dnd5e/tokens/giant/Ettin.webp",
+					"scaleX":1.5,
+					"scaleY":1.5
+				}
+			}
+		},
+		"9g4N9sjyh8Ql46to": {
+			"actor":"systems/dnd5e/tokens/giant/HillGiant.webp",
+			"token": {
+				"texture": {
+					"src":"systems/dnd5e/tokens/giant/HillGiant.webp",
+					"scaleX":1.66,
+					"scaleY":1.66
+				}
+			}
+		},
+ 		"5TmstVMURpVtmNR3": {
+			"actor":"systems/dnd5e/tokens/humanoid/HalfRedDragonVeteran.webp",
+			"token": "systems/dnd5e/tokens/humanoid/HalfRedDragonVeteran.webp"
+		},
+		"zIr3NaNF0mWz5Ahq": {
+			"actor":"systems/dnd5e/tokens/humanoid/Weretiger.webp",
+			"token": "systems/dnd5e/tokens/humanoid/Weretiger.webp"
+		},
+		"nEC1BRwM8Lx9hLXW": {
+			"actor":"systems/dnd5e/tokens/monstrosity/Androsphinx.webp",
+			"token": "systems/dnd5e/tokens/monstrosity/Androsphinx.webp"
+		},
+		"gGeLeV411iQ5Yijs": {
+			"actor":"systems/dnd5e/tokens/plant/ShamblingMound.webp",
+			"token": "systems/dnd5e/tokens/plant/ShamblingMound.webp"
+		},
+		"NB6wUgVqeOQtsQKu": {
+			"actor":"systems/dnd5e/tokens/plant/Treant.webp",
+			"token": "systems/dnd5e/tokens/plant/Treant.webp"
+		},
+		"RenLfmDT2XlbCF4x": {
+			"actor":"systems/dnd5e/tokens/undead/OgreZombie.webp",
+			"token": "systems/dnd5e/tokens/undead/OgreZombie.webp"
+		},
     "shhHtE7b92PefCWB": {
       "actor": "systems/dnd5e/tokens/aberration/Aboleth.webp",
       "token": {
@@ -127,8 +247,8 @@
       "token": {
         "texture": {
           "src": "systems/dnd5e/tokens/beast/Camel.webp",
-          "scaleX": 1.2,
-          "scaleY": 1.2
+          "scaleX": 1.5,
+          "scaleY": 1.5
         }
       }
     },
@@ -704,6 +824,10 @@
         }
       }
     },
+    "XfQMBoTh892XSnCX": {
+      "actor": "systems/dnd5e/tokens/beast/SwarmpoisonousSnakes.webp",
+      "token": "systems/dnd5e/tokens/beast/SwarmpoisonousSnakes.webp"
+    },
     "dZZFmG8LiBlgWi76": {
       "actor": "systems/dnd5e/tokens/beast/SwarmBeetles.webp",
       "token": "systems/dnd5e/tokens/beast/SwarmBeetles.webp"
@@ -757,6 +881,16 @@
       "token": {
         "texture": {
           "src": "systems/dnd5e/tokens/beast/TyrannosaurusRex.webp",
+          "scaleX": 1.5,
+          "scaleY": 1.5
+        }
+      }
+    },
+    "e5IQxSJO7ySEDdSH": {
+      "actor": "systems/dnd5e/tokens/beast/Triceratops.webp",
+      "token": {
+        "texture": {
+          "src": "systems/dnd5e/tokens/beast/Triceratops.webp",
           "scaleX": 1.5,
           "scaleY": 1.5
         }
@@ -909,6 +1043,36 @@
       "token": {
         "texture": {
           "src": "systems/dnd5e/tokens/dragon/BrassDragonWyrmling.webp",
+          "scaleX": 3,
+          "scaleY": 3
+        }
+      }
+    },
+    "hY9ptpO5Xl2tfkcj": {
+      "actor": "systems/dnd5e/tokens/dragon/BronzeDragonWyrmling.webp",
+      "token": {
+        "texture": {
+          "src": "systems/dnd5e/tokens/dragon/BronzeDragonWyrmling.webp",
+          "scaleX": 3,
+          "scaleY": 3
+        }
+      }
+    },
+    "AyvniEKtyroOe83p": {
+      "actor": "systems/dnd5e/tokens/dragon/CopperDragonWyrmling.webp",
+      "token": {
+        "texture": {
+          "src": "systems/dnd5e/tokens/dragon/CopperDragonWyrmling.webp",
+          "scaleX": 3,
+          "scaleY": 3
+        }
+      }
+    },
+    "naSoHU9KbkgeNIwB": {
+      "actor": "systems/dnd5e/tokens/dragon/GoldDragonWyrmling.webp",
+      "token": {
+        "texture": {
+          "src": "systems/dnd5e/tokens/dragon/GoldDragonWyrmling.webp",
           "scaleX": 3,
           "scaleY": 3
         }
@@ -1844,6 +2008,26 @@
         }
       }
     },
+    "geM2F7HvVGhtk3h4": {
+      "actor": "systems/dnd5e/tokens/dragon/SilverDragonAdult.webp",
+      "token": {
+        "texture": {
+          "src": "systems/dnd5e/tokens/dragon/SilverDragonAdult.webp",
+          "scaleX": 2.3,
+          "scaleY": 2.3
+        }
+      }
+    },
+    "7vswgicsiMfS4ZTS": {
+      "actor": "systems/dnd5e/tokens/dragon/BrassDragonAdult.webp",
+      "token": {
+        "texture": {
+          "src": "systems/dnd5e/tokens/dragon/BrassDragonAdult.webp",
+          "scaleX": 2.3,
+          "scaleY": 2.3
+        }
+      }
+    },
     "K4vsSlHqbBAHUDHY": {
       "actor": "systems/dnd5e/tokens/monstrosity/Hydra.webp",
       "token": {
@@ -1855,7 +2039,7 @@
       }
     },
     "M4eX4Mu5IHCr3TMf": {
-      "actor":"systems/dnd5e/tokens/dragon/BlackDragonAdult.webp",
+      "actor": "systems/dnd5e/tokens/dragon/BlackDragonAdult.webp",
       "token": {
         "texture": {
           "src": "systems/dnd5e/tokens/dragon/BlackDragonAdult.webp",
@@ -1865,7 +2049,7 @@
       }
     },
     "cGM3iVYTtCsYXjzO": {
-      "actor":"systems/dnd5e/tokens/dragon/BlueDragonAdult.webp",
+      "actor": "systems/dnd5e/tokens/dragon/BlueDragonAdult.webp",
       "token": {
         "texture": {
           "src": "systems/dnd5e/tokens/dragon/BlueDragonAdult.webp",
@@ -1875,7 +2059,7 @@
       }
     },
     "MO382D2sxtAIuUC5": {
-      "actor":"systems/dnd5e/tokens/dragon/GoldDragonAdult.webp",
+      "actor": "systems/dnd5e/tokens/dragon/GoldDragonAdult.webp",
       "token": {
         "texture": {
           "src": "systems/dnd5e/tokens/dragon/GoldDragonAdult.webp",
@@ -1897,6 +2081,16 @@
     "oDspGxRQFBhE74L2": {
       "actor": "systems/dnd5e/tokens/elemental/InvisibleStalker.webp",
       "token": "systems/dnd5e/tokens/elemental/InvisibleStalker.webp"
+    },
+    "VCuG0Z3MrO8kfDU0": {
+      "actor": "systems/dnd5e/tokens/dragon/BronzeDragonAdult.webp",
+      "token": {
+        "texture": {
+          "src": "systems/dnd5e/tokens/dragon/BronzeDragonAdult.webp",
+          "scaleX": 2.33,
+          "scaleY": 2.33
+        }
+      }
     }
   },
   "dnd5e.heroes": {

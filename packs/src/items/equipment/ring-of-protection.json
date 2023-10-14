@@ -21,7 +21,7 @@
     "rarity": "rare",
     "identified": true,
     "activation": {
-      "type": "none",
+      "type": "",
       "cost": null,
       "condition": ""
     },
@@ -30,6 +30,7 @@
       "units": ""
     },
     "cover": null,
+    "crewed": false,
     "target": {
       "value": null,
       "width": null,
@@ -97,7 +98,13 @@
         {
           "key": "system.attributes.ac.bonus",
           "mode": 2,
-          "value": "1",
+          "value": "+1",
+          "priority": null
+        },
+        {
+          "key": "system.bonuses.abilities.save",
+          "mode": 2,
+          "value": "+1",
           "priority": null
         }
       ],
@@ -112,12 +119,13 @@
         "startTurn": null
       },
       "icon": "icons/equipment/finger/ring-cabochon-silver-gold-red.webp",
-      "label": "+1 to AC",
+      "label": "Ring of Protection",
       "origin": "Compendium.dnd5e.items.QtmVEreNIWEVOoLR",
       "transfer": true,
       "flags": {},
       "tint": null,
-      "sort": 0
+      "sort": 0,
+      "_key": "!items.effects!QtmVEreNIWEVOoLR.q1wbe9ru251bfnhg"
     }
   ],
   "folder": null,
@@ -128,10 +136,11 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.1.0",
-    "coreVersion": "10.291",
+    "systemVersion": "2.2.2",
+    "coreVersion": "10.303",
     "createdTime": 1661787233653,
-    "modifiedTime": 1671220960501,
+    "modifiedTime": 1690481162093,
     "lastModifiedBy": "dnd5ebuilder0000"
-  }
+  },
+  "_key": "!items!QtmVEreNIWEVOoLR"
 }

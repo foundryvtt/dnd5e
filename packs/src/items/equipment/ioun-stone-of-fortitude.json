@@ -30,6 +30,7 @@
       "units": ""
     },
     "cover": null,
+    "crewed": false,
     "target": {
       "value": null,
       "width": null,
@@ -95,7 +96,36 @@
     "stealth": false,
     "proficient": false
   },
-  "effects": [],
+  "effects": [
+    {
+      "label": "Ioun Stone of Fortitude",
+      "icon": "icons/commodities/gems/gem-rough-cushion-purple-pink.webp",
+      "origin": "Compendium.dnd5e.items.ig5DOQtQYJPXJId4",
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "disabled": false,
+      "_id": "FpwzPfzNKZokKZF4",
+      "changes": [
+        {
+          "key": "system.abilities.con.value",
+          "mode": 2,
+          "value": "+2"
+        }
+      ],
+      "tint": null,
+      "transfer": true,
+      "flags": {},
+      "sort": 0,
+      "_key": "!items.effects!ig5DOQtQYJPXJId4.FpwzPfzNKZokKZF4"
+    }
+  ],
   "folder": null,
   "sort": 0,
   "ownership": {
@@ -104,10 +134,11 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.1.0",
-    "coreVersion": "10.291",
+    "systemVersion": "2.2.2",
+    "coreVersion": "10.303",
     "createdTime": 1661787233824,
-    "modifiedTime": 1671220963096,
+    "modifiedTime": 1690480758230,
     "lastModifiedBy": "dnd5ebuilder0000"
-  }
+  },
+  "_key": "!items!ig5DOQtQYJPXJId4"
 }

@@ -30,6 +30,7 @@
       "units": ""
     },
     "cover": null,
+    "crewed": false,
     "target": {
       "value": null,
       "width": null,
@@ -90,7 +91,36 @@
     "stealth": false,
     "proficient": false
   },
-  "effects": [],
+  "effects": [
+    {
+      "label": "Belt of Cloud Giant Strength",
+      "icon": "icons/equipment/waist/belt-thick-gemmed-steel-grey.webp",
+      "origin": "Compendium.dnd5e.items.NRj0lC3SM03s1YB3",
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "disabled": false,
+      "_id": "iGbcuTRYb2okyQeS",
+      "changes": [
+        {
+          "key": "system.abilities.str.value",
+          "mode": 4,
+          "value": "27"
+        }
+      ],
+      "tint": null,
+      "transfer": true,
+      "flags": {},
+      "sort": 0,
+      "_key": "!items.effects!NRj0lC3SM03s1YB3.iGbcuTRYb2okyQeS"
+    }
+  ],
   "folder": null,
   "sort": 0,
   "ownership": {
@@ -99,10 +129,11 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.1.0",
-    "coreVersion": "10.291",
+    "systemVersion": "2.2.2",
+    "coreVersion": "10.303",
     "createdTime": 1661787233631,
-    "modifiedTime": 1671220960287,
+    "modifiedTime": 1690480168162,
     "lastModifiedBy": "dnd5ebuilder0000"
-  }
+  },
+  "_key": "!items!NRj0lC3SM03s1YB3"
 }

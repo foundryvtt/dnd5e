@@ -2,7 +2,7 @@
   "_id": "aEiM49V8vWpWw7rU",
   "name": "Net",
   "type": "weapon",
-  "img": "icons/tools/fishing/net-simple-tan.webp",
+  "img": "icons/tools/fishing/net-gold.webp",
   "system": {
     "description": {
       "value": "<p>These thickly woven fibers are reinforced for use in combat to entrap and entangle even the most dangerous foes, rendering them vulnerable for assault with other weaponry.</p>\n<p><strong>Special.</strong> A Large or smaller creature hit by a net is restrained until it is freed. A net has no effect on creatures that are formless, or creatures that are Huge or larger. A creature can use its action to make a DC 10 Strength check, freeing itself or another creature within its reach on a success. Dealing 5 slashing damage to the net (AC 10) also frees the creature without harming it, ending the effect and destroying the net. When you use an action, bonus action, or reaction to attack with a net, you can make only one attack regardless of the number of attacks you can normally make.</p>",
@@ -18,7 +18,7 @@
     },
     "attunement": 0,
     "equipped": false,
-    "rarity": "common",
+    "rarity": "",
     "identified": true,
     "activation": {
       "type": "action",
@@ -113,5 +113,6 @@
     "createdTime": 1661787233722,
     "modifiedTime": 1671220961795,
     "lastModifiedBy": "dnd5ebuilder0000"
-  }
+  },
+  "_key": "!items!aEiM49V8vWpWw7rU"
 }

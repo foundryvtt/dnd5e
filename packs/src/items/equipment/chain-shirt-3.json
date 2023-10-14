@@ -2,7 +2,7 @@
   "_id": "cI0UhWUux8gIzSHn",
   "name": "Chain Shirt +3",
   "type": "equipment",
-  "img": "icons/equipment/chest/breastplate-metal-scaled-grey.webp",
+  "img": "icons/equipment/chest/breastplate-scale-grey.webp",
   "system": {
     "description": {
       "value": "<p><em>This armor has been embellished with powerful runes, crafted in sorcerous fires, blessed by a powerful being, or some other event has seen it bequeathed with enhanced protection for the wearer.</em></p>\n<p>You have a bonus to AC while wearing this armor.</p>",
@@ -30,6 +30,7 @@
       "units": ""
     },
     "cover": null,
+    "crewed": false,
     "target": {
       "value": null,
       "width": null,
@@ -99,10 +100,11 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.1.0",
+    "systemVersion": "2.2.2",
     "coreVersion": "10.291",
     "createdTime": 1661787233736,
-    "modifiedTime": 1671220961967,
+    "modifiedTime": 1690538789485,
     "lastModifiedBy": "dnd5ebuilder0000"
-  }
+  },
+  "_key": "!items!cI0UhWUux8gIzSHn"
 }

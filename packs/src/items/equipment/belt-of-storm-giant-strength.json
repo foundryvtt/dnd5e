@@ -30,6 +30,7 @@
       "units": ""
     },
     "cover": null,
+    "crewed": false,
     "target": {
       "value": null,
       "width": null,
@@ -90,7 +91,36 @@
     "stealth": false,
     "proficient": false
   },
-  "effects": [],
+  "effects": [
+    {
+      "label": "Belt of Storm Giant Strength",
+      "icon": "icons/equipment/waist/sash-cloth-gold-purple.webp",
+      "origin": "Compendium.dnd5e.items.wBYmPQG3nZfD88aP",
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "disabled": false,
+      "_id": "GjOniAcdINQsZbnX",
+      "changes": [
+        {
+          "key": "system.abilities.str.value",
+          "mode": 4,
+          "value": "29"
+        }
+      ],
+      "tint": null,
+      "transfer": true,
+      "flags": {},
+      "sort": 0,
+      "_key": "!items.effects!wBYmPQG3nZfD88aP.GjOniAcdINQsZbnX"
+    }
+  ],
   "folder": null,
   "sort": 0,
   "ownership": {
@@ -99,10 +129,11 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.1.0",
-    "coreVersion": "10.291",
+    "systemVersion": "2.2.2",
+    "coreVersion": "10.303",
     "createdTime": 1661787233955,
-    "modifiedTime": 1671220965569,
+    "modifiedTime": 1690480557337,
     "lastModifiedBy": "dnd5ebuilder0000"
-  }
+  },
+  "_key": "!items!wBYmPQG3nZfD88aP"
 }

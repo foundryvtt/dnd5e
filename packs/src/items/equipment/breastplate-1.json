@@ -2,7 +2,7 @@
   "_id": "84z9mVy1mCipUWEY",
   "name": "Breastplate +1",
   "type": "equipment",
-  "img": "icons/equipment/chest/breastplate-layered-steel-black.webp",
+  "img": "icons/equipment/chest/breastplate-collared-steel-grey.webp",
   "system": {
     "description": {
       "value": "<p><em>This armor has been embellished with powerful runes, crafted in sorcerous fires, blessed by a powerful being, or some other event has seen it bequeathed with enhanced protection for the wearer.</em></p>\n<p>You have a bonus to AC while wearing this armor.</p>",
@@ -30,6 +30,7 @@
       "units": ""
     },
     "cover": null,
+    "crewed": false,
     "target": {
       "value": null,
       "width": null,
@@ -99,10 +100,11 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.1.0",
+    "systemVersion": "2.2.2",
     "coreVersion": "10.291",
     "createdTime": 1661787233486,
-    "modifiedTime": 1671220957604,
+    "modifiedTime": 1690538958775,
     "lastModifiedBy": "dnd5ebuilder0000"
-  }
+  },
+  "_key": "!items!84z9mVy1mCipUWEY"
 }

@@ -1,3 +1,5 @@
+import SystemDataModel from "../../abstract.mjs";
+
 /**
  * Data model template with information on physical items.
  *
@@ -10,7 +12,7 @@
  * @property {boolean} identified         Has this item been identified?
  * @mixin
  */
-export default class PhysicalItemTemplate extends foundry.abstract.DataModel {
+export default class PhysicalItemTemplate extends SystemDataModel {
   /** @inheritdoc */
   static defineSchema() {
     return {
@@ -38,7 +40,8 @@ export default class PhysicalItemTemplate extends foundry.abstract.DataModel {
   /* -------------------------------------------- */
 
   /** @inheritdoc */
-  static migrateData(source) {
+  static _migrateData(source) {
+    super._migrateData(source);
     PhysicalItemTemplate.#migratePrice(source);
     PhysicalItemTemplate.#migrateRarity(source);
     PhysicalItemTemplate.#migrateWeight(source);
@@ -51,7 +54,7 @@ export default class PhysicalItemTemplate extends foundry.abstract.DataModel {
    * @param {object} source  The candidate source data from which the model will be constructed.
    */
   static #migratePrice(source) {
-    if ( foundry.utils.getType(source.price) === "Object" ) return;
+    if ( !("price" in source) || foundry.utils.getType(source.price) === "Object" ) return;
     source.price = {
       value: Number.isNumeric(source.price) ? Number(source.price) : 0,
       denomination: "gp"
@@ -78,6 +81,7 @@ export default class PhysicalItemTemplate extends foundry.abstract.DataModel {
    * @param {object} source  The candidate source data from which the model will be constructed.
    */
   static #migrateWeight(source) {
+    if ( !("weight" in source) ) return;
     if ( (source.weight === null) || (source.weight === undefined) ) source.weight = 0;
   }
 }

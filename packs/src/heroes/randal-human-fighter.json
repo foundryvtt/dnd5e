@@ -7,6 +7,7 @@
       "str": {
         "value": 16,
         "proficient": 1,
+        "max": null,
         "bonuses": {
           "check": "",
           "save": ""
@@ -15,6 +16,7 @@
       "dex": {
         "value": 14,
         "proficient": 0,
+        "max": null,
         "bonuses": {
           "check": "",
           "save": ""
@@ -23,6 +25,7 @@
       "con": {
         "value": 15,
         "proficient": 1,
+        "max": null,
         "bonuses": {
           "check": "",
           "save": ""
@@ -31,6 +34,7 @@
       "int": {
         "value": 9,
         "proficient": 0,
+        "max": null,
         "bonuses": {
           "check": "",
           "save": ""
@@ -39,6 +43,7 @@
       "wis": {
         "value": 13,
         "proficient": 0,
+        "max": null,
         "bonuses": {
           "check": "",
           "save": ""
@@ -47,6 +52,7 @@
       "cha": {
         "value": 11,
         "proficient": 0,
+        "max": null,
         "bonuses": {
           "check": "",
           "save": ""
@@ -61,14 +67,14 @@
       },
       "hp": {
         "value": 12,
-        "min": 0,
         "max": null,
         "temp": null,
         "tempmax": null,
         "bonuses": {
           "level": "",
           "overall": ""
-        }
+        },
+        "min": 0
       },
       "init": {
         "ability": "",
@@ -110,7 +116,7 @@
       "alignment": "Neutral Good",
       "race": "Variant Human",
       "background": "",
-      "originalClass": "z1xtuix2w8sjskct",
+      "originalClass": "TixRV4Wr5ruxXRpf",
       "xp": {
         "value": 0
       },
@@ -324,6 +330,7 @@
         }
       }
     },
+    "tools": {},
     "spells": {
       "spell1": {
         "value": 0,
@@ -504,7 +511,7 @@
         },
         "attunement": 0,
         "equipped": false,
-        "rarity": "common",
+        "rarity": "",
         "identified": true,
         "toolType": "",
         "baseItem": "",
@@ -532,7 +539,8 @@
         "createdTime": null,
         "modifiedTime": null,
         "lastModifiedBy": null
-      }
+      },
+      "_key": "!actors.items!2Pdtnswo8Nj2nafY.qy0pVLQWv8tjWJPR"
     },
     {
       "_id": "xhSq81g4w9vTE0nK",
@@ -555,6 +563,7 @@
           "units": ""
         },
         "cover": null,
+        "crewed": false,
         "target": {
           "value": null,
           "width": null,
@@ -624,7 +633,8 @@
         "createdTime": null,
         "modifiedTime": null,
         "lastModifiedBy": null
-      }
+      },
+      "_key": "!actors.items!2Pdtnswo8Nj2nafY.xhSq81g4w9vTE0nK"
     },
     {
       "_id": "r7UallZJjcIFsz8i",
@@ -647,6 +657,7 @@
           "units": ""
         },
         "cover": null,
+        "crewed": false,
         "target": {
           "value": null,
           "width": null,
@@ -716,7 +727,8 @@
         "createdTime": null,
         "modifiedTime": null,
         "lastModifiedBy": null
-      }
+      },
+      "_key": "!actors.items!2Pdtnswo8Nj2nafY.r7UallZJjcIFsz8i"
     },
     {
       "_id": "6kg0dYblyeGcoclF",
@@ -737,7 +749,7 @@
         },
         "attunement": 0,
         "equipped": true,
-        "rarity": "common",
+        "rarity": "",
         "identified": true,
         "activation": {
           "type": "action",
@@ -749,6 +761,7 @@
           "units": ""
         },
         "cover": null,
+        "crewed": false,
         "target": {
           "value": null,
           "width": null,
@@ -812,7 +825,8 @@
         "createdTime": null,
         "modifiedTime": 1670011647487,
         "lastModifiedBy": "dnd5ebuilder0000"
-      }
+      },
+      "_key": "!actors.items!2Pdtnswo8Nj2nafY.6kg0dYblyeGcoclF"
     },
     {
       "_id": "HW10iFMNN5JaJBFf",
@@ -833,7 +847,7 @@
         },
         "attunement": 0,
         "equipped": false,
-        "rarity": "common",
+        "rarity": "",
         "identified": true,
         "activation": {
           "type": "action",
@@ -845,6 +859,7 @@
           "units": ""
         },
         "cover": null,
+        "crewed": false,
         "target": {
           "value": null,
           "width": null,
@@ -938,7 +953,8 @@
         "createdTime": null,
         "modifiedTime": null,
         "lastModifiedBy": null
-      }
+      },
+      "_key": "!actors.items!2Pdtnswo8Nj2nafY.HW10iFMNN5JaJBFf"
     },
     {
       "_id": "3d2b3iqnC0t116JB",
@@ -959,7 +975,7 @@
         },
         "attunement": 0,
         "equipped": true,
-        "rarity": "common",
+        "rarity": "",
         "identified": true,
         "activation": {
           "type": "action",
@@ -971,6 +987,7 @@
           "units": ""
         },
         "cover": null,
+        "crewed": false,
         "target": {
           "value": null,
           "width": null,
@@ -1064,7 +1081,8 @@
         "createdTime": null,
         "modifiedTime": null,
         "lastModifiedBy": null
-      }
+      },
+      "_key": "!actors.items!2Pdtnswo8Nj2nafY.3d2b3iqnC0t116JB"
     },
     {
       "_id": "9vMrpjx6tZQVKCrF",
@@ -1085,7 +1103,7 @@
         },
         "attunement": 0,
         "equipped": false,
-        "rarity": "common",
+        "rarity": "",
         "identified": true,
         "activation": {
           "type": "action",
@@ -1097,6 +1115,7 @@
           "units": ""
         },
         "cover": null,
+        "crewed": false,
         "target": {
           "value": null,
           "width": null,
@@ -1186,7 +1205,8 @@
         "createdTime": null,
         "modifiedTime": null,
         "lastModifiedBy": null
-      }
+      },
+      "_key": "!actors.items!2Pdtnswo8Nj2nafY.9vMrpjx6tZQVKCrF"
     },
     {
       "_id": "ZC11cflszLu1zXBL",
@@ -1207,7 +1227,7 @@
         },
         "attunement": 0,
         "equipped": true,
-        "rarity": "common",
+        "rarity": "",
         "identified": true,
         "activation": {
           "type": "",
@@ -1219,6 +1239,7 @@
           "units": ""
         },
         "cover": null,
+        "crewed": false,
         "target": {
           "value": null,
           "width": null,
@@ -1294,7 +1315,8 @@
         "createdTime": null,
         "modifiedTime": null,
         "lastModifiedBy": null
-      }
+      },
+      "_key": "!actors.items!2Pdtnswo8Nj2nafY.ZC11cflszLu1zXBL"
     },
     {
       "_id": "UwH6scwUXajH9jCh",
@@ -1315,7 +1337,7 @@
         },
         "attunement": 0,
         "equipped": true,
-        "rarity": "common",
+        "rarity": "",
         "identified": true,
         "activation": {
           "type": "",
@@ -1327,6 +1349,7 @@
           "units": ""
         },
         "cover": null,
+        "crewed": false,
         "target": {
           "value": null,
           "width": null,
@@ -1406,7 +1429,8 @@
         "createdTime": null,
         "modifiedTime": null,
         "lastModifiedBy": null
-      }
+      },
+      "_key": "!actors.items!2Pdtnswo8Nj2nafY.UwH6scwUXajH9jCh"
     },
     {
       "_id": "bq6RL40FQY52C7YE",
@@ -1427,7 +1451,7 @@
         },
         "attunement": 0,
         "equipped": false,
-        "rarity": "common",
+        "rarity": "",
         "identified": true,
         "capacity": {
           "type": "weight",
@@ -1461,7 +1485,8 @@
         "createdTime": null,
         "modifiedTime": null,
         "lastModifiedBy": null
-      }
+      },
+      "_key": "!actors.items!2Pdtnswo8Nj2nafY.bq6RL40FQY52C7YE"
     },
     {
       "_id": "Z4bdbM4ROqwPcSli",
@@ -1482,7 +1507,7 @@
         },
         "attunement": 0,
         "equipped": false,
-        "rarity": "common",
+        "rarity": "",
         "identified": true,
         "capacity": {
           "type": "weight",
@@ -1516,7 +1541,8 @@
         "createdTime": null,
         "modifiedTime": 1670011640341,
         "lastModifiedBy": "dnd5ebuilder0000"
-      }
+      },
+      "_key": "!actors.items!2Pdtnswo8Nj2nafY.Z4bdbM4ROqwPcSli"
     },
     {
       "_id": "RtMzLZEMAVyFwhLo",
@@ -1537,7 +1563,7 @@
         },
         "attunement": 0,
         "equipped": false,
-        "rarity": "common",
+        "rarity": "",
         "identified": true
       },
       "sort": 0,
@@ -1559,7 +1585,8 @@
         "createdTime": null,
         "modifiedTime": null,
         "lastModifiedBy": null
-      }
+      },
+      "_key": "!actors.items!2Pdtnswo8Nj2nafY.RtMzLZEMAVyFwhLo"
     },
     {
       "_id": "BQIFmKZfFgM3XQPq",
@@ -1580,7 +1607,7 @@
         },
         "attunement": 0,
         "equipped": false,
-        "rarity": "common",
+        "rarity": "",
         "identified": true
       },
       "sort": 0,
@@ -1602,7 +1629,8 @@
         "createdTime": null,
         "modifiedTime": 1670011640351,
         "lastModifiedBy": "dnd5ebuilder0000"
-      }
+      },
+      "_key": "!actors.items!2Pdtnswo8Nj2nafY.BQIFmKZfFgM3XQPq"
     },
     {
       "_id": "ASK21hDnn53hojQo",
@@ -1623,7 +1651,7 @@
         },
         "attunement": 0,
         "equipped": false,
-        "rarity": "common",
+        "rarity": "",
         "identified": true,
         "activation": {
           "type": "action",
@@ -1635,6 +1663,7 @@
           "units": ""
         },
         "cover": null,
+        "crewed": false,
         "target": {
           "value": null,
           "width": null,
@@ -1697,7 +1726,8 @@
         "createdTime": null,
         "modifiedTime": 1670011640358,
         "lastModifiedBy": "dnd5ebuilder0000"
-      }
+      },
+      "_key": "!actors.items!2Pdtnswo8Nj2nafY.ASK21hDnn53hojQo"
     },
     {
       "_id": "pueZRmygDueiEPES",
@@ -1718,7 +1748,7 @@
         },
         "attunement": 0,
         "equipped": false,
-        "rarity": "common",
+        "rarity": "",
         "identified": true,
         "activation": {
           "type": "action",
@@ -1730,6 +1760,7 @@
           "units": ""
         },
         "cover": null,
+        "crewed": false,
         "target": {
           "value": null,
           "width": null,
@@ -1792,7 +1823,8 @@
         "createdTime": null,
         "modifiedTime": null,
         "lastModifiedBy": null
-      }
+      },
+      "_key": "!actors.items!2Pdtnswo8Nj2nafY.pueZRmygDueiEPES"
     },
     {
       "_id": "ph8RkMxLvWBSgIt3",
@@ -1813,7 +1845,7 @@
         },
         "attunement": 0,
         "equipped": true,
-        "rarity": "common",
+        "rarity": "",
         "identified": true,
         "capacity": {
           "type": "items",
@@ -1847,7 +1879,8 @@
         "createdTime": null,
         "modifiedTime": null,
         "lastModifiedBy": null
-      }
+      },
+      "_key": "!actors.items!2Pdtnswo8Nj2nafY.ph8RkMxLvWBSgIt3"
     },
     {
       "_id": "GUsTVResLLnqzu20",
@@ -1868,7 +1901,7 @@
         },
         "attunement": 0,
         "equipped": false,
-        "rarity": "common",
+        "rarity": "",
         "identified": true
       },
       "sort": 0,
@@ -1890,7 +1923,8 @@
         "createdTime": null,
         "modifiedTime": null,
         "lastModifiedBy": null
-      }
+      },
+      "_key": "!actors.items!2Pdtnswo8Nj2nafY.GUsTVResLLnqzu20"
     },
     {
       "_id": "C47RdG1DyqBhG1aB",
@@ -1911,7 +1945,7 @@
         },
         "attunement": 0,
         "equipped": false,
-        "rarity": "common",
+        "rarity": "",
         "identified": true
       },
       "sort": 0,
@@ -1933,7 +1967,8 @@
         "createdTime": null,
         "modifiedTime": 1670011640365,
         "lastModifiedBy": "dnd5ebuilder0000"
-      }
+      },
+      "_key": "!actors.items!2Pdtnswo8Nj2nafY.C47RdG1DyqBhG1aB"
     },
     {
       "_id": "NcqTt0GXqkHxybfP",
@@ -1954,7 +1989,7 @@
         },
         "attunement": 0,
         "equipped": false,
-        "rarity": "common",
+        "rarity": "",
         "identified": true,
         "activation": {
           "type": "action",
@@ -1966,6 +2001,7 @@
           "units": ""
         },
         "cover": null,
+        "crewed": false,
         "target": {
           "value": null,
           "width": null,
@@ -2059,7 +2095,8 @@
         "createdTime": null,
         "modifiedTime": null,
         "lastModifiedBy": null
-      }
+      },
+      "_key": "!actors.items!2Pdtnswo8Nj2nafY.NcqTt0GXqkHxybfP"
     },
     {
       "_id": "XlBuqgctFFNNx8Xn",
@@ -2080,7 +2117,7 @@
         },
         "attunement": 0,
         "equipped": false,
-        "rarity": "common",
+        "rarity": "",
         "identified": true,
         "activation": {
           "type": "action",
@@ -2092,6 +2129,7 @@
           "units": ""
         },
         "cover": null,
+        "crewed": false,
         "target": {
           "value": 1,
           "width": null,
@@ -2154,7 +2192,8 @@
         "createdTime": null,
         "modifiedTime": 1670011640371,
         "lastModifiedBy": "dnd5ebuilder0000"
-      }
+      },
+      "_key": "!actors.items!2Pdtnswo8Nj2nafY.XlBuqgctFFNNx8Xn"
     },
     {
       "_id": "rRBxjDaj0KZoEySZ",
@@ -2175,7 +2214,7 @@
         },
         "attunement": 0,
         "equipped": false,
-        "rarity": "common",
+        "rarity": "",
         "identified": true,
         "activation": {
           "type": "action",
@@ -2187,6 +2226,7 @@
           "units": ""
         },
         "cover": null,
+        "crewed": false,
         "target": {
           "value": null,
           "width": null,
@@ -2249,7 +2289,8 @@
         "createdTime": null,
         "modifiedTime": 1670011647493,
         "lastModifiedBy": "dnd5ebuilder0000"
-      }
+      },
+      "_key": "!actors.items!2Pdtnswo8Nj2nafY.rRBxjDaj0KZoEySZ"
     },
     {
       "_id": "puS6D5ZXmiKePl1F",
@@ -2270,7 +2311,7 @@
         },
         "attunement": 0,
         "equipped": false,
-        "rarity": "common",
+        "rarity": "",
         "identified": true,
         "activation": {
           "type": "action",
@@ -2282,6 +2323,7 @@
           "units": "hour"
         },
         "cover": null,
+        "crewed": false,
         "target": {
           "value": 40,
           "width": null,
@@ -2349,7 +2391,8 @@
         "createdTime": null,
         "modifiedTime": 1670011647502,
         "lastModifiedBy": "dnd5ebuilder0000"
-      }
+      },
+      "_key": "!actors.items!2Pdtnswo8Nj2nafY.puS6D5ZXmiKePl1F"
     },
     {
       "_id": "gxGtzolLrAw1A3or",
@@ -2370,7 +2413,7 @@
         },
         "attunement": 0,
         "equipped": false,
-        "rarity": "common",
+        "rarity": "",
         "identified": true
       },
       "sort": 0,
@@ -2392,7 +2435,8 @@
         "createdTime": null,
         "modifiedTime": null,
         "lastModifiedBy": null
-      }
+      },
+      "_key": "!actors.items!2Pdtnswo8Nj2nafY.gxGtzolLrAw1A3or"
     },
     {
       "_id": "FZMxHGzQLRylEPyZ",
@@ -2415,6 +2459,7 @@
           "units": ""
         },
         "cover": null,
+        "crewed": false,
         "target": {
           "value": null,
           "width": null,
@@ -2484,10 +2529,42 @@
         "createdTime": null,
         "modifiedTime": null,
         "lastModifiedBy": null
-      }
+      },
+      "_key": "!actors.items!2Pdtnswo8Nj2nafY.FZMxHGzQLRylEPyZ"
     },
     {
-      "_id": "z1xtuix2w8sjskct",
+      "name": "Watchman",
+      "type": "background",
+      "system": {
+        "description": {
+          "value": "<ul><li><strong>Skill Proficiencies:</strong> Athletics, Insight</li><li><strong>Languages:</strong> Two of your choice</li><li><strong>Equipment:</strong> A guard's uniform, a horn with which to summon help, and a pouch containing 10 gp</li></ul>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "",
+        "advancement": []
+      },
+      "img": "icons/environment/settlement/watchtower-stone.webp",
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.1.0",
+        "coreVersion": "10.291",
+        "createdTime": 1673040183979,
+        "modifiedTime": 1673040617213,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_id": "iODPoFlvprdu59Ga",
+      "_key": "!actors.items!2Pdtnswo8Nj2nafY.iODPoFlvprdu59Ga"
+    },
+    {
+      "_id": "TixRV4Wr5ruxXRpf",
       "name": "Fighter",
       "type": "class",
       "img": "icons/skills/melee/hand-grip-sword-red.webp",
@@ -2504,7 +2581,16 @@
         "hitDiceUsed": 0,
         "advancement": [
           {
-            "_id": "mlcvcu7p2jfwxwa3",
+            "type": "HitPoints",
+            "configuration": {},
+            "value": {
+              "1": "max"
+            },
+            "title": "Hit Points",
+            "icon": "systems/dnd5e/icons/svg/hit-points.svg",
+            "_id": "yhZd0KJPJERAWGgA"
+          },
+          {
             "type": "ItemGrant",
             "configuration": {
               "items": [
@@ -2523,15 +2609,16 @@
             },
             "value": {
               "added": {
-                "8esd96grt1e7ct4k": "Compendium.dnd5e.classfeatures.fbExzwNwEAl2kW9c",
-                "pszansgr88j2t9wz": "Compendium.dnd5e.classfeatures.nTjmWbyHweXuIqwc"
+                "xBoN1auJaGal3hva": "Compendium.dnd5e.classfeatures.fbExzwNwEAl2kW9c",
+                "QYbinNgLV2ZYxX2c": "Compendium.dnd5e.classfeatures.nTjmWbyHweXuIqwc"
               }
             },
             "level": 1,
-            "title": "Features"
+            "title": "Features",
+            "icon": "systems/dnd5e/icons/svg/item-grant.svg",
+            "_id": "PwWJCRoUIftcpy47"
           },
           {
-            "_id": "0u1lokzkujbw3yp0",
             "type": "ItemGrant",
             "configuration": {
               "items": [
@@ -2549,10 +2636,11 @@
             },
             "value": {},
             "level": 2,
-            "title": "Features"
+            "title": "Features",
+            "icon": "systems/dnd5e/icons/svg/item-grant.svg",
+            "_id": "pxHWfZrwT5tdCH61"
           },
           {
-            "_id": "6vyztxepntp4zeku",
             "type": "ItemGrant",
             "configuration": {
               "items": [
@@ -2570,10 +2658,11 @@
             },
             "value": {},
             "level": 3,
-            "title": "Features"
+            "title": "Features",
+            "icon": "systems/dnd5e/icons/svg/item-grant.svg",
+            "_id": "tdk8Hj5vUKl7Uz2a"
           },
           {
-            "_id": "q2xwt7zc4sl0dufv",
             "type": "ItemGrant",
             "configuration": {
               "items": [
@@ -2591,10 +2680,11 @@
             },
             "value": {},
             "level": 5,
-            "title": "Features"
+            "title": "Features",
+            "icon": "systems/dnd5e/icons/svg/item-grant.svg",
+            "_id": "1UqvFqvQRr0Mzk3K"
           },
           {
-            "_id": "gcaoecqaltbqlcw9",
             "type": "ItemGrant",
             "configuration": {
               "items": [
@@ -2612,23 +2702,60 @@
             },
             "value": {},
             "level": 9,
-            "title": "Features"
+            "title": "Features",
+            "icon": "systems/dnd5e/icons/svg/item-grant.svg",
+            "_id": "hu99eLBFUHiOOKdl"
           },
           {
-            "_id": "o6jij5xwl7jkaob6",
-            "type": "HitPoints",
-            "configuration": {},
-            "value": {
-              "1": "max"
+            "type": "ItemChoice",
+            "configuration": {
+              "hint": "You adopt a particular style of fighting as your specialty. Choose one of the following options. You can’t take a Fighting Style option more than once, even if you later get to choose again.",
+              "choices": {
+                "1": 1
+              },
+              "allowDrops": true,
+              "type": "feat",
+              "pool": [
+                "Compendium.dnd5e.classfeatures.8YwPFv3UAPjWVDNf",
+                "Compendium.dnd5e.classfeatures.zSlV0O2rQMdoq6pB",
+                "Compendium.dnd5e.classfeatures.hCop9uJrWhF1QPb4",
+                "Compendium.dnd5e.classfeatures.3Nc6u9pyStByuJsm",
+                "Compendium.dnd5e.classfeatures.06NVMYf58Z76O85O",
+                "Compendium.dnd5e.classfeatures.mHcSjcHJ8oZu3hkb"
+              ],
+              "spell": {
+                "ability": "",
+                "preparation": "",
+                "uses": {
+                  "max": "",
+                  "per": ""
+                }
+              },
+              "restriction": {
+                "type": "class",
+                "subtype": "fightingStyle",
+                "level": ""
+              }
             },
-            "title": ""
+            "value": {
+              "added": {
+                "1": {
+                  "dpXCnkmf6mF4qivf": "Compendium.dnd5e.classfeatures.zSlV0O2rQMdoq6pB"
+                }
+              }
+            },
+            "title": "Fighting Style",
+            "icon": "systems/dnd5e/icons/svg/item-choice.svg",
+            "_id": "3hmYTgl5rz8Y5Z0I"
           },
           {
-            "_id": "sk4yn2giu0mx48u8",
             "type": "ScaleValue",
             "configuration": {
               "identifier": "indomitable",
               "type": "number",
+              "distance": {
+                "units": ""
+              },
               "scale": {
                 "9": {
                   "value": 1
@@ -2639,20 +2766,21 @@
                 "17": {
                   "value": 3
                 }
-              },
-              "distance": {
-                "units": ""
               }
             },
             "value": {},
-            "title": "Indomitable Uses"
+            "title": "Indomitable Uses",
+            "icon": "systems/dnd5e/icons/svg/scale-value.svg",
+            "_id": "B7YpSu4cVsEbHbrv"
           },
           {
-            "_id": "sh0ih4vmnv6qsjwp",
             "type": "ScaleValue",
             "configuration": {
               "identifier": "action-surge",
               "type": "number",
+              "distance": {
+                "units": ""
+              },
               "scale": {
                 "2": {
                   "value": 1
@@ -2660,13 +2788,156 @@
                 "17": {
                   "value": 2
                 }
-              },
-              "distance": {
-                "units": ""
               }
             },
             "value": {},
-            "title": "Action Surge Uses"
+            "title": "Action Surge Uses",
+            "icon": "systems/dnd5e/icons/svg/scale-value.svg",
+            "_id": "kxiasN1v8KFm9nse"
+          },
+          {
+            "type": "AbilityScoreImprovement",
+            "configuration": {
+              "points": 2,
+              "fixed": {
+                "str": 0,
+                "dex": 0,
+                "con": 0,
+                "int": 0,
+                "wis": 0,
+                "cha": 0
+              }
+            },
+            "value": {
+              "type": "asi"
+            },
+            "level": 4,
+            "title": "Ability Score Improvement",
+            "icon": "systems/dnd5e/icons/svg/ability-score-improvement.svg",
+            "_id": "rvfuW71lYEeJW7HS"
+          },
+          {
+            "type": "AbilityScoreImprovement",
+            "configuration": {
+              "points": 2,
+              "fixed": {
+                "str": 0,
+                "dex": 0,
+                "con": 0,
+                "int": 0,
+                "wis": 0,
+                "cha": 0
+              }
+            },
+            "value": {
+              "type": "asi"
+            },
+            "level": 8,
+            "title": "Ability Score Improvement",
+            "icon": "systems/dnd5e/icons/svg/ability-score-improvement.svg",
+            "_id": "g49SXigwmpaZW0Hm"
+          },
+          {
+            "type": "AbilityScoreImprovement",
+            "configuration": {
+              "points": 2,
+              "fixed": {
+                "str": 0,
+                "dex": 0,
+                "con": 0,
+                "int": 0,
+                "wis": 0,
+                "cha": 0
+              }
+            },
+            "value": {
+              "type": "asi"
+            },
+            "level": 12,
+            "title": "Ability Score Improvement",
+            "icon": "systems/dnd5e/icons/svg/ability-score-improvement.svg",
+            "_id": "gXVE2mfohi6iErff"
+          },
+          {
+            "type": "AbilityScoreImprovement",
+            "configuration": {
+              "points": 2,
+              "fixed": {
+                "str": 0,
+                "dex": 0,
+                "con": 0,
+                "int": 0,
+                "wis": 0,
+                "cha": 0
+              }
+            },
+            "value": {
+              "type": "asi"
+            },
+            "level": 16,
+            "title": "Ability Score Improvement",
+            "icon": "systems/dnd5e/icons/svg/ability-score-improvement.svg",
+            "_id": "GdBOLIPXmNSWRSmO"
+          },
+          {
+            "_id": "puDaUsYrlks0z5gm",
+            "type": "AbilityScoreImprovement",
+            "configuration": {
+              "points": 2,
+              "fixed": {
+                "str": 0,
+                "dex": 0,
+                "con": 0,
+                "int": 0,
+                "wis": 0,
+                "cha": 0
+              }
+            },
+            "value": {
+              "type": "asi"
+            },
+            "level": 19,
+            "title": ""
+          },
+          {
+            "_id": "ZvTgE4hnO4clYc0z",
+            "type": "AbilityScoreImprovement",
+            "configuration": {
+              "points": 2,
+              "fixed": {
+                "str": 0,
+                "dex": 0,
+                "con": 0,
+                "int": 0,
+                "wis": 0,
+                "cha": 0
+              }
+            },
+            "value": {
+              "type": "asi"
+            },
+            "level": 6,
+            "title": ""
+          },
+          {
+            "_id": "zw1ftiHmlUeHRTdc",
+            "type": "AbilityScoreImprovement",
+            "configuration": {
+              "points": 2,
+              "fixed": {
+                "str": 0,
+                "dex": 0,
+                "con": 0,
+                "int": 0,
+                "wis": 0,
+                "cha": 0
+              }
+            },
+            "value": {
+              "type": "asi"
+            },
+            "level": 14,
+            "title": ""
           }
         ],
         "saves": [
@@ -2704,22 +2975,25 @@
         }
       },
       "_stats": {
-        "systemId": null,
-        "systemVersion": null,
-        "coreVersion": null,
-        "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
-      }
+        "systemId": "dnd5e",
+        "systemVersion": "2.2.2",
+        "coreVersion": "10.303",
+        "createdTime": 1661787234279,
+        "modifiedTime": 1691519178768,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!actors.items!2Pdtnswo8Nj2nafY.TixRV4Wr5ruxXRpf"
     },
     {
-      "_id": "8esd96grt1e7ct4k",
-      "name": "Fighting Style",
+      "_id": "xBoN1auJaGal3hva",
+      "name": "Fighting Style (Fighter)",
+      "ownership": {
+        "default": 0
+      },
       "type": "feat",
-      "img": "icons/skills/melee/weapons-crossed-daggers-orange.webp",
       "system": {
         "description": {
-          "value": "<p>You adopt a particular style of fighting as your specialty. Choose one of the following options from the appropriate class list. You can't take a Fighting Style option more than once, even if you later get to choose again.</p>\n<h3>Fighter Options</h3>\n<p>@Compendium[dnd5e.classfeatures.8YwPFv3UAPjWVDNf]{Archery}</p><p>@Compendium[dnd5e.classfeatures.zSlV0O2rQMdoq6pB]{Defense}</p><p>@Compendium[dnd5e.classfeatures.hCop9uJrWhF1QPb4]{Dueling}</p><p>@Compendium[dnd5e.classfeatures.3Nc6u9pyStByuJsm]{Great Weapon Fighting}</p><p>@Compendium[dnd5e.classfeatures.06NVMYf58Z76O85O]{Protection}</p><p>@Compendium[dnd5e.classfeatures.mHcSjcHJ8oZu3hkb]{Two Weapon Fighting}</p>\n<h3>Paladin Options</h3>\n<p>@Compendium[dnd5e.classfeatures.zSlV0O2rQMdoq6pB]{Defense}</p><p>@Compendium[dnd5e.classfeatures.hCop9uJrWhF1QPb4]{Dueling}</p><p>@Compendium[dnd5e.classfeatures.3Nc6u9pyStByuJsm]{Great Weapon Fighting}</p><p>@Compendium[dnd5e.classfeatures.06NVMYf58Z76O85O]{Protection}</p>\n<h3>Ranger Options</h3>\n<p>@Compendium[dnd5e.classfeatures.8YwPFv3UAPjWVDNf]{Archery}</p><p>@Compendium[dnd5e.classfeatures.zSlV0O2rQMdoq6pB]{Defense}</p><p>@Compendium[dnd5e.classfeatures.hCop9uJrWhF1QPb4]{Dueling}</p><p>@Compendium[dnd5e.classfeatures.mHcSjcHJ8oZu3hkb]{Two Weapon Fighting}</p>",
+          "value": "<p>You adopt a particular style of fighting as your specialty. Choose one of the following options from the appropriate class list. You can't take a Fighting Style option more than once, even if you later get to choose again.</p>\n<p>@Compendium[dnd5e.classfeatures.8YwPFv3UAPjWVDNf]{Archery}</p>\n<p>@Compendium[dnd5e.classfeatures.zSlV0O2rQMdoq6pB]{Defense}</p>\n<p>@Compendium[dnd5e.classfeatures.hCop9uJrWhF1QPb4]{Dueling}</p>\n<p>@Compendium[dnd5e.classfeatures.3Nc6u9pyStByuJsm]{Great Weapon Fighting}</p>\n<p>@Compendium[dnd5e.classfeatures.06NVMYf58Z76O85O]{Protection}</p>\n<p>@Compendium[dnd5e.classfeatures.mHcSjcHJ8oZu3hkb]{Two Weapon Fighting}</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -2734,6 +3008,7 @@
           "units": ""
         },
         "cover": null,
+        "crewed": false,
         "target": {
           "value": null,
           "width": null,
@@ -2775,41 +3050,42 @@
           "scaling": "spell"
         },
         "type": {
-          "value": "",
+          "value": "class",
           "subtype": ""
         },
-        "requirements": "Fighter 1, Paladin 2, Ranger 2",
+        "requirements": "Fighter 1",
         "recharge": {
           "value": null,
           "charged": false
         }
       },
-      "effects": [],
-      "folder": null,
       "sort": 0,
-      "ownership": {
-        "default": 0
-      },
       "flags": {
         "dnd5e": {
           "sourceId": "Compendium.dnd5e.classfeatures.fbExzwNwEAl2kW9c",
-          "advancementOrigin": "z1xtuix2w8sjskct.mlcvcu7p2jfwxwa3"
+          "advancementOrigin": "TixRV4Wr5ruxXRpf.PwWJCRoUIftcpy47"
         }
       },
+      "img": "icons/skills/melee/weapons-crossed-daggers-orange.webp",
+      "effects": [],
+      "folder": null,
       "_stats": {
-        "systemId": null,
-        "systemVersion": null,
-        "coreVersion": null,
-        "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
-      }
+        "systemId": "dnd5e",
+        "systemVersion": "2.2.2",
+        "coreVersion": "10.303",
+        "createdTime": 1661787234404,
+        "modifiedTime": 1691519178770,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!actors.items!2Pdtnswo8Nj2nafY.xBoN1auJaGal3hva"
     },
     {
-      "_id": "pszansgr88j2t9wz",
+      "_id": "QYbinNgLV2ZYxX2c",
       "name": "Second Wind",
+      "ownership": {
+        "default": 0
+      },
       "type": "feat",
-      "img": "icons/magic/life/heart-glowing-red.webp",
       "system": {
         "description": {
           "value": "<p>You have a limited well of stamina that you can draw on to protect yourself from harm. On your turn, you can use a bonus action to regain hit points equal to 1d10 + your fighter level.</p><p>Once you use this feature, you must finish a short or long rest before you can use it again.</p>",
@@ -2827,6 +3103,7 @@
           "units": ""
         },
         "cover": null,
+        "crewed": false,
         "target": {
           "value": null,
           "width": null,
@@ -2873,98 +3150,190 @@
           "scaling": "spell"
         },
         "type": {
-          "value": "",
+          "value": "class",
           "subtype": ""
         },
         "requirements": "Fighter 1",
         "recharge": {
-          "value": 1,
+          "value": null,
           "charged": false
         }
       },
-      "effects": [],
       "folder": null,
       "sort": 0,
-      "ownership": {
-        "default": 0
-      },
       "flags": {
         "dnd5e": {
           "sourceId": "Compendium.dnd5e.classfeatures.nTjmWbyHweXuIqwc",
-          "advancementOrigin": "z1xtuix2w8sjskct.mlcvcu7p2jfwxwa3"
-        },
-        "core": {
-          "sourceId": "Compendium.dnd5e.classfeatures.nTjmWbyHweXuIqwc"
+          "advancementOrigin": "TixRV4Wr5ruxXRpf.PwWJCRoUIftcpy47"
         }
       },
+      "img": "icons/magic/life/heart-glowing-red.webp",
+      "effects": [],
       "_stats": {
-        "systemId": null,
-        "systemVersion": null,
-        "coreVersion": null,
-        "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
-      }
+        "systemId": "dnd5e",
+        "systemVersion": "2.2.2",
+        "coreVersion": "10.303",
+        "createdTime": 1661787234421,
+        "modifiedTime": 1691519178770,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!actors.items!2Pdtnswo8Nj2nafY.QYbinNgLV2ZYxX2c"
     },
     {
-      "name": "Watchman",
-      "type": "background",
-      "system": {
-        "description": {
-          "value": "<ul><li><strong>Skill Proficiencies:</strong> Athletics, Insight</li><li><strong>Languages:</strong> Two of your choice</li><li><strong>Equipment:</strong> A guard's uniform, a horn with which to summon help, and a pouch containing 10 gp</li></ul>",
-          "chat": "",
-          "unidentified": ""
-        },
-        "source": "",
-        "advancement": []
-      },
-      "img": "icons/environment/settlement/watchtower-stone.webp",
-      "effects": [],
-      "folder": null,
-      "sort": 0,
+      "_id": "dpXCnkmf6mF4qivf",
+      "name": "Fighting Style: Defense",
       "ownership": {
         "default": 0
       },
-      "flags": {},
+      "type": "feat",
+      "system": {
+        "description": {
+          "value": "<p>While you are wearing armor, you gain a +1 bonus to AC</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "SRD 5.1",
+        "activation": {
+          "type": "",
+          "cost": null,
+          "condition": ""
+        },
+        "duration": {
+          "value": "",
+          "units": ""
+        },
+        "cover": null,
+        "crewed": false,
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": ""
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": ""
+        },
+        "uses": {
+          "value": null,
+          "max": "",
+          "per": null,
+          "recovery": ""
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null
+        },
+        "ability": "",
+        "actionType": "",
+        "attackBonus": "",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "type": {
+          "value": "class",
+          "subtype": "fightingStyle"
+        },
+        "requirements": "Fighter 1, Champion 10, Paladin 2, Ranger 2",
+        "recharge": {
+          "value": null,
+          "charged": false
+        }
+      },
+      "flags": {
+        "dnd5e": {
+          "sourceId": "Compendium.dnd5e.classfeatures.zSlV0O2rQMdoq6pB",
+          "advancementOrigin": "TixRV4Wr5ruxXRpf.3hmYTgl5rz8Y5Z0I"
+        }
+      },
+      "img": "icons/equipment/shield/heater-stone-orange.webp",
+      "effects": [
+        {
+          "_id": "U3so0zDcVt4sIBRz",
+          "flags": {},
+          "changes": [
+            {
+              "key": "system.attributes.ac.bonus",
+              "value": "+1",
+              "mode": 2,
+              "priority": null
+            }
+          ],
+          "disabled": false,
+          "duration": {
+            "startTime": null,
+            "seconds": null,
+            "combat": null,
+            "rounds": null,
+            "turns": null,
+            "startRound": null,
+            "startTurn": null
+          },
+          "icon": "icons/equipment/shield/heater-stone-orange.webp",
+          "label": "Fighting Style: Defense",
+          "origin": "Item.4mQUDmiDBePkQD6Y",
+          "tint": null,
+          "transfer": true,
+          "sort": 0,
+          "_key": "!actors.items.effects!2Pdtnswo8Nj2nafY.dpXCnkmf6mF4qivf.U3so0zDcVt4sIBRz"
+        }
+      ],
+      "folder": null,
+      "sort": 0,
       "_stats": {
         "systemId": "dnd5e",
-        "systemVersion": "2.1.0",
-        "coreVersion": "10.291",
-        "createdTime": 1673040183979,
-        "modifiedTime": 1673040617213,
+        "systemVersion": "2.2.2",
+        "coreVersion": "10.303",
+        "createdTime": 1661787234445,
+        "modifiedTime": 1691519178770,
         "lastModifiedBy": "dnd5ebuilder0000"
       },
-      "_id": "iODPoFlvprdu59Ga"
+      "_key": "!actors.items!2Pdtnswo8Nj2nafY.dpXCnkmf6mF4qivf"
     }
   ],
   "effects": [
     {
-      "_id": "4K6IBJnngJs6qjpa",
+      "_id": "U3so0zDcVt4sIBRz",
+      "flags": {},
       "changes": [
         {
           "key": "system.attributes.ac.bonus",
+          "value": "+1",
           "mode": 2,
-          "value": "1",
           "priority": null
         }
       ],
       "disabled": false,
       "duration": {
         "startTime": 0,
-        "startRound": 0,
-        "startTurn": 0,
         "seconds": null,
         "combat": null,
         "rounds": null,
-        "turns": null
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
       },
       "icon": "icons/equipment/shield/heater-stone-orange.webp",
-      "label": "+1 to AC",
-      "origin": "Compendium.dnd5e.heroes.K5XFMOiiM9WufwYO.Item.xhSq81g4w9vTE0nK",
-      "transfer": false,
-      "flags": {},
+      "label": "Fighting Style: Defense",
+      "origin": "Compendium.dnd5e.heroes.2Pdtnswo8Nj2nafY.Item.dpXCnkmf6mF4qivf",
       "tint": null,
-      "sort": 0
+      "transfer": false,
+      "sort": 0,
+      "_key": "!actors.effects!2Pdtnswo8Nj2nafY.U3so0zDcVt4sIBRz"
     }
   ],
   "folder": null,
@@ -2976,10 +3345,11 @@
   "_id": "2Pdtnswo8Nj2nafY",
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.1.0",
-    "coreVersion": "10.291",
+    "systemVersion": "2.2.2",
+    "coreVersion": "10.303",
     "createdTime": 1661787232150,
-    "modifiedTime": 1673040617213,
+    "modifiedTime": 1691519178818,
     "lastModifiedBy": "dnd5ebuilder0000"
-  }
+  },
+  "_key": "!actors!2Pdtnswo8Nj2nafY"
 }

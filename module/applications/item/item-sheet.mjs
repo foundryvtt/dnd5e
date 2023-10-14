@@ -30,7 +30,12 @@ export default class ItemSheet5e extends ItemSheet {
       height: 400,
       classes: ["dnd5e", "sheet", "item"],
       resizable: true,
-      scrollY: [".tab.details"],
+      scrollY: [
+        ".tab[data-tab=details]",
+        ".tab[data-tab=effects] .items-list",
+        ".tab[data-tab=description] .editor-content",
+        ".tab[data-tab=advancement] .items-list"
+      ],
       tabs: [{navSelector: ".tabs", contentSelector: ".sheet-body", initial: "description"}],
       dragDrop: [
         {dragSelector: "[data-effect-id]", dropSelector: ".effects-list"},
@@ -224,11 +229,8 @@ export default class ItemSheet5e extends ItemSheet {
     // Attributes
     else if ( consume.type === "attribute" ) {
       const attrData = game.dnd5e.isV10 ? actor.system : actor.type;
-      const attributes = TokenDocument.implementation.getConsumedAttributes(attrData);
-      attributes.bar.forEach(a => a.push("value"));
-      return attributes.bar.concat(attributes.value).reduce((obj, a) => {
-        let k = a.join(".");
-        obj[k] = k;
+      return TokenDocument.implementation.getConsumedAttributes(attrData).reduce((obj, attr) => {
+        obj[attr] = attr;
         return obj;
       }, {});
     }
@@ -295,7 +297,7 @@ export default class ItemSheet5e extends ItemSheet {
       case "spell":
         return CONFIG.DND5E.spellPreparationModes[this.item.system.preparation];
       case "tool":
-        return game.i18n.localize(this.item.system.proficient ? "DND5E.Proficient" : "DND5E.NotProficient");
+        return CONFIG.DND5E.proficiencyLevels[this.item.system.prof?.multiplier || 0];
     }
     return null;
   }
@@ -311,6 +313,11 @@ export default class ItemSheet5e extends ItemSheet {
     const props = [];
     const labels = this.item.labels;
     switch ( this.item.type ) {
+      case "consumable":
+        for ( const [k, v] of Object.entries(this.item.system.properties ?? {}) ) {
+          if ( v === true ) props.push(CONFIG.DND5E.physicalWeaponProperties[k]);
+        }
+        break;
       case "equipment":
         props.push(CONFIG.DND5E.equipmentTypes[this.item.system.armor.type]);
         if ( this.item.isArmor || this.item.isMountable ) props.push(labels.armor);
@@ -573,7 +580,7 @@ export default class ItemSheet5e extends ItemSheet {
   async _onDropActiveEffect(event, data) {
     const effect = await ActiveEffect.implementation.fromDropData(data);
     if ( !this.item.isOwner || !effect ) return false;
-    if ( (this.item.uuid === effect.parent.uuid) || (this.item.uuid === effect.origin) ) return false;
+    if ( (this.item.uuid === effect.parent?.uuid) || (this.item.uuid === effect.origin) ) return false;
     return ActiveEffect.create({
       ...effect.toObject(),
       origin: this.item.uuid
@@ -586,6 +593,7 @@ export default class ItemSheet5e extends ItemSheet {
    * Handle the dropping of an advancement or item with advancements onto the advancements tab.
    * @param {DragEvent} event                  The concluding DragEvent which contains drop data.
    * @param {object} data                      The data transfer extracted from the event.
+   * @returns {Promise}
    */
   async _onDropAdvancement(event, data) {
     let advancements;
@@ -622,7 +630,7 @@ export default class ItemSheet5e extends ItemSheet {
     }
 
     // If no advancements need to be applied, just add them to the item
-    const advancementArray = foundry.utils.deepClone(this.item.system.advancement);
+    const advancementArray = this.item.system.toObject().advancement;
     advancementArray.push(...advancements.map(a => a.toObject()));
     this.item.update({"system.advancement": advancementArray});
   }

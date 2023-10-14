@@ -2,6 +2,7 @@
  * Attempt to create a macro from the dropped data. Will use an existing macro if one exists.
  * @param {object} dropData     The dropped data
  * @param {number} slot         The hotbar slot to use
+ * @returns {Promise}
  */
 export async function create5eMacro(dropData, slot) {
   const macroData = { type: "script", scope: "actor" };
@@ -31,8 +32,9 @@ export async function create5eMacro(dropData, slot) {
   }
 
   // Assign the macro to the hotbar
-  const macro = game.macros.find(m => (m.name === macroData.name) && (m.command === macroData.command)
-    && m.author.isSelf) || await Macro.create(macroData);
+  const macro = game.macros.find(m => {
+    return (m.name === macroData.name) && (m.command === macroData.command) && m.isAuthor;
+  }) || await Macro.create(macroData);
   game.user.assignHotbarMacro(macro, slot);
 }
 

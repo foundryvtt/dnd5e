@@ -72,8 +72,8 @@ export default class SpellData extends SystemDataModel.mixin(
   /* -------------------------------------------- */
 
   /** @inheritdoc */
-  static migrateData(source) {
-    super.migrateData(source);
+  static _migrateData(source) {
+    super._migrateData(source);
     SpellData.#migrateComponentData(source);
     SpellData.#migrateScaling(source);
   }
@@ -132,4 +132,13 @@ export default class SpellData extends SystemDataModel.mixin(
     return this.parent?.actor?.flags.dnd5e?.spellCriticalThreshold ?? Infinity;
   }
 
+  /* -------------------------------------------- */
+
+  /**
+   * The proficiency multiplier for this item.
+   * @returns {number}
+   */
+  get proficiencyMultiplier() {
+    return 1;
+  }
 }

@@ -1,3 +1,5 @@
+import SystemDataModel from "../../abstract.mjs";
+
 /**
  * Data model template for equipment that can be mounted on a vehicle.
  *
@@ -10,7 +12,7 @@
  * @property {string} hp.conditions  Conditions that are triggered when this equipment takes damage.
  * @mixin
  */
-export default class MountableTemplate extends foundry.abstract.DataModel {
+export default class MountableTemplate extends SystemDataModel {
   /** @inheritdoc */
   static defineSchema() {
     return {
