@@ -89,13 +89,6 @@
 
             {{!-- Item Activation Template --}}
             {{> "dnd5e.item-activation"}}
-            {{#if system.activation.type}}
-            <div class="form-group">
-                <label class="checkbox">
-                    <input type="checkbox" name="system.uses.autoDestroy" {{checked system.uses.autoDestroy}}> {{ localize "DND5E.ItemDestroyEmpty" }}
-                </label>
-            </div>
-            {{/if}}
 
             <h3 class="form-header">{{ localize "DND5E.ItemConsumableActivation" }}</h3>
 
