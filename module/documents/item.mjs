@@ -438,15 +438,18 @@ export default class Item5e extends Item {
     if ( ["none", ""].includes(tgt.type) ) tgt.type = null;   // Backwards compatibility
     if ( [null, "self"].includes(tgt.type) ) tgt.value = tgt.units = null;
     else if ( tgt.units === "touch" ) tgt.value = null;
-    this.labels.target = tgt.type
-      ? [tgt.value, C.distanceUnits[tgt.units], C.targetTypes[tgt.type]].filterJoin(" ") : "";
+
+    if ( this.hasTarget ) {
+      this.labels.target = [tgt.value, C.distanceUnits[tgt.units], C.targetTypes[tgt.type]].filterJoin(" ");
+    }
 
     // Range Label
     let rng = this.system.range ?? {};
     if ( ["none", ""].includes(rng.units) ) rng.units = null; // Backwards compatibility
     if ( [null, "touch", "self"].includes(rng.units) ) rng.value = rng.long = null;
-    this.labels.range = rng.units
-      ? [rng.value, rng.long ? `/ ${rng.long}` : null, C.distanceUnits[rng.units]].filterJoin(" ") : "";
+    if ( this.isActive && rng.units ) {
+      this.labels.range = [rng.value, rng.long ? `/ ${rng.long}` : null, C.distanceUnits[rng.units]].filterJoin(" ");
+    } else this.labels.range = game.i18n.localize("DND5E.None");
 
     // Recharge Label
     let chg = this.system.recharge ?? {};

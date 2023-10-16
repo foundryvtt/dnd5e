@@ -243,7 +243,7 @@ export default class ActivatedEffectTemplate extends SystemDataModel {
    * @type {boolean}
    */
   get hasLimitedUses() {
-    return this.isActive && (!!this.uses.per && (this.uses.max > 0));
+    return this.isActive && (this.uses.per in CONFIG.DND5E.limitedUsePeriods) && (this.uses.max > 0);
   }
 
   /**
@@ -251,7 +251,8 @@ export default class ActivatedEffectTemplate extends SystemDataModel {
    * @type {boolean}
    */
   get hasResource() {
-    return this.isActive && this.consume.target && this.consume.type && (!this.hasAttack || (this.consume.type !== "ammo"));
+    const consume = this.consume;
+    return this.isActive && !!consume.target && !!consume.type && (!this.hasAttack || (consume.type !== "ammo"));
   }
 
   /* -------------------------------------------- */
