@@ -1,20 +1,17 @@
 # FoundryVTT dnd5e Active Effects Examples
 
-![Up to date as of 2.1.x](https://img.shields.io/badge/dnd5e-v2.1.x-informational)
-
-See [Kandashi's Active Effects Guide](https://docs.google.com/document/d/1DuZaIFVq0YulDOvpahrfhZ6dK7LuclIRlGOtT0BIYEo) for a trove of useful information
+![Up to date as of 2.3.x](https://img.shields.io/badge/dnd5e-v2.3.x-informational)
 
 This document only covers Active Effects available to the Core dnd5e System.
 
 ## Legend
 
-`[number]` - These square brakets mean "replace this with your value of the type within the brackets".
+`[number]` - These square brackets mean "replace this with your value of the type within the brackets".
 So this example: `+[number]` would mean you input `+3`.
 
 `[formula]` - When `formula` is mentioned in this document it means this value can be populated with any dice formula. For example, Bless adds several effects with the Effect Value of `1d4`.
 
-
-As part of this, an Actor's Rolldata is available as ["@attributes."](https://github.com/foundryvtt/dnd5e/wiki/Roll-Formulas) Useful examples:
+As part of this, an [Actor's Rolldata](https://github.com/foundryvtt/dnd5e/wiki/Roll-Formulas) is available as "@attributes." Useful examples:
 
 | @attribute                 | Description                   |
 | -------------------------- | ----------------------------- |
@@ -23,23 +20,21 @@ As part of this, an Actor's Rolldata is available as ["@attributes."](https://gi
 | `@details.level`           | Actor's overall Level         |
 | `@classes.barbarian.levels` | Actor's Barbarian Class Level |
 
-  
-> Note that when using formulas in an Active Effect Value, the actor sheet display that corresponds to the changed value will not display the evaluated formula, but it will be applied when rolled.
+> [!Note]
+> When using formulas in an Active Effect Value, the actor sheet display that corresponds to the changed value will not display the evaluated formula, but it will be applied when rolled.
 > E.g. When adding `+@abilities.cha.mod` to `system.bonuses.abilities.save` to simulate a Paladin's Aura of Protection, the actor sheet will not display that bonus applied to saving throws. The bonus will be present when the saving throw is rolled.
 
-To find out more about these, this post from Unsoluble in the [FoundryVTT Discord server](https://discord.gg/foundryvtt)'s #core-how-to channel can help:
+| Change Mode | Description |
+|------------ | ------------|
+| Add         | Adds the provided value to a number. This can be used to both add and subtract from a particular value by specifying `+1` or `-1` as the value to add. |
+| Multiply    | Multiplies the defined attribute by the numeric value in the Effect Value field.|
+| Override    | Replaces the defined attribute with the value provided in the Effect Value field.|
+| Downgrade   | Reduces the defined attribute only in cases where the current value of that attribute would be greater than value specified in the Effect Value field.|
+| Upgrade     | Increases the defined attribute only in cases where the current value of that attribute would be less than value specified in the Effect Value field. |
+| Custom      | The Custom change mode applies logic defined by a game system or add-on module. The dnd5e system does not utilize the Custom Change Mode|
 
-> To explore the data model in order to refer to inline properties like character levels, attributes, and other values, here are a few approaches:
->
-> • Select a token, then open up the dev tools (F12 on Win; ⌥⌘I on Mac), and paste this into the Console:
-`console.log(canvas.tokens.controlled[0].actor.getRollData());`
->
-> • Or: Install the "Autocomplete Inline Properties" module, to be able to just start typing in a supported field and have the available properties pop up (not all systems supported yet).
->
-> • Or: Install this module (by pasting this manifest URL into the bottom of the Install Module window), enable it in your world, find and import its macro from the bundled Compendium, and run it on the selected token. `https://raw.githubusercontent.com/relick/FoundryVTT-Actor-Attribute-Lists/master/module.json`
->
-> • Or: Right-click an actor in the sidebar and choose Export Data, which will get you a JSON file you can browse through. 
-
+> [!important]
+> When using the `ADD` change mode, it is always recommended to include the `+` in the Effect Value, this will ensure that if you have multiple effects targeting the same Attribute, they will not be concatenated (e.g. two effects that `ADD | +1` will result in a bonus of `+1+1`, whereas two effects that `ADD | 1` will result in a bonus of `+11`.
 
 ## Commonly Desired Effect Examples
 
@@ -75,6 +70,13 @@ E.g. an Item or potion that sets an ability score to a set value while in use
 | Attribute Key | Change Mode | Effect Value |
 | -------- | -------- | -------- |
 | `system.abilities.[abbreviation].value`     | Override     | `[number]`     |
+
+#### Upgrading an Ability Value
+E.g. an Item or potion that sets an ability score to a set value, if the value does not already exceed that value, such as the Gauntlets of Ogre Power
+
+| Attribute Key | Change Mode | Effect Value |
+| -------- | -------- | -------- |
+| `system.abilities.[abbreviation].value`     | Upgrade     | `[number]`     |
 
 #### Bonus to a Specific Ability Save
 
@@ -229,12 +231,12 @@ E.g. An Item or Spell which adds to the Actor's current AC to something for the 
 
 #### Override the AC Calculation to a custom formula
 
-E.g. An Item or Spell which sets the Actor's AC to something like `12 + Int` for the duration.
+E.g. An Item or Spell which sets the Actor's AC to `12 + Int` for the duration.
 
 | Attribute Key | Change Mode | Effect Value |
 | -------- | -------- | -------- |
 | `system.attributes.ac.calc`     | Override     | `custom`     |
-| `system.attributes.ac.formula`     | Custom     | `10 + @abilities.str.mod`     |
+| `system.attributes.ac.formula`     | Custom     | `12 + @abilities.int.mod`     |
 
 ---
 
@@ -430,11 +432,11 @@ E.g. An Item or Spell which allows additional use(s) of a Class Feature (e.g. ad
 
 | Attribute Key | Change Mode | Effect Value |
 | -------- | -------- | -------- |
-| `system.scale.[classIdentifier].[scaleIdentifier].value`     | Add     | `+[number]`     |
+| `system.scale.barbarian.rages.value`     | Add     | `+[number]`     |
 
 #### Increase the number of die of a Dice Scale Value
 E.g. An Item or Spell which increases the number of die in a Dice Scale Value (e.g. adds a die to a Rogue's Sneak Attack).
 
 | Attribute Key | Change Mode | Effect Value |
 | -------- | -------- | -------- |
-| `system.scale.[classIdentifier].[scaleIdentifier].number`     | Add     | `+[number]`     |
+| `system.scale.rogue.sneak-attack.number`     | Add     | `+[number]`     |
