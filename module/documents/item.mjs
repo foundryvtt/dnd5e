@@ -935,8 +935,7 @@ export default class Item5e extends Item {
    * @returns {ItemUseConfiguration}  Configuration data for the roll.
    */
   _getUsageConfig() {
-    const { consume, activation, uses, target, level, preparation } = this.system;
-    const active = !!activation?.type;
+    const { consume, uses, target, level, preparation } = this.system;
 
     const config = {
       consumeSpellSlot: null,
@@ -950,13 +949,13 @@ export default class Item5e extends Item {
       config.consumeSpellSlot = true;
       config.slotLevel = preparation?.mode === "pact" ? "pact" : `spell${level}`;
     }
-    if ( active && this.hasLimitedUses ) config.consumeUsage = uses.prompt;
-    if ( active && !!consume?.type && !!consume?.target && (!this.hasAttack || (consume.type !== "ammo")) ) {
+    if ( this.hasLimitedUses ) config.consumeUsage = uses.prompt;
+    if ( this.hasResource ) {
       config.consumeResource = true;
       // Do not suggest consuming your own uses if also consuming them through resources.
       if ( consume.target === this.id ) config.consumeUsage = null;
     }
-    if ( active && game.user.can("TEMPLATE_CREATE") && this.hasAreaTarget ) config.createMeasuredTemplate = target.prompt;
+    if ( game.user.can("TEMPLATE_CREATE") && this.hasAreaTarget ) config.createMeasuredTemplate = target.prompt;
 
     return config;
   }
