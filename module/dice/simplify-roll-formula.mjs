@@ -107,7 +107,7 @@ function _simplifyDiceTerms(terms) {
   // Split the unannotated terms into different die sizes and signs
   const diceQuantities = unannotated.reduce((obj, curr, i) => {
     if ( curr instanceof OperatorTerm ) return obj;
-    let face = curr.constructor?.name === "Coin" ? "c":curr.faces;
+    const face = curr.constructor?.name === "Coin" ? "c" : curr.faces;
     const key = `${unannotated[i - 1].operator}${face}`;
     obj[key] = (obj[key] ?? 0) + curr.number;
     return obj;
