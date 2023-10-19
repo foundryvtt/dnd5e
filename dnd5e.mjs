@@ -69,10 +69,9 @@ Hooks.once("init", function() {
   // Configure module art.
   game.dnd5e.moduleArt = new ModuleArt();
 
-  // Remove honor, sanity, and piety from configuration if they are not enabled
+  // Remove honor & sanity from configuration if they aren't enabled
   if ( !game.settings.get("dnd5e", "honorScore") ) delete DND5E.abilities.hon;
   if ( !game.settings.get("dnd5e", "sanityScore") ) delete DND5E.abilities.san;
-  if ( !game.settings.get("dnd5e", "pietyScore") ) delete DND5E.abilities.pty;
 
   // Configure trackable & consumable attributes.
   _configureTrackableAttributes();

@@ -93,6 +93,7 @@ export default class ItemSheet5e extends ItemSheet {
       isFlatDC: item.system.save?.scaling === "flat",
       isLine: ["line", "wall"].includes(item.system.target?.type),
       isFormulaRecharge: item.system.uses?.per in CONFIG.DND5E.limitedUseFormulaPeriods,
+      isCostlessAction: item.system.activation?.type in CONFIG.DND5E.staticAbilityActivationTypes,
 
       // Vehicles
       isCrewed: item.system.activation?.type === "crew",

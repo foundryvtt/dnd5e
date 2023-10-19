@@ -77,13 +77,6 @@ DND5E.abilities = {
     type: "mental",
     defaults: { npc: "wis", vehicle: 0 },
     improvement: false
-  },
-  pty: {
-    label: "DND5E.AbilityPty",
-    abbreviation: "DND5E.AbilityPtyAbbr",
-    type: "mental",
-    defaults: { character: 1, npc: 1, vehicle: 0 },
-    improvement: false
   }
 };
 preLocalize("abilities", { keys: ["label", "abbreviation"] });
@@ -398,18 +391,27 @@ preLocalize("timePeriods");
 /* -------------------------------------------- */
 
 /**
+ * Ways in which to activate an item that cannot be labeled with a cost.
+ * @enum {string}
+ */
+DND5E.staticAbilityActivationTypes = {
+  none: "DND5E.NoneActionLabel",
+  special: DND5E.timePeriods.spec
+};
+preLocalize("staticAbilityActivationTypes");
+
+/**
  * Various ways in which an item or ability can be activated.
  * @enum {string}
  */
 DND5E.abilityActivationTypes = {
+  ...DND5E.staticAbilityActivationTypes,
   action: "DND5E.Action",
   bonus: "DND5E.BonusAction",
   reaction: "DND5E.Reaction",
-  free: "DND5E.FreeActionLabel",
   minute: DND5E.timePeriods.minute,
   hour: DND5E.timePeriods.hour,
   day: DND5E.timePeriods.day,
-  special: DND5E.timePeriods.spec,
   legendary: "DND5E.LegendaryActionLabel",
   mythic: "DND5E.MythicActionLabel",
   lair: "DND5E.LairActionLabel",
