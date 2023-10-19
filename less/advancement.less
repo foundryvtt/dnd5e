@@ -204,6 +204,46 @@
       }
     }
   }
+
+  /* ----------------------------------------- */
+  /*  Traits                                   */
+  /* ----------------------------------------- */
+  &.traits {
+    --grid-two-column-right-size: 0.6fr;
+
+    .selected-trait {
+      h4 {
+        font-weight: bold;
+      }
+      ul {
+        list-style: none;
+        padding: 0;
+        li {
+          display: flex;
+          gap: 0.5em;
+          &:not(:first-of-type) {
+            padding-block-start: 0.5em;
+          }
+        }
+        label {
+          flex-grow: 1;
+          display: flex;
+          gap: 1em;
+          align-items: baseline;
+        }
+      }
+    }
+
+    .hint textarea {
+      flex: 1 0 100%;
+    }
+
+    [data-action="add-choice"] {
+      display: block;
+      padding-block: 0.25em;
+      text-align: center;
+    }
+  }
 }
 
 .dnd5e.advancement-migration {

@@ -1966,7 +1966,8 @@ DND5E.advancementTypes = {
   HitPoints: advancement.HitPointsAdvancement,
   ItemChoice: advancement.ItemChoiceAdvancement,
   ItemGrant: advancement.ItemGrantAdvancement,
-  ScaleValue: advancement.ScaleValueAdvancement
+  ScaleValue: advancement.ScaleValueAdvancement,
+  Trait: advancement.TraitAdvancement
 };
 
 /* -------------------------------------------- */
