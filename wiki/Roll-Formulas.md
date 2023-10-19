@@ -1,4 +1,13 @@
-![Up to date as of 2.1.2](https://img.shields.io/static/v1?label=dnd5e&message=2.1.2&color=informational)
+![Up to date as of 2.3](https://img.shields.io/static/v1?label=dnd5e&message=2.3&color=informational)
+> <details><summary>To explore the data model within Foundry to find the properties detailed below, here are a few approaches:</summary>
+>
+> • Select a token, then open up the dev tools (F12 on Win; ⌥⌘I on Mac), and paste this into the Console (or save it as a Script macro in your hotbar):
+`console.log(canvas.tokens.controlled[0].actor.getRollData());`
+>
+> • Or: Install the "Autocomplete Inline Properties" module, to be able to just start typing in a supported field and have the available properties pop up (not all systems supported yet).
+>
+> • Or: Right-click an actor in the sidebar and choose Export Data, which will get you a JSON file you can browse through. (This won’t contain any values that are derived at roll-time.)
+></details>
 
 ## Actor Properties
 
