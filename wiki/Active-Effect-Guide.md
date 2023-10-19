@@ -405,11 +405,11 @@ system.traits.ci.value
 ### Scale Value
 
 ```
-system.scale.[classId].[scaleId]
-                                 .value
-                                 .number
-                                 .die
-                                 .faces
+system.scale.[classIdentifier].[scaleIdentifier]
+                                                .value
+                                                .number
+                                                .die
+                                                .faces
 ```
 
 > <details>
@@ -419,15 +419,22 @@ system.scale.[classId].[scaleId]
 >
 > | Key | Value    |
 > | ------------- | -------- |
-> |`system.scale.[classId].[scaleId]`| 3d8|
-> | `system.scale.[classId].[scaleId].number` | 3 |
-> | `system.scale.[classId].[scaleId].die` | d8  |
-> | `system.scale.[classId].[scaleId].faces` | 8    |
+> |`system.scale.[classIdentifier].[scaleIdentifier]`| 3d8|
+> | `system.scale.[classIdentifier].[scaleIdentifier].number` | 3 |
+> | `system.scale.[classIdentifier].[scaleIdentifier].die` | d8  |
+> | `system.scale.[classIdentifier].[scaleIdentifier].faces` | 8    |
 > </details>
 
-#### Increase the value of a Scale Values
-E.g. An Item or Spell which allows additional use(s) of a Class Feature.
+#### Increase the value of a Scale Value
+E.g. An Item or Spell which allows additional use(s) of a Class Feature (e.g. adds an additional use of a Barbarian's Rage).
 
 | Attribute Key | Change Mode | Effect Value |
 | -------- | -------- | -------- |
-| `system.scale.[classId].[scaleId].value`     | Add     | `+[number]`     |
+| `system.scale.[classIdentifier].[scaleIdentifier].value`     | Add     | `+[number]`     |
+
+#### Increase the number of die of a Dice Scale Value
+E.g. An Item or Spell which increases the number of die in a Dice Scale Value (e.g. adds a die to a Rogue's Sneak Attack).
+
+| Attribute Key | Change Mode | Effect Value |
+| -------- | -------- | -------- |
+| `system.scale.[classIdentifier].[scaleIdentifier].number`     | Add     | `+[number]`     |
