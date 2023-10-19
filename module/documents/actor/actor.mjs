@@ -1141,7 +1141,7 @@ export default class Actor5e extends Actor {
       data.toolBonus = bonus.join(" + ");
     }
 
-    const flavor = game.i18n.format("DND5E.ToolPromptTitle", {tool: Trait.keyLabel("tool", toolId) ?? ""});
+    const flavor = game.i18n.format("DND5E.ToolPromptTitle", {tool: Trait.keyLabel(toolId, {trait: "tool"}) ?? ""});
     const rollData = foundry.utils.mergeObject({
       data, flavor,
       title: `${flavor}: ${this.name}`,

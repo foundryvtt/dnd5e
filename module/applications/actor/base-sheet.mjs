@@ -158,7 +158,7 @@ export default class ActorSheet5e extends ActorSheet {
         entry.abbreviation = CONFIG.DND5E.abilities[entry.ability]?.abbreviation;
         entry.icon = this._getProficiencyIcon(entry.value);
         entry.hover = CONFIG.DND5E.proficiencyLevels[entry.value];
-        entry.label = prop === "skills" ? CONFIG.DND5E.skills[key]?.label : Trait.keyLabel("tool", key);
+        entry.label = prop === "skills" ? CONFIG.DND5E.skills[key]?.label : Trait.keyLabel(key, {trait: "tool"});
         entry.baseValue = source.system[prop]?.[key]?.value ?? 0;
       }
     });
@@ -417,7 +417,7 @@ export default class ActorSheet5e extends ActorSheet {
       }
 
       data.selected = values.reduce((obj, key) => {
-        obj[key] = Trait.keyLabel(trait, key) ?? key;
+        obj[key] = Trait.keyLabel(key, { trait }) ?? key;
         return obj;
       }, {});
 

@@ -1,3 +1,5 @@
+import SelectChoices from "./select-choices.mjs";
+
 /**
  * Cached version of the base items compendia indices with the needed subtype fields.
  * @type {object}
@@ -6,7 +8,7 @@
 const _cachedIndices = {};
 
 /* -------------------------------------------- */
-/*  Trait Lists                                 */
+/*  Application                                 */
 /* -------------------------------------------- */
 
 /**
@@ -17,46 +19,82 @@ const _cachedIndices = {};
 export function actorKeyPath(trait) {
   const traitConfig = CONFIG.DND5E.traits[trait];
   if ( traitConfig.actorKeyPath ) return traitConfig.actorKeyPath;
-  return `traits.${trait}`;
+  return `system.traits.${trait}`;
 }
 
 /* -------------------------------------------- */
 
 /**
- * Fetch the categories object for the specified trait.
+ * Get the current trait values for the provided actor.
+ * @param {BlackFlagActor} actor  Actor from which to retrieve the values.
+ * @param {string} trait          Trait as defined in `CONFIG.DND5E.traits`.
+ * @returns {Object<number>}
+ */
+export function actorValues(actor, trait) {
+  const keyPath = actorKeyPath(trait);
+  const data = foundry.utils.getProperty(actor, keyPath);
+  if ( !data ) return {};
+  const values = {};
+
+  if ( ["skills", "tool"].includes(trait) ) {
+    Object.entries(data).forEach(([k, d]) => values[`${trait}:${k}`] = d.value);
+  } else if ( trait === "saves" ) {
+    Object.entries(data).forEach(([k, d]) => values[`${trait}:${k}`] = d.proficient);
+  } else {
+    data.value.forEach(v => values[`${trait}:${v}`] = 1);
+  }
+
+  return values;
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Calculate the change key path for a provided trait key.
+ * @param {string} key      Key for a trait to set.
+ * @param {string} [trait]  Trait as defined in `CONFIG.BlackFlag.traits`, only needed if key isn't prefixed.
+ * @returns {string|void}
+ */
+export function changeKeyPath(key, trait) {
+  const split = key.split(":");
+  if ( !trait ) trait = split.shift();
+
+  const traitConfig = CONFIG.DND5E.traits[trait];
+  if ( !traitConfig ) return;
+
+  let keyPath = actorKeyPath(trait);
+
+  if ( trait === "saves" ) {
+    return `${keyPath}.${split.pop()}.proficient`;
+  } else if ( ["skills", "tools"].includes(trait) ) {
+    return `${keyPath}.${split.pop()}.value`;
+  } else {
+    return `${keyPath}.value`;
+  }
+}
+
+/* -------------------------------------------- */
+/*  Trait Lists                                 */
+/* -------------------------------------------- */
+
+/**
+ * Build up a trait structure containing all of the children gathered from config & base items.
  * @param {string} trait  Trait as defined in `CONFIG.DND5E.traits`.
- * @returns {object}      Trait categories defined within `CONFIG.DND5E`.
+ * @returns {object}      Object with trait categories and children.
+ * @private
  */
-export function categories(trait) {
+export async function categories(trait) {
   const traitConfig = CONFIG.DND5E.traits[trait];
-  return CONFIG.DND5E[traitConfig.configKey ?? trait];
-}
+  const config = foundry.utils.deepClone(CONFIG.DND5E[traitConfig.configKey ?? trait]);
 
-/* -------------------------------------------- */
-
-/**
- * Get a list of choices for a specific trait.
- * @param {string} trait             Trait as defined in `CONFIG.DND5E.traits`.
- * @param {Set<string>} [chosen=[]]  Optional list of keys to be marked as chosen.
- * @returns {object}                 Object mapping proficiency ids to choice objects.
- */
-export async function choices(trait, chosen=new Set()) {
-  const traitConfig = CONFIG.DND5E.traits[trait];
-  if ( foundry.utils.getType(chosen) === "Array" ) chosen = new Set(chosen);
-
-  let data = Object.entries(categories(trait)).reduce((obj, [key, label]) => {
-    obj[key] = { label, chosen: chosen.has(key) };
-    return obj;
-  }, {});
-
-  if ( traitConfig.children ) {
-    for ( const [categoryKey, childrenKey] of Object.entries(traitConfig.children) ) {
-      const children = CONFIG.DND5E[childrenKey];
-      if ( !children || !data[categoryKey] ) continue;
-      data[categoryKey].children = Object.entries(children).reduce((obj, [key, label]) => {
-        obj[key] = { label, chosen: chosen.has(key) };
-        return obj;
-      }, {});
+  for ( const key of Object.keys(config) ) {
+    if ( foundry.utils.getType(config[key]) !== "Object" ) config[key] = { label: config[key] };
+    if ( traitConfig.children?.[key] ) {
+      const children = config[key].children ??= {};
+      for ( const [childKey, value] of Object.entries(CONFIG.DND5E[traitConfig.children[key]]) ) {
+        if ( foundry.utils.getType(value) !== "Object" ) children[childKey] = { label: value };
+        else children[childKey] = { ...value };
+      }
     }
   }
 
@@ -64,9 +102,9 @@ export async function choices(trait, chosen=new Set()) {
     const keyPath = `system.${traitConfig.subtypes.keyPath}`;
     const map = CONFIG.DND5E[`${trait}ProficienciesMap`];
 
-    // Merge all IDs lists together
+    // Merge all ID lists together
     const ids = traitConfig.subtypes.ids.reduce((obj, key) => {
-      if ( CONFIG.DND5E[key] ) Object.assign(obj, CONFIG.DND5E[key]);
+      foundry.utils.mergeObject(obj, CONFIG.DND5E[key] ?? {});
       return obj;
     }, {});
 
@@ -84,29 +122,94 @@ export async function choices(trait, chosen=new Set()) {
       let type = foundry.utils.getProperty(index, keyPath);
       if ( map?.[type] ) type = map[type];
 
-      const entry = { label: index.name, chosen: chosen.has(key) };
-
       // No category for this type, add at top level
-      if ( !data[type] ) data[key] = entry;
+      if ( !config[type] ) config[key] = { label: index.name };
 
-      // Add as child to appropriate category
+      // Add as child of appropriate category
       else {
-        data[type].children ??= {};
-        data[type].children[key] = entry;
+        config[type].children ??= {};
+        config[type].children[key] = { label: index.name };
       }
     }
   }
 
-  // Sort Categories
-  if ( traitConfig.sortCategories ) data = dnd5e.utils.sortObjectEntries(data, "label");
+  return config;
+}
 
-  // Sort Children
-  for ( const category of Object.values(data) ) {
-    if ( !category.children ) continue;
-    category.children = dnd5e.utils.sortObjectEntries(category.children, "label");
+/* -------------------------------------------- */
+
+/**
+ * Get a list of choices for a specific trait.
+ * @param {string} trait                      Trait as defined in `CONFIG.DND5E.traits`.
+ * @param {object} [options={}]
+ * @param {Set<string>} [options.chosen=[]]   Optional list of keys to be marked as chosen.
+ * @param {boolean} [options.prefixed=false]  Should keys be prefixed with trait type?
+ * @param {boolean} [options.any=false]       Should the "Any" option be added to each category?
+ * @returns {SelectChoices}                   Object mapping proficiency ids to choice objects.
+ */
+export async function choices(trait, { chosen=new Set(), prefixed=false, any=false }={}) {
+  const traitConfig = CONFIG.DND5E.traits[trait];
+  if ( !traitConfig ) return new SelectChoices();
+  if ( foundry.utils.getType(chosen) === "Array" ) chosen = new Set(chosen);
+  const categoryData = await categories(trait);
+
+  let result = {};
+  if ( prefixed && any ) {
+    const key = `${trait}:*`;
+    result[key] = {
+      label: keyLabel(key).titleCase(),
+      chosen: chosen.has(key), sorting: false, wildcard: true
+    };
   }
 
-  return data;
+  const prepareCategory = (key, data, result, prefix) => {
+    let label = foundry.utils.getType(data) === "Object"
+      ? foundry.utils.getProperty(data, traitConfig.labelKeyPath ?? "label") : data;
+    if ( !label ) label = key;
+    if ( prefixed ) key = `${prefix}:${key}`;
+    result[key] = {
+      label: game.i18n.localize(label),
+      chosen: chosen.has(key),
+      sorting: traitConfig.sortCategories === false
+    };
+    if ( data.children ) {
+      const children = result[key].children = {};
+      if ( prefixed && any ) {
+        const anyKey = `${key}:*`;
+        children[anyKey] = {
+          label: keyLabel(anyKey).titleCase(),
+          chosen: chosen.has(anyKey), sorting: false, wildcard: true
+        };
+      }
+      Object.entries(data.children).forEach(([k, v]) => prepareCategory(k, v, children, key));
+    }
+  };
+
+  Object.entries(categoryData).forEach(([k, v]) => prepareCategory(k, v, result, trait));
+
+  return new SelectChoices(result).sorted();
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Prepare an object with all possible choices from a set of keys. These choices will be grouped by
+ * trait type if more than one type is present.
+ * @param {Set<string>} keys  Prefixed trait keys.
+ * @returns {SelectChoices}
+ */
+export async function mixedChoices(keys) {
+  if ( !keys.size ) return new SelectChoices();
+  const types = {};
+  for ( const key of keys ) {
+    const split = key.split(":");
+    const trait = split.shift();
+    const selectChoices = (await choices(trait, { prefixed: true })).filtered(new Set([key]));
+    types[trait] ??= { label: traitLabel(trait), children: new SelectChoices() };
+    types[trait].children.merge(selectChoices);
+  }
+  if ( Object.keys(types).length > 1 ) return new SelectChoices(types);
+  return Object.values(types)[0].children;
 }
 
 /* -------------------------------------------- */
@@ -190,39 +293,73 @@ export function traitIndexFields() {
  * @returns {string}        Localized label.
  */
 export function traitLabel(trait, count) {
-  let typeCap;
-  if ( trait.length === 2 ) typeCap = trait.toUpperCase();
-  else typeCap = trait.capitalize();
-
-  const pluralRule = ( count !== undefined ) ? new Intl.PluralRules(game.i18n.lang).select(count) : "other";
-  return game.i18n.localize(`DND5E.Trait${typeCap}Plural.${pluralRule}`);
+  const traitConfig = CONFIG.DND5E.traits[trait];
+  const pluralRule = (count !== undefined) ? new Intl.PluralRules(game.i18n.lang).select(count) : "other";
+  if ( !traitConfig ) return game.i18n.localize(`DND5E.TraitGenericPlural.${pluralRule}`);
+  return game.i18n.localize(`${traitConfig.labels.localization}.${pluralRule}`);
 }
 
 /* -------------------------------------------- */
 
 /**
- * Retrieve the proper display label for the provided key.
- * @param {string} trait  Trait as defined in `CONFIG.DND5E.traits`.
- * @param {string} key    Key for which to generate the label.
- * @returns {string}      Retrieved label.
+ * Retrieve the proper display label for the provided key. Will return a promise unless a categories
+ * object is provided in config.
+ * @param {string} key              Key for which to generate the label.
+ * @param {object} [config={}]
+ * @param {number} [config.count]   Number to display, only if a wildcard is used as final part of key.
+ * @param {string} [config.trait]   Trait as defined in `CONFIG.DND5E.traits` if not using a prefixed key.
+ * @param {boolean} [config.final]  Is this the final in a list?
+ * @returns {string}                Retrieved label.
  */
-export function keyLabel(trait, key) {
+export function keyLabel(key, { count, trait, final }={}) {
+  let parts = key.split(":");
+  const pluralRules = new Intl.PluralRules(game.i18n.lang);
+
+  if ( !trait ) trait = parts.shift();
   const traitConfig = CONFIG.DND5E.traits[trait];
-  if ( categories(trait)[key] ) {
-    const category = categories(trait)[key];
-    if ( !traitConfig.labelKey ) return category;
-    return foundry.utils.getProperty(category, traitConfig.labelKey);
+  if ( !traitConfig ) return key;
+  let categoryLabel = game.i18n.localize(`${traitConfig.labels.localization}.${
+    pluralRules.select(count ?? 1)}`);
+
+  const lastKey = parts.pop();
+  if ( !lastKey ) return categoryLabel;
+
+  if ( lastKey !== "*" ) {
+    // Category
+    const category = CONFIG.DND5E[traitConfig.configKey ?? trait]?.[lastKey];
+    if ( category ) {
+      return foundry.utils.getType(category) === "Object"
+        ? foundry.utils.getProperty(category, traitConfig.labelKey ?? "label") : category;
+    }
+
+    // Child
+    for ( const childrenKey of Object.values(traitConfig.children ?? {}) ) {
+      const childLabel = CONFIG.DND5E[childrenKey]?.[lastKey];
+      if ( childLabel ) return childLabel;
+    }
+
+    // Base item
+    for ( const idsKey of traitConfig.subtypes?.ids ?? [] ) {
+      const baseItemId = CONFIG.DND5E[idsKey]?.[lastKey];
+      if ( !baseItemId ) continue;
+      const index = getBaseItem(baseItemId, { indexOnly: true });
+      if ( index ) return index.name;
+      else break;
+    }
   }
 
-  for ( const childrenKey of Object.values(traitConfig.children ?? {}) ) {
-    if ( CONFIG.DND5E[childrenKey]?.[key] ) return CONFIG.DND5E[childrenKey]?.[key];
-  }
-
-  for ( const idsKey of traitConfig.subtypes?.ids ?? [] ) {
-    if ( !CONFIG.DND5E[idsKey]?.[key] ) continue;
-    const index = getBaseItem(CONFIG.DND5E[idsKey][key], { indexOnly: true });
-    if ( index ) return index.name;
-    else break;
+  // Wildcards
+  else {
+    let type;
+    if ( !parts.length ) type = categoryLabel.toLowerCase();
+    else {
+      const category = CONFIG.DND5E[traitConfig.configKey ?? trait]?.[parts.pop()];
+      if ( !category ) return key;
+      type = foundry.utils.getType(category) === "Object"
+        ? foundry.utils.getProperty(category, traitConfig.labelKey ?? "label") : category;
+    }
+    const key = `DND5E.TraitConfigChoose${final ? "Other" : `Any${count ? "Counted" : "Uncounted"}`}`;
+    return game.i18n.format(key, { count: count ?? 1, type });
   }
 
   return key;
@@ -232,24 +369,73 @@ export function keyLabel(trait, key) {
 
 /**
  * Create a human readable description of the provided choice.
- * @param {string} trait        Trait as defined in `CONFIG.DND5E.traits`.
- * @param {TraitChoice} choice  Data for a specific choice.
+ * @param {TraitChoice} choice             Data for a specific choice.
+ * @param {object} [options={}]
+ * @param {boolean} [options.only=false]   Is this choice on its own, or part of a larger list?
+ * @param {boolean} [options.final=false]  If this choice is part of a list of other grants or choices,
+ *                                         is it in the final position?
  * @returns {string}
  */
-export function choiceLabel(trait, choice) {
-  // Select from any trait values
-  if ( !choice.pool ) {
-    return game.i18n.format("DND5E.TraitConfigChooseAny", {
-      count: choice.count,
-      type: traitLabel(trait, choice.count).toLowerCase()
+export function choiceLabel(choice, { only=false, final=false }={}) {
+  if ( !choice.pool.size ) return "";
+
+  // Single entry in pool
+  // { count: 3, pool: ["skills:*"] } -> any three skills
+  // { count: 3, pool: ["skills:*"] } (final) -> three other skills
+  if ( choice.pool.size === 1 ) {
+    return keyLabel(choice.pool.first(), {
+      count: (choice.count > 1 || !only) ? choice.count : null, final: final && !only
     });
   }
 
-  // Select from a list of options
-  const choices = choice.pool.map(key => keyLabel(trait, key));
   const listFormatter = new Intl.ListFormat(game.i18n.lang, { type: "disjunction" });
+
+  // Singular count
+  // { count: 1, pool: ["skills:*"] } -> any skill
+  // { count: 1, pool: ["thief", "skills:*"] } -> Thieves Tools or any skill
+  // { count: 1, pool: ["thief", "tools:artisan:*"] } -> Thieves' Tools or any artisan tool
+  if ( (choice.count === 1) && only ) {
+    return listFormatter.format(choice.pool.map(key => keyLabel(key)));
+  }
+
+  // Select from a list of options
+  // { count: 2, pool: ["thief", "skills:*"] } -> Choose two from thieves tools or any skill
+  const choices = choice.pool.map(key => keyLabel(key));
   return game.i18n.format("DND5E.TraitConfigChooseList", {
     count: choice.count,
     list: listFormatter.format(choices)
+  });
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Create a human readable description of trait grants & choices.
+ * @param {Set<string>} grants                       Guaranteed trait grants.
+ * @param {TraitChoice[]} [choices=[]]               Trait choices.
+ * @param {object} [options={}]
+ * @param {string} [options.choiceMode="inclusive"]  Choice mode.
+ * @returns {string}
+ */
+export function localizedList(grants, choices=[], { choiceMode="inclusive" }={}) {
+  const choiceSections = [];
+
+  for ( const [index, choice] of choices.entries() ) {
+    const final = choiceMode === "exclusive" ? false : index === choices.length - 1;
+    choiceSections.push(choiceLabel(choice, { final, only: !grants.size && choices.length === 1 }));
+  }
+
+  let sections = Array.from(grants).map(g => keyLabel(g));
+  if ( choiceMode === "inclusive" ) {
+    sections = sections.concat(choiceSections);
+  } else {
+    const choiceListFormatter = new Intl.ListFormat(game.i18n.lang, { style: "long", type: "disjunction" });
+    sections.push(choiceListFormatter.format(choiceSections));
+  }
+
+  const listFormatter = new Intl.ListFormat(game.i18n.lang, { style: "long", type: "conjunction" });
+  if ( !sections.length || grants.size ) return listFormatter.format(sections);
+  return game.i18n.format("DND5E.TraitConfigChooseWrapper", {
+    choices: listFormatter.format(sections)
   });
 }
