@@ -398,7 +398,6 @@ DND5E.staticAbilityActivationTypes = {
   none: "DND5E.NoneActionLabel",
   special: DND5E.timePeriods.spec
 };
-preLocalize("staticAbilityActivationTypes");
 
 /**
  * Various ways in which an item or ability can be activated.

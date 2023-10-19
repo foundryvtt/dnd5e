@@ -400,9 +400,10 @@ export default class Item5e extends Item {
     // Ability Activation Label
     const act = this.system.activation ?? {};
     if ( !act.type ) act.type = null;   // Backwards compatibility
-    this.labels.activation = !act.type ? ""
-      : act.type in C.staticAbilityActivationTypes ? C.staticAbilityActivationTypes[act.type]
-      : [act.cost, C.abilityActivationTypes[act.type]].filterJoin(" ");
+    this.labels.activation = act.type ? [
+      (act.type in C.staticAbilityActivationTypes) ? null : act.cost,
+      C.abilityActivationTypes[act.type]
+    ].filterJoin(" ") : "";
 
     // Target Label
     let tgt = this.system.target ?? {};
