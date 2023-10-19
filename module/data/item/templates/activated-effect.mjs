@@ -211,11 +211,19 @@ export default class ActivatedEffectTemplate extends SystemDataModel {
   /* -------------------------------------------- */
 
   /**
+   * Is this Item an activatable item?
+   * @type {boolean}
+   */
+  get isActive() {
+    return !!this.activation.type;
+  }
+
+  /**
    * Does the Item have an area of effect target?
    * @type {boolean}
    */
   get hasAreaTarget() {
-    return this.target.type in CONFIG.DND5E.areaTargetTypes;
+    return this.isActive && (this.target.type in CONFIG.DND5E.areaTargetTypes);
   }
 
   /* -------------------------------------------- */
@@ -225,7 +233,7 @@ export default class ActivatedEffectTemplate extends SystemDataModel {
    * @type {boolean}
    */
   get hasIndividualTarget() {
-    return this.target.type in CONFIG.DND5E.individualTargetTypes;
+    return this.isActive && (this.target.type in CONFIG.DND5E.individualTargetTypes);
   }
 
   /* -------------------------------------------- */
@@ -235,7 +243,16 @@ export default class ActivatedEffectTemplate extends SystemDataModel {
    * @type {boolean}
    */
   get hasLimitedUses() {
-    return !!this.uses.per && (this.uses.max > 0);
+    return this.isActive && (this.uses.per in CONFIG.DND5E.limitedUsePeriods) && (this.uses.max > 0);
+  }
+
+  /**
+   * Does this Item draw from a resource?
+   * @type {boolean}
+   */
+  get hasResource() {
+    const consume = this.consume;
+    return this.isActive && !!consume.target && !!consume.type && (!this.hasAttack || (consume.type !== "ammo"));
   }
 
   /* -------------------------------------------- */
@@ -275,7 +292,7 @@ export default class ActivatedEffectTemplate extends SystemDataModel {
    * @type {boolean}
    */
   get hasTarget() {
-    return !["", null].includes(this.target.type);
+    return this.isActive && !["", null].includes(this.target.type);
   }
 
 }
