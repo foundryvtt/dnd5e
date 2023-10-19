@@ -248,8 +248,9 @@ function _localizeObject(obj, keys) {
     }
 
     for ( const key of keys ) {
-      if ( !v[key] ) continue;
-      v[key] = game.i18n.localize(v[key]);
+      const value = foundry.utils.getProperty(v, key);
+      if ( !value ) continue;
+      foundry.utils.setProperty(v, key, game.i18n.localize(value));
     }
   }
 }

@@ -1706,17 +1706,22 @@ DND5E.CR_EXP_LEVELS = [
  * Trait configuration information.
  *
  * @typedef {object} TraitConfiguration
- * @property {string} label               Localization key for the trait name.
- * @property {string} [actorKeyPath]      If the trait doesn't directly map to an entry as `traits.[key]`, where is
- *                                        this trait's data stored on the actor?
- * @property {string} [configKey]         If the list of trait options doesn't match the name of the trait, where can
- *                                        the options be found within `CONFIG.DND5E`?
- * @property {string} [labelKey]          If config is an enum of objects, where can the label be found?
- * @property {object} [subtypes]          Configuration for traits that take some sort of base item.
- * @property {string} [subtypes.keyPath]  Path to subtype value on base items, should match a category key.
- * @property {string[]} [subtypes.ids]    Key for base item ID objects within `CONFIG.DND5E`.
- * @property {object} [children]          Mapping of category key to an object defining its children.
- * @property {boolean} [sortCategories]   Whether top-level categories should be sorted.
+ * @property {object} labels
+ * @property {string} labels.title         Localization key for the trait name.
+ * @property {string} labels.localization  Prefix for a localization key that can be used to generate various
+ *                                         plural variants of the trait type.
+ * @property {string} icon                 Path to the icon used to represent this trait.
+ * @property {string} [actorKeyPath]       If the trait doesn't directly map to an entry as `traits.[key]`, where is
+ *                                         this trait's data stored on the actor?
+ * @property {string} [configKey]          If the list of trait options doesn't match the name of the trait, where can
+ *                                         the options be found within `CONFIG.DND5E`?
+ * @property {string} [labelKeyPath]       If config is an enum of objects, where can the label be found?
+ * @property {object} [subtypes]           Configuration for traits that take some sort of base item.
+ * @property {string} [subtypes.keyPath]   Path to subtype value on base items, should match a category key.
+ * @property {string[]} [subtypes.ids]     Key for base item ID objects within `CONFIG.DND5E`.
+ * @property {object} [children]           Mapping of category key to an object defining its children.
+ * @property {boolean} [sortCategories]    Whether top-level categories should be sorted.
+ * @property {boolean} [expertise]         Can an actor receive expertise in this trait?
  */
 
 /**
@@ -1725,55 +1730,125 @@ DND5E.CR_EXP_LEVELS = [
  */
 DND5E.traits = {
   saves: {
-    label: "DND5E.ClassSaves",
+    labels: {
+      title: "DND5E.ClassSaves",
+      localization: "DND5E.TraitSavesPlural"
+    },
+    icon: "systems/dnd5e/icons/svg/trait-saves.svg",
+    actorKeyPath: "system.abilities",
     configKey: "abilities",
-    labelKey: "label"
+    labelKeyPath: "label"
   },
   skills: {
-    label: "DND5E.TraitSkillProf",
-    labelKey: "label"
+    labels: {
+      title: "DND5E.Skills",
+      localization: "DND5E.TraitSkillsPlural"
+    },
+    icon: "systems/dnd5e/icons/svg/trait-skills.svg",
+    actorKeyPath: "system.skills",
+    labelKeyPath: "label",
+    expertise: true
   },
   languages: {
-    label: "DND5E.Languages"
-  },
-  di: {
-    label: "DND5E.DamImm",
-    configKey: "damageTypes"
-  },
-  dr: {
-    label: "DND5E.DamRes",
-    configKey: "damageTypes"
-  },
-  dv: {
-    label: "DND5E.DamVuln",
-    configKey: "damageTypes"
-  },
-  ci: {
-    label: "DND5E.ConImm",
-    configKey: "conditionTypes"
-  },
-  weapon: {
-    label: "DND5E.TraitWeaponProf",
-    actorKeyPath: "traits.weaponProf",
-    configKey: "weaponProficiencies",
-    subtypes: { keyPath: "weaponType", ids: ["weaponIds"] }
+    labels: {
+      title: "DND5E.Languages",
+      localization: "DND5E.TraitLanguagesPlural"
+    },
+    icon: "systems/dnd5e/icons/svg/trait-languages.svg"
   },
   armor: {
-    label: "DND5E.TraitArmorProf",
-    actorKeyPath: "traits.armorProf",
+    labels: {
+      title: "DND5E.TraitArmorProf",
+      localization: "DND5E.TraitArmorPlural"
+    },
+    icon: "systems/dnd5e/icons/svg/trait-armor-proficiencies.svg",
+    actorKeyPath: "system.traits.armorProf",
     configKey: "armorProficiencies",
     subtypes: { keyPath: "armor.type", ids: ["armorIds", "shieldIds"] }
   },
+  weapon: {
+    labels: {
+      title: "DND5E.TraitWeaponProf",
+      localization: "DND5E.TraitWeaponPlural"
+    },
+    icon: "systems/dnd5e/icons/svg/trait-weapon-proficiencies.svg",
+    actorKeyPath: "system.traits.weaponProf",
+    configKey: "weaponProficiencies",
+    subtypes: { keyPath: "weaponType", ids: ["weaponIds"] }
+  },
   tool: {
-    label: "DND5E.TraitToolProf",
-    actorKeyPath: "tools",
+    labels: {
+      title: "DND5E.TraitToolProf",
+      localization: "DND5E.TraitToolPlural"
+    },
+    icon: "systems/dnd5e/icons/svg/trait-tool-proficiencies.svg",
+    actorKeyPath: "system.tools",
     configKey: "toolProficiencies",
     subtypes: { keyPath: "toolType", ids: ["toolIds"] },
     children: { vehicle: "vehicleTypes" },
-    sortCategories: true
+    sortCategories: true,
+    expertise: true
+  },
+  di: {
+    labels: {
+      title: "DND5E.DamImm",
+      localization: "DND5E.TraitDIPlural"
+    },
+    icon: "systems/dnd5e/icons/svg/trait-damage-immunities.svg",
+    configKey: "damageTypes"
+  },
+  dr: {
+    labels: {
+      title: "DND5E.DamRes",
+      localization: "DND5E.TraitDRPlural"
+    },
+    icon: "systems/dnd5e/icons/svg/trait-damage-resistances.svg",
+    configKey: "damageTypes"
+  },
+  dv: {
+    labels: {
+      title: "DND5E.DamVuln",
+      localization: "DND5E.TraitDVPlural"
+    },
+    icon: "systems/dnd5e/icons/svg/trait-damage-vulnerabilities.svg",
+    configKey: "damageTypes"
+  },
+  ci: {
+    labels: {
+      title: "DND5E.ConImm",
+      localization: "DND5E.TraitCIPlural"
+    },
+    icon: "systems/dnd5e/icons/svg/trait-condition-immunities.svg",
+    configKey: "conditionTypes"
   }
 };
-preLocalize("traits", { key: "label" });
+preLocalize("traits", { key: "labels.title" });
+
+/* -------------------------------------------- */
+
+/**
+ * Modes used within a trait advancement.
+ * @enum {object}
+ */
+DND5E.traitModes = {
+  default: {
+    label: "DND5E.AdvancementTraitModeDefaultLabel",
+    hint: "DND5E.AdvancementTraitModeDefaultHint"
+  },
+  expertise: {
+    label: "DND5E.AdvancementTraitModeExpertiseLabel",
+    hint: "DND5E.AdvancementTraitModeExpertiseHint"
+  },
+  forcedExpertise: {
+    label: "DND5E.AdvancementTraitModeForceLabel",
+    hint: "DND5E.AdvancementTraitModeForceHint"
+  },
+  upgrade: {
+    label: "DND5E.AdvancementTraitModeUpgradeLabel",
+    hint: "DND5E.AdvancementTraitModeUpgradeHint"
+  }
+};
+preLocalize("traitModes", { keys: ["label", "hint"] });
 
 /* -------------------------------------------- */
 
