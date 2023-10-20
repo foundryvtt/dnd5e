@@ -68,13 +68,15 @@ DND5E.abilities = {
     label: "DND5E.AbilityHon",
     abbreviation: "DND5E.AbilityHonAbbr",
     type: "mental",
-    defaults: { npc: "cha", vehicle: 0 }
+    defaults: { npc: "cha", vehicle: 0 },
+    improvement: false
   },
   san: {
     label: "DND5E.AbilitySan",
     abbreviation: "DND5E.AbilitySanAbbr",
     type: "mental",
-    defaults: { npc: "wis", vehicle: 0 }
+    defaults: { npc: "wis", vehicle: 0 },
+    improvement: false
   }
 };
 preLocalize("abilities", { keys: ["label", "abbreviation"] });
@@ -198,7 +200,6 @@ preLocalize("weaponProficiencies");
  * @enum {(boolean|string)}
  */
 DND5E.weaponProficienciesMap = {
-  natural: true,
   simpleM: "sim",
   simpleR: "sim",
   martialM: "mar",
@@ -1822,6 +1823,12 @@ DND5E.characterFlags = {
     name: "DND5E.FlagsObservant",
     hint: "DND5E.FlagsObservantHint",
     skills: ["prc", "inv"],
+    section: "DND5E.Feats",
+    type: Boolean
+  },
+  tavernBrawlerFeat: {
+    name: "DND5E.FlagsTavernBrawler",
+    hint: "DND5E.FlagsTavernBrawlerHint",
     section: "DND5E.Feats",
     type: Boolean
   },
