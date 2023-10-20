@@ -91,8 +91,7 @@ export default class Actor5e extends Actor {
 
   /** @inheritDoc */
   prepareData() {
-    // Do not attempt to prepare non-system types.
-    if ( !game.template.Actor.types.includes(this.type) ) return;
+    if ( !game.template.Actor.types.includes(this.type) ) return super.prepareData();
     this._classes = undefined;
     this._preparationWarnings = [];
     super.prepareData();
@@ -103,13 +102,9 @@ export default class Actor5e extends Actor {
 
   /** @inheritDoc */
   prepareBaseData() {
-
-    // Delegate preparation to type-subclass
-    if ( this.type === "group" ) {  // Eventually other types will also support this
-      return this.system._prepareBaseData();
-    }
-
-    this._prepareBaseArmorClass();
+    if ( !game.template.Actor.types.includes(this.type) ) return;
+    if ( this.type !== "group" ) this._prepareBaseArmorClass();
+    else if ( game.release.generation < 11 ) this.system.prepareBaseData();
 
     // Type-specific preparation
     switch ( this.type ) {
@@ -137,11 +132,8 @@ export default class Actor5e extends Actor {
 
   /** @inheritDoc */
   prepareDerivedData() {
-
-    // Delegate preparation to type-subclass
-    if ( this.type === "group" ) {  // Eventually other types will also support this
-      return this.system._prepareDerivedData();
-    }
+    if ( !game.template.Actor.types.includes(this.type) ) return;
+    if ( this.type === "group" ) return;
 
     const flags = this.flags.dnd5e || {};
     this.labels = {};
