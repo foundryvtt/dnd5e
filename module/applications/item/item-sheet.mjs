@@ -1,9 +1,12 @@
+import ActorMovementConfig from "../actor/movement-config.mjs";
+import ActorTypeConfig from "../actor/type-config.mjs";
 import AdvancementManager from "../advancement/advancement-manager.mjs";
 import AdvancementMigrationDialog from "../advancement/advancement-migration-dialog.mjs";
 import Accordion from "../accordion.mjs";
 import TraitSelector from "../trait-selector.mjs";
 import ActiveEffect5e from "../../documents/active-effect.mjs";
 import * as Trait from "../../documents/actor/trait.mjs";
+
 
 /**
  * Override and extend the core ItemSheet implementation to handle specific item types.
@@ -464,6 +467,7 @@ export default class ItemSheet5e extends ItemSheet {
     super.activateListeners(html);
     if ( !this.editingDescriptionTarget ) this._accordions.forEach(accordion => accordion.bind(html[0]));
     if ( this.isEditable ) {
+      html.find(".config-button").click(this._onConfigMenu.bind(this));
       html.find(".damage-control").click(this._onDamageControl.bind(this));
       html.find(".trait-selector").click(this._onConfigureTraits.bind(this));
       html.find(".effect-control").click(ev => {
@@ -530,6 +534,28 @@ export default class ItemSheet5e extends ItemSheet {
   }
 
   /* -------------------------------------------- */
+  /**
+   * Handle spawning the configuration applications.
+   * @param {Event} event   The click event which originated the selection.
+   * @private
+   */
+  _onConfigMenu(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    const button = event.currentTarget;
+    let app;
+    switch ( button.dataset.action ) {
+      case "movement":
+        app = new ActorMovementConfig(this.item);
+        break;
+      case "type":
+        app = new ActorTypeConfig(this.item);
+        break;
+    }
+    app?.render(true);
+  }
+
+  /* -------------------------------------------- */
 
   /**
    * Add or remove a damage part from the damage formula.
@@ -557,6 +583,7 @@ export default class ItemSheet5e extends ItemSheet {
       return this.item.update({"system.damage.parts": damage.parts});
     }
   }
+
   /* -------------------------------------------- */
 
   /** @inheritdoc */
