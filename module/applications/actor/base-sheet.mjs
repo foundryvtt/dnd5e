@@ -1427,15 +1427,7 @@ export default class ActorSheet5e extends ActorSheet {
   async _onPropertyAttribution(event) {
     const element = event.target;
     let property = element.dataset.attribution;
-    if ( !property ) {
-      property = element.dataset.property;
-      if ( !property ) return;
-      foundry.utils.logCompatibilityWarning(
-        "Defining attributable properties on sheets with the `.attributable` class and `data-property` value"
-        + " has been deprecated in favor of a single `data-attribution` value.",
-        { since: "DnD5e 2.1.3", until: "DnD5e 2.4" }
-      );
-    }
+    if ( !property ) return;
 
     const rollData = this.actor.getRollData({ deterministic: true });
     const title = game.i18n.localize(element.dataset.attributionCaption);
