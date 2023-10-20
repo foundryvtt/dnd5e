@@ -64,21 +64,21 @@ system.abilities.[abbreviation].value
 > </details>
 
 
-#### Overriding an Ability Value
+#### Overriding an Ability Score
 E.g. an Item or potion that sets an ability score to a set value while in use
 
 | Attribute Key | Change Mode | Effect Value |
 | -------- | -------- | -------- |
 | `system.abilities.[abbreviation].value`     | Override     | `[number]`     |
 
-#### Upgrading an Ability Value
+#### Upgrading an Ability Score
 E.g. an Item or potion that sets an ability score to a set value, if the value does not already exceed that value, such as the Gauntlets of Ogre Power
 
 | Attribute Key | Change Mode | Effect Value |
 | -------- | -------- | -------- |
 | `system.abilities.[abbreviation].value`     | Upgrade     | `[number]`     |
 
-#### Bonus to a Specific Ability Save
+#### Bonus to a Specific Saving Throw
 
 | Attribute Key | Change Mode | Effect Value |
 | -------- | -------- | -------- |
@@ -99,7 +99,7 @@ E.g. an Item or potion that sets an ability score to a set value, if the value d
 | `system.bonuses.abilities.skill`     | Add     | `+[number/formula]`     |
 
 
-#### Bonus to All Ability Saves
+#### Bonus to All Saving Throws
 
 E.g. Paladin Aura of Protection
 
@@ -221,7 +221,7 @@ system.attributes.ac.bonus
 
 #### Add a Bonus to AC
 
-E.g. An Item or Spell which adds to the Actor's current AC to something for the duration.
+E.g. An Item or Spell which adds something to the Actor's current AC for the duration.
 
 | Attribute Key | Change Mode | Effect Value |
 | -------- | -------- | -------- |
