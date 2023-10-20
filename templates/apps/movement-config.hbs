@@ -3,13 +3,13 @@
     {{#each speeds as |label id|}}
     <div class="form-group">
         <label>{{localize label}}</label>
-        {{numberInput (lookup @root.movement id) name=(concat "system.attributes.movement." id) placeholder=0 step=0.1 min=0}}
+        {{numberInput (lookup @root.movement id) name=(concat @root.keyPath "." id) placeholder=0 step=0.1 min=0}}
     </div>
     {{/each}}
     {{#if selectUnits}}
     <div class="form-group">
         <label>{{localize "DND5E.MovementUnits"}}</label>
-        <select name="system.attributes.movement.units">
+        <select name="{{keyPath}}.units">
             {{selectOptions units selected=movement.units}}
         </select>
     </div>
@@ -17,7 +17,7 @@
     {{#if canHover}}
     <div class="form-group">
         <label>{{localize "DND5E.MovementHover"}}</label>
-        <input name="system.attributes.movement.hover" type="checkbox" {{checked movement.hover}}/>
+        <input name="{{keyPath}}.hover" type="checkbox" {{checked movement.hover}}/>
     </div>
     {{/if}}
     <button type="submit"><i class="far fa-save"></i> {{ localize "Submit"}}</button>

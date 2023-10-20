@@ -5,34 +5,37 @@ import BaseConfigSheet from "./base-config.mjs";
  */
 export default class ActorMovementConfig extends BaseConfigSheet {
 
-  /** @override */
+  /** @inheritdoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ["dnd5e"],
       template: "systems/dnd5e/templates/apps/movement-config.hbs",
       width: 300,
-      height: "auto"
+      height: "auto",
+      sheetConfig: false
     });
   }
 
   /* -------------------------------------------- */
 
-  /** @override */
+  /** @inheritdoc */
   get title() {
     return `${game.i18n.localize("DND5E.MovementConfig")}: ${this.document.name}`;
   }
 
   /* -------------------------------------------- */
 
-  /** @override */
+  /** @inheritdoc */
   getData(options={}) {
     const source = this.document.toObject();
+    const isActor = this.document instanceof Actor;
+    const keyPath = isActor ? "system.attributes.movement" : "system.movement";
 
     // Current movement values
-    const movement = source.system.attributes?.movement || {};
+    const movement = foundry.utils.getProperty(source, keyPath) ?? {};
     for ( let [k, v] of Object.entries(movement) ) {
       if ( ["units", "hover"].includes(k) ) continue;
-      movement[k] = Number.isNumeric(v) ? v.toNearest(0.1) : 0;
+      movement[k] = Number.isNumeric(v) ? v.toNearest(0.1) : null;
     }
 
     // Allowed speeds
@@ -53,8 +56,9 @@ export default class ActorMovementConfig extends BaseConfigSheet {
       speeds,
       movement,
       selectUnits: source.type !== "group",
-      canHover: source.type !== "group",
-      units: CONFIG.DND5E.movementUnits
+      canHover: isActor && (source.type !== "group"),
+      units: CONFIG.DND5E.movementUnits,
+      keyPath
     };
   }
 }

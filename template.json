@@ -502,7 +502,7 @@
     }
   },
   "Item": {
-    "types": ["weapon", "equipment", "consumable", "tool", "loot", "background", "class", "subclass", "spell", "feat", "backpack"],
+    "types": ["weapon", "equipment", "consumable", "tool", "loot", "race", "background", "class", "subclass", "spell", "feat", "backpack"],
     "templates": {
       "itemDescription": {
         "description": {
@@ -675,6 +675,24 @@
       "chatFlavor": "",
       "proficient": null,
       "bonus": ""
+    },
+    "race": {
+      "templates": ["itemDescription"],
+      "identifier": "",
+      "advancement": [],
+      "darkvision": null,
+      "movement": {
+        "burrow": null,
+        "climb": null,
+        "fly": null,
+        "swim": null,
+        "walk": 30,
+        "units": "ft"
+      },
+      "type": {
+        "value": "humanoid",
+        "subtype": ""
+      }
     },
     "spell": {
       "templates": ["itemDescription", "activatedEffect", "action"],

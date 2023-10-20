@@ -1842,6 +1842,18 @@ h5 {
 .dnd5e.sheet.item .sheet-body .item-properties [name="system.price.denomination"] {
   border: none;
 }
+.dnd5e.sheet.item .form-group .config-button,
+.dnd5e.sheet.item h4 .config-button {
+  color: #4b4a44;
+  font-size: 10px;
+  font-weight: normal;
+  opacity: 0;
+}
+.dnd5e.sheet.item .form-group:hover .config-button,
+.dnd5e.sheet.item h4:hover .config-button {
+  display: inline;
+  opacity: 1;
+}
 .dnd5e.sheet.item [data-tab="description"] {
   align-content: stretch;
 }
