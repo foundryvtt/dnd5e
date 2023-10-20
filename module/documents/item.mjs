@@ -817,7 +817,7 @@ export default class Item5e extends Item {
 
     // Define follow-up actions resulting from the item usage
     if ( config.consumeSlotLevel ) {
-      console.warn(`You are passing 'consumeSlotLevel' to the ItemUseConfiguration object, which now expects a key as 'slotLevel'.`);
+      console.warn("You are passing 'consumeSlotLevel' to the ItemUseConfiguration object, which now expects a key as 'slotLevel'.");
       config.slotLevel = config.consumeSlotLevel;
       delete config.consumeSlotLevel;
     }
@@ -849,8 +849,8 @@ export default class Item5e extends Item {
       let level = null;
       if ( config.slotLevel ) {
         // A spell slot was consumed.
-        level = Number.isInteger(config.slotLevel) ? config.slotLevel :
-        config.slotLevel === "pact" ? as.spells.pact.level : parseInt(config.slotLevel.replace("spell", ""));
+        level = Number.isInteger(config.slotLevel) ? config.slotLevel
+          : config.slotLevel === "pact" ? as.spells.pact.level : parseInt(config.slotLevel.replace("spell", ""));
       }
       if ( level && (level !== is.level) ) {
         item = item.clone({"system.level": level}, {keepId: true});
@@ -977,7 +977,7 @@ export default class Item5e extends Item {
 
     // Consume own limited uses or recharge
     if ( config.consumeUsage ) {
-      const canConsume = this._handleConsumeUses(itemUpdates, actorUpdates,  resourceUpdates, deleteIds);
+      const canConsume = this._handleConsumeUses(itemUpdates, actorUpdates, resourceUpdates, deleteIds);
       if ( canConsume === false ) return false;
     }
 
