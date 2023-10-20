@@ -1394,6 +1394,12 @@ h5 {
 .dnd5e.advancement select {
   height: var(--form-field-height);
 }
+.dnd5e.advancement input[type="text"][readonly],
+.dnd5e.advancement input[type="number"][readonly],
+.dnd5e.advancement select[readonly] {
+  color: var(--color-text-dark-6);
+  box-shadow: none;
+}
 .dnd5e.advancement .form-group .form-fields button {
   flex: 0;
 }
