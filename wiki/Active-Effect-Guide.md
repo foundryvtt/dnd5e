@@ -107,6 +107,12 @@ E.g. Paladin Aura of Protection
 | -------- | -------- | -------- |
 | `system.bonuses.abilities.save`     | Add     | `+[number/formula]`     |
 
+#### Bonus to Initiative
+
+| Attribute Key | Change Mode | Effect Value |
+| -------- | -------- | -------- |
+| `system.attributes.init.bonus`     | Add     | `+[number/formula]`     |
+
 ---
 
 ### Skills
@@ -160,14 +166,6 @@ system.skills.[abbreviation].bonuses.check
 | Attribute Key | Change Mode | Effect Value |
 | -------- | -------- | -------- |
 | `system.bonuses.abilities.skill`     | Add     | `+[number/formula]`     |
-
-#### Bonus to Initiative
-
-Initiative is not quite a skill but behaves similarly.
-
-| Attribute Key | Change Mode | Effect Value |
-| -------- | -------- | -------- |
-| `system.attributes.init.bonus`     | Add     | `+[number/formula]`     |
 
 ---
 
@@ -440,3 +438,40 @@ E.g. An Item or Spell which increases the number of die in a Dice Scale Value (e
 | Attribute Key | Change Mode | Effect Value |
 | -------- | -------- | -------- |
 | `system.scale.rogue.sneak-attack.number`     | Add     | `+[number]`     |
+
+---
+
+### Hit Points
+
+```
+system.attributes.hp.value
+                     max
+                     temp
+                     tempmax
+                     bonuses.level
+                             overall
+```
+
+> [!warning]
+> **Never** alter the `value`, `max`, or `temp` attributes with an active effect, as this **will** cause issues.
+
+#### Temporary Bonus to the Maximum HP
+E.g. An Item or Spell which temporarily increases a character's Max HP (e.g. Aid).
+
+| Attribute Key | Change Mode | Effect Value |
+| -------- | -------- | -------- |
+| `system.attributes.hp.tempmax`     | Add     | `+[number]`     |
+
+#### Bonus to the Maximum HP
+E.g. An Item or Feature which increases a character's Max HP.
+
+| Attribute Key | Change Mode | Effect Value |
+| -------- | -------- | -------- |
+| `system.attributes.hp.bonuses.overall`     | Add     | `+[number/formula]`     |
+
+#### Bonus HP for each Character Level
+E.g. An effect that provides a bonus to the HP a character gains for each Level they acquire (e.g. Tough).
+
+| Attribute Key | Change Mode | Effect Value |
+| -------- | -------- | -------- |
+| `system.attributes.hp.bonuses.level`     | Add     | `+[number/formula]`     |
