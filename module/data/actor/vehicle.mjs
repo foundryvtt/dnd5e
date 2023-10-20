@@ -121,8 +121,8 @@ export default class VehicleData extends CommonTemplate {
   /* -------------------------------------------- */
 
   /** @inheritdoc */
-  static migrateData(source) {
-    super.migrateData(source);
+  static _migrateData(source) {
+    super._migrateData(source);
     AttributesFields._migrateInitiative(source.attributes);
   }
 }

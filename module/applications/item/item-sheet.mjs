@@ -34,7 +34,7 @@ export default class ItemSheet5e extends ItemSheet {
         ".tab[data-tab=details]",
         ".tab[data-tab=effects] .items-list",
         ".tab[data-tab=description] .editor-content",
-        ".tab[data-tab=advancement] .items-list",
+        ".tab[data-tab=advancement] .items-list"
       ],
       tabs: [{navSelector: ".tabs", contentSelector: ".sheet-body", initial: "description"}],
       dragDrop: [
@@ -391,9 +391,10 @@ export default class ItemSheet5e extends ItemSheet {
       if ( !maxRoll.isDeterministic ) {
         uses.max = this.item._source.system.uses.max;
         this.form.querySelector("input[name='system.uses.max']").value = uses.max;
-        return ui.notifications.error(game.i18n.format("DND5E.FormulaCannotContainDiceError", {
+        ui.notifications.error(game.i18n.format("DND5E.FormulaCannotContainDiceError", {
           name: game.i18n.localize("DND5E.LimitedUses")
         }));
+        return null;
       }
     }
 
@@ -404,9 +405,10 @@ export default class ItemSheet5e extends ItemSheet {
       if ( !durationRoll.isDeterministic ) {
         duration.value = this.item._source.system.duration.value;
         this.form.querySelector("input[name='system.duration.value']").value = duration.value;
-        return ui.notifications.error(game.i18n.format("DND5E.FormulaCannotContainDiceError", {
+        ui.notifications.error(game.i18n.format("DND5E.FormulaCannotContainDiceError", {
           name: game.i18n.localize("DND5E.Duration")
         }));
+        return null;
       }
     }
 
@@ -414,7 +416,8 @@ export default class ItemSheet5e extends ItemSheet {
     if ( formData.system?.identifier && !dnd5e.utils.validators.isValidIdentifier(formData.system.identifier) ) {
       formData.system.identifier = this.item._source.system.identifier;
       this.form.querySelector("input[name='system.identifier']").value = formData.system.identifier;
-      return ui.notifications.error(game.i18n.localize("DND5E.IdentifierError"));
+      ui.notifications.error("DND5E.IdentifierError", {localize: true});
+      return null;
     }
 
     // Return the flattened submission data
@@ -593,6 +596,7 @@ export default class ItemSheet5e extends ItemSheet {
    * Handle the dropping of an advancement or item with advancements onto the advancements tab.
    * @param {DragEvent} event                  The concluding DragEvent which contains drop data.
    * @param {object} data                      The data transfer extracted from the event.
+   * @returns {Promise}
    */
   async _onDropAdvancement(event, data) {
     let advancements;

@@ -31,7 +31,7 @@ import { FormulaField } from "../../fields.mjs";
  * @property {number} consume.amount        Quantity of the resource to consume per use.
  * @mixin
  */
-export default class ActivatedEffectTemplate extends foundry.abstract.DataModel {
+export default class ActivatedEffectTemplate extends SystemDataModel {
   /** @inheritdoc */
   static defineSchema() {
     return {
@@ -52,7 +52,8 @@ export default class ActivatedEffectTemplate extends foundry.abstract.DataModel 
         value: new foundry.data.fields.NumberField({required: true, min: 0, label: "DND5E.TargetValue"}),
         width: new foundry.data.fields.NumberField({required: true, min: 0, label: "DND5E.TargetWidth"}),
         units: new foundry.data.fields.StringField({required: true, blank: true, label: "DND5E.TargetUnits"}),
-        type: new foundry.data.fields.StringField({required: true, blank: true, label: "DND5E.TargetType"})
+        type: new foundry.data.fields.StringField({required: true, blank: true, label: "DND5E.TargetType"}),
+        prompt: new foundry.data.fields.BooleanField({initial: true, label: "DND5E.TemplatePrompt"})
       }, {label: "DND5E.Target"}),
       range: new foundry.data.fields.SchemaField({
         value: new foundry.data.fields.NumberField({required: true, min: 0, label: "DND5E.RangeNormal"}),
@@ -86,7 +87,8 @@ export default class ActivatedEffectTemplate extends foundry.abstract.DataModel 
         per: new foundry.data.fields.StringField({
           required: true, nullable: true, blank: false, initial: null, label: "DND5E.LimitedUsesPer"
         }),
-        recovery: new FormulaField({required: true, label: "DND5E.RecoveryFormula"})
+        recovery: new FormulaField({required: true, label: "DND5E.RecoveryFormula"}),
+        prompt: new foundry.data.fields.BooleanField({initial: true, label: "DND5E.LimitedUsesPrompt"})
       }, extraSchema), options);
     }
   };
@@ -96,7 +98,8 @@ export default class ActivatedEffectTemplate extends foundry.abstract.DataModel 
   /* -------------------------------------------- */
 
   /** @inheritdoc */
-  static migrateData(source) {
+  static _migrateData(source) {
+    super._migrateData(source);
     ActivatedEffectTemplate.#migrateFormulaFields(source);
     ActivatedEffectTemplate.#migrateRanges(source);
     ActivatedEffectTemplate.#migrateTargets(source);
@@ -210,11 +213,19 @@ export default class ActivatedEffectTemplate extends foundry.abstract.DataModel 
   /* -------------------------------------------- */
 
   /**
+   * Is this Item an activatable item?
+   * @type {boolean}
+   */
+  get isActive() {
+    return !!this.activation.type;
+  }
+
+  /**
    * Does the Item have an area of effect target?
    * @type {boolean}
    */
   get hasAreaTarget() {
-    return this.target.type in CONFIG.DND5E.areaTargetTypes;
+    return this.isActive && (this.target.type in CONFIG.DND5E.areaTargetTypes);
   }
 
   /* -------------------------------------------- */
@@ -224,7 +235,7 @@ export default class ActivatedEffectTemplate extends foundry.abstract.DataModel 
    * @type {boolean}
    */
   get hasIndividualTarget() {
-    return this.target.type in CONFIG.DND5E.individualTargetTypes;
+    return this.isActive && (this.target.type in CONFIG.DND5E.individualTargetTypes);
   }
 
   /* -------------------------------------------- */
@@ -234,7 +245,16 @@ export default class ActivatedEffectTemplate extends foundry.abstract.DataModel 
    * @type {boolean}
    */
   get hasLimitedUses() {
-    return !!this.uses.per && (this.uses.max > 0);
+    return this.isActive && (this.uses.per in CONFIG.DND5E.limitedUsePeriods) && (this.uses.max > 0);
+  }
+
+  /**
+   * Does this Item draw from a resource?
+   * @type {boolean}
+   */
+  get hasResource() {
+    const consume = this.consume;
+    return this.isActive && !!consume.target && !!consume.type && (!this.hasAttack || (consume.type !== "ammo"));
   }
 
   /* -------------------------------------------- */
@@ -274,7 +294,7 @@ export default class ActivatedEffectTemplate extends foundry.abstract.DataModel 
    * @type {boolean}
    */
   get hasTarget() {
-    return !["", null].includes(this.target.type);
+    return this.isActive && !["", null].includes(this.target.type);
   }
 
 }

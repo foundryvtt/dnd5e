@@ -290,7 +290,7 @@ Hooks.once("ready", function() {
 
   // Perform the migration
   if ( cv && isNewerVersion(game.system.flags.compatibleMigrationVersion, cv) ) {
-    ui.notifications.error(game.i18n.localize("MIGRATION.5eVersionTooOldWarning"), {permanent: true});
+    ui.notifications.error("MIGRATION.5eVersionTooOldWarning", {localize: true, permanent: true});
   }
   migrations.migrateWorld();
 });

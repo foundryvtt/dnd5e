@@ -64,7 +64,7 @@ export const migrateWorld = async function() {
         console.log(`Migrating RollTable document ${table.name}`);
         await table.update(updateData, { enforceTypes: false });
       }
-    } catch ( err ) {
+    } catch(err) {
       err.message = `Failed dnd5e system migration for RollTable ${table.name}: ${err.message}`;
       console.error(err);
     }

@@ -1376,7 +1376,7 @@ export default class Actor5e extends Actor {
 
     // Display a warning if we are not at zero HP or if we already have reached 3
     if ( (this.system.attributes.hp.value > 0) || (death.failure >= 3) || (death.success >= 3) ) {
-      ui.notifications.warn(game.i18n.localize("DND5E.DeathSaveUnnecessary"));
+      ui.notifications.warn("DND5E.DeathSaveUnnecessary", {localize: true});
       return null;
     }
 
@@ -1982,8 +1982,8 @@ export default class Actor5e extends Actor {
     if ( Hooks.call("dnd5e.preRestCompleted", this, result) === false ) return result;
 
     // Perform updates
-    await this.update(result.updateData);
-    await this.updateEmbeddedDocuments("Item", result.updateItems);
+    await this.update(result.updateData, { isRest: true });
+    await this.updateEmbeddedDocuments("Item", result.updateItems, { isRest: true });
 
     // Display a Chat Message summarizing the rest effects
     if ( chat ) await this._displayRestResultMessage(result, longRest);
@@ -2316,7 +2316,8 @@ export default class Actor5e extends Actor {
     // Ensure the player is allowed to polymorph
     const allowed = game.settings.get("dnd5e", "allowPolymorphing");
     if ( !allowed && !game.user.isGM ) {
-      return ui.notifications.warn(game.i18n.localize("DND5E.PolymorphWarn"));
+      ui.notifications.warn("DND5E.PolymorphWarn", {localize: true});
+      return null;
     }
 
     // Get the original Actor data and the new source data
@@ -2528,7 +2529,10 @@ export default class Actor5e extends Actor {
    */
   async revertOriginalForm({renderSheet=true}={}) {
     if ( !this.isPolymorphed ) return;
-    if ( !this.isOwner ) return ui.notifications.warn(game.i18n.localize("DND5E.PolymorphRevertWarn"));
+    if ( !this.isOwner ) {
+      ui.notifications.warn("DND5E.PolymorphRevertWarn", {localize: true});
+      return null;
+    }
 
     /**
      * A hook event that fires just before the actor is reverted to original form.
