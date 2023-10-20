@@ -1,13 +1,15 @@
+import { simplifyBonus } from "./utils.mjs";
+
 /**
  * Set up the custom text enricher.
  */
 export function registerCustomEnrichers() {
   CONFIG.TextEditor.enrichers.push({
-    pattern: /\[\[\/(?<type>check|save|skill) (?<config>[^\]]+)\]\](?:{(?<label>[^}]+)})?/gi,
+    pattern: /\[\[\/(?<type>check|save|skill) (?<config>[^\]]+)]](?:{(?<label>[^}]+)})?/gi,
     enricher: enrichString
   });
 
-  document.querySelector("body").addEventListener("click", rollAction);
+  document.body.addEventListener("click", rollAction);
 }
 
 /* -------------------------------------------- */
@@ -22,10 +24,10 @@ export function registerCustomEnrichers() {
 export async function enrichString(match, options) {
   let { type, config, label } = match.groups;
   config = config.split(" ").map(c => c.trim());
-  switch (type.toLowerCase()) {
-    case "check": return enrichCheck(config, label);
-    case "save": return enrichSave(config, label);
-    case "skill": return enrichSkill(config, label);
+  switch ( type.toLowerCase() ) {
+    case "check":
+    case "skill": return enrichCheck(config, label, options) ?? match.input;
+    case "save": return enrichSave(config, label, options) ?? match.input;
   }
   return match.input;
 }
@@ -35,29 +37,51 @@ export async function enrichString(match, options) {
 /* -------------------------------------------- */
 
 /**
- * Enrich a ability check link to perform a specific ability or skill check.
- * @param {string[]} config     Configuration data.
- * @param {string} label        Optional label to replace default text.
- * @returns {HTMLElement|null}  A HTML link if the check could be built, otherwise null.
+ * Enrich an ability check link to perform a specific ability or skill check. If an ability is provided
+ * along with a skill, then the skill check will always use the provided ability. Otherwise it will use
+ * the character's default ability for that skill.
+ * @param {string[]} config            Configuration data.
+ * @param {string} label               Optional label to replace default text.
+ * @param {EnrichmentOptions} options  Options provided to customize text enrichment.
+ * @returns {HTMLElement|null}         A HTML link if the check could be built, otherwise null.
  *
  * TODO: Add some examples
  */
-export async function enrichCheck(config, label) {
-  const ability = config.shift();
-  const skill = !Number.isNumeric(config[0]) ? config.shift() : null;
-  const dc = Number.isNumeric(config[0]) ? parseInt(config.pop()) : null;
+export async function enrichCheck(config, label, options) {
+  let ability;
+  let skill;
+  let dc;
+
+  config.forEach(key => {
+    if ( key in CONFIG.DND5E.abilities ) ability = key;
+    else if ( key in CONFIG.DND5E.skills ) skill = key;
+    else if ( Number.isNumeric(key) ) dc = parseInt(key);
+    else dc = simplifyBonus(key, options.rollData ?? {});
+  });
+
+  let invalid = false;
 
   const abilityConfig = CONFIG.DND5E.abilities[ability];
-  if ( !abilityConfig ) return console.log(`Ability ${ability} not found`);
+  if ( ability && !abilityConfig ) {
+    console.warn(`Ability ${ability} not found`);
+    invalid = true;
+  }
 
   const skillConfig = CONFIG.DND5E.skills[skill];
-  if ( skill && !skillConfig ) return console.log(`Skills ${skill} not found`);
+  if ( skill && !skillConfig ) {
+    console.warn(`Skills ${skill} not found`);
+    invalid = true;
+  }
+
+  if ( invalid || !(ability || skill) ) return null;
 
   // Insert the icon and label into the link
   if ( !label ) {
-    const ability = abilityConfig.label;
-    if ( skillConfig ) label = game.i18n.format("EDITOR.DND5E.Inline.Skill", { ability, skill: skillConfig.label });
-    else label = game.i18n.format("EDITOR.DND5E.Inline.Check", { ability });
+    const ability = abilityConfig?.label;
+    const skill = skillConfig?.label;
+    if ( ability && skill ) label = game.i18n.format("EDITOR.DND5E.Inline.Skill", { ability, skill });
+    else if ( ability ) label = game.i18n.format("EDITOR.DND5E.Inline.Check", { type: ability });
+    else if ( skill ) label = game.i18n.format("EDITOR.DND5E.Inline.Check", { type: skill });
     if ( dc ) label = game.i18n.format("EDITOR.DND5E.Inline.DC", { dc, check: label });
   }
 
@@ -68,10 +92,11 @@ export async function enrichCheck(config, label) {
 /* -------------------------------------------- */
 
 /**
- * Enrich a ability save link.
- * @param {string[]} config     Configuration data.
- * @param {string} label        Optional label to replace default text.
- * @returns {HTMLElement|null}  A HTML link if the save could be built, otherwise null.
+ * Enrich a saving throw link.
+ * @param {string[]} config            Configuration data.
+ * @param {string} label               Optional label to replace default text.
+ * @param {EnrichmentOptions} options  Options provided to customize text enrichment.
+ * @returns {HTMLElement|null}         A HTML link if the save could be built, otherwise null.
  *
  * @example Create a dexterity saving throw:
  * ```[[/save dex]]```
@@ -83,7 +108,7 @@ export async function enrichCheck(config, label) {
  * ```
  *
  * @example Add a DC to the save:
- * ```[[/dex 20]]```
+ * ```[[/save dex 20]]```
  * becomes
  * ```html
  * <a class="roll-action" data-type="save" data-key="dex" data-dc="20">
@@ -91,12 +116,15 @@ export async function enrichCheck(config, label) {
  * </a>
  * ```
  */
-export async function enrichSave(config, label) {
+export async function enrichSave(config, label, options) {
   const ability = config.shift();
-  const dc = Number.isNumeric(config[0]) ? parseInt(config.pop()) : null;
+  const dc = simplifyBonus(config.shift(), options.rollData ?? {});
 
   const abilityConfig = CONFIG.DND5E.abilities[ability];
-  if ( !abilityConfig ) return console.log(`Ability ${ability} not found`);
+  if ( !abilityConfig ) {
+    console.warn(`Ability ${ability} not found`);
+    return null;
+  }
 
   if ( !label ) {
     const ability = abilityConfig.label;
@@ -110,34 +138,8 @@ export async function enrichSave(config, label) {
 /* -------------------------------------------- */
 
 /**
- * Enrich a skill check link. Unlike the `@Check` enricher, this will use the player's default ability
- * or allow for selecting any associated ability to perform the skill check.
- * @param {string[]} config     Configuration data.
- * @param {string} label        Optional label to replace default text.
- * @returns {HTMLElement|null}  A HTML link if the save could be built, otherwise null.
- *
- * TODO: Add some examples
- */
-export async function enrichSkill(config, label) {
-  const skill = config.shift();
-  const dc = Number.isNumeric(config[0]) ? parseInt(config.pop()) : null;
-
-  const skillConfig = CONFIG.DND5E.skills[skill];
-  if ( !skillConfig ) return console.log(`Skills ${skill} not found`);
-
-  if ( !label ) {
-    label = game.i18n.format("EDITOR.DND5E.Inline.Check", { ability: skillConfig.label });
-    if ( dc ) label = game.i18n.format("EDITOR.DND5E.Inline.DC", { dc, check: label });
-  }
-
-  return createRollLink(label, { type: "skill", skill, dc });
-}
-
-/* -------------------------------------------- */
-
-/**
  * Create a rollable link.
- * @param {string} label  Label to display.
+ * @param {string} label            Label to display.
  * @param {object} dataset
  * @param {string} dataset.type     Type of rolling action to perform (e.g. `check`, `save`, `skill`).
  * @param {string} dataset.ability  Ability key to roll (e.g. `dex`, `str`).
@@ -165,23 +167,25 @@ export function createRollLink(label, dataset) {
  * @returns {Promise|void}
  */
 export function rollAction(event) {
-  let target = event.target;
-  if ( !target.classList.contains("roll-link") ) target = target.closest(".roll-link");
+  const target = event.target.closest(".roll-link");
   if ( !target ) return;
   event.stopPropagation();
 
   const { type, ability, skill, dc } = target.dataset;
-  const options = {};
+  const options = { event };
   if ( dc ) options.targetValue = dc;
 
   // Fetch the actor that should perform the roll
   let actor;
-  const speaker = ChatMessage.getSpeaker();
+  const speaker = ChatMessage.implementation.getSpeaker();
   if ( speaker.token ) actor = game.actors.tokens[speaker.token];
   actor ??= game.actors.get(speaker.actor);
-  if ( !actor ) return ui.notifications.warn(game.i18n.localize("EDITOR.DND5E.Inline.NoActorWarning"));
+  if ( !actor ) {
+    ui.notifications.warn(game.i18n.localize("EDITOR.DND5E.Inline.NoActorWarning"));
+    return;
+  }
 
-  switch (type) {
+  switch ( type ) {
     case "check":
       return actor.rollAbilityTest(ability, options);
     case "save":
