@@ -50,7 +50,7 @@ export default class SystemDataModel extends foundry.abstract.DataModel {
       configurable: false
     });
     return fieldNames;
-  };
+  }
 
   /* -------------------------------------------- */
 

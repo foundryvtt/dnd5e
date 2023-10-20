@@ -269,7 +269,7 @@ export default class ActorSheet5e extends ActorSheet {
       if ( v === 0 ) continue;
       tags[k] = `${game.i18n.localize(label)} ${v} ${senses.units}`;
     }
-    if ( senses.special ) tags.special = senses.special;
+    if ( senses.special ) senses.special.split(";").forEach((c, i) => tags[`custom${i+1}`] = c.trim());
     return tags;
   }
 
@@ -1354,7 +1354,8 @@ export default class ActorSheet5e extends ActorSheet {
     // Check to make sure the newly created class doesn't take player over level cap
     if ( type === "class" && (this.actor.system.details.level + 1 > CONFIG.DND5E.maxLevel) ) {
       const err = game.i18n.format("DND5E.MaxCharacterLevelExceededWarn", {max: CONFIG.DND5E.maxLevel});
-      return ui.notifications.error(err);
+      ui.notifications.error(err);
+      return null;
     }
 
     const itemData = {

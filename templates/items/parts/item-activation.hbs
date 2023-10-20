@@ -121,14 +121,16 @@
 <div class="form-group uses-per">
     <label>{{ localize "DND5E.LimitedUses" }}</label>
     <div class="form-fields">
+        {{#if system.uses.per}}
         <input type="number" step="any" name="system.uses.value"
                value="{{system.uses.value}}" data-tooltip="DND5E.UsesAvailable">
         <span class="sep">{{localize "DND5E.of"}}</span>
         <input type="text" name="system.uses.max" value="{{source.uses.max}}"
                data-tooltip="DND5E.UsesMax" data-formula-editor>
         <span class="sep">{{localize "DND5E.per"}}</span>
+        {{/if}}
         <select name="system.uses.per" data-tooltip="DND5E.UsesPeriod">
-            {{selectOptions config.limitedUsePeriods selected=system.uses.per blank=""}}
+            {{selectOptions config.limitedUsePeriods selected=system.uses.per blank=(localize "DND5E.None")}}
         </select>
     </div>
 </div>
@@ -147,8 +149,8 @@
     <label>{{ localize "DND5E.ConsumeTitle" }}</label>
     <div class="form-fields">
         {{#if system.consume.type}}
-            <input type="number" step="any" name="system.consume.amount"
-                   value="{{system.consume.amount}}" data-tooltip="DND5E.ConsumeQuanity">
+            <input type="number" step="any" name="system.consume.amount" value="{{system.consume.amount}}"
+                   data-tooltip="DND5E.ConsumeAmount">
             <select name="system.consume.target" data-tooltip="DND5E.ConsumeTarget">
                 {{selectOptions abilityConsumptionTargets selected=system.consume.target blank=""}}
             </select>
@@ -157,5 +159,24 @@
             {{selectOptions config.abilityConsumptionTypes selected=system.consume.type blank=(localize "DND5E.None")}}
         </select>
     </div>
+</div>
+
+{{!-- Prompt Configuration --}}
+<div class="form-group">
+    {{#if (eq item.type "consumable")}}
+    <label class="checkbox" data-tooltip="DND5E.ItemDestroyEmptyTooltip">
+        <input type="checkbox" name="system.uses.autoDestroy" {{checked system.uses.autoDestroy}}> {{ localize "DND5E.ItemDestroyEmpty" }}
+    </label>
+    {{/if}}
+    {{#if item.hasAreaTarget}}
+    <label class="checkbox" data-tooltip="DND5E.TemplatePromptTooltip">
+        <input type="checkbox" name="system.target.prompt" {{checked system.target.prompt}}> {{ localize "DND5E.TemplatePrompt" }}
+    </label>
+    {{/if}}
+    {{#if system.uses.per}}
+    <label class="checkbox" data-tooltip="DND5E.LimitedUsesPromptTooltip">
+        <input type="checkbox" name="system.uses.prompt" {{checked system.uses.prompt}}> {{ localize "DND5E.LimitedUsesPrompt" }}
+    </label>
+    {{/if}}
 </div>
 {{/if}}
