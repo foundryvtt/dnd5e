@@ -43,6 +43,14 @@
 		<div class="tab details" data-group="primary" data-tab="details">
 			<h3 class="form-header">{{localize 'DND5E.ItemContainerDetails'}}</h3>
 
+            <div class="form-group stacked">
+                <label>{{ localize "DND5E.ItemContainerStatus" }}</label>
+                <label class="checkbox">
+                    <input type="checkbox" name="system.equipped" {{ checked system.equipped }}>
+                    {{ localize "DND5E.Equipped" }}
+                </label>
+            </div>
+
 			<div class="form-group">
 				<label>{{localize 'DND5E.ItemContainerCapacity'}}</label>
 				<div class="form-fields">
@@ -56,6 +64,13 @@
 					{{selectOptions config.itemCapacityTypes selected=system.capacity.type}}
 				</select>
 			</div>
+
+            <div class="form-group">
+                <label>{{localize "DND5E.Attunement"}}</label>
+                <select name="system.attunement" data-dtype="Number">
+                    {{selectOptions config.attunements selected=system.attunement}}
+                </select>
+            </div>
 
 			<div class="form-group stacked">
 				<label>{{localize 'DND5E.ItemContainerProperties'}}</label>

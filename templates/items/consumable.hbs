@@ -2,11 +2,11 @@
 
     {{!-- Item Sheet Header --}}
     <header class="sheet-header flexrow">
-        <img class="profile" src="{{item.img}}" data-tooltip="{{item.name}}" data-edit="img"/>
+        <img class="profile" src="{{item.img}}" data-tooltip="{{item.name}}" data-edit="img">
 
         <div class="header-details flexrow">
             <h1 class="charname">
-                <input name="name" type="text" value="{{item.name}}" placeholder="{{ localize 'DND5E.ItemName' }}"/>
+                <input name="name" type="text" value="{{item.name}}" placeholder="{{ localize 'DND5E.ItemName' }}">
             </h1>
 
             <div class="item-subtitle">
@@ -24,7 +24,7 @@
                     </select>
                 </li>
                 <li>
-                    <input type="text" name="system.source" value="{{system.source}}" placeholder="{{ localize 'DND5E.Source' }}"/>
+                    <input type="text" name="system.source" value="{{system.source}}" placeholder="{{ localize 'DND5E.Source' }}">
                 </li>
             </ul>
         </div>
@@ -62,15 +62,28 @@
                 </select>
             </div>
 
+            {{!-- Consumable Status --}}
             <div class="form-group stacked">
                 <label>{{ localize "DND5E.ItemConsumableStatus" }}</label>
                 <label class="checkbox">
-                    <input type="checkbox" name="system.equipped" {{checked system.equipped}}/> {{ localize "DND5E.Equipped" }}
+                    <input type="checkbox" name="system.equipped" {{checked system.equipped}}> {{ localize "DND5E.Equipped" }}
                 </label>
                 <label class="checkbox">
-                    <input type="checkbox" name="system.identified" {{checked system.identified}}/> {{ localize "DND5E.Identified" }}
+                    <input type="checkbox" name="system.identified" {{checked system.identified}}> {{ localize "DND5E.Identified" }}
                 </label>
             </div>
+
+            {{#if (eq system.consumableType "ammo")}}
+            {{!-- Consumable Properties --}}
+            <div class="form-group stacked weapon-properties">
+                <label>{{ localize "DND5E.ItemAmmoProperties" }}</label>
+                {{#each config.physicalWeaponProperties as |name prop|}}
+                <label class="checkbox">
+                    <input type="checkbox" name="system.properties.{{prop}}" {{checked (lookup ../system.properties prop)}}> {{ name }}
+                </label>
+                {{/each}}
+            </div>
+            {{/if}}
 
             <h3 class="form-header">{{ localize "DND5E.ItemConsumableUsage" }}</h3>
 
@@ -79,7 +92,7 @@
             {{#if system.activation.type}}
             <div class="form-group">
                 <label class="checkbox">
-                    <input type="checkbox" name="system.uses.autoDestroy" {{checked system.uses.autoDestroy}}/> {{ localize "DND5E.ItemDestroyEmpty" }}
+                    <input type="checkbox" name="system.uses.autoDestroy" {{checked system.uses.autoDestroy}}> {{ localize "DND5E.ItemDestroyEmpty" }}
                 </label>
             </div>
             {{/if}}

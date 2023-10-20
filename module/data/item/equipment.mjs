@@ -26,7 +26,7 @@ import MountableTemplate from "./templates/mountable.mjs";
  * @property {string} speed.conditions  Conditions that may affect item's speed.
  * @property {number} strength          Minimum strength required to use a piece of armor.
  * @property {boolean} stealth          Does this equipment grant disadvantage on stealth checks when used?
- * @property {boolean} proficient       Does the owner have proficiency in this piece of equipment?
+ * @property {number} proficient        Does the owner have proficiency in this piece of equipment?
  */
 export default class EquipmentData extends SystemDataModel.mixin(
   ItemDescriptionTemplate, PhysicalItemTemplate, EquippableItemTemplate,
@@ -51,7 +51,9 @@ export default class EquipmentData extends SystemDataModel.mixin(
         required: true, integer: true, min: 0, label: "DND5E.ItemRequiredStr"
       }),
       stealth: new foundry.data.fields.BooleanField({required: true, label: "DND5E.ItemEquipmentStealthDisav"}),
-      proficient: new foundry.data.fields.BooleanField({required: true, initial: true, label: "DND5E.Proficient"})
+      proficient: new foundry.data.fields.NumberField({
+        required: true, min: 0, max: 1, integer: true, initial: null, label: "DND5E.ProficiencyLevel"
+      })
     });
   }
 
@@ -64,6 +66,7 @@ export default class EquipmentData extends SystemDataModel.mixin(
     super.migrateData(source);
     EquipmentData.#migrateArmor(source);
     EquipmentData.#migrateStrength(source);
+    EquipmentData.#migrateProficient(source);
   }
 
   /* -------------------------------------------- */
@@ -93,6 +96,16 @@ export default class EquipmentData extends SystemDataModel.mixin(
     if ( typeof source.strength !== "string" ) return;
     if ( source.strength === "" ) source.strength = null;
     if ( Number.isNumeric(source.strength) ) source.strength = Number(source.strength);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Migrate the proficient field to convert boolean values.
+   * @param {object} source  The candidate source data from which the model will be constructed.
+   */
+  static #migrateProficient(source) {
+    if ( typeof source.proficient === "boolean" ) source.proficient = Number(source.proficient);
   }
 
   /* -------------------------------------------- */
@@ -132,4 +145,21 @@ export default class EquipmentData extends SystemDataModel.mixin(
     return this.armor.type === "vehicle";
   }
 
+  /* -------------------------------------------- */
+
+  /**
+   * The proficiency multiplier for this item.
+   * @returns {number}
+   */
+  get proficiencyMultiplier() {
+    if ( Number.isFinite(this.proficient) ) return this.proficient;
+    const actor = this.parent.actor;
+    if ( !actor ) return 0;
+    if ( actor.type === "npc" ) return 1; // NPCs are always considered proficient with any armor in their stat block.
+    const config = CONFIG.DND5E.armorProficienciesMap;
+    const itemProf = config[this.armor?.type];
+    const actorProfs = actor.system.traits?.armorProf?.value ?? new Set();
+    const isProficient = (itemProf === true) || actorProfs.has(itemProf) || actorProfs.has(this.baseItem);
+    return Number(isProficient);
+  }
 }

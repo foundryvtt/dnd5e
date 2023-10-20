@@ -1,4 +1,5 @@
 import SystemDataModel from "../abstract.mjs";
+import { MappingField } from "../fields.mjs";
 import ActionTemplate from "./templates/action.mjs";
 import ActivatedEffectTemplate from "./templates/activated-effect.mjs";
 import EquippableItemTemplate from "./templates/equippable-item.mjs";
@@ -25,6 +26,9 @@ export default class ConsumableData extends SystemDataModel.mixin(
     return this.mergeSchema(super.defineSchema(), {
       consumableType: new foundry.data.fields.StringField({
         required: true, initial: "potion", label: "DND5E.ItemConsumableType"
+      }),
+      properties: new MappingField(new foundry.data.fields.BooleanField(), {
+        required: false, label: "DND5E.ItemAmmoProperties"
       }),
       uses: new ActivatedEffectTemplate.ItemUsesField({
         autoDestroy: new foundry.data.fields.BooleanField({required: true, label: "DND5E.ItemDestroyEmpty"})
@@ -53,5 +57,16 @@ export default class ConsumableData extends SystemDataModel.mixin(
   get _typeAbilityMod() {
     if ( this.consumableType !== "scroll" ) return null;
     return this.parent?.actor?.system.attributes.spellcasting || "int";
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * The proficiency multiplier for this item.
+   * @returns {number}
+   */
+  get proficiencyMultiplier() {
+    const isProficient = this.parent?.actor?.getFlag("dnd5e", "tavernBrawlerFeat");
+    return isProficient ? 1 : 0;
   }
 }

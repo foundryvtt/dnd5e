@@ -171,7 +171,6 @@ export default class ActivatedEffectTemplate extends foundry.abstract.DataModel 
       if ( value === "" ) source.uses.value = null;
       else if ( Number.isNumeric(value) ) source.uses.value = Number(source.uses.value);
     }
-    if ( source.uses.recovery === undefined ) source.uses.recovery = "";
   }
 
   /* -------------------------------------------- */

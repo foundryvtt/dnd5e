@@ -30,6 +30,7 @@
       "units": ""
     },
     "cover": null,
+    "crewed": false,
     "target": {
       "value": null,
       "width": null,
@@ -95,7 +96,35 @@
     "stealth": false,
     "proficient": false
   },
-  "effects": [],
+  "effects": [
+    {
+      "label": "Ioun Stone of Agility",
+      "icon": "icons/commodities/gems/gem-rough-cushion-red.webp",
+      "origin": "Compendium.dnd5e.items.Q4Iy6hqREsbk9yG7",
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "disabled": false,
+      "_id": "f4ScI5hFiyWF5heN",
+      "changes": [
+        {
+          "key": "system.abilities.dex.value",
+          "mode": 2,
+          "value": "+2"
+        }
+      ],
+      "tint": null,
+      "transfer": true,
+      "flags": {},
+      "sort": 0
+    }
+  ],
   "folder": null,
   "sort": 0,
   "ownership": {
@@ -104,10 +133,10 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.1.0",
-    "coreVersion": "10.291",
+    "systemVersion": "2.2.2",
+    "coreVersion": "10.303",
     "createdTime": 1661787233647,
-    "modifiedTime": 1671220960436,
+    "modifiedTime": 1690480723227,
     "lastModifiedBy": "dnd5ebuilder0000"
   }
 }

@@ -100,6 +100,7 @@ export default class GroupActorSheet extends ActorSheet {
     const members = [];
     if ( stats.nMembers ) members.push(`${stats.nMembers} ${game.i18n.localize("DND5E.GroupMembers")}`);
     if ( stats.nVehicles ) members.push(`${stats.nVehicles} ${game.i18n.localize("DND5E.GroupVehicles")}`);
+    if ( !members.length ) return game.i18n.localize("DND5E.GroupSummaryEmpty");
     return game.i18n.format("DND5E.GroupSummary", {members: formatter.format(members)});
   }
 
@@ -193,6 +194,7 @@ export default class GroupActorSheet extends ActorSheet {
       ctx.isStack = Number.isNumeric(quantity) && (quantity > 1);
       ctx.canToggle = false;
       ctx.isExpanded = this._expanded.has(item.id);
+      ctx.hasUses = item.hasLimitedUses;
       if ( (item.type in sections) && (item.type !== "loot") ) sections[item.type].items.push(item);
       else sections.loot.items.push(item);
     }
@@ -230,9 +232,14 @@ export default class GroupActorSheet extends ActorSheet {
     super.activateListeners(html);
     html.find(".group-member .name").click(this._onClickMemberName.bind(this));
     if ( this.isEditable ) {
+      // Input focus and update
+      const inputs = html.find("input");
+      inputs.focus(ev => ev.currentTarget.select());
+      inputs.addBack().find('[type="text"][data-dtype="Number"]').change(ActorSheet5e.prototype._onChangeInputDelta.bind(this));
       html.find(".action-button").click(this._onClickActionButton.bind(this));
       html.find(".item-control").click(this._onClickItemControl.bind(this));
       html.find(".item .rollable h4").click(event => this._onClickItemName(event));
+      html.find(".item-quantity input, .item-uses input").change(this._onItemPropertyChange.bind(this));
       new ContextMenu(html, ".item-list .item", [], {onOpen: this._onItemContext.bind(this)});
     }
   }
@@ -349,6 +356,21 @@ export default class GroupActorSheet extends ActorSheet {
    */
   _onClickItemName(event) {
     game.system.applications.actor.ActorSheet5e.prototype._onItemSummary.call(this, event);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Change the quantity or limited uses of an Owned Item within the actor.
+   * @param {Event} event        The triggering click event.
+   * @returns {Promise<Item5e>}  Updated item.
+   * @protected
+   */
+  async _onItemPropertyChange(event) {
+    const proto = game.system.applications.actor.ActorSheet5e.prototype;
+    const parent = event.currentTarget.parentElement;
+    if ( parent.classList.contains("item-quantity") ) return proto._onQuantityChange.call(this, event);
+    else if ( parent.classList.contains("item-uses") ) return proto._onUsesChange.call(this, event);
   }
 
   /* -------------------------------------------- */

@@ -2,14 +2,14 @@
   "id": "dnd5e",
   "title": "DnD5e - Fifth Edition System",
   "description": "A system for playing the fifth edition of the worlds most popular role-playing game in the Foundry Virtual Tabletop environment.",
-  "version": "2.2.2",
+  "version": "2.3.1",
   "compatibility": {
-    "minimum": "10.291",
+    "minimum": "10.303",
     "verified": "11"
   },
   "url": "https://github.com/foundryvtt/dnd5e/",
   "manifest": "https://raw.githubusercontent.com/foundryvtt/dnd5e/master/system.json",
-  "download": "https://github.com/foundryvtt/dnd5e/releases/download/release-2.2.2/dnd5e-release-2.2.2.zip",
+  "download": "https://github.com/foundryvtt/dnd5e/releases/download/release-2.3.1/dnd5e-release-2.3.1.zip",
   "authors": [
     {
       "name": "Atropos",
@@ -142,6 +142,51 @@
       "flags": {}
     }
   ],
+  "packFolders": [
+    {
+      "name": "DnD5e SRD Content",
+      "sorting": "m",
+      "color": "#cd2c1e",
+      "packs": [
+        "rules",
+        "tables",
+        "heroes"
+      ],
+      "folders": [
+        {
+          "name": "Character Features",
+          "sorting": "m",
+          "color": "#b72c1f",
+          "packs": [
+            "classes",
+            "subclasses",
+            "classfeatures",
+            "backgrounds",
+            "races"
+          ]
+        },
+        {
+          "name": "Items & Spells",
+          "sorting": "m",
+          "color": "#941919 ",
+          "packs": [
+            "items",
+            "spells",
+            "tradegoods"
+          ]
+        },
+        {
+          "name": "Monsters",
+          "sorting": "m",
+          "color": "#7d160c",
+          "packs": [
+            "monsters",
+            "monsterfeatures"
+          ]
+        }
+      ]
+    }
+  ],
   "languages": [
     {
       "lang": "en",
@@ -162,7 +207,7 @@
   "gridUnits": "ft",
   "primaryTokenAttribute": "attributes.hp",
   "flags": {
-    "needsMigrationVersion": "2.2.2",
+    "needsMigrationVersion": "2.3.0",
     "compatibleMigrationVersion": "0.8"
   }
 }
