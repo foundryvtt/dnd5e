@@ -80,17 +80,6 @@ DND5E.abilities = {
   }
 };
 preLocalize("abilities", { keys: ["label", "abbreviation"] });
-patchConfig("abilities", "label", { since: 2.2, until: 2.4 });
-
-Object.defineProperty(DND5E, "abilityAbbreviations", {
-  get() {
-    foundry.utils.logCompatibilityWarning(
-      "The `abilityAbbreviations` configuration object has been merged with `abilities`.",
-      { since: "DnD5e 2.2", until: "DnD5e 2.4" }
-    );
-    return Object.fromEntries(Object.entries(DND5E.abilities).map(([k, v]) => [k, v.abbreviation]));
-  }
-});
 
 /**
  * Configure which ability score is used as the default modifier for initiative rolls.

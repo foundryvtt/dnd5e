@@ -783,21 +783,6 @@ export default class Item5e extends Item {
 
   /**
    * Trigger an item usage, optionally creating a chat message with followup actions.
-   * @param {ItemUseOptions} [options]           Options used for configuring item usage.
-   * @returns {Promise<ChatMessage|object|void>} Chat message if options.createMessage is true, message data if it is
-   *                                             false, and nothing if the roll wasn't performed.
-   * @deprecated since 2.0 in favor of `Item5e#use`, targeted for removal in 2.4
-   */
-  async roll(options={}) {
-    foundry.utils.logCompatibilityWarning(
-      "Item5e#roll has been renamed Item5e#use. Support for the old name will be removed in future versions.",
-      { since: "DnD5e 2.0", until: "DnD5e 2.4" }
-    );
-    return this.use(undefined, options);
-  }
-
-  /**
-   * Trigger an item usage, optionally creating a chat message with followup actions.
    * @param {ItemUseConfiguration} [config]      Initial configuration data for the usage.
    * @param {ItemUseOptions} [options]           Options used for configuring item usage.
    * @returns {Promise<ChatMessage|object|void>} Chat message if options.createMessage is true, message data if it is
@@ -2210,26 +2195,5 @@ export default class Item5e extends Item {
      */
     Hooks.callAll("dnd5e.createScrollFromSpell", spell, spellScrollData);
     return new this(spellScrollData);
-  }
-
-  /* -------------------------------------------- */
-  /*  Deprecations                                */
-  /* -------------------------------------------- */
-
-  /**
-   * Retrieve an item's critical hit threshold. Uses the smallest value from among the following sources:
-   * - item document
-   * - item document's actor (if it has one)
-   * - item document's ammunition (if it has any)
-   * - the constant '20'
-   * @returns {number|null}  The minimum value that must be rolled to be considered a critical hit.
-   * @deprecated since dnd5e 2.2, targeted for removal in 2.4
-   */
-  getCriticalThreshold() {
-    foundry.utils.logCompatibilityWarning(
-      "Item5e#getCriticalThreshold has been replaced with the Item5e#criticalThreshold getter.",
-      { since: "DnD5e 2.2", until: "DnD5e 2.4" }
-    );
-    return this.criticalThreshold;
   }
 }
