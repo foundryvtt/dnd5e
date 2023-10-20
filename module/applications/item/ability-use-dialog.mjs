@@ -172,8 +172,7 @@ export default class AbilityUseDialog extends Dialog {
 
   /**
    * Get the ability usage warnings to display.
-   * @param {object} data    Template data for the AbilityUseDialog. **will be mutated**
-   * @returns {string[]}     The warnings to display.
+   * @param {object} data  Template data for the AbilityUseDialog. **Will be mutated**
    * @private
    */
   static _getAbilityUseWarnings(data) {
@@ -197,7 +196,7 @@ export default class AbilityUseDialog extends Dialog {
 
     // Display warnings that the item or its resource item will be destroyed.
     if ( item.type === "consumable" ) {
-      const type = game.i18n.localize(`DND5E.Consumable${consumableType.capitalize()}`)
+      const type = game.i18n.localize(`DND5E.Consumable${consumableType.capitalize()}`);
       if ( this._willLowerQuantity(item) && (quantity === 1) ) {
         warnings.push(game.i18n.format("DND5E.AbilityUseConsumableDestroyHint", {type}));
       }
@@ -217,11 +216,11 @@ export default class AbilityUseDialog extends Dialog {
   /**
    * Get whether an update for an item's limited uses will result in lowering its quantity.
    * @param {Item5e} item       The item targeted for updates.
-   * @param {number} [consume]    The amount of limited uses to subtract.
+   * @param {number} [consume]  The amount of limited uses to subtract.
    * @returns {boolean}
    * @private
    */
-  static _willLowerQuantity(item, consume=1){
+  static _willLowerQuantity(item, consume=1) {
     const hasUses = item.hasLimitedUses;
     const uses = item.system.uses;
     if ( !hasUses || !uses.autoDestroy ) return false;
