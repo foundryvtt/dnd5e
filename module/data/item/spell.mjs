@@ -106,6 +106,20 @@ export default class SpellData extends SystemDataModel.mixin(
   /*  Getters                                     */
   /* -------------------------------------------- */
 
+  /**
+   * Properties displayed in chat.
+   * @type {string[]}
+   */
+  get chatProperties() {
+    return [
+      this.parent.labels.level,
+      this.parent.labels.components.vsm + (this.parent.labels.materials ? ` (${this.parent.labels.materials})` : ""),
+      ...this.parent.labels.components.tags
+    ];
+  }
+
+  /* -------------------------------------------- */
+
   /** @inheritdoc */
   get _typeAbilityMod() {
     return this.parent?.actor?.system.attributes.spellcasting || "int";
@@ -118,4 +132,13 @@ export default class SpellData extends SystemDataModel.mixin(
     return this.parent?.actor?.flags.dnd5e?.spellCriticalThreshold ?? Infinity;
   }
 
+  /* -------------------------------------------- */
+
+  /**
+   * The proficiency multiplier for this item.
+   * @returns {number}
+   */
+  get proficiencyMultiplier() {
+    return 1;
+  }
 }

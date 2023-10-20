@@ -471,6 +471,22 @@ export default class Item5e extends Item {
   /* -------------------------------------------- */
 
   /**
+   * Determine an item's proficiency level based on its parent actor's proficiencies.
+   * @protected
+   */
+  _prepareProficiency() {
+    if ( !["spell", "weapon", "equipment", "tool", "feat", "consumable"].includes(this.type) ) return;
+    if ( !this.actor?.system.attributes?.prof ) {
+      this.system.prof = new Proficiency(0, 0);
+      return;
+    }
+
+    this.system.prof = new Proficiency(this.actor.system.attributes.prof, this.system.proficiencyMultiplier ?? 0);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Compute item attributes which might depend on prepared actor data. If this item is embedded this method will
    * be called after the actor's data is prepared.
    * Otherwise, it will be called at the end of `Item5e#prepareDerivedData`.
@@ -478,10 +494,7 @@ export default class Item5e extends Item {
   prepareFinalAttributes() {
 
     // Proficiency
-    if ( this.actor?.system.attributes?.prof ) {
-      const isProficient = (this.type === "spell") || this.system.proficient; // Always proficient in spell attacks.
-      this.system.prof = new Proficiency(this.actor?.system.attributes.prof, isProficient);
-    }
+    this._prepareProficiency();
 
     // Class data
     if ( this.type === "class" ) this.system.isOriginalClass = this.isOriginalClass;
@@ -587,12 +600,12 @@ export default class Item5e extends Item {
     if ( !this.isOwned ) return {rollData, parts};
 
     // Ability score modifier
-    parts.push("@mod");
+    if ( this.system.ability !== "none" ) parts.push("@mod");
 
-    // Add proficiency bonus if an explicit proficiency flag is present or for non-item features
-    if ( !["weapon", "consumable"].includes(this.type) || this.system.proficient ) {
+    // Add proficiency bonus.
+    if ( this.system.prof?.hasProficiency ) {
       parts.push("@prof");
-      if ( this.system.prof?.hasProficiency ) rollData.prof = this.system.prof.term;
+      rollData.prof = this.system.prof.term;
     }
 
     // Actor-level global bonus to attack rolls
@@ -867,7 +880,13 @@ export default class Item5e extends Item {
     if ( config.createMeasuredTemplate ) {
       try {
         templates = await (dnd5e.canvas.AbilityTemplate.fromItem(item))?.drawPreview();
-      } catch(err) {}
+      } catch(err) {
+        Hooks.onError("Item5e#use", err, {
+          msg: game.i18n.localize("DND5E.PlaceTemplateError"),
+          log: "error",
+          notify: "error"
+        });
+      }
     }
 
     /**
@@ -1152,7 +1171,6 @@ export default class Item5e extends Item {
    */
   async getChatData(htmlOptions={}) {
     const data = this.toObject().system;
-    const labels = this.labels;
 
     // Rich text description
     data.description.value = await TextEditor.enrichHTML(data.description.value, {
@@ -1162,160 +1180,14 @@ export default class Item5e extends Item {
       ...htmlOptions
     });
 
-    // Item type specific properties
-    const props = [];
-    switch ( this.type ) {
-      case "consumable":
-        this._consumableChatData(data, labels, props); break;
-      case "equipment":
-        this._equipmentChatData(data, labels, props); break;
-      case "feat":
-        this._featChatData(data, labels, props); break;
-      case "loot":
-        this._lootChatData(data, labels, props); break;
-      case "spell":
-        this._spellChatData(data, labels, props); break;
-      case "tool":
-        this._toolChatData(data, labels, props); break;
-      case "weapon":
-        this._weaponChatData(data, labels, props); break;
-    }
+    // Type specific properties
+    data.properties = [
+      ...this.system.chatProperties ?? [],
+      ...this.system.equippableItemChatProperties ?? [],
+      ...this.system.activatedEffectChatProperties ?? []
+    ].filter(p => p);
 
-    // Equipment properties
-    if ( data.hasOwnProperty("equipped") && !["loot", "tool"].includes(this.type) ) {
-      if ( data.attunement === CONFIG.DND5E.attunementTypes.REQUIRED ) {
-        props.push(CONFIG.DND5E.attunements[CONFIG.DND5E.attunementTypes.REQUIRED]);
-      }
-      props.push(
-        game.i18n.localize(data.equipped ? "DND5E.Equipped" : "DND5E.Unequipped"),
-        game.i18n.localize(data.proficient ? "DND5E.Proficient" : "DND5E.NotProficient")
-      );
-    }
-
-    // Ability activation properties
-    if ( data.hasOwnProperty("activation") ) {
-      props.push(
-        labels.activation + (data.activation?.condition ? ` (${data.activation.condition})` : ""),
-        labels.target,
-        labels.range,
-        labels.duration
-      );
-    }
-
-    // Filter properties and return
-    data.properties = props.filter(p => !!p);
     return data;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Prepare chat card data for consumable type items.
-   * @param {object} data     Copy of item data being use to display the chat message.
-   * @param {object} labels   Specially prepared item labels.
-   * @param {string[]} props  Existing list of properties to be displayed. *Will be mutated.*
-   * @private
-   */
-  _consumableChatData(data, labels, props) {
-    props.push(
-      CONFIG.DND5E.consumableTypes[data.consumableType],
-      `${data.uses.value}/${data.uses.max} ${game.i18n.localize("DND5E.Charges")}`
-    );
-    data.hasCharges = data.uses.value >= 0;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Prepare chat card data for equipment type items.
-   * @param {object} data     Copy of item data being use to display the chat message.
-   * @param {object} labels   Specially prepared item labels.
-   * @param {string[]} props  Existing list of properties to be displayed. *Will be mutated.*
-   * @private
-   */
-  _equipmentChatData(data, labels, props) {
-    props.push(
-      CONFIG.DND5E.equipmentTypes[data.armor.type],
-      labels.armor || null,
-      data.stealth ? game.i18n.localize("DND5E.StealthDisadvantage") : null
-    );
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Prepare chat card data for items of the Feat type.
-   * @param {object} data     Copy of item data being use to display the chat message.
-   * @param {object} labels   Specially prepared item labels.
-   * @param {string[]} props  Existing list of properties to be displayed. *Will be mutated.*
-   * @private
-   */
-  _featChatData(data, labels, props) {
-    props.push(data.requirements);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Prepare chat card data for loot type items.
-   * @param {object} data     Copy of item data being use to display the chat message.
-   * @param {object} labels   Specially prepared item labels.
-   * @param {string[]} props  Existing list of properties to be displayed. *Will be mutated.*
-   * @private
-   */
-  _lootChatData(data, labels, props) {
-    props.push(
-      game.i18n.localize("ITEM.TypeLoot"),
-      data.weight ? `${data.weight} ${game.i18n.localize("DND5E.AbbreviationLbs")}` : null
-    );
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Render a chat card for Spell type data.
-   * @param {object} data     Copy of item data being use to display the chat message.
-   * @param {object} labels   Specially prepared item labels.
-   * @param {string[]} props  Existing list of properties to be displayed. *Will be mutated.*
-   * @private
-   */
-  _spellChatData(data, labels, props) {
-    props.push(
-      labels.level,
-      labels.components.vsm + (labels.materials ? ` (${labels.materials})` : ""),
-      ...labels.components.tags
-    );
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Prepare chat card data for tool type items.
-   * @param {object} data     Copy of item data being use to display the chat message.
-   * @param {object} labels   Specially prepared item labels.
-   * @param {string[]} props  Existing list of properties to be displayed. *Will be mutated.*
-   * @private
-   */
-  _toolChatData(data, labels, props) {
-    props.push(
-      CONFIG.DND5E.abilities[data.ability]?.label || null,
-      CONFIG.DND5E.proficiencyLevels[data.proficient || 0]
-    );
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Prepare chat card data for weapon type items.
-   * @param {object} data     Copy of item data being use to display the chat message.
-   * @param {object} labels   Specially prepared item labels.
-   * @param {string[]} props  Existing list of properties to be displayed. *Will be mutated.*
-   * @private
-   */
-  _weaponChatData(data, labels, props) {
-    props.push(
-      CONFIG.DND5E.weaponTypes[data.weaponType]
-    );
   }
 
   /* -------------------------------------------- */
@@ -1368,7 +1240,7 @@ export default class Item5e extends Item {
     const rollConfig = foundry.utils.mergeObject({
       actor: this.actor,
       data: rollData,
-      critical: this.getCriticalThreshold(),
+      critical: this.criticalThreshold,
       title,
       flavor: title,
       elvenAccuracy,
@@ -1719,79 +1591,12 @@ export default class Item5e extends Item {
    */
   async rollToolCheck(options={}) {
     if ( this.type !== "tool" ) throw new Error("Wrong item type!");
-
-    // Prepare roll data
-    const rollData = this.getRollData();
-    const abl = this.system.ability;
-    const parts = ["@mod", "@abilityCheckBonus"];
-    const title = `${this.name} - ${game.i18n.localize("DND5E.ToolCheck")}`;
-
-    // Add proficiency
-    if ( this.system.prof?.hasProficiency ) {
-      parts.push("@prof");
-      rollData.prof = this.system.prof.term;
-    }
-
-    // Add tool bonuses
-    if ( this.system.bonus ) {
-      parts.push("@toolBonus");
-      rollData.toolBonus = Roll.replaceFormulaData(this.system.bonus, rollData);
-    }
-
-    // Add ability-specific check bonus
-    const checkBonus = foundry.utils.getProperty(rollData, `abilities.${abl}.bonuses.check`);
-    if ( checkBonus ) rollData.abilityCheckBonus = Roll.replaceFormulaData(checkBonus, rollData);
-    else rollData.abilityCheckBonus = 0;
-
-    // Add global actor bonus
-    const globalBonus = this.actor.system.bonuses?.abilities || {};
-    if ( globalBonus.check ) {
-      parts.push("@checkBonus");
-      rollData.checkBonus = Roll.replaceFormulaData(globalBonus.check, rollData);
-    }
-
-    // Compose the roll data
-    const rollConfig = foundry.utils.mergeObject({
-      data: rollData,
-      title: title,
-      flavor: title,
-      dialogOptions: {
-        width: 400,
-        top: options.event ? options.event.clientY - 80 : null,
-        left: window.innerWidth - 710
-      },
-      chooseModifier: true,
-      halflingLucky: this.actor.getFlag("dnd5e", "halflingLucky" ),
-      reliableTalent: (this.system.proficient >= 1) && this.actor.getFlag("dnd5e", "reliableTalent"),
-      messageData: {
-        speaker: options.speaker || ChatMessage.getSpeaker({actor: this.actor}),
-        "flags.dnd5e.roll": {type: "tool", itemId: this.id, itemUuid: this.uuid}
-      }
-    }, options);
-    rollConfig.parts = parts.concat(options.parts ?? []);
-
-    /**
-     * A hook event that fires before a tool check is rolled for an Item.
-     * @function dnd5e.preRollToolCheck
-     * @memberof hookEvents
-     * @param {Item5e} item                  Item for which the roll is being performed.
-     * @param {D20RollConfiguration} config  Configuration data for the pending roll.
-     * @returns {boolean}                    Explicitly return false to prevent the roll from being performed.
-     */
-    if ( Hooks.call("dnd5e.preRollToolCheck", this, rollConfig) === false ) return;
-
-    const roll = await d20Roll(rollConfig);
-
-    /**
-     * A hook event that fires after a tool check has been rolled for an Item.
-     * @function dnd5e.rollToolCheck
-     * @memberof hookEvents
-     * @param {Item5e} item   Item for which the roll was performed.
-     * @param {D20Roll} roll  The resulting roll.
-     */
-    if ( roll ) Hooks.callAll("dnd5e.rollToolCheck", this, roll);
-
-    return roll;
+    return this.actor?.rollToolCheck(this.system.baseItem, {
+      ability: this.system.ability,
+      bonus: this.system.bonus,
+      prof: this.system.prof,
+      ...options
+    });
   }
 
   /* -------------------------------------------- */
@@ -1902,7 +1707,13 @@ export default class Item5e extends Item {
       case "placeTemplate":
         try {
           await dnd5e.canvas.AbilityTemplate.fromItem(item)?.drawPreview();
-        } catch(err) {}
+        } catch(err) {
+          Hooks.onError("Item5e._onChatCardAction", err, {
+            msg: game.i18n.localize("DND5E.PlaceTemplateError"),
+            log: "error",
+            notify: "error"
+          });
+        }
         break;
       case "abilityCheck":
         targets = this._getChatCardTargets(card);
@@ -2046,7 +1857,7 @@ export default class Item5e extends Item {
   deleteAdvancement(id, { source=false }={}) {
     if ( !this.system.advancement ) return this;
 
-    const advancementCollection = this.system.advancement.filter(a => a._id !== id);
+    const advancementCollection = this.toObject().system.advancement.filter(a => a._id !== id);
     if ( source ) return this.updateSource({"system.advancement": advancementCollection});
     return this.update({"system.advancement": advancementCollection});
   }
@@ -2110,11 +1921,11 @@ export default class Item5e extends Item {
       case "spell":
         updates = this._onCreateOwnedSpell(data, isNPC);
         break;
-      case "tool":
-        updates = this._onCreateOwnedTool(data, isNPC);
-        break;
       case "weapon":
         updates = this._onCreateOwnedWeapon(data, isNPC);
+        break;
+      case "feat":
+        updates = this._onCreateOwnedFeature(data, isNPC);
         break;
     }
     if ( updates ) return this.updateSource(updates);
@@ -2190,16 +2001,6 @@ export default class Item5e extends Item {
     if ( foundry.utils.getProperty(data, "system.equipped") === undefined ) {
       updates["system.equipped"] = isNPC;  // NPCs automatically equip equipment
     }
-    if ( foundry.utils.getProperty(data, "system.proficient") === undefined ) {
-      if ( isNPC ) {
-        updates["system.proficient"] = true;  // NPCs automatically have equipment proficiency
-      } else {
-        const armorProf = CONFIG.DND5E.armorProficienciesMap[this.system.armor?.type]; // Player characters check proficiency
-        const actorArmorProfs = this.parent.system.traits?.armorProf?.value || new Set();
-        updates["system.proficient"] = (armorProf === true) || actorArmorProfs.has(armorProf)
-          || actorArmorProfs.has(this.system.baseItem);
-      }
-    }
     return updates;
   }
 
@@ -2224,28 +2025,6 @@ export default class Item5e extends Item {
   /* -------------------------------------------- */
 
   /**
-   * Pre-creation logic for the automatic configuration of owned tool type Items.
-   * @param {object} data       Data for the newly created item.
-   * @param {boolean} isNPC     Is this actor an NPC?
-   * @returns {object}          Updates to apply to the item data.
-   * @private
-   */
-  _onCreateOwnedTool(data, isNPC) {
-    const updates = {};
-    if ( data.system?.proficient === undefined ) {
-      if ( isNPC ) updates["system.proficient"] = 1;
-      else {
-        const actorToolProfs = this.parent.system.traits?.toolProf?.value || new Set();
-        const proficient = actorToolProfs.has(this.system.toolType) || actorToolProfs.has(this.system.baseItem);
-        updates["system.proficient"] = Number(proficient);
-      }
-    }
-    return updates;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
    * Pre-creation logic for the automatic configuration of owned weapon type Items.
    * @param {object} data       Data for the newly created item.
    * @param {boolean} isNPC     Is this actor an NPC?
@@ -2253,25 +2032,24 @@ export default class Item5e extends Item {
    * @private
    */
   _onCreateOwnedWeapon(data, isNPC) {
-
-    // NPCs automatically equip items and are proficient with them
-    if ( isNPC ) {
-      const updates = {};
-      if ( !foundry.utils.hasProperty(data, "system.equipped") ) updates["system.equipped"] = true;
-      if ( !foundry.utils.hasProperty(data, "system.proficient") ) updates["system.proficient"] = true;
-      return updates;
-    }
-    if ( data.system?.proficient !== undefined ) return {};
-
-    // Some weapon types are always proficient
-    const weaponProf = CONFIG.DND5E.weaponProficienciesMap[this.system.weaponType];
+    if ( !isNPC ) return;
+    // NPCs automatically equip items.
     const updates = {};
-    if ( weaponProf === true ) updates["system.proficient"] = true;
+    if ( !foundry.utils.hasProperty(data, "system.equipped") ) updates["system.equipped"] = true;
+    return updates;
+  }
 
-    // Characters may have proficiency in this weapon type (or specific base weapon)
-    else {
-      const actorProfs = this.parent.system.traits?.weaponProf?.value || new Set();
-      updates["system.proficient"] = actorProfs.has(weaponProf) || actorProfs.has(this.system.baseItem);
+  /**
+   * Pre-creation logic for the automatic configuration of owned feature type Items.
+   * @param {object} data       Data for the newly created item.
+   * @param {boolean} isNPC     Is this actor an NPC?
+   * @returns {object}          Updates to apply to the item data.
+   * @private
+   */
+  _onCreateOwnedFeature(data, isNPC) {
+    const updates = {};
+    if ( isNPC && !foundry.utils.getProperty(data, "system.type.value") ) {
+      updates["system.type.value"] = "monster"; // Set features on NPCs to be 'monster features'.
     }
     return updates;
   }
@@ -2282,15 +2060,17 @@ export default class Item5e extends Item {
 
   /**
    * Create a consumable spell scroll Item from a spell Item.
-   * @param {Item5e} spell      The spell to be made into a scroll
-   * @returns {Item5e}          The created scroll consumable item
+   * @param {Item5e|object} spell     The spell or item data to be made into a scroll
+   * @param {object} [options]        Additional options that modify the created scroll
+   * @returns {Item5e}                The created scroll consumable item
    */
-  static async createScrollFromSpell(spell) {
+  static async createScrollFromSpell(spell, options={}) {
 
     // Get spell data
     const itemData = (spell instanceof Item5e) ? spell.toObject() : spell;
     let {
-      actionType, description, source, activation, duration, target, range, damage, formula, save, level, attackBonus
+      actionType, description, source, activation, duration, target,
+      range, damage, formula, save, level, attackBonus, ability, components
     } = itemData.system;
 
     // Get scroll data
@@ -2307,11 +2087,16 @@ export default class Item5e extends Item {
     const scrollDetails = scrollDescription.slice(scrollIntroEnd + pdel.length);
 
     // Create a composite description from the scroll description and the spell details
-    const desc = `${scrollIntro}<hr/><h3>${itemData.name} (Level ${level})</h3><hr/>${description.value}<hr/><h3>Scroll Details</h3><hr/>${scrollDetails}`;
+    const desc = scrollIntro
+    + `<hr><h3>${itemData.name} (${game.i18n.format("DND5E.LevelNumber", {level})})</h3>`
+    + (components.concentration ? `<p><em>${game.i18n.localize("DND5E.ScrollRequiresConcentration")}</em></p>` : "")
+    + `<hr>${description.value}<hr>`
+    + `<h3>${game.i18n.localize("DND5E.ScrollDetails")}</h3><hr>${scrollDetails}`;
 
     // Used a fixed attack modifier and saving throw according to the level of spell scroll.
     if ( ["mwak", "rwak", "msak", "rsak"].includes(actionType) ) {
-      attackBonus = `${scrollData.system.attackBonus} - @mod`;
+      attackBonus = scrollData.system.attackBonus;
+      ability = "none";
     }
     if ( save.ability ) {
       save.scaling = "flat";
@@ -2323,10 +2108,20 @@ export default class Item5e extends Item {
       name: `${game.i18n.localize("DND5E.SpellScroll")}: ${itemData.name}`,
       img: itemData.img,
       system: {
-        "description.value": desc.trim(), source, actionType, activation, duration, target, range, damage, formula,
-        save, level, attackBonus
+        description: {value: desc.trim()}, source, actionType, activation, duration, target,
+        range, damage, formula, save, level, attackBonus, ability
       }
     });
+    foundry.utils.mergeObject(spellScrollData, options);
+
+    /**
+     * A hook event that fires after the item data for a scroll is created but before the item is returned.
+     * @function dnd5e.createScrollFromSpell
+     * @memberof hookEvents
+     * @param {Item5e|object} spell       The spell or item data to be made into a scroll.
+     * @param {object} spellScrollData    The final item data used to make the scroll.
+     */
+    Hooks.callAll("dnd5e.createScrollFromSpell", spell, spellScrollData);
     return new this(spellScrollData);
   }
 

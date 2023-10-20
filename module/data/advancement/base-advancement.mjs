@@ -1,6 +1,7 @@
+import { SparseDataModel } from "../abstract.mjs";
 import { AdvancementDataField } from "../fields.mjs";
 
-export default class BaseAdvancement extends foundry.abstract.DataModel {
+export default class BaseAdvancement extends SparseDataModel {
 
   /**
    * Name of this advancement type that will be stored in config and used for lookups.
@@ -13,6 +14,7 @@ export default class BaseAdvancement extends foundry.abstract.DataModel {
 
   /* -------------------------------------------- */
 
+  /** @inheritdoc */
   static defineSchema() {
     return {
       _id: new foundry.data.fields.DocumentIdField({initial: () => foundry.utils.randomID()}),
@@ -33,16 +35,5 @@ export default class BaseAdvancement extends foundry.abstract.DataModel {
         initial: undefined, choices: ["primary", "secondary"], label: "DND5E.AdvancementClassRestriction"
       })
     };
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritdoc */
-  toObject(source=true) {
-    if ( !source ) return super.toObject(source);
-    const clone = foundry.utils.deepClone(this._source);
-    // Remove any undefined keys from the source data
-    Object.keys(clone).filter(k => clone[k] === undefined).forEach(k => delete clone[k]);
-    return clone;
   }
 }

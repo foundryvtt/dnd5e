@@ -6,6 +6,7 @@ import CurrencyTemplate from "../../shared/currency.mjs";
  * @typedef {object} AbilityData
  * @property {number} value          Ability score.
  * @property {number} proficient     Proficiency value for saves.
+ * @property {number} max            Maximum possible score for the ability.
  * @property {object} bonuses        Bonuses that modify ability checks and saves.
  * @property {string} bonuses.check  Numeric or dice bonus to ability checks.
  * @property {string} bonuses.save   Numeric or dice bonus to ability saving throws.
@@ -26,19 +27,50 @@ export default class CommonTemplate extends SystemDataModel.mixin(CurrencyTempla
         value: new foundry.data.fields.NumberField({
           required: true, nullable: false, integer: true, min: 0, initial: 10, label: "DND5E.AbilityScore"
         }),
-        proficient: new foundry.data.fields.NumberField({required: true, initial: 0, label: "DND5E.ProficiencyLevel"}),
+        proficient: new foundry.data.fields.NumberField({
+          required: true, integer: true, min: 0, max: 1, initial: 0, label: "DND5E.ProficiencyLevel"
+        }),
+        max: new foundry.data.fields.NumberField({
+          required: true, integer: true, nullable: true, min: 0, initial: null, label: "DND5E.AbilityScoreMax"
+        }),
         bonuses: new foundry.data.fields.SchemaField({
           check: new FormulaField({required: true, label: "DND5E.AbilityCheckBonus"}),
           save: new FormulaField({required: true, label: "DND5E.SaveBonus"})
         }, {label: "DND5E.AbilityBonuses"})
-      }), {initialKeys: CONFIG.DND5E.abilities, label: "DND5E.Abilities"})
+      }), {
+        initialKeys: CONFIG.DND5E.abilities, initialValue: this._initialAbilityValue.bind(this),
+        initialKeysOnly: true, label: "DND5E.Abilities"
+      })
     });
   }
 
   /* -------------------------------------------- */
 
+  /**
+   * Populate the proper initial value for abilities.
+   * @param {string} key       Key for which the initial data will be created.
+   * @param {object} initial   The initial skill object created by SkillData.
+   * @param {object} existing  Any existing mapping data.
+   * @returns {object}         Initial ability object.
+   * @private
+   */
+  static _initialAbilityValue(key, initial, existing) {
+    const config = CONFIG.DND5E.abilities[key];
+    if ( config ) {
+      let defaultValue = config.defaults?.[this._systemType] ?? initial.value;
+      if ( typeof defaultValue === "string" ) defaultValue = existing?.[defaultValue]?.value ?? initial.value;
+      initial.value = defaultValue;
+    }
+    return initial;
+  }
+
+  /* -------------------------------------------- */
+  /*  Migrations                                  */
+  /* -------------------------------------------- */
+
   /** @inheritdoc */
   static migrateData(source) {
+    super.migrateData(source);
     CommonTemplate.#migrateACData(source);
     CommonTemplate.#migrateMovementData(source);
   }

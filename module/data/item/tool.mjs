@@ -26,11 +26,11 @@ export default class ToolData extends SystemDataModel.mixin(
       toolType: new foundry.data.fields.StringField({required: true, label: "DND5E.ItemToolType"}),
       baseItem: new foundry.data.fields.StringField({required: true, label: "DND5E.ItemToolBase"}),
       ability: new foundry.data.fields.StringField({
-        required: true, initial: "int", blank: false, label: "DND5E.DefaultAbilityCheck"
+        required: true, blank: true, label: "DND5E.DefaultAbilityCheck"
       }),
       chatFlavor: new foundry.data.fields.StringField({required: true, label: "DND5E.ChatFlavor"}),
       proficient: new foundry.data.fields.NumberField({
-        required: true, nullable: false, initial: 0, min: 0, label: "DND5E.ItemToolProficiency"
+        required: true, initial: null, min: 0, max: 2, step: 0.5, label: "DND5E.ItemToolProficiency"
       }),
       bonus: new FormulaField({required: true, label: "DND5E.ItemToolBonus"})
     });
@@ -61,10 +61,36 @@ export default class ToolData extends SystemDataModel.mixin(
   /* -------------------------------------------- */
 
   /**
+   * Properties displayed in chat.
+   * @type {string[]}
+   */
+  get chatProperties() {
+    return [CONFIG.DND5E.abilities[this.ability]?.label];
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Which ability score modifier is used by this item?
    * @type {string|null}
    */
   get abilityMod() {
     return this.ability || "int";
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * The proficiency multiplier for this item.
+   * @returns {number}
+   */
+  get proficiencyMultiplier() {
+    if ( Number.isFinite(this.proficient) ) return this.proficient;
+    const actor = this.parent.actor;
+    if ( !actor ) return 0;
+    if ( actor.type === "npc" ) return 1;
+    const baseItemProf = actor.system.tools?.[this.baseItem];
+    const categoryProf = actor.system.tools?.[this.toolType];
+    return Math.max(baseItemProf?.value ?? 0, categoryProf?.value ?? 0);
   }
 }

@@ -30,6 +30,7 @@
       "units": ""
     },
     "cover": null,
+    "crewed": false,
     "target": {
       "value": null,
       "width": null,
@@ -95,7 +96,35 @@
     "stealth": false,
     "proficient": false
   },
-  "effects": [],
+  "effects": [
+    {
+      "label": "Ioun Stone of Strength",
+      "icon": "icons/commodities/gems/gem-rough-cushion-blue.webp",
+      "origin": "Compendium.dnd5e.items.0G5LSgbb5NTV4XC7",
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "disabled": false,
+      "_id": "plffDmuTOIrXAJDb",
+      "changes": [
+        {
+          "key": "system.abilities.str.value",
+          "mode": 2,
+          "value": "+2"
+        }
+      ],
+      "tint": null,
+      "transfer": true,
+      "flags": {},
+      "sort": 0
+    }
+  ],
   "folder": null,
   "sort": 0,
   "ownership": {
@@ -104,10 +133,10 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.1.0",
-    "coreVersion": "10.291",
+    "systemVersion": "2.2.2",
+    "coreVersion": "10.303",
     "createdTime": 1661787233434,
-    "modifiedTime": 1671220956988,
+    "modifiedTime": 1690481115410,
     "lastModifiedBy": "dnd5ebuilder0000"
   }
 }

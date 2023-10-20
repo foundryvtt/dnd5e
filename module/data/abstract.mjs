@@ -83,6 +83,14 @@ export default class SystemDataModel extends foundry.abstract.DataModel {
 
   /* -------------------------------------------- */
 
+  /** @inheritdoc */
+  validate(options={}) {
+    if ( this.constructor._enableV10Validation === false ) return true;
+    return super.validate(options);
+  }
+
+  /* -------------------------------------------- */
+
   /**
    * Mix multiple templates with the base type.
    * @param {...*} templates            Template classes to mix.
@@ -111,5 +119,21 @@ export default class SystemDataModel extends foundry.abstract.DataModel {
     }
 
     return Base;
+  }
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Data Model variant that does not export fields with an `undefined` value during `toObject(true)`.
+ */
+export class SparseDataModel extends foundry.abstract.DataModel {
+  /** @inheritdoc */
+  toObject(source=true) {
+    if ( !source ) return super.toObject(source);
+    const clone = foundry.utils.flattenObject(this._source);
+    // Remove any undefined keys from the source data
+    Object.keys(clone).filter(k => clone[k] === undefined).forEach(k => delete clone[k]);
+    return foundry.utils.expandObject(clone);
   }
 }

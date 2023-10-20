@@ -30,7 +30,12 @@ export default class ItemSheet5e extends ItemSheet {
       height: 400,
       classes: ["dnd5e", "sheet", "item"],
       resizable: true,
-      scrollY: [".tab.details"],
+      scrollY: [
+        ".tab[data-tab=details]",
+        ".tab[data-tab=effects] .items-list",
+        ".tab[data-tab=description] .editor-content",
+        ".tab[data-tab=advancement] .items-list",
+      ],
       tabs: [{navSelector: ".tabs", contentSelector: ".sheet-body", initial: "description"}],
       dragDrop: [
         {dragSelector: "[data-effect-id]", dropSelector: ".effects-list"},
@@ -77,7 +82,7 @@ export default class ItemSheet5e extends ItemSheet {
       rollData: this.item.getRollData(),
 
       // Item Type, Status, and Details
-      itemType: game.i18n.localize(`ITEM.Type${this.item.type.titleCase()}`),
+      itemType: game.i18n.localize(CONFIG.Item.typeLabels[this.item.type]),
       itemStatus: this._getItemStatus(),
       itemProperties: this._getItemProperties(),
       baseItems: await this._getItemBaseTypes(),
@@ -101,16 +106,6 @@ export default class ItemSheet5e extends ItemSheet {
       effects: ActiveEffect5e.prepareActiveEffectCategories(item.effects)
     });
     context.abilityConsumptionTargets = this._getItemConsumptionTargets();
-
-    /** @deprecated */
-    Object.defineProperty(context, "data", {
-      get() {
-        const msg = `You are accessing the "data" attribute within the rendering context provided by the ItemSheet5e
-        class. This attribute has been deprecated in favor of "system" and will be removed in a future release`;
-        foundry.utils.logCompatibilityWarning(msg, { since: "DnD5e 2.0", until: "DnD5e 2.2" });
-        return context.system;
-      }
-    });
 
     // Special handling for specific item types
     switch ( item.type ) {
@@ -233,11 +228,9 @@ export default class ItemSheet5e extends ItemSheet {
 
     // Attributes
     else if ( consume.type === "attribute" ) {
-      const attributes = TokenDocument.implementation.getConsumedAttributes(actor.system);
-      attributes.bar.forEach(a => a.push("value"));
-      return attributes.bar.concat(attributes.value).reduce((obj, a) => {
-        let k = a.join(".");
-        obj[k] = k;
+      const attrData = game.dnd5e.isV10 ? actor.system : actor.type;
+      return TokenDocument.implementation.getConsumedAttributes(attrData).reduce((obj, attr) => {
+        obj[attr] = attr;
         return obj;
       }, {});
     }
@@ -304,7 +297,7 @@ export default class ItemSheet5e extends ItemSheet {
       case "spell":
         return CONFIG.DND5E.spellPreparationModes[this.item.system.preparation];
       case "tool":
-        return game.i18n.localize(this.item.system.proficient ? "DND5E.Proficient" : "DND5E.NotProficient");
+        return CONFIG.DND5E.proficiencyLevels[this.item.system.prof?.multiplier || 0];
     }
     return null;
   }
@@ -320,6 +313,11 @@ export default class ItemSheet5e extends ItemSheet {
     const props = [];
     const labels = this.item.labels;
     switch ( this.item.type ) {
+      case "consumable":
+        for ( const [k, v] of Object.entries(this.item.system.properties ?? {}) ) {
+          if ( v === true ) props.push(CONFIG.DND5E.physicalWeaponProperties[k]);
+        }
+        break;
       case "equipment":
         props.push(CONFIG.DND5E.equipmentTypes[this.item.system.armor.type]);
         if ( this.item.isArmor || this.item.isMountable ) props.push(labels.armor);
@@ -432,7 +430,8 @@ export default class ItemSheet5e extends ItemSheet {
       html.find(".damage-control").click(this._onDamageControl.bind(this));
       html.find(".trait-selector").click(this._onConfigureTraits.bind(this));
       html.find(".effect-control").click(ev => {
-        if ( this.item.isOwned ) return ui.notifications.warn("Managing Active Effects within an Owned Item is not currently supported and will be added in a subsequent update.");
+        const unsupported = game.dnd5e.isV10 && this.item.isOwned;
+        if ( unsupported ) return ui.notifications.warn("Managing Active Effects within an Owned Item is not currently supported and will be added in a subsequent update.");
         ActiveEffect5e.onManageActiveEffect(ev, this.item);
       });
       html.find(".advancement .item-control").click(event => {
@@ -581,7 +580,7 @@ export default class ItemSheet5e extends ItemSheet {
   async _onDropActiveEffect(event, data) {
     const effect = await ActiveEffect.implementation.fromDropData(data);
     if ( !this.item.isOwner || !effect ) return false;
-    if ( (this.item.uuid === effect.parent.uuid) || (this.item.uuid === effect.origin) ) return false;
+    if ( (this.item.uuid === effect.parent?.uuid) || (this.item.uuid === effect.origin) ) return false;
     return ActiveEffect.create({
       ...effect.toObject(),
       origin: this.item.uuid
@@ -630,7 +629,7 @@ export default class ItemSheet5e extends ItemSheet {
     }
 
     // If no advancements need to be applied, just add them to the item
-    const advancementArray = foundry.utils.deepClone(this.item.system.advancement);
+    const advancementArray = this.item.system.toObject().advancement;
     advancementArray.push(...advancements.map(a => a.toObject()));
     this.item.update({"system.advancement": advancementArray});
   }

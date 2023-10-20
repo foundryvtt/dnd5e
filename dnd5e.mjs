@@ -3,7 +3,7 @@
  * A system for playing the fifth edition of the world's most popular role-playing game.
  * Author: Atropos
  * Software License: MIT
- * Content License: https://media.wizards.com/2016/downloads/DND/SRD-OGL_V5.1.pdf
+ * Content License: https://www.dndbeyond.com/attachments/39j2li89/SRD5.1-CCBY4.0License.pdf
  * Repository: https://github.com/foundryvtt/dnd5e
  * Issue Tracker: https://github.com/foundryvtt/dnd5e/issues
  */
@@ -45,42 +45,6 @@ Hooks.once("init", function() {
   globalThis.dnd5e = game.dnd5e = Object.assign(game.system, globalThis.dnd5e);
   console.log(`DnD5e | Initializing the DnD5e Game System - Version ${dnd5e.version}\n${DND5E.ASCII}`);
 
-  /** @deprecated */
-  Object.defineProperty(dnd5e, "entities", {
-    get() {
-      foundry.utils.logCompatibilityWarning(
-        "You are referencing the 'dnd5e.entities' property which has been deprecated and renamed to "
-        + "'dnd5e.documents'. Support for this old path will be removed in a future version.",
-        { since: "DnD5e 2.0", until: "DnD5e 2.2" }
-      );
-      return dnd5e.documents;
-    }
-  });
-
-  /** @deprecated */
-  Object.defineProperty(dnd5e, "rollItemMacro", {
-    get() {
-      foundry.utils.logCompatibilityWarning(
-        "You are referencing the 'dnd5e.rollItemMacro' method which has been deprecated and renamed to "
-        + "'dnd5e.documents.macro.rollItem'. Support for this old path will be removed in a future version.",
-        { since: "DnD5e 2.0", until: "DnD5e 2.2" }
-      );
-      return dnd5e.documents.macro.rollItem;
-    }
-  });
-
-  /** @deprecated */
-  Object.defineProperty(dnd5e, "macros", {
-    get() {
-      foundry.utils.logCompatibilityWarning(
-        "You are referencing the 'dnd5e.macros' property which has been deprecated and renamed to "
-        + "'dnd5e.documents.macro'. Support for this old path will be removed in a future version.",
-        { since: "DnD5e 2.0", until: "DnD5e 2.2" }
-      );
-      return dnd5e.documents.macro;
-    }
-  });
-
   // Record Configuration Values
   CONFIG.DND5E = DND5E;
   CONFIG.ActiveEffect.documentClass = documents.ActiveEffect5e;
@@ -93,12 +57,14 @@ Hooks.once("init", function() {
   CONFIG.Dice.D20Roll = dice.D20Roll;
   CONFIG.MeasuredTemplate.defaults.angle = 53.13; // 5e cone RAW should be 53.13 degrees
   CONFIG.ui.combat = applications.combat.CombatTracker5e;
+  CONFIG.compatibility.excludePatterns.push(/\bActiveEffect5e#label\b/); // backwards compatibility with v10
+  game.dnd5e.isV10 = game.release.generation < 11;
 
   // Register System Settings
   registerSystemSettings();
 
   // Validation strictness.
-  _determineValidationStrictness();
+  if ( game.dnd5e.isV10 ) _determineValidationStrictness();
 
   // Configure module art.
   game.dnd5e.moduleArt = new ModuleArt();
@@ -106,6 +72,10 @@ Hooks.once("init", function() {
   // Remove honor & sanity from configuration if they aren't enabled
   if ( !game.settings.get("dnd5e", "honorScore") ) delete DND5E.abilities.hon;
   if ( !game.settings.get("dnd5e", "sanityScore") ) delete DND5E.abilities.san;
+
+  // Configure trackable & consumable attributes.
+  _configureTrackableAttributes();
+  _configureConsumableAttributes();
 
   // Patch Core Functions
   Combatant.prototype.getInitiativeRoll = documents.combat.getInitiativeRoll;
@@ -115,9 +85,10 @@ Hooks.once("init", function() {
   CONFIG.Dice.rolls.push(dice.DamageRoll);
 
   // Hook up system data types
-  CONFIG.Actor.systemDataModels = dataModels.actor.config;
-  CONFIG.Item.systemDataModels = dataModels.item.config;
-  CONFIG.JournalEntryPage.systemDataModels = dataModels.journal.config;
+  const modelType = game.dnd5e.isV10 ? "systemDataModels" : "dataModels";
+  CONFIG.Actor[modelType] = dataModels.actor.config;
+  CONFIG.Item[modelType] = dataModels.item.config;
+  CONFIG.JournalEntryPage[modelType] = dataModels.journal.config;
 
   // Register sheet application classes
   Actors.unregisterSheet("core", ActorSheet);
@@ -171,13 +142,78 @@ function _determineValidationStrictness() {
  */
 async function _configureValidationStrictness() {
   if ( !game.user.isGM ) return;
-  const invalidDocuments = game.actors.invalidDocumentIds.size + game.items.invalidDocumentIds.size;
+  const invalidDocuments = game.actors.invalidDocumentIds.size + game.items.invalidDocumentIds.size
+    + game.scenes.invalidDocumentIds.size;
   const strictValidation = game.settings.get("dnd5e", "strictValidation");
   if ( invalidDocuments && strictValidation ) {
     await game.settings.set("dnd5e", "strictValidation", false);
     game.socket.emit("reload");
     foundry.utils.debouncedReload();
   }
+}
+
+/**
+ * Configure explicit lists of attributes that are trackable on the token HUD and in the combat tracker.
+ * @internal
+ */
+function _configureTrackableAttributes() {
+  const common = {
+    bar: [],
+    value: [
+      ...Object.keys(DND5E.abilities).map(ability => `abilities.${ability}.value`),
+      ...Object.keys(DND5E.movementTypes).map(movement => `attributes.movement.${movement}`),
+      "attributes.ac.value", "attributes.init.total"
+    ]
+  };
+
+  const creature = {
+    bar: [...common.bar, "attributes.hp", "spells.pact"],
+    value: [
+      ...common.value,
+      ...Object.keys(DND5E.skills).map(skill => `skills.${skill}.passive`),
+      ...Object.keys(DND5E.senses).map(sense => `attributes.senses.${sense}`),
+      "attributes.spelldc"
+    ]
+  };
+
+  CONFIG.Actor.trackableAttributes = {
+    character: {
+      bar: [...creature.bar, "resources.primary", "resources.secondary", "resources.tertiary", "details.xp"],
+      value: [...creature.value]
+    },
+    npc: {
+      bar: [...creature.bar, "resources.legact", "resources.legres"],
+      value: [...creature.value, "details.cr", "details.spellLevel", "details.xp.value"]
+    },
+    vehicle: {
+      bar: [...common.bar, "attributes.hp"],
+      value: [...common.value]
+    },
+    group: {
+      bar: [],
+      value: []
+    }
+  };
+}
+
+/**
+ * Configure which attributes are available for item consumption.
+ * @internal
+ */
+function _configureConsumableAttributes() {
+  CONFIG.DND5E.consumableResources = [
+    ...Object.keys(DND5E.abilities).map(ability => `abilities.${ability}.value`),
+    "attributes.ac.flat",
+    "attributes.hp.value",
+    ...Object.keys(DND5E.senses).map(sense => `attributes.senses.${sense}`),
+    ...Object.keys(DND5E.movementTypes).map(type => `attributes.movement.${type}`),
+    ...Object.keys(DND5E.currencies).map(denom => `currency.${denom}`),
+    "details.xp.value",
+    "resources.primary.value", "resources.secondary.value", "resources.tertiary.value",
+    "resources.legact.value", "resources.legres.value",
+    "spells.pact.value",
+    ...Array.fromRange(Object.keys(DND5E.spellLevels).length - 1, 1).map(level => `spells.spell${level}.value`)
+  ];
 }
 
 /* -------------------------------------------- */
@@ -189,8 +225,13 @@ async function _configureValidationStrictness() {
  */
 Hooks.once("setup", function() {
   CONFIG.DND5E.trackableAttributes = expandAttributeList(CONFIG.DND5E.trackableAttributes);
-  CONFIG.DND5E.consumableResources = expandAttributeList(CONFIG.DND5E.consumableResources);
   game.dnd5e.moduleArt.registerModuleArt();
+
+  // Apply custom compendium styles to the SRD rules compendium.
+  if ( !game.dnd5e.isV10 ) {
+    const rules = game.packs.get("dnd5e.rules");
+    rules.applicationClass = applications.journal.SRDCompendium;
+  }
 });
 
 /* --------------------------------------------- */
@@ -222,12 +263,14 @@ Hooks.once("i18nInit", () => utils.performPreLocalization(CONFIG.DND5E));
  * Once the entire VTT framework is initialized, check to see if we should perform a data migration
  */
 Hooks.once("ready", function() {
-  // Configure validation strictness.
-  _configureValidationStrictness();
+  if ( game.dnd5e.isV10 ) {
+    // Configure validation strictness.
+    _configureValidationStrictness();
 
-  // Apply custom compendium styles to the SRD rules compendium.
-  const rules = game.packs.get("dnd5e.rules");
-  rules.apps = [new applications.journal.SRDCompendium(rules)];
+    // Apply custom compendium styles to the SRD rules compendium.
+    const rules = game.packs.get("dnd5e.rules");
+    rules.apps = [new applications.journal.SRDCompendium(rules)];
+  }
 
   // Wait to register hotbar drop hook on ready so that modules could register earlier if they want to
   Hooks.on("hotbarDrop", (bar, data, slot) => {

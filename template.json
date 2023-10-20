@@ -7,6 +7,7 @@
           "str": {
             "value": 10,
             "proficient": 0,
+            "max": null,
             "bonuses": {
               "check": "",
               "save": ""
@@ -15,6 +16,7 @@
           "dex": {
             "value": 10,
             "proficient": 0,
+            "max": null,
             "bonuses": {
               "check": "",
               "save": ""
@@ -23,6 +25,7 @@
           "con": {
             "value": 10,
             "proficient": 0,
+            "max": null,
             "bonuses": {
               "check": "",
               "save": ""
@@ -31,6 +34,7 @@
           "int": {
             "value": 10,
             "proficient": 0,
+            "max": null,
             "bonuses": {
               "check": "",
               "save": ""
@@ -39,6 +43,7 @@
           "wis": {
             "value": 10,
             "proficient": 0,
+            "max": null,
             "bonuses": {
               "check": "",
               "save": ""
@@ -47,6 +52,7 @@
           "cha": {
             "value": 10,
             "proficient": 0,
+            "max": null,
             "bonuses": {
               "check": "",
               "save": ""
@@ -280,54 +286,14 @@
             }
           }
         },
+        "tools": {},
         "traits": {
           "languages": {
             "value": [],
             "custom": ""
           }
         },
-        "spells": {
-          "spell1": {
-            "value": 0,
-            "override": null
-          },
-          "spell2": {
-            "value": 0,
-            "override": null
-          },
-          "spell3": {
-            "value": 0,
-            "override": null
-          },
-          "spell4": {
-            "value": 0,
-            "override": null
-          },
-          "spell5": {
-            "value": 0,
-            "override": null
-          },
-          "spell6": {
-            "value": 0,
-            "override": null
-          },
-          "spell7": {
-            "value": 0,
-            "override": null
-          },
-          "spell8": {
-            "value": 0,
-            "override": null
-          },
-          "spell9": {
-            "value": 0,
-            "override": null
-          },
-          "pact": {
-            "value": 0,
-            "override": null
-          }
-        },
+        "spells": {},
         "bonuses": {
           "mwak": {
             "attack": "",
@@ -569,6 +535,7 @@
           "units": ""
         },
         "cover": null,
+        "crewed": false,
         "target": {
           "value": null,
           "width": null,
@@ -683,7 +650,7 @@
       },
       "strength": null,
       "stealth": false,
-      "proficient": true
+      "proficient": null
     },
     "feat": {
       "templates": ["itemDescription", "activatedEffect", "action"],
@@ -706,7 +673,7 @@
       "baseItem": "",
       "ability": "int",
       "chatFlavor": "",
-      "proficient": 0,
+      "proficient": null,
       "bonus": ""
     },
     "spell": {
@@ -750,7 +717,7 @@
       "weaponType": "simpleM",
       "baseItem": "",
       "properties": {},
-      "proficient": true
+      "proficient": null
     }
   },
   "JournalEntryPage": {

@@ -55,6 +55,7 @@ export default class FeatData extends SystemDataModel.mixin(
    * @param {object} source The candidate source data from which the model will be constructed.
    */
   static #migrateType(source) {
+    if ( !("type" in source) ) return;
     if ( !source.type ) source.type = {value: "", subtype: ""};
   }
 
@@ -76,8 +77,28 @@ export default class FeatData extends SystemDataModel.mixin(
   /*  Getters                                     */
   /* -------------------------------------------- */
 
+  /**
+   * Properties displayed in chat.
+   * @type {string[]}
+   */
+  get chatProperties() {
+    return [this.requirements];
+  }
+
+  /* -------------------------------------------- */
+
   /** @inheritdoc */
   get hasLimitedUses() {
     return !!this.recharge.value || super.hasLimitedUses;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * The proficiency multiplier for this item.
+   * @returns {number}
+   */
+  get proficiencyMultiplier() {
+    return 1;
   }
 }

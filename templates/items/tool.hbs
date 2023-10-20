@@ -49,6 +49,16 @@
 
         {{!-- Details Tab --}}
         <div class="tab details" data-group="primary" data-tab="details">
+            {{!-- Tool Status --}}
+            <div class="form-group stacked">
+                <label>{{ localize "DND5E.ItemToolStatus" }}</label>
+                <div class="form-fields">
+                    <label class="checkbox">
+                        <input type="checkbox" name="system.equipped" {{ checked system.equipped }}>
+                        {{ localize "DND5E.Equipped" }}
+                    </label>
+                </div>
+            </div>
 
             {{!-- Tool Type --}}
             <div class="form-group">
@@ -76,7 +86,8 @@
             <div class="form-group">
                 <label>{{ localize "DND5E.ItemToolProficiency" }}</label>
                 <select name="system.proficient" data-dtype="Number">
-                    {{selectOptions config.proficiencyLevels selected=system.proficient}}
+                    {{selectOptions config.proficiencyLevels selected=system.proficient
+                                    blank=(localize "DND5E.Automatic")}}
                 </select>
             </div>
 
@@ -84,7 +95,8 @@
             <div class="form-group">
                 <label>{{ localize "DND5E.DefaultAbilityCheck" }}</label>
                 <select name="system.ability">
-                    {{selectOptions config.abilities selected=system.ability}}
+                    {{selectOptions config.abilities selected=system.ability labelAttr="label"
+                                    blank=(localize "DND5E.Default")}}
                 </select>
             </div>
 

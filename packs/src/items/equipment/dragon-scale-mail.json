@@ -2,7 +2,7 @@
   "_id": "tIwoSAGJlcuyiwaQ",
   "name": "Dragon Scale Mail",
   "type": "equipment",
-  "img": "icons/equipment/chest/breastplate-metal-scaled-grey.webp",
+  "img": "icons/equipment/chest/breastplate-banded-steel.webp",
   "system": {
     "description": {
       "value": "<p><em>(Requires attunement)</em></p>\n<p>Dragon Scale Mail is made of the scales of one kind of dragon. Sometimes dragons collect their cast-off scales and gift them to humanoids. Other times, hunters carefully skin and preserve the hide of a dead dragon. In either case, dragon scale mail is highly valued.</p>\n<p>While wearing this armor, you gain a +1 bonus to AC, you have advantage on saving throws against the Frightful Presence and Breath Weapons of dragons, and you have resistance to one damage type that is determined by the kind of dragon that provided the scales (see the table).</p>\n<p>Additionally, you can focus your senses as an action to magically discern the distance and direction to the closest dragon within 30 miles of you that is of the same type as the armor. This special action can't be used again until the next dawn.</p>\n<table border=\"1\">\n<tbody>\n<tr>\n<td><strong>Dragon</strong></td>\n<td><strong>Resistance</strong></td>\n</tr>\n<tr>\n<td>Black</td>\n<td>Acid</td>\n</tr>\n<tr>\n<td>Blue</td>\n<td>Lightning</td>\n</tr>\n<tr>\n<td>Brass</td>\n<td>Fire</td>\n</tr>\n<tr>\n<td>Bronze</td>\n<td>Lightning</td>\n</tr>\n<tr>\n<td>Copper</td>\n<td>Acid</td>\n</tr>\n<tr>\n<td>Gold</td>\n<td>Fire</td>\n</tr>\n<tr>\n<td>Green</td>\n<td>Poison</td>\n</tr>\n<tr>\n<td>Red</td>\n<td>Fire</td>\n</tr>\n<tr>\n<td>Silver</td>\n<td>Cold</td>\n</tr>\n<tr>\n<td>White</td>\n<td>Cold</td>\n</tr>\n</tbody>\n</table>",
@@ -30,6 +30,7 @@
       "units": ""
     },
     "cover": null,
+    "crewed": false,
     "target": {
       "value": null,
       "width": null,
@@ -99,10 +100,10 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.1.0",
+    "systemVersion": "2.2.2",
     "coreVersion": "10.291",
     "createdTime": 1661787233910,
-    "modifiedTime": 1671220964884,
+    "modifiedTime": 1690538818576,
     "lastModifiedBy": "dnd5ebuilder0000"
   }
 }

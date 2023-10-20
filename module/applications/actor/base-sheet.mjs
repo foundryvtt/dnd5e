@@ -10,7 +10,6 @@ import ActorInitiativeConfig from "./initiative-config.mjs";
 import ActorMovementConfig from "./movement-config.mjs";
 import ActorSensesConfig from "./senses-config.mjs";
 import ActorSheetFlags from "./sheet-flags.mjs";
-import ActorSkillConfig from "./skill-config.mjs";
 import ActorTypeConfig from "./type-config.mjs";
 
 import AdvancementConfirmationDialog from "../advancement/advancement-confirmation-dialog.mjs";
@@ -18,6 +17,8 @@ import AdvancementManager from "../advancement/advancement-manager.mjs";
 
 import PropertyAttribution from "../property-attribution.mjs";
 import TraitSelector from "./trait-selector.mjs";
+import ProficiencyConfig from "./proficiency-config.mjs";
+import ToolSelector from "./tool-selector.mjs";
 
 /**
  * Extend the basic ActorSheet class to suppose system-specific logic and functionality.
@@ -55,7 +56,8 @@ export default class ActorSheet5e extends ActorSheet {
         ".inventory .inventory-list",
         ".features .inventory-list",
         ".spellbook .inventory-list",
-        ".effects .inventory-list"
+        ".effects .inventory-list",
+        ".center-pane"
       ],
       tabs: [{navSelector: ".tabs", contentSelector: ".sheet-body", initial: "description"}],
       width: 720,
@@ -101,6 +103,7 @@ export default class ActorSheet5e extends ActorSheet {
       itemContext: {},
       abilities: foundry.utils.deepClone(this.actor.system.abilities),
       skills: foundry.utils.deepClone(this.actor.system.skills ?? {}),
+      tools: foundry.utils.deepClone(this.actor.system.tools ?? {}),
       labels: this._getLabels(),
       movement: this._getMovementSpeed(this.actor.system),
       senses: this._getSenses(this.actor.system),
@@ -117,18 +120,11 @@ export default class ActorSheet5e extends ActorSheet {
       isVehicle: this.actor.type === "vehicle",
       config: CONFIG.DND5E,
       rollableClass: this.isEditable ? "rollable" : "",
-      rollData: this.actor.getRollData()
-    };
-
-    /** @deprecated */
-    Object.defineProperty(context, "data", {
-      get() {
-        const msg = `You are accessing the "data" attribute within the rendering context provided by the ActorSheet5e 
-        class. This attribute has been deprecated in favor of "system" and will be removed in a future release`;
-        foundry.utils.logCompatibilityWarning(msg, { since: "DnD5e 2.0", until: "DnD5e 2.2" });
-        return context.system;
+      rollData: this.actor.getRollData(),
+      overrides: {
+        attunement: foundry.utils.hasProperty(this.actor.overrides, "system.attributes.attunement.max")
       }
-    });
+    };
 
     // Sort Owned Items
     context.items.sort((a, b) => (a.sort || 0) - (b.sort || 0));
@@ -147,14 +143,16 @@ export default class ActorSheet5e extends ActorSheet {
       abl.baseProf = source.system.abilities[a]?.proficient ?? 0;
     }
 
-    // Skills
-    for ( const [s, skl] of Object.entries(context.skills) ) {
-      skl.abbreviation = CONFIG.DND5E.abilities[skl.ability]?.abbreviation;
-      skl.icon = this._getProficiencyIcon(skl.value);
-      skl.hover = CONFIG.DND5E.proficiencyLevels[skl.value];
-      skl.label = CONFIG.DND5E.skills[s]?.label;
-      skl.baseValue = source.system.skills[s]?.value ?? 0;
-    }
+    // Skills & tools.
+    ["skills", "tools"].forEach(prop => {
+      for ( const [key, entry] of Object.entries(context[prop]) ) {
+        entry.abbreviation = CONFIG.DND5E.abilities[entry.ability]?.abbreviation;
+        entry.icon = this._getProficiencyIcon(entry.value);
+        entry.hover = CONFIG.DND5E.proficiencyLevels[entry.value];
+        entry.label = prop === "skills" ? CONFIG.DND5E.skills[key]?.label : Trait.keyLabel("tool", key);
+        entry.baseValue = source.system[prop]?.[key]?.value ?? 0;
+      }
+    });
 
     // Update traits
     context.traits = this._prepareTraits(context.system);
@@ -389,7 +387,7 @@ export default class ActorSheet5e extends ActorSheet {
     const traits = {};
     for ( const [trait, traitConfig] of Object.entries(CONFIG.DND5E.traits) ) {
       const key = traitConfig.actorKeyPath ?? `traits.${trait}`;
-      let data = foundry.utils.getProperty(systemData, key);
+      const data = foundry.utils.deepClone(foundry.utils.getProperty(systemData, key));
       const choices = CONFIG.DND5E[traitConfig.configKey];
       if ( !data ) continue;
 
@@ -478,10 +476,9 @@ export default class ActorSheet5e extends ActorSheet {
     };
 
     // Determine the maximum spell level which has a slot
-    const maxLevel = Array.fromRange(10).reduce((max, i) => {
-      if ( i === 0 ) return max;
+    const maxLevel = Array.fromRange(Object.keys(CONFIG.DND5E.spellLevels).length - 1, 1).reduce((max, i) => {
       const level = levels[`spell${i}`];
-      if ( (level.max || level.override ) && ( i > max ) ) max = i;
+      if ( level && (level.max || level.override ) && ( i > max ) ) max = i;
       return max;
     }, 0);
 
@@ -630,7 +627,10 @@ export default class ActorSheet5e extends ActorSheet {
       html.find(".ability-proficiency").click(this._onToggleAbilityProficiency.bind(this));
 
       // Toggle Skill Proficiency
-      html.find(".skill-proficiency").on("click contextmenu", this._onCycleSkillProficiency.bind(this));
+      html.find(".skill-proficiency").on("click contextmenu", event => this._onCycleProficiency(event, "skill"));
+
+      // Toggle Tool Proficiency
+      html.find(".tool-proficiency").on("click contextmenu", event => this._onCycleProficiency(event, "tool"));
 
       // Trait Selector
       html.find(".trait-selector").click(this._onTraitSelector.bind(this));
@@ -642,7 +642,9 @@ export default class ActorSheet5e extends ActorSheet {
       html.find(".item-create").click(this._onItemCreate.bind(this));
       html.find(".item-delete").click(this._onItemDelete.bind(this));
       html.find(".item-uses input").click(ev => ev.target.select()).change(this._onUsesChange.bind(this));
+      html.find(".item-quantity input").click(ev => ev.target.select()).change(this._onQuantityChange.bind(this));
       html.find(".slot-max-override").click(this._onSpellSlotOverride.bind(this));
+      html.find(".attunement-max-override").click(this._onAttunementOverride.bind(this));
 
       // Active Effect management
       html.find(".effect-control").click(ev => ActiveEffect5e.onManageActiveEffect(ev, this.actor));
@@ -657,6 +659,9 @@ export default class ActorSheet5e extends ActorSheet {
 
       // Roll Skill Checks
       html.find(".skill-name").click(this._onRollSkillCheck.bind(this));
+
+      // Roll Tool Checks.
+      html.find(".tool-name").on("click", this._onRollToolCheck.bind(this));
 
       // Item Rolling
       html.find(".rollable .item-image").click(event => this._onItemUse(event));
@@ -683,24 +688,25 @@ export default class ActorSheet5e extends ActorSheet {
    * @protected
    */
   _disableOverriddenFields(html) {
+    const proficiencyToggles = {
+      ability: /system\.abilities\.([^.]+)\.proficient/,
+      skill: /system\.skills\.([^.]+)\.value/,
+      tool: /system\.tools\.([^.]+)\.value/
+    };
+
     for ( const override of Object.keys(foundry.utils.flattenObject(this.actor.overrides)) ) {
       html.find(`input[name="${override}"],select[name="${override}"]`).each((i, el) => {
         el.disabled = true;
         el.dataset.tooltip = "DND5E.ActiveEffectOverrideWarning";
       });
 
-      const [, ability] = override.match(/system\.abilities\.([^.]+)\.proficient/) || [];
-      if ( ability ) {
-        const toggle = html.find(`li[data-ability="${ability}"] .proficiency-toggle`);
-        toggle.addClass("disabled");
-        toggle.attr("data-tooltip", "DND5E.ActiveEffectOverrideWarning");
-      }
-
-      const [, skill] = override.match(/system\.skills\.([^.]+)\.value/) || [];
-      if ( skill ) {
-        const toggle = html.find(`li[data-skill="${skill}"] .proficiency-toggle`);
-        toggle.addClass("disabled");
-        toggle.attr("data-tooltip", "DND5E.ActiveEffectOverrideWarning");
+      for ( const [key, regex] of Object.entries(proficiencyToggles) ) {
+        const [, match] = override.match(regex) || [];
+        if ( match ) {
+          const toggle = html.find(`li[data-${key}="${match}"] .proficiency-toggle`);
+          toggle.addClass("disabled");
+          toggle.attr("data-tooltip", "DND5E.ActiveEffectOverrideWarning");
+        }
       }
 
       const [, spell] = override.match(/system\.spells\.(spell\d)\.override/) || [];
@@ -858,7 +864,9 @@ export default class ActorSheet5e extends ActorSheet {
     const value = input.value;
     if ( ["+", "-"].includes(value[0]) ) {
       const delta = parseFloat(value);
-      input.value = Number(foundry.utils.getProperty(this.actor, input.name)) + delta;
+      const item = this.actor.items.get(input.closest("[data-item-id]")?.dataset.itemId);
+      if ( item ) input.value = Number(foundry.utils.getProperty(item, input.dataset.name)) + delta;
+      else input.value = Number(foundry.utils.getProperty(this.actor, input.name)) + delta;
     } else if ( value[0] === "=" ) input.value = value.slice(1);
   }
 
@@ -905,8 +913,13 @@ export default class ActorSheet5e extends ActorSheet {
         break;
       }
       case "skill": {
-        const skill = event.currentTarget.closest("[data-skill]").dataset.skill;
-        app = new ActorSkillConfig(this.actor, null, skill);
+        const skill = event.currentTarget.closest("[data-key]").dataset.key;
+        app = new ProficiencyConfig(this.actor, {property: "skills", key: skill});
+        break;
+      }
+      case "tool": {
+        const tool = event.currentTarget.closest("[data-key]").dataset.key;
+        app = new ProficiencyConfig(this.actor, {property: "tools", key: tool});
         break;
       }
     }
@@ -916,25 +929,26 @@ export default class ActorSheet5e extends ActorSheet {
   /* -------------------------------------------- */
 
   /**
-   * Handle cycling proficiency in a Skill.
-   * @param {Event} event   A click or contextmenu event which triggered the handler.
-   * @returns {Promise}     Updated data for this actor after changes are applied.
-   * @private
+   * Handle cycling proficiency in a skill or tool.
+   * @param {Event} event     A click or contextmenu event which triggered this action.
+   * @returns {Promise|void}  Updated data for this actor after changes are applied.
+   * @protected
    */
-  _onCycleSkillProficiency(event) {
+  _onCycleProficiency(event) {
     if ( event.currentTarget.classList.contains("disabled") ) return;
     event.preventDefault();
-    const parent = event.currentTarget.closest(".skill");
+    const parent = event.currentTarget.closest(".proficiency-row");
     const field = parent.querySelector('[name$=".value"]');
-    const value = this.actor._source.system.skills[parent.dataset.skill]?.value ?? 0;
+    const {property, key} = parent.dataset;
+    const value = this.actor._source.system[property]?.[key]?.value ?? 0;
 
-    // Cycle to the next or previous skill level
-    const levels = [0, 1, 0.5, 2];
-    let idx = levels.indexOf(value);
-    const next = idx + (event.type === "click" ? 1 : 3);
-    field.value = levels[next % 4];
+    // Cycle to the next or previous skill level.
+    const levels = [0, 1, .5, 2];
+    const idx = levels.indexOf(value);
+    const next = idx + (event.type === "contextmenu" ? 3 : 1);
+    field.value = levels[next % levels.length];
 
-    // Update the field value and save the form
+    // Update the field value and save the form.
     return this._onSubmit(event);
   }
 
@@ -1119,7 +1133,7 @@ export default class ActorSheet5e extends ActorSheet {
   /**
    * Handle enabling editing for a spell slot override value.
    * @param {MouseEvent} event    The originating click event.
-   * @private
+   * @protected
    */
   async _onSpellSlotOverride(event) {
     const span = event.currentTarget.parentElement;
@@ -1131,6 +1145,30 @@ export default class ActorSheet5e extends ActorSheet {
     input.value = override;
     input.placeholder = span.dataset.slots;
     input.dataset.dtype = "Number";
+    input.addEventListener("focus", event => event.currentTarget.select());
+
+    // Replace the HTML
+    const parent = span.parentElement;
+    parent.removeChild(span);
+    parent.appendChild(input);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle enabling editing for attunement maximum.
+   * @param {MouseEvent} event    The originating click event.
+   * @private
+   */
+  async _onAttunementOverride(event) {
+    const span = event.currentTarget.parentElement;
+    const input = document.createElement("INPUT");
+    input.type = "text";
+    input.name = "system.attributes.attunement.max";
+    input.value = this.actor.system.attributes.attunement.max;
+    input.placeholder = 3;
+    input.dataset.dtype = "Number";
+    input.addEventListener("focus", event => event.currentTarget.select());
 
     // Replace the HTML
     const parent = span.parentElement;
@@ -1144,7 +1182,7 @@ export default class ActorSheet5e extends ActorSheet {
    * Change the uses amount of an Owned Item within the Actor.
    * @param {Event} event        The triggering click event.
    * @returns {Promise<Item5e>}  Updated item.
-   * @private
+   * @protected
    */
   async _onUsesChange(event) {
     event.preventDefault();
@@ -1153,6 +1191,23 @@ export default class ActorSheet5e extends ActorSheet {
     const uses = Math.clamped(0, parseInt(event.target.value), item.system.uses.max);
     event.target.value = uses;
     return item.update({"system.uses.value": uses});
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Change the quantity of an Owned Item within the actor.
+   * @param {Event} event        The triggering click event.
+   * @returns {Promise<Item5e>}  Updated item.
+   * @protected
+   */
+  async _onQuantityChange(event) {
+    event.preventDefault();
+    const itemId = event.currentTarget.closest(".item").dataset.itemId;
+    const item = this.actor.items.get(itemId);
+    const quantity = Math.max(0, parseInt(event.target.value));
+    event.target.value = quantity;
+    return item.update({"system.quantity": quantity});
   }
 
   /* -------------------------------------------- */
@@ -1232,7 +1287,7 @@ export default class ActorSheet5e extends ActorSheet {
     }
 
     const itemData = {
-      name: game.i18n.format("DND5E.ItemNew", {type: game.i18n.localize(`ITEM.Type${type.capitalize()}`)}),
+      name: game.i18n.format("DND5E.ItemNew", {type: game.i18n.localize(CONFIG.Item.typeLabels[type])}),
       type: type,
       system: foundry.utils.expandObject({ ...header.dataset })
     };
@@ -1344,16 +1399,24 @@ export default class ActorSheet5e extends ActorSheet {
    */
   _onRollSkillCheck(event) {
     event.preventDefault();
-    const skill = event.currentTarget.closest("[data-skill]").dataset.skill;
+    const skill = event.currentTarget.closest("[data-key]").dataset.key;
     return this.actor.rollSkill(skill, {event: event});
+  }
+
+  /* -------------------------------------------- */
+
+  _onRollToolCheck(event) {
+    event.preventDefault();
+    const tool = event.currentTarget.closest("[data-key]").dataset.key;
+    return this.actor.rollToolCheck(tool, {event});
   }
 
   /* -------------------------------------------- */
 
   /**
    * Handle toggling Ability score proficiency level.
-   * @param {Event} event         The originating click event.
-   * @returns {Promise<Actor5e>}  Updated actor instance.
+   * @param {Event} event              The originating click event.
+   * @returns {Promise<Actor5e>|void}  Updated actor instance.
    * @private
    */
   _onToggleAbilityProficiency(event) {
@@ -1391,7 +1454,9 @@ export default class ActorSheet5e extends ActorSheet {
    */
   _onTraitSelector(event) {
     event.preventDefault();
-    return new TraitSelector(this.actor, event.currentTarget.dataset.trait).render(true);
+    const trait = event.currentTarget.dataset.trait;
+    if ( trait === "tool" ) return new ToolSelector(this.actor, trait).render(true);
+    return new TraitSelector(this.actor, trait).render(true);
   }
 
   /* -------------------------------------------- */

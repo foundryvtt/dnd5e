@@ -1,6 +1,10 @@
 .dnd5e.advancement {
   input[type="text"], input[type="number"], select {
     height: var(--form-field-height);
+    &[readonly] {
+      color: var(--color-text-dark-6);
+      box-shadow: none;
+    }
   }
   .form-group .form-fields button {
     flex: 0;
@@ -49,6 +53,11 @@
 
       .left-column {
         grid-area: left;
+        display: flex;
+        flex-direction: column;
+
+        > .form-group { flex: none; }
+        > .drop-target { flex: 1; }
       }
       .right-column {
         grid-area: right;
@@ -67,6 +76,92 @@
       button[type="submit"] {
         grid-column-end: span 2;
       }
+    }
+  }
+
+  form[data-type="AbilityScoreImprovement"] {
+    .ability-scores {
+      contain: layout;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+
+      margin-block-end: 0;
+      padding: 0;
+      list-style: none;
+      text-align: center;
+
+      & > label {
+        grid-area: auto / span 3;
+        margin-block: 0.5em 0;
+        padding: 0;
+        font-size: var(--font-size-18);
+      }
+
+      li {
+        display: grid;
+        grid-template:
+          "label label label label"
+          "minus value value plus"
+          "minus delta delta plus";
+        align-items: center;
+        &.hint {
+          display: block;
+          grid-column: 2 / 4;
+          text-align: start;
+          align-self: end;
+        }
+        label {
+          grid-area: label;
+          font-size: var(--font-size-18);
+        }
+        a {
+          font-size: var(--font-size-16);
+          padding: 0.5em;
+          &:not([data-action]) {
+            opacity: 33%;
+            cursor: default;
+            &:hover {
+              text-shadow: none;
+            }
+          }
+        }
+        .minus { grid-area: minus; }
+        .plus { grid-area: plus; }
+        input {
+          grid-area: value;
+          height: 1.5em;
+          border: none;
+          background: none;
+          font-size: var(--font-size-28);
+        }
+        .delta {
+          grid-area: delta;
+          font-size: var(--font-size-16);
+          font-weight: bold;
+          i {
+            font-size: var(--font-size-12);
+          }
+        }
+      }
+      &.disabled li {
+        opacity: 60%;
+      }
+    }
+    .drop-area {
+      padding-block: 0.5em;
+      h4 {
+        font-size: var(--font-size-16);
+      }
+      a.item-control {
+        flex: 0;
+      }
+    }
+    .drop-area.empty {
+      padding-block: 1em;
+      border: 1px dashed var(--color-border-light-2);
+      border-radius: 5px;
+      justify-content: center;
     }
   }
 
@@ -162,6 +257,10 @@
     padding-block-end: 1em;
   }
 
+  input.error {
+    outline: 2px solid red;
+  }
+
   form[data-type="HitPoints"] {
     div {
       font-size: var(--font-size-14);
@@ -190,10 +289,6 @@
       flex: 0 0 20px;
       margin-inline-end: 1px;
     }
-  }
-
-  input.error {
-    outline: 2px solid red;
   }
 
   form[data-type="ScaleValue"] {

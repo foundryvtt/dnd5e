@@ -30,6 +30,7 @@
       "units": ""
     },
     "cover": null,
+    "crewed": false,
     "target": {
       "value": null,
       "width": null,
@@ -90,7 +91,35 @@
     "stealth": false,
     "proficient": false
   },
-  "effects": [],
+  "effects": [
+    {
+      "label": "Belt of Frost Giant Strength",
+      "icon": "icons/equipment/waist/cloth-sash-purple.webp",
+      "origin": "Compendium.dnd5e.items.ORKf6RRcalrdD6Qp",
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "disabled": false,
+      "_id": "uTXTubfcSCEANSBh",
+      "changes": [
+        {
+          "key": "system.abilities.str.value",
+          "mode": 4,
+          "value": "23"
+        }
+      ],
+      "tint": null,
+      "transfer": true,
+      "flags": {},
+      "sort": 0
+    }
+  ],
   "folder": null,
   "sort": 0,
   "ownership": {
@@ -99,10 +128,10 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.1.0",
-    "coreVersion": "10.291",
+    "systemVersion": "2.2.2",
+    "coreVersion": "10.303",
     "createdTime": 1661787233637,
-    "modifiedTime": 1671220960350,
+    "modifiedTime": 1690480308813,
     "lastModifiedBy": "dnd5ebuilder0000"
   }
 }

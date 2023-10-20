@@ -130,6 +130,7 @@ export async function preloadHandlebarsTemplates() {
     "systems/dnd5e/templates/journal/parts/journal-table.hbs",
 
     // Advancement Partials
+    "systems/dnd5e/templates/advancement/parts/advancement-ability-score-control.hbs",
     "systems/dnd5e/templates/advancement/parts/advancement-controls.hbs",
     "systems/dnd5e/templates/advancement/parts/advancement-spell-config.hbs"
   ];
@@ -152,7 +153,7 @@ export async function preloadHandlebarsTemplates() {
  * @returns {string}
  */
 function itemContext(context, options) {
-  if ( arguments.length !== 2 ) throw new Error("#dnd5e-with requires exactly one argument");
+  if ( arguments.length !== 2 ) throw new Error("#dnd5e-itemContext requires exactly one argument");
   if ( foundry.utils.getType(context) === "function" ) context = context.call(this);
 
   const ctx = options.data.root.itemContext?.[context.id];

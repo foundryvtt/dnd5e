@@ -58,6 +58,16 @@ export default function registerSystemSettings() {
     }
   });
 
+  // Allow feats during Ability Score Improvements
+  game.settings.register("dnd5e", "allowFeats", {
+    name: "SETTINGS.5eFeatsN",
+    hint: "SETTINGS.5eFeatsL",
+    scope: "world",
+    config: true,
+    default: true,
+    type: Boolean
+  });
+
   // Use Honor ability score
   game.settings.register("dnd5e", "honorScore", {
     name: "SETTINGS.5eHonorN",
