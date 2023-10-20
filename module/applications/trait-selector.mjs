@@ -99,10 +99,12 @@ export default class TraitSelector extends DocumentSheet {
 
     // Validate the number chosen
     if ( o.minimum && (chosen.length < o.minimum) ) {
-      return ui.notifications.error(`You must choose at least ${o.minimum} options`);
+      ui.notifications.error(`You must choose at least ${o.minimum} options`);
+      return null;
     }
     if ( o.maximum && (chosen.length > o.maximum) ) {
-      return ui.notifications.error(`You may choose no more than ${o.maximum} options`);
+      ui.notifications.error(`You may choose no more than ${o.maximum} options`);
+      return null;
     }
 
     return updateData;

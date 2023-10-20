@@ -194,19 +194,22 @@ export default class AdvancementConfig extends FormApplication {
     try {
       this._validateDroppedItem(event, item);
     } catch(err) {
-      return ui.notifications.error(err.message);
+      ui.notifications.error(err.message);
+      return null;
     }
 
     const existingItems = foundry.utils.getProperty(this.advancement.configuration, this.options.dropKeyPath);
 
     // Abort if this uuid is the parent item
     if ( item.uuid === this.item.uuid ) {
-      return ui.notifications.error(game.i18n.localize("DND5E.AdvancementItemGrantRecursiveWarning"));
+      ui.notifications.error("DND5E.AdvancementItemGrantRecursiveWarning", {localize: true});
+      return null;
     }
 
     // Abort if this uuid exists already
     if ( existingItems.includes(item.uuid) ) {
-      return ui.notifications.warn(game.i18n.localize("DND5E.AdvancementItemGrantDuplicateWarning"));
+      ui.notifications.warn("DND5E.AdvancementItemGrantDuplicateWarning", {localize: true});
+      return null;
     }
 
     await this.advancement.update({[`configuration.${this.options.dropKeyPath}`]: [...existingItems, item.uuid]});
