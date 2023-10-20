@@ -31,13 +31,14 @@ export default class SelectChoices {
 
   /**
    * Create a set of available choice keys.
-   * @type {Set<string>}
+   * @param {Set<string>} [set]  Existing set to which the values will be added.
+   * @returns {Set<string>}
    */
-  get set() {
-    const set = new Set();
+  asSet(set) {
+    set ??= new Set();
     for ( const [key, choice] of Object.entries(this) ) {
       if ( !choice.children ) set.add(key);
-      else choice.children.set.forEach(k => set.add(k));
+      else choice.children.asSet(set);
     }
     return set;
   }
@@ -61,23 +62,15 @@ export default class SelectChoices {
   /* -------------------------------------------- */
 
   /**
-   * Merge another SelectOptions object into this one.
-   * @param {SelectOptions} other
-   * @returns {SelectOptions}
+   * Merge another SelectChoices object into this one.
+   * @param {SelectChoices} other
+   * @param {object} [options={}]
+   * @param {boolean} [options.inplace=true]  Should this SelectChoices be mutated or a new one returned?
+   * @returns {SelectChoices}
    */
-  merge(other) {
+  merge(other, { inplace=true }={}) {
+    if ( !inplace ) return this.clone().merge();
     return foundry.utils.mergeObject(this, other);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Merge another SelectOptions object into this one, returning a new SelectOptions object.
-   * @param {SelectOptions} other
-   * @returns {SelectOptions}
-   */
-  merged(other) {
-    return this.clone().merge(other);
   }
 
   /* -------------------------------------------- */
@@ -89,7 +82,7 @@ export default class SelectChoices {
    * @returns {number}
    */
   _sort(lhs, rhs) {
-    if ( lhs.sorting === false && rhs.sorting === false ) return 0;
+    if ( (lhs.sorting === false) && (rhs.sorting === false) ) return 0;
     if ( lhs.sorting === false ) return -1;
     if ( rhs.sorting === false ) return 1;
     return lhs.label.localeCompare(rhs.label);
@@ -99,50 +92,96 @@ export default class SelectChoices {
 
   /**
    * Sort the entries using the label.
-   * @returns {SelectOptions}
+   * @param {object} [options={}]
+   * @param {boolean} [options.inplace=true]  Should this SelectChoices be mutated or a new one returned?
+   * @returns {SelectChoices}
    */
-  sort() {
+  sort({ inplace=true }={}) {
     const sorted = new SelectChoices(sortObjectEntries(this, this._sort));
-    for ( const key of Object.keys(this) ) delete this[key];
-    this.merge(sorted);
-    for ( const entry of Object.values(this) ) {
-      if ( entry.children ) entry.children.sort();
-    }
-    return this;
-  }
 
-  /* -------------------------------------------- */
-
-  /**
-   * Sort the entries using the label, returning a new SelectOptions object.
-   * @returns {SelectOptions}
-   */
-  sorted() {
-    const sorted = new SelectChoices(sortObjectEntries(this, this._sort));
-    for ( const entry of Object.values(sorted) ) {
-      if ( entry.children ) entry.children = entry.children.sorted();
+    if ( inplace ) {
+      for ( const key of Object.keys(this) ) delete this[key];
+      this.merge(sorted);
+      for ( const entry of Object.values(this) ) {
+        if ( entry.children ) entry.children.sort();
+      }
+      return this;
     }
-    return sorted;
+
+    else {
+      for ( const entry of Object.values(sorted) ) {
+        if ( entry.children ) entry.children = entry.children.sort({ inplace });
+      }
+      return sorted;
+    }
   }
 
   /* -------------------------------------------- */
 
   /**
    * Filters choices in place to only include the provided keys.
-   * @param {Set<string>|SelectChoices} filter   Keys of traits to retain or another SelectOptions object.
+   * @param {Set<string>|SelectChoices} filter   Keys of traits to retain or another SelectChoices object.
+   * @param {object} [options={}]
+   * @param {boolean} [options.inplace=true]     Should this SelectChoices be mutated or a new one returned?
    * @returns {SelectChoices}                    This SelectChoices with filter applied.
+   *
+   * @example
+   * const choices = new SelectChoices({
+   *   categoryOne: { label: "One" },
+   *   categoryTwo: { label: "Two", children: {
+   *     childOne: { label: "Child One" },
+   *     childTwo: { label: "Child Two" }
+   *   } }
+   * });
+   *
+   * // Results in only categoryOne
+   * choices.filter(new Set(["categoryOne"]));
+   *
+   * // Results in only categoryTwo, but none if its children
+   * choices.filter(new Set(["categoryTwo]));
+   *
+   * // Results in categoryTwo and all of its children
+   * choices.filter(new Set(["categoryTwo:*"]));
+   *
+   * // Results in categoryTwo with only childOne
+   * choices.filter(new Set(["categoryTwo:childOne"]));
+   *
+   * // Results in categoryOne, plus categoryTwo with only childOne
+   * choices.filter(new Set(["categoryOne", "categoryTwo:childOne"]));
+   *
+   * @example
+   * const choices = new SelectChoices({
+   *   "type:categoryOne": { label: "One" },
+   *   "type:categoryTwo": { label: "Two", children: {
+   *     "type:categoryOne:childOne": { label: "Child One" },
+   *     "type:categoryOne:childTwo": { label: "Child Two" }
+   *   } }
+   * });
+   *
+   * // Results in no changes
+   * choices.filter(new Set(["type:*"]));
+   *
+   * // Results in only categoryOne
+   * choices.filter(new Set(["type:categoryOne"]));
+   *
+   * // Results in categoryTwo and all of its children
+   * choices.filter(new Set(["type:categoryTwo:*"]));
+   *
+   * // Results in categoryTwo with only childOne
+   * choices.filter(new Set(["type:categoryTwo:childOne"]));
    */
-  filter(filter) {
-    if ( filter instanceof SelectChoices ) filter = filter.set;
+  filter(filter, { inplace=true }={}) {
+    if ( !inplace ) return this.clone().filter(filter);
+    if ( filter instanceof SelectChoices ) filter = filter.asSet();
 
     for ( const [key, trait] of Object.entries(this) ) {
       // Remove children if direct match and no wildcard for this category present
-      const wildcardKey = key.replace(/(:|^)([\w]+)$/, "$1*");
+      const wildcardKey = key.replace(/(:|^)(\w+)$/, "$1*");
       if ( filter.has(key) && !filter.has(wildcardKey) ) {
         if ( trait.children ) delete trait.children;
       }
 
-      // Check children, remove entry if not children match filter
+      // Check children, remove entry if no children match filter
       else if ( !filter.has(wildcardKey) && !filter.has(`${key}:*`) ) {
         if ( trait.children ) trait.children.filter(filter);
         if ( foundry.utils.isEmpty(trait.children ?? {}) ) delete this[key];
@@ -155,37 +194,34 @@ export default class SelectChoices {
   /* -------------------------------------------- */
 
   /**
-   * Filters choices to only include the provided keys, returning a new SelectChoices object.
-   * @param {Set<string>|SelectChoices} filter   Keys of traits to retain or another SelectOptions object.
-   * @returns {SelectChoices}                    Clone of SelectChoices with filter applied.
-   */
-  filtered(filter) {
-    return this.clone().filter(filter);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
    * Removes in place any traits or categories the keys of which are included in the exclusion set.
-   * @param {Set<string>} keys  Set of keys to remove from the choices.
-   * @returns {SelectChoices}   This SelectChoices with excluded keys removed.
+   * Note: Wildcard keys are not supported with this method.
+   * @param {Set<string>} keys                Set of keys to remove from the choices.
+   * @param {object} [options={}]
+   * @param {boolean} [options.inplace=true]  Should this SelectChoices be mutated or a new one returned?
+   * @returns {SelectChoices}                 This SelectChoices with excluded keys removed.
+   *
+   * @example
+   * const choices = new SelectChoices({
+   *   categoryOne: { label: "One" },
+   *   categoryTwo: { label: "Two", children: {
+   *     childOne: { label: "Child One" },
+   *     childTwo: { label: "Child Two" }
+   *   } }
+   * });
+   *
+   * // Results in categoryOne being removed
+   * choices.exclude(new Set(["categoryOne"]));
+   *
+   * // Results in categoryOne and childOne being removed, but categoryTwo and childTwo remaining
+   * choices.exclude(new Set(["categoryOne", "categoryTwo:childOne"]));
    */
-  exclude(keys) {
+  exclude(keys, { inplace=true }={}) {
+    if ( !inplace ) return this.clone().exclude(keys);
     for ( const [key, trait] of Object.entries(this) ) {
       if ( keys.has(key) ) delete this[key];
       else if ( trait.children ) trait.children = trait.children.exclude(keys);
     }
     return this;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Removes any traits or categories the keys of which are included in the exclusion set, returning a copy.
-   * @param {Set<string>} keys  Set of keys to remove from the choices.
-   * @returns {SelectChoices}   Clone of SelectChoices with excluded keys removed.
-   */
-  excluded(keys) {
-    return this.clone().exclude(keys);
   }
 }
