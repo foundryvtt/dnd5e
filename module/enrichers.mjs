@@ -1,11 +1,12 @@
 import { simplifyBonus } from "./utils.mjs";
+import * as Trait from "./documents/actor/trait.mjs";
 
 /**
  * Set up the custom text enricher.
  */
 export function registerCustomEnrichers() {
   CONFIG.TextEditor.enrichers.push({
-    pattern: /\[\[\/(?<type>check|save|skill) (?<config>[^\]]+)]](?:{(?<label>[^}]+)})?/gi,
+    pattern: /\[\[\/(?<type>check|save|skill|tool) (?<config>[^\]]+)]](?:{(?<label>[^}]+)})?/gi,
     enricher: enrichString
   });
 
@@ -23,13 +24,34 @@ export function registerCustomEnrichers() {
  */
 export async function enrichString(match, options) {
   let { type, config, label } = match.groups;
-  config = config.split(" ").map(c => c.trim());
+  config = parseConfig(config, match.input);
+  config.input = match.input;
   switch ( type.toLowerCase() ) {
     case "check":
-    case "skill": return enrichCheck(config, label, options) ?? match.input;
-    case "save": return enrichSave(config, label, options) ?? match.input;
+    case "skill":
+    case "tool": return enrichCheck(config, label, options);
+    case "save": return enrichSave(config, label, options);
   }
   return match.input;
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Parse a roll string into a configuration object.
+ * @param {string} match  Matched configuration string.
+ * @returns {object}
+ */
+function parseConfig(match) {
+  const config = {};
+  for ( const part of match.split(" ") ) {
+    if ( !part ) continue;
+    const [key, value] = part.split("=");
+    if ( !key || !value ) console.warn(`Invalid roll enricher parameters ${part}. Must be formatted "key=value".`);
+    else if (Number.isNumeric(value)) config[key] = Number(value);
+    else config[key] = value;
+  }
+  return config;
 }
 
 /* -------------------------------------------- */
@@ -45,48 +67,97 @@ export async function enrichString(match, options) {
  * @param {EnrichmentOptions} options  Options provided to customize text enrichment.
  * @returns {HTMLElement|null}         A HTML link if the check could be built, otherwise null.
  *
- * TODO: Add some examples
+ * @example Create a dexterity check:
+ * ```[[/check ability=dex]]```
+ * becomes
+ * ```html
+ * <a class="roll-action" data-type="check" data-ability="dex">
+ *   <i class="fa-solid fa-dice-d20"></i> Dexterity check
+ * </a>
+ * ```
+ *
+ * @example Create a acrobatics check with a DC and default ability:
+ * ```[[/check skill=acr dc=20]]```
+ * becomes
+ * ```html
+ * <a class="roll-action" data-type="check" data-skill="acr" data-dc="20">
+ *   <i class="fa-solid fa-dice-d20"></i> DC 20 Acrobatics check
+ * </a>
+ * ```
+ *
+ * @example Create a acrobatics check using strength:
+ * ```[[/check ability=str skill=acr]]```
+ * becomes
+ * ```html
+ * <a class="roll-action" data-type="check" data-ability="str" data-skill="acr">
+ *   <i class="fa-solid fa-dice-d20"></i> Strength (Acrobatics) check
+ * </a>
+ * ```
+ *
+ * @example Create a tool check:
+ * ```[[/check tool=thief ability=int]]```
+ * becomes
+ * ```html
+ * <a class="roll-action" data-type="check" data-ability="int" data-tool="thief">
+ *   <i class="fa-solid fa-dice-d20"></i> Intelligence (Thieves' Tools) check
+ * </a>
+ * ```
+ *
+ * @example Formulas used for DCs will be resolved using data provided to the description (not the roller):
+ * ```[[/check ability=cha dc=@abilities.int.dc]]```
+ * becomes
+ * ```html
+ * <a class="roll-action" data-type="check" data-ability="cha" data-dc="15">
+ *   <i class="fa-solid fa-dice-d20"></i> DC 15 Charisma check
+ * </a>
+ * ```
  */
 export async function enrichCheck(config, label, options) {
-  let ability;
-  let skill;
-  let dc;
-
-  config.forEach(key => {
-    if ( key in CONFIG.DND5E.abilities ) ability = key;
-    else if ( key in CONFIG.DND5E.skills ) skill = key;
-    else if ( Number.isNumeric(key) ) dc = parseInt(key);
-    else dc = simplifyBonus(key, options.rollData ?? {});
-  });
-
   let invalid = false;
 
-  const abilityConfig = CONFIG.DND5E.abilities[ability];
-  if ( ability && !abilityConfig ) {
-    console.warn(`Ability ${ability} not found`);
+  const skillConfig = CONFIG.DND5E.skills[config.skill];
+  if ( config.skill && !skillConfig ) {
+    console.warn(`Skill ${config.skill} not found while enriching ${config.input}.`);
+    invalid = true;
+  } else if ( config.skill && !config.ability ) {
+    config.ability = skillConfig.ability;
+  }
+
+  const toolUUID = CONFIG.DND5E.toolIds[config.tool];
+  const toolIndex = toolUUID ? Trait.getBaseItem(toolUUID, { indexOnly: true }) : null;
+  if ( config.tool && !toolIndex ) {
+    console.warn(`Tool ${config.tool} not found while enriching ${config.input}.`);
     invalid = true;
   }
 
-  const skillConfig = CONFIG.DND5E.skills[skill];
-  if ( skill && !skillConfig ) {
-    console.warn(`Skills ${skill} not found`);
+  let abilityConfig = CONFIG.DND5E.abilities[config.ability];
+  if ( config.ability && !abilityConfig ) {
+    console.warn(`Ability ${ability} not found while enriching ${config.input}.`);
+    invalid = true;
+  } else if ( !abilityConfig ) {
+    console.warn(`No ability provided while enriching check ${config.input}.`);
     invalid = true;
   }
 
-  if ( invalid || !(ability || skill) ) return null;
+  if ( config.dc && !Number.isNumeric(config.dc) ) config.dc = simplifyBonus(config.dc, options.rollData ?? {});
+
+  if ( invalid || !abilityConfig ) return config.input;
 
   // Insert the icon and label into the link
   if ( !label ) {
     const ability = abilityConfig?.label;
     const skill = skillConfig?.label;
-    if ( ability && skill ) label = game.i18n.format("EDITOR.DND5E.Inline.Skill", { ability, skill });
-    else if ( ability ) label = game.i18n.format("EDITOR.DND5E.Inline.Check", { type: ability });
-    else if ( skill ) label = game.i18n.format("EDITOR.DND5E.Inline.Check", { type: skill });
-    if ( dc ) label = game.i18n.format("EDITOR.DND5E.Inline.DC", { dc, check: label });
+    const tool = toolIndex?.name;
+    if ( ability && (skill || tool) ) {
+      label = game.i18n.format("EDITOR.DND5E.Inline.SpecificCheck", { ability, type: skill ?? tool });
+    } else {
+      label = ability;
+    }
+    if ( config.dc ) label = game.i18n.format("EDITOR.DND5E.Inline.DC", { dc: config.dc, check: label });
   }
 
-  const type = skillConfig ? "skill" : "check";
-  return createRollLink(label, { type, ability, skill, dc });
+  const type = config.skill ? "skill" : config.tool ? "tool" : "check";
+  return createRollLink(label, { type, ...config });
 }
 
 /* -------------------------------------------- */
@@ -99,52 +170,46 @@ export async function enrichCheck(config, label, options) {
  * @returns {HTMLElement|null}         A HTML link if the save could be built, otherwise null.
  *
  * @example Create a dexterity saving throw:
- * ```[[/save dex]]```
+ * ```[[/save ability=dex]]```
  * becomes
  * ```html
  * <a class="roll-action" data-type="save" data-key="dex">
- *   <i class="fa-solid fa-dice-d20"></i> Dexterity Save
+ *   <i class="fa-solid fa-dice-d20"></i> Dexterity
  * </a>
  * ```
  *
  * @example Add a DC to the save:
- * ```[[/save dex 20]]```
+ * ```[[/save ability=dex dc=20]]```
  * becomes
  * ```html
  * <a class="roll-action" data-type="save" data-key="dex" data-dc="20">
- *   <i class="fa-solid fa-dice-d20"></i> DC 20 Dexterity Save
+ *   <i class="fa-solid fa-dice-d20"></i> DC 20 Dexterity
  * </a>
  * ```
  */
 export async function enrichSave(config, label, options) {
-  const ability = config.shift();
-  const dc = simplifyBonus(config.shift(), options.rollData ?? {});
-
-  const abilityConfig = CONFIG.DND5E.abilities[ability];
+  const abilityConfig = CONFIG.DND5E.abilities[config.ability];
   if ( !abilityConfig ) {
-    console.warn(`Ability ${ability} not found`);
-    return null;
+    console.warn(`Ability ${config.ability} not found while enriching ${config.input}.`);
+    return config.input;
   }
+
+  if ( config.dc && !Number.isNumeric(config.dc) ) config.dc = simplifyBonus(config.dc, options.rollData ?? {});
 
   if ( !label ) {
-    const ability = abilityConfig.label;
-    label = game.i18n.format("EDITOR.DND5E.Inline.Save", { ability });
-    if ( dc ) label = game.i18n.format("EDITOR.DND5E.Inline.DC", { dc, check: label });
+    label = abilityConfig.label;
+    if ( config.dc ) label = game.i18n.format("EDITOR.DND5E.Inline.DC", { dc: config.dc, check: label });
   }
 
-  return createRollLink(label, { type: "save", ability, dc });
+  return createRollLink(label, { type: "save", ...config });
 }
 
 /* -------------------------------------------- */
 
 /**
  * Create a rollable link.
- * @param {string} label            Label to display.
- * @param {object} dataset
- * @param {string} dataset.type     Type of rolling action to perform (e.g. `check`, `save`, `skill`).
- * @param {string} dataset.ability  Ability key to roll (e.g. `dex`, `str`).
- * @param {string} dataset.skill    Skill key to roll (e.g. `ath`, `med`).
- * @param {number} dataset.dc       DC of the roll.
+ * @param {string} label    Label to display.
+ * @param {object} dataset  Data that will be added to the link for the rolling method.
  * @returns {HTMLElement}
  */
 export function createRollLink(label, dataset) {
@@ -171,7 +236,7 @@ export function rollAction(event) {
   if ( !target ) return;
   event.stopPropagation();
 
-  const { type, ability, skill, dc } = target.dataset;
+  const { type, ability, skill, tool, dc } = target.dataset;
   const options = { event };
   if ( dc ) options.targetValue = dc;
 
@@ -193,6 +258,9 @@ export function rollAction(event) {
     case "skill":
       if ( ability ) options.ability = ability;
       return actor.rollSkill(skill, options);
+    case "tool":
+      options.ability = ability;
+      return actor.rollToolCheck(tool, options);
     default:
       return console.warn(`DnD5e | Unknown roll type ${type} provided.`);
   }

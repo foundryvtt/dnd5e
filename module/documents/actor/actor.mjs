@@ -1058,7 +1058,7 @@ export default class Actor5e extends Actor {
       data: data,
       title: `${flavor}: ${this.name}`,
       flavor,
-      chooseModifier: !options.ability,
+      chooseModifier: true,
       halflingLucky: this.getFlag("dnd5e", "halflingLucky"),
       reliableTalent,
       messageData: {
@@ -1112,7 +1112,7 @@ export default class Actor5e extends Actor {
     const data = this.getRollData();
 
     // Add ability modifier.
-    data.mod = tool?.mod ?? 0;
+    data.mod = ability?.mod ?? 0;
     data.defaultAbility = options.ability || (tool?.ability ?? "int");
 
     // Add proficiency.
