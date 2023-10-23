@@ -121,9 +121,9 @@
     {{#if filters.spellbook.size}}
     <li class="item flexrow"><p class="notes">{{localize "DND5E.FilterNoSpells"}}</p></li>
     {{else}}
-    <li class="item flexrow inventory-header spellbook-header spellbook-empty">
+    <li class="item flexrow inventory-header spellbook-header spellbook-empty" data-type="spell" data-level="{{lvl}}">
         <div class="item-controls flexrow">
-            <a class="item-control item-create" data-tooltip="DND5E.SpellCreate" data-type="spell" data-level="{{lvl}}">
+            <a class="item-control item-create" data-tooltip="DND5E.SpellCreate">
                 <i class="fas fa-plus"></i> {{localize "DND5E.SpellAdd"}}
             </a>
         </div>
