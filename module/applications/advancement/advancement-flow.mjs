@@ -104,4 +104,11 @@ export default class AdvancementFlow extends FormApplication {
     await this.advancement.apply(this.level, formData);
   }
 
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  _canDragDrop(selector) {
+    return true;
+  }
+
 }
