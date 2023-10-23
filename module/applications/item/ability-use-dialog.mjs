@@ -32,11 +32,14 @@ export default class AbilityUseDialog extends Dialog {
     if ( !item.isOwned ) throw new Error("You cannot display an ability usage dialog for an unowned item");
     config ??= item._getUsageConfig();
     const slotOptions = config.consumeSpellSlot ? this._createSpellSlotOptions(item.actor, item.system.level) : [];
+    const resourceOptions = this._createResourceOptions(item);
 
     const data = {
       item,
       ...config,
       slotOptions,
+      resourceOptions,
+      scaling: item.usageScaling,
       note: this._getAbilityUseNote(item, config),
       title: game.i18n.format("DND5E.AbilityUseHint", {
         type: game.i18n.localize(CONFIG.Item.typeLabels[item.type]),
@@ -121,6 +124,63 @@ export default class AbilityUseDialog extends Dialog {
   /* -------------------------------------------- */
 
   /**
+   * Create an object of resource consumption options for a select.
+   * @param {Item5e} item     The item doing the thing with the consuming of stuff and such.
+   * @returns {object|null}   Object of select options, or null if the item does not scale with resources.
+   * @private
+   */
+  static _createResourceOptions(item) {
+    const consume = item.system.consume || {};
+    if ( (item.type !== "spell") || !consume.scale ) return null;
+    const amt = consume.amount || 1;
+    const spellLevels = Object.keys(CONFIG.DND5E.spellLevels).length - 1;
+
+    const min = consume.amount || 1;
+    const cap = spellLevels + amt - item.system.level;
+
+    let target;
+    let prop;
+    let label;
+    switch ( consume.type ) {
+      case "ammo":
+      case "material": {
+        target = item.actor.items.get(consume.target);
+        label = target?.name;
+        prop = target?.system.quantity;
+        break;
+      }
+      case "attribute": {
+        target = item.actor;
+        prop = foundry.utils.getProperty(target.system, consume.target);
+        break;
+      }
+      case "charges": {
+        target = item.actor.items.get(consume.target);
+        label = target?.name;
+        prop = target?.system.uses.value;
+        break;
+      }
+      case "hitDice": {
+        target = item.actor;
+        prop = target.system.attributes.hd;
+        break;
+      }
+    }
+
+    if(!target) return null;
+
+    const max = Math.min(cap, prop);
+    const range = Array.fromRange(max, 1).reduce((acc, n) => {
+      if ( n >= min ) acc[n] = `[${n} / ${prop}] (${label ?? consume.target})`;
+      return acc;
+    }, {});
+
+    return range;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Get the ability usage note that is displayed.
    * @param {object} item                   Data for the item being used.
    * @param {ItemUseConfiguration} config   The ability use configuration's values.
@@ -192,6 +252,19 @@ export default class AbilityUseDialog extends Dialog {
         level: CONFIG.DND5E.spellLevels[level],
         name: item.name
       }));
+    } else if ( (scale === "resource") && foundry.utils.isEmpty(data.resourceOptions) ) {
+      // Warn that the resource does not have enough left.
+      warnings.push(game.i18n.format("DND5E.ConsumeWarningNoQuantity", {
+        name: item.name,
+        type: CONFIG.DND5E.abilityConsumptionTypes[consume.type]
+      }));
+    }
+
+    // Warn that the resource item is missing.
+    if ( item.hasResource && !item.actor.items.get(consume.target) ) {
+      warnings.push(game.i18n.format("DND5E.ConsumeWarningNoSource", {
+        name: item.name, type: CONFIG.DND5E.abilityConsumptionTypes[consume.type]}
+      ));
     }
 
     // Display warnings that the item or its resource item will be destroyed.

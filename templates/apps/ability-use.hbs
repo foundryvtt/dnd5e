@@ -5,7 +5,18 @@
     <p class="notification error">{{this}}</p>
     {{/each}}
 
-    {{#if (ne consumeSpellSlot null)}}
+    {{#if (eq scaling "resource")}}
+    <div class="form-group">
+        <label>{{ localize "DND5E.SpellCastUpcast" }}</label>
+        <div class="form-fields">
+            <select name="resourceAmount">
+                {{selectOptions resourceOptions selected=resourceAmount localize=true}}
+            </select>
+        </div>
+    </div>
+    {{/if}}
+
+    {{#if (eq scaling "slot")}}
     <div class="form-group">
         <label>{{ localize "DND5E.SpellCastUpcast" }}</label>
         <div class="form-fields">

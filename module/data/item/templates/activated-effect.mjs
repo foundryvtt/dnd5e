@@ -66,7 +66,8 @@ export default class ActivatedEffectTemplate extends SystemDataModel {
         target: new foundry.data.fields.StringField({
           required: true, nullable: true, initial: null, label: "DND5E.ConsumeTarget"
         }),
-        amount: new foundry.data.fields.NumberField({required: true, integer: true, label: "DND5E.ConsumeAmount"})
+        amount: new foundry.data.fields.NumberField({required: true, integer: true, label: "DND5E.ConsumeAmount"}),
+        scale: new foundry.data.fields.BooleanField({label: "DND5E.ConsumeScaling"})
       }, {label: "DND5E.ConsumeTitle"})
     };
   }

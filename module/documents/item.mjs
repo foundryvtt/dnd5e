@@ -271,10 +271,10 @@ export default class Item5e extends Item {
    * @type {string|null}
    */
   get usageScaling() {
-    const { level, preparation } = this.system;
-    if ( (this.type === "spell") && (level > 0) && CONFIG.DND5E.spellUpcastModes.includes(preparation.mode) ) {
-      return "slot";
-    }
+    const { level, preparation, consume } = this.system;
+    const isLeveled = (this.type === "spell") && (level > 0);
+    if ( isLeveled && CONFIG.DND5E.spellUpcastModes.includes(preparation.mode) ) return "slot";
+    else if ( isLeveled && this.hasResource && consume.scale ) return "resource";
     return null;
   }
 
@@ -836,6 +836,10 @@ export default class Item5e extends Item {
         // A spell slot was consumed.
         level = Number.isInteger(config.slotLevel) ? config.slotLevel
           : config.slotLevel === "pact" ? as.spells.pact.level : parseInt(config.slotLevel.replace("spell", ""));
+      } else if ( config.resourceAmount ) {
+        // A quantity of the resource was consumed.
+        const diff = config.resourceAmount - (this.system.consume.amount || 1);
+        level = is.level + diff;
       }
       if ( level && (level !== is.level) ) {
         item = item.clone({"system.level": level}, {keepId: true});
@@ -927,12 +931,16 @@ export default class Item5e extends Item {
       slotLevel: null,
       consumeUsage: null,
       consumeResource: null,
+      resourceAmount: null,
       createMeasuredTemplate: null
     };
 
-    if ( this.usageScaling === "slot" ) {
+    const scaling = this.usageScaling;
+    if ( scaling === "slot" ) {
       config.consumeSpellSlot = true;
-      config.slotLevel = preparation?.mode === "pact" ? "pact" : `spell${level}`;
+      config.slotLevel = (preparation?.mode === "pact") ? "pact" : `spell${level}`;
+    } else if ( scaling === "resource" ) {
+      config.resourceAmount = consume.amount || 1;
     }
     if ( this.hasLimitedUses ) config.consumeUsage = uses.prompt;
     if ( this.hasResource ) {
@@ -968,7 +976,7 @@ export default class Item5e extends Item {
 
     // Consume Limited Resource
     if ( config.consumeResource ) {
-      const canConsume = this._handleConsumeResource(itemUpdates, actorUpdates, resourceUpdates, deleteIds);
+      const canConsume = this._handleConsumeResource(config, itemUpdates, actorUpdates, resourceUpdates, deleteIds);
       if ( canConsume === false ) return false;
     }
 
@@ -996,7 +1004,7 @@ export default class Item5e extends Item {
    * @param {object} itemUpdates        An object of data updates applied to this item
    * @param {object} actorUpdates       An object of data updates applied to the item owner (Actor)
    * @param {object[]} resourceUpdates  An array of updates to apply to other items owned by the actor
-   * @param {Set<string>} deleteIds     A set of item ids that will be deleted off the actor.
+   * @param {Set<string>} deleteIds     A set of item ids that will be deleted off the actor
    * @returns {boolean|void}            Return false to block further progress, or return nothing to continue
    * @protected
    */
@@ -1042,14 +1050,15 @@ export default class Item5e extends Item {
 
   /**
    * Handle update actions required when consuming an external resource
-   * @param {object} itemUpdates        An object of data updates applied to this item
-   * @param {object} actorUpdates       An object of data updates applied to the item owner (Actor)
-   * @param {object[]} resourceUpdates  An array of updates to apply to other items owned by the actor
-   * @param {Set<string>} deleteIds     A set of item ids that will be deleted off the actor.
-   * @returns {boolean|void}            Return false to block further progress, or return nothing to continue
+   * @param {ItemUseConfiguration} usageConfig  Configuration data for an item usage being prepared.
+   * @param {object} itemUpdates                An object of data updates applied to this item
+   * @param {object} actorUpdates               An object of data updates applied to the item owner (Actor)
+   * @param {object[]} resourceUpdates          An array of updates to apply to other items owned by the actor
+   * @param {Set<string>} deleteIds             A set of item ids that will be deleted off the actor
+   * @returns {boolean|void}                    Return false to block further progress, or return nothing to continue
    * @protected
    */
-  _handleConsumeResource(itemUpdates, actorUpdates, resourceUpdates, deleteIds) {
+  _handleConsumeResource(usageConfig, itemUpdates, actorUpdates, resourceUpdates, deleteIds) {
     const consume = this.system.consume || {};
     if ( !consume.type ) return;
 
@@ -1062,7 +1071,7 @@ export default class Item5e extends Item {
 
     // Identify the consumed resource and its current quantity
     let resource = null;
-    let amount = Number(consume.amount ?? 1);
+    let amount = usageConfig.resourceAmount ? Number(usageConfig.resourceAmount) : Number(consume.amount ?? 1);
     let quantity = 0;
     switch ( consume.type ) {
       case "attribute":
@@ -1119,7 +1128,7 @@ export default class Item5e extends Item {
           if ( consume.target === "largest" ) sort *= -1;
           return sort;
         });
-        let toConsume = consume.amount;
+        let toConsume = amount;
         for ( const cls of resource ) {
           const available = (toConsume > 0 ? cls.system.levels : 0) - cls.system.hitDiceUsed;
           const delta = toConsume > 0 ? Math.min(toConsume, available) : Math.max(toConsume, available);
