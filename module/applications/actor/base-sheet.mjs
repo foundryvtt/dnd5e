@@ -294,7 +294,7 @@ export default class ActorSheet5e extends ActorSheet {
   _prepareActiveEffectAttributions(target) {
     return this.actor.effects.reduce((arr, e) => {
       let source = e.sourceName;
-      if ( e.origin === this.actor.uuid ) source = e.label;
+      if ( e.origin === this.actor.uuid ) source = e.name;
       if ( !source || e.disabled || e.isSuppressed ) return arr;
       const value = e.changes.reduce((n, change) => {
         if ( (change.key !== target) || !Number.isNumeric(change.value) ) return n;
