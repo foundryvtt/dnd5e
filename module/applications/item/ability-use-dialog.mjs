@@ -261,10 +261,13 @@ export default class AbilityUseDialog extends Dialog {
     }
 
     // Warn that the resource item is missing.
-    if ( item.hasResource && !item.actor.items.get(consume.target) ) {
-      warnings.push(game.i18n.format("DND5E.ConsumeWarningNoSource", {
-        name: item.name, type: CONFIG.DND5E.abilityConsumptionTypes[consume.type]}
-      ));
+    if ( item.hasResource ) {
+      const isItem = ["ammo", "material", "charges"].includes(consume.type);
+      if ( isItem && !item.actor.items.get(consume.target) ) {
+        warnings.push(game.i18n.format("DND5E.ConsumeWarningNoSource", {
+          name: item.name, type: CONFIG.DND5E.abilityConsumptionTypes[consume.type]}
+        ));
+      }
     }
 
     // Display warnings that the item or its resource item will be destroyed.
