@@ -164,10 +164,20 @@ export async function enrichCheck(config, label, options) {
     } else {
       label = ability;
     }
-    if ( config.dc ) label = game.i18n.format("EDITOR.DND5E.Inline.DC", { dc: config.dc, check: label });
-    label = game.i18n.format(`EDITOR.DND5E.Inline.Check${config.format === "long" ? "Long" : "Short"}`, {
-      check: label
-    });
+    const longSuffix = config.format === "long" ? "Long" : "Short";
+    if ( config.passive ) {
+      label = game.i18n.format(`EDITOR.DND5E.Inline.DCPassive${longSuffix}`, { dc: config.dc, check: label });
+    } else {
+      if ( config.dc ) label = game.i18n.format("EDITOR.DND5E.Inline.DC", { dc: config.dc, check: label });
+      label = game.i18n.format(`EDITOR.DND5E.Inline.Check${longSuffix}`, { check: label });
+    }
+  }
+
+  if ( config.passive ) {
+    const span = document.createElement("span");
+    span.classList.add("passive-check");
+    span.innerText = label;
+    return span;
   }
 
   const type = config.skill ? "skill" : config.tool ? "tool" : "check";
@@ -238,6 +248,7 @@ export async function enrichSave(config, label, options) {
  * @returns {HTMLElement}
  */
 export function createRollLink(label, dataset) {
+  delete dataset.input;
   const link = document.createElement("a");
   link.classList.add("roll-link");
   for ( const [key, value] of Object.entries(dataset) ) {
