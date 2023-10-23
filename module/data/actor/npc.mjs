@@ -4,6 +4,7 @@ import AttributesFields from "./templates/attributes.mjs";
 import CreatureTemplate from "./templates/creature.mjs";
 import DetailsFields from "./templates/details.mjs";
 import TraitsFields from "./templates/traits.mjs";
+import CreatureTypeField from "../shared/creature-type-field.mjs";
 
 /**
  * System data definition for NPCs.
@@ -73,12 +74,7 @@ export default class NPCData extends CreatureTemplate {
       details: new foundry.data.fields.SchemaField({
         ...DetailsFields.common,
         ...DetailsFields.creature,
-        type: new foundry.data.fields.SchemaField({
-          value: new foundry.data.fields.StringField({required: true, blank: true, label: "DND5E.CreatureType"}),
-          subtype: new foundry.data.fields.StringField({required: true, label: "DND5E.CreatureTypeSelectorSubtype"}),
-          swarm: new foundry.data.fields.StringField({required: true, blank: true, label: "DND5E.CreatureSwarmSize"}),
-          custom: new foundry.data.fields.StringField({required: true, label: "DND5E.CreatureTypeSelectorCustom"})
-        }, {label: "DND5E.CreatureType"}),
+        type: new CreatureTypeField(),
         environment: new foundry.data.fields.StringField({required: true, label: "DND5E.Environment"}),
         cr: new foundry.data.fields.NumberField({
           required: true, nullable: false, min: 0, initial: 1, label: "DND5E.ChallengeRating"

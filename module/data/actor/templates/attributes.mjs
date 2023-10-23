@@ -1,4 +1,6 @@
 import { FormulaField } from "../../fields.mjs";
+import MovementField from "../../shared/movement-field.mjs";
+import SensesField from "../../shared/senses-field.mjs";
 
 /**
  * Shared contents of the attributes schema between various actor types.
@@ -26,25 +28,7 @@ export default class AttributesFields {
         ability: new foundry.data.fields.StringField({label: "DND5E.AbilityModifier"}),
         bonus: new FormulaField({label: "DND5E.InitiativeBonus"})
       }, { label: "DND5E.Initiative" }),
-      movement: new foundry.data.fields.SchemaField({
-        burrow: new foundry.data.fields.NumberField({
-          nullable: false, min: 0, step: 0.1, initial: 0, label: "DND5E.MovementBurrow"
-        }),
-        climb: new foundry.data.fields.NumberField({
-          nullable: false, min: 0, step: 0.1, initial: 0, label: "DND5E.MovementClimb"
-        }),
-        fly: new foundry.data.fields.NumberField({
-          nullable: false, min: 0, step: 0.1, initial: 0, label: "DND5E.MovementFly"
-        }),
-        swim: new foundry.data.fields.NumberField({
-          nullable: false, min: 0, step: 0.1, initial: 0, label: "DND5E.MovementSwim"
-        }),
-        walk: new foundry.data.fields.NumberField({
-          nullable: false, min: 0, step: 0.1, initial: 30, label: "DND5E.MovementWalk"
-        }),
-        units: new foundry.data.fields.StringField({initial: "ft", label: "DND5E.MovementUnits"}),
-        hover: new foundry.data.fields.BooleanField({label: "DND5E.MovementHover"})
-      }, {label: "DND5E.Movement"})
+      movement: new MovementField()
     };
   }
 
@@ -72,22 +56,7 @@ export default class AttributesFields {
           required: true, nullable: false, integer: true, min: 0, initial: 3, label: "DND5E.AttunementMax"
         })
       }, {label: "DND5E.Attunement"}),
-      senses: new foundry.data.fields.SchemaField({
-        darkvision: new foundry.data.fields.NumberField({
-          required: true, nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.SenseDarkvision"
-        }),
-        blindsight: new foundry.data.fields.NumberField({
-          required: true, nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.SenseBlindsight"
-        }),
-        tremorsense: new foundry.data.fields.NumberField({
-          required: true, nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.SenseTremorsense"
-        }),
-        truesight: new foundry.data.fields.NumberField({
-          required: true, nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.SenseTruesight"
-        }),
-        units: new foundry.data.fields.StringField({required: true, initial: "ft", label: "DND5E.SenseUnits"}),
-        special: new foundry.data.fields.StringField({required: true, label: "DND5E.SenseSpecial"})
-      }, {label: "DND5E.Senses"}),
+      senses: new SensesField(),
       spellcasting: new foundry.data.fields.StringField({
         required: true, blank: true, initial: "int", label: "DND5E.SpellAbility"
       })

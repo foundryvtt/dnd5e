@@ -350,7 +350,7 @@ export default class Item5e extends Item {
   /** @inheritDoc */
   prepareDerivedData() {
     super.prepareDerivedData();
-    this.labels ??= {};
+    this.labels = {};
 
     // Clear out linked item cache
     this._classLink = undefined;

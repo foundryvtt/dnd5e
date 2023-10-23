@@ -1,4 +1,5 @@
 import ActorMovementConfig from "../actor/movement-config.mjs";
+import ActorSensesConfig from "../actor/senses-config.mjs";
 import ActorTypeConfig from "../actor/type-config.mjs";
 import AdvancementManager from "../advancement/advancement-manager.mjs";
 import AdvancementMigrationDialog from "../advancement/advancement-migration-dialog.mjs";
@@ -6,7 +7,6 @@ import Accordion from "../accordion.mjs";
 import TraitSelector from "../trait-selector.mjs";
 import ActiveEffect5e from "../../documents/active-effect.mjs";
 import * as Trait from "../../documents/actor/trait.mjs";
-
 
 /**
  * Override and extend the core ItemSheet implementation to handle specific item types.
@@ -537,7 +537,7 @@ export default class ItemSheet5e extends ItemSheet {
   /**
    * Handle spawning the configuration applications.
    * @param {Event} event   The click event which originated the selection.
-   * @private
+   * @protected
    */
   _onConfigMenu(event) {
     event.preventDefault();
@@ -546,10 +546,13 @@ export default class ItemSheet5e extends ItemSheet {
     let app;
     switch ( button.dataset.action ) {
       case "movement":
-        app = new ActorMovementConfig(this.item);
+        app = new ActorMovementConfig(this.item, { keyPath: "system.movement" });
+        break;
+      case "senses":
+        app = new ActorSensesConfig(this.item, { keyPath: "system.senses" });
         break;
       case "type":
-        app = new ActorTypeConfig(this.item);
+        app = new ActorTypeConfig(this.item, { keyPath: "system.type" });
         break;
     }
     app?.render(true);

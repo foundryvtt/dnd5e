@@ -39,21 +39,30 @@
           {{#if editable}}<a class="config-button" data-action="type"><i class="fas fa-cog"></i></a>{{/if}}
         </h4>
         <ol class="properties-list">
-          <li>{{labels.type}}</li>
+          <li>{{item.system.typeLabel}}</li>
         </ol>
         <h4 class="properties-header">
           {{localize "DND5E.Movement"}} 
           {{#if editable}}<a class="config-button" data-action="movement"><i class="fas fa-cog"></i></a>{{/if}}
         </h4>
         <ol class="properties-list">
-          {{#each labels.movement}}
+          {{#each item.system.movementLabels}}
             <li>{{this}}</li>
+          {{else}}
+            <li>{{localize "DND5E.None"}}</li>
           {{/each}}
         </ol>
-        <div class="form-group">
-          <label>{{localize "DND5E.SenseDarkvision"}}</label>
-          {{numberInput system.darkvision name="system.darkvision" step=1 min=0 placeholder="None"}}
-        </div>
+        <h4 class="properties-header">
+          {{localize "DND5E.Senses"}} 
+          {{#if editable}}<a class="config-button" data-action="senses"><i class="fas fa-cog"></i></a>{{/if}}
+        </h4>
+        <ol class="properties-list">
+          {{#each item.system.sensesLabels}}
+            <li>{{this}}</li>
+          {{else}}
+            <li>{{localize "DND5E.None"}}</li>
+          {{/each}}
+        </ol>
       </div>
 
       {{editor descriptionHTML target="system.description.value" button=true editable=editable
