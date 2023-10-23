@@ -175,4 +175,21 @@ export default class ActiveEffect5e extends ActiveEffect {
     categories.suppressed.hidden = !categories.suppressed.effects.length;
     return categories;
   }
+
+  /* ~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~ */
+  /*  Deprecations and Compatibility           */
+  /* ~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~ */
+
+  _initialize(options) {
+    super._initialize(options);
+    if ( game.release.generation < 11 ) {
+      Object.defineProperty(this, "name", {
+        get() {
+          return this.label;
+        },
+        configurable: true,
+        enumerable: false
+      });
+    }
+  }
 }
