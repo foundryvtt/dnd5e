@@ -69,7 +69,7 @@ export default class AbilityScoreImprovementFlow extends AdvancementFlow {
         delta: (value - ability.value) ? formatter.format(value - ability.value) : null,
         showDelta: true,
         isDisabled: !!this.feat,
-        isFixed: !!fixed || ability.value >= ability.max,
+        isFixed: !!fixed || (ability.value >= ability.max),
         canIncrease: (value < max) && !fixed && !this.feat,
         canDecrease: (value > ability.value) && !fixed && !this.feat
       };
@@ -104,7 +104,7 @@ export default class AbilityScoreImprovementFlow extends AdvancementFlow {
     super._onChangeInput(event);
     const input = event.currentTarget;
     const key = input.closest("[data-score]").dataset.score;
-    if (isNaN(input.valueAsNumber)) this.assignments[key] = 0;
+    if ( isNaN(input.valueAsNumber) ) this.assignments[key] = 0;
     else {
       const clampedValue = Math.clamped(input.valueAsNumber, Number(input.min), Number(input.max));
       this.assignments[key] = clampedValue - Number(input.dataset.initial);
