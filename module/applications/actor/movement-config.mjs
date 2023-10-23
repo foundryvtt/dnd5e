@@ -12,7 +12,8 @@ export default class ActorMovementConfig extends BaseConfigSheet {
       template: "systems/dnd5e/templates/apps/movement-config.hbs",
       width: 300,
       height: "auto",
-      sheetConfig: false
+      sheetConfig: false,
+      keyPath: "system.attributes.movement"
     });
   }
 
@@ -28,11 +29,9 @@ export default class ActorMovementConfig extends BaseConfigSheet {
   /** @inheritdoc */
   getData(options={}) {
     const source = this.document.toObject();
-    const isActor = this.document instanceof Actor;
-    const keyPath = isActor ? "system.attributes.movement" : "system.movement";
 
     // Current movement values
-    const movement = foundry.utils.getProperty(source, keyPath) ?? {};
+    const movement = foundry.utils.getProperty(source, this.options.keyPath) ?? {};
     for ( let [k, v] of Object.entries(movement) ) {
       if ( ["units", "hover"].includes(k) ) continue;
       movement[k] = Number.isNumeric(v) ? v.toNearest(0.1) : null;
@@ -55,10 +54,10 @@ export default class ActorMovementConfig extends BaseConfigSheet {
     return {
       speeds,
       movement,
-      selectUnits: source.type !== "group",
-      canHover: isActor && (source.type !== "group"),
+      selectUnits: Object.hasOwn(movement, "units"),
+      canHover: Object.hasOwn(movement, "hover"),
       units: CONFIG.DND5E.movementUnits,
-      keyPath
+      keyPath: this.options.keyPath
     };
   }
 }

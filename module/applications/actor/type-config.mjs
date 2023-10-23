@@ -16,7 +16,8 @@ export default class ActorTypeConfig extends DocumentSheet {
       allowCustom: true,
       minimum: 0,
       maximum: null,
-      sheetConfig: false
+      sheetConfig: false,
+      keyPath: "system.details.type"
     });
   }
 
@@ -36,20 +37,10 @@ export default class ActorTypeConfig extends DocumentSheet {
 
   /* -------------------------------------------- */
 
-  /**
-   * Key path to where the type is stored on the document.
-   * @type {string}
-   */
-  get keyPath() {
-    return this.document instanceof Actor ? "system.details.type" : "system.type";
-  }
-
-  /* -------------------------------------------- */
-
   /** @inheritdoc */
   getData(options={}) {
     // Get current value or new default
-    let attr = foundry.utils.getProperty(this.object, this.keyPath);
+    let attr = foundry.utils.getProperty(this.object, this.options.keyPath);
     if ( foundry.utils.getType(attr) !== "Object" ) attr = {
       value: (attr in CONFIG.DND5E.creatureTypes) ? attr : "humanoid",
       subtype: "",
@@ -91,7 +82,7 @@ export default class ActorTypeConfig extends DocumentSheet {
   /** @override */
   async _updateObject(event, formData) {
     const typeObject = foundry.utils.expandObject(formData);
-    return this.object.update({[this.keyPath]: typeObject});
+    return this.object.update({[this.options.keyPath]: typeObject});
   }
 
   /* -------------------------------------------- */
