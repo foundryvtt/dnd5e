@@ -37,8 +37,8 @@ export default class SelectChoices {
   asSet(set) {
     set ??= new Set();
     for ( const [key, choice] of Object.entries(this) ) {
-      if ( !choice.children ) set.add(key);
-      else choice.children.asSet(set);
+      if ( choice.children ) choice.children.asSet(set);
+      else set.add(key);
     }
     return set;
   }
@@ -69,7 +69,7 @@ export default class SelectChoices {
    * @returns {SelectChoices}
    */
   merge(other, { inplace=true }={}) {
-    if ( !inplace ) return this.clone().merge();
+    if ( !inplace ) return this.clone().merge(other);
     return foundry.utils.mergeObject(this, other);
   }
 
@@ -80,6 +80,7 @@ export default class SelectChoices {
    * @param {object} lhs
    * @param {object} rhs
    * @returns {number}
+   * @protected
    */
   _sort(lhs, rhs) {
     if ( (lhs.sorting === false) && (rhs.sorting === false) ) return 0;
@@ -138,7 +139,7 @@ export default class SelectChoices {
    * choices.filter(new Set(["categoryOne"]));
    *
    * // Results in only categoryTwo, but none if its children
-   * choices.filter(new Set(["categoryTwo]));
+   * choices.filter(new Set(["categoryTwo"]));
    *
    * // Results in categoryTwo and all of its children
    * choices.filter(new Set(["categoryTwo:*"]));

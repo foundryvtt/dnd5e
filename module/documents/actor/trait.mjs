@@ -447,7 +447,7 @@ export function keyLabel(key, config={}) {
  * choiceLabel({ count: 1, pool: new Set(["tool:thief", "tool:art:*"]) }, { only: true });
  *
  * @example
- * // Returns
+ * // Returns "2 from Thieves' Tools or any skill proficiency"
  * choiceLabel({ count: 2, pool: new Set(["tool:thief", "skills:*"]) });
  *
  */
@@ -468,7 +468,7 @@ export function choiceLabel(choice, { only=false, final=false }={}) {
     return listFormatter.format(choice.pool.map(key => keyLabel(key)));
   }
 
-  // Select from a list of options (e.g. "Choose 2 from thieves tools or any skill proficiency")
+  // Select from a list of options (e.g. "2 from Thieves' Tools or any skill proficiency")
   const choices = choice.pool.map(key => keyLabel(key));
   return game.i18n.format("DND5E.TraitConfigChooseList", {
     count: choice.count,
@@ -480,31 +480,31 @@ export function choiceLabel(choice, { only=false, final=false }={}) {
 
 /**
  * Create a human readable description of trait grants & choices.
- * @param {Set<string>} grants                                        Guaranteed trait grants.
- * @param {TraitChoice[]} [choices=[]]                                Trait choices.
- * @param {object} [options={}]
- * @param {"inclusive"|"exclusive"} [options.choiceMode="inclusive"]  Choice mode.
+ * @param {object} config
+ * @param {Set<string>} [config.grants]                              Guaranteed trait grants.
+ * @param {TraitChoice[]} [config.choices=[]]                        Trait choices.
+ * @param {"inclusive"|"exclusive"} [config.choiceMode="inclusive"]  Choice mode.
  * @returns {string}
  *
  * @example
  * // Returns "Acrobatics and Athletics"
- * localizedList(new Set(["skills:acr", "skills:ath"]));
+ * localizedList({ grants: new Set(["skills:acr", "skills:ath"]) });
  *
  * @example
  * // Returns "Acrobatics and one other skill proficiency"
- * localizedList(new Set(["skills:acr"]), [{ count: 1, pool: new Set(["skills:*"])}]);
+ * localizedList({ grants: new Set(["skills:acr"]), choices: [{ count: 1, pool: new Set(["skills:*"])}] });
  *
  * @example
  * // Returns "Choose any skill proficiency"
- * localizedList(new Set(), [{ count: 1, pool: new Set(["skills:*"])}]);
+ * localizedList({ choices: [{ count: 1, pool: new Set(["skills:*"])}] });
  *
  * @example
  * // Returns "Choose any 2 languages or any 1 skill proficiency"
- * localizedList(new Set(), [
+ * localizedList({ choices: [
  *   {count: 2, pool: new Set(["languages:*"])}, { count: 1, pool: new Set(["skills:*"])}
- * ], {choiceMode: "exclusive"});
+ * ], choiceMode: "exclusive" });
  */
-export function localizedList(grants, choices=[], { choiceMode="inclusive" }={}) {
+export function localizedList({ grants=new Set(), choices=[], choiceMode="inclusive" }) {
   const choiceSections = [];
 
   for ( const [index, choice] of choices.entries() ) {
