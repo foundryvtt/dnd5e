@@ -44,6 +44,16 @@ export default function registerSystemSettings() {
     onChange: rule => canvas.grid.diagonalRule = rule
   });
 
+  // Allow rotating square templates
+  game.settings.register("dnd5e", "rotateSquareTemplates", {
+    name: "SETTINGS.5eRotateSquareN",
+    hint: "SETTINGS.5eRotateSquareL",
+    scope: "world",
+    config: true,
+    default: true,
+    type: Boolean
+  });
+
   // Proficiency modifier type
   game.settings.register("dnd5e", "proficiencyModifier", {
     name: "SETTINGS.5eProfN",
