@@ -26,7 +26,7 @@ As part of this, an [Actor's Rolldata](https://github.com/foundryvtt/dnd5e/wiki/
 
 | Change Mode | Description |
 |------------ | ------------|
-| Add         | Adds the provided value to a number. This can be used to both add and subtract from a particular value by specifying `+1` or `-1` as the value to add. |
+| Add         | Adds the provided value to the specified attribute. For numerical attributes, this can be used to both add and subtract from a particular value by specifying `+1` or `-1` as the value to add. |
 | Multiply    | Multiplies the defined attribute by the numeric value in the Effect Value field.|
 | Override    | Replaces the defined attribute with the value provided in the Effect Value field.|
 | Downgrade   | Reduces the defined attribute only in cases where the current value of that attribute would be greater than value specified in the Effect Value field.|
