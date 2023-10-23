@@ -47,9 +47,10 @@ function parseConfig(match) {
   for ( const part of match.split(" ") ) {
     if ( !part ) continue;
     const [key, value] = part.split("=");
-    if ( !key || !value ) console.warn(`Invalid roll enricher parameters ${part}. Must be formatted "key=value".`);
-    else if (Number.isNumeric(value)) config[key] = Number(value);
-    else config[key] = value;
+    const valueLower = value?.toLowerCase();
+    if ( ["true", "false"].includes(valueLower) ) config[key] = valueLower === "true";
+    else if ( Number.isNumeric(value) ) config[key] = Number(value);
+    else config[key] = value ?? true;
   }
   return config;
 }
@@ -65,7 +66,7 @@ function parseConfig(match) {
  * @param {string[]} config            Configuration data.
  * @param {string} label               Optional label to replace default text.
  * @param {EnrichmentOptions} options  Options provided to customize text enrichment.
- * @returns {HTMLElement|null}         A HTML link if the check could be built, otherwise null.
+ * @returns {HTMLElement|null}         An HTML link if the check could be built, otherwise null.
  *
  * @example Create a dexterity check:
  * ```[[/check ability=dex]]```
@@ -76,16 +77,16 @@ function parseConfig(match) {
  * </a>
  * ```
  *
- * @example Create a acrobatics check with a DC and default ability:
+ * @example Create an acrobatics check with a DC and default ability:
  * ```[[/check skill=acr dc=20]]```
  * becomes
  * ```html
  * <a class="roll-action" data-type="check" data-skill="acr" data-dc="20">
- *   <i class="fa-solid fa-dice-d20"></i> DC 20 Acrobatics check
+ *   <i class="fa-solid fa-dice-d20"></i> DC 20 Dexterity (Acrobatics) check
  * </a>
  * ```
  *
- * @example Create a acrobatics check using strength:
+ * @example Create an acrobatics check using strength:
  * ```[[/check ability=str skill=acr]]```
  * becomes
  * ```html
@@ -113,6 +114,16 @@ function parseConfig(match) {
  * ```
  */
 export async function enrichCheck(config, label, options) {
+  config = Object.entries(config).reduce((config, [k, v]) => {
+    const bool = foundry.utils.getType(v) === "boolean";
+    if ( bool && (k in CONFIG.DND5E.abilities) ) config.ability = k;
+    else if ( bool && (k in CONFIG.DND5E.skills) ) config.skill = k;
+    else if ( bool && (k in CONFIG.DND5E.toolIDs) ) config.tool = k;
+    else if ( bool && Number.isNumeric(k) ) config.dc = Number(k);
+    else config[k] = v;
+    return config;
+  }, {});
+
   let invalid = false;
 
   const skillConfig = CONFIG.DND5E.skills[config.skill];
@@ -141,7 +152,7 @@ export async function enrichCheck(config, label, options) {
 
   if ( config.dc && !Number.isNumeric(config.dc) ) config.dc = simplifyBonus(config.dc, options.rollData ?? {});
 
-  if ( invalid || !abilityConfig ) return config.input;
+  if ( invalid ) return config.input;
 
   // Insert the icon and label into the link
   if ( !label ) {
@@ -154,6 +165,9 @@ export async function enrichCheck(config, label, options) {
       label = ability;
     }
     if ( config.dc ) label = game.i18n.format("EDITOR.DND5E.Inline.DC", { dc: config.dc, check: label });
+    label = game.i18n.format(`EDITOR.DND5E.Inline.Check${config.format === "long" ? "Long" : "Short"}`, {
+      check: label
+    });
   }
 
   const type = config.skill ? "skill" : config.tool ? "tool" : "check";
@@ -167,7 +181,7 @@ export async function enrichCheck(config, label, options) {
  * @param {string[]} config            Configuration data.
  * @param {string} label               Optional label to replace default text.
  * @param {EnrichmentOptions} options  Options provided to customize text enrichment.
- * @returns {HTMLElement|null}         A HTML link if the save could be built, otherwise null.
+ * @returns {HTMLElement|null}         An HTML link if the save could be built, otherwise null.
  *
  * @example Create a dexterity saving throw:
  * ```[[/save ability=dex]]```
@@ -188,6 +202,14 @@ export async function enrichCheck(config, label, options) {
  * ```
  */
 export async function enrichSave(config, label, options) {
+  config = Object.entries(config).reduce((config, [k, v]) => {
+    const bool = foundry.utils.getType(v) === "boolean";
+    if ( bool && (k in CONFIG.DND5E.abilities) ) config.ability = k;
+    else if ( bool && Number.isNumeric(k) ) config.dc = Number(k);
+    else config[k] = v;
+    return config;
+  }, {});
+
   const abilityConfig = CONFIG.DND5E.abilities[config.ability];
   if ( !abilityConfig ) {
     console.warn(`Ability ${config.ability} not found while enriching ${config.input}.`);
@@ -199,6 +221,9 @@ export async function enrichSave(config, label, options) {
   if ( !label ) {
     label = abilityConfig.label;
     if ( config.dc ) label = game.i18n.format("EDITOR.DND5E.Inline.DC", { dc: config.dc, check: label });
+    label = game.i18n.format(`EDITOR.DND5E.Inline.Save${config.format === "long" ? "Long" : "Short"}`, {
+      save: label
+    });
   }
 
   return createRollLink(label, { type: "save", ...config });
