@@ -20,6 +20,7 @@ _______________________________`;
  * @typedef {object} AbilityConfiguration
  * @property {string} label                               Localized label.
  * @property {string} abbreviation                        Localized abbreviation.
+ * @property {string} fullKey                             Fully written key used as alternate for enrichers.
  * @property {string} [type]                              Whether this is a "physical" or "mental" ability.
  * @property {Object<string, number|string>}  [defaults]  Default values for this ability based on actor type.
  *                                                        If a string is used, the system will attempt to fetch.
@@ -34,40 +35,47 @@ DND5E.abilities = {
   str: {
     label: "DND5E.AbilityStr",
     abbreviation: "DND5E.AbilityStrAbbr",
-    type: "physical"
+    type: "physical",
+    fullKey: "strength"
   },
   dex: {
     label: "DND5E.AbilityDex",
     abbreviation: "DND5E.AbilityDexAbbr",
-    type: "physical"
+    type: "physical",
+    fullKey: "dexterity"
   },
   con: {
     label: "DND5E.AbilityCon",
     abbreviation: "DND5E.AbilityConAbbr",
-    type: "physical"
+    type: "physical",
+    fullKey: "constitution"
   },
   int: {
     label: "DND5E.AbilityInt",
     abbreviation: "DND5E.AbilityIntAbbr",
     type: "mental",
+    fullKey: "intelligence",
     defaults: { vehicle: 0 }
   },
   wis: {
     label: "DND5E.AbilityWis",
     abbreviation: "DND5E.AbilityWisAbbr",
     type: "mental",
+    fullKey: "wisdom",
     defaults: { vehicle: 0 }
   },
   cha: {
     label: "DND5E.AbilityCha",
     abbreviation: "DND5E.AbilityChaAbbr",
     type: "mental",
+    fullKey: "charisma",
     defaults: { vehicle: 0 }
   },
   hon: {
     label: "DND5E.AbilityHon",
     abbreviation: "DND5E.AbilityHonAbbr",
     type: "mental",
+    fullKey: "honor",
     defaults: { npc: "cha", vehicle: 0 },
     improvement: false
   },
@@ -75,6 +83,7 @@ DND5E.abilities = {
     label: "DND5E.AbilitySan",
     abbreviation: "DND5E.AbilitySanAbbr",
     type: "mental",
+    fullKey: "sanity",
     defaults: { npc: "wis", vehicle: 0 },
     improvement: false
   }
@@ -112,6 +121,7 @@ DND5E.hitPointsAbility = "con";
  * @typedef {object} SkillConfiguration
  * @property {string} label    Localized label.
  * @property {string} ability  Key for the default ability used by this skill.
+ * @property {string} fullKey  Fully written key used as alternate for enrichers.
  */
 
 /**
@@ -119,24 +129,24 @@ DND5E.hitPointsAbility = "con";
  * @enum {SkillConfiguration}
  */
 DND5E.skills = {
-  acr: { label: "DND5E.SkillAcr", ability: "dex" },
-  ani: { label: "DND5E.SkillAni", ability: "wis" },
-  arc: { label: "DND5E.SkillArc", ability: "int" },
-  ath: { label: "DND5E.SkillAth", ability: "str" },
-  dec: { label: "DND5E.SkillDec", ability: "cha" },
-  his: { label: "DND5E.SkillHis", ability: "int" },
-  ins: { label: "DND5E.SkillIns", ability: "wis" },
-  itm: { label: "DND5E.SkillItm", ability: "cha" },
-  inv: { label: "DND5E.SkillInv", ability: "int" },
-  med: { label: "DND5E.SkillMed", ability: "wis" },
-  nat: { label: "DND5E.SkillNat", ability: "int" },
-  prc: { label: "DND5E.SkillPrc", ability: "wis" },
-  prf: { label: "DND5E.SkillPrf", ability: "cha" },
-  per: { label: "DND5E.SkillPer", ability: "cha" },
-  rel: { label: "DND5E.SkillRel", ability: "int" },
-  slt: { label: "DND5E.SkillSlt", ability: "dex" },
-  ste: { label: "DND5E.SkillSte", ability: "dex" },
-  sur: { label: "DND5E.SkillSur", ability: "wis" }
+  acr: { label: "DND5E.SkillAcr", ability: "dex", fullKey: "acrobatics" },
+  ani: { label: "DND5E.SkillAni", ability: "wis", fullKey: "animalHandling" },
+  arc: { label: "DND5E.SkillArc", ability: "int", fullKey: "arcana" },
+  ath: { label: "DND5E.SkillAth", ability: "str", fullKey: "athletics" },
+  dec: { label: "DND5E.SkillDec", ability: "cha", fullKey: "deception" },
+  his: { label: "DND5E.SkillHis", ability: "int", fullKey: "history" },
+  ins: { label: "DND5E.SkillIns", ability: "wis", fullKey: "insight" },
+  itm: { label: "DND5E.SkillItm", ability: "cha", fullKey: "intimidation" },
+  inv: { label: "DND5E.SkillInv", ability: "int", fullKey: "investigation" },
+  med: { label: "DND5E.SkillMed", ability: "wis", fullKey: "medicine" },
+  nat: { label: "DND5E.SkillNat", ability: "int", fullKey: "nature" },
+  prc: { label: "DND5E.SkillPrc", ability: "wis", fullKey: "perception" },
+  prf: { label: "DND5E.SkillPrf", ability: "cha", fullKey: "performance" },
+  per: { label: "DND5E.SkillPer", ability: "cha", fullKey: "persuasion" },
+  rel: { label: "DND5E.SkillRel", ability: "int", fullKey: "religion" },
+  slt: { label: "DND5E.SkillSlt", ability: "dex", fullKey: "slightOfHand" },
+  ste: { label: "DND5E.SkillSte", ability: "dex", fullKey: "stealth" },
+  sur: { label: "DND5E.SkillSur", ability: "wis", fullKey: "survival" }
 };
 preLocalize("skills", { key: "label", sort: true });
 
@@ -1969,6 +1979,21 @@ DND5E.advancementTypes = {
   ItemGrant: advancement.ItemGrantAdvancement,
   ScaleValue: advancement.ScaleValueAdvancement
 };
+
+/* -------------------------------------------- */
+
+let enrichmentLookup;
+Object.defineProperty(DND5E, "enrichmentLookup", {
+  get() {
+    if ( !enrichmentLookup ) {
+      enrichmentLookup = { abilities: DND5E.abilities, skills: DND5E.skills, tools: DND5E.toolIds };
+      Object.values(DND5E.abilities).forEach(a => enrichmentLookup.abilities[a.fullKey] = a);
+      Object.values(DND5E.skills).forEach(s => enrichmentLookup.skills[s.fullKey] = s);
+    }
+    return enrichmentLookup;
+  },
+  enumerable: true
+});
 
 /* -------------------------------------------- */
 

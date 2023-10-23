@@ -116,9 +116,9 @@ function parseConfig(match) {
 export async function enrichCheck(config, label, options) {
   config = Object.entries(config).reduce((config, [k, v]) => {
     const bool = foundry.utils.getType(v) === "boolean";
-    if ( bool && (k in CONFIG.DND5E.abilities) ) config.ability = k;
-    else if ( bool && (k in CONFIG.DND5E.skills) ) config.skill = k;
-    else if ( bool && (k in CONFIG.DND5E.toolIDs) ) config.tool = k;
+    if ( bool && (k in CONFIG.DND5E.enrichmentLookup.abilities) ) config.ability = k;
+    else if ( bool && (k in CONFIG.DND5E.enrichmentLookup.skills) ) config.skill = k;
+    else if ( bool && (k in CONFIG.DND5E.enrichmentLookup.tools) ) config.tool = k;
     else if ( bool && Number.isNumeric(k) ) config.dc = Number(k);
     else config[k] = v;
     return config;
@@ -126,7 +126,7 @@ export async function enrichCheck(config, label, options) {
 
   let invalid = false;
 
-  const skillConfig = CONFIG.DND5E.skills[config.skill];
+  const skillConfig = CONFIG.DND5E.enrichmentLookup.skills[config.skill];
   if ( config.skill && !skillConfig ) {
     console.warn(`Skill ${config.skill} not found while enriching ${config.input}.`);
     invalid = true;
@@ -134,14 +134,14 @@ export async function enrichCheck(config, label, options) {
     config.ability = skillConfig.ability;
   }
 
-  const toolUUID = CONFIG.DND5E.toolIds[config.tool];
+  const toolUUID = CONFIG.DND5E.enrichmentLookup.tools[config.tool];
   const toolIndex = toolUUID ? Trait.getBaseItem(toolUUID, { indexOnly: true }) : null;
   if ( config.tool && !toolIndex ) {
     console.warn(`Tool ${config.tool} not found while enriching ${config.input}.`);
     invalid = true;
   }
 
-  let abilityConfig = CONFIG.DND5E.abilities[config.ability];
+  let abilityConfig = CONFIG.DND5E.enrichmentLookup.abilities[config.ability];
   if ( config.ability && !abilityConfig ) {
     console.warn(`Ability ${ability} not found while enriching ${config.input}.`);
     invalid = true;
@@ -204,13 +204,13 @@ export async function enrichCheck(config, label, options) {
 export async function enrichSave(config, label, options) {
   config = Object.entries(config).reduce((config, [k, v]) => {
     const bool = foundry.utils.getType(v) === "boolean";
-    if ( bool && (k in CONFIG.DND5E.abilities) ) config.ability = k;
+    if ( bool && (k in CONFIG.DND5E.enrichmentLookup.abilities) ) config.ability = k;
     else if ( bool && Number.isNumeric(k) ) config.dc = Number(k);
     else config[k] = v;
     return config;
   }, {});
 
-  const abilityConfig = CONFIG.DND5E.abilities[config.ability];
+  const abilityConfig = CONFIG.DND5E.enrichmentLookup.abilities[config.ability];
   if ( !abilityConfig ) {
     console.warn(`Ability ${config.ability} not found while enriching ${config.input}.`);
     return config.input;
