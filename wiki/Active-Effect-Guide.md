@@ -1,10 +1,8 @@
-# FoundryVTT dnd5e Active Effects Examples
-
 ![Up to date as of 2.3.x](https://img.shields.io/badge/dnd5e-v2.3.x-informational)
 
 This document only covers Active Effects available to the Core dnd5e System.
 
-## Legend
+# Legend
 
 `[number]` - These square brackets mean "replace this with your value of the type within the brackets".
 So this example: `+[number]` would mean you input `+3`.
@@ -36,9 +34,9 @@ As part of this, an [Actor's Rolldata](https://github.com/foundryvtt/dnd5e/wiki/
 > [!important]
 > When using the `ADD` change mode, it is always recommended to include the `+` in the Effect Value, this will ensure that if you have multiple effects targeting the same Attribute, they will not be concatenated (e.g. two effects that `ADD | +1` will result in a bonus of `+1+1`, whereas two effects that `ADD | 1` will result in a bonus of `+11`.
 
-## Commonly Desired Effect Examples
+# Commonly Desired Effect Examples
 
-### Abilities
+## Abilities
 
 ```
 system.abilities.[abbreviation].value
@@ -64,42 +62,42 @@ system.abilities.[abbreviation].value
 > </details>
 
 
-#### Overriding an Ability Score
+### Overriding an Ability Score
 E.g. an Item or potion that sets an ability score to a set value while in use
 
 | Attribute Key | Change Mode | Effect Value |
 | -------- | -------- | -------- |
 | `system.abilities.[abbreviation].value`     | Override     | `[number]`     |
 
-#### Upgrading an Ability Score
+### Upgrading an Ability Score
 E.g. an Item or potion that sets an ability score to a set value, if the value does not already exceed that value, such as the Gauntlets of Ogre Power
 
 | Attribute Key | Change Mode | Effect Value |
 | -------- | -------- | -------- |
 | `system.abilities.[abbreviation].value`     | Upgrade     | `[number]`     |
 
-#### Bonus to a Specific Saving Throw
+### Bonus to a Specific Saving Throw
 
 | Attribute Key | Change Mode | Effect Value |
 | -------- | -------- | -------- |
 | `system.abilities.[abbreviation].bonuses.save`     | Add     | `+[number/formula]`     |
 
 
-#### Bonus to a Specific Ability Check
+### Bonus to a Specific Ability Check
 
 | Attribute Key | Change Mode | Effect Value |
 | -------- | -------- | -------- |
 | `system.abilities.[abbreviation].bonuses.check`     | Add     | `+[number/formula]`     |
 
 
-#### Bonus to All Ability Checks
+### Bonus to All Ability Checks
 
 | Attribute Key | Change Mode | Effect Value |
 | -------- | -------- | -------- |
 | `system.bonuses.abilities.skill`     | Add     | `+[number/formula]`     |
 
 
-#### Bonus to All Saving Throws
+### Bonus to All Saving Throws
 
 E.g. Paladin Aura of Protection
 
@@ -107,7 +105,7 @@ E.g. Paladin Aura of Protection
 | -------- | -------- | -------- |
 | `system.bonuses.abilities.save`     | Add     | `+[number/formula]`     |
 
-#### Bonus to Initiative
+### Bonus to Initiative
 
 | Attribute Key | Change Mode | Effect Value |
 | -------- | -------- | -------- |
@@ -115,7 +113,7 @@ E.g. Paladin Aura of Protection
 
 ---
 
-### Skills
+## Skills
 ```
 system.skills.[abbreviation].bonuses.check
                                      passive
@@ -149,19 +147,19 @@ system.skills.[abbreviation].bonuses.check
 > </details>
 
 
-#### Bonus to a Specific Skill Check
+### Bonus to a Specific Skill Check
 
 | Attribute Key | Change Mode | Effect Value |
 | -------- | -------- | -------- |
 | `system.skills.[abbreviation].bonuses.check`     | Add     | `+[number/formula]`     |
 
-#### Bonus to a Specific Skill Passive
+### Bonus to a Specific Skill Passive
 
 | Attribute Key | Change Mode | Effect Value |
 | -------- | -------- | -------- |
 | `system.skills.[abbreviation].bonuses.passive`     | Add     | `+[number/formula]`     |
 
-#### Bonus to All Skill Checks
+### Bonus to All Skill Checks
 
 | Attribute Key | Change Mode | Effect Value |
 | -------- | -------- | -------- |
@@ -169,7 +167,7 @@ system.skills.[abbreviation].bonuses.check
 
 ---
 
-### Movement
+## Movement
 
 ```
 system.attributes.movement.[movementType]
@@ -190,7 +188,7 @@ system.attributes.movement.[movementType]
 > </details>
 
 
-#### Multiply Speed by modifier
+### Multiply Speed by modifier
 E.g. An Item or Spell which doubles/halves/etc. an Actor's speed.
 
 | Attribute Key | Change Mode | Effect Value |
@@ -198,7 +196,7 @@ E.g. An Item or Spell which doubles/halves/etc. an Actor's speed.
 | `system.attributes.movement.[movementType]`     | Multiply     | `[number]`     |
 
 
-#### Add a different Speed
+### Add a different Speed
 E.g. An Item or Spell which grants an Actor a flying or swimming speed.
 
 | Attribute Key | Change Mode | Effect Value |
@@ -207,7 +205,7 @@ E.g. An Item or Spell which grants an Actor a flying or swimming speed.
 
 ---
 
-### Armor Class
+## Armor Class
 
 ```
 system.attributes.ac.bonus
@@ -217,7 +215,7 @@ system.attributes.ac.bonus
                      flat
 ```
 
-#### Add a Bonus to AC
+### Add a Bonus to AC
 
 E.g. An Item or Spell which adds something to the Actor's current AC for the duration.
 
@@ -227,7 +225,7 @@ E.g. An Item or Spell which adds something to the Actor's current AC for the dur
 
 
 
-#### Override the AC Calculation to a custom formula
+### Override the AC Calculation to a custom formula
 
 E.g. An Item or Spell which sets the Actor's AC to `12 + Int` for the duration.
 
@@ -238,7 +236,7 @@ E.g. An Item or Spell which sets the Actor's AC to `12 + Int` for the duration.
 
 ---
 
-### Attack Roll Bonuses
+## Attack Roll Bonuses
 
 ```
 system.bonuses.msak.attack
@@ -260,7 +258,7 @@ system.bonuses.msak.attack
 > Source: `CONFIG.DND5E.itemActionTypes`
 > </details>
 
-#### Bonus to All Melee Attack Rolls (both spell and weapon)
+### Bonus to All Melee Attack Rolls (both spell and weapon)
 
 | Attribute Key | Change Mode | Effect Value |
 | -------- | -------- | -------- |
@@ -268,7 +266,7 @@ system.bonuses.msak.attack
 | `system.bonuses.msak.attack`     | Add     | `+[number/formula]`     |
 
 
-#### Bonus to All Ranged Attack Rolls (both spell and weapon)
+### Bonus to All Ranged Attack Rolls (both spell and weapon)
 
 | Attribute Key | Change Mode | Effect Value |
 | -------- | -------- | -------- |
@@ -277,7 +275,7 @@ system.bonuses.msak.attack
 
 ---
 
-### Damage Roll Bonuses
+## Damage Roll Bonuses
 
 ```
 system.bonuses.msak.damage
@@ -299,7 +297,7 @@ system.bonuses.msak.damage
 > Source: `CONFIG.DND5E.itemActionTypes`
 > </details>
 
-#### Bonus to All Melee Attack Damage Rolls (both spell and weapon)
+### Bonus to All Melee Attack Damage Rolls (both spell and weapon)
 
 | Attribute Key | Change Mode | Effect Value |
 | -------- | -------- | -------- |
@@ -307,7 +305,7 @@ system.bonuses.msak.damage
 | `system.bonuses.msak.damage`     | Add     | `+[number/formula]`     |
 
 
-#### Bonus to All Ranged Attack Damage Rolls (both spell and weapon)
+### Bonus to All Ranged Attack Damage Rolls (both spell and weapon)
 
 | Attribute Key | Change Mode | Effect Value |
 | -------- | -------- | -------- |
@@ -316,7 +314,7 @@ system.bonuses.msak.damage
 
 ---
 
-### Immunities/Resistances/Vulnerabilities
+## Immunities/Resistances/Vulnerabilities
 
 ```
 system.traits.ci.value
@@ -328,7 +326,7 @@ system.traits.ci.value
 > [!WARNING]
 > These only serve as a marker on the actor sheet, the core system has no automations around immunities, resistances, or vulnerabilities.
 
-#### Add a Condition Immunity
+### Add a Condition Immunity
 
 > <details>
 > <summary>Condition Types</summary>
@@ -360,7 +358,7 @@ system.traits.ci.value
 | -------- | -------- | -------- |
 | `system.traits.ci.value`     | Add     | `[conditionType]`     |
 
-#### Add a Damage Type Immunity
+### Add a Damage Type Immunity
 
 > <details>
 > <summary>Damage Types</summary>
@@ -388,13 +386,13 @@ system.traits.ci.value
 | -------- | -------- | -------- |
 | `system.traits.di.value`     | Add     | `[damageType]`     |
 
-#### Add a Damage Type Resistance
+### Add a Damage Type Resistance
 
 | Attribute Key | Change Mode | Effect Value |
 | -------- | -------- | -------- |
 | `system.traits.dr.value`     | Add     | `[damageType]`     |
 
-#### Add a Damage Type Vulnerability
+### Add a Damage Type Vulnerability
 
 | Attribute Key | Change Mode | Effect Value |
 | -------- | -------- | -------- |
@@ -402,7 +400,7 @@ system.traits.ci.value
 
 ---
 
-### Scale Value
+## Scale Value
 
 ```
 system.scale.[classIdentifier].[scaleIdentifier]
@@ -425,14 +423,14 @@ system.scale.[classIdentifier].[scaleIdentifier]
 > | `system.scale.[classIdentifier].[scaleIdentifier].faces` | 8    |
 > </details>
 
-#### Increase the value of a Scale Value
+### Increase the value of a Scale Value
 E.g. An Item or Spell which allows additional use(s) of a Class Feature (e.g. adds an additional use of a Barbarian's Rage).
 
 | Attribute Key | Change Mode | Effect Value |
 | -------- | -------- | -------- |
 | `system.scale.barbarian.rages.value`     | Add     | `+[number]`     |
 
-#### Increase the number of die of a Dice Scale Value
+### Increase the number of die of a Dice Scale Value
 E.g. An Item or Spell which increases the number of die in a Dice Scale Value (e.g. adds a die to a Rogue's Sneak Attack).
 
 | Attribute Key | Change Mode | Effect Value |
@@ -441,7 +439,7 @@ E.g. An Item or Spell which increases the number of die in a Dice Scale Value (e
 
 ---
 
-### Hit Points
+## Hit Points
 
 ```
 system.attributes.hp.value
@@ -455,21 +453,21 @@ system.attributes.hp.value
 > [!warning]
 > **Never** alter the `value`, `max`, or `temp` attributes with an active effect, as this **will** cause issues.
 
-#### Temporary Bonus to the Maximum HP
+### Temporary Bonus to the Maximum HP
 E.g. An Item or Spell which temporarily increases a character's Max HP (e.g. Aid).
 
 | Attribute Key | Change Mode | Effect Value |
 | -------- | -------- | -------- |
 | `system.attributes.hp.tempmax`     | Add     | `+[number]`     |
 
-#### Bonus to the Maximum HP
+### Bonus to the Maximum HP
 E.g. An Item or Feature which increases a character's Max HP.
 
 | Attribute Key | Change Mode | Effect Value |
 | -------- | -------- | -------- |
 | `system.attributes.hp.bonuses.overall`     | Add     | `+[number/formula]`     |
 
-#### Bonus HP for each Character Level
+### Bonus HP for each Character Level
 E.g. An effect that provides a bonus to the HP a character gains for each Level they acquire (e.g. Tough).
 
 | Attribute Key | Change Mode | Effect Value |
