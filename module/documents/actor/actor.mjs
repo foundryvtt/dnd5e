@@ -266,8 +266,9 @@ export default class Actor5e extends Actor {
       if ( item.type === "class" ) {
         const classLevels = parseInt(item.system.levels) || 1;
         this.system.details.level += classLevels;
-        this.system.attributes.hd.amount += classLevels - (parseInt(item.system.hitDiceUsed) || 0);
-        hd.add(Number(item.system.hitDice.replace("d", "")));
+        const available = classLevels - (parseInt(item.system.hitDiceUsed) || 0);
+        this.system.attributes.hd.amount += available;
+        if ( available > 0 ) hd.add(Number(item.system.hitDice.replace("d", "")));
       }
 
       // Attuned items
@@ -277,8 +278,8 @@ export default class Actor5e extends Actor {
     }
 
     // Smallest, largest hit dice.
-    this.system.attributes.hd.smallest = hd.size ? `d${Math.min(...hd)}` : null;
-    this.system.attributes.hd.largest = hd.size ? `d${Math.max(...hd)}` : null;
+    this.system.attributes.hd.smallest = hd.size ? Math.min(...hd) : null;
+    this.system.attributes.hd.largest = hd.size ? Math.max(...hd) : null;
 
     // Character proficiency bonus
     this.system.attributes.prof = Proficiency.calculateMod(this.system.details.level);
