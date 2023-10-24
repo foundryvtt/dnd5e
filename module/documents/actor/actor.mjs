@@ -258,15 +258,16 @@ export default class Actor5e extends Actor {
    */
   _prepareCharacterData() {
     this.system.details.level = 0;
-    this.system.attributes.hd = 0;
+    this.system.attributes.hd = {amount: 0};
     this.system.attributes.attunement.value = 0;
-
+    const hd = new Set();
     for ( const item of this.items ) {
       // Class levels & hit dice
       if ( item.type === "class" ) {
         const classLevels = parseInt(item.system.levels) || 1;
         this.system.details.level += classLevels;
-        this.system.attributes.hd += classLevels - (parseInt(item.system.hitDiceUsed) || 0);
+        this.system.attributes.hd.amount += classLevels - (parseInt(item.system.hitDiceUsed) || 0);
+        hd.add(Number(item.system.hitDice.replace("d", "")));
       }
 
       // Attuned items
@@ -274,6 +275,10 @@ export default class Actor5e extends Actor {
         this.system.attributes.attunement.value += 1;
       }
     }
+
+    // Smallest, largest hit dice.
+    this.system.attributes.hd.smallest = hd.size ? `d${Math.min(...hd)}` : null;
+    this.system.attributes.hd.largest = hd.size ? `d${Math.max(...hd)}` : null;
 
     // Character proficiency bonus
     this.system.attributes.prof = Proficiency.calculateMod(this.system.details.level);
@@ -1879,7 +1884,7 @@ export default class Actor5e extends Actor {
     if ( Hooks.call("dnd5e.preShortRest", this, config) === false ) return;
 
     // Take note of the initial hit points and number of hit dice the Actor has
-    const hd0 = this.system.attributes.hd;
+    const hd0 = this.system.attributes.hd.amount;
     const hp0 = this.system.attributes.hp.value;
 
     // Display a Dialog for rolling hit dice
@@ -1892,7 +1897,7 @@ export default class Actor5e extends Actor {
     else if ( config.autoHD ) await this.autoSpendHitDice({ threshold: config.autoHDThreshold });
 
     // Return the rest result
-    const dhd = this.system.attributes.hd - hd0;
+    const dhd = this.system.attributes.hd.amount - hd0;
     const dhp = this.system.attributes.hp.value - hp0;
     return this._rest(config.chat, config.newDay, false, dhd, dhp);
   }

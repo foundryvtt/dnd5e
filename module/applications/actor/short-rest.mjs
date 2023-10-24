@@ -48,7 +48,7 @@ export default class ShortRestDialog extends Dialog {
       }
       return hd;
     }, {});
-    data.canRoll = this.actor.system.attributes.hd > 0;
+    data.canRoll = this.actor.system.attributes.hd.amount > 0;
     data.denomination = this._denom;
 
     // Determine rest type
