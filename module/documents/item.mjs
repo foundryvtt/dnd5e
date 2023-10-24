@@ -767,6 +767,7 @@ export default class Item5e extends Item {
    * @property {boolean} consumeSpellSlot           Should this item (a spell) consume a spell slot?
    * @property {boolean} consumeUsage               Should this item consume its limited uses or recharge?
    * @property {string|number|null} slotLevel       The spell slot type or level to consume by default.
+   * @property {number|null} resourceAmount         The amount to consume by default when scaling with resource consumption.
    */
 
   /**

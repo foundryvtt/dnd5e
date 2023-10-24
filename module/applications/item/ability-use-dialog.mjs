@@ -126,7 +126,7 @@ export default class AbilityUseDialog extends Dialog {
   /**
    * Create an object of resource consumption options for a select.
    * @param {Item5e} item     The item doing the thing with the consuming of stuff and such.
-   * @returns {object|null}   Object of select options, or null if the item does not scale with resources.
+   * @returns {object|null}   Object of select options, or null if the item does not or cannot scale with resources.
    * @private
    */
   static _createResourceOptions(item) {
