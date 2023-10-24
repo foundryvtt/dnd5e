@@ -167,7 +167,6 @@ export default class AbilityUseDialog extends Dialog {
           prop = target.system.attributes.hd;
         } else {
           prop = Object.values(item.actor.classes ?? {}).reduce((acc, cls) => {
-            console.warn(cls.system.hitDice, consume.target, cls.system.levels, cls.system.hitDiceUsed);
             if ( cls.system.hitDice !== consume.target ) return acc;
             const hd = cls.system.levels - cls.system.hitDiceUsed;
             return acc + hd;
