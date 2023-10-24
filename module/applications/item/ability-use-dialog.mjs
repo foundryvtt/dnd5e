@@ -162,16 +162,27 @@ export default class AbilityUseDialog extends Dialog {
       }
       case "hitDice": {
         target = item.actor;
-        prop = target.system.attributes.hd;
+        if ( ["smallest", "largest"].includes(consume.target) ) {
+          label = game.i18n.localize(`DND5E.ConsumeHitDice${consume.target.capitalize()}Long`);
+          prop = target.system.attributes.hd;
+        } else {
+          prop = Object.values(item.actor.classes ?? {}).reduce((acc, cls) => {
+            console.warn(cls.system.hitDice, consume.target, cls.system.levels, cls.system.hitDiceUsed);
+            if ( cls.system.hitDice !== consume.target ) return acc;
+            const hd = cls.system.levels - cls.system.hitDiceUsed;
+            return acc + hd;
+          }, 0);
+          label = `${game.i18n.localize("DND5E.HitDice")} (${consume.target})`;
+        }
         break;
       }
     }
 
-    if(!target) return null;
+    if (!target) return null;
 
     const max = Math.min(cap, prop);
     const range = Array.fromRange(max, 1).reduce((acc, n) => {
-      if ( n >= min ) acc[n] = `[${n} / ${prop}] (${label ?? consume.target})`;
+      if ( n >= min ) acc[n] = `[${n}/${prop}] ${label ?? consume.target}`;
       return acc;
     }, {});
 
