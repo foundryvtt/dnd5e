@@ -36,6 +36,20 @@ export default class PhysicalItemTemplate extends SystemDataModel {
   }
 
   /* -------------------------------------------- */
+  /*  Getters                                     */
+  /* -------------------------------------------- */
+
+  /**
+   * Get a human-readable label for the price and denomination.
+   * @type {string}
+   */
+  get priceLabel() {
+    const { value, denomination } = this.price;
+    const hasPrice = value && (denomination in CONFIG.DND5E.currencies);
+    return hasPrice ? `${value} ${game.i18n.localize(CONFIG.DND5E.currencies[denomination].label)}` : null;
+  }
+
+  /* -------------------------------------------- */
   /*  Migrations                                  */
   /* -------------------------------------------- */
 
