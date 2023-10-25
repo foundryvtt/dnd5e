@@ -11,7 +11,7 @@ export function registerCustomEnrichers() {
   });
 
   CONFIG.TextEditor.enrichers.push({
-    pattern: /@(?<type>Reference){(?<config>[^}]+)}(?:{(?<label>[^}]+)})?/gi,
+    pattern: /@(?<type>Reference)\[(?<config>[^}]+)](?:{(?<label>[^}]+)})?/gi,
     enricher: enrichString
   });
 
@@ -194,7 +194,7 @@ export async function enrichCheck(config, label, options) {
  * @returns {Promise<HTMLElement|null>}  A HTML link if the rule was found, otherwise null.
  *
  * @example Convert a reference to a condition into a link to its journal entry:
- * `@Reference{condition=prone}`
+ * `@Reference[condition=prone]`
  * becomes
  * ```html
  * <a class="content-link reference" draggable="true" data-uuid="Compendium.dnd5e.rules.w7eitkpD7QQTB6j0">
@@ -215,6 +215,12 @@ export async function enrichReference(config, label, options) {
   const uuid = foundry.utils.getType(typeConfig) === "string" ? typeConfig : typeConfig.reference;
   const link = await TextEditor._createContentLink(["", "UUID", uuid], options);
   link.classList.add("reference-link");
+
+  if ( label ) {
+    const icon = link.querySelector("i");
+    link.innerHTML = `${icon.outerHTML}${label}`;
+  }
+
   return link;
 }
 
