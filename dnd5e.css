@@ -1045,6 +1045,9 @@ h5 {
   height: 20px;
   line-height: 20px;
 }
+.dnd5e.sheet.actor .counters .counter label {
+  cursor: pointer;
+}
 .dnd5e.sheet.actor .counters .counter h4 {
   flex: auto;
   margin: 0;
