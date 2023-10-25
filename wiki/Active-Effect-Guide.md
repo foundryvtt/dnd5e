@@ -221,7 +221,7 @@ E.g. An Item or Spell which adds something to the Actor's current AC for the dur
 
 | Attribute Key | Change Mode | Effect Value |
 | -------- | -------- | -------- |
-| `system.attributes.ac.bonus`     | Add     | `+[number]`     |
+| `system.attributes.ac.bonus`     | Add     | `+[number/formula]`     |
 
 
 
