@@ -231,8 +231,6 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
         return this.actor.rollDeathSave({event: event});
       case "rollInitiative":
         return this.actor.rollInitiativeDialog({event});
-      case "toggleInspiration":
-        return this.actor.update({"system.attributes.inspiration": !this.actor.system.attributes.inspiration});
     }
   }
 
