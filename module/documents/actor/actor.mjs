@@ -222,7 +222,8 @@ export default class Actor5e extends Actor {
   _prepareBaseArmorClass() {
     const ac = this.system.attributes.ac;
     ac.armor = 10;
-    ac.shield = ac.bonus = ac.cover = 0;
+    ac.shield = ac.cover = 0;
+    ac.bonus = "";
   }
 
   /* -------------------------------------------- */
@@ -472,6 +473,7 @@ export default class Actor5e extends Actor {
       else obj.armors.push(equip);
       return obj;
     }, {armors: [], shields: []});
+    const rollData = this.getRollData({ deterministic: true });
 
     // Determine base AC
     switch ( ac.calc ) {
@@ -500,7 +502,6 @@ export default class Actor5e extends Actor {
         }
         else ac.dex = this.system.abilities.dex?.mod ?? 0;
 
-        const rollData = this.getRollData({ deterministic: true });
         rollData.attributes.ac = ac;
         try {
           const replaced = Roll.replaceFormulaData(formula, rollData);
@@ -525,6 +526,7 @@ export default class Actor5e extends Actor {
     }
 
     // Compute total AC and return
+    ac.bonus = simplifyBonus(ac.bonus, rollData);
     ac.value = ac.base + ac.shield + ac.bonus + ac.cover;
   }
 
