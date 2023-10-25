@@ -144,7 +144,7 @@ DND5E.skills = {
   prf: { label: "DND5E.SkillPrf", ability: "cha", fullKey: "performance" },
   per: { label: "DND5E.SkillPer", ability: "cha", fullKey: "persuasion" },
   rel: { label: "DND5E.SkillRel", ability: "int", fullKey: "religion" },
-  slt: { label: "DND5E.SkillSlt", ability: "dex", fullKey: "slightOfHand" },
+  slt: { label: "DND5E.SkillSlt", ability: "dex", fullKey: "sleightOfHand" },
   ste: { label: "DND5E.SkillSte", ability: "dex", fullKey: "stealth" },
   sur: { label: "DND5E.SkillSur", ability: "wis", fullKey: "survival" }
 };
@@ -1982,15 +1982,15 @@ DND5E.advancementTypes = {
 
 /* -------------------------------------------- */
 
-let enrichmentLookup;
+let _enrichmentLookup;
 Object.defineProperty(DND5E, "enrichmentLookup", {
   get() {
-    if ( !enrichmentLookup ) {
-      enrichmentLookup = { abilities: DND5E.abilities, skills: DND5E.skills, tools: DND5E.toolIds };
-      Object.values(DND5E.abilities).forEach(a => enrichmentLookup.abilities[a.fullKey] = a);
-      Object.values(DND5E.skills).forEach(s => enrichmentLookup.skills[s.fullKey] = s);
+    if ( !_enrichmentLookup ) {
+      _enrichmentLookup = { abilities: DND5E.abilities, skills: DND5E.skills, tools: DND5E.toolIds };
+      Object.values(DND5E.abilities).forEach(a => _enrichmentLookup.abilities[a.fullKey] = a);
+      Object.values(DND5E.skills).forEach(s => _enrichmentLookup.skills[s.fullKey] = s);
     }
-    return enrichmentLookup;
+    return _enrichmentLookup;
   },
   enumerable: true
 });

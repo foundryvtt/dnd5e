@@ -173,13 +173,7 @@ export async function enrichCheck(config, label, options) {
     }
   }
 
-  if ( config.passive ) {
-    const span = document.createElement("span");
-    span.classList.add("passive-check");
-    span.innerText = label;
-    return span;
-  }
-
+  if ( config.passive ) return createPassiveTag(label, config);
   const type = config.skill ? "skill" : config.tool ? "tool" : "check";
   return createRollLink(label, { type, ...config });
 }
@@ -242,6 +236,37 @@ export async function enrichSave(config, label, options) {
 /* -------------------------------------------- */
 
 /**
+ * Add a dataset object to the provided element.
+ * @param {HTMLElement} element  Element to modify.
+ * @param {object} dataset       Data properties to add.
+ * @private
+ */
+function _addDataset(element, dataset) {
+  for ( const [key, value] of Object.entries(dataset) ) {
+    if ( value ) element.dataset[key] = value;
+  }
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Create a passive skill tag.
+ * @param {string} label    Label to display.
+ * @param {object} dataset  Data that will be added to the tag.
+ * @returns {HTMLElement}
+ */
+export function createPassiveTag(label, dataset) {
+  delete dataset.input;
+  const span = document.createElement("span");
+  span.classList.add("passive-check");
+  _addDataset(span, dataset);
+  span.innerText = label;
+  return span;
+}
+
+/* -------------------------------------------- */
+
+/**
  * Create a rollable link.
  * @param {string} label    Label to display.
  * @param {object} dataset  Data that will be added to the link for the rolling method.
@@ -251,9 +276,7 @@ export function createRollLink(label, dataset) {
   delete dataset.input;
   const link = document.createElement("a");
   link.classList.add("roll-link");
-  for ( const [key, value] of Object.entries(dataset) ) {
-    if ( value ) link.dataset[key] = value;
-  }
+  _addDataset(link, dataset);
   link.innerHTML = `<i class="fa-solid fa-dice-d20"></i> ${label}`;
   return link;
 }
