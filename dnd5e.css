@@ -1961,6 +1961,13 @@ h5 {
   column-count: 3;
 }
 /* ----------------------------------------- */
+/*  Journal Styles                           */
+/* ----------------------------------------- */
+.passive-check {
+  text-decoration: underline;
+  text-decoration-style: dotted;
+}
+/* ----------------------------------------- */
 /*  Journal Pages                            */
 /* ----------------------------------------- */
 .journal-editor {
@@ -2012,7 +2019,7 @@ h5 {
   border-bottom: 1px solid var(--color-border-light-secondary);
 }
 /* ----------------------------------------- */
-/*  Chat Cards
+/*  Chat Cards                               */
 /* ----------------------------------------- */
 .dnd5e.chat-card {
   font-style: normal;
@@ -2097,6 +2104,21 @@ h5 {
 }
 .dice-roll .dice-total.fumble {
   color: red;
+}
+/* ----------------------------------------- */
+/*  Inline Roll Actions                      */
+/* ----------------------------------------- */
+a.roll-link {
+  background: #DDD;
+  padding: 1px 4px;
+  border: 1px solid var(--color-border-dark-tertiary);
+  border-radius: 2px;
+  white-space: nowrap;
+  word-break: break-all;
+}
+a.roll-link i {
+  color: var(--color-text-dark-inactive);
+  margin-inline-end: 0.25em;
 }
 /* ----------------------------------------- */
 /*  Basic Structure                          */

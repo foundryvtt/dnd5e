@@ -18,6 +18,7 @@ import * as canvas from "./module/canvas/_module.mjs";
 import * as dataModels from "./module/data/_module.mjs";
 import * as dice from "./module/dice/_module.mjs";
 import * as documents from "./module/documents/_module.mjs";
+import * as enrichers from "./module/enrichers.mjs";
 import * as migrations from "./module/migration.mjs";
 import * as utils from "./module/utils.mjs";
 import {ModuleArt} from "./module/module-art.mjs";
@@ -33,6 +34,7 @@ globalThis.dnd5e = {
   dataModels,
   dice,
   documents,
+  enrichers,
   migrations,
   utils
 };
@@ -126,6 +128,8 @@ Hooks.once("init", function() {
   // Preload Handlebars helpers & partials
   utils.registerHandlebarsHelpers();
   utils.preloadHandlebarsTemplates();
+
+  enrichers.registerCustomEnrichers();
 });
 
 /**
@@ -324,6 +328,7 @@ export {
   dataModels,
   dice,
   documents,
+  enrichers,
   migrations,
   utils,
   DND5E
