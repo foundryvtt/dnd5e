@@ -19,6 +19,7 @@ import PropertyAttribution from "../property-attribution.mjs";
 import TraitSelector from "./trait-selector.mjs";
 import ProficiencyConfig from "./proficiency-config.mjs";
 import ToolSelector from "./tool-selector.mjs";
+import { simplifyBonus } from "../../utils.mjs";
 
 /**
  * Extend the basic ActorSheet class to suppose system-specific logic and functionality.
@@ -292,14 +293,15 @@ export default class ActorSheet5e extends ActorSheet {
    * @protected
    */
   _prepareActiveEffectAttributions(target) {
+    const rollData = this.actor.getRollData({deterministic: true});
     return this.actor.effects.reduce((arr, e) => {
       let source = e.sourceName;
       if ( e.origin === this.actor.uuid ) source = e.label;
       if ( !source || e.disabled || e.isSuppressed ) return arr;
       const value = e.changes.reduce((n, change) => {
-        if ( (change.key !== target) || !Number.isNumeric(change.value) ) return n;
+        if ( change.key !== target ) return n;
         if ( change.mode !== CONST.ACTIVE_EFFECT_MODES.ADD ) return n;
-        return n + Number(change.value);
+        return n + simplifyBonus(change.value, rollData);
       }, 0);
       if ( !value ) return arr;
       arr.push({value, label: source, mode: CONST.ACTIVE_EFFECT_MODES.ADD});
