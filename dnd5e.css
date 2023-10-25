@@ -1047,6 +1047,11 @@ h5 {
 }
 .dnd5e.sheet.actor .counters .counter label {
   cursor: pointer;
+  align-items: center;
+}
+.dnd5e.sheet.actor .counters .counter label input[type=checkbox] {
+  top: unset;
+  flex: none;
 }
 .dnd5e.sheet.actor .counters .counter h4 {
   flex: auto;

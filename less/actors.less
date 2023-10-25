@@ -380,7 +380,14 @@
       height: 20px;
       line-height: 20px;
 
-      label { cursor: pointer; }
+      label {
+        cursor: pointer;
+        align-items: center;
+        input[type=checkbox] {
+          top: unset;
+          flex: none;
+        }
+      }
 
       h4 {
         flex: auto;
