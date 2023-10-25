@@ -132,8 +132,7 @@ export default class Actor5e extends Actor {
 
   /** @inheritDoc */
   prepareDerivedData() {
-    if ( !game.template.Actor.types.includes(this.type) ) return;
-    if ( this.type === "group" ) return;
+    if ( !game.template.Actor.types.includes(this.type) || (this.type === "group") ) return;
 
     const flags = this.flags.dnd5e || {};
     this.labels = {};
