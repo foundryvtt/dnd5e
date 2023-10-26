@@ -1,7 +1,7 @@
 import BaseConfigSheet from "./base-config.mjs";
 
 /**
- * Interface for managing a character's armor calculation.
+ * Interface for managing a character's resources.
  */
 export default class ResourceConfig extends BaseConfigSheet {
   constructor(...args) {

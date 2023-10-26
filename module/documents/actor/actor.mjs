@@ -631,8 +631,8 @@ export default class Actor5e extends Actor {
   /* -------------------------------------------- */
 
   /**
-   * Prepare the maximum for a character.
-   * Mutates the max value of the system.resources objects.
+   * Prepare the maximum value of each resource for a character.
+   * Mutates the max values of the system.resources objects.
    * @param {object} rollData     Data produced by getRollData.
    * @protected
    */
