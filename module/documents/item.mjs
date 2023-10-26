@@ -125,6 +125,8 @@ export default class Item5e extends Item {
     return this.system.hasLimitedUses ?? false;
   }
 
+  /* -------------------------------------------- */
+
   /**
    * Does this Item draw from a resource?
    * @type {boolean}
@@ -132,6 +134,17 @@ export default class Item5e extends Item {
    */
   get hasResource() {
     return this.system.hasResource ?? false;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Does this Item draw from ammunition?
+   * @type {boolean}
+   * @see {@link ActivatedEffectTemplate#hasAmmo}
+   */
+  get hasAmmo() {
+    return this.system.hasAmmo ?? false;
   }
 
   /* -------------------------------------------- */
@@ -1279,19 +1292,14 @@ export default class Item5e extends Item {
     if ( options.spellLevel ) rollData.item.level = options.spellLevel;
 
     // Handle ammunition consumption
-    delete this._ammo;
-    let ammo = null;
     let ammoUpdate = [];
     const consume = this.system.consume;
-    if ( consume?.type === "ammo" ) {
-      ammo = this.actor.items.get(consume.target);
-      if ( ammo?.system ) {
-        const q = ammo.system.quantity;
-        const consumeAmount = consume.amount ?? 0;
-        if ( q && (q - consumeAmount >= 0) ) {
-          this._ammo = ammo;
-          title += ` [${ammo.name}]`;
-        }
+    const ammo = this.hasAmmo ? this.actor.items.get(consume.target) : null;
+    if ( ammo ) {
+      const q = ammo.system.quantity;
+      const consumeAmount = consume.amount ?? 0;
+      if ( q && (q - consumeAmount >= 0) ) {
+        title += ` [${ammo.name}]`;
       }
 
       // Get pending ammunition update
@@ -1426,11 +1434,11 @@ export default class Item5e extends Item {
     }
 
     // Only add the ammunition damage if the ammunition is a consumable with type 'ammo'
-    if ( this._ammo && (this._ammo.type === "consumable") && (this._ammo.system.consumableType === "ammo") ) {
+    const ammo = this.hasAmmo ? this.actor.items.get(this.system.consume.target) : null;
+    if ( ammo ) {
       parts.push("@ammo");
-      rollData.ammo = this._ammo.system.damage.parts.map(p => p[0]).join("+");
-      rollConfig.flavor += ` [${this._ammo.name}]`;
-      delete this._ammo;
+      rollData.ammo = ammo.system.damage.parts.map(p => p[0]).join("+");
+      rollConfig.flavor += ` [${ammo.name}]`;
     }
 
     // Factor in extra critical damage dice from the Barbarian's "Brutal Critical"

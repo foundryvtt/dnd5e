@@ -220,6 +220,8 @@ export default class ActivatedEffectTemplate extends SystemDataModel {
     return !!this.activation.type;
   }
 
+  /* -------------------------------------------- */
+
   /**
    * Does the Item have an area of effect target?
    * @type {boolean}
@@ -248,6 +250,8 @@ export default class ActivatedEffectTemplate extends SystemDataModel {
     return this.isActive && (this.uses.per in CONFIG.DND5E.limitedUsePeriods) && (this.uses.max > 0);
   }
 
+  /* -------------------------------------------- */
+
   /**
    * Does this Item draw from a resource?
    * @type {boolean}
@@ -255,6 +259,17 @@ export default class ActivatedEffectTemplate extends SystemDataModel {
   get hasResource() {
     const consume = this.consume;
     return this.isActive && !!consume.target && !!consume.type && (!this.hasAttack || (consume.type !== "ammo"));
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Does this Item draw from ammunition?
+   * @type {boolean}
+   */
+  get hasAmmo() {
+    const consume = this.consume;
+    return this.isActive && !!consume.target && !!consume.type && this.hasAttack && (consume.type === "ammo");
   }
 
   /* -------------------------------------------- */
