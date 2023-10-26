@@ -24,10 +24,12 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
 
     // Resources
     context.resources = ["primary", "secondary", "tertiary"].reduce((arr, r) => {
-      const res = foundry.utils.mergeObject(context.actor.system.resources[r], {
+      const res = foundry.utils.mergeObject(context.actor.system.resources[r] || {}, {
         name: r,
         placeholder: game.i18n.localize(`DND5E.Resource${r.titleCase()}`)
       }, {inplace: false});
+      if ( res.value === 0 ) delete res.value;
+      if ( res.max === 0 ) delete res.max;
       return arr.concat([res]);
     }, []);
 
