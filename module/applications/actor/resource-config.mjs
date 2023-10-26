@@ -61,7 +61,7 @@ export default class ResourceConfig extends BaseConfigSheet {
 
   /** @inheritdoc */
   async _updateObject(event, formData) {
-    const res = foundry.utils.expandObject(formData).resources;
+    const res = foundry.utils.expandObject(formData);
     return this.document.update({"system.resources": res});
   }
 
@@ -76,7 +76,7 @@ export default class ResourceConfig extends BaseConfigSheet {
 
     // Update clone with new data & re-render
     const value = (target.type === "checkbox") ? target.checked : target.value;
-    this.clone.updateSource({ [`system.${target.name}`]: value });
+    this.clone.updateSource({ [`system.resources.${target.name}`]: value });
     this.clone.prepareData();
     this.render();
   }

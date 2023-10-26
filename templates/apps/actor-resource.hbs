@@ -3,14 +3,14 @@
     <div class="form-group">
       <label>{{localize displayLabel}} ({{max}})</label>
       <div class="form-fields">
-        <input type="text" name="resources.{{key}}.label" value="{{label}}" placeholder="{{localize displayLabel}}">
-        <input type="text" class="resource-max" name="resources.{{key}}.max" value="{{src.max}}" placeholder="{{localize 'DND5E.Max'}}">
+        <input type="text" name="{{key}}.label" value="{{label}}" placeholder="{{localize displayLabel}}">
+        <input type="text" class="resource-max" name="{{key}}.max" value="{{src.max}}" placeholder="{{localize 'DND5E.Max'}}">
         <label class="checkbox">
-          <input type="checkbox" name="resources.{{key}}.sr" {{checked sr}}>
+          <input type="checkbox" name="{{key}}.sr" {{checked sr}}>
           {{localize "DND5E.AbbreviationSR"}}
         </label>
         <label class="checkbox">
-          <input type="checkbox" name="resources.{{key}}.lr" {{checked lr}}>
+          <input type="checkbox" name="{{key}}.lr" {{checked lr}}>
           {{localize "DND5E.AbbreviationLR"}}
         </label>
       </div>
