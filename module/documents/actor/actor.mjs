@@ -161,6 +161,7 @@ export default class Actor5e extends Actor {
     this._prepareHitPoints(rollData);
     this._prepareInitiative(rollData, checkBonus);
     this._prepareSpellcasting();
+    this._prepareResources(rollData);
   }
 
   /* -------------------------------------------- */
@@ -625,6 +626,19 @@ export default class Actor5e extends Actor {
     init.total = init.mod + initBonus + abilityBonus + globalCheckBonus
       + (flags.initiativeAlert ? 5 : 0)
       + (Number.isNumeric(init.prof.term) ? init.prof.flat : 0);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare the maximum for a character.
+   * Mutates the max value of the system.resources objects.
+   * @param {object} rollData     Data produced by getRollData.
+   * @protected
+   */
+  _prepareResources(rollData) {
+    if ( this.type !== "character" ) return;
+    Object.values(this.system.resources).forEach(res => res.max = simplifyBonus(res.max, rollData));
   }
 
   /* -------------------------------------------- */

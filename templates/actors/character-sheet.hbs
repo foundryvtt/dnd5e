@@ -211,19 +211,14 @@
                     {{#each resources as |res|}}
                     <li class="attribute resource">
                         <h4 class="attribute-name box-title">
-                            <input name="system.resources.{{res.name}}.label" type="text" value="{{res.label}}"
-                                   placeholder="{{res.placeholder}}" />
+                            {{#if res.label}}{{res.label}}{{else}}{{res.placeholder}}{{/if}}
                         </h4>
+                        <a class="config-button" data-action="resource" data-tooltip="DND5E.ResourceConfig">
+                            <i class="fas fa-cog"></i>
+                        </a>
                         <div class="attribute-value">
-                            <label class="recharge checkbox flexcol">
-                                <span>{{ localize "DND5E.AbbreviationSR" }}</span><input name="system.resources.{{res.name}}.sr" type="checkbox" {{checked res.sr}}/>
-                            </label>
                             <input type="text" name="system.resources.{{res.name}}.value" value="{{res.value}}" placeholder="0" data-dtype="Number">
-                            <span class="sep"> / </span>
-                            <input type="text" name="system.resources.{{res.name}}.max" value="{{res.max}}" placeholder="0" data-dtype="Number">
-                            <label class="recharge checkbox flexcol">
-                                <span>{{ localize "DND5E.AbbreviationLR" }}</span><input name="system.resources.{{res.name}}.lr" type="checkbox" {{checked res.lr}}/>
-                            </label>
+                            <span class="sep"> / {{#if res.max}}{{res.max}}{{else}}0{{/if}}</span>
                         </div>
                     </li>
                     {{/each}}

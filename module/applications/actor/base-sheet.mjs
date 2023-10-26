@@ -19,6 +19,7 @@ import PropertyAttribution from "../property-attribution.mjs";
 import TraitSelector from "./trait-selector.mjs";
 import ProficiencyConfig from "./proficiency-config.mjs";
 import ToolSelector from "./tool-selector.mjs";
+import ResourceConfig from "./resource-config.mjs";
 
 /**
  * Extend the basic ActorSheet class to suppose system-specific logic and functionality.
@@ -929,6 +930,10 @@ export default class ActorSheet5e extends ActorSheet {
       case "tool": {
         const tool = event.currentTarget.closest("[data-key]").dataset.key;
         app = new ProficiencyConfig(this.actor, {property: "tools", key: tool});
+        break;
+      }
+      case "resource": {
+        app = new ResourceConfig(this.actor);
         break;
       }
     }

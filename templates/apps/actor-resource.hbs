@@ -1,0 +1,23 @@
+<form>
+    {{#each resources}}
+    <div class="form-group">
+      <label>{{localize displayLabel}} ({{max}})</label>
+      <div class="form-fields">
+        <input type="text" name="resources.{{key}}.label" value="{{label}}" placeholder="{{localize displayLabel}}">
+        <input type="text" class="resource-max" name="resources.{{key}}.max" value="{{src.max}}" placeholder="{{localize 'DND5E.Max'}}">
+        <label class="checkbox">
+          <input type="checkbox" name="resources.{{key}}.sr" {{checked sr}}>
+          {{localize "DND5E.AbbreviationSR"}}
+        </label>
+        <label class="checkbox">
+          <input type="checkbox" name="resources.{{key}}.lr" {{checked lr}}>
+          {{localize "DND5E.AbbreviationLR"}}
+        </label>
+      </div>
+    </div>
+    {{/each}}
+
+    <button type="submit">
+        <i class="far fa-save"></i> {{ localize "DND5E.TraitSave" }}
+    </button>
+</form>

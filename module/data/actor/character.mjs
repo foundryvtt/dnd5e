@@ -150,8 +150,8 @@ function makeResourceField(schemaOptions={}) {
     value: new foundry.data.fields.NumberField({
       required: true, integer: true, initial: 0, labels: "DND5E.ResourceValue"
     }),
-    max: new foundry.data.fields.NumberField({
-      required: true, integer: true, initial: 0, labels: "DND5E.ResourceMax"
+    max: new FormulaField({
+      deterministic: true, initial: "", labels: "DND5E.ResourceMax"
     }),
     sr: new foundry.data.fields.BooleanField({required: true, labels: "DND5E.ShortRestRecovery"}),
     lr: new foundry.data.fields.BooleanField({required: true, labels: "DND5E.LongRestRecovery"}),

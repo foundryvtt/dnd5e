@@ -89,25 +89,22 @@
   /* ----------------------------------------- */
 
   // Custom Resources
-  .resource .attribute-value {
-    > input {
-      flex: 0 0 25%;
+  .resource {
+    position: relative;
+
+    .config-button {
+      display: none;
+      position: absolute;
+      padding: 4px;
+      right: 0;
+      top: 0;
     }
-    label.recharge {
-      height: 32px;
-      position: relative;
-      font-family: "Signika", sans-serif;
-      font-size: 11px;
-      text-align: center;
-      color: @colorOlive;
-      align-items: center;
-      input[type="checkbox"] {
-        flex-basis: 14px;
-        height: 14px;
-        width: 14px;
-        margin: 0;
-        top: -6px;
-      }
+    &:hover .config-button {
+      display: block;
+    }
+
+    .attribute-value > input {
+      flex: 0 0 25%;
     }
   }
 
