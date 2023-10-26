@@ -4,7 +4,9 @@
     {{#if customPath}}
         <div class="form-group stacked">
             <label>{{localize "DND5E.TraitSelectorSpecial"}}</label>
-            <input type="text" name="{{customPath}}" value="{{custom}}">
+            <div class="form-fields">
+                <input type="text" name="{{customPath}}" value="{{custom}}">
+            </div>
         </div>
     {{/if}}
 
