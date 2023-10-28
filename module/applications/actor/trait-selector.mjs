@@ -67,7 +67,7 @@ export default class TraitSelector extends BaseConfigSheet {
 
     return {
       ...super.getData(),
-      choices: await Trait.choices(this.trait, data.value),
+      choices: await Trait.choices(this.trait, { chosen: data.value }),
       custom: data.custom,
       customPath: "custom" in data ? `${path}.custom` : null,
       bypasses: "bypasses" in data ? Object.entries(CONFIG.DND5E.physicalWeaponProperties).reduce((obj, [k, v]) => {
