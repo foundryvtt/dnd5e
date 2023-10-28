@@ -1683,38 +1683,62 @@ DND5E.conditionTypes = {
 };
 preLocalize("conditionTypes", { sort: true });
 
+/* -------------------------------------------- */
+/*  Languages                                   */
+/* -------------------------------------------- */
+
 /**
  * Languages a character can learn.
  * @enum {string}
  */
 DND5E.languages = {
-  common: "DND5E.LanguagesCommon",
-  aarakocra: "DND5E.LanguagesAarakocra",
-  abyssal: "DND5E.LanguagesAbyssal",
-  aquan: "DND5E.LanguagesAquan",
-  auran: "DND5E.LanguagesAuran",
-  celestial: "DND5E.LanguagesCelestial",
-  deep: "DND5E.LanguagesDeepSpeech",
-  draconic: "DND5E.LanguagesDraconic",
-  druidic: "DND5E.LanguagesDruidic",
-  dwarvish: "DND5E.LanguagesDwarvish",
-  elvish: "DND5E.LanguagesElvish",
-  giant: "DND5E.LanguagesGiant",
-  gith: "DND5E.LanguagesGith",
-  gnomish: "DND5E.LanguagesGnomish",
-  goblin: "DND5E.LanguagesGoblin",
-  gnoll: "DND5E.LanguagesGnoll",
-  halfling: "DND5E.LanguagesHalfling",
-  ignan: "DND5E.LanguagesIgnan",
-  infernal: "DND5E.LanguagesInfernal",
-  orc: "DND5E.LanguagesOrc",
-  primordial: "DND5E.LanguagesPrimordial",
-  sylvan: "DND5E.LanguagesSylvan",
-  terran: "DND5E.LanguagesTerran",
-  cant: "DND5E.LanguagesThievesCant",
-  undercommon: "DND5E.LanguagesUndercommon"
+  standard: {
+    label: "DND5E.LanguagesStandard",
+    children: {
+      common: "DND5E.LanguagesCommon",
+      dwarvish: "DND5E.LanguagesDwarvish",
+      elvish: "DND5E.LanguagesElvish",
+      giant: "DND5E.LanguagesGiant",
+      gnomish: "DND5E.LanguagesGnomish",
+      goblin: "DND5E.LanguagesGoblin",
+      halfling: "DND5E.LanguagesHalfling",
+      orc: "DND5E.LanguagesOrc"
+    }
+  },
+  exotic: {
+    label: "DND5E.LanguagesExotic",
+    children: {
+      aarakocra: "DND5E.LanguagesAarakocra",
+      abyssal: "DND5E.LanguagesAbyssal",
+      celestial: "DND5E.LanguagesCelestial",
+      deep: "DND5E.LanguagesDeepSpeech",
+      draconic: "DND5E.LanguagesDraconic",
+      druidic: "DND5E.LanguagesDruidic",
+      gith: "DND5E.LanguagesGith",
+      gnoll: "DND5E.LanguagesGnoll",
+      infernal: "DND5E.LanguagesInfernal",
+      primordial: {
+        label: "DND5E.LanguagesPrimordial",
+        children: {
+          aquan: "DND5E.LanguagesAquan",
+          auran: "DND5E.LanguagesAuran",
+          ignan: "DND5E.LanguagesIgnan",
+          terran: "DND5E.LanguagesTerran"
+        }
+      },
+      sylvan: "DND5E.LanguagesSylvan",
+      undercommon: "DND5E.LanguagesUndercommon"
+    }
+  },
+  cant: "DND5E.LanguagesThievesCant"
 };
-preLocalize("languages", { sort: true });
+preLocalize("languages", { key: "label" });
+preLocalize("languages.standard.children", { sort: true });
+preLocalize("languages.exotic.children", { key: "label", sort: true });
+preLocalize("languages.exotic.children.primordial.children", { sort: true });
+patchConfig("languages", "label", { since: "DnD5e 2.4", until: "DnD5e 2.6" });
+
+/* -------------------------------------------- */
 
 /**
  * Maximum allowed character level.
@@ -2063,7 +2087,10 @@ function patchConfig(key, fallbackKey, options) {
     return this[fallbackKey];
   }
 
-  Object.values(DND5E[key]).forEach(o => o.toString = toString);
+  Object.values(DND5E[key]).forEach(o => {
+    if ( foundry.utils.getType(o) !== "Object" ) return;
+    o.toString = toString;
+  });
 }
 
 /* -------------------------------------------- */
