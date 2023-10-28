@@ -1585,13 +1585,16 @@ export default class Actor5e extends Actor {
     // Temporarily cache the configured roll and use it to roll initiative for the Actor
     this._cachedInitiativeRoll = roll;
     await this.rollInitiative({createCombatants: true});
-    delete this._cachedInitiativeRoll;
   }
 
   /* -------------------------------------------- */
 
   /** @inheritdoc */
-  async rollInitiative(options={}) {
+  async rollInitiative(options={}, rollOptions={}) {
+    // Set a _cachedInitiativeRoll if not called from rollInitiativeDialog.
+    if ((this._cachedInitiativeRoll ?? undefined) === undefined) {
+      this._cachedInitiativeRoll = this.getInitiativeRoll(rollOptions);
+    }
     /**
      * A hook event that fires before initiative is rolled for an Actor.
      * @function dnd5e.preRollInitiative
@@ -1616,6 +1619,7 @@ export default class Actor5e extends Actor {
      * @param {Combatant[]} combatants  The associated Combatants in the Combat.
      */
     Hooks.callAll("dnd5e.rollInitiative", this, combatants);
+    delete this._cachedInitiativeRoll;
     return combat;
   }
 
