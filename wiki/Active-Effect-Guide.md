@@ -232,7 +232,7 @@ E.g. An Item or Spell which sets the Actor's AC to `12 + Int` for the duration.
 | Attribute Key | Change Mode | Effect Value |
 | -------- | -------- | -------- |
 | `system.attributes.ac.calc`     | Override     | `custom`     |
-| `system.attributes.ac.formula`     | Custom     | `12 + @abilities.int.mod`     |
+| `system.attributes.ac.formula`     | Override     | `12 + @abilities.int.mod`     |
 
 ---
 
