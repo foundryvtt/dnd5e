@@ -2377,8 +2377,8 @@ export default class Actor5e extends Actor {
         else if ( keepMental && (type === "mental") ) abilities[k] = oa;
 
         // Set saving throw proficiencies.
-        if ( keepSaves ) abilities[k].proficient = oa.proficient;
-        else if ( mergeSaves ) abilities[k].proficient = Math.max(prof, oa.proficient);
+        if ( keepSaves && oa ) abilities[k].proficient = oa.proficient;
+        else if ( mergeSaves && oa ) abilities[k].proficient = Math.max(prof, oa.proficient);
         else abilities[k].proficient = source.system.abilities[k].proficient;
       }
 
@@ -2386,7 +2386,7 @@ export default class Actor5e extends Actor {
       if ( keepSkills ) d.system.skills = o.system.skills;
       else if ( mergeSkills ) {
         for ( let [k, s] of Object.entries(d.system.skills) ) {
-          s.value = Math.max(s.value, o.system.skills[k].value);
+          s.value = Math.max(s.value, o.system.skills[k]?.value ?? 0);
         }
       }
 
