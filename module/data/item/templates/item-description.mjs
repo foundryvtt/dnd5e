@@ -1,4 +1,5 @@
 import SystemDataModel from "../../abstract.mjs";
+import SourceField from "../../shared/source-field.mjs";
 
 /**
  * Data model template with item description & source.
@@ -7,7 +8,7 @@ import SystemDataModel from "../../abstract.mjs";
  * @property {string} description.value         Full item description.
  * @property {string} description.chat          Description displayed in chat card.
  * @property {string} description.unidentified  Description displayed if item is unidentified.
- * @property {string} source                    Adventure or sourcebook where this item originated.
+ * @property {SourceField} source               Adventure or sourcebook where this item originated.
  * @mixin
  */
 export default class ItemDescriptionTemplate extends SystemDataModel {
@@ -21,7 +22,7 @@ export default class ItemDescriptionTemplate extends SystemDataModel {
           required: true, nullable: true, label: "DND5E.DescriptionUnidentified"
         })
       }),
-      source: new foundry.data.fields.StringField({required: true, label: "DND5E.Source"})
+      source: new SourceField()
     };
   }
 
@@ -38,10 +39,11 @@ export default class ItemDescriptionTemplate extends SystemDataModel {
   /* -------------------------------------------- */
 
   /**
-   * Convert null source to the blank string.
+   * Convert source string into custom object.
    * @param {object} source  The candidate source data from which the model will be constructed.
    */
   static #migrateSource(source) {
-    if ( source.source === null ) source.source = "";
+    if ( foundry.utils.getType(source.source) === "Object" ) return;
+    source.source = { custom: source.source };
   }
 }

@@ -1,4 +1,5 @@
 import { FormulaField } from "../fields.mjs";
+import SourceField from "../shared/source-field.mjs";
 import AttributesFields from "./templates/attributes.mjs";
 import CommonTemplate from "./templates/common.mjs";
 import DetailsFields from "./templates/details.mjs";
@@ -37,6 +38,8 @@ import TraitsFields from "./templates/traits.mjs";
  * @property {object} cargo                            Details on this vehicle's crew and cargo capacities.
  * @property {PassengerData[]} cargo.crew              Creatures responsible for operating the vehicle.
  * @property {PassengerData[]} cargo.passengers        Creatures just takin' a ride.
+ * @property {object} details
+ * @property {SourceField} details.source              Adventure or sourcebook where this vehicle originated.
  */
 export default class VehicleData extends CommonTemplate {
 
@@ -99,7 +102,7 @@ export default class VehicleData extends CommonTemplate {
       }, {label: "DND5E.Attributes"}),
       details: new foundry.data.fields.SchemaField({
         ...DetailsFields.common,
-        source: new foundry.data.fields.StringField({required: true, label: "DND5E.Source"})
+        source: new SourceField()
       }, {label: "DND5E.Details"}),
       traits: new foundry.data.fields.SchemaField({
         ...TraitsFields.common,
@@ -124,6 +127,18 @@ export default class VehicleData extends CommonTemplate {
   static _migrateData(source) {
     super._migrateData(source);
     AttributesFields._migrateInitiative(source.attributes);
+    VehicleData.#migrateSource(source);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Convert source string into custom object.
+   * @param {object} source  The candidate source data from which the model will be constructed.
+   */
+  static #migrateSource(source) {
+    if ( !source.details?.source || foundry.utils.getType(source.details.source) === "Object" ) return;
+    source.details.source = { custom: source.details.source };
   }
 }
 
