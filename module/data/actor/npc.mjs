@@ -136,8 +136,9 @@ export default class NPCData extends CreatureTemplate {
    * @param {object} source  The candidate source data from which the model will be constructed.
    */
   static #migrateSource(source) {
-    if ( !source.details?.source || foundry.utils.getType(source.details.source) === "Object" ) return;
-    source.details.source = { custom: source.details.source };
+    if ( source.details?.source && (foundry.utils.getType(source.details.source) !== "Object") ) {
+      source.details.source = { custom: source.details.source };
+    }
   }
 
   /* -------------------------------------------- */

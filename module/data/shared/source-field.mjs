@@ -28,8 +28,9 @@ export default class SourceTemplate extends SchemaField {
 
     Object.defineProperty(obj, "label", {
       get() {
-        // TODO: Implement logic for generating source
-        return this.custom ?? "";
+        if ( this.custom ) return this.custom;
+        // TODO: Improve this logic
+        return this.book ? this.page ? `${this.book} ${this.page}` : this.book : "";
       },
       enumerable: false
     });
