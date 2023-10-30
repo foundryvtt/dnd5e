@@ -27,6 +27,13 @@ export default class RaceData extends SystemDataModel.mixin(ItemDescriptionTempl
   }
 
   /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  static metadata = Object.freeze({
+    singleton: true
+  });
+
+  /* -------------------------------------------- */
   /*  Properties                                  */
   /* -------------------------------------------- */
 
@@ -66,5 +73,21 @@ export default class RaceData extends SystemDataModel.mixin(ItemDescriptionTempl
    */
   get typeLabel() {
     return Actor5e.formatCreatureType(this.type);
+  }
+
+  /* -------------------------------------------- */
+  /*  Socket Event Handlers                       */
+  /* -------------------------------------------- */
+
+  _onCreate(data, options, userId) {
+    if ( (game.user.id !== userId) || this.parent.actor?.type !== "character" ) return;
+    this.parent.actor.update({"system.details.race": this.parent});
+  }
+
+  /* -------------------------------------------- */
+
+  async _preDelete(options, user) {
+    if ( this.parent.actor?.type !== "character" ) return;
+    await this.parent.actor.update({"system.details.race": null});
   }
 }

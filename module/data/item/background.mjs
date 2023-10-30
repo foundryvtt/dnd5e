@@ -15,4 +15,27 @@ export default class BackgroundData extends SystemDataModel.mixin(ItemDescriptio
       advancement: new foundry.data.fields.ArrayField(new AdvancementField(), {label: "DND5E.AdvancementTitle"})
     });
   }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  static metadata = Object.freeze({
+    singleton: true
+  });
+
+  /* -------------------------------------------- */
+  /*  Socket Event Handlers                       */
+  /* -------------------------------------------- */
+
+  _onCreate(data, options, userId) {
+    if ( (game.user.id !== userId) || this.parent.actor?.type !== "character" ) return;
+    this.parent.actor.update({"system.details.background": this.parent});
+  }
+
+  /* -------------------------------------------- */
+
+  async _preDelete(options, user) {
+    if ( this.parent.actor?.type !== "character" ) return;
+    await this.parent.actor.update({"system.details.background": null});
+  }
 }
