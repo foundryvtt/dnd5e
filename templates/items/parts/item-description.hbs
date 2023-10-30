@@ -68,7 +68,7 @@
                     </a>
                 </h3>
             {{/if}}
-            {{editor enriched.description target="system.description.value" editable=false}}
+            {{editor enriched.description target="system.description.value" editable=false engine="prosemirror"}}
         {{/if}}
 
         {{#if (or editable system.description.unidentified)}}
@@ -80,7 +80,7 @@
                     </a>
                 {{/if}}
             </h3>
-            {{editor enriched.unidentified target="system.description.unidentified" editable=false}}
+            {{editor enriched.unidentified target="system.description.unidentified" editable=false engine="prosemirror"}}
         {{/if}}
 
         {{#if (or editable system.description.chat)}}
@@ -92,7 +92,7 @@
                     </a>
                 {{/if}}
             </h3>
-            {{editor enriched.chat target="system.description.chat" editable=false}}
+            {{editor enriched.chat target="system.description.chat" editable=false engine="prosemirror"}}
         {{/if}}
     </div>
 {{/if}}
