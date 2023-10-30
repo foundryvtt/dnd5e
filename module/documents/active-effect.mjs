@@ -125,7 +125,7 @@ export default class ActiveEffect5e extends ActiveEffect {
       case "edit":
         return effect.sheet.render(true);
       case "delete":
-        return effect.delete();
+        return effect.deleteDialog();
       case "toggle":
         return effect.update({disabled: !effect.disabled});
     }
