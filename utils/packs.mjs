@@ -9,12 +9,6 @@ import { compilePack, extractPack } from "@foundryvtt/foundryvtt-cli";
 
 
 /**
- * Parsed arguments passed in through the command line.
- * @type {object}
- */
-const parsedArgs = yargs(process.argv).argv;
-
-/**
  * Folder where the compiled compendium packs should be located relative to the
  * base 5e system folder.
  * @type {string}
@@ -45,7 +39,7 @@ function packageCommand() {
         choices: ["unpack", "pack", "clean"]
       });
       yargs.positional("pack", {
-        describe: "Name of the pack unpon which to work.",
+        describe: "Name of the pack upon which to work.",
         type: "string"
       });
       yargs.positional("entry", {
@@ -61,7 +55,7 @@ function packageCommand() {
       const { action, pack, entry, ...options } = argv;
       switch ( action ) {
         case "clean":
-          return await cleanPacks(pack, entry, options);
+          return await cleanPacks(pack, entry);
         case "pack":
           return await compilePacks(pack, options);
         case "unpack":
@@ -172,28 +166,29 @@ async function cleanPacks(packName, entryName) {
     file.isDirectory() && ( !packName || (packName === file.name) )
   );
 
-  const _loadSources = async (directoryPath, files) => {
+  /**
+   * Walk through directories to find JSON files.
+   * @param {string} directoryPath
+   * @yields {string}
+   */
+  async function* _walkDir(directoryPath) {
     const directory = await readdir(directoryPath, { withFileTypes: true });
     for ( const entry of directory ) {
       const entryPath = path.join(directoryPath, entry.name);
-      if ( entry.isDirectory() ) await _loadSources(entryPath, files);
-      else if ( entryPath.endsWith(".json") ) {
-        const file = await readFile(entryPath, { encoding: "utf8" });
-        files[entryPath] = JSON.parse(file);
-      }
+      if ( entry.isDirectory() ) yield* _walkDir(entryPath);
+      else if ( path.extname(entry.name) === ".json" ) yield entryPath;
     }
-  };
+  }
 
   for ( const folder of folders ) {
     logger.info(`Cleaning pack ${folder.name}`);
-    const files = {};
-    await _loadSources(path.join(PACK_SRC, folder.name), files);
-    for ( const [path, json] of Object.entries(files) ) {
+    for await ( const src of _walkDir(path.join(PACK_SRC, folder.name)) ) {
+      const json = JSON.parse(await readFile(src, { encoding: "utf8" }));
       if ( entryName && (entryName !== json.name.toLowerCase()) ) continue;
       cleanPackEntry(json);
       if ( !json._id ) json._id = await determineId(json, folder.name);
-      fs.rmSync(path, { force: true });
-      writeFile(path, `${JSON.stringify(json, null, 2)}\n`, { mode: 0o664 });
+      fs.rmSync(src, { force: true });
+      writeFile(src, `${JSON.stringify(json, null, 2)}\n`, { mode: 0o664 });
     }
   }
 }
