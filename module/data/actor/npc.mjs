@@ -1,4 +1,5 @@
 import { FormulaField } from "../fields.mjs";
+import SourceField from "../shared/source-field.mjs";
 import AttributesFields from "./templates/attributes.mjs";
 import CreatureTemplate from "./templates/creature.mjs";
 import DetailsFields from "./templates/details.mjs";
@@ -27,7 +28,7 @@ import TraitsFields from "./templates/traits.mjs";
  * @property {string} details.environment        Common environments in which this NPC is found.
  * @property {number} details.cr                 NPC's challenge rating.
  * @property {number} details.spellLevel         Spellcasting level of this NPC.
- * @property {string} details.source             What book or adventure is this NPC from?
+ * @property {SourceField} details.source        Adventure or sourcebook where this NPC originated.
  * @property {object} resources
  * @property {object} resources.legact           NPC's legendary actions.
  * @property {number} resources.legact.value     Currently available legendary actions.
@@ -85,7 +86,7 @@ export default class NPCData extends CreatureTemplate {
         spellLevel: new foundry.data.fields.NumberField({
           required: true, nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.SpellcasterLevel"
         }),
-        source: new foundry.data.fields.StringField({required: true, label: "DND5E.Source"})
+        source: new SourceField()
       }, {label: "DND5E.Details"}),
       resources: new foundry.data.fields.SchemaField({
         legact: new foundry.data.fields.SchemaField({
@@ -123,8 +124,21 @@ export default class NPCData extends CreatureTemplate {
   /** @inheritdoc */
   static _migrateData(source) {
     super._migrateData(source);
+    NPCData.#migrateSource(source);
     NPCData.#migrateTypeData(source);
     AttributesFields._migrateInitiative(source.attributes);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Convert source string into custom object.
+   * @param {object} source  The candidate source data from which the model will be constructed.
+   */
+  static #migrateSource(source) {
+    if ( source.details?.source && (foundry.utils.getType(source.details.source) !== "Object") ) {
+      source.details.source = { custom: source.details.source };
+    }
   }
 
   /* -------------------------------------------- */
