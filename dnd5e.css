@@ -720,6 +720,25 @@ h5 {
   width: 16px;
   height: 16px;
 }
+/* ----------------------------------------- */
+/*  Accordion                                */
+/* ----------------------------------------- */
+.accordion {
+  transition: margin-bottom 500ms ease;
+}
+.accordion.collapsed {
+  margin-bottom: 0.5rem;
+}
+.accordion.collapsed > .accordion-content {
+  height: 0;
+}
+.accordion-heading {
+  cursor: pointer;
+}
+.accordion-content {
+  overflow: hidden;
+  transition: height 500ms ease;
+}
 .dnd5e.sheet.actor {
   /* ----------------------------------------- */
   /*  Shared Styles                            */
@@ -1679,6 +1698,9 @@ h5 {
   /*  Sheet Header                             */
   /* ----------------------------------------- */
   /* ----------------------------------------- */
+  /*  Item Description                         */
+  /* ----------------------------------------- */
+  /* ----------------------------------------- */
   /*  Item Details Form                        */
   /* ----------------------------------------- */
   /* ----------------------------------------- */
@@ -1764,6 +1786,36 @@ h5 {
 }
 .dnd5e.sheet.item .sheet-body .item-properties [name="system.price.denomination"] {
   border: none;
+}
+.dnd5e.sheet.item [data-tab="description"] {
+  align-content: stretch;
+}
+.dnd5e.sheet.item [data-tab="description"] .item-description .description-header {
+  display: flex;
+  align-items: first baseline;
+  justify-content: space-between;
+  margin-block-end: 0;
+  padding: 0.25rem;
+  background-color: rgba(0, 0, 0, 0.05);
+}
+.dnd5e.sheet.item [data-tab="description"] .item-description .description-header .description-edit {
+  opacity: 20%;
+}
+.dnd5e.sheet.item [data-tab="description"] .item-description .description-header:hover .description-edit {
+  opacity: 100%;
+}
+.dnd5e.sheet.item [data-tab="description"] .item-description .editor + .description-header {
+  margin-block-start: 0.5rem;
+}
+.dnd5e.sheet.item [data-tab="description"] .item-description .editor:not(.prosemirror) {
+  height: auto;
+  padding-inline: 0.25rem;
+}
+.dnd5e.sheet.item [data-tab="description"] .item-description .accordion.collapsed > .editor.accordion-content {
+  height: 0;
+}
+.dnd5e.sheet.item [data-tab="description"] .item-description .editor.accordion-content > .editor-content {
+  overflow: hidden;
 }
 .dnd5e.sheet.item .details input[type="text"],
 .dnd5e.sheet.item .details input[type="number"],
