@@ -29,7 +29,7 @@ export default class BackgroundData extends SystemDataModel.mixin(ItemDescriptio
 
   _onCreate(data, options, userId) {
     if ( (game.user.id !== userId) || this.parent.actor?.type !== "character" ) return;
-    this.parent.actor.update({"system.details.background": this.parent});
+    this.parent.actor.update({"system.details.background": this.parent.id});
   }
 
   /* -------------------------------------------- */

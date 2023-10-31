@@ -81,7 +81,7 @@ export default class RaceData extends SystemDataModel.mixin(ItemDescriptionTempl
 
   _onCreate(data, options, userId) {
     if ( (game.user.id !== userId) || this.parent.actor?.type !== "character" ) return;
-    this.parent.actor.update({"system.details.race": this.parent});
+    this.parent.actor.update({"system.details.race": this.parent.id});
   }
 
   /* -------------------------------------------- */
