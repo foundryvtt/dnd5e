@@ -1,5 +1,6 @@
 # Welcome to the DnD5e FoundryVTT Wiki
 
+- [Active Effects Guide](Active-Effect-Guide.md)
 - [Advancement Overview](Advancement.md)
   - [Advancement User Guide](Advancement-User-Guide.md)
   - [Custom Class Example](Custom-Class-Advancement.md)  
