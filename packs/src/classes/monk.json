@@ -20,7 +20,115 @@
         "configuration": {},
         "value": {},
         "title": "Hit Points",
-        "icon": "systems/dnd5e/icons/svg/hit-points.svg"
+        "icon": "systems/dnd5e/icons/svg/hit-points.svg",
+        "_id": "ocxNtDFJ7YDaYaK7"
+      },
+      {
+        "_id": "mmAxx3U7FvXNAcKc",
+        "type": "Trait",
+        "configuration": {
+          "hint": "",
+          "mode": "default",
+          "allowReplacements": false,
+          "grants": [
+            "weapon:sim",
+            "weapon:mar:shortsword"
+          ],
+          "choices": [],
+          "choiceMode": "inclusive"
+        },
+        "level": 1,
+        "title": "",
+        "value": {}
+      },
+      {
+        "_id": "QPXy59CQGY9HB0c3",
+        "type": "Trait",
+        "configuration": {
+          "hint": "",
+          "mode": "default",
+          "allowReplacements": false,
+          "grants": [],
+          "choices": [
+            {
+              "count": 1,
+              "pool": [
+                "tool:art:*",
+                "tool:music:*"
+              ]
+            }
+          ],
+          "choiceMode": "inclusive"
+        },
+        "level": 1,
+        "title": "",
+        "classRestriction": "primary",
+        "value": {}
+      },
+      {
+        "_id": "4M8MQ1E64zbcRg6B",
+        "type": "Trait",
+        "configuration": {
+          "hint": "",
+          "mode": "default",
+          "allowReplacements": false,
+          "grants": [
+            "saves:str",
+            "saves:dex"
+          ],
+          "choices": [],
+          "choiceMode": "inclusive"
+        },
+        "level": 1,
+        "title": "",
+        "classRestriction": "primary",
+        "value": {}
+      },
+      {
+        "_id": "7HRRCPk80Ng2Evdx",
+        "type": "Trait",
+        "configuration": {
+          "hint": "",
+          "mode": "default",
+          "allowReplacements": false,
+          "grants": [],
+          "choices": [
+            {
+              "count": 2,
+              "pool": [
+                "skills:acr",
+                "skills:ath",
+                "skills:his",
+                "skills:ins",
+                "skills:rel",
+                "skills:ste"
+              ]
+            }
+          ],
+          "choiceMode": "inclusive"
+        },
+        "level": 1,
+        "title": "",
+        "classRestriction": "primary",
+        "value": {}
+      },
+      {
+        "_id": "BQWHr3mt5flvkfIj",
+        "type": "Trait",
+        "configuration": {
+          "hint": "Your mastery of the ki flowing through you makes you immune to disease and poison.",
+          "mode": "default",
+          "allowReplacements": false,
+          "grants": [
+            "di:poison",
+            "ci:diseased",
+            "ci:poisoned"
+          ],
+          "choices": [],
+          "choiceMode": "inclusive"
+        },
+        "level": 10,
+        "title": "Purity of Body"
       },
       {
         "type": "ItemGrant",
@@ -43,7 +151,8 @@
         "value": {},
         "level": 1,
         "title": "Features",
-        "icon": "systems/dnd5e/icons/svg/item-grant.svg"
+        "icon": "systems/dnd5e/icons/svg/item-grant.svg",
+        "_id": "n0q8XyiGA3vLPgpK"
       },
       {
         "type": "ItemGrant",
@@ -68,7 +177,8 @@
         "value": {},
         "level": 2,
         "title": "Features",
-        "icon": "systems/dnd5e/icons/svg/item-grant.svg"
+        "icon": "systems/dnd5e/icons/svg/item-grant.svg",
+        "_id": "7TyDqpGGi3r3nsp0"
       },
       {
         "type": "ItemGrant",
@@ -90,7 +200,8 @@
         "value": {},
         "level": 3,
         "title": "Features",
-        "icon": "systems/dnd5e/icons/svg/item-grant.svg"
+        "icon": "systems/dnd5e/icons/svg/item-grant.svg",
+        "_id": "2sLHTw6k15DSW8WB"
       },
       {
         "type": "ItemGrant",
@@ -111,7 +222,8 @@
         "value": {},
         "level": 4,
         "title": "Features",
-        "icon": "systems/dnd5e/icons/svg/item-grant.svg"
+        "icon": "systems/dnd5e/icons/svg/item-grant.svg",
+        "_id": "Zc1jOZK1b9mIKekq"
       },
       {
         "type": "ItemGrant",
@@ -133,7 +245,8 @@
         "value": {},
         "level": 5,
         "title": "Features",
-        "icon": "systems/dnd5e/icons/svg/item-grant.svg"
+        "icon": "systems/dnd5e/icons/svg/item-grant.svg",
+        "_id": "j9LeWmxlsENKaMLo"
       },
       {
         "type": "ItemGrant",
@@ -154,7 +267,8 @@
         "value": {},
         "level": 6,
         "title": "Features",
-        "icon": "systems/dnd5e/icons/svg/item-grant.svg"
+        "icon": "systems/dnd5e/icons/svg/item-grant.svg",
+        "_id": "psobDjMqtA2216Db"
       },
       {
         "type": "ItemGrant",
@@ -176,7 +290,8 @@
         "value": {},
         "level": 7,
         "title": "Features",
-        "icon": "systems/dnd5e/icons/svg/item-grant.svg"
+        "icon": "systems/dnd5e/icons/svg/item-grant.svg",
+        "_id": "K38aFaEMxMqRB0BC"
       },
       {
         "type": "ItemGrant",
@@ -197,7 +312,8 @@
         "value": {},
         "level": 10,
         "title": "Features",
-        "icon": "systems/dnd5e/icons/svg/item-grant.svg"
+        "icon": "systems/dnd5e/icons/svg/item-grant.svg",
+        "_id": "eLqmJotmwzlGNrxG"
       },
       {
         "type": "ItemGrant",
@@ -218,7 +334,8 @@
         "value": {},
         "level": 13,
         "title": "Features",
-        "icon": "systems/dnd5e/icons/svg/item-grant.svg"
+        "icon": "systems/dnd5e/icons/svg/item-grant.svg",
+        "_id": "N0geIQiuofqYgswj"
       },
       {
         "type": "ItemGrant",
@@ -239,7 +356,8 @@
         "value": {},
         "level": 14,
         "title": "Features",
-        "icon": "systems/dnd5e/icons/svg/item-grant.svg"
+        "icon": "systems/dnd5e/icons/svg/item-grant.svg",
+        "_id": "N1hjizyI82UPp8UI"
       },
       {
         "type": "ItemGrant",
@@ -260,7 +378,8 @@
         "value": {},
         "level": 15,
         "title": "Features",
-        "icon": "systems/dnd5e/icons/svg/item-grant.svg"
+        "icon": "systems/dnd5e/icons/svg/item-grant.svg",
+        "_id": "TcLZS9WzC7bPETSd"
       },
       {
         "type": "ItemGrant",
@@ -281,7 +400,8 @@
         "value": {},
         "level": 18,
         "title": "Features",
-        "icon": "systems/dnd5e/icons/svg/item-grant.svg"
+        "icon": "systems/dnd5e/icons/svg/item-grant.svg",
+        "_id": "tRb3a0tA5IpehPs8"
       },
       {
         "type": "ItemGrant",
@@ -302,7 +422,8 @@
         "value": {},
         "level": 20,
         "title": "Features",
-        "icon": "systems/dnd5e/icons/svg/item-grant.svg"
+        "icon": "systems/dnd5e/icons/svg/item-grant.svg",
+        "_id": "sEQz9c9XhWYjS9x5"
       },
       {
         "type": "ScaleValue",
@@ -333,7 +454,8 @@
         },
         "value": {},
         "title": "Martial Arts Die",
-        "icon": "systems/dnd5e/icons/svg/scale-value.svg"
+        "icon": "systems/dnd5e/icons/svg/scale-value.svg",
+        "_id": "MXFbf0nxMiyLdPbX"
       },
       {
         "type": "ScaleValue",
@@ -363,7 +485,8 @@
         },
         "value": {},
         "title": "Unarmored Movement",
-        "icon": "systems/dnd5e/icons/svg/scale-value.svg"
+        "icon": "systems/dnd5e/icons/svg/scale-value.svg",
+        "_id": "1OzfWDWCquoHMeX5"
       },
       {
         "type": "AbilityScoreImprovement",
@@ -383,7 +506,8 @@
         },
         "level": 4,
         "title": "Ability Score Improvement",
-        "icon": "systems/dnd5e/icons/svg/ability-score-improvement.svg"
+        "icon": "systems/dnd5e/icons/svg/ability-score-improvement.svg",
+        "_id": "ofNSUhSHKhhDuPSR"
       },
       {
         "type": "AbilityScoreImprovement",
@@ -403,7 +527,8 @@
         },
         "level": 8,
         "title": "Ability Score Improvement",
-        "icon": "systems/dnd5e/icons/svg/ability-score-improvement.svg"
+        "icon": "systems/dnd5e/icons/svg/ability-score-improvement.svg",
+        "_id": "s3t9o57hP6iUHirr"
       },
       {
         "type": "AbilityScoreImprovement",
@@ -423,7 +548,8 @@
         },
         "level": 12,
         "title": "Ability Score Improvement",
-        "icon": "systems/dnd5e/icons/svg/ability-score-improvement.svg"
+        "icon": "systems/dnd5e/icons/svg/ability-score-improvement.svg",
+        "_id": "O24MWOKc1ImsKaml"
       },
       {
         "type": "AbilityScoreImprovement",
@@ -443,7 +569,8 @@
         },
         "level": 16,
         "title": "Ability Score Improvement",
-        "icon": "systems/dnd5e/icons/svg/ability-score-improvement.svg"
+        "icon": "systems/dnd5e/icons/svg/ability-score-improvement.svg",
+        "_id": "xdqWoLtgO3uyl3nJ"
       },
       {
         "_id": "puDaUsYrlks0z5gm",
@@ -496,10 +623,10 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.2.2",
+    "systemVersion": "2.3.1",
     "coreVersion": "10.303",
     "createdTime": 1661787234277,
-    "modifiedTime": 1691518503601,
+    "modifiedTime": 1698857146118,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!6VoZrWxhOEKGYhnq"

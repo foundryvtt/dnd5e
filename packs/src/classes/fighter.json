@@ -24,6 +24,113 @@
         "_id": "yhZd0KJPJERAWGgA"
       },
       {
+        "_id": "mA50Kay0ZDA2jX9p",
+        "type": "Trait",
+        "configuration": {
+          "hint": "",
+          "mode": "default",
+          "allowReplacements": false,
+          "grants": [
+            "armor:lgt",
+            "armor:med",
+            "armor:hvy",
+            "armor:shl"
+          ],
+          "choices": [],
+          "choiceMode": "inclusive"
+        },
+        "level": 1,
+        "title": "",
+        "classRestriction": "primary"
+      },
+      {
+        "_id": "nmUrDORkeK0uZm0p",
+        "type": "Trait",
+        "configuration": {
+          "hint": "",
+          "mode": "default",
+          "allowReplacements": false,
+          "grants": [
+            "weapon:sim",
+            "weapon:mar"
+          ],
+          "choices": [],
+          "choiceMode": "inclusive"
+        },
+        "level": 1,
+        "title": "",
+        "value": {}
+      },
+      {
+        "_id": "3o2s8ZVAyJd74CrP",
+        "type": "Trait",
+        "configuration": {
+          "hint": "",
+          "mode": "default",
+          "allowReplacements": false,
+          "grants": [
+            "saves:str",
+            "saves:con"
+          ],
+          "choices": [],
+          "choiceMode": "inclusive"
+        },
+        "level": 1,
+        "title": "",
+        "classRestriction": "primary",
+        "value": {}
+      },
+      {
+        "_id": "JEZnz3P7ydbNAdwN",
+        "type": "Trait",
+        "configuration": {
+          "hint": "",
+          "mode": "default",
+          "allowReplacements": false,
+          "grants": [],
+          "choices": [
+            {
+              "count": 2,
+              "pool": [
+                "skills:acr",
+                "skills:ani",
+                "skills:ath",
+                "skills:his",
+                "skills:ins",
+                "skills:itm",
+                "skills:prc",
+                "skills:sur"
+              ]
+            }
+          ],
+          "choiceMode": "inclusive"
+        },
+        "level": 1,
+        "title": "",
+        "classRestriction": "primary",
+        "value": {}
+      },
+      {
+        "type": "Trait",
+        "configuration": {
+          "hint": "",
+          "mode": "default",
+          "allowReplacements": false,
+          "grants": [
+            "armor:lgt",
+            "armor:med",
+            "armor:shl"
+          ],
+          "choices": [],
+          "choiceMode": "inclusive"
+        },
+        "level": 1,
+        "title": "",
+        "_id": "dB3KhImYQRemI4mr",
+        "classRestriction": "secondary",
+        "value": {}
+      },
+      {
         "type": "ItemGrant",
         "configuration": {
           "items": [
@@ -394,10 +501,10 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.2.2",
+    "systemVersion": "2.3.1",
     "coreVersion": "10.303",
     "createdTime": 1661787234279,
-    "modifiedTime": 1691518656322,
+    "modifiedTime": 1698851335324,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!ABEBgWyRhVlDUIfq"

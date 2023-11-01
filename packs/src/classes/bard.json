@@ -20,7 +20,201 @@
         "configuration": {},
         "value": {},
         "title": "Hit Points",
-        "icon": "systems/dnd5e/icons/svg/hit-points.svg"
+        "icon": "systems/dnd5e/icons/svg/hit-points.svg",
+        "_id": "pILgW7YYeRvTfJS6"
+      },
+      {
+        "_id": "svCkv1ECxsmu2Q7U",
+        "type": "Trait",
+        "configuration": {
+          "hint": "",
+          "mode": "default",
+          "allowReplacements": false,
+          "grants": [
+            "armor:lgt"
+          ],
+          "choices": [],
+          "choiceMode": "inclusive"
+        },
+        "level": 1,
+        "title": "",
+        "value": {}
+      },
+      {
+        "_id": "hZPJWA6MdmFIZuQD",
+        "type": "Trait",
+        "configuration": {
+          "hint": "",
+          "mode": "default",
+          "allowReplacements": false,
+          "grants": [
+            "weapon:sim",
+            "weapon:mar:handcrossbow",
+            "weapon:mar:longsword",
+            "weapon:mar:rapier",
+            "weapon:mar:shortsword"
+          ],
+          "choices": [],
+          "choiceMode": "inclusive"
+        },
+        "level": 1,
+        "title": "",
+        "classRestriction": "primary",
+        "value": {}
+      },
+      {
+        "_id": "tRCVvsqiLStPNyFl",
+        "type": "Trait",
+        "configuration": {
+          "hint": "",
+          "mode": "default",
+          "allowReplacements": false,
+          "grants": [],
+          "choices": [
+            {
+              "count": 3,
+              "pool": [
+                "tool:music:*"
+              ]
+            }
+          ],
+          "choiceMode": "inclusive"
+        },
+        "level": 1,
+        "title": "",
+        "classRestriction": "primary",
+        "value": {}
+      },
+      {
+        "_id": "wVBCjoHg0ftdHj3m",
+        "type": "Trait",
+        "configuration": {
+          "hint": "",
+          "mode": "default",
+          "allowReplacements": false,
+          "grants": [
+            "saves:dex",
+            "saves:cha"
+          ],
+          "choices": [],
+          "choiceMode": "inclusive"
+        },
+        "level": 1,
+        "title": "",
+        "classRestriction": "primary",
+        "value": {}
+      },
+      {
+        "_id": "eNU6FoX5sNVbDx13",
+        "type": "Trait",
+        "configuration": {
+          "hint": "",
+          "mode": "default",
+          "allowReplacements": false,
+          "grants": [],
+          "choices": [
+            {
+              "count": 3,
+              "pool": [
+                "skills:*"
+              ]
+            }
+          ],
+          "choiceMode": "inclusive"
+        },
+        "level": 1,
+        "title": "",
+        "classRestriction": "primary",
+        "value": {}
+      },
+      {
+        "type": "Trait",
+        "configuration": {
+          "hint": "",
+          "mode": "default",
+          "allowReplacements": false,
+          "grants": [],
+          "choices": [
+            {
+              "count": 3,
+              "pool": [
+                "tool:music:*"
+              ]
+            }
+          ],
+          "choiceMode": "inclusive"
+        },
+        "level": 1,
+        "title": "",
+        "_id": "8oBIVC96av3lm5uk",
+        "classRestriction": "secondary",
+        "value": {}
+      },
+      {
+        "type": "Trait",
+        "configuration": {
+          "hint": "",
+          "mode": "default",
+          "allowReplacements": false,
+          "grants": [],
+          "choices": [
+            {
+              "count": 1,
+              "pool": [
+                "skills:*"
+              ]
+            }
+          ],
+          "choiceMode": "inclusive"
+        },
+        "level": 1,
+        "title": "",
+        "_id": "ELIXk3XCH4EmyiqN",
+        "classRestriction": "secondary",
+        "value": {}
+      },
+      {
+        "_id": "cwu9uhmtcKhqli8W",
+        "type": "Trait",
+        "configuration": {
+          "hint": "",
+          "mode": "expertise",
+          "allowReplacements": false,
+          "grants": [],
+          "choices": [
+            {
+              "count": 2,
+              "pool": [
+                "skills:*"
+              ]
+            }
+          ],
+          "choiceMode": "inclusive"
+        },
+        "level": 3,
+        "title": "Expertise",
+        "value": {}
+      },
+      {
+        "type": "Trait",
+        "configuration": {
+          "hint": "",
+          "mode": "expertise",
+          "allowReplacements": false,
+          "grants": [],
+          "choices": [
+            {
+              "count": 2,
+              "pool": [
+                "skills:*"
+              ]
+            }
+          ],
+          "choiceMode": "inclusive"
+        },
+        "level": 10,
+        "title": "Expertise",
+        "_id": "O2cVH7Y5kNfoUyLg"
       },
       {
         "type": "ItemGrant",
@@ -42,7 +236,8 @@
         "value": {},
         "level": 1,
         "title": "Features",
-        "icon": "systems/dnd5e/icons/svg/item-grant.svg"
+        "icon": "systems/dnd5e/icons/svg/item-grant.svg",
+        "_id": "oNNPhAIeXhAweeBN"
       },
       {
         "type": "ItemGrant",
@@ -64,7 +259,8 @@
         "value": {},
         "level": 2,
         "title": "Features",
-        "icon": "systems/dnd5e/icons/svg/item-grant.svg"
+        "icon": "systems/dnd5e/icons/svg/item-grant.svg",
+        "_id": "V3KCwHELag3C3YVj"
       },
       {
         "type": "ItemGrant",
@@ -86,7 +282,8 @@
         "value": {},
         "level": 3,
         "title": "Features",
-        "icon": "systems/dnd5e/icons/svg/item-grant.svg"
+        "icon": "systems/dnd5e/icons/svg/item-grant.svg",
+        "_id": "MSF1wogSoeJqfxAR"
       },
       {
         "type": "ItemGrant",
@@ -107,7 +304,8 @@
         "value": {},
         "level": 5,
         "title": "Features",
-        "icon": "systems/dnd5e/icons/svg/item-grant.svg"
+        "icon": "systems/dnd5e/icons/svg/item-grant.svg",
+        "_id": "I7HqKmtMcat8Dm08"
       },
       {
         "type": "ItemGrant",
@@ -128,7 +326,8 @@
         "value": {},
         "level": 6,
         "title": "Features",
-        "icon": "systems/dnd5e/icons/svg/item-grant.svg"
+        "icon": "systems/dnd5e/icons/svg/item-grant.svg",
+        "_id": "UThCJ6mGUL0XQUb8"
       },
       {
         "type": "ItemGrant",
@@ -149,7 +348,8 @@
         "value": {},
         "level": 10,
         "title": "Features",
-        "icon": "systems/dnd5e/icons/svg/item-grant.svg"
+        "icon": "systems/dnd5e/icons/svg/item-grant.svg",
+        "_id": "2fX3mtdNC16A1z7S"
       },
       {
         "type": "ItemGrant",
@@ -170,7 +370,8 @@
         "value": {},
         "level": 20,
         "title": "Features",
-        "icon": "systems/dnd5e/icons/svg/item-grant.svg"
+        "icon": "systems/dnd5e/icons/svg/item-grant.svg",
+        "_id": "ZwU2MLhnY219t78q"
       },
       {
         "type": "ItemChoice",
@@ -200,7 +401,8 @@
         },
         "value": {},
         "title": "Magical Secrets",
-        "icon": "systems/dnd5e/icons/svg/item-choice.svg"
+        "icon": "systems/dnd5e/icons/svg/item-choice.svg",
+        "_id": "EC1yNAV6khHilOhz"
       },
       {
         "type": "ScaleValue",
@@ -231,7 +433,8 @@
         },
         "value": {},
         "title": "Bardic Inspiration Die",
-        "icon": "systems/dnd5e/icons/svg/scale-value.svg"
+        "icon": "systems/dnd5e/icons/svg/scale-value.svg",
+        "_id": "0Ybu5yMjplpTAHiE"
       },
       {
         "type": "ScaleValue",
@@ -262,7 +465,8 @@
         },
         "value": {},
         "title": "Song of Rest Die",
-        "icon": "systems/dnd5e/icons/svg/scale-value.svg"
+        "icon": "systems/dnd5e/icons/svg/scale-value.svg",
+        "_id": "TK2RAm9EFQtVjDrU"
       },
       {
         "type": "ScaleValue",
@@ -286,7 +490,8 @@
         },
         "value": {},
         "title": "Cantrips Known",
-        "icon": "systems/dnd5e/icons/svg/scale-value.svg"
+        "icon": "systems/dnd5e/icons/svg/scale-value.svg",
+        "_id": "ovKbtrhfIkYTuThu"
       },
       {
         "type": "ScaleValue",
@@ -349,7 +554,8 @@
         },
         "value": {},
         "title": "Spells Known",
-        "icon": "systems/dnd5e/icons/svg/scale-value.svg"
+        "icon": "systems/dnd5e/icons/svg/scale-value.svg",
+        "_id": "9FXWVh7OmbPr1iR9"
       },
       {
         "type": "AbilityScoreImprovement",
@@ -369,7 +575,8 @@
         },
         "level": 4,
         "title": "Ability Score Improvement",
-        "icon": "systems/dnd5e/icons/svg/ability-score-improvement.svg"
+        "icon": "systems/dnd5e/icons/svg/ability-score-improvement.svg",
+        "_id": "sbzvEEntzYcE5JfN"
       },
       {
         "type": "AbilityScoreImprovement",
@@ -389,7 +596,8 @@
         },
         "level": 8,
         "title": "Ability Score Improvement",
-        "icon": "systems/dnd5e/icons/svg/ability-score-improvement.svg"
+        "icon": "systems/dnd5e/icons/svg/ability-score-improvement.svg",
+        "_id": "adpq4VPJ5oVt8m06"
       },
       {
         "type": "AbilityScoreImprovement",
@@ -409,7 +617,8 @@
         },
         "level": 12,
         "title": "Ability Score Improvement",
-        "icon": "systems/dnd5e/icons/svg/ability-score-improvement.svg"
+        "icon": "systems/dnd5e/icons/svg/ability-score-improvement.svg",
+        "_id": "jl333Hy4RIPs6J9p"
       },
       {
         "type": "AbilityScoreImprovement",
@@ -429,7 +638,8 @@
         },
         "level": 16,
         "title": "Ability Score Improvement",
-        "icon": "systems/dnd5e/icons/svg/ability-score-improvement.svg"
+        "icon": "systems/dnd5e/icons/svg/ability-score-improvement.svg",
+        "_id": "Eweg6iXNJ6qIC6rY"
       },
       {
         "_id": "puDaUsYrlks0z5gm",
@@ -494,10 +704,10 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.2.2",
+    "systemVersion": "2.3.1",
     "coreVersion": "10.303",
     "createdTime": 1661787234279,
-    "modifiedTime": 1691518407140,
+    "modifiedTime": 1698851653259,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!ILvRZGEx3aXqSVUt"
