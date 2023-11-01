@@ -853,22 +853,29 @@ preLocalize("featureTypes.class.subtypes", { sort: true });
  * @enum {LootTypeConfiguration}
  */
 DND5E.lootTypes = {
+  art: {
+    label: "DND5E.Loot.Art"
+  },
+  gear: {
+    label: "DND5E.Loot.Gear"
+  },
+  gem: {
+    label: "DND5E.Loot.Gem"
+  },
   junk: {
     label: "DND5E.Loot.Junk"
+  },
+  material: {
+    label: "DND5E.Loot.Material"
   },
   resource: {
     label: "DND5E.Loot.Resource"
   },
   treasure: {
-    label: "DND5E.Loot.Treasure",
-    subtypes: {
-      art: "DND5E.Loot.TreasureArt",
-      gem: "DND5E.Loot.TreasureGem"
-    }
+    label: "DND5E.Loot.Treasure"
   }
 };
 preLocalize("lootTypes", { key: "label" });
-preLocalize("lootTypes.treasure.subtypes", { sort: true });
 
 /* -------------------------------------------- */
 
