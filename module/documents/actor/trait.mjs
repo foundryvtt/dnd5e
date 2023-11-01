@@ -515,7 +515,7 @@ export function localizedList({ grants=new Set(), choices=[], choiceMode="inclus
   let sections = Array.from(grants).map(g => keyLabel(g));
   if ( choiceMode === "inclusive" ) {
     sections = sections.concat(choiceSections);
-  } else {
+  } else if ( choiceSections.length ) {
     sections.push(game.i18n.getListFormatter({ style: "long", type: "disjunction" }).format(choiceSections));
   }
 

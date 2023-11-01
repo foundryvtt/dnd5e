@@ -16,7 +16,7 @@
       <label>{{localize "DND5E.AdvancementTraitAllowReplacements"}}</label>
       <div class="form-fields">
         <input name="configuration.allowReplacements" id="allowReplacements"
-          type="checkbox" {{checked configuration.allowReplacements}}>
+               type="checkbox" {{checked configuration.allowReplacements}}>
       </div>
       <p class="hint">{{localize "DND5E.AdvancementTraitAllowReplacementsHint"}}</p>
     </div>
@@ -31,8 +31,13 @@
       <p class="hint">{{localize "DND5E.AdvancementTraitGrantsHint"}}</p>
       <ul>
         <li>
-          <label>
-            <input type="radio" name="selectedIndex" value="-1" {{checked (eq selectedIndex -1)}}>
+          <label {{~#if grants.selected}} class="selected"{{/if}}>
+            <input type="radio" name="selectedIndex" value="-1" {{checked grants.selected}}>
+            {{#if grants.selected}}
+              <i class="fa-solid fa-arrow-right-long"></i>
+            {{else}}
+              <i class="fa-solid fa-gear"></i>
+            {{/if}}
             <span>{{grants.label}}</span>
           </label>
         </li>
@@ -63,13 +68,17 @@
       <ul>
         {{#each choices}}
           <li>
-            <label>
-              <input type="radio" name="selectedIndex" value="{{@index}}"
-                {{checked (eq @root.selectedIndex @index)}}>
+            <label {{~#if this.selected}} class="selected"{{/if}}>
+              <input type="radio" name="selectedIndex" value="{{@index}}" {{checked this.selected}}>
+              {{#if this.selected}}
+                <i class="fa-solid fa-arrow-right-long"></i>
+              {{else}}
+                <i class="fa-solid fa-gear"></i>
+              {{/if}}
               <span>{{this.label}}</span>
             </label>
             <a data-action="remove-choice" data-tooltip="DND5E.AdvancementTraitActionRemoveChoice">
-              <i class="fas fa-minus"></i>
+              <i class="fa-solid fa-trash"></i>
             </a>
           </li>
         {{/each}}
@@ -77,6 +86,11 @@
       <a data-action="add-choice">
         <i class="fas fa-plus"></i> {{localize "DND5E.AdvancementTraitActionAddChoice"}}
       </a>
+    </fieldset>
+  </div>
+
+  {{#if choiceOptions}}
+    <div class="right-column trait-selector">
       {{#if (ne selectedIndex -1)}}
         <div class="form-group">
           <label>{{localize "DND5E.AdvancementTraitCount"}}</label>
@@ -85,11 +99,7 @@
           </div>
         </div>
       {{/if}}
-    </fieldset>
-  </div>
 
-  {{#if choiceOptions}}
-    <div class="right-column trait-selector">
       <div class="form-group">
         <label>{{localize "DND5E.AdvancementTraitType"}}</label>
         <div class="form-fields">

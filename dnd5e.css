@@ -1585,6 +1585,9 @@ h5 {
 .dnd5e.advancement.traits {
   --grid-two-column-right-size: 0.6fr;
 }
+.dnd5e.advancement.traits form {
+  grid-gap: 1rem;
+}
 .dnd5e.advancement.traits .selected-trait h4 {
   font-weight: bold;
 }
@@ -1604,6 +1607,18 @@ h5 {
   display: flex;
   gap: 1em;
   align-items: baseline;
+}
+.dnd5e.advancement.traits .selected-trait ul label:not(.selected) {
+  cursor: pointer;
+}
+.dnd5e.advancement.traits .selected-trait ul label:not(.selected):hover {
+  text-shadow: 0 0 8px var(--color-shadow-primary);
+}
+.dnd5e.advancement.traits .selected-trait ul label.selected {
+  font-weight: bold;
+}
+.dnd5e.advancement.traits .selected-trait ul label input[type="radio"] {
+  display: none;
 }
 .dnd5e.advancement.traits .hint textarea {
   flex: 1 0 100%;

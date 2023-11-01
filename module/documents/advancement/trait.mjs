@@ -9,6 +9,7 @@ import {TraitConfigurationData, TraitValueData} from "../../data/advancement/tra
  */
 export default class TraitAdvancement extends Advancement {
 
+  /** @inheritdoc */
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
       dataModels: {
@@ -81,7 +82,7 @@ export default class TraitAdvancement extends Advancement {
     pools ??= [this.configuration.grants, ...this.configuration.choices.map(c => c.pool)];
     for ( const pool of pools ) {
       for ( const key of pool ) {
-        const type = key.split(":").shift();
+        const [type] = key.split(":");
         set.add(type);
       }
     }

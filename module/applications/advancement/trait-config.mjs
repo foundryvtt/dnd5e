@@ -57,7 +57,7 @@ export default class TraitConfig extends AdvancementConfig {
     return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ["dnd5e", "advancement", "traits", "two-column"],
       template: "systems/dnd5e/templates/advancement/trait-config.hbs",
-      width: 600
+      width: 640
     });
   }
 
@@ -135,7 +135,7 @@ export default class TraitConfig extends AdvancementConfig {
    */
   async _onAction(event) {
     event.preventDefault();
-    switch (event.currentTarget.dataset.action) {
+    switch ( event.currentTarget.dataset.action ) {
       case "add-choice":
         this.config.choices.push({ count: 1 });
         this.selected = this.config.choices.length - 1;
@@ -152,15 +152,7 @@ export default class TraitConfig extends AdvancementConfig {
         return;
     }
 
-    // Fix to prevent sets in grants & choice pools being saved as `[object Set]`
-    // TOOD: Remove this when https://github.com/foundryvtt/foundryvtt/issues/7706 is resolved
-    this.config.grants = Array.from(this.config.grants);
-    this.config.choices.forEach(c => {
-      if ( !c.pool ) return;
-      c.pool = Array.from(c.pool);
-    });
-
-    await this.advancement.update({configuration: this.config});
+    await this.advancement.update({ configuration: await this.prepareConfigurationUpdate() });
   }
 
   /* -------------------------------------------- */
@@ -195,7 +187,7 @@ export default class TraitConfig extends AdvancementConfig {
   /* -------------------------------------------- */
 
   /** @inheritdoc */
-  async prepareConfigurationUpdate(configuration) {
+  async prepareConfigurationUpdate(configuration={}) {
     const choicesCollection = foundry.utils.deepClone(this.config.choices);
 
     if ( configuration.checked ) {

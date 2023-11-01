@@ -211,6 +211,10 @@
   &.traits {
     --grid-two-column-right-size: 0.6fr;
 
+    form {
+      grid-gap: 1rem;
+    }
+
     .selected-trait {
       h4 {
         font-weight: bold;
@@ -230,6 +234,20 @@
           display: flex;
           gap: 1em;
           align-items: baseline;
+
+          &:not(.selected) {
+            cursor: pointer;
+            &:hover {
+              text-shadow: 0 0 8px var(--color-shadow-primary);
+            }
+          }
+          &.selected {
+            font-weight: bold;
+          }
+
+          input[type="radio"] {
+            display: none;
+          }
         }
       }
     }
