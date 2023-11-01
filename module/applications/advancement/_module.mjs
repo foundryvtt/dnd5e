@@ -15,3 +15,4 @@ export {default as ItemGrantConfig} from "./item-grant-config.mjs";
 export {default as ItemGrantFlow} from "./item-grant-flow.mjs";
 export {default as ScaleValueConfig} from "./scale-value-config.mjs";
 export {default as ScaleValueFlow} from "./scale-value-flow.mjs";
+export {default as TraitConfig} from "./trait-config.mjs";
