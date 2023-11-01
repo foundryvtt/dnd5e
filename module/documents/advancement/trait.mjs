@@ -66,10 +66,15 @@ export default class TraitAdvancement extends Advancement {
 
   /** @inheritdoc */
   summaryForLevel(level, { configMode=false }={}) {
-    if ( this.configuration.hint ) return `<p>${this.configuration.hint}</p>`;
-    return `<p>${Trait.localizedList({
-      grants: this.configuration.grants, choices: this.configuration.choices, choiceMode: this.configuration.choiceMode
-    })}</p>`;
+    if ( configMode ) {
+      if ( this.configuration.hint ) return `<p>${this.configuration.hint}</p>`;
+      return `<p>${Trait.localizedList({
+        grants: this.configuration.grants, choices: this.configuration.choices,
+        choiceMode: this.configuration.choiceMode
+      })}</p>`;
+    } else {
+      return Array.from(this.value.chosen).map(k => `<span class="tag">${Trait.keyLabel(k)}</span>`).join(" ");
+    }
   }
 
   /* -------------------------------------------- */
