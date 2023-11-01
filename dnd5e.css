@@ -1434,6 +1434,9 @@ h5 {
   /*  Scale Value                              */
   /* ----------------------------------------- */
   /* ----------------------------------------- */
+  /*  Size                                     */
+  /* ----------------------------------------- */
+  /* ----------------------------------------- */
   /*  Traits                                   */
   /* ----------------------------------------- */
 }
@@ -1613,6 +1616,16 @@ h5 {
 .dnd5e.advancement.scale-value select option[value=""] {
   color: var(--color-text-light-6);
 }
+.dnd5e.advancement.size .trait-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  padding: 0;
+  list-style: none;
+}
+.dnd5e.advancement.size .trait-list li {
+  flex: 1 1 40%;
+}
 .dnd5e.advancement.traits {
   --grid-two-column-right-size: 0.6fr;
 }
@@ -1736,6 +1749,11 @@ h5 {
 }
 .dnd5e.advancement.flow form[data-type="ScaleValue"] span.none {
   font-style: italic;
+}
+.dnd5e.advancement.flow form[data-type="Size"] select {
+  width: 100%;
+  font-size: var(--font-size-16);
+  height: 2em;
 }
 .dnd5e.advancement.flow nav {
   display: flex;

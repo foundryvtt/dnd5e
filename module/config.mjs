@@ -1967,6 +1967,7 @@ DND5E.advancementTypes = {
   ItemChoice: advancement.ItemChoiceAdvancement,
   ItemGrant: advancement.ItemGrantAdvancement,
   ScaleValue: advancement.ScaleValueAdvancement,
+  Size: advancement.SizeAdvancement,
   Trait: advancement.TraitAdvancement
 };
 

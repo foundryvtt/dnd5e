@@ -1,0 +1,9 @@
+<form id="{{appId}}" data-level="{{level}}" data-id="{{advancement.id}}" data-type="{{type}}">
+  <h3>{{{this.title}}}</h3>
+
+  <p>{{advancement.configuration.hint}}</p>
+
+  <select name="size">
+    {{selectOptions sizes selected=selectedSize}}
+  </select>
+</form>
