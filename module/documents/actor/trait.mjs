@@ -461,7 +461,7 @@ export function choiceLabel(choice, { only=false, final=false }={}) {
     });
   }
 
-  const listFormatter = game.i18n.getListFormatter({ type: "disjunction" });
+  const listFormatter = new Intl.ListFormat(game.i18n.lang, { type: "disjunction" });
 
   // Singular count (e.g. "any skill", "Thieves Tools or any skill", or "Thieves' Tools or any artisan tool")
   if ( (choice.count === 1) && only ) {
@@ -516,10 +516,11 @@ export function localizedList({ grants=new Set(), choices=[], choiceMode="inclus
   if ( choiceMode === "inclusive" ) {
     sections = sections.concat(choiceSections);
   } else if ( choiceSections.length ) {
-    sections.push(game.i18n.getListFormatter({ style: "long", type: "disjunction" }).format(choiceSections));
+    const formatter = new Intl.ListFormat(game.i18n.lang, { style: "long", type: "disjunction" });
+    sections.push(formatter.format(choiceSections));
   }
 
-  const listFormatter = game.i18n.getListFormatter({ style: "long", type: "conjunction" });
+  const listFormatter = new Intl.ListFormat(game.i18n.lang, { style: "long", type: "conjunction" });
   if ( !sections.length || grants.size ) return listFormatter.format(sections);
   return game.i18n.format("DND5E.TraitConfigChooseWrapper", {
     choices: listFormatter.format(sections)
