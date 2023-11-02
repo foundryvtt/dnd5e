@@ -38,7 +38,8 @@ export default class TraitAdvancement extends Advancement {
    * Prepare data for the Advancement.
    */
   prepareData() {
-    const traitConfig = CONFIG.DND5E.traits[this.representedTraits().first()];
+    const rep = this.representedTraits();
+    const traitConfig = rep.size === 1 ? CONFIG.DND5E.traits[rep.first()] : null;
     this.title = this.title || traitConfig?.labels.title || this.constructor.metadata.title;
     this.icon = this.icon || traitConfig?.icon || this.constructor.metadata.icon;
   }
@@ -221,11 +222,12 @@ export default class TraitAdvancement extends Advancement {
     // If replacements are allowed and there are grants with zero choices from their limited set,
     // display all remaining choices as an option
     if ( this.configuration.allowReplacements && (unfilteredLength > available.length) ) {
+      const rep = this.representedTraits();
       return {
         choices: choices.filter(this.representedTraits().map(t => `${t}:*`), { inplace: false }),
         label: game.i18n.format("DND5E.AdvancementTraitChoicesRemaining", {
           count: unfilteredLength,
-          type: Trait.traitLabel(this.representedTraits().first(), unfilteredLength)
+          type: Trait.traitLabel(rep.size === 1 ? rep.first() : null, unfilteredLength)
         })
       };
       // TODO: This works well for types without categories like skills where it is primarily intended,
@@ -246,11 +248,12 @@ export default class TraitAdvancement extends Advancement {
 
     if ( !available.length ) return null;
 
+    const rep = this.representedTraits(available.map(a => a.asSet()));
     return {
       choices,
       label: game.i18n.format(`DND5E.AdvancementTraitChoicesRemaining${simplifyNotification ? "Simple" : ""}`, {
         count: available.length,
-        type: Trait.traitLabel(this.representedTraits(available.map(a => a.asSet())).first(), available.length)
+        type: Trait.traitLabel(rep.size === 1 ? rep.first() : null, available.length)
       })
     };
   }

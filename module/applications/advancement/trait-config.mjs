@@ -69,7 +69,6 @@ export default class TraitConfig extends AdvancementConfig {
   async getData() {
     const context = super.getData();
 
-    // TODO: Try to make these not async
     context.grants = {
       label: Trait.localizedList({ grants: this.config.grants }) || "—",
       data: this.config.grants,
@@ -89,7 +88,8 @@ export default class TraitConfig extends AdvancementConfig {
       return obj;
     }, {});
 
-    const traitConfig = CONFIG.DND5E.traits[this.advancement.representedTraits().first()];
+    const rep = this.advancement.representedTraits();
+    const traitConfig = rep.size === 1 ? CONFIG.DND5E.traits[rep.first()] : null;
     if ( traitConfig ) {
       context.default.title = traitConfig.labels.title;
       context.default.icon = traitConfig.icon;

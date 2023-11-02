@@ -100,6 +100,17 @@ export default class AdvancementFlow extends FormApplication {
   /* -------------------------------------------- */
 
   /** @inheritdoc */
+  async _render(...args) {
+    await super._render(...args);
+
+    // Call setPosition on manager to adjust for size changes
+    const manager = ui.windows[this.element[0].closest(".app.advancement.flow")?.dataset.appid];
+    manager?.setPosition();
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
   async _updateObject(event, formData) {
     await this.advancement.apply(this.level, formData);
   }
