@@ -226,7 +226,7 @@ export default class TraitConfig extends AdvancementConfig {
     if ( (configuration.mode ?? this.config.mode) !== "default" ) {
       const validTraitTypes = filteredKeys(CONFIG.DND5E.traits, c => c.expertise);
       configuration.grants = configuration.grants.filter(k => validTraitTypes.some(t => k.startsWith(t)));
-      configuration.choices.forEach(c => c.pool = c.pool.filter(k => validTraitTypes.some(t => k.startsWith(t))));
+      configuration.choices.forEach(c => c.pool = c.pool?.filter(k => validTraitTypes.some(t => k.startsWith(t))));
     }
 
     return configuration;
