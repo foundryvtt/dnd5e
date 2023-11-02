@@ -1403,15 +1403,12 @@ export default class ActorSheet5e extends ActorSheet {
     if ( !game.settings.get("dnd5e", "disableAdvancements") ) {
       const manager = AdvancementManager.forDeletedItem(this.actor, item.id);
       if ( manager.steps.length ) {
-        if ( ["class", "subclass"].includes(item.type) ) {
-          try {
-            const shouldRemoveAdvancements = await AdvancementConfirmationDialog.forDelete(item);
-            if ( shouldRemoveAdvancements ) return manager.render(true);
-          } catch(err) {
-            return;
-          }
-        } else {
-          return manager.render(true);
+        try {
+          const shouldRemoveAdvancements = await AdvancementConfirmationDialog.forDelete(item);
+          if ( shouldRemoveAdvancements ) return manager.render(true);
+          else return item.delete({ shouldRemoveAdvancements });
+        } catch(err) {
+          return;
         }
       }
     }

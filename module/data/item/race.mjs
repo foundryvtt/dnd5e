@@ -89,7 +89,31 @@ export default class RaceData extends SystemDataModel.mixin(ItemDescriptionTempl
    */
   _onCreate(data, options, userId) {
     if ( (game.user.id !== userId) || this.parent.actor?.type !== "character" ) return;
-    this.parent.actor.update({"system.details.race": this.parent.id});
+    const updates = { "system.details.race": this.parent.id };
+    const attributes = this.parent.actor.system.attributes;
+
+    for ( const key of Object.keys(CONFIG.DND5E.movementTypes) ) {
+      if ( this.movement[key] > attributes.movement[key] ) {
+        updates[`system.attributes.movement.${key}`] = this.movement[key];
+      }
+    }
+    if ( this.movement.hover ) updates["system.attributes.movement.hover"] = true;
+    updates["system.attributes.movement.units"] = this.movement.units;
+
+    for ( const key of Object.keys(CONFIG.DND5E.senses) ) {
+      if ( this.senses[key] > attributes.senses[key] ) {
+        updates[`system.attributes.senses.${key}`] = this.senses[key];
+      }
+    }
+    if ( this.senses.special ) {
+      updates[system.attributes.senses.special] = attributes.senses.special
+        ? `${attributes.senses.special}:${this.senses.special}` : this.senses.special;
+    }
+    updates["system.attributes.senses.units"] = this.senses.units;
+
+    // TODO: Set creature type once defined on actor
+
+    this.parent.actor.update(updates);
   }
 
   /* -------------------------------------------- */
@@ -104,6 +128,28 @@ export default class RaceData extends SystemDataModel.mixin(ItemDescriptionTempl
    */
   async _preDelete(options, user) {
     if ( this.parent.actor?.type !== "character" ) return;
-    await this.parent.actor.update({"system.details.race": null});
+    const updates = { "system.details.race": null };
+    const attributes = this.parent.actor.system.attributes;
+    if ( options.shouldRemoveAdvancements === false ) return;
+
+    for ( const key of Object.keys(CONFIG.DND5E.movementTypes) ) {
+      if ( this.movement[key] === attributes.movement[key] ) {
+        updates[`system.attributes.movement.${key}`] = 0;
+      }
+    }
+    if ( this.movement.hover ) updates["system.attributes.movement.hover"] = false;
+
+    for ( const key of Object.keys(CONFIG.DND5E.senses) ) {
+      if ( this.senses[key] === attributes.senses[key] ) {
+        updates[`system.attributes.senses.${key}`] = 0;
+      }
+    }
+    if ( this.senses.special ) {
+      updates[system.attributes.senses.special] = attributes.senses.special.replace(this.senses.special, "");
+    }
+
+    // TODO: Unset creature type once defined on actor
+
+    await this.parent.actor.update(updates);
   }
 }
