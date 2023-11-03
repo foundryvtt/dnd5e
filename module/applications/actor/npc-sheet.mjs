@@ -122,7 +122,7 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
   /* -------------------------------------------- */
 
   /**
-   * Handle mouse click events for character sheet actions.
+   * Handle mouse click events for NPC sheet actions.
    * @param {MouseEvent} event  The originating click event.
    * @returns {Promise}         Dialog or roll result.
    * @private
