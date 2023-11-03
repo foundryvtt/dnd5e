@@ -205,6 +205,15 @@
                                    placeholder="20" data-tooltip="DND5E.LairActionInitiative">
                         </div>
                     </div>
+                    <div class="counter flexrow death-saves">
+                        <h4 class="rollable" data-action="rollDeathSave">{{ localize "DND5E.DeathSave" }}</h4>
+                        <div class="counter-value">
+                            <i class="fas fa-check"></i>
+                            <input type="text" name="system.attributes.death.success" value="{{system.attributes.death.success}}" placeholder="0" data-dtype="Number">
+                            <i class="fas fa-times"></i>
+                            <input type="text" name="system.attributes.death.failure" value="{{system.attributes.death.failure}}" placeholder="0" data-dtype="Number">
+                        </div>
+                    </div>
                 </div>
 
                 {{!-- Traits --}}

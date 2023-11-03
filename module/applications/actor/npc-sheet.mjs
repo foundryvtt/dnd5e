@@ -109,6 +109,37 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
   }
 
   /* -------------------------------------------- */
+  /*  Event Listeners and Handlers
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  activateListeners(html) {
+    super.activateListeners(html);
+    if ( !this.isEditable ) return;
+    html.find(".rollable[data-action]").click(this._onSheetAction.bind(this));
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle mouse click events for character sheet actions.
+   * @param {MouseEvent} event  The originating click event.
+   * @returns {Promise}         Dialog or roll result.
+   * @private
+   */
+  _onSheetAction(event) {
+    event.preventDefault();
+    const button = event.currentTarget;
+    switch ( button.dataset.action ) {
+      case "rollDeathSave":
+        return this.actor.rollDeathSave({event: event});
+    }
+  }
+
+  /* -------------------------------------------- */
+
+
+  /* -------------------------------------------- */
   /*  Object Updates                              */
   /* -------------------------------------------- */
 
