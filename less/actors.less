@@ -9,7 +9,7 @@
   // Attribute Configuration
   .config-button {
     color: var(--dnd5e-color-olive);
-    font-size: 10px;
+    font-size: var(--font-size-10);
     font-weight: normal;
   }
 
@@ -50,7 +50,7 @@
     .summary {
       height: 30px;
       border-bottom: var(--dnd5e-border-groove);
-      font-size: 18px;
+      font-size: var(--font-size-18);
       input, span {
         display: block;
         height: 24px;
@@ -122,8 +122,9 @@
     height: 18px;
     line-height: 16px;
     margin: 4px 8px 2px;
-    .modesto();
-    font-size: 18px;
+    font-family: var(--dnd5e-font-modesto);
+    font-size: var(--font-size-18);
+    font-weight: 700;
     color: var(--dnd5e-color-olive);
     border-bottom: 1px solid var(--dnd5e-color-faint);
     white-space: nowrap;
@@ -161,11 +162,13 @@
         align-items: center;
         height: 28px;
         line-height: 28px;
-        .modesto();
+        font-family: var(--dnd5e-font-modesto);
+        font-size: var(--font-size-20);
+        font-weight: 700;
 
         > * {
           font-weight: 400;
-          font-size: 24px;
+          font-size: var(--font-size-24);
         }
 
         &.multiple input, &.multiple span:not(.sep) {
@@ -178,7 +181,7 @@
         margin-top: -1px;
         line-height: 18px;
         font-family: "Signika", sans-serif;
-        font-size: 12px;
+        font-size: var(--font-size-12);
         font-weight: 400;
         white-space: nowrap
       }
@@ -195,7 +198,9 @@
     list-style: none;
     margin: 0;
     padding: 0;
-    .modesto();
+    font-family: var(--dnd5e-font-modesto);
+    font-size: var(--font-size-20);
+    font-weight: 700;
     border: var(--dnd5e-border-groove);
     border-radius: 3px;
 
@@ -215,7 +220,7 @@
         width: 36px;
         margin: 0 auto;
         line-height: 32px;
-        font-size: 24px;
+        font-size: var(--font-size-24);
       }
 
       .config-button {
@@ -238,7 +243,7 @@
           flex: 0 0 24px;
           height: 22px;
           line-height: 22px;
-          font-size: 16px;
+          font-size: var(--font-size-16);
           border-top: var(--dnd5e-border-groove);
         }
 
@@ -260,7 +265,7 @@
   // Proficiency Toggle Buttons
   .proficiency-toggle {
     color: var(--dnd5e-color-beige);
-    font-size: 12px;
+    font-size: var(--font-size-12);
 
     &.disabled {
       cursor: default;
@@ -300,7 +305,7 @@
       h4 {
         flex: 1px;
         margin: 0;
-        font-size: 11px;
+        font-size: var(--font-size-11);
         line-height: 18px;
       }
 
@@ -390,7 +395,7 @@
       h4 {
         flex: auto;
         margin: 0;
-        font-size: 13px;
+        font-size: var(--font-size-13);
         font-weight: bold;
         color: var(--dnd5e-color-olive);
       }
@@ -419,7 +424,7 @@
         top: 4px;
       }
       span.sep {
-        font-size: 12px;
+        font-size: var(--font-size-12);
       }
     }
   }
@@ -494,7 +499,7 @@
 
     .attunement {
       color: #7a7971;
-      font-size: 12px;
+      font-size: var(--font-size-12);
 
       [name="system.attributes.attunement.max"] {
         display: inline;
@@ -508,7 +513,7 @@
       list-style: none;
       margin: 4px 0 8px;
       padding: 0;
-      font-size: 12px;
+      font-size: var(--font-size-12);
 
       label {
         flex: 0;
@@ -559,7 +564,7 @@
       .item-recharge {
         flex: 0 0 80px;
         text-align: right;
-        font-size: 11px;
+        font-size: var(--font-size-11);
         white-space: nowrap;
       }
     }
@@ -574,7 +579,7 @@
     // Item Detail Sections
     .item-detail {
       flex: 0 0 70px;
-      font-size: 12px;
+      font-size: var(--font-size-12);
       text-align: center;
       border-right: 1px solid var(--dnd5e-color-faint);
       word-break: break-word;
@@ -600,7 +605,7 @@
     // Item Dropdown Summary
     .item-summary {
       flex: 0 0 100%;
-      font-size: 12px;
+      font-size: var(--font-size-12);
       line-height: 16px;
       padding: 0.25em 0.5em;
       color: var(--dnd5e-color-dark);
@@ -633,7 +638,7 @@
       position: absolute;
       top: 0;
       right: 0;
-      font-size: 13px;
+      font-size: var(--font-size-13);
       line-height: 12px;
       text-align: right;
       color: #EEE;
@@ -695,7 +700,7 @@
   .spell-comps {
     flex: none;
     padding: 0 5px;
-    font-size: 12px;
+    font-size: var(--font-size-12);
     color: var(--dnd5e-color-tan);
     border-right: 1px solid var(--dnd5e-color-faint);
   }
@@ -706,7 +711,7 @@
       max-width: 20px;
     }
     .sep {
-      font-size: 13px;
+      font-size: var(--font-size-13);
       font-weight: normal;
     }
   }
@@ -719,7 +724,7 @@
 
   .spell-school, .spell-action, .spell-target {
     flex: 0 0 100px;
-    font-size: 12px;
+    font-size: var(--font-size-12);
     color: var(--dnd5e-color-tan);
     text-align: center;
     border-right: 1px solid var(--dnd5e-color-faint);

@@ -10,7 +10,7 @@ h5 {
 
 .dnd5e {
   .window-content {
-    font-size: 13px;
+    font-size: var(--font-size-13);
   }
 
   /* ----------------------------------------- */
@@ -109,7 +109,9 @@ h5 {
     padding: 2px 0;
     border-top: var(--dnd5e-border-groove);
     border-bottom: var(--dnd5e-border-groove);
-    .modesto();
+    font-family: var(--dnd5e-font-modesto);
+    font-size: var(--font-size-20);
+    font-weight: 700;
   }
 
   /* Tags */
@@ -117,7 +119,7 @@ h5 {
     display: inline-block;
     margin: 0 2px 0 0;
     padding: 0 3px;
-    font-size: 10px;
+    font-size: var(--font-size-10);
     line-height: 16px;
     border: 1px solid #999;
     border-radius: 3px;
@@ -164,7 +166,7 @@ h5 {
     overflow-y: hidden;
     padding: 5px;
     background: var(--dnd5e-sheet-background);
-    font-size: 13px;
+    font-size: var(--font-size-13);
     color: var(--dnd5e-color-dark);
 
     form {
@@ -197,7 +199,7 @@ h5 {
   // Select Fields
   select {
     flex: 1;
-    font-size: 12px;
+    font-size: var(--font-size-12);
     height: 22px;
     background: transparent;
   }
@@ -247,7 +249,7 @@ h5 {
     .notification {
       font-family: 'Signika', sans-serif;
       font-weight: normal;
-      font-size: 13px;
+      font-size: var(--font-size-13);
       box-shadow: none;
       padding: 2px 8px;
       margin-bottom: 2px;
@@ -269,16 +271,19 @@ h5 {
     border-bottom: var(--dnd5e-border-groove);
 
     .header-details {
-      .modesto();
+      font-family: var(--dnd5e-font-modesto);
+      font-size: var(--font-size-20);
+      font-weight: 700;
 
       .summary select {
         width: 100%;
         height: 100%;
         border: 0;
 
-        .modesto();
-        text-transform: capitalize;
+        font-family: var(--dnd5e-font-modesto);
+        font-size: var(--font-size-20);
         font-weight: 100;
+        text-transform: capitalize;
       }
     }
 
@@ -293,7 +298,7 @@ h5 {
       input {
         display: block;
         height: 50px;
-        font-size: 32px;
+        font-size: var(--font-size-32);
         margin: 0;
       }
     }
@@ -341,7 +346,9 @@ h5 {
   .sheet-navigation {
     flex: 0 0 30px;
     margin-bottom: 5px;
-    .modesto();
+    font-family: var(--dnd5e-font-modesto);
+    font-size: var(--font-size-20);
+    font-weight: 700;
 
     .item {
       height: 30px;
@@ -378,13 +385,13 @@ h5 {
 
     .filter-icon {
       flex: none;
-      font-size: 14px;
+      font-size: var(--font-size-14);
       color: var(--dnd5e-color-tan);
     }
 
     .filter-item {
       text-align: center;
-      font-size: 12px;
+      font-size: var(--font-size-12);
       margin: 0 6px 0 0;
       border-bottom: 3px solid var(--dnd5e-color-beige);
       white-space: nowrap;
@@ -424,7 +431,7 @@ h5 {
     flex: 0 0 16px;
     padding: 2px 0;
     color: #999;
-    font-size: 10px;
+    font-size: var(--font-size-10);
   }
 }
 
@@ -452,7 +459,7 @@ h5 {
       flex: 2;
       margin: 0;
       overflow: hidden;
-      font-size: 13px;
+      font-size: var(--font-size-13);
       text-align: left;
       align-items: center;
       h3, h4 {
@@ -467,7 +474,7 @@ h5 {
       flex: 0 0 60px;
       justify-content: space-between;
       a {
-        font-size: 12px;
+        font-size: var(--font-size-12);
         text-align: center;
       }
     }
@@ -501,14 +508,15 @@ h5 {
       border: var(--dnd5e-border-groove);
       font-weight: bold;
       > * {
-        font-size: 12px;
+        font-size: var(--font-size-12);
         text-align: center;
       }
       h3 {
         padding-left: 5px;
-        .modesto();
+        font-family: var(--dnd5e-font-modesto);
+        font-size: var(--font-size-16);
+        font-weight: 700;
         text-align: left;
-        font-size: 16px;
       }
     }
   }
@@ -524,7 +532,7 @@ h5 {
       text-align: center;
       border-left: 1px solid var(--dnd5e-color-faint);
       border-right: 1px solid var(--dnd5e-color-faint);
-      font-size: 12px;
+      font-size: var(--font-size-12);
     }
     .effect-controls {
       border: none;
@@ -653,7 +661,7 @@ h5 {
   label.radio {
     display: flex;
     flex: auto;
-    font-size: 12px;
+    font-size: var(--font-size-12);
     line-height: 20px;
     font-weight: normal;
     align-items: baseline;
