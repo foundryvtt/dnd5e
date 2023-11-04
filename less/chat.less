@@ -1,5 +1,3 @@
-@import "variables.less";
-
 /* ----------------------------------------- */
 /*  Chat Cards                               */
 /* ----------------------------------------- */
@@ -23,7 +21,7 @@
       margin: 0;
       line-height: 36px;
       .modesto();
-      color: @colorOlive;
+      color: var(--dnd5e-color-olive);
       &:hover {
         color: #111;
         text-shadow: 0 0 10px red;
@@ -55,7 +53,7 @@
       display: block;
       line-height: 28px;
       text-align: center;
-      border: 1px solid @borderLight;
+      border: 1px solid var(--dnd5e-border-light);
     }
 
     button {

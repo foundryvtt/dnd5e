@@ -1,8 +1,6 @@
-@import "./variables.less";
-
-@actorNameHeight: 60px;
-
 .dnd5e.sheet.actor {
+
+  --dnd5e-actor-name-height: 60px;
 
   /* ----------------------------------------- */
   /*  Shared Styles                            */
@@ -10,7 +8,7 @@
 
   // Attribute Configuration
   .config-button {
-    color: @colorOlive;
+    color: var(--dnd5e-color-olive);
     font-size: 10px;
     font-weight: normal;
   }
@@ -30,10 +28,10 @@
     // Character Name
     h1.charname {
       flex: 1;
-      height: @actorNameHeight;
+      height: var(--dnd5e-actor-name-height);
       padding: 0;
       input {
-        height: @actorNameHeight - 20px;
+        height: calc(var(--dnd5e-actor-name-height) - 20px);
         margin: 10px 0;
       }
     }
@@ -43,7 +41,7 @@
       flex: 0 0 150px;
       max-width: 18em;
       margin-right: 3px;
-      height: @actorNameHeight;
+      height: var(--dnd5e-actor-name-height);
       justify-content: flex-end;
       text-align: right;
     }
@@ -51,7 +49,7 @@
     // Character Summary
     .summary {
       height: 30px;
-      border-bottom: @borderGroove;
+      border-bottom: var(--dnd5e-border-groove);
       font-size: 18px;
       input, span {
         display: block;
@@ -79,7 +77,7 @@
         height: 70px;
         margin: 0;
         border: none;
-        border-right: @borderGroove;
+        border-right: var(--dnd5e-border-groove);
         border-radius: 0;
 
         &:last-child {
@@ -126,8 +124,8 @@
     margin: 4px 8px 2px;
     .modesto();
     font-size: 18px;
-    color: @colorOlive;
-    border-bottom: 1px solid @colorFaint;
+    color: var(--dnd5e-color-olive);
+    border-bottom: 1px solid var(--dnd5e-color-faint);
     white-space: nowrap;
   }
 
@@ -149,7 +147,7 @@
     li.attribute {
       height: 60px;
       margin: 0 5px 0 0;
-      border: @borderGroove;
+      border: var(--dnd5e-border-groove);
       border-radius: 4px;
       text-align: center;
 
@@ -198,13 +196,13 @@
     margin: 0;
     padding: 0;
     .modesto();
-    border: @borderGroove;
+    border: var(--dnd5e-border-groove);
     border-radius: 3px;
 
     .ability {
       height: 70px;
       text-align: center;
-      border-bottom: @borderGroove;
+      border-bottom: var(--dnd5e-border-groove);
       position: relative;
 
       &:last-child {
@@ -241,11 +239,11 @@
           height: 22px;
           line-height: 22px;
           font-size: 16px;
-          border-top: @borderGroove;
+          border-top: var(--dnd5e-border-groove);
         }
 
         span.ability-mod {
-          border-right: @borderGroove;
+          border-right: var(--dnd5e-border-groove);
         }
 
         .ability-proficiency {
@@ -253,7 +251,7 @@
         }
 
         span.ability-save {
-          border-left: @borderGroove;
+          border-left: var(--dnd5e-border-groove);
         }
       }
     }
@@ -261,7 +259,7 @@
 
   // Proficiency Toggle Buttons
   .proficiency-toggle {
-    color: @colorBeige;
+    color: var(--dnd5e-color-beige);
     font-size: 12px;
 
     &.disabled {
@@ -270,11 +268,11 @@
     }
   }
   .proficient .proficiency-toggle {
-    color: @colorOlive;
+    color: var(--dnd5e-color-olive);
   }
 
   .locked .proficiency-toggle {
-    color: @colorBeige;
+    color: var(--dnd5e-color-beige);
     text-shadow: none;
     cursor: default;
   }
@@ -288,7 +286,7 @@
     list-style: none;
     margin: 0 5px 0;
     padding: 0;
-    border: @borderGroove;
+    border: var(--dnd5e-border-groove);
     border-radius: 3px;
 
     li.skill {
@@ -338,7 +336,7 @@
       .skill-passive {
         flex: 0 0 26px;
         text-align: center;
-        color: @colorTan;
+        color: var(--dnd5e-color-tan);
       }
     }
   }
@@ -374,7 +372,7 @@
     flex: none;
     padding: 5px 0;
     margin: 0;
-    border-bottom: @borderGroove;
+    border-bottom: var(--dnd5e-border-groove);
 
     .counter {
       height: 20px;
@@ -394,7 +392,7 @@
         margin: 0;
         font-size: 13px;
         font-weight: bold;
-        color: @colorOlive;
+        color: var(--dnd5e-color-olive);
       }
 
       .counter-value {
@@ -474,7 +472,7 @@
     }
 
     .inactive {
-      color: @colorTan;
+      color: var(--dnd5e-color-tan);
     }
   }
 
@@ -517,13 +515,13 @@
         margin-left: 8px;
         text-align: right;
         line-height: 20px;
-        color: @colorTan;
+        color: var(--dnd5e-color-tan);
       }
       input[type="text"], input[type="number"] {
         flex: 0 0 48px;
         text-align: center;
         margin-left: 8px;
-        border-bottom: @borderGroove;
+        border-bottom: var(--dnd5e-border-groove);
       }
     }
   }
@@ -541,8 +539,8 @@
         &.rollable .item-image:hover {
           background-image: url("../../icons/svg/d20-black.svg") !important;
         }
-        i.attuned { color: @colorCrimson; }
-        i.not-attuned { color: @colorTan; }
+        i.attuned { color: var(--dnd5e-color-crimson); }
+        i.not-attuned { color: var(--dnd5e-color-tan); }
         h4 { line-height: 30px; }
       }
 
@@ -578,7 +576,7 @@
       flex: 0 0 70px;
       font-size: 12px;
       text-align: center;
-      border-right: 1px solid @colorFaint;
+      border-right: 1px solid var(--dnd5e-color-faint);
       word-break: break-word;
       white-space: nowrap;
       overflow: hidden;
@@ -590,8 +588,8 @@
 
     .item-weight {
       flex: 0 0 60px;
-      border-left: 1px solid @colorFaint;
-      border-right: 1px solid @colorFaint;
+      border-left: 1px solid var(--dnd5e-color-faint);
+      border-right: 1px solid var(--dnd5e-color-faint);
     }
 
     // Item Control Buttons
@@ -605,17 +603,17 @@
       font-size: 12px;
       line-height: 16px;
       padding: 0.25em 0.5em;
-      color: @colorDark;
-      border-top: 1px solid @colorFaint;
+      color: var(--dnd5e-color-dark);
+      border-top: 1px solid var(--dnd5e-color-faint);
     }
   }
 
   /* Encumbrance Bar */
   .encumbrance {
     flex: 0 0 12px;
-    background: @colorTan;
+    background: var(--dnd5e-color-tan);
     margin: 1px 15px 0 1px;
-    border: 1px solid @colorDark;
+    border: 1px solid var(--dnd5e-color-dark);
     border-radius: 3px;
     position: relative;
 
@@ -698,8 +696,8 @@
     flex: none;
     padding: 0 5px;
     font-size: 12px;
-    color: @colorTan;
-    border-right: 1px solid @colorFaint;
+    color: var(--dnd5e-color-tan);
+    border-right: 1px solid var(--dnd5e-color-faint);
   }
 
   .spell-slots {
@@ -716,15 +714,15 @@
   .spellbook .spell-uses {
     padding-right: 5px;
     text-align: right;
-    color: @colorTan;
+    color: var(--dnd5e-color-tan);
   }
 
   .spell-school, .spell-action, .spell-target {
     flex: 0 0 100px;
     font-size: 12px;
-    color: @colorTan;
+    color: var(--dnd5e-color-tan);
     text-align: center;
-    border-right: 1px solid @colorFaint;
+    border-right: 1px solid var(--dnd5e-color-faint);
   }
 
   .spell-component {
@@ -734,7 +732,7 @@
       text-align: center;
       padding-top: 1px;
       width: 16px;
-      color: @colorFaint;
+      color: var(--dnd5e-color-faint);
       background: rgba(0, 0, 0, 0.4);
       border: 1px solid transparent;
       border-radius: 8px;

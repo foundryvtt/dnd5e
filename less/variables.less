@@ -1,8 +1,3 @@
-
-/* Deprecated vars */
-@borderLight: #CCC;
-@borderDark: #666;
-
 /* ----------------------------------------- */
 /*  Fonts                                    */
 /* ----------------------------------------- */
@@ -31,14 +26,18 @@
 /*  Sheet Styles                             */
 /* ----------------------------------------- */
 
-@colorDark: #191813;
-@colorFaint: #c9c7b8;
-@colorBeige: #b5b3a4;
-@colorTan: #7a7971;
-@colorOlive: #4b4a44;
-@colorCrimson: #44191A;
-@borderGroove: 2px groove #eeede0;
-@sheetBackground: url("ui/parchment.jpg") repeat;
+:root {
+  --dnd5e-color-dark: #191813;
+  --dnd5e-color-faint: #c9c7b8;
+  --dnd5e-color-beige: #b5b3a4;
+  --dnd5e-color-tan: #7a7971;
+  --dnd5e-color-olive: #4b4a44;
+  --dnd5e-color-crimson: #44191A;
+  --dnd5e-color-groove: #eeede0;
+  --dnd5e-border-light: 1px solid #CCC;
+  --dnd5e-border-groove: 2px groove var(--dnd5e-color-groove);
+  --dnd5e-sheet-background: url("ui/parchment.jpg") repeat;
+}
 
 /* ----------------------------------------- */
 /*  Flexbox                                  */

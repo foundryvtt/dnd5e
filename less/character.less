@@ -1,5 +1,3 @@
-@import "./variables.less";
-
 /* ----------------------------------------- */
 /*  Basic Structure                          */
 /* ----------------------------------------- */
@@ -27,7 +25,7 @@
       overflow: hidden;
       text-overflow: ellipsis;
       font-size: 18px;
-      color: @colorTan;
+      color: var(--dnd5e-color-tan);
       white-space: nowrap;
     }
 
@@ -38,7 +36,7 @@
       align-items: center;
       font-size: 18px;
       span.max {
-        color: @colorTan;
+        color: var(--dnd5e-color-tan);
         flex: none;
         margin-left: 3px;
       }
@@ -47,7 +45,7 @@
       flex: 0 0 8px;
       width: 100%;
       margin-bottom: 5px;
-      background: @colorTan;
+      background: var(--dnd5e-color-tan);
       border: 1px solid #000;
       border-radius: 3px;
       .bar {
@@ -63,7 +61,7 @@
     // Header Attributes
     .attributes {
       a.rest {
-        border: 1px solid @colorBeige;
+        border: 1px solid var(--dnd5e-color-beige);
         border-radius: 2px;
         background: rgba(0, 0, 0, 0.05);
         padding: 0 3px;
@@ -99,7 +97,7 @@
       font-family: "Signika", sans-serif;
       font-size: 11px;
       text-align: center;
-      color: @colorOlive;
+      color: var(--dnd5e-color-olive);
       align-items: center;
       input[type="checkbox"] {
         flex-basis: 14px;
@@ -139,12 +137,12 @@
     .item-controls {
       flex: 0 0 68px;
       .item-toggle {
-        color: @colorBeige;
+        color: var(--dnd5e-color-beige);
         &.active {
-          color: @colorOlive;
+          color: var(--dnd5e-color-olive);
         }
         &.fixed {
-          color: @colorCrimson;
+          color: var(--dnd5e-color-crimson);
           &:hover {
             text-shadow: none;
           }
@@ -172,7 +170,7 @@
     textarea {
       font-family: "Signika", serif;
       font-size: 13px;
-      border: 1px solid @colorFaint;
+      border: 1px solid var(--dnd5e-color-faint);
       resize: none;
     }
   }
