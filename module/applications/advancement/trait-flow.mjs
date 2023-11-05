@@ -98,14 +98,13 @@ export default class TraitFlow extends AdvancementFlow {
    */
   async prepareInitialValue() {
     const existingChosen = this.retainedData?.chosen ?? this.advancement.value.chosen;
-    if ( existingChosen && existingChosen.size ) return new Set(existingChosen);
+    if ( existingChosen?.size ) return new Set(existingChosen);
     const { available } = await this.advancement.unfulfilledChoices();
     const chosen = new Set();
     for ( const a of available ) {
       if ( (a._index !== undefined) && (this.advancement.configuration.choiceMode === "exclusive") ) continue;
       const set = a.asSet();
-      if ( set.size !== 1 ) continue;
-      chosen.add(set.first());
+      if ( set.size === 1 ) chosen.add(set.first());
     }
     return chosen;
   }
@@ -123,7 +122,7 @@ export default class TraitFlow extends AdvancementFlow {
     const chosen = Array.from(this.chosen);
     let selectorShown = false;
     const slots = [];
-    for ( let i = 1; i < count; i++ ) {
+    for ( let i = 1; i <= count; i++ ) {
       const key = chosen.shift();
       if ( selectorShown || (!key && !available) ) continue;
       selectorShown = !key;

@@ -90,7 +90,6 @@ export default class TraitAdvancement extends Advancement {
     for ( const key of data.chosen ) {
       const keyPath = Trait.changeKeyPath(key);
       let existingValue = updates[keyPath] ?? foundry.utils.getProperty(this.actor, keyPath);
-      console.log(keyPath, existingValue);
 
       if ( ["Array", "Set"].includes(foundry.utils.getType(existingValue)) ) {
         existingValue = new Set(existingValue);
@@ -133,9 +132,8 @@ export default class TraitAdvancement extends Advancement {
       else if ( this.configuration.mode === "expertise" ) updates[keyPath] = 1;
       else if ( this.configuration.mode === "upgrade" ) updates[keyPath] = existingValue === 1 ? 0 : 1;
       else updates[keyPath] = 0;
-      // TODO: When using forced expertise mode, this has the potential to lost data
-      // if the value before being applied is 1. To fix that this would need to store
-      // the value before the change was applied.
+      // NOTE: When using forced expertise mode, this will not return to original value
+      // if the value before being applied is 1.
     }
 
     const retainedData = foundry.utils.deepClone(this.value);
@@ -301,8 +299,8 @@ export default class TraitAdvancement extends Advancement {
     available.sort((lhs, rhs) => lhs.asSet().size - rhs.asSet().size);
 
     // Remove any fulfilled grants
-    if ( this.configuration.choiceMode === "inclusive" ) this.removeFullfilledInclusive(available, selected);
-    else this.removeFullfilledExclusive(available, selected);
+    if ( this.configuration.choiceMode === "inclusive" ) this.removeFulfilledInclusive(available, selected.item);
+    else this.removeFulfilledExclusive(available, selected.item);
 
     // Merge all possible choices into a single SelectChoices
     const allChoices = await Trait.mixedChoices(actorData.available);
@@ -320,41 +318,40 @@ export default class TraitAdvancement extends Advancement {
 
   /**
    * Remove any fulfilled grants, handling choices using the "inclusive" elimination mode.
-   * @param {Set<string>[]} available  List of grant/choice pools.
+   * @param {SelectChoices[]} available  List of grant/choice pools.
    * @param {Set<string>} selected     Currently selected trait keys.
    */
-  removeFullfilledInclusive(available, selected) {
-    for ( const key of selected.item ) available.findSplice(grant => grant.asSet().has(key));
+  removeFulfilledInclusive(available, selected) {
+    for ( const key of selected ) available.findSplice(grant => grant.asSet().has(key));
   }
 
   /* -------------------------------------------- */
 
   /**
    * Remove any fulfilled grants, handling choices using the "exclusive" elimination mode.
-   * @param {Set<string>[]} available  List of grant/choice pools.
+   * @param {SelectChoices[]} available  List of grant/choice pools.
    * @param {Set<string>} selected    Currently selected trait keys.
    */
-  removeFullfilledExclusive(available, selected) {
+  removeFulfilledExclusive(available, selected) {
     const indices = new Set(available.map(a => a._index));
-    for ( const key of selected.item ) {
+    for ( const key of selected ) {
       // Remove first selected grant
       const index = available.findIndex(grant => grant.asSet().has(key));
       const firstMatch = available[index];
       available.splice(index, 1);
 
-      if ( firstMatch?._index !== undefined ) {
-        for ( const index of indices ) {
-          if ( index === firstMatch._index ) continue;
-          // If it has an index, remove any other choices by index that don't have this choice
-          const anyMatch = available.filter(a => a._index === index).some(grant => grant.asSet().has(key));
-          if ( !anyMatch ) {
-            let removeIndex = available.findIndex(a => a._index === index);
-            while ( removeIndex !== -1 ) {
-              available.splice(removeIndex, 1);
-              removeIndex = available.findIndex(a => a._index === index);
-            }
-            indices.delete(index);
+      if ( firstMatch?._index === undefined ) continue;
+      for ( const index of indices ) {
+        if ( index === firstMatch._index ) continue;
+        // If it has an index, remove any other choices by index that don't have this choice
+        const anyMatch = available.filter(a => a._index === index).some(grant => grant.asSet().has(key));
+        if ( !anyMatch ) {
+          let removeIndex = available.findIndex(a => a._index === index);
+          while ( removeIndex !== -1 ) {
+            available.splice(removeIndex, 1);
+            removeIndex = available.findIndex(a => a._index === index);
           }
+          indices.delete(index);
         }
       }
     }

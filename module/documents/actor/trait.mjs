@@ -91,8 +91,8 @@ export function changeKeyPath(key, trait) {
 
 /**
  * Build up a trait structure containing all of the children gathered from config & base items.
- * @param {string} trait  Trait as defined in `CONFIG.DND5E.traits`.
- * @returns {object}      Object with trait categories and children.
+ * @param {string} trait       Trait as defined in `CONFIG.DND5E.traits`.
+ * @returns {Promise<object>}  Object with trait categories and children.
  */
 export async function categories(trait) {
   const traitConfig = CONFIG.DND5E.traits[trait];
@@ -156,7 +156,7 @@ export async function categories(trait) {
  * @param {Set<string>} [options.chosen=[]]   Optional list of keys to be marked as chosen.
  * @param {boolean} [options.prefixed=false]  Should keys be prefixed with trait type?
  * @param {boolean} [options.any=false]       Should the "Any" option be added to each category?
- * @returns {SelectChoices}                   Object mapping proficiency ids to choice objects.
+ * @returns {Promise<SelectChoices>}          Object mapping proficiency ids to choice objects.
  */
 export async function choices(trait, { chosen=new Set(), prefixed=false, any=false }={}) {
   const traitConfig = CONFIG.DND5E.traits[trait];
@@ -206,7 +206,7 @@ export async function choices(trait, { chosen=new Set(), prefixed=false, any=fal
  * Prepare an object with all possible choices from a set of keys. These choices will be grouped by
  * trait type if more than one type is present.
  * @param {Set<string>} keys  Prefixed trait keys.
- * @returns {SelectChoices}
+ * @returns {Promise<SelectChoices>}
  */
 export async function mixedChoices(keys) {
   if ( !keys.size ) return new SelectChoices();
