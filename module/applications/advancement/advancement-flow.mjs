@@ -104,8 +104,7 @@ export default class AdvancementFlow extends FormApplication {
     await super._render(...args);
 
     // Call setPosition on manager to adjust for size changes
-    const manager = ui.windows[this.element[0].closest(".app.advancement.flow")?.dataset.appid];
-    manager?.setPosition();
+    this.options.manager?.setPosition();
   }
 
   /* -------------------------------------------- */
