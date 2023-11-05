@@ -101,9 +101,9 @@ export default class TraitFlow extends AdvancementFlow {
     if ( existingChosen?.size ) return new Set(existingChosen);
     const { available } = await this.advancement.unfulfilledChoices();
     const chosen = new Set();
-    for ( const a of available ) {
-      if ( (a._index !== undefined) && (this.advancement.configuration.choiceMode === "exclusive") ) continue;
-      const set = a.asSet();
+    for ( const { type, choices } of available ) {
+      if ( (type === "choice") && (this.advancement.configuration.choiceMode === "exclusive") ) continue;
+      const set = choices.asSet();
       if ( set.size === 1 ) chosen.add(set.first());
     }
     return chosen;

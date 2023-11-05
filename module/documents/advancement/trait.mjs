@@ -31,6 +31,18 @@ export default class TraitAdvancement extends Advancement {
   }
 
   /* -------------------------------------------- */
+
+  /**
+   * The maximum number of traits granted by this advancement. The number of traits actually granted may be lower if
+   * actor already has some traits or exclusive choice mode is set.
+   * @type {number}
+   */
+  get maxTraits() {
+    const { grants, choices } = this.configuration;
+    return grants.size + choices.reduce((acc, choice) => acc + choice.count, 0);
+  }
+
+  /* -------------------------------------------- */
   /*  Preparation Methods                         */
   /* -------------------------------------------- */
 
@@ -215,7 +227,7 @@ export default class TraitAdvancement extends Advancement {
 
     // Remove any grants that have no choices remaining
     let unfilteredLength = available.length;
-    available = available.filter(a => a.asSet().size > 0);
+    available = available.filter(a => a.choices.asSet().size > 0);
 
     // If replacements are allowed and there are grants with zero choices from their limited set,
     // display all remaining choices as an option
@@ -236,17 +248,17 @@ export default class TraitAdvancement extends Advancement {
       // they already have proficiency in all musical instruments. Might not be worth the effort.
     }
 
+    if ( !available.length ) return null;
+
     // Create a choices object featuring a union of choices from all remaining grants
-    const remainingSet = new Set(available.flatMap(a => Array.from(a.asSet())));
+    const remainingSet = new Set(available.flatMap(a => Array.from(a.choices.asSet())));
     choices.filter(remainingSet);
 
     // Simplify label if exclusive mode and more than one set of choices still available
     const simplifyNotification = this.configuration.choiceMode === "exclusive"
-      && (new Set(available.map(a => a._index))).size > 1;
+      && (new Set(available.map(a => a.choiceIdx))).size > 1;
 
-    if ( !available.length ) return null;
-
-    const rep = this.representedTraits(available.map(a => a.asSet()));
+    const rep = this.representedTraits(available.map(a => a.choices.asSet()));
     return {
       choices,
       label: game.i18n.format(`DND5E.AdvancementTraitChoicesRemaining${simplifyNotification ? "Simple" : ""}`, {
@@ -259,10 +271,22 @@ export default class TraitAdvancement extends Advancement {
   /* -------------------------------------------- */
 
   /**
+   * The advancement configuration is flattened into separate options for the user that are chosen step-by-step. Some
+   * are automatically picked for them if they are 'grants' or if there is only one option after the character's
+   * existing traits have been taken into account.
+   * @typedef {object} TraitChoices
+   * @property {"grant"|"choice"} type  Whether this trait is automatically granted or is chosen from some options.
+   * @property {number} [choiceIdx]     An index that groups each separate choice into the groups that they originally
+   *                                    came from.
+   * @property {SelectChoices} choices  The available traits to pick from. Grants have only 0 or 1, depending on whether
+   *                                    the character already has the granted trait.
+   */
+
+  /**
    * Determine which of the provided grants, if any, still needs to be fulfilled.
    * @param {Set<string>} [chosen]  Traits already chosen on the advancement. If not set then it will
    *                                be retrieved from advancement's value.
-   * @returns {{ available: SelectChoices[], choices: SelectChoices }}
+   * @returns {{ available: TraitChoices[], choices: SelectChoices }}
    */
   async unfulfilledChoices(chosen) {
     const actorData = await this.actorSelected();
@@ -271,32 +295,26 @@ export default class TraitAdvancement extends Advancement {
       item: chosen ?? this.value.selected ?? new Set()
     };
 
-    // Duplicate choices a number of times equal to their count to get numbers correct
-    const choices = Array.from(this.configuration.choices.entries()).reduce((arr, [index, choice]) => {
-      const set = new Set(choice.pool);
-      set._index = index;
-      let count = choice.count;
-      while ( count > 0 ) {
-        arr.push(set);
-        count -= 1;
-      }
-      return arr;
-    }, []);
-
     // If everything has already been selected, no need to go further
-    if ( (this.configuration.grants.size + choices.length) <= selected.item.size ) {
+    if ( this.maxTraits <= selected.item.size ) {
       return { available: [], choices: new SelectChoices() };
     }
 
-    let available = await Promise.all([
-      ...this.configuration.grants.map(g => Trait.mixedChoices(new Set([g]))),
-      ...choices.map(async c => {
-        const choices = await Trait.mixedChoices(c);
-        if ( c._index !== undefined ) Object.defineProperty(choices, "_index", { value: c._index, enumerable: false });
-        return choices;
-      })
+    const available = await Promise.all([
+      ...this.configuration.grants.map(async g => ({
+        type: "grant",
+        choices: await Trait.mixedChoices(new Set([g]))
+      })),
+      ...this.configuration.choices.reduce((arr, choice, index) => {
+        return arr.concat(Array.fromRange(choice.count).map(async () => ({
+          type: "choice",
+          choiceIdx: index,
+          choices: await Trait.mixedChoices(choice.pool)
+        })));
+      }, [])
     ]);
-    available.sort((lhs, rhs) => lhs.asSet().size - rhs.asSet().size);
+
+    available.sort((lhs, rhs) => lhs.choices.asSet().size - rhs.choices.asSet().size);
 
     // Remove any fulfilled grants
     if ( this.configuration.choiceMode === "inclusive" ) this.removeFulfilledInclusive(available, selected.item);
@@ -305,11 +323,7 @@ export default class TraitAdvancement extends Advancement {
     // Merge all possible choices into a single SelectChoices
     const allChoices = await Trait.mixedChoices(actorData.available);
     allChoices.exclude(new Set([...(selected.actor ?? []), ...selected.item]));
-    available = available.map(a => {
-      const filtered = allChoices.filter(a, { inplace: false });
-      if ( a._index !== undefined ) Object.defineProperty(filtered, "_index", { value: a._index, enumerable: false });
-      return filtered;
-    });
+    available.forEach(a => a.choices = allChoices.filter(a.choices, { inplace: false }));
 
     return { available, choices: allChoices };
   }
@@ -318,41 +332,32 @@ export default class TraitAdvancement extends Advancement {
 
   /**
    * Remove any fulfilled grants, handling choices using the "inclusive" elimination mode.
-   * @param {SelectChoices[]} available  List of grant/choice pools.
-   * @param {Set<string>} selected     Currently selected trait keys.
+   * @param {TraitChoices[]} available  List of grant/choice pools.
+   * @param {Set<string>} selected      Currently selected trait keys.
    */
   removeFulfilledInclusive(available, selected) {
-    for ( const key of selected ) available.findSplice(grant => grant.asSet().has(key));
+    for ( const key of selected ) available.findSplice(grant => grant.choices.asSet().has(key));
   }
 
   /* -------------------------------------------- */
 
   /**
    * Remove any fulfilled grants, handling choices using the "exclusive" elimination mode.
-   * @param {SelectChoices[]} available  List of grant/choice pools.
-   * @param {Set<string>} selected    Currently selected trait keys.
+   * @param {TraitChoices[]} available  List of grant/choice pools.
+   * @param {Set<string>} selected      Currently selected trait keys.
    */
   removeFulfilledExclusive(available, selected) {
-    const indices = new Set(available.map(a => a._index));
     for ( const key of selected ) {
       // Remove first selected grant
-      const index = available.findIndex(grant => grant.asSet().has(key));
+      const index = available.findIndex(grant => grant.choices.asSet().has(key));
       const firstMatch = available[index];
       available.splice(index, 1);
 
-      if ( firstMatch?._index === undefined ) continue;
-      for ( const index of indices ) {
-        if ( index === firstMatch._index ) continue;
-        // If it has an index, remove any other choices by index that don't have this choice
-        const anyMatch = available.filter(a => a._index === index).some(grant => grant.asSet().has(key));
-        if ( !anyMatch ) {
-          let removeIndex = available.findIndex(a => a._index === index);
-          while ( removeIndex !== -1 ) {
-            available.splice(removeIndex, 1);
-            removeIndex = available.findIndex(a => a._index === index);
-          }
-          indices.delete(index);
-        }
+      if ( firstMatch.type === "grant" ) continue;
+      for ( let i = available.length - 1; i >= 0; i-- ) {
+        const { choiceIdx, choices, type } = available[i];
+        if ( (type === "grant") || (choiceIdx === firstMatch.choiceIdx) ) continue;
+        if ( !choices.asSet().has(key) ) available.splice(i, 1);
       }
     }
   }
