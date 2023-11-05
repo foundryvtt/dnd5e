@@ -108,17 +108,16 @@ Hooks.once("init", () => {
 ## Add new Feature Item Type and Subtypes
 ```js
 /// Adds in a new feature type, similar to "Class Feature" called "Martial Exploit", with 3 different subtypes for it.
-Hooks.once("setup", function(){
+Hooks.once("init", () => {
   CONFIG.DND5E.featureTypes.marexploit = {
-  label: "Martial Exploit",
-  subtypes: {
-    first: "1st-Degree",
-    second: "2nd-Degree",
-    third: "3rd-Degree"
+    label: "Martial Exploit",
+    subtypes: {
+      first: "1st-Degree",
+      second: "2nd-Degree",
+      third: "3rd-Degree"
     }
-};
-```
-
+  };
+});
 ## Add a new Armor Calculation
 ```js
 /// Add a new AC Calculation
@@ -141,24 +140,24 @@ Hooks.once("init", () => {
 ## Remove, Rename, and Add new Languages 
 ```js
 /// Removes Common, Renames Deepspeech to Voidspeech, and adds a languages called Ochnun
-Hooks.once("setup", function addLanguages(){
+Hooks.once("init", () => {
   delete CONFIG.DND5E.languages.common;
   CONFIG.DND5E.languages.deep = "Voidspeech";
-  CONFIG.DND5E.languages.ochnun= "Ochnun";
+  CONFIG.DND5E.languages.ochnun = "Ochnun";
 });
 ```
 
 ## Add new Item Activation Cost Types
 ```js
 /// Adds in options to display in the Activation Cost dropdown
-Hooks.once("setup", function(){
+Hooks.once("init", () => {
   CONFIG.DND5E.abilityActivationTypes.crithit = 'Critical Hit';
   CONFIG.DND5E.abilityActivationTypes.attack = 'On Attack';
   CONFIG.DND5E.abilityActivationTypes.attack = 'Replaces Attack';
   CONFIG.DND5E.abilityActivationTypes.meleehit = 'On Melee Hit';
   CONFIG.DND5E.abilityActivationTypes.rangedhit = 'On Ranged Hit';
   CONFIG.DND5E.abilityActivationTypes.weaponhit = 'On Weapon Hit';
-}),
+});
 ```
 
 ## Add new Weapon Types
