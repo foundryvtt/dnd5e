@@ -2144,6 +2144,17 @@ export default class Item5e extends Item {
 
     // Get spell data
     const itemData = (spell instanceof Item5e) ? spell.toObject() : spell;
+
+    /**
+     * A hook event that fires before the item data for a scroll is created.
+     * @function dnd5e.preCreateScrollFromSpell
+     * @memberof hookEvents
+     * @param {object} itemData    The final item data used to make the scroll
+     * @param {object} [options]   Additional options that modify the created scroll
+     * @returns {boolean}          Explicitly return false to prevent the scroll to be created.
+     */
+    if ( Hooks.call("dnd5e.preCreateScrollFromSpell", itemData, options) === false ) return;
+
     let {
       actionType, description, source, activation, duration, target,
       range, damage, formula, save, level, attackBonus, ability, components
