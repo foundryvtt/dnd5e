@@ -63,7 +63,7 @@ Hooks.once("init", () => {
 });
 ```
 
-## Adding a new Damage Type
+## Add a new Damage Type
 ```js
 /// Adds a new "plasma" damage type that will be selectable as a new type of damage for weapons and a new type of resistance for actors.
 Hooks.once("init", () => {
