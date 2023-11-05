@@ -1,5 +1,9 @@
+import ActorMovementConfig from "../actor/movement-config.mjs";
+import ActorSensesConfig from "../actor/senses-config.mjs";
+import ActorTypeConfig from "../actor/type-config.mjs";
 import AdvancementManager from "../advancement/advancement-manager.mjs";
 import AdvancementMigrationDialog from "../advancement/advancement-migration-dialog.mjs";
+import Accordion from "../accordion.mjs";
 import TraitSelector from "../trait-selector.mjs";
 import ActiveEffect5e from "../../documents/active-effect.mjs";
 import * as Trait from "../../documents/actor/trait.mjs";
@@ -19,6 +23,8 @@ export default class ItemSheet5e extends ItemSheet {
     else if ( this.object.type === "subclass" ) {
       this.options.height = this.position.height = 540;
     }
+
+    this._accordions = this._createAccordions();
   }
 
   /* -------------------------------------------- */
@@ -40,7 +46,10 @@ export default class ItemSheet5e extends ItemSheet {
       dragDrop: [
         {dragSelector: "[data-effect-id]", dropSelector: ".effects-list"},
         {dragSelector: ".advancement-item", dropSelector: ".advancement"}
-      ]
+      ],
+      accordions: [{
+        headingSelector: ".description-header", contentSelector: ".editor"
+      }]
     });
   }
 
@@ -54,6 +63,14 @@ export default class ItemSheet5e extends ItemSheet {
 
   /* -------------------------------------------- */
 
+  /**
+   * The description currently being edited.
+   * @type {string}
+   */
+  editingDescriptionTarget;
+
+  /* -------------------------------------------- */
+
   /** @inheritdoc */
   get template() {
     return `systems/dnd5e/templates/items/${this.item.type}.hbs`;
@@ -61,6 +78,14 @@ export default class ItemSheet5e extends ItemSheet {
 
   /* -------------------------------------------- */
   /*  Context Preparation                         */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _render(force, options) {
+    if ( !this.editingDescriptionTarget ) this._accordions.forEach(accordion => accordion._saveCollapsedState());
+    return super._render(force, options);
+  }
+
   /* -------------------------------------------- */
 
   /** @override */
@@ -122,12 +147,20 @@ export default class ItemSheet5e extends ItemSheet {
     }
 
     // Enrich HTML description
-    context.descriptionHTML = await TextEditor.enrichHTML(item.system.description.value, {
-      secrets: item.isOwner,
-      async: true,
-      relativeTo: this.item,
-      rollData: context.rollData
-    });
+    const enrichmentOptions = {
+      secrets: item.isOwner, async: true, relativeTo: this.item, rollData: context.rollData
+    };
+    context.enriched = {
+      description: await TextEditor.enrichHTML(item.system.description.value, enrichmentOptions),
+      unidentified: await TextEditor.enrichHTML(item.system.description.unidentified, enrichmentOptions),
+      chat: await TextEditor.enrichHTML(item.system.description.chat, enrichmentOptions)
+    };
+    if ( this.editingDescriptionTarget ) {
+      context.editingDescriptionTarget = this.editingDescriptionTarget;
+      context.enriched.editing = await TextEditor.enrichHTML(
+        foundry.utils.getProperty(context, this.editingDescriptionTarget), enrichmentOptions
+      );
+    }
     return context;
   }
 
@@ -366,7 +399,10 @@ export default class ItemSheet5e extends ItemSheet {
       menu: ProseMirror.ProseMirrorMenu.build(ProseMirror.defaultSchema, {
         compact: true,
         destroyOnSave: true,
-        onSave: () => this.saveEditor(name, {remove: true})
+        onSave: () => {
+          this.saveEditor(name, {remove: true});
+          this.editingDescriptionTarget = null;
+        }
       })
     };
     return super.activateEditor(name, options, initialContent);
@@ -429,7 +465,9 @@ export default class ItemSheet5e extends ItemSheet {
   /** @inheritDoc */
   activateListeners(html) {
     super.activateListeners(html);
+    if ( !this.editingDescriptionTarget ) this._accordions.forEach(accordion => accordion.bind(html[0]));
     if ( this.isEditable ) {
+      html.find(".config-button").click(this._onConfigMenu.bind(this));
       html.find(".damage-control").click(this._onDamageControl.bind(this));
       html.find(".trait-selector").click(this._onConfigureTraits.bind(this));
       html.find(".effect-control").click(ev => {
@@ -440,6 +478,10 @@ export default class ItemSheet5e extends ItemSheet {
       html.find(".advancement .item-control").click(event => {
         const t = event.currentTarget;
         if ( t.dataset.action ) this._onAdvancementAction(t, t.dataset.action);
+      });
+      html.find(".description-edit").click(event => {
+        this.editingDescriptionTarget = event.currentTarget.dataset.target;
+        this.render();
       });
     }
 
@@ -492,6 +534,31 @@ export default class ItemSheet5e extends ItemSheet {
   }
 
   /* -------------------------------------------- */
+  /**
+   * Handle spawning the configuration applications.
+   * @param {Event} event   The click event which originated the selection.
+   * @protected
+   */
+  _onConfigMenu(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    const button = event.currentTarget;
+    let app;
+    switch ( button.dataset.action ) {
+      case "movement":
+        app = new ActorMovementConfig(this.item, { keyPath: "system.movement" });
+        break;
+      case "senses":
+        app = new ActorSensesConfig(this.item, { keyPath: "system.senses" });
+        break;
+      case "type":
+        app = new ActorTypeConfig(this.item, { keyPath: "system.type" });
+        break;
+    }
+    app?.render(true);
+  }
+
+  /* -------------------------------------------- */
 
   /**
    * Add or remove a damage part from the damage formula.
@@ -519,6 +586,7 @@ export default class ItemSheet5e extends ItemSheet {
       return this.item.update({"system.damage.parts": damage.parts});
     }
   }
+
   /* -------------------------------------------- */
 
   /** @inheritdoc */
@@ -717,5 +785,16 @@ export default class ItemSheet5e extends ItemSheet {
   async _onSubmit(...args) {
     if ( this._tabs[0].active === "details" ) this.position.height = "auto";
     await super._onSubmit(...args);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Instantiate accordion widgets.
+   * @returns {Accordion[]}
+   * @protected
+   */
+  _createAccordions() {
+    return this.options.accordions.map(config => new Accordion(config));
   }
 }

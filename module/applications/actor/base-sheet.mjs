@@ -19,6 +19,7 @@ import PropertyAttribution from "../property-attribution.mjs";
 import TraitSelector from "./trait-selector.mjs";
 import ProficiencyConfig from "./proficiency-config.mjs";
 import ToolSelector from "./tool-selector.mjs";
+import { simplifyBonus } from "../../utils.mjs";
 
 /**
  * Extend the basic ActorSheet class to suppose system-specific logic and functionality.
@@ -158,7 +159,7 @@ export default class ActorSheet5e extends ActorSheet {
         entry.abbreviation = CONFIG.DND5E.abilities[entry.ability]?.abbreviation;
         entry.icon = this._getProficiencyIcon(entry.value);
         entry.hover = CONFIG.DND5E.proficiencyLevels[entry.value];
-        entry.label = prop === "skills" ? CONFIG.DND5E.skills[key]?.label : Trait.keyLabel("tool", key);
+        entry.label = prop === "skills" ? CONFIG.DND5E.skills[key]?.label : Trait.keyLabel(key, {trait: "tool"});
         entry.baseValue = source.system[prop]?.[key]?.value ?? 0;
       }
     });
@@ -292,14 +293,15 @@ export default class ActorSheet5e extends ActorSheet {
    * @protected
    */
   _prepareActiveEffectAttributions(target) {
+    const rollData = this.actor.getRollData({deterministic: true});
     return this.actor.effects.reduce((arr, e) => {
       let source = e.sourceName;
-      if ( e.origin === this.actor.uuid ) source = e.label;
+      if ( e.origin === this.actor.uuid ) source = e.name;
       if ( !source || e.disabled || e.isSuppressed ) return arr;
       const value = e.changes.reduce((n, change) => {
-        if ( (change.key !== target) || !Number.isNumeric(change.value) ) return n;
+        if ( change.key !== target ) return n;
         if ( change.mode !== CONST.ACTIVE_EFFECT_MODES.ADD ) return n;
-        return n + Number(change.value);
+        return n + simplifyBonus(change.value, rollData);
       }, 0);
       if ( !value ) return arr;
       arr.push({value, label: source, mode: CONST.ACTIVE_EFFECT_MODES.ADD});
@@ -417,7 +419,7 @@ export default class ActorSheet5e extends ActorSheet {
       }
 
       data.selected = values.reduce((obj, key) => {
-        obj[key] = Trait.keyLabel(trait, key) ?? key;
+        obj[key] = Trait.keyLabel(key, { trait }) ?? key;
         return obj;
       }, {});
 
@@ -1427,15 +1429,7 @@ export default class ActorSheet5e extends ActorSheet {
   async _onPropertyAttribution(event) {
     const element = event.target;
     let property = element.dataset.attribution;
-    if ( !property ) {
-      property = element.dataset.property;
-      if ( !property ) return;
-      foundry.utils.logCompatibilityWarning(
-        "Defining attributable properties on sheets with the `.attributable` class and `data-property` value"
-        + " has been deprecated in favor of a single `data-attribution` value.",
-        { since: "DnD5e 2.1.3", until: "DnD5e 2.4" }
-      );
-    }
+    if ( !property ) return;
 
     const rollData = this.actor.getRollData({ deterministic: true });
     const title = game.i18n.localize(element.dataset.attributionCaption);

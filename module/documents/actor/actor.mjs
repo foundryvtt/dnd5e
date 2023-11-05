@@ -91,8 +91,7 @@ export default class Actor5e extends Actor {
 
   /** @inheritDoc */
   prepareData() {
-    // Do not attempt to prepare non-system types.
-    if ( !game.template.Actor.types.includes(this.type) ) return;
+    if ( !game.template.Actor.types.includes(this.type) ) return super.prepareData();
     this._classes = undefined;
     this._preparationWarnings = [];
     super.prepareData();
@@ -103,13 +102,9 @@ export default class Actor5e extends Actor {
 
   /** @inheritDoc */
   prepareBaseData() {
-
-    // Delegate preparation to type-subclass
-    if ( this.type === "group" ) {  // Eventually other types will also support this
-      return this.system._prepareBaseData();
-    }
-
-    this._prepareBaseArmorClass();
+    if ( !game.template.Actor.types.includes(this.type) ) return;
+    if ( this.type !== "group" ) this._prepareBaseArmorClass();
+    else if ( game.release.generation < 11 ) this.system.prepareBaseData();
 
     // Type-specific preparation
     switch ( this.type ) {
@@ -137,11 +132,7 @@ export default class Actor5e extends Actor {
 
   /** @inheritDoc */
   prepareDerivedData() {
-
-    // Delegate preparation to type-subclass
-    if ( this.type === "group" ) {  // Eventually other types will also support this
-      return this.system._prepareDerivedData();
-    }
+    if ( !game.template.Actor.types.includes(this.type) || (this.type === "group") ) return;
 
     const flags = this.flags.dnd5e || {};
     this.labels = {};
@@ -231,7 +222,8 @@ export default class Actor5e extends Actor {
   _prepareBaseArmorClass() {
     const ac = this.system.attributes.ac;
     ac.armor = 10;
-    ac.shield = ac.bonus = ac.cover = 0;
+    ac.shield = ac.cover = 0;
+    ac.bonus = "";
   }
 
   /* -------------------------------------------- */
@@ -481,6 +473,7 @@ export default class Actor5e extends Actor {
       else obj.armors.push(equip);
       return obj;
     }, {armors: [], shields: []});
+    const rollData = this.getRollData({ deterministic: true });
 
     // Determine base AC
     switch ( ac.calc ) {
@@ -509,7 +502,6 @@ export default class Actor5e extends Actor {
         }
         else ac.dex = this.system.abilities.dex?.mod ?? 0;
 
-        const rollData = this.getRollData({ deterministic: true });
         rollData.attributes.ac = ac;
         try {
           const replaced = Roll.replaceFormulaData(formula, rollData);
@@ -534,6 +526,7 @@ export default class Actor5e extends Actor {
     }
 
     // Compute total AC and return
+    ac.bonus = simplifyBonus(ac.bonus, rollData);
     ac.value = ac.base + ac.shield + ac.bonus + ac.cover;
   }
 
@@ -1011,14 +1004,14 @@ export default class Actor5e extends Actor {
    */
   async rollSkill(skillId, options={}) {
     const skl = this.system.skills[skillId];
-    const abl = this.system.abilities[skl.ability];
+    const abl = this.system.abilities[options.ability ?? skl.ability];
     const globalBonuses = this.system.bonuses?.abilities ?? {};
     const parts = ["@mod", "@abilityCheckBonus"];
     const data = this.getRollData();
 
     // Add ability modifier
-    data.mod = skl.mod;
-    data.defaultAbility = skl.ability;
+    data.mod = abl?.mod ?? 0;
+    data.defaultAbility = options.ability ?? skl.ability;
 
     // Include proficiency bonus
     if ( skl.prof.hasProficiency ) {
@@ -1112,7 +1105,7 @@ export default class Actor5e extends Actor {
     const data = this.getRollData();
 
     // Add ability modifier.
-    data.mod = tool?.mod ?? 0;
+    data.mod = ability?.mod ?? 0;
     data.defaultAbility = options.ability || (tool?.ability ?? "int");
 
     // Add proficiency.
@@ -1141,7 +1134,7 @@ export default class Actor5e extends Actor {
       data.toolBonus = bonus.join(" + ");
     }
 
-    const flavor = game.i18n.format("DND5E.ToolPromptTitle", {tool: Trait.keyLabel("tool", toolId) ?? ""});
+    const flavor = game.i18n.format("DND5E.ToolPromptTitle", {tool: Trait.keyLabel(toolId, {trait: "tool"}) ?? ""});
     const rollData = foundry.utils.mergeObject({
       data, flavor,
       title: `${flavor}: ${this.name}`,
@@ -2386,8 +2379,8 @@ export default class Actor5e extends Actor {
         else if ( keepMental && (type === "mental") ) abilities[k] = oa;
 
         // Set saving throw proficiencies.
-        if ( keepSaves ) abilities[k].proficient = oa.proficient;
-        else if ( mergeSaves ) abilities[k].proficient = Math.max(prof, oa.proficient);
+        if ( keepSaves && oa ) abilities[k].proficient = oa.proficient;
+        else if ( mergeSaves && oa ) abilities[k].proficient = Math.max(prof, oa.proficient);
         else abilities[k].proficient = source.system.abilities[k].proficient;
       }
 
@@ -2395,7 +2388,7 @@ export default class Actor5e extends Actor {
       if ( keepSkills ) d.system.skills = o.system.skills;
       else if ( mergeSkills ) {
         for ( let [k, s] of Object.entries(d.system.skills) ) {
-          s.value = Math.max(s.value, o.system.skills[k].value);
+          s.value = Math.max(s.value, o.system.skills[k]?.value ?? 0);
         }
       }
 

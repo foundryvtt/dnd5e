@@ -103,6 +103,55 @@
     }
   }
 
+  .form-group, h4 {
+    .config-button {
+      color: @colorOlive;
+      font-size: 10px;
+      font-weight: normal;
+      opacity: 0;
+    }
+
+    &:hover .config-button {
+      display: inline;
+      opacity: 1;
+    }
+  }
+
+  /* ----------------------------------------- */
+  /*  Item Description                         */
+  /* ----------------------------------------- */
+
+  [data-tab="description"] {
+    align-content: stretch;
+
+    .item-description {
+      .description-header {
+        display: flex;
+        align-items: first baseline;
+        justify-content: space-between;
+        margin-block-end: 0;
+        padding: 0.25rem;
+        background-color: rgb(0 0 0 / 0.05);
+
+        .description-edit {
+          opacity: 20%;
+        }
+        &:hover .description-edit {
+          opacity: 100%;
+        }
+      }
+      .editor + .description-header {
+        margin-block-start: 0.5rem;
+      }
+      .editor:not(.prosemirror) {
+        height: auto;
+        padding-inline: 0.25rem;
+      }
+      .accordion.collapsed > .editor.accordion-content { height: 0; }
+      .editor.accordion-content > .editor-content { overflow: hidden; }
+    }
+  }
+
   /* ----------------------------------------- */
   /*  Item Details Form                        */
   /* ----------------------------------------- */

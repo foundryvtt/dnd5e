@@ -14,18 +14,18 @@ This repository leverages [gulp](https://gulpjs.com/) to run automated build tas
 
 Installs all dependencies needed to run developer tooling scripts.
 
-### `npm run build` / `gulp buildAll`
+### `npm run build`
 
 Runs all relevant build scripts:
 
 - Converts LESS -> CSS
 - Converts JSON -> DB (compendia)
 
-### `npm run build:css` / `gulp buildCSS`
+### `npm run build:css`
 
 Converts the LESS in `./less` to the final `dnd5e.css`.
 
-### `npm run build:watch` / `gulp`
+### `npm run build:watch`
 
 Runs the LESS -> CSS builder in watch mode so that changes made to the LESS files will automatically compile to CSS.
 
@@ -44,8 +44,8 @@ npm run build:db
 gulp compilePacks
 ```
 
-- `gulp compilePacks` - Compile all JSON files into their NEDB files.
-- `gulp compilePacks --pack classes` - Only compile the specified pack.
+- `npm run build:db` - Compile all JSON files into their NEDB files.
+- `npm run build:db -- classes` - Only compile the specified pack.
 
 #### Extracting Packs
 
@@ -56,9 +56,9 @@ npm run build:json
 gulp extractPacks
 ```
 
-- `gulp extractPacks` - Extract all compendium NEDB files into JSON files.
-- `gulp extractPacks --pack classes` - Only extract the contents of the specified compendium.
-- `gulp extractPacks --pack classes --name Barbarian` - Only extract a single item from the specified compendium.
+- `npm run build:json` - Extract all compendium NEDB files into JSON files.
+- `npm run build:json -- classes` - Only extract the contents of the specified compendium.
+- `npm run build:json -- classes Barbarian` - Only extract a single item from the specified compendium.
 
 #### Cleaning Packs
 
@@ -69,9 +69,9 @@ npm run build:clean
 gulp extractPacks
 ```
 
-- `gulp cleanPacks` - Clean all source JSON files.
-- `gulp cleanPacks --pack classes` - Only clean the source files for the specified compendium.
-- `gulp cleanPacks --pack classes --name Barbarian` - Only clean a single item from the specified compendium.
+- `npm run build:clean` - Clean all source JSON files.
+- `npm run build:clean -- classes` - Only clean the source files for the specified compendium.
+- `npm run build:clean -- classes Barbarian` - Only clean a single item from the specified compendium.
 
 ## Issues
 
@@ -118,8 +118,8 @@ To contribute code, [fork this project](https://docs.github.com/en/get-started/q
 
 Please attempt to follow code style present throughout the project. An ESLint profile is included to help with maintaining a consistent code style. All warnings presented by the linter should be resolved before an PR is submitted.
 
-- `gulp lint` or `npm run lint` - Run the linter and display any issues found.
-- `gulp lint --fix` or `npm run lint:fix` - Automatically fix any code style issues that can be fixed.
+- `npm run lint` - Run the linter and display any issues found.
+- `npm run lint:fix` - Automatically fix any code style issues that can be fixed.
 
 ### Linked Issues
 

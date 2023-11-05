@@ -114,9 +114,10 @@ export default class ActiveEffect5e extends ActiveEffect {
     const effect = li.dataset.effectId ? owner.effects.get(li.dataset.effectId) : null;
     switch ( a.dataset.action ) {
       case "create":
+        const isActor = owner instanceof Actor;
         return owner.createEmbeddedDocuments("ActiveEffect", [{
-          label: game.i18n.localize("DND5E.EffectNew"),
-          icon: "icons/svg/aura.svg",
+          label: isActor ? game.i18n.localize("DND5E.EffectNew") : owner.name,
+          icon: isActor ? "icons/svg/aura.svg" : owner.img,
           origin: owner.uuid,
           "duration.rounds": li.dataset.effectType === "temporary" ? 1 : undefined,
           disabled: li.dataset.effectType === "inactive"
@@ -124,7 +125,7 @@ export default class ActiveEffect5e extends ActiveEffect {
       case "edit":
         return effect.sheet.render(true);
       case "delete":
-        return effect.delete();
+        return effect.deleteDialog();
       case "toggle":
         return effect.update({disabled: !effect.disabled});
     }
@@ -173,5 +174,22 @@ export default class ActiveEffect5e extends ActiveEffect {
     }
     categories.suppressed.hidden = !categories.suppressed.effects.length;
     return categories;
+  }
+
+  /* ~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~ */
+  /*  Deprecations and Compatibility           */
+  /* ~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~ */
+
+  _initialize(options) {
+    super._initialize(options);
+    if ( game.release.generation < 11 ) {
+      Object.defineProperty(this, "name", {
+        get() {
+          return this.label;
+        },
+        configurable: true,
+        enumerable: false
+      });
+    }
   }
 }

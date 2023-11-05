@@ -118,9 +118,10 @@ export default class AbilityScoreImprovementAdvancement extends Advancement {
       const updates = {};
       for ( const key of Object.keys(assignments) ) {
         const ability = this.actor.system.abilities[key];
+        const source = this.actor.system.toObject().abilities[key] ?? {};
         if ( !ability || !this.canImprove(key) ) continue;
-        assignments[key] = Math.min(assignments[key], ability.max - ability.value);
-        if ( assignments[key] ) updates[`system.abilities.${key}.value`] = ability.value + assignments[key];
+        assignments[key] = Math.min(assignments[key], ability.max - source.value);
+        if ( assignments[key] ) updates[`system.abilities.${key}.value`] = source.value + assignments[key];
         else delete assignments[key];
       }
       data.assignments = assignments;
@@ -167,7 +168,7 @@ export default class AbilityScoreImprovementAdvancement extends Advancement {
     if ( this.value.type === "asi" ) {
       const updates = {};
       for ( const [key, change] of Object.entries(this.value.assignments ?? {}) ) {
-        const ability = this.actor.system.abilities[key];
+        const ability = this.actor.system.toObject().abilities[key];
         if ( !ability || !this.canImprove(key) ) continue;
         updates[`system.abilities.${key}.value`] = ability.value - change;
       }

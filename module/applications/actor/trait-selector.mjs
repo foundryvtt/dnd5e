@@ -61,13 +61,13 @@ export default class TraitSelector extends BaseConfigSheet {
 
   /** @inheritdoc */
   async getData() {
-    const path = `system.${Trait.actorKeyPath(this.trait)}`;
+    const path = Trait.actorKeyPath(this.trait);
     const data = foundry.utils.getProperty(this.document, path);
     if ( !data ) return super.getData();
 
     return {
       ...super.getData(),
-      choices: await Trait.choices(this.trait, data.value),
+      choices: await Trait.choices(this.trait, { chosen: data.value }),
       custom: data.custom,
       customPath: "custom" in data ? `${path}.custom` : null,
       bypasses: "bypasses" in data ? Object.entries(CONFIG.DND5E.physicalWeaponProperties).reduce((obj, [k, v]) => {
@@ -94,7 +94,7 @@ export default class TraitSelector extends BaseConfigSheet {
   /** @inheritdoc */
   _getActorOverrides() {
     const overrides = super._getActorOverrides();
-    const path = `system.${Trait.actorKeyPath(this.trait)}.value`;
+    const path = Trait.changeKeyPath(this.trait);
     const src = new Set(foundry.utils.getProperty(this.document._source, path));
     const current = foundry.utils.getProperty(this.document, path);
     const delta = current.difference(src);
@@ -151,7 +151,7 @@ export default class TraitSelector extends BaseConfigSheet {
 
   /** @override */
   async _updateObject(event, formData) {
-    const path = `system.${Trait.actorKeyPath(this.trait)}`;
+    const path = Trait.actorKeyPath(this.trait);
     const data = foundry.utils.getProperty(this.document, path);
 
     this._prepareChoices("choices", `${path}.value`, formData);

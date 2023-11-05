@@ -16,7 +16,8 @@
 
       <ul class="summary flexrow">
         <li>
-          <input type="text" name="system.source" value="{{system.source}}" placeholder="{{ localize 'DND5E.Source' }}"/>
+          <input type="text" name="system.source.custom" value="{{system.source.custom}}"
+                 placeholder="{{ localize 'DND5E.Source' }}">
         </li>
       </ul>
     </div>
@@ -33,8 +34,8 @@
 
     {{!-- Description Tab --}}
     <div class="tab flexrow active" data-group="primary" data-tab="description">
-      {{editor descriptionHTML target="system.description.value" button=true editable=editable engine="prosemirror"
-               collaborate=false}}
+      {{editor enriched.description target="system.description.value" button=true editable=editable
+               engine="prosemirror" collaborate=false}}
     </div>
 
     {{!-- Advancement Tab --}}

@@ -125,6 +125,8 @@ export default class Item5e extends Item {
     return this.system.hasLimitedUses ?? false;
   }
 
+  /* -------------------------------------------- */
+
   /**
    * Does this Item draw from a resource?
    * @type {boolean}
@@ -132,6 +134,17 @@ export default class Item5e extends Item {
    */
   get hasResource() {
     return this.system.hasResource ?? false;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Does this Item draw from ammunition?
+   * @type {boolean}
+   * @see {@link ActivatedEffectTemplate#hasAmmo}
+   */
+  get hasAmmo() {
+    return this.system.hasAmmo ?? false;
   }
 
   /* -------------------------------------------- */
@@ -647,17 +660,15 @@ export default class Item5e extends Item {
     if ( actorBonus.attack ) parts.push(actorBonus.attack);
 
     // One-time bonus provided by consumed ammunition
-    if ( (this.system.consume?.type === "ammo") && this.actor.items ) {
-      const ammoItem = this.actor.items.get(this.system.consume.target);
-      if ( ammoItem ) {
-        const ammoItemQuantity = ammoItem.system.quantity;
-        const ammoCanBeConsumed = ammoItemQuantity && (ammoItemQuantity - (this.system.consume.amount ?? 0) >= 0);
-        const ammoItemAttackBonus = ammoItem.system.attackBonus;
-        const ammoIsTypeConsumable = (ammoItem.type === "consumable") && (ammoItem.system.consumableType === "ammo");
-        if ( ammoCanBeConsumed && ammoItemAttackBonus && ammoIsTypeConsumable ) {
-          parts.push("@ammo");
-          rollData.ammo = ammoItemAttackBonus;
-        }
+    const ammo = this.hasAmmo ? this.actor.items.get(this.system.consume.target) : null;
+    if ( ammo ) {
+      const ammoItemQuantity = ammo.system.quantity;
+      const ammoCanBeConsumed = ammoItemQuantity && (ammoItemQuantity - (this.system.consume.amount ?? 0) >= 0);
+      const ammoItemAttackBonus = ammo.system.attackBonus;
+      const ammoIsTypeConsumable = (ammo.type === "consumable") && (ammo.system.consumableType === "ammo");
+      if ( ammoCanBeConsumed && ammoItemAttackBonus && ammoIsTypeConsumable ) {
+        parts.push("@ammo");
+        rollData.ammo = ammoItemAttackBonus;
       }
     }
 
@@ -780,21 +791,6 @@ export default class Item5e extends Item {
    * @property {object} flags             Additional flags added to the chat message.
    * @property {Event} event              The browser event which triggered the item usage, if any.
    */
-
-  /**
-   * Trigger an item usage, optionally creating a chat message with followup actions.
-   * @param {ItemUseOptions} [options]           Options used for configuring item usage.
-   * @returns {Promise<ChatMessage|object|void>} Chat message if options.createMessage is true, message data if it is
-   *                                             false, and nothing if the roll wasn't performed.
-   * @deprecated since 2.0 in favor of `Item5e#use`, targeted for removal in 2.4
-   */
-  async roll(options={}) {
-    foundry.utils.logCompatibilityWarning(
-      "Item5e#roll has been renamed Item5e#use. Support for the old name will be removed in future versions.",
-      { since: "DnD5e 2.0", until: "DnD5e 2.4" }
-    );
-    return this.use(undefined, options);
-  }
 
   /**
    * Trigger an item usage, optionally creating a chat message with followup actions.
@@ -1294,19 +1290,14 @@ export default class Item5e extends Item {
     if ( options.spellLevel ) rollData.item.level = options.spellLevel;
 
     // Handle ammunition consumption
-    delete this._ammo;
-    let ammo = null;
     let ammoUpdate = [];
     const consume = this.system.consume;
-    if ( consume?.type === "ammo" ) {
-      ammo = this.actor.items.get(consume.target);
-      if ( ammo?.system ) {
-        const q = ammo.system.quantity;
-        const consumeAmount = consume.amount ?? 0;
-        if ( q && (q - consumeAmount >= 0) ) {
-          this._ammo = ammo;
-          title += ` [${ammo.name}]`;
-        }
+    const ammo = this.hasAmmo ? this.actor.items.get(consume.target) : null;
+    if ( ammo ) {
+      const q = ammo.system.quantity;
+      const consumeAmount = consume.amount ?? 0;
+      if ( q && (q - consumeAmount >= 0) ) {
+        title += ` [${ammo.name}]`;
       }
 
       // Get pending ammunition update
@@ -1441,11 +1432,11 @@ export default class Item5e extends Item {
     }
 
     // Only add the ammunition damage if the ammunition is a consumable with type 'ammo'
-    if ( this._ammo && (this._ammo.type === "consumable") && (this._ammo.system.consumableType === "ammo") ) {
+    const ammo = this.hasAmmo ? this.actor.items.get(this.system.consume.target) : null;
+    if ( ammo ) {
       parts.push("@ammo");
-      rollData.ammo = this._ammo.system.damage.parts.map(p => p[0]).join("+");
-      rollConfig.flavor += ` [${this._ammo.name}]`;
-      delete this._ammo;
+      rollData.ammo = ammo.system.damage.parts.map(p => p[0]).join("+");
+      rollConfig.flavor += ` [${ammo.name}]`;
     }
 
     // Factor in extra critical damage dice from the Barbarian's "Brutal Critical"
@@ -2210,26 +2201,5 @@ export default class Item5e extends Item {
      */
     Hooks.callAll("dnd5e.createScrollFromSpell", spell, spellScrollData);
     return new this(spellScrollData);
-  }
-
-  /* -------------------------------------------- */
-  /*  Deprecations                                */
-  /* -------------------------------------------- */
-
-  /**
-   * Retrieve an item's critical hit threshold. Uses the smallest value from among the following sources:
-   * - item document
-   * - item document's actor (if it has one)
-   * - item document's ammunition (if it has any)
-   * - the constant '20'
-   * @returns {number|null}  The minimum value that must be rolled to be considered a critical hit.
-   * @deprecated since dnd5e 2.2, targeted for removal in 2.4
-   */
-  getCriticalThreshold() {
-    foundry.utils.logCompatibilityWarning(
-      "Item5e#getCriticalThreshold has been replaced with the Item5e#criticalThreshold getter.",
-      { since: "DnD5e 2.2", until: "DnD5e 2.4" }
-    );
-    return this.criticalThreshold;
   }
 }

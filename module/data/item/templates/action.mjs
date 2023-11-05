@@ -178,8 +178,8 @@ export default class ActionTemplate extends SystemDataModel {
   get criticalThreshold() {
     if ( !this.hasAttack ) return null;
     let ammoThreshold = Infinity;
-    if ( this.consume?.type === "ammo" ) {
-      ammoThreshold = this.parent?.actor?.items.get(this.consume.target).system.critical.threshold ?? Infinity;
+    if ( this.hasAmmo ) {
+      ammoThreshold = this.parent?.actor?.items.get(this.consume.target)?.system.critical.threshold ?? Infinity;
     }
     const threshold = Math.min(this.critical.threshold ?? Infinity, this._typeCriticalThreshold, ammoThreshold);
     return threshold < Infinity ? threshold : 20;
