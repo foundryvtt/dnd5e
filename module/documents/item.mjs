@@ -2149,7 +2149,7 @@ export default class Item5e extends Item {
      * A hook event that fires before the item data for a scroll is created.
      * @function dnd5e.preCreateScrollFromSpell
      * @memberof hookEvents
-     * @param {object} itemData    The final item data used to make the scroll
+     * @param {object} itemData    The initial item data of the spell to convert to a scroll
      * @param {object} [options]   Additional options that modify the created scroll
      * @returns {boolean}          Explicitly return false to prevent the scroll to be created.
      */
