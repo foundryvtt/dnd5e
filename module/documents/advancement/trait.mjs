@@ -34,7 +34,7 @@ export default class TraitAdvancement extends Advancement {
 
   /**
    * The maximum number of traits granted by this advancement. The number of traits actually granted may be lower if
-   * actor already has some traits or exclusive choice mode is set.
+   * actor already has some traits.
    * @type {number}
    */
   get maxTraits() {
