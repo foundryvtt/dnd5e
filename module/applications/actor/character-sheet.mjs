@@ -37,6 +37,9 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
     return foundry.utils.mergeObject(context, {
       disableExperience: game.settings.get("dnd5e", "disableExperienceTracking"),
       classLabels: classes.map(c => c.name).join(", "),
+      labels: {
+        type: context.system.details.type.label
+      },
       multiclassLabels: classes.map(c => [c.subclass?.name ?? "", c.name, c.system.levels].filterJoin(" ")).join(", "),
       weightUnit: game.i18n.localize(`DND5E.Abbreviation${
         game.settings.get("dnd5e", "metricWeightUnits") ? "Kg" : "Lbs"}`),

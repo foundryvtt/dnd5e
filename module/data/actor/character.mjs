@@ -1,4 +1,5 @@
 import { FormulaField, LocalDocumentField } from "../fields.mjs";
+import CreatureTypeField from "../shared/creature-type-field.mjs";
 import AttributesFields from "./templates/attributes.mjs";
 import CreatureTemplate from "./templates/creature.mjs";
 import DetailsFields from "./templates/details.mjs";
@@ -28,6 +29,7 @@ import TraitsFields from "./templates/traits.mjs";
  * @property {object} details
  * @property {Item5e|string} details.background           Character's background item or name.
  * @property {string} details.originalClass               ID of first class taken by character.
+ * @property {CreatureTypeField} details.type             Creature type of this actor.
  * @property {XPData} details.xp                          Experience points gained.
  * @property {number} details.xp.value                    Total experience points earned.
  * @property {string} details.appearance                  Description of character's appearance.
@@ -95,6 +97,7 @@ export default class CharacterData extends CreatureTemplate {
           required: true, fallback: true, label: "DND5E.Background"
         }),
         originalClass: new foundry.data.fields.StringField({required: true, label: "DND5E.ClassOriginal"}),
+        type: new CreatureTypeField({ swarm: false }),
         xp: new foundry.data.fields.SchemaField({
           value: new foundry.data.fields.NumberField({
             required: true, nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.ExperiencePointsCurrent"

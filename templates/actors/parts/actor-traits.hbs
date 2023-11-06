@@ -10,6 +10,20 @@
         </select>
     </div>
 
+    {{#if isCharacter}}
+    <div class="form-group">
+        <label>{{localize "DND5E.CreatureType"}}</label>
+        <a class="config-button" data-action="type" data-tooltip="DND5E.SensesConfig">
+            <i class="fas fa-cog"></i>
+        </a>
+        <ul class="traits-list">
+            {{#if labels.type}}
+                <li class="tag">{{labels.type}}</li>
+            {{/if}}
+        </ul>
+    </div>
+    {{/if}}
+
     {{#unless isVehicle}}
     <div class="form-group">
         <label>{{localize "DND5E.Senses"}}</label>
