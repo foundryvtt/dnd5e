@@ -187,7 +187,7 @@ function groupedSelectOptions(choices, options) {
     html += `<option value="${name}" ${chosen ? "selected" : ""}>${label}</option>`;
   };
 
-  // Create an group
+  // Create a group
   const group = category => {
     let label = category[labelAttr];
     if ( localize ) game.i18n.localize(label);

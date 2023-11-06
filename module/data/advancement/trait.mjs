@@ -16,7 +16,6 @@
  *                                        are no more choices available in a more limited set.
  * @property {string[]} grants            Keys for traits granted automatically.
  * @property {TraitChoice[]} choices      Choices presented to the user.
- * @property {string} choiceMode          Method by which player can select from sets of choices.
  */
 export class TraitConfigurationData extends foundry.abstract.DataModel {
   static defineSchema() {
@@ -37,10 +36,7 @@ export class TraitConfigurationData extends foundry.abstract.DataModel {
         pool: new foundry.data.fields.SetField(new foundry.data.fields.StringField(), {
           required: false, initial: undefined, label: "DOCUMENT.Items"
         })
-      }), {label: "DND5E.AdvancementTraitChoices"}),
-      choiceMode: new foundry.data.fields.StringField({
-        initial: "inclusive", label: "DND5E.AdvancementTraitChoiceMode"
-      })
+      }), {label: "DND5E.AdvancementTraitChoices"})
     };
   }
 }

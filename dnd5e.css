@@ -1753,6 +1753,31 @@ h5 {
 .dnd5e.advancement.flow form[data-type="ScaleValue"] span.none {
   font-style: italic;
 }
+.dnd5e.advancement.flow form[data-type="Trait"] select {
+  min-width: min(20em, 100%);
+  margin-block-end: 0.25em;
+}
+.dnd5e.advancement.flow form[data-type="Trait"] .trait-slots {
+  counter-reset: trait-list;
+  list-style: none;
+  padding: 0;
+}
+.dnd5e.advancement.flow form[data-type="Trait"] .trait-slot {
+  min-height: 30px;
+  align-items: center;
+  font-size: var(--font-size-14);
+}
+.dnd5e.advancement.flow form[data-type="Trait"] .trait-slot::before {
+  counter-increment: trait-list;
+  content: counter(trait-list);
+  width: 2em;
+  text-align: center;
+  font-size: var(--font-size-16);
+}
+.dnd5e.advancement.flow form[data-type="Trait"] .trait-slot a {
+  flex: 0;
+  padding-inline-end: 0.5em;
+}
 .dnd5e.advancement.flow form[data-type="Size"] select {
   width: 100%;
   font-size: var(--font-size-16);
