@@ -209,9 +209,13 @@
   /*  Size                                     */
   /* ----------------------------------------- */
   &.size {
+    textarea {
+      flex: 1 0 100%;
+    }
+
     .trait-list {
-      display: flex;
-      flex-wrap: wrap;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
       gap: 0.25rem;
       padding: 0;
       list-style: none;

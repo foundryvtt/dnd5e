@@ -31,6 +31,24 @@ export default class SizeAdvancement extends Advancement {
   /*  Instance Properties                         */
   /* -------------------------------------------- */
 
+  /**
+   * Hint that will be displayed to players if none is entered.
+   * @type {string}
+   */
+  get automaticHint() {
+    if ( !this.configuration.sizes.size ) return "";
+    if ( this.configuration.sizes.size === 1 ) return game.i18n.format("DND5E.AdvancementSizeFlowHintSingle", {
+      size: CONFIG.DND5E.actorSizes[this.configuration.sizes.first()]
+    });
+
+    const listFormatter = new Intl.ListFormat(game.i18n.lang, { type: "disjunction" });
+    return game.i18n.format("DND5E.AdvancementSizeflowHintMultiple", {
+      sizes: listFormatter.format(this.configuration.sizes.map(s => CONFIG.DND5E.actorSizes[s]))
+    });
+  }
+
+  /* -------------------------------------------- */
+
   /** @inheritdoc */
   get levels() {
     return [0];
@@ -52,7 +70,7 @@ export default class SizeAdvancement extends Advancement {
 
   /** @inheritdoc */
   static availableForItem(item) {
-    return !item.advancement.byType.Race?.length;
+    return !item.advancement.byType.Size?.length;
   }
 
   /* -------------------------------------------- */
