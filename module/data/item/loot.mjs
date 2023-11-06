@@ -8,6 +8,15 @@ import PhysicalItemTemplate from "./templates/physical-item.mjs";
  * @mixes PhysicalItemTemplate
  */
 export default class LootData extends SystemDataModel.mixin(ItemDescriptionTemplate, PhysicalItemTemplate) {
+    /** @inheritdoc */
+    static defineSchema() {
+      return this.mergeSchema(super.defineSchema(), {
+        type: new foundry.data.fields.SchemaField({
+          value: new foundry.data.fields.StringField({required: true, label: "DND5E.Type"}),
+          subtype: new foundry.data.fields.StringField({required: true, label: "DND5E.Subtype"})
+        }, {label: "DND5E.ItemLootType"})
+      });
+    }
 
   /* -------------------------------------------- */
   /*  Getters                                     */
