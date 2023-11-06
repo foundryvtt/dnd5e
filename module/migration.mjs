@@ -267,7 +267,9 @@ export const migrateActorData = function(actor, migrationData) {
     const itemData = i instanceof CONFIG.Item.documentClass ? i.toObject() : i;
     let itemUpdate = migrateItemData(itemData, migrationData);
 
-    if ( itemData.type === "background" ) updateData["system.details.background"] = itemData._id;
+    if ( (itemData.type === "background") && (actor.system?.details?.background !== itemData._id) ) {
+      updateData["system.details.background"] = itemData._id;
+    }
 
     // Prepared, Equipped, and Proficient for NPC actors
     if ( actor.type === "npc" ) {
