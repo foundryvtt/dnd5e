@@ -127,19 +127,6 @@ export default class CharacterData extends CreatureTemplate {
     super._migrateData(source);
     AttributesFields._migrateInitiative(source.attributes);
   }
-
-  /* -------------------------------------------- */
-
-  prepareDerivedData() {
-    // Populate the background field with background if background item exists but is not set
-    if ( !(this.details.background instanceof dnd5e.documents.Item5e) ) {
-      const background = this.parent.itemTypes.background?.[0];
-      if ( background ) Object.defineProperty(this.details, "background", {
-        get() { return background; },
-        enumerable: false
-      });
-    }
-  }
 }
 
 /* -------------------------------------------- */
