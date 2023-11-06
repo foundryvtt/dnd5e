@@ -45,9 +45,9 @@ export default function registerSystemSettings() {
   });
 
   // Allow rotating square templates
-  game.settings.register("dnd5e", "rotateSquareTemplates", {
-    name: "SETTINGS.5eRotateSquareN",
-    hint: "SETTINGS.5eRotateSquareL",
+  game.settings.register("dnd5e", "gridAlignedSquareTemplates", {
+    name: "SETTINGS.5eGridAlignedSquareTemplatesN",
+    hint: "SETTINGS.5eGridAlignedSquareTemplatesL",
     scope: "world",
     config: true,
     default: true,
