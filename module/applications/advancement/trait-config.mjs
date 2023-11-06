@@ -69,7 +69,6 @@ export default class TraitConfig extends AdvancementConfig {
   async getData() {
     const context = super.getData();
 
-    // TODO: Try to make these not async
     context.grants = {
       label: Trait.localizedList({ grants: this.config.grants }) || "—",
       data: this.config.grants,
@@ -89,7 +88,8 @@ export default class TraitConfig extends AdvancementConfig {
       return obj;
     }, {});
 
-    const traitConfig = CONFIG.DND5E.traits[this.advancement.representedTraits().first()];
+    const rep = this.advancement.representedTraits();
+    const traitConfig = rep.size === 1 ? CONFIG.DND5E.traits[rep.first()] : null;
     if ( traitConfig ) {
       context.default.title = traitConfig.labels.title;
       context.default.icon = traitConfig.icon;
@@ -97,9 +97,7 @@ export default class TraitConfig extends AdvancementConfig {
       context.default.title = game.i18n.localize("DND5E.TraitGenericPlural.other");
       context.default.icon = this.advancement.constructor.metadata.icon;
     }
-    context.default.hint = Trait.localizedList({
-      grants: this.config.grants, choices: this.config.choices, choiceMode: this.config.choiceMode
-    });
+    context.default.hint = Trait.localizedList({ grants: this.config.grants, choices: this.config.choices });
 
     context.choiceOptions = await Trait.choices(this.trait, { chosen, prefixed: true, any: this.selected !== -1 });
     context.selectedTraitHeader = `${CONFIG.DND5E.traits[this.trait].labels.localization}.other`;
@@ -226,7 +224,7 @@ export default class TraitConfig extends AdvancementConfig {
     if ( (configuration.mode ?? this.config.mode) !== "default" ) {
       const validTraitTypes = filteredKeys(CONFIG.DND5E.traits, c => c.expertise);
       configuration.grants = configuration.grants.filter(k => validTraitTypes.some(t => k.startsWith(t)));
-      configuration.choices.forEach(c => c.pool = c.pool.filter(k => validTraitTypes.some(t => k.startsWith(t))));
+      configuration.choices.forEach(c => c.pool = c.pool?.filter(k => validTraitTypes.some(t => k.startsWith(t))));
     }
 
     return configuration;

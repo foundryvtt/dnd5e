@@ -1,14 +1,16 @@
 import Proficiency from "./proficiency.mjs";
+import * as Trait from "./trait.mjs";
+import ScaleValueAdvancement from "../advancement/scale-value.mjs";
+import { SystemDocumentMixin } from "../mixin.mjs";
 import { d20Roll } from "../../dice/dice.mjs";
 import { simplifyBonus } from "../../utils.mjs";
 import ShortRestDialog from "../../applications/actor/short-rest.mjs";
 import LongRestDialog from "../../applications/actor/long-rest.mjs";
-import * as Trait from "./trait.mjs";
 
 /**
  * Extend the base Actor class to implement additional system-specific logic.
  */
-export default class Actor5e extends Actor {
+export default class Actor5e extends SystemDocumentMixin(Actor) {
 
   /**
    * The data source for Actor5e.classes allowing it to be lazily computed.
@@ -234,9 +236,8 @@ export default class Actor5e extends Actor {
    * @protected
    */
   _prepareScaleValues() {
-    this.system.scale = Object.entries(this.classes).reduce((scale, [identifier, cls]) => {
-      scale[identifier] = cls.scaleValues;
-      if ( cls.subclass ) scale[cls.subclass.identifier] = cls.subclass.scaleValues;
+    this.system.scale = this.items.reduce((scale, item) => {
+      if ( ScaleValueAdvancement.metadata.validItemTypes.has(item.type) ) scale[item.identifier] = item.scaleValues;
       return scale;
     }, {});
   }
@@ -838,7 +839,8 @@ export default class Actor5e extends Actor {
 
   /** @inheritdoc */
   async _preCreate(data, options, user) {
-    await super._preCreate(data, options, user);
+    if ( (await super._preCreate(data, options, user)) === false ) return false;
+
     const sourceId = this.getFlag("core", "sourceId");
     if ( sourceId?.startsWith("Compendium.") ) return;
 
@@ -859,7 +861,7 @@ export default class Actor5e extends Actor {
 
   /** @inheritdoc */
   async _preUpdate(changed, options, user) {
-    await super._preUpdate(changed, options, user);
+    if ( (await super._preUpdate(changed, options, user)) === false ) return false;
 
     // Apply changes in Actor size to Token width/height
     if ( "size" in (this.system.traits || {}) ) {
@@ -1587,13 +1589,14 @@ export default class Actor5e extends Actor {
     // Temporarily cache the configured roll and use it to roll initiative for the Actor
     this._cachedInitiativeRoll = roll;
     await this.rollInitiative({createCombatants: true});
-    delete this._cachedInitiativeRoll;
   }
 
   /* -------------------------------------------- */
 
   /** @inheritdoc */
-  async rollInitiative(options={}) {
+  async rollInitiative(options={}, rollOptions={}) {
+    this._cachedInitiativeRoll ??= this.getInitiativeRoll(rollOptions);
+
     /**
      * A hook event that fires before initiative is rolled for an Actor.
      * @function dnd5e.preRollInitiative
@@ -1601,7 +1604,10 @@ export default class Actor5e extends Actor {
      * @param {Actor5e} actor  The Actor that is rolling initiative.
      * @param {D20Roll} roll   The initiative roll.
      */
-    if ( Hooks.call("dnd5e.preRollInitiative", this, this._cachedInitiativeRoll) === false ) return;
+    if ( Hooks.call("dnd5e.preRollInitiative", this, this._cachedInitiativeRoll) === false ) {
+      delete this._cachedInitiativeRoll;
+      return null;
+    }
 
     const combat = await super.rollInitiative(options);
     const combatants = this.isToken ? this.getActiveTokens(false, true).reduce((arr, t) => {
@@ -1618,6 +1624,7 @@ export default class Actor5e extends Actor {
      * @param {Combatant[]} combatants  The associated Combatants in the Combat.
      */
     Hooks.callAll("dnd5e.rollInitiative", this, combatants);
+    delete this._cachedInitiativeRoll;
     return combat;
   }
 

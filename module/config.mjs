@@ -842,6 +842,44 @@ preLocalize("featureTypes.class.subtypes", { sort: true });
 /* -------------------------------------------- */
 
 /**
+ * Configuration data for an item with the "loot" type.
+ *
+ * @typedef {object} LootTypeConfiguration
+ * @property {string} label                       Localized label for this type.
+ */
+
+/**
+ * Types of "loot" items.
+ * @enum {LootTypeConfiguration}
+ */
+DND5E.lootTypes = {
+  art: {
+    label: "DND5E.Loot.Art"
+  },
+  gear: {
+    label: "DND5E.Loot.Gear"
+  },
+  gem: {
+    label: "DND5E.Loot.Gem"
+  },
+  junk: {
+    label: "DND5E.Loot.Junk"
+  },
+  material: {
+    label: "DND5E.Loot.Material"
+  },
+  resource: {
+    label: "DND5E.Loot.Resource"
+  },
+  treasure: {
+    label: "DND5E.Loot.Treasure"
+  }
+};
+preLocalize("lootTypes", { key: "label" });
+
+/* -------------------------------------------- */
+
+/**
  * @typedef {object} CurrencyConfiguration
  * @property {string} label         Localized label for the currency.
  * @property {string} abbreviation  Localized abbreviation for the currency.
@@ -1967,6 +2005,7 @@ DND5E.advancementTypes = {
   ItemChoice: advancement.ItemChoiceAdvancement,
   ItemGrant: advancement.ItemGrantAdvancement,
   ScaleValue: advancement.ScaleValueAdvancement,
+  Size: advancement.SizeAdvancement,
   Trait: advancement.TraitAdvancement
 };
 

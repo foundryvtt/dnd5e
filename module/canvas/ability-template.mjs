@@ -56,9 +56,14 @@ export default class AbilityTemplate extends MeasuredTemplate {
         templateData.angle = CONFIG.MeasuredTemplate.defaults.angle;
         break;
       case "rect": // 5e rectangular AoEs are always cubes
-        templateData.distance = Math.hypot(target.value, target.value);
         templateData.width = target.value;
-        templateData.direction = 45;
+        if ( game.settings.get("dnd5e", "gridAlignedSquareTemplates") ) {
+          templateData.distance = Math.hypot(target.value, target.value);
+          templateData.direction = 45;
+        } else {
+          // Override as 'ray' to make the template able to be rotated without morphing its shape
+          templateData.t = "ray";
+        }
         break;
       case "ray": // 5e rays are most commonly 1 square (5 ft) in width
         templateData.width = target.width ?? canvas.dimensions.distance;

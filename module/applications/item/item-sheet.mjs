@@ -144,6 +144,13 @@ export default class ItemSheet5e extends ItemSheet {
       case "spell":
         context.spellComponents = {...CONFIG.DND5E.spellComponents, ...CONFIG.DND5E.spellTags};
         break;
+      case "loot":
+        const lootType = CONFIG.DND5E.lootTypes[item.system.type?.value];
+        if ( lootType ) {
+          context.itemType = lootType.label;
+          context.lootSubtypes = lootType.subtypes;
+        }
+        break;
     }
 
     // Enrich HTML description
