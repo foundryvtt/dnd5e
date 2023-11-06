@@ -206,6 +206,27 @@
   }
 
   /* ----------------------------------------- */
+  /*  Size                                     */
+  /* ----------------------------------------- */
+  &.size {
+    textarea {
+      flex: 1 0 100%;
+    }
+
+    .trait-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.25rem;
+      padding: 0;
+      list-style: none;
+
+      li {
+        flex: 1 1 40%;
+      }
+    }
+  }
+
+  /* ----------------------------------------- */
   /*  Traits                                   */
   /* ----------------------------------------- */
   &.traits {
@@ -355,6 +376,14 @@
       font-size: var(--font-size-18);
     }
     span.none { font-style: italic; }
+  }
+
+  form[data-type="Size"] {
+    select {
+      width: 100%;
+      font-size: var(--font-size-16);
+      height: 2em;
+    }
   }
 
   nav {
