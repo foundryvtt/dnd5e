@@ -78,7 +78,7 @@ export function changeKeyPath(key, trait) {
 
   if ( trait === "saves" ) {
     return `${keyPath}.${split.pop()}.proficient`;
-  } else if ( ["skills", "tools"].includes(trait) ) {
+  } else if ( ["skills", "tool"].includes(trait) ) {
     return `${keyPath}.${split.pop()}.value`;
   } else {
     return `${keyPath}.value`;
@@ -481,9 +481,8 @@ export function choiceLabel(choice, { only=false, final=false }={}) {
 /**
  * Create a human readable description of trait grants & choices.
  * @param {object} config
- * @param {Set<string>} [config.grants]                              Guaranteed trait grants.
- * @param {TraitChoice[]} [config.choices=[]]                        Trait choices.
- * @param {"inclusive"|"exclusive"} [config.choiceMode="inclusive"]  Choice mode.
+ * @param {Set<string>} [config.grants]        Guaranteed trait grants.
+ * @param {TraitChoice[]} [config.choices=[]]  Trait choices.
  * @returns {string}
  *
  * @example
@@ -497,27 +496,13 @@ export function choiceLabel(choice, { only=false, final=false }={}) {
  * @example
  * // Returns "Choose any skill proficiency"
  * localizedList({ choices: [{ count: 1, pool: new Set(["skills:*"])}] });
- *
- * @example
- * // Returns "Choose any 2 languages or any 1 skill proficiency"
- * localizedList({ choices: [
- *   {count: 2, pool: new Set(["languages:*"])}, { count: 1, pool: new Set(["skills:*"])}
- * ], choiceMode: "exclusive" });
  */
-export function localizedList({ grants=new Set(), choices=[], choiceMode="inclusive" }) {
-  const choiceSections = [];
+export function localizedList({ grants=new Set(), choices=[] }) {
+  const sections = Array.from(grants).map(g => keyLabel(g));
 
   for ( const [index, choice] of choices.entries() ) {
-    const final = choiceMode === "exclusive" ? false : index === choices.length - 1;
-    choiceSections.push(choiceLabel(choice, { final, only: !grants.size && choices.length === 1 }));
-  }
-
-  let sections = Array.from(grants).map(g => keyLabel(g));
-  if ( choiceMode === "inclusive" ) {
-    sections = sections.concat(choiceSections);
-  } else if ( choiceSections.length ) {
-    const formatter = new Intl.ListFormat(game.i18n.lang, { style: "long", type: "disjunction" });
-    sections.push(formatter.format(choiceSections));
+    const final = index === choices.length - 1;
+    sections.push(choiceLabel(choice, { final, only: !grants.size && choices.length === 1 }));
   }
 
   const listFormatter = new Intl.ListFormat(game.i18n.lang, { style: "long", type: "conjunction" });

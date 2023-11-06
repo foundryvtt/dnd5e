@@ -39,8 +39,7 @@ export default class TraitFlow extends AdvancementFlow {
     const available = await this.advancement.availableChoices(this.chosen);
     return foundry.utils.mergeObject(super.getData(), {
       hint: this.advancement.configuration.hint ? this.advancement.configuration.hint : Trait.localizedList({
-        grants: this.advancement.configuration.grants, choices: this.advancement.configuration.choices,
-        choiceMode: this.advancement.configuration.choiceMode
+        grants: this.advancement.configuration.grants, choices: this.advancement.configuration.choices
       }),
       slots: this.prepareTraitSlots(available),
       available
@@ -84,7 +83,7 @@ export default class TraitFlow extends AdvancementFlow {
 
   /** @inheritdoc */
   async _updateObject(event, formData) {
-    if ( !Array.isArray(formData.chosen) ) formData.chosen = [formData.chosen];
+    if ( formData.chosen && !Array.isArray(formData.chosen) ) formData.chosen = [formData.chosen];
     super._updateObject(event, formData);
   }
 
@@ -101,8 +100,7 @@ export default class TraitFlow extends AdvancementFlow {
     if ( existingChosen?.size ) return new Set(existingChosen);
     const { available } = await this.advancement.unfulfilledChoices();
     const chosen = new Set();
-    for ( const { type, choices } of available ) {
-      if ( (type === "choice") && (this.advancement.configuration.choiceMode === "exclusive") ) continue;
+    for ( const { choices } of available ) {
       const set = choices.asSet();
       if ( set.size === 1 ) chosen.add(set.first());
     }

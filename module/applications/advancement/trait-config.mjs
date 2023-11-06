@@ -97,9 +97,7 @@ export default class TraitConfig extends AdvancementConfig {
       context.default.title = game.i18n.localize("DND5E.TraitGenericPlural.other");
       context.default.icon = this.advancement.constructor.metadata.icon;
     }
-    context.default.hint = Trait.localizedList({
-      grants: this.config.grants, choices: this.config.choices, choiceMode: this.config.choiceMode
-    });
+    context.default.hint = Trait.localizedList({ grants: this.config.grants, choices: this.config.choices });
 
     context.choiceOptions = await Trait.choices(this.trait, { chosen, prefixed: true, any: this.selected !== -1 });
     context.selectedTraitHeader = `${CONFIG.DND5E.traits[this.trait].labels.localization}.other`;

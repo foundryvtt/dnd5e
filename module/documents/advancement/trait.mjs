@@ -82,8 +82,7 @@ export default class TraitAdvancement extends Advancement {
     if ( configMode ) {
       if ( this.configuration.hint ) return `<p>${this.configuration.hint}</p>`;
       return `<p>${Trait.localizedList({
-        grants: this.configuration.grants, choices: this.configuration.choices,
-        choiceMode: this.configuration.choiceMode
+        grants: this.configuration.grants, choices: this.configuration.choices
       })}</p>`;
     } else {
       return Array.from(this.value.chosen).map(k => `<span class="tag">${Trait.keyLabel(k)}</span>`).join(" ");
@@ -254,14 +253,10 @@ export default class TraitAdvancement extends Advancement {
     const remainingSet = new Set(available.flatMap(a => Array.from(a.choices.asSet())));
     choices.filter(remainingSet);
 
-    // Simplify label if exclusive mode and more than one set of choices still available
-    const simplifyNotification = this.configuration.choiceMode === "exclusive"
-      && (new Set(available.map(a => a.choiceIdx))).size > 1;
-
     const rep = this.representedTraits(available.map(a => a.choices.asSet()));
     return {
       choices,
-      label: game.i18n.format(`DND5E.AdvancementTraitChoicesRemaining${simplifyNotification ? "Simple" : ""}`, {
+      label: game.i18n.format("DND5E.AdvancementTraitChoicesRemaining", {
         count: available.length,
         type: Trait.traitLabel(rep.size === 1 ? rep.first() : null, available.length)
       })
@@ -317,8 +312,7 @@ export default class TraitAdvancement extends Advancement {
     available.sort((lhs, rhs) => lhs.choices.asSet().size - rhs.choices.asSet().size);
 
     // Remove any fulfilled grants
-    if ( this.configuration.choiceMode === "inclusive" ) this.removeFulfilledInclusive(available, selected.item);
-    else this.removeFulfilledExclusive(available, selected.item);
+    for ( const key of selected.item ) available.findSplice(grant => grant.choices.asSet().has(key));
 
     // Merge all possible choices into a single SelectChoices
     const allChoices = await Trait.mixedChoices(actorData.available);
@@ -326,39 +320,5 @@ export default class TraitAdvancement extends Advancement {
     available.forEach(a => a.choices = allChoices.filter(a.choices, { inplace: false }));
 
     return { available, choices: allChoices };
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Remove any fulfilled grants, handling choices using the "inclusive" elimination mode.
-   * @param {TraitChoices[]} available  List of grant/choice pools.
-   * @param {Set<string>} selected      Currently selected trait keys.
-   */
-  removeFulfilledInclusive(available, selected) {
-    for ( const key of selected ) available.findSplice(grant => grant.choices.asSet().has(key));
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Remove any fulfilled grants, handling choices using the "exclusive" elimination mode.
-   * @param {TraitChoices[]} available  List of grant/choice pools.
-   * @param {Set<string>} selected      Currently selected trait keys.
-   */
-  removeFulfilledExclusive(available, selected) {
-    for ( const key of selected ) {
-      // Remove first selected grant
-      const index = available.findIndex(grant => grant.choices.asSet().has(key));
-      const firstMatch = available[index];
-      available.splice(index, 1);
-
-      if ( firstMatch.type === "grant" ) continue;
-      for ( let i = available.length - 1; i >= 0; i-- ) {
-        const { choiceIdx, choices, type } = available[i];
-        if ( (type === "grant") || (choiceIdx === firstMatch.choiceIdx) ) continue;
-        if ( !choices.asSet().has(key) ) available.splice(i, 1);
-      }
-    }
   }
 }
