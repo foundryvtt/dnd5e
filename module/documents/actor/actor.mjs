@@ -1,7 +1,7 @@
 import Proficiency from "./proficiency.mjs";
 import * as Trait from "./trait.mjs";
 import ScaleValueAdvancement from "../advancement/scale-value.mjs";
-import { DocumentMixin } from "../mixin.mjs";
+import { SystemDocumentMixin } from "../mixin.mjs";
 import { d20Roll } from "../../dice/dice.mjs";
 import { simplifyBonus } from "../../utils.mjs";
 import ShortRestDialog from "../../applications/actor/short-rest.mjs";
@@ -10,7 +10,7 @@ import LongRestDialog from "../../applications/actor/long-rest.mjs";
 /**
  * Extend the base Actor class to implement additional system-specific logic.
  */
-export default class Actor5e extends DocumentMixin(Actor) {
+export default class Actor5e extends SystemDocumentMixin(Actor) {
 
   /**
    * The data source for Actor5e.classes allowing it to be lazily computed.
@@ -839,8 +839,7 @@ export default class Actor5e extends DocumentMixin(Actor) {
 
   /** @inheritdoc */
   async _preCreate(data, options, user) {
-    let allowed = await super._preCreate(data, options, user);
-    if ( allowed === false ) return allowed;
+    if ( (await super._preCreate(data, options, user)) === false ) return false;
 
     const sourceId = this.getFlag("core", "sourceId");
     if ( sourceId?.startsWith("Compendium.") ) return;
@@ -862,8 +861,7 @@ export default class Actor5e extends DocumentMixin(Actor) {
 
   /** @inheritdoc */
   async _preUpdate(changed, options, user) {
-    let allowed = await super._preUpdate(changed, options, user);
-    if ( allowed === false ) return allowed;
+    if ( (await super._preUpdate(changed, options, user)) === false ) return false;
 
     // Apply changes in Actor size to Token width/height
     if ( "size" in (this.system.traits || {}) ) {

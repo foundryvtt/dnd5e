@@ -181,6 +181,7 @@ export class LocalDocumentField extends foundry.data.fields.DocumentIdField {
 
   /* -------------------------------------------- */
 
+  /** @inheritdoc */
   static get _defaults() {
     return foundry.utils.mergeObject(super._defaults, {
       nullable: true,
@@ -192,6 +193,7 @@ export class LocalDocumentField extends foundry.data.fields.DocumentIdField {
 
   /* -------------------------------------------- */
 
+  /** @override */
   _cast(value) {
     if ( typeof value === "string" ) return value;
     if ( (value instanceof this.model) ) return value._id;
@@ -200,14 +202,16 @@ export class LocalDocumentField extends foundry.data.fields.DocumentIdField {
 
   /* -------------------------------------------- */
 
+  /** @inheritdoc */
   _validateType(value) {
     if ( !this.options.fallback ) super._validateType(value);
   }
 
   /* -------------------------------------------- */
 
+  /** @override */
   initialize(value, model, options={}) {
-    if ( this.idOnly ) return value;
+    if ( this.idOnly ) return this.options.fallback || foundry.data.validators.isValidId(value) ? value : null;
     const collection = model.parent?.[this.model.metadata.collection];
     return () => {
       const document = collection?.get(value);
@@ -223,6 +227,7 @@ export class LocalDocumentField extends foundry.data.fields.DocumentIdField {
 
   /* -------------------------------------------- */
 
+  /** @inheritdoc */
   toObject(value) {
     return value?._id ?? value;
   }

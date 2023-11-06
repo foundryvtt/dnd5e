@@ -166,9 +166,11 @@ export default class SystemDataModel extends foundry.abstract.DataModel {
 
   /**
    * Pre-creation logic for this system data.
-   * @param {object} data     The initial data object provided to the document creation request.
-   * @param {object} options  Additional options which modify the creation request.
-   * @param {User} user       The User requesting the document creation.
+   * @param {object} data               The initial data object provided to the document creation request.
+   * @param {object} options            Additional options which modify the creation request.
+   * @param {User} user                 The User requesting the document creation.
+   * @returns {Promise<boolean|void>}   A return value of false indicates the creation operation should be cancelled.
+   * @see {Document#_preCreate}
    * @protected
    */
   async _preCreate(data, options, user) {

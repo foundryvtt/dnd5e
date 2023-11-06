@@ -3,12 +3,12 @@ import simplifyRollFormula from "../dice/simplify-roll-formula.mjs";
 import Advancement from "./advancement/advancement.mjs";
 import AbilityUseDialog from "../applications/item/ability-use-dialog.mjs";
 import Proficiency from "./actor/proficiency.mjs";
-import { DocumentMixin } from "./mixin.mjs";
+import { SystemDocumentMixin } from "./mixin.mjs";
 
 /**
  * Override and extend the basic Item implementation.
  */
-export default class Item5e extends DocumentMixin(Item) {
+export default class Item5e extends SystemDocumentMixin(Item) {
 
   /**
    * Caches an item linked to this one, such as a subclass associated with a class.
@@ -1982,8 +1982,7 @@ export default class Item5e extends DocumentMixin(Item) {
 
   /** @inheritdoc */
   async _preCreate(data, options, user) {
-    let allowed = await super._preCreate(data, options, user);
-    if ( allowed === false ) return allowed;
+    if ( (await super._preCreate(data, options, user)) === false ) return false;
 
     // Create class identifier based on name
     if ( ["class", "subclass"].includes(this.type) && !this.system.identifier ) {
@@ -2028,8 +2027,7 @@ export default class Item5e extends DocumentMixin(Item) {
 
   /** @inheritdoc */
   async _preUpdate(changed, options, user) {
-    let allowed = await super._preUpdate(changed, options, user);
-    if ( allowed === false ) return allowed;
+    if ( (await super._preUpdate(changed, options, user)) === false ) return false;
     if ( (this.type !== "class") || !("levels" in (changed.system || {})) ) return;
 
     // Check to make sure the updated class level isn't below zero

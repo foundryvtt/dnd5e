@@ -169,7 +169,6 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
     context.spellbook = spellbook;
     context.preparedSpells = nPrepared;
     context.features = Object.values(features);
-    context.labels.background = backgrounds[0]?.name;
   }
 
   /* -------------------------------------------- */
