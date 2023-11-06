@@ -1,9 +1,10 @@
 import Proficiency from "./proficiency.mjs";
+import * as Trait from "./trait.mjs";
+import ScaleValueAdvancement from "../advancement/scale-value.mjs";
 import { d20Roll } from "../../dice/dice.mjs";
 import { simplifyBonus } from "../../utils.mjs";
 import ShortRestDialog from "../../applications/actor/short-rest.mjs";
 import LongRestDialog from "../../applications/actor/long-rest.mjs";
-import * as Trait from "./trait.mjs";
 
 /**
  * Extend the base Actor class to implement additional system-specific logic.
@@ -234,9 +235,8 @@ export default class Actor5e extends Actor {
    * @protected
    */
   _prepareScaleValues() {
-    this.system.scale = Object.entries(this.classes).reduce((scale, [identifier, cls]) => {
-      scale[identifier] = cls.scaleValues;
-      if ( cls.subclass ) scale[cls.subclass.identifier] = cls.subclass.scaleValues;
+    this.system.scale = this.items.reduce((scale, item) => {
+      if ( ScaleValueAdvancement.metadata.validItemTypes.has(item.type) ) scale[item.identifier] = item.scaleValues;
       return scale;
     }, {});
   }

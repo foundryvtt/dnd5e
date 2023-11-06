@@ -44,7 +44,9 @@ export default class ScaleValueConfig extends AdvancementConfig {
    */
   _prepareLevelData() {
     let lastValue = null;
-    return Array.fromRange(CONFIG.DND5E.maxLevel + 1).slice(1).reduce((obj, level) => {
+    let levels = Array.fromRange(CONFIG.DND5E.maxLevel + 1);
+    if ( ["class", "subclass"].includes(this.advancement.parent.type ) ) levels = levels.slice(1);
+    return levels.reduce((obj, level) => {
       obj[level] = { placeholder: this._formatPlaceholder(lastValue), value: null };
       const value = this.advancement.configuration.scale[level];
       if ( value ) {
