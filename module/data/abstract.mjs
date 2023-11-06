@@ -65,6 +65,23 @@ export default class SystemDataModel extends foundry.abstract.DataModel {
 
   /* -------------------------------------------- */
 
+  /**
+   * @typedef {object} SystemDataModelMetadata
+   * @property {boolean} [singleton] - Should only a single item of this type be allowed on an actor?
+   */
+
+  /**
+   * Metadata that describes this DataModel.
+   * @type {SystemDataModelMetadata}
+   */
+  static metadata = {};
+
+  get metadata() {
+    return this.constructor.metadata;
+  }
+
+  /* -------------------------------------------- */
+
   /** @inheritdoc */
   static defineSchema() {
     const schema = {};
@@ -143,6 +160,33 @@ export default class SystemDataModel extends foundry.abstract.DataModel {
     return super.validate(options);
   }
 
+  /* -------------------------------------------- */
+  /*  Socket Event Handlers                       */
+  /* -------------------------------------------- */
+
+  /**
+   * Pre-creation logic for this system data.
+   * @param {object} data               The initial data object provided to the document creation request.
+   * @param {object} options            Additional options which modify the creation request.
+   * @param {User} user                 The User requesting the document creation.
+   * @returns {Promise<boolean|void>}   A return value of false indicates the creation operation should be cancelled.
+   * @see {Document#_preCreate}
+   * @protected
+   */
+  async _preCreate(data, options, user) {
+    const actor = this.parent.actor;
+    if ( (actor?.type !== "character") || !this.metadata?.singleton ) return;
+    if ( actor.itemTypes[data.type]?.length ) {
+      ui.notifications.error(game.i18n.format("DND5E.ActorWarningSingleton", {
+        itemType: game.i18n.localize(CONFIG.Item.typeLabels[data.type]),
+        actorType: game.i18n.localize(CONFIG.Actor.typeLabels[actor.type])
+      }));
+      return false;
+    }
+  }
+
+  /* -------------------------------------------- */
+  /*  Mixin                                       */
   /* -------------------------------------------- */
 
   /** @inheritdoc */

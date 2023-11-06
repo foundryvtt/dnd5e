@@ -15,7 +15,7 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
   /* -------------------------------------------- */
 
   /** @override */
-  static unsupportedItemTypes = new Set(["background", "class", "subclass"]);
+  static unsupportedItemTypes = new Set(["background", "class", "race", "subclass"]);
 
   /* -------------------------------------------- */
 
