@@ -390,17 +390,26 @@ preLocalize("timePeriods");
 /* -------------------------------------------- */
 
 /**
+ * Ways in which to activate an item that cannot be labeled with a cost.
+ * @enum {string}
+ */
+DND5E.staticAbilityActivationTypes = {
+  none: "DND5E.NoneActionLabel",
+  special: DND5E.timePeriods.spec
+};
+
+/**
  * Various ways in which an item or ability can be activated.
  * @enum {string}
  */
 DND5E.abilityActivationTypes = {
+  ...DND5E.staticAbilityActivationTypes,
   action: "DND5E.Action",
   bonus: "DND5E.BonusAction",
   reaction: "DND5E.Reaction",
   minute: DND5E.timePeriods.minute,
   hour: DND5E.timePeriods.hour,
   day: DND5E.timePeriods.day,
-  special: DND5E.timePeriods.spec,
   legendary: "DND5E.LegendaryActionLabel",
   mythic: "DND5E.MythicActionLabel",
   lair: "DND5E.LairActionLabel",
@@ -538,6 +547,18 @@ preLocalize("itemRarity");
 /* -------------------------------------------- */
 
 /**
+ * The limited use periods that support a recovery formula.
+ * @enum {string}
+ */
+DND5E.limitedUseFormulaPeriods = {
+  charges: "DND5E.Charges",
+  dawn: "DND5E.Dawn",
+  dusk: "DND5E.Dusk"
+};
+
+/* -------------------------------------------- */
+
+/**
  * Enumerate the lengths of time over which an item can have limited use ability.
  * @enum {string}
  */
@@ -545,7 +566,7 @@ DND5E.limitedUsePeriods = {
   sr: "DND5E.ShortRest",
   lr: "DND5E.LongRest",
   day: "DND5E.Day",
-  charges: "DND5E.Charges"
+  ...DND5E.limitedUseFormulaPeriods
 };
 preLocalize("limitedUsePeriods");
 

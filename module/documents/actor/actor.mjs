@@ -2202,7 +2202,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       }
 
       // Items that roll to gain charges on a new day
-      if ( recoverDailyUses && uses?.recovery && (uses?.per === "charges") ) {
+      if ( recoverDailyUses && uses?.recovery && (uses?.per in CONFIG.DND5E.limitedUseFormulaPeriods) ) {
         const roll = new Roll(uses.recovery, item.getRollData());
         if ( recoverLongRestUses && (game.settings.get("dnd5e", "restVariant") === "gritty") ) {
           roll.alter(7, 0, {multiplyNumeric: true});

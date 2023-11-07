@@ -2,13 +2,12 @@
 <div class="form-group input-select">
     <label>{{ localize "DND5E.ItemActivationCost" }}</label>
     <div class="form-fields">
-        {{#if system.activation.type}}
+        {{#if (and system.activation.type (not isCostlessAction))}}
             <input type="number" step="any" name="system.activation.cost"
                    value="{{system.activation.cost}}" placeholder="&mdash;">
         {{/if}}
         <select name="system.activation.type" data-tooltip="DND5E.ItemActivationType">
-            {{selectOptions config.abilityActivationTypes selected=system.activation.type
-                blank=(localize "DND5E.None")}}
+            {{selectOptions config.abilityActivationTypes selected=system.activation.type blank=""}}
         </select>
     </div>
 </div>
@@ -135,7 +134,7 @@
     </div>
 </div>
 
-{{#if (eq system.uses.per "charges")}}
+{{#if isFormulaRecharge}}
 <div class="form-group">
     <label>{{localize "DND5E.RecoveryFormula"}}</label>
     <div class="form-fields">
