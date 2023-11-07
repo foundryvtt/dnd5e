@@ -46,7 +46,7 @@ export default class PhysicalItemTemplate extends SystemDataModel {
   get priceLabel() {
     const { value, denomination } = this.price;
     const hasPrice = value && (denomination in CONFIG.DND5E.currencies);
-    return hasPrice ? `${value} ${game.i18n.localize(CONFIG.DND5E.currencies[denomination].label)}` : null;
+    return hasPrice ? `${value} ${CONFIG.DND5E.currencies[denomination].label}` : null;
   }
 
   /* -------------------------------------------- */
