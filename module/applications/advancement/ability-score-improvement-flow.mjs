@@ -48,10 +48,10 @@ export default class AbilityScoreImprovementFlow extends AdvancementFlow {
         if ( !this.advancement.canImprove(key) || this.advancement.configuration.fixed[key] ) return assigned;
         return assigned + (this.assignments[key] ?? 0);
       }, 0),
+      cap: this.advancement.configuration.cap ?? Infinity,
       total: this.advancement.configuration.points
     };
     points.available = points.total - points.assigned;
-    points.cap = this.advancement.configuration.cap ?? Infinity;
 
     const formatter = new Intl.NumberFormat(game.i18n.lang, { signDisplay: "always" });
 
