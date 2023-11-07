@@ -97,7 +97,7 @@ export default class CharacterData extends CreatureTemplate {
           required: true, fallback: true, label: "DND5E.Background"
         }),
         originalClass: new foundry.data.fields.StringField({required: true, label: "DND5E.ClassOriginal"}),
-        type: new CreatureTypeField({ swarm: false }),
+        type: new CreatureTypeField({ swarm: false }, { initial: { value: "humanoid" } }),
         xp: new foundry.data.fields.SchemaField({
           value: new foundry.data.fields.NumberField({
             required: true, nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.ExperiencePointsCurrent"
