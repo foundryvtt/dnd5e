@@ -40,7 +40,8 @@
         },
         "level": 1,
         "title": "",
-        "classRestriction": "primary"
+        "classRestriction": "primary",
+        "value": {}
       },
       {
         "_id": "2pEp37GeIGCBdiqU",
@@ -122,6 +123,21 @@
         "_id": "qd6RxOGs50LR5Lea",
         "classRestriction": "secondary",
         "value": {}
+      },
+      {
+        "_id": "LYiiMtwvVVXZs8yE",
+        "type": "Trait",
+        "configuration": {
+          "hint": "The divine magic flowing through you makes you immune to disease.",
+          "mode": "default",
+          "allowReplacements": false,
+          "grants": [
+            "ci:diseased"
+          ],
+          "choices": []
+        },
+        "level": 3,
+        "title": "Divine Health"
       },
       {
         "type": "ItemGrant",
@@ -476,7 +492,7 @@
     "systemVersion": "2.3.1",
     "coreVersion": "10.303",
     "createdTime": 1661787234280,
-    "modifiedTime": 1698851402709,
+    "modifiedTime": 1699386117323,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!gZiUvbXWLs0pOp0c"
