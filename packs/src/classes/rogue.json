@@ -24,6 +24,184 @@
         "_id": "WMbkpELkLBvDaEsL"
       },
       {
+        "_id": "OdvmWcuFdpmQa1R9",
+        "type": "Trait",
+        "configuration": {
+          "hint": "",
+          "mode": "default",
+          "allowReplacements": false,
+          "grants": [
+            "armor:lgt"
+          ],
+          "choices": []
+        },
+        "level": 1,
+        "title": "",
+        "value": {}
+      },
+      {
+        "_id": "IAuJ7LQGV2HvMXWB",
+        "type": "Trait",
+        "configuration": {
+          "hint": "",
+          "mode": "default",
+          "allowReplacements": false,
+          "grants": [
+            "weapon:sim",
+            "weapon:mar:handcrossbow",
+            "weapon:mar:longsword",
+            "weapon:mar:rapier",
+            "weapon:mar:shortsword"
+          ],
+          "choices": []
+        },
+        "level": 1,
+        "title": "",
+        "classRestriction": "primary"
+      },
+      {
+        "_id": "ZfLkT5c0hxOmdyti",
+        "type": "Trait",
+        "configuration": {
+          "hint": "",
+          "mode": "default",
+          "allowReplacements": false,
+          "grants": [
+            "tool:thief"
+          ],
+          "choices": []
+        },
+        "level": 1,
+        "title": "",
+        "value": {}
+      },
+      {
+        "_id": "ejtwT3eAwBpgvtcw",
+        "type": "Trait",
+        "configuration": {
+          "hint": "",
+          "mode": "default",
+          "allowReplacements": false,
+          "grants": [
+            "saves:dex",
+            "saves:int"
+          ],
+          "choices": []
+        },
+        "level": 1,
+        "title": "",
+        "classRestriction": "primary",
+        "value": {}
+      },
+      {
+        "_id": "rKux16jqNCPEtyDL",
+        "type": "Trait",
+        "configuration": {
+          "hint": "",
+          "mode": "default",
+          "allowReplacements": false,
+          "grants": [],
+          "choices": [
+            {
+              "count": 4,
+              "pool": [
+                "skills:acr",
+                "skills:ath",
+                "skills:dec",
+                "skills:ins",
+                "skills:itm",
+                "skills:inv",
+                "skills:prc",
+                "skills:prf",
+                "skills:per",
+                "skills:slt",
+                "skills:ste"
+              ]
+            }
+          ]
+        },
+        "level": 1,
+        "title": "",
+        "classRestriction": "primary",
+        "value": {}
+      },
+      {
+        "_id": "TDHYngxGqDHllgzw",
+        "type": "Trait",
+        "configuration": {
+          "hint": "",
+          "mode": "expertise",
+          "allowReplacements": false,
+          "grants": [],
+          "choices": [
+            {
+              "count": 2,
+              "pool": [
+                "tool:thief",
+                "skills:*"
+              ]
+            }
+          ]
+        },
+        "level": 1,
+        "title": "Expertise",
+        "value": {}
+      },
+      {
+        "type": "Trait",
+        "configuration": {
+          "hint": "",
+          "mode": "expertise",
+          "allowReplacements": false,
+          "grants": [],
+          "choices": [
+            {
+              "count": 2,
+              "pool": [
+                "skills:*",
+                "tool:thief"
+              ]
+            }
+          ]
+        },
+        "level": 6,
+        "title": "Expertise",
+        "_id": "Iozyk39gsM4Kecex",
+        "value": {}
+      },
+      {
+        "type": "Trait",
+        "configuration": {
+          "hint": "",
+          "mode": "default",
+          "allowReplacements": false,
+          "grants": [],
+          "choices": [
+            {
+              "count": 1,
+              "pool": [
+                "skills:acr",
+                "skills:ath",
+                "skills:dec",
+                "skills:ins",
+                "skills:itm",
+                "skills:inv",
+                "skills:prc",
+                "skills:prf",
+                "skills:per",
+                "skills:slt",
+                "skills:ste"
+              ]
+            }
+          ]
+        },
+        "level": 1,
+        "title": "",
+        "_id": "CYYQSaGgmuHG7i6z",
+        "classRestriction": "secondary",
+        "value": {}
+      },
+      {
         "type": "ItemGrant",
         "configuration": {
           "items": [
@@ -461,10 +639,10 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.2.2",
+    "systemVersion": "2.3.1",
     "coreVersion": "10.303",
     "createdTime": 1661787234284,
-    "modifiedTime": 1691518730064,
+    "modifiedTime": 1698851457625,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!xEb8jmA5HlNs7xTF"

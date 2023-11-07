@@ -20,7 +20,73 @@
         "configuration": {},
         "value": {},
         "title": "Hit Points",
-        "icon": "systems/dnd5e/icons/svg/hit-points.svg"
+        "icon": "systems/dnd5e/icons/svg/hit-points.svg",
+        "_id": "J94h5oqcZsaxhaqz"
+      },
+      {
+        "_id": "JXcSQmjdfaJeSjZ7",
+        "type": "Trait",
+        "configuration": {
+          "hint": "",
+          "mode": "default",
+          "allowReplacements": false,
+          "grants": [
+            "weapon:sim:dagger",
+            "weapon:sim:dart",
+            "weapon:sim:lightcrossbow",
+            "weapon:sim:quarterstaff",
+            "weapon:sim:sling"
+          ],
+          "choices": []
+        },
+        "level": 1,
+        "title": "",
+        "classRestriction": "primary"
+      },
+      {
+        "_id": "r1DG0GF8L6SkLNvq",
+        "type": "Trait",
+        "configuration": {
+          "hint": "",
+          "mode": "default",
+          "allowReplacements": false,
+          "grants": [
+            "saves:int",
+            "saves:wis"
+          ],
+          "choices": []
+        },
+        "level": 1,
+        "title": "",
+        "classRestriction": "primary",
+        "value": {}
+      },
+      {
+        "_id": "6blzmKC4EON0KM2e",
+        "type": "Trait",
+        "configuration": {
+          "hint": "",
+          "mode": "default",
+          "allowReplacements": false,
+          "grants": [],
+          "choices": [
+            {
+              "count": 2,
+              "pool": [
+                "skills:arc",
+                "skills:his",
+                "skills:ins",
+                "skills:inv",
+                "skills:med",
+                "skills:rel"
+              ]
+            }
+          ]
+        },
+        "level": 1,
+        "title": "",
+        "classRestriction": "primary",
+        "value": {}
       },
       {
         "type": "ItemGrant",
@@ -42,7 +108,8 @@
         "value": {},
         "level": 1,
         "title": "Features",
-        "icon": "systems/dnd5e/icons/svg/item-grant.svg"
+        "icon": "systems/dnd5e/icons/svg/item-grant.svg",
+        "_id": "CTmwzlFgOyeE1L6K"
       },
       {
         "type": "ItemGrant",
@@ -63,7 +130,8 @@
         "value": {},
         "level": 2,
         "title": "Features",
-        "icon": "systems/dnd5e/icons/svg/item-grant.svg"
+        "icon": "systems/dnd5e/icons/svg/item-grant.svg",
+        "_id": "AC4kN3RjttskWHUJ"
       },
       {
         "type": "ItemGrant",
@@ -84,7 +152,8 @@
         "value": {},
         "level": 18,
         "title": "Features",
-        "icon": "systems/dnd5e/icons/svg/item-grant.svg"
+        "icon": "systems/dnd5e/icons/svg/item-grant.svg",
+        "_id": "0jnLhoNlk5qFB4QM"
       },
       {
         "type": "ItemGrant",
@@ -105,7 +174,8 @@
         "value": {},
         "level": 20,
         "title": "Features",
-        "icon": "systems/dnd5e/icons/svg/item-grant.svg"
+        "icon": "systems/dnd5e/icons/svg/item-grant.svg",
+        "_id": "ftN4NxMNvbBwYA0p"
       },
       {
         "type": "ItemChoice",
@@ -133,7 +203,8 @@
         },
         "value": {},
         "title": "Signature Spells",
-        "icon": "systems/dnd5e/icons/svg/item-choice.svg"
+        "icon": "systems/dnd5e/icons/svg/item-choice.svg",
+        "_id": "jvTZfjedDhMCVGEn"
       },
       {
         "type": "ScaleValue",
@@ -157,7 +228,8 @@
         },
         "value": {},
         "title": "Cantrips Known",
-        "icon": "systems/dnd5e/icons/svg/scale-value.svg"
+        "icon": "systems/dnd5e/icons/svg/scale-value.svg",
+        "_id": "r4NBaBhA20gUjJ56"
       },
       {
         "type": "AbilityScoreImprovement",
@@ -177,7 +249,8 @@
         },
         "level": 4,
         "title": "Ability Score Improvement",
-        "icon": "systems/dnd5e/icons/svg/ability-score-improvement.svg"
+        "icon": "systems/dnd5e/icons/svg/ability-score-improvement.svg",
+        "_id": "cqHTAJF9gyolaBBq"
       },
       {
         "type": "AbilityScoreImprovement",
@@ -197,7 +270,8 @@
         },
         "level": 8,
         "title": "Ability Score Improvement",
-        "icon": "systems/dnd5e/icons/svg/ability-score-improvement.svg"
+        "icon": "systems/dnd5e/icons/svg/ability-score-improvement.svg",
+        "_id": "lQO8njk1wKmUwP1N"
       },
       {
         "type": "AbilityScoreImprovement",
@@ -217,7 +291,8 @@
         },
         "level": 12,
         "title": "Ability Score Improvement",
-        "icon": "systems/dnd5e/icons/svg/ability-score-improvement.svg"
+        "icon": "systems/dnd5e/icons/svg/ability-score-improvement.svg",
+        "_id": "cyEtKa5tG1NFuknx"
       },
       {
         "type": "AbilityScoreImprovement",
@@ -237,7 +312,8 @@
         },
         "level": 16,
         "title": "Ability Score Improvement",
-        "icon": "systems/dnd5e/icons/svg/ability-score-improvement.svg"
+        "icon": "systems/dnd5e/icons/svg/ability-score-improvement.svg",
+        "_id": "ZSeVTprbNjLOwWzX"
       },
       {
         "_id": "puDaUsYrlks0z5gm",
@@ -290,10 +366,10 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.2.2",
+    "systemVersion": "2.3.1",
     "coreVersion": "10.303",
     "createdTime": 1661787234283,
-    "modifiedTime": 1691518616077,
+    "modifiedTime": 1698851514621,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!wZK2Q0rXB0AQo8h3"
