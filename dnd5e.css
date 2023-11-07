@@ -1852,9 +1852,11 @@ h5 {
 }
 .dnd5e.sheet.item .sheet-body .item-properties {
   flex: 0 0 120px;
-  margin: 5px 5px 5px 0;
-  padding-right: 5px;
+  margin: 0 5px 0 0;
+  padding: 5px 5px 0 0;
   border-right: 2px groove #eeede0;
+  overflow: hidden auto;
+  height: 100%;
 }
 .dnd5e.sheet.item .sheet-body .item-properties .form-group {
   margin: 0;
