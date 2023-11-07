@@ -23,7 +23,7 @@ export function registerCustomEnrichers() {
  * @returns {Promise<HTMLElement|null>}  An HTML element to insert in place of the matched text or null to
  *                                       indicate that no replacement should be made.
  */
-export async function enrichString(match, options) {
+async function enrichString(match, options) {
   let { type, config, label } = match.groups;
   config = parseConfig(config, match.input);
   config.input = match[0];
@@ -67,7 +67,7 @@ function parseConfig(match) {
  * along with a skill, then the skill check will always use the provided ability. Otherwise it will use
  * the character's default ability for that skill.
  * @param {string[]} config            Configuration data.
- * @param {string} label               Optional label to replace default text.
+ * @param {string} [label]             Optional label to replace default text.
  * @param {EnrichmentOptions} options  Options provided to customize text enrichment.
  * @returns {HTMLElement|null}         An HTML link if the check could be built, otherwise null.
  *
@@ -116,12 +116,13 @@ function parseConfig(match) {
  * </a>
  * ```
  */
-export async function enrichCheck(config, label, options) {
+async function enrichCheck(config, label, options) {
   for ( const value of config.values ) {
     if ( value in CONFIG.DND5E.enrichmentLookup.abilities ) config.ability = value;
     else if ( value in CONFIG.DND5E.enrichmentLookup.skills ) config.skill = value;
     else if ( value in CONFIG.DND5E.enrichmentLookup.tools ) config.tool = value;
     else if ( Number.isNumeric(value) ) config.dc = Number(value);
+    else config[value] = true;
   }
 
   let invalid = false;
@@ -183,7 +184,7 @@ export async function enrichCheck(config, label, options) {
 /**
  * Enrich a damage link.
  * @param {string[]} config            Configuration data.
- * @param {string} label               Optional label to replace default text.
+ * @param {string} [label]             Optional label to replace default text.
  * @param {EnrichmentOptions} options  Options provided to customize text enrichment.
  * @returns {HTMLElement|null}         An HTML link if the save could be built, otherwise null.
  *
@@ -214,11 +215,12 @@ export async function enrichCheck(config, label, options) {
  * </a> force
  * ````
  */
-export async function enrichDamage(config, label, options) {
+async function enrichDamage(config, label, options) {
   const formulaParts = [];
   if ( config.formula ) formulaParts.push(config.formula);
   for ( const value of config.values ) {
     if ( value in CONFIG.DND5E.damageTypes ) config.type = value;
+    else if ( value === "average" ) config.average = true;
     else formulaParts.push(value);
   }
   config.formula = Roll.defaultImplementation.replaceFormulaData(formulaParts.join(" "), options.rollData ?? {});
@@ -254,7 +256,7 @@ export async function enrichDamage(config, label, options) {
 /**
  * Enrich a saving throw link.
  * @param {string[]} config            Configuration data.
- * @param {string} label               Optional label to replace default text.
+ * @param {string} [label]             Optional label to replace default text.
  * @param {EnrichmentOptions} options  Options provided to customize text enrichment.
  * @returns {HTMLElement|null}         An HTML link if the save could be built, otherwise null.
  *
@@ -276,10 +278,11 @@ export async function enrichDamage(config, label, options) {
  * </a>
  * ```
  */
-export async function enrichSave(config, label, options) {
+async function enrichSave(config, label, options) {
   for ( const value of config.values ) {
     if ( value in CONFIG.DND5E.enrichmentLookup.abilities ) config.ability = value;
     else if ( Number.isNumeric(value) ) config.dc = Number(value);
+    else config[value] = true;
   }
 
   const abilityConfig = CONFIG.DND5E.enrichmentLookup.abilities[config.ability];
@@ -323,7 +326,7 @@ function _addDataset(element, dataset) {
  * @param {object} dataset  Data that will be added to the tag.
  * @returns {HTMLElement}
  */
-export function createPassiveTag(label, dataset) {
+function createPassiveTag(label, dataset) {
   const span = document.createElement("span");
   span.classList.add("passive-check");
   _addDataset(span, dataset);
@@ -339,7 +342,7 @@ export function createPassiveTag(label, dataset) {
  * @param {object} dataset  Data that will be added to the link for the rolling method.
  * @returns {HTMLElement}
  */
-export function createRollLink(label, dataset) {
+function createRollLink(label, dataset) {
   const link = document.createElement("a");
   link.classList.add("roll-link");
   _addDataset(link, dataset);
@@ -356,7 +359,7 @@ export function createRollLink(label, dataset) {
  * @param {Event} event  The click event triggering the action.
  * @returns {Promise|void}
  */
-export function rollAction(event) {
+function rollAction(event) {
   const target = event.target.closest(".roll-link");
   if ( !target ) return;
   event.stopPropagation();
@@ -401,7 +404,7 @@ export function rollAction(event) {
  * @param {TokenDocument} [speaker]  Currently selected token, if one exists.
  * @returns {Promise|void}
  */
-export async function rollDamage(event, speaker) {
+async function rollDamage(event, speaker) {
   const target = event.target.closest(".roll-link");
   const { formula, damageType } = target.dataset;
 
