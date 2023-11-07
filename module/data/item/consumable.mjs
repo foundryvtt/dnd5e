@@ -47,7 +47,8 @@ export default class ConsumableData extends SystemDataModel.mixin(
   get chatProperties() {
     return [
       CONFIG.DND5E.consumableTypes[this.consumableType],
-      this.hasLimitedUses ? `${this.uses.value}/${this.uses.max} ${game.i18n.localize("DND5E.Charges")}` : null
+      this.hasLimitedUses ? `${this.uses.value}/${this.uses.max} ${game.i18n.localize("DND5E.Charges")}` : null,
+      this.priceLabel
     ];
   }
 
