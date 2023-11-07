@@ -502,7 +502,7 @@
     }
   },
   "Item": {
-    "types": ["weapon", "equipment", "consumable", "tool", "loot", "background", "class", "subclass", "spell", "feat", "backpack"],
+    "types": ["weapon", "equipment", "consumable", "tool", "loot", "race", "background", "class", "subclass", "spell", "feat", "backpack"],
     "templates": {
       "itemDescription": {
         "description": {
@@ -510,7 +510,7 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": ""
+        "source": {}
       },
       "physicalItem": {
         "quantity": 1,
@@ -676,6 +676,7 @@
       "proficient": null,
       "bonus": ""
     },
+    "race": {},
     "spell": {
       "templates": ["itemDescription", "activatedEffect", "action"],
       "level": 1,

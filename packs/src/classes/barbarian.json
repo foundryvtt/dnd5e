@@ -23,6 +23,103 @@
         "title": ""
       },
       {
+        "_id": "fjwU0G5OtTZWOkib",
+        "type": "Trait",
+        "configuration": {
+          "hint": "",
+          "mode": "default",
+          "allowReplacements": false,
+          "grants": [
+            "armor:lgt",
+            "armor:med",
+            "armor:shl"
+          ],
+          "choices": []
+        },
+        "level": 1,
+        "title": "",
+        "classRestriction": "primary",
+        "value": {}
+      },
+      {
+        "_id": "sFas4Tifj7zKgmkY",
+        "type": "Trait",
+        "configuration": {
+          "hint": "",
+          "mode": "default",
+          "allowReplacements": false,
+          "grants": [
+            "weapon:sim",
+            "weapon:mar"
+          ],
+          "choices": []
+        },
+        "level": 1,
+        "title": "",
+        "value": {}
+      },
+      {
+        "_id": "CmX808i8HaWZ7VMx",
+        "type": "Trait",
+        "configuration": {
+          "hint": "",
+          "mode": "default",
+          "allowReplacements": false,
+          "grants": [
+            "saves:str",
+            "saves:con"
+          ],
+          "choices": []
+        },
+        "level": 1,
+        "title": "",
+        "classRestriction": "primary",
+        "value": {}
+      },
+      {
+        "_id": "lD3JBViqmxFYu0kc",
+        "type": "Trait",
+        "configuration": {
+          "hint": "",
+          "mode": "default",
+          "allowReplacements": false,
+          "grants": [],
+          "choices": [
+            {
+              "count": 2,
+              "pool": [
+                "skills:ani",
+                "skills:ath",
+                "skills:itm",
+                "skills:nat",
+                "skills:prc",
+                "skills:sur"
+              ]
+            }
+          ]
+        },
+        "level": 1,
+        "title": "",
+        "classRestriction": "primary"
+      },
+      {
+        "type": "Trait",
+        "configuration": {
+          "hint": "",
+          "mode": "default",
+          "allowReplacements": false,
+          "grants": [
+            "armor:shl"
+          ],
+          "choices": []
+        },
+        "level": 1,
+        "title": "",
+        "_id": "3ETNrLc8RQlHwNXP",
+        "classRestriction": "secondary",
+        "value": {}
+      },
+      {
         "_id": "amez6rlose3eoigo",
         "type": "ItemGrant",
         "configuration": {
@@ -447,10 +544,10 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.2.2",
+    "systemVersion": "2.3.1",
     "coreVersion": "10.303",
     "createdTime": 1661787234281,
-    "modifiedTime": 1691518329159,
+    "modifiedTime": 1698851083985,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!pvEzGSv71zBhaolc"

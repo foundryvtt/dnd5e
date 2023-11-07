@@ -3,18 +3,18 @@
     {{#each senses as |sense name|}}
     <div class="form-group">
         <label>{{sense.label}}</label>
-        <input name="system.attributes.senses.{{name}}" type="number" step="0.1" value="{{sense.value}}"/>
+        <input name="{{@root.keyPath}}.{{name}}" type="number" step="0.1" value="{{sense.value}}"/>
     </div>
     {{/each}}
     <div class="form-group">
         <label>{{localize "DND5E.MovementUnits"}}</label>
-        <select name="system.attributes.senses.units">
+        <select name="{{keyPath}}.units">
             {{selectOptions movementUnits selected=units}}
         </select>
     </div>
     <div class="form-group">
         <label>{{localize "DND5E.SenseSpecial"}}</label>
-        <input type="text" name="system.attributes.senses.special" value="{{special}}"/>
+        <input type="text" name="{{keyPath}}.special" value="{{special}}"/>
     </div>
     <button type="submit"><i class="far fa-save"></i> {{ localize "Submit"}}</button>
 </form>

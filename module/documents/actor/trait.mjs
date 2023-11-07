@@ -78,7 +78,7 @@ export function changeKeyPath(key, trait) {
 
   if ( trait === "saves" ) {
     return `${keyPath}.${split.pop()}.proficient`;
-  } else if ( ["skills", "tools"].includes(trait) ) {
+  } else if ( ["skills", "tool"].includes(trait) ) {
     return `${keyPath}.${split.pop()}.value`;
   } else {
     return `${keyPath}.value`;
@@ -91,8 +91,8 @@ export function changeKeyPath(key, trait) {
 
 /**
  * Build up a trait structure containing all of the children gathered from config & base items.
- * @param {string} trait  Trait as defined in `CONFIG.DND5E.traits`.
- * @returns {object}      Object with trait categories and children.
+ * @param {string} trait       Trait as defined in `CONFIG.DND5E.traits`.
+ * @returns {Promise<object>}  Object with trait categories and children.
  */
 export async function categories(trait) {
   const traitConfig = CONFIG.DND5E.traits[trait];
@@ -156,7 +156,7 @@ export async function categories(trait) {
  * @param {Set<string>} [options.chosen=[]]   Optional list of keys to be marked as chosen.
  * @param {boolean} [options.prefixed=false]  Should keys be prefixed with trait type?
  * @param {boolean} [options.any=false]       Should the "Any" option be added to each category?
- * @returns {SelectChoices}                   Object mapping proficiency ids to choice objects.
+ * @returns {Promise<SelectChoices>}          Object mapping proficiency ids to choice objects.
  */
 export async function choices(trait, { chosen=new Set(), prefixed=false, any=false }={}) {
   const traitConfig = CONFIG.DND5E.traits[trait];
@@ -206,7 +206,7 @@ export async function choices(trait, { chosen=new Set(), prefixed=false, any=fal
  * Prepare an object with all possible choices from a set of keys. These choices will be grouped by
  * trait type if more than one type is present.
  * @param {Set<string>} keys  Prefixed trait keys.
- * @returns {SelectChoices}
+ * @returns {Promise<SelectChoices>}
  */
 export async function mixedChoices(keys) {
   if ( !keys.size ) return new SelectChoices();
@@ -461,7 +461,7 @@ export function choiceLabel(choice, { only=false, final=false }={}) {
     });
   }
 
-  const listFormatter = game.i18n.getListFormatter({ type: "disjunction" });
+  const listFormatter = new Intl.ListFormat(game.i18n.lang, { type: "disjunction" });
 
   // Singular count (e.g. "any skill", "Thieves Tools or any skill", or "Thieves' Tools or any artisan tool")
   if ( (choice.count === 1) && only ) {
@@ -481,9 +481,8 @@ export function choiceLabel(choice, { only=false, final=false }={}) {
 /**
  * Create a human readable description of trait grants & choices.
  * @param {object} config
- * @param {Set<string>} [config.grants]                              Guaranteed trait grants.
- * @param {TraitChoice[]} [config.choices=[]]                        Trait choices.
- * @param {"inclusive"|"exclusive"} [config.choiceMode="inclusive"]  Choice mode.
+ * @param {Set<string>} [config.grants]        Guaranteed trait grants.
+ * @param {TraitChoice[]} [config.choices=[]]  Trait choices.
  * @returns {string}
  *
  * @example
@@ -497,29 +496,16 @@ export function choiceLabel(choice, { only=false, final=false }={}) {
  * @example
  * // Returns "Choose any skill proficiency"
  * localizedList({ choices: [{ count: 1, pool: new Set(["skills:*"])}] });
- *
- * @example
- * // Returns "Choose any 2 languages or any 1 skill proficiency"
- * localizedList({ choices: [
- *   {count: 2, pool: new Set(["languages:*"])}, { count: 1, pool: new Set(["skills:*"])}
- * ], choiceMode: "exclusive" });
  */
-export function localizedList({ grants=new Set(), choices=[], choiceMode="inclusive" }) {
-  const choiceSections = [];
+export function localizedList({ grants=new Set(), choices=[] }) {
+  const sections = Array.from(grants).map(g => keyLabel(g));
 
   for ( const [index, choice] of choices.entries() ) {
-    const final = choiceMode === "exclusive" ? false : index === choices.length - 1;
-    choiceSections.push(choiceLabel(choice, { final, only: !grants.size && choices.length === 1 }));
+    const final = index === choices.length - 1;
+    sections.push(choiceLabel(choice, { final, only: !grants.size && choices.length === 1 }));
   }
 
-  let sections = Array.from(grants).map(g => keyLabel(g));
-  if ( choiceMode === "inclusive" ) {
-    sections = sections.concat(choiceSections);
-  } else {
-    sections.push(game.i18n.getListFormatter({ style: "long", type: "disjunction" }).format(choiceSections));
-  }
-
-  const listFormatter = game.i18n.getListFormatter({ style: "long", type: "conjunction" });
+  const listFormatter = new Intl.ListFormat(game.i18n.lang, { style: "long", type: "conjunction" });
   if ( !sections.length || grants.size ) return listFormatter.format(sections);
   return game.i18n.format("DND5E.TraitConfigChooseWrapper", {
     choices: listFormatter.format(sections)

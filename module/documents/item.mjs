@@ -3,11 +3,12 @@ import simplifyRollFormula from "../dice/simplify-roll-formula.mjs";
 import Advancement from "./advancement/advancement.mjs";
 import AbilityUseDialog from "../applications/item/ability-use-dialog.mjs";
 import Proficiency from "./actor/proficiency.mjs";
+import { SystemDocumentMixin } from "./mixin.mjs";
 
 /**
  * Override and extend the basic Item implementation.
  */
-export default class Item5e extends Item {
+export default class Item5e extends SystemDocumentMixin(Item) {
 
   /**
    * Caches an item linked to this one, such as a subclass associated with a class.
@@ -125,6 +126,8 @@ export default class Item5e extends Item {
     return this.system.hasLimitedUses ?? false;
   }
 
+  /* -------------------------------------------- */
+
   /**
    * Does this Item draw from a resource?
    * @type {boolean}
@@ -132,6 +135,17 @@ export default class Item5e extends Item {
    */
   get hasResource() {
     return this.system.hasResource ?? false;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Does this Item draw from ammunition?
+   * @type {boolean}
+   * @see {@link ActivatedEffectTemplate#hasAmmo}
+   */
+  get hasAmmo() {
+    return this.system.hasAmmo ?? false;
   }
 
   /* -------------------------------------------- */
@@ -256,8 +270,9 @@ export default class Item5e extends Item {
    * @type {object}
    */
   get scaleValues() {
-    if ( !["class", "subclass"].includes(this.type) || !this.advancement.byType.ScaleValue ) return {};
-    const level = this.type === "class" ? this.system.levels : this.class?.system.levels ?? 0;
+    if ( !this.advancement.byType.ScaleValue ) return {};
+    const level = this.type === "class" ? this.system.levels : this.type === "subclass" ? this.class?.system.levels
+      : this.parent?.system.details.level ?? 0;
     return this.advancement.byType.ScaleValue.reduce((obj, advancement) => {
       obj[advancement.identifier] = advancement.valueForLevel(level);
       return obj;
@@ -430,8 +445,11 @@ export default class Item5e extends Item {
 
     // Ability Activation Label
     const act = this.system.activation ?? {};
-    if ( ["none", ""].includes(act.type) ) act.type = null;   // Backwards compatibility
-    this.labels.activation = act.type ? [act.cost, C.abilityActivationTypes[act.type]].filterJoin(" ") : "";
+    if ( !act.type ) act.type = null;   // Backwards compatibility
+    this.labels.activation = act.type ? [
+      (act.type in C.staticAbilityActivationTypes) ? null : act.cost,
+      C.abilityActivationTypes[act.type]
+    ].filterJoin(" ") : "";
 
     // Target Label
     let tgt = this.system.target ?? {};
@@ -647,17 +665,15 @@ export default class Item5e extends Item {
     if ( actorBonus.attack ) parts.push(actorBonus.attack);
 
     // One-time bonus provided by consumed ammunition
-    if ( (this.system.consume?.type === "ammo") && this.actor.items ) {
-      const ammoItem = this.actor.items.get(this.system.consume.target);
-      if ( ammoItem ) {
-        const ammoItemQuantity = ammoItem.system.quantity;
-        const ammoCanBeConsumed = ammoItemQuantity && (ammoItemQuantity - (this.system.consume.amount ?? 0) >= 0);
-        const ammoItemAttackBonus = ammoItem.system.attackBonus;
-        const ammoIsTypeConsumable = (ammoItem.type === "consumable") && (ammoItem.system.consumableType === "ammo");
-        if ( ammoCanBeConsumed && ammoItemAttackBonus && ammoIsTypeConsumable ) {
-          parts.push("@ammo");
-          rollData.ammo = ammoItemAttackBonus;
-        }
+    const ammo = this.hasAmmo ? this.actor.items.get(this.system.consume.target) : null;
+    if ( ammo ) {
+      const ammoItemQuantity = ammo.system.quantity;
+      const ammoCanBeConsumed = ammoItemQuantity && (ammoItemQuantity - (this.system.consume.amount ?? 0) >= 0);
+      const ammoItemAttackBonus = ammo.system.attackBonus;
+      const ammoIsTypeConsumable = (ammo.type === "consumable") && (ammo.system.consumableType === "ammo");
+      if ( ammoCanBeConsumed && ammoItemAttackBonus && ammoIsTypeConsumable ) {
+        parts.push("@ammo");
+        rollData.ammo = ammoItemAttackBonus;
       }
     }
 
@@ -1279,19 +1295,14 @@ export default class Item5e extends Item {
     if ( options.spellLevel ) rollData.item.level = options.spellLevel;
 
     // Handle ammunition consumption
-    delete this._ammo;
-    let ammo = null;
     let ammoUpdate = [];
     const consume = this.system.consume;
-    if ( consume?.type === "ammo" ) {
-      ammo = this.actor.items.get(consume.target);
-      if ( ammo?.system ) {
-        const q = ammo.system.quantity;
-        const consumeAmount = consume.amount ?? 0;
-        if ( q && (q - consumeAmount >= 0) ) {
-          this._ammo = ammo;
-          title += ` [${ammo.name}]`;
-        }
+    const ammo = this.hasAmmo ? this.actor.items.get(consume.target) : null;
+    if ( ammo ) {
+      const q = ammo.system.quantity;
+      const consumeAmount = consume.amount ?? 0;
+      if ( q && (q - consumeAmount >= 0) ) {
+        title += ` [${ammo.name}]`;
       }
 
       // Get pending ammunition update
@@ -1426,11 +1437,11 @@ export default class Item5e extends Item {
     }
 
     // Only add the ammunition damage if the ammunition is a consumable with type 'ammo'
-    if ( this._ammo && (this._ammo.type === "consumable") && (this._ammo.system.consumableType === "ammo") ) {
+    const ammo = this.hasAmmo ? this.actor.items.get(this.system.consume.target) : null;
+    if ( ammo ) {
       parts.push("@ammo");
-      rollData.ammo = this._ammo.system.damage.parts.map(p => p[0]).join("+");
-      rollConfig.flavor += ` [${this._ammo.name}]`;
-      delete this._ammo;
+      rollData.ammo = ammo.system.damage.parts.map(p => p[0]).join("+");
+      rollConfig.flavor += ` [${ammo.name}]`;
     }
 
     // Factor in extra critical damage dice from the Barbarian's "Brutal Critical"
@@ -1874,7 +1885,10 @@ export default class Item5e extends Item {
       throw new Error(`${type} advancement cannot be added to ${this.name}`);
     }
 
+    const createData = foundry.utils.deepClone(data);
     const advancement = new Advancement(data, {parent: this});
+    if ( advancement._preCreate(createData) === false ) return;
+
     const advancementCollection = this.toObject().system.advancement;
     advancementCollection.push(advancement.toObject());
     if ( source ) return this.updateSource({"system.advancement": advancementCollection});
@@ -1974,7 +1988,7 @@ export default class Item5e extends Item {
 
   /** @inheritdoc */
   async _preCreate(data, options, user) {
-    await super._preCreate(data, options, user);
+    if ( (await super._preCreate(data, options, user)) === false ) return false;
 
     // Create class identifier based on name
     if ( ["class", "subclass"].includes(this.type) && !this.system.identifier ) {
@@ -2019,7 +2033,7 @@ export default class Item5e extends Item {
 
   /** @inheritdoc */
   async _preUpdate(changed, options, user) {
-    await super._preUpdate(changed, options, user);
+    if ( (await super._preUpdate(changed, options, user)) === false ) return false;
     if ( (this.type !== "class") || !("levels" in (changed.system || {})) ) return;
 
     // Check to make sure the updated class level isn't below zero
@@ -2138,6 +2152,17 @@ export default class Item5e extends Item {
 
     // Get spell data
     const itemData = (spell instanceof Item5e) ? spell.toObject() : spell;
+
+    /**
+     * A hook event that fires before the item data for a scroll is created.
+     * @function dnd5e.preCreateScrollFromSpell
+     * @memberof hookEvents
+     * @param {object} itemData    The initial item data of the spell to convert to a scroll
+     * @param {object} [options]   Additional options that modify the created scroll
+     * @returns {boolean}          Explicitly return false to prevent the scroll to be created.
+     */
+    if ( Hooks.call("dnd5e.preCreateScrollFromSpell", itemData, options) === false ) return;
+
     let {
       actionType, description, source, activation, duration, target,
       range, damage, formula, save, level, attackBonus, ability, components

@@ -10,7 +10,7 @@ export default class ToolSelector extends TraitSelector {
   async getData() {
     return {
       ...super.getData(),
-      choices: await Trait.choices(this.trait, Object.keys(this.document.system.tools))
+      choices: await Trait.choices(this.trait, { chosen: new Set(Object.keys(this.document.system.tools)) })
     };
   }
 

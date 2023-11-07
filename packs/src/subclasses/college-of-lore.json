@@ -13,6 +13,26 @@
     "classIdentifier": "bard",
     "advancement": [
       {
+        "_id": "GgjL1Z4CKIkVLcyz",
+        "type": "Trait",
+        "configuration": {
+          "hint": "",
+          "mode": "default",
+          "allowReplacements": false,
+          "grants": [],
+          "choices": [
+            {
+              "count": 3,
+              "pool": [
+                "skills:*"
+              ]
+            }
+          ]
+        },
+        "level": 3,
+        "title": ""
+      },
+      {
         "_id": "pxolz5oyrvbez6aj",
         "type": "ItemGrant",
         "level": 3,
@@ -120,10 +140,10 @@
   "_id": "MNvsEc4D2ccX7dQT",
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.1.2",
-    "coreVersion": "10.291",
+    "systemVersion": "2.3.1",
+    "coreVersion": "10.303",
     "createdTime": 1661787234294,
-    "modifiedTime": 1674435535784,
+    "modifiedTime": 1698856945298,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!MNvsEc4D2ccX7dQT"

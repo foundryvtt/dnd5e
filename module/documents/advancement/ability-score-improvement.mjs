@@ -22,12 +22,23 @@ export default class AbilityScoreImprovementAdvancement extends Advancement {
       icon: "systems/dnd5e/icons/svg/ability-score-improvement.svg",
       title: game.i18n.localize("DND5E.AdvancementAbilityScoreImprovementTitle"),
       hint: game.i18n.localize("DND5E.AdvancementAbilityScoreImprovementHint"),
-      validItemTypes: new Set(["background", "class"]),
+      validItemTypes: new Set(["background", "class", "race"]),
       apps: {
         config: AbilityScoreImprovementConfig,
         flow: AbilityScoreImprovementFlow
       }
     });
+  }
+
+  /* -------------------------------------------- */
+  /*  Preparation Methods                         */
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  _preCreate(data) {
+    if ( super._preCreate(data) === false ) return false;
+    if ( this.item.type !== "class" || foundry.utils.hasProperty(data, "configuration.points") ) return;
+    this.updateSource({"configuration.points": 2});
   }
 
   /* -------------------------------------------- */
