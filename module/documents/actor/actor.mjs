@@ -281,6 +281,14 @@ export default class Actor5e extends Actor {
     this.system.attributes.hd.smallest = hd.size ? Math.min(...hd) : null;
     this.system.attributes.hd.largest = hd.size ? Math.max(...hd) : null;
 
+    this.system.attributes.hd.toString = function() {
+      foundry.utils.logCompatibilityWarning(
+        "You are accessing 'attributes.hd' which has been moved to 'attributes.hd.amount'.",
+        {since: "DnD5e 2.4.0", until: "DnD5e 2.5"}
+      );
+      return this.amount;
+    }
+
     // Character proficiency bonus
     this.system.attributes.prof = Proficiency.calculateMod(this.system.details.level);
 
