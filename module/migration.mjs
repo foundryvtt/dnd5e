@@ -38,6 +38,7 @@ export const migrateWorld = async function() {
       if ( !foundry.utils.isEmpty(updateData) || flags.needsMigration ) {
         console.log(`Migrating Item document ${item.name}`);
         const update = foundry.utils.isEmpty(updateData) ? source : updateData;
+        update["flags.dnd5e.-=needsMigration"] = null;
         await item.update(update, {enforceTypes: false, diff: valid && !flags.needsMigration});
       }
     } catch(err) {
@@ -144,8 +145,9 @@ export const migrateCompendium = async function(pack) {
 
       // Save the entry, if data was changed
       if ( foundry.utils.isEmpty(updateData) && !flags.needsMigration ) continue;
-      const updates = foundry.utils.isEmpty(updateData) ? source : updateData;
-      await doc.update(updates, { diff: !flags.needsMigration });
+      const update = foundry.utils.isEmpty(updateData) ? source : updateData;
+      update["flags.dnd5e.-=needsMigration"] = null;
+      await doc.update(update, { diff: !flags.needsMigration });
       console.log(`Migrated ${documentName} document ${doc.name} in Compendium ${pack.collection}`);
     }
 
@@ -288,8 +290,11 @@ export const migrateActorData = function(actor, migrationData, flags={}) {
 
     // Update the Owned Item
     if ( !foundry.utils.isEmpty(itemUpdate) || itemFlags.needsMigration ) {
-      if ( itemFlags.needsMigration ) flags.needsMigration = true;
       const update = !foundry.utils.isEmpty(itemUpdate) ? foundry.utils.expandObject(itemUpdate) : itemData;
+      if ( itemFlags.needsMigration ) {
+        flags.needsMigration = true;
+        update["flags.dnd5e.-=needsMigration"] = null;
+      }
       arr.push({ ...update, _id: itemData._id });
     }
 
