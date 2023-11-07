@@ -106,12 +106,13 @@ export default class RaceData extends SystemDataModel.mixin(ItemDescriptionTempl
       }
     }
     if ( this.senses.special ) {
-      updates[system.attributes.senses.special] = attributes.senses.special
-        ? `${attributes.senses.special}:${this.senses.special}` : this.senses.special;
+      updates[system.attributes.senses.special] = [attributes.senses.special, this.senses.special].filterJoin(";");
     }
     updates["system.attributes.senses.units"] = this.senses.units;
 
-    // TODO: Set creature type once defined on actor
+    if ( this.type.value ) updates["system.details.type.value"] = this.type.value;
+    if ( this.type.subtype ) updates["system.details.type.subtype"] = this.type.subtype;
+    if ( this.type.custom ) updates["system.details.type.custom"] = this.type.custom;
 
     this.parent.actor.update(updates);
   }
@@ -148,7 +149,10 @@ export default class RaceData extends SystemDataModel.mixin(ItemDescriptionTempl
       updates[system.attributes.senses.special] = attributes.senses.special.replace(this.senses.special, "");
     }
 
-    // TODO: Unset creature type once defined on actor
+    const type = this.parent.actor.system.details.type;
+    if ( this.type.value === type.value ) updates["system.details.type.value"] = "humanoid";
+    if ( this.type.subtype === type.subtype ) updates["system.details.type.subtype"] = "";
+    if ( this.type.custom === type.custom ) updates["system.details.type.custom"] = "";
 
     await this.parent.actor.update(updates);
   }

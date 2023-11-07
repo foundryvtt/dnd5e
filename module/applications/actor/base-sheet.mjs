@@ -1406,7 +1406,7 @@ export default class ActorSheet5e extends ActorSheet {
         try {
           const shouldRemoveAdvancements = await AdvancementConfirmationDialog.forDelete(item);
           if ( shouldRemoveAdvancements ) return manager.render(true);
-          else return item.delete({ shouldRemoveAdvancements });
+          return item.delete({ shouldRemoveAdvancements });
         } catch(err) {
           return;
         }
