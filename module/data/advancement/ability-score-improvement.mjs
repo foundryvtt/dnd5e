@@ -19,7 +19,11 @@ export class AbilityScoreImprovementConfigurationData extends foundry.abstract.D
       fixed: new MappingField(
         new foundry.data.fields.NumberField({nullable: false, integer: true, initial: 0}),
         {label: "DND5E.AdvancementAbilityScoreImprovementFixed"}
-      )
+      ),
+      cap: new foundry.data.fields.NumberField({
+        integer: true, min: 1, initial: 2, label: "DND5E.AdvancementAbilityScoreImprovementCap",
+        hint: "DND5E.AdvancementAbilityScoreImprovementCapHint"
+      })
     };
   }
 }

@@ -1526,6 +1526,10 @@ h5 {
   padding: 0;
   font-size: var(--font-size-18);
 }
+.dnd5e.advancement form[data-type="AbilityScoreImprovement"] .ability-scores > label > .cap {
+  margin-block: 0;
+  font-size: var(--font-size-13);
+}
 .dnd5e.advancement form[data-type="AbilityScoreImprovement"] .ability-scores li {
   display: grid;
   grid-template: "label label label label" "minus value value plus" "minus delta delta plus";
