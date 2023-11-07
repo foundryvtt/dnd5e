@@ -1,5 +1,6 @@
 import Actor5e from "../../documents/actor/actor.mjs";
 import Proficiency from "../../documents/actor/proficiency.mjs";
+import * as Trait from "../../documents/actor/trait.mjs";
 import JournalEditor from "./journal-editor.mjs";
 
 /**
@@ -77,6 +78,26 @@ export default class JournalClassPageSheet extends JournalPageSheet {
         hitDice: `1${hp.hitDie}`,
         max: hp.hitDieValue,
         average: Math.floor(hp.hitDieValue / 2) + 1
+      };
+    }
+
+    const traits = item.advancement.byType.Trait ?? [];
+    const makeTrait = type => {
+      const advancement = traits.find(a => {
+        const rep = a.representedTraits();
+        if ( (rep.size > 1) || (rep.first() !== type) ) return false;
+        return (a.classRestriction !== "secondary") && (a.level === 1);
+      });
+      if ( !advancement ) return game.i18n.localize("None");
+      return advancement.configuration.hint || Trait.localizedList(advancement.configuration);
+    };
+    if ( traits.length ) {
+      advancement.traits = {
+        armor: makeTrait("armor"),
+        weapons: makeTrait("weapon"),
+        tools: makeTrait("tool"),
+        saves: makeTrait("saves"),
+        skills: makeTrait("skills")
       };
     }
 
