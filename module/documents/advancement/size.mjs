@@ -15,7 +15,7 @@ export default class SizeAdvancement extends Advancement {
         configuration: SizeConfigurationData,
         value: SizeValueData
       },
-      order: 5,
+      order: 25,
       icon: "systems/dnd5e/icons/svg/size.svg",
       title: game.i18n.localize("DND5E.AdvancementSizeTitle"),
       hint: game.i18n.localize("DND5E.AdvancementSizeHint"),
