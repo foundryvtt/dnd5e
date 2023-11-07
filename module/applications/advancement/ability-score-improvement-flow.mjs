@@ -48,6 +48,7 @@ export default class AbilityScoreImprovementFlow extends AdvancementFlow {
         if ( !this.advancement.canImprove(key) || this.advancement.configuration.fixed[key] ) return assigned;
         return assigned + (this.assignments[key] ?? 0);
       }, 0),
+      cap: this.advancement.configuration.cap ?? Infinity,
       total: this.advancement.configuration.points
     };
     points.available = points.total - points.assigned;
@@ -57,8 +58,9 @@ export default class AbilityScoreImprovementFlow extends AdvancementFlow {
     const abilities = Object.entries(CONFIG.DND5E.abilities).reduce((obj, [key, data]) => {
       if ( !this.advancement.canImprove(key) ) return obj;
       const ability = this.advancement.actor.system.abilities[key];
+      const assignment = this.assignments[key] ?? 0;
       const fixed = this.advancement.configuration.fixed[key] ?? 0;
-      const value = Math.min(ability.value + ((fixed || this.assignments[key]) ?? 0), ability.max);
+      const value = Math.min(ability.value + ((fixed || assignment) ?? 0), ability.max);
       const max = fixed ? value : Math.min(value + points.available, ability.max);
       obj[key] = {
         key, max, value,
@@ -70,19 +72,23 @@ export default class AbilityScoreImprovementFlow extends AdvancementFlow {
         showDelta: true,
         isDisabled: !!this.feat,
         isFixed: !!fixed || (ability.value >= ability.max),
-        canIncrease: (value < max) && !fixed && !this.feat,
+        canIncrease: (value < max) && (assignment < points.cap) && !fixed && !this.feat,
         canDecrease: (value > ability.value) && !fixed && !this.feat
       };
       return obj;
     }, {});
 
-    const pluralRule = new Intl.PluralRules(game.i18n.lang).select(points.available);
+    const pluralRules = new Intl.PluralRules(game.i18n.lang);
     return foundry.utils.mergeObject(super.getData(), {
       abilities, points,
       feat: this.feat,
       staticIncrease: !this.advancement.configuration.points,
+      pointCap: game.i18n.format(
+        `DND5E.AdvancementAbilityScoreImprovementCapDisplay.${pluralRules.select(points.cap)}`, {points: points.cap}
+      ),
       pointsRemaining: game.i18n.format(
-        `DND5E.AdvancementAbilityScoreImprovementPointsRemaining.${pluralRule}`, {points: points.available}
+        `DND5E.AdvancementAbilityScoreImprovementPointsRemaining.${pluralRules.select(points.available)}`,
+        {points: points.available}
       )
     });
   }
@@ -106,8 +112,10 @@ export default class AbilityScoreImprovementFlow extends AdvancementFlow {
     const key = input.closest("[data-score]").dataset.score;
     if ( isNaN(input.valueAsNumber) ) this.assignments[key] = 0;
     else {
-      const clampedValue = Math.clamped(input.valueAsNumber, Number(input.min), Number(input.max));
-      this.assignments[key] = clampedValue - Number(input.dataset.initial);
+      this.assignments[key] = Math.min(
+        Math.clamped(input.valueAsNumber, Number(input.min), Number(input.max)) - Number(input.dataset.initial),
+        this.advancement.configuration.cap ?? Infinity
+      );
     }
     this.render();
   }

@@ -80,6 +80,29 @@ export default class RaceData extends SystemDataModel.mixin(ItemDescriptionTempl
   /* -------------------------------------------- */
 
   /**
+   * Create default advancement items when race is created.
+   * @param {object} data               The initial data object provided to the document creation request.
+   * @param {object} options            Additional options which modify the creation request.
+   * @param {User} user                 The User requesting the document creation.
+   * @returns {Promise<boolean|void>}   A return value of false indicates the creation operation should be cancelled.
+   * @see {Document#_preCreate}
+   * @protected
+   */
+  async _preCreate(data, options, user) {
+    if ( data._id || foundry.utils.hasProperty(data, "system.advancement") ) return;
+    const toCreate = [
+      { type: "AbilityScoreImprovement" }, { type: "Size" },
+      { type: "Trait", configuration: { grants: ["languages:common"] } }
+    ];
+    this.parent.updateSource({"system.advancement": toCreate.map(c => {
+      const AdvancementClass = CONFIG.DND5E.advancementTypes[c.type];
+      return new AdvancementClass(c, { parent: this.parent }).toObject();
+    })});
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Set the race reference in actor data.
    * @param {object} data     The initial data object provided to the document creation request
    * @param {object} options  Additional options which modify the creation request

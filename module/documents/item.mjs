@@ -1885,7 +1885,10 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       throw new Error(`${type} advancement cannot be added to ${this.name}`);
     }
 
+    const createData = foundry.utils.deepClone(data);
     const advancement = new Advancement(data, {parent: this});
+    if ( advancement._preCreate(createData) === false ) return;
+
     const advancementCollection = this.toObject().system.advancement;
     advancementCollection.push(advancement.toObject());
     if ( source ) return this.updateSource({"system.advancement": advancementCollection});
