@@ -1,3 +1,4 @@
+import TraitAdvancement from "../../documents/advancement/trait.mjs";
 import SystemDataModel from "../abstract.mjs";
 import { AdvancementField, IdentifierField } from "../fields.mjs";
 import ItemDescriptionTemplate from "./templates/item-description.mjs";
@@ -49,7 +50,6 @@ export default class ClassData extends SystemDataModel.mixin(ItemDescriptionTemp
     super._migrateData(source);
     ClassData.#migrateLevels(source);
     ClassData.#migrateSpellcastingData(source);
-    ClassData.#migrateTraitAdvancement(source);
   }
 
   /* -------------------------------------------- */
@@ -84,42 +84,49 @@ export default class ClassData extends SystemDataModel.mixin(ItemDescriptionTemp
   /**
    * Migrate the class's saves & skills into TraitAdvancements.
    * @param {object} source  The candidate source data from which the model will be constructed.
+   * @private
    */
-  static #migrateTraitAdvancement(source) {
-    source.advancement ??= [];
-    if ( source.advancement.find(a => a.type === "Trait") ) return;
+  static _migrateTraitAdvancement(source) {
+    const system = source.system ??= {};
+    system.advancement ??= [];
+    if ( system.advancement.find(a => a.type === "Trait") ) return;
+    let needsMigration = false;
 
-    if ( source.saves?.length ) {
+    if ( system.saves?.length ) {
       const savesData = {
         type: "Trait",
         configuration: {
-          grants: source.saves.map(t => `saves:${t}`)
+          grants: system.saves.map(t => `saves:${t}`)
         }
       };
       savesData.value = {
         chosen: savesData.configuration.grants
       };
-      source.advancement.push(savesData);
-      delete source.saves;
+      system.advancement.push(new TraitAdvancement(savesData).toObject());
+      delete system.saves;
+      needsMigration = true;
     }
 
-    if ( source.skills?.choices?.length ) {
+    if ( system.skills?.choices?.length ) {
       const skillsData = {
         type: "Trait",
         configuration: {
           choices: [{
-            count: source.skills.number ?? 1,
-            pool: source.skills.choices.map(t => `skills:${t}`)
+            count: system.skills.number ?? 1,
+            pool: system.skills.choices.map(t => `skills:${t}`)
           }]
         }
       };
-      if ( source.skills.value?.length ) {
+      if ( system.skills.value?.length ) {
         skillsData.value = {
-          chosen: source.skills.value.map(t => `skills:${t}`)
+          chosen: system.skills.value.map(t => `skills:${t}`)
         };
       }
-      source.advancement.push(skillsData);
-      delete source.skills;
+      system.advancement.push(new TraitAdvancement(skillsData).toObject());
+      delete system.skills;
+      needsMigration = true;
     }
+
+    if ( needsMigration ) foundry.utils.setProperty(source, "flags.dnd5e.needsMigration", true);
   }
 }

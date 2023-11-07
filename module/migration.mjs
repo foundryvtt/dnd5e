@@ -13,11 +13,13 @@ export const migrateWorld = async function() {
     .concat(Array.from(game.actors.invalidDocumentIds).map(id => [game.actors.getInvalid(id), false]));
   for ( const [actor, valid] of actors ) {
     try {
+      const flags = { needsMigration: false };
       const source = valid ? actor.toObject() : game.data.actors.find(a => a._id === actor.id);
-      const updateData = migrateActorData(source, migrationData);
-      if ( !foundry.utils.isEmpty(updateData) ) {
+      const updateData = migrateActorData(source, migrationData, flags);
+      if ( !foundry.utils.isEmpty(updateData) || flags.needsMigration ) {
         console.log(`Migrating Actor document ${actor.name}`);
-        await actor.update(updateData, {enforceTypes: false, diff: valid});
+        const update = foundry.utils.isEmpty(updateData) ? source : updateData;
+        await actor.update(update, {enforceTypes: false, diff: valid && !flags.needsMigration});
       }
     } catch(err) {
       err.message = `Failed dnd5e system migration for Actor ${actor.name}: ${err.message}`;
@@ -30,11 +32,13 @@ export const migrateWorld = async function() {
     .concat(Array.from(game.items.invalidDocumentIds).map(id => [game.items.getInvalid(id), false]));
   for ( const [item, valid] of items ) {
     try {
+      const flags = { needsMigration: false };
       const source = valid ? item.toObject() : game.data.items.find(i => i._id === item.id);
-      const updateData = migrateItemData(source, migrationData);
-      if ( !foundry.utils.isEmpty(updateData) ) {
+      const updateData = migrateItemData(source, migrationData, flags);
+      if ( !foundry.utils.isEmpty(updateData) || flags.needsMigration ) {
         console.log(`Migrating Item document ${item.name}`);
-        await item.update(updateData, {enforceTypes: false, diff: valid});
+        const update = foundry.utils.isEmpty(updateData) ? source : updateData;
+        await item.update(update, {enforceTypes: false, diff: valid && !flags.needsMigration});
       }
     } catch(err) {
       err.message = `Failed dnd5e system migration for Item ${item.name}: ${err.message}`;
@@ -124,21 +128,24 @@ export const migrateCompendium = async function(pack) {
   for ( let doc of documents ) {
     let updateData = {};
     try {
+      const flags = { needsMigration: false };
+      const source = doc.toObject();
       switch (documentName) {
         case "Actor":
-          updateData = migrateActorData(doc.toObject(), migrationData);
+          updateData = migrateActorData(source, migrationData, flags);
           break;
         case "Item":
-          updateData = migrateItemData(doc.toObject(), migrationData);
+          updateData = migrateItemData(source, migrationData, flags);
           break;
         case "Scene":
-          updateData = migrateSceneData(doc.toObject(), migrationData);
+          updateData = migrateSceneData(source, migrationData, flags);
           break;
       }
 
       // Save the entry, if data was changed
-      if ( foundry.utils.isEmpty(updateData) ) continue;
-      await doc.update(updateData);
+      if ( foundry.utils.isEmpty(updateData) && !flags.needsMigration ) continue;
+      const updates = foundry.utils.isEmpty(updateData) ? source : updateData;
+      await doc.update(updates, { diff: !flags.needsMigration });
       console.log(`Migrated ${documentName} document ${doc.name} in Compendium ${pack.collection}`);
     }
 
@@ -247,9 +254,10 @@ export const migrateArmorClass = async function(pack) {
  * Return an Object of updateData to be applied
  * @param {object} actor            The actor data object to update
  * @param {object} [migrationData]  Additional data to perform the migration
+ * @param {object} [flags={}]       Track the needs migration flag.
  * @returns {object}                The updateData to apply
  */
-export const migrateActorData = function(actor, migrationData) {
+export const migrateActorData = function(actor, migrationData, flags={}) {
   const updateData = {};
   _migrateTokenImage(actor, updateData);
   _migrateActorAC(actor, updateData);
@@ -265,7 +273,8 @@ export const migrateActorData = function(actor, migrationData) {
   const items = actor.items.reduce((arr, i) => {
     // Migrate the Owned Item
     const itemData = i instanceof CONFIG.Item.documentClass ? i.toObject() : i;
-    let itemUpdate = migrateItemData(itemData, migrationData);
+    const itemFlags = { needsMigration: false };
+    let itemUpdate = migrateItemData(itemData, migrationData, itemFlags);
 
     if ( (itemData.type === "background") && (actor.system?.details?.background !== itemData._id) ) {
       updateData["system.details.background"] = itemData._id;
@@ -278,9 +287,10 @@ export const migrateActorData = function(actor, migrationData) {
     }
 
     // Update the Owned Item
-    if ( !foundry.utils.isEmpty(itemUpdate) ) {
-      itemUpdate._id = itemData._id;
-      arr.push(foundry.utils.expandObject(itemUpdate));
+    if ( !foundry.utils.isEmpty(itemUpdate) || itemFlags.needsMigration ) {
+      if ( itemFlags.needsMigration ) flags.needsMigration = true;
+      const update = !foundry.utils.isEmpty(itemUpdate) ? foundry.utils.expandObject(itemUpdate) : itemData;
+      arr.push({ ...update, _id: itemData._id });
     }
 
     // Update tool expertise.
@@ -305,9 +315,10 @@ export const migrateActorData = function(actor, migrationData) {
  *
  * @param {object} item             Item data to migrate
  * @param {object} [migrationData]  Additional data to perform the migration
+ * @param {object} [flags={}]       Track the needs migration flag.
  * @returns {object}                The updateData to apply
  */
-export function migrateItemData(item, migrationData) {
+export function migrateItemData(item, migrationData, flags={}) {
   const updateData = {};
   _migrateDocumentIcon(item, updateData, migrationData);
 
@@ -316,6 +327,8 @@ export function migrateItemData(item, migrationData) {
     const effects = migrateEffects(item, migrationData);
     if ( effects.length > 0 ) updateData.effects = effects;
   }
+
+  if ( foundry.utils.getProperty(item, "flags.dnd5e.needsMigration") ) flags.needsMigration = true;
 
   return updateData;
 }

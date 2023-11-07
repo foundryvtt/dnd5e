@@ -1,3 +1,4 @@
+import ClassData from "../data/item/class.mjs";
 import {d20Roll, damageRoll} from "../dice/dice.mjs";
 import simplifyRollFormula from "../dice/simplify-roll-formula.mjs";
 import Advancement from "./advancement/advancement.mjs";
@@ -2220,5 +2221,16 @@ export default class Item5e extends SystemDocumentMixin(Item) {
      */
     Hooks.callAll("dnd5e.createScrollFromSpell", spell, spellScrollData);
     return new this(spellScrollData);
+  }
+
+  /* -------------------------------------------- */
+  /*  Migrations & Deprecations                   */
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  static migrateData(source) {
+    source = super.migrateData(source);
+    if ( source.type === "class" ) ClassData._migrateTraitAdvancement(source);
+    return source;
   }
 }
