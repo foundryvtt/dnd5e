@@ -23,6 +23,7 @@ export default class SourceTemplate extends SchemaField {
 
   /* -------------------------------------------- */
 
+  /** @inheritdoc */
   initialize(value, model, options={}) {
     const obj = super.initialize(value, model, options);
 
