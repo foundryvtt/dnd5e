@@ -224,6 +224,7 @@ async function enrichDamage(config, label, options) {
     else formulaParts.push(value);
   }
   config.formula = Roll.defaultImplementation.replaceFormulaData(formulaParts.join(" "), options.rollData ?? {});
+  if ( !config.formula ) return null;
   config.damageType = config.type;
   config.type = "damage";
 
