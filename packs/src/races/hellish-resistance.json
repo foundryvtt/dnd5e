@@ -11,7 +11,13 @@
       "chat": "",
       "unidentified": ""
     },
-    "source": "SRD 5.1",
+    "source": {
+      "custom": "SRD 5.1",
+      "book": "",
+      "page": "",
+      "uuid": "",
+      "license": ""
+    },
     "activation": {
       "type": "",
       "cost": null,
@@ -22,11 +28,13 @@
       "units": ""
     },
     "cover": null,
+    "crewed": false,
     "target": {
       "value": null,
       "width": null,
       "units": "",
-      "type": ""
+      "type": "",
+      "prompt": true
     },
     "range": {
       "value": null,
@@ -37,7 +45,8 @@
       "value": null,
       "max": "",
       "per": null,
-      "recovery": ""
+      "recovery": "",
+      "prompt": true
     },
     "consume": {
       "type": "",
@@ -101,18 +110,18 @@
       "transfer": true,
       "flags": {},
       "tint": null,
-      "sort": 0,
-      "_key": "!items.effects!q71Pe1F8RRtEJt8Q.0rAhv7npcNmDcQ3B"
+      "_key": "!items.effects!q71Pe1F8RRtEJt8Q.0rAhv7npcNmDcQ3B",
+      "sort": 0
     }
   ],
   "folder": null,
   "sort": 0,
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.1.0",
-    "coreVersion": "10.291",
+    "systemVersion": "2.3.1",
+    "coreVersion": "10.303",
     "createdTime": 1661787234473,
-    "modifiedTime": 1672336356633,
+    "modifiedTime": 1699397219293,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!q71Pe1F8RRtEJt8Q"

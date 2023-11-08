@@ -1,13 +1,11 @@
 {
-  "_id": "0kUsT4sMUOr5FcoX",
-  "name": "Savage Attacks",
-  "ownership": {
-    "default": 0
-  },
+  "_id": "4v2PiBrAbqDizdSJ",
+  "name": "Trance",
   "type": "feat",
+  "img": "icons/magic/perception/third-eye-blue-red.webp",
   "system": {
     "description": {
-      "value": "<p>When you score a critical hit with a melee weapon attack, you can roll one of the weapon's damage dice one additional time and add it to the extra damage of the critical hit.</p><section class=\"secret foundry-note\" id=\"secret-FW95FLcIfLVA7oB6\"><p><strong>Foundry Note</strong></p><p>Enable this feature in the Special Traits section of the character sheet.</p></section>",
+      "value": "<p>Elves don't need to sleep. Instead, they meditate deeply, remaining semiconscious, for 4 hours a day. (The Common word for such meditation is \"trance.\") While meditating, you can dream after a fashion; such dreams are actually mental exercises that have become reflexive through years of practice. After resting in this way, you gain the same benefit that a human does from 8 hours of sleep.</p>",
       "chat": "",
       "unidentified": ""
     },
@@ -53,7 +51,7 @@
       "target": null,
       "amount": null
     },
-    "ability": "",
+    "ability": null,
     "actionType": "",
     "attackBonus": "",
     "chatFlavor": "",
@@ -75,24 +73,26 @@
       "value": "race",
       "subtype": ""
     },
-    "requirements": "Half-Orc",
+    "requirements": "Elf",
     "recharge": {
       "value": null,
       "charged": false
     }
   },
-  "flags": {},
-  "img": "icons/skills/melee/weapons-crossed-swords-purple.webp",
   "effects": [],
-  "folder": null,
-  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
   "_stats": {
     "systemId": "dnd5e",
     "systemVersion": "2.3.1",
     "coreVersion": "10.303",
-    "createdTime": 1661787234460,
-    "modifiedTime": 1699397219108,
+    "createdTime": 1677179906781,
+    "modifiedTime": 1699397219112,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
-  "_key": "!items!0kUsT4sMUOr5FcoX"
+  "sort": 0,
+  "folder": null,
+  "_key": "!items!4v2PiBrAbqDizdSJ"
 }

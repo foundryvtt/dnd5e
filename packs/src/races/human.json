@@ -1,85 +1,120 @@
 {
   "_id": "ydP3QzCmur55mtY2",
   "name": "Human",
-  "ownership": {
-    "default": 0
-  },
-  "type": "feat",
+  "type": "race",
+  "img": "icons/environment/people/commoner.webp",
   "system": {
     "description": {
-      "value": "<p><em>It's hard to make generalizations about humans, but your human character has these traits. </em></p>\n<p><em><strong>Ability Score Increase.</strong></em> Your ability scores each increase by 1.</p>\n<p><em><strong>Age.</strong></em> Humans reach adulthood in their late teens and live less than a century.</p>\n<p><em><strong>Alignment. </strong></em>Humans tend toward no particular alignment. The best and the worst are found among them.</p>\n<p><em><strong>Size.</strong></em> Humans vary widely in height and build, from barely 5 feet to well over 6 feet tall. Regardless of your position in that range, your size is Medium.</p>\n<p><em><strong>Speed.</strong></em> Your base walking speed is 30 feet.</p>\n<p><em><strong>Languages. </strong></em>You can speak, read, and write Common and one extra language of your choice. Humans typically learn the languages of other peoples they deal with, including obscure dialects. They are fond of sprinkling their speech with words borrowed from other tongues: Orc curses, Elvish musical expressions, Dwarvish military phrases, and so on.</p>",
+      "value": "<p>It's hard to make generalizations about humans, but your human character has these traits.</p><p><em><strong>Ability Score Increase.</strong></em> Your ability scores each increase by 1.</p><p><em><strong>Age.</strong></em> Humans reach adulthood in their late teens and live less than a century.</p><p><em><strong>Alignment.</strong></em> Humans tend toward no particular alignment. The best and the worst are found among them.</p><p><em><strong>Size.</strong></em> Humans vary widely in height and build, from barely 5 feet to well over 6 feet tall. Regardless of your position in that range, your size is Medium.</p><p><em><strong>Speed.</strong></em> Your base walking speed is 30 feet.</p><p><em><strong>Languages.</strong></em> You can speak, read, and write Common and one extra language of your choice. Humans typically learn the languages of other peoples they deal with, including obscure dialects. They are fond of sprinkling their speech with words borrowed from other tongues: Orc curses, Elvish musical expressions, Dwarvish military phrases, and so on.</p>",
       "chat": "",
       "unidentified": ""
     },
-    "source": "SRD 5.1",
-    "activation": {
-      "type": "",
-      "cost": null,
-      "condition": ""
+    "source": {
+      "custom": "SRD 5.1",
+      "book": "",
+      "page": "",
+      "uuid": "",
+      "license": ""
     },
-    "duration": {
-      "value": "",
-      "units": ""
+    "identifier": "human",
+    "advancement": [
+      {
+        "_id": "Z9hvZFkWUNvowbQX",
+        "type": "AbilityScoreImprovement",
+        "configuration": {
+          "points": 0,
+          "fixed": {
+            "str": 1,
+            "dex": 1,
+            "con": 1,
+            "int": 1,
+            "wis": 1,
+            "cha": 1
+          },
+          "cap": 2
+        },
+        "value": {
+          "type": "asi"
+        },
+        "level": 0,
+        "title": ""
+      },
+      {
+        "_id": "dNSrZePZHz2qwVpi",
+        "type": "Size",
+        "configuration": {
+          "hint": "Humans vary widely in height and build, from barely 5 feet to well over 6 feet tall. Regardless of your position in that range, your size is Medium.",
+          "sizes": [
+            "med"
+          ]
+        },
+        "value": {
+          "size": ""
+        },
+        "level": 1,
+        "title": ""
+      },
+      {
+        "_id": "HI6r4Y6KjHND0i53",
+        "type": "Trait",
+        "configuration": {
+          "hint": "",
+          "mode": "default",
+          "allowReplacements": false,
+          "grants": [
+            "languages:common"
+          ],
+          "choices": [
+            {
+              "count": 1,
+              "pool": [
+                "languages:*"
+              ]
+            }
+          ]
+        },
+        "level": 0,
+        "title": "",
+        "value": {}
+      }
+    ],
+    "movement": {
+      "burrow": 0,
+      "climb": 0,
+      "fly": 0,
+      "swim": 0,
+      "walk": 30,
+      "units": "ft",
+      "hover": false
     },
-    "cover": null,
-    "target": {
-      "value": null,
-      "width": null,
-      "units": "",
-      "type": ""
+    "senses": {
+      "darkvision": 0,
+      "blindsight": 0,
+      "tremorsense": 0,
+      "truesight": 0,
+      "units": "ft",
+      "special": ""
     },
-    "range": {
-      "value": null,
-      "long": null,
-      "units": ""
-    },
-    "uses": {
-      "value": null,
-      "max": "",
-      "per": null,
-      "recovery": ""
-    },
-    "consume": {
-      "type": "",
-      "target": null,
-      "amount": null
-    },
-    "ability": null,
-    "actionType": "",
-    "attackBonus": "",
-    "chatFlavor": "",
-    "critical": {
-      "threshold": null,
-      "damage": ""
-    },
-    "damage": {
-      "parts": [],
-      "versatile": ""
-    },
-    "formula": "",
-    "save": {
-      "ability": "",
-      "dc": null,
-      "scaling": "spell"
-    },
-    "requirements": "",
-    "recharge": {
-      "value": null,
-      "charged": false
+    "type": {
+      "value": "humanoid",
+      "subtype": "",
+      "custom": ""
     }
   },
-  "flags": {},
-  "img": "icons/magic/light/explosion-star-large-orange.webp",
   "effects": [],
-  "folder": null,
-  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.1.0",
-    "coreVersion": "10.291",
-    "createdTime": 1661787234475,
-    "modifiedTime": 1671220977692,
+    "systemVersion": "2.3.1",
+    "coreVersion": "10.303",
+    "createdTime": 1677180079259,
+    "modifiedTime": 1699397219303,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
+  "sort": 0,
+  "folder": null,
   "_key": "!items!ydP3QzCmur55mtY2"
 }

@@ -1,13 +1,13 @@
 {
-  "_id": "97c8i9Z28thvZuA8",
-  "name": "Relentless Endurance",
+  "_id": "kB61JPKQrDBbSNU7",
+  "name": "Breath Weapon - Red",
   "ownership": {
     "default": 0
   },
   "type": "feat",
   "system": {
     "description": {
-      "value": "<p>When you are reduced to 0 hit points but not killed outright, you can drop to 1 hit point instead. You can't use this feature again until you finish a long rest.</p>",
+      "value": "<p>You can use your action to exhale destructive energy. Your draconic ancestry determines the size, shape, and damage type of the exhalation.</p><p>When you use your breath weapon, each creature in the area of the exhalation must make a Dexterity saving throw. The DC for this saving throw equals 8 + your Constitution modifier + your proficiency bonus. A creature takes 2d6 fire damage on a failed save, and half as much damage on a successful one. The damage increases to 3d6 at 6th level, 4d6 at 11th level, and 5d6 at 16th level.</p><p>After you use your breath weapon, you can't use it again until you complete a short or long rest.</p>",
       "chat": "",
       "unidentified": ""
     },
@@ -19,21 +19,21 @@
       "license": ""
     },
     "activation": {
-      "type": "special",
-      "cost": null,
-      "condition": "When you are reduced to 0 hit points"
+      "type": "action",
+      "cost": 1,
+      "condition": ""
     },
     "duration": {
       "value": "",
-      "units": ""
+      "units": "inst"
     },
     "cover": null,
     "crewed": false,
     "target": {
-      "value": null,
+      "value": 15,
       "width": null,
-      "units": "",
-      "type": "self",
+      "units": "ft",
+      "type": "cone",
       "prompt": true
     },
     "range": {
@@ -44,7 +44,7 @@
     "uses": {
       "value": 1,
       "max": "1",
-      "per": "lr",
+      "per": "sr",
       "recovery": "",
       "prompt": true
     },
@@ -53,8 +53,8 @@
       "target": null,
       "amount": null
     },
-    "ability": "",
-    "actionType": "heal",
+    "ability": "dex",
+    "actionType": "save",
     "attackBonus": "",
     "chatFlavor": "",
     "critical": {
@@ -64,40 +64,40 @@
     "damage": {
       "parts": [
         [
-          "1",
-          "healing"
+          "@scale.dragonborn.breath-weapon",
+          "fire"
         ]
       ],
       "versatile": ""
     },
     "formula": "",
     "save": {
-      "ability": "",
+      "ability": "con",
       "dc": null,
-      "scaling": "spell"
+      "scaling": "con"
     },
     "type": {
       "value": "race",
       "subtype": ""
     },
-    "requirements": "Half-Orc",
+    "requirements": "Red Dragonborn",
     "recharge": {
       "value": null,
       "charged": false
     }
   },
   "flags": {},
-  "img": "icons/magic/control/control-influence-rally-purple.webp",
+  "img": "icons/magic/fire/beam-jet-stream-trails-orange.webp",
   "effects": [],
-  "folder": null,
-  "sort": 0,
   "_stats": {
     "systemId": "dnd5e",
     "systemVersion": "2.3.1",
     "coreVersion": "10.303",
-    "createdTime": 1661787234463,
-    "modifiedTime": 1699397219121,
+    "createdTime": 1661787234466,
+    "modifiedTime": 1699397219246,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
-  "_key": "!items!97c8i9Z28thvZuA8"
+  "sort": 0,
+  "folder": null,
+  "_key": "!items!kB61JPKQrDBbSNU7"
 }
