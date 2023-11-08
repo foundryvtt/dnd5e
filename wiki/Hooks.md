@@ -430,7 +430,7 @@ Fires after the item data for a scroll is created but before the item is returne
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| item | Item5e|object | The spell or item data to be made into a scroll. |
+| item | Item5e\|object | The spell or item data to be made into a scroll. |
 | spellScrollData | object | The final item data used to make the scroll. |
 
 ## Item Sheet
