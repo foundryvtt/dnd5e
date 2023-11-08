@@ -415,6 +415,24 @@ Fires after a tool check has been rolled for an Item.
 | item | Item5e | Item for which the roll was performed. |
 | roll | D20Roll | The resulting roll. |
 
+### `dnd5e.preCreateScrollFromSpell`
+
+Fires before the item data for a scroll is created. Returning `false` will prevent the scroll from being created.
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| itemData | object | The initial item data of the spell to convert to a scroll. |
+| options | object | Additional options that determine how the scroll is created. |
+
+### `dnd5e.createScrollFromSpell`
+
+Fires after the item data for a scroll is created but before the item is returned.
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| item | Item5e\|object | The spell or item data to be made into a scroll. |
+| spellScrollData | object | The final item data used to make the scroll. |
+
 ## Item Sheet
 
 ### `dnd5e.dropItemSheetData`
