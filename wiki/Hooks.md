@@ -421,7 +421,7 @@ Fires before the item data for a scroll is created. Returning `false` will preve
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| itemData | Item5e | The initial item of the spell to convert to a scroll. |
+| itemData | object | The initial item data of the spell to convert to a scroll. |
 | options | object | Additional options that determine how the scroll is created. |
 
 ### `dnd5e.createScrollFromSpell`
@@ -430,8 +430,8 @@ Fires after the item data for a scroll is created but before the item is returne
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| item | Item5e | Item of the spell to be made into a scroll. |
-| options | object | Additional options that modify the created scroll. |
+| item | Item5e|object | The spell or item data to be made into a scroll. |
+| spellScrollData | object | The final item data used to make the scroll. |
 
 ## Item Sheet
 
