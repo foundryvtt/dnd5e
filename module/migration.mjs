@@ -13,13 +13,13 @@ export const migrateWorld = async function() {
     .concat(Array.from(game.actors.invalidDocumentIds).map(id => [game.actors.getInvalid(id), false]));
   for ( const [actor, valid] of actors ) {
     try {
-      const flags = { needsMigration: false };
+      const flags = { persistSourceMigration: false };
       const source = valid ? actor.toObject() : game.data.actors.find(a => a._id === actor.id);
-      const updateData = migrateActorData(source, migrationData, flags);
-      if ( !foundry.utils.isEmpty(updateData) || flags.needsMigration ) {
+      let updateData = migrateActorData(source, migrationData, flags);
+      if ( !foundry.utils.isEmpty(updateData) ) {
         console.log(`Migrating Actor document ${actor.name}`);
-        const update = foundry.utils.isEmpty(updateData) ? source : updateData;
-        await actor.update(update, {enforceTypes: false, diff: valid && !flags.needsMigration});
+        if ( flags.persistSourceMigration ) updateData = foundry.utils.mergeObject(source, updateData);
+        await actor.update(updateData, {enforceTypes: false, diff: valid && !flags.persistSourceMigration});
       }
     } catch(err) {
       err.message = `Failed dnd5e system migration for Actor ${actor.name}: ${err.message}`;
@@ -32,14 +32,13 @@ export const migrateWorld = async function() {
     .concat(Array.from(game.items.invalidDocumentIds).map(id => [game.items.getInvalid(id), false]));
   for ( const [item, valid] of items ) {
     try {
-      const flags = { needsMigration: false };
+      const flags = { persistSourceMigration: false };
       const source = valid ? item.toObject() : game.data.items.find(i => i._id === item.id);
-      const updateData = migrateItemData(source, migrationData, flags);
-      if ( !foundry.utils.isEmpty(updateData) || flags.needsMigration ) {
+      let updateData = migrateItemData(source, migrationData, flags);
+      if ( !foundry.utils.isEmpty(updateData) ) {
         console.log(`Migrating Item document ${item.name}`);
-        const update = foundry.utils.isEmpty(updateData) ? source : updateData;
-        update["flags.dnd5e.-=needsMigration"] = null;
-        await item.update(update, {enforceTypes: false, diff: valid && !flags.needsMigration});
+        if ( flags.persistSourceMigration ) updateData = foundry.utils.mergeObject(source, updateData);
+        await item.update(updateData, {enforceTypes: false, diff: valid && !flags.persistSourceMigration});
       }
     } catch(err) {
       err.message = `Failed dnd5e system migration for Item ${item.name}: ${err.message}`;
@@ -129,7 +128,7 @@ export const migrateCompendium = async function(pack) {
   for ( let doc of documents ) {
     let updateData = {};
     try {
-      const flags = { needsMigration: false };
+      const flags = { persistSourceMigration: false };
       const source = doc.toObject();
       switch (documentName) {
         case "Actor":
@@ -144,10 +143,9 @@ export const migrateCompendium = async function(pack) {
       }
 
       // Save the entry, if data was changed
-      if ( foundry.utils.isEmpty(updateData) && !flags.needsMigration ) continue;
-      const update = foundry.utils.isEmpty(updateData) ? source : updateData;
-      update["flags.dnd5e.-=needsMigration"] = null;
-      await doc.update(update, { diff: !flags.needsMigration });
+      if ( foundry.utils.isEmpty(updateData) ) continue;
+      if ( flags.persistSourceMigration ) updateData = foundry.utils.mergeObject(source, updateData);
+      await doc.update(updateData, { diff: !flags.persistSourceMigration });
       console.log(`Migrated ${documentName} document ${doc.name} in Compendium ${pack.collection}`);
     }
 
@@ -275,7 +273,7 @@ export const migrateActorData = function(actor, migrationData, flags={}) {
   const items = actor.items.reduce((arr, i) => {
     // Migrate the Owned Item
     const itemData = i instanceof CONFIG.Item.documentClass ? i.toObject() : i;
-    const itemFlags = { needsMigration: false };
+    const itemFlags = { persistSourceMigration: false };
     let itemUpdate = migrateItemData(itemData, migrationData, itemFlags);
 
     if ( (itemData.type === "background") && (actor.system?.details?.background !== itemData._id) ) {
@@ -289,12 +287,9 @@ export const migrateActorData = function(actor, migrationData, flags={}) {
     }
 
     // Update the Owned Item
-    if ( !foundry.utils.isEmpty(itemUpdate) || itemFlags.needsMigration ) {
+    if ( !foundry.utils.isEmpty(itemUpdate) || itemFlags.persistSourceMigration ) {
       const update = !foundry.utils.isEmpty(itemUpdate) ? foundry.utils.expandObject(itemUpdate) : itemData;
-      if ( itemFlags.needsMigration ) {
-        flags.needsMigration = true;
-        update["flags.dnd5e.-=needsMigration"] = null;
-      }
+      if ( itemFlags.persistSourceMigration ) flags.persistSourceMigration = true;
       arr.push({ ...update, _id: itemData._id });
     }
 
@@ -333,7 +328,10 @@ export function migrateItemData(item, migrationData, flags={}) {
     if ( effects.length > 0 ) updateData.effects = effects;
   }
 
-  if ( foundry.utils.getProperty(item, "flags.dnd5e.needsMigration") ) flags.needsMigration = true;
+  if ( foundry.utils.getProperty(item, "flags.dnd5e.persistSourceMigration") ) {
+    flags.persistSourceMigration = true;
+    updateData["flags.dnd5e.-=persistSourceMigration"] = null;
+  }
 
   return updateData;
 }

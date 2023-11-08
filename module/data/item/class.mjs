@@ -84,7 +84,7 @@ export default class ClassData extends SystemDataModel.mixin(ItemDescriptionTemp
   /**
    * Migrate the class's saves & skills into TraitAdvancements.
    * @param {object} source  The candidate source data from which the model will be constructed.
-   * @private
+   * @protected
    */
   static _migrateTraitAdvancement(source) {
     const system = source.system ??= {};
@@ -127,6 +127,6 @@ export default class ClassData extends SystemDataModel.mixin(ItemDescriptionTemp
       needsMigration = true;
     }
 
-    if ( needsMigration ) foundry.utils.setProperty(source, "flags.dnd5e.needsMigration", true);
+    if ( needsMigration ) foundry.utils.setProperty(source, "flags.dnd5e.persistSourceMigration", true);
   }
 }
