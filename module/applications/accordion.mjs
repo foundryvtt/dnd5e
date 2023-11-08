@@ -54,11 +54,13 @@ export default class Accordion {
     this.#sections = new Map();
     this.#ongoing = new Map();
     const { headingSelector, contentSelector } = this.#config;
+    let idx = 0;
     for ( const heading of root.querySelectorAll(headingSelector) ) {
       const content = heading.querySelector(contentSelector) ?? heading.parentElement.querySelector(contentSelector);
       if ( !content ) continue;
       const wrapper = document.createElement("div");
       wrapper.classList.add("accordion");
+      if ( this.#collapsed[idx] ) wrapper.classList.add("collapsed");
       heading.before(wrapper);
       wrapper.append(heading, content);
       this.#sections.set(heading, content);
@@ -66,6 +68,7 @@ export default class Accordion {
       heading.classList.add("accordion-heading");
       content.classList.add("accordion-content");
       heading.addEventListener("click", this._onClickHeading.bind(this));
+      idx++;
     }
     await new Promise(resolve => { setTimeout(resolve, 0); }); // Allow re-paint.
     this._restoreCollapsedState();
