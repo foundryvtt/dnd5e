@@ -140,6 +140,30 @@
         "level": 0,
         "title": "",
         "value": {}
+      },
+      {
+        "_id": "2f4dkpTYlhOgRgxu",
+        "type": "Trait",
+        "configuration": {
+          "hint": "You have resistance to the damage type associated with your draconic ancestry.",
+          "mode": "default",
+          "allowReplacements": false,
+          "grants": [],
+          "choices": [
+            {
+              "count": 1,
+              "pool": [
+                "dr:acid",
+                "dr:cold",
+                "dr:fire",
+                "dr:lightning",
+                "dr:poison"
+              ]
+            }
+          ]
+        },
+        "level": 0,
+        "title": ""
       }
     ],
     "movement": {
@@ -175,7 +199,7 @@
     "systemVersion": "2.3.1",
     "coreVersion": "10.303",
     "createdTime": 1677180157568,
-    "modifiedTime": 1699397219174,
+    "modifiedTime": 1699460933805,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "sort": 0,
