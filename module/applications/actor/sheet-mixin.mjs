@@ -1,5 +1,6 @@
 /**
  * Mixin method for common uses between all actor sheets.
+ * @mixin
  */
 export const ActorSheetMixin = Base => class extends Base {
   /**
