@@ -87,9 +87,8 @@ export default class ClassData extends SystemDataModel.mixin(ItemDescriptionTemp
    * @protected
    */
   static _migrateTraitAdvancement(source) {
-    const system = source.system ??= {};
-    system.advancement ??= [];
-    if ( system.advancement.find(a => a.type === "Trait") ) return;
+    const system = source.system;
+    if ( !system?.advancement || system.advancement.find(a => a.type === "Trait") ) return;
     let needsMigration = false;
 
     if ( system.saves?.length ) {
