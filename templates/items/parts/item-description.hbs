@@ -63,6 +63,7 @@
             {{#if editable}}
                 <h3 class="description-header">
                     {{localize "DND5E.Description"}}
+                    <i class="accordion-indicator fa-solid fa-chevron-down"></i>
                     <a class="description-edit" data-target="system.description.value">
                         <i class="fa-solid fa-edit"></i>
                     </a>
@@ -74,6 +75,7 @@
         {{#if (or editable system.description.unidentified)}}
             <h3 class="description-header">
                 {{localize "DND5E.DescriptionUnidentified"}}
+                <i class="accordion-indicator fa-solid fa-chevron-down"></i>
                 {{#if editable}}
                     <a class="description-edit" data-target="system.description.unidentified">
                         <i class="fa-solid fa-edit"></i>
@@ -86,6 +88,7 @@
         {{#if (or editable system.description.chat)}}
             <h3 class="description-header">
                 {{localize "DND5E.DescriptionChat"}}
+                <i class="accordion-indicator fa-solid fa-chevron-down"></i>
                 {{#if editable}}
                     <a class="description-edit" data-target="system.description.chat">
                         <i class="fa-solid fa-edit"></i>
