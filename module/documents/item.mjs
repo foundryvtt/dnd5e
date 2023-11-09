@@ -2153,6 +2153,9 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     // Get spell data
     const itemData = (spell instanceof Item5e) ? spell.toObject() : spell;
 
+    // improve scroll creation so that effects and flags from the original spell are included in the created scroll
+    options = mergeObject(options, {flags: itemData.flags, effects: itemData.effects}, {overwrite: false});
+
     /**
      * A hook event that fires before the item data for a scroll is created.
      * @function dnd5e.preCreateScrollFromSpell
