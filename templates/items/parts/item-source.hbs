@@ -1,0 +1,11 @@
+{{#if (eq system.source.custom system.source.label)}}
+	<input type="text" name="system.source.custom" value="{{system.source.custom}}"
+				 placeholder="{{ localize 'DND5E.Source' }}">
+{{else}}
+	<span>{{system.source.label}}</span>
+{{/if}}
+{{#if editable}}
+	<a class="config-button" data-action="source" data-tooltip="DND5E.SourceConfig">
+		<i class="fas fa-cog"></i>
+	</a>
+{{/if}}

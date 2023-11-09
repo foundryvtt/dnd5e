@@ -2055,6 +2055,32 @@ DND5E.advancementTypes = {
 };
 
 /* -------------------------------------------- */
+/*  Sources                                     */
+/* -------------------------------------------- */
+
+/**
+ * List of books available as sources.
+ * @enum {string}
+ */
+DND5E.sourceBooks = {
+  "SRD 5.1": "SOURCE.BOOK.SRD"
+};
+preLocalize("sourceBooks", { sort: true });
+
+/* -------------------------------------------- */
+
+/**
+ * List of licenses available with sources.
+ * @enum {string}
+ */
+DND5E.sourceLicenses = {
+  "CC-BY-4.0": "SOURCE.LICENSE.CC-BY-40"
+};
+preLocalize("sourceLicenses", { sort: true });
+
+/* -------------------------------------------- */
+/*  Enrichment                                  */
+/* -------------------------------------------- */
 
 let _enrichmentLookup;
 Object.defineProperty(DND5E, "enrichmentLookup", {

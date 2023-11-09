@@ -40,6 +40,29 @@
         padding: 0 0.25em;
         text-align: right;
       }
+      li {
+        display: flex;
+        justify-content: space-between;
+        gap: 0.25em;
+      
+        span {
+          padding-inline: 4px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          font-weight: 400;
+        }
+      
+        .config-button {
+          display: none;
+          font-size: var(--font-size-14);
+          font-weight: normal;
+          padding-inline-end: 0.25em;
+        }
+        &:hover .config-button {
+          display: block;
+        }
+      }
     }
   }
 
