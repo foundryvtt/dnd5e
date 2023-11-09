@@ -661,10 +661,13 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
       // Active Effect management
       html.find(".effect-control").click(ev => ActiveEffect5e.onManageActiveEffect(ev, this.actor));
       this._disableOverriddenFields(html);
+
+      // Item Context Menu
+      new ContextMenu(html, ".item-list .item", [], {onOpen: this._onItemContext.bind(this)});
     }
 
-    // Owner Only Listeners
-    if ( this.actor.isOwner ) {
+    // Owner Only Listeners, for non-compendium actors.
+    if ( this.actor.isOwner && !(this.actor.compendium) ) {
 
       // Ability Checks
       html.find(".ability-name").click(this._onRollAbilityTest.bind(this));
@@ -678,9 +681,6 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
       // Item Rolling
       html.find(".rollable .item-image").click(event => this._onItemUse(event));
       html.find(".item .item-recharge").click(event => this._onItemRecharge(event));
-
-      // Item Context Menu
-      new ContextMenu(html, ".item-list .item", [], {onOpen: this._onItemContext.bind(this)});
     }
 
     // Otherwise, remove rollable classes
