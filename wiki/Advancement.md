@@ -1,4 +1,4 @@
-![Up to date as of 1.6.3](https://img.shields.io/static/v1?label=dnd5e&message=1.6.3&color=informational)
+![Up to date as of 2.4.0](https://img.shields.io/static/v1?label=dnd5e&message=2.4.0&color=informational)
 
 ## Advancement System
 
@@ -15,24 +15,32 @@ The advancement system can be disabled for all players in a world by using the `
 
 
 ## Advancement Types
+### Ability Score Improvement *(class, background, or race only)*
+Ability score improvement allows for improving a character's ability scores by either a fixed amount or based on user choice. When added to a class, it also optionally allows for selecting a feat instead of improving abilities.
+
 ### Grant Items
 The [grant items advancement](Advancement-Type-Item-Grant) defines a list of features, spells, or other items that are added to the actor at a certain level.
 
 ### Hit Points *(class only)*
 The [hit points advancement](Advancement-Type-Hit-Points) keeps track of hit point values for each level of a class. The player will have an option for rolling their hit points or taking the average value.
 
-### Scale Value *(class or subclass only)*
+### Scale Value
 [Scale values](Advancement-Type-Scale-Value) are formula values that change arbitrarily depending on the level of the class or subclass to which they belong. These values are then made available to be used in roll formulas or elsewhere in the system. A few examples of this include a Bard's inspiration die size, a Rogue's sneak attack value, or a Cleric's channel divinity uses.
+
+### Size *(race only)*
+The [size](Advancement-Type-Size) advancement stores a list of sizes that can be selected when selecting a race.
 
 ### Item Choice
 The [item choice advancement](Advancement-Type-Item-Choice) defines a list of features, spells, or other items that the player can choose to add to the actor at a certain level.
+
+### Trait
+The [trait](Advancement-Type-Trait) advancement grants the character certain traits such as weapon proficiencies, skill expertise, or damage resistances. It presents the player with a list of options if a choice needs to be made.
 
 ### Proposed Types
 These advancement types are still under development, links point to the proposal pages for each type:
 - [Ability Score Improvement](https://github.com/foundryvtt/dnd5e/issues/1403)
 - [Equipment](https://github.com/foundryvtt/dnd5e/issues/1871)
 - [Subclass](https://github.com/foundryvtt/dnd5e/issues/1407)
-- [Trait](https://github.com/foundryvtt/dnd5e/issues/1405)
 
 
 ## Advancement Hooks
@@ -57,10 +65,11 @@ All custom types should subclass the abstract `Advancement` type. This class con
 The `order` value in the `Advancement#metadata` object determines in which order this advancement type appears. Here are the values for built-in types:
 
 * `10` - Hit Points
-* `20` - Ability Score Improvement *(in progress)*
-* `30` - Traits *(in progress)*
+* `20` - Ability Score Improvement
+* `25` - Size
+* `30` - Trait
 * `40` - Grant Items
-* `50` - Item Choice *(in progress)*
+* `50` - Item Choice
 * `60` - Scale Value
 * `70` - Subclass *(in progress)*
 * `100` - (base advancement class)
@@ -74,7 +83,7 @@ A subclass of `AdvancementConfig` is needed when a custom advancement type needs
 Any custom config templates should contain the base advancement controls partial so those controls are always available:
 
 ```html
-{{> "systems/dnd5e/templates/advancement/parts/advancement-controls.html"}}
+{{> "dnd5e.advancement-controls"}}
 ```
 
 #### `AdvancementFlow` Class
@@ -91,7 +100,7 @@ The only step required to register a custom advancement type with 5e is to add t
 
 ```javascript
 Hooks.once("init", () => {
-  game.dnd5e.advancement.types.MyModuleCustomAdvancement = MyModuleCustomAdvancement;
+  CONFIG.DND5E.advancementTypes.MyModuleCustom = MyModuleCustomAdvancement;
 });
 ```
 
