@@ -1,4 +1,4 @@
-![Up to date as of 2.2.0](https://img.shields.io/static/v1?label=dnd5e&message=2.0.0&color=informational)
+![Up to date as of 2.2.0](https://img.shields.io/static/v1?label=dnd5e&message=2.2.0&color=informational)
 
 This advancement type is designed for any feature that gives the player a choice of options to add to their character at a certain level. This covers features with a limited set of options such as Fighting Style and more open ended features such as Magical Secrets.
 

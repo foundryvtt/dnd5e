@@ -4,11 +4,13 @@
 - [Advancement Overview](Advancement.md)
   - [Advancement User Guide](Advancement-User-Guide.md)
   - [Custom Class Example](Custom-Class-Advancement.md)  
-    Advancement Types
+  - Advancement Types
     - [Advancement Type: Hit Points](Advancement-Type-Hit-Points.md)
     - [Advancement Type: Item Grant](Advancement-Type-Item-Grant.md)
     - [Advancement Type: Item Choice](Advancement-Type-Item-Choice.md)
     - [Advancement Type: Scale Value](Advancement-Type-Scale-Value.md)
+    - [Advancement Type: Size](Advancement-Type-Size.md)
+    - [Advancement Type: Trait](Advancement-Type-Trait.md)
 
 - [Dynamic Module Art](Dynamic-Module-Art.md)
 - [Hooks](Hooks.md)

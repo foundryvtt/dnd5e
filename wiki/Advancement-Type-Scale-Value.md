@@ -1,4 +1,4 @@
-![Up to date as of 2.0.3](https://img.shields.io/static/v1?label=dnd5e&message=1.6.3&color=informational)
+![Up to date as of 2.0.3](https://img.shields.io/static/v1?label=dnd5e&message=2.0.3&color=informational)
 
 This Advancement Type also contains the following options:
 * **Scale Type**: This determines the values accepted on the Level sections on the right hand side

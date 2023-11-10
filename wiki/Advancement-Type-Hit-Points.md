@@ -1,4 +1,4 @@
-![Up to date as of 2.0.3](https://img.shields.io/static/v1?label=dnd5e&message=1.6.3&color=informational)
+![Up to date as of 2.0.3](https://img.shields.io/static/v1?label=dnd5e&message=2.0.3&color=informational)
 
 The Hit Points advancement type keeps track of hit point choices for each level of a class. This advancement can only be added to classes and each class can only have a single advancement of this type.
 
