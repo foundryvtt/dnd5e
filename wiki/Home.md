@@ -12,10 +12,10 @@
     - [Advancement Type: Scale Value](Advancement-Type-Scale-Value.md)
     - [Advancement Type: Size](Advancement-Type-Size.md)
     - [Advancement Type: Trait](Advancement-Type-Trait.md)
-
 - [Dynamic Module Art](Dynamic-Module-Art.md)
+- [Enrichers](Enrichers.md)
+- [Frequently Asked Questions](FAQ.md)
 - [Hooks](Hooks.md)
 - [Roll Formulas](Roll-Formulas.md)
-- [Frequently Asked Questions](FAQ.md)
 - [Modifying Your Game with World Scripts](Modifying-Your-Game-with-Scripts.md)
 - [Contributing to the Wiki](Contributing-to-the-Wiki.md)
