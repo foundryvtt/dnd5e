@@ -1713,7 +1713,6 @@ DND5E.languages = {
       celestial: "DND5E.LanguagesCelestial",
       deep: "DND5E.LanguagesDeepSpeech",
       draconic: "DND5E.LanguagesDraconic",
-      druidic: "DND5E.LanguagesDruidic",
       gith: "DND5E.LanguagesGith",
       gnoll: "DND5E.LanguagesGnoll",
       infernal: "DND5E.LanguagesInfernal",
@@ -1730,7 +1729,8 @@ DND5E.languages = {
       undercommon: "DND5E.LanguagesUndercommon"
     }
   },
-  cant: "DND5E.LanguagesThievesCant"
+  cant: "DND5E.LanguagesThievesCant",
+  druidic: "DND5E.LanguagesDruidic"
 };
 preLocalize("languages", { key: "label" });
 preLocalize("languages.standard.children", { sort: true });
