@@ -388,7 +388,7 @@ export function keyLabel(key, config={}) {
       do {
         category = (category.children ?? category)[parts.shift()];
         if ( !category ) return key;
-      } while (parts.length);
+      } while ( parts.length );
       type = _innerLabel(category, traitConfig);
     } else type = categoryLabel.toLowerCase();
     const localization = `DND5E.TraitConfigChoose${final ? "Other" : `Any${count ? "Counted" : "Uncounted"}`}`;
