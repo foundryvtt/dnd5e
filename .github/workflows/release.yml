@@ -63,6 +63,14 @@ jobs:
         fi
 
 
+    - name: Adjust manifest
+      uses: microsoft/variable-substitution@v1
+      with:
+        files: "system.json"
+      env:
+        flags.hotReload: false
+
+
     # Set up Node
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3

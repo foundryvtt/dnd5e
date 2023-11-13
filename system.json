@@ -208,6 +208,10 @@
   "primaryTokenAttribute": "attributes.hp",
   "flags": {
     "needsMigrationVersion": "2.4.0",
-    "compatibleMigrationVersion": "0.8"
+    "compatibleMigrationVersion": "0.8",
+    "hotReload": {
+      "extensions": ["css", "hbs", "json"],
+      "paths": ["dnd5e.css", "templates", "lang"]
+    }
   }
 }
