@@ -824,9 +824,6 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     }
     config = foundry.utils.mergeObject(this._getUsageConfig(), config);
 
-    // Are any default values necessitating a prompt?
-    const needsConfiguration = Object.values(config).includes(true);
-
     /**
      * A hook event that fires before an item usage is configured.
      * @function dnd5e.preUseItem
@@ -837,6 +834,9 @@ export default class Item5e extends SystemDocumentMixin(Item) {
      * @returns {boolean}                    Explicitly return `false` to prevent item from being used.
      */
     if ( Hooks.call("dnd5e.preUseItem", item, config, options) === false ) return;
+
+    // Are any default values necessitating a prompt?
+    const needsConfiguration = Object.values(config).includes(true);
 
     // Display configuration dialog
     if ( (options.configureDialog !== false) && needsConfiguration ) {
