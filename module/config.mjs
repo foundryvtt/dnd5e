@@ -2036,7 +2036,11 @@ let _enrichmentLookup;
 Object.defineProperty(DND5E, "enrichmentLookup", {
   get() {
     if ( !_enrichmentLookup ) {
-      _enrichmentLookup = { abilities: DND5E.abilities, skills: DND5E.skills, tools: DND5E.toolIds };
+      _enrichmentLookup = {
+        abilities: foundry.utils.deepClone(DND5E.abilities),
+        skills: foundry.utils.deepClone(DND5E.skills),
+        tools: foundry.utils.deepClone(DND5E.toolIds)
+      };
       Object.values(DND5E.abilities).forEach(a => _enrichmentLookup.abilities[a.fullKey] = a);
       Object.values(DND5E.skills).forEach(s => _enrichmentLookup.skills[s.fullKey] = s);
     }
