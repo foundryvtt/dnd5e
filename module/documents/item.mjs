@@ -1,3 +1,4 @@
+import ClassData from "../data/item/class.mjs";
 import {d20Roll, damageRoll} from "../dice/dice.mjs";
 import simplifyRollFormula from "../dice/simplify-roll-formula.mjs";
 import Advancement from "./advancement/advancement.mjs";
@@ -502,7 +503,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     this.advancement = {
       byId: {},
       byLevel: Object.fromEntries(
-        Array.fromRange(CONFIG.DND5E.maxLevel + 1).slice(minAdvancementLevel).map(l => [l, []])
+        Array.fromRange(CONFIG.DND5E.maxLevel + 1, minAdvancementLevel).map(l => [l, []])
       ),
       byType: {},
       needingConfiguration: []
@@ -512,7 +513,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       this.advancement.byId[advancement.id] = advancement;
       this.advancement.byType[advancement.type] ??= [];
       this.advancement.byType[advancement.type].push(advancement);
-      advancement.levels.forEach(l => this.advancement.byLevel[l].push(advancement));
+      advancement.levels.forEach(l => this.advancement.byLevel[l]?.push(advancement));
       if ( !advancement.levels.length ) this.advancement.needingConfiguration.push(advancement);
     }
     Object.entries(this.advancement.byLevel).forEach(([lvl, data]) => data.sort((a, b) => {
@@ -2220,5 +2221,16 @@ export default class Item5e extends SystemDocumentMixin(Item) {
      */
     Hooks.callAll("dnd5e.createScrollFromSpell", spell, spellScrollData);
     return new this(spellScrollData);
+  }
+
+  /* -------------------------------------------- */
+  /*  Migrations & Deprecations                   */
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  static migrateData(source) {
+    source = super.migrateData(source);
+    if ( source.type === "class" ) ClassData._migrateTraitAdvancement(source);
+    return source;
   }
 }

@@ -4,7 +4,6 @@ import ActorTypeConfig from "../actor/type-config.mjs";
 import AdvancementManager from "../advancement/advancement-manager.mjs";
 import AdvancementMigrationDialog from "../advancement/advancement-migration-dialog.mjs";
 import Accordion from "../accordion.mjs";
-import TraitSelector from "../trait-selector.mjs";
 import ActiveEffect5e from "../../documents/active-effect.mjs";
 import * as Trait from "../../documents/actor/trait.mjs";
 
@@ -478,7 +477,6 @@ export default class ItemSheet5e extends ItemSheet {
     if ( this.isEditable ) {
       html.find(".config-button").click(this._onConfigMenu.bind(this));
       html.find(".damage-control").click(this._onDamageControl.bind(this));
-      html.find(".trait-selector").click(this._onConfigureTraits.bind(this));
       html.find(".effect-control").click(ev => {
         const unsupported = game.dnd5e.isV10 && this.item.isOwned;
         if ( unsupported ) return ui.notifications.warn("Managing Active Effects within an Owned Item is not currently supported and will be added in a subsequent update.");
@@ -713,45 +711,6 @@ export default class ItemSheet5e extends ItemSheet {
     const advancementArray = this.item.system.toObject().advancement;
     advancementArray.push(...advancements.map(a => a.toObject()));
     this.item.update({"system.advancement": advancementArray});
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Handle spawning the TraitSelector application for selection various options.
-   * @param {Event} event   The click event which originated the selection.
-   * @private
-   */
-  _onConfigureTraits(event) {
-    event.preventDefault();
-    const a = event.currentTarget;
-    const options = {
-      name: a.dataset.target,
-      title: a.parentElement.innerText,
-      choices: [],
-      allowCustom: false,
-      suppressWarning: true
-    };
-    switch (a.dataset.options) {
-      case "saves":
-        options.choices = CONFIG.DND5E.abilities;
-        options.valueKey = null;
-        options.labelKey = "label";
-        break;
-      case "skills.choices":
-        options.choices = CONFIG.DND5E.skills;
-        options.valueKey = null;
-        options.labelKey = "label";
-        break;
-      case "skills":
-        const skills = this.item.system.skills;
-        const choices = skills.choices?.length ? skills.choices : Object.keys(CONFIG.DND5E.skills);
-        options.choices = Object.fromEntries(Object.entries(CONFIG.DND5E.skills).filter(([s]) => choices.includes(s)));
-        options.maximum = skills.number;
-        options.labelKey = "label";
-        break;
-    }
-    new TraitSelector(this.item, options).render(true);
   }
 
   /* -------------------------------------------- */
