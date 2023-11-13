@@ -1932,9 +1932,8 @@ h5 {
 }
 .dnd5e.sheet.item [data-tab="description"] .item-description .description-header .description-edit .fa-solid.fa-edit {
   position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
+  inset-block: 0;
+  inset-inline-end: 0;
   padding: 6px;
 }
 .dnd5e.sheet.item [data-tab="description"] .item-description .description-header:hover .description-edit {
