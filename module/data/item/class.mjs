@@ -94,6 +94,7 @@ export default class ClassData extends SystemDataModel.mixin(ItemDescriptionTemp
     if ( system.saves?.length ) {
       const savesData = {
         type: "Trait",
+        level: 1,
         configuration: {
           grants: system.saves.map(t => `saves:${t}`)
         }
@@ -109,6 +110,7 @@ export default class ClassData extends SystemDataModel.mixin(ItemDescriptionTemp
     if ( system.skills?.choices?.length ) {
       const skillsData = {
         type: "Trait",
+        level: 1,
         configuration: {
           choices: [{
             count: system.skills.number ?? 1,

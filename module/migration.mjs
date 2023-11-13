@@ -18,7 +18,9 @@ export const migrateWorld = async function() {
       let updateData = migrateActorData(source, migrationData, flags);
       if ( !foundry.utils.isEmpty(updateData) ) {
         console.log(`Migrating Actor document ${actor.name}`);
-        if ( flags.persistSourceMigration ) updateData = foundry.utils.mergeObject(source, updateData);
+        if ( flags.persistSourceMigration ) {
+          updateData = foundry.utils.mergeObject(source, updateData, {inplace: false});
+        }
         await actor.update(updateData, {enforceTypes: false, diff: valid && !flags.persistSourceMigration});
       }
     } catch(err) {
@@ -37,7 +39,9 @@ export const migrateWorld = async function() {
       let updateData = migrateItemData(source, migrationData, flags);
       if ( !foundry.utils.isEmpty(updateData) ) {
         console.log(`Migrating Item document ${item.name}`);
-        if ( flags.persistSourceMigration ) updateData = foundry.utils.mergeObject(source, updateData);
+        if ( flags.persistSourceMigration ) {
+          updateData = foundry.utils.mergeObject(source, updateData, {inplace: false});
+        }
         await item.update(updateData, {enforceTypes: false, diff: valid && !flags.persistSourceMigration});
       }
     } catch(err) {
@@ -287,10 +291,12 @@ export const migrateActorData = function(actor, migrationData, flags={}) {
     }
 
     // Update the Owned Item
-    if ( !foundry.utils.isEmpty(itemUpdate) || itemFlags.persistSourceMigration ) {
-      const update = !foundry.utils.isEmpty(itemUpdate) ? foundry.utils.expandObject(itemUpdate) : itemData;
-      if ( itemFlags.persistSourceMigration ) flags.persistSourceMigration = true;
-      arr.push({ ...update, _id: itemData._id });
+    if ( !foundry.utils.isEmpty(itemUpdate) ) {
+      if ( itemFlags.persistSourceMigration ) {
+        itemUpdate = foundry.utils.mergeObject(itemData, itemUpdate, {inplace: false});
+        flags.persistSourceMigration = true;
+      }
+      arr.push({ ...itemUpdate, _id: itemData._id });
     }
 
     // Update tool expertise.
