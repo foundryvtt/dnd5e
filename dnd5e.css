@@ -748,6 +748,7 @@ h5 {
 }
 .accordion-heading {
   cursor: pointer;
+  position: relative;
 }
 .accordion-content {
   overflow: hidden;
@@ -1928,6 +1929,12 @@ h5 {
 .dnd5e.sheet.item [data-tab="description"] .item-description .description-header .description-edit {
   margin-inline-start: auto;
   opacity: 20%;
+}
+.dnd5e.sheet.item [data-tab="description"] .item-description .description-header .description-edit .fa-solid.fa-edit {
+  position: absolute;
+  inset-block: 0;
+  inset-inline-end: 0;
+  padding: 6px;
 }
 .dnd5e.sheet.item [data-tab="description"] .item-description .description-header:hover .description-edit {
   opacity: 100%;
