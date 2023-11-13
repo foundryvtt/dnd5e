@@ -34,17 +34,19 @@ export const ActorSheetMixin = Base => class extends Base {
       {
         name: "DND5E.ContextMenuActionEdit",
         icon: "<i class='fas fa-edit fa-fw'></i>",
+        condition: () => item.isOwner,
         callback: () => item.sheet.render(true)
       },
       {
         name: "DND5E.ContextMenuActionDuplicate",
         icon: "<i class='fas fa-copy fa-fw'></i>",
-        condition: () => !["race", "background", "class", "subclass"].includes(item.type),
+        condition: () => !["race", "background", "class", "subclass"].includes(item.type) && item.actor.isOwner,
         callback: () => item.clone({name: game.i18n.format("DOCUMENT.CopyOf", {name: item.name})}, {save: true})
       },
       {
         name: "DND5E.ContextMenuActionDelete",
         icon: "<i class='fas fa-trash fa-fw'></i>",
+        condition: () => item.isOwner,
         callback: () => item.deleteDialog()
       }
     ];
@@ -55,6 +57,7 @@ export const ActorSheetMixin = Base => class extends Base {
       options.push({
         name: isAttuned ? "DND5E.ContextMenuActionUnattune" : "DND5E.ContextMenuActionAttune",
         icon: "<i class='fas fa-sun fa-fw'></i>",
+        condition: () => item.isOwner,
         callback: () => item.update({
           "system.attunement": CONFIG.DND5E.attunementTypes[isAttuned ? "REQUIRED" : "ATTUNED"]
         })
@@ -65,6 +68,7 @@ export const ActorSheetMixin = Base => class extends Base {
     if ( "equipped" in item.system ) options.push({
       name: item.system.equipped ? "DND5E.ContextMenuActionUnequip" : "DND5E.ContextMenuActionEquip",
       icon: "<i class='fas fa-shield-alt fa-fw'></i>",
+      condition: () => item.isOwner,
       callback: () => item.update({"system.equipped": !item.system.equipped})
     });
 
@@ -72,6 +76,7 @@ export const ActorSheetMixin = Base => class extends Base {
     if ( ("preparation" in item.system) && (item.system.preparation?.mode === "prepared") ) options.push({
       name: item.system?.preparation?.prepared ? "DND5E.ContextMenuActionUnprepare" : "DND5E.ContextMenuActionPrepare",
       icon: "<i class='fas fa-sun fa-fw'></i>",
+      condition: () => item.isOwner,
       callback: () => item.update({"system.preparation.prepared": !item.system.preparation?.prepared})
     });
     return options;

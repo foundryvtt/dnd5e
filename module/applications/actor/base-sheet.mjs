@@ -661,9 +661,6 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
       // Active Effect management
       html.find(".effect-control").click(ev => ActiveEffect5e.onManageActiveEffect(ev, this.actor));
       this._disableOverriddenFields(html);
-
-      // Item Context Menu
-      new ContextMenu(html, ".item-list .item", [], {onOpen: this._onItemContext.bind(this)});
     }
 
     // Owner Only Listeners, for non-compendium actors.
@@ -687,6 +684,9 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
     else {
       html.find(".rollable").each((i, el) => el.classList.remove("rollable"));
     }
+
+    // Item Context Menu
+    new ContextMenu(html, ".item-list .item", [], {onOpen: this._onItemContext.bind(this)});
 
     // Handle default listeners last so system listeners are triggered first
     super.activateListeners(html);
