@@ -10,9 +10,6 @@ export default class SourceConfig extends DocumentSheet {
       template: "systems/dnd5e/templates/apps/source-config.hbs",
       width: 400,
       height: "auto",
-      dragDrop: [{dropSelector: "form"}],
-      submitOnChange: true,
-      closeOnSubmit: false,
       sheetConfig: false,
       keyPath: "system.details.source"
     });
@@ -35,6 +32,7 @@ export default class SourceConfig extends DocumentSheet {
     context.appId = this.id;
     context.CONFIG = CONFIG.DND5E;
     context.source = foundry.utils.getProperty(this.document, this.options.keyPath);
+    context.sourceUuid = foundry.utils.getProperty(this.document, "flags.core.sourceId");
     return context;
   }
 
@@ -42,39 +40,9 @@ export default class SourceConfig extends DocumentSheet {
   /*  Event Handlers                              */
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
-  activateListeners(html) {
-    super.activateListeners(html);
-    html.find('[data-action="delete"]').click(() => {
-      this.form.querySelector('[name="source.uuid"]').value = "";
-      this.submit();
-    });
-  }
-
-  /* -------------------------------------------- */
-
   /** @override */
   async _updateObject(event, formData) {
     const source = foundry.utils.expandObject(formData).source;
     return this.document.update({[this.options.keyPath]: source});
-  }
-
-  /* -------------------------------------------- */
-  /*  Drag & Drop                                 */
-  /* -------------------------------------------- */
-
-  /** @inheritdoc */
-  async _onDrop(event) {
-    const data = TextEditor.getDragEventData(event);
-    const input = this.form.querySelector('[name="source.uuid"]');
-
-    if ( data.uuid ) input.value = data.uuid;
-    else {
-      const item = await Item.implementation.fromDropData(data);
-      if ( !item.uuid ) return;
-      input.value = item.uuid;
-    }
-
-    return this.submit();
   }
 }

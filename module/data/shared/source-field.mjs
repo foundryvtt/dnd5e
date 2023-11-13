@@ -6,7 +6,6 @@ const { SchemaField, StringField } = foundry.data.fields;
  * @property {string} book     Book/publication where the item originated.
  * @property {string} page     Page or section where the item can be found.
  * @property {string} custom   Fully custom source label.
- * @property {string} uuid     Upstream source of this data if it originated in another compendium.
  * @property {string} license  Type of license that covers this item.
  */
 export default class SourceField extends SchemaField {
@@ -15,7 +14,6 @@ export default class SourceField extends SchemaField {
       book: new StringField({label: "DND5E.SourceBook"}),
       page: new StringField({label: "DND5E.SourcePage"}),
       custom: new StringField({label: "DND5E.SourceCustom"}),
-      uuid: new StringField({label: "DND5E.SourceUUID"}), // TODO: Convert to UUIDField with v12
       license: new StringField({label: "DND5E.SourceLicense"}),
       ...fields
     }, { label: "DND5E.Source", ...options });
