@@ -125,48 +125,47 @@ export default class AbilityUseDialog extends Dialog {
 
   /**
    * Create an object of resource consumption options for a select.
-   * @param {Item5e} item     The item doing the thing with the consuming of stuff and such.
+   * @param {Item5e} item     The item.
    * @returns {object|null}   Object of select options, or null if the item does not or cannot scale with resources.
-   * @private
+   * @protected
    */
   static _createResourceOptions(item) {
     const consume = item.system.consume || {};
     if ( (item.type !== "spell") || !consume.scale ) return null;
-    const amt = consume.amount || 1;
     const spellLevels = Object.keys(CONFIG.DND5E.spellLevels).length - 1;
 
     const min = consume.amount || 1;
-    const cap = spellLevels + amt - item.system.level;
+    const cap = spellLevels + min - item.system.level;
 
     let target;
-    let prop;
+    let value;
     let label;
     switch ( consume.type ) {
       case "ammo":
       case "material": {
         target = item.actor.items.get(consume.target);
         label = target?.name;
-        prop = target?.system.quantity;
+        value = target?.system.quantity;
         break;
       }
       case "attribute": {
         target = item.actor;
-        prop = foundry.utils.getProperty(target.system, consume.target);
+        value = foundry.utils.getProperty(target.system, consume.target);
         break;
       }
       case "charges": {
         target = item.actor.items.get(consume.target);
         label = target?.name;
-        prop = target?.system.uses.value;
+        value = target?.system.uses.value;
         break;
       }
       case "hitDice": {
         target = item.actor;
         if ( ["smallest", "largest"].includes(consume.target) ) {
           label = game.i18n.localize(`DND5E.ConsumeHitDice${consume.target.capitalize()}Long`);
-          prop = target.system.attributes.hd;
+          value = target.system.attributes.hd;
         } else {
-          prop = Object.values(item.actor.classes ?? {}).reduce((acc, cls) => {
+          value = Object.values(item.actor.classes ?? {}).reduce((acc, cls) => {
             if ( cls.system.hitDice !== consume.target ) return acc;
             const hd = cls.system.levels - cls.system.hitDiceUsed;
             return acc + hd;
@@ -177,15 +176,13 @@ export default class AbilityUseDialog extends Dialog {
       }
     }
 
-    if (!target) return null;
+    if ( !target ) return null;
 
-    const max = Math.min(cap, prop);
-    const range = Array.fromRange(max, 1).reduce((acc, n) => {
-      if ( n >= min ) acc[n] = `[${n}/${prop}] ${label ?? consume.target}`;
+    const max = Math.min(cap, value);
+    return Array.fromRange(max, 1).reduce((acc, n) => {
+      if ( n >= min ) acc[n] = `[${n}/${value}] ${label ?? consume.target}`;
       return acc;
     }, {});
-
-    return range;
   }
 
   /* -------------------------------------------- */
@@ -275,8 +272,8 @@ export default class AbilityUseDialog extends Dialog {
       const isItem = ["ammo", "material", "charges"].includes(consume.type);
       if ( isItem && !item.actor.items.get(consume.target) ) {
         warnings.push(game.i18n.format("DND5E.ConsumeWarningNoSource", {
-          name: item.name, type: CONFIG.DND5E.abilityConsumptionTypes[consume.type]}
-        ));
+          name: item.name, type: CONFIG.DND5E.abilityConsumptionTypes[consume.type]
+        }));
       }
     }
 

@@ -767,7 +767,7 @@ export default class Item5e extends Item {
    * @property {boolean} consumeSpellSlot           Should this item (a spell) consume a spell slot?
    * @property {boolean} consumeUsage               Should this item consume its limited uses or recharge?
    * @property {string|number|null} slotLevel       The spell slot type or level to consume by default.
-   * @property {number|null} resourceAmount         The amount to consume by default when scaling with resource consumption.
+   * @property {number|null} resourceAmount         The amount to consume by default when scaling with consumption.
    */
 
   /**
@@ -1072,7 +1072,7 @@ export default class Item5e extends Item {
 
     // Identify the consumed resource and its current quantity
     let resource = null;
-    let amount = usageConfig.resourceAmount ? Number(usageConfig.resourceAmount) : Number(consume.amount ?? 1);
+    let amount = usageConfig.resourceAmount ? usageConfig.resourceAmount : (consume.amount || 1);
     let quantity = 0;
     switch ( consume.type ) {
       case "attribute":
