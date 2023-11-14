@@ -108,9 +108,9 @@ export default class SystemDataModel extends foundry.abstract.DataModel {
   }
 
 
-  /* ---------------------------------------- */
-  /*  Data Cleaning                           */
-  /* ---------------------------------------- */
+  /* -------------------------------------------- */
+  /*  Data Cleaning                               */
+  /* -------------------------------------------- */
 
   /** @inheritdoc */
   static cleanData(source, options) {
@@ -118,7 +118,7 @@ export default class SystemDataModel extends foundry.abstract.DataModel {
     return super.cleanData(source, options);
   }
 
-  /* ---------------------------------------- */
+  /* -------------------------------------------- */
 
   /**
    * Performs cleaning without calling DataModel.cleanData.
@@ -132,9 +132,9 @@ export default class SystemDataModel extends foundry.abstract.DataModel {
     }
   }
 
-  /* ---------------------------------------- */
-  /*  Data Initialization                     */
-  /* ---------------------------------------- */
+  /* -------------------------------------------- */
+  /*  Data Initialization                         */
+  /* -------------------------------------------- */
 
   /** @inheritdoc */
   static *_initializationOrder() {
@@ -150,9 +150,9 @@ export default class SystemDataModel extends foundry.abstract.DataModel {
     }
   }
 
-  /* ---------------------------------------- */
-  /*  Data Validation                         */
-  /* ---------------------------------------- */
+  /* -------------------------------------------- */
+  /*  Data Validation                             */
+  /* -------------------------------------------- */
 
   /** @inheritdoc */
   validate(options={}) {
@@ -209,9 +209,9 @@ export default class SystemDataModel extends foundry.abstract.DataModel {
     }
   }
 
-  /* ---------------------------------------- */
-  /*  Data Migration                          */
-  /* ---------------------------------------- */
+  /* -------------------------------------------- */
+  /*  Data Migration                              */
+  /* -------------------------------------------- */
 
   /** @inheritdoc */
   static migrateData(source) {

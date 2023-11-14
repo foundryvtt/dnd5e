@@ -242,7 +242,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
     if ( largestPrimary ) {
       let primary = speeds.shift();
       return {
-        primary: `${primary ? primary[1] : "0"} ${movement.units}`,
+        primary: `${primary ? primary[1] : "0"} ${movement.units || Object.keys(CONFIG.DND5E.movementUnits)[0]}`,
         special: speeds.map(s => s[1]).join(", ")
       };
     }
@@ -250,7 +250,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
     // Case 2: Walk as primary
     else {
       return {
-        primary: `${movement.walk || 0} ${movement.units}`,
+        primary: `${movement.walk || 0} ${movement.units || Object.keys(CONFIG.DND5E.movementUnits)[0]}`,
         special: speeds.length ? speeds.map(s => s[1]).join(", ") : ""
       };
     }
