@@ -112,13 +112,7 @@ export default class RaceData extends SystemDataModel.mixin(ItemDescriptionTempl
    */
   _onCreate(data, options, userId) {
     if ( (game.user.id !== userId) || this.parent.actor?.type !== "character" ) return;
-    const updates = { "system.details.race": this.parent.id };
-
-    if ( this.type.value ) updates["system.details.type.value"] = this.type.value;
-    if ( this.type.subtype ) updates["system.details.type.subtype"] = this.type.subtype;
-    if ( this.type.custom ) updates["system.details.type.custom"] = this.type.custom;
-
-    this.parent.actor.update(updates);
+    this.parent.actor.update({ "system.details.race": this.parent.id });
   }
 
   /* -------------------------------------------- */
@@ -132,14 +126,7 @@ export default class RaceData extends SystemDataModel.mixin(ItemDescriptionTempl
    * @protected
    */
   async _preDelete(options, user) {
-    if ( (this.parent.actor?.type !== "character") || (options.shouldRemoveAdvancements === false) ) return;
-    const updates = { "system.details.race": null };
-
-    const type = this.parent.actor.system.details.type;
-    if ( this.type.value === type.value ) updates["system.details.type.value"] = "humanoid";
-    if ( this.type.subtype === type.subtype ) updates["system.details.type.subtype"] = "";
-    if ( this.type.custom === type.custom ) updates["system.details.type.custom"] = "";
-
-    await this.parent.actor.update(updates);
+    if ( (this.parent.actor?.type !== "character") ) return;
+    await this.parent.actor.update({ "system.details.race": null });
   }
 }

@@ -4,6 +4,14 @@
     <div class="form-group stacked">
         <label>{{ localize "DND5E.CreatureType" }}</label>
         <ul class="trait-list">
+            {{#if automatic}}
+              <li>
+                <label class="radio">
+                  <input type="radio" name="value" value="" {{checked type.chosen}}>
+                  {{automatic}}
+                </label>
+              </li>
+            {{/if}}
             {{#each types as |type key|}}
             <li>
                 <label class="radio">

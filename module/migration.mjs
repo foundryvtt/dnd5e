@@ -531,7 +531,7 @@ function _migrateActorAC(actorData, updateData) {
  * @private
  */
 function _migrateActorMovementSenses(actorData, updateData) {
-  if ( foundry.utils.isNewerVersion("2.4.0", actorData._stats.systemVersion) ) {
+  if ( actorData._stats?.systemVersion && foundry.utils.isNewerVersion("2.4.0", actorData._stats.systemVersion) ) {
     for ( const key of Object.keys(CONFIG.DND5E.movementTypes) ) {
       const keyPath = `system.attributes.movement.${key}`;
       if ( foundry.utils.getProperty(actorData, keyPath) === 0 ) updateData[keyPath] = null;
