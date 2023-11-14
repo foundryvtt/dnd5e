@@ -129,8 +129,8 @@
           "mode": "default",
           "allowReplacements": false,
           "grants": [
-            "languages:common",
-            "languages:elvish"
+            "languages:standard:common",
+            "languages:standard:elvish"
           ],
           "choices": [
             {
@@ -142,8 +142,7 @@
           ]
         },
         "level": 0,
-        "title": "",
-        "value": {}
+        "title": ""
       },
       {
         "_id": "ZwJOJ5Ywagq7rWNI",
@@ -167,17 +166,17 @@
     ],
     "senses": {
       "darkvision": 60,
-      "blindsight": 0,
-      "tremorsense": 0,
-      "truesight": 0,
+      "blindsight": null,
+      "tremorsense": null,
+      "truesight": null,
       "units": "ft",
       "special": ""
     },
     "movement": {
-      "burrow": 0,
-      "climb": 0,
-      "fly": 0,
-      "swim": 0,
+      "burrow": null,
+      "climb": null,
+      "fly": null,
+      "swim": null,
       "walk": 30,
       "units": "ft",
       "hover": false
@@ -195,10 +194,10 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.3.1",
+    "systemVersion": "2.4.0",
     "coreVersion": "10.303",
     "createdTime": 1677179211328,
-    "modifiedTime": 1699397219137,
+    "modifiedTime": 1699987871524,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "sort": 0,
