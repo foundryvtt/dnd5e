@@ -177,5 +177,10 @@
         <input type="checkbox" name="system.uses.prompt" {{checked system.uses.prompt}}> {{ localize "DND5E.LimitedUsesPrompt" }}
     </label>
     {{/if}}
+    {{#if (and (eq item.type "spell") system.consume.type)}}
+    <label class="checkbox" data-tooltip="DND5E.ConsumeScalingTooltip">
+        <input type="checkbox" name="system.consume.scale" {{checked system.consume.scale}}> {{ localize "DND5E.ConsumeScaling" }}
+    </label>
+    {{/if}}
 </div>
 {{/if}}

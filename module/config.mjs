@@ -1265,7 +1265,7 @@ preLocalize("spellPreparationModes");
 
 /**
  * Subset of `DND5E.spellPreparationModes` that consume spell slots.
- * @type {boolean[]}
+ * @type {string[]}
  */
 DND5E.spellUpcastModes = ["always", "pact", "prepared"];
 
