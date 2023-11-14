@@ -7,6 +7,7 @@ import { FormulaField } from "../../fields.mjs";
  * @property {string} ability             Ability score to use when determining modifier.
  * @property {string} actionType          Action type as defined in `DND5E.itemActionTypes`.
  * @property {string} attackBonus         Numeric or dice bonus to attack rolls.
+ * @property {boolean} attackFlat          Is the attack bonus the only bonus to attack rolls?
  * @property {string} chatFlavor          Extra text displayed in chat.
  * @property {object} critical            Information on how critical hits are handled.
  * @property {number} critical.threshold  Minimum number on the dice to roll a critical hit.
@@ -32,6 +33,7 @@ export default class ActionTemplate extends ItemDataModel {
         required: true, nullable: true, initial: null, label: "DND5E.ItemActionType"
       }),
       attackBonus: new FormulaField({required: true, label: "DND5E.ItemAttackBonus"}),
+      attackFlat: new foundry.data.fields.BooleanField({label: "DND5E.ItemAttackFlat"}),
       chatFlavor: new foundry.data.fields.StringField({required: true, label: "DND5E.ChatFlavor"}),
       critical: new foundry.data.fields.SchemaField({
         threshold: new foundry.data.fields.NumberField({

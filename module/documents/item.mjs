@@ -741,6 +741,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     if ( ab ) {
       parts.push(ab);
       this.labels.toHit = !/^[+-]/.test(ab) ? `+ ${ab}` : ab;
+      if ( this.system.attackFlat ) return {rollData, parts};
     }
 
     // Take no further action for un-owned items
@@ -2502,7 +2503,6 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     // Used a fixed attack modifier and saving throw according to the level of spell scroll.
     if ( ["mwak", "rwak", "msak", "rsak"].includes(actionType) ) {
       attackBonus = scrollData.system.attackBonus;
-      ability = "none";
     }
     if ( save.ability ) {
       save.scaling = "flat";
@@ -2516,7 +2516,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       effects: itemData.effects ?? [],
       system: {
         description: {value: desc.trim()}, source, actionType, activation, duration, target,
-        range, damage, formula, save, level, attackBonus, ability, properties
+        range, damage, formula, save, level, attackBonus, ability, properties, attackFlat: true
       }
     });
     foundry.utils.mergeObject(spellScrollData, options);

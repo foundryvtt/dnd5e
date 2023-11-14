@@ -29,6 +29,10 @@
     <label>{{ localize "DND5E.ItemAttackBonus" }}</label>
     <div class="form-fields">
         <input type="text" name="system.attackBonus" value="{{system.attackBonus}}" data-formula-editor/>
+        <label class="checkbox" data-tooltip="DND5E.ItemAttackFlatHint">
+          <input type="checkbox" name="system.attackFlat" {{checked system.attackFlat}}>
+          {{localize "DND5E.ItemAttackFlat"}}
+        </label>
     </div>
 </div>
 
