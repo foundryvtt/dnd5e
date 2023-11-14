@@ -46,8 +46,9 @@ Hooks.once("init", () => {
   CONFIG.DND5E.abilities.grt = {
     label: "Grit",
     abbreviation: "grt",
-    type: "mental", ///mental or physical
-    defaults: {vehicle: 0} ///Optional
+    type: "mental", // mental or physical
+    defaults: {vehicle: 0}, // Optional
+    improvement: false, // Explicitly set this to 'false' to prevent it showing up for ASIs.
   };
 });
 ```
@@ -118,6 +119,8 @@ Hooks.once("init", () => {
     }
   };
 });
+```
+
 ## Add a new Armor Calculation
 ```js
 /// Add a new AC Calculation
@@ -151,12 +154,12 @@ Hooks.once("init", () => {
 ```js
 /// Adds in options to display in the Activation Cost dropdown
 Hooks.once("init", () => {
-  CONFIG.DND5E.abilityActivationTypes.crithit = 'Critical Hit';
-  CONFIG.DND5E.abilityActivationTypes.attack = 'On Attack';
-  CONFIG.DND5E.abilityActivationTypes.attack = 'Replaces Attack';
-  CONFIG.DND5E.abilityActivationTypes.meleehit = 'On Melee Hit';
-  CONFIG.DND5E.abilityActivationTypes.rangedhit = 'On Ranged Hit';
-  CONFIG.DND5E.abilityActivationTypes.weaponhit = 'On Weapon Hit';
+  CONFIG.DND5E.abilityActivationTypes.crithit = "Critical Hit";
+  CONFIG.DND5E.abilityActivationTypes.attack = "On Attack";
+  CONFIG.DND5E.abilityActivationTypes.replaceattack = "Replaces Attack";
+  CONFIG.DND5E.abilityActivationTypes.meleehit = "On Melee Hit";
+  CONFIG.DND5E.abilityActivationTypes.rangedhit = "On Ranged Hit";
+  CONFIG.DND5E.abilityActivationTypes.weaponhit = "On Weapon Hit";
 });
 ```
 
