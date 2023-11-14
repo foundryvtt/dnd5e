@@ -4,6 +4,7 @@ import ActorTypeConfig from "../actor/type-config.mjs";
 import AdvancementManager from "../advancement/advancement-manager.mjs";
 import AdvancementMigrationDialog from "../advancement/advancement-migration-dialog.mjs";
 import Accordion from "../accordion.mjs";
+import SourceConfig from "../source-config.mjs";
 import ActiveEffect5e from "../../documents/active-effect.mjs";
 import * as Trait from "../../documents/actor/trait.mjs";
 
@@ -557,6 +558,9 @@ export default class ItemSheet5e extends ItemSheet {
         break;
       case "senses":
         app = new ActorSensesConfig(this.item, { keyPath: "system.senses" });
+        break;
+      case "source":
+        app = new SourceConfig(this.item, { keyPath: "system.source" });
         break;
       case "type":
         app = new ActorTypeConfig(this.item, { keyPath: "system.type" });

@@ -5,3 +5,4 @@ export * as item from "./item/_module.mjs";
 export * as journal from "./journal/_module.mjs";
 
 export {default as PropertyAttribution} from "./property-attribution.mjs";
+export {default as SourceConfig} from "./source-config.mjs";

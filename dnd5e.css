@@ -1850,6 +1850,27 @@ h5 {
   padding: 0 0.25em;
   text-align: right;
 }
+.dnd5e.sheet.item .sheet-header .summary li {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.25em;
+}
+.dnd5e.sheet.item .sheet-header .summary li span {
+  padding-inline: 4px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: 400;
+}
+.dnd5e.sheet.item .sheet-header .summary li .config-button {
+  display: none;
+  font-size: var(--font-size-14);
+  font-weight: normal;
+  padding-inline-end: 0.25em;
+}
+.dnd5e.sheet.item .sheet-header .summary li:hover .config-button {
+  display: block;
+}
 .dnd5e.sheet.item .sheet-navigation {
   margin-bottom: 5px;
 }
@@ -2527,25 +2548,31 @@ a.roll-link i {
 .dnd5e.sheet.actor.npc .summary {
   font-size: 18px;
 }
-.dnd5e.sheet.actor.npc .summary .creature-type {
+.dnd5e.sheet.actor.npc .summary li {
   display: flex;
   justify-content: space-between;
-  width: 1em;
-  padding: 0 3px;
+  gap: 0.25em;
 }
-.dnd5e.sheet.actor.npc .summary .creature-type span {
+.dnd5e.sheet.actor.npc .summary li span {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-.dnd5e.sheet.actor.npc .summary .creature-type .config-button {
+.dnd5e.sheet.actor.npc .summary li .config-button {
   display: none;
   font-size: 12px;
   font-weight: normal;
   line-height: 2em;
 }
-.dnd5e.sheet.actor.npc .summary .creature-type:hover .config-button {
+.dnd5e.sheet.actor.npc .summary li:hover .config-button {
   display: block;
+}
+.dnd5e.sheet.actor.npc .summary .creature-type {
+  width: 1em;
+  padding: 0 3px;
+}
+.dnd5e.sheet.actor.npc .summary .source {
+  width: 1em;
 }
 .dnd5e.sheet.actor.vehicle {
   min-width: 720px;

@@ -11,6 +11,7 @@ import ActorMovementConfig from "./movement-config.mjs";
 import ActorSensesConfig from "./senses-config.mjs";
 import ActorSheetFlags from "./sheet-flags.mjs";
 import ActorTypeConfig from "./type-config.mjs";
+import SourceConfig from "../source-config.mjs";
 
 import AdvancementConfirmationDialog from "../advancement/advancement-confirmation-dialog.mjs";
 import AdvancementManager from "../advancement/advancement-manager.mjs";
@@ -807,24 +808,24 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
       case "senses":
         app = new ActorSensesConfig(this.actor);
         break;
+      case "source":
+        app = new SourceConfig(this.actor);
+        break;
       case "type":
         app = new ActorTypeConfig(this.actor);
         break;
-      case "ability": {
+      case "ability":
         const ability = event.currentTarget.closest("[data-ability]").dataset.ability;
         app = new ActorAbilityConfig(this.actor, null, ability);
         break;
-      }
-      case "skill": {
+      case "skill":
         const skill = event.currentTarget.closest("[data-key]").dataset.key;
         app = new ProficiencyConfig(this.actor, {property: "skills", key: skill});
         break;
-      }
-      case "tool": {
+      case "tool":
         const tool = event.currentTarget.closest("[data-key]").dataset.key;
         app = new ProficiencyConfig(this.actor, {property: "tools", key: tool});
         break;
-      }
     }
     app?.render(true);
   }
@@ -1120,8 +1121,6 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
     parent.removeChild(span);
     parent.appendChild(input);
   }
-
-
 
   /* -------------------------------------------- */
 
