@@ -92,7 +92,7 @@ export default class RaceData extends SystemDataModel.mixin(ItemDescriptionTempl
     if ( data._id || foundry.utils.hasProperty(data, "system.advancement") ) return;
     const toCreate = [
       { type: "AbilityScoreImprovement" }, { type: "Size" },
-      { type: "Trait", configuration: { grants: ["languages:common"] } }
+      { type: "Trait", configuration: { grants: ["languages:standard:common"] } }
     ];
     this.parent.updateSource({"system.advancement": toCreate.map(c => {
       const AdvancementClass = CONFIG.DND5E.advancementTypes[c.type];

@@ -399,9 +399,8 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
   _prepareTraits(systemData) {
     const traits = {};
     for ( const [trait, traitConfig] of Object.entries(CONFIG.DND5E.traits) ) {
-      const key = traitConfig.actorKeyPath ?? `traits.${trait}`;
+      const key = traitConfig.actorKeyPath?.replace("system.", "") ?? `traits.${trait}`;
       const data = foundry.utils.deepClone(foundry.utils.getProperty(systemData, key));
-      const choices = CONFIG.DND5E[traitConfig.configKey];
       if ( !data ) continue;
 
       foundry.utils.setProperty(traits, key, data);
@@ -430,7 +429,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
         const damageTypesFormatter = new Intl.ListFormat(game.i18n.lang, { style: "long", type: "conjunction" });
         const bypassFormatter = new Intl.ListFormat(game.i18n.lang, { style: "long", type: "disjunction" });
         data.selected.physical = game.i18n.format("DND5E.DamagePhysicalBypasses", {
-          damageTypes: damageTypesFormatter.format(physical.map(t => choices[t])),
+          damageTypes: damageTypesFormatter.format(physical.map(t => Trait.keyLabel(t, { trait }))),
           bypassTypes: bypassFormatter.format(data.bypasses.map(t => CONFIG.DND5E.physicalWeaponProperties[t]))
         });
       }
