@@ -1,3 +1,4 @@
+import ClassData from "../data/item/class.mjs";
 import {d20Roll, damageRoll} from "../dice/dice.mjs";
 import simplifyRollFormula from "../dice/simplify-roll-formula.mjs";
 import Advancement from "./advancement/advancement.mjs";
@@ -286,10 +287,10 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * @type {string|null}
    */
   get usageScaling() {
-    const { level, preparation } = this.system;
-    if ( (this.type === "spell") && (level > 0) && CONFIG.DND5E.spellUpcastModes.includes(preparation.mode) ) {
-      return "slot";
-    }
+    const { level, preparation, consume } = this.system;
+    const isLeveled = (this.type === "spell") && (level > 0);
+    if ( isLeveled && CONFIG.DND5E.spellUpcastModes.includes(preparation.mode) ) return "slot";
+    else if ( isLeveled && this.hasResource && consume.scale ) return "resource";
     return null;
   }
 
@@ -502,7 +503,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     this.advancement = {
       byId: {},
       byLevel: Object.fromEntries(
-        Array.fromRange(CONFIG.DND5E.maxLevel + 1).slice(minAdvancementLevel).map(l => [l, []])
+        Array.fromRange(CONFIG.DND5E.maxLevel + 1, minAdvancementLevel).map(l => [l, []])
       ),
       byType: {},
       needingConfiguration: []
@@ -512,7 +513,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       this.advancement.byId[advancement.id] = advancement;
       this.advancement.byType[advancement.type] ??= [];
       this.advancement.byType[advancement.type].push(advancement);
-      advancement.levels.forEach(l => this.advancement.byLevel[l].push(advancement));
+      advancement.levels.forEach(l => this.advancement.byLevel[l]?.push(advancement));
       if ( !advancement.levels.length ) this.advancement.needingConfiguration.push(advancement);
     }
     Object.entries(this.advancement.byLevel).forEach(([lvl, data]) => data.sort((a, b) => {
@@ -783,6 +784,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * @property {boolean} consumeSpellSlot           Should this item (a spell) consume a spell slot?
    * @property {boolean} consumeUsage               Should this item consume its limited uses or recharge?
    * @property {string|number|null} slotLevel       The spell slot type or level to consume by default.
+   * @property {number|null} resourceAmount         The amount to consume by default when scaling with consumption.
    */
 
   /**
@@ -824,9 +826,6 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     }
     config = foundry.utils.mergeObject(this._getUsageConfig(), config);
 
-    // Are any default values necessitating a prompt?
-    const needsConfiguration = Object.values(config).includes(true);
-
     /**
      * A hook event that fires before an item usage is configured.
      * @function dnd5e.preUseItem
@@ -837,6 +836,9 @@ export default class Item5e extends SystemDocumentMixin(Item) {
      * @returns {boolean}                    Explicitly return `false` to prevent item from being used.
      */
     if ( Hooks.call("dnd5e.preUseItem", item, config, options) === false ) return;
+
+    // Are any default values necessitating a prompt?
+    const needsConfiguration = Object.values(config).includes(true);
 
     // Display configuration dialog
     if ( (options.configureDialog !== false) && needsConfiguration ) {
@@ -852,6 +854,10 @@ export default class Item5e extends SystemDocumentMixin(Item) {
         // A spell slot was consumed.
         level = Number.isInteger(config.slotLevel) ? config.slotLevel
           : config.slotLevel === "pact" ? as.spells.pact.level : parseInt(config.slotLevel.replace("spell", ""));
+      } else if ( config.resourceAmount ) {
+        // A quantity of the resource was consumed.
+        const diff = config.resourceAmount - (this.system.consume.amount || 1);
+        level = is.level + diff;
       }
       if ( level && (level !== is.level) ) {
         item = item.clone({"system.level": level}, {keepId: true});
@@ -943,12 +949,16 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       slotLevel: null,
       consumeUsage: null,
       consumeResource: null,
+      resourceAmount: null,
       createMeasuredTemplate: null
     };
 
-    if ( this.usageScaling === "slot" ) {
+    const scaling = this.usageScaling;
+    if ( scaling === "slot" ) {
       config.consumeSpellSlot = true;
-      config.slotLevel = preparation?.mode === "pact" ? "pact" : `spell${level}`;
+      config.slotLevel = (preparation?.mode === "pact") ? "pact" : `spell${level}`;
+    } else if ( scaling === "resource" ) {
+      config.resourceAmount = consume.amount || 1;
     }
     if ( this.hasLimitedUses ) config.consumeUsage = uses.prompt;
     if ( this.hasResource ) {
@@ -984,7 +994,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
 
     // Consume Limited Resource
     if ( config.consumeResource ) {
-      const canConsume = this._handleConsumeResource(itemUpdates, actorUpdates, resourceUpdates, deleteIds);
+      const canConsume = this._handleConsumeResource(config, itemUpdates, actorUpdates, resourceUpdates, deleteIds);
       if ( canConsume === false ) return false;
     }
 
@@ -1012,7 +1022,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * @param {object} itemUpdates        An object of data updates applied to this item
    * @param {object} actorUpdates       An object of data updates applied to the item owner (Actor)
    * @param {object[]} resourceUpdates  An array of updates to apply to other items owned by the actor
-   * @param {Set<string>} deleteIds     A set of item ids that will be deleted off the actor.
+   * @param {Set<string>} deleteIds     A set of item ids that will be deleted off the actor
    * @returns {boolean|void}            Return false to block further progress, or return nothing to continue
    * @protected
    */
@@ -1058,14 +1068,15 @@ export default class Item5e extends SystemDocumentMixin(Item) {
 
   /**
    * Handle update actions required when consuming an external resource
-   * @param {object} itemUpdates        An object of data updates applied to this item
-   * @param {object} actorUpdates       An object of data updates applied to the item owner (Actor)
-   * @param {object[]} resourceUpdates  An array of updates to apply to other items owned by the actor
-   * @param {Set<string>} deleteIds     A set of item ids that will be deleted off the actor.
-   * @returns {boolean|void}            Return false to block further progress, or return nothing to continue
+   * @param {ItemUseConfiguration} usageConfig  Configuration data for an item usage being prepared.
+   * @param {object} itemUpdates                An object of data updates applied to this item
+   * @param {object} actorUpdates               An object of data updates applied to the item owner (Actor)
+   * @param {object[]} resourceUpdates          An array of updates to apply to other items owned by the actor
+   * @param {Set<string>} deleteIds             A set of item ids that will be deleted off the actor
+   * @returns {boolean|void}                    Return false to block further progress, or return nothing to continue
    * @protected
    */
-  _handleConsumeResource(itemUpdates, actorUpdates, resourceUpdates, deleteIds) {
+  _handleConsumeResource(usageConfig, itemUpdates, actorUpdates, resourceUpdates, deleteIds) {
     const consume = this.system.consume || {};
     if ( !consume.type ) return;
 
@@ -1078,7 +1089,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
 
     // Identify the consumed resource and its current quantity
     let resource = null;
-    let amount = Number(consume.amount ?? 1);
+    let amount = usageConfig.resourceAmount ? usageConfig.resourceAmount : (consume.amount || 1);
     let quantity = 0;
     switch ( consume.type ) {
       case "attribute":
@@ -1135,7 +1146,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
           if ( consume.target === "largest" ) sort *= -1;
           return sort;
         });
-        let toConsume = consume.amount;
+        let toConsume = amount;
         for ( const cls of resource ) {
           const available = (toConsume > 0 ? cls.system.levels : 0) - cls.system.hitDiceUsed;
           const delta = toConsume > 0 ? Math.min(toConsume, available) : Math.max(toConsume, available);
@@ -1787,7 +1798,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
         await item.rollToolCheck({event}); break;
       case "placeTemplate":
         try {
-          await dnd5e.canvas.AbilityTemplate.fromItem(item)?.drawPreview();
+          await dnd5e.canvas.AbilityTemplate.fromItem(item, {"flags.dnd5e.spellLevel": spellLevel})?.drawPreview();
         } catch(err) {
           Hooks.onError("Item5e._onChatCardAction", err, {
             msg: game.i18n.localize("DND5E.PlaceTemplateError"),
@@ -2220,5 +2231,16 @@ export default class Item5e extends SystemDocumentMixin(Item) {
      */
     Hooks.callAll("dnd5e.createScrollFromSpell", spell, spellScrollData);
     return new this(spellScrollData);
+  }
+
+  /* -------------------------------------------- */
+  /*  Migrations & Deprecations                   */
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  static migrateData(source) {
+    source = super.migrateData(source);
+    if ( source.type === "class" ) ClassData._migrateTraitAdvancement(source);
+    return source;
   }
 }

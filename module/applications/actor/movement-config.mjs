@@ -29,13 +29,8 @@ export default class ActorMovementConfig extends BaseConfigSheet {
   /** @inheritdoc */
   getData(options={}) {
     const source = this.document.toObject();
-
-    // Current movement values
     const movement = foundry.utils.getProperty(source, this.options.keyPath) ?? {};
-    for ( let [k, v] of Object.entries(movement) ) {
-      if ( ["units", "hover"].includes(k) ) continue;
-      movement[k] = Number.isNumeric(v) ? v.toNearest(0.1) : null;
-    }
+    const raceData = this.document.system.details?.race?.system?.movement ?? {};
 
     // Allowed speeds
     const speeds = source.type === "group" ? {
@@ -50,13 +45,18 @@ export default class ActorMovementConfig extends BaseConfigSheet {
       swim: "DND5E.MovementSwim"
     };
 
-    // Return rendering context
     return {
-      speeds,
       movement,
+      movements: Object.entries(speeds).reduce((obj, [k, label]) => {
+        obj[k] = { label, value: movement[k], placeholder: raceData[k] ?? 0 };
+        return obj;
+      }, {}),
       selectUnits: Object.hasOwn(movement, "units"),
       canHover: Object.hasOwn(movement, "hover"),
       units: CONFIG.DND5E.movementUnits,
+      unitsPlaceholder: game.i18n.format("DND5E.AutomaticValue", {
+        value: CONFIG.DND5E.movementUnits[raceData.units ?? Object.keys(CONFIG.DND5E.movementUnits)[0]]?.toLowerCase()
+      }),
       keyPath: this.options.keyPath
     };
   }

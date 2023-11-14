@@ -1,4 +1,5 @@
 import ActorSheet5e from "./base-sheet.mjs";
+import ActorTypeConfig from "./type-config.mjs";
 import AdvancementConfirmationDialog from "../advancement/advancement-confirmation-dialog.mjs";
 import AdvancementManager from "../advancement/advancement-manager.mjs";
 
@@ -214,6 +215,19 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
     html.find(".short-rest").click(this._onShortRest.bind(this));
     html.find(".long-rest").click(this._onLongRest.bind(this));
     html.find(".rollable[data-action]").click(this._onSheetAction.bind(this));
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  _onConfigMenu(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    if ( (event.currentTarget.dataset.action === "type") && (this.actor.system.details.race?.id) ) {
+      new ActorTypeConfig(this.actor.system.details.race, { keyPath: "system.type" }).render(true);
+    } else if ( event.currentTarget.dataset.action !== "type" ) {
+      return super._onConfigMenu(event);
+    }
   }
 
   /* -------------------------------------------- */

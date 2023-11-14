@@ -16,8 +16,7 @@
 
             <ul class="summary flexrow">
                 <li>
-                    <input type="text" name="system.source.custom" value="{{system.source.custom}}"
-                           placeholder="{{ localize 'DND5E.Source' }}">
+                    {{> "dnd5e.item-source"}}
                 </li>
             </ul>
         </div>
@@ -79,69 +78,6 @@
             <h3 class="form-header">{{localize "DND5E.Spellcasting"}}</h3>
             {{> "dnd5e.item-spellcasting"}}
 
-            {{!-- Proficiencies --}}
-            <h3 class="form-header">{{localize "DND5E.Proficiency"}}</h3>
-            <div class="form-group">
-                <label>
-                    {{ localize "DND5E.ClassSaves" }}
-                    {{#if editable}}
-                    <a class="trait-selector class-saves" data-target="system.saves" data-options="saves">
-                        <i class="fas fa-edit"></i>
-                    </a>
-                    {{/if}}
-                </label>
-                <div class="form-fields">
-                    <ul class="traits-list">
-                        {{#each system.saves}}
-                            <li class="tag {{this}}">{{lookup (lookup ../config.abilities this) "label"}}</li>
-                        {{/each}}
-                    </ul>
-                </div>
-            </div>
-
-            {{!-- Level 1 skills --}}
-            <div class="form-group">
-                <label>{{localize "DND5E.ClassSkillsNumber"}}</label>
-                <div class="form-fields">
-                    {{numberInput system.skills.number name="system.skills.number" placeholder="0"}}
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label>
-                    {{localize "DND5E.ClassSkillsEligible"}}
-                    {{#if editable}}
-                    <a class="trait-selector class-skills" data-target="system.skills.choices" data-options="skills.choices">
-                        <i class="fas fa-edit"></i>
-                    </a>
-                    {{/if}}
-                </label>
-                <div class="form-fields">
-                    <ul class="traits-list">
-                        {{#each system.skills.choices}}
-                        <li class="tag {{this}}">{{lookup (lookup ../config.skills this) "label"}}</li>
-                        {{/each}}
-                    </ul>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label>
-                    {{localize "DND5E.ClassSkillsChosen"}}
-                    {{#if editable}}
-                    <a class="trait-selector class-skills" data-target="system.skills" data-options="skills">
-                        <i class="fas fa-edit"></i>
-                    </a>
-                    {{/if}}
-                </label>
-                <div class="form-fields">
-                    <ul class="traits-list">
-                        {{#each system.skills.value}}
-                            <li class="tag {{this}}">{{lookup (lookup ../config.skills this) "label"}}</li>
-                        {{/each}}
-                    </ul>
-                </div>
-            </div>
         </div>
 
         {{!-- Advancement Tab --}}

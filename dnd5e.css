@@ -741,14 +741,23 @@ h5 {
 .accordion {
   transition: margin-bottom 500ms ease;
 }
-.accordion.collapsed {
-  margin-bottom: 0.5rem;
-}
 .accordion.collapsed > .accordion-content {
   height: 0;
 }
+.accordion-indicator {
+  display: none;
+  transition: transform 500ms ease;
+}
+.accordion .accordion-indicator {
+  display: inherit;
+  transform: rotate(0deg);
+}
+.accordion.collapsed .accordion-indicator {
+  transform: rotate(-90deg);
+}
 .accordion-heading {
   cursor: pointer;
+  position: relative;
 }
 .accordion-content {
   overflow: hidden;
@@ -1850,6 +1859,27 @@ h5 {
   padding: 0 0.25em;
   text-align: right;
 }
+.dnd5e.sheet.item .sheet-header .summary li {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.25em;
+}
+.dnd5e.sheet.item .sheet-header .summary li span {
+  padding-inline: 4px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: 400;
+}
+.dnd5e.sheet.item .sheet-header .summary li .config-button {
+  display: none;
+  font-size: var(--font-size-14);
+  font-weight: normal;
+  padding-inline-end: 0.25em;
+}
+.dnd5e.sheet.item .sheet-header .summary li:hover .config-button {
+  display: block;
+}
 .dnd5e.sheet.item .sheet-navigation {
   margin-bottom: 5px;
 }
@@ -1921,13 +1951,20 @@ h5 {
 .dnd5e.sheet.item [data-tab="description"] .item-description .description-header {
   display: flex;
   align-items: first baseline;
-  justify-content: space-between;
+  gap: 0.5em;
   margin-block-end: 0;
   padding: 0.25rem;
   background-color: rgba(0, 0, 0, 0.05);
 }
 .dnd5e.sheet.item [data-tab="description"] .item-description .description-header .description-edit {
+  margin-inline-start: auto;
   opacity: 20%;
+}
+.dnd5e.sheet.item [data-tab="description"] .item-description .description-header .description-edit .fa-solid.fa-edit {
+  position: absolute;
+  inset-block: 0;
+  inset-inline-end: 0;
+  padding: 6px;
 }
 .dnd5e.sheet.item [data-tab="description"] .item-description .description-header:hover .description-edit {
   opacity: 100%;
@@ -1939,11 +1976,22 @@ h5 {
   height: auto;
   padding-inline: 0.25rem;
 }
+.dnd5e.sheet.item [data-tab="description"] .item-description .accordion {
+  margin-block-end: 0.5rem;
+}
+.dnd5e.sheet.item [data-tab="description"] .item-description .accordion p:last-child {
+  margin-block-end: 0;
+}
 .dnd5e.sheet.item [data-tab="description"] .item-description .accordion.collapsed > .editor.accordion-content {
   height: 0;
 }
 .dnd5e.sheet.item [data-tab="description"] .item-description .editor.accordion-content > .editor-content {
   overflow: hidden;
+}
+.dnd5e.sheet.item [data-tab="description"] .item-description .accordion-indicator {
+  align-self: center;
+  opacity: 0.5;
+  font-size: 0.75em;
 }
 .dnd5e.sheet.item .details input[type="text"],
 .dnd5e.sheet.item .details input[type="number"],
@@ -2506,25 +2554,31 @@ a.roll-link i {
 .dnd5e.sheet.actor.npc .summary {
   font-size: 18px;
 }
-.dnd5e.sheet.actor.npc .summary .creature-type {
+.dnd5e.sheet.actor.npc .summary li {
   display: flex;
   justify-content: space-between;
-  width: 1em;
-  padding: 0 3px;
+  gap: 0.25em;
 }
-.dnd5e.sheet.actor.npc .summary .creature-type span {
+.dnd5e.sheet.actor.npc .summary li span {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-.dnd5e.sheet.actor.npc .summary .creature-type .config-button {
+.dnd5e.sheet.actor.npc .summary li .config-button {
   display: none;
   font-size: 12px;
   font-weight: normal;
   line-height: 2em;
 }
-.dnd5e.sheet.actor.npc .summary .creature-type:hover .config-button {
+.dnd5e.sheet.actor.npc .summary li:hover .config-button {
   display: block;
+}
+.dnd5e.sheet.actor.npc .summary .creature-type {
+  width: 1em;
+  padding: 0 3px;
+}
+.dnd5e.sheet.actor.npc .summary .source {
+  width: 1em;
 }
 .dnd5e.sheet.actor.vehicle {
   min-width: 720px;

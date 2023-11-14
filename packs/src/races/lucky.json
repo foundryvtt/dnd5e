@@ -7,11 +7,17 @@
   "type": "feat",
   "system": {
     "description": {
-      "value": "<p>When you roll a 1 on the d20 for an attack roll, ability check, or saving throw, you can reroll the die and must use the new roll.</p>",
+      "value": "<p>When you roll a 1 on the d20 for an attack roll, ability check, or saving throw, you can reroll the die and must use the new roll.</p><section id=\"secret-S04TPyvUh05Dz0Ng\" class=\"secret foundry-note\"><p><strong>Foundry Note</strong></p><p>This property can be enabled on your character sheet in the Special Traits configuration on the Attributes tab.</p></section>",
       "chat": "",
       "unidentified": ""
     },
-    "source": "SRD 5.1",
+    "source": {
+      "custom": "SRD 5.1",
+      "book": "",
+      "page": "",
+      "uuid": "",
+      "license": ""
+    },
     "activation": {
       "type": "",
       "cost": null,
@@ -22,11 +28,13 @@
       "units": ""
     },
     "cover": null,
+    "crewed": false,
     "target": {
       "value": null,
       "width": null,
       "units": "",
-      "type": ""
+      "type": "",
+      "prompt": true
     },
     "range": {
       "value": null,
@@ -37,7 +45,8 @@
       "value": null,
       "max": "",
       "per": null,
-      "recovery": ""
+      "recovery": "",
+      "prompt": true
     },
     "consume": {
       "type": "",
@@ -101,18 +110,18 @@
       "transfer": true,
       "flags": {},
       "tint": null,
-      "sort": 0,
-      "_key": "!items.effects!LOMdcNAGWh5xpfm4.3ZXTUDl62zDpvpai"
+      "_key": "!items.effects!LOMdcNAGWh5xpfm4.3ZXTUDl62zDpvpai",
+      "sort": 0
     }
   ],
   "folder": null,
   "sort": 0,
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.1.0",
-    "coreVersion": "10.291",
+    "systemVersion": "2.3.1",
+    "coreVersion": "10.303",
     "createdTime": 1661787234467,
-    "modifiedTime": 1672336345266,
+    "modifiedTime": 1699461251311,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!LOMdcNAGWh5xpfm4"

@@ -99,22 +99,34 @@ export default class AbilityScoreImprovementAdvancement extends Advancement {
 
   /** @inheritdoc */
   summaryForLevel(level, { configMode=false }={}) {
-    if ( (this.value.type === "feat") && this.value.feat ) {
+    const formatter = new Intl.NumberFormat(game.i18n.lang, { signDisplay: "always" });
+    if ( configMode ) {
+      const entries = Object.entries(this.configuration.fixed).map(([key, value]) => {
+        if ( !value ) return null;
+        const name = CONFIG.DND5E.abilities[key]?.label ?? key;
+        return `<span class="tag">${name} <strong>${formatter.format(value)}</strong></span>`;
+      });
+      if ( this.configuration.points ) entries.push(`<span class="tag">${
+        game.i18n.localize("DND5E.AdvancementAbilityScoreImprovementPoints")}: <strong>${
+        this.configuration.points}</strong></span>`
+      );
+      return entries.filterJoin("\n");
+    }
 
+    else if ( (this.value.type === "feat") && this.value.feat ) {
       const id = Object.keys(this.value.feat)[0];
       const feat = this.actor.items.get(id);
       if ( feat ) return feat.toAnchor({classes: ["content-link"]}).outerHTML;
+    }
 
-    } else if ( (this.value.type === "asi") && this.value.assignments ) {
-
-      const formatter = new Intl.NumberFormat(game.i18n.lang, { signDisplay: "always" });
+    else if ( (this.value.type === "asi") && this.value.assignments ) {
       return Object.entries(this.value.assignments).reduce((html, [key, value]) => {
         const name = CONFIG.DND5E.abilities[key]?.label ?? key;
         html += `<span class="tag">${name} <strong>${formatter.format(value)}</strong></span>\n`;
         return html;
       }, "");
-
     }
+
     return "";
   }
 
