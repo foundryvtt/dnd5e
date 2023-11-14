@@ -2068,17 +2068,6 @@ DND5E.sourceBooks = {
 preLocalize("sourceBooks", { sort: true });
 
 /* -------------------------------------------- */
-
-/**
- * List of licenses available with sources.
- * @enum {string}
- */
-DND5E.sourceLicenses = {
-  "CC-BY-4.0": "SOURCE.LICENSE.CC-BY-40"
-};
-preLocalize("sourceLicenses", { sort: true });
-
-/* -------------------------------------------- */
 /*  Enrichment                                  */
 /* -------------------------------------------- */
 
