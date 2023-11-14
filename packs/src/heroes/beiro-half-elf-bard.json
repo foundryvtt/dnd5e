@@ -73,8 +73,7 @@
         "bonuses": {
           "level": "",
           "overall": ""
-        },
-        "min": 0
+        }
       },
       "init": {
         "ability": "",
@@ -110,12 +109,12 @@
     },
     "details": {
       "biography": {
-        "value": "<p>Beiro was a famed entertainer at his local tavern, when he one day ran out of stories to tell. To solve this, he set out to make his own stories, so as to one day tell them again at his tavern.</p>\n",
+        "value": "<p>Beiro was a famed entertainer at his local tavern, when he one day ran out of stories to tell. To solve this, he set out to make his own stories, so as to one day tell them again at his tavern.</p>",
         "public": ""
       },
       "alignment": "Chaotic Neutral",
       "race": "Mmfz1ndrE8zwXsWT",
-      "background": "",
+      "background": null,
       "originalClass": "jRCTm0gBRZHs1hc7",
       "xp": {
         "value": 0
@@ -173,7 +172,7 @@
       },
       "toolProf": {
         "value": [],
-        "custom": "Flute; Lyre; Drums; Lute"
+        "custom": ""
       }
     },
     "currency": {
@@ -329,7 +328,29 @@
         }
       }
     },
-    "tools": {},
+    "tools": {
+      "bagpipes": {
+        "value": 1,
+        "ability": "int",
+        "bonuses": {
+          "check": ""
+        }
+      },
+      "flute": {
+        "value": 1,
+        "ability": "int",
+        "bonuses": {
+          "check": ""
+        }
+      },
+      "lute": {
+        "value": 1,
+        "ability": "int",
+        "bonuses": {
+          "check": ""
+        }
+      }
+    },
     "spells": {
       "spell1": {
         "value": 2,
@@ -501,7 +522,12 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": "SRD 5.1",
+        "source": {
+          "custom": "SRD 5.1",
+          "book": "",
+          "page": "",
+          "license": ""
+        },
         "quantity": 1,
         "weight": 2,
         "price": {
@@ -547,7 +573,12 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": "SRD 5.1",
+        "source": {
+          "custom": "SRD 5.1",
+          "book": "",
+          "page": "",
+          "license": ""
+        },
         "quantity": 1,
         "weight": 1,
         "price": {
@@ -593,7 +624,12 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": "SRD 5.1",
+        "source": {
+          "custom": "SRD 5.1",
+          "book": "",
+          "page": "",
+          "license": ""
+        },
         "quantity": 1,
         "weight": 25,
         "price": {
@@ -649,7 +685,12 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": "SRD 5.1",
+        "source": {
+          "custom": "SRD 5.1",
+          "book": "",
+          "page": "",
+          "license": ""
+        },
         "quantity": 2,
         "weight": 1,
         "price": {
@@ -705,7 +746,12 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": "SRD 5.1",
+        "source": {
+          "custom": "SRD 5.1",
+          "book": "",
+          "page": "",
+          "license": ""
+        },
         "quantity": 1,
         "weight": 5,
         "price": {
@@ -761,7 +807,12 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": "SRD 5.1",
+        "source": {
+          "custom": "SRD 5.1",
+          "book": "",
+          "page": "",
+          "license": ""
+        },
         "quantity": 1,
         "weight": 1,
         "price": {
@@ -817,7 +868,12 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": "SRD 5.1",
+        "source": {
+          "custom": "SRD 5.1",
+          "book": "",
+          "page": "",
+          "license": ""
+        },
         "quantity": 1,
         "weight": 3,
         "price": {
@@ -867,7 +923,12 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": "SRD 5.1",
+        "source": {
+          "custom": "SRD 5.1",
+          "book": "",
+          "page": "",
+          "license": ""
+        },
         "quantity": 1,
         "weight": 1,
         "price": {
@@ -893,7 +954,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": 20,
@@ -904,12 +966,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "mwak",
@@ -961,7 +1025,7 @@
           "two": false,
           "ver": false
         },
-        "proficient": true
+        "proficient": 1
       },
       "sort": 0,
       "flags": {
@@ -995,7 +1059,12 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": "SRD 5.1",
+        "source": {
+          "custom": "SRD 5.1",
+          "book": "",
+          "page": "",
+          "license": ""
+        },
         "quantity": 1,
         "weight": 2,
         "price": {
@@ -1021,7 +1090,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": 5,
@@ -1032,12 +1102,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "mwak",
@@ -1089,7 +1161,7 @@
           "two": false,
           "ver": false
         },
-        "proficient": true
+        "proficient": 1
       },
       "sort": 0,
       "flags": {
@@ -1123,7 +1195,12 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": "SRD 5.1",
+        "source": {
+          "custom": "SRD 5.1",
+          "book": "",
+          "page": "",
+          "license": ""
+        },
         "quantity": 1,
         "weight": 10,
         "price": {
@@ -1149,7 +1226,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -1160,12 +1238,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": null,
         "actionType": "",
@@ -1203,7 +1283,7 @@
         },
         "strength": null,
         "stealth": false,
-        "proficient": true
+        "proficient": 1
       },
       "sort": 0,
       "flags": {
@@ -1237,7 +1317,12 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": "SRD 5.1",
+        "source": {
+          "custom": "SRD 5.1",
+          "book": "",
+          "page": "",
+          "license": ""
+        },
         "quantity": 1,
         "weight": 4,
         "price": {
@@ -1263,7 +1348,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -1274,12 +1360,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": null,
         "actionType": "",
@@ -1317,7 +1405,7 @@
         },
         "strength": null,
         "stealth": false,
-        "proficient": false
+        "proficient": 0
       },
       "sort": 0,
       "flags": {
@@ -1351,7 +1439,12 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": "SRD 5.1",
+        "source": {
+          "custom": "SRD 5.1",
+          "book": "",
+          "page": "",
+          "license": ""
+        },
         "quantity": 1,
         "weight": 6,
         "price": {
@@ -1377,7 +1470,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -1388,12 +1482,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": null,
         "actionType": "",
@@ -1431,7 +1527,7 @@
         },
         "strength": null,
         "stealth": false,
-        "proficient": false
+        "proficient": 0
       },
       "sort": 0,
       "flags": {
@@ -1465,7 +1561,12 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": "SRD 5.1",
+        "source": {
+          "custom": "SRD 5.1",
+          "book": "",
+          "page": "",
+          "license": ""
+        },
         "quantity": 2,
         "weight": 1,
         "price": {
@@ -1491,7 +1592,8 @@
           "value": 1,
           "width": null,
           "units": "",
-          "type": "creature"
+          "type": "creature",
+          "prompt": true
         },
         "range": {
           "value": 5,
@@ -1503,12 +1605,14 @@
           "max": "1",
           "per": "charges",
           "recovery": "",
-          "autoDestroy": true
+          "autoDestroy": true,
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "dex",
         "actionType": "rwak",
@@ -1533,7 +1637,8 @@
           "dc": null,
           "scaling": "spell"
         },
-        "consumableType": "trinket"
+        "consumableType": "trinket",
+        "properties": {}
       },
       "sort": 0,
       "flags": {
@@ -1567,7 +1672,12 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": "SRD 5.1",
+        "source": {
+          "custom": "SRD 5.1",
+          "book": "",
+          "page": "",
+          "license": ""
+        },
         "quantity": 1,
         "weight": 0,
         "price": {
@@ -1593,7 +1703,8 @@
           "value": 45,
           "width": null,
           "units": "ft",
-          "type": "radius"
+          "type": "radius",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -1605,12 +1716,14 @@
           "max": "1",
           "per": "charges",
           "recovery": "",
-          "autoDestroy": false
+          "autoDestroy": false,
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "util",
@@ -1630,7 +1743,8 @@
           "dc": null,
           "scaling": "spell"
         },
-        "consumableType": "trinket"
+        "consumableType": "trinket",
+        "properties": {}
       },
       "sort": 0,
       "flags": {
@@ -1664,7 +1778,12 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": "SRD 5.1",
+        "source": {
+          "custom": "SRD 5.1",
+          "book": "",
+          "page": "",
+          "license": ""
+        },
         "quantity": 1,
         "weight": 3,
         "price": {
@@ -1710,7 +1829,12 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": "SRD 5.1",
+        "source": {
+          "custom": "SRD 5.1",
+          "book": "",
+          "page": "",
+          "license": ""
+        },
         "quantity": 1,
         "weight": 0,
         "price": {
@@ -1720,7 +1844,11 @@
         "attunement": 0,
         "equipped": false,
         "rarity": "",
-        "identified": true
+        "identified": true,
+        "type": {
+          "value": "",
+          "subtype": ""
+        }
       },
       "sort": 0,
       "flags": {
@@ -1754,7 +1882,12 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": "SRD 5.1",
+        "source": {
+          "custom": "SRD 5.1",
+          "book": "",
+          "page": "",
+          "license": ""
+        },
         "quantity": 1,
         "weight": 0.06,
         "price": {
@@ -1764,7 +1897,11 @@
         "attunement": 0,
         "equipped": false,
         "rarity": "",
-        "identified": true
+        "identified": true,
+        "type": {
+          "value": "",
+          "subtype": ""
+        }
       },
       "sort": 0,
       "flags": {
@@ -1798,7 +1935,12 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": "SRD 5.1",
+        "source": {
+          "custom": "SRD 5.1",
+          "book": "",
+          "page": "",
+          "license": ""
+        },
         "quantity": 5,
         "weight": 0,
         "price": {
@@ -1808,7 +1950,11 @@
         "attunement": 0,
         "equipped": false,
         "rarity": "",
-        "identified": true
+        "identified": true,
+        "type": {
+          "value": "",
+          "subtype": ""
+        }
       },
       "sort": 0,
       "flags": {
@@ -1842,7 +1988,12 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": "SRD 5.1",
+        "source": {
+          "custom": "SRD 5.1",
+          "book": "",
+          "page": "",
+          "license": ""
+        },
         "quantity": 1,
         "weight": 0,
         "price": {
@@ -1852,7 +2003,11 @@
         "attunement": 0,
         "equipped": false,
         "rarity": "",
-        "identified": true
+        "identified": true,
+        "type": {
+          "value": "",
+          "subtype": ""
+        }
       },
       "sort": 0,
       "flags": {
@@ -1886,7 +2041,12 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": "SRD 5.1",
+        "source": {
+          "custom": "SRD 5.1",
+          "book": "",
+          "page": "",
+          "license": ""
+        },
         "quantity": 1,
         "weight": 0,
         "price": {
@@ -1896,7 +2056,11 @@
         "attunement": 0,
         "equipped": false,
         "rarity": "",
-        "identified": true
+        "identified": true,
+        "type": {
+          "value": "",
+          "subtype": ""
+        }
       },
       "sort": 0,
       "flags": {
@@ -1930,7 +2094,12 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": "SRD 5.1",
+        "source": {
+          "custom": "SRD 5.1",
+          "book": "",
+          "page": "",
+          "license": ""
+        },
         "quantity": 1,
         "weight": 0,
         "price": {
@@ -1940,7 +2109,11 @@
         "attunement": 0,
         "equipped": false,
         "rarity": "",
-        "identified": true
+        "identified": true,
+        "type": {
+          "value": "",
+          "subtype": ""
+        }
       },
       "sort": 0,
       "flags": {
@@ -1974,7 +2147,12 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": "SRD 5.1",
+        "source": {
+          "custom": "SRD 5.1",
+          "book": "",
+          "page": "",
+          "license": ""
+        },
         "quantity": 1,
         "weight": 0,
         "price": {
@@ -1984,7 +2162,11 @@
         "attunement": 0,
         "equipped": false,
         "rarity": "",
-        "identified": true
+        "identified": true,
+        "type": {
+          "value": "",
+          "subtype": ""
+        }
       },
       "sort": 0,
       "flags": {},
@@ -2014,7 +2196,12 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": "SRD 5.1",
+        "source": {
+          "custom": "SRD 5.1",
+          "book": "",
+          "page": "",
+          "license": ""
+        },
         "quantity": 10,
         "weight": 2,
         "price": {
@@ -2040,7 +2227,8 @@
           "value": 1,
           "width": null,
           "units": "",
-          "type": "creature"
+          "type": "creature",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -2052,12 +2240,14 @@
           "max": "1",
           "per": "charges",
           "recovery": "",
-          "autoDestroy": true
+          "autoDestroy": true,
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "util",
@@ -2077,7 +2267,8 @@
           "dc": null,
           "scaling": "spell"
         },
-        "consumableType": "food"
+        "consumableType": "food",
+        "properties": {}
       },
       "sort": 0,
       "flags": {
@@ -2114,7 +2305,12 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": "SRD 5.1",
+        "source": {
+          "custom": "SRD 5.1",
+          "book": "",
+          "page": "",
+          "license": ""
+        },
         "activation": {
           "type": "action",
           "cost": 1,
@@ -2130,7 +2326,8 @@
           "value": 1,
           "width": null,
           "units": "",
-          "type": "object"
+          "type": "object",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -2141,12 +2338,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "save",
@@ -2222,7 +2421,12 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": "SRD 5.1",
+        "source": {
+          "custom": "SRD 5.1",
+          "book": "",
+          "page": "",
+          "license": ""
+        },
         "activation": {
           "type": "action",
           "cost": 1,
@@ -2238,7 +2442,8 @@
           "value": 1,
           "width": null,
           "units": "",
-          "type": "space"
+          "type": "space",
+          "prompt": true
         },
         "range": {
           "value": 30,
@@ -2249,12 +2454,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "util",
@@ -2330,7 +2537,12 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": "SRD 5.1",
+        "source": {
+          "custom": "SRD 5.1",
+          "book": "",
+          "page": "",
+          "license": ""
+        },
         "activation": {
           "type": "action",
           "cost": 1,
@@ -2346,7 +2558,8 @@
           "value": 1,
           "width": null,
           "units": "",
-          "type": "creature"
+          "type": "creature",
+          "prompt": true
         },
         "range": {
           "value": 30,
@@ -2357,12 +2570,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "save",
@@ -2438,7 +2653,12 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": "SRD 5.1",
+        "source": {
+          "custom": "SRD 5.1",
+          "book": "",
+          "page": "",
+          "license": ""
+        },
         "activation": {
           "type": "action",
           "cost": 1,
@@ -2454,7 +2674,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": "self"
+          "type": "self",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -2465,12 +2686,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "util",
@@ -2546,7 +2769,12 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": "SRD 5.1",
+        "source": {
+          "custom": "SRD 5.1",
+          "book": "",
+          "page": "",
+          "license": ""
+        },
         "activation": {
           "type": "action",
           "cost": 1,
@@ -2562,7 +2790,8 @@
           "value": 1,
           "width": null,
           "units": "",
-          "type": "creature"
+          "type": "creature",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -2573,12 +2802,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "heal",
@@ -2659,7 +2890,12 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": "SRD 5.1",
+        "source": {
+          "custom": "SRD 5.1",
+          "book": "",
+          "page": "",
+          "license": ""
+        },
         "activation": {
           "type": "action",
           "cost": 1,
@@ -2675,7 +2911,8 @@
           "value": 1,
           "width": null,
           "units": "",
-          "type": "creature"
+          "type": "creature",
+          "prompt": true
         },
         "range": {
           "value": 30,
@@ -2686,12 +2923,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "save",
@@ -2763,7 +3002,12 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": "",
+        "source": {
+          "custom": "",
+          "book": "",
+          "page": "",
+          "license": ""
+        },
         "advancement": []
       },
       "img": "icons/tools/instruments/harp-gold-glowing.webp",
@@ -2796,7 +3040,12 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": "SRD 5.1",
+        "source": {
+          "custom": "SRD 5.1",
+          "book": "",
+          "page": "",
+          "license": ""
+        },
         "identifier": "bard",
         "levels": 1,
         "hitDice": "d8",
@@ -3268,95 +3517,223 @@
             "title": ""
           },
           {
+            "_id": "svCkv1ECxsmu2Q7U",
             "type": "Trait",
-            "level": 1,
             "configuration": {
+              "hint": "",
+              "mode": "default",
+              "allowReplacements": false,
+              "grants": [
+                "armor:lgt"
+              ],
+              "choices": []
+            },
+            "level": 1,
+            "title": "",
+            "value": {
+              "chosen": [
+                "armor:lgt"
+              ]
+            }
+          },
+          {
+            "_id": "hZPJWA6MdmFIZuQD",
+            "type": "Trait",
+            "configuration": {
+              "hint": "",
+              "mode": "default",
+              "allowReplacements": false,
+              "grants": [
+                "weapon:sim",
+                "weapon:mar:handcrossbow",
+                "weapon:mar:longsword",
+                "weapon:mar:rapier",
+                "weapon:mar:shortsword"
+              ],
+              "choices": []
+            },
+            "level": 1,
+            "title": "",
+            "classRestriction": "primary",
+            "value": {
+              "chosen": [
+                "weapon:sim",
+                "weapon:mar:handcrossbow",
+                "weapon:mar:longsword",
+                "weapon:mar:rapier",
+                "weapon:mar:shortsword"
+              ]
+            }
+          },
+          {
+            "_id": "tRCVvsqiLStPNyFl",
+            "type": "Trait",
+            "configuration": {
+              "hint": "",
+              "mode": "default",
+              "allowReplacements": false,
+              "grants": [],
+              "choices": [
+                {
+                  "count": 3,
+                  "pool": [
+                    "tool:music:*"
+                  ]
+                }
+              ]
+            },
+            "level": 1,
+            "title": "",
+            "classRestriction": "primary",
+            "value": {
+              "chosen": [
+                "tool:music:bagpipes",
+                "tool:music:flute",
+                "tool:music:lute"
+              ]
+            }
+          },
+          {
+            "_id": "wVBCjoHg0ftdHj3m",
+            "type": "Trait",
+            "configuration": {
+              "hint": "",
+              "mode": "default",
+              "allowReplacements": false,
               "grants": [
                 "saves:dex",
                 "saves:cha"
               ],
-              "hint": "",
-              "mode": "default",
-              "allowReplacements": false,
               "choices": []
             },
+            "level": 1,
+            "title": "",
+            "classRestriction": "primary",
             "value": {
               "chosen": [
                 "saves:dex",
                 "saves:cha"
               ]
-            },
-            "_id": "kQjRVQwVNU01DMbl"
+            }
           },
           {
+            "_id": "eNU6FoX5sNVbDx13",
             "type": "Trait",
-            "level": 1,
             "configuration": {
+              "hint": "",
+              "mode": "default",
+              "allowReplacements": false,
+              "grants": [],
               "choices": [
                 {
                   "count": 3,
                   "pool": [
-                    "skills:acr",
-                    "skills:ani",
-                    "skills:arc",
-                    "skills:ath",
-                    "skills:dec",
-                    "skills:his",
-                    "skills:ins",
-                    "skills:itm",
-                    "skills:inv",
-                    "skills:med",
-                    "skills:nat",
-                    "skills:prc",
-                    "skills:per",
-                    "skills:prf",
-                    "skills:rel",
-                    "skills:slt",
-                    "skills:ste",
-                    "skills:sur"
+                    "skills:*"
                   ]
                 }
-              ],
+              ]
+            },
+            "level": 1,
+            "title": "",
+            "classRestriction": "primary",
+            "value": {
+              "chosen": [
+                "skills:acr",
+                "skills:his",
+                "skills:slt"
+              ]
+            }
+          },
+          {
+            "type": "Trait",
+            "configuration": {
               "hint": "",
               "mode": "default",
               "allowReplacements": false,
-              "grants": []
+              "grants": [],
+              "choices": [
+                {
+                  "count": 1,
+                  "pool": [
+                    "tool:music:*"
+                  ]
+                }
+              ]
             },
-            "_id": "5TUxr3V2DNyaUi3O",
+            "level": 1,
+            "title": "",
+            "_id": "8oBIVC96av3lm5uk",
+            "classRestriction": "secondary",
+            "value": {}
+          },
+          {
+            "type": "Trait",
+            "configuration": {
+              "hint": "",
+              "mode": "default",
+              "allowReplacements": false,
+              "grants": [],
+              "choices": [
+                {
+                  "count": 1,
+                  "pool": [
+                    "skills:*"
+                  ]
+                }
+              ]
+            },
+            "level": 1,
+            "title": "",
+            "_id": "ELIXk3XCH4EmyiqN",
+            "classRestriction": "secondary",
+            "value": {}
+          },
+          {
+            "_id": "cwu9uhmtcKhqli8W",
+            "type": "Trait",
+            "configuration": {
+              "hint": "",
+              "mode": "expertise",
+              "allowReplacements": false,
+              "grants": [],
+              "choices": [
+                {
+                  "count": 2,
+                  "pool": [
+                    "skills:*"
+                  ]
+                }
+              ]
+            },
+            "level": 3,
+            "title": "Expertise",
+            "value": {}
+          },
+          {
+            "type": "Trait",
+            "configuration": {
+              "hint": "",
+              "mode": "expertise",
+              "allowReplacements": false,
+              "grants": [],
+              "choices": [
+                {
+                  "count": 2,
+                  "pool": [
+                    "skills:*"
+                  ]
+                }
+              ]
+            },
+            "level": 10,
+            "title": "Expertise",
+            "_id": "O2cVH7Y5kNfoUyLg",
             "value": {}
           }
         ],
         "spellcasting": {
           "progression": "full",
           "ability": "cha"
-        },
-        "saves": [
-          "dex",
-          "cha"
-        ],
-        "skills": {
-          "number": 3,
-          "choices": [
-            "acr",
-            "ani",
-            "arc",
-            "ath",
-            "dec",
-            "his",
-            "ins",
-            "itm",
-            "inv",
-            "med",
-            "nat",
-            "prc",
-            "per",
-            "prf",
-            "rel",
-            "slt",
-            "ste",
-            "sur"
-          ],
-          "value": []
         }
       },
       "effects": [],
@@ -3375,7 +3752,7 @@
         "systemVersion": "2.4.0",
         "coreVersion": "10.303",
         "createdTime": 1661787234279,
-        "modifiedTime": 1699987064368,
+        "modifiedTime": 1699992833464,
         "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!xVmbM44RXyI2Eqq3.jRCTm0gBRZHs1hc7"
@@ -3393,7 +3770,12 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": "SRD 5.1",
+        "source": {
+          "custom": "SRD 5.1",
+          "book": "",
+          "page": "",
+          "license": ""
+        },
         "activation": {
           "type": "",
           "cost": null,
@@ -3409,7 +3791,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -3420,12 +3803,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": null,
         "actionType": "",
@@ -3488,7 +3873,12 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": "SRD 5.1",
+        "source": {
+          "custom": "SRD 5.1",
+          "book": "",
+          "page": "",
+          "license": ""
+        },
         "activation": {
           "type": "bonus",
           "cost": 1,
@@ -3504,7 +3894,8 @@
           "value": 1,
           "width": null,
           "units": "",
-          "type": "creature"
+          "type": "creature",
+          "prompt": true
         },
         "range": {
           "value": 60,
@@ -3515,12 +3906,14 @@
           "value": 1,
           "max": "max(1, @abilities.cha.mod)",
           "per": "lr",
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "util",
@@ -3747,7 +4140,7 @@
         "systemVersion": "2.4.0",
         "coreVersion": "10.303",
         "createdTime": 1677181061205,
-        "modifiedTime": 1699987071110,
+        "modifiedTime": 1699992833465,
         "lastModifiedBy": "dnd5ebuilder0000"
       },
       "sort": 0,
@@ -3871,7 +4264,7 @@
     "systemVersion": "2.4.0",
     "coreVersion": "10.303",
     "createdTime": 1661787232198,
-    "modifiedTime": 1699987344216,
+    "modifiedTime": 1699992833480,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!xVmbM44RXyI2Eqq3"
