@@ -7,7 +7,7 @@ import { FormulaField } from "../../fields.mjs";
  * @property {string} ability             Ability score to use when determining modifier.
  * @property {string} actionType          Action type as defined in `DND5E.itemActionTypes`.
  * @property {string} attackBonus         Numeric or dice bonus to attack rolls.
- * @property {boolean} attackFlat          Is the attack bonus the only bonus to attack rolls?
+ * @property {boolean} attackFlat         Is the attack bonus the only bonus to attack rolls?
  * @property {string} chatFlavor          Extra text displayed in chat.
  * @property {object} critical            Information on how critical hits are handled.
  * @property {number} critical.threshold  Minimum number on the dice to roll a critical hit.
