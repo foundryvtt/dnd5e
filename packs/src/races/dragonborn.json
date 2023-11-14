@@ -132,8 +132,8 @@
           "mode": "default",
           "allowReplacements": false,
           "grants": [
-            "languages:common",
-            "languages:draconic"
+            "languages:standard:common",
+            "languages:exotic:draconic"
           ],
           "choices": []
         },
@@ -167,25 +167,25 @@
       }
     ],
     "movement": {
-      "burrow": 0,
-      "climb": 0,
-      "fly": 0,
-      "swim": 0,
+      "burrow": null,
+      "climb": null,
+      "fly": null,
+      "swim": null,
       "walk": 30,
       "units": "ft",
       "hover": false
     },
     "senses": {
-      "darkvision": 0,
-      "blindsight": 0,
-      "tremorsense": 0,
-      "truesight": 0,
+      "darkvision": null,
+      "blindsight": null,
+      "tremorsense": null,
+      "truesight": null,
       "units": "ft",
       "special": ""
     },
     "type": {
       "value": "humanoid",
-      "subtype": "",
+      "subtype": "dragonborn",
       "custom": ""
     }
   },
@@ -196,10 +196,10 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.3.1",
+    "systemVersion": "2.4.0",
     "coreVersion": "10.303",
     "createdTime": 1677180157568,
-    "modifiedTime": 1699460933805,
+    "modifiedTime": 1699987919586,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "sort": 0,

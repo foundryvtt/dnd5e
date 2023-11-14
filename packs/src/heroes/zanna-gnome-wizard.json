@@ -73,31 +73,30 @@
         "bonuses": {
           "level": "",
           "overall": ""
-        },
-        "min": 0
+        }
       },
       "init": {
         "ability": "",
         "bonus": "0"
       },
       "movement": {
-        "burrow": 0,
-        "climb": 0,
-        "fly": 0,
-        "swim": 0,
-        "walk": 25,
-        "units": "ft",
+        "burrow": null,
+        "climb": null,
+        "fly": null,
+        "swim": null,
+        "walk": null,
+        "units": null,
         "hover": false
       },
       "attunement": {
         "max": 3
       },
       "senses": {
-        "darkvision": 60,
-        "blindsight": 0,
-        "tremorsense": 0,
-        "truesight": 0,
-        "units": "ft",
+        "darkvision": null,
+        "blindsight": null,
+        "tremorsense": null,
+        "truesight": null,
+        "units": null,
         "special": ""
       },
       "spellcasting": "int",
@@ -110,12 +109,12 @@
     },
     "details": {
       "biography": {
-        "value": "<p>Always interested in tinkering, Zanna set out for adventure in order to find more spells for her spellbook, and perhaps one day create some of her own.</p>\n",
+        "value": "<p>Always interested in tinkering, Zanna set out for adventure in order to find more spells for her spellbook, and perhaps one day create some of her own.</p>",
         "public": ""
       },
       "alignment": "Chaotic Good",
-      "race": "Rock Gnome",
-      "background": "",
+      "race": "ur4Pjajcd3IlxKlZ",
+      "background": null,
       "originalClass": "N4bhi6usK8wuNEnh",
       "xp": {
         "value": 0
@@ -149,9 +148,9 @@
       },
       "languages": {
         "value": [
-          "common",
           "dwarvish",
           "giant",
+          "common",
           "gnomish"
         ],
         "custom": ""
@@ -172,7 +171,7 @@
       },
       "toolProf": {
         "value": [],
-        "custom": "Tinkerer's Tools"
+        "custom": ""
       }
     },
     "currency": {
@@ -248,7 +247,7 @@
         }
       },
       "inv": {
-        "value": 0,
+        "value": 1,
         "ability": "int",
         "bonuses": {
           "check": "",
@@ -288,7 +287,7 @@
         }
       },
       "per": {
-        "value": 1,
+        "value": 0,
         "ability": "cha",
         "bonuses": {
           "check": "",
@@ -500,7 +499,12 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": "SRD 5.1",
+        "source": {
+          "custom": "SRD 5.1",
+          "book": "",
+          "page": "",
+          "license": ""
+        },
         "quantity": 1,
         "weight": 2,
         "price": {
@@ -526,7 +530,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -538,12 +543,14 @@
           "max": "",
           "per": null,
           "recovery": "",
-          "autoDestroy": false
+          "autoDestroy": false,
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": null,
         "actionType": "util",
@@ -563,7 +570,8 @@
           "dc": null,
           "scaling": "spell"
         },
-        "consumableType": "ammo"
+        "consumableType": "ammo",
+        "properties": {}
       },
       "sort": 0,
       "flags": {
@@ -597,7 +605,12 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": "SRD 5.1",
+        "source": {
+          "custom": "SRD 5.1",
+          "book": "",
+          "page": "",
+          "license": ""
+        },
         "quantity": 1,
         "weight": 4,
         "price": {
@@ -623,7 +636,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": 5,
@@ -634,12 +648,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "mwak",
@@ -691,7 +707,7 @@
           "thr": false,
           "two": false
         },
-        "proficient": true
+        "proficient": 1
       },
       "sort": 0,
       "flags": {
@@ -725,7 +741,12 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": "SRD 5.1",
+        "source": {
+          "custom": "SRD 5.1",
+          "book": "",
+          "page": "",
+          "license": ""
+        },
         "quantity": 1,
         "weight": 4,
         "price": {
@@ -751,7 +772,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -762,12 +784,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": null,
         "actionType": "",
@@ -805,7 +829,7 @@
         },
         "strength": null,
         "stealth": false,
-        "proficient": true
+        "proficient": 1
       },
       "sort": 0,
       "flags": {
@@ -839,7 +863,12 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": "SRD 5.1",
+        "source": {
+          "custom": "SRD 5.1",
+          "book": "",
+          "page": "",
+          "license": ""
+        },
         "quantity": 1,
         "weight": 5,
         "price": {
@@ -895,7 +924,12 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": "SRD 5.1",
+        "source": {
+          "custom": "SRD 5.1",
+          "book": "",
+          "page": "",
+          "license": ""
+        },
         "quantity": 1,
         "weight": 1,
         "price": {
@@ -951,7 +985,12 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": "SRD 5.1",
+        "source": {
+          "custom": "SRD 5.1",
+          "book": "",
+          "page": "",
+          "license": ""
+        },
         "quantity": 1,
         "weight": 7,
         "price": {
@@ -961,7 +1000,11 @@
         "attunement": 0,
         "equipped": false,
         "rarity": "",
-        "identified": true
+        "identified": true,
+        "type": {
+          "value": "",
+          "subtype": ""
+        }
       },
       "sort": 0,
       "flags": {
@@ -1001,7 +1044,12 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": "SRD 5.1",
+        "source": {
+          "custom": "SRD 5.1",
+          "book": "",
+          "page": "",
+          "license": ""
+        },
         "quantity": 1,
         "weight": 10,
         "price": {
@@ -1027,7 +1075,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -1039,12 +1088,14 @@
           "max": "1",
           "per": "charges",
           "recovery": "",
-          "autoDestroy": false
+          "autoDestroy": false,
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "abil",
@@ -1064,7 +1115,8 @@
           "dc": 17,
           "scaling": "flat"
         },
-        "consumableType": "trinket"
+        "consumableType": "trinket",
+        "properties": {}
       },
       "sort": 0,
       "flags": {
@@ -1104,7 +1156,12 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": "SRD 5.1",
+        "source": {
+          "custom": "SRD 5.1",
+          "book": "",
+          "page": "",
+          "license": ""
+        },
         "quantity": 1,
         "weight": 1,
         "price": {
@@ -1114,7 +1171,11 @@
         "attunement": 0,
         "equipped": false,
         "rarity": "",
-        "identified": true
+        "identified": true,
+        "type": {
+          "value": "",
+          "subtype": ""
+        }
       },
       "sort": 0,
       "flags": {
@@ -1154,7 +1215,12 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": "SRD 5.1",
+        "source": {
+          "custom": "SRD 5.1",
+          "book": "",
+          "page": "",
+          "license": ""
+        },
         "quantity": 10,
         "weight": 2,
         "price": {
@@ -1180,7 +1246,8 @@
           "value": 1,
           "width": null,
           "units": "",
-          "type": "creature"
+          "type": "creature",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -1192,12 +1259,14 @@
           "max": "1",
           "per": "charges",
           "recovery": "",
-          "autoDestroy": true
+          "autoDestroy": true,
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "util",
@@ -1217,7 +1286,8 @@
           "dc": null,
           "scaling": "spell"
         },
-        "consumableType": "food"
+        "consumableType": "food",
+        "properties": {}
       },
       "sort": 0,
       "flags": {
@@ -1251,7 +1321,12 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": "SRD 5.1",
+        "source": {
+          "custom": "SRD 5.1",
+          "book": "",
+          "page": "",
+          "license": ""
+        },
         "quantity": 1,
         "weight": 1,
         "price": {
@@ -1261,7 +1336,11 @@
         "attunement": 0,
         "equipped": false,
         "rarity": "",
-        "identified": true
+        "identified": true,
+        "type": {
+          "value": "",
+          "subtype": ""
+        }
       },
       "sort": 0,
       "flags": {
@@ -1295,7 +1374,12 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": "SRD 5.1",
+        "source": {
+          "custom": "SRD 5.1",
+          "book": "",
+          "page": "",
+          "license": ""
+        },
         "quantity": 10,
         "weight": 1,
         "price": {
@@ -1321,7 +1405,8 @@
           "value": 40,
           "width": null,
           "units": "ft",
-          "type": "radius"
+          "type": "radius",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -1333,12 +1418,14 @@
           "max": "1",
           "per": "charges",
           "recovery": "",
-          "autoDestroy": true
+          "autoDestroy": true,
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "str",
         "actionType": "mwak",
@@ -1363,7 +1450,8 @@
           "dc": null,
           "scaling": "spell"
         },
-        "consumableType": "trinket"
+        "consumableType": "trinket",
+        "properties": {}
       },
       "sort": 0,
       "flags": {
@@ -1403,7 +1491,12 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": "SRD 5.1",
+        "source": {
+          "custom": "SRD 5.1",
+          "book": "",
+          "page": "",
+          "license": ""
+        },
         "quantity": 1,
         "weight": 5,
         "price": {
@@ -1429,7 +1522,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -1441,12 +1535,14 @@
           "max": "4",
           "per": "charges",
           "recovery": "",
-          "autoDestroy": false
+          "autoDestroy": false,
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "util",
@@ -1466,7 +1562,8 @@
           "dc": null,
           "scaling": "spell"
         },
-        "consumableType": "food"
+        "consumableType": "food",
+        "properties": {}
       },
       "sort": 0,
       "flags": {
@@ -1500,7 +1597,12 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": "SRD 5.1",
+        "source": {
+          "custom": "SRD 5.1",
+          "book": "",
+          "page": "",
+          "license": ""
+        },
         "quantity": 1,
         "weight": 0.06,
         "price": {
@@ -1510,7 +1612,11 @@
         "attunement": 0,
         "equipped": false,
         "rarity": "",
-        "identified": true
+        "identified": true,
+        "type": {
+          "value": "",
+          "subtype": ""
+        }
       },
       "sort": 0,
       "flags": {
@@ -1544,7 +1650,12 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": "SRD 5.1",
+        "source": {
+          "custom": "SRD 5.1",
+          "book": "",
+          "page": "",
+          "license": ""
+        },
         "quantity": 1,
         "weight": 0,
         "price": {
@@ -1554,7 +1665,11 @@
         "attunement": 0,
         "equipped": false,
         "rarity": "",
-        "identified": true
+        "identified": true,
+        "type": {
+          "value": "",
+          "subtype": ""
+        }
       },
       "sort": 0,
       "flags": {
@@ -1588,7 +1703,12 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": "SRD 5.1",
+        "source": {
+          "custom": "SRD 5.1",
+          "book": "",
+          "page": "",
+          "license": ""
+        },
         "quantity": 1,
         "weight": 0,
         "price": {
@@ -1598,7 +1718,11 @@
         "attunement": 0,
         "equipped": false,
         "rarity": "",
-        "identified": true
+        "identified": true,
+        "type": {
+          "value": "",
+          "subtype": ""
+        }
       },
       "sort": 0,
       "flags": {
@@ -1632,7 +1756,12 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": "SRD 5.1",
+        "source": {
+          "custom": "SRD 5.1",
+          "book": "",
+          "page": "",
+          "license": ""
+        },
         "quantity": 1,
         "weight": 5,
         "price": {
@@ -1642,7 +1771,11 @@
         "attunement": 0,
         "equipped": false,
         "rarity": "",
-        "identified": true
+        "identified": true,
+        "type": {
+          "value": "",
+          "subtype": ""
+        }
       },
       "sort": 0,
       "flags": {
@@ -1676,7 +1809,12 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": "SRD 5.1",
+        "source": {
+          "custom": "SRD 5.1",
+          "book": "",
+          "page": "",
+          "license": ""
+        },
         "quantity": 1,
         "weight": 3,
         "price": {
@@ -1686,7 +1824,11 @@
         "attunement": 0,
         "equipped": false,
         "rarity": "",
-        "identified": true
+        "identified": true,
+        "type": {
+          "value": "",
+          "subtype": ""
+        }
       },
       "sort": 0,
       "flags": {
@@ -1720,7 +1862,12 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": "SRD 5.1",
+        "source": {
+          "custom": "SRD 5.1",
+          "book": "",
+          "page": "",
+          "license": ""
+        },
         "quantity": 1,
         "weight": 0.5,
         "price": {
@@ -1730,7 +1877,11 @@
         "attunement": 0,
         "equipped": false,
         "rarity": "",
-        "identified": true
+        "identified": true,
+        "type": {
+          "value": "",
+          "subtype": ""
+        }
       },
       "sort": 0,
       "flags": {
@@ -1755,194 +1906,6 @@
       "_key": "!actors.items!4Jsv5vYaJ1atUEDV.rjlTBnXJGxoodrM3"
     },
     {
-      "_id": "hAOdlcKJP3W7zD0p",
-      "name": "Artificer's Lore",
-      "type": "feat",
-      "system": {
-        "description": {
-          "value": "<p>Whenever you make an Intelligence (History) check related to magic items, alchemical objects, or technological devices, you can add twice your proficiency bonus, instead of any proficiency bonus you normally apply.</p>",
-          "chat": "",
-          "unidentified": ""
-        },
-        "source": "SRD 5.1",
-        "activation": {
-          "type": "",
-          "cost": null,
-          "condition": ""
-        },
-        "duration": {
-          "value": "",
-          "units": ""
-        },
-        "cover": null,
-        "crewed": false,
-        "target": {
-          "value": null,
-          "width": null,
-          "units": "",
-          "type": ""
-        },
-        "range": {
-          "value": null,
-          "long": null,
-          "units": ""
-        },
-        "uses": {
-          "value": null,
-          "max": "",
-          "per": null,
-          "recovery": ""
-        },
-        "consume": {
-          "type": "",
-          "target": null,
-          "amount": null
-        },
-        "ability": "",
-        "actionType": "",
-        "attackBonus": "",
-        "chatFlavor": "",
-        "critical": {
-          "threshold": null,
-          "damage": ""
-        },
-        "damage": {
-          "parts": [],
-          "versatile": ""
-        },
-        "formula": "",
-        "save": {
-          "ability": "",
-          "dc": null,
-          "scaling": "spell"
-        },
-        "type": {
-          "value": "",
-          "subtype": ""
-        },
-        "requirements": "Rock Gnome",
-        "recharge": {
-          "value": null,
-          "charged": false
-        }
-      },
-      "sort": 0,
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.dnd5e.races.OQA1sHxKnSJq01dL"
-        }
-      },
-      "img": "icons/magic/fire/flame-burning-chain.webp",
-      "effects": [],
-      "folder": null,
-      "ownership": {
-        "default": 0
-      },
-      "_stats": {
-        "systemId": null,
-        "systemVersion": null,
-        "coreVersion": null,
-        "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
-      },
-      "_key": "!actors.items!4Jsv5vYaJ1atUEDV.hAOdlcKJP3W7zD0p"
-    },
-    {
-      "_id": "z0AzZRlDE0RiB0Vp",
-      "name": "Gnome Cunning",
-      "type": "feat",
-      "system": {
-        "description": {
-          "value": "<p>You have advantage on all Intelligence, Wisdom, and Charisma saving throws against magic.</p>",
-          "chat": "",
-          "unidentified": ""
-        },
-        "source": "SRD 5.1",
-        "activation": {
-          "type": "",
-          "cost": null,
-          "condition": ""
-        },
-        "duration": {
-          "value": "",
-          "units": ""
-        },
-        "cover": null,
-        "crewed": false,
-        "target": {
-          "value": null,
-          "width": null,
-          "units": "",
-          "type": ""
-        },
-        "range": {
-          "value": null,
-          "long": null,
-          "units": ""
-        },
-        "uses": {
-          "value": null,
-          "max": "",
-          "per": null,
-          "recovery": ""
-        },
-        "consume": {
-          "type": "",
-          "target": null,
-          "amount": null
-        },
-        "ability": "",
-        "actionType": "",
-        "attackBonus": "",
-        "chatFlavor": "",
-        "critical": {
-          "threshold": null,
-          "damage": ""
-        },
-        "damage": {
-          "parts": [],
-          "versatile": ""
-        },
-        "formula": "",
-        "save": {
-          "ability": "",
-          "dc": null,
-          "scaling": "spell"
-        },
-        "type": {
-          "value": "",
-          "subtype": ""
-        },
-        "requirements": "Gnome",
-        "recharge": {
-          "value": null,
-          "charged": false
-        }
-      },
-      "sort": 0,
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.dnd5e.monsterfeatures.0gl43AC57cvJaW7D"
-        }
-      },
-      "img": "icons/magic/light/hand-sparks-glow-yellow.webp",
-      "effects": [],
-      "folder": null,
-      "ownership": {
-        "default": 0
-      },
-      "_stats": {
-        "systemId": null,
-        "systemVersion": null,
-        "coreVersion": null,
-        "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
-      },
-      "_key": "!actors.items!4Jsv5vYaJ1atUEDV.z0AzZRlDE0RiB0Vp"
-    },
-    {
       "_id": "5hEbhdZm1ozQ3B2g",
       "name": "Tinker",
       "type": "feat",
@@ -1952,7 +1915,12 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": "SRD 5.1",
+        "source": {
+          "custom": "SRD 5.1",
+          "book": "",
+          "page": "",
+          "license": ""
+        },
         "activation": {
           "type": "hour",
           "cost": 1,
@@ -1968,7 +1936,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -1979,12 +1948,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "",
@@ -2037,194 +2008,6 @@
       "_key": "!actors.items!4Jsv5vYaJ1atUEDV.5hEbhdZm1ozQ3B2g"
     },
     {
-      "_id": "zb2ggSgTNtBj8HWl",
-      "name": "Gnome",
-      "type": "feat",
-      "system": {
-        "description": {
-          "value": "<div title=\"Page 6\">\n<div>\n<div>\n<p><em>Your gnome character has certain characteristics in common with all other gnomes. </em></p><p><em><strong>Ability Score Increase.</strong></em> Your Intelligence score increases by 2.</p><p><em><strong>Age.</strong></em> Gnomes mature at the same rate humans do, and most are expected to settle down into an adult life by around age 40. They can live 350 to almost 500 years.</p><p><em><strong>Alignment.</strong></em> Gnomes are most often good. Those who tend toward law are sages, engineers, researchers, scholars, investigators, or inventors. Those who tend toward chaos are minstrels, tricksters, wanderers, or fanciful jewelers. Gnomes are good-­‐‑hearted, and even the tricksters among them are more playful than vicious.</p><p><em><strong>Size. </strong></em>Gnomes are between 3 and 4 feet tall and average about 40 pounds. Your size is Small. Speed. Your base walking speed is 25 feet.</p><p><em><strong>Darkvision. </strong></em>Accustomed to life underground, you have superior vision in dark and dim conditions. You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can't discern color in darkness, only shades of gray.</p><p><em><strong>Gnome Cunning. </strong></em>@Compendium[dnd5e.races.EHhr9umJ5kxJFCQH]{Gnome Cunning} You have advantage on all Intelligence, Wisdom, and Charisma saving throws against magic.</p><p><em><strong>Languages.</strong></em> You can speak, read, and write Common and Gnomish. The Gnomish language, which uses the Dwarvish script, is renowned for its technical treatises and its catalogs of knowledge about the natural world.</p>\n</div>\n</div>\n</div>",
-          "chat": "",
-          "unidentified": ""
-        },
-        "source": "SRD 5.1",
-        "activation": {
-          "type": "",
-          "cost": null,
-          "condition": ""
-        },
-        "duration": {
-          "value": "",
-          "units": ""
-        },
-        "cover": null,
-        "crewed": false,
-        "target": {
-          "value": null,
-          "width": null,
-          "units": "",
-          "type": ""
-        },
-        "range": {
-          "value": null,
-          "long": null,
-          "units": ""
-        },
-        "uses": {
-          "value": null,
-          "max": "",
-          "per": null,
-          "recovery": ""
-        },
-        "consume": {
-          "type": "",
-          "target": null,
-          "amount": null
-        },
-        "ability": null,
-        "actionType": "",
-        "attackBonus": "",
-        "chatFlavor": "",
-        "critical": {
-          "threshold": null,
-          "damage": ""
-        },
-        "damage": {
-          "parts": [],
-          "versatile": ""
-        },
-        "formula": "",
-        "save": {
-          "ability": "",
-          "dc": null,
-          "scaling": "spell"
-        },
-        "type": {
-          "value": "",
-          "subtype": ""
-        },
-        "requirements": "",
-        "recharge": {
-          "value": null,
-          "charged": false
-        }
-      },
-      "sort": 0,
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.dnd5e.races.kmRnMETG5hB9Bmwu"
-        }
-      },
-      "img": "icons/magic/fire/projectile-meteor-salvo-strong-purple-yellow.webp",
-      "effects": [],
-      "folder": null,
-      "ownership": {
-        "default": 0
-      },
-      "_stats": {
-        "systemId": null,
-        "systemVersion": null,
-        "coreVersion": null,
-        "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
-      },
-      "_key": "!actors.items!4Jsv5vYaJ1atUEDV.zb2ggSgTNtBj8HWl"
-    },
-    {
-      "_id": "PaLpYN8wbP0MyP2w",
-      "name": "Rock Gnome",
-      "type": "feat",
-      "system": {
-        "description": {
-          "value": "<div>\n<div>\n<p><em>As a rock gnome, you have a natural inventiveness and hardiness beyond that of other gnomes.</em></p>\n</div>\n</div>\n<div title=\"Page 6\">\n<div>\n<div>\n<p><em><strong>Ability Score Increase. </strong></em>Your Constitution score increases by 1.</p><p><em><strong>Artificer's Lore.</strong></em> @Compendium[dnd5e.races.OQA1sHxKnSJq01dL]{Artificer's Lore} Whenever you make an Intelligence (History) check related to magic items, alchemical objects, or technological devices, you can add twice your proficiency bonus, instead of any proficiency bonus you normally apply.</p><p><em><strong>Tinker.</strong></em> @Compendium[dnd5e.races.koRPOLtj8XAFMwnW]{Tinker} You have proficiency with artisan's tools (tinker's tools). Using those tools, you can spend 1 hour and 10 gp worth of materials to construct a Tiny clockwork device (AC 5, 1 hp). The device ceases to function after 24 hours (unless you spend 1 hour repairing it to keep the device functioning), or when you use your action to dismantle it; at that time, you can reclaim the materials used to create it. You can have up to three such devices active at a time.</p><p>When you create a device, choose one of the following options:</p><p><em>Clockwork Toy. </em>This toy is a clockwork animal, monster, or person, such as a frog, mouse, bird, dragon, or soldier. When placed on the ground, the toy moves 5 feet across the ground on each of your turns in a random direction. It makes noises as appropriate to the creature it represents.</p><p><em>Fire Starter.</em> The device produces a miniature flame, which you can use to light a candle, torch, or campfire. Using the device requires your action.</p><p><em>Music Box.</em> When opened, this music box plays a single song at a moderate volume. The box stops playing when it reaches the song's end or when it is closed.</p>\n</div>\n</div>\n</div>",
-          "chat": "",
-          "unidentified": ""
-        },
-        "source": "SRD 5.1",
-        "activation": {
-          "type": "",
-          "cost": null,
-          "condition": ""
-        },
-        "duration": {
-          "value": "",
-          "units": ""
-        },
-        "cover": null,
-        "crewed": false,
-        "target": {
-          "value": null,
-          "width": null,
-          "units": "",
-          "type": ""
-        },
-        "range": {
-          "value": null,
-          "long": null,
-          "units": ""
-        },
-        "uses": {
-          "value": null,
-          "max": "",
-          "per": null,
-          "recovery": ""
-        },
-        "consume": {
-          "type": "",
-          "target": null,
-          "amount": null
-        },
-        "ability": null,
-        "actionType": "",
-        "attackBonus": "",
-        "chatFlavor": "",
-        "critical": {
-          "threshold": null,
-          "damage": ""
-        },
-        "damage": {
-          "parts": [],
-          "versatile": ""
-        },
-        "formula": "",
-        "save": {
-          "ability": "",
-          "dc": null,
-          "scaling": "spell"
-        },
-        "type": {
-          "value": "",
-          "subtype": ""
-        },
-        "requirements": "Gnome",
-        "recharge": {
-          "value": null,
-          "charged": false
-        }
-      },
-      "sort": 0,
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.dnd5e.races.TZtarkKs6cgGD7z2"
-        }
-      },
-      "img": "icons/magic/fire/projectile-meteor-salvo-light-purple.webp",
-      "effects": [],
-      "folder": null,
-      "ownership": {
-        "default": 0
-      },
-      "_stats": {
-        "systemId": null,
-        "systemVersion": null,
-        "coreVersion": null,
-        "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
-      },
-      "_key": "!actors.items!4Jsv5vYaJ1atUEDV.PaLpYN8wbP0MyP2w"
-    },
-    {
       "_id": "EOmsUcFQJTfG2oio",
       "name": "Fire Bolt",
       "ownership": {
@@ -2237,7 +2020,12 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": "SRD 5.1",
+        "source": {
+          "custom": "SRD 5.1",
+          "book": "",
+          "page": "",
+          "license": ""
+        },
         "activation": {
           "type": "action",
           "cost": 1,
@@ -2253,7 +2041,8 @@
           "value": 1,
           "width": null,
           "units": "",
-          "type": "creature"
+          "type": "creature",
+          "prompt": true
         },
         "range": {
           "value": 120,
@@ -2264,12 +2053,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "rsak",
@@ -2350,7 +2141,12 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": "SRD 5.1",
+        "source": {
+          "custom": "SRD 5.1",
+          "book": "",
+          "page": "",
+          "license": ""
+        },
         "activation": {
           "type": "action",
           "cost": 1,
@@ -2366,7 +2162,8 @@
           "value": 1,
           "width": null,
           "units": "",
-          "type": "object"
+          "type": "object",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -2377,12 +2174,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "save",
@@ -2458,7 +2257,12 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": "SRD 5.1",
+        "source": {
+          "custom": "SRD 5.1",
+          "book": "",
+          "page": "",
+          "license": ""
+        },
         "activation": {
           "type": "action",
           "cost": 1,
@@ -2474,7 +2278,8 @@
           "value": 1,
           "width": null,
           "units": "",
-          "type": "space"
+          "type": "space",
+          "prompt": true
         },
         "range": {
           "value": 30,
@@ -2485,12 +2290,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "util",
@@ -2566,7 +2373,12 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": "SRD 5.1",
+        "source": {
+          "custom": "SRD 5.1",
+          "book": "",
+          "page": "",
+          "license": ""
+        },
         "activation": {
           "type": "minute",
           "cost": 1,
@@ -2582,7 +2394,8 @@
           "value": 20,
           "width": null,
           "units": "ft",
-          "type": "cube"
+          "type": "cube",
+          "prompt": true
         },
         "range": {
           "value": 30,
@@ -2593,12 +2406,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "util",
@@ -2672,7 +2487,12 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": "SRD 5.1",
+        "source": {
+          "custom": "SRD 5.1",
+          "book": "",
+          "page": "",
+          "license": ""
+        },
         "activation": {
           "type": "reaction",
           "cost": 1,
@@ -2688,7 +2508,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": "self"
+          "type": "self",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -2699,12 +2520,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "util",
@@ -2775,8 +2598,8 @@
           "origin": "Item.FlLKKv7bQBlIAs11",
           "tint": null,
           "transfer": true,
-          "sort": 0,
-          "_key": "!actors.items.effects!4Jsv5vYaJ1atUEDV.z1mx84ONwkXKUZd7.6pbotGIvqQkraPva"
+          "_key": "!actors.items.effects!4Jsv5vYaJ1atUEDV.z1mx84ONwkXKUZd7.6pbotGIvqQkraPva",
+          "sort": 0
         }
       ],
       "folder": null,
@@ -2812,7 +2635,12 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": "SRD 5.1",
+        "source": {
+          "custom": "SRD 5.1",
+          "book": "",
+          "page": "",
+          "license": ""
+        },
         "activation": {
           "type": "hour",
           "cost": 1,
@@ -2828,7 +2656,8 @@
           "value": null,
           "width": null,
           "units": "any",
-          "type": "space"
+          "type": "space",
+          "prompt": true
         },
         "range": {
           "value": 10,
@@ -2839,12 +2668,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "util",
@@ -2918,7 +2749,12 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": "SRD 5.1",
+        "source": {
+          "custom": "SRD 5.1",
+          "book": "",
+          "page": "",
+          "license": ""
+        },
         "activation": {
           "type": "action",
           "cost": 1,
@@ -2934,7 +2770,8 @@
           "value": 1,
           "width": null,
           "units": "",
-          "type": "creature"
+          "type": "creature",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -2945,12 +2782,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "util",
@@ -3021,8 +2860,8 @@
           "transfer": true,
           "flags": {},
           "tint": null,
-          "sort": 0,
-          "_key": "!actors.items.effects!4Jsv5vYaJ1atUEDV.CKZTpZlxj7hjjo2H.cfwMU7LuOJ619Lny"
+          "_key": "!actors.items.effects!4Jsv5vYaJ1atUEDV.CKZTpZlxj7hjjo2H.cfwMU7LuOJ619Lny",
+          "sort": 0
         }
       ],
       "folder": null,
@@ -3056,7 +2895,12 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": "SRD 5.1",
+        "source": {
+          "custom": "SRD 5.1",
+          "book": "",
+          "page": "",
+          "license": ""
+        },
         "activation": {
           "type": "action",
           "cost": 1,
@@ -3072,7 +2916,8 @@
           "value": 20,
           "width": null,
           "units": "ft",
-          "type": "sphere"
+          "type": "sphere",
+          "prompt": true
         },
         "range": {
           "value": 90,
@@ -3083,12 +2928,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "other",
@@ -3171,7 +3018,12 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": "SRD 5.1",
+        "source": {
+          "custom": "SRD 5.1",
+          "book": "",
+          "page": "",
+          "license": ""
+        },
         "activation": {
           "type": "action",
           "cost": 1,
@@ -3187,7 +3039,8 @@
           "value": 1,
           "width": null,
           "units": "",
-          "type": "creature"
+          "type": "creature",
+          "prompt": true
         },
         "range": {
           "value": 120,
@@ -3198,12 +3051,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "other",
@@ -3280,7 +3135,12 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": "",
+        "source": {
+          "custom": "",
+          "book": "",
+          "page": "",
+          "license": ""
+        },
         "advancement": []
       },
       "img": "icons/magic/light/hand-sparks-smoke-teal.webp",
@@ -3313,7 +3173,12 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": "SRD 5.1",
+        "source": {
+          "custom": "SRD 5.1",
+          "book": "",
+          "page": "",
+          "license": ""
+        },
         "identifier": "wizard",
         "levels": 1,
         "hitDice": "d6",
@@ -3488,7 +3353,8 @@
                 "int": 0,
                 "wis": 0,
                 "cha": 0
-              }
+              },
+              "cap": 2
             },
             "value": {
               "type": "asi"
@@ -3509,7 +3375,8 @@
                 "int": 0,
                 "wis": 0,
                 "cha": 0
-              }
+              },
+              "cap": 2
             },
             "value": {
               "type": "asi"
@@ -3530,7 +3397,8 @@
                 "int": 0,
                 "wis": 0,
                 "cha": 0
-              }
+              },
+              "cap": 2
             },
             "value": {
               "type": "asi"
@@ -3551,7 +3419,8 @@
                 "int": 0,
                 "wis": 0,
                 "cha": 0
-              }
+              },
+              "cap": 2
             },
             "value": {
               "type": "asi"
@@ -3573,31 +3442,100 @@
                 "int": 0,
                 "wis": 0,
                 "cha": 0
-              }
+              },
+              "cap": 2
             },
             "value": {
               "type": "asi"
             },
             "level": 19,
             "title": ""
+          },
+          {
+            "_id": "JXcSQmjdfaJeSjZ7",
+            "type": "Trait",
+            "configuration": {
+              "hint": "",
+              "mode": "default",
+              "allowReplacements": false,
+              "grants": [
+                "weapon:sim:dagger",
+                "weapon:sim:dart",
+                "weapon:sim:lightcrossbow",
+                "weapon:sim:quarterstaff",
+                "weapon:sim:sling"
+              ],
+              "choices": []
+            },
+            "level": 1,
+            "title": "",
+            "classRestriction": "primary",
+            "value": {
+              "chosen": [
+                "weapon:sim:dagger",
+                "weapon:sim:dart",
+                "weapon:sim:lightcrossbow",
+                "weapon:sim:quarterstaff",
+                "weapon:sim:sling"
+              ]
+            }
+          },
+          {
+            "_id": "r1DG0GF8L6SkLNvq",
+            "type": "Trait",
+            "configuration": {
+              "hint": "",
+              "mode": "default",
+              "allowReplacements": false,
+              "grants": [
+                "saves:int",
+                "saves:wis"
+              ],
+              "choices": []
+            },
+            "level": 1,
+            "title": "",
+            "classRestriction": "primary",
+            "value": {
+              "chosen": [
+                "saves:int",
+                "saves:wis"
+              ]
+            }
+          },
+          {
+            "_id": "6blzmKC4EON0KM2e",
+            "type": "Trait",
+            "configuration": {
+              "hint": "",
+              "mode": "default",
+              "allowReplacements": false,
+              "grants": [],
+              "choices": [
+                {
+                  "count": 2,
+                  "pool": [
+                    "skills:arc",
+                    "skills:his",
+                    "skills:ins",
+                    "skills:inv",
+                    "skills:med",
+                    "skills:rel"
+                  ]
+                }
+              ]
+            },
+            "level": 1,
+            "title": "",
+            "classRestriction": "primary",
+            "value": {
+              "chosen": [
+                "skills:med",
+                "skills:inv"
+              ]
+            }
           }
         ],
-        "saves": [
-          "int",
-          "wis"
-        ],
-        "skills": {
-          "number": 2,
-          "choices": [
-            "arc",
-            "his",
-            "ins",
-            "inv",
-            "med",
-            "rel"
-          ],
-          "value": []
-        },
         "spellcasting": {
           "progression": "full",
           "ability": "int"
@@ -3616,10 +3554,10 @@
       },
       "_stats": {
         "systemId": "dnd5e",
-        "systemVersion": "2.2.2",
+        "systemVersion": "2.4.0",
         "coreVersion": "10.303",
         "createdTime": 1661787234283,
-        "modifiedTime": 1691519218867,
+        "modifiedTime": 1699993725827,
         "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!4Jsv5vYaJ1atUEDV.N4bhi6usK8wuNEnh"
@@ -3637,7 +3575,12 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": "SRD 5.1",
+        "source": {
+          "custom": "SRD 5.1",
+          "book": "",
+          "page": "",
+          "license": ""
+        },
         "activation": {
           "type": "",
           "cost": null,
@@ -3653,7 +3596,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -3664,12 +3608,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": null,
         "actionType": "",
@@ -3711,10 +3657,10 @@
       "sort": 0,
       "_stats": {
         "systemId": "dnd5e",
-        "systemVersion": "2.2.2",
+        "systemVersion": "2.4.0",
         "coreVersion": "10.303",
         "createdTime": 1661787234406,
-        "modifiedTime": 1691519218869,
+        "modifiedTime": 1699987548856,
         "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!4Jsv5vYaJ1atUEDV.ZCH7glEObWbjFGHB"
@@ -3732,7 +3678,12 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": "SRD 5.1",
+        "source": {
+          "custom": "SRD 5.1",
+          "book": "",
+          "page": "",
+          "license": ""
+        },
         "activation": {
           "type": "special",
           "cost": null,
@@ -3748,7 +3699,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": "self"
+          "type": "self",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -3759,12 +3711,14 @@
           "value": 1,
           "max": "1",
           "per": "lr",
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "util",
@@ -3813,6 +3767,500 @@
         "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!4Jsv5vYaJ1atUEDV.fnxa7jBxIHkDyZuU"
+    },
+    {
+      "_id": "ur4Pjajcd3IlxKlZ",
+      "name": "Rock Gnome",
+      "type": "race",
+      "img": "icons/environment/wilderness/terrain-rocks-brown.webp",
+      "system": {
+        "description": {
+          "value": "<p>Your gnome character has certain characteristics in common with all other gnomes.</p><p><em><strong>Ability Score Increase.</strong></em> Your Intelligence score increases by 2.</p><p><em><strong>Age.</strong></em> Gnomes mature at the same rate humans do, and most are expected to settle down into an adult life by around age 40. They can live 350 to almost 500 years.</p><p><em><strong>Alignment.</strong></em> Gnomes are most often good. Those who tend toward law are sages, engineers, researchers, scholars, investigators, or inventors. Those who tend toward chaos are minstrels, tricksters, wanderers, or fanciful jewelers. Gnomes are good‑hearted, and even the tricksters among them are more playful than vicious.</p><p><em><strong>Size.</strong></em> Gnomes are between 3 and 4 feet tall and average about 40 pounds. Your size is Small.</p><p><em><strong>Speed.</strong></em> Your base walking speed is 25 feet.</p><p><em><strong>Darkvision.</strong></em> Accustomed to life underground, you have superior vision in dark and dim conditions. You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can't discern color in darkness, only shades of gray.</p><p><em><strong>Gnome Cunning.</strong></em> You have advantage on all Intelligence, Wisdom, and Charisma saving throws against magic.</p><p><em><strong>Languages.</strong></em> You can speak, read, and write Common and Gnomish. The Gnomish language, which uses the Dwarvish script, is renowned for its technical treatises and its catalogs of knowledge about the natural world.</p><h5>Rock Gnome</h5><p>As a rock gnome, you have a natural inventiveness and hardiness beyond that of other gnomes.</p><p><em><strong>Ability Score Increase.</strong></em> Your Constitution score increases by 1.</p><p><em><strong>Artificer's Lore.</strong></em> Whenever you make an Intelligence (History) check related to magic items, alchemical objects, or technological devices, you can add twice your proficiency bonus, instead of any proficiency bonus you normally apply.</p><p><em><strong>Tinker.</strong></em> You have proficiency with artisan's tools (tinker's tools). Using those tools, you can spend 1 hour and 10 gp worth of materials to construct a Tiny clockwork device (AC 5, 1 hp). The device ceases to function after 24 hours (unless you spend 1 hour repairing it to keep the device functioning), or when you use your action to dismantle it; at that time, you can reclaim the materials used to create it. You can have up to three such devices active at a time.</p><p>When you create a device, choose one of the following options:</p><p><em>Clockwork Toy.</em> This toy is a clockwork animal, monster, or person, such as a frog, mouse, bird, dragon, or soldier. When placed on the ground, the toy moves 5 feet across the ground on each of your turns in a random direction. It makes noises as appropriate to the creature it represents.</p><p><em>Fire Starter.</em> The device produces a miniature flame, which you can use to light a candle, torch, or campfire. Using the device requires your action.</p><p><em>Music Box.</em> When opened, this music box plays a single song at a moderate volume. The box stops playing when it reaches the song's end or when it is closed.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": {
+          "custom": "SRD 5.1",
+          "book": "",
+          "page": "",
+          "license": ""
+        },
+        "identifier": "rock-gnome",
+        "advancement": [
+          {
+            "_id": "oHASjkY2yexn8nAv",
+            "type": "ItemGrant",
+            "configuration": {
+              "items": [
+                "Compendium.dnd5e.races.EHhr9umJ5kxJFCQH",
+                "Compendium.dnd5e.races.OQA1sHxKnSJq01dL",
+                "Compendium.dnd5e.races.koRPOLtj8XAFMwnW"
+              ],
+              "optional": false,
+              "spell": {
+                "ability": "",
+                "preparation": "",
+                "uses": {
+                  "max": "",
+                  "per": ""
+                }
+              }
+            },
+            "value": {
+              "added": {
+                "PZFiXV29QKKu02BE": "Compendium.dnd5e.races.EHhr9umJ5kxJFCQH",
+                "H5IsMCJRETbzQF6T": "Compendium.dnd5e.races.OQA1sHxKnSJq01dL",
+                "ylzIab4YKbPPyvj0": "Compendium.dnd5e.races.koRPOLtj8XAFMwnW"
+              }
+            },
+            "level": 0,
+            "title": ""
+          },
+          {
+            "_id": "Z9hvZFkWUNvowbQX",
+            "type": "AbilityScoreImprovement",
+            "configuration": {
+              "points": 0,
+              "fixed": {
+                "str": 0,
+                "dex": 0,
+                "con": 1,
+                "int": 2,
+                "wis": 0,
+                "cha": 0
+              },
+              "cap": 2
+            },
+            "value": {
+              "type": "asi",
+              "assignments": {
+                "con": 1,
+                "int": 2
+              }
+            },
+            "level": 0,
+            "title": ""
+          },
+          {
+            "_id": "1qwH1s1GrEC8T8Qp",
+            "type": "Size",
+            "configuration": {
+              "hint": "Gnomes are between 3 and 4 feet tall and average about 40 pounds. Your size is Small.",
+              "sizes": [
+                "sm"
+              ]
+            },
+            "value": {
+              "size": "sm"
+            },
+            "level": 1,
+            "title": ""
+          },
+          {
+            "_id": "lQjgBd250F2JZeo2",
+            "type": "Trait",
+            "configuration": {
+              "hint": "",
+              "mode": "default",
+              "allowReplacements": false,
+              "grants": [
+                "languages:standard:common",
+                "languages:standard:gnomish"
+              ],
+              "choices": []
+            },
+            "level": 1,
+            "title": "",
+            "value": {
+              "chosen": [
+                "languages:standard:common",
+                "languages:standard:gnomish"
+              ]
+            }
+          }
+        ],
+        "movement": {
+          "walk": 25,
+          "burrow": 0,
+          "climb": 0,
+          "fly": 0,
+          "swim": 0,
+          "units": "ft",
+          "hover": false
+        },
+        "senses": {
+          "darkvision": 60,
+          "blindsight": 0,
+          "tremorsense": 0,
+          "truesight": 0,
+          "units": "ft",
+          "special": ""
+        },
+        "type": {
+          "subtype": "gnome",
+          "value": "humanoid",
+          "custom": ""
+        }
+      },
+      "effects": [],
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.races.TZtarkKs6cgGD7z2"
+        }
+      },
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.4.0",
+        "coreVersion": "10.303",
+        "createdTime": 1677181053374,
+        "modifiedTime": 1699993725827,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "sort": 0,
+      "folder": null,
+      "_key": "!actors.items!4Jsv5vYaJ1atUEDV.ur4Pjajcd3IlxKlZ"
+    },
+    {
+      "_id": "PZFiXV29QKKu02BE",
+      "name": "Gnome Cunning",
+      "ownership": {
+        "default": 0
+      },
+      "type": "feat",
+      "system": {
+        "description": {
+          "value": "<p>You have advantage on all Intelligence, Wisdom, and Charisma saving throws against magic.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": {
+          "custom": "SRD 5.1",
+          "book": "",
+          "page": "",
+          "license": ""
+        },
+        "activation": {
+          "type": "",
+          "cost": null,
+          "condition": ""
+        },
+        "duration": {
+          "value": "",
+          "units": ""
+        },
+        "cover": null,
+        "crewed": false,
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": "",
+          "prompt": true
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": ""
+        },
+        "uses": {
+          "value": null,
+          "max": "",
+          "per": null,
+          "recovery": "",
+          "prompt": true
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null,
+          "scale": false
+        },
+        "ability": "",
+        "actionType": "",
+        "attackBonus": "",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "type": {
+          "value": "race",
+          "subtype": ""
+        },
+        "requirements": "Gnome",
+        "recharge": {
+          "value": null,
+          "charged": false
+        }
+      },
+      "flags": {
+        "dnd5e": {
+          "sourceId": "Compendium.dnd5e.races.EHhr9umJ5kxJFCQH",
+          "advancementOrigin": "ur4Pjajcd3IlxKlZ.oHASjkY2yexn8nAv"
+        }
+      },
+      "img": "icons/magic/light/hand-sparks-glow-yellow.webp",
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.4.0",
+        "coreVersion": "10.303",
+        "createdTime": 1661787234464,
+        "modifiedTime": 1699987548856,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!actors.items!4Jsv5vYaJ1atUEDV.PZFiXV29QKKu02BE"
+    },
+    {
+      "_id": "H5IsMCJRETbzQF6T",
+      "name": "Artificer's Lore",
+      "ownership": {
+        "default": 0
+      },
+      "type": "feat",
+      "system": {
+        "description": {
+          "value": "<p>Whenever you make an Intelligence (History) check related to magic items, alchemical objects, or technological devices, you can add twice your proficiency bonus, instead of any proficiency bonus you normally apply.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": {
+          "custom": "SRD 5.1",
+          "book": "",
+          "page": "",
+          "license": ""
+        },
+        "activation": {
+          "type": "",
+          "cost": null,
+          "condition": ""
+        },
+        "duration": {
+          "value": "",
+          "units": ""
+        },
+        "cover": null,
+        "crewed": false,
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": "",
+          "prompt": true
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": ""
+        },
+        "uses": {
+          "value": null,
+          "max": "",
+          "per": null,
+          "recovery": "",
+          "prompt": true
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null,
+          "scale": false
+        },
+        "ability": "",
+        "actionType": "",
+        "attackBonus": "",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "type": {
+          "value": "race",
+          "subtype": ""
+        },
+        "requirements": "Rock Gnome",
+        "recharge": {
+          "value": null,
+          "charged": false
+        }
+      },
+      "flags": {
+        "dnd5e": {
+          "sourceId": "Compendium.dnd5e.races.OQA1sHxKnSJq01dL",
+          "advancementOrigin": "ur4Pjajcd3IlxKlZ.oHASjkY2yexn8nAv"
+        }
+      },
+      "img": "icons/magic/fire/flame-burning-chain.webp",
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.4.0",
+        "coreVersion": "10.303",
+        "createdTime": 1661787234468,
+        "modifiedTime": 1699987550173,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!actors.items!4Jsv5vYaJ1atUEDV.H5IsMCJRETbzQF6T"
+    },
+    {
+      "_id": "ylzIab4YKbPPyvj0",
+      "name": "Tinker",
+      "ownership": {
+        "default": 0
+      },
+      "type": "feat",
+      "system": {
+        "description": {
+          "value": "<p>You have proficiency with artisan's tools (tinker's tools). Using those tools, you can spend 1 hour and 10 gp worth of materials to construct a Tiny clockwork device (AC 5, 1 hp). The device ceases to function after 24 hours (unless you spend 1 hour repairing it to keep the device functioning), or when you use your action to dismantle it; at that time, you can reclaim the materials used to create it. You can have up to three such devices active at a time. When you create a device, choose one of the following options:</p>\n<p><em>Clockwork Toy:</em> This toy is a clockwork animal, monster, or person, such as a frog, mouse, bird, dragon, or soldier. When placed on the ground, the toy moves 5 feet across the ground on each of your turns in a random direction. It makes noises as appropriate to the creature it represents.</p>\n<p><em>Fire Starter:</em> The device produces a miniature flame, which you can use to light a candle, torch, or campfire. Using the device requires your action.</p>\n<p><em>Music Box:</em> When opened, this music box plays a single song at a moderate volume. The box stops playing when it reaches the song's end or when it is closed.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": {
+          "custom": "SRD 5.1",
+          "book": "",
+          "page": "",
+          "license": ""
+        },
+        "activation": {
+          "type": "hour",
+          "cost": 1,
+          "condition": "Expend 10 gp worth of materials"
+        },
+        "duration": {
+          "value": "",
+          "units": ""
+        },
+        "cover": null,
+        "crewed": false,
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": "",
+          "prompt": true
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": ""
+        },
+        "uses": {
+          "value": null,
+          "max": "",
+          "per": null,
+          "recovery": "",
+          "prompt": true
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null,
+          "scale": false
+        },
+        "ability": "",
+        "actionType": "",
+        "attackBonus": "",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "type": {
+          "value": "race",
+          "subtype": ""
+        },
+        "requirements": "Rock Gnome",
+        "recharge": {
+          "value": null,
+          "charged": false
+        }
+      },
+      "flags": {
+        "dnd5e": {
+          "sourceId": "Compendium.dnd5e.races.koRPOLtj8XAFMwnW",
+          "advancementOrigin": "ur4Pjajcd3IlxKlZ.oHASjkY2yexn8nAv"
+        }
+      },
+      "img": "icons/commodities/tech/cog-steel.webp",
+      "effects": [
+        {
+          "_id": "CkQlNsLyTZGVbnKM",
+          "changes": [
+            {
+              "key": "system.traits.toolProf.value",
+              "mode": 2,
+              "value": "tinker",
+              "priority": null
+            }
+          ],
+          "disabled": false,
+          "duration": {
+            "startTime": null,
+            "seconds": null,
+            "combat": null,
+            "rounds": null,
+            "turns": null,
+            "startRound": null,
+            "startTurn": null
+          },
+          "icon": "icons/commodities/tech/cog-steel.webp",
+          "label": "Tinker",
+          "origin": "Item.koRPOLtj8XAFMwnW",
+          "transfer": true,
+          "flags": {},
+          "tint": null,
+          "_key": "!actors.items.effects!4Jsv5vYaJ1atUEDV.ylzIab4YKbPPyvj0.CkQlNsLyTZGVbnKM",
+          "sort": 0
+        }
+      ],
+      "folder": null,
+      "sort": 0,
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.4.0",
+        "coreVersion": "10.303",
+        "createdTime": 1661787234472,
+        "modifiedTime": 1699986898969,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!actors.items!4Jsv5vYaJ1atUEDV.ylzIab4YKbPPyvj0"
     }
   ],
   "effects": [
@@ -3842,8 +4290,8 @@
       "origin": "Compendium.dnd5e.heroes.4Jsv5vYaJ1atUEDV.Item.z1mx84ONwkXKUZd7",
       "tint": null,
       "transfer": false,
-      "sort": 0,
-      "_key": "!actors.effects!4Jsv5vYaJ1atUEDV.6pbotGIvqQkraPva"
+      "_key": "!actors.effects!4Jsv5vYaJ1atUEDV.6pbotGIvqQkraPva",
+      "sort": 0
     },
     {
       "_id": "cfwMU7LuOJ619Lny",
@@ -3871,8 +4319,37 @@
       "transfer": false,
       "flags": {},
       "tint": null,
-      "sort": 0,
-      "_key": "!actors.effects!4Jsv5vYaJ1atUEDV.cfwMU7LuOJ619Lny"
+      "_key": "!actors.effects!4Jsv5vYaJ1atUEDV.cfwMU7LuOJ619Lny",
+      "sort": 0
+    },
+    {
+      "_id": "CkQlNsLyTZGVbnKM",
+      "changes": [
+        {
+          "key": "system.traits.toolProf.value",
+          "mode": 2,
+          "value": "tinker",
+          "priority": null
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": 0,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "icon": "icons/commodities/tech/cog-steel.webp",
+      "label": "Tinker",
+      "origin": "Compendium.dnd5e.heroes.4Jsv5vYaJ1atUEDV.Item.ylzIab4YKbPPyvj0",
+      "transfer": false,
+      "flags": {},
+      "tint": null,
+      "_key": "!actors.effects!4Jsv5vYaJ1atUEDV.CkQlNsLyTZGVbnKM",
+      "sort": 0
     }
   ],
   "folder": null,
@@ -3884,10 +4361,10 @@
   "_id": "4Jsv5vYaJ1atUEDV",
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.2.2",
+    "systemVersion": "2.4.0",
     "coreVersion": "10.303",
     "createdTime": 1661787232155,
-    "modifiedTime": 1691519218885,
+    "modifiedTime": 1699993725854,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!4Jsv5vYaJ1atUEDV"
