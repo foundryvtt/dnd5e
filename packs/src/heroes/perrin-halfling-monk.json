@@ -81,23 +81,23 @@
         "bonus": "0"
       },
       "movement": {
-        "burrow": 0,
-        "climb": 0,
-        "fly": 0,
-        "swim": 0,
-        "walk": 25,
-        "units": "ft",
+        "burrow": null,
+        "climb": null,
+        "fly": null,
+        "swim": null,
+        "walk": null,
+        "units": null,
         "hover": false
       },
       "attunement": {
         "max": 3
       },
       "senses": {
-        "darkvision": 0,
-        "blindsight": 0,
-        "tremorsense": 0,
-        "truesight": 0,
-        "units": "ft",
+        "darkvision": null,
+        "blindsight": null,
+        "tremorsense": null,
+        "truesight": null,
+        "units": null,
         "special": ""
       },
       "spellcasting": "int",
@@ -114,7 +114,7 @@
         "public": ""
       },
       "alignment": "True Neutral",
-      "race": "Lightfoot Halfling",
+      "race": "6JOg9xYjafGcdHnY",
       "background": "",
       "originalClass": "ckabMZ0IHcAMt16f",
       "xp": {
@@ -149,9 +149,9 @@
       },
       "languages": {
         "value": [
-          "common",
           "celestial",
           "draconic",
+          "common",
           "halfling"
         ],
         "custom": ""
@@ -2003,566 +2003,6 @@
       "_key": "!actors.items!125qFnXvT9z0iOic.D7cvC9lq7qUdvoUr"
     },
     {
-      "_id": "YdZrV1HM7x0q7t99",
-      "name": "Brave",
-      "type": "feat",
-      "system": {
-        "description": {
-          "value": "<p>You have advantage on saving throws against being frightened.</p>",
-          "chat": "",
-          "unidentified": ""
-        },
-        "source": "SRD 5.1",
-        "activation": {
-          "type": "",
-          "cost": null,
-          "condition": ""
-        },
-        "duration": {
-          "value": "",
-          "units": ""
-        },
-        "cover": null,
-        "crewed": false,
-        "target": {
-          "value": null,
-          "width": null,
-          "units": "",
-          "type": ""
-        },
-        "range": {
-          "value": null,
-          "long": null,
-          "units": ""
-        },
-        "uses": {
-          "value": null,
-          "max": "",
-          "per": null,
-          "recovery": ""
-        },
-        "consume": {
-          "type": "",
-          "target": null,
-          "amount": null
-        },
-        "ability": "",
-        "actionType": "",
-        "attackBonus": "",
-        "chatFlavor": "You have advantage on saving throws against being frightened.",
-        "critical": {
-          "threshold": null,
-          "damage": ""
-        },
-        "damage": {
-          "parts": [],
-          "versatile": ""
-        },
-        "formula": "",
-        "save": {
-          "ability": "",
-          "dc": null,
-          "scaling": "spell"
-        },
-        "type": {
-          "value": "",
-          "subtype": ""
-        },
-        "requirements": "Halfling",
-        "recharge": {
-          "value": null,
-          "charged": false
-        }
-      },
-      "sort": 0,
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.dnd5e.monsterfeatures.108q5fJnnBRoLKfe"
-        }
-      },
-      "img": "icons/skills/melee/unarmed-punch-fist.webp",
-      "effects": [],
-      "folder": null,
-      "ownership": {
-        "default": 0
-      },
-      "_stats": {
-        "systemId": null,
-        "systemVersion": null,
-        "coreVersion": null,
-        "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
-      },
-      "_key": "!actors.items!125qFnXvT9z0iOic.YdZrV1HM7x0q7t99"
-    },
-    {
-      "_id": "LIB9TNHLEmuohMLn",
-      "name": "Lucky",
-      "type": "feat",
-      "system": {
-        "description": {
-          "value": "<p>When you roll a 1 on the d20 for an attack roll, ability check, or saving throw, you can reroll the die and must use the new roll.</p><p><em><strong>Foundry Note:</strong> Enable this feature in the Special Traits section of the character sheet.</em></p>",
-          "chat": "",
-          "unidentified": ""
-        },
-        "source": "SRD 5.1",
-        "activation": {
-          "type": "",
-          "cost": null,
-          "condition": ""
-        },
-        "duration": {
-          "value": "",
-          "units": ""
-        },
-        "cover": null,
-        "crewed": false,
-        "target": {
-          "value": null,
-          "width": null,
-          "units": "",
-          "type": ""
-        },
-        "range": {
-          "value": null,
-          "long": null,
-          "units": ""
-        },
-        "uses": {
-          "value": null,
-          "max": "",
-          "per": null,
-          "recovery": ""
-        },
-        "consume": {
-          "type": "",
-          "target": null,
-          "amount": null
-        },
-        "ability": null,
-        "actionType": "",
-        "attackBonus": "",
-        "chatFlavor": "",
-        "critical": {
-          "threshold": null,
-          "damage": ""
-        },
-        "damage": {
-          "parts": [],
-          "versatile": ""
-        },
-        "formula": "",
-        "save": {
-          "ability": "",
-          "dc": null,
-          "scaling": "spell"
-        },
-        "type": {
-          "value": "",
-          "subtype": ""
-        },
-        "requirements": "Halfling",
-        "recharge": {
-          "value": null,
-          "charged": false
-        }
-      },
-      "sort": 0,
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.dnd5e.races.LOMdcNAGWh5xpfm4"
-        }
-      },
-      "img": "icons/sundries/gaming/dice-runed-brown.webp",
-      "effects": [],
-      "folder": null,
-      "ownership": {
-        "default": 0
-      },
-      "_stats": {
-        "systemId": null,
-        "systemVersion": null,
-        "coreVersion": null,
-        "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
-      },
-      "_key": "!actors.items!125qFnXvT9z0iOic.LIB9TNHLEmuohMLn"
-    },
-    {
-      "_id": "MEbwGBWDnCYWAcKu",
-      "name": "Naturally Stealthy",
-      "type": "feat",
-      "system": {
-        "description": {
-          "value": "<p>You can attempt to hide even when you are obscured only by a creature that is at least one size larger than you.</p>",
-          "chat": "",
-          "unidentified": ""
-        },
-        "source": "SRD 5.1",
-        "activation": {
-          "type": "",
-          "cost": null,
-          "condition": ""
-        },
-        "duration": {
-          "value": "",
-          "units": ""
-        },
-        "cover": null,
-        "crewed": false,
-        "target": {
-          "value": null,
-          "width": null,
-          "units": "",
-          "type": ""
-        },
-        "range": {
-          "value": null,
-          "long": null,
-          "units": ""
-        },
-        "uses": {
-          "value": null,
-          "max": "",
-          "per": null,
-          "recovery": ""
-        },
-        "consume": {
-          "type": "",
-          "target": null,
-          "amount": null
-        },
-        "ability": "",
-        "actionType": "",
-        "attackBonus": "",
-        "chatFlavor": "",
-        "critical": {
-          "threshold": null,
-          "damage": ""
-        },
-        "damage": {
-          "parts": [],
-          "versatile": ""
-        },
-        "formula": "",
-        "save": {
-          "ability": "",
-          "dc": null,
-          "scaling": "spell"
-        },
-        "type": {
-          "value": "",
-          "subtype": ""
-        },
-        "requirements": "Lightfoot",
-        "recharge": {
-          "value": null,
-          "charged": false
-        }
-      },
-      "sort": 0,
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.dnd5e.races.GWPjKFeIthBBeCFJ"
-        }
-      },
-      "img": "icons/magic/perception/silhouette-stealth-shadow.webp",
-      "effects": [],
-      "folder": null,
-      "ownership": {
-        "default": 0
-      },
-      "_stats": {
-        "systemId": null,
-        "systemVersion": null,
-        "coreVersion": null,
-        "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
-      },
-      "_key": "!actors.items!125qFnXvT9z0iOic.MEbwGBWDnCYWAcKu"
-    },
-    {
-      "_id": "1wrJ898tmYcUUj5C",
-      "name": "Halfling Nimbleness",
-      "type": "feat",
-      "system": {
-        "description": {
-          "value": "<p>You can move through the space of any creature that is of a size larger than yours.</p>",
-          "chat": "",
-          "unidentified": ""
-        },
-        "source": "SRD 5.1",
-        "activation": {
-          "type": "",
-          "cost": null,
-          "condition": ""
-        },
-        "duration": {
-          "value": "",
-          "units": ""
-        },
-        "cover": null,
-        "crewed": false,
-        "target": {
-          "value": null,
-          "width": null,
-          "units": "",
-          "type": ""
-        },
-        "range": {
-          "value": null,
-          "long": null,
-          "units": ""
-        },
-        "uses": {
-          "value": null,
-          "max": "",
-          "per": null,
-          "recovery": ""
-        },
-        "consume": {
-          "type": "",
-          "target": null,
-          "amount": null
-        },
-        "ability": "",
-        "actionType": "",
-        "attackBonus": "",
-        "chatFlavor": "",
-        "critical": {
-          "threshold": null,
-          "damage": ""
-        },
-        "damage": {
-          "parts": [],
-          "versatile": ""
-        },
-        "formula": "",
-        "save": {
-          "ability": "",
-          "dc": null,
-          "scaling": "spell"
-        },
-        "type": {
-          "value": "",
-          "subtype": ""
-        },
-        "requirements": "Halfling",
-        "recharge": {
-          "value": null,
-          "charged": false
-        }
-      },
-      "sort": 0,
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.dnd5e.races.PqxZgcJzp1VVgP8t"
-        }
-      },
-      "img": "icons/skills/movement/feet-winged-boots-brown.webp",
-      "effects": [],
-      "folder": null,
-      "ownership": {
-        "default": 0
-      },
-      "_stats": {
-        "systemId": null,
-        "systemVersion": null,
-        "coreVersion": null,
-        "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
-      },
-      "_key": "!actors.items!125qFnXvT9z0iOic.1wrJ898tmYcUUj5C"
-    },
-    {
-      "_id": "f2nWYA1kRgCTcTtR",
-      "name": "Lightfoot",
-      "type": "feat",
-      "system": {
-        "description": {
-          "value": "<div title=\"Page 5\">\n<div>\n<div>\n<p><em>As a lightfoot halfling, you can easily hide from notice, even using other people as cover. You're inclined to be affable and get along well with others. </em></p>\n<em> </em>\n<p><em>Lightfoots are more prone to wanderlust than other halflings, and often dwell alongside other races or take up a nomadic life. </em></p><p><em><strong>Ability Score Increase.</strong></em> Your Charisma score increases by 1.</p><p><strong><em>Naturally Stealthy.</em></strong> @Compendium[dnd5e.races.GWPjKFeIthBBeCFJ]{Naturally Stealthy} You can attempt to hide even when you are obscured only by a creature that is at least one size larger than you.</p>\n</div>\n</div>\n</div>",
-          "chat": "",
-          "unidentified": ""
-        },
-        "source": "SRD 5.1",
-        "activation": {
-          "type": "",
-          "cost": null,
-          "condition": ""
-        },
-        "duration": {
-          "value": "",
-          "units": ""
-        },
-        "cover": null,
-        "crewed": false,
-        "target": {
-          "value": null,
-          "width": null,
-          "units": "",
-          "type": ""
-        },
-        "range": {
-          "value": null,
-          "long": null,
-          "units": ""
-        },
-        "uses": {
-          "value": null,
-          "max": "",
-          "per": null,
-          "recovery": ""
-        },
-        "consume": {
-          "type": "",
-          "target": null,
-          "amount": null
-        },
-        "ability": null,
-        "actionType": "",
-        "attackBonus": "",
-        "chatFlavor": "",
-        "critical": {
-          "threshold": null,
-          "damage": ""
-        },
-        "damage": {
-          "parts": [],
-          "versatile": ""
-        },
-        "formula": "",
-        "save": {
-          "ability": "",
-          "dc": null,
-          "scaling": "spell"
-        },
-        "type": {
-          "value": "",
-          "subtype": ""
-        },
-        "requirements": "Halfling",
-        "recharge": {
-          "value": null,
-          "charged": false
-        }
-      },
-      "sort": 0,
-      "flags": {},
-      "img": "icons/magic/lightning/bolt-forked-teal.webp",
-      "effects": [],
-      "folder": null,
-      "ownership": {
-        "default": 0
-      },
-      "_stats": {
-        "systemId": null,
-        "systemVersion": null,
-        "coreVersion": null,
-        "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
-      },
-      "_key": "!actors.items!125qFnXvT9z0iOic.f2nWYA1kRgCTcTtR"
-    },
-    {
-      "_id": "KROifaAhldMdTVyB",
-      "name": "Halfling",
-      "type": "feat",
-      "system": {
-        "description": {
-          "value": "<div title=\"Page 4\">\n<div>\n<div>\n<p><em>Your halfling character has a number of traits in common with all other halflings. </em></p><p><em><strong>Ability Score Increase.</strong></em> Your Dexterity score increases by 2.</p><p><em><strong>Age.</strong></em> A halfling reaches adulthood at the age of 20 and generally lives into the middle of his or her second century.</p><p><em><strong>Alignment.</strong></em> Most halflings are lawful good. As a rule, they are good-­hearted and kind, hate to see others in pain, and have no tolerance for oppression. They are also very orderly and traditional, leaning heavily on the support of their community and the comfort of their old ways.</p><p><em><strong>Size.</strong></em> Halflings average about 3 feet tall and weigh about 40 pounds. Your size is Small.</p><p><em><strong>Speed. </strong></em>Your base walking speed is 25 feet.</p><p><em><strong>Lucky.</strong></em> @Compendium[dnd5e.races.LOMdcNAGWh5xpfm4]{Lucky} When you roll a 1 on the d20 for an attack roll, ability check, or saving throw, you can reroll the die and must use the new roll.</p><p><em><strong>Brave.</strong></em> @Compendium[dnd5e.races.7Yoo9hG0hfPSmBoC]{Brave} You have advantage on saving throws against being frightened.</p>\n</div>\n</div>\n</div>\n<div title=\"Page 5\">\n<div>\n<div>\n<p><em><strong>Halfling Nimbleness.</strong></em> @Compendium[dnd5e.races.PqxZgcJzp1VVgP8t]{Halfling Nimbleness} You can move through the space of any creature that is of a size larger than yours.</p><p><em><strong>Languages.</strong></em> You can speak, read, and write Common and Halfling. The Halfling language isn't secret, but halflings are loath to share it with others. They write very little, so they don't have a rich body of literature. Their oral tradition, however, is very strong. Almost all halflings speak Common to converse with the people in whose lands they dwell or through which they are traveling.</p>\n</div>\n</div>\n</div>",
-          "chat": "",
-          "unidentified": ""
-        },
-        "source": "SRD 5.1",
-        "activation": {
-          "type": "",
-          "cost": null,
-          "condition": ""
-        },
-        "duration": {
-          "value": "",
-          "units": ""
-        },
-        "cover": null,
-        "crewed": false,
-        "target": {
-          "value": null,
-          "width": null,
-          "units": "",
-          "type": ""
-        },
-        "range": {
-          "value": null,
-          "long": null,
-          "units": ""
-        },
-        "uses": {
-          "value": null,
-          "max": "",
-          "per": null,
-          "recovery": ""
-        },
-        "consume": {
-          "type": "",
-          "target": null,
-          "amount": null
-        },
-        "ability": null,
-        "actionType": "",
-        "attackBonus": "",
-        "chatFlavor": "",
-        "critical": {
-          "threshold": null,
-          "damage": ""
-        },
-        "damage": {
-          "parts": [],
-          "versatile": ""
-        },
-        "formula": "",
-        "save": {
-          "ability": "",
-          "dc": null,
-          "scaling": "spell"
-        },
-        "type": {
-          "value": "",
-          "subtype": ""
-        },
-        "requirements": "",
-        "recharge": {
-          "value": null,
-          "charged": false
-        }
-      },
-      "sort": 0,
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.dnd5e.races.GH2dNne2bt1NjcJk"
-        }
-      },
-      "img": "icons/magic/lightning/bolt-forked-large-teal.webp",
-      "effects": [],
-      "folder": null,
-      "ownership": {
-        "default": 0
-      },
-      "_stats": {
-        "systemId": null,
-        "systemVersion": null,
-        "coreVersion": null,
-        "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
-      },
-      "_key": "!actors.items!125qFnXvT9z0iOic.KROifaAhldMdTVyB"
-    },
-    {
       "name": "Priest",
       "type": "background",
       "system": {
@@ -2995,7 +2435,8 @@
                 "int": 0,
                 "wis": 0,
                 "cha": 0
-              }
+              },
+              "cap": 2
             },
             "value": {
               "type": "asi"
@@ -3016,7 +2457,8 @@
                 "int": 0,
                 "wis": 0,
                 "cha": 0
-              }
+              },
+              "cap": 2
             },
             "value": {
               "type": "asi"
@@ -3037,7 +2479,8 @@
                 "int": 0,
                 "wis": 0,
                 "cha": 0
-              }
+              },
+              "cap": 2
             },
             "value": {
               "type": "asi"
@@ -3058,7 +2501,8 @@
                 "int": 0,
                 "wis": 0,
                 "cha": 0
-              }
+              },
+              "cap": 2
             },
             "value": {
               "type": "asi"
@@ -3080,15 +2524,66 @@
                 "int": 0,
                 "wis": 0,
                 "cha": 0
-              }
+              },
+              "cap": 2
             },
             "value": {
               "type": "asi"
             },
             "level": 19,
             "title": ""
+          },
+          {
+            "type": "Trait",
+            "level": 1,
+            "configuration": {
+              "grants": [
+                "saves:str",
+                "saves:dex"
+              ],
+              "hint": "",
+              "mode": "default",
+              "allowReplacements": false,
+              "choices": []
+            },
+            "value": {
+              "chosen": [
+                "saves:str",
+                "saves:dex"
+              ]
+            },
+            "_id": "Kf0dFNxBiZdt7p3B"
+          },
+          {
+            "type": "Trait",
+            "level": 1,
+            "configuration": {
+              "choices": [
+                {
+                  "count": 2,
+                  "pool": [
+                    "skills:acr",
+                    "skills:ath",
+                    "skills:his",
+                    "skills:ins",
+                    "skills:rel",
+                    "skills:ste"
+                  ]
+                }
+              ],
+              "hint": "",
+              "mode": "default",
+              "allowReplacements": false,
+              "grants": []
+            },
+            "_id": "Yk7prVovILhemHlQ",
+            "value": {}
           }
         ],
+        "spellcasting": {
+          "progression": "none",
+          "ability": ""
+        },
         "saves": [
           "str",
           "dex"
@@ -3104,10 +2599,6 @@
             "ste"
           ],
           "value": []
-        },
-        "spellcasting": {
-          "progression": "none",
-          "ability": ""
         }
       },
       "effects": [],
@@ -3123,10 +2614,10 @@
       },
       "_stats": {
         "systemId": "dnd5e",
-        "systemVersion": "2.2.2",
+        "systemVersion": "2.4.0",
         "coreVersion": "10.303",
         "createdTime": 1661787234277,
-        "modifiedTime": 1691519134474,
+        "modifiedTime": 1699986694943,
         "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!125qFnXvT9z0iOic.ckabMZ0IHcAMt16f"
@@ -3240,18 +2731,18 @@
           "transfer": true,
           "flags": {},
           "tint": null,
-          "sort": 0,
-          "_key": "!actors.items.effects!125qFnXvT9z0iOic.lVsKpEajeU5R83a5.R5ro4AuNjcdWD56O"
+          "_key": "!actors.items.effects!125qFnXvT9z0iOic.lVsKpEajeU5R83a5.R5ro4AuNjcdWD56O",
+          "sort": 0
         }
       ],
       "folder": null,
       "sort": 0,
       "_stats": {
         "systemId": "dnd5e",
-        "systemVersion": "2.2.2",
+        "systemVersion": "2.4.0",
         "coreVersion": "10.303",
         "createdTime": 1661787234382,
-        "modifiedTime": 1691519134476,
+        "modifiedTime": 1699987416952,
         "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!125qFnXvT9z0iOic.lVsKpEajeU5R83a5"
@@ -3343,10 +2834,10 @@
       "sort": 0,
       "_stats": {
         "systemId": "dnd5e",
-        "systemVersion": "2.2.2",
+        "systemVersion": "2.4.0",
         "coreVersion": "10.303",
         "createdTime": 1661787234416,
-        "modifiedTime": 1691519134477,
+        "modifiedTime": 1699987416952,
         "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!125qFnXvT9z0iOic.rppGdpjLLaRF9F2G"
@@ -3482,6 +2973,605 @@
         "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!125qFnXvT9z0iOic.jVIh24qThOvMskfW"
+    },
+    {
+      "_id": "6JOg9xYjafGcdHnY",
+      "name": "Lightfoot Halfling",
+      "type": "race",
+      "img": "icons/equipment/feet/shoes-leather-simple-brown.webp",
+      "system": {
+        "description": {
+          "value": "<p>Your halfling character has a number of traits in common with all other halflings.</p><p><em><strong>Ability Score Increase.</strong></em> Your Dexterity score increases by 2.</p><p><em><strong>Age.</strong></em> A halfling reaches adulthood at the age of 20 and generally lives into the middle of his or her second century.</p><p><em><strong>Alignment.</strong></em> Most halflings are lawful good. As a rule, they are good-hearted and kind, hate to see others in pain, and have no tolerance for oppression. They are also very orderly and traditional, leaning heavily on the support of their community and the comfort of their old ways.</p><p><em><strong>Size.</strong></em> Halflings average about 3 feet tall and weigh about 40 pounds. Your size is Small.</p><p><em><strong>Speed.</strong></em> Your base walking speed is 25 feet.</p><p><em><strong>Lucky.</strong></em> When you roll a 1 on the d20 for an attack roll, ability check, or saving throw, you can reroll the die and must use the new roll.</p><p><em><strong>Brave.</strong></em> You have advantage on saving throws against being frightened.</p><p><em><strong>Halfling Nimbleness.</strong></em> You can move through the space of any creature that is of a size larger than yours.</p><p><em><strong>Languages.</strong></em> You can speak, read, and write Common and Halfling. The Halfling language isn't secret, but halflings are loath to share it with others. They write very little, so they don't have a rich body of literature. Their oral tradition, however, is very strong. Almost all halflings speak Common to converse with the people in whose lands they dwell or through which they are traveling.</p><h5>Lightfoot</h5><p>As a lightfoot halfling, you can easily hide from notice, even using other people as cover. You're inclined to be affable and get along well with others.</p><p>Lightfoots are more prone to wanderlust than other halflings, and often dwell alongside other races or take up a nomadic life.</p><p><em><strong>Ability Score Increase.</strong></em> Your Charisma score increases by 1.</p><p><em><strong>Naturally Stealthy.</strong></em> You can attempt to hide even when you are obscured only by a creature that is at least one size larger than you.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": {
+          "custom": "SRD 5.1",
+          "book": "",
+          "page": "",
+          "license": ""
+        },
+        "identifier": "lightfoot-halfling",
+        "advancement": [
+          {
+            "_id": "nInhIgkbzzJTdm8F",
+            "type": "ItemGrant",
+            "configuration": {
+              "items": [
+                "Compendium.dnd5e.races.LOMdcNAGWh5xpfm4",
+                "Compendium.dnd5e.races.7Yoo9hG0hfPSmBoC",
+                "Compendium.dnd5e.races.PqxZgcJzp1VVgP8t",
+                "Compendium.dnd5e.races.GWPjKFeIthBBeCFJ"
+              ],
+              "optional": false,
+              "spell": {
+                "ability": "",
+                "preparation": "",
+                "uses": {
+                  "max": "",
+                  "per": ""
+                }
+              }
+            },
+            "value": {
+              "added": {
+                "tUz8GlMnsZW70sFM": "Compendium.dnd5e.races.LOMdcNAGWh5xpfm4",
+                "CAVO88Jxjnm928MR": "Compendium.dnd5e.races.7Yoo9hG0hfPSmBoC",
+                "4Q1Mlm3NtMlhLMF9": "Compendium.dnd5e.races.PqxZgcJzp1VVgP8t",
+                "ddEW1gRmYuvAkrU2": "Compendium.dnd5e.races.GWPjKFeIthBBeCFJ"
+              }
+            },
+            "level": 0,
+            "title": ""
+          },
+          {
+            "_id": "Z9hvZFkWUNvowbQX",
+            "type": "AbilityScoreImprovement",
+            "configuration": {
+              "points": 0,
+              "fixed": {
+                "str": 0,
+                "dex": 2,
+                "con": 0,
+                "int": 0,
+                "wis": 0,
+                "cha": 1
+              },
+              "cap": 2
+            },
+            "value": {
+              "type": "asi",
+              "assignments": {
+                "dex": 2,
+                "cha": 1
+              }
+            },
+            "level": 0,
+            "title": ""
+          },
+          {
+            "_id": "hv2bcANK5jEJZaAb",
+            "type": "Size",
+            "configuration": {
+              "hint": "Halflings average about 3 feet tall and weigh about 40 pounds. Your size is Small.",
+              "sizes": [
+                "sm"
+              ]
+            },
+            "value": {
+              "size": "sm"
+            },
+            "level": 1,
+            "title": ""
+          },
+          {
+            "_id": "nGwMjsfNU6CXHk3A",
+            "type": "Trait",
+            "configuration": {
+              "hint": "",
+              "mode": "default",
+              "allowReplacements": false,
+              "grants": [
+                "languages:standard:common",
+                "languages:standard:halfling"
+              ],
+              "choices": []
+            },
+            "level": 0,
+            "title": "",
+            "value": {
+              "chosen": [
+                "languages:standard:common",
+                "languages:standard:halfling"
+              ]
+            }
+          }
+        ],
+        "movement": {
+          "walk": 25,
+          "burrow": 0,
+          "climb": 0,
+          "fly": 0,
+          "swim": 0,
+          "units": "ft",
+          "hover": false
+        },
+        "type": {
+          "subtype": "halfling",
+          "value": "humanoid",
+          "custom": ""
+        },
+        "senses": {
+          "darkvision": 0,
+          "blindsight": 0,
+          "tremorsense": 0,
+          "truesight": 0,
+          "units": "ft",
+          "special": ""
+        }
+      },
+      "effects": [],
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.races.ZgYBjYYfiUstQD6f"
+        }
+      },
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.4.0",
+        "coreVersion": "10.303",
+        "createdTime": 1677178323356,
+        "modifiedTime": 1699986706271,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "sort": 0,
+      "folder": null,
+      "_key": "!actors.items!125qFnXvT9z0iOic.6JOg9xYjafGcdHnY"
+    },
+    {
+      "_id": "tUz8GlMnsZW70sFM",
+      "name": "Lucky",
+      "ownership": {
+        "default": 0
+      },
+      "type": "feat",
+      "system": {
+        "description": {
+          "value": "<p>When you roll a 1 on the d20 for an attack roll, ability check, or saving throw, you can reroll the die and must use the new roll.</p><section id=\"secret-S04TPyvUh05Dz0Ng\" class=\"secret foundry-note\"><p><strong>Foundry Note</strong></p><p>This property can be enabled on your character sheet in the Special Traits configuration on the Attributes tab.</p></section>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": {
+          "custom": "SRD 5.1",
+          "book": "",
+          "page": "",
+          "license": ""
+        },
+        "activation": {
+          "type": "",
+          "cost": null,
+          "condition": ""
+        },
+        "duration": {
+          "value": "",
+          "units": ""
+        },
+        "cover": null,
+        "crewed": false,
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": "",
+          "prompt": true
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": ""
+        },
+        "uses": {
+          "value": null,
+          "max": "",
+          "per": null,
+          "recovery": "",
+          "prompt": true
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null,
+          "scale": false
+        },
+        "ability": null,
+        "actionType": "",
+        "attackBonus": "",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "type": {
+          "value": "race",
+          "subtype": ""
+        },
+        "requirements": "Halfling",
+        "recharge": {
+          "value": null,
+          "charged": false
+        }
+      },
+      "flags": {
+        "dnd5e": {
+          "sourceId": "Compendium.dnd5e.races.LOMdcNAGWh5xpfm4",
+          "advancementOrigin": "6JOg9xYjafGcdHnY.nInhIgkbzzJTdm8F"
+        }
+      },
+      "img": "icons/sundries/gaming/dice-runed-brown.webp",
+      "effects": [
+        {
+          "_id": "3ZXTUDl62zDpvpai",
+          "changes": [
+            {
+              "key": "flags.dnd5e.halflingLucky",
+              "mode": 5,
+              "value": "true",
+              "priority": null
+            }
+          ],
+          "disabled": false,
+          "duration": {
+            "startTime": null,
+            "seconds": null,
+            "combat": null,
+            "rounds": null,
+            "turns": null,
+            "startRound": null,
+            "startTurn": null
+          },
+          "icon": "icons/sundries/gaming/dice-runed-brown.webp",
+          "label": "Lucky",
+          "origin": "Item.LOMdcNAGWh5xpfm4",
+          "transfer": true,
+          "flags": {},
+          "tint": null,
+          "_key": "!actors.items.effects!125qFnXvT9z0iOic.tUz8GlMnsZW70sFM.3ZXTUDl62zDpvpai",
+          "sort": 0
+        }
+      ],
+      "folder": null,
+      "sort": 0,
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.4.0",
+        "coreVersion": "10.303",
+        "createdTime": 1661787234467,
+        "modifiedTime": 1699987416952,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!actors.items!125qFnXvT9z0iOic.tUz8GlMnsZW70sFM"
+    },
+    {
+      "_id": "CAVO88Jxjnm928MR",
+      "name": "Brave",
+      "ownership": {
+        "default": 0
+      },
+      "type": "feat",
+      "system": {
+        "description": {
+          "value": "<p>You have advantage on saving throws against being frightened.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": {
+          "custom": "SRD 5.1",
+          "book": "",
+          "page": "",
+          "license": ""
+        },
+        "activation": {
+          "type": "",
+          "cost": null,
+          "condition": ""
+        },
+        "duration": {
+          "value": "",
+          "units": ""
+        },
+        "cover": null,
+        "crewed": false,
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": "",
+          "prompt": true
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": ""
+        },
+        "uses": {
+          "value": null,
+          "max": "",
+          "per": null,
+          "recovery": "",
+          "prompt": true
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null,
+          "scale": false
+        },
+        "ability": "",
+        "actionType": "",
+        "attackBonus": "",
+        "chatFlavor": "You have advantage on saving throws against being frightened.",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "type": {
+          "value": "race",
+          "subtype": ""
+        },
+        "requirements": "Halfling",
+        "recharge": {
+          "value": null,
+          "charged": false
+        }
+      },
+      "flags": {
+        "dnd5e": {
+          "sourceId": "Compendium.dnd5e.races.7Yoo9hG0hfPSmBoC",
+          "advancementOrigin": "6JOg9xYjafGcdHnY.nInhIgkbzzJTdm8F"
+        }
+      },
+      "img": "icons/skills/melee/unarmed-punch-fist.webp",
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.4.0",
+        "coreVersion": "10.303",
+        "createdTime": 1661787234462,
+        "modifiedTime": 1699987417890,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!actors.items!125qFnXvT9z0iOic.CAVO88Jxjnm928MR"
+    },
+    {
+      "_id": "4Q1Mlm3NtMlhLMF9",
+      "name": "Halfling Nimbleness",
+      "ownership": {
+        "default": 0
+      },
+      "type": "feat",
+      "system": {
+        "description": {
+          "value": "<p>You can move through the space of any creature that is of a size larger than yours.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": {
+          "custom": "SRD 5.1",
+          "book": "",
+          "page": "",
+          "license": ""
+        },
+        "activation": {
+          "type": "",
+          "cost": null,
+          "condition": ""
+        },
+        "duration": {
+          "value": "",
+          "units": ""
+        },
+        "cover": null,
+        "crewed": false,
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": "",
+          "prompt": true
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": ""
+        },
+        "uses": {
+          "value": null,
+          "max": "",
+          "per": null,
+          "recovery": "",
+          "prompt": true
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null,
+          "scale": false
+        },
+        "ability": "",
+        "actionType": "",
+        "attackBonus": "",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "type": {
+          "value": "race",
+          "subtype": ""
+        },
+        "requirements": "Halfling",
+        "recharge": {
+          "value": null,
+          "charged": false
+        }
+      },
+      "flags": {
+        "dnd5e": {
+          "sourceId": "Compendium.dnd5e.races.PqxZgcJzp1VVgP8t",
+          "advancementOrigin": "6JOg9xYjafGcdHnY.nInhIgkbzzJTdm8F"
+        }
+      },
+      "img": "icons/skills/movement/feet-winged-boots-brown.webp",
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.4.0",
+        "coreVersion": "10.303",
+        "createdTime": 1661787234468,
+        "modifiedTime": 1699987418714,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!actors.items!125qFnXvT9z0iOic.4Q1Mlm3NtMlhLMF9"
+    },
+    {
+      "_id": "ddEW1gRmYuvAkrU2",
+      "name": "Naturally Stealthy",
+      "ownership": {
+        "default": 0
+      },
+      "type": "feat",
+      "system": {
+        "description": {
+          "value": "<p>You can attempt to hide even when you are obscured only by a creature that is at least one size larger than you.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": {
+          "custom": "SRD 5.1",
+          "book": "",
+          "page": "",
+          "license": ""
+        },
+        "activation": {
+          "type": "",
+          "cost": null,
+          "condition": ""
+        },
+        "duration": {
+          "value": "",
+          "units": ""
+        },
+        "cover": null,
+        "crewed": false,
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": "",
+          "prompt": true
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": ""
+        },
+        "uses": {
+          "value": null,
+          "max": "",
+          "per": null,
+          "recovery": "",
+          "prompt": true
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null,
+          "scale": false
+        },
+        "ability": "",
+        "actionType": "",
+        "attackBonus": "",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "type": {
+          "value": "race",
+          "subtype": ""
+        },
+        "requirements": "Lightfoot Halfling",
+        "recharge": {
+          "value": null,
+          "charged": false
+        }
+      },
+      "flags": {
+        "dnd5e": {
+          "sourceId": "Compendium.dnd5e.races.GWPjKFeIthBBeCFJ",
+          "advancementOrigin": "6JOg9xYjafGcdHnY.nInhIgkbzzJTdm8F"
+        }
+      },
+      "img": "icons/magic/perception/silhouette-stealth-shadow.webp",
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.4.0",
+        "coreVersion": "10.303",
+        "createdTime": 1661787234465,
+        "modifiedTime": 1699987419669,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!actors.items!125qFnXvT9z0iOic.ddEW1gRmYuvAkrU2"
     }
   ],
   "effects": [
@@ -3511,8 +3601,37 @@
       "transfer": false,
       "flags": {},
       "tint": null,
-      "sort": 0,
-      "_key": "!actors.effects!125qFnXvT9z0iOic.R5ro4AuNjcdWD56O"
+      "_key": "!actors.effects!125qFnXvT9z0iOic.R5ro4AuNjcdWD56O",
+      "sort": 0
+    },
+    {
+      "_id": "3ZXTUDl62zDpvpai",
+      "changes": [
+        {
+          "key": "flags.dnd5e.halflingLucky",
+          "mode": 5,
+          "value": "true",
+          "priority": null
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": 0,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "icon": "icons/sundries/gaming/dice-runed-brown.webp",
+      "label": "Lucky",
+      "origin": "Compendium.dnd5e.heroes.125qFnXvT9z0iOic.Item.tUz8GlMnsZW70sFM",
+      "transfer": false,
+      "flags": {},
+      "tint": null,
+      "_key": "!actors.effects!125qFnXvT9z0iOic.3ZXTUDl62zDpvpai",
+      "sort": 0
     }
   ],
   "folder": null,
@@ -3528,10 +3647,10 @@
   "_id": "125qFnXvT9z0iOic",
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.2.2",
+    "systemVersion": "2.4.0",
     "coreVersion": "10.303",
     "createdTime": 1661787232144,
-    "modifiedTime": 1691519134517,
+    "modifiedTime": 1699987419669,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!125qFnXvT9z0iOic"

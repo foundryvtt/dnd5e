@@ -81,23 +81,23 @@
         "bonus": "0"
       },
       "movement": {
-        "burrow": 0,
-        "climb": 0,
-        "fly": 0,
-        "swim": 0,
-        "walk": 25,
-        "units": "ft",
+        "burrow": null,
+        "climb": null,
+        "fly": null,
+        "swim": null,
+        "walk": null,
+        "units": null,
         "hover": false
       },
       "attunement": {
         "max": 3
       },
       "senses": {
-        "darkvision": 60,
-        "blindsight": 0,
-        "tremorsense": 0,
-        "truesight": 0,
-        "units": "ft",
+        "darkvision": null,
+        "blindsight": null,
+        "tremorsense": null,
+        "truesight": null,
+        "units": null,
         "special": ""
       },
       "spellcasting": "int",
@@ -114,7 +114,7 @@
         "public": ""
       },
       "alignment": "True neutral",
-      "race": "Hill Dwarf",
+      "race": "JtKfV5srBn6zBNVt",
       "background": "",
       "originalClass": "POlGoMp1xwT02K3S",
       "xp": {
@@ -151,11 +151,11 @@
       },
       "languages": {
         "value": [
-          "common",
-          "dwarvish",
           "elvish",
           "halfling",
-          "cant"
+          "cant",
+          "common",
+          "dwarvish"
         ],
         "custom": ""
       },
@@ -167,7 +167,9 @@
           "handcrossbow",
           "longsword",
           "rapier",
-          "shortsword"
+          "shortsword",
+          "handaxe",
+          "lighthammer"
         ],
         "custom": ""
       },
@@ -337,7 +339,15 @@
         }
       }
     },
-    "tools": {},
+    "tools": {
+      "mason": {
+        "value": 1,
+        "ability": "int",
+        "bonuses": {
+          "check": ""
+        }
+      }
+    },
     "spells": {
       "spell1": {
         "value": 0,
@@ -2265,382 +2275,6 @@
       "_key": "!actors.items!bzlxBO5km3zCQA8G.OpfHMuWyqcO7LmSt"
     },
     {
-      "_id": "VlHHit2a50YCKKTm",
-      "name": "Dwarven Resilience",
-      "type": "feat",
-      "system": {
-        "description": {
-          "value": "<p>You have advantage on saving throws against poison, and you have resistance against poison damage.</p>",
-          "chat": "",
-          "unidentified": ""
-        },
-        "source": "SRD 5.1",
-        "activation": {
-          "type": "",
-          "cost": null,
-          "condition": ""
-        },
-        "duration": {
-          "value": "",
-          "units": ""
-        },
-        "cover": null,
-        "crewed": false,
-        "target": {
-          "value": null,
-          "width": null,
-          "units": "",
-          "type": ""
-        },
-        "range": {
-          "value": null,
-          "long": null,
-          "units": ""
-        },
-        "uses": {
-          "value": null,
-          "max": "",
-          "per": null,
-          "recovery": ""
-        },
-        "consume": {
-          "type": "",
-          "target": null,
-          "amount": null
-        },
-        "ability": "",
-        "actionType": "",
-        "attackBonus": "",
-        "chatFlavor": "",
-        "critical": {
-          "threshold": null,
-          "damage": ""
-        },
-        "damage": {
-          "parts": [],
-          "versatile": ""
-        },
-        "formula": "",
-        "save": {
-          "ability": "",
-          "dc": null,
-          "scaling": "spell"
-        },
-        "type": {
-          "value": "",
-          "subtype": ""
-        },
-        "requirements": "Dwarf",
-        "recharge": {
-          "value": null,
-          "charged": false
-        }
-      },
-      "sort": 0,
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.dnd5e.races.ufysTkqet2Ctmtyi"
-        }
-      },
-      "img": "icons/creatures/abilities/stinger-poison-green.webp",
-      "effects": [],
-      "folder": null,
-      "ownership": {
-        "default": 0
-      },
-      "_stats": {
-        "systemId": null,
-        "systemVersion": null,
-        "coreVersion": null,
-        "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
-      },
-      "_key": "!actors.items!bzlxBO5km3zCQA8G.VlHHit2a50YCKKTm"
-    },
-    {
-      "_id": "0Db7KX5wxDYwiem3",
-      "name": "Stonecunning",
-      "type": "feat",
-      "system": {
-        "description": {
-          "value": "<p>Whenever you make an Intelligence (History) check related to the origin of stonework, you are considered proficient in the History skill and add double your proficiency bonus to the check, instead of your normal proficiency bonus.</p>",
-          "chat": "",
-          "unidentified": ""
-        },
-        "source": "SRD 5.1",
-        "activation": {
-          "type": "",
-          "cost": null,
-          "condition": ""
-        },
-        "duration": {
-          "value": "",
-          "units": ""
-        },
-        "cover": null,
-        "crewed": false,
-        "target": {
-          "value": null,
-          "width": null,
-          "units": "",
-          "type": ""
-        },
-        "range": {
-          "value": null,
-          "long": null,
-          "units": ""
-        },
-        "uses": {
-          "value": null,
-          "max": "",
-          "per": null,
-          "recovery": ""
-        },
-        "consume": {
-          "type": "",
-          "target": null,
-          "amount": null
-        },
-        "ability": "",
-        "actionType": "",
-        "attackBonus": "",
-        "chatFlavor": "",
-        "critical": {
-          "threshold": null,
-          "damage": ""
-        },
-        "damage": {
-          "parts": [],
-          "versatile": ""
-        },
-        "formula": "",
-        "save": {
-          "ability": "",
-          "dc": null,
-          "scaling": "spell"
-        },
-        "type": {
-          "value": "",
-          "subtype": ""
-        },
-        "requirements": "Dwarf",
-        "recharge": {
-          "value": null,
-          "charged": false
-        }
-      },
-      "sort": 0,
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.dnd5e.races.mQPZDRbUhgYTbXKa"
-        }
-      },
-      "img": "icons/commodities/tech/cog-bronze.webp",
-      "effects": [],
-      "folder": null,
-      "ownership": {
-        "default": 0
-      },
-      "_stats": {
-        "systemId": null,
-        "systemVersion": null,
-        "coreVersion": null,
-        "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
-      },
-      "_key": "!actors.items!bzlxBO5km3zCQA8G.0Db7KX5wxDYwiem3"
-    },
-    {
-      "_id": "loauVqu6iAKv70b7",
-      "name": "Hill Dwarf",
-      "type": "feat",
-      "system": {
-        "description": {
-          "value": "<div title=\"Page 4\">\n<div>\n<div>\n<p><em>As a hill dwarf, you have keen senses, deep intuition, and remarkable resilience. </em></p><p><em><strong>Ability Score Increase.</strong></em> Your Wisdom score increases by 1.</p><p><em><strong>Dwarven Toughness.</strong></em> Your hit point maximum increases by 1, and it increases by 1 every time you gain a level.</p>\n</div>\n</div>\n</div>",
-          "chat": "",
-          "unidentified": ""
-        },
-        "source": "SRD 5.1",
-        "activation": {
-          "type": "",
-          "cost": null,
-          "condition": ""
-        },
-        "duration": {
-          "value": "",
-          "units": ""
-        },
-        "cover": null,
-        "crewed": false,
-        "target": {
-          "value": null,
-          "width": null,
-          "units": "",
-          "type": ""
-        },
-        "range": {
-          "value": null,
-          "long": null,
-          "units": ""
-        },
-        "uses": {
-          "value": null,
-          "max": "",
-          "per": null,
-          "recovery": ""
-        },
-        "consume": {
-          "type": "",
-          "target": null,
-          "amount": null
-        },
-        "ability": null,
-        "actionType": "",
-        "attackBonus": "",
-        "chatFlavor": "",
-        "critical": {
-          "threshold": null,
-          "damage": ""
-        },
-        "damage": {
-          "parts": [],
-          "versatile": ""
-        },
-        "formula": "",
-        "save": {
-          "ability": "",
-          "dc": null,
-          "scaling": "spell"
-        },
-        "type": {
-          "value": "",
-          "subtype": ""
-        },
-        "requirements": "Dwarf",
-        "recharge": {
-          "value": null,
-          "charged": false
-        }
-      },
-      "sort": 0,
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.dnd5e.races.UQiRQUTBcsz8gZU1"
-        }
-      },
-      "img": "icons/magic/defensive/shield-barrier-glowing-triangle-magenta.webp",
-      "effects": [],
-      "folder": null,
-      "ownership": {
-        "default": 0
-      },
-      "_stats": {
-        "systemId": null,
-        "systemVersion": null,
-        "coreVersion": null,
-        "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
-      },
-      "_key": "!actors.items!bzlxBO5km3zCQA8G.loauVqu6iAKv70b7"
-    },
-    {
-      "_id": "HXOtd9EqzXbB3e2c",
-      "name": "Dwarf",
-      "type": "feat",
-      "system": {
-        "description": {
-          "value": "<div title=\"Page 3\">\n<p><em>Your dwarf character has an assortment of inborn abilities, part and parcel of dwarven nature.</em></p><p><em><strong>Ability Score Increase.</strong></em> Your Constitution score increases by 2.</p><p><em><strong>Age.</strong></em> Dwarves mature at the same rate as humans, but they're considered young until they reach the age of 50. On average, they live about 350 years.</p><p><em><strong>Alignment.</strong></em> Most dwarves are lawful, believing firmly in the benefits of a well-­ordered society. They tend toward good as well, with a strong sense of fair play and a belief that everyone deserves to share in the benefits of a just order.</p><p><em><strong>Size. </strong></em>Dwarves stand between 4 and 5 feet tall and average about 150 pounds. Your size is Medium.</p><p><em><strong>Speed. </strong></em>Your base walking speed is 25 feet. Your speed is not reduced by wearing heavy armor.</p><p><em><strong>Darkvision.</strong></em> Accustomed to life underground, you have superior vision in dark and dim conditions. You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can't discern color in darkness, only shades of gray.</p><p><em><strong>Dwarven Resilience.</strong></em> @Compendium[dnd5e.races.ufysTkqet2Ctmtyi]{Dwarven Resilience} You have advantage on saving throws against poison, and you have resistance against poison damage.</p><p><em><strong>Dwarven Combat Training.</strong></em> You have proficiency with the battleaxe, handaxe, light hammer, and warhammer.</p><p><em><strong>Tool Proficiency.</strong></em> You gain proficiency with the artisan's tools of your choice: smith's tools, brewer's supplies, or mason's tools.</p>\n</div>\n<div>\n<div>\n<p><em><strong>Stonecunning.</strong></em> @Compendium[dnd5e.races.mQPZDRbUhgYTbXKa]{Stonecunning} Whenever you make an Intelligence (History) check related to the origin of stonework, you are considered proficient in the History skill and add double your proficiency bonus to the check, instead of your normal proficiency bonus.</p>\n</div>\n</div>\n<div>\n<div>\n<p><em><strong>Languages.</strong></em> You can speak, read, and write Common and Dwarvish. Dwarvish is full of hard consonants and guttural sounds, and those characteristics spill over into whatever other language a dwarf might speak.</p>\n</div>\n</div>\n<div title=\"Page 3\">\n<div>\n<div>\n<div class=\"page\" title=\"Page 3\"> </div>\n</div>\n</div>\n</div>",
-          "chat": "",
-          "unidentified": ""
-        },
-        "source": "SRD 5.1",
-        "activation": {
-          "type": "",
-          "cost": null,
-          "condition": ""
-        },
-        "duration": {
-          "value": "",
-          "units": ""
-        },
-        "cover": null,
-        "crewed": false,
-        "target": {
-          "value": null,
-          "width": null,
-          "units": "",
-          "type": ""
-        },
-        "range": {
-          "value": null,
-          "long": null,
-          "units": ""
-        },
-        "uses": {
-          "value": null,
-          "max": "",
-          "per": null,
-          "recovery": ""
-        },
-        "consume": {
-          "type": "",
-          "target": null,
-          "amount": null
-        },
-        "ability": null,
-        "actionType": "",
-        "attackBonus": "",
-        "chatFlavor": "",
-        "critical": {
-          "threshold": null,
-          "damage": ""
-        },
-        "damage": {
-          "parts": [],
-          "versatile": ""
-        },
-        "formula": "",
-        "save": {
-          "ability": "",
-          "dc": null,
-          "scaling": "spell"
-        },
-        "type": {
-          "value": "",
-          "subtype": ""
-        },
-        "requirements": "",
-        "recharge": {
-          "value": null,
-          "charged": false
-        }
-      },
-      "sort": 0,
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.dnd5e.races.6N31WSez2szqQcIQ"
-        }
-      },
-      "img": "icons/magic/defensive/shield-barrier-glowing-triangle-teal-purple.webp",
-      "effects": [],
-      "folder": null,
-      "ownership": {
-        "default": 0
-      },
-      "_stats": {
-        "systemId": null,
-        "systemVersion": null,
-        "coreVersion": null,
-        "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
-      },
-      "_key": "!actors.items!bzlxBO5km3zCQA8G.HXOtd9EqzXbB3e2c"
-    },
-    {
       "name": "Bureaucrat",
       "type": "background",
       "system": {
@@ -2993,7 +2627,8 @@
                 "int": 0,
                 "wis": 0,
                 "cha": 0
-              }
+              },
+              "cap": 2
             },
             "value": {
               "type": "asi"
@@ -3014,7 +2649,8 @@
                 "int": 0,
                 "wis": 0,
                 "cha": 0
-              }
+              },
+              "cap": 2
             },
             "value": {
               "type": "asi"
@@ -3035,7 +2671,8 @@
                 "int": 0,
                 "wis": 0,
                 "cha": 0
-              }
+              },
+              "cap": 2
             },
             "value": {
               "type": "asi"
@@ -3056,7 +2693,8 @@
                 "int": 0,
                 "wis": 0,
                 "cha": 0
-              }
+              },
+              "cap": 2
             },
             "value": {
               "type": "asi"
@@ -3078,7 +2716,8 @@
                 "int": 0,
                 "wis": 0,
                 "cha": 0
-              }
+              },
+              "cap": 2
             },
             "value": {
               "type": "asi"
@@ -3098,15 +2737,71 @@
                 "int": 0,
                 "wis": 0,
                 "cha": 0
-              }
+              },
+              "cap": 2
             },
             "value": {
               "type": "asi"
             },
             "level": 10,
             "title": ""
+          },
+          {
+            "type": "Trait",
+            "level": 1,
+            "configuration": {
+              "grants": [
+                "saves:dex",
+                "saves:int"
+              ],
+              "hint": "",
+              "mode": "default",
+              "allowReplacements": false,
+              "choices": []
+            },
+            "value": {
+              "chosen": [
+                "saves:dex",
+                "saves:int"
+              ]
+            },
+            "_id": "mKRrIkgWDVEViJlV"
+          },
+          {
+            "type": "Trait",
+            "level": 1,
+            "configuration": {
+              "choices": [
+                {
+                  "count": 4,
+                  "pool": [
+                    "skills:acr",
+                    "skills:ath",
+                    "skills:dec",
+                    "skills:ins",
+                    "skills:itm",
+                    "skills:inv",
+                    "skills:per",
+                    "skills:prf",
+                    "skills:prc",
+                    "skills:slt",
+                    "skills:ste"
+                  ]
+                }
+              ],
+              "hint": "",
+              "mode": "default",
+              "allowReplacements": false,
+              "grants": []
+            },
+            "_id": "BfcOMTbDy1JnEerR",
+            "value": {}
           }
         ],
+        "spellcasting": {
+          "progression": "none",
+          "ability": ""
+        },
         "saves": [
           "dex",
           "int"
@@ -3127,10 +2822,6 @@
             "ste"
           ],
           "value": []
-        },
-        "spellcasting": {
-          "progression": "none",
-          "ability": ""
         }
       },
       "effects": [],
@@ -3146,10 +2837,10 @@
       },
       "_stats": {
         "systemId": "dnd5e",
-        "systemVersion": "2.2.2",
+        "systemVersion": "2.4.0",
         "coreVersion": "10.303",
         "createdTime": 1661787234284,
-        "modifiedTime": 1691519191232,
+        "modifiedTime": 1699985978335,
         "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!bzlxBO5km3zCQA8G.POlGoMp1xwT02K3S"
@@ -3241,10 +2932,10 @@
       "sort": 0,
       "_stats": {
         "systemId": "dnd5e",
-        "systemVersion": "2.2.2",
+        "systemVersion": "2.4.0",
         "coreVersion": "10.303",
         "createdTime": 1661787234328,
-        "modifiedTime": 1691519191233,
+        "modifiedTime": 1699987533792,
         "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!bzlxBO5km3zCQA8G.GcRC4ZItJPqsIrsm"
@@ -3341,10 +3032,10 @@
       "sort": 0,
       "_stats": {
         "systemId": "dnd5e",
-        "systemVersion": "2.2.2",
+        "systemVersion": "2.4.0",
         "coreVersion": "10.303",
         "createdTime": 1661787234348,
-        "modifiedTime": 1691519191234,
+        "modifiedTime": 1699987533792,
         "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!bzlxBO5km3zCQA8G.vRhjcnnlifZYB4dy"
@@ -3458,21 +3149,483 @@
           "transfer": true,
           "flags": {},
           "tint": null,
-          "sort": 0,
-          "_key": "!actors.items.effects!bzlxBO5km3zCQA8G.eHh5dHiq9wss2Vq0.VN7GnGzVwmBM7YCU"
+          "_key": "!actors.items.effects!bzlxBO5km3zCQA8G.eHh5dHiq9wss2Vq0.VN7GnGzVwmBM7YCU",
+          "sort": 0
         }
       ],
       "folder": null,
       "sort": 0,
       "_stats": {
         "systemId": "dnd5e",
-        "systemVersion": "2.2.2",
+        "systemVersion": "2.4.0",
         "coreVersion": "10.303",
         "createdTime": 1661787234423,
-        "modifiedTime": 1691519191235,
+        "modifiedTime": 1699987533792,
         "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!bzlxBO5km3zCQA8G.eHh5dHiq9wss2Vq0"
+    },
+    {
+      "_id": "JtKfV5srBn6zBNVt",
+      "name": "Hill Dwarf",
+      "type": "race",
+      "img": "icons/environment/wilderness/cave-entrance-rocky.webp",
+      "system": {
+        "description": {
+          "value": "<p><em>Your dwarf character has an assortment of inborn abilities, part and parcel of dwarven nature.</em></p><p><strong>Ability Score Increase.</strong> Your Constitution score increases by 2.</p><p><strong>Age.</strong> Dwarves mature at the same rate as humans, but they're considered young until they reach the age of 50. On average, they live about 350 years.</p><p><strong>Alignment.</strong> Most dwarves are lawful, believing firmly in the benefits of a well-ordered society. They tend toward good as well, with a strong sense of fair play and a belief that everyone deserves to share in the benefits of a just order.</p><p><strong>Size.</strong> Dwarves stand between 4 and 5 feet tall and average about 150 pounds. Your size is Medium.</p><p><strong>Speed.</strong> Your base walking speed is 25 feet. Your speed is not reduced by wearing heavy armor.</p><p><strong>Darkvision.</strong> Accustomed to life underground, you have superior vision in dark and dim conditions. You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can't discern color in darkness, only shades of gray.</p><p><strong>Dwarven Resilience.</strong> You have advantage on saving throws against poison, and you have resistance against poison damage.</p><p><strong>Dwarven Combat Training.</strong> You have proficiency with the battleaxe, handaxe, light hammer, and warhammer.</p><p><strong>Tool Proficiency.</strong> You gain proficiency with the artisan's tools of your choice: smith's tools, brewer's supplies, or mason's tools.</p><p><strong>Stonecunning.</strong> Whenever you make an Intelligence (History) check related to the origin of stonework, you are considered proficient in the History skill and add double your proficiency bonus to the check, instead of your normal proficiency bonus.</p><p><strong>Languages.</strong> You can speak, read, and write Common and Dwarvish. Dwarvish is full of hard consonants and guttural sounds, and those characteristics spill over into whatever other language a dwarf might speak.</p><h5>Hill Dwarf</h5><p>As a hill dwarf, you have keen senses, deep intuition, and remarkable resilience.</p><p><strong>Ability Score Increase.</strong> Your Wisdom score increases by 1.</p><p><strong>Dwarven Toughness.</strong> Your hit point maximum increases by 1, and it increases by 1 every time you gain a level.</p><section class=\"secret\" id=\"secret-bkbaaEWqAGbU8ZgK\"><p><strong>Foundry Note</strong></p><p>Dwarven Toughness should be configured by adding 1 to the \"Per Level\" bonus in HP configuration on your character sheet (accessible using the cog next to your character's hit points).</p></section>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": {
+          "custom": "SRD 5.1",
+          "book": "",
+          "page": "",
+          "license": ""
+        },
+        "identifier": "hill-dwarf",
+        "advancement": [
+          {
+            "_id": "tNfLTuoHfvAxg2FC",
+            "type": "ItemGrant",
+            "configuration": {
+              "items": [
+                "Compendium.dnd5e.races.ufysTkqet2Ctmtyi",
+                "Compendium.dnd5e.races.mQPZDRbUhgYTbXKa"
+              ],
+              "optional": false,
+              "spell": {
+                "ability": "",
+                "preparation": "",
+                "uses": {
+                  "max": "",
+                  "per": ""
+                }
+              }
+            },
+            "value": {
+              "added": {
+                "yeAdyhHhZGgcb7if": "Compendium.dnd5e.races.ufysTkqet2Ctmtyi",
+                "VtJK5sQ1pHMMWGQ4": "Compendium.dnd5e.races.mQPZDRbUhgYTbXKa"
+              }
+            },
+            "level": 0,
+            "title": ""
+          },
+          {
+            "_id": "Z9hvZFkWUNvowbQX",
+            "type": "AbilityScoreImprovement",
+            "configuration": {
+              "points": 0,
+              "fixed": {
+                "str": 0,
+                "dex": 0,
+                "con": 2,
+                "int": 0,
+                "wis": 1,
+                "cha": 0
+              },
+              "cap": 2
+            },
+            "value": {
+              "type": "asi",
+              "assignments": {
+                "con": 2,
+                "wis": 1
+              }
+            },
+            "level": 0,
+            "title": ""
+          },
+          {
+            "_id": "kdMPoRp3j1uOHQom",
+            "type": "Size",
+            "configuration": {
+              "hint": "Dwarves stand between 4 and 5 feet tall and average about 150 pounds. Your size is Medium.",
+              "sizes": [
+                "med"
+              ]
+            },
+            "value": {
+              "size": "med"
+            },
+            "level": 1,
+            "title": ""
+          },
+          {
+            "_id": "rmcKuRQ2Laloq1xp",
+            "type": "Trait",
+            "configuration": {
+              "hint": "",
+              "mode": "default",
+              "allowReplacements": false,
+              "grants": [
+                "languages:standard:common",
+                "languages:standard:dwarvish"
+              ],
+              "choices": []
+            },
+            "level": 0,
+            "title": "",
+            "value": {
+              "chosen": [
+                "languages:standard:common",
+                "languages:standard:dwarvish"
+              ]
+            }
+          },
+          {
+            "_id": "5zWGcz9uAerx3Dh5",
+            "type": "Trait",
+            "configuration": {
+              "hint": "",
+              "mode": "default",
+              "allowReplacements": false,
+              "grants": [
+                "dr:poison"
+              ],
+              "choices": []
+            },
+            "level": 0,
+            "title": "Dwarven Resilience",
+            "value": {
+              "chosen": [
+                "dr:poison"
+              ]
+            }
+          },
+          {
+            "_id": "J0UGmCyMy6thWDeU",
+            "type": "Trait",
+            "configuration": {
+              "hint": "",
+              "mode": "default",
+              "allowReplacements": false,
+              "grants": [
+                "weapon:sim:handaxe",
+                "weapon:sim:lighthammer",
+                "weapon:mar:battleaxe",
+                "weapon:mar:warhammer"
+              ],
+              "choices": []
+            },
+            "level": 0,
+            "title": "Dwarven Combat Training",
+            "value": {
+              "chosen": [
+                "weapon:sim:handaxe",
+                "weapon:sim:lighthammer",
+                "weapon:mar:battleaxe",
+                "weapon:mar:warhammer"
+              ]
+            }
+          },
+          {
+            "_id": "9CYW7Bj53L9G8Zsw",
+            "type": "Trait",
+            "configuration": {
+              "hint": "",
+              "mode": "default",
+              "allowReplacements": false,
+              "grants": [],
+              "choices": [
+                {
+                  "count": 1,
+                  "pool": [
+                    "tool:art:brewer",
+                    "tool:art:mason",
+                    "tool:art:smith"
+                  ]
+                }
+              ]
+            },
+            "level": 0,
+            "title": "",
+            "value": {
+              "chosen": [
+                "tool:art:mason"
+              ]
+            }
+          }
+        ],
+        "senses": {
+          "darkvision": 60,
+          "blindsight": 0,
+          "tremorsense": 0,
+          "truesight": 0,
+          "units": "ft",
+          "special": ""
+        },
+        "movement": {
+          "walk": 25,
+          "burrow": 0,
+          "climb": 0,
+          "fly": 0,
+          "swim": 0,
+          "units": "ft",
+          "hover": false
+        },
+        "type": {
+          "subtype": "dwarf",
+          "value": "",
+          "custom": ""
+        }
+      },
+      "effects": [],
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.races.UQiRQUTBcsz8gZU1"
+        }
+      },
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.4.0",
+        "coreVersion": "10.303",
+        "createdTime": 1677179053861,
+        "modifiedTime": 1699985978352,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "sort": 0,
+      "folder": null,
+      "_key": "!actors.items!bzlxBO5km3zCQA8G.JtKfV5srBn6zBNVt"
+    },
+    {
+      "_id": "yeAdyhHhZGgcb7if",
+      "name": "Dwarven Resilience",
+      "ownership": {
+        "default": 0
+      },
+      "type": "feat",
+      "system": {
+        "description": {
+          "value": "<p>You have advantage on saving throws against poison, and you have resistance against poison damage.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": {
+          "custom": "SRD 5.1",
+          "book": "",
+          "page": "",
+          "license": ""
+        },
+        "activation": {
+          "type": "",
+          "cost": null,
+          "condition": ""
+        },
+        "duration": {
+          "value": "",
+          "units": ""
+        },
+        "cover": null,
+        "crewed": false,
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": "",
+          "prompt": true
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": ""
+        },
+        "uses": {
+          "value": null,
+          "max": "",
+          "per": null,
+          "recovery": "",
+          "prompt": true
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null,
+          "scale": false
+        },
+        "ability": "",
+        "actionType": "",
+        "attackBonus": "",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "type": {
+          "value": "race",
+          "subtype": ""
+        },
+        "requirements": "Dwarf",
+        "recharge": {
+          "value": null,
+          "charged": false
+        }
+      },
+      "flags": {
+        "dnd5e": {
+          "sourceId": "Compendium.dnd5e.races.ufysTkqet2Ctmtyi",
+          "advancementOrigin": "JtKfV5srBn6zBNVt.tNfLTuoHfvAxg2FC"
+        }
+      },
+      "img": "icons/creatures/abilities/stinger-poison-green.webp",
+      "effects": [
+        {
+          "_id": "hIaIpLxcMZSY3qXi",
+          "changes": [
+            {
+              "key": "system.traits.dr.value",
+              "mode": 2,
+              "value": "poison",
+              "priority": null
+            }
+          ],
+          "disabled": false,
+          "duration": {
+            "startTime": null,
+            "seconds": null,
+            "combat": null,
+            "rounds": null,
+            "turns": null,
+            "startRound": null,
+            "startTurn": null
+          },
+          "icon": "icons/creatures/abilities/stinger-poison-green.webp",
+          "label": "Dwarven Resilience",
+          "origin": "Item.ufysTkqet2Ctmtyi",
+          "transfer": true,
+          "flags": {},
+          "tint": null,
+          "_key": "!actors.items.effects!bzlxBO5km3zCQA8G.yeAdyhHhZGgcb7if.hIaIpLxcMZSY3qXi",
+          "sort": 0
+        }
+      ],
+      "folder": null,
+      "sort": 0,
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.4.0",
+        "coreVersion": "10.303",
+        "createdTime": 1661787234474,
+        "modifiedTime": 1699987533792,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!actors.items!bzlxBO5km3zCQA8G.yeAdyhHhZGgcb7if"
+    },
+    {
+      "_id": "VtJK5sQ1pHMMWGQ4",
+      "name": "Stonecunning",
+      "ownership": {
+        "default": 0
+      },
+      "type": "feat",
+      "system": {
+        "description": {
+          "value": "<p>Whenever you make an Intelligence (History) check related to the origin of stonework, you are considered proficient in the History skill and add double your proficiency bonus to the check, instead of your normal proficiency bonus.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": {
+          "custom": "SRD 5.1",
+          "book": "",
+          "page": "",
+          "license": ""
+        },
+        "activation": {
+          "type": "",
+          "cost": null,
+          "condition": ""
+        },
+        "duration": {
+          "value": "",
+          "units": ""
+        },
+        "cover": null,
+        "crewed": false,
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": "",
+          "prompt": true
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": ""
+        },
+        "uses": {
+          "value": null,
+          "max": "",
+          "per": null,
+          "recovery": "",
+          "prompt": true
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null,
+          "scale": false
+        },
+        "ability": "",
+        "actionType": "",
+        "attackBonus": "",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "type": {
+          "value": "race",
+          "subtype": ""
+        },
+        "requirements": "Dwarf",
+        "recharge": {
+          "value": null,
+          "charged": false
+        }
+      },
+      "flags": {
+        "dnd5e": {
+          "sourceId": "Compendium.dnd5e.races.mQPZDRbUhgYTbXKa",
+          "advancementOrigin": "JtKfV5srBn6zBNVt.tNfLTuoHfvAxg2FC"
+        }
+      },
+      "img": "icons/commodities/tech/cog-bronze.webp",
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.4.0",
+        "coreVersion": "10.303",
+        "createdTime": 1661787234472,
+        "modifiedTime": 1699987535049,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!actors.items!bzlxBO5km3zCQA8G.VtJK5sQ1pHMMWGQ4"
     }
   ],
   "effects": [
@@ -3502,8 +3655,37 @@
       "transfer": false,
       "flags": {},
       "tint": null,
-      "sort": 0,
-      "_key": "!actors.effects!bzlxBO5km3zCQA8G.VN7GnGzVwmBM7YCU"
+      "_key": "!actors.effects!bzlxBO5km3zCQA8G.VN7GnGzVwmBM7YCU",
+      "sort": 0
+    },
+    {
+      "_id": "hIaIpLxcMZSY3qXi",
+      "changes": [
+        {
+          "key": "system.traits.dr.value",
+          "mode": 2,
+          "value": "poison",
+          "priority": null
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": 0,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "icon": "icons/creatures/abilities/stinger-poison-green.webp",
+      "label": "Dwarven Resilience",
+      "origin": "Compendium.dnd5e.heroes.bzlxBO5km3zCQA8G.Item.yeAdyhHhZGgcb7if",
+      "transfer": false,
+      "flags": {},
+      "tint": null,
+      "_key": "!actors.effects!bzlxBO5km3zCQA8G.hIaIpLxcMZSY3qXi",
+      "sort": 0
     }
   ],
   "folder": null,
@@ -3515,10 +3697,10 @@
   "_id": "bzlxBO5km3zCQA8G",
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.2.2",
+    "systemVersion": "2.4.0",
     "coreVersion": "10.303",
     "createdTime": 1661787232177,
-    "modifiedTime": 1691519191272,
+    "modifiedTime": 1699987535049,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!bzlxBO5km3zCQA8G"

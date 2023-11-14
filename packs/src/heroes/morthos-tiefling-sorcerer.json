@@ -82,23 +82,23 @@
         "bonus": "0"
       },
       "movement": {
-        "burrow": 0,
-        "climb": 0,
-        "fly": 0,
-        "swim": 0,
-        "walk": 30,
-        "units": "ft",
+        "burrow": null,
+        "climb": null,
+        "fly": null,
+        "swim": null,
+        "walk": null,
+        "units": null,
         "hover": false
       },
       "attunement": {
         "max": 3
       },
       "senses": {
-        "darkvision": 60,
-        "blindsight": 0,
-        "tremorsense": 0,
-        "truesight": 0,
-        "units": "ft",
+        "darkvision": null,
+        "blindsight": null,
+        "tremorsense": null,
+        "truesight": null,
+        "units": null,
         "special": ""
       },
       "spellcasting": "cha",
@@ -115,7 +115,7 @@
         "public": ""
       },
       "alignment": "Neutral Evil",
-      "race": "Tiefling",
+      "race": "Y7BsvdA2in8INCB5",
       "background": "",
       "originalClass": "Ig5YOxEOabGaTjG5",
       "xp": {
@@ -152,8 +152,8 @@
       },
       "languages": {
         "value": [
-          "common",
           "draconic",
+          "common",
           "infernal"
         ],
         "custom": ""
@@ -1940,288 +1940,6 @@
       "_key": "!actors.items!xT2C2Itv2XambDYp.VXfJOqA5hOKDCVf1"
     },
     {
-      "_id": "Xfag5A38nhLBUfkr",
-      "name": "Hellish Resistance",
-      "type": "feat",
-      "system": {
-        "description": {
-          "value": "<p>You have resistance to fire damage.</p>",
-          "chat": "",
-          "unidentified": ""
-        },
-        "source": "SRD 5.1",
-        "activation": {
-          "type": "",
-          "cost": null,
-          "condition": ""
-        },
-        "duration": {
-          "value": "",
-          "units": ""
-        },
-        "cover": null,
-        "crewed": false,
-        "target": {
-          "value": null,
-          "width": null,
-          "units": "",
-          "type": ""
-        },
-        "range": {
-          "value": null,
-          "long": null,
-          "units": ""
-        },
-        "uses": {
-          "value": null,
-          "max": "",
-          "per": null,
-          "recovery": ""
-        },
-        "consume": {
-          "type": "",
-          "target": null,
-          "amount": null
-        },
-        "ability": null,
-        "actionType": "",
-        "attackBonus": "",
-        "chatFlavor": "",
-        "critical": {
-          "threshold": null,
-          "damage": ""
-        },
-        "damage": {
-          "parts": [],
-          "versatile": ""
-        },
-        "formula": "",
-        "save": {
-          "ability": "",
-          "dc": null,
-          "scaling": "spell"
-        },
-        "type": {
-          "value": "",
-          "subtype": ""
-        },
-        "requirements": "Tiefling",
-        "recharge": {
-          "value": null,
-          "charged": false
-        }
-      },
-      "sort": 0,
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.dnd5e.races.q71Pe1F8RRtEJt8Q"
-        }
-      },
-      "img": "icons/magic/air/fog-gas-smoke-swirling-orange.webp",
-      "effects": [],
-      "folder": null,
-      "ownership": {
-        "default": 0
-      },
-      "_stats": {
-        "systemId": null,
-        "systemVersion": null,
-        "coreVersion": null,
-        "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
-      },
-      "_key": "!actors.items!xT2C2Itv2XambDYp.Xfag5A38nhLBUfkr"
-    },
-    {
-      "_id": "xQyybuzUPke5Owuf",
-      "name": "Infernal Legacy",
-      "type": "feat",
-      "system": {
-        "description": {
-          "value": "<p>You know the @Compendium[dnd5e.spells.MUO1uYN7JR1hm4dR]{Thaumaturgy} cantrip.</p><p>When you reach 3rd level, you can cast the @Compendium[dnd5e.spells.22dPoeXfaaAv4K3h]{Hellish Rebuke} spell as a 2nd-level spell once with this trait and regain the ability to do so when you finish a long rest.</p><p>When you reach 5th level, you can cast the @Compendium[dnd5e.spells.S7VbUetIfVT7B6Eq]{Darkness} spell once with this trait and regain the ability to do so when you finish a long rest. Charisma is your spellcasting ability for these spells.</p>",
-          "chat": "",
-          "unidentified": ""
-        },
-        "source": "SRD 5.1",
-        "activation": {
-          "type": "",
-          "cost": null,
-          "condition": ""
-        },
-        "duration": {
-          "value": "",
-          "units": ""
-        },
-        "cover": null,
-        "crewed": false,
-        "target": {
-          "value": null,
-          "width": null,
-          "units": "",
-          "type": ""
-        },
-        "range": {
-          "value": null,
-          "long": null,
-          "units": ""
-        },
-        "uses": {
-          "value": 1,
-          "max": "1",
-          "per": null,
-          "recovery": ""
-        },
-        "consume": {
-          "type": "",
-          "target": null,
-          "amount": null
-        },
-        "ability": "",
-        "actionType": "",
-        "attackBonus": "",
-        "chatFlavor": "",
-        "critical": {
-          "threshold": null,
-          "damage": ""
-        },
-        "damage": {
-          "parts": [],
-          "versatile": ""
-        },
-        "formula": "",
-        "save": {
-          "ability": "",
-          "dc": null,
-          "scaling": "spell"
-        },
-        "type": {
-          "value": "",
-          "subtype": ""
-        },
-        "requirements": "Tiefling",
-        "recharge": {
-          "value": null,
-          "charged": false
-        }
-      },
-      "sort": 0,
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.dnd5e.races.wJc88B8OP1y1xzMw"
-        }
-      },
-      "img": "icons/creatures/unholy/demon-fanged-horned-yellow.webp",
-      "effects": [],
-      "folder": null,
-      "ownership": {
-        "default": 0
-      },
-      "_stats": {
-        "systemId": null,
-        "systemVersion": null,
-        "coreVersion": null,
-        "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
-      },
-      "_key": "!actors.items!xT2C2Itv2XambDYp.xQyybuzUPke5Owuf"
-    },
-    {
-      "_id": "pTwtACItEzLveouu",
-      "name": "Tiefling",
-      "type": "feat",
-      "system": {
-        "description": {
-          "value": "<div title=\"Page 7\">\n<div>\n<div>\n<p><em>Tieflings share certain racial traits as a result of their infernal descent. </em></p><p><em><strong>Ability Score Increase.</strong></em> Your Intelligence score increases by 1, and your Charisma score increases by 2.</p><p><em><strong>Age.</strong></em> Tieflings mature at the same rate as humans but live a few years longer.</p><p><em><strong>Alignment.</strong></em> Tieflings might not have an innate tendency toward evil, but many of them end up there. Evil or not, an independent nature inclines many tieflings toward a chaotic alignment.</p><p><em><strong>Size.</strong></em> Tieflings are about the same size and build as humans. Your size is Medium.</p><p><em><strong>Speed. </strong></em>Your base walking speed is 30 feet.</p><p><em><strong>Darkvision.</strong></em> Thanks to your infernal heritage, you have superior vision in dark and dim conditions. You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can't discern color in darkness, only shades of gray.</p><p><em><strong>Hellish Resistance. </strong></em>@Compendium[dnd5e.races.q71Pe1F8RRtEJt8Q]{Hellish Resistance} You have resistance to fire damage.</p><p><em><strong>Infernal Legacy.</strong></em> @Compendium[dnd5e.races.wJc88B8OP1y1xzMw]{Infernal Legacy} You know the @Compendium[dnd5e.spells.MUO1uYN7JR1hm4dR]{Thaumaturgy} cantrip. When you reach 3rd level, you can cast the @Compendium[dnd5e.spells.22dPoeXfaaAv4K3h]{Hellish Rebuke} spell as a 2nd‑level spell once with this trait and regain the ability to do so when you finish a long rest. When you reach 5th level, you can cast the @Compendium[dnd5e.spells.S7VbUetIfVT7B6Eq]{Darkness} spell once with this trait and regain the ability to do so when you finish a long rest. Charisma is your spellcasting ability for these spells.</p><p><em><strong>Languages.</strong></em> You can speak, read, and write Common and Infernal.</p>\n</div>\n</div>\n</div>",
-          "chat": "",
-          "unidentified": ""
-        },
-        "source": "SRD 5.1",
-        "activation": {
-          "type": "",
-          "cost": null,
-          "condition": ""
-        },
-        "duration": {
-          "value": "",
-          "units": ""
-        },
-        "cover": null,
-        "crewed": false,
-        "target": {
-          "value": null,
-          "width": null,
-          "units": "",
-          "type": ""
-        },
-        "range": {
-          "value": null,
-          "long": null,
-          "units": ""
-        },
-        "uses": {
-          "value": null,
-          "max": "",
-          "per": null,
-          "recovery": ""
-        },
-        "consume": {
-          "type": "",
-          "target": null,
-          "amount": null
-        },
-        "ability": null,
-        "actionType": "",
-        "attackBonus": "",
-        "chatFlavor": "",
-        "critical": {
-          "threshold": null,
-          "damage": ""
-        },
-        "damage": {
-          "parts": [],
-          "versatile": ""
-        },
-        "formula": "",
-        "save": {
-          "ability": "",
-          "dc": null,
-          "scaling": "spell"
-        },
-        "type": {
-          "value": "",
-          "subtype": ""
-        },
-        "requirements": "",
-        "recharge": {
-          "value": null,
-          "charged": false
-        }
-      },
-      "sort": 0,
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.dnd5e.races.aHTokZ151W0ASSmo"
-        }
-      },
-      "img": "icons/magic/air/wind-tornado-cyclone-red-orange.webp",
-      "effects": [],
-      "folder": null,
-      "ownership": {
-        "default": 0
-      },
-      "_stats": {
-        "systemId": null,
-        "systemVersion": null,
-        "coreVersion": null,
-        "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
-      },
-      "_key": "!actors.items!xT2C2Itv2XambDYp.pTwtACItEzLveouu"
-    },
-    {
       "_id": "f3p50jjvtk2ao61n",
       "name": "Draconic Bloodline",
       "type": "subclass",
@@ -2345,121 +2063,13 @@
       },
       "_stats": {
         "systemId": "dnd5e",
-        "systemVersion": "2.2.2",
+        "systemVersion": "2.4.0",
         "coreVersion": "10.303",
         "createdTime": null,
-        "modifiedTime": 1691519120854,
+        "modifiedTime": 1699987303217,
         "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!xT2C2Itv2XambDYp.f3p50jjvtk2ao61n"
-    },
-    {
-      "_id": "MUO1uYN7JR1hm4dR",
-      "name": "Thaumaturgy",
-      "ownership": {
-        "default": 0
-      },
-      "type": "spell",
-      "system": {
-        "description": {
-          "value": "<p>You create one of the following magical effects within range:</p>\n<ul>\n<li>Your voice booms up to three times as loud as normal for 1 minute.</li>\n<li>You cause flames to flicker, brighten, dim, or change color for 1 minute.</li>\n<li>You cause harmless tremors in the ground for 1 minute.</li>\n<li>You create a sound that originates from a point of your choice within range.</li>\n<li>You cause an unlocked door or window to fly open or slam shut.</li>\n<li>You alter the appearance of your eyes for 1 minute.</li>\n</ul>\n<p>If you cast this spell multiple times, you can have up to three of its 1-minute effects active at a time, and you can dismiss such an effect as an action.</p>",
-          "chat": "",
-          "unidentified": ""
-        },
-        "source": "SRD 5.1",
-        "activation": {
-          "type": "action",
-          "cost": 1,
-          "condition": ""
-        },
-        "duration": {
-          "value": "1",
-          "units": "minute"
-        },
-        "cover": null,
-        "crewed": false,
-        "target": {
-          "value": null,
-          "width": null,
-          "units": "",
-          "type": ""
-        },
-        "range": {
-          "value": 30,
-          "long": null,
-          "units": "ft"
-        },
-        "uses": {
-          "value": null,
-          "max": "",
-          "per": null,
-          "recovery": ""
-        },
-        "consume": {
-          "type": "",
-          "target": null,
-          "amount": null
-        },
-        "ability": "",
-        "actionType": "util",
-        "attackBonus": "",
-        "chatFlavor": "",
-        "critical": {
-          "threshold": null,
-          "damage": ""
-        },
-        "damage": {
-          "parts": [],
-          "versatile": ""
-        },
-        "formula": "",
-        "save": {
-          "ability": "",
-          "dc": null,
-          "scaling": "spell"
-        },
-        "level": 0,
-        "school": "trs",
-        "components": {
-          "vocal": true,
-          "somatic": false,
-          "material": false,
-          "ritual": false,
-          "concentration": false
-        },
-        "materials": {
-          "value": "",
-          "consumed": false,
-          "cost": 0,
-          "supply": 0
-        },
-        "preparation": {
-          "mode": "prepared",
-          "prepared": false
-        },
-        "scaling": {
-          "mode": "none",
-          "formula": ""
-        }
-      },
-      "sort": 0,
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.dnd5e.spells.MUO1uYN7JR1hm4dR"
-        }
-      },
-      "img": "icons/magic/fire/explosion-fireball-small-purple-orange.webp",
-      "effects": [],
-      "folder": null,
-      "_stats": {
-        "systemId": "dnd5e",
-        "systemVersion": "2.0.0",
-        "coreVersion": "10.279",
-        "createdTime": 1661603486272,
-        "modifiedTime": 1661603486272,
-        "lastModifiedBy": "dnd5ebuilder0000"
-      },
-      "_key": "!actors.items!xT2C2Itv2XambDYp.MUO1uYN7JR1hm4dR"
     },
     {
       "_id": "kjmjY0zlE6IEiQVL",
@@ -3405,7 +3015,8 @@
                 "int": 0,
                 "wis": 0,
                 "cha": 0
-              }
+              },
+              "cap": 2
             },
             "value": {
               "type": "asi"
@@ -3426,7 +3037,8 @@
                 "int": 0,
                 "wis": 0,
                 "cha": 0
-              }
+              },
+              "cap": 2
             },
             "value": {
               "type": "asi"
@@ -3447,7 +3059,8 @@
                 "int": 0,
                 "wis": 0,
                 "cha": 0
-              }
+              },
+              "cap": 2
             },
             "value": {
               "type": "asi"
@@ -3468,7 +3081,8 @@
                 "int": 0,
                 "wis": 0,
                 "cha": 0
-              }
+              },
+              "cap": 2
             },
             "value": {
               "type": "asi"
@@ -3490,15 +3104,66 @@
                 "int": 0,
                 "wis": 0,
                 "cha": 0
-              }
+              },
+              "cap": 2
             },
             "value": {
               "type": "asi"
             },
             "level": 19,
             "title": ""
+          },
+          {
+            "type": "Trait",
+            "level": 1,
+            "configuration": {
+              "grants": [
+                "saves:con",
+                "saves:cha"
+              ],
+              "hint": "",
+              "mode": "default",
+              "allowReplacements": false,
+              "choices": []
+            },
+            "value": {
+              "chosen": [
+                "saves:con",
+                "saves:cha"
+              ]
+            },
+            "_id": "WErWJN8FNONXBOnN"
+          },
+          {
+            "type": "Trait",
+            "level": 1,
+            "configuration": {
+              "choices": [
+                {
+                  "count": 2,
+                  "pool": [
+                    "skills:arc",
+                    "skills:dec",
+                    "skills:ins",
+                    "skills:itm",
+                    "skills:per",
+                    "skills:rel"
+                  ]
+                }
+              ],
+              "hint": "",
+              "mode": "default",
+              "allowReplacements": false,
+              "grants": []
+            },
+            "_id": "i0q3BtpzAi4r39Zq",
+            "value": {}
           }
         ],
+        "spellcasting": {
+          "progression": "full",
+          "ability": "cha"
+        },
         "saves": [
           "con",
           "cha"
@@ -3514,10 +3179,6 @@
             "rel"
           ],
           "value": []
-        },
-        "spellcasting": {
-          "progression": "full",
-          "ability": "cha"
         }
       },
       "effects": [],
@@ -3533,10 +3194,10 @@
       },
       "_stats": {
         "systemId": "dnd5e",
-        "systemVersion": "2.2.2",
+        "systemVersion": "2.4.0",
         "coreVersion": "10.303",
         "createdTime": 1661787234275,
-        "modifiedTime": 1691519120869,
+        "modifiedTime": 1699987303217,
         "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!xT2C2Itv2XambDYp.Ig5YOxEOabGaTjG5"
@@ -3628,10 +3289,10 @@
       "sort": 0,
       "_stats": {
         "systemId": "dnd5e",
-        "systemVersion": "2.2.2",
+        "systemVersion": "2.4.0",
         "coreVersion": "10.303",
         "createdTime": 1661787234424,
-        "modifiedTime": 1691519120870,
+        "modifiedTime": 1699987317098,
         "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!xT2C2Itv2XambDYp.I6RIW8FArEkBLA3G"
@@ -3723,10 +3384,10 @@
       "sort": 0,
       "_stats": {
         "systemId": "dnd5e",
-        "systemVersion": "2.2.2",
+        "systemVersion": "2.4.0",
         "coreVersion": "10.303",
         "createdTime": 1661787234397,
-        "modifiedTime": 1691519120870,
+        "modifiedTime": 1699987317098,
         "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!xT2C2Itv2XambDYp.PnwXvKH6tQ3n7iIo"
@@ -3840,18 +3501,18 @@
           "transfer": true,
           "flags": {},
           "tint": null,
-          "sort": 0,
-          "_key": "!actors.items.effects!xT2C2Itv2XambDYp.oO4FCdIDwsr4VTb3.xI5jjbA2Dlj7L0cd"
+          "_key": "!actors.items.effects!xT2C2Itv2XambDYp.oO4FCdIDwsr4VTb3.xI5jjbA2Dlj7L0cd",
+          "sort": 0
         }
       ],
       "folder": null,
       "sort": 0,
       "_stats": {
         "systemId": "dnd5e",
-        "systemVersion": "2.2.2",
+        "systemVersion": "2.4.0",
         "coreVersion": "10.303",
         "createdTime": 1661787234352,
-        "modifiedTime": 1691519120871,
+        "modifiedTime": 1699987392343,
         "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!xT2C2Itv2XambDYp.oO4FCdIDwsr4VTb3"
@@ -3965,21 +3626,614 @@
           "transfer": true,
           "flags": {},
           "tint": null,
-          "sort": 0,
-          "_key": "!actors.items.effects!xT2C2Itv2XambDYp.o0wsV8JAuT6FUDAt.Pu89Tsgy2FJjYPQi"
+          "_key": "!actors.items.effects!xT2C2Itv2XambDYp.o0wsV8JAuT6FUDAt.Pu89Tsgy2FJjYPQi",
+          "sort": 0
         }
       ],
       "folder": null,
       "sort": 0,
       "_stats": {
         "systemId": "dnd5e",
-        "systemVersion": "2.2.2",
+        "systemVersion": "2.4.0",
         "coreVersion": "10.303",
         "createdTime": 1661787234366,
-        "modifiedTime": 1691519120872,
+        "modifiedTime": 1699987391372,
         "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!xT2C2Itv2XambDYp.o0wsV8JAuT6FUDAt"
+    },
+    {
+      "_id": "Y7BsvdA2in8INCB5",
+      "name": "Tiefling",
+      "type": "race",
+      "img": "icons/creatures/unholy/demon-female-succubus-orange.webp",
+      "system": {
+        "description": {
+          "value": "<p>Tieflings share certain racial traits as a result of their infernal descent.</p><p><em><strong>Ability Score Increase.</strong></em> Your Intelligence score increases by 1, and your Charisma score increases by 2.</p><p><em><strong>Age.</strong></em> Tieflings mature at the same rate as humans but live a few years longer.</p><p><em><strong>Alignment.</strong></em> Tieflings might not have an innate tendency toward evil, but many of them end up there. Evil or not, an independent nature inclines many tieflings toward a chaotic alignment.</p><p><em><strong>Size.</strong></em> Tieflings are about the same size and build as humans. Your size is Medium.</p><p><em><strong>Speed.</strong></em> Your base walking speed is 30 feet.</p><p><em><strong>Darkvision.</strong></em> Thanks to your infernal heritage, you have superior vision in dark and dim conditions. You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can't discern color in darkness, only shades of gray.</p><p><em><strong>Hellish Resistance.</strong></em> You have resistance to fire damage.</p><p><em><strong>Infernal Legacy.</strong></em> You know the thaumaturgy cantrip. When you reach 3rd level, you can cast the hellish rebuke spell as a 2nd-­level spell once with this trait and regain the ability to do so when you finish a long rest. When you reach 5th level, you can cast the darkness spell once with this trait and regain the ability to do so when you finish a long rest. Charisma is your spellcasting ability for these spells.</p><p><em><strong>Languages.</strong></em> You can speak, read, and write Common and Infernal.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": {
+          "custom": "SRD 5.1",
+          "book": "",
+          "page": "",
+          "license": ""
+        },
+        "identifier": "tiefling",
+        "advancement": [
+          {
+            "_id": "1TyE6rcEq01VWRZc",
+            "type": "ItemGrant",
+            "configuration": {
+              "items": [
+                "Compendium.dnd5e.races.q71Pe1F8RRtEJt8Q",
+                "Compendium.dnd5e.races.wJc88B8OP1y1xzMw"
+              ],
+              "optional": false,
+              "spell": {
+                "ability": "cha",
+                "preparation": "innate",
+                "uses": {
+                  "max": "",
+                  "per": ""
+                }
+              }
+            },
+            "value": {
+              "added": {
+                "AqOtnW8y12LokI6Z": "Compendium.dnd5e.races.q71Pe1F8RRtEJt8Q",
+                "dbhkmMp9qAZQNQ7s": "Compendium.dnd5e.races.wJc88B8OP1y1xzMw"
+              }
+            },
+            "level": 0,
+            "title": ""
+          },
+          {
+            "_id": "d8rqpB59h8lfbnva",
+            "type": "ItemGrant",
+            "configuration": {
+              "items": [
+                "Compendium.dnd5e.spells.22dPoeXfaaAv4K3h"
+              ],
+              "optional": false,
+              "spell": {
+                "ability": "cha",
+                "preparation": "innate",
+                "uses": {
+                  "max": "1",
+                  "per": "lr"
+                }
+              }
+            },
+            "value": {},
+            "level": 3,
+            "title": "Infernal Legacy"
+          },
+          {
+            "_id": "p2AP4Rn6S8A8Xu5L",
+            "type": "ItemGrant",
+            "configuration": {
+              "items": [
+                "Compendium.dnd5e.spells.S7VbUetIfVT7B6Eq"
+              ],
+              "optional": false,
+              "spell": {
+                "ability": "cha",
+                "preparation": "innate",
+                "uses": {
+                  "max": "1",
+                  "per": "lr"
+                }
+              }
+            },
+            "value": {},
+            "level": 5,
+            "title": "Infernal Legacy"
+          },
+          {
+            "_id": "Z9hvZFkWUNvowbQX",
+            "type": "AbilityScoreImprovement",
+            "configuration": {
+              "points": 0,
+              "fixed": {
+                "str": 0,
+                "dex": 0,
+                "con": 0,
+                "int": 1,
+                "wis": 0,
+                "cha": 2
+              },
+              "cap": 2
+            },
+            "value": {
+              "type": "asi",
+              "assignments": {
+                "int": 1,
+                "cha": 2
+              }
+            },
+            "level": 0,
+            "title": ""
+          },
+          {
+            "_id": "RdFKqK8MykC5CYIB",
+            "type": "Size",
+            "configuration": {
+              "hint": "Tieflings are about the same size and build as humans. Your size is Medium.",
+              "sizes": [
+                "med"
+              ]
+            },
+            "value": {
+              "size": "med"
+            },
+            "level": 1,
+            "title": ""
+          },
+          {
+            "_id": "rE6m74Xp32VuJC5y",
+            "type": "Trait",
+            "configuration": {
+              "hint": "",
+              "mode": "default",
+              "allowReplacements": false,
+              "grants": [
+                "dr:fire"
+              ],
+              "choices": []
+            },
+            "level": 0,
+            "title": "Hellish Resistance",
+            "value": {
+              "chosen": [
+                "dr:fire"
+              ]
+            }
+          },
+          {
+            "type": "ItemGrant",
+            "configuration": {
+              "items": [
+                "Compendium.dnd5e.spells.MUO1uYN7JR1hm4dR"
+              ],
+              "optional": false,
+              "spell": {
+                "ability": "cha",
+                "preparation": "innate",
+                "uses": {
+                  "max": "",
+                  "per": ""
+                }
+              }
+            },
+            "value": {
+              "added": {
+                "FlFGTgeJM6U0I1iP": "Compendium.dnd5e.spells.MUO1uYN7JR1hm4dR"
+              }
+            },
+            "level": 0,
+            "title": "Infernal Legacy",
+            "_id": "VUUQMvAtL25wj3vD"
+          },
+          {
+            "_id": "jGeaKhTjGApgqmWw",
+            "type": "Trait",
+            "configuration": {
+              "hint": "",
+              "mode": "default",
+              "allowReplacements": false,
+              "grants": [
+                "languages:standard:common",
+                "languages:exotic:infernal"
+              ],
+              "choices": []
+            },
+            "level": 0,
+            "title": "",
+            "value": {
+              "chosen": [
+                "languages:standard:common",
+                "languages:exotic:infernal"
+              ]
+            }
+          }
+        ],
+        "senses": {
+          "darkvision": 60,
+          "blindsight": 0,
+          "tremorsense": 0,
+          "truesight": 0,
+          "units": "ft",
+          "special": ""
+        },
+        "movement": {
+          "burrow": 0,
+          "climb": 0,
+          "fly": 0,
+          "swim": 0,
+          "walk": 30,
+          "units": "ft",
+          "hover": false
+        },
+        "type": {
+          "value": "humanoid",
+          "subtype": "",
+          "custom": ""
+        }
+      },
+      "effects": [],
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.races.aHTokZ151W0ASSmo"
+        }
+      },
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.4.0",
+        "coreVersion": "10.303",
+        "createdTime": 1677181073037,
+        "modifiedTime": 1699987303233,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "sort": 0,
+      "folder": null,
+      "_key": "!actors.items!xT2C2Itv2XambDYp.Y7BsvdA2in8INCB5"
+    },
+    {
+      "_id": "AqOtnW8y12LokI6Z",
+      "name": "Hellish Resistance",
+      "ownership": {
+        "default": 0
+      },
+      "type": "feat",
+      "system": {
+        "description": {
+          "value": "<p>You have resistance to fire damage.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": {
+          "custom": "SRD 5.1",
+          "book": "",
+          "page": "",
+          "license": ""
+        },
+        "activation": {
+          "type": "",
+          "cost": null,
+          "condition": ""
+        },
+        "duration": {
+          "value": "",
+          "units": ""
+        },
+        "cover": null,
+        "crewed": false,
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": "",
+          "prompt": true
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": ""
+        },
+        "uses": {
+          "value": null,
+          "max": "",
+          "per": null,
+          "recovery": "",
+          "prompt": true
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null,
+          "scale": false
+        },
+        "ability": null,
+        "actionType": "",
+        "attackBonus": "",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "type": {
+          "value": "race",
+          "subtype": ""
+        },
+        "requirements": "Tiefling",
+        "recharge": {
+          "value": null,
+          "charged": false
+        }
+      },
+      "flags": {
+        "dnd5e": {
+          "sourceId": "Compendium.dnd5e.races.q71Pe1F8RRtEJt8Q",
+          "advancementOrigin": "Y7BsvdA2in8INCB5.1TyE6rcEq01VWRZc"
+        }
+      },
+      "img": "icons/magic/air/fog-gas-smoke-swirling-orange.webp",
+      "effects": [
+        {
+          "_id": "0rAhv7npcNmDcQ3B",
+          "changes": [
+            {
+              "key": "system.traits.dr.value",
+              "mode": 2,
+              "value": "fire",
+              "priority": null
+            }
+          ],
+          "disabled": false,
+          "duration": {
+            "startTime": null,
+            "seconds": null,
+            "combat": null,
+            "rounds": null,
+            "turns": null,
+            "startRound": null,
+            "startTurn": null
+          },
+          "icon": "icons/magic/air/fog-gas-smoke-swirling-orange.webp",
+          "label": "Hellish Resistance",
+          "origin": "Item.q71Pe1F8RRtEJt8Q",
+          "transfer": true,
+          "flags": {},
+          "tint": null,
+          "_key": "!actors.items.effects!xT2C2Itv2XambDYp.AqOtnW8y12LokI6Z.0rAhv7npcNmDcQ3B",
+          "sort": 0
+        }
+      ],
+      "folder": null,
+      "sort": 0,
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.4.0",
+        "coreVersion": "10.303",
+        "createdTime": 1661787234473,
+        "modifiedTime": 1699987317098,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!actors.items!xT2C2Itv2XambDYp.AqOtnW8y12LokI6Z"
+    },
+    {
+      "_id": "dbhkmMp9qAZQNQ7s",
+      "name": "Infernal Legacy",
+      "ownership": {
+        "default": 0
+      },
+      "type": "feat",
+      "system": {
+        "description": {
+          "value": "<p>You know the @Compendium[dnd5e.spells.MUO1uYN7JR1hm4dR]{Thaumaturgy} cantrip.</p>\n<p>When you reach 3rd level, you can cast the @Compendium[dnd5e.spells.22dPoeXfaaAv4K3h]{Hellish Rebuke} spell as a 2nd-level spell once with this trait and regain the ability to do so when you finish a long rest.</p>\n<p>When you reach 5th level, you can cast the @Compendium[dnd5e.spells.S7VbUetIfVT7B6Eq]{Darkness} spell once with this trait and regain the ability to do so when you finish a long rest. Charisma is your spellcasting ability for these spells.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": {
+          "custom": "SRD 5.1",
+          "book": "",
+          "page": "",
+          "license": ""
+        },
+        "activation": {
+          "type": "",
+          "cost": null,
+          "condition": ""
+        },
+        "duration": {
+          "value": "",
+          "units": ""
+        },
+        "cover": null,
+        "crewed": false,
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": "",
+          "prompt": true
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": ""
+        },
+        "uses": {
+          "value": null,
+          "max": "",
+          "per": null,
+          "recovery": "",
+          "prompt": true
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null,
+          "scale": false
+        },
+        "ability": "",
+        "actionType": "",
+        "attackBonus": "",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "type": {
+          "value": "race",
+          "subtype": ""
+        },
+        "requirements": "Tiefling",
+        "recharge": {
+          "value": null,
+          "charged": false
+        }
+      },
+      "flags": {
+        "dnd5e": {
+          "sourceId": "Compendium.dnd5e.races.wJc88B8OP1y1xzMw",
+          "advancementOrigin": "Y7BsvdA2in8INCB5.1TyE6rcEq01VWRZc"
+        }
+      },
+      "img": "icons/creatures/unholy/demon-fanged-horned-yellow.webp",
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.4.0",
+        "coreVersion": "10.303",
+        "createdTime": 1661787234475,
+        "modifiedTime": 1699987318799,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!actors.items!xT2C2Itv2XambDYp.dbhkmMp9qAZQNQ7s"
+    },
+    {
+      "_id": "FlFGTgeJM6U0I1iP",
+      "name": "Thaumaturgy",
+      "ownership": {
+        "default": 0
+      },
+      "type": "spell",
+      "system": {
+        "description": {
+          "value": "<p>You create one of the following magical effects within range:</p>\n<ul>\n<li>Your voice booms up to three times as loud as normal for 1 minute.</li>\n<li>You cause flames to flicker, brighten, dim, or change color for 1 minute.</li>\n<li>You cause harmless tremors in the ground for 1 minute.</li>\n<li>You create a sound that originates from a point of your choice within range.</li>\n<li>You cause an unlocked door or window to fly open or slam shut.</li>\n<li>You alter the appearance of your eyes for 1 minute.</li>\n</ul>\n<p>If you cast this spell multiple times, you can have up to three of its 1-minute effects active at a time, and you can dismiss such an effect as an action.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": {
+          "custom": "SRD 5.1",
+          "book": "",
+          "page": "",
+          "license": ""
+        },
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": "1",
+          "units": "minute"
+        },
+        "cover": null,
+        "crewed": false,
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": "",
+          "prompt": true
+        },
+        "range": {
+          "value": 30,
+          "long": null,
+          "units": "ft"
+        },
+        "uses": {
+          "value": null,
+          "max": "",
+          "per": null,
+          "recovery": "",
+          "prompt": true
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null,
+          "scale": false
+        },
+        "ability": "cha",
+        "actionType": "util",
+        "attackBonus": "",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "level": 0,
+        "school": "trs",
+        "components": {
+          "vocal": true,
+          "somatic": false,
+          "material": false,
+          "ritual": false,
+          "concentration": false
+        },
+        "materials": {
+          "value": "",
+          "consumed": false,
+          "cost": 0,
+          "supply": 0
+        },
+        "preparation": {
+          "mode": "innate",
+          "prepared": false
+        },
+        "scaling": {
+          "mode": "none",
+          "formula": ""
+        }
+      },
+      "sort": 0,
+      "flags": {
+        "dnd5e": {
+          "sourceId": "Compendium.dnd5e.spells.MUO1uYN7JR1hm4dR",
+          "advancementOrigin": "Y7BsvdA2in8INCB5.VUUQMvAtL25wj3vD"
+        }
+      },
+      "img": "icons/magic/fire/explosion-fireball-small-purple-orange.webp",
+      "effects": [],
+      "folder": null,
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.4.0",
+        "coreVersion": "10.303",
+        "createdTime": 1661787234127,
+        "modifiedTime": 1699987303236,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!actors.items!xT2C2Itv2XambDYp.FlFGTgeJM6U0I1iP"
     }
   ],
   "effects": [
@@ -4009,8 +4263,8 @@
       "transfer": false,
       "flags": {},
       "tint": null,
-      "sort": 0,
-      "_key": "!actors.effects!xT2C2Itv2XambDYp.xI5jjbA2Dlj7L0cd"
+      "_key": "!actors.effects!xT2C2Itv2XambDYp.xI5jjbA2Dlj7L0cd",
+      "sort": 0
     },
     {
       "_id": "Pu89Tsgy2FJjYPQi",
@@ -4038,8 +4292,37 @@
       "transfer": false,
       "flags": {},
       "tint": null,
-      "sort": 0,
-      "_key": "!actors.effects!xT2C2Itv2XambDYp.Pu89Tsgy2FJjYPQi"
+      "_key": "!actors.effects!xT2C2Itv2XambDYp.Pu89Tsgy2FJjYPQi",
+      "sort": 0
+    },
+    {
+      "_id": "0rAhv7npcNmDcQ3B",
+      "changes": [
+        {
+          "key": "system.traits.dr.value",
+          "mode": 2,
+          "value": "fire",
+          "priority": null
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": 0,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "icon": "icons/magic/air/fog-gas-smoke-swirling-orange.webp",
+      "label": "Hellish Resistance",
+      "origin": "Compendium.dnd5e.heroes.xT2C2Itv2XambDYp.Item.AqOtnW8y12LokI6Z",
+      "transfer": false,
+      "flags": {},
+      "tint": null,
+      "_key": "!actors.effects!xT2C2Itv2XambDYp.0rAhv7npcNmDcQ3B",
+      "sort": 0
     }
   ],
   "folder": null,
@@ -4050,10 +4333,10 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.2.2",
+    "systemVersion": "2.4.0",
     "coreVersion": "10.303",
     "createdTime": 1661787232194,
-    "modifiedTime": 1691519120928,
+    "modifiedTime": 1699987392343,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!xT2C2Itv2XambDYp"

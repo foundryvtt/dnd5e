@@ -81,23 +81,23 @@
         "bonus": "0"
       },
       "movement": {
-        "burrow": 0,
-        "climb": 0,
-        "fly": 0,
-        "swim": 0,
-        "walk": 30,
-        "units": "ft",
+        "burrow": null,
+        "climb": null,
+        "fly": null,
+        "swim": null,
+        "walk": null,
+        "units": null,
         "hover": false
       },
       "attunement": {
         "max": 3
       },
       "senses": {
-        "darkvision": 0,
-        "blindsight": 0,
-        "tremorsense": 0,
-        "truesight": 0,
-        "units": "ft",
+        "darkvision": null,
+        "blindsight": null,
+        "tremorsense": null,
+        "truesight": null,
+        "units": null,
         "special": ""
       },
       "spellcasting": "wis",
@@ -114,7 +114,7 @@
         "public": ""
       },
       "alignment": "True Neutral",
-      "race": "HUMAN",
+      "race": "FZiSrcZmUUelVbNW",
       "background": "",
       "originalClass": "mwtiHpkH8Gglxr3u",
       "xp": {
@@ -149,8 +149,8 @@
       },
       "languages": {
         "value": [
-          "common",
           "druidic",
+          "common",
           "gnomish"
         ],
         "custom": ""
@@ -1750,100 +1750,6 @@
         "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!ZGDys30OS76uYaIO.u900dGnBWSbjqrjP"
-    },
-    {
-      "_id": "s9TjQ4VjDzht25O3",
-      "name": "Human",
-      "type": "feat",
-      "system": {
-        "description": {
-          "value": "<div title=\"Page 5\">\n<div>\n<div>\n<p><em>It&rsquo;s hard to make generalizations about humans, but your human character has these traits. </em></p><p><em><strong>Ability Score Increase.</strong></em> Your ability scores each increase by 1.</p><p><em><strong>Age.</strong></em> Humans reach adulthood in their late teens and live less than a century.</p><p><em><strong>Alignment. </strong></em>Humans tend toward no particular alignment. The best and the worst are found among them.</p><p><em><strong>Size.</strong></em> Humans vary widely in height and build, from barely 5 feet to well over 6 feet tall. Regardless of your position in that range, your size is Medium.</p><p><em><strong>Speed.</strong></em> Your base walking speed is 30 feet.</p><p><em><strong>Languages. </strong></em>You can speak, read, and write Common and one extra language of your choice. Humans typically learn the languages of other peoples they deal with, including obscure dialects. They are fond of sprinkling their speech with words borrowed from other tongues: Orc curses, Elvish musical expressions, Dwarvish military phrases, and so on.</p>\n</div>\n</div>\n</div>",
-          "chat": "",
-          "unidentified": ""
-        },
-        "source": "SRD 5.1",
-        "activation": {
-          "type": "",
-          "cost": null,
-          "condition": ""
-        },
-        "duration": {
-          "value": "",
-          "units": ""
-        },
-        "cover": null,
-        "crewed": false,
-        "target": {
-          "value": null,
-          "width": null,
-          "units": "",
-          "type": ""
-        },
-        "range": {
-          "value": null,
-          "long": null,
-          "units": ""
-        },
-        "uses": {
-          "value": null,
-          "max": "",
-          "per": null,
-          "recovery": ""
-        },
-        "consume": {
-          "type": "",
-          "target": null,
-          "amount": null
-        },
-        "ability": null,
-        "actionType": "",
-        "attackBonus": "",
-        "chatFlavor": "",
-        "critical": {
-          "threshold": null,
-          "damage": ""
-        },
-        "damage": {
-          "parts": [],
-          "versatile": ""
-        },
-        "formula": "",
-        "save": {
-          "ability": "",
-          "dc": null,
-          "scaling": "spell"
-        },
-        "type": {
-          "value": "",
-          "subtype": ""
-        },
-        "requirements": "",
-        "recharge": {
-          "value": null,
-          "charged": false
-        }
-      },
-      "sort": 0,
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.dnd5e.races.ydP3QzCmur55mtY2"
-        }
-      },
-      "img": "icons/magic/light/explosion-star-large-orange.webp",
-      "effects": [],
-      "folder": null,
-      "ownership": {
-        "default": 0
-      },
-      "_stats": {
-        "systemId": null,
-        "systemVersion": null,
-        "coreVersion": null,
-        "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
-      },
-      "_key": "!actors.items!ZGDys30OS76uYaIO.s9TjQ4VjDzht25O3"
     },
     {
       "_id": "SbSvZKkJASyk8jKo",
@@ -4029,7 +3935,8 @@
                 "int": 0,
                 "wis": 0,
                 "cha": 0
-              }
+              },
+              "cap": 2
             },
             "value": {
               "type": "asi"
@@ -4050,7 +3957,8 @@
                 "int": 0,
                 "wis": 0,
                 "cha": 0
-              }
+              },
+              "cap": 2
             },
             "value": {
               "type": "asi"
@@ -4071,7 +3979,8 @@
                 "int": 0,
                 "wis": 0,
                 "cha": 0
-              }
+              },
+              "cap": 2
             },
             "value": {
               "type": "asi"
@@ -4092,7 +4001,8 @@
                 "int": 0,
                 "wis": 0,
                 "cha": 0
-              }
+              },
+              "cap": 2
             },
             "value": {
               "type": "asi"
@@ -4114,15 +4024,68 @@
                 "int": 0,
                 "wis": 0,
                 "cha": 0
-              }
+              },
+              "cap": 2
             },
             "value": {
               "type": "asi"
             },
             "level": 19,
             "title": ""
+          },
+          {
+            "type": "Trait",
+            "level": 1,
+            "configuration": {
+              "grants": [
+                "saves:int",
+                "saves:wis"
+              ],
+              "hint": "",
+              "mode": "default",
+              "allowReplacements": false,
+              "choices": []
+            },
+            "value": {
+              "chosen": [
+                "saves:int",
+                "saves:wis"
+              ]
+            },
+            "_id": "RGZjoDhXdFF8wcWv"
+          },
+          {
+            "type": "Trait",
+            "level": 1,
+            "configuration": {
+              "choices": [
+                {
+                  "count": 2,
+                  "pool": [
+                    "skills:arc",
+                    "skills:ani",
+                    "skills:ins",
+                    "skills:med",
+                    "skills:nat",
+                    "skills:prc",
+                    "skills:rel",
+                    "skills:sur"
+                  ]
+                }
+              ],
+              "hint": "",
+              "mode": "default",
+              "allowReplacements": false,
+              "grants": []
+            },
+            "_id": "sL3gh8yVevHLppEU",
+            "value": {}
           }
         ],
+        "spellcasting": {
+          "progression": "full",
+          "ability": "wis"
+        },
         "saves": [
           "int",
           "wis"
@@ -4140,10 +4103,6 @@
             "sur"
           ],
           "value": []
-        },
-        "spellcasting": {
-          "progression": "full",
-          "ability": "wis"
         }
       },
       "effects": [],
@@ -4159,10 +4118,10 @@
       },
       "_stats": {
         "systemId": "dnd5e",
-        "systemVersion": "2.2.2",
+        "systemVersion": "2.4.0",
         "coreVersion": "10.303",
         "createdTime": 1661787234284,
-        "modifiedTime": 1691519042381,
+        "modifiedTime": 1699986827124,
         "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!ZGDys30OS76uYaIO.mwtiHpkH8Gglxr3u"
@@ -4276,8 +4235,8 @@
           "transfer": true,
           "flags": {},
           "tint": null,
-          "sort": 0,
-          "_key": "!actors.items.effects!ZGDys30OS76uYaIO.njUMNaCbBHpZswoL.iIQXR8VezkvbkFoS"
+          "_key": "!actors.items.effects!ZGDys30OS76uYaIO.njUMNaCbBHpZswoL.iIQXR8VezkvbkFoS",
+          "sort": 0
         }
       ],
       "folder": null,
@@ -4386,6 +4345,142 @@
         "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!ZGDys30OS76uYaIO.HK6uFl7S3Mahvw9o"
+    },
+    {
+      "_id": "FZiSrcZmUUelVbNW",
+      "name": "Human",
+      "type": "race",
+      "img": "icons/environment/people/commoner.webp",
+      "system": {
+        "description": {
+          "value": "<p>It's hard to make generalizations about humans, but your human character has these traits.</p><p><em><strong>Ability Score Increase.</strong></em> Your ability scores each increase by 1.</p><p><em><strong>Age.</strong></em> Humans reach adulthood in their late teens and live less than a century.</p><p><em><strong>Alignment.</strong></em> Humans tend toward no particular alignment. The best and the worst are found among them.</p><p><em><strong>Size.</strong></em> Humans vary widely in height and build, from barely 5 feet to well over 6 feet tall. Regardless of your position in that range, your size is Medium.</p><p><em><strong>Speed.</strong></em> Your base walking speed is 30 feet.</p><p><em><strong>Languages.</strong></em> You can speak, read, and write Common and one extra language of your choice. Humans typically learn the languages of other peoples they deal with, including obscure dialects. They are fond of sprinkling their speech with words borrowed from other tongues: Orc curses, Elvish musical expressions, Dwarvish military phrases, and so on.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": {
+          "custom": "SRD 5.1",
+          "book": "",
+          "page": "",
+          "license": ""
+        },
+        "identifier": "human",
+        "advancement": [
+          {
+            "_id": "Z9hvZFkWUNvowbQX",
+            "type": "AbilityScoreImprovement",
+            "configuration": {
+              "points": 0,
+              "fixed": {
+                "str": 1,
+                "dex": 1,
+                "con": 1,
+                "int": 1,
+                "wis": 1,
+                "cha": 1
+              },
+              "cap": 2
+            },
+            "value": {
+              "type": "asi",
+              "assignments": {
+                "str": 1,
+                "dex": 1,
+                "con": 1,
+                "int": 1,
+                "wis": 1,
+                "cha": 1
+              }
+            },
+            "level": 0,
+            "title": ""
+          },
+          {
+            "_id": "dNSrZePZHz2qwVpi",
+            "type": "Size",
+            "configuration": {
+              "hint": "Humans vary widely in height and build, from barely 5 feet to well over 6 feet tall. Regardless of your position in that range, your size is Medium.",
+              "sizes": [
+                "med"
+              ]
+            },
+            "value": {
+              "size": "med"
+            },
+            "level": 1,
+            "title": ""
+          },
+          {
+            "_id": "HI6r4Y6KjHND0i53",
+            "type": "Trait",
+            "configuration": {
+              "hint": "",
+              "mode": "default",
+              "allowReplacements": false,
+              "grants": [
+                "languages:standard:common"
+              ],
+              "choices": [
+                {
+                  "count": 1,
+                  "pool": [
+                    "languages:*"
+                  ]
+                }
+              ]
+            },
+            "level": 0,
+            "title": "",
+            "value": {
+              "chosen": [
+                "languages:standard:common",
+                "languages:standard:gnomish"
+              ]
+            }
+          }
+        ],
+        "movement": {
+          "burrow": 0,
+          "climb": 0,
+          "fly": 0,
+          "swim": 0,
+          "walk": 30,
+          "units": "ft",
+          "hover": false
+        },
+        "senses": {
+          "darkvision": 0,
+          "blindsight": 0,
+          "tremorsense": 0,
+          "truesight": 0,
+          "units": "ft",
+          "special": ""
+        },
+        "type": {
+          "value": "humanoid",
+          "subtype": "",
+          "custom": ""
+        }
+      },
+      "effects": [],
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.races.ydP3QzCmur55mtY2"
+        }
+      },
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.4.0",
+        "coreVersion": "10.303",
+        "createdTime": 1677180079259,
+        "modifiedTime": 1699986827105,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "sort": 0,
+      "folder": null,
+      "_key": "!actors.items!ZGDys30OS76uYaIO.FZiSrcZmUUelVbNW"
     }
   ],
   "effects": [
@@ -4415,8 +4510,8 @@
       "transfer": false,
       "flags": {},
       "tint": null,
-      "sort": 0,
-      "_key": "!actors.effects!ZGDys30OS76uYaIO.iIQXR8VezkvbkFoS"
+      "_key": "!actors.effects!ZGDys30OS76uYaIO.iIQXR8VezkvbkFoS",
+      "sort": 0
     }
   ],
   "folder": null,
@@ -4428,10 +4523,10 @@
   "_id": "ZGDys30OS76uYaIO",
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.2.2",
+    "systemVersion": "2.4.0",
     "coreVersion": "10.303",
     "createdTime": 1661787232171,
-    "modifiedTime": 1691519042425,
+    "modifiedTime": 1699986827213,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!ZGDys30OS76uYaIO"

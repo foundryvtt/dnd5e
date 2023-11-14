@@ -51,7 +51,7 @@
         }
       },
       "cha": {
-        "value": 17,
+        "value": 19,
         "proficient": 1,
         "max": null,
         "bonuses": {
@@ -82,23 +82,23 @@
         "bonus": "0"
       },
       "movement": {
-        "burrow": 0,
-        "climb": 0,
-        "fly": 0,
-        "swim": 0,
-        "walk": 30,
-        "units": "ft",
+        "burrow": null,
+        "climb": null,
+        "fly": null,
+        "swim": null,
+        "walk": null,
+        "units": null,
         "hover": false
       },
       "attunement": {
         "max": 3
       },
       "senses": {
-        "darkvision": 60,
-        "blindsight": 0,
-        "tremorsense": 0,
-        "truesight": 0,
-        "units": "ft",
+        "darkvision": null,
+        "blindsight": null,
+        "tremorsense": null,
+        "truesight": null,
+        "units": null,
         "special": ""
       },
       "spellcasting": "cha",
@@ -115,7 +115,7 @@
         "public": ""
       },
       "alignment": "Chaotic Neutral",
-      "race": "Half-elf",
+      "race": "wLvV5awPEy6FHkvg",
       "background": "",
       "originalClass": "MuaNnEZkswuhixJP",
       "xp": {
@@ -151,8 +151,8 @@
       "languages": {
         "value": [
           "common",
-          "deep",
-          "elvish"
+          "elvish",
+          "deep"
         ],
         "custom": ""
       },
@@ -265,7 +265,7 @@
         }
       },
       "nat": {
-        "value": 1,
+        "value": 0,
         "ability": "int",
         "bonuses": {
           "check": "",
@@ -297,7 +297,7 @@
         }
       },
       "rel": {
-        "value": 0,
+        "value": 1,
         "ability": "int",
         "bonuses": {
           "check": "",
@@ -576,12 +576,12 @@
         "default": 0
       },
       "_stats": {
-        "systemId": null,
-        "systemVersion": null,
-        "coreVersion": null,
+        "systemId": "dnd5e",
+        "systemVersion": "2.4.0",
+        "coreVersion": "10.303",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1699987213588,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!Jw8DeuPjt1qpusdB.s6ksFNAiSR2Wy20f"
     },
@@ -2056,194 +2056,6 @@
       "_key": "!actors.items!Jw8DeuPjt1qpusdB.n4y54n9b3KkJdhLL"
     },
     {
-      "_id": "IBBEAAhVb5tWL0sz",
-      "name": "Fey Ancestry",
-      "type": "feat",
-      "system": {
-        "description": {
-          "value": "<p>You have advantage on saving throws against being charmed, and magic can't put you to sleep.</p>",
-          "chat": "",
-          "unidentified": ""
-        },
-        "source": "SRD 5.1",
-        "activation": {
-          "type": "",
-          "cost": null,
-          "condition": ""
-        },
-        "duration": {
-          "value": "",
-          "units": ""
-        },
-        "cover": null,
-        "crewed": false,
-        "target": {
-          "value": null,
-          "width": null,
-          "units": "",
-          "type": ""
-        },
-        "range": {
-          "value": null,
-          "long": null,
-          "units": ""
-        },
-        "uses": {
-          "value": null,
-          "max": "",
-          "per": null,
-          "recovery": ""
-        },
-        "consume": {
-          "type": "",
-          "target": null,
-          "amount": null
-        },
-        "ability": "",
-        "actionType": "",
-        "attackBonus": "",
-        "chatFlavor": "",
-        "critical": {
-          "threshold": null,
-          "damage": ""
-        },
-        "damage": {
-          "parts": [],
-          "versatile": ""
-        },
-        "formula": "",
-        "save": {
-          "ability": "",
-          "dc": null,
-          "scaling": "spell"
-        },
-        "type": {
-          "value": "",
-          "subtype": ""
-        },
-        "requirements": "Elf, Half-Elf",
-        "recharge": {
-          "value": null,
-          "charged": false
-        }
-      },
-      "sort": 0,
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.dnd5e.monsterfeatures.LvSBjRKoCAKaAnQy"
-        }
-      },
-      "img": "icons/creatures/mammals/elk-moose-marked-green.webp",
-      "effects": [],
-      "folder": null,
-      "ownership": {
-        "default": 0
-      },
-      "_stats": {
-        "systemId": null,
-        "systemVersion": null,
-        "coreVersion": null,
-        "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
-      },
-      "_key": "!actors.items!Jw8DeuPjt1qpusdB.IBBEAAhVb5tWL0sz"
-    },
-    {
-      "_id": "N86N6wcMkknG99ZF",
-      "name": "Half-Elf",
-      "type": "feat",
-      "system": {
-        "description": {
-          "value": "<div title=\"Page 6\">\n<div>\n<div>\n<p><em>Your half-­elf character has some qualities in common with elves and some that are unique to half-­elves. </em></p><p><em><strong>Ability Score Increase.</strong></em> Your Charisma score increases by 2, and two other ability scores of your choice increase by 1.</p><p><em><strong>Age.</strong></em> Half-­elves mature at the same rate humans do and reach adulthood around the age of 20. They live much longer than humans, however, often exceeding 180 years.</p><p><em><strong>Alignment.</strong></em> Half-­elves share the chaotic bent of their elven heritage. They value both personal freedom and creative expression, demonstrating neither love of leaders nor desire for followers. They chafe at rules, resent others' demands, and sometimes prove unreliable, or at least unpredictable.</p>\n<div title=\"Page 7\">\n<div>\n<div>\n<p><em><strong>Size.</strong></em> Half-­elves are about the same size as humans, ranging from 5 to 6 feet tall. Your size is Medium.</p><p><em><strong>Speed.</strong></em> Your base walking speed is 30 feet.</p><p><em><strong>Darkvision.</strong></em> Thanks to your elf blood, you have superior vision in dark and dim conditions. You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can't discern color in darkness, only shades of gray.</p><p><em><strong>Fey Ancestry.</strong></em> @Compendium[dnd5e.races.cnTbpPPeGW7vGjOV]{Fey Ancestry} You have advantage on saving throws against being charmed, and magic can't put you to sleep.</p><p><em><strong>Skill Versatility.</strong></em> You gain proficiency in two skills of your choice.</p><p><em><strong>Languages.</strong></em> You can speak, read, and write Common, Elvish, and one extra language of your choice.</p>\n</div>\n</div>\n</div>\n</div>\n</div>\n</div>",
-          "chat": "",
-          "unidentified": ""
-        },
-        "source": "SRD 5.1",
-        "activation": {
-          "type": "",
-          "cost": null,
-          "condition": ""
-        },
-        "duration": {
-          "value": "",
-          "units": ""
-        },
-        "cover": null,
-        "crewed": false,
-        "target": {
-          "value": null,
-          "width": null,
-          "units": "",
-          "type": ""
-        },
-        "range": {
-          "value": null,
-          "long": null,
-          "units": ""
-        },
-        "uses": {
-          "value": null,
-          "max": "",
-          "per": null,
-          "recovery": ""
-        },
-        "consume": {
-          "type": "",
-          "target": null,
-          "amount": null
-        },
-        "ability": null,
-        "actionType": "",
-        "attackBonus": "",
-        "chatFlavor": "",
-        "critical": {
-          "threshold": null,
-          "damage": ""
-        },
-        "damage": {
-          "parts": [],
-          "versatile": ""
-        },
-        "formula": "",
-        "save": {
-          "ability": "",
-          "dc": null,
-          "scaling": "spell"
-        },
-        "type": {
-          "value": "",
-          "subtype": ""
-        },
-        "requirements": "",
-        "recharge": {
-          "value": null,
-          "charged": false
-        }
-      },
-      "sort": 0,
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.dnd5e.races.Hye5IZwPOSwV0qRR"
-        }
-      },
-      "img": "icons/magic/nature/leaf-glow-triple-teal.webp",
-      "effects": [],
-      "folder": null,
-      "ownership": {
-        "default": 0
-      },
-      "_stats": {
-        "systemId": null,
-        "systemVersion": null,
-        "coreVersion": null,
-        "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
-      },
-      "_key": "!actors.items!Jw8DeuPjt1qpusdB.N86N6wcMkknG99ZF"
-    },
-    {
       "_id": "r4vy8utsxo9my9r0",
       "name": "The Fiend",
       "type": "subclass",
@@ -2365,10 +2177,10 @@
       },
       "_stats": {
         "systemId": "dnd5e",
-        "systemVersion": "2.2.2",
+        "systemVersion": "2.4.0",
         "coreVersion": "10.303",
         "createdTime": null,
-        "modifiedTime": 1691519206746,
+        "modifiedTime": 1699987101473,
         "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!Jw8DeuPjt1qpusdB.r4vy8utsxo9my9r0"
@@ -3305,7 +3117,8 @@
                 "int": 0,
                 "wis": 0,
                 "cha": 0
-              }
+              },
+              "cap": 2
             },
             "value": {
               "type": "asi"
@@ -3326,7 +3139,8 @@
                 "int": 0,
                 "wis": 0,
                 "cha": 0
-              }
+              },
+              "cap": 2
             },
             "value": {
               "type": "asi"
@@ -3347,7 +3161,8 @@
                 "int": 0,
                 "wis": 0,
                 "cha": 0
-              }
+              },
+              "cap": 2
             },
             "value": {
               "type": "asi"
@@ -3368,7 +3183,8 @@
                 "int": 0,
                 "wis": 0,
                 "cha": 0
-              }
+              },
+              "cap": 2
             },
             "value": {
               "type": "asi"
@@ -3390,15 +3206,67 @@
                 "int": 0,
                 "wis": 0,
                 "cha": 0
-              }
+              },
+              "cap": 2
             },
             "value": {
               "type": "asi"
             },
             "level": 19,
             "title": ""
+          },
+          {
+            "type": "Trait",
+            "level": 1,
+            "configuration": {
+              "grants": [
+                "saves:wis",
+                "saves:cha"
+              ],
+              "hint": "",
+              "mode": "default",
+              "allowReplacements": false,
+              "choices": []
+            },
+            "value": {
+              "chosen": [
+                "saves:wis",
+                "saves:cha"
+              ]
+            },
+            "_id": "6c0dIUJzG26SEbrh"
+          },
+          {
+            "type": "Trait",
+            "level": 1,
+            "configuration": {
+              "choices": [
+                {
+                  "count": 2,
+                  "pool": [
+                    "skills:arc",
+                    "skills:dec",
+                    "skills:his",
+                    "skills:itm",
+                    "skills:inv",
+                    "skills:nat",
+                    "skills:rel"
+                  ]
+                }
+              ],
+              "hint": "",
+              "mode": "default",
+              "allowReplacements": false,
+              "grants": []
+            },
+            "_id": "FZbpcxCMD2wSrRmC",
+            "value": {}
           }
         ],
+        "spellcasting": {
+          "progression": "pact",
+          "ability": "cha"
+        },
         "saves": [
           "wis",
           "cha"
@@ -3415,10 +3283,6 @@
             "rel"
           ],
           "value": []
-        },
-        "spellcasting": {
-          "progression": "pact",
-          "ability": "cha"
         }
       },
       "effects": [],
@@ -3434,10 +3298,10 @@
       },
       "_stats": {
         "systemId": "dnd5e",
-        "systemVersion": "2.2.2",
+        "systemVersion": "2.4.0",
         "coreVersion": "10.303",
         "createdTime": 1661787234278,
-        "modifiedTime": 1691519206763,
+        "modifiedTime": 1699987101473,
         "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!Jw8DeuPjt1qpusdB.MuaNnEZkswuhixJP"
@@ -3529,10 +3393,10 @@
       "folder": null,
       "_stats": {
         "systemId": "dnd5e",
-        "systemVersion": "2.2.2",
+        "systemVersion": "2.4.0",
         "coreVersion": "10.303",
         "createdTime": 1661787234413,
-        "modifiedTime": 1691519206764,
+        "modifiedTime": 1699987213588,
         "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!Jw8DeuPjt1qpusdB.O5nhueIb5HIil0eh"
@@ -3624,10 +3488,10 @@
       "sort": 0,
       "_stats": {
         "systemId": "dnd5e",
-        "systemVersion": "2.2.2",
+        "systemVersion": "2.4.0",
         "coreVersion": "10.303",
         "createdTime": 1661787234440,
-        "modifiedTime": 1691519206766,
+        "modifiedTime": 1699987213588,
         "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!Jw8DeuPjt1qpusdB.uf6mKJJICzDHiWly"
@@ -3724,13 +3588,300 @@
       "sort": 0,
       "_stats": {
         "systemId": "dnd5e",
-        "systemVersion": "2.2.2",
+        "systemVersion": "2.4.0",
         "coreVersion": "10.303",
         "createdTime": 1661787234360,
-        "modifiedTime": 1691519206767,
+        "modifiedTime": 1699987213589,
         "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!Jw8DeuPjt1qpusdB.mbXQrn8QAMAtSSUc"
+    },
+    {
+      "_id": "wLvV5awPEy6FHkvg",
+      "name": "Half-Elf",
+      "type": "race",
+      "img": "icons/magic/nature/leaf-glow-triple-green.webp",
+      "system": {
+        "description": {
+          "value": "<p>Your half‑elf character has some qualities in common with elves and some that are unique to half-­elves.</p><p><em><strong>Ability Score Increase.</strong></em> Your Charisma score increases by 2, and two other ability scores of your choice increase by 1.</p><p><em><strong>Age.</strong></em> Half-­elves mature at the same rate humans do and reach adulthood around the age of 20. They live much longer than humans, however, often exceeding 180 years.</p><p><em><strong>Alignment.</strong></em> Half-­elves share the chaotic bent of their elven heritage. They value both personal freedom and creative expression, demonstrating neither love of leaders nor desire for followers. They chafe at rules, resent others' demands, and sometimes prove unreliable, or at least unpredictable.</p><p><em><strong>Size.</strong></em> Half-­elves are about the same size as humans, ranging from 5 to 6 feet tall. Your size is Medium.</p><p><em><strong>Speed.</strong></em> Your base walking speed is 30 feet.</p><p><em><strong>Darkvision.</strong></em> Thanks to your elf blood, you have superior vision in dark and dim conditions. You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can't discern color in darkness, only shades of gray.</p><p><em><strong>Fey Ancestry.</strong></em> You have advantage on saving throws against being charmed, and magic can't put you to sleep.</p><p><em><strong>Skill Versatility.</strong></em> You gain proficiency in two skills of your choice.</p><p><em><strong>Languages.</strong></em> You can speak, read, and write Common, Elvish, and one extra language of your choice.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": {
+          "custom": "SRD 5.1",
+          "book": "",
+          "page": "",
+          "license": ""
+        },
+        "identifier": "half-elf",
+        "advancement": [
+          {
+            "_id": "rXyxzoqxdxlspMi5",
+            "type": "ItemGrant",
+            "configuration": {
+              "items": [
+                "Compendium.dnd5e.races.cnTbpPPeGW7vGjOV"
+              ],
+              "optional": false,
+              "spell": {
+                "ability": "",
+                "preparation": "",
+                "uses": {
+                  "max": "",
+                  "per": ""
+                }
+              }
+            },
+            "value": {
+              "added": {
+                "pZ76fyelg2iQaqUA": "Compendium.dnd5e.races.cnTbpPPeGW7vGjOV"
+              }
+            },
+            "level": 0,
+            "title": ""
+          },
+          {
+            "_id": "Z9hvZFkWUNvowbQX",
+            "type": "AbilityScoreImprovement",
+            "configuration": {
+              "points": 2,
+              "fixed": {
+                "str": 0,
+                "dex": 0,
+                "con": 0,
+                "int": 0,
+                "wis": 0,
+                "cha": 2
+              },
+              "cap": 1
+            },
+            "value": {
+              "type": "asi",
+              "assignments": {
+                "cha": 2
+              }
+            },
+            "level": 0,
+            "title": ""
+          },
+          {
+            "_id": "r3PSgtQO6Eim49LU",
+            "type": "Size",
+            "configuration": {
+              "hint": "Half-elves are about the same size as humans, ranging from 5 to 6 feet tall. Your size is Medium.",
+              "sizes": [
+                "med"
+              ]
+            },
+            "value": {
+              "size": "med"
+            },
+            "level": 1,
+            "title": ""
+          },
+          {
+            "_id": "CormRQZ5momyvS2I",
+            "type": "Trait",
+            "configuration": {
+              "hint": "",
+              "mode": "default",
+              "allowReplacements": false,
+              "grants": [],
+              "choices": [
+                {
+                  "count": 2,
+                  "pool": [
+                    "skills:*"
+                  ]
+                }
+              ]
+            },
+            "level": 0,
+            "title": "Skill Versatility",
+            "value": {
+              "chosen": [
+                "skills:dec",
+                "skills:rel"
+              ]
+            }
+          },
+          {
+            "_id": "U3OO7jLU0nm0Z7zw",
+            "type": "Trait",
+            "configuration": {
+              "hint": "",
+              "mode": "default",
+              "allowReplacements": false,
+              "grants": [
+                "languages:standard:common",
+                "languages:standard:elvish"
+              ],
+              "choices": [
+                {
+                  "count": 1,
+                  "pool": [
+                    "languages:*"
+                  ]
+                }
+              ]
+            },
+            "level": 0,
+            "title": "",
+            "value": {
+              "chosen": [
+                "languages:standard:common",
+                "languages:standard:elvish",
+                "languages:exotic:deep"
+              ]
+            }
+          }
+        ],
+        "senses": {
+          "darkvision": 60,
+          "blindsight": 0,
+          "tremorsense": 0,
+          "truesight": 0,
+          "units": "ft",
+          "special": ""
+        },
+        "type": {
+          "subtype": "elf",
+          "value": "humanoid",
+          "custom": ""
+        },
+        "movement": {
+          "burrow": 0,
+          "climb": 0,
+          "fly": 0,
+          "swim": 0,
+          "walk": 30,
+          "units": "ft",
+          "hover": false
+        }
+      },
+      "effects": [],
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.races.Hye5IZwPOSwV0qRR"
+        }
+      },
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.4.0",
+        "coreVersion": "10.303",
+        "createdTime": 1677181061205,
+        "modifiedTime": 1699987101462,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "sort": 0,
+      "folder": null,
+      "_key": "!actors.items!Jw8DeuPjt1qpusdB.wLvV5awPEy6FHkvg"
+    },
+    {
+      "_id": "pZ76fyelg2iQaqUA",
+      "name": "Fey Ancestry",
+      "ownership": {
+        "default": 0
+      },
+      "type": "feat",
+      "system": {
+        "description": {
+          "value": "<p>You have advantage on saving throws against being charmed, and magic can't put you to sleep.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": {
+          "custom": "SRD 5.1",
+          "book": "",
+          "page": "",
+          "license": ""
+        },
+        "activation": {
+          "type": "",
+          "cost": null,
+          "condition": ""
+        },
+        "duration": {
+          "value": "",
+          "units": ""
+        },
+        "cover": null,
+        "crewed": false,
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": "",
+          "prompt": true
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": ""
+        },
+        "uses": {
+          "value": null,
+          "max": "",
+          "per": null,
+          "recovery": "",
+          "prompt": true
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null,
+          "scale": false
+        },
+        "ability": "",
+        "actionType": "",
+        "attackBonus": "",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "type": {
+          "value": "race",
+          "subtype": ""
+        },
+        "requirements": "Elf, Half-Elf",
+        "recharge": {
+          "value": null,
+          "charged": false
+        }
+      },
+      "flags": {
+        "dnd5e": {
+          "sourceId": "Compendium.dnd5e.races.cnTbpPPeGW7vGjOV",
+          "advancementOrigin": "wLvV5awPEy6FHkvg.rXyxzoqxdxlspMi5"
+        }
+      },
+      "img": "icons/creatures/mammals/elk-moose-marked-green.webp",
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.4.0",
+        "coreVersion": "10.303",
+        "createdTime": 1661787234471,
+        "modifiedTime": 1699987213587,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!actors.items!Jw8DeuPjt1qpusdB.pZ76fyelg2iQaqUA"
     }
   ],
   "effects": [],
@@ -3742,10 +3893,10 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.2.2",
+    "systemVersion": "2.4.0",
     "coreVersion": "10.303",
     "createdTime": 1661787232167,
-    "modifiedTime": 1691519206781,
+    "modifiedTime": 1699987213589,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!Jw8DeuPjt1qpusdB"

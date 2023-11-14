@@ -82,23 +82,23 @@
         "bonus": "0"
       },
       "movement": {
-        "burrow": 0,
-        "climb": 0,
-        "fly": 0,
-        "swim": 0,
-        "walk": 30,
-        "units": "ft",
+        "burrow": null,
+        "climb": null,
+        "fly": null,
+        "swim": null,
+        "walk": null,
+        "units": null,
         "hover": false
       },
       "attunement": {
         "max": 3
       },
       "senses": {
-        "darkvision": 0,
-        "blindsight": 0,
-        "tremorsense": 0,
-        "truesight": 0,
-        "units": "ft",
+        "darkvision": null,
+        "blindsight": null,
+        "tremorsense": null,
+        "truesight": null,
+        "units": null,
         "special": ""
       },
       "spellcasting": "wis",
@@ -115,7 +115,7 @@
         "public": ""
       },
       "alignment": "Lawful Good",
-      "race": "Dragonborn",
+      "race": "syaK4jD01I8U6EAL",
       "background": "",
       "originalClass": "Zo7sWdchHDF6d0nn",
       "xp": {
@@ -152,10 +152,10 @@
       },
       "languages": {
         "value": [
-          "common",
-          "draconic",
           "giant",
-          "halfling"
+          "halfling",
+          "common",
+          "draconic"
         ],
         "custom": ""
       },
@@ -2154,293 +2154,6 @@
       "_key": "!actors.items!kfzBL0q1Y7LgGs2x.1qgVPt1uOptTVby1"
     },
     {
-      "_id": "0geQXeMWTg6cbDvQ",
-      "name": "Breath Weapon",
-      "type": "feat",
-      "system": {
-        "description": {
-          "value": "<div title=\"Page 5\">\n<p>You can use your action to exhale destructive energy. Your draconic ancestry determines the size, shape, and damage type of the exhalation.</p><p>When you use your breath weapon, each creature in the area of the exhalation must make a saving throw, the type of which is determined by your draconic ancestry. The DC for this saving throw equals 8 + your Constitution modifier + your proficiency bonus. A creature takes 2d6 damage on a failed save, and half as much damage on a successful one. The damage increases to 3d6 at 6th level, 4d6 at 11th level, and 5d6 at 16th level.</p>\n<div title=\"Page 6\">\n<div>\n<div>\n<p>After you use your breath weapon, you can't use it again until you complete a short or long rest.</p><p><em><strong>Foundry Note: </strong>Edit the Details for this feat, so that the damage type, saving throw, and area of effect match those of your Draconic Ancestry.</em></p>\n</div>\n</div>\n</div>\n</div>",
-          "chat": "",
-          "unidentified": ""
-        },
-        "source": "SRD 5.1",
-        "activation": {
-          "type": "action",
-          "cost": 1,
-          "condition": ""
-        },
-        "duration": {
-          "value": "",
-          "units": "inst"
-        },
-        "cover": null,
-        "crewed": false,
-        "target": {
-          "value": 15,
-          "width": null,
-          "units": "ft",
-          "type": "cone"
-        },
-        "range": {
-          "value": null,
-          "long": null,
-          "units": ""
-        },
-        "uses": {
-          "value": 1,
-          "max": "1",
-          "per": "sr",
-          "recovery": ""
-        },
-        "consume": {
-          "type": "",
-          "target": null,
-          "amount": null
-        },
-        "ability": "con",
-        "actionType": "save",
-        "attackBonus": "",
-        "chatFlavor": "",
-        "critical": {
-          "threshold": null,
-          "damage": ""
-        },
-        "damage": {
-          "parts": [
-            [
-              "(ceil((@details.level/5) + 1))d6",
-              "cold"
-            ]
-          ],
-          "versatile": ""
-        },
-        "formula": "",
-        "save": {
-          "ability": "con",
-          "dc": 11,
-          "scaling": "con"
-        },
-        "type": {
-          "value": "",
-          "subtype": ""
-        },
-        "requirements": "Dragonborn",
-        "recharge": {
-          "value": null,
-          "charged": false
-        }
-      },
-      "sort": 0,
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.dnd5e.races.KL7wx9Q8XNJQir0k"
-        }
-      },
-      "img": "icons/magic/acid/projectile-smoke-glowing.webp",
-      "effects": [],
-      "folder": null,
-      "ownership": {
-        "default": 0
-      },
-      "_stats": {
-        "systemId": null,
-        "systemVersion": null,
-        "coreVersion": null,
-        "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
-      },
-      "_key": "!actors.items!kfzBL0q1Y7LgGs2x.0geQXeMWTg6cbDvQ"
-    },
-    {
-      "_id": "DPYl8D5QtcRVH5XX",
-      "name": "Damage Resistance",
-      "type": "feat",
-      "system": {
-        "description": {
-          "value": "<div title=\"Page 6\">\n<div>\n<div>\n<p>You have resistance to the damage type associated with your draconic ancestry.</p>\n</div>\n</div>\n</div>",
-          "chat": "",
-          "unidentified": ""
-        },
-        "source": "SRD 5.1",
-        "activation": {
-          "type": "",
-          "cost": null,
-          "condition": ""
-        },
-        "duration": {
-          "value": "",
-          "units": ""
-        },
-        "cover": null,
-        "crewed": false,
-        "target": {
-          "value": null,
-          "width": null,
-          "units": "",
-          "type": ""
-        },
-        "range": {
-          "value": null,
-          "long": null,
-          "units": ""
-        },
-        "uses": {
-          "value": null,
-          "max": "",
-          "per": null,
-          "recovery": ""
-        },
-        "consume": {
-          "type": "",
-          "target": null,
-          "amount": null
-        },
-        "ability": null,
-        "actionType": "",
-        "attackBonus": "",
-        "chatFlavor": "",
-        "critical": {
-          "threshold": null,
-          "damage": ""
-        },
-        "damage": {
-          "parts": [],
-          "versatile": ""
-        },
-        "formula": "",
-        "save": {
-          "ability": "",
-          "dc": null,
-          "scaling": "spell"
-        },
-        "type": {
-          "value": "",
-          "subtype": ""
-        },
-        "requirements": "Dragonborn",
-        "recharge": {
-          "value": null,
-          "charged": false
-        }
-      },
-      "sort": 0,
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.dnd5e.races.XxCuhIk6hAu6rNB0"
-        }
-      },
-      "img": "icons/magic/defensive/shield-barrier-glowing-blue.webp",
-      "effects": [],
-      "folder": null,
-      "ownership": {
-        "default": 0
-      },
-      "_stats": {
-        "systemId": null,
-        "systemVersion": null,
-        "coreVersion": null,
-        "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
-      },
-      "_key": "!actors.items!kfzBL0q1Y7LgGs2x.DPYl8D5QtcRVH5XX"
-    },
-    {
-      "_id": "kJbsSe2Dht2Tc7ux",
-      "name": "Dragonborn",
-      "type": "feat",
-      "system": {
-        "description": {
-          "value": "<div title=\"Page 5\">\n<div>\n<div>\n<p><em>Your draconic heritage manifests in a variety of traits you share with other dragonborn. </em></p><p><em><strong>Ability Score Increase. </strong></em>Your Strength score increases by 2, and your Charisma score increases by 1.</p><p><em><strong>Age.</strong></em> Young dragonborn grow quickly. They walk hours after hatching, attain the size and development of a 10-­year-­old human child by the age of 3, and reach adulthood by 15. They live to be around 80.</p><p><em><strong>Alignment.</strong></em> Dragonborn tend to extremes, making a conscious choice for one side or the other in the cosmic war between good and evil. Most dragonborn are good, but those who side with evil can be terrible villains.</p><p><em><strong>Size.</strong></em> Dragonborn are taller and heavier than humans, standing well over 6 feet tall and averaging almost 250 pounds. Your size is Medium.</p><p><em><strong>Speed.</strong></em> Your base walking speed is 30 feet.</p><p><em><strong>Draconic Ancestry.</strong></em> You have draconic ancestry. Choose one type of dragon from the Draconic Ancestry table. Your breath weapon and damage resistance are determined by the dragon type, as shown in the table.</p>\n</div>\n</div>\n</div>\n<table>\n<thead>\n<tr>\n<td>Dragon</td>\n<td>Damage Type</td>\n<td>Breath Weapon</td>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>Black</td>\n<td>Acid</td>\n<td>5 by 30 ft. line (Dex. save)</td>\n</tr>\n<tr>\n<td>Blue</td>\n<td>Lightning</td>\n<td>5 by 30 ft. line (Dex. save)</td>\n</tr>\n<tr>\n<td>Brass</td>\n<td>Fire</td>\n<td>5 by 30 ft. line (Dex. save)</td>\n</tr>\n<tr>\n<td>Bronze</td>\n<td>Lightning</td>\n<td>5 by 30 ft. line (Dex. save)</td>\n</tr>\n<tr>\n<td>Copper</td>\n<td>Acid</td>\n<td>5 by 30 ft. line (Dex. save)</td>\n</tr>\n<tr>\n<td>Gold</td>\n<td>Fire</td>\n<td>15 ft. cone (Dex. save)</td>\n</tr>\n<tr>\n<td>Green</td>\n<td>Poison</td>\n<td>15 ft. cone (Con. save)</td>\n</tr>\n<tr>\n<td>Red</td>\n<td>Fire</td>\n<td>15 ft. cone (Dex. save)</td>\n</tr>\n<tr>\n<td>Silver</td>\n<td>Cold</td>\n<td>15 ft. cone (Con. save)</td>\n</tr>\n<tr>\n<td>White</td>\n<td>Cold</td>\n<td>15 ft. cone (Con. save)</td>\n</tr>\n</tbody>\n</table>\n\n<div title=\"Page 5\">\n<div>\n<div>\n<p><em><strong>Breath Weapon. </strong></em>@Compendium[dnd5e.races.KL7wx9Q8XNJQir0k]{Breath Weapon} You can use your action to exhale destructive energy. Your draconic ancestry determines the size, shape, and damage type of the exhalation.</p><p>When you use your breath weapon, each creature in the area of the exhalation must make a saving throw, the type of which is determined by your draconic ancestry. The DC for this saving throw equals 8 + your Constitution modifier + your proficiency bonus. A creature takes 2d6 damage on a failed save, and half as much damage on a successful one. The damage increases to 3d6 at 6th level, 4d6 at 11th level, and 5d6 at 16th level.</p>\n<div title=\"Page 6\">\n<div>\n<div>\n<p>After you use your breath weapon, you can't use it again until you complete a short or long rest.</p><p><em><strong>Damage Resistance.</strong></em> @Compendium[dnd5e.races.XxCuhIk6hAu6rNB0]{Damage Resistance} You have resistance to the damage type associated with your draconic ancestry.</p><p><em><strong>Languages. </strong></em>You can speak, read, and write Common and Draconic. Draconic is thought to be one of the oldest languages and is often used in the study of magic. The language sounds harsh to most other creatures and includes numerous hard consonants and sibilants. </p>\n</div>\n</div>\n</div>\n</div>\n</div>\n</div>\n<div title=\"Page 5\">\n<div>\n<div> </div>\n</div>\n</div>",
-          "chat": "",
-          "unidentified": ""
-        },
-        "source": "SRD 5.1",
-        "activation": {
-          "type": "",
-          "cost": null,
-          "condition": ""
-        },
-        "duration": {
-          "value": "",
-          "units": ""
-        },
-        "cover": null,
-        "crewed": false,
-        "target": {
-          "value": null,
-          "width": null,
-          "units": "",
-          "type": ""
-        },
-        "range": {
-          "value": null,
-          "long": null,
-          "units": ""
-        },
-        "uses": {
-          "value": null,
-          "max": "",
-          "per": null,
-          "recovery": ""
-        },
-        "consume": {
-          "type": "",
-          "target": null,
-          "amount": null
-        },
-        "ability": null,
-        "actionType": "",
-        "attackBonus": "",
-        "chatFlavor": "",
-        "critical": {
-          "threshold": null,
-          "damage": ""
-        },
-        "damage": {
-          "parts": [],
-          "versatile": ""
-        },
-        "formula": "",
-        "save": {
-          "ability": "",
-          "dc": null,
-          "scaling": "spell"
-        },
-        "type": {
-          "value": "",
-          "subtype": ""
-        },
-        "requirements": "",
-        "recharge": {
-          "value": null,
-          "charged": false
-        }
-      },
-      "sort": 0,
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.dnd5e.races.K4DNDcR6vngbp0pf"
-        }
-      },
-      "img": "icons/magic/perception/eye-ringed-glow-angry-small-red.webp",
-      "effects": [],
-      "folder": null,
-      "ownership": {
-        "default": 0
-      },
-      "_stats": {
-        "systemId": null,
-        "systemVersion": null,
-        "coreVersion": null,
-        "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
-      },
-      "_key": "!actors.items!kfzBL0q1Y7LgGs2x.kJbsSe2Dht2Tc7ux"
-    },
-    {
       "_id": "6srkb2hvbgbrjzi3",
       "name": "Life Domain",
       "type": "subclass",
@@ -2585,10 +2298,10 @@
       },
       "_stats": {
         "systemId": "dnd5e",
-        "systemVersion": "2.2.2",
+        "systemVersion": "2.4.0",
         "coreVersion": "10.303",
         "createdTime": null,
-        "modifiedTime": 1691519023020,
+        "modifiedTime": 1699985823386,
         "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!kfzBL0q1Y7LgGs2x.6srkb2hvbgbrjzi3"
@@ -3060,8 +2773,8 @@
           "origin": "Item.kZZAZ6kp9YzgPQEe",
           "tint": null,
           "transfer": true,
-          "sort": 0,
-          "_key": "!actors.items.effects!kfzBL0q1Y7LgGs2x.8dzaICjGy6mTUaUr.8rP3gwmXVTgZqYZE"
+          "_key": "!actors.items.effects!kfzBL0q1Y7LgGs2x.8dzaICjGy6mTUaUr.8rP3gwmXVTgZqYZE",
+          "sort": 0
         }
       ],
       "folder": null,
@@ -3668,8 +3381,8 @@
           "origin": "Item.KkaQm4OQJxc6z3to",
           "tint": null,
           "transfer": true,
-          "sort": 0,
-          "_key": "!actors.items.effects!kfzBL0q1Y7LgGs2x.95K2aUhAGV9qXjnf.potjmpJPeUA1U4oe"
+          "_key": "!actors.items.effects!kfzBL0q1Y7LgGs2x.95K2aUhAGV9qXjnf.potjmpJPeUA1U4oe",
+          "sort": 0
         }
       ],
       "folder": null,
@@ -4915,7 +4628,8 @@
                 "int": 0,
                 "wis": 0,
                 "cha": 0
-              }
+              },
+              "cap": 2
             },
             "value": {
               "type": "asi"
@@ -4936,7 +4650,8 @@
                 "int": 0,
                 "wis": 0,
                 "cha": 0
-              }
+              },
+              "cap": 2
             },
             "value": {
               "type": "asi"
@@ -4957,7 +4672,8 @@
                 "int": 0,
                 "wis": 0,
                 "cha": 0
-              }
+              },
+              "cap": 2
             },
             "value": {
               "type": "asi"
@@ -4978,7 +4694,8 @@
                 "int": 0,
                 "wis": 0,
                 "cha": 0
-              }
+              },
+              "cap": 2
             },
             "value": {
               "type": "asi"
@@ -5000,15 +4717,65 @@
                 "int": 0,
                 "wis": 0,
                 "cha": 0
-              }
+              },
+              "cap": 2
             },
             "value": {
               "type": "asi"
             },
             "level": 19,
             "title": ""
+          },
+          {
+            "type": "Trait",
+            "level": 1,
+            "configuration": {
+              "grants": [
+                "saves:wis",
+                "saves:cha"
+              ],
+              "hint": "",
+              "mode": "default",
+              "allowReplacements": false,
+              "choices": []
+            },
+            "value": {
+              "chosen": [
+                "saves:wis",
+                "saves:cha"
+              ]
+            },
+            "_id": "iCVmPC16uKVbbHYF"
+          },
+          {
+            "type": "Trait",
+            "level": 1,
+            "configuration": {
+              "choices": [
+                {
+                  "count": 2,
+                  "pool": [
+                    "skills:his",
+                    "skills:ins",
+                    "skills:med",
+                    "skills:per",
+                    "skills:rel"
+                  ]
+                }
+              ],
+              "hint": "",
+              "mode": "default",
+              "allowReplacements": false,
+              "grants": []
+            },
+            "_id": "T7QwXjy3y5uAVSaG",
+            "value": {}
           }
         ],
+        "spellcasting": {
+          "progression": "full",
+          "ability": "wis"
+        },
         "saves": [
           "wis",
           "cha"
@@ -5023,10 +4790,6 @@
             "rel"
           ],
           "value": []
-        },
-        "spellcasting": {
-          "progression": "full",
-          "ability": "wis"
         }
       },
       "effects": [],
@@ -5042,10 +4805,10 @@
       },
       "_stats": {
         "systemId": "dnd5e",
-        "systemVersion": "2.2.2",
+        "systemVersion": "2.4.0",
         "coreVersion": "10.303",
         "createdTime": 1661787234282,
-        "modifiedTime": 1691519023054,
+        "modifiedTime": 1699985823387,
         "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!kfzBL0q1Y7LgGs2x.Zo7sWdchHDF6d0nn"
@@ -5349,8 +5112,8 @@
           "transfer": true,
           "flags": {},
           "tint": null,
-          "sort": 0,
-          "_key": "!actors.items.effects!kfzBL0q1Y7LgGs2x.nc5IaPb64YH0AT8L.Dk95lqbXXCUlefZW"
+          "_key": "!actors.items.effects!kfzBL0q1Y7LgGs2x.nc5IaPb64YH0AT8L.Dk95lqbXXCUlefZW",
+          "sort": 0
         }
       ],
       "folder": null,
@@ -5459,6 +5222,345 @@
         "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!kfzBL0q1Y7LgGs2x.A7qWZHa1wRp3NRgK"
+    },
+    {
+      "_id": "syaK4jD01I8U6EAL",
+      "name": "Dragonborn",
+      "type": "race",
+      "img": "icons/creatures/eyes/lizard-single-slit-green.webp",
+      "system": {
+        "description": {
+          "value": "<p>Your draconic heritage manifests in a variety of traits you share with other dragonborn.</p><p><em><strong>Ability Score Increase.</strong></em> Your Strength score increases by 2, and your Charisma score increases by 1.</p><p><em><strong>Age.</strong></em> Young dragonborn grow quickly. They walk hours after hatching, attain the size and development of a 10-­year-­old human child by the age of 3, and reach adulthood by 15. They live to be around 80.</p><p><em><strong>Alignment.</strong></em> Dragonborn tend to extremes, making a conscious choice for one side or the other in the cosmic war between good and evil. Most dragonborn are good, but those who side with evil can be terrible villains.</p><p><em><strong>Size.</strong></em> Dragonborn are taller and heavier than humans, standing well over 6 feet tall and averaging almost 250 pounds. Your size is Medium.</p><p><em><strong>Speed.</strong></em> Your base walking speed is 30 feet.</p><table><caption>Draconic Ancestry</caption><thead><tr><td>Dragon</td><td>Damage Type</td><td>Breath Weapon</td></tr></thead><tbody><tr><td>Black</td><td>Acid</td><td>5 by 30 ft. line (Dex. save)</td></tr><tr><td>Blue</td><td>Lightning</td><td>5 by 30 ft. line (Dex. save)</td></tr><tr><td>Brass</td><td>Fire</td><td>5 by 30 ft. line (Dex. save)</td></tr><tr><td>Bronze</td><td>Lightning</td><td>5 by 30 ft. line (Dex. save)</td></tr><tr><td>Copper</td><td>Acid</td><td>5 by 30 ft. line (Dex. save)</td></tr><tr><td>Gold</td><td>Fire</td><td>15 ft. cone (Dex. save)</td></tr><tr><td>Green</td><td>Poison</td><td>15 ft. cone (Con. save)</td></tr><tr><td>Red</td><td>Fire</td><td>15 ft. cone (Dex. save)</td></tr><tr><td>Silver</td><td>Cold</td><td>15 ft. cone (Con. save)</td></tr><tr><td>White</td><td>Cold</td><td>15 ft. cone (Con. save)</td></tr></tbody></table><p><em><strong>Draconic Ancestry.</strong></em> You have draconic ancestry. Choose one type of dragon from the Draconic Ancestry table. Your breath weapon and damage resistance are determined by the dragon type, as shown in the table.</p><p><em><strong>Breath Weapon.</strong></em> You can use your action to exhale destructive energy. Your draconic ancestry determines the size, shape, and damage type of the exhalation.</p><p>When you use your breath weapon, each creature in the area of the exhalation must make a saving throw, the type of which is determined by your draconic ancestry. The DC for this saving throw equals 8 + your Constitution modifier + your proficiency bonus. A creature takes 2d6 damage on a failed save, and half as much damage on a successful one. The damage increases to 3d6 at 6th level, 4d6 at 11th level, and 5d6 at 16th level.</p><p>After you use your breath weapon, you can't use it again until you complete a short or long rest.</p><p><em><strong>Damage Resistance.</strong></em> You have resistance to the damage type associated with your draconic ancestry.</p><p><em><strong>Languages.</strong></em> You can speak, read, and write Common and Draconic. Draconic is thought to be one of the oldest languages and is often used in the study of magic. The language sounds harsh to most other creatures and includes numerous hard consonants and sibilants.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": {
+          "custom": "SRD 5.1",
+          "book": "",
+          "page": "",
+          "license": ""
+        },
+        "identifier": "dragonborn",
+        "advancement": [
+          {
+            "_id": "QIrBmvSmNOTEJLWn",
+            "type": "ItemChoice",
+            "configuration": {
+              "hint": "You have draconic ancestry. Choose one type of dragon from the list. Your breath weapon and damage resistance are determined by the dragon type.",
+              "choices": {
+                "0": 1
+              },
+              "allowDrops": false,
+              "type": "feat",
+              "pool": [
+                "Compendium.dnd5e.races.NnSZlrsHCFeH3cCq",
+                "Compendium.dnd5e.races.KVgvW5yhKcmQUanz",
+                "Compendium.dnd5e.races.JrUcwLR2aQC09iUM",
+                "Compendium.dnd5e.races.pJzMSk9qYywYy65w",
+                "Compendium.dnd5e.races.bFpLM0N3uTeHLdzu",
+                "Compendium.dnd5e.races.YPQQBZAuRiSwuBfh",
+                "Compendium.dnd5e.races.lXIxndsBaQglHBtO",
+                "Compendium.dnd5e.races.kB61JPKQrDBbSNU7",
+                "Compendium.dnd5e.races.pAYTdRGftNr8AitK",
+                "Compendium.dnd5e.races.KL7wx9Q8XNJQir0k"
+              ],
+              "spell": {
+                "ability": "",
+                "preparation": "",
+                "uses": {
+                  "max": "",
+                  "per": ""
+                }
+              },
+              "restriction": {
+                "type": "race",
+                "subtype": "",
+                "level": ""
+              }
+            },
+            "value": {
+              "added": {
+                "0": {
+                  "Ww5s1slhUia11ZqH": "Compendium.dnd5e.races.KL7wx9Q8XNJQir0k"
+                }
+              }
+            },
+            "title": "Draconic Ancestry"
+          },
+          {
+            "_id": "Z9hvZFkWUNvowbQX",
+            "type": "AbilityScoreImprovement",
+            "configuration": {
+              "points": 0,
+              "fixed": {
+                "str": 2,
+                "dex": 0,
+                "con": 0,
+                "int": 0,
+                "wis": 0,
+                "cha": 1
+              },
+              "cap": 2
+            },
+            "value": {
+              "type": "asi",
+              "assignments": {
+                "str": 2,
+                "cha": 1
+              }
+            },
+            "level": 0,
+            "title": ""
+          },
+          {
+            "_id": "rXLC7smebN2zPOBT",
+            "type": "ScaleValue",
+            "configuration": {
+              "identifier": "breath-weapon",
+              "type": "dice",
+              "distance": {
+                "units": ""
+              },
+              "scale": {
+                "0": {
+                  "number": 2,
+                  "faces": 6
+                },
+                "6": {
+                  "number": 3,
+                  "faces": 6
+                },
+                "11": {
+                  "number": 4,
+                  "faces": 6
+                },
+                "16": {
+                  "number": 5,
+                  "faces": 6
+                }
+              }
+            },
+            "value": {},
+            "title": "Breath Weapon"
+          },
+          {
+            "_id": "9D8XNnmTLWfzN32K",
+            "type": "Size",
+            "configuration": {
+              "hint": "Dragonborn are taller and heavier than humans, standing well over 6 feet tall and averaging almost 250 pounds. Your size is Medium.",
+              "sizes": [
+                "med"
+              ]
+            },
+            "value": {
+              "size": "med"
+            },
+            "level": 1,
+            "title": ""
+          },
+          {
+            "_id": "6WUcKNSLh5WJ3Q24",
+            "type": "Trait",
+            "configuration": {
+              "hint": "",
+              "mode": "default",
+              "allowReplacements": false,
+              "grants": [
+                "languages:standard:common",
+                "languages:exotic:draconic"
+              ],
+              "choices": []
+            },
+            "level": 0,
+            "title": "",
+            "value": {
+              "chosen": [
+                "languages:standard:common",
+                "languages:exotic:draconic"
+              ]
+            }
+          },
+          {
+            "_id": "2f4dkpTYlhOgRgxu",
+            "type": "Trait",
+            "configuration": {
+              "hint": "You have resistance to the damage type associated with your draconic ancestry.",
+              "mode": "default",
+              "allowReplacements": false,
+              "grants": [],
+              "choices": [
+                {
+                  "count": 1,
+                  "pool": [
+                    "dr:acid",
+                    "dr:cold",
+                    "dr:fire",
+                    "dr:lightning",
+                    "dr:poison"
+                  ]
+                }
+              ]
+            },
+            "level": 0,
+            "title": "",
+            "value": {
+              "chosen": [
+                "dr:cold"
+              ]
+            }
+          }
+        ],
+        "movement": {
+          "burrow": 0,
+          "climb": 0,
+          "fly": 0,
+          "swim": 0,
+          "walk": 30,
+          "units": "ft",
+          "hover": false
+        },
+        "senses": {
+          "darkvision": 0,
+          "blindsight": 0,
+          "tremorsense": 0,
+          "truesight": 0,
+          "units": "ft",
+          "special": ""
+        },
+        "type": {
+          "value": "humanoid",
+          "subtype": "",
+          "custom": ""
+        }
+      },
+      "effects": [],
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.races.K4DNDcR6vngbp0pf"
+        }
+      },
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.4.0",
+        "coreVersion": "10.303",
+        "createdTime": 1677180157568,
+        "modifiedTime": 1699985823367,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "sort": 0,
+      "folder": null,
+      "_key": "!actors.items!kfzBL0q1Y7LgGs2x.syaK4jD01I8U6EAL"
+    },
+    {
+      "_id": "Ww5s1slhUia11ZqH",
+      "name": "Breath Weapon - White",
+      "ownership": {
+        "default": 0
+      },
+      "type": "feat",
+      "system": {
+        "description": {
+          "value": "<p>You can use your action to exhale destructive energy. Your draconic ancestry determines the size, shape, and damage type of the exhalation.</p><p>When you use your breath weapon, each creature in the area of the exhalation must make a Constitution saving throw, the type of which is determined by your draconic ancestry. The DC for this saving throw equals 8 + your Constitution modifier + your proficiency bonus. A creature takes 2d6 cold damage on a failed save, and half as much damage on a successful one. The damage increases to 3d6 at 6th level, 4d6 at 11th level, and 5d6 at 16th level.</p><p>After you use your breath weapon, you can't use it again until you complete a short or long rest.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": {
+          "custom": "SRD 5.1",
+          "book": "",
+          "page": "",
+          "license": ""
+        },
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": "",
+          "units": "inst"
+        },
+        "cover": null,
+        "crewed": false,
+        "target": {
+          "value": 15,
+          "width": null,
+          "units": "ft",
+          "type": "cone",
+          "prompt": true
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": ""
+        },
+        "uses": {
+          "value": 1,
+          "max": "1",
+          "per": "sr",
+          "recovery": "",
+          "prompt": true
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null,
+          "scale": false
+        },
+        "ability": "con",
+        "actionType": "save",
+        "attackBonus": "",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [
+            [
+              "@scale.dragonborn.breath-weapon",
+              "cold"
+            ]
+          ],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "con",
+          "dc": null,
+          "scaling": "con"
+        },
+        "type": {
+          "value": "race",
+          "subtype": ""
+        },
+        "requirements": "White Dragonborn",
+        "recharge": {
+          "value": null,
+          "charged": false
+        }
+      },
+      "flags": {
+        "dnd5e": {
+          "sourceId": "Compendium.dnd5e.races.KL7wx9Q8XNJQir0k",
+          "advancementOrigin": "syaK4jD01I8U6EAL.QIrBmvSmNOTEJLWn"
+        }
+      },
+      "img": "icons/magic/water/projectile-icecicle.webp",
+      "effects": [],
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.4.0",
+        "coreVersion": "10.303",
+        "createdTime": 1661787234466,
+        "modifiedTime": 1699985823369,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "sort": 0,
+      "folder": null,
+      "_key": "!actors.items!kfzBL0q1Y7LgGs2x.Ww5s1slhUia11ZqH"
     }
   ],
   "effects": [
@@ -5512,8 +5614,8 @@
       "origin": "Compendium.dnd5e.heroes.kfzBL0q1Y7LgGs2x.Item.8dzaICjGy6mTUaUr",
       "tint": null,
       "transfer": false,
-      "sort": 0,
-      "_key": "!actors.effects!kfzBL0q1Y7LgGs2x.8rP3gwmXVTgZqYZE"
+      "_key": "!actors.effects!kfzBL0q1Y7LgGs2x.8rP3gwmXVTgZqYZE",
+      "sort": 0
     },
     {
       "_id": "potjmpJPeUA1U4oe",
@@ -5565,8 +5667,8 @@
       "origin": "Compendium.dnd5e.heroes.kfzBL0q1Y7LgGs2x.Item.95K2aUhAGV9qXjnf",
       "tint": null,
       "transfer": false,
-      "sort": 0,
-      "_key": "!actors.effects!kfzBL0q1Y7LgGs2x.potjmpJPeUA1U4oe"
+      "_key": "!actors.effects!kfzBL0q1Y7LgGs2x.potjmpJPeUA1U4oe",
+      "sort": 0
     },
     {
       "_id": "Dk95lqbXXCUlefZW",
@@ -5594,8 +5696,8 @@
       "transfer": false,
       "flags": {},
       "tint": null,
-      "sort": 0,
-      "_key": "!actors.effects!kfzBL0q1Y7LgGs2x.Dk95lqbXXCUlefZW"
+      "_key": "!actors.effects!kfzBL0q1Y7LgGs2x.Dk95lqbXXCUlefZW",
+      "sort": 0
     }
   ],
   "folder": null,
@@ -5606,10 +5708,10 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.2.2",
+    "systemVersion": "2.4.0",
     "coreVersion": "10.303",
     "createdTime": 1661787232189,
-    "modifiedTime": 1691519023120,
+    "modifiedTime": 1699985914600,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!kfzBL0q1Y7LgGs2x"
