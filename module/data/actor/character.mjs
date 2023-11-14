@@ -124,11 +124,37 @@ export default class CharacterData extends CreatureTemplate {
   }
 
   /* -------------------------------------------- */
+  /*  Data Migration                              */
+  /* -------------------------------------------- */
 
   /** @inheritdoc */
   static _migrateData(source) {
     super._migrateData(source);
     AttributesFields._migrateInitiative(source.attributes);
+  }
+
+  /* -------------------------------------------- */
+  /*  Data Preparation                            */
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare movement & senses values derived from race item.
+   */
+  prepareEmbeddedData() {
+    const raceData = this.details.race?.system;
+    if ( !raceData ) return;
+
+    for ( const key of Object.keys(CONFIG.DND5E.movementTypes) ) {
+      if ( raceData.movement[key] ) this.attributes.movement[key] ??= raceData.movement[key];
+    }
+    if ( raceData.movement.hover ) this.attributes.movement.hover = true;
+    this.attributes.movement.units ??= raceData.movement.units;
+
+    for ( const key of Object.keys(CONFIG.DND5E.senses) ) {
+      if ( raceData.senses[key] ) this.attributes.senses[key] ??= raceData.senses[key];
+    }
+    this.attributes.senses.special = [this.attributes.senses.special, raceData.senses.special].filterJoin(";");
+    this.attributes.senses.units ??= raceData.senses.units;
   }
 }
 

@@ -42,7 +42,7 @@ export default class RaceData extends SystemDataModel.mixin(ItemDescriptionTempl
    * @returns {Object<string>}
    */
   get movementLabels() {
-    const units = CONFIG.DND5E.movementUnits[this.movement.units];
+    const units = CONFIG.DND5E.movementUnits[this.movement.units || Object.keys(CONFIG.DND5E.movementUnits)[0]];
     return Object.entries(CONFIG.DND5E.movementTypes).reduce((obj, [k, label]) => {
       const value = this.movement[k];
       if ( value ) obj[k] = `${label} ${value} ${units}`;
@@ -57,7 +57,7 @@ export default class RaceData extends SystemDataModel.mixin(ItemDescriptionTempl
    * @returns {Object<string>}
    */
   get sensesLabels() {
-    const units = CONFIG.DND5E.movementUnits[this.senses.units];
+    const units = CONFIG.DND5E.movementUnits[this.senses.units || Object.keys(CONFIG.DND5E.movementUnits)[0]];
     return Object.entries(CONFIG.DND5E.senses).reduce((arr, [k, label]) => {
       const value = this.senses[k];
       if ( value ) arr.push(`${label} ${value} ${units}`);
@@ -113,25 +113,6 @@ export default class RaceData extends SystemDataModel.mixin(ItemDescriptionTempl
   _onCreate(data, options, userId) {
     if ( (game.user.id !== userId) || this.parent.actor?.type !== "character" ) return;
     const updates = { "system.details.race": this.parent.id };
-    const attributes = this.parent.actor.system.attributes;
-
-    for ( const key of Object.keys(CONFIG.DND5E.movementTypes) ) {
-      if ( this.movement[key] > attributes.movement[key] ) {
-        updates[`system.attributes.movement.${key}`] = this.movement[key];
-      }
-    }
-    if ( this.movement.hover ) updates["system.attributes.movement.hover"] = true;
-    updates["system.attributes.movement.units"] = this.movement.units;
-
-    for ( const key of Object.keys(CONFIG.DND5E.senses) ) {
-      if ( this.senses[key] > attributes.senses[key] ) {
-        updates[`system.attributes.senses.${key}`] = this.senses[key];
-      }
-    }
-    if ( this.senses.special ) {
-      updates[system.attributes.senses.special] = [attributes.senses.special, this.senses.special].filterJoin(";");
-    }
-    updates["system.attributes.senses.units"] = this.senses.units;
 
     if ( this.type.value ) updates["system.details.type.value"] = this.type.value;
     if ( this.type.subtype ) updates["system.details.type.subtype"] = this.type.subtype;
@@ -151,26 +132,8 @@ export default class RaceData extends SystemDataModel.mixin(ItemDescriptionTempl
    * @protected
    */
   async _preDelete(options, user) {
-    if ( this.parent.actor?.type !== "character" ) return;
+    if ( (this.parent.actor?.type !== "character") || (options.shouldRemoveAdvancements === false) ) return;
     const updates = { "system.details.race": null };
-    const attributes = this.parent.actor.system.attributes;
-    if ( options.shouldRemoveAdvancements === false ) return;
-
-    for ( const key of Object.keys(CONFIG.DND5E.movementTypes) ) {
-      if ( this.movement[key] === attributes.movement[key] ) {
-        updates[`system.attributes.movement.${key}`] = 0;
-      }
-    }
-    if ( this.movement.hover ) updates["system.attributes.movement.hover"] = false;
-
-    for ( const key of Object.keys(CONFIG.DND5E.senses) ) {
-      if ( this.senses[key] === attributes.senses[key] ) {
-        updates[`system.attributes.senses.${key}`] = 0;
-      }
-    }
-    if ( this.senses.special ) {
-      updates[system.attributes.senses.special] = attributes.senses.special.replace(this.senses.special, "");
-    }
 
     const type = this.parent.actor.system.details.type;
     if ( this.type.value === type.value ) updates["system.details.type.value"] = "humanoid";

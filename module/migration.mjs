@@ -265,6 +265,7 @@ export const migrateActorData = function(actor, migrationData, flags={}) {
   const updateData = {};
   _migrateTokenImage(actor, updateData);
   _migrateActorAC(actor, updateData);
+  _migrateActorMovementSenses(actor, updateData);
 
   // Migrate embedded effects
   if ( actor.effects ) {
@@ -517,6 +518,29 @@ function _migrateActorAC(actorData, updateData) {
     }
   }
 
+  return updateData;
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Migrate the actor movement & senses to replace `0` with `null`.
+ * @param {object} actorData   Actor data being migrated.
+ * @param {object} updateData  Existing updates being applied to actor. *Will be mutated.*
+ * @returns {object}           Modified version of update data.
+ * @private
+ */
+function _migrateActorMovementSenses(actorData, updateData) {
+  if ( foundry.utils.isNewerVersion("2.4.0", actorData._stats.systemVersion) ) {
+    for ( const key of Object.keys(CONFIG.DND5E.movementTypes) ) {
+      const keyPath = `system.attributes.movement.${key}`;
+      if ( foundry.utils.getProperty(actorData, keyPath) === 0 ) updateData[keyPath] = null;
+    }
+    for ( const key of Object.keys(CONFIG.DND5E.senses) ) {
+      const keyPath = `system.attributes.senses.${key}`;
+      if ( foundry.utils.getProperty(actorData, keyPath) === 0 ) updateData[keyPath] = null;
+    }
+  }
   return updateData;
 }
 

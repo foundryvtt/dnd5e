@@ -76,12 +76,12 @@
             "bonus": ""
           },
           "movement": {
-            "burrow": 0,
-            "climb": 0,
-            "fly": 0,
-            "swim": 0,
-            "walk": 30,
-            "units": "ft",
+            "burrow": null,
+            "climb": null,
+            "fly": null,
+            "swim": null,
+            "walk": null,
+            "units": null,
             "hover": false
           }
         },
@@ -127,11 +127,11 @@
             "max": 3
           },
           "senses": {
-            "darkvision": 0,
-            "blindsight": 0,
-            "tremorsense": 0,
-            "truesight": 0,
-            "units": "ft",
+            "darkvision": null,
+            "blindsight": null,
+            "tremorsense": null,
+            "truesight": null,
+            "units": null,
             "special": ""
           },
           "spellcasting": "int"
