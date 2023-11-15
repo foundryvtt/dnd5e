@@ -19,19 +19,6 @@ export default class TokenDocument5e extends TokenDocument {
   /* -------------------------------------------- */
 
   /** @inheritdoc */
-  static getTrackedAttributes(data, _path=[]) {
-    if ( !game.dnd5e.isV10 ) return super.getTrackedAttributes(data, _path);
-    if ( data instanceof foundry.abstract.DataModel ) return this._getTrackedAttributesFromSchema(data.schema, _path);
-    const attributes = super.getTrackedAttributes(data, _path);
-    if ( _path.length ) return attributes;
-    const allowed = CONFIG.DND5E.trackableAttributes;
-    attributes.value = attributes.value.filter(attrs => this._isAllowedAttribute(allowed, attrs));
-    return attributes;
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritdoc */
   static _getTrackedAttributesFromSchema(schema, _path=[]) {
     const isSchema = field => field instanceof foundry.data.fields.SchemaField;
     const isModel = field => field instanceof foundry.data.fields.EmbeddedDataField;

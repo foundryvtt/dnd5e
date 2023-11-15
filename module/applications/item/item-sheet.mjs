@@ -270,7 +270,7 @@ export default class ItemSheet5e extends ItemSheet {
 
     // Attributes
     else if ( consume.type === "attribute" ) {
-      const attrData = game.dnd5e.isV10 ? actor.system : actor.type;
+      const attrData = actor.type;
       return TokenDocument.implementation.getConsumedAttributes(attrData).reduce((obj, attr) => {
         obj[attr] = attr;
         return obj;
@@ -478,11 +478,7 @@ export default class ItemSheet5e extends ItemSheet {
     if ( this.isEditable ) {
       html.find(".config-button").click(this._onConfigMenu.bind(this));
       html.find(".damage-control").click(this._onDamageControl.bind(this));
-      html.find(".effect-control").click(ev => {
-        const unsupported = game.dnd5e.isV10 && this.item.isOwned;
-        if ( unsupported ) return ui.notifications.warn("Managing Active Effects within an Owned Item is not currently supported and will be added in a subsequent update.");
-        ActiveEffect5e.onManageActiveEffect(ev, this.item);
-      });
+      html.find(".effect-control").click(ev => ActiveEffect5e.onManageActiveEffect(ev, this.item));
       html.find(".advancement .item-control").click(event => {
         const t = event.currentTarget;
         if ( t.dataset.action ) this._onAdvancementAction(t, t.dataset.action);

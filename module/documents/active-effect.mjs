@@ -83,7 +83,7 @@ export default class ActiveEffect5e extends ActiveEffect {
     this.isSuppressed = false;
     if ( this.disabled || (this.parent.documentName !== "Actor") || !this.origin ) return;
     // Deliberately avoiding using fromUuidSync here, see: https://github.com/foundryvtt/dnd5e/pull/1980
-    const parsed = game.dnd5e.isV10 ? _parseUuid(this.origin) : parseUuid(this.origin);
+    const parsed = foundry.utils.parseUuid(this.origin);
     if ( !parsed ) return;
     const { collection, documentId: parentId, embedded } = parsed;
     let item;
@@ -171,7 +171,6 @@ export default class ActiveEffect5e extends ActiveEffect {
 
     // Iterate over active effects, classifying them into categories
     for ( let e of effects ) {
-      if ( game.dnd5e.isV10 ) e._getSourceName(); // Trigger a lookup for the source name
       if ( e.isSuppressed ) categories.suppressed.effects.push(e);
       else if ( e.disabled ) categories.inactive.effects.push(e);
       else if ( e.isTemporary ) categories.temporary.effects.push(e);
@@ -179,22 +178,5 @@ export default class ActiveEffect5e extends ActiveEffect {
     }
     categories.suppressed.hidden = !categories.suppressed.effects.length;
     return categories;
-  }
-
-  /* ~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~ */
-  /*  Deprecations and Compatibility           */
-  /* ~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~ */
-
-  _initialize(options) {
-    super._initialize(options);
-    if ( game.release.generation < 11 ) {
-      Object.defineProperty(this, "name", {
-        get() {
-          return this.label;
-        },
-        configurable: true,
-        enumerable: false
-      });
-    }
   }
 }

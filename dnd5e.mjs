@@ -59,13 +59,9 @@ Hooks.once("init", function() {
   CONFIG.Dice.D20Roll = dice.D20Roll;
   CONFIG.MeasuredTemplate.defaults.angle = 53.13; // 5e cone RAW should be 53.13 degrees
   CONFIG.ui.combat = applications.combat.CombatTracker5e;
-  game.dnd5e.isV10 = game.release.generation < 11;
 
   // Register System Settings
   registerSystemSettings();
-
-  // Validation strictness.
-  if ( game.dnd5e.isV10 ) _determineValidationStrictness();
 
   // Configure module art.
   game.dnd5e.moduleArt = new ModuleArt();
@@ -86,10 +82,9 @@ Hooks.once("init", function() {
   CONFIG.Dice.rolls.push(dice.DamageRoll);
 
   // Hook up system data types
-  const modelType = game.dnd5e.isV10 ? "systemDataModels" : "dataModels";
-  CONFIG.Actor[modelType] = dataModels.actor.config;
-  CONFIG.Item[modelType] = dataModels.item.config;
-  CONFIG.JournalEntryPage[modelType] = dataModels.journal.config;
+  CONFIG.Actor.dataModels = dataModels.actor.config;
+  CONFIG.Item.dataModels = dataModels.item.config;
+  CONFIG.JournalEntryPage.dataModels = dataModels.journal.config;
 
   // Register sheet application classes
   Actors.unregisterSheet("core", ActorSheet);
@@ -131,29 +126,6 @@ Hooks.once("init", function() {
   enrichers.registerCustomEnrichers();
 });
 
-/**
- * Determine if this is a 'legacy' world with permissive validation, or one where strict validation is enabled.
- * @internal
- */
-function _determineValidationStrictness() {
-  dataModels.SystemDataModel._enableV10Validation = game.settings.get("dnd5e", "strictValidation");
-}
-
-/**
- * Update the world's validation strictness setting based on whether validation errors were encountered.
- * @internal
- */
-async function _configureValidationStrictness() {
-  if ( !game.user.isGM ) return;
-  const invalidDocuments = game.actors.invalidDocumentIds.size + game.items.invalidDocumentIds.size
-    + game.scenes.invalidDocumentIds.size;
-  const strictValidation = game.settings.get("dnd5e", "strictValidation");
-  if ( invalidDocuments && strictValidation ) {
-    await game.settings.set("dnd5e", "strictValidation", false);
-    game.socket.emit("reload");
-    foundry.utils.debouncedReload();
-  }
-}
 
 /**
  * Configure explicit lists of attributes that are trackable on the token HUD and in the combat tracker.
@@ -231,10 +203,8 @@ Hooks.once("setup", function() {
   game.dnd5e.moduleArt.registerModuleArt();
 
   // Apply custom compendium styles to the SRD rules compendium.
-  if ( !game.dnd5e.isV10 ) {
-    const rules = game.packs.get("dnd5e.rules");
-    rules.applicationClass = applications.journal.SRDCompendium;
-  }
+  const rules = game.packs.get("dnd5e.rules");
+  rules.applicationClass = applications.journal.SRDCompendium;
 });
 
 /* --------------------------------------------- */
@@ -266,15 +236,6 @@ Hooks.once("i18nInit", () => utils.performPreLocalization(CONFIG.DND5E));
  * Once the entire VTT framework is initialized, check to see if we should perform a data migration
  */
 Hooks.once("ready", function() {
-  if ( game.dnd5e.isV10 ) {
-    // Configure validation strictness.
-    _configureValidationStrictness();
-
-    // Apply custom compendium styles to the SRD rules compendium.
-    const rules = game.packs.get("dnd5e.rules");
-    rules.apps = [new applications.journal.SRDCompendium(rules)];
-  }
-
   // Wait to register hotbar drop hook on ready so that modules could register earlier if they want to
   Hooks.on("hotbarDrop", (bar, data, slot) => {
     if ( ["Item", "ActiveEffect"].includes(data.type) ) {
