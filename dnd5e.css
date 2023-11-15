@@ -1216,6 +1216,7 @@ h5 {
 }
 .dnd5e.sheet.actor .inventory-list .item .item-name {
   cursor: pointer;
+  flex: auto;
 }
 .dnd5e.sheet.actor .inventory-list .item .item-name.rollable:hover .item-image {
   background-image: url("../../icons/svg/d20-grey.svg") !important;
