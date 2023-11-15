@@ -2,6 +2,8 @@
 
 The dnd5e system adds a number of useful enrichers that can be used within journals or in item or actor descriptions. These enrichers will generate text based on the standard formatting used throughout 5e releases and provide rolls and related behavior that properly hooks into the system.
 
+![Enricher Preview](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/enrichers-preview.jpg)
+
 ## Check & Save Enrichers
 Check and save enrichers allow for rolling ability checks, skill checks, tool checks, and saving throws using all of the proper modifiers of the character performing the roll.
 
@@ -28,4 +30,7 @@ The basic format of a damage enricher is `[[/damage {formula} {type}]]`, so one 
 
 For a format like shown in many places through 5e releases, you can use the `average` flag to auto-calculate the average. Typing `[[/damage 2d6 fire average]]` or `[[/damage 2d6 fire average=true]]` will result in `"7 ([2d6]) fire"`. If for some reason the system cannot automatically calulate the average or you wish to display something different, you can enter a custom value that will be displayed. So `[[/damage 2d6kh fire average=5]]` will display `"5 (2d6kh) fire"`.
 
-The formula can also include formula values that will be evaluated before the damage is displayed in the condition. If you wanted to add a feature to a monster that includes its modifier in a damage roll, you might write `[[/damage 1d6 + @abilities.dex.mod slashing]]` and it will be parsed using whatever dexterity modifier is on the actor that owns the item. **Note:** Any values entered in the formula will be resolved based on the stats of the owner of the item, not who ultimately performs the roll.
+The formula can also include formula values that will be evaluated before the damage is displayed in the condition. If you wanted to add a feature to a monster that includes its modifier in a damage roll, you might write `[[/damage 1d6 + @abilities.dex.mod slashing]]` and it will be parsed using whatever dexterity modifier is on the actor that owns the item.
+
+> [!Note]
+> Any values entered in the formula will be resolved based on the stats of the owner of the item, not who ultimately performs the roll.
