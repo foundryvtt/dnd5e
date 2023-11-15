@@ -37,6 +37,17 @@ export default class ActorTypeConfig extends DocumentSheet {
 
   /* -------------------------------------------- */
 
+  /**
+   * Return a reference to the Actor. Either the NPCs themselves if they are being edited, otherwise the parent Actor
+   * if a race Item is being edited.
+   * @returns {Actor5e}
+   */
+  get actor() {
+    return this.object.actor ?? this.object;
+  }
+
+  /* -------------------------------------------- */
+
   /** @inheritdoc */
   getData(options={}) {
     // Get current value or new default
@@ -93,6 +104,15 @@ export default class ActorTypeConfig extends DocumentSheet {
   activateListeners(html) {
     super.activateListeners(html);
     html.find("input[name='custom']").focusin(this._onCustomFieldFocused.bind(this));
+
+    const overrides = Object.keys(foundry.utils.flattenObject(this.actor.overrides || {}));
+    if ( overrides.some(k => k.startsWith("system.details.type.")) ) {
+      // Disable editing any type field if one of them is overridden by an Active Effect.
+      html.find("input, select").each((i, el) => {
+        el.disabled = true;
+        el.dataset.tooltip = "DND5E.ActiveEffectOverrideWarning";
+      });
+    }
   }
 
   /* -------------------------------------------- */
