@@ -113,7 +113,7 @@ export default class TraitAdvancement extends Advancement {
     }
 
     this.actor.updateSource(updates);
-    this.updateSource({ "value.chosen": data.chosen });
+    this.updateSource({ "value.chosen": Array.from(data.chosen) });
   }
 
   /* -------------------------------------------- */
