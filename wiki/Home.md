@@ -5,7 +5,7 @@
   - [Advancement User Guide](Advancement-User-Guide.md)
   - [Custom Class Example](Custom-Class-Advancement.md)  
   - Advancement Types
-    - Advancement Type: Ability Score Improvement
+    - [Advancement Type: Ability Score Improvement](Advancement-Type-Ability-Score-Improvement.md)
     - [Advancement Type: Hit Points](Advancement-Type-Hit-Points.md)
     - [Advancement Type: Item Grant](Advancement-Type-Item-Grant.md)
     - [Advancement Type: Item Choice](Advancement-Type-Item-Choice.md)

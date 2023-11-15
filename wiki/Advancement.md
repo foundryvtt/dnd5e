@@ -16,7 +16,7 @@ The advancement system can be disabled for all players in a world by using the `
 
 ## Advancement Types
 ### Ability Score Improvement *(class, background, or race only)*
-Ability score improvement allows for improving a character's ability scores by either a fixed amount or based on user choice. When added to a class, it also optionally allows for selecting a feat instead of improving abilities.
+[Ability score improvement](Advancement-Type-Ability-Score-Improvement) allows for improving a character's ability scores by either a fixed amount or based on user choice. When added to a class, it also optionally allows for selecting a feat instead of improving abilities.
 
 ### Grant Items
 The [grant items advancement](Advancement-Type-Item-Grant) defines a list of features, spells, or other items that are added to the actor at a certain level.
@@ -38,7 +38,6 @@ The [trait](Advancement-Type-Trait) advancement grants the character certain tra
 
 ### Proposed Types
 These advancement types are still under development, links point to the proposal pages for each type:
-- [Ability Score Improvement](https://github.com/foundryvtt/dnd5e/issues/1403)
 - [Equipment](https://github.com/foundryvtt/dnd5e/issues/1871)
 - [Subclass](https://github.com/foundryvtt/dnd5e/issues/1407)
 
