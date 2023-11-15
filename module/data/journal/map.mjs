@@ -9,4 +9,16 @@ export default class MapLocationJournalPageData extends foundry.abstract.DataMod
       code: new foundry.data.fields.StringField()
     };
   }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Adjust the number of this entry in the table of contents.
+   * @param {number} number  Current position number.
+   * @returns {{ number: string, adjustment: [number] }|void}
+   */
+  adjustTOCNumbering(number) {
+    if ( !this.code ) return;
+    return { number: this.code, adjustment: -1 };
+  }
 }
