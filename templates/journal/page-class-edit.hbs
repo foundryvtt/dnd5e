@@ -7,7 +7,7 @@
       <ol class="items-list">
         {{#if document.system.item}}
           <li class="item flexrow" data-item-uuid="{{document.system.item}}" data-item-type="class">
-            <div clas="item.name">{{{dnd5e-linkForUuid document.system.item}}}</div>
+            <div class="item-name">{{{dnd5e-linkForUuid document.system.item}}}</div>
             <div class="item-controls flexrow">
               <a class="item-control item-delete" data-tooltip="DND5E.ItemDelete">
                 <i class="fas fa-trash"></i>
@@ -84,7 +84,7 @@
       <ol class="items-list">
         {{#each subclasses}}
           <li class="item flexrow" data-item-uuid="{{this.document.uuid}}" data-item-type="subclass">
-            <div clas="item-name">{{{dnd5e-linkForUuid this.document.uuid}}}</div>
+            <div class="item-name">{{{dnd5e-linkForUuid this.document.uuid}}}</div>
             <div class="item-controls flexrow">
               <a class="item-control item-delete" data-tooltip="DND5E.ItemDelete">
                 <i class="fas fa-trash"></i>

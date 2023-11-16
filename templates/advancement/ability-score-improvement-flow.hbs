@@ -8,6 +8,7 @@
         {{localize "DND5E.AdvancementAbilityScoreImprovementLockedHint"}}
       {{else}}
         {{ pointsRemaining }}
+        {{#if advancement.configuration.cap}}<p class="cap">{{pointCap}}</p>{{/if}}
       {{/if}}
     </label>
     {{/unless}}

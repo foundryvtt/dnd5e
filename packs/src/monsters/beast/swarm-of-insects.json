@@ -110,7 +110,12 @@
       "environment": "Underdark",
       "cr": 0.5,
       "spellLevel": 0,
-      "source": "SRD 5.1"
+      "source": {
+        "custom": "",
+        "book": "SRD 5.1",
+        "page": "",
+        "license": "CC-BY-4.0"
+      }
     },
     "traits": {
       "size": "med",
@@ -467,7 +472,12 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": "SRD 5.1",
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
         "activation": {
           "type": "",
           "cost": null,
@@ -546,7 +556,8 @@
         "createdTime": null,
         "modifiedTime": null,
         "lastModifiedBy": null
-      }
+      },
+      "_key": "!actors.items!S0zDrv6lbnwWaz9E.neAokA0n390MXPMQ"
     },
     {
       "_id": "1yXz3JunJtlQs6vV",
@@ -559,7 +570,12 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": "SRD 5.1",
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
         "quantity": 1,
         "weight": 0,
         "price": {
@@ -668,7 +684,8 @@
         "createdTime": null,
         "modifiedTime": null,
         "lastModifiedBy": null
-      }
+      },
+      "_key": "!actors.items!S0zDrv6lbnwWaz9E.1yXz3JunJtlQs6vV"
     }
   ],
   "effects": [],
@@ -685,5 +702,6 @@
     "createdTime": 1661787232826,
     "modifiedTime": 1672596099814,
     "lastModifiedBy": "dnd5ebuilder0000"
-  }
+  },
+  "_key": "!actors!S0zDrv6lbnwWaz9E"
 }

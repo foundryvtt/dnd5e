@@ -30,15 +30,16 @@ export default class AbilityTemplate extends MeasuredTemplate {
   /**
    * A factory method to create an AbilityTemplate instance using provided data from an Item5e instance
    * @param {Item5e} item               The Item object for which to construct the template
+   * @param {object} [options={}]       Options to modify the created template.
    * @returns {AbilityTemplate|null}    The template object, or null if the item does not produce a template
    */
-  static fromItem(item) {
+  static fromItem(item, options={}) {
     const target = item.system.target ?? {};
     const templateShape = dnd5e.config.areaTargetTypes[target.type]?.template;
     if ( !templateShape ) return null;
 
     // Prepare template data
-    const templateData = {
+    const templateData = foundry.utils.mergeObject({
       t: templateShape,
       user: game.user.id,
       distance: target.value,
@@ -46,8 +47,8 @@ export default class AbilityTemplate extends MeasuredTemplate {
       x: 0,
       y: 0,
       fillColor: game.user.color,
-      flags: { dnd5e: { origin: item.uuid } }
-    };
+      flags: { dnd5e: { origin: item.uuid, spellLevel: item.system.level } }
+    }, options);
 
     // Additional type-specific data
     switch ( templateShape ) {
@@ -55,9 +56,14 @@ export default class AbilityTemplate extends MeasuredTemplate {
         templateData.angle = CONFIG.MeasuredTemplate.defaults.angle;
         break;
       case "rect": // 5e rectangular AoEs are always cubes
-        templateData.distance = Math.hypot(target.value, target.value);
         templateData.width = target.value;
-        templateData.direction = 45;
+        if ( game.settings.get("dnd5e", "gridAlignedSquareTemplates") ) {
+          templateData.distance = Math.hypot(target.value, target.value);
+          templateData.direction = 45;
+        } else {
+          // Override as 'ray' to make the template able to be rotated without morphing its shape
+          templateData.t = "ray";
+        }
         break;
       case "ray": // 5e rays are most commonly 1 square (5 ft) in width
         templateData.width = target.width ?? canvas.dimensions.distance;

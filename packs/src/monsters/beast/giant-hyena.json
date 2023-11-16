@@ -110,7 +110,12 @@
       "environment": "Grassland",
       "cr": 1,
       "spellLevel": 0,
-      "source": "SRD 5.1"
+      "source": {
+        "custom": "",
+        "book": "SRD 5.1",
+        "page": "",
+        "license": "CC-BY-4.0"
+      }
     },
     "traits": {
       "size": "lg",
@@ -454,7 +459,12 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": "SRD 5.1",
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
         "activation": {
           "type": "bonus",
           "cost": null,
@@ -533,7 +543,8 @@
         "createdTime": null,
         "modifiedTime": null,
         "lastModifiedBy": null
-      }
+      },
+      "_key": "!actors.items!aAqfEHPiVbhMwZ6j.QY2OI39oNi9VUuAY"
     },
     {
       "_id": "X9XQ405Nx5lHP20E",
@@ -546,7 +557,12 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": "SRD 5.1",
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
         "quantity": 1,
         "weight": 0,
         "price": {
@@ -659,7 +675,8 @@
         "createdTime": null,
         "modifiedTime": null,
         "lastModifiedBy": null
-      }
+      },
+      "_key": "!actors.items!aAqfEHPiVbhMwZ6j.X9XQ405Nx5lHP20E"
     }
   ],
   "effects": [],
@@ -676,5 +693,6 @@
     "createdTime": 1661787232901,
     "modifiedTime": 1672596101847,
     "lastModifiedBy": "dnd5ebuilder0000"
-  }
+  },
+  "_key": "!actors!aAqfEHPiVbhMwZ6j"
 }

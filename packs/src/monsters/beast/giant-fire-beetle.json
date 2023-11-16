@@ -110,7 +110,12 @@
       "environment": "Underdark",
       "cr": 0,
       "spellLevel": 0,
-      "source": "SRD 5.1"
+      "source": {
+        "custom": "",
+        "book": "SRD 5.1",
+        "page": "",
+        "license": "CC-BY-4.0"
+      }
     },
     "traits": {
       "size": "sm",
@@ -454,7 +459,12 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": "SRD 5.1",
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
         "quantity": 1,
         "weight": 0,
         "price": {
@@ -567,7 +577,8 @@
         "createdTime": null,
         "modifiedTime": null,
         "lastModifiedBy": null
-      }
+      },
+      "_key": "!actors.items!Z0GiAv3bJxTjUfjM.ytajTMHqbOxc0BvA"
     },
     {
       "_id": "t1I5Ss8xvBplViSy",
@@ -580,7 +591,12 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": "SRD 5.1",
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
         "activation": {
           "type": "",
           "cost": null,
@@ -659,7 +675,8 @@
         "createdTime": null,
         "modifiedTime": null,
         "lastModifiedBy": null
-      }
+      },
+      "_key": "!actors.items!Z0GiAv3bJxTjUfjM.t1I5Ss8xvBplViSy"
     }
   ],
   "effects": [],
@@ -676,5 +693,6 @@
     "createdTime": 1661787232886,
     "modifiedTime": 1672596101374,
     "lastModifiedBy": "dnd5ebuilder0000"
-  }
+  },
+  "_key": "!actors!Z0GiAv3bJxTjUfjM"
 }

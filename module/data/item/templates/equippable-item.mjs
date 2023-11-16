@@ -1,3 +1,5 @@
+import SystemDataModel from "../../abstract.mjs";
+
 /**
  * Data model template with information on items that can be attuned and equipped.
  *
@@ -5,7 +7,7 @@
  * @property {boolean} equipped   Is this item equipped on its owning actor.
  * @mixin
  */
-export default class EquippableItemTemplate extends foundry.abstract.DataModel {
+export default class EquippableItemTemplate extends SystemDataModel {
   /** @inheritdoc */
   static defineSchema() {
     return {
@@ -21,7 +23,8 @@ export default class EquippableItemTemplate extends foundry.abstract.DataModel {
   /* -------------------------------------------- */
 
   /** @inheritdoc */
-  static migrateData(source) {
+  static _migrateData(source) {
+    super._migrateData(source);
     EquippableItemTemplate.#migrateAttunement(source);
     EquippableItemTemplate.#migrateEquipped(source);
   }

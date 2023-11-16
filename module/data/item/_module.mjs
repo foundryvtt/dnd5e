@@ -5,6 +5,7 @@ import ContainerData from "./container.mjs";
 import EquipmentData from "./equipment.mjs";
 import FeatData from "./feat.mjs";
 import LootData from "./loot.mjs";
+import RaceData from "./race.mjs";
 import SpellData from "./spell.mjs";
 import SubclassData from "./subclass.mjs";
 import ToolData from "./tool.mjs";
@@ -18,6 +19,7 @@ export {
   EquipmentData,
   FeatData,
   LootData,
+  RaceData,
   SpellData,
   SubclassData,
   ToolData,
@@ -38,6 +40,7 @@ export const config = {
   equipment: EquipmentData,
   feat: FeatData,
   loot: LootData,
+  race: RaceData,
   spell: SpellData,
   subclass: SubclassData,
   tool: ToolData,

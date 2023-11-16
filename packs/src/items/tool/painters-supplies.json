@@ -9,7 +9,12 @@
       "chat": "",
       "unidentified": ""
     },
-    "source": "SRD 5.1",
+    "source": {
+      "custom": "",
+      "book": "SRD 5.1",
+      "page": "",
+      "license": "CC-BY-4.0"
+    },
     "quantity": 1,
     "weight": 5,
     "price": {
@@ -24,7 +29,7 @@
     "baseItem": "painter",
     "ability": "int",
     "chatFlavor": "",
-    "proficient": 0,
+    "proficient": null,
     "bonus": ""
   },
   "effects": [],
@@ -41,5 +46,6 @@
     "createdTime": 1661787233738,
     "modifiedTime": 1671220961986,
     "lastModifiedBy": "dnd5ebuilder0000"
-  }
+  },
+  "_key": "!items!ccm5xlWhx74d6lsK"
 }

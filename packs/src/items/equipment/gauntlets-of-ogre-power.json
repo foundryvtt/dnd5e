@@ -8,7 +8,12 @@
       "chat": "",
       "unidentified": ""
     },
-    "source": "SRD 5.1",
+    "source": {
+      "custom": "",
+      "book": "SRD 5.1",
+      "page": "",
+      "license": "CC-BY-4.0"
+    },
     "quantity": 1,
     "weight": 2,
     "price": {
@@ -88,7 +93,7 @@
     },
     "strength": null,
     "stealth": false,
-    "proficient": 0
+    "proficient": null
   },
   "effects": [
     {
@@ -117,7 +122,8 @@
       "tint": null,
       "transfer": true,
       "flags": {},
-      "sort": 0
+      "sort": 0,
+      "_key": "!items.effects!3TWT5bv3z5zGUZCe.m7FoXVGKT7C9X7aq"
     }
   ],
   "ownership": {
@@ -134,5 +140,6 @@
   },
   "folder": null,
   "sort": 0,
-  "_id": "3TWT5bv3z5zGUZCe"
+  "_id": "3TWT5bv3z5zGUZCe",
+  "_key": "!items!3TWT5bv3z5zGUZCe"
 }
