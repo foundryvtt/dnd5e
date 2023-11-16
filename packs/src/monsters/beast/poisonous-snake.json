@@ -110,7 +110,12 @@
       "environment": "Grassland",
       "cr": 0.125,
       "spellLevel": 0,
-      "source": "SRD 5.1"
+      "source": {
+        "custom": "",
+        "book": "SRD 5.1",
+        "page": "",
+        "license": "CC-BY-4.0"
+      }
     },
     "traits": {
       "size": "tiny",
@@ -454,7 +459,12 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": "SRD 5.1",
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
         "quantity": 1,
         "weight": 0,
         "price": {
@@ -567,7 +577,8 @@
         "createdTime": null,
         "modifiedTime": null,
         "lastModifiedBy": null
-      }
+      },
+      "_key": "!actors.items!D5rwVIxmfFrdyyxT.obYv0JJqJiMTsoIF"
     }
   ],
   "effects": [],
@@ -584,5 +595,6 @@
     "createdTime": 1661787232678,
     "modifiedTime": 1672596094945,
     "lastModifiedBy": "dnd5ebuilder0000"
-  }
+  },
+  "_key": "!actors!D5rwVIxmfFrdyyxT"
 }

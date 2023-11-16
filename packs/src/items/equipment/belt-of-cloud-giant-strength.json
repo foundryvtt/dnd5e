@@ -9,7 +9,12 @@
       "chat": "",
       "unidentified": ""
     },
-    "source": "SRD 5.1",
+    "source": {
+      "custom": "",
+      "book": "SRD 5.1",
+      "page": "",
+      "license": "CC-BY-4.0"
+    },
     "quantity": 1,
     "weight": 1,
     "price": {
@@ -89,7 +94,7 @@
     },
     "strength": null,
     "stealth": false,
-    "proficient": false
+    "proficient": null
   },
   "effects": [
     {
@@ -117,7 +122,8 @@
       "tint": null,
       "transfer": true,
       "flags": {},
-      "sort": 0
+      "sort": 0,
+      "_key": "!items.effects!NRj0lC3SM03s1YB3.iGbcuTRYb2okyQeS"
     }
   ],
   "folder": null,
@@ -133,5 +139,6 @@
     "createdTime": 1661787233631,
     "modifiedTime": 1690480168162,
     "lastModifiedBy": "dnd5ebuilder0000"
-  }
+  },
+  "_key": "!items!NRj0lC3SM03s1YB3"
 }

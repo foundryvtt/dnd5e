@@ -11,7 +11,12 @@
       "chat": "",
       "unidentified": ""
     },
-    "source": "SRD 5.1",
+    "source": {
+      "custom": "",
+      "book": "SRD 5.1",
+      "page": "",
+      "license": "CC-BY-4.0"
+    },
     "activation": {
       "type": "minute",
       "cost": 1,
@@ -101,7 +106,8 @@
       "transfer": true,
       "flags": {},
       "tint": null,
-      "sort": 0
+      "sort": 0,
+      "_key": "!items.effects!r0unvWK0lPsDthDx.7if4vIkT84Sw2zFm"
     }
   ],
   "folder": null,
@@ -113,5 +119,6 @@
     "createdTime": 1661787234428,
     "modifiedTime": 1672334583742,
     "lastModifiedBy": "dnd5ebuilder0000"
-  }
+  },
+  "_key": "!items!r0unvWK0lPsDthDx"
 }

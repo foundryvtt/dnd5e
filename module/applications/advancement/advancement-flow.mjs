@@ -100,8 +100,25 @@ export default class AdvancementFlow extends FormApplication {
   /* -------------------------------------------- */
 
   /** @inheritdoc */
+  async _render(...args) {
+    await super._render(...args);
+
+    // Call setPosition on manager to adjust for size changes
+    this.options.manager?.setPosition();
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
   async _updateObject(event, formData) {
     await this.advancement.apply(this.level, formData);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  _canDragDrop(selector) {
+    return true;
   }
 
 }

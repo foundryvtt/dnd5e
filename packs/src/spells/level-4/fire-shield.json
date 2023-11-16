@@ -11,7 +11,12 @@
       "chat": "",
       "unidentified": ""
     },
-    "source": "SRD 5.1",
+    "source": {
+      "custom": "",
+      "book": "SRD 5.1",
+      "page": "",
+      "license": "CC-BY-4.0"
+    },
     "activation": {
       "type": "action",
       "cost": 1,
@@ -121,7 +126,8 @@
       "origin": "Item.OtcTsffCQaOFkr9K",
       "tint": null,
       "transfer": true,
-      "sort": 0
+      "sort": 0,
+      "_key": "!items.effects!avD5XUtkBPQQR97c.lVKx8swB08jm6IFE"
     },
     {
       "_id": "UUXwEKSPX4nYfDzo",
@@ -149,7 +155,8 @@
       "origin": "Item.OtcTsffCQaOFkr9K",
       "tint": null,
       "transfer": true,
-      "sort": 0
+      "sort": 0,
+      "_key": "!items.effects!avD5XUtkBPQQR97c.UUXwEKSPX4nYfDzo"
     }
   ],
   "folder": null,
@@ -160,5 +167,6 @@
     "createdTime": 1661787234170,
     "modifiedTime": 1671220970322,
     "lastModifiedBy": "dnd5ebuilder0000"
-  }
+  },
+  "_key": "!items!avD5XUtkBPQQR97c"
 }

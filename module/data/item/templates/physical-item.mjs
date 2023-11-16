@@ -1,3 +1,5 @@
+import SystemDataModel from "../../abstract.mjs";
+
 /**
  * Data model template with information on physical items.
  *
@@ -10,7 +12,7 @@
  * @property {boolean} identified         Has this item been identified?
  * @mixin
  */
-export default class PhysicalItemTemplate extends foundry.abstract.DataModel {
+export default class PhysicalItemTemplate extends SystemDataModel {
   /** @inheritdoc */
   static defineSchema() {
     return {
@@ -34,11 +36,26 @@ export default class PhysicalItemTemplate extends foundry.abstract.DataModel {
   }
 
   /* -------------------------------------------- */
+  /*  Getters                                     */
+  /* -------------------------------------------- */
+
+  /**
+   * Get a human-readable label for the price and denomination.
+   * @type {string}
+   */
+  get priceLabel() {
+    const { value, denomination } = this.price;
+    const hasPrice = value && (denomination in CONFIG.DND5E.currencies);
+    return hasPrice ? `${value} ${CONFIG.DND5E.currencies[denomination].label}` : null;
+  }
+
+  /* -------------------------------------------- */
   /*  Migrations                                  */
   /* -------------------------------------------- */
 
   /** @inheritdoc */
-  static migrateData(source) {
+  static _migrateData(source) {
+    super._migrateData(source);
     PhysicalItemTemplate.#migratePrice(source);
     PhysicalItemTemplate.#migrateRarity(source);
     PhysicalItemTemplate.#migrateWeight(source);

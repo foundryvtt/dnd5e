@@ -18,6 +18,7 @@ import * as canvas from "./module/canvas/_module.mjs";
 import * as dataModels from "./module/data/_module.mjs";
 import * as dice from "./module/dice/_module.mjs";
 import * as documents from "./module/documents/_module.mjs";
+import * as enrichers from "./module/enrichers.mjs";
 import * as migrations from "./module/migration.mjs";
 import * as utils from "./module/utils.mjs";
 import {ModuleArt} from "./module/module-art.mjs";
@@ -33,6 +34,7 @@ globalThis.dnd5e = {
   dataModels,
   dice,
   documents,
+  enrichers,
   migrations,
   utils
 };
@@ -57,7 +59,6 @@ Hooks.once("init", function() {
   CONFIG.Dice.D20Roll = dice.D20Roll;
   CONFIG.MeasuredTemplate.defaults.angle = 53.13; // 5e cone RAW should be 53.13 degrees
   CONFIG.ui.combat = applications.combat.CombatTracker5e;
-  CONFIG.compatibility.excludePatterns.push(/\bActiveEffect5e#label\b/); // backwards compatibility with v10
   game.dnd5e.isV10 = game.release.generation < 11;
 
   // Register System Settings
@@ -126,6 +127,8 @@ Hooks.once("init", function() {
   // Preload Handlebars helpers & partials
   utils.registerHandlebarsHelpers();
   utils.preloadHandlebarsTemplates();
+
+  enrichers.registerCustomEnrichers();
 });
 
 /**
@@ -289,7 +292,7 @@ Hooks.once("ready", function() {
 
   // Perform the migration
   if ( cv && isNewerVersion(game.system.flags.compatibleMigrationVersion, cv) ) {
-    ui.notifications.error(game.i18n.localize("MIGRATION.5eVersionTooOldWarning"), {permanent: true});
+    ui.notifications.error("MIGRATION.5eVersionTooOldWarning", {localize: true, permanent: true});
   }
   migrations.migrateWorld();
 });
@@ -324,6 +327,7 @@ export {
   dataModels,
   dice,
   documents,
+  enrichers,
   migrations,
   utils,
   DND5E

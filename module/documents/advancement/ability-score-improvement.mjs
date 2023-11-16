@@ -22,12 +22,23 @@ export default class AbilityScoreImprovementAdvancement extends Advancement {
       icon: "systems/dnd5e/icons/svg/ability-score-improvement.svg",
       title: game.i18n.localize("DND5E.AdvancementAbilityScoreImprovementTitle"),
       hint: game.i18n.localize("DND5E.AdvancementAbilityScoreImprovementHint"),
-      validItemTypes: new Set(["background", "class"]),
+      validItemTypes: new Set(["background", "class", "race"]),
       apps: {
         config: AbilityScoreImprovementConfig,
         flow: AbilityScoreImprovementFlow
       }
     });
+  }
+
+  /* -------------------------------------------- */
+  /*  Preparation Methods                         */
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  _preCreate(data) {
+    if ( super._preCreate(data) === false ) return false;
+    if ( this.item.type !== "class" || foundry.utils.hasProperty(data, "configuration.points") ) return;
+    this.updateSource({"configuration.points": 2});
   }
 
   /* -------------------------------------------- */
@@ -88,22 +99,34 @@ export default class AbilityScoreImprovementAdvancement extends Advancement {
 
   /** @inheritdoc */
   summaryForLevel(level, { configMode=false }={}) {
-    if ( (this.value.type === "feat") && this.value.feat ) {
+    const formatter = new Intl.NumberFormat(game.i18n.lang, { signDisplay: "always" });
+    if ( configMode ) {
+      const entries = Object.entries(this.configuration.fixed).map(([key, value]) => {
+        if ( !value ) return null;
+        const name = CONFIG.DND5E.abilities[key]?.label ?? key;
+        return `<span class="tag">${name} <strong>${formatter.format(value)}</strong></span>`;
+      });
+      if ( this.configuration.points ) entries.push(`<span class="tag">${
+        game.i18n.localize("DND5E.AdvancementAbilityScoreImprovementPoints")}: <strong>${
+        this.configuration.points}</strong></span>`
+      );
+      return entries.filterJoin("\n");
+    }
 
+    else if ( (this.value.type === "feat") && this.value.feat ) {
       const id = Object.keys(this.value.feat)[0];
       const feat = this.actor.items.get(id);
       if ( feat ) return feat.toAnchor({classes: ["content-link"]}).outerHTML;
+    }
 
-    } else if ( (this.value.type === "asi") && this.value.assignments ) {
-
-      const formatter = new Intl.NumberFormat(game.i18n.lang, { signDisplay: "always" });
+    else if ( (this.value.type === "asi") && this.value.assignments ) {
       return Object.entries(this.value.assignments).reduce((html, [key, value]) => {
         const name = CONFIG.DND5E.abilities[key]?.label ?? key;
         html += `<span class="tag">${name} <strong>${formatter.format(value)}</strong></span>\n`;
         return html;
       }, "");
-
     }
+
     return "";
   }
 
@@ -118,9 +141,10 @@ export default class AbilityScoreImprovementAdvancement extends Advancement {
       const updates = {};
       for ( const key of Object.keys(assignments) ) {
         const ability = this.actor.system.abilities[key];
+        const source = this.actor.system.toObject().abilities[key] ?? {};
         if ( !ability || !this.canImprove(key) ) continue;
-        assignments[key] = Math.min(assignments[key], ability.max - ability.value);
-        if ( assignments[key] ) updates[`system.abilities.${key}.value`] = ability.value + assignments[key];
+        assignments[key] = Math.min(assignments[key], ability.max - source.value);
+        if ( assignments[key] ) updates[`system.abilities.${key}.value`] = source.value + assignments[key];
         else delete assignments[key];
       }
       data.assignments = assignments;
@@ -167,7 +191,7 @@ export default class AbilityScoreImprovementAdvancement extends Advancement {
     if ( this.value.type === "asi" ) {
       const updates = {};
       for ( const [key, change] of Object.entries(this.value.assignments ?? {}) ) {
-        const ability = this.actor.system.abilities[key];
+        const ability = this.actor.system.toObject().abilities[key];
         if ( !ability || !this.canImprove(key) ) continue;
         updates[`system.abilities.${key}.value`] = ability.value - change;
       }

@@ -62,7 +62,7 @@ export default class D20Roll extends Roll {
     NORMAL: 0,
     ADVANTAGE: 1,
     DISADVANTAGE: -1
-  }
+  };
 
   /* -------------------------------------------- */
 

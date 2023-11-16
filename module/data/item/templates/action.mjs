@@ -1,3 +1,4 @@
+import SystemDataModel from "../../abstract.mjs";
 import { FormulaField } from "../../fields.mjs";
 
 /**
@@ -20,7 +21,7 @@ import { FormulaField } from "../../fields.mjs";
  * @property {string} save.scaling        Method for automatically determining saving throw DC.
  * @mixin
  */
-export default class ActionTemplate extends foundry.abstract.DataModel {
+export default class ActionTemplate extends SystemDataModel {
   /** @inheritdoc */
   static defineSchema() {
     return {
@@ -62,7 +63,8 @@ export default class ActionTemplate extends foundry.abstract.DataModel {
   /* -------------------------------------------- */
 
   /** @inheritdoc */
-  static migrateData(source) {
+  static _migrateData(source) {
+    super._migrateData(source);
     ActionTemplate.#migrateAbility(source);
     ActionTemplate.#migrateAttackBonus(source);
     ActionTemplate.#migrateCritical(source);
@@ -176,8 +178,8 @@ export default class ActionTemplate extends foundry.abstract.DataModel {
   get criticalThreshold() {
     if ( !this.hasAttack ) return null;
     let ammoThreshold = Infinity;
-    if ( this.consume?.type === "ammo" ) {
-      ammoThreshold = this.parent?.actor?.items.get(this.consume.target).system.critical.threshold ?? Infinity;
+    if ( this.hasAmmo ) {
+      ammoThreshold = this.parent?.actor?.items.get(this.consume.target)?.system.critical.threshold ?? Infinity;
     }
     const threshold = Math.min(this.critical.threshold ?? Infinity, this._typeCriticalThreshold, ammoThreshold);
     return threshold < Infinity ? threshold : 20;

@@ -110,7 +110,12 @@
       "environment": "Underdark",
       "cr": 0.25,
       "spellLevel": 0,
-      "source": "SRD 5.1"
+      "source": {
+        "custom": "",
+        "book": "SRD 5.1",
+        "page": "",
+        "license": "CC-BY-4.0"
+      }
     },
     "traits": {
       "size": "med",
@@ -458,7 +463,12 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": "SRD 5.1",
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
         "quantity": 1,
         "weight": 0,
         "price": {
@@ -567,7 +577,8 @@
         "createdTime": null,
         "modifiedTime": null,
         "lastModifiedBy": null
-      }
+      },
+      "_key": "!actors.items!7EmUVycEASn7SFL0.OEx9iy4HDipiYsPt"
     },
     {
       "_id": "wjDktLNTUnueuX2X",
@@ -580,7 +591,12 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": "SRD 5.1",
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
         "activation": {
           "type": "action",
           "cost": 1,
@@ -659,7 +675,8 @@
         "createdTime": null,
         "modifiedTime": null,
         "lastModifiedBy": null
-      }
+      },
+      "_key": "!actors.items!7EmUVycEASn7SFL0.wjDktLNTUnueuX2X"
     },
     {
       "_id": "fZgfSlczUTtrCNEb",
@@ -672,7 +689,12 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": "SRD 5.1",
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
         "activation": {
           "type": "",
           "cost": null,
@@ -751,7 +773,8 @@
         "createdTime": null,
         "modifiedTime": null,
         "lastModifiedBy": null
-      }
+      },
+      "_key": "!actors.items!7EmUVycEASn7SFL0.fZgfSlczUTtrCNEb"
     }
   ],
   "effects": [],
@@ -768,5 +791,6 @@
     "createdTime": 1661787232610,
     "modifiedTime": 1672596092910,
     "lastModifiedBy": "dnd5ebuilder0000"
-  }
+  },
+  "_key": "!actors!7EmUVycEASn7SFL0"
 }

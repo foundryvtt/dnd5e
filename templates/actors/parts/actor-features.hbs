@@ -47,6 +47,7 @@
                     {{#if item.system.isOriginalClass}}
                         <i class="original-class fas fa-sun" data-tooltip="DND5E.ClassOriginal"></i>
                     {{/if}}
+                    {{~#if ctx.isStack}} ({{item.system.quantity}}){{/if}}
                 </h4>
             </div>
 
