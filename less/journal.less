@@ -154,21 +154,18 @@
     gap: 1rem;
 
     [name="system.code"] {
-      width: 3em;
-      height: 100%;
+      block-size: 100%;
+      inline-size: 3em;
       background: rgb(0 0 0 / 0.1);
       font-size: var(--font-size-24);
       text-align: center;
     }
 
     .page-level {
-      margin-left: 0;
+      margin-inline-start: 0;
     }
   }
-  .map-location-code {
-    margin-inline-end: 0.25em;
-  }
-  .map-location-code::after {
-    content: ":";
+  [data-map-location-code]::before {
+    content: attr(data-map-location-code) ': ';
   }
 }

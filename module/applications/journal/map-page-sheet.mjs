@@ -21,8 +21,9 @@ export default class JournalMapLocationPageSheet extends JournalTextPageSheet {
 
   async _renderInner(...args) {
     const jQuery = await super._renderInner(...args);
-
     const editingHeader = jQuery[0].querySelector(".journal-header");
+    const viewingHeader = jQuery[0].querySelector(":is(h1, h2, h3)");
+
     if ( editingHeader ) {
       const input = document.createElement("input");
       input.name = "system.code";
@@ -31,11 +32,8 @@ export default class JournalMapLocationPageSheet extends JournalTextPageSheet {
       editingHeader.insertAdjacentElement("afterbegin", input);
     }
 
-    else if ( jQuery[0].classList.contains("journal-page-header") && this.document.system.code ) {
-      const span = document.createElement("span");
-      span.innerText = this.document.system.code;
-      span.classList.add("map-location-code");
-      jQuery[0].querySelector(":is(h1, h2, h3)")?.insertAdjacentElement("afterbegin", span);
+    else if ( viewingHeader && this.document.system.code ) {
+      viewingHeader.dataset.mapLocationCode = this.document.system.code;
     }
 
     return jQuery;
