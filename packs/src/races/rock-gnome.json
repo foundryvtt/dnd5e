@@ -10,11 +10,11 @@
       "unidentified": ""
     },
     "source": {
-      "custom": "SRD 5.1",
-      "book": "",
+      "custom": "",
+      "book": "SRD 5.1",
       "page": "",
       "uuid": "",
-      "license": ""
+      "license": "CC-BY-4.0"
     },
     "identifier": "rock-gnome",
     "advancement": [
@@ -85,8 +85,8 @@
           "mode": "default",
           "allowReplacements": false,
           "grants": [
-            "languages:common",
-            "languages:gnomish"
+            "languages:standard:common",
+            "languages:standard:gnomish"
           ],
           "choices": []
         },
@@ -97,24 +97,24 @@
     ],
     "movement": {
       "walk": 25,
-      "burrow": 0,
-      "climb": 0,
-      "fly": 0,
-      "swim": 0,
+      "burrow": null,
+      "climb": null,
+      "fly": null,
+      "swim": null,
       "units": "ft",
       "hover": false
     },
     "senses": {
       "darkvision": 60,
-      "blindsight": 0,
-      "tremorsense": 0,
-      "truesight": 0,
+      "blindsight": null,
+      "tremorsense": null,
+      "truesight": null,
       "units": "ft",
       "special": ""
     },
     "type": {
       "subtype": "gnome",
-      "value": "",
+      "value": "humanoid",
       "custom": ""
     }
   },
@@ -125,10 +125,10 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.3.1",
+    "systemVersion": "2.4.0",
     "coreVersion": "10.303",
     "createdTime": 1677181053374,
-    "modifiedTime": 1699397219206,
+    "modifiedTime": 1699987615902,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "sort": 0,

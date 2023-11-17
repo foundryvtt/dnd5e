@@ -9,7 +9,12 @@
       "chat": "",
       "unidentified": ""
     },
-    "source": "SRD 5.1",
+    "source": {
+      "custom": "",
+      "book": "SRD 5.1",
+      "page": "",
+      "license": "CC-BY-4.0"
+    },
     "identifier": "rogue",
     "levels": 1,
     "hitDice": "d8",
@@ -57,7 +62,8 @@
         },
         "level": 1,
         "title": "",
-        "classRestriction": "primary"
+        "classRestriction": "primary",
+        "value": {}
       },
       {
         "_id": "ZfLkT5c0hxOmdyti",
@@ -490,7 +496,8 @@
             "int": 0,
             "wis": 0,
             "cha": 0
-          }
+          },
+          "cap": 2
         },
         "value": {
           "type": "asi"
@@ -511,7 +518,8 @@
             "int": 0,
             "wis": 0,
             "cha": 0
-          }
+          },
+          "cap": 2
         },
         "value": {
           "type": "asi"
@@ -532,7 +540,8 @@
             "int": 0,
             "wis": 0,
             "cha": 0
-          }
+          },
+          "cap": 2
         },
         "value": {
           "type": "asi"
@@ -553,7 +562,8 @@
             "int": 0,
             "wis": 0,
             "cha": 0
-          }
+          },
+          "cap": 2
         },
         "value": {
           "type": "asi"
@@ -575,7 +585,8 @@
             "int": 0,
             "wis": 0,
             "cha": 0
-          }
+          },
+          "cap": 2
         },
         "value": {
           "type": "asi"
@@ -595,15 +606,35 @@
             "int": 0,
             "wis": 0,
             "cha": 0
-          }
+          },
+          "cap": 2
         },
         "value": {
           "type": "asi"
         },
         "level": 10,
         "title": ""
+      },
+      {
+        "_id": "3GyyG2fRAwPbKK7n",
+        "type": "Trait",
+        "configuration": {
+          "hint": "",
+          "mode": "default",
+          "allowReplacements": false,
+          "grants": [
+            "languages:cant"
+          ],
+          "choices": []
+        },
+        "level": 1,
+        "title": ""
       }
     ],
+    "spellcasting": {
+      "progression": "none",
+      "ability": ""
+    },
     "saves": [
       "dex",
       "int"
@@ -624,10 +655,6 @@
         "ste"
       ],
       "value": []
-    },
-    "spellcasting": {
-      "progression": "none",
-      "ability": ""
     }
   },
   "effects": [],
@@ -639,10 +666,10 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.3.1",
+    "systemVersion": "2.4.0",
     "coreVersion": "10.303",
     "createdTime": 1661787234284,
-    "modifiedTime": 1698851457625,
+    "modifiedTime": 1699988274467,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!xEb8jmA5HlNs7xTF"

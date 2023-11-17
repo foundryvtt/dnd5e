@@ -73,31 +73,30 @@
         "bonuses": {
           "level": "",
           "overall": ""
-        },
-        "min": 0
+        }
       },
       "init": {
         "ability": "",
         "bonus": "0"
       },
       "movement": {
-        "burrow": 0,
-        "climb": 0,
-        "fly": 0,
-        "swim": 0,
-        "walk": 25,
-        "units": "ft",
+        "burrow": null,
+        "climb": null,
+        "fly": null,
+        "swim": null,
+        "walk": null,
+        "units": null,
         "hover": false
       },
       "attunement": {
         "max": 3
       },
       "senses": {
-        "darkvision": 60,
-        "blindsight": 0,
-        "tremorsense": 0,
-        "truesight": 0,
-        "units": "ft",
+        "darkvision": null,
+        "blindsight": null,
+        "tremorsense": null,
+        "truesight": null,
+        "units": null,
         "special": ""
       },
       "spellcasting": "int",
@@ -110,12 +109,12 @@
     },
     "details": {
       "biography": {
-        "value": "<p>Once a well-respected bureaucrat at the dwarven halls, Riswynn dabbled in intruigue, picked up a few tricks, and ran intro trouble with some nobles. She looks to make a name for herself and regain her social status.</p>\n",
+        "value": "<p>Once a well-respected bureaucrat at the dwarven halls, Riswynn dabbled in intruigue, picked up a few tricks, and ran intro trouble with some nobles. She looks to make a name for herself and regain her social status.</p>",
         "public": ""
       },
       "alignment": "True neutral",
-      "race": "Hill Dwarf",
-      "background": "",
+      "race": "JtKfV5srBn6zBNVt",
+      "background": null,
       "originalClass": "POlGoMp1xwT02K3S",
       "xp": {
         "value": 0
@@ -161,9 +160,11 @@
       },
       "weaponProf": {
         "value": [
-          "sim",
           "battleaxe",
           "warhammer",
+          "handaxe",
+          "lighthammer",
+          "sim",
           "handcrossbow",
           "longsword",
           "rapier",
@@ -178,10 +179,8 @@
         "custom": ""
       },
       "toolProf": {
-        "value": [
-          "thief"
-        ],
-        "custom": "Smith Tools"
+        "value": [],
+        "custom": ""
       }
     },
     "currency": {
@@ -337,7 +336,22 @@
         }
       }
     },
-    "tools": {},
+    "tools": {
+      "mason": {
+        "value": 1,
+        "ability": "int",
+        "bonuses": {
+          "check": ""
+        }
+      },
+      "thief": {
+        "value": 1,
+        "ability": "int",
+        "bonuses": {
+          "check": ""
+        }
+      }
+    },
     "spells": {
       "spell1": {
         "value": 0,
@@ -509,7 +523,12 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": "SRD 5.1",
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
         "quantity": 1,
         "weight": 6,
         "price": {
@@ -535,7 +554,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -546,12 +566,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": null,
         "actionType": "",
@@ -589,7 +611,7 @@
         },
         "strength": null,
         "stealth": false,
-        "proficient": false
+        "proficient": null
       },
       "sort": 0,
       "flags": {
@@ -623,7 +645,12 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": "SRD 5.1",
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
         "quantity": 1,
         "weight": 2,
         "price": {
@@ -649,7 +676,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": 5,
@@ -660,12 +688,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "mwak",
@@ -720,7 +750,7 @@
           "mgc": false,
           "sil": false
         },
-        "proficient": true
+        "proficient": null
       },
       "sort": 0,
       "flags": {
@@ -754,7 +784,12 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": "SRD 5.1",
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
         "quantity": 20,
         "weight": 0.05,
         "price": {
@@ -780,7 +815,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": 5,
@@ -792,12 +828,14 @@
           "max": "",
           "per": null,
           "recovery": "",
-          "autoDestroy": false
+          "autoDestroy": false,
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "rwak",
@@ -822,7 +860,8 @@
           "dc": null,
           "scaling": "spell"
         },
-        "consumableType": "ammo"
+        "consumableType": "ammo",
+        "properties": {}
       },
       "sort": 0,
       "flags": {},
@@ -852,7 +891,12 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": "SRD 5.1",
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
         "quantity": 1,
         "weight": 2,
         "price": {
@@ -878,7 +922,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": 80,
@@ -889,12 +934,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "ammo",
           "target": "13NzavzIfxLtAbjF",
-          "amount": 1
+          "amount": 1,
+          "scale": false
         },
         "ability": "",
         "actionType": "rwak",
@@ -946,7 +993,7 @@
           "ver": false,
           "lod": false
         },
-        "proficient": true
+        "proficient": null
       },
       "sort": 0,
       "flags": {
@@ -980,7 +1027,12 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": "SRD 5.1",
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
         "quantity": 1,
         "weight": 1,
         "price": {
@@ -1006,7 +1058,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": 20,
@@ -1017,12 +1070,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "mwak",
@@ -1074,7 +1129,7 @@
           "two": false,
           "ver": false
         },
-        "proficient": true
+        "proficient": null
       },
       "sort": 0,
       "flags": {
@@ -1108,7 +1163,12 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": "SRD 5.1",
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
         "quantity": 1,
         "weight": 10,
         "price": {
@@ -1134,7 +1194,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -1145,12 +1206,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": null,
         "actionType": "",
@@ -1188,7 +1251,7 @@
         },
         "strength": null,
         "stealth": false,
-        "proficient": true
+        "proficient": null
       },
       "sort": 0,
       "flags": {
@@ -1222,7 +1285,12 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": "SRD 5.1",
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
         "quantity": 1,
         "weight": 1,
         "price": {
@@ -1237,7 +1305,7 @@
         "baseItem": "",
         "ability": "dex",
         "chatFlavor": "",
-        "proficient": 1,
+        "proficient": null,
         "bonus": ""
       },
       "sort": 0,
@@ -1272,7 +1340,12 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": "SRD 5.1",
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
         "quantity": 1,
         "weight": 5,
         "price": {
@@ -1328,7 +1401,12 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": "SRD 5.1",
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
         "quantity": 1,
         "weight": 1,
         "price": {
@@ -1384,7 +1462,12 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": "SRD 5.1",
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
         "quantity": 1,
         "weight": 1,
         "price": {
@@ -1440,7 +1523,12 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": "SRD 5.1",
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
         "quantity": 1,
         "weight": 3,
         "price": {
@@ -1450,7 +1538,11 @@
         "attunement": 0,
         "equipped": false,
         "rarity": "",
-        "identified": true
+        "identified": true,
+        "type": {
+          "value": "",
+          "subtype": ""
+        }
       },
       "sort": 0,
       "flags": {
@@ -1484,7 +1576,12 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": "SRD 5.1",
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
         "quantity": 1,
         "weight": 10,
         "price": {
@@ -1510,7 +1607,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -1522,12 +1620,14 @@
           "max": "1",
           "per": "charges",
           "recovery": "",
-          "autoDestroy": false
+          "autoDestroy": false,
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "abil",
@@ -1547,7 +1647,8 @@
           "dc": 17,
           "scaling": "flat"
         },
-        "consumableType": "trinket"
+        "consumableType": "trinket",
+        "properties": {}
       },
       "sort": 0,
       "flags": {
@@ -1581,7 +1682,12 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": "SRD 5.1",
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
         "quantity": 10,
         "weight": 0.25,
         "price": {
@@ -1607,7 +1713,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": 5,
@@ -1619,12 +1726,14 @@
           "max": "1",
           "per": "charges",
           "recovery": "",
-          "autoDestroy": true
+          "autoDestroy": true,
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "util",
@@ -1644,7 +1753,8 @@
           "dc": null,
           "scaling": "spell"
         },
-        "consumableType": "trinket"
+        "consumableType": "trinket",
+        "properties": {}
       },
       "sort": 0,
       "flags": {
@@ -1678,7 +1788,12 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": "SRD 5.1",
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
         "quantity": 10,
         "weight": 2,
         "price": {
@@ -1704,7 +1819,8 @@
           "value": 1,
           "width": null,
           "units": "",
-          "type": "creature"
+          "type": "creature",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -1716,12 +1832,14 @@
           "max": "1",
           "per": "charges",
           "recovery": "",
-          "autoDestroy": true
+          "autoDestroy": true,
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "util",
@@ -1741,7 +1859,8 @@
           "dc": null,
           "scaling": "spell"
         },
-        "consumableType": "food"
+        "consumableType": "food",
+        "properties": {}
       },
       "sort": 0,
       "flags": {
@@ -1775,7 +1894,12 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": "SRD 5.1",
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
         "quantity": 1,
         "weight": 1,
         "price": {
@@ -1785,7 +1909,11 @@
         "attunement": 0,
         "equipped": false,
         "rarity": "",
-        "identified": true
+        "identified": true,
+        "type": {
+          "value": "",
+          "subtype": ""
+        }
       },
       "sort": 0,
       "flags": {
@@ -1819,7 +1947,12 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": "SRD 5.1",
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
         "quantity": 10,
         "weight": 1,
         "price": {
@@ -1845,7 +1978,8 @@
           "value": 40,
           "width": null,
           "units": "ft",
-          "type": "radius"
+          "type": "radius",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -1857,12 +1991,14 @@
           "max": "1",
           "per": "charges",
           "recovery": "",
-          "autoDestroy": true
+          "autoDestroy": true,
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "str",
         "actionType": "mwak",
@@ -1887,7 +2023,8 @@
           "dc": null,
           "scaling": "spell"
         },
-        "consumableType": "trinket"
+        "consumableType": "trinket",
+        "properties": {}
       },
       "sort": 0,
       "flags": {
@@ -1921,7 +2058,12 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": "SRD 5.1",
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
         "quantity": 1,
         "weight": 5,
         "price": {
@@ -1947,7 +2089,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -1959,12 +2102,14 @@
           "max": "4",
           "per": "charges",
           "recovery": "",
-          "autoDestroy": false
+          "autoDestroy": false,
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "util",
@@ -1984,7 +2129,8 @@
           "dc": null,
           "scaling": "spell"
         },
-        "consumableType": "food"
+        "consumableType": "food",
+        "properties": {}
       },
       "sort": 0,
       "flags": {
@@ -2018,7 +2164,12 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": "SRD 5.1",
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
         "quantity": 1,
         "weight": 1,
         "price": {
@@ -2028,7 +2179,11 @@
         "attunement": 0,
         "equipped": false,
         "rarity": "",
-        "identified": true
+        "identified": true,
+        "type": {
+          "value": "",
+          "subtype": ""
+        }
       },
       "sort": 0,
       "flags": {
@@ -2062,7 +2217,12 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": "SRD 5.1",
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
         "quantity": 1,
         "weight": 7,
         "price": {
@@ -2072,7 +2232,11 @@
         "attunement": 0,
         "equipped": false,
         "rarity": "",
-        "identified": true
+        "identified": true,
+        "type": {
+          "value": "",
+          "subtype": ""
+        }
       },
       "sort": 0,
       "flags": {
@@ -2106,7 +2270,12 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": "SRD 5.1",
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
         "quantity": 1,
         "weight": 1,
         "price": {
@@ -2132,7 +2301,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": 20,
@@ -2143,12 +2313,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "mwak",
@@ -2200,7 +2372,7 @@
           "two": false,
           "ver": false
         },
-        "proficient": true
+        "proficient": null
       },
       "sort": 0,
       "flags": {},
@@ -2230,7 +2402,12 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": "SRD 5.1",
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
         "quantity": 1,
         "weight": 5,
         "price": {
@@ -2240,7 +2417,11 @@
         "attunement": 0,
         "equipped": false,
         "rarity": "",
-        "identified": true
+        "identified": true,
+        "type": {
+          "value": "",
+          "subtype": ""
+        }
       },
       "sort": 0,
       "flags": {
@@ -2265,382 +2446,6 @@
       "_key": "!actors.items!bzlxBO5km3zCQA8G.OpfHMuWyqcO7LmSt"
     },
     {
-      "_id": "VlHHit2a50YCKKTm",
-      "name": "Dwarven Resilience",
-      "type": "feat",
-      "system": {
-        "description": {
-          "value": "<p>You have advantage on saving throws against poison, and you have resistance against poison damage.</p>",
-          "chat": "",
-          "unidentified": ""
-        },
-        "source": "SRD 5.1",
-        "activation": {
-          "type": "",
-          "cost": null,
-          "condition": ""
-        },
-        "duration": {
-          "value": "",
-          "units": ""
-        },
-        "cover": null,
-        "crewed": false,
-        "target": {
-          "value": null,
-          "width": null,
-          "units": "",
-          "type": ""
-        },
-        "range": {
-          "value": null,
-          "long": null,
-          "units": ""
-        },
-        "uses": {
-          "value": null,
-          "max": "",
-          "per": null,
-          "recovery": ""
-        },
-        "consume": {
-          "type": "",
-          "target": null,
-          "amount": null
-        },
-        "ability": "",
-        "actionType": "",
-        "attackBonus": "",
-        "chatFlavor": "",
-        "critical": {
-          "threshold": null,
-          "damage": ""
-        },
-        "damage": {
-          "parts": [],
-          "versatile": ""
-        },
-        "formula": "",
-        "save": {
-          "ability": "",
-          "dc": null,
-          "scaling": "spell"
-        },
-        "type": {
-          "value": "",
-          "subtype": ""
-        },
-        "requirements": "Dwarf",
-        "recharge": {
-          "value": null,
-          "charged": false
-        }
-      },
-      "sort": 0,
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.dnd5e.races.ufysTkqet2Ctmtyi"
-        }
-      },
-      "img": "icons/creatures/abilities/stinger-poison-green.webp",
-      "effects": [],
-      "folder": null,
-      "ownership": {
-        "default": 0
-      },
-      "_stats": {
-        "systemId": null,
-        "systemVersion": null,
-        "coreVersion": null,
-        "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
-      },
-      "_key": "!actors.items!bzlxBO5km3zCQA8G.VlHHit2a50YCKKTm"
-    },
-    {
-      "_id": "0Db7KX5wxDYwiem3",
-      "name": "Stonecunning",
-      "type": "feat",
-      "system": {
-        "description": {
-          "value": "<p>Whenever you make an Intelligence (History) check related to the origin of stonework, you are considered proficient in the History skill and add double your proficiency bonus to the check, instead of your normal proficiency bonus.</p>",
-          "chat": "",
-          "unidentified": ""
-        },
-        "source": "SRD 5.1",
-        "activation": {
-          "type": "",
-          "cost": null,
-          "condition": ""
-        },
-        "duration": {
-          "value": "",
-          "units": ""
-        },
-        "cover": null,
-        "crewed": false,
-        "target": {
-          "value": null,
-          "width": null,
-          "units": "",
-          "type": ""
-        },
-        "range": {
-          "value": null,
-          "long": null,
-          "units": ""
-        },
-        "uses": {
-          "value": null,
-          "max": "",
-          "per": null,
-          "recovery": ""
-        },
-        "consume": {
-          "type": "",
-          "target": null,
-          "amount": null
-        },
-        "ability": "",
-        "actionType": "",
-        "attackBonus": "",
-        "chatFlavor": "",
-        "critical": {
-          "threshold": null,
-          "damage": ""
-        },
-        "damage": {
-          "parts": [],
-          "versatile": ""
-        },
-        "formula": "",
-        "save": {
-          "ability": "",
-          "dc": null,
-          "scaling": "spell"
-        },
-        "type": {
-          "value": "",
-          "subtype": ""
-        },
-        "requirements": "Dwarf",
-        "recharge": {
-          "value": null,
-          "charged": false
-        }
-      },
-      "sort": 0,
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.dnd5e.races.mQPZDRbUhgYTbXKa"
-        }
-      },
-      "img": "icons/commodities/tech/cog-bronze.webp",
-      "effects": [],
-      "folder": null,
-      "ownership": {
-        "default": 0
-      },
-      "_stats": {
-        "systemId": null,
-        "systemVersion": null,
-        "coreVersion": null,
-        "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
-      },
-      "_key": "!actors.items!bzlxBO5km3zCQA8G.0Db7KX5wxDYwiem3"
-    },
-    {
-      "_id": "loauVqu6iAKv70b7",
-      "name": "Hill Dwarf",
-      "type": "feat",
-      "system": {
-        "description": {
-          "value": "<div title=\"Page 4\">\n<div>\n<div>\n<p><em>As a hill dwarf, you have keen senses, deep intuition, and remarkable resilience. </em></p><p><em><strong>Ability Score Increase.</strong></em> Your Wisdom score increases by 1.</p><p><em><strong>Dwarven Toughness.</strong></em> Your hit point maximum increases by 1, and it increases by 1 every time you gain a level.</p>\n</div>\n</div>\n</div>",
-          "chat": "",
-          "unidentified": ""
-        },
-        "source": "SRD 5.1",
-        "activation": {
-          "type": "",
-          "cost": null,
-          "condition": ""
-        },
-        "duration": {
-          "value": "",
-          "units": ""
-        },
-        "cover": null,
-        "crewed": false,
-        "target": {
-          "value": null,
-          "width": null,
-          "units": "",
-          "type": ""
-        },
-        "range": {
-          "value": null,
-          "long": null,
-          "units": ""
-        },
-        "uses": {
-          "value": null,
-          "max": "",
-          "per": null,
-          "recovery": ""
-        },
-        "consume": {
-          "type": "",
-          "target": null,
-          "amount": null
-        },
-        "ability": null,
-        "actionType": "",
-        "attackBonus": "",
-        "chatFlavor": "",
-        "critical": {
-          "threshold": null,
-          "damage": ""
-        },
-        "damage": {
-          "parts": [],
-          "versatile": ""
-        },
-        "formula": "",
-        "save": {
-          "ability": "",
-          "dc": null,
-          "scaling": "spell"
-        },
-        "type": {
-          "value": "",
-          "subtype": ""
-        },
-        "requirements": "Dwarf",
-        "recharge": {
-          "value": null,
-          "charged": false
-        }
-      },
-      "sort": 0,
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.dnd5e.races.UQiRQUTBcsz8gZU1"
-        }
-      },
-      "img": "icons/magic/defensive/shield-barrier-glowing-triangle-magenta.webp",
-      "effects": [],
-      "folder": null,
-      "ownership": {
-        "default": 0
-      },
-      "_stats": {
-        "systemId": null,
-        "systemVersion": null,
-        "coreVersion": null,
-        "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
-      },
-      "_key": "!actors.items!bzlxBO5km3zCQA8G.loauVqu6iAKv70b7"
-    },
-    {
-      "_id": "HXOtd9EqzXbB3e2c",
-      "name": "Dwarf",
-      "type": "feat",
-      "system": {
-        "description": {
-          "value": "<div title=\"Page 3\">\n<p><em>Your dwarf character has an assortment of inborn abilities, part and parcel of dwarven nature.</em></p><p><em><strong>Ability Score Increase.</strong></em> Your Constitution score increases by 2.</p><p><em><strong>Age.</strong></em> Dwarves mature at the same rate as humans, but they're considered young until they reach the age of 50. On average, they live about 350 years.</p><p><em><strong>Alignment.</strong></em> Most dwarves are lawful, believing firmly in the benefits of a well-­ordered society. They tend toward good as well, with a strong sense of fair play and a belief that everyone deserves to share in the benefits of a just order.</p><p><em><strong>Size. </strong></em>Dwarves stand between 4 and 5 feet tall and average about 150 pounds. Your size is Medium.</p><p><em><strong>Speed. </strong></em>Your base walking speed is 25 feet. Your speed is not reduced by wearing heavy armor.</p><p><em><strong>Darkvision.</strong></em> Accustomed to life underground, you have superior vision in dark and dim conditions. You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can't discern color in darkness, only shades of gray.</p><p><em><strong>Dwarven Resilience.</strong></em> @Compendium[dnd5e.races.ufysTkqet2Ctmtyi]{Dwarven Resilience} You have advantage on saving throws against poison, and you have resistance against poison damage.</p><p><em><strong>Dwarven Combat Training.</strong></em> You have proficiency with the battleaxe, handaxe, light hammer, and warhammer.</p><p><em><strong>Tool Proficiency.</strong></em> You gain proficiency with the artisan's tools of your choice: smith's tools, brewer's supplies, or mason's tools.</p>\n</div>\n<div>\n<div>\n<p><em><strong>Stonecunning.</strong></em> @Compendium[dnd5e.races.mQPZDRbUhgYTbXKa]{Stonecunning} Whenever you make an Intelligence (History) check related to the origin of stonework, you are considered proficient in the History skill and add double your proficiency bonus to the check, instead of your normal proficiency bonus.</p>\n</div>\n</div>\n<div>\n<div>\n<p><em><strong>Languages.</strong></em> You can speak, read, and write Common and Dwarvish. Dwarvish is full of hard consonants and guttural sounds, and those characteristics spill over into whatever other language a dwarf might speak.</p>\n</div>\n</div>\n<div title=\"Page 3\">\n<div>\n<div>\n<div class=\"page\" title=\"Page 3\"> </div>\n</div>\n</div>\n</div>",
-          "chat": "",
-          "unidentified": ""
-        },
-        "source": "SRD 5.1",
-        "activation": {
-          "type": "",
-          "cost": null,
-          "condition": ""
-        },
-        "duration": {
-          "value": "",
-          "units": ""
-        },
-        "cover": null,
-        "crewed": false,
-        "target": {
-          "value": null,
-          "width": null,
-          "units": "",
-          "type": ""
-        },
-        "range": {
-          "value": null,
-          "long": null,
-          "units": ""
-        },
-        "uses": {
-          "value": null,
-          "max": "",
-          "per": null,
-          "recovery": ""
-        },
-        "consume": {
-          "type": "",
-          "target": null,
-          "amount": null
-        },
-        "ability": null,
-        "actionType": "",
-        "attackBonus": "",
-        "chatFlavor": "",
-        "critical": {
-          "threshold": null,
-          "damage": ""
-        },
-        "damage": {
-          "parts": [],
-          "versatile": ""
-        },
-        "formula": "",
-        "save": {
-          "ability": "",
-          "dc": null,
-          "scaling": "spell"
-        },
-        "type": {
-          "value": "",
-          "subtype": ""
-        },
-        "requirements": "",
-        "recharge": {
-          "value": null,
-          "charged": false
-        }
-      },
-      "sort": 0,
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.dnd5e.races.6N31WSez2szqQcIQ"
-        }
-      },
-      "img": "icons/magic/defensive/shield-barrier-glowing-triangle-teal-purple.webp",
-      "effects": [],
-      "folder": null,
-      "ownership": {
-        "default": 0
-      },
-      "_stats": {
-        "systemId": null,
-        "systemVersion": null,
-        "coreVersion": null,
-        "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
-      },
-      "_key": "!actors.items!bzlxBO5km3zCQA8G.HXOtd9EqzXbB3e2c"
-    },
-    {
       "name": "Bureaucrat",
       "type": "background",
       "system": {
@@ -2649,7 +2454,12 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": "",
+        "source": {
+          "custom": "",
+          "book": "",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
         "advancement": []
       },
       "img": "icons/skills/social/theft-pickpocket-bribery-brown.webp",
@@ -2682,7 +2492,12 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": "SRD 5.1",
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
         "identifier": "rogue",
         "levels": 1,
         "hitDice": "d8",
@@ -2993,7 +2808,8 @@
                 "int": 0,
                 "wis": 0,
                 "cha": 0
-              }
+              },
+              "cap": 2
             },
             "value": {
               "type": "asi"
@@ -3014,7 +2830,8 @@
                 "int": 0,
                 "wis": 0,
                 "cha": 0
-              }
+              },
+              "cap": 2
             },
             "value": {
               "type": "asi"
@@ -3035,7 +2852,8 @@
                 "int": 0,
                 "wis": 0,
                 "cha": 0
-              }
+              },
+              "cap": 2
             },
             "value": {
               "type": "asi"
@@ -3056,7 +2874,8 @@
                 "int": 0,
                 "wis": 0,
                 "cha": 0
-              }
+              },
+              "cap": 2
             },
             "value": {
               "type": "asi"
@@ -3078,7 +2897,8 @@
                 "int": 0,
                 "wis": 0,
                 "cha": 0
-              }
+              },
+              "cap": 2
             },
             "value": {
               "type": "asi"
@@ -3098,36 +2918,248 @@
                 "int": 0,
                 "wis": 0,
                 "cha": 0
-              }
+              },
+              "cap": 2
             },
             "value": {
               "type": "asi"
             },
             "level": 10,
             "title": ""
+          },
+          {
+            "_id": "OdvmWcuFdpmQa1R9",
+            "type": "Trait",
+            "configuration": {
+              "hint": "",
+              "mode": "default",
+              "allowReplacements": false,
+              "grants": [
+                "armor:lgt"
+              ],
+              "choices": []
+            },
+            "level": 1,
+            "title": "",
+            "value": {
+              "chosen": [
+                "armor:lgt"
+              ]
+            }
+          },
+          {
+            "_id": "IAuJ7LQGV2HvMXWB",
+            "type": "Trait",
+            "configuration": {
+              "hint": "",
+              "mode": "default",
+              "allowReplacements": false,
+              "grants": [
+                "weapon:sim",
+                "weapon:mar:handcrossbow",
+                "weapon:mar:longsword",
+                "weapon:mar:rapier",
+                "weapon:mar:shortsword"
+              ],
+              "choices": []
+            },
+            "level": 1,
+            "title": "",
+            "classRestriction": "primary",
+            "value": {
+              "chosen": [
+                "weapon:sim",
+                "weapon:mar:handcrossbow",
+                "weapon:mar:longsword",
+                "weapon:mar:rapier",
+                "weapon:mar:shortsword"
+              ]
+            }
+          },
+          {
+            "_id": "ZfLkT5c0hxOmdyti",
+            "type": "Trait",
+            "configuration": {
+              "hint": "",
+              "mode": "default",
+              "allowReplacements": false,
+              "grants": [
+                "tool:thief"
+              ],
+              "choices": []
+            },
+            "level": 1,
+            "title": "",
+            "value": {
+              "chosen": [
+                "tool:thief"
+              ]
+            }
+          },
+          {
+            "_id": "ejtwT3eAwBpgvtcw",
+            "type": "Trait",
+            "configuration": {
+              "hint": "",
+              "mode": "default",
+              "allowReplacements": false,
+              "grants": [
+                "saves:dex",
+                "saves:int"
+              ],
+              "choices": []
+            },
+            "level": 1,
+            "title": "",
+            "classRestriction": "primary",
+            "value": {
+              "chosen": [
+                "saves:dex",
+                "saves:int"
+              ]
+            }
+          },
+          {
+            "_id": "rKux16jqNCPEtyDL",
+            "type": "Trait",
+            "configuration": {
+              "hint": "",
+              "mode": "default",
+              "allowReplacements": false,
+              "grants": [],
+              "choices": [
+                {
+                  "count": 4,
+                  "pool": [
+                    "skills:acr",
+                    "skills:ath",
+                    "skills:dec",
+                    "skills:ins",
+                    "skills:itm",
+                    "skills:inv",
+                    "skills:prc",
+                    "skills:prf",
+                    "skills:per",
+                    "skills:slt",
+                    "skills:ste"
+                  ]
+                }
+              ]
+            },
+            "level": 1,
+            "title": "",
+            "classRestriction": "primary",
+            "value": {
+              "chosen": [
+                "skills:acr",
+                "skills:dec",
+                "skills:ins",
+                "skills:ste"
+              ]
+            }
+          },
+          {
+            "_id": "TDHYngxGqDHllgzw",
+            "type": "Trait",
+            "configuration": {
+              "hint": "",
+              "mode": "expertise",
+              "allowReplacements": false,
+              "grants": [],
+              "choices": [
+                {
+                  "count": 2,
+                  "pool": [
+                    "tool:thief",
+                    "skills:*"
+                  ]
+                }
+              ]
+            },
+            "level": 1,
+            "title": "Expertise",
+            "value": {
+              "chosen": [
+                "skills:slt",
+                "skills:ste"
+              ]
+            }
+          },
+          {
+            "type": "Trait",
+            "configuration": {
+              "hint": "",
+              "mode": "expertise",
+              "allowReplacements": false,
+              "grants": [],
+              "choices": [
+                {
+                  "count": 2,
+                  "pool": [
+                    "skills:*",
+                    "tool:thief"
+                  ]
+                }
+              ]
+            },
+            "level": 6,
+            "title": "Expertise",
+            "_id": "Iozyk39gsM4Kecex",
+            "value": {}
+          },
+          {
+            "type": "Trait",
+            "configuration": {
+              "hint": "",
+              "mode": "default",
+              "allowReplacements": false,
+              "grants": [],
+              "choices": [
+                {
+                  "count": 1,
+                  "pool": [
+                    "skills:acr",
+                    "skills:ath",
+                    "skills:dec",
+                    "skills:ins",
+                    "skills:itm",
+                    "skills:inv",
+                    "skills:prc",
+                    "skills:prf",
+                    "skills:per",
+                    "skills:slt",
+                    "skills:ste"
+                  ]
+                }
+              ]
+            },
+            "level": 1,
+            "title": "",
+            "_id": "CYYQSaGgmuHG7i6z",
+            "classRestriction": "secondary",
+            "value": {}
+          },
+          {
+            "_id": "3GyyG2fRAwPbKK7n",
+            "type": "Trait",
+            "configuration": {
+              "hint": "",
+              "mode": "default",
+              "allowReplacements": false,
+              "grants": [
+                "languages:cant"
+              ],
+              "choices": []
+            },
+            "level": 1,
+            "title": "",
+            "value": {
+              "chosen": [
+                "languages:cant"
+              ]
+            }
           }
         ],
-        "saves": [
-          "dex",
-          "int"
-        ],
-        "skills": {
-          "number": 4,
-          "choices": [
-            "acr",
-            "ath",
-            "dec",
-            "ins",
-            "itm",
-            "inv",
-            "per",
-            "prf",
-            "prc",
-            "slt",
-            "ste"
-          ],
-          "value": []
-        },
         "spellcasting": {
           "progression": "none",
           "ability": ""
@@ -3146,10 +3178,10 @@
       },
       "_stats": {
         "systemId": "dnd5e",
-        "systemVersion": "2.2.2",
+        "systemVersion": "2.4.0",
         "coreVersion": "10.303",
         "createdTime": 1661787234284,
-        "modifiedTime": 1691519191232,
+        "modifiedTime": 1699993522289,
         "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!bzlxBO5km3zCQA8G.POlGoMp1xwT02K3S"
@@ -3167,7 +3199,12 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": "SRD 5.1",
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
         "activation": {
           "type": "",
           "cost": null,
@@ -3183,7 +3220,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -3194,12 +3232,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "",
@@ -3241,10 +3281,10 @@
       "sort": 0,
       "_stats": {
         "systemId": "dnd5e",
-        "systemVersion": "2.2.2",
+        "systemVersion": "2.4.0",
         "coreVersion": "10.303",
         "createdTime": 1661787234328,
-        "modifiedTime": 1691519191233,
+        "modifiedTime": 1699987533792,
         "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!bzlxBO5km3zCQA8G.GcRC4ZItJPqsIrsm"
@@ -3262,7 +3302,12 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": "SRD 5.1",
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
         "activation": {
           "type": "",
           "cost": null,
@@ -3278,7 +3323,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -3289,12 +3335,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "other",
@@ -3341,10 +3389,10 @@
       "sort": 0,
       "_stats": {
         "systemId": "dnd5e",
-        "systemVersion": "2.2.2",
+        "systemVersion": "2.4.0",
         "coreVersion": "10.303",
         "createdTime": 1661787234348,
-        "modifiedTime": 1691519191234,
+        "modifiedTime": 1699987533792,
         "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!bzlxBO5km3zCQA8G.vRhjcnnlifZYB4dy"
@@ -3362,7 +3410,12 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": "SRD 5.1",
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
         "activation": {
           "type": "",
           "cost": null,
@@ -3378,7 +3431,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -3389,12 +3443,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "",
@@ -3466,23 +3522,485 @@
       "sort": 0,
       "_stats": {
         "systemId": "dnd5e",
-        "systemVersion": "2.2.2",
+        "systemVersion": "2.4.0",
         "coreVersion": "10.303",
         "createdTime": 1661787234423,
-        "modifiedTime": 1691519191235,
+        "modifiedTime": 1699987533792,
         "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!bzlxBO5km3zCQA8G.eHh5dHiq9wss2Vq0"
+    },
+    {
+      "_id": "JtKfV5srBn6zBNVt",
+      "name": "Hill Dwarf",
+      "type": "race",
+      "img": "icons/environment/wilderness/cave-entrance-rocky.webp",
+      "system": {
+        "description": {
+          "value": "<p><em>Your dwarf character has an assortment of inborn abilities, part and parcel of dwarven nature.</em></p><p><strong>Ability Score Increase.</strong> Your Constitution score increases by 2.</p><p><strong>Age.</strong> Dwarves mature at the same rate as humans, but they're considered young until they reach the age of 50. On average, they live about 350 years.</p><p><strong>Alignment.</strong> Most dwarves are lawful, believing firmly in the benefits of a well-ordered society. They tend toward good as well, with a strong sense of fair play and a belief that everyone deserves to share in the benefits of a just order.</p><p><strong>Size.</strong> Dwarves stand between 4 and 5 feet tall and average about 150 pounds. Your size is Medium.</p><p><strong>Speed.</strong> Your base walking speed is 25 feet. Your speed is not reduced by wearing heavy armor.</p><p><strong>Darkvision.</strong> Accustomed to life underground, you have superior vision in dark and dim conditions. You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can't discern color in darkness, only shades of gray.</p><p><strong>Dwarven Resilience.</strong> You have advantage on saving throws against poison, and you have resistance against poison damage.</p><p><strong>Dwarven Combat Training.</strong> You have proficiency with the battleaxe, handaxe, light hammer, and warhammer.</p><p><strong>Tool Proficiency.</strong> You gain proficiency with the artisan's tools of your choice: smith's tools, brewer's supplies, or mason's tools.</p><p><strong>Stonecunning.</strong> Whenever you make an Intelligence (History) check related to the origin of stonework, you are considered proficient in the History skill and add double your proficiency bonus to the check, instead of your normal proficiency bonus.</p><p><strong>Languages.</strong> You can speak, read, and write Common and Dwarvish. Dwarvish is full of hard consonants and guttural sounds, and those characteristics spill over into whatever other language a dwarf might speak.</p><h5>Hill Dwarf</h5><p>As a hill dwarf, you have keen senses, deep intuition, and remarkable resilience.</p><p><strong>Ability Score Increase.</strong> Your Wisdom score increases by 1.</p><p><strong>Dwarven Toughness.</strong> Your hit point maximum increases by 1, and it increases by 1 every time you gain a level.</p><section class=\"secret\" id=\"secret-bkbaaEWqAGbU8ZgK\"><p><strong>Foundry Note</strong></p><p>Dwarven Toughness should be configured by adding 1 to the \"Per Level\" bonus in HP configuration on your character sheet (accessible using the cog next to your character's hit points).</p></section>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "identifier": "hill-dwarf",
+        "advancement": [
+          {
+            "_id": "tNfLTuoHfvAxg2FC",
+            "type": "ItemGrant",
+            "configuration": {
+              "items": [
+                "Compendium.dnd5e.races.ufysTkqet2Ctmtyi",
+                "Compendium.dnd5e.races.mQPZDRbUhgYTbXKa"
+              ],
+              "optional": false,
+              "spell": {
+                "ability": "",
+                "preparation": "",
+                "uses": {
+                  "max": "",
+                  "per": ""
+                }
+              }
+            },
+            "value": {
+              "added": {
+                "yeAdyhHhZGgcb7if": "Compendium.dnd5e.races.ufysTkqet2Ctmtyi",
+                "VtJK5sQ1pHMMWGQ4": "Compendium.dnd5e.races.mQPZDRbUhgYTbXKa"
+              }
+            },
+            "level": 0,
+            "title": ""
+          },
+          {
+            "_id": "Z9hvZFkWUNvowbQX",
+            "type": "AbilityScoreImprovement",
+            "configuration": {
+              "points": 0,
+              "fixed": {
+                "str": 0,
+                "dex": 0,
+                "con": 2,
+                "int": 0,
+                "wis": 1,
+                "cha": 0
+              },
+              "cap": 2
+            },
+            "value": {
+              "type": "asi",
+              "assignments": {
+                "con": 2,
+                "wis": 1
+              }
+            },
+            "level": 0,
+            "title": ""
+          },
+          {
+            "_id": "kdMPoRp3j1uOHQom",
+            "type": "Size",
+            "configuration": {
+              "hint": "Dwarves stand between 4 and 5 feet tall and average about 150 pounds. Your size is Medium.",
+              "sizes": [
+                "med"
+              ]
+            },
+            "value": {
+              "size": "med"
+            },
+            "level": 1,
+            "title": ""
+          },
+          {
+            "_id": "rmcKuRQ2Laloq1xp",
+            "type": "Trait",
+            "configuration": {
+              "hint": "",
+              "mode": "default",
+              "allowReplacements": false,
+              "grants": [
+                "languages:standard:common",
+                "languages:standard:dwarvish"
+              ],
+              "choices": []
+            },
+            "level": 0,
+            "title": "",
+            "value": {
+              "chosen": [
+                "languages:standard:common",
+                "languages:standard:dwarvish"
+              ]
+            }
+          },
+          {
+            "_id": "5zWGcz9uAerx3Dh5",
+            "type": "Trait",
+            "configuration": {
+              "hint": "",
+              "mode": "default",
+              "allowReplacements": false,
+              "grants": [
+                "dr:poison"
+              ],
+              "choices": []
+            },
+            "level": 0,
+            "title": "Dwarven Resilience",
+            "value": {
+              "chosen": [
+                "dr:poison"
+              ]
+            }
+          },
+          {
+            "_id": "J0UGmCyMy6thWDeU",
+            "type": "Trait",
+            "configuration": {
+              "hint": "",
+              "mode": "default",
+              "allowReplacements": false,
+              "grants": [
+                "weapon:sim:handaxe",
+                "weapon:sim:lighthammer",
+                "weapon:mar:battleaxe",
+                "weapon:mar:warhammer"
+              ],
+              "choices": []
+            },
+            "level": 0,
+            "title": "Dwarven Combat Training",
+            "value": {
+              "chosen": [
+                "weapon:sim:handaxe",
+                "weapon:sim:lighthammer",
+                "weapon:mar:battleaxe",
+                "weapon:mar:warhammer"
+              ]
+            }
+          },
+          {
+            "_id": "9CYW7Bj53L9G8Zsw",
+            "type": "Trait",
+            "configuration": {
+              "hint": "",
+              "mode": "default",
+              "allowReplacements": false,
+              "grants": [],
+              "choices": [
+                {
+                  "count": 1,
+                  "pool": [
+                    "tool:art:brewer",
+                    "tool:art:mason",
+                    "tool:art:smith"
+                  ]
+                }
+              ]
+            },
+            "level": 0,
+            "title": "",
+            "value": {
+              "chosen": [
+                "tool:art:mason"
+              ]
+            }
+          }
+        ],
+        "senses": {
+          "darkvision": 60,
+          "blindsight": 0,
+          "tremorsense": 0,
+          "truesight": 0,
+          "units": "ft",
+          "special": ""
+        },
+        "movement": {
+          "walk": 25,
+          "burrow": 0,
+          "climb": 0,
+          "fly": 0,
+          "swim": 0,
+          "units": "ft",
+          "hover": false
+        },
+        "type": {
+          "subtype": "dwarf",
+          "value": "",
+          "custom": ""
+        }
+      },
+      "effects": [],
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.races.UQiRQUTBcsz8gZU1"
+        }
+      },
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.4.0",
+        "coreVersion": "10.303",
+        "createdTime": 1677179053861,
+        "modifiedTime": 1699993522290,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "sort": 0,
+      "folder": null,
+      "_key": "!actors.items!bzlxBO5km3zCQA8G.JtKfV5srBn6zBNVt"
+    },
+    {
+      "_id": "yeAdyhHhZGgcb7if",
+      "name": "Dwarven Resilience",
+      "ownership": {
+        "default": 0
+      },
+      "type": "feat",
+      "system": {
+        "description": {
+          "value": "<p>You have advantage on saving throws against poison, and you have resistance against poison damage.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "activation": {
+          "type": "",
+          "cost": null,
+          "condition": ""
+        },
+        "duration": {
+          "value": "",
+          "units": ""
+        },
+        "cover": null,
+        "crewed": false,
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": "",
+          "prompt": true
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": ""
+        },
+        "uses": {
+          "value": null,
+          "max": "",
+          "per": null,
+          "recovery": "",
+          "prompt": true
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null,
+          "scale": false
+        },
+        "ability": "",
+        "actionType": "",
+        "attackBonus": "",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "type": {
+          "value": "race",
+          "subtype": ""
+        },
+        "requirements": "Dwarf",
+        "recharge": {
+          "value": null,
+          "charged": false
+        }
+      },
+      "flags": {
+        "dnd5e": {
+          "sourceId": "Compendium.dnd5e.races.ufysTkqet2Ctmtyi",
+          "advancementOrigin": "JtKfV5srBn6zBNVt.tNfLTuoHfvAxg2FC"
+        }
+      },
+      "img": "icons/creatures/abilities/stinger-poison-green.webp",
+      "effects": [
+        {
+          "_id": "hIaIpLxcMZSY3qXi",
+          "changes": [
+            {
+              "key": "system.traits.dr.value",
+              "mode": 2,
+              "value": "poison",
+              "priority": null
+            }
+          ],
+          "disabled": false,
+          "duration": {
+            "startTime": null,
+            "seconds": null,
+            "combat": null,
+            "rounds": null,
+            "turns": null,
+            "startRound": null,
+            "startTurn": null
+          },
+          "icon": "icons/creatures/abilities/stinger-poison-green.webp",
+          "label": "Dwarven Resilience",
+          "origin": "Item.ufysTkqet2Ctmtyi",
+          "transfer": true,
+          "flags": {},
+          "tint": null,
+          "sort": 0,
+          "_key": "!actors.items.effects!bzlxBO5km3zCQA8G.yeAdyhHhZGgcb7if.hIaIpLxcMZSY3qXi"
+        }
+      ],
+      "folder": null,
+      "sort": 0,
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.4.0",
+        "coreVersion": "10.303",
+        "createdTime": 1661787234474,
+        "modifiedTime": 1699987533792,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!actors.items!bzlxBO5km3zCQA8G.yeAdyhHhZGgcb7if"
+    },
+    {
+      "_id": "VtJK5sQ1pHMMWGQ4",
+      "name": "Stonecunning",
+      "ownership": {
+        "default": 0
+      },
+      "type": "feat",
+      "system": {
+        "description": {
+          "value": "<p>Whenever you make an Intelligence (History) check related to the origin of stonework, you are considered proficient in the History skill and add double your proficiency bonus to the check, instead of your normal proficiency bonus.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "activation": {
+          "type": "",
+          "cost": null,
+          "condition": ""
+        },
+        "duration": {
+          "value": "",
+          "units": ""
+        },
+        "cover": null,
+        "crewed": false,
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": "",
+          "prompt": true
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": ""
+        },
+        "uses": {
+          "value": null,
+          "max": "",
+          "per": null,
+          "recovery": "",
+          "prompt": true
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null,
+          "scale": false
+        },
+        "ability": "",
+        "actionType": "",
+        "attackBonus": "",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "type": {
+          "value": "race",
+          "subtype": ""
+        },
+        "requirements": "Dwarf",
+        "recharge": {
+          "value": null,
+          "charged": false
+        }
+      },
+      "flags": {
+        "dnd5e": {
+          "sourceId": "Compendium.dnd5e.races.mQPZDRbUhgYTbXKa",
+          "advancementOrigin": "JtKfV5srBn6zBNVt.tNfLTuoHfvAxg2FC"
+        }
+      },
+      "img": "icons/commodities/tech/cog-bronze.webp",
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.4.0",
+        "coreVersion": "10.303",
+        "createdTime": 1661787234472,
+        "modifiedTime": 1699987535049,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!actors.items!bzlxBO5km3zCQA8G.VtJK5sQ1pHMMWGQ4"
     }
   ],
   "effects": [
     {
-      "_id": "VN7GnGzVwmBM7YCU",
+      "_id": "hIaIpLxcMZSY3qXi",
       "changes": [
         {
-          "key": "system.traits.languages.value",
+          "key": "system.traits.dr.value",
           "mode": 2,
-          "value": "cant",
+          "value": "poison",
           "priority": null
         }
       ],
@@ -3496,14 +4014,14 @@
         "startRound": null,
         "startTurn": null
       },
-      "icon": "icons/sundries/documents/document-torn-diagram-tan.webp",
-      "label": "Thieves' Cant",
-      "origin": "Compendium.dnd5e.heroes.bzlxBO5km3zCQA8G.Item.eHh5dHiq9wss2Vq0",
+      "icon": "icons/creatures/abilities/stinger-poison-green.webp",
+      "label": "Dwarven Resilience",
+      "origin": "Compendium.dnd5e.heroes.bzlxBO5km3zCQA8G.Item.yeAdyhHhZGgcb7if",
       "transfer": false,
       "flags": {},
       "tint": null,
       "sort": 0,
-      "_key": "!actors.effects!bzlxBO5km3zCQA8G.VN7GnGzVwmBM7YCU"
+      "_key": "!actors.effects!bzlxBO5km3zCQA8G.hIaIpLxcMZSY3qXi"
     }
   ],
   "folder": null,
@@ -3515,10 +4033,10 @@
   "_id": "bzlxBO5km3zCQA8G",
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.2.2",
+    "systemVersion": "2.4.0",
     "coreVersion": "10.303",
     "createdTime": 1661787232177,
-    "modifiedTime": 1691519191272,
+    "modifiedTime": 1699993522307,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!bzlxBO5km3zCQA8G"

@@ -10,11 +10,11 @@
       "unidentified": ""
     },
     "source": {
-      "custom": "SRD 5.1",
-      "book": "",
+      "custom": "",
+      "book": "SRD 5.1",
       "page": "",
       "uuid": "",
-      "license": ""
+      "license": "CC-BY-4.0"
     },
     "identifier": "human",
     "advancement": [
@@ -62,7 +62,7 @@
           "mode": "default",
           "allowReplacements": false,
           "grants": [
-            "languages:common"
+            "languages:standard:common"
           ],
           "choices": [
             {
@@ -79,25 +79,25 @@
       }
     ],
     "movement": {
-      "burrow": 0,
-      "climb": 0,
-      "fly": 0,
-      "swim": 0,
+      "burrow": null,
+      "climb": null,
+      "fly": null,
+      "swim": null,
       "walk": 30,
       "units": "ft",
       "hover": false
     },
     "senses": {
-      "darkvision": 0,
-      "blindsight": 0,
-      "tremorsense": 0,
-      "truesight": 0,
+      "darkvision": null,
+      "blindsight": null,
+      "tremorsense": null,
+      "truesight": null,
       "units": "ft",
       "special": ""
     },
     "type": {
       "value": "humanoid",
-      "subtype": "",
+      "subtype": "human",
       "custom": ""
     }
   },
@@ -108,10 +108,10 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.3.1",
+    "systemVersion": "2.4.0",
     "coreVersion": "10.303",
     "createdTime": 1677180079259,
-    "modifiedTime": 1699397219303,
+    "modifiedTime": 1699987914586,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "sort": 0,

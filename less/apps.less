@@ -660,6 +660,7 @@ h5 {
     font-size: 12px;
     line-height: 20px;
     font-weight: normal;
+    align-items: baseline;
     > input[type="radio"] {
       margin: 0 5px 0 0;
     }
@@ -762,12 +763,24 @@ h5 {
   transition: margin-bottom 500ms ease;
 }
 .accordion.collapsed {
-  margin-bottom: .5rem;
   > .accordion-content { height: 0; }
+}
+
+.accordion-indicator {
+  display: none;
+  transition: transform 500ms ease;
+}
+.accordion .accordion-indicator {
+  display: inherit;
+  transform: rotate(0deg);
+}
+.accordion.collapsed .accordion-indicator {
+  transform: rotate(-90deg);
 }
 
 .accordion-heading {
   cursor: pointer;
+  position: relative;
 }
 
 .accordion-content {

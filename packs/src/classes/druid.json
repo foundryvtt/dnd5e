@@ -9,7 +9,12 @@
       "chat": "",
       "unidentified": ""
     },
-    "source": "SRD 5.1",
+    "source": {
+      "custom": "",
+      "book": "SRD 5.1",
+      "page": "",
+      "license": "CC-BY-4.0"
+    },
     "identifier": "druid",
     "levels": 1,
     "hitDice": "d8",
@@ -81,7 +86,8 @@
         },
         "level": 1,
         "title": "",
-        "classRestriction": "primary"
+        "classRestriction": "primary",
+        "value": {}
       },
       {
         "_id": "xZ55SColbUbJOW2i",
@@ -282,7 +288,8 @@
             "int": 0,
             "wis": 0,
             "cha": 0
-          }
+          },
+          "cap": 2
         },
         "value": {
           "type": "asi"
@@ -303,7 +310,8 @@
             "int": 0,
             "wis": 0,
             "cha": 0
-          }
+          },
+          "cap": 2
         },
         "value": {
           "type": "asi"
@@ -324,7 +332,8 @@
             "int": 0,
             "wis": 0,
             "cha": 0
-          }
+          },
+          "cap": 2
         },
         "value": {
           "type": "asi"
@@ -345,7 +354,8 @@
             "int": 0,
             "wis": 0,
             "cha": 0
-          }
+          },
+          "cap": 2
         },
         "value": {
           "type": "asi"
@@ -367,15 +377,35 @@
             "int": 0,
             "wis": 0,
             "cha": 0
-          }
+          },
+          "cap": 2
         },
         "value": {
           "type": "asi"
         },
         "level": 19,
         "title": ""
+      },
+      {
+        "_id": "miieZ5i2DxMvyWKG",
+        "type": "Trait",
+        "configuration": {
+          "hint": "",
+          "mode": "default",
+          "allowReplacements": false,
+          "grants": [
+            "languages:druidic"
+          ],
+          "choices": []
+        },
+        "level": 1,
+        "title": ""
       }
     ],
+    "spellcasting": {
+      "progression": "full",
+      "ability": "wis"
+    },
     "saves": [
       "int",
       "wis"
@@ -393,10 +423,6 @@
         "sur"
       ],
       "value": []
-    },
-    "spellcasting": {
-      "progression": "full",
-      "ability": "wis"
     }
   },
   "effects": [],
@@ -408,10 +434,10 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.3.1",
+    "systemVersion": "2.4.0",
     "coreVersion": "10.303",
     "createdTime": 1661787234284,
-    "modifiedTime": 1698851312888,
+    "modifiedTime": 1699988244829,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!ygVYgPbJkaH0tH1N"

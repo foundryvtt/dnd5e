@@ -11,6 +11,7 @@ import ActorMovementConfig from "./movement-config.mjs";
 import ActorSensesConfig from "./senses-config.mjs";
 import ActorSheetFlags from "./sheet-flags.mjs";
 import ActorTypeConfig from "./type-config.mjs";
+import SourceConfig from "../source-config.mjs";
 
 import AdvancementConfirmationDialog from "../advancement/advancement-confirmation-dialog.mjs";
 import AdvancementManager from "../advancement/advancement-manager.mjs";
@@ -241,7 +242,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
     if ( largestPrimary ) {
       let primary = speeds.shift();
       return {
-        primary: `${primary ? primary[1] : "0"} ${movement.units}`,
+        primary: `${primary ? primary[1] : "0"} ${movement.units || Object.keys(CONFIG.DND5E.movementUnits)[0]}`,
         special: speeds.map(s => s[1]).join(", ")
       };
     }
@@ -249,7 +250,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
     // Case 2: Walk as primary
     else {
       return {
-        primary: `${movement.walk || 0} ${movement.units}`,
+        primary: `${movement.walk || 0} ${movement.units || Object.keys(CONFIG.DND5E.movementUnits)[0]}`,
         special: speeds.length ? speeds.map(s => s[1]).join(", ") : ""
       };
     }
@@ -398,9 +399,8 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
   _prepareTraits(systemData) {
     const traits = {};
     for ( const [trait, traitConfig] of Object.entries(CONFIG.DND5E.traits) ) {
-      const key = traitConfig.actorKeyPath ?? `traits.${trait}`;
+      const key = traitConfig.actorKeyPath?.replace("system.", "") ?? `traits.${trait}`;
       const data = foundry.utils.deepClone(foundry.utils.getProperty(systemData, key));
-      const choices = CONFIG.DND5E[traitConfig.configKey];
       if ( !data ) continue;
 
       foundry.utils.setProperty(traits, key, data);
@@ -429,7 +429,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
         const damageTypesFormatter = new Intl.ListFormat(game.i18n.lang, { style: "long", type: "conjunction" });
         const bypassFormatter = new Intl.ListFormat(game.i18n.lang, { style: "long", type: "disjunction" });
         data.selected.physical = game.i18n.format("DND5E.DamagePhysicalBypasses", {
-          damageTypes: damageTypesFormatter.format(physical.map(t => choices[t])),
+          damageTypes: damageTypesFormatter.format(physical.map(t => Trait.keyLabel(t, { trait }))),
           bypassTypes: bypassFormatter.format(data.bypasses.map(t => CONFIG.DND5E.physicalWeaponProperties[t]))
         });
       }
@@ -663,8 +663,8 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
       this._disableOverriddenFields(html);
     }
 
-    // Owner Only Listeners
-    if ( this.actor.isOwner ) {
+    // Owner Only Listeners, for non-compendium actors.
+    if ( this.actor.isOwner && !this.actor.compendium ) {
 
       // Ability Checks
       html.find(".ability-name").click(this._onRollAbilityTest.bind(this));
@@ -678,15 +678,15 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
       // Item Rolling
       html.find(".rollable .item-image").click(event => this._onItemUse(event));
       html.find(".item .item-recharge").click(event => this._onItemRecharge(event));
-
-      // Item Context Menu
-      new ContextMenu(html, ".item-list .item", [], {onOpen: this._onItemContext.bind(this)});
     }
 
     // Otherwise, remove rollable classes
     else {
       html.find(".rollable").each((i, el) => el.classList.remove("rollable"));
     }
+
+    // Item Context Menu
+    new ContextMenu(html, ".item-list .item", [], {onOpen: this._onItemContext.bind(this)});
 
     // Handle default listeners last so system listeners are triggered first
     super.activateListeners(html);
@@ -807,24 +807,24 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
       case "senses":
         app = new ActorSensesConfig(this.actor);
         break;
+      case "source":
+        app = new SourceConfig(this.actor);
+        break;
       case "type":
         app = new ActorTypeConfig(this.actor);
         break;
-      case "ability": {
+      case "ability":
         const ability = event.currentTarget.closest("[data-ability]").dataset.ability;
         app = new ActorAbilityConfig(this.actor, null, ability);
         break;
-      }
-      case "skill": {
+      case "skill":
         const skill = event.currentTarget.closest("[data-key]").dataset.key;
         app = new ProficiencyConfig(this.actor, {property: "skills", key: skill});
         break;
-      }
-      case "tool": {
+      case "tool":
         const tool = event.currentTarget.closest("[data-key]").dataset.key;
         app = new ProficiencyConfig(this.actor, {property: "tools", key: tool});
         break;
-      }
     }
     app?.render(true);
   }
@@ -1120,8 +1120,6 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
     parent.removeChild(span);
     parent.appendChild(input);
   }
-
-
 
   /* -------------------------------------------- */
 

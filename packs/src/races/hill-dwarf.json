@@ -10,11 +10,11 @@
       "unidentified": ""
     },
     "source": {
-      "custom": "SRD 5.1",
-      "book": "",
+      "custom": "",
+      "book": "SRD 5.1",
       "page": "",
       "uuid": "",
-      "license": ""
+      "license": "CC-BY-4.0"
     },
     "identifier": "hill-dwarf",
     "advancement": [
@@ -84,8 +84,8 @@
           "mode": "default",
           "allowReplacements": false,
           "grants": [
-            "languages:common",
-            "languages:dwarvish"
+            "languages:standard:common",
+            "languages:standard:dwarvish"
           ],
           "choices": []
         },
@@ -154,24 +154,24 @@
     ],
     "senses": {
       "darkvision": 60,
-      "blindsight": 0,
-      "tremorsense": 0,
-      "truesight": 0,
+      "blindsight": null,
+      "tremorsense": null,
+      "truesight": null,
       "units": "ft",
       "special": ""
     },
     "movement": {
       "walk": 25,
-      "burrow": 0,
-      "climb": 0,
-      "fly": 0,
-      "swim": 0,
+      "burrow": null,
+      "climb": null,
+      "fly": null,
+      "swim": null,
       "units": "ft",
       "hover": false
     },
     "type": {
       "subtype": "dwarf",
-      "value": "",
+      "value": "humanoid",
       "custom": ""
     }
   },
@@ -182,10 +182,10 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.3.1",
+    "systemVersion": "2.4.0",
     "coreVersion": "10.303",
     "createdTime": 1677179053861,
-    "modifiedTime": 1699461134643,
+    "modifiedTime": 1699987862731,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "sort": 0,

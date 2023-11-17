@@ -10,11 +10,11 @@
       "unidentified": ""
     },
     "source": {
-      "custom": "SRD 5.1",
-      "book": "",
+      "custom": "",
+      "book": "SRD 5.1",
       "page": "",
       "uuid": "",
-      "license": ""
+      "license": "CC-BY-4.0"
     },
     "identifier": "tiefling",
     "advancement": [
@@ -163,8 +163,8 @@
           "mode": "default",
           "allowReplacements": false,
           "grants": [
-            "languages:common",
-            "languages:infernal"
+            "languages:standard:common",
+            "languages:exotic:infernal"
           ],
           "choices": []
         },
@@ -175,24 +175,24 @@
     ],
     "senses": {
       "darkvision": 60,
-      "blindsight": 0,
-      "tremorsense": 0,
-      "truesight": 0,
+      "blindsight": null,
+      "tremorsense": null,
+      "truesight": null,
       "units": "ft",
       "special": ""
     },
     "movement": {
-      "burrow": 0,
-      "climb": 0,
-      "fly": 0,
-      "swim": 0,
+      "burrow": null,
+      "climb": null,
+      "fly": null,
+      "swim": null,
       "walk": 30,
       "units": "ft",
       "hover": false
     },
     "type": {
       "value": "humanoid",
-      "subtype": "",
+      "subtype": "tiefling",
       "custom": ""
     }
   },
@@ -203,10 +203,10 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.3.1",
+    "systemVersion": "2.4.0",
     "coreVersion": "10.303",
     "createdTime": 1677181073037,
-    "modifiedTime": 1699397219234,
+    "modifiedTime": 1699987908467,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "sort": 0,

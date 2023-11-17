@@ -372,6 +372,7 @@ export function keyLabel(key, config={}) {
   if ( !trait ) trait = parts.shift();
   const traitConfig = CONFIG.DND5E.traits[trait];
   if ( !traitConfig ) return key;
+  const traitData = CONFIG.DND5E[traitConfig.configKey ?? trait] ?? {};
   let categoryLabel = game.i18n.localize(`${traitConfig.labels.localization}.${
     pluralRules.select(count ?? 1)}`);
 
@@ -383,8 +384,11 @@ export function keyLabel(key, config={}) {
   if ( lastKey === "*" ) {
     let type;
     if ( parts.length ) {
-      const category = CONFIG.DND5E[traitConfig.configKey ?? trait]?.[parts.pop()];
-      if ( !category ) return key;
+      let category = traitData;
+      do {
+        category = (category.children ?? category)[parts.shift()];
+        if ( !category ) return key;
+      } while ( parts.length );
       type = _innerLabel(category, traitConfig);
     } else type = categoryLabel.toLowerCase();
     const localization = `DND5E.TraitConfigChoose${final ? "Other" : `Any${count ? "Counted" : "Uncounted"}`}`;
@@ -393,7 +397,7 @@ export function keyLabel(key, config={}) {
 
   else {
     // Category (e.g. "Gaming Sets")
-    const category = CONFIG.DND5E[traitConfig.configKey ?? trait]?.[lastKey];
+    const category = traitData[lastKey];
     if ( category ) return _innerLabel(category, traitConfig);
 
     // Child (e.g. "Land Vehicle")
@@ -410,9 +414,20 @@ export function keyLabel(key, config={}) {
       if ( index ) return index.name;
       break;
     }
-  }
 
-  return key;
+    // Explicit categories (e.g. languages)
+    const searchCategory = (data, key) => {
+      for ( const [k, v] of Object.entries(data) ) {
+        if ( k === key ) return v;
+        if ( v.children ) {
+          const result = searchCategory(v.children, key);
+          if ( result ) return result;
+        }
+      }
+    };
+    const config = searchCategory(traitData, lastKey);
+    return config ? _innerLabel(config, traitConfig) : key;
+  }
 }
 
 /* -------------------------------------------- */
