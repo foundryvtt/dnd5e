@@ -39,21 +39,27 @@ export function actorKeyPath(trait) {
 /**
  * Get the current trait values for the provided actor.
  * @param {Actor5e} actor  Actor from which to retrieve the values.
- * @param {string} trait          Trait as defined in `CONFIG.DND5E.traits`.
+ * @param {string} trait   Trait as defined in `CONFIG.DND5E.traits`.
  * @returns {Object<number>}
  */
-export function actorValues(actor, trait) {
+export async function actorValues(actor, trait) {
   const keyPath = actorKeyPath(trait);
   const data = foundry.utils.getProperty(actor, keyPath);
   if ( !data ) return {};
   const values = {};
+  const traitChoices = await choices(trait, {prefixed: true});
+
+  const setValue = (k, v) => {
+    const [key] = traitChoices.find(k);
+    if ( key ) values[key] = v;
+  };
 
   if ( ["skills", "tool"].includes(trait) ) {
-    Object.entries(data).forEach(([k, d]) => values[`${trait}:${k}`] = d.value);
+    Object.entries(data).forEach(([k, d]) => setValue(k, d.value));
   } else if ( trait === "saves" ) {
-    Object.entries(data).forEach(([k, d]) => values[`${trait}:${k}`] = d.proficient);
+    Object.entries(data).forEach(([k, d]) => setValue(k, d.proficient));
   } else {
-    data.value.forEach(v => values[`${trait}:${v}`] = 1);
+    data.value.forEach(v => setValue(v, 1));
   }
 
   return values;
