@@ -63,6 +63,7 @@ export default class Accordion {
       heading.before(wrapper);
       wrapper.append(heading, content);
       this.#sections.set(heading, content);
+      content._fullHeight = content.getBoundingClientRect().height;
       if ( firstBind ) this.#collapsed.push(this.#collapsed.length > 0);
       else if ( this.#collapsed[collapsedIndex] ) wrapper.classList.add("collapsed");
       heading.classList.add("accordion-heading");
@@ -140,7 +141,7 @@ export default class Accordion {
     this.#cancelOngoing(heading);
     const { height } = content.getBoundingClientRect();
     heading.parentElement.classList.add("collapsed");
-    content._fullHeight = height;
+    content._fullHeight = height || content._fullHeight;
     if ( animate ) content.style.height = `${height}px`;
     else {
       content.style.height = "0";
