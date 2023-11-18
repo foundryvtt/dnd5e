@@ -47,6 +47,7 @@ export default class AbilityUseDialog extends Dialog {
       ...config,
       slotOptions,
       resourceOptions,
+      resourceArray: Array.isArray(resourceOptions),
       scaling: item.usageScaling,
       note: this._getAbilityUseNote(item, config),
       title: game.i18n.format("DND5E.AbilityUseHint", {
@@ -190,6 +191,13 @@ export default class AbilityUseDialog extends Dialog {
     }
 
     if ( !target ) return null;
+
+    if ( /spells\.(.+)\.value/.test(consume.target) ) {
+      const [, key] = consume.target.match(/spells\.(.+)\.value/);
+      const level = (key === "pact") ? item.actor.system.spells.pact.level : parseInt(key.replace("spell", ""));
+      const minimum = (item.type === "spell") ? Math.max(item.system.level, level) : level;
+      return this._createSpellSlotOptions(item.actor, minimum);
+    }
 
     const max = Math.min(cap, value);
     return Array.fromRange(max, 1).reduce((acc, n) => {

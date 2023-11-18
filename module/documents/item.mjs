@@ -949,6 +949,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     // Handle upcasting
     if ( item.type === "spell" ) {
       let level = null;
+      if ( config.resourceAmount in as.spells ) config.slotLevel = config.resourceAmount;
       if ( config.slotLevel ) {
         // A spell slot was consumed.
         if ( Number.isInteger(config.slotLevel) ) level = config.slotLevel;
@@ -1189,13 +1190,17 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       return false;
     }
 
+    const as = this.actor.system;
     // Identify the consumed resource and its current quantity
     let resource = null;
     let amount = usageConfig.resourceAmount ? usageConfig.resourceAmount : (consume.amount || 0);
+    if ( amount in as.spells ) amount = consume.amount || 0;
     let quantity = 0;
     switch ( consume.type ) {
       case "attribute":
-        resource = foundry.utils.getProperty(this.actor.system, consume.target);
+        const amt = usageConfig.resourceAmount;
+        const target = (amt in as.spells) ? `spells.${amt}.value` : consume.target;
+        resource = foundry.utils.getProperty(as, target);
         quantity = resource || 0;
         break;
       case "ammo":
@@ -1236,7 +1241,9 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     // Define updates to provided data objects
     switch ( consume.type ) {
       case "attribute":
-        actorUpdates[`system.${consume.target}`] = remaining;
+        const amt = usageConfig.resourceAmount;
+        const target = (amt in as.spells) ? `spells.${amt}.value` : consume.target;
+        actorUpdates[`system.${target}`] = remaining;
         break;
       case "ammo":
       case "material":
