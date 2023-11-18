@@ -1,5 +1,9 @@
 <div class="tab flexrow active" data-group="primary" data-tab="description">
 
+{{#if editingDescriptionTarget}}
+    {{editor enriched.editing target=editingDescriptionTarget button=false editable=editable
+             engine="prosemirror" collaborate=true}}
+{{else}}
     <div class="item-properties">
         {{#if isPhysical}}
         <div class="form-group">
@@ -54,6 +58,45 @@
         {{/if}}
     </div>
 
-    {{editor descriptionHTML target="system.description.value" button=true editable=editable engine="prosemirror"
-             collaborate=false}}
+    <div class="item-description">
+        {{#if (or editable system.description.value)}}
+            {{#if editable}}
+                <h3 class="description-header">
+                    <i class="accordion-indicator fa-solid fa-chevron-down"></i>
+                    {{localize "DND5E.Description"}}
+                    <a class="description-edit" data-target="system.description.value">
+                        <i class="fa-solid fa-edit"></i>
+                    </a>
+                </h3>
+            {{/if}}
+            {{editor enriched.description target="system.description.value" editable=false engine="prosemirror"}}
+        {{/if}}
+
+        {{#if (or editable system.description.unidentified)}}
+            <h3 class="description-header">
+                <i class="accordion-indicator fa-solid fa-chevron-down"></i>
+                {{localize "DND5E.DescriptionUnidentified"}}
+                {{#if editable}}
+                    <a class="description-edit" data-target="system.description.unidentified">
+                        <i class="fa-solid fa-edit"></i>
+                    </a>
+                {{/if}}
+            </h3>
+            {{editor enriched.unidentified target="system.description.unidentified" editable=false engine="prosemirror"}}
+        {{/if}}
+
+        {{#if (or editable system.description.chat)}}
+            <h3 class="description-header">
+                <i class="accordion-indicator fa-solid fa-chevron-down"></i>
+                {{localize "DND5E.DescriptionChat"}}
+                {{#if editable}}
+                    <a class="description-edit" data-target="system.description.chat">
+                        <i class="fa-solid fa-edit"></i>
+                    </a>
+                {{/if}}
+            </h3>
+            {{editor enriched.chat target="system.description.chat" editable=false engine="prosemirror"}}
+        {{/if}}
+    </div>
+{{/if}}
 </div>

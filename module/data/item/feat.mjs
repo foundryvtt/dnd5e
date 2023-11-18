@@ -89,7 +89,7 @@ export default class FeatData extends SystemDataModel.mixin(
 
   /** @inheritdoc */
   get hasLimitedUses() {
-    return !!this.recharge.value || super.hasLimitedUses;
+    return this.isActive && (!!this.recharge.value || super.hasLimitedUses);
   }
 
   /* -------------------------------------------- */

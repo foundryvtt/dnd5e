@@ -107,7 +107,8 @@ function _simplifyDiceTerms(terms) {
   // Split the unannotated terms into different die sizes and signs
   const diceQuantities = unannotated.reduce((obj, curr, i) => {
     if ( curr instanceof OperatorTerm ) return obj;
-    const key = `${unannotated[i - 1].operator}${curr.faces}`;
+    const face = curr.constructor?.name === "Coin" ? "c" : curr.faces;
+    const key = `${unannotated[i - 1].operator}${face}`;
     obj[key] = (obj[key] ?? 0) + curr.number;
     return obj;
   }, {});
@@ -115,7 +116,9 @@ function _simplifyDiceTerms(terms) {
   // Add new die and operator terms to simplified for each die size and sign
   const simplified = Object.entries(diceQuantities).flatMap(([key, number]) => ([
     new OperatorTerm({ operator: key.charAt(0) }),
-    new Die({ number, faces: parseInt(key.slice(1)) })
+    key.slice(1) === "c"
+      ? new Coin({ number: number })
+      : new Die({ number, faces: parseInt(key.slice(1)) })
   ]));
   return [...simplified, ...annotated];
 }

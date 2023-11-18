@@ -9,7 +9,12 @@
       "chat": "",
       "unidentified": ""
     },
-    "source": "SRD 5.1",
+    "source": {
+      "custom": "",
+      "book": "SRD 5.1",
+      "page": "",
+      "license": "CC-BY-4.0"
+    },
     "identifier": "ranger",
     "levels": 1,
     "hitDice": "d10",
@@ -20,7 +25,118 @@
         "configuration": {},
         "value": {},
         "title": "Hit Points",
-        "icon": "systems/dnd5e/icons/svg/hit-points.svg"
+        "icon": "systems/dnd5e/icons/svg/hit-points.svg",
+        "_id": "xBohtOEv3ukqmso2"
+      },
+      {
+        "_id": "TYXdkZvuFRIksnaN",
+        "type": "Trait",
+        "configuration": {
+          "hint": "",
+          "mode": "default",
+          "allowReplacements": false,
+          "grants": [
+            "armor:lgt",
+            "armor:med",
+            "armor:shl"
+          ],
+          "choices": []
+        },
+        "level": 1,
+        "title": "",
+        "value": {}
+      },
+      {
+        "_id": "MPQe2gl78EIkJp4B",
+        "type": "Trait",
+        "configuration": {
+          "hint": "",
+          "mode": "default",
+          "allowReplacements": false,
+          "grants": [
+            "weapon:sim",
+            "weapon:mar"
+          ],
+          "choices": []
+        },
+        "level": 1,
+        "title": "",
+        "value": {}
+      },
+      {
+        "_id": "mfYrk9GETHcNXCqs",
+        "type": "Trait",
+        "configuration": {
+          "hint": "",
+          "mode": "default",
+          "allowReplacements": false,
+          "grants": [
+            "saves:str",
+            "saves:dex"
+          ],
+          "choices": []
+        },
+        "level": 1,
+        "title": "",
+        "classRestriction": "primary",
+        "value": {}
+      },
+      {
+        "_id": "ICgRpBmX0g8Y0ZzD",
+        "type": "Trait",
+        "configuration": {
+          "hint": "",
+          "mode": "default",
+          "allowReplacements": false,
+          "grants": [],
+          "choices": [
+            {
+              "count": 3,
+              "pool": [
+                "skills:ani",
+                "skills:ath",
+                "skills:ins",
+                "skills:inv",
+                "skills:nat",
+                "skills:prc",
+                "skills:ste",
+                "skills:sur"
+              ]
+            }
+          ]
+        },
+        "level": 1,
+        "title": "",
+        "classRestriction": "primary"
+      },
+      {
+        "type": "Trait",
+        "configuration": {
+          "hint": "",
+          "mode": "default",
+          "allowReplacements": false,
+          "grants": [],
+          "choices": [
+            {
+              "count": 1,
+              "pool": [
+                "skills:ani",
+                "skills:ath",
+                "skills:ins",
+                "skills:inv",
+                "skills:nat",
+                "skills:prc",
+                "skills:ste",
+                "skills:sur"
+              ]
+            }
+          ]
+        },
+        "level": 1,
+        "title": "",
+        "_id": "04X0Kohr5hwmeErb",
+        "classRestriction": "secondary",
+        "value": {}
       },
       {
         "type": "ItemGrant",
@@ -42,7 +158,8 @@
         "value": {},
         "level": 1,
         "title": "Features",
-        "icon": "systems/dnd5e/icons/svg/item-grant.svg"
+        "icon": "systems/dnd5e/icons/svg/item-grant.svg",
+        "_id": "L0DHAlnRhNlttHtT"
       },
       {
         "type": "ItemGrant",
@@ -64,7 +181,8 @@
         "value": {},
         "level": 2,
         "title": "Features",
-        "icon": "systems/dnd5e/icons/svg/item-grant.svg"
+        "icon": "systems/dnd5e/icons/svg/item-grant.svg",
+        "_id": "yCF7xTPbbbLvy1oi"
       },
       {
         "type": "ItemGrant",
@@ -86,7 +204,8 @@
         "value": {},
         "level": 3,
         "title": "Features",
-        "icon": "systems/dnd5e/icons/svg/item-grant.svg"
+        "icon": "systems/dnd5e/icons/svg/item-grant.svg",
+        "_id": "uBfO0VT74Ubkb3Vq"
       },
       {
         "type": "ItemGrant",
@@ -107,7 +226,8 @@
         "value": {},
         "level": 5,
         "title": "Features",
-        "icon": "systems/dnd5e/icons/svg/item-grant.svg"
+        "icon": "systems/dnd5e/icons/svg/item-grant.svg",
+        "_id": "tkm2YSp7v7CsyAv5"
       },
       {
         "type": "ItemGrant",
@@ -128,7 +248,8 @@
         "value": {},
         "level": 8,
         "title": "Features",
-        "icon": "systems/dnd5e/icons/svg/item-grant.svg"
+        "icon": "systems/dnd5e/icons/svg/item-grant.svg",
+        "_id": "J2W7bBur77wnP4aC"
       },
       {
         "type": "ItemGrant",
@@ -149,7 +270,8 @@
         "value": {},
         "level": 10,
         "title": "Features",
-        "icon": "systems/dnd5e/icons/svg/item-grant.svg"
+        "icon": "systems/dnd5e/icons/svg/item-grant.svg",
+        "_id": "DpZ2KsGzNrxyFJEQ"
       },
       {
         "type": "ItemGrant",
@@ -170,7 +292,8 @@
         "value": {},
         "level": 14,
         "title": "Features",
-        "icon": "systems/dnd5e/icons/svg/item-grant.svg"
+        "icon": "systems/dnd5e/icons/svg/item-grant.svg",
+        "_id": "9bNIObxgYslup65I"
       },
       {
         "type": "ItemGrant",
@@ -191,7 +314,8 @@
         "value": {},
         "level": 18,
         "title": "Features",
-        "icon": "systems/dnd5e/icons/svg/item-grant.svg"
+        "icon": "systems/dnd5e/icons/svg/item-grant.svg",
+        "_id": "GOpw3X1MmQnMB4Xb"
       },
       {
         "type": "ItemGrant",
@@ -212,7 +336,8 @@
         "value": {},
         "level": 20,
         "title": "Features",
-        "icon": "systems/dnd5e/icons/svg/item-grant.svg"
+        "icon": "systems/dnd5e/icons/svg/item-grant.svg",
+        "_id": "CjPcaL8V6MErHufh"
       },
       {
         "type": "ItemChoice",
@@ -245,7 +370,8 @@
         },
         "value": {},
         "title": "Fighting Style",
-        "icon": "systems/dnd5e/icons/svg/item-choice.svg"
+        "icon": "systems/dnd5e/icons/svg/item-choice.svg",
+        "_id": "ih8WlydEZdg3rCPh"
       },
       {
         "type": "ScaleValue",
@@ -290,7 +416,8 @@
         },
         "value": {},
         "title": "Spells Known",
-        "icon": "systems/dnd5e/icons/svg/scale-value.svg"
+        "icon": "systems/dnd5e/icons/svg/scale-value.svg",
+        "_id": "FYvhuTSScSJTfYBM"
       },
       {
         "type": "AbilityScoreImprovement",
@@ -310,7 +437,8 @@
         },
         "level": 4,
         "title": "Ability Score Improvement",
-        "icon": "systems/dnd5e/icons/svg/ability-score-improvement.svg"
+        "icon": "systems/dnd5e/icons/svg/ability-score-improvement.svg",
+        "_id": "bWqpb3Malvjjk8a6"
       },
       {
         "type": "AbilityScoreImprovement",
@@ -330,7 +458,8 @@
         },
         "level": 8,
         "title": "Ability Score Improvement",
-        "icon": "systems/dnd5e/icons/svg/ability-score-improvement.svg"
+        "icon": "systems/dnd5e/icons/svg/ability-score-improvement.svg",
+        "_id": "Dr4RKCdMxlKWoHHV"
       },
       {
         "type": "AbilityScoreImprovement",
@@ -350,7 +479,8 @@
         },
         "level": 12,
         "title": "Ability Score Improvement",
-        "icon": "systems/dnd5e/icons/svg/ability-score-improvement.svg"
+        "icon": "systems/dnd5e/icons/svg/ability-score-improvement.svg",
+        "_id": "zDIECkwBeV96xABF"
       },
       {
         "type": "AbilityScoreImprovement",
@@ -370,7 +500,8 @@
         },
         "level": 16,
         "title": "Ability Score Improvement",
-        "icon": "systems/dnd5e/icons/svg/ability-score-improvement.svg"
+        "icon": "systems/dnd5e/icons/svg/ability-score-improvement.svg",
+        "_id": "5VCLK1OCRzEZxMy3"
       },
       {
         "_id": "puDaUsYrlks0z5gm",
@@ -425,10 +556,10 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.2.2",
+    "systemVersion": "2.3.1",
     "coreVersion": "10.303",
     "createdTime": 1661787234280,
-    "modifiedTime": 1691518541515,
+    "modifiedTime": 1698851429400,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!VkRQ7glQvTWWiOCS"

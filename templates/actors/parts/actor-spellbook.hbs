@@ -73,8 +73,10 @@
             <div class="item-name flexrow rollable">
                 <div class="item-image" tabindex="0" role="button" aria-label="{{item.name}}" style="background-image: url('{{item.img}}')"></div>
                 <h4>{{item.name}}</h4>
-                {{#if item.system.uses.per }}
-                <div class="item-detail spell-uses">Uses {{item.system.uses.value}} / {{item.system.uses.max}}</div>
+                {{#if item.hasLimitedUses}}
+                <div class="item-detail spell-uses">
+                  {{localize "DND5E.Uses"}} {{#if item.system.uses.value}}{{item.system.uses.value}}{{else}}0{{/if}} / {{item.system.uses.max}}
+                </div>
                 {{/if}}
                 <div class="spell-comps">
                     {{#each item.labels.components.all}}
@@ -119,9 +121,9 @@
     {{#if filters.spellbook.size}}
     <li class="item flexrow"><p class="notes">{{localize "DND5E.FilterNoSpells"}}</p></li>
     {{else}}
-    <li class="item flexrow inventory-header spellbook-header spellbook-empty">
+    <li class="item flexrow inventory-header spellbook-header spellbook-empty" data-type="spell" data-level="{{lvl}}">
         <div class="item-controls flexrow">
-            <a class="item-control item-create" data-tooltip="DND5E.SpellCreate" data-type="spell" data-level="{{lvl}}">
+            <a class="item-control item-create" data-tooltip="DND5E.SpellCreate">
                 <i class="fas fa-plus"></i> {{localize "DND5E.SpellAdd"}}
             </a>
         </div>

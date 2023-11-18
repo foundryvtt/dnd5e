@@ -26,15 +26,30 @@ export function simplifyBonus(bonus, data={}) {
 /* -------------------------------------------- */
 
 /**
+ * Transform an object, returning only the keys which match the provided filter.
+ * @param {object} obj         Object to transform.
+ * @param {Function} [filter]  Filtering function. If none is provided, it will just check for truthiness.
+ * @returns {string[]}         Array of filtered keys.
+ */
+export function filteredKeys(obj, filter) {
+  filter ??= e => e;
+  return Object.entries(obj).filter(e => filter(e[1])).map(e => e[0]);
+}
+
+/* -------------------------------------------- */
+
+/**
  * Sort the provided object by its values or by an inner sortKey.
- * @param {object} obj        The object to sort.
- * @param {string} [sortKey]  An inner key upon which to sort.
- * @returns {object}          A copy of the original object that has been sorted.
+ * @param {object} obj                 The object to sort.
+ * @param {string|Function} [sortKey]  An inner key upon which to sort or sorting function.
+ * @returns {object}                   A copy of the original object that has been sorted.
  */
 export function sortObjectEntries(obj, sortKey) {
   let sorted = Object.entries(obj);
-  if ( sortKey ) sorted = sorted.sort((a, b) => a[1][sortKey].localeCompare(b[1][sortKey]));
-  else sorted = sorted.sort((a, b) => a[1].localeCompare(b[1]));
+  const sort = (lhs, rhs) => foundry.utils.getType(lhs) === "string" ? lhs.localeCompare(rhs) : lhs - rhs;
+  if ( foundry.utils.getType(sortKey) === "function" ) sorted = sorted.sort((lhs, rhs) => sortKey(lhs[1], rhs[1]));
+  else if ( sortKey ) sorted = sorted.sort((lhs, rhs) => sort(lhs[1][sortKey], rhs[1][sortKey]));
+  else sorted = sorted.sort((lhs, rhs) => sort(lhs[1], rhs[1]));
   return Object.fromEntries(sorted);
 }
 
@@ -124,6 +139,7 @@ export async function preloadHandlebarsTemplates() {
     "systems/dnd5e/templates/items/parts/item-description.hbs",
     "systems/dnd5e/templates/items/parts/item-mountable.hbs",
     "systems/dnd5e/templates/items/parts/item-spellcasting.hbs",
+    "systems/dnd5e/templates/items/parts/item-source.hbs",
     "systems/dnd5e/templates/items/parts/item-summary.hbs",
 
     // Journal Partials
@@ -142,6 +158,58 @@ export async function preloadHandlebarsTemplates() {
   }
 
   return loadTemplates(paths);
+}
+
+/* -------------------------------------------- */
+
+/**
+ * A helper to create a set of <option> elements in a <select> block grouped together
+ * in <optgroup> based on the provided categories.
+ *
+ * @param {SelectChoices} choices          Choices to format.
+ * @param {object} [options]
+ * @param {boolean} [options.localize]     Should the label be localized?
+ * @param {string} [options.blank]         Name for the empty option, if one should be added.
+ * @param {string} [options.labelAttr]     Attribute pointing to label string.
+ * @param {string} [options.chosenAttr]    Attribute pointing to chosen boolean.
+ * @param {string} [options.childrenAttr]  Attribute pointing to array of children.
+ * @returns {Handlebars.SafeString}        Formatted option list.
+ */
+function groupedSelectOptions(choices, options) {
+  const localize = options.hash.localize ?? false;
+  const blank = options.hash.blank ?? null;
+  const labelAttr = options.hash.labelAttr ?? "label";
+  const chosenAttr = options.hash.chosenAttr ?? "chosen";
+  const childrenAttr = options.hash.childrenAttr ?? "children";
+
+  // Create an option
+  const option = (name, label, chosen) => {
+    if ( localize ) label = game.i18n.localize(label);
+    html += `<option value="${name}" ${chosen ? "selected" : ""}>${label}</option>`;
+  };
+
+  // Create a group
+  const group = category => {
+    let label = category[labelAttr];
+    if ( localize ) game.i18n.localize(label);
+    html += `<optgroup label="${label}">`;
+    children(category[childrenAttr]);
+    html += "</optgroup>";
+  };
+
+  // Add children
+  const children = children => {
+    for ( let [name, child] of Object.entries(children) ) {
+      if ( child[childrenAttr] ) group(child);
+      else option(name, child[labelAttr], child[chosenAttr] ?? false);
+    }
+  };
+
+  // Create the options
+  let html = "";
+  if ( blank !== null ) option("", blank);
+  children(choices);
+  return new Handlebars.SafeString(html);
 }
 
 /* -------------------------------------------- */
@@ -173,6 +241,7 @@ function itemContext(context, options) {
 export function registerHandlebarsHelpers() {
   Handlebars.registerHelper({
     getProperty: foundry.utils.getProperty,
+    "dnd5e-groupedSelectOptions": groupedSelectOptions,
     "dnd5e-linkForUuid": linkForUuid,
     "dnd5e-itemContext": itemContext
   });
@@ -248,8 +317,9 @@ function _localizeObject(obj, keys) {
     }
 
     for ( const key of keys ) {
-      if ( !v[key] ) continue;
-      v[key] = game.i18n.localize(v[key]);
+      const value = foundry.utils.getProperty(v, key);
+      if ( !value ) continue;
+      foundry.utils.setProperty(v, key, game.i18n.localize(value));
     }
   }
 }

@@ -1,17 +1,23 @@
 {
   "_id": "KL7wx9Q8XNJQir0k",
-  "name": "Breath Weapon",
+  "name": "Breath Weapon - White",
   "ownership": {
     "default": 0
   },
   "type": "feat",
   "system": {
     "description": {
-      "value": "<p>You can use your action to exhale destructive energy. Your draconic ancestry determines the size, shape, and damage type of the exhalation.</p><p>When you use your breath weapon, each creature in the area of the exhalation must make a saving throw, the type of which is determined by your draconic ancestry. The DC for this saving throw equals 8 + your Constitution modifier + your proficiency bonus. A creature takes 2d6 damage on a failed save, and half as much damage on a successful one. The damage increases to 3d6 at 6th level, 4d6 at 11th level, and 5d6 at 16th level.</p><p>After you use your breath weapon, you can't use it again until you complete a short or long rest.</p><section class=\"secret foundry-note\" id=\"secret-bTTAXItqCqmVPlTG\"><p><strong>Foundry Note</strong></p><p>Edit the Details for this feat, so that the damage type, saving throw, and area of effect match those of your Draconic Ancestry.</p></section>",
+      "value": "<p>You can use your action to exhale destructive energy. Your draconic ancestry determines the size, shape, and damage type of the exhalation.</p><p>When you use your breath weapon, each creature in the area of the exhalation must make a Constitution saving throw, the type of which is determined by your draconic ancestry. The DC for this saving throw equals 8 + your Constitution modifier + your proficiency bonus. A creature takes 2d6 cold damage on a failed save, and half as much damage on a successful one. The damage increases to 3d6 at 6th level, 4d6 at 11th level, and 5d6 at 16th level.</p><p>After you use your breath weapon, you can't use it again until you complete a short or long rest.</p>",
       "chat": "",
       "unidentified": ""
     },
-    "source": "SRD 5.1",
+    "source": {
+      "custom": "",
+      "book": "SRD 5.1",
+      "page": "",
+      "uuid": "",
+      "license": "CC-BY-4.0"
+    },
     "activation": {
       "type": "action",
       "cost": 1,
@@ -22,11 +28,13 @@
       "units": "inst"
     },
     "cover": null,
+    "crewed": false,
     "target": {
       "value": 15,
       "width": null,
       "units": "ft",
-      "type": "cone"
+      "type": "cone",
+      "prompt": true
     },
     "range": {
       "value": null,
@@ -37,7 +45,8 @@
       "value": 1,
       "max": "1",
       "per": "sr",
-      "recovery": ""
+      "recovery": "",
+      "prompt": true
     },
     "consume": {
       "type": "",
@@ -55,7 +64,7 @@
     "damage": {
       "parts": [
         [
-          "((ceil((@details.level - 5)/5)) +2)d6",
+          "@scale.dragonborn.breath-weapon",
           "cold"
         ]
       ],
@@ -71,24 +80,24 @@
       "value": "race",
       "subtype": ""
     },
-    "requirements": "Dragonborn",
+    "requirements": "White Dragonborn",
     "recharge": {
       "value": null,
       "charged": false
     }
   },
   "flags": {},
-  "img": "icons/magic/acid/projectile-smoke-glowing.webp",
+  "img": "icons/magic/water/projectile-icecicle.webp",
   "effects": [],
-  "folder": null,
-  "sort": 0,
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.1.0",
-    "coreVersion": "10.291",
+    "systemVersion": "2.3.1",
+    "coreVersion": "10.303",
     "createdTime": 1661787234466,
-    "modifiedTime": 1672336385274,
+    "modifiedTime": 1699397219179,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
+  "sort": 0,
+  "folder": null,
   "_key": "!items!KL7wx9Q8XNJQir0k"
 }

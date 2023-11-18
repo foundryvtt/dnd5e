@@ -73,31 +73,30 @@
         "bonuses": {
           "level": "",
           "overall": ""
-        },
-        "min": 0
+        }
       },
       "init": {
         "ability": "",
         "bonus": "0"
       },
       "movement": {
-        "burrow": 0,
-        "climb": 0,
-        "fly": 0,
-        "swim": 0,
-        "walk": 30,
-        "units": "ft",
+        "burrow": null,
+        "climb": null,
+        "fly": null,
+        "swim": null,
+        "walk": null,
+        "units": null,
         "hover": false
       },
       "attunement": {
         "max": 3
       },
       "senses": {
-        "darkvision": 60,
-        "blindsight": 0,
-        "tremorsense": 0,
-        "truesight": 0,
-        "units": "ft",
+        "darkvision": null,
+        "blindsight": null,
+        "tremorsense": null,
+        "truesight": null,
+        "units": null,
         "special": ""
       },
       "spellcasting": "wis",
@@ -110,12 +109,12 @@
     },
     "details": {
       "biography": {
-        "value": "<p>Quillathe cleanses monsters from her woods as a hobby, but now a new force menaces her land and she must band with adventurers to defeat it.</p>\n",
+        "value": "<p>Quillathe cleanses monsters from her woods as a hobby, but now a new force menaces her land and she must band with adventurers to defeat it.</p>",
         "public": ""
       },
       "alignment": "Chaotic Neutral",
-      "race": "High Elf",
-      "background": "",
+      "race": "jp4BUcAipDi7GIQQ",
+      "background": null,
       "originalClass": "Apx6i4A5a7JKqaGi",
       "xp": {
         "value": 0
@@ -158,7 +157,11 @@
       "weaponProf": {
         "value": [
           "sim",
-          "mar"
+          "mar",
+          "shortbow",
+          "longbow",
+          "longsword",
+          "shortsword"
         ],
         "custom": ""
       },
@@ -171,9 +174,7 @@
         "custom": ""
       },
       "toolProf": {
-        "value": [
-          "navg"
-        ],
+        "value": [],
         "custom": ""
       }
     },
@@ -330,7 +331,15 @@
         }
       }
     },
-    "tools": {},
+    "tools": {
+      "navg": {
+        "value": 1,
+        "ability": "int",
+        "bonuses": {
+          "check": ""
+        }
+      }
+    },
     "spells": {
       "spell1": {
         "value": 0,
@@ -502,7 +511,12 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": "SRD 5.1",
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
         "quantity": 1,
         "weight": 1,
         "price": {
@@ -512,7 +526,11 @@
         "attunement": 0,
         "equipped": false,
         "rarity": "",
-        "identified": true
+        "identified": true,
+        "type": {
+          "value": "",
+          "subtype": ""
+        }
       },
       "sort": 0,
       "flags": {
@@ -546,7 +564,12 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": "SRD 5.1",
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
         "quantity": 1,
         "weight": 10,
         "price": {
@@ -572,7 +595,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -584,12 +608,14 @@
           "max": "1",
           "per": "charges",
           "recovery": "",
-          "autoDestroy": false
+          "autoDestroy": false,
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "abil",
@@ -609,7 +635,8 @@
           "dc": 17,
           "scaling": "flat"
         },
-        "consumableType": "trinket"
+        "consumableType": "trinket",
+        "properties": {}
       },
       "sort": 0,
       "flags": {
@@ -643,7 +670,12 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": "SRD 5.1",
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
         "quantity": 1,
         "weight": 1,
         "price": {
@@ -653,7 +685,11 @@
         "attunement": 0,
         "equipped": false,
         "rarity": "",
-        "identified": true
+        "identified": true,
+        "type": {
+          "value": "",
+          "subtype": ""
+        }
       },
       "sort": 0,
       "flags": {
@@ -687,7 +723,12 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": "SRD 5.1",
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
         "quantity": 1,
         "weight": 7,
         "price": {
@@ -697,7 +738,11 @@
         "attunement": 0,
         "equipped": false,
         "rarity": "",
-        "identified": true
+        "identified": true,
+        "type": {
+          "value": "",
+          "subtype": ""
+        }
       },
       "sort": 0,
       "flags": {
@@ -731,7 +776,12 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": "SRD 5.1",
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
         "quantity": 1,
         "weight": 5,
         "price": {
@@ -757,7 +807,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -769,12 +820,14 @@
           "max": "4",
           "per": "charges",
           "recovery": "",
-          "autoDestroy": false
+          "autoDestroy": false,
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "util",
@@ -794,7 +847,8 @@
           "dc": null,
           "scaling": "spell"
         },
-        "consumableType": "food"
+        "consumableType": "food",
+        "properties": {}
       },
       "sort": 0,
       "flags": {
@@ -828,7 +882,12 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": "SRD 5.1",
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
         "quantity": 20,
         "weight": 0.05,
         "price": {
@@ -854,7 +913,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": 5,
@@ -866,12 +926,14 @@
           "max": "",
           "per": null,
           "recovery": "",
-          "autoDestroy": false
+          "autoDestroy": false,
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "rwak",
@@ -896,7 +958,8 @@
           "dc": null,
           "scaling": "spell"
         },
-        "consumableType": "ammo"
+        "consumableType": "ammo",
+        "properties": {}
       },
       "sort": 0,
       "flags": {},
@@ -926,7 +989,12 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": "SRD 5.1",
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
         "quantity": 1,
         "weight": 5,
         "price": {
@@ -982,7 +1050,12 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": "SRD 5.1",
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
         "quantity": 1,
         "weight": 1,
         "price": {
@@ -1038,7 +1111,12 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": "SRD 5.1",
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
         "quantity": 1,
         "weight": 10,
         "price": {
@@ -1064,7 +1142,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -1075,12 +1154,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": null,
         "actionType": "",
@@ -1118,7 +1199,7 @@
         },
         "strength": null,
         "stealth": false,
-        "proficient": true
+        "proficient": null
       },
       "sort": 0,
       "flags": {
@@ -1152,7 +1233,12 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": "SRD 5.1",
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
         "quantity": 1,
         "weight": 2,
         "price": {
@@ -1178,7 +1264,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": 150,
@@ -1189,12 +1276,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "ammo",
           "target": "GqfDVqVqyUh1Gquv",
-          "amount": 1
+          "amount": 1,
+          "scale": false
         },
         "ability": "",
         "actionType": "rwak",
@@ -1246,7 +1335,7 @@
           "ver": false,
           "lod": false
         },
-        "proficient": true
+        "proficient": null
       },
       "sort": 0,
       "flags": {
@@ -1280,7 +1369,12 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": "SRD 5.1",
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
         "quantity": 1,
         "weight": 2,
         "price": {
@@ -1306,7 +1400,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": 5,
@@ -1317,12 +1412,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "mwak",
@@ -1374,7 +1471,7 @@
           "two": false,
           "ver": false
         },
-        "proficient": true
+        "proficient": null
       },
       "sort": 0,
       "flags": {
@@ -1408,7 +1505,12 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": "SRD 5.1",
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
         "quantity": 1,
         "weight": 2,
         "price": {
@@ -1434,7 +1536,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": 5,
@@ -1445,12 +1548,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "mwak",
@@ -1502,7 +1607,7 @@
           "two": false,
           "ver": false
         },
-        "proficient": true
+        "proficient": null
       },
       "sort": 0,
       "flags": {},
@@ -1532,7 +1637,12 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": "SRD 5.1",
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
         "quantity": 10,
         "weight": 2,
         "price": {
@@ -1558,7 +1668,8 @@
           "value": 1,
           "width": null,
           "units": "",
-          "type": "creature"
+          "type": "creature",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -1570,12 +1681,14 @@
           "max": "1",
           "per": "charges",
           "recovery": "",
-          "autoDestroy": true
+          "autoDestroy": true,
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "util",
@@ -1595,7 +1708,8 @@
           "dc": null,
           "scaling": "spell"
         },
-        "consumableType": "food"
+        "consumableType": "food",
+        "properties": {}
       },
       "sort": 0,
       "flags": {
@@ -1629,7 +1743,12 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": "SRD 5.1",
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
         "quantity": 10,
         "weight": 1,
         "price": {
@@ -1655,7 +1774,8 @@
           "value": 40,
           "width": null,
           "units": "ft",
-          "type": "radius"
+          "type": "radius",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -1667,12 +1787,14 @@
           "max": "1",
           "per": "charges",
           "recovery": "",
-          "autoDestroy": true
+          "autoDestroy": true,
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "str",
         "actionType": "mwak",
@@ -1697,7 +1819,8 @@
           "dc": null,
           "scaling": "spell"
         },
-        "consumableType": "trinket"
+        "consumableType": "trinket",
+        "properties": {}
       },
       "sort": 0,
       "flags": {
@@ -1722,396 +1845,6 @@
       "_key": "!actors.items!cYD0wRXLW4B17aoY.WhXl1O0JMkPKi6hz"
     },
     {
-      "_id": "9RMRzjKqbGDsSXtO",
-      "name": "Fey Ancestry",
-      "type": "feat",
-      "system": {
-        "description": {
-          "value": "<p>You have advantage on saving throws against being charmed, and magic can't put you to sleep.</p>",
-          "chat": "",
-          "unidentified": ""
-        },
-        "source": "SRD 5.1",
-        "activation": {
-          "type": "",
-          "cost": null,
-          "condition": ""
-        },
-        "duration": {
-          "value": "",
-          "units": ""
-        },
-        "cover": null,
-        "crewed": false,
-        "target": {
-          "value": null,
-          "width": null,
-          "units": "",
-          "type": ""
-        },
-        "range": {
-          "value": null,
-          "long": null,
-          "units": ""
-        },
-        "uses": {
-          "value": null,
-          "max": "",
-          "per": null,
-          "recovery": ""
-        },
-        "consume": {
-          "type": "",
-          "target": null,
-          "amount": null
-        },
-        "ability": "",
-        "actionType": "",
-        "attackBonus": "",
-        "chatFlavor": "",
-        "critical": {
-          "threshold": null,
-          "damage": ""
-        },
-        "damage": {
-          "parts": [],
-          "versatile": ""
-        },
-        "formula": "",
-        "save": {
-          "ability": "",
-          "dc": null,
-          "scaling": "spell"
-        },
-        "type": {
-          "value": "",
-          "subtype": ""
-        },
-        "requirements": "Elf, Half-Elf",
-        "recharge": {
-          "value": null,
-          "charged": false
-        }
-      },
-      "sort": 0,
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.dnd5e.monsterfeatures.LvSBjRKoCAKaAnQy"
-        }
-      },
-      "img": "icons/creatures/mammals/elk-moose-marked-green.webp",
-      "effects": [],
-      "folder": null,
-      "ownership": {
-        "default": 0
-      },
-      "_stats": {
-        "systemId": null,
-        "systemVersion": null,
-        "coreVersion": null,
-        "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
-      },
-      "_key": "!actors.items!cYD0wRXLW4B17aoY.9RMRzjKqbGDsSXtO"
-    },
-    {
-      "_id": "ZrMuDdfHM9ZkKc24",
-      "name": "Elf",
-      "type": "feat",
-      "system": {
-        "description": {
-          "value": "<div title=\"Page 4\">\n<div>\n<div>\n<p><em>Your elf character has a variety of natural abilities, the result of thousands of years of elven refinement. </em></p><p><em><strong>Ability Score Increase.</strong></em> Your Dexterity score increases by 2.</p><p><em><strong>Age.</strong></em> Although elves reach physical maturity at about the same age as humans, the elven understanding of adulthood goes beyond physical growth to encompass worldly experience. An elf typically claims adulthood and an adult name around the age of 100 and can live to be 750 years old.</p><p><em><strong>Alignment</strong></em>. Elves love freedom, variety, and self-­expression, so they lean strongly toward the gentler aspects of chaos. They value and protect others' freedom as well as their own, and they are more often good than not.</p><p><em><strong>Size.</strong></em> Elves range from under 5 to over 6 feet tall and have slender builds. Your size is Medium.</p><p><em><strong>Speed.</strong></em> Your base walking speed is 30 feet.</p><p><em><strong>Darkvision.</strong></em> Accustomed to twilit forests and the night sky, you have superior vision in dark and dim conditions. You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can't discern color in darkness, only shades of gray.</p><p><em><strong>Keen Senses.</strong></em> You have proficiency in the Perception skill.</p><p><em><strong>Fey Ancestry.</strong></em> @Compendium[dnd5e.races.cnTbpPPeGW7vGjOV]{Fey Ancestry} You have advantage on saving throws against being charmed, and magic can't put you to sleep.</p><p><em><strong>Trance.</strong></em> Elves don't need to sleep. Instead, they meditate deeply, remaining semiconscious, for 4 hours a day. (The Common word for such meditation is \"trance.\") While meditating, you can dream after a fashion; such dreams are actually mental exercises that have become reflexive through years of practice. After resting in this way, you gain the same benefit that a human does from 8 hours of sleep.</p>\n<div title=\"Page 4\">\n<div>\n<div>\n<p><em><strong>Languages.</strong></em> You can speak, read, and write Common and Elvish. Elvish is fluid, with subtle intonations and intricate grammar. Elven literature is rich and varied, and their songs and poems are famous among other races. Many bards learn their language so they can add Elvish ballads to their repertoires.</p>\n</div>\n</div>\n</div>\n</div>\n</div>\n</div>",
-          "chat": "",
-          "unidentified": ""
-        },
-        "source": "SRD 5.1",
-        "activation": {
-          "type": "",
-          "cost": null,
-          "condition": ""
-        },
-        "duration": {
-          "value": "",
-          "units": ""
-        },
-        "cover": null,
-        "crewed": false,
-        "target": {
-          "value": null,
-          "width": null,
-          "units": "",
-          "type": ""
-        },
-        "range": {
-          "value": null,
-          "long": null,
-          "units": ""
-        },
-        "uses": {
-          "value": null,
-          "max": "",
-          "per": null,
-          "recovery": ""
-        },
-        "consume": {
-          "type": "",
-          "target": null,
-          "amount": null
-        },
-        "ability": null,
-        "actionType": "",
-        "attackBonus": "",
-        "chatFlavor": "",
-        "critical": {
-          "threshold": null,
-          "damage": ""
-        },
-        "damage": {
-          "parts": [],
-          "versatile": ""
-        },
-        "formula": "",
-        "save": {
-          "ability": "",
-          "dc": null,
-          "scaling": "spell"
-        },
-        "type": {
-          "value": "",
-          "subtype": ""
-        },
-        "requirements": "",
-        "recharge": {
-          "value": null,
-          "charged": false
-        }
-      },
-      "sort": 0,
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.dnd5e.races.rAGnsfgw3ZqAme1v"
-        }
-      },
-      "img": "icons/magic/nature/leaf-glow-maple-teal.webp",
-      "effects": [],
-      "folder": null,
-      "ownership": {
-        "default": 0
-      },
-      "_stats": {
-        "systemId": null,
-        "systemVersion": null,
-        "coreVersion": null,
-        "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
-      },
-      "_key": "!actors.items!cYD0wRXLW4B17aoY.ZrMuDdfHM9ZkKc24"
-    },
-    {
-      "_id": "BswrpoIHKoj3T2o7",
-      "name": "High Elf",
-      "type": "feat",
-      "system": {
-        "description": {
-          "value": "<div title=\"Page 4\">\n<div>\n<div>\n<p><em>As a high elf, you have a keen mind and a mastery of at least the basics of magic. In many fantasy gaming worlds, there are two kinds of high elves. One type is haughty and reclusive, believing themselves to be superior to non-­elves and even other elves. The other type is more common and more friendly, and often encountered among humans and other races. </em></p><p><em><strong>Ability Score Increase.</strong></em> Your Intelligence score increases by 1.</p><p><em><strong>Elf Weapon Training.</strong></em> You have proficiency with the longsword, shortsword, shortbow, and longbow.</p><p><em><strong>Cantrip.</strong></em> You know one cantrip of your choice from the wizard spell list. Intelligence is your spellcasting ability for it.</p><p><em><strong>Extra Language.</strong></em> You can speak, read, and write one extra language of your choice.</p>\n</div>\n</div>\n</div>",
-          "chat": "",
-          "unidentified": ""
-        },
-        "source": "SRD 5.1",
-        "activation": {
-          "type": "",
-          "cost": null,
-          "condition": ""
-        },
-        "duration": {
-          "value": "",
-          "units": ""
-        },
-        "cover": null,
-        "crewed": false,
-        "target": {
-          "value": null,
-          "width": null,
-          "units": "",
-          "type": ""
-        },
-        "range": {
-          "value": null,
-          "long": null,
-          "units": ""
-        },
-        "uses": {
-          "value": null,
-          "max": "",
-          "per": null,
-          "recovery": ""
-        },
-        "consume": {
-          "type": "",
-          "target": null,
-          "amount": null
-        },
-        "ability": null,
-        "actionType": "",
-        "attackBonus": "",
-        "chatFlavor": "",
-        "critical": {
-          "threshold": null,
-          "damage": ""
-        },
-        "damage": {
-          "parts": [],
-          "versatile": ""
-        },
-        "formula": "",
-        "save": {
-          "ability": "",
-          "dc": null,
-          "scaling": "spell"
-        },
-        "type": {
-          "value": "",
-          "subtype": ""
-        },
-        "requirements": "Elf",
-        "recharge": {
-          "value": null,
-          "charged": false
-        }
-      },
-      "sort": 0,
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.dnd5e.races.A69KxdH1renVPrQV"
-        }
-      },
-      "img": "icons/magic/nature/leaf-glow-maple-green.webp",
-      "effects": [],
-      "folder": null,
-      "ownership": {
-        "default": 0
-      },
-      "_stats": {
-        "systemId": null,
-        "systemVersion": null,
-        "coreVersion": null,
-        "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
-      },
-      "_key": "!actors.items!cYD0wRXLW4B17aoY.BswrpoIHKoj3T2o7"
-    },
-    {
-      "_id": "udsLtG0BugXHR2JQ",
-      "name": "Prestidigitation",
-      "ownership": {
-        "default": 0
-      },
-      "type": "spell",
-      "system": {
-        "description": {
-          "value": "<p>This spell is a minor magical trick that novice spellcasters use for practice. You create one of the following magical effects within range:</p>\n<ul>\n<li>You create an instantaneous, harmless sensory effect, such as a shower of sparks, a puff of wind, faint musical notes, or an odd odor.</li>\n<li>You instantaneously light or snuff out a candle, a torch, or a small campfire.</li>\n<li>You instantaneously clean or soil an object no larger than 1 cubic foot.</li>\n<li>You chill, warm, or flavor up to 1 cubic foot of nonliving material for 1 hour.</li>\n<li>You make a color, a small mark, or a symbol appear on an object or a surface for 1 hour.</li>\n<li>You create a nonmagical trinket or an illusory image that can fit in your hand and that lasts until the end of your next turn.</li>\n</ul>\n<p>If you cast this spell multiple times, you can have up to three of its non-instantaneous effects active at a time, and you can dismiss such an effect as an action.</p>",
-          "chat": "",
-          "unidentified": ""
-        },
-        "source": "SRD 5.1",
-        "activation": {
-          "type": "action",
-          "cost": 1,
-          "condition": ""
-        },
-        "duration": {
-          "value": "1",
-          "units": "hour"
-        },
-        "cover": null,
-        "crewed": false,
-        "target": {
-          "value": null,
-          "width": null,
-          "units": "",
-          "type": ""
-        },
-        "range": {
-          "value": 10,
-          "long": null,
-          "units": "ft"
-        },
-        "uses": {
-          "value": null,
-          "max": "",
-          "per": null,
-          "recovery": ""
-        },
-        "consume": {
-          "type": "",
-          "target": null,
-          "amount": null
-        },
-        "ability": "",
-        "actionType": "util",
-        "attackBonus": "",
-        "chatFlavor": "",
-        "critical": {
-          "threshold": null,
-          "damage": ""
-        },
-        "damage": {
-          "parts": [],
-          "versatile": ""
-        },
-        "formula": "",
-        "save": {
-          "ability": "",
-          "dc": null,
-          "scaling": "spell"
-        },
-        "level": 0,
-        "school": "trs",
-        "components": {
-          "vocal": true,
-          "somatic": true,
-          "material": false,
-          "ritual": false,
-          "concentration": false
-        },
-        "materials": {
-          "value": "",
-          "consumed": false,
-          "cost": 0,
-          "supply": 0
-        },
-        "preparation": {
-          "mode": "prepared",
-          "prepared": false
-        },
-        "scaling": {
-          "mode": "none",
-          "formula": ""
-        }
-      },
-      "sort": 0,
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.dnd5e.spells.udsLtG0BugXHR2JQ"
-        }
-      },
-      "img": "icons/magic/fire/explosion-fireball-small-purple-orange.webp",
-      "effects": [],
-      "folder": null,
-      "_stats": {
-        "systemId": "dnd5e",
-        "systemVersion": "2.0.0",
-        "coreVersion": "10.279",
-        "createdTime": 1661603486171,
-        "modifiedTime": 1661603486171,
-        "lastModifiedBy": "dnd5ebuilder0000"
-      },
-      "_key": "!actors.items!cYD0wRXLW4B17aoY.udsLtG0BugXHR2JQ"
-    },
-    {
       "name": "Monster Hunter",
       "type": "background",
       "system": {
@@ -2120,7 +1853,12 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": "",
+        "source": {
+          "custom": "",
+          "book": "",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
         "advancement": []
       },
       "img": "icons/magic/light/explosion-beam-impact-silhouette.webp",
@@ -2153,7 +1891,12 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": "SRD 5.1",
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
         "identifier": "ranger",
         "levels": 1,
         "hitDice": "d10",
@@ -2466,7 +2209,8 @@
                 "int": 0,
                 "wis": 0,
                 "cha": 0
-              }
+              },
+              "cap": 2
             },
             "value": {
               "type": "asi"
@@ -2487,7 +2231,8 @@
                 "int": 0,
                 "wis": 0,
                 "cha": 0
-              }
+              },
+              "cap": 2
             },
             "value": {
               "type": "asi"
@@ -2508,7 +2253,8 @@
                 "int": 0,
                 "wis": 0,
                 "cha": 0
-              }
+              },
+              "cap": 2
             },
             "value": {
               "type": "asi"
@@ -2529,7 +2275,8 @@
                 "int": 0,
                 "wis": 0,
                 "cha": 0
-              }
+              },
+              "cap": 2
             },
             "value": {
               "type": "asi"
@@ -2551,33 +2298,149 @@
                 "int": 0,
                 "wis": 0,
                 "cha": 0
-              }
+              },
+              "cap": 2
             },
             "value": {
               "type": "asi"
             },
             "level": 19,
             "title": ""
+          },
+          {
+            "_id": "TYXdkZvuFRIksnaN",
+            "type": "Trait",
+            "configuration": {
+              "hint": "",
+              "mode": "default",
+              "allowReplacements": false,
+              "grants": [
+                "armor:lgt",
+                "armor:med",
+                "armor:shl"
+              ],
+              "choices": []
+            },
+            "level": 1,
+            "title": "",
+            "value": {
+              "chosen": [
+                "armor:lgt",
+                "armor:med",
+                "armor:shl"
+              ]
+            }
+          },
+          {
+            "_id": "MPQe2gl78EIkJp4B",
+            "type": "Trait",
+            "configuration": {
+              "hint": "",
+              "mode": "default",
+              "allowReplacements": false,
+              "grants": [
+                "weapon:sim",
+                "weapon:mar"
+              ],
+              "choices": []
+            },
+            "level": 1,
+            "title": "",
+            "value": {
+              "chosen": [
+                "weapon:sim",
+                "weapon:mar"
+              ]
+            }
+          },
+          {
+            "_id": "mfYrk9GETHcNXCqs",
+            "type": "Trait",
+            "configuration": {
+              "hint": "",
+              "mode": "default",
+              "allowReplacements": false,
+              "grants": [
+                "saves:str",
+                "saves:dex"
+              ],
+              "choices": []
+            },
+            "level": 1,
+            "title": "",
+            "classRestriction": "primary",
+            "value": {
+              "chosen": [
+                "saves:str",
+                "saves:dex"
+              ]
+            }
+          },
+          {
+            "_id": "ICgRpBmX0g8Y0ZzD",
+            "type": "Trait",
+            "configuration": {
+              "hint": "",
+              "mode": "default",
+              "allowReplacements": false,
+              "grants": [],
+              "choices": [
+                {
+                  "count": 3,
+                  "pool": [
+                    "skills:ani",
+                    "skills:ath",
+                    "skills:ins",
+                    "skills:inv",
+                    "skills:nat",
+                    "skills:prc",
+                    "skills:ste",
+                    "skills:sur"
+                  ]
+                }
+              ]
+            },
+            "level": 1,
+            "title": "",
+            "classRestriction": "primary",
+            "value": {
+              "chosen": [
+                "skills:ani",
+                "skills:ste",
+                "skills:sur"
+              ]
+            }
+          },
+          {
+            "type": "Trait",
+            "configuration": {
+              "hint": "",
+              "mode": "default",
+              "allowReplacements": false,
+              "grants": [],
+              "choices": [
+                {
+                  "count": 1,
+                  "pool": [
+                    "skills:ani",
+                    "skills:ath",
+                    "skills:ins",
+                    "skills:inv",
+                    "skills:nat",
+                    "skills:prc",
+                    "skills:ste",
+                    "skills:sur"
+                  ]
+                }
+              ]
+            },
+            "level": 1,
+            "title": "",
+            "_id": "04X0Kohr5hwmeErb",
+            "classRestriction": "secondary",
+            "value": {}
           }
         ],
-        "saves": [
-          "str",
-          "dex"
-        ],
-        "skills": {
-          "number": 3,
-          "choices": [
-            "ani",
-            "ath",
-            "ins",
-            "inv",
-            "nat",
-            "prc",
-            "ste",
-            "sur"
-          ],
-          "value": []
-        },
         "spellcasting": {
           "progression": "half",
           "ability": "wis"
@@ -2596,10 +2459,10 @@
       },
       "_stats": {
         "systemId": "dnd5e",
-        "systemVersion": "2.2.2",
+        "systemVersion": "2.4.0",
         "coreVersion": "10.303",
         "createdTime": 1661787234280,
-        "modifiedTime": 1691519160853,
+        "modifiedTime": 1699993332326,
         "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!cYD0wRXLW4B17aoY.Apx6i4A5a7JKqaGi"
@@ -2617,7 +2480,12 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": "SRD 5.1",
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
         "activation": {
           "type": "",
           "cost": null,
@@ -2633,7 +2501,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -2644,12 +2513,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "",
@@ -2691,10 +2562,10 @@
       "sort": 0,
       "_stats": {
         "systemId": "dnd5e",
-        "systemVersion": "2.2.2",
+        "systemVersion": "2.4.0",
         "coreVersion": "10.303",
         "createdTime": 1661787234330,
-        "modifiedTime": 1691519160854,
+        "modifiedTime": 1699987424767,
         "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!cYD0wRXLW4B17aoY.btJCgsHp9d6BKOdE"
@@ -2712,7 +2583,12 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": "SRD 5.1",
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
         "activation": {
           "type": "",
           "cost": null,
@@ -2728,7 +2604,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -2739,12 +2616,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "",
@@ -2786,13 +2665,581 @@
       "sort": 0,
       "_stats": {
         "systemId": "dnd5e",
-        "systemVersion": "2.2.2",
+        "systemVersion": "2.4.0",
         "coreVersion": "10.303",
         "createdTime": 1661787234342,
-        "modifiedTime": 1691519160855,
+        "modifiedTime": 1699987424767,
         "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!cYD0wRXLW4B17aoY.UAmLNoN2LQpPR7ok"
+    },
+    {
+      "_id": "jp4BUcAipDi7GIQQ",
+      "name": "High Elf",
+      "type": "race",
+      "img": "icons/commodities/treasure/statue-gold-laurel-wreath.webp",
+      "system": {
+        "description": {
+          "value": "<p>Your elf character has a variety of natural abilities, the result of thousands of years of elven refinement.</p><p><em><strong>Ability Score Increase.</strong></em> Your Dexterity score increases by 2.</p><p><em><strong>Age.</strong></em> Although elves reach physical maturity at about the same age as humans, the elven understanding of adulthood goes beyond physical growth to encompass worldly experience. An elf typically claims adulthood and an adult name around the age of 100 and can live to be 750 years old.</p><p><em><strong>Alignment.</strong></em> Elves love freedom, variety, and self-expression, so they lean strongly toward the gentler aspects of chaos. They value and protect others' freedom as well as their own, and they are more often good than not.</p><p><em><strong>Size.</strong></em> Elves range from under 5 to over 6 feet tall and have slender builds. Your size is Medium.</p><p><em><strong>Speed.</strong></em> Your base walking speed is 30 feet.</p><p><em><strong>Darkvision.</strong></em> Accustomed to twilit forests and the night sky, you have superior vision in dark and dim conditions. You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can't discern color in darkness, only shades of gray.</p><p><em><strong>Keen Senses.</strong></em> You have proficiency in the Perception skill.</p><p><em><strong>Fey Ancestry.</strong></em> You have advantage on saving throws against being charmed, and magic can't put you to sleep.</p><p><em><strong>Trance.</strong></em> Elves don't need to sleep. Instead, they meditate deeply, remaining semiconscious, for 4 hours a day. (The Common word for such meditation is \"trance.\") While meditating, you can dream after a fashion; such dreams are actually mental exercises that have become reflexive through years of practice. After resting in this way, you gain the same benefit that a human does from 8 hours of sleep.</p><p><em><strong>Languages.</strong></em> You can speak, read, and write Common and Elvish. Elvish is fluid, with subtle intonations and intricate grammar. Elven literature is rich and varied, and their songs and poems are famous among other races. Many bards learn their language so they can add Elvish ballads to their repertoires.</p><h5>High Elf</h5><p>As a high elf, you have a keen mind and a mastery of at least the basics of magic. In many fantasy gaming worlds, there are two kinds of high elves. One type is haughty and reclusive, believing themselves to be superior to non-elves and even other elves. The other type is more common and more friendly, and often encountered among humans and other races.</p><p><em><strong>Ability Score Increase.</strong></em> Your Intelligence score increases by 1.</p><p><em><strong>Elf Weapon Training.</strong></em> You have proficiency with the longsword, shortsword, shortbow, and longbow.</p><p><em><strong>Cantrip.</strong></em> You know one cantrip of your choice from the wizard spell list. Intelligence is your spellcasting ability for it.</p><p><em><strong>Extra Language.</strong></em> You can speak, read, and write one extra language of your choice.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "identifier": "high-elf",
+        "advancement": [
+          {
+            "type": "ItemGrant",
+            "configuration": {
+              "items": [
+                "Compendium.dnd5e.races.cnTbpPPeGW7vGjOV",
+                "Compendium.dnd5e.races.4v2PiBrAbqDizdSJ"
+              ],
+              "optional": false,
+              "spell": {
+                "ability": "",
+                "preparation": "",
+                "uses": {
+                  "max": "",
+                  "per": ""
+                }
+              }
+            },
+            "value": {
+              "added": {
+                "C688oL0TBRFLNedh": "Compendium.dnd5e.races.cnTbpPPeGW7vGjOV",
+                "xOnk30vJeG4EMX2W": "Compendium.dnd5e.races.4v2PiBrAbqDizdSJ"
+              }
+            },
+            "level": 0,
+            "title": "Grant Items",
+            "icon": "systems/dnd5e/icons/svg/item-grant.svg",
+            "_id": "9SgUOZ9mjqyA8Q2d"
+          },
+          {
+            "_id": "l1Pw82BvhrSkYiyF",
+            "type": "ItemChoice",
+            "configuration": {
+              "hint": "You know one cantrip of your choice from the wizard spell list. Intelligence is your spellcasting ability for it.",
+              "choices": {
+                "0": 1
+              },
+              "allowDrops": true,
+              "type": "spell",
+              "pool": [],
+              "spell": {
+                "ability": "int",
+                "preparation": "innate",
+                "uses": {
+                  "max": "",
+                  "per": ""
+                }
+              },
+              "restriction": {
+                "type": "",
+                "subtype": "",
+                "level": "0"
+              }
+            },
+            "value": {
+              "added": {
+                "0": {
+                  "U0X7MGDlr5QH3x5R": "Compendium.dnd5e.spells.udsLtG0BugXHR2JQ"
+                }
+              }
+            },
+            "title": "Cantrip"
+          },
+          {
+            "_id": "Z9hvZFkWUNvowbQX",
+            "type": "AbilityScoreImprovement",
+            "configuration": {
+              "points": 0,
+              "fixed": {
+                "str": 0,
+                "dex": 2,
+                "con": 0,
+                "int": 1,
+                "wis": 0,
+                "cha": 0
+              },
+              "cap": 2
+            },
+            "value": {
+              "type": "asi",
+              "assignments": {
+                "dex": 2,
+                "int": 1
+              }
+            },
+            "level": 0,
+            "title": ""
+          },
+          {
+            "_id": "eqSwyWvm0gYgBzJJ",
+            "type": "Size",
+            "configuration": {
+              "hint": "Elves range from under 5 to over 6 feet tall and have slender builds. Your size is Medium.",
+              "sizes": [
+                "med"
+              ]
+            },
+            "value": {
+              "size": "med"
+            },
+            "level": 1,
+            "title": ""
+          },
+          {
+            "_id": "eAv9eLr0ackU7WO2",
+            "type": "Trait",
+            "configuration": {
+              "hint": "",
+              "mode": "default",
+              "allowReplacements": false,
+              "grants": [
+                "skills:prc"
+              ],
+              "choices": []
+            },
+            "level": 0,
+            "title": "Keen Senses",
+            "value": {
+              "chosen": [
+                "skills:prc"
+              ]
+            }
+          },
+          {
+            "_id": "vNyszlmxQeXRjYIH",
+            "type": "Trait",
+            "configuration": {
+              "hint": "",
+              "mode": "default",
+              "allowReplacements": false,
+              "grants": [
+                "languages:standard:common",
+                "languages:standard:elvish"
+              ],
+              "choices": [
+                {
+                  "count": 1,
+                  "pool": [
+                    "languages:*"
+                  ]
+                }
+              ]
+            },
+            "level": 0,
+            "title": "",
+            "value": {
+              "chosen": [
+                "languages:standard:common",
+                "languages:standard:elvish",
+                "languages:standard:gnomish"
+              ]
+            }
+          },
+          {
+            "_id": "ZwJOJ5Ywagq7rWNI",
+            "type": "Trait",
+            "configuration": {
+              "hint": "",
+              "mode": "default",
+              "allowReplacements": false,
+              "grants": [
+                "weapon:sim:shortbow",
+                "weapon:mar:longbow",
+                "weapon:mar:longsword",
+                "weapon:mar:shortsword"
+              ],
+              "choices": []
+            },
+            "level": 0,
+            "title": "Elf Weapon Training",
+            "value": {
+              "chosen": [
+                "weapon:sim:shortbow",
+                "weapon:mar:longbow",
+                "weapon:mar:longsword",
+                "weapon:mar:shortsword"
+              ]
+            }
+          }
+        ],
+        "senses": {
+          "darkvision": 60,
+          "blindsight": 0,
+          "tremorsense": 0,
+          "truesight": 0,
+          "units": "ft",
+          "special": ""
+        },
+        "movement": {
+          "burrow": 0,
+          "climb": 0,
+          "fly": 0,
+          "swim": 0,
+          "walk": 30,
+          "units": "ft",
+          "hover": false
+        },
+        "type": {
+          "value": "humanoid",
+          "subtype": "",
+          "custom": ""
+        }
+      },
+      "effects": [],
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.races.A69KxdH1renVPrQV"
+        }
+      },
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.4.0",
+        "coreVersion": "10.303",
+        "createdTime": 1677179211328,
+        "modifiedTime": 1699993332326,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "sort": 0,
+      "folder": null,
+      "_key": "!actors.items!cYD0wRXLW4B17aoY.jp4BUcAipDi7GIQQ"
+    },
+    {
+      "_id": "C688oL0TBRFLNedh",
+      "name": "Fey Ancestry",
+      "ownership": {
+        "default": 0
+      },
+      "type": "feat",
+      "system": {
+        "description": {
+          "value": "<p>You have advantage on saving throws against being charmed, and magic can't put you to sleep.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "activation": {
+          "type": "",
+          "cost": null,
+          "condition": ""
+        },
+        "duration": {
+          "value": "",
+          "units": ""
+        },
+        "cover": null,
+        "crewed": false,
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": "",
+          "prompt": true
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": ""
+        },
+        "uses": {
+          "value": null,
+          "max": "",
+          "per": null,
+          "recovery": "",
+          "prompt": true
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null,
+          "scale": false
+        },
+        "ability": "",
+        "actionType": "",
+        "attackBonus": "",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "type": {
+          "value": "race",
+          "subtype": ""
+        },
+        "requirements": "Elf, Half-Elf",
+        "recharge": {
+          "value": null,
+          "charged": false
+        }
+      },
+      "flags": {
+        "dnd5e": {
+          "sourceId": "Compendium.dnd5e.races.cnTbpPPeGW7vGjOV",
+          "advancementOrigin": "jp4BUcAipDi7GIQQ.9SgUOZ9mjqyA8Q2d"
+        }
+      },
+      "img": "icons/creatures/mammals/elk-moose-marked-green.webp",
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.4.0",
+        "coreVersion": "10.303",
+        "createdTime": 1661787234471,
+        "modifiedTime": 1699987424767,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!actors.items!cYD0wRXLW4B17aoY.C688oL0TBRFLNedh"
+    },
+    {
+      "_id": "xOnk30vJeG4EMX2W",
+      "name": "Trance",
+      "type": "feat",
+      "img": "icons/magic/perception/third-eye-blue-red.webp",
+      "system": {
+        "description": {
+          "value": "<p>Elves don't need to sleep. Instead, they meditate deeply, remaining semiconscious, for 4 hours a day. (The Common word for such meditation is \"trance.\") While meditating, you can dream after a fashion; such dreams are actually mental exercises that have become reflexive through years of practice. After resting in this way, you gain the same benefit that a human does from 8 hours of sleep.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "activation": {
+          "type": "",
+          "cost": null,
+          "condition": ""
+        },
+        "duration": {
+          "value": "",
+          "units": ""
+        },
+        "cover": null,
+        "crewed": false,
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": "",
+          "prompt": true
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": ""
+        },
+        "uses": {
+          "value": null,
+          "max": "",
+          "per": null,
+          "recovery": "",
+          "prompt": true
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null,
+          "scale": false
+        },
+        "ability": null,
+        "actionType": "",
+        "attackBonus": "",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "type": {
+          "value": "race",
+          "subtype": ""
+        },
+        "requirements": "Elf",
+        "recharge": {
+          "value": null,
+          "charged": false
+        }
+      },
+      "effects": [],
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "dnd5e": {
+          "sourceId": "Compendium.dnd5e.races.4v2PiBrAbqDizdSJ",
+          "advancementOrigin": "jp4BUcAipDi7GIQQ.9SgUOZ9mjqyA8Q2d"
+        }
+      },
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.4.0",
+        "coreVersion": "10.303",
+        "createdTime": 1677179906781,
+        "modifiedTime": 1699987425727,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "sort": 0,
+      "folder": null,
+      "_key": "!actors.items!cYD0wRXLW4B17aoY.xOnk30vJeG4EMX2W"
+    },
+    {
+      "_id": "U0X7MGDlr5QH3x5R",
+      "name": "Prestidigitation",
+      "ownership": {
+        "default": 0
+      },
+      "type": "spell",
+      "system": {
+        "description": {
+          "value": "<p>This spell is a minor magical trick that novice spellcasters use for practice. You create one of the following magical effects within range:</p>\n<ul>\n<li>You create an instantaneous, harmless sensory effect, such as a shower of sparks, a puff of wind, faint musical notes, or an odd odor.</li>\n<li>You instantaneously light or snuff out a candle, a torch, or a small campfire.</li>\n<li>You instantaneously clean or soil an object no larger than 1 cubic foot.</li>\n<li>You chill, warm, or flavor up to 1 cubic foot of nonliving material for 1 hour.</li>\n<li>You make a color, a small mark, or a symbol appear on an object or a surface for 1 hour.</li>\n<li>You create a nonmagical trinket or an illusory image that can fit in your hand and that lasts until the end of your next turn.</li>\n</ul>\n<p>If you cast this spell multiple times, you can have up to three of its non-instantaneous effects active at a time, and you can dismiss such an effect as an action.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0"
+        },
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": "1",
+          "units": "hour"
+        },
+        "cover": null,
+        "crewed": false,
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": "",
+          "prompt": true
+        },
+        "range": {
+          "value": 10,
+          "long": null,
+          "units": "ft"
+        },
+        "uses": {
+          "value": null,
+          "max": "",
+          "per": null,
+          "recovery": "",
+          "prompt": true
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null,
+          "scale": false
+        },
+        "ability": "int",
+        "actionType": "util",
+        "attackBonus": "",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "level": 0,
+        "school": "trs",
+        "components": {
+          "vocal": true,
+          "somatic": true,
+          "material": false,
+          "ritual": false,
+          "concentration": false
+        },
+        "materials": {
+          "value": "",
+          "consumed": false,
+          "cost": 0,
+          "supply": 0
+        },
+        "preparation": {
+          "mode": "innate",
+          "prepared": false
+        },
+        "scaling": {
+          "mode": "none",
+          "formula": ""
+        }
+      },
+      "sort": 0,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.udsLtG0BugXHR2JQ"
+        },
+        "dnd5e": {
+          "sourceId": "Compendium.dnd5e.spells.udsLtG0BugXHR2JQ",
+          "advancementOrigin": "jp4BUcAipDi7GIQQ.l1Pw82BvhrSkYiyF"
+        }
+      },
+      "img": "icons/magic/fire/explosion-fireball-small-purple-orange.webp",
+      "effects": [],
+      "folder": null,
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "2.4.0",
+        "coreVersion": "10.303",
+        "createdTime": 1661787234236,
+        "modifiedTime": 1699986132474,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!actors.items!cYD0wRXLW4B17aoY.U0X7MGDlr5QH3x5R"
     }
   ],
   "effects": [],
@@ -2805,10 +3252,10 @@
   "_id": "cYD0wRXLW4B17aoY",
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.2.2",
+    "systemVersion": "2.4.0",
     "coreVersion": "10.303",
     "createdTime": 1661787232181,
-    "modifiedTime": 1691519160867,
+    "modifiedTime": 1699993332339,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!cYD0wRXLW4B17aoY"
