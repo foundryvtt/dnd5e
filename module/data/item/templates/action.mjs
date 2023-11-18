@@ -43,8 +43,8 @@ export default class ActionTemplate extends SystemDataModel {
       }),
       damage: new foundry.data.fields.SchemaField({
         parts: new foundry.data.fields.ArrayField(new foundry.data.fields.SchemaField({
-          formula: new foundry.data.fields.StringField(),
-          type: new foundry.data.fields.StringField()
+          formula: new FormulaField({required: true}),
+          type: new foundry.data.fields.StringField({required: true})
         }), {required: true}),
         versatile: new FormulaField({required: true, label: "DND5E.VersatileDamage"})
       }, {label: "DND5E.Damage"}),
