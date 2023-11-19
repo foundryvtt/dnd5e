@@ -544,13 +544,9 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const encumbrance = this.system.attributes.encumbrance ??= {};
 
     // Get the total weight from items
-    const physicalItems = ["weapon", "equipment", "consumable", "tool", "backpack", "loot"];
-    let weight = this.items.reduce((weight, i) => {
-      if ( !physicalItems.includes(i.type) ) return weight;
-      const q = i.system.quantity || 0;
-      const w = i.system.weight || 0;
-      return weight + (q * w);
-    }, 0);
+    let weight = this.items
+      .filter(item => !item.container)
+      .reduce((weight, item) => weight + (item.system.totalWeight ?? 0), 0);
 
     // [Optional] add Currency Weight (for non-transformed actors)
     const currency = this.system.currency;

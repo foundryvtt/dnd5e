@@ -23,6 +23,7 @@ export default class ContainerData extends SystemDataModel.mixin(
   /** @inheritdoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
+      quantity: new foundry.data.fields.NumberField({min: 1, max: 1}),
       capacity: new foundry.data.fields.SchemaField({
         type: new foundry.data.fields.StringField({
           required: true, initial: "weight", blank: false, label: "DND5E.ItemContainerCapacityType"
@@ -33,5 +34,93 @@ export default class ContainerData extends SystemDataModel.mixin(
         weightless: new foundry.data.fields.BooleanField({required: true, label: "DND5E.ItemContainerWeightless"})
       }, {label: "DND5E.ItemContainerCapacity"})
     });
+  }
+
+  /* -------------------------------------------- */
+  /*  Migrations                                  */
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  static _migrateData(source) {
+    super._migrateData(source);
+    ContainerData.#migrateQuantity(source);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Force quantity to always be 1.
+   * @param {object} source  The candidate source data from which the model will be constructed.
+   */
+  static #migrateQuantity(source) {
+    source.quantity = 1;
+  }
+
+  /* -------------------------------------------- */
+  /*  Getters                                     */
+  /* -------------------------------------------- */
+
+  /**
+   * Get all of the items contained in this container. A promise if item is within a compendium.
+   * @type {Collection<Item5e>|Promise<Collection<Item5e>>}
+   */
+  get contents() {
+    if ( !this.parent ) return new foundry.utils.Collection();
+
+    // If in a compendium, fetch using getDocuments and return a promise
+    if ( this.parent.pack && !this.parent.isEmbedded ) {
+      const pack = game.packs.get(this.parent.pack);
+      return pack.getDocuments({"system.container": this.parent.id}).then(d =>
+        new foundry.utils.Collection(d.map(d => [d.id, d]))
+      );
+    }
+
+    // Otherwise use local document collection
+    return (this.parent.isEmbedded ? this.parent.actor.items : game.items).reduce((collection, item) => {
+      if ( item.system.container === this.parent.id ) collection.set(item.id, item);
+      return collection;
+    }, new foundry.utils.Collection());
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Weight of the items in this container. Result is a promise if item is within a compendium.
+   * @type {number|Promise<number>}
+   */
+  get contentsWeight() {
+    if ( this.parent?.pack && !this.parent?.isEmbedded ) return this.#contentsWeight();
+    return this.contents.reduce((weight, item) =>
+      weight + (item.type === "backpack" ? item.system.totalWeight
+        : (item.system.weight * item.system.quantity))
+    , this.currencyWeight);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Asynchronous helper method for calculating the weight of items in a compendium.
+   * @returns {Promise<number>}
+   * @private
+   */
+  async #contentsWeight() {
+    const contents = await this.contents;
+    return contents.reduce(async (weight, item) =>
+      await weight + (item.type === "backpack" ? await item.system.totalWeight
+        : (item.system.weight * item.system.quantity))
+    , this.currencyWeight);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * The weight of this container with all of its contents. Result is a promise if item is within a compendium.
+   * @type {number|Promise<number>}
+   */
+  get totalWeight() {
+    if ( this.capacity.weightless ) return this.weight;
+    const containedWeight = this.contentsWeight;
+    if ( containedWeight instanceof Promise ) return containedWeight.then(c => this.weight + c);
+    return this.weight + containedWeight;
   }
 }

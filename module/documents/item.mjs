@@ -30,6 +30,8 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     return this.system.isActive ?? false;
   }
 
+  /* --------------------------------------------- */
+
   /**
    * Which ability score modifier is used by this item?
    * @type {string|null}
@@ -40,6 +42,19 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   }
 
   /* --------------------------------------------- */
+
+  /**
+   * The item that contains this item, if it is in a container. Returns a promise if the item is located
+   * in a compendium pack.
+   * @type {Item5e|Promise<Item5e>|void}
+   */
+  get container() {
+    if ( this.isEmbedded ) return this.actor.items.get(this.system.container);
+    if ( this.pack ) return game.packs.get(this.pack).getDocument(this.system.container);
+    return game.items.get(this.system.container);
+  }
+
+  /* -------------------------------------------- */
 
   /**
    * What is the critical hit threshold for this item, if applicable?
