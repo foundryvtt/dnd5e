@@ -1,4 +1,5 @@
 import SystemDataModel from "../../abstract.mjs";
+import GrantedSpellData from "../../shared/granted-spell.mjs";
 
 /**
  * Data model template with information on items that can be attuned and equipped.
@@ -14,8 +15,20 @@ export default class EquippableItemTemplate extends SystemDataModel {
       attunement: new foundry.data.fields.NumberField({
         required: true, integer: true, initial: CONFIG.DND5E.attunementTypes.NONE, label: "DND5E.Attunement"
       }),
-      equipped: new foundry.data.fields.BooleanField({required: true, label: "DND5E.Equipped"})
+      equipped: new foundry.data.fields.BooleanField({required: true, label: "DND5E.Equipped"}),
+      granted: new foundry.data.fields.ArrayField(new foundry.data.fields.EmbeddedDataField(GrantedSpellData))
     };
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Retrieve and create all spells embedded in this item.
+   * @returns {Promise<Item5e[]>}
+   */
+  async createGrantedSpells() {
+    const spells = await Promise.all(this.granted.map(g => g._createSpellData()));
+    return this.parent.actor.createEmbeddedDocuments("Item", spells.filter(data => data));
   }
 
   /* -------------------------------------------- */

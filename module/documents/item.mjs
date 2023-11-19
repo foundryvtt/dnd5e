@@ -347,6 +347,21 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   }
 
   /* -------------------------------------------- */
+
+  /**
+   * Should this item's spells be present?
+   * @type {boolean}
+   */
+  get areSpellsActive() {
+    if ( !this.isOwned || (["vehicle", "group"].includes(this.parent.type)) ) return false;
+    return "equipped" in this.system;
+
+    // TODO: add or remove spells when an item is updated.
+    // const { equipped, attunement, identified } = this.system;
+    // (equipped === true) && (identified === true) && (attunement !== CONFIG.DND5E.attunementTypes.REQUIRED);
+  }
+
+  /* -------------------------------------------- */
   /*  Data Preparation                            */
   /* -------------------------------------------- */
 
@@ -2038,6 +2053,9 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       const pc = this.parent.items.get(this.parent.system.details.originalClass);
       if ( !pc ) await this.parent._assignPrimaryClass();
     }
+
+    // Create granted spells.
+    if ( this.areSpellsActive ) await this.system.createGrantedSpells();
   }
 
   /* -------------------------------------------- */
@@ -2078,6 +2096,15 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     // Assign a new original class
     if ( (this.type === "class") && (this.id === this.parent.system.details.originalClass) ) {
       this.parent._assignPrimaryClass();
+    }
+
+    // Delete embedded spells.
+    else if ( "granted" in this.system ) {
+      const spells = this.actor.items.reduce((acc, item) => {
+        if ( item.flags.dnd5e?.parentId === this.id ) acc.push(item.id);
+        return acc;
+      }, []);
+      this.actor.deleteEmbeddedDocuments("Item", spells);
     }
   }
 
