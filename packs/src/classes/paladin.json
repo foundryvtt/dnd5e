@@ -142,7 +142,8 @@
           "choices": []
         },
         "level": 3,
-        "title": "Divine Health"
+        "title": "Divine Health",
+        "value": {}
       },
       {
         "type": "ItemGrant",
@@ -370,7 +371,8 @@
             "int": 0,
             "wis": 0,
             "cha": 0
-          }
+          },
+          "cap": 2
         },
         "value": {
           "type": "asi"
@@ -391,7 +393,8 @@
             "int": 0,
             "wis": 0,
             "cha": 0
-          }
+          },
+          "cap": 2
         },
         "value": {
           "type": "asi"
@@ -412,7 +415,8 @@
             "int": 0,
             "wis": 0,
             "cha": 0
-          }
+          },
+          "cap": 2
         },
         "value": {
           "type": "asi"
@@ -433,7 +437,8 @@
             "int": 0,
             "wis": 0,
             "cha": 0
-          }
+          },
+          "cap": 2
         },
         "value": {
           "type": "asi"
@@ -455,15 +460,41 @@
             "int": 0,
             "wis": 0,
             "cha": 0
-          }
+          },
+          "cap": 2
         },
         "value": {
           "type": "asi"
         },
         "level": 19,
         "title": ""
+      },
+      {
+        "_id": "J6UYtKD0wkJQ9CHT",
+        "type": "ScaleValue",
+        "configuration": {
+          "identifier": "aura-radius",
+          "type": "distance",
+          "distance": {
+            "units": "ft"
+          },
+          "scale": {
+            "6": {
+              "value": 10
+            },
+            "18": {
+              "value": 30
+            }
+          }
+        },
+        "value": {},
+        "title": "Aura Radius"
       }
     ],
+    "spellcasting": {
+      "progression": "half",
+      "ability": "cha"
+    },
     "saves": [
       "wis",
       "cha"
@@ -479,10 +510,6 @@
         "rel"
       ],
       "value": []
-    },
-    "spellcasting": {
-      "progression": "half",
-      "ability": "cha"
     }
   },
   "effects": [],
@@ -494,10 +521,10 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.3.1",
+    "systemVersion": "2.4.1",
     "coreVersion": "10.303",
     "createdTime": 1661787234280,
-    "modifiedTime": 1699386117323,
+    "modifiedTime": 1700503668880,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!gZiUvbXWLs0pOp0c"
