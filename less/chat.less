@@ -1,12 +1,10 @@
-@import "variables.less";
-
 /* ----------------------------------------- */
 /*  Chat Cards                               */
 /* ----------------------------------------- */
 
 .dnd5e.chat-card {
   font-style: normal;
-  font-size: 12px;
+  font-size: var(--font-size-12);
 
   .card-header {
     padding: 3px 0;
@@ -22,8 +20,10 @@
       flex: 1;
       margin: 0;
       line-height: 36px;
-      .modesto();
-      color: @colorOlive;
+      font-family: var(--dnd5e-font-modesto);
+      font-size: var(--font-size-20);
+      font-weight: 700;
+      color: var(--dnd5e-color-olive);
       &:hover {
         color: #111;
         text-shadow: 0 0 10px red;
@@ -35,7 +35,7 @@
     margin: 5px 0;
 
     h3 {
-      font-size: 12px;
+      font-size: var(--font-size-12);
       margin: 0;
       font-weight: bold;
     }
@@ -55,11 +55,11 @@
       display: block;
       line-height: 28px;
       text-align: center;
-      border: 1px solid @borderLight;
+      border: 1px solid var(--dnd5e-border-light);
     }
 
     button {
-      font-size: 12px;
+      font-size: var(--font-size-12);
       height: 24px;
       line-height: 20px;
       margin: 2px 0;
@@ -73,7 +73,7 @@
     span {
       border-right: 2px groove #FFF;
       padding: 0 3px 0 0;
-      font-size: 10px;
+      font-size: var(--font-size-10);
 
       &:last-child {
         border-right: none;

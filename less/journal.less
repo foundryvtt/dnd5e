@@ -2,13 +2,20 @@
 /*  SRD Compendium                           */
 /* ----------------------------------------- */
 
+.srd-compendium {
+  --dnd5e-srd-color-background: #efefef99;
+  --dnd5e-srd-color-border: #ba2828;
+  --dnd5e-srd-color-box-header: var(--color-text-light-1);
+  --dnd5e-srd-color-chapter-header: var(--color-text-hyperlink);
+}
+
 .srd-compendium.app {
   min-height: 480px;
   min-width: 640px;
 }
 
 .srd-compendium.app .window-content {
-  background: url(ui/parchment.jpg) repeat;
+  background: var(--dnd5e-sheet-background);
   color: var(--color-text-dark-primary);
 }
 
@@ -19,13 +26,13 @@
   gap: 1rem;
 
   aside, .contents {
-    border: 4px solid #ba2828;
-    background: #efefef99;
+    border: 4px solid var(--dnd5e-srd-color-border);
+    background: var(--dnd5e-srd-color-background);
 
     header h2 {
       border: none;
-      background: #ba2828;
-      color: var(--color-text-light-1);
+      background: var(--dnd5e-srd-color-border);
+      color: var(--dnd5e-srd-color-box-header);
       padding: 0 .25rem .25rem .25rem;
       margin: 0;
     }
@@ -53,7 +60,7 @@
       border: none;
       font-weight: bold;
       font-size: var(--font-size-18);
-      color: var(--color-text-hyperlink);
+      color: var(--dnd5e-srd-color-chapter-header);
     }
 
     ul {
