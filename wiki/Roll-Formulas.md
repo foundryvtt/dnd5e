@@ -204,7 +204,7 @@
 
 ### Currency
 
-`@bonuses.currency.pp`, `.gp`, `.sp`, `.ep`, `.cp` - Amount of each type of current held by actor
+`@currency.pp`, `.gp`, `.sp`, `.ep`, `.cp` - Amount of each type of current held by actor
 
 
 ### Details
