@@ -49,6 +49,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * @type {Item5e|Promise<Item5e>|void}
    */
   get container() {
+    if ( !this.system.container ) return undefined;
     if ( this.isEmbedded ) return this.actor.items.get(this.system.container);
     if ( this.pack ) return game.packs.get(this.pack).getDocument(this.system.container);
     return game.items.get(this.system.container);

@@ -70,7 +70,7 @@ export default class ContainerData extends SystemDataModel.mixin(
     // If in a compendium, fetch using getDocuments and return a promise
     if ( this.parent.pack && !this.parent.isEmbedded ) {
       const pack = game.packs.get(this.parent.pack);
-      return pack.getDocuments({"system.container": this.parent.id}).then(d =>
+      return pack.getDocuments({system: { container: this.parent.id }}).then(d =>
         new foundry.utils.Collection(d.map(d => [d.id, d]))
       );
     }
@@ -90,10 +90,7 @@ export default class ContainerData extends SystemDataModel.mixin(
    */
   get contentsWeight() {
     if ( this.parent?.pack && !this.parent?.isEmbedded ) return this.#contentsWeight();
-    return this.contents.reduce((weight, item) =>
-      weight + (item.type === "backpack" ? item.system.totalWeight
-        : (item.system.weight * item.system.quantity))
-    , this.currencyWeight);
+    return this.contents.reduce((weight, item) => weight + item.system.totalWeight, this.currencyWeight);
   }
 
   /* -------------------------------------------- */
@@ -101,14 +98,10 @@ export default class ContainerData extends SystemDataModel.mixin(
   /**
    * Asynchronous helper method for calculating the weight of items in a compendium.
    * @returns {Promise<number>}
-   * @private
    */
   async #contentsWeight() {
     const contents = await this.contents;
-    return contents.reduce(async (weight, item) =>
-      await weight + (item.type === "backpack" ? await item.system.totalWeight
-        : (item.system.weight * item.system.quantity))
-    , this.currencyWeight);
+    return contents.reduce(async (weight, item) => await weight + await item.system.totalWeight, this.currencyWeight);
   }
 
   /* -------------------------------------------- */
