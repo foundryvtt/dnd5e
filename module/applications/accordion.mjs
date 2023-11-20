@@ -71,8 +71,7 @@ export default class Accordion {
       heading.addEventListener("click", this._onClickHeading.bind(this));
       collapsedIndex++;
     }
-    await new Promise(resolve => { setTimeout(resolve, 0); }); // Allow re-paint.
-    this._restoreCollapsedState();
+    requestAnimationFrame(() => this._restoreCollapsedState());
   }
 
   /* -------------------------------------------- */
@@ -120,11 +119,12 @@ export default class Accordion {
       content.style.height = `${content._fullHeight}px`;
       return;
     }
-    await new Promise(resolve => { setTimeout(resolve, 0); }); // Allow re-paint.
-    const onEnd = this._onEnd.bind(this, heading, content);
-    this.#ongoing.set(heading, onEnd);
-    content.addEventListener("transitionend", onEnd, { once: true });
-    content.style.height = `${content._fullHeight}px`;
+    requestAnimationFrame(() => {
+      const onEnd = this._onEnd.bind(this, heading, content);
+      this.#ongoing.set(heading, onEnd);
+      content.addEventListener("transitionend", onEnd, { once: true });
+      content.style.height = `${content._fullHeight}px`;
+    });
   }
 
   /* -------------------------------------------- */
@@ -147,11 +147,12 @@ export default class Accordion {
       content.style.height = "0";
       return;
     }
-    await new Promise(resolve => { setTimeout(resolve, 0); }); // Allow re-paint.
-    const onEnd = this._onEnd.bind(this, heading, content);
-    this.#ongoing.set(heading, onEnd);
-    content.addEventListener("transitionend", onEnd, { once: true });
-    content.style.height = "0";
+    requestAnimationFrame(() => {
+      const onEnd = this._onEnd.bind(this, heading, content);
+      this.#ongoing.set(heading, onEnd);
+      content.addEventListener("transitionend", onEnd, { once: true });
+      content.style.height = "0";
+    });
   }
 
   /* -------------------------------------------- */
