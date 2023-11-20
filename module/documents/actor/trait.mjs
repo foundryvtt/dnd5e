@@ -173,14 +173,14 @@ export async function choices(trait, { chosen=new Set(), prefixed=false, any=fal
     };
   }
 
-  const prepareCategory = (key, data, result, prefix) => {
+  const prepareCategory = (key, data, result, prefix, topLevel=false) => {
     let label = _innerLabel(data, traitConfig);
     if ( !label ) label = key;
     if ( prefixed ) key = `${prefix}:${key}`;
     result[key] = {
       label: game.i18n.localize(label),
       chosen: chosen.has(key),
-      sorting: traitConfig.sortCategories === true
+      sorting: topLevel ? traitConfig.sortCategories === true : true
     };
     if ( data.children ) {
       const children = result[key].children = {};
@@ -195,7 +195,7 @@ export async function choices(trait, { chosen=new Set(), prefixed=false, any=fal
     }
   };
 
-  Object.entries(categoryData).forEach(([k, v]) => prepareCategory(k, v, result, trait));
+  Object.entries(categoryData).forEach(([k, v]) => prepareCategory(k, v, result, trait, true));
 
   return new SelectChoices(result).sort();
 }
