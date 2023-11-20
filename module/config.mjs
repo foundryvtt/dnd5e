@@ -1736,7 +1736,7 @@ preLocalize("languages", { key: "label" });
 preLocalize("languages.standard.children", { sort: true });
 preLocalize("languages.exotic.children", { key: "label", sort: true });
 preLocalize("languages.exotic.children.primordial.children", { sort: true });
-patchConfig("languages", "label", { since: "DnD5e 2.4", until: "DnD5e 2.6" });
+patchConfig("languages", "label", { since: "DnD5e 2.4", until: "DnD5e 3.1" });
 
 /* -------------------------------------------- */
 
