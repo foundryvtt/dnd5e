@@ -8,6 +8,7 @@
     "build:json": "node ./utils/packs.mjs package unpack --nedb",
     "lint": "eslint --ext .mjs ./",
     "lint:fix": "eslint --ext .mjs ./ --fix",
+    "startup": "npm install && npm run build:css && npm run build:db",
     "watch": "less-watch-compiler less/ ./ dnd5e.less"
   },
   "devDependencies": {
