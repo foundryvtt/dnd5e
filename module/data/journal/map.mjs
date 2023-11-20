@@ -15,7 +15,7 @@ export default class MapLocationJournalPageData extends foundry.abstract.DataMod
   /**
    * Adjust the number of this entry in the table of contents.
    * @param {number} number  Current position number.
-   * @returns {{ number: string, adjustment: [number] }|void}
+   * @returns {{ number: string, adjustment: number }|void}
    */
   adjustTOCNumbering(number) {
     if ( !this.code ) return;

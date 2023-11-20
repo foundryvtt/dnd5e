@@ -19,6 +19,7 @@ export default class JournalMapLocationPageSheet extends JournalTextPageSheet {
 
   /* -------------------------------------------- */
 
+  /** @inheritdoc */
   async _renderInner(...args) {
     const jQuery = await super._renderInner(...args);
     const editingHeader = jQuery[0].querySelector(".journal-header");
