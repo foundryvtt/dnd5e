@@ -48,7 +48,7 @@ export default class Accordion {
    * Augment the given markup with an accordion effect.
    * @param {HTMLElement} root  The root HTML node.
    */
-  async bind(root) {
+  bind(root) {
     const firstBind = this.#sections.size < 1;
     if ( firstBind ) this.#collapsed = [];
     this.#sections = new Map();
@@ -102,7 +102,7 @@ export default class Accordion {
    * @param {boolean} [options.animate=true]  Whether to animate the expand effect.
    * @protected
    */
-  async _onExpandSection(heading, content, { animate=true }={}) {
+  _onExpandSection(heading, content, { animate=true }={}) {
     this.#cancelOngoing(heading);
 
     if ( this.#config.collapseOthers ) {
@@ -137,7 +137,7 @@ export default class Accordion {
    * @param {boolean} [options.animate=true]  Whether to animate the collapse effect.
    * @protected
    */
-  async _onCollapseSection(heading, content, { animate=true }={}) {
+  _onCollapseSection(heading, content, { animate=true }={}) {
     this.#cancelOngoing(heading);
     const { height } = content.getBoundingClientRect();
     heading.parentElement.classList.add("collapsed");
