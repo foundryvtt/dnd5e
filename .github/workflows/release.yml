@@ -88,7 +88,7 @@ jobs:
     # Run our `build` script
     - name: Build All
       run: |
-        npm run build --if-present
+        npm run build:code --if-present
         mv --force dnd5e-compiled.mjs dnd5e.mjs
 
     # Create a zip file with all files required by the module to add to the release
