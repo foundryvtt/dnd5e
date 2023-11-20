@@ -148,3 +148,24 @@
     }
   }
 }
+
+.journal-entry-page.map {
+  .journal-header {
+    gap: 1rem;
+
+    [name="system.code"] {
+      block-size: 100%;
+      inline-size: 3em;
+      background: rgb(0 0 0 / 0.1);
+      font-size: var(--font-size-24);
+      text-align: center;
+    }
+
+    .page-level {
+      margin-inline-start: 0;
+    }
+  }
+  [data-map-location-code]::before {
+    content: attr(data-map-location-code) ': ';
+  }
+}
