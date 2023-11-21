@@ -1,3 +1,5 @@
+import MapLocationControlIcon from "../../canvas/map-location-control-icon.mjs";
+
 /**
  * Data definition for Map Location journal entry pages.
  *
@@ -20,5 +22,17 @@ export default class MapLocationJournalPageData extends foundry.abstract.DataMod
   adjustTOCNumbering(number) {
     if ( !this.code ) return;
     return { number: this.code, adjustment: -1 };
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Create a control icon for rendering this page on a scene.
+   * @param {object} options  Options passed through to ControlIcon construction.
+   * @returns {PIXI.Container|void}
+   */
+  getControlIcon(options) {
+    if ( !this.code ) return;
+    return new MapLocationControlIcon({code: this.code, ...options});
   }
 }
