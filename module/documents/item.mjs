@@ -1092,7 +1092,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     // Identify the consumed resource and its current quantity
     let resource = null;
     let amount = usageConfig.resourceAmount ? usageConfig.resourceAmount : (consume.amount || 0);
-    if ( amount in as.spells ) amount = consume.amount || 1;
+    if ( amount in as.spells ) amount = consume.amount || 0;
     let quantity = 0;
     switch ( consume.type ) {
       case "attribute":
