@@ -1810,7 +1810,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       case "placeTemplate":
       case "placeAmmoTemplate":
         try {
-          const templateItem = action === "placeTemplate" ? item : ammo;
+          const templateItem = (action === "placeTemplate") ? item : ammo;
           await dnd5e.canvas.AbilityTemplate.fromItem(templateItem, {"flags.dnd5e.spellLevel": spellLevel})?.drawPreview();
         } catch(err) {
           Hooks.onError("Item5e._onChatCardAction", err, {
