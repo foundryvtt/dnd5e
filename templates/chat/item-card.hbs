@@ -1,5 +1,7 @@
 <div class="dnd5e chat-card item-card" data-actor-id="{{actor._id}}" data-item-id="{{item._id}}"
-     {{#if tokenId}}data-token-id="{{tokenId}}"{{/if}} {{#if isSpell}}data-spell-level="{{item.system.level}}"{{/if}}>
+     {{#if tokenId}}data-token-id="{{tokenId}}"{{/if}}
+     {{#if isSpell}}data-spell-level="{{item.system.level}}"{{/if}}
+     {{#if hasAmmo}}data-ammo-id="{{ammo.item._id}}"{{/if}}>
     <header class="card-header flexrow">
         <img src="{{item.img}}" title="{{item.name}}" width="36" height="36"/>
         <h3 class="item-name">{{item.name}}</h3>
@@ -13,6 +15,16 @@
         {{/if}}
         {{#if data.materials.value}}
         <p><strong>{{ localize "DND5E.RequiredMaterials" }}.</strong> {{data.materials.value}}</p>
+        {{/if}}
+
+        {{#if hasAmmo}}
+        <fieldset><legend>{{ammo.item.name}}</legend>
+            {{#if ammo.data.description.chat}}
+                {{{ammo.data.description.chat}}}
+            {{else}}
+                {{{ammo.data.description.value}}}
+            {{/if}}
+        </fieldset>
         {{/if}}
     </div>
 
@@ -50,6 +62,20 @@
 
         {{#if hasAbilityCheck}}
         <button data-action="abilityCheck" data-ability="{{data.ability}}">{{labels.abilityCheck}}</button>
+        {{/if}}
+
+        {{#if hasAmmo}}
+
+          {{#if ammo.hasSave}}
+          <button data-action="save" data-ability="{{ammo.data.save.ability}}">
+              {{ localize "DND5E.SavingThrow" }} {{ammo.labels.save}} [{{ammo.item.name}}]
+          </button>
+          {{/if}}
+
+          {{#if ammo.hasAreaTarget}}
+          <button data-action="placeAmmoTemplate">{{ localize "DND5E.PlaceTemplate" }} [{{ammo.item.name}}]</button>
+          {{/if}}
+
         {{/if}}
     </div>
 

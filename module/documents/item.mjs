@@ -1190,6 +1190,8 @@ export default class Item5e extends SystemDocumentMixin(Item) {
 
     // Render the chat card template
     const token = this.actor.token;
+    const ammo = this.hasAmmo ? this.actor.items.get(this.system.consume.target) : null;
+    const hasAmmo = ammo && (ammo.hasSave || ammo.hasAreaTarget);
     const templateData = {
       actor: this.actor,
       tokenId: token?.uuid || null,
@@ -1204,7 +1206,15 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       hasSave: this.hasSave,
       hasAreaTarget: this.hasAreaTarget,
       isTool: this.type === "tool",
-      hasAbilityCheck: this.hasAbilityCheck
+      hasAbilityCheck: this.hasAbilityCheck,
+      hasAmmo: hasAmmo,
+      ammo: hasAmmo ? {
+        item: ammo,
+        data: await ammo.getChatData(),
+        labels: ammo.labels,
+        hasSave: ammo.hasSave,
+        hasAreaTarget: ammo.hasAreaTarget
+      } : {}
     };
     const html = await renderTemplate("systems/dnd5e/templates/chat/item-card.hbs", templateData);
 
@@ -1766,6 +1776,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       }));
       return null;
     }
+    const ammo = actor.items.get(card.dataset.ammoId);
     const spellLevel = parseInt(card.dataset.spellLevel) || null;
 
     // Handle different actions
@@ -1797,8 +1808,10 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       case "toolCheck":
         await item.rollToolCheck({event}); break;
       case "placeTemplate":
+      case "placeAmmoTemplate":
         try {
-          await dnd5e.canvas.AbilityTemplate.fromItem(item, {"flags.dnd5e.spellLevel": spellLevel})?.drawPreview();
+          const templateItem = action === "placeTemplate" ? item : ammo;
+          await dnd5e.canvas.AbilityTemplate.fromItem(templateItem, {"flags.dnd5e.spellLevel": spellLevel})?.drawPreview();
         } catch(err) {
           Hooks.onError("Item5e._onChatCardAction", err, {
             msg: game.i18n.localize("DND5E.PlaceTemplateError"),
