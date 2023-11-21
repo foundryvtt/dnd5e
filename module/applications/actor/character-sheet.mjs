@@ -110,7 +110,7 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
     // Organize items
     for ( let i of items ) {
       const ctx = context.itemContext[i.id] ??= {};
-      ctx.totalWeight = (i.system.quantity * i.system.weight).toNearest(0.1);
+      ctx.totalWeight = i.system.totalWeight?.toNearest(0.1);
       inventory[i.type].items.push(i);
     }
 

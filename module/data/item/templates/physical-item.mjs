@@ -3,6 +3,7 @@ import SystemDataModel from "../../abstract.mjs";
 /**
  * Data model template with information on physical items.
  *
+ * @property {string} container           Container within which this item is located.
  * @property {number} quantity            Number of items in a stack.
  * @property {number} weight              Item's weight in pounds or kilograms (depending on system setting).
  * @property {object} price
@@ -16,6 +17,9 @@ export default class PhysicalItemTemplate extends SystemDataModel {
   /** @inheritdoc */
   static defineSchema() {
     return {
+      container: new foundry.data.fields.ForeignDocumentField(foundry.documents.BaseItem, {
+        idOnly: true, label: "DND5E.Container"
+      }),
       quantity: new foundry.data.fields.NumberField({
         required: true, nullable: false, integer: true, initial: 1, min: 0, label: "DND5E.Quantity"
       }),
@@ -47,6 +51,16 @@ export default class PhysicalItemTemplate extends SystemDataModel {
     const { value, denomination } = this.price;
     const hasPrice = value && (denomination in CONFIG.DND5E.currencies);
     return hasPrice ? `${value} ${CONFIG.DND5E.currencies[denomination].label}` : null;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * The weight of all of the items in an item stack.
+   * @type {number}
+   */
+  get totalWeight() {
+    return this.quantity * this.weight;
   }
 
   /* -------------------------------------------- */

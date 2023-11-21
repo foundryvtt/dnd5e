@@ -27,7 +27,7 @@
     "eqeqeq": ["warn", "smart"],
     "func-call-spacing": "warn",
     "func-names": ["warn", "never"],
-    "getter-return": "warn",
+    "getter-return": ["warn", { "allowImplicit": true }],
     "lines-between-class-members": "warn",
     "new-parens": ["warn", "always"],
     "no-alert": "warn",
