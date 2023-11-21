@@ -16,6 +16,14 @@ export default class MapLocationControlIcon extends PIXI.Container {
     this.hitArea = new PIXI.Circle(...this.circle);
     this.cursor = "pointer";
 
+    // Drop Shadow
+    this.shadow = this.addChild(new PIXI.Graphics());
+    this.shadow.clear()
+      .beginFill(CONFIG.DND5E.mapLocationMarker.borderColor, 0.65)
+      .drawCircle(this.radius + 8, this.radius + 8, this.radius + 10)
+      .endFill();
+    this.shadow.filters = [new PIXI.filters.BlurFilter(16)];
+
     // 3D Effect
     this.extrude = this.addChild(new PIXI.Graphics());
     this.extrude.clear()
