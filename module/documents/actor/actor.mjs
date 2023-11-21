@@ -580,7 +580,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * @protected
    */
   _prepareHitPoints(rollData) {
-    if ( this.type !== "character" || (this.system._source.attributes.hp.max !== null) ) return;
+    if ( this.type !== "character" || (this.system.attributes.hp.max !== null) ) return;
     const hp = this.system.attributes.hp;
 
     const abilityId = CONFIG.DND5E.hitPointsAbility || "con";
@@ -1132,12 +1132,16 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       data.toolBonus = bonus.join(" + ");
     }
 
+    // Reliable Talent applies to any tool check we have full or better proficiency in
+    const reliableTalent = (prof.multiplier >= 1 && this.getFlag("dnd5e", "reliableTalent"));
+
     const flavor = game.i18n.format("DND5E.ToolPromptTitle", {tool: Trait.keyLabel(toolId, {trait: "tool"}) ?? ""});
     const rollData = foundry.utils.mergeObject({
       data, flavor,
       title: `${flavor}: ${this.name}`,
       chooseModifier: true,
       halflingLucky: this.getFlag("dnd5e", "halflingLucky"),
+      reliableTalent,
       messageData: {
         speaker: options.speaker || ChatMessage.implementation.getSpeaker({actor: this}),
         "flags.dnd5e.roll": {type: "tool", toolId}
