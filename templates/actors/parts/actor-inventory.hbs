@@ -165,15 +165,15 @@
 </ol>
 
 
-{{#unless isNPC}}
 {{#with encumbrance}}
-<div class="encumbrance {{#if encumbered}}encumbered{{/if}}">
-    <span class="encumbrance-bar" style="width:{{pct}}%"></span>
-    <span class="encumbrance-label">{{value}} / {{max}}</span>
-    <i class="encumbrance-breakpoint encumbrance-33 arrow-up"></i>
-    <i class="encumbrance-breakpoint encumbrance-33 arrow-down"></i>
-    <i class="encumbrance-breakpoint encumbrance-66 arrow-up"></i>
-    <i class="encumbrance-breakpoint encumbrance-66 arrow-down"></i>
-</div>
+  <div class="encumbrance {{~#if encumbered}} encumbered{{/if}}" role="meter"
+       aria-label="{{localize 'DND5E.DND5E.Encumbrance'}}" aria-value="{{pct}}"
+       aria-valuetext="{{value}} {{@root.weightUnit}}" aria-valuemin="0"
+       aria-valuemax="{{max}}" style="--percentage: {{pct}}%">
+    <label>{{value}} / {{max}}</label>
+    <i class="breakpoint encumbrance-33 arrow-up" role="presentation"></i>
+    <i class="breakpoint encumbrance-33 arrow-down" role="presentation"></i>
+    <i class="breakpoint encumbrance-66 arrow-up" role="presentation"></i>
+    <i class="breakpoint encumbrance-66 arrow-down" role="presentation"></i>
+  </div>
 {{/with}}
-{{/unless}}

@@ -2061,6 +2061,11 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   /** @inheritdoc */
   async _preUpdate(changed, options, user) {
     if ( (await super._preUpdate(changed, options, user)) === false ) return false;
+
+    if ( foundry.utils.hasProperty(changed, "system.container") ) {
+      options.formerContainer = (await this.container)?.uuid;
+    }
+
     if ( (this.type !== "class") || !("levels" in (changed.system || {})) ) return;
 
     // Check to make sure the updated class level isn't below zero
@@ -2087,12 +2092,18 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   /* -------------------------------------------- */
 
   /** @inheritdoc */
-  _onDelete(options, userId) {
+  async _onDelete(options, userId) {
     super._onDelete(options, userId);
-    if ( (userId !== game.user.id) || !this.parent ) return;
+    if ( userId !== game.user.id ) return;
+
+    // Delete a container's contents when it is deleted
+    const contents = await this.system.contents;
+    if ( contents && !options.retainContents ) {
+      await Item.deleteDocuments(Array.from(contents.map(i => i.id)), {pack: this.pack, parent: this.parent});
+    }
 
     // Assign a new original class
-    if ( (this.type === "class") && (this.id === this.parent.system.details.originalClass) ) {
+    if ( this.parent && (this.type === "class") && (this.id === this.parent.system.details.originalClass) ) {
       this.parent._assignPrimaryClass();
     }
   }
