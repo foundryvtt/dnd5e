@@ -1729,8 +1729,8 @@ DND5E.languages = {
       undercommon: "DND5E.LanguagesUndercommon"
     }
   },
-  cant: "DND5E.LanguagesThievesCant",
-  druidic: "DND5E.LanguagesDruidic"
+  druidic: "DND5E.LanguagesDruidic",
+  cant: "DND5E.LanguagesThievesCant"
 };
 preLocalize("languages", { key: "label" });
 preLocalize("languages.standard.children", { sort: true });
