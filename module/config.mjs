@@ -461,6 +461,10 @@ DND5E.tokenSizes = {
   grg: 4
 };
 
+/* -------------------------------------------- */
+/*  Canvas                                      */
+/* -------------------------------------------- */
+
 /**
  * Colors used to visualize temporary and temporary maximum HP in token health bars.
  * @enum {number}
@@ -471,6 +475,22 @@ DND5E.tokenHPColors = {
   temp: 0x66CCFF,
   tempmax: 0x440066,
   negmax: 0x550000
+};
+
+/* -------------------------------------------- */
+
+/**
+ * Settings used to render map location markers on the canvas.
+ * @type {object}
+ */
+DND5E.mapLocationMarker = {
+  default: {
+    backgroundColor: 0xFBF8F5,
+    borderColor: 0x000000,
+    borderHoverColor: 0xFF5500,
+    font: null,
+    textColor: 0x000000
+  }
 };
 
 /* -------------------------------------------- */
