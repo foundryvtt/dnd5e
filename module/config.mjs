@@ -484,11 +484,13 @@ DND5E.tokenHPColors = {
  * @type {object}
  */
 DND5E.mapLocationMarker = {
-  backgroundColor: 0xFBF8F5,
-  borderColor: 0x000000,
-  borderHoverColor: 0xFF5500,
-  font: null,
-  textColor: 0x000000
+  default: {
+    backgroundColor: 0xFBF8F5,
+    borderColor: 0x000000,
+    borderHoverColor: 0xFF5500,
+    font: null,
+    textColor: 0x000000
+  }
 };
 
 /* -------------------------------------------- */

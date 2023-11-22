@@ -33,6 +33,11 @@ export default class MapLocationJournalPageData extends foundry.abstract.DataMod
    */
   getControlIcon(options) {
     if ( !this.code ) return;
-    return new MapLocationControlIcon({code: this.code, ...options});
+    const style = foundry.utils.mergeObject(
+      CONFIG.DND5E.mapLocationMarker.default,
+      CONFIG.DND5E.mapLocationMarker[this.parent.getFlag("dnd5e", "style")] ?? {},
+      {inplace: false}
+    );
+    return new MapLocationControlIcon({code: this.code, ...options, ...style});
   }
 }

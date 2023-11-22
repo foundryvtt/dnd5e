@@ -1,14 +1,15 @@
 export default class MapLocationControlIcon extends PIXI.Container {
-  constructor({code, size=40, backgroundColor, borderColor}={}, ...args) {
+  constructor({code, size=40, ...style}={}, ...args) {
     super(...args);
 
     this.code = code;
-
     this.size = size;
+    this.style = style;
+
     this.radius = size / 2;
     this.circle = [this.radius, this.radius, this.radius + 8];
-    this.backgroundColor = backgroundColor ?? CONFIG.DND5E.mapLocationMarker.backgroundColor;
-    this.borderColor = borderColor ?? CONFIG.DND5E.mapLocationMarker.borderHoverColor;
+    this.backgroundColor = this.style.backgroundColor;
+    this.borderColor = this.style.borderHoverColor;
 
     // Define hit area
     this.eventMode = "static";
@@ -19,7 +20,7 @@ export default class MapLocationControlIcon extends PIXI.Container {
     // Drop Shadow
     this.shadow = this.addChild(new PIXI.Graphics());
     this.shadow.clear()
-      .beginFill(CONFIG.DND5E.mapLocationMarker.borderColor, 0.65)
+      .beginFill(this.style.borderColor, 0.65)
       .drawCircle(this.radius + 8, this.radius + 8, this.radius + 10)
       .endFill();
     this.shadow.filters = [new PIXI.filters.BlurFilter(16)];
@@ -27,7 +28,7 @@ export default class MapLocationControlIcon extends PIXI.Container {
     // 3D Effect
     this.extrude = this.addChild(new PIXI.Graphics());
     this.extrude.clear()
-      .beginFill(CONFIG.DND5E.mapLocationMarker.borderColor, 1.0)
+      .beginFill(this.style.borderColor, 1.0)
       .drawCircle(this.radius + 2, this.radius + 2, this.radius + 9)
       .endFill();
 
@@ -35,7 +36,7 @@ export default class MapLocationControlIcon extends PIXI.Container {
     this.bg = this.addChild(new PIXI.Graphics());
     this.bg.clear()
       .beginFill(this.backgroundColor, 1.0)
-      .lineStyle(2, CONFIG.DND5E.mapLocationMarker.borderColor, 1.0)
+      .lineStyle(2, this.style.borderColor, 1.0)
       .drawCircle(...this.circle)
       .endFill();
 
@@ -48,8 +49,6 @@ export default class MapLocationControlIcon extends PIXI.Container {
     // Border
     this.border = this.addChild(new PIXI.Graphics());
     this.border.visible = false;
-
-    // TODO: Drop Shadow
 
     this.refresh();
   }
@@ -82,10 +81,10 @@ export default class MapLocationControlIcon extends PIXI.Container {
   _getTextStyle() {
     const style = CONFIG.canvasTextStyle.clone();
     style.dropShadow = false;
-    style.fill = Color.from(CONFIG.DND5E.mapLocationMarker.textColor);
+    style.fill = Color.from(this.style.textColor);
     style.strokeThickness = 0;
-    if ( CONFIG.DND5E.mapLocationMarker.fontFamily ) {
-      style.fontFamily = CONFIG.DND5E.mapLocationMarker.fontFamily;
+    if ( this.style.fontFamily ) {
+      style.fontFamily = this.style.fontFamily;
     }
     return style;
   }
