@@ -136,7 +136,7 @@ async function enrichCheck(config, label, options) {
   }
 
   const toolUUID = CONFIG.DND5E.enrichmentLookup.tools[config.tool];
-  const toolIndex = toolUUID ? Trait.getBaseItem(toolUUID, { indexOnly: true }) : null;
+  const toolIndex = toolUUID ? getBaseItem(toolUUID, { indexOnly: true }) : null;
   if ( config.tool && !toolIndex ) {
     console.warn(`Tool ${config.tool} not found while enriching ${config.input}.`);
     invalid = true;
