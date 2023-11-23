@@ -2193,11 +2193,11 @@ export default class Item5e extends SystemDocumentMixin(Item) {
             <input type="checkbox" name="deleteContents">
             ${game.i18n.localize("DND5E.ContainerDeleteContents")}
           </label>`,
-        yes: jQuery => {
-          const deleteContents = jQuery[0].querySelector('[name="deleteContents"]').checked;
+        yes: html => {
+          const deleteContents = html.querySelector('[name="deleteContents"]').checked;
           this.delete({ deleteContents });
         },
-        options: options
+        options: { ...options, jQuery: false }
       });
     }
 
