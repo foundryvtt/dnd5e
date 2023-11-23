@@ -2061,6 +2061,11 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   /** @inheritdoc */
   async _preUpdate(changed, options, user) {
     if ( (await super._preUpdate(changed, options, user)) === false ) return false;
+
+    if ( foundry.utils.hasProperty(changed, "system.container") ) {
+      options.formerContainer = (await this.container)?.uuid;
+    }
+
     if ( (this.type !== "class") || !("levels" in (changed.system || {})) ) return;
 
     // Check to make sure the updated class level isn't below zero
@@ -2087,12 +2092,20 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   /* -------------------------------------------- */
 
   /** @inheritdoc */
-  _onDelete(options, userId) {
+  async _onDelete(options, userId) {
     super._onDelete(options, userId);
-    if ( (userId !== game.user.id) || !this.parent ) return;
+    if ( userId !== game.user.id ) return;
+
+    // Delete a container's contents when it is deleted
+    const contents = await this.system.contents;
+    if ( contents && options.deleteContents ) {
+      await Item.deleteDocuments(Array.from(contents.map(i => i.id)), {
+        pack: this.pack, parent: this.parent, deleteContents: true
+      });
+    }
 
     // Assign a new original class
-    if ( (this.type === "class") && (this.id === this.parent.system.details.originalClass) ) {
+    if ( this.parent && (this.type === "class") && (this.id === this.parent.system.details.originalClass) ) {
       this.parent._assignPrimaryClass();
     }
   }
@@ -2163,6 +2176,32 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       updates["system.type.value"] = "monster"; // Set features on NPCs to be 'monster features'.
     }
     return updates;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  async deleteDialog(options={}) {
+    // Display custom delete dialog when deleting a container with contents
+    const count = await this.system.contentsCount;
+    if ( count ) {
+      return Dialog.confirm({
+        title: `${game.i18n.format("DOCUMENT.Delete", {type: game.i18n.localize("DND5E.Container")})}: ${this.name}`,
+        content: `<h4>${game.i18n.localize("AreYouSure")}</h4>
+          <p>${game.i18n.format("DND5E.ContainerDeleteMessage", {count})}</p>
+          <label>
+            <input type="checkbox" name="deleteContents">
+            ${game.i18n.localize("DND5E.ContainerDeleteContents")}
+          </label>`,
+        yes: html => {
+          const deleteContents = html.querySelector('[name="deleteContents"]').checked;
+          this.delete({ deleteContents });
+        },
+        options: { ...options, jQuery: false }
+      });
+    }
+
+    return super.deleteDialog(options);
   }
 
   /* -------------------------------------------- */

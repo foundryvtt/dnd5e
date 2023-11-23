@@ -110,10 +110,16 @@ Hooks.once("init", function() {
     label: "DND5E.SheetClassGroup"
   });
 
-  Items.unregisterSheet("core", ItemSheet);
-  Items.registerSheet("dnd5e", applications.item.ItemSheet5e, {
+  DocumentSheetConfig.unregisterSheet(Item, "core", ItemSheet);
+  DocumentSheetConfig.registerSheet(Item, "dnd5e", applications.item.ItemSheet5e, {
     makeDefault: true,
     label: "DND5E.SheetClassItem"
+  });
+  DocumentSheetConfig.unregisterSheet(Item, "dnd5e", applications.item.ItemSheet5e, { types: ["backpack"] });
+  DocumentSheetConfig.registerSheet(Item, "dnd5e", applications.item.ContainerSheet, {
+    makeDefault: true,
+    types: ["backpack"],
+    label: "DND5E.SheetClassContainer"
   });
 
   DocumentSheetConfig.unregisterSheet(JournalEntry, "core", JournalSheet);

@@ -85,6 +85,64 @@ export default class ContainerData extends SystemDataModel.mixin(
   /* -------------------------------------------- */
 
   /**
+   * Get all of the items in this container and any sub-containers. A promise if item is within a compendium.
+   * @type {Collection<Item5e>|Promise<Collection<Item5e>>}
+   */
+  get allContainedItems() {
+    if ( !this.parent || !this.contents.size ) return new foundry.utils.Collection();
+    if ( this.parent.pack ) return this.#allContainedItems();
+
+    return this.contents.reduce((collection, item) => {
+      collection.set(item.id, item);
+      if ( item.type === "backpack" ) item.system.allContainedItems.forEach(i => collection.set(i.id, i));
+      return collection;
+    }, new foundry.utils.Collection());
+  }
+
+  /**
+   * Asynchronous helper method for fetching all contained items from a compendium.
+   * @returns {Promise<Collection<Item5e>>}
+   * @private
+   */
+  async #allContainedItems() {
+    return (await this.contents).reduce(async (promise, item) => {
+      const collection = await promise;
+      collection.add(item);
+      if ( item.type === "backpack" ) (await item.system.allContainedItems).forEach(i => collection.set(id.id, i));
+      return collection;
+    }, new foundry.utils.Collection());
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Fetch a specific contained item.
+   * @param {string} id                 ID of the item to fetch.
+   * @returns {Item5e|Promise<Item5e>}  Item if found.
+   */
+  getContainedItem(id) {
+    if ( this.parent?.isEmbedded ) return this.parent.actor.items.get(id);
+    if ( this.parent?.pack ) return game.packs.get(this.parent.pack)?.getDocument(id);
+    return game.items.get(id);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Number of items contained in this container including items in sub-containers. Result is a promise if item
+   * is within a compendium.
+   * @type {number|Promise<number>}
+   */
+  get contentsCount() {
+    const reducer = (count, item) => count + item.system.quantity;
+    const items = this.allContainedItems;
+    if ( items instanceof Promise ) return items.then(items => items.reduce(reducer, 0));
+    return items.reduce(reducer, 0);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Weight of the items in this container. Result is a promise if item is within a compendium.
    * @type {number|Promise<number>}
    */
@@ -92,8 +150,6 @@ export default class ContainerData extends SystemDataModel.mixin(
     if ( this.parent?.pack && !this.parent?.isEmbedded ) return this.#contentsWeight();
     return this.contents.reduce((weight, item) => weight + item.system.totalWeight, this.currencyWeight);
   }
-
-  /* -------------------------------------------- */
 
   /**
    * Asynchronous helper method for calculating the weight of items in a compendium.

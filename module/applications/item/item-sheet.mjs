@@ -538,6 +538,7 @@ export default class ItemSheet5e extends ItemSheet {
   }
 
   /* -------------------------------------------- */
+
   /**
    * Handle spawning the configuration applications.
    * @param {Event} event   The click event which originated the selection.

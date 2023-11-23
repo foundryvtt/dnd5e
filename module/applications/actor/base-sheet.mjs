@@ -138,8 +138,10 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
       }
     };
 
-    // Sort Owned Items
-    context.items.sort((a, b) => (a.sort || 0) - (b.sort || 0));
+    // Remove items in containers & sort remaining
+    context.items = context.items
+      .filter(i => !i.system.container)
+      .sort((a, b) => (a.sort || 0) - (b.sort || 0));
 
     // Temporary HP
     const hp = {...context.system.attributes.hp};
@@ -940,7 +942,23 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
 
   /* -------------------------------------------- */
 
-  /** @override */
+  /** @inheritdoc */
+  async _onDropItem(event, data) {
+    if ( !this.actor.isOwner ) return false;
+    const item = await Item.implementation.fromDropData(data);
+
+    // Handle moving out of container & item sorting
+    if ( this.actor.uuid === item.parent?.uuid ) {
+      if ( item.system.container !== null ) await item.update({"system.container": null});
+      return this._onSortItem(event, item.toObject());
+    }
+
+    return this._onDropItemCreate(item);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
   async _onDropItemCreate(itemData) {
     let items = itemData instanceof Array ? itemData : [itemData];
     const itemsWithoutAdvancement = items.filter(i => !i.system.advancement?.length);
