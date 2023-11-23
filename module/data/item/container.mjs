@@ -117,8 +117,8 @@ export default class ContainerData extends SystemDataModel.mixin(
 
   /**
    * Fetch a specific contained item.
-   * @param {string} id  ID of the item to fetch.
-   * @returns {Item5e}   Item if found.
+   * @param {string} id                 ID of the item to fetch.
+   * @returns {Item5e|Promise<Item5e>}  Item if found.
    */
   getContainedItem(id) {
     if ( this.parent?.isEmbedded ) return this.parent.actor.items.get(id);

@@ -130,7 +130,7 @@ export default class PhysicalItemTemplate extends SystemDataModel {
    * @param {object} [options={}]
    * @param {object} [options.rendering]        Additional rendering options.
    * @param {string} [options.formerContainer]  UUID of the former container if this item was moved.
-   * @private
+   * @protected
    */
   async _renderContainers({ formerContainer, ...rendering }={}) {
     // Render this item's container & any containers it is within
@@ -140,11 +140,7 @@ export default class PhysicalItemTemplate extends SystemDataModel {
     // Render the actor sheet, compendium, or sidebar
     if ( this.parent.isEmbedded ) this.parent.actor.sheet?.render(false, rendering);
     else if ( this.parent.pack ) game.packs.get(this.parent.pack).apps.forEach(a => a.render(false, rendering));
-    else {
-      const itemSidebar = ui.sidebar.tabs.items;
-      itemSidebar.render(false, rendering);
-      itemSidebar._popout?.render(false, rendering);
-    }
+    else ui.sidebar.tabs.items.render(false, rendering);
 
     // Render former container if it was moved between containers
     if ( formerContainer ) {

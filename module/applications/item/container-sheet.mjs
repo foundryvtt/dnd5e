@@ -74,10 +74,12 @@ export default class ContainerSheet extends ItemSheet5e {
   activateListeners(html) {
     super.activateListeners(html);
 
-    if ( !this.item.isEmbedded || !this.item.actor.isOwner ) html.find(".rollable").each((i, el) => {
-      el.find('[data-action="use"]')?.[0].classList.remove("item-action");
-      el.classList.remove("rollable");
-    });
+    if ( !this.item.isEmbedded || !this.item.actor.isOwner || this.item.actor.pack ) {
+      html[0].querySelectorAll(".rollable").forEach(el => {
+        el.querySelector('[data-action="use"]')?.classList.remove("item-action");
+        el.classList.remove("rollable");
+      });
+    }
 
     html.find(".item-action").click(this._onItemAction.bind(this));
   }
@@ -90,8 +92,8 @@ export default class ContainerSheet extends ItemSheet5e {
       event.preventDefault();
       const itemId = event.target.closest("[data-item-id]")?.dataset.itemId;
       const item = await this.item.system.getContainedItem(itemId);
-      if ( !item || Number.isNaN(event.target.valueAsNumber) ) return;
-      const quantity = Math.max(0, parseInt(event.target.value || 0));
+      const quantity = Math.max(0, event.target.valueAsNumber);
+      if ( !item || Number.isNaN(quantity) ) return;
       event.target.value = quantity;
       return item.update({"system.quantity": quantity});
     }
@@ -102,7 +104,7 @@ export default class ContainerSheet extends ItemSheet5e {
 
   /**
    * Handle interacting with backpack contents.
-   * @param {ClickEvent} event  The triggering click event.
+   * @param {PointerEvent} event  The triggering click event.
    * @returns {Promise}
    * @protected
    */
@@ -131,16 +133,8 @@ export default class ContainerSheet extends ItemSheet5e {
           this._expanded.add(item.id);
         }
       case "use":
-        return item.use(undefined, { event });
+        return item.use({}, { event });
     }
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritdoc */
-  async deleteDialog(options={}) {
-    // TODO: Display custom delete dialog when deleting a container with contents
-    return super.deleteDialog(options);
   }
 
   /* -------------------------------------------- */
@@ -195,7 +189,8 @@ export default class ContainerSheet extends ItemSheet5e {
     // Prevent dropping containers within themselves
     const parentContainers = await this.item.system.allContainers();
     if ( (this.item.uuid === item.uuid) || parentContainers.includes(item) ) {
-      return ui.notifications.error(game.i18n.localize("DND5E.ContainerRecursiveError"));
+      ui.notifications.error(game.i18n.localize("DND5E.ContainerRecursiveError"));
+      return;
     }
 
     // If item already exists in same DocumentCollection, just adjust its container property
