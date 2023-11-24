@@ -32,7 +32,11 @@
   "ownership": {
     "default": 0
   },
-  "flags": {},
+  "flags": {
+    "dnd5e": {
+      "type": "header"
+    }
+  },
   "_stats": {
     "systemId": "dnd5e",
     "systemVersion": "2.0.2",

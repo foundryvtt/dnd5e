@@ -572,7 +572,12 @@
   "ownership": {
     "default": 0
   },
-  "flags": {},
+  "flags": {
+    "dnd5e": {
+      "type": "special",
+      "append": 11
+    }
+  },
   "_stats": {
     "systemId": "dnd5e",
     "systemVersion": "2.0.2",
