@@ -961,20 +961,16 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
   /** @inheritdoc */
   async _onDropItemCreate(itemData) {
     let items = itemData instanceof Array ? itemData : [itemData];
-    const itemsWithoutAdvancement = items.filter(i => !i.system?.advancement?.length);
+    const itemsWithoutAdvancement = items.filter(i => !i.system.advancement?.length);
     const multipleAdvancements = (items.length - itemsWithoutAdvancement.length) > 1;
     if ( multipleAdvancements && !game.settings.get("dnd5e", "disableAdvancements") ) {
       ui.notifications.warn(game.i18n.format("DND5E.WarnCantAddMultipleAdvancements"));
       items = itemsWithoutAdvancement;
     }
 
-    // Create the owned items as normal
-    const created = [];
-    for ( const item of items ) created.concat(await item.createInContext(
-      {pack: this.actor.pack, parent: this.actor}, this._onDropSingleItem.bind(this)
-    ));
-
-    return created;
+    // Create the owned items & contents as normal
+    const toCreate = await Item5e.createWithContents(items, {transformation: this._onDropSingleItem.bind(this)});
+    return Item5e.createDocuments(toCreate, {pack: this.actor.pack, parent: this.actor, keepId: true});
   }
 
   /* -------------------------------------------- */

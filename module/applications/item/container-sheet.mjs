@@ -1,4 +1,4 @@
-import PhysicalItemTemplate from "../../data/item/templates/physical-item.mjs";
+import Item5e from "../../documents/item.mjs";
 import ItemSheet5e from "./item-sheet.mjs";
 
 export default class ContainerSheet extends ItemSheet5e {
@@ -199,8 +199,9 @@ export default class ContainerSheet extends ItemSheet5e {
       return item.update({"system.container": this.item.id});
     }
 
-    // Otherwise, create a new item in this context
-    return await item.createInContext({pack: this.item.pack, parent: this.item.actor, container: this.item});
+    // Otherwise, create a new item & contents in this context
+    const toCreate = await Item5e.createWithContents([item], {container: this.item});
+    return Item5e.createDocuments(toCreate, {pack: this.item.pack, parent: this.item.actor, keepId: true});
   }
 
   /* -------------------------------------------- */

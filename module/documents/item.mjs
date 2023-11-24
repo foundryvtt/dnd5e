@@ -2179,47 +2179,6 @@ export default class Item5e extends SystemDocumentMixin(Item) {
 
   /* -------------------------------------------- */
 
-  /**
-   * Copy this item into the provided context along with any contained items.
-   * @param {DocumentModificationContext} [context]  Context for the item's creation.
-   * @param {Item5e} [context.container]             Container in which to create the item.
-   * @param {Function} [transformation]              Method called on this item (but not contents) before creation.
-   * @returns {Item5e[]}                             Newly created items along with any contained items also created.
-   */
-  async createInContext(context, transformation) {
-    let container;
-    let depth = 0;
-    if ( context.container ) {
-      container = context.container;
-      delete context.container;
-      depth = 1 + (await container.system.allContainers()).length;
-      if ( depth > PhysicalItemTemplate.MAX_DEPTH ) {
-        ui.notifications.warn(game.i18n.format("DND5E.ContainerMaxDepth", { depth: PhysicalItemTemplate.MAX_DEPTH }));
-        return;
-      }
-    }
-
-    const createItem = async (item, container, depth) => {
-      const newItem = await Item.create(foundry.utils.mergeObject(
-        transformation && (depth === 0) ? await transformation(item.toObject()) : item.toObject(),
-        {"system.container": container?.id ?? null}
-      ), context);
-
-      const contents = await item.system.contents;
-      if ( contents && (depth < PhysicalItemTemplate.MAX_DEPTH) ) {
-        for ( const doc of contents ) await createItem(doc, newItem, depth + 1);
-      }
-
-      created.push(newItem);
-    };
-
-    const created = [];
-    await createItem(this, container, depth);
-    return created;
-  }
-
-  /* -------------------------------------------- */
-
   /** @inheritdoc */
   async deleteDialog(options={}) {
     // Display custom delete dialog when deleting a container with contents
@@ -2257,6 +2216,47 @@ export default class Item5e extends SystemDocumentMixin(Item) {
 
   /* -------------------------------------------- */
   /*  Factory Methods                             */
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare creation data for the provided items and any items contained within them. The data created by this method
+   * can be passed to `createDocuments` with `keepId` always set to true to maintain links to container contents.
+   * @param {Item5e[]} items                     Items to create.
+   * @param {object} [context={}]                Context for the item's creation.
+   * @param {Item5e} [context.container]         Container in which to create the item.
+   * @param {boolean} [context.keepId=false]     Should IDs be maintained?
+   * @param {Function} [context.transformation]  Method called on provided items (but not contents).
+   * @returns {object[]}                         Data for items to be created.
+   */
+  static async createWithContents(items, { container, keepId=false, transformation }={}) {
+    let depth = 0;
+    if ( container ) {
+      depth = 1 + (await container.system.allContainers()).length;
+      if ( depth > PhysicalItemTemplate.MAX_DEPTH ) {
+        ui.notifications.warn(game.i18n.format("DND5E.ContainerMaxDepth", { depth: PhysicalItemTemplate.MAX_DEPTH }));
+        return;
+      }
+    }
+
+    const createItemData = async (item, containerId, depth) => {
+      const newItemData = transformation && (depth === 0) ? await transformation(item.toObject()) : item.toObject();
+      if ( !newItemData ) return;
+      foundry.utils.mergeObject(newItemData, {"system.container": containerId} );
+      if ( !keepId ) newItemData._id = foundry.utils.randomID();
+
+      const contents = await item.system.contents;
+      if ( contents && (depth < PhysicalItemTemplate.MAX_DEPTH) ) {
+        for ( const doc of contents ) await createItemData(doc, newItemData._id, depth + 1);
+      }
+
+      created.push(newItemData);
+    };
+
+    const created = [];
+    for ( const item of items ) await createItemData(item, container?.id, depth);
+    return created;
+  }
+
   /* -------------------------------------------- */
 
   /**
