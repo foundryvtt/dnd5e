@@ -969,7 +969,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
     }
 
     // Create the owned items & contents as normal
-    const toCreate = await Item5e.createWithContents(items, {transformation: this._onDropSingleItem.bind(this)});
+    const toCreate = await Item5e.createWithContents(items, {transformFirst: this._onDropSingleItem.bind(this)});
     return Item5e.createDocuments(toCreate, {pack: this.actor.pack, parent: this.actor, keepId: true});
   }
 

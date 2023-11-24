@@ -18,7 +18,9 @@ export default class Items5e extends Items {
     const item = await pack.getDocument(id);
     const contents = await item.system.contents;
     if ( contents ) {
-      const toCreate = await Item5e.createWithContents(contents, {container: created});
+      const toCreate = await Item5e.createWithContents(contents, {
+        container: created, keepId: options.keepId, transformAll: item => this.fromCompendium(item, options)
+      });
       await Item5e.createDocuments(toCreate, {fromCompendium: true, keepId: true});
     }
 
