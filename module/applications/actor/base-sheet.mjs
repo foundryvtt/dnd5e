@@ -176,7 +176,10 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
     context.expandedData = {};
     for ( const id of this._expanded ) {
       const item = this.actor.items.get(id);
-      if ( item ) context.expandedData[id] = await item.getChatData({secrets: this.actor.isOwner});
+      if ( item ) {
+        context.expandedData[id] = await item.getChatData({secrets: this.actor.isOwner});
+        if ( context.itemContext[id] ) context.itemContext[id].expanded = context.expandedData[id];
+      }
     }
 
     // Biography HTML enrichment
@@ -620,9 +623,6 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
     // Item summaries
     html.find(".item .item-name.rollable h4").click(event => this._onItemSummary(event));
 
-    // View Item Sheets
-    html.find(".item-edit").click(this._onItemEdit.bind(this));
-
     // Property attributions
     html.find("[data-attribution]").mouseover(this._onPropertyAttribution.bind(this));
     html.find(".attributable").mouseover(this._onPropertyAttribution.bind(this));
@@ -654,9 +654,6 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
 
       // Owned Item management
       html.find(".item-create").click(this._onItemCreate.bind(this));
-      html.find(".item-delete").click(this._onItemDelete.bind(this));
-      html.find(".item-uses input").click(ev => ev.target.select()).change(this._onUsesChange.bind(this));
-      html.find(".item-quantity input").click(ev => ev.target.select()).change(this._onQuantityChange.bind(this));
       html.find(".slot-max-override").click(this._onSpellSlotOverride.bind(this));
       html.find(".attunement-max-override").click(this._onAttunementOverride.bind(this));
 
@@ -1203,53 +1200,6 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
     };
     delete itemData.system.type;
     return this.actor.createEmbeddedDocuments("Item", [itemData]);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Handle editing an existing Owned Item for the Actor.
-   * @param {Event} event    The originating click event.
-   * @returns {ItemSheet5e}  The rendered item sheet.
-   * @private
-   */
-  _onItemEdit(event) {
-    event.preventDefault();
-    const li = event.currentTarget.closest(".item");
-    const item = this.actor.items.get(li.dataset.itemId);
-    return item.sheet.render(true);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Handle deleting an existing Owned Item for the Actor.
-   * @param {Event} event  The originating click event.
-   * @returns {Promise<Item5e|AdvancementManager>|undefined}  The deleted item if something was deleted or the
-   *                                                          advancement manager if advancements need removing.
-   * @private
-   */
-  async _onItemDelete(event) {
-    event.preventDefault();
-    const li = event.currentTarget.closest(".item");
-    const item = this.actor.items.get(li.dataset.itemId);
-    if ( !item ) return;
-
-    // If item has advancement, handle it separately
-    if ( !game.settings.get("dnd5e", "disableAdvancements") ) {
-      const manager = AdvancementManager.forDeletedItem(this.actor, item.id);
-      if ( manager.steps.length ) {
-        try {
-          const shouldRemoveAdvancements = await AdvancementConfirmationDialog.forDelete(item);
-          if ( shouldRemoveAdvancements ) return manager.render(true);
-          return item.delete({ shouldRemoveAdvancements });
-        } catch(err) {
-          return;
-        }
-      }
-    }
-
-    return item.deleteDialog();
   }
 
   /* -------------------------------------------- */

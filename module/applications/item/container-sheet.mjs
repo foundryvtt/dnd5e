@@ -61,81 +61,17 @@ export default class ContainerSheet extends ItemSheet5e {
       ctx.isStack = item.system.quantity > 1;
       ctx.expanded = this._expanded.has(item.id) ? await item.getChatData({secrets: this.item.isOwner}) : null;
     }
+    context.isContainer = true;
+    context.inventory = {
+      contents: {
+        label: "DND5E.Contents",
+        items: context.items
+      }
+    };
 
     context.items = context.items.sort((a, b) => (a.sort || 0) - (b.sort || 0));
 
     return context;
-  }
-
-  /* -------------------------------------------- */
-  /*  Event Handlers                              */
-  /* -------------------------------------------- */
-
-  /** @inheritdoc */
-  activateListeners(html) {
-    super.activateListeners(html);
-
-    if ( !this.item.isEmbedded || !this.item.actor.isOwner || this.item.actor.pack ) {
-      html[0].querySelectorAll(".rollable").forEach(el => {
-        el.querySelector('[data-action="use"]')?.classList.remove("item-action");
-        el.classList.remove("rollable");
-      });
-    }
-
-    html.find(".item-action").click(this._onItemAction.bind(this));
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritdoc */
-  async _onChangeInput(event) {
-    if ( event.target.dataset.name === "system.quantity" ) {
-      event.preventDefault();
-      const itemId = event.target.closest("[data-item-id]")?.dataset.itemId;
-      const item = await this.item.system.getContainedItem(itemId);
-      const quantity = Math.max(0, event.target.valueAsNumber);
-      if ( !item || Number.isNaN(quantity) ) return;
-      event.target.value = quantity;
-      return item.update({"system.quantity": quantity});
-    }
-    return super._onChangeInput(event);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Handle interacting with backpack contents.
-   * @param {PointerEvent} event  The triggering click event.
-   * @returns {Promise}
-   * @protected
-   */
-  async _onItemAction(event) {
-    const action = event.currentTarget.dataset.action;
-    const li = event.currentTarget.closest(".item");
-    const itemId = li.dataset.itemId;
-    const item = await this.item.system.getContainedItem(itemId);
-    if ( !item ) return;
-    switch ( action ) {
-      case "delete":
-        return item.deleteDialog();
-      case "edit":
-        return item.sheet.render(true);
-      case "expand":
-        if ( this._expanded.has(itemId) ) {
-          const summary = $(li.querySelector(".item-summary"));
-          summary.slideUp(200, () => summary.remove());
-          this._expanded.delete(item.id);
-        } else {
-          const chatData = await item.getChatData({secrets: this.item.actor?.isOwner ?? false});
-          const summary = $(await renderTemplate("systems/dnd5e/templates/items/parts/item-summary.hbs", chatData));
-          $(li).append(summary.hide());
-          summary.slideDown(200);
-          this._expanded.add(item.id);
-        }
-        return;
-      case "use":
-        return item.use({}, { event });
-    }
   }
 
   /* -------------------------------------------- */

@@ -1,0 +1,198 @@
+<dnd5e-inventory>
+  <div class="inventory-header flexrow">
+    {{#unless isNPC}}
+      <ol class="currency flexrow">
+        {{#unless isContainer}}
+          <h3>
+            {{localize "DND5E.Currency"}}
+            <a class="action-button currency-convert {{rollableClass}}" data-action="convertCurrency"
+               data-tooltip="DND5E.CurrencyConvert">
+              <i class="fas fa-coins"></i>
+            </a>
+          </h3>
+        {{/unless}}
+        {{#each system.currency as |v k|}}
+          <label class="denomination {{k}}">{{lookup (lookup @root.config.currencies k) "label"}}</label>
+          <input type="text" name="system.currency.{{k}}" value="{{v}}" data-dtype="Number">
+        {{/each}}
+      </ol>
+    {{/unless}}
+    {{#if isCharacter}}
+      <div class="attunement">
+        <label>{{localize "DND5E.Attunement"}}</label>
+        <span class="attunement-value">{{system.attributes.attunement.value}}</span>
+        <span class="sep"> / </span>
+        <span class="attunement-max" {{#if overrides.attunement}}data-tooltip="DND5E.ActiveEffectOverrideWarning"{{/if}}>
+          {{system.attributes.attunement.max}}
+          {{#unless (or overrides.attunement (not editable))}}
+            <a class="attunement-max-override" data-tooltip="DND5E.AttunementOverride">
+              <i class="fa-solid fa-edit"></i>
+            </a>
+          {{/unless}}
+        </span>
+      </div>
+    {{/if}}
+
+    {{#if inventoryFilters}}
+      <ul class="filter-list flexrow" data-filter="inventory">
+        <li class="filter-item" data-filter="action">{{localize "DND5E.Action"}}</li>
+        <li class="filter-item" data-filter="bonus">{{localize "DND5E.BonusAction"}}</li>
+        <li class="filter-item" data-filter="reaction">{{localize "DND5E.Reaction"}}</li>
+        <li class="filter-item" data-filter="equipped">{{localize "DND5E.Equipped"}}</li>
+      </ul>
+    {{/if}}
+  </div>
+
+  <ol class="items-list inventory-list">
+    {{#each sections as |section sid|}}
+      <li class="items-header flexrow">
+        <h3 class="item-name flexrow">{{localize section.label}}</h3>
+
+        {{#if section.columns}}
+          {{#each section.columns}}
+            <div class="item-detail {{css}}">{{label}}</div>
+          {{/each}}
+        {{else}}
+          {{#if (or @root.isCharacter @root.isContainer)}}
+            <div class="item-detail item-weight">{{localize "DND5E.Weight"}}</div>
+          {{/if}}
+          <div class="item-detail item-quantity">{{localize "DND5E.QuantityAbbr"}}</div>
+          {{#unless @root.isContainer}}
+            <div class="item-detail item-uses">{{localize "DND5E.Charges"}}</div>
+            <div class="item-detail item-action">{{localize "DND5E.Usage"}}</div>
+          {{/unless}}
+        {{/if}}
+
+        {{#if @root.owner}}
+          <div class="item-controls flexrow">
+            {{#if section.dataset}}
+              <a class="item-control item-create" data-action="itemCreate" data-tooltip="DND5E.ItemCreate"
+                 {{#each section.dataset as |v k|}}data-{{k}}="{{v}}"{{/each}}>
+                <i class="fas fa-plus"></i> {{localize "DND5E.Add"}}
+              </a>
+            {{/if}}
+          </div>
+        {{/if}}
+      </li>
+
+    <ol class="item-list">
+      {{#each section.items as |item iid|}}
+      {{#dnd5e-itemContext item as |ctx|}}
+        <li class="item flexrow {{section.css}}" data-item-id="{{item.id}}"
+            {{#if section.editableName}}data-item-index="{{iid}}"{{/if}}>
+          <div class="item-name flexrow {{@root.rollableClass}}">
+            {{#if section.editableName}}
+              <input type="text" value="{{item.name}}">
+            {{else}}
+              <div class="item-image item-action" data-action="use" tabindex="0" role="button"
+                aria-label="{{item.name}}" style="background-image: url('{{item.img}}')"></div>
+              <h4 class="item-action" data-action="expand">
+                {{item.name~}}
+                {{~#if ctx.isStack}} ({{item.system.quantity}}){{/if}}
+              </h4>
+              {{#if ctx.attunement}}
+                <div class="item-detail attunement">
+                  <i class="fas {{ctx.attunement.icon}} {{ctx.attunement.cls}}"
+                     data-tooltip="{{ctx.attunement.title}}"></i>
+                </div>
+              {{/if}}
+            {{/if}}
+          </div>
+
+          {{#if section.columns}}
+            {{#each section.columns}}
+              <div class="item-detail {{css}}">
+                {{#if editable}}
+                  <input type="text" data-dtype="{{editable}}" data-property="{{property}}"
+                         value="{{#if (getProperty item property)}}{{getProperty item property}}
+                         {{~else}}{{getProperty ctx property}}{{/if}}" placeholder="&mdash;">
+                {{else}}
+                  {{#if (getProperty item property)}}
+                    {{getProperty item property}}
+                  {{else}}
+                    {{getProperty ctx property}}
+                  {{/if}}
+                {{/if}}
+              </div>
+            {{/each}}
+          {{else}}
+            {{#if (or @root.isCharacter @root.isContainer)}}
+              <div class="item-detail item-weight">
+                {{#if ctx.totalWeight}}
+                  <div class="item-detail">
+                    {{ ctx.totalWeight }} {{ @root.weightUnit }}
+                  </div>
+                {{/if}}
+              </div>
+            {{/if}}
+
+            <div class="item-detail item-quantity">
+              <input type="number" value="{{item.system.quantity}}" min="0" placeholder="0" data-dtype="Number"
+                     data-name="system.quantity">
+            </div>
+
+            {{#unless @root.isContainer}}
+              <div class="item-detail item-uses">
+                {{#if ctx.hasUses}}
+                  <input type="number" value="{{item.system.uses.value}}" min="0" max="{{item.system.uses.max}}"
+                         placeholder="0" data-dtype="Number" data-name="system.uses.value">
+                  / {{item.system.uses.max}}
+                {{/if}}
+              </div>
+
+              <div class="item-detail item-action">
+                {{#if item.system.activation.type}}
+                  {{item.labels.activation}}
+                {{/if}}
+              </div>
+            {{/unless}}
+          {{/if}}
+
+          {{#if @root.owner}}
+            <div class="item-controls flexrow">
+              {{#if ctx.canToggle}}
+                <a class="item-control item-action {{ctx.toggleClass}}" data-action="toggle"
+                   data-tooltip="{{ctx.toggleTitle}}">
+                  <i class="fas fa-shield-alt"></i>
+                </a>
+              {{/if}}
+              {{#unless section.editableName}}
+                <a class="item-control item-action" data-action="edit" data-tooltip="DND5E.ItemEdit">
+                  <i class="fas fa-edit"></i>
+                </a>
+              {{/unless}}
+              <a class="item-control item-action" data-action="delete" data-tooltip="DND5E.ItemDelete">
+                <i class="fas fa-trash"></i>
+              </a>
+            </div>
+          {{/if}}
+
+          {{#if ctx.expanded}}
+            {{> "dnd5e.item-summary" ctx.expanded}}
+          {{/if}}
+        </li>
+      {{/dnd5e-itemContext}}
+      {{/each}}
+    </ol>
+  {{/each}}
+  </ol>
+
+  {{#with capacity}}
+    <div class="capacity" role="meter" aria-label="{{localize 'DND5E.ItemContainerCapacity'}}"
+         aria-value="{{capacity.pct}}" aria-valuetext="{{capacity.value}} {{capacity.units}}"
+         aria-valuemin="0" aria-valuemax="{{capacity.max}}" style="--percentage: {{capacity.pct}}%">
+    </div>
+  {{/with}}
+  {{#with encumbrance}}
+    <div class="encumbrance {{~#if encumbered}} encumbered{{/if}}" role="meter"
+         aria-label="{{localize 'DND5E.DND5E.Encumbrance'}}" aria-value="{{pct}}"
+         aria-valuetext="{{value}} {{@root.weightUnit}}" aria-valuemin="0"
+         aria-valuemax="{{max}}" style="--percentage: {{pct}}%">
+      <label>{{value}} / {{max}}</label>
+      <i class="breakpoint encumbrance-33 arrow-up" role="presentation"></i>
+      <i class="breakpoint encumbrance-33 arrow-down" role="presentation"></i>
+      <i class="breakpoint encumbrance-66 arrow-up" role="presentation"></i>
+      <i class="breakpoint encumbrance-66 arrow-down" role="presentation"></i>
+    </div>
+  {{/with}}
+</dnd5e-inventory>

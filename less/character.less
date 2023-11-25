@@ -132,11 +132,10 @@
   /*  Item Controls                            */
   /* ----------------------------------------- */
 
-  .inventory,
   .spellbook {
     .item-controls {
       flex: 0 0 68px;
-      .item-toggle {
+      .item-toggle, [data-action="toggle"] {
         color: var(--dnd5e-color-beige);
         &.active {
           color: var(--dnd5e-color-olive);

@@ -199,4 +199,4 @@ export const ActorSheetMixin = Base => class extends Base {
       "system.quantity": similarItem.system.quantity + Math.max(itemData.system.quantity, 1)
     });
   }
-}
+};

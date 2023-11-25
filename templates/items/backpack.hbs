@@ -39,74 +39,7 @@
 
     {{!-- Contents Tab --}}
     <div class="tab inventory flexcol" data-group="primary" data-tab="contents">
-      <div class="inventory-header flexrow">
-        <div class="currency flexrow">
-          {{#each system.currency as |v k|}}
-            <label class="denomination {{k}}">{{lookup (lookup @root.config.currencies k) "label"}}</label>
-            {{numberInput v name=(concat "system.currency." k)}}
-          {{/each}}
-        </div>
-      </div>
-      <ol class="items-list inventory-list">
-        <li class="items-header flexrow">
-          <h3 class="item-name flexrow">{{localize "DND5E.Contents"}}</h3>
-
-          <div class="item-detail item-weight">{{localize "DND5E.Weight"}}</div>
-          <div class="item-detail item-quantity">{{localize "DND5E.QuantityAbbr"}}</div>
-
-          {{#if @root.editable}}
-            <div class="item-controls flexrow"></div>
-          {{/if}}
-        </li>
-
-        {{#each items as |item|}}
-        {{#dnd5e-itemContext this as |ctx|}}
-          <li class="item flexrow {{#if ctx.isExpanded}}expanded{{/if}}" data-item-id="{{item.id}}">
-            <div class="item-name flexrow rollable">
-              <div class="item-image item-action" data-action="use" style="background-image: url('{{item.img}}')"></div>
-              <h4 class="item-action" data-action="expand">{{item.name}}</h4>
-              {{#if item.attunement}}
-                <div class="item-detail attunement">
-                  <i class="fas {{item.attunement.icon}} {{item.attunement.cls}}"
-                    title="{{localize item.attunement.title}}"></i>
-                </div>
-              {{/if}}
-            </div>
-
-            <div class="item-detail item-weight">
-              <div class="item-detail">
-                {{ctx.totalWeight}} {{@root.weightUnit}}
-              </div>
-            </div>
-
-            <div class="item-detail item-quantity">
-                <input type="number" value="{{item.system.quantity}}" min="0" step="1" placeholder="0"
-                  data-name="system.quantity">
-            </div>
-
-            {{#if @root.editable}}
-              <div class="item-controls flexrow">
-                <a class="item-control item-action" data-action="edit" title="{{localize 'DND5E.ItemEdit'}}">
-                  <i class="fas fa-edit"></i>
-                </a>
-                <a class="item-control item-action" data-action="delete" title="{{localize 'DND5E.ItemDelete'}}">
-                  <i class="fas fa-trash"></i>
-                </a>
-              </div>
-            {{/if}}
-
-            {{#if ctx.expanded}}
-              {{> "dnd5e.item-summary" ctx.expanded}}
-            {{/if}}
-          </li>
-        {{/dnd5e-itemContext}}
-        {{/each}}
-      </ol>
-
-      <div class="capacity" role="meter" aria-label="{{localize 'DND5E.ItemContainerCapacity'}}"
-           aria-value="{{capacity.pct}}" aria-valuetext="{{capacity.value}} {{capacity.units}}"
-           aria-valuemin="0" aria-valuemax="{{capacity.max}}" style="--percentage: {{capacity.pct}}%">
-      </div>
+      {{> "dnd5e.inventory" sections=inventory}}
     </div>
 
     {{!-- Description Tab --}}

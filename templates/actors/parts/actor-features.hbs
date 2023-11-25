@@ -1,15 +1,16 @@
-{{#unless isVehicle}}
-<div class="inventory-filters flexrow">
+<dnd5e-inventory>
+  {{#unless isVehicle}}
+  <div class="inventory-filters inventory-header flexrow">
     <ul class="filter-list flexrow" data-filter="features">
         <li class="filter-item" data-filter="action">{{localize "DND5E.Action"}}</li>
         <li class="filter-item" data-filter="bonus">{{localize "DND5E.BonusAction"}}</li>
         <li class="filter-item" data-filter="reaction">{{localize "DND5E.Reaction"}}</li>
     </ul>
-</div>
-{{/unless}}
+  </div>
+  {{/unless}}
 
-<ol class="items-list inventory-list">
-{{#each sections as |section sid|}}
+  <ol class="items-list inventory-list">
+  {{#each sections as |section sid|}}
     <li class="items-header flexrow">
         <h3 class="item-name flexrow">{{localize section.label}}</h3>
 
@@ -40,8 +41,8 @@
         <li class="item flexrow {{#if ctx.isDepleted}}depleted{{/if}} {{#if ctx.isExpanded}}expanded{{/if}}"
             data-item-id="{{item.id}}">
             <div class="item-name flexrow rollable">
-                <div class="item-image" tabindex="0" role="button" aria-label="{{item.name}}" style="background-image: url('{{item.img}}')"></div>
-                <h4>
+                <div class="item-image item-action" data-action="use" tabindex="0" role="button" aria-label="{{item.name}}" style="background-image: url('{{item.img}}')"></div>
+                <h4 class="item-action" data-action="expand">
                     {{#if (eq item.type "subclass")}}&rdsh;{{/if}}
                     {{item.name}}
                     {{#if item.system.isOriginalClass}}
@@ -103,14 +104,15 @@
             {{#if @root.owner}}
             <div class="item-controls flexrow">
                 {{#if section.crewable}}
-                <a class="item-control item-toggle {{ctx.toggleClass}}" data-tooltip="{{ctx.toggleTitle}}">
+                <a class="item-control item-action {{ctx.toggleClass}}" data-action="toggle"
+                   data-tooltip="{{ctx.toggleTitle}}">
                     <i class="fas fa-sun"></i>
                 </a>
                 {{/if}}
-                <a class="item-control item-edit" data-tooltip="DND5E.ItemEdit">
+                <a class="item-control item-action" data-action="edit" data-tooltip="DND5E.ItemEdit">
                     <i class="fas fa-edit"></i>
                 </a>
-                <a class="item-control item-delete" data-tooltip="DND5E.ItemDelete">
+                <a class="item-control item-action" data-action="delete" data-tooltip="DND5E.ItemDelete">
                     <i class="fas fa-trash"></i>
                 </a>
             </div>
@@ -123,5 +125,6 @@
     {{/dnd5e-itemContext}}
     {{/each}}
     </ol>
-{{/each}}
-</ol>
+  {{/each}}
+  </ol>
+</dnd5e-inventory>
