@@ -133,3 +133,12 @@
     {{/if}}
 {{/each}}
 </ol>
+
+{{#unless isNPC}}
+{{#with spellPoints}}
+<div class="spell-points">
+    <span class="spell bar" style="width:{{pct}}%"></span>
+    <span class="label">{{value}} / {{max}}</span>
+</div>
+{{/with}}
+{{/unless}}

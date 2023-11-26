@@ -100,7 +100,7 @@ export default class CreatureTemplate extends CommonTemplate {
    */
   static get _spellLevels() {
     const levels = Object.keys(CONFIG.DND5E.spellLevels).filter(a => a !== "0").map(l => `spell${l}`);
-    return [...levels, "pact"];
+    return [...levels, "pact", "points"];
   }
 
   /* -------------------------------------------- */

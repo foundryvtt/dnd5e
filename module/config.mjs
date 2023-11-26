@@ -1225,6 +1225,56 @@ DND5E.SPELL_SLOT_TABLE = [
 /* -------------------------------------------- */
 
 /**
+ * Define the standard amount of spell points by character level for a full spell-caster,
+ * and the maximum level of a spell they are able to cast.
+ * @typedef {object} SpellPointProgressionConfig
+ * @property {number} points      The amount of spell points.
+ * @property {number} max         The maximum spell level.
+ */
+DND5E.spellPointsProgression = {
+  1: {points: 4, max: 1},
+  2: {points: 6, max: 1},
+  3: {points: 14, max: 2},
+  4: {points: 17, max: 2},
+  5: {points: 27, max: 3},
+  6: {points: 32, max: 3},
+  7: {points: 38, max: 4},
+  8: {points: 44, max: 4},
+  9: {points: 57, max: 5},
+  10: {points: 64, max: 5},
+  11: {points: 73, max: 6},
+  12: {points: 73, max: 6},
+  13: {points: 83, max: 7},
+  14: {points: 83, max: 7},
+  15: {points: 94, max: 8},
+  16: {points: 94, max: 8},
+  17: {points: 107, max: 9},
+  18: {points: 114, max: 9},
+  19: {points: 123, max: 9},
+  20: {points: 133, max: 9}
+};
+
+/* -------------------------------------------- */
+
+/**
+ * Define the spell point cost of a spell by spell level.
+ * @enum {number}
+ */
+DND5E.spellPointCost = {
+  1: 2,
+  2: 3,
+  3: 5,
+  4: 6,
+  5: 7,
+  6: 9,
+  7: 10,
+  8: 11,
+  9: 13
+};
+
+/* -------------------------------------------- */
+
+/**
  * Configuration data for pact casting progression.
  *
  * @typedef {object} PactProgressionConfig
@@ -2005,6 +2055,12 @@ DND5E.characterFlags = {
     name: "DND5E.FlagsRemarkableAthlete",
     hint: "DND5E.FlagsRemarkableAthleteHint",
     abilities: ["str", "dex", "con"],
+    section: "DND5E.Feats",
+    type: Boolean
+  },
+  spellPoints: {
+    name: "DND5E.FlagsSpellPoints",
+    hint: "DND5E.FlagsSpellPointsHint",
     section: "DND5E.Feats",
     type: Boolean
   },

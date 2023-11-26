@@ -34,6 +34,16 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
       return arr.concat([res]);
     }, []);
 
+    // Spell points.
+    if ( this.actor.flags.dnd5e?.spellPoints ) {
+      const pts = this.actor.system.spells.points;
+      context.spellPoints = {
+        value: pts.value,
+        max: pts.max,
+        pct: Math.clamped(parseInt(pts.value / pts.max * 100), 0, 100)
+      };
+    }
+
     const classes = this.actor.itemTypes.class;
     return foundry.utils.mergeObject(context, {
       disableExperience: game.settings.get("dnd5e", "disableExperienceTracking"),
