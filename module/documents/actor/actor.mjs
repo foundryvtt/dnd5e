@@ -792,7 +792,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const points = CONFIG.DND5E.spellPointsProgression[levels] ?? {};
     const slots = CONFIG.DND5E.SPELL_SLOT_TABLE[Math.min(levels, CONFIG.DND5E.SPELL_SLOT_TABLE.length) - 1] ?? [];
     const slot = spells.points ??= { value: 0 };
-    slot.max = Number.isNumeric(slot.override) ? Math.max(parseInt(slot.override), 0) : points.points ?? 0;
+    const fallback = usePoints ? (points.points ?? 0) : 0;
+    slot.max = Number.isNumeric(slot.override) ? Math.max(parseInt(slot.override), 0) : fallback;
     for ( const level of Array.fromRange(Object.keys(CONFIG.DND5E.spellLevels).length - 1, 1) ) {
       const slot = spells[`spell${level}`] ??= { value: 0 };
       const fallback = usePoints ? 0 : (slots[level - 1] ?? 0);

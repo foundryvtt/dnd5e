@@ -35,8 +35,8 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
     }, []);
 
     // Spell points.
-    if ( this.actor.flags.dnd5e?.spellPoints ) {
-      const pts = this.actor.system.spells.points;
+    const pts = this.actor.system.spells.points;
+    if ( pts.max > 0 ) {
       context.spellPoints = {
         value: pts.value,
         max: pts.max,
