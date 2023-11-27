@@ -64,9 +64,6 @@ Hooks.once("init", function() {
   CONFIG.ui.combat = applications.combat.CombatTracker5e;
   CONFIG.ui.items = dnd5e.applications.item.ItemDirectory5e;
 
-  // Patch CompendiumCollection to support containers
-  dataModels.collection.patchCompendiumCollection();
-
   // Register System Settings
   registerSystemSettings();
 
