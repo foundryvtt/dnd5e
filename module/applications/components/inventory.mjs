@@ -1,4 +1,5 @@
 import AdvancementManager from "../advancement/advancement-manager.mjs";
+import AdvancementConfirmationDialog from "../advancement/advancement-confirmation-dialog.mjs";
 
 /**
  * Custom element that handles displaying actor & container inventories.
@@ -6,6 +7,8 @@ import AdvancementManager from "../advancement/advancement-manager.mjs";
 export default class InventoryElement extends HTMLElement {
   connectedCallback() {
     this.#app = ui.windows[this.closest(".app")?.dataset.appid];
+
+    this.#initializeFilterLists();
 
     if ( !this.canUse ) {
       for ( const element of this.querySelectorAll('[data-action="use"]') ) {
@@ -19,7 +22,42 @@ export default class InventoryElement extends HTMLElement {
     }
 
     for ( const control of this.querySelectorAll(".item-action[data-action]") ) {
-      control.addEventListener("click", this.#onItemAction.bind(this));
+      control.addEventListener("click", event => {
+        this.#onAction(event.currentTarget, event.currentTarget.dataset.action);
+      });
+    }
+
+    new ContextMenu(this, "[data-item-id]", [], {onOpen: async element => {
+      const item = this.getItem(element.dataset.itemId);
+      // Parts of ContextMenu doesn't play well with promises, so don't show menus for containers in packs
+      if ( !item || (item instanceof Promise) ) return;
+      ui.context.menuItems = this.#getContextOptions(item);
+      Hooks.call("dnd5e.getItemContextOptions", item, ui.context.menuItems);
+    }});
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare filter lists an attach their listeners.
+   */
+  #initializeFilterLists() {
+    const filterLists = this.querySelectorAll(".filter-list");
+    if ( !this.#app._filters || !filterLists.length ) return;
+
+    // Activate the set of filters which are currently applied
+    for ( const list of filterLists ) {
+      const set = this.#app._filters[list.dataset.filter];
+      const filters = list.querySelectorAll(".filter-item");
+      for ( const filter of filters ) {
+        if ( set.has(filter.dataset.filter) ) filter.classList.add("active");
+        filter.addEventListener("click", event => {
+          const f = filter.dataset.filter;
+          if ( set.has(f) ) set.delete(f);
+          else set.add(f);
+          return this.#app.render();
+        });
+      }
     }
   }
 
@@ -71,15 +109,77 @@ export default class InventoryElement extends HTMLElement {
   /**
    * Retrieve an item with the specified ID.
    * @param {string} id
-   * @returns {Promise<Item5e>}
+   * @returns {Item5e|Promise<Item5e>}
    */
-  async getItem(id) {
+  getItem(id) {
     if ( this.document.type === "backpack" ) return this.document.system.getContainedItem(id);
     return this.document.items.get(id);
   }
 
   /* -------------------------------------------- */
   /*  Event Handlers                              */
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare an array of context menu options which are available for inventory items.
+   * @param {Item5e} item           The Item for which the context menu is activated.
+   * @returns {ContextMenuEntry[]}  An array of context menu options offered for the Item.
+   */
+  #getContextOptions(item) {
+    // Standard Options
+    const options = [
+      {
+        name: "DND5E.ContextMenuActionEdit",
+        icon: "<i class='fas fa-edit fa-fw'></i>",
+        condition: () => item.isOwner,
+        callback: li => this.#onAction(li[0], "edit")
+      },
+      {
+        name: "DND5E.ContextMenuActionDuplicate",
+        icon: "<i class='fas fa-copy fa-fw'></i>",
+        condition: () => !item.system.metadata?.singleton && !["class", "subclass"].includes(item.type) && item.isOwner,
+        callback: li => this.#onAction(li[0], "duplicate")
+      },
+      {
+        name: "DND5E.ContextMenuActionDelete",
+        icon: "<i class='fas fa-trash fa-fw'></i>",
+        condition: () => item.isOwner,
+        callback: li => this.#onAction(li[0], "delete")
+      }
+    ];
+
+    if ( !this.actor || (this.actor.type === "group") ) return options;
+
+    // Toggle Attunement State
+    if ( ("attunement" in item.system) && (item.system.attunement !== CONFIG.DND5E.attunementTypes.NONE) ) {
+      const isAttuned = item.system.attunement === CONFIG.DND5E.attunementTypes.ATTUNED;
+      options.push({
+        name: isAttuned ? "DND5E.ContextMenuActionUnattune" : "DND5E.ContextMenuActionAttune",
+        icon: "<i class='fas fa-sun fa-fw'></i>",
+        condition: () => item.isOwner,
+        callback: li => this.#onAction(li[0], "attune")
+      });
+    }
+
+    // Toggle Equipped State
+    if ( "equipped" in item.system ) options.push({
+      name: item.system.equipped ? "DND5E.ContextMenuActionUnequip" : "DND5E.ContextMenuActionEquip",
+      icon: "<i class='fas fa-shield-alt fa-fw'></i>",
+      condition: () => item.isOwner,
+      callback: li => this.#onAction(li[0], "equip")
+    });
+
+    // Toggle Prepared State
+    else if ( ("preparation" in item.system) && (item.system.preparation?.mode === "prepared") ) options.push({
+      name: item.system?.preparation?.prepared ? "DND5E.ContextMenuActionUnprepare" : "DND5E.ContextMenuActionPrepare",
+      icon: "<i class='fas fa-sun fa-fw'></i>",
+      condition: () => item.isOwner,
+      callback: li => this.#onAction(li[0], "prepare")
+    });
+
+    return options;
+  }
+
   /* -------------------------------------------- */
 
   /**
@@ -106,21 +206,53 @@ export default class InventoryElement extends HTMLElement {
 
   /**
    * Handle item actions.
-   * @param {PointerEvent} event  Triggering click event.
+   * @param {Element} target  Button or context menu entry that triggered this action.
+   * @param {string} action   Action being triggered.
    * @returns {Promise}
    */
-  async #onItemAction(event) {
-    event.stopImmediatePropagation();
-    const action = event.currentTarget.dataset.action;
-    const li = event.target.closest(".item");
-    const itemId = li.dataset.itemId;
+  async #onAction(target, action) {
+    const event = new CustomEvent("inventory", {
+      bubbles: true,
+      cancelable: true,
+      detail: action
+    });
+    if ( target.dispatchEvent(event) === false ) return;
+
+    const li = target.closest("[data-item-id]");
+    const itemId = li?.dataset.itemId;
     const item = await this.getItem(itemId);
-    if ( !item ) return;
+    if ( (action !== "create") && !item ) return;
 
     switch ( action ) {
+      case "attune":
+        return item.update({
+          "system.attunement": CONFIG.DND5E.attunementTypes[isAttuned ? "REQUIRED" : "ATTUNED"]
+        });
+      case "create":
+        if ( this.document.type === "backpack" ) return;
+        const dataset = (target.closest(".spellbook-header") ?? target).dataset;
+        const type = dataset.type;
+
+        // Check to make sure the newly created class doesn't take player over level cap
+        if ( type === "class" && (this.actor.system.details.level + 1 > CONFIG.DND5E.maxLevel) ) {
+          const err = game.i18n.format("DND5E.MaxCharacterLevelExceededWarn", {max: CONFIG.DND5E.maxLevel});
+          ui.notifications.error(err);
+          return null;
+        }
+
+        const itemData = {
+          name: game.i18n.format("DND5E.ItemNew", {type: game.i18n.localize(CONFIG.Item.typeLabels[type])}),
+          type,
+          system: foundry.utils.expandObject({ ...dataset })
+        };
+        delete itemData.system.type;
+        return this.actor.createEmbeddedDocuments("Item", [itemData]);
+      case "crew":
+        return item.update({"system.crewed": !item.system.crewed});
       case "delete":
         // If item has advancement, handle it separately
-        if ( (this.document instanceof Actor) && !game.settings.get("dnd5e", "disableAdvancements") ) {
+        if ( (this.document instanceof Actor) && (this.actor.type !== "group")
+          && !game.settings.get("dnd5e", "disableAdvancements") ) {
           const manager = AdvancementManager.forDeletedItem(this.actor, item.id);
           if ( manager.steps.length ) {
             try {
@@ -133,8 +265,12 @@ export default class InventoryElement extends HTMLElement {
           }
         }
         return item.deleteDialog();
+      case "duplicate":
+        return item.clone({name: game.i18n.format("DOCUMENT.CopyOf", {name: item.name})}, {save: true});
       case "edit":
         return item.sheet.render(true);
+      case "equip":
+        return item.update({"system.equipped": !item.system.equipped});
       case "expand":
         if ( this.#app._expanded.has(itemId) ) {
           const summary = $(li.querySelector(".item-summary"));
@@ -148,13 +284,12 @@ export default class InventoryElement extends HTMLElement {
           this.#app._expanded.add(item.id);
         }
         return;
-      case "toggle":
-        const attr = item.type === "spell" ? "system.preparation.prepared" : "system.equipped";
-        return item.update({[attr]: !foundry.utils.getProperty(item, attr)});
+      case "prepare":
+        return item.update({"system.preparation.prepared": !item.system.preparation?.prepared});
+      case "recharge":
+        return item.rollRecharge();
       case "use":
         return item.use({}, { event });
     }
   }
-  
-  
 }

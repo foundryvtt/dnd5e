@@ -115,7 +115,7 @@ dnd5e-inventory {
     .item-controls {
       flex: 0 0 68px;
 
-      [data-action="toggle"] {
+      [data-action="crew"], [data-action="equip"], [data-action="prepare"] {
         color: var(--dnd5e-color-beige);
         &.active { color: var(--dnd5e-color-olive); }
         &.fixed { color: var(--dnd5e-color-crimson); }
@@ -148,6 +148,7 @@ dnd5e-inventory {
       position: absolute;
       inset: 0;
       inline-size: var(--percentage);
+      max-inline-size: calc(100% - 4px);
       margin: 1px;
       border: 1px solid var(--dnd5e-capacity-border-color);
       border-radius: 2px;
@@ -164,6 +165,7 @@ dnd5e-inventory {
       font-size: var(--font-size-13);
       text-shadow: 0 0 5px #000;
       line-height: 0.8em;
+      z-index: 1;
     }
 
     .breakpoint {

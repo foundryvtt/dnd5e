@@ -66,7 +66,7 @@
         {{#if @root.owner}}
           <div class="item-controls flexrow">
             {{#if section.dataset}}
-              <a class="item-control item-create" data-action="itemCreate" data-tooltip="DND5E.ItemCreate"
+              <a class="item-control item-action" data-action="create" data-tooltip="DND5E.ItemCreate"
                  {{#each section.dataset as |v k|}}data-{{k}}="{{v}}"{{/each}}>
                 <i class="fas fa-plus"></i> {{localize "DND5E.Add"}}
               </a>
@@ -86,10 +86,7 @@
             {{else}}
               <div class="item-image item-action" data-action="use" tabindex="0" role="button"
                 aria-label="{{item.name}}" style="background-image: url('{{item.img}}')"></div>
-              <h4 class="item-action" data-action="expand">
-                {{item.name~}}
-                {{~#if ctx.isStack}} ({{item.system.quantity}}){{/if}}
-              </h4>
+              <h4 class="item-action" data-action="expand">{{item.name~}}</h4>
               {{#if ctx.attunement}}
                 <div class="item-detail attunement">
                   <i class="fas {{ctx.attunement.icon}} {{ctx.attunement.cls}}"
@@ -151,7 +148,7 @@
           {{#if @root.owner}}
             <div class="item-controls flexrow">
               {{#if ctx.canToggle}}
-                <a class="item-control item-action {{ctx.toggleClass}}" data-action="toggle"
+                <a class="item-control item-action {{ctx.toggleClass}}" data-action="equip"
                    data-tooltip="{{ctx.toggleTitle}}">
                   <i class="fas fa-shield-alt"></i>
                 </a>

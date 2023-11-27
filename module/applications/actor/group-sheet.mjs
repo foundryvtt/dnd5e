@@ -47,6 +47,7 @@ export default class GroupActorSheet extends ActorSheetMixin(ActorSheet) {
     const context = super.getData(options);
     context.system = context.data.system;
     context.items = Array.from(this.actor.items);
+    context.config = CONFIG.DND5E;
 
     // Membership
     const {sections, stats} = this.#prepareMembers();
@@ -237,11 +238,7 @@ export default class GroupActorSheet extends ActorSheetMixin(ActorSheet) {
       inputs.focus(ev => ev.currentTarget.select());
       inputs.addBack().find('[type="text"][data-dtype="Number"]').change(this._onChangeInputDelta.bind(this));
       html.find(".action-button").click(this._onClickActionButton.bind(this));
-      html.find(".item-control").click(this._onClickItemControl.bind(this));
       html.find(".item .rollable h4").click(event => this._onItemSummary(event));
-      html.find(".item-uses input").change(this._onUsesChange.bind(this));
-      html.find(".item-quantity input").change(this._onQuantityChange.bind(this));
-      new ContextMenu(html, ".item-list .item", [], {onOpen: this._onItemContext.bind(this)});
     }
   }
 
@@ -272,66 +269,6 @@ export default class GroupActorSheet extends ActorSheetMixin(ActorSheet) {
         movementConfig.render(true);
         break;
     }
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Handle clicks to item control buttons on the group sheet.
-   * @param {PointerEvent} event      The initiating click event
-   * @protected
-   */
-  _onClickItemControl(event) {
-    event.preventDefault();
-    const button = event.currentTarget;
-    switch ( button.dataset.action ) {
-      case "itemCreate":
-        this._createItem(button);
-        break;
-      case "itemDelete":
-        const deleteLi = event.currentTarget.closest(".item");
-        const deleteItem = this.actor.items.get(deleteLi.dataset.itemId);
-        deleteItem.deleteDialog();
-        break;
-      case "itemEdit":
-        const editLi = event.currentTarget.closest(".item");
-        const editItem = this.actor.items.get(editLi.dataset.itemId);
-        editItem.sheet.render(true);
-        break;
-    }
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Handle workflows to create a new Item directly within the Group Actor sheet.
-   * @param {HTMLElement} button      The clicked create button
-   * @returns {Item5e}                The created embedded Item
-   * @protected
-   */
-  _createItem(button) {
-    const type = button.dataset.type;
-    const system = {...button.dataset};
-    delete system.type;
-    const name = game.i18n.format("DND5E.ItemNew", {type: game.i18n.localize(CONFIG.Item.typeLabels[type])});
-    const itemData = {name, type, system};
-    return this.actor.createEmbeddedDocuments("Item", [itemData]);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Handle activation of a context menu for an embedded Item document.
-   * Dynamically populate the array of context menu options.
-   * Reuse the item context options provided by the base ActorSheet5e class.
-   * @param {HTMLElement} element       The HTML element for which the context menu is activated
-   * @protected
-   */
-  _onItemContext(element) {
-    const item = this.actor.items.get(element.dataset.itemId);
-    if ( !item ) return;
-    ui.context.menuItems = this._getItemContextOptions(item);
-    Hooks.call("dnd5e.getItemContextOptions", item, ui.context.menuItems);
   }
 
   /* -------------------------------------------- */

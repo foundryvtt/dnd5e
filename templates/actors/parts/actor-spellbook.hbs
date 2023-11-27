@@ -60,7 +60,7 @@
 
         <div class="item-controls flexrow">
             {{#if section.canCreate}}
-            <a class="item-control item-create" data-tooltip="DND5E.SpellCreate">
+            <a class="item-control item-action" data-action="create" data-tooltip="DND5E.SpellCreate">
                 <i class="fas fa-plus"></i> {{localize "DND5E.Add"}}
             </a>
             {{/if}}
@@ -98,7 +98,7 @@
             {{#if @root.owner}}
             <div class="item-controls flexrow">
                 {{#if section.canPrepare}}
-                <a class="item-control item-action {{ctx.toggleClass}}" data-action="toggle"
+                <a class="item-control item-action {{ctx.toggleClass}}" data-action="prepare"
                    data-tooltip="{{ctx.toggleTitle}}">
                     <i class="fas fa-sun"></i>
                 </a>
@@ -126,7 +126,7 @@
     {{else}}
     <li class="item flexrow inventory-header spellbook-header spellbook-empty" data-type="spell" data-level="{{lvl}}">
         <div class="item-controls flexrow">
-            <a class="item-control item-create" data-tooltip="DND5E.SpellCreate">
+            <a class="item-control item-action" data-action="create" data-tooltip="DND5E.SpellCreate">
                 <i class="fas fa-plus"></i> {{localize "DND5E.SpellAdd"}}
             </a>
         </div>

@@ -27,7 +27,7 @@
 
         {{#if ../owner}}
         <div class="item-controls flexrow">
-            <a class="item-control item-create" data-tooltip="DND5E.FeatureAdd"
+            <a class="item-control item-action" data-action="create" data-tooltip="DND5E.FeatureAdd"
                 {{#each section.dataset as |v k|}}data-{{k}}="{{v}}"{{/each}}>
                 <i class="fas fa-plus"></i> {{localize "DND5E.Add"}}
             </a>
@@ -55,7 +55,7 @@
             {{#if section.hasActions}}
             <div class="item-detail item-uses">
                 {{#if ctx.isOnCooldown}}
-                    <a class="item-recharge rollable">{{item.labels.recharge}}</a>
+                    <a class="item-action" data-action="recharge">{{item.labels.recharge}}</a>
                 {{else if item.system.recharge.value}}
                     {{localize "DND5E.Charged"}}
                 {{else if ctx.hasUses}}
@@ -87,9 +87,10 @@
                 {{#each section.columns}}
                     <div class="item-detail {{css}}">
                         {{#if editable}}
-                            <input type="text" data-dtype="{{editable}}" data-property="{{property}}"
-                                   value="{{#if (getProperty item property)}}{{getProperty item property}}
-                                   {{~else}}{{getProperty ctx property}}{{/if}}" placeholder="&mdash;">
+                            <input type="number" min="0" data-name="{{property}}"
+                                   {{#with (getProperty item maxProperty) as |max|}}max="{{max}}"{{/with}}
+                                   value="{{#with (getProperty item property) as |value|}}{{value}}
+                                   {{~else}}{{getProperty ctx property}}{{/with}}" placeholder="&mdash;">
                         {{else}}
                             {{#if (getProperty item property)}}
                                 {{getProperty item property}}
@@ -104,7 +105,7 @@
             {{#if @root.owner}}
             <div class="item-controls flexrow">
                 {{#if section.crewable}}
-                <a class="item-control item-action {{ctx.toggleClass}}" data-action="toggle"
+                <a class="item-control item-action {{ctx.toggleClass}}" data-action="crew"
                    data-tooltip="{{ctx.toggleTitle}}">
                     <i class="fas fa-sun"></i>
                 </a>
