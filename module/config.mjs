@@ -2080,8 +2080,8 @@ Object.defineProperty(DND5E, "enrichmentLookup", {
         skills: foundry.utils.deepClone(DND5E.skills),
         tools: foundry.utils.deepClone(DND5E.toolIds)
       };
-      Object.entries(DND5E.abilities).forEach((k, a) => _enrichmentLookup.abilities[a.fullKey] = { ...a, key: k });
-      Object.entries(DND5E.skills).forEach((k, s) => _enrichmentLookup.skills[s.fullKey] = { ...s, key: k );
+      Object.entries(DND5E.abilities).forEach(([k, a]) => _enrichmentLookup.abilities[a.fullKey] = { ...a, key: k });
+      Object.entries(DND5E.skills).forEach(([k, s]) => _enrichmentLookup.skills[s.fullKey] = { ...s, key: k });
     }
     return _enrichmentLookup;
   },
