@@ -2216,7 +2216,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * @param {boolean} [context.keepId=false]     Should IDs be maintained?
    * @param {Function} [context.transformAll]    Method called on provided items and their contents.
    * @param {Function} [context.transformFirst]  Method called only on provided items.
-   * @returns {object[]}                         Data for items to be created.
+   * @returns {Promise<object[]>}                Data for items to be created.
    */
   static async createWithContents(items, { container, keepId=false, transformAll, transformFirst }={}) {
     let depth = 0;
@@ -2231,7 +2231,6 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     const createItemData = async (item, containerId, depth) => {
       let newItemData = transformAll ? await transformAll(item) : item;
       if ( transformFirst && (depth === 0) ) newItemData = await transformFirst(newItemData);
-      if ( newItemData instanceof foundry.abstract.Document ) newItemData = newItemData.toObject();
       else if ( !newItemData ) return;
       foundry.utils.mergeObject(newItemData, {"system.container": containerId} );
       if ( !keepId ) newItemData._id = foundry.utils.randomID();
