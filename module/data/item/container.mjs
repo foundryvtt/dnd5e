@@ -89,7 +89,7 @@ export default class ContainerData extends SystemDataModel.mixin(
    * @type {Collection<Item5e>|Promise<Collection<Item5e>>}
    */
   get allContainedItems() {
-    if ( !this.parent || !this.contents.size ) return new foundry.utils.Collection();
+    if ( !this.parent ) return new foundry.utils.Collection();
     if ( this.parent.pack ) return this.#allContainedItems();
 
     return this.contents.reduce((collection, item) => {
@@ -107,8 +107,8 @@ export default class ContainerData extends SystemDataModel.mixin(
   async #allContainedItems() {
     return (await this.contents).reduce(async (promise, item) => {
       const collection = await promise;
-      collection.add(item);
-      if ( item.type === "backpack" ) (await item.system.allContainedItems).forEach(i => collection.set(id.id, i));
+      collection.set(item.id, item);
+      if ( item.type === "backpack" ) (await item.system.allContainedItems).forEach(i => collection.set(i.id, i));
       return collection;
     }, new foundry.utils.Collection());
   }

@@ -51,6 +51,8 @@ Hooks.once("init", function() {
   CONFIG.DND5E = DND5E;
   CONFIG.ActiveEffect.documentClass = documents.ActiveEffect5e;
   CONFIG.Actor.documentClass = documents.Actor5e;
+  CONFIG.Item.collection = dataModels.collection.Items5e;
+  CONFIG.Item.compendiumIndexFields.push("system.container");
   CONFIG.Item.documentClass = documents.Item5e;
   CONFIG.Token.documentClass = documents.TokenDocument5e;
   CONFIG.Token.objectClass = canvas.Token5e;
@@ -60,6 +62,7 @@ Hooks.once("init", function() {
   CONFIG.MeasuredTemplate.defaults.angle = 53.13; // 5e cone RAW should be 53.13 degrees
   CONFIG.Note.objectClass = canvas.Note5e;
   CONFIG.ui.combat = applications.combat.CombatTracker5e;
+  CONFIG.ui.items = dnd5e.applications.item.ItemDirectory5e;
 
   // Register System Settings
   registerSystemSettings();
@@ -221,6 +224,10 @@ Hooks.once("setup", function() {
   // Apply custom compendium styles to the SRD rules compendium.
   const rules = game.packs.get("dnd5e.rules");
   rules.applicationClass = applications.journal.SRDCompendium;
+
+  // Apply custom item compendium
+  game.packs.filter(p => p.metadata.type === "Item")
+    .forEach(p => p.applicationClass = applications.item.ItemCompendium5e);
 });
 
 /* --------------------------------------------- */

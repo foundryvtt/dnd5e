@@ -1,4 +1,5 @@
 import ClassData from "../data/item/class.mjs";
+import PhysicalItemTemplate from "../data/item/templates/physical-item.mjs";
 import {d20Roll, damageRoll} from "../dice/dice.mjs";
 import simplifyRollFormula from "../dice/simplify-roll-formula.mjs";
 import Advancement from "./advancement/advancement.mjs";
@@ -2097,11 +2098,9 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     if ( userId !== game.user.id ) return;
 
     // Delete a container's contents when it is deleted
-    const contents = await this.system.contents;
-    if ( contents && options.deleteContents ) {
-      await Item.deleteDocuments(Array.from(contents.map(i => i.id)), {
-        pack: this.pack, parent: this.parent, deleteContents: true
-      });
+    const contents = await this.system.allContainedItems;
+    if ( contents?.size && options.deleteContents ) {
+      await Item.deleteDocuments(Array.from(contents.map(i => i.id)), { pack: this.pack, parent: this.parent });
     }
 
     // Assign a new original class
@@ -2206,6 +2205,50 @@ export default class Item5e extends SystemDocumentMixin(Item) {
 
   /* -------------------------------------------- */
   /*  Factory Methods                             */
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare creation data for the provided items and any items contained within them. The data created by this method
+   * can be passed to `createDocuments` with `keepId` always set to true to maintain links to container contents.
+   * @param {Item5e[]} items                     Items to create.
+   * @param {object} [context={}]                Context for the item's creation.
+   * @param {Item5e} [context.container]         Container in which to create the item.
+   * @param {boolean} [context.keepId=false]     Should IDs be maintained?
+   * @param {Function} [context.transformAll]    Method called on provided items and their contents.
+   * @param {Function} [context.transformFirst]  Method called only on provided items.
+   * @returns {object[]}                         Data for items to be created.
+   */
+  static async createWithContents(items, { container, keepId=false, transformAll, transformFirst }={}) {
+    let depth = 0;
+    if ( container ) {
+      depth = 1 + (await container.system.allContainers()).length;
+      if ( depth > PhysicalItemTemplate.MAX_DEPTH ) {
+        ui.notifications.warn(game.i18n.format("DND5E.ContainerMaxDepth", { depth: PhysicalItemTemplate.MAX_DEPTH }));
+        return;
+      }
+    }
+
+    const createItemData = async (item, containerId, depth) => {
+      let newItemData = transformAll ? await transformAll(item) : item;
+      if ( transformFirst && (depth === 0) ) newItemData = await transformFirst(newItemData);
+      if ( newItemData instanceof foundry.abstract.Document ) newItemData = newItemData.toObject();
+      else if ( !newItemData ) return;
+      foundry.utils.mergeObject(newItemData, {"system.container": containerId} );
+      if ( !keepId ) newItemData._id = foundry.utils.randomID();
+
+      const contents = await item.system.contents;
+      if ( contents && (depth < PhysicalItemTemplate.MAX_DEPTH) ) {
+        for ( const doc of contents ) await createItemData(doc, newItemData._id, depth + 1);
+      }
+
+      created.push(newItemData);
+    };
+
+    const created = [];
+    for ( const item of items ) await createItemData(item, container?.id, depth);
+    return created;
+  }
+
   /* -------------------------------------------- */
 
   /**
