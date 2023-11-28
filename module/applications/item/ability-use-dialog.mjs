@@ -247,7 +247,7 @@ export default class AbilityUseDialog extends Dialog {
     const item = data.item;
     const { quantity, level, consume, consumableType, preparation } = item.system;
     const scale = item.usageScaling;
-    const levels = (preparation.mode === "pact") ? [level, item.actor.system.spells.pact.level] : [level];
+    const levels = (preparation?.mode === "pact") ? [level, item.actor.system.spells.pact.level] : [level];
 
     if ( (scale === "slot") && data.slotOptions.every(o => !o.hasSlots) ) {
       // Warn that the actor has no spell slots of any level with which to use this item.
