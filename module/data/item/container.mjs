@@ -172,4 +172,21 @@ export default class ContainerData extends SystemDataModel.mixin(
     if ( containedWeight instanceof Promise ) return containedWeight.then(c => this.weight + c);
     return this.weight + containedWeight;
   }
+
+  /* -------------------------------------------- */
+  /*  Socket Event Handlers                       */
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  async _onUpdate(changed, options, userId) {
+    // Keep contents folder synchronized with container
+    if ( (game.user.id === userId) && foundry.utils.hasProperty(changed, "folder") ) {
+      const contents = await this.contents;
+      await Item.updateDocuments(contents.map(c => ({ _id: c.id, folder: changed.folder })), {
+        parent: this.parent.parent, pack: this.parent.pack, ...options, render: false
+      });
+    }
+
+    super._onUpdate(changed, options, userId);
+  }
 }
