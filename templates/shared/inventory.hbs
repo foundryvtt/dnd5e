@@ -176,13 +176,13 @@
 
   {{#with capacity}}
     <div class="capacity" role="meter" aria-label="{{localize 'DND5E.ItemContainerCapacity'}}"
-         aria-value="{{capacity.pct}}" aria-valuetext="{{capacity.value}} {{capacity.units}}"
-         aria-valuemin="0" aria-valuemax="{{capacity.max}}" style="--percentage: {{capacity.pct}}%">
+         aria-value="{{pct}}" aria-valuetext="{{value}} {{units}}"
+         aria-valuemin="0" aria-valuemax="{{max}}" style="--percentage: {{pct}}%">
     </div>
   {{/with}}
   {{#with encumbrance}}
     <div class="encumbrance {{~#if encumbered}} encumbered{{/if}}" role="meter"
-         aria-label="{{localize 'DND5E.DND5E.Encumbrance'}}" aria-value="{{pct}}"
+         aria-label="{{localize 'DND5E.Encumbrance'}}" aria-value="{{pct}}"
          aria-valuetext="{{value}} {{@root.weightUnit}}" aria-valuemin="0"
          aria-valuemax="{{max}}" style="--percentage: {{pct}}%">
       <label>{{value}} / {{max}}</label>

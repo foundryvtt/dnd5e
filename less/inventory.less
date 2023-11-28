@@ -7,6 +7,29 @@ dnd5e-inventory {
     margin: 0 8px;
     flex: 0 0 20px;
     justify-content: flex-end;
+
+    .currency {
+      flex: 0 0 100%;
+      align-items: first baseline;
+      justify-content: flex-end;
+      margin: 4px 0 8px;
+      padding: 0;
+      font-size: var(--font-size-12);
+    
+      label {
+        flex: 0;
+        margin-inline-start: 8px;
+        text-align: end;
+        line-height: 20px;
+        color: var(--dnd5e-color-tan);
+      }
+      input[type="text"], input[type="number"] {
+        flex: 0 0 48px;
+        text-align: center;
+        margin-inline-start: 8px;
+        border-block-end: var(--dnd5e-border-groove);
+      }
+    }
   }
 
   .attunement {
@@ -17,29 +40,6 @@ dnd5e-inventory {
       display: inline;
       max-inline-size: 23px;
       text-align: center;
-    }
-  }
-
-  .currency {
-    flex: 0 0 100%;
-    align-items: first baseline;
-    justify-content: flex-end;
-    margin: 4px 0 8px;
-    padding: 0;
-    font-size: var(--font-size-12);
-
-    label {
-      flex: 0;
-      margin-inline-start: 8px;
-      text-align: end;
-      line-height: 20px;
-      color: var(--dnd5e-color-tan);
-    }
-    input[type="text"], input[type="number"] {
-      flex: 0 0 48px;
-      text-align: center;
-      margin-inline-start: 8px;
-      border-bottom: var(--dnd5e-border-groove);
     }
   }
   
