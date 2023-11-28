@@ -8,7 +8,7 @@ export default class ItemCompendium5e extends Compendium {
   /** @inheritdoc */
   async _render(...args) {
     await super._render(...args);
-
+    let items = this.collection;
     if ( this.collection.index ) {
       if ( !this.collection._reindexing ) this.collection._reindexing = this.collection.getIndex();
       await this.collection._reindexing;
