@@ -60,6 +60,7 @@ export default class GroupActorSheet extends ActorSheetMixin(ActorSheet) {
     // Inventory
     context.itemContext = {};
     context.inventory = this.#prepareInventory(context);
+    context.inventoryElement = "dnd5e-inventory";
     context.expandedData = {};
     for ( const id of this._expanded ) {
       const item = this.actor.items.get(id);

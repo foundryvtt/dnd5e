@@ -68,6 +68,7 @@ export default class ContainerSheet extends ItemSheet5e {
         items: context.items
       }
     };
+    context.inventoryElement = "dnd5e-inventory";
 
     context.items = context.items.sort((a, b) => (a.sort || 0) - (b.sort || 0));
 

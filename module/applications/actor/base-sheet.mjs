@@ -134,7 +134,8 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
       rollData: this.actor.getRollData(),
       overrides: {
         attunement: foundry.utils.hasProperty(this.actor.overrides, "system.attributes.attunement.max")
-      }
+      },
+      inventoryElement: "dnd5e-inventory"
     };
 
     // Remove items in containers & sort remaining

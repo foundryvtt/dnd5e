@@ -6,7 +6,7 @@ import AdvancementConfirmationDialog from "../advancement/advancement-confirmati
  */
 export default class InventoryElement extends HTMLElement {
   connectedCallback() {
-    this.#app = ui.windows[this.closest(".app")?.dataset.appid];
+    this._app = ui.windows[this.closest(".app")?.dataset.appid];
 
     this.#initializeFilterLists();
 
@@ -18,12 +18,12 @@ export default class InventoryElement extends HTMLElement {
     }
 
     for ( const input of this.querySelectorAll("input") ) {
-      input.addEventListener("change", this.#onChangeInput.bind(this));
+      input.addEventListener("change", this._onChangeInput.bind(this));
     }
 
     for ( const control of this.querySelectorAll(".item-action[data-action]") ) {
       control.addEventListener("click", event => {
-        this.#onAction(event.currentTarget, event.currentTarget.dataset.action);
+        this._onAction(event.currentTarget, event.currentTarget.dataset.action);
       });
     }
 
@@ -31,7 +31,7 @@ export default class InventoryElement extends HTMLElement {
       const item = this.getItem(element.dataset.itemId);
       // Parts of ContextMenu doesn't play well with promises, so don't show menus for containers in packs
       if ( !item || (item instanceof Promise) ) return;
-      ui.context.menuItems = this.#getContextOptions(item);
+      ui.context.menuItems = this._getContextOptions(item);
       Hooks.call("dnd5e.getItemContextOptions", item, ui.context.menuItems);
     }});
   }
@@ -43,11 +43,11 @@ export default class InventoryElement extends HTMLElement {
    */
   #initializeFilterLists() {
     const filterLists = this.querySelectorAll(".filter-list");
-    if ( !this.#app._filters || !filterLists.length ) return;
+    if ( !this._app._filters || !filterLists.length ) return;
 
     // Activate the set of filters which are currently applied
     for ( const list of filterLists ) {
-      const set = this.#app._filters[list.dataset.filter];
+      const set = this._app._filters[list.dataset.filter];
       const filters = list.querySelectorAll(".filter-item");
       for ( const filter of filters ) {
         if ( set.has(filter.dataset.filter) ) filter.classList.add("active");
@@ -55,7 +55,7 @@ export default class InventoryElement extends HTMLElement {
           const f = filter.dataset.filter;
           if ( set.has(f) ) set.delete(f);
           else set.add(f);
-          return this.#app.render();
+          return this._app.render();
         });
       }
     }
@@ -68,8 +68,9 @@ export default class InventoryElement extends HTMLElement {
   /**
    * Reference to the application that contains this component.
    * @type {Application}
+   * @protected
    */
-  #app;
+  _app;
 
   /* -------------------------------------------- */
 
@@ -99,7 +100,7 @@ export default class InventoryElement extends HTMLElement {
    * @type {Actor5e|Item5e}
    */
   get document() {
-    return this.#app.document;
+    return this._app.document;
   }
 
   /* -------------------------------------------- */
@@ -124,27 +125,28 @@ export default class InventoryElement extends HTMLElement {
    * Prepare an array of context menu options which are available for inventory items.
    * @param {Item5e} item           The Item for which the context menu is activated.
    * @returns {ContextMenuEntry[]}  An array of context menu options offered for the Item.
+   * @protected
    */
-  #getContextOptions(item) {
+  _getContextOptions(item) {
     // Standard Options
     const options = [
       {
         name: "DND5E.ContextMenuActionEdit",
         icon: "<i class='fas fa-edit fa-fw'></i>",
         condition: () => item.isOwner,
-        callback: li => this.#onAction(li[0], "edit")
+        callback: li => this._onAction(li[0], "edit")
       },
       {
         name: "DND5E.ContextMenuActionDuplicate",
         icon: "<i class='fas fa-copy fa-fw'></i>",
         condition: () => !item.system.metadata?.singleton && !["class", "subclass"].includes(item.type) && item.isOwner,
-        callback: li => this.#onAction(li[0], "duplicate")
+        callback: li => this._onAction(li[0], "duplicate")
       },
       {
         name: "DND5E.ContextMenuActionDelete",
         icon: "<i class='fas fa-trash fa-fw'></i>",
         condition: () => item.isOwner,
-        callback: li => this.#onAction(li[0], "delete")
+        callback: li => this._onAction(li[0], "delete")
       }
     ];
 
@@ -157,7 +159,7 @@ export default class InventoryElement extends HTMLElement {
         name: isAttuned ? "DND5E.ContextMenuActionUnattune" : "DND5E.ContextMenuActionAttune",
         icon: "<i class='fas fa-sun fa-fw'></i>",
         condition: () => item.isOwner,
-        callback: li => this.#onAction(li[0], "attune")
+        callback: li => this._onAction(li[0], "attune")
       });
     }
 
@@ -166,7 +168,7 @@ export default class InventoryElement extends HTMLElement {
       name: item.system.equipped ? "DND5E.ContextMenuActionUnequip" : "DND5E.ContextMenuActionEquip",
       icon: "<i class='fas fa-shield-alt fa-fw'></i>",
       condition: () => item.isOwner,
-      callback: li => this.#onAction(li[0], "equip")
+      callback: li => this._onAction(li[0], "equip")
     });
 
     // Toggle Prepared State
@@ -174,7 +176,7 @@ export default class InventoryElement extends HTMLElement {
       name: item.system?.preparation?.prepared ? "DND5E.ContextMenuActionUnprepare" : "DND5E.ContextMenuActionPrepare",
       icon: "<i class='fas fa-sun fa-fw'></i>",
       condition: () => item.isOwner,
-      callback: li => this.#onAction(li[0], "prepare")
+      callback: li => this._onAction(li[0], "prepare")
     });
 
     return options;
@@ -186,8 +188,9 @@ export default class InventoryElement extends HTMLElement {
    * Handle changing the quantity or charges fields.
    * @param {Event} event  Triggering change event.
    * @returns {Promise}
+   * @protected
    */
-  async #onChangeInput(event) {
+  async _onChangeInput(event) {
     const itemId = event.target.closest("[data-item-id]")?.dataset.itemId;
     if ( !itemId ) return;
 
@@ -209,8 +212,9 @@ export default class InventoryElement extends HTMLElement {
    * @param {Element} target  Button or context menu entry that triggered this action.
    * @param {string} action   Action being triggered.
    * @returns {Promise}
+   * @protected
    */
-  async #onAction(target, action) {
+  async _onAction(target, action) {
     const event = new CustomEvent("inventory", {
       bubbles: true,
       cancelable: true,
@@ -218,8 +222,7 @@ export default class InventoryElement extends HTMLElement {
     });
     if ( target.dispatchEvent(event) === false ) return;
 
-    const li = target.closest("[data-item-id]");
-    const itemId = li?.dataset.itemId;
+    const itemId = target.closest("[data-item-id]")?.dataset.itemId;
     const item = await this.getItem(itemId);
     if ( (action !== "create") && !item ) return;
 
@@ -230,41 +233,11 @@ export default class InventoryElement extends HTMLElement {
         });
       case "create":
         if ( this.document.type === "backpack" ) return;
-        const dataset = (target.closest(".spellbook-header") ?? target).dataset;
-        const type = dataset.type;
-
-        // Check to make sure the newly created class doesn't take player over level cap
-        if ( type === "class" && (this.actor.system.details.level + 1 > CONFIG.DND5E.maxLevel) ) {
-          const err = game.i18n.format("DND5E.MaxCharacterLevelExceededWarn", {max: CONFIG.DND5E.maxLevel});
-          ui.notifications.error(err);
-          return null;
-        }
-
-        const itemData = {
-          name: game.i18n.format("DND5E.ItemNew", {type: game.i18n.localize(CONFIG.Item.typeLabels[type])}),
-          type,
-          system: foundry.utils.expandObject({ ...dataset })
-        };
-        delete itemData.system.type;
-        return this.actor.createEmbeddedDocuments("Item", [itemData]);
+        return this._onCreate(target);
       case "crew":
         return item.update({"system.crewed": !item.system.crewed});
       case "delete":
-        // If item has advancement, handle it separately
-        if ( (this.document instanceof Actor) && (this.actor.type !== "group")
-          && !game.settings.get("dnd5e", "disableAdvancements") ) {
-          const manager = AdvancementManager.forDeletedItem(this.actor, item.id);
-          if ( manager.steps.length ) {
-            try {
-              const shouldRemoveAdvancements = await AdvancementConfirmationDialog.forDelete(item);
-              if ( shouldRemoveAdvancements ) return manager.render(true);
-              return item.delete({ shouldRemoveAdvancements });
-            } catch(err) {
-              return;
-            }
-          }
-        }
-        return item.deleteDialog();
+        return this._onDelete(target, item);
       case "duplicate":
         return item.clone({name: game.i18n.format("DOCUMENT.CopyOf", {name: item.name})}, {save: true});
       case "edit":
@@ -272,24 +245,88 @@ export default class InventoryElement extends HTMLElement {
       case "equip":
         return item.update({"system.equipped": !item.system.equipped});
       case "expand":
-        if ( this.#app._expanded.has(itemId) ) {
-          const summary = $(li.querySelector(".item-summary"));
-          summary.slideUp(200, () => summary.remove());
-          this.#app._expanded.delete(item.id);
-        } else {
-          const chatData = await item.getChatData({secrets: this.document.isOwner});
-          const summary = $(await renderTemplate("systems/dnd5e/templates/items/parts/item-summary.hbs", chatData));
-          $(li).append(summary.hide());
-          summary.slideDown(200);
-          this.#app._expanded.add(item.id);
-        }
-        return;
+        return this._onExpand(target, item);
       case "prepare":
         return item.update({"system.preparation.prepared": !item.system.preparation?.prepared});
       case "recharge":
         return item.rollRecharge();
       case "use":
         return item.use({}, { event });
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Create a new item.
+   * @param {HTMLElement} target  Button or context menu entry that triggered this action.
+   * @returns {Promise<Item5e>}
+   */
+  async _onCreate(target) {
+    const dataset = (target.closest(".spellbook-header") ?? target).dataset;
+    const type = dataset.type;
+
+    // Check to make sure the newly created class doesn't take player over level cap
+    if ( type === "class" && (this.actor.system.details.level + 1 > CONFIG.DND5E.maxLevel) ) {
+      const err = game.i18n.format("DND5E.MaxCharacterLevelExceededWarn", {max: CONFIG.DND5E.maxLevel});
+      ui.notifications.error(err);
+      return null;
+    }
+
+    const itemData = {
+      name: game.i18n.format("DND5E.ItemNew", {type: game.i18n.localize(CONFIG.Item.typeLabels[type])}),
+      type,
+      system: foundry.utils.expandObject({ ...dataset })
+    };
+    delete itemData.system.type;
+    return this.actor.createEmbeddedDocuments("Item", [itemData]);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Delete an item.
+   * @param {HTMLElement} target  Button or context menu entry that triggered this action.
+   * @param {Item5e} item         Item to be deleted.
+   * @returns {Promise}
+   */
+  async _onDelete(target, item) {
+    // If item has advancement, handle it separately
+    if ( (this.document instanceof Actor) && (this.actor.type !== "group")
+      && !game.settings.get("dnd5e", "disableAdvancements") ) {
+      const manager = AdvancementManager.forDeletedItem(this.actor, item.id);
+      if ( manager.steps.length ) {
+        try {
+          const shouldRemoveAdvancements = await AdvancementConfirmationDialog.forDelete(item);
+          if ( shouldRemoveAdvancements ) return manager.render(true);
+          return item.delete({ shouldRemoveAdvancements });
+        } catch(err) {
+          return;
+        }
+      }
+    }
+    return item.deleteDialog();
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Expand or collapse an item's summary.
+   * @param {HTMLElement} target  Button or context menu entry that triggered this action.
+   * @param {Item5e} item         Item to being expanded or collapsed.
+   */
+  async _onExpand(target, item) {
+    const li = target.closest("[data-item-id]");
+    if ( this._app._expanded.has(item.id) ) {
+      const summary = $(li.querySelector(".item-summary"));
+      summary.slideUp(200, () => summary.remove());
+      this._app._expanded.delete(item.id);
+    } else {
+      const chatData = await item.getChatData({secrets: this.document.isOwner});
+      const summary = $(await renderTemplate("systems/dnd5e/templates/items/parts/item-summary.hbs", chatData));
+      $(li).append(summary.hide());
+      summary.slideDown(200);
+      this._app._expanded.add(item.id);
     }
   }
 }
