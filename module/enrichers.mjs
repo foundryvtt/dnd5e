@@ -134,6 +134,7 @@ async function enrichCheck(config, label, options) {
   } else if ( config.skill && !config.ability ) {
     config.ability = skillConfig.ability;
   }
+  if ( skillConfig?.key ) config.skill = skillConfig.key;
 
   const toolUUID = CONFIG.DND5E.enrichmentLookup.tools[config.tool];
   const toolIndex = toolUUID ? Trait.getBaseItem(toolUUID, { indexOnly: true }) : null;
@@ -144,12 +145,13 @@ async function enrichCheck(config, label, options) {
 
   let abilityConfig = CONFIG.DND5E.enrichmentLookup.abilities[config.ability];
   if ( config.ability && !abilityConfig ) {
-    console.warn(`Ability ${ability} not found while enriching ${config.input}.`);
+    console.warn(`Ability ${ability} not found while enriching ${config.ability}.`);
     invalid = true;
   } else if ( !abilityConfig ) {
     console.warn(`No ability provided while enriching check ${config.input}.`);
     invalid = true;
   }
+  if ( abilityConfig?.key ) config.ability = abilityConfig.key;
 
   if ( config.dc && !Number.isNumeric(config.dc) ) config.dc = simplifyBonus(config.dc, options.rollData ?? {});
 
@@ -291,6 +293,7 @@ async function enrichSave(config, label, options) {
     console.warn(`Ability ${config.ability} not found while enriching ${config.input}.`);
     return config.input;
   }
+  if ( abilityConfig?.key ) config.ability = abilityConfig.key;
 
   if ( config.dc && !Number.isNumeric(config.dc) ) config.dc = simplifyBonus(config.dc, options.rollData ?? {});
 
