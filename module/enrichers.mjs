@@ -145,7 +145,7 @@ async function enrichCheck(config, label, options) {
 
   let abilityConfig = CONFIG.DND5E.enrichmentLookup.abilities[config.ability];
   if ( config.ability && !abilityConfig ) {
-    console.warn(`Ability ${ability} not found while enriching ${config.ability}.`);
+    console.warn(`Ability ${config.ability} not found while enriching ${config.input}.`);
     invalid = true;
   } else if ( !abilityConfig ) {
     console.warn(`No ability provided while enriching check ${config.input}.`);
