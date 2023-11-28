@@ -32,6 +32,8 @@ export default class ItemCompendium5e extends Compendium {
       const contents = await item.system.contents;
       if ( contents?.size ) {
         const toCreate = await Item5e.createWithContents([item], {transformAll: item => item.toCompendium(item)});
+        const folder = target?.closest("[data-folder-id]")?.dataset.folderId;
+        if ( folder ) toCreate.map(d => d.folder = folder);
         [item] = await Item5e.createDocuments(toCreate, {pack: this.collection.collection, keepId: true});
       }
     }

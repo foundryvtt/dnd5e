@@ -13,6 +13,8 @@ export default class ItemDirectory5e extends ItemDirectory {
     // Create item and its contents if it doesn't already exist here
     if ( !this._entryAlreadyExists(item) ) {
       const toCreate = await Item5e.createWithContents([item]);
+      const folder = target?.closest("[data-folder-id]")?.dataset.folderId;
+      if ( folder ) toCreate.map(d => d.folder = folder);
       [item] = await Item5e.createDocuments(toCreate, {keepId: true});
     }
 
