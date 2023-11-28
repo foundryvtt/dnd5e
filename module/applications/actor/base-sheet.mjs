@@ -13,7 +13,6 @@ import ActorSheetFlags from "./sheet-flags.mjs";
 import ActorTypeConfig from "./type-config.mjs";
 import SourceConfig from "../source-config.mjs";
 
-import AdvancementConfirmationDialog from "../advancement/advancement-confirmation-dialog.mjs";
 import AdvancementManager from "../advancement/advancement-manager.mjs";
 
 import PropertyAttribution from "../property-attribution.mjs";
@@ -65,9 +64,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       scrollY: [
-        ".inventory .inventory-list",
-        ".features .inventory-list",
-        ".spellbook .inventory-list",
+        "dnd5e-inventory .inventory-list",
         ".effects .inventory-list",
         ".center-pane"
       ],
@@ -76,7 +73,8 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
       height: Math.max(680, Math.max(
         237 + (Object.keys(CONFIG.DND5E.abilities).length * 70),
         240 + (Object.keys(CONFIG.DND5E.skills).length * 24)
-      ))
+      )),
+      inventoryElement: "dnd5e-inventory"
     });
   }
 
@@ -135,7 +133,8 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
       rollData: this.actor.getRollData(),
       overrides: {
         attunement: foundry.utils.hasProperty(this.actor.overrides, "system.attributes.attunement.max")
-      }
+      },
+      inventoryElement: this.options.inventoryElement
     };
 
     // Remove items in containers & sort remaining
@@ -176,7 +175,10 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
     context.expandedData = {};
     for ( const id of this._expanded ) {
       const item = this.actor.items.get(id);
-      if ( item ) context.expandedData[id] = await item.getChatData({secrets: this.actor.isOwner});
+      if ( item ) {
+        context.expandedData[id] = await item.getChatData({secrets: this.actor.isOwner});
+        if ( context.itemContext[id] ) context.itemContext[id].expanded = context.expandedData[id];
+      }
     }
 
     // Biography HTML enrichment
@@ -612,17 +614,6 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
 
   /** @inheritdoc */
   activateListeners(html) {
-    // Activate Item Filters
-    const filterLists = html.find(".filter-list");
-    filterLists.each(this._initializeFilterItemList.bind(this));
-    filterLists.on("click", ".filter-item", this._onToggleFilter.bind(this));
-
-    // Item summaries
-    html.find(".item .item-name.rollable h4").click(event => this._onItemSummary(event));
-
-    // View Item Sheets
-    html.find(".item-edit").click(this._onItemEdit.bind(this));
-
     // Property attributions
     html.find("[data-attribution]").mouseover(this._onPropertyAttribution.bind(this));
     html.find(".attributable").mouseover(this._onPropertyAttribution.bind(this));
@@ -653,10 +644,6 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
       html.find(".config-button").click(this._onConfigMenu.bind(this));
 
       // Owned Item management
-      html.find(".item-create").click(this._onItemCreate.bind(this));
-      html.find(".item-delete").click(this._onItemDelete.bind(this));
-      html.find(".item-uses input").click(ev => ev.target.select()).change(this._onUsesChange.bind(this));
-      html.find(".item-quantity input").click(ev => ev.target.select()).change(this._onQuantityChange.bind(this));
       html.find(".slot-max-override").click(this._onSpellSlotOverride.bind(this));
       html.find(".attunement-max-override").click(this._onAttunementOverride.bind(this));
 
@@ -677,14 +664,6 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
       // Roll Tool Checks.
       html.find(".tool-name").on("click", this._onRollToolCheck.bind(this));
 
-      // Item Rolling
-      html.find(".rollable .item-image").click(event => this._onItemUse(event));
-      html.find(".item .item-recharge").click(event => this._onItemRecharge(event));
-    }
-
-    // Otherwise, remove rollable classes
-    else {
-      html.find(".rollable").each((i, el) => el.classList.remove("rollable"));
     }
 
     // Item Context Menu
@@ -739,37 +718,12 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
    * @protected
    */
   _onItemContext(element) {
-
     // Active Effects
     if ( element.classList.contains("effect") ) {
       const effect = this.actor.effects.get(element.dataset.effectId);
       if ( !effect ) return;
       ui.context.menuItems = this._getActiveEffectContextOptions(effect);
       Hooks.call("dnd5e.getActiveEffectContextOptions", effect, ui.context.menuItems);
-    }
-
-    // Items
-    else {
-      const item = this.actor.items.get(element.dataset.itemId);
-      if ( !item ) return;
-      ui.context.menuItems = this._getItemContextOptions(item);
-      Hooks.call("dnd5e.getItemContextOptions", item, ui.context.menuItems);
-    }
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Initialize Item list filters by activating the set of filters which are currently applied
-   * @param {number} i  Index of the filter in the list.
-   * @param {HTML} ul   HTML object for the list item surrounding the filter.
-   * @private
-   */
-  _initializeFilterItemList(i, ul) {
-    const set = this._filters[ul.dataset.filter];
-    const filters = ul.querySelectorAll(".filter-item");
-    for ( let li of filters ) {
-      if ( set.has(li.dataset.filter) ) li.classList.add("active");
     }
   }
 
@@ -1151,112 +1105,6 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
   /* -------------------------------------------- */
 
   /**
-   * Handle using an item from the Actor sheet, obtaining the Item instance, and dispatching to its use method.
-   * @param {Event} event  The triggering click event.
-   * @returns {Promise}    Results of the usage.
-   * @protected
-   */
-  _onItemUse(event) {
-    event.preventDefault();
-    const itemId = event.currentTarget.closest(".item").dataset.itemId;
-    const item = this.actor.items.get(itemId);
-    return item.use({}, {event});
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Handle attempting to recharge an item usage by rolling a recharge check.
-   * @param {Event} event      The originating click event.
-   * @returns {Promise<Roll>}  The resulting recharge roll.
-   * @private
-   */
-  _onItemRecharge(event) {
-    event.preventDefault();
-    const itemId = event.currentTarget.closest(".item").dataset.itemId;
-    const item = this.actor.items.get(itemId);
-    return item.rollRecharge();
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Handle creating a new Owned Item for the actor using initial data defined in the HTML dataset.
-   * @param {Event} event          The originating click event.
-   * @returns {Promise<Item5e[]>}  The newly created item.
-   * @private
-   */
-  _onItemCreate(event) {
-    event.preventDefault();
-    const dataset = (event.currentTarget.closest(".spellbook-header") ?? event.currentTarget).dataset;
-    const type = dataset.type;
-
-    // Check to make sure the newly created class doesn't take player over level cap
-    if ( type === "class" && (this.actor.system.details.level + 1 > CONFIG.DND5E.maxLevel) ) {
-      const err = game.i18n.format("DND5E.MaxCharacterLevelExceededWarn", {max: CONFIG.DND5E.maxLevel});
-      ui.notifications.error(err);
-      return null;
-    }
-
-    const itemData = {
-      name: game.i18n.format("DND5E.ItemNew", {type: game.i18n.localize(CONFIG.Item.typeLabels[type])}),
-      type: type,
-      system: foundry.utils.expandObject({ ...dataset })
-    };
-    delete itemData.system.type;
-    return this.actor.createEmbeddedDocuments("Item", [itemData]);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Handle editing an existing Owned Item for the Actor.
-   * @param {Event} event    The originating click event.
-   * @returns {ItemSheet5e}  The rendered item sheet.
-   * @private
-   */
-  _onItemEdit(event) {
-    event.preventDefault();
-    const li = event.currentTarget.closest(".item");
-    const item = this.actor.items.get(li.dataset.itemId);
-    return item.sheet.render(true);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Handle deleting an existing Owned Item for the Actor.
-   * @param {Event} event  The originating click event.
-   * @returns {Promise<Item5e|AdvancementManager>|undefined}  The deleted item if something was deleted or the
-   *                                                          advancement manager if advancements need removing.
-   * @private
-   */
-  async _onItemDelete(event) {
-    event.preventDefault();
-    const li = event.currentTarget.closest(".item");
-    const item = this.actor.items.get(li.dataset.itemId);
-    if ( !item ) return;
-
-    // If item has advancement, handle it separately
-    if ( !game.settings.get("dnd5e", "disableAdvancements") ) {
-      const manager = AdvancementManager.forDeletedItem(this.actor, item.id);
-      if ( manager.steps.length ) {
-        try {
-          const shouldRemoveAdvancements = await AdvancementConfirmationDialog.forDelete(item);
-          if ( shouldRemoveAdvancements ) return manager.render(true);
-          return item.delete({ shouldRemoveAdvancements });
-        } catch(err) {
-          return;
-        }
-      }
-    }
-
-    return item.deleteDialog();
-  }
-
-  /* -------------------------------------------- */
-
-  /**
    * Handle displaying the property attribution tooltip when a property is hovered over.
    * @param {Event} event   The originating mouse event.
    * @private
@@ -1325,24 +1173,6 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
     event.preventDefault();
     const field = event.currentTarget.previousElementSibling;
     return this.actor.update({[field.name]: 1 - parseInt(field.value)});
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Handle toggling of filters to display a different set of owned items.
-   * @param {Event} event     The click event which triggered the toggle.
-   * @returns {ActorSheet5e}  This actor sheet with toggled filters.
-   * @private
-   */
-  _onToggleFilter(event) {
-    event.preventDefault();
-    const li = event.currentTarget;
-    const set = this._filters[li.parentElement.dataset.filter];
-    const filter = li.dataset.filter;
-    if ( set.has(filter) ) set.delete(filter);
-    else set.add(filter);
-    return this.render();
   }
 
   /* -------------------------------------------- */

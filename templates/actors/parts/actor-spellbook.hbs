@@ -1,4 +1,5 @@
-<div class="inventory-filters spellbook-filters flexrow">
+<{{inventoryElement}}>
+  <div class="inventory-filters spellbook-filters flexrow">
     <div class="form-group spellcasting-ability">
         {{#unless isNPC}}
         <label>{{localize "DND5E.Spellcasting"}}</label>
@@ -26,10 +27,10 @@
         <li class="filter-item" data-filter="ritual">{{localize "DND5E.Ritual"}}</li>
         <li class="filter-item" data-filter="prepared">{{localize "DND5E.Prepared"}}{{#if preparedSpells}} ({{preparedSpells}}){{/if}}</li>
     </ul>
-</div>
+  </div>
 
-<ol class="items-list inventory-list">
-{{#each spellbook as |section|}}
+  <ol class="items-list inventory-list">
+  {{#each spellbook as |section|}}
     <li class="items-header spellbook-header flexrow" {{#each section.dataset as |v k|}}data-{{k}}="{{v}}"{{/each}}>
         <div class="item-name flexrow">
             <h3>{{section.label}}</h3>
@@ -59,7 +60,7 @@
 
         <div class="item-controls flexrow">
             {{#if section.canCreate}}
-            <a class="item-control item-create" data-tooltip="DND5E.SpellCreate">
+            <a class="item-control item-action" data-action="create" data-tooltip="DND5E.SpellCreate">
                 <i class="fas fa-plus"></i> {{localize "DND5E.Add"}}
             </a>
             {{/if}}
@@ -71,8 +72,9 @@
     {{#dnd5e-itemContext item as |ctx|}}
         <li class="item flexrow {{#if ctx.isExpanded}}expanded{{/if}}" data-item-id="{{item.id}}">
             <div class="item-name flexrow rollable">
-                <div class="item-image" tabindex="0" role="button" aria-label="{{item.name}}" style="background-image: url('{{item.img}}')"></div>
-                <h4>{{item.name}}</h4>
+                <div class="item-image item-action" data-action="use" tabindex="0" role="button"
+                     aria-label="{{item.name}}" style="background-image: url('{{item.img}}')"></div>
+                <h4 class="item-action" data-action="expand">{{item.name}}</h4>
                 {{#if item.hasLimitedUses}}
                 <div class="item-detail spell-uses">
                   {{localize "DND5E.Uses"}} {{#if item.system.uses.value}}{{item.system.uses.value}}{{else}}0{{/if}} / {{item.system.uses.max}}
@@ -96,14 +98,15 @@
             {{#if @root.owner}}
             <div class="item-controls flexrow">
                 {{#if section.canPrepare}}
-                <a class="item-control item-toggle {{ctx.toggleClass}}" data-tooltip="{{ctx.toggleTitle}}">
+                <a class="item-control item-action {{ctx.toggleClass}}" data-action="prepare"
+                   data-tooltip="{{ctx.toggleTitle}}">
                     <i class="fas fa-sun"></i>
                 </a>
                 {{/if}}
-                <a class="item-control item-edit" data-tooltip="DND5E.ItemEdit">
+                <a class="item-control item-action" data-action="edit" data-tooltip="DND5E.ItemEdit">
                     <i class="fas fa-edit"></i>
                 </a>
-                <a class="item-control item-delete" data-tooltip="DND5E.ItemDelete">
+                <a class="item-control item-action" data-action="delete" data-tooltip="DND5E.ItemDelete">
                     <i class="fas fa-trash"></i>
                 </a>
             </div>
@@ -116,14 +119,14 @@
     {{/dnd5e-itemContext}}
     {{/each}}
     </ol>
-{{else}}
+  {{else}}
     {{#if owner}}
     {{#if filters.spellbook.size}}
     <li class="item flexrow"><p class="notes">{{localize "DND5E.FilterNoSpells"}}</p></li>
     {{else}}
     <li class="item flexrow inventory-header spellbook-header spellbook-empty" data-type="spell" data-level="{{lvl}}">
         <div class="item-controls flexrow">
-            <a class="item-control item-create" data-tooltip="DND5E.SpellCreate">
+            <a class="item-control item-action" data-action="create" data-tooltip="DND5E.SpellCreate">
                 <i class="fas fa-plus"></i> {{localize "DND5E.SpellAdd"}}
             </a>
         </div>
@@ -131,5 +134,6 @@
     <li class="item flexrow"><p class="notes">{{localize "DND5E.NoSpellLevels"}}</p></li>
     {{/if}}
     {{/if}}
-{{/each}}
-</ol>
+  {{/each}}
+  </ol>
+</{{inventoryElement}}>

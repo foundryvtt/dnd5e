@@ -145,6 +145,9 @@ export async function preloadHandlebarsTemplates() {
     // Journal Partials
     "systems/dnd5e/templates/journal/parts/journal-table.hbs",
 
+    // Shared Partials
+    "systems/dnd5e/templates/shared/inventory.hbs",
+
     // Advancement Partials
     "systems/dnd5e/templates/advancement/parts/advancement-ability-score-control.hbs",
     "systems/dnd5e/templates/advancement/parts/advancement-controls.hbs",
