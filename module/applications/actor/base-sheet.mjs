@@ -64,9 +64,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       scrollY: [
-        ".inventory .inventory-list",
-        ".features .inventory-list",
-        ".spellbook .inventory-list",
+        "dnd5e-inventory .inventory-list",
         ".effects .inventory-list",
         ".center-pane"
       ],
@@ -75,7 +73,8 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
       height: Math.max(680, Math.max(
         237 + (Object.keys(CONFIG.DND5E.abilities).length * 70),
         240 + (Object.keys(CONFIG.DND5E.skills).length * 24)
-      ))
+      )),
+      inventoryElement: "dnd5e-inventory"
     });
   }
 
@@ -135,7 +134,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
       overrides: {
         attunement: foundry.utils.hasProperty(this.actor.overrides, "system.attributes.attunement.max")
       },
-      inventoryElement: "dnd5e-inventory"
+      inventoryElement: this.options.inventoryElement
     };
 
     // Remove items in containers & sort remaining

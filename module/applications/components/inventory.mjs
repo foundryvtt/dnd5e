@@ -6,9 +6,9 @@ import AdvancementConfirmationDialog from "../advancement/advancement-confirmati
  */
 export default class InventoryElement extends HTMLElement {
   connectedCallback() {
-    this._app = ui.windows[this.closest(".app")?.dataset.appid];
+    this.#app = ui.windows[this.closest(".app")?.dataset.appid];
 
-    this.#initializeFilterLists();
+    this._initializeFilterLists();
 
     if ( !this.canUse ) {
       for ( const element of this.querySelectorAll('[data-action="use"]') ) {
@@ -40,8 +40,9 @@ export default class InventoryElement extends HTMLElement {
 
   /**
    * Prepare filter lists an attach their listeners.
+   * @protected
    */
-  #initializeFilterLists() {
+  _initializeFilterLists() {
     const filterLists = this.querySelectorAll(".filter-list");
     if ( !this._app._filters || !filterLists.length ) return;
 
@@ -68,9 +69,15 @@ export default class InventoryElement extends HTMLElement {
   /**
    * Reference to the application that contains this component.
    * @type {Application}
+   */
+  #app;
+
+  /**
+   * Reference to the application that contains this component.
+   * @type {Application}
    * @protected
    */
-  _app;
+  get _app() { return this.#app; }
 
   /* -------------------------------------------- */
 

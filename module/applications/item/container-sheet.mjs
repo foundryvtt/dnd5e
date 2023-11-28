@@ -8,12 +8,14 @@ export default class ContainerSheet extends ItemSheet5e {
     return foundry.utils.mergeObject(super.defaultOptions, {
       width: 600,
       height: 540,
+      scrollY: ["dnd5e-inventory .inventory-list"],
       tabs: [{navSelector: ".tabs", contentSelector: ".sheet-body", initial: "contents"}],
       dragDrop: [
         {dragSelector: "[data-effect-id]", dropSelector: ".effects-list"},
         {dragSelector: ".advancement-item", dropSelector: ".advancement"},
         {dragSelector: ".items-list .item", dropSelector: null}
-      ]
+      ],
+      inventoryElement: "dnd5e-inventory"
     });
   }
 
@@ -68,7 +70,7 @@ export default class ContainerSheet extends ItemSheet5e {
         items: context.items
       }
     };
-    context.inventoryElement = "dnd5e-inventory";
+    context.inventoryElement = this.options.inventoryElement;
 
     context.items = context.items.sort((a, b) => (a.sort || 0) - (b.sort || 0));
 

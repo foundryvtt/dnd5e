@@ -24,9 +24,10 @@ export default class GroupActorSheet extends ActorSheetMixin(ActorSheet) {
       classes: ["dnd5e", "sheet", "actor", "group"],
       template: "systems/dnd5e/templates/actors/group-sheet.hbs",
       tabs: [{navSelector: ".tabs", contentSelector: ".sheet-body", initial: "members"}],
-      scrollY: [".inventory .inventory-list"],
+      scrollY: ["dnd5e-inventory .inventory-list"],
       width: 620,
-      height: 620
+      height: 620,
+      inventoryElement: "dnd5e-inventory"
     });
   }
 
@@ -60,7 +61,7 @@ export default class GroupActorSheet extends ActorSheetMixin(ActorSheet) {
     // Inventory
     context.itemContext = {};
     context.inventory = this.#prepareInventory(context);
-    context.inventoryElement = "dnd5e-inventory";
+    context.inventoryElement = this.options.inventoryElement;
     context.expandedData = {};
     for ( const id of this._expanded ) {
       const item = this.actor.items.get(id);
