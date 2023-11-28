@@ -180,10 +180,10 @@ export default class ContainerData extends SystemDataModel.mixin(
   /** @inheritdoc */
   async _onUpdate(changed, options, userId) {
     // Keep contents folder synchronized with container
-    if ( foundry.utils.hasProperty(changed, "folder") ) {
+    if ( (game.user.id === userId) && foundry.utils.hasProperty(changed, "folder") ) {
       const contents = await this.contents;
       await Item.updateDocuments(contents.map(c => ({ _id: c.id, folder: changed.folder })), {
-        parent: this.parent.parent, pack: this.parent.pack, ...options
+        parent: this.parent.parent, pack: this.parent.pack, ...options, render: false
       });
     }
 
