@@ -2,24 +2,24 @@
 /*  SRD Compendium                           */
 /* ----------------------------------------- */
 
-.srd-compendium {
+.table-of-contents {
   --dnd5e-srd-color-background: #efefef99;
   --dnd5e-srd-color-border: #ba2828;
   --dnd5e-srd-color-box-header: var(--color-text-light-1);
   --dnd5e-srd-color-chapter-header: var(--color-text-hyperlink);
 }
 
-.srd-compendium.app {
+.table-of-contents.app {
   min-height: 480px;
   min-width: 640px;
+
+  .window-content {
+    background: var(--dnd5e-sheet-background);
+    color: var(--color-text-dark-primary);
+  }
 }
 
-.srd-compendium.app .window-content {
-  background: var(--dnd5e-sheet-background);
-  color: var(--color-text-dark-primary);
-}
-
-.srd-compendium article {
+.table-of-contents article {
   display: flex;
   flex-direction: column;
   padding: 1rem;
@@ -52,7 +52,7 @@
     flex-grow: 1;
 
     .chapter {
-      margin-bottom: .5rem;
+      margin-block-end: .5rem;
       break-inside: avoid-column;
     }
 

@@ -221,9 +221,10 @@ Hooks.once("setup", function() {
   CONFIG.DND5E.trackableAttributes = expandAttributeList(CONFIG.DND5E.trackableAttributes);
   game.dnd5e.moduleArt.registerModuleArt();
 
-  // Apply custom compendium styles to the SRD rules compendium.
-  const rules = game.packs.get("dnd5e.rules");
-  rules.applicationClass = applications.journal.SRDCompendium;
+  // Apply table of contents compendium style if specified in flags
+  game.packs
+    .filter(p => p.metadata.flags?.display === "table-of-contents")
+    .forEach(p => p.applicationClass = applications.journal.TableOfContentsCompendium);
 
   // Apply custom item compendium
   game.packs.filter(p => p.metadata.type === "Item")
