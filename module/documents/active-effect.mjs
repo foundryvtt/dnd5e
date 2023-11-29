@@ -15,9 +15,63 @@ export default class ActiveEffect5e extends ActiveEffect {
 
   /** @inheritdoc */
   apply(actor, change) {
-    if ( this.isSuppressed ) return null;
     if ( change.key.startsWith("flags.dnd5e.") ) change = this._prepareFlagChange(actor, change);
-    return super.apply(actor, change);
+
+    // Determine type using DataField
+    const field = change.key.startsWith("system.") ? actor.system.schema.getField(change.key.slice(7)) : null;
+
+    // Get the current value of the target field
+    const current = foundry.utils.getProperty(actor, change.key) ?? null;
+
+    const getTargetType = field => {
+      if ( field instanceof foundry.data.fields.ArrayField ) return "Array";
+      else if ( field instanceof foundry.data.fields.ObjectField ) return "Object";
+      else if ( field instanceof foundry.data.fields.BooleanField ) return "boolean";
+      else if ( field instanceof foundry.data.fields.NumberField ) return "number";
+      else if ( field instanceof foundry.data.fields.StringField ) return "string";
+    };
+    // TODO: Custom handling for FormulaField
+
+    const targetType = getTargetType(field);
+    if ( !targetType ) return super.apply(actor, change);
+
+    let delta;
+    try {
+      if ( targetType === "Array" ) {
+        const innerType = getTargetType(field.element);
+        delta = this._castArray(change.value, innerType);
+      }
+      else delta = this._castDelta(change.value, targetType);
+    } catch(err) {
+      console.warn(`Actor [${actor.id}] | Unable to parse active effect change for ${change.key}: "${change.value}"`);
+      return;
+    }
+
+    // Apply the change depending on the application mode
+    const modes = CONST.ACTIVE_EFFECT_MODES;
+    const changes = {};
+    switch ( change.mode ) {
+      case modes.ADD:
+        this._applyAdd(actor, change, current, delta, changes);
+        break;
+      case modes.MULTIPLY:
+        this._applyMultiply(actor, change, current, delta, changes);
+        break;
+      case modes.OVERRIDE:
+        this._applyOverride(actor, change, current, delta, changes);
+        break;
+      case modes.UPGRADE:
+      case modes.DOWNGRADE:
+        this._applyUpgrade(actor, change, current, delta, changes);
+        break;
+      default:
+        this._applyCustom(actor, change, current, delta, changes);
+        break;
+    }
+
+    // Apply all changes to the Actor data
+    foundry.utils.mergeObject(actor, changes);
+    return changes;
   }
 
   /* -------------------------------------------- */
