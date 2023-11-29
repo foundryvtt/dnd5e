@@ -27,7 +27,7 @@ export default class InventoryElement extends HTMLElement {
       });
     }
 
-    new ContextMenu(this, "[data-item-id]", [], {onOpen: async element => {
+    new ContextMenu(this, "[data-item-id]", [], {onOpen: element => {
       const item = this.getItem(element.dataset.itemId);
       // Parts of ContextMenu doesn't play well with promises, so don't show menus for containers in packs
       if ( !item || (item instanceof Promise) ) return;

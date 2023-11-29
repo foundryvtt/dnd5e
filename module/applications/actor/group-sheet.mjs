@@ -27,7 +27,9 @@ export default class GroupActorSheet extends ActorSheetMixin(ActorSheet) {
       scrollY: ["dnd5e-inventory .inventory-list"],
       width: 620,
       height: 620,
-      inventoryElement: "dnd5e-inventory"
+      elements: {
+        inventory: "dnd5e-inventory"
+      }
     });
   }
 
@@ -61,7 +63,7 @@ export default class GroupActorSheet extends ActorSheetMixin(ActorSheet) {
     // Inventory
     context.itemContext = {};
     context.inventory = this.#prepareInventory(context);
-    context.inventoryElement = this.options.inventoryElement;
+    context.elements = this.options.elements;
     context.expandedData = {};
     for ( const id of this._expanded ) {
       const item = this.actor.items.get(id);

@@ -4,8 +4,8 @@ import ActorTypeConfig from "../actor/type-config.mjs";
 import AdvancementManager from "../advancement/advancement-manager.mjs";
 import AdvancementMigrationDialog from "../advancement/advancement-migration-dialog.mjs";
 import Accordion from "../accordion.mjs";
+import EffectsElement from "../components/effects.mjs";
 import SourceConfig from "../source-config.mjs";
-import ActiveEffect5e from "../../documents/active-effect.mjs";
 import * as Trait from "../../documents/actor/trait.mjs";
 
 /**
@@ -49,7 +49,10 @@ export default class ItemSheet5e extends ItemSheet {
       ],
       accordions: [{
         headingSelector: ".description-header", contentSelector: ".editor"
-      }]
+      }],
+      elements: {
+        effects: "dnd5e-effects"
+      }
     });
   }
 
@@ -130,7 +133,8 @@ export default class ItemSheet5e extends ItemSheet {
       advancement: this._getItemAdvancement(item),
 
       // Prepare Active Effects
-      effects: ActiveEffect5e.prepareActiveEffectCategories(item.effects)
+      effects: EffectsElement.prepareCategories(item.effects),
+      elements: this.options.elements
     });
     context.abilityConsumptionTargets = this._getItemConsumptionTargets();
 
@@ -478,7 +482,6 @@ export default class ItemSheet5e extends ItemSheet {
     if ( this.isEditable ) {
       html.find(".config-button").click(this._onConfigMenu.bind(this));
       html.find(".damage-control").click(this._onDamageControl.bind(this));
-      html.find(".effect-control").click(ev => ActiveEffect5e.onManageActiveEffect(ev, this.item));
       html.find(".advancement .item-control").click(event => {
         const t = event.currentTarget;
         if ( t.dataset.action ) this._onAdvancementAction(t, t.dataset.action);

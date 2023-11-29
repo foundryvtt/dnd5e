@@ -1,3 +1,5 @@
+import EffectsElement from "../applications/components/effects.mjs";
+
 /**
  * Extend the base ActiveEffect class to implement system-specific logic.
  */
@@ -111,8 +113,13 @@ export default class ActiveEffect5e extends ActiveEffect {
    * @param {MouseEvent} event      The left-click event on the effect control
    * @param {Actor5e|Item5e} owner  The owning document which manages this effect
    * @returns {Promise|null}        Promise that resolves when the changes are complete.
+   * @deprecated since 3.0, targeted for removal in 3.2
    */
   static onManageActiveEffect(event, owner) {
+    foundry.utils.logCompatibilityWarning(
+      "ActiveEffects5e#onManageActiveEffect has been deprecated in favor of the new dnd5e-effects element.",
+      { since: "DnD5e 3.0", until: "DnD5e 3.2" }
+    );
     event.preventDefault();
     const a = event.currentTarget;
     const li = a.closest("li");
@@ -142,41 +149,13 @@ export default class ActiveEffect5e extends ActiveEffect {
    * Prepare the data structure for Active Effects which are currently applied to an Actor or Item.
    * @param {ActiveEffect5e[]} effects  The array of Active Effect instances to prepare sheet data for
    * @returns {object}                  Data for rendering
+   * @deprecated since 3.0, targeted for removal in 3.2
    */
   static prepareActiveEffectCategories(effects) {
-    // Define effect header categories
-    const categories = {
-      temporary: {
-        type: "temporary",
-        label: game.i18n.localize("DND5E.EffectTemporary"),
-        effects: []
-      },
-      passive: {
-        type: "passive",
-        label: game.i18n.localize("DND5E.EffectPassive"),
-        effects: []
-      },
-      inactive: {
-        type: "inactive",
-        label: game.i18n.localize("DND5E.EffectInactive"),
-        effects: []
-      },
-      suppressed: {
-        type: "suppressed",
-        label: game.i18n.localize("DND5E.EffectUnavailable"),
-        effects: [],
-        info: [game.i18n.localize("DND5E.EffectUnavailableInfo")]
-      }
-    };
-
-    // Iterate over active effects, classifying them into categories
-    for ( let e of effects ) {
-      if ( e.isSuppressed ) categories.suppressed.effects.push(e);
-      else if ( e.disabled ) categories.inactive.effects.push(e);
-      else if ( e.isTemporary ) categories.temporary.effects.push(e);
-      else categories.passive.effects.push(e);
-    }
-    categories.suppressed.hidden = !categories.suppressed.effects.length;
-    return categories;
+    foundry.utils.logCompatibilityWarning(
+      "ActiveEffects5e#prepareActiveEffectCategories has been deprecated in favor of EffectsElement#prepareCategories.",
+      { since: "DnD5e 3.0", until: "DnD5e 3.2" }
+    );
+    return EffectsElement.prepareCategories(effects);
   }
 }
