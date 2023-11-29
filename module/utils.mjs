@@ -122,7 +122,8 @@ export const validators = {
 export async function preloadHandlebarsTemplates() {
   const partials = [
     // Shared Partials
-    "systems/dnd5e/templates/actors/parts/active-effects.hbs",
+    "systems/dnd5e/templates/shared/active-effects.hbs",
+    "systems/dnd5e/templates/shared/inventory.hbs",
     "systems/dnd5e/templates/apps/parts/trait-list.hbs",
 
     // Actor Sheet Partials
@@ -144,9 +145,6 @@ export async function preloadHandlebarsTemplates() {
 
     // Journal Partials
     "systems/dnd5e/templates/journal/parts/journal-table.hbs",
-
-    // Shared Partials
-    "systems/dnd5e/templates/shared/inventory.hbs",
 
     // Advancement Partials
     "systems/dnd5e/templates/advancement/parts/advancement-ability-score-control.hbs",

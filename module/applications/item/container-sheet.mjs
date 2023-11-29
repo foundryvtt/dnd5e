@@ -15,7 +15,9 @@ export default class ContainerSheet extends ItemSheet5e {
         {dragSelector: ".advancement-item", dropSelector: ".advancement"},
         {dragSelector: ".items-list .item", dropSelector: null}
       ],
-      inventoryElement: "dnd5e-inventory"
+      elements: {
+        inventory: "dnd5e-inventory"
+      }
     });
   }
 
@@ -70,7 +72,6 @@ export default class ContainerSheet extends ItemSheet5e {
         items: context.items
       }
     };
-    context.inventoryElement = this.options.inventoryElement;
 
     context.items = context.items.sort((a, b) => (a.sort || 0) - (b.sort || 0));
 

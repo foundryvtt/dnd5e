@@ -1,6 +1,6 @@
-import ActiveEffect5e from "../../documents/active-effect.mjs";
 import * as Trait from "../../documents/actor/trait.mjs";
 import Item5e from "../../documents/item.mjs";
+import EffectsElement from "../components/effects.mjs";
 
 import ActorAbilityConfig from "./ability-config.mjs";
 import ActorArmorConfig from "./armor-config.mjs";
@@ -65,7 +65,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
     return foundry.utils.mergeObject(super.defaultOptions, {
       scrollY: [
         "dnd5e-inventory .inventory-list",
-        ".effects .inventory-list",
+        "dnd5e-effects .effects-list",
         ".center-pane"
       ],
       tabs: [{navSelector: ".tabs", contentSelector: ".sheet-body", initial: "description"}],
@@ -74,7 +74,10 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
         237 + (Object.keys(CONFIG.DND5E.abilities).length * 70),
         240 + (Object.keys(CONFIG.DND5E.skills).length * 24)
       )),
-      inventoryElement: "dnd5e-inventory"
+      elements: {
+        effects: "dnd5e-effects",
+        inventory: "dnd5e-inventory"
+      }
     });
   }
 
@@ -117,7 +120,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
       labels: this._getLabels(),
       movement: this._getMovementSpeed(this.actor.system),
       senses: this._getSenses(this.actor.system),
-      effects: ActiveEffect5e.prepareActiveEffectCategories(this.actor.effects),
+      effects: EffectsElement.prepareCategories(this.actor.effects),
       warnings: foundry.utils.deepClone(this.actor._preparationWarnings),
       filters: this._filters,
       owner: this.actor.isOwner,
@@ -134,7 +137,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
       overrides: {
         attunement: foundry.utils.hasProperty(this.actor.overrides, "system.attributes.attunement.max")
       },
-      inventoryElement: this.options.inventoryElement
+      elements: this.options.elements
     };
 
     // Remove items in containers & sort remaining
@@ -647,14 +650,11 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
       html.find(".slot-max-override").click(this._onSpellSlotOverride.bind(this));
       html.find(".attunement-max-override").click(this._onAttunementOverride.bind(this));
 
-      // Active Effect management
-      html.find(".effect-control").click(ev => ActiveEffect5e.onManageActiveEffect(ev, this.actor));
       this._disableOverriddenFields(html);
     }
 
     // Owner Only Listeners, for non-compendium actors.
     if ( this.actor.isOwner && !this.actor.compendium ) {
-
       // Ability Checks
       html.find(".ability-name").click(this._onRollAbilityTest.bind(this));
 
@@ -663,11 +663,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
 
       // Roll Tool Checks.
       html.find(".tool-name").on("click", this._onRollToolCheck.bind(this));
-
     }
-
-    // Item Context Menu
-    new ContextMenu(html, ".item-list .item", [], {onOpen: this._onItemContext.bind(this)});
 
     // Handle default listeners last so system listeners are triggered first
     super.activateListeners(html);
@@ -706,24 +702,6 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
       if ( spell ) {
         html.find(`.spell-max[data-level="${spell}"]`).attr("data-tooltip", "DND5E.ActiveEffectOverrideWarning");
       }
-    }
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Handle activation of a context menu for an embedded Item or ActiveEffect document.
-   * Dynamically populate the array of context menu options.
-   * @param {HTMLElement} element       The HTML element for which the context menu is activated
-   * @protected
-   */
-  _onItemContext(element) {
-    // Active Effects
-    if ( element.classList.contains("effect") ) {
-      const effect = this.actor.effects.get(element.dataset.effectId);
-      if ( !effect ) return;
-      ui.context.menuItems = this._getActiveEffectContextOptions(effect);
-      Hooks.call("dnd5e.getActiveEffectContextOptions", effect, ui.context.menuItems);
     }
   }
 

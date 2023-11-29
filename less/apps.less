@@ -528,23 +528,29 @@ h5 {
       }
     }
   }
+}
 
-  /* ----------------------------------------- */
-  /*  Active Effects                           */
-  /* ----------------------------------------- */
+/* ----------------------------------------- */
+/*  Active Effects                           */
+/* ----------------------------------------- */
 
-  .effects .item {
-    .effect-source,
-    .effect-duration,
-    .effect-controls {
-      text-align: center;
-      border-left: 1px solid var(--dnd5e-color-faint);
-      border-right: 1px solid var(--dnd5e-color-faint);
-      font-size: var(--font-size-12);
-    }
-    .effect-controls {
-      border: none;
-    }
+dnd5e-effects {
+  display: flex;
+  flex-direction: column;
+  overflow-y: hidden;
+
+  .effects-list {
+    flex-grow: 1;
+  }
+  .effect-source,
+  .effect-duration,
+  .effect-controls {
+    text-align: center;
+    border-inline: 1px solid var(--dnd5e-color-faint);
+    font-size: var(--font-size-12);
+  }
+  .effect-controls {
+    border: none;
   }
 }
 
