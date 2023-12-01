@@ -1406,7 +1406,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * @param {number} [config.spellLevel]   If the item is a spell, override the level for damage scaling
    * @param {boolean} [config.versatile]   If the item is a weapon, roll damage using the versatile formula
    * @param {DamageRollConfiguration} [config.options]  Additional options passed to the damageRoll function
-   * @returns {Promise<DamageRoll>}        A Promise which resolves to the created Roll instance, or null if the action
+   * @returns {Promise<DamageRoll[]>}      A Promise which resolves to the created Roll instances, or null if the action
    *                                       cannot be performed.
    */
   async rollDamage({critical, event=null, spellLevel=null, versatile=false, options={}}={}) {
@@ -1418,7 +1418,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
 
     // Get roll data
     const dmg = this.system.damage;
-    const parts = dmg.parts.map(d => d[0]);
+    const rollConfigs = dmg.parts.map(([formula, type]) => ({ parts: [formula], type }));
     const rollData = this.getRollData();
     if ( spellLevel ) rollData.item.level = spellLevel;
 
@@ -1442,35 +1442,37 @@ export default class Item5e extends SystemDocumentMixin(Item) {
 
     // Adjust damage from versatile usage
     if ( versatile && dmg.versatile ) {
-      parts[0] = dmg.versatile;
+      rollConfigs[0].parts[0] = dmg.versatile;
       messageData["flags.dnd5e.roll"].versatile = true;
     }
 
     // Scale damage from up-casting spells
     const scaling = this.system.scaling;
-    if ( (this.type === "spell") ) {
+    if ( this.type === "spell" ) {
       if ( scaling.mode === "cantrip" ) {
         let level;
         if ( this.actor.type === "character" ) level = this.actor.system.details.level;
         else if ( this.system.preparation.mode === "innate" ) level = Math.ceil(this.actor.system.details.cr);
         else level = this.actor.system.details.spellLevel;
-        this._scaleCantripDamage(parts, scaling.formula, level, rollData);
+        rollConfigs.forEach(c => this._scaleCantripDamage(c.parts, scaling.formula, level, rollData));
       }
       else if ( spellLevel && (scaling.mode === "level") && scaling.formula ) {
-        this._scaleSpellDamage(parts, this.system.level, spellLevel, scaling.formula, rollData);
+        rollConfigs.forEach(c =>
+          this._scaleSpellDamage(c.parts, this.system.level, spellLevel, scaling.formula, rollData)
+        );
       }
     }
 
     // Add damage bonus formula
     const actorBonus = foundry.utils.getProperty(this.actor.system, `bonuses.${this.system.actionType}`) || {};
     if ( actorBonus.damage && (parseInt(actorBonus.damage) !== 0) ) {
-      parts.push(actorBonus.damage);
+      rollConfigs[0].parts.push(actorBonus.damage);
     }
 
     // Only add the ammunition damage if the ammunition is a consumable with type 'ammo'
     const ammo = this.hasAmmo ? this.actor.items.get(this.system.consume.target) : null;
     if ( ammo ) {
-      parts.push("@ammo");
+      rollConfigs[0].parts.push("@ammo");
       rollData.ammo = ammo.system.damage.parts.map(p => p[0]).join("+");
       rollConfig.flavor += ` [${ammo.name}]`;
     }
@@ -1484,7 +1486,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     if ( this.system.critical?.damage ) rollConfig.criticalBonusDamage = this.system.critical.damage;
 
     foundry.utils.mergeObject(rollConfig, options);
-    rollConfig.parts = parts.concat(options.parts ?? []);
+    rollConfig.rollConfigs = rollConfigs;
 
     /**
      * A hook event that fires before a damage is rolled for an Item.
@@ -1496,19 +1498,18 @@ export default class Item5e extends SystemDocumentMixin(Item) {
      */
     if ( Hooks.call("dnd5e.preRollDamage", this, rollConfig) === false ) return;
 
-    const roll = await damageRoll(rollConfig);
+    const rolls = await damageRoll(rollConfig);
 
     /**
      * A hook event that fires after a damage has been rolled for an Item.
      * @function dnd5e.rollDamage
      * @memberof hookEvents
-     * @param {Item5e} item      Item for which the roll was performed.
-     * @param {DamageRoll} roll  The resulting roll.
+     * @param {Item5e} item       Item for which the roll was performed.
+     * @param {DamageRoll} rolls  The resulting rolls.
      */
-    if ( roll ) Hooks.callAll("dnd5e.rollDamage", this, roll);
+    if ( rolls?.length ) Hooks.callAll("dnd5e.rollDamage", this, rolls);
 
-    // Call the roll helper utility
-    return roll;
+    return rolls;
   }
 
   /* -------------------------------------------- */
