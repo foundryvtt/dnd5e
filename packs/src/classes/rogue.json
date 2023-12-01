@@ -628,6 +628,22 @@
           "choices": []
         },
         "level": 1,
+        "title": "",
+        "value": {}
+      },
+      {
+        "_id": "nCjIrANeqoEqGbTA",
+        "type": "Trait",
+        "configuration": {
+          "hint": "You have acquired greater mental strength. You gain proficiency in Wisdom saving throws.",
+          "mode": "default",
+          "allowReplacements": false,
+          "grants": [
+            "saves:wis"
+          ],
+          "choices": []
+        },
+        "level": 15,
         "title": ""
       }
     ],
@@ -666,10 +682,10 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.4.0",
-    "coreVersion": "10.303",
+    "systemVersion": "2.4.1",
+    "coreVersion": "10.312",
     "createdTime": 1661787234284,
-    "modifiedTime": 1699988274467,
+    "modifiedTime": 1701456291142,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!xEb8jmA5HlNs7xTF"
