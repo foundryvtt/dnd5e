@@ -66,8 +66,8 @@ export default class SelectChoices {
   /**
    * Find key and value for the provided key or key suffix.
    * @param {string} key  Full prefixed key (e.g. `tool:art:alchemist`) or just the suffix (e.g. `alchemist`).
-   * @returns {[string, SelectChoicesEntry]}  An array with the first value being the matched key, and the second
-   *                                          being the value.
+   * @returns {[string, SelectChoicesEntry]|null}  An array with the first value being the matched key,
+   *                                               and the second being the value.
    */
   find(key) {
     for ( const [k, v] of Object.entries(this) ) {
@@ -78,7 +78,7 @@ export default class SelectChoices {
         if ( result ) return result;
       }
     }
-    return [];
+    return null;
   }
 
   /* -------------------------------------------- */

@@ -50,8 +50,8 @@ export async function actorValues(actor, trait) {
   const traitChoices = await choices(trait, {prefixed: true});
 
   const setValue = (k, v) => {
-    const [key] = traitChoices.find(k);
-    if ( key ) values[key] = v;
+    const result = traitChoices.find(k);
+    if ( result ) values[result[0]] = v;
   };
 
   if ( ["skills", "tool"].includes(trait) ) {
