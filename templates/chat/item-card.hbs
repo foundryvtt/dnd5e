@@ -68,12 +68,12 @@
 
           {{#if ammo.hasSave}}
           <button data-action="save" data-ability="{{ammo.data.save.ability}}">
-              {{ localize "DND5E.SavingThrow" }} {{ammo.labels.save}} [{{ammo.item.name}}]
+              {{ localize "DND5E.SavingThrow" }} {{ammo.labels.save}} [{{ localize "DND5E.ConsumableAmmo" }}]
           </button>
           {{/if}}
 
           {{#if ammo.hasAreaTarget}}
-          <button data-action="placeAmmoTemplate">{{ localize "DND5E.PlaceTemplate" }} [{{ammo.item.name}}]</button>
+          <button data-action="placeAmmoTemplate">{{ localize "DND5E.PlaceTemplate" }} [{{ localize "DND5E.ConsumableAmmo" }}]</button>
           {{/if}}
 
         {{/if}}
