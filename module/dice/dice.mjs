@@ -171,16 +171,14 @@ export async function damageRoll({
 
   const {isCritical, isFF} = _determineCriticalMode({critical, fastForward, event});
   const rolls = [];
-  for ( const [index, rollConfig] of rollConfigs.entries() ) {
-    const formula = rollConfig.parts.join(" + ");
+  flavor ??= title;
+  multiplyNumeric ??= game.settings.get("dnd5e", "criticalDamageModifiers");
+  powerfulCritical ??= game.settings.get("dnd5e", "criticalDamageMaxDice");
+  critical = isFF ? isCritical : false;
+  for ( const [index, { parts, type }] of rollConfigs.entries() ) {
+    const formula = parts.join(" + ");
     const rollOptions = {
-      flavor: flavor ?? title,
-      rollMode,
-      critical: isFF ? isCritical : false,
-      criticalMultiplier,
-      multiplyNumeric: multiplyNumeric ?? game.settings.get("dnd5e", "criticalDamageModifiers"),
-      powerfulCritical: powerfulCritical ?? game.settings.get("dnd5e", "criticalDamageMaxDice"),
-      type: rollConfig.type
+      flavor, rollMode, critical, criticalMultiplier, multiplyNumeric, powerfulCritical, type
     };
     if ( index === 0 ) {
       rollOptions.criticalBonusDice = criticalBonusDice;

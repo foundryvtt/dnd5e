@@ -242,10 +242,8 @@ export default class DamageRoll extends Roll {
    *                                          dialog was closed
    */
   async configureDialog(data={}, options={}) {
-    return new Promise(async resolve => {
-      const rolls = await this.constructor.configureDialog([this], data, options);
-      resolve(rolls[0] ?? null);
-    });
+    const rolls = await this.constructor.configureDialog([this], data, options);
+    return rolls[0] ?? null;
   }
 
   /* -------------------------------------------- */
