@@ -1507,7 +1507,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
      * @param {Item5e} item       Item for which the roll was performed.
      * @param {DamageRoll} rolls  The resulting rolls.
      */
-    if ( rolls?.length ) Hooks.callAll("dnd5e.rollDamage", this, rolls);
+    if ( rolls || (rollConfig.returnMultiple && rolls?.length) ) Hooks.callAll("dnd5e.rollDamage", this, rolls);
 
     return rolls;
   }
