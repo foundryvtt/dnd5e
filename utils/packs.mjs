@@ -76,7 +76,6 @@ function packageCommand() {
 function cleanPackEntry(data, { clearSourceId=true }={}) {
   if ( data.ownership ) data.ownership = { default: 0 };
   if ( clearSourceId ) delete data.flags?.core?.sourceId;
-  if ( typeof data.folder === "string" ) data.folder = null;
   delete data.flags?.importSource;
   delete data.flags?.exportSource;
   if ( data._stats?.lastModifiedBy ) data._stats.lastModifiedBy = "dnd5ebuilder0000";
@@ -167,7 +166,7 @@ async function cleanPacks(packName, entryName) {
 
 
 /* ----------------------------------------- */
-/*  Compile Packs
+/*  Compile Packs                            */
 /* ----------------------------------------- */
 
 /**
@@ -195,7 +194,7 @@ async function compilePacks(packName, options={}) {
 
 
 /* ----------------------------------------- */
-/*  Extract Packs
+/*  Extract Packs                            */
 /* ----------------------------------------- */
 
 /**
@@ -221,15 +220,34 @@ async function extractPacks(packName, entryName, options) {
   for ( const packInfo of packs ) {
     const dest = path.join(PACK_SRC, packInfo.name);
     logger.info(`Extracting pack ${packInfo.name}`);
+
+    const folders = {};
+    await extractPack(packInfo.path, dest, {
+      log: false, documentType: packInfo.type, transformEntry: entry => {
+        if ( entry._key.startsWith("!folders") ) {
+          folders[entry._id] = { name: slugify(entry.name), folder: entry.folder };
+          folders[entry._id].path = `${folders[entry._id].name}/`;
+        }
+        return false;
+      }
+    });
+    for ( const folder of Object.values(folders) ) {
+      let parent = folder.folder;
+      while ( parent ) {
+        const parentData = folders[parent];
+        if ( parentData ) folder.path = `${parentData.name}/${folder.path}`;
+        parent = parentData?.parent;
+      }
+    }
+
     await extractPack(packInfo.path, dest, {
       nedb: options.nedb, log: true, documentType: packInfo.type, transformEntry: entry => {
         if ( entryName && (entryName !== entry.name.toLowerCase()) ) return false;
         cleanPackEntry(entry);
       }, transformName: entry => {
-        const name = entry.name.toLowerCase();
-        const outputName = name.replace("'", "").replace(/[^a-z0-9]+/gi, " ").trim().replace(/\s+|-{2,}/g, "-");
-        const subfolder = _getSubfolderName(entry, packInfo.name);
-        return path.join(subfolder, `${outputName}.json`);
+        if ( entry._id in folders ) return `${folders[entry._id].path}_folder.json`;
+        const outputName = slugify(entry.name);
+        return path.join(folders[entry.folder]?.path ?? "", `${outputName}.json`);
       }
     });
   }
@@ -237,30 +255,10 @@ async function extractPacks(packName, entryName, options) {
 
 
 /**
- * Determine a subfolder name based on which pack is being extracted.
- * @param {object} data  Data for the entry being extracted.
- * @param {string} pack  Name of the pack.
- * @returns {string}     Subfolder name the entry into which the entry should be created. An empty string if none.
- * @private
+ * Standardize name format.
+ * @param {string} name
+ * @returns {string}
  */
-function _getSubfolderName(data, pack) {
-  switch (pack) {
-    // Items should be grouped by type
-    case "items":
-      if ( (data.type === "consumable") && data.system.consumableType ) return data.system.consumableType;
-      return data.type;
-
-    // Monsters should be grouped by type
-    case "monsters":
-      if ( !data.system?.details?.type?.value ) return "";
-      return data.system.details.type.value;
-
-    // Spells should be grouped by level
-    case "spells":
-      if ( data.system?.level === undefined ) return "";
-      if ( data.system.level === 0 ) return "cantrip";
-      return `level-${data.system.level}`;
-
-    default: return "";
-  }
+function slugify(name) {
+  return name.toLowerCase().replace("'", "").replace(/[^a-z0-9]+/gi, " ").trim().replace(/\s+|-{2,}/g, "-");
 }
