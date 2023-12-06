@@ -124,7 +124,7 @@ export default class ItemSheet5e extends ItemSheet {
       isCrewed: item.system.activation?.type === "crew",
 
       // Armor Class
-      hasDexModifier: item.isArmor && (item.system.armor?.type !== "shield"),
+      hasAbilityModifier: item.isArmor && (item.system.armor?.type !== "shield"),
 
       // Advancement
       advancement: this._getItemAdvancement(item),

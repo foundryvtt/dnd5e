@@ -695,7 +695,7 @@ DND5E.armorClasses = {
   },
   default: {
     label: "DND5E.ArmorClassEquipment",
-    formula: "@attributes.ac.armor + @attributes.ac.dex"
+    formula: "@attributes.ac.armor + @attributes.ac.ability"
   },
   mage: {
     label: "DND5E.ArmorClassMage",

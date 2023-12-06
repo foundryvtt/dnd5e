@@ -497,12 +497,19 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
             message: game.i18n.localize("DND5E.WarnMultipleArmor"), type: "warning"
           });
           const armorData = armors[0].system.armor;
-          const isHeavy = armorData.type === "heavy";
-          ac.armor = armorData.value ?? ac.armor;
-          ac.dex = isHeavy ? 0 : Math.min(armorData.dex ?? Infinity, this.system.abilities.dex?.mod ?? 0);
-          ac.equippedArmor = armors[0];
+          ac.armor = armorData.value ?? ac.armor; // Set base.
+          const ability = (armorData.ability in CONFIG.DND5E.abilities) ? armorData.ability : "none";
+          if (ability !== "none") {
+            const min = armorData.abilityMin ?? -Infinity;
+            const max = armorData.abilityMax ?? Infinity;
+            const mod = this.system.abilities[ability].mod ?? 0;
+            ac.ability = Math.clamped(mod, min, max);
+            ac.equippedArmor = armors[0];
+          } else {
+            ac.ability = 0;
+          }
         }
-        else ac.dex = this.system.abilities.dex?.mod ?? 0;
+        else ac.ability = this.system.abilities.dex?.mod ?? 0;
 
         rollData.attributes.ac = ac;
         try {

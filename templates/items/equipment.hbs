@@ -104,12 +104,21 @@
             </div>
             {{/if}}
 
-            {{#if hasDexModifier}}
-            {{!-- Dexterity Modifier --}}
+            {{#if hasAbilityModifier}}
+            {{!-- Ability Modifier --}}
             <div class="form-group">
-                <label>{{ localize "DND5E.ItemEquipmentDexMod" }}</label>
+                <label>{{ localize "DND5E.ItemEquipmentAbilityMod" }}</label>
                 <div class="form-fields">
-                    {{numberInput system.armor.dex name="system.armor.dex" placeholder=(localize "DND5E.Unlimited")}}
+                    {{#if (ne system.armor.ability "none")}}
+                    {{numberInput system.armor.abilityMin name="system.armor.abilityMin" placeholder=(localize "DND5E.ItemEquipmentAbilityModMin")}}
+                    {{numberInput system.armor.abilityMax name="system.armor.abilityMax" placeholder=(localize "DND5E.ItemEquipmentAbilityModMax")}}
+                    {{/if}}
+                    <select name="system.armor.ability">
+                      {{#select system.armor.ability}}
+                      <option value="none">{{ localize "DND5E.None" }}</option>
+                      {{selectOptions config.abilities labelAttr="label"}}
+                      {{/select}}
+                    </select>
                 </div>
             </div>
             {{/if}}
