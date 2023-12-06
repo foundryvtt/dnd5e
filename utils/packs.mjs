@@ -247,7 +247,7 @@ async function extractPacks(packName, entryName, options) {
       }, transformName: entry => {
         if ( entry._id in folders ) return `${folders[entry._id].path}_folder.json`;
         const outputName = slugify(entry.name);
-        return path.join(folders[entry.folder]?.path ?? "", `${outputName}.json`);
+        return path.join(folders[entry.folder]?.path ?? "", `${outputName}-${entry._id}.json`);
       }
     });
   }
