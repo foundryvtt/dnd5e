@@ -45,6 +45,14 @@ export default class ActiveEffect5e extends ActiveEffect {
 
   /* --------------------------------------------- */
 
+  /** @inheritdoc */
+  _applyUpgrade(actor, change, current, delta, changes) {
+    if ( current === null ) return this._applyOverride(actor, change, current, delta, changes);
+    return super._applyUpgrade(actor, change, current, delta, changes);
+  }
+
+  /* --------------------------------------------- */
+
   /**
    * Transform the data type of the change to match the type expected for flags.
    * @param {Actor5e} actor            The Actor to whom this effect should be applied.

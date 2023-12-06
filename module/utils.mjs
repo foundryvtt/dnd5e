@@ -282,6 +282,7 @@ export function preLocalize(configKeyPath, { key, keys=[], sort=false }={}) {
 export function performPreLocalization(config) {
   for ( const [keyPath, settings] of Object.entries(_preLocalizationRegistrations) ) {
     const target = foundry.utils.getProperty(config, keyPath);
+    if ( !target ) continue;
     _localizeObject(target, settings.keys);
     if ( settings.sort ) foundry.utils.setProperty(config, keyPath, sortObjectEntries(target, settings.keys[0]));
   }

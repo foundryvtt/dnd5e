@@ -1729,8 +1729,8 @@ DND5E.languages = {
       undercommon: "DND5E.LanguagesUndercommon"
     }
   },
-  cant: "DND5E.LanguagesThievesCant",
-  druidic: "DND5E.LanguagesDruidic"
+  druidic: "DND5E.LanguagesDruidic",
+  cant: "DND5E.LanguagesThievesCant"
 };
 preLocalize("languages", { key: "label" });
 preLocalize("languages.standard.children", { sort: true });
@@ -2080,8 +2080,8 @@ Object.defineProperty(DND5E, "enrichmentLookup", {
         skills: foundry.utils.deepClone(DND5E.skills),
         tools: foundry.utils.deepClone(DND5E.toolIds)
       };
-      Object.values(DND5E.abilities).forEach(a => _enrichmentLookup.abilities[a.fullKey] = a);
-      Object.values(DND5E.skills).forEach(s => _enrichmentLookup.skills[s.fullKey] = s);
+      Object.entries(DND5E.abilities).forEach(([k, a]) => _enrichmentLookup.abilities[a.fullKey] = { ...a, key: k });
+      Object.entries(DND5E.skills).forEach(([k, s]) => _enrichmentLookup.skills[s.fullKey] = { ...s, key: k });
     }
     return _enrichmentLookup;
   },
