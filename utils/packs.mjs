@@ -49,14 +49,14 @@ function packageCommand() {
       });
     },
     handler: async argv => {
-      const { action, pack, entry, ...options } = argv;
+      const { action, pack, entry } = argv;
       switch ( action ) {
         case "clean":
           return await cleanPacks(pack, entry);
         case "pack":
-          return await compilePacks(pack, options);
+          return await compilePacks(pack);
         case "unpack":
-          return await extractPacks(pack, entry, options);
+          return await extractPacks(pack, entry);
       }
     }
   };
@@ -69,9 +69,9 @@ function packageCommand() {
 
 /**
  * Removes unwanted flags, permissions, and other data from entries before extracting or compiling.
- * @param {object} data  Data for a single entry to clean.
- * @param {object} [options]
- * @param {boolean} [options.clearSourceId]  Should the core sourceId flag be deleted.
+ * @param {object} data                           Data for a single entry to clean.
+ * @param {object} [options={}]
+ * @param {boolean} [options.clearSourceId=true]  Should the core sourceId flag be deleted.
  */
 function cleanPackEntry(data, { clearSourceId=true }={}) {
   if ( data.ownership ) data.ownership = { default: 0 };
@@ -172,13 +172,11 @@ async function cleanPacks(packName, entryName) {
 /**
  * Compile the source JSON files into compendium packs.
  * @param {string} [packName]       Name of pack to compile. If none provided, all packs will be packed.
- * @param {object} [options={}]
- * @param {boolean} [options.nedb]  Compile into NeDB?
  *
- * - `npm run build:db` - Compile all JSON files into their NEDB files.
+ * - `npm run build:db` - Compile all JSON files into their LevelDB files.
  * - `npm run build:db -- classes` - Only compile the specified pack.
  */
-async function compilePacks(packName, options={}) {
+async function compilePacks(packName) {
   // Determine which source folders to process
   const folders = fs.readdirSync(PACK_SRC, { withFileTypes: true }).filter(file =>
     file.isDirectory() && ( !packName || (packName === file.name) )
@@ -186,9 +184,9 @@ async function compilePacks(packName, options={}) {
 
   for ( const folder of folders ) {
     const src = path.join(PACK_SRC, folder.name);
-    const dest = path.join(PACK_DEST, `${folder.name}${options.nedb ? ".db" : ""}`);
+    const dest = path.join(PACK_DEST, folder.name);
     logger.info(`Compiling pack ${folder.name}`);
-    await compilePack(src, dest, { nedb: options.nedb, recursive: true, log: true, transformEntry: cleanPackEntry });
+    await compilePack(src, dest, { recursive: true, log: true, transformEntry: cleanPackEntry });
   }
 }
 
@@ -201,14 +199,12 @@ async function compilePacks(packName, options={}) {
  * Extract the contents of compendium packs to JSON files.
  * @param {string} [packName]       Name of pack to extract. If none provided, all packs will be unpacked.
  * @param {string} [entryName]      Name of a specific entry to extract.
- * @param {object} [options={}]
- * @param {boolean} [options.nedb]  Extract from NeDB?
  *
- * - `npm build:json - Extract all compendium NEDB files into JSON files.
+ * - `npm build:json - Extract all compendium LevelDB files into JSON files.
  * - `npm build:json -- classes` - Only extract the contents of the specified compendium.
  * - `npm build:json -- classes Barbarian` - Only extract a single item from the specified compendium.
  */
-async function extractPacks(packName, entryName, options) {
+async function extractPacks(packName, entryName) {
   entryName = entryName?.toLowerCase();
 
   // Load system.json.
@@ -241,7 +237,7 @@ async function extractPacks(packName, entryName, options) {
     }
 
     await extractPack(packInfo.path, dest, {
-      nedb: options.nedb, log: true, documentType: packInfo.type, transformEntry: entry => {
+      log: true, documentType: packInfo.type, transformEntry: entry => {
         if ( entryName && (entryName !== entry.name.toLowerCase()) ) return false;
         cleanPackEntry(entry);
       }, transformName: entry => {
