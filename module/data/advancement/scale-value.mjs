@@ -53,10 +53,10 @@ export class ScaleValueEntryField extends foundry.data.fields.ObjectField {
   /* -------------------------------------------- */
 
   /** @override */
-  initialize(value, model) {
+  initialize(value, model, options={}) {
     const cls = TYPES[model.type];
     if ( !value || !cls ) return value;
-    return new cls(value, {parent: model});
+    return new cls(value, {parent: model, ...options});
   }
 
   /* -------------------------------------------- */
