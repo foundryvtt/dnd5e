@@ -1,4 +1,3 @@
-import Datastore from "nedb-promises";
 import fs from "fs";
 import { readdir, readFile, writeFile } from "node:fs/promises";
 import logger from "fancy-log";
@@ -22,12 +21,14 @@ const PACK_DEST = "packs";
 const PACK_SRC = "packs/src";
 
 
+// eslint-disable-next-line
 const argv = yargs(hideBin(process.argv))
   .command(packageCommand())
   .help().alias("help", "h")
   .argv;
 
 
+// eslint-disable-next-line
 function packageCommand() {
   return {
     command: "package [action] [pack] [entry]",
@@ -46,10 +47,6 @@ function packageCommand() {
         describe: "Name of any entry within a pack upon which to work. Only applicable to extract & clean commands.",
         type: "string"
       });
-      yargs.option("nedb", {
-        describe: "Should the NeDB database be used instead of ClassicLevel?",
-        type: "boolean"
-      });
     },
     handler: async argv => {
       const { action, pack, entry, ...options } = argv;
@@ -66,15 +63,8 @@ function packageCommand() {
 }
 
 
-/**
- * Cache of DBs so they aren't loaded repeatedly when determining IDs.
- * @type {Object<string,Datastore>}
- */
-const DB_CACHE = {};
-
-
 /* ----------------------------------------- */
-/*  Clean Packs
+/*  Clean Packs                              */
 /* ----------------------------------------- */
 
 /**
@@ -125,24 +115,6 @@ function cleanPackEntry(data, { clearSourceId=true }={}) {
 
 
 /**
- * Attempts to find an existing matching ID for an item of this name, otherwise generates a new unique ID.
- * @param {object} data        Data for the entry that needs an ID.
- * @param {string} pack        Name of the pack to which this item belongs.
- * @returns {Promise<string>}  Resolves once the ID is determined.
- */
-async function determineId(data, pack) {
-  const db_path = path.join(PACK_DEST, `${pack}.db`);
-  if ( !DB_CACHE[db_path] ) DB_CACHE[db_path] = Datastore.create({ filename: db_path, autoload: true });
-  const db = DB_CACHE[db_path];
-
-  try {
-    return await db.findOne({ name: data.name });
-  } catch(err) {
-    return db.createNewId();
-  }
-}
-
-/**
  * Removes invisible whitespace characters and normalizes single- and double-quotes.
  * @param {string} str  The string to be cleaned.
  * @returns {string}    The cleaned string.
@@ -150,6 +122,7 @@ async function determineId(data, pack) {
 function cleanString(str) {
   return str.replace(/\u2060/gu, "").replace(/[‘’]/gu, "'").replace(/[“”]/gu, '"');
 }
+
 
 /**
  * Cleans and formats source JSON files, removing unnecessary permissions and flags and adding the proper spacing.
@@ -186,7 +159,6 @@ async function cleanPacks(packName, entryName) {
       const json = JSON.parse(await readFile(src, { encoding: "utf8" }));
       if ( entryName && (entryName !== json.name.toLowerCase()) ) continue;
       cleanPackEntry(json);
-      if ( !json._id ) json._id = await determineId(json, folder.name);
       fs.rmSync(src, { force: true });
       writeFile(src, `${JSON.stringify(json, null, 2)}\n`, { mode: 0o664 });
     }
