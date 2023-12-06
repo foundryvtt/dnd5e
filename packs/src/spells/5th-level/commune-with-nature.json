@@ -1,0 +1,108 @@
+{
+  "_id": "dp6xny4v8PDoIGjh",
+  "name": "Commune with Nature",
+  "ownership": {
+    "default": 0
+  },
+  "type": "spell",
+  "system": {
+    "description": {
+      "value": "<p>You briefly become one with nature and gain knowledge of the surrounding territory. In the outdoors, the spell gives you knowledge of the land within 3 miles of you. In caves and other natural underground settings, the radius is limited to 300 feet. The spell doesn't function where nature has been replaced by construction, such as in dungeons and towns.</p><p>You instantly gain knowledge of up to three facts of your choice about any of the following subjects as they relate to the area:</p>\n<ul>\n<li>terrain and bodies of water</li>\n<li>prevalent plants, minerals, animals, or peoples</li>\n<li>powerful celestials, fey, fiends, elementals, or undead</li>\n<li>influence from other planes of existence</li>\n<li>buildings</li>\n</ul>\n<p>For example, you could determine the location of powerful undead in the area, the location of major sources of safe drinking water, and the location of any nearby towns.</p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": {
+      "custom": "",
+      "book": "SRD 5.1",
+      "page": "",
+      "license": "CC-BY-4.0"
+    },
+    "activation": {
+      "type": "minute",
+      "cost": 1,
+      "condition": ""
+    },
+    "duration": {
+      "value": "",
+      "units": "inst"
+    },
+    "cover": null,
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": "self"
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": "self"
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": null,
+      "recovery": ""
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
+    "ability": "",
+    "actionType": "util",
+    "attackBonus": "",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "level": 5,
+    "school": "div",
+    "components": {
+      "vocal": true,
+      "somatic": true,
+      "material": false,
+      "ritual": true,
+      "concentration": false
+    },
+    "materials": {
+      "value": "",
+      "consumed": false,
+      "cost": 0,
+      "supply": 0
+    },
+    "preparation": {
+      "mode": "prepared",
+      "prepared": false
+    },
+    "scaling": {
+      "mode": "none",
+      "formula": ""
+    }
+  },
+  "sort": 0,
+  "flags": {},
+  "img": "icons/magic/nature/leaf-glow-triple-green.webp",
+  "effects": [],
+  "folder": "bG9QTayc46rfNkv2",
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "3.0.0",
+    "coreVersion": "11.315",
+    "createdTime": 1661787234183,
+    "modifiedTime": 1701902521420,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  },
+  "_key": "!items!dp6xny4v8PDoIGjh"
+}

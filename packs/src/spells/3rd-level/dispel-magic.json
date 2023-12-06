@@ -1,0 +1,108 @@
+{
+  "_id": "15Fa6q1nH27XfbR8",
+  "name": "Dispel Magic",
+  "ownership": {
+    "default": 0
+  },
+  "type": "spell",
+  "system": {
+    "description": {
+      "value": "<p>Choose one creature, object, or magical effect within range. Any spell of 3rd level or lower on the target ends. For each spell of 4th level or higher on the target, make an ability check using your spellcasting ability. The DC equals 10 + the spell's level. On a successful check, the spell ends.</p><p><strong>Higher Levels.</strong> When you cast this spell using a spell slot of 4th level or higher, you automatically end the effects of a spell on the target if the spell's level is equal to or less than the level of the spell slot you used.</p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": {
+      "custom": "",
+      "book": "SRD 5.1",
+      "page": "",
+      "license": "CC-BY-4.0"
+    },
+    "activation": {
+      "type": "action",
+      "cost": 1,
+      "condition": ""
+    },
+    "duration": {
+      "value": "",
+      "units": "inst"
+    },
+    "cover": null,
+    "target": {
+      "value": 1,
+      "width": null,
+      "units": "",
+      "type": "creature"
+    },
+    "range": {
+      "value": 120,
+      "long": null,
+      "units": "ft"
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": null,
+      "recovery": ""
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
+    "ability": "",
+    "actionType": "util",
+    "attackBonus": "",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "level": 3,
+    "school": "abj",
+    "components": {
+      "vocal": true,
+      "somatic": true,
+      "material": false,
+      "ritual": false,
+      "concentration": false
+    },
+    "materials": {
+      "value": "",
+      "consumed": false,
+      "cost": 0,
+      "supply": 0
+    },
+    "preparation": {
+      "mode": "prepared",
+      "prepared": false
+    },
+    "scaling": {
+      "mode": "level",
+      "formula": ""
+    }
+  },
+  "sort": 0,
+  "flags": {},
+  "img": "icons/skills/melee/strike-blade-knife-orange-blue.webp",
+  "effects": [],
+  "folder": "5Si35RRLLaaoWvC3",
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "3.0.0",
+    "coreVersion": "11.315",
+    "createdTime": 1661787234054,
+    "modifiedTime": 1701902519485,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  },
+  "_key": "!items!15Fa6q1nH27XfbR8"
+}

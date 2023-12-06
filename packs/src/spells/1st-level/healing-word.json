@@ -1,0 +1,113 @@
+{
+  "_id": "o8Dh7fblk1d16tnO",
+  "name": "Healing Word",
+  "ownership": {
+    "default": 0
+  },
+  "type": "spell",
+  "system": {
+    "description": {
+      "value": "<p>A creature of your choice that you can see within range regains hit points equal to 1d4 + your spellcasting ability modifier. This spell has no effect on undead or constructs.</p><p><strong>Higher Levels.</strong> When you cast this spell using a spell slot of 2nd level or higher, the healing increases by 1d4 for each slot level above 1st.</p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": {
+      "custom": "",
+      "book": "SRD 5.1",
+      "page": "",
+      "license": "CC-BY-4.0"
+    },
+    "activation": {
+      "type": "bonus",
+      "cost": 1,
+      "condition": ""
+    },
+    "duration": {
+      "value": "",
+      "units": "inst"
+    },
+    "cover": null,
+    "target": {
+      "value": 1,
+      "width": null,
+      "units": "",
+      "type": "creature"
+    },
+    "range": {
+      "value": 60,
+      "long": null,
+      "units": "ft"
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": null,
+      "recovery": ""
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
+    "ability": "",
+    "actionType": "heal",
+    "attackBonus": "",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [
+        [
+          "1d4 + @mod",
+          "healing"
+        ]
+      ],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "level": 1,
+    "school": "evo",
+    "components": {
+      "vocal": true,
+      "somatic": false,
+      "material": false,
+      "ritual": false,
+      "concentration": false
+    },
+    "materials": {
+      "value": "",
+      "consumed": false,
+      "cost": 0,
+      "supply": 0
+    },
+    "preparation": {
+      "mode": "prepared",
+      "prepared": false
+    },
+    "scaling": {
+      "mode": "level",
+      "formula": "1d4"
+    }
+  },
+  "sort": 0,
+  "flags": {},
+  "img": "icons/magic/life/heart-cross-green.webp",
+  "effects": [],
+  "folder": "ERuXllkhTQF51rDJ",
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "3.0.0",
+    "coreVersion": "11.315",
+    "createdTime": 1661787234223,
+    "modifiedTime": 1701902521770,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  },
+  "_key": "!items!o8Dh7fblk1d16tnO"
+}

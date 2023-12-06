@@ -1,0 +1,113 @@
+{
+  "_id": "2RC0EyvBLPH88PZF",
+  "name": "Sunbeam",
+  "ownership": {
+    "default": 0
+  },
+  "type": "spell",
+  "system": {
+    "description": {
+      "value": "<p>A beam of brilliant light flashes out from your hand in a 5-foot-wide, 60-foot-long line. Each creature in the line must make a Constitution saving throw. On a failed save, a creature takes 6d8 radiant damage and is Blinded until your next turn. On a successful save, it takes half as much damage and isn't blinded by this spell. Undead and oozes have disadvantage on this saving throw.</p><p>You can create a new line of radiance as your action on any turn until the spell ends.</p><p>For the Duration, a mote of brilliant radiance shines in your hand. It sheds bright light in a 30-foot radius and dim light for an additional 30 feet. This light is sunlight.</p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": {
+      "custom": "",
+      "book": "SRD 5.1",
+      "page": "",
+      "license": "CC-BY-4.0"
+    },
+    "activation": {
+      "type": "action",
+      "cost": 1,
+      "condition": ""
+    },
+    "duration": {
+      "value": "1",
+      "units": "minute"
+    },
+    "cover": null,
+    "target": {
+      "value": 60,
+      "width": null,
+      "units": "ft",
+      "type": "line"
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": "self"
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": null,
+      "recovery": ""
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
+    "ability": "",
+    "actionType": "save",
+    "attackBonus": "",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [
+        [
+          "6d8",
+          "radiant"
+        ]
+      ],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "con",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "level": 6,
+    "school": "evo",
+    "components": {
+      "vocal": true,
+      "somatic": true,
+      "material": true,
+      "ritual": false,
+      "concentration": true
+    },
+    "materials": {
+      "value": "A magnifying glass",
+      "consumed": false,
+      "cost": 0,
+      "supply": 0
+    },
+    "preparation": {
+      "mode": "prepared",
+      "prepared": false
+    },
+    "scaling": {
+      "mode": "none",
+      "formula": ""
+    }
+  },
+  "sort": 0,
+  "flags": {},
+  "img": "icons/magic/light/beams-rays-orange-purple-large.webp",
+  "effects": [],
+  "folder": "0pdesvXqKd55VOh2",
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "3.0.0",
+    "coreVersion": "11.315",
+    "createdTime": 1661787234059,
+    "modifiedTime": 1701902519555,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  },
+  "_key": "!items!2RC0EyvBLPH88PZF"
+}

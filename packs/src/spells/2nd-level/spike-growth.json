@@ -1,0 +1,113 @@
+{
+  "_id": "9gYGkrL6qFTsE6fw",
+  "name": "Spike Growth",
+  "ownership": {
+    "default": 0
+  },
+  "type": "spell",
+  "system": {
+    "description": {
+      "value": "<p>The ground in a 20-foot radius centered on a point within range twists and sprouts hard spikes and thorns. The area becomes difficult terrain for the Duration. When a creature moves into or within the area, it takes 2d4 piercing damage for every 5 feet it travels.</p><p>The transformation of the ground is camouflaged to look natural. Any creature that can't see the area at the time the spell is cast must make a Wisdom (Perception) check against your spell save DC to recognize the terrain as hazardous before entering it.</p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": {
+      "custom": "",
+      "book": "SRD 5.1",
+      "page": "",
+      "license": "CC-BY-4.0"
+    },
+    "activation": {
+      "type": "action",
+      "cost": 1,
+      "condition": ""
+    },
+    "duration": {
+      "value": "10",
+      "units": "minute"
+    },
+    "cover": null,
+    "target": {
+      "value": 20,
+      "width": null,
+      "units": "ft",
+      "type": "radius"
+    },
+    "range": {
+      "value": 150,
+      "long": null,
+      "units": "ft"
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": null,
+      "recovery": ""
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
+    "ability": "",
+    "actionType": "other",
+    "attackBonus": "",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [
+        [
+          "2d4",
+          "piercing"
+        ]
+      ],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "level": 2,
+    "school": "trs",
+    "components": {
+      "vocal": true,
+      "somatic": true,
+      "material": true,
+      "ritual": false,
+      "concentration": true
+    },
+    "materials": {
+      "value": "Seven sharp thorns or seven small twigs, each sharpened to a point",
+      "consumed": false,
+      "cost": 0,
+      "supply": 0
+    },
+    "preparation": {
+      "mode": "prepared",
+      "prepared": false
+    },
+    "scaling": {
+      "mode": "none",
+      "formula": ""
+    }
+  },
+  "sort": 0,
+  "flags": {},
+  "img": "icons/magic/nature/vines-thorned-curled-glow-green.webp",
+  "effects": [],
+  "folder": "Qi4Se3we69ukl2V9",
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "3.0.0",
+    "coreVersion": "11.315",
+    "createdTime": 1661787234085,
+    "modifiedTime": 1701902519980,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  },
+  "_key": "!items!9gYGkrL6qFTsE6fw"
+}

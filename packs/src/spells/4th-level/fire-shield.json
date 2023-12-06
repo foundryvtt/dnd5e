@@ -1,0 +1,172 @@
+{
+  "_id": "avD5XUtkBPQQR97c",
+  "name": "Fire Shield",
+  "ownership": {
+    "default": 0
+  },
+  "type": "spell",
+  "system": {
+    "description": {
+      "value": "<p>Thin and wispy flames wreathe your body for the Duration, shedding bright light in a 10-foot radius and dim light for an additional 10 feet. You can end the spell early by using an action to dismiss it.</p>\n<p>The flames provide you with a warm shield or a chill shield, as you choose. The warm shield grants you Resistance to cold damage, and the chill shield grants you resistance to fire damage.</p>\n<p>In addition, whenever a creature within 5 feet of you hits you with a melee Attack, the shield erupts with flame. The attacker takes 2d8 fire damage from a warm shield, or 2d8 cold damage from a cold shield.</p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": {
+      "custom": "",
+      "book": "SRD 5.1",
+      "page": "",
+      "license": "CC-BY-4.0"
+    },
+    "activation": {
+      "type": "action",
+      "cost": 1,
+      "condition": ""
+    },
+    "duration": {
+      "value": "10",
+      "units": "minute"
+    },
+    "cover": null,
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": "self"
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": "self"
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": null,
+      "recovery": ""
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
+    "ability": "",
+    "actionType": "util",
+    "attackBonus": "",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [
+        [
+          "2d8",
+          "fire"
+        ]
+      ],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "level": 4,
+    "school": "evo",
+    "components": {
+      "vocal": true,
+      "somatic": true,
+      "material": true,
+      "ritual": false,
+      "concentration": false
+    },
+    "materials": {
+      "value": "A bit of phosphorus or a firefly",
+      "consumed": false,
+      "cost": 0,
+      "supply": 0
+    },
+    "preparation": {
+      "mode": "prepared",
+      "prepared": false
+    },
+    "scaling": {
+      "mode": "none",
+      "formula": ""
+    }
+  },
+  "sort": 0,
+  "flags": {},
+  "img": "icons/magic/defensive/shield-barrier-flaming-pentagon-red.webp",
+  "effects": [
+    {
+      "_id": "lVKx8swB08jm6IFE",
+      "flags": {},
+      "changes": [
+        {
+          "key": "system.traits.dr.value",
+          "value": "cold",
+          "mode": 2,
+          "priority": null
+        }
+      ],
+      "disabled": true,
+      "duration": {
+        "startTime": null,
+        "seconds": 600,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null,
+        "combat": null
+      },
+      "icon": "icons/magic/defensive/shield-barrier-flaming-pentagon-red.webp",
+      "label": "Warm Shield",
+      "origin": "Item.OtcTsffCQaOFkr9K",
+      "tint": null,
+      "transfer": true,
+      "sort": 0,
+      "_key": "!items.effects!avD5XUtkBPQQR97c.lVKx8swB08jm6IFE"
+    },
+    {
+      "_id": "UUXwEKSPX4nYfDzo",
+      "flags": {},
+      "changes": [
+        {
+          "key": "system.traits.dr.value",
+          "value": "fire",
+          "mode": 2,
+          "priority": null
+        }
+      ],
+      "disabled": true,
+      "duration": {
+        "startTime": null,
+        "seconds": 600,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null,
+        "combat": null
+      },
+      "icon": "icons/magic/defensive/shield-barrier-flaming-pentagon-blue.webp",
+      "label": "Chill Shield",
+      "origin": "Item.OtcTsffCQaOFkr9K",
+      "tint": null,
+      "transfer": true,
+      "sort": 0,
+      "_key": "!items.effects!avD5XUtkBPQQR97c.UUXwEKSPX4nYfDzo"
+    }
+  ],
+  "folder": "5auWSClKMDUIV5Ni",
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "3.0.0",
+    "coreVersion": "11.315",
+    "createdTime": 1661787234170,
+    "modifiedTime": 1701902521256,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  },
+  "_key": "!items!avD5XUtkBPQQR97c"
+}

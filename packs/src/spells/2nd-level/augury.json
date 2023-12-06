@@ -1,0 +1,108 @@
+{
+  "_id": "4v2H3hHb3Ph9XLNd",
+  "name": "Augury",
+  "ownership": {
+    "default": 0
+  },
+  "type": "spell",
+  "system": {
+    "description": {
+      "value": "<p>By casting gem-inlaid sticks, rolling dragon bones, laying out ornate cards, or employing some other divining tool, you receive an omen from an otherworldly entity about the results of a specific course of action that you plan to take within the next 30 minutes. The DM chooses from the following possible omens:</p>\n<ul>\n<li>Weal, for good results</li>\n<li>Woe, for bad results</li>\n<li>Weal and woe, for both good and bad results</li>\n<li>Nothing, for results that aren't especially good or bad</li>\n</ul>\n<p>The spell doesn't take into account any possible circumstances that might change the outcome, such as the casting of additional spells or the loss or gain of a companion.</p><p>If you cast the spell two or more times before completing your next long rest, there is a cumulative 25 percent chance for each casting after the first that you get a random reading. The DM makes this roll in secret.</p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": {
+      "custom": "",
+      "book": "SRD 5.1",
+      "page": "",
+      "license": "CC-BY-4.0"
+    },
+    "activation": {
+      "type": "minute",
+      "cost": 1,
+      "condition": ""
+    },
+    "duration": {
+      "value": "",
+      "units": "inst"
+    },
+    "cover": null,
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": "self"
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": "self"
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": null,
+      "recovery": ""
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
+    "ability": "",
+    "actionType": "util",
+    "attackBonus": "",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "1d4",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "level": 2,
+    "school": "div",
+    "components": {
+      "vocal": true,
+      "somatic": true,
+      "material": true,
+      "ritual": true,
+      "concentration": false
+    },
+    "materials": {
+      "value": "Specially marked sticks, bones, or similar tokens worth at least 25 gp",
+      "consumed": false,
+      "cost": 25,
+      "supply": 0
+    },
+    "preparation": {
+      "mode": "prepared",
+      "prepared": false
+    },
+    "scaling": {
+      "mode": "none",
+      "formula": ""
+    }
+  },
+  "sort": 0,
+  "flags": {},
+  "img": "icons/magic/perception/eye-ringed-glow-angry-teal.webp",
+  "effects": [],
+  "folder": "Qi4Se3we69ukl2V9",
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "3.0.0",
+    "coreVersion": "11.315",
+    "createdTime": 1661787234067,
+    "modifiedTime": 1701902519682,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  },
+  "_key": "!items!4v2H3hHb3Ph9XLNd"
+}

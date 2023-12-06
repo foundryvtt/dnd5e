@@ -1,0 +1,138 @@
+{
+  "_id": "z1mx84ONwkXKUZd7",
+  "name": "Shield",
+  "type": "spell",
+  "img": "icons/magic/defensive/shield-barrier-glowing-triangle-magenta.webp",
+  "system": {
+    "description": {
+      "value": "<p>An invisible barrier of magical force appears and protects you. Until the start of your next turn, you have a +5 bonus to AC, including against the triggering attack, and you take no damage from magic missile.</p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": {
+      "custom": "",
+      "book": "SRD 5.1",
+      "page": "",
+      "license": "CC-BY-4.0"
+    },
+    "activation": {
+      "type": "reaction",
+      "cost": 1,
+      "condition": "Which you take when you are hit by an attack or targeted by the magic missile spell"
+    },
+    "duration": {
+      "value": "1",
+      "units": "round"
+    },
+    "cover": null,
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": "self"
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": "self"
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": null,
+      "recovery": ""
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
+    "ability": "",
+    "actionType": "util",
+    "attackBonus": "",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "level": 1,
+    "school": "abj",
+    "components": {
+      "vocal": true,
+      "somatic": true,
+      "material": false,
+      "ritual": false,
+      "concentration": false
+    },
+    "materials": {
+      "value": "",
+      "consumed": false,
+      "cost": 0,
+      "supply": 0
+    },
+    "preparation": {
+      "mode": "prepared",
+      "prepared": false
+    },
+    "scaling": {
+      "mode": "none",
+      "formula": ""
+    }
+  },
+  "effects": [
+    {
+      "_id": "6pbotGIvqQkraPva",
+      "flags": {},
+      "changes": [
+        {
+          "key": "system.attributes.ac.bonus",
+          "value": "5",
+          "mode": 2,
+          "priority": null
+        }
+      ],
+      "disabled": true,
+      "duration": {
+        "startTime": null,
+        "rounds": 1,
+        "seconds": null,
+        "combat": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "icon": "icons/magic/defensive/shield-barrier-glowing-triangle-magenta.webp",
+      "label": "Shield",
+      "origin": "Item.FlLKKv7bQBlIAs11",
+      "tint": null,
+      "transfer": true,
+      "sort": 0,
+      "_key": "!items.effects!z1mx84ONwkXKUZd7.6pbotGIvqQkraPva"
+    }
+  ],
+  "folder": "ERuXllkhTQF51rDJ",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "3.0.0",
+    "coreVersion": "11.315",
+    "createdTime": 1661787234244,
+    "modifiedTime": 1701902522104,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  },
+  "_key": "!items!z1mx84ONwkXKUZd7"
+}

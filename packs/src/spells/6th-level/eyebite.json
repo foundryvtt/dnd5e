@@ -1,0 +1,108 @@
+{
+  "_id": "ZRqu3Xh9FmlBCZGy",
+  "name": "Eyebite",
+  "ownership": {
+    "default": 0
+  },
+  "type": "spell",
+  "system": {
+    "description": {
+      "value": "<p>For the spell's Duration, your eyes become an inky void imbued with dread power. One creature of your choice within 60 feet of you that you can see must succeed on a Wisdom saving throw or be affected by one of the following Effects of your choice for the Duration. On each of your turns until the spell ends, you can use your action to target another creature but can't target a creature again if it has succeeded on a saving throw against this casting of eyebite.</p>\n<ul>\n<li><strong>Asleep</strong>. The target falls Unconscious. It wakes up if it takes any damage or if another creature uses its action to shake the sleeper awake.</li>\n<li><strong>Panicked</strong>. The target is Frightened of you. On each of its turns, the frightened creature must take the Dash action and move away from you by the safest and shortest available route, unless there is nowhere to move. If the target moves to a place at least 60 feet away from you where it can no longer see you, this effect ends.</li>\n<li><strong>Sickened</strong>. The target has disadvantage on Attack rolls and Ability Checks. At the end of each of its turns, it can make another Wisdom saving throw. If it succeeds, the effect ends</li>\n</ul>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": {
+      "custom": "",
+      "book": "SRD 5.1",
+      "page": "",
+      "license": "CC-BY-4.0"
+    },
+    "activation": {
+      "type": "action",
+      "cost": 1,
+      "condition": ""
+    },
+    "duration": {
+      "value": "1",
+      "units": "minute"
+    },
+    "cover": null,
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": "self"
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": ""
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": null,
+      "recovery": ""
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
+    "ability": "",
+    "actionType": "save",
+    "attackBonus": "",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "wis",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "level": 6,
+    "school": "nec",
+    "components": {
+      "vocal": true,
+      "somatic": true,
+      "material": false,
+      "ritual": false,
+      "concentration": true
+    },
+    "materials": {
+      "value": "",
+      "consumed": false,
+      "cost": 0,
+      "supply": 0
+    },
+    "preparation": {
+      "mode": "prepared",
+      "prepared": false
+    },
+    "scaling": {
+      "mode": "none",
+      "formula": ""
+    }
+  },
+  "sort": 0,
+  "flags": {},
+  "img": "icons/magic/perception/eye-ringed-glow-angry-large-red.webp",
+  "effects": [],
+  "folder": "0pdesvXqKd55VOh2",
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "3.0.0",
+    "coreVersion": "11.315",
+    "createdTime": 1661787234163,
+    "modifiedTime": 1701902521179,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  },
+  "_key": "!items!ZRqu3Xh9FmlBCZGy"
+}
