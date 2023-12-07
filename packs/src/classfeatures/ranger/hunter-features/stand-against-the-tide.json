@@ -1,13 +1,13 @@
 {
-  "_id": "Dop1RcU5UdhSVLYS",
-  "name": "Grappler",
+  "_id": "Xf763cJoDHPPWSGG",
+  "name": "Stand Against the Tide",
   "ownership": {
     "default": 0
   },
   "type": "feat",
   "system": {
     "description": {
-      "value": "<p><em>Prerequisite: Strength 13 or higher </em></p><p>You've developed the skills necessary to hold your own in close-quarters grappling.</p><p>You gain the following benefits:</p>\n<ul>\n<li>You have advantage on attack rolls against a creature you are grappling.</li>\n<li>You can use your action to try to pin a creature grappled by you. To do so, make another grapple check. If you succeed, you and the creature are both restrained until the grapple ends.</li>\n</ul>",
+      "value": "<p>When a hostile creature misses you with a melee attack, you can use your reaction to force that creature to repeat the same attack against another creature (other than itself) of your choice.</p>",
       "chat": "",
       "unidentified": ""
     },
@@ -18,8 +18,8 @@
       "license": "CC-BY-4.0"
     },
     "activation": {
-      "type": "",
-      "cost": null,
+      "type": "reaction",
+      "cost": 1,
       "condition": ""
     },
     "duration": {
@@ -28,10 +28,10 @@
     },
     "cover": null,
     "target": {
-      "value": null,
+      "value": 1,
       "width": null,
       "units": "",
-      "type": ""
+      "type": "creature"
     },
     "range": {
       "value": null,
@@ -49,7 +49,7 @@
       "target": null,
       "amount": null
     },
-    "ability": null,
+    "ability": "",
     "actionType": "",
     "attackBonus": "",
     "chatFlavor": "",
@@ -68,27 +68,27 @@
       "scaling": "spell"
     },
     "type": {
-      "value": "feat",
-      "subtype": ""
+      "value": "class",
+      "subtype": "superiorHuntersDefense"
     },
-    "requirements": "STR 13 or higher",
+    "requirements": "Hunter 15",
     "recharge": {
       "value": null,
       "charged": false
     }
   },
-  "sort": 0,
   "flags": {},
-  "img": "icons/skills/melee/unarmed-punch-fist.webp",
+  "img": "icons/magic/water/pseudopod-teal.webp",
   "effects": [],
-  "folder": null,
+  "folder": "UYfImiULTmGD1AvR",
+  "sort": 0,
   "_stats": {
     "systemId": "dnd5e",
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
-    "createdTime": 1661787234351,
-    "modifiedTime": 1701910112911,
+    "createdTime": 1661787234385,
+    "modifiedTime": 1701910550237,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
-  "_key": "!items!Dop1RcU5UdhSVLYS"
+  "_key": "!items!Xf763cJoDHPPWSGG"
 }

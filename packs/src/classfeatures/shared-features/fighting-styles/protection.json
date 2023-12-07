@@ -1,13 +1,11 @@
 {
-  "_id": "Dop1RcU5UdhSVLYS",
-  "name": "Grappler",
-  "ownership": {
-    "default": 0
-  },
+  "_id": "06NVMYf58Z76O85O",
+  "name": "Protection",
   "type": "feat",
+  "img": "icons/magic/defensive/shield-barrier-deflect-gold.webp",
   "system": {
     "description": {
-      "value": "<p><em>Prerequisite: Strength 13 or higher </em></p><p>You've developed the skills necessary to hold your own in close-quarters grappling.</p><p>You gain the following benefits:</p>\n<ul>\n<li>You have advantage on attack rolls against a creature you are grappling.</li>\n<li>You can use your action to try to pin a creature grappled by you. To do so, make another grapple check. If you succeed, you and the creature are both restrained until the grapple ends.</li>\n</ul>",
+      "value": "<p>When a creature you can see attacks a target other than you that is within 5 feet of you, you can use your reaction to impose disadvantage on the attack roll. You must be wielding a shield.</p>",
       "chat": "",
       "unidentified": ""
     },
@@ -18,9 +16,9 @@
       "license": "CC-BY-4.0"
     },
     "activation": {
-      "type": "",
-      "cost": null,
-      "condition": ""
+      "type": "reaction",
+      "cost": 1,
+      "condition": "Must be wearing a shield."
     },
     "duration": {
       "value": "",
@@ -28,15 +26,15 @@
     },
     "cover": null,
     "target": {
-      "value": null,
+      "value": 1,
       "width": null,
       "units": "",
-      "type": ""
+      "type": "creature"
     },
     "range": {
-      "value": null,
+      "value": 5,
       "long": null,
-      "units": ""
+      "units": "ft"
     },
     "uses": {
       "value": null,
@@ -49,7 +47,7 @@
       "target": null,
       "amount": null
     },
-    "ability": null,
+    "ability": "",
     "actionType": "",
     "attackBonus": "",
     "chatFlavor": "",
@@ -68,27 +66,29 @@
       "scaling": "spell"
     },
     "type": {
-      "value": "feat",
-      "subtype": ""
+      "value": "class",
+      "subtype": "fightingStyle"
     },
-    "requirements": "STR 13 or higher",
+    "requirements": "Fighter 1, Champion 10, Paladin 2",
     "recharge": {
       "value": null,
       "charged": false
     }
   },
-  "sort": 0,
-  "flags": {},
-  "img": "icons/skills/melee/unarmed-punch-fist.webp",
   "effects": [],
-  "folder": null,
+  "folder": "159EPyqZTcus1HNJ",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
   "_stats": {
     "systemId": "dnd5e",
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
-    "createdTime": 1661787234351,
-    "modifiedTime": 1701910112911,
+    "createdTime": 1661787234319,
+    "modifiedTime": 1701911273842,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
-  "_key": "!items!Dop1RcU5UdhSVLYS"
+  "_key": "!items!06NVMYf58Z76O85O"
 }

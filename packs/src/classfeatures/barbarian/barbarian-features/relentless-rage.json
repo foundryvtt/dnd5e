@@ -1,13 +1,13 @@
 {
-  "_id": "Dop1RcU5UdhSVLYS",
-  "name": "Grappler",
+  "_id": "FqfmbPgxiyrWzhYk",
+  "name": "Relentless Rage",
   "ownership": {
     "default": 0
   },
   "type": "feat",
   "system": {
     "description": {
-      "value": "<p><em>Prerequisite: Strength 13 or higher </em></p><p>You've developed the skills necessary to hold your own in close-quarters grappling.</p><p>You gain the following benefits:</p>\n<ul>\n<li>You have advantage on attack rolls against a creature you are grappling.</li>\n<li>You can use your action to try to pin a creature grappled by you. To do so, make another grapple check. If you succeed, you and the creature are both restrained until the grapple ends.</li>\n</ul>",
+      "value": "<p>Starting at 11th level, your rage can keep you fighting despite grievous wounds.</p><p>If you drop to 0 hit points while you're raging and don't die outright, you can make a DC 10 Constitution saving throw. If you succeed, you drop to 1 hit point instead.</p><p>Each time you use this feature after the first, the DC increases by 5. When you finish a short or long rest, the DC resets to 10.</p>",
       "chat": "",
       "unidentified": ""
     },
@@ -49,8 +49,8 @@
       "target": null,
       "amount": null
     },
-    "ability": null,
-    "actionType": "",
+    "ability": "",
+    "actionType": "other",
     "attackBonus": "",
     "chatFlavor": "",
     "critical": {
@@ -63,32 +63,32 @@
     },
     "formula": "",
     "save": {
-      "ability": "",
-      "dc": null,
-      "scaling": "spell"
+      "ability": "con",
+      "dc": 10,
+      "scaling": "flat"
     },
     "type": {
-      "value": "feat",
+      "value": "class",
       "subtype": ""
     },
-    "requirements": "STR 13 or higher",
+    "requirements": "Barbarian 11",
     "recharge": {
       "value": null,
       "charged": false
     }
   },
-  "sort": 0,
   "flags": {},
-  "img": "icons/skills/melee/unarmed-punch-fist.webp",
+  "img": "icons/skills/social/intimidation-impressing.webp",
   "effects": [],
-  "folder": null,
+  "folder": "Q2ZQ0SlqfbgueFys",
+  "sort": 0,
   "_stats": {
     "systemId": "dnd5e",
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
-    "createdTime": 1661787234351,
-    "modifiedTime": 1701910112911,
+    "createdTime": 1661787234355,
+    "modifiedTime": 1701909880253,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
-  "_key": "!items!Dop1RcU5UdhSVLYS"
+  "_key": "!items!FqfmbPgxiyrWzhYk"
 }

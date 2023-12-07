@@ -1,13 +1,13 @@
 {
-  "_id": "Dop1RcU5UdhSVLYS",
-  "name": "Grappler",
+  "_id": "SEJmsjkEhdAZ90ki",
+  "name": "Countercharm",
   "ownership": {
     "default": 0
   },
   "type": "feat",
   "system": {
     "description": {
-      "value": "<p><em>Prerequisite: Strength 13 or higher </em></p><p>You've developed the skills necessary to hold your own in close-quarters grappling.</p><p>You gain the following benefits:</p>\n<ul>\n<li>You have advantage on attack rolls against a creature you are grappling.</li>\n<li>You can use your action to try to pin a creature grappled by you. To do so, make another grapple check. If you succeed, you and the creature are both restrained until the grapple ends.</li>\n</ul>",
+      "value": "<p>At 6th level, you gain the ability to use musical notes or words of power to disrupt mind-influencing effects. As an action, you can start a performance that lasts until the end of your next turn. During that time, you and any friendly creatures within 30 feet of you have advantage on saving throws against being frightened or charmed. A creature must be able to hear you to gain this benefit. The performance ends early if you are incapacitated or silenced or if you voluntarily end it (no action required).</p>",
       "chat": "",
       "unidentified": ""
     },
@@ -18,13 +18,13 @@
       "license": "CC-BY-4.0"
     },
     "activation": {
-      "type": "",
-      "cost": null,
-      "condition": ""
+      "type": "action",
+      "cost": 1,
+      "condition": "Creatures must be able to hear you to benefit."
     },
     "duration": {
-      "value": "",
-      "units": ""
+      "value": "1",
+      "units": "round"
     },
     "cover": null,
     "target": {
@@ -34,9 +34,9 @@
       "type": ""
     },
     "range": {
-      "value": null,
+      "value": 30,
       "long": null,
-      "units": ""
+      "units": "ft"
     },
     "uses": {
       "value": null,
@@ -68,27 +68,27 @@
       "scaling": "spell"
     },
     "type": {
-      "value": "feat",
+      "value": "class",
       "subtype": ""
     },
-    "requirements": "STR 13 or higher",
+    "requirements": "Bard 6",
     "recharge": {
       "value": null,
       "charged": false
     }
   },
-  "sort": 0,
   "flags": {},
-  "img": "icons/skills/melee/unarmed-punch-fist.webp",
+  "img": "icons/magic/sonic/scream-wail-shout-teal.webp",
   "effects": [],
-  "folder": null,
+  "folder": "XEu43QVhYfhUcewt",
+  "sort": 0,
   "_stats": {
     "systemId": "dnd5e",
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
-    "createdTime": 1661787234351,
-    "modifiedTime": 1701910112911,
+    "createdTime": 1661787234378,
+    "modifiedTime": 1701909989798,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
-  "_key": "!items!Dop1RcU5UdhSVLYS"
+  "_key": "!items!SEJmsjkEhdAZ90ki"
 }

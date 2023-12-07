@@ -1,13 +1,13 @@
 {
-  "_id": "Dop1RcU5UdhSVLYS",
-  "name": "Grappler",
+  "_id": "rQhWDaMHMn7iU4f2",
+  "name": "Stroke of Luck",
   "ownership": {
     "default": 0
   },
   "type": "feat",
   "system": {
     "description": {
-      "value": "<p><em>Prerequisite: Strength 13 or higher </em></p><p>You've developed the skills necessary to hold your own in close-quarters grappling.</p><p>You gain the following benefits:</p>\n<ul>\n<li>You have advantage on attack rolls against a creature you are grappling.</li>\n<li>You can use your action to try to pin a creature grappled by you. To do so, make another grapple check. If you succeed, you and the creature are both restrained until the grapple ends.</li>\n</ul>",
+      "value": "<p>At 20th level, you have an uncanny knack for succeeding when you need to. If your attack misses a target within range, you can turn the miss into a hit. Alternatively, if you fail an ability check, you can treat the d20 roll as a 20.</p><p>Once you use this feature, you can't use it again until you finish a short or long rest.</p>",
       "chat": "",
       "unidentified": ""
     },
@@ -18,7 +18,7 @@
       "license": "CC-BY-4.0"
     },
     "activation": {
-      "type": "",
+      "type": "special",
       "cost": null,
       "condition": ""
     },
@@ -31,17 +31,17 @@
       "value": null,
       "width": null,
       "units": "",
-      "type": ""
+      "type": "self"
     },
     "range": {
       "value": null,
       "long": null,
-      "units": ""
+      "units": "self"
     },
     "uses": {
-      "value": null,
-      "max": "",
-      "per": null,
+      "value": 1,
+      "max": "1",
+      "per": "sr",
       "recovery": ""
     },
     "consume": {
@@ -49,7 +49,7 @@
       "target": null,
       "amount": null
     },
-    "ability": null,
+    "ability": "",
     "actionType": "",
     "attackBonus": "",
     "chatFlavor": "",
@@ -68,27 +68,27 @@
       "scaling": "spell"
     },
     "type": {
-      "value": "feat",
+      "value": "class",
       "subtype": ""
     },
-    "requirements": "STR 13 or higher",
+    "requirements": "Rogue 20",
     "recharge": {
       "value": null,
       "charged": false
     }
   },
-  "sort": 0,
   "flags": {},
-  "img": "icons/skills/melee/unarmed-punch-fist.webp",
+  "img": "icons/magic/light/hand-sparks-glow-yellow.webp",
   "effects": [],
-  "folder": null,
+  "folder": "RMtv55MamGWKrCfq",
+  "sort": 0,
   "_stats": {
     "systemId": "dnd5e",
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
-    "createdTime": 1661787234351,
-    "modifiedTime": 1701910112911,
+    "createdTime": 1661787234429,
+    "modifiedTime": 1701910820511,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
-  "_key": "!items!Dop1RcU5UdhSVLYS"
+  "_key": "!items!rQhWDaMHMn7iU4f2"
 }

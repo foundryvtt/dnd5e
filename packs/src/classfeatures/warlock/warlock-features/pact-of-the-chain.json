@@ -1,13 +1,13 @@
 {
-  "_id": "Dop1RcU5UdhSVLYS",
-  "name": "Grappler",
+  "_id": "Ic1CSjvbWKudVUv9",
+  "name": "Pact of the Chain",
   "ownership": {
     "default": 0
   },
   "type": "feat",
   "system": {
     "description": {
-      "value": "<p><em>Prerequisite: Strength 13 or higher </em></p><p>You've developed the skills necessary to hold your own in close-quarters grappling.</p><p>You gain the following benefits:</p>\n<ul>\n<li>You have advantage on attack rolls against a creature you are grappling.</li>\n<li>You can use your action to try to pin a creature grappled by you. To do so, make another grapple check. If you succeed, you and the creature are both restrained until the grapple ends.</li>\n</ul>",
+      "value": "<p>You learn the @Compendium[dnd5e.spells.JGT5bNqu9REL7Fuz]{Find Familiar} spell and can cast it as a ritual. The spell doesn't count against your number of spells known. When you cast the spell, you can choose one of the normal forms for your familiar or one of the following special forms: @Compendium[dnd5e.monsters.dLQiESMsfsXijD5c]{Imp}, pseudodragon, @Compendium[dnd5e.monsters.bwtkdzavdNHISgp4]{Quasit}, or @Compendium[dnd5e.monsters.MUpBNDoJEr09bLaO]{Sprite}.</p><p>Additionally, when you take the Attack action, you can forgo one of your own attacks to allow your familiar to make one attack of its own with its reaction.</p>",
       "chat": "",
       "unidentified": ""
     },
@@ -49,7 +49,7 @@
       "target": null,
       "amount": null
     },
-    "ability": null,
+    "ability": "",
     "actionType": "",
     "attackBonus": "",
     "chatFlavor": "",
@@ -68,27 +68,27 @@
       "scaling": "spell"
     },
     "type": {
-      "value": "feat",
-      "subtype": ""
+      "value": "class",
+      "subtype": "pact"
     },
-    "requirements": "STR 13 or higher",
+    "requirements": "Warlock 3",
     "recharge": {
       "value": null,
       "charged": false
     }
   },
-  "sort": 0,
   "flags": {},
-  "img": "icons/skills/melee/unarmed-punch-fist.webp",
+  "img": "icons/magic/control/debuff-chains-shackle-movement-red.webp",
   "effects": [],
-  "folder": null,
+  "folder": "5vh3H3BfNi3v9LeS",
+  "sort": 0,
   "_stats": {
     "systemId": "dnd5e",
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
-    "createdTime": 1661787234351,
-    "modifiedTime": 1701910112911,
+    "createdTime": 1661787234359,
+    "modifiedTime": 1701910990072,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
-  "_key": "!items!Dop1RcU5UdhSVLYS"
+  "_key": "!items!Ic1CSjvbWKudVUv9"
 }

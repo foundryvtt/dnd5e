@@ -1,13 +1,13 @@
 {
-  "_id": "Dop1RcU5UdhSVLYS",
-  "name": "Grappler",
+  "_id": "bqWA7t9pDELbNRkp",
+  "name": "Purity of Body",
   "ownership": {
     "default": 0
   },
   "type": "feat",
   "system": {
     "description": {
-      "value": "<p><em>Prerequisite: Strength 13 or higher </em></p><p>You've developed the skills necessary to hold your own in close-quarters grappling.</p><p>You gain the following benefits:</p>\n<ul>\n<li>You have advantage on attack rolls against a creature you are grappling.</li>\n<li>You can use your action to try to pin a creature grappled by you. To do so, make another grapple check. If you succeed, you and the creature are both restrained until the grapple ends.</li>\n</ul>",
+      "value": "<p>At 10th level, your mastery of the ki flowing through you makes you immune to disease and poison.</p>",
       "chat": "",
       "unidentified": ""
     },
@@ -27,6 +27,7 @@
       "units": ""
     },
     "cover": null,
+    "crewed": false,
     "target": {
       "value": null,
       "width": null,
@@ -49,7 +50,7 @@
       "target": null,
       "amount": null
     },
-    "ability": null,
+    "ability": "",
     "actionType": "",
     "attackBonus": "",
     "chatFlavor": "",
@@ -68,27 +69,27 @@
       "scaling": "spell"
     },
     "type": {
-      "value": "feat",
+      "value": "class",
       "subtype": ""
     },
-    "requirements": "STR 13 or higher",
+    "requirements": "Monk 10",
     "recharge": {
       "value": null,
       "charged": false
     }
   },
-  "sort": 0,
   "flags": {},
-  "img": "icons/skills/melee/unarmed-punch-fist.webp",
+  "img": "icons/magic/control/encase-creature-humanoid-hold.webp",
   "effects": [],
-  "folder": null,
+  "folder": "TMmNG8ujFDBEWXRe",
+  "sort": 0,
   "_stats": {
     "systemId": "dnd5e",
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
-    "createdTime": 1661787234351,
-    "modifiedTime": 1701910112911,
+    "createdTime": 1661787234396,
+    "modifiedTime": 1701910370244,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
-  "_key": "!items!Dop1RcU5UdhSVLYS"
+  "_key": "!items!bqWA7t9pDELbNRkp"
 }
