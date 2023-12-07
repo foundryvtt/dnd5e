@@ -2,7 +2,7 @@
   "_id": "uZ8NrRenwYZ4qNf6",
   "name": "Balor",
   "type": "npc",
-  "img": "",
+  "img": null,
   "system": {
     "abilities": {
       "str": {
@@ -439,7 +439,7 @@
       "color": null
     },
     "texture": {
-      "src": "",
+      "src": null,
       "tint": null,
       "scaleX": 1,
       "scaleY": 1,
@@ -458,7 +458,9 @@
       "saturation": 0,
       "contrast": 0
     },
-    "detectionModes": []
+    "detectionModes": [],
+    "appendNumber": false,
+    "prependAdjective": false
   },
   "items": [
     {
@@ -1333,7 +1335,7 @@
     }
   ],
   "effects": [],
-  "folder": null,
+  "folder": "P1YKVDd1IN7XXWWy",
   "sort": 0,
   "ownership": {
     "default": 0
@@ -1341,10 +1343,10 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.1.0",
-    "coreVersion": "10.291",
+    "systemVersion": "3.0.0",
+    "coreVersion": "11.315",
     "createdTime": 1661787233232,
-    "modifiedTime": 1672596108544,
+    "modifiedTime": 1701908190760,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!uZ8NrRenwYZ4qNf6"

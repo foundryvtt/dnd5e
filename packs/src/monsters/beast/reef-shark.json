@@ -2,7 +2,7 @@
   "_id": "F0yILX4xKKt4dxKY",
   "name": "Reef Shark",
   "type": "npc",
-  "img": "",
+  "img": null,
   "system": {
     "abilities": {
       "str": {
@@ -426,7 +426,7 @@
       "attenuation": 0.5
     },
     "texture": {
-      "src": "",
+      "src": null,
       "tint": null,
       "scaleX": 1,
       "scaleY": 1,
@@ -445,7 +445,9 @@
       "saturation": 0,
       "contrast": 0
     },
-    "detectionModes": []
+    "detectionModes": [],
+    "appendNumber": false,
+    "prependAdjective": false
   },
   "items": [
     {
@@ -778,7 +780,7 @@
     }
   ],
   "effects": [],
-  "folder": null,
+  "folder": "g8DmtGW2tiBpzCMk",
   "sort": 0,
   "ownership": {
     "default": 0
@@ -786,10 +788,10 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.1.0",
-    "coreVersion": "10.291",
+    "systemVersion": "3.0.0",
+    "coreVersion": "11.315",
     "createdTime": 1661787232703,
-    "modifiedTime": 1672596095468,
+    "modifiedTime": 1701908186346,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!F0yILX4xKKt4dxKY"

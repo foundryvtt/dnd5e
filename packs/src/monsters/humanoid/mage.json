@@ -2,7 +2,7 @@
   "_id": "mQnsXanewsPiV7QE",
   "name": "Mage",
   "type": "npc",
-  "img": "",
+  "img": null,
   "system": {
     "abilities": {
       "str": {
@@ -428,7 +428,7 @@
       "color": null
     },
     "texture": {
-      "src": "",
+      "src": null,
       "tint": null,
       "scaleX": 1,
       "scaleY": 1,
@@ -447,7 +447,9 @@
       "saturation": 0,
       "contrast": 0
     },
-    "detectionModes": []
+    "detectionModes": [],
+    "appendNumber": false,
+    "prependAdjective": false
   },
   "items": [
     {
@@ -2622,7 +2624,7 @@
       "_key": "!actors.effects!mQnsXanewsPiV7QE.6pbotGIvqQkraPva"
     }
   ],
-  "folder": null,
+  "folder": "pEyqIq8DYb21xia3",
   "sort": 0,
   "ownership": {
     "default": 0
@@ -2630,10 +2632,10 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.1.0",
-    "coreVersion": "10.291",
+    "systemVersion": "3.0.0",
+    "coreVersion": "11.315",
     "createdTime": 1661787233145,
-    "modifiedTime": 1672596105756,
+    "modifiedTime": 1701908189716,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!mQnsXanewsPiV7QE"
