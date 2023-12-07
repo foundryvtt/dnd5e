@@ -1,3 +1,5 @@
+import TooltipMixin from "./tooltip-mixin.mjs";
+
 /**
  * Description for a single part of a property attribution.
  * @typedef {object} AttributionDescription
@@ -16,7 +18,7 @@
  * @param {string} property                        Dot separated path to the property.
  * @param {object} [options={}]                    Application rendering options.
  */
-export default class PropertyAttribution extends Application {
+export default class PropertyAttribution extends TooltipMixin(Application) {
   constructor(object, attributions, property, options={}) {
     super(options);
     this.object = object;
@@ -35,18 +37,6 @@ export default class PropertyAttribution extends Application {
       width: 320,
       height: "auto"
     });
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Render this view as a tooltip rather than a whole window.
-   * @param {HTMLElement} element  The element to which the tooltip should be attached.
-   */
-  async renderTooltip(element) {
-    const data = this.getData(this.options);
-    const text = (await this._renderInner(data))[0].outerHTML;
-    game.tooltip.activate(element, { text, cssClass: "property-attribution" });
   }
 
   /* -------------------------------------------- */
