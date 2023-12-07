@@ -218,32 +218,41 @@ async function extractPacks(packName, entryName) {
     logger.info(`Extracting pack ${packInfo.name}`);
 
     const folders = {};
+    const containers = {};
     await extractPack(packInfo.path, dest, {
-      log: false, documentType: packInfo.type, transformEntry: entry => {
-        if ( entry._key.startsWith("!folders") ) {
-          folders[entry._id] = { name: slugify(entry.name), folder: entry.folder };
-          folders[entry._id].path = `${folders[entry._id].name}/`;
-        }
+      log: false, documentType: packInfo.type, transformEntry: e => {
+        if ( e._key.startsWith("!folders") ) folders[e._id] = { name: slugify(e.name), folder: e.folder };
+        else if ( e.type === "backpack" ) containers[e._id] = {
+          name: slugify(e.name), container: e.system?.container, folder: e.folder
+        };
         return false;
       }
     });
-    for ( const folder of Object.values(folders) ) {
-      let parent = folder.folder;
+    const buildPath = (collection, entry, parentKey) => {
+      let parent = collection[entry[parentKey]];
+      entry.path = entry.name;
       while ( parent ) {
-        const parentData = folders[parent];
-        if ( parentData ) folder.path = `${parentData.name}/${folder.path}`;
-        parent = parentData?.parent;
+        entry.path = path.join(parent.name, entry.path);
+        parent = collection[parent[parentKey]];
       }
-    }
+    };
+    Object.values(folders).forEach(f => buildPath(folders, f, "folder"));
+    Object.values(containers).forEach(c => {
+      buildPath(containers, c, "container");
+      const folder = folders[c.folder];
+      if ( folder ) c.path = path.join(folder.path, c.path);
+    });
 
     await extractPack(packInfo.path, dest, {
       log: true, documentType: packInfo.type, transformEntry: entry => {
         if ( entryName && (entryName !== entry.name.toLowerCase()) ) return false;
         cleanPackEntry(entry);
       }, transformName: entry => {
-        if ( entry._id in folders ) return `${folders[entry._id].path}_folder.json`;
+        if ( entry._id in folders ) return path.join(folders[entry._id].path, "_folder.json");
+        if ( entry._id in containers ) return path.join(containers[entry._id].path, "_container.json");
         const outputName = slugify(entry.name);
-        return path.join(folders[entry.folder]?.path ?? "", `${outputName}-${entry._id}.json`);
+        const parent = containers[entry.system?.container] ?? folders[entry.folder];
+        return path.join(parent?.path ?? "", `${outputName}.json`);
       }
     });
   }
