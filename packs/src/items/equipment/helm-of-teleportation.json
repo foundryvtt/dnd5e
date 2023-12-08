@@ -1,11 +1,11 @@
 {
-  "_id": "IuVaBrq17AqxpXc4",
-  "name": "Wand of the War Mage +3",
+  "_id": "DEQkJiQdGyfmSNkV",
+  "name": "Helm of Teleportation",
   "type": "equipment",
-  "img": "icons/weapons/staves/staff-engraved-red.webp",
+  "img": "icons/equipment/head/helm-barbute-horned-copper.webp",
   "system": {
     "description": {
-      "value": "<p><em>(Requires attunement by a spellcaster)</em></p>\n<p>While holding this wand, you gain a bonus to spell attack rolls of +3. In addition, you ignore half cover when making a spell attack.</p>",
+      "value": "<p><em>Wondrous item, (requires attunement)</em></p>\n<p>This helm has 3 charges. While wearing it, you can use an action and expend 1 charge to cast the @Compendium[dnd5e.spells.L4J89JXqbKs6puEV]{Teleport} spell from it. The helm regains 1d3 expended charges daily at dawn.</p>",
       "chat": "",
       "unidentified": ""
     },
@@ -16,49 +16,49 @@
       "license": "CC-BY-4.0"
     },
     "quantity": 1,
-    "weight": 1,
+    "weight": 2,
     "price": {
-      "value": 19200,
+      "value": 64000,
       "denomination": "gp"
     },
     "attunement": 1,
     "equipped": false,
-    "rarity": "uncommon",
+    "rarity": "rare",
     "identified": true,
     "activation": {
-      "type": "",
-      "cost": null,
+      "type": "action",
+      "cost": 1,
       "condition": ""
     },
     "duration": {
       "value": "",
-      "units": ""
+      "units": "inst"
     },
     "cover": null,
     "target": {
       "value": null,
       "width": null,
       "units": "",
-      "type": ""
+      "type": "creature"
     },
     "range": {
-      "value": null,
+      "value": 10,
       "long": null,
-      "units": ""
+      "units": "ft"
     },
     "uses": {
-      "value": null,
-      "max": "",
-      "per": null,
-      "recovery": ""
+      "value": 3,
+      "max": "3",
+      "per": "charges",
+      "recovery": "1d3"
     },
     "consume": {
       "type": "",
       "target": null,
       "amount": null
     },
-    "ability": null,
-    "actionType": "",
+    "ability": "",
+    "actionType": "util",
     "attackBonus": "",
     "chatFlavor": "",
     "critical": {
@@ -97,7 +97,7 @@
   },
   "effects": [],
   "folder": "aJgMxnZED9XdoN2W",
-  "sort": 0,
+  "sort": 125000,
   "ownership": {
     "default": 0
   },
@@ -106,9 +106,9 @@
     "systemId": "dnd5e",
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
-    "createdTime": 1661787233576,
-    "modifiedTime": 1701903920605,
+    "createdTime": 1661787233521,
+    "modifiedTime": 1702071560133,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
-  "_key": "!items!IuVaBrq17AqxpXc4"
+  "_key": "!items!DEQkJiQdGyfmSNkV"
 }
