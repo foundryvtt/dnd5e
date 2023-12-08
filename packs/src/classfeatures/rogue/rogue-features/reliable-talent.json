@@ -1,0 +1,124 @@
+{
+  "_id": "YN9xm6MCvse4Y60u",
+  "name": "Reliable Talent",
+  "ownership": {
+    "default": 0
+  },
+  "type": "feat",
+  "system": {
+    "description": {
+      "value": "<p>By 11th level, you have refined your chosen skills until they approach perfection. Whenever you make an ability check that lets you add your proficiency bonus, you can treat a d20 roll of 9 or lower as a 10.</p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": {
+      "custom": "",
+      "book": "SRD 5.1",
+      "page": "",
+      "license": "CC-BY-4.0"
+    },
+    "activation": {
+      "type": "",
+      "cost": null,
+      "condition": ""
+    },
+    "duration": {
+      "value": "",
+      "units": ""
+    },
+    "cover": null,
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": ""
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": ""
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": null,
+      "recovery": ""
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
+    "ability": "",
+    "actionType": "",
+    "attackBonus": "",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "type": {
+      "value": "class",
+      "subtype": ""
+    },
+    "requirements": "Rogue 11",
+    "recharge": {
+      "value": null,
+      "charged": false
+    }
+  },
+  "flags": {},
+  "img": "icons/skills/ranged/target-bullseye-arrow-glowing.webp",
+  "effects": [
+    {
+      "_id": "vMMZHZQ0qT7MT4I4",
+      "changes": [
+        {
+          "key": "flags.dnd5e.reliableTalent",
+          "mode": 5,
+          "value": "true",
+          "priority": null
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "icon": "icons/skills/ranged/target-bullseye-arrow-glowing.webp",
+      "label": "Reliable Talent",
+      "origin": "Item.YN9xm6MCvse4Y60u",
+      "transfer": true,
+      "flags": {},
+      "tint": null,
+      "sort": 0,
+      "_key": "!items.effects!YN9xm6MCvse4Y60u.vMMZHZQ0qT7MT4I4"
+    }
+  ],
+  "folder": "RMtv55MamGWKrCfq",
+  "sort": 0,
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "3.0.0",
+    "coreVersion": "11.315",
+    "createdTime": 1661787234387,
+    "modifiedTime": 1701910813242,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  },
+  "_key": "!items!YN9xm6MCvse4Y60u"
+}

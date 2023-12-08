@@ -1,0 +1,190 @@
+{
+  "_id": "3jwFt3hSqDswBlOH",
+  "name": "Empty Body",
+  "ownership": {
+    "default": 0
+  },
+  "type": "feat",
+  "system": {
+    "description": {
+      "value": "<p>Beginning at 18th level, you can use your action to spend 4 ki points to become invisible for 1 minute. During that time, you also have resistance to all damage but force damage.</p>\n<p>Additionally, you can spend 8 ki points to cast the @Compendium[dnd5e.spells.TIoadMIsUKD4edXi]{Astral Projection} spell, without needing material components. When you do so, you can't take any other creatures with you.</p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": {
+      "custom": "",
+      "book": "SRD 5.1",
+      "page": "",
+      "license": "CC-BY-4.0"
+    },
+    "activation": {
+      "type": "action",
+      "cost": 1,
+      "condition": "Also requires 4 ki points (or 8 for Astral Projection)."
+    },
+    "duration": {
+      "value": "1",
+      "units": "minute"
+    },
+    "cover": null,
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": "self"
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": "self"
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": null,
+      "recovery": ""
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
+    "ability": "",
+    "actionType": "",
+    "attackBonus": "",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "type": {
+      "value": "class",
+      "subtype": "ki"
+    },
+    "requirements": "Monk 18",
+    "recharge": {
+      "value": null,
+      "charged": false
+    }
+  },
+  "flags": {},
+  "img": "icons/magic/perception/silhouette-stealth-shadow.webp",
+  "effects": [
+    {
+      "_id": "4dvYtqvbQGDsVi51",
+      "flags": {},
+      "changes": [
+        {
+          "key": "system.traits.dr.value",
+          "value": "fire",
+          "mode": 2,
+          "priority": null
+        },
+        {
+          "key": "system.traits.dr.value",
+          "value": "cold",
+          "mode": 2,
+          "priority": null
+        },
+        {
+          "key": "system.traits.dr.value",
+          "value": "acid",
+          "mode": 2,
+          "priority": null
+        },
+        {
+          "key": "system.traits.dr.value",
+          "value": "bludgeoning",
+          "mode": 2,
+          "priority": null
+        },
+        {
+          "key": "system.traits.dr.value",
+          "value": "lightning",
+          "mode": 2,
+          "priority": null
+        },
+        {
+          "key": "system.traits.dr.value",
+          "value": "necrotic",
+          "mode": 2,
+          "priority": null
+        },
+        {
+          "key": "system.traits.dr.value",
+          "value": "piercing",
+          "mode": 2,
+          "priority": null
+        },
+        {
+          "key": "system.traits.dr.value",
+          "value": "psychic",
+          "mode": 2,
+          "priority": null
+        },
+        {
+          "key": "system.traits.dr.value",
+          "value": "radiant",
+          "mode": 2,
+          "priority": null
+        },
+        {
+          "key": "system.traits.dr.value",
+          "value": "slashing",
+          "mode": 2,
+          "priority": null
+        },
+        {
+          "key": "system.traits.dr.value",
+          "value": "thunder",
+          "mode": 2,
+          "priority": null
+        },
+        {
+          "key": "system.traits.dr.value",
+          "value": "poison",
+          "mode": 2,
+          "priority": null
+        }
+      ],
+      "disabled": true,
+      "duration": {
+        "startTime": null,
+        "seconds": 60,
+        "rounds": 10,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null,
+        "combat": null
+      },
+      "icon": "icons/magic/perception/silhouette-stealth-shadow.webp",
+      "label": "Ki: Empty Body",
+      "origin": "Item.xqRleciuHDZlYCl6",
+      "tint": null,
+      "transfer": true,
+      "sort": 0,
+      "_key": "!items.effects!3jwFt3hSqDswBlOH.4dvYtqvbQGDsVi51"
+    }
+  ],
+  "folder": "TMmNG8ujFDBEWXRe",
+  "sort": 0,
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "3.0.0",
+    "coreVersion": "11.315",
+    "createdTime": 1661787234326,
+    "modifiedTime": 1701910423526,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  },
+  "_key": "!items!3jwFt3hSqDswBlOH"
+}
