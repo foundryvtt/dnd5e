@@ -1680,28 +1680,84 @@ DND5E.consumableResources = [
 /* -------------------------------------------- */
 
 /**
+ * Configuration data for system conditions.
+ *
+ * @typedef {object} ConditionConfiguration
+ * @property {string} label        Localized label for the condition.
+ * @property {string} [reference]  UUID of a journal entry with details on this condition.
+ */
+
+/**
  * Conditions that can affect an actor.
- * @enum {string}
+ * @enum {ConditionConfiguration}
  */
 DND5E.conditionTypes = {
-  blinded: "DND5E.ConBlinded",
-  charmed: "DND5E.ConCharmed",
-  deafened: "DND5E.ConDeafened",
-  diseased: "DND5E.ConDiseased",
-  exhaustion: "DND5E.ConExhaustion",
-  frightened: "DND5E.ConFrightened",
-  grappled: "DND5E.ConGrappled",
-  incapacitated: "DND5E.ConIncapacitated",
-  invisible: "DND5E.ConInvisible",
-  paralyzed: "DND5E.ConParalyzed",
-  petrified: "DND5E.ConPetrified",
-  poisoned: "DND5E.ConPoisoned",
-  prone: "DND5E.ConProne",
-  restrained: "DND5E.ConRestrained",
-  stunned: "DND5E.ConStunned",
-  unconscious: "DND5E.ConUnconscious"
+  blinded: {
+    label: "DND5E.ConBlinded",
+    reference: "Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.0b8N4FymGGfbZGpJ"
+  },
+  charmed: {
+    label: "DND5E.ConCharmed",
+    reference: "Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.zZaEBrKkr66OWJvD"
+  },
+  deafened: {
+    label: "DND5E.ConDeafened",
+    reference: "Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.6G8JSjhn701cBITY"
+  },
+  diseased: {
+    label: "DND5E.ConDiseased"
+  },
+  exhaustion: {
+    label: "DND5E.ConExhaustion",
+    reference: "Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.cspWveykstnu3Zcv"
+  },
+  frightened: {
+    label: "DND5E.ConFrightened",
+    reference: "Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.oreoyaFKnvZCrgij"
+  },
+  grappled: {
+    label: "DND5E.ConGrappled",
+    reference: "Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.gYDAhd02ryUmtwZn"
+  },
+  incapacitated: {
+    label: "DND5E.ConIncapacitated",
+    reference: "Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.TpkZgLfxCmSndmpb"
+  },
+  invisible: {
+    label: "DND5E.ConInvisible",
+    reference: "Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.3UU5GCTVeRDbZy9u"
+  },
+  paralyzed: {
+    label: "DND5E.ConParalyzed",
+    reference: "Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.xnSV5hLJIMaTABXP"
+  },
+  petrified: {
+    label: "DND5E.ConPetrified",
+    reference: "Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.xaNDaW6NwQTgHSmi"
+  },
+  poisoned: {
+    label: "DND5E.ConPoisoned",
+    reference: "Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.lq3TRI6ZlED8ABMx"
+  },
+  prone: {
+    label: "DND5E.ConProne",
+    reference: "Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.y0TkcdyoZlOTmAFT"
+  },
+  restrained: {
+    label: "DND5E.ConRestrained",
+    reference: "Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.cSVcyZyNe2iG1fIc"
+  },
+  stunned: {
+    label: "DND5E.ConStunned",
+    reference: "Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.ZyZMUwA2rboh4ObS"
+  },
+  unconscious: {
+    label: "DND5E.ConUnconscious",
+    reference: "Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.UWw13ISmMxDzmwbd"
+  }
 };
-preLocalize("conditionTypes", { sort: true });
+preLocalize("conditionTypes", { key: "label", sort: true });
+patchConfig("conditionTypes", "label", { since: "DnD5e 3.0", until: "DnD5e 3.2" });
 
 /* -------------------------------------------- */
 /*  Languages                                   */

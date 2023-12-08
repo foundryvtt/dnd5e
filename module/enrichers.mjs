@@ -2,12 +2,23 @@ import { simplifyBonus } from "./utils.mjs";
 import { damageRoll } from "./dice/_module.mjs";
 import * as Trait from "./documents/actor/trait.mjs";
 
+const MAX_EMBED_DEPTH = 5;
+
 /**
- * Set up the custom text enricher.
+ * Set up custom text enrichers.
  */
 export function registerCustomEnrichers() {
   CONFIG.TextEditor.enrichers.push({
     pattern: /\[\[\/(?<type>check|damage|save|skill|tool) (?<config>[^\]]+)]](?:{(?<label>[^}]+)})?/gi,
+    enricher: enrichString
+  },
+  {
+    pattern: /&(?<type>Reference)\[(?<config>[^\]]+)](?:{(?<label>[^}]+)})?/gi,
+    enricher: enrichString
+  },
+  {
+    // TODO: Remove when v11 support is dropped
+    pattern: /@(?<type>Embed)\[(?<config>[^\]]+)](?:{(?<label>[^}]+)})?/gi,
     enricher: enrichString
   });
 
@@ -25,7 +36,7 @@ export function registerCustomEnrichers() {
  */
 async function enrichString(match, options) {
   let { type, config, label } = match.groups;
-  config = parseConfig(config, match.input);
+  config = parseConfig(config);
   config.input = match[0];
   switch ( type.toLowerCase() ) {
     case "damage": return enrichDamage(config, label, options);
@@ -33,8 +44,47 @@ async function enrichString(match, options) {
     case "skill":
     case "tool": return enrichCheck(config, label, options);
     case "save": return enrichSave(config, label, options);
+    case "embed": return enrichEmbed(config, label, options);
+    case "reference": return enrichReference(config, label, options);
   }
   return match.input;
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Parse the enriched embed and provide the appropriate content.
+ * @param {object} config              Configuration data.
+ * @param {string} [label]             Optional label to replace default caption/text.
+ * @param {EnrichmentOptions} options  Options provided to customize text enrichment.
+ * @returns {HTMLElement|null}         An HTML link if the check could be built, otherwise null.
+ */
+async function enrichEmbed(config, label, options) {
+  options._embedDepth ??= 0;
+  if ( options._embedDepth > MAX_EMBED_DEPTH ) {
+    console.warn(
+      `Embed enrichers are restricted to ${MAX_EMBED_DEPTH} levels deep. ${config.input} cannot be enriched fully.`
+    );
+    return null;
+  }
+
+  for ( const value of config.values ) {
+    if ( config.uuid ) break;
+    try {
+      const parsed = foundry.utils.parseUuid(value);
+      if ( parsed.documentId ) config.uuid = value;
+    } catch(err) {}
+  }
+
+  config.doc = await fromUuid(config.uuid, { relative: options.relativeTo });
+  if ( config.doc instanceof JournalEntryPage ) {
+    switch ( config.doc.type ) {
+      case "image": return embedImagePage(config, label, options);
+      case "text": return embedTextPage(config, label, options);
+    }
+  }
+  else if ( config.doc instanceof RollTable ) return embedRollTable(config, label, options);
+  return null;
 }
 
 /* -------------------------------------------- */
@@ -46,14 +96,14 @@ async function enrichString(match, options) {
  */
 function parseConfig(match) {
   const config = { values: [] };
-  for ( const part of match.split(" ") ) {
+  for ( const part of match.match(/(?:[^\s"]+|"[^"]*")+/g) ) {
     if ( !part ) continue;
     const [key, value] = part.split("=");
     const valueLower = value?.toLowerCase();
-    if ( value === undefined ) config.values.push(key);
+    if ( value === undefined ) config.values.push(key.replace(/(^"|"$)/g, ""));
     else if ( ["true", "false"].includes(valueLower) ) config[key] = valueLower === "true";
     else if ( Number.isNumeric(value) ) config[key] = Number(value);
-    else config[key] = value;
+    else config[key] = value.replace(/(^"|"$)/g, "");
   }
   return config;
 }
@@ -66,7 +116,7 @@ function parseConfig(match) {
  * Enrich an ability check link to perform a specific ability or skill check. If an ability is provided
  * along with a skill, then the skill check will always use the provided ability. Otherwise it will use
  * the character's default ability for that skill.
- * @param {string[]} config            Configuration data.
+ * @param {object} config              Configuration data.
  * @param {string} [label]             Optional label to replace default text.
  * @param {EnrichmentOptions} options  Options provided to customize text enrichment.
  * @returns {HTMLElement|null}         An HTML link if the check could be built, otherwise null.
@@ -185,7 +235,7 @@ async function enrichCheck(config, label, options) {
 
 /**
  * Enrich a damage link.
- * @param {string[]} config            Configuration data.
+ * @param {object} config              Configuration data.
  * @param {string} [label]             Optional label to replace default text.
  * @param {EnrichmentOptions} options  Options provided to customize text enrichment.
  * @returns {HTMLElement|null}         An HTML link if the save could be built, otherwise null.
@@ -257,8 +307,220 @@ async function enrichDamage(config, label, options) {
 /* -------------------------------------------- */
 
 /**
+ * Embed an image page.
+ * @param {object} config              Configuration data.
+ * @param {string} [label]             Optional label to replace the default caption.
+ * @param {EnrichmentOptions} options  Options provided to customize text enrichment.
+ * @returns {HTMLElement|null}         An HTML figure containing the image, caption from the image page or a custom
+ *                                     caption, and a link to the source if it could be built, otherwise null.
+ *
+ * @example Create an embedded image from the UUID of an Image Journal Entry Page:
+ * ```@Embed[uuid=.QnH8yGIHy4pmFBHR classes="small right"]{A caption for the image}```
+ * becomes
+ * ```html
+ * <figure class="small right content-embed">
+ *   <img src="assets/image.png" alt="A caption for the image">
+ *   <figcaption>
+ *     <strong class="embed-caption">A caption for the image</strong>
+ *     <cite>
+ *       <a class="content-link" draggable="true"
+ *          data-uuid="JournalEntry.xFNPjbSEDbWjILNj.JournalEntryPage.QnH8yGIHy4pmFBHR"
+ *          data-id="QnH8yGIHy4pmFBHR" data-type="JournalEntryPage" data-tooltip="Image Page">
+ *         <i class="fas fa-file-image"></i> Image Page
+ *       </a>
+ *     </cite>
+ *   </figcaption>
+ * </figure>
+ * ```
+ */
+function embedImagePage(config, label, options) {
+  const showCaption = config.caption !== false;
+  const showCite = config.cite !== false;
+  const caption = label || config.doc.image.caption || config.doc.name;
+
+  const figure = document.createElement("figure");
+  if ( config.classes ) figure.className = config.classes;
+  figure.classList.add("content-embed");
+  figure.innerHTML = `<img src="${config.doc.src}" alt="${config.alt || caption}">`;
+
+  if ( showCaption || showCite ) {
+    const figcaption = document.createElement("figcaption");
+    if ( showCaption ) figcaption.innerHTML += `<strong class="embed-caption">${caption}</strong>`;
+    if ( showCite ) figcaption.innerHTML += `<cite>${config.doc.toAnchor().outerHTML}</cite>`;
+    figure.insertAdjacentElement("beforeend", figcaption);
+  }
+  return figure;
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Embed a text page.
+ * @param {object} config              Configuration data.
+ * @param {string} [label]             Optional label to replace default text.
+ * @param {EnrichmentOptions} options  Options provided to customize text enrichment.
+ * @returns {HTMLElement|null}         An HTML element containing the content from the given page and a link to the
+ *                                     source if it could be built, otherwise null.
+ *
+ * @example Embed the content of the Journal Entry Page with the given UUID:
+ * ```@Embed[uuid=JournalEntry.xFNPjbSEDbWjILNj.JournalEntryPage.QnH8yGIHy4pmFBHR classes="small right"]```
+ * becomes
+ * ```html
+ * <figure class="small right content-embed">
+ *   <p>The contents of the page</p>
+ *   <figcaption>
+ *     <strong class="embed-caption">A caption for the text</strong>
+ *     <cite>
+ *       <a class="content-link" draggable="true"
+ *          data-uuid="JournalEntry.ekAeXsvXvNL8rKFZ.JournalEntryPage.yDbDF1ThSfeinh3Y"
+ *          data-id="yDbDF1ThSfeinh3Y" data-type="JournalEntryPage" data-tooltip="Text Page">
+ *         <i class="fas fa-file-lines"></i> Text Page
+ *       </a>
+ *     </cite>
+ *   <figcaption>
+ * </figure>
+ * ```
+ */
+async function embedTextPage(config, label, options) {
+  options = { ...options, _embedDepth: options._embedDepth + 1, relativeTo: config.doc };
+  config.inline ??= config.values.includes("inline");
+
+  const enrichedPage = await TextEditor.enrichHTML(config.doc.text.content, options);
+  if ( config.inline ) {
+    const section = document.createElement("section");
+    if ( config.classes ) section.className = config.classes;
+    section.classList.add("content-embed");
+    section.innerHTML = enrichedPage;
+    return section;
+  }
+
+  const showCaption = config.caption !== false;
+  const showCite = config.cite !== false;
+  const caption = label || config.doc.name;
+  const figure = document.createElement("figure");
+  figure.innerHTML = enrichedPage;
+
+  if ( config.classes ) figure.className = config.classes;
+  figure.classList.add("content-embed");
+  if ( showCaption || showCite ) {
+    const figcaption = document.createElement("figcaption");
+    if ( showCaption ) figcaption.innerHTML += `<strong class="embed-caption">${caption}</strong>`;
+    if ( showCite ) figcaption.innerHTML += `<cite>${config.doc.toAnchor().outerHTML}</cite>`;
+    figure.insertAdjacentElement("beforeend", figcaption);
+  }
+
+  return figure;
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Embed a roll table.
+ * @param {object} config              Configuration data.
+ * @param {string} label               Optional label to use as the table caption.
+ * @param {EnrichmentOptions} options  Options provided to customize text enrichment.
+ * @returns {Promise<HTMLElement|null>}
+ */
+async function embedRollTable(config, label, options) {
+  options = { ...options, _embedDepth: options._embedDepth + 1, relativeTo: config.doc };
+  config.inline ??= config.values.includes("inline");
+  const results = config.doc.results.toObject();
+  results.sort((a, b) => a.range[0] - b.range[0]);
+  const table = document.createElement("table");
+  table.classList.add("roll-table-embed");
+  table.innerHTML = `
+    <thead>
+      <tr>
+        <th>${game.i18n.localize("TABLE.Roll")}</th>
+        <th>${game.i18n.localize("Result")}</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  `;
+  const tbody = table.querySelector("tbody");
+  for ( const { range, type, text, documentCollection, documentId } of results ) {
+    const row = document.createElement("tr");
+    const [lo, hi] = range;
+    row.innerHTML += `<td>${lo === hi ? lo : `${lo}&mdash;${hi}`}</td>`;
+    let result;
+    switch ( type ) {
+      case CONST.TABLE_RESULT_TYPES.TEXT: result = await TextEditor.enrichHTML(text, options); break;
+      case CONST.TABLE_RESULT_TYPES.DOCUMENT:
+        result = CONFIG[documentCollection].collection.get(documentId).toAnchor().outerHTML;
+        break;
+      case CONST.TABLE_RESULT_TYPES.COMPENDIUM:
+        const pack = game.packs.get(documentCollection);
+        result = (await pack.getDocument(documentId)).toAnchor().outerHTML;
+        break;
+    }
+    row.innerHTML += `<td>${result}</td>`;
+    tbody.append(row);
+  }
+
+  if ( config.inline ) {
+    const section = document.createElement("section");
+    if ( config.classes ) section.className = config.classes;
+    section.classList.add("content-embed");
+    section.append(table);
+    return section;
+  }
+
+  const showCaption = config.caption !== false;
+  const showCite = config.cite !== false;
+  const figure = document.createElement("figure");
+  figure.append(table);
+  if ( config.classes ) figure.className = config.classes;
+  figure.classList.add("content-embed");
+  if ( showCaption || showCite ) {
+    const figcaption = document.createElement("figcaption");
+    if ( showCaption ) {
+      if ( label ) figcaption.innerHTML += `<strong class="embed-caption">${label}</strong>`;
+      else {
+        const description = await TextEditor.enrichHTML(config.doc.description, options);
+        const container = document.createElement("div");
+        container.innerHTML = description;
+        container.classList.add("embed-caption");
+        figcaption.append(container);
+      }
+    }
+    if ( showCite ) figcaption.innerHTML += `<cite>${config.doc.toAnchor().outerHTML}</cite>`;
+    figure.append(figcaption);
+  }
+  return figure;
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Enrich a reference link.
+ * @param {object} config              Configuration data.
+ * @param {string} [label]             Optional label to replace default text.
+ * @param {EnrichmentOptions} options    Options provided to customize text enrichment.
+ * @returns {HTMLElement|null}         An HTML link to the Journal Entry Page for the given reference.
+ *
+ * @example Create a content link to the relevant reference:
+ * ```@Reference[condition=unconscious]{Label}```
+ * becomes
+ * ```html
+ * <a class="content-link" draggable="true"
+ *    data-uuid="Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.UWw13ISmMxDzmwbd"
+ *    data-type="JournalEntryPage" data-tooltip="Text Page">
+ *   <i class="fas fa-file-lines"></i> Label
+ * </a>
+ * ```
+ */
+async function enrichReference(config, label, options) {
+  const uuid = CONFIG.DND5E.conditionTypes[config.condition]?.reference;
+  if ( !uuid ) return null;
+  const doc = await fromUuid(uuid);
+  return doc.toAnchor({ name: label || doc.name });
+}
+
+/* -------------------------------------------- */
+
+/**
  * Enrich a saving throw link.
- * @param {string[]} config            Configuration data.
+ * @param {object} config              Configuration data.
  * @param {string} [label]             Optional label to replace default text.
  * @param {EnrichmentOptions} options  Options provided to customize text enrichment.
  * @returns {HTMLElement|null}         An HTML link if the save could be built, otherwise null.

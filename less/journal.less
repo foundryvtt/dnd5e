@@ -88,6 +88,10 @@
   text-decoration-style: dotted;
 }
 
+p:empty:has(+ .content-embed), .content-embed + p:empty {
+  display: none;
+}
+
 /* ----------------------------------------- */
 /*  Journal Pages                            */
 /* ----------------------------------------- */
