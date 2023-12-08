@@ -5,6 +5,25 @@ import { MappingField } from "../data/fields.mjs";
  */
 export default class TokenDocument5e extends TokenDocument {
 
+  /* -------------------------------------------- */
+  /*  Migrations                                  */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  _initializeSource(data, options={}) {
+    // Migrate backpack -> container.
+    for ( const item of data.delta?.items ?? [] ) {
+      // This will be correctly flagged as needing a source migration when the synthetic actor is created, but we need
+      // to also change the type in the raw ActorDelta to avoid spurious console warnings.
+      if ( item.type === "backpack" ) item.type = "container";
+    }
+    return super._initializeSource(data, options);
+  }
+
+  /* -------------------------------------------- */
+  /*  Methods                                     */
+  /* -------------------------------------------- */
+
   /** @inheritdoc */
   getBarAttribute(...args) {
     const data = super.getBarAttribute(...args);

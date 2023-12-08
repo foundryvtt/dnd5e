@@ -79,19 +79,43 @@ export const migrateWorld = async function() {
   }
 
   // Migrate Actor Override Tokens
-  for ( let s of game.scenes ) {
+  for ( const s of game.scenes ) {
     try {
       const updateData = migrateSceneData(s, migrationData);
       if ( !foundry.utils.isEmpty(updateData) ) {
         console.log(`Migrating Scene document ${s.name}`);
         await s.update(updateData, {enforceTypes: false});
-        // If we do not do this, then synthetic token actors remain in cache
-        // with the un-updated actorData.
-        s.tokens.forEach(t => t._actor = null);
       }
     } catch(err) {
       err.message = `Failed dnd5e system migration for Scene ${s.name}: ${err.message}`;
       console.error(err);
+    }
+
+    // Migrate ActorDeltas individually in order to avoid issues with ActorDelta bulk updates.
+    for ( const token of s.tokens ) {
+      try {
+        const flags = { persistSourceMigration: false };
+        const source = token.actor.toObject();
+        let updateData = migrateActorData(source, migrationData, flags);
+        if ( !foundry.utils.isEmpty(updateData) ) {
+          console.log(`Migrating ActorDelta document ${token.actor.name} [${token.delta.id}] in Scene ${s.name}`);
+          if ( flags.persistSourceMigration ) {
+            updateData = foundry.utils.mergeObject(source, updateData, { inplace: false });
+          } else {
+            // Workaround for core issue of bulk updating ActorDelta collections.
+            ["items", "effects"].forEach(col => {
+              for ( const [i, update] of (updateData[col] ?? []).entries() ) {
+                const original = token.actor[col].get(update._id);
+                updateData[col][i] = foundry.utils.mergeObject(original.toObject(), update, { inplace: false });
+              }
+            });
+          }
+          await token.actor.update(updateData, { enforceTypes: false, diff: !flags.persistSourceMigration });
+        }
+      } catch(err) {
+        err.message = `Failed dnd5e system migration for ActorDelta ${token.actor.name}: ${err.message}`;
+        console.error(err);
+      }
     }
   }
 
@@ -422,29 +446,23 @@ export function migrateRollTableData(table, migrationData) {
 /* -------------------------------------------- */
 
 /**
- * Migrate a single Scene document to incorporate changes to the data model of it's actor data overrides
+ * Migrate a single Scene document to incorporate changes to the data model of its actor data overrides
  * Return an Object of updateData to be applied
  * @param {object} scene            The Scene data to Update
  * @param {object} [migrationData]  Additional data to perform the migration
  * @returns {object}                The updateData to apply
  */
 export const migrateSceneData = function(scene, migrationData) {
-  const tokens = scene.tokens.map(token => {
+  const tokens = scene.tokens.reduce((arr, token) => {
     const t = token instanceof foundry.abstract.DataModel ? token.toObject() : token;
     const update = {};
     _migrateTokenImage(t, update);
-    if ( Object.keys(update).length ) foundry.utils.mergeObject(t, update);
-    if ( !game.actors.has(t.actorId) ) t.actorId = null;
-    if ( !t.actorId || t.actorLink ) t.actorData = {};
-    else if ( !t.actorLink ) {
-      const actorData = token.delta?.toObject() ?? foundry.utils.deepClone(t.actorData);
-      actorData.type = token.actor?.type;
-      const update = migrateActorData(actorData, migrationData);
-      t.delta = update;
-    }
+    if ( !game.actors.has(t.actorId) ) update.actorId = null;
+    if ( !foundry.utils.isEmpty(update) ) arr.push({ ...update, _id: t._id });
     return t;
   });
-  return {tokens};
+  if ( tokens.length ) return { tokens };
+  return {};
 };
 
 /* -------------------------------------------- */

@@ -34,7 +34,7 @@ export {default as PhysicalItemTemplate} from "./templates/physical-item.mjs";
 
 export const config = {
   background: BackgroundData,
-  backpack: ContainerData,
+  container: ContainerData,
   class: ClassData,
   consumable: ConsumableData,
   equipment: EquipmentData,

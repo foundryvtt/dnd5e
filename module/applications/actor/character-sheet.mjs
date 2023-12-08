@@ -55,7 +55,7 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
 
     // Categorize items as inventory, spellbook, features, and classes
     const inventory = {};
-    for ( const type of ["weapon", "equipment", "consumable", "tool", "backpack", "loot"] ) {
+    for ( const type of ["weapon", "equipment", "consumable", "tool", "container", "loot"] ) {
       inventory[type] = {label: `${CONFIG.Item.typeLabels[type]}Pl`, items: [], dataset: {type}};
     }
 

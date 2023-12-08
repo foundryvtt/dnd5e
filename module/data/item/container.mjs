@@ -6,7 +6,7 @@ import CurrencyTemplate from "../shared/currency.mjs";
 
 
 /**
- * Data definition for Backpack items.
+ * Data definition for Container items.
  * @mixes ItemDescriptionTemplate
  * @mixes PhysicalItemTemplate
  * @mixes EquippableItemTemplate
@@ -94,7 +94,7 @@ export default class ContainerData extends SystemDataModel.mixin(
 
     return this.contents.reduce((collection, item) => {
       collection.set(item.id, item);
-      if ( item.type === "backpack" ) item.system.allContainedItems.forEach(i => collection.set(i.id, i));
+      if ( item.type === "container" ) item.system.allContainedItems.forEach(i => collection.set(i.id, i));
       return collection;
     }, new foundry.utils.Collection());
   }
@@ -108,7 +108,7 @@ export default class ContainerData extends SystemDataModel.mixin(
     return (await this.contents).reduce(async (promise, item) => {
       const collection = await promise;
       collection.set(item.id, item);
-      if ( item.type === "backpack" ) (await item.system.allContainedItems).forEach(i => collection.set(i.id, i));
+      if ( item.type === "container" ) (await item.system.allContainedItems).forEach(i => collection.set(i.id, i));
       return collection;
     }, new foundry.utils.Collection());
   }

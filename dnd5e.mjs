@@ -118,10 +118,10 @@ Hooks.once("init", function() {
     makeDefault: true,
     label: "DND5E.SheetClassItem"
   });
-  DocumentSheetConfig.unregisterSheet(Item, "dnd5e", applications.item.ItemSheet5e, { types: ["backpack"] });
+  DocumentSheetConfig.unregisterSheet(Item, "dnd5e", applications.item.ItemSheet5e, { types: ["container"] });
   DocumentSheetConfig.registerSheet(Item, "dnd5e", applications.item.ContainerSheet, {
     makeDefault: true,
-    types: ["backpack"],
+    types: ["container"],
     label: "DND5E.SheetClassContainer"
   });
 

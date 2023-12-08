@@ -226,7 +226,7 @@ async function extractPacks(packName, entryName) {
     await extractPack(packInfo.path, dest, {
       log: false, transformEntry: e => {
         if ( e._key.startsWith("!folders") ) folders[e._id] = { name: slugify(e.name), folder: e.folder };
-        else if ( e.type === "backpack" ) containers[e._id] = {
+        else if ( e.type === "container" ) containers[e._id] = {
           name: slugify(e.name), container: e.system?.container, folder: e.folder
         };
         return false;

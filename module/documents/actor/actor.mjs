@@ -2439,7 +2439,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
         if ( origin.type === "feat" ) return keepFeatAE;
         if ( origin.type === "background" ) return keepBackgroundAE;
         if ( ["subclass", "class"].includes(origin.type) ) return keepClassAE;
-        if ( ["equipment", "weapon", "tool", "loot", "backpack"].includes(origin.type) ) return keepEquipmentAE;
+        if ( ["equipment", "weapon", "tool", "loot", "container"].includes(origin.type) ) return keepEquipmentAE;
         return true;
       });
     }

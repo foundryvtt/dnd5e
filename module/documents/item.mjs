@@ -20,6 +20,20 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   _classLink;
 
   /* -------------------------------------------- */
+  /*  Migrations                                  */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  _initializeSource(data, options={}) {
+    // Migrate backpack -> container.
+    if ( data.type === "backpack" ) {
+      data.type = "container";
+      foundry.utils.setProperty(data, "flags.dnd5e.persistSourceMigration", true);
+    }
+    return super._initializeSource(data, options);
+  }
+
+  /* -------------------------------------------- */
   /*  Item Properties                             */
   /* -------------------------------------------- */
 

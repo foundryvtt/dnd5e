@@ -120,7 +120,7 @@ export default class InventoryElement extends HTMLElement {
    * @returns {Item5e|Promise<Item5e>}
    */
   getItem(id) {
-    if ( this.document.type === "backpack" ) return this.document.system.getContainedItem(id);
+    if ( this.document.type === "container" ) return this.document.system.getContainedItem(id);
     return this.document.items.get(id);
   }
 
@@ -239,7 +239,7 @@ export default class InventoryElement extends HTMLElement {
           "system.attunement": CONFIG.DND5E.attunementTypes[isAttuned ? "REQUIRED" : "ATTUNED"]
         });
       case "create":
-        if ( this.document.type === "backpack" ) return;
+        if ( this.document.type === "container" ) return;
         return this._onCreate(target);
       case "crew":
         return item.update({"system.crewed": !item.system.crewed});

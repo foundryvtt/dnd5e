@@ -125,7 +125,7 @@
 
             <div class="item-detail item-quantity">
               <input type="number" value="{{item.system.quantity}}" min="0" placeholder="0" data-dtype="Number"
-                     data-name="system.quantity" {{disabled (eq item.type "backpack")}}>
+                     data-name="system.quantity" {{disabled (eq item.type "container")}}>
             </div>
 
             {{#unless @root.isContainer}}

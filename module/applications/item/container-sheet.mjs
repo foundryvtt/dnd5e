@@ -25,7 +25,7 @@ export default class ContainerSheet extends ItemSheet5e {
 
   /** @inheritdoc */
   get template() {
-    return "systems/dnd5e/templates/items/backpack.hbs";
+    return "systems/dnd5e/templates/items/container.hbs";
   }
 
   /* -------------------------------------------- */
