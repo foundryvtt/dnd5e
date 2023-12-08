@@ -2,7 +2,7 @@
   "_id": "8SMQl75HLjhuSeau",
   "name": "Fire Elemental",
   "type": "npc",
-  "img": "",
+  "img": null,
   "system": {
     "abilities": {
       "str": {
@@ -446,7 +446,7 @@
       "color": null
     },
     "texture": {
-      "src": "",
+      "src": null,
       "tint": null,
       "scaleX": 1,
       "scaleY": 1,
@@ -465,7 +465,9 @@
       "saturation": 0,
       "contrast": 0
     },
-    "detectionModes": []
+    "detectionModes": [],
+    "appendNumber": false,
+    "prependAdjective": false
   },
   "items": [
     {
@@ -995,7 +997,7 @@
     }
   ],
   "effects": [],
-  "folder": null,
+  "folder": "IB448xVSBvtqitzs",
   "sort": 0,
   "ownership": {
     "default": 0
@@ -1003,10 +1005,10 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.1.0",
-    "coreVersion": "10.291",
+    "systemVersion": "3.0.0",
+    "coreVersion": "11.315",
     "createdTime": 1661787232630,
-    "modifiedTime": 1672596093514,
+    "modifiedTime": 1701908185281,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!8SMQl75HLjhuSeau"

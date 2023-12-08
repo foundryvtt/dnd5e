@@ -2,7 +2,7 @@
   "_id": "irz834sqAxRihtSG",
   "name": "Adult Copper Dragon",
   "type": "npc",
-  "img": "",
+  "img": null,
   "system": {
     "abilities": {
       "str": {
@@ -427,7 +427,7 @@
       "color": null
     },
     "texture": {
-      "src": "",
+      "src": null,
       "tint": null,
       "scaleX": 1,
       "scaleY": 1,
@@ -446,7 +446,9 @@
       "saturation": 0,
       "contrast": 0
     },
-    "detectionModes": []
+    "detectionModes": [],
+    "appendNumber": false,
+    "prependAdjective": false
   },
   "items": [
     {
@@ -2071,7 +2073,7 @@
     }
   ],
   "effects": [],
-  "folder": null,
+  "folder": "PNekSR74iAZ5dJwZ",
   "sort": 0,
   "ownership": {
     "default": 0
@@ -2079,10 +2081,10 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.1.0",
-    "coreVersion": "10.291",
+    "systemVersion": "3.0.0",
+    "coreVersion": "11.315",
     "createdTime": 1661787233005,
-    "modifiedTime": 1672596104472,
+    "modifiedTime": 1701908189429,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!irz834sqAxRihtSG"
