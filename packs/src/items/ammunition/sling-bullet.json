@@ -1,0 +1,97 @@
+{
+  "_id": "z9SbsMIBZzuhZOqT",
+  "name": "Sling Bullet",
+  "type": "consumable",
+  "img": "icons/skills/ranged/bullets-triple-ball-yellow.webp",
+  "system": {
+    "description": {
+      "value": "<p>A hardened pebble of stone, bone, or metal which can be flung at high velocity using a sling.</p><section class=\"secret foundry-note\" id=\"secret-nfge79saW8cFjJrx\"><p><strong>Foundry Note</strong></p><p>It will usually be impossible to buy one sling bullet because they are worth less than a copper piece (5 bullets = 1 cp).</p></section>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": {
+      "custom": "",
+      "book": "SRD 5.1",
+      "page": "",
+      "license": "CC-BY-4.0"
+    },
+    "quantity": 1,
+    "weight": 0.075,
+    "price": {
+      "value": 0.2,
+      "denomination": "cp"
+    },
+    "attunement": 0,
+    "equipped": false,
+    "rarity": "",
+    "identified": true,
+    "activation": {
+      "type": "action",
+      "cost": 1,
+      "condition": ""
+    },
+    "duration": {
+      "value": "",
+      "units": ""
+    },
+    "cover": null,
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": ""
+    },
+    "range": {
+      "value": 30,
+      "long": 120,
+      "units": "ft"
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": null,
+      "recovery": "",
+      "autoDestroy": false
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
+    "ability": "",
+    "actionType": "rwak",
+    "attackBonus": "",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "consumableType": "ammo"
+  },
+  "effects": [],
+  "folder": "NdDvXSjfqlghXpQZ",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "3.0.0",
+    "coreVersion": "11.315",
+    "createdTime": 1661787233974,
+    "modifiedTime": 1701903948958,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  },
+  "_key": "!items!z9SbsMIBZzuhZOqT"
+}
