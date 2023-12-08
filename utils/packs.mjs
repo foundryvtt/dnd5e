@@ -109,7 +109,6 @@ function cleanPackEntry(data, { clearSourceId=true }={}) {
   if ( data.system?.description?.value ) data.system.description.value = cleanString(data.system.description.value);
   if ( data.label ) data.label = cleanString(data.label);
   if ( data.name ) data.name = cleanString(data.name);
-  data.sort = 0;
 }
 
 
