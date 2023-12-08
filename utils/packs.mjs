@@ -157,6 +157,10 @@ async function cleanPacks(packName, entryName) {
     for await ( const src of _walkDir(path.join(PACK_SRC, folder.name)) ) {
       const json = JSON.parse(await readFile(src, { encoding: "utf8" }));
       if ( entryName && (entryName !== json.name.toLowerCase()) ) continue;
+      if ( !json._id || !json._key ) {
+        console.log(`Failed to clean \x1b[31m${src}\x1b[0m, must have _id and _key.`);
+        continue;
+      }
       cleanPackEntry(json);
       fs.rmSync(src, { force: true });
       writeFile(src, `${JSON.stringify(json, null, 2)}\n`, { mode: 0o664 });
@@ -220,7 +224,7 @@ async function extractPacks(packName, entryName) {
     const folders = {};
     const containers = {};
     await extractPack(packInfo.path, dest, {
-      log: false, documentType: packInfo.type, transformEntry: e => {
+      log: false, transformEntry: e => {
         if ( e._key.startsWith("!folders") ) folders[e._id] = { name: slugify(e.name), folder: e.folder };
         else if ( e.type === "backpack" ) containers[e._id] = {
           name: slugify(e.name), container: e.system?.container, folder: e.folder
@@ -244,7 +248,7 @@ async function extractPacks(packName, entryName) {
     });
 
     await extractPack(packInfo.path, dest, {
-      log: true, documentType: packInfo.type, transformEntry: entry => {
+      log: true, transformEntry: entry => {
         if ( entryName && (entryName !== entry.name.toLowerCase()) ) return false;
         cleanPackEntry(entry);
       }, transformName: entry => {
