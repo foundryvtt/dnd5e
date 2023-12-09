@@ -18,7 +18,9 @@ import MountableTemplate from "./templates/mountable.mjs";
  * @property {object} armor             Armor details and equipment type information.
  * @property {string} armor.type        Equipment type as defined in `DND5E.equipmentTypes`.
  * @property {number} armor.value       Base armor class or shield bonus.
- * @property {number} armor.dex         Maximum dex bonus added to armor class.
+ * @property {string} armor.ability     Ability which bonus is added to armor class.
+ * @property {number} armor.abilityMin  Minimum ability bonus added to armor class.
+ * @property {number} armor.abilityMax  Maximum ability bonus added to armor class.
  * @property {string} baseItem          Base armor as defined in `DND5E.armorIds` for determining proficiency.
  * @property {object} speed             Speed granted by a piece of vehicle equipment.
  * @property {number} speed.value       Speed granted by this piece of equipment measured in feet or meters
