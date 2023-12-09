@@ -81,10 +81,16 @@ export default class EquipmentData extends SystemDataModel.mixin(
     if ( !("armor" in source) ) return;
     source.armor ??= {};
     if ( source.armor.type === "bonus" ) source.armor.type = "trinket";
+    if ( !("dex" in source.armor) ) return;
     if ( (typeof source.armor.dex === "string") ) {
       const dex = source.armor.dex;
       if ( dex === "" ) source.armor.dex = null;
       else if ( Number.isNumeric(dex) ) source.armor.dex = Number(dex);
+    }
+    if ( source.armor.dex === 0 ) source.armor.ability = "none";
+    else {
+      source.armor.abilityMax ??= source.armor.dex;
+      source.armor.ability ??= "dex";
     }
   }
 
