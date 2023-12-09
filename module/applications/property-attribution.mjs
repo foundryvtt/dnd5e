@@ -84,7 +84,8 @@ export default class PropertyAttribution extends Application {
     if ( parts[0] === "abilities" && parts[1] ) {
       return CONFIG.DND5E.abilities[parts[1]]?.label ?? property;
     } else if ( property === "attributes.ac.abilityMod" ) {
-      return game.i18n.localize("DND5E.ItemEquipmentAbilityMod");
+      const ability = this.object.armor?.system.armor?.ability;
+      return CONFIG.DND5E.abilities[ability]?.label ?? game.i18n.localize("DND5E.ItemEquipmentAbilityMod");
     } else if ( (parts[0] === "prof") || (property === "attributes.prof") ) {
       return game.i18n.localize("DND5E.Proficiency");
     }
