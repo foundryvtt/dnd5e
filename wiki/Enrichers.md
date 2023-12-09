@@ -21,7 +21,53 @@ The `[[/check]]`, `[[/skill]]`, `[[/tool]]` starting terms are all interchangeab
 
 For skill checks, the ability is optional. If one is provided then the person rolling have that ability selected by default even if it isn't the default on their sheet. Otherwise they will use whatever ability is set for that skill on their character sheet.
 
-For tool checks, the ability is required. A check like `[[/tool thief]]` will not parse because the ability must be explicitly set like `[[/tool thief dex]]`.
+For tool checks, the ability is required. A check like `[[/tool thief]]` will not parse because the ability must be explicitly set like `[[/tool thief dex]]`. A list of the toolIds to use for this enricher are provided below.  
+
+> <details>
+> <summary>Tool Ids</summary>
+>
+> | Tool                   | Id             |
+> |------------------------|----------------|
+> | Alchemist's Supplies   | `alchemist`    |
+> | Bagpipes               | `bagpipes`     |
+> | Brewer's Supplies      | `brewer`       |
+> | Calligrapher's Supplies | `calligrapher`|
+> | Playing Cards Set      | `card`         |
+> | Carpenter's Tools      | `carpenter`    |
+> | Cartographer's Tools   | `cartographer` |
+> | Chess Set              | `chess`        |
+> | Cobbler's Tools        | `cobbler`      |
+> | Cook's Utensils        | `cook`         |
+> | Dice Set               | `dice`         |
+> | Disguise Kit           | `disg`         |
+> | Drum                   | `drum`         |
+> | Dulcimer               | `dulcimer`     |
+> | Flute                  | `flute`        |
+> | Forgery Kit            | `forg`         |
+> | Glassblower's Tools    | `glassblower`  |
+> | Herbalism Kit          | `herb`         |
+> | Horn                   | `horn`         |
+> | Jeweler's Tools        | `jeweler`      |
+> | Leatherworker's Tools  | `leatherworker`|
+> | Lute                   | `lute`         |
+> | Lyre                   | `lyre`         |
+> | Mason's Tools          | `mason`        |
+> | Navigator's Tools      | `navg`         |
+> | Painter's Supplies     | `painter`      |
+> | Pan Flute              | `panflute`     |
+> | Poisoner's Kit         | `pois`         |
+> | Potter's Tools         | `potter`       |
+> | Shawm                  | `shawm`        |
+> | Smith's Tools          | `smith`        |
+> | Thieves' Tools         | `thief`        |
+> | Tinker's Tools         | `tinker`       |
+> | Viol                   | `viol`         |
+> | Weaver's Tools         | `weaver`       |
+> | Woodcarver's Tools     | `woodcarver`   |
+>
+> Source: `CONFIG.DND5E.toolIds` </details>
+
+
 
 ## Damage Enrichers
 Unlike simple inline roll links (the old `[[/r 2d6]]`), damage enrichers allow for properly associating damage types with rolls, automatically calculating the average, and will present the damage roll dialog when clicked allowing them to rolled as criticals or modified with temporary bonuses.
