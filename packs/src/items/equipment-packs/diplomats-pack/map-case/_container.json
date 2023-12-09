@@ -1,10 +1,10 @@
 {
-  "name": "Alms Box",
+  "name": "Map Case",
   "type": "container",
-  "img": "icons/sundries/misc/piggybank.webp",
+  "img": "icons/containers/bags/case-leather-tan.webp",
   "system": {
     "description": {
-      "value": "<p>A box with a money slot and detachable base mainly used by priests and the like to collect alms.</p>",
+      "value": "<p>This cylindrical leather case can hold up to ten rolled-up sheets of paper or five rolled-up sheets of parchment.</p>",
       "chat": "",
       "unidentified": ""
     },
@@ -15,18 +15,18 @@
       "license": "CC-BY-4.0"
     },
     "quantity": 1,
-    "weight": 2,
+    "weight": 1,
     "price": {
       "value": 1,
-      "denomination": "sp"
+      "denomination": "gp"
     },
     "attunement": 0,
     "equipped": false,
     "rarity": "",
     "identified": true,
     "capacity": {
-      "type": "weight",
-      "value": 2,
+      "type": "items",
+      "value": 10,
       "weightless": false
     },
     "currency": {
@@ -36,7 +36,7 @@
       "gp": 0,
       "pp": 0
     },
-    "container": "6BybWxK5GcEzqcOV"
+    "container": "Qy2aRjl4iQ8EmaT5"
   },
   "effects": [],
   "folder": "Dx3K2y0J1wJUPP9m",
@@ -45,14 +45,14 @@
     "systemId": "dnd5e",
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
-    "createdTime": 1661787233802,
-    "modifiedTime": 1702146779523,
+    "createdTime": 1661787233472,
+    "modifiedTime": 1702146684064,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
-  "_id": "ac8IamT5vDrH1ZT8",
-  "sort": 250000,
+  "_id": "u5GmRCvAsCYoacLj",
+  "sort": 0,
   "ownership": {
     "default": 0
   },
-  "_key": "!items!ac8IamT5vDrH1ZT8"
+  "_key": "!items!u5GmRCvAsCYoacLj"
 }
