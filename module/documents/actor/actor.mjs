@@ -504,13 +504,12 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
             const max = armorData.abilityMax ?? Infinity;
             const mod = this.system.abilities[ability].mod ?? 0;
             ac.abilityMod = Math.clamped(mod, min, max);
-            ac.equippedArmor = armors[0];
           } else {
             ac.abilityMod = 0;
           }
           ac.ability = ability;
-        }
-        else {
+          ac.equippedArmor = armors[0];
+        } else {
           ac.abilityMod = this.system.abilities.dex?.mod ?? 0;
           ac.ability = "dex";
         }
