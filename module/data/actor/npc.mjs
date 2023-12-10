@@ -163,8 +163,8 @@ export default class NPCData extends CreatureTemplate {
       const typeLc = match.groups.type.trim().toLowerCase();
       const typeMatch = Object.entries(CONFIG.DND5E.creatureTypes).find(([k, v]) => {
         return (typeLc === k)
-          || (typeLc === game.i18n.localize(v).toLowerCase())
-          || (typeLc === game.i18n.localize(`${v}Pl`).toLowerCase());
+          || (typeLc === game.i18n.localize(v.label).toLowerCase())
+          || (typeLc === game.i18n.localize(`${v.label}Pl`).toLowerCase());
       });
       if ( typeMatch ) source.type.value = typeMatch[0];
       else {
