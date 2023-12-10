@@ -21,7 +21,7 @@ The `[[/check]]`, `[[/skill]]`, `[[/tool]]` starting terms are all interchangeab
 
 For skill checks, the ability is optional. If one is provided then the person rolling have that ability selected by default even if it isn't the default on their sheet. Otherwise they will use whatever ability is set for that skill on their character sheet.
 
-For tool checks, the ability is required. A check like `[[/tool thief]]` will not parse because the ability must be explicitly set like `[[/tool thief dex]]`. A list of the toolIds to use for this enricher are provided below.  
+For tool checks, the ability is required. A check like `[[/tool thief]]` will not parse because the ability must be explicitly set like `[[/tool thief dex]]`. A list of the tool ids to use for this enricher is provided below.  
 
 > <details>
 > <summary>Tool Ids</summary>

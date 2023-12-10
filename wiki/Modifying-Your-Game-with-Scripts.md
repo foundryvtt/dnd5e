@@ -143,7 +143,7 @@ Hooks.once("init", () => {
 
 ## Modify Languages 
 ### Add a language  
-"Cool Speech" will be available at the top level (with Druidic and Theives' Cant), "Super Common" will appear under the Standard category, and "Uncommon" will appear under the Exotic category.  
+The "Cool Speech" language will be available at the top level (with Druidic and Thieves' Cant), "Super Common" will appear under the Standard category, and "Uncommon" will appear under the Exotic category.
 ```js
 Hooks.once("init", () => {
     CONFIG.DND5E.languages.coolspeech = "Cool Speech";
@@ -174,7 +174,7 @@ Hooks.once("setup", () => {
 ```
 ### Delete languages
 ```js
-Hooks.once("init", function () {
+Hooks.once("init", () => {
     delete CONFIG.DND5E.languages.druidic;
     delete CONFIG.DND5E.languages.standard.children.dwarvish;
     delete CONFIG.DND5E.languages.exotic.children.aarakocra;
