@@ -37,7 +37,7 @@ To include your Javascript file in your world, first, shut down the World in Fou
 
 # Examples
 Scripts rely on Hooks to automatically execute, see [Hooks](Hooks.md) for system specific Hooks that you can use, or the [Foundry API](https://foundryvtt.com/api/modules/hookEvents.html) for Hooks provided by the Core Foundry Software.  
-The examples below modify different aspects of the dnd5e system's datamodel, to explore this datamodel to see what you can modify, open the Console with F12 and type in `CONFIG.DND5E` then hit Enter.  
+The examples below modify different aspects of the dnd5e system's configuration, to explore the configuration to see what you can modify, open the Console with F12 and type in `CONFIG.DND5E` then hit Enter.  
 Need Help? Feel free to jump in the Foundry VTT discord's [#dnd5e](https://discord.com/channels/170995199584108546/670336046164213761) or [#macro-polo](https://discord.com/channels/170995199584108546/699750150674972743) channels for assistance from the community. 
 
 ## Add a new Ability
