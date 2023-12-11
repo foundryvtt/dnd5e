@@ -460,7 +460,7 @@ export const migrateSceneData = function(scene, migrationData) {
     if ( !game.actors.has(t.actorId) ) update.actorId = null;
     if ( !foundry.utils.isEmpty(update) ) arr.push({ ...update, _id: t._id });
     return t;
-  });
+  }, []);
   if ( tokens.length ) return { tokens };
   return {};
 };
