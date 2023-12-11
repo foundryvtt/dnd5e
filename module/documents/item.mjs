@@ -2254,12 +2254,12 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       foundry.utils.mergeObject(newItemData, {"system.container": containerId} );
       if ( !keepId ) newItemData._id = foundry.utils.randomID();
 
+      created.push(newItemData);
+
       const contents = await item.system.contents;
       if ( contents && (depth < PhysicalItemTemplate.MAX_DEPTH) ) {
         for ( const doc of contents ) await createItemData(doc, newItemData._id, depth + 1);
       }
-
-      created.push(newItemData);
     };
 
     const created = [];
