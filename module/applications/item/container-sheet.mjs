@@ -136,11 +136,12 @@ export default class ContainerSheet extends ItemSheet5e {
 
     // If item already exists in same DocumentCollection, just adjust its container property
     if ( (item.actor === this.item.actor) && (item.pack === this.item.pack) ) {
-      return item.update({"system.container": this.item.id});
+      return item.update({folder: this.item.folder, "system.container": this.item.id});
     }
 
     // Otherwise, create a new item & contents in this context
     const toCreate = await Item5e.createWithContents([item], {container: this.item});
+    if ( this.item.folder ) toCreate.forEach(d => d.folder = this.item.folder);
     return Item5e.createDocuments(toCreate, {pack: this.item.pack, parent: this.item.actor, keepId: true});
   }
 
