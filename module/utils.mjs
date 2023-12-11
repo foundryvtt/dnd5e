@@ -237,6 +237,18 @@ function itemContext(context, options) {
 /* -------------------------------------------- */
 
 /**
+ * A helper for using Intl.NumberFormat within handlebars.
+ * @param {number} value    The value to format.
+ * @param {object} options  Options forwarded to {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat}
+ */
+function numberFormat(value, options) {
+  const formatter = new Intl.NumberFormat(game.i18n.lang, options.hash);
+  return formatter.format(value);
+}
+
+/* -------------------------------------------- */
+
+/**
  * Register custom Handlebars helpers used by 5e.
  */
 export function registerHandlebarsHelpers() {
@@ -244,7 +256,8 @@ export function registerHandlebarsHelpers() {
     getProperty: foundry.utils.getProperty,
     "dnd5e-groupedSelectOptions": groupedSelectOptions,
     "dnd5e-linkForUuid": linkForUuid,
-    "dnd5e-itemContext": itemContext
+    "dnd5e-itemContext": itemContext,
+    "dnd5e-numberFormat": numberFormat
   });
 }
 

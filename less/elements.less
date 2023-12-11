@@ -1,0 +1,43 @@
+/* ---------------------------------- */
+/*  Slide Toggles                     */
+/* ---------------------------------- */
+
+slide-toggle {
+  --slide-toggle-height: 20px;
+  --slide-toggle-width: 36px;
+  --slide-toggle-padding: 3px;
+  --slide-toggle-track-color-unchecked: black;
+  --slide-toggle-track-color-checked: #3ba55d;
+  --slide-toggle-thumb-color: white;
+  --slide-toggle-thumb-width: calc(var(--slide-toggle-height) - var(--slide-toggle-padding) * 2);
+
+  width: var(--slide-toggle-width);
+  height: var(--slide-toggle-height);
+  cursor: pointer;
+
+  .slide-toggle-track {
+    width: 100%;
+    height: 100%;
+    background: var(--slide-toggle-track-color-unchecked);
+    border-radius: calc((var(--slide-toggle-height) * 2) / 3);
+    box-shadow: 0 0 8px rgb(0 0 0 / 45%);
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    padding: var(--slide-toggle-padding);
+  }
+
+  .slide-toggle-thumb {
+    width: var(--slide-toggle-thumb-width);
+    height: 100%;
+    border-radius: 100%;
+    background: var(--slide-toggle-thumb-color);
+    box-shadow: 0 0 8px rgb(0 0 0 / 45%);
+    text-align: center;
+    transition: margin-left 250ms ease;
+  }
+
+  /* Checked state */
+  &[checked] .slide-toggle-track { background: var(--slide-toggle-track-color-checked); }
+  &[checked] .slide-toggle-thumb { margin-left: calc(100% - var(--slide-toggle-thumb-width)); }
+}
