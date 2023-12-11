@@ -1,11 +1,11 @@
 {
-  "_id": "8ABk0XV76Hzq8Qul",
-  "name": "Amulet of the Planes",
+  "_id": "rY9sRFQp5CFSfsat",
+  "name": "Helm of Comprehending Languages",
   "type": "equipment",
-  "img": "icons/equipment/neck/pendant-faceted-green.webp",
+  "img": "icons/magic/defensive/illusion-evasion-echo-purple.webp",
   "system": {
     "description": {
-      "value": "<div><em>Wondrous Item (requires attunement)</em></div>\n<div> </div>\n<div>While wearing this Amulet, you can use an action to name a location that you are familiar with on another plane of existence. Then make a DC 15 Intelligence check. On a successful check, you cast the <em>@Compendium[dnd5e.spells.J6Jpw5XzB5aTeqnz]{Plane Shift}</em> spell. On a failure, you and each creature and object within 15 feet of you travel to a random destination. Roll a d100. On a 1-60, you travel to a random location on the plane you named. On a 61-100, you travel to a randomly determined plane of existence.</div>",
+      "value": "<p><em>Wondrous item</em></p>\n<p>While wearing this helm, you can use an action to cast the @Compendium[dnd5e.spells.4dSvfvTy2ZIJ3K4k]{Comprehend Languages} spell from it at will.</p>",
       "chat": "",
       "unidentified": ""
     },
@@ -16,35 +16,35 @@
       "license": "CC-BY-4.0"
     },
     "quantity": 1,
-    "weight": 0.1,
+    "weight": 2,
     "price": {
-      "value": 160000,
+      "value": 500,
       "denomination": "gp"
     },
-    "attunement": 1,
+    "attunement": 0,
     "equipped": false,
-    "rarity": "veryRare",
+    "rarity": "uncommon",
     "identified": true,
     "activation": {
-      "type": "",
-      "cost": null,
+      "type": "action",
+      "cost": 1,
       "condition": ""
     },
     "duration": {
-      "value": "",
-      "units": ""
+      "value": "1",
+      "units": "hour"
     },
     "cover": null,
     "target": {
       "value": null,
       "width": null,
       "units": "",
-      "type": ""
+      "type": "self"
     },
     "range": {
       "value": null,
       "long": null,
-      "units": ""
+      "units": "self"
     },
     "uses": {
       "value": null,
@@ -77,8 +77,8 @@
     },
     "armor": {
       "value": 0,
-      "type": "light",
-      "dex": 0
+      "type": "trinket",
+      "dex": null
     },
     "hp": {
       "value": 0,
@@ -96,8 +96,8 @@
     "proficient": null
   },
   "effects": [],
-  "folder": "JqTP017wj3uxDJ8g",
-  "sort": 0,
+  "folder": "aJgMxnZED9XdoN2W",
+  "sort": 150000,
   "ownership": {
     "default": 0
   },
@@ -106,9 +106,9 @@
     "systemId": "dnd5e",
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
-    "createdTime": 1661787233487,
-    "modifiedTime": 1701904247002,
+    "createdTime": 1661787233892,
+    "modifiedTime": 1702071554364,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
-  "_key": "!items!8ABk0XV76Hzq8Qul"
+  "_key": "!items!rY9sRFQp5CFSfsat"
 }
