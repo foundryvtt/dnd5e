@@ -2,15 +2,12 @@
   <div class="inventory-header flexrow">
     {{#unless isNPC}}
       <ol class="currency flexrow">
-        {{#unless isContainer}}
-          <h3>
-            {{localize "DND5E.Currency"}}
-            <a class="action-button currency-convert {{rollableClass}}" data-action="convertCurrency"
-               data-tooltip="DND5E.CurrencyConvert">
-              <i class="fas fa-coins"></i>
-            </a>
-          </h3>
-        {{/unless}}
+        <h3>
+          {{#unless isContainer}}{{localize "DND5E.Currency"}}{{/unless}}
+          <a class="item-action" data-action="currency" data-tooltip="DND5E.CurrencyManage">
+            <i class="fas fa-coins"></i>
+          </a>
+        </h3>
         {{#each system.currency as |v k|}}
           <label class="denomination {{k}}">{{lookup (lookup @root.config.currencies k) "label"}}</label>
           <input type="text" name="system.currency.{{k}}" value="{{v}}" data-dtype="Number">

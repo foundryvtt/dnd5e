@@ -2244,28 +2244,14 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * Convert all carried currency to the highest possible denomination using configured conversion rates.
    * See CONFIG.DND5E.currencies for configuration.
    * @returns {Promise<Actor5e>}
+   * @deprecated since DnD5e 3.0, targeted for removal in DnD5e 3.2.
    */
   convertCurrency() {
-    const currency = foundry.utils.deepClone(this.system.currency);
-    const currencies = Object.entries(CONFIG.DND5E.currencies);
-    currencies.sort((a, b) => a[1].conversion - b[1].conversion);
-
-    // Count total converted units of the base currency
-    let basis = currencies.reduce((change, [denomination, config]) => {
-      if ( !config.conversion ) return change;
-      return change + (currency[denomination] / config.conversion);
-    }, 0);
-
-    // Convert base units into the highest denomination possible
-    for ( const [denomination, config] of currencies) {
-      if ( !config.conversion ) continue;
-      const amount = Math.floor(basis * config.conversion);
-      currency[denomination] = amount;
-      basis -= (amount / config.conversion);
-    }
-
-    // Save the updated currency object
-    return this.update({"system.currency": currency});
+    foundry.utils.logCompatibilityWarning(
+      "Actor5e.convertCurrency has been moved to CurrencyManager.convertCurrency.",
+      { since: "DnD5e 3.0", until: "DnD5e 3.2" }
+    );
+    return CurrencyManager.convertCurrency(this);
   }
 
   /* -------------------------------------------- */

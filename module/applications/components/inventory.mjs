@@ -1,5 +1,6 @@
 import AdvancementManager from "../advancement/advancement-manager.mjs";
 import AdvancementConfirmationDialog from "../advancement/advancement-confirmation-dialog.mjs";
+import CurrencyManager from "../item/currency-manager.mjs";
 
 /**
  * Custom element that handles displaying actor & container inventories.
@@ -231,7 +232,7 @@ export default class InventoryElement extends HTMLElement {
 
     const itemId = target.closest("[data-item-id]")?.dataset.itemId;
     const item = await this.getItem(itemId);
-    if ( (action !== "create") && !item ) return;
+    if ( !["create", "currency"].includes(action) && !item ) return;
 
     switch ( action ) {
       case "attune":
@@ -243,6 +244,8 @@ export default class InventoryElement extends HTMLElement {
         return this._onCreate(target);
       case "crew":
         return item.update({"system.crewed": !item.system.crewed});
+      case "currency":
+        return new CurrencyManager(this.document).render(true);
       case "delete":
         return this._onDelete(target, item);
       case "duplicate":
