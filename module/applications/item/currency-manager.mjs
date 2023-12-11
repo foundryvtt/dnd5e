@@ -1,17 +1,16 @@
-import TooltipMixin from "../tooltip-mixin.mjs";
-
 /**
  * Application for performing currency conversions & transfers.
  */
-export default class CurrencyManager extends TooltipMixin(FormApplication) {
+export default class CurrencyManager extends FormApplication {
 
   /** @inheritdoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ["dnd5e", "currency-manager"],
-      tabs: [{navSelector: "nav", contentSelector: "main", initial: "transfer"}],
+      tabs: [{navSelector: "nav", contentSelector: ".sheet-content", initial: "transfer"}],
       template: "systems/dnd5e/templates/apps/currency-manager.hbs",
-      width: 450,
+      title: "DND5E.CurrencyManage",
+      width: 350,
       height: "auto"
     });
   }
@@ -28,7 +27,7 @@ export default class CurrencyManager extends TooltipMixin(FormApplication) {
     const destinations = [];
     const actor = this.object instanceof Actor ? this.object : this.object.parent;
     if ( actor !== this.object ) destinations.push(actor);
-    destinations.push(...actor.itemTypes.backpack.filter(b => b !== this.object));
+    destinations.push(...actor.itemTypes.container.filter(b => b !== this.object));
     return destinations;
   }
 

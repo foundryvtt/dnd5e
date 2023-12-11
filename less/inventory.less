@@ -194,77 +194,49 @@ dnd5e-inventory {
 }
 
 .dnd5e.currency-manager {
-  color-scheme: dark;
-  --border-color: color-mix(in oklab, var(--dnd5e-color-groove), transparent);
-
-  min-width: 300px;
-  padding: 0;
-
   nav {
-    position: relative;
     display: flex;
     gap: 4px;
     justify-content: center;
-    border-block-end: 1px solid white;
-    padding-block-start: 4px;
+    padding-block-end: 4px;
 
     a {
-      display: block;
-      border: 1px solid transparent;
+      border-block-end: 3px solid var(--dnd5e-color-beige);
       padding-block: 2px;
       padding-inline: 6px;
 
       &.active {
-        margin-block-end: -1px;
-        border-color: white;
-        border-block-end-color: black;
+        border-color: var(--dnd5e-color-crimson);
+        text-shadow: 0 0 10px var(--color-shadow-primary);
       }
     }
   }
 
-  .hint {
-    color: inherit;
-  }
+  .amount {
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-rows: 1fr 1fr;
+    gap: 4px;
+    font-size: var(--font-size-11);
 
-  main {
-    margin-block: 6px;
-    margin-inline-start: 4px;
-    margin-inline-end: 6px;
-
-    button, input {
-      border: var(--dnd5e-border-groove);
-      border-color: var(--border-color);
-      color: inherit;
-      &:hover, &:focus {
-        border-color: white;
-        box-shadow: none;
-      }
+    label {
+      text-align: center;
     }
     input {
       height: unset;
-      border-inline-color: transparent;
-      border-block-start-color: transparent;
     }
+  }
+  .destinations {
+    display: flex;
+    flex-direction: column;
+    margin-block: 4px;
+    text-align: start;
 
-    .amount {
-      display: grid;
-      grid-auto-flow: column;
-      grid-template-rows: 1fr 1fr;
-      gap: 4px;
-      font-size: var(--font-size-11);
-    }
-    .destinations {
+    label {
       display: flex;
-      flex-direction: column;
-      margin-block: 4px;
-      text-align: start;
-
-      label {
-        display: flex;
-        gap: 0.5em;
-        padding: 4px;
-        align-items: first baseline;
-      }
+      gap: 0.5em;
+      padding: 4px;
+      align-items: first baseline;
     }
   }
 }
