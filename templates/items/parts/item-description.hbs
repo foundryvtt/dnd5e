@@ -61,6 +61,8 @@
     </div>
 
     <div class="item-description">
+      {{#if system.identified}}
+
         {{#if (or editable system.description.value)}}
             {{#if editable}}
                 <h3 class="description-header">
@@ -72,19 +74,6 @@
                 </h3>
             {{/if}}
             {{editor enriched.description target="system.description.value" editable=false engine="prosemirror"}}
-        {{/if}}
-
-        {{#if (or editable system.unidentified.description)}}
-            <h3 class="description-header">
-                <i class="accordion-indicator fa-solid fa-chevron-down"></i>
-                {{localize "DND5E.DescriptionUnidentified"}}
-                {{#if editable}}
-                    <a class="description-edit" data-target="system.unidentified.description">
-                        <i class="fa-solid fa-edit"></i>
-                    </a>
-                {{/if}}
-            </h3>
-            {{editor enriched.unidentified target="system.unidentified.description" editable=false engine="prosemirror"}}
         {{/if}}
 
         {{#if (or editable system.description.chat)}}
@@ -99,6 +88,15 @@
             </h3>
             {{editor enriched.chat target="system.description.chat" editable=false engine="prosemirror"}}
         {{/if}}
+
+      {{else}}
+
+        {{#if (or editable system.unidentified.description)}}
+            {{editor enriched.unidentified target="system.unidentified.description" button=true editable=true
+                     engine="prosemirror"}}
+        {{/if}}
+
+      {{/if}}
     </div>
 {{/if}}
 </div>
