@@ -1,12 +1,14 @@
 import SystemDataModel from "../abstract.mjs";
 import { FormulaField } from "../fields.mjs";
 import EquippableItemTemplate from "./templates/equippable-item.mjs";
+import IdentifiableTemplate from "./templates/identifiable.mjs";
 import ItemDescriptionTemplate from "./templates/item-description.mjs";
 import PhysicalItemTemplate from "./templates/physical-item.mjs";
 
 /**
  * Data definition for Tool items.
  * @mixes ItemDescriptionTemplate
+ * @mixes IdentifiableTemplate
  * @mixes PhysicalItemTemplate
  * @mixes EquippableItemTemplate
  *
@@ -18,7 +20,7 @@ import PhysicalItemTemplate from "./templates/physical-item.mjs";
  * @property {string} bonus       Bonus formula added to tool rolls.
  */
 export default class ToolData extends SystemDataModel.mixin(
-  ItemDescriptionTemplate, PhysicalItemTemplate, EquippableItemTemplate
+  ItemDescriptionTemplate, IdentifiableTemplate, PhysicalItemTemplate, EquippableItemTemplate
 ) {
   /** @inheritdoc */
   static defineSchema() {

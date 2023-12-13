@@ -3,12 +3,14 @@ import { MappingField } from "../fields.mjs";
 import ActionTemplate from "./templates/action.mjs";
 import ActivatedEffectTemplate from "./templates/activated-effect.mjs";
 import EquippableItemTemplate from "./templates/equippable-item.mjs";
+import IdentifiableTemplate from "./templates/identifiable.mjs";
 import ItemDescriptionTemplate from "./templates/item-description.mjs";
 import PhysicalItemTemplate from "./templates/physical-item.mjs";
 
 /**
  * Data definition for Consumable items.
  * @mixes ItemDescriptionTemplate
+ * @mixes IdentifiableTemplate
  * @mixes PhysicalItemTemplate
  * @mixes EquippableItemTemplate
  * @mixes ActivatedEffectTemplate
@@ -19,7 +21,8 @@ import PhysicalItemTemplate from "./templates/physical-item.mjs";
  * @property {boolean} uses.autoDestroy  Should this item be destroyed when it runs out of uses.
  */
 export default class ConsumableData extends SystemDataModel.mixin(
-  ItemDescriptionTemplate, PhysicalItemTemplate, EquippableItemTemplate, ActivatedEffectTemplate, ActionTemplate
+  ItemDescriptionTemplate, IdentifiableTemplate, PhysicalItemTemplate, EquippableItemTemplate,
+  ActivatedEffectTemplate, ActionTemplate
 ) {
   /** @inheritdoc */
   static defineSchema() {
