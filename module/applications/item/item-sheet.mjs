@@ -165,7 +165,7 @@ export default class ItemSheet5e extends ItemSheet {
     };
     context.enriched = {
       description: await TextEditor.enrichHTML(item.system.description.value, enrichmentOptions),
-      unidentified: await TextEditor.enrichHTML(item.system.description.unidentified, enrichmentOptions),
+      unidentified: await TextEditor.enrichHTML(item.system.unidentified?.description, enrichmentOptions),
       chat: await TextEditor.enrichHTML(item.system.description.chat, enrichmentOptions)
     };
     if ( this.editingDescriptionTarget ) {

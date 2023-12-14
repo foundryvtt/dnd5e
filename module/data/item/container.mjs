@@ -1,5 +1,6 @@
 import SystemDataModel from "../abstract.mjs";
 import EquippableItemTemplate from "./templates/equippable-item.mjs";
+import IdentifiableTemplate from "./templates/identifiable.mjs";
 import ItemDescriptionTemplate from "./templates/item-description.mjs";
 import PhysicalItemTemplate from "./templates/physical-item.mjs";
 import CurrencyTemplate from "../shared/currency.mjs";
@@ -8,6 +9,7 @@ import CurrencyTemplate from "../shared/currency.mjs";
 /**
  * Data definition for Container items.
  * @mixes ItemDescriptionTemplate
+ * @mixes IdentifiableTemplate
  * @mixes PhysicalItemTemplate
  * @mixes EquippableItemTemplate
  * @mixes CurrencyTemplate
@@ -18,7 +20,7 @@ import CurrencyTemplate from "../shared/currency.mjs";
  * @property {boolean} capacity.weightless  Does the weight of the items in the container carry over to the actor?
  */
 export default class ContainerData extends SystemDataModel.mixin(
-  ItemDescriptionTemplate, PhysicalItemTemplate, EquippableItemTemplate, CurrencyTemplate
+  ItemDescriptionTemplate, IdentifiableTemplate, PhysicalItemTemplate, EquippableItemTemplate, CurrencyTemplate
 ) {
   /** @inheritdoc */
   static defineSchema() {

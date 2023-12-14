@@ -10,7 +10,6 @@ import SystemDataModel from "../../abstract.mjs";
  * @property {number} price.value         Item's cost in the specified denomination.
  * @property {string} price.denomination  Currency denomination used to determine price.
  * @property {string} rarity              Item rarity as defined in `DND5E.itemRarity`.
- * @property {boolean} identified         Has this item been identified?
  * @mixin
  */
 export default class PhysicalItemTemplate extends SystemDataModel {
@@ -34,8 +33,7 @@ export default class PhysicalItemTemplate extends SystemDataModel {
           required: true, blank: false, initial: "gp", label: "DND5E.Currency"
         })
       }, {label: "DND5E.Price"}),
-      rarity: new foundry.data.fields.StringField({required: true, blank: true, label: "DND5E.Rarity"}),
-      identified: new foundry.data.fields.BooleanField({required: true, initial: true, label: "DND5E.Identified"})
+      rarity: new foundry.data.fields.StringField({required: true, blank: true, label: "DND5E.Rarity"})
     };
   }
 
