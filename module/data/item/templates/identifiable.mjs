@@ -86,38 +86,38 @@ export default class IdentifiableTemplate extends SystemDataModel {
    * @protected
    */
   async _preUpdate(changed, options, user) {
-    if ( foundry.utils.hasProperty(changed, "system.identified") && !changed.system.identified ) {
-      const fetchName = !foundry.utils.getProperty(changed, "system.unidentified.name") && !this.unidentified.name;
-      const fetchDesc = !foundry.utils.getProperty(changed, "system.unidentified.description")
-        && !this.unidentified.description;
-      if ( !fetchName & !fetchDesc ) return;
+    if ( !foundry.utils.hasProperty(changed, "system.identified") || changed.system.identified ) return;
 
-      let baseItemIdentifier;
-      if ( this.parent.type === "weapon" ) baseItemIdentifier = CONFIG.DND5E.weaponIds[this.baseItem];
-      else if ( this.parent.type === "tool" ) baseItemIdentifier = CONFIG.DND5E.toolIds[this.baseItem];
-      else if ( this.parent.type === "equipment" ) {
-        if ( this.armor.type === "shield" ) baseItemIdentifier = CONFIG.DND5E.armorIds[this.baseItem];
-        else baseItemIdentifier = CONFIG.DND5E.shieldIds[this.baseItem];
-      }
-      const baseItem = await Trait.getBaseItem(baseItemIdentifier ?? "", { fullItem: fetchDesc });
+    const fetchName = !foundry.utils.getProperty(changed, "system.unidentified.name") && !this.unidentified.name;
+    const fetchDesc = !foundry.utils.getProperty(changed, "system.unidentified.description")
+      && !this.unidentified.description;
+    if ( !fetchName && !fetchDesc ) return;
 
-      // If a base item is set, fetch that and use its name/description
-      if ( baseItem ) {
-        if ( fetchName ) {
-          foundry.utils.setProperty(changed, "system.unidentified.name", game.i18n.format(
-            "DND5E.Unidentified.DefaultName", { name: baseItem.name }
-          ));
-        }
-        if ( fetchDesc ) {
-          foundry.utils.setProperty(changed, "system.unidentified.description", baseItem.system.description.value);
-        }
-        return;
-      }
-
-      // Otherwise, set the name to match the item type
-      if ( fetchName ) foundry.utils.setProperty(changed, "system.unidentified.name", game.i18n.format(
-        "DND5E.Unidentified.DefaultName", { name: game.i18n.localize(CONFIG.Item.typeLabels[this.parent.type]) }
-      ));
+    let baseItemIdentifier;
+    if ( this.parent.type === "weapon" ) baseItemIdentifier = CONFIG.DND5E.weaponIds[this.baseItem];
+    else if ( this.parent.type === "tool" ) baseItemIdentifier = CONFIG.DND5E.toolIds[this.baseItem];
+    else if ( this.parent.type === "equipment" ) {
+      if ( this.armor.type === "shield" ) baseItemIdentifier = CONFIG.DND5E.shieldIds[this.baseItem];
+      else baseItemIdentifier = CONFIG.DND5E.armorIds[this.baseItem];
     }
+    const baseItem = await Trait.getBaseItem(baseItemIdentifier ?? "", { fullItem: fetchDesc });
+
+    // If a base item is set, fetch that and use its name/description
+    if ( baseItem ) {
+      if ( fetchName ) {
+        foundry.utils.setProperty(changed, "system.unidentified.name", game.i18n.format(
+          "DND5E.Unidentified.DefaultName", { name: baseItem.name }
+        ));
+      }
+      if ( fetchDesc ) {
+        foundry.utils.setProperty(changed, "system.unidentified.description", baseItem.system.description.value);
+      }
+      return;
+    }
+
+    // Otherwise, set the name to match the item type
+    if ( fetchName ) foundry.utils.setProperty(changed, "system.unidentified.name", game.i18n.format(
+      "DND5E.Unidentified.DefaultName", { name: game.i18n.localize(CONFIG.Item.typeLabels[this.parent.type]) }
+    ));
   }
 }
