@@ -2249,7 +2249,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     const createItemData = async (item, containerId, depth) => {
       let newItemData = transformAll ? await transformAll(item) : item;
       if ( transformFirst && (depth === 0) ) newItemData = await transformFirst(newItemData);
-      else if ( !newItemData ) return;
+      if ( !newItemData ) return;
       if ( newItemData instanceof Item ) newItemData = newItemData.toObject();
       foundry.utils.mergeObject(newItemData, {"system.container": containerId} );
       if ( !keepId ) newItemData._id = foundry.utils.randomID();
