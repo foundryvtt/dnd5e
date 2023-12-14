@@ -1,0 +1,79 @@
+<form class="{{ cssClass }} flexcol" autocomplete="off">
+
+    {{!-- TODO: Dark mode only --}}
+    <div class="underlays">
+        <div class="banner-image"></div>
+        <div class="bottom-shadow"></div>
+    </div>
+
+    {{!-- Header --}}
+    <header class="sheet-header">
+
+        {{!-- Name & Class --}}
+        <div class="left">
+
+            {{!-- Name --}}
+            {{#if editMode}}
+            <input type="text" name="name" class="name uninput" value="{{ actor.name }}">
+            {{else}}
+            <div class="name">{{ actor.name }}</div>
+            {{/if}}
+
+            {{!-- Class --}}
+            <div class="class roboto-upper">{{ labels.class }}</div>
+        </div>
+
+        {{!-- Level, XP, & Buttons --}}
+        <div class="right">
+
+            {{!-- Level --}}
+            <div class="level" aria-label="{{ localize "DND5E.LevelNumber" }}">{{ system.details.level }}</div>
+
+            <div>
+                {{!-- Resting & Special Traits --}}
+                <div class="sheet-header-buttons">
+                    <button type="button" class="short-rest unbutton" data-tooltip="DND5E.ShortRest"
+                            aria-label="{{ localize "DND5E.ShortRest" }}">
+                        <i class="fas fa-utensils"></i>
+                    </button>
+                    <button type="button" class="long-rest unbutton" data-tooltip="DND5E.LongRest"
+                            aria-label="{{ localize "DND5E.LongRest" }}">
+                        <i class="fas fa-campground"></i>
+                    </button>
+                    <button type="button" class="config-button unbutton" data-action="flags"
+                            data-tooltip="DND5E.SpecialTraits" aria-label="{{ localize "DND5E.SpecialTraits" }}">
+                        <i class="fas fa-star"></i>
+                    </button>
+                </div>
+
+                {{!-- XP --}}
+                {{#with system.details.xp}}
+                <div class="xp-label roboto-upper">
+                    {{#if @root.editMode}}
+                    <input type="text" name="system.details.xp.value" class="value uninput" data-dtype="Number"
+                           value="{{ value }}">
+                    {{else}}
+                    <span class="value">{{ dnd5e-numberFormat value }}</span>
+                    {{/if}}
+                    <span class="separator">&sol;</span>
+                    <span class="max">{{ dnd5e-numberFormat max }}</span>
+                </div>
+                <div class="xp-bar" role="meter" aria-label="{{ localize "DND5E.ExperiencePointsLabel" }}"
+                     aria-valuemin="{{ min }}" aria-valuenow="{{ value }}" aria-valuemax="{{ max }}"
+                     aria-valuetext="{{ pct }}%" style="--bar-percentage: {{ pct }}%;"></div>
+                {{/with}}
+            </div>
+        </div>
+    </header>
+
+    {{!-- Body --}}
+    <section class="sheet-body">
+
+        {{!-- Main Content --}}
+        <div class="content">
+
+        </div>
+
+    </section>
+
+</form>

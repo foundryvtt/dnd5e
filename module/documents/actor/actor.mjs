@@ -272,12 +272,15 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     this.system.attributes.prof = Proficiency.calculateMod(this.system.details.level);
 
     // Experience required for next level
-    const xp = this.system.details.xp;
-    xp.max = this.getLevelExp(this.system.details.level || 1);
-    const prior = this.getLevelExp(this.system.details.level - 1 || 0);
-    const required = xp.max - prior;
-    const pct = Math.round((xp.value - prior) * 100 / required);
-    xp.pct = Math.clamped(pct, 0, 100);
+    const { xp, level } = this.system.details;
+    xp.max = this.getLevelExp(level || 1);
+    xp.min = level ? this.getLevelExp(level - 1) : 0;
+    if ( level >= CONFIG.DND5E.CHARACTER_EXP_LEVELS.length ) xp.pct = 100;
+    else {
+      const required = xp.max - xp.min;
+      const pct = Math.round((xp.value - xp.min) * 100 / required);
+      xp.pct = Math.clamped(pct, 0, 100);
+    }
   }
 
   /* -------------------------------------------- */

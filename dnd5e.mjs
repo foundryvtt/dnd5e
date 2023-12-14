@@ -90,12 +90,20 @@ Hooks.once("init", function() {
   CONFIG.Item.dataModels = dataModels.item.config;
   CONFIG.JournalEntryPage.dataModels = dataModels.journal.config;
 
+  // Add fonts
+  _configureFonts();
+
   // Register sheet application classes
   Actors.unregisterSheet("core", ActorSheet);
   Actors.registerSheet("dnd5e", applications.actor.ActorSheet5eCharacter, {
     types: ["character"],
     makeDefault: true,
     label: "DND5E.SheetClassCharacter"
+  });
+  // TODO: Temporary while new sheets are WIP.
+  DocumentSheetConfig.registerSheet(Actor, "dnd5e", applications.actor.ActorSheet5eCharacter2, {
+    types: ["character"],
+    label: "dnd5e 3.0 Character Sheet"
   });
   Actors.registerSheet("dnd5e", applications.actor.ActorSheet5eNPC, {
     types: ["npc"],
@@ -208,6 +216,45 @@ function _configureConsumableAttributes() {
     "spells.pact.value",
     ...Array.fromRange(Object.keys(DND5E.spellLevels).length - 1, 1).map(level => `spells.spell${level}.value`)
   ];
+}
+
+/**
+ * Configure additional system fonts.
+ */
+function _configureFonts() {
+  Object.assign(CONFIG.fontDefinitions, {
+    Roboto: {
+      editor: true,
+      fonts: [
+        { urls: ["systems/dnd5e/fonts/Roboto-Regular.woff2"] },
+        { urls: ["systems/dnd5e/fonts/Roboto-Bold.woff2"], weight: "bold" },
+        { urls: ["systems/dnd5e/fonts/Roboto-Italic.woff2"], style: "italic" },
+        { urls: ["systems/dnd5e/fonts/Roboto-BoldItalic.woff2"], weight: "bold", style: "italic" }
+      ]
+    },
+    "Roboto Condensed": {
+      editor: true,
+      fonts: [
+        { urls: ["systems/dnd5e/fonts/RobotoCondensed-Regular.woff2"] },
+        { urls: ["systems/dnd5e/fonts/RobotoCondensed-Bold.woff2"], weight: "bold" },
+        { urls: ["systems/dnd5e/fonts/RobotoCondensed-Italic.woff2"], style: "italic" },
+        { urls: ["systems/dnd5e/fonts/RobotoCondensed-BoldItalic.woff2"], weight: "bold", style: "italic" }
+      ]
+    },
+    "Roboto Slab": {
+      editor: true,
+      fonts: [
+        { urls: ["systems/dnd5e/fonts/RobotoSlab-Regular.ttf"] },
+        { urls: ["systems/dnd5e/fonts/RobotoSlab-Bold.ttf"], weight: "bold" }
+      ]
+    },
+    "Tiamat Condensed": {
+      editor: false,
+      fonts: [
+        { urls: ["systems/dnd5e/fonts/TiamatCondensedSC-Regular.otf"] }
+      ]
+    }
+  });
 }
 
 /* -------------------------------------------- */
