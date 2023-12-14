@@ -1,0 +1,250 @@
+/* ---------------------------------- */
+/*  Basic Structure                   */
+/* ---------------------------------- */
+
+.dnd5e2.sheet.actor.character {
+  background: transparent;
+  border: 1px solid var(--dnd5e-color-gold);
+
+  /* ---------------------------------- */
+  /*  Outer Window                      */
+  /* ---------------------------------- */
+
+  > header {
+    background: transparent;
+    border: none;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+
+    .header-button {
+      border-radius: 100%;
+      background: rgb(0 0 0 / 25%);
+      width: 20px;
+      height: 20px;
+      line-height: unset;
+      display: grid;
+      place-content: center;
+      font-size: var(--font-size-12);
+      margin-top: .25rem;
+
+      > i { margin: 0; }
+    }
+
+    .window-title { visibility: hidden; }
+
+    /* Edit Mode Toggle */
+    > slide-toggle {
+      --slide-toggle-track-color-checked: var(--dnd5e-color-gold);
+      --slide-toggle-track-color-unchecked: var(--dnd5e-color-light-gray);
+      flex: none;
+
+      .slide-toggle-thumb {
+        line-height: 12px;
+
+        &::before {
+          content: "\f0ad";
+          font-family: var(--font-awesome);
+          color: var(--dnd5e-color-light-gray);
+          font-weight: bold;
+          font-size: var(--font-size-9);
+        }
+      }
+
+      &[checked] .slide-toggle-thumb::before {
+        color: var(--dnd5e-color-gold);
+      }
+    }
+  }
+
+  .window-content > form { margin-top: -30px; }
+
+  .sheet-header, .sheet-body, .content {
+    position: relative;
+  }
+
+  /* ---------------------------------- */
+  /*  Sheet Header                      */
+  /* ---------------------------------- */
+
+  .sheet-header {
+    --dnd5e-sheet-header-height: 170px;
+    flex: 0 0 var(--dnd5e-sheet-header-height);
+    background: transparent url("ui/banner-character.jpg") no-repeat center / cover;
+    border: none;
+    border-radius: 5px 5px 0 0;
+    display: grid;
+    grid-template-columns: 65% 35%;
+    align-items: center;
+
+    input {
+      background: rgb(0 0 0 / 45%);
+      border: 1px solid transparent;
+
+      &:hover, &:focus {
+        border: 1px solid var(--dnd5e-color-gold);
+        box-shadow: 0 0 6px var(--dnd5e-color-gold);
+      }
+    }
+
+
+    /* Name & Class */
+    > .left {
+      padding-left: 3rem;
+      display: flex;
+      flex-direction: column;
+      gap: .25rem;
+
+      /* Name */
+      .name {
+        color: var(--color-text-light-0);
+        font-size: var(--font-size-42);
+        text-shadow: 2px 2px 2px var(--color-shadow-dark);
+        font-family: var(--dnd5e-font-tiamat);
+        letter-spacing: 3px;
+        padding: 0;
+        margin: 0;
+      }
+
+      input.name {
+        padding: .3125rem .75rem;
+        border-radius: 6px;
+        width: 95%;
+      }
+
+      /* Class */
+      .class {
+        color: var(--dnd5e-color-gold);
+        font-size: var(--font-size-14);
+      }
+    }
+
+    /* Level, XP, & Buttons */
+    > .right {
+      padding-right: 3rem;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+
+      /* Level */
+      .level {
+        width: 78px;
+        height: 78px;
+        background: transparent url("ui/level-badge.webp") no-repeat center / contain;
+        font-family: var(--dnd5e-font-roboto);
+        font-weight: bold;
+        color: var(--color-text-light-0);
+        display: grid;
+        place-content: center;
+        margin-left: auto;
+        font-size: var(--font-size-30);
+      }
+
+      /* XP & Buttons */
+      > div:last-child {
+        display: flex;
+        flex-direction: column;
+        gap: .25rem;
+        margin-top: -.5rem;
+
+        /* Resting & Special Traits */
+        .sheet-header-buttons {
+          display: flex;
+          align-items: center;
+          gap: .5rem;
+          position: absolute;
+          top: 1.5625rem;
+
+          > button {
+            position: relative;
+            border-radius: 4px;
+            background: black;
+            color: var(--dnd5e-color-gold);
+            width: 30px;
+            height: 30px;
+            margin: 0;
+            box-shadow: 0 0 4px var(--dnd5e-shadow-45);
+            font-size: var(--font-size-14);
+            display: grid;
+            place-content: center;
+
+            &::after {
+              content: "";
+              position: absolute;
+              inset: .1875rem;
+              border: 1px solid var(--dnd5e-color-gold);
+              border-radius: 3px;
+            }
+
+            &:hover, &:focus { box-shadow: 0 0 6px var(--dnd5e-color-gold); }
+            > i { margin: 0 }
+          }
+        }
+
+        /* XP */
+        .xp-label {
+          color: var(--dnd5e-color-gold);
+          font-size: var(--font-size-12);
+          display: flex;
+          gap: .25rem;
+          align-items: center;
+
+          > input {
+            width: 55px;
+            text-align: right;
+            padding: .125rem .25rem;
+          }
+        }
+
+        .xp-bar {
+          --bar-percentage: 0%;
+          border: 2px solid var(--dnd5e-color-gold);
+          background: black;
+          width: 100%;
+          height: 8px;
+
+          &::after {
+            content: "";
+            height: 100%;
+            width: var(--bar-percentage);
+            background: var(--dnd5e-color-red);
+            display: block;
+          }
+        }
+      }
+    }
+  }
+
+  /* ---------------------------------- */
+  /*  Sheet Body                        */
+  /* ---------------------------------- */
+
+  .sheet-body {
+    padding: .5rem;
+
+    /* Underlays */
+    > .underlays {
+      &::before, &::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        width: 100%;
+        background: transparent no-repeat top center;
+      }
+
+      &::before {
+        top: 0;
+        height: 770px;
+        background-image: url("ui/texture1.webp");
+        background-position-y: top;
+      }
+
+      &::after {
+        bottom: 0;
+        height: 704px;
+        background-image: url("ui/texture2.webp");
+        background-position-y: bottom;
+      }
+    }
+  }
+}

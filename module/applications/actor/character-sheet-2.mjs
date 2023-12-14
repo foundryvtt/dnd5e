@@ -7,7 +7,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
   /** @inheritDoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
-      classes: ["dnd5e", "sheet", "actor", "character2"],
+      classes: ["dnd5e2", "sheet", "actor", "character"],
       width: 800,
       height: 1000,
       resizable: true

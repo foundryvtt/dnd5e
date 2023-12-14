@@ -1,0 +1,94 @@
+/* ---------------------------------- */
+/*  All DnD5e Apps                    */
+/* ---------------------------------- */
+
+.dnd5e2 {
+
+  /* ---------------------------------- */
+  /*  Frame Styling                     */
+  /* ---------------------------------- */
+
+  .window-content {
+    font-family: var(--dnd5e-font-roboto);
+    font-size: var(--font-size-13);
+    border-radius: 5px;
+    padding: 0;
+    background: var(--dnd5e-color-parchment);
+    overflow: visible;
+  }
+
+  .window-resizable-handle {
+    border-radius: 0;
+    border: none;
+    background: transparent;
+    color: var(--dnd5e-color-black);
+    overflow: hidden;
+    font-size: var(--font-size-16);
+    cursor: nwse-resize;
+    opacity: .4;
+
+    > i {
+      position: absolute;
+      bottom: -3px;
+      right: 1px;
+
+      &::before { content: "\f7a5"; }
+    }
+  }
+
+  /* ---------------------------------- */
+  /*  Common App Components             */
+  /* ---------------------------------- */
+
+  .underlays {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+  }
+
+  .roboto-upper {
+    font-family: var(--dnd5e-font-roboto);
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+
+  .roboto-condensed-upper {
+    font-family: var(--dnd5e-font-roboto-condensed);
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+
+  /* ---------------------------------- */
+  /*  Form Elements                     */
+  /* ---------------------------------- */
+
+  /* Reset button & input styles */
+  input.uninput, button.unbutton {
+    border: none;
+
+    &:hover, &:focus {
+      box-shadow: none;
+      border: none;
+    }
+  }
+
+  input.uninput {
+    color: inherit;
+    font-weight: inherit;
+    height: unset;
+  }
+
+  /* Inputs & Buttons */
+  input, button {
+    transition: all 250ms ease;
+  }
+}
+
+/* ---------------------------------- */
+/*  Document Sheets                   */
+/* ---------------------------------- */
+
+.dnd5e2.sheet {
+
+}
