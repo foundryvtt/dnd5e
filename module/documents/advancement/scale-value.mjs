@@ -41,7 +41,8 @@ export default class ScaleValueAdvancement extends Advancement {
 
   /** @inheritdoc */
   get levels() {
-    return Array.from(Object.keys(this.configuration.scale).map(l => Number(l)));
+    return Array.from(Object.keys(this.configuration.scale).map(l => Number(l)))
+      .filter(l => !["class", "subclass"].includes(this.item.type) ? true : l !== 0);
   }
 
   /* -------------------------------------------- */

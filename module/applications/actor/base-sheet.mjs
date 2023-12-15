@@ -270,7 +270,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
     for ( let [k, label] of Object.entries(CONFIG.DND5E.senses) ) {
       const v = senses[k] ?? 0;
       if ( v === 0 ) continue;
-      tags[k] = `${game.i18n.localize(label)} ${v} ${senses.units}`;
+      tags[k] = `${game.i18n.localize(label)} ${v} ${senses.units ?? Object.keys(CONFIG.DND5E.movementUnits)[0]}`;
     }
     if ( senses.special ) senses.special.split(";").forEach((c, i) => tags[`custom${i+1}`] = c.trim());
     return tags;
@@ -1032,6 +1032,18 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
     // Stack identical consumables
     const stacked = this._onDropStackConsumables(itemData);
     if ( stacked ) return false;
+
+    // Ensure that this item isn't violating the singleton rule
+    // TODO: When v10 support is dropped, this will only need to be handled for items with advancement
+    const dataModel = CONFIG.Item[dnd5e.isV10 ? "systemDataModels" : "dataModels"][itemData.type];
+    const singleton = dataModel?.metadata.singleton ?? false;
+    if ( singleton && this.actor.itemTypes[itemData.type].length ) {
+      ui.notifications.error(game.i18n.format("DND5E.ActorWarningSingleton", {
+        itemType: game.i18n.localize(CONFIG.Item.typeLabels[itemData.type]),
+        actorType: game.i18n.localize(CONFIG.Actor.typeLabels[this.actor.type])
+      }));
+      return false;
+    }
 
     // Bypass normal creation flow for any items with advancement
     if ( itemData.system.advancement?.length && !game.settings.get("dnd5e", "disableAdvancements") ) {

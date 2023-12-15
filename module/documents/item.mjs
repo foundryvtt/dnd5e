@@ -459,7 +459,10 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     else if ( tgt.units === "touch" ) tgt.value = null;
 
     if ( this.hasTarget ) {
-      this.labels.target = [tgt.value, C.distanceUnits[tgt.units], C.targetTypes[tgt.type]].filterJoin(" ");
+      const target = [tgt.value];
+      if ( this.hasAreaTarget ) target.push(C.distanceUnits[tgt.units]);
+      target.push(C.targetTypes[tgt.type]);
+      this.labels.target = target.filterJoin(" ");
     }
 
     // Range Label
@@ -1105,7 +1108,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
 
     // Identify the consumed resource and its current quantity
     let resource = null;
-    let amount = usageConfig.resourceAmount ? usageConfig.resourceAmount : (consume.amount || 1);
+    let amount = usageConfig.resourceAmount ? usageConfig.resourceAmount : (consume.amount || 0);
     let quantity = 0;
     switch ( consume.type ) {
       case "attribute":
