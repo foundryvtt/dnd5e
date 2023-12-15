@@ -53,6 +53,10 @@ export default class IdentifiableTemplate extends SystemDataModel {
 
   /** @inheritdoc */
   prepareDerivedData() {
+    if ( !this.identified && this.unidentified.name ) {
+      this.parent.name = this.unidentified.name;
+    }
+
     const description = this.unidentified.description ?? null;
     Object.defineProperty(this.description, "unidentified", {
       get() {
