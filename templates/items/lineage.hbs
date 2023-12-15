@@ -1,0 +1,49 @@
+<form class="{{cssClass}} flexcol" autocomplete="off">
+
+  {{!-- Item Sheet Header --}}
+  <header class="sheet-header flexrow">
+    <img class="profile" src="{{item.img}}" data-tooltip="{{item.name}}" data-edit="img"/>
+
+    <div class="header-details flexrow">
+      <h1 class="charname">
+        <input name="name" type="text" value="{{item.name}}" placeholder="{{ localize 'DND5E.BackgroundName' }}"/>
+      </h1>
+
+      <div class="item-subtitle">
+        <h4 class="item-type">{{itemType}}</h4>
+        <span class="item-status">{{itemStatus}}</span>
+      </div>
+
+      <ul class="summary flexrow">
+        <li>
+          <input type="text" name="system.source" value="{{system.source}}" placeholder="{{ localize 'DND5E.Source' }}"/>
+        </li>
+      </ul>
+    </div>
+  </header>
+
+  {{!-- Item Sheet Navigation --}}
+  <nav class="sheet-navigation tabs" data-group="primary">
+      <a class="item active" data-tab="description">{{ localize "DND5E.Description" }}</a>
+      <a class="item" data-tab="advancement">{{ localize "DND5E.AdvancementTitle" }}</a>
+      <a class="item" data-tab="effects">{{ localize "DND5E.Effects" }}</a>
+  </nav>
+
+  {{!-- Item Sheet Body --}}
+  <section class="sheet-body">
+
+    {{!-- Description Tab --}}
+    <div class="tab flexrow active" data-group="primary" data-tab="description">
+      {{editor descriptionHTML target="system.description.value" button=true editable=editable engine="prosemirror"
+               collaborate=false}}
+    </div>
+
+    {{!-- Advancement Tab --}}
+    {{> "dnd5e.item-advancement"}}
+    
+    {{!-- Effects Tab --}}
+    <div class="tab effects flexcol" data-group="primary" data-tab="effects">
+        {{> "dnd5e.active-effects"}}
+    </div>
+  </section>
+</form>

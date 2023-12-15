@@ -1,0 +1,69 @@
+<div class="actor-score-generation">
+    <div>
+        <div class="form-group">
+            <label>{{localize "DND5E.CreationPoints"}}</label>
+            <div class="form-fields">
+                <span>{{system.creation.current}} / {{system.creation.maxPoints}}</span>
+            </div>
+        </div>
+    </div>
+    <div>
+        <ul class="abilities">
+        {{#each abilities as |ability id|}}
+            <li data-ability="{{id}}">
+            <h4 class="ability-name box-title rollable">{{ability.label}}</h4>
+            <div class="ability-value">
+                <div>
+                    {{#if enableDecrease}}
+                    <a class="decrement-ability" data-tooltip="DND5E.IncrementAbility" data-ability="{{id}}">
+                        <i class="fa-solid fa-circle-chevron-left"></i>
+                    </a>
+                    {{/if}}
+                </div>
+                <span class="bigger">{{ability.value}}</span>
+                <div>
+                    {{#if enableIncrease}}
+                    <a class="increment-ability" data-tooltip="DND5E.DecrementAbility" data-ability="{{id}}">
+                        <i class="fa-solid fa-circle-chevron-right"></i>
+                    </a>
+                    {{/if}}
+                </div>
+            </div>
+            <div class="ability-value">
+                <div></div>
+                <div class="creation-bonus">
+                    {{#unless (eq ability.newValue ability.value)}}
+                    <i class="fa-solid fa-chevrons-down fa-xl"></i>
+                    <span>{{ability.newValue}}</span>
+                    {{/unless}}
+                </div>
+                <div></div>
+            </div>
+            </li>
+        {{/each}}
+        </ul>
+    </div>
+    <div class="final-contener">
+        <div>
+            <div class="form-group">
+                <label>{{localize "DND5E.MajorBonus"}}</label>
+                <div class="form-fields">
+                    <select name="system.creation.majorBonus">
+                        {{selectOptions system.creation.majorBonusSelection selected=system.creation.majorBonus blank="" labelAttr="label"}}
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>{{localize "DND5E.MinorBonus"}}</label>
+                <div class="form-fields">
+                    <select name="system.creation.minorBonus">
+                        {{selectOptions system.creation.minorBonusSelection selected=system.creation.minorBonus blank="" labelAttr="label"}}
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div>
+            <a class="rest set-abilities {{#unless system.creation.canValidate}}disabled{{/unless}}" data-tooltip="DND5E.SetAbilitiesHint">{{localize "DND5E.SetAbilities"}}</a>
+        </div>
+    </div>
+</div>

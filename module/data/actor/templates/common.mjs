@@ -23,21 +23,7 @@ export default class CommonTemplate extends SystemDataModel.mixin(CurrencyTempla
   /** @inheritdoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
-      abilities: new MappingField(new foundry.data.fields.SchemaField({
-        value: new foundry.data.fields.NumberField({
-          required: true, nullable: false, integer: true, min: 0, initial: 10, label: "DND5E.AbilityScore"
-        }),
-        proficient: new foundry.data.fields.NumberField({
-          required: true, integer: true, min: 0, max: 1, initial: 0, label: "DND5E.ProficiencyLevel"
-        }),
-        max: new foundry.data.fields.NumberField({
-          required: true, integer: true, nullable: true, min: 0, initial: null, label: "DND5E.AbilityScoreMax"
-        }),
-        bonuses: new foundry.data.fields.SchemaField({
-          check: new FormulaField({required: true, label: "DND5E.AbilityCheckBonus"}),
-          save: new FormulaField({required: true, label: "DND5E.SaveBonus"})
-        }, {label: "DND5E.AbilityBonuses"})
-      }), {
+      abilities: new MappingField(new foundry.data.fields.SchemaField(this.makeAbilityField()), {
         initialKeys: CONFIG.DND5E.abilities, initialValue: this._initialAbilityValue.bind(this),
         initialKeysOnly: true, label: "DND5E.Abilities"
       })
@@ -110,5 +96,27 @@ export default class CommonTemplate extends SystemDataModel.mixin(CurrencyTempla
     source.attributes.movement ??= {};
     const s = original.split(" ");
     if ( s.length > 0 ) source.attributes.movement.walk = Number.isNumeric(s[0]) ? parseInt(s[0]) : 0;
+  }
+
+  /**
+   * Produce the schema field for a simple trait.
+   * @returns {AbilityData}
+   */
+  static makeAbilityField() {
+    return {
+      value: new foundry.data.fields.NumberField({
+        required: true, nullable: false, integer: true, min: 0, initial: 10, label: "DND5E.AbilityScore"
+      }),
+      proficient: new foundry.data.fields.NumberField({
+        required: true, integer: true, min: 0, max: 1, initial: 0, label: "DND5E.ProficiencyLevel"
+      }),
+      max: new foundry.data.fields.NumberField({
+        required: true, integer: true, nullable: true, min: 0, initial: null, label: "DND5E.AbilityScoreMax"
+      }),
+      bonuses: new foundry.data.fields.SchemaField({
+        check: new FormulaField({required: true, label: "DND5E.AbilityCheckBonus"}),
+        save: new FormulaField({required: true, label: "DND5E.SaveBonus"})
+      }, {label: "DND5E.AbilityBonuses"})
+    };
   }
 }

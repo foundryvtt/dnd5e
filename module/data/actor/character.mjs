@@ -54,6 +54,12 @@ export default class CharacterData extends CreatureTemplate {
   /** @inheritdoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
+      creation: new foundry.data.fields.SchemaField({
+        level: new foundry.data.fields.StringField({initial: "Classic", label: "DND5E.CreationLevel"}),
+        majorBonus: new foundry.data.fields.StringField({initial: "", label: "DND5E.MajorBonus"}),
+        minorBonus: new foundry.data.fields.StringField({initial: "", label: "DND5E.MinorBonus"}),
+        validate: new foundry.data.fields.BooleanField({initial: false, label: "DND5E.CreationValidate"})
+      }),
       attributes: new foundry.data.fields.SchemaField({
         ...AttributesFields.common,
         ...AttributesFields.creature,
@@ -189,6 +195,7 @@ function makeResourceField(schemaOptions={}) {
     }),
     sr: new foundry.data.fields.BooleanField({required: true, labels: "DND5E.ShortRestRecovery"}),
     lr: new foundry.data.fields.BooleanField({required: true, labels: "DND5E.LongRestRecovery"}),
-    label: new foundry.data.fields.StringField({required: true, labels: "DND5E.ResourceLabel"})
+    label: new foundry.data.fields.StringField({required: true, labels: "DND5E.ResourceLabel"}),
+    identifier: new foundry.data.fields.StringField({required: true, labels: "DND5E.ResourceLabel"})
   }, schemaOptions);
 }

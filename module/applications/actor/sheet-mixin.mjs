@@ -77,7 +77,7 @@ export const ActorSheetMixin = Base => class extends Base {
       {
         name: "DND5E.ContextMenuActionDuplicate",
         icon: "<i class='fas fa-copy fa-fw'></i>",
-        condition: () => !["race", "background", "class", "subclass"].includes(item.type) && item.actor.isOwner,
+        condition: () => !["race", "background", "lineage", "class", "subclass"].includes(item.type) && item.actor.isOwner,
         callback: () => item.clone({name: game.i18n.format("DOCUMENT.CopyOf", {name: item.name})}, {save: true})
       },
       {

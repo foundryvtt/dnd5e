@@ -31,6 +31,14 @@ export default class ClassData extends SystemDataModel.mixin(ItemDescriptionTemp
       hitDiceUsed: new foundry.data.fields.NumberField({
         required: true, nullable: false, integer: true, initial: 0, min: 0, label: "DND5E.HitDiceUsed"
       }),
+      reserve: new foundry.data.fields.SchemaField({
+        identifier: new foundry.data.fields.StringField({
+          required: false, label: "DND5E.ReserveIdentifier"
+        }),
+        key: new foundry.data.fields.StringField({required: false, label: "DND5E.ReserveTranslationKey"}),
+        formula: new foundry.data.fields.StringField({required: false, label: "DND5E.ReserveFormula"}),
+        refresh: new foundry.data.fields.StringField({required: false, initial: "lr", label: "DND5E.ReserveRefresh"})
+      }, {label: "DND5E.Reserve"}),
       advancement: new foundry.data.fields.ArrayField(new AdvancementField(), {label: "DND5E.AdvancementTitle"}),
       spellcasting: new foundry.data.fields.SchemaField({
         progression: new foundry.data.fields.StringField({

@@ -324,6 +324,11 @@
     },
     "htmlFields": ["details.biography.value", "details.biography.public", "description.full", "description.summary"],
     "character": {
+      "creation": {
+        "level": "Classic",
+        "current": 12,
+        "validate": false
+      },
       "templates": ["common", "creature"],
       "attributes": {
         "hp": {
@@ -502,7 +507,7 @@
     }
   },
   "Item": {
-    "types": ["weapon", "equipment", "consumable", "tool", "loot", "race", "background", "class", "subclass", "spell", "feat", "backpack"],
+    "types": ["weapon", "equipment", "consumable", "tool", "loot", "race", "background", "class", "subclass", "spell", "feat", "talent", "lineage", "backpack"],
     "templates": {
       "itemDescription": {
         "description": {
@@ -657,6 +662,14 @@
         "value": null,
         "charged": false
       }
+    },
+    "lineage": {
+      "templates": ["itemDescription"],
+      "advancement": []
+    },
+    "talent": {
+      "templates": ["itemDescription", "action"],
+      "advancement": []
     },
     "loot": {
       "templates": ["itemDescription", "physicalItem"]

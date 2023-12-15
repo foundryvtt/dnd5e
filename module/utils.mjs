@@ -131,6 +131,8 @@ export async function preloadHandlebarsTemplates() {
     "systems/dnd5e/templates/actors/parts/actor-features.hbs",
     "systems/dnd5e/templates/actors/parts/actor-spellbook.hbs",
     "systems/dnd5e/templates/actors/parts/actor-warnings.hbs",
+    "systems/dnd5e/templates/actors/parts/actor-score-generation.hbs",
+    "systems/dnd5e/templates/actors/parts/actor-body.hbs",
 
     // Item Sheet Partials
     "systems/dnd5e/templates/items/parts/item-action.hbs",
@@ -140,6 +142,7 @@ export async function preloadHandlebarsTemplates() {
     "systems/dnd5e/templates/items/parts/item-mountable.hbs",
     "systems/dnd5e/templates/items/parts/item-spellcasting.hbs",
     "systems/dnd5e/templates/items/parts/item-source.hbs",
+    "systems/dnd5e/templates/items/parts/item-reserve.hbs",
     "systems/dnd5e/templates/items/parts/item-summary.hbs",
 
     // Journal Partials

@@ -93,7 +93,7 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
 
       // Classify items into types
       if ( item.type === "spell" ) obj.spells.push(item);
-      else if ( item.type === "feat" ) obj.feats.push(item);
+      else if (["feat", "talent"].includes(item.type)) obj.feats.push(item);
       else if ( item.type === "race" ) obj.races.push(item);
       else if ( item.type === "background" ) obj.backgrounds.push(item);
       else if ( item.type === "class" ) obj.classes.push(item);
@@ -143,7 +143,32 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
       });
       context.warnings.push({ message, type: "warning" });
     }
+    const tmp = feats
+      .reduce((prev, curr) => {
+        const type = this.getFeatType(curr);
+        prev[type] = [
+          ...(prev[type] ?? []),
+          curr
+        ];
+        return prev;
+      }, {});
 
+    const resources = Object.values(context.system?.resources ?? {})
+      .filter(({identifier}) => identifier).reduce((prev, curr) => ({
+        ...prev,
+        [curr.identifier]: curr
+      }), {});
+    const reserves = (context?.rollData?.reserves ?? []).reduce((prev, reserve) => ({
+      ...prev,
+      [reserve.identifier]: {
+        label: reserve.key,
+        hasActions: true,
+        dataset: {type: "reserve"},
+        items: tmp[reserve.identifier],
+        value: resources[reserve.identifier]?.value ?? 0,
+        reserve
+      }
+    }), {});
     // Organize Features
     const features = {
       race: {
@@ -155,6 +180,7 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
       classes: {
         label: `${CONFIG.Item.typeLabels.class}Pl`, items: classes,
         hasActions: false, dataset: {type: "class"}, isClass: true },
+      ...reserves,
       active: {
         label: "DND5E.FeatureActive", items: [],
         hasActions: true, dataset: {type: "feat", "activation.type": "action"} },
@@ -162,7 +188,7 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
         label: "DND5E.FeaturePassive", items: [],
         hasActions: false, dataset: {type: "feat"} }
     };
-    for ( const feat of feats ) {
+    for ( const feat of feats.filter(f => !f.system.reserve?.identifier) ) {
       if ( feat.system.activation?.type ) features.active.items.push(feat);
       else features.passive.items.push(feat);
     }
@@ -173,6 +199,22 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
     context.spellbook = spellbook;
     context.preparedSpells = nPrepared;
     context.features = Object.values(features);
+  }
+
+  getFeatType(feat) {
+    if (feat.system.reserve?.identifier) {
+      return feat.system.reserve.identifier;
+    }
+    if (feat.system.activation?.type) {
+      return feat.system.activation.type;
+    }
+    if (feat.system.type?.value) {
+      return feat.system.type.value;
+    }
+    if (feat.type) {
+      return feat.type;
+    }
+    return "";
   }
 
   /* -------------------------------------------- */

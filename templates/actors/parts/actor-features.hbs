@@ -14,9 +14,17 @@
         <h3 class="item-name flexrow">{{localize section.label}}</h3>
 
         {{#if section.hasActions}}
-        <div class="item-detail item-uses">{{localize "DND5E.Uses"}}</div>
+            {{#if section.reserve.max}}
+            {{ section.value }} / {{ section.reserve.max }}
+            {{else}}
+            <div class="item-detail item-uses">{{localize "DND5E.Uses"}}</div>
+            {{/if}}
         <div class="item-detail item-action">{{localize "DND5E.Usage"}}</div>
         {{/if}}
+        {{!-- {{#if section.hasActions}}
+        <div class="item-detail item-uses">{{localize "DND5E.Uses"}}</div>
+        <div class="item-detail item-action">{{localize "DND5E.Usage"}}</div>
+        {{/if}} --}}
 
         {{#if section.columns}}
             {{#each section.columns}}

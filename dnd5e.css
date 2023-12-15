@@ -766,6 +766,9 @@ h5 {
   /*  General Styles                           */
   /* ----------------------------------------- */
   /* ----------------------------------------- */
+  /*  Abilities                                */
+  /* ----------------------------------------- */
+  /* ----------------------------------------- */
   /*  Attributes                               */
   /* ----------------------------------------- */
   /* ----------------------------------------- */
@@ -891,6 +894,105 @@ h5 {
   color: #4b4a44;
   border-bottom: 1px solid #c9c7b8;
   white-space: nowrap;
+}
+.dnd5e.sheet.actor .actor-score-generation {
+  display: flex;
+  flex-direction: column;
+}
+.dnd5e.sheet.actor .actor-score-generation > :not(:first-child) {
+  margin-top: 8px;
+}
+.dnd5e.sheet.actor .actor-score-generation .creation-points {
+  display: flex;
+  flex-direction: row;
+}
+.dnd5e.sheet.actor .actor-score-generation .abilities {
+  height: 120px;
+  flex-shrink: 1;
+  display: flex;
+  flex-direction: row;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border: 2px groove #eeede0;
+  border-radius: 3px;
+}
+.dnd5e.sheet.actor .actor-score-generation .abilities > * {
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+  flex-direction: column;
+}
+.dnd5e.sheet.actor .actor-score-generation .abilities > * > :not(:first-child) {
+  margin-top: 4px;
+}
+.dnd5e.sheet.actor .actor-score-generation .abilities > * > :last-child {
+  flex-grow: 1;
+}
+.dnd5e.sheet.actor .actor-score-generation .abilities .ability-value {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.dnd5e.sheet.actor .actor-score-generation .abilities .ability-value .creation-bonus {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.dnd5e.sheet.actor .actor-score-generation .abilities .ability-value .creation-bonus > :not(:first-child) {
+  margin-top: 4px;
+}
+.dnd5e.sheet.actor .actor-score-generation .abilities .ability-value > :not(:first-child) {
+  margin-left: 8px;
+}
+.dnd5e.sheet.actor .actor-score-generation .abilities .ability-value > * {
+  flex: 1;
+}
+.dnd5e.sheet.actor .actor-score-generation .abilities .ability-value span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 30px;
+  width: 36px;
+  line-height: 32px;
+  font-size: 24px;
+}
+.dnd5e.sheet.actor .actor-score-generation .abilities .racial-bonus {
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.dnd5e.sheet.actor .actor-score-generation .final-contener {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.dnd5e.sheet.actor .actor-score-generation .final-contener > :first-child {
+  flex-grow: 1;
+}
+.dnd5e.sheet.actor .actor-score-generation .final-contener > :not(:first-child) {
+  margin-left: 8px;
+}
+.dnd5e.sheet.actor .actor-score-generation .final-contener > :last-child {
+  flex-shrink: 1;
+}
+.dnd5e.sheet.actor .actor-score-generation .final-contener a {
+  padding: 4px;
+  border-radius: 3px;
+  font-weight: bold;
+  border: 2px groove #eeede0;
+  opacity: 0.8;
+  transition: opacity 0.3s ease-out;
+}
+.dnd5e.sheet.actor .actor-score-generation .final-contener a.disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}
+.dnd5e.sheet.actor .actor-score-generation .final-contener a:hover,
+.dnd5e.sheet.actor .actor-score-generation .final-contener a:focus {
+  opacity: 1;
 }
 .dnd5e.sheet.actor .tab.attributes {
   overflow: hidden;

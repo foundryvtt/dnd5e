@@ -783,6 +783,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * @property {boolean} consumeResource            Should this item consume a (non-ammo) resource?
    * @property {boolean} consumeSpellSlot           Should this item (a spell) consume a spell slot?
    * @property {boolean} consumeUsage               Should this item consume its limited uses or recharge?
+   * @property {boolean} consumeReserve             Should this item consume a specific reserve?
    * @property {string|number|null} slotLevel       The spell slot type or level to consume by default.
    * @property {number|null} resourceAmount         The amount to consume by default when scaling with consumption.
    */
@@ -942,7 +943,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * @returns {ItemUseConfiguration}  Configuration data for the roll.
    */
   _getUsageConfig() {
-    const { consume, uses, target, level, preparation } = this.system;
+    const { consume, uses, target, level, preparation, reserve } = this.system;
 
     const config = {
       consumeSpellSlot: null,
@@ -950,7 +951,8 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       consumeUsage: null,
       consumeResource: null,
       resourceAmount: null,
-      createMeasuredTemplate: null
+      createMeasuredTemplate: null,
+      consumeReserve: null,
     };
 
     const scaling = this.usageScaling;
@@ -960,7 +962,11 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     } else if ( scaling === "resource" ) {
       config.resourceAmount = consume.amount || 1;
     }
-    if ( this.hasLimitedUses ) config.consumeUsage = uses.prompt;
+    if ( this.hasLimitedUses ) {
+      config.consumeUsage = uses.prompt;
+    } else {
+      config.consumeReserve = !!reserve?.identifier;
+    }
     if ( this.hasResource ) {
       config.consumeResource = true;
       // Do not suggest consuming your own uses if also consuming them through resources.
@@ -1009,6 +1015,16 @@ export default class Item5e extends SystemDocumentMixin(Item) {
         return false;
       }
       actorUpdates[`system.spells.${config.slotLevel}.value`] = Math.max(spells - 1, 0);
+    }
+
+    if (config.consumeReserve) {
+      const resourceKey = Object.keys(this.actor?.system?.resources ?? {})
+        .find(key => this.actor?.system?.resources[key]?.identifier === this.system?.reserve?.identifier);
+      const resource = this.actor?.system?.resources[resourceKey];
+      if (resource) {
+        actorUpdates[`system.resources.${resourceKey}.value`] = resource.value - (this.system.reserve?.cost ?? 0);
+        actorUpdates[`system.resources.${resourceKey}.identifier`] = this.system?.reserve?.identifier;
+      }
     }
 
     // Return the configured usage

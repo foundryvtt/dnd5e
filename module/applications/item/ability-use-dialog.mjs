@@ -34,12 +34,24 @@ export default class AbilityUseDialog extends Dialog {
     const slotOptions = config.consumeSpellSlot ? this._createSpellSlotOptions(item.actor, item.system.level) : [];
     const resourceOptions = this._createResourceOptions(item);
 
+    const reserve = r && !item.system.uses?.value
+      ? {
+        value: resources
+          .find(({identifier}) => identifier === r.identifier)?.value ?? 0,
+        max: r.max,
+        per: r.refresh
+      }
+      : null;
+    const uses = reserve ?? (item.system.uses ?? {});
+
     const data = {
       item,
       ...config,
+      uses,
       slotOptions,
       resourceOptions,
       scaling: item.usageScaling,
+      consumeReserve: !!reserve,
       note: this._getAbilityUseNote(item, config),
       title: game.i18n.format("DND5E.AbilityUseHint", {
         type: game.i18n.localize(CONFIG.Item.typeLabels[item.type]),

@@ -53,6 +53,14 @@
     </div>
     {{/if}}
 
+    {{#if (ne consumeReserve null)}}
+    <div class="form-group">
+        <label class="checkbox">
+            <input type="checkbox" name="consumeReserve" {{checked consumeReserve}}>{{localize "DND5E.ConsumeReserve"}}
+        </label>
+    </div>
+    {{/if}}
+
     {{#if (ne createMeasuredTemplate null)}}
     <div class="form-group">
         <label class="checkbox">

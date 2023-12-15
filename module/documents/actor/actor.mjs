@@ -159,11 +159,13 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     this._prepareAbilities(rollData, globalBonuses, checkBonus, originalSaves);
     this._prepareSkills(rollData, globalBonuses, checkBonus, originalSkills);
     this._prepareTools(rollData, globalBonuses, checkBonus);
-    this._prepareArmorClass();
+    this._prepareArmorClass(rollData);
     this._prepareEncumbrance();
     this._prepareHitPoints(rollData);
     this._prepareInitiative(rollData, checkBonus);
     this._prepareSpellcasting();
+    this._prepareReserves(rollData);
+    this._prepareCreationState();
   }
 
   /* -------------------------------------------- */
@@ -454,9 +456,17 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   /**
    * Prepare a character's AC value from their equipped armor and shield.
    * Mutates the value of the `system.attributes.ac` object.
+   * @param {object} bonusData       Data produced by `getRollData` to be applied to bonus formulae.
    */
-  _prepareArmorClass() {
+  _prepareArmorClass(bonusData) {
     const ac = this.system.attributes.ac;
+
+    const replaced = Roll.replaceFormulaData(ac.bonus ?? "0", bonusData);
+    if (replaced) {
+      ac.bonus = Roll.safeEval(replaced);
+    } else {
+      ac.bonus = 0;
+    }
 
     // Apply automatic migrations for older data structures
     let cfg = CONFIG.DND5E.armorClasses[ac.calc];
@@ -611,6 +621,10 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    */
   _prepareInitiative(bonusData, globalCheckBonus=0) {
     const init = this.system.attributes.init ??= {};
+    const replaced = Roll.replaceFormulaData(init.bonus ?? "0", bonusData);
+    if (replaced) {
+      init.bonus = Roll.safeEval(replaced);
+    }
     const flags = this.flags.dnd5e || {};
 
     // Compute initiative modifier
@@ -629,6 +643,149 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     init.total = init.mod + initBonus + abilityBonus + globalCheckBonus
       + (flags.initiativeAlert ? 5 : 0)
       + (Number.isNumeric(init.prof.term) ? init.prof.flat : 0);
+  }
+
+
+
+  _prepareCreationState() {
+    if (!this.system.creation) {
+      this.system.creation = {};
+    }
+    this.system.creation.validate =
+      this.system.creation.validate || this.system.details.level > 0;
+    if (!this.system.creation?.validate) {
+      const gameLevel =
+        CONFIG.DND5E.StartingPoints[
+          this.system.creation?.level
+            ?? Object.keys(CONFIG.DND5E.StartingPoints)[0]
+        ];
+      const abilityKeys = Object.keys(this.system.abilities);
+      this.system.creation.current = Object.values(
+        this.system.abilities
+      ).reduce(
+        (prev, ability) => prev + (CONFIG.DND5E.PointsCost[ability.value] ?? 0),
+        0
+      );
+      this.system.creation.maxPoints = gameLevel.Points;
+      this.system.abilities = abilityKeys.reduce(
+        (prev, key) => ({
+          ...prev,
+          [key]: {
+            ...this.system.abilities[key],
+            enableDecrease: this.system.abilities[key].value > gameLevel.Min,
+            enableIncrease:
+              this.system.abilities[key].value < gameLevel.Max
+              && this.system.creation.current
+                - CONFIG.DND5E.PointsCost[this.system.abilities[key].value]
+                + CONFIG.DND5E.PointsCost[this.system.abilities[key].value + 1]
+                <= this.system.creation.maxPoints,
+            newValue:
+              this.system.abilities[key].value
+              + (this.system.creation.majorBonus === key
+                ? CONFIG.DND5E.AbilityCreationBonus.MAJOR
+                : 0)
+              + (this.system.creation.minorBonus === key
+                ? CONFIG.DND5E.AbilityCreationBonus.MINOR
+                : 0)
+          }
+        }),
+        {}
+      );
+      this.system.creation.majorBonusSelection = abilityKeys
+        .filter(key => key !== this.system.creation.minorBonus)
+        .reduce(
+          (prev, key) => ({
+            ...prev,
+            [key]: {
+              ...this.system.abilities[key],
+              label: CONFIG.DND5E.abilities[key].label,
+            },
+          }),
+          {}
+        );
+      this.system.creation.minorBonusSelection = Object.keys(
+        this.system.abilities
+      )
+        .filter(key => key !== this.system.creation.majorBonus)
+        .reduce(
+          (prev, key) => ({
+            ...prev,
+            [key]: {
+              ...this.system.abilities[key],
+              label: CONFIG.DND5E.abilities[key].label
+            },
+          }),
+          {}
+        );
+      this.system.creation.canValidate =
+        this.system.creation.current === this.system.creation.maxPoints
+        && abilityKeys.some(key => key === this.system.creation.majorBonus)
+        && abilityKeys.some(key => key === this.system.creation.minorBonus);
+    }
+  }
+  
+  /* -------------------------------------------- */
+  /*  Reserves Preparation                        */
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare data related to the reserves capabilities of the Actor.
+   * @protected
+   */
+  _prepareReserves(rollData) {
+    const reserves = Object.keys(rollData.classes)
+      .reduce(
+        (prev, key) => [
+          ...prev,
+          rollData.classes[key].reserve,
+          rollData.classes[key].subclass?.reserve,
+        ],
+        []
+      )
+      .reduce((prev, curr) => {
+        if (curr?.identifier) {
+          const r = prev.find(
+            ({ identifier }) => identifier === curr.identifier
+          ) ?? {
+            ...curr,
+          };
+          const replaced = Roll.replaceFormulaData(
+            curr.formula ?? "0",
+            rollData
+          );
+          let max = 0;
+          if (replaced) {
+            max = Roll.safeEval(replaced);
+          }
+          r.max = r.max ?? 0 < max ? max : r.max;
+          r.resource = this.getResourceName(curr.identifier);
+          if (!this.system.resources[r.resource].identifier) {
+            this.system.resources[r.resource].identifier = curr.identifier;
+            this.system.resources[r.resource].value = r.max;
+          }
+          this.system.resources[r.resource].sr = r.refresh === "sr";
+          this.system.resources[r.resource].lr = r.refresh === "lr";
+          this.system.resources[r.resource].label = r.key;
+          this.system.resources[r.resource].max = r.max;
+          return [
+            ...prev.filter(({ identifier }) => identifier !== curr.identifier),
+            r
+          ];
+        }
+        return prev;
+      }, []);
+
+    this.system.reserves = reserves;
+  }
+
+  getResourceName(identifier) {
+    const keys = Object.keys(this.system.resources ?? {});
+
+    return (
+      keys.find(
+        (key) => this.system.resources[key].identifier === identifier
+      ) ?? keys.find((key) => !this.system.resources[key].identifier)
+    );
   }
 
   /* -------------------------------------------- */

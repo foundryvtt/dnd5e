@@ -117,22 +117,33 @@
 </div>
 
 {{!-- Limited Uses --}}
-<div class="form-group uses-per">
-    <label>{{ localize "DND5E.LimitedUses" }}</label>
-    <div class="form-fields">
-        {{#if system.uses.per}}
-        <input type="number" step="any" name="system.uses.value"
-               value="{{system.uses.value}}" data-tooltip="DND5E.UsesAvailable">
-        <span class="sep">{{localize "DND5E.of"}}</span>
-        <input type="text" name="system.uses.max" value="{{source.uses.max}}"
-               data-tooltip="DND5E.UsesMax" data-formula-editor>
-        <span class="sep">{{localize "DND5E.per"}}</span>
-        {{/if}}
-        <select name="system.uses.per" data-tooltip="DND5E.UsesPeriod">
-            {{selectOptions config.limitedUsePeriods selected=system.uses.per blank=(localize "DND5E.None")}}
-        </select>
+    <div class="form-group uses-per">
+        <label>{{ localize "DND5E.LimitedUses" }}</label>
+        <div class="form-fields">
+            <input type="number" step="any" name="system.uses.value"
+                value="{{system.uses.value}}" data-tooltip="DND5E.UsesAvailable">
+            <span class="sep">{{localize "DND5E.of"}}</span>
+            <input type="text" name="system.uses.max" value="{{source.uses.max}}"
+                data-tooltip="DND5E.UsesMax" data-formula-editor>
+            <span class="sep">{{localize "DND5E.per"}}</span>
+            <select name="system.uses.per" data-tooltip="DND5E.UsesPeriod">
+                {{selectOptions config.limitedUsePeriods selected=system.uses.per blank=""}}
+            </select>
+        </div>
     </div>
-</div>
+{{!-- Reserve --}}
+    <div class="form-group uses-per">
+        <label>{{ localize "DND5E.ReserveIdentifier" }}</label>
+        <div class="form-fields">
+            <input type="text" name="system.reserve.identifier" value="{{source.reserve.identifier}}"
+                data-tooltip="DND5E.ReserveIdentifier">
+            {{#if system.reserve.identifier}}
+                <span class="sep">{{localize "DND5E.ReserveCost"}}</span>
+                <input type="number" step="any" name="system.reserve.cost"
+                    value="{{system.reserve.cost}}" data-tooltip="DND5E.ReserveCostHint">
+            {{/if}}
+        </div>
+    </div>
 
 {{#if isFormulaRecharge}}
 <div class="form-group">

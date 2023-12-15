@@ -61,6 +61,10 @@ export default class ActivatedEffectTemplate extends SystemDataModel {
         units: new foundry.data.fields.StringField({required: true, blank: true, label: "DND5E.RangeUnits"})
       }, {label: "DND5E.Range"}),
       uses: new this.ItemUsesField({}, {label: "DND5E.LimitedUses"}),
+      reserve: new foundry.data.fields.SchemaField({
+        identifier: new foundry.data.fields.StringField({required: true, blank: true, label: "DND5E.ReserveIdentifier"}),
+        cost: new foundry.data.fields.NumberField({initial: 1, label: "DND5E.ReserveCost"})
+      }, {label: "DND5E.Reserve"}),
       consume: new foundry.data.fields.SchemaField({
         type: new foundry.data.fields.StringField({required: true, blank: true, label: "DND5E.ConsumeType"}),
         target: new foundry.data.fields.StringField({

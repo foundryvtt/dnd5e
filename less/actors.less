@@ -132,6 +132,111 @@
   }
 
   /* ----------------------------------------- */
+  /*  Abilities                                */
+  /* ----------------------------------------- */
+  .actor-score-generation {
+    display: flex;
+    flex-direction: column;
+    > :not(:first-child) {
+      margin-top: 8px;
+    }
+    .creation-points {
+      display: flex;
+      flex-direction: row;
+    }
+    .abilities {
+      height: 120px;
+      flex-shrink: 1;
+      display: flex;
+      flex-direction: row;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      border: @borderGroove;
+      border-radius: 3px;
+
+      > * {
+        display: flex;
+        align-items: center;
+        flex-grow: 1;
+        flex-direction: column;
+        > :not(:first-child) {
+          margin-top: 4px;
+        }
+        > :last-child {
+          flex-grow: 1;
+        }
+      }
+      .ability-value {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        .creation-bonus {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          > :not(:first-child) {
+            margin-top: 4px;
+          }
+        }
+        > :not(:first-child) {
+          margin-left: 8px;
+        }
+        > * {
+          flex: 1;
+        }
+        span {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          height: 30px;
+          width: 36px;
+          line-height: 32px;
+          font-size: 24px;
+        }
+      }
+      .racial-bonus {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+    .final-contener {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      > :first-child {
+        flex-grow: 1;
+      }
+      > :not(:first-child) {
+        margin-left: 8px;
+      }
+      > :last-child {
+        flex-shrink: 1;
+      }
+      a {
+        padding: 4px;
+        border-radius: 3px;
+        font-weight: bold;
+        border: @borderGroove;
+        opacity: 0.8;
+        transition: @opacity-transition;
+        &.disabled {
+          pointer-events: none;
+          opacity: 0.5;
+        }
+        &:hover,
+        &:focus {
+          opacity: 1;
+        }
+      }
+    }
+  }
+
+
+  /* ----------------------------------------- */
   /*  Attributes                               */
   /* ----------------------------------------- */
 

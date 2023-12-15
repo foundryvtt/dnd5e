@@ -22,6 +22,14 @@ export default class SubclassData extends SystemDataModel.mixin(ItemDescriptionT
         required: true, label: "DND5E.ClassIdentifier", hint: "DND5E.ClassIdentifierHint"
       }),
       advancement: new foundry.data.fields.ArrayField(new AdvancementField(), {label: "DND5E.AdvancementTitle"}),
+      reserve: new foundry.data.fields.SchemaField({
+        identifier: new foundry.data.fields.StringField({
+          required: false, label: "DND5E.ReserveIdentifier"
+        }),
+        key: new foundry.data.fields.StringField({required: false, label: "DND5E.ReserveTranslationKey"}),
+        formula: new foundry.data.fields.StringField({required: false, label: "DND5E.ReserveFormula"}),
+        refresh: new foundry.data.fields.StringField({required: false, initial: "lr", label: "DND5E.ReserveRefresh"})
+      }, {label: "DND5E.Reserve"}),
       spellcasting: new foundry.data.fields.SchemaField({
         progression: new foundry.data.fields.StringField({
           required: true, initial: "none", blank: false, label: "DND5E.SpellProgression"

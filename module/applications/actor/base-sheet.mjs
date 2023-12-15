@@ -549,7 +549,12 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
     });
 
     // Sort the spellbook by section level
-    const sorted = Object.values(spellbook);
+    const sorted = Object.values(spellbook)
+      .map(data => ({
+        ...data,
+        spells: data.spells.sort((l, r) => l.name.localeCompare(r.name))
+          .sort((l, r) => (l.system.preparation.prepared?0:1)-(r.system.preparation.prepared?0:1))
+      }));
     sorted.sort((a, b) => a.order - b.order);
     return sorted;
   }
@@ -628,6 +633,13 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
     // Preparation Warnings
     html.find(".warnings").click(this._onWarningLink.bind(this));
 
+    if (!this.actor.creation?.validate) {
+      html.find(".increment-ability").click(this._IncreaseAbilityInCreation.bind(this));
+      html.find(".decrement-ability").click(this._DecreaseAbilityInCreation.bind(this));
+      html.find(".set-abilities").click(this._ValidateAbilitiesCreation.bind(this));
+    }
+    html.find(".unvalidate-abilities").click(this._UnvalidateAbilitiesCreation.bind(this));
+
     // Editable Only Listeners
     if ( this.isEditable ) {
       // Input focus and update
@@ -690,6 +702,34 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
 
     // Handle default listeners last so system listeners are triggered first
     super.activateListeners(html);
+  }
+
+  _UnvalidateAbilitiesCreation(event) {
+    this.actor.update({"system.creation.validate": false});
+  }
+
+  _ValidateAbilitiesCreation(event) {
+    const update = Object.keys(this.actor.system.abilities)
+      .reduce((prev, key) => ({
+        ...prev,
+        [`system.abilities.${key}.value`]: this.actor.system.abilities[key].newValue
+      }), {"system.creation.validate": true});
+    this.actor.update(update);
+  }
+
+  _IncreaseAbilityInCreation(event) {
+    const ability = event.currentTarget.closest("[data-ability]").dataset.ability;
+    this._ManageAbilityInCreation(ability, true);
+  }
+
+  _DecreaseAbilityInCreation(event) {
+    const ability = event.currentTarget.closest("[data-ability]").dataset.ability;
+    this._ManageAbilityInCreation(ability, false);
+  }
+
+  _ManageAbilityInCreation(ability, increase) {
+    const value = this.actor.system.abilities[ability].value + (increase ? 1 : -1);
+    this.actor.update({[`system.abilities.${ability}.value`]: parseInt(value)});
   }
 
   /* -------------------------------------------- */

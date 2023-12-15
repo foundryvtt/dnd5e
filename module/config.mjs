@@ -181,6 +181,36 @@ DND5E.attunements = {
 };
 preLocalize("attunements");
 
+DND5E.StartingPoints = {
+  Classic: {
+    Points: 27,
+    Min: 8,
+    Max: 15
+  }
+};
+DND5E.AbilityCreationBonus = {
+  MAJOR: 2,
+  MINOR: 1
+};
+DND5E.PointsCost = [
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  1,
+  2,
+  3,
+  4,
+  5,
+  7,
+  9
+];
+
 /* -------------------------------------------- */
 
 /**
@@ -829,8 +859,10 @@ DND5E.featureTypes = {
   class: {
     label: "DND5E.Feature.Class",
     subtypes: {
+      arcaneRecovery: "DND5E.ClassFeature.arcaneRecovery",
       arcaneShot: "DND5E.ClassFeature.ArcaneShot",
       artificerInfusion: "DND5E.ClassFeature.ArtificerInfusion",
+      battleManeuver: "DND5E.ClassFeature.BattleManeuver",
       channelDivinity: "DND5E.ClassFeature.ChannelDivinity",
       defensiveTactic: "DND5E.ClassFeature.DefensiveTactic",
       eldritchInvocation: "DND5E.ClassFeature.EldritchInvocation",
@@ -846,6 +878,9 @@ DND5E.featureTypes = {
       rune: "DND5E.ClassFeature.Rune",
       superiorHuntersDefense: "DND5E.ClassFeature.SuperiorHuntersDefense"
     }
+  },
+  proficiencies: {
+    label: "DND5E.Feature.Proficiencies"
   },
   monster: {
     label: "DND5E.Feature.Monster"
