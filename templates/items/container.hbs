@@ -17,6 +17,16 @@
       <div class="item-subtitle">
         <h4 class="item-type">{{itemType}}</h4>
         <span class="item-status">{{itemStatus}}</span>
+        <label class="identified">
+            <input type="checkbox" name="system.identified" {{checked system.identified}}>
+            {{#if system.identified}}
+                {{ localize "DND5E.Identified" }}
+                {{#if editable}}<i class="fa-solid fa-toggle-on"></i>{{/if}}
+            {{else}}
+                {{ localize "DND5E.Unidentified.Title" }}
+                {{#if editable}}<i class="fa-solid fa-toggle-off"></i>{{/if}}
+            {{/if}}
+        </label>
       </div>
 
       <ul class="summary flexrow">
