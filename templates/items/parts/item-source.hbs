@@ -4,7 +4,7 @@
 {{else}}
  <span>{{system.source.label}}</span>
 {{/if}}
-{{#if editable}}
+{{#if (and editable (not concealDetails))}}
 <a class="config-button" data-action="source" data-tooltip="DND5E.SourceConfig">
     <i class="fas fa-cog"></i>
 </a>

@@ -40,7 +40,7 @@
 
             <ul class="summary flexrow">
                 <li>
-                    <select name="system.rarity">
+                    <select name="system.rarity" {{~#if concealDetails}} inert{{/if}}>
                         {{selectOptions config.itemRarity selected=system.rarity blank=""}}
                     </select>
                 </li>
@@ -60,7 +60,6 @@
 
     {{!-- Item Sheet Body --}}
     <section class="sheet-body">
-
         {{!-- Contents Tab --}}
         <div class="tab inventory flexcol" data-group="primary" data-tab="contents">
             {{> "dnd5e.inventory" sections=inventory}}
@@ -71,6 +70,8 @@
 
         {{!-- Details Tab --}}
         <div class="tab details" data-group="primary" data-tab="details">
+            {{#dnd5e-concealSection concealDetails}}
+
             <h3 class="form-header">{{localize "DND5E.ItemContainerDetails"}}</h3>
 
             <div class="form-group">
@@ -101,5 +102,8 @@
                     {{localize "DND5E.ItemContainerWeightless"}}
                 </label>
             </div>
+
+            {{/dnd5e-concealSection}}
+        </div>
     </section>
 </form>

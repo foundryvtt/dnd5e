@@ -43,7 +43,7 @@
                     {{lookup config.consumableTypes system.consumableType }}
                 </li>
                 <li>
-                    <select name="system.rarity">
+                    <select name="system.rarity" {{~#if concealDetails}} inert{{/if}}>
                         {{selectOptions config.itemRarity selected=system.rarity blank=""}}
                     </select>
                 </li>
@@ -69,6 +69,8 @@
 
         {{!-- Details Tab --}}
         <div class="tab details" data-group="primary" data-tab="details">
+            {{#dnd5e-concealSection concealDetails}}
+
             <h3 class="form-header">{{ localize "DND5E.ItemConsumableDetails" }}</h3>
 
             {{!-- Consumable Type --}}
@@ -107,6 +109,8 @@
 
             {{!-- Item Action Template --}}
             {{> "dnd5e.item-action"}}
+
+            {{/dnd5e-concealSection}}
         </div>
 
         {{!-- Effects Tab --}}
