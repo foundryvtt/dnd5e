@@ -68,7 +68,7 @@ export default class JournalSpellListPageSheet extends JournalPageSheet {
     context.GROUPING_MODES = this.constructor.GROUPING_MODES;
     context.grouping = this.grouping || context.system.grouping;
 
-    context.spells = await Promise.all(context.system.spells.map(fromUuid));
+    context.spells = await Promise.all(context.system.spells.map(i => fromUuid(i)));
     context.spells.sort((a, b) => a.name.localeCompare(b.name));
 
     context.sections = {};

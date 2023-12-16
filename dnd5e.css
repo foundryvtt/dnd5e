@@ -2284,6 +2284,20 @@ h5 {
   list-style: none;
   line-height: 1.8em;
 }
+.journal-entry-page.spellList ul button.launch-text-editor {
+  flex: 0.35;
+}
+.journal-entry-page.spellList ul .items-list .item {
+  align-items: center;
+  padding-block: 0.35em 0;
+  padding-inline: 2px;
+}
+.journal-entry-page.spellList ul .items-list .item .item-controls {
+  flex: 0;
+}
+.journal-entry-page.spellList ul .items-list .item:not(:last-of-type) {
+  border-bottom: 1px solid var(--color-border-light-secondary);
+}
 /* ----------------------------------------- */
 /*  Chat Cards                               */
 /* ----------------------------------------- */
