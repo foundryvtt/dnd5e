@@ -10,7 +10,10 @@ slide-toggle {
   --slide-toggle-track-color-checked: #3ba55d;
   --slide-toggle-thumb-color: white;
   --slide-toggle-thumb-width: calc(var(--slide-toggle-height) - var(--slide-toggle-padding) * 2);
+  --slide-toggle-thumb-height: var(--slide-toggle-thumb-width);
+  --slide-toggle-transition-time: 250ms;
 
+  display: inline-block;
   width: var(--slide-toggle-width);
   height: var(--slide-toggle-height);
   cursor: pointer;
@@ -29,12 +32,12 @@ slide-toggle {
 
   .slide-toggle-thumb {
     width: var(--slide-toggle-thumb-width);
-    height: 100%;
+    height: var(--slide-toggle-thumb-height);
     border-radius: 100%;
     background: var(--slide-toggle-thumb-color);
     box-shadow: 0 0 8px rgb(0 0 0 / 45%);
     text-align: center;
-    transition: margin-left 250ms ease;
+    transition: margin-left var(--slide-toggle-transition-time) ease;
   }
 
   /* Checked state */

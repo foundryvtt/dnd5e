@@ -11,7 +11,14 @@ export default class SlideToggleElement extends HTMLElement {
     super();
     this.#internals = this.attachInternals();
     this.#internals.role = "switch";
+    this.#internals.ariaChecked = this.hasAttribute("checked") ? "true" : "false";
   }
+
+  /**
+   * Controller responsible for removing events on teardown.
+   * @type {AbortController}
+   */
+  #controller;
 
   /**
    * The custom element's form and accessibility internals.
@@ -55,6 +62,7 @@ export default class SlideToggleElement extends HTMLElement {
     if ( typeof value !== "boolean" ) throw new Error("Slide toggle checked state must be a boolean.");
     if ( value ) this.setAttribute("checked", "");
     else this.removeAttribute("checked");
+    this.#internals.ariaChecked = `${value}`;
   }
 
   /* -------------------------------------------- */
@@ -95,6 +103,13 @@ export default class SlideToggleElement extends HTMLElement {
 
   /* -------------------------------------------- */
 
+  /** @override */
+  disconnectedCallback() {
+    this.#controller.abort();
+  }
+
+  /* -------------------------------------------- */
+
   /**
    * Create the constituent components of this element.
    * @returns {HTMLElement[]}
@@ -116,7 +131,8 @@ export default class SlideToggleElement extends HTMLElement {
    * @protected
    */
   _activateListeners() {
-    this.addEventListener("click", this._onToggle.bind(this));
+    const { signal } = this.#controller = new AbortController();
+    this.addEventListener("click", this._onToggle.bind(this), { signal });
   }
 
   /* -------------------------------------------- */
@@ -127,7 +143,6 @@ export default class SlideToggleElement extends HTMLElement {
    * @protected
    */
   _onToggle(event) {
-    event.preventDefault();
     this.checked = !this.checked;
     this.dispatchEvent(new Event("change"));
   }
