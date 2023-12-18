@@ -11,6 +11,7 @@ export default class SlideToggleElement extends HTMLElement {
     super();
     this.#internals = this.attachInternals();
     this.#internals.role = "switch";
+    this.#internals.ariaChecked = this.hasAttribute("checked") ? "true" : "false";
   }
 
   /**
@@ -55,6 +56,7 @@ export default class SlideToggleElement extends HTMLElement {
     if ( typeof value !== "boolean" ) throw new Error("Slide toggle checked state must be a boolean.");
     if ( value ) this.setAttribute("checked", "");
     else this.removeAttribute("checked");
+    this.#internals.ariaChecked = `${value}`;
   }
 
   /* -------------------------------------------- */
@@ -112,11 +114,19 @@ export default class SlideToggleElement extends HTMLElement {
   /* -------------------------------------------- */
 
   /**
+   * Guard against adding event listeners more than once.
+   * @type {boolean}
+   */
+  #listenersAdded = false;
+
+  /**
    * Activate event listeners.
    * @protected
    */
   _activateListeners() {
+    if ( this.#listenersAdded ) return;
     this.addEventListener("click", this._onToggle.bind(this));
+    this.#listenersAdded = true;
   }
 
   /* -------------------------------------------- */
@@ -127,7 +137,6 @@ export default class SlideToggleElement extends HTMLElement {
    * @protected
    */
   _onToggle(event) {
-    event.preventDefault();
     this.checked = !this.checked;
     this.dispatchEvent(new Event("change"));
   }
