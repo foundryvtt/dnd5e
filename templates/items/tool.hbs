@@ -47,9 +47,13 @@
                     {{/if}}
                 </li>
                 <li>
-                    <select name="system.rarity">
+                    {{#if concealDetails}}
+                    <span>{{ localize "DND5E.Unidentified.Title" }}</span>
+                    {{else}}
+                    <select name="system.rarity" {{~#if concealDetails}} inert{{/if}}>
                         {{selectOptions config.itemRarity selected=system.rarity blank=""}}
                     </select>
+                    {{/if}}
                 </li>
                 <li>
                     {{> "dnd5e.item-source"}}
@@ -73,6 +77,7 @@
 
         {{!-- Details Tab --}}
         <div class="tab details" data-group="primary" data-tab="details">
+            {{#dnd5e-concealSection concealDetails}}
 
             {{!-- Tool Type --}}
             <div class="form-group">
@@ -125,6 +130,8 @@
                 <label>{{ localize "DND5E.ChatFlavor" }}</label>
                 <input type="text" name="system.chatFlavor" value="{{system.chatFlavor}}"/>
             </div>
+
+            {{/dnd5e-concealSection}}
         </div>
 
         {{!-- Effects Tab --}}

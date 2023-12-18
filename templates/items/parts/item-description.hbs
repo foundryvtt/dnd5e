@@ -20,16 +20,20 @@
 
         <div class="form-group">
             <label>{{ localize "DND5E.Price" }}</label>
+            {{#if concealDetails}}
+            <input type="text" value="{{localize 'DND5E.Unidentified.Value'}}" disabled>
+            {{else}}
             {{numberInput system.price.value name="system.price.value"}}
             <select name="system.price.denomination">
                 {{selectOptions config.currencies selected=system.price.denomination labelAttr="abbreviation"}}
             </select>
+            {{/if}}
         </div>
         {{/if}}
 
         {{#if (or labels.toHit labels.derivedDamage)}}
         <h4 class="properties-header">{{localize "DND5E.Attack"}}/{{localize "DND5E.Damage"}}</h4>
-        <ol class="properties-list">
+        <ol class="properties-list" {{~#if concealDetails}} inert{{/if}}>
             {{#if labels.save}}
             <li>
                 {{labels.save}}
@@ -52,7 +56,7 @@
 
         {{#if itemProperties.length}}
         <h4 class="properties-header">{{localize "DND5E.Properties"}}</h4>
-        <ol class="properties-list">
+        <ol class="properties-list" {{~#if concealDetails}} inert{{/if}}>
             {{#each itemProperties}}
             <li>{{this}}</li>
             {{/each}}

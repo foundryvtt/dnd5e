@@ -135,7 +135,9 @@ export default class ItemSheet5e extends ItemSheet {
 
       // Prepare Active Effects
       effects: EffectsElement.prepareCategories(item.effects),
-      elements: this.options.elements
+      elements: this.options.elements,
+
+      concealDetails: !game.user.isGM && (this.document.system.identified === false)
     });
     context.abilityConsumptionTargets = this._getItemConsumptionTargets();
 

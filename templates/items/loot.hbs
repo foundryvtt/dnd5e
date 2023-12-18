@@ -31,9 +31,13 @@
 
             <ul class="summary flexrow">
                 <li>
-                    <select name="system.rarity">
+                    {{#if concealDetails}}
+                    <span>{{ localize "DND5E.Unidentified.Title" }}</span>
+                    {{else}}
+                    <select name="system.rarity" {{~#if concealDetails}} inert{{/if}}>
                         {{selectOptions config.itemRarity selected=system.rarity blank=""}}
                     </select>
+                    {{/if}}
                 </li>
                 <li>
                     {{> "dnd5e.item-source"}}
@@ -56,6 +60,8 @@
 
         {{!-- Details Tab --}}
         <div class="tab details" data-group="primary" data-tab="details">
+            {{#dnd5e-concealSection concealDetails}}
+
             <h3 class="form-header">{{ localize "DND5E.ItemLootDetails" }}</h3>
 
             {{!-- Loot Type --}}
@@ -78,6 +84,7 @@
             </div>
             {{/if}}
 
+            {{/dnd5e-concealSection}}
         </div>
 
     </section>
