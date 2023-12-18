@@ -15,12 +15,6 @@ export default class SlideToggleElement extends HTMLElement {
   }
 
   /**
-   * Controller responsible for removing events on teardown.
-   * @type {AbortController}
-   */
-  #controller;
-
-  /**
    * The custom element's form and accessibility internals.
    * @type {ElementInternals}
    */
@@ -103,13 +97,6 @@ export default class SlideToggleElement extends HTMLElement {
 
   /* -------------------------------------------- */
 
-  /** @override */
-  disconnectedCallback() {
-    this.#controller.abort();
-  }
-
-  /* -------------------------------------------- */
-
   /**
    * Create the constituent components of this element.
    * @returns {HTMLElement[]}
@@ -127,12 +114,19 @@ export default class SlideToggleElement extends HTMLElement {
   /* -------------------------------------------- */
 
   /**
+   * Guard against adding event listeners more than once.
+   * @type {boolean}
+   */
+  #listenersAdded = false;
+
+  /**
    * Activate event listeners.
    * @protected
    */
   _activateListeners() {
-    const { signal } = this.#controller = new AbortController();
-    this.addEventListener("click", this._onToggle.bind(this), { signal });
+    if ( this.#listenersAdded ) return;
+    this.addEventListener("click", this._onToggle.bind(this));
+    this.#listenersAdded = true;
   }
 
   /* -------------------------------------------- */
