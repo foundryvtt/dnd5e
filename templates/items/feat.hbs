@@ -2,11 +2,11 @@
 
     {{!-- Item Sheet Header --}}
     <header class="sheet-header flexrow">
-        <img class="profile" src="{{item.img}}" data-tooltip="{{item.name}}" data-edit="img"/>
+        <img class="profile" src="{{item.img}}" data-tooltip="{{item.name}}" data-edit="img">
 
         <div class="header-details flexrow">
             <h1 class="charname">
-                <input name="name" type="text" value="{{item.name}}" placeholder="{{ localize 'DND5E.ItemName' }}"/>
+                <input name="name" type="text" value="{{item.name}}" placeholder="{{ localize 'DND5E.ItemName' }}">
             </h1>
 
             <div class="item-subtitle">
@@ -19,7 +19,7 @@
                     {{labels.featType}}
                 </li>
                 <li>
-                    <input type="text" name="system.requirements" value="{{system.requirements}}" placeholder="{{ localize 'DND5E.Requirements' }}"/>
+                    <input type="text" name="system.requirements" value="{{system.requirements}}" placeholder="{{ localize 'DND5E.Requirements' }}">
                 </li>
                 <li>
                     {{> "dnd5e.item-source"}}
@@ -57,7 +57,7 @@
             <div class="form-group">
                 <label>
                     {{localize "DND5E.ItemFeatureSubtype"
-                        category=(lookup (lookup config.featureTypes system.type.value) "label")}}
+                               category=(lookup (lookup config.featureTypes system.type.value) "label")}}
                 </label>
                 <select name="system.type.subtype">
                     {{selectOptions featureSubtypes selected=system.type.subtype blank=""}}
@@ -77,10 +77,10 @@
                 <div class="form-fields">
                     <span>{{ localize "DND5E.FeatureRechargeOn" }}</span>
                     {{numberInput system.recharge.value name="system.recharge.value"
-                        placeholder=(localize "DND5E.FeatureRechargeResult")}}
+                                  placeholder=(localize "DND5E.FeatureRechargeResult")}}
                     <label class="checkbox">
                         {{ localize "DND5E.Charged" }}
-                        <input type="checkbox" name="system.recharge.charged" {{checked system.recharge.charged}}/>
+                        <input type="checkbox" name="system.recharge.charged" {{checked system.recharge.charged}}>
                     </label>
                 </div>
             </div>

@@ -2,7 +2,7 @@
   <ol class="items-list effects-list">
     {{#each effects as |section sid|}}
     {{#unless section.hidden}}
-      <li class="items-header flexrow" data-effect-type="{{section.type}}">
+    <li class="items-header flexrow" data-effect-type="{{section.type}}">
         <h3 class="item-name effect-name flexrow">{{localize section.label}}</h3>
         <div class="effect-source">{{localize "DND5E.Source"}}</div>
         <div class="effect-source">{{localize "DND5E.Duration"}}</div>
@@ -13,18 +13,18 @@
             </a>
             {{/if}}
         </div>
-      </li>
+    </li>
 
-      {{#if section.info}}
-        <ol class="info">
+    {{#if section.info}}
+    <ol class="info">
         {{#each section.info}}
             <li class="notification info">{{this}}</li>
         {{/each}}
-        </ol>
-      {{/if}}
+    </ol>
+    {{/if}}
 
-      <ol class="item-list">
-      {{#each section.effects as |effect|}}
+    <ol class="item-list">
+        {{#each section.effects as |effect|}}
         <li class="item effect flexrow" data-effect-id="{{effect.id}}">
             <div class="item-name effect-name flexrow">
                 <img class="item-image" src="{{effect.icon}}"/>
@@ -47,8 +47,8 @@
                 {{/if}}
             </div>
         </li>
-      {{/each}}
-      </ol>
+        {{/each}}
+    </ol>
     {{/unless}}
     {{/each}}
   </ol>

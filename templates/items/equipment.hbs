@@ -2,16 +2,16 @@
 
     {{!-- Item Sheet Header --}}
     <header class="sheet-header flexrow">
-        <img class="profile" src="{{item.img}}" data-tooltip="{{item.name}}" data-edit="img"/>
+        <img class="profile" src="{{item.img}}" data-tooltip="{{item.name}}" data-edit="img">
 
         <div class="header-details flexrow">
             <h1 class="charname">
-              {{#if system.identified}}
+                {{#if system.identified}}
                 <input name="name" type="text" value="{{item.name}}" placeholder="{{ localize 'DND5E.ItemName' }}">
-              {{else}}
+                {{else}}
                 <input name="system.unidentified.name" type="text" value="{{system.unidentified.name}}"
                        placeholder="{{ localize 'DND5E.NameUnidentified' }}">
-              {{/if}}
+                {{/if}}
             </h1>
 
             <div class="item-subtitle">

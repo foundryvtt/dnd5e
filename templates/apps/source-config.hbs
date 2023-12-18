@@ -1,32 +1,32 @@
 <form autocomplete="off">
-  <div class="form-group">
-    <label>{{localize "DND5E.SourceBook"}}</label>
-    <input type="text" name="source.book" value="{{source.book}}" list="{{appId}}-books">
-    <datalist id="{{appId}}-books">
-      {{#each CONFIG.sourceBooks as |label key|}}
-        <option value="{{key}}">{{label}}</option>
-      {{/each}}
-    </datalist>
-  </div>
-  <div class="form-group">
-    <label>{{localize "DND5E.SourcePage"}}</label>
-    <input type="text" name="source.page" value="{{source.page}}">
-  </div>
-  <div class="form-group">
-    <label>{{localize "DND5E.SourceCustom"}}</label>
-    <input type="text" name="source.custom" value="{{source.custom}}">
-  </div>
-  <div class="form-group">
-    <label>{{localize "DND5E.SourceLicense"}}</label>
-    <input type="text" name="source.license" value="{{source.license}}">
-  </div>
-  {{#if hasSourceId}}
     <div class="form-group">
-      <label>{{localize "DND5E.SourceUUID"}}</label>
-      <div class="source-uuid">
-        {{{dnd5e-linkForUuid sourceUuid}}}
-      </div>
+        <label>{{localize "DND5E.SourceBook"}}</label>
+        <input type="text" name="source.book" value="{{source.book}}" list="{{appId}}-books">
+        <datalist id="{{appId}}-books">
+            {{#each CONFIG.sourceBooks as |label key|}}
+            <option value="{{key}}">{{label}}</option>
+            {{/each}}
+        </datalist>
     </div>
-  {{/if}}
-  <button type="submit"><i class="far fa-save"></i> {{ localize "Submit"}}</button>
+    <div class="form-group">
+        <label>{{localize "DND5E.SourcePage"}}</label>
+        <input type="text" name="source.page" value="{{source.page}}">
+    </div>
+    <div class="form-group">
+        <label>{{localize "DND5E.SourceCustom"}}</label>
+        <input type="text" name="source.custom" value="{{source.custom}}">
+    </div>
+    <div class="form-group">
+        <label>{{localize "DND5E.SourceLicense"}}</label>
+        <input type="text" name="source.license" value="{{source.license}}">
+    </div>
+    {{#if hasSourceId}}
+    <div class="form-group">
+        <label>{{localize "DND5E.SourceUUID"}}</label>
+        <div class="source-uuid">
+            {{{dnd5e-linkForUuid sourceUuid}}}
+        </div>
+    </div>
+    {{/if}}
+    <button type="submit"><i class="far fa-save"></i> {{ localize "Submit"}}</button>
 </form>

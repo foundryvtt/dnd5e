@@ -1,13 +1,13 @@
 <form id="{{appId}}" data-level="{{level}}" data-id="{{advancement.id}}" data-type="{{type}}">
-  <h3>{{{this.title}}}</h3>
+    <h3>{{{this.title}}}</h3>
 
-  <p>{{hint}}</p>
+    <p>{{hint}}</p>
 
-  {{#if singleSize}}
+    {{#if singleSize}}
     <input type="hidden" name="size" value="{{singleSize}}">
-  {{else}}
+    {{else}}
     <select name="size">
-      {{selectOptions sizes selected=selectedSize}}
+        {{selectOptions sizes selected=selectedSize}}
     </select>
-  {{/if}}
+    {{/if}}
 </form>
