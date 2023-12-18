@@ -14,6 +14,8 @@
 
     .item-subtitle {
       flex: 0 0 100px;
+      display: flex;
+      flex-direction: column;
       height: 60px;
       margin: 0;
       padding: 5px;
@@ -22,14 +24,28 @@
       color: var(--dnd5e-color-tan);
 
       .item-type {
-        font-size: var(--font-size-24);
-        line-height: 26px;
+        flex-grow: 1;
+        font-size: var(--font-size-20);
+        line-height: 1em;
         margin: 0;
       }
 
       .item-status {
-        font-size: var(--font-size-16);
-        line-height: 24px;
+        font-size: var(--font-size-14);
+        line-height: 1em;
+      }
+
+      label {
+        display: block;
+        font-size: var(--font-size-14);
+        > input { display: none; }
+
+        &:has(input:not([disabled])) {
+          cursor: pointer;
+          &:hover, &:focus-visible {
+            text-shadow: 0 0 4px color-mix(in oklab, var(--color-shadow-primary), transparent);
+          }
+        }
       }
     }
 
