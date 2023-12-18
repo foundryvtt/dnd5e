@@ -1,34 +1,34 @@
 <form autocomplete="off">
-  {{> "dnd5e.advancement-controls"}}
-  <div class="form-group">
-    <label>{{localize "DND5E.AdvancementItemGrantOptional"}}</label>
-    <div class="form-fields">
-      <input type="checkbox" name="configuration.optional" {{checked configuration.optional}}>
+    {{> "dnd5e.advancement-controls"}}
+    <div class="form-group">
+        <label>{{localize "DND5E.AdvancementItemGrantOptional"}}</label>
+        <div class="form-fields">
+            <input type="checkbox" name="configuration.optional" {{checked configuration.optional}}>
+        </div>
+        <p class="hint">{{localize "DND5E.AdvancementItemGrantOptionalHint"}}</p>
     </div>
-    <p class="hint">{{localize "DND5E.AdvancementItemGrantOptionalHint"}}</p>
-  </div>
 
-  {{#if showSpellConfig}}
+    {{#if showSpellConfig}}
     {{> "dnd5e.advancement-spell-config"}}
-  {{/if}}
+    {{/if}}
 
-  <div class="drop-target">
-    <ol class="items-list">
-      <li class="items-header flexrow"><h3 class="item-name">{{localize "DOCUMENT.Items"}}</h3></li>
-      <ol class="item-list">
-      {{#each configuration.items}}
-        <li class="item flexrow" data-item-uuid="{{this}}">
-          <div class="item-name">{{{dnd5e-linkForUuid this}}}</div>
-          <div class="item-controls flexrow">
-            <a class="item-control item-action" data-action="delete" data-tooltip="DND5E.ItemDelete">
-              <i class="fas fa-trash"></i>
-            </a>
-          </div>
-        </li>
-      {{/each}}
-      </ol>
-    </ol>
+    <div class="drop-target">
+        <ol class="items-list">
+            <li class="items-header flexrow"><h3 class="item-name">{{localize "DOCUMENT.Items"}}</h3></li>
+            <ol class="item-list">
+            {{#each configuration.items}}
+            <li class="item flexrow" data-item-uuid="{{this}}">
+                <div class="item-name">{{{dnd5e-linkForUuid this}}}</div>
+                <div class="item-controls flexrow">
+                    <a class="item-control item-action" data-action="delete" data-tooltip="DND5E.ItemDelete">
+                        <i class="fas fa-trash"></i>
+                    </a>
+                </div>
+            </li>
+            {{/each}}
+            </ol>
+        </ol>
 
-    <p class="hint centered">{{localize "DND5E.AdvancementItemGrantDropHint"}}</p>
-  </div>
+        <p class="hint centered">{{localize "DND5E.AdvancementItemGrantDropHint"}}</p>
+    </div>
 </form>

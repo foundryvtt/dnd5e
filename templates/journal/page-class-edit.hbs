@@ -1,100 +1,100 @@
 <form class="{{cssClass}} flexcol drop-target" autocomplete="off">
-  {{> journalEntryPageHeader}}
+    {{> journalEntryPageHeader}}
 
-  <div class="form-group">
-    <label>{{localize "JOURNALENTRYPAGE.DND5E.Class.Item"}}</label>
-    <div class="form-fields">
-      <ol class="items-list">
-        {{#if document.system.item}}
-          <li class="item flexrow" data-item-uuid="{{document.system.item}}" data-item-type="class">
-            <div class="item-name">{{{dnd5e-linkForUuid document.system.item}}}</div>
-            <div class="item-controls flexrow">
-              <a class="item-control item-delete" data-tooltip="DND5E.ItemDelete">
-                <i class="fas fa-trash"></i>
-              </a>
-            </div>
-          </li>
-        {{else}}
-          <li class="item flexrow">{{localize "JOURNALENTRYPAGE.DND5E.Class.ItemHint"}}</li>
-        {{/if}}
-      </ol>
+    <div class="form-group">
+        <label>{{localize "JOURNALENTRYPAGE.DND5E.Class.Item"}}</label>
+        <div class="form-fields">
+            <ol class="items-list">
+                {{#if document.system.item}}
+                <li class="item flexrow" data-item-uuid="{{document.system.item}}" data-item-type="class">
+                    <div class="item-name">{{{dnd5e-linkForUuid document.system.item}}}</div>
+                    <div class="item-controls flexrow">
+                        <a class="item-control item-delete" data-tooltip="DND5E.ItemDelete">
+                            <i class="fas fa-trash"></i>
+                        </a>
+                    </div>
+                </li>
+                {{else}}
+                <li class="item flexrow">{{localize "JOURNALENTRYPAGE.DND5E.Class.ItemHint"}}</li>
+                {{/if}}
+            </ol>
+        </div>
     </div>
-  </div>
 
-  <div class="form-group">
-    <label>{{localize "JOURNALENTRYPAGE.DND5E.Class.Description"}}</label>
-    <div class="form-fields">
-      <button class="launch-text-editor" data-target="system.description.value">
-        <i class="fas fa-edit"></i> {{localize "JOURNALENTRYPAGE.DND5E.EditDescription"}}
-      </button>
+    <div class="form-group">
+        <label>{{localize "JOURNALENTRYPAGE.DND5E.Class.Description"}}</label>
+        <div class="form-fields">
+            <button class="launch-text-editor" data-target="system.description.value">
+                <i class="fas fa-edit"></i> {{localize "JOURNALENTRYPAGE.DND5E.EditDescription"}}
+            </button>
+        </div>
+        <p class="hint">{{localize "JOURNALENTRYPAGE.DND5E.Class.DescriptionHint"}}</p>
     </div>
-    <p class="hint">{{localize "JOURNALENTRYPAGE.DND5E.Class.DescriptionHint"}}</p>
-  </div>
 
-  <div class="form-group">
-    <label>{{localize "JOURNALENTRYPAGE.DND5E.Class.AdditionalHitPoints"}}</label>
-    <div class="form-fields">
-      <button class="launch-text-editor" data-target="system.description.additionalHitPoints">
-        <i class="fas fa-edit"></i> {{localize "JOURNALENTRYPAGE.DND5E.EditDescription"}}
-      </button>
+    <div class="form-group">
+        <label>{{localize "JOURNALENTRYPAGE.DND5E.Class.AdditionalHitPoints"}}</label>
+        <div class="form-fields">
+            <button class="launch-text-editor" data-target="system.description.additionalHitPoints">
+                <i class="fas fa-edit"></i> {{localize "JOURNALENTRYPAGE.DND5E.EditDescription"}}
+            </button>
+        </div>
+        <p class="hint">{{localize "JOURNALENTRYPAGE.DND5E.Class.AdditionalHitPointsHint"}}</p>
     </div>
-    <p class="hint">{{localize "JOURNALENTRYPAGE.DND5E.Class.AdditionalHitPointsHint"}}</p>
-  </div>
 
-  <div class="form-group">
-    <label>{{localize "JOURNALENTRYPAGE.DND5E.Class.AdditionalTraits"}}</label>
-    <div class="form-fields">
-      <button class="launch-text-editor" data-target="system.description.additionalTraits">
-        <i class="fas fa-edit"></i> {{localize "JOURNALENTRYPAGE.DND5E.EditDescription"}}
-      </button>
+    <div class="form-group">
+        <label>{{localize "JOURNALENTRYPAGE.DND5E.Class.AdditionalTraits"}}</label>
+        <div class="form-fields">
+            <button class="launch-text-editor" data-target="system.description.additionalTraits">
+                <i class="fas fa-edit"></i> {{localize "JOURNALENTRYPAGE.DND5E.EditDescription"}}
+            </button>
+        </div>
+        <p class="hint">{{localize "JOURNALENTRYPAGE.DND5E.Class.AdditionalTraitsHint"}}</p>
     </div>
-    <p class="hint">{{localize "JOURNALENTRYPAGE.DND5E.Class.AdditionalTraitsHint"}}</p>
-  </div>
 
-  <div class="form-group">
-    <label>{{localize "JOURNALENTRYPAGE.DND5E.Class.AdditionalEquipment"}}</label>
-    <div class="form-fields">
-      <button class="launch-text-editor" data-target="system.description.additionalEquipment">
-        <i class="fas fa-edit"></i> {{localize "JOURNALENTRYPAGE.DND5E.EditDescription"}}
-      </button>
+    <div class="form-group">
+        <label>{{localize "JOURNALENTRYPAGE.DND5E.Class.AdditionalEquipment"}}</label>
+        <div class="form-fields">
+            <button class="launch-text-editor" data-target="system.description.additionalEquipment">
+                <i class="fas fa-edit"></i> {{localize "JOURNALENTRYPAGE.DND5E.EditDescription"}}
+            </button>
+        </div>
+        <p class="hint">{{localize "JOURNALENTRYPAGE.DND5E.Class.AdditionalEquipmentHint"}}</p>
     </div>
-    <p class="hint">{{localize "JOURNALENTRYPAGE.DND5E.Class.AdditionalEquipmentHint"}}</p>
-  </div>
 
-  <div class="form-group">
-    <label>{{localize "JOURNALENTRYPAGE.DND5E.Class.SubclassHeader"}}</label>
-    <div class="form-fields">
-      <input type="text" name="system.subclassHeader" value="{{system.subclassHeader}}">
+    <div class="form-group">
+        <label>{{localize "JOURNALENTRYPAGE.DND5E.Class.SubclassHeader"}}</label>
+        <div class="form-fields">
+            <input type="text" name="system.subclassHeader" value="{{system.subclassHeader}}">
+        </div>
     </div>
-  </div>
 
-  <div class="form-group">
-    <label>{{localize "JOURNALENTRYPAGE.DND5E.Class.SubclassDescription"}}</label>
-    <div class="form-fields">
-      <button class="launch-text-editor" data-target="system.description.subclass">
-        <i class="fas fa-edit"></i> {{localize "JOURNALENTRYPAGE.DND5E.EditDescription"}}
-      </button>
+    <div class="form-group">
+        <label>{{localize "JOURNALENTRYPAGE.DND5E.Class.SubclassDescription"}}</label>
+        <div class="form-fields">
+            <button class="launch-text-editor" data-target="system.description.subclass">
+                <i class="fas fa-edit"></i> {{localize "JOURNALENTRYPAGE.DND5E.EditDescription"}}
+            </button>
+        </div>
+        <p class="hint">{{localize "JOURNALENTRYPAGE.DND5E.Class.SubclassDescriptionHint"}}</p>
     </div>
-    <p class="hint">{{localize "JOURNALENTRYPAGE.DND5E.Class.SubclassDescriptionHint"}}</p>
-  </div>
 
-  <div class="form-group">
-    <label>{{localize "JOURNALENTRYPAGE.DND5E.Class.SubclassItems"}}</label>
-    <div class="form-fields">
-      <ol class="items-list">
-        {{#each subclasses}}
-          <li class="item flexrow" data-item-uuid="{{this.document.uuid}}" data-item-type="subclass">
-            <div class="item-name">{{{dnd5e-linkForUuid this.document.uuid}}}</div>
-            <div class="item-controls flexrow">
-              <a class="item-control item-delete" data-tooltip="DND5E.ItemDelete">
-                <i class="fas fa-trash"></i>
-              </a>
-            </div>
-          </li>
-        {{else}}
-          <li class="item flexrow">{{localize "JOURNALENTRYPAGE.DND5E.Class.SubclassHint"}}</li>
-        {{/each}}
-      </ol>
+    <div class="form-group">
+        <label>{{localize "JOURNALENTRYPAGE.DND5E.Class.SubclassItems"}}</label>
+        <div class="form-fields">
+            <ol class="items-list">
+                {{#each subclasses}}
+                <li class="item flexrow" data-item-uuid="{{this.document.uuid}}" data-item-type="subclass">
+                    <div class="item-name">{{{dnd5e-linkForUuid this.document.uuid}}}</div>
+                    <div class="item-controls flexrow">
+                        <a class="item-control item-delete" data-tooltip="DND5E.ItemDelete">
+                            <i class="fas fa-trash"></i>
+                        </a>
+                    </div>
+                </li>
+                {{else}}
+                <li class="item flexrow">{{localize "JOURNALENTRYPAGE.DND5E.Class.SubclassHint"}}</li>
+                {{/each}}
+            </ol>
+        </div>
     </div>
-  </div>
 </form>

@@ -6,12 +6,12 @@
 
         <div class="header-details flexrow">
             <h1 class="charname">
-              {{#if system.identified}}
+                {{#if system.identified}}
                 <input name="name" type="text" value="{{item.name}}" placeholder="{{ localize 'DND5E.ItemName' }}">
-              {{else}}
+                {{else}}
                 <input name="system.unidentified.name" type="text" value="{{system.unidentified.name}}"
                        placeholder="{{ localize 'DND5E.NameUnidentified' }}">
-              {{/if}}
+                {{/if}}
             </h1>
 
             <div class="item-subtitle">
@@ -70,7 +70,7 @@
             <div class="form-group">
                 <label>
                     {{localize "DND5E.ItemLootSubtype"
-                        category=(lookup (lookup config.lootTypes system.type.value) "label")}}
+                               category=(lookup (lookup config.lootTypes system.type.value) "label")}}
                 </label>
                 <select name="system.type.subtype">
                     {{selectOptions lootSubtypes selected=system.type.subtype blank=""}}

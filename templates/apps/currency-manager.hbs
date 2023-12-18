@@ -1,32 +1,32 @@
 <form autocomplete="off">
-  <nav data-group="primary">
-    <a data-tab="convert">{{localize "DND5E.CurrencyActionConvert"}}</a>
-    <a data-tab="transfer">{{localize "DND5E.CurrencyActionTransfer"}}</a>
-  </nav>
+    <nav data-group="primary">
+        <a data-tab="convert">{{localize "DND5E.CurrencyActionConvert"}}</a>
+        <a data-tab="transfer">{{localize "DND5E.CurrencyActionTransfer"}}</a>
+    </nav>
 
-  <div class="sheet-content">
-    <section class="tab" data-group="primary" data-tab="convert">
-      <p class="hint">{{localize "DND5E.CurrencyConvertHint"}}</p>
-      <button type="submit" name="convert">{{localize "DND5E.CurrencyConvert"}}</button>
-    </section>
-    
-    <section class="tab" data-group="primary" data-tab="transfer">
-      <div class="amount">
-        <button type="button" name="setAll">{{localize "DND5E.CurrencyActionTransferAll"}}</button>
-        <button type="button" name="setHalf">{{localize "DND5E.CurrencyActionTransferHalf"}}</button>
-        {{#each currency}}
-          <label>
-            <span>{{lookup (lookup @root.CONFIG.currencies @key) "label"}}</span>
-            <input type="number" name="amount.{{@key}}">
-          </label>
-        {{/each}}
-      </div>
-      <div class="destinations">
-        {{#each destinations}}
-          <label><input type="radio" name="destination" value="{{id}}"> {{name}}</label>
-        {{/each}}
-      </div>
-      <button type="submit" name="transfer">{{localize "DND5E.CurrencyActionTransfer"}}</button>
-    </section>  
-  </div>
+    <div class="sheet-content">
+        <section class="tab" data-group="primary" data-tab="convert">
+            <p class="hint">{{localize "DND5E.CurrencyConvertHint"}}</p>
+            <button type="submit" name="convert">{{localize "DND5E.CurrencyConvert"}}</button>
+        </section>
+        
+        <section class="tab" data-group="primary" data-tab="transfer">
+            <div class="amount">
+                <button type="button" name="setAll">{{localize "DND5E.CurrencyActionTransferAll"}}</button>
+                <button type="button" name="setHalf">{{localize "DND5E.CurrencyActionTransferHalf"}}</button>
+                {{#each currency}}
+                <label>
+                    <span>{{lookup (lookup @root.CONFIG.currencies @key) "label"}}</span>
+                    <input type="number" name="amount.{{@key}}">
+                </label>
+                {{/each}}
+            </div>
+            <div class="destinations">
+                {{#each destinations}}
+                <label><input type="radio" name="destination" value="{{id}}"> {{name}}</label>
+                {{/each}}
+            </div>
+            <button type="submit" name="transfer">{{localize "DND5E.CurrencyActionTransfer"}}</button>
+        </section>  
+    </div>
 </form>
