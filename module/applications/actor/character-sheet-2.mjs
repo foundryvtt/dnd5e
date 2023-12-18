@@ -68,14 +68,22 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
   /** @inheritDoc */
   async getData(options) {
     const context = await super.getData(options);
+    context.editable = this.isEditable && (this._mode === this.constructor.MODES.EDIT);
+    context.cssClass = context.editable ? "editable" : "locked";
     const { attributes } = this.actor.system;
 
     context.labels.class = Object.values(this.actor.classes).sort((a, b) => {
       return b.system.levels - a.system.levels;
     }).map(c => `${c.name} ${c.system.levels}`).join(" / ");
 
-    context.editMode = this._mode === this.constructor.MODES.EDIT;
-    if ( context.editMode ) context.cssClass += " edit-mode";
+    const showTokenPortrait = this.actor.getFlag("dnd5e", "showTokenPortrait") === true;
+    const token = this.actor.isToken ? this.actor.token : this.actor.prototypeToken;
+    context.portrait = {
+      token: showTokenPortrait,
+      src: showTokenPortrait ? token.texture.src : this.actor.img,
+      // TODO: Not sure the best way to update the parent texture from this sheet if this is a token actor.
+      path: showTokenPortrait ? this.actor.isToken ? "" : "prototypeToken.texture.src" : "img"
+    };
 
     context.exhaustion = Array.fromRange(6, 1).map(n => {
       const label = game.i18n.format("DND5E.ExhaustionLevel", { n });
@@ -101,7 +109,17 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
   activateListeners(html) {
     super.activateListeners(html);
     html.find(".pips[data-prop]").on("click", this._onTogglePip.bind(this));
-    html.find(".speed-tooltip").on("pointerover", this._onHoverSpeed.bind(this));
+
+    // Edit mode only.
+    if ( this._mode === this.constructor.MODES.EDIT ) {
+      // In future PR.
+    }
+
+    // Play mode only.
+    else {
+      html.find(".speed-tooltip").on("pointerover", this._onHoverSpeed.bind(this));
+      html.find(".portrait").on("click", this._onShowPortrait.bind(this));
+    }
   }
 
   /* -------------------------------------------- */
@@ -162,7 +180,6 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
    * @protected
    */
   _onHoverSpeed(event) {
-    if ( this._mode !== this.constructor.MODES.PLAY ) return;
     const { movement } = this.actor.system.attributes;
     const units = movement.units || Object.keys(CONFIG.DND5E.movementUnits)[0];
     const contents = Object.entries(CONFIG.DND5E.movementTypes).reduce((html, [k, label]) => {
@@ -182,5 +199,18 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
       direction: TooltipManager.TOOLTIP_DIRECTIONS.DOWN,
       cssClass: "property-attribution"
     });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle showing the character's portrait or token art.
+   * @protected
+   */
+  _onShowPortrait() {
+    const showTokenPortrait = this.actor.getFlag("dnd5e", "showTokenPortrait") === true;
+    const token = this.actor.isToken ? this.actor.token : this.actor.prototypeToken;
+    const img = showTokenPortrait ? token.texture.src : this.actor.img;
+    new ImagePopout(img, { title: this.actor.name, uuid: this.actor.uuid }).render(true);
   }
 }

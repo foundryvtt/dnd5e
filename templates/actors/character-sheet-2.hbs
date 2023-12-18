@@ -19,7 +19,7 @@
         <div class="left">
 
             {{!-- Name --}}
-            {{#if editMode}}
+            {{#if editable}}
             <input type="text" name="name" class="name uninput" value="{{ actor.name }}">
             {{else}}
             <div class="name">{{ actor.name }}</div>
@@ -55,7 +55,7 @@
                 {{!-- XP --}}
                 {{#with system.details.xp}}
                 <div class="xp-label roboto-upper">
-                    {{#if @root.editMode}}
+                    {{#if @root.editable}}
                     <input type="text" name="system.details.xp.value" class="value uninput" data-dtype="Number"
                            value="{{ value }}">
                     {{else}}
@@ -88,8 +88,22 @@
                 <div class="card">
 
                     {{!-- Portrait --}}
-                    <div class="portrait">
-                        <img src="{{ actor.img }}" alt="{{ actor.name }}" data-edit="img">
+                    <div class="portrait {{#if portrait.token}}token{{/if}}">
+                        {{#if editable}}
+                        <label class="slide-toggle roboto-upper">
+                            <input type="checkbox" name="flags.dnd5e.showTokenPortrait" {{ checked portrait.token }}>
+                            {{#if portrait.token}}
+                            <i class="fas fa-toggle-on"></i>
+                            {{ localize "DOCUMENT.Token" }}
+                            {{else}}
+                            <i class="fas fa-toggle-off"></i>
+                            {{ localize "DND5E.Portrait" }}
+                            {{/if}}
+                        </label>
+                        {{/if}}
+
+                        <img src="{{ portrait.src }}" alt="{{ actor.name }}"
+                             {{#if (and editable portrait.path)}}data-edit="{{ portrait.path }}"{{/if}}>
                     </div>
 
                     {{!-- Stats --}}
@@ -108,7 +122,7 @@
 
                             {{!-- AC --}}
                             <div class="ac" aria-label="{{ localize "DND5E.ArmorClass" }}">
-                                {{#if editMode}}
+                                {{#if editable}}
                                 <a class="config-button" data-action="armor" data-tooltip="DND5E.ArmorConfig"
                                    aria-label="{{ localize "DND5E.ArmorConfig" }}">
                                     <i class="fas fa-cog"></i>
@@ -134,10 +148,10 @@
                         <div class="lozenges">
 
                             {{!-- Initiative --}}
-                            <div class="lozenge {{#unless editMode}}rollable{{/unless}}"
-                                 {{#unless editMode}}data-action="rollInitiative"{{/unless}}>
+                            <div class="lozenge {{#unless editable}}rollable{{/unless}}"
+                                 {{#unless editable}}data-action="rollInitiative"{{/unless}}>
                                 <div class="value">
-                                    {{#if editMode}}
+                                    {{#if editable}}
                                     <a class="config-button" data-action="initiative"
                                        data-tooltip="DND5E.InitiativeConfig"
                                        aria-label="{{ localize "DND5E.InitiativeConfig" }}">
@@ -155,7 +169,7 @@
                             {{!-- Speed --}}
                             <div class="lozenge speed-tooltip">
                                 <div class="value">
-                                    {{#if editMode}}
+                                    {{#if editable}}
                                     <a class="config-button" data-action="movement" data-tooltip="DND5E.MovementConfig">
                                         <i class="fas fa-cog"></i>
                                     </a>

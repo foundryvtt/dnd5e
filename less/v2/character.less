@@ -98,10 +98,11 @@
       /* Name */
       .name {
         color: var(--color-text-light-0);
-        font-size: var(--font-size-42);
+        font-size: var(--font-size-46);
         text-shadow: 2px 2px 2px var(--color-shadow-dark);
-        font-family: var(--dnd5e-font-tiamat);
-        letter-spacing: 3px;
+        font-family: var(--dnd5e-font-modesto);
+        font-weight: bold;
+        letter-spacing: 2px;
         padding: 0;
         margin: 0;
       }
@@ -263,36 +264,63 @@
         box-shadow: 0 0 9px var(--color-shadow-dark);
         border-radius: 3px;
         position: relative;
+        background: var(--dnd5e-color-iron-gray) url("/ui/denim.png");
         transform-style: preserve-3d;
 
         /* Portrait */
         .portrait {
           position: relative;
           width: 100%;
+          cursor: pointer;
 
           > img {
             display: block;
             object-fit: cover;
+            object-position: top center;
             border: none;
             width: 100%;
             max-height: 300px;
             min-height: var(--sheet-sidebar-width);
             border-radius: 3px 3px 0 0;
+            border-bottom: 2px solid var(--dnd5e-color-gold);
           }
 
           &::after {
             content: "";
             position: absolute;
-            inset: 6px;
+            inset: 6px 6px 8px;
             border: 2px solid var(--dnd5e-color-gold);
             pointer-events: none;
+          }
+
+          > label.slide-toggle {
+            position: absolute;
+            z-index: 1;
+            padding: 1rem 0;
+            width: 100%;
+            text-align: center;
+            color: var(--dnd5e-color-gold);
+            background: linear-gradient(to bottom, rgb(0 0 0 / 65%) 75%, transparent);
+
+            &:has(input:not([disabled])):hover { text-shadow: 0 0 6px var(--dnd5e-color-gold); }
+          }
+
+          &.token {
+            &::after { display: none; }
+
+            > img {
+              object-fit: contain;
+              object-position: center;
+              border-radius: 0;
+              margin-bottom: -1rem;
+              border: none;
+              filter: drop-shadow(0 0 8px var(--dnd5e-color-black));
+            }
           }
         }
 
         /* Stats */
         .stats {
-          background: var(--dnd5e-color-iron-gray) url("/ui/denim.png");
-          border-top: 2px solid var(--dnd5e-color-gold);
           padding-bottom: .5rem;
           border-radius: 0 0 3px 3px;
 
@@ -304,7 +332,6 @@
             position: relative;
 
             /* Exhaustion */
-
             .pips .pip.filled.death::before {
               content: "\f54c";
               font-family: var(--font-awesome);
@@ -371,16 +398,12 @@
                 color: var(--dnd5e-color-gold);
               }
 
-              &:nth-child(2) {
-                margin-top: 24px;
-              }
+              &:nth-child(2) { margin-top: 24px; }
 
               &.rollable:hover .value {
                 cursor: pointer;
 
-                > span {
-                  display: none;
-                }
+                > span { display: none; }
 
                 &::before {
                   content: "\f6cf";

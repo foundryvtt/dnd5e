@@ -247,12 +247,6 @@ function _configureFonts() {
         { urls: ["systems/dnd5e/fonts/RobotoSlab-Regular.ttf"] },
         { urls: ["systems/dnd5e/fonts/RobotoSlab-Bold.ttf"], weight: "bold" }
       ]
-    },
-    "Tiamat Condensed": {
-      editor: false,
-      fonts: [
-        { urls: ["systems/dnd5e/fonts/TiamatCondensedSC-Regular.otf"] }
-      ]
     }
   });
 }

@@ -84,6 +84,14 @@
     transition: all 250ms ease;
   }
 
+  /* FA icon-based slide-toggle */
+  label.slide-toggle {
+    display: block;
+
+    > input { display: none; }
+    &:has(input:not([disabled])) { cursor: pointer; }
+  }
+
   /* Pips */
   .pips {
     display: flex;
@@ -98,7 +106,6 @@
       height: 16px;
       display: grid;
       place-content: center;
-      font-family: var(--dnd5e-font-roboto);
       font-weight: bold;
       font-size: var(--font-size-18);
       box-shadow: 0 0 6px var(--dnd5e-shadow-45);
