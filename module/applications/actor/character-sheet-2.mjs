@@ -68,6 +68,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
   /** @inheritDoc */
   async getData(options) {
     const context = await super.getData(options);
+    const { attributes } = this.actor.system;
 
     context.labels.class = Object.values(this.actor.classes).sort((a, b) => {
       return b.system.levels - a.system.levels;
@@ -76,7 +77,31 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
     context.editMode = this._mode === this.constructor.MODES.EDIT;
     if ( context.editMode ) context.cssClass += " edit-mode";
 
+    context.exhaustion = Array.fromRange(6, 1).map(n => {
+      const label = game.i18n.format("DND5E.ExhaustionLevel", { n });
+      const classes = ["pip"];
+      const filled = attributes.exhaustion >= n;
+      if ( filled ) classes.push("filled");
+      if ( n === 6 ) classes.push("death");
+      return { n, label, filled, tooltip: label, classes: classes.join(" ") };
+    });
+
+    context.speed = Object.entries(CONFIG.DND5E.movementTypes).reduce((obj, [k, label]) => {
+      const value = attributes.movement[k];
+      if ( value > obj.value ) Object.assign(obj, { value, label });
+      return obj;
+    }, { value: 0, label: CONFIG.DND5E.movementTypes.walk });
+
     return context;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  activateListeners(html) {
+    super.activateListeners(html);
+    html.find(".pips[data-prop]").on("click", this._onTogglePip.bind(this));
+    html.find(".speed-tooltip").on("pointerover", this._onHoverSpeed.bind(this));
   }
 
   /* -------------------------------------------- */
@@ -110,5 +135,52 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
     toggle.setAttribute("aria-label", label);
     this._mode = toggle.checked ? MODES.EDIT : MODES.PLAY;
     this.render();
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle toggling a pip on the character sheet.
+   * @param {PointerEvent} event  The triggering event.
+   * @protected
+   */
+  _onTogglePip(event) {
+    const n = Number(event.target.closest("[data-n]")?.dataset.n);
+    if ( !n || isNaN(n) ) return;
+    const prop = event.currentTarget.dataset.prop;
+    let value = foundry.utils.getProperty(this.actor, prop);
+    if ( value === n ) value--;
+    else value = n;
+    return this.actor.update({ [prop]: value });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle showing a breakdown of all this character's movement speeds.
+   * @param {PointerEvent} event  The triggering event.
+   * @protected
+   */
+  _onHoverSpeed(event) {
+    if ( this._mode !== this.constructor.MODES.PLAY ) return;
+    const { movement } = this.actor.system.attributes;
+    const units = movement.units || Object.keys(CONFIG.DND5E.movementUnits)[0];
+    const contents = Object.entries(CONFIG.DND5E.movementTypes).reduce((html, [k, label]) => {
+      const value = movement[k];
+      if ( value ) html += `
+        <div class="row">
+          <i class="fas ${k}"></i>
+          <span class="value">${value} <span class="units">${units}</span></span>
+          <span class="label">${label}</span>
+        </div>
+      `;
+      return html;
+    }, "");
+    if ( !contents ) return;
+    game.tooltip.activate(event.currentTarget, {
+      text: contents,
+      direction: TooltipManager.TOOLTIP_DIRECTIONS.DOWN,
+      cssClass: "property-attribution"
+    });
   }
 }

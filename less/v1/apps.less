@@ -598,7 +598,7 @@ dnd5e-effects {
 /*  Property Attribution                     */
 /* ----------------------------------------- */
 
-#tooltip.property-attribution {
+:is(#tooltip, .locked-tooltip).property-attribution {
   min-width: 150px;
   padding: 3px;
   background-color: rgba(0, 0, 0, .8);
@@ -651,6 +651,35 @@ dnd5e-effects {
     }
     td.mode-4::before { // Upgrade
       content: "↑";
+    }
+  }
+
+  .row {
+    display: flex;
+    flex-direction: row;
+    font-size: var(--font-size-14);
+    gap: .5rem;
+
+    + .row { margin-top: 4px; }
+    .value { font-weight: bold; }
+    .label { flex: 1; }
+    .units {
+      opacity: .6;
+      font-weight: normal;
+    }
+    > i.fas {
+      height: 16px;
+      width: 16px;
+      text-align: center;
+
+      &.burrow::before { content: "\f85e"; }
+      &.climb::before { content: "\f6fc"; }
+      &.fly::before { content: "\f56b"; }
+      &.walk::before { content: "\f554"; }
+      &.swim {
+        transform: scaleX(-1);
+        &::before { content: "\f5c4"; }
+      }
     }
   }
 }

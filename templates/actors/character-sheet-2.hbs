@@ -1,3 +1,9 @@
+{{!-- Components --}}
+{{#*inline "pip"}}
+    <button type="button" class="{{ classes }}" data-n="{{ n }}" data-tooltip="{{ tooltip }}" aria-label="{{ label }}"
+            aria-pressed="{{ filled }}"></button>
+{{/inline}}
+
 <form class="{{ cssClass }} flexcol" autocomplete="off">
 
     {{!-- TODO: Dark mode only --}}
@@ -75,6 +81,113 @@
         {{!-- Main Content --}}
         <div class="content">
 
+            {{!-- Sidebar --}}
+            <div class="sidebar">
+
+                {{!-- Character Card --}}
+                <div class="card">
+
+                    {{!-- Portrait --}}
+                    <div class="portrait">
+                        <img src="{{ actor.img }}" alt="{{ actor.name }}" data-edit="img">
+                    </div>
+
+                    {{!-- Stats --}}
+                    <div class="stats">
+
+                        {{!-- AC & Exhaustion --}}
+                        <div class="top">
+
+                            <div class="pips" data-prop="system.attributes.exhaustion">
+                                {{#each exhaustion}}
+                                {{#if (lt @index 3)}}
+                                    {{> pip }}
+                                {{/if}}
+                                {{/each}}
+                            </div>
+
+                            {{!-- AC --}}
+                            <div class="ac" aria-label="{{ localize "DND5E.ArmorClass" }}">
+                                {{#if editMode}}
+                                <a class="config-button" data-action="armor" data-tooltip="DND5E.ArmorConfig"
+                                   aria-label="{{ localize "DND5E.ArmorConfig" }}">
+                                    <i class="fas fa-cog"></i>
+                                </a>
+                                {{else}}
+                                <div data-attribution="attributes.ac" data-attribution-caption="DND5E.ArmorClass"
+                                     data-tooltip-direction="DOWN">
+                                    {{ system.attributes.ac.value }}
+                                </div>
+                                {{/if}}
+                            </div>
+
+                            <div class="pips" data-prop="system.attributes.exhaustion">
+                                {{#each exhaustion}}
+                                {{#if (gt @index 2)}}
+                                    {{> pip }}
+                                {{/if}}
+                                {{/each}}
+                            </div>
+                        </div>
+
+                        {{!-- Initiative, Speed, & Proficiency --}}
+                        <div class="lozenges">
+
+                            {{!-- Initiative --}}
+                            <div class="lozenge {{#unless editMode}}rollable{{/unless}}"
+                                 {{#unless editMode}}data-action="rollInitiative"{{/unless}}>
+                                <div class="value">
+                                    {{#if editMode}}
+                                    <a class="config-button" data-action="initiative"
+                                       data-tooltip="DND5E.InitiativeConfig"
+                                       aria-label="{{ localize "DND5E.InitiativeConfig" }}">
+                                        <i class="fas fa-cog"></i>
+                                    </a>
+                                    {{else}}
+                                    <span>
+                                        {{ dnd5e-numberFormat system.attributes.init.total signDisplay="always" }}
+                                    </span>
+                                    {{/if}}
+                                </div>
+                                <div class="label roboto-condensed-upper">{{ localize "DND5E.Initiative" }}</div>
+                            </div>
+
+                            {{!-- Speed --}}
+                            <div class="lozenge speed-tooltip">
+                                <div class="value">
+                                    {{#if editMode}}
+                                    <a class="config-button" data-action="movement" data-tooltip="DND5E.MovementConfig">
+                                        <i class="fas fa-cog"></i>
+                                    </a>
+                                    {{else}}
+                                    {{ speed.value }}
+                                    {{/if}}
+                                </div>
+                                <div class="label roboto-condensed-upper">{{ speed.label }}</div>
+                            </div>
+
+                            {{!-- Proficiency --}}
+                            <div class="lozenge">
+                                <div class="value">
+                                    {{ dnd5e-numberFormat system.attributes.prof signDisplay="always" }}
+                                </div>
+                                <div class="label roboto-condensed-upper">{{ localize "DND5E.Proficiency" }}</div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+                {{!-- Favorites --}}
+                <div class="favorites">
+                    <h3>
+                        <i class="fas fa-star"></i>
+                        <span class="roboto-upper">{{ localize "DND5E.Favorites" }}</span>
+                    </h3>
+                </div>
+            </div>
         </div>
 
     </section>
