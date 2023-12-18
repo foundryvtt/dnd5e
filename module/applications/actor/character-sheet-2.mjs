@@ -2,6 +2,7 @@ import CharacterData from "../../data/actor/character.mjs";
 import * as Trait from "../../documents/actor/trait.mjs";
 import { simplifyBonus, staticID } from "../../utils.mjs";
 import ContextMenu5e from "../context-menu.mjs";
+import SheetConfig5e from "../sheet-config.mjs";
 import Tabs5e from "../tabs.mjs";
 import ActorSheet5eCharacter from "./character-sheet.mjs";
 
@@ -159,6 +160,9 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
       if ( this._tabs?.[0]?.active !== t.initial ) t.initial = this._tabs?.[0]?.active ?? t.initial;
       return new Tabs5e(t);
     });
+
+    // Set theme
+    html[0].dataset.theme = this.actor.getFlag("dnd5e", "theme");
 
     return html;
   }
@@ -856,6 +860,17 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
     const item = this.actor.items.get(itemId);
     if ( event.target.closest(".favorites") && name && item ) return item.update({ [name]: event.target.value });
     return super._onChangeInput(event);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  _onConfigureSheet(event) {
+    event.preventDefault();
+    new SheetConfig5e(this.document, {
+      top: this.position.top + 40,
+      left: this.position.left + ((this.position.width - DocumentSheet.defaultOptions.width) / 2)
+    }).render(true);
   }
 
   /* -------------------------------------------- */
