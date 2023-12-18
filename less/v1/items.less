@@ -353,7 +353,7 @@
   /* ----------------------------------------- */
 
   [inert] {
-    filter: blur(3px) opacity(50%);
+    filter: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%3E%3Cfilter%20id%3D%22b%22%20color-interpolation-filters%3D%22sRGB%22%20x%3D%220%22%20y%3D%220%22%3E%3CfeComponentTransfer%20in%3D%22SourceGraphic%22%20result%3D%22t%22%3E%3CfeFuncA%20type%3D%22table%22%20tableValues%3D%22-1%200.5%22/%3E%3C/feComponentTransfer%3E%3CfeMerge%20result%3D%22a%22%3E%3CfeMergeNode%20in%3D%22t%22/%3E%3CfeMergeNode%20in%3D%22SourceGraphic%22/%3E%3C/feMerge%3E%3CfeTurbulence%20type%3D%22fractalNoise%22%20baseFrequency%3D%220.025%22%20numOctaves%3D%221%22%20result%3D%22w%22/%3E%3CfeDisplacementMap%20xChannelSelector%3D%22R%22%20yChannelSelector%3D%22G%22%20scale%3D%2250%22%20in%3D%22a%22%20in2%3D%22w%22%20result%3D%22displacement-map-0%22/%3E%3C/filter%3E%3C/svg%3E#b") blur(3px) opacity(50%);
   }
   [data-tab]:has(.unidentified-notice) {
     position: relative;
@@ -368,7 +368,9 @@
         margin-block-start: 4em;
         margin-inline: auto;
         padding: 2em;
-        border: var(--dnd5e-border-groove);
+        border: 1px solid var(--dnd5e-color-tan);
+        border-radius: 4px;
+        box-shadow: 0 0 12px var(--dnd5e-shadow-45);
         background: var(--dnd5e-sheet-background);
         text-align: center;
       }

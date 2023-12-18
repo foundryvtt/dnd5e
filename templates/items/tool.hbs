@@ -47,9 +47,13 @@
                     {{/if}}
                 </li>
                 <li>
+                    {{#if concealDetails}}
+                    <span>{{ localize "DND5E.Unidentified.Title" }}</span>
+                    {{else}}
                     <select name="system.rarity" {{~#if concealDetails}} inert{{/if}}>
                         {{selectOptions config.itemRarity selected=system.rarity blank=""}}
                     </select>
+                    {{/if}}
                 </li>
                 <li>
                     {{> "dnd5e.item-source"}}
