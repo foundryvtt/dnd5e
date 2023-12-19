@@ -124,7 +124,7 @@ export default class ItemSheet5e extends ItemSheet {
       isCrewed: item.system.activation?.type === "crew",
 
       // Armor Class
-      hasDexModifier: item.isArmor && (item.system.armor?.type !== "shield"),
+      hasDexModifier: item.isArmor && (item.system.type.value !== "shield"),
 
       // Advancement
       advancement: this._getItemAdvancement(item),
@@ -235,7 +235,7 @@ export default class ItemSheet5e extends ItemSheet {
     const baseIds = CONFIG.DND5E[`${type}Ids`];
     if ( baseIds === undefined ) return {};
 
-    const typeProperty = type === "armor" ? "armor.type" : `${type}Type`;
+    const typeProperty = "type.value";
     const baseType = foundry.utils.getProperty(this.item.system, typeProperty);
 
     const items = {};
@@ -263,7 +263,7 @@ export default class ItemSheet5e extends ItemSheet {
     // Ammunition
     if ( consume.type === "ammo" ) {
       return actor.itemTypes.consumable.reduce((ammo, i) => {
-        if ( i.system.consumableType === "ammo" ) ammo[i.id] = `${i.name} (${i.system.quantity})`;
+        if ( i.system.type.value === "ammo" ) ammo[i.id] = `${i.name} (${i.system.quantity})`;
         return ammo;
       }, {});
     }
@@ -361,7 +361,7 @@ export default class ItemSheet5e extends ItemSheet {
         }
         break;
       case "equipment":
-        props.push(CONFIG.DND5E.equipmentTypes[this.item.system.armor.type]);
+        props.push(CONFIG.DND5E.equipmentTypes[this.item.system.type.value]);
         if ( this.item.isArmor || this.item.isMountable ) props.push(labels.armor);
         break;
       case "feat":

@@ -2,29 +2,27 @@ import SystemDataModel from "../abstract.mjs";
 import { FormulaField } from "../fields.mjs";
 import EquippableItemTemplate from "./templates/equippable-item.mjs";
 import ItemDescriptionTemplate from "./templates/item-description.mjs";
+import ItemTypeTemplate from "./templates/item-type.mjs";
 import PhysicalItemTemplate from "./templates/physical-item.mjs";
 
 /**
  * Data definition for Tool items.
  * @mixes ItemDescriptionTemplate
+ * @mixes ItemTypeTemplate
  * @mixes PhysicalItemTemplate
  * @mixes EquippableItemTemplate
  *
- * @property {string} toolType    Tool category as defined in `DND5E.toolTypes`.
- * @property {string} baseItem    Base tool as defined in `DND5E.toolIds` for determining proficiency.
  * @property {string} ability     Default ability when this tool is being used.
  * @property {string} chatFlavor  Additional text added to chat when this tool is used.
  * @property {number} proficient  Level of proficiency in this tool as defined in `DND5E.proficiencyLevels`.
  * @property {string} bonus       Bonus formula added to tool rolls.
  */
 export default class ToolData extends SystemDataModel.mixin(
-  ItemDescriptionTemplate, PhysicalItemTemplate, EquippableItemTemplate
+  ItemDescriptionTemplate, ItemTypeTemplate, PhysicalItemTemplate, EquippableItemTemplate
 ) {
   /** @inheritdoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
-      toolType: new foundry.data.fields.StringField({required: true, label: "DND5E.ItemToolType"}),
-      baseItem: new foundry.data.fields.StringField({required: true, label: "DND5E.ItemToolBase"}),
       ability: new foundry.data.fields.StringField({
         required: true, blank: true, label: "DND5E.DefaultAbilityCheck"
       }),
@@ -89,8 +87,8 @@ export default class ToolData extends SystemDataModel.mixin(
     const actor = this.parent.actor;
     if ( !actor ) return 0;
     if ( actor.type === "npc" ) return 1;
-    const baseItemProf = actor.system.tools?.[this.baseItem];
-    const categoryProf = actor.system.tools?.[this.toolType];
+    const baseItemProf = actor.system.tools?.[this.type.baseItem];
+    const categoryProf = actor.system.tools?.[this.type.value];
     return Math.max(baseItemProf?.value ?? 0, categoryProf?.value ?? 0);
   }
 }
