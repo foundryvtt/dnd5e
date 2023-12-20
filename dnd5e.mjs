@@ -68,8 +68,11 @@ Hooks.once("init", function() {
   // Register System Settings
   registerSystemSettings();
 
-  // Configure module art.
+  // Configure module art
   game.dnd5e.moduleArt = new ModuleArt();
+
+  // Set up status effects
+  _configureStatusEffects();
 
   // Remove honor & sanity from configuration if they aren't enabled
   if ( !game.settings.get("dnd5e", "honorScore") ) delete DND5E.abilities.hon;
@@ -158,6 +161,7 @@ Hooks.once("init", function() {
   enrichers.registerCustomEnrichers();
 });
 
+/* -------------------------------------------- */
 
 /**
  * Configure explicit lists of attributes that are trackable on the token HUD and in the combat tracker.
@@ -203,6 +207,8 @@ function _configureTrackableAttributes() {
   };
 }
 
+/* -------------------------------------------- */
+
 /**
  * Configure which attributes are available for item consumption.
  * @internal
@@ -222,6 +228,8 @@ function _configureConsumableAttributes() {
     ...Array.fromRange(Object.keys(DND5E.spellLevels).length - 1, 1).map(level => `spells.spell${level}.value`)
   ];
 }
+
+/* -------------------------------------------- */
 
 /**
  * Configure additional system fonts.
@@ -254,6 +262,20 @@ function _configureFonts() {
       ]
     }
   });
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Configure system status effects.
+ */
+function _configureStatusEffects() {
+  CONFIG.statusEffects = CONFIG.statusEffects.filter(e => CONFIG.DND5E.statusEffects.retained.includes(e.id));
+  for ( const [id, {label: name, ...data}] of Object.entries(CONFIG.DND5E.conditionTypes) ) {
+    if ( !data.icon ) continue;
+    CONFIG.statusEffects.push({ id, name, ...data });
+  }
+  foundry.utils.mergeObject(CONFIG.specialStatusEffects, CONFIG.DND5E.statusEffects.special);
 }
 
 /* -------------------------------------------- */
