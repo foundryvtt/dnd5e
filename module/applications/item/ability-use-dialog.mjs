@@ -245,7 +245,7 @@ export default class AbilityUseDialog extends Dialog {
   static _getAbilityUseWarnings(data) {
     const warnings = [];
     const item = data.item;
-    const { quantity, level, consume, consumableType, preparation } = item.system;
+    const { quantity, level, consume, preparation } = item.system;
     const scale = item.usageScaling;
     const levels = (preparation?.mode === "pact") ? [level, item.actor.system.spells.pact.level] : [level];
 
