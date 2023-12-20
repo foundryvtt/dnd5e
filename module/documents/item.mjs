@@ -1,3 +1,5 @@
+import AdvancementManager from "../applications/advancement/advancement-manager.mjs";
+import AdvancementConfirmationDialog from "../applications/advancement/advancement-confirmation-dialog.mjs";
 import ClassData from "../data/item/class.mjs";
 import PhysicalItemTemplate from "../data/item/templates/physical-item.mjs";
 import {d20Roll, damageRoll} from "../dice/dice.mjs";
@@ -2199,6 +2201,20 @@ export default class Item5e extends SystemDocumentMixin(Item) {
 
   /** @inheritdoc */
   async deleteDialog(options={}) {
+    // If item has advancement, handle it separately
+    if ( this.isEmbedded && (this.actor.type !== "group") && !game.settings.get("dnd5e", "disableAdvancements") ) {
+      const manager = AdvancementManager.forDeletedItem(this.actor, this.id);
+      if ( manager.steps.length ) {
+        try {
+          const shouldRemoveAdvancements = await AdvancementConfirmationDialog.forDelete(this);
+          if ( shouldRemoveAdvancements ) return manager.render(true);
+          return this.delete({ shouldRemoveAdvancements });
+        } catch(err) {
+          return;
+        }
+      }
+    }
+
     // Display custom delete dialog when deleting a container with contents
     const count = await this.system.contentsCount;
     if ( count ) {
