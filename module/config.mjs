@@ -1800,6 +1800,7 @@ DND5E.CR_EXP_LEVELS = [
  * @property {string} [labelKeyPath]       If config is an enum of objects, where can the label be found?
  * @property {object} [subtypes]           Configuration for traits that take some sort of base item.
  * @property {string} [subtypes.keyPath]   Path to subtype value on base items, should match a category key.
+ *                                         Deprecated in favor of the standardized `system.type.value`.
  * @property {string[]} [subtypes.ids]     Key for base item ID objects within `CONFIG.DND5E`.
  * @property {object} [children]           Mapping of category key to an object defining its children.
  * @property {boolean} [sortCategories]    Whether top-level categories should be sorted.
@@ -1846,7 +1847,7 @@ DND5E.traits = {
     icon: "systems/dnd5e/icons/svg/trait-armor-proficiencies.svg",
     actorKeyPath: "system.traits.armorProf",
     configKey: "armorProficiencies",
-    subtypes: { keyPath: "type.value", ids: ["armorIds", "shieldIds"] }
+    subtypes: { keyPath: "armor.type", ids: ["armorIds", "shieldIds"] }
   },
   weapon: {
     labels: {
@@ -1856,7 +1857,7 @@ DND5E.traits = {
     icon: "systems/dnd5e/icons/svg/trait-weapon-proficiencies.svg",
     actorKeyPath: "system.traits.weaponProf",
     configKey: "weaponProficiencies",
-    subtypes: { keyPath: "type.value", ids: ["weaponIds"] }
+    subtypes: { keyPath: "weaponType", ids: ["weaponIds"] }
   },
   tool: {
     labels: {
@@ -1866,7 +1867,7 @@ DND5E.traits = {
     icon: "systems/dnd5e/icons/svg/trait-tool-proficiencies.svg",
     actorKeyPath: "system.tools",
     configKey: "toolProficiencies",
-    subtypes: { keyPath: "type.value", ids: ["toolIds"] },
+    subtypes: { keyPath: "toolType", ids: ["toolIds"] },
     children: { vehicle: "vehicleTypes" },
     sortCategories: true,
     expertise: true
