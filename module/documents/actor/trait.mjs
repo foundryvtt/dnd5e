@@ -274,7 +274,7 @@ export function getBaseItem(identifier, { indexOnly=false, fullItem=false }={}) 
       for (const field in fields) {
         const val = foundry.utils.getProperty(entry, field);
         if (field !== "system.type.value" && val !== undefined) {
-          foundry.utils.setProperty("system.type.value", val);
+          foundry.utils.setProperty(entry, "system.type.value", val);
           foundry.utils.logCompatibilityWarning(
             `The '${field}' property has been deprecated in favor of a standardized \`system.type.value\` property.`,
             { since: "DnD5e 2.5.0", until: "DnD5e 2.6" }
