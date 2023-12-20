@@ -413,6 +413,189 @@
               }
             }
           }
+
+          /* Hit Points & Hit Dice */
+          .meter-group {
+            display: flex;
+            flex-direction: column;
+            padding: 0 .5rem;
+            gap: .125rem;
+
+            + .meter-group { margin-top: .5rem; }
+
+            > .label {
+              font-size: var(--font-size-11);
+              color: var(--dnd5e-color-gold);
+              text-shadow: 0 0 6px var(--dnd5e-shadow-45);
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+
+              > .config-button { color: var(--dnd5e-color-gold); }
+            }
+
+            .meter {
+              border: 2px solid var(--dnd5e-color-gold);
+              background: var(--dnd5e-color-light-gray);
+              font-family: var(--dnd5e-font-roboto);
+              font-weight: bold;
+              box-shadow: inset 0 0 16px rgb(0 0 0 / 25%);
+              position: relative;
+              display: flex;
+              align-items: center;
+
+              &.hit-points {
+                height: 32px;
+                font-size: var(--font-size-16);
+
+                .progress::before {
+                  background: linear-gradient(to right, var(--dnd5e-color-hp-1) 0%, var(--dnd5e-color-hp-2) 100%);
+                  border-right: 3px solid var(--dnd5e-color-hp-3);
+                }
+              }
+
+              &.hit-dice {
+                height: 25px;
+                font-size: var(--font-size-14);
+
+                &.progress::before {
+                  background: linear-gradient(to right, var(--dnd5e-color-hd-1) 0%, var(--dnd5e-color-hd-2) 100%);
+                  border-right: 3px solid var(--dnd5e-color-hd-3);
+                }
+              }
+
+              &.progress, .progress {
+                --bar-percentage: 0%;
+
+                &::before {
+                  content: "";
+                  position: absolute;
+                  height: 100%;
+                  width: calc(var(--bar-percentage) - 3px);
+                }
+              }
+
+              &.sectioned {
+                input {
+                  width: 100%;
+                  height: 100%;
+                  text-align: center;
+                  border: none;
+                  font-weight: bold;
+                  background: none;
+                  color: var(--color-text-light-0);
+
+                  &:hover, &:focus { box-shadow: 0 0 8px var(--dnd5e-color-gold); }
+                }
+
+                > div { height: 100%; }
+
+                > .hit-points {
+                  flex: 1;
+                  position: relative;
+                  display: flex;
+                  align-items: center;
+                  cursor: pointer;
+
+                  > input { position: relative; }
+                }
+
+                > .tmp {
+                  flex: none;
+                  width: 50px;
+                  border-left: 2px dashed var(--dnd5e-color-gold);
+
+                  > input { color: var(--dnd5e-color-blue); }
+                }
+              }
+
+              .label {
+                color: var(--color-text-light-0);
+                position: relative;
+                padding-left: .5rem;
+
+                .value, .max { text-shadow: 0 0 4px var(--dnd5e-color-gold); }
+                .separator { color: var(--dnd5e-color-gold); }
+              }
+            }
+          }
+        }
+
+        /* Death Saves */
+        .death-tray {
+          --lip: 6px;
+          --tray-height: 72px;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          padding: 0 .5rem;
+          position: absolute;
+          width: 100%;
+          top: calc(100% - var(--tray-height));
+          transform: translateZ(-1px);
+          transition: top 450ms cubic-bezier(.36, 0, .66, -.56);
+
+          &.open { top: calc(100% - var(--lip)); }
+
+          .death-saves {
+            --padding: .375rem;
+            background: black;
+            border-radius: 0 0 5px 5px;
+            box-shadow: 0 0 6px var(--color-shadow-dark);
+            padding: calc(var(--padding) * 2 + var(--lip)) var(--padding) calc(var(--padding) * 2);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            &::after {
+              content: "";
+              border: 1px solid var(--dnd5e-color-gold);
+              border-radius: 4px;
+              position: absolute;
+              inset: calc(var(--padding) + var(--lip)) var(--padding) var(--padding);
+              pointer-events: none;
+            }
+
+            .death-save {
+              width: 40px;
+              height: 40px;
+              background: transparent url("ui/skull.svg") no-repeat center / contain;
+
+              &:hover { filter: drop-shadow(0 0 4px var(--color-shadow-primary)); }
+            }
+
+            .pip {
+              background: black;
+
+              &.filled { background: var(--dnd5e-color-gold); }
+
+              &.filled.failure::before {
+                content: "\f00d";
+                font-family: var(--font-awesome);
+                font-size: var(--font-size-14);
+              }
+            }
+          }
+
+          .death-tab {
+            display: grid;
+            place-content: center;
+            width: 32px;
+            height: 20px;
+            background: var(--dnd5e-color-iron-gray) url("/ui/denim.png");
+            cursor: pointer;
+            border-radius: 0 0 3px 3px;
+            box-shadow: 0 0 6px var(--color-shadow-dark);
+
+            &:hover, &:focus { box-shadow: 0 0 6px var(--color-shadow-dark); }
+
+            > i {
+              color: var(--dnd5e-color-gold);
+              font-size: var(--font-size-12);
+              margin: 0;
+            }
+          }
         }
       }
 

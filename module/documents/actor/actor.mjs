@@ -596,6 +596,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const overallBonus = simplifyBonus(hp.bonuses.overall, rollData);
 
     hp.max = base + levelBonus + overallBonus;
+    hp.pct = Math.clamped(hp.max ? (hp.value / hp.max) * 100 : 0, 0, 100);
   }
 
   /* -------------------------------------------- */

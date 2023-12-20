@@ -189,8 +189,93 @@
                             </div>
                         </div>
 
+                        {{!-- Hit Points --}}
+                        <div class="meter-group">
+                            <div class="label roboto-condensed-upper">
+                                <span>{{ localize "DND5E.HitPoints" }}</span>
+                                {{#if editable}}
+                                <a class="config-button" data-action="hit-points" data-tooltip="DND5E.HitPointsConfig">
+                                    <i class="fas fa-cog"></i>
+                                </a>
+                                {{/if}}
+                            </div>
+                            {{#with system.attributes.hp}}
+                            <div class="meter sectioned hit-points">
+                                <div class="progress hit-points" role="meter" aria-valuemin="0"
+                                     aria-valuenow="{{ value }}" aria-valuemax="{{ max }}"
+                                     style="--bar-percentage: {{ pct }}%">
+                                    <div class="label">
+                                        <span class="value">{{ value }}</span>
+                                        <span class="separator">&sol;</span>
+                                        <span class="max">{{ max }}</span>
+                                    </div>
+                                    <input type="text" name="system.attributes.hp.value" data-dtype="Number"
+                                           placeholder="0" value="{{ value }}" hidden>
+                                </div>
+                                <div class="tmp">
+                                    <input type="text" name="system.attributes.hp.temp" data-dtype="Number"
+                                           placeholder="{{ localize "DND5E.TMP" }}" value="{{ temp }}">
+                                </div>
+                            </div>
+                            {{/with}}
+                        </div>
+
+                        {{!-- Hit Dice --}}
+                        <div class="meter-group">
+                            <div class="label roboto-condensed-upper">
+                                <span>{{ localize "DND5E.HitDice" }}</span>
+                                {{#if editable}}
+                                <a class="config-button" data-action="hit-dice" data-tooltip="DND5E.HitDiceConfig">
+                                    <i class="fas fa-cog"></i>
+                                </a>
+                                {{/if}}
+                            </div>
+                            <div class="meter hit-dice progress" role="meter" aria-valuemin="0"
+                                 aria-valuenow="{{ hd.value }}" aria-valuemax="{{ hd.max }}"
+                                 style="--bar-percentage: {{ hd.pct }}%">
+                                <div class="label">
+                                    <span class="value">{{ hd.value }}</span>
+                                    <span class="separator">&sol;</span>
+                                    <span class="max">{{ hd.max }}</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
+                    {{!-- Death Saves --}}
+                    <div class="death-tray {{#if death.open}}open{{/if}}">
+                        <div class="death-saves">
+
+                            {{!-- Successes --}}
+                            <div class="pips" data-prop="system.attributes.death.success">
+                                {{#each death.success}}
+                                    {{> pip }}
+                                {{/each}}
+                            </div>
+
+                            {{!-- Roll Death Save --}}
+                            <button type="button" data-action="rollDeathSave" data-tooltip="DND5E.DeathSaveRoll"
+                                    aria-label="{{ localize "DND5E.DeathSaveRoll" }}"
+                                    class="rollable death-save unbutton"></button>
+
+                            {{!-- Failures --}}
+                            <div class="pips" data-prop="system.attributes.death.failure">
+                                {{#each death.failure}}
+                                    {{> pip }}
+                                {{/each}}
+                            </div>
+
+                        </div>
+
+                        <button type="button" class="death-tab unbutton"
+                                {{#if death.open}}
+                                    data-tooltip="DND5E.DeathSaveShow" aria-label="{{ localize "DND5E.DeathSaveShow" }}"
+                                {{else}}
+                                    data-tooltip="DND5E.DeathSaveHide" aria-label="{{ localize "DND5E.DeathSaveHide" }}"
+                                {{/if}}>
+                            <i class="fas fa-skull"></i>
+                        </button>
+                    </div>
 
                 </div>
 

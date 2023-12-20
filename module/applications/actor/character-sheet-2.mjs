@@ -30,6 +30,13 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
    */
   _mode = this.constructor.MODES.PLAY;
 
+  /**
+   * Whether the user has manually opened the death save tray.
+   * @type {boolean}
+   * @protected
+   */
+  _deathTrayOpen = false;
+
   /* -------------------------------------------- */
 
   /** @override */
@@ -72,10 +79,12 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
     context.cssClass = context.editable ? "editable" : "locked";
     const { attributes } = this.actor.system;
 
+    // Class
     context.labels.class = Object.values(this.actor.classes).sort((a, b) => {
       return b.system.levels - a.system.levels;
     }).map(c => `${c.name} ${c.system.levels}`).join(" / ");
 
+    // Portrait
     const showTokenPortrait = this.actor.getFlag("dnd5e", "showTokenPortrait") === true;
     const token = this.actor.isToken ? this.actor.token : this.actor.prototypeToken;
     context.portrait = {
@@ -85,6 +94,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
       path: showTokenPortrait ? this.actor.isToken ? "" : "prototypeToken.texture.src" : "img"
     };
 
+    // Exhaustion
     context.exhaustion = Array.fromRange(6, 1).map(n => {
       const label = game.i18n.format("DND5E.ExhaustionLevel", { n });
       const classes = ["pip"];
@@ -94,11 +104,37 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
       return { n, label, filled, tooltip: label, classes: classes.join(" ") };
     });
 
+    // Speed
     context.speed = Object.entries(CONFIG.DND5E.movementTypes).reduce((obj, [k, label]) => {
       const value = attributes.movement[k];
       if ( value > obj.value ) Object.assign(obj, { value, label });
       return obj;
     }, { value: 0, label: CONFIG.DND5E.movementTypes.walk });
+
+    // Hit Dice
+    context.hd = { value: attributes.hd, max: this.actor.system.details.level };
+    context.hd.pct = Math.clamped(context.hd.max ? (context.hd.value / context.hd.max) * 100 : 0, 0, 100);
+
+    // Death Saves
+    const plurals = new Intl.PluralRules(game.i18n.lang, { type: "ordinal" });
+    context.death = { open: this._deathTrayOpen };
+    ["success", "failure"].forEach(deathSave => {
+      context.death[deathSave] = [];
+      for ( let i = 1; i < 4; i++ ) {
+        const n = deathSave === "failure" ? i : 4 - i;
+        const i18nKey = `DND5E.DeathSave${deathSave.titleCase()}Label`;
+        const filled = attributes.death[deathSave] >= n;
+        const classes = ["pip"];
+        if ( filled ) classes.push("filled");
+        if ( deathSave === "failure" ) classes.push("failure");
+        context.death[deathSave].push({
+          n, filled,
+          tooltip: i18nKey,
+          label: game.i18n.localize(`${i18nKey}N.${plurals.select(n)}`),
+          classes: classes.join(" ")
+        });
+      }
+    });
 
     return context;
   }
@@ -109,6 +145,9 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
   activateListeners(html) {
     super.activateListeners(html);
     html.find(".pips[data-prop]").on("click", this._onTogglePip.bind(this));
+    html.find(".meter > .hit-points").on("click", event => this._toggleEditHP(event, true));
+    html.find(".meter > .hit-points > input").on("blur", event => this._toggleEditHP(event, false));
+    html.find(".death-tab").on("click", this._toggleDeathTray.bind(this));
 
     // Edit mode only.
     if ( this._mode === this.constructor.MODES.EDIT ) {
@@ -199,6 +238,39 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
       direction: TooltipManager.TOOLTIP_DIRECTIONS.DOWN,
       cssClass: "property-attribution"
     });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Toggle editing hit points.
+   * @param {PointerEvent} event  The triggering event.
+   * @param {boolean} edit        Whether to toggle to the edit state.
+   * @protected
+   */
+  _toggleEditHP(event, edit) {
+    const target = event.currentTarget.closest(".hit-points");
+    const label = target.querySelector(":scope > .label");
+    const input = target.querySelector(":scope > input");
+    label.hidden = edit;
+    input.hidden = !edit;
+    if ( edit ) input.focus();
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Toggle the death save tray.
+   * @param {PointerEvent} event  The triggering event.
+   * @protected
+   */
+  _toggleDeathTray(event) {
+    const target = event.currentTarget;
+    const tray = target.closest(".death-tray");
+    tray.classList.toggle("open");
+    this._deathTrayOpen = tray.classList.contains("open");
+    target.dataset.tooltip = `DND5E.DeathSave${this._deathTrayOpen ? "Hide" : "Show"}`
+    target.setAttribute("aria-label", game.i18n.localize(target.dataset.tooltip));
   }
 
   /* -------------------------------------------- */
