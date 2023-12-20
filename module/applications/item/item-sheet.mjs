@@ -235,8 +235,7 @@ export default class ItemSheet5e extends ItemSheet {
     const baseIds = CONFIG.DND5E[`${type}Ids`];
     if ( baseIds === undefined ) return {};
 
-    const typeProperty = "type.value";
-    const baseType = foundry.utils.getProperty(this.item.system, typeProperty);
+    const baseType = this.item.system.type.value;
 
     const items = {};
     for ( const [name, id] of Object.entries(baseIds) ) {
