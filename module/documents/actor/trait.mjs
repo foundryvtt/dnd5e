@@ -271,13 +271,13 @@ export function getBaseItem(identifier, { indexOnly=false, fullItem=false }={}) 
   const fields = traitIndexFields();
   const promise = packObject.getIndex({ fields }).then(index => {
     const store = index.reduce((obj, entry) => {
-      for (const field in fields) {
+      for ( const field of fields ) {
         const val = foundry.utils.getProperty(entry, field);
-        if (field !== "system.type.value" && val !== undefined) {
+        if ( (field !== "system.type.value") && (val !== undefined) ) {
           foundry.utils.setProperty(entry, "system.type.value", val);
           foundry.utils.logCompatibilityWarning(
             `The '${field}' property has been deprecated in favor of a standardized \`system.type.value\` property.`,
-            { since: "DnD5e 2.5.0", until: "DnD5e 2.6" }
+            { since: "DnD5e 2.5", until: "DnD5e 2.7", once: true }
           );
         }
       }
@@ -299,7 +299,7 @@ export function getBaseItem(identifier, { indexOnly=false, fullItem=false }={}) 
  * @protected
  */
 export function traitIndexFields() {
-  const fields = [ "system.type.value" ];
+  const fields = ["system.type.value"];
   for ( const traitConfig of Object.values(CONFIG.DND5E.traits) ) {
     if ( !traitConfig.subtypes ) continue;
     fields.push(`system.${traitConfig.subtypes.keyPath}`);
