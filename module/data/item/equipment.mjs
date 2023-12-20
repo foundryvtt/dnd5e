@@ -166,7 +166,7 @@ export default class EquipmentData extends SystemDataModel.mixin(
     const config = CONFIG.DND5E.armorProficienciesMap;
     const itemProf = config[this.type.value];
     const actorProfs = actor.system.traits?.armorProf?.value ?? new Set();
-    const isProficient = (itemProf === true) || actorProfs.has(itemProf) || actorProfs.has(this.system.type.baseItem);
+    const isProficient = (itemProf === true) || actorProfs.has(itemProf) || actorProfs.has(this.type.baseItem);
     return Number(isProficient);
   }
 }

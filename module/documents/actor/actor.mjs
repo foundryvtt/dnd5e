@@ -469,7 +469,6 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     // Identify Equipped Items
     const armorTypes = new Set(Object.keys(CONFIG.DND5E.armorTypes));
     const {armors, shields} = this.itemTypes.equipment.reduce((obj, equip) => {
-      const armor = equip.system.armor;
       if ( !equip.system.equipped || !armorTypes.has(equip.type.value) ) return obj;
       if ( equip.system.type.value === "shield" ) obj.shields.push(equip);
       else obj.armors.push(equip);
