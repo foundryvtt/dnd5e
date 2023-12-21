@@ -176,10 +176,13 @@ p:empty:has(+ .content-embed), .content-embed + p:empty {
 
 .journal-entry-page.rule {
   .window-content {
+    .editor:first-of-type { flex: 2; }
     .separator {
       flex: 0 1;
       display: flex;
+      align-items: center;
       justify-content: space-between;
+      border-block-start: 1px dashed var(--color-border-dark-4);
       padding-block: 0.5em;
       padding-inline: 1em;
 
