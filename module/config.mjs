@@ -498,24 +498,59 @@ DND5E.mapLocationMarker = {
 /**
  * Default types of creatures.
  * *Note: Not pre-localized to allow for easy fetching of pluralized forms.*
- * @enum {string}
+ * @enum {{ label: string, [detectAlignment]: boolean }}
  */
 DND5E.creatureTypes = {
-  aberration: "DND5E.CreatureAberration",
-  beast: "DND5E.CreatureBeast",
-  celestial: "DND5E.CreatureCelestial",
-  construct: "DND5E.CreatureConstruct",
-  dragon: "DND5E.CreatureDragon",
-  elemental: "DND5E.CreatureElemental",
-  fey: "DND5E.CreatureFey",
-  fiend: "DND5E.CreatureFiend",
-  giant: "DND5E.CreatureGiant",
-  humanoid: "DND5E.CreatureHumanoid",
-  monstrosity: "DND5E.CreatureMonstrosity",
-  ooze: "DND5E.CreatureOoze",
-  plant: "DND5E.CreaturePlant",
-  undead: "DND5E.CreatureUndead"
+  aberration: {
+    label: "DND5E.CreatureAberration",
+    detectAlignment: true
+  },
+  beast: {
+    label: "DND5E.CreatureBeast"
+  },
+  celestial: {
+    label: "DND5E.CreatureCelestial",
+    detectAlignment: true
+  },
+  construct: {
+    label: "DND5E.CreatureConstruct"
+  },
+  dragon: {
+    label: "DND5E.CreatureDragon"
+  },
+  elemental: {
+    label: "DND5E.CreatureElemental",
+    detectAlignment: true
+  },
+  fey: {
+    label: "DND5E.CreatureFey",
+    detectAlignment: true
+  },
+  fiend: {
+    label: "DND5E.CreatureFiend",
+    detectAlignment: true
+  },
+  giant: {
+    label: "DND5E.CreatureGiant"
+  },
+  humanoid: {
+    label: "DND5E.CreatureHumanoid"
+  },
+  monstrosity: {
+    label: "DND5E.CreatureMonstrosity"
+  },
+  ooze: {
+    label: "DND5E.CreatureOoze"
+  },
+  plant: {
+    label: "DND5E.CreaturePlant"
+  },
+  undead: {
+    label: "DND5E.CreatureUndead",
+    detectAlignment: true
+  }
 };
+patchConfig("creatureTypes", "label", { since: "DnD5e 2.5", until: "DnD5e 2.7" });
 
 /* -------------------------------------------- */
 
