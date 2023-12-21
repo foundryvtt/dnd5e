@@ -1,4 +1,5 @@
 import { MappingField } from "../data/fields.mjs";
+import { staticID } from "../utils.mjs";
 
 /**
  * Extend the base TokenDocument class to implement system-specific HP bar logic.
@@ -104,27 +105,28 @@ export default class TokenDocument5e extends TokenDocument {
   /** @inheritdoc */
   async toggleActiveEffect(effectData, {overlay=false, active}={}) {
     if ( !this.actor || !effectData.id ) return false;
+    const id = staticID(`dnd${effectData.id}`);
 
     // Remove existing effects that contain this effect data's primary ID as their primary ID.
-    const existing = this.actor.effects.reduce((arr, e) => {
-      if ( e.statuses.first() === effectData.id ) arr.push(e.id);
-      return arr;
-    }, []);
-    const state = active ?? !existing.length;
-    if ( !state && existing.length ) await this.actor.deleteEmbeddedDocuments("ActiveEffect", existing);
+    const existing = this.actor.effects.get(id);
+    const state = active ?? !existing;
+    if ( !state && existing ) await this.actor.deleteEmbeddedDocuments("ActiveEffect", [id]);
 
     // Add a new effect
     else if ( state ) {
       const cls = getDocumentClass("ActiveEffect");
-      const createData = foundry.utils.deepClone(effectData);
-      createData.statuses = [effectData.id, ...effectData.statuses ?? []];
-      delete createData.id;
+      const createData = {
+        ...foundry.utils.deepClone(effectData),
+        _id: id,
+        name: game.i18n.localize(effectData.name),
+        statuses: [effectData.id, ...effectData.statuses ?? []]
+      };
       cls.migrateDataSafe(createData);
       cls.cleanData(createData);
-      createData.name = game.i18n.localize(createData.name);
       if ( overlay ) createData["flags.core.overlay"] = true;
-      await cls.create(createData, {parent: this.actor});
+      await cls.create(createData, {parent: this.actor, keepId: true});
     }
+
     return state;
   }
 }
