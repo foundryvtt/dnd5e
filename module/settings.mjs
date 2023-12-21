@@ -3,7 +3,7 @@ import { ModuleArtConfig } from "./module-art.mjs";
 /**
  * Register all of the system's settings.
  */
-export default function registerSystemSettings() {
+export function registerSystemSettings() {
   // Internal System Migration Version
   game.settings.register("dnd5e", "systemMigrationVersion", {
     name: "System Migration Version",
@@ -314,4 +314,27 @@ class PrimaryPartyData extends foundry.abstract.DataModel {
   static defineSchema() {
     return { actor: new foundry.data.fields.ForeignDocumentField(foundry.documents.BaseActor) };
   }
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Register additional settings after modules have had a chance to initialize to give them a chance to modify choices.
+ */
+export function registerDeferredSettings() {
+  game.settings.register("dnd5e", "theme", {
+    name: "SETTINGS.DND5E.THEME.Name",
+    hint: "SETTINGS.DND5E.THEME.Hint",
+    scope: "client",
+    config: true,
+    default: "",
+    type: String,
+    choices: {
+      "": "SHEETS.DND5E.THEME.Automatic",
+      ...CONFIG.DND5E.themes
+    },
+    onChange: s => document.body.dataset.theme = s
+  });
+
+  document.body.dataset.theme = game.settings.get("dnd5e", "theme");
 }

@@ -3196,8 +3196,8 @@ preLocalize("sourceBooks", { sort: true });
  * @enum {string}
  */
 DND5E.themes = {
-  light: "SHEETS.DND5E.Theme.Light",
-  dark: "SHEETS.DND5E.Theme.Dark"
+  light: "SHEETS.DND5E.THEME.Light",
+  dark: "SHEETS.DND5E.THEME.Dark"
 };
 preLocalize("themes");
 
