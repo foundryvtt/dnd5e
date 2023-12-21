@@ -1851,6 +1851,10 @@ DND5E.statusEffects = {
   sleep: {
     name: "EFFECT.DND5E.StatusSleeping"
   },
+  surprised: {
+    name: "EFFECT.DND5E.StatusSurprised",
+    icon: "systems/dnd5e/icons/svg/statuses/surprised.svg"
+  },
   transformed: {
     name: "EFFECT.DND5E.StatusTransformed",
     icon: "icons/svg/pawprint.svg"
