@@ -252,7 +252,7 @@
 > <summary> Scale Value Identifiers</summary>
 > 
 > [Scale Value Advancements](Advancement-Type-Scale-Value.md) can be added to Class, Subclass, Race, and Background item types, which will define how the identifiers used are generated.  
-> The identifiers used will follow this general format: `@scale.parent-item-identifier.scale-value-identifier`where the `parent-item-identifier` is defined in the item the advancement is added to, and the `scale-value-identifier` is defined within the Advancement itself.  
+> The identifiers used will follow this general format: `@scale.parent-item-identifier.scale-value-identifier` where the `parent-item-identifier` is defined in the item the advancement is added to, and the `scale-value-identifier` is defined within the Advancement itself.  
 >> Examples from the SRD:  
 >> Race item - Dragonborn's Breath Weapon: `@scale.dragonborn.breath-weapon`  
 >> Class item - Rogue's Sneak Attack: `@scale.rogue.sneak-attack`  
