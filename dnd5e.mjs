@@ -50,6 +50,7 @@ Hooks.once("init", function() {
   // Record Configuration Values
   CONFIG.DND5E = DND5E;
   CONFIG.ActiveEffect.documentClass = documents.ActiveEffect5e;
+  CONFIG.ActiveEffect.legacyTransferral = false;
   CONFIG.Actor.documentClass = documents.Actor5e;
   CONFIG.Item.collection = dataModels.collection.Items5e;
   CONFIG.Item.compendiumIndexFields.push("system.container");

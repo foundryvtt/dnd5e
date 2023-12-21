@@ -120,7 +120,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
       labels: this._getLabels(),
       movement: this._getMovementSpeed(this.actor.system),
       senses: this._getSenses(this.actor.system),
-      effects: EffectsElement.prepareCategories(this.actor.effects),
+      effects: EffectsElement.prepareCategories(this.actor.allApplicableEffects()),
       warnings: foundry.utils.deepClone(this.actor._preparationWarnings),
       filters: this._filters,
       owner: this.actor.isOwner,
@@ -303,19 +303,19 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
    */
   _prepareActiveEffectAttributions(target) {
     const rollData = this.actor.getRollData({deterministic: true});
-    return this.actor.effects.reduce((arr, e) => {
+    const attributions = [];
+    for ( const e of this.actor.allApplicableEffects() ) {
       let source = e.sourceName;
       if ( e.origin === this.actor.uuid ) source = e.name;
-      if ( !source || e.disabled || e.isSuppressed ) return arr;
+      if ( !source || e.disabled || e.isSuppressed ) continue;
       const value = e.changes.reduce((n, change) => {
         if ( change.key !== target ) return n;
         if ( change.mode !== CONST.ACTIVE_EFFECT_MODES.ADD ) return n;
         return n + simplifyBonus(change.value, rollData);
       }, 0);
-      if ( !value ) return arr;
-      arr.push({value, label: source, mode: CONST.ACTIVE_EFFECT_MODES.ADD});
-      return arr;
-    }, []);
+      if ( value ) attributions.push({value, label: source, mode: CONST.ACTIVE_EFFECT_MODES.ADD});
+    }
+    return attributions;
   }
 
   /* -------------------------------------------- */
@@ -791,6 +791,22 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
 
   /* -------------------------------------------- */
 
+  /** @inheritdoc */
+  _onDragStart(event) {
+    const li = event.currentTarget;
+    if ( event.target.classList.contains("content-link") ) return;
+
+    if ( li.dataset.effectId && li.dataset.parentId ) {
+      const effect = this.actor.items.get(li.dataset.parentId)?.effects.get(li.dataset.effectId);
+      if ( effect ) event.dataTransfer.setData("text/plain", JSON.stringify(effect.toDragData()));
+      return;
+    }
+
+    super._onDragStart(event);
+  }
+
+  /* -------------------------------------------- */
+
   /** @override */
   async _onDropActor(event, data) {
     const canPolymorph = game.user.isGM || (this.actor.isOwner && game.settings.get("dnd5e", "allowPolymorphing"));
@@ -870,6 +886,15 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
   async _onDrop(event) {
     this._event = event;
     return super._onDrop(event);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  async _onDropActiveEffect(event, data) {
+    const effect = await ActiveEffect.implementation.fromDropData(data);
+    if ( effect?.target === this.actor ) return false;
+    return super._onDropActiveEffect(event, data);
   }
 
   /* -------------------------------------------- */

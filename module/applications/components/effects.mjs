@@ -12,7 +12,7 @@ export default class EffectsElement extends HTMLElement {
     }
 
     new ContextMenu(this, "[data-effect-id]", [], {onOpen: element => {
-      const effect = this.document.effects.get(element.dataset.effectId);
+      const effect = this.getEffect(element.dataset);
       if ( !effect ) return;
       ui.context.menuItems = this._getContextOptions(effect);
       Hooks.call("dnd5e.getActiveEffectContextOptions", effect, ui.context.menuItems);
@@ -148,15 +148,15 @@ export default class EffectsElement extends HTMLElement {
     });
     if ( target.dispatchEvent(event) === false ) return;
 
-    const effectId = target.closest("[data-effect-id]")?.dataset.effectId;
-    const effect = await this.document.effects.get(effectId);
+    const dataset = target.closest("[data-effect-id]")?.dataset;
+    const effect = this.getEffect(dataset);
     if ( (action !== "create") && !effect ) return;
 
     switch ( action ) {
       case "create":
         return this._onCreate(target);
       case "duplicate":
-        return effect.clone({label: game.i18n.format("DOCUMENT.CopyOf", {name: effect.name})}, {save: true});
+        return effect.clone({name: game.i18n.format("DOCUMENT.CopyOf", {name: effect.name})}, {save: true});
       case "edit":
         return effect.sheet.render(true);
       case "delete":
@@ -177,11 +177,27 @@ export default class EffectsElement extends HTMLElement {
     const isActor = this.document instanceof Actor;
     const li = target.closest("li");
     return this.document.createEmbeddedDocuments("ActiveEffect", [{
-      label: isActor ? game.i18n.localize("DND5E.EffectNew") : this.document.name,
+      name: isActor ? game.i18n.localize("DND5E.EffectNew") : this.document.name,
       icon: isActor ? "icons/svg/aura.svg" : this.document.img,
       origin: this.document.uuid,
       "duration.rounds": li.dataset.effectType === "temporary" ? 1 : undefined,
       disabled: li.dataset.effectType === "inactive"
     }]);
+  }
+
+  /* -------------------------------------------- */
+  /*  Helpers                                     */
+  /* -------------------------------------------- */
+
+  /**
+   * Fetch an effect from this document, or any embedded items if this document is an actor.
+   * @param {object} data
+   * @param {string} data.effectId    ID of the effect to fetch.
+   * @param {string} [data.parentId]  ID of the parent item containing the effect.
+   * @returns {ActiveEffect5e}
+   */
+  getEffect({ effectId, parentId }={}) {
+    if ( !parentId ) return this.document.effects.get(effectId);
+    return this.document.items.get(parentId).effects.get(effectId);
   }
 }
