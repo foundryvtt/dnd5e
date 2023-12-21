@@ -1,4 +1,4 @@
-![](https://img.shields.io/static/v1?label=dnd5e&message=2.3.1&color=informational)
+![](https://img.shields.io/static/v1?label=dnd5e&message=2.4.1&color=informational)
 
 For a general overview of World Scripts, see the [Foundry Community Wiki](https://foundryvtt.wiki/en/basics/world-scripts), much of this guide has been lifted from that page, but the example scripts below will be limited to DnD5e specific scripts.
 
@@ -37,6 +37,7 @@ To include your Javascript file in your world, first, shut down the World in Fou
 
 # Examples
 Scripts rely on Hooks to automatically execute, see [Hooks](Hooks.md) for system specific Hooks that you can use, or the [Foundry API](https://foundryvtt.com/api/modules/hookEvents.html) for Hooks provided by the Core Foundry Software.  
+The examples below modify different aspects of the dnd5e system's configuration, to explore the configuration to see what you can modify, open the Console with F12 and type in `CONFIG.DND5E` then hit Enter.  
 Need Help? Feel free to jump in the Foundry VTT discord's [#dnd5e](https://discord.com/channels/170995199584108546/670336046164213761) or [#macro-polo](https://discord.com/channels/170995199584108546/699750150674972743) channels for assistance from the community. 
 
 ## Add a new Ability
@@ -140,13 +141,44 @@ Hooks.once("init", () => {
 });
 ```
 
-## Remove, Rename, and Add new Languages 
+## Modify Languages 
+### Add a language  
+The "Cool Speech" language will be available at the top level (with Druidic and Thieves' Cant), "Super Common" will appear under the Standard category, and "Uncommon" will appear under the Exotic category.
 ```js
-/// Removes Common, Renames Deepspeech to Voidspeech, and adds a languages called Ochnun
 Hooks.once("init", () => {
-  delete CONFIG.DND5E.languages.common;
-  CONFIG.DND5E.languages.deep = "Voidspeech";
-  CONFIG.DND5E.languages.ochnun = "Ochnun";
+    CONFIG.DND5E.languages.coolspeech = "Cool Speech";
+    CONFIG.DND5E.languages.standard.children.supercommon = "Super Common";
+    CONFIG.DND5E.languages.exotic.children.uncommon = "Uncommon";
+});
+```
+
+### Add languages with children to the Standard or Exotic language families  
+"Gibberish" will be a subfamily of the Standard language family with child languages "High Gibberish" and "Gibberish", and "Nonsense" will be a subfamily of the Exotic language family with child languages "Old Nonsense" and "New Nonsense".  
+```js
+Hooks.once("setup", () => {
+    CONFIG.DND5E.languages.standard.children.gibberish = {
+        label: "Gibberish",
+        children: {
+            gibberish: "Gibberish",
+            highgibberish: "High Gibberish"
+        }
+    },
+    CONFIG.DND5E.languages.exotic.children.nonsense = {
+        label: "Nonsense",
+        children: {
+            oldnonsense: "Old Nonsense",
+            newnonsense: "New Nonsense"
+        }
+    }
+});
+```
+### Delete languages
+```js
+Hooks.once("init", () => {
+    delete CONFIG.DND5E.languages.druidic;
+    delete CONFIG.DND5E.languages.standard.children.dwarvish;
+    delete CONFIG.DND5E.languages.exotic.children.aarakocra;
+    delete CONFIG.DND5E.languages.exotic.children.primordial.children.aquan;
 });
 ```
 
