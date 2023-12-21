@@ -327,6 +327,10 @@ export function performPreLocalization(config) {
     _localizeObject(target, settings.keys);
     if ( settings.sort ) foundry.utils.setProperty(config, keyPath, sortObjectEntries(target, settings.keys[0]));
   }
+
+  // Localize & sort status effects
+  CONFIG.statusEffects.forEach(s => s.name = game.i18n.localize(s.name));
+  CONFIG.statusEffects.sort((lhs, rhs) => lhs.name.localeCompare(rhs.name));
 }
 
 /* -------------------------------------------- */

@@ -1721,6 +1721,7 @@ DND5E.consumableResources = [
  * @property {string} label        Localized label for the condition.
  * @property {string} [icon]       Icon used to represent the condition on the token.
  * @property {string} [reference]  UUID of a journal entry with details on this condition.
+ * @property {string} [special]    Set this condition as a special status effect under this name.
  */
 
 /**
@@ -1731,7 +1732,8 @@ DND5E.conditionTypes = {
   blinded: {
     label: "DND5E.ConBlinded",
     icon: "systems/dnd5e/icons/svg/statuses/blinded.svg",
-    reference: "Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.0b8N4FymGGfbZGpJ"
+    reference: "Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.0b8N4FymGGfbZGpJ",
+    special: "BLIND"
   },
   charmed: {
     label: "DND5E.ConCharmed",
@@ -1815,18 +1817,43 @@ DND5E.conditionTypes = {
 preLocalize("conditionTypes", { key: "label", sort: true });
 patchConfig("conditionTypes", "label", { since: "DnD5e 3.0", until: "DnD5e 3.2" });
 
+/* -------------------------------------------- */
+
 /**
- * Extra configuration information for special status effects not specified in `conditionTypes`.
- * @type {{retained: string[], special: object}}
+ * Extra status effects not specified in `conditionTypes`. If the ID matches a core-provided effect, then this
+ * data will be merged into the core data.
+ * @enum {object}
  */
 DND5E.statusEffects = {
-  retained: {
-    dead: {
-      icon: "systems/dnd5e/icons/svg/statuses/dead.svg"
-    }
+  bleeding: {},
+  burrowing: {
+    name: "EFFECT.DND5E.StatusBurrowing",
+    icon: "icons/svg/cave.svg"
   },
-  special: {
-    BLIND: "blinded"
+  concentrating: {
+    name: "EFFECT.DND5E.StatusConcentrating",
+    icon: "systems/dnd5e/icons/svg/statuses/concentrating.svg"
+  },
+  curse: {},
+  dead: {
+    icon: "systems/dnd5e/icons/svg/statuses/dead.svg"
+  },
+  fly: {},
+  hidden: {
+    name: "EFFECT.DND5E.StatusHidden",
+    icon: "icons/svg/cowled.svg"
+  },
+  marked: {
+    name: "EFFECT.DND5E.StatusMarked",
+    icon: "icons/svg/target.svg"
+  },
+  silence: {},
+  sleep: {
+    name: "EFFECT.DND5E.StatusSleeping"
+  },
+  transformed: {
+    name: "EFFECT.DND5E.StatusTransformed",
+    icon: "icons/svg/pawprint.svg"
   }
 };
 
