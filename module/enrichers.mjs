@@ -495,7 +495,7 @@ async function embedRollTable(config, label, options) {
  * Enrich a reference link.
  * @param {object} config              Configuration data.
  * @param {string} [label]             Optional label to replace default text.
- * @param {EnrichmentOptions} options    Options provided to customize text enrichment.
+ * @param {EnrichmentOptions} options  Options provided to customize text enrichment.
  * @returns {HTMLElement|null}         An HTML link to the Journal Entry Page for the given reference.
  *
  * @example Create a content link to the relevant reference:
@@ -510,7 +510,12 @@ async function embedRollTable(config, label, options) {
  * ```
  */
 async function enrichReference(config, label, options) {
-  const uuid = CONFIG.DND5E.conditionTypes[config.condition]?.reference;
+  const type = Object.keys(config).find(k => k in CONFIG.DND5E.ruleTypes);
+  if ( !type ) {
+    console.warn(`No valid rule type found while enriching ${config.input}.`);
+    return null;
+  }
+  const uuid = CONFIG.DND5E[CONFIG.DND5E.ruleTypes[type].references]?.[config[type]]?.reference;
   if ( !uuid ) return null;
   const doc = await fromUuid(uuid);
   return doc.toAnchor({ name: label || doc.name });
