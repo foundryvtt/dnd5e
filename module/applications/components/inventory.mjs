@@ -1,5 +1,3 @@
-import AdvancementManager from "../advancement/advancement-manager.mjs";
-import AdvancementConfirmationDialog from "../advancement/advancement-confirmation-dialog.mjs";
 import CurrencyManager from "../item/currency-manager.mjs";
 
 /**
@@ -247,7 +245,7 @@ export default class InventoryElement extends HTMLElement {
       case "currency":
         return new CurrencyManager(this.document).render(true);
       case "delete":
-        return this._onDelete(target, item);
+        return item.deleteDialog();
       case "duplicate":
         return item.clone({name: game.i18n.format("DOCUMENT.CopyOf", {name: item.name})}, {save: true});
       case "edit":
@@ -290,32 +288,6 @@ export default class InventoryElement extends HTMLElement {
     };
     delete itemData.system.type;
     return this.actor.createEmbeddedDocuments("Item", [itemData]);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Delete an item.
-   * @param {HTMLElement} target  Button or context menu entry that triggered this action.
-   * @param {Item5e} item         Item to be deleted.
-   * @returns {Promise}
-   */
-  async _onDelete(target, item) {
-    // If item has advancement, handle it separately
-    if ( (this.document instanceof Actor) && (this.actor.type !== "group")
-      && !game.settings.get("dnd5e", "disableAdvancements") ) {
-      const manager = AdvancementManager.forDeletedItem(this.actor, item.id);
-      if ( manager.steps.length ) {
-        try {
-          const shouldRemoveAdvancements = await AdvancementConfirmationDialog.forDelete(item);
-          if ( shouldRemoveAdvancements ) return manager.render(true);
-          return item.delete({ shouldRemoveAdvancements });
-        } catch(err) {
-          return;
-        }
-      }
-    }
-    return item.deleteDialog();
   }
 
   /* -------------------------------------------- */
