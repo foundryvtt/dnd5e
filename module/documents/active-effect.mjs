@@ -185,12 +185,13 @@ export default class ActiveEffect5e extends ActiveEffect {
     event.preventDefault();
     const a = event.currentTarget;
     const li = a.closest("li");
+    if ( li.dataset.parentId ) owner = owner.items.get(li.dataset.parentId);
     const effect = li.dataset.effectId ? owner.effects.get(li.dataset.effectId) : null;
     switch ( a.dataset.action ) {
       case "create":
         const isActor = owner instanceof Actor;
         return owner.createEmbeddedDocuments("ActiveEffect", [{
-          label: isActor ? game.i18n.localize("DND5E.EffectNew") : owner.name,
+          name: isActor ? game.i18n.localize("DND5E.EffectNew") : owner.name,
           icon: isActor ? "icons/svg/aura.svg" : owner.img,
           origin: owner.uuid,
           "duration.rounds": li.dataset.effectType === "temporary" ? 1 : undefined,
