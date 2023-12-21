@@ -173,3 +173,23 @@ p:empty:has(+ .content-embed), .content-embed + p:empty {
     content: attr(data-map-location-code) ': ';
   }
 }
+
+.journal-entry-page.rule {
+  .window-content {
+    .separator {
+      flex: 0 1;
+      display: flex;
+      justify-content: space-between;
+      padding-block: 0.5em;
+      padding-inline: 1em;
+
+      h3 {
+        border: none;
+        margin: 0;
+      }
+      select {
+        min-width: 8em;
+      }
+    }
+  }
+}

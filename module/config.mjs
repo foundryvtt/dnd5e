@@ -2166,6 +2166,33 @@ DND5E.advancementTypes = {
 };
 
 /* -------------------------------------------- */
+/*  Rules                                       */
+/* -------------------------------------------- */
+
+/**
+ * Configuration information for rule types.
+ *
+ * @typedef {object} RuleTypeConfiguration
+ * @property {string} label         Localized label for the rule type.
+ * @property {string} [references]  Key for a configuration object that contains reference data.
+ */
+
+/**
+ * Types of rules that can be used in rule pages and the &Reference enricher.
+ * @enum {RuleTypeConfiguration}
+ */
+DND5E.ruleTypes = {
+  rule: {
+    label: "DND5E.Rule.TypeRule"
+  },
+  condition: {
+    label: "DND5E.Rule.TypeCondition",
+    references: "conditionTypes"
+  }
+};
+preLocalize("ruleTypes", { key: "label" });
+
+/* -------------------------------------------- */
 /*  Sources                                     */
 /* -------------------------------------------- */
 

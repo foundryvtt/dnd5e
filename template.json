@@ -37,14 +37,16 @@
   "JournalEntryPage": {
     "types": [
       "class",
-      "map"
+      "map",
+      "rule"
     ],
     "htmlFields": [
       "description.value",
       "description.additionalHitPoints",
       "description.additionalTraits",
       "description.additionalEquipment",
-      "description.subclass"
+      "description.subclass",
+      "tooltip"
     ]
   }
 }

@@ -146,6 +146,10 @@ Hooks.once("init", function() {
     label: "DND5E.SheetClassMapLocation",
     types: ["map"]
   });
+  DocumentSheetConfig.registerSheet(JournalEntryPage, "dnd5e", applications.journal.JournalRulePageSheet, {
+    label: "DND5E.SheetClassRule",
+    types: ["rule"]
+  });
 
   // Preload Handlebars helpers & partials
   utils.registerHandlebarsHelpers();
