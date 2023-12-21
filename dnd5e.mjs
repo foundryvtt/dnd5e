@@ -270,7 +270,11 @@ function _configureFonts() {
  * Configure system status effects.
  */
 function _configureStatusEffects() {
-  CONFIG.statusEffects = CONFIG.statusEffects.filter(e => CONFIG.DND5E.statusEffects.retained.includes(e.id));
+  CONFIG.statusEffects = CONFIG.statusEffects.reduce((arr, status) => {
+    const retained = CONFIG.DND5E.statusEffects.retained[status.id];
+    if ( retained ) arr.push(foundry.utils.mergeObject(status, retained, { inplace: false }));
+    return arr;
+  }, []);
   for ( const [id, {label: name, ...data}] of Object.entries(CONFIG.DND5E.conditionTypes) ) {
     if ( !data.icon ) continue;
     CONFIG.statusEffects.push({ id, name, ...data });

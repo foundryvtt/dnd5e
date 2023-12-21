@@ -1730,17 +1730,17 @@ DND5E.consumableResources = [
 DND5E.conditionTypes = {
   blinded: {
     label: "DND5E.ConBlinded",
-    icon: "icons/svg/blind.svg",
+    icon: "systems/dnd5e/icons/svg/statuses/blinded.svg",
     reference: "Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.0b8N4FymGGfbZGpJ"
   },
   charmed: {
     label: "DND5E.ConCharmed",
-    icon: "",
+    icon: "systems/dnd5e/icons/svg/statuses/charmed.svg",
     reference: "Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.zZaEBrKkr66OWJvD"
   },
   deafened: {
     label: "DND5E.ConDeafened",
-    icon: "icons/svg/deaf.svg",
+    icon: "systems/dnd5e/icons/svg/statuses/deafened.svg",
     reference: "Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.6G8JSjhn701cBITY"
   },
   diseased: {
@@ -1749,65 +1749,65 @@ DND5E.conditionTypes = {
   },
   exhaustion: {
     label: "DND5E.ConExhaustion",
-    icon: "icons/svg/degen.svg",
+    icon: "systems/dnd5e/icons/svg/statuses/exhaustion.svg",
     reference: "Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.cspWveykstnu3Zcv"
   },
   frightened: {
     label: "DND5E.ConFrightened",
-    icon: "icons/svg/terror.svg",
+    icon: "systems/dnd5e/icons/svg/statuses/frightened.svg",
     reference: "Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.oreoyaFKnvZCrgij"
   },
   grappled: {
     label: "DND5E.ConGrappled",
-    icon: "",
+    icon: "systems/dnd5e/icons/svg/statuses/grappled.svg",
     reference: "Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.gYDAhd02ryUmtwZn"
   },
   incapacitated: {
     label: "DND5E.ConIncapacitated",
-    icon: "icons/svg/daze.svg",
+    icon: "systems/dnd5e/icons/svg/statuses/incapacitated.svg",
     reference: "Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.TpkZgLfxCmSndmpb"
   },
   invisible: {
     label: "DND5E.ConInvisible",
-    icon: "icons/svg/invisible.svg",
+    icon: "systems/dnd5e/icons/svg/statuses/invisible.svg",
     reference: "Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.3UU5GCTVeRDbZy9u"
   },
   paralyzed: {
     label: "DND5E.ConParalyzed",
-    icon: "icons/svg/paralysis.svg",
+    icon: "systems/dnd5e/icons/svg/statuses/paralyzed.svg",
     reference: "Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.xnSV5hLJIMaTABXP",
     statuses: ["incapacitated"]
   },
   petrified: {
     label: "DND5E.ConPetrified",
-    icon: "icons/svg/statue.svg",
+    icon: "systems/dnd5e/icons/svg/statuses/petrified.svg",
     reference: "Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.xaNDaW6NwQTgHSmi",
     statuses: ["incapacitated"]
   },
   poisoned: {
     label: "DND5E.ConPoisoned",
-    icon: "icons/svg/poison.svg",
+    icon: "systems/dnd5e/icons/svg/statuses/poisoned.svg",
     reference: "Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.lq3TRI6ZlED8ABMx"
   },
   prone: {
     label: "DND5E.ConProne",
-    icon: "icons/svg/falling.svg",
+    icon: "systems/dnd5e/icons/svg/statuses/prone.svg",
     reference: "Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.y0TkcdyoZlOTmAFT"
   },
   restrained: {
     label: "DND5E.ConRestrained",
-    icon: "icons/svg/net.svg",
+    icon: "systems/dnd5e/icons/svg/statuses/restrained.svg",
     reference: "Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.cSVcyZyNe2iG1fIc"
   },
   stunned: {
     label: "DND5E.ConStunned",
-    icon: "icons/svg/stoned.svg",
+    icon: "systems/dnd5e/icons/svg/statuses/stunned.svg",
     reference: "Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.ZyZMUwA2rboh4ObS",
     statuses: ["incapacitated"]
   },
   unconscious: {
     label: "DND5E.ConUnconscious",
-    icon: "icons/svg/unconscious.svg",
+    icon: "systems/dnd5e/icons/svg/statuses/unconscious.svg",
     reference: "Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.UWw13ISmMxDzmwbd",
     statuses: ["incapacitated", "prone"]
   }
@@ -1820,7 +1820,11 @@ patchConfig("conditionTypes", "label", { since: "DnD5e 3.0", until: "DnD5e 3.2" 
  * @type {{retained: string[], special: object}}
  */
 DND5E.statusEffects = {
-  retained: ["dead"],
+  retained: {
+    dead: {
+      icon: "systems/dnd5e/icons/svg/statuses/dead.svg"
+    }
+  },
   special: {
     BLIND: "blinded"
   }
