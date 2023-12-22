@@ -182,14 +182,10 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
     html.find(".meter > .hit-points > input").on("blur", event => this._toggleEditHP(event, false));
     html.find(".death-tab").on("click", this._toggleDeathTray.bind(this));
     html.find(".rollable:is(.saving-throw, .ability-check)").on("click", this._onRollAbility.bind(this));
-
-    // Edit mode only.
-    if ( this._mode === this.constructor.MODES.EDIT ) {
-      html.find(".proficiency-toggle").on("click contextmenu", this._onCycleProficiency.bind(this));
-    }
+    html.find("proficiency-cycle").on("change", this._onChangeInput.bind(this));
 
     // Play mode only.
-    else {
+    if ( this._mode !== this.constructor.MODES.EDIT ) {
       html.find(".speed-tooltip").on("pointerover", this._onHoverSpeed.bind(this));
       html.find(".portrait").on("click", this._onShowPortrait.bind(this));
     }
@@ -305,23 +301,6 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
     this._deathTrayOpen = tray.classList.contains("open");
     target.dataset.tooltip = `DND5E.DeathSave${this._deathTrayOpen ? "Hide" : "Show"}`
     target.setAttribute("aria-label", game.i18n.localize(target.dataset.tooltip));
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Handle editing skill & tools proficiencies.
-   * @param {PointerEvent} event  The triggering event.
-   * @protected
-   */
-  _onCycleProficiency(event) {
-    const isAbility = event.currentTarget.closest("[data-ability]").dataset.ability;
-    const path = `${event.currentTarget.dataset.path}.${isAbility ? "proficient" : "value"}`;
-    const value = foundry.utils.getProperty(this.actor._source, path);
-    const levels = isAbility ? [0, 1] : [0, 1, .5, 2];
-    const idx = levels.indexOf(value);
-    const newValue = levels[(idx + (event.button === 0 ? 1 : levels.length - 1)) % levels.length];
-    return this.actor.update({ [path]: newValue });
   }
 
   /* -------------------------------------------- */
