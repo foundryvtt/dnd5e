@@ -437,22 +437,35 @@ async function embedRollTable(config, label, options) {
     </thead>
     <tbody></tbody>
   `;
+
+  const getDocAnchor = (doc, resultData) => {
+    if ( doc ) return doc.toAnchor().outerHTML;
+
+    // No doc found, create a broken anchor.
+    return `<a class="content-link broken"><i class="fas fa-unlink"></i>${resultData.text || game.i18n.localize("Unknown")}</a>`;
+  };
+
   const tbody = table.querySelector("tbody");
-  for ( const { range, type, text, documentCollection, documentId } of results ) {
+  for ( const data of results ) {
+    const { range, type, text, documentCollection, documentId } = data;
     const row = document.createElement("tr");
     const [lo, hi] = range;
     row.innerHTML += `<td>${lo === hi ? lo : `${lo}&mdash;${hi}`}</td>`;
     let result;
     switch ( type ) {
       case CONST.TABLE_RESULT_TYPES.TEXT: result = await TextEditor.enrichHTML(text, options); break;
-      case CONST.TABLE_RESULT_TYPES.DOCUMENT:
-        result = CONFIG[documentCollection].collection.get(documentId).toAnchor().outerHTML;
+      case CONST.TABLE_RESULT_TYPES.DOCUMENT: {
+        const doc = CONFIG[documentCollection]?.collection.instance?.get(documentId);
+        result = getDocAnchor(doc, data);
         break;
-      case CONST.TABLE_RESULT_TYPES.COMPENDIUM:
-        const pack = game.packs.get(documentCollection);
-        result = (await pack.getDocument(documentId)).toAnchor().outerHTML;
+      }
+      case CONST.TABLE_RESULT_TYPES.COMPENDIUM: {
+        const doc = await game.packs.get(documentCollection)?.getDocument(documentId);
+        result = getDocAnchor(doc, data);
         break;
+      }
     }
+
     row.innerHTML += `<td>${result}</td>`;
     tbody.append(row);
   }
