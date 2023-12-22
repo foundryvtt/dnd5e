@@ -598,6 +598,12 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const overallBonus = simplifyBonus(hp.bonuses.overall, rollData);
 
     hp.max = base + levelBonus + overallBonus;
+
+    if ( this.system.attributes.exhaustion >= 4 ) {
+      hp.max = Math.floor(hp.max * 0.5);
+      hp.value = Math.min(hp.value, hp.max);
+    }
+
     hp.pct = Math.clamped(hp.max ? (hp.value / hp.max) * 100 : 0, 0, 100);
   }
 

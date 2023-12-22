@@ -159,6 +159,16 @@ export default class CharacterData extends CreatureTemplate {
 
     this.details.type = raceData.type;
   }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare remaining character data.
+   */
+  prepareDerivedData() {
+    AttributesFields.prepareMovement.call(this);
+    TraitsFields.prepareResistImmune.call(this);
+  }
 }
 
 /* -------------------------------------------- */

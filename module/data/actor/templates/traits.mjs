@@ -93,4 +93,20 @@ export default class TraitsField {
       })
     }});
   }
+
+  /* -------------------------------------------- */
+  /*  Data Preparation                            */
+  /* -------------------------------------------- */
+
+  /**
+   * Modify resistances and immunities for the petrified condition.
+   */
+  static prepareResistImmune() {
+    if ( this.parent.statuses.has("petrified") ) {
+      this.traits.dr.custom = game.i18n.localize("DND5E.DamageAll");
+      this.traits.di.value.add("poison");
+      this.traits.ci.value.add("poisoned");
+      this.traits.ci.value.add("diseased");
+    }
+  }
 }
