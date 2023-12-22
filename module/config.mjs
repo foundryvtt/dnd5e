@@ -1825,7 +1825,9 @@ patchConfig("conditionTypes", "label", { since: "DnD5e 3.0", until: "DnD5e 3.2" 
  * @enum {object}
  */
 DND5E.statusEffects = {
-  bleeding: {},
+  bleeding: {
+    icon: "systems/dnd5e/icons/svg/statuses/bleeding.svg"
+  },
   burrowing: {
     name: "EFFECT.DND5E.StatusBurrowing",
     icon: "icons/svg/cave.svg"
@@ -1845,9 +1847,11 @@ DND5E.statusEffects = {
   },
   marked: {
     name: "EFFECT.DND5E.StatusMarked",
-    icon: "icons/svg/target.svg"
+    icon: "systems/dnd5e/icons/svg/statuses/marked.svg"
   },
-  silence: {},
+  silence: {
+    icon: "systems/dnd5e/icons/svg/statuses/silenced.svg"
+  },
   sleep: {
     name: "EFFECT.DND5E.StatusSleeping"
   },
