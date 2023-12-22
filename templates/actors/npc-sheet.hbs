@@ -142,7 +142,8 @@
                             {{numberFormat ability.save decimals=0 sign=true}}
                         </span>
                     </div>
-                    <a class="config-button" data-action="ability" data-tooltip="DND5E.AbilityConfigure">
+                    <a class="config-button" data-action="ability"
+                       data-tooltip="{{ localize "DND5E.AbilityConfigure" ability=ability.label }}">
                         <i class="fas fa-cog"></i>
                     </a>
                 </li>

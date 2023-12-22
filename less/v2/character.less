@@ -3,6 +3,7 @@
 /* ---------------------------------- */
 
 .dnd5e2.sheet.actor.character {
+  --dnd5e-sheet-header-right-width: 280px;
   background: transparent;
   border: 1px solid var(--dnd5e-color-gold);
 
@@ -74,7 +75,7 @@
     border: none;
     border-radius: 5px 5px 0 0;
     display: grid;
-    grid-template-columns: 65% 35%;
+    grid-template-columns: 1fr var(--dnd5e-sheet-header-right-width);
     align-items: center;
 
     input {
@@ -90,10 +91,22 @@
 
     /* Name & Class */
     > .left {
-      padding-left: 3rem;
+      padding: 0 1.5rem 0 3rem;
       display: flex;
       flex-direction: column;
       gap: .25rem;
+
+      &.optional-ability-1 {
+        padding-right: 8.5rem;
+
+        .name { font-size: var(--font-size-42) }
+      }
+
+      &.optional-ability-2 {
+        padding-right: 14rem;
+
+        .name { font-size: var(--font-size-36); }
+      }
 
       /* Name */
       .name {
@@ -110,7 +123,6 @@
       input.name {
         padding: .3125rem .75rem;
         border-radius: 6px;
-        width: 95%;
       }
 
       /* Class */
@@ -618,4 +630,114 @@
       }
     }
   }
+
+  /* ---------------------------------- */
+  /*  Ability Scores                    */
+  /* ---------------------------------- */
+
+  .ability-scores {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 546px;
+    padding: 4.75rem .75rem;
+    pointer-events: none;
+
+    > div {
+      display: flex;
+      gap: 1.375rem;
+    }
+
+    .top {
+      padding-right: calc(var(--dnd5e-sheet-header-right-width) + 49px);
+      justify-content: end;
+      min-height: 72px;
+    }
+
+    .ability-score {
+      width: 64px;
+      height: 64px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--dnd5e-font-roboto);
+      padding-top: .75rem;
+      filter: drop-shadow(0 0 6px var(--dnd5e-shadow-45));
+      pointer-events: all;
+
+      &::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: transparent url("ui/ability-score-tab.svg") no-repeat top center / contain;
+        z-index: -1;
+      }
+
+      &.flipped {
+        padding: 0 0 .5rem 0;
+        height: 72px;
+        justify-content: start;
+        gap: .125rem;
+
+        &::before { transform: scaleY(-1); }
+        .mod { padding: 0; }
+
+        .score {
+          margin: 0;
+          order: -1;
+        }
+      }
+
+      .sign { color: var(--color-text-light-6); }
+
+      .label {
+        text-transform: uppercase;
+        font-size: var(--font-size-11);
+        color: var(--dnd5e-color-gold);
+      }
+
+      .mod {
+        font-weight: bold;
+        color: var(--dnd5e-color-black);
+        font-size: var(--font-size-16);
+        padding: .1875rem 0;
+      }
+
+      .score {
+        width: 50px;
+        height: 23px;
+        padding: .25rem;
+        text-align: center;
+        font-size: var(--font-size-13);
+        color: var(--dnd5e-color-gold);
+        background: black;
+        border-radius: 3px;
+        margin-top: -.125rem;
+
+        > input {
+          padding: .25rem;
+          color: var(--dnd5e-color-gold);
+          width: 50px;
+          height: 23px;
+          border-radius: 3px;
+          border: 1px solid transparent;
+
+          &:hover, &:focus {
+            border: 1px solid var(--dnd5e-color-gold);
+            box-shadow: 0 0 6px var(--dnd5e-color-gold);
+          }
+        }
+      }
+    }
+  }
+}
+
+/* ---------------------------------- */
+/*  Edit Mode                         */
+/* ---------------------------------- */
+
+.dnd5e2.sheet.actor.character .editable {
+  .ability-scores .ability-score .score { padding: 0; }
 }

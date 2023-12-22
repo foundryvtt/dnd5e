@@ -4,6 +4,31 @@
             aria-pressed="{{ filled }}"></button>
 {{/inline}}
 
+{{#*inline "ability-score"}}
+    <div class="ability-score {{#if flipped}}flipped{{/if}}" data-ability="{{ key }}">
+        <a class="label {{ @root.rollableClass }} ability-check">{{ abbr }}</a>
+        <div class="mod">
+            {{#if @root.editable}}
+            <a class="config-button" data-action="ability"
+               data-tooltip="{{ localize "DND5E.AbilityConfigure" ability=label }}"
+               aria-label="{{ localize "DND5E.AbilityConfigure" ability=label }}">
+                <i class="fas fa-cog"></i>
+            </a>
+            {{else}}
+            <span class="sign">{{ sign }}</span>{{ mod }}
+            {{/if}}
+        </div>
+        <div class="score">
+            {{#if @root.editable}}
+            <input type="text" name="system.abilities.{{ key }}.value" value="{{ baseValue }}" placeholder="10"
+                   data-dtype="Number" class="uninput">
+            {{else}}
+            {{ value }}
+            {{/if}}
+        </div>
+    </div>
+{{/inline}}
+
 <form class="{{ cssClass }} flexcol" autocomplete="off">
 
     {{!-- TODO: Dark mode only --}}
@@ -16,7 +41,7 @@
     <header class="sheet-header">
 
         {{!-- Name & Class --}}
-        <div class="left">
+        <div class="left optional-ability-{{ abilityRows.optional }}">
 
             {{!-- Name --}}
             {{#if editable}}
@@ -148,7 +173,7 @@
                         <div class="lozenges">
 
                             {{!-- Initiative --}}
-                            <div class="lozenge {{#unless editable}}rollable{{/unless}}"
+                            <div class="lozenge {{#unless editable}}{{ rollableClass }}{{/unless}}"
                                  {{#unless editable}}data-action="rollInitiative"{{/unless}}>
                                 <div class="value">
                                     {{#if editable}}
@@ -256,7 +281,7 @@
                             {{!-- Roll Death Save --}}
                             <button type="button" data-action="rollDeathSave" data-tooltip="DND5E.DeathSaveRoll"
                                     aria-label="{{ localize "DND5E.DeathSaveRoll" }}"
-                                    class="rollable death-save unbutton"></button>
+                                    class="{{ rollableClass }} death-save unbutton"></button>
 
                             {{!-- Failures --}}
                             <div class="pips" data-prop="system.attributes.death.failure">
@@ -291,4 +316,17 @@
 
     </section>
 
+    {{!-- Ability Scores --}}
+    <div class="ability-scores">
+        <div class="top">
+            {{#each abilityRows.top}}
+                {{> ability-score flipped=true }}
+            {{/each}}
+        </div>
+        <div class="bottom">
+            {{#each abilityRows.bottom}}
+                {{> ability-score }}
+            {{/each}}
+        </div>
+    </div>
 </form>

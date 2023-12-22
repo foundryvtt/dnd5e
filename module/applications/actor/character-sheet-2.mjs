@@ -136,6 +136,19 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
       }
     });
 
+    // Ability Scores
+    context.abilityRows = Object.entries(context.abilities).reduce((obj, [k, ability]) => {
+      ability.key = k;
+      ability.abbr = CONFIG.DND5E.abilities[k]?.abbreviation ?? "";
+      ability.sign = Math.sign(ability.mod) < 0 ? "-" : "+";
+      ability.mod = Math.abs(ability.mod);
+      ability.baseValue = context.source.abilities[k]?.value ?? 0;
+      if ( obj.bottom.length > 5 ) obj.top.push(ability);
+      else obj.bottom.push(ability);
+      return obj;
+    }, { top: [], bottom: [] });
+    context.abilityRows.optional = Object.keys(CONFIG.DND5E.abilities).length - 6;
+
     return context;
   }
 
@@ -148,6 +161,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
     html.find(".meter > .hit-points").on("click", event => this._toggleEditHP(event, true));
     html.find(".meter > .hit-points > input").on("blur", event => this._toggleEditHP(event, false));
     html.find(".death-tab").on("click", this._toggleDeathTray.bind(this));
+    html.find(".rollable:is(.saving-throw, .ability-check)").on("click", this._onRollAbility.bind(this));
 
     // Edit mode only.
     if ( this._mode === this.constructor.MODES.EDIT ) {
@@ -284,5 +298,19 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
     const token = this.actor.isToken ? this.actor.token : this.actor.prototypeToken;
     const img = showTokenPortrait ? token.texture.src : this.actor.img;
     new ImagePopout(img, { title: this.actor.name, uuid: this.actor.uuid }).render(true);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle rolling an ability check or saving throw.
+   * @param {PointerEvent} event  The triggering event.
+   * @protected
+   */
+  _onRollAbility(event) {
+    const abilityId = event.currentTarget.closest("[data-ability]").dataset.ability;
+    const isSavingThrow = event.currentTarget.classList.contains("saving-throw");
+    if ( isSavingThrow ) this.actor.rollAbilitySave(abilityId, { event });
+    else this.actor.rollAbilityTest(abilityId, { event })
   }
 }
