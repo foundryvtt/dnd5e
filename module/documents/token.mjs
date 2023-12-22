@@ -105,7 +105,7 @@ export default class TokenDocument5e extends TokenDocument {
   /** @inheritdoc */
   async toggleActiveEffect(effectData, {overlay=false, active}={}) {
     if ( !this.actor || !effectData.id ) return false;
-    const id = staticID(`dnd${effectData.id}`);
+    const id = staticID(`dnd5e${effectData.id}`);
 
     // Remove existing effects that contain this effect data's primary ID as their primary ID.
     const existing = this.actor.effects.get(id);
