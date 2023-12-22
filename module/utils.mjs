@@ -22,6 +22,20 @@ export function simplifyBonus(bonus, data={}) {
 }
 
 /* -------------------------------------------- */
+/*  IDs                                         */
+/* -------------------------------------------- */
+
+/**
+ * Create an ID from the input truncating or padding the value to make it reach 16 characters.
+ * @param {string} id
+ * @returns {string}
+ */
+export function staticID(id) {
+  if ( id.length >= 16 ) return id.substring(0, 16);
+  return id.padEnd(16, "0");
+}
+
+/* -------------------------------------------- */
 /*  Object Helpers                              */
 /* -------------------------------------------- */
 
@@ -327,6 +341,12 @@ export function performPreLocalization(config) {
     _localizeObject(target, settings.keys);
     if ( settings.sort ) foundry.utils.setProperty(config, keyPath, sortObjectEntries(target, settings.keys[0]));
   }
+
+  // Localize & sort status effects
+  CONFIG.statusEffects.forEach(s => s.name = game.i18n.localize(s.name));
+  CONFIG.statusEffects.sort((lhs, rhs) =>
+    lhs.id === "dead" ? -1 : rhs.id === "dead" ? 1 : lhs.name.localeCompare(rhs.name)
+  );
 }
 
 /* -------------------------------------------- */

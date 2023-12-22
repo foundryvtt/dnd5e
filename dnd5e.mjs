@@ -68,8 +68,11 @@ Hooks.once("init", function() {
   // Register System Settings
   registerSystemSettings();
 
-  // Configure module art.
+  // Configure module art
   game.dnd5e.moduleArt = new ModuleArt();
+
+  // Set up status effects
+  _configureStatusEffects();
 
   // Remove honor & sanity from configuration if they aren't enabled
   if ( !game.settings.get("dnd5e", "honorScore") ) delete DND5E.abilities.hon;
@@ -158,6 +161,7 @@ Hooks.once("init", function() {
   enrichers.registerCustomEnrichers();
 });
 
+/* -------------------------------------------- */
 
 /**
  * Configure explicit lists of attributes that are trackable on the token HUD and in the combat tracker.
@@ -203,6 +207,8 @@ function _configureTrackableAttributes() {
   };
 }
 
+/* -------------------------------------------- */
+
 /**
  * Configure which attributes are available for item consumption.
  * @internal
@@ -222,6 +228,8 @@ function _configureConsumableAttributes() {
     ...Array.fromRange(Object.keys(DND5E.spellLevels).length - 1, 1).map(level => `spells.spell${level}.value`)
   ];
 }
+
+/* -------------------------------------------- */
 
 /**
  * Configure additional system fonts.
@@ -254,6 +262,26 @@ function _configureFonts() {
       ]
     }
   });
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Configure system status effects.
+ */
+function _configureStatusEffects() {
+  const addEffect = (effects, data) => {
+    effects.push(data);
+    if ( "special" in data ) CONFIG.specialStatusEffects[data.special] = data.id;
+  };
+  CONFIG.statusEffects = Object.entries(CONFIG.DND5E.statusEffects).reduce((arr, [id, data]) => {
+    const original = CONFIG.statusEffects.find(s => s.id === id);
+    addEffect(arr, foundry.utils.mergeObject(original ?? {}, { id, ...data }, { inplace: false }));
+    return arr;
+  }, []);
+  for ( const [id, {label: name, ...data}] of Object.entries(CONFIG.DND5E.conditionTypes) ) {
+    addEffect(CONFIG.statusEffects, { id, name, ...data });
+  }
 }
 
 /* -------------------------------------------- */
