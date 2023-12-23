@@ -40,7 +40,7 @@
 
             <ul class="summary flexrow">
                 <li>
-                    {{lookup config.equipmentTypes system.armor.type }}
+                    {{lookup config.equipmentTypes system.type.value }}
                 </li>
                 <li>
                     {{#if concealDetails}}
@@ -80,19 +80,19 @@
             {{!-- Equipment Type --}}
             <div class="form-group">
                 <label>{{ localize "DND5E.ItemEquipmentType" }}</label>
-                <select name="system.armor.type">
+                <select name="system.type.value">
                     <option value=""></option>
                     <optgroup label="{{ localize "DND5E.Armor" }}">
-                        {{selectOptions config.armorTypes selected=system.armor.type}}
+                        {{selectOptions config.armorTypes selected=system.type.value}}
                     </optgroup>
-                    {{selectOptions config.miscEquipmentTypes selected=system.armor.type}}
+                    {{selectOptions config.miscEquipmentTypes selected=system.type.value}}
                 </select>
             </div>
 
             <div class="form-group">
                 <label>{{ localize "DND5E.ItemEquipmentBase" }}</label>
-                <select name="system.baseItem">
-                    {{selectOptions baseItems selected=system.baseItem blank=""}}
+                <select name="system.type.baseItem">
+                    {{selectOptions baseItems selected=system.type.baseItem blank=""}}
                 </select>
             </div>
 

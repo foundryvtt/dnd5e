@@ -116,7 +116,6 @@ export async function categories(trait) {
   }
 
   if ( traitConfig.subtypes ) {
-    const keyPath = `system.${traitConfig.subtypes.keyPath}`;
     const map = CONFIG.DND5E[`${trait}ProficienciesMap`];
 
     // Merge all ID lists together
@@ -136,7 +135,7 @@ export async function categories(trait) {
       if ( !index ) continue;
 
       // Get the proper subtype, using proficiency map if needed
-      let type = foundry.utils.getProperty(index, keyPath);
+      let type = index.system.type.value;
       if ( map?.[type] ) type = map[type];
 
       // No category for this type, add at top level
@@ -269,8 +268,19 @@ export function getBaseItem(identifier, { indexOnly=false, fullItem=false }={}) 
   if ( !packObject ) return;
 
   // Build the extended index and return a promise for the data
-  const promise = packObject.getIndex({ fields: traitIndexFields() }).then(index => {
+  const fields = traitIndexFields();
+  const promise = packObject.getIndex({ fields }).then(index => {
     const store = index.reduce((obj, entry) => {
+      for ( const field of fields ) {
+        const val = foundry.utils.getProperty(entry, field);
+        if ( (field !== "system.type.value") && (val !== undefined) ) {
+          foundry.utils.setProperty(entry, "system.type.value", val);
+          foundry.utils.logCompatibilityWarning(
+            `The '${field}' property has been deprecated in favor of a standardized \`system.type.value\` property.`,
+            { since: "DnD5e 2.5", until: "DnD5e 2.7", once: true }
+          );
+        }
+      }
       obj[entry._id] = entry;
       return obj;
     }, {});
@@ -289,7 +299,7 @@ export function getBaseItem(identifier, { indexOnly=false, fullItem=false }={}) 
  * @protected
  */
 export function traitIndexFields() {
-  const fields = [];
+  const fields = ["system.type.value"];
   for ( const traitConfig of Object.values(CONFIG.DND5E.traits) ) {
     if ( !traitConfig.subtypes ) continue;
     fields.push(`system.${traitConfig.subtypes.keyPath}`);

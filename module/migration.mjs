@@ -256,7 +256,7 @@ export const migrateArmorClass = async function(pack) {
 
       // CASE 1: Armor is equipped
       const hasArmorEquipped = actor.itemTypes.equipment.some(e => {
-        return armor.has(e.system.armor?.type) && e.system.equipped;
+        return armor.has(e.system.type.value) && e.system.equipped;
       });
       if ( hasArmorEquipped ) update["system.attributes.ac.calc"] = "default";
 
@@ -326,9 +326,9 @@ export const migrateActorData = function(actor, migrationData, flags={}) {
 
     // Update tool expertise.
     if ( actor.system.tools ) {
-      const hasToolProf = itemData.system.baseItem in actor.system.tools;
+      const hasToolProf = itemData.system.type.baseItem in actor.system.tools;
       if ( (itemData.type === "tool") && (itemData.system.proficient > 1) && hasToolProf ) {
-        updateData[`system.tools.${itemData.system.baseItem}.value`] = itemData.system.proficient;
+        updateData[`system.tools.${itemData.system.type.baseItem}.value`] = itemData.system.proficient;
       }
     }
 
