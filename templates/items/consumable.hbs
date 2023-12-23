@@ -16,7 +16,7 @@
 
             <ul class="summary flexrow">
                 <li>
-                    {{lookup config.consumableTypes system.consumableType }}
+                    {{lookup config.consumableTypes system.type.value }}
                 </li>
                 <li>
                     <select name="system.rarity">
@@ -50,8 +50,8 @@
             {{!-- Consumable Type --}}
             <div class="form-group">
                 <label>{{ localize "DND5E.ItemConsumableType" }}</label>
-                <select name="system.consumableType">
-                    {{selectOptions config.consumableTypes selected=system.consumableType}}
+                <select name="system.type.value">
+                    {{selectOptions config.consumableTypes selected=system.type.value}}
                 </select>
             </div>
 
@@ -73,7 +73,7 @@
                 </label>
             </div>
 
-            {{#if (eq system.consumableType "ammo")}}
+            {{#if (eq system.type.value "ammo")}}
             {{!-- Consumable Properties --}}
             <div class="form-group stacked weapon-properties">
                 <label>{{ localize "DND5E.ItemAmmoProperties" }}</label>

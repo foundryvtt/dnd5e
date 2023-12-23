@@ -341,7 +341,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    */
   get areEffectsSuppressed() {
     const requireEquipped = (this.type !== "consumable")
-      || ["rod", "trinket", "wand"].includes(this.system.consumableType);
+      || ["rod", "trinket", "wand"].includes(this.system.type.value);
     if ( requireEquipped && (this.system.equipped === false) ) return true;
     return this.system.attunement === CONFIG.DND5E.attunementTypes.REQUIRED;
   }
@@ -674,7 +674,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       const ammoItemQuantity = ammo.system.quantity;
       const ammoCanBeConsumed = ammoItemQuantity && (ammoItemQuantity - (this.system.consume.amount ?? 0) >= 0);
       const ammoItemAttackBonus = ammo.system.attackBonus;
-      const ammoIsTypeConsumable = (ammo.type === "consumable") && (ammo.system.consumableType === "ammo");
+      const ammoIsTypeConsumable = (ammo.type === "consumable") && (ammo.system.type.value === "ammo");
       if ( ammoCanBeConsumed && ammoItemAttackBonus && ammoIsTypeConsumable ) {
         parts.push("@ammo");
         rollData.ammo = ammoItemAttackBonus;
@@ -1684,7 +1684,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    */
   async rollToolCheck(options={}) {
     if ( this.type !== "tool" ) throw new Error("Wrong item type!");
-    return this.actor?.rollToolCheck(this.system.baseItem, {
+    return this.actor?.rollToolCheck(this.system.type.baseItem, {
       ability: this.system.ability,
       bonus: this.system.bonus,
       prof: this.system.prof,
