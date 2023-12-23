@@ -6,6 +6,7 @@ import EquippableItemTemplate from "./templates/equippable-item.mjs";
 import ItemDescriptionTemplate from "./templates/item-description.mjs";
 import ItemTypeTemplate from "./templates/item-type.mjs";
 import PhysicalItemTemplate from "./templates/physical-item.mjs";
+import ItemTypeField from "./fields/item-type-field.mjs";
 
 /**
  * Data definition for Consumable items.
@@ -22,15 +23,10 @@ import PhysicalItemTemplate from "./templates/physical-item.mjs";
 export default class ConsumableData extends SystemDataModel.mixin(
   ItemDescriptionTemplate, ItemTypeTemplate, PhysicalItemTemplate, EquippableItemTemplate, ActivatedEffectTemplate, ActionTemplate
 ) {
-  /**
-   * Default value for the `system.type.value` property.
-   * @type {string}
-   */
-  static _defaultSystemType = "potion";
-
   /** @inheritdoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
+      type: new ItemTypeField({ value: "potion" }, { label: "DND5E.ItemConsumableType" }),
       properties: new MappingField(new foundry.data.fields.BooleanField(), {
         required: false, label: "DND5E.ItemAmmoProperties"
       }),

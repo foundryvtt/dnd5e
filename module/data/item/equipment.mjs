@@ -6,6 +6,7 @@ import ItemDescriptionTemplate from "./templates/item-description.mjs";
 import ItemTypeTemplate from "./templates/item-type.mjs";
 import PhysicalItemTemplate from "./templates/physical-item.mjs";
 import MountableTemplate from "./templates/mountable.mjs";
+import ItemTypeField from "./fields/item-type-field.mjs";
 
 /**
  * Data definition for Equipment items.
@@ -32,15 +33,10 @@ export default class EquipmentData extends SystemDataModel.mixin(
   ItemDescriptionTemplate, ItemTypeTemplate, PhysicalItemTemplate, EquippableItemTemplate,
   ActivatedEffectTemplate, ActionTemplate, MountableTemplate
 ) {
-  /**
-   * Default value for the `system.type.value` property.
-   * @type {string}
-   */
-  static _defaultSystemType = "light";
-
   /** @inheritdoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
+      type: new ItemTypeField({ value: "light" }, { label: "DND5E.ItemEquipmentType" }),
       armor: new foundry.data.fields.SchemaField({
         value: new foundry.data.fields.NumberField({required: true, integer: true, min: 0, label: "DND5E.ArmorClass"}),
         dex: new foundry.data.fields.NumberField({required: true, integer: true, label: "DND5E.ItemEquipmentDexMod"})

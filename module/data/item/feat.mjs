@@ -3,6 +3,7 @@ import ActionTemplate from "./templates/action.mjs";
 import ActivatedEffectTemplate from "./templates/activated-effect.mjs";
 import ItemDescriptionTemplate from "./templates/item-description.mjs";
 import ItemTypeTemplate from "./templates/item-type.mjs";
+import ItemTypeField from "./fields/item-type-field.mjs";
 
 /**
  * Data definition for Feature items.
@@ -22,6 +23,7 @@ export default class FeatData extends SystemDataModel.mixin(
   /** @inheritdoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
+      type: new ItemTypeField({}, { label: "DND5E.ItemFeatureType" }),
       requirements: new foundry.data.fields.StringField({required: true, nullable: true, label: "DND5E.Requirements"}),
       recharge: new foundry.data.fields.SchemaField({
         value: new foundry.data.fields.NumberField({

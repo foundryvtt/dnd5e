@@ -10,16 +10,6 @@ import SystemDataModel from "../../abstract.mjs";
  * @mixin
  */
 export default class ItemTypeTemplate extends SystemDataModel {
-  /** @inheritdoc */
-  static defineSchema() {
-    return {
-      type: new foundry.data.fields.SchemaField({
-        value: new foundry.data.fields.StringField({required: true, blank: true, initial: this._defaultSystemType ?? "", label: "DND5E.Type"}),
-        subtype: new foundry.data.fields.StringField({required: true, blank: true, label: "DND5E.Subtype"}),
-        baseItem: new foundry.data.fields.StringField({required: true, blank: true, label: "DND5E.BaseItem"})
-      })
-    };
-  }
 
   /* -------------------------------------------- */
   /*  Migrations                                  */

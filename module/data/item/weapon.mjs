@@ -7,6 +7,7 @@ import ItemDescriptionTemplate from "./templates/item-description.mjs";
 import PhysicalItemTemplate from "./templates/physical-item.mjs";
 import ItemTypeTemplate from "./templates/item-type.mjs";
 import MountableTemplate from "./templates/mountable.mjs";
+import ItemTypeField from "./fields/item-type-field.mjs";
 
 /**
  * Data definition for Weapon items.
@@ -25,15 +26,10 @@ export default class WeaponData extends SystemDataModel.mixin(
   ItemDescriptionTemplate, ItemTypeTemplate, PhysicalItemTemplate, EquippableItemTemplate,
   ActivatedEffectTemplate, ActionTemplate, MountableTemplate
 ) {
-  /**
-   * Default value for the `system.type.value` property.
-   * @type {string}
-   */
-  static _defaultSystemType = "simpleM";
-
   /** @inheritdoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
+      type: new ItemTypeField({ value: "simpleM" }, { label: "DND5E.ItemWeaponType" }),
       properties: new MappingField(new foundry.data.fields.BooleanField(), {
         required: true, initialKeys: CONFIG.DND5E.weaponProperties, label: "DND5E.ItemWeaponProperties"
       }),

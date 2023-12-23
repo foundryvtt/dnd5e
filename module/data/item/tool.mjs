@@ -4,6 +4,7 @@ import EquippableItemTemplate from "./templates/equippable-item.mjs";
 import ItemDescriptionTemplate from "./templates/item-description.mjs";
 import ItemTypeTemplate from "./templates/item-type.mjs";
 import PhysicalItemTemplate from "./templates/physical-item.mjs";
+import ItemTypeField from "./fields/item-type-field.mjs";
 
 /**
  * Data definition for Tool items.
@@ -23,6 +24,7 @@ export default class ToolData extends SystemDataModel.mixin(
   /** @inheritdoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
+      type: new ItemTypeField(),
       ability: new foundry.data.fields.StringField({
         required: true, blank: true, label: "DND5E.DefaultAbilityCheck"
       }),

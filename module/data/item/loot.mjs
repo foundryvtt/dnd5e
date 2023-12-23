@@ -2,6 +2,7 @@ import SystemDataModel from "../abstract.mjs";
 import ItemDescriptionTemplate from "./templates/item-description.mjs";
 import ItemTypeTemplate from "./templates/item-type.mjs";
 import PhysicalItemTemplate from "./templates/physical-item.mjs";
+import ItemTypeField from "./fields/item-type-field.mjs";
 
 /**
  * Data definition for Loot items.
@@ -12,6 +13,13 @@ import PhysicalItemTemplate from "./templates/physical-item.mjs";
 export default class LootData extends SystemDataModel.mixin(
   ItemDescriptionTemplate, ItemTypeTemplate, PhysicalItemTemplate
 ) {
+  /** @inheritdoc */
+  static defineSchema() {
+    return this.mergeSchema(super.defineSchema(), {
+      type: new ItemTypeField({}, {label: "DND5E.ItemLootType"})
+    });
+  }
+
   /* -------------------------------------------- */
   /*  Getters                                     */
   /* -------------------------------------------- */
