@@ -64,6 +64,8 @@ export default class AttributesFields {
   }
 
   /* -------------------------------------------- */
+  /*  Data Migration                              */
+  /* -------------------------------------------- */
 
   /**
    * Migrate the old init.value and incorporate it into init.bonus.
@@ -75,5 +77,23 @@ export default class AttributesFields {
     if ( !init?.value || (typeof init?.bonus === "string") ) return;
     if ( init.bonus ) init.bonus += init.value < 0 ? ` - ${init.value * -1}` : ` + ${init.value}`;
     else init.bonus = `${init.value}`;
+  }
+
+  /* -------------------------------------------- */
+  /*  Data Preparation                            */
+  /* -------------------------------------------- */
+
+  /**
+   * Modify movement speeds taking exhaustion and any other conditions into account.
+   */
+  static prepareMovement() {
+    const noMovement = new Set(["grappled", "paralyzed", "petrified", "restrained", "stunned", "unconscious"])
+      .intersection(this.parent.statuses).size || (this.attributes.exhaustion >= 5);
+    const halfMovement = this.parent.statuses.has("prone") || (this.attributes.exhaustion >= 2);
+    if ( !noMovement && !halfMovement ) return;
+    Object.keys(CONFIG.DND5E.movementTypes).forEach(k => {
+      if ( (this.parent.statuses.has("prone") && (k !== "walk")) || noMovement ) this.attributes.movement[k] = 0;
+      else this.attributes.movement[k] = Math.floor(this.attributes.movement[k] * 0.5);
+    });
   }
 }
