@@ -1,6 +1,7 @@
 {{#*inline "prof-entry"}}
     <li data-key="{{ @key }}" data-ability="{{ key }}">
-        <proficiency-cycle type="skill" name="{{ path }}.value" value="{{ value }}" data-tooltip="{{ hover }}"
+        <proficiency-cycle type="skill" name="{{ path }}.value" data-tooltip="{{ hover }}"
+                           value="{{#if @root.editable}}{{ baseValue }}{{else}}{{ value }}{{/if}}"
                            aria-label="{{ localize hover }}" {{disabled (not @root.editable)}}></proficiency-cycle>
         {{#if hasAbility}}
         {{#if @root.editable}}

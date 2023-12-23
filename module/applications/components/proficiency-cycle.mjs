@@ -9,11 +9,7 @@ export default class ProficiencyCycleElement extends HTMLElement {
     this.#controller = new AbortController();
     this.#internals = this.attachInternals();
     this.#internals.role = "spinbutton";
-    this.#shadowRoot = this.attachShadow({ mode: "open", delegatesFocus: true });
-
-    this.#disabled = this.hasAttribute("disabled");
-    this.#name = this.getAttribute("name");
-    this.type = this.getAttribute("type") ?? "ability";
+    this.#shadowRoot = this.attachShadow({ mode: "open" });
     this.#value = Number(this.getAttribute("value") ?? 0);
   }
 
@@ -52,11 +48,17 @@ export default class ProficiencyCycleElement extends HTMLElement {
    * Is the input disabled?
    * @type {boolean}
    */
-  #disabled;
+  get disabled() { return this.hasAttribute("disabled"); }
 
-  get disabled() { return this.#disabled; }
-
-  set disabled(value) { this.#disabled = value; }
+  set disabled(value) {
+    if ( value ) {
+      this.setAttribute("disabled", "");
+      this.#shadowRoot.querySelector("input")?.setAttribute("disabled", "");
+    } else {
+      this.removeAttribute("disabled");
+      this.#shadowRoot.querySelector("input")?.removeAttribute("disabled");
+    }
+  }
 
   /* -------------------------------------------- */
 
@@ -64,28 +66,24 @@ export default class ProficiencyCycleElement extends HTMLElement {
    * The name of the toggle.
    * @type {string}
    */
-  #name;
+  get name() { return this.getAttribute("name"); }
 
-  get name() { return this.#name; }
-
-  set name(value) { this.#name = value; }
+  set name(value) { this.setAttribute("name"); }
 
   /* -------------------------------------------- */
 
   /**
-   * Type of proficiency represented by this control (e.g. "ability" or "skills").
+   * Type of proficiency represented by this control (e.g. "ability" or "skill").
    * @type {"ability"|"skill"}
    */
-  #type;
-
-  get type() { return this.#type; }
+  get type() { return this.getAttribute("type") ?? "ability"; }
 
   set type(value) {
     if ( !["ability", "skill"].includes(value) ) throw new Error("Type must be 'ability' or 'skill'.");
-    this.#type = value;
+    this.setAttribute("type", value);
     this.#internals.ariaValueMin = 0;
-    this.#internals.ariaValueMax = this.#type === "ability" ? 1 : 2;
-    this.#internals.ariaValueStep = this.#type === "ability" ? 1 : 0.5;
+    this.#internals.ariaValueMax = value === "ability" ? 1 : 2;
+    this.#internals.ariaValueStep = value === "ability" ? 1 : 0.5;
   }
 
   /* -------------------------------------------- */
@@ -95,7 +93,7 @@ export default class ProficiencyCycleElement extends HTMLElement {
    * @type {number[]}
    */
   get validValues() {
-    return this.#type === "ability" ? [0, 1] : [0, 1, .5, 2];
+    return this.type === "ability" ? [0, 1] : [0, 1, .5, 2];
   }
 
   /* -------------------------------------------- */
@@ -211,8 +209,7 @@ export default class ProficiencyCycleElement extends HTMLElement {
 
     const input = document.createElement("input");
     input.setAttribute("type", "number");
-    input.setAttribute("autofocus", true);
-    if ( this.#disabled ) input.setAttribute("disabled", true);
+    if ( this.disabled ) input.setAttribute("disabled", "");
     div.appendChild(input);
   }
 
@@ -243,8 +240,9 @@ export default class ProficiencyCycleElement extends HTMLElement {
    * @param {boolean} [up=true]  Should the value step up or down?
    */
   step(up=true) {
-    const idx = this.validValues.indexOf(this.value);
-    this.value = this.validValues[(idx + (up ? 1 : this.validValues.length - 1)) % this.validValues.length];
+    const levels = this.validValues;
+    const idx = levels.indexOf(this.value);
+    this.value = levels[(idx + (up ? 1 : levels.length - 1)) % levels.length];
     this.dispatchEvent(new Event("change"));
   }
 
@@ -266,6 +264,6 @@ export default class ProficiencyCycleElement extends HTMLElement {
    */
   #onClick(event) {
     event.preventDefault();
-    this.step(event.type === "click");
+    this.step((event.type === "click") && (event.button !== 2));
   }
 }
