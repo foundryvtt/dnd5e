@@ -529,7 +529,7 @@
         },
         "armor": {
           "value": 18,
-          "type": "light",
+          "type": "heavy",
           "dex": null
         },
         "hp": {
@@ -538,7 +538,7 @@
           "dt": null,
           "conditions": ""
         },
-        "baseItem": "",
+        "baseItem": "plate",
         "speed": {
           "value": null,
           "conditions": ""
@@ -758,7 +758,7 @@
           "conditions": ""
         },
         "weaponType": "martialM",
-        "baseItem": "",
+        "baseItem": "greatsword",
         "properties": {
           "hvy": true,
           "two": true,
@@ -890,7 +890,7 @@
           "conditions": ""
         },
         "weaponType": "martialR",
-        "baseItem": "",
+        "baseItem": "heavycrossbow",
         "properties": {
           "amm": true,
           "hvy": true,

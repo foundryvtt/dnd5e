@@ -27,6 +27,7 @@
       "units": ""
     },
     "cover": null,
+    "crewed": false,
     "target": {
       "value": null,
       "width": null,
@@ -79,45 +80,15 @@
   },
   "flags": {},
   "img": "icons/equipment/chest/breastplate-layered-steel.webp",
-  "effects": [
-    {
-      "_id": "Dk95lqbXXCUlefZW",
-      "changes": [
-        {
-          "key": "system.traits.armorProf.value",
-          "mode": 2,
-          "value": "hvy",
-          "priority": null
-        }
-      ],
-      "disabled": false,
-      "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
-      },
-      "icon": "icons/equipment/chest/breastplate-layered-steel.webp",
-      "label": "Heavy Armor Proficiency",
-      "origin": "Item.68bYIOvx6rIqnlOW",
-      "transfer": true,
-      "flags": {},
-      "tint": null,
-      "sort": 0,
-      "_key": "!items.effects!68bYIOvx6rIqnlOW.Dk95lqbXXCUlefZW"
-    }
-  ],
+  "effects": [],
   "folder": null,
   "sort": 0,
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.1.0",
-    "coreVersion": "10.291",
+    "systemVersion": "2.4.1",
+    "coreVersion": "10.312",
     "createdTime": 1661787234335,
-    "modifiedTime": 1672334368160,
+    "modifiedTime": 1701456028655,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!68bYIOvx6rIqnlOW"

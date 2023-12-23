@@ -8,7 +8,7 @@ Please ensure there is an open issue about whatever contribution you are submitt
 
 Cloning this repository and either placing it in or symlinking it to your `Data/systems/dnd5e` user data directory is all that is necessary to run this within Foundry VTT. However, if you want to make changes to either the LESS stylesheets or the compendia, there are some developer tools which will make your life easier.
 
-This repository leverages [gulp](https://gulpjs.com/) to run automated build tasks. If your system supports `npm`, you can run the following commands from the root of the project to get set up:
+If your system supports `npm`, you can run the following commands from the root of the project to get set up:
 
 ### `npm install`
 
@@ -41,7 +41,6 @@ Compile the source JSON files into compendium packs.
 
 ```text
 npm run build:db
-gulp compilePacks
 ```
 
 - `npm run build:db` - Compile all JSON files into their NEDB files.
@@ -53,7 +52,6 @@ Extract the contents of compendium packs to JSON files.
 
 ```text
 npm run build:json
-gulp extractPacks
 ```
 
 - `npm run build:json` - Extract all compendium NEDB files into JSON files.
@@ -66,7 +64,6 @@ Cleans and formats source JSON files, removing unnecessary permissions and flags
 
 ```text
 npm run build:clean
-gulp extractPacks
 ```
 
 - `npm run build:clean` - Clean all source JSON files.

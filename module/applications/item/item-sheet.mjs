@@ -608,6 +608,14 @@ export default class ItemSheet5e extends ItemSheet {
 
   /* -------------------------------------------- */
 
+  /** @inheritDoc */
+  _canDragDrop(selector) {
+    if ( selector === ".advancement" ) return this.item.testUserPermission(game.user, "OWNER");
+    return super._canDragDrop(selector);
+  }
+
+  /* -------------------------------------------- */
+
   /** @inheritdoc */
   _onDragStart(event) {
     const li = event.currentTarget;
