@@ -33,7 +33,7 @@
     <div class="left">
 
         {{!-- Skills --}}
-        <div class="skills filigree-box">
+        <filigree-box class="skills">
             <h3>
                 <i class="fas fa-briefcase"></i>
                 <span class="roboto-upper">{{ localize "DND5E.Skills" }}</span>
@@ -46,10 +46,10 @@
                 {{/with}}
                 {{/each}}
             </ul>
-        </div>
+        </filigree-box>
 
         {{!-- Tools --}}
-        <div class="tools filigree-box">
+        <filigree-box class="tools">
             {{#if editable}}
             <a class="trait-selector" data-trait="tool"
                data-tooltip="{{ localize "DND5E.TraitConfig" trait=(localize "DND5E.TraitToolProf") }}"
@@ -67,7 +67,7 @@
                         type="tool" hasAbility=true hasPassive=false roll="tool-name" }}
                 {{/each}}
             </ul>
-        </div>
+        </filigree-box>
 
     </div>
 
