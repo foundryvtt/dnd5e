@@ -38,10 +38,9 @@ export default class ItemTypeTemplate extends SystemDataModel {
    * @param {object} source  The candidate source data from which the model will be constructed.
    */
   static #migrateType(source) {
-    if ( !source.type ) source.type = { value: "", subtype: "", baseItem: "" };
+    if ( foundry.utils.getType(source.type) === "Object" ) return;
     const oldType = source.consumableType ?? source.armor?.type ?? source.toolType ?? source.weaponType;
-    if ( ![undefined, null].includes(oldType) ) source.type.value = oldType;
-    const oldBase = source.baseItem;
-    if ( ![undefined, null].includes(oldBase) ) source.type.baseItem = oldBase;
+    if ( (oldType !== null) && (oldType !== undefined) ) foundry.utils.setProperty(source, "type.value", oldType);
+    if ( "baseItem" in source ) foundry.utils.setProperty(source, "type.baseItem", source.baseItem);
   }
 }
