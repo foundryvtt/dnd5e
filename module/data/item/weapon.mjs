@@ -25,6 +25,12 @@ export default class WeaponData extends SystemDataModel.mixin(
   ItemDescriptionTemplate, ItemTypeTemplate, PhysicalItemTemplate, EquippableItemTemplate,
   ActivatedEffectTemplate, ActionTemplate, MountableTemplate
 ) {
+  /**
+   * Default value for the `system.type.value` property.
+   * @type {string}
+   */
+  static _defaultSystemType = "simpleM";
+
   /** @inheritdoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {

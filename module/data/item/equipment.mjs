@@ -32,6 +32,12 @@ export default class EquipmentData extends SystemDataModel.mixin(
   ItemDescriptionTemplate, ItemTypeTemplate, PhysicalItemTemplate, EquippableItemTemplate,
   ActivatedEffectTemplate, ActionTemplate, MountableTemplate
 ) {
+  /**
+   * Default value for the `system.type.value` property.
+   * @type {string}
+   */
+  static _defaultSystemType = "light";
+
   /** @inheritdoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {

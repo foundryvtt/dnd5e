@@ -22,6 +22,12 @@ import PhysicalItemTemplate from "./templates/physical-item.mjs";
 export default class ConsumableData extends SystemDataModel.mixin(
   ItemDescriptionTemplate, ItemTypeTemplate, PhysicalItemTemplate, EquippableItemTemplate, ActivatedEffectTemplate, ActionTemplate
 ) {
+  /**
+   * Default value for the `system.type.value` property.
+   * @type {string}
+   */
+  static _defaultSystemType = "potion";
+
   /** @inheritdoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
