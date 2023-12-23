@@ -104,7 +104,8 @@
         <div class="underlays"></div>
 
         {{!-- Main Content --}}
-        <div class="content">
+        <div class="scrollable">
+        <div class="main-content">
 
             {{!-- Sidebar --}}
             <div class="sidebar">
@@ -306,12 +307,22 @@
 
                 {{!-- Favorites --}}
                 <div class="favorites">
-                    <h3>
+                    <h3 class="icon">
                         <i class="fas fa-star"></i>
                         <span class="roboto-upper">{{ localize "DND5E.Favorites" }}</span>
                     </h3>
                 </div>
             </div>
+
+            {{!-- Tabbed Content --}}
+            <section class="tab-body">
+
+                {{!-- Character Details --}}
+                {{> "dnd5e.character-details" }}
+
+            </section>
+
+        </div>
         </div>
 
     </section>

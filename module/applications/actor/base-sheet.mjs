@@ -167,6 +167,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
         entry.hover = CONFIG.DND5E.proficiencyLevels[entry.value];
         entry.label = prop === "skills" ? CONFIG.DND5E.skills[key]?.label : Trait.keyLabel(key, {trait: "tool"});
         entry.baseValue = source.system[prop]?.[key]?.value ?? 0;
+        entry.baseAbility = source.system[prop]?.[key]?.ability ?? "int";
       }
     });
 

@@ -8,6 +8,8 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ["dnd5e2", "sheet", "actor", "character"],
+      tabs: [{ navSelector: ".tabs", contentSelector: ".tab-body", initial: "details" }],
+      scrollY: [".main-content"],
       width: 800,
       height: 1000,
       resizable: true
@@ -21,6 +23,17 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
   static MODES = {
     PLAY: 1,
     EDIT: 2
+  };
+
+  /**
+   * Proficiency class names.
+   * @enum {string}
+   */
+  static PROFICIENCY_CLASSES = {
+    "0": "none",
+    "0.5": "half",
+    "1": "full",
+    "2": "double"
   };
 
   /**
@@ -149,6 +162,13 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
     }, { top: [], bottom: [] });
     context.abilityRows.optional = Object.keys(CONFIG.DND5E.abilities).length - 6;
 
+    // Skills & Tools
+    for ( const entry of Object.values(context.skills).concat(Object.values(context.tools)) ) {
+      entry.class = this.constructor.PROFICIENCY_CLASSES[context.editable ? entry.baseValue : entry.value];
+      entry.sign = Math.sign(entry.total) < 0 ? "-" : "+";
+      entry.mod = Math.abs(entry.total);
+    }
+
     return context;
   }
 
@@ -165,7 +185,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
 
     // Edit mode only.
     if ( this._mode === this.constructor.MODES.EDIT ) {
-      // In future PR.
+      html.find(".proficiency-toggle").on("click contextmenu", this._onCycleProficiency.bind(this));
     }
 
     // Play mode only.
@@ -285,6 +305,23 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
     this._deathTrayOpen = tray.classList.contains("open");
     target.dataset.tooltip = `DND5E.DeathSave${this._deathTrayOpen ? "Hide" : "Show"}`
     target.setAttribute("aria-label", game.i18n.localize(target.dataset.tooltip));
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle editing skill & tools proficiencies.
+   * @param {PointerEvent} event  The triggering event.
+   * @protected
+   */
+  _onCycleProficiency(event) {
+    const isAbility = event.currentTarget.closest("[data-ability]").dataset.ability;
+    const path = `${event.currentTarget.dataset.path}.${isAbility ? "proficient" : "value"}`;
+    const value = foundry.utils.getProperty(this.actor._source, path);
+    const levels = isAbility ? [0, 1] : [0, 1, .5, 2];
+    const idx = levels.indexOf(value);
+    const newValue = levels[(idx + (event.button === 0 ? 1 : levels.length - 1)) % levels.length];
+    return this.actor.update({ [path]: newValue });
   }
 
   /* -------------------------------------------- */
