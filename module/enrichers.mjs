@@ -336,7 +336,7 @@ async function enrichSave(config, label, options) {
 
 async function enrichItem(config, label) {
   const givenItem = config.values.join(' ');
-  const itemUuidMatch = itemName.match(/^Actor\.\w{16}\.Item\.\w{16}$/);
+  const itemUuidMatch = givenItem.match(/^Actor\.\w{16}\.Item\.\w{16}$/);
     if (itemUuidMatch) {
       const actorId = itemUuidMatch[0].split('.')[1];
       const itemId = itemUuidMatch[0].split('.')[3];
