@@ -315,7 +315,7 @@ async function enrichSave(config, label, options) {
  * @param {string[]} config            Configuration data.
  * @param {string} [label]             Optional label to replace default text.
  *
- * @example Use a Heavy Crossbow:
+ * @example Use an item from a Name:
  * ```[[/item Heavy Crossbow]]```
  * becomes
  * ```html
@@ -323,14 +323,31 @@ async function enrichSave(config, label, options) {
  *   <i class="fa-solid fa-dice-d20"></i> Heavy Crossbow
  * </a>
  * ```
+ *
+ * @example Use an Item from a UUID:
+ * ```[[/item Actor.M4eX4Mu5IHCr3TMf.Item.amUUCouL69OK1GZU]]```
+ * becomes
+ * ```html
+ * <a class="roll-action" data-type="item">
+ *   <i class="fa-solid fa-dice-d20"></i> Bite
+ * </a>
+ * ```
 */
 
 async function enrichItem(config, label) {
   const givenItem = config.values.join(' ');
+  const itemUuidMatch = itemName.match(/^Actor\.\w{16}\.Item\.\w{16}$/);
+    if (itemUuidMatch) {
+      const actorId = itemUuidMatch[0].split('.')[1];
+      const itemId = itemUuidMatch[0].split('.')[3];
+      const itemDocument = await fromUuid(givenItem);
+      if ( !label ) {
+        label = itemDocument.name};
+    return createRollLink(label, {type: "item", rollItemActor: actorId, rollItemId: itemId })
+    };
   if ( !label ) {
     label = givenItem;}
-
-    return createRollLink(label, { type: "item", rollItem: givenItem, ...config });
+    return createRollLink(label, { type: "item", rollItemName: givenItem });
   }
 
 /* -------------------------------------------- */
@@ -402,7 +419,7 @@ function rollAction(event) {
   const speaker = ChatMessage.implementation.getSpeaker();
   if ( speaker.token ) actor = game.actors.tokens[speaker.token];
   actor ??= game.actors.get(speaker.actor);
-  if ( !actor && (type !== "damage") ) {
+  if ( !actor && (type !== "damage" && type !== "item") ) {
     ui.notifications.warn(game.i18n.localize("EDITOR.DND5E.Inline.NoActorWarning"));
     return;
   }
@@ -421,7 +438,11 @@ function rollAction(event) {
       options.ability = ability;
       return actor.rollToolCheck(tool, options);
     case "item":
-      return dnd5e.documents.macro.rollItem(target.dataset.rollItem);
+      if (target.dataset.rollItemActor) {
+      return game.actors.get(target.dataset.rollItemActor).items.get(target.dataset.rollItemId).use();
+    } else if (target.dataset.rollItemName) {
+      return dnd5e.documents.macro.rollItem(target.dataset.rollItemName);
+    }    
     default:
       return console.warn(`DnD5e | Unknown roll type ${type} provided.`);
   }
