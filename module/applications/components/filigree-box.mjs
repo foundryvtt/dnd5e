@@ -104,7 +104,7 @@ export default class FiligreeBoxElement extends HTMLElement {
    */
   #buildSVG(path, ...positions) {
     const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-    ["filigree", path, ...positions].forEach(p => svg.classList.add(p));
+    svg.classList.add("filigree", path, ...positions);
     svg.innerHTML = `<path d="${FiligreeBoxElement.svgPaths[path]}" />`;
     svg.setAttribute("viewBox", `0 0 ${path === "block" ? 10 : 25} ${path === "inline" ? 10 : 30}`);
     svg.setAttribute("preserveAspectRatio", "none");
