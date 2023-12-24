@@ -703,11 +703,6 @@
         color: var(--color-text-light-6);
       }
 
-      .proficiency-toggle {
-        cursor: default;
-        align-self: center;
-      }
-
       .ability {
         font-size: var(--font-size-12);
         color: var(--color-text-dark-5);
@@ -858,10 +853,5 @@
 
   :is(.skills, .tools) {
     > ul > li { gap: .25rem; }
-    .proficiency-toggle {
-      cursor: pointer;
-      &::before { border-color: var(--dnd5e-color-blue); }
-      &.full::before, &.double::after, &.half::after { background-color: var(--dnd5e-color-blue); }
-    }
   }
 }
