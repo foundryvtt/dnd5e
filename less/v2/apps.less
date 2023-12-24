@@ -77,33 +77,6 @@
     }
   }
 
-  .filigree-box {
-    --chamfer: 12px;
-    position: relative;
-    filter: drop-shadow(0 0 12px var(--dnd5e-shadow-15));
-    min-height: 56px;
-
-    &::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      z-index: -1;
-      background: var(--dnd5e-color-card);
-      border: 4px solid var(--dnd5e-color-gold);
-      border-image: url("ui/filigree-border.webp") 28 / 7;
-      clip-path: polygon(
-        var(--chamfer) 0,
-        calc(100% - var(--chamfer)) 0,
-        100% var(--chamfer),
-        100% calc(100% - var(--chamfer)),
-        calc(100% - var(--chamfer)) 100%,
-        var(--chamfer) 100%,
-        0 calc(100% - var(--chamfer)),
-        0 var(--chamfer)
-      );
-    }
-  }
-
   proficiency-cycle {
     width: 15px;
     height: 14px;
