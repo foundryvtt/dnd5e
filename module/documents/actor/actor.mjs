@@ -926,29 +926,29 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * Description of a source of damage.
    *
    * @typedef {object} DamageDescription
-   * @property {number} value - Amount of damage.
-   * @property {string} type - Type of damage.
+   * @property {number} value  Amount of damage.
+   * @property {string} type   Type of damage.
    */
 
   /**
    * Options for damage application.
    *
    * @typedef {object} DamageApplicationOptions
-   * @property {number} [multiplier=1] - Amount by which to multiply all damage.
-   * @property {object|boolean} [ignore] - Set to `true` to ignore all damage modifiers. If set to an object, then
-   *                                       values can either be `true` to indicate that the all modifications of that
-   *                                       type should be ignored, or a set of specific damage types for which it should
-   *                                       be ignored.
-   * @property {boolean|Set<string>} [ignore.immunity] - Should this actor's damage immunity be ignored?
-   * @property {boolean|Set<string>} [ignore.resistance] - Should this actor's damage resistance be ignored?
-   * @property {boolean|Set<string>} [ignore.vulnerability] - Should this actor's damage vulnerability be ignored?
+   * @property {number} [multiplier=1]    Amount by which to multiply all damage.
+   * @property {object|boolean} [ignore]  Set to `true` to ignore all damage modifiers. If set to an object, then
+   *                                      values can either be `true` to indicate that the all modifications of that
+   *                                      type should be ignored, or a set of specific damage types for which it should
+   *                                      be ignored.
+   * @property {boolean|Set<string>} [ignore.immunity]       Should this actor's damage immunity be ignored?
+   * @property {boolean|Set<string>} [ignore.resistance]     Should this actor's damage resistance be ignored?
+   * @property {boolean|Set<string>} [ignore.vulnerability]  Should this actor's damage vulnerability be ignored?
    */
 
   /**
    * Apply a certain amount of damage or healing to the health pool for Actor
    * @param {DamageDescription[]|number} damages     Damages to apply.
    * @param {DamageApplicationOptions} [options={}]  Damage application options.
-   * @returns {Promise<Actor5e>}  A Promise which resolves once the damage has been applied
+   * @returns {Promise<Actor5e>}                     A Promise which resolves once the damage has been applied.
    */
   async applyDamage(damages, options={}) {
     const hp = this.system.attributes.hp;
@@ -972,7 +972,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
     /**
      * A hook event that fires before damage amount is calculated for an actor.
-     * @param {Actor5e} actor                     Actor upon whom the damage is being calculated.
+     * @param {Actor5e} actor                     The actor being damaged.
      * @param {DamageDescription[]} damages       Damage descriptions.
      * @param {DamageApplicationOptions} options  Additional damage application options.
      * @returns {boolean}                         Explicitly return `false` to prevent damage application.
@@ -991,6 +991,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       // Skip damage types with immunity
       if ( !ignore("immunity", d.type) && traits?.di?.value.has(d.type) ) return total;
 
+      // TODO: Apply type-specific damage reduction
+
       let damageMultiplier = multiplier;
 
       // TODO: Take physical damage bypasses into account when that data is included with rolls
@@ -1003,12 +1005,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
       let value = d.value * damageMultiplier;
 
-      // TODO: Apply type-specific damage reduction
-
       return total + value;
     }, 0);
-
-    // TODO: Apply overall damage reduction
 
     // Round damage down
     amount = Math.floor(amount);
@@ -1016,14 +1014,13 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const deltaTemp = amount > 0 ? Math.min(hp.temp, amount) : 0;
     const deltaHP = Math.clamped(amount - deltaTemp, hp.value - hp.max, hp.value);
     const updates = {
-      "system.attributres.hp.temp": hp.temp - deltaTemp,
+      "system.attributes.hp.temp": hp.temp - deltaTemp,
       "system.attributes.hp.value": hp.value - deltaHP
     };
-    amount = deltaTemp + deltaHP;
 
     /**
      * A hook event that fires before damage is applied to an actor.
-     * @param {Actor5e} actor                     Actor upon whom the damage is being calculated.
+     * @param {Actor5e} actor                     Actor the damage will be applied to.
      * @param {number} amount                     Amount of damage that will be applied.
      * @param {object} updates                    Distinct updates to be performed on the actor.
      * @param {DamageApplicationOptions} options  Additional damage application options.
@@ -1046,8 +1043,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
     /**
      * A hook event that fires after damage has been applied to an actor.
-     * @param {Actor5e} actor                     Actor upon whom the damage is being calculated.
-     * @param {number} amount                     Amount of damage that will be applied.
+     * @param {Actor5e} actor                     Actor that has been damaged.
+     * @param {number} amount                     Amount of damage that has been applied.
      * @param {DamageApplicationOptions} options  Additional damage application options.
      * @function dnd5e.applyDamage
      * @memberof hookEvents
