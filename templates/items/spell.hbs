@@ -70,7 +70,7 @@
                 <label>{{ localize "DND5E.SpellComponents" }}</label>
                 {{#each spellComponents as |component key|}}
                 <label class="checkbox">
-                    <input type="checkbox" name="system.components.{{key}}" {{checked (lookup ../system.components key)}}>
+                    <input type="checkbox" name="system.properties.{{key}}" {{checked (lookup ../system.properties key)}}>
                     {{component.label}}
                 </label>
                 {{/each}}
