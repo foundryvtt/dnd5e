@@ -1,3 +1,7 @@
+import { MappingField } from "../../fields.mjs";
+
+const { NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
+
 /**
  * Shared contents of the traits schema between various actor types.
  */
@@ -19,24 +23,39 @@ export default class TraitsField {
    * @property {string} custom         Semicolon-separated list of custom traits.
    */
 
+  /**
+   * Data structure for a damage actor trait.
+   *
+   * @typedef {object} DamageModificationData
+   * @property {{[key: string]; number}} amount  Damage boost or reduction by damage type.
+   * @property {Set<string>} bypasses  Keys for physical weapon properties that cause modification to be bypassed.
+   */
+
   /* -------------------------------------------- */
 
   /**
    * Fields shared between characters, NPCs, and vehicles.
    *
    * @type {object}
-   * @property {string} size         Actor's size.
-   * @property {DamageTraitData} di  Damage immunities.
-   * @property {DamageTraitData} dr  Damage resistances.
-   * @property {DamageTraitData} dv  Damage vulnerabilities.
-   * @property {SimpleTraitData} ci  Condition immunities.
+   * @property {string} size                Actor's size.
+   * @property {DamageTraitData} di         Damage immunities.
+   * @property {DamageTraitData} dr         Damage resistances.
+   * @property {DamageTraitData} dv         Damage vulnerabilities.
+   * @property {DamageModificationData} dm  Damage modification.
+   * @property {SimpleTraitData} ci         Condition immunities.
    */
   static get common() {
     return {
-      size: new foundry.data.fields.StringField({required: true, initial: "med", label: "DND5E.Size"}),
+      size: new StringField({required: true, initial: "med", label: "DND5E.Size"}),
       di: this.makeDamageTrait({label: "DND5E.DamImm"}),
       dr: this.makeDamageTrait({label: "DND5E.DamRes"}),
       dv: this.makeDamageTrait({label: "DND5E.DamVuln"}),
+      dm: new SchemaField({
+        amount: new MappingField(new NumberField({integer: true}), {label: "DND5E.DamMod"}),
+        bypasses: new SetField(new StringField(), {
+          label: "DND5E.DamagePhysicalBypass", hint: "DND5E.DamagePhysicalBypassHint"
+        })
+      }),
       ci: this.makeSimpleTrait({label: "DND5E.ConImm"})
     };
   }
@@ -66,12 +85,12 @@ export default class TraitsField {
    * @returns {SchemaField}
    */
   static makeSimpleTrait(schemaOptions={}, {initial=[], extraFields={}}={}) {
-    return new foundry.data.fields.SchemaField({
+    return new SchemaField({
       ...extraFields,
-      value: new foundry.data.fields.SetField(
-        new foundry.data.fields.StringField(), {label: "DND5E.TraitsChosen", initial}
+      value: new SetField(
+        new StringField(), {label: "DND5E.TraitsChosen", initial}
       ),
-      custom: new foundry.data.fields.StringField({required: true, label: "DND5E.Special"})
+      custom: new StringField({required: true, label: "DND5E.Special"})
     }, schemaOptions);
   }
 
@@ -88,7 +107,7 @@ export default class TraitsField {
   static makeDamageTrait(schemaOptions={}, {initial=[], initialBypasses=[], extraFields={}}={}) {
     return this.makeSimpleTrait(schemaOptions, {initial, extraFields: {
       ...extraFields,
-      bypasses: new foundry.data.fields.SetField(new foundry.data.fields.StringField(), {
+      bypasses: new SetField(new StringField(), {
         label: "DND5E.DamagePhysicalBypass", hint: "DND5E.DamagePhysicalBypassHint", initial: initialBypasses
       })
     }});
