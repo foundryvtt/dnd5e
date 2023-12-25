@@ -12,12 +12,12 @@ import ItemDescriptionTemplate from "./templates/item-description.mjs";
  *
  * @property {number} level                      Base level of the spell.
  * @property {string} school                     Magical school to which this spell belongs.
- * @property {object} components                 General components and tags for this spell.
- * @property {boolean} components.vocal          Does this spell require vocal components?
- * @property {boolean} components.somatic        Does this spell require somatic components?
- * @property {boolean} components.material       Does this spell require material components?
- * @property {boolean} components.ritual         Can this spell be cast as a ritual?
- * @property {boolean} components.concentration  Does this spell require concentration?
+ * @property {object} properties                 General components and tags for this spell.
+ * @property {boolean} properties.vocal          Does this spell require vocal components?
+ * @property {boolean} properties.somatic        Does this spell require somatic components?
+ * @property {boolean} properties.material       Does this spell require material components?
+ * @property {boolean} properties.ritual         Can this spell be cast as a ritual?
+ * @property {boolean} properties.concentration  Does this spell require concentration?
  * @property {object} materials                  Details on material components required for this spell.
  * @property {string} materials.value            Description of the material components required for casting.
  * @property {boolean} materials.consumed        Are these material components consumed during casting?
@@ -40,7 +40,7 @@ export default class SpellData extends SystemDataModel.mixin(
         required: true, integer: true, initial: 1, min: 0, label: "DND5E.SpellLevel"
       }),
       school: new foundry.data.fields.StringField({required: true, label: "DND5E.SpellSchool"}),
-      components: new MappingField(new foundry.data.fields.BooleanField(), {
+      properties: new MappingField(new foundry.data.fields.BooleanField(), {
         required: true, label: "DND5E.SpellComponents",
         initialKeys: [...Object.keys(CONFIG.DND5E.spellComponents), ...Object.keys(CONFIG.DND5E.spellTags)]
       }),
@@ -82,13 +82,17 @@ export default class SpellData extends SystemDataModel.mixin(
 
   /**
    * Migrate the spell's component object to remove any old, non-boolean values.
+   * Migrate the component object to be 'properties' instead.
    * @param {object} source  The candidate source data from which the model will be constructed.
    */
   static #migrateComponentData(source) {
-    if ( !source.components ) return;
-    for ( const [key, value] of Object.entries(source.components) ) {
-      if ( typeof value !== "boolean" ) delete source.components[key];
+    const src = source.components;
+    if ( !src ) return;
+    for ( const [key, value] of Object.entries(src) ) {
+      if ( typeof value !== "boolean" ) delete src[key];
     }
+    source.properties = src;
+    delete source.components;
   }
 
   /* -------------------------------------------- */
