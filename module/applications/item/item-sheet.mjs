@@ -142,6 +142,7 @@ export default class ItemSheet5e extends ItemSheet {
           context.itemType = featureType.label;
           context.featureSubtypes = featureType.subtypes;
         }
+        context.featureProperties = CONFIG.DND5E.featureProperties;
         break;
       case "spell":
         context.spellComponents = {...CONFIG.DND5E.spellComponents, ...CONFIG.DND5E.spellTags};

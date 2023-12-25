@@ -2,31 +2,30 @@ import SystemDataModel from "../abstract.mjs";
 import ActionTemplate from "./templates/action.mjs";
 import ActivatedEffectTemplate from "./templates/activated-effect.mjs";
 import ItemDescriptionTemplate from "./templates/item-description.mjs";
+import ItemTypeTemplate from "./templates/item-type.mjs";
+import ItemTypeField from "./fields/item-type-field.mjs";
+
 
 /**
  * Data definition for Feature items.
  * @mixes ItemDescriptionTemplate
+ * @mixes ItemTypeTemplate
  * @mixes ActivatedEffectTemplate
  * @mixes ActionTemplate
  *
- * @property {object} type
- * @property {string} type.value         Category to which this feature belongs.
- * @property {string} type.subtype       Feature subtype according to its category.
  * @property {string} requirements       Actor details required to use this feature.
  * @property {object} recharge           Details on how a feature can roll for recharges.
  * @property {number} recharge.value     Minimum number needed to roll on a d6 to recharge this feature.
  * @property {boolean} recharge.charged  Does this feature have a charge remaining?
  */
 export default class FeatData extends SystemDataModel.mixin(
-  ItemDescriptionTemplate, ActivatedEffectTemplate, ActionTemplate
+  ItemDescriptionTemplate, ItemTypeTemplate, ActivatedEffectTemplate, ActionTemplate
 ) {
   /** @inheritdoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
-      type: new foundry.data.fields.SchemaField({
-        value: new foundry.data.fields.StringField({required: true, label: "DND5E.Type"}),
-        subtype: new foundry.data.fields.StringField({required: true, label: "DND5E.Subtype"})
-      }, {label: "DND5E.ItemFeatureType"}),
+      type: new ItemTypeField({}, { label: "DND5E.ItemFeatureType" }),
+      properties: new SetField(new foundry.data.fields.StringField()),
       requirements: new foundry.data.fields.StringField({required: true, nullable: true, label: "DND5E.Requirements"}),
       recharge: new foundry.data.fields.SchemaField({
         value: new foundry.data.fields.NumberField({

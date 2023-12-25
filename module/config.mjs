@@ -863,6 +863,22 @@ preLocalize("featureTypes.class.subtypes", { sort: true });
 /* -------------------------------------------- */
 
 /**
+ * The various properties of a feature item.
+ * @enum {object}
+ */
+DND5E.featureProperties = {
+  concentration: {
+    label: "DND5E.FeaturePropertyCon"
+  },
+  mgc: {
+    label: "DND5E.FeaturePropertyMgc"
+  }
+};
+preLocalize("featureProperties", {keys: ["label"]});
+
+/* -------------------------------------------- */
+
+/**
  * Configuration data for an item with the "loot" type.
  *
  * @typedef {object} LootTypeConfiguration
