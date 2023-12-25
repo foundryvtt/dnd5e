@@ -91,8 +91,7 @@ export default class SpellData extends SystemDataModel.mixin(
     for ( const [key, value] of Object.entries(src) ) {
       if ( typeof value !== "boolean" ) delete src[key];
     }
-    source.properties = src;
-    delete source.components;
+    if ( !("properties" in source) ) source.properties = src;
   }
 
   /* -------------------------------------------- */
