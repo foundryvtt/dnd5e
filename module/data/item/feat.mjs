@@ -4,6 +4,7 @@ import ActivatedEffectTemplate from "./templates/activated-effect.mjs";
 import ItemDescriptionTemplate from "./templates/item-description.mjs";
 import ItemTypeTemplate from "./templates/item-type.mjs";
 import ItemTypeField from "./fields/item-type-field.mjs";
+import {MappingField} from "../fields.mjs";
 
 /**
  * Data definition for Feature items.
@@ -12,10 +13,13 @@ import ItemTypeField from "./fields/item-type-field.mjs";
  * @mixes ActivatedEffectTemplate
  * @mixes ActionTemplate
  *
- * @property {string} requirements       Actor details required to use this feature.
- * @property {object} recharge           Details on how a feature can roll for recharges.
- * @property {number} recharge.value     Minimum number needed to roll on a d6 to recharge this feature.
- * @property {boolean} recharge.charged  Does this feature have a charge remaining?
+ * @property {object} properties                    General properties of a feature item.
+ * @property {boolean} properties.mgc               Is this feature magical?
+ * @property {boolean} properties.concentration     Does this feature require concentration?
+ * @property {string} requirements                  Actor details required to use this feature.
+ * @property {object} recharge                      Details on how a feature can roll for recharges.
+ * @property {number} recharge.value                Minimum number needed to roll on a d6 to recharge this feature.
+ * @property {boolean} recharge.charged             Does this feature have a charge remaining?
  */
 export default class FeatData extends SystemDataModel.mixin(
   ItemDescriptionTemplate, ItemTypeTemplate, ActivatedEffectTemplate, ActionTemplate
@@ -24,6 +28,10 @@ export default class FeatData extends SystemDataModel.mixin(
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
       type: new ItemTypeField({}, { label: "DND5E.ItemFeatureType" }),
+      properties: new MappingField(new foundry.data.fields.BooleanField(), {
+        required: true, label: "DND5E.FeatureProperties",
+        initialKeys: Object.keys(CONFIG.DND5E.featureProperties)
+      }),
       requirements: new foundry.data.fields.StringField({required: true, nullable: true, label: "DND5E.Requirements"}),
       recharge: new foundry.data.fields.SchemaField({
         value: new foundry.data.fields.NumberField({
