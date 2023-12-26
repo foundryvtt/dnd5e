@@ -1,6 +1,6 @@
-import { MappingField } from "../../fields.mjs";
+import { FormulaField, MappingField } from "../../fields.mjs";
 
-const { NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
+const { SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
  * Shared contents of the traits schema between various actor types.
@@ -27,8 +27,8 @@ export default class TraitsField {
    * Data structure for a damage actor trait.
    *
    * @typedef {object} DamageModificationData
-   * @property {{[key: string]; number}} amount  Damage boost or reduction by damage type.
-   * @property {Set<string>} bypasses  Keys for physical weapon properties that cause modification to be bypassed.
+   * @property {{[key: string]: string}} amount  Damage boost or reduction by damage type.
+   * @property {Set<string>} bypasses            Keys for physical properties that cause modification to be bypassed.
    */
 
   /* -------------------------------------------- */
@@ -51,7 +51,7 @@ export default class TraitsField {
       dr: this.makeDamageTrait({label: "DND5E.DamRes"}),
       dv: this.makeDamageTrait({label: "DND5E.DamVuln"}),
       dm: new SchemaField({
-        amount: new MappingField(new NumberField({integer: true}), {label: "DND5E.DamMod"}),
+        amount: new MappingField(new FormulaField({deterministic: true}), {label: "DND5E.DamMod"}),
         bypasses: new SetField(new StringField(), {
           label: "DND5E.DamagePhysicalBypass", hint: "DND5E.DamagePhysicalBypassHint"
         })
