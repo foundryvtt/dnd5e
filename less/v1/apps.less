@@ -775,16 +775,32 @@ dnd5e-effects {
 /* ----------------------------------------- */
 
 #module-art-config {
-  .form-group-stacked {
-    flex-wrap: nowrap;
-    justify-content: space-between;
+  ol {
+    counter-reset: priorities;
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+  }
 
-    > label {
-      flex: 1 0 auto;
+  li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: .5rem;
+
+    &::before {
+      counter-increment: priorities;
+      content: counter(priorities);
+      width: 2em;
+      text-align: center;
+      font-size: var(--font-size-16);
     }
 
+    > label { flex: 1; }
+
     > .form-fields {
-      flex: 0 0 auto;
       display: flex;
       gap: .5rem;
 
@@ -797,6 +813,20 @@ dnd5e-effects {
         width: 16px;
         height: 16px;
       }
+    }
+  }
+
+  .priority-adjust {
+    display: flex;
+
+    button {
+      width: 24px;
+      height: 24px;
+      font-size: var(--font-size-11);
+      display: grid;
+      place-content: center;
+
+      > i { margin: 0; }
     }
   }
 }
