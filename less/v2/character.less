@@ -499,6 +499,8 @@
                   position: absolute;
                   height: 100%;
                   width: calc(var(--bar-percentage) - 3px);
+                  box-shadow: 0 0 6px var(--dnd5e-shadow-45);
+                  clip-path: polygon(0 0, calc(100% + 6px) 0, calc(100% + 6px) 100%, 0 100%);
                 }
               }
 
@@ -655,8 +657,8 @@
       }
     }
 
-    /* Skills & Tools */
-    .skills, .tools {
+    /* Skills, Tools, & Saving Throws */
+    .skills, .tools, .saves {
       > ul {
         list-style: none;
         padding: 0 1rem .75rem;
@@ -737,6 +739,86 @@
         font-size: var(--font-size-11);
         color: var(--color-text-dark-5);
         text-align: center;
+      }
+    }
+
+    .saves {
+      > ul {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+
+        > li {
+          border-bottom: none;
+          border-top: 1px dotted #bbb;
+
+          &:nth-child(1), &:nth-child(2) { border-top: none; }
+          &:last-child { border-top: 1px dotted #bbb; }
+        }
+
+      }
+
+      .name {
+        font-family: var(--dnd5e-font-roboto);
+        text-transform: uppercase;
+        font-weight: bold;
+      }
+    }
+
+    /* Background Pills */
+    .details .pills-lg {
+      display: flex;
+      flex-direction: column;
+      gap: .5rem;
+
+      > div { width: 100%; }
+    }
+
+    .pill-lg {
+      position: relative;
+      transition: box-shadow 250ms ease;
+
+      &.race, &.background {
+        cursor: pointer;
+        &:hover:not(:has(a:hover)) { box-shadow: 0 0 12px var(--dnd5e-color-gold); }
+      }
+
+      &.texture {
+        background-blend-mode: color-burn;
+
+        &.type {
+          background: url("ui/pill-texture-type.webp") no-repeat right,
+            color-mix(in oklab, var(--dnd5e-color-parchment), white);
+        }
+
+        &.race {
+          background: url("ui/pill-texture-race.webp") no-repeat right,
+            color-mix(in oklab, var(--dnd5e-color-parchment), white);
+        }
+
+        &.background {
+          background: url("ui/pill-texture-background.webp") no-repeat right,
+            color-mix(in oklab, var(--dnd5e-color-parchment), white);
+        }
+
+        &::before {
+          content: "";
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(to right, var(--dnd5e-color-card) 35%, transparent);
+          border-radius: 5px;
+        }
+
+        > * { position: relative; }
+      }
+
+      > .creature-type { background: transparent no-repeat center / cover; }
+
+      [data-action] { color: var(--color-text-dark-5); }
+
+      .actor-size {
+        width: fit-content;
+        height: unset;
+        font-size: var(--font-size-11);
       }
     }
   }
@@ -851,7 +933,7 @@
 .dnd5e2.sheet.actor.character .editable {
   .ability-scores .ability-score .score { padding: 0; }
 
-  :is(.skills, .tools) {
+  :is(.skills, .tools, .saves) {
     > ul > li { gap: .25rem; }
   }
 }

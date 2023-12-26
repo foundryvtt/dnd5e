@@ -503,50 +503,64 @@ DND5E.mapLocationMarker = {
 DND5E.creatureTypes = {
   aberration: {
     label: "DND5E.CreatureAberration",
+    icon: "/icons/creatures/tentacles/tentacle-eyes-yellow-pink.webp",
     detectAlignment: true
   },
   beast: {
-    label: "DND5E.CreatureBeast"
+    label: "DND5E.CreatureBeast",
+    icon: "/icons/creatures/claws/claw-bear-paw-swipe-red.webp"
   },
   celestial: {
     label: "DND5E.CreatureCelestial",
+    icon: "/icons/creatures/abilities/wings-birdlike-blue.webp",
     detectAlignment: true
   },
   construct: {
-    label: "DND5E.CreatureConstruct"
+    label: "DND5E.CreatureConstruct",
+    icon: "/icons/creatures/magical/construct-stone-earth-gray.webp"
   },
   dragon: {
-    label: "DND5E.CreatureDragon"
+    label: "DND5E.CreatureDragon",
+    icon: "/icons/creatures/abilities/dragon-fire-breath-orange.webp"
   },
   elemental: {
     label: "DND5E.CreatureElemental",
+    icon: "/icons/creatures/magical/spirit-fire-orange.webp",
     detectAlignment: true
   },
   fey: {
     label: "DND5E.CreatureFey",
+    icon: "/icons/creatures/magical/fae-fairy-winged-glowing-green.webp",
     detectAlignment: true
   },
   fiend: {
     label: "DND5E.CreatureFiend",
+    icon: "/icons/magic/death/skull-horned-goat-pentagram-red.webp",
     detectAlignment: true
   },
   giant: {
-    label: "DND5E.CreatureGiant"
+    label: "DND5E.CreatureGiant",
+    icon: "/icons/creatures/magical/humanoid-giant-forest-blue.webp"
   },
   humanoid: {
-    label: "DND5E.CreatureHumanoid"
+    label: "DND5E.CreatureHumanoid",
+    icon: "/icons/magic/unholy/strike-body-explode-disintegrate.webp"
   },
   monstrosity: {
-    label: "DND5E.CreatureMonstrosity"
+    label: "DND5E.CreatureMonstrosity",
+    icon: "/icons/creatures/abilities/mouth-teeth-rows-red.webp"
   },
   ooze: {
-    label: "DND5E.CreatureOoze"
+    label: "DND5E.CreatureOoze",
+    icon: "/icons/creatures/slimes/slime-movement-pseudopods-green.webp"
   },
   plant: {
-    label: "DND5E.CreaturePlant"
+    label: "DND5E.CreaturePlant",
+    icon: "/icons/magic/nature/tree-animated-strike.webp"
   },
   undead: {
     label: "DND5E.CreatureUndead",
+    icon: "/icons/magic/death/skull-horned-worn-fire-blue.webp",
     detectAlignment: true
   }
 };

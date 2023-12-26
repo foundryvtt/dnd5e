@@ -90,7 +90,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
     const context = await super.getData(options);
     context.editable = this.isEditable && (this._mode === this.constructor.MODES.EDIT);
     context.cssClass = context.editable ? "editable" : "locked";
-    const { attributes } = this.actor.system;
+    const { attributes, details } = this.actor.system;
 
     // Class
     context.labels.class = Object.values(this.actor.classes).sort((a, b) => {
@@ -162,12 +162,32 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
     }, { top: [], bottom: [] });
     context.abilityRows.optional = Object.keys(CONFIG.DND5E.abilities).length - 6;
 
+    // Saving Throws
+    context.saves = {};
+    for ( let ability of Object.values(context.abilities) ) {
+      ability = context.saves[ability.key] = { ...ability };
+      ability.class = this.constructor.PROFICIENCY_CLASSES[context.editable ? ability.baseProf : ability.proficient];
+      ability.hover = CONFIG.DND5E.proficiencyLevels[ability.proficient];
+      ability.sign = Math.sign(ability.save) < 0 ? "-" : "+";
+      ability.mod = Math.abs(ability.save);
+    }
+
     // Skills & Tools
     for ( const entry of Object.values(context.skills).concat(Object.values(context.tools)) ) {
       entry.class = this.constructor.PROFICIENCY_CLASSES[context.editable ? entry.baseValue : entry.value];
       entry.sign = Math.sign(entry.total) < 0 ? "-" : "+";
       entry.mod = Math.abs(entry.total);
     }
+
+    // Creature Type
+    context.creatureType = {
+      class: details.type.value === "custom" ? "none" : "",
+      icon: CONFIG.DND5E.creatureTypes[details.type.value]?.icon ?? "/icons/svg/mystery-man.svg",
+      title: details.type.value === "custom"
+        ? details.type.custom
+        : CONFIG.DND5E.creatureTypes[details.type.value].label,
+      subtitle: details.type.subtype
+    };
 
     return context;
   }
@@ -181,11 +201,17 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
     html.find(".meter > .hit-points").on("click", event => this._toggleEditHP(event, true));
     html.find(".meter > .hit-points > input").on("blur", event => this._toggleEditHP(event, false));
     html.find(".death-tab").on("click", this._toggleDeathTray.bind(this));
+    html.find("[data-item-id][data-action]").on("click", this._onItemAction.bind(this));
     html.find(".rollable:is(.saving-throw, .ability-check)").on("click", this._onRollAbility.bind(this));
     html.find("proficiency-cycle").on("change", this._onChangeInput.bind(this));
 
+    // Edit mode only.
+    if ( this._mode === this.constructor.MODES.EDIT ) {
+      html.find(".item-action").on("click", this._onItemAction.bind(this));
+    }
+
     // Play mode only.
-    if ( this._mode !== this.constructor.MODES.EDIT ) {
+    else {
       html.find(".speed-tooltip").on("pointerover", this._onHoverSpeed.bind(this));
       html.find(".portrait").on("click", this._onShowPortrait.bind(this));
     }
@@ -314,6 +340,27 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
     const token = this.actor.isToken ? this.actor.token : this.actor.prototypeToken;
     const img = showTokenPortrait ? token.texture.src : this.actor.img;
     new ImagePopout(img, { title: this.actor.name, uuid: this.actor.uuid }).render(true);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle performing some action on an owned Item.
+   * @param {PointerEvent} event  The triggering event.
+   * @protected
+   */
+  _onItemAction(event) {
+    if ( event.target.closest("select") ) return;
+    event.preventDefault();
+    event.stopPropagation();
+    const itemId = event.currentTarget.closest("[data-item-id]")?.dataset.itemId;
+    const action = event.currentTarget.dataset.action;
+    const item = this.actor.items.get(itemId);
+
+    switch ( action ) {
+      case "edit": item?.sheet.render(true); break;
+      case "delete": item?.deleteDialog(); break;
+    }
   }
 
   /* -------------------------------------------- */

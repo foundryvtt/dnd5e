@@ -82,6 +82,54 @@
     height: 14px;
   }
 
+  .pill-lg {
+    background: var(--dnd5e-color-card);
+    border: 2px solid var(--dnd5e-color-gold);
+    border-radius: 5px;
+    box-shadow: 0 0 12px var(--dnd5e-shadow-15);
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    padding: .5rem;
+    height: 50px;
+
+    > .gold-icon {
+      width: 32px;
+      height: 32px;
+    }
+
+    .name {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+
+      .title {
+        font-family: var(--dnd5e-font-roboto-slab);
+        font-size: var(--font-size-14);
+        font-weight: bold;
+      }
+
+      .subtitle {
+        font-family: var(--dnd5e-font-roboto);
+        font-size: var(--font-size-10);
+        color: var(--color-text-dark-5);
+      }
+    }
+  }
+
+  .gold-icon {
+    border: 2px solid var(--dnd5e-color-gold);
+    box-shadow: 0 0 4px var(--dnd5e-shadow-45);
+    border-radius: 0;
+  }
+
+  i.svg {
+    width: 14px;
+    height: 14px;
+    display: inline-block;
+    background: transparent no-repeat center / contain;
+  }
+
   /* ---------------------------------- */
   /*  Form Elements                     */
   /* ---------------------------------- */
