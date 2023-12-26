@@ -942,6 +942,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * @property {boolean|Set<string>} [ignore.immunity]       Should this actor's damage immunity be ignored?
    * @property {boolean|Set<string>} [ignore.resistance]     Should this actor's damage resistance be ignored?
    * @property {boolean|Set<string>} [ignore.vulnerability]  Should this actor's damage vulnerability be ignored?
+   * @property {boolean|Set<string>} [ignore.modification]   Should this actor's damage modification be ignored?
    */
 
   /**
@@ -987,11 +988,20 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
         || options.ignore?.[category]?.has?.(type);
     };
 
+    const rollData = this.getRollData({deterministic: true});
+
     let amount = damages.reduce((total, d) => {
       // Skip damage types with immunity
       if ( !ignore("immunity", d.type) && traits?.di?.value.has(d.type) ) return total;
 
-      // TODO: Apply type-specific damage reduction
+      let value = d.value;
+
+      // Apply type-specific damage reduction
+      if ( !ignore("modification", d.type) && traits?.dm?.amount[d.type] ) {
+        const modification = simplifyBonus(traits.dm.amount[d.type], rollData);
+        if ( Math.sign(value) !== Math.sign(value + modification) ) value = 0;
+        else value += modification;
+      }
 
       let damageMultiplier = multiplier;
 
@@ -1003,16 +1013,14 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       // Apply type-specific damage vulnerability
       if ( !ignore("vulnerability", d.type) && traits?.dv.value.has(d.type) ) damageMultiplier *= 2;
 
-      let value = d.value * damageMultiplier;
-
-      return total + value;
+      return total + (value * damageMultiplier);
     }, 0);
 
     // Round damage down
     amount = Math.floor(amount);
 
     const deltaTemp = amount > 0 ? Math.min(hp.temp, amount) : 0;
-    const deltaHP = Math.clamped(amount - deltaTemp, hp.value - hp.max, hp.value);
+    const deltaHP = amount - deltaTemp;
     const updates = {
       "system.attributes.hp.temp": hp.temp - deltaTemp,
       "system.attributes.hp.value": hp.value - deltaHP
