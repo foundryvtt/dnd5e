@@ -1434,7 +1434,8 @@ export default class Item5e extends SystemDocumentMixin(Item) {
 
     // Get roll data
     const dmg = this.system.damage;
-    const rollConfigs = dmg.parts.map(([formula, type]) => ({ parts: [formula], type }));
+    const properties = Object.keys(CONFIG.DND5E.physicalWeaponProperties).filter(k => this.system.properties?.[k]);
+    const rollConfigs = dmg.parts.map(([formula, type]) => ({ parts: [formula], type, properties }));
     const rollData = this.getRollData();
     if ( spellLevel ) rollData.item.level = spellLevel;
 

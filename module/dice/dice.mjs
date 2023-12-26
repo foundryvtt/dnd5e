@@ -143,8 +143,9 @@ export async function d20Roll({
  * Configuration data for a single damage roll.
  *
  * @typedef {object} SingleDamageRollConfiguration
- * @property {string[]} parts  The dice roll component parts.
- * @property {string} [type]   Damage type represented by the roll.
+ * @property {string[]} parts         The dice roll component parts.
+ * @property {string} [type]          Damage type represented by the roll.
+ * @property {string[]} [properties]  Physical properties of the damage source (e.g. magical, silvered).
  */
 
 /**
@@ -175,10 +176,10 @@ export async function damageRoll({
   multiplyNumeric ??= game.settings.get("dnd5e", "criticalDamageModifiers");
   powerfulCritical ??= game.settings.get("dnd5e", "criticalDamageMaxDice");
   critical = isFF ? isCritical : false;
-  for ( const [index, { parts, type }] of rollConfigs.entries() ) {
+  for ( const [index, { parts, type, properties }] of rollConfigs.entries() ) {
     const formula = parts.join(" + ");
     const rollOptions = {
-      flavor, rollMode, critical, criticalMultiplier, multiplyNumeric, powerfulCritical, type
+      flavor, rollMode, critical, criticalMultiplier, multiplyNumeric, powerfulCritical, type, properties
     };
     if ( index === 0 ) {
       rollOptions.criticalBonusDice = criticalBonusDice;
