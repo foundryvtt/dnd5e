@@ -124,11 +124,12 @@ function applyChatCardDamage(li, multiplier) {
   const message = game.messages.get(li.data("messageId"));
   const damages = message.rolls.map(roll => ({
     value: roll.total,
-    type: roll.options.type
+    type: roll.options.type,
+    properties: roll.options.properties ?? []
   }));
   return Promise.all(canvas.tokens.controlled.map(t => {
     const a = t.actor;
-    return a.applyDamage(damages, { multiplier });
+    return a.applyDamage(damages, { multiplier, ignore: true });
   }));
 }
 

@@ -926,8 +926,9 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * Description of a source of damage.
    *
    * @typedef {object} DamageDescription
-   * @property {number} value  Amount of damage.
-   * @property {string} type   Type of damage.
+   * @property {number} value         Amount of damage.
+   * @property {string} type          Type of damage.
+   * @property {string[]} properties  Physical properties that affect damage application.
    */
 
   /**
