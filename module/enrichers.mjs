@@ -332,19 +332,33 @@ async function enrichSave(config, label, options) {
  *   <i class="fa-solid fa-dice-d20"></i> Bite
  * </a>
  * ```
+ *
+ * @example Use an Item from a "Name UUID":
+ * ```[[/item Actor.Akra (Dragonborn Cleric).Item.Mace]]```
+ * becomes
+ * ```html
+ * <a class="roll-action" data-type="item">
+ *   <i class="fa-solid fa-dice-d20"></i> Mace
+ * </a>
+ * ```
 */
 
 async function enrichItem(config, label) {
   const givenItem = config.values.join(' ');
-  const itemUuidMatch = givenItem.match(/^Actor\.\w{16}\.Item\.\w{16}$/);
+  const itemUuidMatch = givenItem.match(/^Actor\..*?\.Item\..*?$/);
     if (itemUuidMatch) {
-      const actorId = itemUuidMatch[0].split('.')[1];
-      const itemId = itemUuidMatch[0].split('.')[3];
-      const itemDocument = await fromUuid(givenItem);
-      if ( !label ) {
-        label = itemDocument.name};
-    return createRollLink(label, {type: "item", rollItemActor: actorId, rollItemId: itemId })
-    };
+      const actorIdOrName = itemUuidMatch[0].split('.')[1];
+      const ownerActor = game.actors.get(actorIdOrName) || game.actors.getName(actorIdOrName);
+
+      if (ownerActor) {
+        const itemIdOrName = itemUuidMatch[0].split('.')[3];
+        const ownedItem = ownerActor.items.get(itemIdOrName) || ownerActor.items.getName(itemIdOrName);
+        if ( !label ) {
+          label = ownedItem.name;
+        }
+      return createRollLink(label, {type: "item", rollItemActor: ownerActor.id, rollItemId: ownedItem.id });
+      }
+    }
   if ( !label ) {
     label = givenItem;}
     return createRollLink(label, { type: "item", rollItemName: givenItem });
