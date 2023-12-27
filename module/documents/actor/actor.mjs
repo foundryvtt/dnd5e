@@ -2765,8 +2765,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     let localizedType;
     if ( typeData.value === "custom" ) {
       localizedType = typeData.custom;
-    } else {
-      let code = CONFIG.DND5E.creatureTypes[typeData.value];
+    } else if ( typeData.value in CONFIG.DND5E.creatureTypes ) {
+      const code = CONFIG.DND5E.creatureTypes[typeData.value];
       localizedType = game.i18n.localize(typeData.swarm ? `${code.label}Pl` : code.label);
     }
     let type = localizedType;
