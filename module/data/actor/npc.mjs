@@ -190,4 +190,15 @@ export default class NPCData extends CreatureTemplate {
       source.type.custom = original;
     }
   }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare remaining NPC data.
+   */
+  prepareDerivedData() {
+    AttributesFields.prepareExhaustionLevel.call(this);
+    AttributesFields.prepareMovement.call(this);
+    TraitsFields.prepareResistImmune.call(this);
+  }
 }

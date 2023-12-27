@@ -1,6 +1,7 @@
 import { FormulaField } from "../../fields.mjs";
 import MovementField from "../../shared/movement-field.mjs";
 import SensesField from "../../shared/senses-field.mjs";
+import ActiveEffect5e from "../../../documents/active-effect.mjs";
 
 /**
  * Shared contents of the attributes schema between various actor types.
@@ -59,7 +60,10 @@ export default class AttributesFields {
       senses: new SensesField(),
       spellcasting: new foundry.data.fields.StringField({
         required: true, blank: true, initial: "int", label: "DND5E.SpellAbility"
-      })
+      }),
+      exhaustion: new foundry.data.fields.NumberField({
+        required: true, nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.Exhaustion"
+      }),
     };
   }
 
@@ -84,7 +88,20 @@ export default class AttributesFields {
   /* -------------------------------------------- */
 
   /**
+   * Adjust exhaustion level based on Active Effects.
+   * @this {CharacterData|NPCData}
+   */
+  static prepareExhaustionLevel() {
+    const exhaustion = this.parent.effects.get(ActiveEffect5e.EXHAUSTION);
+    const level = exhaustion?.getFlag("dnd5e", "exhaustionLevel");
+    this.attributes.exhaustion = Number.isFinite(level) ? level : 0;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Modify movement speeds taking exhaustion and any other conditions into account.
+   * @this {CharacterData|NPCData}
    */
   static prepareMovement() {
     const noMovement = new Set(["grappled", "paralyzed", "petrified", "restrained", "stunned", "unconscious"])

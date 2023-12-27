@@ -119,6 +119,7 @@ export default class TraitsField {
 
   /**
    * Modify resistances and immunities for the petrified condition.
+   * @this {CharacterData|NPCData}
    */
   static prepareResistImmune() {
     if ( this.parent.statuses.has("petrified") ) {

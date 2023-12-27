@@ -6,6 +6,7 @@ import { d20Roll } from "../../dice/dice.mjs";
 import { simplifyBonus } from "../../utils.mjs";
 import ShortRestDialog from "../../applications/actor/short-rest.mjs";
 import LongRestDialog from "../../applications/actor/long-rest.mjs";
+import ActiveEffect5e from "../active-effect.mjs";
 
 /**
  * Extend the base Actor class to implement additional system-specific logic.
@@ -890,6 +891,11 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
         foundry.utils.setProperty(changed, "system.attributes.death.success", 0);
         foundry.utils.setProperty(changed, "system.attributes.death.failure", 0);
       }
+    }
+
+    // Record previous exhaustion level.
+    if ( Number.isFinite(foundry.utils.getProperty(changed, "system.attributes.exhaustion")) ) {
+      foundry.utils.setProperty(options, "dnd5e.originalExhaustion", this.system.attributes.exhaustion);
     }
   }
 
@@ -2781,6 +2787,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   _onUpdate(data, options, userId) {
     super._onUpdate(data, options, userId);
     this._displayScrollingDamage(options.dhp);
+    if ( userId === game.userId ) this._onUpdateExhaustion(data, options);
   }
 
   /* -------------------------------------------- */
@@ -2806,6 +2813,30 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
         strokeThickness: 4,
         jitter: 0.25
       });
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * TODO: Perform this as part of Actor._preUpdateOperation instead when it becomes available in v12.
+   * Handle syncing the Actor's exhaustion level with the ActiveEffect.
+   * @param {object} data                          The Actor's update delta.
+   * @param {DocumentModificationContext} options  Additional options supplied with the update.
+   * @protected
+   */
+  _onUpdateExhaustion(data, options) {
+    const level = foundry.utils.getProperty(data, "system.attributes.exhaustion");
+    if ( !Number.isFinite(level) ) return;
+    let effect = this.effects.get(ActiveEffect5e.EXHAUSTION);
+    if ( level < 1 ) return effect?.delete();
+    else if ( effect ) {
+      const originalExhaustion = foundry.utils.getProperty(options, "dnd5e.originalExhaustion");
+      return effect.update({ "flags.dnd5e.exhaustionLevel": level }, { dnd5e: { originalExhaustion } });
+    } else {
+      effect = ActiveEffect.implementation.fromStatusEffect("exhaustion", { parent: this });
+      effect.updateSource({ "flags.dnd5e.exhaustionLevel": level });
+      return ActiveEffect.implementation.create(effect, { parent: this, keepId: true });
     }
   }
 }

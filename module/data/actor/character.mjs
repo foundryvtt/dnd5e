@@ -84,9 +84,6 @@ export default class CharacterData extends CreatureTemplate {
             required: true, nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.DeathSaveFailures"
           })
         }, {label: "DND5E.DeathSave"}),
-        exhaustion: new foundry.data.fields.NumberField({
-          required: true, nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.Exhaustion"
-        }),
         inspiration: new foundry.data.fields.BooleanField({required: true, label: "DND5E.Inspiration"})
       }, {label: "DND5E.Attributes"}),
       details: new foundry.data.fields.SchemaField({
@@ -166,6 +163,7 @@ export default class CharacterData extends CreatureTemplate {
    * Prepare remaining character data.
    */
   prepareDerivedData() {
+    AttributesFields.prepareExhaustionLevel.call(this);
     AttributesFields.prepareMovement.call(this);
     TraitsFields.prepareResistImmune.call(this);
   }

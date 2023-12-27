@@ -158,7 +158,11 @@ Hooks.once("init", function() {
   utils.registerHandlebarsHelpers();
   utils.preloadHandlebarsTemplates();
 
+  // Enrichers
   enrichers.registerCustomEnrichers();
+
+  // Exhaustion handling
+  documents.ActiveEffect5e.registerHUDListeners();
 });
 
 /* -------------------------------------------- */

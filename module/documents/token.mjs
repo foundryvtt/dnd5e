@@ -115,16 +115,9 @@ export default class TokenDocument5e extends TokenDocument {
     // Add a new effect
     else if ( state ) {
       const cls = getDocumentClass("ActiveEffect");
-      const createData = {
-        ...foundry.utils.deepClone(effectData),
-        _id: id,
-        name: game.i18n.localize(effectData.name),
-        statuses: [effectData.id, ...effectData.statuses ?? []]
-      };
-      cls.migrateDataSafe(createData);
-      cls.cleanData(createData);
-      if ( overlay ) createData["flags.core.overlay"] = true;
-      await cls.create(createData, {parent: this.actor, keepId: true});
+      const effect = cls.fromStatusEffect(effectData);
+      if ( overlay ) effect.updateSource({ "flags.core.overlay": true });
+      await cls.create(effect, { parent: this.actor, keepId: true });
     }
 
     return state;

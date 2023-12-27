@@ -1,9 +1,17 @@
 import EffectsElement from "../applications/components/effects.mjs";
+import { staticID } from "../utils.mjs";
 
 /**
  * Extend the base ActiveEffect class to implement system-specific logic.
  */
 export default class ActiveEffect5e extends ActiveEffect {
+  /**
+   * The ActiveEffect ID for the exhaustion condition.
+   * @type {string}
+   */
+  static EXHAUSTION = staticID("dnd5eexhaustion");
+
+  /* -------------------------------------------- */
 
   /**
    * Is this active effect currently suppressed?
@@ -11,7 +19,31 @@ export default class ActiveEffect5e extends ActiveEffect {
    */
   isSuppressed = false;
 
-  /* --------------------------------------------- */
+  /* -------------------------------------------- */
+
+  /**
+   * Create an ActiveEffect instance from some status effect data.
+   * @param {string|object} effectData               The status effect ID or its data.
+   * @param {DocumentModificationContext} [options]  Additional options to pass to ActiveEffect instantiation.
+   * @returns {ActiveEffect5e|void}
+   */
+  static fromStatusEffect(effectData, options={}) {
+    if ( typeof effectData === "string" ) effectData = CONFIG.statusEffects.find(e => e.id === effectData);
+    if ( foundry.utils.getType(effectData) !== "Object" ) return;
+    const createData = {
+      ...foundry.utils.deepClone(effectData),
+      _id: staticID(`dnd5e${effectData.id}`),
+      name: game.i18n.localize(effectData.name),
+      statuses: [effectData.id, ...effectData.statuses ?? []]
+    };
+    this.migrateDataSafe(createData);
+    this.cleanData(createData);
+    return new this(createData, { keepId: true, ...options });
+  }
+
+  /* -------------------------------------------- */
+  /*  Effect Application                          */
+  /* -------------------------------------------- */
 
   /** @inheritdoc */
   apply(actor, change) {
@@ -168,7 +200,101 @@ export default class ActiveEffect5e extends ActiveEffect {
     this.isSuppressed = item.areEffectsSuppressed;
   }
 
-  /* --------------------------------------------- */
+  /* -------------------------------------------- */
+  /*  Lifecycle                                   */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  prepareDerivedData() {
+    super.prepareDerivedData();
+    if ( this.id === this.constructor.EXHAUSTION ) this._prepareExhaustionLevel();
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Modify the ActiveEffect's attributes based on the exhaustion level.
+   * @protected
+   */
+  _prepareExhaustionLevel() {
+    let level = this.getFlag("dnd5e", "exhaustionLevel");
+    if ( !Number.isFinite(level) ) level = 1;
+    this.icon = `systems/dnd5e/icons/svg/statuses/exhaustion-${level}.svg`;
+    this.name = `Exhaustion ${level}`;
+    if ( level >= 6 ) this.statuses.add("dead");
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  _onUpdate(data, options, userId) {
+    super._onUpdate(data, options, userId);
+    const originalLevel = foundry.utils.getProperty(options, "dnd5e.originalExhaustion");
+    const newLevel = foundry.utils.getProperty(data, "flags.dnd5e.exhaustionLevel");
+    if ( (this.id === this.constructor.EXHAUSTION) && Number.isFinite(newLevel) && Number.isFinite(originalLevel) ) {
+      if ( newLevel === originalLevel ) return;
+      const name = this.name;
+      // Temporarily set the name for the benefit of _displayScrollingTextStatus. We should improve this method to
+      // accept a name parameter instead.
+      if ( newLevel < originalLevel ) this.name = `Exhaustion ${originalLevel}`;
+      this._displayScrollingStatus(newLevel > originalLevel);
+      this.name = name;
+    }
+  }
+
+  /* -------------------------------------------- */
+  /*  Exhaustion Handling                         */
+  /* -------------------------------------------- */
+
+  /**
+   * Register listeners for custom exhaustion handling in the TokenHUD.
+   */
+  static registerHUDListeners() {
+    Hooks.on("renderTokenHUD", this.onTokenHUDRender);
+    document.addEventListener("click", this.onClickTokenHUD.bind(this), { capture: true });
+    document.addEventListener("contextmenu", this.onClickTokenHUD.bind(this), { capture: true });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Adjust exhaustion icon display to match current level.
+   * @param {Application} app  The TokenHUD application.
+   * @param {jQuery} html      The TokenHUD HTML.
+   */
+  static onTokenHUDRender(app, html) {
+    const actor = app.object.actor;
+    const level = foundry.utils.getProperty(actor, "system.attributes.exhaustion");
+    if ( Number.isFinite(level) && (level > 0) ) {
+      html.find('[data-status-id="exhaustion"]').css({
+        objectPosition: "-100px",
+        background: `url('systems/dnd5e/icons/svg/statuses/exhaustion-${level}.svg') no-repeat center / contain`
+      });
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Implement custom exhaustion cycling when interacting with the Token HUD.
+   * @param {PointerEvent} event        The triggering event.
+   */
+  static onClickTokenHUD(event) {
+    const { target } = event;
+    if ( !target.classList?.contains("effect-control") || (target.dataset?.statusId !== "exhaustion") ) return;
+    const actor = canvas.hud.token.object?.actor;
+    let level = foundry.utils.getProperty(actor ?? {}, "system.attributes.exhaustion");
+    if ( !Number.isFinite(level) ) return;
+    event.preventDefault();
+    event.stopPropagation();
+    if ( event.button === 0 ) level++;
+    else level--;
+    actor.update({ "system.attributes.exhaustion": Math.clamped(level, 0, 6) });
+  }
+
+  /* -------------------------------------------- */
+  /*  Deprecations                                */
+  /* -------------------------------------------- */
 
   /**
    * Manage Active Effect instances through the Actor Sheet via effect control buttons.
