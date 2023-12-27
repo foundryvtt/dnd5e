@@ -42,7 +42,8 @@
     {{#if (or @root.editable values)}}
     <div class="pills-group {{#unless values}}empty{{/unless}}">
         <h3 class="icon">
-            <i class="{{ icon }}"></i>
+            {{#if icon}}<i class="{{ icon }}"></i>
+            {{~else if svg}}<dnd5e-icon src="systems/dnd5e/icons/svg/{{svg}}.svg"></dnd5e-icon>{{/if}}
             <span class="roboto-upper">{{ localize label }}</span>
             {{#if @root.editable}}
             <a class="trait-selector" data-trait="{{ key }}"
@@ -231,10 +232,10 @@
         {{> "traits" values=traits.dv key="dv" color="maroon" icon="fas fa-heart-crack" label="DND5E.Vulnerabilities" }}
 
         {{!-- Armor --}}
-        {{> "traits" values=traits.armor key="armor" icon="svg armor-prof" label="DND5E.Armor" }}
+        {{> "traits" values=traits.armor key="armor" svg="trait-armor-proficiencies" label="DND5E.Armor" }}
 
         {{!-- Weapons --}}
-        {{> "traits" values=traits.weapon key="weapon" icon="svg weapon-prof" label="TYPES.Item.weaponPl" }}
+        {{> "traits" values=traits.weapon key="weapon" svg="trait-weapon-proficiencies" label="TYPES.Item.weaponPl" }}
 
         {{!-- Languages --}}
         {{> "traits" values=traits.languages key="languages" icon="fas fa-flag" label="DND5E.Languages" }}
