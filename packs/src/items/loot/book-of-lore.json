@@ -6,8 +6,7 @@
   "system": {
     "description": {
       "value": "<p>A book containing historical accounts, information pertaining to a particular field of lore, myth, or legend.</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -21,10 +20,15 @@
       "value": 25,
       "denomination": "gp"
     },
-    "attunement": 0,
-    "equipped": false,
     "rarity": "",
-    "identified": true
+    "identified": true,
+    "type": {
+      "value": ""
+    },
+    "unidentified": {
+      "description": ""
+    },
+    "container": null
   },
   "effects": [],
   "folder": "dlru9Hy74nSMv6fr",
@@ -38,7 +42,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787233842,
-    "modifiedTime": 1701903932218,
+    "modifiedTime": 1703713491705,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!l794iywHk8Wc6Uvi"

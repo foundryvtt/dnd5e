@@ -5,8 +5,7 @@
   "system": {
     "description": {
       "value": "<p>A hooded lantern casts bright light in a 30-foot radius and dim light for an additional 30 feet. Once lit, it burns for 6 hours on a flask (1 pint) of oil. As an action, you can lower the hood, reducing the light to dim light in a 5-foot radius.</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -79,9 +78,14 @@
       "dc": null,
       "scaling": "spell"
     },
-    "consumableType": "trinket",
     "container": "xsB7Y2WI476kvOt4",
-    "properties": {}
+    "properties": {},
+    "type": {
+      "value": "trinket"
+    },
+    "unidentified": {
+      "description": ""
+    }
   },
   "effects": [],
   "folder": "Dx3K2y0J1wJUPP9m",
@@ -91,7 +95,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787233914,
-    "modifiedTime": 1702146655560,
+    "modifiedTime": 1703713496187,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_id": "wjHtGnd05SPdURqE",

@@ -6,8 +6,7 @@
   "system": {
     "description": {
       "value": "<p><em>Wondrous item</em></p>\n<p>This tube holds milky liquid with a strong alcohol smell. You can use an action to pour the contents of the tube onto a surface within reach. The liquid instantly dissolves up to 1 square foot of adhesive it touches, including Sovereign Glue.</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -39,7 +38,8 @@
       "value": 1,
       "width": null,
       "units": "ft",
-      "type": "square"
+      "type": "square",
+      "prompt": true
     },
     "range": {
       "value": null,
@@ -51,12 +51,14 @@
       "max": "1",
       "per": "charges",
       "recovery": "",
-      "autoDestroy": true
+      "autoDestroy": true,
+      "prompt": true
     },
     "consume": {
       "type": "",
       "target": null,
-      "amount": null
+      "amount": null,
+      "scale": false
     },
     "ability": "",
     "actionType": "util",
@@ -76,7 +78,15 @@
       "dc": null,
       "scaling": "spell"
     },
-    "consumableType": "trinket"
+    "type": {
+      "value": "trinket"
+    },
+    "unidentified": {
+      "description": ""
+    },
+    "container": null,
+    "crewed": false,
+    "properties": {}
   },
   "effects": [],
   "folder": "UnUwTG4YIgd0kaUJ",
@@ -90,7 +100,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787233624,
-    "modifiedTime": 1701903921403,
+    "modifiedTime": 1703713482333,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!MAwoj2suj6cvb9Ti"

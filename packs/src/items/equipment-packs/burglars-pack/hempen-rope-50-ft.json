@@ -5,8 +5,7 @@
   "system": {
     "description": {
       "value": "<p>Rope, whether made of hemp or silk, has 2 hit points and can be burst with a DC 17 Strength check.</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -79,9 +78,14 @@
       "dc": 17,
       "scaling": "flat"
     },
-    "consumableType": "trinket",
     "container": "xsB7Y2WI476kvOt4",
-    "properties": {}
+    "properties": {},
+    "type": {
+      "value": "trinket"
+    },
+    "unidentified": {
+      "description": ""
+    }
   },
   "effects": [],
   "folder": "Dx3K2y0J1wJUPP9m",
@@ -91,7 +95,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787233651,
-    "modifiedTime": 1702146631702,
+    "modifiedTime": 1703713493059,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_id": "oRrNK2H2vcN4Kp74",

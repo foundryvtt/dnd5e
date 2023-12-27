@@ -6,8 +6,7 @@
   "system": {
     "description": {
       "value": "<p><em>Wondrous item, (requires attunement)</em></p>\n<p>While wearing these bracers, you gain a +2 bonus to AC if you are wearing no armor and using no shield.</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -39,7 +38,8 @@
       "value": null,
       "width": null,
       "units": "",
-      "type": ""
+      "type": "",
+      "prompt": true
     },
     "range": {
       "value": null,
@@ -50,12 +50,14 @@
       "value": null,
       "max": "",
       "per": null,
-      "recovery": ""
+      "recovery": "",
+      "prompt": true
     },
     "consume": {
       "type": "",
       "target": null,
-      "amount": null
+      "amount": null,
+      "scale": false
     },
     "ability": null,
     "actionType": "",
@@ -77,7 +79,6 @@
     },
     "armor": {
       "value": 0,
-      "type": "clothing",
       "dex": 0
     },
     "hp": {
@@ -86,14 +87,22 @@
       "dt": null,
       "conditions": ""
     },
-    "baseItem": "",
     "speed": {
       "value": null,
       "conditions": ""
     },
     "strength": null,
     "stealth": false,
-    "proficient": null
+    "proficient": null,
+    "type": {
+      "value": "clothing",
+      "baseItem": ""
+    },
+    "unidentified": {
+      "description": ""
+    },
+    "container": null,
+    "crewed": false
   },
   "effects": [
     {
@@ -117,12 +126,13 @@
         "startTurn": null
       },
       "icon": "icons/equipment/wrist/bracer-segmented-leather.webp",
-      "label": "+2 to AC",
       "origin": "Compendium.dnd5e.items.DSHi7yT6OUyDoCcu",
       "transfer": true,
       "flags": {},
       "tint": null,
-      "sort": 0,
+      "name": "+2 to AC",
+      "description": "",
+      "statuses": [],
       "_key": "!items.effects!DSHi7yT6OUyDoCcu.ul7rjl68p1kyv4z2"
     }
   ],
@@ -137,7 +147,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787233523,
-    "modifiedTime": 1701903919236,
+    "modifiedTime": 1703713478862,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!DSHi7yT6OUyDoCcu"

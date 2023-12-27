@@ -6,8 +6,7 @@
   "system": {
     "description": {
       "value": "<p>This heavy two-handed mace crushes metal and bone with thunderous force.</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -39,7 +38,8 @@
       "value": null,
       "width": null,
       "units": "",
-      "type": ""
+      "type": "",
+      "prompt": true
     },
     "range": {
       "value": 5,
@@ -50,12 +50,14 @@
       "value": null,
       "max": "",
       "per": null,
-      "recovery": ""
+      "recovery": "",
+      "prompt": true
     },
     "consume": {
       "type": "",
       "target": null,
-      "amount": null
+      "amount": null,
+      "scale": false
     },
     "ability": null,
     "actionType": "mwak",
@@ -89,13 +91,20 @@
       "dt": null,
       "conditions": ""
     },
-    "weaponType": "martialM",
-    "baseItem": "maul",
     "properties": {
       "hvy": true,
       "two": true
     },
-    "proficient": null
+    "proficient": null,
+    "type": {
+      "value": "martialM",
+      "baseItem": "maul"
+    },
+    "unidentified": {
+      "description": ""
+    },
+    "container": null,
+    "crewed": false
   },
   "effects": [],
   "folder": "MLMTCAvKsuFE3vYA",
@@ -109,7 +118,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787233528,
-    "modifiedTime": 1701903919337,
+    "modifiedTime": 1703713479068,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!DizirD7eqjh8n95A"

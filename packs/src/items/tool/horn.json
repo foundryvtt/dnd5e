@@ -6,8 +6,7 @@
   "system": {
     "description": {
       "value": "<p>A horn, of any variety, to evoke awe, wonder, or fear in your audience.</p>\n<p>If you have proficiency with a given musical instrument, you can add your proficiency bonus to any ability checks you make to play music with the instrument. A bard can use a musical instrument as a spellcasting focus. Each type of musical instrument requires a separate proficiency. </p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -25,12 +24,18 @@
     "equipped": false,
     "rarity": "",
     "identified": true,
-    "toolType": "music",
-    "baseItem": "horn",
     "ability": "cha",
     "chatFlavor": "",
     "proficient": null,
-    "bonus": ""
+    "bonus": "",
+    "type": {
+      "value": "music",
+      "baseItem": "horn"
+    },
+    "unidentified": {
+      "description": ""
+    },
+    "container": null
   },
   "effects": [],
   "folder": "uvZXbqK3cHirDzeT",
@@ -44,7 +49,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787233724,
-    "modifiedTime": 1701903924273,
+    "modifiedTime": 1703713487406,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!aa9KuBy4dst7WIW9"

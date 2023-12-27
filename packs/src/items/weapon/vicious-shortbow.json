@@ -6,8 +6,7 @@
   "system": {
     "description": {
       "value": "<p>This two handed bow is somewhat smaller than the traditional longbow variant, making it well suited for rapid attacks while on the move or mounted from horseback.</p>\n<p>When you roll a 20 on your attack roll with this magic weapon, your critical hit deals an extra 2d6 damage of the weapon's type.</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -39,7 +38,8 @@
       "value": null,
       "width": null,
       "units": "",
-      "type": ""
+      "type": "",
+      "prompt": true
     },
     "range": {
       "value": 80,
@@ -50,12 +50,14 @@
       "value": null,
       "max": "",
       "per": null,
-      "recovery": ""
+      "recovery": "",
+      "prompt": true
     },
     "consume": {
       "type": "",
       "target": null,
-      "amount": null
+      "amount": null,
+      "scale": false
     },
     "ability": null,
     "actionType": "rwak",
@@ -89,8 +91,6 @@
       "dt": null,
       "conditions": ""
     },
-    "weaponType": "simpleR",
-    "baseItem": "shortbow",
     "properties": {
       "two": true,
       "amm": true,
@@ -108,7 +108,16 @@
       "lod": false,
       "mgc": true
     },
-    "proficient": null
+    "proficient": null,
+    "type": {
+      "value": "simpleR",
+      "baseItem": "shortbow"
+    },
+    "unidentified": {
+      "description": ""
+    },
+    "container": null,
+    "crewed": false
   },
   "effects": [],
   "folder": "MLMTCAvKsuFE3vYA",
@@ -122,7 +131,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787233712,
-    "modifiedTime": 1701903923912,
+    "modifiedTime": 1703713486807,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!Z0eO3TTpYA2hjwdd"

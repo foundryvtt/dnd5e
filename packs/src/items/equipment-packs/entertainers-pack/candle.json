@@ -5,8 +5,7 @@
   "system": {
     "description": {
       "value": "<p>For 1 hour, a candle sheds bright light in a 5-foot radius and dim light for an additional 5 feet.</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -79,9 +78,14 @@
       "dc": null,
       "scaling": "spell"
     },
-    "consumableType": "trinket",
     "container": "6OYR11aJX2dEVtOj",
-    "properties": {}
+    "properties": {},
+    "type": {
+      "value": "trinket"
+    },
+    "unidentified": {
+      "description": ""
+    }
   },
   "effects": [],
   "folder": "Dx3K2y0J1wJUPP9m",
@@ -91,7 +95,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787233435,
-    "modifiedTime": 1702146743488,
+    "modifiedTime": 1703713480780,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_id": "HgFNy16VK0iJgpFx",

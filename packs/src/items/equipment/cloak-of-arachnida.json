@@ -6,8 +6,7 @@
   "system": {
     "description": {
       "value": "<p><em>Wondrous item, (requires attunement)</em></p>\n<p>This fine garment is made of black silk interwoven with faint silvery threads. While wearing it, you gain the following benefits:</p>\n<ul>\n<li>You have resistance to poison damage.</li>\n<li>You have a climbing speed equal to your walking speed.</li>\n<li>You can move up, down, and across vertical surfaces and upside down along ceilings, while leaving your hands free.</li>\n<li>You can't be caught in webs of any sort and can move through webs as if they were difficult terrain.</li>\n<li>You can use an action to cast the @Compendium[dnd5e.spells.UJJu9c2UvCzVljiP]{Web} spell (save DC 13). The web created by the spell fills twice its normal area. Once used, this property of the cloak can't be used again until the next dawn.</li>\n</ul>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -39,7 +38,8 @@
       "value": 40,
       "width": null,
       "units": "ft",
-      "type": "cube"
+      "type": "cube",
+      "prompt": true
     },
     "range": {
       "value": 60,
@@ -50,12 +50,14 @@
       "value": 1,
       "max": "1",
       "per": "day",
-      "recovery": ""
+      "recovery": "",
+      "prompt": true
     },
     "consume": {
       "type": "",
       "target": null,
-      "amount": null
+      "amount": null,
+      "scale": false
     },
     "ability": "",
     "actionType": "save",
@@ -77,7 +79,6 @@
     },
     "armor": {
       "value": 0,
-      "type": "clothing",
       "dex": 0
     },
     "hp": {
@@ -86,14 +87,22 @@
       "dt": null,
       "conditions": ""
     },
-    "baseItem": "",
     "speed": {
       "value": null,
       "conditions": ""
     },
     "strength": null,
     "stealth": false,
-    "proficient": null
+    "proficient": null,
+    "type": {
+      "value": "clothing",
+      "baseItem": ""
+    },
+    "unidentified": {
+      "description": ""
+    },
+    "container": null,
+    "crewed": false
   },
   "effects": [],
   "folder": "aJgMxnZED9XdoN2W",
@@ -107,7 +116,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787233687,
-    "modifiedTime": 1701903923150,
+    "modifiedTime": 1703713485546,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!VwJjuNbBf2KHMPrY"

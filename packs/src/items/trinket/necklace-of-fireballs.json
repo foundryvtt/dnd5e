@@ -6,8 +6,7 @@
   "system": {
     "description": {
       "value": "<p><em>Wondrous item</em></p><p>This necklace has 1d6 + 3 beads hanging from it. You can use an action to detach a bead and throw it up to 60 feet away. When it reaches the end of its trajectory, the bead detonates as a 3rd-level @UUID[Compendium.dnd5e.spells.ztgcdrWPshKRpFd0]{Fireball} spell (save DC 15).</p><p>You can hurl multiple beads, or even the whole necklace, as one action. When you do so, increase the level of the fireball by 1 for each bead beyond the first.</p><section class=\"secret foundry-note\" id=\"secret-BPYFYGO4aUSbDiBj\"><p><strong>Foundry Note</strong></p><p>The 9 charges represent the maximum number of beads possible to find; please adjust as required. The Other Formula button can be used to roll the additional damage for extra beads thrown.</p><p>Additionally, here is a price guide depending on the number of beads still remaining. These prices are a guide only and should be adjusted accordingly to reflect the Dungeon Master's world:</p><table><thead><tr><td><strong>Number of Beads</strong></td><td><strong>Price (gp)</strong></td></tr></thead><tbody><tr><td>8</td><td>30,720</td></tr><tr><td>7</td><td>15,360</td></tr><tr><td>6</td><td>7680</td></tr><tr><td>5</td><td>3840</td></tr><tr><td>4</td><td>1600</td></tr><tr><td>3</td><td>960</td></tr><tr><td>2</td><td>480</td></tr><tr><td>1</td><td>300</td></tr></tbody></table></section>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -39,7 +38,8 @@
       "value": 20,
       "width": null,
       "units": "ft",
-      "type": "radius"
+      "type": "radius",
+      "prompt": true
     },
     "range": {
       "value": 60,
@@ -51,12 +51,14 @@
       "max": "9",
       "per": "charges",
       "recovery": "",
-      "autoDestroy": true
+      "autoDestroy": true,
+      "prompt": true
     },
     "consume": {
       "type": "",
       "target": null,
-      "amount": null
+      "amount": null,
+      "scale": false
     },
     "ability": "",
     "actionType": "save",
@@ -81,7 +83,15 @@
       "dc": 15,
       "scaling": "flat"
     },
-    "consumableType": "trinket"
+    "type": {
+      "value": "trinket"
+    },
+    "unidentified": {
+      "description": ""
+    },
+    "container": null,
+    "crewed": false,
+    "properties": {}
   },
   "effects": [],
   "folder": "UnUwTG4YIgd0kaUJ",
@@ -95,7 +105,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787233452,
-    "modifiedTime": 1701903917265,
+    "modifiedTime": 1703713475043,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!3ALOhh6JNInIK4o7"

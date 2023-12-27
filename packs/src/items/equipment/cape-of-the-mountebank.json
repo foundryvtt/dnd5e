@@ -6,8 +6,7 @@
   "system": {
     "description": {
       "value": "<p><em>Wondrous item</em></p>\n<p>This cape smells faintly of brimstone. While wearing it, you can use it to cast the @Compendium[dnd5e.spells.A4RsPuSvB9wFtz1j]{Dimension Door} spell as an action. This property of the cape can't be used again until the next dawn.</p>\n<p>When you disappear, you leave behind a cloud of smoke, and you appear in a similar cloud of smoke at your destination. The smoke lightly obscures the space you left and the space you appear in, and it dissipates at the end of your next turn. A light or stronger wind disperses the smoke.</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -39,7 +38,8 @@
       "value": null,
       "width": null,
       "units": "",
-      "type": "self"
+      "type": "self",
+      "prompt": true
     },
     "range": {
       "value": 500,
@@ -50,12 +50,14 @@
       "value": 1,
       "max": "1",
       "per": "day",
-      "recovery": ""
+      "recovery": "",
+      "prompt": true
     },
     "consume": {
       "type": "",
       "target": null,
-      "amount": null
+      "amount": null,
+      "scale": false
     },
     "ability": null,
     "actionType": "",
@@ -77,7 +79,6 @@
     },
     "armor": {
       "value": 0,
-      "type": "clothing",
       "dex": 0
     },
     "hp": {
@@ -86,14 +87,22 @@
       "dt": null,
       "conditions": ""
     },
-    "baseItem": "",
     "speed": {
       "value": null,
       "conditions": ""
     },
     "strength": null,
     "stealth": false,
-    "proficient": null
+    "proficient": null,
+    "type": {
+      "value": "clothing",
+      "baseItem": ""
+    },
+    "unidentified": {
+      "description": ""
+    },
+    "container": null,
+    "crewed": false
   },
   "effects": [],
   "folder": "aJgMxnZED9XdoN2W",
@@ -107,7 +116,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787233808,
-    "modifiedTime": 1701903927877,
+    "modifiedTime": 1703713489959,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!gpHgWLsD8k2yzbfR"

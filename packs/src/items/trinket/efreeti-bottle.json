@@ -6,8 +6,7 @@
   "system": {
     "description": {
       "value": "<p><em>Wondrous item</em></p>\n<p>This painted brass bottle weighs 1 pound. When you use an action to remove the stopper, a cloud of thick smoke flows out of the bottle. At the end of your turn, the smoke disappears with a flash of harmless fire, and an @Compendium[dnd5e.monsters.LTomFUTBrkRi0Pj5]{Efreeti} appears in an unoccupied space within 30 feet of you.</p>\n<p>The first time the bottle is opened, the GM rolls to determine what happens from the @Compendium[dnd5e.tables.yZMFNfocj5qyVuOC]{Efreeti Bottle} table.</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -39,7 +38,8 @@
       "value": 10,
       "width": null,
       "units": "ft",
-      "type": "square"
+      "type": "square",
+      "prompt": true
     },
     "range": {
       "value": 30,
@@ -51,12 +51,14 @@
       "max": "4",
       "per": "charges",
       "recovery": "",
-      "autoDestroy": true
+      "autoDestroy": true,
+      "prompt": true
     },
     "consume": {
       "type": "",
       "target": null,
-      "amount": null
+      "amount": null,
+      "scale": false
     },
     "ability": null,
     "actionType": "",
@@ -76,7 +78,15 @@
       "dc": null,
       "scaling": "spell"
     },
-    "consumableType": "trinket"
+    "type": {
+      "value": "trinket"
+    },
+    "unidentified": {
+      "description": ""
+    },
+    "container": null,
+    "crewed": false,
+    "properties": {}
   },
   "effects": [],
   "folder": "UnUwTG4YIgd0kaUJ",
@@ -90,7 +100,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787233799,
-    "modifiedTime": 1701903927161,
+    "modifiedTime": 1703713489526,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!fbcQsOgWCjhEAGY7"

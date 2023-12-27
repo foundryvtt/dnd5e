@@ -6,8 +6,7 @@
   "system": {
     "description": {
       "value": "<p>These metal restraints can bind a Small or Medium creature. Escaping the manacles requires a successful DC 20 Dexterity check. Breaking them requires a successful DC 20 Strength check. Each set of manacles comes with one key. Without the key, a creature proficient with thieves' tools can pick the manacles' lock with a successful DC 15 Dexterity check. Manacles have 15 hit points.</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -39,7 +38,8 @@
       "value": 1,
       "width": null,
       "units": "",
-      "type": "creature"
+      "type": "creature",
+      "prompt": true
     },
     "range": {
       "value": null,
@@ -51,12 +51,14 @@
       "max": "1",
       "per": "charges",
       "recovery": "",
-      "autoDestroy": false
+      "autoDestroy": false,
+      "prompt": true
     },
     "consume": {
       "type": "",
       "target": null,
-      "amount": null
+      "amount": null,
+      "scale": false
     },
     "ability": "",
     "actionType": "abil",
@@ -76,7 +78,15 @@
       "dc": 20,
       "scaling": "flat"
     },
-    "consumableType": "trinket"
+    "type": {
+      "value": "trinket"
+    },
+    "unidentified": {
+      "description": ""
+    },
+    "container": null,
+    "crewed": false,
+    "properties": {}
   },
   "effects": [],
   "folder": "UnUwTG4YIgd0kaUJ",
@@ -90,7 +100,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787233912,
-    "modifiedTime": 1701903942629,
+    "modifiedTime": 1703713495212,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!tWJLHIL6ZIZUez9k"

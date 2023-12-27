@@ -6,8 +6,7 @@
   "system": {
     "description": {
       "value": "<p><em>Wondrous item</em></p>\n<p>This tiny object looks like a feather. Different types of feather tokens exist, each with a different single-use effect. The GM chooses the kind of token or determines it randomly from the @Compendium[dnd5e.tables.OEdr086W61t1DRJo]{Feather Token} table.</p>\n<p><strong>Tree.</strong> You must be outdoors to use this token. You can use an action to touch it to an unoccupied space on the ground. The token disappears, and in its place a nonmagical oak tree springs into existence. The tree is 60 feet tall and has a 5-foot-diameter trunk, and its branches at the top spread out in a 20-foot radius.</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -39,7 +38,8 @@
       "value": 5,
       "width": null,
       "units": "ft",
-      "type": "space"
+      "type": "space",
+      "prompt": true
     },
     "range": {
       "value": null,
@@ -51,12 +51,14 @@
       "max": "1",
       "per": "charges",
       "recovery": "",
-      "autoDestroy": true
+      "autoDestroy": true,
+      "prompt": true
     },
     "consume": {
       "type": "",
       "target": null,
-      "amount": null
+      "amount": null,
+      "scale": false
     },
     "ability": null,
     "actionType": "",
@@ -76,7 +78,15 @@
       "dc": null,
       "scaling": "spell"
     },
-    "consumableType": "trinket"
+    "type": {
+      "value": "trinket"
+    },
+    "unidentified": {
+      "description": ""
+    },
+    "container": null,
+    "crewed": false,
+    "properties": {}
   },
   "effects": [],
   "folder": "UnUwTG4YIgd0kaUJ",
@@ -90,7 +100,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787233634,
-    "modifiedTime": 1701903921698,
+    "modifiedTime": 1703713482834,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!NjTgPn2o0M1TGk93"

@@ -6,8 +6,7 @@
   "system": {
     "description": {
       "value": "<p><em>The red in the potion's liquid continuously contracts to a tiny bead and then expands to color the clear liquid around it.  Shaking the bottle fails to interrupt this process.</em></p>\n<p>When you drink this potion, you gain the \"reduce\" effect of the @Compendium[dnd5e.spells.WahI41a3goVUg0x1]{Enlarge/Reduce} spell for 1d4 hours (no concentration required). </p>\n<p> </p>\n<p> </p>\n<p> </p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -39,7 +38,8 @@
       "value": 1,
       "width": null,
       "units": "",
-      "type": "creature"
+      "type": "creature",
+      "prompt": true
     },
     "range": {
       "value": null,
@@ -51,12 +51,14 @@
       "max": "1",
       "per": "charges",
       "recovery": "",
-      "autoDestroy": true
+      "autoDestroy": true,
+      "prompt": true
     },
     "consume": {
       "type": "",
       "target": null,
-      "amount": null
+      "amount": null,
+      "scale": false
     },
     "ability": "",
     "actionType": "util",
@@ -76,7 +78,15 @@
       "dc": null,
       "scaling": "spell"
     },
-    "consumableType": "potion"
+    "type": {
+      "value": "potion"
+    },
+    "unidentified": {
+      "description": ""
+    },
+    "container": null,
+    "crewed": false,
+    "properties": {}
   },
   "effects": [],
   "folder": "gyBZp72zKb56Da84",
@@ -90,7 +100,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787233562,
-    "modifiedTime": 1701903920224,
+    "modifiedTime": 1703713480642,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!HY8duCwmvlXOruTG"

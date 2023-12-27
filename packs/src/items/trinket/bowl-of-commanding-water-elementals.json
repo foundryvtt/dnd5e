@@ -6,8 +6,7 @@
   "system": {
     "description": {
       "value": "<p><em>Wondrous item</em></p>\n<p>While this bowl is filled with water, you can use an action to speak the bowl's command word and summon a <em>@Compendium[dnd5e.monsters.namJz755U1EhvEJa]{Water Elemental}</em>, as if you had cast the <em>@Compendium[dnd5e.spells.1LkZvINag7KqBmDR]{Conjure Elemental}</em> spell. The bowl can't be used this way again until the next dawn.</p>\n<p>The bowl is about 1 foot in diameter and half as deep. It weighs 3 pounds and holds about 3 gallons.</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -39,7 +38,8 @@
       "value": 10,
       "width": null,
       "units": "ft",
-      "type": "square"
+      "type": "square",
+      "prompt": true
     },
     "range": {
       "value": 90,
@@ -51,12 +51,14 @@
       "max": "1",
       "per": "day",
       "recovery": "",
-      "autoDestroy": false
+      "autoDestroy": false,
+      "prompt": true
     },
     "consume": {
       "type": "",
       "target": null,
-      "amount": null
+      "amount": null,
+      "scale": false
     },
     "ability": null,
     "actionType": "",
@@ -76,7 +78,15 @@
       "dc": null,
       "scaling": "spell"
     },
-    "consumableType": "trinket"
+    "type": {
+      "value": "trinket"
+    },
+    "unidentified": {
+      "description": ""
+    },
+    "container": null,
+    "crewed": false,
+    "properties": {}
   },
   "effects": [],
   "folder": "UnUwTG4YIgd0kaUJ",
@@ -90,7 +100,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787233890,
-    "modifiedTime": 1701903940156,
+    "modifiedTime": 1703713494267,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!rRMaaGZ7qbzqMvoI"

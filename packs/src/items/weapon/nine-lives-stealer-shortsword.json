@@ -6,8 +6,7 @@
   "system": {
     "description": {
       "value": "<p><em>(Requires attunement)</em></p><p>You gain a +2 bonus to attack and damage rolls made with this magic weapon.</p><p>The sword has 1d8 + 1 charges. If you score a critical hit against a creature that has fewer than 100 hit points, it must succeed on a DC 15 Constitution saving throw or be slain instantly as the sword tears its life force from its body (a construct or an undead is immune). The sword loses 1 charge if the creature is slain. When the sword has no charges remaining, it loses this property.</p><section class=\"secret foundry-note\" id=\"secret-frvYcC8zMAoCd8sF\"><p><strong>Foundry Note</strong></p><p>The 9 charges reflect a fully charged blade. Please adjust accordingly as required.</p></section>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -39,7 +38,8 @@
       "value": null,
       "width": null,
       "units": "",
-      "type": ""
+      "type": "",
+      "prompt": true
     },
     "range": {
       "value": 5,
@@ -50,12 +50,14 @@
       "value": 9,
       "max": "9",
       "per": "charges",
-      "recovery": ""
+      "recovery": "",
+      "prompt": true
     },
     "consume": {
       "type": "",
       "target": null,
-      "amount": null
+      "amount": null,
+      "scale": false
     },
     "ability": "",
     "actionType": "mwak",
@@ -89,8 +91,6 @@
       "dt": null,
       "conditions": ""
     },
-    "weaponType": "martialM",
-    "baseItem": "shortsword",
     "properties": {
       "amm": false,
       "hvy": false,
@@ -110,7 +110,16 @@
       "ada": false,
       "sil": false
     },
-    "proficient": null
+    "proficient": null,
+    "type": {
+      "value": "martialM",
+      "baseItem": "shortsword"
+    },
+    "unidentified": {
+      "description": ""
+    },
+    "container": null,
+    "crewed": false
   },
   "effects": [],
   "folder": "MLMTCAvKsuFE3vYA",
@@ -124,7 +133,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787233446,
-    "modifiedTime": 1701903917105,
+    "modifiedTime": 1703713474700,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!2Lkub0qIwucWEfp3"

@@ -6,8 +6,7 @@
   "system": {
     "description": {
       "value": "<p>This set of tools includes a small file, a set of lock picks, a small mirror mounted on a metal handle, a set of narrow-bladed scissors, and a pair of pliers. Proficiency with these tools lets you add your proficiency bonus to any ability checks you make to disarm traps or open locks.</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -25,12 +24,18 @@
     "equipped": false,
     "rarity": "",
     "identified": true,
-    "toolType": "",
-    "baseItem": "thief",
     "ability": "dex",
     "chatFlavor": "",
     "proficient": null,
-    "bonus": ""
+    "bonus": "",
+    "type": {
+      "value": "",
+      "baseItem": "thief"
+    },
+    "unidentified": {
+      "description": ""
+    },
+    "container": null
   },
   "effects": [],
   "folder": "uvZXbqK3cHirDzeT",
@@ -44,7 +49,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787233959,
-    "modifiedTime": 1701903946867,
+    "modifiedTime": 1703713496235,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!woWZ1sO5IUVGzo58"

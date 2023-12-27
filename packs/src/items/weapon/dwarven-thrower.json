@@ -6,8 +6,7 @@
   "system": {
     "description": {
       "value": "<p><em>(Requires attunement by a dwarf)</em></p><p>You gain a +3 bonus to attack and damage rolls made with this magic weapon. It has the thrown property with a normal range of 20 feet and a long range of 60 feet. When you hit with a ranged attack using this weapon, it deals an extra 1d8 damage or, if the target is a giant, 2d8 damage. Immediately after the attack, the weapon flies back to your hand.</p><section class=\"secret foundry-note\" id=\"secret-DdEcPocHwtm5CFcf\"><p><strong>Foundry Note</strong></p><p>To apply the additional damage to a giant, please use the Other Formula one more time.</p></section>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -39,7 +38,8 @@
       "value": null,
       "width": null,
       "units": "",
-      "type": ""
+      "type": "",
+      "prompt": true
     },
     "range": {
       "value": 20,
@@ -50,12 +50,14 @@
       "value": null,
       "max": "",
       "per": null,
-      "recovery": ""
+      "recovery": "",
+      "prompt": true
     },
     "consume": {
       "type": "",
       "target": null,
-      "amount": null
+      "amount": null,
+      "scale": false
     },
     "ability": "",
     "actionType": "mwak",
@@ -89,8 +91,6 @@
       "dt": null,
       "conditions": ""
     },
-    "weaponType": "martialM",
-    "baseItem": "warhammer",
     "properties": {
       "amm": false,
       "hvy": false,
@@ -110,7 +110,16 @@
       "ada": false,
       "sil": false
     },
-    "proficient": null
+    "proficient": null,
+    "type": {
+      "value": "martialM",
+      "baseItem": "warhammer"
+    },
+    "unidentified": {
+      "description": ""
+    },
+    "container": null,
+    "crewed": false
   },
   "effects": [],
   "folder": "MLMTCAvKsuFE3vYA",
@@ -124,7 +133,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787233841,
-    "modifiedTime": 1701903932016,
+    "modifiedTime": 1703713491602,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!kvD4ElYCfCKpjDeg"

@@ -6,8 +6,7 @@
   "system": {
     "description": {
       "value": "<p>This crude armor consists of thick furs and pelts. It is commonly worn by barbarian tribes, evil humanoids, and other folk who lack access to the tools and materials needed to create better armor.</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -40,7 +39,8 @@
       "value": null,
       "width": null,
       "units": "",
-      "type": ""
+      "type": "",
+      "prompt": true
     },
     "range": {
       "value": null,
@@ -51,12 +51,14 @@
       "value": null,
       "max": "",
       "per": null,
-      "recovery": ""
+      "recovery": "",
+      "prompt": true
     },
     "consume": {
       "type": "",
       "target": null,
-      "amount": null
+      "amount": null,
+      "scale": false
     },
     "ability": null,
     "actionType": "",
@@ -78,7 +80,6 @@
     },
     "armor": {
       "value": 12,
-      "type": "medium",
       "dex": 2
     },
     "hp": {
@@ -87,14 +88,21 @@
       "dt": null,
       "conditions": ""
     },
-    "baseItem": "hide",
     "speed": {
       "value": null,
       "conditions": ""
     },
     "strength": null,
     "stealth": false,
-    "proficient": null
+    "proficient": null,
+    "type": {
+      "value": "medium",
+      "baseItem": "hide"
+    },
+    "unidentified": {
+      "description": ""
+    },
+    "container": null
   },
   "effects": [],
   "folder": "JqTP017wj3uxDJ8g",
@@ -108,7 +116,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787233857,
-    "modifiedTime": 1701904253347,
+    "modifiedTime": 1703713492520,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!n1V07puo0RQxPGuF"

@@ -5,8 +5,7 @@
   "system": {
     "description": {
       "value": "<p><em>Wondrous item</em></p>\n<p>Your Strength score is 19 while you wear these gauntlets. They have no effect on you if your Strength is already 19 or higher.</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -39,7 +38,8 @@
       "value": null,
       "width": null,
       "units": "",
-      "type": ""
+      "type": "",
+      "prompt": true
     },
     "range": {
       "value": null,
@@ -50,12 +50,14 @@
       "value": null,
       "max": "",
       "per": null,
-      "recovery": ""
+      "recovery": "",
+      "prompt": true
     },
     "consume": {
       "type": "",
       "target": null,
-      "amount": null
+      "amount": null,
+      "scale": false
     },
     "ability": null,
     "actionType": "",
@@ -77,7 +79,6 @@
     },
     "armor": {
       "value": 0,
-      "type": "clothing",
       "dex": 0
     },
     "hp": {
@@ -86,18 +87,24 @@
       "dt": null,
       "conditions": ""
     },
-    "baseItem": "",
     "speed": {
       "value": null,
       "conditions": ""
     },
     "strength": null,
     "stealth": false,
-    "proficient": null
+    "proficient": null,
+    "type": {
+      "value": "clothing",
+      "baseItem": ""
+    },
+    "unidentified": {
+      "description": ""
+    },
+    "container": null
   },
   "effects": [
     {
-      "label": "Gauntlets of Ogre Power",
       "icon": "icons/magic/unholy/strike-hand-glow-pink.webp",
       "origin": "Compendium.dnd5e.items.3TWT5bv3z5zGUZCe",
       "duration": {
@@ -122,7 +129,9 @@
       "tint": null,
       "transfer": true,
       "flags": {},
-      "sort": 0,
+      "name": "Gauntlets of Ogre Power",
+      "description": "",
+      "statuses": [],
       "_key": "!items.effects!3TWT5bv3z5zGUZCe.m7FoXVGKT7C9X7aq"
     }
   ],
@@ -135,7 +144,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787233454,
-    "modifiedTime": 1701903917324,
+    "modifiedTime": 1703713475159,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "folder": "aJgMxnZED9XdoN2W",

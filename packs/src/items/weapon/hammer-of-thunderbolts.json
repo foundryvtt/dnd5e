@@ -6,8 +6,7 @@
   "system": {
     "description": {
       "value": "<p>You gain a +1 bonus to attack and damage rolls made with this magic weapon (maul).</p>\n<p><strong>Giant's Bane</strong> (<em>requires attunement</em>)</p>\n<p>You must be wearing a Belt of Giant Strength (any variety) and Gauntlets of Ogre Power to attune to this weapon. The attunement ends if you take off either of those items. While you are attuned to this weapon and holding it, your Strength score increases by 4 and can exceed 20, but not 30.</p>\n<p>When you roll a 20 on an attack roll made with this weapon against a giant, the giant must succeed on a DC 17 Constitution saving throw or die.</p>\n<p>The hammer also has 5 charges. While attuned to it, you can expend 1 charge and make a ranged weapon attack with the hammer, hurling it as if it had the thrown property with a normal range of 20 feet and a long range of 60 feet. If the attack hits, the hammer unleashes a thunderclap audible out to 300 feet. The target and every creature within 30 feet of it must succeed on a DC 17 Constitution saving throw or be stunned until the end of your next turn. The hammer regains 1d4 + 1 expended charges daily at dawn.</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -39,7 +38,8 @@
       "value": null,
       "width": null,
       "units": "",
-      "type": ""
+      "type": "",
+      "prompt": true
     },
     "range": {
       "value": 20,
@@ -50,12 +50,14 @@
       "value": 5,
       "max": "5",
       "per": "charges",
-      "recovery": "1d4 + 1"
+      "recovery": "1d4 + 1",
+      "prompt": true
     },
     "consume": {
       "type": "",
       "target": null,
-      "amount": null
+      "amount": null,
+      "scale": false
     },
     "ability": null,
     "actionType": "mwak",
@@ -89,8 +91,6 @@
       "dt": null,
       "conditions": ""
     },
-    "weaponType": "martialM",
-    "baseItem": "maul",
     "properties": {
       "amm": false,
       "hvy": true,
@@ -108,7 +108,16 @@
       "ver": false,
       "mgc": true
     },
-    "proficient": null
+    "proficient": null,
+    "type": {
+      "value": "martialM",
+      "baseItem": "maul"
+    },
+    "unidentified": {
+      "description": ""
+    },
+    "container": null,
+    "crewed": false
   },
   "effects": [],
   "folder": "MLMTCAvKsuFE3vYA",
@@ -122,7 +131,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787233956,
-    "modifiedTime": 1701903946251,
+    "modifiedTime": 1703713496031,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!wGDDt17DpBcXPuUD"

@@ -6,8 +6,7 @@
   "system": {
     "description": {
       "value": "<p>A medium sized blade with a firm crossguard and a leather-wrapped handle. A versatile weapon which makes up in versatility what it lacks in reach.</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -39,7 +38,8 @@
       "value": null,
       "width": null,
       "units": "",
-      "type": ""
+      "type": "",
+      "prompt": true
     },
     "range": {
       "value": 5,
@@ -50,12 +50,14 @@
       "value": null,
       "max": "",
       "per": null,
-      "recovery": ""
+      "recovery": "",
+      "prompt": true
     },
     "consume": {
       "type": "",
       "target": null,
-      "amount": null
+      "amount": null,
+      "scale": false
     },
     "ability": null,
     "actionType": "mwak",
@@ -89,8 +91,6 @@
       "dt": null,
       "conditions": ""
     },
-    "weaponType": "martialM",
-    "baseItem": "shortsword",
     "properties": {
       "fin": true,
       "lgt": true,
@@ -107,7 +107,16 @@
       "two": false,
       "ver": false
     },
-    "proficient": null
+    "proficient": null,
+    "type": {
+      "value": "martialM",
+      "baseItem": "shortsword"
+    },
+    "unidentified": {
+      "description": ""
+    },
+    "container": null,
+    "crewed": false
   },
   "effects": [],
   "folder": "MLMTCAvKsuFE3vYA",
@@ -121,7 +130,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787233871,
-    "modifiedTime": 1701903937246,
+    "modifiedTime": 1703713493213,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!osLzOwQdPtrK3rQH"

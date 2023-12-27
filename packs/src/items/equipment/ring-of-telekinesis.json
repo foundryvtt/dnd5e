@@ -6,8 +6,7 @@
   "system": {
     "description": {
       "value": "<p><em>(Requires attunement)</em></p>\n<p>While wearing this ring, you can cast the @Compendium[dnd5e.spells.HQfd7jJyULIoGxrZ]{Telekinesis} spell at will, but you can target only objects that aren't being worn or carried.</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -39,7 +38,8 @@
       "value": 1,
       "width": null,
       "units": "",
-      "type": "object"
+      "type": "object",
+      "prompt": true
     },
     "range": {
       "value": 60,
@@ -50,12 +50,14 @@
       "value": null,
       "max": "",
       "per": null,
-      "recovery": ""
+      "recovery": "",
+      "prompt": true
     },
     "consume": {
       "type": "",
       "target": null,
-      "amount": null
+      "amount": null,
+      "scale": false
     },
     "ability": "",
     "actionType": "util",
@@ -77,7 +79,6 @@
     },
     "armor": {
       "value": 0,
-      "type": "trinket",
       "dex": 0
     },
     "hp": {
@@ -86,14 +87,22 @@
       "dt": null,
       "conditions": ""
     },
-    "baseItem": "",
     "speed": {
       "value": null,
       "conditions": ""
     },
     "strength": null,
     "stealth": false,
-    "proficient": null
+    "proficient": null,
+    "type": {
+      "value": "trinket",
+      "baseItem": ""
+    },
+    "unidentified": {
+      "description": ""
+    },
+    "container": null,
+    "crewed": false
   },
   "effects": [],
   "folder": "aJgMxnZED9XdoN2W",
@@ -107,7 +116,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787233817,
-    "modifiedTime": 1701903928645,
+    "modifiedTime": 1703713490437,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!hxfOtvFrY1PXHQN1"

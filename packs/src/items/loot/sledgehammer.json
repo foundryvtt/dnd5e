@@ -6,8 +6,7 @@
   "system": {
     "description": {
       "value": "<p>A tool with a large, flat, often metal head, attached to a long handle. </p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -21,10 +20,15 @@
       "value": 2,
       "denomination": "gp"
     },
-    "attunement": 0,
-    "equipped": false,
     "rarity": "",
-    "identified": true
+    "identified": true,
+    "type": {
+      "value": ""
+    },
+    "unidentified": {
+      "description": ""
+    },
+    "container": null
   },
   "effects": [],
   "folder": "dlru9Hy74nSMv6fr",
@@ -38,7 +42,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787233496,
-    "modifiedTime": 1701903918515,
+    "modifiedTime": 1703713477535,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!9G9QGSPgpZDSsm37"

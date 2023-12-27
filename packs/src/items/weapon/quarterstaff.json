@@ -6,8 +6,7 @@
   "system": {
     "description": {
       "value": "<p>A thick shaft of wood wrapped with a sturdy grip makes a highly functional weapon in addition to a stout walking stick.</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -39,7 +38,8 @@
       "value": null,
       "width": null,
       "units": "",
-      "type": ""
+      "type": "",
+      "prompt": true
     },
     "range": {
       "value": 5,
@@ -50,12 +50,14 @@
       "value": null,
       "max": "",
       "per": null,
-      "recovery": ""
+      "recovery": "",
+      "prompt": true
     },
     "consume": {
       "type": "",
       "target": null,
-      "amount": null
+      "amount": null,
+      "scale": false
     },
     "ability": null,
     "actionType": "mwak",
@@ -89,8 +91,6 @@
       "dt": null,
       "conditions": ""
     },
-    "weaponType": "simpleM",
-    "baseItem": "quarterstaff",
     "properties": {
       "ver": true,
       "amm": false,
@@ -107,7 +107,16 @@
       "thr": false,
       "two": false
     },
-    "proficient": null
+    "proficient": null,
+    "type": {
+      "value": "simpleM",
+      "baseItem": "quarterstaff"
+    },
+    "unidentified": {
+      "description": ""
+    },
+    "container": null,
+    "crewed": false
   },
   "effects": [],
   "folder": "MLMTCAvKsuFE3vYA",
@@ -121,7 +130,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787233801,
-    "modifiedTime": 1701903927310,
+    "modifiedTime": 1703713489629,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!g2dWN7PQiMRYWzyk"

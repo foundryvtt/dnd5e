@@ -6,8 +6,7 @@
   "system": {
     "description": {
       "value": "<p><em>Wondrous item, (requires attunement)</em></p>\n<p>While wearing this belt, your Strength score changes to 21. If your Strength is already equal to or greater than the belt's score, the item has no effect on you.</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -40,7 +39,8 @@
       "value": null,
       "width": null,
       "units": "",
-      "type": ""
+      "type": "",
+      "prompt": true
     },
     "range": {
       "value": null,
@@ -51,12 +51,14 @@
       "value": null,
       "max": "",
       "per": null,
-      "recovery": ""
+      "recovery": "",
+      "prompt": true
     },
     "consume": {
       "type": "",
       "target": null,
-      "amount": null
+      "amount": null,
+      "scale": false
     },
     "ability": null,
     "actionType": "",
@@ -78,7 +80,6 @@
     },
     "armor": {
       "value": 0,
-      "type": "clothing",
       "dex": 0
     },
     "hp": {
@@ -87,18 +88,24 @@
       "dt": null,
       "conditions": ""
     },
-    "baseItem": "",
     "speed": {
       "value": null,
       "conditions": ""
     },
     "strength": null,
     "stealth": false,
-    "proficient": null
+    "proficient": null,
+    "type": {
+      "value": "clothing",
+      "baseItem": ""
+    },
+    "unidentified": {
+      "description": ""
+    },
+    "container": null
   },
   "effects": [
     {
-      "label": "Belt of Hill Giant Strength",
       "icon": "icons/equipment/waist/belt-buckle-square-leather-brown.webp",
       "origin": "Compendium.dnd5e.items.ER75WHewYN04Zp11",
       "duration": {
@@ -116,13 +123,16 @@
         {
           "key": "system.abilities.str.value",
           "mode": 4,
-          "value": "21"
+          "value": "21",
+          "priority": null
         }
       ],
       "tint": null,
       "transfer": true,
       "flags": {},
-      "sort": 0,
+      "name": "Belt of Hill Giant Strength",
+      "description": "",
+      "statuses": [],
       "_key": "!items.effects!ER75WHewYN04Zp11.wz6bugCbOYcTBUMg"
     }
   ],
@@ -137,7 +147,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787233535,
-    "modifiedTime": 1701903919486,
+    "modifiedTime": 1703713479368,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!ER75WHewYN04Zp11"

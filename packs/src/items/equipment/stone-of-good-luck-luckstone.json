@@ -6,8 +6,7 @@
   "system": {
     "description": {
       "value": "<p><em>Wondrous item, (requires attunement)</em></p>\n<p>While this polished agate is on your person, you gain a +1 bonus to ability checks and saving throws.</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -40,7 +39,8 @@
       "value": null,
       "width": null,
       "units": "",
-      "type": ""
+      "type": "",
+      "prompt": true
     },
     "range": {
       "value": null,
@@ -51,12 +51,14 @@
       "value": null,
       "max": "",
       "per": null,
-      "recovery": ""
+      "recovery": "",
+      "prompt": true
     },
     "consume": {
       "type": "",
       "target": null,
-      "amount": null
+      "amount": null,
+      "scale": false
     },
     "ability": null,
     "actionType": "",
@@ -78,7 +80,6 @@
     },
     "armor": {
       "value": null,
-      "type": "trinket",
       "dex": null
     },
     "hp": {
@@ -87,18 +88,24 @@
       "dt": null,
       "conditions": ""
     },
-    "baseItem": "",
     "speed": {
       "value": null,
       "conditions": ""
     },
     "strength": null,
     "stealth": false,
-    "proficient": null
+    "proficient": null,
+    "type": {
+      "value": "trinket",
+      "baseItem": ""
+    },
+    "unidentified": {
+      "description": ""
+    },
+    "container": null
   },
   "effects": [
     {
-      "label": "Stone of Good Luck",
       "icon": "icons/commodities/gems/gem-faceted-octagon-yellow.webp",
       "origin": "Compendium.dnd5e.items.296Zgo9RhltWShE1",
       "duration": {
@@ -116,18 +123,22 @@
         {
           "key": "system.bonuses.abilities.save",
           "mode": 2,
-          "value": "+1"
+          "value": "+1",
+          "priority": null
         },
         {
           "key": "system.bonuses.abilities.check",
           "mode": 2,
-          "value": "+1"
+          "value": "+1",
+          "priority": null
         }
       ],
       "tint": null,
       "transfer": true,
       "flags": {},
-      "sort": 0,
+      "name": "Stone of Good Luck",
+      "description": "",
+      "statuses": [],
       "_key": "!items.effects!296Zgo9RhltWShE1.TghMVbmFnR0t0AoP"
     }
   ],
@@ -142,7 +153,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787233443,
-    "modifiedTime": 1701903917046,
+    "modifiedTime": 1703713474535,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!296Zgo9RhltWShE1"

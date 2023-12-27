@@ -6,8 +6,7 @@
   "system": {
     "description": {
       "value": "<p>A grimoire given to you by your patron. Choose three cantrips from any class's spell list (the three needn't be from the same list). While the book is on your person, you can cast those cantrips at will. They don't count against your number of cantrips known. If they don't appear on the warlock spell list, they are nonetheless warlock spells for you. </p>\n<p>If you lose your Book of Shadows, you can perform a 1-hour ceremony to receive a replacement from your patron. This ceremony can be performed during a short or long rest, and it destroys the previous book. The book turns to ash when you die.</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -21,10 +20,15 @@
       "value": 0,
       "denomination": "gp"
     },
-    "attunement": 0,
-    "equipped": false,
     "rarity": "veryRare",
-    "identified": true
+    "identified": true,
+    "type": {
+      "value": ""
+    },
+    "unidentified": {
+      "description": ""
+    },
+    "container": null
   },
   "effects": [],
   "folder": "dlru9Hy74nSMv6fr",
@@ -38,7 +42,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787233521,
-    "modifiedTime": 1701903919165,
+    "modifiedTime": 1703713478745,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!CwWbeQ6XyqFzbMYw"

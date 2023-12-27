@@ -6,8 +6,7 @@
   "system": {
     "description": {
       "value": "<p>You gain a +1 bonus to attack and damage rolls made with this magic weapon. The bonus increases to +3 when you use the mace to attack a construct.</p><p>When you roll a 20 on an attack roll made with this weapon, the target takes an extra 2d6 bludgeoning damage, or 4d6 bludgeoning damage if it's a construct. If a construct has 25 hit points or fewer after taking this damage, it is destroyed.</p><section class=\"secret foundry-note\" id=\"secret-AY4O41uMKnbhqve5\"><p><strong>Foundry Note</strong></p><p>The bonus to attack and damage rolls has been set at the +1. In the instances of hitting a construct, please remember to +2 to both of these results. Additionally, on a hit of 20 against a construct, please use the Other Formula one more time.</p></section>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -39,7 +38,8 @@
       "value": null,
       "width": null,
       "units": "",
-      "type": ""
+      "type": "",
+      "prompt": true
     },
     "range": {
       "value": 5,
@@ -50,12 +50,14 @@
       "value": null,
       "max": "",
       "per": null,
-      "recovery": ""
+      "recovery": "",
+      "prompt": true
     },
     "consume": {
       "type": "",
       "target": null,
-      "amount": null
+      "amount": null,
+      "scale": false
     },
     "ability": "",
     "actionType": "mwak",
@@ -89,8 +91,6 @@
       "dt": null,
       "conditions": ""
     },
-    "weaponType": "simpleM",
-    "baseItem": "mace",
     "properties": {
       "amm": false,
       "hvy": false,
@@ -110,7 +110,16 @@
       "ada": false,
       "sil": false
     },
-    "proficient": null
+    "proficient": null,
+    "type": {
+      "value": "simpleM",
+      "baseItem": "mace"
+    },
+    "unidentified": {
+      "description": ""
+    },
+    "container": null,
+    "crewed": false
   },
   "effects": [],
   "folder": "MLMTCAvKsuFE3vYA",
@@ -124,7 +133,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787233955,
-    "modifiedTime": 1701903945694,
+    "modifiedTime": 1703713495981,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!w56FIjFafs2rN6iK"

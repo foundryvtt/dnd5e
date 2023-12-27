@@ -6,8 +6,7 @@
   "system": {
     "description": {
       "value": "<p>A hardened pebble of stone, bone, or metal which can be flung at high velocity using a sling.</p><section class=\"secret foundry-note\" id=\"secret-nfge79saW8cFjJrx\"><p><strong>Foundry Note</strong></p><p>It will usually be impossible to buy one sling bullet because they are worth less than a copper piece (5 bullets = 1 cp).</p></section>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -39,7 +38,8 @@
       "value": null,
       "width": null,
       "units": "",
-      "type": ""
+      "type": "",
+      "prompt": true
     },
     "range": {
       "value": 30,
@@ -51,12 +51,14 @@
       "max": "",
       "per": null,
       "recovery": "",
-      "autoDestroy": false
+      "autoDestroy": false,
+      "prompt": true
     },
     "consume": {
       "type": "",
       "target": null,
-      "amount": null
+      "amount": null,
+      "scale": false
     },
     "ability": "",
     "actionType": "rwak",
@@ -76,7 +78,15 @@
       "dc": null,
       "scaling": "spell"
     },
-    "consumableType": "ammo"
+    "type": {
+      "value": "ammo"
+    },
+    "unidentified": {
+      "description": ""
+    },
+    "container": null,
+    "crewed": false,
+    "properties": {}
   },
   "effects": [],
   "folder": "NdDvXSjfqlghXpQZ",
@@ -90,7 +100,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787233974,
-    "modifiedTime": 1701903948958,
+    "modifiedTime": 1703713497066,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!z9SbsMIBZzuhZOqT"

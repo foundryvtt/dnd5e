@@ -6,8 +6,7 @@
   "system": {
     "description": {
       "value": "<p><em>This concoction looks, smells, and tastes like a potion of healing or other beneficial potion.</em></p><p>However, it is actually poison masked by illusion magic. An identify spell reveals its true nature.</p><p>If you drink it, you take 3d6 poison damage, and you must succeed on a DC 13 Constitution saving throw or be poisoned. At the start of each of your turns while you are poisoned in this way, you take 3d6 poison damage. At the end of each of your turns, you can repeat the saving throw. On a successful save, the poison damage you take on your subsequent turns decreases by 1d6. The poison ends when the damage decreases to 0.</p><section class=\"secret foundry-note\" id=\"secret-lK9L9LydgGgQJzNL\"><p><strong>Foundry Note</strong></p><p>To apply the reduced damage from a successful Constitution save, please use the Other Formula (set at 1d6) as required.</p></section>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -39,7 +38,8 @@
       "value": 1,
       "width": null,
       "units": "",
-      "type": "creature"
+      "type": "creature",
+      "prompt": true
     },
     "range": {
       "value": null,
@@ -51,12 +51,14 @@
       "max": "1",
       "per": "charges",
       "recovery": "",
-      "autoDestroy": true
+      "autoDestroy": true,
+      "prompt": true
     },
     "consume": {
       "type": "",
       "target": null,
-      "amount": null
+      "amount": null,
+      "scale": false
     },
     "ability": "",
     "actionType": "save",
@@ -81,7 +83,15 @@
       "dc": 13,
       "scaling": "flat"
     },
-    "consumableType": "poison"
+    "type": {
+      "value": "poison"
+    },
+    "unidentified": {
+      "description": ""
+    },
+    "container": null,
+    "crewed": false,
+    "properties": {}
   },
   "effects": [],
   "folder": "ZzUfnm1OuSL02nLG",
@@ -95,7 +105,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787233878,
-    "modifiedTime": 1701903938100,
+    "modifiedTime": 1703713493603,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!qBSEGJyHxdKIlBfj"

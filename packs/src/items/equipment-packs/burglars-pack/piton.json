@@ -5,8 +5,7 @@
   "system": {
     "description": {
       "value": "<p>A metal spike that is drive into a seam in a climbing surface with a climbing hammer. It can also be used like iron spikes to block doors in a pinch.</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -79,9 +78,14 @@
       "dc": null,
       "scaling": "spell"
     },
-    "consumableType": "trinket",
     "container": "xsB7Y2WI476kvOt4",
-    "properties": {}
+    "properties": {},
+    "type": {
+      "value": "trinket"
+    },
+    "unidentified": {
+      "description": ""
+    }
   },
   "effects": [],
   "folder": "Dx3K2y0J1wJUPP9m",
@@ -91,7 +95,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787233674,
-    "modifiedTime": 1702146651568,
+    "modifiedTime": 1703713483178,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_id": "P31t6tGgt9aLAdYt",

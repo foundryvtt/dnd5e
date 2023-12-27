@@ -6,8 +6,7 @@
   "system": {
     "description": {
       "value": "<p>A small crossbow with a wooden haft and a tense cord which is capable of firing a single bolt which can puncture even heavy armor at close range.</p>\n<p>When you roll a 20 on your attack roll with this magic weapon, your critical hit deals an extra 2d6 damage of the weapon's type.</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -39,7 +38,8 @@
       "value": null,
       "width": null,
       "units": "",
-      "type": ""
+      "type": "",
+      "prompt": true
     },
     "range": {
       "value": 80,
@@ -50,12 +50,14 @@
       "value": null,
       "max": "",
       "per": null,
-      "recovery": ""
+      "recovery": "",
+      "prompt": true
     },
     "consume": {
       "type": "",
       "target": null,
-      "amount": null
+      "amount": null,
+      "scale": false
     },
     "ability": null,
     "actionType": "rwak",
@@ -89,8 +91,6 @@
       "dt": null,
       "conditions": ""
     },
-    "weaponType": "simpleR",
-    "baseItem": "lightcrossbow",
     "properties": {
       "lgt": false,
       "two": true,
@@ -108,7 +108,16 @@
       "lod": true,
       "mgc": true
     },
-    "proficient": null
+    "proficient": null,
+    "type": {
+      "value": "simpleR",
+      "baseItem": "lightcrossbow"
+    },
+    "unidentified": {
+      "description": ""
+    },
+    "container": null,
+    "crewed": false
   },
   "effects": [],
   "folder": "MLMTCAvKsuFE3vYA",
@@ -122,7 +131,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787233685,
-    "modifiedTime": 1701903923020,
+    "modifiedTime": 1703713485402,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!VQAUcjn1qdwW3MeU"

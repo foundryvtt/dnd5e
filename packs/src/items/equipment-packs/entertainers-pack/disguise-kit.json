@@ -5,8 +5,7 @@
   "system": {
     "description": {
       "value": "<p>This pouch of cosmetics, hair dye, and small props lets you create disguises that change your physical appearance. Proficiency with this kit lets you add your proficiency bonus to any ability checks you make to create a visual disguise.</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -24,13 +23,18 @@
     "equipped": false,
     "rarity": "",
     "identified": true,
-    "toolType": "",
-    "baseItem": "disg",
     "ability": "int",
     "chatFlavor": "",
     "proficient": null,
     "bonus": "",
-    "container": "6OYR11aJX2dEVtOj"
+    "container": "6OYR11aJX2dEVtOj",
+    "type": {
+      "value": "",
+      "baseItem": "disg"
+    },
+    "unidentified": {
+      "description": ""
+    }
   },
   "effects": [],
   "folder": "Dx3K2y0J1wJUPP9m",
@@ -40,7 +44,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787233571,
-    "modifiedTime": 1702146740255,
+    "modifiedTime": 1703713491522,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_id": "kj5DNiBKasYWyuj6",

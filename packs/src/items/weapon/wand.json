@@ -6,8 +6,7 @@
   "system": {
     "description": {
       "value": "<p>A single-handed delicate implement of wood, bone, crystal, or other exotic materials which is commonly used as a focus to assist with arcane spellcasting.</p>\n<p><strong>Spellcasting Focus</strong>. An arcane focus is a special item designed to channel the power of arcane spells. A sorcerer, warlock, or wizard can use such an item as a spellcasting focus, using it in place of any material component which does not list a cost.</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -39,7 +38,8 @@
       "value": null,
       "width": null,
       "units": "",
-      "type": ""
+      "type": "",
+      "prompt": true
     },
     "range": {
       "value": null,
@@ -50,12 +50,14 @@
       "value": null,
       "max": "",
       "per": null,
-      "recovery": ""
+      "recovery": "",
+      "prompt": true
     },
     "consume": {
       "type": "",
       "target": null,
-      "amount": null
+      "amount": null,
+      "scale": false
     },
     "ability": null,
     "actionType": "util",
@@ -84,8 +86,6 @@
       "dt": null,
       "conditions": ""
     },
-    "weaponType": "simpleM",
-    "baseItem": "",
     "properties": {
       "foc": true,
       "amm": false,
@@ -103,7 +103,16 @@
       "ver": false,
       "mgc": true
     },
-    "proficient": null
+    "proficient": null,
+    "type": {
+      "value": "simpleM",
+      "baseItem": ""
+    },
+    "unidentified": {
+      "description": ""
+    },
+    "container": null,
+    "crewed": false
   },
   "effects": [],
   "folder": "MLMTCAvKsuFE3vYA",
@@ -117,7 +126,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787233610,
-    "modifiedTime": 1701903920822,
+    "modifiedTime": 1703713481628,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!KA2P6I48iOWlnboO"

@@ -6,8 +6,7 @@
   "system": {
     "description": {
       "value": "<p>A flexible lash of leather affixed to a wooden handle which is capable of flinging rocks or metal bullets with deadly velocity.</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -39,7 +38,8 @@
       "value": null,
       "width": null,
       "units": "",
-      "type": ""
+      "type": "",
+      "prompt": true
     },
     "range": {
       "value": 30,
@@ -50,12 +50,14 @@
       "value": null,
       "max": "",
       "per": null,
-      "recovery": ""
+      "recovery": "",
+      "prompt": true
     },
     "consume": {
       "type": "",
       "target": null,
-      "amount": null
+      "amount": null,
+      "scale": false
     },
     "ability": null,
     "actionType": "rwak",
@@ -89,8 +91,6 @@
       "dt": null,
       "conditions": ""
     },
-    "weaponType": "simpleR",
-    "baseItem": "sling",
     "properties": {
       "amm": true,
       "hvy": false,
@@ -107,7 +107,16 @@
       "two": false,
       "ver": false
     },
-    "proficient": null
+    "proficient": null,
+    "type": {
+      "value": "simpleR",
+      "baseItem": "sling"
+    },
+    "unidentified": {
+      "description": ""
+    },
+    "container": null,
+    "crewed": false
   },
   "effects": [],
   "folder": "MLMTCAvKsuFE3vYA",
@@ -121,7 +130,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787233458,
-    "modifiedTime": 1701903917439,
+    "modifiedTime": 1703713475352,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!3gynWO9sN4OLGMWD"

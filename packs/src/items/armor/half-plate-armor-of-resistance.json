@@ -6,8 +6,7 @@
   "system": {
     "description": {
       "value": "<p><em>(Requires attunement)</em></p>\n<p>You have resistance to one type of damage while you wear this armor. The GM chooses the type or determines it randomly from the @Compendium[dnd5e.tables.VRqG3F72ebgNHyVR]{Armor of Resistance} table.\n</p><p> </p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -40,7 +39,8 @@
       "value": null,
       "width": null,
       "units": "",
-      "type": ""
+      "type": "",
+      "prompt": true
     },
     "range": {
       "value": null,
@@ -51,12 +51,14 @@
       "value": null,
       "max": "",
       "per": null,
-      "recovery": ""
+      "recovery": "",
+      "prompt": true
     },
     "consume": {
       "type": "",
       "target": null,
-      "amount": null
+      "amount": null,
+      "scale": false
     },
     "ability": null,
     "actionType": "",
@@ -78,7 +80,6 @@
     },
     "armor": {
       "value": 15,
-      "type": "medium",
       "dex": 2
     },
     "hp": {
@@ -87,14 +88,21 @@
       "dt": null,
       "conditions": ""
     },
-    "baseItem": "halfplate",
     "speed": {
       "value": null,
       "conditions": ""
     },
     "strength": null,
     "stealth": true,
-    "proficient": null
+    "proficient": null,
+    "type": {
+      "value": "medium",
+      "baseItem": "halfplate"
+    },
+    "unidentified": {
+      "description": ""
+    },
+    "container": null
   },
   "effects": [],
   "folder": "JqTP017wj3uxDJ8g",
@@ -108,7 +116,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787233845,
-    "modifiedTime": 1701904253157,
+    "modifiedTime": 1703713491874,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!lN1VbnGFo3HNZXNb"

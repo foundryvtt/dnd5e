@@ -6,8 +6,7 @@
   "system": {
     "description": {
       "value": "<p><em>(Requires attunement outdoors at night)</em></p><p>While wearing this ring in dim light or darkness, you can cast @Compendium[dnd5e.spells.CAxSzHWizrafT033]{Dancing Lights} and @Compendium[dnd5e.spells.Bnn9Nzajixvow9xi]{Light} from the ring at will. Casting either spell from the ring requires an action.</p><p>The ring has 6 charges for the following other properties. The ring regains 1d6 expended charges daily at dawn.</p><p><strong>Faerie Fire</strong>. You can expend 1 charge as an action to cast @Compendium[dnd5e.spells.nqBDWkVOfcGZt4YU]{Faerie Fire} from the ring.</p><p><strong>Ball Lightning</strong>. You can expend 2 charges as an action to create one to four 3-foot-diameter spheres of lightning. The more spheres you create, the less powerful each sphere is individually.</p><p>Each sphere appears in an unoccupied space you can see within 120 feet of you. The spheres last as long as you concentrate (as if concentrating on a spell), up to 1 minute. Each sphere sheds dim light in a 30-foot radius.</p><p>As a bonus action, you can move each sphere up to 30 feet, but no farther than 120 feet away from you. When a creature other than you comes within 5 feet of a sphere, the sphere discharges lightning at that creature and disappears. That creature must make a DC 15 Dexterity saving throw. On a failed save, the creature takes lightning damage based on the number of spheres you created.</p><table><thead><tr><td><strong>Spheres</strong></td><td><strong>Lightning Damage</strong></td></tr></thead><tbody><tr><td>4</td><td>2d4</td></tr><tr><td>3</td><td>2d6</td></tr><tr><td>2</td><td>5d4</td></tr><tr><td>1</td><td>4d12</td></tr></tbody></table><p><strong>Shooting Stars</strong>. You can expend 1 to 3 charges as an action. For every charge you expend, you launch a glowing mote of light from the ring at a point you can see within 60 feet of you. Each creature within a 15-foot cube originating from that point is showered in sparks and must make a DC 15 Dexterity saving throw, taking 5d4 fire damage on a failed save, or half as much damage on a successful one.</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -39,7 +38,8 @@
       "value": null,
       "width": null,
       "units": "",
-      "type": ""
+      "type": "",
+      "prompt": true
     },
     "range": {
       "value": null,
@@ -50,12 +50,14 @@
       "value": 6,
       "max": "6",
       "per": "charges",
-      "recovery": "1d6"
+      "recovery": "1d6",
+      "prompt": true
     },
     "consume": {
       "type": "",
       "target": null,
-      "amount": null
+      "amount": null,
+      "scale": false
     },
     "ability": "",
     "actionType": "save",
@@ -77,7 +79,6 @@
     },
     "armor": {
       "value": 0,
-      "type": "trinket",
       "dex": 0
     },
     "hp": {
@@ -86,14 +87,22 @@
       "dt": null,
       "conditions": ""
     },
-    "baseItem": "",
     "speed": {
       "value": null,
       "conditions": ""
     },
     "strength": null,
     "stealth": false,
-    "proficient": null
+    "proficient": null,
+    "type": {
+      "value": "trinket",
+      "baseItem": ""
+    },
+    "unidentified": {
+      "description": ""
+    },
+    "container": null,
+    "crewed": false
   },
   "effects": [],
   "folder": "aJgMxnZED9XdoN2W",
@@ -107,7 +116,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787233789,
-    "modifiedTime": 1701903926611,
+    "modifiedTime": 1703713489151,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!etA2SBgWwduCLgLT"

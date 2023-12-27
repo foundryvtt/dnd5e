@@ -6,8 +6,7 @@
   "system": {
     "description": {
       "value": "<p>Usually used in conjunction with blocks of incense to perfume the air.</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -21,10 +20,15 @@
       "value": 5,
       "denomination": "gp"
     },
-    "attunement": 0,
-    "equipped": false,
     "rarity": "",
-    "identified": true
+    "identified": true,
+    "type": {
+      "value": ""
+    },
+    "unidentified": {
+      "description": ""
+    },
+    "container": null
   },
   "effects": [],
   "folder": "dlru9Hy74nSMv6fr",
@@ -38,7 +42,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787233486,
-    "modifiedTime": 1701903918229,
+    "modifiedTime": 1703713476954,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!7ztvHyYJCcOOAWmR"

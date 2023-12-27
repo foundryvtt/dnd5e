@@ -6,8 +6,7 @@
   "system": {
     "description": {
       "value": "<p>A small thrown implement crafted with a short wooden shaft and crossed feathres with a sharp wooden or metal tip. Darts can be thrown with sufficient force to puncture the skin.</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -39,7 +38,8 @@
       "value": null,
       "width": null,
       "units": "",
-      "type": ""
+      "type": "",
+      "prompt": true
     },
     "range": {
       "value": 20,
@@ -50,12 +50,14 @@
       "value": null,
       "max": "",
       "per": null,
-      "recovery": ""
+      "recovery": "",
+      "prompt": true
     },
     "consume": {
       "type": "",
       "target": null,
-      "amount": null
+      "amount": null,
+      "scale": false
     },
     "ability": null,
     "actionType": "rwak",
@@ -89,8 +91,6 @@
       "dt": null,
       "conditions": ""
     },
-    "weaponType": "simpleR",
-    "baseItem": "dart",
     "properties": {
       "fin": true,
       "thr": true,
@@ -106,7 +106,16 @@
       "two": false,
       "ver": false
     },
-    "proficient": null
+    "proficient": null,
+    "type": {
+      "value": "simpleR",
+      "baseItem": "dart"
+    },
+    "unidentified": {
+      "description": ""
+    },
+    "container": null,
+    "crewed": false
   },
   "effects": [],
   "folder": "MLMTCAvKsuFE3vYA",
@@ -120,7 +129,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787233460,
-    "modifiedTime": 1701903917486,
+    "modifiedTime": 1703713475434,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!3rCO8MTIdPGSW6IJ"

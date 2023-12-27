@@ -6,8 +6,7 @@
   "system": {
     "description": {
       "value": "<p>A poisoner's kit includes the vials, chemicals, and other equipment necessary for the creation of poisons. Proficiency with this kit lets you add your proficiency bonus to any ability checks you make to craft or use poisons.</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -25,12 +24,18 @@
     "equipped": false,
     "rarity": "",
     "identified": true,
-    "toolType": "",
-    "baseItem": "pois",
     "ability": "wis",
     "chatFlavor": "",
     "proficient": null,
-    "bonus": ""
+    "bonus": "",
+    "type": {
+      "value": "",
+      "baseItem": "pois"
+    },
+    "unidentified": {
+      "description": ""
+    },
+    "container": null
   },
   "effects": [],
   "folder": "uvZXbqK3cHirDzeT",
@@ -44,7 +49,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787233826,
-    "modifiedTime": 1701903929546,
+    "modifiedTime": 1703713490839,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!il2GNi8C0DvGLL9P"

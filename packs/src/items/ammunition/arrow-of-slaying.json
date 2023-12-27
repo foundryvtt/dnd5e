@@ -6,8 +6,7 @@
   "system": {
     "description": {
       "value": "<p>An arrow of slaying is a magic weapon meant to slay a particular kind of creature. Some are more focused than others; for example, there are both arrows of dragon slaying and arrows of blue dragon slaying. If a creature belonging to the type, race, or group associated with an arrow of slaying takes damage from the arrow, the creature must make a DC 17 Constitution saving throw, taking an extra 6d10 piercing damage on a failed save, or half as much extra damage on a successful one.<br />Once an arrow of slaying deals its extra damage to a creature, it becomes a nonmagical arrow.</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -39,7 +38,8 @@
       "value": null,
       "width": null,
       "units": "",
-      "type": ""
+      "type": "",
+      "prompt": true
     },
     "range": {
       "value": null,
@@ -51,12 +51,14 @@
       "max": "",
       "per": null,
       "recovery": "",
-      "autoDestroy": false
+      "autoDestroy": false,
+      "prompt": true
     },
     "consume": {
       "type": "",
       "target": null,
-      "amount": null
+      "amount": null,
+      "scale": false
     },
     "ability": null,
     "actionType": "rwak",
@@ -76,7 +78,15 @@
       "dc": 17,
       "scaling": "flat"
     },
-    "consumableType": "ammo"
+    "type": {
+      "value": "ammo"
+    },
+    "unidentified": {
+      "description": ""
+    },
+    "container": null,
+    "crewed": false,
+    "properties": {}
   },
   "effects": [],
   "folder": "NdDvXSjfqlghXpQZ",
@@ -90,7 +100,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787233724,
-    "modifiedTime": 1701903924258,
+    "modifiedTime": 1703713487383,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!aXsfZvDCdpuv3Yvb"

@@ -6,8 +6,7 @@
   "system": {
     "description": {
       "value": "<p>A component pouch is a small, watertight leather belt pouch that has compartments to hold all the material components and other special items you need to cast your spells, except for those components that have a specific cost (as indicated in a spell's description).</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -39,7 +38,8 @@
       "value": null,
       "width": null,
       "units": "",
-      "type": ""
+      "type": "",
+      "prompt": true
     },
     "range": {
       "value": null,
@@ -51,12 +51,14 @@
       "max": "",
       "per": null,
       "recovery": "",
-      "autoDestroy": false
+      "autoDestroy": false,
+      "prompt": true
     },
     "consume": {
       "type": "",
       "target": null,
-      "amount": null
+      "amount": null,
+      "scale": false
     },
     "ability": "",
     "actionType": "util",
@@ -76,12 +78,19 @@
       "dc": null,
       "scaling": "spell"
     },
-    "consumableType": "ammo",
     "properties": {
       "ada": false,
       "mgc": false,
       "sil": false
-    }
+    },
+    "type": {
+      "value": "ammo"
+    },
+    "unidentified": {
+      "description": ""
+    },
+    "container": null,
+    "crewed": false
   },
   "effects": [],
   "folder": "NdDvXSjfqlghXpQZ",
@@ -95,7 +104,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787233786,
-    "modifiedTime": 1701903960452,
+    "modifiedTime": 1703713488989,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!eZGmdOhaTWMicXPW"

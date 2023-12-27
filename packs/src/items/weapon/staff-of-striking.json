@@ -6,8 +6,7 @@
   "system": {
     "description": {
       "value": "<p><em>(Requires attunement)</em></p><p>This staff can be wielded as a magic quarterstaff that grants a +3 bonus to attack and damage rolls made with it.</p><p>The staff has 10 charges. When you hit with a melee attack using it, you can expend up to 3 of its charges. For each charge you expend, the target takes an extra 1d6 force damage. The staff regains 1d6 + 4 expended charges daily at dawn. If you expend the last charge, roll a d20. On a 1, the staff becomes a nonmagical quarterstaff.</p><section class=\"secret foundry-note\" id=\"secret-Fp8PZmbsQFbsmSHS\"><p><strong>Foundry Note</strong></p><p>The Other Formula button has been configured to roll 1d6. Use to calculate any additional force damage.</p></section>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -39,7 +38,8 @@
       "value": null,
       "width": null,
       "units": "",
-      "type": ""
+      "type": "",
+      "prompt": true
     },
     "range": {
       "value": 5,
@@ -50,12 +50,14 @@
       "value": 10,
       "max": "10",
       "per": "charges",
-      "recovery": "1d6 + 4"
+      "recovery": "1d6 + 4",
+      "prompt": true
     },
     "consume": {
       "type": "",
       "target": null,
-      "amount": null
+      "amount": null,
+      "scale": false
     },
     "ability": "",
     "actionType": "mwak",
@@ -89,8 +91,6 @@
       "dt": null,
       "conditions": ""
     },
-    "weaponType": "simpleM",
-    "baseItem": "",
     "properties": {
       "amm": false,
       "hvy": false,
@@ -110,7 +110,16 @@
       "ada": false,
       "sil": false
     },
-    "proficient": null
+    "proficient": null,
+    "type": {
+      "value": "simpleM",
+      "baseItem": ""
+    },
+    "unidentified": {
+      "description": ""
+    },
+    "container": null,
+    "crewed": false
   },
   "effects": [],
   "folder": "MLMTCAvKsuFE3vYA",
@@ -124,7 +133,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787233677,
-    "modifiedTime": 1701903922808,
+    "modifiedTime": 1703713484961,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!URun3vYrXKJJdAJe"
