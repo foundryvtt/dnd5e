@@ -23,6 +23,10 @@ export const migrateWorld = async function() {
         }
         await actor.update(updateData, {enforceTypes: false, diff: valid && !flags.persistSourceMigration});
       }
+      if ( actor.effects && actor.items && foundry.utils.isNewerVersion("3.0.0", actor._stats.systemVersion) ) {
+        const deleteIds = _duplicatedEffects(actor);
+        if ( deleteIds.size ) await actor.deleteEmbeddedDocuments("ActiveEffect", Array.from(deleteIds));
+      }
     } catch(err) {
       err.message = `Failed dnd5e system migration for Actor ${actor.name}: ${err.message}`;
       console.error(err);
@@ -161,6 +165,11 @@ export const migrateCompendium = async function(pack) {
       switch (documentName) {
         case "Actor":
           updateData = migrateActorData(source, migrationData, flags);
+          if ( (documentName === "Actor") && source.effects && source.items
+            && foundry.utils.isNewerVersion("3.0.0", source._stats.systemVersion) ) {
+            const deleteIds = _duplicatedEffects(source);
+            if ( deleteIds.size ) await doc.deleteEmbeddedDocuments("ActiveEffect", Array.from(deleteIds));
+          }
           break;
         case "Item":
           updateData = migrateItemData(source, migrationData, flags);
@@ -326,7 +335,7 @@ export const migrateActorData = function(actor, migrationData, flags={}) {
 
     // Update tool expertise.
     if ( actor.system.tools ) {
-      const hasToolProf = itemData.system.type.baseItem in actor.system.tools;
+      const hasToolProf = itemData.system.type?.baseItem in actor.system.tools;
       if ( (itemData.type === "tool") && (itemData.system.proficient > 1) && hasToolProf ) {
         updateData[`system.tools.${itemData.system.type.baseItem}.value`] = itemData.system.proficient;
       }
@@ -485,6 +494,29 @@ export const getMigrationData = async function() {
 
 /* -------------------------------------------- */
 /*  Low level migration utilities
+/* -------------------------------------------- */
+
+/**
+ * Identify effects that might have been duplicated when legacyTransferral was disabled.
+ * @param {object} parent   Data of the actor being migrated.
+ * @returns {Set<string>}   IDs of effects to delete from the actor.
+ * @private
+ */
+function _duplicatedEffects(parent) {
+  const deleteIds = new Set();
+  for ( const item of parent.items ) {
+    for ( const effect of item.effects ?? [] ) {
+      if ( !effect.transfer ) continue;
+      const match = parent.effects.find(t => {
+        const diff = foundry.utils.diffObject(t, effect);
+        return !("changes" in diff) && !deleteIds.has(t._id);
+      });
+      if ( match ) deleteIds.add(match._id);
+    }
+  }
+  return deleteIds;
+}
+
 /* -------------------------------------------- */
 
 /**
