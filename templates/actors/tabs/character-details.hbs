@@ -38,6 +38,35 @@
     </li>
 {{/inline}}
 
+{{#*inline "traits"}}
+    {{#if (or @root.editable values)}}
+    <div class="pills-group {{#unless values}}empty{{/unless}}">
+        <h3 class="icon">
+            <i class="{{ icon }}"></i>
+            <span class="roboto-upper">{{ localize label }}</span>
+            {{#if @root.editable}}
+            <a class="trait-selector" data-trait="{{ key }}"
+               data-tooltip="{{ localize "DND5E.TraitConfig" trait=(localize label) }}"
+               aria-label="{{ localize "DND5E.TraitConfig" trait=(localize label) }}">
+                <i class="fas fa-cog"></i>
+            </a>
+            {{/if}}
+        </h3>
+        <ul class="pills">
+            {{#each values}}
+            <li class="pill {{ ../color }}">
+                {{#each icons}}
+                <i class="{{ this }}" data-tooltip="{{ lookup @root.config.physicalWeaponProperties this }}"
+                   aria-label="{{ lookup @root.config.physicalWeaponProperties this }}"></i>
+                {{/each}}
+                <span class="label">{{ label }}</span>
+            </li>
+            {{/each}}
+        </ul>
+    </div>
+    {{/if}}
+{{/inline}}
+
 <div class="tab details col-2" data-group="primary" data-tab="details">
 
     {{!-- Skills & Tools --}}
@@ -82,7 +111,7 @@
 
     </div>
 
-    {{!-- Background & Saving Throws --}}
+    {{!-- Background, Saving Throws, Proficiencies, & Senses --}}
     <div class="right">
 
         {{!-- Background --}}
@@ -159,6 +188,56 @@
                 {{/each}}
             </ul>
         </filigree-box>
+
+        {{!-- Senses --}}
+        {{#if (or editable senses)}}
+        <div class="pills-group {{#unless senses}}empty{{/unless}}">
+            <h3 class="icon">
+                <i class="fas fa-eye"></i>
+                <span class="roboto-upper">{{ localize "DND5E.Senses" }}</span>
+                {{#if editable}}
+                <a class="config-button" data-action="senses" data-tooltip="DND5E.SensesConfig"
+                   aria-label="{{ localize "DND5E.SensesConfig" }}">
+                    <i class="fas fa-cog"></i>
+                </a>
+                {{/if}}
+            </h3>
+            <ul class="pills">
+                {{#each senses}}
+                <li class="pill">
+                    <span class="label">{{ label }}</span>
+                    {{#if value}}
+                    <span class="separator">&vert;</span>
+                    <span class="value">{{ value }}</span>
+                    {{/if}}
+                </li>
+                {{/each}}
+            </ul>
+        </div>
+        {{/if}}
+
+        {{!-- Resistances --}}
+        {{> "traits" values=traits.dr key="dr" color="green" icon="fas fa-shield-halved" label="DND5E.Resistances" }}
+
+        {{!-- Immunities --}}
+        {{#if editable}}
+            {{> "traits" values=traits.di key="di" color="green" icon="fas fa-shield" label="DND5E.DamImm" }}
+        {{else}}
+            {{> "traits" values=traits.di key="di" color="green" icon="fas fa-shield" label="DND5E.Immunities" }}
+        {{/if}}
+        {{> "traits" values=traits.ci key="ci" color="green" icon="fas fa-shield" label="DND5E.ConImm" }}
+
+        {{!-- Vulnerabilities --}}
+        {{> "traits" values=traits.dv key="dv" color="maroon" icon="fas fa-heart-crack" label="DND5E.Vulnerabilities" }}
+
+        {{!-- Armor --}}
+        {{> "traits" values=traits.armor key="armor" icon="svg armor-prof" label="DND5E.Armor" }}
+
+        {{!-- Weapons --}}
+        {{> "traits" values=traits.weapon key="weapon" icon="svg weapon-prof" label="TYPES.Item.weaponPl" }}
+
+        {{!-- Languages --}}
+        {{> "traits" values=traits.languages key="languages" icon="fas fa-flag" label="DND5E.Languages" }}
 
     </div>
 </div>

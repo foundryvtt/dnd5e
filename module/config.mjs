@@ -700,9 +700,9 @@ preLocalize("vehicleTypes", { sort: true });
  * @type {object}
  */
 DND5E.armorProficiencies = {
-  lgt: DND5E.equipmentTypes.light,
-  med: DND5E.equipmentTypes.medium,
-  hvy: DND5E.equipmentTypes.heavy,
+  lgt: "DND5E.ArmorLightProficiency",
+  med: "DND5E.ArmorMediumProficiency",
+  hvy: "DND5E.ArmorHeavyProficiency",
   shl: "DND5E.EquipmentShieldProficiency"
 };
 preLocalize("armorProficiencies");

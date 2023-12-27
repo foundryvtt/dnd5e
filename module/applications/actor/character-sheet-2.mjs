@@ -1,4 +1,5 @@
 import ActorSheet5eCharacter from "./character-sheet.mjs";
+import * as Trait from "../../documents/actor/trait.mjs";
 
 /**
  * An Actor sheet for player character type actors.
@@ -189,7 +190,51 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
       subtitle: details.type.subtype
     };
 
+    // Senses
+    context.senses = Object.entries(CONFIG.DND5E.senses).reduce((obj, [k, label]) => {
+      const value = attributes.senses[k];
+      if ( value ) obj[k] = { label, value };
+      return obj;
+    }, {});
+
+    if ( attributes.senses.special ) attributes.senses.special.split(";").forEach((v, i) => {
+      context.senses[`custom${i + 1}`] = { label: v.trim() };
+    });
+
+    if ( foundry.utils.isEmpty(context.senses) ) delete context.senses;
+
     return context;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  _prepareTraits() {
+    const traits = {};
+    for ( const [trait, config] of Object.entries(CONFIG.DND5E.traits) ) {
+      const key = config.actorKeyPath ?? `system.traits.${trait}`;
+      const data = foundry.utils.deepClone(foundry.utils.getProperty(this.actor, key));
+      if ( !data ) continue;
+      let values = data.value;
+      if ( !values ) values = [];
+      else if ( values instanceof Set ) values = Array.from(values);
+      else if ( !Array.isArray(values) ) values = [values];
+      values = values.map(key => {
+        const value = { label: Trait.keyLabel(key, { trait }) ?? key };
+        const icons = value.icons = [];
+        if ( data.bypasses?.size && (key in CONFIG.DND5E.physicalDamageTypes) ) icons.push(...data.bypasses);
+        return value;
+      });
+      if ( data.custom ) data.custom.split(";").forEach(v => values.push({ label: v.trim() }));
+      if ( values.length ) traits[trait] = values;
+    }
+    // Combine damage & condition immunities in play mode.
+    if ( (this._mode === this.constructor.MODES.PLAY) && traits.ci ) {
+      traits.di ??= [];
+      traits.di.push(...traits.ci);
+      delete traits.ci;
+    }
+    return traits;
   }
 
   /* -------------------------------------------- */
