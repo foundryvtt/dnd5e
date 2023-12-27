@@ -932,8 +932,9 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * Description of a source of damage.
    *
    * @typedef {object} DamageDescription
-   * @property {number} value  Amount of damage.
-   * @property {string} type   Type of damage.
+   * @property {number} value         Amount of damage.
+   * @property {string} type          Type of damage.
+   * @property {string[]} properties  Physical properties that affect damage application.
    */
 
   /**
@@ -1022,8 +1023,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       return total + (value * damageMultiplier);
     }, 0);
 
-    // Round damage down
-    amount = Math.floor(amount);
+    // Round damage towards zero
+    amount = amount > 0 ? Math.floor(amount) : Math.ceil(amount);
 
     const deltaTemp = amount > 0 ? Math.min(hp.temp, amount) : 0;
     const deltaHP = amount - deltaTemp;
