@@ -5,8 +5,7 @@
   "system": {
     "description": {
       "value": "<p><em>(ingested)</em></p>\n<p>A creature subjected to this poison must succeed on a <strong>DC 11 Constitution saving throw</strong> or become @UUID[Compendium.dnd5e.rules.w7eitkpD7QQTB6j0.JournalEntryPage.lq3TRI6ZlED8ABMx]{Poisoned} for <strong>1 hour</strong>. The @UUID[Compendium.dnd5e.rules.w7eitkpD7QQTB6j0.JournalEntryPage.lq3TRI6ZlED8ABMx]{Poisoned} creature can't knowingly speak a lie, as if under the effect of a @Compendium[dnd5e.spells.CylBa7jR8DSbo8Z3]{Zone of Truth} spell.</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -38,7 +37,8 @@
       "value": null,
       "width": null,
       "units": "",
-      "type": "self"
+      "type": "self",
+      "prompt": true
     },
     "range": {
       "value": null,
@@ -50,12 +50,14 @@
       "max": "1",
       "per": "charges",
       "recovery": "",
-      "autoDestroy": true
+      "autoDestroy": true,
+      "prompt": true
     },
     "consume": {
       "type": "",
       "target": null,
-      "amount": null
+      "amount": null,
+      "scale": false
     },
     "ability": "",
     "actionType": "util",
@@ -75,7 +77,15 @@
       "dc": null,
       "scaling": "spell"
     },
-    "consumableType": "poison"
+    "type": {
+      "value": "poison"
+    },
+    "unidentified": {
+      "description": ""
+    },
+    "container": null,
+    "crewed": false,
+    "properties": {}
   },
   "effects": [],
   "sort": 0,
@@ -90,7 +100,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787233720,
-    "modifiedTime": 1701903924132,
+    "modifiedTime": 1703713487171,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!a86F565Pjdzym1jH"

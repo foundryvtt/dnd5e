@@ -6,8 +6,7 @@
   "system": {
     "description": {
       "value": "<p>This kit contains a variety of instruments such as clippers, mortar and pestle, and pouches and vials used by herbalists to create remedies and potions. Proficiency with this kit lets you add your proficiency bonus to any ability checks you make to identify or apply herbs. Also, proficiency with this kit is required to create antitoxin and potions of healing.</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -25,12 +24,18 @@
     "equipped": false,
     "rarity": "",
     "identified": true,
-    "toolType": "",
-    "baseItem": "herb",
     "ability": "wis",
     "chatFlavor": "",
     "proficient": null,
-    "bonus": ""
+    "bonus": "",
+    "type": {
+      "value": "",
+      "baseItem": "herb"
+    },
+    "unidentified": {
+      "description": ""
+    },
+    "container": null
   },
   "effects": [],
   "folder": "uvZXbqK3cHirDzeT",
@@ -44,7 +49,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787233819,
-    "modifiedTime": 1701903928880,
+    "modifiedTime": 1703713490546,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!i89okN7GFTWHsvPy"

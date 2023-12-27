@@ -6,8 +6,7 @@
   "system": {
     "description": {
       "value": "<p><em>Wondrous item, (requires attunement)</em></p>\n<p>These furred boots are snug and feel quite warm. While you wear them, you gain the following benefits:</p>\n<ul>\n<li>You have resistance to cold damage.</li>\n<li>You ignore difficult terrain created by ice or snow. You can tolerate temperatures as low as −50 degrees Fahrenheit without any additional protection. If you wear heavy clothes, you can tolerate temperatures as low as −100 degrees Fahrenheit.</li>\n</ul>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -40,7 +39,8 @@
       "value": null,
       "width": null,
       "units": "",
-      "type": ""
+      "type": "",
+      "prompt": true
     },
     "range": {
       "value": null,
@@ -51,12 +51,14 @@
       "value": null,
       "max": "",
       "per": null,
-      "recovery": ""
+      "recovery": "",
+      "prompt": true
     },
     "consume": {
       "type": "",
       "target": null,
-      "amount": null
+      "amount": null,
+      "scale": false
     },
     "ability": null,
     "actionType": "",
@@ -78,7 +80,6 @@
     },
     "armor": {
       "value": 0,
-      "type": "clothing",
       "dex": 0
     },
     "hp": {
@@ -87,18 +88,24 @@
       "dt": null,
       "conditions": ""
     },
-    "baseItem": "",
     "speed": {
       "value": null,
       "conditions": ""
     },
     "strength": null,
     "stealth": false,
-    "proficient": null
+    "proficient": null,
+    "type": {
+      "value": "clothing",
+      "baseItem": ""
+    },
+    "unidentified": {
+      "description": ""
+    },
+    "container": null
   },
   "effects": [
     {
-      "label": "Boots of the Winterlands",
       "icon": "icons/equipment/feet/boots-leather-banded-furred.webp",
       "origin": "Compendium.dnd5e.items.RDPFmUR9exTEXFc8",
       "duration": {
@@ -116,13 +123,16 @@
         {
           "key": "system.traits.dr.value",
           "mode": 2,
-          "value": "cold"
+          "value": "cold",
+          "priority": null
         }
       ],
       "tint": null,
       "transfer": true,
       "flags": {},
-      "sort": 0,
+      "name": "Boots of the Winterlands",
+      "description": "",
+      "statuses": [],
       "_key": "!items.effects!RDPFmUR9exTEXFc8.6PXhI0qCk64LuoXO"
     }
   ],
@@ -137,7 +147,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787233655,
-    "modifiedTime": 1701903922210,
+    "modifiedTime": 1703713483824,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!RDPFmUR9exTEXFc8"

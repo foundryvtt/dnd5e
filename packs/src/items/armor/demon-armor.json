@@ -6,8 +6,7 @@
   "system": {
     "description": {
       "value": "<p><em>(Requires attunement)</em></p>\n<p>While wearing this plate armor, you gain a +1 bonus to AC, and you can understand and speak Abyssal. In addition, the armor's clawed gauntlets turn unarmed strikes with your hands into magic weapons that deal slashing damage, with a +1 bonus to attack rolls and damage rolls and a damage die of 1d8.</p>\n<p><strong>Curse</strong>. Once you don this cursed armor, you can't doff it unless you are targeted by the @Compendium[dnd5e.spells.XZhdgVK3cLoxNCQl]{Remove Curse} spell or similar magic. While wearing the armor, you have disadvantage on attack rolls against demons and on saving throws against their spells and special abilities.</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -40,7 +39,8 @@
       "value": null,
       "width": null,
       "units": "",
-      "type": ""
+      "type": "",
+      "prompt": true
     },
     "range": {
       "value": 5,
@@ -51,12 +51,14 @@
       "value": null,
       "max": "",
       "per": null,
-      "recovery": ""
+      "recovery": "",
+      "prompt": true
     },
     "consume": {
       "type": "",
       "target": null,
-      "amount": null
+      "amount": null,
+      "scale": false
     },
     "ability": "str",
     "actionType": "mwak",
@@ -83,7 +85,6 @@
     },
     "armor": {
       "value": 19,
-      "type": "heavy",
       "dex": 0
     },
     "hp": {
@@ -92,14 +93,21 @@
       "dt": null,
       "conditions": ""
     },
-    "baseItem": "plate",
     "speed": {
       "value": null,
       "conditions": ""
     },
     "strength": 15,
     "stealth": true,
-    "proficient": null
+    "proficient": null,
+    "type": {
+      "value": "heavy",
+      "baseItem": "plate"
+    },
+    "unidentified": {
+      "description": ""
+    },
+    "container": null
   },
   "effects": [],
   "folder": "JqTP017wj3uxDJ8g",
@@ -113,7 +121,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787233789,
-    "modifiedTime": 1701904252308,
+    "modifiedTime": 1703713489126,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!ejEt6hLQxOux04lS"

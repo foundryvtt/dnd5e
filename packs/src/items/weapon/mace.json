@@ -6,8 +6,7 @@
   "system": {
     "description": {
       "value": "<p>A heavy bludgeoning weapon mounted to the end of a metal club. The head features spikes and blades designed to puncture armor and shatter the bones below.</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -39,7 +38,8 @@
       "value": null,
       "width": null,
       "units": "",
-      "type": ""
+      "type": "",
+      "prompt": true
     },
     "range": {
       "value": 5,
@@ -50,12 +50,14 @@
       "value": null,
       "max": "",
       "per": null,
-      "recovery": ""
+      "recovery": "",
+      "prompt": true
     },
     "consume": {
       "type": "",
       "target": null,
-      "amount": null
+      "amount": null,
+      "scale": false
     },
     "ability": null,
     "actionType": "mwak",
@@ -89,8 +91,6 @@
       "dt": null,
       "conditions": ""
     },
-    "weaponType": "simpleM",
-    "baseItem": "mace",
     "properties": {
       "amm": false,
       "hvy": false,
@@ -106,7 +106,16 @@
       "two": false,
       "ver": false
     },
-    "proficient": null
+    "proficient": null,
+    "type": {
+      "value": "simpleM",
+      "baseItem": "mace"
+    },
+    "unidentified": {
+      "description": ""
+    },
+    "container": null,
+    "crewed": false
   },
   "effects": [],
   "folder": "MLMTCAvKsuFE3vYA",
@@ -120,7 +129,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787233508,
-    "modifiedTime": 1701903918833,
+    "modifiedTime": 1703713478076,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!Ajyq6nGwF7FtLhDQ"

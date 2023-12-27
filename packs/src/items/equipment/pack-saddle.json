@@ -5,8 +5,7 @@
   "system": {
     "description": {
       "value": "<p>A type of seat that is fastened to a mount's back, designed to support the rider and affix part of the mount's tack such as stirrups. This type of saddle is suitable for pack mounts.</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -38,7 +37,8 @@
       "value": null,
       "width": null,
       "units": "",
-      "type": ""
+      "type": "",
+      "prompt": true
     },
     "range": {
       "value": null,
@@ -49,12 +49,14 @@
       "value": null,
       "max": "",
       "per": null,
-      "recovery": ""
+      "recovery": "",
+      "prompt": true
     },
     "consume": {
       "type": "",
       "target": null,
-      "amount": null
+      "amount": null,
+      "scale": false
     },
     "ability": null,
     "actionType": "",
@@ -76,7 +78,6 @@
     },
     "armor": {
       "value": null,
-      "type": "clothing",
       "dex": null
     },
     "hp": {
@@ -85,14 +86,22 @@
       "dt": null,
       "conditions": ""
     },
-    "baseItem": "",
     "speed": {
       "value": null,
       "conditions": ""
     },
     "strength": null,
     "stealth": false,
-    "proficient": null
+    "proficient": null,
+    "type": {
+      "value": "clothing",
+      "baseItem": ""
+    },
+    "unidentified": {
+      "description": ""
+    },
+    "container": null,
+    "crewed": false
   },
   "effects": [],
   "folder": "aJgMxnZED9XdoN2W",
@@ -107,7 +116,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787233787,
-    "modifiedTime": 1701903926461,
+    "modifiedTime": 1703713489045,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!ecz2fVDyAg8YgJGe"

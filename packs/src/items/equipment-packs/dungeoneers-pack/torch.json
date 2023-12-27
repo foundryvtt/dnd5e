@@ -5,8 +5,7 @@
   "system": {
     "description": {
       "value": "<p>A torch burns for 1 hour, providing bright light in a 20-foot radius and dim light for an additional 20 feet. If you make a melee attack with a burning torch and hit, it deals 1 fire damage.</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -84,9 +83,14 @@
       "dc": null,
       "scaling": "spell"
     },
-    "consumableType": "trinket",
     "container": "XY8b594Dn7plACLL",
-    "properties": {}
+    "properties": {},
+    "type": {
+      "value": "trinket"
+    },
+    "unidentified": {
+      "description": ""
+    }
   },
   "effects": [],
   "folder": "Dx3K2y0J1wJUPP9m",
@@ -96,7 +100,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787233513,
-    "modifiedTime": 1702146726422,
+    "modifiedTime": 1703713492098,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_id": "ltbDV5OitV0yrDFU",

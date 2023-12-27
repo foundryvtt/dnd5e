@@ -6,8 +6,7 @@
   "system": {
     "description": {
       "value": "<p><em>(Requires attunement by a bard, cleric, or druid)</em></p><p>This staff has 10 charges. While holding it, you can use an action to expend 1 or more of its charges to cast one of the following spells from it, using your spell save DC and spellcasting ability modifier: @Compendium[dnd5e.spells.uUWb1wZgtMou0TVP]{Cure Wounds} (1 charge per spell level, up to 4th), @Compendium[dnd5e.spells.F0GsG0SJzsIOacwV]{Lesser Restoration} (2 charges), or @Compendium[dnd5e.spells.Pyzmm8R7rVsNAPsd]{Mass Cure Wounds} (5 charges).</p><p>The staff regains 1d6 + 4 expended charges daily at dawn. If you expend the last charge, roll a d20. On a 1, the staff vanishes in a flash of light, lost forever.</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -39,7 +38,8 @@
       "value": null,
       "width": null,
       "units": "",
-      "type": ""
+      "type": "",
+      "prompt": true
     },
     "range": {
       "value": null,
@@ -50,12 +50,14 @@
       "value": 10,
       "max": "10",
       "per": "charges",
-      "recovery": "1d6 + 4"
+      "recovery": "1d6 + 4",
+      "prompt": true
     },
     "consume": {
       "type": "",
       "target": null,
-      "amount": null
+      "amount": null,
+      "scale": false
     },
     "ability": "",
     "actionType": "heal",
@@ -84,8 +86,6 @@
       "dt": null,
       "conditions": ""
     },
-    "weaponType": "simpleM",
-    "baseItem": "",
     "properties": {
       "amm": false,
       "hvy": false,
@@ -105,7 +105,16 @@
       "ada": false,
       "sil": false
     },
-    "proficient": null
+    "proficient": null,
+    "type": {
+      "value": "simpleM",
+      "baseItem": ""
+    },
+    "unidentified": {
+      "description": ""
+    },
+    "container": null,
+    "crewed": false
   },
   "effects": [],
   "folder": "MLMTCAvKsuFE3vYA",
@@ -119,7 +128,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787233689,
-    "modifiedTime": 1701903923215,
+    "modifiedTime": 1703713485655,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!WLVQJVpCWiPkCAtZ"

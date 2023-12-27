@@ -6,8 +6,7 @@
   "system": {
     "description": {
       "value": "<p><em>Wondrous item, (requires attunement)</em></p>\n<p>While wearing these bracers, you have proficiency with the longbow and shortbow, and you gain a +2 bonus to damage rolls on ranged attacks made with such weapons.</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -40,7 +39,8 @@
       "value": null,
       "width": null,
       "units": "",
-      "type": ""
+      "type": "",
+      "prompt": true
     },
     "range": {
       "value": null,
@@ -51,12 +51,14 @@
       "value": null,
       "max": "",
       "per": null,
-      "recovery": ""
+      "recovery": "",
+      "prompt": true
     },
     "consume": {
       "type": "",
       "target": null,
-      "amount": null
+      "amount": null,
+      "scale": false
     },
     "ability": null,
     "actionType": "",
@@ -78,7 +80,6 @@
     },
     "armor": {
       "value": 0,
-      "type": "clothing",
       "dex": 0
     },
     "hp": {
@@ -87,18 +88,24 @@
       "dt": null,
       "conditions": ""
     },
-    "baseItem": "",
     "speed": {
       "value": null,
       "conditions": ""
     },
     "strength": null,
     "stealth": false,
-    "proficient": null
+    "proficient": null,
+    "type": {
+      "value": "clothing",
+      "baseItem": ""
+    },
+    "unidentified": {
+      "description": ""
+    },
+    "container": null
   },
   "effects": [
     {
-      "label": "Bracers of Archery",
       "icon": "icons/equipment/wrist/bracer-studded-leather-steel.webp",
       "origin": "Compendium.dnd5e.items.ZYEqOSY9BLZs2GPx",
       "duration": {
@@ -116,18 +123,22 @@
         {
           "key": "system.traits.weaponProf.value",
           "mode": 2,
-          "value": "longbow"
+          "value": "longbow",
+          "priority": null
         },
         {
           "key": "system.traits.weaponProf.value",
           "mode": 2,
-          "value": "shortbow"
+          "value": "shortbow",
+          "priority": null
         }
       ],
       "tint": null,
       "transfer": true,
       "flags": {},
-      "sort": 0,
+      "name": "Bracers of Archery",
+      "description": "",
+      "statuses": [],
       "_key": "!items.effects!ZYEqOSY9BLZs2GPx.ChaLjlYldFzDgHHv"
     }
   ],
@@ -142,7 +153,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787233715,
-    "modifiedTime": 1701903923995,
+    "modifiedTime": 1703713486934,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!ZYEqOSY9BLZs2GPx"

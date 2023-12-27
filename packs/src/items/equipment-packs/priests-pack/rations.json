@@ -5,8 +5,7 @@
   "system": {
     "description": {
       "value": "<p>Rations consist of dry foods suitable for extended travel, including jerky, dried fruit, hardtack, and nuts.</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -79,9 +78,14 @@
       "dc": null,
       "scaling": "spell"
     },
-    "consumableType": "food",
     "container": "6BybWxK5GcEzqcOV",
-    "properties": {}
+    "properties": {},
+    "type": {
+      "value": "food"
+    },
+    "unidentified": {
+      "description": ""
+    }
   },
   "effects": [],
   "folder": "Dx3K2y0J1wJUPP9m",
@@ -91,7 +95,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787233793,
-    "modifiedTime": 1702146771425,
+    "modifiedTime": 1703713479293,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_id": "EC6ugXsfJZmjMNAj",

@@ -5,8 +5,7 @@
   "system": {
     "description": {
       "value": "<p>A leather hide sewn into an enclosed skin which can contain up to 4 pints of liquid. It weighs 5 pounds when full; a pint of water is approximately 1 pound.</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -79,9 +78,14 @@
       "dc": null,
       "scaling": "spell"
     },
-    "consumableType": "food",
     "container": "XY8b594Dn7plACLL",
-    "properties": {}
+    "properties": {},
+    "type": {
+      "value": "food"
+    },
+    "unidentified": {
+      "description": ""
+    }
   },
   "effects": [],
   "folder": "Dx3K2y0J1wJUPP9m",
@@ -91,7 +95,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787233681,
-    "modifiedTime": 1702146718722,
+    "modifiedTime": 1703713474829,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_id": "2cKJTN5Ki77oCrQn",

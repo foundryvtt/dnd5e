@@ -6,8 +6,7 @@
   "system": {
     "description": {
       "value": "<p><em>(Requires attunement by a spellcaster)</em></p>\n<p>This wand has 7 charges. While holding it, you can use an action to expend 1 of its charges to cast the @Compendium[dnd5e.spells.04nMsTWkIFvkbXlY]{Polymorph} spell (save DC 15) from it.</p>\n<p>The wand regains 1d6 + 1 expended charges daily at dawn. If you expend the wand's last charge, roll a d20. On a 1, the wand crumbles into ashes and is destroyed.</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -39,7 +38,8 @@
       "value": 1,
       "width": null,
       "units": "",
-      "type": "creature"
+      "type": "creature",
+      "prompt": true
     },
     "range": {
       "value": 60,
@@ -51,12 +51,14 @@
       "max": "7",
       "per": "charges",
       "recovery": "1d6 + 1",
-      "autoDestroy": false
+      "autoDestroy": false,
+      "prompt": true
     },
     "consume": {
       "type": "",
       "target": null,
-      "amount": null
+      "amount": null,
+      "scale": false
     },
     "ability": "",
     "actionType": "save",
@@ -76,7 +78,15 @@
       "dc": 15,
       "scaling": "flat"
     },
-    "consumableType": "wand"
+    "type": {
+      "value": "wand"
+    },
+    "unidentified": {
+      "description": ""
+    },
+    "container": null,
+    "crewed": false,
+    "properties": {}
   },
   "effects": [],
   "folder": "1aDgsGVwDbPdxG2V",
@@ -90,7 +100,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787233839,
-    "modifiedTime": 1701903931819,
+    "modifiedTime": 1703713491496,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!khyjT3dKyoEOf4eA"

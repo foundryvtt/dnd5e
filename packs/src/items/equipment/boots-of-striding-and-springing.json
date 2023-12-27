@@ -6,8 +6,7 @@
   "system": {
     "description": {
       "value": "<p><em>Wondrous item, (requires attunement)</em></p>\n<p>While you wear these boots, your walking speed becomes 30 feet, unless your walking speed is higher, and your speed isn't reduced if you are encumbered or wearing heavy armor. In addition, you can jump three times the normal distance, though you can't jump farther than your remaining movement would allow.</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -40,7 +39,8 @@
       "value": null,
       "width": null,
       "units": "",
-      "type": ""
+      "type": "",
+      "prompt": true
     },
     "range": {
       "value": null,
@@ -51,12 +51,14 @@
       "value": null,
       "max": "",
       "per": null,
-      "recovery": ""
+      "recovery": "",
+      "prompt": true
     },
     "consume": {
       "type": "",
       "target": null,
-      "amount": null
+      "amount": null,
+      "scale": false
     },
     "ability": null,
     "actionType": "",
@@ -78,7 +80,6 @@
     },
     "armor": {
       "value": 0,
-      "type": "clothing",
       "dex": 0
     },
     "hp": {
@@ -87,18 +88,24 @@
       "dt": null,
       "conditions": ""
     },
-    "baseItem": "",
     "speed": {
       "value": null,
       "conditions": ""
     },
     "strength": null,
     "stealth": false,
-    "proficient": null
+    "proficient": null,
+    "type": {
+      "value": "clothing",
+      "baseItem": ""
+    },
+    "unidentified": {
+      "description": ""
+    },
+    "container": null
   },
   "effects": [
     {
-      "label": "Boots of Striding and Springing",
       "icon": "icons/equipment/feet/boots-collared-rounded-brown.webp",
       "origin": "Compendium.dnd5e.items.hSY1b8yi8JWw2blf",
       "duration": {
@@ -116,13 +123,16 @@
         {
           "key": "system.attributes.movement.walk",
           "mode": 4,
-          "value": "30"
+          "value": "30",
+          "priority": null
         }
       ],
       "tint": null,
       "transfer": true,
       "flags": {},
-      "sort": 0,
+      "name": "Boots of Striding and Springing",
+      "description": "",
+      "statuses": [],
       "_key": "!items.effects!hSY1b8yi8JWw2blf.ewBIkUaBn4meKsK5"
     }
   ],
@@ -137,7 +147,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787233814,
-    "modifiedTime": 1701903928410,
+    "modifiedTime": 1703713490258,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!hSY1b8yi8JWw2blf"

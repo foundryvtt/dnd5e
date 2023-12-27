@@ -6,8 +6,7 @@
   "system": {
     "description": {
       "value": "<p><em>(Requires attunement)</em></p>\n<p>This rod has a flanged head and the following properties.</p>\n<p><strong>Alertness</strong>. While holding the rod, you have advantage on Wisdom (Perception) checks and on rolls for initiative.</p>\n<p><strong>Spells</strong>. While holding the rod, you can use an action to cast one of the following spells from it: @Compendium[dnd5e.spells.Mzh95utKDPIrjiH8]{Detect Evil and Good}, @Compendium[dnd5e.spells.ghXTfe7sgCbgf1Q8]{Detect Magic}, @Compendium[dnd5e.spells.2skfDtglk1mGrb3l]{Detect Poison and Disease}, or @Compendium[dnd5e.spells.DQzlB5Y3k791W5bH]{See Invisibility}.</p>\n<p><strong>Protective Aura</strong>. As an action, you can plant the haft end of the rod in the ground, whereupon the rod's head sheds bright light in a 60-foot radius and dim light for an additional 60 feet. While in that bright light, you and any creature that is friendly to you gain a +1 bonus to AC and saving throws and can sense the location of any invisible hostile creature that is also in the bright light.</p>\n<p>The rod's head stops glowing and the effect ends after 10 minutes, or when a creature uses an action to pull the rod from the ground.. This property can't be used again until the next dawn.</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -39,7 +38,8 @@
       "value": null,
       "width": null,
       "units": "",
-      "type": "self"
+      "type": "self",
+      "prompt": true
     },
     "range": {
       "value": 60,
@@ -51,12 +51,14 @@
       "max": "1",
       "per": "day",
       "recovery": "",
-      "autoDestroy": false
+      "autoDestroy": false,
+      "prompt": true
     },
     "consume": {
       "type": "",
       "target": null,
-      "amount": null
+      "amount": null,
+      "scale": false
     },
     "ability": "",
     "actionType": "util",
@@ -76,7 +78,15 @@
       "dc": null,
       "scaling": "spell"
     },
-    "consumableType": "rod"
+    "type": {
+      "value": "rod"
+    },
+    "unidentified": {
+      "description": ""
+    },
+    "container": null,
+    "crewed": false,
+    "properties": {}
   },
   "effects": [],
   "folder": "609zLs23BLj5hyYp",
@@ -90,7 +100,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787233530,
-    "modifiedTime": 1701903919368,
+    "modifiedTime": 1703713479117,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!Do3qeSHtBjUsmfvz"

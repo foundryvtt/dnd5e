@@ -6,8 +6,7 @@
   "system": {
     "description": {
       "value": "<p>This armor is leather armor with heavy rings sewn into it. The rings help reinforce the armor against blows from swords and axes. Ring mail is inferior to chain mail, and it's usually worn only by those who can't afford better armor.</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -40,7 +39,8 @@
       "value": null,
       "width": null,
       "units": "",
-      "type": ""
+      "type": "",
+      "prompt": true
     },
     "range": {
       "value": null,
@@ -51,12 +51,14 @@
       "value": null,
       "max": "",
       "per": null,
-      "recovery": ""
+      "recovery": "",
+      "prompt": true
     },
     "consume": {
       "type": "",
       "target": null,
-      "amount": null
+      "amount": null,
+      "scale": false
     },
     "ability": null,
     "actionType": "",
@@ -78,7 +80,6 @@
     },
     "armor": {
       "value": 14,
-      "type": "heavy",
       "dex": 0
     },
     "hp": {
@@ -87,14 +88,21 @@
       "dt": null,
       "conditions": ""
     },
-    "baseItem": "ringmail",
     "speed": {
       "value": null,
       "conditions": ""
     },
     "strength": null,
     "stealth": true,
-    "proficient": null
+    "proficient": null,
+    "type": {
+      "value": "heavy",
+      "baseItem": "ringmail"
+    },
+    "unidentified": {
+      "description": ""
+    },
+    "container": null
   },
   "effects": [],
   "folder": "JqTP017wj3uxDJ8g",
@@ -108,7 +116,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787233865,
-    "modifiedTime": 1701904253536,
+    "modifiedTime": 1703713492902,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!nsXZejlmgalj4he9"

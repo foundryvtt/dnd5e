@@ -6,8 +6,7 @@
   "system": {
     "description": {
       "value": "<p>This small container holds flint, fire steel, and tinder (usually dry cloth soaked in light oil) used to kindle a fire. Using it to light a torch - or anything else with abundant, exposed fuel - takes an action. Lighting any other fire takes 1 minute.</p>\n<p> </p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -21,10 +20,15 @@
       "value": 5,
       "denomination": "sp"
     },
-    "attunement": 0,
-    "equipped": false,
     "rarity": "",
-    "identified": true
+    "identified": true,
+    "type": {
+      "value": ""
+    },
+    "unidentified": {
+      "description": ""
+    },
+    "container": null
   },
   "effects": [],
   "folder": "dlru9Hy74nSMv6fr",
@@ -38,7 +42,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787233523,
-    "modifiedTime": 1701903919221,
+    "modifiedTime": 1703713478839,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!DNOSEAvF4Oh1DlWy"

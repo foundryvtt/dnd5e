@@ -6,8 +6,7 @@
   "system": {
     "description": {
       "value": "<p>A small bottle of ink for writing upon parchment.</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -21,10 +20,15 @@
       "value": 10,
       "denomination": "gp"
     },
-    "attunement": 0,
-    "equipped": false,
     "rarity": "",
-    "identified": true
+    "identified": true,
+    "type": {
+      "value": ""
+    },
+    "unidentified": {
+      "description": ""
+    },
+    "container": null
   },
   "effects": [],
   "folder": "dlru9Hy74nSMv6fr",
@@ -38,7 +42,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787233743,
-    "modifiedTime": 1701903925449,
+    "modifiedTime": 1703713488303,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!dP7jMKyHTTgVb3ii"

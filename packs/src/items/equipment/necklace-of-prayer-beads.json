@@ -6,8 +6,7 @@
   "system": {
     "description": {
       "value": "<p><em>Wondrous item, (requires attunement by a cleric, druid, or paladin)</em></p><p>This necklace has 1d4 + 2 magic beads made from aquamarine, black pearl, or topaz. It also has many nonmagical beads made from stones such as amber, bloodstone, citrine, coral, jade, pearl, or quartz. If a magic bead is removed from the necklace, that bead loses its magic.</p><p>Six types of magic beads exist. The GM decides the type of each bead on the necklace or determines it randomly. A necklace can have more than one bead of the same type. To use one, you must be wearing the necklace. Each bead contains a spell that you can cast from it as a bonus action (using your spell save DC if a save is necessary). Once a magic bead's spell is cast, that bead can't be used again until the next dawn.</p><p>Use the @Compendium[dnd5e.tables.XHTUTUXdyzcPbodw]{Necklace of Prayer Beads} table and refer to the table below for detailed descriptions on each bead</p><table><thead><tr><th><strong>d20</strong></th><th><strong>Bead of…</strong></th><th><strong>Spell</strong></th><th><strong>Guide Price per Bead (gp)</strong></th></tr></thead><tbody><tr><td>1-6</td><td>Blessing</td><td>@Compendium[dnd5e.spells.8dzaICjGy6mTUaUr]{Bless}</td><td>2,000</td></tr><tr><td>7-12</td><td>Curing</td><td>@Compendium[dnd5e.spells.uUWb1wZgtMou0TVP]{Cure Wounds} (2nd level) or @Compendium[dnd5e.spells.F0GsG0SJzsIOacwV]{Lesser Restoration}</td><td>4,000</td></tr><tr><td>13-16</td><td>Favor</td><td>@Compendium[dnd5e.spells.WzvJ7G3cqvIubsLk]{Greater Restoration}</td><td>32,000</td></tr><tr><td>17-18</td><td>Smiting</td><td>@Compendium[dnd5e.spells.7UwUjJ6owIQkEPrs]{Branding Smite}</td><td>1,500</td></tr><tr><td>19</td><td>Summons</td><td>@Compendium[dnd5e.spells.fkREcytuZ8sngWtC]{Planar Ally}</td><td>128,000</td></tr><tr><td>20</td><td>Wind Walking</td><td>@Compendium[dnd5e.spells.8PJAsHmbu6UgDHC0]{Wind Walk}</td><td>96,000</td></tr></tbody></table><section class=\"secret foundry-note\" id=\"secret-7DOXr3q6fDOOCepZ\"><p><strong>Foundry Note</strong></p><p>The 6 charges reflect the maximum number of beads able to be found; please adjust as required.</p><p>Additionally, the guide price is a guide only and should be adjusted accordingly to reflect the Dungeon Master's world.</p></section>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -39,7 +38,8 @@
       "value": null,
       "width": null,
       "units": "",
-      "type": ""
+      "type": "",
+      "prompt": true
     },
     "range": {
       "value": null,
@@ -50,12 +50,14 @@
       "value": 6,
       "max": "6",
       "per": "day",
-      "recovery": ""
+      "recovery": "",
+      "prompt": true
     },
     "consume": {
       "type": "",
       "target": null,
-      "amount": null
+      "amount": null,
+      "scale": false
     },
     "ability": "",
     "actionType": "util",
@@ -77,7 +79,6 @@
     },
     "armor": {
       "value": 0,
-      "type": "trinket",
       "dex": 0
     },
     "hp": {
@@ -86,14 +87,22 @@
       "dt": null,
       "conditions": ""
     },
-    "baseItem": "",
     "speed": {
       "value": null,
       "conditions": ""
     },
     "strength": null,
     "stealth": false,
-    "proficient": null
+    "proficient": null,
+    "type": {
+      "value": "trinket",
+      "baseItem": ""
+    },
+    "unidentified": {
+      "description": ""
+    },
+    "container": null,
+    "crewed": false
   },
   "effects": [],
   "folder": "aJgMxnZED9XdoN2W",
@@ -107,7 +116,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787233960,
-    "modifiedTime": 1701903946936,
+    "modifiedTime": 1703713496264,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!wqVSRfkcTjuhvDyx"

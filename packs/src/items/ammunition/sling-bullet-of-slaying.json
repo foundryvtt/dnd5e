@@ -6,8 +6,7 @@
   "system": {
     "description": {
       "value": "<p>A Bullet of Slaying is a magic weapon meant to slay a particular kind of creature. Some are more focused than others; for example, there are both Bullets of Dragon Slaying and Bullets of Blue Dragon Slaying. If a creature belonging to the type, race, or group associated with a Bullet of Slaying takes damage from the bullet, the creature must make a DC 17 Constitution saving throw, taking an extra 6d10 bludgeoning damage on a failed save, or half as much extra damage on a successful one.</p>\n<p>Once a Bullet of Slaying deals its extra damage to a creature, it becomes a nonmagical bullet.</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -39,7 +38,8 @@
       "value": null,
       "width": null,
       "units": "",
-      "type": ""
+      "type": "",
+      "prompt": true
     },
     "range": {
       "value": null,
@@ -51,12 +51,14 @@
       "max": "",
       "per": null,
       "recovery": "",
-      "autoDestroy": false
+      "autoDestroy": false,
+      "prompt": true
     },
     "consume": {
       "type": "",
       "target": null,
-      "amount": null
+      "amount": null,
+      "scale": false
     },
     "ability": null,
     "actionType": "rwak",
@@ -76,7 +78,15 @@
       "dc": 17,
       "scaling": "flat"
     },
-    "consumableType": "ammo"
+    "type": {
+      "value": "ammo"
+    },
+    "unidentified": {
+      "description": ""
+    },
+    "container": null,
+    "crewed": false,
+    "properties": {}
   },
   "effects": [],
   "folder": "NdDvXSjfqlghXpQZ",
@@ -90,7 +100,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787233627,
-    "modifiedTime": 1701903921524,
+    "modifiedTime": 1703713482532,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!Mj8fTo5VZKJJ7uMv"

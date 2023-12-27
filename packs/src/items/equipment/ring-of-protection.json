@@ -6,8 +6,7 @@
   "system": {
     "description": {
       "value": "<p><em>(Requires attunement)</em></p>\n<p>You gain a +1 bonus to AC and saving throws while wearing this ring.</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -40,7 +39,8 @@
       "value": null,
       "width": null,
       "units": "",
-      "type": "self"
+      "type": "self",
+      "prompt": true
     },
     "range": {
       "value": null,
@@ -51,12 +51,14 @@
       "value": null,
       "max": "",
       "per": null,
-      "recovery": ""
+      "recovery": "",
+      "prompt": true
     },
     "consume": {
       "type": "",
       "target": null,
-      "amount": null
+      "amount": null,
+      "scale": false
     },
     "ability": "",
     "actionType": "",
@@ -78,7 +80,6 @@
     },
     "armor": {
       "value": 0,
-      "type": "trinket",
       "dex": 0
     },
     "hp": {
@@ -87,14 +88,21 @@
       "dt": null,
       "conditions": ""
     },
-    "baseItem": "",
     "speed": {
       "value": null,
       "conditions": ""
     },
     "strength": null,
     "stealth": false,
-    "proficient": null
+    "proficient": null,
+    "type": {
+      "value": "trinket",
+      "baseItem": ""
+    },
+    "unidentified": {
+      "description": ""
+    },
+    "container": null
   },
   "effects": [
     {
@@ -124,12 +132,13 @@
         "startTurn": null
       },
       "icon": "icons/equipment/finger/ring-cabochon-silver-gold-red.webp",
-      "label": "Ring of Protection",
       "origin": "Compendium.dnd5e.items.QtmVEreNIWEVOoLR",
       "transfer": true,
       "flags": {},
       "tint": null,
-      "sort": 0,
+      "name": "Ring of Protection",
+      "description": "",
+      "statuses": [],
       "_key": "!items.effects!QtmVEreNIWEVOoLR.q1wbe9ru251bfnhg"
     }
   ],
@@ -144,7 +153,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787233653,
-    "modifiedTime": 1701903922195,
+    "modifiedTime": 1703713483748,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!QtmVEreNIWEVOoLR"

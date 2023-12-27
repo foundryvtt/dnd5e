@@ -6,8 +6,7 @@
   "system": {
     "description": {
       "value": "<p><em>(Requires attunement by a druid)</em></p><p>This staff can be wielded as a magic quarterstaff that grants a +2 bonus to attack and damage rolls made with it. While holding it, you have a +2 bonus to spell attack rolls.</p><p>The staff has 10 charges for the following properties. It regains 1d6 + 4 expended charges daily at dawn. If you expend the last charge, roll a d20. On a 1, the staff loses its properties and becomes a nonmagical quarterstaff.</p><p><strong>Spells</strong>. You can use an action to expend 1 or more of the staff's charges to cast one of the following spells from it, using your spell save DC: @Compendium[dnd5e.spells.hDOENzjuj5WpLq7B]{Animal Friendship} (1 charge), @Compendium[dnd5e.spells.MCEpGpvovcXagwQS]{Awaken} (5 charges), @Compendium[dnd5e.spells.JPwIEfgUPVebr5AH]{Barkskin} (2 charges), @Compendium[dnd5e.spells.Iv2qqSAT7OkXKPFx]{Locate Animals or Plants} (2 charges), speak with animals (1 charge), @Compendium[dnd5e.spells.2VXGS206tuChoeXy]{Speak with Plants} (3 charges), or @Compendium[dnd5e.spells.AQsBc94ES7W7s7iG]{Wall of Thorns} (6 charges).</p><p>You can also use an action to cast the @Compendium[dnd5e.spells.pRMvmknwLf2tdMTj]{Pass without Trace} spell from the staff without using any charges.</p><p><strong>Tree Form</strong>. You can use an action to plant one end of the staff in fertile earth and expend 1 charge to transform the staff into a healthy tree. The tree is 60 feet tall and has a 5-foot-diameter trunk, and its branches at the top spread out in a 20-foot radius. The tree appears ordinary but radiates a faint aura of transmutation magic if targeted by @Compendium[dnd5e.spells.ghXTfe7sgCbgf1Q8]{Detect Magic}. While touching the tree and using another action to speak its command word, you return the staff to its normal form. Any creature in the tree falls when it reverts to a staff.</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -39,7 +38,8 @@
       "value": null,
       "width": null,
       "units": "",
-      "type": ""
+      "type": "",
+      "prompt": true
     },
     "range": {
       "value": 5,
@@ -50,12 +50,14 @@
       "value": 10,
       "max": "10",
       "per": "charges",
-      "recovery": "1d6 + 4"
+      "recovery": "1d6 + 4",
+      "prompt": true
     },
     "consume": {
       "type": "",
       "target": null,
-      "amount": null
+      "amount": null,
+      "scale": false
     },
     "ability": "",
     "actionType": "mwak",
@@ -89,8 +91,6 @@
       "dt": null,
       "conditions": ""
     },
-    "weaponType": "simpleM",
-    "baseItem": "",
     "properties": {
       "amm": false,
       "hvy": false,
@@ -110,7 +110,16 @@
       "ada": false,
       "sil": false
     },
-    "proficient": null
+    "proficient": null,
+    "type": {
+      "value": "simpleM",
+      "baseItem": ""
+    },
+    "unidentified": {
+      "description": ""
+    },
+    "container": null,
+    "crewed": false
   },
   "effects": [],
   "folder": "MLMTCAvKsuFE3vYA",
@@ -124,7 +133,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787233738,
-    "modifiedTime": 1701903925055,
+    "modifiedTime": 1703713488059,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!caEn3ixCUFBnHTx6"

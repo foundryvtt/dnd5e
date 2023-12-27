@@ -6,8 +6,7 @@
   "system": {
     "description": {
       "value": "<p><em>(Requires attunement)</em></p>\n<p>This ring is linked to the Elemental Plane of Water.</p>\n<p>While wearing this ring, you have advantage on attack rolls against @Compendium[dnd5e.monsters.namJz755U1EhvEJa]{Water Elemental}s, and they have disadvantage on attack rolls against you. In addition, you have access to properties based on the linked plane.</p>\n<p>The ring has 5 charges. It regains 1d4 + 1 expended charges daily at dawn. Spells cast from the ring have a save DC of 17.</p>\n<p><strong>Ring of Water Elemental Command</strong>. You can expend 2 of the ring's charges to cast @Compendium[dnd5e.spells.eEpy1ONlXumKS1mp]{Dominate Monster} on a Water Elemental. In addition, you can stand on and walk across liquid surfaces as if they were solid ground. You can also speak and understand Aquan.</p>\n<p>If you help slay a Water Elemental while attuned to the ring, you gain access to the following additional properties:</p>\n<ul>\n<li>You can breathe underwater and have a swimming speed equal to your walking speed.</li>\n<li>You can cast the following spells from the ring, expending the necessary number of charges: @Compendium[dnd5e.spells.a3XtAO5n2GrqiAh5]{Create or Destroy Water} (1 charge), @Compendium[dnd5e.spells.7fFHlBk3UNX8gPKL]{Control Water} (3 charges), @Compendium[dnd5e.spells.WN2LWEljYU6QqnRH]{Ice Storm} (2 charges), or @Compendium[dnd5e.spells.fzZnVKLmBMo2f5up]{Wall of Ice} (3 charges).</li>\n</ul>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -39,7 +38,8 @@
       "value": null,
       "width": null,
       "units": "",
-      "type": ""
+      "type": "",
+      "prompt": true
     },
     "range": {
       "value": null,
@@ -50,12 +50,14 @@
       "value": 5,
       "max": "5",
       "per": "charges",
-      "recovery": "1d4 + 1"
+      "recovery": "1d4 + 1",
+      "prompt": true
     },
     "consume": {
       "type": "",
       "target": null,
-      "amount": null
+      "amount": null,
+      "scale": false
     },
     "ability": "",
     "actionType": "save",
@@ -77,7 +79,6 @@
     },
     "armor": {
       "value": 0,
-      "type": "trinket",
       "dex": 0
     },
     "hp": {
@@ -86,14 +87,22 @@
       "dt": null,
       "conditions": ""
     },
-    "baseItem": "",
     "speed": {
       "value": null,
       "conditions": ""
     },
     "strength": null,
     "stealth": false,
-    "proficient": null
+    "proficient": null,
+    "type": {
+      "value": "trinket",
+      "baseItem": ""
+    },
+    "unidentified": {
+      "description": ""
+    },
+    "container": null,
+    "crewed": false
   },
   "effects": [],
   "folder": "aJgMxnZED9XdoN2W",
@@ -107,7 +116,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787233565,
-    "modifiedTime": 1701903920339,
+    "modifiedTime": 1703713480804,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!HnIERWmmra74hSCw"
