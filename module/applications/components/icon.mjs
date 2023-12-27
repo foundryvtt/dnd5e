@@ -25,18 +25,26 @@ export default class IconElement extends HTMLElement {
   /* -------------------------------------------- */
 
   /**
-   * Cached SVG files by SRC.
-   * @type {Map<string, SVGElement|Promise<SVGElement>>}
-   */
-  static #svgCache = new Map();
-
-  /* -------------------------------------------- */
-
-  /**
    * Path to the SVG source file.
    * @type {string}
    */
   #src;
+
+  /* -------------------------------------------- */
+
+  /**
+   * Stylesheet that is shared among all icons.
+   * @type {CSSStyleSheet}
+   */
+  static #stylesheet;
+
+  /* -------------------------------------------- */
+
+  /**
+   * Cached SVG files by SRC.
+   * @type {Map<string, SVGElement|Promise<SVGElement>>}
+   */
+  static #svgCache = new Map();
 
   /* -------------------------------------------- */
 
@@ -45,19 +53,21 @@ export default class IconElement extends HTMLElement {
     this.replaceChildren();
 
     // Create icon styles
-    const style = new CSSStyleSheet();
-    style.replaceSync(`
-      :host {
-        display: contents;
-        height: 1em;
-      }
-      svg {
-        fill: var(--icon-fill, #000);
-        width: var(--icon-size, 1em);
-        height: var(--icon-size, 1em);
-      }
-    `);
-    this.#shadowRoot.adoptedStyleSheets = [style];
+    if ( !this.constructor.#stylesheet ) {
+      this.constructor.#stylesheet = new CSSStyleSheet();
+      this.constructor.#stylesheet.replaceSync(`
+        :host {
+          display: contents;
+          height: 1em;
+        }
+        svg {
+          fill: var(--icon-fill, #000);
+          width: var(--icon-size, 1em);
+          height: var(--icon-size, 1em);
+        }
+      `);
+    }
+    this.#shadowRoot.adoptedStyleSheets = [this.constructor.#stylesheet];
 
     const insertElement = element => {
       if ( !element ) return;
@@ -80,12 +90,13 @@ export default class IconElement extends HTMLElement {
    */
   static fetch(src) {
     if ( !this.#svgCache.has(src) ) this.#svgCache.set(src, fetch(src)
-      .then(r => r.blob())
       .then(b => b.text())
       .then(t => {
         const temp = document.createElement("div");
         temp.innerHTML = t;
-        return temp.querySelector("svg");
+        const svg = temp.querySelector("svg");
+        this.#svgCache.set(src, svg);
+        return svg;
       }));
     return this.#svgCache.get(src);
   }
