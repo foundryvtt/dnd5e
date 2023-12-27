@@ -5,6 +5,13 @@ import * as Trait from "../../documents/actor/trait.mjs";
  * An Actor sheet for player character type actors.
  */
 export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
+  constructor(object, options={}) {
+    const { width, height } = game.user.getFlag("dnd5e", "sheetPrefs.character") ?? {};
+    if ( width && !("width" in options) ) options.width = width;
+    if ( height && !("height" in options) ) options.height = height;
+    super(object, options);
+  }
+
   /** @inheritDoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
@@ -420,5 +427,14 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
     const isSavingThrow = event.currentTarget.classList.contains("saving-throw");
     if ( isSavingThrow ) this.actor.rollAbilitySave(abilityId, { event });
     else this.actor.rollAbilityTest(abilityId, { event })
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  _onResize(event) {
+    super._onResize(event);
+    const { width, height } = this.position;
+    game.user.setFlag("dnd5e", "sheetPrefs.character", { width, height });
   }
 }

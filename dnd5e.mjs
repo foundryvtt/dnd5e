@@ -57,6 +57,7 @@ Hooks.once("init", function() {
   CONFIG.Item.documentClass = documents.Item5e;
   CONFIG.Token.documentClass = documents.TokenDocument5e;
   CONFIG.Token.objectClass = canvas.Token5e;
+  CONFIG.User.documentClass = documents.User5e;
   CONFIG.time.roundTime = 6;
   CONFIG.Dice.DamageRoll = dice.DamageRoll;
   CONFIG.Dice.D20Roll = dice.D20Roll;
