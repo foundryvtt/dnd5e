@@ -509,7 +509,7 @@ function _duplicatedEffects(parent) {
       if ( !effect.transfer ) continue;
       const match = parent.effects.find(t => {
         const diff = foundry.utils.diffObject(t, effect);
-        return !("changes" in diff) && !deleteIds.has(t._id);
+        return t.origin.endsWith(`Item.${item._id}`) && !("changes" in diff) && !deleteIds.has(t._id);
       });
       if ( match ) deleteIds.add(match._id);
     }
