@@ -77,9 +77,9 @@
             {{!-- Consumable Properties --}}
             <div class="form-group stacked weapon-properties">
                 <label>{{ localize "DND5E.ItemAmmoProperties" }}</label>
-                {{#each config.physicalWeaponProperties as |name prop|}}
+                {{#each properties}}
                 <label class="checkbox">
-                    <input type="checkbox" name="system.properties.{{prop}}" {{checked (lookup ../system.properties prop)}}> {{ name }}
+                    <input type="checkbox" name="system.properties.{{@key}}" {{checked selected}}> {{ label }}
                 </label>
                 {{/each}}
             </div>
