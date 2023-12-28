@@ -341,24 +341,59 @@ async function enrichSave(config, label, options) {
  *   <i class="fa-solid fa-dice-d20"></i> Mace
  * </a>
  * ```
+ *
+ * @example Use an Item from a Relative UUID:
+ * ```[[/item .amUUCouL69OK1GZU]]```
+ * becomes
+ * ```html
+ * <a class="roll-action" data-type="item">
+ *   <i class="fa-solid fa-dice-d20"></i> Bite
+ * </a>
+ * ```
 */
 
 async function enrichItem(config, label) {
   const givenItem = config.values.join(' ');
+  ///if config is a UUID
   const itemUuidMatch = givenItem.match(/^Actor\..*?\.Item\..*?$/);
     if (itemUuidMatch) {
       const actorIdOrName = itemUuidMatch[0].split('.')[1];
       const ownerActor = game.actors.get(actorIdOrName) || game.actors.getName(actorIdOrName);
-
       if (ownerActor) {
         const itemIdOrName = itemUuidMatch[0].split('.')[3];
         const ownedItem = ownerActor.items.get(itemIdOrName) || ownerActor.items.getName(itemIdOrName);
-        if ( !label ) {
+        if (!ownedItem) {
+          console.warn(`Item ${itemIdOrName} not found while enriching ${config.input}.`);
+          return config.input;
+        } else if ( !label ) {
           label = ownedItem.name;
         }
       return createRollLink(label, {type: "item", rollItemActor: ownerActor.id, rollItemId: ownedItem.id });
       }
     }
+
+  ///If config is a relative ID
+  const itemIdMatch = givenItem.match(/^\.\w{16}$/);
+  if (itemIdMatch) {
+    const relativeId = givenItem.substr(1); 
+    const foundActor = game.actors.find((actor) => actor.items.get(relativeId));
+    if (foundActor) {
+      const foundItem = foundActor.items.get(relativeId);
+      if ( !label ) {
+        label = foundItem.name;
+        console.log(`Found actor ${foundActor.name} that owns the item ${foundItem.name}.`);
+      }
+      return createRollLink(label, { type: "item", rollRelativeItemId: relativeId });
+      } else {
+      console.warn(`No Actor with Item ${givenItem} found while enriching ${config.input}.`);
+      return config.input;
+    }
+  } else if (givenItem.startsWith(".")) {
+    console.warn(`Item ${givenItem} not found while enriching ${config.input}.`);
+    return config.input;
+  }
+
+  //Finally, if config is an item name
   if ( !label ) {
     label = givenItem;}
     return createRollLink(label, { type: "item", rollItemName: givenItem });
@@ -452,11 +487,59 @@ function rollAction(event) {
       options.ability = ability;
       return actor.rollToolCheck(tool, options);
     case "item":
+      ///UUID Method
       if (target.dataset.rollItemActor) {
-      return game.actors.get(target.dataset.rollItemActor).items.get(target.dataset.rollItemId).use();
-    } else if (target.dataset.rollItemName) {
-      return dnd5e.documents.macro.rollItem(target.dataset.rollItemName);
-    }    
+        return game.actors.get(target.dataset.rollItemActor).items.get(target.dataset.rollItemId).use();
+
+      ///Relative Id Method
+      } else if (target.dataset.rollRelativeItemId) {
+        let locatedToken, locatedScene, locatedActor;
+        const targetLocation = target.parentElement.parentElement;
+          if (targetLocation.classList.contains("card-content")) {
+          const chatCardIds = target.closest(".dnd5e.chat-card.item-card").dataset;
+            if (chatCardIds.tokenId) {
+              const chatIds = chatCardIds.tokenId.match(/Scene\.(.{16}).Token\.(.{16})/);
+              locatedScene = chatIds[1];
+              locatedToken = chatIds[2];
+            } else {
+              locatedActor = chatCardIds.actorId;
+            }
+
+          } else if (targetLocation.classList.contains("item-summary")) {
+            const actorSheetIds = target.closest(".app.window-app.dnd5e.sheet.actor").id.match(/ActorSheet5e(?:NPC|Character)-(Scene?\-?(.{16}))?(-Token?\-?(.{16}))?(-Actor\-?(.{16})?)?/);
+            if (actorSheetIds[2]) {
+              locatedScene = actorSheetIds[2];
+              locatedToken = actorSheetIds[4];
+            } else {
+              locatedActor = event.target.offsetParent.id.slice(-16);
+            }
+
+          } else if (targetLocation.classList.contains("editor-content")) {
+            const itemSheetIds = target.closest(".app.window-app.dnd5e.sheet.item").id.match(/ItemSheet5e-(Scene?\-?(.{16}))?(-Token?\-?(.{16}))?(Actor\-?(.{16})?)?/);
+            if (itemSheetIds[2]) {
+              locatedScene = itemSheetIds[2];
+              locatedToken = itemSheetIds[4];
+            } else {
+              locatedActor = itemSheetIds[6];
+            }
+          }
+
+        if (locatedActor) {
+          const gameActor = game.actors.get(locatedActor);
+          const actorItem = gameActor.items.get(target.dataset.rollRelativeItemId);
+          if (actorItem) return actorItem.use();
+          else return ui.notifications.warn(`Item ${target.dataset.rollRelativeItemId} not found on Actor ${gameActor.name}!`)
+        } else {
+          const parentScene = game.scenes.get(locatedScene);
+          const sceneToken = parentScene.collections.tokens.get(locatedToken);
+          const tokenItem = sceneToken.delta.collections.items.get(target.dataset.rollRelativeItemId);
+          if (tokenItem) return tokenItem.use();
+          else return ui.notifications.warn(`Item ${target.dataset.rollRelativeItemId} not found on Actor ${sceneToken.name} in Scene ${parentScene.name}!`);
+        }
+
+      } else if (target.dataset.rollItemName) { //Name Method
+        return dnd5e.documents.macro.rollItem(target.dataset.rollItemName);
+    }  
     default:
       return console.warn(`DnD5e | Unknown roll type ${type} provided.`);
   }
