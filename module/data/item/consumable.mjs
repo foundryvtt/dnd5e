@@ -21,12 +21,13 @@ import ItemTypeField from "./fields/item-type-field.mjs";
  * @property {boolean} uses.autoDestroy  Should this item be destroyed when it runs out of uses.
  */
 export default class ConsumableData extends SystemDataModel.mixin(
-  ItemDescriptionTemplate, ItemTypeTemplate, PhysicalItemTemplate, EquippableItemTemplate, ActivatedEffectTemplate, ActionTemplate
+  ItemDescriptionTemplate, ItemTypeTemplate, PhysicalItemTemplate, EquippableItemTemplate,
+  ActivatedEffectTemplate, ActionTemplate
 ) {
   /** @inheritdoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
-      type: new ItemTypeField({value: "potion"}, {subtype: false, baseItem: false, label: "DND5E.ItemConsumableType"}),
+      type: new ItemTypeField({value: "potion", subtype: false, baseItem: false}, {label: "DND5E.ItemConsumableType"}),
       properties: new MappingField(new foundry.data.fields.BooleanField(), {
         required: false, label: "DND5E.ItemAmmoProperties"
       }),
