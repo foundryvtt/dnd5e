@@ -10,6 +10,7 @@ export default class ProficiencyCycleElement extends HTMLElement {
     this.#internals = this.attachInternals();
     this.#internals.role = "spinbutton";
     this.#shadowRoot = this.attachShadow({ mode: "open" });
+    this.#buildCSS();
     this.#value = Number(this.getAttribute("value") ?? 0);
   }
 
@@ -30,6 +31,13 @@ export default class ProficiencyCycleElement extends HTMLElement {
    * @type {ShadowRoot}
    */
   #shadowRoot;
+
+  /**
+   * The stylesheet to attach to the element's shadow root.
+   * @type {CSSStyleSheet}
+   * @protected
+   */
+  static _stylesheet;
 
   /* -------------------------------------------- */
 
@@ -120,7 +128,6 @@ export default class ProficiencyCycleElement extends HTMLElement {
   /** @override */
   connectedCallback() {
     this.replaceChildren();
-    this.#buildCSS();
     this.#buildHTML();
     this.#refreshValue();
 
@@ -137,65 +144,67 @@ export default class ProficiencyCycleElement extends HTMLElement {
    * Build the CSS internals.
    */
   #buildCSS() {
-    const style = document.createElement("style");
-    style.innerHTML = `
-      :host { display: inline-block; }
-      div { --_fill: var(--proficiency-cycle-enabled-color, var(--dnd5e-color-blue)); }
-      div:has(:disabled, :focus-visible) { --_fill: var(--proficiency-cycle-disabled-color, var(--dnd5e-color-gold)); }
-      div:not(:has(:disabled)) { cursor: pointer; }
-
-      div {
-        position: relative;
-        overflow: clip;
-        width: 100%;
-        aspect-ratio: 1;
-
-        &::before {
-          content: "";
-          position: absolute;
-          display: block;
-          inset: 3px;
-          border: 1px solid var(--_fill);
-          border-radius: 100%;
-        }
-
-        &:has([value="1"])::before { background: var(--_fill); }
+    if ( !this.constructor._stylesheet ) {
+      this.constructor._stylesheet = new CSSStyleSheet();
+      this.constructor._stylesheet.replaceSync(`
+        :host { display: inline-block; }
+        div { --_fill: var(--proficiency-cycle-enabled-color, var(--dnd5e-color-blue)); }
+        div:has(:disabled, :focus-visible) { --_fill: var(--proficiency-cycle-disabled-color, var(--dnd5e-color-gold)); }
+        div:not(:has(:disabled)) { cursor: pointer; }
   
-        &:has([value="0.5"], [value="2"])::after {
-          content: "";
-          position: absolute;
-          background: var(--_fill);  
-        }
-
-        &:has([value="0.5"])::after {
-          inset: 4px;
-          width: 4px;
-          aspect-ratio: 1 / 2;
-          border-radius: 100% 0 0 100%;
-        }
-
-        &:has([value="2"]) {
+        div {
+          position: relative;
+          overflow: clip;
+          width: 100%;
+          aspect-ratio: 1;
+  
           &::before {
-            inset: 1px;
-            border-width: 2px;
-          }
-
-          &::after {
-            inset: 5px;
+            content: "";
+            position: absolute;
+            display: block;
+            inset: 3px;
+            border: 1px solid var(--_fill);
             border-radius: 100%;
           }
+  
+          &:has([value="1"])::before { background: var(--_fill); }
+    
+          &:has([value="0.5"], [value="2"])::after {
+            content: "";
+            position: absolute;
+            background: var(--_fill);  
+          }
+  
+          &:has([value="0.5"])::after {
+            inset: 4px;
+            width: 4px;
+            aspect-ratio: 1 / 2;
+            border-radius: 100% 0 0 100%;
+          }
+  
+          &:has([value="2"]) {
+            &::before {
+              inset: 1px;
+              border-width: 2px;
+            }
+  
+            &::after {
+              inset: 5px;
+              border-radius: 100%;
+            }
+          }
         }
-      }
-
-      input {
-        position: absolute;
-        inset-block-start: -100px;
-        width: 1px;
-        height: 1px;
-        opacity: 0;
-      }
-    `;
-    this.#shadowRoot.appendChild(style);
+  
+        input {
+          position: absolute;
+          inset-block-start: -100px;
+          width: 1px;
+          height: 1px;
+          opacity: 0;
+        }
+      `);
+    }
+    this.#shadowRoot.adoptedStyleSheets = [this.constructor._stylesheet];
   }
 
   /* -------------------------------------------- */

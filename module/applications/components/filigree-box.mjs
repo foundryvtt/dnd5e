@@ -30,59 +30,70 @@ export default class FiligreeBoxElement extends HTMLElement {
   /* -------------------------------------------- */
 
   /**
+   * The stylesheet to attach to the element's shadow root.
+   * @type {CSSStyleSheet}
+   * @protected
+   */
+  static _stylesheet;
+
+  /* -------------------------------------------- */
+
+  /**
    * Build the shadow DOM's styles.
    */
   #buildStyle() {
-    const style = document.createElement("style");
-    style.innerHTML = `
-      :host {
-        position: relative;
-        isolation: isolate;
-        min-height: 56px;
-        filter: var(--filigree-drop-shadow, drop-shadow(0 0 12px var(--dnd5e-shadow-15)));
-      }
-      .backdrop {
-        --chamfer: 12px;
-        position: absolute;
-        inset: 0;
-        background: var(--filigree-background-color, var(--dnd5e-color-card));
-        z-index: -2;
-        clip-path: polygon(
-          var(--chamfer) 0,
-          calc(100% - var(--chamfer)) 0,
-          100% var(--chamfer),
-          100% calc(100% - var(--chamfer)),
-          calc(100% - var(--chamfer)) 100%,
-          var(--chamfer) 100%,
-          0 calc(100% - var(--chamfer)),
-          0 var(--chamfer)
-        );
-      }
-      .filigree {
-        position: absolute;
-        fill: var(--filigree-border-color, var(--dnd5e-color-gold));
-        z-index: -1;
-
-        &.top, &.bottom { height: 30px; }
-        &.top { top: 0; }
-        &.bottom { bottom: 0; scale: 1 -1; }
-
-        &.left, &.right { width: 25px; }
-        &.left { left: 0; }
-        &.right { right: 0; scale: -1 1; }
-
-        &.bottom.right { scale: -1 -1; }
-      }
-      .filigree.block {
-        inline-size: calc(100% - 50px);
-        inset-inline: 25px;
-      }
-      .filigree.inline {
-        block-size: calc(100% - 60px);
-        inset-block: 30px;
-      }
-    `;
-    this.#shadowRoot.appendChild(style);
+    if ( !this.constructor._stylesheet ) {
+      this.constructor._stylesheet = new CSSStyleSheet();
+      this.constructor._stylesheet.replaceSync(`
+        :host {
+          position: relative;
+          isolation: isolate;
+          min-height: 56px;
+          filter: var(--filigree-drop-shadow, drop-shadow(0 0 12px var(--dnd5e-shadow-15)));
+        }
+        .backdrop {
+          --chamfer: 12px;
+          position: absolute;
+          inset: 0;
+          background: var(--filigree-background-color, var(--dnd5e-color-card));
+          z-index: -2;
+          clip-path: polygon(
+            var(--chamfer) 0,
+            calc(100% - var(--chamfer)) 0,
+            100% var(--chamfer),
+            100% calc(100% - var(--chamfer)),
+            calc(100% - var(--chamfer)) 100%,
+            var(--chamfer) 100%,
+            0 calc(100% - var(--chamfer)),
+            0 var(--chamfer)
+          );
+        }
+        .filigree {
+          position: absolute;
+          fill: var(--filigree-border-color, var(--dnd5e-color-gold));
+          z-index: -1;
+  
+          &.top, &.bottom { height: 30px; }
+          &.top { top: 0; }
+          &.bottom { bottom: 0; scale: 1 -1; }
+  
+          &.left, &.right { width: 25px; }
+          &.left { left: 0; }
+          &.right { right: 0; scale: -1 1; }
+  
+          &.bottom.right { scale: -1 -1; }
+        }
+        .filigree.block {
+          inline-size: calc(100% - 50px);
+          inset-inline: 25px;
+        }
+        .filigree.inline {
+          block-size: calc(100% - 60px);
+          inset-block: 30px;
+        }
+      `);
+    }
+    this.#shadowRoot.adoptedStyleSheets = [this.constructor._stylesheet];
   }
 
   /* -------------------------------------------- */
