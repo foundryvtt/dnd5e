@@ -150,6 +150,51 @@
   }
 
   /* ---------------------------------- */
+  /*  Meters                            */
+  /* ---------------------------------- */
+
+  .meter-group {
+    display: flex;
+    flex-direction: column;
+    gap: .125rem;
+
+    + .meter-group { margin-top: .5rem; }
+  }
+
+  .meter {
+    border: 2px solid var(--dnd5e-color-gold);
+    background: var(--dnd5e-color-light-gray);
+    font-family: var(--dnd5e-font-roboto);
+    font-weight: bold;
+    box-shadow: inset 0 0 16px rgb(0 0 0 / 25%);
+    position: relative;
+    display: flex;
+    align-items: center;
+
+    &.progress, .progress {
+      --bar-percentage: 0%;
+
+      &::before {
+        content: "";
+        position: absolute;
+        height: 100%;
+        width: calc(var(--bar-percentage) - 3px);
+        box-shadow: 0 0 6px var(--dnd5e-shadow-45);
+        clip-path: polygon(0 0, calc(100% + 6px) 0, calc(100% + 6px) 100%, 0 100%);
+      }
+    }
+
+    .label {
+      color: var(--color-text-light-0);
+      position: relative;
+      padding-left: .5rem;
+
+      .value, .max { text-shadow: 0 0 4px var(--dnd5e-color-gold); }
+      .separator { color: var(--dnd5e-color-gold); }
+    }
+  }
+
+  /* ---------------------------------- */
   /*  Form Elements                     */
   /* ---------------------------------- */
 
@@ -173,6 +218,8 @@
   input, button {
     transition: all 250ms ease;
   }
+
+  button:disabled { cursor: default; }
 
   /* Reset select styles */
   select.unselect {
@@ -209,7 +256,7 @@
       margin: 0;
 
       &.filled { background: var(--dnd5e-color-gold); }
-      &:hover, &:focus { box-shadow: 0 0 6px var(--dnd5e-color-gold); }
+      &:not(:disabled):is(:hover, :focus) { box-shadow: 0 0 6px var(--dnd5e-color-gold); }
     }
   }
 }
@@ -219,5 +266,8 @@
 /* ---------------------------------- */
 
 .dnd5e2.sheet {
-
+  .locked a {
+    cursor: default;
+    &:hover { text-shadow: unset; }
+  }
 }

@@ -283,6 +283,7 @@ export default class ProficiencyCycleElement extends HTMLElement {
    */
   #onClick(event) {
     event.preventDefault();
+    if ( this.disabled ) return;
     this.step((event.type === "click") && (event.button !== 2));
   }
 }

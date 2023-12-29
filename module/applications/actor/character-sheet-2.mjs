@@ -95,13 +95,15 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
     const header = html[0].querySelector(".window-header");
 
     // Add edit <-> play slide toggle.
-    const toggle = document.createElement("slide-toggle");
-    toggle.classList.add("mode-slider");
-    toggle.dataset.tooltip = "DND5E.SheetModeEdit";
-    toggle.setAttribute("aria-label", game.i18n.localize("DND5E.SheetModeEdit"));
-    toggle.addEventListener("change", this._onChangeSheetMode.bind(this));
-    toggle.addEventListener("dblclick", event => event.stopPropagation());
-    header.insertAdjacentElement("afterbegin", toggle);
+    if ( this.actor.isOwner ) {
+      const toggle = document.createElement("slide-toggle");
+      toggle.classList.add("mode-slider");
+      toggle.dataset.tooltip = "DND5E.SheetModeEdit";
+      toggle.setAttribute("aria-label", game.i18n.localize("DND5E.SheetModeEdit"));
+      toggle.addEventListener("change", this._onChangeSheetMode.bind(this));
+      toggle.addEventListener("dblclick", event => event.stopPropagation());
+      header.insertAdjacentElement("afterbegin", toggle);
+    }
 
     // Adjust header buttons.
     header.querySelectorAll(".header-button").forEach(btn => {
@@ -117,7 +119,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
     nav.dataset.group = "primary";
     nav.append(...this.constructor.TABS.map(({ tab, label, icon, svg }) => {
       const item = document.createElement("a");
-      item.classList.add("item");
+      item.classList.add("item", "control");
       item.dataset.group = "primary";
       item.dataset.tab = tab;
       item.dataset.tooltip = label;
@@ -141,7 +143,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
   async getData(options) {
     const context = await super.getData(options);
     context.editable = this.isEditable && (this._mode === this.constructor.MODES.EDIT);
-    context.cssClass = context.editable ? "editable" : "locked";
+    context.cssClass = context.editable ? "editable" : this.isEditable ? "interactable" : "locked";
     const activeTab = this._tabs?.[0]?.active ?? "details";
     context.cssClass += ` tab-${activeTab}`;
     const sidebarCollapsed = game.user.getFlag("dnd5e", `sheetPrefs.character.tabs.${activeTab}.collapseSidebar`);
@@ -301,13 +303,16 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
   activateListeners(html) {
     super.activateListeners(html);
     html.find(".pips[data-prop]").on("click", this._onTogglePip.bind(this));
-    html.find(".meter > .hit-points").on("click", event => this._toggleEditHP(event, true));
-    html.find(".meter > .hit-points > input").on("blur", event => this._toggleEditHP(event, false));
     html.find(".death-tab").on("click", this._toggleDeathTray.bind(this));
     html.find("[data-item-id][data-action]").on("click", this._onItemAction.bind(this));
     html.find(".rollable:is(.saving-throw, .ability-check)").on("click", this._onRollAbility.bind(this));
     html.find("proficiency-cycle").on("change", this._onChangeInput.bind(this));
     html.find(".sidebar .collapser").on("click", this._toggleSidebar.bind(this));
+
+    if ( this.isEditable ) {
+      html.find(".meter > .hit-points").on("click", event => this._toggleEditHP(event, true));
+      html.find(".meter > .hit-points > input").on("blur", event => this._toggleEditHP(event, false));
+    }
 
     // Edit mode only.
     if ( this._mode === this.constructor.MODES.EDIT ) {
@@ -335,6 +340,14 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
   _getSubmitData(updateData={}) {
     // Skip over ActorSheet#_getSubmitData to allow for editing overridden values.
     return FormApplication.prototype._getSubmitData.call(this, updateData);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  _disableFields(form) {
+    super._disableFields(form);
+    form.querySelectorAll(".interface-only").forEach(input => input.disabled = false);
   }
 
   /* -------------------------------------------- */

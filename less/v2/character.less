@@ -205,7 +205,7 @@
               border-radius: 3px;
             }
 
-            &:hover, &:focus { box-shadow: 0 0 6px var(--dnd5e-color-gold); }
+            &:not(:disabled):is(:hover, :focus) { box-shadow: 0 0 6px var(--dnd5e-color-gold); }
             > i { margin: 0 }
           }
         }
@@ -530,112 +530,78 @@
               }
             }
           }
+        }
 
-          /* Hit Points & Hit Dice */
-          .meter-group {
+        /* Hit Points & Hit Dice */
+        .meter-group {
+          padding: 0 .5rem;
+
+          + .meter-group { margin-top: .5rem; }
+
+          > .label {
+            font-size: var(--font-size-11);
+            color: var(--dnd5e-color-gold);
+            text-shadow: 0 0 6px var(--dnd5e-shadow-45);
             display: flex;
-            flex-direction: column;
-            padding: 0 .5rem;
-            gap: .125rem;
+            align-items: center;
+            justify-content: space-between;
 
-            + .meter-group { margin-top: .5rem; }
+            > .config-button { color: var(--dnd5e-color-gold); }
+          }
+        }
 
-            > .label {
-              font-size: var(--font-size-11);
-              color: var(--dnd5e-color-gold);
-              text-shadow: 0 0 6px var(--dnd5e-shadow-45);
-              display: flex;
-              align-items: center;
-              justify-content: space-between;
+        .meter {
+          &.hit-points {
+            height: 32px;
+            font-size: var(--font-size-16);
 
-              > .config-button { color: var(--dnd5e-color-gold); }
+            .progress::before {
+              background: linear-gradient(to right, var(--dnd5e-color-hp-1) 0%, var(--dnd5e-color-hp-2) 100%);
+              border-right: 3px solid var(--dnd5e-color-hp-3);
+            }
+          }
+
+          &.hit-dice {
+            height: 25px;
+            font-size: var(--font-size-14);
+
+            &.progress::before {
+              background: linear-gradient(to right, var(--dnd5e-color-hd-1) 0%, var(--dnd5e-color-hd-2) 100%);
+              border-right: 3px solid var(--dnd5e-color-hd-3);
+            }
+          }
+
+          &.sectioned {
+            input {
+              width: 100%;
+              height: 100%;
+              text-align: center;
+              border: none;
+              font-weight: bold;
+              background: none;
+              color: var(--color-text-light-0);
+
+              &:hover, &:focus { box-shadow: 0 0 8px var(--dnd5e-color-gold); }
             }
 
-            .meter {
-              border: 2px solid var(--dnd5e-color-gold);
-              background: var(--dnd5e-color-light-gray);
-              font-family: var(--dnd5e-font-roboto);
-              font-weight: bold;
-              box-shadow: inset 0 0 16px rgb(0 0 0 / 25%);
+            > div { height: 100%; }
+
+            > .hit-points {
+              flex: 1;
               position: relative;
               display: flex;
               align-items: center;
+              cursor: pointer;
 
-              &.hit-points {
-                height: 32px;
-                font-size: var(--font-size-16);
+              > input { position: relative; }
+            }
 
-                .progress::before {
-                  background: linear-gradient(to right, var(--dnd5e-color-hp-1) 0%, var(--dnd5e-color-hp-2) 100%);
-                  border-right: 3px solid var(--dnd5e-color-hp-3);
-                }
-              }
+            > .tmp {
+              flex: none;
+              width: 50px;
+              border-left: 2px dashed var(--dnd5e-color-gold);
 
-              &.hit-dice {
-                height: 25px;
-                font-size: var(--font-size-14);
-
-                &.progress::before {
-                  background: linear-gradient(to right, var(--dnd5e-color-hd-1) 0%, var(--dnd5e-color-hd-2) 100%);
-                  border-right: 3px solid var(--dnd5e-color-hd-3);
-                }
-              }
-
-              &.progress, .progress {
-                --bar-percentage: 0%;
-
-                &::before {
-                  content: "";
-                  position: absolute;
-                  height: 100%;
-                  width: calc(var(--bar-percentage) - 3px);
-                  box-shadow: 0 0 6px var(--dnd5e-shadow-45);
-                  clip-path: polygon(0 0, calc(100% + 6px) 0, calc(100% + 6px) 100%, 0 100%);
-                }
-              }
-
-              &.sectioned {
-                input {
-                  width: 100%;
-                  height: 100%;
-                  text-align: center;
-                  border: none;
-                  font-weight: bold;
-                  background: none;
-                  color: var(--color-text-light-0);
-
-                  &:hover, &:focus { box-shadow: 0 0 8px var(--dnd5e-color-gold); }
-                }
-
-                > div { height: 100%; }
-
-                > .hit-points {
-                  flex: 1;
-                  position: relative;
-                  display: flex;
-                  align-items: center;
-                  cursor: pointer;
-
-                  > input { position: relative; }
-                }
-
-                > .tmp {
-                  flex: none;
-                  width: 50px;
-                  border-left: 2px dashed var(--dnd5e-color-gold);
-
-                  > input { color: var(--dnd5e-color-blue); }
-                }
-              }
-
-              .label {
-                color: var(--color-text-light-0);
-                position: relative;
-                padding-left: .5rem;
-
-                .value, .max { text-shadow: 0 0 4px var(--dnd5e-color-gold); }
-                .separator { color: var(--dnd5e-color-gold); }
-              }
+              > input { color: var(--dnd5e-color-blue); }
             }
           }
         }
@@ -679,9 +645,14 @@
             .death-save {
               width: 40px;
               height: 40px;
-              background: transparent url("ui/skull.svg") no-repeat center / contain;
+              padding: 0;
 
-              &:hover { filter: drop-shadow(0 0 4px var(--color-shadow-primary)); }
+              dnd5e-icon {
+                --icon-size: 40px;
+                --icon-fill: var(--dnd5e-color-gold);
+              }
+
+              &:not(:disabled):hover { filter: drop-shadow(0 0 4px var(--color-shadow-primary)); }
             }
 
             .pip {
@@ -1112,6 +1083,14 @@
     }
 
     .ability-scores { left: 0; }
+  }
+
+  /* ---------------------------------- */
+  /*  Locked                            */
+  /* ---------------------------------- */
+
+  form.locked {
+    .sheet-body .sidebar .card .meter.sectioned > .hit-points { cursor: default; }
   }
 }
 

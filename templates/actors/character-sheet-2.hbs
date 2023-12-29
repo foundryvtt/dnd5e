@@ -56,6 +56,7 @@
 
             <div>
                 {{!-- Resting & Special Traits --}}
+                {{#if actor.isOwner}}
                 <div class="sheet-header-buttons">
                     <button type="button" class="short-rest unbutton" data-tooltip="DND5E.ShortRest"
                             aria-label="{{ localize "DND5E.ShortRest" }}">
@@ -70,6 +71,7 @@
                         <i class="fas fa-star"></i>
                     </button>
                 </div>
+                {{/if}}
 
                 {{!-- XP --}}
                 {{#with system.details.xp}}
@@ -104,7 +106,7 @@
                 <div class="card">
 
                     {{!-- Collapser --}}
-                    <button type="button" class="collapser card-tab vertical unbutton"
+                    <button type="button" class="collapser card-tab vertical unbutton interface-only"
                         {{#if sidebarCollapsed}}
                             data-tooltip="JOURNAL.ViewExpand" aria-label="{{ localize "JOURNAL.ViewExpand" }}"
                         {{else}}
@@ -282,7 +284,9 @@
                             {{!-- Roll Death Save --}}
                             <button type="button" data-action="rollDeathSave" data-tooltip="DND5E.DeathSaveRoll"
                                     aria-label="{{ localize "DND5E.DeathSaveRoll" }}"
-                                    class="{{ rollableClass }} death-save unbutton"></button>
+                                    class="{{ rollableClass }} death-save unbutton">
+                                <dnd5e-icon src="systems/dnd5e/icons/svg/statuses/dead.svg"></dnd5e-icon>
+                            </button>
 
                             {{!-- Failures --}}
                             <div class="pips" data-prop="system.attributes.death.failure">
@@ -293,7 +297,7 @@
 
                         </div>
 
-                        <button type="button" class="death-tab card-tab horizontal unbutton"
+                        <button type="button" class="death-tab card-tab horizontal unbutton interface-only"
                                 {{#if death.open}}
                                     data-tooltip="DND5E.DeathSaveShow" aria-label="{{ localize "DND5E.DeathSaveShow" }}"
                                 {{else}}
