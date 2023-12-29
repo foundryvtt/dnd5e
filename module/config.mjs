@@ -2238,6 +2238,18 @@ DND5E.allowedActorFlags = ["isPolymorphed", "originalActor"].concat(Object.keys(
 /* -------------------------------------------- */
 
 /**
+ * Different types of actor structures that groups can represent.
+ * @enum {object}
+ */
+DND5E.groupTypes = {
+  party: "DND5E.Group.TypeParty",
+  encounter: "DND5E.Group.TypeEncounter"
+};
+preLocalize("groupTypes");
+
+/* -------------------------------------------- */
+
+/**
  * Advancement types that can be added to items.
  * @enum {*}
  */

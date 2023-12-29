@@ -9,6 +9,12 @@
                 <li>
                     <span>{{summary}}</span>
                 </li>
+                <li class="type">
+                    <select name="system.type.value">
+                        {{selectOptions config.groupTypes selected=system.type.value
+                                        blank=(localize "DND5E.Group.TypeGeneric")}}
+                    </select>
+                </li>
             </ul>
 
             <ul class="attributes flexrow">
