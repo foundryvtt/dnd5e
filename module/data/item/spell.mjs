@@ -1,5 +1,5 @@
 import SystemDataModel from "../abstract.mjs";
-import { FormulaField, MappingField } from "../fields.mjs";
+import { FormulaField } from "../fields.mjs";
 import ActionTemplate from "./templates/action.mjs";
 import ActivatedEffectTemplate from "./templates/activated-effect.mjs";
 import ItemDescriptionTemplate from "./templates/item-description.mjs";
@@ -12,12 +12,7 @@ import ItemDescriptionTemplate from "./templates/item-description.mjs";
  *
  * @property {number} level                      Base level of the spell.
  * @property {string} school                     Magical school to which this spell belongs.
- * @property {object} properties                 General components and tags for this spell.
- * @property {boolean} properties.vocal          Does this spell require vocal components?
- * @property {boolean} properties.somatic        Does this spell require somatic components?
- * @property {boolean} properties.material       Does this spell require material components?
- * @property {boolean} properties.ritual         Can this spell be cast as a ritual?
- * @property {boolean} properties.concentration  Does this spell require concentration?
+ * @property {Set<string>} properties            General components and tags for this spell.
  * @property {object} materials                  Details on material components required for this spell.
  * @property {string} materials.value            Description of the material components required for casting.
  * @property {boolean} materials.consumed        Are these material components consumed during casting?
@@ -40,10 +35,7 @@ export default class SpellData extends SystemDataModel.mixin(
         required: true, integer: true, initial: 1, min: 0, label: "DND5E.SpellLevel"
       }),
       school: new foundry.data.fields.StringField({required: true, label: "DND5E.SpellSchool"}),
-      properties: new MappingField(new foundry.data.fields.BooleanField(), {
-        required: true, label: "DND5E.SpellComponents",
-        initialKeys: [...Object.keys(CONFIG.DND5E.spellComponents), ...Object.keys(CONFIG.DND5E.spellTags)]
-      }),
+      properties: new foundry.data.fields.SetField(new foundry.data.fields.StringField()),
       materials: new foundry.data.fields.SchemaField({
         value: new foundry.data.fields.StringField({required: true, label: "DND5E.SpellMaterialsDescription"}),
         consumed: new foundry.data.fields.BooleanField({required: true, label: "DND5E.SpellMaterialsConsumed"}),
