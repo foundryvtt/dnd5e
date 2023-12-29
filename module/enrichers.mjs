@@ -374,7 +374,7 @@ async function enrichItem(config, label) {
 
   ///If config is a relative ID
   const relativeIdMatch = givenItem.match(/^\.\w{16}$/); ///Matches for relative IDs
-  const copiedIdMatch = givenItem.match(/\w{16}$/)
+  const copiedIdMatch = givenItem.match(/^\w{16}$/)
   if (relativeIdMatch || copiedIdMatch) {
     const relativeId = relativeIdMatch ? givenItem.substr(1) : givenItem;
     if (foundActor) {
