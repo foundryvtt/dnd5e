@@ -379,6 +379,8 @@ Hooks.on("getChatLogEntryContext", documents.chat.addChatMessageContextOptions);
 
 Hooks.on("renderChatLog", (app, html, data) => documents.Item5e.chatListeners(html));
 Hooks.on("renderChatPopout", (app, html, data) => documents.Item5e.chatListeners(html));
+
+Hooks.on("renderActorDirectory", (app, html, data) => documents.Actor5e.onRenderActorDirectory(html));
 Hooks.on("getActorDirectoryEntryContext", documents.Actor5e.addDirectoryContextOptions);
 
 /* -------------------------------------------- */

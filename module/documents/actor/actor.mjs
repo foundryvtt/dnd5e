@@ -2744,7 +2744,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   static addDirectoryContextOptions(html, entryOptions) {
     entryOptions.push({
       name: "DND5E.PolymorphRestoreTransformation",
-      icon: '<i class="fas fa-backward"></i>',
+      icon: '<i class="fa-solid fa-backward"></i>',
       callback: li => {
         const actor = game.actors.get(li.data("documentId"));
         return actor.revertOriginalForm();
@@ -2754,8 +2754,48 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
         if ( !allowed && !game.user.isGM ) return false;
         const actor = game.actors.get(li.data("documentId"));
         return actor && actor.isPolymorphed;
-      }
+      },
+      group: "system"
+    }, {
+      name: "DND5E.Group.Primary.Set",
+      icon: '<i class="fa-solid fa-star"></i>',
+      callback: li => {
+        game.settings.set("dnd5e", "primaryParty", { actor: game.actors.get(li[0].dataset.documentId) });
+      },
+      condition: li => {
+        const actor = game.actors.get(li[0].dataset.documentId);
+        const primary = game.settings.get("dnd5e", "primaryParty")?.actor;
+        return game.user.isGM && (actor.type === "group")
+          && (actor.system.type.value === "party") && (actor !== primary);
+      },
+      group: "system"
+    }, {
+      name: "DND5E.Group.Primary.Remove",
+      icon: '<i class="fa-regular fa-star"></i>',
+      callback: li => {
+        game.settings.set("dnd5e", "primaryParty", { actor: null });
+      },
+      condition: li => {
+        const actor = game.actors.get(li[0].dataset.documentId);
+        const primary = game.settings.get("dnd5e", "primaryParty")?.actor;
+        return game.user.isGM && (actor === primary);
+      },
+      group: "system"
     });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Add class to actor entry representing the primary group.
+   * @param {jQuery} jQuery
+   */
+  static onRenderActorDirectory(jQuery) {
+    const primaryParty = game.settings.get("dnd5e", "primaryParty")?.actor;
+    if ( primaryParty ) {
+      const element = jQuery[0]?.querySelector(`[data-entry-id="${primaryParty.id}"]`);
+      element?.classList.add("primary-party");
+    }
   }
 
   /* -------------------------------------------- */

@@ -5,6 +5,7 @@ import UserSystemFlags from "../data/user/user-system-flags.mjs";
  * @extends {User}
  */
 export default class User5e extends User {
+
   /** @inheritDoc */
   prepareData() {
     super.prepareData();
