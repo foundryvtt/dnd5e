@@ -373,10 +373,12 @@ async function enrichItem(config, label) {
     }
 
   ///If config is a relative ID
-  const relativeIdMatch = givenItem.match(/^\.\w{16}$/); ///Matches for relative IDs
-  const copiedIdMatch = givenItem.match(/^\w{16}$/)
-  if (relativeIdMatch || copiedIdMatch) {
+  const relativeIdMatch = givenItem.match(/^\.\w{16}$/);
+  const copiedIdMatch = givenItem.match(/^\w{16}$/);
+  const relativeNameMatch = givenItem.startsWith(".");
+  if (relativeIdMatch || copiedIdMatch || relativeNameMatch) {
     const relativeId = relativeIdMatch ? givenItem.substr(1) : givenItem;
+    const foundActor = game.actors.find((actor) => actor.items.get(relativeId));
     if (foundActor) {
       const foundItem = foundActor.items.get(relativeId);
       if ( !label ) {
@@ -384,23 +386,13 @@ async function enrichItem(config, label) {
         console.log(`Found actor ${foundActor.name} that owns the item ${foundItem.name}.`);
       }
       return createRollLink(label, { type: "item", rollRelativeItemId: relativeId });
-      } else if(relativeIdMatch) {
-      console.warn(`No Actor with Item ${givenItem} found while enriching ${config.input}.`);
-      return config.input;
-    }
-  } else if (givenItem.startsWith(".")) {
+    } else if (relativeNameMatch) {
     const relativeName = givenItem.substr(1)
-    const foundActor = game.actors.find((actor) => actor.items.getName(relativeName))
-    if (foundActor) {
-      const foundItem = foundActor.items.getName(relativeName);
       if (!label) {
-        label = foundItem.name;
-        console.log(`Found actor ${foundActor.name} that owns the item ${foundItem.name}.`);
+        label = relativeName;
+      return createRollLink(label, { type: "item", rollRelativeItemName: relativeName });
       }
-      return createRollLink(label, { type: "item", rollRelativeItemId: foundItem.id });
     }
-    console.warn(`Item ${givenItem} not found while enriching ${config.input}.`);
-    return config.input;
   }
 
   //Finally, if config is an item name
@@ -502,7 +494,7 @@ function rollAction(event) {
         return game.actors.get(target.dataset.rollItemActor).items.get(target.dataset.rollItemId).use();
 
       ///Relative Id Method
-      } else if (target.dataset.rollRelativeItemId) {
+      } else if (target.dataset.rollRelativeItemId || target.dataset.rollRelativeItemName) {
         let locatedToken, locatedScene, locatedActor;
         const targetLocation = target.parentElement.parentElement;
           if (targetLocation.classList.contains("card-content")) {
@@ -536,15 +528,15 @@ function rollAction(event) {
 
         if (locatedActor) {
           const gameActor = game.actors.get(locatedActor);
-          const actorItem = gameActor.items.get(target.dataset.rollRelativeItemId);
+          const actorItem = gameActor.items.get(target.dataset.rollRelativeItemId) || gameActor.items.getName(target.dataset.rollRelativeItemName);
           if (actorItem) return actorItem.use();
-          else return ui.notifications.warn(`Item ${target.dataset.rollRelativeItemId} not found on Actor ${gameActor.name}!`)
+          else return ui.notifications.warn(`Item ${target.dataset.rollRelativeItemId || target.dataset.rollRelativeItemName} not found on Actor ${gameActor.name}!`)
         } else {
           const parentScene = game.scenes.get(locatedScene);
           const sceneToken = parentScene.collections.tokens.get(locatedToken);
-          const tokenItem = sceneToken.delta.collections.items.get(target.dataset.rollRelativeItemId);
+          const tokenItem = sceneToken.delta.collections.items.get(target.dataset.rollRelativeItemId) || sceneToken.delta.collections.items.getName(target.dataset.rollRelativeItemName);
           if (tokenItem) return tokenItem.use();
-          else return ui.notifications.warn(`Item ${target.dataset.rollRelativeItemId} not found on Actor ${sceneToken.name} in Scene ${parentScene.name}!`);
+          else return ui.notifications.warn(`Item ${target.dataset.rollRelativeItemId || target.dataset.rollRelativeItemName} not found on Token ${sceneToken.name} in Scene ${parentScene.name}!`)
         }
 
       } else if (target.dataset.rollItemName) { //Name Method
