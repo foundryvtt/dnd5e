@@ -101,10 +101,15 @@ export default class GroupActorSheet extends ActorSheetMixin(ActorSheet) {
    * @returns {string}                                        The formatted summary string
    */
   #getSummary(stats) {
-    const formatter = new Intl.ListFormat(game.i18n.lang, {style: "long", type: "conjunction"});
+    const formatter = game.i18n.getListFormatter({ style: "long", type: "conjunction" });
+    const rule = new Intl.PluralRules(game.i18n.lang);
     const members = [];
-    if ( stats.nMembers ) members.push(`${stats.nMembers} ${game.i18n.localize("DND5E.GroupMembers")}`);
-    if ( stats.nVehicles ) members.push(`${stats.nVehicles} ${game.i18n.localize("DND5E.GroupVehicles")}`);
+    if ( stats.nMembers ) {
+      members.push(`${stats.nMembers} ${game.i18n.localize(`DND5E.Group.Member.${rule.select(stats.nMembers)}`)}`);
+    }
+    if ( stats.nVehicles ) {
+      members.push(`${stats.nVehicles} ${game.i18n.localize(`DND5E.Group.Vehicle.${rule.select(stats.nVehicles)}`)}`);
+    }
     if ( !members.length ) return game.i18n.localize("DND5E.GroupSummaryEmpty");
     return game.i18n.format("DND5E.GroupSummary", {members: formatter.format(members)});
   }
