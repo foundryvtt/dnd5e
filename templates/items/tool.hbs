@@ -16,8 +16,8 @@
 
             <ul class="summary flexrow">
                 <li>
-                    {{#if system.toolType}}
-                      {{lookup config.toolTypes system.toolType}}
+                    {{#if system.type.value}}
+                      {{lookup config.toolTypes system.type.value}}
                     {{else}}
                       {{localize "ITEM.TypeTool"}}
                     {{/if}}
@@ -63,15 +63,15 @@
             {{!-- Tool Type --}}
             <div class="form-group">
                 <label>{{ localize "DND5E.ItemToolType" }}</label>
-                <select name="system.toolType">
-                    {{selectOptions config.toolTypes selected=system.toolType blank=""}}
+                <select name="system.type.value">
+                    {{selectOptions config.toolTypes selected=system.type.value blank=""}}
                 </select>
             </div>
 
             <div class="form-group">
                 <label>{{ localize "DND5E.ItemToolBase" }}</label>
-                <select name="system.baseItem">
-                    {{selectOptions baseItems selected=system.baseItem blank=""}}
+                <select name="system.type.baseItem">
+                    {{selectOptions baseItems selected=system.type.baseItem blank=""}}
                 </select>
             </div>
 

@@ -478,24 +478,59 @@ DND5E.tokenHPColors = {
 /**
  * Default types of creatures.
  * *Note: Not pre-localized to allow for easy fetching of pluralized forms.*
- * @enum {string}
+ * @enum {{ label: string, [detectAlignment]: boolean }}
  */
 DND5E.creatureTypes = {
-  aberration: "DND5E.CreatureAberration",
-  beast: "DND5E.CreatureBeast",
-  celestial: "DND5E.CreatureCelestial",
-  construct: "DND5E.CreatureConstruct",
-  dragon: "DND5E.CreatureDragon",
-  elemental: "DND5E.CreatureElemental",
-  fey: "DND5E.CreatureFey",
-  fiend: "DND5E.CreatureFiend",
-  giant: "DND5E.CreatureGiant",
-  humanoid: "DND5E.CreatureHumanoid",
-  monstrosity: "DND5E.CreatureMonstrosity",
-  ooze: "DND5E.CreatureOoze",
-  plant: "DND5E.CreaturePlant",
-  undead: "DND5E.CreatureUndead"
+  aberration: {
+    label: "DND5E.CreatureAberration",
+    detectAlignment: true
+  },
+  beast: {
+    label: "DND5E.CreatureBeast"
+  },
+  celestial: {
+    label: "DND5E.CreatureCelestial",
+    detectAlignment: true
+  },
+  construct: {
+    label: "DND5E.CreatureConstruct"
+  },
+  dragon: {
+    label: "DND5E.CreatureDragon"
+  },
+  elemental: {
+    label: "DND5E.CreatureElemental",
+    detectAlignment: true
+  },
+  fey: {
+    label: "DND5E.CreatureFey",
+    detectAlignment: true
+  },
+  fiend: {
+    label: "DND5E.CreatureFiend",
+    detectAlignment: true
+  },
+  giant: {
+    label: "DND5E.CreatureGiant"
+  },
+  humanoid: {
+    label: "DND5E.CreatureHumanoid"
+  },
+  monstrosity: {
+    label: "DND5E.CreatureMonstrosity"
+  },
+  ooze: {
+    label: "DND5E.CreatureOoze"
+  },
+  plant: {
+    label: "DND5E.CreaturePlant"
+  },
+  undead: {
+    label: "DND5E.CreatureUndead",
+    detectAlignment: true
+  }
 };
+patchConfig("creatureTypes", "label", { since: "DnD5e 2.5", until: "DnD5e 2.7" });
 
 /* -------------------------------------------- */
 
@@ -1816,6 +1851,7 @@ DND5E.CR_EXP_LEVELS = [
  * @property {string} [labelKeyPath]       If config is an enum of objects, where can the label be found?
  * @property {object} [subtypes]           Configuration for traits that take some sort of base item.
  * @property {string} [subtypes.keyPath]   Path to subtype value on base items, should match a category key.
+ *                                         Deprecated in favor of the standardized `system.type.value`.
  * @property {string[]} [subtypes.ids]     Key for base item ID objects within `CONFIG.DND5E`.
  * @property {object} [children]           Mapping of category key to an object defining its children.
  * @property {boolean} [sortCategories]    Whether top-level categories should be sorted.

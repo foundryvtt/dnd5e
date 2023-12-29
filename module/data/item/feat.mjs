@@ -5,7 +5,6 @@ import ItemDescriptionTemplate from "./templates/item-description.mjs";
 import ItemTypeTemplate from "./templates/item-type.mjs";
 import ItemTypeField from "./fields/item-type-field.mjs";
 
-
 /**
  * Data definition for Feature items.
  * @mixes ItemDescriptionTemplate
@@ -13,10 +12,13 @@ import ItemTypeField from "./fields/item-type-field.mjs";
  * @mixes ActivatedEffectTemplate
  * @mixes ActionTemplate
  *
- * @property {string} requirements       Actor details required to use this feature.
- * @property {object} recharge           Details on how a feature can roll for recharges.
- * @property {number} recharge.value     Minimum number needed to roll on a d6 to recharge this feature.
- * @property {boolean} recharge.charged  Does this feature have a charge remaining?
+ * @property {Set<string>} properties                    General properties of a feature item.
+ * @property {boolean} properties.mgc               Is this feature magical?
+ * @property {boolean} properties.concentration     Does this feature require concentration?
+ * @property {string} requirements                  Actor details required to use this feature.
+ * @property {object} recharge                      Details on how a feature can roll for recharges.
+ * @property {number} recharge.value                Minimum number needed to roll on a d6 to recharge this feature.
+ * @property {boolean} recharge.charged             Does this feature have a charge remaining?
  */
 export default class FeatData extends SystemDataModel.mixin(
   ItemDescriptionTemplate, ItemTypeTemplate, ActivatedEffectTemplate, ActionTemplate
