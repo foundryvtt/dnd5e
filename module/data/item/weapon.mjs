@@ -1,5 +1,5 @@
+import { filteredKeys } from "../../utils.mjs";
 import SystemDataModel from "../abstract.mjs";
-import { MappingField } from "../fields.mjs";
 import ActionTemplate from "./templates/action.mjs";
 import ActivatedEffectTemplate from "./templates/activated-effect.mjs";
 import EquippableItemTemplate from "./templates/equippable-item.mjs";
@@ -8,6 +8,8 @@ import PhysicalItemTemplate from "./templates/physical-item.mjs";
 import ItemTypeTemplate from "./templates/item-type.mjs";
 import MountableTemplate from "./templates/mountable.mjs";
 import ItemTypeField from "./fields/item-type-field.mjs";
+
+const { NumberField, SetField, StringField } = foundry.data.fields;
 
 /**
  * Data definition for Weapon items.
@@ -19,8 +21,8 @@ import ItemTypeField from "./fields/item-type-field.mjs";
  * @mixes ActionTemplate
  * @mixes MountableTemplate
  *
- * @property {object} properties   Mapping of various weapon property booleans.
- * @property {number} proficient   Does the weapon's owner have proficiency?
+ * @property {Set<string>} properties  Weapon's properties.
+ * @property {number} proficient       Does the weapon's owner have proficiency?
  */
 export default class WeaponData extends SystemDataModel.mixin(
   ItemDescriptionTemplate, ItemTypeTemplate, PhysicalItemTemplate, EquippableItemTemplate,
@@ -30,17 +32,15 @@ export default class WeaponData extends SystemDataModel.mixin(
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
       type: new ItemTypeField({value: "simpleM", subtype: false}, {label: "DND5E.ItemWeaponType"}),
-      properties: new MappingField(new foundry.data.fields.BooleanField(), {
-        required: true, initialKeys: CONFIG.DND5E.weaponProperties, label: "DND5E.ItemWeaponProperties"
-      }),
-      proficient: new foundry.data.fields.NumberField({
+      properties: new SetField(new StringField(), {label: "DND5E.ItemWeaponProperties"}),
+      proficient: new NumberField({
         required: true, min: 0, max: 1, integer: true, initial: null, label: "DND5E.ProficiencyLevel"
       })
     });
   }
 
   /* -------------------------------------------- */
-  /*  Migrations                                  */
+  /*  Data Migrations                             */
   /* -------------------------------------------- */
 
   /** @inheritdoc */
@@ -53,14 +53,12 @@ export default class WeaponData extends SystemDataModel.mixin(
   /* -------------------------------------------- */
 
   /**
-   * Migrate the weapons's properties object to remove any old, non-boolean values.
+   * Migrate the properties object into a set.
    * @param {object} source  The candidate source data from which the model will be constructed.
    */
   static #migratePropertiesData(source) {
-    if ( !source.properties ) return;
-    for ( const [key, value] of Object.entries(source.properties) ) {
-      if ( typeof value !== "boolean" ) delete source.properties[key];
-    }
+    if ( foundry.utils.getType(source.properties) !== "Object" ) return;
+    source.properties = filteredKeys(source.properties);
   }
 
   /* -------------------------------------------- */
@@ -92,7 +90,7 @@ export default class WeaponData extends SystemDataModel.mixin(
     if ( ["simpleR", "martialR"].includes(this.type.value) ) return "dex";
 
     const abilities = this.parent?.actor?.system.abilities;
-    if ( this.properties.fin && abilities ) {
+    if ( this.properties.has("fin") && abilities ) {
       return (abilities.dex?.mod ?? 0) >= (abilities.str?.mod ?? 0) ? "dex" : "str";
     }
 
