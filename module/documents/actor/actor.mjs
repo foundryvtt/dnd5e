@@ -932,9 +932,9 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * Description of a source of damage.
    *
    * @typedef {object} DamageDescription
-   * @property {number} value         Amount of damage.
-   * @property {string} type          Type of damage.
-   * @property {string[]} properties  Physical properties that affect damage application.
+   * @property {number} value            Amount of damage.
+   * @property {string} type             Type of damage.
+   * @property {Set<string>} properties  Physical properties that affect damage application.
    */
 
   /**
@@ -995,11 +995,18 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
         || options.ignore?.[category]?.has?.(type);
     };
 
+    const hasEffect = (category, type, properties) => {
+      const config = traits?.[category];
+      if ( !config?.value.has(type) ) return false;
+      if ( !(type in CONFIG.DND5E.physicalDamageTypes) || !properties?.size ) return true;
+      return !config.bypasses?.intersection(properties)?.size;
+    };
+
     const rollData = this.getRollData({deterministic: true});
 
     let amount = damages.reduce((total, d) => {
       // Skip damage types with immunity
-      if ( !ignore("immunity", d.type) && traits?.di?.value.has(d.type) ) return total;
+      if ( !ignore("immunity", d.type) && hasEffect("di", d.type, d.properties) ) return total;
 
       let value = d.value;
 
@@ -1012,13 +1019,11 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
       let damageMultiplier = multiplier;
 
-      // TODO: Take physical damage bypasses into account when that data is included with rolls
-
       // Apply type-specific damage resistance
-      if ( !ignore("resistance", d.type) && traits?.dr.value.has(d.type) ) damageMultiplier /= 2;
+      if ( !ignore("resistance", d.type) && hasEffect("dr", d.type, d.properties) ) damageMultiplier /= 2;
 
       // Apply type-specific damage vulnerability
-      if ( !ignore("vulnerability", d.type) && traits?.dv.value.has(d.type) ) damageMultiplier *= 2;
+      if ( !ignore("vulnerability", d.type) && hasEffect("dv", d.type, d.properties) ) damageMultiplier *= 2;
 
       return total + (value * damageMultiplier);
     }, 0);
