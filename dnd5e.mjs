@@ -63,7 +63,6 @@ Hooks.once("init", function() {
   CONFIG.Dice.D20Roll = dice.D20Roll;
   CONFIG.MeasuredTemplate.defaults.angle = 53.13; // 5e cone RAW should be 53.13 degrees
   CONFIG.Note.objectClass = canvas.Note5e;
-  CONFIG.ui.actors = dnd5e.applications.actor.ActorDirectory5e;
   CONFIG.ui.combat = applications.combat.CombatTracker5e;
   CONFIG.ui.items = dnd5e.applications.item.ItemDirectory5e;
 
@@ -380,6 +379,8 @@ Hooks.on("getChatLogEntryContext", documents.chat.addChatMessageContextOptions);
 
 Hooks.on("renderChatLog", (app, html, data) => documents.Item5e.chatListeners(html));
 Hooks.on("renderChatPopout", (app, html, data) => documents.Item5e.chatListeners(html));
+
+Hooks.on("renderActorDirectory", (app, html, data) => documents.Actor5e.onRenderActorDirectory(html));
 Hooks.on("getActorDirectoryEntryContext", documents.Actor5e.addDirectoryContextOptions);
 
 /* -------------------------------------------- */

@@ -6,18 +6,6 @@ import UserSystemFlags from "../data/user/user-system-flags.mjs";
  */
 export default class User5e extends User {
 
-  /**
-   * Is this user the first logged-in GM user? Helpful for ensuring some socket events that require GM permissions
-   * are only performed once if there are multiple GMs logged in.
-   * @type {boolean}
-   */
-  get isFirstGM() {
-    const currentGMs = game.users.filter(u => u.isGM && u.active);
-    return this === currentGMs[0];
-  }
-
-  /* -------------------------------------------- */
-
   /** @inheritDoc */
   prepareData() {
     super.prepareData();
