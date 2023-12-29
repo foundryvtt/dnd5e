@@ -31,12 +31,6 @@
 
 <form class="{{ cssClass }} flexcol" autocomplete="off">
 
-    {{!-- TODO: Dark mode only --}}
-    <div class="underlays">
-        <div class="banner-image"></div>
-        <div class="bottom-shadow"></div>
-    </div>
-
     {{!-- Header --}}
     <header class="sheet-header">
 
@@ -100,11 +94,7 @@
     {{!-- Body --}}
     <section class="sheet-body">
 
-        {{!-- Underlays --}}
-        <div class="underlays"></div>
-
         {{!-- Main Content --}}
-        <div class="scrollable">
         <div class="main-content">
 
             {{!-- Sidebar --}}
@@ -112,6 +102,16 @@
 
                 {{!-- Character Card --}}
                 <div class="card">
+
+                    {{!-- Collapser --}}
+                    <button type="button" class="collapser card-tab vertical unbutton"
+                        {{#if sidebarCollapsed}}
+                            data-tooltip="JOURNAL.ViewExpand" aria-label="{{ localize "JOURNAL.ViewExpand" }}"
+                        {{else}}
+                            data-tooltip="JOURNAL.ViewCollapse" aria-label="{{ localize "JOURNAL.ViewCollapse" }}"
+                        {{/if}}>
+                        <i class="fas fa-caret-{{#if sidebarCollapsed}}right{{else}}left{{/if}}"></i>
+                    </button>
 
                     {{!-- Portrait --}}
                     <div class="portrait {{#if portrait.token}}token{{/if}}">
@@ -293,7 +293,7 @@
 
                         </div>
 
-                        <button type="button" class="death-tab unbutton"
+                        <button type="button" class="death-tab card-tab horizontal unbutton"
                                 {{#if death.open}}
                                     data-tooltip="DND5E.DeathSaveShow" aria-label="{{ localize "DND5E.DeathSaveShow" }}"
                                 {{else}}
@@ -323,21 +323,22 @@
             </section>
 
         </div>
-        </div>
 
     </section>
 
     {{!-- Ability Scores --}}
-    <div class="ability-scores">
-        <div class="top">
-            {{#each abilityRows.top}}
-                {{> ability-score flipped=true }}
-            {{/each}}
-        </div>
-        <div class="bottom">
-            {{#each abilityRows.bottom}}
-                {{> ability-score }}
-            {{/each}}
+    <div class="ability-scores optional-ability-{{ abilityRows.optional }}">
+        <div class="rows">
+            <div class="top">
+                {{#each abilityRows.top}}
+                    {{> ability-score flipped=true }}
+                {{/each}}
+            </div>
+            <div class="bottom">
+                {{#each abilityRows.bottom}}
+                    {{> ability-score }}
+                {{/each}}
+            </div>
         </div>
     </div>
 </form>

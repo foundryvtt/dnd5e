@@ -40,13 +40,6 @@
   /*  Common App Components             */
   /* ---------------------------------- */
 
-  .underlays {
-    position: absolute;
-    inset: 0;
-    overflow: hidden;
-    pointer-events: none;
-  }
-
   .roboto-upper {
     font-family: var(--dnd5e-font-roboto);
     font-weight: bold;
@@ -70,6 +63,11 @@
     > i { font-size: var(--font-size-14); }
     > span { font-size: var(--font-size-13); }
 
+    > dnd5e-icon {
+      font-size: var(--font-size-14);
+      --icon-fill: var(--color-text-dark-primary);
+    }
+
     > a {
       margin-left: auto;
       font-size: var(--font-size-12);
@@ -79,7 +77,7 @@
 
   proficiency-cycle {
     width: 15px;
-    height: 14px;
+    height: 15px;
   }
 
   .pill-lg {
@@ -149,13 +147,6 @@
     border: 2px solid var(--dnd5e-color-gold);
     box-shadow: 0 0 4px var(--dnd5e-shadow-45);
     border-radius: 0;
-  }
-
-  i.svg {
-    width: 14px;
-    height: 14px;
-    display: inline-block;
-    background: transparent no-repeat center / contain;
   }
 
   /* ---------------------------------- */

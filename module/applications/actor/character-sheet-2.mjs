@@ -1,5 +1,6 @@
 import ActorSheet5eCharacter from "./character-sheet.mjs";
 import * as Trait from "../../documents/actor/trait.mjs";
+import Tabs5e from "../tabs.mjs";
 
 /**
  * An Actor sheet for player character type actors.
@@ -45,6 +46,27 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
   };
 
   /**
+   * @typedef {object} SheetTabDescriptor5e
+   * @property {string} tab     The tab key.
+   * @property {string} label   The tab label's localization key.
+   * @property {string} [icon]  A font-awesome icon.
+   * @property {string} [svg]   An SVG icon.
+   */
+
+  /**
+   * Sheet tabs.
+   * @type {SheetTabDescriptor5e[]}
+   */
+  static TABS = [
+    { tab: "details", label: "DND5E.Details", icon: "fas fa-cog" },
+    { tab: "inventory", label: "DND5E.Inventory", svg: "backpack" },
+    { tab: "features", label: "DND5E.Features", icon: "fas fa-list" },
+    { tab: "spells", label: "TYPES.Item.spellPl", icon: "fas fa-book" },
+    { tab: "effects", label: "DND5E.Effects", icon: "fas fa-bolt" },
+    { tab: "biography", label: "DND5E.Biography", icon: "fas fa-feather" }
+  ];
+
+  /**
    * The mode the sheet is currently in.
    * @type {ActorSheet5eCharacter2.MODES}
    * @protected
@@ -88,6 +110,28 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
       btn.setAttribute("aria-label", label.textContent);
       label.remove();
     });
+
+    // Render tabs.
+    const nav = document.createElement("nav");
+    nav.classList.add("tabs");
+    nav.dataset.group = "primary";
+    nav.append(...this.constructor.TABS.map(({ tab, label, icon, svg }) => {
+      const item = document.createElement("a");
+      item.classList.add("item");
+      item.dataset.group = "primary";
+      item.dataset.tab = tab;
+      item.dataset.tooltip = label;
+      item.setAttribute("aria-label", label);
+      if ( icon ) item.innerHTML = `<i class="${icon}"></i>`;
+      else if ( svg ) item.innerHTML = `<dnd5e-icon src="systems/dnd5e/icons/svg/${svg}.svg"></dnd5e-icon>`;
+      return item;
+    }));
+    html[0].insertAdjacentElement("afterbegin", nav);
+    this._tabs = this.options.tabs.map(t => {
+      t.callback = this._onChangeTab.bind(this);
+      return new Tabs5e(t);
+    });
+
     return html;
   }
 
@@ -98,6 +142,13 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
     const context = await super.getData(options);
     context.editable = this.isEditable && (this._mode === this.constructor.MODES.EDIT);
     context.cssClass = context.editable ? "editable" : "locked";
+    const activeTab = this._tabs?.[0]?.active ?? "details";
+    context.cssClass += ` tab-${activeTab}`;
+    const sidebarCollapsed = game.user.getFlag("dnd5e", `sheetPrefs.character.tabs.${activeTab}.collapseSidebar`);
+    if ( sidebarCollapsed ) {
+      context.cssClass += " collapsed";
+      context.sidebarCollapsed = true;
+    }
     const { attributes, details } = this.actor.system;
 
     // Class
@@ -256,6 +307,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
     html.find("[data-item-id][data-action]").on("click", this._onItemAction.bind(this));
     html.find(".rollable:is(.saving-throw, .ability-check)").on("click", this._onRollAbility.bind(this));
     html.find("proficiency-cycle").on("change", this._onChangeInput.bind(this));
+    html.find(".sidebar .collapser").on("click", this._toggleSidebar.bind(this));
 
     // Edit mode only.
     if ( this._mode === this.constructor.MODES.EDIT ) {
@@ -283,6 +335,15 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
   _getSubmitData(updateData={}) {
     // Skip over ActorSheet#_getSubmitData to allow for editing overridden values.
     return FormApplication.prototype._getSubmitData.call(this, updateData);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  _onChangeTab(event, tabs, active) {
+    super._onChangeTab(event, tabs, active);
+    this.form.className = this.form.className.replace(/tab-\w+/g, "");
+    this.form.classList.add(`tab-${active}`);
   }
 
   /* -------------------------------------------- */
@@ -379,6 +440,26 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
     this._deathTrayOpen = tray.classList.contains("open");
     target.dataset.tooltip = `DND5E.DeathSave${this._deathTrayOpen ? "Hide" : "Show"}`
     target.setAttribute("aria-label", game.i18n.localize(target.dataset.tooltip));
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Toggle the sidebar collapsed state.
+   * @param {PointerEvent} event  The triggering event.
+   * @protected
+   */
+  _toggleSidebar(event) {
+    const target = event.currentTarget;
+    const icon = target.querySelector("i");
+    this.form.classList.toggle("collapsed");
+    const sidebarCollapsed = this.form.classList.contains("collapsed");
+    target.dataset.tooltip = `JOURNAL.View${sidebarCollapsed ? "Expand" : "Collapse" }`;
+    target.setAttribute("aria-label", game.i18n.localize(target.dataset.tooltip));
+    icon.classList.remove("fa-caret-left", "fa-caret-right");
+    icon.classList.add(`fa-caret-${sidebarCollapsed ? "right" : "left"}`);
+    const activeTab = this._tabs?.[0]?.active ?? "details";
+    game.user.setFlag("dnd5e", `sheetPrefs.character.tabs.${activeTab}.collapseSidebar`, sidebarCollapsed);
   }
 
   /* -------------------------------------------- */

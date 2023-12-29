@@ -28,7 +28,8 @@
         <proficiency-cycle type="ability" name="{{ path }}.proficient" data-tooltip="{{ hover }}"
                            value="{{#if @root.editable}}{{ baseProf }}{{else}}{{ proficient }}{{/if}}"
                            aria-label="{{ localize hover }}" {{ disabled (not @root.editable) }}></proficiency-cycle>
-        <a class="name saving-throw {{ @root.rollableClass }}">{{ abbr }}</a>
+        <a class="name saving-throw full {{ @root.rollableClass }}">{{ label }}</a>
+        <a class="name saving-throw abbr {{ @root.rollableClass }}">{{ abbr }}</a>
         <div class="bonus"><span class="sign">{{ sign }}</span>{{ mod }}</div>
         {{#if @root.editable}}
         <a class="config-button" data-action="ability" data-tooltip="{{ config }}" aria-label="{{ localize config }}">
@@ -115,80 +116,86 @@
     {{!-- Background, Saving Throws, Proficiencies, & Senses --}}
     <div class="right">
 
-        {{!-- Background --}}
-        <div class="pills-lg">
-            {{#with creatureType}}
-            <div class="pill-lg texture type">
-                <div class="gold-icon creature-type {{ class }}" style="background-image: url('{{ icon }}');"></div>
-                <div class="name">
-                    <span class="title">{{ localize title }}</span>
-                    <span class="subtitle">{{ subtitle }}</span>
-                </div>
-                {{#if editable}}
-                <a class="config-button" data-action="type" data-tooltip="DND5E.CreatureTypeConfig"
-                   aria-label="{{ localize "DND5E.CreatureTypeConfig" }}">
-                    <i class="fas fa-cog"></i>
-                </a>
-                {{/if}}
-            </div>
-            {{/with}}
-            {{#if system.details.race}}
-            <div class="pill-lg texture race" data-action="edit" data-item-id="{{ system.details.race.id }}"
-                 aria-label="{{#if actor.isOwner}}{{ localize "DND5E.ItemEdit" }}{{else}}{{ localize "DND5E.ItemView" }}{{/if}}">
-                {{#if system.details.race.img}}
-                <img class="gold-icon" src="{{ system.details.race.img }}" alt="{{ system.details.race.name }}">
-                {{/if}}
-                <div class="name">
-                    <span class="title">{{ system.details.race.name }}</span>
+        {{!-- Background & Saving Throws --}}
+        <div class="top flexrow">
+
+            {{!-- Saving Throws --}}
+            <filigree-box class="saves">
+                <h3>
+                    <i class="fas fa-shield-heart"></i>
+                    <span class="roboto-upper">{{ localize "DND5E.ClassSaves" }}</span>
+                </h3>
+                <ul>
+                    {{#each saves}}
+                        {{> "ability-prof" path=(concat "system.abilities." @key)
+                            config=(localize "DND5E.AbilityConfigure" ability=label) }}
+                    {{/each}}
+                </ul>
+            </filigree-box>
+
+            {{!-- Background --}}
+            <div class="pills-lg">
+                {{#with creatureType}}
+                <div class="pill-lg texture type">
+                    <div class="gold-icon creature-type {{ class }}" style="background-image: url('{{ icon }}');"></div>
+                    <div class="name">
+                        <span class="title">{{ localize title }}</span>
+                        <span class="subtitle">{{ subtitle }}</span>
+                    </div>
                     {{#if editable}}
-                    <select class="actor-size unselect" name="system.traits.size">
-                        {{ selectOptions config.actorSizes selected=source.traits.size }}
-                    </select>
-                    {{else}}
-                    <span class="subtitle">{{ lookup config.actorSizes system.traits.size }}</span>
+                    <a class="config-button" data-action="type" data-tooltip="DND5E.CreatureTypeConfig"
+                       aria-label="{{ localize "DND5E.CreatureTypeConfig" }}">
+                        <i class="fas fa-cog"></i>
+                    </a>
                     {{/if}}
                 </div>
-                {{#if editable}}
-                <a class="item-control item-action" data-action="delete" data-tooltip="DND5E.ItemDelete"
-                   aria-label="{{ localize "DND5E.ItemDelete" }}">
-                    <i class="fas fa-trash"></i>
-                </a>
-                {{/if}}
-            </div>
-            {{/if}}
-            {{#if system.details.background}}
-            <div class="pill-lg texture background" data-action="edit" data-item-id="{{ system.details.background.id }}"
-                 aria-label="{{#if actor.isOwner}}{{ localize "DND5E.ItemEdit" }}{{else}}{{ localize "DND5E.ItemView" }}{{/if}}">
-                {{#if system.details.background.img}}
-                <img class="gold-icon" src="{{ system.details.background.img }}"
-                     alt="{{ system.details.background.name }}">
-                {{/if}}
-                <div class="name">
-                    <span class="title">{{ system.details.background.name }}</span>
+                {{/with}}
+                {{#if system.details.race}}
+                <div class="pill-lg texture race" data-action="edit" data-item-id="{{ system.details.race.id }}"
+                     aria-label="{{#if actor.isOwner}}{{ localize "DND5E.ItemEdit" }}{{else}}{{ localize "DND5E.ItemView" }}{{/if}}">
+                    {{#if system.details.race.img}}
+                    <img class="gold-icon" src="{{ system.details.race.img }}" alt="{{ system.details.race.name }}">
+                    {{/if}}
+                    <div class="name">
+                        <span class="title">{{ system.details.race.name }}</span>
+                        {{#if editable}}
+                        <select class="actor-size unselect" name="system.traits.size">
+                            {{ selectOptions config.actorSizes selected=source.traits.size }}
+                        </select>
+                        {{else}}
+                        <span class="subtitle">{{ lookup config.actorSizes system.traits.size }}</span>
+                        {{/if}}
+                    </div>
+                    {{#if editable}}
+                    <a class="item-control item-action" data-action="delete" data-tooltip="DND5E.ItemDelete"
+                       aria-label="{{ localize "DND5E.ItemDelete" }}">
+                        <i class="fas fa-trash"></i>
+                    </a>
+                    {{/if}}
                 </div>
-                {{#if editable}}
-                <a class="item-control item-action" data-action="delete" data-tooltip="DND5E.ItemDelete"
-                   aria-label="{{ localize "DND5E.ItemDelete" }}">
-                    <i class="fas fa-trash"></i>
-                </a>
+                {{/if}}
+                {{#if system.details.background}}
+                <div class="pill-lg texture background" data-action="edit"
+                     data-item-id="{{ system.details.background.id }}"
+                     aria-label="{{#if actor.isOwner}}{{ localize "DND5E.ItemEdit" }}{{else}}{{ localize "DND5E.ItemView" }}{{/if}}">
+                    {{#if system.details.background.img}}
+                    <img class="gold-icon" src="{{ system.details.background.img }}"
+                         alt="{{ system.details.background.name }}">
+                    {{/if}}
+                    <div class="name">
+                        <span class="title">{{ system.details.background.name }}</span>
+                    </div>
+                    {{#if editable}}
+                    <a class="item-control item-action" data-action="delete" data-tooltip="DND5E.ItemDelete"
+                       aria-label="{{ localize "DND5E.ItemDelete" }}">
+                        <i class="fas fa-trash"></i>
+                    </a>
+                    {{/if}}
+                </div>
                 {{/if}}
             </div>
-            {{/if}}
-        </div>
 
-        {{!-- Saving Throws --}}
-        <filigree-box class="saves">
-            <h3>
-                <i class="fas fa-shield-heart"></i>
-                <span class="roboto-upper">{{ localize "DND5E.ClassSaves" }}</span>
-            </h3>
-            <ul>
-                {{#each saves}}
-                    {{> "ability-prof" path=(concat "system.abilities." @key)
-                        config=(localize "DND5E.AbilityConfigure" ability=label) }}
-                {{/each}}
-            </ul>
-        </filigree-box>
+        </div>
 
         {{!-- Senses --}}
         {{#if (or editable senses)}}
@@ -226,13 +233,13 @@
         {{else}}
             {{> "traits" values=traits.di key="di" color="green" icon="fas fa-shield" label="DND5E.Immunities" }}
         {{/if}}
-        {{> "traits" values=traits.ci key="ci" color="green" icon="fas fa-shield" label="DND5E.ConImm" }}
+        {{> "traits" values=traits.ci key="ci" color="green" svg="rosa-shield" label="DND5E.ConImm" }}
 
         {{!-- Vulnerabilities --}}
         {{> "traits" values=traits.dv key="dv" color="maroon" icon="fas fa-heart-crack" label="DND5E.Vulnerabilities" }}
 
         {{!-- Armor --}}
-        {{> "traits" values=traits.armor key="armor" svg="trait-armor-proficiencies" label="DND5E.Armor" }}
+        {{> "traits" values=traits.armor key="armor" svg="checked-shield" label="DND5E.Armor" }}
 
         {{!-- Weapons --}}
         {{> "traits" values=traits.weapon key="weapon" svg="trait-weapon-proficiencies" label="TYPES.Item.weaponPl" }}
