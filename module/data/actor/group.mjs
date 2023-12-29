@@ -117,4 +117,23 @@ export default class GroupActor extends SystemDataModel.mixin(CurrencyTemplate) 
       }
     });
   }
+
+  /* -------------------------------------------- */
+  /*  Socket Event Handlers                       */
+  /* -------------------------------------------- */
+
+  /**
+   * If type has been set to something other than "party" and this is currently the primary party, remove that setting.
+   * @param {object} changed   The differential data that was changed relative to the documents prior values
+   * @param {object} options   Additional options which modify the update request
+   * @param {string} userId    The id of the User requesting the document update
+   * @see {Document#_onUpdate}
+   * @protected
+   */
+  _onUpdate(changed, options, userId) {
+    if ( !foundry.utils.hasProperty(changed, "system.type.value") || !game.user.isFirstGM
+      || (game.settings.get("dnd5e", "primaryParty")?.actor !== this.parent)
+      || (foundry.utils.getProperty(changed, "system.type.value") === "party") ) return;
+    game.settings.set("dnd5e", "primaryParty", { actor: null });
+  }
 }

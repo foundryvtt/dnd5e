@@ -252,4 +252,24 @@ export default function registerSystemSettings() {
       }
     }
   });
+
+  // Primary Group
+  game.settings.register("dnd5e", "primaryParty", {
+    name: "Primary Party",
+    scope: "world",
+    config: false,
+    type: PrimaryPartyData,
+    onChange: s => ui.actors.render()
+  });
+}
+
+/**
+ * Data model for tracking information on the primary party.
+ *
+ * @property {Actor5e} actor  Group actor representing the primary party.
+ */
+class PrimaryPartyData extends foundry.abstract.DataModel {
+  static defineSchema() {
+    return { actor: new foundry.data.fields.ForeignDocumentField(foundry.documents.BaseActor) };
+  }
 }

@@ -1,3 +1,4 @@
+export {default as ActorDirectory5e} from "./actor-directory.mjs";
 export {default as ActorSheet5e} from "./base-sheet.mjs";
 export {default as ActorSheet5eCharacter} from "./character-sheet.mjs";
 export {default as ActorSheet5eCharacter2} from "./character-sheet-2.mjs";

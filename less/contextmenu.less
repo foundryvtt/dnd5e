@@ -1,0 +1,13 @@
+#context-menu {
+  [data-group-id]:has(li) {
+    position: relative;
+    margin-block-start: 0.5rem;
+    &::before {
+      content: "";
+      position: absolute;
+      inset-inline: 1rem;
+      inset-block-start: -0.25rem;
+      border-block-start: 1px solid rgb(255 255 255 / 0.5);
+    }
+  }
+}
