@@ -125,7 +125,7 @@ function applyChatCardDamage(li, multiplier) {
   const damages = message.rolls.map(roll => ({
     value: roll.total,
     type: roll.options.type,
-    properties: roll.options.properties ?? []
+    properties: new Set(roll.options.properties ?? [])
   }));
   return Promise.all(canvas.tokens.controlled.map(t => {
     const a = t.actor;
