@@ -26,7 +26,7 @@ export default class ToolData extends SystemDataModel.mixin(
   /** @inheritdoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
-      type: new ItemTypeField(),
+      type: new ItemTypeField({subtype: false}, {label: "DND5E.ItemToolType"}),
       ability: new foundry.data.fields.StringField({
         required: true, blank: true, label: "DND5E.DefaultAbilityCheck"
       }),

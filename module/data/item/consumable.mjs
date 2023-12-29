@@ -29,7 +29,7 @@ export default class ConsumableData extends SystemDataModel.mixin(
   /** @inheritdoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
-      type: new ItemTypeField({ value: "potion" }, { label: "DND5E.ItemConsumableType" }),
+      type: new ItemTypeField({value: "potion", subtype: false, baseItem: false}, {label: "DND5E.ItemConsumableType"}),
       properties: new MappingField(new foundry.data.fields.BooleanField(), {
         required: false, label: "DND5E.ItemAmmoProperties"
       }),
