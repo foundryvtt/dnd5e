@@ -135,10 +135,12 @@ export default class ItemSheet5e extends ItemSheet {
     });
     context.abilityConsumptionTargets = this._getItemConsumptionTargets();
 
-    if ( "properties" in item.system ) {
-      const validProperties = CONFIG.DND5E[item.type === "weapon" ? "weaponProperties" : "physicalWeaponProperties"];
-      context.properties = Object.entries(validProperties).reduce((obj, [k, label]) => {
-        obj[k] = { label, selected: item.system.properties.has(k) };
+    if ( ("properties" in item.system) && (item.type in CONFIG.DND5E.validProperties) ) {
+      context.properties = CONFIG.DND5E.validProperties[item.type].reduce((obj, k) => {
+        obj[k] = {
+          label: CONFIG.DND5E.itemProperties[k].label,
+          selected: item.system.properties.has(k)
+        };
         return obj;
       }, {});
     }
@@ -151,10 +153,6 @@ export default class ItemSheet5e extends ItemSheet {
           context.itemType = featureType.label;
           context.featureSubtypes = featureType.subtypes;
         }
-        context.featureProperties = CONFIG.DND5E.featureProperties;
-        break;
-      case "spell":
-        context.spellComponents = {...CONFIG.DND5E.spellComponents, ...CONFIG.DND5E.spellTags};
         break;
       case "loot":
         const lootType = CONFIG.DND5E.lootTypes[item.system.type?.value];

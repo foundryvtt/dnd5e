@@ -898,18 +898,129 @@ preLocalize("featureTypes.class.subtypes", { sort: true });
 /* -------------------------------------------- */
 
 /**
- * The various properties of a feature item.
+ * The various properties of all item types.
  * @enum {object}
  */
-DND5E.featureProperties = {
+DND5E.itemProperties = {
+  ada: {
+    label: "DND5E.ItemPropertiesAda",
+    isPhysical: true
+  },
+  amm: {
+    label: "DND5E.ItemPropertiesAmm"
+  },
   concentration: {
-    label: "DND5E.FeaturePropertyCon"
+    label: "DND5E.ItemPropertiesConcentration",
+    abbr: "DND5E.ConcentrationAbbr",
+    isTag: true
+  },
+  fin: {
+    label: "DND5E.ItemPropertiesFin"
+  },
+  fir: {
+    label: "DND5E.ItemPropertiesFir"
+  },
+  foc: {
+    label: "DND5E.ItemPropertiesFoc"
+  },
+  hvy: {
+    label: "DND5E.ItemPropertiesHvy"
+  },
+  lgt: {
+    label: "DND5E.ItemPropertiesLgt"
+  },
+  lod: {
+    label: "DND5E.ItemPropertiesLod"
+  },
+  material: {
+    label: "DND5E.ItemPropertiesMaterial"
   },
   mgc: {
-    label: "DND5E.FeaturePropertyMgc"
+    label: "DND5E.ItemPropertiesMgc",
+    isPhysical: true
+  },
+  rch: {
+    label: "DND5E.ItemPropertiesRch"
+  },
+  rel: {
+    label: "DND5E.ItemPropertiesRel"
+  },
+  ret: {
+    label: "DND5E.ItemPropertiesRet"
+  },
+  ritual: {
+    label: "DND5E.ItemPropertiesRitual",
+    abbr: "DND5E.RitualAbbr",
+    isTag: true
+  },
+  sil: {
+    label: "DND5E.ItemPropertiesSil",
+    isPhysical: true
+  },
+  somatic: {
+    label: "DND5E.ItemPropertiesSomatic"
+  },
+  spc: {
+    label: "DND5E.ItemPropertiesSpc"
+  },
+  thr: {
+    label: "DND5E.ItemPropertiesThr"
+  },
+  two: {
+    label: "DND5E.ItemPropertiesTwo"
+  },
+  ver: {
+    label: "DND5E.ItemPropertiesVer"
+  },
+  vocal: {
+    label: "DND5E.ItemPropertiesVocal"
   }
 };
-preLocalize("featureProperties", {keys: ["label"]});
+preLocalize("itemProperties", {keys: ["label", "abbr"]});
+
+/* -------------------------------------------- */
+
+/**
+ * The various properties of an item per item type.
+ * @enum {object}
+ */
+DND5E.validProperties = {
+  feat: new Set([
+    "concentration",
+    "mgc"
+  ]),
+  weapon: new Set([
+    "ada",
+    "amm",
+    "fin",
+    "fir",
+    "foc",
+    "hvy",
+    "lgt",
+    "lod",
+    "mgc",
+    "rch",
+    "rel",
+    "ret",
+    "sil",
+    "spc",
+    "thr",
+    "two",
+    "ver"
+  ]),
+  spell: new Set([
+    "vocal",
+    "somatic",
+    "material",
+    "concentration",
+    "ritual"
+  ]),
+  consumable: new Set([
+    "ada",
+    "mgc",
+    "sil"
+  ])
+};
 
 /* -------------------------------------------- */
 

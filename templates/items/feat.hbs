@@ -67,11 +67,10 @@
 
             {{!-- Feature Properties --}}
             <div class="feature-properties form-group stacked">
-                <label>{{ localize "DND5E.FeatureProperties" }}</label>
-                {{#each featureProperties as |property key|}}
+                <label>{{ localize "DND5E.ItemFeatureProperties" }}</label>
+                {{#each properties}}
                 <label class="checkbox">
-                    <input type="checkbox" name="system.properties.{{key}}" {{checked (lookup ../system.properties key)}}>
-                    {{property.label}}
+                    <input type="checkbox" name="system.properties.{{@key}}" {{checked selected}}> {{ label }}
                 </label>
                 {{/each}}
             </div>
