@@ -7,6 +7,7 @@ import Accordion from "../accordion.mjs";
 import EffectsElement from "../components/effects.mjs";
 import SourceConfig from "../source-config.mjs";
 import * as Trait from "../../documents/actor/trait.mjs";
+import { filteredKeys } from "../../utils.mjs";
 
 /**
  * Override and extend the core ItemSheet implementation to handle specific item types.
@@ -140,6 +141,14 @@ export default class ItemSheet5e extends ItemSheet {
       concealDetails: !game.user.isGM && (this.document.system.identified === false)
     });
     context.abilityConsumptionTargets = this._getItemConsumptionTargets();
+
+    if ( "properties" in item.system ) {
+      const validProperties = CONFIG.DND5E[item.type === "weapon" ? "weaponProperties" : "physicalWeaponProperties"];
+      context.properties = Object.entries(validProperties).reduce((obj, [k, label]) => {
+        obj[k] = { label, selected: item.system.properties.has(k) };
+        return obj;
+      }, {});
+    }
 
     // Special handling for specific item types
     switch ( item.type ) {
@@ -362,8 +371,8 @@ export default class ItemSheet5e extends ItemSheet {
     const labels = this.item.labels;
     switch ( this.item.type ) {
       case "consumable":
-        for ( const [k, v] of Object.entries(this.item.system.properties ?? {}) ) {
-          if ( v === true ) props.push(CONFIG.DND5E.physicalWeaponProperties[k]);
+        for ( const k of this.item.system.properties ) {
+          props.push(CONFIG.DND5E.physicalWeaponProperties[k]);
         }
         break;
       case "equipment":
@@ -377,8 +386,8 @@ export default class ItemSheet5e extends ItemSheet {
         props.push(labels.components.vsm, labels.materials, ...labels.components.tags);
         break;
       case "weapon":
-        for ( const [k, v] of Object.entries(this.item.system.properties) ) {
-          if ( v === true ) props.push(CONFIG.DND5E.weaponProperties[k]);
+        for ( const k of this.item.system.properties ) {
+          props.push(CONFIG.DND5E.weaponProperties[k]);
         }
         break;
     }
@@ -434,6 +443,13 @@ export default class ItemSheet5e extends ItemSheet {
     // Handle Damage array
     const damage = formData.system?.damage;
     if ( damage ) damage.parts = Object.values(damage?.parts || {}).map(d => [d[0] || "", d[1] || ""]);
+
+    // Handle properties
+    if ( foundry.utils.hasProperty(formData, "system.properties") ) {
+      const keys = new Set(Object.keys(formData.system.properties));
+      const preserve = this.object.system.properties.difference(keys);
+      formData.system.properties = [...filteredKeys(formData.system.properties), ...preserve];
+    }
 
     // Check max uses formula
     const uses = formData.system?.uses;
