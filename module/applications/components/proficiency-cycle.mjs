@@ -245,6 +245,16 @@ export default class ProficiencyCycleElement extends HTMLElement {
   /* -------------------------------------------- */
 
   /**
+   * Redirect focus requests into the inner input.
+   * @param {object} options  Focus options forwarded to inner input.
+   */
+  focus(options) {
+    this.#shadowRoot.querySelector("input")?.focus(options);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Change the value by one step, looping around if the limits have been reached.
    * @param {boolean} [up=true]  Should the value step up or down?
    */
