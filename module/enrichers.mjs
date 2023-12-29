@@ -388,9 +388,6 @@ async function enrichItem(config, label) {
       console.warn(`No Actor with Item ${givenItem} found while enriching ${config.input}.`);
       return config.input;
     }
-  } else if (givenItem.startsWith(".")) {
-    console.warn(`Item ${givenItem} not found while enriching ${config.input}.`);
-    return config.input;
   }
 
   //Finally, if config is an item name
