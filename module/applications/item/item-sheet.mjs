@@ -439,7 +439,9 @@ export default class ItemSheet5e extends ItemSheet {
 
     // Handle properties
     if ( foundry.utils.hasProperty(formData, "system.properties") ) {
-      formData.system.properties = filteredKeys(formData.system.properties);
+      const keys = new Set(Object.keys(formData.system.properties));
+      const preserve = this.object.system.properties.difference(keys);
+      formData.system.properties = [...filteredKeys(formData.system.properties), ...preserve];
     }
 
     // Check max uses formula
