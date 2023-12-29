@@ -388,6 +388,19 @@ async function enrichItem(config, label) {
       console.warn(`No Actor with Item ${givenItem} found while enriching ${config.input}.`);
       return config.input;
     }
+  } else if (givenItem.startsWith(".")) {
+    const relativeName = givenItem.substr(1)
+    const foundActor = game.actors.find((actor) => actor.items.getName(relativeName))
+    if (foundActor) {
+      const foundItem = foundActor.items.getName(relativeName);
+      if (!label) {
+        label = foundItem.name;
+        console.log(`Found actor ${foundActor.name} that owns the item ${foundItem.name}.`);
+      }
+      return createRollLink(label, { type: "item", rollRelativeItemId: foundItem.id });
+    }
+    console.warn(`Item ${givenItem} not found while enriching ${config.input}.`);
+    return config.input;
   }
 
   //Finally, if config is an item name
