@@ -373,10 +373,10 @@ async function enrichItem(config, label) {
     }
 
   ///If config is a relative ID
-  const itemIdMatch = givenItem.match(/^\.\w{16}$/);
-  if (itemIdMatch) {
-    const relativeId = givenItem.substr(1); 
-    const foundActor = game.actors.find((actor) => actor.items.get(relativeId));
+  const relativeIdMatch = givenItem.match(/^\.\w{16}$/); ///Matches for relative IDs
+  const copiedIdMatch = givenItem.match(/\w{16}$/)
+  if (relativeIdMatch || copiedIdMatch) {
+    const relativeId = relativeIdMatch ? givenItem.substr(1) : givenItem;
     if (foundActor) {
       const foundItem = foundActor.items.get(relativeId);
       if ( !label ) {
@@ -384,7 +384,7 @@ async function enrichItem(config, label) {
         console.log(`Found actor ${foundActor.name} that owns the item ${foundItem.name}.`);
       }
       return createRollLink(label, { type: "item", rollRelativeItemId: relativeId });
-      } else {
+      } else if(relativeIdMatch) {
       console.warn(`No Actor with Item ${givenItem} found while enriching ${config.input}.`);
       return config.input;
     }
