@@ -173,6 +173,10 @@
                     </a>
                     {{/if}}
                 </div>
+                {{else if actor.isOwner}}
+                <div class="pill-lg empty roboto-upper" data-action="findItem" data-item-type="race">
+                    {{ localize "DND5E.RaceAdd" }}
+                </div>
                 {{/if}}
                 {{#if system.details.background}}
                 <div class="pill-lg texture background" data-action="edit"
@@ -191,6 +195,10 @@
                         <i class="fas fa-trash"></i>
                     </a>
                     {{/if}}
+                </div>
+                {{else if actor.isOwner}}
+                <div class="pill-lg empty roboto-upper" data-action="findItem" data-item-type="background">
+                    {{ localize "DND5E.BackgroundAdd" }}
                 </div>
                 {{/if}}
             </div>

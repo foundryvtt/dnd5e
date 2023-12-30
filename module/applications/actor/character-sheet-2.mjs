@@ -316,6 +316,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
     super.activateListeners(html);
     html.find(".pips[data-prop]").on("click", this._onTogglePip.bind(this));
     html.find(".death-tab").on("click", () => this._toggleDeathTray());
+    html.find("[data-action]").on("click", this._onAction.bind(this));
     html.find("[data-item-id][data-action]").on("click", this._onItemAction.bind(this));
     html.find(".rollable:is(.saving-throw, .ability-check)").on("click", this._onRollAbility.bind(this));
     html.find("proficiency-cycle").on("change", this._onChangeInput.bind(this));
@@ -498,6 +499,34 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
     const token = this.actor.isToken ? this.actor.token : this.actor.prototypeToken;
     const img = showTokenPortrait ? token.texture.src : this.actor.img;
     new ImagePopout(img, { title: this.actor.name, uuid: this.actor.uuid }).render(true);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle the user performing some sheet action.
+   * @param {PointerEvent} event  The triggering event.
+   * @protected
+   */
+  _onAction(event) {
+    const { action } = event.currentTarget.dataset;
+    switch ( action ) {
+      case "findItem": this._onFindItem(event.currentTarget.dataset.itemType); break;
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Show available items of a given type.
+   * @param {string} type  The item type.
+   * @protected
+   */
+  _onFindItem(type) {
+    switch ( type ) {
+      case "race": game.packs.get("dnd5e.races").render(true); break;
+      case "background": game.packs.get("dnd5e.backgrounds").render(true); break;
+    }
   }
 
   /* -------------------------------------------- */

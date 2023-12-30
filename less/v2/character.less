@@ -558,6 +558,7 @@
             .progress::before {
               background: linear-gradient(to right, var(--dnd5e-color-hp-1) 0%, var(--dnd5e-color-hp-2) 100%);
               border-right: 3px solid var(--dnd5e-color-hp-3);
+              border-radius: 4px 0 0 4px;
             }
           }
 
@@ -599,7 +600,7 @@
             > .tmp {
               flex: none;
               width: 50px;
-              border-left: 2px dashed var(--dnd5e-color-gold);
+              border-left: 1px dashed var(--dnd5e-color-gold);
 
               > input { color: var(--dnd5e-color-blue); }
             }
@@ -846,6 +847,12 @@
       &.race, &.background {
         cursor: pointer;
         &:hover:not(:has(a:hover)) { box-shadow: 0 0 12px var(--dnd5e-color-gold); }
+      }
+
+      &.empty {
+        cursor: pointer;
+        transition: opacity 250ms ease;
+        &:hover { opacity: .5; }
       }
 
       &.texture {
