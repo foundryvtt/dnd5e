@@ -363,9 +363,12 @@ export default class ItemSheet5e extends ItemSheet {
     const labels = this.item.labels;
     switch ( this.item.type ) {
       case "consumable":
-        for ( const k of this.item.system.properties ) {
-          props.push(CONFIG.DND5E.physicalWeaponProperties[k]);
-        }
+      case "weapon":
+        const ip = CONFIG.DND5E.itemProperties;
+        const vp = CONFIG.DND5E.validProperties[this.item.type];
+        this.item.system.properties.forEach(k => {
+          if ( vp.has(k) ) props.push(ip[k].label);
+        });
         break;
       case "equipment":
         props.push(CONFIG.DND5E.equipmentTypes[this.item.system.type.value]);
@@ -376,11 +379,6 @@ export default class ItemSheet5e extends ItemSheet {
         break;
       case "spell":
         props.push(labels.components.vsm, labels.materials, ...labels.components.tags);
-        break;
-      case "weapon":
-        for ( const k of this.item.system.properties ) {
-          props.push(CONFIG.DND5E.weaponProperties[k]);
-        }
         break;
     }
 
