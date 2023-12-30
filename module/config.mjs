@@ -976,7 +976,7 @@ DND5E.itemProperties = {
     label: "DND5E.Item.PropertyVerbal"
   }
 };
-preLocalize("itemProperties", {keys: ["label", "abbr"]});
+preLocalize("itemProperties", {keys: ["label", "abbr"], sort: true});
 
 /* -------------------------------------------- */
 
