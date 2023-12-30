@@ -140,6 +140,18 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
+  async _render(force=false, options={}) {
+    await super._render(force, options);
+    const context = options.renderContext ?? options.action;
+    const data = options.renderData ?? options.data;
+    const isUpdate = (context === "update") || (context === "updateActor");
+    const hp = foundry.utils.getProperty(data ?? {}, "system.attributes.hp.value");
+    if ( isUpdate && (hp === 0) ) this._toggleDeathTray(true);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
   async getData(options) {
     const context = await super.getData(options);
     context.editable = this.isEditable && (this._mode === this.constructor.MODES.EDIT);
@@ -303,7 +315,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
   activateListeners(html) {
     super.activateListeners(html);
     html.find(".pips[data-prop]").on("click", this._onTogglePip.bind(this));
-    html.find(".death-tab").on("click", this._toggleDeathTray.bind(this));
+    html.find(".death-tab").on("click", () => this._toggleDeathTray());
     html.find("[data-item-id][data-action]").on("click", this._onItemAction.bind(this));
     html.find(".rollable:is(.saving-throw, .ability-check)").on("click", this._onRollAbility.bind(this));
     html.find("proficiency-cycle").on("change", this._onChangeInput.bind(this));
@@ -443,16 +455,16 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
 
   /**
    * Toggle the death save tray.
-   * @param {PointerEvent} event  The triggering event.
+   * @param {boolean} [open]  Force a particular open state.
    * @protected
    */
-  _toggleDeathTray(event) {
-    const target = event.currentTarget;
-    const tray = target.closest(".death-tray");
-    tray.classList.toggle("open");
+  _toggleDeathTray(open) {
+    const tray = this.form.querySelector(".death-tray");
+    const tab = tray.querySelector(".death-tab");
+    tray.classList.toggle("open", open);
     this._deathTrayOpen = tray.classList.contains("open");
-    target.dataset.tooltip = `DND5E.DeathSave${this._deathTrayOpen ? "Hide" : "Show"}`
-    target.setAttribute("aria-label", game.i18n.localize(target.dataset.tooltip));
+    tab.dataset.tooltip = `DND5E.DeathSave${this._deathTrayOpen ? "Hide" : "Show"}`
+    tab.setAttribute("aria-label", game.i18n.localize(tab.dataset.tooltip));
   }
 
   /* -------------------------------------------- */
