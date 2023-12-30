@@ -1,3 +1,4 @@
+import Proficiency from "../../documents/actor/proficiency.mjs";
 import { FormulaField, LocalDocumentField } from "../fields.mjs";
 import CreatureTypeField from "../shared/creature-type-field.mjs";
 import AttributesFields from "./templates/attributes.mjs";
@@ -158,6 +159,21 @@ export default class CharacterData extends CreatureTemplate {
     this.attributes.senses.units ??= raceData.senses.units;
 
     this.details.type = raceData.type;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  getRollData({ deterministic=false }={}) {
+    const data = {...this};
+    data.prof = new Proficiency(this.attributes.prof, 1);
+    if ( deterministic ) data.prof = data.prof.flat;
+    data.classes = {};
+    for ( const [identifier, cls] of Object.entries(this.parent.classes) ) {
+      data.classes[identifier] = {...cls.system};
+      if ( cls.subclass ) data.classes[identifier].subclass = cls.subclass.system;
+    }
+    return data;
   }
 }
 
