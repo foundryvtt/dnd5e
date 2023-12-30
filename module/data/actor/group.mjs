@@ -19,7 +19,7 @@ const { ArrayField, ForeignDocumentField, HTMLField, NumberField, SchemaField, S
  * @property {object} description
  * @property {string} description.full           Description of this group.
  * @property {string} description.summary        Summary description (currently unused).
- * @property {Record<string, GroupMemberData>} members  Members in this group with associated metadata.
+ * @property {GroupMemberData[]} members         Members in this group with associated metadata.
  * @property {object} attributes
  * @property {object} attributes.movement
  * @property {number} attributes.movement.land   Base movement speed over land.
@@ -48,7 +48,7 @@ export default class GroupActor extends SystemDataModel.mixin(CurrencyTemplate) 
       }),
       members: new ArrayField(new SchemaField({
         actor: new ForeignDocumentField(foundry.documents.BaseActor),
-        quantity: new NumberField({initial: 1, interger: true, min: 0})
+        quantity: new NumberField({initial: 1, integer: true, min: 0})
       }), {label: "DND5E.GroupMembers"}),
       attributes: new SchemaField({
         movement: new SchemaField({
@@ -146,7 +146,7 @@ export default class GroupActor extends SystemDataModel.mixin(CurrencyTemplate) 
     if ( !this.members.ids.has(actorId) ) throw new Error(`Actor id "${actorId}" is not a group member`);
 
     // Remove the actor and update the parent document
-    const membersCollection = foundry.utils.deepClone(this.toObject().members);
+    const membersCollection = this.toObject().members;
     membersCollection.findSplice(member => member.actor === actorId);
     return this.parent.update({"system.members": membersCollection});
   }
