@@ -48,7 +48,7 @@ export default class GroupActor extends SystemDataModel.mixin(CurrencyTemplate) 
       }),
       members: new ArrayField(new SchemaField({
         actor: new ForeignDocumentField(foundry.documents.BaseActor),
-        quantity: new NumberField({initial: 1, integer: true, min: 0})
+        quantity: new NumberField({initial: 1, integer: true, min: 0, label: "DND5E.Quantity"})
       }), {label: "DND5E.GroupMembers"}),
       attributes: new SchemaField({
         movement: new SchemaField({
@@ -77,7 +77,7 @@ export default class GroupActor extends SystemDataModel.mixin(CurrencyTemplate) 
    * @param {object} source  The candidate source data from which the model will be constructed.
    */
   static #migrateMembers(source) {
-    if ( !("members" in source) ) return;
+    if ( foundry.utils.getType(source.members) !== "Array" ) return;
     source.members = source.members.map(m => {
       if ( foundry.utils.getType(m) === "Object" ) return m;
       return { actor: m };
