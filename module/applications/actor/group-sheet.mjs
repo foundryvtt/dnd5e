@@ -270,17 +270,6 @@ export default class GroupActorSheet extends ActorSheetMixin(ActorSheet) {
 
   /* -------------------------------------------- */
 
-  /** @inheritDoc */
-  _getSubmitData(updateData={}) {
-    const formData = foundry.utils.expandObject(super._getSubmitData(updateData));
-
-    if ( formData.system?.members ) formData.system.members = Object.values(formData.system.members);
-
-    return foundry.utils.flattenObject(formData);
-  }
-
-  /* -------------------------------------------- */
-
   /**
    * Handle clicks to action buttons on the group sheet.
    * @param {PointerEvent} event      The initiating click event
