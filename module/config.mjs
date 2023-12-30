@@ -903,77 +903,77 @@ preLocalize("featureTypes.class.subtypes", { sort: true });
  */
 DND5E.itemProperties = {
   ada: {
-    label: "DND5E.ItemPropertiesAda",
+    label: "DND5E.Item.PropertyAdamantine",
     isPhysical: true
   },
   amm: {
-    label: "DND5E.ItemPropertiesAmm"
+    label: "DND5E.Item.PropertyAmmunition"
   },
   concentration: {
-    label: "DND5E.ItemPropertiesConcentration",
+    label: "DND5E.Item.PropertyConcentration",
     abbr: "DND5E.ConcentrationAbbr",
     isTag: true
   },
   fin: {
-    label: "DND5E.ItemPropertiesFin"
+    label: "DND5E.Item.PropertyFinesse"
   },
   fir: {
-    label: "DND5E.ItemPropertiesFir"
+    label: "DND5E.Item.PropertyFirearm"
   },
   foc: {
-    label: "DND5E.ItemPropertiesFoc"
+    label: "DND5E.Item.PropertyFocus"
   },
   hvy: {
-    label: "DND5E.ItemPropertiesHvy"
+    label: "DND5E.Item.PropertyHeavy"
   },
   lgt: {
-    label: "DND5E.ItemPropertiesLgt"
+    label: "DND5E.Item.PropertyLight"
   },
   lod: {
-    label: "DND5E.ItemPropertiesLod"
+    label: "DND5E.Item.PropertyLoading"
   },
   material: {
-    label: "DND5E.ItemPropertiesMaterial"
+    label: "DND5E.Item.PropertyMaterial"
   },
   mgc: {
-    label: "DND5E.ItemPropertiesMgc",
+    label: "DND5E.Item.PropertyMagical",
     isPhysical: true
   },
   rch: {
-    label: "DND5E.ItemPropertiesRch"
+    label: "DND5E.Item.PropertyReach"
   },
   rel: {
-    label: "DND5E.ItemPropertiesRel"
+    label: "DND5E.Item.PropertyReload"
   },
   ret: {
-    label: "DND5E.ItemPropertiesRet"
+    label: "DND5E.Item.PropertyReturning"
   },
   ritual: {
-    label: "DND5E.ItemPropertiesRitual",
+    label: "DND5E.Item.PropertyRitual",
     abbr: "DND5E.RitualAbbr",
     isTag: true
   },
   sil: {
-    label: "DND5E.ItemPropertiesSil",
+    label: "DND5E.Item.PropertySilvered",
     isPhysical: true
   },
   somatic: {
-    label: "DND5E.ItemPropertiesSomatic"
+    label: "DND5E.Item.PropertySomatic"
   },
   spc: {
-    label: "DND5E.ItemPropertiesSpc"
+    label: "DND5E.Item.PropertySpecial"
   },
   thr: {
-    label: "DND5E.ItemPropertiesThr"
+    label: "DND5E.Item.PropertyThrown"
   },
   two: {
-    label: "DND5E.ItemPropertiesTwo"
+    label: "DND5E.Item.PropertyTwoHanded"
   },
   ver: {
-    label: "DND5E.ItemPropertiesVer"
+    label: "DND5E.Item.PropertyVersatile"
   },
   vocal: {
-    label: "DND5E.ItemPropertiesVocal"
+    label: "DND5E.Item.PropertyVerbal"
   }
 };
 preLocalize("itemProperties", {keys: ["label", "abbr"]});
