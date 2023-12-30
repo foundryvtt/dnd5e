@@ -3,6 +3,32 @@
 /* -------------------------------------------- */
 
 /**
+ * Format a Challenge Rating using the proper fractional symbols.
+ * @param {number} value  CR value for format.
+ * @returns {string}
+ */
+export function formatCR(value) {
+  return { 0.125: "⅛", 0.25: "¼", 0.5: "½" }[value] ?? formatNumber(value);
+}
+
+/* -------------------------------------------- */
+
+/**
+ * A helper for using Intl.NumberFormat within handlebars.
+ * @param {number} value    The value to format.
+ * @param {object} options  Options forwarded to {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat}
+ * @returns {string}
+ */
+export function formatNumber(value, options) {
+  const formatter = new Intl.NumberFormat(game.i18n.lang, options);
+  return formatter.format(value);
+}
+
+/* -------------------------------------------- */
+/*  Formulas                                    */
+/* -------------------------------------------- */
+
+/**
  * Convert a bonus value to a simple integer for displaying on the sheet.
  * @param {number|string|null} bonus  Bonus formula.
  * @param {object} [data={}]          Data to use for replacing @ strings.
@@ -252,20 +278,6 @@ function itemContext(context, options) {
 /* -------------------------------------------- */
 
 /**
- * A helper for using Intl.NumberFormat within handlebars.
- * @param {number} value         The value to format.
- * @param {object} options
- * @param {object} options.hash  Options forwarded to {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat}
- * @returns {string}
- */
-function numberFormat(value, options) {
-  const formatter = new Intl.NumberFormat(game.i18n.lang, options.hash);
-  return formatter.format(value);
-}
-
-/* -------------------------------------------- */
-
-/**
  * Conceal a section and display a notice if unidentified.
  * @param {boolean} conceal  Should the section be concealed?
  * @param {object} options   Handlebars options.
@@ -299,7 +311,7 @@ export function registerHandlebarsHelpers() {
     "dnd5e-groupedSelectOptions": groupedSelectOptions,
     "dnd5e-linkForUuid": linkForUuid,
     "dnd5e-itemContext": itemContext,
-    "dnd5e-numberFormat": numberFormat
+    "dnd5e-numberFormat": (context, options) => formatNumber(context, options.hash)
   });
 }
 

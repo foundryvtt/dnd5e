@@ -1,5 +1,6 @@
-import ActorMovementConfig from "./movement-config.mjs";
 import Item5e from "../../documents/item.mjs";
+import { formatCR, formatNumber } from "../../utils.mjs";
+import ActorMovementConfig from "./movement-config.mjs";
 import { ActorSheetMixin } from "./sheet-mixin.mjs";
 
 /**
@@ -132,6 +133,8 @@ export default class GroupActorSheet extends ActorSheetMixin(ActorSheet) {
       npc: {label: `${CONFIG.Actor.typeLabels.npc}Pl`, members: []},
       vehicle: {label: `${CONFIG.Actor.typeLabels.vehicle}Pl`, members: []}
     };
+    const type = this.actor.system.type.value;
+    const displayXP = !game.settings.get("dnd5e", "disableExperienceTracking");
     for ( const memberData of this.object.system.members ) {
       const member = memberData.actor;
 
@@ -151,8 +154,14 @@ export default class GroupActorSheet extends ActorSheetMixin(ActorSheet) {
       m.hp.max = Math.max(0, hp.max + (hp.tempmax || 0));
       m.hp.pct = Math.clamped((m.hp.current / m.hp.max) * 100, 0, 100).toFixed(2);
       m.hp.color = dnd5e.documents.Actor5e.getHPColor(m.hp.current, m.hp.max).css;
-      stats.currentHP += m.hp.current;
-      stats.maxHP += m.hp.max;
+      stats.currentHP += (m.hp.current * m.quantity);
+      stats.maxHP += (m.hp.max * m.quantity);
+
+      // Challenge
+      if ( member.type === "npc" ) {
+        m.cr = formatCR(member.system.details.cr);
+        if ( displayXP ) m.xp = formatNumber(member.system.details.xp.value * m.quantity);
+      }
 
       if ( member.type === "vehicle" ) stats.nVehicles++;
       else stats.nMembers++;
@@ -160,6 +169,11 @@ export default class GroupActorSheet extends ActorSheetMixin(ActorSheet) {
     }
     for ( const [k, section] of Object.entries(sections) ) {
       if ( !section.members.length ) delete sections[k];
+      else {
+        section.displayHPColumn = type !== "encounter";
+        section.displayQuantityColumn = type === "encounter";
+        section.displayChallengeColumn = (type === "encounter") && (k === "npc");
+      }
     }
     return {sections, stats};
   }
@@ -252,6 +266,17 @@ export default class GroupActorSheet extends ActorSheetMixin(ActorSheet) {
       html.find(".action-button").click(this._onClickActionButton.bind(this));
       html.find(".item .rollable h4").click(event => this._onItemSummary(event));
     }
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  _getSubmitData(updateData={}) {
+    const formData = foundry.utils.expandObject(super._getSubmitData(updateData));
+
+    if ( formData.system?.members ) formData.system.members = Object.values(formData.system.members);
+
+    return foundry.utils.flattenObject(formData);
   }
 
   /* -------------------------------------------- */
