@@ -69,7 +69,7 @@
                 <ol class="members-list directory-list">
                     {{#each section.members as |member|}}
                     <li class="group-member directory-item flexrow" data-actor-id="{{member.id}}">
-                        <input type="hidden" name="system.members.{{@index}}.actor" value="{{member.id}}">
+                        <input type="hidden" name="system.members.{{index}}.actor" value="{{member.id}}">
                         <div class="name flexrow">
                             <img class="thumbnail" src="{{member.img}}">
                             <h4 class="document-name"><a class="member-link">{{member.name}}</a></h4>
@@ -88,11 +88,11 @@
                         {{/if}}
                         {{#if section.displayQuantityColumn}}
                         <div class="quantity flexrow">
-                            <input type="number" name="system.members.{{@index}}.quantity" min="1" step="1"
+                            <input type="number" name="system.members.{{index}}.quantity" min="1" step="1"
                                    value="{{member.quantity}}">
                         </div>
                         {{else}}
-                        <input type="hidden" name="system.members.{{@index}}.quantity" value="{{member.quantity}}">
+                        <input type="hidden" name="system.members.{{index}}.quantity" value="{{member.quantity}}">
                         {{/if}}
                         {{#if section.displayChallengeColumn}}
                         <div class="challenge">

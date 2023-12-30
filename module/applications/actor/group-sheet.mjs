@@ -135,10 +135,11 @@ export default class GroupActorSheet extends ActorSheetMixin(ActorSheet) {
     };
     const type = this.actor.system.type.value;
     const displayXP = !game.settings.get("dnd5e", "disableExperienceTracking");
-    for ( const memberData of this.object.system.members ) {
+    for ( const [index, memberData] of this.object.system.members.entries() ) {
       const member = memberData.actor;
 
       const m = {
+        index,
         ...memberData,
         actor: member,
         id: member.id,
