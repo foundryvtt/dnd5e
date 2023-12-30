@@ -572,8 +572,8 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
       }
 
       // Spell-specific filters
-      if ( filters.has("ritual") && item.system.properties.has("ritual") ) return false;
-      if ( filters.has("concentration") && item.system.properties.has("concentration") ) return false;
+      if ( filters.has("ritual") && !item.system.properties.has("ritual") ) return false;
+      if ( filters.has("concentration") && !item.system.properties.has("concentration") ) return false;
       if ( filters.has("prepared") ) {
         if ( (item.system.level === 0) || ["innate", "always"].includes(item.system.preparation.mode) ) return true;
         if ( this.actor.type === "npc" ) return true;
