@@ -1,3 +1,4 @@
+import { filteredKeys } from "../../utils.mjs";
 import SystemDataModel from "../abstract.mjs";
 import { FormulaField } from "../fields.mjs";
 import ActionTemplate from "./templates/action.mjs";
@@ -73,17 +74,12 @@ export default class SpellData extends SystemDataModel.mixin(
   /* -------------------------------------------- */
 
   /**
-   * Migrate the spell's component object to remove any old, non-boolean values.
    * Migrate the component object to be 'properties' instead.
    * @param {object} source  The candidate source data from which the model will be constructed.
    */
   static #migrateComponentData(source) {
-    const src = source.components;
-    if ( !src ) return;
-    for ( const [key, value] of Object.entries(src) ) {
-      if ( typeof value !== "boolean" ) delete src[key];
-    }
-    if ( !("properties" in source) ) source.properties = src;
+    if ( !source.components || ("properties" in source)) return;
+    source.properties = filteredKeys(source.components);
   }
 
   /* -------------------------------------------- */
@@ -142,7 +138,7 @@ export default class SpellData extends SystemDataModel.mixin(
   /**
    * Provide a backwards compatible getter for accessing `components`.
    * @deprecated since v2.5.
-   * @returns {Set<string>}
+   * @type {Set<string>}
    */
   get components() {
     foundry.utils.logCompatibilityWarning(
