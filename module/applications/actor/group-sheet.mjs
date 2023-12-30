@@ -132,8 +132,11 @@ export default class GroupActorSheet extends ActorSheetMixin(ActorSheet) {
       npc: {label: `${CONFIG.Actor.typeLabels.npc}Pl`, members: []},
       vehicle: {label: `${CONFIG.Actor.typeLabels.vehicle}Pl`, members: []}
     };
-    for ( const member of this.object.system.members ) {
+    for ( const memberData of this.object.system.members ) {
+      const member = memberData.actor;
+
       const m = {
+        ...memberData,
         actor: member,
         id: member.id,
         name: member.name,
@@ -218,7 +221,7 @@ export default class GroupActorSheet extends ActorSheetMixin(ActorSheet) {
   /** @inheritDoc */
   async _render(force, options={}) {
     for ( const member of this.object.system.members) {
-      member.apps[this.id] = this;
+      member.actor.apps[this.id] = this;
     }
     return super._render(force, options);
   }
@@ -228,7 +231,7 @@ export default class GroupActorSheet extends ActorSheetMixin(ActorSheet) {
   /** @inheritDoc */
   async close(options={}) {
     for ( const member of this.object.system.members ) {
-      delete member.apps[this.id];
+      delete member.actor.apps[this.id];
     }
     return super.close(options);
   }

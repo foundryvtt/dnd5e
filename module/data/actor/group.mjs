@@ -1,7 +1,14 @@
 import SystemDataModel from "../abstract.mjs";
 import CurrencyTemplate from "../shared/currency.mjs";
 
-const { ForeignDocumentField, HTMLField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
+const { ArrayField, ForeignDocumentField, HTMLField, NumberField, SchemaField, StringField } = foundry.data.fields;
+
+/**
+ * Metadata associated with members in this group.
+ * @typedef {object} GroupMemberData
+ * @property {Actor5e} actor    Associated actor document.
+ * @property {number} quantity  Number of this actor in the group (for encounter or crew types).
+ */
 
 /**
  * A data model and API layer which handles the schema and functionality of "group" type Actors in the dnd5e system.
@@ -12,7 +19,7 @@ const { ForeignDocumentField, HTMLField, NumberField, SchemaField, SetField, Str
  * @property {object} description
  * @property {string} description.full           Description of this group.
  * @property {string} description.summary        Summary description (currently unused).
- * @property {Set<string>} members               IDs of actors belonging to this group in the world collection.
+ * @property {GroupMemberData[]} members         Members in this group with associated metadata.
  * @property {object} attributes
  * @property {object} attributes.movement
  * @property {number} attributes.movement.land   Base movement speed over land.
@@ -39,9 +46,10 @@ export default class GroupActor extends SystemDataModel.mixin(CurrencyTemplate) 
         full: new HTMLField({label: "DND5E.Description"}),
         summary: new HTMLField({label: "DND5E.DescriptionSummary"})
       }),
-      members: new SetField(
-        new ForeignDocumentField(foundry.documents.BaseActor, {idOnly: true}), {label: "DND5E.GroupMembers"}
-      ),
+      members: new ArrayField(new SchemaField({
+        actor: new ForeignDocumentField(foundry.documents.BaseActor),
+        quantity: new NumberField({initial: 1, integer: true, min: 0})
+      }), {label: "DND5E.GroupMembers"}),
       attributes: new SchemaField({
         movement: new SchemaField({
           land: new NumberField({nullable: false, min: 0, step: 0.1, initial: 0, label: "DND5E.MovementLand"}),
@@ -53,22 +61,55 @@ export default class GroupActor extends SystemDataModel.mixin(CurrencyTemplate) 
   }
 
   /* -------------------------------------------- */
+  /*  Data Migration                              */
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  static _migrateData(source) {
+    super._migrateData(source);
+    GroupActor.#migrateMembers(source);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Migrate group members from set of IDs into array of metadata objects.
+   * @param {object} source  The candidate source data from which the model will be constructed.
+   */
+  static #migrateMembers(source) {
+    if ( !("members" in source) ) return;
+    source.members = source.members.map(m => {
+      if ( foundry.utils.getType(m) === "Object" ) return m;
+      return { actor: m };
+    });
+  }
+
+  /* -------------------------------------------- */
   /*  Data Preparation                            */
   /* -------------------------------------------- */
 
   /** @inheritdoc */
   prepareBaseData() {
-    this.members.clear();
-    for ( const id of this._source.members ) {
-      const a = game.actors.get(id);
-      if ( a ) {
-        if ( a.type === "group" ) {
-          console.warn(`Group "${this._id}" may not contain another Group "${a.id}" as a member.`);
-        }
-        else this.members.add(a);
+    const memberIds = new Set();
+    this.members = this.members.filter((member, index) => {
+      if ( !member.actor ) {
+        const id = this._source.members[index]?.actor;
+        console.warn(`Actor "${id}" in group "${this._id}" does not exist within the World.`);
+      } else if ( member.actor.type === "group" ) {
+        console.warn(`Group "${this._id}" may not contain another Group "${member.actor.id}" as a member.`);
+      } else if ( memberIds.has(member.actor.id) ) {
+        console.warn(`Actor "${member.actor.id}" duplicated in Group "${this._id}".`);
+      } else {
+        memberIds.add(member.actor.id);
+        return true;
       }
-      else console.warn(`Actor "${id}" in group "${this._id}" does not exist within the World.`);
-    }
+      return false;
+    });
+    Object.defineProperty(this.members, "ids", {
+      value: memberIds,
+      enumerable: false,
+      writable: false
+    });
   }
 
   /* -------------------------------------------- */
@@ -83,13 +124,10 @@ export default class GroupActor extends SystemDataModel.mixin(CurrencyTemplate) 
   async addMember(actor) {
     if ( actor.type === "group" ) throw new Error("You may not add a group within a group.");
     if ( actor.pack ) throw new Error("You may only add Actors to the group which exist within the World.");
-    const memberIds = this._source.members;
-    if ( memberIds.includes(actor.id) ) return;
-    return this.parent.update({
-      system: {
-        members: memberIds.concat([actor.id])
-      }
-    });
+    if ( this.members.ids.has(actor.id) ) return;
+    const membersCollection = this.toObject().members;
+    membersCollection.push({ actor: actor.id });
+    return this.parent.update({"system.members": membersCollection});
   }
 
   /* -------------------------------------------- */
@@ -100,22 +138,17 @@ export default class GroupActor extends SystemDataModel.mixin(CurrencyTemplate) 
    * @returns {Promise<Actor5e>}      The updated group Actor
    */
   async removeMember(actor) {
-    const memberIds = foundry.utils.deepClone(this._source.members);
-
     // Handle user input
     let actorId;
     if ( typeof actor === "string" ) actorId = actor;
     else if ( actor instanceof Actor ) actorId = actor.id;
     else throw new Error("You must provide an Actor document or an actor ID to remove a group member");
-    if ( !memberIds.includes(actorId) ) throw new Error(`Actor id "${actorId}" is not a group member`);
+    if ( !this.members.ids.has(actorId) ) throw new Error(`Actor id "${actorId}" is not a group member`);
 
     // Remove the actor and update the parent document
-    memberIds.findSplice(id => id === actorId);
-    return this.parent.update({
-      system: {
-        members: memberIds
-      }
-    });
+    const membersCollection = this.toObject().members;
+    membersCollection.findSplice(member => member.actor === actorId);
+    return this.parent.update({"system.members": membersCollection});
   }
 
   /* -------------------------------------------- */
