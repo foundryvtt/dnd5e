@@ -27,7 +27,7 @@ export default class CurrencyManager extends FormApplication {
     const destinations = [];
     const actor = this.object instanceof Actor ? this.object : this.object.parent;
     if ( actor !== this.object ) destinations.push(actor);
-    else destinations.push(...(actor.system.transferDestinations ?? []));
+    destinations.push(...(actor.system.transferDestinations ?? []));
     destinations.push(...actor.itemTypes.container.filter(b => b !== this.object));
     return destinations;
   }
