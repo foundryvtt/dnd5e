@@ -12,10 +12,11 @@ import ItemTypeField from "./fields/item-type-field.mjs";
  * @mixes ActivatedEffectTemplate
  * @mixes ActionTemplate
  *
- * @property {string} requirements       Actor details required to use this feature.
- * @property {object} recharge           Details on how a feature can roll for recharges.
- * @property {number} recharge.value     Minimum number needed to roll on a d6 to recharge this feature.
- * @property {boolean} recharge.charged  Does this feature have a charge remaining?
+ * @property {Set<string>} properties               General properties of a feature item.
+ * @property {string} requirements                  Actor details required to use this feature.
+ * @property {object} recharge                      Details on how a feature can roll for recharges.
+ * @property {number} recharge.value                Minimum number needed to roll on a d6 to recharge this feature.
+ * @property {boolean} recharge.charged             Does this feature have a charge remaining?
  */
 export default class FeatData extends SystemDataModel.mixin(
   ItemDescriptionTemplate, ItemTypeTemplate, ActivatedEffectTemplate, ActionTemplate
@@ -24,6 +25,9 @@ export default class FeatData extends SystemDataModel.mixin(
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
       type: new ItemTypeField({}, { label: "DND5E.ItemFeatureType" }),
+      properties: new foundry.data.fields.SetField(new foundry.data.fields.StringField(), {
+        label: "DND5E.ItemFeatureProperties"
+      }),
       requirements: new foundry.data.fields.StringField({required: true, nullable: true, label: "DND5E.Requirements"}),
       recharge: new foundry.data.fields.SchemaField({
         value: new foundry.data.fields.NumberField({
