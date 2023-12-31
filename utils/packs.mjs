@@ -72,9 +72,10 @@ function packageCommand() {
  * @param {object} data                           Data for a single entry to clean.
  * @param {object} [options={}]
  * @param {boolean} [options.clearSourceId=true]  Should the core sourceId flag be deleted.
+ * @param {number} [options.ownership=0]          Value to reset default ownership to.
  */
-function cleanPackEntry(data, { clearSourceId=true }={}) {
-  if ( data.ownership ) data.ownership = { default: 0 };
+function cleanPackEntry(data, { clearSourceId=true, ownership=0 }={}) {
+  if ( data.ownership ) data.ownership = { default: ownership };
   if ( clearSourceId ) delete data.flags?.core?.sourceId;
   delete data.flags?.importSource;
   delete data.flags?.exportSource;
@@ -106,6 +107,7 @@ function cleanPackEntry(data, { clearSourceId=true }={}) {
 
   if ( data.effects ) data.effects.forEach(i => cleanPackEntry(i, { clearSourceId: false }));
   if ( data.items ) data.items.forEach(i => cleanPackEntry(i, { clearSourceId: false }));
+  if ( data.pages ) data.pages.forEach(i => cleanPackEntry(i, { ownership: -1 }));
   if ( data.system?.description?.value ) data.system.description.value = cleanString(data.system.description.value);
   if ( data.label ) data.label = cleanString(data.label);
   if ( data.name ) data.name = cleanString(data.name);
