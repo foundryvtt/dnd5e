@@ -23,6 +23,9 @@ export default class ContainerData extends SystemDataModel.mixin(
   /** @inheritdoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
+      properties: new foundry.data.fields.SetField(new foundry.data.fields.StringField(), {
+        label: "DND5E.ItemContainerProperties"
+      }),
       capacity: new foundry.data.fields.SchemaField({
         type: new foundry.data.fields.StringField({
           required: true, initial: "weight", blank: false, label: "DND5E.ItemContainerCapacityType"

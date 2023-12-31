@@ -985,8 +985,18 @@ preLocalize("itemProperties", { keys: ["label", "abbr"], sort: true });
  * @enum {object}
  */
 DND5E.validProperties = {
+  backpack: new Set([
+    "mgc"
+  ]),
+  equipment: new Set([
+    "concentration",
+    "mgc"
+  ]),
   feat: new Set([
     "concentration",
+    "mgc"
+  ]),
+  loot: new Set([
     "mgc"
   ]),
   weapon: new Set([
@@ -1014,6 +1024,10 @@ DND5E.validProperties = {
     "material",
     "concentration",
     "ritual"
+  ]),
+  tool: new Set([
+    "concentration",
+    "mgc"
   ]),
   consumable: new Set([
     "ada",
