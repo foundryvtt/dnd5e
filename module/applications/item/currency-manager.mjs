@@ -1,3 +1,5 @@
+import { filteredKeys } from "../../utils.mjs";
+
 /**
  * Application for performing currency conversions & transfers.
  */
@@ -102,8 +104,8 @@ export default class CurrencyManager extends FormApplication {
   _validateForm() {
     const data = foundry.utils.expandObject(this._getSubmitData());
     let valid = true;
-    if ( !Object.values(data.amount ?? {}).some(v => v > 0) ) valid = false;
-    if ( !("destination" in data) ) valid = false;
+    if ( !Object.values(data.amount ?? {}).some(v => v) ) valid = false;
+    if ( !filteredKeys(data.destination ?? {}).length ) valid = false;
     this.form.querySelector('button[name="transfer"]').disabled = !valid;
   }
 
@@ -117,8 +119,8 @@ export default class CurrencyManager extends FormApplication {
         await this.constructor.convertCurrency(this.object);
         break;
       case "transfer":
-        const destination = this.transferDestinations.find(d => d.id === data.destination);
-        await this.constructor.transferCurrency(this.object, destination, data.amount);
+        const destinations = this.transferDestinations.filter(d => data.destination[d.id]);
+        await this.constructor.transferCurrency(this.object, destinations, data.amount);
         break;
     }
     this.close();
@@ -163,23 +165,38 @@ export default class CurrencyManager extends FormApplication {
   /**
    * Transfer currency between one document and another.
    * @param {Actor5e|Item5e} origin       Document from which to move the currency.
-   * @param {Actor5e|Item5e} destination  Document that should receive the currency.
+   * @param {Document[]} destinations     Documents that should receive the currency.
    * @param {object[]} amounts            Amount of each denomination to transfer.
    * @returns {Promise}
    */
-  static async transferCurrency(origin, destination, amounts) {
-    if ( !destination ) return;
+  static async transferCurrency(origin, destinations, amounts) {
+    if ( !destinations.length ) return;
 
     const originUpdates = {};
-    const destinationUpdates = {};
-    for ( let [key, amount] of Object.entries(amounts) ) {
-      if ( !amount ) continue;
-      amount = Math.clamped(amount, -destination.system.currency[key], origin.system.currency[key]);
-      originUpdates[`system.currency.${key}`] = origin.system.currency[key] - amount;
-      destinationUpdates[`system.currency.${key}`] = destination.system.currency[key] + amount;
+    let remainingDestinations = destinations.length;
+    for ( const destination of destinations ) {
+      const destinationUpdates = {};
+
+      for ( let [key, amount] of Object.entries(amounts) ) {
+        if ( !amount ) continue;
+        amount = Math.clamped(
+          // Divide amount between remaining destinations
+          Math.floor(amount / remainingDestinations),
+          // Ensure negative amounts aren't more than is contained in destination
+          -destination.system.currency[key],
+          // Ensure positive amounts aren't more than is contained in origin
+          origin.system.currency[key]
+        );
+        amounts[key] -= amount;
+        originUpdates[`system.currency.${key}`] ??= origin.system.currency[key];
+        originUpdates[`system.currency.${key}`] -= amount;
+        destinationUpdates[`system.currency.${key}`] = destination.system.currency[key] + amount;
+      }
+
+      await destination.update(destinationUpdates);
+      remainingDestinations -= 1;
     }
 
     await origin.update(originUpdates);
-    return destination.update(destinationUpdates);
   }
 }
