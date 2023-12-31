@@ -1648,6 +1648,7 @@ preLocalize("weaponTypes");
 /**
  * A subset of weapon properties that determine the physical characteristics of the weapon.
  * These properties are used for determining physical resistance bypasses.
+ * @deprecated
  * @enum {string}
  */
 DND5E.physicalWeaponProperties = {
@@ -1661,6 +1662,7 @@ preLocalize("physicalWeaponProperties", { sort: true });
 
 /**
  * The set of weapon property flags which can exist on a weapon.
+ * @deprecated
  * @enum {string}
  */
 DND5E.weaponProperties = {
