@@ -9,7 +9,7 @@ export default class CurrencyManager extends FormApplication {
       classes: ["dnd5e", "currency-manager"],
       tabs: [{navSelector: "nav", contentSelector: ".sheet-content", initial: "transfer"}],
       template: "systems/dnd5e/templates/apps/currency-manager.hbs",
-      title: "DND5E.CurrencyManage",
+      title: "DND5E.CurrencyManager.Title",
       width: 350,
       height: "auto"
     });
@@ -27,6 +27,7 @@ export default class CurrencyManager extends FormApplication {
     const destinations = [];
     const actor = this.object instanceof Actor ? this.object : this.object.parent;
     if ( actor !== this.object ) destinations.push(actor);
+    destinations.push(...(actor.system.transferDestinations ?? []));
     destinations.push(...actor.itemTypes.container.filter(b => b !== this.object));
     return destinations;
   }
@@ -39,9 +40,17 @@ export default class CurrencyManager extends FormApplication {
   getData(options={}) {
     const context = super.getData(options);
 
+    const icons = {
+      container: '<dnd5e-icon class="fa-fw" src="systems/dnd5e/icons/svg/backpack.svg"></dnd5e-icon>',
+      group: '<i class="fa-solid fa-people-group"></i>',
+      vehicle: '<i class="fa-solid fa-sailboat"></i>'
+    };
+
     context.CONFIG = CONFIG.DND5E;
     context.currency = this.object.system.currency;
-    context.destinations = this.transferDestinations;
+    context.destinations = this.transferDestinations.map(doc => ({
+      doc, icon: icons[doc.type] ?? '<i class="fa-solid fa-fw fa-user"></i>'
+    }));
 
     return context;
   }
@@ -62,9 +71,18 @@ export default class CurrencyManager extends FormApplication {
 
   /* -------------------------------------------- */
 
+  /** @inheritDoc */
+  _onChangeInput(event) {
+    super._onChangeInput(event);
+    this._validateForm();
+  }
+
+  /* -------------------------------------------- */
+
   /**
    * Handle setting the transfer amount based on the buttons.
    * @param {PointerEvent} event  Triggering click event.
+   * @protected
    */
   _onSetTransferValue(event) {
     for ( let [key, value] of Object.entries(this.object.system.currency) ) {
@@ -72,6 +90,21 @@ export default class CurrencyManager extends FormApplication {
       const input = this.form.querySelector(`[name="amount.${key}"]`);
       if ( input && value ) input.value = value;
     }
+    this._validateForm();
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Ensure the transfer form is in a valid form to be submitted.
+   * @protected
+   */
+  _validateForm() {
+    const data = foundry.utils.expandObject(this._getSubmitData());
+    let valid = true;
+    if ( !Object.values(data.amount ?? {}).some(v => v > 0) ) valid = false;
+    if ( !("destination" in data) ) valid = false;
+    this.form.querySelector('button[name="transfer"]').disabled = !valid;
   }
 
   /* -------------------------------------------- */

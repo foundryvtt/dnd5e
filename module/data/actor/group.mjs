@@ -1,4 +1,4 @@
-import SystemDataModel from "../abstract.mjs";
+import { ActorDataModel } from "../abstract.mjs";
 import CurrencyTemplate from "../shared/currency.mjs";
 
 const { ArrayField, ForeignDocumentField, HTMLField, NumberField, SchemaField, StringField } = foundry.data.fields;
@@ -35,7 +35,7 @@ const { ArrayField, ForeignDocumentField, HTMLField, NumberField, SchemaField, S
  *  }
  * });
  */
-export default class GroupActor extends SystemDataModel.mixin(CurrencyTemplate) {
+export default class GroupActor extends ActorDataModel.mixin(CurrencyTemplate) {
   /** @inheritdoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
@@ -58,6 +58,15 @@ export default class GroupActor extends SystemDataModel.mixin(CurrencyTemplate) 
         })
       }, {label: "DND5E.Attributes"})
     });
+  }
+
+  /* -------------------------------------------- */
+  /*  Properties                                  */
+  /* -------------------------------------------- */
+
+  /** @override */
+  get transferDestinations() {
+    return this.members.map(m => m.actor).filter(a => a.isOwner);
   }
 
   /* -------------------------------------------- */

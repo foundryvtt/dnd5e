@@ -58,12 +58,11 @@ export default class IconElement extends HTMLElement {
       this.constructor.#stylesheet.replaceSync(`
         :host {
           display: contents;
-          height: 1em;
         }
         svg {
           fill: var(--icon-fill, #000);
-          width: var(--icon-size, 1em);
-          height: var(--icon-size, 1em);
+          width: var(--icon-width, var(--icon-size, 1em));
+          height: var(--icon-height, var(--icon-size, 1em));
         }
       `);
     }
