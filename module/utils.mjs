@@ -164,6 +164,7 @@ export async function preloadHandlebarsTemplates() {
     // Shared Partials
     "systems/dnd5e/templates/shared/active-effects.hbs",
     "systems/dnd5e/templates/shared/inventory.hbs",
+    "systems/dnd5e/templates/shared/inventory2.hbs",
     "systems/dnd5e/templates/apps/parts/trait-list.hbs",
 
     // Actor Sheet Partials

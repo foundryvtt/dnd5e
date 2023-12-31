@@ -299,6 +299,8 @@
   /*  Sheet Body                        */
   /* ---------------------------------- */
 
+  .tab-details .tab-body { padding-top: 56px; }
+
   .sheet-body {
     position: relative;
     transform: translateZ(1px);
@@ -685,8 +687,6 @@
 
     /* Tabbed Content */
     .tab-body {
-      padding-top: 56px;
-
       .col-2 {
         --skills-col-width: 260px;
         display: grid;
@@ -706,6 +706,8 @@
           align-items: start;
         }
       }
+
+      .tab:not(.details) { padding: .5rem; }
     }
 
     /* Skills, Tools, & Saving Throws */
@@ -720,7 +722,7 @@
           gap: .5rem;
           align-items: center;
           padding: .375rem;
-          border-bottom: 1px dotted #bbb;
+          border-bottom: var(--dnd5e-border-dotted);
 
           &:last-child { border: none; }
 
@@ -803,10 +805,10 @@
 
         > li {
           border-bottom: none;
-          border-top: 1px dotted #bbb;
+          border-top: var(--dnd5e-border-dotted);
 
           &:nth-child(1), &:nth-child(2) { border-top: none; }
-          &:last-child { border-top: 1px dotted #bbb; }
+          &:last-child { border-top: var(--dnd5e-border-dotted); }
         }
 
       }
@@ -1098,6 +1100,16 @@
 
   form.locked {
     .sheet-body .sidebar .card .meter.sectioned > .hit-points { cursor: default; }
+  }
+
+  /* ---------------------------------- */
+  /*  Accessibility                     */
+  /* ---------------------------------- */
+
+  @media (prefers-reduced-motion) {
+    .sheet-body .main-content,
+    .sheet-body .sidebar,
+    .sheet-body .sidebar .card .death-tray { transition: unset; }
   }
 }
 

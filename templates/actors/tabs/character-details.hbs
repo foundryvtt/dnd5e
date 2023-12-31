@@ -138,7 +138,7 @@
                 {{#with creatureType}}
                 <div class="pill-lg texture type">
                     <div class="gold-icon creature-type {{ class }}" style="background-image: url('{{ icon }}');"></div>
-                    <div class="name">
+                    <div class="name name-stacked">
                         <span class="title">{{ localize title }}</span>
                         <span class="subtitle">{{ subtitle }}</span>
                     </div>
@@ -156,7 +156,7 @@
                     {{#if system.details.race.img}}
                     <img class="gold-icon" src="{{ system.details.race.img }}" alt="{{ system.details.race.name }}">
                     {{/if}}
-                    <div class="name">
+                    <div class="name name-stacked">
                         <span class="title">{{ system.details.race.name }}</span>
                         {{#if editable}}
                         <select class="actor-size unselect" name="system.traits.size">
@@ -186,7 +186,7 @@
                     <img class="gold-icon" src="{{ system.details.background.img }}"
                          alt="{{ system.details.background.name }}">
                     {{/if}}
-                    <div class="name">
+                    <div class="name name-stacked">
                         <span class="title">{{ system.details.background.name }}</span>
                     </div>
                     {{#if editable}}

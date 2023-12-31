@@ -272,8 +272,10 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
     if ( attributes.senses.special ) attributes.senses.special.split(";").forEach((v, i) => {
       context.senses[`custom${i + 1}`] = { label: v.trim() };
     });
-
     if ( foundry.utils.isEmpty(context.senses) ) delete context.senses;
+
+    // Inventory
+    this._prepareItems(context);
 
     return context;
   }
@@ -312,6 +314,44 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
+  _prepareItems(context) {
+    super._prepareItems(context);
+    for ( const [k, v] of Object.entries(context.inventory) ) {
+      if ( k === "container" ) {
+        context.containers = v.items;
+        v.items = [];
+      }
+
+      if ( !v.items.length ) {
+        delete context.inventory[k];
+        continue;
+      }
+
+      for ( const item of v.items ) {
+        const ctx = context.itemContext[item.id];
+        if ( ctx.attunement ) {
+          ctx.attunement.applicable = true;
+          ctx.attunement.disabled = !item.isOwner;
+          ctx.attunement.cls = ctx.attunement.cls === "attuned" ? "active" : "";
+        }
+        else ctx.attunement = { applicable: false };
+
+        if ( "equipped" in item.system ) {
+          ctx.equip = {
+            applicable: true,
+            cls: item.system.equipped ? "active" : "",
+            title: `DND5E.${item.system.equipped ? "Equipped" : "Unequipped"}`,
+            disabled: !item.isOwner
+          };
+        }
+        else ctx.equip = { applicable: false };
+      }
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
   activateListeners(html) {
     super.activateListeners(html);
     html.find(".pips[data-prop]").on("click", this._onTogglePip.bind(this));
@@ -320,7 +360,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
     html.find("[data-item-id][data-action]").on("click", this._onItemAction.bind(this));
     html.find(".rollable:is(.saving-throw, .ability-check)").on("click", this._onRollAbility.bind(this));
     html.find("proficiency-cycle").on("change", this._onChangeInput.bind(this));
-    html.find(".sidebar .collapser").on("click", this._toggleSidebar.bind(this));
+    html.find(".sidebar .collapser").on("click", this._onToggleSidebar.bind(this));
 
     if ( this.isEditable ) {
       html.find(".meter > .hit-points").on("click", event => this._toggleEditHP(event, true));
@@ -370,6 +410,8 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
     super._onChangeTab(event, tabs, active);
     this.form.className = this.form.className.replace(/tab-\w+/g, "");
     this.form.classList.add(`tab-${active}`);
+    const sidebarCollapsed = game.user.getFlag("dnd5e", `sheetPrefs.character.tabs.${active}.collapseSidebar`);
+    if ( sidebarCollapsed !== undefined ) this._toggleSidebar(sidebarCollapsed);
   }
 
   /* -------------------------------------------- */
@@ -471,21 +513,33 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
   /* -------------------------------------------- */
 
   /**
-   * Toggle the sidebar collapsed state.
-   * @param {PointerEvent} event  The triggering event.
+   * Handle the user toggling the sidebar collapsed state.
    * @protected
    */
-  _toggleSidebar(event) {
-    const target = event.currentTarget;
-    const icon = target.querySelector("i");
-    this.form.classList.toggle("collapsed");
-    const sidebarCollapsed = this.form.classList.contains("collapsed");
-    target.dataset.tooltip = `JOURNAL.View${sidebarCollapsed ? "Expand" : "Collapse" }`;
-    target.setAttribute("aria-label", game.i18n.localize(target.dataset.tooltip));
-    icon.classList.remove("fa-caret-left", "fa-caret-right");
-    icon.classList.add(`fa-caret-${sidebarCollapsed ? "right" : "left"}`);
+  _onToggleSidebar() {
+    const collapsed = this._toggleSidebar();
     const activeTab = this._tabs?.[0]?.active ?? "details";
-    game.user.setFlag("dnd5e", `sheetPrefs.character.tabs.${activeTab}.collapseSidebar`, sidebarCollapsed);
+    game.user.setFlag("dnd5e", `sheetPrefs.character.tabs.${activeTab}.collapseSidebar`, collapsed);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Toggle the sidebar collapsed state.
+   * @param {boolean} [collapsed]  Force a particular collapsed state.
+   * @returns {boolean}            The new collapsed state.
+   * @protected
+   */
+  _toggleSidebar(collapsed) {
+    this.form.classList.toggle("collapsed", collapsed);
+    collapsed = this.form.classList.contains("collapsed");
+    const collapser = this.form.querySelector(".sidebar .collapser");
+    const icon = collapser.querySelector("i");
+    collapser.dataset.tooltip = `JOURNAL.View${collapsed ? "Expand" : "Collapse"}`;
+    collapser.setAttribute("aria-label", game.i18n.localize(collapser.dataset.tooltip));
+    icon.classList.remove("fa-caret-left", "fa-caret-right");
+    icon.classList.add(`fa-caret-${collapsed ? "right" : "left"}`);
+    return collapsed;
   }
 
   /* -------------------------------------------- */

@@ -106,23 +106,7 @@
       height: 32px;
     }
 
-    .name {
-      display: flex;
-      flex-direction: column;
-      flex: 1;
-
-      .title {
-        font-family: var(--dnd5e-font-roboto-slab);
-        font-size: var(--font-size-14);
-        font-weight: bold;
-      }
-
-      .subtitle {
-        font-family: var(--dnd5e-font-roboto);
-        font-size: var(--font-size-10);
-        color: var(--color-text-dark-5);
-      }
-    }
+    .name { flex: 1; }
   }
 
   .pills {
@@ -157,6 +141,23 @@
     border: 2px solid var(--dnd5e-color-gold);
     box-shadow: 0 0 4px var(--dnd5e-shadow-45);
     border-radius: 0;
+  }
+
+  .name-stacked {
+    display: flex;
+    flex-direction: column;
+
+    .title {
+      font-family: var(--dnd5e-font-roboto-slab);
+      font-size: var(--font-size-14);
+      font-weight: bold;
+    }
+
+    .subtitle {
+      font-family: var(--dnd5e-font-roboto);
+      font-size: var(--font-size-10);
+      color: var(--color-text-dark-5);
+    }
   }
 
   /* ---------------------------------- */

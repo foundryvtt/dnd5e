@@ -16,8 +16,16 @@ export default class InventoryElement extends HTMLElement {
       }
     }
 
-    for ( const input of this.querySelectorAll("input") ) {
+    for ( const input of this.querySelectorAll('input[type="number"]') ) {
       input.addEventListener("change", this._onChangeInput.bind(this));
+    }
+
+    for ( const input of this.querySelectorAll('input[inputmode="numeric"]') ) {
+      input.addEventListener("change", this._onChangeInputDelta.bind(this));
+    }
+
+    for ( const button of this.querySelectorAll(".adjustment-button") ) {
+      button.addEventListener("click", this._onAdjustInput.bind(this));
     }
 
     for ( const control of this.querySelectorAll(".item-action[data-action]") ) {
@@ -26,13 +34,17 @@ export default class InventoryElement extends HTMLElement {
       });
     }
 
-    new ContextMenu(this, "[data-item-id]", [], {onOpen: element => {
-      const item = this.getItem(element.dataset.itemId);
-      // Parts of ContextMenu doesn't play well with promises, so don't show menus for containers in packs
-      if ( !item || (item instanceof Promise) ) return;
-      ui.context.menuItems = this._getContextOptions(item);
-      Hooks.call("dnd5e.getItemContextOptions", item, ui.context.menuItems);
-    }});
+    for ( const control of this.querySelectorAll("[data-context-menu]") ) {
+      control.addEventListener("click", event => {
+        event.preventDefault();
+        event.stopPropagation();
+        event.currentTarget.closest("[data-item-id]").dispatchEvent(new PointerEvent("contextmenu", {
+          view: window, bubbles: true, cancelable: true
+        }));
+      });
+    }
+
+    new ContextMenu(this, "[data-item-id]", [], {onOpen: this._onOpenContextMenu.bind(this)});
   }
 
   /* -------------------------------------------- */
@@ -165,7 +177,8 @@ export default class InventoryElement extends HTMLElement {
         name: isAttuned ? "DND5E.ContextMenuActionUnattune" : "DND5E.ContextMenuActionAttune",
         icon: "<i class='fas fa-sun fa-fw'></i>",
         condition: () => item.isOwner,
-        callback: li => this._onAction(li[0], "attune")
+        callback: li => this._onAction(li[0], "attune"),
+        group: "state"
       });
     }
 
@@ -174,7 +187,8 @@ export default class InventoryElement extends HTMLElement {
       name: item.system.equipped ? "DND5E.ContextMenuActionUnequip" : "DND5E.ContextMenuActionEquip",
       icon: "<i class='fas fa-shield-alt fa-fw'></i>",
       condition: () => item.isOwner,
-      callback: li => this._onAction(li[0], "equip")
+      callback: li => this._onAction(li[0], "equip"),
+      group: "state"
     });
 
     // Toggle Prepared State
@@ -182,7 +196,17 @@ export default class InventoryElement extends HTMLElement {
       name: item.system?.preparation?.prepared ? "DND5E.ContextMenuActionUnprepare" : "DND5E.ContextMenuActionPrepare",
       icon: "<i class='fas fa-sun fa-fw'></i>",
       condition: () => item.isOwner,
-      callback: li => this._onAction(li[0], "prepare")
+      callback: li => this._onAction(li[0], "prepare"),
+      group: "state"
+    });
+
+    // Identification
+    if ( "identified" in item.system ) options.push({
+      name: "DND5E.Identify",
+      icon: '<i class="fas fa-magnifying-glass"></i>',
+      condition: () => item.isOwner && !item.system.identified,
+      callback: () => item.update({ "system.identified": true }),
+      group: "state"
     });
 
     return options;
@@ -214,6 +238,49 @@ export default class InventoryElement extends HTMLElement {
   /* -------------------------------------------- */
 
   /**
+   * Handle input changes to numeric form fields, allowing them to accept delta-typed inputs.
+   * @param {Event} event  Triggering event.
+   * @protected
+   */
+  async _onChangeInputDelta(event) {
+    const input = event.target;
+    const itemId = input.closest("[data-item-id]")?.dataset.itemId;
+    const item = await this.getItem(itemId);
+    if ( !item ) return;
+    let value = input.value;
+    if ( ["+", "-"].includes(value[0]) ) {
+      const delta = parseFloat(value);
+      value = Number(foundry.utils.getProperty(item, input.dataset.name)) + delta;
+    }
+    else if ( value[0] === "=" ) value = Number(value.slice(1));
+    if ( isNaN(value) ) return;
+    input.value = value;
+    item.update({ [input.dataset.name]: value });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle incrementing or decrementing a numeric input.
+   * @param {PointerEvent} event  The triggering event.
+   * @protected
+   */
+  _onAdjustInput(event) {
+    const button = event.currentTarget;
+    const { action } = button.dataset;
+    const input = button.parentElement.querySelector("input");
+    const min = input.min ? Number(input.min) : -Infinity;
+    const max = input.max ? Number(input.max) : Infinity;
+    let value = Number(input.value);
+    if ( isNaN(value) ) return;
+    value += action === "increase" ? 1 : -1;
+    input.value = Math.clamped(value, min, max);
+    input.dispatchEvent(new Event("change"));
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Handle item actions.
    * @param {Element} target  Button or context menu entry that triggered this action.
    * @param {string} action   Action being triggered.
@@ -234,6 +301,7 @@ export default class InventoryElement extends HTMLElement {
 
     switch ( action ) {
       case "attune":
+        const isAttuned = item.system.attunement === CONFIG.DND5E.attunementTypes.ATTUNED;
         return item.update({
           "system.attunement": CONFIG.DND5E.attunementTypes[isAttuned ? "REQUIRED" : "ATTUNED"]
         });
@@ -310,5 +378,20 @@ export default class InventoryElement extends HTMLElement {
       summary.slideDown(200);
       this._app._expanded.add(item.id);
     }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle opening the context menu.
+   * @param {HTMLElement} element  The element the context menu was triggered on.
+   * @protected
+   */
+  _onOpenContextMenu(element) {
+    const item = this.getItem(element.closest("[data-item-id]")?.dataset.itemId);
+    // Parts of ContextMenu doesn't play well with promises, so don't show menus for containers in packs
+    if ( !item || (item instanceof Promise) ) return;
+    ui.context.menuItems = this._getContextOptions(item);
+    Hooks.call("dnd5e.getItemContextOptions", item, ui.context.menuItems);
   }
 }
