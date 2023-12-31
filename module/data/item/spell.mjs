@@ -36,7 +36,9 @@ export default class SpellData extends SystemDataModel.mixin(
         required: true, integer: true, initial: 1, min: 0, label: "DND5E.SpellLevel"
       }),
       school: new foundry.data.fields.StringField({required: true, label: "DND5E.SpellSchool"}),
-      properties: new foundry.data.fields.SetField(new foundry.data.fields.StringField()),
+      properties: new foundry.data.fields.SetField(new foundry.data.fields.StringField(), {
+        label: "DND5E.SpellComponents"
+      }),
       materials: new foundry.data.fields.SchemaField({
         value: new foundry.data.fields.StringField({required: true, label: "DND5E.SpellMaterialsDescription"}),
         consumed: new foundry.data.fields.BooleanField({required: true, label: "DND5E.SpellMaterialsConsumed"}),
