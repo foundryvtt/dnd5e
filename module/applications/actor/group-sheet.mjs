@@ -1,6 +1,6 @@
 import ActorMovementConfig from "./movement-config.mjs";
 import Item5e from "../../documents/item.mjs";
-import { ActorSheetMixin } from "./sheet-mixin.mjs";
+import {default as ActorSheetMixin} from "./sheet-mixin.mjs";
 
 /**
  * A character sheet for group-type Actors.

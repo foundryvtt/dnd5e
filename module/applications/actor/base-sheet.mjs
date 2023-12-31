@@ -21,7 +21,7 @@ import TraitSelector from "./trait-selector.mjs";
 import ProficiencyConfig from "./proficiency-config.mjs";
 import ToolSelector from "./tool-selector.mjs";
 import { simplifyBonus } from "../../utils.mjs";
-import { ActorSheetMixin } from "./sheet-mixin.mjs";
+import {default as ActorSheetMixin} from "./sheet-mixin.mjs";
 
 /**
  * Extend the basic ActorSheet class to suppose system-specific logic and functionality.
