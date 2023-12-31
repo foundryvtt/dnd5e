@@ -1137,7 +1137,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     }
 
     // Reliable Talent applies to any tool check we have full or better proficiency in
-    const reliableTalent = (prof.multiplier >= 1 && this.getFlag("dnd5e", "reliableTalent"));
+    const reliableTalent = (prof?.multiplier >= 1 && this.getFlag("dnd5e", "reliableTalent"));
 
     const flavor = game.i18n.format("DND5E.ToolPromptTitle", {tool: Trait.keyLabel(toolId, {trait: "tool"}) ?? ""});
     const rollData = foundry.utils.mergeObject({
