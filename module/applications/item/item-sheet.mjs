@@ -7,7 +7,7 @@ import Accordion from "../accordion.mjs";
 import SourceConfig from "../source-config.mjs";
 import ActiveEffect5e from "../../documents/active-effect.mjs";
 import * as Trait from "../../documents/actor/trait.mjs";
-import { filteredKeys } from "../../utils.mjs";
+import { filteredKeys, sortObjectEntries } from "../../utils.mjs";
 
 /**
  * Override and extend the core ItemSheet implementation to handle specific item types.
@@ -143,6 +143,7 @@ export default class ItemSheet5e extends ItemSheet {
         };
         return obj;
       }, {});
+      if ( item.type !== "spell" ) context.properties = sortObjectEntries(context.properties, "label");
     }
 
     // Special handling for specific item types
