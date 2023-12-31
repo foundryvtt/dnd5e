@@ -24,7 +24,7 @@
             <div class="destinations">
                 {{#each destinations}}
                 <label>
-                    <input type="radio" name="destination" value="{{doc.id}}">
+                    <input type="checkbox" name="destination.{{doc.id}}">
                     {{{icon}}} {{doc.name}}
                 </label>
                 {{else}}
