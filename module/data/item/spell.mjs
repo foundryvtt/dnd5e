@@ -140,13 +140,16 @@ export default class SpellData extends SystemDataModel.mixin(
   /**
    * Provide a backwards compatible getter for accessing `components`.
    * @deprecated since v2.5.
-   * @type {Set<string>}
+   * @type {object}
    */
   get components() {
     foundry.utils.logCompatibilityWarning(
-      "The `system.components` property has been deprecated in favor of a standardized \`system.properties\` property.",
+      "The `system.components` property has been deprecated in favor of a standardized `system.properties` property.",
       { since: "DnD5e 2.5", until: "DnD5e 2.7", once: true }
     );
-    return this.properties;
+    return this.properties.reduce((acc, p) => {
+      acc[p] = true;
+      return acc;
+    }, {});
   }
 }
