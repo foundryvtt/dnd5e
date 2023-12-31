@@ -309,7 +309,11 @@ export class ActorDataModel extends SystemDataModel {
    * @type {Actor5e[]}
    */
   get transferDestinations() {
-    return [];
+    const primaryParty = game.settings.get("dnd5e", "primaryParty")?.actor;
+    if ( !primaryParty?.system.members.ids.has(this.parent.id) ) return [];
+    const destinations = primaryParty.system.members.map(m => m.actor).filter(a => a.isOwner && a !== this.parent);
+    if ( primaryParty.isOwner ) destinations.unshift(primaryParty);
+    return destinations;
   }
 }
 
