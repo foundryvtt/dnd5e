@@ -1806,9 +1806,9 @@ export default class Item5e extends SystemDocumentMixin(Item) {
            * @function dnd5e.prePlaceTemplate
            * @memberof hookEvents
            * @param {Item5e} item                     Item for which the template is being placed.
-           * @returns {boolean}                       Explicitly return false to prevent the roll from being performed.
+           * @returns {boolean}                       Explicitly return false to prevent the template from being placed.
            */
-          if ( Hooks.call("dnd5e.prePlaceTemplate", this) === false ) break;
+          if ( Hooks.call("dnd5e.prePlaceTemplate", item) === false ) break;
           const template = dnd5e.canvas.AbilityTemplate.fromItem(item, {"flags.dnd5e.spellLevel": spellLevel});
 
           /**
@@ -1819,7 +1819,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
            * @param {AbilityTemplate} template   The template being placed.
            */
           if ( template ) {
-            Hooks.callAll("dnd5e.placeTemplate", this, template);
+            Hooks.callAll("dnd5e.placeTemplate", item, template);
             await template.drawPreview();
           }
         } catch(err) {
