@@ -477,59 +477,73 @@ DND5E.tokenHPColors = {
 
 /**
  * Default types of creatures.
- * *Note: Not pre-localized to allow for easy fetching of pluralized forms.*
- * @enum {{ label: string, [detectAlignment]: boolean }}
+ * @enum {{ label: string, plural: string, [detectAlignment]: boolean }}
  */
 DND5E.creatureTypes = {
   aberration: {
     label: "DND5E.CreatureAberration",
+    plural: "DND5E.CreatureAberrationPl",
     detectAlignment: true
   },
   beast: {
-    label: "DND5E.CreatureBeast"
+    label: "DND5E.CreatureBeast",
+    plural: "DND5E.CreatureBeastPl"
   },
   celestial: {
     label: "DND5E.CreatureCelestial",
+    plural: "DND5E.CreatureCelestialPl",
     detectAlignment: true
   },
   construct: {
-    label: "DND5E.CreatureConstruct"
+    label: "DND5E.CreatureConstruct",
+    plural: "DND5E.CreatureConstructPl"
   },
   dragon: {
-    label: "DND5E.CreatureDragon"
+    label: "DND5E.CreatureDragon",
+    plural: "DND5E.CreatureDragonPl"
   },
   elemental: {
     label: "DND5E.CreatureElemental",
+    plural: "DND5E.CreatureElementalPl",
     detectAlignment: true
   },
   fey: {
     label: "DND5E.CreatureFey",
+    plural: "DND5E.CreatureFeyPl",
     detectAlignment: true
   },
   fiend: {
     label: "DND5E.CreatureFiend",
+    plural: "DND5E.CreatureFiendPl",
     detectAlignment: true
   },
   giant: {
-    label: "DND5E.CreatureGiant"
+    label: "DND5E.CreatureGiant",
+    plural: "DND5E.CreatureGiantPl"
   },
   humanoid: {
-    label: "DND5E.CreatureHumanoid"
+    label: "DND5E.CreatureHumanoid",
+    plural: "DND5E.CreatureHumanoidPl"
   },
   monstrosity: {
-    label: "DND5E.CreatureMonstrosity"
+    label: "DND5E.CreatureMonstrosity",
+    plural: "DND5E.CreatureMonstrosityPl"
   },
   ooze: {
-    label: "DND5E.CreatureOoze"
+    label: "DND5E.CreatureOoze",
+    plural: "DND5E.CreatureOozePl"
   },
   plant: {
-    label: "DND5E.CreaturePlant"
+    label: "DND5E.CreaturePlant",
+    plural: "DND5E.CreaturePlantPl"
   },
   undead: {
     label: "DND5E.CreatureUndead",
+    plural: "DND5E.CreatureUndeadPl",
     detectAlignment: true
   }
 };
+preLocalize("creatureTypes", { keys: ["label", "plural"], sort: true });
 patchConfig("creatureTypes", "label", { since: "DnD5e 2.5", until: "DnD5e 2.7" });
 
 /* -------------------------------------------- */
