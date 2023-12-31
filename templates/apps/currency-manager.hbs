@@ -23,9 +23,12 @@
             </div>
             <div class="destinations">
                 {{#each destinations}}
-                <label><input type="radio" name="destination" value="{{id}}"> {{name}}</label>
+                <label>
+                    <input type="radio" name="destination" value="{{doc.id}}">
+                    {{{icon}}} {{doc.name}}
+                </label>
                 {{else}}
-                {{localize "DND5E.CurrencyManager.Transfer.NoDestinations"}}
+                <p class="no-desinations">{{localize "DND5E.CurrencyManager.Transfer.NoDestinations"}}</p>
                 {{/each}}
             </div>
             <button type="submit" name="transfer" disabled>{{localize "DND5E.CurrencyManager.Transfer.Action"}}</button>

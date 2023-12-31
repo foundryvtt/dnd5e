@@ -27,6 +27,7 @@ export default class CurrencyManager extends FormApplication {
     const destinations = [];
     const actor = this.object instanceof Actor ? this.object : this.object.parent;
     if ( actor !== this.object ) destinations.push(actor);
+    else destinations.push(...(actor.system.transferDestinations ?? []));
     destinations.push(...actor.itemTypes.container.filter(b => b !== this.object));
     return destinations;
   }
@@ -39,9 +40,17 @@ export default class CurrencyManager extends FormApplication {
   getData(options={}) {
     const context = super.getData(options);
 
+    const icons = {
+      container: '<dnd5e-icon class="fa-fw" src="systems/dnd5e/icons/svg/backpack.svg"></dnd5e-icon>',
+      group: '<i class="fa-solid fa-people-group"></i>',
+      vehicle: '<i class="fa-solid fa-sailboat"></i>'
+    };
+
     context.CONFIG = CONFIG.DND5E;
     context.currency = this.object.system.currency;
-    context.destinations = this.transferDestinations;
+    context.destinations = this.transferDestinations.map(doc => ({
+      doc, icon: icons[doc.type] ?? '<i class="fa-solid fa-fw fa-user"></i>'
+    }));
 
     return context;
   }

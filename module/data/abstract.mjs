@@ -296,6 +296,26 @@ export default class SystemDataModel extends foundry.abstract.DataModel {
 /* -------------------------------------------- */
 
 /**
+ * Variant of the SystemDataModel with some extra actor-specific handling.
+ */
+export class ActorDataModel extends SystemDataModel {
+
+  /* -------------------------------------------- */
+  /*  Properties                                  */
+  /* -------------------------------------------- */
+
+  /**
+   * Other actors that are available for currency transfers from this actor.
+   * @type {Actor5e[]}
+   */
+  get transferDestinations() {
+    return [];
+  }
+}
+
+/* -------------------------------------------- */
+
+/**
  * Data Model variant that does not export fields with an `undefined` value during `toObject(true)`.
  */
 export class SparseDataModel extends foundry.abstract.DataModel {
