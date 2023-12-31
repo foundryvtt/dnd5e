@@ -515,18 +515,26 @@
 "DND5E.CurrencyAbbrGP": "gp",
 "DND5E.CurrencyAbbrPP": "pp",
 "DND5E.CurrencyAbbrSP": "sp",
-"DND5E.CurrencyActionConvert": "Convert",
-"DND5E.CurrencyActionTransfer": "Transfer",
-"DND5E.CurrencyActionTransferAll": "All",
-"DND5E.CurrencyActionTransferHalf": "Half",
 "DND5E.CurrencyCP": "Copper",
-"DND5E.CurrencyConvert": "Convert All Currency",
-"DND5E.CurrencyConvertHint": "Convert all carried currency to the highest possible denomination to reduce the amount of coinage carried by the character. Be wary, this action cannot be undone.",
 "DND5E.CurrencyEP": "Electrum",
 "DND5E.CurrencyGP": "Gold",
-"DND5E.CurrencyManage": "Manage Currency",
 "DND5E.CurrencyPP": "Platinum",
 "DND5E.CurrencySP": "Silver",
+"DND5E.CurrencyManager": {
+  "Title": "Manage Currency",
+  "Convert": {
+    "Label": "Convert",
+    "Action": "Convert All Currency",
+    "Hint": "Convert all carried currency to the highest possible denomination to reduce the amount of coinage carried by the character. Be wary, this action cannot be undone."
+  },
+  "Transfer": {
+    "Label": "Transfer",
+    "Action": "Transfer Selected",
+    "All": "All",
+    "Half": "Half",
+    "NoDestinations": "No Destinations Available"
+  }
+},
 "DND5E.DamImm": "Damage Immunities",
 "DND5E.DamMod": "Damage Modification",
 "DND5E.DamRes": "Damage Resistances",
