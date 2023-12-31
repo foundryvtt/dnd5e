@@ -932,6 +932,133 @@ preLocalize("featureTypes.class.subtypes", { sort: true });
 /* -------------------------------------------- */
 
 /**
+ * The various properties of all item types.
+ * @enum {object}
+ */
+DND5E.itemProperties = {
+  ada: {
+    label: "DND5E.Item.PropertyAdamantine",
+    isPhysical: true
+  },
+  amm: {
+    label: "DND5E.Item.PropertyAmmunition"
+  },
+  concentration: {
+    label: "DND5E.Item.PropertyConcentration",
+    abbr: "DND5E.ConcentrationAbbr",
+    isTag: true
+  },
+  fin: {
+    label: "DND5E.Item.PropertyFinesse"
+  },
+  fir: {
+    label: "DND5E.Item.PropertyFirearm"
+  },
+  foc: {
+    label: "DND5E.Item.PropertyFocus"
+  },
+  hvy: {
+    label: "DND5E.Item.PropertyHeavy"
+  },
+  lgt: {
+    label: "DND5E.Item.PropertyLight"
+  },
+  lod: {
+    label: "DND5E.Item.PropertyLoading"
+  },
+  material: {
+    label: "DND5E.Item.PropertyMaterial"
+  },
+  mgc: {
+    label: "DND5E.Item.PropertyMagical",
+    isPhysical: true
+  },
+  rch: {
+    label: "DND5E.Item.PropertyReach"
+  },
+  rel: {
+    label: "DND5E.Item.PropertyReload"
+  },
+  ret: {
+    label: "DND5E.Item.PropertyReturning"
+  },
+  ritual: {
+    label: "DND5E.Item.PropertyRitual",
+    abbr: "DND5E.RitualAbbr",
+    isTag: true
+  },
+  sil: {
+    label: "DND5E.Item.PropertySilvered",
+    isPhysical: true
+  },
+  somatic: {
+    label: "DND5E.Item.PropertySomatic"
+  },
+  spc: {
+    label: "DND5E.Item.PropertySpecial"
+  },
+  thr: {
+    label: "DND5E.Item.PropertyThrown"
+  },
+  two: {
+    label: "DND5E.Item.PropertyTwoHanded"
+  },
+  ver: {
+    label: "DND5E.Item.PropertyVersatile"
+  },
+  vocal: {
+    label: "DND5E.Item.PropertyVerbal"
+  }
+};
+preLocalize("itemProperties", { keys: ["label", "abbr"], sort: true });
+
+/* -------------------------------------------- */
+
+/**
+ * The various properties of an item per item type.
+ * @enum {object}
+ */
+DND5E.validProperties = {
+  feat: new Set([
+    "concentration",
+    "mgc"
+  ]),
+  weapon: new Set([
+    "ada",
+    "amm",
+    "fin",
+    "fir",
+    "foc",
+    "hvy",
+    "lgt",
+    "lod",
+    "mgc",
+    "rch",
+    "rel",
+    "ret",
+    "sil",
+    "spc",
+    "thr",
+    "two",
+    "ver"
+  ]),
+  spell: new Set([
+    "vocal",
+    "somatic",
+    "material",
+    "concentration",
+    "ritual"
+  ]),
+  consumable: new Set([
+    "ada",
+    "mgc",
+    "sil"
+  ])
+};
+
+/* -------------------------------------------- */
+
+/**
  * Configuration data for an item with the "loot" type.
  *
  * @typedef {object} LootTypeConfiguration

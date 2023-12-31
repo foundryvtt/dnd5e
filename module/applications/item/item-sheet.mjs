@@ -7,7 +7,7 @@ import Accordion from "../accordion.mjs";
 import EffectsElement from "../components/effects.mjs";
 import SourceConfig from "../source-config.mjs";
 import * as Trait from "../../documents/actor/trait.mjs";
-import { filteredKeys } from "../../utils.mjs";
+import { filteredKeys, sortObjectEntries } from "../../utils.mjs";
 
 /**
  * Override and extend the core ItemSheet implementation to handle specific item types.
@@ -142,12 +142,15 @@ export default class ItemSheet5e extends ItemSheet {
     });
     context.abilityConsumptionTargets = this._getItemConsumptionTargets();
 
-    if ( "properties" in item.system ) {
-      const validProperties = CONFIG.DND5E[item.type === "weapon" ? "weaponProperties" : "physicalWeaponProperties"];
-      context.properties = Object.entries(validProperties).reduce((obj, [k, label]) => {
-        obj[k] = { label, selected: item.system.properties.has(k) };
+    if ( ("properties" in item.system) && (item.type in CONFIG.DND5E.validProperties) ) {
+      context.properties = CONFIG.DND5E.validProperties[item.type].reduce((obj, k) => {
+        obj[k] = {
+          label: CONFIG.DND5E.itemProperties[k].label,
+          selected: item.system.properties.has(k)
+        };
         return obj;
       }, {});
+      if ( item.type !== "spell" ) context.properties = sortObjectEntries(context.properties, "label");
     }
 
     // Special handling for specific item types
@@ -158,9 +161,6 @@ export default class ItemSheet5e extends ItemSheet {
           context.itemType = featureType.label;
           context.featureSubtypes = featureType.subtypes;
         }
-        break;
-      case "spell":
-        context.spellComponents = {...CONFIG.DND5E.spellComponents, ...CONFIG.DND5E.spellTags};
         break;
       case "loot":
         const lootType = CONFIG.DND5E.lootTypes[item.system.type?.value];
@@ -371,9 +371,12 @@ export default class ItemSheet5e extends ItemSheet {
     const labels = this.item.labels;
     switch ( this.item.type ) {
       case "consumable":
-        for ( const k of this.item.system.properties ) {
-          props.push(CONFIG.DND5E.physicalWeaponProperties[k]);
-        }
+      case "weapon":
+        const ip = CONFIG.DND5E.itemProperties;
+        const vp = CONFIG.DND5E.validProperties[this.item.type];
+        this.item.system.properties.forEach(k => {
+          if ( vp.has(k) ) props.push(ip[k].label);
+        });
         break;
       case "equipment":
         props.push(CONFIG.DND5E.equipmentTypes[this.item.system.type.value]);
@@ -384,11 +387,6 @@ export default class ItemSheet5e extends ItemSheet {
         break;
       case "spell":
         props.push(labels.components.vsm, labels.materials, ...labels.components.tags);
-        break;
-      case "weapon":
-        for ( const k of this.item.system.properties ) {
-          props.push(CONFIG.DND5E.weaponProperties[k]);
-        }
         break;
     }
 
