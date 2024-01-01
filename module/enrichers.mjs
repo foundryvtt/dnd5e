@@ -523,16 +523,20 @@ async function embedRollTable(config, label, options) {
  * ```
  */
 async function enrichReference(config, label, options) {
-  let type = Object.keys(config).find(k => k in CONFIG.DND5E.ruleTypes);
-  if ( !type && (config.values[0] in CONFIG.DND5E.rules) ) {
-    type = "rule";
-    config.rule = config.values[0];
+  let source;
+  const type = Object.keys(config).find(k => k in CONFIG.DND5E.ruleTypes);
+  if ( type ) source = CONFIG.DND5E[CONFIG.DND5E.ruleTypes[type].references]?.[config[type].slugify().replace("-", "")];
+  else if ( config.values.length ) {
+    const key = config.values.join("").slugify().replace("-", "");
+    for ( const { references } of Object.values(CONFIG.DND5E.ruleTypes) ) {
+      source = CONFIG.DND5E[references][key];
+      if ( source ) break;
+    }
   }
-  if ( !type ) {
-    console.warn(`No valid rule type found while enriching ${config.input}.`);
+  if ( !source ) {
+    console.warn(`No valid rule found while enriching ${config.input}.`);
     return null;
   }
-  const source = CONFIG.DND5E[CONFIG.DND5E.ruleTypes[type].references]?.[config[type].toLowerCase()];
   const uuid = foundry.utils.getType(source) === "Object" ? source.reference : source;
   if ( !uuid ) return null;
   const doc = await fromUuid(uuid);
