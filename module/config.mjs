@@ -1648,7 +1648,7 @@ preLocalize("weaponTypes");
 /**
  * A subset of weapon properties that determine the physical characteristics of the weapon.
  * These properties are used for determining physical resistance bypasses.
- * @deprecated
+ * @deprecated since DnD5e 2.5, available until DnD5e 2.7
  * @enum {string}
  */
 DND5E.physicalWeaponProperties = {
