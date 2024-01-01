@@ -1,4 +1,5 @@
 import { ActorDataModel } from "../abstract.mjs";
+import { FormulaField } from "../fields.mjs";
 import CurrencyTemplate from "../shared/currency.mjs";
 
 const { ArrayField, ForeignDocumentField, HTMLField, NumberField, SchemaField, StringField } = foundry.data.fields;
@@ -6,8 +7,10 @@ const { ArrayField, ForeignDocumentField, HTMLField, NumberField, SchemaField, S
 /**
  * Metadata associated with members in this group.
  * @typedef {object} GroupMemberData
- * @property {Actor5e} actor    Associated actor document.
- * @property {number} quantity  Number of this actor in the group (for encounter or crew types).
+ * @property {Actor5e} actor            Associated actor document.
+ * @property {object} quantity
+ * @property {number} quantity.value    Number of this actor in the group (for encounter or crew types).
+ * @property {string} quantity.formula  Formula used for re-rolling actor quantities in encounters.
  */
 
 /**
@@ -31,7 +34,7 @@ const { ArrayField, ForeignDocumentField, HTMLField, NumberField, SchemaField, S
  *  type: "group",
  *  name: "Test Group",
  *  system: {
- *    members: ["3f3hoYFWUgDqBP4U"]
+ *    members: [{ actor: "3f3hoYFWUgDqBP4U" }]
  *  }
  * });
  */
@@ -48,7 +51,10 @@ export default class GroupActor extends ActorDataModel.mixin(CurrencyTemplate) {
       }),
       members: new ArrayField(new SchemaField({
         actor: new ForeignDocumentField(foundry.documents.BaseActor),
-        quantity: new NumberField({initial: 1, integer: true, min: 0, label: "DND5E.Quantity"})
+        quantity: new SchemaField({
+          value: new NumberField({initial: 1, integer: true, min: 0, label: "DND5E.Quantity"}),
+          formula: new FormulaField({label: "DND5E.QuantityFormula"})
+        })
       }), {label: "DND5E.GroupMembers"}),
       attributes: new SchemaField({
         movement: new SchemaField({
@@ -157,6 +163,24 @@ export default class GroupActor extends ActorDataModel.mixin(CurrencyTemplate) {
     // Remove the actor and update the parent document
     const membersCollection = this.toObject().members;
     membersCollection.findSplice(member => member.actor === actorId);
+    return this.parent.update({"system.members": membersCollection});
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Roll the quantity formulas for each member and replace their quantity. Any entries without formulas
+   * will not be modified.
+   * @returns {Promise<Actor5e>}
+   */
+  async rollQuantities() {
+    const membersCollection = this.toObject().members;
+    await Promise.all(membersCollection.map(async member => {
+      if ( !member.quantity?.formula ) return member;
+      const roll = new Roll(member.quantity.formula);
+      await roll.evaluate();
+      if ( roll.total > 0 ) member.quantity.value = roll.total;
+    }));
     return this.parent.update({"system.members": membersCollection});
   }
 

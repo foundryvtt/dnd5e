@@ -155,13 +155,13 @@ export default class GroupActorSheet extends ActorSheetMixin(ActorSheet) {
       m.hp.max = Math.max(0, hp.max + (hp.tempmax || 0));
       m.hp.pct = Math.clamped((m.hp.current / m.hp.max) * 100, 0, 100).toFixed(2);
       m.hp.color = dnd5e.documents.Actor5e.getHPColor(m.hp.current, m.hp.max).css;
-      stats.currentHP += (m.hp.current * m.quantity);
-      stats.maxHP += (m.hp.max * m.quantity);
+      stats.currentHP += (m.hp.current * m.quantity.value);
+      stats.maxHP += (m.hp.max * m.quantity.value);
 
       // Challenge
       if ( member.type === "npc" ) {
         m.cr = formatCR(member.system.details.cr);
-        if ( displayXP ) m.xp = formatNumber(member.system.details.xp.value * m.quantity);
+        if ( displayXP ) m.xp = formatNumber(member.system.details.xp.value * m.quantity.value);
       }
 
       if ( member.type === "vehicle" ) stats.nVehicles++;
@@ -280,16 +280,12 @@ export default class GroupActorSheet extends ActorSheetMixin(ActorSheet) {
     event.preventDefault();
     const button = event.currentTarget;
     switch ( button.dataset.action ) {
-      case "convertCurrency":
-        Dialog.confirm({
-          title: `${game.i18n.localize("DND5E.CurrencyConvert")}`,
-          content: `<p>${game.i18n.localize("DND5E.CurrencyConvertHint")}</p>`,
-          yes: () => this.actor.convertCurrency()
-        });
-        break;
       case "removeMember":
         const removeMemberId = button.closest("li.group-member").dataset.actorId;
         this.object.system.removeMember(removeMemberId);
+        break;
+      case "rollQuantities":
+        this.object.system.rollQuantities();
         break;
       case "movementConfig":
         const movementConfig = new ActorMovementConfig(this.object);
