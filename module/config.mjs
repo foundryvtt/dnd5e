@@ -1662,7 +1662,7 @@ preLocalize("physicalWeaponProperties", { sort: true });
 
 /**
  * The set of weapon property flags which can exist on a weapon.
- * @deprecated
+ * @deprecated since DnD5e 2.5, available until DnD5e 2.7
  * @enum {string}
  */
 DND5E.weaponProperties = {
