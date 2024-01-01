@@ -1,0 +1,933 @@
+{
+  "name": "Appendix E: Rules",
+  "pages": [
+    {
+      "sort": 100000,
+      "name": "Inspiration",
+      "type": "rule",
+      "_id": "nkEPI89CiQnOaLYh",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>Inspiration is a rule the game master can use to reward you for playing your character in a way that's true to his or her personality traits, ideal, bond, and flaw. By using inspiration, you can draw on your personality trait of compassion for the downtrodden to give you an edge in negotiating with the Beggar Prince. Or inspiration can let you call on your bond to the defense of your home village to push past the effect of a spell that has been laid on you.</p><h2 data-anchor=\"gaining-inspiration\">Gaining Inspiration</h2><p>Your GM can choose to give you inspiration for a variety of reasons. Typically, GMs award it when you play out your personality traits, give in to the drawbacks presented by a flaw or bond, and otherwise portray your character in a compelling way. Your GM will tell you how you can earn inspiration in the game.</p><p>You either have inspiration or you don't—you can't stockpile multiple “inspirations” for later use.</p><h2 data-anchor=\"using-inspiration\">Using Inspiration</h2><p>If you have inspiration, you can expend it when you make an attack roll, saving throw, or ability check. Spending your inspiration gives you advantage on that roll.</p><p>Additionally, if you have inspiration, you can reward another player for good roleplaying, clever thinking, or simply doing something exciting in the game. When another player character does something that really contributes to the story in a fun and interesting way, you can give up your inspiration to give that character inspiration.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "<p>Your GM can choose to give you inspiration for a variety of reasons and you either have inspiration of you don't—you can't stockpile multiple “inspirations” for later use.</p><p>If you have inspiration, you can expend it when you make an attack roll, saving throw, or ability check. Spending your inspiration gives you advantage on that roll. You can also use your inspiration to give another player advantage.</p>",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1704059861082,
+        "modifiedTime": 1704059977965,
+        "lastModifiedBy": "kQWr6yUtg9W5DnFX"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.nkEPI89CiQnOaLYh"
+    },
+    {
+      "sort": 200000,
+      "name": "Time",
+      "type": "rule",
+      "_id": "eihqNjwpZ3HM4IqY",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>In situations where keeping track of the passage of time is important, the GM determines the time a task requires. The GM might use a different time scale depending on the context of the situation at hand. In a dungeon environment, the adventurers' movement happens on a scale of <strong>minutes</strong>. It takes them about a minute to creep down a long hallway, another minute to check for traps on the door at the end of the hall, and a good ten minutes to search the chamber beyond for anything interesting or valuable.</p><p>In a city or wilderness, a scale of <strong>hours</strong> is often more appropriate. Adventurers eager to reach the lonely tower at the heart of the forest hurry across those fifteen miles in just under four hours' time.</p><p>For long journeys, a scale of <strong>days</strong> works best. Following the road from Baldur's Gate to Waterdeep, the adventurers spend four uneventful days before a goblin ambush interrupts their journey.</p><p>In combat and other fast-paced situations, the game relies on <strong>rounds</strong>, a 6-second span of time.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "<p>Outside of combat, the GM determines how fast time passes depending on what the situation requires, <strong>minutes</strong> for exploring a dungeon or breaking into a house, <strong>hours</strong> for traveling through a city or through the wilderness, or <strong>days</strong> for long journeys through the world.</p><p>During combat and other fast-paced situations, the game relies on <strong>rounds</strong>, a 6-second span of time.</p>",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1704060082284,
+        "modifiedTime": 1704060197021,
+        "lastModifiedBy": "kQWr6yUtg9W5DnFX"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.eihqNjwpZ3HM4IqY"
+    },
+    {
+      "sort": 300000,
+      "name": "Speed",
+      "type": "rule",
+      "_id": "HhqeIiSj8sE1v1qZ",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>Every character and monster has a speed, which is the distance in feet that the character or monster can walk in 1 round. This number assumes short bursts of energetic movement in the midst of a lifethreatening situation.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1704060227333,
+        "modifiedTime": 1704060240818,
+        "lastModifiedBy": "kQWr6yUtg9W5DnFX"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.HhqeIiSj8sE1v1qZ"
+    },
+    {
+      "sort": 400000,
+      "name": "Travel Pace",
+      "type": "rule",
+      "_id": "eFAISahBloR2X8MX",
+      "title": {
+        "show": true,
+        "level": 2
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>While traveling, a group of adventurers can move at a normal, fast, or slow pace, as shown on the Travel Pace table. The table states how far the party can move in a period of time and whether the pace has any effect. A fast pace makes characters less perceptive, while a slow pace makes it possible to sneak around and to search an area more carefully.</p><p><strong>Forced March. </strong>The Travel Pace table assumes that characters travel for 8 hours in day. They can push on beyond that limit, at the risk of exhaustion.</p><p>For each additional hour of travel beyond 8 hours, the characters cover the distance shown in the Hour column for their pace, and each character must make a Constitution saving throw at the end of the hour. The DC is 10 + 1 for each hour past 8 hours. On a failed saving throw, a character suffers one level of @UUID[Compendium.dnd5e.rules.w7eitkpD7QQTB6j0.JournalEntryPage.cspWveykstnu3Zcv]{Exhaustion}.</p><p><strong>Mounts and Vehicles. </strong>For short spans of time (up to an hour), many animals move much faster than humanoids. A mounted character can ride at a gallop for about an hour, covering twice the usual distance for a fast pace. If fresh mounts are available every 8 to 10 miles, characters can cover larger distances at this pace, but this is very rare except in densely populated areas.</p><p>Characters in wagons, carriages, or other land vehicles choose a pace as normal. Characters in a waterborne vessel are limited to the speed of the vessel, and they don’t suffer penalties for a fast pace or gain benefits from a slow pace. Depending on the vessel and the size of the crew, ships might be able to travel for up to 24 hours per day.</p><p>Certain special mounts, such as a pegasus or griffon, or special vehicles, such as a @Compendium[dnd5e.items.TjWk2mpNXjDdfIDM]{Carpet of Flying}, allow you to travel more swiftly.</p><table border=\"0\"><caption>Travel Pace</caption><thead><tr><td rowspan=\"2\">Pace</td><td colspan=\"4\">Distance Traveled per . . .</td></tr><tr><td>Minute</td><td>Hour</td><td>Day</td><td>Effect</td></tr></thead><tbody><tr><td>Fast</td><td>400 feet</td><td>4 miles</td><td>30 miles</td><td>- 5 penalty to passive Wisdom (Perception) scores</td></tr><tr><td>Normal</td><td>300 feet</td><td>3 miles</td><td>24 miles</td><td>—</td></tr><tr><td>Slow</td><td>200 feet</td><td>2 miles</td><td>18 miles</td><td>Able to use stealth</td></tr></tbody></table>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1704060245611,
+        "modifiedTime": 1704060323126,
+        "lastModifiedBy": "kQWr6yUtg9W5DnFX"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.eFAISahBloR2X8MX"
+    },
+    {
+      "sort": 500000,
+      "name": "Difficult Terain",
+      "type": "rule",
+      "_id": "hFW5BR2yHHwwgurD",
+      "title": {
+        "show": true,
+        "level": 2
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>The travel speeds given in the Travel Pace table assume relatively simple terrain: roads, open plains, or clear dungeon corridors. But adventurers often face dense forests, deep swamps, rubble-filled ruins, steep mountains, and ice-covered ground—all considered difficult terrain.</p><p>You move at half speed in difficult terrain—moving 1 foot in difficult terrain costs 2 feet of speed—so you can cover only half the normal distance in a minute, an hour, or a day.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "<p>You move at half speed in difficult terrain—moving 1 foot in difficult terrain costs 2 feet of speed—so you can cover only half the normal distance in a round, a minute, an hour, or a day.</p>",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1704060338740,
+        "modifiedTime": 1704060376879,
+        "lastModifiedBy": "kQWr6yUtg9W5DnFX"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.hFW5BR2yHHwwgurD"
+    },
+    {
+      "sort": 600000,
+      "name": "Climbing, Swimming, and Crawling",
+      "type": "rule",
+      "_id": "KxUXbMrUCIAhv4AF",
+      "title": {
+        "show": true,
+        "level": 2
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>While climbing or swimming, each foot of movement costs 1 extra foot (2 extra feet in difficult terrain), unless a creature has a climbing or swimming speed. At the GM’s option, climbing a slippery vertical surface or one with few handholds requires a successful Strength (Athletics) check. Similarly, gaining any distance in rough water might require a successful Strength (Athletics) check.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1704060403867,
+        "modifiedTime": 1704060414323,
+        "lastModifiedBy": "kQWr6yUtg9W5DnFX"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.KxUXbMrUCIAhv4AF"
+    },
+    {
+      "sort": 700000,
+      "name": "Long Jump",
+      "type": "rule",
+      "_id": "1U0myNrOvIVBUdJV",
+      "title": {
+        "show": true,
+        "level": 3
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p><strong>Long Jump. </strong>When you make a long jump, you cover a number of feet up to your Strength score if you move at least 10 feet on foot immediately before the jump. When you make a standing long jump, you can leap only half that distance. Either way, each foot you clear on the jump costs a foot of movement.</p><p>This rule assumes that the height of your jump doesn’t matter, such as a jump across a stream or chasm. At your GM’s option, you must succeed on a DC 10 Strength (Athletics) check to clear a low obstacle (no taller than a quarter of the jump’s distance), such as a hedge or low wall. Otherwise, you hit it.</p><p>When you land in difficult terrain, you must succeed on a DC 10 Dexterity (Acrobatics) check to land on your feet. Otherwise, you land prone.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1704060439308,
+        "modifiedTime": 1704060456157,
+        "lastModifiedBy": "kQWr6yUtg9W5DnFX"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.1U0myNrOvIVBUdJV"
+    },
+    {
+      "sort": 800000,
+      "name": "High Jump",
+      "type": "rule",
+      "_id": "raPwIkqKSv60ELmy",
+      "title": {
+        "show": true,
+        "level": 3
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p><strong>High Jump. </strong>When you make a high jump, you leap into the air a number of feet equal to 3 + your Strength modifier if you move at least 10 feet on foot immediately before the jump. When you make a standing high jump, you can jump only half that distance. Either way, each foot you clear on the jump costs a foot of movement. In some circumstances, your GM might allow you to make a Strength (Athletics) check to jump higher than you normally can.</p><p>You can extend your arms half your height above yourself during the jump. Thus, you can reach above you a distance equal to the height of the jump plus 1½ times your height.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1704060462059,
+        "modifiedTime": 1704060468459,
+        "lastModifiedBy": "kQWr6yUtg9W5DnFX"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.raPwIkqKSv60ELmy"
+    },
+    {
+      "sort": 900000,
+      "name": "Falling",
+      "type": "rule",
+      "_id": "kREHL5pgNUOhay9f",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>A fall from a great height is one of the most common hazards facing an adventurer. At the end of a fall, a creature takes 1d6 bludgeoning damage for every 10 feet it fell, to a maximum of 20d6. The creature lands prone, unless it avoids taking damage from the fall.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1704060488900,
+        "modifiedTime": 1704060539850,
+        "lastModifiedBy": "kQWr6yUtg9W5DnFX"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.kREHL5pgNUOhay9f"
+    },
+    {
+      "sort": 1000000,
+      "name": "Suffocating",
+      "type": "rule",
+      "_id": "BIlnr0xYhqt4TGsi",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>A creature can hold its breath for a number of minutes equal to 1 + its Constitution modifier (minimum of 30 seconds).</p><p>When a creature runs out of breath or is choking, it can survive for a number of rounds equal to its Constitution modifier (minimum of 1 round). At the start of its next turn, it drops to 0 hit points and is dying, and it can't regain hit points or be stabilized until it can breathe again.</p><p>For example, a creature with a Constitution of 14 can hold its breath for 3 minutes. If it starts suffocating, it has 2 rounds to reach air before it drops to 0 hit points.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1704060498008,
+        "modifiedTime": 1704060543594,
+        "lastModifiedBy": "kQWr6yUtg9W5DnFX"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.BIlnr0xYhqt4TGsi"
+    },
+    {
+      "sort": 1100000,
+      "name": "Vision and Light",
+      "type": "rule",
+      "_id": "O6hamUbI9kVASN8b",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>The most fundamental tasks of adventuring— noticing danger, finding hidden objects, hitting an enemy in combat, and targeting a spell, to name just a few—rely heavily on a character's ability to see. Darkness and other effects that obscure vision can prove a significant hindrance. A given area might be lightly or heavily obscured.</p><p>@Embed[.MAxtfJyvJV7EpzWN]</p><p>@Embed[.wPFjfRruboxhtL4b]</p><p>The presence or absence of light in an environment creates three categories of illumination: bright light, dim light, and darkness.</p><p>@Embed[.RnMokVPyKGbbL8vi]</p><p>@Embed[.n1Ocpbyhr6HhgbCG]</p><p>@Embed[.4dfREIDjG5N4fvxd]</p><h3 data-anchor=\"blindsight\">Blindsight</h3><p>@Embed[.sacjsfm9ZXnw4Tqc]</p><h3 data-anchor=\"darkvision\">Darkvision</h3><p>@Embed[.ldmA1PbnEGVkmE11]</p><h3 data-anchor=\"truesight\">Truesight</h3><p>@Embed[.kNa8rJFbtaTM3Rmk]</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1704060555773,
+        "modifiedTime": 1704061077654,
+        "lastModifiedBy": "kQWr6yUtg9W5DnFX"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.O6hamUbI9kVASN8b"
+    },
+    {
+      "sort": 1200000,
+      "name": "Lightly Obscured",
+      "type": "rule",
+      "_id": "MAxtfJyvJV7EpzWN",
+      "title": {
+        "show": true,
+        "level": 3
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>In a <strong>lightly obscured</strong> area, such as dim light, patchy fog, or moderate foliage, creatures have disadvantage on Wisdom (Perception) checks that rely on sight.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1704060578564,
+        "modifiedTime": 1704060750236,
+        "lastModifiedBy": "kQWr6yUtg9W5DnFX"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.MAxtfJyvJV7EpzWN"
+    },
+    {
+      "sort": 1300000,
+      "name": "Heavily Obscured",
+      "type": "rule",
+      "_id": "wPFjfRruboxhtL4b",
+      "title": {
+        "show": true,
+        "level": 3
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>A <strong>heavily obscured </strong>area—such as darkness, opaque fog, or dense foliage—blocks vision entirely. A creature effectively suffers from the &amp;Reference[condition=blinded] condition when trying to see something in that area.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1704060589526,
+        "modifiedTime": 1704060759222,
+        "lastModifiedBy": "kQWr6yUtg9W5DnFX"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.wPFjfRruboxhtL4b"
+    },
+    {
+      "sort": 1400000,
+      "name": "Bright Light",
+      "type": "rule",
+      "_id": "RnMokVPyKGbbL8vi",
+      "title": {
+        "show": true,
+        "level": 3
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p><strong>Bright light </strong>lets most creatures see normally. Even gloomy days provide bright light, as do torches, lanterns, fires, and other sources of illumination within a specific radius.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1704060600179,
+        "modifiedTime": 1704060764798,
+        "lastModifiedBy": "kQWr6yUtg9W5DnFX"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.RnMokVPyKGbbL8vi"
+    },
+    {
+      "sort": 1500000,
+      "name": "Dim Light",
+      "type": "rule",
+      "_id": "n1Ocpbyhr6HhgbCG",
+      "title": {
+        "show": true,
+        "level": 3
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p><strong>Dim light</strong>, also called shadows, creates a lightly obscured area. An area of dim light is usually a boundary between a source of bright light, such as a torch, and surrounding darkness. The soft light of twilight and dawn also counts as dim light. A particularly brilliant full moon might bathe the land in dim light.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "<p><strong>Dim light</strong>, also called shadows, creates a @UUID[.MAxtfJyvJV7EpzWN]{lightly obscured} area. An area of dim light is usually a boundary between a source of bright light, such as a torch, and surrounding darkness. The soft light of twilight and dawn also counts as dim light. A particularly brilliant full moon might bathe the land in dim light.</p>",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1704060607320,
+        "modifiedTime": 1704060779040,
+        "lastModifiedBy": "kQWr6yUtg9W5DnFX"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.n1Ocpbyhr6HhgbCG"
+    },
+    {
+      "sort": 1600000,
+      "name": "Darkness",
+      "type": "rule",
+      "_id": "4dfREIDjG5N4fvxd",
+      "title": {
+        "show": true,
+        "level": 3
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p><strong>Darkness</strong> creates a heavily obscured area. Characters face darkness outdoors at night (even most moonlit nights), within the confines of an unlit dungeon or a subterranean vault, or in an area of magical darkness.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "<p><strong>Darkness</strong> creates a @UUID[.wPFjfRruboxhtL4b]{heavily obscured} area. Characters face darkness outdoors at night (even most moonlit nights), within the confines of an unlit dungeon or a subterranean vault, or in an area of magical darkness.</p>",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1704060615173,
+        "modifiedTime": 1704060784433,
+        "lastModifiedBy": "kQWr6yUtg9W5DnFX"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.4dfREIDjG5N4fvxd"
+    },
+    {
+      "sort": 1700000,
+      "name": "Blindsight",
+      "type": "rule",
+      "_id": "sacjsfm9ZXnw4Tqc",
+      "title": {
+        "show": true,
+        "level": 2
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>A creature with blindsight can perceive its surroundings without relying on sight, within a specific radius. Creatures without eyes, such as oozes, and creatures with echolocation or heightened senses, such as bats and true dragons, have this sense.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1704060795426,
+        "modifiedTime": 1704060923745,
+        "lastModifiedBy": "kQWr6yUtg9W5DnFX"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.sacjsfm9ZXnw4Tqc"
+    },
+    {
+      "sort": 1800000,
+      "name": "Darkvision",
+      "type": "rule",
+      "_id": "ldmA1PbnEGVkmE11",
+      "title": {
+        "show": true,
+        "level": 2
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>Many creatures in fantasy gaming worlds, especially those that dwell underground, have darkvision. Within a specified range, a creature with darkvision can see in darkness as if the darkness were dim light, so areas of darkness are only lightly obscured as far as that creature is concerned. However, the creature can't discern color in darkness, only shades of gray.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "<p>Many creatures in fantasy gaming worlds, especially those that dwell underground, have darkvision. Within a specified range, a creature with darkvision can see in &amp;Reference[darkness] as if the darkness were &amp;Reference[dimLight], so areas of darkness are only lightly obscured as far as that creature is concerned. However, the creature can't discern color in darkness, only shades of gray.</p>",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1704060798757,
+        "modifiedTime": 1704060902416,
+        "lastModifiedBy": "kQWr6yUtg9W5DnFX"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.ldmA1PbnEGVkmE11"
+    },
+    {
+      "sort": 1900000,
+      "name": "Truesight",
+      "type": "rule",
+      "_id": "kNa8rJFbtaTM3Rmk",
+      "title": {
+        "show": true,
+        "level": 2
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>A creature with truesight can, out to a specific range, see in normal and magical darkness, see &amp;Reference[condition=Invisible] creatures and objects, automatically detect visual illusions and succeed on saving throws against them, and perceives the original form of a shapechanger or a creature that is transformed by magic. Furthermore, the creature can see into the Ethereal Plane.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1704060803410,
+        "modifiedTime": 1704060913192,
+        "lastModifiedBy": "kQWr6yUtg9W5DnFX"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.kNa8rJFbtaTM3Rmk"
+    },
+    {
+      "sort": 2000000,
+      "name": "Food",
+      "type": "rule",
+      "_id": "jayo7XVgGnRCpTW0",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>A character needs one pound of food per day and can make food last longer by subsisting on half rations. Eating half a pound of food in a day counts as half a day without food.</p><p>A character can go without food for a number of days equal to 3 + his or her Constitution modifier (minimum 1). At the end of each day beyond that limit, a character automatically suffers one level of exhaustion.</p><p>A normal day of eating resets the count of days without food to zero.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1704060934324,
+        "modifiedTime": 1704060965189,
+        "lastModifiedBy": "kQWr6yUtg9W5DnFX"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.jayo7XVgGnRCpTW0"
+    },
+    {
+      "sort": 2100000,
+      "name": "Water",
+      "type": "rule",
+      "_id": "iIEI87J7lr2sqtb5",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>A character needs one gallon of water per day, or two gallons per day if the weather is hot. A character who drinks only half that much water must succeed on a DC 15 Constitution saving throw or suffer one level of exhaustion at the end of the day. A character with access to even less water automatically suffers one level of exhaustion at the end of the day.</p><p>If the character already has one or more levels of exhaustion, the character takes two levels in either case.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1704060937145,
+        "modifiedTime": 1704060957725,
+        "lastModifiedBy": "kQWr6yUtg9W5DnFX"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.iIEI87J7lr2sqtb5"
+    },
+    {
+      "sort": 2300000,
+      "name": "Short Rest",
+      "type": "rule",
+      "_id": "1s2swI3UsjUUgbt2",
+      "title": {
+        "show": true,
+        "level": 2
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>A short rest is a period of downtime, at least 1 hour long, during which a character does nothing more strenuous than eating, drinking, reading, and tending to wounds.</p><p>A character can spend one or more Hit Dice at the end of a short rest, up to the character's maximum number of Hit Dice, which is equal to the character's level. For each Hit Die spent in this way, the player rolls the die and adds the character's Constitution modifier to it. The character regains hit points equal to the total. The player can decide to spend an additional Hit Die after each roll. A character regains some spent Hit Dice upon finishing a long rest, as explained below.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1704061126995,
+        "modifiedTime": 1704061150441,
+        "lastModifiedBy": "kQWr6yUtg9W5DnFX"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.1s2swI3UsjUUgbt2"
+    },
+    {
+      "sort": 2400000,
+      "name": "Long Rest",
+      "type": "rule",
+      "_id": "6cLtjbHn4KV2R7G9",
+      "title": {
+        "show": true,
+        "level": 2
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>A long rest is a period of extended downtime, at least 8 hours long, during which a character sleeps or performs light activity: reading, talking, eating, or standing watch for no more than 2 hours. If the rest is interrupted by a period of strenuous activity—at least 1 hour of walking, fighting, casting spells, or similar adventuring activity—the characters must begin the rest again to gain any benefit from it.</p><p>At the end of a long rest, a character regains all lost hit points. The character also regains spent Hit Dice, up to a number of dice equal to half of the character's total number of them (minimum of one die). For example, if a character has eight Hit Dice, he or she can regain four spent Hit Dice upon finishing a long rest.</p><p>A character can't benefit from more than one long rest in a 24-hour period, and a character must have at least 1 hit point at the start of the rest to gain its benefits.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1704061156575,
+        "modifiedTime": 1704061164187,
+        "lastModifiedBy": "kQWr6yUtg9W5DnFX"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.6cLtjbHn4KV2R7G9"
+    },
+    {
+      "sort": 2200000,
+      "name": "Resting",
+      "type": "rule",
+      "_id": "dpHJXYLigIdEseIb",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "><p>Heroic though they might be, adventurers can't spend every hour of the day in the thick of exploration, social interaction, and combat. They need rest—time to sleep and eat, tend their wounds, refresh their minds and spirits for spellcasting, and brace themselves for further adventure.</p><p>Adventurers can take short rests in the midst of an adventuring day and a long rest to end the day.</p><h2 data-anchor=\"short-rest\">Short Rest</h2><p>@Embed[.1s2swI3UsjUUgbt2]</p><h2 data-anchor=\"long-rest\">Long Rest</h2><p>@Embed[.6cLtjbHn4KV2R7G9]</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1704061172728,
+        "modifiedTime": 1704061195338,
+        "lastModifiedBy": "kQWr6yUtg9W5DnFX"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.dpHJXYLigIdEseIb"
+    }
+  ],
+  "folder": null,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "3.0.0",
+    "coreVersion": "11.315",
+    "createdTime": 1704059808409,
+    "modifiedTime": 1704061471279,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  },
+  "_id": "NizgRXLNUqtdlC1s",
+  "sort": 0,
+  "_key": "!journal!NizgRXLNUqtdlC1s"
+}
