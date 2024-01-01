@@ -4,6 +4,8 @@ import * as Trait from "./documents/actor/trait.mjs";
 
 const MAX_EMBED_DEPTH = 5;
 
+const slugify = value => value?.slugify().replaceAll("-", "");
+
 /**
  * Set up custom text enrichers.
  */
@@ -168,7 +170,8 @@ function parseConfig(match) {
  * ```
  */
 async function enrichCheck(config, label, options) {
-  for ( const value of config.values ) {
+  for ( let value of config.values ) {
+    value = foundry.utils.getType(value) === "string" ? slugify(value) : value;
     if ( value in CONFIG.DND5E.enrichmentLookup.abilities ) config.ability = value;
     else if ( value in CONFIG.DND5E.enrichmentLookup.skills ) config.skill = value;
     else if ( value in CONFIG.DND5E.enrichmentLookup.tools ) config.tool = value;
@@ -178,7 +181,7 @@ async function enrichCheck(config, label, options) {
 
   let invalid = false;
 
-  const skillConfig = CONFIG.DND5E.enrichmentLookup.skills[config.skill];
+  const skillConfig = CONFIG.DND5E.enrichmentLookup.skills[slugify(config.skill)];
   if ( config.skill && !skillConfig ) {
     console.warn(`Skill ${config.skill} not found while enriching ${config.input}.`);
     invalid = true;
@@ -187,14 +190,14 @@ async function enrichCheck(config, label, options) {
   }
   if ( skillConfig?.key ) config.skill = skillConfig.key;
 
-  const toolUUID = CONFIG.DND5E.enrichmentLookup.tools[config.tool];
+  const toolUUID = CONFIG.DND5E.enrichmentLookup.tools[slugify(config.tool)];
   const toolIndex = toolUUID ? Trait.getBaseItem(toolUUID, { indexOnly: true }) : null;
   if ( config.tool && !toolIndex ) {
     console.warn(`Tool ${config.tool} not found while enriching ${config.input}.`);
     invalid = true;
   }
 
-  let abilityConfig = CONFIG.DND5E.enrichmentLookup.abilities[config.ability];
+  let abilityConfig = CONFIG.DND5E.enrichmentLookup.abilities[slugify(config.ability)];
   if ( config.ability && !abilityConfig ) {
     console.warn(`Ability ${config.ability} not found while enriching ${config.input}.`);
     invalid = true;
@@ -526,11 +529,13 @@ async function embedRollTable(config, label, options) {
 async function enrichReference(config, label, options) {
   let source;
   const type = Object.keys(config).find(k => k in CONFIG.DND5E.ruleTypes);
-  if ( type ) source = CONFIG.DND5E[CONFIG.DND5E.ruleTypes[type].references]?.[config[type].slugify().replace("-", "")];
-  else if ( config.values.length ) {
-    const key = config.values.join("").slugify().replace("-", "");
+  if ( type ) {
+    const key = config[type].slugify().replace("-", "");
+    source = foundry.utils.getProperty(CONFIG.DND5E, CONFIG.DND5E.ruleTypes[type].references)?.[key];
+  } else if ( config.values.length ) {
+    const key = slugify(config.values.join(""));
     for ( const { references } of Object.values(CONFIG.DND5E.ruleTypes) ) {
-      source = CONFIG.DND5E[references][key];
+      source = foundry.utils.getProperty(CONFIG.DND5E, references)[key];
       if ( source ) break;
     }
   }

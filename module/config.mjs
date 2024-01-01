@@ -21,6 +21,7 @@ _______________________________`;
  * @property {string} label                               Localized label.
  * @property {string} abbreviation                        Localized abbreviation.
  * @property {string} fullKey                             Fully written key used as alternate for enrichers.
+ * @property {string} [reference]                         Reference to a rule page describing this ability.
  * @property {string} [type]                              Whether this is a "physical" or "mental" ability.
  * @property {Object<string, number|string>}  [defaults]  Default values for this ability based on actor type.
  *                                                        If a string is used, the system will attempt to fetch.
@@ -36,25 +37,29 @@ DND5E.abilities = {
     label: "DND5E.AbilityStr",
     abbreviation: "DND5E.AbilityStrAbbr",
     type: "physical",
-    fullKey: "strength"
+    fullKey: "strength",
+    reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.nUPv6C66Ur64BIUH"
   },
   dex: {
     label: "DND5E.AbilityDex",
     abbreviation: "DND5E.AbilityDexAbbr",
     type: "physical",
-    fullKey: "dexterity"
+    fullKey: "dexterity",
+    reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.ER8CKDUWLsFXuARJ"
   },
   con: {
     label: "DND5E.AbilityCon",
     abbreviation: "DND5E.AbilityConAbbr",
     type: "physical",
-    fullKey: "constitution"
+    fullKey: "constitution",
+    reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.MpA4jnwD17Q0RPg7"
   },
   int: {
     label: "DND5E.AbilityInt",
     abbreviation: "DND5E.AbilityIntAbbr",
     type: "mental",
     fullKey: "intelligence",
+    reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.WzWWcTIppki35YvF",
     defaults: { vehicle: 0 }
   },
   wis: {
@@ -62,6 +67,7 @@ DND5E.abilities = {
     abbreviation: "DND5E.AbilityWisAbbr",
     type: "mental",
     fullKey: "wisdom",
+    reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.v3IPyTtqvXqN934s",
     defaults: { vehicle: 0 }
   },
   cha: {
@@ -69,6 +75,7 @@ DND5E.abilities = {
     abbreviation: "DND5E.AbilityChaAbbr",
     type: "mental",
     fullKey: "charisma",
+    reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.9FyghudYFV5QJOuG",
     defaults: { vehicle: 0 }
   },
   hon: {
@@ -108,9 +115,10 @@ DND5E.hitPointsAbility = "con";
  * Configuration data for skills.
  *
  * @typedef {object} SkillConfiguration
- * @property {string} label    Localized label.
- * @property {string} ability  Key for the default ability used by this skill.
- * @property {string} fullKey  Fully written key used as alternate for enrichers.
+ * @property {string} label        Localized label.
+ * @property {string} ability      Key for the default ability used by this skill.
+ * @property {string} fullKey      Fully written key used as alternate for enrichers.
+ * @property {string} [reference]  Reference to a rule page describing this skill.
  */
 
 /**
@@ -118,24 +126,114 @@ DND5E.hitPointsAbility = "con";
  * @enum {SkillConfiguration}
  */
 DND5E.skills = {
-  acr: { label: "DND5E.SkillAcr", ability: "dex", fullKey: "acrobatics" },
-  ani: { label: "DND5E.SkillAni", ability: "wis", fullKey: "animalHandling" },
-  arc: { label: "DND5E.SkillArc", ability: "int", fullKey: "arcana" },
-  ath: { label: "DND5E.SkillAth", ability: "str", fullKey: "athletics" },
-  dec: { label: "DND5E.SkillDec", ability: "cha", fullKey: "deception" },
-  his: { label: "DND5E.SkillHis", ability: "int", fullKey: "history" },
-  ins: { label: "DND5E.SkillIns", ability: "wis", fullKey: "insight" },
-  itm: { label: "DND5E.SkillItm", ability: "cha", fullKey: "intimidation" },
-  inv: { label: "DND5E.SkillInv", ability: "int", fullKey: "investigation" },
-  med: { label: "DND5E.SkillMed", ability: "wis", fullKey: "medicine" },
-  nat: { label: "DND5E.SkillNat", ability: "int", fullKey: "nature" },
-  prc: { label: "DND5E.SkillPrc", ability: "wis", fullKey: "perception" },
-  prf: { label: "DND5E.SkillPrf", ability: "cha", fullKey: "performance" },
-  per: { label: "DND5E.SkillPer", ability: "cha", fullKey: "persuasion" },
-  rel: { label: "DND5E.SkillRel", ability: "int", fullKey: "religion" },
-  slt: { label: "DND5E.SkillSlt", ability: "dex", fullKey: "sleightOfHand" },
-  ste: { label: "DND5E.SkillSte", ability: "dex", fullKey: "stealth" },
-  sur: { label: "DND5E.SkillSur", ability: "wis", fullKey: "survival" }
+  acr: {
+    label: "DND5E.SkillAcr",
+    ability: "dex",
+    fullKey: "acrobatics",
+    reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.AvvBLEHNl7kuwPkN"
+  },
+  ani: {
+    label: "DND5E.SkillAni",
+    ability: "wis",
+    fullKey: "animalHandling",
+    reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.xb3MCjUvopOU4viE"
+  },
+  arc: {
+    label: "DND5E.SkillArc",
+    ability: "int",
+    fullKey: "arcana",
+    reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.h3bYSPge8IOqne1N"
+  },
+  ath: {
+    label: "DND5E.SkillAth",
+    ability: "str",
+    fullKey: "athletics",
+    reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.rIR7ttYDUpH3tMzv"
+  },
+  dec: {
+    label: "DND5E.SkillDec",
+    ability: "cha",
+    fullKey: "deception",
+    reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.mqVZ2fz0L7a9VeKJ"
+  },
+  his: {
+    label: "DND5E.SkillHis",
+    ability: "int",
+    fullKey: "history",
+    reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.kRBZbdWMGW9K3wdY"
+  },
+  ins: {
+    label: "DND5E.SkillIns",
+    ability: "wis",
+    fullKey: "insight",
+    reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.8R5SMbAGbECNgO8z"
+  },
+  itm: {
+    label: "DND5E.SkillItm",
+    ability: "cha",
+    fullKey: "intimidation",
+    reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.4VHHI2gJ1jEsppfg"
+  },
+  inv: {
+    label: "DND5E.SkillInv",
+    ability: "int",
+    fullKey: "investigation",
+    reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.Y7nmbQAruWOs7WRM"
+  },
+  med: {
+    label: "DND5E.SkillMed",
+    ability: "wis",
+    fullKey: "medicine",
+    reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.GeYmM7BVfSCAga4o"
+  },
+  nat: {
+    label: "DND5E.SkillNat",
+    ability: "int",
+    fullKey: "nature",
+    reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.ueMx3uF2PQlcye31"
+  },
+  prc: {
+    label: "DND5E.SkillPrc",
+    ability: "wis",
+    fullKey: "perception",
+    reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.zjEeHCUqfuprfzhY"
+  },
+  prf: {
+    label: "DND5E.SkillPrf",
+    ability: "cha",
+    fullKey: "performance",
+    reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.hYT7Z06yDNBcMtGe"
+  },
+  per: {
+    label: "DND5E.SkillPer",
+    ability: "cha",
+    fullKey: "persuasion",
+    reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.4R5H8iIsdFQTsj3X"
+  },
+  rel: {
+    label: "DND5E.SkillRel",
+    ability: "int",
+    fullKey: "religion",
+    reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.CXVzERHdP4qLhJXM"
+  },
+  slt: {
+    label: "DND5E.SkillSlt",
+    ability: "dex",
+    fullKey: "sleightOfHand",
+    reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.yg6SRpGNVz9nDW0A"
+  },
+  ste: {
+    label: "DND5E.SkillSte",
+    ability: "dex",
+    fullKey: "stealth",
+    reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.4MfrpERNiQXmvgCI"
+  },
+  sur: {
+    label: "DND5E.SkillSur",
+    ability: "wis",
+    fullKey: "survival",
+    reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.t3EzDU5b9BVAIEVi"
+  }
 };
 preLocalize("skills", { key: "label", sort: true });
 
@@ -2399,7 +2497,7 @@ DND5E.advancementTypes = {
  *
  * @typedef {object} RuleTypeConfiguration
  * @property {string} label         Localized label for the rule type.
- * @property {string} [references]  Key for a configuration object that contains reference data.
+ * @property {string} [references]  Key path for a configuration object that contains reference data.
  */
 
 /**
@@ -2411,9 +2509,17 @@ DND5E.ruleTypes = {
     label: "DND5E.Rule.TypeRule",
     references: "rules"
   },
+  ability: {
+    label: "DND5E.Ability",
+    references: "enrichmentLookup.abilities"
+  },
   condition: {
     label: "DND5E.Rule.TypeCondition",
     references: "conditionTypes"
+  },
+  skill: {
+    label: "DND5E.Skill",
+    references: "enrichmentLookup.skills"
   }
 };
 preLocalize("ruleTypes", { key: "label" });
@@ -2426,6 +2532,13 @@ preLocalize("ruleTypes", { key: "label" });
  */
 DND5E.rules = {
   inspiration: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.nkEPI89CiQnOaLYh",
+  carryingcapacity: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.1PnjDBKbQJIVyc2t",
+  push: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.Hni8DjqLzoqsVjb6",
+  lift: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.Hni8DjqLzoqsVjb6",
+  drag: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.Hni8DjqLzoqsVjb6",
+  encumbrance: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.JwqYf9qb6gJAWZKs",
+  hiding: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.plHuoNdS0j3umPNS",
+  passiveperception: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.988C2hQNyvqkdbND",
   time: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.eihqNjwpZ3HM4IqY",
   speed: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.HhqeIiSj8sE1v1qZ",
   travelpace: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.eFAISahBloR2X8MX",
@@ -2474,14 +2587,15 @@ preLocalize("sourceBooks", { sort: true });
 let _enrichmentLookup;
 Object.defineProperty(DND5E, "enrichmentLookup", {
   get() {
+    const s = value => value?.slugify().replaceAll("-", "");
     if ( !_enrichmentLookup ) {
       _enrichmentLookup = {
         abilities: foundry.utils.deepClone(DND5E.abilities),
         skills: foundry.utils.deepClone(DND5E.skills),
         tools: foundry.utils.deepClone(DND5E.toolIds)
       };
-      Object.entries(DND5E.abilities).forEach(([k, a]) => _enrichmentLookup.abilities[a.fullKey] = { ...a, key: k });
-      Object.entries(DND5E.skills).forEach(([k, s]) => _enrichmentLookup.skills[s.fullKey] = { ...s, key: k });
+      Object.entries(DND5E.abilities).forEach(([k, a]) => _enrichmentLookup.abilities[s(a.fullKey)] = { ...a, key: k });
+      Object.entries(DND5E.skills).forEach(([k, s]) => _enrichmentLookup.skills[s(s.fullKey)] = { ...s, key: k });
     }
     return _enrichmentLookup;
   },
