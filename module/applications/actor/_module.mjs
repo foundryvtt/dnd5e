@@ -20,3 +20,4 @@ export {default as ProficiencyConfig} from "./proficiency-config.mjs";
 export {default as TraitSelector} from "./trait-selector.mjs";
 export {default as ToolSelector} from "./tool-selector.mjs";
 export {default as ActorTypeConfig} from "./type-config.mjs";
+export {default as ActorSheetMixin} from "./sheet-mixin.mjs";

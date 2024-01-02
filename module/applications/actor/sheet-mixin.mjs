@@ -4,7 +4,7 @@
  * @returns {class}
  * @mixin
  */
-export const ActorSheetMixin = Base => class extends Base {
+export default Base => class extends Base {
   /**
    * Handle input changes to numeric form fields, allowing them to accept delta-typed inputs.
    * @param {Event} event  Triggering event.

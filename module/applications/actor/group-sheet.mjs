@@ -1,7 +1,7 @@
 import Item5e from "../../documents/item.mjs";
 import { formatCR, formatNumber } from "../../utils.mjs";
 import ActorMovementConfig from "./movement-config.mjs";
-import { ActorSheetMixin } from "./sheet-mixin.mjs";
+import ActorSheetMixin from "./sheet-mixin.mjs";
 
 /**
  * A character sheet for group-type Actors.
@@ -40,7 +40,7 @@ export default class GroupActorSheet extends ActorSheetMixin(ActorSheet) {
    * A set of item types that should be prevented from being dropped on this type of actor sheet.
    * @type {Set<string>}
    */
-  static unsupportedItemTypes = new Set(["background", "class", "subclass", "feat"]);
+  static unsupportedItemTypes = new Set(["background", "race", "class", "subclass", "feat"]);
 
   /* -------------------------------------------- */
   /*  Context Preparation                         */
