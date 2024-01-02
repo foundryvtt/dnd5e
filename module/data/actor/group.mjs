@@ -43,7 +43,7 @@ export default class GroupActor extends ActorDataModel.mixin(CurrencyTemplate) {
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
       type: new SchemaField({
-        value: new StringField({label: "DND5E.Group.Type"})
+        value: new StringField({initial: "party", label: "DND5E.Group.Type"})
       }),
       description: new SchemaField({
         full: new HTMLField({label: "DND5E.Description"}),
