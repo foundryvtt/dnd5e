@@ -59,6 +59,16 @@ export default class ToolData extends SystemDataModel.mixin(
   }
 
   /* -------------------------------------------- */
+  /*  Data Preparation                            */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  prepareDerivedData() {
+    super.prepareDerivedData();
+    this.type.label = CONFIG.DND5E.toolTypes[this.type.value] ?? game.i18n.localize(CONFIG.Item.typeLabels.tool);
+  }
+
+  /* -------------------------------------------- */
   /*  Getters                                     */
   /* -------------------------------------------- */
 
@@ -67,6 +77,16 @@ export default class ToolData extends SystemDataModel.mixin(
    * @type {string[]}
    */
   get chatProperties() {
+    return [CONFIG.DND5E.abilities[this.ability]?.label];
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Properties displayed in the item tooltip.
+   * @type {string[]}
+   */
+  get tooltipProperties() {
     return [CONFIG.DND5E.abilities[this.ability]?.label];
   }
 

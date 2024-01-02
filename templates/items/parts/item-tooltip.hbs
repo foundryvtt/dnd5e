@@ -1,0 +1,42 @@
+<section class="content">
+    <section class="header">
+        <div class="top">
+            <img src="{{ img }}" alt="{{ name }}">
+            <div class="name name-stacked">
+                <span class="title">{{ name }}</span>
+                <span class="subtitle">{{ type }}</span>
+            </div>
+        </div>
+        <div class="bottom">
+            <div class="cost">
+                {{#if price}}
+                <i class="fas fa-coins"></i>
+                <span>{{ dnd5e-numberFormat price.value }}</span>
+                {{/if}}
+            </div>
+
+            <div class="charges">
+                {{#if uses.max}}
+                <span class="value">{{ uses.value }}</span>
+                <span class="separator">&sol;</span>
+                <span class="max">{{ uses.max }}</span>
+                <span>{{ localize "DND5E.Charges" }}</span>
+                {{/if}}
+            </div>
+            <div class="weight">
+                <i class="fas fa-weight-hanging"></i>
+                <span>{{ weight }}</span>
+            </div>
+        </div>
+    </section>
+    <section class="description">
+        {{{ description }}}
+    </section>
+    <ul class="pills">
+       {{#each properties}}
+       <li class="pill maroon">
+           <span class="label">{{ this }}</span>
+       </li>
+       {{/each}}
+    </ul>
+</section>

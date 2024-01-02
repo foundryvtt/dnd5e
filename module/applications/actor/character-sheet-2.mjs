@@ -369,7 +369,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
 
     // Edit mode only.
     if ( this._mode === this.constructor.MODES.EDIT ) {
-      html.find(".item-action").on("click", this._onItemAction.bind(this));
+      html.find(".tab.details .item-action").on("click", this._onItemAction.bind(this));
     }
 
     // Play mode only.

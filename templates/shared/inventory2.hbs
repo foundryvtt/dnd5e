@@ -18,7 +18,7 @@
             </div>
 
             {{!-- Section Contents --}}
-            <ol class="item-list">
+            <ol class="item-list unlist">
                 {{#each items as |item|}}
                 {{#dnd5e-itemContext item as |ctx|}}
 
@@ -54,14 +54,18 @@
 
                     {{!-- Item Quantity --}}
                     <div class="item-detail item-quantity">
+                        {{#if @root.owner}}
                         <a class="adjustment-button" data-action="decrease" data-property="system.quantity">
                             <i class="fas fa-minus"></i>
                         </a>
+                        {{/if}}
                         <input type="text" value="{{ item.system.quantity }}" placeholder="0" data-dtype="Number"
                                data-name="system.quantity" inputmode="numeric" pattern="[0-9+=\-]*" min="0">
+                        {{#if @root.owner}}
                         <a class="adjustment-button" data-action="increase" data-property="system.quantity">
                             <i class="fas fa-plus"></i>
                         </a>
+                        {{/if}}
                     </div>
 
                     {{!-- Item Uses --}}
@@ -77,6 +81,19 @@
                     {{!-- Item Status --}}
                     <div class="item-detail item-controls">
 
+                        {{#if @root.editable}}
+                        {{!-- Editing --}}
+                        <a class="item-control item-action" data-action="edit" data-tooltip="DND5E.ItemEdit"
+                           aria-label="{{ localize "DND5E.ItemEdit" }}">
+                            <i class="fas fa-pen-to-square"></i>
+                        </a>
+
+                        {{!-- Deleting --}}
+                        <a class="item-control item-action" data-action="delete" data-tooltip="DND5E.ItemDelete"
+                           aria-label="{{ localize "DND5E.ItemDelete" }}">
+                            <i class="fas fa-trash"></i>
+                        </a>
+                        {{else if @root.owner}}
                         {{!-- Attuning --}}
                         {{#with ctx.attunement}}
                         {{#if applicable}}
@@ -96,9 +113,10 @@
                         </a>
                         {{/if}}
                         {{/with}}
+                        {{/if}}
 
                         {{!-- Context Menu --}}
-                        <a class="item-control" data-context-menu
+                        <a class="item-control interface-only" data-context-menu
                            aria-label="{{ localize "DND5E.AdditionalControls" }}">
                             <i class="fas fa-ellipsis-vertical"></i>
                         </a>

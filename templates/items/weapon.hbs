@@ -39,9 +39,7 @@
             </div>
 
             <ul class="summary flexrow">
-                <li>
-                    {{lookup config.weaponTypes system.type.value }}
-                </li>
+                <li>{{ system.type.label }}</li>
                 <li>
                     {{#if concealDetails}}
                     <span>{{ localize "DND5E.Unidentified.Title" }}</span>

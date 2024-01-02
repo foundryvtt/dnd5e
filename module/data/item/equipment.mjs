@@ -120,6 +120,16 @@ export default class EquipmentData extends SystemDataModel.mixin(
   }
 
   /* -------------------------------------------- */
+  /*  Data Preparation                            */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  prepareDerivedData() {
+    super.prepareDerivedData();
+    this.type.label = CONFIG.DND5E.equipmentTypes[this.type.value];
+  }
+
+  /* -------------------------------------------- */
   /*  Getters                                     */
   /* -------------------------------------------- */
 
@@ -129,8 +139,21 @@ export default class EquipmentData extends SystemDataModel.mixin(
    */
   get chatProperties() {
     return [
-      CONFIG.DND5E.equipmentTypes[this.type.value],
+      this.type.label,
       this.parent.labels?.armor ?? null,
+      this.stealth ? game.i18n.localize("DND5E.StealthDisadvantage") : null
+    ];
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Properties displayed in the item tooltip.
+   * @type {string[]}
+   */
+  get tooltipProperties() {
+    return [
+      this.parent.labels?.armor,
       this.stealth ? game.i18n.localize("DND5E.StealthDisadvantage") : null
     ];
   }

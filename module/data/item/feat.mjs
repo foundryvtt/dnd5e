@@ -88,6 +88,16 @@ export default class FeatData extends SystemDataModel.mixin(
 
   /* -------------------------------------------- */
 
+  /**
+   * Properties displayed in the item tooltip.
+   * @type {string[]}
+   */
+  get tooltipProperties() {
+    return [this.requirements];
+  }
+
+  /* -------------------------------------------- */
+
   /** @inheritdoc */
   get hasLimitedUses() {
     return this.isActive && (!!this.recharge.value || super.hasLimitedUses);

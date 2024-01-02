@@ -74,6 +74,16 @@ export default class WeaponData extends SystemDataModel.mixin(
   }
 
   /* -------------------------------------------- */
+  /*  Data Preparation                            */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  prepareDerivedData() {
+    super.prepareDerivedData();
+    this.type.label = CONFIG.DND5E.weaponTypes[this.type.value];
+  }
+
+  /* -------------------------------------------- */
   /*  Getters                                     */
   /* -------------------------------------------- */
 
@@ -82,7 +92,7 @@ export default class WeaponData extends SystemDataModel.mixin(
    * @type {string[]}
    */
   get chatProperties() {
-    return [CONFIG.DND5E.weaponTypes[this.type.value]];
+    return [this.type.label];
   }
 
   /* -------------------------------------------- */

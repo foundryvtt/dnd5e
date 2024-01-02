@@ -62,6 +62,16 @@ export default class ConsumableData extends SystemDataModel.mixin(
   }
 
   /* -------------------------------------------- */
+  /*  Data Preparation                            */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  prepareDerivedData() {
+    super.prepareDerivedData();
+    this.type.label = CONFIG.DND5E.consumableTypes[this.type.value];
+  }
+
+  /* -------------------------------------------- */
   /*  Getters                                     */
   /* -------------------------------------------- */
 
@@ -71,7 +81,7 @@ export default class ConsumableData extends SystemDataModel.mixin(
    */
   get chatProperties() {
     return [
-      CONFIG.DND5E.consumableTypes[this.type.value],
+      this.type.label,
       this.hasLimitedUses ? `${this.uses.value}/${this.uses.max} ${game.i18n.localize("DND5E.Charges")}` : null,
       this.priceLabel
     ];

@@ -1095,6 +1095,18 @@
   }
 
   /* ---------------------------------- */
+  /*  Edit Mode                         */
+  /* ---------------------------------- */
+
+  form.editable {
+    .ability-scores .ability-score .score { padding: 0; }
+
+    :is(.skills, .tools, .saves) {
+      > ul > li { gap: .25rem; }
+    }
+  }
+
+  /* ---------------------------------- */
   /*  Locked                            */
   /* ---------------------------------- */
 
@@ -1110,17 +1122,5 @@
     .sheet-body .main-content,
     .sheet-body .sidebar,
     .sheet-body .sidebar .card .death-tray { transition: unset; }
-  }
-}
-
-/* ---------------------------------- */
-/*  Edit Mode                         */
-/* ---------------------------------- */
-
-.dnd5e2.sheet.actor.character .editable {
-  .ability-scores .ability-score .score { padding: 0; }
-
-  :is(.skills, .tools, .saves) {
-    > ul > li { gap: .25rem; }
   }
 }

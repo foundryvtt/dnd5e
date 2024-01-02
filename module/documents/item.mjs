@@ -1322,6 +1322,41 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   }
 
   /* -------------------------------------------- */
+
+  /**
+   * Prepare item tooltip template data.
+   * @param {EnrichmentOptions} enrichmentOptions  Options for text enrichment.
+   * @returns {Promise<object>}
+   */
+  async getTooltipData(enrichmentOptions={}) {
+    const { name, img, system } = this;
+    let { price, weight, uses, identified, unidentified, description } = system;
+    description = game.user.isGM || identified ? description.value : unidentified.description;
+    uses = game.user.isGM || identified ? uses : null;
+    price = game.user.isGM || identified ? price : null;
+
+    const context = {
+      name, img, price, weight, uses,
+      type: system.type?.label ?? game.i18n.localize(CONFIG.Item.typeLabels[this.type]),
+      description: await TextEditor.enrichHTML(description, {
+        async: true, relativeTo: this, rollData: this.getRollData(), ...enrichmentOptions
+      })
+    };
+
+    context.properties = [];
+
+    if ( game.user.isGM || identified ) {
+      context.properties.push(...system.tooltipProperties ?? [], ...system.activatedEffectChatProperties ?? []);
+      if ( "proficient" in system ) {
+        context.properties.push(CONFIG.DND5E.proficiencyLevels[system.prof?.multiplier || 0]);
+      }
+    }
+
+    context.properties = context.properties.filter(_ => _);
+    return context;
+  }
+
+  /* -------------------------------------------- */
   /*  Item Rolls - Attack, Damage, Saves, Checks  */
   /* -------------------------------------------- */
 

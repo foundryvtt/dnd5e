@@ -39,13 +39,7 @@
             </div>
 
             <ul class="summary flexrow">
-                <li>
-                    {{#if system.type.value}}
-                    {{lookup config.toolTypes system.type.value}}
-                    {{else}}
-                    {{localize "ITEM.TypeTool"}}
-                    {{/if}}
-                </li>
+                <li>{{ system.type.label }}</li>
                 <li>
                     {{#if concealDetails}}
                     <span>{{ localize "DND5E.Unidentified.Title" }}</span>

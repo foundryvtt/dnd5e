@@ -52,6 +52,12 @@
     text-transform: uppercase;
   }
 
+  .unlist {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
   h3.icon {
     border-bottom: 1px solid var(--dnd5e-color-black);
     display: flex;
@@ -279,8 +285,100 @@
 /* ---------------------------------- */
 
 .dnd5e2.sheet {
-  .locked a {
+  .locked a:not(.interface-only) {
     cursor: default;
     &:hover { text-shadow: unset; }
   }
+}
+
+/* ---------------------------------- */
+/*  Tooltips                          */
+/* ---------------------------------- */
+
+:is(#tooltip, .locked-tooltip).item-tooltip {
+  width: 300px;
+  font-family: var(--dnd5e-font-roboto);
+  font-size: var(--font-size-13);
+  color: var(--color-text-dark-primary);
+  border-radius: 5px;
+  background: var(--dnd5e-color-parchment) url("ui/texture-gray.webp") no-repeat top left;
+  box-shadow: 0 0 16px var(--dnd5e-shadow-45);
+  border: 2px solid var(--dnd5e-color-gold);
+
+  .content { padding: 0 .5rem .25rem; }
+
+  .header {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    padding-top: .75rem;
+
+    .top {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: .75rem;
+
+      .subtitle { font-size: var(--font-size-11); }
+    }
+
+    img {
+      width: 64px;
+      height: 64px;
+      border: 4px solid var(--dnd5e-color-gold);
+      box-shadow: 0 0 4px var(--dnd5e-shadow-45);
+      border-radius: 100%;
+      object-fit: cover;
+    }
+
+    .bottom {
+      display: flex;
+      font-size: var(--font-size-11);
+      color: var(--color-text-dark-5);
+    }
+
+    .weight, .cost { width: 70px; }
+
+    .cost { text-align: left; }
+
+    .weight {
+      display: flex;
+      align-items: center;
+      justify-content: end;
+      gap: .25rem;
+
+      i { font-size: var(--font-size-9); }
+      span { height: 14px; }
+    }
+
+    .charges {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: .25rem;
+    }
+  }
+
+  .description {
+    font-size: var(--font-size-12);
+    line-height: normal;
+    text-align: left;
+  }
+
+  .pill {
+    font-size: var(--font-size-10);
+    padding: .1875rem .375rem;
+    line-height: 1;
+  }
+}
+
+.locked-tooltip.item-tooltip::after {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  border: 1px solid var(--dnd5e-color-gold);
+  border-radius: 4px;
+  pointer-events: none;
 }

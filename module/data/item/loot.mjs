@@ -23,6 +23,16 @@ export default class LootData extends SystemDataModel.mixin(
   }
 
   /* -------------------------------------------- */
+  /*  Data Preparation                            */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  prepareDerivedData() {
+    super.prepareDerivedData();
+    this.type.label = CONFIG.DND5E.lootTypes[this.type.value]?.label ?? game.i18n.localize(CONFIG.Item.typeLabels.loot);
+  }
+
+  /* -------------------------------------------- */
   /*  Getters                                     */
   /* -------------------------------------------- */
 
@@ -32,7 +42,7 @@ export default class LootData extends SystemDataModel.mixin(
    */
   get chatProperties() {
     return [
-      game.i18n.localize(CONFIG.Item.typeLabels.loot),
+      this.type.label,
       this.weight ? `${this.weight} ${game.i18n.localize("DND5E.AbbreviationLbs")}` : null,
       this.priceLabel
     ];
