@@ -96,7 +96,7 @@ export default class AbilityTemplate extends MeasuredTemplate {
      * @param {Item5e} item                Item for which the template is being placed.
      * @param {AbilityTemplate} template   The template being placed.
      */
-    Hooks.callAll("dnd5e.createItemTemplate", item, template);
+    Hooks.callAll("dnd5e.createItemTemplate", item, object);
 
     return object;
   }
