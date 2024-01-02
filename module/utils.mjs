@@ -163,6 +163,23 @@ export async function preloadHandlebarsTemplates() {
 /* -------------------------------------------- */
 
 /**
+ * A helper that converts the provided object into a series of `data-` entries.
+ * @param {object} context  Current evaluation context.
+ * @param {object} options  Handlebars options.
+ * @returns {string}
+ */
+function dataset(context, options) {
+  const entries = [];
+  for ( let [key, value] of Object.entries(context ?? {}) ) {
+    key = key.replace(/[A-Z]+(?![a-z])|[A-Z]/g, (a, b) => (b ? "-" : "") + a.toLowerCase());
+    entries.push(`data-${key}="${value}"`);
+  }
+  return new Handlebars.SafeString(entries.join(" "));
+}
+
+/* -------------------------------------------- */
+
+/**
  * A helper to create a set of <option> elements in a <select> block grouped together
  * in <optgroup> based on the provided categories.
  *
@@ -241,6 +258,7 @@ function itemContext(context, options) {
 export function registerHandlebarsHelpers() {
   Handlebars.registerHelper({
     getProperty: foundry.utils.getProperty,
+    "dnd5e-dataset": dataset,
     "dnd5e-groupedSelectOptions": groupedSelectOptions,
     "dnd5e-linkForUuid": linkForUuid,
     "dnd5e-itemContext": itemContext
