@@ -989,9 +989,7 @@ DND5E.validProperties = {
     "mgc"
   ]),
   consumable: new Set([
-    "ada",
-    "mgc",
-    "sil"
+    "mgc"
   ]),
   equipment: new Set([
     "concentration",
