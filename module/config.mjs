@@ -989,8 +989,7 @@ preLocalize("itemProperties", { keys: ["label", "abbr"], sort: true });
  */
 DND5E.validProperties = {
   backpack: new Set([
-    "mgc",
-    "weightlessContents"
+    "mgc"
   ]),
   consumable: new Set([
     "ada",
