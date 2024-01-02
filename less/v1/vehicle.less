@@ -2,6 +2,29 @@
   min-width: 720px;
   min-height: 680px;
 
+  .source {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.25em;
+
+    span {
+      padding-inline: 4px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .config-button {
+      display: none;
+      font-size: var(--font-size-11);
+      font-weight: normal;
+      padding-inline-end: 0.25em;
+    }
+    &:hover .config-button {
+      display: block;
+      margin-block-start: -5px;
+    }
+  }
   .features {
     .item-controls {
       flex: 0 0 68px;
