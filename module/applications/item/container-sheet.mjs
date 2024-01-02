@@ -126,7 +126,7 @@ export default class ContainerSheet extends ItemSheet5e {
     const containers = new Set();
 
     let items = await Promise.all(folder.contents.map(async item => {
-      if ( !(document instanceof Item) ) item = await fromUuid(item.uuid);
+      if ( !(item instanceof Item) ) item = await fromUuid(item.uuid);
       if ( item.system.container === this.item.id ) return;
       if ( (this.item.uuid === item.uuid) || parentContainers.includes(item) ) {
         recursiveWarning = true;
@@ -143,7 +143,7 @@ export default class ContainerSheet extends ItemSheet5e {
 
     // Create any remaining items
     const toCreate = await Item5e.createWithContents(items, {container: this.item});
-    if ( this.item.folder ) toCreate.forEach(d => d.folder = this.item.folder);
+    if ( this.item.folder ) toCreate.forEach(d => d.folder = this.item.folder.id);
     return Item5e.createDocuments(toCreate, {pack: this.item.pack, parent: this.item.parent, keepId: true});
   }
 
@@ -179,7 +179,7 @@ export default class ContainerSheet extends ItemSheet5e {
 
     // Otherwise, create a new item & contents in this context
     const toCreate = await Item5e.createWithContents([item], {container: this.item});
-    if ( this.item.folder ) toCreate.forEach(d => d.folder = this.item.folder);
+    if ( this.item.folder ) toCreate.forEach(d => d.folder = this.item.folder.id);
     return Item5e.createDocuments(toCreate, {pack: this.item.pack, parent: this.item.actor, keepId: true});
   }
 

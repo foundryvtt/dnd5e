@@ -922,7 +922,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
     const folder = await Folder.implementation.fromDropData(data);
     if ( folder.type !== "Item" ) return [];
     const droppedItemData = await Promise.all(folder.contents.map(async item => {
-      if ( !(document instanceof Item) ) item = await fromUuid(item.uuid);
+      if ( !(item instanceof Item) ) item = await fromUuid(item.uuid);
       return item;
     }));
     return this._onDropItemCreate(droppedItemData);
@@ -945,7 +945,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
       items = itemsWithoutAdvancement;
     }
 
-    // Filter to items already in contains to avoid creating duplicates
+    // Filter out items already in containers to avoid creating duplicates
     const containers = new Set(items.filter(i => i.type === "container").map(i => i._id));
     items = items.filter(i => !containers.has(i.system.container));
 
