@@ -988,6 +988,11 @@ DND5E.validProperties = {
   backpack: new Set([
     "mgc"
   ]),
+  consumable: new Set([
+    "ada",
+    "mgc",
+    "sil"
+  ]),
   equipment: new Set([
     "concentration",
     "mgc"
@@ -1028,11 +1033,6 @@ DND5E.validProperties = {
   tool: new Set([
     "concentration",
     "mgc"
-  ]),
-  consumable: new Set([
-    "ada",
-    "mgc",
-    "sil"
   ])
 };
 
