@@ -1801,27 +1801,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
         await item.rollToolCheck({event}); break;
       case "placeTemplate":
         try {
-          /**
-           * A hook event that fires before a template is placed for an Item.
-           * @function dnd5e.prePlaceTemplate
-           * @memberof hookEvents
-           * @param {Item5e} item                     Item for which the template is being placed.
-           * @returns {boolean}                       Explicitly return false to prevent the roll from being performed.
-           */
-          if ( Hooks.call("dnd5e.prePlaceTemplate", this) === false ) break;
-          const template = dnd5e.canvas.AbilityTemplate.fromItem(item, {"flags.dnd5e.spellLevel": spellLevel});
-
-          /**
-           * A hook event that fires after a template is placed for an Item.
-           * @function dnd5e.placeTemplate
-           * @memberof hookEvents
-           * @param {Item5e} item                Item for which the template is being placed.
-           * @param {AbilityTemplate} template   The template being placed.
-           */
-          if ( template ) {
-            Hooks.callAll("dnd5e.placeTemplate", this, template);
-            await template.drawPreview();
-          }
+          await dnd5e.canvas.AbilityTemplate.fromItem(item, {"flags.dnd5e.spellLevel": spellLevel})?.drawPreview();
         } catch(err) {
           Hooks.onError("Item5e._onChatCardAction", err, {
             msg: game.i18n.localize("DND5E.PlaceTemplateError"),
