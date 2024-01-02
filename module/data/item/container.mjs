@@ -32,9 +32,43 @@ export default class ContainerData extends SystemDataModel.mixin(
         }),
         value: new foundry.data.fields.NumberField({
           required: true, min: 0, label: "DND5E.ItemContainerCapacityMax"
-        }),
-        weightless: new foundry.data.fields.BooleanField({required: true, label: "DND5E.ItemContainerWeightless"})
+        })
       }, {label: "DND5E.ItemContainerCapacity"})
+    });
+  }
+
+  /* -------------------------------------------- */
+  /*  Data Migrations                             */
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  static _migrateData(source) {
+    super._migrateData(source);
+    ContainerData.#migrateWeightlessData(source);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Migrate the weightless property into `properties`.
+   * @param {object} source  The candidate source data from which the model will be constructed.
+   */
+  static #migrateWeightlessData(source) {
+    if ( foundry.utils.getProperty(source, "capacity.weightless") === true ) {
+      source.properties ??= [];
+      source.properties.push("weightlessContents");
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  prepareDerivedData() {
+    const data = this;
+    Object.defineProperty(this.capacity, "weightless", {
+      get() {
+        return data.properties.has("weightlessContents");
+      }
     });
   }
 }

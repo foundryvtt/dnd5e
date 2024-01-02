@@ -61,18 +61,18 @@
                 {{/each}}
             </div>
 
-            <div class="form-group input-select">
+            <div class="form-group">
                 <label>{{localize 'DND5E.ItemContainerCapacity'}}</label>
                 <div class="form-fields">
                     {{numberInput system.capacity.value name="system.capacity.value" placeholder="&mdash;"}}
-                    <select name="system.capacity.type">
-                        {{selectOptions config.itemCapacityTypes selected=system.capacity.type}}
-                    </select>
-                    <label class="checkbox">
-                        <input type="checkbox" name="system.capacity.weightless" {{checked system.capacity.weightless}}>
-                        {{localize 'DND5E.ItemContainerWeightless'}}
-                    </label>
                 </div>
+            </div>
+
+            <div class="form-group">
+                <label>{{localize 'DND5E.ItemContainerCapacityType'}}</label>
+                <select name="system.capacity.type">
+                    {{selectOptions config.itemCapacityTypes selected=system.capacity.type}}
+                </select>
             </div>
 
             <div class="form-group">
