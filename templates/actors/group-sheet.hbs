@@ -96,7 +96,7 @@
                         {{/if}}
                         {{#if section.displayQuantityColumn}}
                         <div class="quantity flexrow">
-                            <input type="number" name="system.members.{{index}}.quantity.value" min="1" step="1"
+                            <input type="number" name="system.members.{{index}}.quantity.value" min="0" step="1"
                                    value="{{member.quantity.value}}">
                             <input type="text" name="system.members.{{index}}.quantity.formula"
                                    value="{{member.quantity.formula}}" placeholder="{{localize 'DND5E.Formula'}}">

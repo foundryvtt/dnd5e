@@ -7,10 +7,10 @@ const { ArrayField, ForeignDocumentField, HTMLField, NumberField, SchemaField, S
 /**
  * Metadata associated with members in this group.
  * @typedef {object} GroupMemberData
- * @property {Actor5e} actor            Associated actor document.
+ * @property {Actor5e} actor              Associated actor document.
  * @property {object} quantity
- * @property {number} quantity.value    Number of this actor in the group (for encounter or crew types).
- * @property {string} quantity.formula  Formula used for re-rolling actor quantities in encounters.
+ * @property {number} quantity.value      Number of this actor in the group (for encounter or crew types).
+ * @property {string} [quantity.formula]  Formula used for re-rolling actor quantities in encounters.
  */
 
 /**
