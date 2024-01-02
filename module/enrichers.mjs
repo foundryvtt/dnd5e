@@ -530,7 +530,7 @@ async function enrichReference(config, label, options) {
   let source;
   const type = Object.keys(config).find(k => k in CONFIG.DND5E.ruleTypes);
   if ( type ) {
-    const key = config[type].slugify().replace("-", "");
+    const key = slugify(config[type]);
     source = foundry.utils.getProperty(CONFIG.DND5E, CONFIG.DND5E.ruleTypes[type].references)?.[key];
   } else if ( config.values.length ) {
     const key = slugify(config.values.join(""));
