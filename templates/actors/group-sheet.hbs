@@ -59,7 +59,15 @@
                     <span class="hp">{{localize "DND5E.HitPoints"}}</span>
                     {{/if}}
                     {{#if section.displayQuantityColumn}}
-                    <span class="quantity">{{localize "DND5E.Quantity"}}</span>
+                    <span class="quantity">
+                        {{localize "DND5E.Quantity"}}
+                        {{#if @root.editable}}
+                        <a class="action-button" data-action="rollQuantities" data-tooltip="DND5E.QuantityRoll"
+                           aria-label="{{localize 'DND5E.QuantityRoll'}}">
+                            <i class="fa-solid fa-dice"></i>
+                        </a>
+                        {{/if}}
+                    </span>
                     {{/if}}
                     {{#if section.displayChallengeColumn}}
                     <span class="challenge">{{localize "DND5E.Group.Challenge"}}</span>
@@ -88,11 +96,16 @@
                         {{/if}}
                         {{#if section.displayQuantityColumn}}
                         <div class="quantity flexrow">
-                            <input type="number" name="system.members.{{index}}.quantity" min="1" step="1"
-                                   value="{{member.quantity}}">
+                            <input type="number" name="system.members.{{index}}.quantity.value" min="0" step="1"
+                                   value="{{member.quantity.value}}">
+                            <input type="text" name="system.members.{{index}}.quantity.formula"
+                                   value="{{member.quantity.formula}}" placeholder="{{localize 'DND5E.Formula'}}">
                         </div>
                         {{else}}
-                        <input type="hidden" name="system.members.{{index}}.quantity" value="{{member.quantity}}">
+                        <input type="hidden" name="system.members.{{index}}.quantity.value"
+                               value="{{member.quantity.value}}">
+                        <input type="hidden" name="system.members.{{index}}.quantity.formula"
+                               value="{{member.quantity.formula}}">
                         {{/if}}
                         {{#if section.displayChallengeColumn}}
                         <div class="challenge">
