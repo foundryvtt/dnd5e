@@ -974,9 +974,6 @@ DND5E.itemProperties = {
   },
   vocal: {
     label: "DND5E.Item.PropertyVerbal"
-  },
-  weightlessContents: {
-    label: "DND5E.Item.PropertyWeightlessContents"
   }
 };
 preLocalize("itemProperties", { keys: ["label", "abbr"], sort: true });
@@ -990,11 +987,6 @@ preLocalize("itemProperties", { keys: ["label", "abbr"], sort: true });
 DND5E.validProperties = {
   backpack: new Set([
     "mgc"
-  ]),
-  consumable: new Set([
-    "ada",
-    "mgc",
-    "sil"
   ]),
   consumable: new Set([
     "ada",
