@@ -900,7 +900,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @override */
   async _onDropItem(event, data) {
     if ( !this.actor.isOwner ) return false;
     const item = await Item.implementation.fromDropData(data);
@@ -916,7 +916,26 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @override */
+  async _onDropFolder(event, data) {
+    if ( !this.actor.isOwner ) return [];
+    const folder = await Folder.implementation.fromDropData(data);
+    if ( folder.type !== "Item" ) return [];
+    const droppedItemData = await Promise.all(folder.contents.map(async item => {
+      if ( !(document instanceof Item) ) item = await fromUuid(item.uuid);
+      return item;
+    }));
+    return this._onDropItemCreate(droppedItemData);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle the final creation of dropped Item data on the Actor.
+   * @param {Item5e[]|Item5e} itemData     The item or items requested for creation
+   * @returns {Promise<Item5e[]>}
+   * @protected
+   */
   async _onDropItemCreate(itemData) {
     let items = itemData instanceof Array ? itemData : [itemData];
     const itemsWithoutAdvancement = items.filter(i => !i.system.advancement?.length);
@@ -925,6 +944,10 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
       ui.notifications.warn(game.i18n.format("DND5E.WarnCantAddMultipleAdvancements"));
       items = itemsWithoutAdvancement;
     }
+
+    // Filter to items already in contains to avoid creating duplicates
+    const containers = new Set(items.filter(i => i.type === "container").map(i => i._id));
+    items = items.filter(i => !containers.has(i.system.container));
 
     // Create the owned items & contents as normal
     const toCreate = await Item5e.createWithContents(items, {
