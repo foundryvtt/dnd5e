@@ -101,12 +101,50 @@ export default class ContainerSheet extends ItemSheet5e {
   /** @inheritdoc */
   _onDrop(event) {
     const data = TextEditor.getDragEventData(event);
-    // TODO: Handle dropping folders of items
-    if ( data.type !== "Item" ) return super._onDrop(event, data);
+    if ( !["Item", "Folder"].includes(data.type) ) return super._onDrop(event, data);
 
     if ( Hooks.call("dnd5e.dropItemSheetData", this.item, this, data) === false ) return;
 
+    if ( data.type === "Folder" ) return this._onDropFolder(event, data);
     return this._onDropItem(event, data);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle the dropping of Folder data onto the Container sheet.
+   * @param {DragEvent} event              The concluding DragEvent which contains the drop data.
+   * @param {object} data                  The data transfer extracted from the event.
+   * @returns {Promise<Item5e[]>}          The created Item objects.
+   */
+  async _onDropFolder(event, data) {
+    const folder = await Folder.implementation.fromDropData(data);
+    if ( !this.item.isOwner || (folder.type !== "Item") ) return [];
+
+    let recursiveWarning = false;
+    const parentContainers = await this.item.system.allContainers();
+    const containers = new Set();
+
+    let items = await Promise.all(folder.contents.map(async item => {
+      if ( !(document instanceof Item) ) item = await fromUuid(item.uuid);
+      if ( item.system.container === this.item.id ) return;
+      if ( (this.item.uuid === item.uuid) || parentContainers.includes(item) ) {
+        recursiveWarning = true;
+        return;
+      }
+      if ( item.type === "container" ) containers.add(item.id);
+      return item;
+    }));
+    items = items.filter(i => i && !containers.has(i.system.container));
+
+    // Display recursive warning, but continue with any remaining items
+    if ( recursiveWarning ) ui.notifications.warn("DND5E.ContainerRecursiveError", { localize: true });
+    if ( !items.length ) return [];
+
+    // Create any remaining items
+    const toCreate = await Item5e.createWithContents(items, {container: this.item});
+    if ( this.item.folder ) toCreate.forEach(d => d.folder = this.item.folder);
+    return Item5e.createDocuments(toCreate, {pack: this.item.pack, parent: this.item.parent, keepId: true});
   }
 
   /* -------------------------------------------- */
@@ -115,7 +153,7 @@ export default class ContainerSheet extends ItemSheet5e {
    * Handle the dropping of Item data onto an Item Sheet.
    * @param {DragEvent} event              The concluding DragEvent which contains the drop data.
    * @param {object} data                  The data transfer extracted from the event.
-   * @returns {Promise<Item5e[]|boolean>}  The created Item object or `false` if it couldn't be created.
+   * @returns {Promise<Item5e[]|boolean>}  The created Item objects or `false` if it couldn't be created.
    * @protected
    */
   async _onDropItem(event, data) {
@@ -130,7 +168,7 @@ export default class ContainerSheet extends ItemSheet5e {
     // Prevent dropping containers within themselves
     const parentContainers = await this.item.system.allContainers();
     if ( (this.item.uuid === item.uuid) || parentContainers.includes(item) ) {
-      ui.notifications.error(game.i18n.localize("DND5E.ContainerRecursiveError"));
+      ui.notifications.error("DND5E.ContainerRecursiveError", { localize: true });
       return;
     }
 
