@@ -75,7 +75,11 @@
 
             {{!-- Consumable Properties --}}
             <div class="form-group stacked weapon-properties">
+                {{#if (eq system.type.value "ammo")}}
                 <label>{{ localize "DND5E.ItemAmmoProperties" }}</label>
+                {{else}}
+                <label>{{ localize "DND5E.ItemConsumableProperties" }}</label>
+                {{/if}}
                 {{#each properties}}
                 <label class="checkbox">
                     <input type="checkbox" name="system.properties.{{@key}}" {{checked selected}}> {{ label }}
