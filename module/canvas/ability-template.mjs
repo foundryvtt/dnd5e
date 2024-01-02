@@ -80,7 +80,7 @@ export default class AbilityTemplate extends MeasuredTemplate {
      * @param {object} templateData             Data used to create the new template.
      * @returns {boolean}                       Explicitly return false to prevent the template from being placed.
      */
-    if ( Hooks.call("dnd5e.preCreateItemTemplate", item, templateData) === false ) return;
+    if ( Hooks.call("dnd5e.preCreateItemTemplate", item, templateData) === false ) return null;
 
     // Return the template constructed from the item data
     const cls = CONFIG.MeasuredTemplate.documentClass;
