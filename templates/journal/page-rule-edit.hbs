@@ -6,7 +6,7 @@
         <h3>{{localize "DND5E.Rule.Tooltip"}}</h3>
         <label>
             {{localize "DND5E.Rule.Type"}}
-            <select>
+            <select name="system.type">
                 {{selectOptions CONFIG.ruleTypes selected=document.system.type labelAttr="label"}}
             </select>
         </label>
