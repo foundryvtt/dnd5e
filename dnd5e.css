@@ -2580,6 +2580,27 @@ a.roll-link i {
   min-width: 720px;
   min-height: 680px;
 }
+.dnd5e.sheet.actor.vehicle .source {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.25em;
+}
+.dnd5e.sheet.actor.vehicle .source span {
+  padding-inline: 4px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.dnd5e.sheet.actor.vehicle .source .config-button {
+  display: none;
+  font-size: var(--font-size-11);
+  font-weight: normal;
+  padding-inline-end: 0.25em;
+}
+.dnd5e.sheet.actor.vehicle .source:hover .config-button {
+  display: block;
+  margin-block-start: -5px;
+}
 .dnd5e.sheet.actor.vehicle .features .item-controls {
   flex: 0 0 68px;
 }
