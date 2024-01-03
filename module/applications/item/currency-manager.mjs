@@ -31,6 +31,12 @@ export default class CurrencyManager extends FormApplication {
     if ( actor !== this.object ) destinations.push(actor);
     destinations.push(...(actor.system.transferDestinations ?? []));
     destinations.push(...actor.itemTypes.container.filter(b => b !== this.object));
+    if ( game.user.isGM ) {
+      const primaryParty = game.settings.get("dnd5e", "primaryParty")?.actor;
+      if ( primaryParty && (this.object !== primaryParty) && !destinations.includes(primaryParty) ) {
+        destinations.push(primaryParty);
+      }
+    }
     return destinations;
   }
 
