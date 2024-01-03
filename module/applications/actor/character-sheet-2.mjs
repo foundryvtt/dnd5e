@@ -18,6 +18,10 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
     return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ["dnd5e2", "sheet", "actor", "character"],
       tabs: [{ navSelector: ".tabs", contentSelector: ".tab-body", initial: "details" }],
+      dragDrop: [
+        { dragSelector: ".item-list .item", dropSelector: null },
+        { dragSelector: ".containers .container", dropSelector: null }
+      ],
       scrollY: [".main-content"],
       width: 800,
       height: 1000,
@@ -163,7 +167,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
       context.cssClass += " collapsed";
       context.sidebarCollapsed = true;
     }
-    const { attributes, details } = this.actor.system;
+    const { attributes, details, traits } = this.actor.system;
 
     // Class
     context.labels.class = Object.values(this.actor.classes).sort((a, b) => {
@@ -245,6 +249,13 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
       ability.mod = Math.abs(ability.save);
     }
 
+    // Size
+    context.size = {
+      label: CONFIG.DND5E.actorSizes[traits.size].label,
+      abbr: CONFIG.DND5E.actorSizes[traits.size].abbreviation,
+      mod: attributes.encumbrance.mod
+    };
+
     // Skills & Tools
     for ( const entry of Object.values(context.skills).concat(Object.values(context.tools)) ) {
       entry.class = this.constructor.PROFICIENCY_CLASSES[context.editable ? entry.baseValue : entry.value];
@@ -276,6 +287,12 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
 
     // Inventory
     this._prepareItems(context);
+
+    // Containers
+    for ( const container of context.containers ) {
+      const ctx = context.itemContext[container.id];
+      ctx.capacity = await container.system.computeCapacity();
+    }
 
     return context;
   }
@@ -316,18 +333,13 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
   /** @inheritDoc */
   _prepareItems(context) {
     super._prepareItems(context);
-    for ( const [k, v] of Object.entries(context.inventory) ) {
-      if ( k === "container" ) {
-        context.containers = v.items;
-        v.items = [];
+    for ( const entry of context.inventory ) {
+      if ( entry.dataset.type === "container" ) {
+        context.containers = entry.items.sort((a, b) => a.sort - b.sort);
+        entry.items = [];
       }
 
-      if ( !v.items.length ) {
-        delete context.inventory[k];
-        continue;
-      }
-
-      for ( const item of v.items ) {
+      for ( const item of entry.items ) {
         const ctx = context.itemContext[item.id];
         if ( ctx.attunement ) {
           ctx.attunement.applicable = true;
@@ -347,6 +359,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
         else ctx.equip = { applicable: false };
       }
     }
+    context.inventory = context.inventory.filter(entry => entry.items.length);
   }
 
   /* -------------------------------------------- */

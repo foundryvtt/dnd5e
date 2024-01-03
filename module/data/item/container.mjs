@@ -176,6 +176,34 @@ export default class ContainerData extends SystemDataModel.mixin(
   }
 
   /* -------------------------------------------- */
+
+  /**
+   * @typedef {object} Item5eCapacityDescriptor
+   * @property {number} value  The current total weight or number of items in the container.
+   * @property {number} max    The maximum total weight or number of items in the container.
+   * @property {number} pct    The percentage of total capacity.
+   * @property {string} units  The units label.
+   */
+
+  /**
+   * Compute capacity information for this container.
+   * @returns {Promise<Item5eCapacityDescriptor>}
+   */
+  async computeCapacity() {
+    const { value, type } = this.capacity;
+    const context = { max: value };
+    if ( type === "weight" ) {
+      context.value = await this.contentsWeight;
+      context.units = game.i18n.localize("DND5E.AbbreviationLbs");
+    } else {
+      context.value = await this.contentsCount;
+      context.units = game.i18n.localize("DND5E.ItemContainerCapacityItems");
+    }
+    context.pct = context.max ? (context.value / context.max) * 100 : 0;
+    return context;
+  }
+
+  /* -------------------------------------------- */
   /*  Socket Event Handlers                       */
   /* -------------------------------------------- */
 

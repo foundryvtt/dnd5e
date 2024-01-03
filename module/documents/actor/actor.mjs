@@ -563,14 +563,19 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     }
 
     // Determine the Encumbrance size class
-    let mod = {tiny: 0.5, sm: 1, med: 1, lg: 2, huge: 4, grg: 8}[this.system.traits.size] || 1;
-    if ( this.flags.dnd5e?.powerfulBuild ) mod = Math.min(mod * 2, 8);
+    const keys = Object.keys(CONFIG.DND5E.actorSizes);
+    const index = keys.findIndex(k => k === this.system.traits.size);
+    const config = CONFIG.DND5E.actorSizes[
+      keys[this.flags.dnd5e?.powerfulBuild ? Math.min(index + 1, keys.length - 1) : index]
+    ];
+    const mod = config?.capacityMultiplier ?? config?.token ?? 1;
 
     const strengthMultiplier = game.settings.get("dnd5e", "metricWeightUnits")
       ? CONFIG.DND5E.encumbrance.strMultiplier.metric
       : CONFIG.DND5E.encumbrance.strMultiplier.imperial;
 
     // Populate final Encumbrance values
+    encumbrance.mod = mod;
     encumbrance.value = weight.toNearest(0.1);
     encumbrance.max = ((this.system.abilities.str?.value ?? 10) * strengthMultiplier * mod).toNearest(0.1);
     encumbrance.pct = Math.clamped((encumbrance.value * 100) / encumbrance.max, 0, 100);
@@ -855,7 +860,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     // Configure prototype token settings
     const prototypeToken = {};
     if ( "size" in (this.system.traits || {}) ) {
-      const size = CONFIG.DND5E.tokenSizes[this.system.traits.size || "med"];
+      const size = CONFIG.DND5E.actorSizes[this.system.traits.size || "med"].token ?? 1;
       if ( !foundry.utils.hasProperty(data, "prototypeToken.width") ) prototypeToken.width = size;
       if ( !foundry.utils.hasProperty(data, "prototypeToken.height") ) prototypeToken.height = size;
     }
@@ -875,7 +880,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( "size" in (this.system.traits || {}) ) {
       const newSize = foundry.utils.getProperty(changed, "system.traits.size");
       if ( newSize && (newSize !== this.system.traits?.size) ) {
-        let size = CONFIG.DND5E.tokenSizes[newSize];
+        let size = CONFIG.DND5E.actorSizes[newSize].token ?? 1;
         if ( !foundry.utils.hasProperty(changed, "prototypeToken.width") ) {
           changed.prototypeToken ||= {};
           changed.prototypeToken.height = size;
@@ -2817,7 +2822,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     let type = localizedType;
     if ( typeData.swarm ) {
       type = game.i18n.format("DND5E.CreatureSwarmPhrase", {
-        size: game.i18n.localize(CONFIG.DND5E.actorSizes[typeData.swarm]),
+        size: game.i18n.localize(CONFIG.DND5E.actorSizes[typeData.swarm].label),
         type: localizedType
       });
     }

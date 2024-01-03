@@ -54,8 +54,7 @@ export default class SlideToggleElement extends HTMLElement {
 
   set checked(value) {
     if ( typeof value !== "boolean" ) throw new Error("Slide toggle checked state must be a boolean.");
-    if ( value ) this.setAttribute("checked", "");
-    else this.removeAttribute("checked");
+    this.toggleAttribute("checked", value);
     this.#internals.ariaChecked = `${value}`;
   }
 

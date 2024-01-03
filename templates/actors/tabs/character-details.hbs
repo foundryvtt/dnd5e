@@ -160,10 +160,10 @@
                         <span class="title">{{ system.details.race.name }}</span>
                         {{#if editable}}
                         <select class="actor-size unselect" name="system.traits.size">
-                            {{ selectOptions config.actorSizes selected=source.traits.size }}
+                            {{ selectOptions config.actorSizes selected=source.traits.size labelAttr="label" }}
                         </select>
                         {{else}}
-                        <span class="subtitle">{{ lookup config.actorSizes system.traits.size }}</span>
+                        <span class="subtitle">{{ size.label }}</span>
                         {{/if}}
                     </div>
                     {{#if editable}}

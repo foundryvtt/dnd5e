@@ -59,13 +59,8 @@ export default class ProficiencyCycleElement extends HTMLElement {
   get disabled() { return this.hasAttribute("disabled"); }
 
   set disabled(value) {
-    if ( value ) {
-      this.setAttribute("disabled", "");
-      this.#shadowRoot.querySelector("input")?.setAttribute("disabled", "");
-    } else {
-      this.removeAttribute("disabled");
-      this.#shadowRoot.querySelector("input")?.removeAttribute("disabled");
-    }
+    this.toggleAttribute("disabled", value);
+    this.#shadowRoot.querySelector("input")?.toggleAttribute("disabled", value);
   }
 
   /* -------------------------------------------- */
@@ -76,7 +71,7 @@ export default class ProficiencyCycleElement extends HTMLElement {
    */
   get name() { return this.getAttribute("name"); }
 
-  set name(value) { this.setAttribute("name"); }
+  set name(value) { this.setAttribute("name", value); }
 
   /* -------------------------------------------- */
 

@@ -46,17 +46,8 @@ export default class ContainerSheet extends ItemSheet5e {
     const context = await super.getData(options);
 
     context.items = Array.from(await this.item.system.contents);
+    context.capacity = await this.item.system.computeCapacity();
     context.itemContext = {};
-
-    context.capacity = { max: this.item.system.capacity.value };
-    if ( this.item.system.capacity.type === "weight" ) {
-      context.capacity.value = await this.item.system.contentsWeight;
-      context.capacity.units = game.i18n.localize("DND5E.AbbreviationLbs"); // TODO: Support metric
-    } else {
-      context.capacity.value = await this.item.system.contentsCount;
-      context.capacity.units = game.i18n.localize("DND5E.ItemContainerCapacityItems");
-    }
-    context.capacity.pct = (context.capacity.value / context.capacity.max) * 100;
 
     for ( const item of context.items ) {
       const ctx = context.itemContext[item.id] ??= {};

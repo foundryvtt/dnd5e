@@ -533,31 +533,73 @@ preLocalize("abilityConsumptionTypes", { sort: true });
 /* -------------------------------------------- */
 
 /**
- * Creature sizes.
- * @enum {string}
+ * Configuration data for actor sizes.
+ *
+ * @typedef {object} ActorSizeConfiguration
+ * @property {string} label                   Localized label.
+ * @property {string} abbreviation            Localized abbreviation.
+ * @property {number} [token=1]               Default token size.
+ * @property {number} [capacityMultiplier=1]  Multiplier used to calculate carrying capacities.
+ */
+
+/**
+ * Creature sizes ordered from smallest to largest.
+ * @enum {ActorSizeConfiguration}
  */
 DND5E.actorSizes = {
-  tiny: "DND5E.SizeTiny",
-  sm: "DND5E.SizeSmall",
-  med: "DND5E.SizeMedium",
-  lg: "DND5E.SizeLarge",
-  huge: "DND5E.SizeHuge",
-  grg: "DND5E.SizeGargantuan"
+  tiny: {
+    label: "DND5E.SizeTiny",
+    abbreviation: "DND5E.SizeTinyAbbr",
+    token: 0.5,
+    capacityMultiplier: 0.5
+  },
+  sm: {
+    label: "DND5E.SizeSmall",
+    abbreviation: "DND5E.SizeSmallAbbr"
+  },
+  med: {
+    label: "DND5E.SizeMedium",
+    abbreviation: "DND5E.SizeMediumAbbr"
+  },
+  lg: {
+    label: "DND5E.SizeLarge",
+    abbreviation: "DND5E.SizeLargeAbbr",
+    token: 2,
+    capacityMultiplier: 2
+  },
+  huge: {
+    label: "DND5E.SizeHuge",
+    abbreviation: "DND5E.SizeHugeAbbr",
+    token: 3,
+    capacityMultiplier: 4
+  },
+  grg: {
+    label: "DND5E.SizeGargantuan",
+    abbreviation: "DND5E.SizeGargantuanAbbr",
+    token: 4,
+    capacityMultiplier: 8
+  }
 };
-preLocalize("actorSizes");
+preLocalize("actorSizes", { keys: ["label", "abbreviation"] });
+patchConfig("actorSizes", "label", { since: "DnD5e 3.0", until: "DnD5e 3.2" });
 
 /**
  * Default token image size for the values of `DND5E.actorSizes`.
  * @enum {number}
+ * @deprecated since DnD5e 3.0, available until DnD5e 3.2
  */
-DND5E.tokenSizes = {
-  tiny: 0.5,
-  sm: 1,
-  med: 1,
-  lg: 2,
-  huge: 3,
-  grg: 4
-};
+Object.defineProperty(DND5E, "tokenSizes", {
+  get() {
+    foundry.utils.logCompatibilityWarning(
+      "DND5E.tokenSizes has been deprecated and is now accessible through the .token property on DND5E.actorSizes.",
+      { since: "DnD5e 3.0", until: "DnD5e 3.2" }
+    );
+    return Object.entries(DND5E.actorSizes).reduce((obj, [k, v]) => {
+      obj[k] = v.token ?? 1;
+      return obj;
+    }, {});
+  }
+});
 
 /* -------------------------------------------- */
 /*  Canvas                                      */

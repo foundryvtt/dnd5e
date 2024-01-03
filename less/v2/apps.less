@@ -191,12 +191,13 @@
 
     &.progress, .progress {
       --bar-percentage: 0%;
+      --border-width: 3px;
 
       &::before {
         content: "";
         position: absolute;
         height: 100%;
-        width: calc(var(--bar-percentage) - 3px);
+        width: calc(var(--bar-percentage) - var(--border-width));
         box-shadow: 0 0 6px var(--dnd5e-shadow-45);
         clip-path: polygon(0 0, calc(100% + 6px) 0, calc(100% + 6px) 100%, 0 100%);
         border-radius: 4px;
@@ -231,6 +232,15 @@
     color: inherit;
     font-weight: inherit;
     height: unset;
+  }
+
+  button.unbutton {
+    background: none;
+    margin: 0;
+    border-radius: 0;
+    line-height: normal;
+
+    > i { margin: 0; }
   }
 
   /* Inputs & Buttons */
