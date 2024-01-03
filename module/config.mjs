@@ -637,73 +637,87 @@ DND5E.mapLocationMarker = {
 
 /**
  * Default types of creatures.
- * *Note: Not pre-localized to allow for easy fetching of pluralized forms.*
- * @enum {{ label: string, [detectAlignment]: boolean }}
+ * @enum {{ label: string, plural: string, [detectAlignment]: boolean }}
  */
 DND5E.creatureTypes = {
   aberration: {
     label: "DND5E.CreatureAberration",
+    plural: "DND5E.CreatureAberrationPl",
     icon: "/icons/creatures/tentacles/tentacle-eyes-yellow-pink.webp",
     detectAlignment: true
   },
   beast: {
     label: "DND5E.CreatureBeast",
+    plural: "DND5E.CreatureBeastPl",
     icon: "/icons/creatures/claws/claw-bear-paw-swipe-red.webp"
   },
   celestial: {
     label: "DND5E.CreatureCelestial",
+    plural: "DND5E.CreatureCelestialPl",
     icon: "/icons/creatures/abilities/wings-birdlike-blue.webp",
     detectAlignment: true
   },
   construct: {
     label: "DND5E.CreatureConstruct",
+    plural: "DND5E.CreatureConstructPl",
     icon: "/icons/creatures/magical/construct-stone-earth-gray.webp"
   },
   dragon: {
     label: "DND5E.CreatureDragon",
+    plural: "DND5E.CreatureDragonPl",
     icon: "/icons/creatures/abilities/dragon-fire-breath-orange.webp"
   },
   elemental: {
     label: "DND5E.CreatureElemental",
+    plural: "DND5E.CreatureElementalPl",
     icon: "/icons/creatures/magical/spirit-fire-orange.webp",
     detectAlignment: true
   },
   fey: {
     label: "DND5E.CreatureFey",
+    plural: "DND5E.CreatureFeyPl",
     icon: "/icons/creatures/magical/fae-fairy-winged-glowing-green.webp",
     detectAlignment: true
   },
   fiend: {
     label: "DND5E.CreatureFiend",
+    plural: "DND5E.CreatureFiendPl",
     icon: "/icons/magic/death/skull-horned-goat-pentagram-red.webp",
     detectAlignment: true
   },
   giant: {
     label: "DND5E.CreatureGiant",
+    plural: "DND5E.CreatureGiantPl",
     icon: "/icons/creatures/magical/humanoid-giant-forest-blue.webp"
   },
   humanoid: {
     label: "DND5E.CreatureHumanoid",
+    plural: "DND5E.CreatureHumanoidPl",
     icon: "/icons/magic/unholy/strike-body-explode-disintegrate.webp"
   },
   monstrosity: {
     label: "DND5E.CreatureMonstrosity",
+    plural: "DND5E.CreatureMonstrosityPl",
     icon: "/icons/creatures/abilities/mouth-teeth-rows-red.webp"
   },
   ooze: {
     label: "DND5E.CreatureOoze",
+    plural: "DND5E.CreatureOozePl",
     icon: "/icons/creatures/slimes/slime-movement-pseudopods-green.webp"
   },
   plant: {
     label: "DND5E.CreaturePlant",
+    plural: "DND5E.CreaturePlantPl",
     icon: "/icons/magic/nature/tree-animated-strike.webp"
   },
   undead: {
     label: "DND5E.CreatureUndead",
+    plural: "DND5E.CreatureUndeadPl",
     icon: "/icons/magic/death/skull-horned-worn-fire-blue.webp",
     detectAlignment: true
   }
 };
+preLocalize("creatureTypes", { keys: ["label", "plural"], sort: true });
 patchConfig("creatureTypes", "label", { since: "DnD5e 2.5", until: "DnD5e 2.7" });
 
 /* -------------------------------------------- */
