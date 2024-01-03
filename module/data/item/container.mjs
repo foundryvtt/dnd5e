@@ -41,34 +41,32 @@ export default class ContainerData extends SystemDataModel.mixin(
   /*  Data Migrations                             */
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
-  static _migrateData(source) {
-    super._migrateData(source);
-    ContainerData.#migrateWeightlessData(source);
-  }
-
-  /* -------------------------------------------- */
-
   /**
    * Migrate the weightless property into `properties`.
    * @param {object} source  The candidate source data from which the model will be constructed.
    */
-  static #migrateWeightlessData(source) {
-    if ( foundry.utils.getProperty(source, "capacity.weightless") === true ) {
-      source.properties ??= [];
-      source.properties.push("weightlessContents");
+  static _migrateWeightlessData(source) {
+    if ( foundry.utils.getProperty(source, "system.capacity.weightless") === true ) {
+      foundry.utils.setProperty(source, "flags.dnd5e.migratedProperties", ["weightlessContents"]);
     }
   }
 
   /* -------------------------------------------- */
+  /*  Data Preparation                            */
+  /* -------------------------------------------- */
 
   /** @inheritdoc */
   prepareDerivedData() {
-    const data = this;
+    const system = this;
     Object.defineProperty(this.capacity, "weightless", {
       get() {
-        return data.properties.has("weightlessContents");
-      }
+        foundry.utils.logCompatibilityWarning(
+          "The `system.capacity.weightless` value on containers has migrated into a property.",
+          { since: "DnD5e 2.5", until: "DnD5e 2.7" }
+        );
+        return system.properties.has("weightlessContents");
+      },
+      configurable: true
     });
   }
 }
