@@ -126,7 +126,7 @@ export default class CurrencyManager extends FormApplication {
         break;
       case "transfer":
         const destinations = this.transferDestinations.filter(d => data.destination[d.id]);
-        await this.constructor.transferCurrency(this.object, destinations, data.amount);
+        await this.constructor.transferCurrency(data.amount, destinations, this.object);
         break;
     }
     this.close();
@@ -170,15 +170,15 @@ export default class CurrencyManager extends FormApplication {
 
   /**
    * Transfer currency between one document and another.
-   * @param {Actor5e|Item5e} origin       Document from which to move the currency.
-   * @param {Document[]} destinations     Documents that should receive the currency.
    * @param {object[]} amounts            Amount of each denomination to transfer.
+   * @param {Document[]} destinations     Documents that should receive the currency.
+   * @param {Actor5e|Item5e} [origin]     Document from which to move the currency, if not a freeform reward.
    * @returns {Promise}
    */
-  static async transferCurrency(origin, destinations, amounts) {
+  static async transferCurrency(amounts, destinations, origin) {
     if ( !destinations.length ) return;
+    const originCurrency = origin ? foundry.utils.deepClone(origin.system.currency) : null;
 
-    const originUpdates = {};
     let remainingDestinations = destinations.length;
     for ( const destination of destinations ) {
       const destinationUpdates = {};
@@ -191,11 +191,10 @@ export default class CurrencyManager extends FormApplication {
           // Ensure negative amounts aren't more than is contained in destination
           -destination.system.currency[key],
           // Ensure positive amounts aren't more than is contained in origin
-          origin.system.currency[key]
+          originCurrency ? originCurrency[key] : Infinity
         );
         amounts[key] -= amount;
-        originUpdates[`system.currency.${key}`] ??= origin.system.currency[key];
-        originUpdates[`system.currency.${key}`] -= amount;
+        if ( originCurrency ) originCurrency[key] -= amount;
         destinationUpdates[`system.currency.${key}`] = destination.system.currency[key] + amount;
       }
 
@@ -203,6 +202,6 @@ export default class CurrencyManager extends FormApplication {
       remainingDestinations -= 1;
     }
 
-    await origin.update(originUpdates);
+    if ( origin ) await origin.update({"system.currency": originCurrency});
   }
 }
