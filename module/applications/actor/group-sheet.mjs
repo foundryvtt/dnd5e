@@ -49,7 +49,7 @@ export default class GroupActorSheet extends ActorSheetMixin(ActorSheet) {
   /** @inheritDoc */
   async getData(options={}) {
     const context = super.getData(options);
-    context.system = context.data.system;
+    context.system = this.actor.system;
     context.items = Array.from(this.actor.items);
     context.config = CONFIG.DND5E;
 
