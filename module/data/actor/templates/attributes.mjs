@@ -63,7 +63,7 @@ export default class AttributesFields {
       }),
       exhaustion: new foundry.data.fields.NumberField({
         required: true, nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.Exhaustion"
-      }),
+      })
     };
   }
 

@@ -28,6 +28,9 @@ const { ArrayField, ForeignDocumentField, HTMLField, NumberField, SchemaField, S
  * @property {number} attributes.movement.land   Base movement speed over land.
  * @property {number} attributes.movement.water  Base movement speed over water.
  * @property {number} attributes.movement.air    Base movement speed through the air.
+ * @property {object} details
+ * @property {object} details.xp
+ * @property {number} details.xp.value           XP currently available to be distributed to a party.
  *
  * @example Create a new Group
  * const g = new dnd5e.documents.Actor5e({
@@ -62,7 +65,14 @@ export default class GroupActor extends ActorDataModel.mixin(CurrencyTemplate) {
           water: new NumberField({nullable: false, min: 0, step: 0.1, initial: 0, label: "DND5E.MovementWater"}),
           air: new NumberField({nullable: false, min: 0, step: 0.1, initial: 0, label: "DND5E.MovementAir"})
         })
-      }, {label: "DND5E.Attributes"})
+      }, {label: "DND5E.Attributes"}),
+      details: new SchemaField({
+        xp: new foundry.data.fields.SchemaField({
+          value: new foundry.data.fields.NumberField({
+            integer: true, min: 0, label: "DND5E.ExperiencePointsCurrent"
+          })
+        }, {label: "DND5E.ExperiencePoints"})
+      }, {label: "DND5E.Details"})
     });
   }
 
@@ -124,6 +134,22 @@ export default class GroupActor extends ActorDataModel.mixin(CurrencyTemplate) {
       value: memberIds,
       enumerable: false,
       writable: false
+    });
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  prepareDerivedData() {
+    const system = this;
+    Object.defineProperty(this.details.xp, "derived", {
+      get() {
+        return system.type.value === "encounter" ? system.members.reduce((xp, { actor, quantity }) =>
+          xp + ((actor.system.details?.xp?.value ?? 0) * (quantity.value ?? 1))
+        , 0) : null;
+      },
+      configurable: true,
+      enumerable: false
     });
   }
 
