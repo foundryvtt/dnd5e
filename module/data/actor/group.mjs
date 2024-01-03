@@ -146,7 +146,7 @@ export default class GroupActor extends ActorDataModel.mixin(CurrencyTemplate) {
       get() {
         return system.type.value === "encounter" ? system.members.reduce((xp, { actor, quantity }) =>
           xp + ((actor.system.details?.xp?.value ?? 0) * (quantity.value ?? 1))
-        , 0) : 0;
+        , 0) : null;
       },
       configurable: true,
       enumerable: false

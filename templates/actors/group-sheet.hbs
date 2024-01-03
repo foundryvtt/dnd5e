@@ -39,13 +39,15 @@
                         <span>{{movement.secondary}}</span>
                     </footer>
                 </li>
+                {{#if xp}}
                 <li class="attribute xp">
                     <h4 class="attribute-name box-title">{{localize "DND5E.ExperiencePoints"}}</h4>
                     <div class="attribute-value">
-                        <input type="number" name="system.details.xp.value" value="{{system.details.xp.value}}"
-                               min="0" step="1" placeholder="{{dnd5e-numberFormat system.details.xp.derived}}">
+                        {{ numberInput xp.value name="system.details.xp.value" min=0 step=1
+                           placeholder=(dnd5e-numberFormat xp.derived) }}
                     </div>
                 </li>
+                {{/if}}
             </ul>
         </section>
     </header>

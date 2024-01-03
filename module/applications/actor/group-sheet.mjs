@@ -61,6 +61,9 @@ export default class GroupActorSheet extends ActorSheetMixin(ActorSheet) {
     // Movement
     context.movement = this.#prepareMovementSpeed();
 
+    // XP
+    if ( !game.settings.get("dnd5e", "disableExperienceTracking") ) context.xp = context.system.details.xp;
+
     // Inventory
     context.itemContext = {};
     context.inventory = this.#prepareInventory(context);
