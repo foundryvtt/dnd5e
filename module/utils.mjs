@@ -164,13 +164,13 @@ export async function preloadHandlebarsTemplates() {
 
 /**
  * A helper that converts the provided object into a series of `data-` entries.
- * @param {object} context  Current evaluation context.
+ * @param {object} object   Object to convert into dataset entries.
  * @param {object} options  Handlebars options.
  * @returns {string}
  */
-function dataset(context, options) {
+function dataset(object, options) {
   const entries = [];
-  for ( let [key, value] of Object.entries(context ?? {}) ) {
+  for ( let [key, value] of Object.entries(object ?? {}) ) {
     key = key.replace(/[A-Z]+(?![a-z])|[A-Z]/g, (a, b) => (b ? "-" : "") + a.toLowerCase());
     entries.push(`data-${key}="${value}"`);
   }

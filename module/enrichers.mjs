@@ -348,9 +348,7 @@ function createRollLabel(config) {
     case "save":
       label = ability;
       if ( config.dc ) label = game.i18n.format("EDITOR.DND5E.Inline.DC", { dc: config.dc, check: label });
-      label = game.i18n.format(`EDITOR.DND5E.Inline.Save${longSuffix}`, {
-        save: label
-      });
+      label = game.i18n.format(`EDITOR.DND5E.Inline.Save${longSuffix}`, { save: label });
       break;
     default:
       return "";
@@ -383,6 +381,7 @@ function createRollLink(label, dataset) {
     const gmLink = document.createElement("a");
     gmLink.dataset.action = "request";
     gmLink.dataset.tooltip = "EDITOR.DND5E.Inline.RequestRoll";
+    gmLink.setAttribute("aria-label", game.i18n.localize(gmLink.dataset.tooltip));
     gmLink.innerHTML = '<i class="fa-solid fa-comment-dots"></i>';
     span.insertAdjacentElement("beforeend", gmLink);
   }
@@ -400,7 +399,7 @@ function createRollLink(label, dataset) {
  * @returns {Promise|void}
  */
 async function rollAction(event) {
-  const target = event.target.closest(".roll-link") ?? event.target.closest('[data-action="rollRequest"]');
+  const target = event.target.closest('.roll-link, [data-action="rollRequest"]');
   if ( !target ) return;
   event.stopPropagation();
 
@@ -453,7 +452,6 @@ async function rollAction(event) {
       flavor: game.i18n.localize("EDITOR.DND5E.Inline.RollRequest"),
       speaker: MessageClass.getSpeaker({user: game.user})
     };
-    MessageClass.applyRollMode(chatData, game.settings.get("core", "rollMode"));
     return MessageClass.create(chatData);
   }
 }
