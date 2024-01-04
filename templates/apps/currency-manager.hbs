@@ -17,7 +17,7 @@
                 {{#each currency}}
                 <label>
                     <span>{{lookup (lookup @root.CONFIG.currencies @key) "label"}}</span>
-                    <input type="number" name="amount.{{@key}}">
+                    {{numberInput null name=(concat "amount." @key) min=0 step=1}}
                 </label>
                 {{/each}}
             </div>

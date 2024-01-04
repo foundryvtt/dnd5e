@@ -46,6 +46,11 @@
                         {{ numberInput xp.value name="system.details.xp.value" min=0 step=1
                            placeholder=(dnd5e-numberFormat xp.derived) }}
                     </div>
+                    <footer class="attribute-footer">
+                        <a class="action-button" data-action="award">
+                            <i class="fa-solid fa-trophy"></i> {{localize "DND5E.Award.Action"}}
+                        </a>
+                    </footer>
                 </li>
                 {{/if}}
             </ul>

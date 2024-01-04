@@ -1,5 +1,6 @@
 import Item5e from "../../documents/item.mjs";
 import { formatCR, formatNumber } from "../../utils.mjs";
+import Award from "../award.mjs";
 import ActorMovementConfig from "./movement-config.mjs";
 import ActorSheetMixin from "./sheet-mixin.mjs";
 
@@ -283,6 +284,10 @@ export default class GroupActorSheet extends ActorSheetMixin(ActorSheet) {
     event.preventDefault();
     const button = event.currentTarget;
     switch ( button.dataset.action ) {
+      case "award":
+        const award = new Award(this.object);
+        award.render(true);
+        break;
       case "removeMember":
         const removeMemberId = button.closest("li.group-member").dataset.actorId;
         this.object.system.removeMember(removeMemberId);
