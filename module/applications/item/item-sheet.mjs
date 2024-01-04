@@ -7,6 +7,7 @@ import Accordion from "../accordion.mjs";
 import SourceConfig from "../source-config.mjs";
 import ActiveEffect5e from "../../documents/active-effect.mjs";
 import * as Trait from "../../documents/actor/trait.mjs";
+import { filteredKeys, sortObjectEntries } from "../../utils.mjs";
 
 /**
  * Override and extend the core ItemSheet implementation to handle specific item types.
@@ -124,7 +125,7 @@ export default class ItemSheet5e extends ItemSheet {
       isCrewed: item.system.activation?.type === "crew",
 
       // Armor Class
-      hasDexModifier: item.isArmor && (item.system.armor?.type !== "shield"),
+      hasDexModifier: item.isArmor && (item.system.type.value !== "shield"),
 
       // Advancement
       advancement: this._getItemAdvancement(item),
@@ -134,6 +135,17 @@ export default class ItemSheet5e extends ItemSheet {
     });
     context.abilityConsumptionTargets = this._getItemConsumptionTargets();
 
+    if ( ("properties" in item.system) && (item.type in CONFIG.DND5E.validProperties) ) {
+      context.properties = CONFIG.DND5E.validProperties[item.type].reduce((obj, k) => {
+        obj[k] = {
+          label: CONFIG.DND5E.itemProperties[k].label,
+          selected: item.system.properties.has(k)
+        };
+        return obj;
+      }, {});
+      if ( item.type !== "spell" ) context.properties = sortObjectEntries(context.properties, "label");
+    }
+
     // Special handling for specific item types
     switch ( item.type ) {
       case "feat":
@@ -142,9 +154,6 @@ export default class ItemSheet5e extends ItemSheet {
           context.itemType = featureType.label;
           context.featureSubtypes = featureType.subtypes;
         }
-        break;
-      case "spell":
-        context.spellComponents = {...CONFIG.DND5E.spellComponents, ...CONFIG.DND5E.spellTags};
         break;
       case "loot":
         const lootType = CONFIG.DND5E.lootTypes[item.system.type?.value];
@@ -235,13 +244,12 @@ export default class ItemSheet5e extends ItemSheet {
     const baseIds = CONFIG.DND5E[`${type}Ids`];
     if ( baseIds === undefined ) return {};
 
-    const typeProperty = type === "armor" ? "armor.type" : `${type}Type`;
-    const baseType = foundry.utils.getProperty(this.item.system, typeProperty);
+    const baseType = this.item.system.type.value;
 
     const items = {};
     for ( const [name, id] of Object.entries(baseIds) ) {
       const baseItem = await Trait.getBaseItem(id);
-      if ( baseType !== foundry.utils.getProperty(baseItem?.system, typeProperty) ) continue;
+      if ( baseType !== baseItem?.system?.type?.value ) continue;
       items[name] = baseItem.name;
     }
     return Object.fromEntries(Object.entries(items).sort((lhs, rhs) => lhs[1].localeCompare(rhs[1])));
@@ -263,7 +271,7 @@ export default class ItemSheet5e extends ItemSheet {
     // Ammunition
     if ( consume.type === "ammo" ) {
       return actor.itemTypes.consumable.reduce((ammo, i) => {
-        if ( i.system.consumableType === "ammo" ) ammo[i.id] = `${i.name} (${i.system.quantity})`;
+        if ( i.system.type.value === "ammo" ) ammo[i.id] = `${i.name} (${i.system.quantity})`;
         return ammo;
       }, {});
     }
@@ -356,12 +364,15 @@ export default class ItemSheet5e extends ItemSheet {
     const labels = this.item.labels;
     switch ( this.item.type ) {
       case "consumable":
-        for ( const [k, v] of Object.entries(this.item.system.properties ?? {}) ) {
-          if ( v === true ) props.push(CONFIG.DND5E.physicalWeaponProperties[k]);
-        }
+      case "weapon":
+        const ip = CONFIG.DND5E.itemProperties;
+        const vp = CONFIG.DND5E.validProperties[this.item.type];
+        this.item.system.properties.forEach(k => {
+          if ( vp.has(k) ) props.push(ip[k].label);
+        });
         break;
       case "equipment":
-        props.push(CONFIG.DND5E.equipmentTypes[this.item.system.armor.type]);
+        props.push(CONFIG.DND5E.equipmentTypes[this.item.system.type.value]);
         if ( this.item.isArmor || this.item.isMountable ) props.push(labels.armor);
         break;
       case "feat":
@@ -369,11 +380,6 @@ export default class ItemSheet5e extends ItemSheet {
         break;
       case "spell":
         props.push(labels.components.vsm, labels.materials, ...labels.components.tags);
-        break;
-      case "weapon":
-        for ( const [k, v] of Object.entries(this.item.system.properties) ) {
-          if ( v === true ) props.push(CONFIG.DND5E.weaponProperties[k]);
-        }
         break;
     }
 
@@ -428,6 +434,13 @@ export default class ItemSheet5e extends ItemSheet {
     // Handle Damage array
     const damage = formData.system?.damage;
     if ( damage ) damage.parts = Object.values(damage?.parts || {}).map(d => [d[0] || "", d[1] || ""]);
+
+    // Handle properties
+    if ( foundry.utils.hasProperty(formData, "system.properties") ) {
+      const keys = new Set(Object.keys(formData.system.properties));
+      const preserve = this.object.system.properties.difference(keys);
+      formData.system.properties = [...filteredKeys(formData.system.properties), ...preserve];
+    }
 
     // Check max uses formula
     const uses = formData.system?.uses;

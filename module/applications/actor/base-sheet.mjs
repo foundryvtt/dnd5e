@@ -21,7 +21,7 @@ import TraitSelector from "./trait-selector.mjs";
 import ProficiencyConfig from "./proficiency-config.mjs";
 import ToolSelector from "./tool-selector.mjs";
 import { simplifyBonus } from "../../utils.mjs";
-import { ActorSheetMixin } from "./sheet-mixin.mjs";
+import ActorSheetMixin from "./sheet-mixin.mjs";
 
 /**
  * Extend the basic ActorSheet class to suppose system-specific logic and functionality.
@@ -572,8 +572,8 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
       }
 
       // Spell-specific filters
-      if ( filters.has("ritual") && (item.system.components.ritual !== true) ) return false;
-      if ( filters.has("concentration") && (item.system.components.concentration !== true) ) return false;
+      if ( filters.has("ritual") && !item.system.properties.has("ritual") ) return false;
+      if ( filters.has("concentration") && !item.system.properties.has("concentration") ) return false;
       if ( filters.has("prepared") ) {
         if ( (item.system.level === 0) || ["innate", "always"].includes(item.system.preparation.mode) ) return true;
         if ( this.actor.type === "npc" ) return true;

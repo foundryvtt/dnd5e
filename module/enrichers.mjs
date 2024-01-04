@@ -158,28 +158,10 @@ async function enrichCheck(config, label, options) {
 
   if ( invalid ) return config.input;
 
-  // Insert the icon and label into the link
-  if ( !label ) {
-    const ability = abilityConfig?.label;
-    const skill = skillConfig?.label;
-    const tool = toolIndex?.name;
-    if ( ability && (skill || tool) ) {
-      label = game.i18n.format("EDITOR.DND5E.Inline.SpecificCheck", { ability, type: skill ?? tool });
-    } else {
-      label = ability;
-    }
-    const longSuffix = config.format === "long" ? "Long" : "Short";
-    if ( config.passive ) {
-      label = game.i18n.format(`EDITOR.DND5E.Inline.DCPassive${longSuffix}`, { dc: config.dc, check: label });
-    } else {
-      if ( config.dc ) label = game.i18n.format("EDITOR.DND5E.Inline.DC", { dc: config.dc, check: label });
-      label = game.i18n.format(`EDITOR.DND5E.Inline.Check${longSuffix}`, { check: label });
-    }
-  }
-
-  if ( config.passive ) return createPassiveTag(label, config);
   const type = config.skill ? "skill" : config.tool ? "tool" : "check";
-  return createRollLink(label, { type, ...config });
+  config = { type, ...config };
+  if ( !label ) label = createRollLabel(config);
+  return config.passive ? createPassiveTag(label, config) : createRollLink(label, config);
 }
 
 /* -------------------------------------------- */
@@ -298,15 +280,9 @@ async function enrichSave(config, label, options) {
 
   if ( config.dc && !Number.isNumeric(config.dc) ) config.dc = simplifyBonus(config.dc, options.rollData ?? {});
 
-  if ( !label ) {
-    label = abilityConfig.label;
-    if ( config.dc ) label = game.i18n.format("EDITOR.DND5E.Inline.DC", { dc: config.dc, check: label });
-    label = game.i18n.format(`EDITOR.DND5E.Inline.Save${config.format === "long" ? "Long" : "Short"}`, {
-      save: label
-    });
-  }
-
-  return createRollLink(label, { type: "save", ...config });
+  config = { type: "save", ...config };
+  if ( !label ) label = createRollLabel(config);
+  return createRollLink(label, config);
 }
 
 /* -------------------------------------------- */
@@ -434,17 +410,76 @@ function createPassiveTag(label, dataset) {
 /* -------------------------------------------- */
 
 /**
+ * Create a label for a roll message.
+ * @param {object} config  Enrichment configuration data.
+ * @returns {string}
+ */
+function createRollLabel(config) {
+  const ability = CONFIG.DND5E.abilities[config.ability]?.label;
+  const skill = CONFIG.DND5E.skills[config.skill]?.label;
+  const toolUUID = CONFIG.DND5E.enrichmentLookup.tools[config.tool];
+  const tool = toolUUID ? Trait.getBaseItem(toolUUID, { indexOnly: true })?.name : null;
+  const longSuffix = config.format === "long" ? "Long" : "Short";
+
+  let label;
+  switch ( config.type ) {
+    case "check":
+    case "skill":
+    case "tool":
+      if ( ability && (skill || tool) ) {
+        label = game.i18n.format("EDITOR.DND5E.Inline.SpecificCheck", { ability, type: skill ?? tool });
+      } else {
+        label = ability;
+      }
+      if ( config.passive ) {
+        label = game.i18n.format(`EDITOR.DND5E.Inline.DCPassive${longSuffix}`, { dc: config.dc, check: label });
+      } else {
+        if ( config.dc ) label = game.i18n.format("EDITOR.DND5E.Inline.DC", { dc: config.dc, check: label });
+        label = game.i18n.format(`EDITOR.DND5E.Inline.Check${longSuffix}`, { check: label });
+      }
+      break;
+    case "save":
+      label = ability;
+      if ( config.dc ) label = game.i18n.format("EDITOR.DND5E.Inline.DC", { dc: config.dc, check: label });
+      label = game.i18n.format(`EDITOR.DND5E.Inline.Save${longSuffix}`, { save: label });
+      break;
+    default:
+      return "";
+  }
+
+  return label;
+}
+
+/* -------------------------------------------- */
+
+/**
  * Create a rollable link.
  * @param {string} label    Label to display.
  * @param {object} dataset  Data that will be added to the link for the rolling method.
  * @returns {HTMLElement}
  */
 function createRollLink(label, dataset) {
+  const span = document.createElement("span");
+  span.classList.add("roll-link");
+  _addDataset(span, dataset);
+
+  // Add main link
   const link = document.createElement("a");
-  link.classList.add("roll-link");
-  _addDataset(link, dataset);
+  link.dataset.action = "roll";
   link.innerHTML = `<i class="fa-solid fa-dice-d20"></i> ${label}`;
-  return link;
+  span.insertAdjacentElement("afterbegin", link);
+
+  // Add chat request link for GMs
+  if ( game.user.isGM && (dataset.type !== "damage") ) {
+    const gmLink = document.createElement("a");
+    gmLink.dataset.action = "request";
+    gmLink.dataset.tooltip = "EDITOR.DND5E.Inline.RequestRoll";
+    gmLink.setAttribute("aria-label", game.i18n.localize(gmLink.dataset.tooltip));
+    gmLink.innerHTML = '<i class="fa-solid fa-comment-dots"></i>';
+    span.insertAdjacentElement("beforeend", gmLink);
+  }
+
+  return span;
 }
 
 /* -------------------------------------------- */
@@ -456,8 +491,8 @@ function createRollLink(label, dataset) {
  * @param {Event} event  The click event triggering the action.
  * @returns {Promise|void}
  */
-function rollAction(event) {
-  const target = event.target.closest(".roll-link");
+async function rollAction(event) {
+  const target = event.target.closest('.roll-link, [data-action="rollRequest"]');
   if ( !target ) return;
   event.stopPropagation();
 
@@ -465,11 +500,15 @@ function rollAction(event) {
   const options = { event };
   if ( dc ) options.targetValue = dc;
 
-  // Fetch the actor that should perform the roll
-  let actor;
-  const speaker = ChatMessage.implementation.getSpeaker();
-  if ( speaker.token ) actor = game.actors.tokens[speaker.token];
-  actor ??= game.actors.get(speaker.actor);
+  const action = event.target.closest("a")?.dataset.action ?? "roll";
+
+  // Direct roll
+  if ( (action === "roll") || !game.user.isGM ) {
+    // Fetch the actor that should perform the roll
+    let actor;
+    const speaker = ChatMessage.implementation.getSpeaker();
+    if ( speaker.token ) actor = game.actors.tokens[speaker.token];
+    actor ??= game.actors.get(speaker.actor);
   if ( !actor && (type !== "damage" && type !== "item") ) {
     ui.notifications.warn(game.i18n.localize("EDITOR.DND5E.Inline.NoActorWarning"));
     return;
@@ -544,6 +583,23 @@ function rollAction(event) {
     }  
     default:
       return console.warn(`DnD5e | Unknown roll type ${type} provided.`);
+    }
+  }
+
+  // Roll request
+  else {
+    const MessageClass = getDocumentClass("ChatMessage");
+    const chatData = {
+      user: game.user.id,
+      type: CONST.CHAT_MESSAGE_TYPES.OTHER,
+      content: await renderTemplate("systems/dnd5e/templates/chat/request-card.hbs", {
+        buttonLabel: createRollLabel({ ...target.dataset, format: "short" }),
+        dataset: { ...target.dataset, action: "rollRequest" }
+      }),
+      flavor: game.i18n.localize("EDITOR.DND5E.Inline.RollRequest"),
+      speaker: MessageClass.getSpeaker({user: game.user})
+    };
+    return MessageClass.create(chatData);
   }
 }
 

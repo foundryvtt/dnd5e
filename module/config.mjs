@@ -477,25 +477,74 @@ DND5E.tokenHPColors = {
 
 /**
  * Default types of creatures.
- * *Note: Not pre-localized to allow for easy fetching of pluralized forms.*
- * @enum {string}
+ * @enum {{ label: string, plural: string, [detectAlignment]: boolean }}
  */
 DND5E.creatureTypes = {
-  aberration: "DND5E.CreatureAberration",
-  beast: "DND5E.CreatureBeast",
-  celestial: "DND5E.CreatureCelestial",
-  construct: "DND5E.CreatureConstruct",
-  dragon: "DND5E.CreatureDragon",
-  elemental: "DND5E.CreatureElemental",
-  fey: "DND5E.CreatureFey",
-  fiend: "DND5E.CreatureFiend",
-  giant: "DND5E.CreatureGiant",
-  humanoid: "DND5E.CreatureHumanoid",
-  monstrosity: "DND5E.CreatureMonstrosity",
-  ooze: "DND5E.CreatureOoze",
-  plant: "DND5E.CreaturePlant",
-  undead: "DND5E.CreatureUndead"
+  aberration: {
+    label: "DND5E.CreatureAberration",
+    plural: "DND5E.CreatureAberrationPl",
+    detectAlignment: true
+  },
+  beast: {
+    label: "DND5E.CreatureBeast",
+    plural: "DND5E.CreatureBeastPl"
+  },
+  celestial: {
+    label: "DND5E.CreatureCelestial",
+    plural: "DND5E.CreatureCelestialPl",
+    detectAlignment: true
+  },
+  construct: {
+    label: "DND5E.CreatureConstruct",
+    plural: "DND5E.CreatureConstructPl"
+  },
+  dragon: {
+    label: "DND5E.CreatureDragon",
+    plural: "DND5E.CreatureDragonPl"
+  },
+  elemental: {
+    label: "DND5E.CreatureElemental",
+    plural: "DND5E.CreatureElementalPl",
+    detectAlignment: true
+  },
+  fey: {
+    label: "DND5E.CreatureFey",
+    plural: "DND5E.CreatureFeyPl",
+    detectAlignment: true
+  },
+  fiend: {
+    label: "DND5E.CreatureFiend",
+    plural: "DND5E.CreatureFiendPl",
+    detectAlignment: true
+  },
+  giant: {
+    label: "DND5E.CreatureGiant",
+    plural: "DND5E.CreatureGiantPl"
+  },
+  humanoid: {
+    label: "DND5E.CreatureHumanoid",
+    plural: "DND5E.CreatureHumanoidPl"
+  },
+  monstrosity: {
+    label: "DND5E.CreatureMonstrosity",
+    plural: "DND5E.CreatureMonstrosityPl"
+  },
+  ooze: {
+    label: "DND5E.CreatureOoze",
+    plural: "DND5E.CreatureOozePl"
+  },
+  plant: {
+    label: "DND5E.CreaturePlant",
+    plural: "DND5E.CreaturePlantPl"
+  },
+  undead: {
+    label: "DND5E.CreatureUndead",
+    plural: "DND5E.CreatureUndeadPl",
+    detectAlignment: true
+  }
 };
+preLocalize("creatureTypes", { keys: ["label", "plural"], sort: true });
+patchConfig("creatureTypes", "label", { since: "DnD5e 2.5", until: "DnD5e 2.7" });
 
 /* -------------------------------------------- */
 
@@ -859,6 +908,133 @@ DND5E.featureTypes = {
 };
 preLocalize("featureTypes", { key: "label" });
 preLocalize("featureTypes.class.subtypes", { sort: true });
+
+/* -------------------------------------------- */
+
+/**
+ * The various properties of all item types.
+ * @enum {object}
+ */
+DND5E.itemProperties = {
+  ada: {
+    label: "DND5E.Item.PropertyAdamantine",
+    isPhysical: true
+  },
+  amm: {
+    label: "DND5E.Item.PropertyAmmunition"
+  },
+  concentration: {
+    label: "DND5E.Item.PropertyConcentration",
+    abbr: "DND5E.ConcentrationAbbr",
+    isTag: true
+  },
+  fin: {
+    label: "DND5E.Item.PropertyFinesse"
+  },
+  fir: {
+    label: "DND5E.Item.PropertyFirearm"
+  },
+  foc: {
+    label: "DND5E.Item.PropertyFocus"
+  },
+  hvy: {
+    label: "DND5E.Item.PropertyHeavy"
+  },
+  lgt: {
+    label: "DND5E.Item.PropertyLight"
+  },
+  lod: {
+    label: "DND5E.Item.PropertyLoading"
+  },
+  material: {
+    label: "DND5E.Item.PropertyMaterial"
+  },
+  mgc: {
+    label: "DND5E.Item.PropertyMagical",
+    isPhysical: true
+  },
+  rch: {
+    label: "DND5E.Item.PropertyReach"
+  },
+  rel: {
+    label: "DND5E.Item.PropertyReload"
+  },
+  ret: {
+    label: "DND5E.Item.PropertyReturning"
+  },
+  ritual: {
+    label: "DND5E.Item.PropertyRitual",
+    abbr: "DND5E.RitualAbbr",
+    isTag: true
+  },
+  sil: {
+    label: "DND5E.Item.PropertySilvered",
+    isPhysical: true
+  },
+  somatic: {
+    label: "DND5E.Item.PropertySomatic"
+  },
+  spc: {
+    label: "DND5E.Item.PropertySpecial"
+  },
+  thr: {
+    label: "DND5E.Item.PropertyThrown"
+  },
+  two: {
+    label: "DND5E.Item.PropertyTwoHanded"
+  },
+  ver: {
+    label: "DND5E.Item.PropertyVersatile"
+  },
+  vocal: {
+    label: "DND5E.Item.PropertyVerbal"
+  }
+};
+preLocalize("itemProperties", { keys: ["label", "abbr"], sort: true });
+
+/* -------------------------------------------- */
+
+/**
+ * The various properties of an item per item type.
+ * @enum {object}
+ */
+DND5E.validProperties = {
+  feat: new Set([
+    "concentration",
+    "mgc"
+  ]),
+  weapon: new Set([
+    "ada",
+    "amm",
+    "fin",
+    "fir",
+    "foc",
+    "hvy",
+    "lgt",
+    "lod",
+    "mgc",
+    "rch",
+    "rel",
+    "ret",
+    "sil",
+    "spc",
+    "thr",
+    "two",
+    "ver"
+  ]),
+  spell: new Set([
+    "vocal",
+    "somatic",
+    "material",
+    "concentration",
+    "ritual"
+  ]),
+  consumable: new Set([
+    "ada",
+    "mgc",
+    "sil"
+  ])
+};
 
 /* -------------------------------------------- */
 
@@ -1800,6 +1976,7 @@ DND5E.CR_EXP_LEVELS = [
  * @property {string} [labelKeyPath]       If config is an enum of objects, where can the label be found?
  * @property {object} [subtypes]           Configuration for traits that take some sort of base item.
  * @property {string} [subtypes.keyPath]   Path to subtype value on base items, should match a category key.
+ *                                         Deprecated in favor of the standardized `system.type.value`.
  * @property {string[]} [subtypes.ids]     Key for base item ID objects within `CONFIG.DND5E`.
  * @property {object} [children]           Mapping of category key to an object defining its children.
  * @property {boolean} [sortCategories]    Whether top-level categories should be sorted.
