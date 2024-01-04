@@ -8,8 +8,8 @@
     <div class="amount">
         {{#each currency}}
         <label>
-            <span>{{lookup (lookup @root.CONFIG.currencies @key) "label"}}</span>
-            {{numberInput this name=(concat "amount." @key) min=0 step=1}}
+            <span>{{label}}</span>
+            {{numberInput value name=(concat "amount." @key) min=0 step=1}}
         </label>
         {{/each}}
     </div>
