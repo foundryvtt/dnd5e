@@ -1,4 +1,4 @@
-import CurrencyManager from "../item/currency-manager.mjs";
+import CurrencyManager from "../currency-manager.mjs";
 
 /**
  * Custom element that handles displaying actor & container inventories.

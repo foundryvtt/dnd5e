@@ -193,7 +193,7 @@
   }
 }
 
-.dnd5e.currency-manager {
+.dnd5e:is(.award, .currency-manager) {
   nav {
     display: flex;
     gap: 4px;
@@ -212,6 +212,9 @@
     }
   }
 
+  .xp {
+    margin-block-end: 4px;
+  }
   .amount {
     display: grid;
     grid-auto-flow: column;

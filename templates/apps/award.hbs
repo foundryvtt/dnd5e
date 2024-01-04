@@ -1,0 +1,27 @@
+<form autocomplete="off">
+    <div class="xp">
+        <label>
+            <span>{{localize "DND5E.ExperiencePoints"}}</span>
+            <input type="number" name="xp" value="{{xp}}">
+        </label>
+    </div>
+    <div class="amount">
+        {{#each currency}}
+        <label>
+            <span>{{lookup (lookup @root.CONFIG.currencies @key) "label"}}</span>
+            <input type="number" name="amount.{{@key}}" value="{{this}}">
+        </label>
+        {{/each}}
+    </div>
+    <div class="destinations">
+        {{#each destinations}}
+        <label>
+            <input type="checkbox" name="destination.{{doc.id}}">
+            {{{icon}}} {{doc.name}}
+        </label>
+        {{else}}
+        <p class="no-desinations">{{localize "DND5E.CurrencyManager.Transfer.NoDestinations"}}</p>
+        {{/each}}
+    </div>
+    <button type="submit" name="transfer" disabled>{{localize "DND5E.Award.Action"}}</button>
+</form>

@@ -1,4 +1,5 @@
-import { filteredKeys } from "../../utils.mjs";
+import { filteredKeys } from "../utils.mjs";
+import Award from "./award.mjs";
 
 /**
  * Application for performing currency conversions & transfers.
@@ -22,8 +23,8 @@ export default class CurrencyManager extends FormApplication {
   /* -------------------------------------------- */
 
   /**
-   * Other containers to which currency can be transferred.
-   * @type {Document[]}
+   * Destinations to which currency can be transferred.
+   * @type {(Actor5e|Item5e)[]}
    */
   get transferDestinations() {
     const destinations = [];
@@ -48,17 +49,9 @@ export default class CurrencyManager extends FormApplication {
   getData(options={}) {
     const context = super.getData(options);
 
-    const icons = {
-      container: '<dnd5e-icon class="fa-fw" src="systems/dnd5e/icons/svg/backpack.svg"></dnd5e-icon>',
-      group: '<i class="fa-solid fa-people-group"></i>',
-      vehicle: '<i class="fa-solid fa-sailboat"></i>'
-    };
-
     context.CONFIG = CONFIG.DND5E;
     context.currency = this.object.system.currency;
-    context.destinations = this.transferDestinations.map(doc => ({
-      doc, icon: icons[doc.type] ?? '<i class="fa-solid fa-fw fa-user"></i>'
-    }));
+    context.destinations = Award.prepareDestinations(this.transferDestinations);
 
     return context;
   }
@@ -110,7 +103,7 @@ export default class CurrencyManager extends FormApplication {
   _validateForm() {
     const data = foundry.utils.expandObject(this._getSubmitData());
     let valid = true;
-    if ( !Object.values(data.amount ?? {}).some(v => v) ) valid = false;
+    if ( !filteredKeys(data.amount ?? {}).length ) valid = false;
     if ( !filteredKeys(data.destination ?? {}).length ) valid = false;
     this.form.querySelector('button[name="transfer"]').disabled = !valid;
   }
@@ -126,7 +119,7 @@ export default class CurrencyManager extends FormApplication {
         break;
       case "transfer":
         const destinations = this.transferDestinations.filter(d => data.destination[d.id]);
-        await this.constructor.transferCurrency(data.amount, destinations, this.object);
+        await this.constructor.transferCurrency(this.object, destinations, data.amount);
         break;
     }
     this.close();
@@ -170,38 +163,11 @@ export default class CurrencyManager extends FormApplication {
 
   /**
    * Transfer currency between one document and another.
-   * @param {object[]} amounts            Amount of each denomination to transfer.
+   * @param {Actor5e|Item5e} origin       Document from which to move the currency.
    * @param {Document[]} destinations     Documents that should receive the currency.
-   * @param {Actor5e|Item5e} [origin]     Document from which to move the currency, if not a freeform reward.
-   * @returns {Promise}
+   * @param {object[]} amounts            Amount of each denomination to transfer.
    */
-  static async transferCurrency(amounts, destinations, origin) {
-    if ( !destinations.length ) return;
-    const originCurrency = origin ? foundry.utils.deepClone(origin.system.currency) : null;
-
-    let remainingDestinations = destinations.length;
-    for ( const destination of destinations ) {
-      const destinationUpdates = {};
-
-      for ( let [key, amount] of Object.entries(amounts) ) {
-        if ( !amount ) continue;
-        amount = Math.clamped(
-          // Divide amount between remaining destinations
-          Math.floor(amount / remainingDestinations),
-          // Ensure negative amounts aren't more than is contained in destination
-          -destination.system.currency[key],
-          // Ensure positive amounts aren't more than is contained in origin
-          originCurrency ? originCurrency[key] : Infinity
-        );
-        amounts[key] -= amount;
-        if ( originCurrency ) originCurrency[key] -= amount;
-        destinationUpdates[`system.currency.${key}`] = destination.system.currency[key] + amount;
-      }
-
-      await destination.update(destinationUpdates);
-      remainingDestinations -= 1;
-    }
-
-    if ( origin ) await origin.update({"system.currency": originCurrency});
+  static async transferCurrency(origin, destinations, amounts) {
+    CurrencyManager.awardCurrency(amounts, destinations, origin);
   }
 }
