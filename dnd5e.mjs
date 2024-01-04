@@ -371,6 +371,17 @@ Hooks.on("canvasInit", gameCanvas => {
 });
 
 /* -------------------------------------------- */
+/*  Pause Styling                               */
+/* -------------------------------------------- */
+
+Hooks.on("renderPause", (app, [html]) => {
+  html.classList.add("dnd5e2");
+  const img = html.querySelector("img");
+  img.src = "systems/dnd5e/ui/official/ampersand.svg";
+  img.className = "";
+});
+
+/* -------------------------------------------- */
 /*  Other Hooks                                 */
 /* -------------------------------------------- */
 

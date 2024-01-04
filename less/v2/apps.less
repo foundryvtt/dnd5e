@@ -288,6 +288,34 @@
       &:not(:disabled):is(:hover, :focus) { box-shadow: 0 0 6px var(--dnd5e-color-gold); }
     }
   }
+
+  /* ---------------------------------- */
+  /*  Pause                             */
+  /* ---------------------------------- */
+
+  &#pause {
+    background: none;
+    animation: pulsate 3s infinite ease-in-out;
+
+    img { opacity: .75; }
+
+    figcaption {
+      color: var(--color-text-light-0);
+      font-size: var(--font-size-46);
+      text-shadow: 2px 2px 2px var(--color-shadow-dark);
+      font-family: var(--dnd5e-font-modesto);
+      font-weight: bold;
+      letter-spacing: 2px;
+      padding: 0;
+      margin: 0;
+    }
+  }
+
+  @keyframes pulsate {
+    0% { filter: drop-shadow(0 0 0 rgb(255 255 255 / 0%)); }
+    50% { filter: drop-shadow(0 0 10px rgb(255 255 255 / 50%)); }
+    100% { filter: drop-shadow(0 0 0 rgb(255 255 255 / 0%)); }
+  }
 }
 
 /* ---------------------------------- */
