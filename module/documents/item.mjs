@@ -1,5 +1,6 @@
 import ClassData from "../data/item/class.mjs";
 import ContainerData from "../data/item/container.mjs";
+import SpellData from "../data/item/spell.mjs";
 import {d20Roll, damageRoll} from "../dice/dice.mjs";
 import simplifyRollFormula from "../dice/simplify-roll-formula.mjs";
 import Advancement from "./advancement/advancement.mjs";
@@ -2245,7 +2246,8 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   static migrateData(source) {
     source = super.migrateData(source);
     if ( source.type === "class" ) ClassData._migrateTraitAdvancement(source);
-    if ( source.type === "backpack" ) ContainerData._migrateWeightlessData(source);
+    else if ( source.type === "backpack" ) ContainerData._migrateWeightlessData(source);
+    else if ( source.type === "spell" ) SpellData._migrateComponentData(source);
     return source;
   }
 }
