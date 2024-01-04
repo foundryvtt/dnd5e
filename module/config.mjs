@@ -977,6 +977,9 @@ DND5E.itemProperties = {
   spc: {
     label: "DND5E.Item.PropertySpecial"
   },
+  stealthDisadvantage: {
+    label: "DND5E.Item.PropertyStealthDisadvantage"
+  },
   thr: {
     label: "DND5E.Item.PropertyThrown"
   },
