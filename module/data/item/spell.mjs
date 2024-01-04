@@ -63,13 +63,12 @@ export default class SpellData extends SystemDataModel.mixin(
   }
 
   /* -------------------------------------------- */
-  /*  Migrations                                  */
+  /*  Data Migrations                             */
   /* -------------------------------------------- */
 
   /** @inheritdoc */
   static _migrateData(source) {
     super._migrateData(source);
-    SpellData.#migrateComponentData(source);
     SpellData.#migrateScaling(source);
   }
 
@@ -79,9 +78,9 @@ export default class SpellData extends SystemDataModel.mixin(
    * Migrate the component object to be 'properties' instead.
    * @param {object} source  The candidate source data from which the model will be constructed.
    */
-  static #migrateComponentData(source) {
-    if ( !source.components || ("properties" in source)) return;
-    source.properties = filteredKeys(source.components);
+  static _migrateComponentData(source) {
+    const components = filteredKeys(source.system?.components ?? {});
+    if ( components.length ) foundry.utils.setProperty(source, "flags.dnd5e.migratedProperties", components);
   }
 
   /* -------------------------------------------- */
