@@ -2,14 +2,14 @@
     <div class="xp">
         <label>
             <span>{{localize "DND5E.ExperiencePoints"}}</span>
-            <input type="number" name="xp" value="{{xp}}">
+            {{numberInput xp name="xp" min=0 step=1}}
         </label>
     </div>
     <div class="amount">
         {{#each currency}}
         <label>
             <span>{{lookup (lookup @root.CONFIG.currencies @key) "label"}}</span>
-            <input type="number" name="amount.{{@key}}" value="{{this}}">
+            {{numberInput this name=(concat "amount." @key) min=0 step=1}}
         </label>
         {{/each}}
     </div>

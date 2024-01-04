@@ -153,11 +153,10 @@ export default class Award extends FormApplication {
     if ( !amount || !destinations.length ) return;
 
     let originUpdate = origin?.system.details.xp.value ?? Infinity;
-    let perDestination = Math.floor(Math.min(amount, originUpdate) / destinations.length);
+    const perDestination = Math.floor(Math.min(amount, originUpdate) / destinations.length);
+    originUpdate -= amount;
     for ( const destination of destinations ) {
-      const a = Math.min(perDestination, originUpdate);
-      originUpdate -= a;
-      await destination.update({"system.details.xp.value": destination.system.details.xp.value + a});
+      await destination.update({"system.details.xp.value": destination.system.details.xp.value + perDestination});
     }
 
     if ( Number.isFinite(originUpdate) ) await origin.update({"system.details.xp.value": originUpdate});
