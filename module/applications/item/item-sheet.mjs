@@ -139,7 +139,7 @@ export default class ItemSheet5e extends ItemSheet {
       const isAmmo = item.system.type?.value === "ammo";
       const valids = CONFIG.DND5E.validProperties[item.type];
       context.properties = Object.entries(CONFIG.DND5E.itemProperties).reduce((obj, [k, v]) => {
-        if ( valids.has(k) || (isAmmo && v.isPhysical) || (item.system.isArmor && k === "stealthDisadvantage") ) {
+        if ( valids.has(k) || (isAmmo && v.isPhysical) || (item.system.isArmor && (k === "stealthDisadvantage")) ) {
           obj[k] = { label: v.label, selected: item.system.properties.has(k) };
         }
         return obj;

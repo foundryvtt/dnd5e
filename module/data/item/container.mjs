@@ -60,7 +60,7 @@ export default class ContainerData extends SystemDataModel.mixin(
     Object.defineProperty(this.capacity, "weightless", {
       get() {
         foundry.utils.logCompatibilityWarning(
-          "The `system.capacity.weightless` value on containers has migrated to the 'weightlessContents' a property.",
+          "The `system.capacity.weightless` value on containers has migrated to the 'weightlessContents' property.",
           { since: "DnD5e 2.5", until: "DnD5e 2.7" }
         );
         return system.properties.has("weightlessContents");
