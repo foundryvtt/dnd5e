@@ -368,6 +368,14 @@ export function migrateItemData(item, migrationData, flags={}) {
     if ( effects.length > 0 ) updateData.effects = effects;
   }
 
+  // Migrate properties
+  const migratedProperties = foundry.utils.getProperty(item, "flags.dnd5e.migratedProperties");
+  if ( migratedProperties?.length ) {
+    updateData["system.properties"] = foundry.utils.getProperty(item, "system.properties") ?? [];
+    updateData["system.properties"].push(...migratedProperties);
+    updateData["flags.dnd5e.-=migratedProperties"] = null;
+  }
+
   if ( foundry.utils.getProperty(item, "flags.dnd5e.persistSourceMigration") ) {
     flags.persistSourceMigration = true;
     updateData["flags.dnd5e.-=persistSourceMigration"] = null;

@@ -43,6 +43,9 @@ export default class EquipmentData extends SystemDataModel.mixin(
         value: new foundry.data.fields.NumberField({required: true, integer: true, min: 0, label: "DND5E.ArmorClass"}),
         dex: new foundry.data.fields.NumberField({required: true, integer: true, label: "DND5E.ItemEquipmentDexMod"})
       }),
+      properties: new foundry.data.fields.SetField(new foundry.data.fields.StringField(), {
+        label: "DND5E.ItemEquipmentProperties"
+      }),
       speed: new foundry.data.fields.SchemaField({
         value: new foundry.data.fields.NumberField({required: true, min: 0, label: "DND5E.Speed"}),
         conditions: new foundry.data.fields.StringField({required: true, label: "DND5E.SpeedConditions"})

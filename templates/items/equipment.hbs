@@ -111,6 +111,16 @@
             </div>
             {{/unless}}
 
+            {{!-- Equipment Properties --}}
+            <div class="form-group stacked equipment-properties">
+                <label>{{ localize "DND5E.ItemEquipmentProperties" }}</label>
+                {{#each properties}}
+                <label class="checkbox">
+                    <input type="checkbox" name="system.properties.{{@key}}" {{checked selected}}> {{ label }}
+                </label>
+                {{/each}}
+            </div>
+
             {{!-- Armor Class --}}
             {{#if (or system.isArmor system.isMountable)}}
             <div class="form-group">

@@ -26,20 +26,22 @@ export default class ContainerData extends SystemDataModel.mixin(
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
       quantity: new foundry.data.fields.NumberField({min: 1, max: 1}),
+      properties: new foundry.data.fields.SetField(new foundry.data.fields.StringField(), {
+        label: "DND5E.ItemContainerProperties"
+      }),
       capacity: new foundry.data.fields.SchemaField({
         type: new foundry.data.fields.StringField({
           required: true, initial: "weight", blank: false, label: "DND5E.ItemContainerCapacityType"
         }),
         value: new foundry.data.fields.NumberField({
           required: true, min: 0, label: "DND5E.ItemContainerCapacityMax"
-        }),
-        weightless: new foundry.data.fields.BooleanField({required: true, label: "DND5E.ItemContainerWeightless"})
+        })
       }, {label: "DND5E.ItemContainerCapacity"})
     });
   }
 
   /* -------------------------------------------- */
-  /*  Migrations                                  */
+  /*  Data Migrations                             */
   /* -------------------------------------------- */
 
   /** @inheritdoc */
@@ -51,11 +53,42 @@ export default class ContainerData extends SystemDataModel.mixin(
   /* -------------------------------------------- */
 
   /**
+   * Migrate the weightless property into `properties`.
+   * @param {object} source  The candidate source data from which the model will be constructed.
+   */
+  static _migrateWeightlessData(source) {
+    if ( foundry.utils.getProperty(source, "system.capacity.weightless") === true ) {
+      foundry.utils.setProperty(source, "flags.dnd5e.migratedProperties", ["weightlessContents"]);
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Force quantity to always be 1.
    * @param {object} source  The candidate source data from which the model will be constructed.
    */
   static #migrateQuantity(source) {
     source.quantity = 1;
+  }
+
+  /* -------------------------------------------- */
+  /*  Data Preparation                            */
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  prepareDerivedData() {
+    const system = this;
+    Object.defineProperty(this.capacity, "weightless", {
+      get() {
+        foundry.utils.logCompatibilityWarning(
+          "The `system.capacity.weightless` value on containers has migrated into a property.",
+          { since: "DnD5e 2.5", until: "DnD5e 2.7" }
+        );
+        return system.properties.has("weightlessContents");
+      },
+      configurable: true
+    });
   }
 
   /* -------------------------------------------- */

@@ -143,11 +143,12 @@ export default class ItemSheet5e extends ItemSheet {
     context.abilityConsumptionTargets = this._getItemConsumptionTargets();
 
     if ( ("properties" in item.system) && (item.type in CONFIG.DND5E.validProperties) ) {
-      context.properties = CONFIG.DND5E.validProperties[item.type].reduce((obj, k) => {
-        obj[k] = {
-          label: CONFIG.DND5E.itemProperties[k].label,
-          selected: item.system.properties.has(k)
-        };
+      const isAmmo = item.system.type?.value === "ammo";
+      const valids = CONFIG.DND5E.validProperties[item.type];
+      context.properties = Object.entries(CONFIG.DND5E.itemProperties).reduce((obj, [k, v]) => {
+        if ( valids.has(k) || (isAmmo && v.isPhysical) ) {
+          obj[k] = { label: v.label, selected: item.system.properties.has(k) };
+        }
         return obj;
       }, {});
       if ( item.type !== "spell" ) context.properties = sortObjectEntries(context.properties, "label");

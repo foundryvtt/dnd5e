@@ -78,6 +78,16 @@
 
             <h3 class="form-header">{{localize "DND5E.ItemContainerDetails"}}</h3>
 
+            {{!-- Container Properties --}}
+            <div class="form-group stacked container-properties">
+                <label>{{ localize "DND5E.ItemContainerProperties" }}</label>
+                {{#each properties}}
+                <label class="checkbox">
+                    <input type="checkbox" name="system.properties.{{@key}}" {{checked selected}}> {{ label }}
+                </label>
+                {{/each}}
+            </div>
+
             <div class="form-group">
                 <label>{{localize "DND5E.ItemContainerCapacity"}}</label>
                 <div class="form-fields">

@@ -84,6 +84,16 @@
             </div>
             {{/if}}
 
+            {{!-- Loot Properties --}}
+            <div class="form-group stacked loot-properties">
+                <label>{{ localize "DND5E.ItemLootProperties" }}</label>
+                {{#each properties}}
+                <label class="checkbox">
+                    <input type="checkbox" name="system.properties.{{@key}}" {{checked selected}}> {{ label }}
+                </label>
+                {{/each}}
+            </div>
+
             {{/dnd5e-concealSection}}
         </div>
 
