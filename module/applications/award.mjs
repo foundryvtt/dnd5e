@@ -12,7 +12,9 @@ export default class Award extends FormApplication {
       template: "systems/dnd5e/templates/apps/award.hbs",
       title: "DND5E.Award.Title",
       width: 350,
-      height: "auto"
+      height: "auto",
+      currency: null,
+      xp: null
     });
   }
 
@@ -40,9 +42,12 @@ export default class Award extends FormApplication {
     const context = super.getData(options);
 
     context.CONFIG = CONFIG.DND5E;
-    context.currency = this.object?.system.currency;
+    context.currency = Object.entries(CONFIG.DND5E.currencies).reduce((obj, [k, { label }]) => {
+      obj[k] = { label, value: this.options.currency ? this.options.currency[k] : this.object?.system.currency[k] };
+      return obj;
+    }, {});
     context.destinations = Award.prepareDestinations(this.transferDestinations);
-    context.xp = this.object?.system.details.xp.value ?? this.object?.system.details.xp.derived;
+    context.xp = this.options.xp ?? this.object?.system.details.xp.value ?? this.object?.system.details.xp.derived;
 
     return context;
   }
@@ -160,5 +165,82 @@ export default class Award extends FormApplication {
     }
 
     if ( Number.isFinite(originUpdate) ) await origin.update({"system.details.xp.value": originUpdate});
+  }
+
+  /* -------------------------------------------- */
+  /*  Chat Command                                */
+  /* -------------------------------------------- */
+
+  /**
+   * Regular expression used to match the /award command in chat messages.
+   * @type {RegExp}
+   */
+  static COMMAND_PATTERN = new RegExp(/^\/award(?:\s|$)/i);
+
+  /* -------------------------------------------- */
+
+  /**
+   * Regular expression used to split currency & xp values from their labels.
+   * @type {RegExp}
+   */
+  static VALUE_PATTERN = new RegExp(/^(-?\d+)(\D+)$/);
+
+  /* -------------------------------------------- */
+
+  /**
+   * Use the `chatMessage` hook to determine if an award command was typed.
+   * @param {string} message   Text of the message being posted.
+   * @returns {boolean|void}   Returns `false` to prevent the message from continuing to parse.
+   */
+  static chatMessage(message) {
+    if ( !this.COMMAND_PATTERN.test(message) ) return;
+    if ( game.user.isGM ) this.parseAwardCommand(message);
+    else ui.notifications.error("DND5E.Award.NotGMError", { localize: true });
+    return false;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Parse the award command and grant an award.
+   * @param {string} message  Award command typed in chat.
+   */
+  static async parseAwardCommand(message) {
+    const command = message.replace(this.COMMAND_PATTERN, "").toLowerCase();
+
+    const currency = {};
+    let party = false;
+    let xp;
+    const unrecognized = [];
+    for ( const part of command.split(" ") ) {
+      if ( !part ) continue;
+      let [, amount, label] = part.match(this.VALUE_PATTERN) ?? [];
+      amount = parseInt(amount);
+      if ( label in CONFIG.DND5E.currencies ) currency[label] = amount;
+      else if ( label === "xp" ) xp = amount;
+      else if ( part === "party" ) party = true;
+      else unrecognized.push(part);
+    }
+
+    // Display warning about an unrecognized commands
+    if ( unrecognized.length ) {
+      ui.notifications.warn(game.i18n.format("DND5E.Award.UnrecognizedWarning", {
+        commands: game.i18n.getListFormatter().format(unrecognized.map(u => `"${u}"`))
+      }));
+      return;
+    }
+
+    // If the party command is set, a primary party is set, and the award isn't empty, skip the UI
+    const primaryParty = game.settings.get("dnd5e", "primaryParty")?.actor;
+    if ( party && primaryParty && (xp || filteredKeys(currency).length) ) {
+      await this.awardCurrency(currency, [primaryParty]);
+      await this.awardXP(xp, [primaryParty]);
+    }
+
+    // Otherwise show the UI with defaults
+    else {
+      const app = new Award(null, { currency, xp });
+      app.render(true);
+    }
   }
 }
