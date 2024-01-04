@@ -430,7 +430,11 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
         const bypassFormatter = new Intl.ListFormat(game.i18n.lang, { style: "long", type: "disjunction" });
         data.selected.physical = game.i18n.format("DND5E.DamagePhysicalBypasses", {
           damageTypes: damageTypesFormatter.format(physical.map(t => Trait.keyLabel(t, { trait }))),
-          bypassTypes: bypassFormatter.format(data.bypasses.map(t => CONFIG.DND5E.physicalWeaponProperties[t]))
+          bypassTypes: bypassFormatter.format(data.bypasses.reduce((acc, t) => {
+            const v = CONFIG.DND5E.itemProperties[t];
+            if ( v && v.isPhysical ) acc.push(v.label);
+            return acc;
+          }, []))
         });
       }
 

@@ -988,6 +988,9 @@ DND5E.itemProperties = {
   },
   vocal: {
     label: "DND5E.Item.PropertyVerbal"
+  },
+  weightlessContents: {
+    label: "DND5E.Item.PropertyWeightlessContents"
   }
 };
 preLocalize("itemProperties", { keys: ["label", "abbr"], sort: true });
@@ -999,8 +1002,22 @@ preLocalize("itemProperties", { keys: ["label", "abbr"], sort: true });
  * @enum {object}
  */
 DND5E.validProperties = {
+  backpack: new Set([
+    "mgc",
+    "weightlessContents"
+  ]),
+  consumable: new Set([
+    "mgc"
+  ]),
+  equipment: new Set([
+    "concentration",
+    "mgc"
+  ]),
   feat: new Set([
     "concentration",
+    "mgc"
+  ]),
+  loot: new Set([
     "mgc"
   ]),
   weapon: new Set([
@@ -1029,10 +1046,9 @@ DND5E.validProperties = {
     "concentration",
     "ritual"
   ]),
-  consumable: new Set([
-    "ada",
-    "mgc",
-    "sil"
+  tool: new Set([
+    "concentration",
+    "mgc"
   ])
 };
 
@@ -1648,6 +1664,7 @@ preLocalize("weaponTypes");
 /**
  * A subset of weapon properties that determine the physical characteristics of the weapon.
  * These properties are used for determining physical resistance bypasses.
+ * @deprecated since DnD5e 2.5, available until DnD5e 2.7
  * @enum {string}
  */
 DND5E.physicalWeaponProperties = {
@@ -1661,6 +1678,7 @@ preLocalize("physicalWeaponProperties", { sort: true });
 
 /**
  * The set of weapon property flags which can exist on a weapon.
+ * @deprecated since DnD5e 2.5, available until DnD5e 2.7
  * @enum {string}
  */
 DND5E.weaponProperties = {

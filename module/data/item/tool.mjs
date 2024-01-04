@@ -32,6 +32,9 @@ export default class ToolData extends SystemDataModel.mixin(
       proficient: new foundry.data.fields.NumberField({
         required: true, initial: null, min: 0, max: 2, step: 0.5, label: "DND5E.ItemToolProficiency"
       }),
+      properties: new foundry.data.fields.SetField(new foundry.data.fields.StringField(), {
+        label: "DND5E.ItemToolProperties"
+      }),
       bonus: new FormulaField({required: true, label: "DND5E.ItemToolBonus"})
     });
   }

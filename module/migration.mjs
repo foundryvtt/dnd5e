@@ -302,7 +302,7 @@ export const migrateActorData = function(actor, migrationData, flags={}) {
 
     // Update tool expertise.
     if ( actor.system.tools ) {
-      const hasToolProf = itemData.system.type.baseItem in actor.system.tools;
+      const hasToolProf = itemData.system.type?.baseItem in actor.system.tools;
       if ( (itemData.type === "tool") && (itemData.system.proficient > 1) && hasToolProf ) {
         updateData[`system.tools.${itemData.system.type.baseItem}.value`] = itemData.system.proficient;
       }
@@ -333,6 +333,14 @@ export function migrateItemData(item, migrationData, flags={}) {
   if ( item.effects ) {
     const effects = migrateEffects(item, migrationData);
     if ( effects.length > 0 ) updateData.effects = effects;
+  }
+
+  // Migrate properties
+  const migratedProperties = foundry.utils.getProperty(item, "flags.dnd5e.migratedProperties");
+  if ( migratedProperties?.length ) {
+    updateData["system.properties"] = foundry.utils.getProperty(item, "system.properties") ?? [];
+    updateData["system.properties"].push(...migratedProperties);
+    updateData["flags.dnd5e.-=migratedProperties"] = null;
   }
 
   if ( foundry.utils.getProperty(item, "flags.dnd5e.persistSourceMigration") ) {
