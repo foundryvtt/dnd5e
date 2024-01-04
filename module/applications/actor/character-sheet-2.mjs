@@ -360,6 +360,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
       }
     }
     context.inventory = context.inventory.filter(entry => entry.items.length);
+    context.inventory.push({ label: "DND5E.Contents", items: [], dataset: { type: "all" } });
   }
 
   /* -------------------------------------------- */
@@ -638,5 +639,12 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
     super._onResize(event);
     const { width, height } = this.position;
     game.user.setFlag("dnd5e", "sheetPrefs.character", { width, height });
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  _filterItem(item) {
+    if ( item.type === "container" ) return true;
   }
 }

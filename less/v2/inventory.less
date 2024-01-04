@@ -158,8 +158,47 @@
     }
   }
 
+  /* ------------------------------------ */
+  /*  Searching & Filtering, & Attunement */
+  /* ------------------------------------ */
+
+  .middle {
+    display: flex;
+    gap: .5rem;
+
+    item-list-controls { flex: 1; }
+
+    .attunement {
+      display: flex;
+      gap: .5rem;
+      align-items: center;
+      background: var(--dnd5e-color-card);
+      border-radius: 4px;
+      box-shadow: 0 0 6px var(--dnd5e-shadow-45);
+      border: 1px solid var(--dnd5e-color-gold);
+      padding: 0 .875rem 0 .5rem;
+      font-weight: bold;
+
+      .fa-sun, .separator { color: var(--dnd5e-color-gold); }
+      .config-button { color: var(--color-text-light-6); }
+      .max { color: var(--color-text-dark-5); }
+
+      input.max {
+        width: 22px;
+        text-align: left;
+        font-weight: bold;
+        background: none;
+        border: none;
+        padding: 0;
+        transition: box-shadow 250ms ease;
+
+        &:focus-visible, &:hover { box-shadow: 0 0 6px var(--dnd5e-color-gold); }
+      }
+    }
+  }
+
   /* ---------------------------------- */
-  /* Entries                            */
+  /*  Entries                           */
   /* ---------------------------------- */
 
   .inventory-list {
@@ -179,6 +218,8 @@
     .items-header, .item {
       display: flex;
       align-items: stretch;
+
+      &[hidden] { display: none; }
 
       .item-name {
         flex: 1;
@@ -330,4 +371,12 @@
 
 .dnd5e2 .locked dnd5e-inventory {
   .item :is(.item-quantity, .item-uses) input:is(:focus-visible, :hover) { box-shadow: none; }
+}
+
+/* ---------------------------------- */
+/*  Edit Mode                         */
+/* ---------------------------------- */
+
+.dnd5e2 .editable dnd5e-inventory {
+  .middle .attunement { padding-right: 0; }
 }

@@ -102,11 +102,6 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
       return obj;
     }, { items: [], spells: [], feats: [], races: [], backgrounds: [], classes: [], subclasses: [] });
 
-    // Apply active item filters
-    items = this._filterItems(items, this._filters.inventory);
-    spells = this._filterItems(spells, this._filters.spellbook);
-    feats = this._filterItems(feats, this._filters.features);
-
     // Organize items
     for ( let i of items ) {
       const ctx = context.itemContext[i.id] ??= {};

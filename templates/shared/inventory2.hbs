@@ -59,12 +59,42 @@
 
     </div>
 
+    {{!-- Searching & Filtering, & Attunement --}}
+    <div class="middle">
+
+        {{!-- Searching & Filtering --}}
+        <item-list-controls for="inventory" label="{{ localize "DND5E.InventorySearch" }}" sort group>
+            <datalist>
+                <option value="action">{{ localize "DND5E.Action" }}</option>
+                <option value="bonus">{{ localize "DND5E.BonusAction" }}</option>
+                <option value="reaction">{{ localize "DND5E.Reaction" }}</option>
+                <option value="equipped">{{ localize "DND5E.Equipped" }}</option>
+                <option value="mgc">{{ localize "DND5E.Item.PropertyMagical" }}</option>
+            </datalist>
+        </item-list-controls>
+
+        {{!-- Attunement --}}
+        {{#with system.attributes.attunement}}
+        <div class="attunement">
+            <i class="fas fa-sun" data-tooltip="DND5E.Attunement" aria-label="{{ localize "DND5E.Attunement" }}"></i>
+            <span class="value">{{ value }}</span>
+            <span class="separator">&sol;</span>
+            {{#if @root.editable}}
+            {{ numberInput max name="system.attributes.attunement.max" class="max" min=0 step=1 }}
+            {{else}}
+            <span class="max">{{ max }}</span>
+            {{/if}}
+        </div>
+        {{/with}}
+
+    </div>
+
     {{!-- Inventory List --}}
-    <section class="items-list inventory-list">
+    <section class="items-list inventory-list" data-item-list="inventory">
 
         {{!-- Sections / Categories --}}
         {{#each sections}}
-        <div class="items-section">
+        <div class="items-section" {{#each dataset}}data-{{ @key }}="{{ this }}"{{/each}}>
 
             {{!-- Section Header --}}
             <div class="items-header">
@@ -82,7 +112,8 @@
                 {{#dnd5e-itemContext item as |ctx|}}
 
                 {{!-- Items --}}
-                <li class="item" data-item-id="{{ item.id }}">
+                <li class="item" data-item-id="{{ item.id }}" data-item-name="{{ item.name }}"
+                    data-item-sort="{{ item.sort }}" data-item-type="{{ item.type }}">
 
                     {{!-- Item Name --}}
                     <div class="item-name item-action item-tooltip {{ @root.rollableClass }}" role="button"

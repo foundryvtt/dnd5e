@@ -54,7 +54,7 @@ export default class InventoryElement extends HTMLElement {
   /* -------------------------------------------- */
 
   /**
-   * Prepare filter lists an attach their listeners.
+   * Prepare filter lists and attach their listeners.
    * @protected
    */
   _initializeFilterLists() {
@@ -63,17 +63,43 @@ export default class InventoryElement extends HTMLElement {
 
     // Activate the set of filters which are currently applied
     for ( const list of filterLists ) {
-      const set = this._app._filters[list.dataset.filter];
+      const state = this._app._filters[list.dataset.filter];
+      if ( !state ) continue;
+      const set = state.properties;
       const filters = list.querySelectorAll(".filter-item");
       for ( const filter of filters ) {
         if ( set.has(filter.dataset.filter) ) filter.classList.add("active");
-        filter.addEventListener("click", event => {
+        filter.addEventListener("click", () => {
           const f = filter.dataset.filter;
           if ( set.has(f) ) set.delete(f);
           else set.add(f);
-          return this._app.render();
+          filter.classList.toggle("active", set.has(f));
+          this._applyFilters(state);
         });
       }
+      this._applyFilters(state);
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * TODO: Remove filtering code from dnd5e-inventory when all sheets use item-list-controls.
+   * Apply the current set of filters to the inventory list.
+   * @param {FilterState5e} state  The filter state to apply.
+   * @protected
+   */
+  _applyFilters(state) {
+    let items = this._app._filterItems?.(this._app.object.items, state.properties);
+    if ( !items ) return;
+    const elementMap = {};
+    this.querySelectorAll(".inventory-list .item-list .item").forEach(el => {
+      elementMap[el.dataset.itemId] = el;
+      el.hidden = true;
+    });
+    for ( const item of items ) {
+      const el = elementMap[item.id];
+      if ( el ) el.hidden = false;
     }
   }
 

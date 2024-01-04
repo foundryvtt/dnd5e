@@ -29,15 +29,21 @@ import ActorSheetMixin from "./sheet-mixin.mjs";
 export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
 
   /**
+   * @typedef {object} FilterState5e
+   * @property {string} name             Filtering by name.
+   * @property {Set<string>} properties  Filtering by some property.
+   */
+
+  /**
    * Track the set of item filters which are applied
-   * @type {Object<string, Set>}
+   * @type {Object<string, FilterState5e>}
    * @protected
    */
   _filters = {
-    inventory: new Set(),
-    spellbook: new Set(),
-    features: new Set(),
-    effects: new Set()
+    inventory: { name: "", properties: new Set() },
+    spellbook: { name: "", properties: new Set() },
+    features: { name: "", properties: new Set() },
+    effects: { name: "", properties: new Set() }
   };
 
   /* -------------------------------------------- */
@@ -565,14 +571,18 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
   /* -------------------------------------------- */
 
   /**
-   * Determine whether an Owned Item will be shown based on the current set of filters.
-   * @param {object[]} items       Copies of item data to be filtered.
+   * Filter items based on the current set of filters.
+   * @param {Item5e[]} items       Copies of item data to be filtered.
    * @param {Set<string>} filters  Filters applied to the item list.
    * @returns {object[]}           Subset of input items limited by the provided filters.
    * @protected
    */
   _filterItems(items, filters) {
     return items.filter(item => {
+
+      // Subclass-specific logic.
+      const filtered = this._filterItem(item);
+      if ( filtered !== undefined ) return filtered;
 
       // Action usage
       for ( let f of ["action", "bonus", "reaction"] ) {
@@ -590,9 +600,20 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
 
       // Equipment-specific filters
       if ( filters.has("equipped") && (item.system.equipped !== true) ) return false;
+      if ( filters.has("mgc") && !item.system.properties?.has("mgc") ) return false;
       return true;
     });
   }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Determine whether an Item will be shown based on the current set of filters.
+   * @param {Item5e} item  The item.
+   * @returns {boolean|void}
+   * @protected
+   */
+  _filterItem(item) {}
 
   /* -------------------------------------------- */
 
