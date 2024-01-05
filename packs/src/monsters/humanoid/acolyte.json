@@ -771,7 +771,11 @@
         "scaling": {
           "mode": "none",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "material"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -888,7 +892,11 @@
         "scaling": {
           "mode": "cantrip",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -1000,7 +1008,10 @@
         "scaling": {
           "mode": "none",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -1110,7 +1121,13 @@
         "scaling": {
           "mode": "level",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic",
+          "material",
+          "concentration"
+        ]
       },
       "effects": [
         {
@@ -1159,11 +1176,12 @@
             "startTurn": null
           },
           "icon": "icons/magic/control/buff-flight-wings-blue.webp",
-          "label": "Bless",
           "origin": "Item.kZZAZ6kp9YzgPQEe",
           "tint": null,
           "transfer": true,
-          "sort": 0,
+          "name": "Bless",
+          "description": "",
+          "statuses": [],
           "_key": "!actors.items.effects!CHEUjiYrVM9X0vIT.8dzaICjGy6mTUaUr.8rP3gwmXVTgZqYZE"
         }
       ],
@@ -1278,7 +1296,12 @@
         "scaling": {
           "mode": "none",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic",
+          "material"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -1395,7 +1418,11 @@
         "scaling": {
           "mode": "level",
           "formula": "1d8"
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -1464,11 +1491,12 @@
         "startTurn": 1
       },
       "icon": "icons/magic/control/buff-flight-wings-blue.webp",
-      "label": "Bless",
       "origin": "Compendium.dnd5e.monsters.CHEUjiYrVM9X0vIT.Item.8dzaICjGy6mTUaUr",
       "tint": null,
       "transfer": false,
-      "sort": 0,
+      "name": "Bless",
+      "description": "",
+      "statuses": [],
       "_key": "!actors.effects!CHEUjiYrVM9X0vIT.8rP3gwmXVTgZqYZE"
     }
   ],
@@ -1483,7 +1511,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787232667,
-    "modifiedTime": 1701908185883,
+    "modifiedTime": 1704466734909,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!CHEUjiYrVM9X0vIT"

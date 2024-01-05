@@ -1106,7 +1106,12 @@
         "scaling": {
           "mode": "none",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "material",
+          "concentration"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -1218,7 +1223,13 @@
         "scaling": {
           "mode": "none",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic",
+          "ritual",
+          "concentration"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -1330,7 +1341,11 @@
         "scaling": {
           "mode": "level",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -1440,7 +1455,13 @@
         "scaling": {
           "mode": "level",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic",
+          "material",
+          "concentration"
+        ]
       },
       "effects": [],
       "folder": null,
@@ -1554,7 +1575,13 @@
         "scaling": {
           "mode": "level",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic",
+          "material",
+          "concentration"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -1666,7 +1693,10 @@
         "scaling": {
           "mode": "none",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -1700,7 +1730,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787232800,
-    "modifiedTime": 1701908187361,
+    "modifiedTime": 1704466735485,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!OGPHF4sCVOAi87TU"

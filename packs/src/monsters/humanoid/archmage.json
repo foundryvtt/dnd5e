@@ -874,7 +874,11 @@
         "scaling": {
           "mode": "cantrip",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -986,7 +990,11 @@
         "scaling": {
           "mode": "none",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "material"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -1098,7 +1106,11 @@
         "scaling": {
           "mode": "none",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -1210,7 +1222,11 @@
         "scaling": {
           "mode": "none",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -1327,7 +1343,11 @@
         "scaling": {
           "mode": "cantrip",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -1439,7 +1459,13 @@
         "scaling": {
           "mode": "none",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic",
+          "ritual",
+          "concentration"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -1551,7 +1577,13 @@
         "scaling": {
           "mode": "none",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic",
+          "material",
+          "ritual"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -1661,7 +1693,12 @@
         "scaling": {
           "mode": "none",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic",
+          "material"
+        ]
       },
       "effects": [
         {
@@ -1685,12 +1722,13 @@
             "startTurn": null
           },
           "icon": "icons/magic/defensive/shield-barrier-glowing-triangle-blue.webp",
-          "label": "Mage Armor",
           "origin": "Compendium.dnd5e.spells.CKZTpZlxj7hjjo2H",
           "transfer": true,
           "flags": {},
           "tint": null,
-          "sort": 0,
+          "name": "Mage Armor",
+          "description": "",
+          "statuses": [],
           "_key": "!actors.items.effects!B7lBOr1AahNZs4a6.CKZTpZlxj7hjjo2H.cfwMU7LuOJ619Lny"
         }
       ],
@@ -1810,7 +1848,11 @@
         "scaling": {
           "mode": "level",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -1922,7 +1964,13 @@
         "scaling": {
           "mode": "none",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic",
+          "material",
+          "concentration"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -2032,7 +2080,11 @@
         "scaling": {
           "mode": "none",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic"
+        ]
       },
       "effects": [],
       "folder": null,
@@ -2146,7 +2198,10 @@
         "scaling": {
           "mode": "none",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -2258,7 +2313,10 @@
         "scaling": {
           "mode": "level",
           "formula": ""
-        }
+        },
+        "properties": [
+          "somatic"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -2370,7 +2428,13 @@
         "scaling": {
           "mode": "level",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic",
+          "material",
+          "concentration"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -2487,7 +2551,12 @@
         "scaling": {
           "mode": "level",
           "formula": "1d6"
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic",
+          "material"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -2599,7 +2668,13 @@
         "scaling": {
           "mode": "none",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic",
+          "material",
+          "concentration"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -2716,7 +2791,12 @@
         "scaling": {
           "mode": "none",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic",
+          "material"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -2748,11 +2828,12 @@
             "combat": null
           },
           "icon": "icons/magic/defensive/shield-barrier-flaming-pentagon-red.webp",
-          "label": "Warm Shield",
           "origin": "Item.OtcTsffCQaOFkr9K",
           "tint": null,
           "transfer": true,
-          "sort": 0,
+          "name": "Warm Shield",
+          "description": "",
+          "statuses": [],
           "_key": "!actors.items.effects!B7lBOr1AahNZs4a6.avD5XUtkBPQQR97c.lVKx8swB08jm6IFE"
         },
         {
@@ -2777,11 +2858,12 @@
             "combat": null
           },
           "icon": "icons/magic/defensive/shield-barrier-flaming-pentagon-blue.webp",
-          "label": "Chill Shield",
           "origin": "Item.OtcTsffCQaOFkr9K",
           "tint": null,
           "transfer": true,
-          "sort": 0,
+          "name": "Chill Shield",
+          "description": "",
+          "statuses": [],
           "_key": "!actors.items.effects!B7lBOr1AahNZs4a6.avD5XUtkBPQQR97c.UUXwEKSPX4nYfDzo"
         }
       ],
@@ -2887,7 +2969,13 @@
         "scaling": {
           "mode": "none",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic",
+          "material",
+          "concentration"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -2898,7 +2986,6 @@
       "img": "icons/magic/defensive/shield-barrier-flaming-diamond-orange.webp",
       "effects": [
         {
-          "label": "Stoneskin",
           "icon": "icons/magic/defensive/shield-barrier-flaming-diamond-orange.webp",
           "origin": "Compendium.dnd5e.spells.ReMbjfeOKoSj3O79",
           "duration": {
@@ -2941,7 +3028,9 @@
           "tint": null,
           "transfer": true,
           "flags": {},
-          "sort": 0,
+          "name": "Stoneskin",
+          "description": "",
+          "statuses": [],
           "_key": "!actors.items.effects!B7lBOr1AahNZs4a6.ReMbjfeOKoSj3O79.cSVCA9h5OEo5lfBE"
         }
       ],
@@ -3052,7 +3141,12 @@
         "scaling": {
           "mode": "level",
           "formula": "1d8"
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic",
+          "material"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -3164,7 +3258,13 @@
         "scaling": {
           "mode": "none",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic",
+          "material",
+          "concentration"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -3276,7 +3376,13 @@
         "scaling": {
           "mode": "none",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic",
+          "material",
+          "concentration"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -3388,7 +3494,13 @@
         "scaling": {
           "mode": "level",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic",
+          "material",
+          "concentration"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -3500,7 +3612,10 @@
         "scaling": {
           "mode": "none",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -3612,7 +3727,11 @@
         "scaling": {
           "mode": "none",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -3724,7 +3843,10 @@
         "scaling": {
           "mode": "none",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -3836,7 +3958,13 @@
         "scaling": {
           "mode": "level",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic",
+          "material",
+          "concentration"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -3948,7 +4076,11 @@
         "scaling": {
           "mode": "none",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -3992,12 +4124,13 @@
         "startTurn": 1
       },
       "icon": "icons/magic/defensive/shield-barrier-glowing-triangle-blue.webp",
-      "label": "Mage Armor",
       "origin": "Compendium.dnd5e.monsters.B7lBOr1AahNZs4a6.Item.CKZTpZlxj7hjjo2H",
       "transfer": false,
       "flags": {},
       "tint": null,
-      "sort": 0,
+      "name": "Mage Armor",
+      "description": "",
+      "statuses": [],
       "_key": "!actors.effects!B7lBOr1AahNZs4a6.cfwMU7LuOJ619Lny"
     },
     {
@@ -4022,11 +4155,12 @@
         "combat": null
       },
       "icon": "icons/magic/defensive/shield-barrier-flaming-pentagon-red.webp",
-      "label": "Warm Shield",
       "origin": "Compendium.dnd5e.monsters.B7lBOr1AahNZs4a6.Item.avD5XUtkBPQQR97c",
       "tint": null,
       "transfer": false,
-      "sort": 0,
+      "name": "Warm Shield",
+      "description": "",
+      "statuses": [],
       "_key": "!actors.effects!B7lBOr1AahNZs4a6.lVKx8swB08jm6IFE"
     },
     {
@@ -4051,15 +4185,15 @@
         "combat": null
       },
       "icon": "icons/magic/defensive/shield-barrier-flaming-pentagon-blue.webp",
-      "label": "Chill Shield",
       "origin": "Compendium.dnd5e.monsters.B7lBOr1AahNZs4a6.Item.avD5XUtkBPQQR97c",
       "tint": null,
       "transfer": false,
-      "sort": 0,
+      "name": "Chill Shield",
+      "description": "",
+      "statuses": [],
       "_key": "!actors.effects!B7lBOr1AahNZs4a6.UUXwEKSPX4nYfDzo"
     },
     {
-      "label": "Stoneskin",
       "icon": "icons/magic/defensive/shield-barrier-flaming-diamond-orange.webp",
       "origin": "Compendium.dnd5e.monsters.B7lBOr1AahNZs4a6.Item.ReMbjfeOKoSj3O79",
       "duration": {
@@ -4102,7 +4236,9 @@
       "tint": null,
       "transfer": false,
       "flags": {},
-      "sort": 0,
+      "name": "Stoneskin",
+      "description": "",
+      "statuses": [],
       "_key": "!actors.effects!B7lBOr1AahNZs4a6.4KtXvy5OXy2qUidh"
     }
   ],
@@ -4117,7 +4253,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787232655,
-    "modifiedTime": 1701908185752,
+    "modifiedTime": 1704466734734,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!B7lBOr1AahNZs4a6"

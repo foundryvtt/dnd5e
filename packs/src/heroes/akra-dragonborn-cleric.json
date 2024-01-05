@@ -2,7 +2,7 @@
   "_id": "kfzBL0q1Y7LgGs2x",
   "name": "Akra (Dragonborn Cleric)",
   "type": "character",
-  "img": "",
+  "img": null,
   "system": {
     "abilities": {
       "str": {
@@ -115,7 +115,7 @@
       },
       "alignment": "Lawful Good",
       "race": "syaK4jD01I8U6EAL",
-      "background": null,
+      "background": "UXJw0wVE7GCx6yzv",
       "originalClass": "Zo7sWdchHDF6d0nn",
       "xp": {
         "value": 0
@@ -471,7 +471,7 @@
       "attenuation": 0.5
     },
     "texture": {
-      "src": "",
+      "src": null,
       "tint": null,
       "scaleX": 1,
       "scaleY": 1,
@@ -490,7 +490,9 @@
       "saturation": 0,
       "contrast": 0
     },
-    "detectionModes": []
+    "detectionModes": [],
+    "appendNumber": false,
+    "prependAdjective": false
   },
   "items": [
     {
@@ -1265,7 +1267,10 @@
         },
         "strength": null,
         "stealth": true,
-        "proficient": null
+        "proficient": null,
+        "properties": [
+          "stealthDisadvantage"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -2587,7 +2592,12 @@
         "scaling": {
           "mode": "none",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic",
+          "concentration"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -2708,7 +2718,11 @@
         "scaling": {
           "mode": "cantrip",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -2824,7 +2838,10 @@
         "scaling": {
           "mode": "none",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -2938,7 +2955,13 @@
         "scaling": {
           "mode": "level",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic",
+          "material",
+          "concentration"
+        ]
       },
       "effects": [
         {
@@ -2987,11 +3010,12 @@
             "startTurn": null
           },
           "icon": "icons/magic/control/buff-flight-wings-blue.webp",
-          "label": "Bless",
           "origin": "Item.kZZAZ6kp9YzgPQEe",
           "tint": null,
           "transfer": true,
-          "sort": 0,
+          "name": "Bless",
+          "description": "",
+          "statuses": [],
           "_key": "!actors.items.effects!kfzBL0q1Y7LgGs2x.8dzaICjGy6mTUaUr.8rP3gwmXVTgZqYZE"
         }
       ],
@@ -3115,7 +3139,11 @@
         "scaling": {
           "mode": "level",
           "formula": "1d8"
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -3231,7 +3259,12 @@
         "scaling": {
           "mode": "none",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic",
+          "material"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -3347,7 +3380,10 @@
         "scaling": {
           "mode": "none",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -3463,7 +3499,12 @@
         "scaling": {
           "mode": "level",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic",
+          "material"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -3579,7 +3620,13 @@
         "scaling": {
           "mode": "level",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic",
+          "material",
+          "concentration"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -3635,11 +3682,12 @@
             "combat": null
           },
           "icon": "icons/magic/unholy/strike-beam-blood-red-purple.webp",
-          "label": "Bane",
           "origin": "Item.KkaQm4OQJxc6z3to",
           "tint": null,
           "transfer": true,
-          "sort": 0,
+          "name": "Bane",
+          "description": "",
+          "statuses": [],
           "_key": "!actors.items.effects!kfzBL0q1Y7LgGs2x.95K2aUhAGV9qXjnf.potjmpJPeUA1U4oe"
         }
       ],
@@ -3749,7 +3797,12 @@
         "scaling": {
           "mode": "none",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic",
+          "concentration"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -3865,7 +3918,13 @@
         "scaling": {
           "mode": "none",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic",
+          "ritual",
+          "concentration"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -3981,7 +4040,13 @@
         "scaling": {
           "mode": "none",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic",
+          "material",
+          "concentration"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -4102,7 +4167,11 @@
         "scaling": {
           "mode": "level",
           "formula": "1d6"
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -4223,7 +4292,10 @@
         "scaling": {
           "mode": "level",
           "formula": "1d4"
-        }
+        },
+        "properties": [
+          "vocal"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -4344,7 +4416,11 @@
         "scaling": {
           "mode": "level",
           "formula": "1d10"
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -4460,7 +4536,13 @@
         "scaling": {
           "mode": "none",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic",
+          "material",
+          "concentration"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -4576,7 +4658,12 @@
         "scaling": {
           "mode": "none",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic",
+          "ritual"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -4692,7 +4779,13 @@
         "scaling": {
           "mode": "none",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic",
+          "material",
+          "concentration"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -5510,12 +5603,13 @@
             "startTurn": null
           },
           "icon": "icons/equipment/chest/breastplate-layered-steel.webp",
-          "label": "Heavy Armor Proficiency",
           "origin": "Item.68bYIOvx6rIqnlOW",
           "transfer": true,
           "flags": {},
           "tint": null,
-          "sort": 0,
+          "name": "Heavy Armor Proficiency",
+          "description": "",
+          "statuses": [],
           "_key": "!actors.items.effects!kfzBL0q1Y7LgGs2x.nc5IaPb64YH0AT8L.Dk95lqbXXCUlefZW"
         }
       ],
@@ -5974,143 +6068,7 @@
       "_key": "!actors.items!kfzBL0q1Y7LgGs2x.Ww5s1slhUia11ZqH"
     }
   ],
-  "effects": [
-    {
-      "_id": "8rP3gwmXVTgZqYZE",
-      "flags": {},
-      "changes": [
-        {
-          "key": "system.bonuses.abilities.save",
-          "mode": 2,
-          "value": "+1d4",
-          "priority": null
-        },
-        {
-          "key": "system.bonuses.mwak.attack",
-          "mode": 2,
-          "value": "+1d4",
-          "priority": null
-        },
-        {
-          "key": "system.bonuses.msak.attack",
-          "mode": 2,
-          "value": "+1d4",
-          "priority": null
-        },
-        {
-          "key": "system.bonuses.rsak.attack",
-          "mode": 2,
-          "value": "+1d4",
-          "priority": null
-        },
-        {
-          "key": "system.bonuses.rwak.attack",
-          "mode": 2,
-          "value": "+1d4",
-          "priority": null
-        }
-      ],
-      "disabled": true,
-      "duration": {
-        "startTime": 648,
-        "seconds": 60,
-        "rounds": 10,
-        "combat": null,
-        "turns": null,
-        "startRound": 0,
-        "startTurn": 0
-      },
-      "icon": "icons/magic/control/buff-flight-wings-blue.webp",
-      "label": "Bless",
-      "origin": "Compendium.dnd5e.heroes.kfzBL0q1Y7LgGs2x.Item.8dzaICjGy6mTUaUr",
-      "tint": null,
-      "transfer": false,
-      "sort": 0,
-      "_key": "!actors.effects!kfzBL0q1Y7LgGs2x.8rP3gwmXVTgZqYZE"
-    },
-    {
-      "_id": "potjmpJPeUA1U4oe",
-      "flags": {},
-      "changes": [
-        {
-          "key": "system.bonuses.abilities.save",
-          "value": "-1d4",
-          "mode": 2,
-          "priority": null
-        },
-        {
-          "key": "system.bonuses.mwak.attack",
-          "value": "-1d4",
-          "mode": 2,
-          "priority": null
-        },
-        {
-          "key": "system.bonuses.msak.attack",
-          "value": "-1d4",
-          "mode": 2,
-          "priority": null
-        },
-        {
-          "key": "system.bonuses.rsak.attack",
-          "value": "-1d4",
-          "mode": 2,
-          "priority": null
-        },
-        {
-          "key": "system.bonuses.rwak.attack",
-          "value": "-1d4",
-          "mode": 2,
-          "priority": null
-        }
-      ],
-      "disabled": true,
-      "duration": {
-        "startTime": 648,
-        "seconds": 60,
-        "rounds": 10,
-        "turns": null,
-        "startRound": 0,
-        "startTurn": 0,
-        "combat": null
-      },
-      "icon": "icons/magic/unholy/strike-beam-blood-red-purple.webp",
-      "label": "Bane",
-      "origin": "Compendium.dnd5e.heroes.kfzBL0q1Y7LgGs2x.Item.95K2aUhAGV9qXjnf",
-      "tint": null,
-      "transfer": false,
-      "sort": 0,
-      "_key": "!actors.effects!kfzBL0q1Y7LgGs2x.potjmpJPeUA1U4oe"
-    },
-    {
-      "_id": "Dk95lqbXXCUlefZW",
-      "changes": [
-        {
-          "key": "system.traits.armorProf.value",
-          "mode": 2,
-          "value": "hvy",
-          "priority": null
-        }
-      ],
-      "disabled": false,
-      "duration": {
-        "startTime": 0,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
-      },
-      "icon": "icons/equipment/chest/breastplate-layered-steel.webp",
-      "label": "Heavy Armor Proficiency",
-      "origin": "Compendium.dnd5e.heroes.kfzBL0q1Y7LgGs2x.Item.nc5IaPb64YH0AT8L",
-      "transfer": false,
-      "flags": {},
-      "tint": null,
-      "sort": 0,
-      "_key": "!actors.effects!kfzBL0q1Y7LgGs2x.Dk95lqbXXCUlefZW"
-    }
-  ],
+  "effects": [],
   "folder": null,
   "sort": 0,
   "ownership": {
@@ -6119,10 +6077,10 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.4.0",
-    "coreVersion": "10.303",
+    "systemVersion": "3.0.0",
+    "coreVersion": "11.315",
     "createdTime": 1661787232189,
-    "modifiedTime": 1699989874871,
+    "modifiedTime": 1704466715357,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!kfzBL0q1Y7LgGs2x"

@@ -1,7 +1,7 @@
 {
   "name": "Zanna (Gnome Wizard)",
   "type": "character",
-  "img": "",
+  "img": null,
   "system": {
     "abilities": {
       "str": {
@@ -114,7 +114,7 @@
       },
       "alignment": "Chaotic Good",
       "race": "ur4Pjajcd3IlxKlZ",
-      "background": null,
+      "background": "Nt4QsuSYvhIwSoO5",
       "originalClass": "N4bhi6usK8wuNEnh",
       "xp": {
         "value": 0
@@ -467,7 +467,7 @@
       "attenuation": 0.5
     },
     "texture": {
-      "src": "",
+      "src": null,
       "tint": null,
       "scaleX": 1,
       "scaleY": 1,
@@ -486,7 +486,9 @@
       "saturation": 0,
       "contrast": 0
     },
-    "detectionModes": []
+    "detectionModes": [],
+    "appendNumber": false,
+    "prependAdjective": false
   },
   "items": [
     {
@@ -2107,7 +2109,11 @@
         "scaling": {
           "mode": "cantrip",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -2223,7 +2229,11 @@
         "scaling": {
           "mode": "none",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "material"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -2339,7 +2349,11 @@
         "scaling": {
           "mode": "none",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -2455,7 +2469,13 @@
         "scaling": {
           "mode": "none",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic",
+          "material",
+          "ritual"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -2569,7 +2589,11 @@
         "scaling": {
           "mode": "none",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic"
+        ]
       },
       "effects": [
         {
@@ -2594,11 +2618,12 @@
             "startTurn": null
           },
           "icon": "icons/magic/defensive/shield-barrier-glowing-triangle-magenta.webp",
-          "label": "Shield",
           "origin": "Item.FlLKKv7bQBlIAs11",
           "tint": null,
           "transfer": true,
-          "sort": 0,
+          "name": "Shield",
+          "description": "",
+          "statuses": [],
           "_key": "!actors.items.effects!4Jsv5vYaJ1atUEDV.z1mx84ONwkXKUZd7.6pbotGIvqQkraPva"
         }
       ],
@@ -2717,7 +2742,13 @@
         "scaling": {
           "mode": "none",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic",
+          "material",
+          "ritual"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -2831,7 +2862,12 @@
         "scaling": {
           "mode": "none",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic",
+          "material"
+        ]
       },
       "effects": [
         {
@@ -2855,12 +2891,13 @@
             "startTurn": null
           },
           "icon": "icons/magic/defensive/shield-barrier-glowing-triangle-blue.webp",
-          "label": "Mage Armor",
           "origin": "Compendium.dnd5e.spells.CKZTpZlxj7hjjo2H",
           "transfer": true,
           "flags": {},
           "tint": null,
-          "sort": 0,
+          "name": "Mage Armor",
+          "description": "",
+          "statuses": [],
           "_key": "!actors.items.effects!4Jsv5vYaJ1atUEDV.CKZTpZlxj7hjjo2H.cfwMU7LuOJ619Lny"
         }
       ],
@@ -2982,7 +3019,12 @@
         "scaling": {
           "mode": "level",
           "formula": "2d8"
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic",
+          "material"
+        ]
       },
       "effects": [],
       "folder": null,
@@ -3105,7 +3147,11 @@
         "scaling": {
           "mode": "level",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -4241,12 +4287,13 @@
             "startTurn": null
           },
           "icon": "icons/commodities/tech/cog-steel.webp",
-          "label": "Tinker",
           "origin": "Item.koRPOLtj8XAFMwnW",
           "transfer": true,
           "flags": {},
           "tint": null,
-          "sort": 0,
+          "name": "Tinker",
+          "description": "",
+          "statuses": [],
           "_key": "!actors.items.effects!4Jsv5vYaJ1atUEDV.ylzIab4YKbPPyvj0.CkQlNsLyTZGVbnKM"
         }
       ],
@@ -4263,95 +4310,7 @@
       "_key": "!actors.items!4Jsv5vYaJ1atUEDV.ylzIab4YKbPPyvj0"
     }
   ],
-  "effects": [
-    {
-      "_id": "6pbotGIvqQkraPva",
-      "flags": {},
-      "changes": [
-        {
-          "key": "system.attributes.ac.bonus",
-          "value": "5",
-          "mode": 2,
-          "priority": null
-        }
-      ],
-      "disabled": true,
-      "duration": {
-        "startTime": 648,
-        "rounds": 1,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": 0,
-        "startTurn": 0
-      },
-      "icon": "icons/magic/defensive/shield-barrier-glowing-triangle-magenta.webp",
-      "label": "Shield",
-      "origin": "Compendium.dnd5e.heroes.4Jsv5vYaJ1atUEDV.Item.z1mx84ONwkXKUZd7",
-      "tint": null,
-      "transfer": false,
-      "sort": 0,
-      "_key": "!actors.effects!4Jsv5vYaJ1atUEDV.6pbotGIvqQkraPva"
-    },
-    {
-      "_id": "cfwMU7LuOJ619Lny",
-      "changes": [
-        {
-          "key": "system.attributes.ac.calc",
-          "value": "mage",
-          "mode": 5,
-          "priority": null
-        }
-      ],
-      "disabled": true,
-      "duration": {
-        "startTime": 648,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": 0,
-        "startTurn": 0
-      },
-      "icon": "icons/magic/defensive/shield-barrier-glowing-triangle-blue.webp",
-      "label": "Mage Armor",
-      "origin": "Compendium.dnd5e.heroes.4Jsv5vYaJ1atUEDV.Item.CKZTpZlxj7hjjo2H",
-      "transfer": false,
-      "flags": {},
-      "tint": null,
-      "sort": 0,
-      "_key": "!actors.effects!4Jsv5vYaJ1atUEDV.cfwMU7LuOJ619Lny"
-    },
-    {
-      "_id": "CkQlNsLyTZGVbnKM",
-      "changes": [
-        {
-          "key": "system.traits.toolProf.value",
-          "mode": 2,
-          "value": "tinker",
-          "priority": null
-        }
-      ],
-      "disabled": false,
-      "duration": {
-        "startTime": 0,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
-      },
-      "icon": "icons/commodities/tech/cog-steel.webp",
-      "label": "Tinker",
-      "origin": "Compendium.dnd5e.heroes.4Jsv5vYaJ1atUEDV.Item.ylzIab4YKbPPyvj0",
-      "transfer": false,
-      "flags": {},
-      "tint": null,
-      "sort": 0,
-      "_key": "!actors.effects!4Jsv5vYaJ1atUEDV.CkQlNsLyTZGVbnKM"
-    }
-  ],
+  "effects": [],
   "folder": null,
   "sort": 0,
   "ownership": {
@@ -4361,10 +4320,10 @@
   "_id": "4Jsv5vYaJ1atUEDV",
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.4.0",
-    "coreVersion": "10.303",
+    "systemVersion": "3.0.0",
+    "coreVersion": "11.315",
     "createdTime": 1661787232155,
-    "modifiedTime": 1699993725854,
+    "modifiedTime": 1704466714951,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!4Jsv5vYaJ1atUEDV"

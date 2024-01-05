@@ -1536,7 +1536,13 @@
         "scaling": {
           "mode": "none",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic",
+          "material",
+          "concentration"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -1648,7 +1654,12 @@
         "scaling": {
           "mode": "none",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "material",
+          "concentration"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -1760,7 +1771,11 @@
         "scaling": {
           "mode": "none",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "concentration"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -1794,7 +1809,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787232553,
-    "modifiedTime": 1701908184130,
+    "modifiedTime": 1704466734128,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!1OQbxoZI5BtlB2ME"

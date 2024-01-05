@@ -1086,7 +1086,12 @@
         "scaling": {
           "mode": "level",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic",
+          "concentration"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -1120,7 +1125,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787232693,
-    "modifiedTime": 1701908186211,
+    "modifiedTime": 1704466735015,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!ESEm3fGUfSKjzVUc"

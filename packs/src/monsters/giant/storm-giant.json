@@ -553,7 +553,10 @@
         },
         "strength": null,
         "stealth": true,
-        "proficient": true
+        "proficient": true,
+        "properties": [
+          "stealthDisadvantage"
+        ]
       },
       "effects": [],
       "folder": null,
@@ -1349,7 +1352,13 @@
         "scaling": {
           "mode": "none",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic",
+          "ritual",
+          "concentration"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -1461,7 +1470,11 @@
         "scaling": {
           "mode": "none",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "material"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -1573,7 +1586,13 @@
         "scaling": {
           "mode": "none",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic",
+          "material",
+          "concentration"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -1685,7 +1704,11 @@
         "scaling": {
           "mode": "none",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "material"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -1797,7 +1820,13 @@
         "scaling": {
           "mode": "none",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic",
+          "material",
+          "concentration"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -1909,7 +1938,13 @@
         "scaling": {
           "mode": "none",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic",
+          "material",
+          "ritual"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -1943,7 +1978,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787232600,
-    "modifiedTime": 1701908184825,
+    "modifiedTime": 1704466734460,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!68bAMIpe4jvDeR9G"

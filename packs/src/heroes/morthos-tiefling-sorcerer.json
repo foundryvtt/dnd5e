@@ -2,7 +2,7 @@
   "_id": "xT2C2Itv2XambDYp",
   "name": "Morthos (Tiefling Sorcerer)",
   "type": "character",
-  "img": "",
+  "img": null,
   "system": {
     "abilities": {
       "str": {
@@ -115,7 +115,7 @@
       },
       "alignment": "Neutral Evil",
       "race": "Y7BsvdA2in8INCB5",
-      "background": null,
+      "background": "38phJIpUGf6pPv1e",
       "originalClass": "Ig5YOxEOabGaTjG5",
       "xp": {
         "value": 0
@@ -469,7 +469,7 @@
       "attenuation": 0.5
     },
     "texture": {
-      "src": "",
+      "src": null,
       "tint": null,
       "scaleX": 1,
       "scaleY": 1,
@@ -488,7 +488,9 @@
       "saturation": 0,
       "contrast": 0
     },
-    "detectionModes": []
+    "detectionModes": [],
+    "appendNumber": false,
+    "prependAdjective": false
   },
   "items": [
     {
@@ -2329,7 +2331,12 @@
         "scaling": {
           "mode": "none",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic",
+          "material"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -2450,7 +2457,11 @@
         "scaling": {
           "mode": "cantrip",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -2566,7 +2577,11 @@
         "scaling": {
           "mode": "none",
           "formula": ""
-        }
+        },
+        "properties": [
+          "somatic",
+          "material"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -2682,7 +2697,12 @@
         "scaling": {
           "mode": "none",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic",
+          "material"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -2803,7 +2823,11 @@
         "scaling": {
           "mode": "level",
           "formula": "1d6"
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -2919,7 +2943,11 @@
         "scaling": {
           "mode": "none",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -3763,12 +3791,13 @@
             "startTurn": null
           },
           "icon": "icons/creatures/abilities/dragon-fire-breath-orange.webp",
-          "label": "Dragon Ancestor",
           "origin": "Item.EZsonMThTNLZq35j",
           "transfer": true,
           "flags": {},
           "tint": null,
-          "sort": 0,
+          "name": "Dragon Ancestor",
+          "description": "",
+          "statuses": [],
           "_key": "!actors.items.effects!xT2C2Itv2XambDYp.oO4FCdIDwsr4VTb3.xI5jjbA2Dlj7L0cd"
         }
       ],
@@ -3896,12 +3925,13 @@
             "startTurn": null
           },
           "icon": "icons/creatures/claws/claw-scaled-red.webp",
-          "label": "Draconic Resilience",
           "origin": "Item.MW1ExvBLm8Hg82aA",
           "transfer": true,
           "flags": {},
           "tint": null,
-          "sort": 0,
+          "name": "Draconic Resilience",
+          "description": "",
+          "statuses": [],
           "_key": "!actors.items.effects!xT2C2Itv2XambDYp.o0wsV8JAuT6FUDAt.Pu89Tsgy2FJjYPQi"
         }
       ],
@@ -4269,12 +4299,13 @@
             "startTurn": null
           },
           "icon": "icons/magic/air/fog-gas-smoke-swirling-orange.webp",
-          "label": "Hellish Resistance",
           "origin": "Item.q71Pe1F8RRtEJt8Q",
           "transfer": true,
           "flags": {},
           "tint": null,
-          "sort": 0,
+          "name": "Hellish Resistance",
+          "description": "",
+          "statuses": [],
           "_key": "!actors.items.effects!xT2C2Itv2XambDYp.AqOtnW8y12LokI6Z.0rAhv7npcNmDcQ3B"
         }
       ],
@@ -4488,7 +4519,10 @@
         "scaling": {
           "mode": "none",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -4511,95 +4545,7 @@
       "_key": "!actors.items!xT2C2Itv2XambDYp.FlFGTgeJM6U0I1iP"
     }
   ],
-  "effects": [
-    {
-      "_id": "xI5jjbA2Dlj7L0cd",
-      "changes": [
-        {
-          "key": "system.traits.languages.value",
-          "mode": 2,
-          "value": "draconic",
-          "priority": null
-        }
-      ],
-      "disabled": false,
-      "duration": {
-        "startTime": 0,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
-      },
-      "icon": "icons/creatures/abilities/dragon-fire-breath-orange.webp",
-      "label": "Dragon Ancestor",
-      "origin": "Compendium.dnd5e.heroes.xT2C2Itv2XambDYp.Item.oO4FCdIDwsr4VTb3",
-      "transfer": false,
-      "flags": {},
-      "tint": null,
-      "sort": 0,
-      "_key": "!actors.effects!xT2C2Itv2XambDYp.xI5jjbA2Dlj7L0cd"
-    },
-    {
-      "_id": "Pu89Tsgy2FJjYPQi",
-      "changes": [
-        {
-          "key": "system.attributes.ac.calc",
-          "mode": 5,
-          "value": "draconic",
-          "priority": null
-        }
-      ],
-      "disabled": false,
-      "duration": {
-        "startTime": 0,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
-      },
-      "icon": "icons/creatures/claws/claw-scaled-red.webp",
-      "label": "Draconic Resilience",
-      "origin": "Compendium.dnd5e.heroes.xT2C2Itv2XambDYp.Item.o0wsV8JAuT6FUDAt",
-      "transfer": false,
-      "flags": {},
-      "tint": null,
-      "sort": 0,
-      "_key": "!actors.effects!xT2C2Itv2XambDYp.Pu89Tsgy2FJjYPQi"
-    },
-    {
-      "_id": "0rAhv7npcNmDcQ3B",
-      "changes": [
-        {
-          "key": "system.traits.dr.value",
-          "mode": 2,
-          "value": "fire",
-          "priority": null
-        }
-      ],
-      "disabled": false,
-      "duration": {
-        "startTime": 0,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
-      },
-      "icon": "icons/magic/air/fog-gas-smoke-swirling-orange.webp",
-      "label": "Hellish Resistance",
-      "origin": "Compendium.dnd5e.heroes.xT2C2Itv2XambDYp.Item.AqOtnW8y12LokI6Z",
-      "transfer": false,
-      "flags": {},
-      "tint": null,
-      "sort": 0,
-      "_key": "!actors.effects!xT2C2Itv2XambDYp.0rAhv7npcNmDcQ3B"
-    }
-  ],
+  "effects": [],
   "folder": null,
   "sort": 0,
   "ownership": {
@@ -4608,10 +4554,10 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.4.0",
-    "coreVersion": "10.303",
+    "systemVersion": "3.0.0",
+    "coreVersion": "11.315",
     "createdTime": 1661787232194,
-    "modifiedTime": 1699993127240,
+    "modifiedTime": 1704466715450,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!xT2C2Itv2XambDYp"

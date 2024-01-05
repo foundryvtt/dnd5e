@@ -1,7 +1,7 @@
 {
   "name": "Quillathe (Elf Ranger)",
   "type": "character",
-  "img": "",
+  "img": null,
   "system": {
     "abilities": {
       "str": {
@@ -114,7 +114,7 @@
       },
       "alignment": "Chaotic Neutral",
       "race": "jp4BUcAipDi7GIQQ",
-      "background": null,
+      "background": "I5EK9j7jV6mrXt7K",
       "originalClass": "Apx6i4A5a7JKqaGi",
       "xp": {
         "value": 0
@@ -479,7 +479,7 @@
       "attenuation": 0.5
     },
     "texture": {
-      "src": "",
+      "src": null,
       "tint": null,
       "scaleX": 1,
       "scaleY": 1,
@@ -498,7 +498,9 @@
       "saturation": 0,
       "contrast": 0
     },
-    "detectionModes": []
+    "detectionModes": [],
+    "appendNumber": false,
+    "prependAdjective": false
   },
   "items": [
     {
@@ -3216,7 +3218,11 @@
         "scaling": {
           "mode": "none",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -3252,10 +3258,10 @@
   "_id": "cYD0wRXLW4B17aoY",
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.4.0",
-    "coreVersion": "10.303",
+    "systemVersion": "3.0.0",
+    "coreVersion": "11.315",
     "createdTime": 1661787232181,
-    "modifiedTime": 1699993332339,
+    "modifiedTime": 1704466715207,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!cYD0wRXLW4B17aoY"

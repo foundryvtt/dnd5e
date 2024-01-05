@@ -759,7 +759,7 @@
       "_id": "2C0408CEBtrZW8ji",
       "name": "Invisibility (self only)",
       "type": "spell",
-      "img": "icons/magic/air/fog-gas-smoke-blue-dense-white.webp",
+      "img": "icons/magic/air/fog-gas-smoke-dense-white.webp",
       "system": {
         "description": {
           "value": "<p>A creature you touch becomes invisible until the spell ends. Anything the target is wearing or carrying is invisible as long as it is on the target's person. The spell ends for a target that attacks or casts a spell.</p><p><strong>At Higher Levels.</strong> When you cast this spell using a spell slot of 3rd level or higher, you can target one additional creature for each slot level above 2nd.</p>",
@@ -844,7 +844,12 @@
         "scaling": {
           "mode": "level",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic",
+          "concentration"
+        ]
       },
       "effects": [],
       "folder": null,
@@ -1393,7 +1398,12 @@
         "scaling": {
           "mode": "none",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic",
+          "concentration"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -1510,7 +1520,12 @@
         "scaling": {
           "mode": "none",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic",
+          "concentration"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -1622,7 +1637,13 @@
         "scaling": {
           "mode": "none",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic",
+          "material",
+          "concentration"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -1743,7 +1764,12 @@
         "scaling": {
           "mode": "level",
           "formula": "1d6"
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic",
+          "material"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -1860,7 +1886,12 @@
         "scaling": {
           "mode": "none",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic",
+          "material"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -1972,7 +2003,13 @@
         "scaling": {
           "mode": "none",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic",
+          "material",
+          "ritual"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -2084,7 +2121,13 @@
         "scaling": {
           "mode": "none",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic",
+          "material",
+          "concentration"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -2201,7 +2244,13 @@
         "scaling": {
           "mode": "level",
           "formula": "1d10"
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic",
+          "material",
+          "concentration"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -2235,7 +2284,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787232875,
-    "modifiedTime": 1701908188129,
+    "modifiedTime": 1704466735750,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!XEByBLeOkDgL3mrr"

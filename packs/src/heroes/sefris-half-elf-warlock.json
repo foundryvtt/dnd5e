@@ -2,7 +2,7 @@
   "_id": "Jw8DeuPjt1qpusdB",
   "name": "Sefris (Half-Elf Warlock)",
   "type": "character",
-  "img": "",
+  "img": null,
   "system": {
     "abilities": {
       "str": {
@@ -115,7 +115,7 @@
       },
       "alignment": "Chaotic Neutral",
       "race": "wLvV5awPEy6FHkvg",
-      "background": null,
+      "background": "8uFLMKLwRO7Y5Xl2",
       "originalClass": "MuaNnEZkswuhixJP",
       "xp": {
         "value": 0
@@ -480,7 +480,7 @@
       "attenuation": 0.5
     },
     "texture": {
-      "src": "",
+      "src": null,
       "tint": null,
       "scaleX": 1,
       "scaleY": 1,
@@ -499,7 +499,9 @@
       "saturation": 0,
       "contrast": 0
     },
-    "detectionModes": []
+    "detectionModes": [],
+    "appendNumber": false,
+    "prependAdjective": false
   },
   "items": [
     {
@@ -2451,7 +2453,11 @@
         "scaling": {
           "mode": "none",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -2572,7 +2578,11 @@
         "scaling": {
           "mode": "cantrip",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -2693,7 +2703,11 @@
         "scaling": {
           "mode": "level",
           "formula": "1d6"
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -2809,7 +2823,10 @@
         "scaling": {
           "mode": "none",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -4157,10 +4174,10 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.4.0",
-    "coreVersion": "10.303",
+    "systemVersion": "3.0.0",
+    "coreVersion": "11.315",
     "createdTime": 1661787232167,
-    "modifiedTime": 1699993640237,
+    "modifiedTime": 1704466715036,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!Jw8DeuPjt1qpusdB"

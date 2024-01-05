@@ -1,7 +1,7 @@
 {
   "name": "Randal (Human Fighter)",
   "type": "character",
-  "img": "",
+  "img": null,
   "system": {
     "abilities": {
       "str": {
@@ -114,7 +114,7 @@
       },
       "alignment": "Neutral Good",
       "race": "VFOCTtbEvjeUHo6B",
-      "background": null,
+      "background": "iODPoFlvprdu59Ga",
       "originalClass": "TixRV4Wr5ruxXRpf",
       "xp": {
         "value": 0
@@ -469,7 +469,7 @@
       "attenuation": 0.5
     },
     "texture": {
-      "src": "",
+      "src": null,
       "tint": null,
       "scaleX": 1,
       "scaleY": 1,
@@ -488,7 +488,9 @@
       "saturation": 0,
       "contrast": 0
     },
-    "detectionModes": []
+    "detectionModes": [],
+    "appendNumber": false,
+    "prependAdjective": false
   },
   "items": [
     {
@@ -1359,7 +1361,10 @@
         },
         "strength": 13,
         "stealth": true,
-        "proficient": null
+        "proficient": null,
+        "properties": [
+          "stealthDisadvantage"
+        ]
       },
       "sort": 0,
       "flags": {},
@@ -3520,11 +3525,12 @@
             "startTurn": null
           },
           "icon": "icons/equipment/shield/heater-stone-orange.webp",
-          "label": "Fighting Style: Defense",
           "origin": "Item.4mQUDmiDBePkQD6Y",
           "tint": null,
           "transfer": true,
-          "sort": 0,
+          "name": "Fighting Style: Defense",
+          "description": "",
+          "statuses": [],
           "_key": "!actors.items.effects!2Pdtnswo8Nj2nafY.dpXCnkmf6mF4qivf.U3so0zDcVt4sIBRz"
         }
       ],
@@ -3664,37 +3670,7 @@
       "_key": "!actors.items!2Pdtnswo8Nj2nafY.VFOCTtbEvjeUHo6B"
     }
   ],
-  "effects": [
-    {
-      "_id": "U3so0zDcVt4sIBRz",
-      "flags": {},
-      "changes": [
-        {
-          "key": "system.attributes.ac.bonus",
-          "value": "+1",
-          "mode": 2,
-          "priority": null
-        }
-      ],
-      "disabled": false,
-      "duration": {
-        "startTime": 0,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
-      },
-      "icon": "icons/equipment/shield/heater-stone-orange.webp",
-      "label": "Fighting Style: Defense",
-      "origin": "Compendium.dnd5e.heroes.2Pdtnswo8Nj2nafY.Item.dpXCnkmf6mF4qivf",
-      "tint": null,
-      "transfer": false,
-      "sort": 0,
-      "_key": "!actors.effects!2Pdtnswo8Nj2nafY.U3so0zDcVt4sIBRz"
-    }
-  ],
+  "effects": [],
   "folder": null,
   "sort": 0,
   "ownership": {
@@ -3704,10 +3680,10 @@
   "_id": "2Pdtnswo8Nj2nafY",
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.4.0",
-    "coreVersion": "10.303",
+    "systemVersion": "3.0.0",
+    "coreVersion": "11.315",
     "createdTime": 1661787232150,
-    "modifiedTime": 1699993381280,
+    "modifiedTime": 1704466714865,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!2Pdtnswo8Nj2nafY"

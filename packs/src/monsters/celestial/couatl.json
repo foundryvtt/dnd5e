@@ -1202,7 +1202,12 @@
         "scaling": {
           "mode": "none",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic",
+          "concentration"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -1314,7 +1319,13 @@
         "scaling": {
           "mode": "none",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic",
+          "ritual",
+          "concentration"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -1426,7 +1437,13 @@
         "scaling": {
           "mode": "none",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic",
+          "material",
+          "concentration"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -1536,7 +1553,13 @@
         "scaling": {
           "mode": "level",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic",
+          "material",
+          "concentration"
+        ]
       },
       "effects": [
         {
@@ -1585,11 +1608,12 @@
             "startTurn": null
           },
           "icon": "icons/magic/control/buff-flight-wings-blue.webp",
-          "label": "Bless",
           "origin": "Item.kZZAZ6kp9YzgPQEe",
           "tint": null,
           "transfer": true,
-          "sort": 0,
+          "name": "Bless",
+          "description": "",
+          "statuses": [],
           "_key": "!actors.items.effects!ZaP1H91t4FzbRqR5.8dzaICjGy6mTUaUr.8rP3gwmXVTgZqYZE"
         }
       ],
@@ -1704,7 +1728,11 @@
         "scaling": {
           "mode": "none",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -1821,7 +1849,11 @@
         "scaling": {
           "mode": "level",
           "formula": "1d8"
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -1933,7 +1965,11 @@
         "scaling": {
           "mode": "none",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -2045,7 +2081,12 @@
         "scaling": {
           "mode": "none",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic",
+          "material"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -2155,7 +2196,11 @@
         "scaling": {
           "mode": "none",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic"
+        ]
       },
       "effects": [
         {
@@ -2180,11 +2225,12 @@
             "startTurn": null
           },
           "icon": "icons/magic/defensive/shield-barrier-glowing-triangle-magenta.webp",
-          "label": "Shield",
           "origin": "Item.FlLKKv7bQBlIAs11",
           "tint": null,
           "transfer": true,
-          "sort": 0,
+          "name": "Shield",
+          "description": "",
+          "statuses": [],
           "_key": "!actors.items.effects!ZaP1H91t4FzbRqR5.z1mx84ONwkXKUZd7.6pbotGIvqQkraPva"
         }
       ],
@@ -2304,7 +2350,12 @@
         "scaling": {
           "mode": "none",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic",
+          "material"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -2416,7 +2467,12 @@
         "scaling": {
           "mode": "none",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic",
+          "material"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -2528,7 +2584,13 @@
         "scaling": {
           "mode": "none",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic",
+          "material",
+          "concentration"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -2640,7 +2702,11 @@
         "scaling": {
           "mode": "none",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -2709,11 +2775,12 @@
         "startTurn": 1
       },
       "icon": "icons/magic/control/buff-flight-wings-blue.webp",
-      "label": "Bless",
       "origin": "Compendium.dnd5e.monsters.ZaP1H91t4FzbRqR5.Item.8dzaICjGy6mTUaUr",
       "tint": null,
       "transfer": false,
-      "sort": 0,
+      "name": "Bless",
+      "description": "",
+      "statuses": [],
       "_key": "!actors.effects!ZaP1H91t4FzbRqR5.8rP3gwmXVTgZqYZE"
     },
     {
@@ -2738,11 +2805,12 @@
         "startTurn": 1
       },
       "icon": "icons/magic/defensive/shield-barrier-glowing-triangle-magenta.webp",
-      "label": "Shield",
       "origin": "Compendium.dnd5e.monsters.ZaP1H91t4FzbRqR5.Item.z1mx84ONwkXKUZd7",
       "tint": null,
       "transfer": false,
-      "sort": 0,
+      "name": "Shield",
+      "description": "",
+      "statuses": [],
       "_key": "!actors.effects!ZaP1H91t4FzbRqR5.6pbotGIvqQkraPva"
     }
   ],
@@ -2757,7 +2825,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787232895,
-    "modifiedTime": 1701908188364,
+    "modifiedTime": 1704466735860,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!ZaP1H91t4FzbRqR5"

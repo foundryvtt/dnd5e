@@ -1662,7 +1662,11 @@
         "scaling": {
           "mode": "none",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -1774,7 +1778,11 @@
         "scaling": {
           "mode": "none",
           "formula": ""
-        }
+        },
+        "properties": [
+          "somatic",
+          "material"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -1886,7 +1894,11 @@
         "scaling": {
           "mode": "none",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -1998,7 +2010,13 @@
         "scaling": {
           "mode": "none",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic",
+          "ritual",
+          "concentration"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -2110,7 +2128,13 @@
         "scaling": {
           "mode": "none",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic",
+          "material",
+          "ritual"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -2220,7 +2244,11 @@
         "scaling": {
           "mode": "none",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic"
+        ]
       },
       "effects": [
         {
@@ -2245,11 +2273,12 @@
             "startTurn": null
           },
           "icon": "icons/magic/defensive/shield-barrier-glowing-triangle-magenta.webp",
-          "label": "Shield",
           "origin": "Item.FlLKKv7bQBlIAs11",
           "tint": null,
           "transfer": true,
-          "sort": 0,
+          "name": "Shield",
+          "description": "",
+          "statuses": [],
           "_key": "!actors.items.effects!6wbasdWWqtXeIAyD.z1mx84ONwkXKUZd7.6pbotGIvqQkraPva"
         }
       ],
@@ -2364,7 +2393,11 @@
         "scaling": {
           "mode": "level",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -2476,7 +2509,12 @@
         "scaling": {
           "mode": "none",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "material",
+          "concentration"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -2588,7 +2626,13 @@
         "scaling": {
           "mode": "none",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic",
+          "material",
+          "concentration"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -2700,7 +2744,12 @@
         "scaling": {
           "mode": "none",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "material",
+          "concentration"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -2812,7 +2861,11 @@
         "scaling": {
           "mode": "none",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -2924,7 +2977,11 @@
         "scaling": {
           "mode": "none",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "material"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -3036,7 +3093,13 @@
         "scaling": {
           "mode": "none",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic",
+          "material",
+          "concentration"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -3148,7 +3211,12 @@
         "scaling": {
           "mode": "none",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic",
+          "concentration"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -3260,7 +3328,12 @@
         "scaling": {
           "mode": "none",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic",
+          "material"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -3305,11 +3378,12 @@
         "startTurn": 1
       },
       "icon": "icons/magic/defensive/shield-barrier-glowing-triangle-magenta.webp",
-      "label": "Shield",
       "origin": "Compendium.dnd5e.monsters.6wbasdWWqtXeIAyD.Item.z1mx84ONwkXKUZd7",
       "tint": null,
       "transfer": false,
-      "sort": 0,
+      "name": "Shield",
+      "description": "",
+      "statuses": [],
       "_key": "!actors.effects!6wbasdWWqtXeIAyD.6pbotGIvqQkraPva"
     }
   ],
@@ -3324,7 +3398,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787232605,
-    "modifiedTime": 1701908184916,
+    "modifiedTime": 1704466734558,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!6wbasdWWqtXeIAyD"

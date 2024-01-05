@@ -653,7 +653,11 @@
         "scaling": {
           "mode": "none",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic"
+        ]
       },
       "effects": [],
       "folder": null,
@@ -1287,7 +1291,13 @@
         "scaling": {
           "mode": "none",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic",
+          "ritual",
+          "concentration"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -1404,7 +1414,11 @@
         "scaling": {
           "mode": "level",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -1516,7 +1530,12 @@
         "scaling": {
           "mode": "none",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic",
+          "concentration"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -1631,7 +1650,12 @@
         "scaling": {
           "mode": "level",
           "formula": "2d8"
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic",
+          "material"
+        ]
       },
       "effects": [],
       "folder": null,
@@ -1667,7 +1691,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787233243,
-    "modifiedTime": 1701908190930,
+    "modifiedTime": 1704466736474,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!xvh2UOKv1bh03Gih"

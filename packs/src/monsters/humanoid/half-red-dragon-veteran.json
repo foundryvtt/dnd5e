@@ -550,7 +550,10 @@
         },
         "strength": 15,
         "stealth": true,
-        "proficient": true
+        "proficient": true,
+        "properties": [
+          "stealthDisadvantage"
+        ]
       },
       "effects": [],
       "folder": null,
@@ -1183,7 +1186,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787232594,
-    "modifiedTime": 1701908184742,
+    "modifiedTime": 1704466734415,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!5TmstVMURpVtmNR3"

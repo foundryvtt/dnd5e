@@ -1163,7 +1163,12 @@
         "scaling": {
           "mode": "none",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic",
+          "concentration"
+        ]
       },
       "effects": [],
       "flags": {
@@ -1278,7 +1283,11 @@
         "scaling": {
           "mode": "none",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -1395,7 +1404,12 @@
         "scaling": {
           "mode": "none",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic",
+          "material"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -1505,7 +1519,13 @@
         "scaling": {
           "mode": "none",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic",
+          "material",
+          "concentration"
+        ]
       },
       "effects": [
         {
@@ -1536,11 +1556,12 @@
             "startTurn": null
           },
           "icon": "icons/magic/defensive/shield-barrier-flaming-diamond-orange.webp",
-          "label": "Barkskin",
           "origin": "Item.VQMKMnQDw5rzL0zp",
           "tint": null,
           "transfer": true,
-          "sort": 0,
+          "name": "Barkskin",
+          "description": "",
+          "statuses": [],
           "_key": "!actors.items.effects!KOHVWl5RU9XBR8Jb.JPwIEfgUPVebr5AH.uM6rgctYpcbCVSkn"
         }
       ],
@@ -1655,7 +1676,13 @@
         "scaling": {
           "mode": "none",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic",
+          "material",
+          "concentration"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -1772,7 +1799,12 @@
         "scaling": {
           "mode": "none",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic",
+          "material"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -1823,11 +1855,12 @@
         "startTurn": 1
       },
       "icon": "icons/magic/defensive/shield-barrier-flaming-diamond-orange.webp",
-      "label": "Barkskin",
       "origin": "Compendium.dnd5e.monsters.KOHVWl5RU9XBR8Jb.Item.JPwIEfgUPVebr5AH",
       "tint": null,
       "transfer": false,
-      "sort": 0,
+      "name": "Barkskin",
+      "description": "",
+      "statuses": [],
       "_key": "!actors.effects!KOHVWl5RU9XBR8Jb.uM6rgctYpcbCVSkn"
     }
   ],
@@ -1842,7 +1875,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787232758,
-    "modifiedTime": 1701908186926,
+    "modifiedTime": 1704466735279,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!KOHVWl5RU9XBR8Jb"

@@ -774,7 +774,11 @@
         "scaling": {
           "mode": "none",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -891,7 +895,11 @@
         "scaling": {
           "mode": "cantrip",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -1000,7 +1008,12 @@
         "scaling": {
           "mode": "none",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic",
+          "concentration"
+        ]
       },
       "effects": [],
       "flags": {
@@ -1115,7 +1128,12 @@
         "scaling": {
           "mode": "level",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic",
+          "material"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -1227,7 +1245,12 @@
         "scaling": {
           "mode": "none",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic",
+          "ritual"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -1344,7 +1367,11 @@
         "scaling": {
           "mode": "level",
           "formula": "1d8"
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -1456,7 +1483,13 @@
         "scaling": {
           "mode": "level",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic",
+          "material",
+          "ritual"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -1573,7 +1606,12 @@
         "scaling": {
           "mode": "none",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic",
+          "material"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -1683,7 +1721,13 @@
         "scaling": {
           "mode": "none",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic",
+          "material",
+          "concentration"
+        ]
       },
       "effects": [
         {
@@ -1714,11 +1758,12 @@
             "startTurn": null
           },
           "icon": "icons/magic/defensive/shield-barrier-flaming-diamond-orange.webp",
-          "label": "Barkskin",
           "origin": "Item.VQMKMnQDw5rzL0zp",
           "tint": null,
           "transfer": true,
-          "sort": 0,
+          "name": "Barkskin",
+          "description": "",
+          "statuses": [],
           "_key": "!actors.items.effects!K15Yl8JmB5iPircc.JPwIEfgUPVebr5AH.uM6rgctYpcbCVSkn"
         }
       ],
@@ -1772,11 +1817,12 @@
         "startTurn": 1
       },
       "icon": "icons/magic/defensive/shield-barrier-flaming-diamond-orange.webp",
-      "label": "Barkskin",
       "origin": "Compendium.dnd5e.monsters.K15Yl8JmB5iPircc.Item.JPwIEfgUPVebr5AH",
       "tint": null,
       "transfer": false,
-      "sort": 0,
+      "name": "Barkskin",
+      "description": "",
+      "statuses": [],
       "_key": "!actors.effects!K15Yl8JmB5iPircc.uM6rgctYpcbCVSkn"
     }
   ],
@@ -1791,7 +1837,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787232744,
-    "modifiedTime": 1701908186791,
+    "modifiedTime": 1704466735172,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!K15Yl8JmB5iPircc"

@@ -975,7 +975,12 @@
         "scaling": {
           "mode": "level",
           "formula": "2d8"
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic",
+          "material"
+        ]
       },
       "effects": [],
       "folder": null,
@@ -1011,7 +1016,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787232661,
-    "modifiedTime": 1701908185811,
+    "modifiedTime": 1704466734866,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!BUCfQ7ihaXX75Vai"

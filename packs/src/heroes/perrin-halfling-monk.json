@@ -1,7 +1,7 @@
 {
   "name": "Perrin (Halfling Monk)",
   "type": "character",
-  "img": "",
+  "img": null,
   "system": {
     "abilities": {
       "str": {
@@ -114,7 +114,7 @@
       },
       "alignment": "True Neutral",
       "race": "6JOg9xYjafGcdHnY",
-      "background": null,
+      "background": "q4tr1vTU8RxtU1UZ",
       "originalClass": "ckabMZ0IHcAMt16f",
       "xp": {
         "value": 0
@@ -479,7 +479,7 @@
       "attenuation": 0.5
     },
     "texture": {
-      "src": "",
+      "src": null,
       "tint": null,
       "scaleX": 1,
       "scaleY": 1,
@@ -498,7 +498,9 @@
       "saturation": 0,
       "contrast": 0
     },
-    "detectionModes": []
+    "detectionModes": [],
+    "appendNumber": false,
+    "prependAdjective": false
   },
   "items": [
     {
@@ -3829,66 +3831,7 @@
       "_key": "!actors.items!125qFnXvT9z0iOic.ddEW1gRmYuvAkrU2"
     }
   ],
-  "effects": [
-    {
-      "_id": "R5ro4AuNjcdWD56O",
-      "changes": [
-        {
-          "key": "system.attributes.ac.calc",
-          "mode": 5,
-          "value": "unarmoredMonk",
-          "priority": null
-        }
-      ],
-      "disabled": false,
-      "duration": {
-        "startTime": 0,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
-      },
-      "icon": "icons/magic/control/silhouette-hold-change-blue.webp",
-      "label": "Unarmored Defense",
-      "origin": "Compendium.dnd5e.heroes.125qFnXvT9z0iOic.Item.lVsKpEajeU5R83a5",
-      "transfer": false,
-      "flags": {},
-      "tint": null,
-      "sort": 0,
-      "_key": "!actors.effects!125qFnXvT9z0iOic.R5ro4AuNjcdWD56O"
-    },
-    {
-      "_id": "3ZXTUDl62zDpvpai",
-      "changes": [
-        {
-          "key": "flags.dnd5e.halflingLucky",
-          "mode": 5,
-          "value": "true",
-          "priority": null
-        }
-      ],
-      "disabled": false,
-      "duration": {
-        "startTime": 0,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
-      },
-      "icon": "icons/sundries/gaming/dice-runed-brown.webp",
-      "label": "Lucky",
-      "origin": "Compendium.dnd5e.heroes.125qFnXvT9z0iOic.Item.tUz8GlMnsZW70sFM",
-      "transfer": false,
-      "flags": {},
-      "tint": null,
-      "sort": 0,
-      "_key": "!actors.effects!125qFnXvT9z0iOic.3ZXTUDl62zDpvpai"
-    }
-  ],
+  "effects": [],
   "folder": null,
   "sort": 0,
   "ownership": {
@@ -3902,10 +3845,10 @@
   "_id": "125qFnXvT9z0iOic",
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.4.0",
-    "coreVersion": "10.303",
+    "systemVersion": "3.0.0",
+    "coreVersion": "11.315",
     "createdTime": 1661787232144,
-    "modifiedTime": 1699993223554,
+    "modifiedTime": 1704466714775,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!125qFnXvT9z0iOic"

@@ -1,7 +1,7 @@
 {
   "name": "Riswynn (Dwarf Rogue)",
   "type": "character",
-  "img": "",
+  "img": null,
   "system": {
     "abilities": {
       "str": {
@@ -114,7 +114,7 @@
       },
       "alignment": "True neutral",
       "race": "JtKfV5srBn6zBNVt",
-      "background": null,
+      "background": "kLWeji1tfubIJvfT",
       "originalClass": "POlGoMp1xwT02K3S",
       "xp": {
         "value": 0
@@ -491,7 +491,7 @@
       "attenuation": 0.5
     },
     "texture": {
-      "src": "",
+      "src": null,
       "tint": null,
       "scaleX": 1,
       "scaleY": 1,
@@ -510,7 +510,9 @@
       "saturation": 0,
       "contrast": 0
     },
-    "detectionModes": []
+    "detectionModes": [],
+    "appendNumber": false,
+    "prependAdjective": false
   },
   "items": [
     {
@@ -3993,37 +3995,7 @@
       "_key": "!actors.items!bzlxBO5km3zCQA8G.VtJK5sQ1pHMMWGQ4"
     }
   ],
-  "effects": [
-    {
-      "_id": "hIaIpLxcMZSY3qXi",
-      "changes": [
-        {
-          "key": "system.traits.dr.value",
-          "mode": 2,
-          "value": "poison",
-          "priority": null
-        }
-      ],
-      "disabled": false,
-      "duration": {
-        "startTime": 0,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
-      },
-      "icon": "icons/creatures/abilities/stinger-poison-green.webp",
-      "label": "Dwarven Resilience",
-      "origin": "Compendium.dnd5e.heroes.bzlxBO5km3zCQA8G.Item.yeAdyhHhZGgcb7if",
-      "transfer": false,
-      "flags": {},
-      "tint": null,
-      "sort": 0,
-      "_key": "!actors.effects!bzlxBO5km3zCQA8G.hIaIpLxcMZSY3qXi"
-    }
-  ],
+  "effects": [],
   "folder": null,
   "sort": 0,
   "ownership": {
@@ -4033,10 +4005,10 @@
   "_id": "bzlxBO5km3zCQA8G",
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.4.0",
-    "coreVersion": "10.303",
+    "systemVersion": "3.0.0",
+    "coreVersion": "11.315",
     "createdTime": 1661787232177,
-    "modifiedTime": 1699993522307,
+    "modifiedTime": 1704466715170,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!bzlxBO5km3zCQA8G"

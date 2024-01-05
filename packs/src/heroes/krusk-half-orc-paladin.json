@@ -1,7 +1,7 @@
 {
   "name": "Krusk (Half-Orc Paladin)",
   "type": "character",
-  "img": "",
+  "img": null,
   "system": {
     "abilities": {
       "str": {
@@ -114,7 +114,7 @@
       },
       "alignment": "Lawful Good",
       "race": "PIvfnfQVQ98MdCmQ",
-      "background": null,
+      "background": "gfQ9BWSZtm6WJyZr",
       "originalClass": "xogb503g0jZcBEyb",
       "xp": {
         "value": 0
@@ -475,7 +475,7 @@
       "attenuation": 0.5
     },
     "texture": {
-      "src": "",
+      "src": null,
       "tint": null,
       "scaleX": 1,
       "scaleY": 1,
@@ -494,7 +494,9 @@
       "saturation": 0,
       "contrast": 0
     },
-    "detectionModes": []
+    "detectionModes": [],
+    "appendNumber": false,
+    "prependAdjective": false
   },
   "items": [
     {
@@ -1132,7 +1134,10 @@
         },
         "strength": 13,
         "stealth": true,
-        "proficient": null
+        "proficient": null,
+        "properties": [
+          "stealthDisadvantage"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -3310,10 +3315,10 @@
   "_id": "Dh1AA6w104V17V6w",
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.4.0",
-    "coreVersion": "10.303",
+    "systemVersion": "3.0.0",
+    "coreVersion": "11.315",
     "createdTime": 1661787232161,
-    "modifiedTime": 1699992954619,
+    "modifiedTime": 1704466715002,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!Dh1AA6w104V17V6w"

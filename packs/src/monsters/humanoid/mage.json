@@ -776,7 +776,11 @@
         "scaling": {
           "mode": "cantrip",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -888,7 +892,11 @@
         "scaling": {
           "mode": "none",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "material"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -1000,7 +1008,11 @@
         "scaling": {
           "mode": "none",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -1112,7 +1124,11 @@
         "scaling": {
           "mode": "none",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -1224,7 +1240,13 @@
         "scaling": {
           "mode": "none",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic",
+          "ritual",
+          "concentration"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -1334,7 +1356,12 @@
         "scaling": {
           "mode": "none",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic",
+          "material"
+        ]
       },
       "effects": [
         {
@@ -1358,12 +1385,13 @@
             "startTurn": null
           },
           "icon": "icons/magic/defensive/shield-barrier-glowing-triangle-blue.webp",
-          "label": "Mage Armor",
           "origin": "Compendium.dnd5e.spells.CKZTpZlxj7hjjo2H",
           "transfer": true,
           "flags": {},
           "tint": null,
-          "sort": 0,
+          "name": "Mage Armor",
+          "description": "",
+          "statuses": [],
           "_key": "!actors.items.effects!mQnsXanewsPiV7QE.CKZTpZlxj7hjjo2H.cfwMU7LuOJ619Lny"
         }
       ],
@@ -1483,7 +1511,11 @@
         "scaling": {
           "mode": "level",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -1593,7 +1625,11 @@
         "scaling": {
           "mode": "none",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic"
+        ]
       },
       "effects": [
         {
@@ -1618,11 +1654,12 @@
             "startTurn": null
           },
           "icon": "icons/magic/defensive/shield-barrier-glowing-triangle-magenta.webp",
-          "label": "Shield",
           "origin": "Item.FlLKKv7bQBlIAs11",
           "tint": null,
           "transfer": true,
-          "sort": 0,
+          "name": "Shield",
+          "description": "",
+          "statuses": [],
           "_key": "!actors.items.effects!mQnsXanewsPiV7QE.z1mx84ONwkXKUZd7.6pbotGIvqQkraPva"
         }
       ],
@@ -1737,7 +1774,10 @@
         "scaling": {
           "mode": "none",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -1849,7 +1889,12 @@
         "scaling": {
           "mode": "none",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "material",
+          "concentration"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -1961,7 +2006,10 @@
         "scaling": {
           "mode": "level",
           "formula": ""
-        }
+        },
+        "properties": [
+          "somatic"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -2078,7 +2126,12 @@
         "scaling": {
           "mode": "level",
           "formula": "1d6"
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic",
+          "material"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -2190,7 +2243,13 @@
         "scaling": {
           "mode": "level",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic",
+          "material",
+          "concentration"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -2302,7 +2361,12 @@
         "scaling": {
           "mode": "none",
           "formula": ""
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic",
+          "concentration"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -2423,7 +2487,12 @@
         "scaling": {
           "mode": "level",
           "formula": "1d8"
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic",
+          "material"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -2540,7 +2609,12 @@
         "scaling": {
           "mode": "level",
           "formula": "1d8"
-        }
+        },
+        "properties": [
+          "vocal",
+          "somatic",
+          "material"
+        ]
       },
       "sort": 0,
       "flags": {
@@ -2584,12 +2658,13 @@
         "startTurn": 1
       },
       "icon": "icons/magic/defensive/shield-barrier-glowing-triangle-blue.webp",
-      "label": "Mage Armor",
       "origin": "Compendium.dnd5e.monsters.mQnsXanewsPiV7QE.Item.CKZTpZlxj7hjjo2H",
       "transfer": false,
       "flags": {},
       "tint": null,
-      "sort": 0,
+      "name": "Mage Armor",
+      "description": "",
+      "statuses": [],
       "_key": "!actors.effects!mQnsXanewsPiV7QE.cfwMU7LuOJ619Lny"
     },
     {
@@ -2614,11 +2689,12 @@
         "startTurn": 1
       },
       "icon": "icons/magic/defensive/shield-barrier-glowing-triangle-magenta.webp",
-      "label": "Shield",
       "origin": "Compendium.dnd5e.monsters.mQnsXanewsPiV7QE.Item.z1mx84ONwkXKUZd7",
       "tint": null,
       "transfer": false,
-      "sort": 0,
+      "name": "Shield",
+      "description": "",
+      "statuses": [],
       "_key": "!actors.effects!mQnsXanewsPiV7QE.6pbotGIvqQkraPva"
     }
   ],
@@ -2633,7 +2709,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787233145,
-    "modifiedTime": 1701908189716,
+    "modifiedTime": 1704466736150,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!mQnsXanewsPiV7QE"

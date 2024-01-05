@@ -1,7 +1,7 @@
 {
   "name": "Merric (Halfling Barbarian)",
   "type": "character",
-  "img": "",
+  "img": null,
   "system": {
     "abilities": {
       "str": {
@@ -114,7 +114,7 @@
       },
       "alignment": "Chaotic Good",
       "race": "DAbggfkfZ8yIEDyK",
-      "background": null,
+      "background": "XIVdS0HZI5lOG5bx",
       "originalClass": "LX25nsSy2bvul2dp",
       "xp": {
         "value": 0
@@ -466,7 +466,7 @@
       "attenuation": 0.5
     },
     "texture": {
-      "src": "",
+      "src": null,
       "tint": null,
       "scaleX": 1,
       "scaleY": 1,
@@ -485,7 +485,9 @@
       "saturation": 0,
       "contrast": 0
     },
-    "detectionModes": []
+    "detectionModes": [],
+    "appendNumber": false,
+    "prependAdjective": false
   },
   "items": [
     {
@@ -3412,113 +3414,7 @@
       "_key": "!actors.items!irWonyO6ZLh47sN7.WPhg1wZUed3W0ili"
     }
   ],
-  "effects": [
-    {
-      "_id": "eWhL8hUr0c2ujDUm",
-      "flags": {},
-      "changes": [
-        {
-          "key": "system.bonuses.mwak.damage",
-          "mode": 2,
-          "value": "+@scale.barbarian.rage-damage",
-          "priority": null
-        },
-        {
-          "key": "system.traits.dr.value",
-          "mode": 2,
-          "value": "slashing",
-          "priority": null
-        },
-        {
-          "key": "system.traits.dr.value",
-          "mode": 2,
-          "value": "piercing",
-          "priority": null
-        },
-        {
-          "key": "system.traits.dr.value",
-          "mode": 2,
-          "value": "bludgeoning",
-          "priority": null
-        }
-      ],
-      "disabled": true,
-      "duration": {
-        "startTime": 0,
-        "rounds": 10,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
-      },
-      "icon": "icons/creatures/abilities/mouth-teeth-human.webp",
-      "label": "Rage",
-      "origin": "Compendium.dnd5e.heroes.irWonyO6ZLh47sN7.Item.t9n1JlIt64USZcYm",
-      "tint": null,
-      "transfer": false,
-      "sort": 0,
-      "_key": "!actors.effects!irWonyO6ZLh47sN7.eWhL8hUr0c2ujDUm"
-    },
-    {
-      "_id": "hEgUnQNVxtBo2zkK",
-      "changes": [
-        {
-          "key": "system.attributes.ac.calc",
-          "mode": 5,
-          "value": "unarmoredBarb",
-          "priority": null
-        }
-      ],
-      "disabled": false,
-      "duration": {
-        "startTime": 0,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
-      },
-      "icon": "icons/magic/control/silhouette-hold-change-blue.webp",
-      "label": "Unarmored Defense",
-      "origin": "Compendium.dnd5e.heroes.irWonyO6ZLh47sN7.Item.jq7HHcrrGB4hc9dp",
-      "transfer": false,
-      "flags": {},
-      "tint": null,
-      "sort": 0,
-      "_key": "!actors.effects!irWonyO6ZLh47sN7.hEgUnQNVxtBo2zkK"
-    },
-    {
-      "_id": "3ZXTUDl62zDpvpai",
-      "changes": [
-        {
-          "key": "flags.dnd5e.halflingLucky",
-          "mode": 5,
-          "value": "true",
-          "priority": null
-        }
-      ],
-      "disabled": false,
-      "duration": {
-        "startTime": 0,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
-      },
-      "icon": "icons/sundries/gaming/dice-runed-brown.webp",
-      "label": "Lucky",
-      "origin": "Compendium.dnd5e.heroes.irWonyO6ZLh47sN7.Item.JQl3VzzqbaXKQUy4",
-      "transfer": false,
-      "flags": {},
-      "tint": null,
-      "sort": 0,
-      "_key": "!actors.effects!irWonyO6ZLh47sN7.3ZXTUDl62zDpvpai"
-    }
-  ],
+  "effects": [],
   "folder": null,
   "sort": 0,
   "ownership": {
@@ -3532,10 +3428,10 @@
   "_id": "irWonyO6ZLh47sN7",
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.4.0",
-    "coreVersion": "10.303",
+    "systemVersion": "3.0.0",
+    "coreVersion": "11.315",
     "createdTime": 1661787232184,
-    "modifiedTime": 1699993047522,
+    "modifiedTime": 1704466715271,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!irWonyO6ZLh47sN7"
