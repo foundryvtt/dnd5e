@@ -28,7 +28,6 @@ import ItemTypeField from "./fields/item-type-field.mjs";
  *                                      depending on system setting.
  * @property {string} speed.conditions  Conditions that may affect item's speed.
  * @property {number} strength          Minimum strength required to use a piece of armor.
- * @property {boolean} stealth          Does this equipment grant disadvantage on stealth checks when used?
  * @property {number} proficient        Does the owner have proficiency in this piece of equipment?
  */
 export default class EquipmentData extends SystemDataModel.mixin(
@@ -53,7 +52,6 @@ export default class EquipmentData extends SystemDataModel.mixin(
       strength: new foundry.data.fields.NumberField({
         required: true, integer: true, min: 0, label: "DND5E.ItemRequiredStr"
       }),
-      stealth: new foundry.data.fields.BooleanField({required: true, label: "DND5E.ItemEquipmentStealthDisav"}),
       proficient: new foundry.data.fields.NumberField({
         required: true, min: 0, max: 1, integer: true, initial: null, label: "DND5E.ProficiencyLevel"
       })
@@ -115,6 +113,18 @@ export default class EquipmentData extends SystemDataModel.mixin(
   /* -------------------------------------------- */
 
   /**
+   * Migrates stealth disadvantage boolean to properties.
+   * @param {object} source  The candidate source data from which the model will be constructed.
+   */
+  static _migrateStealth(source) {
+    if ( foundry.utils.getProperty(source, "system.stealth") === true ) {
+      foundry.utils.setProperty(source, "flags.dnd5e.migratedProperties", ["stealthDisadvantage"]);
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Migrate the proficient field to convert boolean values.
    * @param {object} source  The candidate source data from which the model will be constructed.
    */
@@ -144,7 +154,7 @@ export default class EquipmentData extends SystemDataModel.mixin(
     return [
       this.type.label,
       this.parent.labels?.armor ?? null,
-      this.stealth ? game.i18n.localize("DND5E.StealthDisadvantage") : null
+      this.properties.has("stealthDisadvantage") ? game.i18n.localize("DND5E.Item.PropertyStealthDisadvantage") : null
     ];
   }
 
@@ -198,5 +208,29 @@ export default class EquipmentData extends SystemDataModel.mixin(
     const actorProfs = actor.system.traits?.armorProf?.value ?? new Set();
     const isProficient = (itemProf === true) || actorProfs.has(itemProf) || actorProfs.has(this.type.baseItem);
     return Number(isProficient);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Does this armor impose disadvantage on stealth checks?
+   * @type {boolean}
+   * @deprecated since DnD5e 2.5, available until DnD5e 2.7
+   */
+  get stealth() {
+    foundry.utils.logCompatibilityWarning(
+      "The `system.stealth` value on equipment has migrated to the 'stealthDisadvantage' property.",
+      { since: "DnD5e 2.5", until: "DnD5e 2.7" }
+    );
+    return this.properties.has("stealthDisadvantage");
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  get validProperties() {
+    const valid = super.validProperties;
+    if ( this.isArmor ) valid.add("stealthDisadvantage");
+    return valid;
   }
 }

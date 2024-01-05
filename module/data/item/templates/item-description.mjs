@@ -25,7 +25,7 @@ export default class ItemDescriptionTemplate extends SystemDataModel {
   }
 
   /* -------------------------------------------- */
-  /*  Migrations                                  */
+  /*  Data Migrations                             */
   /* -------------------------------------------- */
 
   /** @inheritdoc */
@@ -44,5 +44,17 @@ export default class ItemDescriptionTemplate extends SystemDataModel {
     if ( ("source" in source) && (foundry.utils.getType(source.source) !== "Object") ) {
       source.source = { custom: source.source };
     }
+  }
+
+  /* -------------------------------------------- */
+  /*  Getters                                     */
+  /* -------------------------------------------- */
+
+  /**
+   * What properties can be used for this item?
+   * @returns {Set<string>}
+   */
+  get validProperties() {
+    return new Set(CONFIG.DND5E.validProperties[this.parent.type] ?? []);
   }
 }

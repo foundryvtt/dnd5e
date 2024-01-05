@@ -17,7 +17,6 @@ import CurrencyTemplate from "../shared/currency.mjs";
  * @property {object} capacity              Information on container's carrying capacity.
  * @property {string} capacity.type         Method for tracking max capacity as defined in `DND5E.itemCapacityTypes`.
  * @property {number} capacity.value        Total amount of the type this container can carry.
- * @property {boolean} capacity.weightless  Does the weight of the items in the container carry over to the actor?
  */
 export default class ContainerData extends SystemDataModel.mixin(
   ItemDescriptionTemplate, IdentifiableTemplate, PhysicalItemTemplate, EquippableItemTemplate, CurrencyTemplate
@@ -82,7 +81,7 @@ export default class ContainerData extends SystemDataModel.mixin(
     Object.defineProperty(this.capacity, "weightless", {
       get() {
         foundry.utils.logCompatibilityWarning(
-          "The `system.capacity.weightless` value on containers has migrated into a property.",
+          "The `system.capacity.weightless` value on containers has migrated to the 'weightlessContents' property.",
           { since: "DnD5e 2.5", until: "DnD5e 2.7" }
         );
         return system.properties.has("weightlessContents");

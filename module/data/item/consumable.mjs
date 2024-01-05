@@ -105,4 +105,15 @@ export default class ConsumableData extends SystemDataModel.mixin(
     const isProficient = this.parent?.actor?.getFlag("dnd5e", "tavernBrawlerFeat");
     return isProficient ? 1 : 0;
   }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  get validProperties() {
+    const valid = super.validProperties;
+    if ( this.type.value === "ammo" ) Object.entries(CONFIG.DND5E.itemProperties).forEach(([k, v]) => {
+      if ( v.isPhysical ) valid.add(k);
+    });
+    return valid;
+  }
 }

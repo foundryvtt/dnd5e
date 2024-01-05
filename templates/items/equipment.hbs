@@ -149,12 +149,6 @@
                     {{numberInput system.strength name="system.strength" placeholder=(localize "DND5E.None")}}
                 </div>
             </div>
-
-            {{!-- Stealth Disadvantage --}}
-            <div class="form-group">
-                <label>{{ localize "DND5E.ItemEquipmentStealthDisav" }}</label>
-                <input type="checkbox" name="system.stealth" {{checked system.stealth}}/>
-            </div>
             {{/if}}
 
             {{#if system.isMountable}}
