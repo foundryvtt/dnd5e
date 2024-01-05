@@ -167,7 +167,7 @@ export default class EquipmentData extends SystemDataModel.mixin(
   get tooltipProperties() {
     return [
       this.parent.labels?.armor,
-      this.stealth ? game.i18n.localize("DND5E.StealthDisadvantage") : null
+      this.properties.has("stealthDisadvantage") ? game.i18n.localize("DND5E.StealthDisadvantage") : null
     ];
   }
 

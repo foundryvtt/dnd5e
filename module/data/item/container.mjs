@@ -201,7 +201,7 @@ export default class ContainerData extends SystemDataModel.mixin(
    * @type {number|Promise<number>}
    */
   get totalWeight() {
-    if ( this.capacity.weightless ) return this.weight;
+    if ( this.properties.has("weightlessContents") ) return this.weight;
     const containedWeight = this.contentsWeight;
     if ( containedWeight instanceof Promise ) return containedWeight.then(c => this.weight + c);
     return this.weight + containedWeight;
