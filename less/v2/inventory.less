@@ -158,6 +158,52 @@
     }
   }
 
+  /* ---------------------------------- */
+  /*  Currency                          */
+  /* ---------------------------------- */
+
+  section.currency {
+    display: flex;
+    gap: 1rem;
+
+    label {
+      position: relative;
+
+      i {
+        position: absolute;
+        inset: -2px auto auto -2px;
+        filter: drop-shadow(0 0 1px black);
+      }
+    }
+
+    input, button {
+      border: 1px solid var(--dnd5e-color-gold);
+      background: var(--dnd5e-color-parchment);
+      box-shadow: 0 0 6px var(--dnd5e-shadow-15);
+
+      &:hover, &:focus {
+        box-shadow: 0 0 6px var(--dnd5e-color-gold);
+        border: 1px solid var(--dnd5e-color-gold);
+      }
+    }
+
+    input {
+      border-radius: 6px;
+      padding: .375rem .5rem .3755rem 1rem;
+      text-align: right;
+      font-family: var(--dnd5e-font-roboto);
+      font-weight: bold;
+      font-size: var(--font-size-11);
+      max-width: 80px;
+    }
+
+    button {
+      border-radius: 4px;
+      width: 30px;
+      color: var(--color-text-dark-5);
+    }
+  }
+
   /* ------------------------------------ */
   /*  Searching & Filtering, & Attunement */
   /* ------------------------------------ */
@@ -290,6 +336,8 @@
       .item-price {
         width: 80px;
         display: none;
+        justify-content: end;
+        padding-right: .5rem;
       }
 
       /* Item Quantity & Uses */
@@ -356,6 +404,11 @@
       color: white;
       border-radius: 3px 3px 0 0;
       border-bottom: 1px solid var(--dnd5e-color-gold);
+
+      .item-price {
+        justify-content: center;
+        padding: 0;
+      }
     }
 
     .item {

@@ -101,6 +101,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
     // Add edit <-> play slide toggle.
     if ( this.actor.isOwner ) {
       const toggle = document.createElement("slide-toggle");
+      toggle.checked = this._mode === this.constructor.MODES.EDIT;
       toggle.classList.add("mode-slider");
       toggle.dataset.tooltip = "DND5E.SheetModeEdit";
       toggle.setAttribute("aria-label", game.i18n.localize("DND5E.SheetModeEdit"));
@@ -160,7 +161,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
     const context = await super.getData(options);
     context.editable = this.isEditable && (this._mode === this.constructor.MODES.EDIT);
     context.cssClass = context.editable ? "editable" : this.isEditable ? "interactable" : "locked";
-    const activeTab = this._tabs?.[0]?.active ?? "details";
+    const activeTab = this.element.length ? this._tabs?.[0]?.active ?? "details" : "details";
     context.cssClass += ` tab-${activeTab}`;
     const sidebarCollapsed = game.user.getFlag("dnd5e", `sheetPrefs.character.tabs.${activeTab}.collapseSidebar`);
     if ( sidebarCollapsed ) {

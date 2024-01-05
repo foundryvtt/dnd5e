@@ -59,6 +59,22 @@
 
     </div>
 
+    {{!-- Currency --}}
+    <section class="currency">
+        <button type="button" class="item-action unbutton" data-action="currency"
+                data-tooltip="DND5E.CurrencyManager.Title" aria-label="{{ localize "DND5E.CurrencyManager.Title" }}">
+            <i class="fas fa-coins"></i>
+        </button>
+        {{#each system.currency}}
+        <label aria-label="{{ lookup (lookup @root.config.currencies @key) "label" }}">
+            <i class="currency {{ @key }}"
+               data-tooltip="{{ lookup (lookup @root.config.currencies @key) "label" }}"></i>
+            <input type="text" class="uninput" name="system.currency.{{ @key }}" value="{{ this }}"
+                   data-dtype="Number" inputmode="numeric" pattern="[0-9+=\-]*">
+        </label>
+        {{/each}}
+    </section>
+
     {{!-- Searching & Filtering, & Attunement --}}
     <div class="middle">
 
@@ -130,8 +146,8 @@
                     {{!-- Item Price --}}
                     <div class="item-detail item-price {{#unless item.system.price.value}}empty{{/unless}}">
                         {{#if item.system.price.value}}
-                        {{!-- TODO: Replace with new coin icons of appropriate denomination --}}
-                        <i class="fas fa-coins"></i> {{ dnd5e-numberFormat item.system.price.value }}
+                        {{ dnd5e-numberFormat item.system.price.value }}
+                        <i class="currency {{ item.system.price.denomination }}"></i>
                         {{/if}}
                     </div>
 

@@ -8,9 +8,9 @@
             </div>
         </div>
         <div class="bottom">
-            <div class="cost">
+            <div class="price">
                 {{#if price}}
-                <i class="fas fa-coins"></i>
+                <i class="currency {{ price.denomination }}"></i>
                 <span>{{ dnd5e-numberFormat price.value }}</span>
                 {{/if}}
             </div>
