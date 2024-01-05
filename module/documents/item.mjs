@@ -2188,7 +2188,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     // Get scroll data
     let scrollUuid;
     const id = CONFIG.DND5E.spellScrollIds[level];
-    if (foundry.data.validators.isValidId(id)) {
+    if ( foundry.data.validators.isValidId(id) ) {
       scrollUuid = game.packs.get(CONFIG.DND5E.sourcePacks.ITEMS).index.get(id).uuid;
     } else {
       scrollUuid = id;
@@ -2206,13 +2206,18 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     const isConc = properties.includes("concentration");
 
     // Create a composite description from the scroll description and the spell details
-    const desc = `
-      ${scrollIntro}
-      <hr><h3>${itemData.name} (${game.i18n.format("DND5E.LevelNumber", {level})})</h3>
-      ${(isConc ? `<p><em>${game.i18n.localize("DND5E.ScrollRequiresConcentration")}</em></p>` : "")}
-      <hr>${description.value}<hr>
-      <h3>${game.i18n.localize("DND5E.ScrollDetails")}</h3><hr>${scrollDetails}
-    `;
+    const desc = [
+      scrollIntro,
+      "<hr>",
+      `<h3>${itemData.name} (${game.i18n.format("DND5E.LevelNumber", {level})})</h3>`,
+      isConc ? `<p><em>${game.i18n.localize("DND5E.ScrollRequiresConcentration")}</em></p>` : null,
+      "<hr>",
+      description.value,
+      "<hr>",
+      `<h3>${game.i18n.localize("DND5E.ScrollDetails")}</h3>`,
+      "<hr>",
+      scrollDetails
+    ].filterJoin("");
 
     // Used a fixed attack modifier and saving throw according to the level of spell scroll.
     if ( ["mwak", "rwak", "msak", "rsak"].includes(actionType) ) {
