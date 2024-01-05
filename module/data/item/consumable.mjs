@@ -102,6 +102,7 @@ export default class ConsumableData extends SystemDataModel.mixin(
     if ( this.type.value === "ammo" ) Object.entries(CONFIG.DND5E.itemProperties).forEach(([k, v]) => {
       if ( v.isPhysical ) valid.add(k);
     });
+    else if ( (this.type.value === "scroll") ) valid.add("concentration");
     return valid;
   }
 }

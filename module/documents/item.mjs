@@ -2163,7 +2163,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * Create a consumable spell scroll Item from a spell Item.
    * @param {Item5e|object} spell     The spell or item data to be made into a scroll
    * @param {object} [options]        Additional options that modify the created scroll
-   * @returns {Item5e}                The created scroll consumable item
+   * @returns {Promise<Item5e>}       The created scroll consumable item
    */
   static async createScrollFromSpell(spell, options={}) {
 
@@ -2182,11 +2182,17 @@ export default class Item5e extends SystemDocumentMixin(Item) {
 
     let {
       actionType, description, source, activation, duration, target,
-      range, damage, formula, save, level, attackBonus, ability, components
+      range, damage, formula, save, level, attackBonus, ability, properties
     } = itemData.system;
 
     // Get scroll data
-    const scrollUuid = `Compendium.${CONFIG.DND5E.sourcePacks.ITEMS}.${CONFIG.DND5E.spellScrollIds[level]}`;
+    let scrollUuid;
+    const id = CONFIG.DND5E.spellScrollIds[level];
+    if (foundry.data.validators.isValidId(id)) {
+      scrollUuid = game.packs.get(CONFIG.DND5E.sourcePacks.ITEMS).index.get(id).uuid;
+    } else {
+      scrollUuid = id;
+    }
     const scrollItem = await fromUuid(scrollUuid);
     const scrollData = scrollItem.toObject();
     delete scrollData._id;
@@ -2197,12 +2203,13 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     const scrollIntroEnd = scrollDescription.indexOf(pdel);
     const scrollIntro = scrollDescription.slice(0, scrollIntroEnd + pdel.length);
     const scrollDetails = scrollDescription.slice(scrollIntroEnd + pdel.length);
+    const isConc = properties.includes("concentration");
 
     // Create a composite description from the scroll description and the spell details
     const desc = `
       ${scrollIntro}
       <hr><h3>${itemData.name} (${game.i18n.format("DND5E.LevelNumber", {level})})</h3>
-      ${(components.concentration ? `<p><em>${game.i18n.localize("DND5E.ScrollRequiresConcentration")}</em></p>` : "")}
+      ${(isConc ? `<p><em>${game.i18n.localize("DND5E.ScrollRequiresConcentration")}</em></p>` : "")}
       <hr>${description.value}<hr>
       <h3>${game.i18n.localize("DND5E.ScrollDetails")}</h3><hr>${scrollDetails}
     `;
@@ -2223,10 +2230,16 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       img: itemData.img,
       system: {
         description: {value: desc.trim()}, source, actionType, activation, duration, target,
-        range, damage, formula, save, level, attackBonus, ability
+        range, damage, formula, save, level, attackBonus, ability, properties
       }
     });
     foundry.utils.mergeObject(spellScrollData, options);
+    spellScrollData.system.properties = [
+      "mgc",
+      ...scrollData.system.properties,
+      ...properties ?? [],
+      ...options.system?.properties ?? []
+    ];
 
     /**
      * A hook event that fires after the item data for a scroll is created but before the item is returned.
