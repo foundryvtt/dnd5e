@@ -146,8 +146,8 @@ export default class ItemSheet5e extends ItemSheet {
 
     // Handle item subtypes.
     if ( ["feat", "loot", "consumable"].includes(item.type) ) {
-      const name = item.type === "feat" ? "feature" : `${item.type}Types`;
-      const itemTypes = CONFIG.DND5E[name][item.system.type.value];
+      const name = item.type === "feat" ? "feature" : item.type;
+      const itemTypes = CONFIG.DND5E[`${name}Types`][item.system.type.value];
       if ( itemTypes ) {
         context.itemType = itemTypes.label;
         context.itemSubtypes = itemTypes.subtypes;
