@@ -36,17 +36,6 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   /* --------------------------------------------- */
 
   /**
-   * Does this item require concentration?
-   * @type {boolean}
-   */
-  get isConcentration() {
-    const isValid = this.system.validProperties.has("concentration") && this.system.properties.has("concentration");
-    return isValid && this.isActive && this.system.hasScalarDuration;
-  }
-
-  /* --------------------------------------------- */
-
-  /**
    * Which ability score modifier is used by this item?
    * @type {string|null}
    * @see {@link ActionTemplate#abilityMod}
@@ -253,6 +242,17 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    */
   get isVersatile() {
     return this.system.isVersatile ?? false;
+  }
+
+  /* --------------------------------------------- */
+
+  /**
+   * Does this item require concentration?
+   * @type {boolean}
+   */
+  get requiresConcentration() {
+    const isValid = this.system.validProperties.has("concentration") && this.system.properties.has("concentration");
+    return isValid && this.isActive && this.system.hasScalarDuration;
   }
 
   /* -------------------------------------------- */
