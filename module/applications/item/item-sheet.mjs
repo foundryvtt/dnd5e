@@ -144,22 +144,14 @@ export default class ItemSheet5e extends ItemSheet {
       if ( item.type !== "spell" ) context.properties = sortObjectEntries(context.properties, "label");
     }
 
-    // Special handling for specific item types
-    switch ( item.type ) {
-      case "feat":
-        const featureType = CONFIG.DND5E.featureTypes[item.system.type?.value];
-        if ( featureType ) {
-          context.itemType = featureType.label;
-          context.featureSubtypes = featureType.subtypes;
-        }
-        break;
-      case "loot":
-        const lootType = CONFIG.DND5E.lootTypes[item.system.type?.value];
-        if ( lootType ) {
-          context.itemType = lootType.label;
-          context.lootSubtypes = lootType.subtypes;
-        }
-        break;
+    // Handle item subtypes.
+    if ( ["feat", "loot", "consumable"].includes(item.type) ) {
+      const name = item.type === "feat" ? "feature" : `${item.type}Types`;
+      const itemTypes = CONFIG.DND5E[name][item.system.type.value];
+      if ( itemTypes ) {
+        context.itemType = itemTypes.label;
+        context.itemSubtypes = itemTypes.subtypes;
+      }
     }
 
     // Enrich HTML description
@@ -339,7 +331,9 @@ export default class ItemSheet5e extends ItemSheet {
       case "weapon":
         return game.i18n.localize(this.item.system.equipped ? "DND5E.Equipped" : "DND5E.Unequipped");
       case "feat":
-        const typeConfig = CONFIG.DND5E.featureTypes[this.item.system.type.value];
+      case "consumable":
+        const name = this.item.type === "feat" ? "featureTypes" : "consumableTypes";
+        const typeConfig = CONFIG.DND5E[name][this.item.system.type.value];
         if ( typeConfig?.subtypes ) return typeConfig.subtypes[this.item.system.type.subtype] ?? null;
         break;
       case "spell":

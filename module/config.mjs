@@ -775,16 +775,47 @@ preLocalize("armorClasses", { key: "label" });
  * @enum {string}
  */
 DND5E.consumableTypes = {
-  ammo: "DND5E.ConsumableAmmo",
-  potion: "DND5E.ConsumablePotion",
-  poison: "DND5E.ConsumablePoison",
-  food: "DND5E.ConsumableFood",
-  scroll: "DND5E.ConsumableScroll",
-  wand: "DND5E.ConsumableWand",
-  rod: "DND5E.ConsumableRod",
-  trinket: "DND5E.ConsumableTrinket"
+  ammo: {
+    label: "DND5E.ConsumableAmmo",
+    subtypes: {
+      arrow: "DND5E.ConsumableAmmoArrow",
+      blowgunNeedle: "DND5E.ConsumableAmmoBlowgunNeedle",
+      crossbowBolt: "DND5E.ConsumableAmmoCrossbowBolt",
+      slingBullet: "DND5E.ConsumableAmmoSlingBullet"
+    }
+  },
+  potion: {
+    label: "DND5E.ConsumablePotion"
+  },
+  poison: {
+    label: "DND5E.ConsumablePoison",
+    subtypes: {
+      contact: "DND5E.ConsumablePoisonContact",
+      ingested: "DND5E.ConsumablePoisonIngested",
+      inhaled: "DND5E.ConsumablePoisonInhaled",
+      injury: "DND5E.ConsumablePoisonInjury"
+    }
+  },
+  food: {
+    label: "DND5E.ConsumableFood"
+  },
+  scroll: {
+    label: "DND5E.ConsumableScroll"
+  },
+  wand: {
+    label: "DND5E.ConsumableWand"
+  },
+  rod: {
+    label: "DND5E.ConsumableRod"
+  },
+  trinket: {
+    label: "DND5E.ConsumableTrinket"
+  }
 };
-preLocalize("consumableTypes", { sort: true });
+patchConfig("consumableTypes", "label", { since: "DnD5e 2.5", until: "DnD5e 2.7" });
+preLocalize("consumableTypes", { key: "label", sort: true });
+preLocalize("consumableTypes.ammo.subtypes", { sort: true });
+preLocalize("consumableTypes.poison.subtypes", { sort: true });
 
 /* -------------------------------------------- */
 
