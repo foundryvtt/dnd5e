@@ -1436,8 +1436,18 @@ preLocalize("distanceUnits");
 /* -------------------------------------------- */
 
 /**
+ * Encumbrance configuration data.
+ *
+ * @typedef {object} EncumbranceConfiguration
+ * @property {Record<string, number>} currencyPerWeight  Pieces of currency that equal a base weight (lbs or kgs).
+ * @property {Record<string, number>} strMultiplier      Amount to multiply strength to get maximum carrying capacity.
+ * @property {Record<string, number>} speedReduction     Speed reduction caused by encumbered status effects.
+ * @property {Record<string, number>} vehicleWeightMultiplier  Multiplier used to determine vehicle carrying capacity.
+ */
+
+/**
  * Configure aspects of encumbrance calculation so that it could be configured by modules.
- * @enum {{ imperial: number, metric: number }}
+ * @type {EncumbranceConfiguration}
  */
 DND5E.encumbrance = {
   currencyPerWeight: {
@@ -1447,6 +1457,10 @@ DND5E.encumbrance = {
   strMultiplier: {
     imperial: 15,
     metric: 6.8
+  },
+  speedReduction: {
+    encumbered: 10,
+    heavilyEncumbered: 20
   },
   vehicleWeightMultiplier: {
     imperial: 2000, // 2000 lbs in an imperial ton
