@@ -33,6 +33,19 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     return this.system.isActive ?? false;
   }
 
+  /* --------------------------------------------- */
+
+  /**
+   * Does this item require concentration?
+   * @type {boolean}
+   */
+  get isConcentration() {
+    const isValid = this.system.validProperties.has("concentration") && this.system.properties.has("concentration");
+    return isValid && this.isActive && this.system.hasScalarDuration;
+  }
+
+  /* --------------------------------------------- */
+
   /**
    * Which ability score modifier is used by this item?
    * @type {string|null}
