@@ -8,6 +8,25 @@
   /*  Frame Styling                     */
   /* ---------------------------------- */
 
+  .window-header {
+    border: none;
+    align-items: center;
+
+    .header-button {
+      border-radius: 100%;
+      background: rgb(0 0 0 / 25%);
+      width: 20px;
+      height: 20px;
+      line-height: unset;
+      display: grid;
+      place-content: center;
+      font-size: var(--font-size-12);
+      margin-top: .25rem;
+
+      > i { margin: 0 }
+    }
+  }
+
   .window-content {
     font-family: var(--dnd5e-font-roboto);
     font-size: var(--font-size-13);
@@ -50,6 +69,13 @@
     font-family: var(--dnd5e-font-roboto-condensed);
     font-weight: bold;
     text-transform: uppercase;
+  }
+
+  .card {
+    border-radius: 4px;
+    background: var(--dnd5e-color-card);
+    box-shadow: 0 0 6px var(--dnd5e-shadow-45);
+    border: 1px solid var(--dnd5e-color-gold);
   }
 
   .unlist {
@@ -143,10 +169,38 @@
     }
   }
 
+  .gold-button {
+    position: relative;
+    border: none;
+    border-radius: 4px;
+    background: var(--dnd5e-color-black);
+    color: var(--dnd5e-color-gold);
+    width: 30px;
+    height: 30px;
+    margin: 0;
+    box-shadow: 0 0 6px var(--dnd5e-shadow-45);
+    font-size: var(--font-size-14);
+    display: grid;
+    place-content: center;
+    line-height: normal;
+
+    &::after {
+      content: "";
+      position: absolute;
+      inset: 3px;
+      border: 1px solid var(--dnd5e-color-gold);
+      border-radius: 3px;
+    }
+
+    &:not(:disabled):is(:hover, :focus) { box-shadow: 0 0 6px var(--dnd5e-color-gold); }
+    > i { margin: 0; }
+  }
+
   .gold-icon {
     border: 2px solid var(--dnd5e-color-gold);
     box-shadow: 0 0 4px var(--dnd5e-shadow-45);
     border-radius: 0;
+    background-color: var(--dnd5e-color-light-gray);
   }
 
   .name-stacked {
@@ -249,13 +303,26 @@
     transition: all 250ms ease;
   }
 
-  button:disabled { cursor: default; }
+  button {
+    background: var(--dnd5e-color-card);
+    font-family: var(--dnd5e-font-roboto);
+    font-weight: bold;
+    font-size: var(--font-size-13);
+    text-transform: uppercase;
+    padding: .1875rem;
+    border: 1px solid var(--color-border-light-2);
+    box-shadow: 0 0 8px var(--dnd5e-shadow-15);
+
+    &:disabled { cursor: default; }
+    &:hover, &:focus { box-shadow: 0 0 5px var(--color-shadow-primary); }
+  }
 
   /* Reset select styles */
   select.unselect {
     border: none;
     padding: 0;
     background: transparent;
+    height: unset;
   }
 
   /* FA icon-based slide-toggle */
@@ -344,6 +411,92 @@
   .locked a:not(.interface-only) {
     cursor: default;
     &:hover { text-shadow: unset; }
+  }
+}
+
+/* ---------------------------------- */
+/*  Dialogs                           */
+/* ---------------------------------- */
+
+.dnd5e2.dialog {
+  background: url("ui/texture-gray1.webp") no-repeat top left, url("ui/texture-gray2.webp") no-repeat bottom right;
+  background-color: var(--dnd5e-color-parchment);
+  border: 1px solid var(--dnd5e-color-gold);
+
+  > .window-content { background: transparent; }
+
+  > .window-header .window-title { visibility: hidden; }
+
+  .dialog-buttons {
+    padding: .5rem;
+    gap: .5rem;
+
+    button {
+      background: var(--dnd5e-color-card);
+      border: 1px solid var(--color-border-light-2);
+      &.default { border-color: var(--dnd5e-color-gold); }
+    }
+  }
+}
+
+/* ---------------------------------- */
+/*  Create Document Dialog            */
+/* ---------------------------------- */
+
+.dnd5e2.create-document {
+  form header { padding: 0 .5rem; }
+
+  .document-name {
+    font-family: var(--dnd5e-font-roboto-slab);
+    font-weight: bold;
+    font-size: var(--font-size-24);
+    text-align: center;
+    background: none;
+
+    &:hover, &:focus { box-shadow: none; }
+  }
+
+  ol {
+    margin: .75rem;
+    padding: .25rem .5rem;
+
+    li {
+      padding: .25rem .5rem;
+      border-bottom: var(--dnd5e-border-dotted);
+
+      &:hover { background: var(--dnd5e-color-parchment); }
+      &:last-child { border: none; }
+    }
+
+    label {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      cursor: pointer;
+
+      > span {
+        flex: 1;
+        font-family: var(--dnd5e-font-roboto-slab);
+        font-weight: bold;
+        font-size: var(--font-size-14);
+      }
+    }
+
+    img {
+      width: 32px;
+      height: 32px;
+      object-fit: contain;
+      object-position: center;
+      border: none;
+      filter: invert(100%);
+    }
+  }
+
+  select {
+    border: 1px solid var(--color-border-light-2);
+    background: var(--dnd5e-background-10);
+    padding: 0 .5rem;
+    flex: none;
   }
 }
 

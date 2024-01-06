@@ -4,7 +4,7 @@
     <div class="top">
 
         {{!-- Encumbrance --}}
-        <div class="encumbrance">
+        <div class="encumbrance card">
             {{#with encumbrance}}
             <div class="meter progress" role="meter" aria-valuemin="0" aria-valuenow="{{ pct }}"
                  aria-valuetext="{{ value }}" aria-valuemax="{{ max }}" style="--bar-percentage: {{ pct }}%">
@@ -75,7 +75,7 @@
         {{/each}}
     </section>
 
-    {{!-- Searching & Filtering, & Attunement --}}
+    {{!-- Searching, Filtering, Sorting, & Grouping, & Attunement --}}
     <div class="middle">
 
         {{!-- Searching & Filtering --}}
@@ -110,7 +110,7 @@
 
         {{!-- Sections / Categories --}}
         {{#each sections}}
-        <div class="items-section" {{#each dataset}}data-{{ @key }}="{{ this }}"{{/each}}>
+        <div class="items-section card" {{ dnd5e-dataset dataset }}>
 
             {{!-- Section Header --}}
             <div class="items-header">

@@ -39,9 +39,9 @@
 
             {{!-- Name --}}
             {{#if editable}}
-            <input type="text" name="name" class="name uninput" value="{{ actor.name }}">
+            <input type="text" name="name" class="document-name uninput" value="{{ actor.name }}">
             {{else}}
-            <div class="name">{{ actor.name }}</div>
+            <div class="document-name">{{ actor.name }}</div>
             {{/if}}
 
             {{!-- Class --}}
@@ -58,15 +58,15 @@
                 {{!-- Resting & Special Traits --}}
                 {{#if actor.isOwner}}
                 <div class="sheet-header-buttons">
-                    <button type="button" class="short-rest unbutton" data-tooltip="DND5E.ShortRest"
+                    <button type="button" class="short-rest gold-button" data-tooltip="DND5E.ShortRest"
                             aria-label="{{ localize "DND5E.ShortRest" }}">
                         <i class="fas fa-utensils"></i>
                     </button>
-                    <button type="button" class="long-rest unbutton" data-tooltip="DND5E.LongRest"
+                    <button type="button" class="long-rest gold-button" data-tooltip="DND5E.LongRest"
                             aria-label="{{ localize "DND5E.LongRest" }}">
                         <i class="fas fa-campground"></i>
                     </button>
-                    <button type="button" class="config-button unbutton" data-action="flags"
+                    <button type="button" class="config-button gold-button" data-action="flags"
                             data-tooltip="DND5E.SpecialTraits" aria-label="{{ localize "DND5E.SpecialTraits" }}">
                         <i class="fas fa-star"></i>
                     </button>
@@ -350,4 +350,10 @@
             </div>
         </div>
     </div>
+
+    {{!-- Item Creation --}}
+    <button type="button" class="create-item gold-button"
+            aria-label="{{ "SIDEBAR.Create" type=(localize "DOCUMENT.Item") }}">
+        <i class="fas fa-plus"></i>
+    </button>
 </form>

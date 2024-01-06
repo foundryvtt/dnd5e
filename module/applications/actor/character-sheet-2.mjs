@@ -380,6 +380,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
     if ( this.isEditable ) {
       html.find(".meter > .hit-points").on("click", event => this._toggleEditHP(event, true));
       html.find(".meter > .hit-points > input").on("blur", event => this._toggleEditHP(event, false));
+      html.find(".create-item").on("click", this._onCreateItem.bind(this));
     }
 
     // Edit mode only.
@@ -582,6 +583,30 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
     switch ( action ) {
       case "findItem": this._onFindItem(event.currentTarget.dataset.itemType); break;
     }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle creating a new Item.
+   * @protected
+   */
+  _onCreateItem() {
+    const activeTab = this._tabs?.[0]?.active ?? "details";
+    let types = {
+      inventory: ["weapon", "equipment", "consumable", "tool", "container", "loot"],
+      features: ["feat", "race", "background", "class", "subclass"],
+      spells: ["spell"]
+    }[activeTab] ?? [];
+
+    types = types.filter(type => {
+      const model = CONFIG.Item.dataModels[type];
+      return !model.metadata?.singleton || !this.actor.itemTypes[type].length;
+    });
+
+    if ( types.length ) return Item.implementation.createDialog({}, {
+      parent: this.actor, pack: this.actor.pack, types
+    });
   }
 
   /* -------------------------------------------- */

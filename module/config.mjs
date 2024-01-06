@@ -2566,6 +2566,29 @@ DND5E.advancementTypes = {
 };
 
 /* -------------------------------------------- */
+
+/**
+ * Default artwork configuration for each Document type and sub-type.
+ * @type {Record<string, Record<string, string>>}
+ */
+DND5E.defaultArtwork = {
+  Item: {
+    background: "systems/dnd5e/icons/svg/items/background.svg",
+    class: "systems/dnd5e/icons/svg/items/class.svg",
+    consumable: "systems/dnd5e/icons/svg/items/consumable.svg",
+    container: "systems/dnd5e/icons/svg/items/container.svg",
+    equipment: "systems/dnd5e/icons/svg/items/equipment.svg",
+    feat: "systems/dnd5e/icons/svg/items/feature.svg",
+    loot: "systems/dnd5e/icons/svg/items/loot.svg",
+    race: "systems/dnd5e/icons/svg/items/race.svg",
+    spell: "systems/dnd5e/icons/svg/items/spell.svg",
+    subclass: "systems/dnd5e/icons/svg/items/subclass.svg",
+    tool: "systems/dnd5e/icons/svg/items/tool.svg",
+    weapon: "systems/dnd5e/icons/svg/items/weapon.svg"
+  }
+};
+
+/* -------------------------------------------- */
 /*  Rules                                       */
 /* -------------------------------------------- */
 

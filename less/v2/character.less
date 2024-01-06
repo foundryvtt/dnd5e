@@ -18,24 +18,8 @@
 
   > header {
     background: transparent;
-    border: none;
-    align-items: center;
     position: relative;
     z-index: 1;
-
-    .header-button {
-      border-radius: 100%;
-      background: rgb(0 0 0 / 25%);
-      width: 20px;
-      height: 20px;
-      line-height: unset;
-      display: grid;
-      place-content: center;
-      font-size: var(--font-size-12);
-      margin-top: .25rem;
-
-      > i { margin: 0; }
-    }
 
     .window-title { visibility: hidden; }
 
@@ -115,16 +99,16 @@
 
       &.optional-ability-1 {
         padding-right: 8.5rem;
-        .name { font-size: var(--font-size-42); }
+        .document-name { font-size: var(--font-size-42); }
       }
 
       &.optional-ability-2 {
         padding-right: 14rem;
-        .name { font-size: var(--font-size-36); }
+        .document-name { font-size: var(--font-size-36); }
       }
 
       /* Name */
-      .name {
+      .document-name {
         color: var(--color-text-light-0);
         font-size: var(--font-size-46);
         text-shadow: 2px 2px 2px var(--color-shadow-dark);
@@ -136,7 +120,7 @@
         transition: font-size 250ms ease;
       }
 
-      input.name {
+      input.document-name {
         padding: .3125rem .75rem;
         border-radius: 6px;
       }
@@ -183,31 +167,6 @@
           gap: .5rem;
           position: absolute;
           top: 1.5625rem;
-
-          > button {
-            position: relative;
-            border-radius: 4px;
-            background: black;
-            color: var(--dnd5e-color-gold);
-            width: 30px;
-            height: 30px;
-            margin: 0;
-            box-shadow: 0 0 4px var(--dnd5e-shadow-45);
-            font-size: var(--font-size-14);
-            display: grid;
-            place-content: center;
-
-            &::after {
-              content: "";
-              position: absolute;
-              inset: .1875rem;
-              border: 1px solid var(--dnd5e-color-gold);
-              border-radius: 3px;
-            }
-
-            &:not(:disabled):is(:hover, :focus) { box-shadow: 0 0 6px var(--dnd5e-color-gold); }
-            > i { margin: 0 }
-          }
         }
 
         /* XP */
@@ -1074,6 +1033,19 @@
   form:not(.tab-details) .ability-scores { display: none; }
 
   /* ---------------------------------- */
+  /*  Item Creation                     */
+  /* ---------------------------------- */
+
+  .create-item {
+    display: none;
+    position: absolute;
+    inset: auto 1rem 1rem auto;
+    transform: translateZ(1px);
+  }
+
+  form:is(.tab-inventory, .tab-features, .tab-spells) .create-item { display: block; }
+
+  /* ---------------------------------- */
   /*  Collapsed                         */
   /* ---------------------------------- */
 
@@ -1086,7 +1058,7 @@
 
     .sheet-header > .left:is(.optional-ability-1, .optional-ability-2) {
       padding-right: 1.5rem;
-      .name { font-size: var(--font-size-46); }
+      .document-name { font-size: var(--font-size-46); }
     }
 
     .ability-scores { left: 0; }

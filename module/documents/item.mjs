@@ -2405,6 +2405,79 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   }
 
   /* -------------------------------------------- */
+
+  /**
+   * Spawn a dialog for creating a new Item.
+   * @param {object} [data]  Data to pre-populate the Item with.
+   * @param {object} [context]
+   * @param {Actor5e} [context.parent]       A parent for the Item.
+   * @param {string|null} [context.pack]     A compendium pack the Item should be placed in.
+   * @param {string[]|null} [context.types]  A list of types to restrict the choices to, or null for no restriction.
+   * @returns {Promise<Item5e|null>}
+   */
+  static async createDialog(data={}, { parent=null, pack=null, types=null, ...options }) {
+    types ??= game.documentTypes[this.documentName].filter(t => t !== CONST.BASE_DOCUMENT_TYPE);
+    if ( !types.length ) return null;
+    const collection = parent ? null : pack ? game.packs.get(pack) : game.collections.get(this.documentName);
+    const folders = collection?._formatFolderSelectOptions() ?? [];
+    const label = game.i18n.localize(this.metadata.label);
+    const title = game.i18n.format("DOCUMENT.Create", { type: label });
+    const name = data.name || game.i18n.format("DOCUMENT.New", { type: label });
+    let type = data.type || CONFIG[this.documentName]?.defaultType;
+    if ( !types.includes(type) ) type = types[0];
+    const content = await renderTemplate("systems/dnd5e/templates/apps/document-create.hbs", {
+      folders, name, type,
+      folder: data.folder,
+      hasFolders: folders.length > 0,
+      types: types.reduce((arr, type) => {
+        const label = CONFIG[this.documentName]?.typeLabels?.[type] ?? type;
+        arr.push({
+          type,
+          label: game.i18n.has(label) ? game.i18n.localize(label) : type,
+          icon: this.getDefaultArtwork({ type })?.img ?? "icons/svg/item-bag.svg"
+        });
+        return arr;
+      }, []).sort((a, b) => a.label.localeCompare(b.label, game.i18n.lang))
+    });
+    return Dialog.prompt({
+      title, content,
+      label: title,
+      render: html => {
+        const app = html.closest(".app");
+        const folder = app.querySelector("select");
+        if ( folder ) app.querySelector(".dialog-buttons").insertAdjacentElement("afterbegin", folder);
+        app.querySelectorAll(".window-header .header-button").forEach(btn => {
+          const label = btn.innerText;
+          const icon = btn.querySelector("i");
+          btn.innerHTML = icon.outerHTML;
+          btn.dataset.tooltip = label;
+          btn.setAttribute("aria-label", label);
+        });
+        app.querySelector(".document-name").select();
+      },
+      callback: html => {
+        const form = html.querySelector("form");
+        const fd = new FormDataExtended(form);
+        const createData = foundry.utils.mergeObject(data, fd.object, { inplace: false });
+        if ( !createData.folder ) delete createData.folder;
+        if ( !createData.name?.trim() ) createData.name = this.defaultName();
+        return this.create(createData, { parent, pack, renderSheet: true });
+      },
+      rejectClose: false,
+      options: { ...options, jQuery: false, width: 350, classes: ["dnd5e2", "create-document", "dialog"] }
+    });
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  static getDefaultArtwork(itemData={}) {
+    const { type } = itemData;
+    const { img } = super.getDefaultArtwork(itemData);
+    return { img: CONFIG.DND5E.defaultArtwork.Item[type] ?? img };
+  }
+
+  /* -------------------------------------------- */
   /*  Migrations & Deprecations                   */
   /* -------------------------------------------- */
 
