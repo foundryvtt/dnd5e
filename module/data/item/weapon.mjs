@@ -81,8 +81,8 @@ export default class WeaponData extends SystemDataModel.mixin(
    */
   get chatProperties() {
     return [
-      this.isMountable ? (this.parent.labels?.armor ?? null) : null,
-      CONFIG.DND5E.weaponTypes[this.type.value]
+      CONFIG.DND5E.weaponTypes[this.type.value],
+      this.isMountable ? (this.parent.labels?.armor ?? null) : null
     ];
   }
 
