@@ -545,6 +545,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * @protected
    */
   _prepareEncumbrance() {
+    const config = CONFIG.DND5E.encumbrance;
     const encumbrance = this.system.attributes.encumbrance ??= {};
     const units = game.settings.get("dnd5e", "metricWeightUnits") ? "metric" : "imperial";
 
@@ -557,28 +558,29 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const currency = this.system.currency;
     if ( game.settings.get("dnd5e", "currencyWeight") && currency ) {
       const numCoins = Object.values(currency).reduce((val, denom) => val + Math.max(denom, 0), 0);
-      const currencyPerWeight = CONFIG.DND5E.encumbrance.currencyPerWeight[units];
+      const currencyPerWeight = config.currencyPerWeight[units];
       weight += numCoins / currencyPerWeight;
     }
 
     // Determine the Encumbrance size class
     const keys = Object.keys(CONFIG.DND5E.actorSizes);
     const index = keys.findIndex(k => k === this.system.traits.size);
-    const config = CONFIG.DND5E.actorSizes[
+    const sizeConfig = CONFIG.DND5E.actorSizes[
       keys[this.flags.dnd5e?.powerfulBuild ? Math.min(index + 1, keys.length - 1) : index]
     ];
-    const mod = config?.capacityMultiplier ?? config?.token ?? 1;
+    const mod = sizeConfig?.capacityMultiplier ?? sizeConfig?.token ?? 1;
 
-    const calculateThreshold = multiplier =>
-      ((this.system.abilities.str?.value ?? 10) * multiplier * mod).toNearest(0.1);
+    const calculateThreshold = multiplier => this.type === "vehicle"
+      ? this.system.attributes.capacity.cargo * config.vehicleWeightMultiplier[units]
+      : ((this.system.abilities.str?.value ?? 10) * multiplier * mod).toNearest(0.1);
 
     // Populate final Encumbrance values
     encumbrance.mod = mod;
     encumbrance.value = weight.toNearest(0.1);
     encumbrance.thresholds = {
-      encumbered: calculateThreshold(CONFIG.DND5E.encumbrance.threshold.encumbered[units]),
-      heavilyEncumbered: calculateThreshold(CONFIG.DND5E.encumbrance.threshold.heavilyEncumbered[units]),
-      maximum: calculateThreshold(CONFIG.DND5E.encumbrance.threshold.maximum[units])
+      encumbered: calculateThreshold(config.threshold.encumbered[units]),
+      heavilyEncumbered: calculateThreshold(config.threshold.heavilyEncumbered[units]),
+      maximum: calculateThreshold(config.threshold.maximum[units])
     };
     encumbrance.max = encumbrance.thresholds.maximum;
     encumbrance.stops = {
