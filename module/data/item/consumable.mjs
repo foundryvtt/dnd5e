@@ -30,7 +30,7 @@ export default class ConsumableData extends SystemDataModel.mixin(
   /** @inheritdoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
-      type: new ItemTypeField({value: "potion", subtype: false, baseItem: false}, {label: "DND5E.ItemConsumableType"}),
+      type: new ItemTypeField({value: "potion", baseItem: false}, {label: "DND5E.ItemConsumableType"}),
       properties: new SetField(new StringField(), { label: "DND5E.ItemAmmoProperties" }),
       uses: new ActivatedEffectTemplate.ItemUsesField({
         autoDestroy: new BooleanField({required: true, label: "DND5E.ItemDestroyEmpty"})
