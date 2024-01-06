@@ -141,7 +141,7 @@ export default class EquipmentData extends SystemDataModel.mixin(
   get chatProperties() {
     return [
       CONFIG.DND5E.equipmentTypes[this.type.value],
-      this.parent.labels?.armor ?? null,
+      (this.isArmor || this.isMountable) ? (this.parent.labels?.armor ?? null) : null,
       this.properties.has("stealthDisadvantage") ? game.i18n.localize("DND5E.Item.PropertyStealthDisadvantage") : null
     ];
   }
