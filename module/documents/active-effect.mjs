@@ -6,10 +6,13 @@ import { staticID } from "../utils.mjs";
  */
 export default class ActiveEffect5e extends ActiveEffect {
   /**
-   * The ActiveEffect ID for the exhaustion condition.
-   * @type {string}
+   * Static ActiveEffect ID for various conditions.
+   * @type {Record<string, string>}
    */
-  static EXHAUSTION = staticID("dnd5eexhaustion");
+  static ID = {
+    ENCUMBERED: staticID("dnd5eencumbered"),
+    EXHAUSTION: staticID("dnd5eexhaustion")
+  };
 
   /* -------------------------------------------- */
 
@@ -207,7 +210,7 @@ export default class ActiveEffect5e extends ActiveEffect {
   /** @inheritDoc */
   prepareDerivedData() {
     super.prepareDerivedData();
-    if ( this.id === this.constructor.EXHAUSTION ) this._prepareExhaustionLevel();
+    if ( this.id === this.constructor.ID.EXHAUSTION ) this._prepareExhaustionLevel();
   }
 
   /* -------------------------------------------- */
@@ -231,13 +234,27 @@ export default class ActiveEffect5e extends ActiveEffect {
     super._onUpdate(data, options, userId);
     const originalLevel = foundry.utils.getProperty(options, "dnd5e.originalExhaustion");
     const newLevel = foundry.utils.getProperty(data, "flags.dnd5e.exhaustionLevel");
-    if ( (this.id === this.constructor.EXHAUSTION) && Number.isFinite(newLevel) && Number.isFinite(originalLevel) ) {
+    const originalEncumbrance = foundry.utils.getProperty(options, "dnd5e.originalEncumbrance");
+
+    // Display proper scrolling status effects for exhaustion
+    if ( (this.id === this.constructor.ID.EXHAUSTION) && Number.isFinite(newLevel) && Number.isFinite(originalLevel) ) {
       if ( newLevel === originalLevel ) return;
       const name = this.name;
       // Temporarily set the name for the benefit of _displayScrollingTextStatus. We should improve this method to
       // accept a name parameter instead.
       if ( newLevel < originalLevel ) this.name = `Exhaustion ${originalLevel}`;
       this._displayScrollingStatus(newLevel > originalLevel);
+      this.name = name;
+    }
+
+    // Display proper scrolling status effects for encumbrance
+    else if ( (this.id === this.constructor.ID.ENCUMBERED) && originalEncumbrance ) {
+      const newEncumbrance = data.statuses[0];
+      if ( newEncumbrance === originalEncumbrance ) return;
+      const increase = !originalEncumbrance || ((originalEncumbrance === "encumbered") && newEncumbrance)
+        || (newEncumbrance === "exceedingCarryingCapacity");
+      if ( !increase ) this.name = CONFIG.DND5E.encumbrance.effects[originalEncumbrance].name;
+      this._displayScrollingStatus(increase);
       this.name = name;
     }
   }

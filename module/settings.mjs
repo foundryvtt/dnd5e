@@ -78,6 +78,16 @@ export default function registerSystemSettings() {
     type: Boolean
   });
 
+  // Encumbrance tracking
+  game.settings.register("dnd5e", "encumbrance", {
+    name: "SETTINGS.5eEncumbranceN",
+    hint: "SETTINGS.5eEncumbranceL",
+    scope: "world",
+    config: true,
+    default: false,
+    type: Boolean
+  });
+
   // Use Honor ability score
   game.settings.register("dnd5e", "honorScore", {
     name: "SETTINGS.5eHonorN",

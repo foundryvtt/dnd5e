@@ -92,7 +92,7 @@ export default class AttributesFields {
    * @this {CharacterData|NPCData}
    */
   static prepareExhaustionLevel() {
-    const exhaustion = this.parent.effects.get(ActiveEffect5e.EXHAUSTION);
+    const exhaustion = this.parent.effects.get(ActiveEffect5e.ID.EXHAUSTION);
     const level = exhaustion?.getFlag("dnd5e", "exhaustionLevel");
     this.attributes.exhaustion = Number.isFinite(level) ? level : 0;
   }
@@ -105,8 +105,9 @@ export default class AttributesFields {
    */
   static prepareMovement() {
     const statuses = this.parent.statuses;
-    const noMovement = new Set(["grappled", "paralyzed", "petrified", "restrained", "stunned", "unconscious"])
-      .intersection(statuses).size || (this.attributes.exhaustion >= 5);
+    const noMovement = new Set([
+      "exceedingCarryingCapacity", "grappled", "paralyzed", "petrified", "restrained", "stunned", "unconscious"
+    ]).intersection(statuses).size || (this.attributes.exhaustion >= 5);
     const halfMovement = statuses.has("prone") || (this.attributes.exhaustion >= 2);
     const reduction = statuses.has("heavilyEncumbered")
       ? CONFIG.DND5E.encumbrance.speedReduction.heavilyEncumbered

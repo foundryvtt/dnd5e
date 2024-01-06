@@ -10,7 +10,7 @@
             </h1>
             <ul class="summary flexrow">
                 <li class="size">
-                    <span>{{lookup config.actorSizes system.traits.size labelAttr="label"}}</span>
+                    <span>{{lookup (lookup config.actorSizes system.traits.size) "label"}}</span>
                 </li>
                 <li class="vehicle-type">
                     <select name="system.vehicleType">
