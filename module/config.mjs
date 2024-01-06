@@ -2156,7 +2156,16 @@ DND5E.statusEffects = {
   dead: {
     icon: "systems/dnd5e/icons/svg/statuses/dead.svg"
   },
+  encumbered: {
+    name: "EFFECT.DND5E.StatusEncumbered",
+    icon: "systems/dnd5e/icons/svg/statuses/encumbered.svg"
+  },
   fly: {},
+  heavilyEncumbered: {
+    name: "EFFECT.DND5E.StatusHeavilyEncumbered",
+    icon: "systems/dnd5e/icons/svg/statuses/heavily-encumbered.svg",
+    statuses: ["encumbered"]
+  },
   hidden: {
     name: "EFFECT.DND5E.StatusHidden",
     icon: "icons/svg/cowled.svg"
