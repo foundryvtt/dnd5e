@@ -372,6 +372,8 @@ export default class Item5e extends SystemDocumentMixin(Item) {
         this._prepareFeat(); break;
       case "spell":
         this._prepareSpell(); break;
+      case "weapon":
+        this._prepareWeapon(); break;
     }
 
     // Activated Items
@@ -435,6 +437,16 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     this.labels.components.vsm = new Intl.ListFormat(game.i18n.lang, { style: "narrow", type: "conjunction" })
       .format(this.labels.components.vsm);
     this.labels.materials = this.system?.materials?.value ?? null;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare derived data for a weapon-type item and define labels.
+   * @protected
+   */
+  _prepareWeapon() {
+    this.labels.armor = this.system.armor.value ? `${this.system.armor.value} ${game.i18n.localize("DND5E.AC")}` : "";
   }
 
   /* -------------------------------------------- */

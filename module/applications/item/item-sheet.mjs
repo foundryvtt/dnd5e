@@ -363,6 +363,7 @@ export default class ItemSheet5e extends ItemSheet {
     switch ( this.item.type ) {
       case "consumable":
       case "weapon":
+        if ( this.item.isMountable ) props.push(labels.armor);
         const ip = CONFIG.DND5E.itemProperties;
         const vp = CONFIG.DND5E.validProperties[this.item.type];
         this.item.system.properties.forEach(k => {
