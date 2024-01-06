@@ -22,6 +22,7 @@ import * as enrichers from "./module/enrichers.mjs";
 import * as migrations from "./module/migration.mjs";
 import * as utils from "./module/utils.mjs";
 import {ModuleArt} from "./module/module-art.mjs";
+import Tooltips5e from "./module/tooltips.mjs";
 
 /* -------------------------------------------- */
 /*  Define Module Structure                     */
@@ -74,6 +75,9 @@ Hooks.once("init", function() {
 
   // Configure module art
   game.dnd5e.moduleArt = new ModuleArt();
+
+  // Configure tooltips
+  game.dnd5e.tooltips = new Tooltips5e();
 
   // Set up status effects
   _configureStatusEffects();
@@ -302,6 +306,7 @@ function _configureStatusEffects() {
 Hooks.once("setup", function() {
   CONFIG.DND5E.trackableAttributes = expandAttributeList(CONFIG.DND5E.trackableAttributes);
   game.dnd5e.moduleArt.registerModuleArt();
+  game.dnd5e.tooltips.observe();
 
   // Apply table of contents compendium style if specified in flags
   game.packs

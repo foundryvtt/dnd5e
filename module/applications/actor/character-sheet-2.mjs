@@ -376,6 +376,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
     html.find(".rollable:is(.saving-throw, .ability-check)").on("click", this._onRollAbility.bind(this));
     html.find("proficiency-cycle").on("change", this._onChangeInput.bind(this));
     html.find(".sidebar .collapser").on("click", this._onToggleSidebar.bind(this));
+    this.form.querySelectorAll(".item-tooltip").forEach(this._applyItemTooltips.bind(this));
 
     if ( this.isEditable ) {
       html.find(".meter > .hit-points").on("click", event => this._toggleEditHP(event, true));
@@ -390,7 +391,6 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
 
     // Play mode only.
     else {
-      html.find(".speed-tooltip").on("pointerover", this._onHoverSpeed.bind(this));
       html.find(".portrait").on("click", this._onShowPortrait.bind(this));
     }
   }
@@ -462,35 +462,6 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
     if ( value === n ) value--;
     else value = n;
     return this.actor.update({ [prop]: value });
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Handle showing a breakdown of all this character's movement speeds.
-   * @param {PointerEvent} event  The triggering event.
-   * @protected
-   */
-  _onHoverSpeed(event) {
-    const { movement } = this.actor.system.attributes;
-    const units = movement.units || Object.keys(CONFIG.DND5E.movementUnits)[0];
-    const contents = Object.entries(CONFIG.DND5E.movementTypes).reduce((html, [k, label]) => {
-      const value = movement[k];
-      if ( value ) html += `
-        <div class="row">
-          <i class="fas ${k}"></i>
-          <span class="value">${value} <span class="units">${units}</span></span>
-          <span class="label">${label}</span>
-        </div>
-      `;
-      return html;
-    }, "");
-    if ( !contents ) return;
-    game.tooltip.activate(event.currentTarget, {
-      text: contents,
-      direction: TooltipManager.TOOLTIP_DIRECTIONS.DOWN,
-      cssClass: "property-attribution"
-    });
   }
 
   /* -------------------------------------------- */
@@ -621,6 +592,24 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
       case "race": game.packs.get("dnd5e.races").render(true); break;
       case "background": game.packs.get("dnd5e.backgrounds").render(true); break;
     }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Initialize item tooltips on an element.
+   * @param {HTMLElement} element  The tooltipped element.
+   * @protected
+   */
+  _applyItemTooltips(element) {
+    const itemId = element.closest("[data-item-id]")?.dataset.itemId;
+    const item = this.actor.items.get(itemId);
+    if ( !item || ("tooltip" in element.dataset) ) return;
+    element.dataset.tooltip = `
+      <section class="loading" data-uuid="${item.uuid}"><i class="fas fa-spinner fa-spin-pulse"></i></section>
+    `;
+    element.dataset.tooltipClass = "dnd5e2 item-tooltip";
+    element.dataset.tooltipDirection = "LEFT";
   }
 
   /* -------------------------------------------- */

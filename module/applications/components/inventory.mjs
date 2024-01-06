@@ -34,10 +34,6 @@ export default class InventoryElement extends HTMLElement {
       });
     }
 
-    for ( const element of this.querySelectorAll(".item-tooltip") ) {
-      element.addEventListener("pointerenter", this._onHoverItem.bind(this));
-    }
-
     for ( const control of this.querySelectorAll("[data-context-menu]") ) {
       control.addEventListener("click", event => {
         event.preventDefault();
@@ -106,12 +102,6 @@ export default class InventoryElement extends HTMLElement {
   /* -------------------------------------------- */
   /*  Properties                                  */
   /* -------------------------------------------- */
-
-  /**
-   * The handlebars template for rendering item tooltips.
-   * @type {string}
-   */
-  static TOOLTIP_TEMPLATE = "systems/dnd5e/templates/items/parts/item-tooltip.hbs";
 
   /**
    * Reference to the application that contains this component.
@@ -421,28 +411,6 @@ export default class InventoryElement extends HTMLElement {
       summary.slideDown(200);
       this._app._expanded.add(item.id);
     }
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Handle hovering over an Item and showing a tooltip.
-   * @param {PointerEvent} event  The triggering event.
-   * @returns {Promise<void>}
-   * @protected
-   */
-  async _onHoverItem(event) {
-    if ( ui.context ) return;
-    const target = event.currentTarget;
-    const itemId = target.closest("[data-item-id]")?.dataset.itemId;
-    const item = await this.getItem(itemId);
-    if ( !item ) return;
-    const chatData = await item.getTooltipData({ secrets: this.document.isOwner });
-    const tooltip = await renderTemplate(this.constructor.TOOLTIP_TEMPLATE, chatData);
-    const { left } = target.getBoundingClientRect();
-    const { TOOLTIP_DIRECTIONS } = TooltipManager;
-    const direction = (left - 300) > 0 ? TOOLTIP_DIRECTIONS.LEFT : TOOLTIP_DIRECTIONS.RIGHT;
-    return game.tooltip.activate(target, { direction, text: tooltip, cssClass: "dnd5e2 item-tooltip" });
   }
 
   /* -------------------------------------------- */

@@ -195,7 +195,7 @@
                             </div>
 
                             {{!-- Speed --}}
-                            <div class="lozenge speed-tooltip">
+                            <div class="lozenge" data-attribution="attributes.movement">
                                 <div class="value">
                                     {{#if editable}}
                                     <a class="config-button" data-action="movement" data-tooltip="DND5E.MovementConfig">
@@ -336,7 +336,7 @@
     </section>
 
     {{!-- Ability Scores --}}
-    <div class="ability-scores optional-ability-{{ abilityRows.optional }}">
+    <section class="ability-scores optional-ability-{{ abilityRows.optional }}">
         <div class="rows">
             <div class="top">
                 {{#each abilityRows.top}}
@@ -349,7 +349,7 @@
                 {{/each}}
             </div>
         </div>
-    </div>
+    </section>
 
     {{!-- Item Creation --}}
     <button type="button" class="create-item gold-button"

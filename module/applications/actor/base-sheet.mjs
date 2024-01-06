@@ -298,110 +298,6 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
     return super.activateEditor(name, options, initialContent);
   }
 
-  /* --------------------------------------------- */
-  /*  Property Attribution                         */
-  /* --------------------------------------------- */
-
-  /**
-   * Break down all of the Active Effects affecting a given target property.
-   * @param {string} target               The data property being targeted.
-   * @returns {AttributionDescription[]}  Any active effects that modify that property.
-   * @protected
-   */
-  _prepareActiveEffectAttributions(target) {
-    const rollData = this.actor.getRollData({deterministic: true});
-    const attributions = [];
-    for ( const e of this.actor.allApplicableEffects() ) {
-      let source = e.sourceName;
-      if ( e.origin === this.actor.uuid ) source = e.name;
-      if ( !source || e.disabled || e.isSuppressed ) continue;
-      const value = e.changes.reduce((n, change) => {
-        if ( change.key !== target ) return n;
-        if ( change.mode !== CONST.ACTIVE_EFFECT_MODES.ADD ) return n;
-        return n + simplifyBonus(change.value, rollData);
-      }, 0);
-      if ( value ) attributions.push({value, label: source, mode: CONST.ACTIVE_EFFECT_MODES.ADD});
-    }
-    return attributions;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Produce a list of armor class attribution objects.
-   * @param {object} rollData             Data provided by Actor5e#getRollData
-   * @returns {AttributionDescription[]}  List of attribution descriptions.
-   * @protected
-   */
-  _prepareArmorClassAttribution(rollData) {
-    const ac = rollData.attributes.ac;
-    const cfg = CONFIG.DND5E.armorClasses[ac.calc];
-    const attribution = [];
-
-    // Base AC Attribution
-    switch ( ac.calc ) {
-
-      // Flat AC
-      case "flat":
-        return [{
-          label: game.i18n.localize("DND5E.ArmorClassFlat"),
-          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-          value: ac.flat
-        }];
-
-      // Natural armor
-      case "natural":
-        attribution.push({
-          label: game.i18n.localize("DND5E.ArmorClassNatural"),
-          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-          value: ac.flat
-        });
-        break;
-
-      default:
-        const formula = ac.calc === "custom" ? ac.formula : cfg.formula;
-        let base = ac.base;
-        const dataRgx = new RegExp(/@([a-z.0-9_-]+)/gi);
-        for ( const [match, term] of formula.matchAll(dataRgx) ) {
-          const value = String(foundry.utils.getProperty(rollData, term));
-          if ( (term === "attributes.ac.armor") || (value === "0") ) continue;
-          if ( Number.isNumeric(value) ) base -= Number(value);
-          attribution.push({
-            label: match,
-            mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-            value
-          });
-        }
-        const armorInFormula = formula.includes("@attributes.ac.armor");
-        let label = game.i18n.localize("DND5E.PropertyBase");
-        if ( armorInFormula ) label = this.actor.armor?.name ?? game.i18n.localize("DND5E.ArmorClassUnarmored");
-        attribution.unshift({
-          label,
-          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-          value: base
-        });
-        break;
-    }
-
-    // Shield
-    if ( ac.shield !== 0 ) attribution.push({
-      label: this.actor.shield?.name ?? game.i18n.localize("DND5E.EquipmentShield"),
-      mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-      value: ac.shield
-    });
-
-    // Bonus
-    if ( ac.bonus !== 0 ) attribution.push(...this._prepareActiveEffectAttributions("system.attributes.ac.bonus"));
-
-    // Cover
-    if ( ac.cover !== 0 ) attribution.push({
-      label: game.i18n.localize("DND5E.Cover"),
-      mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-      value: ac.cover
-    });
-    return attribution;
-  }
-
   /* -------------------------------------------- */
 
   /**
@@ -644,8 +540,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
   /** @inheritdoc */
   activateListeners(html) {
     // Property attributions
-    html.find("[data-attribution]").mouseover(this._onPropertyAttribution.bind(this));
-    html.find(".attributable").mouseover(this._onPropertyAttribution.bind(this));
+    this.form.querySelectorAll("[data-attribution], .attributable").forEach(this._applyAttributionTooltips.bind(this));
 
     // Preparation Warnings
     html.find(".warnings").click(this._onWarningLink.bind(this));
@@ -1157,24 +1052,16 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
   /* -------------------------------------------- */
 
   /**
-   * Handle displaying the property attribution tooltip when a property is hovered over.
-   * @param {Event} event   The originating mouse event.
-   * @private
+   * Initialize attribution tooltips on an element.
+   * @param {HTMLElement} element  The tooltipped element.
+   * @protected
    */
-  async _onPropertyAttribution(event) {
-    const element = event.target;
-    let property = element.dataset.attribution;
-    if ( !property ) return;
-
-    const rollData = this.actor.getRollData({ deterministic: true });
-    const title = game.i18n.localize(element.dataset.attributionCaption);
-    let attributions;
-    switch ( property ) {
-      case "attributes.ac":
-        attributions = this._prepareArmorClassAttribution(rollData); break;
-    }
-    if ( !attributions ) return;
-    new PropertyAttribution(this.actor, attributions, property, {title}).renderTooltip(element);
+  _applyAttributionTooltips(element) {
+    if ( "tooltip" in element.dataset ) return;
+    element.dataset.tooltip = `
+      <section class="loading" data-uuid="${this.actor.uuid}"><i class="fas fa-spinner fa-spin-pulse"></i></section>
+    `;
+    element.dataset.tooltipClass = "property-attribution";
   }
 
   /* -------------------------------------------- */

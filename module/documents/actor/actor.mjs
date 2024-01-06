@@ -7,6 +7,7 @@ import { simplifyBonus } from "../../utils.mjs";
 import ShortRestDialog from "../../applications/actor/short-rest.mjs";
 import LongRestDialog from "../../applications/actor/long-rest.mjs";
 import ActiveEffect5e from "../active-effect.mjs";
+import PropertyAttribution from "../../applications/property-attribution.mjs";
 
 /**
  * Extend the base Actor class to implement additional system-specific logic.
@@ -2366,6 +2367,158 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       }
     }
     return updates;
+  }
+
+  /* -------------------------------------------- */
+  /*  Property Attribution                        */
+  /* -------------------------------------------- */
+
+  /**
+   * Format an HTML breakdown for a given property.
+   * @param {string} attribution      The property.
+   * @param {object} [options]
+   * @param {string} [options.title]  A title for the breakdown.
+   * @returns {Promise<string>}
+   */
+  async getAttributionData(attribution, { title }={}) {
+    switch ( attribution ) {
+      case "attributes.ac": return this._prepareArmorClassAttribution({ title });
+      case "attributes.movement": return this._prepareMovementAttribution();
+      default: return "";
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare a movement breakdown.
+   * @returns {string}
+   * @protected
+   */
+  _prepareMovementAttribution() {
+    const { movement } = this.system.attributes;
+    const units = movement.units || Object.keys(CONFIG.DND5E.movementUnits)[0];
+    return Object.entries(CONFIG.DND5E.movementTypes).reduce((html, [k, label]) => {
+      const value = movement[k];
+      if ( value ) html += `
+        <div class="row">
+          <i class="fas ${k}"></i>
+          <span class="value">${value} <span class="units">${units}</span></span>
+          <span class="label">${label}</span>
+        </div>
+      `;
+      return html;
+    }, "");
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare an AC breakdown.
+   * @param {object} [options]
+   * @param {string} [options.title]  A title for the breakdown.
+   * @returns {Promise<string>}
+   * @protected
+   */
+  async _prepareArmorClassAttribution({ title }={}) {
+    const rollData = this.getRollData({ deterministic: true });
+    const ac = rollData.attributes.ac;
+    const cfg = CONFIG.DND5E.armorClasses[ac.calc];
+    const attribution = [];
+
+    if ( ac.calc === "flat" ) {
+      attribution.push({
+        label: game.i18n.localize("DND5E.ArmorClassFlat"),
+        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+        value: ac.flat
+      });
+      return new PropertyAttribution(this, attribution, "attributes.ac", { title }).renderTooltip();
+    }
+
+    // Base AC Attribution
+    switch ( ac.calc ) {
+
+      // Natural armor
+      case "natural":
+        attribution.push({
+          label: game.i18n.localize("DND5E.ArmorClassNatural"),
+          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+          value: ac.flat
+        });
+        break;
+
+      default:
+        const formula = ac.calc === "custom" ? ac.formula : cfg.formula;
+        let base = ac.base;
+        const dataRgx = new RegExp(/@([a-z.0-9_-]+)/gi);
+        for ( const [match, term] of formula.matchAll(dataRgx) ) {
+          const value = String(foundry.utils.getProperty(rollData, term));
+          if ( (term === "attributes.ac.armor") || (value === "0") ) continue;
+          if ( Number.isNumeric(value) ) base -= Number(value);
+          attribution.push({
+            label: match,
+            mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+            value
+          });
+        }
+        const armorInFormula = formula.includes("@attributes.ac.armor");
+        let label = game.i18n.localize("DND5E.PropertyBase");
+        if ( armorInFormula ) label = this.armor?.name ?? game.i18n.localize("DND5E.ArmorClassUnarmored");
+        attribution.unshift({
+          label,
+          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+          value: base
+        });
+        break;
+    }
+
+    // Shield
+    if ( ac.shield !== 0 ) attribution.push({
+      label: this.shield?.name ?? game.i18n.localize("DND5E.EquipmentShield"),
+      mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+      value: ac.shield
+    });
+
+    // Bonus
+    if ( ac.bonus !== 0 ) attribution.push(...this._prepareActiveEffectAttributions("system.attributes.ac.bonus"));
+
+    // Cover
+    if ( ac.cover !== 0 ) attribution.push({
+      label: game.i18n.localize("DND5E.Cover"),
+      mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+      value: ac.cover
+    });
+
+    if ( attribution.length ) {
+      return new PropertyAttribution(this, attribution, "attributes.ac", { title }).renderTooltip();
+    }
+
+    return "";
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Break down all of the Active Effects affecting a given target property.
+   * @param {string} target               The data property being targeted.
+   * @returns {AttributionDescription[]}  Any active effects that modify that property.
+   * @protected
+   */
+  _prepareActiveEffectAttributions(target) {
+    const rollData = this.getRollData({ deterministic: true });
+    const attributions = [];
+    for ( const e of this.allApplicableEffects() ) {
+      let source = e.sourceName;
+      if ( e.origin === this.uuid ) source = e.name;
+      if ( !source || e.disabled || e.isSuppressed ) continue;
+      const value = e.changes.reduce((n, change) => {
+        if ( change.key !== target ) return n;
+        if ( change.mode !== CONST.ACTIVE_EFFECT_MODES.ADD ) return n;
+        return n + simplifyBonus(change.value, rollData);
+      }, 0);
+      if ( value ) attributions.push({ value, label: source, mode: CONST.ACTIVE_EFFECT_MODES.ADD });
+    }
+    return attributions;
   }
 
   /* -------------------------------------------- */

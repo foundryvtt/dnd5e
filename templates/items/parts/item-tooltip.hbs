@@ -24,14 +24,14 @@
                 {{/if}}
             </div>
             <div class="weight">
+                {{#if weight}}
                 <i class="fas fa-weight-hanging"></i>
                 <span>{{ weight }}</span>
+                {{/if}}
             </div>
         </div>
     </section>
-    <section class="description">
-        {{{ description }}}
-    </section>
+    <section class="description">{{{ description }}}</section>
     <ul class="pills">
        {{#each properties}}
        <li class="pill maroon">

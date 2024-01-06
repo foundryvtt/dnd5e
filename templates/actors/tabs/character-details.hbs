@@ -151,7 +151,8 @@
                 </div>
                 {{/with}}
                 {{#if system.details.race}}
-                <div class="pill-lg texture race" data-action="edit" data-item-id="{{ system.details.race.id }}"
+                <div class="pill-lg texture race item-tooltip" data-action="edit"
+                     data-item-id="{{ system.details.race.id }}"
                      aria-label="{{#if actor.isOwner}}{{ localize "DND5E.ItemEdit" }}{{else}}{{ localize "DND5E.ItemView" }}{{/if}}">
                     {{#if system.details.race.img}}
                     <img class="gold-icon" src="{{ system.details.race.img }}" alt="{{ system.details.race.name }}">
@@ -179,7 +180,7 @@
                 </div>
                 {{/if}}
                 {{#if system.details.background}}
-                <div class="pill-lg texture background" data-action="edit"
+                <div class="pill-lg texture background item-tooltip" data-action="edit"
                      data-item-id="{{ system.details.background.id }}"
                      aria-label="{{#if actor.isOwner}}{{ localize "DND5E.ItemEdit" }}{{else}}{{ localize "DND5E.ItemView" }}{{/if}}">
                     {{#if system.details.background.img}}

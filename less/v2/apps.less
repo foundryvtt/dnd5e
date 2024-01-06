@@ -419,8 +419,9 @@
 /* ---------------------------------- */
 
 .dnd5e2.dialog {
-  background: url("ui/texture-gray1.webp") no-repeat top left, url("ui/texture-gray2.webp") no-repeat bottom right;
-  background-color: var(--dnd5e-color-parchment);
+  background: url("ui/texture-gray1.webp") no-repeat top left,
+    url("ui/texture-gray2.webp") no-repeat bottom right,
+    var(--dnd5e-color-parchment);
   border: 1px solid var(--dnd5e-color-gold);
 
   > .window-content { background: transparent; }
@@ -510,10 +511,19 @@
   font-size: var(--font-size-13);
   color: var(--color-text-dark-primary);
   border-radius: 5px;
-  background: url("ui/texture-gray1.webp") no-repeat top left, url("ui/texture-gray2.webp") no-repeat bottom right;
-  background-color: var(--dnd5e-color-parchment);
+  background: url("ui/texture-gray1.webp") no-repeat top left,
+    url("ui/texture-gray2.webp") no-repeat bottom right,
+    var(--dnd5e-color-parchment);
   box-shadow: 0 0 16px var(--dnd5e-shadow-45);
   border: 2px solid var(--dnd5e-color-gold);
+
+  .loading {
+    display: flex;
+    justify-content: center;
+    padding: .75rem;
+    font-size: var(--font-size-24);
+    opacity: .25;
+  }
 
   .content { padding: 0 .5rem .25rem; }
 
@@ -540,6 +550,7 @@
       box-shadow: 0 0 4px var(--dnd5e-shadow-45);
       border-radius: 100%;
       object-fit: cover;
+      background: var(--dnd5e-color-light-gray);
     }
 
     .bottom {
@@ -574,7 +585,22 @@
   .description {
     font-size: var(--font-size-12);
     line-height: normal;
-    text-align: left;
+    max-height: 450px;
+    overflow: hidden;
+
+    table { display: none; }
+
+    h1, h2, h3 {
+      border: none;
+      font-family: var(--dnd5e-font-roboto-slab);
+      font-weight: bold;
+    }
+
+    h2 { font-size: 1.4em; }
+    h1 { font-size: 1.5em; }
+
+    &.overflowing { mask-image: linear-gradient(to bottom, black 90%, transparent); }
+    &:empty { margin-bottom: .5rem; }
   }
 
   .pill {
