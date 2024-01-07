@@ -2937,11 +2937,12 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    */
   updateEncumbrance(options) {
     const encumbrance = this.system.attributes?.encumbrance;
-    if ( !encumbrance || !game.settings.get("dnd5e", "encumbrance") ) return;
+    if ( !encumbrance || (game.settings.get("dnd5e", "encumbrance") === "none") ) return;
     const statuses = [];
+    const variant = game.settings.get("dnd5e", "encumbrance") === "variant";
     if ( encumbrance.value > encumbrance.thresholds.maximum ) statuses.push("exceedingCarryingCapacity");
-    if ( encumbrance.value > encumbrance.thresholds.heavilyEncumbered ) statuses.push("heavilyEncumbered");
-    if ( encumbrance.value > encumbrance.thresholds.encumbered ) statuses.push("encumbered");
+    if ( (encumbrance.value > encumbrance.thresholds.heavilyEncumbered) && variant ) statuses.push("heavilyEncumbered");
+    if ( (encumbrance.value > encumbrance.thresholds.encumbered) && variant ) statuses.push("encumbered");
 
     const effect = this.effects.get(ActiveEffect5e.ID.ENCUMBERED);
     if ( !statuses.length ) return effect?.delete();

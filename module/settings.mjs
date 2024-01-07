@@ -13,6 +13,21 @@ export default function registerSystemSettings() {
     default: ""
   });
 
+  // Encumbrance tracking
+  game.settings.register("dnd5e", "encumbrance", {
+    name: "SETTINGS.5eEncumbrance.Name",
+    hint: "SETTINGS.5eEncumbrance.Hint",
+    scope: "world",
+    config: true,
+    default: "none",
+    type: String,
+    choices: {
+      none: "SETTINGS.5eEncumbrance.None",
+      normal: "SETTINGS.5eEncumbrance.Normal",
+      variant: "SETTINGS.5eEncumbrance.Variant"
+    }
+  });
+
   // Rest Recovery Rules
   game.settings.register("dnd5e", "restVariant", {
     name: "SETTINGS.5eRestN",
@@ -75,16 +90,6 @@ export default function registerSystemSettings() {
     scope: "world",
     config: true,
     default: true,
-    type: Boolean
-  });
-
-  // Encumbrance tracking
-  game.settings.register("dnd5e", "encumbrance", {
-    name: "SETTINGS.5eEncumbranceN",
-    hint: "SETTINGS.5eEncumbranceL",
-    scope: "world",
-    config: true,
-    default: false,
     type: Boolean
   });
 

@@ -111,8 +111,6 @@ export default class AttributesFields {
     const reduction = statuses.has("heavilyEncumbered")
       ? CONFIG.DND5E.encumbrance.speedReduction.heavilyEncumbered
       : statuses.has("encumbered") ? CONFIG.DND5E.encumbrance.speedReduction.encumbered : 0;
-    if ( !noMovement && !halfMovement && !reduction ) return;
-
     const crawl = statuses.has("prone") || statuses.has("exceedingCarryingCapacity");
     Object.keys(CONFIG.DND5E.movementTypes).forEach(k => {
       if ( reduction ) this.attributes.movement[k] = Math.max(0, this.attributes.movement[k] - reduction);
