@@ -136,6 +136,7 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
         const delta = level - cls.system.levels;
         return { level, delta, disabled: delta > maxLevelDelta };
       });
+      ctx.prefixedImage = foundry.utils.getRoute(cls.img);
       arr.push(cls);
       const identifier = cls.system.identifier || cls.name.slugify({strict: true});
       const subclass = subclasses.findSplice(s => s.system.classIdentifier === identifier);
@@ -271,7 +272,7 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
   async _onLevelChange(event) {
     event.preventDefault();
     const delta = Number(event.target.value);
-    const classId = event.target.closest(".item")?.dataset.itemId;
+    const classId = event.target.closest("[data-item-id]")?.dataset.itemId;
     if ( !delta || !classId ) return;
     const classItem = this.actor.items.get(classId);
     if ( !game.settings.get("dnd5e", "disableAdvancements") ) {
