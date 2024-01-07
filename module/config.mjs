@@ -1173,6 +1173,7 @@ preLocalize("currencies", { keys: ["label", "abbreviation"] });
 
 /**
  * Types of damage that are considered physical.
+ * @deprecated since DnD5e 2.5, available until DnD5e 2.7
  * @enum {string}
  */
 DND5E.physicalDamageTypes = {
@@ -1186,35 +1187,67 @@ preLocalize("physicalDamageTypes", { sort: true });
 
 /**
  * Types of damage the can be caused by abilities.
- * @enum {string}
+ * @enum {{label: string, color: string}}
  */
 DND5E.damageTypes = {
-  ...DND5E.physicalDamageTypes,
-  acid: "DND5E.DamageAcid",
-  cold: "DND5E.DamageCold",
-  fire: "DND5E.DamageFire",
-  force: "DND5E.DamageForce",
-  lightning: "DND5E.DamageLightning",
-  necrotic: "DND5E.DamageNecrotic",
-  poison: "DND5E.DamagePoison",
-  psychic: "DND5E.DamagePsychic",
-  radiant: "DND5E.DamageRadiant",
-  thunder: "DND5E.DamageThunder"
+  acid: {
+    label: "DND5E.DamageAcid",
+    color: "839D50"
+  },
+  bludgeoning: {
+    label: "DND5E.DamageBludgeoning",
+    color: "0000A0",
+    isPhysical: true
+  },
+  cold: {
+    label: "DND5E.DamageCold",
+    color: "ADD8E6"
+  },
+  fire: {
+    label: "DND5E.DamageFire",
+    color: "FF4500"
+  },
+  force: {
+    label: "DND5E.DamageForce",
+    color: "800080"
+  },
+  lightning: {
+    label: "DND5E.DamageLightning",
+    color: "1E90FF"
+  },
+  necrotic: {
+    label: "DND5E.DamageNecrotic",
+    color: "006400"
+  },
+  piercing: {
+    label: "DND5E.DamagePiercing",
+    color: "C0C0C0",
+    isPhysical: true
+  },
+  poison: {
+    label: "DND5E.DamagePoison",
+    color: "8A2BE2"
+  },
+  psychic: {
+    label: "DND5E.DamagePsychic",
+    color: "FF1493"
+  },
+  radiant: {
+    label: "DND5E.DamageRadiant",
+    color: "FFD700"
+  },
+  slashing: {
+    label: "DND5E.DamageSlashing",
+    color: "8B0000",
+    isPhysical: true
+  },
+  thunder: {
+    label: "DND5E.DamageThunder",
+    color: "708090"
+  }
 };
-preLocalize("damageTypes", { sort: true });
-
-/* -------------------------------------------- */
-
-/**
- * Types of damage to which an actor can possess resistance, immunity, or vulnerability.
- * @enum {string}
- * @deprecated
- */
-DND5E.damageResistanceTypes = {
-  ...DND5E.damageTypes,
-  physical: "DND5E.DamagePhysical"
-};
-preLocalize("damageResistanceTypes", { sort: true });
+patchConfig("damageTypes", "label", { since: "DnD5e 2.5", until: "DnD5e 2.7" });
+preLocalize("damageTypes", { keys: ["label"], sort: true });
 
 /* -------------------------------------------- */
 /*  Movement                                    */
@@ -1225,10 +1258,17 @@ preLocalize("damageResistanceTypes", { sort: true });
  * @enum {string}
  */
 DND5E.healingTypes = {
-  healing: "DND5E.Healing",
-  temphp: "DND5E.HealingTemp"
+  healing: {
+    label: "DND5E.Healing",
+    color: "46C252"
+  },
+  temphp: {
+    label: "DND5E.HealingTemp",
+    color: "4B66DE"
+  }
 };
-preLocalize("healingTypes");
+patchConfig("healingTypes", "label", { since: "DnD5e 2.5", until: "DnD5e 2.7" });
+preLocalize("healingTypes", { keys: ["label"] });
 
 /* -------------------------------------------- */
 

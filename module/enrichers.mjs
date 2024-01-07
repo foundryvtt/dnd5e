@@ -216,7 +216,7 @@ async function enrichDamage(config, label, options) {
 
   const localizationData = {
     formula: createRollLink(config.formula, config).outerHTML,
-    type: game.i18n.localize(CONFIG.DND5E.damageTypes[config.damageType] ?? "").toLowerCase()
+    type: game.i18n.localize(CONFIG.DND5E.damageTypes[config.damageType]?.label ?? "").toLowerCase()
   };
 
   let localizationType = "Short";
@@ -472,7 +472,7 @@ async function rollDamage(event, speaker) {
   const messageData = { "flags.dnd5e.roll.type": "damage", speaker };
   const rollConfig = {
     parts: [formula],
-    flavor: `${title} (${game.i18n.localize(CONFIG.DND5E.damageTypes[damageType] ?? damageType)})`,
+    flavor: `${title} (${game.i18n.localize(CONFIG.DND5E.damageTypes[damageType]?.label ?? damageType)})`,
     event,
     title,
     messageData

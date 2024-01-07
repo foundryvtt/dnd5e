@@ -519,7 +519,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     if ( dmg.parts ) {
       const types = CONFIG.DND5E.damageTypes;
       this.labels.damage = dmg.parts.map(d => d[0]).join(" + ").replace(/\+ -/g, "- ");
-      this.labels.damageTypes = dmg.parts.map(d => types[d[1]]).join(", ");
+      this.labels.damageTypes = dmg.parts.map(d => types[d[1]]?.label).join(", ");
     }
   }
 
@@ -627,7 +627,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
         console.warn(`Unable to simplify formula for ${this.name}: ${err}`);
       }
       const damageType = damagePart[1];
-      return { formula, damageType, label: `${formula} ${damageLabels[damageType] ?? ""}` };
+      return { formula, damageType, label: `${formula} ${damageLabels[damageType]?.label ?? ""}` };
     });
     return this.labels.derivedDamage = derivedDamage;
   }
