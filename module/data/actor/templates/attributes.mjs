@@ -104,13 +104,19 @@ export default class AttributesFields {
    * @this {CharacterData|NPCData}
    */
   static prepareMovement() {
+    const statuses = this.parent.statuses;
     const noMovement = new Set(["grappled", "paralyzed", "petrified", "restrained", "stunned", "unconscious"])
-      .intersection(this.parent.statuses).size || (this.attributes.exhaustion >= 5);
-    const halfMovement = this.parent.statuses.has("prone") || (this.attributes.exhaustion >= 2);
-    if ( !noMovement && !halfMovement ) return;
+      .intersection(statuses).size || (this.attributes.exhaustion >= 5);
+    const halfMovement = statuses.has("prone") || (this.attributes.exhaustion >= 2);
+    const reduction = statuses.has("heavilyEncumbered")
+      ? CONFIG.DND5E.encumbrance.speedReduction.heavilyEncumbered
+      : statuses.has("encumbered") ? CONFIG.DND5E.encumbrance.speedReduction.encumbered : 0;
+    if ( !noMovement && !halfMovement && !reduction ) return;
+
     Object.keys(CONFIG.DND5E.movementTypes).forEach(k => {
-      if ( (this.parent.statuses.has("prone") && (k !== "walk")) || noMovement ) this.attributes.movement[k] = 0;
-      else this.attributes.movement[k] = Math.floor(this.attributes.movement[k] * 0.5);
+      if ( reduction ) this.attributes.movement[k] = Math.max(0, this.attributes.movement[k] - reduction);
+      if ( (statuses.has("prone") && (k !== "walk")) || noMovement ) this.attributes.movement[k] = 0;
+      else if ( halfMovement ) this.attributes.movement[k] = Math.floor(this.attributes.movement[k] * 0.5);
     });
   }
 }
