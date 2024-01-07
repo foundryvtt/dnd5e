@@ -286,10 +286,12 @@ async function enrichSave(config, label, options) {
 }
 
 /* -------------------------------------------- */
+
 /**
  * Enrich an item use link to roll an item on the selected token.
  * @param {string[]} config            Configuration data.
  * @param {string} [label]             Optional label to replace default text.
+ * @returns {HTMLElement|null}         An HTML link if the item link could be built, otherwise null.
  *
  * @example Use an item from a Name:
  * ```[[/item Heavy Crossbow]]```
@@ -326,12 +328,6 @@ async function enrichSave(config, label, options) {
  *   <i class="fa-solid fa-dice-d20"></i> Bite
  * </a>
  * ```
- */
-
-/**
- *
- * @param config
- * @param label
  */
 async function enrichItem(config, label) {
   const givenItem = config.values.join(" ");
@@ -557,7 +553,7 @@ async function rollAction(event) {
             }
 
           } else if (targetLocation.classList.contains("item-summary")) {
-            const actorSheetIds = target.closest(".app.window-app.dnd5e.sheet.actor").id.match(/ActorSheet5e(?:NPC|Character)-(Scene?\-?(.{16}))?(-Token?\-?(.{16}))?(-Actor\-?(.{16})?)?/);
+            const actorSheetIds = target.closest(".app.window-app.dnd5e.sheet.actor").id.match(/ActorSheet5e(?:NPC|Character)-(Scene-(.{16}))?(-Token-(.{16}))?(-Actor-(.{16}))?/);
             if (actorSheetIds[2]) {
               locatedScene = actorSheetIds[2];
               locatedToken = actorSheetIds[4];
@@ -566,7 +562,7 @@ async function rollAction(event) {
             }
 
           } else if (targetLocation.classList.contains("editor-content")) {
-            const itemSheetIds = target.closest(".app.window-app.dnd5e.sheet.item").id.match(/ItemSheet5e-(Scene?\-?(.{16}))?(-Token?\-?(.{16}))?(Actor\-?(.{16})?)?/);
+            const itemSheetIds = target.closest(".app.window-app.dnd5e.sheet.item").id.match(/ItemSheet5e-(Scene-(.{16}))?(-Token-(.{16}))?(Actor-(.{16}))?/);
             if (itemSheetIds[2]) {
               locatedScene = itemSheetIds[2];
               locatedToken = itemSheetIds[4];
