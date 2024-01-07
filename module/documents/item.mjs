@@ -26,14 +26,6 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   /* -------------------------------------------- */
 
   /**
-   * Is this Item an activatable item?
-   * @type {boolean}
-   */
-  get isActive() {
-    return this.system.isActive ?? false;
-  }
-
-  /**
    * Which ability score modifier is used by this item?
    * @type {string|null}
    * @see {@link ActionTemplate#abilityMod}
@@ -184,6 +176,16 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     return this.system.identifier || this.name.slugify({strict: true});
   }
 
+  /* --------------------------------------------- */
+
+  /**
+   * Is this Item an activatable item?
+   * @type {boolean}
+   */
+  get isActive() {
+    return this.system.isActive ?? false;
+  }
+
   /* -------------------------------------------- */
 
   /**
@@ -240,6 +242,17 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    */
   get isVersatile() {
     return this.system.isVersatile ?? false;
+  }
+
+  /* --------------------------------------------- */
+
+  /**
+   * Does this item require concentration?
+   * @type {boolean}
+   */
+  get requiresConcentration() {
+    const isValid = this.system.validProperties.has("concentration") && this.system.properties.has("concentration");
+    return isValid && this.isActive && this.system.hasScalarDuration;
   }
 
   /* -------------------------------------------- */
