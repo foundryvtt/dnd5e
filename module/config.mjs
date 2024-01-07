@@ -1440,7 +1440,11 @@ preLocalize("distanceUnits");
  *
  * @typedef {object} EncumbranceConfiguration
  * @property {Record<string, number>} currencyPerWeight  Pieces of currency that equal a base weight (lbs or kgs).
- * @property {Record<string, number>} strMultiplier      Amount to multiply strength to get maximum carrying capacity.
+ * @property {Record<string, object>} effects            Data used to create encumbrance-replated Active Effects.
+ * @property {object} threshold                          Amount to multiply strength to get given capacity threshold.
+ * @property {Record<string, number>} threshold.encumbered
+ * @property {Record<string, number>} threshold.heavilyEncumbered
+ * @property {Record<string, number>} threshold.maximum
  * @property {Record<string, number>} speedReduction     Speed reduction caused by encumbered status effects.
  * @property {Record<string, number>} vehicleWeightMultiplier  Multiplier used to determine vehicle carrying capacity.
  */
@@ -1454,9 +1458,33 @@ DND5E.encumbrance = {
     imperial: 50,
     metric: 110
   },
-  strMultiplier: {
-    imperial: 15,
-    metric: 6.8
+  effects: {
+    encumbered: {
+      name: "EFFECT.DND5E.StatusEncumbered",
+      icon: "systems/dnd5e/icons/svg/statuses/encumbered.svg"
+    },
+    heavilyEncumbered: {
+      name: "EFFECT.DND5E.StatusHeavilyEncumbered",
+      icon: "systems/dnd5e/icons/svg/statuses/heavily-encumbered.svg"
+    },
+    exceedingCarryingCapacity: {
+      name: "EFFECT.DND5E.StatusExceedingCarryingCapacity",
+      icon: "systems/dnd5e/icons/svg/statuses/exceeding-carrying-capacity.svg"
+    }
+  },
+  threshold: {
+    encumbered: {
+      imperial: 5,
+      metric: 2.2
+    },
+    heavilyEncumbered: {
+      imperial: 10,
+      metric: 4.5
+    },
+    maximum: {
+      imperial: 15,
+      metric: 6.8
+    }
   },
   speedReduction: {
     encumbered: 10,
@@ -1467,6 +1495,16 @@ DND5E.encumbrance = {
     metric: 1000 // 1000 kg in a metric ton
   }
 };
+Object.defineProperty(DND5E.encumbrance, "strMultiplier", {
+  get() {
+    foundry.utils.logCompatibilityWarning(
+      "`DND5E.encumbrance.strMultiplier` has been moved to `DND5E.encumbrance.threshold.maximum`.",
+      { since: "DnD5e 3.0", until: "DnD5e 3.2" }
+    );
+    return this.threshold.maximum;
+  }
+});
+preLocalize("encumbrance.effects", { key: "name" });
 
 /* -------------------------------------------- */
 /*  Targeting                                   */
@@ -2170,16 +2208,7 @@ DND5E.statusEffects = {
   dead: {
     icon: "systems/dnd5e/icons/svg/statuses/dead.svg"
   },
-  encumbered: {
-    name: "EFFECT.DND5E.StatusEncumbered",
-    icon: "systems/dnd5e/icons/svg/statuses/encumbered.svg"
-  },
   fly: {},
-  heavilyEncumbered: {
-    name: "EFFECT.DND5E.StatusHeavilyEncumbered",
-    icon: "systems/dnd5e/icons/svg/statuses/heavily-encumbered.svg",
-    statuses: ["encumbered"]
-  },
   hidden: {
     name: "EFFECT.DND5E.StatusHidden",
     icon: "icons/svg/cowled.svg"
