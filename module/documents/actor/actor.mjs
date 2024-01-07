@@ -546,7 +546,9 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * @protected
    */
   _prepareEncumbrance() {
+    const config = CONFIG.DND5E.encumbrance;
     const encumbrance = this.system.attributes.encumbrance ??= {};
+    const units = game.settings.get("dnd5e", "metricWeightUnits") ? "metric" : "imperial";
 
     // Get the total weight from items
     let weight = this.items
@@ -557,30 +559,37 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const currency = this.system.currency;
     if ( game.settings.get("dnd5e", "currencyWeight") && currency ) {
       const numCoins = Object.values(currency).reduce((val, denom) => val + Math.max(denom, 0), 0);
-      const currencyPerWeight = game.settings.get("dnd5e", "metricWeightUnits")
-        ? CONFIG.DND5E.encumbrance.currencyPerWeight.metric
-        : CONFIG.DND5E.encumbrance.currencyPerWeight.imperial;
+      const currencyPerWeight = config.currencyPerWeight[units];
       weight += numCoins / currencyPerWeight;
     }
 
     // Determine the Encumbrance size class
     const keys = Object.keys(CONFIG.DND5E.actorSizes);
     const index = keys.findIndex(k => k === this.system.traits.size);
-    const config = CONFIG.DND5E.actorSizes[
+    const sizeConfig = CONFIG.DND5E.actorSizes[
       keys[this.flags.dnd5e?.powerfulBuild ? Math.min(index + 1, keys.length - 1) : index]
     ];
-    const mod = config?.capacityMultiplier ?? config?.token ?? 1;
+    const mod = sizeConfig?.capacityMultiplier ?? sizeConfig?.token ?? 1;
 
-    const strengthMultiplier = game.settings.get("dnd5e", "metricWeightUnits")
-      ? CONFIG.DND5E.encumbrance.strMultiplier.metric
-      : CONFIG.DND5E.encumbrance.strMultiplier.imperial;
+    const calculateThreshold = multiplier => this.type === "vehicle"
+      ? this.system.attributes.capacity.cargo * config.vehicleWeightMultiplier[units]
+      : ((this.system.abilities.str?.value ?? 10) * multiplier * mod).toNearest(0.1);
 
     // Populate final Encumbrance values
     encumbrance.mod = mod;
     encumbrance.value = weight.toNearest(0.1);
-    encumbrance.max = ((this.system.abilities.str?.value ?? 10) * strengthMultiplier * mod).toNearest(0.1);
+    encumbrance.thresholds = {
+      encumbered: calculateThreshold(config.threshold.encumbered[units]),
+      heavilyEncumbered: calculateThreshold(config.threshold.heavilyEncumbered[units]),
+      maximum: calculateThreshold(config.threshold.maximum[units])
+    };
+    encumbrance.max = encumbrance.thresholds.maximum;
+    encumbrance.stops = {
+      encumbered: Math.clamped((encumbrance.thresholds.encumbered * 100) / encumbrance.max, 0, 100),
+      heavilyEncumbered: Math.clamped((encumbrance.thresholds.heavilyEncumbered * 100) / encumbrance.max, 0, 100)
+    };
     encumbrance.pct = Math.clamped((encumbrance.value * 100) / encumbrance.max, 0, 100);
-    encumbrance.encumbered = encumbrance.pct > (200 / 3);
+    encumbrance.encumbered = encumbrance.value > encumbrance.heavilyEncumbered;
   }
 
   /* -------------------------------------------- */
@@ -2988,10 +2997,37 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   /* -------------------------------------------- */
 
   /** @inheritdoc */
-  _onUpdate(data, options, userId) {
+  async _onUpdate(data, options, userId) {
     super._onUpdate(data, options, userId);
     this._displayScrollingDamage(options.dhp);
-    if ( userId === game.userId ) this._onUpdateExhaustion(data, options);
+    if ( userId === game.userId ) {
+      await this.updateEncumbrance(options);
+      this._onUpdateExhaustion(data, options);
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _onCreateDescendantDocuments(parent, collection, documents, data, options, userId) {
+    if ( (userId === game.userId) && (collection === "items") ) await this.updateEncumbrance(options);
+    super._onCreateDescendantDocuments(parent, collection, documents, data, options, userId);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _onUpdateDescendantDocuments(parent, collection, documents, changes, options, userId) {
+    if ( (userId === game.userId) && (collection === "items") ) await this.updateEncumbrance(options);
+    super._onUpdateDescendantDocuments(parent, collection, documents, changes, options, userId);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _onDeleteDescendantDocuments(parent, collection, documents, ids, options, userId) {
+    if ( (userId === game.userId) && (collection === "items") ) await this.updateEncumbrance(options);
+    super._onDeleteDescendantDocuments(parent, collection, documents, ids, options, userId);
   }
 
   /* -------------------------------------------- */
@@ -3027,12 +3063,13 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * Handle syncing the Actor's exhaustion level with the ActiveEffect.
    * @param {object} data                          The Actor's update delta.
    * @param {DocumentModificationContext} options  Additional options supplied with the update.
+   * @returns {Promise<ActiveEffect>|void}
    * @protected
    */
   _onUpdateExhaustion(data, options) {
     const level = foundry.utils.getProperty(data, "system.attributes.exhaustion");
     if ( !Number.isFinite(level) ) return;
-    let effect = this.effects.get(ActiveEffect5e.EXHAUSTION);
+    let effect = this.effects.get(ActiveEffect5e.ID.EXHAUSTION);
     if ( level < 1 ) return effect?.delete();
     else if ( effect ) {
       const originalExhaustion = foundry.utils.getProperty(options, "dnd5e.originalExhaustion");
@@ -3042,5 +3079,36 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       effect.updateSource({ "flags.dnd5e.exhaustionLevel": level });
       return ActiveEffect.implementation.create(effect, { parent: this, keepId: true });
     }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle applying/removing encumbrance statuses.
+   * @param {DocumentModificationContext} options  Additional options supplied with the update.
+   * @returns {Promise<ActiveEffect>|void}
+   */
+  updateEncumbrance(options) {
+    const encumbrance = this.system.attributes?.encumbrance;
+    if ( !encumbrance || (game.settings.get("dnd5e", "encumbrance") === "none") ) return;
+    const statuses = [];
+    const variant = game.settings.get("dnd5e", "encumbrance") === "variant";
+    if ( encumbrance.value > encumbrance.thresholds.maximum ) statuses.push("exceedingCarryingCapacity");
+    if ( (encumbrance.value > encumbrance.thresholds.heavilyEncumbered) && variant ) statuses.push("heavilyEncumbered");
+    if ( (encumbrance.value > encumbrance.thresholds.encumbered) && variant ) statuses.push("encumbered");
+
+    const effect = this.effects.get(ActiveEffect5e.ID.ENCUMBERED);
+    if ( !statuses.length ) return effect?.delete();
+
+    const effectData = { ...CONFIG.DND5E.encumbrance.effects[statuses[0]], statuses };
+    if ( effect ) {
+      const originalEncumbrance = effect.statuses.first();
+      return effect.update(effectData, { dnd5e: { originalEncumbrance } });
+    }
+
+    return ActiveEffect.implementation.create(
+      { _id: ActiveEffect5e.ID.ENCUMBERED, ...effectData },
+      { parent: this, keepId: true }
+    );
   }
 }

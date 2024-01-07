@@ -92,7 +92,7 @@ export default class AttributesFields {
    * @this {CharacterData|NPCData}
    */
   static prepareExhaustionLevel() {
-    const exhaustion = this.parent.effects.get(ActiveEffect5e.EXHAUSTION);
+    const exhaustion = this.parent.effects.get(ActiveEffect5e.ID.EXHAUSTION);
     const level = exhaustion?.getFlag("dnd5e", "exhaustionLevel");
     this.attributes.exhaustion = Number.isFinite(level) ? level : 0;
   }
@@ -111,11 +111,11 @@ export default class AttributesFields {
     const reduction = statuses.has("heavilyEncumbered")
       ? CONFIG.DND5E.encumbrance.speedReduction.heavilyEncumbered
       : statuses.has("encumbered") ? CONFIG.DND5E.encumbrance.speedReduction.encumbered : 0;
-    if ( !noMovement && !halfMovement && !reduction ) return;
-
+    const crawl = statuses.has("prone") || statuses.has("exceedingCarryingCapacity");
     Object.keys(CONFIG.DND5E.movementTypes).forEach(k => {
       if ( reduction ) this.attributes.movement[k] = Math.max(0, this.attributes.movement[k] - reduction);
-      if ( (statuses.has("prone") && (k !== "walk")) || noMovement ) this.attributes.movement[k] = 0;
+      if ( (crawl && (k !== "walk")) || noMovement ) this.attributes.movement[k] = 0;
+      else if ( statuses.has("exceedingCarryingCapacity") ) this.attributes.movement[k] = 5;
       else if ( halfMovement ) this.attributes.movement[k] = Math.floor(this.attributes.movement[k] * 0.5);
     });
   }
