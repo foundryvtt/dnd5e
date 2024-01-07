@@ -88,6 +88,17 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
       ctx.isDepleted = ctx.isOnCooldown && ctx.hasUses && (uses.value > 0);
       ctx.hasTarget = item.hasAreaTarget || item.hasIndividualTarget;
 
+      // Item grouping
+      const [originId] = item.getFlag("dnd5e", "advancementOrigin")?.split(".") ?? [];
+      const group = this.actor.items.get(originId);
+      switch ( group?.type ) {
+        case "race": ctx.group = "race"; break;
+        case "background": ctx.group = "background"; break;
+        case "class": ctx.group = group.identifier; break;
+        case "subclass": ctx.group = group.class?.identifier ?? "other"; break;
+        default: ctx.group = "other";
+      }
+
       // Item toggle state
       this._prepareItemToggleState(item, ctx);
 

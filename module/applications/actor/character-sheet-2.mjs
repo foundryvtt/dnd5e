@@ -362,6 +362,33 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
     }
     context.inventory = context.inventory.filter(entry => entry.items.length);
     context.inventory.push({ label: "DND5E.Contents", items: [], dataset: { type: "all" } });
+
+    // Remove races & background as they are shown on the details tab instead.
+    context.features = context.features.filter(f => (f.dataset.type !== "background") && (f.dataset.type !== "race"));
+    context.features.forEach(f => {
+      if ( f.hasActions ) f.dataset.type = "active";
+      else f.dataset.type = "passive";
+    });
+
+    // Add extra categories for features grouping.
+    Object.values(this.actor.classes ?? {}).sort((a, b) => b.system.levels - a.system.levels).forEach(cls => {
+      context.features.push({
+        label: game.i18n.format("DND5E.FeaturesClass", { class: cls.name }),
+        items: [],
+        dataset: { type: cls.identifier }
+      });
+    });
+
+    if ( this.actor.system.details.race instanceof dnd5e.documents.Item5e ) {
+      context.features.push({ label: "DND5E.FeaturesRace", items: [], dataset: { type: "race" } });
+    }
+
+    if ( this.actor.system.details.background instanceof dnd5e.documents.Item5e ) {
+      context.features.push({ label: "DND5E.FeaturesBackground", items: [], dataset: { type: "background" } });
+    }
+
+    context.features.push({ label: "DND5E.FeaturesOther", items: [], dataset: { type: "other" } });
+    context.classes = context.features.findSplice(f => f.isClass)?.items;
   }
 
   /* -------------------------------------------- */

@@ -1,0 +1,108 @@
+{{!-- Features --}}
+<{{elements.inventory}}>
+
+    {{!-- Searching, Filtering, & Sorting --}}
+    <item-list-controls for="features" label="{{ localize "DND5E.FeatureSearch" }}" sort group
+                        group-label="{{ localize "DND5E.FilterGroupOrigin" }}">
+        <datalist>
+            <option value="action">{{ localize "DND5E.Action" }}</option>
+            <option value="bonus">{{ localize "DND5E.BonusAction" }}</option>
+            <option value="reaction">{{ localize "DND5E.Reaction" }}</option>
+            <option value="sr">{{ localize "DND5E.ShortRest" }}</option>
+            <option value="lr">{{ localize "DND5E.LongRest" }}</option>
+            <option value="concentration">{{ localize "DND5E.Concentration" }}</option>
+            <option value="mgc">{{ localize "DND5E.Item.PropertyMagical" }}</option>
+        </datalist>
+    </item-list-controls>
+
+    {{!-- Features List --}}
+    <section class="items-list features-list" data-item-list="features">
+
+        {{!-- Sections / Categories --}}
+        {{#each sections}}
+        <div class="items-section card" {{ dnd5e-dataset dataset }}>
+
+            {{!-- Section Header --}}
+            <div class="items-header">
+                <h3 class="item-name">{{ localize label }}</h3>
+                <div class="item-header item-uses">{{ localize "DND5E.Uses" }}</div>
+                <div class="item-header item-recovery">{{ localize "DND5E.Recovery" }}</div>
+                <div class="item-header item-controls"></div>
+            </div>
+
+            {{!-- Section Contents --}}
+            <ol class="item-list unlist">
+                {{#each items as |item|}}
+                {{#dnd5e-itemContext item as |ctx|}}
+
+                {{!-- Items --}}
+                <li class="item" data-item-id="{{ item.id }}" data-item-name="{{ item.name }}"
+                    data-item-sort="{{ item.sort }}" data-ungrouped="{{#if ../hasActions}}active{{else}}passive{{/if}}"
+                    data-grouped="{{ ctx.group }}">
+
+                    {{!-- Item Name --}}
+                    <div class="item-name item-action item-tooltip {{ @root.rollableClass }}" role="button"
+                         data-action="use" aria-label="{{ item.name }}">
+                        <img class="item-image gold-icon" src="{{ item.img }}" alt="{{ item.name }}">
+                        <div class="name name-stacked">
+                            <span class="title">{{ item.name }}</span>
+                            {{#if item.isActive}}
+                            <span class="subtitle">{{ item.labels.activation }}</span>
+                            {{/if}}
+                        </div>
+                    </div>
+
+                    {{!-- Item Uses --}}
+                    <div class="item-detail item-uses {{#unless ctx.hasUses}}empty{{/unless}}">
+                        {{#if ctx.hasUses}}
+                        <input type="text" value="{{ item.system.uses.value }}" placeholder="0" data-dtype="Number"
+                               data-name="system.uses.value" inputmode="numeric" pattern="[0-9+=\-]*">
+                        <span class="separator">&sol;</span>
+                        <span class="max">{{ item.system.uses.max }}</span>
+                        {{/if}}
+                    </div>
+
+                    {{!-- Item Recovery --}}
+                    <div class="item-detail item-recovery {{#unless item.system.uses.per}}empty{{/unless}}">
+                        {{#if item.system.uses.per}}
+                        <span>{{ item.labels.recovery }}</span>
+                        {{/if}}
+                    </div>
+
+                    {{!-- Item Status --}}
+                    <div class="item-detail item-controls">
+
+                        {{#if @root.editable}}
+                        {{!-- Editing --}}
+                        <a class="item-control item-action" data-action="edit" data-tooltip="DND5E.ItemEdit"
+                           aria-label="{{ localize "DND5E.ItemEdit" }}">
+                            <i class="fas fa-pen-to-square"></i>
+                        </a>
+
+                        {{!-- Deleting --}}
+                        <a class="item-control item-action" data-action="delete" data-tooltip="DND5E.ItemDelete"
+                           aria-label="{{ localize "DND5E.ItemDelete" }}">
+                            <i class="fas fa-trash"></i>
+                        </a>
+                        {{/if}}
+
+                        {{!-- Context Menu --}}
+                        <a class="item-control interface-only" data-context-menu
+                           aria-label="{{ localize "DND5E.AdditionalControls" }}">
+                            <i class="fas fa-ellipsis-vertical"></i>
+                        </a>
+
+                    </div>
+
+                </li>
+
+                {{/dnd5e-itemContext}}
+                {{/each}}
+            </ol>
+
+        </div>
+        {{/each}}
+
+    </section>
+
+</{{elements.inventory}}>

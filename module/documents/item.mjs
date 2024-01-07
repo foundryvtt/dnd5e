@@ -410,6 +410,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     // Activated Items
     this._prepareActivation();
     this._prepareAction();
+    this._prepareRecovery();
 
     // Un-owned items can have their final preparation done here, otherwise this needs to happen in the owning Actor
     if ( !this.isOwned ) this.prepareFinalAttributes();
@@ -529,6 +530,19 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       this.labels.damage = dmg.parts.map(d => d[0]).join(" + ").replace(/\+ -/g, "- ");
       this.labels.damageTypes = dmg.parts.map(d => types[d[1]]).join(", ");
     }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare recovery labels.
+   * @protected
+   */
+  _prepareRecovery() {
+    const { per } = this.system.uses ?? {};
+    this.labels.recovery = CONFIG.DND5E.limitedUsePeriods[per];
+    if ( per === "lr" ) this.labels.recovery = game.i18n.localize("DND5E.AbbreviationLR");
+    else if ( per === "sr" ) this.labels.recovery = game.i18n.localize("DND5E.AbbreviationSR");
   }
 
   /* -------------------------------------------- */

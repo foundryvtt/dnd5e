@@ -13,8 +13,8 @@ export default class ItemListControlsElement extends HTMLElement {
     const debouncedFilter = foundry.utils.debounce(this._onFilterName.bind(this), this.constructor.FILTER_DEBOUNCE_MS);
     this._inputElement.addEventListener("input", debouncedFilter);
     this._controls.clear.addEventListener("click", this._onClearFilters.bind(this));
-    this._controls.sort.addEventListener("click", this._onToggleMode.bind(this));
-    this._controls.group.addEventListener("click", this._onToggleMode.bind(this));
+    this._controls.sort?.addEventListener("click", this._onToggleMode.bind(this));
+    this._controls.group?.addEventListener("click", this._onToggleMode.bind(this));
 
     this._initFilters();
     this._initGrouping();
@@ -155,11 +155,11 @@ export default class ItemListControlsElement extends HTMLElement {
 
     // Grouping
     if ( this.hasAttribute("group") ) {
+      const groupLabel = this.getAttribute("group-label");
       const item = document.createElement("li");
       item.innerHTML = `
-        <button type="button" class="unbutton filter-control active" data-action="group"
-                data-tooltip="DND5E.FilterGroupCategory"
-                aria-label="${game.i18n.localize("DND5E.FilterGroupCategory")}">
+        <button type="button" class="unbutton filter-control active" data-action="group" data-tooltip="${groupLabel}"
+                aria-label="${groupLabel}">
           <i class="fas fa-layer-group"></i>
         </button>
       `;
@@ -193,7 +193,7 @@ export default class ItemListControlsElement extends HTMLElement {
    * @protected
    */
   _initGrouping() {
-    this._controls.group.classList.toggle("active", this.prefs?.group !== false);
+    this._controls.group?.classList.toggle("active", this.prefs?.group !== false);
   }
 
   /* -------------------------------------------- */
@@ -242,15 +242,17 @@ export default class ItemListControlsElement extends HTMLElement {
    * @protected
    */
   _applyGrouping() {
-    const group = this.prefs?.group !== false;
-    const sections = {};
-    for ( const section of this.list.querySelectorAll(".items-section") ) {
-      sections[section.dataset.type] = section.querySelector(".item-list");
-    }
-    for ( const item of this.list.querySelectorAll(".item") ) {
-      const type = item.dataset.itemType;
-      const section = sections[group ? type : "all"];
-      section.appendChild(item);
+    if ( this._controls.group ) {
+      const group = this.prefs?.group !== false;
+      const sections = {};
+      for ( const section of this.list.querySelectorAll(".items-section") ) {
+        sections[section.dataset.type] = section.querySelector(".item-list");
+      }
+      for ( const item of this.list.querySelectorAll(".item") ) {
+        const { grouped, ungrouped } = item.dataset;
+        const section = sections[group ? grouped : ungrouped];
+        section.appendChild(item);
+      }
     }
     this._applyFilters();
     this._applySorting();
