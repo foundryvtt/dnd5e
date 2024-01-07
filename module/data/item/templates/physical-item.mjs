@@ -153,7 +153,6 @@ export default class PhysicalItemTemplate extends SystemDataModel {
   /** @inheritdoc */
   _onCreate(data, options, userId) {
     this._renderContainers();
-    if ( userId === game.user.id ) this.parent.actor?.updateEncumbrance(options);
   }
 
   /* -------------------------------------------- */
@@ -161,7 +160,6 @@ export default class PhysicalItemTemplate extends SystemDataModel {
   /** @inheritdoc */
   _onUpdate(changed, options, userId) {
     this._renderContainers({ formerContainer: options.formerContainer });
-    if ( userId === game.user.id ) this.parent.actor?.updateEncumbrance(options);
   }
 
   /* -------------------------------------------- */
@@ -169,7 +167,6 @@ export default class PhysicalItemTemplate extends SystemDataModel {
   /** @inheritdoc */
   _onDelete(options, userId) {
     this._renderContainers();
-    if ( userId === game.user.id ) this.parent.actor?.updateEncumbrance(options);
   }
 
   /* -------------------------------------------- */

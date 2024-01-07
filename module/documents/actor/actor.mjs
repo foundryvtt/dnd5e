@@ -588,7 +588,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       heavilyEncumbered: Math.clamped((encumbrance.thresholds.heavilyEncumbered * 100) / encumbrance.max, 0, 100)
     };
     encumbrance.pct = Math.clamped((encumbrance.value * 100) / encumbrance.max, 0, 100);
-    encumbrance.encumbered = encumbrance.value > encumbrance.encumbrance;
+    encumbrance.encumbered = encumbrance.value > encumbrance.heavilyEncumbered;
   }
 
   /* -------------------------------------------- */
@@ -2848,9 +2848,33 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     super._onUpdate(data, options, userId);
     this._displayScrollingDamage(options.dhp);
     if ( userId === game.userId ) {
-      await this.updateEncumbrance(data, options);
+      await this.updateEncumbrance(options);
       this._onUpdateExhaustion(data, options);
     }
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _onCreateDescendantDocuments(parent, collection, documents, data, options, userId) {
+    if ( (userId === game.userId) && (collection === "items") ) await this.updateEncumbrance(options);
+    super._onCreateDescendantDocuments(parent, collection, documents, data, options, userId);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _onUpdateDescendantDocuments(parent, collection, documents, changes, options, userId) {
+    if ( (userId === game.userId) && (collection === "items") ) await this.updateEncumbrance(options);
+    super._onUpdateDescendantDocuments(parent, collection, documents, changes, options, userId);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _onDeleteDescendantDocuments(parent, collection, documents, ids, options, userId) {
+    if ( (userId === game.userId) && (collection === "items") ) await this.updateEncumbrance(options);
+    super._onDeleteDescendantDocuments(parent, collection, documents, ids, options, userId);
   }
 
   /* -------------------------------------------- */

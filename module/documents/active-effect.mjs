@@ -235,11 +235,12 @@ export default class ActiveEffect5e extends ActiveEffect {
     const originalLevel = foundry.utils.getProperty(options, "dnd5e.originalExhaustion");
     const newLevel = foundry.utils.getProperty(data, "flags.dnd5e.exhaustionLevel");
     const originalEncumbrance = foundry.utils.getProperty(options, "dnd5e.originalEncumbrance");
+    const newEncumbrance = data.statuses?.[0];
+    const name = this.name;
 
     // Display proper scrolling status effects for exhaustion
     if ( (this.id === this.constructor.ID.EXHAUSTION) && Number.isFinite(newLevel) && Number.isFinite(originalLevel) ) {
       if ( newLevel === originalLevel ) return;
-      const name = this.name;
       // Temporarily set the name for the benefit of _displayScrollingTextStatus. We should improve this method to
       // accept a name parameter instead.
       if ( newLevel < originalLevel ) this.name = `Exhaustion ${originalLevel}`;
@@ -248,8 +249,7 @@ export default class ActiveEffect5e extends ActiveEffect {
     }
 
     // Display proper scrolling status effects for encumbrance
-    else if ( (this.id === this.constructor.ID.ENCUMBERED) && originalEncumbrance ) {
-      const newEncumbrance = data.statuses[0];
+    else if ( (this.id === this.constructor.ID.ENCUMBERED) && originalEncumbrance && newEncumbrance ) {
       if ( newEncumbrance === originalEncumbrance ) return;
       const increase = !originalEncumbrance || ((originalEncumbrance === "encumbered") && newEncumbrance)
         || (newEncumbrance === "exceedingCarryingCapacity");
