@@ -1191,46 +1191,59 @@ preLocalize("physicalDamageTypes", { sort: true });
  */
 DND5E.damageTypes = {
   acid: {
-    label: "DND5E.DamageAcid"
+    label: "DND5E.DamageAcid",
+    color: new Color(0x839D50)
   },
   bludgeoning: {
     label: "DND5E.DamageBludgeoning",
+    color: new Color(0x0000A0),
     isPhysical: true
   },
   cold: {
-    label: "DND5E.DamageCold"
+    label: "DND5E.DamageCold",
+    color: new Color(0xADD8E6)
   },
   fire: {
-    label: "DND5E.DamageFire"
+    label: "DND5E.DamageFire",
+    color: new Color(0xFF4500)
   },
   force: {
-    label: "DND5E.DamageForce"
+    label: "DND5E.DamageForce",
+    color: new Color(0x800080)
   },
   lightning: {
-    label: "DND5E.DamageLightning"
+    label: "DND5E.DamageLightning",
+    color: new Color(0x1E90FF)
   },
   necrotic: {
-    label: "DND5E.DamageNecrotic"
+    label: "DND5E.DamageNecrotic",
+    color: new Color(0x006400)
   },
   piercing: {
     label: "DND5E.DamagePiercing",
+    color: new Color(0xC0C0C0),
     isPhysical: true
   },
   poison: {
-    label: "DND5E.DamagePoison"
+    label: "DND5E.DamagePoison",
+    color: new Color(0x8A2BE2)
   },
   psychic: {
-    label: "DND5E.DamagePsychic"
+    label: "DND5E.DamagePsychic",
+    color: new Color(0xFF1493)
   },
   radiant: {
-    label: "DND5E.DamageRadiant"
+    label: "DND5E.DamageRadiant",
+    color: new Color(0xFFD700)
   },
   slashing: {
     label: "DND5E.DamageSlashing",
+    color: new Color(0x8B0000),
     isPhysical: true
   },
   thunder: {
-    label: "DND5E.DamageThunder"
+    label: "DND5E.DamageThunder",
+    color: new Color(0x708090)
   }
 };
 patchConfig("damageTypes", "label", { since: "DnD5e 2.5", until: "DnD5e 2.7" });
@@ -1246,10 +1259,12 @@ preLocalize("damageTypes", { keys: ["label"], sort: true });
  */
 DND5E.healingTypes = {
   healing: {
-    label: "DND5E.Healing"
+    label: "DND5E.Healing",
+    color: new Color(0x46C252)
   },
   temphp: {
-    label: "DND5E.HealingTemp"
+    label: "DND5E.HealingTemp",
+    color: new Color(0x4B66DE)
   }
 };
 patchConfig("healingTypes", "label", { since: "DnD5e 2.5", until: "DnD5e 2.7" });
