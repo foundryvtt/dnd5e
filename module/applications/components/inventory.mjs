@@ -1,3 +1,4 @@
+import { parseInputDelta } from "../../utils.mjs";
 import CurrencyManager from "../currency-manager.mjs";
 
 /**
@@ -279,15 +280,8 @@ export default class InventoryElement extends HTMLElement {
     const itemId = input.closest("[data-item-id]")?.dataset.itemId;
     const item = await this.getItem(itemId);
     if ( !item ) return;
-    let value = input.value;
-    if ( ["+", "-"].includes(value[0]) ) {
-      const delta = parseFloat(value);
-      value = Number(foundry.utils.getProperty(item, input.dataset.name)) + delta;
-    }
-    else if ( value[0] === "=" ) value = Number(value.slice(1));
-    if ( isNaN(value) ) return;
-    input.value = value;
-    item.update({ [input.dataset.name]: value });
+    const result = parseInputDelta(input, item);
+    if ( result !== undefined ) item.update({ [input.dataset.name]: result });
   }
 
   /* -------------------------------------------- */

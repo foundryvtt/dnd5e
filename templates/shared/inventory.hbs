@@ -97,9 +97,10 @@
                     {{#each section.columns}}
                     <div class="item-detail {{css}}">
                         {{#if editable}}
-                        <input type="text" data-dtype="{{editable}}" data-property="{{property}}"
+                        <input type="text" data-dtype="{{editable}}" data-name="{{property}}"
                                value="{{#if (getProperty item property)}}{{getProperty item property}}
-                               {{~else}}{{getProperty ctx property}}{{/if}}" placeholder="&mdash;">
+                               {{~else}}{{getProperty ctx property}}{{/if}}" placeholder="&mdash;"
+                               {{~#if (eq editable "Number")}} inputmode="numeric" pattern="[0-9+=\-]*"{{/if}}>
                         {{else}}
                         {{#if (getProperty item property)}}
                         {{getProperty item property}}
@@ -121,15 +122,17 @@
                     {{/if}}
 
                     <div class="item-detail item-quantity">
-                        <input type="number" value="{{item.system.quantity}}" min="0" placeholder="0" data-dtype="Number"
-                               data-name="system.quantity" {{disabled (eq item.type "container")}}>
+                        <input type="text" value="{{item.system.quantity}}" min="0" placeholder="0" data-dtype="Number"
+                               inputmode="numeric" pattern="[0-9+=\-]*" data-name="system.quantity"
+                               {{disabled (eq item.type "container")}}>
                     </div>
 
                     {{#unless @root.isContainer}}
                     <div class="item-detail item-uses">
                         {{#if ctx.hasUses}}
-                        <input type="number" value="{{item.system.uses.value}}" min="0" max="{{item.system.uses.max}}"
-                               placeholder="0" data-dtype="Number" data-name="system.uses.value">
+                        <input type="text" value="{{item.system.uses.value}}" min="0" max="{{item.system.uses.max}}"
+                               placeholder="0" data-dtype="Number" inputmode="numeric" pattern="[0-9+=\-]*"
+                               data-name="system.uses.value">
                         / {{item.system.uses.max}}
                         {{/if}}
                     </div>
