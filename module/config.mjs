@@ -1191,59 +1191,46 @@ preLocalize("physicalDamageTypes", { sort: true });
  */
 DND5E.damageTypes = {
   acid: {
-    label: "DND5E.DamageAcid",
-    color: "839D50"
+    label: "DND5E.DamageAcid"
   },
   bludgeoning: {
     label: "DND5E.DamageBludgeoning",
-    color: "0000A0",
     isPhysical: true
   },
   cold: {
-    label: "DND5E.DamageCold",
-    color: "ADD8E6"
+    label: "DND5E.DamageCold"
   },
   fire: {
-    label: "DND5E.DamageFire",
-    color: "FF4500"
+    label: "DND5E.DamageFire"
   },
   force: {
-    label: "DND5E.DamageForce",
-    color: "800080"
+    label: "DND5E.DamageForce"
   },
   lightning: {
-    label: "DND5E.DamageLightning",
-    color: "1E90FF"
+    label: "DND5E.DamageLightning"
   },
   necrotic: {
-    label: "DND5E.DamageNecrotic",
-    color: "006400"
+    label: "DND5E.DamageNecrotic"
   },
   piercing: {
     label: "DND5E.DamagePiercing",
-    color: "C0C0C0",
     isPhysical: true
   },
   poison: {
-    label: "DND5E.DamagePoison",
-    color: "8A2BE2"
+    label: "DND5E.DamagePoison"
   },
   psychic: {
-    label: "DND5E.DamagePsychic",
-    color: "FF1493"
+    label: "DND5E.DamagePsychic"
   },
   radiant: {
-    label: "DND5E.DamageRadiant",
-    color: "FFD700"
+    label: "DND5E.DamageRadiant"
   },
   slashing: {
     label: "DND5E.DamageSlashing",
-    color: "8B0000",
     isPhysical: true
   },
   thunder: {
-    label: "DND5E.DamageThunder",
-    color: "708090"
+    label: "DND5E.DamageThunder"
   }
 };
 patchConfig("damageTypes", "label", { since: "DnD5e 2.5", until: "DnD5e 2.7" });
@@ -1259,12 +1246,10 @@ preLocalize("damageTypes", { keys: ["label"], sort: true });
  */
 DND5E.healingTypes = {
   healing: {
-    label: "DND5E.Healing",
-    color: "46C252"
+    label: "DND5E.Healing"
   },
   temphp: {
-    label: "DND5E.HealingTemp",
-    color: "4B66DE"
+    label: "DND5E.HealingTemp"
   }
 };
 patchConfig("healingTypes", "label", { since: "DnD5e 2.5", until: "DnD5e 2.7" });
