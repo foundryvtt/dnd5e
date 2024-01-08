@@ -1173,6 +1173,7 @@ preLocalize("currencies", { keys: ["label", "abbreviation"] });
 
 /**
  * Types of damage that are considered physical.
+ * @deprecated since DnD5e 2.5, available until DnD5e 2.7
  * @enum {string}
  */
 DND5E.physicalDamageTypes = {
@@ -1186,35 +1187,54 @@ preLocalize("physicalDamageTypes", { sort: true });
 
 /**
  * Types of damage the can be caused by abilities.
- * @enum {string}
+ * @enum {{label: string, [isPhysical]: boolean}}
  */
 DND5E.damageTypes = {
-  ...DND5E.physicalDamageTypes,
-  acid: "DND5E.DamageAcid",
-  cold: "DND5E.DamageCold",
-  fire: "DND5E.DamageFire",
-  force: "DND5E.DamageForce",
-  lightning: "DND5E.DamageLightning",
-  necrotic: "DND5E.DamageNecrotic",
-  poison: "DND5E.DamagePoison",
-  psychic: "DND5E.DamagePsychic",
-  radiant: "DND5E.DamageRadiant",
-  thunder: "DND5E.DamageThunder"
+  acid: {
+    label: "DND5E.DamageAcid"
+  },
+  bludgeoning: {
+    label: "DND5E.DamageBludgeoning",
+    isPhysical: true
+  },
+  cold: {
+    label: "DND5E.DamageCold"
+  },
+  fire: {
+    label: "DND5E.DamageFire"
+  },
+  force: {
+    label: "DND5E.DamageForce"
+  },
+  lightning: {
+    label: "DND5E.DamageLightning"
+  },
+  necrotic: {
+    label: "DND5E.DamageNecrotic"
+  },
+  piercing: {
+    label: "DND5E.DamagePiercing",
+    isPhysical: true
+  },
+  poison: {
+    label: "DND5E.DamagePoison"
+  },
+  psychic: {
+    label: "DND5E.DamagePsychic"
+  },
+  radiant: {
+    label: "DND5E.DamageRadiant"
+  },
+  slashing: {
+    label: "DND5E.DamageSlashing",
+    isPhysical: true
+  },
+  thunder: {
+    label: "DND5E.DamageThunder"
+  }
 };
-preLocalize("damageTypes", { sort: true });
-
-/* -------------------------------------------- */
-
-/**
- * Types of damage to which an actor can possess resistance, immunity, or vulnerability.
- * @enum {string}
- * @deprecated
- */
-DND5E.damageResistanceTypes = {
-  ...DND5E.damageTypes,
-  physical: "DND5E.DamagePhysical"
-};
-preLocalize("damageResistanceTypes", { sort: true });
+patchConfig("damageTypes", "label", { since: "DnD5e 2.5", until: "DnD5e 2.7" });
+preLocalize("damageTypes", { keys: ["label"], sort: true });
 
 /* -------------------------------------------- */
 /*  Movement                                    */
@@ -1225,10 +1245,15 @@ preLocalize("damageResistanceTypes", { sort: true });
  * @enum {string}
  */
 DND5E.healingTypes = {
-  healing: "DND5E.Healing",
-  temphp: "DND5E.HealingTemp"
+  healing: {
+    label: "DND5E.Healing"
+  },
+  temphp: {
+    label: "DND5E.HealingTemp"
+  }
 };
-preLocalize("healingTypes");
+patchConfig("healingTypes", "label", { since: "DnD5e 2.5", until: "DnD5e 2.7" });
+preLocalize("healingTypes", { keys: ["label"] });
 
 /* -------------------------------------------- */
 
