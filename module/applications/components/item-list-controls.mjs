@@ -101,6 +101,14 @@ export default class ItemListControlsElement extends HTMLElement {
     return game.user.getFlag("dnd5e", `sheetPrefs.${this.app.object.type}.tabs.${this.tab}`);
   }
 
+  /**
+   * Whether to keep empty sections visible.
+   * @type {boolean}
+   */
+  get keepEmpty() {
+    return this.hasAttribute("keep-empty");
+  }
+
   /* -------------------------------------------- */
   /*  Methods                                     */
   /* -------------------------------------------- */
@@ -223,7 +231,7 @@ export default class ItemListControlsElement extends HTMLElement {
     if ( !items ) return;
     if ( name ) items = items.filter(item => item.name.toLocaleLowerCase(game.i18n.lang).includes(name));
     const elementMap = {};
-    this.list.querySelectorAll(".items-section").forEach(el => el.hidden = true);
+    if ( !this.keepEmpty ) this.list.querySelectorAll(".items-section").forEach(el => el.hidden = true);
     this.list.querySelectorAll(".item-list .item").forEach(el => {
       elementMap[el.dataset.itemId] = el;
       el.hidden = true;

@@ -99,8 +99,8 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
         default: ctx.group = "other";
       }
 
-      // Item toggle state
-      this._prepareItemToggleState(item, ctx);
+      // Individual item preparation
+      this._prepareItem(item, ctx);
 
       // Classify items into types
       if ( item.type === "spell" ) obj.spells.push(item);
@@ -190,7 +190,7 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
    * @param {object} context  Context data for display.
    * @protected
    */
-  _prepareItemToggleState(item, context) {
+  _prepareItem(item, context) {
     if ( item.type === "spell" ) {
       const prep = item.system.preparation || {};
       const isAlways = prep.mode === "always";

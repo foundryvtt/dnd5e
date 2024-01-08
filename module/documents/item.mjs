@@ -497,7 +497,10 @@ export default class Item5e extends SystemDocumentMixin(Item) {
 
     if ( this.hasTarget ) {
       const target = [tgt.value];
-      if ( this.hasAreaTarget ) target.push(C.distanceUnits[tgt.units]);
+      if ( this.hasAreaTarget ) {
+        if ( tgt.units in C.movementUnits ) target.push(game.i18n.localize(`DND5E.Dist${tgt.units.capitalize()}Abbr`));
+        else target.push(C.distanceUnits[tgt.units]);
+      }
       target.push(C.targetTypes[tgt.type]);
       this.labels.target = target.filterJoin(" ");
     }
@@ -507,7 +510,12 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     if ( ["none", ""].includes(rng.units) ) rng.units = null; // Backwards compatibility
     if ( [null, "touch", "self"].includes(rng.units) ) rng.value = rng.long = null;
     if ( this.isActive && rng.units ) {
-      this.labels.range = [rng.value, rng.long ? `/ ${rng.long}` : null, C.distanceUnits[rng.units]].filterJoin(" ");
+      this.labels.range = [rng.value, rng.long ? `/ ${rng.long}` : null];
+      if ( rng.units in C.movementUnits ) {
+        this.labels.range.push(game.i18n.localize(`DND5E.Dist${rng.units.capitalize()}Abbr`));
+      }
+      else this.labels.range.push(C.distanceUnits[rng.units]);
+      this.labels.range = this.labels.range.filterJoin(" ");
     } else this.labels.range = game.i18n.localize("DND5E.None");
 
     // Recharge Label

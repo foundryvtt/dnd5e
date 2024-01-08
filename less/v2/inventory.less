@@ -259,6 +259,7 @@
       align-items: stretch;
 
       &[hidden] { display: none; }
+      .condensed { font-family: var(--dnd5e-font-roboto-condensed); }
 
       .item-name {
         flex: 1;
@@ -366,9 +367,66 @@
       }
 
       /* Item Recovery */
-      .item-recovery {
-        width: 60px;
-        font-family: var(--dnd5e-font-roboto-condensed);
+      .item-recovery { width: 60px; }
+
+      /* Spell School, Cast Time, & To Hit / DC */
+      .item-school, .item-usage, .item-roll { width: 40px; }
+
+      .item-school {
+        --icon-fill: var(--dnd5e-color-gold);
+        display: none;
+        &.item-detail { font-size: var(--font-size-18); }
+      }
+
+      .item-roll {
+        .stacked {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
+
+        &.item-detail { font-weight: bold; }
+        .value { font-size: var(--font-size-14); }
+        .sign { color: var(--color-text-light-6); }
+
+        .ability {
+          text-transform: uppercase;
+          font-size: var(--font-size-10);
+          color: var(--dnd5e-color-gold);
+        }
+      }
+
+      /* Spell Range */
+      .item-range {
+        width: 50px;
+        display: flex;
+        gap: .1875rem;
+        align-self: center;
+        align-items: baseline;
+
+        .value { font-weight: bold; }
+        .unit {
+          color: var(--color-text-light-6);
+          font-size: var(--font-size-12);
+        }
+      }
+
+      /* Spell Target & Formula */
+      .item-target, .item-formula { width: 80px; }
+
+      .item-formula {
+        display: none;
+        flex-direction: column;
+
+        dnd5e-icon {
+          font-size: var(--font-size-14);
+          --icon-fill: var(--color-text-dark-5);
+        }
+
+        .row {
+          display: flex;
+          gap: .1875rem;
+        }
       }
 
       /* Item Controls */
@@ -394,7 +452,11 @@
       }
 
       @container (min-width: 600px) {
-        .item-price { display: flex; }
+        .item-price, .item-formula { display: flex; }
+      }
+
+      @container (min-width: 650px) {
+        .item-school { display: flex; }
       }
     }
 

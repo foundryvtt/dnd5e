@@ -476,6 +476,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
    * @protected
    */
   _filterItems(items, filters) {
+    const spellSchools = new Set(Object.keys(CONFIG.DND5E.spellSchools));
     return items.filter(item => {
 
       // Subclass-specific logic.
@@ -490,10 +491,12 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
       // Spell-specific filters
       if ( filters.has("ritual") && !item.system.properties?.has("ritual") ) return false;
       if ( filters.has("concentration") && !item.system.properties?.has("concentration") ) return false;
+      const schoolFilter = spellSchools.intersection(filters);
+      if ( schoolFilter.size && !schoolFilter.has(item.system.school) ) return false;
       if ( filters.has("prepared") ) {
-        if ( (item.system.level === 0) || ["innate", "always"].includes(item.system.preparation.mode) ) return true;
+        if ( ["innate", "always"].includes(item.system.preparation?.mode) ) return true;
         if ( this.actor.type === "npc" ) return true;
-        return item.system.preparation.prepared;
+        return item.system.preparation?.prepared;
       }
 
       // Equipment-specific filters
@@ -968,7 +971,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
       const list = this._event.target.closest(".item-list"); // Dropped inside an existing list.
       header = list?.previousElementSibling;
     }
-    const mode = header?.dataset ?? {};
+    const mode = header?.closest("[data-level]")?.dataset ?? {};
 
     // Determine the actor's spell slot progressions, if any.
     const progs = Object.values(this.document.classes).reduce((acc, cls) => {
@@ -987,10 +990,11 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
       } else {
         itemData.system.preparation.mode = mode["preparation.mode"];
       }
+      if ( itemData.system.preparation.mode === "prepared" ) itemData.system.preparation.prepared = true;
     }
 
     // Case 2: Drop a leveled spell in a section without a mode.
-    else if ( (mode.level === 0) || !mode["preparation.mode"] ) {
+    else if ( (mode.level === "0") || !mode["preparation.mode"] ) {
       if ( this.document.type === "npc" ) {
         itemData.system.preparation.mode = this.document.system.details.spellLevel ? "prepared" : "innate";
       } else {

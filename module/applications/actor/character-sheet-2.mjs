@@ -300,6 +300,14 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
 
   /* -------------------------------------------- */
 
+  _getLabels() {
+    const labels = super._getLabels();
+    labels.damageAndHealing = { ...CONFIG.DND5E.damageTypes, ...CONFIG.DND5E.healingTypes };
+    return labels;
+  }
+
+  /* -------------------------------------------- */
+
   /** @override */
   _prepareTraits() {
     const traits = {};
@@ -334,32 +342,9 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
   /** @inheritDoc */
   _prepareItems(context) {
     super._prepareItems(context);
-    for ( const entry of context.inventory ) {
-      if ( entry.dataset.type === "container" ) {
-        context.containers = entry.items.sort((a, b) => a.sort - b.sort);
-        entry.items = [];
-      }
-
-      for ( const item of entry.items ) {
-        const ctx = context.itemContext[item.id];
-        if ( ctx.attunement ) {
-          ctx.attunement.applicable = true;
-          ctx.attunement.disabled = !item.isOwner;
-          ctx.attunement.cls = ctx.attunement.cls === "attuned" ? "active" : "";
-        }
-        else ctx.attunement = { applicable: false };
-
-        if ( "equipped" in item.system ) {
-          ctx.equip = {
-            applicable: true,
-            cls: item.system.equipped ? "active" : "",
-            title: `DND5E.${item.system.equipped ? "Equipped" : "Unequipped"}`,
-            disabled: !item.isOwner
-          };
-        }
-        else ctx.equip = { applicable: false };
-      }
-    }
+    context.containers = context.inventory
+      .findSplice(entry => entry.dataset.type === "container")
+      ?.items?.sort((a, b) => a.sort - b.sort);
     context.inventory = context.inventory.filter(entry => entry.items.length);
     context.inventory.push({ label: "DND5E.Contents", items: [], dataset: { type: "all" } });
 
@@ -389,6 +374,92 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
 
     context.features.push({ label: "DND5E.FeaturesOther", items: [], dataset: { type: "other" } });
     context.classes = context.features.findSplice(f => f.isClass)?.items;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  _prepareItem(item, ctx) {
+    const { system } = item;
+
+    // Spells
+    if ( item.type === "spell" ) {
+
+      // Activation
+      const cost = system.activation?.cost;
+      const abbr = {
+        action: "DND5E.ActionAbbr",
+        bonus: "DND5E.BonusActionAbbr",
+        reaction: "DND5E.ReactionAbbr",
+        minute: "DND5E.TimeMinuteAbbr",
+        hour: "DND5E.TimeHourAbbr",
+        day: "DND5E.TimeDayAbbr"
+      }[system.activation.type]
+      ctx.activation = cost && abbr ? `${cost}${game.i18n.localize(abbr)}` : item.labels.activation;
+
+      // Range
+      const units = system.range?.units;
+      if ( units && (units !== "none") ) {
+        if ( units in CONFIG.DND5E.movementUnits ) {
+          ctx.range = {
+            distance: true,
+            value: system.range.value,
+            unit: game.i18n.localize(`DND5E.Dist${units.capitalize()}Abbr`)
+          };
+        }
+        else ctx.range = { distance: false };
+      }
+
+      // To Hit
+      const toHit = parseInt(item.labels.toHit?.replace(/\s+/g, ""));
+      if ( item.hasAttack && !isNaN(toHit) ) {
+        ctx.toHit = {
+          sign: Math.sign(toHit) < 0 ? "-" : "+",
+          abs: Math.abs(toHit)
+        };
+      }
+
+      // Prepared
+      const mode = system.preparation?.mode;
+      if ( (mode === "always") || (mode === "prepared") ) {
+        const isAlways = mode === "always";
+        const prepared = isAlways || system.preparation.prepared;
+        ctx.preparation = {
+          applicable: true,
+          disabled: !item.isOwner || isAlways,
+          cls: prepared ? "active" : "",
+          title: isAlways
+            ? CONFIG.DND5E.spellPreparationModes.always
+            : prepared
+              ? CONFIG.DND5E.spellPreparationModes.prepared
+              : game.i18n.localize("DND5E.SpellUnprepared")
+        };
+      }
+      else ctx.preparation = { applicable: false };
+    }
+
+    // Gear
+    else {
+
+      // Attuned
+      if ( ctx.attunement ) {
+        ctx.attunement.applicable = true;
+        ctx.attunement.disabled = !item.isOwner;
+        ctx.attunement.cls = ctx.attunement.cls === "attuned" ? "active" : "";
+      }
+      else ctx.attunement = { applicable: false };
+
+      // Equipped
+      if ( "equipped" in system ) {
+        ctx.equip = {
+          applicable: true,
+          cls: system.equipped ? "active" : "",
+          title: `DND5E.${system.equipped ? "Equipped" : "Unequipped"}`,
+          disabled: !item.isOwner
+        };
+      }
+      else ctx.equip = { applicable: false };
+    }
   }
 
   /* -------------------------------------------- */

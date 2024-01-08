@@ -50,8 +50,6 @@ export default class IconElement extends HTMLElement {
 
   /** @inheritDoc */
   connectedCallback() {
-    this.replaceChildren();
-
     // Create icon styles
     if ( !this.constructor.#stylesheet ) {
       this.constructor.#stylesheet = new CSSStyleSheet();
@@ -71,7 +69,7 @@ export default class IconElement extends HTMLElement {
     const insertElement = element => {
       if ( !element ) return;
       const clone = element.cloneNode(true);
-      this.#shadowRoot.appendChild(clone);
+      this.#shadowRoot.replaceChildren(clone);
     };
 
     // Insert element immediately if already available, otherwise wait for fetch
