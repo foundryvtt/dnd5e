@@ -268,7 +268,7 @@ export default class DamageRoll extends Roll {
     const content = await renderTemplate(template ?? this.EVALUATION_TEMPLATE, {
       formulas: rolls.map((roll, index) => ({
         formula: `${roll.formula}${index === 0 ? " + @bonus" : ""}`,
-        type: CONFIG.DND5E.damageTypes[roll.options.type] ?? null
+        type: CONFIG.DND5E.damageTypes[roll.options.type]?.label ?? null
       })),
       defaultRollMode,
       rollModes: CONFIG.Dice.rollModes

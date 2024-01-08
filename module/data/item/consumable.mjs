@@ -32,7 +32,7 @@ export default class ConsumableData extends SystemDataModel.mixin(
   /** @inheritdoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
-      type: new ItemTypeField({value: "potion", subtype: false, baseItem: false}, {label: "DND5E.ItemConsumableType"}),
+      type: new ItemTypeField({value: "potion", baseItem: false}, {label: "DND5E.ItemConsumableType"}),
       properties: new SetField(new StringField(), { label: "DND5E.ItemAmmoProperties" }),
       uses: new ActivatedEffectTemplate.ItemUsesField({
         autoDestroy: new BooleanField({required: true, label: "DND5E.ItemDestroyEmpty"})
@@ -114,6 +114,8 @@ export default class ConsumableData extends SystemDataModel.mixin(
     if ( this.type.value === "ammo" ) Object.entries(CONFIG.DND5E.itemProperties).forEach(([k, v]) => {
       if ( v.isPhysical ) valid.add(k);
     });
+    else if ( this.type.value === "scroll" ) CONFIG.DND5E.validProperties.spell
+      .filter(p => p !== "material").forEach(p => valid.add(p));
     return valid;
   }
 }

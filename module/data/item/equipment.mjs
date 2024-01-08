@@ -153,7 +153,7 @@ export default class EquipmentData extends SystemDataModel.mixin(
   get chatProperties() {
     return [
       this.type.label,
-      this.parent.labels?.armor ?? null,
+      (this.isArmor || this.isMountable) ? (this.parent.labels?.armor ?? null) : null,
       this.properties.has("stealthDisadvantage") ? game.i18n.localize("DND5E.Item.PropertyStealthDisadvantage") : null
     ];
   }
@@ -166,7 +166,7 @@ export default class EquipmentData extends SystemDataModel.mixin(
    */
   get tooltipProperties() {
     return [
-      this.parent.labels?.armor,
+      (this.isArmor || this.isMountable) ? (this.parent.labels?.armor ?? null) : null,
       this.properties.has("stealthDisadvantage") ? game.i18n.localize("DND5E.StealthDisadvantage") : null
     ];
   }

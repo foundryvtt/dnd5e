@@ -72,14 +72,14 @@
                 </select>
             </div>
 
-            {{#if lootSubtypes}}
+            {{#if itemSubtypes}}
             <div class="form-group">
                 <label>
                     {{localize "DND5E.ItemLootSubtype"
                                category=(lookup (lookup config.lootTypes system.type.value) "label")}}
                 </label>
                 <select name="system.type.subtype">
-                    {{selectOptions lootSubtypes selected=system.type.subtype blank=""}}
+                    {{selectOptions itemSubtypes selected=system.type.subtype blank=""}}
                 </select>
             </div>
             {{/if}}

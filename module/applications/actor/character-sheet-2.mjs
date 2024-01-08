@@ -300,9 +300,13 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
 
   /* -------------------------------------------- */
 
+  /** @inheritDoc */
   _getLabels() {
     const labels = super._getLabels();
-    labels.damageAndHealing = { ...CONFIG.DND5E.damageTypes, ...CONFIG.DND5E.healingTypes };
+    labels.damageAndHealing = Object.fromEntries(Object.entries({
+      ...CONFIG.DND5E.damageTypes,
+      ...CONFIG.DND5E.healingTypes
+    }).map(([k, { label }]) => [k, label]));
     return labels;
   }
 

@@ -92,7 +92,22 @@ export default class WeaponData extends SystemDataModel.mixin(
    * @type {string[]}
    */
   get chatProperties() {
-    return [this.type.label];
+    return [
+      this.type.label,
+      this.isMountable ? (this.parent.labels?.armor ?? null) : null
+    ];
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Properties displayed in the item tooltip.
+   * @type {string[]}
+   */
+  get tooltipProperties() {
+    return [
+      this.isMountable ? (this.parent.labels?.armor ?? null) : null
+    ];
   }
 
   /* -------------------------------------------- */
