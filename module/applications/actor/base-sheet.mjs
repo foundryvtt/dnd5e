@@ -15,11 +15,9 @@ import SourceConfig from "../source-config.mjs";
 
 import AdvancementManager from "../advancement/advancement-manager.mjs";
 
-import PropertyAttribution from "../property-attribution.mjs";
 import TraitSelector from "./trait-selector.mjs";
 import ProficiencyConfig from "./proficiency-config.mjs";
 import ToolSelector from "./tool-selector.mjs";
-import { simplifyBonus } from "../../utils.mjs";
 import ActorSheetMixin from "./sheet-mixin.mjs";
 
 /**

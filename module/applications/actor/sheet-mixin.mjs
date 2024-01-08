@@ -1,3 +1,5 @@
+import { parseInputDelta } from "../../utils.mjs";
+
 /**
  * Mixin method for common uses between all actor sheets.
  * @param {typeof Document} Base   Document class being extended.
@@ -12,13 +14,8 @@ export default Base => class extends Base {
    */
   _onChangeInputDelta(event) {
     const input = event.target;
-    const value = input.value;
-    if ( ["+", "-"].includes(value[0]) ) {
-      const delta = parseFloat(value);
-      const item = this.actor.items.get(input.closest("[data-item-id]")?.dataset.itemId);
-      if ( item ) input.value = Number(foundry.utils.getProperty(item, input.dataset.name)) + delta;
-      else input.value = Number(foundry.utils.getProperty(this.actor, input.name)) + delta;
-    } else if ( value[0] === "=" ) input.value = value.slice(1);
+    const target = this.actor.items.get(input.closest("[data-item-id]")?.dataset.itemId) ?? this.actor;
+    parseInputDelta(input, target);
   }
 
   /* -------------------------------------------- */

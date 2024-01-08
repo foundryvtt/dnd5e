@@ -299,7 +299,7 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
     if ( !entry ) return null;
 
     // Update the cargo value
-    const key = target.dataset.property ?? "name";
+    const key = target.dataset.name ?? "name";
     const type = target.dataset.dtype;
     let value = target.value;
     if (type === "Number") value = Number(value);
