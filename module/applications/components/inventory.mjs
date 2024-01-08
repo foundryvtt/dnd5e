@@ -280,7 +280,8 @@ export default class InventoryElement extends HTMLElement {
     const itemId = input.closest("[data-item-id]")?.dataset.itemId;
     const item = await this.getItem(itemId);
     if ( !item ) return;
-    parseInputDelta(input, item);
+    const result = parseInputDelta(input, item);
+    if ( result !== undefined ) item.update({ [input.dataset.name]: result });
   }
 
   /* -------------------------------------------- */

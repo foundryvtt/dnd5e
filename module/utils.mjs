@@ -43,7 +43,6 @@ export function parseInputDelta(input, target) {
   else if ( value[0] === "=" ) value = Number(value.slice(1));
   if ( Number.isNaN(value) ) return;
   input.value = value;
-  target.update({ [input.dataset.name]: value });
   return value;
 }
 
