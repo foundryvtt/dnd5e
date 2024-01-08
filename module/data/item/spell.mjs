@@ -80,7 +80,9 @@ export default class SpellData extends SystemDataModel.mixin(
    */
   static _migrateComponentData(source) {
     const components = filteredKeys(source.system?.components ?? {});
-    if ( components.length ) foundry.utils.setProperty(source, "flags.dnd5e.migratedProperties", components);
+    if ( components.length ) {
+      foundry.utils.setProperty(source, "flags.dnd5e.migratedProperties", components);
+    }
   }
 
   /* -------------------------------------------- */
