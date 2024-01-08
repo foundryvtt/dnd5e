@@ -1187,7 +1187,7 @@ preLocalize("physicalDamageTypes", { sort: true });
 
 /**
  * Types of damage the can be caused by abilities.
- * @enum {{label: string, [isPhysical]: boolean}}
+ * @enum {{label: string, color: Color, [isPhysical]: boolean}}
  */
 DND5E.damageTypes = {
   acid: {
