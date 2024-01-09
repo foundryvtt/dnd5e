@@ -166,9 +166,9 @@
         "value": [],
         "custom": ""
       },
-      "toolProf": {
-        "value": [],
-        "custom": ""
+      "dm": {
+        "amount": {},
+        "bypasses": []
       }
     },
     "currency": {
@@ -510,8 +510,7 @@
       "system": {
         "description": {
           "value": "<p>A medium sized blade with a firm crossguard and a leather-wrapped handle. A versatile weapon which makes up in versatility what it lacks in reach.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -597,25 +596,19 @@
           "dt": null,
           "conditions": ""
         },
-        "weaponType": "martialM",
-        "baseItem": "shortsword",
-        "properties": {
-          "fin": true,
-          "lgt": true,
-          "amm": false,
-          "hvy": false,
-          "fir": false,
-          "foc": false,
-          "lod": false,
-          "rch": false,
-          "rel": false,
-          "ret": false,
-          "spc": false,
-          "thr": false,
-          "two": false,
-          "ver": false
+        "properties": [
+          "fin",
+          "lgt"
+        ],
+        "proficient": null,
+        "unidentified": {
+          "description": ""
         },
-        "proficient": null
+        "type": {
+          "value": "martialM",
+          "baseItem": "shortsword"
+        },
+        "container": null
       },
       "sort": 0,
       "flags": {
@@ -646,8 +639,7 @@
       "system": {
         "description": {
           "value": "<p>A small thrown implement crafted with a short wooden shaft and crossed feathres with a sharp wooden or metal tip. Darts can be thrown with sufficient force to puncture the skin.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -733,25 +725,19 @@
           "dt": null,
           "conditions": ""
         },
-        "weaponType": "simpleR",
-        "baseItem": "dart",
-        "properties": {
-          "fin": true,
-          "thr": true,
-          "amm": false,
-          "hvy": false,
-          "fir": false,
-          "foc": false,
-          "lgt": false,
-          "rch": false,
-          "rel": false,
-          "ret": false,
-          "spc": false,
-          "two": false,
-          "ver": false,
-          "lod": false
+        "properties": [
+          "fin",
+          "thr"
+        ],
+        "proficient": null,
+        "unidentified": {
+          "description": ""
         },
-        "proficient": null
+        "type": {
+          "value": "simpleR",
+          "baseItem": "dart"
+        },
+        "container": null
       },
       "sort": 0,
       "flags": {
@@ -782,8 +768,7 @@
       "system": {
         "description": {
           "value": "<p>A small thrown implement crafted with a short wooden shaft and crossed feathres with a sharp wooden or metal tip. Darts can be thrown with sufficient force to puncture the skin.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -856,8 +841,15 @@
           "dc": null,
           "scaling": "spell"
         },
-        "consumableType": "ammo",
-        "properties": {}
+        "properties": [],
+        "unidentified": {
+          "description": ""
+        },
+        "type": {
+          "value": "ammo",
+          "subtype": ""
+        },
+        "container": null
       },
       "sort": 0,
       "flags": {},
@@ -884,8 +876,7 @@
       "system": {
         "description": {
           "value": "<p>A tiny box or other container holding a fragment of a precious relic, saint, or other historical figure that dedicated their life to walk the path of a true believer. A deity imbues the bearer of this artifact with the ability to call forth their power and in doing so spread the faith once more.</p><p><strong>Spellcasting Focus</strong>. A cleric or paladin can use a holy symbol as a spellcasting focus. To use the symbol in this way, the caster must hold it in hand, wear it visibly, or bear it on a shield.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -959,7 +950,6 @@
         },
         "armor": {
           "value": null,
-          "type": "trinket",
           "dex": null
         },
         "hp": {
@@ -968,14 +958,21 @@
           "dt": null,
           "conditions": ""
         },
-        "baseItem": "",
         "speed": {
           "value": null,
           "conditions": ""
         },
         "strength": null,
-        "stealth": false,
-        "proficient": null
+        "proficient": null,
+        "unidentified": {
+          "description": ""
+        },
+        "type": {
+          "value": "trinket",
+          "baseItem": ""
+        },
+        "container": null,
+        "properties": []
       },
       "sort": 0,
       "flags": {
@@ -1006,8 +1003,7 @@
       "system": {
         "description": {
           "value": "<p>Clothes worn by most commoners.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -1081,7 +1077,6 @@
         },
         "armor": {
           "value": null,
-          "type": "clothing",
           "dex": null
         },
         "hp": {
@@ -1090,14 +1085,21 @@
           "dt": null,
           "conditions": ""
         },
-        "baseItem": "",
         "speed": {
           "value": null,
           "conditions": ""
         },
         "strength": null,
-        "stealth": false,
-        "proficient": null
+        "proficient": null,
+        "unidentified": {
+          "description": ""
+        },
+        "type": {
+          "value": "clothing",
+          "baseItem": ""
+        },
+        "container": null,
+        "properties": []
       },
       "sort": 0,
       "flags": {
@@ -1128,8 +1130,7 @@
       "system": {
         "description": {
           "value": "<p>Simple or ostentacious wear, often used by priests and other religious figures for use in rituals and ceremonies.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -1203,7 +1204,6 @@
         },
         "armor": {
           "value": null,
-          "type": "clothing",
           "dex": null
         },
         "hp": {
@@ -1212,14 +1212,21 @@
           "dt": null,
           "conditions": ""
         },
-        "baseItem": "",
         "speed": {
           "value": null,
           "conditions": ""
         },
         "strength": null,
-        "stealth": false,
-        "proficient": null
+        "proficient": null,
+        "unidentified": {
+          "description": ""
+        },
+        "type": {
+          "value": "clothing",
+          "baseItem": ""
+        },
+        "container": null,
+        "properties": []
       },
       "sort": 0,
       "flags": {
@@ -1250,8 +1257,7 @@
       "system": {
         "description": {
           "value": "<p>A backpack can hold one cubic foot or 30 pounds of gear. You can also strap items, such as a bedroll or a coil of rope, to the outside of a backpack.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -1271,8 +1277,7 @@
         "identified": true,
         "capacity": {
           "type": "weight",
-          "value": 30,
-          "weightless": false
+          "value": 30
         },
         "currency": {
           "cp": 0,
@@ -1280,7 +1285,12 @@
           "ep": 0,
           "gp": 0,
           "pp": 0
-        }
+        },
+        "unidentified": {
+          "description": ""
+        },
+        "container": null,
+        "properties": []
       },
       "sort": 0,
       "flags": {
@@ -1311,8 +1321,7 @@
       "system": {
         "description": {
           "value": "<p>A cloth or leather pouch can hold up to 20 sling bullets or 50 blowgun needles, among other things. A compartmentalized pouch for holding spell components is called a component pouch. A pouch can hold up to ⅕ cubic foot or 6 pounds of gear.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -1332,8 +1341,7 @@
         "identified": true,
         "capacity": {
           "type": "weight",
-          "value": 6,
-          "weightless": false
+          "value": 6
         },
         "currency": {
           "cp": 0,
@@ -1341,7 +1349,12 @@
           "ep": 0,
           "gp": 0,
           "pp": 0
-        }
+        },
+        "unidentified": {
+          "description": ""
+        },
+        "container": null,
+        "properties": []
       },
       "sort": 0,
       "flags": {
@@ -1372,8 +1385,7 @@
       "system": {
         "description": {
           "value": "<p>Rations consist of dry foods suitable for extended travel, including jerky, dried fruit, hardtack, and nuts.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -1446,8 +1458,15 @@
           "dc": null,
           "scaling": "spell"
         },
-        "consumableType": "food",
-        "properties": {}
+        "properties": [],
+        "unidentified": {
+          "description": ""
+        },
+        "type": {
+          "value": "food",
+          "subtype": ""
+        },
+        "container": null
       },
       "sort": 0,
       "flags": {
@@ -1478,8 +1497,7 @@
       "system": {
         "description": {
           "value": "<p>A leather hide sewn into an enclosed skin which can contain up to 4 pints of liquid. It weighs 5 pounds when full; a pint of water is approximately 1 pound.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -1552,8 +1570,15 @@
           "dc": null,
           "scaling": "spell"
         },
-        "consumableType": "food",
-        "properties": {}
+        "properties": [],
+        "unidentified": {
+          "description": ""
+        },
+        "type": {
+          "value": "food",
+          "subtype": ""
+        },
+        "container": null
       },
       "sort": 0,
       "flags": {
@@ -1584,8 +1609,7 @@
       "system": {
         "description": {
           "value": "<p>A book containing prayers and incantations dedicated to a specific power for the faithful to follow.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -1599,14 +1623,17 @@
           "value": 25,
           "denomination": "gp"
         },
-        "attunement": 0,
-        "equipped": false,
         "rarity": "",
         "identified": true,
         "type": {
           "value": "",
           "subtype": ""
-        }
+        },
+        "unidentified": {
+          "description": ""
+        },
+        "container": null,
+        "properties": []
       },
       "sort": 0,
       "flags": {
@@ -1637,8 +1664,7 @@
       "system": {
         "description": {
           "value": "<p>When blocks of incense cannot be used or a cheaper alternative is required, people often use these to perfume the air, whether for pleasurable or religious purposes.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -1652,14 +1678,17 @@
           "value": 2,
           "denomination": "sp"
         },
-        "attunement": 0,
-        "equipped": false,
         "rarity": "",
         "identified": true,
         "type": {
           "value": "",
           "subtype": ""
-        }
+        },
+        "unidentified": {
+          "description": ""
+        },
+        "container": null,
+        "properties": []
       },
       "sort": 0,
       "flags": {
@@ -1690,8 +1719,7 @@
       "system": {
         "description": {
           "value": "<p>Using a crowbar grants advantage to Strength checks where the crowbar's leverage can be applied.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -1705,14 +1733,17 @@
           "value": 2,
           "denomination": "gp"
         },
-        "attunement": 0,
-        "equipped": false,
         "rarity": "",
         "identified": true,
         "type": {
           "value": "",
           "subtype": ""
-        }
+        },
+        "unidentified": {
+          "description": ""
+        },
+        "container": null,
+        "properties": []
       },
       "sort": 0,
       "flags": {
@@ -1743,8 +1774,7 @@
       "system": {
         "description": {
           "value": "<p>A tool with heavy metal head mounted ar the right angles at the end of a handle, used for job such as breaking things and driving in nails. </p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -1758,14 +1788,17 @@
           "value": 1,
           "denomination": "gp"
         },
-        "attunement": 0,
-        "equipped": false,
         "rarity": "",
         "identified": true,
         "type": {
           "value": "",
           "subtype": ""
-        }
+        },
+        "unidentified": {
+          "description": ""
+        },
+        "container": null,
+        "properties": []
       },
       "sort": 0,
       "flags": {
@@ -1796,8 +1829,7 @@
       "system": {
         "description": {
           "value": "<p>A metal spike that is drive into a seam in a climbing surface with a climbing hammer. It can also be used like iron spikes to block doors in a pinch.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -1870,8 +1902,15 @@
           "dc": null,
           "scaling": "spell"
         },
-        "consumableType": "trinket",
-        "properties": {}
+        "properties": [],
+        "unidentified": {
+          "description": ""
+        },
+        "type": {
+          "value": "trinket",
+          "subtype": ""
+        },
+        "container": null
       },
       "sort": 0,
       "flags": {
@@ -1902,8 +1941,7 @@
       "system": {
         "description": {
           "value": "<p>A torch burns for 1 hour, providing bright light in a 20-foot radius and dim light for an additional 20 feet. If you make a melee attack with a burning torch and hit, it deals 1 fire damage.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -1981,8 +2019,15 @@
           "dc": null,
           "scaling": "spell"
         },
-        "consumableType": "trinket",
-        "properties": {}
+        "properties": [],
+        "unidentified": {
+          "description": ""
+        },
+        "type": {
+          "value": "trinket",
+          "subtype": ""
+        },
+        "container": null
       },
       "sort": 0,
       "flags": {
@@ -2013,8 +2058,7 @@
       "system": {
         "description": {
           "value": "<p>This small container holds flint, fire steel, and tinder (usually dry cloth soaked in light oil) used to kindle a fire. Using it to light a torch - or anything else with abundant, exposed fuel - takes an action. Lighting any other fire takes 1 minute.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -2028,14 +2072,17 @@
           "value": 5,
           "denomination": "sp"
         },
-        "attunement": 0,
-        "equipped": false,
         "rarity": "",
         "identified": true,
         "type": {
           "value": "",
           "subtype": ""
-        }
+        },
+        "unidentified": {
+          "description": ""
+        },
+        "container": null,
+        "properties": []
       },
       "sort": 0,
       "flags": {
@@ -2066,8 +2113,7 @@
       "system": {
         "description": {
           "value": "<p>Rope, whether made of hemp or silk, has 2 hit points and can be burst with a DC 17 Strength check.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -2140,8 +2186,15 @@
           "dc": 17,
           "scaling": "flat"
         },
-        "consumableType": "trinket",
-        "properties": {}
+        "properties": [],
+        "unidentified": {
+          "description": ""
+        },
+        "type": {
+          "value": "trinket",
+          "subtype": ""
+        },
+        "container": null
       },
       "sort": 0,
       "flags": {
@@ -2171,8 +2224,7 @@
       "system": {
         "description": {
           "value": "<ul><li><strong>Skill Proficiencies:</strong> Insight, Religion</li><li><strong>Languages:</strong> Two of your choice</li><li><strong>Equipment:</strong> A holy symbol, 5 sticks of incense, prayer book, vestments, a set of common clothes, and a pouch containing 15 gp.</li></ul>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -2209,8 +2261,7 @@
       "system": {
         "description": {
           "value": "<p>As a monk, you gain the following class features.</p>\n<h3>Hit Points</h3>\n<p><strong>Hit Dice:</strong> 1d8 per monk level<br /><strong>Hit Points at 1st Level:</strong> 8 + your Constitution modifier<br /><strong>Hit Points at Higher Levels:</strong> 1d8 (or 5) + your Constitution modifier per monk level after 1st</p>\n<h3>Proficiencies</h3>\n<p><strong>Armor:</strong> None<br /><strong>Weapons:</strong> Simple weapons, shortswords<br /><strong>Tools:</strong> Choose one type of artisan's tools or one musical instrument<br /><strong>Saving Throws:</strong> Strength, Dexterity<br /><strong>Skills:</strong> Choose two from Acrobatics, Athletics, History, Insight, Religion, and Stealth</p>\n<h3>Equipment</h3>\n<p>You start with the following equipment, in addition to the equipment granted by your background:</p>\n<ul>\n<li>(a) a shortsword or (b) any simple weapon</li>\n<li>(a) a dungeoneer's pack or (b) an explorer's pack</li>\n<li>10 darts</li>\n</ul>\n<h1>Monk Advancement</h1>\n<table>\n<thead>\n<tr>\n<td>Level</td>\n<td>Proficiency Bonus</td>\n<td>Martial Arts</td>\n<td>Ki Points</td>\n<td>Unarmored Movement</td>\n<td>Features</td>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>1st</td>\n<td>+2</td>\n<td>1d4</td>\n<td>—</td>\n<td>—</td>\n<td>@Compendium[dnd5e.classfeatures.UAvV7N7T4zJhxdfI]{Unarmored Defense}, @Compendium[dnd5e.classfeatures.l50hjTxO2r0iecKw]{Martial Arts}</td>\n</tr>\n<tr>\n<td>2nd</td>\n<td>+2</td>\n<td>1d4</td>\n<td>2</td>\n<td>+10 ft.</td>\n<td>@Compendium[dnd5e.classfeatures.10b6z2W1txNkrGP7]{Ki}, @Compendium[dnd5e.classfeatures.zCeqyQ8uIPNdYJSW]{Unarmored Movement}</td>\n</tr>\n<tr>\n<td>3rd</td>\n<td>+2</td>\n<td>1d4</td>\n<td>3</td>\n<td>+10 ft.</td>\n<td>@Compendium[dnd5e.classfeatures.rtpQdX77dYWbDIOH]{Monastic Tradition}, @Compendium[dnd5e.classfeatures.mzweVbnsJPQiVkAe]{Deflect Missiles}</td>\n</tr>\n<tr>\n<td>4th</td>\n<td>+2</td>\n<td>1d4</td>\n<td>4</td>\n<td>+10 ft.</td>\n<td>@Compendium[dnd5e.classfeatures.s0Cc2zcX0JzIgam5]{Ability Score Improvement}, @Compendium[dnd5e.classfeatures.KQz9bqxVkXjDl8gK]{Slow Fall}</td>\n</tr>\n<tr>\n<td>5th</td>\n<td>+3</td>\n<td>1d6</td>\n<td>5</td>\n<td>+10 ft.</td>\n<td>@Compendium[dnd5e.classfeatures.XogoBnFWmCAHXppo]{Extra Attack}, @Compendium[dnd5e.classfeatures.pvRc6GAu1ok6zihC]{Stunning Strike}</td>\n</tr>\n<tr>\n<td>6th</td>\n<td>+3</td>\n<td>1d6</td>\n<td>6</td>\n<td>+15 ft.</td>\n<td>\n<p>@Compendium[dnd5e.classfeatures.7flZKruSSu6dHg6D]{Ki-Empowered Strikes},</p>\n<p>Monastic Tradition feature</p>\n</td>\n</tr>\n<tr>\n<td>7th</td>\n<td>+3</td>\n<td>1d6</td>\n<td>7</td>\n<td>+15 ft.</td>\n<td>@Compendium[dnd5e.classfeatures.a4P4DNMmH8CqSNkC]{Evasion}, @Compendium[dnd5e.classfeatures.ZmC31XKS4YNENnoc]{Stillness of Mind}</td>\n</tr>\n<tr>\n<td>8th</td>\n<td>+3</td>\n<td>1d6</td>\n<td>8</td>\n<td>+15 ft.</td>\n<td>@Compendium[dnd5e.classfeatures.s0Cc2zcX0JzIgam5]{Ability Score Improvement}</td>\n</tr>\n<tr>\n<td>9th</td>\n<td>+4</td>\n<td>1d6</td>\n<td>9</td>\n<td>+15 ft.</td>\n<td>Unarmored Movement improvement</td>\n</tr>\n<tr>\n<td>10th</td>\n<td>+4</td>\n<td>1d6</td>\n<td>10</td>\n<td>+20 ft.</td>\n<td>@Compendium[dnd5e.classfeatures.bqWA7t9pDELbNRkp]{Purity of Body}</td>\n</tr>\n<tr>\n<td>11th</td>\n<td>+4</td>\n<td>1d8</td>\n<td>11</td>\n<td>+20 ft.</td>\n<td>Monastic Tradition feature</td>\n</tr>\n<tr>\n<td>12th</td>\n<td>+4</td>\n<td>1d8</td>\n<td>12</td>\n<td>+20 ft.</td>\n<td>@Compendium[dnd5e.classfeatures.s0Cc2zcX0JzIgam5]{Ability Score Improvement}</td>\n</tr>\n<tr>\n<td>13th</td>\n<td>+5</td>\n<td>1d8</td>\n<td>13</td>\n<td>+20 ft.</td>\n<td>@Compendium[dnd5e.classfeatures.XjuGBeB8Y0C3A5D4]{Tongue of the Sun and Moon}</td>\n</tr>\n<tr>\n<td>14th</td>\n<td>+5</td>\n<td>1d8</td>\n<td>14</td>\n<td>+25 ft.</td>\n<td>@Compendium[dnd5e.classfeatures.7D2EkLdISwShEDlN]{Diamond Soul}</td>\n</tr>\n<tr>\n<td>15th</td>\n<td>+5</td>\n<td>1d8</td>\n<td>15</td>\n<td>+25 ft.</td>\n<td>@Compendium[dnd5e.classfeatures.gDH8PMrKvLHaNmEI]{Timeless Body}</td>\n</tr>\n<tr>\n<td>16th</td>\n<td>+5</td>\n<td>1d8</td>\n<td>16</td>\n<td>+25 ft.</td>\n<td>@Compendium[dnd5e.classfeatures.s0Cc2zcX0JzIgam5]{Ability Score Improvement}</td>\n</tr>\n<tr>\n<td>17th</td>\n<td>+6</td>\n<td>1d10</td>\n<td>17</td>\n<td>+25 ft.</td>\n<td>Monastic Tradition feature</td>\n</tr>\n<tr>\n<td>18th</td>\n<td>+6</td>\n<td>1d10</td>\n<td>18</td>\n<td>+30 ft.</td>\n<td>@Compendium[dnd5e.classfeatures.3jwFt3hSqDswBlOH]{Empty Body}</td>\n</tr>\n<tr>\n<td>19th</td>\n<td>+6</td>\n<td>1d10</td>\n<td>19</td>\n<td>+30 ft.</td>\n<td>@Compendium[dnd5e.classfeatures.s0Cc2zcX0JzIgam5]{Ability Score Improvement}</td>\n</tr>\n<tr>\n<td>20th</td>\n<td>+6</td>\n<td>1d10</td>\n<td>20</td>\n<td>+30 ft.</td>\n<td>@Compendium[dnd5e.classfeatures.mQNPg89YIs7g5tG4]{Perfect Self}</td>\n</tr>\n</tbody>\n</table>\n<h1>Monastic Traditions</h1>\n<p>Three traditions of monastic pursuit are common in the monasteries scattered across the multiverse. Most monasteries practice one tradition exclusively, but a few honor the three traditions and instruct each monk according to his or her aptitude and interest. All three traditions rely on the same basic techniques, diverging as the student grows more adept. Thus, a monk need choose a tradition only upon reaching 3rd level.</p>\n<p>@Compendium[dnd5e.classfeatures.IvlpKMXX3PmW1NY2]{Way of the Open Hand}</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -2865,8 +2916,7 @@
       "system": {
         "description": {
           "value": "<p>Beginning at 1st Level, while you are wearing no armor and not wielding a Shield, your AC equals 10 + your Dexterity modifier + your Wisdom modifier.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -2930,13 +2980,15 @@
         },
         "type": {
           "value": "class",
-          "subtype": ""
+          "subtype": "",
+          "baseItem": ""
         },
         "requirements": "Monk 1",
         "recharge": {
           "value": null,
           "charged": false
-        }
+        },
+        "properties": []
       },
       "flags": {
         "dnd5e": {
@@ -2967,12 +3019,13 @@
             "startTurn": null
           },
           "icon": "icons/magic/control/silhouette-hold-change-blue.webp",
-          "label": "Unarmored Defense",
           "origin": "Item.cOdcNWy4hII029DT",
           "transfer": true,
           "flags": {},
           "tint": null,
-          "sort": 0,
+          "name": "Unarmored Defense",
+          "description": "",
+          "statuses": [],
           "_key": "!actors.items.effects!125qFnXvT9z0iOic.lVsKpEajeU5R83a5.R5ro4AuNjcdWD56O"
         }
       ],
@@ -2998,8 +3051,7 @@
       "system": {
         "description": {
           "value": "<p>At 1st level, your practice of martial arts gives you mastery of combat styles that use and monk weapons, which are shortswords and any simple melee weapons that don't have the two-handed or heavy property. You gain the following benefits while you are unarmed or wielding only monk weapons and you aren't wearing armor or wielding a shield:</p>\n<ul>\n<li>\n<p>You can use Dexterity instead of Strength for the attack and damage rolls of your unarmed strikes and monk weapons.</p>\n</li>\n<li>\n<p>You can roll a d4 in place of the normal damage of your unarmed strike or monk weapon. This die changes as you gain monk levels, as shown in the Martial Arts column of the Monk table.</p>\n</li>\n<li>\n<p>When you use the Attack action with an unarmed strike or a monk weapon on your turn, you can make one unarmed strike as a bonus action. For example, if you take the Attack action and attack with a quarterstaff, you can also make an unarmed strike as a bonus action, assuming you haven't already taken a bonus action this turn.</p>\n</li>\n</ul>\n<p>Certain monasteries use specialized forms of the monk weapons. For example, you might use a club that is two lengths of wood connected by a short chain (called a nunchaku) or a sickle with a shorter, straighter blade (called a kama). Whatever name you use for a monk weapon, you can use the game statistics provided for the weapon.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -3063,13 +3115,15 @@
         },
         "type": {
           "value": "class",
-          "subtype": ""
+          "subtype": "",
+          "baseItem": ""
         },
         "requirements": "Monk 1",
         "recharge": {
           "value": null,
           "charged": false
-        }
+        },
+        "properties": []
       },
       "flags": {
         "dnd5e": {
@@ -3099,8 +3153,7 @@
       "system": {
         "description": {
           "value": "<p></p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -3186,28 +3239,18 @@
           "dt": null,
           "conditions": ""
         },
-        "weaponType": "natural",
-        "baseItem": "",
-        "properties": {
-          "ada": false,
-          "amm": false,
-          "fin": true,
-          "fir": false,
-          "foc": false,
-          "hvy": false,
-          "lgt": false,
-          "lod": false,
-          "mgc": false,
-          "rch": false,
-          "rel": false,
-          "ret": false,
-          "sil": false,
-          "spc": false,
-          "thr": false,
-          "two": false,
-          "ver": false
+        "properties": [
+          "fin"
+        ],
+        "proficient": null,
+        "unidentified": {
+          "description": ""
         },
-        "proficient": null
+        "type": {
+          "value": "natural",
+          "baseItem": ""
+        },
+        "container": null
       },
       "effects": [],
       "folder": null,
@@ -3239,8 +3282,7 @@
       "system": {
         "description": {
           "value": "<p>Your halfling character has a number of traits in common with all other halflings.</p><p><em><strong>Ability Score Increase.</strong></em> Your Dexterity score increases by 2.</p><p><em><strong>Age.</strong></em> A halfling reaches adulthood at the age of 20 and generally lives into the middle of his or her second century.</p><p><em><strong>Alignment.</strong></em> Most halflings are lawful good. As a rule, they are good-hearted and kind, hate to see others in pain, and have no tolerance for oppression. They are also very orderly and traditional, leaning heavily on the support of their community and the comfort of their old ways.</p><p><em><strong>Size.</strong></em> Halflings average about 3 feet tall and weigh about 40 pounds. Your size is Small.</p><p><em><strong>Speed.</strong></em> Your base walking speed is 25 feet.</p><p><em><strong>Lucky.</strong></em> When you roll a 1 on the d20 for an attack roll, ability check, or saving throw, you can reroll the die and must use the new roll.</p><p><em><strong>Brave.</strong></em> You have advantage on saving throws against being frightened.</p><p><em><strong>Halfling Nimbleness.</strong></em> You can move through the space of any creature that is of a size larger than yours.</p><p><em><strong>Languages.</strong></em> You can speak, read, and write Common and Halfling. The Halfling language isn't secret, but halflings are loath to share it with others. They write very little, so they don't have a rich body of literature. Their oral tradition, however, is very strong. Almost all halflings speak Common to converse with the people in whose lands they dwell or through which they are traveling.</p><h5>Lightfoot</h5><p>As a lightfoot halfling, you can easily hide from notice, even using other people as cover. You're inclined to be affable and get along well with others.</p><p>Lightfoots are more prone to wanderlust than other halflings, and often dwell alongside other races or take up a nomadic life.</p><p><em><strong>Ability Score Increase.</strong></em> Your Charisma score increases by 1.</p><p><em><strong>Naturally Stealthy.</strong></em> You can attempt to hide even when you are obscured only by a creature that is at least one size larger than you.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -3398,8 +3440,7 @@
       "system": {
         "description": {
           "value": "<p>When you roll a 1 on the d20 for an attack roll, ability check, or saving throw, you can reroll the die and must use the new roll.</p><section id=\"secret-S04TPyvUh05Dz0Ng\" class=\"secret foundry-note\"><p><strong>Foundry Note</strong></p><p>This property can be enabled on your character sheet in the Special Traits configuration on the Attributes tab.</p></section>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -3463,13 +3504,15 @@
         },
         "type": {
           "value": "race",
-          "subtype": ""
+          "subtype": "",
+          "baseItem": ""
         },
         "requirements": "Halfling",
         "recharge": {
           "value": null,
           "charged": false
-        }
+        },
+        "properties": []
       },
       "flags": {
         "dnd5e": {
@@ -3500,12 +3543,13 @@
             "startTurn": null
           },
           "icon": "icons/sundries/gaming/dice-runed-brown.webp",
-          "label": "Lucky",
           "origin": "Item.LOMdcNAGWh5xpfm4",
           "transfer": true,
           "flags": {},
           "tint": null,
-          "sort": 0,
+          "name": "Lucky",
+          "description": "",
+          "statuses": [],
           "_key": "!actors.items.effects!125qFnXvT9z0iOic.tUz8GlMnsZW70sFM.3ZXTUDl62zDpvpai"
         }
       ],
@@ -3531,8 +3575,7 @@
       "system": {
         "description": {
           "value": "<p>You have advantage on saving throws against being frightened.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -3596,13 +3639,15 @@
         },
         "type": {
           "value": "race",
-          "subtype": ""
+          "subtype": "",
+          "baseItem": ""
         },
         "requirements": "Halfling",
         "recharge": {
           "value": null,
           "charged": false
-        }
+        },
+        "properties": []
       },
       "flags": {
         "dnd5e": {
@@ -3634,8 +3679,7 @@
       "system": {
         "description": {
           "value": "<p>You can move through the space of any creature that is of a size larger than yours.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -3699,13 +3743,15 @@
         },
         "type": {
           "value": "race",
-          "subtype": ""
+          "subtype": "",
+          "baseItem": ""
         },
         "requirements": "Halfling",
         "recharge": {
           "value": null,
           "charged": false
-        }
+        },
+        "properties": []
       },
       "flags": {
         "dnd5e": {
@@ -3737,8 +3783,7 @@
       "system": {
         "description": {
           "value": "<p>You can attempt to hide even when you are obscured only by a creature that is at least one size larger than you.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -3802,13 +3847,15 @@
         },
         "type": {
           "value": "race",
-          "subtype": ""
+          "subtype": "",
+          "baseItem": ""
         },
         "requirements": "Lightfoot Halfling",
         "recharge": {
           "value": null,
           "charged": false
-        }
+        },
+        "properties": []
       },
       "flags": {
         "dnd5e": {
@@ -3848,7 +3895,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787232144,
-    "modifiedTime": 1704466714775,
+    "modifiedTime": 1704823963924,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!125qFnXvT9z0iOic"
