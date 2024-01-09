@@ -209,8 +209,41 @@
   }
 
   /* ---------------------------------- */
-  /*  Entries                           */
+  /*  Spell Slots                       */
   /* ---------------------------------- */
+
+  .spells-list .items-section {
+    position: relative;
+
+    .pips {
+      position: absolute;
+      right: .5rem;
+      top: -.5rem;
+      display: flex;
+      align-items: center;
+      padding: 0;
+      gap: 1px;
+
+      .pip {
+        border: none;
+        background: none;
+        --icon-size: 13px;
+        --icon-fill: var(--dnd5e-color-light-gray);
+        box-shadow: none;
+        filter: drop-shadow(0 0 1px var(--dnd5e-color-black));
+
+        &.filled { --icon-fill: var(--dnd5e-color-gold); }
+        &:hover { filter: drop-shadow(0 0 2px var(--dnd5e-color-gold)); }
+      }
+    }
+  }
+}
+
+/* ---------------------------------- */
+/*  Entries                           */
+/* ---------------------------------- */
+
+.dnd5e2 {
 
   .items-list {
     display: flex;
@@ -432,6 +465,13 @@
     }
 
     .items-header {
+      .config-button {
+        position: absolute;
+        inset: .5rem 1.5rem auto auto;
+        color: var(--dnd5e-color-gold);
+        font-size: var(--font-size-12);
+      }
+
       .item-price {
         justify-content: center;
         padding: 0;
@@ -459,4 +499,5 @@
 
 .dnd5e2 .editable dnd5e-inventory {
   .middle .attunement { padding-right: 0; }
+  .items-section .pips { display: none; }
 }

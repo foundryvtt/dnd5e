@@ -68,7 +68,8 @@ export default class ConsumableData extends SystemDataModel.mixin(
   /** @inheritDoc */
   prepareDerivedData() {
     super.prepareDerivedData();
-    this.type.label = CONFIG.DND5E.consumableTypes[this.type.value];
+    const config = CONFIG.DND5E.consumableTypes[this.type.value];
+    this.type.label = this.type.subtype ? config.subtypes[this.type.subtype] : config.label;
   }
 
   /* -------------------------------------------- */

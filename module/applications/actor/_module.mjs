@@ -10,6 +10,7 @@ export {default as ActorAbilityConfig} from "./ability-config.mjs";
 export {default as ActorArmorConfig} from "./armor-config.mjs";
 export {default as ActorHitDiceConfig} from "./hit-dice-config.mjs";
 export {default as ActorHitPointsConfig} from "./hit-points-config.mjs";
+export {default as ActorSpellSlotsConfig} from "./spell-slots-config.mjs";
 export {default as ActorInitiativeConfig} from "./initiative-config.mjs";
 export {default as LongRestDialog} from "./long-rest.mjs";
 export {default as ActorMovementConfig} from "./movement-config.mjs";

@@ -398,6 +398,21 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
 
     context.features.push({ label: "DND5E.FeaturesOther", items: [], dataset: { type: "other" } });
     context.classes = context.features.findSplice(f => f.isClass)?.items;
+
+    // Spell slots
+    const plurals = new Intl.PluralRules(game.i18n.lang, { type: "ordinal" });
+    context.spellbook.forEach(section => {
+      if ( !section.usesSlots ) return;
+      const spells = foundry.utils.getProperty(this.actor.system.spells, section.prop);
+      const max = spells.override ?? spells.max ?? 0;
+      section.pips = Array.fromRange(max, 1).map(n => {
+        const label = game.i18n.format(`DND5E.SpellSlotN.${plurals.select(n)}`, { n });
+        const classes = ["pip"];
+        const filled = spells.value >= n;
+        if ( filled ) classes.push("filled");
+        return { n, label, filled, tooltip: label, classes: classes.join(" ") };
+      });
+    });
   }
 
   /* -------------------------------------------- */
@@ -499,6 +514,13 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
     html.find("proficiency-cycle").on("change", this._onChangeInput.bind(this));
     html.find(".sidebar .collapser").on("click", this._onToggleSidebar.bind(this));
     this.form.querySelectorAll(".item-tooltip").forEach(this._applyItemTooltips.bind(this));
+
+    // Prevent default middle-click scrolling when locking a tooltip.
+    this.form.addEventListener("pointerdown", event => {
+      if ( (event.button === 1) && document.getElementById("tooltip")?.classList.contains("active") ) {
+        event.preventDefault();
+      }
+    });
 
     if ( this.isEditable ) {
       html.find(".meter > .hit-points").on("click", event => this._toggleEditHP(event, true));

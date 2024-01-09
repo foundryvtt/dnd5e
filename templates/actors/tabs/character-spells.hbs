@@ -67,7 +67,25 @@
                 <div class="item-header item-roll">{{ localize "DND5E.SpellHeader.Roll" }}</div>
                 <div class="item-header item-formula">{{ localize "DND5E.SpellHeader.Formula" }}</div>
                 <div class="item-header item-controls"></div>
+                {{#if (and usesSlots editable)}}
+                <a class="config-button" data-action="spellSlots" data-tooltip="DND5E.SpellSlotsConfig"
+                   aria-label="{{ localize "DND5E.SpellSlotsConfig" }}">
+                    <i class="fas fa-cog"></i>
+                </a>
+                {{/if}}
             </div>
+
+            {{!-- Spell Slots --}}
+            {{#if usesSlots}}
+            <div class="pips" data-prop="system.spells.{{ prop }}.value">
+                {{#each pips}}
+                <button type="button" class="{{ classes }}" data-n="{{ n }}" data-tooltip="{{ tooltip }}"
+                        aria-label="{{ label }}" aria-pressed="{{ filled }}">
+                    <dnd5e-icon src="systems/dnd5e/icons/svg/spell-slot.svg"></dnd5e-icon>
+                </button>
+                {{/each}}
+            </div>
+            {{/if}}
 
             {{!-- Section Contents --}}
             <ol class="item-list unlist">
