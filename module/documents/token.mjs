@@ -1,4 +1,3 @@
-import { MappingField } from "../data/fields.mjs";
 import { staticID } from "../utils.mjs";
 
 /**
@@ -38,39 +37,6 @@ export default class TokenDocument5e extends TokenDocument {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
-  static _getTrackedAttributesFromSchema(schema, _path=[]) {
-    const isSchema = field => field instanceof foundry.data.fields.SchemaField;
-    const isModel = field => field instanceof foundry.data.fields.EmbeddedDataField;
-    const attributes = {bar: [], value: []};
-    for ( const [name, field] of Object.entries(schema.fields) ) {
-      const p = _path.concat([name]);
-      if ( field instanceof foundry.data.fields.NumberField ) attributes.value.push(p);
-      if ( isSchema(field) || isModel(field) ) {
-        const schema = isModel(field) ? field.model.schema : field;
-        const isBar = schema.has("value") && schema.has("max");
-        if ( isBar ) attributes.bar.push(p);
-        else {
-          const inner = this._getTrackedAttributesFromSchema(schema, p);
-          attributes.bar.push(...inner.bar);
-          attributes.value.push(...inner.value);
-        }
-      }
-      if ( !(field instanceof MappingField) ) continue;
-      if ( !field.initialKeys || foundry.utils.isEmpty(field.initialKeys) ) continue;
-      if ( !isSchema(field.model) && !isModel(field.model) ) continue;
-      const keys = Array.isArray(field.initialKeys) ? field.initialKeys : Object.keys(field.initialKeys);
-      for ( const key of keys ) {
-        const inner = this._getTrackedAttributesFromSchema(field.model, p.concat([key]));
-        attributes.bar.push(...inner.bar);
-        attributes.value.push(...inner.value);
-      }
-    }
-    return attributes;
-  }
-
-  /* -------------------------------------------- */
-
   /**
    * Get an Array of attribute choices which are suitable for being consumed by an item usage.
    * @param {object} data  The actor data.
@@ -78,26 +44,6 @@ export default class TokenDocument5e extends TokenDocument {
    */
   static getConsumedAttributes(data) {
     return CONFIG.DND5E.consumableResources;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Traverse the configured allowed attributes to see if the provided one matches.
-   * @param {object} allowed  The allowed attributes structure.
-   * @param {string[]} attrs  The attributes list to test.
-   * @returns {boolean}       Whether the given attribute is allowed.
-   * @private
-   */
-  static _isAllowedAttribute(allowed, attrs) {
-    let allow = allowed;
-    for ( const attr of attrs ) {
-      if ( allow === undefined ) return false;
-      if ( allow === true ) return true;
-      if ( allow["*"] !== undefined ) allow = allow["*"];
-      else allow = allow[attr];
-    }
-    return allow !== undefined;
   }
 
   /* -------------------------------------------- */
