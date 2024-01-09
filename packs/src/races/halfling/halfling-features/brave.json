@@ -8,14 +8,12 @@
   "system": {
     "description": {
       "value": "<p>You have advantage on saving throws against being frightened.</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
       "book": "SRD 5.1",
       "page": "",
-      "uuid": "",
       "license": "CC-BY-4.0"
     },
     "activation": {
@@ -51,7 +49,8 @@
     "consume": {
       "type": "",
       "target": null,
-      "amount": null
+      "amount": null,
+      "scale": false
     },
     "ability": "",
     "actionType": "",
@@ -79,7 +78,8 @@
     "recharge": {
       "value": null,
       "charged": false
-    }
+    },
+    "properties": []
   },
   "flags": {},
   "img": "icons/skills/melee/unarmed-punch-fist.webp",
@@ -91,7 +91,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787234462,
-    "modifiedTime": 1701908944853,
+    "modifiedTime": 1704824711070,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!7Yoo9hG0hfPSmBoC"

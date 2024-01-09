@@ -8,8 +8,7 @@
   "system": {
     "description": {
       "value": "<p>You can cast @Compendium[dnd5e.spells.yqUDoxk4x0NWG5Bz]{Slow} once using a warlock spell slot. You can't do so again until you finish a long rest.</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -31,7 +30,8 @@
       "value": 40,
       "width": null,
       "units": "ft",
-      "type": "cube"
+      "type": "cube",
+      "prompt": true
     },
     "range": {
       "value": 120,
@@ -42,12 +42,14 @@
       "value": 1,
       "max": "1",
       "per": "lr",
-      "recovery": ""
+      "recovery": "",
+      "prompt": true
     },
     "consume": {
       "type": "",
       "target": null,
-      "amount": null
+      "amount": null,
+      "scale": false
     },
     "ability": "",
     "actionType": "save",
@@ -75,7 +77,9 @@
     "recharge": {
       "value": null,
       "charged": false
-    }
+    },
+    "crewed": false,
+    "properties": []
   },
   "flags": {},
   "img": "icons/magic/time/clock-stopwatch-white-blue.webp",
@@ -87,7 +91,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787234350,
-    "modifiedTime": 1701911145660,
+    "modifiedTime": 1704824715582,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!DjXi0IkCTbJx1gsp"

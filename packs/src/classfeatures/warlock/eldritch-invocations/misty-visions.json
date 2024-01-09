@@ -8,8 +8,7 @@
   "system": {
     "description": {
       "value": "<p>You can cast @Compendium[dnd5e.spells.BrBZdCCrJRIVg7YX]{Silent Image} at will, without expending a spell slot or material components.</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -31,7 +30,8 @@
       "value": 15,
       "width": null,
       "units": "ft",
-      "type": "cube"
+      "type": "cube",
+      "prompt": true
     },
     "range": {
       "value": 60,
@@ -42,12 +42,14 @@
       "value": null,
       "max": "",
       "per": null,
-      "recovery": ""
+      "recovery": "",
+      "prompt": true
     },
     "consume": {
       "type": "",
       "target": null,
-      "amount": null
+      "amount": null,
+      "scale": false
     },
     "ability": "",
     "actionType": "abil",
@@ -75,7 +77,9 @@
     "recharge": {
       "value": null,
       "charged": false
-    }
+    },
+    "crewed": false,
+    "properties": []
   },
   "flags": {},
   "img": "icons/creatures/webs/web-spider-glowing-purple.webp",
@@ -87,7 +91,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787234414,
-    "modifiedTime": 1701911147543,
+    "modifiedTime": 1704824718397,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!k5DU0mMuYVHejiqz"

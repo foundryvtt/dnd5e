@@ -8,14 +8,12 @@
   "system": {
     "description": {
       "value": "<p>You can use your action to exhale destructive energy. Your draconic ancestry determines the size, shape, and damage type of the exhalation.</p><p>When you use your breath weapon, each creature in the area of the exhalation must make a dexterity saving throw. The DC for this saving throw equals 8 + your Constitution modifier + your proficiency bonus. A creature takes 2d6 acid damage on a failed save, and half as much damage on a successful one. The damage increases to 3d6 at 6th level, 4d6 at 11th level, and 5d6 at 16th level.</p><p>After you use your breath weapon, you can't use it again until you complete a short or long rest.</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
       "book": "SRD 5.1",
       "page": "",
-      "uuid": "",
       "license": "CC-BY-4.0"
     },
     "activation": {
@@ -51,7 +49,8 @@
     "consume": {
       "type": "",
       "target": null,
-      "amount": null
+      "amount": null,
+      "scale": false
     },
     "ability": "dex",
     "actionType": "save",
@@ -84,7 +83,8 @@
     "recharge": {
       "value": null,
       "charged": false
-    }
+    },
+    "properties": []
   },
   "flags": {},
   "img": "icons/magic/acid/projectile-smoke-glowing.webp",
@@ -94,7 +94,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787234466,
-    "modifiedTime": 1701908624117,
+    "modifiedTime": 1704824711260,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "sort": 0,

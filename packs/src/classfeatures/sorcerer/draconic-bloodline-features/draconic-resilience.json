@@ -8,8 +8,7 @@
   "system": {
     "description": {
       "value": "<p>As magic flows through your body, it causes physical traits of your dragon ancestors to emerge. At 1st level, your hit point maximum increases by 1 and increases by 1 again whenever you gain a level in this class.</p><p>Additionally, parts of your skin are covered by a thin sheen of dragon-like scales. When you aren't wearing armor, your AC equals 13 + your Dexterity modifier.</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -31,7 +30,8 @@
       "value": null,
       "width": null,
       "units": "",
-      "type": ""
+      "type": "",
+      "prompt": true
     },
     "range": {
       "value": null,
@@ -42,12 +42,14 @@
       "value": null,
       "max": "",
       "per": null,
-      "recovery": ""
+      "recovery": "",
+      "prompt": true
     },
     "consume": {
       "type": "",
       "target": null,
-      "amount": null
+      "amount": null,
+      "scale": false
     },
     "ability": "",
     "actionType": "",
@@ -75,7 +77,9 @@
     "recharge": {
       "value": null,
       "charged": false
-    }
+    },
+    "crewed": false,
+    "properties": []
   },
   "flags": {},
   "img": "icons/creatures/claws/claw-scaled-red.webp",
@@ -101,12 +105,13 @@
         "startTurn": null
       },
       "icon": "icons/creatures/claws/claw-scaled-red.webp",
-      "label": "Draconic Resilience",
       "origin": "Item.MW1ExvBLm8Hg82aA",
       "transfer": true,
       "flags": {},
       "tint": null,
-      "sort": 0,
+      "name": "Draconic Resilience",
+      "description": "",
+      "statuses": [],
       "_key": "!items.effects!MW1ExvBLm8Hg82aA.Pu89Tsgy2FJjYPQi"
     }
   ],
@@ -117,7 +122,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787234366,
-    "modifiedTime": 1701910863370,
+    "modifiedTime": 1704824716333,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!MW1ExvBLm8Hg82aA"

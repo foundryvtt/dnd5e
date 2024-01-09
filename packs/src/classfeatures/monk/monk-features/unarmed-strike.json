@@ -6,8 +6,7 @@
   "system": {
     "description": {
       "value": "<p></p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -39,7 +38,8 @@
       "value": null,
       "width": null,
       "units": "",
-      "type": ""
+      "type": "",
+      "prompt": true
     },
     "range": {
       "value": null,
@@ -50,12 +50,14 @@
       "value": null,
       "max": "",
       "per": null,
-      "recovery": ""
+      "recovery": "",
+      "prompt": true
     },
     "consume": {
       "type": "",
       "target": null,
-      "amount": null
+      "amount": null,
+      "scale": false
     },
     "ability": "",
     "actionType": "mwak",
@@ -89,28 +91,19 @@
       "dt": null,
       "conditions": ""
     },
-    "weaponType": "natural",
-    "baseItem": "",
-    "properties": {
-      "ada": false,
-      "amm": false,
-      "fin": true,
-      "fir": false,
-      "foc": false,
-      "hvy": false,
-      "lgt": false,
-      "lod": false,
-      "mgc": false,
-      "rch": false,
-      "rel": false,
-      "ret": false,
-      "sil": false,
-      "spc": false,
-      "thr": false,
-      "two": false,
-      "ver": false
+    "properties": [
+      "fin"
+    ],
+    "proficient": 1,
+    "unidentified": {
+      "description": ""
     },
-    "proficient": true
+    "type": {
+      "value": "natural",
+      "baseItem": ""
+    },
+    "container": null,
+    "crewed": false
   },
   "effects": [],
   "folder": "TMmNG8ujFDBEWXRe",
@@ -124,7 +117,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787234400,
-    "modifiedTime": 1701910312700,
+    "modifiedTime": 1704824717825,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!eGxoNmSMWKNzChCO"

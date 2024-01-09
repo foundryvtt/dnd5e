@@ -8,14 +8,12 @@
   "system": {
     "description": {
       "value": "<p>You have resistance to fire damage.</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
       "book": "SRD 5.1",
       "page": "",
-      "uuid": "",
       "license": "CC-BY-4.0"
     },
     "activation": {
@@ -51,7 +49,8 @@
     "consume": {
       "type": "",
       "target": null,
-      "amount": null
+      "amount": null,
+      "scale": false
     },
     "ability": null,
     "actionType": "",
@@ -79,7 +78,8 @@
     "recharge": {
       "value": null,
       "charged": false
-    }
+    },
+    "properties": []
   },
   "flags": {},
   "img": "icons/magic/air/fog-gas-smoke-swirling-orange.webp",
@@ -105,12 +105,13 @@
         "startTurn": null
       },
       "icon": "icons/magic/air/fog-gas-smoke-swirling-orange.webp",
-      "label": "Hellish Resistance",
       "origin": "Item.q71Pe1F8RRtEJt8Q",
       "transfer": true,
       "flags": {},
       "tint": null,
-      "sort": 0,
+      "name": "Hellish Resistance",
+      "description": "",
+      "statuses": [],
       "_key": "!items.effects!q71Pe1F8RRtEJt8Q.0rAhv7npcNmDcQ3B"
     }
   ],
@@ -121,7 +122,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787234473,
-    "modifiedTime": 1701908900165,
+    "modifiedTime": 1704824711386,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!q71Pe1F8RRtEJt8Q"

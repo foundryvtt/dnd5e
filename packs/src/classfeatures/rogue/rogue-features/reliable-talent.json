@@ -8,8 +8,7 @@
   "system": {
     "description": {
       "value": "<p>By 11th level, you have refined your chosen skills until they approach perfection. Whenever you make an ability check that lets you add your proficiency bonus, you can treat a d20 roll of 9 or lower as a 10.</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -31,7 +30,8 @@
       "value": null,
       "width": null,
       "units": "",
-      "type": ""
+      "type": "",
+      "prompt": true
     },
     "range": {
       "value": null,
@@ -42,12 +42,14 @@
       "value": null,
       "max": "",
       "per": null,
-      "recovery": ""
+      "recovery": "",
+      "prompt": true
     },
     "consume": {
       "type": "",
       "target": null,
-      "amount": null
+      "amount": null,
+      "scale": false
     },
     "ability": "",
     "actionType": "",
@@ -75,7 +77,9 @@
     "recharge": {
       "value": null,
       "charged": false
-    }
+    },
+    "crewed": false,
+    "properties": []
   },
   "flags": {},
   "img": "icons/skills/ranged/target-bullseye-arrow-glowing.webp",
@@ -101,12 +105,13 @@
         "startTurn": null
       },
       "icon": "icons/skills/ranged/target-bullseye-arrow-glowing.webp",
-      "label": "Reliable Talent",
       "origin": "Item.YN9xm6MCvse4Y60u",
       "transfer": true,
       "flags": {},
       "tint": null,
-      "sort": 0,
+      "name": "Reliable Talent",
+      "description": "",
+      "statuses": [],
       "_key": "!items.effects!YN9xm6MCvse4Y60u.vMMZHZQ0qT7MT4I4"
     }
   ],
@@ -117,7 +122,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787234387,
-    "modifiedTime": 1701910813242,
+    "modifiedTime": 1704824717210,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!YN9xm6MCvse4Y60u"

@@ -8,8 +8,7 @@
   "system": {
     "description": {
       "value": "<p>Starting at 14th level, when you make an ability check, you can expend one use of @Compendium[dnd5e.classfeatures.hpLNiGq7y67d2EHA]{Bardic Inspiraton}.</p><p>Roll a Bardic Inspiration die and add the number rolled to your ability check.</p><p>You can choose to do so after you roll the die for the ability check, but before the GM tells you whether you succeed or fail.</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -31,7 +30,8 @@
       "value": null,
       "width": null,
       "units": "",
-      "type": ""
+      "type": "",
+      "prompt": true
     },
     "range": {
       "value": null,
@@ -42,12 +42,14 @@
       "value": null,
       "max": "",
       "per": null,
-      "recovery": ""
+      "recovery": "",
+      "prompt": true
     },
     "consume": {
       "type": "",
       "target": null,
-      "amount": null
+      "amount": null,
+      "scale": false
     },
     "ability": "",
     "actionType": "",
@@ -75,7 +77,9 @@
     "recharge": {
       "value": null,
       "charged": false
-    }
+    },
+    "crewed": false,
+    "properties": []
   },
   "flags": {},
   "img": "icons/magic/light/hand-sparks-glow-yellow.webp",
@@ -87,7 +91,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787234426,
-    "modifiedTime": 1701909945542,
+    "modifiedTime": 1704824718957,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!pquwueEMweRhiWaq"

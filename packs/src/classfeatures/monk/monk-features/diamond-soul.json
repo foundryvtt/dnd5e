@@ -8,8 +8,7 @@
   "system": {
     "description": {
       "value": "<p>Beginning at 14th level, your mastery of ki grants you proficiency in all saving throws. Additionally, whenever you make a saving throw and fail, you can spend 1 ki point to reroll it and take the second result.</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -31,7 +30,8 @@
       "value": null,
       "width": null,
       "units": "",
-      "type": ""
+      "type": "",
+      "prompt": true
     },
     "range": {
       "value": null,
@@ -42,12 +42,14 @@
       "value": null,
       "max": "",
       "per": null,
-      "recovery": ""
+      "recovery": "",
+      "prompt": true
     },
     "consume": {
       "type": "",
       "target": null,
-      "amount": null
+      "amount": null,
+      "scale": false
     },
     "ability": "",
     "actionType": "",
@@ -75,7 +77,9 @@
     "recharge": {
       "value": null,
       "charged": false
-    }
+    },
+    "crewed": false,
+    "properties": []
   },
   "flags": {},
   "img": "icons/magic/water/projectile-icecicle.webp",
@@ -101,12 +105,13 @@
         "startTurn": null
       },
       "icon": "icons/magic/water/projectile-icecicle.webp",
-      "label": "Diamond Soul",
       "origin": "Item.PRME1bZBvnc2E0iH",
       "transfer": true,
       "flags": {},
       "tint": null,
-      "sort": 0,
+      "name": "Diamond Soul",
+      "description": "",
+      "statuses": [],
       "_key": "!items.effects!7D2EkLdISwShEDlN.v6jhyPoAYRIIXBG1"
     }
   ],
@@ -117,7 +122,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787234336,
-    "modifiedTime": 1701910426721,
+    "modifiedTime": 1704824714963,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!7D2EkLdISwShEDlN"

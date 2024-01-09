@@ -8,8 +8,7 @@
   "system": {
     "description": {
       "value": "<p>When you are in an area of dim light or darkness, you can use your action to become invisible until you move or take an action or a reaction.</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -31,7 +30,8 @@
       "value": null,
       "width": null,
       "units": "",
-      "type": "self"
+      "type": "self",
+      "prompt": true
     },
     "range": {
       "value": null,
@@ -42,12 +42,14 @@
       "value": null,
       "max": "",
       "per": null,
-      "recovery": ""
+      "recovery": "",
+      "prompt": true
     },
     "consume": {
       "type": "",
       "target": null,
-      "amount": null
+      "amount": null,
+      "scale": false
     },
     "ability": "",
     "actionType": "",
@@ -75,7 +77,9 @@
     "recharge": {
       "value": null,
       "charged": false
-    }
+    },
+    "crewed": false,
+    "properties": []
   },
   "flags": {},
   "img": "icons/magic/unholy/silhouette-robe-evil-power.webp",
@@ -87,7 +91,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787234361,
-    "modifiedTime": 1701911149375,
+    "modifiedTime": 1704824716087,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!KfnUyjUWAk0bAAus"

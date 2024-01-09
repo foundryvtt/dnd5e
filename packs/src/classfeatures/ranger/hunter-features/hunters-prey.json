@@ -8,8 +8,7 @@
   "system": {
     "description": {
       "value": "<p>At 3rd level, you gain one of the following features of your choice.</p><p>@Compendium[dnd5e.classfeatures.5gx1O0sxK08awEO9]{Colossus Slayer}</p><p>@Compendium[dnd5e.classfeatures.StfmqK1twVfukpa0]{Giant Killer}</p><p>@Compendium[dnd5e.classfeatures.C6sHdDGmCMo0cYHd]{Horde Breaker}</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -31,7 +30,8 @@
       "value": null,
       "width": null,
       "units": "",
-      "type": ""
+      "type": "",
+      "prompt": true
     },
     "range": {
       "value": null,
@@ -42,12 +42,14 @@
       "value": null,
       "max": "",
       "per": null,
-      "recovery": ""
+      "recovery": "",
+      "prompt": true
     },
     "consume": {
       "type": "",
       "target": null,
-      "amount": null
+      "amount": null,
+      "scale": false
     },
     "ability": null,
     "actionType": "",
@@ -75,7 +77,9 @@
     "recharge": {
       "value": null,
       "charged": false
-    }
+    },
+    "crewed": false,
+    "properties": []
   },
   "flags": {},
   "img": "icons/magic/acid/dissolve-bone-skull.webp",
@@ -87,7 +91,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787234439,
-    "modifiedTime": 1701910473872,
+    "modifiedTime": 1704824719665,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!wrxIW5sDfmGr3u5s"

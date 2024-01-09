@@ -8,8 +8,7 @@
   "system": {
     "description": {
       "value": "<p>At 11th level, you gain one of the following features of your choice.</p><p>@UUID[Compendium.dnd5e.classfeatures.l7W6JB9yWLLLtQKP]{Volley}</p><p>@UUID[Compendium.dnd5e.classfeatures.1DY8w3CXeD7PHDXF]{Whirlwind Attack}</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -31,7 +30,8 @@
       "value": null,
       "width": null,
       "units": "",
-      "type": ""
+      "type": "",
+      "prompt": true
     },
     "range": {
       "value": null,
@@ -42,12 +42,14 @@
       "value": null,
       "max": "",
       "per": null,
-      "recovery": ""
+      "recovery": "",
+      "prompt": true
     },
     "consume": {
       "type": "",
       "target": null,
-      "amount": null
+      "amount": null,
+      "scale": false
     },
     "ability": null,
     "actionType": "",
@@ -75,7 +77,9 @@
     "recharge": {
       "value": null,
       "charged": false
-    }
+    },
+    "crewed": false,
+    "properties": []
   },
   "flags": {},
   "img": "icons/magic/death/skull-trio-badge-purple.webp",
@@ -87,7 +91,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787234339,
-    "modifiedTime": 1701910477051,
+    "modifiedTime": 1704824715121,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!7zlTRRXT1vWSBGjX"

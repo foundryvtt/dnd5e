@@ -8,8 +8,7 @@
   "system": {
     "description": {
       "value": "<p>When you hit a creature with @Compendium[dnd5e.spells.Z9p1vezIn95jw1Yw]{Eldritch Blast}, you can push the creature up to 10 feet away from you in a straight line.</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -31,7 +30,8 @@
       "value": null,
       "width": null,
       "units": "",
-      "type": ""
+      "type": "",
+      "prompt": true
     },
     "range": {
       "value": null,
@@ -42,12 +42,14 @@
       "value": null,
       "max": "",
       "per": null,
-      "recovery": ""
+      "recovery": "",
+      "prompt": true
     },
     "consume": {
       "type": "",
       "target": null,
-      "amount": null
+      "amount": null,
+      "scale": false
     },
     "ability": "",
     "actionType": "",
@@ -75,7 +77,9 @@
     "recharge": {
       "value": null,
       "charged": false
-    }
+    },
+    "crewed": false,
+    "properties": []
   },
   "flags": {},
   "img": "icons/magic/fire/explosion-embers-evade-silhouette.webp",
@@ -87,7 +91,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787234430,
-    "modifiedTime": 1701911153342,
+    "modifiedTime": 1704824719141,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!rdBPd6CwqXT64iJM"

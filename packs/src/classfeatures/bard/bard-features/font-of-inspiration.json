@@ -8,8 +8,7 @@
   "system": {
     "description": {
       "value": "<p>Beginning when you reach 5th level, you regain all of your expended uses of @Compendium[dnd5e.classfeatures.hpLNiGq7y67d2EHA]{Bardic Inspiraton} when you finish a short or long rest.</p><section class=\"secret foundry-note\" id=\"secret-2Ixwv0urEA2kot3D\"><p><strong>Foundry Note</strong></p><p>Bardic Inspiration is set to long rest recovery by default. Please edit to short rest upon reaching this level.</p></section>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -31,7 +30,8 @@
       "value": null,
       "width": null,
       "units": "",
-      "type": ""
+      "type": "",
+      "prompt": true
     },
     "range": {
       "value": null,
@@ -42,12 +42,14 @@
       "value": null,
       "max": "",
       "per": null,
-      "recovery": ""
+      "recovery": "",
+      "prompt": true
     },
     "consume": {
       "type": "",
       "target": null,
-      "amount": null
+      "amount": null,
+      "scale": false
     },
     "ability": "",
     "actionType": "",
@@ -75,7 +77,9 @@
     "recharge": {
       "value": null,
       "charged": false
-    }
+    },
+    "crewed": false,
+    "properties": []
   },
   "flags": {},
   "img": "icons/magic/control/sihouette-hold-beam-green.webp",
@@ -87,7 +91,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787234326,
-    "modifiedTime": 1701909987131,
+    "modifiedTime": 1704824714544,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!3VDZGs5Ug3hIE322"

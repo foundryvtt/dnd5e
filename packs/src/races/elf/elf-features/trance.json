@@ -6,14 +6,12 @@
   "system": {
     "description": {
       "value": "<p>Elves don't need to sleep. Instead, they meditate deeply, remaining semiconscious, for 4 hours a day. (The Common word for such meditation is \"trance.\") While meditating, you can dream after a fashion; such dreams are actually mental exercises that have become reflexive through years of practice. After resting in this way, you gain the same benefit that a human does from 8 hours of sleep.</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
       "book": "SRD 5.1",
       "page": "",
-      "uuid": "",
       "license": "CC-BY-4.0"
     },
     "activation": {
@@ -49,7 +47,8 @@
     "consume": {
       "type": "",
       "target": null,
-      "amount": null
+      "amount": null,
+      "scale": false
     },
     "ability": null,
     "actionType": "",
@@ -77,7 +76,8 @@
     "recharge": {
       "value": null,
       "charged": false
-    }
+    },
+    "properties": []
   },
   "effects": [],
   "ownership": {
@@ -89,7 +89,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1677179906781,
-    "modifiedTime": 1701908733583,
+    "modifiedTime": 1704824711061,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "sort": 0,

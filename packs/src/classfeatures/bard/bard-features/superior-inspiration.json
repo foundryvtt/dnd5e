@@ -8,8 +8,7 @@
   "system": {
     "description": {
       "value": "<p>At 20th level, when you roll initiative and have no uses of @Compendium[dnd5e.classfeatures.hpLNiGq7y67d2EHA]{Bardic Inspiraton} left, you regain one use.</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -31,7 +30,8 @@
       "value": null,
       "width": null,
       "units": "",
-      "type": ""
+      "type": "",
+      "prompt": true
     },
     "range": {
       "value": null,
@@ -42,12 +42,14 @@
       "value": null,
       "max": "",
       "per": null,
-      "recovery": ""
+      "recovery": "",
+      "prompt": true
     },
     "consume": {
       "type": "",
       "target": null,
-      "amount": null
+      "amount": null,
+      "scale": false
     },
     "ability": "",
     "actionType": "",
@@ -75,7 +77,9 @@
     "recharge": {
       "value": null,
       "charged": false
-    }
+    },
+    "crewed": false,
+    "properties": []
   },
   "flags": {},
   "img": "icons/magic/earth/explosion-lava-stone-green.webp",
@@ -87,7 +91,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787234356,
-    "modifiedTime": 1701909996414,
+    "modifiedTime": 1704824715825,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!GBYN5rH4nh1ocRlY"

@@ -8,8 +8,7 @@
   "system": {
     "description": {
       "value": "<p>When you reach 10th level, you can't be charmed or frightened by elementals or fey, and you are immune to poison and disease.</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -31,7 +30,8 @@
       "value": null,
       "width": null,
       "units": "",
-      "type": ""
+      "type": "",
+      "prompt": true
     },
     "range": {
       "value": null,
@@ -42,12 +42,14 @@
       "value": null,
       "max": "",
       "per": null,
-      "recovery": ""
+      "recovery": "",
+      "prompt": true
     },
     "consume": {
       "type": "",
       "target": null,
-      "amount": null
+      "amount": null,
+      "scale": false
     },
     "ability": "",
     "actionType": "",
@@ -75,7 +77,9 @@
     "recharge": {
       "value": null,
       "charged": false
-    }
+    },
+    "crewed": false,
+    "properties": []
   },
   "flags": {},
   "img": "icons/commodities/flowers/lotus-pink.webp",
@@ -107,12 +111,13 @@
         "startTurn": null
       },
       "icon": "icons/commodities/flowers/lotus-pink.webp",
-      "label": "Nature's Ward",
       "origin": "Item.OTvrJSJSUgAwXrWX",
       "transfer": true,
       "flags": {},
       "tint": null,
-      "sort": 0,
+      "name": "Nature's Ward",
+      "description": "",
+      "statuses": [],
       "_key": "!items.effects!OTvrJSJSUgAwXrWX.Jxpz4MZmgTy7z7cm"
     }
   ],
@@ -123,7 +128,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787234370,
-    "modifiedTime": 1701910144838,
+    "modifiedTime": 1704824716501,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!OTvrJSJSUgAwXrWX"

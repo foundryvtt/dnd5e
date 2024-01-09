@@ -8,8 +8,7 @@
   "system": {
     "description": {
       "value": "<p>At 3rd level, you gain the ability to twist your spells to suit your needs. You gain two of the following Metamagic options of your choice. You gain another one at 10th and 17th level. You can use only one Metamagic option on a spell when you cast it, unless otherwise noted.</p>\n<p>@UUID[Compendium.dnd5e.classfeatures.zElYrOcCFFMhB6Xl]{Careful Spell}</p>\n<p>@UUID[Compendium.dnd5e.classfeatures.DZpAa3LzMNBexbmX]{Distant Spell}</p>\n<p>@UUID[Compendium.dnd5e.classfeatures.IWpe0Y9uAStHGiH1]{Empowered Spell}</p>\n<p>@UUID[Compendium.dnd5e.classfeatures.tQxlKyAx9sgPrbgj]{Extended Spell}</p>\n<p>@UUID[Compendium.dnd5e.classfeatures.tNG2qi9zhmXEkecA]{Heightened Spell}</p>\n<p>@UUID[Compendium.dnd5e.classfeatures.nViGf6bZ6DQAJhkw]{Quickened Spell}</p>\n<p>@UUID[Compendium.dnd5e.classfeatures.fXa0DMhoVLtbBu9l]{Subtle Spell}</p>\n<p>@UUID[Compendium.dnd5e.classfeatures.Qb391hakCfmH4w8p]{Twinned Spell}</p>\n<section class=\"secret foundry-note\">\n<p><strong>Foundry Note</strong></p>\n<p>You can drag your choices from the above onto your character sheet and it will automatically update.</p>\n</section>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -31,7 +30,8 @@
       "value": null,
       "width": null,
       "units": "",
-      "type": ""
+      "type": "",
+      "prompt": true
     },
     "range": {
       "value": null,
@@ -42,12 +42,14 @@
       "value": null,
       "max": "",
       "per": null,
-      "recovery": ""
+      "recovery": "",
+      "prompt": true
     },
     "consume": {
       "type": "",
       "target": null,
-      "amount": null
+      "amount": null,
+      "scale": false
     },
     "ability": "",
     "actionType": "",
@@ -75,7 +77,9 @@
     "recharge": {
       "value": null,
       "charged": false
-    }
+    },
+    "crewed": false,
+    "properties": []
   },
   "folder": "s3pztJl6gzeYmXdi",
   "sort": 0,
@@ -87,7 +91,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787234343,
-    "modifiedTime": 1701910887038,
+    "modifiedTime": 1704824715301,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!9Uh7uTDNZ04oTJsL"

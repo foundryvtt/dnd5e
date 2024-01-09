@@ -8,8 +8,7 @@
   "system": {
     "description": {
       "value": "<p>When you cast a spell that targets only one creature and doesn't have a range of self, you can spend a number of sorcery points equal to the spell's level to target a second creature in range with the same spell (1 sorcery point if the spell is a cantrip).</p><p>To be eligible, a spell must be incapable of targeting more than one creature at the spell's current level. For example, @Compendium[dnd5e.spells.41JIhpDyM9Anm7cs]{Magic Missile} and @Compendium[dnd5e.spells.7u2obDvuvtZBkTfq]{Scorching Ray} aren't eligible, but @Compendium[dnd5e.spells.ctW81uiX56xZR2c5]{Ray of Frost} is.</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -31,7 +30,8 @@
       "value": null,
       "width": null,
       "units": "",
-      "type": ""
+      "type": "",
+      "prompt": true
     },
     "range": {
       "value": null,
@@ -42,12 +42,14 @@
       "value": null,
       "max": "",
       "per": null,
-      "recovery": ""
+      "recovery": "",
+      "prompt": true
     },
     "consume": {
       "type": "",
       "target": null,
-      "amount": null
+      "amount": null,
+      "scale": false
     },
     "ability": "",
     "actionType": "",
@@ -75,7 +77,9 @@
     "recharge": {
       "value": null,
       "charged": false
-    }
+    },
+    "crewed": false,
+    "properties": []
   },
   "flags": {},
   "img": "icons/magic/lightning/bolt-strike-blue.webp",
@@ -87,7 +91,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787234375,
-    "modifiedTime": 1701910943169,
+    "modifiedTime": 1704824716687,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!Qb391hakCfmH4w8p"
