@@ -91,22 +91,10 @@
       "dt": null,
       "conditions": ""
     },
-    "properties": {
-      "amm": true,
-      "hvy": false,
-      "fin": false,
-      "fir": false,
-      "foc": false,
-      "lgt": false,
-      "rch": false,
-      "rel": false,
-      "ret": false,
-      "spc": false,
-      "thr": false,
-      "two": false,
-      "ver": false,
-      "lod": true
-    },
+    "properties": [
+      "amm",
+      "lod"
+    ],
     "proficient": null,
     "type": {
       "value": "martialR",
@@ -130,7 +118,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787233958,
-    "modifiedTime": 1703713496112,
+    "modifiedTime": 1704823165492,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!wNWK6yJMHG9ANqQV"
