@@ -718,7 +718,7 @@ DND5E.creatureTypes = {
   }
 };
 preLocalize("creatureTypes", { keys: ["label", "plural"], sort: true });
-patchConfig("creatureTypes", "label", { since: "DnD5e 2.5", until: "DnD5e 2.7" });
+patchConfig("creatureTypes", "label", { since: "DnD5e 3.0", until: "DnD5e 3.2" });
 
 /* -------------------------------------------- */
 
@@ -986,7 +986,7 @@ DND5E.consumableTypes = {
     label: "DND5E.ConsumableTrinket"
   }
 };
-patchConfig("consumableTypes", "label", { since: "DnD5e 2.5", until: "DnD5e 2.7" });
+patchConfig("consumableTypes", "label", { since: "DnD5e 3.0", until: "DnD5e 3.2" });
 preLocalize("consumableTypes", { key: "label", sort: true });
 preLocalize("consumableTypes.ammo.subtypes", { sort: true });
 preLocalize("consumableTypes.poison.subtypes", { sort: true });
@@ -1347,7 +1347,7 @@ preLocalize("currencies", { keys: ["label", "abbreviation"] });
 
 /**
  * Types of damage that are considered physical.
- * @deprecated since DnD5e 2.5, available until DnD5e 2.7
+ * @deprecated since DnD5e 3.0, available until DnD5e 3.2
  * @enum {string}
  */
 DND5E.physicalDamageTypes = {
@@ -1407,7 +1407,7 @@ DND5E.damageTypes = {
     label: "DND5E.DamageThunder"
   }
 };
-patchConfig("damageTypes", "label", { since: "DnD5e 2.5", until: "DnD5e 2.7" });
+patchConfig("damageTypes", "label", { since: "DnD5e 3.0", until: "DnD5e 3.2" });
 preLocalize("damageTypes", { keys: ["label"], sort: true });
 
 /* -------------------------------------------- */
@@ -1426,7 +1426,7 @@ DND5E.healingTypes = {
     label: "DND5E.HealingTemp"
   }
 };
-patchConfig("healingTypes", "label", { since: "DnD5e 2.5", until: "DnD5e 2.7" });
+patchConfig("healingTypes", "label", { since: "DnD5e 3.0", until: "DnD5e 3.2" });
 preLocalize("healingTypes", { keys: ["label"] });
 
 /* -------------------------------------------- */
@@ -1949,7 +1949,7 @@ preLocalize("weaponTypes");
 /**
  * A subset of weapon properties that determine the physical characteristics of the weapon.
  * These properties are used for determining physical resistance bypasses.
- * @deprecated since DnD5e 2.5, available until DnD5e 2.7
+ * @deprecated since DnD5e 3.0, available until DnD5e 3.2
  * @enum {string}
  */
 DND5E.physicalWeaponProperties = {
@@ -1963,7 +1963,7 @@ preLocalize("physicalWeaponProperties", { sort: true });
 
 /**
  * The set of weapon property flags which can exist on a weapon.
- * @deprecated since DnD5e 2.5, available until DnD5e 2.7
+ * @deprecated since DnD5e 3.0, available until DnD5e 3.2
  * @enum {string}
  */
 DND5E.weaponProperties = {

@@ -215,12 +215,12 @@ export default class EquipmentData extends SystemDataModel.mixin(
   /**
    * Does this armor impose disadvantage on stealth checks?
    * @type {boolean}
-   * @deprecated since DnD5e 2.5, available until DnD5e 2.7
+   * @deprecated since DnD5e 3.0, available until DnD5e 3.2
    */
   get stealth() {
     foundry.utils.logCompatibilityWarning(
       "The `system.stealth` value on equipment has migrated to the 'stealthDisadvantage' property.",
-      { since: "DnD5e 2.5", until: "DnD5e 2.7" }
+      { since: "DnD5e 3.0", until: "DnD5e 3.2" }
     );
     return this.properties.has("stealthDisadvantage");
   }
