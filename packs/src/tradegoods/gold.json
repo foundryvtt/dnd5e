@@ -8,8 +8,7 @@
   "system": {
     "description": {
       "value": "<p>Gold is the king of currency for many civilizations. Usually more common than the likes of platinum, but nowhere near as common as other metals like iron, it occupies a sweet spot in rarity and unreactiveness.</p>\n<p>Unlike silver, gold can be found more easily on the surface. Both surface and underground mining can be extremely profitable. Gold rushes can and have been a source a great happiness and huge tragedy.</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -23,10 +22,17 @@
       "value": 50,
       "denomination": "gp"
     },
-    "attunement": 0,
-    "equipped": false,
     "rarity": "",
-    "identified": true
+    "identified": true,
+    "unidentified": {
+      "description": ""
+    },
+    "container": null,
+    "properties": [],
+    "type": {
+      "value": "",
+      "subtype": ""
+    }
   },
   "sort": 0,
   "flags": {},
@@ -35,10 +41,10 @@
   "folder": null,
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.0.3",
-    "coreVersion": "10.290",
+    "systemVersion": "3.0.0",
+    "coreVersion": "11.315",
     "createdTime": 1661787234015,
-    "modifiedTime": 1670010072030,
+    "modifiedTime": 1704823424054,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!HHh7Ihuk8ToxJzQX"

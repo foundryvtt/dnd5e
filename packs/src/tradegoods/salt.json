@@ -8,8 +8,7 @@
   "system": {
     "description": {
       "value": "<p>Prized by chefs and quartermasters alike as a seasoning and preservative for supplies where alcohol or vinegar are undesired.</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -23,10 +22,17 @@
       "value": 5,
       "denomination": "cp"
     },
-    "attunement": 0,
-    "equipped": false,
     "rarity": "",
-    "identified": true
+    "identified": true,
+    "unidentified": {
+      "description": ""
+    },
+    "container": null,
+    "properties": [],
+    "type": {
+      "value": "",
+      "subtype": ""
+    }
   },
   "sort": 0,
   "flags": {},
@@ -35,10 +41,10 @@
   "folder": null,
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.0.3",
-    "coreVersion": "10.290",
+    "systemVersion": "3.0.0",
+    "coreVersion": "11.315",
     "createdTime": 1661787234020,
-    "modifiedTime": 1670010072172,
+    "modifiedTime": 1704823424185,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!eDVTXE3qv28DwvPl"

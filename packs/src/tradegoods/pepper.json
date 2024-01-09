@@ -8,8 +8,7 @@
   "system": {
     "description": {
       "value": "<p>Peppercorns are the tiny fruit, or drupe, of the pepper plant, a flowering vine also known as the piper nigrum. Highly prized by chefs for its versaility and can be utilized in a pinch by adventurers when ground down for distractions and shenanigans.</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -23,10 +22,17 @@
       "value": 2,
       "denomination": "gp"
     },
-    "attunement": 0,
-    "equipped": false,
     "rarity": "",
-    "identified": true
+    "identified": true,
+    "unidentified": {
+      "description": ""
+    },
+    "container": null,
+    "properties": [],
+    "type": {
+      "value": "",
+      "subtype": ""
+    }
   },
   "sort": 0,
   "flags": {},
@@ -35,10 +41,10 @@
   "folder": null,
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.0.3",
-    "coreVersion": "10.290",
+    "systemVersion": "3.0.0",
+    "coreVersion": "11.315",
     "createdTime": 1661787234012,
-    "modifiedTime": 1670010071966,
+    "modifiedTime": 1704823423984,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!8SQ7vyE6gevpfJvn"
