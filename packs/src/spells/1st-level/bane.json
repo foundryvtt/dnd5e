@@ -8,8 +8,7 @@
   "system": {
     "description": {
       "value": "<p>Up to three creatures of your choice that you can see within range must make Charisma saving throws. Whenever a target that fails this saving throw makes an attack roll or a saving throw before the spell ends, the target must roll a d4 and subtract the number rolled from the attack roll or saving throw.</p>\n<p><strong>Higher Levels.</strong> When you cast this spell using a spell slot of 2nd level or higher, you can target one additional creature for each slot level above 1st.</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -31,7 +30,8 @@
       "value": 3,
       "width": null,
       "units": "",
-      "type": "creature"
+      "type": "creature",
+      "prompt": true
     },
     "range": {
       "value": 30,
@@ -42,12 +42,14 @@
       "value": null,
       "max": "",
       "per": null,
-      "recovery": ""
+      "recovery": "",
+      "prompt": true
     },
     "consume": {
       "type": "",
       "target": null,
-      "amount": null
+      "amount": null,
+      "scale": false
     },
     "ability": "",
     "actionType": "save",
@@ -69,13 +71,6 @@
     },
     "level": 1,
     "school": "enc",
-    "components": {
-      "vocal": true,
-      "somatic": true,
-      "material": true,
-      "ritual": false,
-      "concentration": true
-    },
     "materials": {
       "value": "A drop of blood",
       "consumed": false,
@@ -95,7 +90,8 @@
       "somatic",
       "material",
       "concentration"
-    ]
+    ],
+    "crewed": false
   },
   "sort": 0,
   "flags": {},
@@ -147,11 +143,12 @@
         "combat": null
       },
       "icon": "icons/magic/unholy/strike-beam-blood-red-purple.webp",
-      "label": "Bane",
       "origin": "Item.KkaQm4OQJxc6z3to",
       "tint": null,
       "transfer": true,
-      "sort": 0,
+      "name": "Bane",
+      "description": "",
+      "statuses": [],
       "_key": "!items.effects!95K2aUhAGV9qXjnf.potjmpJPeUA1U4oe"
     }
   ],
@@ -161,7 +158,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787234084,
-    "modifiedTime": 1704565106864,
+    "modifiedTime": 1704823522381,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!95K2aUhAGV9qXjnf"

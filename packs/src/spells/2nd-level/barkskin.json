@@ -6,8 +6,7 @@
   "system": {
     "description": {
       "value": "<p>You touch a willing creature. Until the spell ends, the target's skin has a rough, bark-like appearance, and the target's AC can't be less than 16, regardless of what kind of armor it is wearing.</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -29,7 +28,8 @@
       "value": 1,
       "width": null,
       "units": "",
-      "type": "creature"
+      "type": "creature",
+      "prompt": true
     },
     "range": {
       "value": null,
@@ -40,12 +40,14 @@
       "value": null,
       "max": "",
       "per": null,
-      "recovery": ""
+      "recovery": "",
+      "prompt": true
     },
     "consume": {
       "type": "",
       "target": null,
-      "amount": null
+      "amount": null,
+      "scale": false
     },
     "ability": "",
     "actionType": "util",
@@ -67,13 +69,6 @@
     },
     "level": 2,
     "school": "trs",
-    "components": {
-      "vocal": true,
-      "somatic": true,
-      "material": true,
-      "ritual": false,
-      "concentration": true
-    },
     "materials": {
       "value": "A handful of oak bark",
       "consumed": false,
@@ -93,7 +88,8 @@
       "somatic",
       "material",
       "concentration"
-    ]
+    ],
+    "crewed": false
   },
   "effects": [
     {
@@ -124,11 +120,12 @@
         "startTurn": null
       },
       "icon": "icons/magic/defensive/shield-barrier-flaming-diamond-orange.webp",
-      "label": "Barkskin",
       "origin": "Item.VQMKMnQDw5rzL0zp",
       "tint": null,
       "transfer": true,
-      "sort": 0,
+      "name": "Barkskin",
+      "description": "",
+      "statuses": [],
       "_key": "!items.effects!JPwIEfgUPVebr5AH.uM6rgctYpcbCVSkn"
     }
   ],
@@ -143,7 +140,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787234113,
-    "modifiedTime": 1704565107714,
+    "modifiedTime": 1704823523171,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!JPwIEfgUPVebr5AH"

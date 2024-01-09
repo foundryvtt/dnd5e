@@ -8,8 +8,7 @@
   "system": {
     "description": {
       "value": "<p>You transform up to ten centipedes, three spiders, five wasps, or one Scorpion within range into giant versions of their natural forms for the Duration. A centipede becomes a Giant Centipede, a Spider becomes a Giant Spider, a wasp becomes a Giant Wasp, and a Scorpion becomes a Giant Scorpion.</p><p>Each creature obeys your verbal commands, and in Combat, they act on Your Turn each round. The DM has the Statistics for these creatures and resolves their Actions and Movement.</p><p>A creature remains in its giant size for the Duration, until it drops to 0 Hit Points, or until you use an action to dismiss the effect on it.</p><p>The DM might allow you to choose different Targets. For example, if you transform a bee, its giant version might have the same Statistics as a Giant Wasp.</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -31,7 +30,8 @@
       "value": 10,
       "width": null,
       "units": "spec",
-      "type": "creature"
+      "type": "creature",
+      "prompt": true
     },
     "range": {
       "value": 30,
@@ -42,12 +42,14 @@
       "value": null,
       "max": "",
       "per": null,
-      "recovery": ""
+      "recovery": "",
+      "prompt": true
     },
     "consume": {
       "type": "",
       "target": null,
-      "amount": null
+      "amount": null,
+      "scale": false
     },
     "ability": "",
     "actionType": "util",
@@ -69,13 +71,6 @@
     },
     "level": 4,
     "school": "trs",
-    "components": {
-      "vocal": true,
-      "somatic": true,
-      "material": false,
-      "ritual": false,
-      "concentration": true
-    },
     "materials": {
       "value": "",
       "consumed": false,
@@ -94,7 +89,8 @@
       "vocal",
       "somatic",
       "concentration"
-    ]
+    ],
+    "crewed": false
   },
   "sort": 0,
   "flags": {},
@@ -106,7 +102,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787234177,
-    "modifiedTime": 1704565109580,
+    "modifiedTime": 1704823524872,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!czXrVRx6XYRWsHAi"

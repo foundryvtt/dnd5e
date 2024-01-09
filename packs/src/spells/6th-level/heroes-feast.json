@@ -8,8 +8,7 @@
   "system": {
     "description": {
       "value": "<p>You bring forth a great feast, including magnificent food and drink. The feast takes 1 Hour to consume and disappears at the end of that time, and the beneficial Effects don't set in until this hour is over. Up to twelve creatures can partake of the feast.</p><p>A creature that partakes of the feast gains several benefits. The creature is cured of all Diseases and poison, becomes immune to poison and being Frightened, and makes all Wisdom Saving Throws with advantage. Its hit point maximum also increases by 2d10, and it gains the same number of Hit Points. These benefits last for 24 hours.</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -31,7 +30,8 @@
       "value": null,
       "width": null,
       "units": "",
-      "type": ""
+      "type": "",
+      "prompt": true
     },
     "range": {
       "value": 30,
@@ -42,12 +42,14 @@
       "value": null,
       "max": "",
       "per": null,
-      "recovery": ""
+      "recovery": "",
+      "prompt": true
     },
     "consume": {
       "type": "",
       "target": null,
-      "amount": null
+      "amount": null,
+      "scale": false
     },
     "ability": "",
     "actionType": "util",
@@ -69,13 +71,6 @@
     },
     "level": 6,
     "school": "con",
-    "components": {
-      "vocal": true,
-      "somatic": true,
-      "material": true,
-      "ritual": false,
-      "concentration": false
-    },
     "materials": {
       "value": "A gem-encrusted bowl worth at least 1000gp, which the spell consumes",
       "consumed": true,
@@ -94,7 +89,8 @@
       "vocal",
       "somatic",
       "material"
-    ]
+    ],
+    "crewed": false
   },
   "sort": 0,
   "flags": {},
@@ -106,7 +102,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787234220,
-    "modifiedTime": 1704565110471,
+    "modifiedTime": 1704823525676,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!mgFqi0ev8f7Ut19y"

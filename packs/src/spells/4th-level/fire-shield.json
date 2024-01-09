@@ -8,8 +8,7 @@
   "system": {
     "description": {
       "value": "<p>Thin and wispy flames wreathe your body for the Duration, shedding bright light in a 10-foot radius and dim light for an additional 10 feet. You can end the spell early by using an action to dismiss it.</p>\n<p>The flames provide you with a warm shield or a chill shield, as you choose. The warm shield grants you Resistance to cold damage, and the chill shield grants you resistance to fire damage.</p>\n<p>In addition, whenever a creature within 5 feet of you hits you with a melee Attack, the shield erupts with flame. The attacker takes 2d8 fire damage from a warm shield, or 2d8 cold damage from a cold shield.</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -31,7 +30,8 @@
       "value": null,
       "width": null,
       "units": "",
-      "type": "self"
+      "type": "self",
+      "prompt": true
     },
     "range": {
       "value": null,
@@ -42,12 +42,14 @@
       "value": null,
       "max": "",
       "per": null,
-      "recovery": ""
+      "recovery": "",
+      "prompt": true
     },
     "consume": {
       "type": "",
       "target": null,
-      "amount": null
+      "amount": null,
+      "scale": false
     },
     "ability": "",
     "actionType": "util",
@@ -74,13 +76,6 @@
     },
     "level": 4,
     "school": "evo",
-    "components": {
-      "vocal": true,
-      "somatic": true,
-      "material": true,
-      "ritual": false,
-      "concentration": false
-    },
     "materials": {
       "value": "A bit of phosphorus or a firefly",
       "consumed": false,
@@ -99,7 +94,8 @@
       "vocal",
       "somatic",
       "material"
-    ]
+    ],
+    "crewed": false
   },
   "sort": 0,
   "flags": {},
@@ -127,11 +123,12 @@
         "combat": null
       },
       "icon": "icons/magic/defensive/shield-barrier-flaming-pentagon-red.webp",
-      "label": "Warm Shield",
       "origin": "Item.OtcTsffCQaOFkr9K",
       "tint": null,
       "transfer": true,
-      "sort": 0,
+      "name": "Warm Shield",
+      "description": "",
+      "statuses": [],
       "_key": "!items.effects!avD5XUtkBPQQR97c.lVKx8swB08jm6IFE"
     },
     {
@@ -156,11 +153,12 @@
         "combat": null
       },
       "icon": "icons/magic/defensive/shield-barrier-flaming-pentagon-blue.webp",
-      "label": "Chill Shield",
       "origin": "Item.OtcTsffCQaOFkr9K",
       "tint": null,
       "transfer": true,
-      "sort": 0,
+      "name": "Chill Shield",
+      "description": "",
+      "statuses": [],
       "_key": "!items.effects!avD5XUtkBPQQR97c.UUXwEKSPX4nYfDzo"
     }
   ],
@@ -170,7 +168,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787234170,
-    "modifiedTime": 1704565109389,
+    "modifiedTime": 1704823524695,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!avD5XUtkBPQQR97c"

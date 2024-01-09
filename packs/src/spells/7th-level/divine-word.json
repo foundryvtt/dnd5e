@@ -8,8 +8,7 @@
   "system": {
     "description": {
       "value": "<p>You utter a divine word, imbued with the power that shaped the world at the dawn of Creation. Choose any number of creatures you can see within range. Each creature that can hear you must make a Charisma saving throw. On a failed save, a creature suffers an effect based on its current hit points:</p>\n<ul>\n<li>50 Hit Points or fewer: Deafened for 1 minute</li>\n<li>40 Hit Points or fewer: Deafened and Blinded for 10 minutes</li>\n<li>30 Hit Points or fewer: Blinded, Deafened, and Stunned for 1 Hour</li>\n<li>20 Hit Points or fewer: killed instantly</li>\n</ul>\n<p>Regardless of its current Hit Points, a Celestial, an elemental, a fey, or a fiend that fails its save is forced back to its plane of Origin (if it isn't there already) and can't return to your current plane for 24 hours by any means short of a wish spell.</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -31,7 +30,8 @@
       "value": null,
       "width": null,
       "units": "any",
-      "type": "creature"
+      "type": "creature",
+      "prompt": true
     },
     "range": {
       "value": 30,
@@ -42,12 +42,14 @@
       "value": null,
       "max": "",
       "per": null,
-      "recovery": ""
+      "recovery": "",
+      "prompt": true
     },
     "consume": {
       "type": "",
       "target": null,
-      "amount": null
+      "amount": null,
+      "scale": false
     },
     "ability": "",
     "actionType": "save",
@@ -69,13 +71,6 @@
     },
     "level": 7,
     "school": "evo",
-    "components": {
-      "vocal": true,
-      "somatic": false,
-      "material": false,
-      "ritual": false,
-      "concentration": false
-    },
     "materials": {
       "value": "",
       "consumed": false,
@@ -92,7 +87,8 @@
     },
     "properties": [
       "vocal"
-    ]
+    ],
+    "crewed": false
   },
   "sort": 0,
   "flags": {},
@@ -104,7 +100,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787234144,
-    "modifiedTime": 1704565108617,
+    "modifiedTime": 1704823524012,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!T1vpZLam7LezjToj"
