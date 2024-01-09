@@ -24,7 +24,7 @@ export default class FeatData extends SystemDataModel.mixin(
   /** @inheritdoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
-      type: new ItemTypeField({}, { label: "DND5E.ItemFeatureType" }),
+      type: new ItemTypeField({baseItem: false}, {label: "DND5E.ItemFeatureType"}),
       properties: new foundry.data.fields.SetField(new foundry.data.fields.StringField(), {
         label: "DND5E.ItemFeatureProperties"
       }),
