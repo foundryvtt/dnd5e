@@ -63,7 +63,7 @@ export default class ActorTypeConfig extends DocumentSheet {
     const types = {};
     for ( let [k, v] of Object.entries(CONFIG.DND5E.creatureTypes) ) {
       types[k] = {
-        label: game.i18n.localize(v),
+        label: game.i18n.localize(v.label),
         chosen: attr.value === k
       };
     }
