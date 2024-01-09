@@ -222,7 +222,8 @@
                             <div class="label roboto-condensed-upper">
                                 <span>{{ localize "DND5E.HitPoints" }}</span>
                                 {{#if editable}}
-                                <a class="config-button" data-action="hit-points" data-tooltip="DND5E.HitPointsConfig">
+                                <a class="config-button" data-action="hitPoints" data-tooltip="DND5E.HitPointsConfig"
+                                   aria-label="{{ localize "DND5E.HitPointsConfig" }}">
                                     <i class="fas fa-cog"></i>
                                 </a>
                                 {{/if}}
@@ -253,7 +254,8 @@
                             <div class="label roboto-condensed-upper">
                                 <span>{{ localize "DND5E.HitDice" }}</span>
                                 {{#if editable}}
-                                <a class="config-button" data-action="hit-dice" data-tooltip="DND5E.HitDiceConfig">
+                                <a class="config-button" data-action="hitDice" data-tooltip="DND5E.HitDiceConfig"
+                                   aria-label="{{ localize "DND5E.HitDiceConfig" }}">
                                     <i class="fas fa-cog"></i>
                                 </a>
                                 {{/if}}

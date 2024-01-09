@@ -474,9 +474,10 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     this.labels.components = this.system.properties.reduce((obj, c) => {
       const config = attributes[c];
       if ( !config ) return obj;
-      obj.all.push({abbr: config.abbr, tag: config.tag});
-      if ( config.tag ) obj.tags.push(config.label);
-      else obj.vsm.push(config.abbr);
+      const { abbr, label, icon } = config;
+      obj.all.push({ abbr, label, icon, tag: config.tag });
+      if ( config.tag ) obj.tags.push(label);
+      else obj.vsm.push(abbr);
       return obj;
     }, {all: [], vsm: [], tags: []});
     this.labels.components.vsm = new Intl.ListFormat(game.i18n.lang, { style: "narrow", type: "conjunction" })
@@ -802,8 +803,12 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    */
   prepareDurationValue() {
     const duration = this.system.duration;
-    if ( !duration?.value ) return;
-    let value = duration.value;
+    let value = duration?.value;
+
+    if ( !value ) {
+      if ( duration?.units ) this.labels.duration = CONFIG.DND5E.timePeriods[duration.units];
+      return;
+    }
 
     // If this is an owned item and the value is not numeric, we need to calculate it
     if ( this.isOwned && !Number.isNumeric(value) ) {
@@ -1377,15 +1382,20 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * @returns {Promise<object>}
    */
   async getTooltipData(enrichmentOptions={}) {
-    const { name, img, system } = this;
-    let { price, weight, uses, identified, unidentified, description } = system;
+    const { name, type, img, system } = this;
+    let {
+      price, weight, uses, identified, unidentified, description, school, materials, activation, properties
+    } = system;
     description = game.user.isGM || identified ? description.value : unidentified.description;
     uses = game.user.isGM || identified ? uses : null;
     price = game.user.isGM || identified ? price : null;
 
     const context = {
-      name, img, price, weight, uses,
-      type: system.type?.label ?? game.i18n.localize(CONFIG.Item.typeLabels[this.type]),
+      name, type, img, price, weight, uses, school, materials, activation,
+      labels: foundry.utils.deepClone(this.labels),
+      subtitle: school
+        ? CONFIG.DND5E.spellSchools[school]
+        : system.type?.label ?? game.i18n.localize(CONFIG.Item.typeLabels[this.type]),
       description: await TextEditor.enrichHTML(description, {
         async: true, relativeTo: this, rollData: this.getRollData(), ...enrichmentOptions
       })
@@ -1394,10 +1404,18 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     context.properties = [];
 
     if ( game.user.isGM || identified ) {
-      context.properties.push(...system.tooltipProperties ?? [], ...system.activatedEffectChatProperties ?? []);
+      context.properties.push(...system.tooltipProperties ?? []);
+      if ( type === "spell" ) context.properties.push(...this.labels.components.tags);
+      else context.properties.push(...system.activatedEffectChatProperties ?? []);
       if ( "proficient" in system ) {
         context.properties.push(CONFIG.DND5E.proficiencyLevels[system.prof?.multiplier || 0]);
       }
+    }
+
+    if ( properties.has("concentration") ) {
+      context.labels.duration = game.i18n.format("DND5E.ConcentrationDuration", {
+        duration: context.labels.duration.toLocaleLowerCase(game.i18n.lang)
+      });
     }
 
     context.properties = context.properties.filter(_ => _);

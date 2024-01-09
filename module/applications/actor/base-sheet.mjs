@@ -650,10 +650,10 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
       case "armor":
         app = new ActorArmorConfig(this.actor);
         break;
-      case "hit-dice":
+      case "hitDice":
         app = new ActorHitDiceConfig(this.actor);
         break;
-      case "hit-points":
+      case "hitPoints":
         app = new ActorHitPointsConfig(this.actor);
         break;
       case "initiative":

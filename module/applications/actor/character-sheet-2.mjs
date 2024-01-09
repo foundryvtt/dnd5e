@@ -1,6 +1,7 @@
 import ActorSheet5eCharacter from "./character-sheet.mjs";
 import * as Trait from "../../documents/actor/trait.mjs";
 import Tabs5e from "../tabs.mjs";
+import { simplifyBonus } from "../../utils.mjs";
 
 /**
  * An Actor sheet for player character type actors.
@@ -289,6 +290,28 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
     // Inventory
     this._prepareItems(context);
 
+    // Spellcasting
+    context.spellcasting = [];
+    const msak = simplifyBonus(this.actor.system.bonuses.msak.attack, context.rollData);
+    const rsak = simplifyBonus(this.actor.system.bonuses.rsak.attack, context.rollData);
+
+    for ( const item of Object.values(this.actor.classes).sort((a, b) => b.system.levels - a.system.levels) ) {
+      const sc = item.spellcasting;
+      if ( !sc?.progression || (sc.progression === "none") ) continue;
+      const ability = this.actor.system.abilities[sc.ability];
+      const mod = ability?.mod ?? 0;
+      const attackBonus = msak === rsak ? msak : 0;
+      const attack = mod + this.actor.system.attributes.prof + attackBonus;
+      const name = item.system.spellcasting.progression === sc.progression ? item.name : item.subclass?.name;
+      context.spellcasting.push({
+        label: game.i18n.format("DND5E.SpellcastingClass", { class: name }),
+        ability: { sign: Math.sign(mod) < 0 ? "-" : "+", value: Math.abs(mod), ability: sc.ability },
+        attack: { sign: Math.sign(attack) < 0 ? "-" : "+", value: Math.abs(attack) },
+        primary: this.actor.system.attributes.spellcasting === sc.ability,
+        save: ability?.dc ?? 0
+      });
+    }
+
     // Containers
     for ( const container of context.containers ) {
       const ctx = context.itemContext[container.id];
@@ -303,10 +326,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
   /** @inheritDoc */
   _getLabels() {
     const labels = super._getLabels();
-    labels.damageAndHealing = Object.fromEntries(Object.entries({
-      ...CONFIG.DND5E.damageTypes,
-      ...CONFIG.DND5E.healingTypes
-    }).map(([k, { label }]) => [k, label]));
+    labels.damageAndHealing = { ...CONFIG.DND5E.damageTypes, ...CONFIG.DND5E.healingTypes };
     return labels;
   }
 
@@ -655,6 +675,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
     const { action } = event.currentTarget.dataset;
     switch ( action ) {
       case "findItem": this._onFindItem(event.currentTarget.dataset.itemType); break;
+      case "spellcasting": this._onToggleSpellcasting(event); break;
     }
   }
 
@@ -695,6 +716,18 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
       case "race": game.packs.get("dnd5e.races").render(true); break;
       case "background": game.packs.get("dnd5e.backgrounds").render(true); break;
     }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle toggling the character's primary spellcasting ability.
+   * @param {PointerEvent} event  The triggering event.
+   * @protected
+   */
+  _onToggleSpellcasting(event) {
+    const ability = event.currentTarget.closest("[data-ability]")?.dataset.ability;
+    return this.actor.update({ "system.attributes.spellcasting": ability });
   }
 
   /* -------------------------------------------- */

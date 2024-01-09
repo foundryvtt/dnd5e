@@ -1,10 +1,22 @@
 <section class="content">
     <section class="header">
+        {{#if school}}
+        <div class="school">
+            {{#if (eq school "con")}}
+            <dnd5e-icon src="systems/dnd5e/icons/svg/schools/conj.svg"></dnd5e-icon>
+            {{else}}
+            <dnd5e-icon src="systems/dnd5e/icons/svg/schools/{{ school }}.svg"></dnd5e-icon>
+            {{/if}}
+        </div>
+        {{/if}}
         <div class="top">
             <img src="{{ img }}" alt="{{ name }}">
             <div class="name name-stacked">
                 <span class="title">{{ name }}</span>
-                <span class="subtitle">{{ type }}</span>
+                <span class="subtitle">
+                    {{#if labels.level}}{{ labels.level }} &bull; {{/if}}
+                    {{ subtitle }}
+                </span>
             </div>
         </div>
         <div class="bottom">
@@ -31,6 +43,40 @@
             </div>
         </div>
     </section>
+    {{#if (eq type "spell")}}
+    <ul class="info unlist">
+        <li>
+            <strong>{{ localize "DND5E.SpellCastTime" }}:</strong>
+            <span class="value">
+                {{ labels.activation }}
+                {{#if activation.condition}}
+                <span class="condition">({{ activation.condition }})</span>
+                {{/if}}
+            </span>
+        </li>
+        <li>
+            <strong>{{ localize "DND5E.Range" }}:</strong>
+            <span class="value">{{ labels.range }}</span>
+        </li>
+        <li>
+            <strong>{{ localize "DND5E.Target" }}:</strong>
+            <span class="value">{{ labels.target }}</span>
+        </li>
+        <li>
+            <strong>{{ localize "DND5E.Components" }}:</strong>
+            <span class="value">
+                {{ labels.components.vsm }}
+                {{#if materials.value}}
+                <span class="materials">({{ materials.value }})</span>
+                {{/if}}
+            </span>
+        </li>
+        <li>
+            <strong>{{ localize "DND5E.Duration" }}:</strong>
+            <span class="value">{{ labels.duration }}</span>
+        </li>
+    </ul>
+    {{/if}}
     <section class="description">{{{ description }}}</section>
     <ul class="pills">
        {{#each properties}}

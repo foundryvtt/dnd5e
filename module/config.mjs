@@ -1365,46 +1365,59 @@ preLocalize("physicalDamageTypes", { sort: true });
  */
 DND5E.damageTypes = {
   acid: {
-    label: "DND5E.DamageAcid"
+    label: "DND5E.DamageAcid",
+    icon: "systems/dnd5e/icons/svg/damage/acid.svg"
   },
   bludgeoning: {
     label: "DND5E.DamageBludgeoning",
+    icon: "systems/dnd5e/icons/svg/damage/bludgeoning.svg",
     isPhysical: true
   },
   cold: {
-    label: "DND5E.DamageCold"
+    label: "DND5E.DamageCold",
+    icon: "systems/dnd5e/icons/svg/damage/cold.svg"
   },
   fire: {
-    label: "DND5E.DamageFire"
+    label: "DND5E.DamageFire",
+    icon: "systems/dnd5e/icons/svg/damage/fire.svg"
   },
   force: {
-    label: "DND5E.DamageForce"
+    label: "DND5E.DamageForce",
+    icon: "systems/dnd5e/icons/svg/damage/force.svg"
   },
   lightning: {
-    label: "DND5E.DamageLightning"
+    label: "DND5E.DamageLightning",
+    icon: "systems/dnd5e/icons/svg/damage/lightning.svg"
   },
   necrotic: {
-    label: "DND5E.DamageNecrotic"
+    label: "DND5E.DamageNecrotic",
+    icon: "systems/dnd5e/icons/svg/damage/acid.svg"
   },
   piercing: {
     label: "DND5E.DamagePiercing",
+    icon: "systems/dnd5e/icons/svg/damage/piercing.svg",
     isPhysical: true
   },
   poison: {
-    label: "DND5E.DamagePoison"
+    label: "DND5E.DamagePoison",
+    icon: "systems/dnd5e/icons/svg/statuses/poisoned.svg"
   },
   psychic: {
-    label: "DND5E.DamagePsychic"
+    label: "DND5E.DamagePsychic",
+    icon: "systems/dnd5e/icons/svg/damage/psychic.svg"
   },
   radiant: {
-    label: "DND5E.DamageRadiant"
+    label: "DND5E.DamageRadiant",
+    icon: "systems/dnd5e/icons/svg/damage/radiant.svg"
   },
   slashing: {
     label: "DND5E.DamageSlashing",
+    icon: "systems/dnd5e/icons/svg/damage/slashing.svg",
     isPhysical: true
   },
   thunder: {
-    label: "DND5E.DamageThunder"
+    label: "DND5E.DamageThunder",
+    icon: "systems/dnd5e/icons/svg/damage/thunder.svg"
   }
 };
 patchConfig("damageTypes", "label", { since: "DnD5e 3.0", until: "DnD5e 3.2" });
@@ -1420,10 +1433,12 @@ preLocalize("damageTypes", { keys: ["label"], sort: true });
  */
 DND5E.healingTypes = {
   healing: {
-    label: "DND5E.Healing"
+    label: "DND5E.Healing",
+    icon: "systems/dnd5e/icons/svg/damage/healing.svg"
   },
   temphp: {
-    label: "DND5E.HealingTemp"
+    label: "DND5E.HealingTemp",
+    icon: "systems/dnd5e/icons/svg/damage/temphp.svg"
   }
 };
 patchConfig("healingTypes", "label", { since: "DnD5e 3.0", until: "DnD5e 3.2" });
@@ -1879,11 +1894,13 @@ preLocalize("spellComponents", {keys: ["label", "abbr"]});
 DND5E.spellTags = {
   concentration: {
     label: "DND5E.Concentration",
-    abbr: "DND5E.ConcentrationAbbr"
+    abbr: "DND5E.ConcentrationAbbr",
+    icon: "systems/dnd5e/icons/svg/statuses/concentrating.svg"
   },
   ritual: {
     label: "DND5E.Ritual",
-    abbr: "DND5E.RitualAbbr"
+    abbr: "DND5E.RitualAbbr",
+    icon: "systems/dnd5e/icons/svg/items/spell.svg"
   }
 };
 preLocalize("spellTags", {keys: ["label", "abbr"]});
