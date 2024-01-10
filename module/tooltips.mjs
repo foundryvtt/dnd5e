@@ -100,16 +100,18 @@ export default class Tooltips5e {
     const { content, classes } = await doc.system.richTooltip();
     this.tooltip.innerHTML = content;
     classes?.forEach(c => this.tooltip.classList.add(c));
-    requestAnimationFrame(() => this._positionItemTooltip());
+    const { tooltipDirection } = game.tooltip.element.dataset;
+    requestAnimationFrame(() => this._positionItemTooltip(tooltipDirection));
   }
 
   /* -------------------------------------------- */
 
   /**
    * Position a tooltip after rendering.
+   * @param {string} [direction="LEFT"]  The direction to position the tooltip.
    * @protected
    */
-  _positionItemTooltip() {
+  _positionItemTooltip(direction=TooltipManager.TOOLTIP_DIRECTIONS.LEFT) {
     const tooltip = this.tooltip;
     const { clientWidth, clientHeight } = document.documentElement;
     const tooltipBox = tooltip.getBoundingClientRect();
@@ -117,13 +119,14 @@ export default class Tooltips5e {
     const maxTop = clientHeight - tooltipBox.height;
     const top = Math.min(maxTop, targetBox.bottom - ((targetBox.height + tooltipBox.height) / 2));
     const left = targetBox.left - tooltipBox.width - game.tooltip.constructor.TOOLTIP_MARGIN_PX;
+    const right = targetBox.right + game.tooltip.constructor.TOOLTIP_MARGIN_PX;
+    const { RIGHT, LEFT } = TooltipManager.TOOLTIP_DIRECTIONS;
+    if ( (direction === LEFT) && (left < 0) ) direction = RIGHT;
+    else if ( (direction === RIGHT) && (right + targetBox.width > clientWidth) ) direction = LEFT;
     tooltip.style.top = `${Math.max(0, top)}px`;
     tooltip.style.right = "";
-    if ( left > 0 ) tooltip.style.left = `${left}px`;
-    else {
-      const right = targetBox.right + game.tooltip.constructor.TOOLTIP_MARGIN_PX;
-      tooltip.style.left = `${Math.min(right, clientWidth - tooltipBox.width)}px`;
-    }
+    if ( direction === RIGHT ) tooltip.style.left = `${Math.min(right, clientWidth - tooltipBox.width)}px`;
+    else tooltip.style.left = `${Math.max(0, left)}px`;
 
     // Set overflowing styles for item tooltips.
     if ( tooltip.classList.contains("item-tooltip") ) {

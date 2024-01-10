@@ -433,6 +433,32 @@
         }
       }
 
+      /* Effect Duration */
+      .effect-name {
+        .name { flex: 1; }
+        .duration {
+          padding: .25rem;
+          border: 1px dashed var(--color-border-light-1);
+          border-radius: 4px;
+          font-family: var(--dnd5e-font-roboto-condensed);
+          text-transform: uppercase;
+          font-size: var(--font-size-11);
+          color: var(--color-text-dark-5);
+
+          .separator, .least-significant { color: var(--color-text-light-6); }
+        }
+      }
+
+      /* Effect Source */
+      .effect-source {
+        width: 150px;
+        border: none;
+
+        &.item-detail {
+          color: var(--color-text-dark-5);
+        }
+      }
+
       /* Item Controls */
       .item-controls {
         width: 60px;
@@ -444,6 +470,11 @@
 
         .item-control.active { color: var(--dnd5e-color-black); }
 
+        &.item-detail .radio-button {
+          background: none;
+          &[aria-pressed="true"]::before { background: var(--color-border-dark-5); }
+        }
+
         [data-context-menu] {
           position: absolute;
           inset-block: 0;
@@ -453,6 +484,13 @@
           align-items: center;
           justify-content: center;
         }
+      }
+
+      /* Effect Controls */
+      .item-header.effect-controls {
+        padding-right: .75rem;
+        justify-content: end;
+        color: var(--color-text-light-0);
       }
 
       @container (min-width: 600px) {

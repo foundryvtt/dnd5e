@@ -11,6 +11,20 @@ export default class EffectsElement extends HTMLElement {
       });
     }
 
+    for ( const source of this.querySelectorAll(".effect-source a") ) {
+      source.addEventListener("click", this._onClickEffectSource.bind(this));
+    }
+
+    for ( const control of this.querySelectorAll("[data-context-menu]") ) {
+      control.addEventListener("click", event => {
+        event.preventDefault();
+        event.stopPropagation();
+        event.currentTarget.closest("[data-effect-id]").dispatchEvent(new PointerEvent("contextmenu", {
+          view: window, bubbles: true, cancelable: true
+        }));
+      });
+    }
+
     new ContextMenu(this, "[data-effect-id]", [], {onOpen: element => {
       const effect = this.getEffect(element.dataset);
       if ( !effect ) return;
@@ -77,6 +91,7 @@ export default class EffectsElement extends HTMLElement {
         type: "suppressed",
         label: game.i18n.localize("DND5E.EffectUnavailable"),
         effects: [],
+        disabled: true,
         info: [game.i18n.localize("DND5E.EffectUnavailableInfo")]
       }
     };
@@ -183,6 +198,24 @@ export default class EffectsElement extends HTMLElement {
       "duration.rounds": li.dataset.effectType === "temporary" ? 1 : undefined,
       disabled: li.dataset.effectType === "inactive"
     }]);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle clicking an effect's source.
+   * @param {PointerEvent} event  The triggering event.
+   * @protected
+   */
+  async _onClickEffectSource(event) {
+    const { uuid } = event.currentTarget.dataset;
+    const doc = await fromUuid(uuid);
+    if ( !doc ) return;
+    if ( !doc.testUserPermission(game.user, "LIMITED") ) {
+      ui.notifications.warn("DND5E.DocumentViewWarn", { localize: true });
+      return;
+    }
+    doc.sheet.render(true);
   }
 
   /* -------------------------------------------- */

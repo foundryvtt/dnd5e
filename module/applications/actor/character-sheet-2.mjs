@@ -318,6 +318,21 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
       ctx.capacity = await container.system.computeCapacity();
     }
 
+    // Effects
+    for ( const category of Object.values(context.effects) ) {
+      category.effects = await Promise.all(category.effects.map(async effect => {
+        effect.updateDuration();
+        const { id, name, img, disabled, duration } = effect;
+        return {
+          id, name, img, disabled, duration,
+          parentId: effect.target === effect.parent ? null : effect.parent.id,
+          source: await effect.getSource(),
+          durationParts: duration.remaining ? duration.label.split(", ") : []
+        };
+      }));
+    }
+
+    context.effects.suppressed.info = context.effects.suppressed.info[0];
     return context;
   }
 
@@ -525,7 +540,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
     if ( this.isEditable ) {
       html.find(".meter > .hit-points").on("click", event => this._toggleEditHP(event, true));
       html.find(".meter > .hit-points > input").on("blur", event => this._toggleEditHP(event, false));
-      html.find(".create-item").on("click", this._onCreateItem.bind(this));
+      html.find(".create-child").on("click", this._onCreateChild.bind(this));
     }
 
     // Edit mode only.
@@ -572,6 +587,10 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
     this.form.classList.add(`tab-${active}`);
     const sidebarCollapsed = game.user.getFlag("dnd5e", `sheetPrefs.character.tabs.${active}.collapseSidebar`);
     if ( sidebarCollapsed !== undefined ) this._toggleSidebar(sidebarCollapsed);
+    const createChild = this.form.querySelector(".create-child");
+    createChild.setAttribute("aria-label", game.i18n.format("SIDEBAR.Create", {
+      type: game.i18n.localize(`DOCUMENT.${active === "effects" ? "ActiveEffect" : "Item"}`)
+    }));
   }
 
   /* -------------------------------------------- */
@@ -704,11 +723,16 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
   /* -------------------------------------------- */
 
   /**
-   * Handle creating a new Item.
+   * Handle creating a new embedded child.
    * @protected
    */
-  _onCreateItem() {
+  _onCreateChild() {
     const activeTab = this._tabs?.[0]?.active ?? "details";
+    if ( activeTab === "effects" ) return ActiveEffect.implementation.create({
+      name: game.i18n.localize("DND5E.EffectNew"),
+      icon: "icons/svg/aura.svg"
+    }, { parent: this.actor, renderSheet: true });
+
     let types = {
       inventory: ["weapon", "equipment", "consumable", "tool", "container", "loot"],
       features: ["feat", "race", "background", "class", "subclass"],
@@ -760,14 +784,19 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
    * @protected
    */
   _applyItemTooltips(element) {
-    const itemId = element.closest("[data-item-id]")?.dataset.itemId;
-    const item = this.actor.items.get(itemId);
-    if ( !item || ("tooltip" in element.dataset) ) return;
+    if ( "tooltip" in element.dataset ) return;
+    const target = element.closest("[data-item-id], [data-uuid]");
+    let uuid = target.dataset.uuid;
+    if ( !uuid ) {
+      const item = this.actor.items.get(target.dataset.itemId);
+      uuid = item?.uuid;
+    }
+    if ( !uuid ) return;
     element.dataset.tooltip = `
-      <section class="loading" data-uuid="${item.uuid}"><i class="fas fa-spinner fa-spin-pulse"></i></section>
+      <section class="loading" data-uuid="${uuid}"><i class="fas fa-spinner fa-spin-pulse"></i></section>
     `;
     element.dataset.tooltipClass = "dnd5e2 item-tooltip";
-    element.dataset.tooltipDirection = "LEFT";
+    element.dataset.tooltipDirection ??= "LEFT";
   }
 
   /* -------------------------------------------- */

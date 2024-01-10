@@ -341,6 +341,11 @@
                     {{> "dnd5e.character-spells" }}
                 </div>
 
+                {{!-- Effects --}}
+                <div class="tab effects" data-group="primary" data-tab="effects">
+                    {{> "dnd5e.active-effects2" }}
+                </div>
+
             </section>
 
         </div>
@@ -363,8 +368,8 @@
         </div>
     </section>
 
-    {{!-- Item Creation --}}
-    <button type="button" class="create-item gold-button"
+    {{!-- Child Creation --}}
+    <button type="button" class="create-child gold-button"
             aria-label="{{ "SIDEBAR.Create" type=(localize "DOCUMENT.Item") }}">
         <i class="fas fa-plus"></i>
     </button>

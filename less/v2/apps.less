@@ -83,6 +83,10 @@
       border-radius: 3px 3px 0 0;
       border-bottom: 1px solid var(--dnd5e-color-gold);
 
+      &.disabled {
+        background: linear-gradient(to right, var(--color-border-dark-3), var(--color-border-light-2));
+      }
+
       h3 {
         border: none;
         margin: 0;
@@ -727,6 +731,7 @@
     }
 
     .info {
+      text-align: left;
       font-size: var(--font-size-12);
 
       .materials, .condition {
@@ -736,6 +741,7 @@
     }
 
     .description {
+      text-align: left;
       font-size: var(--font-size-12);
       line-height: normal;
       max-height: 450px;
@@ -751,7 +757,7 @@
 
       h2 { font-size: 1.4em; }
       h1 { font-size: 1.5em; }
-  
+
       &.overflowing { mask-image: linear-gradient(to bottom, black 90%, transparent); }
       &:empty { margin-bottom: .5rem; }
     }
@@ -762,7 +768,7 @@
       line-height: 1;
     }
   }
-  
+
   &.rule-tooltip {
     max-width: 450px;
 

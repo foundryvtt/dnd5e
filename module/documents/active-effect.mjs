@@ -25,6 +25,19 @@ export default class ActiveEffect5e extends ActiveEffect {
   /* -------------------------------------------- */
 
   /**
+   * Retrieve the source Actor or Item, or null if it could not be determined.
+   * @returns {Promise<Actor5e|Item5e|null>}
+   */
+  async getSource() {
+    if ( (this.target instanceof dnd5e.documents.Actor5e) && (this.parent instanceof dnd5e.documents.Item5e) ) {
+      return this.parent;
+    }
+    return fromUuid(this.origin);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Create an ActiveEffect instance from some status effect data.
    * @param {string|object} effectData               The status effect ID or its data.
    * @param {DocumentModificationContext} [options]  Additional options to pass to ActiveEffect instantiation.
@@ -180,27 +193,7 @@ export default class ActiveEffect5e extends ActiveEffect {
    */
   determineSuppression() {
     this.isSuppressed = false;
-    if ( this.disabled || (this.parent.documentName !== "Actor") || !this.origin ) return;
-    // Deliberately avoiding using fromUuidSync here, see: https://github.com/foundryvtt/dnd5e/pull/1980
-    const parsed = foundry.utils.parseUuid(this.origin);
-    if ( !parsed ) return;
-    const { collection, documentId: parentId, embedded } = parsed;
-    let item;
-    // Case 1: This is a linked or sidebar actor
-    if ( collection === game.actors ) {
-      const [documentType, documentId] = embedded;
-      if ( (parentId !== this.parent.id) || (documentType !== "Item") ) return;
-      item = this.parent.items.get(documentId);
-    }
-    // Case 2: This is a synthetic actor on the scene
-    else if ( collection === game.scenes ) {
-      if ( embedded.length > 4 ) embedded.splice(2, 2);
-      const [, documentId, syntheticItem, syntheticItemId] = embedded;
-      if ( (documentId !== this.parent.token?.id) || (syntheticItem !== "Item") ) return;
-      item = this.parent.items.get(syntheticItemId);
-    }
-    if ( !item ) return;
-    this.isSuppressed = item.areEffectsSuppressed;
+    if ( this.parent instanceof dnd5e.documents.Item5e ) this.isSuppressed = this.parent.areEffectsSuppressed;
   }
 
   /* -------------------------------------------- */

@@ -384,7 +384,7 @@ export class ItemDataModel extends SystemDataModel {
       }
     }
 
-    if ( properties.has("concentration") ) {
+    if ( properties?.has("concentration") ) {
       context.labels.duration = game.i18n.format("DND5E.ConcentrationDuration", {
         duration: context.labels.duration.toLocaleLowerCase(game.i18n.lang)
       });
