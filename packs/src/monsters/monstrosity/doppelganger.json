@@ -11,7 +11,8 @@
         "bonuses": {
           "check": "",
           "save": ""
-        }
+        },
+        "max": null
       },
       "dex": {
         "value": 18,
@@ -19,7 +20,8 @@
         "bonuses": {
           "check": "",
           "save": ""
-        }
+        },
+        "max": null
       },
       "con": {
         "value": 14,
@@ -27,7 +29,8 @@
         "bonuses": {
           "check": "",
           "save": ""
-        }
+        },
+        "max": null
       },
       "int": {
         "value": 11,
@@ -35,7 +38,8 @@
         "bonuses": {
           "check": "",
           "save": ""
-        }
+        },
+        "max": null
       },
       "wis": {
         "value": 12,
@@ -43,7 +47,8 @@
         "bonuses": {
           "check": "",
           "save": ""
-        }
+        },
+        "max": null
       },
       "cha": {
         "value": 14,
@@ -51,7 +56,8 @@
         "bonuses": {
           "check": "",
           "save": ""
-        }
+        },
+        "max": null
       }
     },
     "attributes": {
@@ -62,7 +68,6 @@
       },
       "hp": {
         "value": 52,
-        "min": 0,
         "max": 52,
         "temp": 0,
         "tempmax": 0,
@@ -92,7 +97,8 @@
         "units": "ft",
         "special": ""
       },
-      "spellcasting": ""
+      "spellcasting": "",
+      "exhaustion": 0
     },
     "details": {
       "biography": {
@@ -100,7 +106,7 @@
         "public": ""
       },
       "alignment": "Neutral",
-      "race": "",
+      "race": null,
       "type": {
         "value": "monstrosity",
         "subtype": "Shapechanger",
@@ -145,6 +151,10 @@
           "common"
         ],
         "custom": ""
+      },
+      "dm": {
+        "amount": {},
+        "bypasses": []
       }
     },
     "currency": {
@@ -385,7 +395,8 @@
         "value": false,
         "initiative": null
       }
-    }
+    },
+    "tools": {}
   },
   "prototypeToken": {
     "name": "Doppelganger",
@@ -462,8 +473,7 @@
       "system": {
         "description": {
           "value": "<p>In the first round of a combat, the doppelganger has<strong> advantage </strong>on attack rolls against any creature it has surprised.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -485,7 +495,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -496,12 +507,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "",
@@ -529,7 +542,9 @@
         "recharge": {
           "value": null,
           "charged": false
-        }
+        },
+        "crewed": false,
+        "properties": []
       },
       "effects": [],
       "folder": null,
@@ -560,8 +575,7 @@
       "system": {
         "description": {
           "value": "<p>If the doppelganger surprises a creature and hits it with an attack during the first round of combat, the target takes an extra 10 (3d6) damage from the attack.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -583,7 +597,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -594,12 +609,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "other",
@@ -632,7 +649,9 @@
         "recharge": {
           "value": null,
           "charged": false
-        }
+        },
+        "crewed": false,
+        "properties": []
       },
       "effects": [],
       "folder": null,
@@ -663,8 +682,7 @@
       "system": {
         "description": {
           "value": "<p>The doppelganger makes two melee attacks.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -686,7 +704,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -697,12 +716,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "",
@@ -730,7 +751,9 @@
         "recharge": {
           "value": null,
           "charged": false
-        }
+        },
+        "crewed": false,
+        "properties": []
       },
       "effects": [],
       "folder": null,
@@ -761,8 +784,7 @@
       "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+6 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>7 (1d6 + 4) <em>bludgeoning damage</em></strong>.</p></section>\n<p>The Doppelganger attacks with its Slam.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -794,7 +816,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": 5,
@@ -805,12 +828,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "dex",
         "actionType": "mwak",
@@ -844,25 +869,19 @@
           "dt": null,
           "conditions": ""
         },
-        "weaponType": "natural",
-        "baseItem": "",
-        "properties": {
-          "fin": true,
-          "amm": false,
-          "fir": false,
-          "foc": false,
-          "hvy": false,
-          "lgt": false,
-          "lod": false,
-          "rch": false,
-          "rel": false,
-          "ret": false,
-          "spc": false,
-          "thr": false,
-          "two": false,
-          "ver": false
+        "properties": [
+          "fin"
+        ],
+        "proficient": 1,
+        "unidentified": {
+          "description": ""
         },
-        "proficient": true
+        "type": {
+          "value": "natural",
+          "baseItem": ""
+        },
+        "container": null,
+        "crewed": false
       },
       "effects": [],
       "folder": null,
@@ -889,8 +908,7 @@
       "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p>The doppelganger magically reads the surface thoughts of one creature within 60 ft. of it. The effect can penetrate barriers, but 3 ft. of wood or dirt, 2 ft. of stone, 2 inches of metal, or a thin sheet of lead blocks it.</p>\n<p>While the target is in range, the doppelganger can continue reading its thoughts, as long as the doppelganger's concentration isn't broken (as if concentrating on a spell). While reading the target's mind, the doppelganger has advantage on Wisdom (Insight) and Charisma (Deception, Intimidation, and Persuasion) checks against the target.</p>\n</section>\n<p>The doppelganger magically reads the surface thoughts of one creature within 60 ft. of it.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -912,7 +930,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": 60,
@@ -923,12 +942,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "",
@@ -956,7 +977,9 @@
         "recharge": {
           "value": null,
           "charged": false
-        }
+        },
+        "crewed": false,
+        "properties": []
       },
       "effects": [],
       "folder": null,
@@ -987,8 +1010,7 @@
       "system": {
         "description": {
           "value": "<section class=\"secret\"><p>The doppelganger can use its action to <strong>polymorph</strong> into a Small or Medium humanoid it has seen, or back into its true form.</p><p>Its statistics, other than its size, are the same in each form. Any equipment it is wearing or carrying isn't transformed. It reverts to its true form if it dies.</p></section><p>The doppelganger can use its action to <strong>polymorph</strong> into a Small or Medium humanoid it has seen, or back into its true form.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -1010,7 +1032,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -1021,12 +1044,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": null,
         "actionType": "",
@@ -1054,7 +1079,9 @@
         "recharge": {
           "value": null,
           "charged": false
-        }
+        },
+        "crewed": false,
+        "properties": []
       },
       "effects": [],
       "folder": null,
@@ -1090,7 +1117,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787233147,
-    "modifiedTime": 1701908189746,
+    "modifiedTime": 1704847052474,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!mWbrPhcKOz6oLXMV"

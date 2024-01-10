@@ -11,7 +11,8 @@
         "bonuses": {
           "check": "",
           "save": ""
-        }
+        },
+        "max": null
       },
       "dex": {
         "value": 13,
@@ -19,7 +20,8 @@
         "bonuses": {
           "check": "",
           "save": ""
-        }
+        },
+        "max": null
       },
       "con": {
         "value": 14,
@@ -27,7 +29,8 @@
         "bonuses": {
           "check": "",
           "save": ""
-        }
+        },
+        "max": null
       },
       "int": {
         "value": 10,
@@ -35,7 +38,8 @@
         "bonuses": {
           "check": "",
           "save": ""
-        }
+        },
+        "max": null
       },
       "wis": {
         "value": 11,
@@ -43,7 +47,8 @@
         "bonuses": {
           "check": "",
           "save": ""
-        }
+        },
+        "max": null
       },
       "cha": {
         "value": 10,
@@ -51,7 +56,8 @@
         "bonuses": {
           "check": "",
           "save": ""
-        }
+        },
+        "max": null
       }
     },
     "attributes": {
@@ -62,7 +68,6 @@
       },
       "hp": {
         "value": 65,
-        "min": 0,
         "max": 65,
         "temp": 0,
         "tempmax": 0,
@@ -92,7 +97,8 @@
         "units": "ft",
         "special": ""
       },
-      "spellcasting": ""
+      "spellcasting": "",
+      "exhaustion": 0
     },
     "details": {
       "biography": {
@@ -100,7 +106,7 @@
         "public": ""
       },
       "alignment": "Any Alignment",
-      "race": "",
+      "race": null,
       "type": {
         "value": "humanoid",
         "subtype": "Human",
@@ -146,6 +152,10 @@
           "draconic"
         ],
         "custom": ""
+      },
+      "dm": {
+        "amount": {},
+        "bypasses": []
       }
     },
     "currency": {
@@ -386,7 +396,8 @@
         "value": false,
         "initiative": null
       }
-    }
+    },
+    "tools": {}
   },
   "prototypeToken": {
     "name": "Half-Red Dragon Veteran",
@@ -463,8 +474,7 @@
       "system": {
         "description": {
           "value": "<p>Plate consists of shaped, interlocking metal plates to cover the entire body. A suit of plate includes gauntlets, heavy leather boots, a visored helmet, and thick layers of padding underneath the armor. Buckles and straps distribute the weight over the body.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -496,7 +506,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -507,12 +518,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": null,
         "actionType": null,
@@ -534,7 +547,6 @@
         },
         "armor": {
           "value": 18,
-          "type": "heavy",
           "dex": null
         },
         "hp": {
@@ -543,17 +555,24 @@
           "dt": null,
           "conditions": ""
         },
-        "baseItem": "plate",
         "speed": {
           "value": null,
           "conditions": ""
         },
         "strength": 15,
-        "stealth": true,
-        "proficient": true,
+        "proficient": 1,
         "properties": [
           "stealthDisadvantage"
-        ]
+        ],
+        "unidentified": {
+          "description": ""
+        },
+        "type": {
+          "value": "heavy",
+          "baseItem": "plate"
+        },
+        "container": null,
+        "crewed": false
       },
       "effects": [],
       "folder": null,
@@ -564,6 +583,11 @@
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.items.OjkIqlW2UpgFcjZa"
+        },
+        "dnd5e": {
+          "migratedProperties": [
+            "stealthDisadvantage"
+          ]
         }
       },
       "_stats": {
@@ -584,8 +608,7 @@
       "system": {
         "description": {
           "value": "<p>The veteran makes two longsword attacks. If it has a shortsword drawn, it can also make a shortsword attack.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -607,7 +630,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -618,12 +642,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": null,
         "actionType": "",
@@ -651,7 +677,9 @@
         "recharge": {
           "value": null,
           "charged": false
-        }
+        },
+        "crewed": false,
+        "properties": []
       },
       "effects": [],
       "folder": null,
@@ -682,8 +710,7 @@
       "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+5 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>7 (1d8 + 3) <em>slashing damage</em></strong>, or <strong>8 (1d10 + 3) <em>slashing damage</em></strong> if used with two hands.</p></section>\n<p>The Half-Red Dragon Veteran attacks with its Longsword.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -715,7 +742,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": 5,
@@ -726,12 +754,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "str",
         "actionType": "mwak",
@@ -765,25 +795,19 @@
           "dt": null,
           "conditions": ""
         },
-        "weaponType": "martialM",
-        "baseItem": "longsword",
-        "properties": {
-          "amm": false,
-          "fin": false,
-          "fir": false,
-          "foc": false,
-          "hvy": false,
-          "lgt": false,
-          "lod": false,
-          "rch": false,
-          "rel": false,
-          "ret": false,
-          "spc": false,
-          "thr": false,
-          "two": false,
-          "ver": true
+        "properties": [
+          "ver"
+        ],
+        "proficient": 1,
+        "unidentified": {
+          "description": ""
         },
-        "proficient": true
+        "type": {
+          "value": "martialM",
+          "baseItem": "longsword"
+        },
+        "container": null,
+        "crewed": false
       },
       "effects": [],
       "folder": null,
@@ -814,8 +838,7 @@
       "system": {
         "description": {
           "value": "<section class=\"secret\"><p><em>Melee Weapon Attack:</em><strong>+5 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>6 (1d6 + 3) <em>piercing damage</em></strong>.</p><p></p></section><p>The Half-Red Dragon Veteran attacks with its Shortsword.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -847,7 +870,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": 5,
@@ -858,12 +882,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "str",
         "actionType": "mwak",
@@ -897,25 +923,20 @@
           "dt": null,
           "conditions": ""
         },
-        "weaponType": "martialM",
-        "baseItem": "shortsword",
-        "properties": {
-          "amm": false,
-          "fin": true,
-          "fir": false,
-          "foc": false,
-          "hvy": false,
-          "lgt": true,
-          "lod": false,
-          "rch": false,
-          "rel": false,
-          "ret": false,
-          "spc": false,
-          "thr": false,
-          "two": false,
-          "ver": false
+        "properties": [
+          "fin",
+          "lgt"
+        ],
+        "proficient": 1,
+        "unidentified": {
+          "description": ""
         },
-        "proficient": true
+        "type": {
+          "value": "martialM",
+          "baseItem": "shortsword"
+        },
+        "container": null,
+        "crewed": false
       },
       "effects": [],
       "folder": null,
@@ -946,8 +967,7 @@
       "system": {
         "description": {
           "value": "<section class=\"secret\"><p>Ranged Weapon Attack: +3 to hit, range 100/400 ft., one target. Hit: <strong>6 (1d10 + 1) <em>piercing damage</em></strong>.</p><p></p></section><p>The Half-Red Dragon Veteran attacks with its Heavy Crossbow.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -979,7 +999,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": 100,
@@ -990,12 +1011,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "dex",
         "actionType": "rwak",
@@ -1029,25 +1052,22 @@
           "dt": null,
           "conditions": ""
         },
-        "weaponType": "martialM",
-        "baseItem": "heavycrossbow",
-        "properties": {
-          "amm": true,
-          "fin": false,
-          "fir": false,
-          "foc": false,
-          "hvy": true,
-          "lgt": false,
-          "lod": true,
-          "rch": false,
-          "rel": false,
-          "ret": false,
-          "spc": false,
-          "thr": false,
-          "two": true,
-          "ver": false
+        "properties": [
+          "amm",
+          "hvy",
+          "lod",
+          "two"
+        ],
+        "proficient": 1,
+        "unidentified": {
+          "description": ""
         },
-        "proficient": true
+        "type": {
+          "value": "martialM",
+          "baseItem": "heavycrossbow"
+        },
+        "container": null,
+        "crewed": false
       },
       "effects": [],
       "folder": null,
@@ -1078,8 +1098,7 @@
       "system": {
         "description": {
           "value": "<section class=\"secret\"><p>The veteran exhales fire in a 15-foot cone. Each creature in that area must make a  <strong>DC 15 Dexterity</strong> saving throw, taking <strong>24 (7d6) <em>fire damage</em></strong> on a failed save, or half as much damage on a successful one.</p><p></p></section><p>The veteran exhales fire in a 15-foot cone. Each creature in that area must make a <strong>Dexterity</strong> saving throw.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -1101,7 +1120,8 @@
           "value": 15,
           "width": null,
           "units": "ft",
-          "type": "cone"
+          "type": "cone",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -1112,12 +1132,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "save",
@@ -1150,7 +1172,9 @@
         "recharge": {
           "value": 5,
           "charged": true
-        }
+        },
+        "crewed": false,
+        "properties": []
       },
       "effects": [],
       "folder": null,
@@ -1174,7 +1198,32 @@
       "_key": "!actors.items!5TmstVMURpVtmNR3.68Y4sNHbVetQN3wa"
     }
   ],
-  "effects": [],
+  "effects": [
+    {
+      "_id": "dnd5eencumbered0",
+      "name": "Encumbered",
+      "icon": "systems/dnd5e/icons/svg/statuses/encumbered.svg",
+      "statuses": [
+        "encumbered"
+      ],
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": 0,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": 0,
+        "startTurn": 0
+      },
+      "description": "",
+      "origin": null,
+      "transfer": false,
+      "flags": {},
+      "_key": "!actors.effects!5TmstVMURpVtmNR3.dnd5eencumbered0"
+    }
+  ],
   "folder": "pEyqIq8DYb21xia3",
   "sort": 0,
   "ownership": {
@@ -1186,7 +1235,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787232594,
-    "modifiedTime": 1704466734415,
+    "modifiedTime": 1704847041873,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!5TmstVMURpVtmNR3"

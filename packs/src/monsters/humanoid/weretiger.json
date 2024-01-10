@@ -11,7 +11,8 @@
         "bonuses": {
           "check": "",
           "save": ""
-        }
+        },
+        "max": null
       },
       "dex": {
         "value": 15,
@@ -19,7 +20,8 @@
         "bonuses": {
           "check": "",
           "save": ""
-        }
+        },
+        "max": null
       },
       "con": {
         "value": 16,
@@ -27,7 +29,8 @@
         "bonuses": {
           "check": "",
           "save": ""
-        }
+        },
+        "max": null
       },
       "int": {
         "value": 10,
@@ -35,7 +38,8 @@
         "bonuses": {
           "check": "",
           "save": ""
-        }
+        },
+        "max": null
       },
       "wis": {
         "value": 13,
@@ -43,7 +47,8 @@
         "bonuses": {
           "check": "",
           "save": ""
-        }
+        },
+        "max": null
       },
       "cha": {
         "value": 11,
@@ -51,7 +56,8 @@
         "bonuses": {
           "check": "",
           "save": ""
-        }
+        },
+        "max": null
       }
     },
     "attributes": {
@@ -62,7 +68,6 @@
       },
       "hp": {
         "value": 120,
-        "min": 0,
         "max": 120,
         "temp": null,
         "tempmax": 0,
@@ -92,7 +97,8 @@
         "units": "ft",
         "special": ""
       },
-      "spellcasting": ""
+      "spellcasting": "",
+      "exhaustion": 0
     },
     "details": {
       "biography": {
@@ -100,7 +106,7 @@
         "public": ""
       },
       "alignment": "Neutral",
-      "race": "",
+      "race": null,
       "type": {
         "value": "humanoid",
         "subtype": "Human, Shapechanger",
@@ -150,6 +156,10 @@
           "common"
         ],
         "custom": "(can't speak in tiger form)"
+      },
+      "dm": {
+        "amount": {},
+        "bypasses": []
       }
     },
     "currency": {
@@ -390,7 +400,8 @@
         "value": false,
         "initiative": null
       }
-    }
+    },
+    "tools": {}
   },
   "prototypeToken": {
     "name": "Weretiger",
@@ -467,8 +478,7 @@
       "system": {
         "description": {
           "value": "<section class=\"secret\"><p>The weretiger can use its action to <strong>polymorph</strong> into a tiger-humanoid hybrid or into a tiger, or back into its true form, which is humanoid. </p><p>Its statistics, other than its size, are the same in each form. Any equipment it is wearing or carrying isn't transformed. It reverts to its true form if it dies.</p></section><p>The weretiger can use its action to <strong>polymorph</strong>, or return to its true form.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -490,7 +500,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -501,12 +512,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": null,
         "actionType": "",
@@ -534,7 +547,9 @@
         "recharge": {
           "value": null,
           "charged": false
-        }
+        },
+        "crewed": false,
+        "properties": []
       },
       "effects": [],
       "folder": null,
@@ -565,8 +580,7 @@
       "system": {
         "description": {
           "value": "<p>The weretiger has<strong> advantage </strong>on Wisdom (Perception) checks that rely on hearing or smell.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -588,7 +602,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -599,12 +614,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": null,
         "actionType": "",
@@ -632,7 +649,9 @@
         "recharge": {
           "value": null,
           "charged": false
-        }
+        },
+        "crewed": false,
+        "properties": []
       },
       "effects": [],
       "folder": null,
@@ -659,8 +678,7 @@
       "system": {
         "description": {
           "value": "<section class=\"secret\"><p>If the weretiger moves at <strong>least 15 feet</strong> straight toward a creature and then hits it with a claw attack on the same turn, that target must succeed on a <strong>DC 14 Strength saving throw</strong> or be knocked prone. If the target is prone, the weretiger can make one bite attack against it as a bonus action.</p><p>If the target is prone, the panther can make one bite attack against it as a bonus action.</p></section><p>If the weretiger moves at <strong>least 15 feet</strong> straight toward a creature and then hits it with a claw attack on the same turn, that target must make a <strong>Strength</strong> saving throw or be knocked prone.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -682,7 +700,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": 15,
@@ -693,12 +712,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "other",
@@ -726,7 +747,9 @@
         "recharge": {
           "value": null,
           "charged": false
-        }
+        },
+        "crewed": false,
+        "properties": []
       },
       "effects": [],
       "folder": null,
@@ -753,8 +776,7 @@
       "system": {
         "description": {
           "value": "<p>In humanoid form, the weretiger makes two scimitar attacks or two longbow attacks. In hybrid form, it can attack like a humanoid or make two claw attacks.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -776,7 +798,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -787,12 +810,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": null,
         "actionType": "",
@@ -820,7 +845,9 @@
         "recharge": {
           "value": null,
           "charged": false
-        }
+        },
+        "crewed": false,
+        "properties": []
       },
       "effects": [],
       "folder": null,
@@ -847,8 +874,7 @@
       "system": {
         "description": {
           "value": "<section class=\"secret\"><p><em>Melee Weapon Attack:</em><strong>+5 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>8 (1d10 + 3) <em>piercing damage</em></strong>. </p><p>If the target is a humanoid, it must succeed on a  <strong>DC 13 Constitution</strong> saving throw or be cursed with weretiger lycanthropy.</p></section><p>The Weretiger attacks with its Bite. If the target is a humanoid, it must make a <strong>Constitution</strong> saving throw.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -880,7 +906,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": 5,
@@ -891,12 +918,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "str",
         "actionType": "mwak",
@@ -930,25 +959,17 @@
           "dt": null,
           "conditions": ""
         },
-        "weaponType": "natural",
-        "baseItem": "",
-        "properties": {
-          "amm": false,
-          "fin": false,
-          "fir": false,
-          "foc": false,
-          "hvy": false,
-          "lgt": false,
-          "lod": false,
-          "rch": false,
-          "rel": false,
-          "ret": false,
-          "spc": false,
-          "thr": false,
-          "two": false,
-          "ver": false
+        "properties": [],
+        "proficient": 1,
+        "unidentified": {
+          "description": ""
         },
-        "proficient": true
+        "type": {
+          "value": "natural",
+          "baseItem": ""
+        },
+        "container": null,
+        "crewed": false
       },
       "effects": [],
       "folder": null,
@@ -975,8 +996,7 @@
       "system": {
         "description": {
           "value": "<section class=\"secret\"><p><em>Melee Weapon Attack:</em><strong>+5 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>7 (1d8 + 3) <em>slashing damage</em></strong>.</p><p></p></section><p>The Weretiger attacks with its Claw.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -1008,7 +1028,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": 5,
@@ -1019,12 +1040,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "str",
         "actionType": "mwak",
@@ -1058,25 +1081,17 @@
           "dt": null,
           "conditions": ""
         },
-        "weaponType": "natural",
-        "baseItem": "",
-        "properties": {
-          "amm": false,
-          "fin": false,
-          "fir": false,
-          "foc": false,
-          "hvy": false,
-          "lgt": false,
-          "lod": false,
-          "rch": false,
-          "rel": false,
-          "ret": false,
-          "spc": false,
-          "thr": false,
-          "two": false,
-          "ver": false
+        "properties": [],
+        "proficient": 1,
+        "unidentified": {
+          "description": ""
         },
-        "proficient": true
+        "type": {
+          "value": "natural",
+          "baseItem": ""
+        },
+        "container": null,
+        "crewed": false
       },
       "effects": [],
       "folder": null,
@@ -1103,8 +1118,7 @@
       "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+5 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>6 (1d6 + 3) <em>slashing damage</em></strong>.</p>\n</section>\n<p>The Weretiger attacks with its Scimitar.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -1136,7 +1150,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": 5,
@@ -1147,12 +1162,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "str",
         "actionType": "mwak",
@@ -1186,25 +1203,20 @@
           "dt": null,
           "conditions": ""
         },
-        "weaponType": "martialM",
-        "baseItem": "",
-        "properties": {
-          "fin": true,
-          "lgt": true,
-          "amm": false,
-          "fir": false,
-          "foc": false,
-          "hvy": false,
-          "lod": false,
-          "rch": false,
-          "rel": false,
-          "ret": false,
-          "spc": false,
-          "thr": false,
-          "two": false,
-          "ver": false
+        "properties": [
+          "fin",
+          "lgt"
+        ],
+        "proficient": 1,
+        "unidentified": {
+          "description": ""
         },
-        "proficient": true
+        "type": {
+          "value": "martialM",
+          "baseItem": ""
+        },
+        "container": null,
+        "crewed": false
       },
       "effects": [],
       "folder": null,
@@ -1231,8 +1243,7 @@
       "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p>Ranged Weapon Attack: +4 to hit, range 150/600 ft., one target. Hit: <strong>6 (1d8 + 2) <em>piercing damage</em></strong>.</p>\n</section>\n<p>The Weretiger attacks with its Longbow.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -1264,7 +1275,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": 150,
@@ -1275,12 +1287,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "str",
         "actionType": "rwak",
@@ -1314,25 +1328,21 @@
           "dt": null,
           "conditions": ""
         },
-        "weaponType": "martialR",
-        "baseItem": "",
-        "properties": {
-          "amm": true,
-          "hvy": true,
-          "two": true,
-          "fin": false,
-          "fir": false,
-          "foc": false,
-          "lgt": false,
-          "rch": false,
-          "rel": false,
-          "ret": false,
-          "spc": false,
-          "thr": false,
-          "ver": false,
-          "lod": false
+        "properties": [
+          "amm",
+          "hvy",
+          "two"
+        ],
+        "proficient": 1,
+        "unidentified": {
+          "description": ""
         },
-        "proficient": true
+        "type": {
+          "value": "martialR",
+          "baseItem": ""
+        },
+        "container": null,
+        "crewed": false
       },
       "effects": [],
       "folder": null,
@@ -1364,7 +1374,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787233258,
-    "modifiedTime": 1701908191084,
+    "modifiedTime": 1704847055385,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!zIr3NaNF0mWz5Ahq"

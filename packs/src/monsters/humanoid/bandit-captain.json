@@ -11,7 +11,8 @@
         "bonuses": {
           "check": "",
           "save": ""
-        }
+        },
+        "max": null
       },
       "dex": {
         "value": 16,
@@ -19,7 +20,8 @@
         "bonuses": {
           "check": "",
           "save": ""
-        }
+        },
+        "max": null
       },
       "con": {
         "value": 14,
@@ -27,7 +29,8 @@
         "bonuses": {
           "check": "",
           "save": ""
-        }
+        },
+        "max": null
       },
       "int": {
         "value": 14,
@@ -35,7 +38,8 @@
         "bonuses": {
           "check": "",
           "save": ""
-        }
+        },
+        "max": null
       },
       "wis": {
         "value": 11,
@@ -43,7 +47,8 @@
         "bonuses": {
           "check": "",
           "save": ""
-        }
+        },
+        "max": null
       },
       "cha": {
         "value": 14,
@@ -51,7 +56,8 @@
         "bonuses": {
           "check": "",
           "save": ""
-        }
+        },
+        "max": null
       }
     },
     "attributes": {
@@ -62,7 +68,6 @@
       },
       "hp": {
         "value": 65,
-        "min": 0,
         "max": 65,
         "temp": 0,
         "tempmax": 0,
@@ -92,7 +97,8 @@
         "units": "ft",
         "special": ""
       },
-      "spellcasting": ""
+      "spellcasting": "",
+      "exhaustion": 0
     },
     "details": {
       "biography": {
@@ -100,7 +106,7 @@
         "public": ""
       },
       "alignment": "Any Non-Lawful Alignment",
-      "race": "",
+      "race": null,
       "type": {
         "value": "humanoid",
         "subtype": "Any Race",
@@ -141,6 +147,10 @@
       "languages": {
         "value": [],
         "custom": "any two languages"
+      },
+      "dm": {
+        "amount": {},
+        "bypasses": []
       }
     },
     "currency": {
@@ -381,7 +391,8 @@
         "value": false,
         "initiative": null
       }
-    }
+    },
+    "tools": {}
   },
   "prototypeToken": {
     "name": "Bandit Captain",
@@ -458,8 +469,7 @@
       "system": {
         "description": {
           "value": "<p>Made from tough but flexible leather, studded leather is reinforced with close-set rivets or spikes.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -491,7 +501,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -502,12 +513,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": null,
         "actionType": null,
@@ -529,7 +542,6 @@
         },
         "armor": {
           "value": 12,
-          "type": "light",
           "dex": null
         },
         "hp": {
@@ -538,14 +550,22 @@
           "dt": null,
           "conditions": ""
         },
-        "baseItem": "studded",
         "speed": {
           "value": null,
           "conditions": ""
         },
         "strength": null,
-        "stealth": false,
-        "proficient": true
+        "proficient": 1,
+        "unidentified": {
+          "description": ""
+        },
+        "type": {
+          "value": "light",
+          "baseItem": "studded"
+        },
+        "container": null,
+        "crewed": false,
+        "properties": []
       },
       "effects": [],
       "folder": null,
@@ -576,8 +596,7 @@
       "system": {
         "description": {
           "value": "<p>The captain makes three melee attacks: two with its scimitar and one with its dagger. Or the captain makes two ranged attacks with its daggers.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -599,7 +618,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -610,12 +630,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "",
@@ -643,7 +665,9 @@
         "recharge": {
           "value": null,
           "charged": false
-        }
+        },
+        "crewed": false,
+        "properties": []
       },
       "effects": [],
       "folder": null,
@@ -674,8 +698,7 @@
       "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+5 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>6 (1d6 + 3) <em>slashing damage</em></strong>.</p></section>\n<p>The Bandit Captain attacks with their Scimitar.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -707,7 +730,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": 5,
@@ -718,12 +742,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "dex",
         "actionType": "mwak",
@@ -757,25 +783,20 @@
           "dt": null,
           "conditions": ""
         },
-        "weaponType": "martialM",
-        "baseItem": "scimitar",
-        "properties": {
-          "fin": true,
-          "lgt": true,
-          "amm": false,
-          "fir": false,
-          "foc": false,
-          "hvy": false,
-          "lod": false,
-          "rch": false,
-          "rel": false,
-          "ret": false,
-          "spc": false,
-          "thr": false,
-          "two": false,
-          "ver": false
+        "properties": [
+          "fin",
+          "lgt"
+        ],
+        "proficient": 1,
+        "unidentified": {
+          "description": ""
         },
-        "proficient": true
+        "type": {
+          "value": "martialM",
+          "baseItem": "scimitar"
+        },
+        "container": null,
+        "crewed": false
       },
       "effects": [],
       "folder": null,
@@ -806,8 +827,7 @@
       "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p>Melee or Ranged Weapon Attack: +5 to hit, reach 5 ft. or range 20/60 ft., one target. Hit: <strong>5 (1d4 + 3) <em>piercing damage</em></strong>.</p></section>\n<p>The Bandit Captain attacks with their Dagger.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -839,7 +859,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": 20,
@@ -850,12 +871,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "dex",
         "actionType": "mwak",
@@ -889,25 +912,21 @@
           "dt": null,
           "conditions": ""
         },
-        "weaponType": "simpleM",
-        "baseItem": "dagger",
-        "properties": {
-          "fin": true,
-          "lgt": true,
-          "thr": true,
-          "amm": false,
-          "fir": false,
-          "foc": false,
-          "hvy": false,
-          "lod": false,
-          "rch": false,
-          "rel": false,
-          "ret": false,
-          "spc": false,
-          "two": false,
-          "ver": false
+        "properties": [
+          "fin",
+          "lgt",
+          "thr"
+        ],
+        "proficient": 1,
+        "unidentified": {
+          "description": ""
         },
-        "proficient": true
+        "type": {
+          "value": "simpleM",
+          "baseItem": "dagger"
+        },
+        "container": null,
+        "crewed": false
       },
       "effects": [],
       "folder": null,
@@ -938,8 +957,7 @@
       "system": {
         "description": {
           "value": "<p>The captain adds 2 to its AC against one melee attack that would hit it. To do so, the captain must see the attacker and be wielding a melee weapon.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -961,7 +979,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -972,12 +991,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "",
@@ -1005,7 +1026,9 @@
         "recharge": {
           "value": null,
           "charged": false
-        }
+        },
+        "crewed": false,
+        "properties": []
       },
       "effects": [],
       "folder": null,
@@ -1041,7 +1064,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787233203,
-    "modifiedTime": 1701908190448,
+    "modifiedTime": 1704847053879,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!rb7OJt822wIO52qY"

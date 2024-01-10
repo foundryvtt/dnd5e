@@ -11,7 +11,8 @@
         "bonuses": {
           "check": "",
           "save": ""
-        }
+        },
+        "max": null
       },
       "dex": {
         "value": 13,
@@ -19,7 +20,8 @@
         "bonuses": {
           "check": "",
           "save": ""
-        }
+        },
+        "max": null
       },
       "con": {
         "value": 13,
@@ -27,7 +29,8 @@
         "bonuses": {
           "check": "",
           "save": ""
-        }
+        },
+        "max": null
       },
       "int": {
         "value": 2,
@@ -35,7 +38,8 @@
         "bonuses": {
           "check": "",
           "save": ""
-        }
+        },
+        "max": null
       },
       "wis": {
         "value": 10,
@@ -43,7 +47,8 @@
         "bonuses": {
           "check": "",
           "save": ""
-        }
+        },
+        "max": null
       },
       "cha": {
         "value": 3,
@@ -51,7 +56,8 @@
         "bonuses": {
           "check": "",
           "save": ""
-        }
+        },
+        "max": null
       }
     },
     "attributes": {
@@ -62,7 +68,6 @@
       },
       "hp": {
         "value": 19,
-        "min": 0,
         "max": 19,
         "temp": 0,
         "tempmax": 0,
@@ -92,7 +97,8 @@
         "units": "ft",
         "special": ""
       },
-      "spellcasting": ""
+      "spellcasting": "",
+      "exhaustion": 0
     },
     "details": {
       "biography": {
@@ -100,7 +106,7 @@
         "public": ""
       },
       "alignment": "Unaligned",
-      "race": "",
+      "race": null,
       "type": {
         "value": "beast",
         "subtype": "",
@@ -141,6 +147,10 @@
       "languages": {
         "value": [],
         "custom": ""
+      },
+      "dm": {
+        "amount": {},
+        "bypasses": []
       }
     },
     "currency": {
@@ -377,7 +387,8 @@
         "value": false,
         "initiative": null
       }
-    }
+    },
+    "tools": {}
   },
   "prototypeToken": {
     "name": "Giant Fly",
@@ -458,7 +469,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787233200,
-    "modifiedTime": 1701908190410,
+    "modifiedTime": 1704847053802,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!rLl22hYeAH3ljhdI"

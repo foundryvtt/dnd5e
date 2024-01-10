@@ -11,7 +11,8 @@
         "bonuses": {
           "check": "",
           "save": ""
-        }
+        },
+        "max": null
       },
       "dex": {
         "value": 12,
@@ -19,7 +20,8 @@
         "bonuses": {
           "check": "",
           "save": ""
-        }
+        },
+        "max": null
       },
       "con": {
         "value": 15,
@@ -27,7 +29,8 @@
         "bonuses": {
           "check": "",
           "save": ""
-        }
+        },
+        "max": null
       },
       "int": {
         "value": 12,
@@ -35,7 +38,8 @@
         "bonuses": {
           "check": "",
           "save": ""
-        }
+        },
+        "max": null
       },
       "wis": {
         "value": 13,
@@ -43,7 +47,8 @@
         "bonuses": {
           "check": "",
           "save": ""
-        }
+        },
+        "max": null
       },
       "cha": {
         "value": 10,
@@ -51,7 +56,8 @@
         "bonuses": {
           "check": "",
           "save": ""
-        }
+        },
+        "max": null
       }
     },
     "attributes": {
@@ -62,7 +68,6 @@
       },
       "hp": {
         "value": 39,
-        "min": 0,
         "max": 39,
         "temp": 0,
         "tempmax": 0,
@@ -92,7 +97,8 @@
         "units": "ft",
         "special": ""
       },
-      "spellcasting": ""
+      "spellcasting": "",
+      "exhaustion": 0
     },
     "details": {
       "biography": {
@@ -100,7 +106,7 @@
         "public": ""
       },
       "alignment": "Lawful Neutral",
-      "race": "",
+      "race": null,
       "type": {
         "value": "elemental",
         "subtype": "",
@@ -148,6 +154,10 @@
           "ignan"
         ],
         "custom": ""
+      },
+      "dm": {
+        "amount": {},
+        "bypasses": []
       }
     },
     "currency": {
@@ -388,7 +398,8 @@
         "value": false,
         "initiative": null
       }
-    }
+    },
+    "tools": {}
   },
   "prototypeToken": {
     "name": "Azer",
@@ -465,8 +476,7 @@
       "system": {
         "description": {
           "value": "<p>A shield is made from wood or metal and is carried in one hand. Wielding a shield increases your Armor Class by 2. You can benefit from only one shield at a time.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -498,7 +508,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -509,12 +520,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": null,
         "actionType": null,
@@ -536,7 +549,6 @@
         },
         "armor": {
           "value": 2,
-          "type": "shield",
           "dex": null
         },
         "hp": {
@@ -545,14 +557,22 @@
           "dt": null,
           "conditions": ""
         },
-        "baseItem": "",
         "speed": {
           "value": null,
           "conditions": ""
         },
         "strength": null,
-        "stealth": false,
-        "proficient": true
+        "proficient": 1,
+        "unidentified": {
+          "description": ""
+        },
+        "type": {
+          "value": "shield",
+          "baseItem": ""
+        },
+        "container": null,
+        "crewed": false,
+        "properties": []
       },
       "effects": [],
       "folder": null,
@@ -583,8 +603,7 @@
       "system": {
         "description": {
           "value": "<p>A creature that touches the azer or hits it with a melee attack while within 5 feet of it takes <strong>5 (1d10) <em>fire damage</em></strong>.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -606,7 +625,8 @@
           "value": null,
           "width": null,
           "units": "any",
-          "type": "creature"
+          "type": "creature",
+          "prompt": true
         },
         "range": {
           "value": 5,
@@ -617,12 +637,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "other",
@@ -655,7 +677,9 @@
         "recharge": {
           "value": null,
           "charged": false
-        }
+        },
+        "crewed": false,
+        "properties": []
       },
       "effects": [],
       "folder": null,
@@ -686,8 +710,7 @@
       "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p>When the azer hits with a metal melee weapon, it deals an extra <strong>3 (1d6) <em>fire damage</em></strong> (included in the attack).</p>\n</section>\n<p>When the azer hits with a metal melee weapon, it deals extra <em>fire damage</em> (included in the attack).</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -709,7 +732,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -720,12 +744,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "",
@@ -753,7 +779,9 @@
         "recharge": {
           "value": null,
           "charged": false
-        }
+        },
+        "crewed": false,
+        "properties": []
       },
       "effects": [],
       "folder": null,
@@ -784,8 +812,7 @@
       "system": {
         "description": {
           "value": "<p>The azer sheds bright light in a 10-foot radius and dim light for an additional 10 ft.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -807,7 +834,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -818,12 +846,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "",
@@ -851,7 +881,9 @@
         "recharge": {
           "value": null,
           "charged": false
-        }
+        },
+        "crewed": false,
+        "properties": []
       },
       "effects": [],
       "folder": null,
@@ -882,8 +914,7 @@
       "system": {
         "description": {
           "value": "<section>\n<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+5 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>7 (1d8 + 3) <em>bludgeoning damage</em></strong>, or <strong>8 (1d10 + 3) <em>bludgeoning damage</em></strong> if used with two hands to make a melee attack, plus <strong>3 (1d6) <em>fire damage</em></strong>.</p>\n</section>\n</section>\n<p>A heavy metal hammer capable of being wielded with a single hand with a shield or in two hands to deliver crushing concussive blows.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -915,7 +946,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": 5,
@@ -926,12 +958,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "str",
         "actionType": "mwak",
@@ -969,25 +1003,19 @@
           "dt": null,
           "conditions": ""
         },
-        "weaponType": "martialM",
-        "baseItem": "warhammer",
-        "properties": {
-          "ver": true,
-          "amm": false,
-          "fin": false,
-          "fir": false,
-          "foc": false,
-          "hvy": false,
-          "lgt": false,
-          "lod": false,
-          "rch": false,
-          "rel": false,
-          "ret": false,
-          "spc": false,
-          "thr": false,
-          "two": false
+        "properties": [
+          "ver"
+        ],
+        "proficient": 1,
+        "unidentified": {
+          "description": ""
         },
-        "proficient": true
+        "type": {
+          "value": "martialM",
+          "baseItem": "warhammer"
+        },
+        "container": null,
+        "crewed": false
       },
       "effects": [],
       "folder": null,
@@ -1023,7 +1051,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787232732,
-    "modifiedTime": 1701908186661,
+    "modifiedTime": 1704847045488,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!IiEDPMWqBlzkggYD"

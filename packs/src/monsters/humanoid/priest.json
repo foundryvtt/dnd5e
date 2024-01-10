@@ -11,7 +11,8 @@
         "bonuses": {
           "check": "",
           "save": ""
-        }
+        },
+        "max": null
       },
       "dex": {
         "value": 10,
@@ -19,7 +20,8 @@
         "bonuses": {
           "check": "",
           "save": ""
-        }
+        },
+        "max": null
       },
       "con": {
         "value": 12,
@@ -27,7 +29,8 @@
         "bonuses": {
           "check": "",
           "save": ""
-        }
+        },
+        "max": null
       },
       "int": {
         "value": 13,
@@ -35,7 +38,8 @@
         "bonuses": {
           "check": "",
           "save": ""
-        }
+        },
+        "max": null
       },
       "wis": {
         "value": 16,
@@ -43,7 +47,8 @@
         "bonuses": {
           "check": "",
           "save": ""
-        }
+        },
+        "max": null
       },
       "cha": {
         "value": 13,
@@ -51,7 +56,8 @@
         "bonuses": {
           "check": "",
           "save": ""
-        }
+        },
+        "max": null
       }
     },
     "attributes": {
@@ -62,7 +68,6 @@
       },
       "hp": {
         "value": 27,
-        "min": 0,
         "max": 27,
         "temp": 0,
         "tempmax": 0,
@@ -92,7 +97,8 @@
         "units": "ft",
         "special": ""
       },
-      "spellcasting": "wis"
+      "spellcasting": "wis",
+      "exhaustion": 0
     },
     "details": {
       "biography": {
@@ -100,7 +106,7 @@
         "public": ""
       },
       "alignment": "Any Alignment",
-      "race": "",
+      "race": null,
       "type": {
         "value": "humanoid",
         "subtype": "Any Race",
@@ -141,6 +147,10 @@
       "languages": {
         "value": [],
         "custom": "any two languages"
+      },
+      "dm": {
+        "amount": {},
+        "bypasses": []
       }
     },
     "currency": {
@@ -381,7 +391,8 @@
         "value": false,
         "initiative": null
       }
-    }
+    },
+    "tools": {}
   },
   "prototypeToken": {
     "name": "Priest",
@@ -458,8 +469,7 @@
       "system": {
         "description": {
           "value": "<p>Made of interlocking metal rings, a chain shirt is worn between layers of clothing or leather. This armor offers modest protection to the wearer's upper body and allows the sound of the rings rubbing against one another to be muffled by outer layers.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -491,7 +501,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -502,12 +513,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": null,
         "actionType": null,
@@ -529,7 +542,6 @@
         },
         "armor": {
           "value": 13,
-          "type": "light",
           "dex": null
         },
         "hp": {
@@ -538,14 +550,22 @@
           "dt": null,
           "conditions": ""
         },
-        "baseItem": "chainshirt",
         "speed": {
           "value": null,
           "conditions": ""
         },
         "strength": null,
-        "stealth": false,
-        "proficient": true
+        "proficient": 1,
+        "unidentified": {
+          "description": ""
+        },
+        "type": {
+          "value": "light",
+          "baseItem": "chainshirt"
+        },
+        "container": null,
+        "crewed": false,
+        "properties": []
       },
       "effects": [],
       "folder": null,
@@ -576,8 +596,7 @@
       "system": {
         "description": {
           "value": "<p>The priest is a 5th-level spellcaster. Its spellcasting ability is Wisdom (spell save DC 13, +5 to hit with spell attacks). The priest has the following cleric spells prepared:</p>\n<p>Cantrips (at will): light, sacred flame, thaumaturgy</p>\n<p>1st level (4 slots): cure wounds, guiding bolt, sanctuary</p>\n<p>2nd level (3 slots): lesser restoration, spiritual weapon</p>\n<p>3rd level (2 slots): dispel magic, spirit guardians</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -599,7 +618,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -610,12 +630,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "",
@@ -643,7 +665,9 @@
         "recharge": {
           "value": null,
           "charged": false
-        }
+        },
+        "crewed": false,
+        "properties": []
       },
       "effects": [],
       "folder": null,
@@ -674,8 +698,7 @@
       "system": {
         "description": {
           "value": "<section class=\"secret\"><p>As a bonus action, the priest can expend a spell slot to cause its melee weapon attacks to magically deal an extra <strong>10 (3d6) <em>radiant damage</em></strong> to a target on a hit. </p><p>This benefit lasts until the end of the turn. If the priest expends a spell slot of 2nd level or higher, the extra damage increases by 1d6 for each level above 1st.</p></section><p>As a bonus action, the priest can expend a spell slot to cause its melee weapon attacks to magically deal an extra <em>radiant damage</em> to a target on a hit.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -697,7 +720,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -708,12 +732,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "other",
@@ -746,7 +772,9 @@
         "recharge": {
           "value": null,
           "charged": false
-        }
+        },
+        "crewed": false,
+        "properties": []
       },
       "effects": [],
       "folder": null,
@@ -777,8 +805,7 @@
       "system": {
         "description": {
           "value": "<section class=\"secret\"><p><em>Melee Weapon Attack:</em><strong>+2 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>3 (1d6) <em>bludgeoning damage</em></strong>.</p><p></p></section><p>The Priest attacks with its Mace.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -810,7 +837,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": 5,
@@ -821,12 +849,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "str",
         "actionType": "mwak",
@@ -860,25 +890,17 @@
           "dt": null,
           "conditions": ""
         },
-        "weaponType": "simpleM",
-        "baseItem": "mace",
-        "properties": {
-          "amm": false,
-          "fin": false,
-          "fir": false,
-          "foc": false,
-          "hvy": false,
-          "lgt": false,
-          "lod": false,
-          "rch": false,
-          "rel": false,
-          "ret": false,
-          "spc": false,
-          "thr": false,
-          "two": false,
-          "ver": false
+        "properties": [],
+        "proficient": 1,
+        "unidentified": {
+          "description": ""
         },
-        "proficient": true
+        "type": {
+          "value": "simpleM",
+          "baseItem": "mace"
+        },
+        "container": null,
+        "crewed": false
       },
       "effects": [],
       "folder": null,
@@ -911,8 +933,7 @@
       "system": {
         "description": {
           "value": "<p>Flame-like radiance descends on a creature that you can see within range. The target must succeed on a Dexterity saving throw or take 1d8 radiant damage. The target gains no benefit from cover for this saving throw.</p><p>The spell's damage increases by 1d8 when you reach 5th level (2d8), 11th level (3d8), and 17th level (4d8).</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -934,7 +955,8 @@
           "value": 1,
           "width": null,
           "units": "",
-          "type": "creature"
+          "type": "creature",
+          "prompt": true
         },
         "range": {
           "value": 60,
@@ -945,12 +967,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "save",
@@ -977,13 +1001,6 @@
         },
         "level": 0,
         "school": "evo",
-        "components": {
-          "vocal": true,
-          "somatic": true,
-          "material": false,
-          "ritual": false,
-          "concentration": false
-        },
         "materials": {
           "value": "",
           "consumed": false,
@@ -1001,12 +1018,19 @@
         "properties": [
           "vocal",
           "somatic"
-        ]
+        ],
+        "crewed": false
       },
       "sort": 0,
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.spells.n9pJzTDsAwQxJVRl"
+        },
+        "dnd5e": {
+          "migratedProperties": [
+            "vocal",
+            "somatic"
+          ]
         }
       },
       "img": "icons/magic/light/beam-rays-orange.webp",
@@ -1032,8 +1056,7 @@
       "system": {
         "description": {
           "value": "<p>You create one of the following magical effects within range:</p>\n<ul>\n<li>Your voice booms up to three times as loud as normal for 1 minute.</li>\n<li>You cause flames to flicker, brighten, dim, or change color for 1 minute.</li>\n<li>You cause harmless tremors in the ground for 1 minute.</li>\n<li>You create a sound that originates from a point of your choice within range.</li>\n<li>You cause an unlocked door or window to fly open or slam shut.</li>\n<li>You alter the appearance of your eyes for 1 minute.</li>\n</ul>\n<p>If you cast this spell multiple times, you can have up to three of its 1-minute effects active at a time, and you can dismiss such an effect as an action.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -1055,7 +1078,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": 30,
@@ -1066,12 +1090,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "util",
@@ -1093,13 +1119,6 @@
         },
         "level": 0,
         "school": "trs",
-        "components": {
-          "vocal": true,
-          "somatic": false,
-          "material": false,
-          "ritual": false,
-          "concentration": false
-        },
         "materials": {
           "value": "",
           "consumed": false,
@@ -1116,12 +1135,18 @@
         },
         "properties": [
           "vocal"
-        ]
+        ],
+        "crewed": false
       },
       "sort": 0,
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.spells.MUO1uYN7JR1hm4dR"
+        },
+        "dnd5e": {
+          "migratedProperties": [
+            "vocal"
+          ]
         }
       },
       "img": "icons/magic/fire/explosion-fireball-small-purple-orange.webp",
@@ -1147,8 +1172,7 @@
       "system": {
         "description": {
           "value": "<p>A flash of light streaks toward a creature of your choice within range. Make a ranged spell attack against the target. On a hit, the target takes 4d6 radiant damage, and the next attack roll made against this target before the end of your next turn has advantage, thanks to the mystical dim light glittering on the target until then.</p><p><strong>Higher Levels.</strong> When you cast this spell using a spell slot of 2nd level or higher, the damage increases by 1d6 for each slot level above 1st.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -1170,7 +1194,8 @@
           "value": 1,
           "width": null,
           "units": "",
-          "type": "creature"
+          "type": "creature",
+          "prompt": true
         },
         "range": {
           "value": 120,
@@ -1181,12 +1206,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "rsak",
@@ -1213,13 +1240,6 @@
         },
         "level": 1,
         "school": "evo",
-        "components": {
-          "vocal": true,
-          "somatic": true,
-          "material": false,
-          "ritual": false,
-          "concentration": false
-        },
         "materials": {
           "value": "",
           "consumed": false,
@@ -1237,12 +1257,19 @@
         "properties": [
           "vocal",
           "somatic"
-        ]
+        ],
+        "crewed": false
       },
       "sort": 0,
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.spells.7buEm5KhI5lP8m1z"
+        },
+        "dnd5e": {
+          "migratedProperties": [
+            "vocal",
+            "somatic"
+          ]
         }
       },
       "img": "icons/magic/fire/projectile-fireball-smoke-large-blue.webp",
@@ -1268,8 +1295,7 @@
       "system": {
         "description": {
           "value": "<p>You ward a creature within range against attack. Until the spell ends, any creature who targets the warded creature with an attack or a harmful spell must first make a Wisdom saving throw. On a failed save, the creature must choose a new target or lose the attack or spell. This spell doesn't protect the warded creature from area effects, such as the explosion of a Fireball.</p><p>If the warded creature makes an attack or casts a spell that affects an enemy creature, this spell ends.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -1291,7 +1317,8 @@
           "value": 1,
           "width": null,
           "units": "",
-          "type": "creature"
+          "type": "creature",
+          "prompt": true
         },
         "range": {
           "value": 30,
@@ -1302,12 +1329,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "save",
@@ -1329,13 +1358,6 @@
         },
         "level": 1,
         "school": "abj",
-        "components": {
-          "vocal": true,
-          "somatic": true,
-          "material": true,
-          "ritual": false,
-          "concentration": false
-        },
         "materials": {
           "value": "A small silver mirror",
           "consumed": false,
@@ -1354,12 +1376,20 @@
           "vocal",
           "somatic",
           "material"
-        ]
+        ],
+        "crewed": false
       },
       "sort": 0,
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.spells.gvdA9nPuWLck4tBl"
+        },
+        "dnd5e": {
+          "migratedProperties": [
+            "vocal",
+            "somatic",
+            "material"
+          ]
         }
       },
       "img": "icons/magic/defensive/shield-barrier-flaming-diamond-blue-yellow.webp",
@@ -1385,8 +1415,7 @@
       "system": {
         "description": {
           "value": "<p>You touch a creature and can end either one disease or one condition afflicting it. The condition can be blinded, deafened, paralyzed, or poisoned.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -1408,7 +1437,8 @@
           "value": 1,
           "width": null,
           "units": "",
-          "type": "creature"
+          "type": "creature",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -1419,12 +1449,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "util",
@@ -1446,13 +1478,6 @@
         },
         "level": 2,
         "school": "abj",
-        "components": {
-          "vocal": true,
-          "somatic": true,
-          "material": false,
-          "ritual": false,
-          "concentration": false
-        },
         "materials": {
           "value": "",
           "consumed": false,
@@ -1470,12 +1495,19 @@
         "properties": [
           "vocal",
           "somatic"
-        ]
+        ],
+        "crewed": false
       },
       "sort": 0,
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.spells.F0GsG0SJzsIOacwV"
+        },
+        "dnd5e": {
+          "migratedProperties": [
+            "vocal",
+            "somatic"
+          ]
         }
       },
       "img": "icons/magic/life/heart-cross-blue.webp",
@@ -1499,8 +1531,7 @@
       "system": {
         "description": {
           "value": "<p>You create a floating, spectral weapon within range that lasts for the duration or until you cast this spell again. When you cast the spell, you can make a melee spell attack against a creature within 5 feet of the weapon. On a hit, the target takes force damage equal to 1d8 + your spellcasting ability modifier.</p><p>As a bonus action on your turn, you can move the weapon up to 20 feet and repeat the attack against a creature within 5 feet of it.</p><p>The weapon can take whatever form you choose. Clerics of deities who are associated with a particular weapon (as St. Cuthbert is known for his mace and Thor for his hammer) make this spell's effect resemble that weapon.</p><p><strong>Higher Levels.</strong> When you cast this spell using a spell slot of 3rd level or higher, the damage increases by 1d8 for every two slot levels above the 2nd.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -1522,7 +1553,8 @@
           "value": 5,
           "width": null,
           "units": "ft",
-          "type": "square"
+          "type": "square",
+          "prompt": true
         },
         "range": {
           "value": 60,
@@ -1533,12 +1565,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "msak",
@@ -1565,13 +1599,6 @@
         },
         "level": 2,
         "school": "evo",
-        "components": {
-          "vocal": true,
-          "somatic": true,
-          "material": false,
-          "ritual": false,
-          "concentration": false
-        },
         "materials": {
           "value": "",
           "consumed": false,
@@ -1589,7 +1616,8 @@
         "properties": [
           "vocal",
           "somatic"
-        ]
+        ],
+        "crewed": false
       },
       "effects": [],
       "folder": null,
@@ -1600,6 +1628,12 @@
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.spells.JbxsYXxSOTZbf9I0"
+        },
+        "dnd5e": {
+          "migratedProperties": [
+            "vocal",
+            "somatic"
+          ]
         }
       },
       "_stats": {
@@ -1622,8 +1656,7 @@
       "system": {
         "description": {
           "value": "<p>Choose one creature, object, or magical effect within range. Any spell of 3rd level or lower on the target ends. For each spell of 4th level or higher on the target, make an ability check using your spellcasting ability. The DC equals 10 + the spell's level. On a successful check, the spell ends.</p><p><strong>Higher Levels.</strong> When you cast this spell using a spell slot of 4th level or higher, you automatically end the effects of a spell on the target if the spell's level is equal to or less than the level of the spell slot you used.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -1645,7 +1678,8 @@
           "value": 1,
           "width": null,
           "units": "",
-          "type": "creature"
+          "type": "creature",
+          "prompt": true
         },
         "range": {
           "value": 120,
@@ -1656,12 +1690,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "util",
@@ -1683,13 +1719,6 @@
         },
         "level": 3,
         "school": "abj",
-        "components": {
-          "vocal": true,
-          "somatic": true,
-          "material": false,
-          "ritual": false,
-          "concentration": false
-        },
         "materials": {
           "value": "",
           "consumed": false,
@@ -1707,12 +1736,19 @@
         "properties": [
           "vocal",
           "somatic"
-        ]
+        ],
+        "crewed": false
       },
       "sort": 0,
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.spells.15Fa6q1nH27XfbR8"
+        },
+        "dnd5e": {
+          "migratedProperties": [
+            "vocal",
+            "somatic"
+          ]
         }
       },
       "img": "icons/skills/melee/strike-blade-knife-orange-blue.webp",
@@ -1738,8 +1774,7 @@
       "system": {
         "description": {
           "value": "<p>You call forth spirits to protect you. They flit around you to a distance of 15 feet for the duration. If you are good or neutral, their spectral form appears angelic or fey (your choice). If you are evil, they appear fiendish.</p><p>When you cast this spell, you can designate any number of creatures you can see to be unaffected by it. An affected creature's speed is halved in the area, and when the creature enters the area for the first time on a turn or starts its turn there, it must make a Wisdom saving throw. On a failed save, the creature takes 3d8 radiant damage (if you are good or neutral) or 3d8 necrotic damage (if you are evil). On a successful save, the creature takes half as much damage.</p><p><strong>At Higher Levels.</strong> When you cast this spell using a spell slot of 4th level or higher, the damage increases by 1d8 for each slot level above 3rd.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -1761,7 +1796,8 @@
           "value": 15,
           "width": null,
           "units": "ft",
-          "type": "radius"
+          "type": "radius",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -1772,12 +1808,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "save",
@@ -1804,13 +1842,6 @@
         },
         "level": 3,
         "school": "con",
-        "components": {
-          "vocal": true,
-          "somatic": true,
-          "material": true,
-          "ritual": false,
-          "concentration": true
-        },
         "materials": {
           "value": "A holy symbol",
           "consumed": false,
@@ -1830,12 +1861,21 @@
           "somatic",
           "material",
           "concentration"
-        ]
+        ],
+        "crewed": false
       },
       "sort": 0,
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.spells.uCud2s4TjMfjiXUb"
+        },
+        "dnd5e": {
+          "migratedProperties": [
+            "vocal",
+            "somatic",
+            "material",
+            "concentration"
+          ]
         }
       },
       "img": "icons/magic/light/projectile-bolts-salvo-white.webp",
@@ -1861,8 +1901,7 @@
       "system": {
         "description": {
           "value": "<p>You touch one object that is no larger than 10 feet in any dimension. Until the spell ends, the object sheds bright light in a 20-foot radius and dim light for an additional 20 feet. The light can be colored as you like. Completely covering the object with something opaque blocks the light. The spell ends if you cast it again or dismiss it as an action.</p><p>If you target an object held or worn by a hostile creature, that creature must succeed on a Dexterity saving throw to avoid the spell.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -1884,7 +1923,8 @@
           "value": 1,
           "width": null,
           "units": "",
-          "type": "object"
+          "type": "object",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -1895,12 +1935,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "save",
@@ -1922,13 +1964,6 @@
         },
         "level": 0,
         "school": "evo",
-        "components": {
-          "vocal": true,
-          "somatic": false,
-          "material": true,
-          "ritual": false,
-          "concentration": false
-        },
         "materials": {
           "value": "A firefly or phosphorescent moss.",
           "consumed": false,
@@ -1946,12 +1981,19 @@
         "properties": [
           "vocal",
           "material"
-        ]
+        ],
+        "crewed": false
       },
       "sort": 0,
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.spells.Bnn9Nzajixvow9xi"
+        },
+        "dnd5e": {
+          "migratedProperties": [
+            "vocal",
+            "material"
+          ]
         }
       },
       "img": "icons/magic/light/explosion-star-small-blue-yellow.webp",
@@ -1977,8 +2019,7 @@
       "system": {
         "description": {
           "value": "<p>A creature you touch regains a number of hit points equal to 1d8 + your spellcasting ability modifier. This spell has no effect on undead or constructs.</p><p><strong>Higher Levels.</strong> When you cast this spell using a spell slot of 2nd level or higher, the healing increases by 1d8 for each slot level above 1st.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -2000,7 +2041,8 @@
           "value": 1,
           "width": null,
           "units": "",
-          "type": "creature"
+          "type": "creature",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -2011,12 +2053,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "heal",
@@ -2043,13 +2087,6 @@
         },
         "level": 1,
         "school": "evo",
-        "components": {
-          "vocal": true,
-          "somatic": true,
-          "material": false,
-          "ritual": false,
-          "concentration": false
-        },
         "materials": {
           "value": "",
           "consumed": false,
@@ -2067,12 +2104,19 @@
         "properties": [
           "vocal",
           "somatic"
-        ]
+        ],
+        "crewed": false
       },
       "sort": 0,
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.spells.uUWb1wZgtMou0TVP"
+        },
+        "dnd5e": {
+          "migratedProperties": [
+            "vocal",
+            "somatic"
+          ]
         }
       },
       "img": "icons/magic/life/heart-cross-green.webp",
@@ -2101,7 +2145,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787232808,
-    "modifiedTime": 1704466735537,
+    "modifiedTime": 1704847047405,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!PVD5wRdyO7iCJPs1"

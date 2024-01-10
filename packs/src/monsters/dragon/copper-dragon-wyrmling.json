@@ -11,7 +11,8 @@
         "bonuses": {
           "check": "",
           "save": ""
-        }
+        },
+        "max": null
       },
       "dex": {
         "value": 12,
@@ -19,7 +20,8 @@
         "bonuses": {
           "check": "",
           "save": ""
-        }
+        },
+        "max": null
       },
       "con": {
         "value": 13,
@@ -27,7 +29,8 @@
         "bonuses": {
           "check": "",
           "save": ""
-        }
+        },
+        "max": null
       },
       "int": {
         "value": 14,
@@ -35,7 +38,8 @@
         "bonuses": {
           "check": "",
           "save": ""
-        }
+        },
+        "max": null
       },
       "wis": {
         "value": 11,
@@ -43,7 +47,8 @@
         "bonuses": {
           "check": "",
           "save": ""
-        }
+        },
+        "max": null
       },
       "cha": {
         "value": 13,
@@ -51,7 +56,8 @@
         "bonuses": {
           "check": "",
           "save": ""
-        }
+        },
+        "max": null
       }
     },
     "attributes": {
@@ -62,7 +68,6 @@
       },
       "hp": {
         "value": 22,
-        "min": 0,
         "max": 22,
         "temp": 0,
         "tempmax": 0,
@@ -92,7 +97,8 @@
         "units": "ft",
         "special": ""
       },
-      "spellcasting": ""
+      "spellcasting": "",
+      "exhaustion": 0
     },
     "details": {
       "biography": {
@@ -100,7 +106,7 @@
         "public": ""
       },
       "alignment": "Chaotic Good",
-      "race": "",
+      "race": null,
       "type": {
         "value": "dragon",
         "subtype": "",
@@ -145,6 +151,10 @@
           "draconic"
         ],
         "custom": ""
+      },
+      "dm": {
+        "amount": {},
+        "bypasses": []
       }
     },
     "currency": {
@@ -385,7 +395,8 @@
         "value": false,
         "initiative": null
       }
-    }
+    },
+    "tools": {}
   },
   "prototypeToken": {
     "name": "Copper Dragon Wyrmling",
@@ -462,8 +473,7 @@
       "system": {
         "description": {
           "value": "<section class=\"secret\"><p><em>Melee Weapon Attack:</em><strong>+4 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>7 (1d10 + 2) <em>piercing damage</em></strong>.</p><p></p></section><p>The Copper Dragon Wyrmling attacks with its Bite.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -495,7 +505,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": 5,
@@ -506,12 +517,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "str",
         "actionType": "mwak",
@@ -545,25 +558,17 @@
           "dt": null,
           "conditions": ""
         },
-        "weaponType": "natural",
-        "baseItem": "",
-        "properties": {
-          "amm": false,
-          "fin": false,
-          "fir": false,
-          "foc": false,
-          "hvy": false,
-          "lgt": false,
-          "lod": false,
-          "rch": false,
-          "rel": false,
-          "ret": false,
-          "spc": false,
-          "thr": false,
-          "two": false,
-          "ver": false
+        "properties": [],
+        "proficient": 1,
+        "unidentified": {
+          "description": ""
         },
-        "proficient": true
+        "type": {
+          "value": "natural",
+          "baseItem": ""
+        },
+        "container": null,
+        "crewed": false
       },
       "effects": [],
       "folder": null,
@@ -594,8 +599,7 @@
       "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p>The dragon uses one of the following breath weapons.</p>\n<p>**Acid Breath.** The dragon exhales acid in an 20-foot line that is 5 feet wide. Each creature in that line must make a  <strong>DC 11 Dexterity</strong> saving throw, taking <strong>18 (4d8) <em>acid damage</em></strong> on a failed save, or half as much damage on a successful one.</p>\n<p>**Slowing Breath.** The dragon exhales gas in a 1 5-foot cone. Each creature in that area must succeed on a  <strong>DC 11 Constitution</strong> saving throw. On a failed save, the creature can't use reactions, its speed is halved, and it can't make more than one attack on its turn. In addition, the creature can use either an action or a bonus action on its turn, but not both. These effects last for 1 minute. The creature can repeat the saving throw at the end of each of its turns, ending the effect on itself with a successful save.</p>\n</section>\n<p>The dragon breathes in!</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -617,7 +621,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -628,12 +633,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": null,
         "actionType": "",
@@ -661,7 +668,9 @@
         "recharge": {
           "value": 5,
           "charged": true
-        }
+        },
+        "crewed": false,
+        "properties": []
       },
       "effects": [],
       "folder": null,
@@ -692,8 +701,7 @@
       "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p>**Acid Breath.** The dragon exhales acid in an 20-foot line that is 5 feet wide. Each creature in that line must make a  <strong>DC 11 Dexterity</strong> saving throw, taking <strong>18 (4d8) <em>acid damage</em></strong> on a failed save, or half as much damage on a successful one.</p>\n</section>\n<p>The dragon exhales acid in an 20-foot line that is 5 feet wide. Each creature in that line must make a <strong>Dexterity</strong> saving throw.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -715,7 +723,8 @@
           "value": 20,
           "width": null,
           "units": "ft",
-          "type": "line"
+          "type": "line",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -726,12 +735,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "charges",
           "target": "6mcnEM9hUPlfUT9x",
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "dex",
         "actionType": "save",
@@ -764,7 +775,9 @@
         "recharge": {
           "value": null,
           "charged": false
-        }
+        },
+        "crewed": false,
+        "properties": []
       },
       "effects": [],
       "folder": null,
@@ -795,8 +808,7 @@
       "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p>**Slowing Breath.** The dragon exhales gas in a 15-foot cone. Each creature in that area must succeed on a  <strong>DC 11 Constitution</strong> saving throw. On a failed save, the creature can't use reactions, its speed is halved, and it can't make more than one attack on its turn. In addition, the creature can use either an action or a bonus action on its turn, but not both. These effects last for 1 minute. The creature can repeat the saving throw at the end of each of its turns, ending the effect on itself with a successful save.</p>\n</section>\n<p>The dragon exhales gas in a 15-foot cone. Each creature in that area must make a <strong>Constitution</strong> saving throw.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -818,7 +830,8 @@
           "value": 15,
           "width": null,
           "units": "ft",
-          "type": "cone"
+          "type": "cone",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -829,12 +842,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "charges",
           "target": "6mcnEM9hUPlfUT9x",
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "con",
         "actionType": "save",
@@ -862,7 +877,9 @@
         "recharge": {
           "value": null,
           "charged": false
-        }
+        },
+        "crewed": false,
+        "properties": []
       },
       "effects": [],
       "folder": null,
@@ -898,7 +915,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787232654,
-    "modifiedTime": 1701908185705,
+    "modifiedTime": 1704847043495,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!AyvniEKtyroOe83p"

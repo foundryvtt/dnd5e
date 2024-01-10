@@ -11,7 +11,8 @@
         "bonuses": {
           "check": "",
           "save": ""
-        }
+        },
+        "max": null
       },
       "dex": {
         "value": 14,
@@ -19,7 +20,8 @@
         "bonuses": {
           "check": "",
           "save": ""
-        }
+        },
+        "max": null
       },
       "con": {
         "value": 20,
@@ -27,7 +29,8 @@
         "bonuses": {
           "check": "",
           "save": ""
-        }
+        },
+        "max": null
       },
       "int": {
         "value": 16,
@@ -35,7 +38,8 @@
         "bonuses": {
           "check": "",
           "save": ""
-        }
+        },
+        "max": null
       },
       "wis": {
         "value": 18,
@@ -43,7 +47,8 @@
         "bonuses": {
           "check": "",
           "save": ""
-        }
+        },
+        "max": null
       },
       "cha": {
         "value": 18,
@@ -51,7 +56,8 @@
         "bonuses": {
           "check": "",
           "save": ""
-        }
+        },
+        "max": null
       }
     },
     "attributes": {
@@ -62,7 +68,6 @@
       },
       "hp": {
         "value": 230,
-        "min": 0,
         "max": 230,
         "temp": 0,
         "tempmax": 0,
@@ -92,7 +97,8 @@
         "units": "ft",
         "special": ""
       },
-      "spellcasting": "cha"
+      "spellcasting": "cha",
+      "exhaustion": 0
     },
     "details": {
       "biography": {
@@ -100,7 +106,7 @@
         "public": ""
       },
       "alignment": "Chaotic Good",
-      "race": "",
+      "race": null,
       "type": {
         "value": "giant",
         "subtype": "",
@@ -149,6 +155,10 @@
           "giant"
         ],
         "custom": ""
+      },
+      "dm": {
+        "amount": {},
+        "bypasses": []
       }
     },
     "currency": {
@@ -389,7 +399,8 @@
         "value": false,
         "initiative": null
       }
-    }
+    },
+    "tools": {}
   },
   "prototypeToken": {
     "name": "Storm Giant",
@@ -466,8 +477,7 @@
       "system": {
         "description": {
           "value": "<p>This armor consists of a coat and leggings (and perhaps a separate skirt) of leather covered with overlapping pieces of metal, much like the scales of a fish. The suit includes gauntlets.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -499,7 +509,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -510,12 +521,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": null,
         "actionType": "",
@@ -537,7 +550,6 @@
         },
         "armor": {
           "value": 14,
-          "type": "medium",
           "dex": 2
         },
         "hp": {
@@ -546,17 +558,24 @@
           "dt": null,
           "conditions": ""
         },
-        "baseItem": "scalemail",
         "speed": {
           "value": null,
           "conditions": ""
         },
         "strength": null,
-        "stealth": true,
-        "proficient": true,
+        "proficient": 1,
         "properties": [
           "stealthDisadvantage"
-        ]
+        ],
+        "unidentified": {
+          "description": ""
+        },
+        "type": {
+          "value": "medium",
+          "baseItem": "scalemail"
+        },
+        "container": null,
+        "crewed": false
       },
       "effects": [],
       "folder": null,
@@ -567,6 +586,11 @@
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.items.XmnlF5fgIO3tg6TG"
+        },
+        "dnd5e": {
+          "migratedProperties": [
+            "stealthDisadvantage"
+          ]
         }
       },
       "_stats": {
@@ -587,8 +611,7 @@
       "system": {
         "description": {
           "value": "<p>The giant can breathe air and water.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -610,7 +633,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -621,12 +645,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": null,
         "actionType": "",
@@ -654,7 +680,9 @@
         "recharge": {
           "value": null,
           "charged": false
-        }
+        },
+        "crewed": false,
+        "properties": []
       },
       "effects": [],
       "folder": null,
@@ -685,8 +713,7 @@
       "system": {
         "description": {
           "value": "<section class=\"secret\"><p><em>Melee Weapon Attack:</em><strong>+14 to hit,</strong>, <strong>10 ft.,</strong> one target. Hit: <strong>30 (6d6 + 9) <em>slashing damage</em></strong>.</p><p></p></section><p>The Storm Giant attacks with its Greatsword.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -718,7 +745,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": 10,
@@ -729,12 +757,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "str",
         "actionType": "mwak",
@@ -768,25 +798,17 @@
           "dt": null,
           "conditions": ""
         },
-        "weaponType": "martialM",
-        "baseItem": "greatsword",
-        "properties": {
-          "amm": false,
-          "fin": false,
-          "fir": false,
-          "foc": false,
-          "hvy": false,
-          "lgt": false,
-          "lod": false,
-          "rch": false,
-          "rel": false,
-          "ret": false,
-          "spc": false,
-          "thr": false,
-          "two": false,
-          "ver": false
+        "properties": [],
+        "proficient": 1,
+        "unidentified": {
+          "description": ""
         },
-        "proficient": true
+        "type": {
+          "value": "martialM",
+          "baseItem": "greatsword"
+        },
+        "container": null,
+        "crewed": false
       },
       "effects": [],
       "folder": null,
@@ -817,8 +839,7 @@
       "system": {
         "description": {
           "value": "<p>The giant's innate spellcasting ability is Charisma (spell save DC 17). It can innately cast the following spells, requiring no material components:</p>\n<p><strong>At will:</strong> detect magic, feather fall, levitate, light</p>\n<p><strong>3/day each</strong>: control weather, water breathing</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -840,7 +861,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -851,12 +873,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": null,
         "actionType": "",
@@ -884,7 +908,9 @@
         "recharge": {
           "value": null,
           "charged": false
-        }
+        },
+        "crewed": false,
+        "properties": []
       },
       "effects": [],
       "folder": null,
@@ -915,8 +941,7 @@
       "system": {
         "description": {
           "value": "<section class=\"secret\"><p>The giant hurls a magical lightning bolt at a point it can see within 500 feet of it. </p><p>Each creature within 10 feet of that point must make a  <strong>DC 17 Dexterity</strong> saving throw, taking <strong>54 (12d8) <em>lightning damage</em></strong> on a failed save, or half as much damage on a successful one.</p></section><p>The Storm Giant attacks with its Lightning Strike. Each creature within 10 feet of that point must make a <strong>Dexterity</strong> saving throw.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -948,7 +973,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": 500,
@@ -959,12 +985,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "save",
@@ -998,25 +1026,17 @@
           "dt": null,
           "conditions": ""
         },
-        "weaponType": "natural",
-        "baseItem": "",
-        "properties": {
-          "amm": false,
-          "fin": false,
-          "fir": false,
-          "foc": false,
-          "hvy": false,
-          "lgt": false,
-          "lod": false,
-          "rch": false,
-          "rel": false,
-          "ret": false,
-          "spc": false,
-          "thr": false,
-          "two": false,
-          "ver": false
+        "properties": [],
+        "proficient": 1,
+        "unidentified": {
+          "description": ""
         },
-        "proficient": true
+        "type": {
+          "value": "natural",
+          "baseItem": ""
+        },
+        "container": null,
+        "crewed": false
       },
       "effects": [],
       "folder": null,
@@ -1043,8 +1063,7 @@
       "system": {
         "description": {
           "value": "<p>The giant makes two greatsword attacks.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -1066,7 +1085,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -1077,12 +1097,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": null,
         "actionType": "",
@@ -1110,7 +1132,9 @@
         "recharge": {
           "value": null,
           "charged": false
-        }
+        },
+        "crewed": false,
+        "properties": []
       },
       "effects": [],
       "folder": null,
@@ -1141,8 +1165,7 @@
       "system": {
         "description": {
           "value": "<section class=\"secret\"><p>Ranged Weapon Attack: +14 to hit, range 60/240 ft., one target. Hit: <strong>35 (4d12 + 9) <em>bludgeoning damage</em></strong>.</p><p></p></section><p>The Storm Giant attacks with its Rock.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -1174,7 +1197,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": 60,
@@ -1185,12 +1209,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "str",
         "actionType": "rwak",
@@ -1224,25 +1250,17 @@
           "dt": null,
           "conditions": ""
         },
-        "weaponType": "simpleR",
-        "baseItem": "",
-        "properties": {
-          "amm": false,
-          "fin": false,
-          "fir": false,
-          "foc": false,
-          "hvy": false,
-          "lgt": false,
-          "lod": false,
-          "rch": false,
-          "rel": false,
-          "ret": false,
-          "spc": false,
-          "thr": false,
-          "two": false,
-          "ver": false
+        "properties": [],
+        "proficient": 1,
+        "unidentified": {
+          "description": ""
         },
-        "proficient": true
+        "type": {
+          "value": "simpleR",
+          "baseItem": ""
+        },
+        "container": null,
+        "crewed": false
       },
       "effects": [],
       "folder": null,
@@ -1271,8 +1289,7 @@
       "system": {
         "description": {
           "value": "<p>For the duration, you sense the presence of magic within 30 feet of you. If you sense magic in this way, you can use your action to see a faint aura around any visible creature or object in the area that bears magic, and you learn its school of magic, if any.</p><p>The spell can penetrate most barriers, but it is blocked by 1 foot of stone, 1 inch of common metal, a thin sheet of lead, or 3 feet of wood or dirt.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -1294,7 +1311,8 @@
           "value": 30,
           "width": null,
           "units": "ft",
-          "type": "radius"
+          "type": "radius",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -1305,12 +1323,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "util",
@@ -1332,13 +1352,6 @@
         },
         "level": 1,
         "school": "div",
-        "components": {
-          "vocal": true,
-          "somatic": true,
-          "material": false,
-          "ritual": true,
-          "concentration": true
-        },
         "materials": {
           "value": "",
           "consumed": false,
@@ -1358,12 +1371,21 @@
           "somatic",
           "ritual",
           "concentration"
-        ]
+        ],
+        "crewed": false
       },
       "sort": 0,
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.spells.ghXTfe7sgCbgf1Q8"
+        },
+        "dnd5e": {
+          "migratedProperties": [
+            "vocal",
+            "somatic",
+            "ritual",
+            "concentration"
+          ]
         }
       },
       "img": "icons/magic/light/explosion-star-blue.webp",
@@ -1389,8 +1411,7 @@
       "system": {
         "description": {
           "value": "<p>Choose up to five falling creatures within range. A falling creature's rate of descent slows to 60 feet per round until the spell ends. If the creature lands before the spell ends, it takes no falling damage and can land on its feet, and the spell ends for that creature.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -1412,7 +1433,8 @@
           "value": 5,
           "width": null,
           "units": "",
-          "type": "creature"
+          "type": "creature",
+          "prompt": true
         },
         "range": {
           "value": 60,
@@ -1423,12 +1445,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "util",
@@ -1450,13 +1474,6 @@
         },
         "level": 1,
         "school": "trs",
-        "components": {
-          "vocal": true,
-          "somatic": false,
-          "material": true,
-          "ritual": false,
-          "concentration": false
-        },
         "materials": {
           "value": "A small feather or piece of down",
           "consumed": false,
@@ -1474,12 +1491,19 @@
         "properties": [
           "vocal",
           "material"
-        ]
+        ],
+        "crewed": false
       },
       "sort": 0,
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.spells.pub0OWVEB71XQx1n"
+        },
+        "dnd5e": {
+          "migratedProperties": [
+            "vocal",
+            "material"
+          ]
         }
       },
       "img": "icons/magic/air/wind-swirl-pink-purple.webp",
@@ -1505,8 +1529,7 @@
       "system": {
         "description": {
           "value": "<p>One creature or object of your choice that you can see within range rises vertically, up to 20 feet, and remains suspended there for the duration. The spell can levitate a target that weighs up to 500 pounds. An unwilling creature that succeeds on a Constitution saving throw is unaffected.</p><p>The target can move only by pushing or pulling against a fixed object or surface within reach (such as a wall or a ceiling), which allows it to move as if it were climbing. You can change the target's altitude by up to 20 feet in either direction on your turn. If you are the target, you can move up or down as part of your move. Otherwise, you can use your action to move the target, which must remain within the spell's range.</p><p>When the spell ends, the target floats gently to the ground if it is still aloft.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -1528,7 +1551,8 @@
           "value": 1,
           "width": null,
           "units": "",
-          "type": "creature"
+          "type": "creature",
+          "prompt": true
         },
         "range": {
           "value": 60,
@@ -1539,12 +1563,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "save",
@@ -1566,13 +1592,6 @@
         },
         "level": 2,
         "school": "trs",
-        "components": {
-          "vocal": true,
-          "somatic": true,
-          "material": true,
-          "ritual": false,
-          "concentration": true
-        },
         "materials": {
           "value": "Either a small leather loop or a piece of golden wire bent into a cup shape with a long shank on one end",
           "consumed": false,
@@ -1592,12 +1611,21 @@
           "somatic",
           "material",
           "concentration"
-        ]
+        ],
+        "crewed": false
       },
       "sort": 0,
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.spells.MRxldJd6C4bsBo3O"
+        },
+        "dnd5e": {
+          "migratedProperties": [
+            "vocal",
+            "somatic",
+            "material",
+            "concentration"
+          ]
         }
       },
       "img": "icons/magic/control/debuff-energy-hold-levitate-pink.webp",
@@ -1623,8 +1651,7 @@
       "system": {
         "description": {
           "value": "<p>You touch one object that is no larger than 10 feet in any dimension. Until the spell ends, the object sheds bright light in a 20-foot radius and dim light for an additional 20 feet. The light can be colored as you like. Completely covering the object with something opaque blocks the light. The spell ends if you cast it again or dismiss it as an action.</p><p>If you target an object held or worn by a hostile creature, that creature must succeed on a Dexterity saving throw to avoid the spell.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -1646,7 +1673,8 @@
           "value": 1,
           "width": null,
           "units": "",
-          "type": "object"
+          "type": "object",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -1657,12 +1685,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "save",
@@ -1684,13 +1714,6 @@
         },
         "level": 0,
         "school": "evo",
-        "components": {
-          "vocal": true,
-          "somatic": false,
-          "material": true,
-          "ritual": false,
-          "concentration": false
-        },
         "materials": {
           "value": "A firefly or phosphorescent moss.",
           "consumed": false,
@@ -1708,12 +1731,19 @@
         "properties": [
           "vocal",
           "material"
-        ]
+        ],
+        "crewed": false
       },
       "sort": 0,
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.spells.Bnn9Nzajixvow9xi"
+        },
+        "dnd5e": {
+          "migratedProperties": [
+            "vocal",
+            "material"
+          ]
         }
       },
       "img": "icons/magic/light/explosion-star-small-blue-yellow.webp",
@@ -1739,8 +1769,7 @@
       "system": {
         "description": {
           "value": "<p>You take control of the weather within 5 miles of you for the duration. You must be outdoors to cast this spell. Moving to a place where you don't have a clear path to the sky ends the spell early.</p><p>When you cast the spell, you change the current weather conditions, which are determined by the DM based on the climate and season. You can change precipitation, temperature, and wind. It takes 1d4 x 10 minutes for the new conditions to take effect. Once they do so, you can change the conditions again. When the spell ends, the weather gradually returns to normal.</p><p>When you change the weather conditions, find a current condition on the following tables and change its stage by one, up or down. When changing the wind, you can change its direction.</p><p><strong>Conditions</strong></p>\n<ol>\n<li>Clear</li>\n<li>Light clouds</li>\n<li>Overcast or ground fog</li>\n<li>Rain, hail, or snow</li>\n<li>Torrential rain, driving hail, or blizzard</li>\n</ol>\n<p><strong>Temperature</strong></p>\n<ol>\n<li>Unbearable heat</li>\n<li>Hot</li>\n<li>Warm</li>\n<li>Cool</li>\n<li>Cold</li>\n<li>Arctic cold</li>\n</ol>\n<p><strong>Wind</strong></p>\n<ol>\n<li>Calm</li>\n<li>Moderate wind</li>\n<li>Strong wind</li>\n<li>Gale</li>\n<li>Storm</li>\n</ol>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -1762,7 +1791,8 @@
           "value": 5,
           "width": null,
           "units": "mi",
-          "type": "radius"
+          "type": "radius",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -1773,12 +1803,14 @@
           "value": 3,
           "max": "3",
           "per": "day",
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "util",
@@ -1800,13 +1832,6 @@
         },
         "level": 8,
         "school": "trs",
-        "components": {
-          "vocal": true,
-          "somatic": true,
-          "material": true,
-          "ritual": false,
-          "concentration": true
-        },
         "materials": {
           "value": "Burning incense and bits of earth and wood mixed in water.",
           "consumed": false,
@@ -1826,12 +1851,21 @@
           "somatic",
           "material",
           "concentration"
-        ]
+        ],
+        "crewed": false
       },
       "sort": 0,
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.spells.ZPd73HtKF3At11jh"
+        },
+        "dnd5e": {
+          "migratedProperties": [
+            "vocal",
+            "somatic",
+            "material",
+            "concentration"
+          ]
         }
       },
       "img": "icons/magic/air/wind-tornado-cyclone-white.webp",
@@ -1857,8 +1891,7 @@
       "system": {
         "description": {
           "value": "<p>This spell grants up to ten willing creatures you can see within range the ability to breathe underwater until the spell ends. Affected creatures also retain their normal mode of respiration.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -1880,7 +1913,8 @@
           "value": 10,
           "width": null,
           "units": "",
-          "type": "creature"
+          "type": "creature",
+          "prompt": true
         },
         "range": {
           "value": 30,
@@ -1891,12 +1925,14 @@
           "value": 3,
           "max": "3",
           "per": "day",
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "util",
@@ -1918,13 +1954,6 @@
         },
         "level": 3,
         "school": "trs",
-        "components": {
-          "vocal": true,
-          "somatic": true,
-          "material": true,
-          "ritual": true,
-          "concentration": false
-        },
         "materials": {
           "value": "A short reed or piece of straw",
           "consumed": false,
@@ -1944,12 +1973,21 @@
           "somatic",
           "material",
           "ritual"
-        ]
+        ],
+        "crewed": false
       },
       "sort": 0,
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.spells.13uVuBQP6VaiSPvC"
+        },
+        "dnd5e": {
+          "migratedProperties": [
+            "vocal",
+            "somatic",
+            "material",
+            "ritual"
+          ]
         }
       },
       "img": "icons/magic/water/pseudopod-swirl-blue.webp",
@@ -1978,7 +2016,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787232600,
-    "modifiedTime": 1704466734460,
+    "modifiedTime": 1704847042006,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!68bAMIpe4jvDeR9G"

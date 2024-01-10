@@ -11,7 +11,8 @@
         "bonuses": {
           "check": "",
           "save": ""
-        }
+        },
+        "max": null
       },
       "dex": {
         "value": 10,
@@ -19,7 +20,8 @@
         "bonuses": {
           "check": "",
           "save": ""
-        }
+        },
+        "max": null
       },
       "con": {
         "value": 23,
@@ -27,7 +29,8 @@
         "bonuses": {
           "check": "",
           "save": ""
-        }
+        },
+        "max": null
       },
       "int": {
         "value": 16,
@@ -35,7 +38,8 @@
         "bonuses": {
           "check": "",
           "save": ""
-        }
+        },
+        "max": null
       },
       "wis": {
         "value": 15,
@@ -43,7 +47,8 @@
         "bonuses": {
           "check": "",
           "save": ""
-        }
+        },
+        "max": null
       },
       "cha": {
         "value": 19,
@@ -51,7 +56,8 @@
         "bonuses": {
           "check": "",
           "save": ""
-        }
+        },
+        "max": null
       }
     },
     "attributes": {
@@ -62,7 +68,6 @@
       },
       "hp": {
         "value": 212,
-        "min": 0,
         "max": 212,
         "temp": 0,
         "tempmax": 0,
@@ -92,7 +97,8 @@
         "units": "ft",
         "special": ""
       },
-      "spellcasting": ""
+      "spellcasting": "",
+      "exhaustion": 0
     },
     "details": {
       "biography": {
@@ -100,7 +106,7 @@
         "public": ""
       },
       "alignment": "Lawful Good",
-      "race": "",
+      "race": null,
       "type": {
         "value": "dragon",
         "subtype": "",
@@ -146,6 +152,10 @@
           "draconic"
         ],
         "custom": ""
+      },
+      "dm": {
+        "amount": {},
+        "bypasses": []
       }
     },
     "currency": {
@@ -382,7 +392,8 @@
         "value": true,
         "initiative": 20
       }
-    }
+    },
+    "tools": {}
   },
   "prototypeToken": {
     "name": "Adult Bronze Dragon",
@@ -459,8 +470,7 @@
       "system": {
         "description": {
           "value": "<p>The dragon can breathe air and water.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -482,7 +492,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -493,12 +504,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": null,
         "actionType": "",
@@ -526,7 +539,9 @@
         "recharge": {
           "value": null,
           "charged": false
-        }
+        },
+        "crewed": false,
+        "properties": []
       },
       "effects": [],
       "folder": null,
@@ -557,8 +572,7 @@
       "system": {
         "description": {
           "value": "<section class=\"secret\"><p><em>Melee Weapon Attack:</em><strong>+12 to hit,</strong>, <strong>10 ft.,</strong> one target. Hit: <strong>18 (2d10 + 7) <em>piercing damage</em></strong>.</p><p></p></section><p>The Adult Bronze Dragon attacks with its Bite.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -590,7 +604,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": 10,
@@ -601,12 +616,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "str",
         "actionType": "mwak",
@@ -640,25 +657,17 @@
           "dt": null,
           "conditions": ""
         },
-        "weaponType": "natural",
-        "baseItem": "",
-        "properties": {
-          "amm": false,
-          "fin": false,
-          "fir": false,
-          "foc": false,
-          "hvy": false,
-          "lgt": false,
-          "lod": false,
-          "rch": false,
-          "rel": false,
-          "ret": false,
-          "spc": false,
-          "thr": false,
-          "two": false,
-          "ver": false
+        "properties": [],
+        "proficient": 1,
+        "unidentified": {
+          "description": ""
         },
-        "proficient": true
+        "type": {
+          "value": "natural",
+          "baseItem": ""
+        },
+        "container": null,
+        "crewed": false
       },
       "effects": [],
       "folder": null,
@@ -689,8 +698,7 @@
       "system": {
         "description": {
           "value": "<p>If the dragon fails a saving throw, it can choose to succeed instead.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -712,7 +720,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -723,12 +732,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "attribute",
           "target": "resources.legres.value",
-          "amount": 1
+          "amount": 1,
+          "scale": false
         },
         "ability": null,
         "actionType": "",
@@ -756,7 +767,9 @@
         "recharge": {
           "value": null,
           "charged": false
-        }
+        },
+        "crewed": false,
+        "properties": []
       },
       "effects": [],
       "folder": null,
@@ -787,8 +800,7 @@
       "system": {
         "description": {
           "value": "<p>The dragon can use its Frightful Presence. It then makes three attacks: one with its bite and two with its claws.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -810,7 +822,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -821,12 +834,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": null,
         "actionType": "",
@@ -854,7 +869,9 @@
         "recharge": {
           "value": null,
           "charged": false
-        }
+        },
+        "crewed": false,
+        "properties": []
       },
       "effects": [],
       "folder": null,
@@ -885,8 +902,7 @@
       "system": {
         "description": {
           "value": "<section class=\"secret\"><p><em>Melee Weapon Attack:</em><strong>+12 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>14 (2d6 + 7) <em>slashing damage</em></strong>.</p><p></p></section><p>The Adult Bronze Dragon attacks with its Claw.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -918,7 +934,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": 5,
@@ -929,12 +946,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "str",
         "actionType": "mwak",
@@ -968,25 +987,17 @@
           "dt": null,
           "conditions": ""
         },
-        "weaponType": "natural",
-        "baseItem": "",
-        "properties": {
-          "amm": false,
-          "fin": false,
-          "fir": false,
-          "foc": false,
-          "hvy": false,
-          "lgt": false,
-          "lod": false,
-          "rch": false,
-          "rel": false,
-          "ret": false,
-          "spc": false,
-          "thr": false,
-          "two": false,
-          "ver": false
+        "properties": [],
+        "proficient": 1,
+        "unidentified": {
+          "description": ""
         },
-        "proficient": true
+        "type": {
+          "value": "natural",
+          "baseItem": ""
+        },
+        "container": null,
+        "crewed": false
       },
       "effects": [],
       "folder": null,
@@ -1013,8 +1024,7 @@
       "system": {
         "description": {
           "value": "<section class=\"secret\"><p><em>Melee Weapon Attack:</em><strong>+12 to hit,</strong>, <strong>15 ft.,</strong> one target. Hit: <strong>16 (2d8 + 7) <em>bludgeoning damage</em></strong>.</p><p></p></section><p>The Adult Bronze Dragon attacks with its Tail.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -1046,7 +1056,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": 15,
@@ -1057,12 +1068,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "str",
         "actionType": "mwak",
@@ -1096,25 +1109,17 @@
           "dt": null,
           "conditions": ""
         },
-        "weaponType": "natural",
-        "baseItem": "",
-        "properties": {
-          "amm": false,
-          "fin": false,
-          "fir": false,
-          "foc": false,
-          "hvy": false,
-          "lgt": false,
-          "lod": false,
-          "rch": false,
-          "rel": false,
-          "ret": false,
-          "spc": false,
-          "thr": false,
-          "two": false,
-          "ver": false
+        "properties": [],
+        "proficient": 1,
+        "unidentified": {
+          "description": ""
         },
-        "proficient": true
+        "type": {
+          "value": "natural",
+          "baseItem": ""
+        },
+        "container": null,
+        "crewed": false
       },
       "effects": [],
       "folder": null,
@@ -1141,8 +1146,7 @@
       "system": {
         "description": {
           "value": "<section class=\"secret\"><p>Each creature of the dragon's choice that is <strong>within 120 feet</strong> of the dragon and aware of it must succeed on a <strong>DC 17 Wisdom saving throw</strong> or become frightened for <strong>1 minute</strong>. </p><p>A creature can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success. If a creature's saving throw is successful or the effect ends for it, the creature is immune to the dragon's Frightful Presence for the next 24 hours.</p></section><p>Each creature of the dragon's choice that is <strong>within 120 feet</strong> of the dragon and aware of it must succeed on a Wisdom saving throw. A creature can repeat the saving throw at the end of each of its turns.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -1164,7 +1168,8 @@
           "value": null,
           "width": null,
           "units": "any",
-          "type": "creature"
+          "type": "creature",
+          "prompt": true
         },
         "range": {
           "value": 120,
@@ -1175,12 +1180,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "wis",
         "actionType": "save",
@@ -1208,7 +1215,9 @@
         "recharge": {
           "value": null,
           "charged": false
-        }
+        },
+        "crewed": false,
+        "properties": []
       },
       "effects": [],
       "folder": null,
@@ -1239,8 +1248,7 @@
       "system": {
         "description": {
           "value": "<p>The dragon magically <strong>polymorphs</strong> into a <strong>humanoid</strong> or <strong>beast</strong> that has a challenge rating no higher than its own, or back into its true form. It reverts to its true form if it dies. Any equipment it is wearing or carrying is absorbed or borne by the new form (the dragon's choice).</p>\n<p>In a new form, the dragon <strong>retains its alignment, hit points, Hit Dice, ability to speak, proficiencies, Legendary Resistance, lair actions, and Intelligence, Wisdom, and Charisma scores, as well as this action. </strong>Its statistics and capabilities are otherwise replaced by those of the new form, <strong>except any class features or legendary actions of that form.</strong></p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -1262,7 +1270,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -1273,12 +1282,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": null,
         "actionType": "",
@@ -1306,7 +1317,9 @@
         "recharge": {
           "value": null,
           "charged": false
-        }
+        },
+        "crewed": false,
+        "properties": []
       },
       "effects": [],
       "folder": null,
@@ -1337,8 +1350,7 @@
       "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p>The dragon uses one of the following breath weapons.</p>\n<p>**Lightning Breath.** The dragon exhales lightning in a 90-foot line that is 5 feet wide. Each creature in that line must make a  <strong>DC 19 Dexterity</strong> saving throw, taking <strong>66 (12d10) <em>lightning damage</em></strong> on a failed save, or half as much damage on a successful one.</p>\n<p>**Repulsion Breath.** The dragon exhales repulsion energy in a 30-foot cone. Each creature in that area must succeed on a  <strong>DC 19 Strength</strong> saving throw. On a failed save, the creature is pushed 60 feet away from the dragon.</p>\n</section>\n<p>The dragon breathes in!</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -1360,7 +1372,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -1371,12 +1384,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": null,
         "actionType": "",
@@ -1404,7 +1419,9 @@
         "recharge": {
           "value": 5,
           "charged": true
-        }
+        },
+        "crewed": false,
+        "properties": []
       },
       "effects": [],
       "folder": null,
@@ -1435,8 +1452,7 @@
       "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p>**Lightning Breath.** The dragon exhales lightning in a 90-foot line that is 5 feet wide. Each creature in that line must make a  <strong>DC 19 Dexterity</strong> saving throw, taking <strong>66 (12d10) <em>lightning damage</em></strong> on a failed save, or half as much damage on a successful one.</p>\n</section>\n<p>The dragon exhales lightning in a 90-foot line that is 5 feet wide. Each creature in that line must make a <strong>Dexterity</strong> saving throw.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -1458,7 +1474,8 @@
           "value": 90,
           "width": null,
           "units": "ft",
-          "type": "line"
+          "type": "line",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -1469,12 +1486,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "charges",
           "target": "ApCOq8kdcdR2lgPa",
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "dex",
         "actionType": "save",
@@ -1507,7 +1526,9 @@
         "recharge": {
           "value": null,
           "charged": false
-        }
+        },
+        "crewed": false,
+        "properties": []
       },
       "effects": [],
       "folder": null,
@@ -1538,8 +1559,7 @@
       "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p>**Repulsion Breath.** The dragon exhales repulsion energy in a 30-foot cone. Each creature in that area must succeed on a  <strong>DC 19 Strength</strong> saving throw. On a failed save, the creature is pushed 60 feet away from the dragon.</p>\n</section>\n<p>The dragon exhales repulsion energy in a 30-foot cone. Each creature in that area must make a <strong>Strength</strong> saving throw.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -1561,7 +1581,8 @@
           "value": 30,
           "width": null,
           "units": "ft",
-          "type": "cone"
+          "type": "cone",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -1572,12 +1593,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "charges",
           "target": "ApCOq8kdcdR2lgPa",
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "str",
         "actionType": "save",
@@ -1605,7 +1628,9 @@
         "recharge": {
           "value": null,
           "charged": false
-        }
+        },
+        "crewed": false,
+        "properties": []
       },
       "effects": [],
       "folder": null,
@@ -1636,8 +1661,7 @@
       "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p>The dragon can take 3 legendary actions. Only one legendary action option can be used at a time and only at the end of another creature's turn. The dragon regains spent legendary actions at the start of its turn.</p>\n</section>\n<p>The dragon can take 3 legendary actions. </p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -1659,7 +1683,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -1670,12 +1695,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": null,
         "actionType": "",
@@ -1703,7 +1730,9 @@
         "recharge": {
           "value": null,
           "charged": false
-        }
+        },
+        "crewed": false,
+        "properties": []
       },
       "effects": [],
       "folder": null,
@@ -1734,8 +1763,7 @@
       "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p>The dragon makes a Wisdom (Perception) check.</p>\n</section>\n<p>The dragon watches its surrounding...</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -1757,7 +1785,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -1768,12 +1797,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "attribute",
           "target": "resources.legact.value",
-          "amount": 1
+          "amount": 1,
+          "scale": false
         },
         "ability": "wis",
         "actionType": "",
@@ -1801,7 +1832,9 @@
         "recharge": {
           "value": null,
           "charged": false
-        }
+        },
+        "crewed": false,
+        "properties": []
       },
       "effects": [],
       "folder": null,
@@ -1828,8 +1861,7 @@
       "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p>The dragon makes a tail attack.</p>\n</section>\n<p>The dragon slams its long tail against its foe!</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -1861,7 +1893,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -1872,12 +1905,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "attribute",
           "target": "resources.legact.value",
-          "amount": 1
+          "amount": 1,
+          "scale": false
         },
         "ability": "",
         "actionType": "",
@@ -1906,25 +1941,17 @@
           "dt": null,
           "conditions": ""
         },
-        "weaponType": "natural",
-        "baseItem": "",
-        "properties": {
-          "amm": false,
-          "fin": false,
-          "fir": false,
-          "foc": false,
-          "hvy": false,
-          "lgt": false,
-          "lod": false,
-          "rch": false,
-          "rel": false,
-          "ret": false,
-          "spc": false,
-          "thr": false,
-          "two": false,
-          "ver": false
+        "properties": [],
+        "proficient": 1,
+        "unidentified": {
+          "description": ""
         },
-        "proficient": true
+        "type": {
+          "value": "natural",
+          "baseItem": ""
+        },
+        "container": null,
+        "crewed": false
       },
       "effects": [],
       "folder": null,
@@ -1951,8 +1978,7 @@
       "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p>The dragon beats its wings. <strong>Each creature within&nbsp;10 feet of the dragon</strong> must succeed on a&nbsp;<strong>DC 20 Dexterity saving throw</strong>&nbsp;or take&nbsp;<strong>16 (2d6+7) bludgeoning</strong>&nbsp;damage and be <strong>knocked prone.</strong> The dragon <strong>can then fly up to half its flying speed.</strong></p>\n</section>\n<p>The dragon beats its wings!</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -1984,7 +2010,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -1995,12 +2022,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "attribute",
           "target": "resources.legact.value",
-          "amount": 2
+          "amount": 2,
+          "scale": false
         },
         "ability": "str",
         "actionType": "save",
@@ -2034,25 +2063,17 @@
           "dt": null,
           "conditions": ""
         },
-        "weaponType": "natural",
-        "baseItem": "",
-        "properties": {
-          "amm": false,
-          "fin": false,
-          "fir": false,
-          "foc": false,
-          "hvy": false,
-          "lgt": false,
-          "lod": false,
-          "rch": false,
-          "rel": false,
-          "ret": false,
-          "spc": false,
-          "thr": false,
-          "two": false,
-          "ver": false
+        "properties": [],
+        "proficient": 1,
+        "unidentified": {
+          "description": ""
         },
-        "proficient": true
+        "type": {
+          "value": "natural",
+          "baseItem": ""
+        },
+        "container": null,
+        "crewed": false
       },
       "effects": [],
       "folder": null,
@@ -2079,8 +2100,7 @@
       "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p>If a legendary creature has lair actions, it can use them to harness the ambient magic in its lair. On initiative count 20 (losing all initiative ties), it can use one of its lair action options. It can't do so while incapacitated or otherwise unable to take actions. If surprised, it can't use one until after its first turn in the combat.</p>\n</section>\n<p>If a legendary creature has lair actions, it can use them to harness the ambient magic in its lair. </p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -2102,7 +2122,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -2113,12 +2134,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": null,
         "actionType": "",
@@ -2146,7 +2169,9 @@
         "recharge": {
           "value": null,
           "charged": false
-        }
+        },
+        "crewed": false,
+        "properties": []
       },
       "effects": [],
       "folder": null,
@@ -2177,8 +2202,7 @@
       "system": {
         "description": {
           "value": "<p>The mere presence of a legendary creature can have strange and wondrous effects on its environment. Regional effects end abruptly or dissipate over time when the legendary creature dies.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -2200,7 +2224,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -2211,12 +2236,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": null,
         "actionType": "",
@@ -2244,7 +2271,9 @@
         "recharge": {
           "value": null,
           "charged": false
-        }
+        },
+        "crewed": false,
+        "properties": []
       },
       "effects": [],
       "folder": null,
@@ -2280,7 +2309,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787232862,
-    "modifiedTime": 1701908187992,
+    "modifiedTime": 1704847048660,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!VCuG0Z3MrO8kfDU0"

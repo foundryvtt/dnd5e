@@ -11,7 +11,8 @@
         "bonuses": {
           "check": "",
           "save": ""
-        }
+        },
+        "max": null
       },
       "dex": {
         "value": 17,
@@ -19,7 +20,8 @@
         "bonuses": {
           "check": "",
           "save": ""
-        }
+        },
+        "max": null
       },
       "con": {
         "value": 10,
@@ -27,7 +29,8 @@
         "bonuses": {
           "check": "",
           "save": ""
-        }
+        },
+        "max": null
       },
       "int": {
         "value": 7,
@@ -35,7 +38,8 @@
         "bonuses": {
           "check": "",
           "save": ""
-        }
+        },
+        "max": null
       },
       "wis": {
         "value": 10,
@@ -43,7 +47,8 @@
         "bonuses": {
           "check": "",
           "save": ""
-        }
+        },
+        "max": null
       },
       "cha": {
         "value": 10,
@@ -51,7 +56,8 @@
         "bonuses": {
           "check": "",
           "save": ""
-        }
+        },
+        "max": null
       }
     },
     "attributes": {
@@ -62,7 +68,6 @@
       },
       "hp": {
         "value": 7,
-        "min": 0,
         "max": 7,
         "temp": null,
         "tempmax": 0,
@@ -92,7 +97,8 @@
         "units": "ft",
         "special": ""
       },
-      "spellcasting": ""
+      "spellcasting": "",
+      "exhaustion": 0
     },
     "details": {
       "biography": {
@@ -100,7 +106,7 @@
         "public": ""
       },
       "alignment": "Chaotic Evil",
-      "race": "",
+      "race": null,
       "type": {
         "value": "fiend",
         "subtype": "Demon, Shapechanger",
@@ -157,6 +163,10 @@
           "common"
         ],
         "custom": ""
+      },
+      "dm": {
+        "amount": {},
+        "bypasses": []
       }
     },
     "currency": {
@@ -397,7 +407,8 @@
         "value": false,
         "initiative": null
       }
-    }
+    },
+    "tools": {}
   },
   "prototypeToken": {
     "name": "Quasit",
@@ -474,8 +485,7 @@
       "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p>The quasit magically turns invisible until it attacks or uses Scare, or until its concentration ends (as if concentrating on a spell). Any equipment the quasit wears or carries is invisible with it.</p></section>\n<p>The quasit magically turns invisible. Any equipment the quasit wears or carries is invisible with it.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -497,7 +507,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -508,12 +519,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "",
@@ -541,7 +554,9 @@
         "recharge": {
           "value": null,
           "charged": false
-        }
+        },
+        "crewed": false,
+        "properties": []
       },
       "effects": [],
       "folder": null,
@@ -572,8 +587,7 @@
       "system": {
         "description": {
           "value": "<section class=\"secret\"><p>Melee Weapon Attack: +4 to hit, reach 5 ft ., one target. Hit: <strong>5 (1d4 + 3) <em>piercing damage</em></strong>.</p><p>The target must succeed on a  <strong>DC 10 Constitution</strong> saving throw or take <strong>5 (2d4) <em>poison damage</em></strong> and become poisoned for 1 minute. The target can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success.</p></section><p>The Quasit attacks with its Claw. The target must make a <strong>Constitution</strong> saving throw. The target can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -605,7 +619,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": 5,
@@ -616,12 +631,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "dex",
         "actionType": "mwak",
@@ -655,25 +672,17 @@
           "dt": null,
           "conditions": ""
         },
-        "weaponType": "simpleM",
-        "baseItem": "",
-        "properties": {
-          "amm": false,
-          "fin": false,
-          "fir": false,
-          "foc": false,
-          "hvy": false,
-          "lgt": false,
-          "lod": false,
-          "rch": false,
-          "rel": false,
-          "ret": false,
-          "spc": false,
-          "thr": false,
-          "two": false,
-          "ver": false
+        "properties": [],
+        "proficient": 1,
+        "unidentified": {
+          "description": ""
         },
-        "proficient": true
+        "type": {
+          "value": "simpleM",
+          "baseItem": ""
+        },
+        "container": null,
+        "crewed": false
       },
       "effects": [],
       "folder": null,
@@ -700,8 +709,7 @@
       "system": {
         "description": {
           "value": "<section class=\"secret\"><p>The quasit can use its action to <strong>polymorph</strong> into a beast form that resembles a bat (speed <strong>10 ft.</strong> fly <strong>40 ft.</strong>), a centipede (<strong>40 ft.</strong>, climb <strong>40 ft.</strong>), or a toad (<strong>40 ft.</strong>, swim <strong>40 ft.</strong>), or back into its true form . Its statistics are the same in each form, except for the speed changes noted. </p><p>Any equipment it is wearing or carrying isn't transformed . It reverts to its true form if it dies.</p></section><p>The quasit can use its action to <strong>polymorph</strong> into a beast form or back into its true form. </p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -723,7 +731,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -734,12 +743,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": null,
         "actionType": "",
@@ -767,7 +778,9 @@
         "recharge": {
           "value": null,
           "charged": false
-        }
+        },
+        "crewed": false,
+        "properties": []
       },
       "effects": [],
       "folder": null,
@@ -798,8 +811,7 @@
       "system": {
         "description": {
           "value": "<p>The quasit has<strong> advantage </strong>on saving throws against spells and other magical effects.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -821,7 +833,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -832,12 +845,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": null,
         "actionType": "",
@@ -865,7 +880,9 @@
         "recharge": {
           "value": null,
           "charged": false
-        }
+        },
+        "crewed": false,
+        "properties": []
       },
       "effects": [],
       "folder": null,
@@ -896,8 +913,7 @@
       "system": {
         "description": {
           "value": "<section class=\"secret\"><p>One creature of the quasit's choice within 20 ft. of it must succeed on a  <strong>DC 10 Wisdom</strong> saving throw or be frightened for 1 minute. </p><p>The target can repeat the saving throw at the end of each of its turns, with disadvantage if the quasit is within line of sight, ending the effect on itself on a success.</p></section><p>One creature of the quasit's choice within 20 ft. of it must make a <strong>Wisdom</strong> saving throw. The target can repeat the saving throw at the end of each of its turns, with disadvantage if the quasit is within line of sight, ending the effect on itself on a success.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -919,7 +935,8 @@
           "value": 1,
           "width": null,
           "units": "",
-          "type": "creature"
+          "type": "creature",
+          "prompt": true
         },
         "range": {
           "value": 20,
@@ -930,12 +947,14 @@
           "value": 1,
           "max": "1",
           "per": "day",
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "other",
@@ -963,7 +982,9 @@
         "recharge": {
           "value": null,
           "charged": false
-        }
+        },
+        "crewed": false,
+        "properties": []
       },
       "effects": [],
       "folder": null,
@@ -999,7 +1020,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787232916,
-    "modifiedTime": 1701908188596,
+    "modifiedTime": 1704847049884,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!bwtkdzavdNHISgp4"

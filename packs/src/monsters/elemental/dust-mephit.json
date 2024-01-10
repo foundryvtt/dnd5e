@@ -11,7 +11,8 @@
         "bonuses": {
           "check": "",
           "save": ""
-        }
+        },
+        "max": null
       },
       "dex": {
         "value": 14,
@@ -19,7 +20,8 @@
         "bonuses": {
           "check": "",
           "save": ""
-        }
+        },
+        "max": null
       },
       "con": {
         "value": 10,
@@ -27,7 +29,8 @@
         "bonuses": {
           "check": "",
           "save": ""
-        }
+        },
+        "max": null
       },
       "int": {
         "value": 9,
@@ -35,7 +38,8 @@
         "bonuses": {
           "check": "",
           "save": ""
-        }
+        },
+        "max": null
       },
       "wis": {
         "value": 11,
@@ -43,7 +47,8 @@
         "bonuses": {
           "check": "",
           "save": ""
-        }
+        },
+        "max": null
       },
       "cha": {
         "value": 10,
@@ -51,7 +56,8 @@
         "bonuses": {
           "check": "",
           "save": ""
-        }
+        },
+        "max": null
       }
     },
     "attributes": {
@@ -62,7 +68,6 @@
       },
       "hp": {
         "value": 17,
-        "min": 0,
         "max": 17,
         "temp": 0,
         "tempmax": 0,
@@ -92,7 +97,8 @@
         "units": "ft",
         "special": ""
       },
-      "spellcasting": "cha"
+      "spellcasting": "cha",
+      "exhaustion": 0
     },
     "details": {
       "biography": {
@@ -100,7 +106,7 @@
         "public": ""
       },
       "alignment": "Neutral Evil",
-      "race": "",
+      "race": null,
       "type": {
         "value": "elemental",
         "subtype": "",
@@ -150,6 +156,10 @@
           "terran"
         ],
         "custom": ""
+      },
+      "dm": {
+        "amount": {},
+        "bypasses": []
       }
     },
     "currency": {
@@ -390,7 +400,8 @@
         "value": false,
         "initiative": null
       }
-    }
+    },
+    "tools": {}
   },
   "prototypeToken": {
     "name": "Dust Mephit",
@@ -467,8 +478,7 @@
       "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p>When the mephit dies, it explodes in a burst of dust. Each creature within <strong>5 ft.</strong> of it must then succeed on a <strong>DC 10 Constitution saving throw</strong> or be blinded for <strong>1 minute</strong>. A blinded creature can repeat the saving throw on each of its turns, ending the effect on itself on a success.</p>\n</section>\n<p>When the mephit dies, it explodes in a burst of dust. Each creature within <strong>5 ft.</strong> of it must make a <strong>Constitution</strong> saving throw.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -490,7 +500,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": 5,
@@ -501,12 +512,14 @@
           "value": 1,
           "max": "1",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "con",
         "actionType": "other",
@@ -534,7 +547,9 @@
         "recharge": {
           "value": null,
           "charged": false
-        }
+        },
+        "crewed": false,
+        "properties": []
       },
       "effects": [],
       "folder": null,
@@ -565,8 +580,7 @@
       "system": {
         "description": {
           "value": "<p>The mephit can innately cast sleep, requiring no material components. Its innate spellcasting ability is Charisma.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -588,7 +602,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -599,12 +614,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "",
@@ -632,7 +649,9 @@
         "recharge": {
           "value": null,
           "charged": false
-        }
+        },
+        "crewed": false,
+        "properties": []
       },
       "effects": [],
       "folder": null,
@@ -663,8 +682,7 @@
       "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+4 to hit,</strong>, <strong>5 ft.,</strong> one creature. Hit: <strong>4 (1d4 + 2) <em>slashing damage</em></strong>.</p>\n</section>\n<p>The Dust Mephit attacks with its Claws.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -696,7 +714,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": 5,
@@ -707,12 +726,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "dex",
         "actionType": "mwak",
@@ -746,25 +767,19 @@
           "dt": null,
           "conditions": ""
         },
-        "weaponType": "natural",
-        "baseItem": "",
-        "properties": {
-          "fin": true,
-          "amm": false,
-          "fir": false,
-          "foc": false,
-          "hvy": false,
-          "lgt": false,
-          "lod": false,
-          "rch": false,
-          "rel": false,
-          "ret": false,
-          "spc": false,
-          "thr": false,
-          "two": false,
-          "ver": false
+        "properties": [
+          "fin"
+        ],
+        "proficient": 1,
+        "unidentified": {
+          "description": ""
         },
-        "proficient": true
+        "type": {
+          "value": "natural",
+          "baseItem": ""
+        },
+        "container": null,
+        "crewed": false
       },
       "effects": [],
       "folder": null,
@@ -791,8 +806,7 @@
       "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p>The mephit exhales a 15-foot cone of blinding dust.</p>\n<p>Each creature in that area must succeed on a  <strong>DC 10 Dexterity</strong> saving throw or be blinded for 1 minute. A creature can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success.</p>\n</section>\n<p>The mephit exhales a 15-foot cone of blinding dust. Each creature in that area must make a <strong>Dexterity</strong> saving throw. A creature can repeat the saving throw at the end of each of its turns.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -814,7 +828,8 @@
           "value": 15,
           "width": null,
           "units": "ft",
-          "type": "cone"
+          "type": "cone",
+          "prompt": true
         },
         "range": {
           "value": 15,
@@ -825,12 +840,14 @@
           "value": 1,
           "max": "1",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "con",
         "actionType": "other",
@@ -858,7 +875,9 @@
         "recharge": {
           "value": 6,
           "charged": true
-        }
+        },
+        "crewed": false,
+        "properties": []
       },
       "effects": [],
       "folder": null,
@@ -889,8 +908,7 @@
       "system": {
         "description": {
           "value": "<p>This spell sends creatures into a magical slumber. Roll 5d8; the total is how many hit points of creatures this spell can affect. Creatures within 20 feet of a point you choose within range are affected in ascending order of their current hit points (ignoring unconscious creatures).</p><p>Starting with the creature that has the lowest current hit points, each creature affected by this spell falls unconscious until the spell ends, the sleeper takes damage, or someone uses an action to shake or slap the sleeper awake. Subtract each creature's hit points from the total before moving on to the creature with the next lowest hit points. A creature's hit points must be equal to or less than the remaining total for that creature to be affected.</p><p>Undead and creatures immune to being charmed aren't affected by this spell.</p><p><strong>Higher Levels.</strong> When you cast this spell using a spell slot of 2nd level or higher, roll an additional 2d8 for each slot level above 1st.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -912,7 +930,8 @@
           "value": 20,
           "width": null,
           "units": "ft",
-          "type": "sphere"
+          "type": "sphere",
+          "prompt": true
         },
         "range": {
           "value": 90,
@@ -923,12 +942,14 @@
           "value": 1,
           "max": "1",
           "per": "day",
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "other",
@@ -955,13 +976,6 @@
         },
         "level": 1,
         "school": "enc",
-        "components": {
-          "vocal": true,
-          "somatic": true,
-          "material": true,
-          "ritual": false,
-          "concentration": false
-        },
         "materials": {
           "value": "A pinch of fine sand, rose petals, or a cricket.",
           "consumed": false,
@@ -980,7 +994,8 @@
           "vocal",
           "somatic",
           "material"
-        ]
+        ],
+        "crewed": false
       },
       "effects": [],
       "folder": null,
@@ -991,6 +1006,13 @@
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.spells.KhwiSi9fwVfUPtku"
+        },
+        "dnd5e": {
+          "migratedProperties": [
+            "vocal",
+            "somatic",
+            "material"
+          ]
         }
       },
       "_stats": {
@@ -1016,7 +1038,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787232661,
-    "modifiedTime": 1704466734866,
+    "modifiedTime": 1704847043805,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!BUCfQ7ihaXX75Vai"

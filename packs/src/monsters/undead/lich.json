@@ -11,7 +11,8 @@
         "bonuses": {
           "check": "",
           "save": ""
-        }
+        },
+        "max": null
       },
       "dex": {
         "value": 16,
@@ -19,7 +20,8 @@
         "bonuses": {
           "check": "",
           "save": ""
-        }
+        },
+        "max": null
       },
       "con": {
         "value": 16,
@@ -27,7 +29,8 @@
         "bonuses": {
           "check": "",
           "save": ""
-        }
+        },
+        "max": null
       },
       "int": {
         "value": 20,
@@ -35,7 +38,8 @@
         "bonuses": {
           "check": "",
           "save": ""
-        }
+        },
+        "max": null
       },
       "wis": {
         "value": 14,
@@ -43,7 +47,8 @@
         "bonuses": {
           "check": "",
           "save": ""
-        }
+        },
+        "max": null
       },
       "cha": {
         "value": 16,
@@ -51,7 +56,8 @@
         "bonuses": {
           "check": "",
           "save": ""
-        }
+        },
+        "max": null
       }
     },
     "attributes": {
@@ -62,7 +68,6 @@
       },
       "hp": {
         "value": 135,
-        "min": 0,
         "max": 135,
         "temp": null,
         "tempmax": 0,
@@ -92,7 +97,8 @@
         "units": "ft",
         "special": ""
       },
-      "spellcasting": "int"
+      "spellcasting": "int",
+      "exhaustion": 0
     },
     "details": {
       "biography": {
@@ -100,7 +106,7 @@
         "public": ""
       },
       "alignment": "Any Evil",
-      "race": "",
+      "race": null,
       "type": {
         "value": "undead",
         "subtype": "",
@@ -161,6 +167,10 @@
           "custom"
         ],
         "custom": "5 other languages"
+      },
+      "dm": {
+        "amount": {},
+        "bypasses": []
       }
     },
     "currency": {
@@ -401,7 +411,8 @@
         "value": true,
         "initiative": 20
       }
-    }
+    },
+    "tools": {}
   },
   "prototypeToken": {
     "name": "Lich",
@@ -478,8 +489,7 @@
       "system": {
         "description": {
           "value": "<p>The lich casts a cantrip.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -501,7 +511,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -512,12 +523,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "attribute",
           "target": "resources.legact.value",
-          "amount": 1
+          "amount": 1,
+          "scale": false
         },
         "ability": "",
         "actionType": "",
@@ -545,7 +558,9 @@
         "recharge": {
           "value": null,
           "charged": false
-        }
+        },
+        "crewed": false,
+        "properties": []
       },
       "effects": [],
       "folder": null,
@@ -572,8 +587,7 @@
       "system": {
         "description": {
           "value": "<p>The lich uses its Paralyzing Touch.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -595,7 +609,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -606,12 +621,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "attribute",
           "target": "resources.legact.value",
-          "amount": 2
+          "amount": 2,
+          "scale": false
         },
         "ability": "",
         "actionType": "mwak",
@@ -639,7 +656,9 @@
         "recharge": {
           "value": null,
           "charged": false
-        }
+        },
+        "crewed": false,
+        "properties": []
       },
       "effects": [],
       "folder": null,
@@ -670,8 +689,7 @@
       "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p>The lich fixes its gaze on one creature it can see within 10 feet of it. The target must succeed on a  <strong>DC 18 Wisdom</strong> saving throw against this magic or become grappled for 1 minute. The grappled target can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success. If a target's saving throw is successful or the effect ends for it, the target is immune to the lich's gaze for the next 24 hours.</p>\n</section>\n<p>The lich fixes its gaze on one creature it can see within 10 feet of it. The target must make a <strong>Wisdom</strong> saving throw.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -693,7 +711,8 @@
           "value": 1,
           "width": null,
           "units": "",
-          "type": "creature"
+          "type": "creature",
+          "prompt": true
         },
         "range": {
           "value": 10,
@@ -704,12 +723,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "attribute",
           "target": "resources.legact.value",
-          "amount": 2
+          "amount": 2,
+          "scale": false
         },
         "ability": "",
         "actionType": "save",
@@ -737,7 +758,9 @@
         "recharge": {
           "value": null,
           "charged": false
-        }
+        },
+        "crewed": false,
+        "properties": []
       },
       "effects": [],
       "folder": null,
@@ -768,8 +791,7 @@
       "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p>Each non-undead creature within 20 feet of the lich must make a  <strong>DC 18 Constitution</strong> saving throw against this magic, taking <strong>21 (6d6) <em>necrotic damage</em></strong> on a failed save, or half as much damage on a successful one.</p>\n</section>\n<p>Each non-undead creature within 20 feet of the lich must make a <strong>Constitution</strong> saving throw against this magic.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -791,7 +813,8 @@
           "value": 20,
           "width": null,
           "units": "ft",
-          "type": "radius"
+          "type": "radius",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -802,12 +825,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "attribute",
           "target": "resources.legact.value",
-          "amount": 3
+          "amount": 3,
+          "scale": false
         },
         "ability": "",
         "actionType": "save",
@@ -840,7 +865,9 @@
         "recharge": {
           "value": null,
           "charged": false
-        }
+        },
+        "crewed": false,
+        "properties": []
       },
       "effects": [],
       "folder": null,
@@ -871,8 +898,7 @@
       "system": {
         "description": {
           "value": "<p>If the lich fails a saving throw, it can choose to succeed instead.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -894,7 +920,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -905,12 +932,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "attribute",
           "target": "resources.legres.value",
-          "amount": 1
+          "amount": 1,
+          "scale": false
         },
         "ability": null,
         "actionType": "",
@@ -938,7 +967,9 @@
         "recharge": {
           "value": null,
           "charged": false
-        }
+        },
+        "crewed": false,
+        "properties": []
       },
       "effects": [],
       "folder": null,
@@ -969,8 +1000,7 @@
       "system": {
         "description": {
           "value": "<section class=\"secret\"><p>If it has a phylactery, a destroyed lich gains a new body in 1d10 days, regaining all its<strong> hit points</strong> and becoming active again. The new body appears <strong>within 5 feet</strong> of the phylactery.</p></section><p>A destroyed lich gains a new body in 1d10 days, regaining all its<strong> hit points</strong> and becoming active again.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -992,7 +1022,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -1003,12 +1034,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "other",
@@ -1036,7 +1069,9 @@
         "recharge": {
           "value": null,
           "charged": false
-        }
+        },
+        "crewed": false,
+        "properties": []
       },
       "effects": [],
       "folder": null,
@@ -1067,8 +1102,7 @@
       "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p>The lich is an 18th-level spellcaster. Its spellcasting ability is Intelligence (spell save DC 20, +12 to hit with spell attacks). The lich has the following wizard spells prepared:</p>\n<p>Cantrips (at will): mage hand, prestidigitation, ray of frost</p>\n<p>1st level (4 slots): detect magic, magic missile, shield, thunderwave</p>\n<p>2nd level (3 slots): detect thoughts, invisibility, acid arrow, mirror image</p>\n<p>3rd level (3 slots): animate dead, counterspell, dispel magic, fireball</p>\n<p>4th level (3 slots): blight, dimension door</p>\n<p>5th level (3 slots): cloudkill, scrying</p>\n<p>6th level (1 slot): disintegrate, globe of invulnerability</p>\n<p>7th level (1 slot): finger of death, plane shift</p>\n<p>8th level (1 slot): dominate monster, power word stun</p>\n<p>9th level (1 slot): power word kill</p>\n</section>\n<p>The lich is an spellcaster. Its spellcasting ability is Intelligence.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -1090,7 +1124,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -1101,12 +1136,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": null,
         "actionType": "",
@@ -1134,7 +1171,9 @@
         "recharge": {
           "value": null,
           "charged": false
-        }
+        },
+        "crewed": false,
+        "properties": []
       },
       "effects": [],
       "folder": null,
@@ -1165,8 +1204,7 @@
       "system": {
         "description": {
           "value": "<section class=\"secret\"><p><em>Melee Spell Attack:</em><strong>+12 to hit,</strong>, <strong>5 ft.,</strong> one creature. Hit: <strong>10 (3d6) <em>cold damage</em></strong>. </p><p>The target must succeed on a  <strong>DC 18 Constitution</strong> saving throw or be paralyzed for 1 minute. The target can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success.</p></section><p>The Lich attacks with its Paralyzing Touch. The target must make a <strong>Constitution</strong> saving throw. The target can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -1198,7 +1236,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": 5,
@@ -1209,12 +1248,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "int",
         "actionType": "msak",
@@ -1248,25 +1289,17 @@
           "dt": null,
           "conditions": ""
         },
-        "weaponType": "natural",
-        "baseItem": "",
-        "properties": {
-          "amm": false,
-          "fin": false,
-          "fir": false,
-          "foc": false,
-          "hvy": false,
-          "lgt": false,
-          "lod": false,
-          "rch": false,
-          "rel": false,
-          "ret": false,
-          "spc": false,
-          "thr": false,
-          "two": false,
-          "ver": false
+        "properties": [],
+        "proficient": 1,
+        "unidentified": {
+          "description": ""
         },
-        "proficient": true
+        "type": {
+          "value": "natural",
+          "baseItem": ""
+        },
+        "container": null,
+        "crewed": false
       },
       "effects": [],
       "folder": null,
@@ -1297,8 +1330,7 @@
       "system": {
         "description": {
           "value": "<p>The lich has<strong> advantage </strong>on saving throws against any effect that turns undead.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -1320,7 +1352,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -1331,12 +1364,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": null,
         "actionType": "",
@@ -1364,7 +1399,9 @@
         "recharge": {
           "value": null,
           "charged": false
-        }
+        },
+        "crewed": false,
+        "properties": []
       },
       "effects": [],
       "folder": null,
@@ -1395,8 +1432,7 @@
       "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p>The lich can take 3 legendary actions. Only one legendary action option can be used at a time and only at the end of another creature's turn. The lich regains spent legendary actions at the start of its turn.</p>\n</section>\n<p>The lich can take 3 legendary actions.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -1418,7 +1454,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -1429,12 +1466,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": null,
         "actionType": "",
@@ -1462,7 +1501,9 @@
         "recharge": {
           "value": null,
           "charged": false
-        }
+        },
+        "crewed": false,
+        "properties": []
       },
       "effects": [],
       "folder": null,
@@ -1493,8 +1534,7 @@
       "system": {
         "description": {
           "value": "<p>The mere presence of a legendary creature can have strange and wondrous effects on its environment. Regional effects end abruptly or dissipate over time when the legendary creature dies.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -1516,7 +1556,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -1527,12 +1568,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": null,
         "actionType": "",
@@ -1560,7 +1603,9 @@
         "recharge": {
           "value": null,
           "charged": false
-        }
+        },
+        "crewed": false,
+        "properties": []
       },
       "effects": [],
       "folder": null,
@@ -1591,8 +1636,7 @@
       "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p>If a legendary creature has lair actions, it can use them to harness the ambient magic in its lair. On initiative count 20 (losing all initiative ties), it can use one of its lair action options. It can't do so while incapacitated or otherwise unable to take actions. If surprised, it can't use one until after its first turn in the combat.</p>\n</section>\n<p>If a legendary creature has lair actions, it can use them to harness the ambient magic in its lair. </p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -1614,7 +1658,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -1625,12 +1670,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": null,
         "actionType": "",
@@ -1658,7 +1705,9 @@
         "recharge": {
           "value": null,
           "charged": false
-        }
+        },
+        "crewed": false,
+        "properties": []
       },
       "effects": [],
       "folder": null,
@@ -1691,8 +1740,7 @@
       "system": {
         "description": {
           "value": "<p>A spectral, floating hand appears at a point you choose within range. The hand lasts for the duration or until you dismiss it as an action. The hand vanishes if it is ever more than 30 feet away from you or if you cast this spell again.</p><p>You can use your action to control the hand. You can use the hand to manipulate an object, open an unlocked door or container, stow or retrieve an item from an open container, or pour the contents out of a vial. You can move the hand up to 30 feet each time you use it.</p><p>The hand can't attack, activate magic items, or carry more than 10 pounds.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -1714,7 +1762,8 @@
           "value": 1,
           "width": null,
           "units": "",
-          "type": "space"
+          "type": "space",
+          "prompt": true
         },
         "range": {
           "value": 30,
@@ -1725,12 +1774,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "util",
@@ -1752,13 +1803,6 @@
         },
         "level": 0,
         "school": "con",
-        "components": {
-          "vocal": true,
-          "somatic": true,
-          "material": false,
-          "ritual": false,
-          "concentration": false
-        },
         "materials": {
           "value": "",
           "consumed": false,
@@ -1776,12 +1820,19 @@
         "properties": [
           "vocal",
           "somatic"
-        ]
+        ],
+        "crewed": false
       },
       "sort": 0,
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.spells.Utk1OQRwYkMkFRD3"
+        },
+        "dnd5e": {
+          "migratedProperties": [
+            "vocal",
+            "somatic"
+          ]
         }
       },
       "img": "icons/magic/water/water-hand.webp",
@@ -1807,8 +1858,7 @@
       "system": {
         "description": {
           "value": "<p>This spell is a minor magical trick that novice spellcasters use for practice. You create one of the following magical effects within range:</p>\n<ul>\n<li>You create an instantaneous, harmless sensory effect, such as a shower of sparks, a puff of wind, faint musical notes, or an odd odor.</li>\n<li>You instantaneously light or snuff out a candle, a torch, or a small campfire.</li>\n<li>You instantaneously clean or soil an object no larger than 1 cubic foot.</li>\n<li>You chill, warm, or flavor up to 1 cubic foot of nonliving material for 1 hour.</li>\n<li>You make a color, a small mark, or a symbol appear on an object or a surface for 1 hour.</li>\n<li>You create a nonmagical trinket or an illusory image that can fit in your hand and that lasts until the end of your next turn.</li>\n</ul>\n<p>If you cast this spell multiple times, you can have up to three of its non-instantaneous effects active at a time, and you can dismiss such an effect as an action.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -1830,7 +1880,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": 10,
@@ -1841,12 +1892,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "util",
@@ -1868,13 +1921,6 @@
         },
         "level": 0,
         "school": "trs",
-        "components": {
-          "vocal": true,
-          "somatic": true,
-          "material": false,
-          "ritual": false,
-          "concentration": false
-        },
         "materials": {
           "value": "",
           "consumed": false,
@@ -1892,12 +1938,19 @@
         "properties": [
           "vocal",
           "somatic"
-        ]
+        ],
+        "crewed": false
       },
       "sort": 0,
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.spells.udsLtG0BugXHR2JQ"
+        },
+        "dnd5e": {
+          "migratedProperties": [
+            "vocal",
+            "somatic"
+          ]
         }
       },
       "img": "icons/magic/fire/explosion-fireball-small-purple-orange.webp",
@@ -1923,8 +1976,7 @@
       "system": {
         "description": {
           "value": "<p>A frigid beam of blue-white light streaks toward a creature within range. Make a ranged spell attack against the target. On a hit, it takes 1d8 cold damage, and its speed is reduced by 10 feet until the start of your next turn.</p><p>The spell's damage increases by 1d8 when you reach 5th level (2d8), 11th level (3d8), and 17th level (4d8).</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -1946,7 +1998,8 @@
           "value": 1,
           "width": null,
           "units": "",
-          "type": "creature"
+          "type": "creature",
+          "prompt": true
         },
         "range": {
           "value": 60,
@@ -1957,12 +2010,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "rsak",
@@ -1989,13 +2044,6 @@
         },
         "level": 0,
         "school": "evo",
-        "components": {
-          "vocal": true,
-          "somatic": true,
-          "material": false,
-          "ritual": false,
-          "concentration": false
-        },
         "materials": {
           "value": "",
           "consumed": false,
@@ -2013,12 +2061,19 @@
         "properties": [
           "vocal",
           "somatic"
-        ]
+        ],
+        "crewed": false
       },
       "sort": 0,
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.spells.ctW81uiX56xZR2c5"
+        },
+        "dnd5e": {
+          "migratedProperties": [
+            "vocal",
+            "somatic"
+          ]
         }
       },
       "img": "icons/magic/light/beam-rays-blue-small.webp",
@@ -2044,8 +2099,7 @@
       "system": {
         "description": {
           "value": "<p>For the duration, you sense the presence of magic within 30 feet of you. If you sense magic in this way, you can use your action to see a faint aura around any visible creature or object in the area that bears magic, and you learn its school of magic, if any.</p><p>The spell can penetrate most barriers, but it is blocked by 1 foot of stone, 1 inch of common metal, a thin sheet of lead, or 3 feet of wood or dirt.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -2067,7 +2121,8 @@
           "value": 30,
           "width": null,
           "units": "ft",
-          "type": "radius"
+          "type": "radius",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -2078,12 +2133,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "util",
@@ -2105,13 +2162,6 @@
         },
         "level": 1,
         "school": "div",
-        "components": {
-          "vocal": true,
-          "somatic": true,
-          "material": false,
-          "ritual": true,
-          "concentration": true
-        },
         "materials": {
           "value": "",
           "consumed": false,
@@ -2131,12 +2181,21 @@
           "somatic",
           "ritual",
           "concentration"
-        ]
+        ],
+        "crewed": false
       },
       "sort": 0,
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.spells.ghXTfe7sgCbgf1Q8"
+        },
+        "dnd5e": {
+          "migratedProperties": [
+            "vocal",
+            "somatic",
+            "ritual",
+            "concentration"
+          ]
         }
       },
       "img": "icons/magic/light/explosion-star-blue.webp",
@@ -2162,8 +2221,7 @@
       "system": {
         "description": {
           "value": "<p>You create three glowing darts of magical force. Each dart hits a creature of your choice that you can see within range. A dart deals 1d4 + 1 force damage to its target. The darts all strike simultaneously, and you can direct them to hit one creature or several.</p><p><strong>Higher Levels. </strong>When you cast this spell using a spell slot of 2nd level or higher, the spell creates one more dart for each slot level above 1st.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -2185,7 +2243,8 @@
           "value": 1,
           "width": null,
           "units": "",
-          "type": "creature"
+          "type": "creature",
+          "prompt": true
         },
         "range": {
           "value": 120,
@@ -2196,12 +2255,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "other",
@@ -2228,13 +2289,6 @@
         },
         "level": 1,
         "school": "evo",
-        "components": {
-          "vocal": true,
-          "somatic": true,
-          "material": false,
-          "ritual": false,
-          "concentration": false
-        },
         "materials": {
           "value": "",
           "consumed": false,
@@ -2252,12 +2306,19 @@
         "properties": [
           "vocal",
           "somatic"
-        ]
+        ],
+        "crewed": false
       },
       "sort": 0,
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.spells.41JIhpDyM9Anm7cs"
+        },
+        "dnd5e": {
+          "migratedProperties": [
+            "vocal",
+            "somatic"
+          ]
         }
       },
       "img": "icons/magic/fire/projectile-meteor-salvo-light-pink.webp",
@@ -2281,8 +2342,7 @@
       "system": {
         "description": {
           "value": "<p>An invisible barrier of magical force appears and protects you. Until the start of your next turn, you have a +5 bonus to AC, including against the triggering attack, and you take no damage from magic missile.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -2304,7 +2364,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": "self"
+          "type": "self",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -2315,12 +2376,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "util",
@@ -2342,13 +2405,6 @@
         },
         "level": 1,
         "school": "abj",
-        "components": {
-          "vocal": true,
-          "somatic": true,
-          "material": false,
-          "ritual": false,
-          "concentration": false
-        },
         "materials": {
           "value": "",
           "consumed": false,
@@ -2366,7 +2422,8 @@
         "properties": [
           "vocal",
           "somatic"
-        ]
+        ],
+        "crewed": false
       },
       "effects": [
         {
@@ -2408,6 +2465,12 @@
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.spells.z1mx84ONwkXKUZd7"
+        },
+        "dnd5e": {
+          "migratedProperties": [
+            "vocal",
+            "somatic"
+          ]
         }
       },
       "_stats": {
@@ -2430,8 +2493,7 @@
       "system": {
         "description": {
           "value": "<p>A wave of thunderous force sweeps out from you. Each creature in a 15-foot cube originating from you must make a Constitution saving throw. On a failed save, a creature takes 2d8 thunder damage and is pushed 10 feet away from you. On a successful save, the creature takes half as much damage and isn't pushed.</p><p>In addition, unsecured objects that are completely within the area of effect are automatically pushed 10 feet away from you by the spell's effect, and the spell emits a thunderous boom audible out to 300 feet.</p><p><strong>Higher Levels.</strong> When you cast this spell using a spell slot of 2nd level or higher, the damage increases by 1d8 for each slot level above 1st.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -2453,7 +2515,8 @@
           "value": 15,
           "width": null,
           "units": "ft",
-          "type": "cube"
+          "type": "cube",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -2464,12 +2527,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "save",
@@ -2496,13 +2561,6 @@
         },
         "level": 1,
         "school": "evo",
-        "components": {
-          "vocal": true,
-          "somatic": true,
-          "material": false,
-          "ritual": false,
-          "concentration": false
-        },
         "materials": {
           "value": "",
           "consumed": false,
@@ -2520,12 +2578,19 @@
         "properties": [
           "vocal",
           "somatic"
-        ]
+        ],
+        "crewed": false
       },
       "sort": 0,
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.spells.WTbOQBsarsL1LuXJ"
+        },
+        "dnd5e": {
+          "migratedProperties": [
+            "vocal",
+            "somatic"
+          ]
         }
       },
       "img": "icons/magic/lightning/bolt-forked-teal.webp",
@@ -2551,8 +2616,7 @@
       "system": {
         "description": {
           "value": "<p>A shimmering green arrow streaks toward a target within range and bursts in a spray of acid. Make a ranged spell Attack against the target. On a hit, the target takes 4d4 acid damage immediately and 2d4 acid damage at the end of its next turn. On a miss, the arrow splashes the target with acid for half as much of the initial damage and no damage at the end of its next turn.</p><p><strong>At Higher Levels.</strong> When you cast this spell using a spell slot of 3rd level or higher, the damage (both initial and later) increases by 1d4 for each slot level above 2nd.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -2574,7 +2638,8 @@
           "value": 1,
           "width": null,
           "units": "",
-          "type": "creature"
+          "type": "creature",
+          "prompt": true
         },
         "range": {
           "value": 90,
@@ -2585,12 +2650,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "rsak",
@@ -2617,13 +2684,6 @@
         },
         "level": 2,
         "school": "evo",
-        "components": {
-          "vocal": true,
-          "somatic": true,
-          "material": true,
-          "ritual": false,
-          "concentration": false
-        },
         "materials": {
           "value": "powdered rhubarb leaf and an adder's stomach",
           "consumed": false,
@@ -2642,12 +2702,20 @@
           "vocal",
           "somatic",
           "material"
-        ]
+        ],
+        "crewed": false
       },
       "sort": 0,
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.spells.4H6YgYdKgnX6ZQ8M"
+        },
+        "dnd5e": {
+          "migratedProperties": [
+            "vocal",
+            "somatic",
+            "material"
+          ]
         }
       },
       "img": "icons/magic/acid/projectile-bolts-salvo-green.webp",
@@ -2673,8 +2741,7 @@
       "system": {
         "description": {
           "value": "<p>For the duration, you can read the thoughts of certain creatures. When you cast the spell and as your action on each turn until the spell ends, you can focus your mind on any one creature that you can see within 30 feet of you. If the creature you choose has an Intelligence of 3 or lower or doesn't speak any language, the creature is unaffected.</p><p>You initially learn the surface thoughts of the creature—what is most on its mind in that moment. As an action, you can either shift your attention to another creature's thoughts or attempt to probe deeper into the same creature's mind. If you probe deeper, the target must make a Wisdom saving throw. If it fails, you gain insight into its reasoning (if any), its emotional state, and something that looms large in its mind (such as something it worries over, loves, or hates). If it succeeds, the spell ends. Either way, the target knows that you are probing into its mind, and unless you shift your attention to another creature's thoughts, the creature can use its action on its turn to make an Intelligence check contested by your Intelligence check; if it succeeds, the spell ends.</p><p>Questions verbally directed at the target creature naturally shape the course of its thoughts, so this spell is particularly effective as part of an interrogation.</p><p>You can also use this spell to detect the presence of thinking creatures you can't see. When you cast the spell or as your action during the duration, you can search for thoughts within 30 feet of you. The spell can penetrate barriers, but 2 feet of rock, 2 inches of any metal other than lead, or a thin sheet of lead blocks you. You can't detect a creature with an Intelligence of 3 or lower or one that doesn't speak any language.</p><p>Once you detect the presence of a creature in this way, you can read its thoughts for the rest of the duration as described above, even if you can't see it, but it must still be within range.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -2696,7 +2763,8 @@
           "value": 1,
           "width": null,
           "units": "",
-          "type": "creature"
+          "type": "creature",
+          "prompt": true
         },
         "range": {
           "value": 30,
@@ -2707,12 +2775,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "save",
@@ -2734,13 +2804,6 @@
         },
         "level": 2,
         "school": "div",
-        "components": {
-          "vocal": true,
-          "somatic": true,
-          "material": true,
-          "ritual": false,
-          "concentration": true
-        },
         "materials": {
           "value": "A copper piece",
           "consumed": false,
@@ -2760,12 +2823,21 @@
           "somatic",
           "material",
           "concentration"
-        ]
+        ],
+        "crewed": false
       },
       "sort": 0,
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.spells.ppWAAEul0QHtm4er"
+        },
+        "dnd5e": {
+          "migratedProperties": [
+            "vocal",
+            "somatic",
+            "material",
+            "concentration"
+          ]
         }
       },
       "img": "icons/magic/light/explosion-star-teal-purple.webp",
@@ -2791,8 +2863,7 @@
       "system": {
         "description": {
           "value": "<p>A creature you touch becomes invisible until the spell ends. Anything the target is wearing or carrying is invisible as long as it is on the target's person. The spell ends for a target that attacks or casts a spell.</p><p><strong>At Higher Levels.</strong> When you cast this spell using a spell slot of 3rd level or higher, you can target one additional creature for each slot level above 2nd.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -2814,7 +2885,8 @@
           "value": 1,
           "width": null,
           "units": "",
-          "type": "creature"
+          "type": "creature",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -2825,12 +2897,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "util",
@@ -2852,13 +2926,6 @@
         },
         "level": 2,
         "school": "ill",
-        "components": {
-          "vocal": true,
-          "somatic": true,
-          "material": true,
-          "ritual": false,
-          "concentration": true
-        },
         "materials": {
           "value": "An eyelash encased in gum arabic",
           "consumed": false,
@@ -2878,12 +2945,21 @@
           "somatic",
           "material",
           "concentration"
-        ]
+        ],
+        "crewed": false
       },
       "sort": 0,
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.spells.1N8dDMMgZ1h1YJ3B"
+        },
+        "dnd5e": {
+          "migratedProperties": [
+            "vocal",
+            "somatic",
+            "material",
+            "concentration"
+          ]
         }
       },
       "img": "icons/magic/air/fog-gas-smoke-dense-gray.webp",
@@ -2907,8 +2983,7 @@
       "system": {
         "description": {
           "value": "<p>Three illusory duplicates of yourself appear in your space. Until the spell ends, the duplicates move with you and mimic your actions, shifting position so it's impossible to track which image is real. You can use your action to dismiss the illusory duplicates.</p>\n<p>Each time a creature targets you with an attack during the spell's duration, roll a [[/r 1d20 # Mirror Image Check]] to determine whether the attack instead targets one of your duplicates.</p>\n<p>If you have three duplicates, you must roll a 6 or higher to change the attack's target to a duplicate. With two duplicates, you must roll an 8 or higher. With one duplicate, you must roll an 11 or higher.</p>\n<p>A duplicate's AC equals 10 + your Dexterity modifier. If an attack hits a duplicate, the duplicate is destroyed. A duplicate can be destroyed only by an attack that hits it. It ignores all other damage and effects. The spell ends when all three duplicates are destroyed.</p>\n<p>A creature is unaffected by this spell if it can't see, if it relies on senses other than sight, such as blindsight, or if it can perceive illusions as false, as with truesight.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -2930,7 +3005,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": "self"
+          "type": "self",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -2941,12 +3017,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "util",
@@ -2968,13 +3046,6 @@
         },
         "level": 2,
         "school": "ill",
-        "components": {
-          "vocal": true,
-          "somatic": true,
-          "material": false,
-          "ritual": false,
-          "concentration": false
-        },
         "materials": {
           "value": "",
           "consumed": false,
@@ -2992,7 +3063,8 @@
         "properties": [
           "vocal",
           "somatic"
-        ]
+        ],
+        "crewed": false
       },
       "effects": [],
       "folder": null,
@@ -3003,6 +3075,12 @@
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.spells.X4c8xCkmF8U9HUMz"
+        },
+        "dnd5e": {
+          "migratedProperties": [
+            "vocal",
+            "somatic"
+          ]
         }
       },
       "_stats": {
@@ -3025,8 +3103,7 @@
       "system": {
         "description": {
           "value": "<p>This spell creates an undead servant. Choose a pile of bones or a corpse of a Medium or Small humanoid within range. Your spell imbues the target with a foul mimicry of life, raising it as an undead creature. The target becomes a skeleton if you chose bones or a zombie if you chose a corpse (the DM has the creature's game statistics).</p><p>On each of your turns, you can use a bonus action to mentally command any creature you made with this spell if the creature is within 60 feet of you (if you control multiple creatures, you can command any or all of them at the same time, issuing the same command to each one). You decide what action the creature will take and where it will move during its next turn, or you can issue a general command, such as to guard a particular chamber or corridor. If you issue no commands, the creature only defends itself against hostile creatures. Once given an order, the creature continues to follow it until its task is complete.</p><p>The creature is under your control for 24 hours, after which it stops obeying any command you've given it. To maintain control of the creature for another 24 hours, you must cast this spell on the creature again before the current 24-hour period ends. This use of the spell reasserts your control over up to four creatures you have animated with this spell, rather than animating a new one.</p><p><strong>At Higher Levels.</strong> When you cast this spell using a spell slot of 4th level or higher, you animate or reassert control over two additional undead creatures for each slot level above 3rd. Each of the creatures must come from a different corpse or pile of bones.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -3048,7 +3125,8 @@
           "value": 1,
           "width": null,
           "units": "",
-          "type": "object"
+          "type": "object",
+          "prompt": true
         },
         "range": {
           "value": 10,
@@ -3059,12 +3137,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "util",
@@ -3086,13 +3166,6 @@
         },
         "level": 3,
         "school": "nec",
-        "components": {
-          "vocal": true,
-          "somatic": true,
-          "material": true,
-          "ritual": false,
-          "concentration": false
-        },
         "materials": {
           "value": "A drop of blood, a piece of flesh, and a pinch of bone dust",
           "consumed": false,
@@ -3111,12 +3184,20 @@
           "vocal",
           "somatic",
           "material"
-        ]
+        ],
+        "crewed": false
       },
       "sort": 0,
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.spells.oyE5nVppa5mde5gT"
+        },
+        "dnd5e": {
+          "migratedProperties": [
+            "vocal",
+            "somatic",
+            "material"
+          ]
         }
       },
       "img": "icons/magic/control/fear-fright-monster-red.webp",
@@ -3142,8 +3223,7 @@
       "system": {
         "description": {
           "value": "<p>You attempt to interrupt a creature in the process of casting a spell. If the creature is casting a spell of 3rd level or lower, its spell fails and has no effect. If it is casting a spell of 4th level or higher, make an ability check using your spellcasting ability. The DC equals 10 + the spell's level. On a success, the creature's spell fails and has no effect.</p><p><strong>Higher Levels. </strong>When you cast this spell using a spell slot of 4th level or higher, the interrupted spell has no effect if its level is less than or equal to the level of the spell slot you used.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -3165,7 +3245,8 @@
           "value": 1,
           "width": null,
           "units": "",
-          "type": "creature"
+          "type": "creature",
+          "prompt": true
         },
         "range": {
           "value": 60,
@@ -3176,12 +3257,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "util",
@@ -3203,13 +3286,6 @@
         },
         "level": 3,
         "school": "abj",
-        "components": {
-          "vocal": false,
-          "somatic": true,
-          "material": false,
-          "ritual": false,
-          "concentration": false
-        },
         "materials": {
           "value": "",
           "consumed": false,
@@ -3226,12 +3302,18 @@
         },
         "properties": [
           "somatic"
-        ]
+        ],
+        "crewed": false
       },
       "sort": 0,
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.spells.Ek45cBpVXvJdv1Qy"
+        },
+        "dnd5e": {
+          "migratedProperties": [
+            "somatic"
+          ]
         }
       },
       "img": "icons/skills/melee/strike-blade-hooked-orange-blue.webp",
@@ -3257,8 +3339,7 @@
       "system": {
         "description": {
           "value": "<p>Choose one creature, object, or magical effect within range. Any spell of 3rd level or lower on the target ends. For each spell of 4th level or higher on the target, make an ability check using your spellcasting ability. The DC equals 10 + the spell's level. On a successful check, the spell ends.</p><p><strong>Higher Levels.</strong> When you cast this spell using a spell slot of 4th level or higher, you automatically end the effects of a spell on the target if the spell's level is equal to or less than the level of the spell slot you used.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -3280,7 +3361,8 @@
           "value": 1,
           "width": null,
           "units": "",
-          "type": "creature"
+          "type": "creature",
+          "prompt": true
         },
         "range": {
           "value": 120,
@@ -3291,12 +3373,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "util",
@@ -3318,13 +3402,6 @@
         },
         "level": 3,
         "school": "abj",
-        "components": {
-          "vocal": true,
-          "somatic": true,
-          "material": false,
-          "ritual": false,
-          "concentration": false
-        },
         "materials": {
           "value": "",
           "consumed": false,
@@ -3342,12 +3419,19 @@
         "properties": [
           "vocal",
           "somatic"
-        ]
+        ],
+        "crewed": false
       },
       "sort": 0,
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.spells.15Fa6q1nH27XfbR8"
+        },
+        "dnd5e": {
+          "migratedProperties": [
+            "vocal",
+            "somatic"
+          ]
         }
       },
       "img": "icons/skills/melee/strike-blade-knife-orange-blue.webp",
@@ -3373,8 +3457,7 @@
       "system": {
         "description": {
           "value": "<p>A bright streak flashes from your pointing finger to a point you choose within range and then blossoms with a low roar into an explosion of flame. Each creature in a 20-foot-radius sphere centered on that point must make a Dexterity saving throw. A target takes 8d6 fire damage on a failed save, or half as much damage on a successful one.</p><p>The fire spreads around corners. It ignites flammable objects in the area that aren't being worn or carried.</p><p><strong>Higher Levels.</strong> When you cast this spell using a spell slot of 4th level or higher, the damage increases by 1d6 for each slot level above 3rd.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -3396,7 +3479,8 @@
           "value": 20,
           "width": null,
           "units": "ft",
-          "type": "sphere"
+          "type": "sphere",
+          "prompt": true
         },
         "range": {
           "value": 150,
@@ -3407,12 +3491,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "save",
@@ -3439,13 +3525,6 @@
         },
         "level": 3,
         "school": "evo",
-        "components": {
-          "vocal": true,
-          "somatic": true,
-          "material": true,
-          "ritual": false,
-          "concentration": false
-        },
         "materials": {
           "value": "A tiny ball of bat guano and sulfur",
           "consumed": false,
@@ -3464,12 +3543,20 @@
           "vocal",
           "somatic",
           "material"
-        ]
+        ],
+        "crewed": false
       },
       "sort": 0,
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.spells.ztgcdrWPshKRpFd0"
+        },
+        "dnd5e": {
+          "migratedProperties": [
+            "vocal",
+            "somatic",
+            "material"
+          ]
         }
       },
       "img": "icons/magic/fire/projectile-fireball-smoke-large-orange.webp",
@@ -3495,8 +3582,7 @@
       "system": {
         "description": {
           "value": "<p>Necromantic energy washes over a creature of your choice that you can see within range, draining moisture and vitality from it. The target must make a Constitution saving throw. The target takes 8d8 necrotic damage on a failed save, or half as much damage on a successful one. This spell has no effect on undead or constructs.</p><p>If you target a plant creature or a magical plant, it makes the saving throw with disadvantage, and the spell deals maximum damage to it.</p><p>If you target a nonmagical plant that isn't a creature, such as a tree or shrub, it doesn't make a saving throw, it simply withers and dies.</p><p><strong>At Higher Levels.</strong> When you cast this spell using a spell slot of 5th level or higher, the damage increases by 1d8 for each slot level above 4th.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -3518,7 +3604,8 @@
           "value": 1,
           "width": null,
           "units": "",
-          "type": "creature"
+          "type": "creature",
+          "prompt": true
         },
         "range": {
           "value": 30,
@@ -3529,12 +3616,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "save",
@@ -3561,13 +3650,6 @@
         },
         "level": 4,
         "school": "nec",
-        "components": {
-          "vocal": true,
-          "somatic": true,
-          "material": false,
-          "ritual": false,
-          "concentration": false
-        },
         "materials": {
           "value": "",
           "consumed": false,
@@ -3585,12 +3667,19 @@
         "properties": [
           "vocal",
           "somatic"
-        ]
+        ],
+        "crewed": false
       },
       "sort": 0,
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.spells.pybg5MNc3lkerH4Y"
+        },
+        "dnd5e": {
+          "migratedProperties": [
+            "vocal",
+            "somatic"
+          ]
         }
       },
       "img": "icons/magic/unholy/strike-beam-blood-large-red-green.webp",
@@ -3616,8 +3705,7 @@
       "system": {
         "description": {
           "value": "<p>You teleport yourself from your current location to any other spot within range. You arrive at exactly the spot desired. It can be a place you can see, one you can visualize, or one you can describe by stating distance and direction, such as \"200 feet straight downward\" or \"upward to the northwest at a 45-degree angle, 300 feet.\"</p><p>You can bring along objects as long as their weight doesn't exceed what you can carry. You can also bring one willing creature of your size or smaller who is carrying gear up to its carrying capacity. The creature must be within 5 feet of you when you cast this spell.</p><p>If you would arrive in a place already occupied by an object or a creature, you and any creature traveling with you each take 4d6 force damage, and the spell fails to teleport you.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -3639,7 +3727,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": "self"
+          "type": "self",
+          "prompt": true
         },
         "range": {
           "value": 500,
@@ -3650,12 +3739,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "other",
@@ -3682,13 +3773,6 @@
         },
         "level": 4,
         "school": "con",
-        "components": {
-          "vocal": true,
-          "somatic": false,
-          "material": false,
-          "ritual": false,
-          "concentration": false
-        },
         "materials": {
           "value": "",
           "consumed": false,
@@ -3705,12 +3789,18 @@
         },
         "properties": [
           "vocal"
-        ]
+        ],
+        "crewed": false
       },
       "sort": 0,
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.spells.A4RsPuSvB9wFtz1j"
+        },
+        "dnd5e": {
+          "migratedProperties": [
+            "vocal"
+          ]
         }
       },
       "img": "icons/magic/air/air-burst-spiral-large-pink.webp",
@@ -3736,8 +3826,7 @@
       "system": {
         "description": {
           "value": "<p>You create a 20-foot-radius sphere of poisonous, yellow-green fog centered on a point you choose within range. The fog spreads around corners. It lasts for the duration or until strong wind disperses the fog, ending the spell. Its area is heavily obscured.</p><p>When a creature enters the spell's area for the first time on a turn or starts its turn there, that creature must make a Constitution saving throw. The creature takes 5d8 poison damage on a failed save, or half as much damage on a successful one. Creatures are affected even if they hold their breath or don't need to breathe.</p><p>The fog moves 10 feet away from you at the start of each of your turns, rolling along the surface of the ground. The vapors, being heavier than air, sink to the lowest level of the land, even pouring down openings.</p><p><strong>Higher Levels. </strong>When you cast this spell using a spell slot of 6th level or higher, the damage increases by 1d8 for each slot level above 5th.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -3759,7 +3848,8 @@
           "value": 20,
           "width": null,
           "units": "ft",
-          "type": "sphere"
+          "type": "sphere",
+          "prompt": true
         },
         "range": {
           "value": 120,
@@ -3770,12 +3860,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "save",
@@ -3802,13 +3894,6 @@
         },
         "level": 5,
         "school": "con",
-        "components": {
-          "vocal": true,
-          "somatic": true,
-          "material": false,
-          "ritual": false,
-          "concentration": true
-        },
         "materials": {
           "value": "",
           "consumed": false,
@@ -3827,12 +3912,20 @@
           "vocal",
           "somatic",
           "concentration"
-        ]
+        ],
+        "crewed": false
       },
       "sort": 0,
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.spells.LkvI11Uue774QBKZ"
+        },
+        "dnd5e": {
+          "migratedProperties": [
+            "vocal",
+            "somatic",
+            "concentration"
+          ]
         }
       },
       "img": "icons/magic/air/fog-gas-smoke-swirling-green.webp",
@@ -3858,8 +3951,7 @@
       "system": {
         "description": {
           "value": "<p>You can see and hear a particular creature you choose that is on the same plane of existence as you. The target must make a Wisdom saving throw, which is modified by how well you know the target and the sort of physical connection you have to it. If a target knows you're casting this spell, it can fail the saving throw voluntarily if it wants to be observed.</p>\n<table border=\"1\">\n<tbody>\n<tr>\n<td><strong>Knowledge</strong></td>\n<td><strong>Save Modifier</strong></td>\n</tr>\n<tr>\n<td>Secondhand (you have heard of the target)</td>\n<td>+5</td>\n</tr>\n<tr>\n<td>Firsthand (you have met the target)</td>\n<td>+0</td>\n</tr>\n<tr>\n<td>Familiar (you know the target well)</td>\n<td>-5</td>\n</tr>\n</tbody>\n</table>\n\n<table border=\"1\">\n<tbody>\n<tr>\n<td><strong>Connection</strong></td>\n<td><strong>Save Modifier</strong></td>\n</tr>\n<tr>\n<td>Likeness or picture</td>\n<td>-2</td>\n</tr>\n<tr>\n<td>Possession or garment</td>\n<td>-4</td>\n</tr>\n<tr>\n<td>Body part, lock of hair, bit of nail, or the like</td>\n<td>-10</td>\n</tr>\n</tbody>\n</table>\n<p>On a successful save, the target isn't affected, and you can't use this spell against it again for 24 hours.</p><p>On a failed save, the spell creates an Invisible sensor within 10 feet of the target. You can see and hear through the sensor as if you were there. The sensor moves with the target, remaining within 10 feet of it for the Duration. A creature that can see Invisile Objects sees the sensor as a luminous orb about the size of your fist.</p><p>Instead of targeting a creature, you can choose a location you have seen before as the target of this spell. When you do, the sensor appears at that location and doesn't move.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -3881,7 +3973,8 @@
           "value": 1,
           "width": null,
           "units": "",
-          "type": "creature"
+          "type": "creature",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -3892,12 +3985,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "save",
@@ -3919,13 +4014,6 @@
         },
         "level": 5,
         "school": "div",
-        "components": {
-          "vocal": true,
-          "somatic": true,
-          "material": true,
-          "ritual": false,
-          "concentration": true
-        },
         "materials": {
           "value": "A focus worth at least 1,000 gp, such as a crystal ball, a silver mirror, or a font filled with holy water.",
           "consumed": false,
@@ -3945,12 +4033,21 @@
           "somatic",
           "material",
           "concentration"
-        ]
+        ],
+        "crewed": false
       },
       "sort": 0,
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.spells.fVbCxFRaORalHB20"
+        },
+        "dnd5e": {
+          "migratedProperties": [
+            "vocal",
+            "somatic",
+            "material",
+            "concentration"
+          ]
         }
       },
       "img": "icons/magic/perception/eye-ringed-glow-angry-large-teal.webp",
@@ -3976,8 +4073,7 @@
       "system": {
         "description": {
           "value": "<p>A thin green ray springs from your pointing finger to a target that you can see within range. The target can be a creature, an object, or a creation of magical force, such as the wall created by wall of force.</p><p>A creature targeted by this spell must make a Dexterity saving throw. On a failed save, the target takes 10d6 + 40 force damage. The target is disintegrated if this damage leaves it with 0 hit points.</p><p>A disintegrated creature and everything it is wearing and carrying, except magic items, are reduced to a pile of fine gray dust. The creature can be restored to life only by means of a true resurrection or a wish spell.</p><p>This spell automatically disintegrates a Large or smaller nonmagical object or a creation of magical force. If the target is a Huge or larger object or creation of force, this spell disintegrates a 10-foot-cube portion of it. A magic item is unaffected by this spell.</p><p><strong>At Higher Levels.</strong> When you cast this spell using a spell slot of 7th level or higher, the damage increases by 3d6 for each slot level above 6th.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -3999,7 +4095,8 @@
           "value": 1,
           "width": null,
           "units": "",
-          "type": "creature"
+          "type": "creature",
+          "prompt": true
         },
         "range": {
           "value": 60,
@@ -4010,12 +4107,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "save",
@@ -4042,13 +4141,6 @@
         },
         "level": 6,
         "school": "trs",
-        "components": {
-          "vocal": true,
-          "somatic": true,
-          "material": true,
-          "ritual": false,
-          "concentration": false
-        },
         "materials": {
           "value": "A lodestone and a pinch of dust",
           "consumed": false,
@@ -4067,12 +4159,20 @@
           "vocal",
           "somatic",
           "material"
-        ]
+        ],
+        "crewed": false
       },
       "sort": 0,
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.spells.HBHbOGKNVVprSlwn"
+        },
+        "dnd5e": {
+          "migratedProperties": [
+            "vocal",
+            "somatic",
+            "material"
+          ]
         }
       },
       "img": "icons/magic/unholy/strike-beam-blood-large-red-purple.webp",
@@ -4098,8 +4198,7 @@
       "system": {
         "description": {
           "value": "<p>You send negative energy coursing through a creature that you can see within range, causing it searing pain. The target must make a Constitution saving throw. It takes 7d8 + 30 necrotic damage on a failed save, or half as much damage on a successful one.</p><p>A humanoid killed by this spell rises at the start of your next turn as a Zombie that is permanently under your command, following your verbal orders to the best of its ability.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -4121,7 +4220,8 @@
           "value": 1,
           "width": null,
           "units": "",
-          "type": "creature"
+          "type": "creature",
+          "prompt": true
         },
         "range": {
           "value": 60,
@@ -4132,12 +4232,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "save",
@@ -4164,13 +4266,6 @@
         },
         "level": 7,
         "school": "nec",
-        "components": {
-          "vocal": true,
-          "somatic": true,
-          "material": false,
-          "ritual": false,
-          "concentration": false
-        },
         "materials": {
           "value": "",
           "consumed": false,
@@ -4188,12 +4283,19 @@
         "properties": [
           "vocal",
           "somatic"
-        ]
+        ],
+        "crewed": false
       },
       "sort": 0,
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.spells.HPvZm8YJO91k6Qdg"
+        },
+        "dnd5e": {
+          "migratedProperties": [
+            "vocal",
+            "somatic"
+          ]
         }
       },
       "img": "icons/magic/unholy/strike-beam-blood-large-red-purple.webp",
@@ -4219,8 +4321,7 @@
       "system": {
         "description": {
           "value": "<p>You and up to eight willing creatures who link hands in a circle are transported to a different plane of existence. You can specify a target destination in general terms, such as the City of Brass on the Elemental Plane of Fire or the palace of Dispater on the second level of the Nine Hells, and you appear in or near that destination. If you are trying to reach the City of Brass, for example, you might arrive in its Street of Steel, before its Gate of Ashes, or looking at the city from across the Sea of Fire, at the DM's discretion.</p><p>Alternatively, if you know the sigil sequence of a teleportation circle on another plane of existence, this spell can take you to that circle. If the teleportation circle is too small to hold all the creatures you transported, they appear in the closest unoccupied spaces next to the circle.</p><p>You can use this spell to banish an unwilling creature to another plane. Choose a creature within your reach and make a melee spell attack against it. On a hit, the creature must make a Charisma saving throw. If the creature fails this save, it is transported to a random location on the plane of existence you specify. A creature so transported must find its own way back to your current plane of existence.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -4242,7 +4343,8 @@
           "value": 8,
           "width": null,
           "units": "",
-          "type": "creature"
+          "type": "creature",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -4253,12 +4355,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "msak",
@@ -4280,13 +4384,6 @@
         },
         "level": 7,
         "school": "con",
-        "components": {
-          "vocal": true,
-          "somatic": true,
-          "material": true,
-          "ritual": false,
-          "concentration": false
-        },
         "materials": {
           "value": "A forked, metal rod worth at least 250 gp, attuned to a particular plane of existence",
           "consumed": false,
@@ -4305,12 +4402,20 @@
           "vocal",
           "somatic",
           "material"
-        ]
+        ],
+        "crewed": false
       },
       "sort": 0,
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.spells.J6Jpw5XzB5aTeqnz"
+        },
+        "dnd5e": {
+          "migratedProperties": [
+            "vocal",
+            "somatic",
+            "material"
+          ]
         }
       },
       "img": "icons/magic/symbols/runes-star-pentagon-orange-purple.webp",
@@ -4336,8 +4441,7 @@
       "system": {
         "description": {
           "value": "<p>You attempt to beguile a creature that you can see within range. It must succeed on a Wisdom saving throw or be charmed by you for the duration. If you or creatures that are friendly to you are fighting it, it has advantage on the saving throw.</p><p>While the creature is charmed, you have a telepathic link with it as long as the two of you are on the same plane of existence. You can use this telepathic link to issue commands to the creature while you are conscious (no action required), which it does its best to obey. You can specify a simple and general course of action, such as \"Attack that creature,\" \"Run over there,\" or \"Fetch that object.\" If the creature completes the order and doesn't receive further direction from you, it defends and preserves itself to the best of its ability.</p><p>You can use your action to take total and precise control of the target. Until the end of your next turn, the creature takes only the actions you choose, and doesn't do anything that you don't allow it to do. During this time, you can also cause the creature to use a reaction, but this requires you to use your own reaction as well.</p><p>Each time the target takes damage, it makes a new Wisdom saving throw against the spell. If the saving throw succeeds, the spell ends.</p><p><strong>At Higher Levels.</strong> When you cast this spell with a 9th-level spell slot, the duration is concentration, up to 8 hours.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -4359,7 +4463,8 @@
           "value": 1,
           "width": null,
           "units": "",
-          "type": "creature"
+          "type": "creature",
+          "prompt": true
         },
         "range": {
           "value": 60,
@@ -4370,12 +4475,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "save",
@@ -4397,13 +4504,6 @@
         },
         "level": 8,
         "school": "enc",
-        "components": {
-          "vocal": true,
-          "somatic": true,
-          "material": false,
-          "ritual": false,
-          "concentration": true
-        },
         "materials": {
           "value": "",
           "consumed": false,
@@ -4422,12 +4522,20 @@
           "vocal",
           "somatic",
           "concentration"
-        ]
+        ],
+        "crewed": false
       },
       "sort": 0,
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.spells.eEpy1ONlXumKS1mp"
+        },
+        "dnd5e": {
+          "migratedProperties": [
+            "vocal",
+            "somatic",
+            "concentration"
+          ]
         }
       },
       "img": "icons/magic/air/air-burst-spiral-large-pink.webp",
@@ -4453,8 +4561,7 @@
       "system": {
         "description": {
           "value": "<p>You utter a word of power that can compel one creature you can see within range to die instantly. If the creature you choose has 100 hit points or fewer, it dies. Otherwise, the spell has no effect.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -4476,7 +4583,8 @@
           "value": 1,
           "width": null,
           "units": "",
-          "type": "creature"
+          "type": "creature",
+          "prompt": true
         },
         "range": {
           "value": 60,
@@ -4487,12 +4595,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "util",
@@ -4514,13 +4624,6 @@
         },
         "level": 9,
         "school": "enc",
-        "components": {
-          "vocal": true,
-          "somatic": false,
-          "material": false,
-          "ritual": false,
-          "concentration": false
-        },
         "materials": {
           "value": "",
           "consumed": false,
@@ -4537,12 +4640,18 @@
         },
         "properties": [
           "vocal"
-        ]
+        ],
+        "crewed": false
       },
       "sort": 0,
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.spells.dmvaMLFWFtv0qx0S"
+        },
+        "dnd5e": {
+          "migratedProperties": [
+            "vocal"
+          ]
         }
       },
       "img": "icons/magic/unholy/strike-beam-blood-large-red-teal.webp",
@@ -4568,8 +4677,7 @@
       "system": {
         "description": {
           "value": "<p>You speak a word of power that can overwhelm the mind of one creature you can see within range, leaving it dumbfounded. If the target has 150 Hit Points or fewer, it is Stunned. Otherwise, the spell has no effect.</p><p>The stunned target must make a Constitution saving throw at the end of each of its turns. On a successful save, this stunning effect ends.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -4591,7 +4699,8 @@
           "value": 1,
           "width": null,
           "units": "",
-          "type": "creature"
+          "type": "creature",
+          "prompt": true
         },
         "range": {
           "value": 60,
@@ -4602,12 +4711,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "save",
@@ -4629,13 +4740,6 @@
         },
         "level": 8,
         "school": "enc",
-        "components": {
-          "vocal": true,
-          "somatic": false,
-          "material": false,
-          "ritual": false,
-          "concentration": false
-        },
         "materials": {
           "value": "",
           "consumed": false,
@@ -4652,12 +4756,18 @@
         },
         "properties": [
           "vocal"
-        ]
+        ],
+        "crewed": false
       },
       "sort": 0,
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.spells.35j2QIMmIk6aEdxj"
+        },
+        "dnd5e": {
+          "migratedProperties": [
+            "vocal"
+          ]
         }
       },
       "img": "icons/magic/control/debuff-chains-ropes-red.webp",
@@ -4683,8 +4793,7 @@
       "system": {
         "description": {
           "value": "<p>An immobile, faintly shimmering barrier springs into existence in a 10-foot radius around you and remains for the Duration.</p><p>Any spell of 5th level or lower cast from outside the barrier can't affect creatures or Objects within it, even if the spell is cast using a higher level spell slot. Such a spell can target creatures and Objects within the barrier, but the spell has no effect on them. Similarly, the area within the barrier is excluded from the areas affected by such Spells.</p><p><strong>At Higher Levels.</strong> When you cast this spell using a spell slot of 7th level or higher, the barrier blocks Spells of one level higher for each slot level above 6th.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -4706,7 +4815,8 @@
           "value": 10,
           "width": null,
           "units": "ft",
-          "type": "radius"
+          "type": "radius",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -4717,12 +4827,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "util",
@@ -4744,13 +4856,6 @@
         },
         "level": 6,
         "school": "abj",
-        "components": {
-          "vocal": true,
-          "somatic": true,
-          "material": true,
-          "ritual": false,
-          "concentration": true
-        },
         "materials": {
           "value": "A glass or crystal bead that shatters when the spell ends",
           "consumed": true,
@@ -4770,12 +4875,21 @@
           "somatic",
           "material",
           "concentration"
-        ]
+        ],
+        "crewed": false
       },
       "sort": 0,
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.spells.WmQpxfjZwF3MGUby"
+        },
+        "dnd5e": {
+          "migratedProperties": [
+            "vocal",
+            "somatic",
+            "material",
+            "concentration"
+          ]
         }
       },
       "img": "icons/magic/defensive/shield-barrier-flaming-pentagon-blue.webp",
@@ -4835,7 +4949,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787232912,
-    "modifiedTime": 1704466735918,
+    "modifiedTime": 1704847049825,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!bfh29vIEoGzI240e"

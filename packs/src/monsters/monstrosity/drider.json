@@ -11,7 +11,8 @@
         "bonuses": {
           "check": "",
           "save": ""
-        }
+        },
+        "max": null
       },
       "dex": {
         "value": 16,
@@ -19,7 +20,8 @@
         "bonuses": {
           "check": "",
           "save": ""
-        }
+        },
+        "max": null
       },
       "con": {
         "value": 18,
@@ -27,7 +29,8 @@
         "bonuses": {
           "check": "",
           "save": ""
-        }
+        },
+        "max": null
       },
       "int": {
         "value": 13,
@@ -35,7 +38,8 @@
         "bonuses": {
           "check": "",
           "save": ""
-        }
+        },
+        "max": null
       },
       "wis": {
         "value": 14,
@@ -43,7 +47,8 @@
         "bonuses": {
           "check": "",
           "save": ""
-        }
+        },
+        "max": null
       },
       "cha": {
         "value": 12,
@@ -51,7 +56,8 @@
         "bonuses": {
           "check": "",
           "save": ""
-        }
+        },
+        "max": null
       }
     },
     "attributes": {
@@ -62,7 +68,6 @@
       },
       "hp": {
         "value": 123,
-        "min": 0,
         "max": 123,
         "temp": 0,
         "tempmax": 0,
@@ -92,7 +97,8 @@
         "units": "ft",
         "special": ""
       },
-      "spellcasting": "wis"
+      "spellcasting": "wis",
+      "exhaustion": 0
     },
     "details": {
       "biography": {
@@ -100,7 +106,7 @@
         "public": ""
       },
       "alignment": "Chaotic Evil",
-      "race": "",
+      "race": null,
       "type": {
         "value": "monstrosity",
         "subtype": "",
@@ -144,6 +150,10 @@
           "undercommon"
         ],
         "custom": ""
+      },
+      "dm": {
+        "amount": {},
+        "bypasses": []
       }
     },
     "currency": {
@@ -384,7 +394,8 @@
         "value": false,
         "initiative": null
       }
-    }
+    },
+    "tools": {}
   },
   "prototypeToken": {
     "name": "Drider",
@@ -461,8 +472,7 @@
       "system": {
         "description": {
           "value": "<p>The drider has<strong> advantage </strong>on saving throws against being charmed, and magic can't put the drider to sleep.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -484,7 +494,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -495,12 +506,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "",
@@ -528,7 +541,9 @@
         "recharge": {
           "value": null,
           "charged": false
-        }
+        },
+        "crewed": false,
+        "properties": []
       },
       "effects": [],
       "folder": null,
@@ -559,8 +574,7 @@
       "system": {
         "description": {
           "value": "<p>The drider's innate spellcasting ability is Wisdom (spell save DC 13). The drider can innately cast the following spells, requiring no material components:</p>\n<p>At will: dancing lights</p>\n<p>1/day each: darkness, faerie fire</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -582,7 +596,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -593,12 +608,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "",
@@ -626,7 +643,9 @@
         "recharge": {
           "value": null,
           "charged": false
-        }
+        },
+        "crewed": false,
+        "properties": []
       },
       "effects": [],
       "folder": null,
@@ -657,8 +676,7 @@
       "system": {
         "description": {
           "value": "<p>The drider can climb difficult surfaces, including upside down on ceilings, without needing to make an ability check.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -680,7 +698,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -691,12 +710,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "",
@@ -724,7 +745,9 @@
         "recharge": {
           "value": null,
           "charged": false
-        }
+        },
+        "crewed": false,
+        "properties": []
       },
       "effects": [],
       "folder": null,
@@ -755,8 +778,7 @@
       "system": {
         "description": {
           "value": "<p>While in sunlight, the drider has<strong> disadvantage </strong>on attack rolls, as well as on Wisdom (Perception) checks that rely on sight.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -778,7 +800,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -789,12 +812,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "",
@@ -822,7 +847,9 @@
         "recharge": {
           "value": null,
           "charged": false
-        }
+        },
+        "crewed": false,
+        "properties": []
       },
       "effects": [],
       "folder": null,
@@ -853,8 +880,7 @@
       "system": {
         "description": {
           "value": "<p>The drider ignores movement restrictions caused by webbing.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -876,7 +902,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -887,12 +914,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "",
@@ -920,7 +949,9 @@
         "recharge": {
           "value": null,
           "charged": false
-        }
+        },
+        "crewed": false,
+        "properties": []
       },
       "effects": [],
       "folder": null,
@@ -951,8 +982,7 @@
       "system": {
         "description": {
           "value": "<p>The drider makes three attacks, either with its longsword or its longbow. It can replace one of those attacks with a bite attack.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -974,7 +1004,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -985,12 +1016,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "",
@@ -1018,7 +1051,9 @@
         "recharge": {
           "value": null,
           "charged": false
-        }
+        },
+        "crewed": false,
+        "properties": []
       },
       "effects": [],
       "folder": null,
@@ -1049,8 +1084,7 @@
       "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+6 to hit,</strong>, <strong>5 ft.,</strong> one creature. Hit: <strong>2 (1d4) <em>piercing damage</em></strong> plus <strong>9 (2d8) <em>poison damage</em></strong>.</p></section>\n<p>The Drider attacks with its Bite.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -1082,7 +1116,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": 5,
@@ -1093,12 +1128,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "mwak",
@@ -1136,25 +1173,17 @@
           "dt": null,
           "conditions": ""
         },
-        "weaponType": "natural",
-        "baseItem": "",
-        "properties": {
-          "amm": false,
-          "fin": false,
-          "fir": false,
-          "foc": false,
-          "hvy": false,
-          "lgt": false,
-          "lod": false,
-          "rch": false,
-          "rel": false,
-          "ret": false,
-          "spc": false,
-          "thr": false,
-          "two": false,
-          "ver": false
+        "properties": [],
+        "proficient": 1,
+        "unidentified": {
+          "description": ""
         },
-        "proficient": true
+        "type": {
+          "value": "natural",
+          "baseItem": ""
+        },
+        "container": null,
+        "crewed": false
       },
       "effects": [],
       "folder": null,
@@ -1185,8 +1214,7 @@
       "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+6 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>7 (1d8 + 3) <em>slashing damage</em></strong>, or <strong>8 (1d10 + 3) <em>slashing damage</em></strong> if used with two hands.</p></section>\n<p>The Drider attacks with its Longsword.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -1218,7 +1246,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": 5,
@@ -1229,12 +1258,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "str",
         "actionType": "mwak",
@@ -1268,25 +1299,19 @@
           "dt": null,
           "conditions": ""
         },
-        "weaponType": "martialM",
-        "baseItem": "longsword",
-        "properties": {
-          "ver": true,
-          "amm": false,
-          "fin": false,
-          "fir": false,
-          "foc": false,
-          "hvy": false,
-          "lgt": false,
-          "lod": false,
-          "rch": false,
-          "rel": false,
-          "ret": false,
-          "spc": false,
-          "thr": false,
-          "two": false
+        "properties": [
+          "ver"
+        ],
+        "proficient": 1,
+        "unidentified": {
+          "description": ""
         },
-        "proficient": true
+        "type": {
+          "value": "martialM",
+          "baseItem": "longsword"
+        },
+        "container": null,
+        "crewed": false
       },
       "effects": [],
       "folder": null,
@@ -1317,8 +1342,7 @@
       "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p>Ranged Weapon Attack: +6 to hit, range 150/600 ft., one target. Hit: <strong>7 (1d8 + 3) <em>piercing damage</em></strong> plus <strong>4 (1d8) <em>poison damage</em></strong>.</p></section>\n<p>The Drider attacks with its Longbow.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -1350,7 +1374,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": 150,
@@ -1361,12 +1386,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "dex",
         "actionType": "rwak",
@@ -1404,25 +1431,21 @@
           "dt": null,
           "conditions": ""
         },
-        "weaponType": "martialR",
-        "baseItem": "longbow",
-        "properties": {
-          "amm": true,
-          "hvy": true,
-          "two": true,
-          "fin": false,
-          "fir": false,
-          "foc": false,
-          "lgt": false,
-          "lod": false,
-          "rch": false,
-          "rel": false,
-          "ret": false,
-          "spc": false,
-          "thr": false,
-          "ver": false
+        "properties": [
+          "amm",
+          "hvy",
+          "two"
+        ],
+        "proficient": 1,
+        "unidentified": {
+          "description": ""
         },
-        "proficient": true
+        "type": {
+          "value": "martialR",
+          "baseItem": "longbow"
+        },
+        "container": null,
+        "crewed": false
       },
       "effects": [],
       "folder": null,
@@ -1455,8 +1478,7 @@
       "system": {
         "description": {
           "value": "<p>You create up to four torch-sized lights within range, making them appear as torches, lanterns, or glowing orbs that hover in the air for the duration. You can also combine the four lights into one glowing vaguely humanoid form of Medium size. Whichever form you choose, each light sheds dim light in a 10-foot radius.</p><p>As a bonus action on your turn, you can move the lights up to 60 feet to a new spot within range. A light must be within 20 feet of another light created by this spell, and a light winks out if it exceeds the spell's range.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -1478,7 +1500,8 @@
           "value": null,
           "width": null,
           "units": "any",
-          "type": "space"
+          "type": "space",
+          "prompt": true
         },
         "range": {
           "value": 120,
@@ -1489,12 +1512,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "util",
@@ -1516,13 +1541,6 @@
         },
         "level": 0,
         "school": "evo",
-        "components": {
-          "vocal": true,
-          "somatic": true,
-          "material": true,
-          "ritual": false,
-          "concentration": true
-        },
         "materials": {
           "value": "A bit of phosphorus or wychwood, or a glowworm",
           "consumed": false,
@@ -1542,12 +1560,21 @@
           "somatic",
           "material",
           "concentration"
-        ]
+        ],
+        "crewed": false
       },
       "sort": 0,
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.spells.CAxSzHWizrafT033"
+        },
+        "dnd5e": {
+          "migratedProperties": [
+            "vocal",
+            "somatic",
+            "material",
+            "concentration"
+          ]
         }
       },
       "img": "icons/magic/fire/projectile-meteor-salvo-strong-blue.webp",
@@ -1573,8 +1600,7 @@
       "system": {
         "description": {
           "value": "<p>Magical darkness spreads from a point you choose within range to fill a 15-foot-radius sphere for the duration. The darkness spreads around corners. A creature with darkvision can't see through this darkness, and nonmagical light can't illuminate it.</p><p>If the point you choose is on an object you are holding or one that isn't being worn or carried, the darkness emanates from the object and moves with it. Completely covering the source of the darkness with an opaque object, such as a bowl or a helm, blocks the darkness.</p><p>If any of this spell's area overlaps with an area of light created by a spell of 2nd level or lower, the spell that created the light is dispelled.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -1596,7 +1622,8 @@
           "value": 15,
           "width": null,
           "units": "ft",
-          "type": "sphere"
+          "type": "sphere",
+          "prompt": true
         },
         "range": {
           "value": 60,
@@ -1607,12 +1634,14 @@
           "value": 1,
           "max": "1",
           "per": "day",
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "util",
@@ -1634,13 +1663,6 @@
         },
         "level": 2,
         "school": "evo",
-        "components": {
-          "vocal": true,
-          "somatic": false,
-          "material": true,
-          "ritual": false,
-          "concentration": true
-        },
         "materials": {
           "value": "Bat fur and a drop of pitch or piece of coal",
           "consumed": false,
@@ -1659,12 +1681,20 @@
           "vocal",
           "material",
           "concentration"
-        ]
+        ],
+        "crewed": false
       },
       "sort": 0,
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.spells.S7VbUetIfVT7B6Eq"
+        },
+        "dnd5e": {
+          "migratedProperties": [
+            "vocal",
+            "material",
+            "concentration"
+          ]
         }
       },
       "img": "icons/magic/perception/eye-ringed-glow-angry-red.webp",
@@ -1690,8 +1720,7 @@
       "system": {
         "description": {
           "value": "<p>Each object in a 20-foot cube within range is outlined in blue, green, or violet light (your choice). Any creature in the area when the spell is cast is also outlined in light if it fails a Dexterity saving throw. For the duration, objects and affected creatures shed dim light in a 10-foot radius.</p><p>Any attack roll against an affected creature or object has advantage if the attacker can see it, and the affected creature or object can't benefit from being invisible.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -1713,7 +1742,8 @@
           "value": 20,
           "width": null,
           "units": "ft",
-          "type": "cube"
+          "type": "cube",
+          "prompt": true
         },
         "range": {
           "value": 60,
@@ -1724,12 +1754,14 @@
           "value": 1,
           "max": "1",
           "per": "day",
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "save",
@@ -1751,13 +1783,6 @@
         },
         "level": 1,
         "school": "evo",
-        "components": {
-          "vocal": true,
-          "somatic": false,
-          "material": false,
-          "ritual": false,
-          "concentration": true
-        },
         "materials": {
           "value": "",
           "consumed": false,
@@ -1775,12 +1800,19 @@
         "properties": [
           "vocal",
           "concentration"
-        ]
+        ],
+        "crewed": false
       },
       "sort": 0,
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.spells.nqBDWkVOfcGZt4YU"
+        },
+        "dnd5e": {
+          "migratedProperties": [
+            "vocal",
+            "concentration"
+          ]
         }
       },
       "img": "icons/magic/fire/projectile-meteor-salvo-strong-teal.webp",
@@ -1809,7 +1841,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787232553,
-    "modifiedTime": 1704466734128,
+    "modifiedTime": 1704847040857,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!1OQbxoZI5BtlB2ME"

@@ -11,7 +11,8 @@
         "bonuses": {
           "check": "",
           "save": ""
-        }
+        },
+        "max": null
       },
       "dex": {
         "value": 16,
@@ -19,7 +20,8 @@
         "bonuses": {
           "check": "",
           "save": ""
-        }
+        },
+        "max": null
       },
       "con": {
         "value": 18,
@@ -27,7 +29,8 @@
         "bonuses": {
           "check": "",
           "save": ""
-        }
+        },
+        "max": null
       },
       "int": {
         "value": 14,
@@ -35,7 +38,8 @@
         "bonuses": {
           "check": "",
           "save": ""
-        }
+        },
+        "max": null
       },
       "wis": {
         "value": 14,
@@ -43,7 +47,8 @@
         "bonuses": {
           "check": "",
           "save": ""
-        }
+        },
+        "max": null
       },
       "cha": {
         "value": 18,
@@ -51,7 +56,8 @@
         "bonuses": {
           "check": "",
           "save": ""
-        }
+        },
+        "max": null
       }
     },
     "attributes": {
@@ -62,7 +68,6 @@
       },
       "hp": {
         "value": 153,
-        "min": 0,
         "max": 153,
         "temp": null,
         "tempmax": 0,
@@ -92,7 +97,8 @@
         "units": "ft",
         "special": ""
       },
-      "spellcasting": ""
+      "spellcasting": "",
+      "exhaustion": 0
     },
     "details": {
       "biography": {
@@ -100,7 +106,7 @@
         "public": ""
       },
       "alignment": "Lawful Evil",
-      "race": "",
+      "race": null,
       "type": {
         "value": "fiend",
         "subtype": "Devil",
@@ -156,6 +162,10 @@
           "infernal"
         ],
         "custom": "Telepathy 120 ft."
+      },
+      "dm": {
+        "amount": {},
+        "bypasses": []
       }
     },
     "currency": {
@@ -396,7 +406,8 @@
         "value": false,
         "initiative": null
       }
-    }
+    },
+    "tools": {}
   },
   "prototypeToken": {
     "name": "Erinyes",
@@ -473,8 +484,7 @@
       "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p>The erinyes's weapon attacks are magical and deal an extra <strong>13 (3d8) <em>poison damage</em></strong> on a hit (included in the attacks).</p>\n</section>\n<p>The erinyes's weapon attacks are magical and deal extra <em>poison damage</em> on a hit (included in the attacks).</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -496,7 +506,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -507,12 +518,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": null,
         "actionType": "",
@@ -540,7 +553,9 @@
         "recharge": {
           "value": null,
           "charged": false
-        }
+        },
+        "crewed": false,
+        "properties": []
       },
       "effects": [],
       "folder": null,
@@ -571,8 +586,7 @@
       "system": {
         "description": {
           "value": "<section class=\"secret\"><p><em>Melee Weapon Attack:</em><strong>+8 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>8 (1d8 + 4) <em>slashing damage</em></strong>, or <strong>9 (1d10 + 4) <em>slashing damage</em></strong> if used with two hands, plus <strong>13 (3d8) <em>poison damage</em></strong>.</p><p></p></section><p>The Erinyes attacks with its Longsword.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -604,7 +618,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": 5,
@@ -615,12 +630,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "str",
         "actionType": "mwak",
@@ -658,25 +675,19 @@
           "dt": null,
           "conditions": ""
         },
-        "weaponType": "martialM",
-        "baseItem": "longsword",
-        "properties": {
-          "amm": false,
-          "fin": false,
-          "fir": false,
-          "foc": false,
-          "hvy": false,
-          "lgt": false,
-          "lod": false,
-          "rch": false,
-          "rel": false,
-          "ret": false,
-          "spc": false,
-          "thr": false,
-          "two": false,
-          "ver": true
+        "properties": [
+          "ver"
+        ],
+        "proficient": 1,
+        "unidentified": {
+          "description": ""
         },
-        "proficient": true
+        "type": {
+          "value": "martialM",
+          "baseItem": "longsword"
+        },
+        "container": null,
+        "crewed": false
       },
       "effects": [],
       "folder": null,
@@ -707,8 +718,7 @@
       "system": {
         "description": {
           "value": "<section class=\"secret\"><p>The erinyes adds 4 to its <strong>AC</strong> against one melee Attack that would hit it. To do so, the erinyes must see the attacker and be wielding a melee weapon.</p></section><p>The erinyes adds 4 to its <strong>AC</strong> against one melee Attack that would hit it.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -730,7 +740,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -741,12 +752,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": null,
         "actionType": "",
@@ -774,7 +787,9 @@
         "recharge": {
           "value": null,
           "charged": false
-        }
+        },
+        "crewed": false,
+        "properties": []
       },
       "effects": [],
       "folder": null,
@@ -805,8 +820,7 @@
       "system": {
         "description": {
           "value": "<p>The erinyes has<strong> advantage </strong>on saving throws against spells and other magical effects.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -828,7 +842,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -839,12 +854,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": null,
         "actionType": "",
@@ -872,7 +889,9 @@
         "recharge": {
           "value": null,
           "charged": false
-        }
+        },
+        "crewed": false,
+        "properties": []
       },
       "effects": [],
       "folder": null,
@@ -903,8 +922,7 @@
       "system": {
         "description": {
           "value": "<p>Plate consists of shaped, interlocking metal plates to cover the entire body. A suit of plate includes gauntlets, heavy leather boots, a visored helmet, and thick layers of padding underneath the armor. Buckles and straps distribute the weight over the body.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -936,7 +954,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -947,12 +966,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": null,
         "actionType": "",
@@ -974,7 +995,6 @@
         },
         "armor": {
           "value": 18,
-          "type": "heavy",
           "dex": 0
         },
         "hp": {
@@ -983,17 +1003,24 @@
           "dt": null,
           "conditions": ""
         },
-        "baseItem": "plate",
         "speed": {
           "value": null,
           "conditions": ""
         },
         "strength": 15,
-        "stealth": true,
-        "proficient": true,
+        "proficient": 1,
         "properties": [
           "stealthDisadvantage"
-        ]
+        ],
+        "unidentified": {
+          "description": ""
+        },
+        "type": {
+          "value": "heavy",
+          "baseItem": "plate"
+        },
+        "container": null,
+        "crewed": false
       },
       "effects": [],
       "folder": null,
@@ -1004,6 +1031,11 @@
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.items.OjkIqlW2UpgFcjZa"
+        },
+        "dnd5e": {
+          "migratedProperties": [
+            "stealthDisadvantage"
+          ]
         }
       },
       "_stats": {
@@ -1024,8 +1056,7 @@
       "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p>Ranged Weapon Attack: +7 to hit, range 150/600 ft., one target. Hit: <strong>7 (1d8 + 3) <em>piercing damage</em></strong> plus <strong>13 (3d8) <em>poison damage</em></strong>.</p>\n<p>The target must succeed on a  <strong>DC 14 Constitution</strong> saving throw or be poisoned. The poison lasts until it is removed by the lesser restoration spell or similar magic.</p>\n</section>\n<p>The Erinyes attacks with its Longbow. The target must make a <strong>Constitution</strong> saving throw.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -1057,7 +1088,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": 150,
@@ -1068,12 +1100,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "dex",
         "actionType": "rwak",
@@ -1111,25 +1145,21 @@
           "dt": null,
           "conditions": ""
         },
-        "weaponType": "martialR",
-        "baseItem": "longbow",
-        "properties": {
-          "amm": true,
-          "hvy": true,
-          "two": true,
-          "fin": false,
-          "fir": false,
-          "foc": false,
-          "lgt": false,
-          "rch": false,
-          "rel": false,
-          "ret": false,
-          "spc": false,
-          "thr": false,
-          "ver": false,
-          "lod": false
+        "properties": [
+          "amm",
+          "hvy",
+          "two"
+        ],
+        "proficient": 1,
+        "unidentified": {
+          "description": ""
         },
-        "proficient": true
+        "type": {
+          "value": "martialR",
+          "baseItem": "longbow"
+        },
+        "container": null,
+        "crewed": false
       },
       "effects": [],
       "folder": null,
@@ -1160,8 +1190,7 @@
       "system": {
         "description": {
           "value": "<p>The erinyes makes three attacks.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -1183,7 +1212,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -1194,12 +1224,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": null,
         "actionType": "",
@@ -1227,7 +1259,9 @@
         "recharge": {
           "value": null,
           "charged": false
-        }
+        },
+        "crewed": false,
+        "properties": []
       },
       "effects": [],
       "folder": null,
@@ -1263,7 +1297,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787232573,
-    "modifiedTime": 1704466734263,
+    "modifiedTime": 1704847041321,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!3o2rQBqpzjIHmrBW"

@@ -11,7 +11,8 @@
         "bonuses": {
           "check": "",
           "save": ""
-        }
+        },
+        "max": null
       },
       "dex": {
         "value": 12,
@@ -19,7 +20,8 @@
         "bonuses": {
           "check": "",
           "save": ""
-        }
+        },
+        "max": null
       },
       "con": {
         "value": 12,
@@ -27,7 +29,8 @@
         "bonuses": {
           "check": "",
           "save": ""
-        }
+        },
+        "max": null
       },
       "int": {
         "value": 7,
@@ -35,7 +38,8 @@
         "bonuses": {
           "check": "",
           "save": ""
-        }
+        },
+        "max": null
       },
       "wis": {
         "value": 10,
@@ -43,7 +47,8 @@
         "bonuses": {
           "check": "",
           "save": ""
-        }
+        },
+        "max": null
       },
       "cha": {
         "value": 10,
@@ -51,7 +56,8 @@
         "bonuses": {
           "check": "",
           "save": ""
-        }
+        },
+        "max": null
       }
     },
     "attributes": {
@@ -62,7 +68,6 @@
       },
       "hp": {
         "value": 22,
-        "min": 0,
         "max": 22,
         "temp": 0,
         "tempmax": 0,
@@ -92,7 +97,8 @@
         "units": "ft",
         "special": ""
       },
-      "spellcasting": "cha"
+      "spellcasting": "cha",
+      "exhaustion": 0
     },
     "details": {
       "biography": {
@@ -100,7 +106,7 @@
         "public": ""
       },
       "alignment": "Neutral Evil",
-      "race": "",
+      "race": null,
       "type": {
         "value": "elemental",
         "subtype": "",
@@ -151,6 +157,10 @@
           "terran"
         ],
         "custom": ""
+      },
+      "dm": {
+        "amount": {},
+        "bypasses": []
       }
     },
     "currency": {
@@ -387,7 +397,8 @@
         "value": false,
         "initiative": null
       }
-    }
+    },
+    "tools": {}
   },
   "prototypeToken": {
     "name": "Magma Mephit",
@@ -464,8 +475,7 @@
       "system": {
         "description": {
           "value": "<p>The mephit can innately cast heat metal (spell save DC 10), requiring no material components. Its innate spellcasting ability is Charisma.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -487,7 +497,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -498,12 +509,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "",
@@ -531,7 +544,9 @@
         "recharge": {
           "value": 1,
           "charged": false
-        }
+        },
+        "crewed": false,
+        "properties": []
       },
       "effects": [],
       "folder": null,
@@ -562,8 +577,7 @@
       "system": {
         "description": {
           "value": "<section class=\"secret\"><p>When the mephit dies, it explodes in a burst of lava. Each creature within 5 ft. of it must make a  <strong>DC 11 Dexterity</strong> saving throw, taking <strong>7 (2d6) <em>fire damage</em></strong> on a failed save, or half as much damage on a successful one.</p><p></p></section><p>When the mephit dies, it explodes in a burst of lava. Each creature within 5 ft. of it must make a <strong>Dexterity</strong> saving throw.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -585,7 +599,8 @@
           "value": 5,
           "width": null,
           "units": "ft",
-          "type": "radius"
+          "type": "radius",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -596,12 +611,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "save",
@@ -634,7 +651,9 @@
         "recharge": {
           "value": null,
           "charged": false
-        }
+        },
+        "crewed": false,
+        "properties": []
       },
       "effects": [],
       "folder": null,
@@ -665,8 +684,7 @@
       "system": {
         "description": {
           "value": "<p>While the mephit remains motionless, it is indistinguishable from an ordinary mound of magma.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -688,7 +706,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -699,12 +718,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": null,
         "actionType": "",
@@ -732,7 +753,9 @@
         "recharge": {
           "value": null,
           "charged": false
-        }
+        },
+        "crewed": false,
+        "properties": []
       },
       "effects": [],
       "folder": null,
@@ -763,8 +786,7 @@
       "system": {
         "description": {
           "value": "<section class=\"secret\"><p>Melee Weapon Attack: +3 to hit, reach 5 ft ., one creature. Hit: <strong>3 (1d4 + 1) <em>slashing damage</em></strong> plus <strong>2 (1d4) <em>fire damage</em></strong>.</p><p></p></section><p>The Magma Mephit attacks with its Claws.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -796,7 +818,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": 5,
@@ -807,12 +830,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "dex",
         "actionType": "mwak",
@@ -850,25 +875,17 @@
           "dt": null,
           "conditions": ""
         },
-        "weaponType": "natural",
-        "baseItem": "",
-        "properties": {
-          "amm": false,
-          "fin": false,
-          "fir": false,
-          "foc": false,
-          "hvy": false,
-          "lgt": false,
-          "lod": false,
-          "rch": false,
-          "rel": false,
-          "ret": false,
-          "spc": false,
-          "thr": false,
-          "two": false,
-          "ver": false
+        "properties": [],
+        "proficient": 1,
+        "unidentified": {
+          "description": ""
         },
-        "proficient": true
+        "type": {
+          "value": "natural",
+          "baseItem": ""
+        },
+        "container": null,
+        "crewed": false
       },
       "effects": [],
       "folder": null,
@@ -895,8 +912,7 @@
       "system": {
         "description": {
           "value": "<section class=\"secret\"><p>The mephit exhales a 15-foot cone of fire. Each creature in that area must make a  <strong>DC 11 Dexterity</strong> saving throw, taking <strong>7 (2d6) <em>fire damage</em></strong> on a failed save, or half as much damage on a successful one.</p><p></p></section><p>The mephit exhales a 15-foot cone of fire. Each creature in that area must make a <strong>Dexterity</strong> saving throw.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -918,7 +934,8 @@
           "value": 15,
           "width": null,
           "units": "ft",
-          "type": "cone"
+          "type": "cone",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -929,12 +946,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "save",
@@ -967,7 +986,9 @@
         "recharge": {
           "value": 6,
           "charged": true
-        }
+        },
+        "crewed": false,
+        "properties": []
       },
       "effects": [],
       "folder": null,
@@ -1000,8 +1021,7 @@
       "system": {
         "description": {
           "value": "<p>Choose a manufactured metal object, such as a metal weapon or a suit of heavy or medium metal armor, that you can see within range. You cause the object to glow red-hot. Any creature in physical contact with the object takes 2d8 fire damage when you cast the spell. Until the spell ends, you can use a bonus action on each of your subsequent turns to cause this damage again.</p><p>If a creature is holding or wearing the object and takes the damage from it, the creature must succeed on a Constitution saving throw or drop the object if it can. If it doesn't drop the object, it has disadvantage on attack rolls and ability checks until the start of your next turn.</p><p><strong>Higher Levels.</strong> When you cast this spell using a spell slot of 3rd level or higher, the damage increases by 1d8 for each slot level above 2nd.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -1023,7 +1043,8 @@
           "value": 1,
           "width": null,
           "units": "",
-          "type": "object"
+          "type": "object",
+          "prompt": true
         },
         "range": {
           "value": 60,
@@ -1034,12 +1055,14 @@
           "value": 1,
           "max": "1",
           "per": "day",
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "save",
@@ -1066,13 +1089,6 @@
         },
         "level": 2,
         "school": "trs",
-        "components": {
-          "vocal": true,
-          "somatic": true,
-          "material": true,
-          "ritual": false,
-          "concentration": true
-        },
         "materials": {
           "value": "A piece of iron and a flame.",
           "consumed": false,
@@ -1092,12 +1108,21 @@
           "somatic",
           "material",
           "concentration"
-        ]
+        ],
+        "crewed": false
       },
       "sort": 0,
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.spells.2yHXEcrRbadZDr5M"
+        },
+        "dnd5e": {
+          "migratedProperties": [
+            "vocal",
+            "somatic",
+            "material",
+            "concentration"
+          ]
         }
       },
       "img": "icons/magic/light/explosion-star-large-orange.webp",
@@ -1126,7 +1151,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787233166,
-    "modifiedTime": 1704466736275,
+    "modifiedTime": 1704847052987,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!oJCOB9X2BPsBkWW5"

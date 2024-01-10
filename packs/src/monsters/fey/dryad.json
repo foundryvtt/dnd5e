@@ -11,7 +11,8 @@
         "bonuses": {
           "check": "",
           "save": ""
-        }
+        },
+        "max": null
       },
       "dex": {
         "value": 12,
@@ -19,7 +20,8 @@
         "bonuses": {
           "check": "",
           "save": ""
-        }
+        },
+        "max": null
       },
       "con": {
         "value": 11,
@@ -27,7 +29,8 @@
         "bonuses": {
           "check": "",
           "save": ""
-        }
+        },
+        "max": null
       },
       "int": {
         "value": 14,
@@ -35,7 +38,8 @@
         "bonuses": {
           "check": "",
           "save": ""
-        }
+        },
+        "max": null
       },
       "wis": {
         "value": 15,
@@ -43,7 +47,8 @@
         "bonuses": {
           "check": "",
           "save": ""
-        }
+        },
+        "max": null
       },
       "cha": {
         "value": 18,
@@ -51,7 +56,8 @@
         "bonuses": {
           "check": "",
           "save": ""
-        }
+        },
+        "max": null
       }
     },
     "attributes": {
@@ -62,7 +68,6 @@
       },
       "hp": {
         "value": 22,
-        "min": 0,
         "max": 22,
         "temp": 0,
         "tempmax": 0,
@@ -92,7 +97,8 @@
         "units": "ft",
         "special": ""
       },
-      "spellcasting": "cha"
+      "spellcasting": "cha",
+      "exhaustion": 0
     },
     "details": {
       "biography": {
@@ -100,7 +106,7 @@
         "public": ""
       },
       "alignment": "Neutral",
-      "race": "",
+      "race": null,
       "type": {
         "value": "fey",
         "subtype": "",
@@ -144,6 +150,10 @@
           "sylvan"
         ],
         "custom": ""
+      },
+      "dm": {
+        "amount": {},
+        "bypasses": []
       }
     },
     "currency": {
@@ -384,7 +394,8 @@
         "value": false,
         "initiative": null
       }
-    }
+    },
+    "tools": {}
   },
   "prototypeToken": {
     "name": "Dryad",
@@ -461,8 +472,7 @@
       "system": {
         "description": {
           "value": "<p>The dryad's innate spellcasting ability is Charisma (spell save DC 14). The dryad can innately cast the following spells, requiring no material components:</p>\n<p><strong>At will: </strong>druidcraft</p>\n<p><strong>3/day each</strong>: entangle, goodberry</p>\n<p><strong>1/day each: </strong>barkskin, pass without trace, shillelagh</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -484,7 +494,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -495,12 +506,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "",
@@ -528,7 +541,9 @@
         "recharge": {
           "value": null,
           "charged": false
-        }
+        },
+        "crewed": false,
+        "properties": []
       },
       "effects": [],
       "folder": null,
@@ -559,8 +574,7 @@
       "system": {
         "description": {
           "value": "<p>The dryad has advantage on saving throws against spells and other magical effects.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -582,7 +596,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -593,12 +608,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "",
@@ -626,7 +643,9 @@
         "recharge": {
           "value": null,
           "charged": false
-        }
+        },
+        "crewed": false,
+        "properties": []
       },
       "effects": [],
       "folder": null,
@@ -657,8 +676,7 @@
       "system": {
         "description": {
           "value": "<p>The dryad can communicate with beasts and plants as if they shared a language.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -680,7 +698,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -691,12 +710,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "",
@@ -724,7 +745,9 @@
         "recharge": {
           "value": null,
           "charged": false
-        }
+        },
+        "crewed": false,
+        "properties": []
       },
       "effects": [],
       "folder": null,
@@ -755,8 +778,7 @@
       "system": {
         "description": {
           "value": "<p>Once on her turn, the dryad can use 10 feet of her movement to step magically into one living tree within her reach and emerge from a second living tree within 60 feet of the first tree, appearing in an unoccupied space within 5 feet of the second tree. Both trees must be Large or bigger.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -778,7 +800,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -789,12 +812,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "",
@@ -822,7 +847,9 @@
         "recharge": {
           "value": null,
           "charged": false
-        }
+        },
+        "crewed": false,
+        "properties": []
       },
       "effects": [],
       "folder": null,
@@ -853,8 +880,7 @@
       "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p>Melee Weapon Attack: +2 to hit (+6 to hit with shillelagh), reach 5 ft., one target. Hit: <strong>2 (1d4) <em>bludgeoning damage</em></strong>, or <strong>8 (1d8 + 4) <em>bludgeoning damage</em></strong> with shillelagh.</p>\n</section>\n<p>The Dryad attacks with its Club.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -886,7 +912,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": 5,
@@ -897,12 +924,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "dex",
         "actionType": "mwak",
@@ -936,25 +965,19 @@
           "dt": null,
           "conditions": ""
         },
-        "weaponType": "simpleM",
-        "baseItem": "club",
-        "properties": {
-          "lgt": true,
-          "amm": false,
-          "fin": false,
-          "fir": false,
-          "foc": false,
-          "hvy": false,
-          "lod": false,
-          "rch": false,
-          "rel": false,
-          "ret": false,
-          "spc": false,
-          "thr": false,
-          "two": false,
-          "ver": false
+        "properties": [
+          "lgt"
+        ],
+        "proficient": 1,
+        "unidentified": {
+          "description": ""
         },
-        "proficient": true
+        "type": {
+          "value": "simpleM",
+          "baseItem": "club"
+        },
+        "container": null,
+        "crewed": false
       },
       "effects": [],
       "folder": null,
@@ -985,8 +1008,7 @@
       "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p>The dryad targets one humanoid or beast that she can see within 30 feet of her. If the target can see the dryad, it must succeed on a  <strong>DC 14 Wisdom</strong> saving throw or be magically charmed.</p>\n<p>The charmed creature regards the dryad as a trusted friend to be heeded and protected. Although the target isn't under the dryad's control, it takes the dryad's requests or actions in the most favorable way it can.Each time the dryad or its allies do anything harmful to the target, it can repeat the saving throw, ending the effect on itself on a success. Otherwise, the effect lasts 24 hours or until the dryad dies, is on a different plane of existence from the target, or ends the effect as a bonus action. If a target's saving throw is successful, the target is immune to the dryad's Fey Charm for the next 24 hours.The dryad can have no more than one humanoid and up to three beasts charmed at a time.</p>\n</section>\n<p>The dryad targets one humanoid or beast that she can see within 30 feet of her. If the target can see the dryad, it must make a <strong>Wisdom</strong> saving throw. Each time the dryad or its allies do anything harmful to the target, it can repeat the saving throw.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -1008,7 +1030,8 @@
           "value": 1,
           "width": null,
           "units": "spec",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": 30,
@@ -1019,12 +1042,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "wis",
         "actionType": "other",
@@ -1052,7 +1077,9 @@
         "recharge": {
           "value": null,
           "charged": false
-        }
+        },
+        "crewed": false,
+        "properties": []
       },
       "effects": [],
       "folder": null,
@@ -1082,8 +1109,7 @@
       "system": {
         "description": {
           "value": "<p>Grasping weeds and vines sprout from the ground in a 20-foot square starting from a point within range. For the Duration, these Plants turn the ground in the area into difficult terrain.</p><p>A creature in the area when you cast the spell must succeed on a Strength saving throw or be Restrained by the entangling Plants until the spell ends. A creature restrained by the plants can use its action to make a Strength check against your spell save DC. On a success, it frees itself.</p><p>When the spell ends, the conjured Plants wilt away.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -1105,7 +1131,8 @@
           "value": 20,
           "width": null,
           "units": "ft",
-          "type": "square"
+          "type": "square",
+          "prompt": true
         },
         "range": {
           "value": 90,
@@ -1116,12 +1143,14 @@
           "value": 3,
           "max": "3",
           "per": "day",
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "save",
@@ -1143,13 +1172,6 @@
         },
         "level": 1,
         "school": "con",
-        "components": {
-          "vocal": true,
-          "somatic": true,
-          "material": false,
-          "ritual": false,
-          "concentration": true
-        },
         "materials": {
           "value": "",
           "consumed": false,
@@ -1168,12 +1190,20 @@
           "vocal",
           "somatic",
           "concentration"
-        ]
+        ],
+        "crewed": false
       },
       "effects": [],
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.spells.gMrWeG8fMDPRFiVe"
+        },
+        "dnd5e": {
+          "migratedProperties": [
+            "vocal",
+            "somatic",
+            "concentration"
+          ]
         }
       },
       "_id": "gMrWeG8fMDPRFiVe",
@@ -1202,8 +1232,7 @@
       "system": {
         "description": {
           "value": "<p>Whispering to the spirits of Nature, you create one of the following Effects within range:</p>\n<ul>\n<li>You create a tiny, harmless sensory effect that predicts what the weather will be at your location for the next 24 hours. The effect might manifest as a golden orb for clear skies, a cloud for rain, Falling snowflakes for snow, and so on. This effect persists for 1 round.</li>\n<li>You instantly make a flower blossom, a seed pod open, or a leaf bud bloom.</li>\n<li>You create an Instantaneous, harmless sensory effect, such as Falling leaves, a puff of wind, the sound of a small animal, or the faint odor of skunk. The effect must fit in a 5-foot cube.</li>\n<li>You instantly light or snuff out a Candle, a torch, or a small campfire.</li>\n</ul>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -1225,7 +1254,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": 30,
@@ -1236,12 +1266,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "util",
@@ -1263,13 +1295,6 @@
         },
         "level": 0,
         "school": "trs",
-        "components": {
-          "vocal": true,
-          "somatic": true,
-          "material": false,
-          "ritual": false,
-          "concentration": false
-        },
         "materials": {
           "value": "",
           "consumed": false,
@@ -1287,12 +1312,19 @@
         "properties": [
           "vocal",
           "somatic"
-        ]
+        ],
+        "crewed": false
       },
       "sort": 0,
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.spells.SbSvZKkJASyk8jKo"
+        },
+        "dnd5e": {
+          "migratedProperties": [
+            "vocal",
+            "somatic"
+          ]
         }
       },
       "img": "icons/magic/nature/vines-thorned-glow-teal.webp",
@@ -1318,8 +1350,7 @@
       "system": {
         "description": {
           "value": "<p>Up to ten berries appear in your hand and are infused with magic for the duration. A creature can use its action to eat one berry. Eating a berry restores 1 hit point, and the berry provides enough nourishment to sustain a creature for one day.</p><p>The berries lose their potency if they have not been consumed within 24 hours of the casting of this spell.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -1341,7 +1372,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -1352,12 +1384,14 @@
           "value": 3,
           "max": "3",
           "per": "day",
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "heal",
@@ -1384,13 +1418,6 @@
         },
         "level": 1,
         "school": "trs",
-        "components": {
-          "vocal": true,
-          "somatic": true,
-          "material": true,
-          "ritual": false,
-          "concentration": false
-        },
         "materials": {
           "value": "A spring of mistletoe",
           "consumed": false,
@@ -1409,12 +1436,20 @@
           "vocal",
           "somatic",
           "material"
-        ]
+        ],
+        "crewed": false
       },
       "sort": 0,
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.spells.Qf6CAZkc7ms4ZY3e"
+        },
+        "dnd5e": {
+          "migratedProperties": [
+            "vocal",
+            "somatic",
+            "material"
+          ]
         }
       },
       "img": "icons/magic/nature/leaf-glow-green.webp",
@@ -1438,8 +1473,7 @@
       "system": {
         "description": {
           "value": "<p>You touch a willing creature. Until the spell ends, the target's skin has a rough, bark-like appearance, and the target's AC can't be less than 16, regardless of what kind of armor it is wearing.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -1461,7 +1495,8 @@
           "value": 1,
           "width": null,
           "units": "",
-          "type": "creature"
+          "type": "creature",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -1472,12 +1507,14 @@
           "value": 1,
           "max": "1",
           "per": "day",
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "util",
@@ -1499,13 +1536,6 @@
         },
         "level": 2,
         "school": "trs",
-        "components": {
-          "vocal": true,
-          "somatic": true,
-          "material": true,
-          "ritual": false,
-          "concentration": true
-        },
         "materials": {
           "value": "A handful of oak bark",
           "consumed": false,
@@ -1525,7 +1555,8 @@
           "somatic",
           "material",
           "concentration"
-        ]
+        ],
+        "crewed": false
       },
       "effects": [
         {
@@ -1573,6 +1604,14 @@
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.spells.JPwIEfgUPVebr5AH"
+        },
+        "dnd5e": {
+          "migratedProperties": [
+            "vocal",
+            "somatic",
+            "material",
+            "concentration"
+          ]
         }
       },
       "_stats": {
@@ -1595,8 +1634,7 @@
       "system": {
         "description": {
           "value": "<p>A veil of shadows and Silence radiates from you, masking you and your companions from detection. For the Duration, each creature you choose within 30 feet of you (including you) has a +10 bonus to Dexterity (Stealth) checks and can't be tracked except by magical means. A creature that receives this bonus leaves behind no tracks or other traces of its passage.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -1618,7 +1656,8 @@
           "value": 30,
           "width": null,
           "units": "ft",
-          "type": "radius"
+          "type": "radius",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -1629,12 +1668,14 @@
           "value": 1,
           "max": "1",
           "per": "day",
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "util",
@@ -1656,13 +1697,6 @@
         },
         "level": 2,
         "school": "abj",
-        "components": {
-          "vocal": true,
-          "somatic": true,
-          "material": true,
-          "ritual": false,
-          "concentration": true
-        },
         "materials": {
           "value": "Ashes from a burned leaf of mistletoe and a sprig of spruce",
           "consumed": false,
@@ -1682,12 +1716,21 @@
           "somatic",
           "material",
           "concentration"
-        ]
+        ],
+        "crewed": false
       },
       "sort": 0,
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.spells.pRMvmknwLf2tdMTj"
+        },
+        "dnd5e": {
+          "migratedProperties": [
+            "vocal",
+            "somatic",
+            "material",
+            "concentration"
+          ]
         }
       },
       "img": "icons/magic/air/fog-gas-smoke-brown.webp",
@@ -1713,8 +1756,7 @@
       "system": {
         "description": {
           "value": "<p>The wood of a club or quarterstaff you are holding is imbued with nature's power. For the duration, you can use your spellcasting ability instead of Strength for the attack and damage rolls of melee attacks using that weapon, and the weapon's damage die becomes a d8. The weapon also becomes magical, if it isn't already. The spell ends if you cast it again or if you let go of the weapon.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -1736,7 +1778,8 @@
           "value": 1,
           "width": null,
           "units": "spec",
-          "type": "object"
+          "type": "object",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -1747,12 +1790,14 @@
           "value": 1,
           "max": "1",
           "per": "day",
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "util",
@@ -1779,13 +1824,6 @@
         },
         "level": 0,
         "school": "trs",
-        "components": {
-          "vocal": true,
-          "somatic": true,
-          "material": true,
-          "ritual": false,
-          "concentration": false
-        },
         "materials": {
           "value": "A shamrock leaf, and a club or quarterstaff",
           "consumed": false,
@@ -1804,12 +1842,20 @@
           "vocal",
           "somatic",
           "material"
-        ]
+        ],
+        "crewed": false
       },
       "sort": 0,
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.spells.VzgFzcmocr1X1cp4"
+        },
+        "dnd5e": {
+          "migratedProperties": [
+            "vocal",
+            "somatic",
+            "material"
+          ]
         }
       },
       "img": "icons/magic/fire/dagger-rune-enchant-teal.webp",
@@ -1875,7 +1921,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787232758,
-    "modifiedTime": 1704466735279,
+    "modifiedTime": 1704847046106,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!KOHVWl5RU9XBR8Jb"

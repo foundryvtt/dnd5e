@@ -11,7 +11,8 @@
         "bonuses": {
           "check": "",
           "save": ""
-        }
+        },
+        "max": null
       },
       "dex": {
         "value": 15,
@@ -19,7 +20,8 @@
         "bonuses": {
           "check": "",
           "save": ""
-        }
+        },
+        "max": null
       },
       "con": {
         "value": 21,
@@ -27,7 +29,8 @@
         "bonuses": {
           "check": "",
           "save": ""
-        }
+        },
+        "max": null
       },
       "int": {
         "value": 19,
@@ -35,7 +38,8 @@
         "bonuses": {
           "check": "",
           "save": ""
-        }
+        },
+        "max": null
       },
       "wis": {
         "value": 17,
@@ -43,7 +47,8 @@
         "bonuses": {
           "check": "",
           "save": ""
-        }
+        },
+        "max": null
       },
       "cha": {
         "value": 16,
@@ -51,7 +56,8 @@
         "bonuses": {
           "check": "",
           "save": ""
-        }
+        },
+        "max": null
       }
     },
     "attributes": {
@@ -62,7 +68,6 @@
       },
       "hp": {
         "value": 157,
-        "min": 0,
         "max": 157,
         "temp": null,
         "tempmax": 0,
@@ -92,7 +97,8 @@
         "units": "ft",
         "special": ""
       },
-      "spellcasting": "int"
+      "spellcasting": "int",
+      "exhaustion": 0
     },
     "details": {
       "biography": {
@@ -100,7 +106,7 @@
         "public": ""
       },
       "alignment": "Chaotic Evil",
-      "race": "",
+      "race": null,
       "type": {
         "value": "fiend",
         "subtype": "Demon",
@@ -156,6 +162,10 @@
           "abyssal"
         ],
         "custom": "Telepathy 120 ft."
+      },
+      "dm": {
+        "amount": {},
+        "bypasses": []
       }
     },
     "currency": {
@@ -396,7 +406,8 @@
         "value": false,
         "initiative": null
       }
-    }
+    },
+    "tools": {}
   },
   "prototypeToken": {
     "name": "Glabrezu",
@@ -473,8 +484,7 @@
       "system": {
         "description": {
           "value": "<p>The glabrezu's spellcasting ability is Intelligence (spell save DC 16). The glabrezu can innately cast the following spells, requiring no material components:</p>\n<p>At will: darkness, detect magic, dispel magic</p>\n<p>1/day each: confusion, fly, power word stun</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -496,7 +506,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -507,12 +518,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": null,
         "actionType": "",
@@ -540,7 +553,9 @@
         "recharge": {
           "value": null,
           "charged": false
-        }
+        },
+        "crewed": false,
+        "properties": []
       },
       "effects": [],
       "folder": null,
@@ -571,8 +586,7 @@
       "system": {
         "description": {
           "value": "<p>The glabrezu has<strong> advantage </strong>on saving throws against spells and other magical effects.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -594,7 +608,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -605,12 +620,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": null,
         "actionType": "",
@@ -638,7 +655,9 @@
         "recharge": {
           "value": null,
           "charged": false
-        }
+        },
+        "crewed": false,
+        "properties": []
       },
       "effects": [],
       "folder": null,
@@ -669,8 +688,7 @@
       "system": {
         "description": {
           "value": "<p>The glabrezu makes four attacks: two with its pincers and two with its fists. Alternatively, it makes two attacks with its pincers and casts one spell.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -692,7 +710,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -703,12 +722,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": null,
         "actionType": "",
@@ -736,7 +757,9 @@
         "recharge": {
           "value": null,
           "charged": false
-        }
+        },
+        "crewed": false,
+        "properties": []
       },
       "effects": [],
       "folder": null,
@@ -767,8 +790,7 @@
       "system": {
         "description": {
           "value": "<section class=\"secret\"><p><em>Melee Weapon Attack:</em><strong>+9 to hit,</strong>, <strong>10 ft.,</strong> one target. Hit: <strong>16 (2d10 + 5) <em>bludgeoning damage</em></strong>. </p><p>If the target is a Medium or smaller creature, it is grappled (escape DC 15). The glabrezu has two pincers, each of which can grapple only one target.</p></section><p>The Glabrezu attacks with its Pincer. If the target is a Medium or smaller creature, it is grappled.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -800,7 +822,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": 10,
@@ -811,12 +834,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "str",
         "actionType": "mwak",
@@ -850,25 +875,19 @@
           "dt": null,
           "conditions": ""
         },
-        "weaponType": "natural",
-        "baseItem": "",
-        "properties": {
-          "amm": false,
-          "fin": false,
-          "fir": false,
-          "foc": false,
-          "hvy": false,
-          "lgt": false,
-          "lod": false,
-          "rch": true,
-          "rel": false,
-          "ret": false,
-          "spc": false,
-          "thr": false,
-          "two": false,
-          "ver": false
+        "properties": [
+          "rch"
+        ],
+        "proficient": 1,
+        "unidentified": {
+          "description": ""
         },
-        "proficient": true
+        "type": {
+          "value": "natural",
+          "baseItem": ""
+        },
+        "container": null,
+        "crewed": false
       },
       "effects": [],
       "folder": null,
@@ -895,8 +914,7 @@
       "system": {
         "description": {
           "value": "<section class=\"secret\"><p><em>Melee Weapon Attack:</em><strong>+9 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>7 (2d4 + 2) <em>bludgeoning damage</em></strong>.</p><p></p></section><p>The Glabrezu attacks with its Fist.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -928,7 +946,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": 5,
@@ -939,12 +958,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "str",
         "actionType": "mwak",
@@ -978,25 +999,17 @@
           "dt": null,
           "conditions": ""
         },
-        "weaponType": "natural",
-        "baseItem": "",
-        "properties": {
-          "amm": false,
-          "fin": false,
-          "fir": false,
-          "foc": false,
-          "hvy": false,
-          "lgt": false,
-          "lod": false,
-          "rch": false,
-          "rel": false,
-          "ret": false,
-          "spc": false,
-          "thr": false,
-          "two": false,
-          "ver": false
+        "properties": [],
+        "proficient": 1,
+        "unidentified": {
+          "description": ""
         },
-        "proficient": true
+        "type": {
+          "value": "natural",
+          "baseItem": ""
+        },
+        "container": null,
+        "crewed": false
       },
       "effects": [],
       "folder": null,
@@ -1025,8 +1038,7 @@
       "system": {
         "description": {
           "value": "<p>Magical darkness spreads from a point you choose within range to fill a 15-foot-radius sphere for the duration. The darkness spreads around corners. A creature with darkvision can't see through this darkness, and nonmagical light can't illuminate it.</p><p>If the point you choose is on an object you are holding or one that isn't being worn or carried, the darkness emanates from the object and moves with it. Completely covering the source of the darkness with an opaque object, such as a bowl or a helm, blocks the darkness.</p><p>If any of this spell's area overlaps with an area of light created by a spell of 2nd level or lower, the spell that created the light is dispelled.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -1048,7 +1060,8 @@
           "value": 15,
           "width": null,
           "units": "ft",
-          "type": "sphere"
+          "type": "sphere",
+          "prompt": true
         },
         "range": {
           "value": 60,
@@ -1059,12 +1072,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "util",
@@ -1086,13 +1101,6 @@
         },
         "level": 2,
         "school": "evo",
-        "components": {
-          "vocal": true,
-          "somatic": false,
-          "material": true,
-          "ritual": false,
-          "concentration": true
-        },
         "materials": {
           "value": "Bat fur and a drop of pitch or piece of coal",
           "consumed": false,
@@ -1111,12 +1119,20 @@
           "vocal",
           "material",
           "concentration"
-        ]
+        ],
+        "crewed": false
       },
       "sort": 0,
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.spells.S7VbUetIfVT7B6Eq"
+        },
+        "dnd5e": {
+          "migratedProperties": [
+            "vocal",
+            "material",
+            "concentration"
+          ]
         }
       },
       "img": "icons/magic/perception/eye-ringed-glow-angry-red.webp",
@@ -1142,8 +1158,7 @@
       "system": {
         "description": {
           "value": "<p>For the duration, you sense the presence of magic within 30 feet of you. If you sense magic in this way, you can use your action to see a faint aura around any visible creature or object in the area that bears magic, and you learn its school of magic, if any.</p><p>The spell can penetrate most barriers, but it is blocked by 1 foot of stone, 1 inch of common metal, a thin sheet of lead, or 3 feet of wood or dirt.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -1165,7 +1180,8 @@
           "value": 30,
           "width": null,
           "units": "ft",
-          "type": "radius"
+          "type": "radius",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -1176,12 +1192,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "util",
@@ -1203,13 +1221,6 @@
         },
         "level": 1,
         "school": "div",
-        "components": {
-          "vocal": true,
-          "somatic": true,
-          "material": false,
-          "ritual": true,
-          "concentration": true
-        },
         "materials": {
           "value": "",
           "consumed": false,
@@ -1229,12 +1240,21 @@
           "somatic",
           "ritual",
           "concentration"
-        ]
+        ],
+        "crewed": false
       },
       "sort": 0,
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.spells.ghXTfe7sgCbgf1Q8"
+        },
+        "dnd5e": {
+          "migratedProperties": [
+            "vocal",
+            "somatic",
+            "ritual",
+            "concentration"
+          ]
         }
       },
       "img": "icons/magic/light/explosion-star-blue.webp",
@@ -1260,8 +1280,7 @@
       "system": {
         "description": {
           "value": "<p>Choose one creature, object, or magical effect within range. Any spell of 3rd level or lower on the target ends. For each spell of 4th level or higher on the target, make an ability check using your spellcasting ability. The DC equals 10 + the spell's level. On a successful check, the spell ends.</p><p><strong>Higher Levels.</strong> When you cast this spell using a spell slot of 4th level or higher, you automatically end the effects of a spell on the target if the spell's level is equal to or less than the level of the spell slot you used.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -1283,7 +1302,8 @@
           "value": 1,
           "width": null,
           "units": "",
-          "type": "creature"
+          "type": "creature",
+          "prompt": true
         },
         "range": {
           "value": 120,
@@ -1294,12 +1314,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "util",
@@ -1321,13 +1343,6 @@
         },
         "level": 3,
         "school": "abj",
-        "components": {
-          "vocal": true,
-          "somatic": true,
-          "material": false,
-          "ritual": false,
-          "concentration": false
-        },
         "materials": {
           "value": "",
           "consumed": false,
@@ -1345,12 +1360,19 @@
         "properties": [
           "vocal",
           "somatic"
-        ]
+        ],
+        "crewed": false
       },
       "sort": 0,
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.spells.15Fa6q1nH27XfbR8"
+        },
+        "dnd5e": {
+          "migratedProperties": [
+            "vocal",
+            "somatic"
+          ]
         }
       },
       "img": "icons/skills/melee/strike-blade-knife-orange-blue.webp",
@@ -1374,8 +1396,7 @@
       "system": {
         "description": {
           "value": "<p>This spell assaults and twists creatures' minds, spawning delusions and provoking uncontrolled action. Each creature in a 10-foot-radius sphere centered on a point you choose within range must succeed on a Wisdom saving throw when you cast this spell or be affected by it.</p>\n<p>An affected target can't take reactions and must roll [[/r 1d10]] at the start of each of its turns to determine its behavior for that turn.</p>\n<table style=\"height:80px;width:98.835%\">\n<thead>\n<tr style=\"height:16px;text-align:center\">\n<td style=\"width:10.1923%;height:16px\">d10</td>\n<td style=\"width:88.8254%;height:16px\">Behaviour</td>\n</tr>\n</thead>\n<tbody>\n<tr style=\"height:16px\">\n<td style=\"width:10.1923%;height:16px;text-align:center\">1</td>\n<td style=\"width:88.8254%;height:16px\">The creature uses all its movement to move in a random direction. To determine the direction, roll [[/r 1d8]] and assign a direction to each die face. The creature doesn't take an action this turn.</td>\n</tr>\n<tr style=\"height:16px\">\n<td style=\"width:10.1923%;height:16px;text-align:center\">2-6</td>\n<td style=\"width:88.8254%;height:16px\">The creature doesn't move or take actions this turn.</td>\n</tr>\n<tr style=\"height:16px\">\n<td style=\"width:10.1923%;height:16px;text-align:center\">7-8</td>\n<td style=\"width:88.8254%;height:16px\">The creature uses its action to make a melee attack against a randomly determined creature within its reach. If there is no creature within its reach, the creature does nothing this turn.</td>\n</tr>\n<tr style=\"height:16px\">\n<td style=\"width:10.1923%;height:16px;text-align:center\">9-10</td>\n<td style=\"width:88.8254%;height:16px\">The creature can act and move normally. </td>\n</tr>\n</tbody>\n</table>\n<p><em><strong>At Higher Levels.</strong></em> When you cast this spell using a spell slot of 5th level or higher, the radius of the sphere increases by 5 feet for each slot level above 4th.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -1397,7 +1418,8 @@
           "value": 10,
           "width": null,
           "units": "ft",
-          "type": "sphere"
+          "type": "sphere",
+          "prompt": true
         },
         "range": {
           "value": 90,
@@ -1408,12 +1430,14 @@
           "value": 1,
           "max": "1",
           "per": "day",
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "save",
@@ -1435,13 +1459,6 @@
         },
         "level": 4,
         "school": "enc",
-        "components": {
-          "vocal": true,
-          "somatic": true,
-          "material": true,
-          "ritual": false,
-          "concentration": true
-        },
         "materials": {
           "value": "Three walnut shells.",
           "consumed": false,
@@ -1461,7 +1478,8 @@
           "somatic",
           "material",
           "concentration"
-        ]
+        ],
+        "crewed": false
       },
       "effects": [],
       "folder": null,
@@ -1472,6 +1490,14 @@
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.spells.9hQXdMSmerkTsHDe"
+        },
+        "dnd5e": {
+          "migratedProperties": [
+            "vocal",
+            "somatic",
+            "material",
+            "concentration"
+          ]
         }
       },
       "_stats": {
@@ -1494,8 +1520,7 @@
       "system": {
         "description": {
           "value": "<p>You touch a willing creature. The target gains a flying speed of 60 feet for the Duration. When the spell ends, the target falls if it is still aloft, unless it can stop the fall.</p><p><strong>At Higher Levels.</strong> When you cast this spell using a spell slot of 4th level or higher, you can target one additional creature for each slot level above 3rd.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -1517,7 +1542,8 @@
           "value": 1,
           "width": null,
           "units": "",
-          "type": "creature"
+          "type": "creature",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -1528,12 +1554,14 @@
           "value": 1,
           "max": "1",
           "per": "day",
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "util",
@@ -1555,13 +1583,6 @@
         },
         "level": 3,
         "school": "trs",
-        "components": {
-          "vocal": true,
-          "somatic": true,
-          "material": true,
-          "ritual": false,
-          "concentration": true
-        },
         "materials": {
           "value": "A wing feather from any bird",
           "consumed": false,
@@ -1581,12 +1602,21 @@
           "somatic",
           "material",
           "concentration"
-        ]
+        ],
+        "crewed": false
       },
       "sort": 0,
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.spells.yfbK8gZqESlaoY5t"
+        },
+        "dnd5e": {
+          "migratedProperties": [
+            "vocal",
+            "somatic",
+            "material",
+            "concentration"
+          ]
         }
       },
       "img": "icons/magic/control/energy-stream-link-white.webp",
@@ -1612,8 +1642,7 @@
       "system": {
         "description": {
           "value": "<p>You speak a word of power that can overwhelm the mind of one creature you can see within range, leaving it dumbfounded. If the target has 150 Hit Points or fewer, it is Stunned. Otherwise, the spell has no effect.</p><p>The stunned target must make a Constitution saving throw at the end of each of its turns. On a successful save, this stunning effect ends.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -1635,7 +1664,8 @@
           "value": 1,
           "width": null,
           "units": "",
-          "type": "creature"
+          "type": "creature",
+          "prompt": true
         },
         "range": {
           "value": 60,
@@ -1646,12 +1676,14 @@
           "value": 1,
           "max": "1",
           "per": "day",
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "save",
@@ -1673,13 +1705,6 @@
         },
         "level": 8,
         "school": "enc",
-        "components": {
-          "vocal": true,
-          "somatic": false,
-          "material": false,
-          "ritual": false,
-          "concentration": false
-        },
         "materials": {
           "value": "",
           "consumed": false,
@@ -1696,12 +1721,18 @@
         },
         "properties": [
           "vocal"
-        ]
+        ],
+        "crewed": false
       },
       "sort": 0,
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.spells.35j2QIMmIk6aEdxj"
+        },
+        "dnd5e": {
+          "migratedProperties": [
+            "vocal"
+          ]
         }
       },
       "img": "icons/magic/control/debuff-chains-ropes-red.webp",
@@ -1730,7 +1761,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787232800,
-    "modifiedTime": 1704466735485,
+    "modifiedTime": 1704847047196,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!OGPHF4sCVOAi87TU"

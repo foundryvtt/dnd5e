@@ -11,7 +11,8 @@
         "bonuses": {
           "check": "",
           "save": ""
-        }
+        },
+        "max": null
       },
       "dex": {
         "value": 20,
@@ -19,7 +20,8 @@
         "bonuses": {
           "check": "",
           "save": ""
-        }
+        },
+        "max": null
       },
       "con": {
         "value": 24,
@@ -27,7 +29,8 @@
         "bonuses": {
           "check": "",
           "save": ""
-        }
+        },
+        "max": null
       },
       "int": {
         "value": 19,
@@ -35,7 +38,8 @@
         "bonuses": {
           "check": "",
           "save": ""
-        }
+        },
+        "max": null
       },
       "wis": {
         "value": 22,
@@ -43,7 +47,8 @@
         "bonuses": {
           "check": "",
           "save": ""
-        }
+        },
+        "max": null
       },
       "cha": {
         "value": 25,
@@ -51,7 +56,8 @@
         "bonuses": {
           "check": "",
           "save": ""
-        }
+        },
+        "max": null
       }
     },
     "attributes": {
@@ -62,7 +68,6 @@
       },
       "hp": {
         "value": 200,
-        "min": 0,
         "max": 200,
         "temp": null,
         "tempmax": 0,
@@ -92,7 +97,8 @@
         "units": "ft",
         "special": ""
       },
-      "spellcasting": "cha"
+      "spellcasting": "cha",
+      "exhaustion": 0
     },
     "details": {
       "biography": {
@@ -100,7 +106,7 @@
         "public": ""
       },
       "alignment": "Lawful Good",
-      "race": "",
+      "race": null,
       "type": {
         "value": "celestial",
         "subtype": "",
@@ -152,6 +158,10 @@
       "languages": {
         "value": [],
         "custom": "All; Telepathy 120 ft."
+      },
+      "dm": {
+        "amount": {},
+        "bypasses": []
       }
     },
     "currency": {
@@ -392,7 +402,8 @@
         "value": false,
         "initiative": null
       }
-    }
+    },
+    "tools": {}
   },
   "prototypeToken": {
     "name": "Planetar",
@@ -469,8 +480,7 @@
       "system": {
         "description": {
           "value": "<section class=\"secret\"><p>The planetar's weapon attacks are magical. When the planetar hits with any weapon, the weapon deals an <strong>extra 5d8 <em>radiant damage</em></strong> (included in the attack).</p></section><p>The planetar's weapon attacks are magical. When the planetar hits with any weapon, the weapon deals extra <em>radiant damage</em> (included in the attack).</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -492,7 +502,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -503,12 +514,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": null,
         "actionType": "",
@@ -536,7 +549,9 @@
         "recharge": {
           "value": null,
           "charged": false
-        }
+        },
+        "crewed": false,
+        "properties": []
       },
       "effects": [],
       "folder": null,
@@ -567,8 +582,7 @@
       "system": {
         "description": {
           "value": "<p>The planetar knows if it hears a lie.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -590,7 +604,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -601,12 +616,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": null,
         "actionType": "",
@@ -634,7 +651,9 @@
         "recharge": {
           "value": null,
           "charged": false
-        }
+        },
+        "crewed": false,
+        "properties": []
       },
       "effects": [],
       "folder": null,
@@ -665,8 +684,7 @@
       "system": {
         "description": {
           "value": "<p>The planetar's spellcasting ability is Charisma (spell save DC 20). The planetar can innately cast the following spells, requiring no material components:</p>\n<p>At will: detect evil and good, invisibility (self only)</p>\n<p>3/day each: blade barrier, dispel evil and good, flame strike, raise dead</p>\n<p>1/day each: commune, control weather, insect plague</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -688,7 +706,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -699,12 +718,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": null,
         "actionType": "",
@@ -732,7 +753,9 @@
         "recharge": {
           "value": null,
           "charged": false
-        }
+        },
+        "crewed": false,
+        "properties": []
       },
       "effects": [],
       "folder": null,
@@ -763,8 +786,7 @@
       "system": {
         "description": {
           "value": "<p>A creature you touch becomes invisible until the spell ends. Anything the target is wearing or carrying is invisible as long as it is on the target's person. The spell ends for a target that attacks or casts a spell.</p><p><strong>At Higher Levels.</strong> When you cast this spell using a spell slot of 3rd level or higher, you can target one additional creature for each slot level above 2nd.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -786,7 +808,8 @@
           "value": 1,
           "width": null,
           "units": "",
-          "type": "creature"
+          "type": "creature",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -797,12 +820,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "util",
@@ -824,13 +849,6 @@
         },
         "level": 2,
         "school": "ill",
-        "components": {
-          "vocal": true,
-          "somatic": true,
-          "material": false,
-          "ritual": false,
-          "concentration": true
-        },
         "materials": {
           "value": "",
           "consumed": false,
@@ -849,7 +867,8 @@
           "vocal",
           "somatic",
           "concentration"
-        ]
+        ],
+        "crewed": false
       },
       "effects": [],
       "folder": null,
@@ -860,6 +879,13 @@
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.spells.1N8dDMMgZ1h1YJ3B"
+        },
+        "dnd5e": {
+          "migratedProperties": [
+            "vocal",
+            "somatic",
+            "concentration"
+          ]
         }
       },
       "_stats": {
@@ -880,8 +906,7 @@
       "system": {
         "description": {
           "value": "<p>The planetar has<strong> advantage </strong>on saving throws against spells and other magical effects.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -903,7 +928,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -914,12 +940,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": null,
         "actionType": "",
@@ -947,7 +975,9 @@
         "recharge": {
           "value": null,
           "charged": false
-        }
+        },
+        "crewed": false,
+        "properties": []
       },
       "effects": [],
       "folder": null,
@@ -978,8 +1008,7 @@
       "system": {
         "description": {
           "value": "<p>The planetar makes two melee attacks.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -1001,7 +1030,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -1012,12 +1042,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": null,
         "actionType": "",
@@ -1045,7 +1077,9 @@
         "recharge": {
           "value": null,
           "charged": false
-        }
+        },
+        "crewed": false,
+        "properties": []
       },
       "effects": [],
       "folder": null,
@@ -1076,8 +1110,7 @@
       "system": {
         "description": {
           "value": "<section class=\"secret\"><p><em>Melee Weapon Attack:</em><strong>+12 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>21 (4d6 + 7) <em>slashing damage</em></strong> plus <strong>22 (5d8) <em>radiant damage</em></strong>.</p><p></p></section><p>The Planetar attacks with its Greatsword.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -1109,7 +1142,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "",
+          "prompt": true
         },
         "range": {
           "value": 5,
@@ -1120,12 +1154,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "str",
         "actionType": "mwak",
@@ -1163,25 +1199,20 @@
           "dt": null,
           "conditions": ""
         },
-        "weaponType": "martialM",
-        "baseItem": "greatsword",
-        "properties": {
-          "amm": false,
-          "fin": false,
-          "fir": false,
-          "foc": false,
-          "hvy": true,
-          "lgt": false,
-          "lod": false,
-          "rch": false,
-          "rel": false,
-          "ret": false,
-          "spc": false,
-          "thr": false,
-          "two": true,
-          "ver": false
+        "properties": [
+          "hvy",
+          "two"
+        ],
+        "proficient": 1,
+        "unidentified": {
+          "description": ""
         },
-        "proficient": true
+        "type": {
+          "value": "martialM",
+          "baseItem": "greatsword"
+        },
+        "container": null,
+        "crewed": false
       },
       "effects": [],
       "folder": null,
@@ -1212,8 +1243,7 @@
       "system": {
         "description": {
           "value": "<section class=\"secret\"><p></p><p></p></section><p>The planetar touches another creature. The target magically regains 30 (6d8 + 3) hit points and is freed from any curse, disease, poison, blindness, or deafness.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -1235,7 +1265,8 @@
           "value": null,
           "width": null,
           "units": "touch",
-          "type": "creature"
+          "type": "creature",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -1246,12 +1277,14 @@
           "value": 4,
           "max": "4",
           "per": "day",
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "heal",
@@ -1284,7 +1317,9 @@
         "recharge": {
           "value": null,
           "charged": false
-        }
+        },
+        "crewed": false,
+        "properties": []
       },
       "effects": [],
       "folder": null,
@@ -1317,8 +1352,7 @@
       "system": {
         "description": {
           "value": "<p>For the duration, you know if there is an aberration, celestial, elemental, fey, fiend, or undead within 30 feet of you, as well as where the creature is located. Similarly, you know if there is a place or object within 30 feet of you that has been magically consecrated or desecrated.</p><p>The spell can penetrate most barriers, but it is blocked by 1 foot of stone, 1 inch of common metal, a thin sheet of lead, or 3 feet of wood or dirt.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -1340,7 +1374,8 @@
           "value": 30,
           "width": null,
           "units": "ft",
-          "type": "radius"
+          "type": "radius",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -1351,12 +1386,14 @@
           "value": null,
           "max": "",
           "per": null,
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "util",
@@ -1378,13 +1415,6 @@
         },
         "level": 1,
         "school": "div",
-        "components": {
-          "vocal": true,
-          "somatic": true,
-          "material": false,
-          "ritual": false,
-          "concentration": true
-        },
         "materials": {
           "value": "",
           "consumed": false,
@@ -1403,12 +1433,20 @@
           "vocal",
           "somatic",
           "concentration"
-        ]
+        ],
+        "crewed": false
       },
       "sort": 0,
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.spells.Mzh95utKDPIrjiH8"
+        },
+        "dnd5e": {
+          "migratedProperties": [
+            "vocal",
+            "somatic",
+            "concentration"
+          ]
         }
       },
       "img": "icons/magic/air/air-burst-spiral-blue-gray.webp",
@@ -1434,8 +1472,7 @@
       "system": {
         "description": {
           "value": "<p>You create a vertical wall of whirling, razor-sharp blades made of magical energy. The wall appears within range and lasts for the duration. You can make a straight wall up to 100 feet long, 20 feet high, and 5 feet thick, or a ringed wall up to 60 feet in diameter, 20 feet high, and 5 feet thick. The wall provides three-quarters cover to creatures behind it, and its space is difficult terrain.</p><p>When a creature enters the wall's area for the first time on a turn or starts its turn there, the creature must make a Dexterity saving throw. On a failed save, the creature takes 6d10 slashing damage. On a successful save, the creature takes half as much damage.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -1457,7 +1494,8 @@
           "value": 100,
           "width": null,
           "units": "ft",
-          "type": "wall"
+          "type": "wall",
+          "prompt": true
         },
         "range": {
           "value": 90,
@@ -1468,12 +1506,14 @@
           "value": 3,
           "max": "3",
           "per": "day",
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "save",
@@ -1500,13 +1540,6 @@
         },
         "level": 6,
         "school": "evo",
-        "components": {
-          "vocal": true,
-          "somatic": true,
-          "material": false,
-          "ritual": false,
-          "concentration": true
-        },
         "materials": {
           "value": "",
           "consumed": false,
@@ -1525,12 +1558,20 @@
           "vocal",
           "somatic",
           "concentration"
-        ]
+        ],
+        "crewed": false
       },
       "sort": 0,
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.spells.dLJhxDfeyOsc3zsY"
+        },
+        "dnd5e": {
+          "migratedProperties": [
+            "vocal",
+            "somatic",
+            "concentration"
+          ]
         }
       },
       "img": "icons/magic/light/projectile-beams-salvo-white.webp",
@@ -1556,8 +1597,7 @@
       "system": {
         "description": {
           "value": "<p>Shimmering energy surrounds and protects you from fey, Undead, and creatures originating from Beyond the Material Plane. For the Duration, Celestials, Elementals, fey, Fiends, and undead have disadvantage on Attack rolls against you.</p><p>You can end the spell early by using either of the following special functions.</p><p><strong>Break Enchantment</strong>. As your action, you touch a creature you can reach that is Charmed, Frightened, or possessed by a Celestial, an elemental, a fey, a fiend, or an Undead. The creature you touch is no longer charmed, frightened, or possessed by such creatures.</p><p><strong>Dismissal</strong>. As your action, make a melee spell Attack against a Celestial, an elemental, a fey, a fiend, or an Undead you can reach. On a hit, you attempt to drive the creature back to its home plane. The creature must succeed on a Charisma saving throw or be sent back to its home plane (if it isn't there already). If they aren't on their home plane, undead are sent to the Shadowfell, and fey are sent to the Feywild.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -1579,7 +1619,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": "self"
+          "type": "self",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -1590,12 +1631,14 @@
           "value": 3,
           "max": "3",
           "per": "day",
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "msak",
@@ -1617,13 +1660,6 @@
         },
         "level": 5,
         "school": "abj",
-        "components": {
-          "vocal": true,
-          "somatic": true,
-          "material": true,
-          "ritual": false,
-          "concentration": true
-        },
         "materials": {
           "value": "Holy water or powdered silver and iron",
           "consumed": false,
@@ -1643,12 +1679,21 @@
           "somatic",
           "material",
           "concentration"
-        ]
+        ],
+        "crewed": false
       },
       "sort": 0,
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.spells.TkJ8Wtg1L7TZtspm"
+        },
+        "dnd5e": {
+          "migratedProperties": [
+            "vocal",
+            "somatic",
+            "material",
+            "concentration"
+          ]
         }
       },
       "img": "icons/magic/air/air-burst-spiral-large-blue.webp",
@@ -1674,8 +1719,7 @@
       "system": {
         "description": {
           "value": "<p>A vertical column of divine fire roars down from the heavens in a location you specify. Each creature in a 10-foot-radius, 40-foot-high Cylinder centered on a point within range must make a Dexterity saving throw. A creature takes 4d6 fire damage and 4d6 radiant damage on a failed save, or half as much damage on a successful one.</p><p><strong>At Higher Levels.</strong> When you cast this spell using a spell slot of 6th level or higher, the fire damage or the radiant damage (your choice) increases by 1d6 for each slot level above 5th.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -1697,7 +1741,8 @@
           "value": 10,
           "width": null,
           "units": "ft",
-          "type": "cylinder"
+          "type": "cylinder",
+          "prompt": true
         },
         "range": {
           "value": 60,
@@ -1708,12 +1753,14 @@
           "value": 3,
           "max": "3",
           "per": "day",
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "save",
@@ -1744,13 +1791,6 @@
         },
         "level": 5,
         "school": "evo",
-        "components": {
-          "vocal": true,
-          "somatic": true,
-          "material": true,
-          "ritual": false,
-          "concentration": false
-        },
         "materials": {
           "value": "A pinch of sulfur",
           "consumed": false,
@@ -1769,12 +1809,20 @@
           "vocal",
           "somatic",
           "material"
-        ]
+        ],
+        "crewed": false
       },
       "sort": 0,
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.spells.5e1xTohkzqFqbYH4"
+        },
+        "dnd5e": {
+          "migratedProperties": [
+            "vocal",
+            "somatic",
+            "material"
+          ]
         }
       },
       "img": "icons/magic/light/beam-rays-red-large.webp",
@@ -1800,8 +1848,7 @@
       "system": {
         "description": {
           "value": "<p>You return a dead creature you touch to life, provided that it has been dead no longer than 10 days. If the creature's soul is both willing and at liberty to rejoin the body, the creature returns to life with 1 hit point.</p><p>This spell also neutralizes any poisons and cures nonmagical diseases that affected the creature at the time it died. This spell doesn't, however, remove magical diseases, curses, or similar effects; if these aren't first removed prior to casting the spell, they take effect when the creature returns to life. The spell can't return an undead creature to life.</p><p>This spell closes all mortal wounds, but it doesn't restore missing body parts. If the creature is lacking body parts or organs integral for its survival—its head, for instance—the spell automatically fails.</p><p>Coming back from the dead is an ordeal. The target takes a −4 penalty to all attack rolls, saving throws, and ability checks. Every time the target finishes a long rest, the penalty is reduced by 1 until it disappears.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -1823,7 +1870,8 @@
           "value": 1,
           "width": null,
           "units": "spec",
-          "type": "creature"
+          "type": "creature",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -1834,12 +1882,14 @@
           "value": 3,
           "max": "3",
           "per": "day",
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "heal",
@@ -1866,13 +1916,6 @@
         },
         "level": 5,
         "school": "nec",
-        "components": {
-          "vocal": true,
-          "somatic": true,
-          "material": true,
-          "ritual": false,
-          "concentration": false
-        },
         "materials": {
           "value": "A diamond worth at least 500gp, which the spell consumes.",
           "consumed": true,
@@ -1891,12 +1934,20 @@
           "vocal",
           "somatic",
           "material"
-        ]
+        ],
+        "crewed": false
       },
       "sort": 0,
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.spells.AGFMPAmuzwWO6Dfz"
+        },
+        "dnd5e": {
+          "migratedProperties": [
+            "vocal",
+            "somatic",
+            "material"
+          ]
         }
       },
       "img": "icons/magic/life/heart-cross-strong-purple-orange.webp",
@@ -1922,8 +1973,7 @@
       "system": {
         "description": {
           "value": "<p>You contact your deity or a divine proxy and ask up to three questions that can be answered with a yes or no. You must ask your questions before the spell ends. You receive a correct answer for each question.</p><p>Divine beings aren't necessarily omniscient, so you might receive \"unclear\" as an answer if a question pertains to information that lies beyond the deity's knowledge. In a case where a one-word answer could be misleading or contrary to the deity's interests, the DM might offer a short phrase as an answer instead.</p><p>If you cast the spell two or more times before finishing your next long rest, there is a cumulative 25 percent chance for each casting after the first that you get no answer. The DM makes this roll in secret.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -1945,7 +1995,8 @@
           "value": null,
           "width": null,
           "units": "",
-          "type": "self"
+          "type": "self",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -1956,12 +2007,14 @@
           "value": 1,
           "max": "1",
           "per": "day",
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "util",
@@ -1983,13 +2036,6 @@
         },
         "level": 5,
         "school": "div",
-        "components": {
-          "vocal": true,
-          "somatic": true,
-          "material": true,
-          "ritual": true,
-          "concentration": false
-        },
         "materials": {
           "value": "Incense and a vial of holy or unholy water",
           "consumed": false,
@@ -2009,12 +2055,21 @@
           "somatic",
           "material",
           "ritual"
-        ]
+        ],
+        "crewed": false
       },
       "sort": 0,
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.spells.d54VDyFulD9xxY7J"
+        },
+        "dnd5e": {
+          "migratedProperties": [
+            "vocal",
+            "somatic",
+            "material",
+            "ritual"
+          ]
         }
       },
       "img": "icons/magic/control/debuff-energy-hold-levitate-blue-yellow.webp",
@@ -2040,8 +2095,7 @@
       "system": {
         "description": {
           "value": "<p>You take control of the weather within 5 miles of you for the duration. You must be outdoors to cast this spell. Moving to a place where you don't have a clear path to the sky ends the spell early.</p><p>When you cast the spell, you change the current weather conditions, which are determined by the DM based on the climate and season. You can change precipitation, temperature, and wind. It takes 1d4 x 10 minutes for the new conditions to take effect. Once they do so, you can change the conditions again. When the spell ends, the weather gradually returns to normal.</p><p>When you change the weather conditions, find a current condition on the following tables and change its stage by one, up or down. When changing the wind, you can change its direction.</p><p><strong>Conditions</strong></p>\n<ol>\n<li>Clear</li>\n<li>Light clouds</li>\n<li>Overcast or ground fog</li>\n<li>Rain, hail, or snow</li>\n<li>Torrential rain, driving hail, or blizzard</li>\n</ol>\n<p><strong>Temperature</strong></p>\n<ol>\n<li>Unbearable heat</li>\n<li>Hot</li>\n<li>Warm</li>\n<li>Cool</li>\n<li>Cold</li>\n<li>Arctic cold</li>\n</ol>\n<p><strong>Wind</strong></p>\n<ol>\n<li>Calm</li>\n<li>Moderate wind</li>\n<li>Strong wind</li>\n<li>Gale</li>\n<li>Storm</li>\n</ol>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -2063,7 +2117,8 @@
           "value": 5,
           "width": null,
           "units": "mi",
-          "type": "radius"
+          "type": "radius",
+          "prompt": true
         },
         "range": {
           "value": null,
@@ -2074,12 +2129,14 @@
           "value": 1,
           "max": "1",
           "per": "day",
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "util",
@@ -2101,13 +2158,6 @@
         },
         "level": 8,
         "school": "trs",
-        "components": {
-          "vocal": true,
-          "somatic": true,
-          "material": true,
-          "ritual": false,
-          "concentration": true
-        },
         "materials": {
           "value": "Burning incense and bits of earth and wood mixed in water.",
           "consumed": false,
@@ -2127,12 +2177,21 @@
           "somatic",
           "material",
           "concentration"
-        ]
+        ],
+        "crewed": false
       },
       "sort": 0,
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.spells.ZPd73HtKF3At11jh"
+        },
+        "dnd5e": {
+          "migratedProperties": [
+            "vocal",
+            "somatic",
+            "material",
+            "concentration"
+          ]
         }
       },
       "img": "icons/magic/air/wind-tornado-cyclone-white.webp",
@@ -2158,8 +2217,7 @@
       "system": {
         "description": {
           "value": "<p>Swarming, biting locusts fill a 20-foot-radius Sphere centered on a point you choose within range. The sphere spreads around corners. The sphere remains for the Duration, and its area is lightly obscured. The sphere's area is difficult terrain.</p><p>When the area appears, each creature in it must make a Constitution saving throw. A creature takes 4d10 piercing damage on a failed save, or half as much damage on a successful one. A creature must also make this saving throw when it enters the spell's area for the first time on a turn or ends its turn there.</p><p><strong>At Higher Levels.</strong> When you cast this spell using a spell slot of 6th level or higher, the damage increases by 1d10 for each slot level above 5th.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -2181,7 +2239,8 @@
           "value": 20,
           "width": null,
           "units": "ft",
-          "type": "sphere"
+          "type": "sphere",
+          "prompt": true
         },
         "range": {
           "value": 300,
@@ -2192,12 +2251,14 @@
           "value": 1,
           "max": "1",
           "per": "day",
-          "recovery": ""
+          "recovery": "",
+          "prompt": true
         },
         "consume": {
           "type": "",
           "target": null,
-          "amount": null
+          "amount": null,
+          "scale": false
         },
         "ability": "",
         "actionType": "save",
@@ -2224,13 +2285,6 @@
         },
         "level": 5,
         "school": "con",
-        "components": {
-          "vocal": true,
-          "somatic": true,
-          "material": true,
-          "ritual": false,
-          "concentration": true
-        },
         "materials": {
           "value": "A few grains of sugar, some kernels of grain, and a smear of fat",
           "consumed": false,
@@ -2250,12 +2304,21 @@
           "somatic",
           "material",
           "concentration"
-        ]
+        ],
+        "crewed": false
       },
       "sort": 0,
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.spells.OVikYmSdHliAG2YD"
+        },
+        "dnd5e": {
+          "migratedProperties": [
+            "vocal",
+            "somatic",
+            "material",
+            "concentration"
+          ]
         }
       },
       "img": "icons/magic/nature/leaf-glow-maple-teal.webp",
@@ -2284,7 +2347,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787232875,
-    "modifiedTime": 1704466735750,
+    "modifiedTime": 1704847048950,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!XEByBLeOkDgL3mrr"
