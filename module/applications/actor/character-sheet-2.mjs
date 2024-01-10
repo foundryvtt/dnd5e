@@ -795,7 +795,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
     element.dataset.tooltip = `
       <section class="loading" data-uuid="${uuid}"><i class="fas fa-spinner fa-spin-pulse"></i></section>
     `;
-    element.dataset.tooltipClass = "dnd5e2 item-tooltip";
+    element.dataset.tooltipClass = "dnd5e2 dnd5e-tooltip item-tooltip";
     element.dataset.tooltipDirection ??= "LEFT";
   }
 

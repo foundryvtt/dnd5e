@@ -364,10 +364,10 @@ export class ItemDataModel extends SystemDataModel {
 
     const context = {
       name, type, img, price, weight, uses, school, materials, activation,
-      labels: foundry.utils.deepClone(this.labels),
+      labels: foundry.utils.deepClone(this.parent.labels),
       subtitle: school
         ? CONFIG.DND5E.spellSchools[school]
-        : this.type?.label ?? game.i18n.localize(CONFIG.Item.typeLabels[this.type]),
+        : this.type?.label ?? game.i18n.localize(CONFIG.Item.typeLabels[this.parent.type]),
       description: await TextEditor.enrichHTML(description, {
         async: true, relativeTo: this.parent, rollData: this.parent.getRollData(), ...enrichmentOptions
       })

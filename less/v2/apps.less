@@ -654,6 +654,13 @@
       border-radius: 4px;
       pointer-events: none;
     }
+
+    &.item-tooltip {
+      .description {
+        overflow-y: scroll;
+        &.overflowing { mask-image: unset; }
+      }
+    }
   }
 
   &.item-tooltip {
@@ -746,6 +753,20 @@
       line-height: normal;
       max-height: 450px;
       overflow: hidden;
+      padding-right: .5rem;
+      margin-right: -.5rem;
+      scrollbar-width: thin;
+      scrollbar-color: var(--dnd5e-color-gold) transparent;
+
+      &::-webkit-scrollbar-track {
+        box-shadow: none;
+        border-radius: 0;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        border: none;
+        background: var(--dnd5e-color-gold);
+      }
 
       table { display: none; }
 
