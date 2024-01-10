@@ -13,4 +13,21 @@ export default class RuleJournalPageData extends foundry.abstract.DataModel {
       type: new StringField({blank: false, initial: "rule", label: "DND5E.Rule.Type"})
     };
   }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Render a rich tooltip for this page.
+   * @returns {string}
+   */
+  async richTooltip() {
+    const context = {
+      page: this.parent,
+      type: CONFIG.DND5E.ruleTypes[this.type].label,
+      content: await TextEditor.enrichHTML(this.tooltip || this.parent.text.content, {
+        secrets: false, async: true, relativeTo: this.parent
+      })
+    };
+    return await renderTemplate("systems/dnd5e/templates/journal/page-rule-tooltip.hbs", context);
+  }
 }

@@ -625,17 +625,35 @@
 /*  Tooltips                          */
 /* ---------------------------------- */
 
+:is(#tooltip, .locked-tooltip) {
+  &.item-tooltip, &:has(.reference-tooltip) {
+    font-family: var(--dnd5e-font-roboto);
+    font-size: var(--font-size-13);
+    color: var(--color-text-dark-primary);
+    border-radius: 5px;
+    background: url("ui/texture-gray1.webp") no-repeat top left,
+      url("ui/texture-gray2.webp") no-repeat bottom right,
+      var(--dnd5e-color-parchment);
+    box-shadow: 0 0 16px var(--dnd5e-shadow-45);
+    border: 2px solid var(--dnd5e-color-gold);
+
+    .content { padding: 0 .5rem .25rem; }
+  }
+}
+
+.locked-tooltip {
+  &.item-tooltip::after, &:has(.reference-tooltip)::after {
+    content: "";
+    position: absolute;
+    inset: 1px;
+    border: 1px solid var(--dnd5e-color-gold);
+    border-radius: 4px;
+    pointer-events: none;
+  }
+}
+
 :is(#tooltip, .locked-tooltip).item-tooltip {
   width: 300px;
-  font-family: var(--dnd5e-font-roboto);
-  font-size: var(--font-size-13);
-  color: var(--color-text-dark-primary);
-  border-radius: 5px;
-  background: url("ui/texture-gray1.webp") no-repeat top left,
-    url("ui/texture-gray2.webp") no-repeat bottom right,
-    var(--dnd5e-color-parchment);
-  box-shadow: 0 0 16px var(--dnd5e-shadow-45);
-  border: 2px solid var(--dnd5e-color-gold);
 
   .loading {
     display: flex;
@@ -644,8 +662,6 @@
     font-size: var(--font-size-24);
     opacity: .25;
   }
-
-  .content { padding: 0 .5rem .25rem; }
 
   .header {
     display: flex;
@@ -747,11 +763,24 @@
   }
 }
 
-.locked-tooltip.item-tooltip::after {
-  content: "";
-  position: absolute;
-  inset: 1px;
-  border: 1px solid var(--dnd5e-color-gold);
-  border-radius: 4px;
-  pointer-events: none;
+:is(#tooltip, .locked-tooltip):has(.reference-tooltip) {
+  max-width: 450px;
+
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-block: 6px 10px;
+
+    h1 {
+      margin: 0;
+      border: none;
+      font-family: var(--dnd5e-font-roboto-slab);
+      font-size: 1.5em;
+      font-weight: bold;
+    }
+  }
+  .description {
+    text-align: start;
+  }
 }

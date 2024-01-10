@@ -60,12 +60,22 @@ export default class Tooltips5e {
   /**
    * Handle tooltip activation.
    * @protected
+   * @returns {Promise}
    */
   async _onTooltipActivate() {
-    const uuid = this.tooltip.querySelector(".loading[data-uuid]")?.dataset.uuid;
-    const doc = await fromUuid(uuid);
-    if ( doc instanceof dnd5e.documents.Item5e ) return this._onHoverItem(doc);
-    if ( doc instanceof dnd5e.documents.Actor5e ) return this._onHoverActor(doc);
+    // General content links
+    if ( game.tooltip.element?.classList.contains("content-link") ) {
+      const doc = await fromUuid(game.tooltip.element.dataset.uuid);
+      return this._onHoverContentLink(doc);
+    }
+
+    // Sheet-specific tooltips
+    else {
+      const uuid = this.tooltip.querySelector(".loading[data-uuid]")?.dataset.uuid;
+      const doc = await fromUuid(uuid);
+      if ( doc instanceof dnd5e.documents.Item5e ) return this._onHoverItem(doc);
+      if ( doc instanceof dnd5e.documents.Actor5e ) return this._onHoverActor(doc);
+    }
   }
 
   /* -------------------------------------------- */
@@ -97,16 +107,29 @@ export default class Tooltips5e {
   /* -------------------------------------------- */
 
   /**
+   * Handle hovering over a content link and showing rich tooltips if possible.
+   * @param {Document} doc  The document linked by the content link.
+   * @protected
+   */
+  async _onHoverContentLink(doc) {
+    if ( !doc.system?.richTooltip ) return;
+    this.tooltip.innerHTML = await doc.system.richTooltip();
+    requestAnimationFrame(() => this._positionItemTooltip());
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Position a tooltip after rendering.
    * @protected
    */
   _positionItemTooltip() {
-    const tooltip = this.tooltip
+    const tooltip = this.tooltip;
     const { clientWidth, clientHeight } = document.documentElement;
     const tooltipBox = tooltip.getBoundingClientRect();
     const targetBox = game.tooltip.element.getBoundingClientRect();
     const maxTop = clientHeight - tooltipBox.height;
-    const top = Math.min(maxTop, targetBox.bottom - (targetBox.height + tooltipBox.height) / 2);
+    const top = Math.min(maxTop, targetBox.bottom - ((targetBox.height + tooltipBox.height) / 2));
     const left = targetBox.left - tooltipBox.width - game.tooltip.constructor.TOOLTIP_MARGIN_PX;
     tooltip.style.top = `${Math.max(0, top)}px`;
     tooltip.style.right = "";

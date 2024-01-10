@@ -2812,15 +2812,19 @@ preLocalize("sourceBooks", { sort: true });
 let _enrichmentLookup;
 Object.defineProperty(DND5E, "enrichmentLookup", {
   get() {
-    const s = value => value?.slugify().replaceAll("-", "");
+    const slugify = value => value?.slugify().replaceAll("-", "");
     if ( !_enrichmentLookup ) {
       _enrichmentLookup = {
         abilities: foundry.utils.deepClone(DND5E.abilities),
         skills: foundry.utils.deepClone(DND5E.skills),
         tools: foundry.utils.deepClone(DND5E.toolIds)
       };
-      Object.entries(DND5E.abilities).forEach(([k, a]) => _enrichmentLookup.abilities[s(a.fullKey)] = { ...a, key: k });
-      Object.entries(DND5E.skills).forEach(([k, s]) => _enrichmentLookup.skills[s(s.fullKey)] = { ...s, key: k });
+      Object.entries(DND5E.abilities).forEach(([k, a]) =>
+        _enrichmentLookup.abilities[slugify(a.fullKey)] = { ...a, key: k }
+      );
+      Object.entries(DND5E.skills).forEach(([k, s]) =>
+        _enrichmentLookup.skills[slugify(s.fullKey)] = { ...s, key: k }
+      );
     }
     return _enrichmentLookup;
   },
