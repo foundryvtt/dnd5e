@@ -2450,7 +2450,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * @returns {Promise<Item5e|null>}
    */
   static async createDialog(data={}, { parent=null, pack=null, types=null, ...options }) {
-    types ??= game.documentTypes[this.documentName].filter(t => t !== CONST.BASE_DOCUMENT_TYPE);
+    types ??= game.documentTypes[this.documentName].filter(t => (t !== CONST.BASE_DOCUMENT_TYPE) && (t !== "backpack"));
     if ( !types.length ) return null;
     const collection = parent ? null : pack ? game.packs.get(pack) : game.collections.get(this.documentName);
     const folders = collection?._formatFolderSelectOptions() ?? [];
