@@ -1109,10 +1109,19 @@ DND5E.featureTypes = {
   },
   feat: {
     label: "DND5E.Feature.Feat"
+  },
+  supernaturalGift: {
+    label: "DND5E.Feature.SupernaturalGift",
+    subtypes: {
+      blessing: "DND5E.Feature.SupernaturalGiftBlessing",
+      charm: "DND5E.Feature.SupernaturalGiftCharm",
+      epicBoon: "DND5E.Feature.SupernaturalGiftEpicBoon"
+    }
   }
 };
 preLocalize("featureTypes", { key: "label" });
 preLocalize("featureTypes.class.subtypes", { sort: true });
+preLocalize("featureTypes.supernaturalGift.subtypes", { sort: true });
 
 /* -------------------------------------------- */
 
