@@ -1,9 +1,9 @@
 <section class="dnd5e2 reference-tooltip content">
-    <hgroup class="header">
+    <section class="header">
         <h1>{{ page.name }}</h1>
-        <p class="pills">
-            <span class="pill {{ page.system.type }}">{{ type }}</span>
-        </p>
-    </hgroup>
+        <ul class="pills">
+            <li class="pill {{ page.system.type }}">{{ type }}</li>
+        </ul>
+    </section>
     <section class="description">{{{ content }}}</section>
 </section>
