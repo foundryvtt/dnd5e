@@ -643,6 +643,16 @@
     border: 2px solid var(--dnd5e-color-gold);
 
     .content { padding: 0 .5rem .25rem; }
+    .description {
+      h1, h2, h3 {
+        border: none;
+        font-family: var(--dnd5e-font-roboto-slab);
+        font-weight: bold;
+      }
+
+      h1 { font-size: 1.5em; }
+      h2 { font-size: 1.4em; }
+    }
   }
 
   &.locked-tooltip {
@@ -770,15 +780,6 @@
 
       table { display: none; }
 
-      h1, h2, h3 {
-        border: none;
-        font-family: var(--dnd5e-font-roboto-slab);
-        font-weight: bold;
-      }
-
-      h2 { font-size: 1.4em; }
-      h1 { font-size: 1.5em; }
-
       &.overflowing { mask-image: linear-gradient(to bottom, black 90%, transparent); }
       &:empty { margin-bottom: .5rem; }
     }
@@ -806,9 +807,6 @@
         font-size: 1.5em;
         font-weight: bold;
       }
-    }
-    .description {
-      text-align: start;
     }
   }
 }

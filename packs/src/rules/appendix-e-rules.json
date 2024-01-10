@@ -127,7 +127,7 @@
       "image": {},
       "text": {
         "format": 1,
-        "content": "<p>While traveling, a group of adventurers can move at a normal, fast, or slow pace, as shown on the Travel Pace table. The table states how far the party can move in a period of time and whether the pace has any effect. A fast pace makes characters less perceptive, while a slow pace makes it possible to sneak around and to search an area more carefully.</p><p><strong>Forced March. </strong>The Travel Pace table assumes that characters travel for 8 hours in day. They can push on beyond that limit, at the risk of exhaustion.</p><p>For each additional hour of travel beyond 8 hours, the characters cover the distance shown in the Hour column for their pace, and each character must make a Constitution saving throw at the end of the hour. The DC is 10 + 1 for each hour past 8 hours. On a failed saving throw, a character suffers one level of @UUID[Compendium.dnd5e.rules.w7eitkpD7QQTB6j0.JournalEntryPage.cspWveykstnu3Zcv]{Exhaustion}.</p><p><strong>Mounts and Vehicles. </strong>For short spans of time (up to an hour), many animals move much faster than humanoids. A mounted character can ride at a gallop for about an hour, covering twice the usual distance for a fast pace. If fresh mounts are available every 8 to 10 miles, characters can cover larger distances at this pace, but this is very rare except in densely populated areas.</p><p>Characters in wagons, carriages, or other land vehicles choose a pace as normal. Characters in a waterborne vessel are limited to the speed of the vessel, and they don’t suffer penalties for a fast pace or gain benefits from a slow pace. Depending on the vessel and the size of the crew, ships might be able to travel for up to 24 hours per day.</p><p>Certain special mounts, such as a pegasus or griffon, or special vehicles, such as a @Compendium[dnd5e.items.TjWk2mpNXjDdfIDM]{Carpet of Flying}, allow you to travel more swiftly.</p><table border=\"0\"><caption>Travel Pace</caption><thead><tr><td rowspan=\"2\">Pace</td><td colspan=\"4\">Distance Traveled per . . .</td></tr><tr><td>Minute</td><td>Hour</td><td>Day</td><td>Effect</td></tr></thead><tbody><tr><td>Fast</td><td>400 feet</td><td>4 miles</td><td>30 miles</td><td>- 5 penalty to passive Wisdom (Perception) scores</td></tr><tr><td>Normal</td><td>300 feet</td><td>3 miles</td><td>24 miles</td><td>—</td></tr><tr><td>Slow</td><td>200 feet</td><td>2 miles</td><td>18 miles</td><td>Able to use stealth</td></tr></tbody></table>",
+        "content": "<p>While traveling, a group of adventurers can move at a normal, fast, or slow pace, as shown on the Travel Pace table. The table states how far the party can move in a period of time and whether the pace has any effect. A fast pace makes characters less perceptive, while a slow pace makes it possible to sneak around and to search an area more carefully.</p><p>@Embed[.uQWQpRKQ1kWhuvjZ inline]</p><p>@Embed[.D8K6ansoz1q6P37s inline]</p><table border=\"0\"><caption>Travel Pace</caption><thead><tr><td rowspan=\"2\">Pace</td><td colspan=\"4\">Distance Traveled per . . .</td></tr><tr><td>Minute</td><td>Hour</td><td>Day</td><td>Effect</td></tr></thead><tbody><tr><td>Fast</td><td>400 feet</td><td>4 miles</td><td>30 miles</td><td>- 5 penalty to passive Wisdom (Perception) scores</td></tr><tr><td>Normal</td><td>300 feet</td><td>3 miles</td><td>24 miles</td><td>—</td></tr><tr><td>Slow</td><td>200 feet</td><td>2 miles</td><td>18 miles</td><td>Able to use stealth</td></tr></tbody></table>",
         "markdown": ""
       },
       "video": {
@@ -148,14 +148,14 @@
         "systemVersion": "3.0.0",
         "coreVersion": "11.315",
         "createdTime": 1704060245611,
-        "modifiedTime": 1704060323126,
+        "modifiedTime": 1704927684631,
         "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!journal.pages!NizgRXLNUqtdlC1s.eFAISahBloR2X8MX"
     },
     {
       "sort": 4200000,
-      "name": "Difficult Terain",
+      "name": "Difficult Terrain",
       "type": "rule",
       "_id": "hFW5BR2yHHwwgurD",
       "title": {
@@ -186,7 +186,7 @@
         "systemVersion": "3.0.0",
         "coreVersion": "11.315",
         "createdTime": 1704060338740,
-        "modifiedTime": 1704071687037,
+        "modifiedTime": 1704926042400,
         "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!journal.pages!NizgRXLNUqtdlC1s.hFW5BR2yHHwwgurD"
@@ -554,7 +554,7 @@
       },
       "src": null,
       "system": {
-        "tooltip": "<p><strong>Dim light</strong>, also called shadows, creates a @UUID[.MAxtfJyvJV7EpzWN]{lightly obscured} area. An area of dim light is usually a boundary between a source of bright light, such as a torch, and surrounding darkness. The soft light of twilight and dawn also counts as dim light. A particularly brilliant full moon might bathe the land in dim light.</p>",
+        "tooltip": "<p><strong>Dim light</strong>, also called shadows, creates a &amp;Reference[lightly obscured]{lightly obscured} area. An area of dim light is usually a boundary between a source of bright light, such as a torch, and surrounding darkness. The soft light of twilight and dawn also counts as dim light. A particularly brilliant full moon might bathe the land in dim light.</p>",
         "type": "rule"
       },
       "ownership": {
@@ -566,7 +566,7 @@
         "systemVersion": "3.0.0",
         "coreVersion": "11.315",
         "createdTime": 1704060607320,
-        "modifiedTime": 1704071687037,
+        "modifiedTime": 1704922503120,
         "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!journal.pages!NizgRXLNUqtdlC1s.n1Ocpbyhr6HhgbCG"
@@ -668,7 +668,7 @@
       },
       "src": null,
       "system": {
-        "tooltip": "<p>Many creatures in fantasy gaming worlds, especially those that dwell underground, have darkvision. Within a specified range, a creature with darkvision can see in &amp;Reference[darkness] as if the darkness were &amp;Reference[dimLight], so areas of darkness are only lightly obscured as far as that creature is concerned. However, the creature can't discern color in darkness, only shades of gray.</p>",
+        "tooltip": "<p>Many creatures in fantasy gaming worlds, especially those that dwell underground, have darkvision. Within a specified range, a creature with darkvision can see in &amp;Reference[darkness] as if the darkness were &amp;Reference[dim light], so areas of darkness are only lightly obscured as far as that creature is concerned. However, the creature can't discern color in darkness, only shades of gray.</p>",
         "type": "rule"
       },
       "ownership": {
@@ -680,7 +680,7 @@
         "systemVersion": "3.0.0",
         "coreVersion": "11.315",
         "createdTime": 1704060798757,
-        "modifiedTime": 1704071687037,
+        "modifiedTime": 1704922450595,
         "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!journal.pages!NizgRXLNUqtdlC1s.ldmA1PbnEGVkmE11"
@@ -697,7 +697,7 @@
       "image": {},
       "text": {
         "format": 1,
-        "content": "<p>A creature with truesight can, out to a specific range, see in normal and magical darkness, see &amp;Reference[condition=Invisible] creatures and objects, automatically detect visual illusions and succeed on saving throws against them, and perceives the original form of a shapechanger or a creature that is transformed by magic. Furthermore, the creature can see into the Ethereal Plane.</p>",
+        "content": "<p>A creature with truesight can, out to a specific range, see in normal and magical darkness, see &amp;Reference[condition=invisible] creatures and objects, automatically detect visual illusions and succeed on saving throws against them, and perceives the original form of a shapechanger or a creature that is transformed by magic. Furthermore, the creature can see into the Ethereal Plane.</p>",
         "markdown": ""
       },
       "video": {
@@ -718,7 +718,7 @@
         "systemVersion": "3.0.0",
         "coreVersion": "11.315",
         "createdTime": 1704060803410,
-        "modifiedTime": 1704071687037,
+        "modifiedTime": 1704922460161,
         "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!journal.pages!NizgRXLNUqtdlC1s.kNa8rJFbtaTM3Rmk"
@@ -1124,7 +1124,7 @@
       },
       "src": null,
       "system": {
-        "tooltip": "",
+        "tooltip": "<p>Your carrying capacity is your Strength score multiplied by 15. This is the weight (in pounds) that you can carry, which is high enough that most characters don't usually have to worry about it.</p>",
         "type": "rule"
       },
       "ownership": {
@@ -1136,7 +1136,7 @@
         "systemVersion": "3.0.0",
         "coreVersion": "11.315",
         "createdTime": 1704069873781,
-        "modifiedTime": 1704070459172,
+        "modifiedTime": 1704922336982,
         "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!journal.pages!NizgRXLNUqtdlC1s.1PnjDBKbQJIVyc2t"
@@ -1162,7 +1162,7 @@
       },
       "src": null,
       "system": {
-        "tooltip": "",
+        "tooltip": "<p>You can push, drag, or lift a weight in pounds up to twice your carrying capacity (or 30 times your Strength score). While pushing or dragging weight in excess of your carrying capacity, your speed drops to 5 feet.</p>",
         "type": "rule"
       },
       "ownership": {
@@ -1174,7 +1174,7 @@
         "systemVersion": "3.0.0",
         "coreVersion": "11.315",
         "createdTime": 1704069884870,
-        "modifiedTime": 1704070459172,
+        "modifiedTime": 1704922342903,
         "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!journal.pages!NizgRXLNUqtdlC1s.Hni8DjqLzoqsVjb6"
@@ -1200,7 +1200,7 @@
       },
       "src": null,
       "system": {
-        "tooltip": "",
+        "tooltip": "<p>Larger creatures can bear more weight, whereas Tiny creatures can carry less. For each size category above Medium, double the creature's carrying capacity and the amount it can push, drag, or lift. For a Tiny creature, halve these weights.</p>",
         "type": "rule"
       },
       "ownership": {
@@ -1212,7 +1212,7 @@
         "systemVersion": "3.0.0",
         "coreVersion": "11.315",
         "createdTime": 1704069892160,
-        "modifiedTime": 1704070459172,
+        "modifiedTime": 1704922347874,
         "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!journal.pages!NizgRXLNUqtdlC1s.oONHbeR1vPpfU1aT"
@@ -2736,6 +2736,3160 @@
         "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!journal.pages!NizgRXLNUqtdlC1s.4R5H8iIsdFQTsj3X"
+    },
+    {
+      "sort": 6300000,
+      "name": "Surprise",
+      "type": "rule",
+      "_id": "YmOt8HderKveA19K",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>A band of adventurers sneaks up on a bandit camp, springing from the trees to attack them. A gelatinous cube glides down a dungeon passage, unnoticed by the adventurers until the cube engulfs one of them. In these situations, one side of the battle gains surprise over the other.</p><p>The GM determines who might be surprised. If neither side tries to be stealthy, they automatically notice each other. Otherwise, the GM compares the Dexterity (Stealth) checks of anyone hiding with the passive Wisdom (Perception) score of each creature on the opposing side. Any character or monster that doesn't notice a threat is surprised at the start of the encounter.</p><p>If you're surprised, you can't move or take an action on your first turn of the combat, and you can't take a reaction until that turn ends. A member of a group can be surprised even if the other members aren't.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1704922716239,
+        "modifiedTime": 1704922739954,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.YmOt8HderKveA19K"
+    },
+    {
+      "sort": 6400000,
+      "name": "Initiative",
+      "type": "rule",
+      "_id": "RcwElV4GAcVXKWxo",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>Initiative determines the order of turns during combat. When combat starts, every participant makes a Dexterity check to determine their place in the initiative order. The GM makes one roll for an entire group of identical creatures, so each member of the group acts at the same time.</p><p>The GM ranks the combatants in order from the one with the highest Dexterity check total to the one with the lowest. This is the order (called the initiative order) in which they act during each round. The initiative order remains the same from round to round.</p><p>If a tie occurs, the GM decides the order among tied GM-controlled creatures, and the players decide the order among their tied characters. The GM can decide the order if the tie is between a monster and a player character. Optionally, the GM can have the tied characters and monsters each roll a d20 to determine the order, highest roll going first.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1704922789290,
+        "modifiedTime": 1704922794772,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.RcwElV4GAcVXKWxo"
+    },
+    {
+      "sort": 6500000,
+      "name": "Your Turn",
+      "type": "rule",
+      "_id": "iP1hYT7zzOyrzS7j",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>On your turn, you can move a distance up to your speed and take one action. You decide whether to move first or take your action first. Your speed— sometimes called your walking speed—is noted on your character sheet.</p><p>The most common actions you can take are described in the @UUID[Compendium.dnd5e.rules.JournalEntry.6PfYpwxkdQkyS6b7.JournalEntryPage.t0XXMmv014K4vV3p]{Actions in Combat} section. Many class features and other abilities provide additional options for your action.</p><p>The @UUID[Compendium.dnd5e.rules.JournalEntry.6PfYpwxkdQkyS6b7.JournalEntryPage.SfmusW5B5jOaR0vd]{Movement and Position} section gives the rules for your move.</p><p>You can forgo moving, taking an action, or doing anything at all on your turn. If you can't decide what to do on your turn, consider taking the Dodge or Ready action, as described in @UUID[Compendium.dnd5e.rules.JournalEntry.6PfYpwxkdQkyS6b7.JournalEntryPage.t0XXMmv014K4vV3p]{Actions in Combat}.</p><h3>Bonus Actions</h3><p>@Embed[.2fu2CXsDg8gQmGGw inline]</p><h3>Other Activity on Your Turn</h3><p>@Embed[.JEZp7QApVjyNgqrQ inline]</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1704922821370,
+        "modifiedTime": 1704922944182,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.iP1hYT7zzOyrzS7j"
+    },
+    {
+      "sort": 6600000,
+      "name": "Bonus Actions",
+      "type": "rule",
+      "_id": "2fu2CXsDg8gQmGGw",
+      "title": {
+        "show": true,
+        "level": 2
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>Various class features, spells, and other abilities let you take an additional action on your turn called a bonus action. The @Compendium[dnd5e.classfeatures.01pcLg6PRu5zGrsb]{Cunning Action} feature, for example, allows a rogue to take a bonus action. You can take a bonus action only when a special ability, spell, or other feature of the game states that you can do something as a bonus action. You otherwise don't have a bonus action to take.</p><p>You can take only one bonus action on your turn, so you must choose which bonus action to use when you have more than one available.</p><p>You choose when to take a bonus action during your turn, unless the bonus action's timing is specified, and anything that deprives you of your ability to take actions also prevents you from taking a bonus action.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1704922827338,
+        "modifiedTime": 1704922861660,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.2fu2CXsDg8gQmGGw"
+    },
+    {
+      "sort": 6700000,
+      "name": "Other Activity on Your Turn",
+      "type": "rule",
+      "_id": "JEZp7QApVjyNgqrQ",
+      "title": {
+        "show": true,
+        "level": 2
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>Your turn can include a variety of flourishes that require neither your action nor your move.</p><p>You can communicate however you are able, through brief utterances and gestures, as you take your turn.</p><p>You can also interact with one object or feature of the environment for free, during either your move or your action. For example, you could open a door during your move as you stride toward a foe, or you could draw your weapon as part of the same action you use to attack.</p><p>If you want to interact with a second object, you need to use your action. Some magic items and other special objects always require an action to use, as stated in their descriptions.</p><p>The GM might require you to use an action for any of these activities when it needs special care or when it presents an unusual obstacle. For instance, the GM could reasonably expect you to use an action to open a stuck door or turn a crank to lower a drawbridge.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1704922836060,
+        "modifiedTime": 1704922881632,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.JEZp7QApVjyNgqrQ"
+    },
+    {
+      "sort": 6800000,
+      "name": "Reactions",
+      "type": "rule",
+      "_id": "2VqLyxMyMxgXe2wC",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>Certain special abilities, spells, and situations allow you to take a special action called a reaction. A reaction is an instant response to a trigger of some kind, which can occur on your turn or on someone else's. The opportunity attack is the most common type of reaction.</p><p>When you take a reaction, you can't take another one until the start of your next turn. If the reaction interrupts another creature's turn, that creature can continue its turn right after the reaction.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1704922840961,
+        "modifiedTime": 1704922848430,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.2VqLyxMyMxgXe2wC"
+    },
+    {
+      "sort": 6900000,
+      "name": "Breaking Up Your Move",
+      "type": "rule",
+      "_id": "wAMCoSlvbZH5G7lS",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>You can break up your movement on your turn, using some of your speed before and after your action. For example, if you have a speed of 30 feet, you can move 10 feet, take your action, and then move 20 feet.</p><h3>Moving between Attacks</h3><p>@Embed[.JxboWb0XHo2GwqD0 inline]</p><h3>Using Different Speeds</h3><p>@Embed[.dc3D4WGYznFa3HCM inline]</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1704923041178,
+        "modifiedTime": 1704923106761,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.wAMCoSlvbZH5G7lS"
+    },
+    {
+      "sort": 7000000,
+      "name": "Moving Between Attacks",
+      "type": "rule",
+      "_id": "JxboWb0XHo2GwqD0",
+      "title": {
+        "show": true,
+        "level": 2
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>If you take an action that includes more than one weapon attack, you can break up your movement even further by moving between those attacks. For example, a fighter who can make two attacks with the Extra Attack feature and who has a speed of 25 feet could move 10 feet, make an attack, move 15 feet, and then attack again.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1704923065477,
+        "modifiedTime": 1704923071811,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.JxboWb0XHo2GwqD0"
+    },
+    {
+      "sort": 7100000,
+      "name": "Using Different Speeds",
+      "type": "rule",
+      "_id": "dc3D4WGYznFa3HCM",
+      "title": {
+        "show": true,
+        "level": 2
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>If you have more than one speed, such as your walking speed and a flying speed, you can switch back and forth between your speeds during your move. Whenever you switch, subtract the distance you’ve already moved from the new speed. The result determines how much farther you can move. If the result is 0 or less, you can’t use the new speed during the current move.</p><p>For example, if you have a speed of 30 and a flying speed of 60 because a wizard cast the fly spell on you, you could fly 20 feet, then walk 10 feet, and then leap into the air to fly 30 feet more.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1704923079216,
+        "modifiedTime": 1704923089084,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.dc3D4WGYznFa3HCM"
+    },
+    {
+      "sort": 7200000,
+      "name": "Difficult Terrain",
+      "type": "rule",
+      "_id": "6tqz947qO8vPyxvD",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>Combat rarely takes place in bare rooms or on featureless plains. Boulder-strewn caverns, briarchoked forests, treacherous staircases—the setting of a typical fight contains difficult terrain.</p><p>Every foot of movement in difficult terrain costs 1 extra foot. This rule is true even if multiple things in a space count as difficult terrain.</p><p>Low furniture, rubble, undergrowth, steep stairs, snow, and shallow bogs are examples of difficult terrain. The space of another creature, whether hostile or not, also counts as difficult terrain.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "<p>Every foot of movement in difficult terrain costs 1 extra foot. This rule is true even if multiple things in a space count as difficult terrain.</p><p>Low furniture, rubble, undergrowth, steep stairs, snow, and shallow bogs are examples of difficult terrain. The space of another creature, whether hostile or not, also counts as difficult terrain.</p>",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1704923117819,
+        "modifiedTime": 1704923134344,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.6tqz947qO8vPyxvD"
+    },
+    {
+      "sort": 7300000,
+      "name": "Being Prone",
+      "type": "rule",
+      "_id": "bV8akkBdVUUG21CO",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>Combatants often find themselves lying on the ground, either because they are knocked down or because they throw themselves down. In the game, they are &amp;Reference[Prone], a condition described in @UUID[Compendium.dnd5e.rules.w7eitkpD7QQTB6j0]{Appendix A: Conditions}.</p><p>@Embed[.hwTLpAtSS5OqQsI1 inline]</p><p>@Embed[.VWG9qe8PUNtS28Pw inline]</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1704923151885,
+        "modifiedTime": 1704927130889,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.bV8akkBdVUUG21CO"
+    },
+    {
+      "sort": 7400000,
+      "name": "Crawling",
+      "type": "rule",
+      "_id": "VWG9qe8PUNtS28Pw",
+      "title": {
+        "show": true,
+        "level": 3
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>To move while prone, you must <strong>crawl</strong> or use magic such as teleportation. Every foot of movement while crawling costs 1 extra foot. Crawling 1 foot in difficult terrain, therefore, costs 3 feet of movement.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1704923190498,
+        "modifiedTime": 1704923276594,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.VWG9qe8PUNtS28Pw"
+    },
+    {
+      "sort": 7350000,
+      "name": "Dropping Prone & Standing Up",
+      "type": "rule",
+      "_id": "hwTLpAtSS5OqQsI1",
+      "title": {
+        "show": true,
+        "level": 3
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>You can <strong>drop prone</strong> without using any of your speed. <strong>Standing up</strong> takes more effort; doing so costs an amount of movement equal to half your speed.</p><p>For example, if your speed is 30 feet, you must spend 15 feet of movement to stand up. You can’t stand up if you don’t have enough movement left or if your speed is 0.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1704923215882,
+        "modifiedTime": 1704923232647,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.hwTLpAtSS5OqQsI1"
+    },
+    {
+      "sort": 7500000,
+      "name": "Interacting with Objects Around You",
+      "type": "rule",
+      "_id": "tVyTG8DkzYAi7wxc",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>Here are a few examples of the sorts of thing you can do in tandem with your movement and action:</p><ul><li>draw or sheathe a sword</li><li>open or close a door</li><li>withdraw a potion from your backpack</li><li>pick up a dropped axe</li><li>take a bauble from a table</li><li>remove a ring from your finger</li><li>stuff some food into your mouth</li><li>plant a banner in the ground</li><li>fish a few coins from your belt pouch</li><li>drink all the ale in a flagon</li><li>throw a lever or a switch</li><li>pull a torch from a sconce</li><li>take a book from a shelf you can reach</li><li>extinguish a small flame</li><li>don a mask</li><li>pull the hood of your cloak up and over your head</li><li>put your ear to a door</li><li>kick a small stone</li><li>turn a key in a lock</li><li>tap the floor with a 10-foot pole</li><li>hand an item to another character</li></ul>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1704923352036,
+        "modifiedTime": 1704923363183,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.tVyTG8DkzYAi7wxc"
+    },
+    {
+      "sort": 7600000,
+      "name": "Moving Around Other Creatures",
+      "type": "rule",
+      "_id": "9ZWCknaXCOdhyOrX",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>You can move through a nonhostile creature’s space. In contrast, you can move through a hostile creature’s space only if the creature is at least two sizes larger or smaller than you. Remember that another creature’s space is difficult terrain for you.</p><p>Whether a creature is a friend or an enemy, you can’t willingly end your move in its space.</p><p>If you leave a hostile creature’s reach during your move, you provoke an opportunity attack.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1704923390612,
+        "modifiedTime": 1704923625467,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.9ZWCknaXCOdhyOrX"
+    },
+    {
+      "sort": 7700000,
+      "name": "Flying Movement",
+      "type": "rule",
+      "_id": "0B1fxfmw0a48tPsc",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>Flying creatures enjoy many benefits of mobility, but they must also deal with the danger of falling. If a flying creature is knocked prone, has its speed reduced to 0, or is otherwise deprived of the ability to move, the creature falls, unless it has the ability to hover or it is being held aloft by magic, such as by the @Compendium[dnd5e.spells.yfbK8gZqESlaoY5t]{Fly} spell.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1704923394847,
+        "modifiedTime": 1704923618107,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.0B1fxfmw0a48tPsc"
+    },
+    {
+      "sort": 7800000,
+      "name": "Creature Size",
+      "type": "rule",
+      "_id": "HWHRQVBVG7K0RVVW",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "markdown": "",
+        "content": "<p>Each creature takes up a different amount of space. The Size Categories table shows how much space a creature of a particular size controls in combat. Objects sometimes use the same size categories.</p><table border=\"0\"><caption><h4>Size Categories</h4></caption><thead><tr><td>Size</td><td>Space</td></tr></thead><tbody><tr><td>Tiny</td><td>2½ by 2½ ft.</td></tr><tr><td>Small</td><td>5 by 5 ft.</td></tr><tr><td>Medium</td><td>5 by 5 ft.</td></tr><tr><td>Large</td><td>10 by 10 ft.</td></tr><tr><td>Huge</td><td>15 by 15 ft.</td></tr><tr><td>Gargantuan</td><td>20 by 20 ft. or larger</td></tr></tbody></table><h3>Space</h3><p>@Embed[.WIA5bs3P45PmO3OS inline]</p><h3>Squeezing into a Smaller Space</h3><p>@Embed[.wKtOwagDAiNfVoPS inline]</p>"
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "<p>Each creature takes up a different amount of space. The Size Categories table shows how much space a creature of a particular size controls in combat. Objects sometimes use the same size categories.</p><table border=\"0\"><caption><h4>Size Categories</h4></caption><thead><tr><td>Size</td><td>Space</td></tr></thead><tbody><tr><td>Tiny</td><td>2½ by 2½ ft.</td></tr><tr><td>Small</td><td>5 by 5 ft.</td></tr><tr><td>Medium</td><td>5 by 5 ft.</td></tr><tr><td>Large</td><td>10 by 10 ft.</td></tr><tr><td>Huge</td><td>15 by 15 ft.</td></tr><tr><td>Gargantuan</td><td>20 by 20 ft. or larger</td></tr></tbody></table>",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1704923401266,
+        "modifiedTime": 1704923496962,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.HWHRQVBVG7K0RVVW"
+    },
+    {
+      "sort": 7900000,
+      "name": "Space",
+      "type": "rule",
+      "_id": "WIA5bs3P45PmO3OS",
+      "title": {
+        "show": true,
+        "level": 2
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>A creature’s space is the area in feet that it effectively controls in combat, not an expression of its physical dimensions. A typical Medium creature isn’t 5 feet wide, for example, but it does control a space that wide. If a Medium hobgoblin stands in a 5- foot-wide doorway, other creatures can’t get through unless the hobgoblin lets them.</p><p>A creature’s space also reflects the area it needs to fight effectively. For that reason, there’s a limit to the number of creatures that can surround another creature in combat. Assuming Medium combatants, eight creatures can fit in a 5-foot radius around another one.</p><p>Because larger creatures take up more space, fewer of them can surround a creature. If five Large creatures crowd around a Medium or smaller one, there’s little room for anyone else. In contrast, as many as twenty Medium creatures can surround a Gargantuan one.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1704923403753,
+        "modifiedTime": 1704923446581,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.WIA5bs3P45PmO3OS"
+    },
+    {
+      "sort": 8000000,
+      "name": "Squeezing into a Smaller Space",
+      "type": "rule",
+      "_id": "wKtOwagDAiNfVoPS",
+      "title": {
+        "show": true,
+        "level": 2
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>A creature can squeeze through a space that is large enough for a creature one size smaller than it. Thus, a Large creature can squeeze through a passage that’s only 5 feet wide. While squeezing through a space, a creature must spend 1 extra foot for every foot it moves there, and it has disadvantage on attack rolls and Dexterity saving throws. Attack rolls against the creature have advantage while it’s in the smaller space.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1704923415580,
+        "modifiedTime": 1704923441836,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.wKtOwagDAiNfVoPS"
+    },
+    {
+      "sort": 8100000,
+      "name": "Attack",
+      "type": "rule",
+      "_id": "u4GQCzoBig20yRLj",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>The most common action to take in combat is the Attack action, whether you are swinging a sword, firing an arrow from a bow, or brawling with your fists.</p><p>With this action, you make one melee or ranged attack. See the @UUID[Compendium.dnd5e.rules.JournalEntry.6PfYpwxkdQkyS6b7.JournalEntryPage.twd4zj7m1n9sBaVG]{Making an Attack} section for the rules that govern attacks.</p><p>Certain features, such as the @Compendium[dnd5e.classfeatures.q9g1MLXuLZyxjQMg]{Extra Attack} feature of the fighter, allow you to make more than one attack with this action.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1704923693131,
+        "modifiedTime": 1704923829094,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.u4GQCzoBig20yRLj"
+    },
+    {
+      "sort": 8200000,
+      "name": "Cast a Spell",
+      "type": "rule",
+      "_id": "GLwN36E4WXn3Cp4Z",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>Spellcasters such as wizards and clerics, as well as many monsters, have access to spells and can use them to great effect in combat. Each spell has a casting time, which specifies whether the caster must use an action, a reaction, minutes, or even hours to cast the spell. Casting a spell is, therefore, not necessarily an action. Most spells do have a casting time of 1 action, so a spellcaster often uses his or her action in combat to cast such a spell.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1704923703900,
+        "modifiedTime": 1704923814529,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.GLwN36E4WXn3Cp4Z"
+    },
+    {
+      "sort": 8300000,
+      "name": "Dash",
+      "type": "rule",
+      "_id": "Jqn0MEvq6fduYNo6",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>When you take the Dash action, you gain extra movement for the current turn. The increase equals your speed, after applying any modifiers. With a speed of 30 feet, for example, you can move up to 60 feet on your turn if you dash.</p><p>Any increase or decrease to your speed changes this additional movement by the same amount. If your speed of 30 feet is reduced to 15 feet, for instance, you can move up to 30 feet this turn if you dash.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1704923709615,
+        "modifiedTime": 1704923810563,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.Jqn0MEvq6fduYNo6"
+    },
+    {
+      "sort": 8400000,
+      "name": "Disengage",
+      "type": "rule",
+      "_id": "ZOPRfI48NyjoloEF",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>If you take the Disengage action, your movement doesn’t provoke opportunity attacks for the rest of the turn.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1704923716170,
+        "modifiedTime": 1704923807688,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.ZOPRfI48NyjoloEF"
+    },
+    {
+      "sort": 8500000,
+      "name": "Dodge",
+      "type": "rule",
+      "_id": "V1BkwK2HQrtEfa4d",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>When you take the Dodge action, you focus entirely on avoiding attacks. Until the start of your next turn, any attack roll made against you has disadvantage if you can see the attacker, and you make Dexterity saving throws with advantage. You lose this benefit if you are &amp;Reference[Incapacitated] (as explained in @UUID[Compendium.dnd5e.rules.w7eitkpD7QQTB6j0]{Appendix A: Conditions}) or if your speed drops to 0.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1704923720519,
+        "modifiedTime": 1704927033543,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.V1BkwK2HQrtEfa4d"
+    },
+    {
+      "sort": 8600000,
+      "name": "Help",
+      "type": "rule",
+      "_id": "KnrD3u2AnQfmtOWj",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>You can lend your aid to another creature in the completion of a task. When you take the Help action, the creature you aid gains advantage on the next ability check it makes to perform the task you are helping with, provided that it makes the check before the start of your next turn.</p><p>Alternatively, you can aid a friendly creature in attacking a creature within 5 feet of you. You feint, distract the target, or in some other way team up to make your ally’s attack more effective. If your ally attacks the target before your next turn, the first attack roll is made with advantage.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1704923724519,
+        "modifiedTime": 1704923782544,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.KnrD3u2AnQfmtOWj"
+    },
+    {
+      "sort": 8700000,
+      "name": "Hide",
+      "type": "rule",
+      "_id": "BXlHhE4ZoiFwiXLK",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>When you take the Hide action, you make a Dexterity (Stealth) check in an attempt to hide, following the rules for hiding. If you succeed, you gain certain benefits, as described in the @UUID[Compendium.dnd5e.rules.JournalEntry.6PfYpwxkdQkyS6b7.JournalEntryPage.twd4zj7m1n9sBaVG#unseen-attackers-and-targets]{Unseen Attackers and Targets} section.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1704923727938,
+        "modifiedTime": 1704923769537,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.BXlHhE4ZoiFwiXLK"
+    },
+    {
+      "sort": 8800000,
+      "name": "Ready",
+      "type": "rule",
+      "_id": "8xJzZVelP2AmQGfU",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>Sometimes you want to get the jump on a foe or wait for a particular circumstance before you act. To do so, you can take the Ready action on your turn, which lets you act using your reaction before the start of your next turn.</p><p>First, you decide what perceivable circumstance will trigger your reaction. Then, you choose the action you will take in response to that trigger, or you choose to move up to your speed in response to it. Examples include “If the cultist steps on the trapdoor, I’ll pull the lever that opens it,” and “If the goblin steps next to me, I move away.”</p><p>When the trigger occurs, you can either take your reaction right after the trigger finishes or ignore the trigger. Remember that you can take only one reaction per round.</p><p>When you ready a spell, you cast it as normal but hold its energy, which you release with your reaction when the trigger occurs. To be readied, a spell must have a casting time of 1 action, and holding onto the spell’s magic requires concentration. If your concentration is broken, the spell dissipates without taking effect. For example, if you are concentrating on the @Compendium[dnd5e.spells.UJJu9c2UvCzVljiP]{Web} spell and ready @Compendium[dnd5e.spells.41JIhpDyM9Anm7cs]{Magic Missile}, your Web spell ends, and if you take damage before you release Magic Missile with your reaction, your concentration might be broken.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1704923732277,
+        "modifiedTime": 1704923755483,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.8xJzZVelP2AmQGfU"
+    },
+    {
+      "sort": 8900000,
+      "name": "Search",
+      "type": "rule",
+      "_id": "5cn1ZTLgQq95vfZx",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>When you take the Search action, you devote your attention to finding something. Depending on the nature of your search, the GM might have you make a Wisdom (Perception) check or an Intelligence (Investigation) check.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1704923736355,
+        "modifiedTime": 1704923750809,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.5cn1ZTLgQq95vfZx"
+    },
+    {
+      "sort": 9000000,
+      "name": "Use an Object",
+      "type": "rule",
+      "_id": "ljqhJx8Qxu2ivo69",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>You normally interact with an object while doing something else, such as when you draw a sword as part of an attack. When an object requires your action for its use, you take the Use an Object action. This action is also useful when you want to interact with more than one object on your turn.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1704923741589,
+        "modifiedTime": 1704923747062,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.ljqhJx8Qxu2ivo69"
+    },
+    {
+      "sort": 9100000,
+      "name": "Attack Rolls",
+      "type": "rule",
+      "_id": "5wkqEqhbBD5kDeE7",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>When you make an attack, your attack roll determines whether the attack hits or misses. To make an attack roll, roll a d20 and add the appropriate modifiers. If the total of the roll plus modifiers equals or exceeds the target's Armor Class (AC), the attack hits. The AC of a character is determined at character creation, whereas the AC of a monster is in its stat block.</p><h3>Modifiers to the Roll</h3><p>@Embed[.6WJRdQlCExNsBZMz inline]</p><h3>Rolling 1 or 20</h3><p>@Embed[.Lw9aodFTlNhXLpyx inline]</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1704923940557,
+        "modifiedTime": 1704924353528,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.5wkqEqhbBD5kDeE7"
+    },
+    {
+      "sort": 9200000,
+      "name": "Modifiers to the Roll",
+      "type": "rule",
+      "_id": "6WJRdQlCExNsBZMz",
+      "title": {
+        "show": true,
+        "level": 2
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>When a character makes an attack roll, the two most common modifiers to the roll are an ability modifier and the character's proficiency bonus. When a monster makes an attack roll, it uses whatever modifier is provided in its stat block.</p><p><strong>Ability Modifier. </strong>The ability modifier used for a melee weapon attack is Strength, and the ability modifier used for a ranged weapon attack is Dexterity. Weapons that have the finesse or thrown property break this rule.</p><p>Some spells also require an attack roll. The ability modifier used for a spell attack depends on the spellcasting ability of the spellcaster.</p><p><strong>Proficiency Bonus.</strong> You add your proficiency bonus to your attack roll when you attack using a weapon with which you have proficiency, as well as when you attack with a spell.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1704923946540,
+        "modifiedTime": 1704924331586,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.6WJRdQlCExNsBZMz"
+    },
+    {
+      "sort": 9300000,
+      "name": "Rolling 1 or 20",
+      "type": "rule",
+      "_id": "Lw9aodFTlNhXLpyx",
+      "title": {
+        "show": true,
+        "level": 2
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>Sometimes fate blesses or curses a combatant, causing the novice to hit and the veteran to miss.</p><p>If the d20 roll for an attack is a 20, the attack hits regardless of any modifiers or the target's AC. This is called a critical hit.</p><p>If the d20 roll for an attack is a 1, the attack misses regardless of any modifiers or the target's AC.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1704923956767,
+        "modifiedTime": 1704924334545,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.Lw9aodFTlNhXLpyx"
+    },
+    {
+      "sort": 9400000,
+      "name": "Unseen Attackers and Targets",
+      "type": "rule",
+      "_id": "5ZJNwEPlsGurecg5",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>Combatants often try to escape their foes' notice by hiding, casting the @Compendium[dnd5e.spells.1N8dDMMgZ1h1YJ3B]{invisibility} spell, or lurking in darkness.</p><p>When you attack a target that you can't see, you have disadvantage on the attack roll. This is true whether you're guessing the target's location or you're targeting a creature you can hear but not see. If the target isn't in the location you targeted, you automatically miss, but the GM typically just says that the attack missed, not whether you guessed the target's location correctly.</p><p>When a creature can't see you, you have advantage on attack rolls against it. If you are hidden—both unseen and unheard—when you make an attack, you give away your location when the attack hits or misses.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1704923972744,
+        "modifiedTime": 1704924316260,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.5ZJNwEPlsGurecg5"
+    },
+    {
+      "sort": 9500000,
+      "name": "Ranged Attacks",
+      "type": "rule",
+      "_id": "S9aclVOCbusLE3kC",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>When you make a ranged attack, you fire a bow or a crossbow, hurl a handaxe, or otherwise send projectiles to strike a foe at a distance. A monster might shoot spines from its tail. Many spells also involve making a ranged attack.</p><h3>Range</h3><p>@Embed[.HjKXuB8ndjcqOds7 inline]</p><h3>Ranged Attacks in Close Combat</h3><p>@Embed[.qEZvxW0NM7ixSQP5 inline]</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "<p>When you make a ranged attack, you fire a bow or a crossbow, hurl a handaxe, or otherwise send projectiles to strike a foe at a distance. A monster might shoot spines from its tail. Many spells also involve making a ranged attack.</p>",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1704923979796,
+        "modifiedTime": 1704926985044,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.S9aclVOCbusLE3kC"
+    },
+    {
+      "sort": 9600000,
+      "name": "Range",
+      "type": "rule",
+      "_id": "HjKXuB8ndjcqOds7",
+      "title": {
+        "show": true,
+        "level": 2
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>You can make ranged attacks only against targets within a specified range.</p><p>If a ranged attack, such as one made with a spell, has a single range, you can't attack a target beyond this range.</p><p>Some ranged attacks, such as those made with a longbow or a shortbow, have two ranges. The smaller number is the normal range, and the larger number is the long range. Your attack roll has disadvantage when your target is beyond normal range, and you can't attack a target beyond the long range.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1704923982537,
+        "modifiedTime": 1704924286722,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.HjKXuB8ndjcqOds7"
+    },
+    {
+      "sort": 9700000,
+      "name": "Ranged Attacks in Close Combat",
+      "type": "rule",
+      "_id": "qEZvxW0NM7ixSQP5",
+      "title": {
+        "show": true,
+        "level": 2
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>Aiming a ranged attack is more difficult when a foe is next to you. When you make a ranged attack with a weapon, a spell, or some other means, you have disadvantage on the attack roll if you are within 5 feet of a hostile creature who can see you and who isn't incapacitated.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1704923990805,
+        "modifiedTime": 1704924289290,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.qEZvxW0NM7ixSQP5"
+    },
+    {
+      "sort": 9800000,
+      "name": "Melee Attacks",
+      "type": "rule",
+      "_id": "GTk6emvzNxl8Oosl",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>Used in hand-to-hand combat, a melee attack allows you to attack a foe within your reach. A melee attack typically uses a handheld weapon such as a sword, a warhammer, or an axe. A typical monster makes a melee attack when it strikes with its claws, horns, teeth, tentacles, or other body part. A few spells also involve making a melee attack.</p><p>@Embed[.hgZ5ZN4B3y7tmFlt inline]</p><p>@Embed[.xJjJ4lhymAYXAOvO inline]</p><h3>Opportunity Attacks</h3><p>@Embed[.zeU0NyCyP10lkLg3 inline]</p><h3>Two-Weapon Fighting</h3><p>@Embed[.FQTS08uH74A6psL2 inline]</p><h3>Grappling</h3><p>@Embed[.Sl4bniSPSbyrakM2 inline]</p><hr /><h4>Contests in Combat</h4><p>Battle often involves pitting your prowess against that of your foe. Such a challenge is represented by a contest. This section includes the most common contests that require an action in combat: grappling and shoving a creature. The GM can use these contests as models for improvising others.</p><hr /><h3>Shoving a Creature</h3><p>@Embed[.hrdqMF8hRXJdNzJx inline]</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "<p>Used in hand-to-hand combat, a melee attack allows you to attack a foe within your reach. A melee attack typically uses a handheld weapon such as a sword, a warhammer, or an axe. A typical monster makes a melee attack when it strikes with its claws, horns, teeth, tentacles, or other body part. A few spells also involve making a melee attack.</p><p>@Embed[.hgZ5ZN4B3y7tmFlt inline]</p><p>@Embed[.xJjJ4lhymAYXAOvO inline]</p>",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1704923996559,
+        "modifiedTime": 1704926953608,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.GTk6emvzNxl8Oosl"
+    },
+    {
+      "sort": 9900000,
+      "name": "Opportunity Attacks",
+      "type": "rule",
+      "_id": "zeU0NyCyP10lkLg3",
+      "title": {
+        "show": true,
+        "level": 2
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>In a fight, everyone is constantly watching for a chance to strike an enemy who is fleeing or passing by. Such a strike is called an opportunity attack.</p><p>You can make an opportunity attack when a hostile creature that you can see moves out of your reach. To make the opportunity attack, you use your reaction to make one melee attack against the provoking creature. The attack occurs right before the creature leaves your reach.</p><p>You can avoid provoking an opportunity attack by taking the Disengage action. You also don't provoke an opportunity attack when you teleport or when someone or something moves you without using your movement, action, or reaction. For example, you don't provoke an opportunity attack if an explosion hurls you out of a foe's reach or if gravity causes you to fall past an enemy.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1704924004374,
+        "modifiedTime": 1704924177432,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.zeU0NyCyP10lkLg3"
+    },
+    {
+      "sort": 10000000,
+      "name": "Two-Weapon Fighting",
+      "type": "rule",
+      "_id": "FQTS08uH74A6psL2",
+      "title": {
+        "show": true,
+        "level": 2
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>When you take the Attack action and attack with a light melee weapon that you're holding in one hand, you can use a bonus action to attack with a different light melee weapon that you're holding in the other hand. You don't add your ability modifier to the damage of the bonus attack, unless that modifier is negative.</p><p>If either weapon has the thrown property, you can throw the weapon, instead of making a melee attack with it.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1704924010542,
+        "modifiedTime": 1704924171765,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.FQTS08uH74A6psL2"
+    },
+    {
+      "sort": 10100000,
+      "name": "Grappling",
+      "type": "rule",
+      "_id": "Sl4bniSPSbyrakM2",
+      "title": {
+        "show": true,
+        "level": 2
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>When you want to grab a creature or wrestle with it, you can use the Attack action to make a special melee attack, a grapple. If you're able to make multiple attacks with the Attack action, this attack replaces one of them.</p><p>The target of your grapple must be no more than one size larger than you and must be within your reach. Using at least one free hand, you try to seize the target by making a grapple check instead of an attack roll: a Strength (Athletics) check contested by the target's Strength (Athletics) or Dexterity (Acrobatics) check (the target chooses the ability to use). If you succeed, you subject the target to the grappled condition (see appendix PH-A). The condition specifies the things that end it, and you can release the target whenever you like (no action required).</p><p>@Embed[.2TZKy9YbMN3ZY3h8 inline]</p><p>@Embed[.x5bUdhAD7u5Bt2rg inline]</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1704924016076,
+        "modifiedTime": 1704926907994,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.Sl4bniSPSbyrakM2"
+    },
+    {
+      "sort": 10200000,
+      "name": "Shoving a Creature",
+      "type": "rule",
+      "_id": "hrdqMF8hRXJdNzJx",
+      "title": {
+        "show": true,
+        "level": 2
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>Using the Attack action, you can make a special melee attack to shove a creature, either to knock it prone or push it away from you. If you're able to make multiple attacks with the Attack action, this attack replaces one of them.</p><p>The target must be no more than one size larger than you and must be within your reach. Instead of making an attack roll, you make a Strength (Athletics) check contested by the target's Strength (Athletics) or Dexterity (Acrobatics) check (the target chooses the ability to use). If you win the contest, you either knock the target prone or push it 5 feet away from you.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1704924042988,
+        "modifiedTime": 1704924077832,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.hrdqMF8hRXJdNzJx"
+    },
+    {
+      "sort": 10150000,
+      "name": "Escaping a Grapple",
+      "type": "rule",
+      "_id": "2TZKy9YbMN3ZY3h8",
+      "title": {
+        "show": true,
+        "level": 3
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p><strong>Escaping a Grapple. </strong>A grappled creature can use its action to escape. To do so, it must succeed on a Strength (Athletics) or Dexterity (Acrobatics) check contested by your Strength (Athletics) check.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "<p>A grappled creature can use its action to escape. To do so, it must succeed on a Strength (Athletics) or Dexterity (Acrobatics) check contested by your Strength (Athletics) check.</p>",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1704924089268,
+        "modifiedTime": 1704924126652,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.2TZKy9YbMN3ZY3h8"
+    },
+    {
+      "sort": 10175000,
+      "name": "Moving a Grappled Creature",
+      "type": "rule",
+      "_id": "x5bUdhAD7u5Bt2rg",
+      "title": {
+        "show": true,
+        "level": 3
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p><strong>Moving a Grappled Creature. </strong>When you move, you can drag or carry the grappled creature with you, but your speed is halved, unless the creature is two or more sizes smaller than you.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "<p>When you move, you can drag or carry the grappled creature with you, but your speed is halved, unless the creature is two or more sizes smaller than you.</p>",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1704924100769,
+        "modifiedTime": 1704924128266,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.x5bUdhAD7u5Bt2rg"
+    },
+    {
+      "sort": 9850000,
+      "name": "Reach",
+      "type": "rule",
+      "_id": "hgZ5ZN4B3y7tmFlt",
+      "title": {
+        "show": true,
+        "level": 3
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>Most creatures have a 5-foot <strong>reach</strong> and can thus attack targets within 5 feet of them when making a melee attack. Certain creatures (typically those larger than Medium) have melee attacks with a greater reach than 5 feet, as noted in their descriptions.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1704924187635,
+        "modifiedTime": 1704924206237,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.hgZ5ZN4B3y7tmFlt"
+    },
+    {
+      "sort": 9875000,
+      "name": "Unarmed Strike",
+      "type": "rule",
+      "_id": "xJjJ4lhymAYXAOvO",
+      "title": {
+        "show": true,
+        "level": 3
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>Instead of using a weapon to make a melee weapon attack, you can use an <strong>unarmed strike</strong>: a punch, kick, head-butt, or similar forceful blow (none of which count as weapons). On a hit, an unarmed strike deals bludgeoning damage equal to 1 + your Strength modifier. You are proficient with your unarmed strikes.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1704924191093,
+        "modifiedTime": 1704924207776,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.xJjJ4lhymAYXAOvO"
+    },
+    {
+      "sort": 10300000,
+      "name": "Cover",
+      "type": "rule",
+      "_id": "W7f7PcRubNUMIq2S",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>Walls, trees, creatures, and other obstacles can provide cover during combat, making a target more difficult to harm. A target can benefit from cover only when an attack or other effect originates on the opposite side of the cover.</p><p>There are three degrees of cover. If a target is behind multiple sources of cover, only the most protective degree of cover applies; the degrees aren't added together. For example, if a target is behind a creature that gives half cover and a tree trunk that gives three-quarters cover, the target has three-quarters cover.</p><p>@Embed[.hv0J61IAfofuhy3Q inline]</p><p>@Embed[.zAMStUjUrPV10dFm inline]</p><p>@Embed[.BKUAxXuPEzxiEOeL inline]</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1704924405683,
+        "modifiedTime": 1704924475944,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.W7f7PcRubNUMIq2S"
+    },
+    {
+      "sort": 10400000,
+      "name": "Half Cover",
+      "type": "rule",
+      "_id": "hv0J61IAfofuhy3Q",
+      "title": {
+        "show": true,
+        "level": 3
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>A target with<strong> half cover </strong>has a +2 bonus to AC and Dexterity saving throws. A target has half cover if an obstacle blocks at least half of its body. The obstacle might be a low wall, a large piece of furniture, a narrow tree trunk, or a creature, whether that creature is an enemy or a friend.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1704924409315,
+        "modifiedTime": 1704924441588,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.hv0J61IAfofuhy3Q"
+    },
+    {
+      "sort": 10500000,
+      "name": "Three-Quarters Cover",
+      "type": "rule",
+      "_id": "zAMStUjUrPV10dFm",
+      "title": {
+        "show": true,
+        "level": 3
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>A target with <strong>three-quarters cover</strong> has a +5 bonus to AC and Dexterity saving throws. A target has three-quarters cover if about three-quarters of it is covered by an obstacle. The obstacle might be a portcullis, an arrow slit, or a thick tree trunk.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1704924414927,
+        "modifiedTime": 1704924447896,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.zAMStUjUrPV10dFm"
+    },
+    {
+      "sort": 10600000,
+      "name": "Total Cover",
+      "type": "rule",
+      "_id": "BKUAxXuPEzxiEOeL",
+      "title": {
+        "show": true,
+        "level": 3
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>A target with <strong>total cover </strong>can't be targeted directly by an attack or a spell, although some spells can reach such a target by including it in an area of effect. A target has total cover if it is completely concealed by an obstacle.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1704924423094,
+        "modifiedTime": 1704924450678,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.BKUAxXuPEzxiEOeL"
+    },
+    {
+      "sort": 10700000,
+      "name": "Hit Points",
+      "type": "rule",
+      "_id": "PFbzoMBviI2DD9QP",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>Hit points represent a combination of physical and mental durability, the will to live, and luck. Creatures with more hit points are more difficult to kill. Those with fewer hit points are more fragile.</p><p>A creature’s current hit points (usually just called hit points) can be any number from the creature’s hit point maximum down to 0. This number changes frequently as a creature takes damage or receives healing.</p><p>Whenever a creature takes damage, that damage is subtracted from its hit points. The loss of hit points has no effect on a creature’s capabilities until the creature drops to 0 hit points.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1704924549304,
+        "modifiedTime": 1704925301714,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.PFbzoMBviI2DD9QP"
+    },
+    {
+      "sort": 10800000,
+      "name": "Damage Rolls",
+      "type": "rule",
+      "_id": "hd26AqKrCqtcQBWy",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>Each weapon, spell, and harmful monster ability specifies the damage it deals. You roll the damage die or dice, add any modifiers, and apply the damage to your target. Magic weapons, special abilities, and other factors can grant a bonus to damage. With a penalty, it is possible to deal 0 damage, but never negative damage.</p><p>When attacking with a <strong>weapon</strong>, you add your ability modifier—the same modifier used for the attack roll—to the damage. A <strong>spell</strong> tells you which dice to roll for damage and whether to add any modifiers.</p><p>If a spell or other effect deals damage to <strong>more than one target </strong>at the same time, roll the damage once for all of them. For example, when a wizard casts @Compendium[dnd5e.spells.ztgcdrWPshKRpFd0]{Fireball} or a cleric casts @Compendium[dnd5e.spells.5e1xTohkzqFqbYH4]{Flame Strike}, the spell’s damage is rolled once for all creatures caught in the blast.</p><h3>Critical Hits</h3><p>@Embed[.gFL1VhSEljL1zvje inline]</p><h3>Damage Types</h3><p>@Embed[.jVOgf7DNEhkzYNIe inline]</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "<p>Each weapon, spell, and harmful monster ability specifies the damage it deals. You roll the damage die or dice, add any modifiers, and apply the damage to your target. Magic weapons, special abilities, and other factors can grant a bonus to damage. With a penalty, it is possible to deal 0 damage, but never negative damage.</p><p>When attacking with a <strong>weapon</strong>, you add your ability modifier—the same modifier used for the attack roll—to the damage. A <strong>spell</strong> tells you which dice to roll for damage and whether to add any modifiers.</p><p>If a spell or other effect deals damage to <strong>more than one target </strong>at the same time, roll the damage once for all of them. For example, when a wizard casts @Compendium[dnd5e.spells.ztgcdrWPshKRpFd0]{Fireball} or a cleric casts @Compendium[dnd5e.spells.5e1xTohkzqFqbYH4]{Flame Strike}, the spell’s damage is rolled once for all creatures caught in the blast.</p>",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1704924556933,
+        "modifiedTime": 1704926546712,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.hd26AqKrCqtcQBWy"
+    },
+    {
+      "sort": 10900000,
+      "name": "Critical Hits",
+      "type": "rule",
+      "_id": "gFL1VhSEljL1zvje",
+      "title": {
+        "show": true,
+        "level": 2
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>When you score a critical hit, you get to roll extra dice for the attack’s damage against the target. Roll all of the attack’s damage dice twice and add them together. Then add any relevant modifiers as normal. To speed up play, you can roll all the damage dice at once.</p><p>For example, if you score a critical hit with a dagger, roll 2d4 for the damage, rather than 1d4, and then add your relevant ability modifier. If the attack involves other damage dice, such as from the rogue’s Sneak Attack feature, you roll those dice twice as well.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1704924561630,
+        "modifiedTime": 1704925237896,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.gFL1VhSEljL1zvje"
+    },
+    {
+      "sort": 11000000,
+      "name": "Damage Types",
+      "type": "rule",
+      "_id": "jVOgf7DNEhkzYNIe",
+      "title": {
+        "show": true,
+        "level": 2
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>Different attacks, damaging spells, and other harmful effects deal different types of damage. Damage types have no rules of their own, but other rules, such as damage resistance, rely on the types.</p><p>The damage types follow, with examples to help a GM assign a damage type to a new effect.</p><p>@Embed[.IQhbKRPe1vCPdh8v inline]</p><p>@Embed[.39LFrlef94JIYO8m inline]</p><p>@Embed[.4xsFUooHDEdfhw6g inline]</p><p>@Embed[.f1S66aQJi4PmOng6 inline]</p><p>@Embed[.eFTWzngD8dKWQuUR inline]</p><p>@Embed[.9SaxFJ9bM3SutaMC inline]</p><p>@Embed[.klOVUV5G1U7iaKoG inline]</p><p>@Embed[.95agSnEGTdAmKhyC inline]</p><p>@Embed[.k5wOYXdWPzcWwds1 inline]</p><p>@Embed[.YIKbDv4zYqbE5teJ inline]</p><p>@Embed[.5tcK9buXWDOw8yHH inline]</p><p>@Embed[.sz2XKQ5lgsdPEJOa inline]</p><p>@Embed[.iqsmMHk7FSpiNkQy inline]</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1704924572267,
+        "modifiedTime": 1704925479691,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.jVOgf7DNEhkzYNIe"
+    },
+    {
+      "sort": 11100000,
+      "name": "Acid",
+      "type": "rule",
+      "_id": "IQhbKRPe1vCPdh8v",
+      "title": {
+        "show": true,
+        "level": 3
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p><strong>Acid. </strong>The corrosive spray of a black dragon’s breath and the dissolving enzymes secreted by a black pudding deal acid damage.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "<p>The corrosive spray of a black dragon’s breath and the dissolving enzymes secreted by a black pudding deal acid damage.</p>",
+        "type": "damage"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1704924577347,
+        "modifiedTime": 1704925193362,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.IQhbKRPe1vCPdh8v"
+    },
+    {
+      "sort": 11200000,
+      "name": "Bludgeoning",
+      "type": "rule",
+      "_id": "39LFrlef94JIYO8m",
+      "title": {
+        "show": true,
+        "level": 3
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p><strong>Bludgeoning. </strong>Blunt force attacks—hammers, falling, constriction, and the like—deal bludgeoning damage.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "<p>Blunt force attacks—hammers, falling, constriction, and the like—deal bludgeoning damage.</p>",
+        "type": "damage"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1704924714346,
+        "modifiedTime": 1704925187932,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.39LFrlef94JIYO8m"
+    },
+    {
+      "sort": 11300000,
+      "name": "Cold",
+      "type": "rule",
+      "_id": "4xsFUooHDEdfhw6g",
+      "title": {
+        "show": true,
+        "level": 3
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p><strong>Cold. </strong>The infernal chill radiating from an ice devil’s spear and the frigid blast of a white dragon’s breath deal cold damage.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "<p>The infernal chill radiating from an ice devil’s spear and the frigid blast of a white dragon’s breath deal cold damage.</p>",
+        "type": "damage"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1704924719440,
+        "modifiedTime": 1704925182352,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.4xsFUooHDEdfhw6g"
+    },
+    {
+      "sort": 11400000,
+      "name": "Fire",
+      "type": "rule",
+      "_id": "f1S66aQJi4PmOng6",
+      "title": {
+        "show": true,
+        "level": 3
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p><strong>Fire. </strong>Red dragons breathe fire, and many spells conjure flames to deal fire damage.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "<p>Red dragons breathe fire, and many spells conjure flames to deal fire damage.</p>",
+        "type": "damage"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1704924731291,
+        "modifiedTime": 1704925176675,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.f1S66aQJi4PmOng6"
+    },
+    {
+      "sort": 11500000,
+      "name": "Force",
+      "type": "rule",
+      "_id": "eFTWzngD8dKWQuUR",
+      "title": {
+        "show": true,
+        "level": 3
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p><strong>Force. </strong>Force is pure magical energy focused into a damaging form. Most effects that deal force damage are spells, including magic missile and spiritual weapon.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "<p>Force is pure magical energy focused into a damaging form. Most effects that deal force damage are spells, including magic missile and spiritual weapon.</p>",
+        "type": "damage"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1704924739645,
+        "modifiedTime": 1704925171631,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.eFTWzngD8dKWQuUR"
+    },
+    {
+      "sort": 11600000,
+      "name": "Lightning",
+      "type": "rule",
+      "_id": "9SaxFJ9bM3SutaMC",
+      "title": {
+        "show": true,
+        "level": 3
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p><strong>Lightning. </strong>A lightning bolt spell and a blue dragon’s breath deal lightning damage.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "<p>A lightning bolt spell and a blue dragon’s breath deal lightning damage.</p>",
+        "type": "damage"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1704924745905,
+        "modifiedTime": 1704925165456,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.9SaxFJ9bM3SutaMC"
+    },
+    {
+      "sort": 11700000,
+      "name": "Necrotic",
+      "type": "rule",
+      "_id": "klOVUV5G1U7iaKoG",
+      "title": {
+        "show": true,
+        "level": 3
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p><strong>Necrotic. </strong>Necrotic damage, dealt by certain undead and a spell such as chill touch, withers matter and even the soul.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "<p>Necrotic damage, dealt by certain undead and a spell such as chill touch, withers matter and even the soul.</p>",
+        "type": "damage"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1704924751347,
+        "modifiedTime": 1704925159725,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.klOVUV5G1U7iaKoG"
+    },
+    {
+      "sort": 11800000,
+      "name": "Piercing",
+      "type": "rule",
+      "_id": "95agSnEGTdAmKhyC",
+      "title": {
+        "show": true,
+        "level": 3
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p><strong>Piercing.</strong> Puncturing and impaling attacks, including spears and monsters’ bites, deal piercing damage.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "<p>Puncturing and impaling attacks, including spears and monsters’ bites, deal piercing damage.</p>",
+        "type": "damage"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1704924758945,
+        "modifiedTime": 1704925153251,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.95agSnEGTdAmKhyC"
+    },
+    {
+      "sort": 12000000,
+      "name": "Psychic",
+      "type": "rule",
+      "_id": "YIKbDv4zYqbE5teJ",
+      "title": {
+        "show": true,
+        "level": 3
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p><strong>Psychic. </strong>Mental abilities such as a mind flayer’s psionic blast deal psychic damage.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "<p>Mental abilities such as a mind flayer’s psionic blast deal psychic damage.</p>",
+        "type": "damage"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1704924774206,
+        "modifiedTime": 1704925122464,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.YIKbDv4zYqbE5teJ"
+    },
+    {
+      "sort": 12100000,
+      "name": "Radiant",
+      "type": "rule",
+      "_id": "5tcK9buXWDOw8yHH",
+      "title": {
+        "show": true,
+        "level": 3
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p><strong>Radiant. </strong>Radiant damage, dealt by a cleric’s flame strike spell or an angel’s smiting weapon, sears the flesh like fire and overloads the spirit with power.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "<p>Radiant damage, dealt by a cleric’s flame strike spell or an angel’s smiting weapon, sears the flesh like fire and overloads the spirit with power.</p>",
+        "type": "damage"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1704924779576,
+        "modifiedTime": 1704925117813,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.5tcK9buXWDOw8yHH"
+    },
+    {
+      "sort": 12200000,
+      "name": "Slashing",
+      "type": "rule",
+      "_id": "sz2XKQ5lgsdPEJOa",
+      "title": {
+        "show": true,
+        "level": 3
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p><strong>Slashing. </strong>Swords, axes, and monsters’ claws deal slashing damage.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "<p>Swords, axes, and monsters’ claws deal slashing damage.</p>",
+        "type": "damage"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1704924788922,
+        "modifiedTime": 1704925107414,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.sz2XKQ5lgsdPEJOa"
+    },
+    {
+      "sort": 12300000,
+      "name": "Thunder",
+      "type": "rule",
+      "_id": "iqsmMHk7FSpiNkQy",
+      "title": {
+        "show": true,
+        "level": 3
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p><strong>Thunder. </strong>A concussive burst of sound, such as the effect of the thunderwave spell, deals thunder damage.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "<p>A concussive burst of sound, such as the effect of the thunderwave spell, deals thunder damage.</p>",
+        "type": "damage"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1704924796347,
+        "modifiedTime": 1704925098765,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.iqsmMHk7FSpiNkQy"
+    },
+    {
+      "sort": 12400000,
+      "name": "Damage Resistance and Vulnerability",
+      "type": "rule",
+      "_id": "v0WE18nT5SJO8Ft7",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>Some creatures and objects are exceedingly difficult or unusually easy to hurt with certain types of damage.</p><p>If a creature or an object has <strong>resistance</strong> to a damage type, damage of that type is halved against it. If a creature or an object has <strong>vulnerability</strong> to a damage type, damage of that type is doubled against it.</p><p>Resistance and then vulnerability are applied after all other modifiers to damage. For example, a creature has resistance to bludgeoning damage and is hit by an attack that deals 25 bludgeoning damage. The creature is also within a magical aura that reduces all damage by 5. The 25 damage is first reduced by 5 and then halved, so the creature takes 10 damage.</p><p>Multiple instances of resistance or vulnerability that affect the same damage type count as only one instance. For example, if a creature has resistance to fire damage as well as resistance to all nonmagical damage, the damage of a nonmagical fire is reduced by half against the creature, not reduced by threequarters.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1704924811356,
+        "modifiedTime": 1704925080031,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.v0WE18nT5SJO8Ft7"
+    },
+    {
+      "sort": 12500000,
+      "name": "Healing",
+      "type": "rule",
+      "_id": "ICketFqbFslqKiX9",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>Unless it results in death, damage isn’t permanent. Even death is reversible through powerful magic. Rest can restore a creature’s hit points, and magical methods such as a @Compendium[dnd5e.spells.uUWb1wZgtMou0TVP]{Cure Wounds} spell or a @Compendium[dnd5e.items.ytlsBjYsZ7OBSEBs]{Potion of Healing} can remove damage in an instant.</p><p>When a creature receives healing of any kind, hit points regained are added to its current hit points. A creature’s hit points can’t exceed its hit point maximum, so any hit points regained in excess of this number are lost. For example, a druid grants a ranger 8 hit points of healing. If the ranger has 14 current hit points and has a hit point maximum of 20, the ranger regains 6 hit points from the druid, not 8.</p><p>A creature that has died can’t regain hit points until magic such as the @Compendium[dnd5e.spells.LmRHHMtplpxr9fX6]{Revivify} spell has restored it to life.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1704924816886,
+        "modifiedTime": 1704925071615,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.ICketFqbFslqKiX9"
+    },
+    {
+      "sort": 12600000,
+      "name": "Dropping to 0 Hit Points",
+      "type": "rule",
+      "_id": "avHnt4RvYYnzhDDj",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>When you drop to 0 hit points, you either die outright or fall unconscious, as explained in the following sections.</p><h3>Instant Death</h3><p>@Embed[.8BG05mA0mEzwmrHU inline]</p><h3>Falling Unconscious</h3><p>@Embed[.UZWKjrHZF5pEEqbA inline]</p><h3>Death Saving Throws</h3><p>@Embed[.JL8LePEJQYFdNuLL inline]</p><h3>Stabilizing a Creature</h3><p>@Embed[.r1CgZXLcqFop6Dlx inline]</p><h3>Monsters and Death</h3><p>@Embed[.DyAsc0h0MqTSHzz4 inline]</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1704924822621,
+        "modifiedTime": 1704925064800,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.avHnt4RvYYnzhDDj"
+    },
+    {
+      "sort": 12700000,
+      "name": "Instant Death",
+      "type": "rule",
+      "_id": "8BG05mA0mEzwmrHU",
+      "title": {
+        "show": true,
+        "level": 2
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>Massive damage can kill you instantly. When damage reduces you to 0 hit points and there is damage remaining, you die if the remaining damage equals or exceeds your hit point maximum.</p><p>For example, a cleric with a maximum of 12 hit points currently has 6 hit points. If she takes 18 damage from an attack, she is reduced to 0 hit points, but 12 damage remains. Because the remaining damage equals her hit point maximum, the cleric dies.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1704924828472,
+        "modifiedTime": 1704925017260,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.8BG05mA0mEzwmrHU"
+    },
+    {
+      "sort": 12800000,
+      "name": "Falling Unconscious",
+      "type": "rule",
+      "_id": "UZWKjrHZF5pEEqbA",
+      "title": {
+        "show": true,
+        "level": 2
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>If damage reduces you to 0 hit points and fails to kill you, you fall &amp;Reference[Unconscious]. This unconsciousness ends if you regain any hit points.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1704924833849,
+        "modifiedTime": 1704926484718,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.UZWKjrHZF5pEEqbA"
+    },
+    {
+      "sort": 12900000,
+      "name": "Death Saving Throws",
+      "type": "rule",
+      "_id": "JL8LePEJQYFdNuLL",
+      "title": {
+        "show": true,
+        "level": 2
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>Whenever you start your turn with 0 hit points, you must make a special saving throw, called a death saving throw, to determine whether you creep closer to death or hang onto life. Unlike other saving throws, this one isn’t tied to any ability score. You are in the hands of fate now, aided only by spells and features that improve your chances of succeeding on a saving throw.</p><p>Roll a d20. If the roll is 10 or higher, you succeed. Otherwise, you fail. A success or failure has no effect by itself. On your third success, you become stable (see below). On your third failure, you die. The successes and failures don’t need to be consecutive; keep track of both until you collect three of a kind. The number of both is reset to zero when you regain any hit points or become stable.</p><p>@Embed[.fwJOeFAJn8DkwebA inline]</p><p>@Embed[.2umstdyMUtPaf6vB inline]</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1704924843370,
+        "modifiedTime": 1704924985358,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.JL8LePEJQYFdNuLL"
+    },
+    {
+      "sort": 13000000,
+      "name": "Rolling 1 or 20",
+      "type": "rule",
+      "_id": "fwJOeFAJn8DkwebA",
+      "title": {
+        "show": true,
+        "level": 3
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p><strong>Rolling 1 or 20. </strong>When you make a death saving throw and roll a 1 on the d20, it counts as two failures. If you roll a 20 on the d20, you regain 1 hit point.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "<p>When you make a death saving throw and roll a 1 on the d20, it counts as two failures. If you roll a 20 on the d20, you regain 1 hit point.</p>",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1704924858361,
+        "modifiedTime": 1704924964760,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.fwJOeFAJn8DkwebA"
+    },
+    {
+      "sort": 13100000,
+      "name": "Damage at 0 Hit Points",
+      "type": "rule",
+      "_id": "2umstdyMUtPaf6vB",
+      "title": {
+        "show": true,
+        "level": 3
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p><strong>Damage at 0 Hit Points. </strong>If you take any damage while you have 0 hit points, you suffer a death saving throw failure. If the damage is from a critical hit, you suffer two failures instead. If the damage equals or exceeds your hit point maximum, you suffer instant death.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "<p>If you take any damage while you have 0 hit points, you suffer a death saving throw failure. If the damage is from a critical hit, you suffer two failures instead. If the damage equals or exceeds your hit point maximum, you suffer instant death.</p>",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1704924866045,
+        "modifiedTime": 1704924960207,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.2umstdyMUtPaf6vB"
+    },
+    {
+      "sort": 13200000,
+      "name": "Stabilizing a Creature",
+      "type": "rule",
+      "_id": "r1CgZXLcqFop6Dlx",
+      "title": {
+        "show": true,
+        "level": 2
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>The best way to save a creature with 0 hit points is to heal it. If healing is unavailable, the creature can at least be stabilized so that it isn’t killed by a failed death saving throw.</p><p>You can use your action to administer first aid to an unconscious creature and attempt to stabilize it, which requires a successful DC 10 Wisdom (Medicine) check.</p><p>A <strong>stable</strong> creature doesn’t make death saving throws, even though it has 0 hit points, but it does remain unconscious. The creature stops being stable, and must start making death saving throws again, if it takes any damage. A stable creature that isn’t healed regains 1 hit point after 1d4 hours.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1704924874198,
+        "modifiedTime": 1704925034970,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.r1CgZXLcqFop6Dlx"
+    },
+    {
+      "sort": 13300000,
+      "name": "Monsters and Death",
+      "type": "rule",
+      "_id": "DyAsc0h0MqTSHzz4",
+      "title": {
+        "show": true,
+        "level": 2
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>Most GMs have a monster die the instant it drops to 0 hit points, rather than having it fall unconscious and make death saving throws.</p><p>Mighty villains and special nonplayer characters are common exceptions; the GM might have them fall unconscious and follow the same rules as player characters.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1704924878557,
+        "modifiedTime": 1704924935478,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.DyAsc0h0MqTSHzz4"
+    },
+    {
+      "sort": 13400000,
+      "name": "Knocking a Creature Out",
+      "type": "rule",
+      "_id": "uEwjgKGuCRTNADYv",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>Sometimes an attacker wants to incapacitate a foe, rather than deal a killing blow. When an attacker reduces a creature to 0 hit points with a melee attack, the attacker can knock the creature out. The attacker can make this choice the instant the damage is dealt. The creature falls unconscious and is stable.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1704924887110,
+        "modifiedTime": 1704924916150,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.uEwjgKGuCRTNADYv"
+    },
+    {
+      "sort": 13500000,
+      "name": "Temporary Hit Points",
+      "type": "rule",
+      "_id": "AW6HpJZHqxfESXaq",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>Some spells and special abilities confer temporary hit points to a creature. Temporary hit points aren’t actual hit points; they are a buffer against damage, a pool of hit points that protect you from injury.</p><p>When you have temporary hit points and take damage, the temporary hit points are lost first, and any leftover damage carries over to your normal hit points. For example, if you have 5 temporary hit points and take 7 damage, you lose the temporary hit points and then take 2 damage.</p><p>Because temporary hit points are separate from your actual hit points, they can exceed your hit point maximum. A character can, therefore, be at full hit points and receive temporary hit points.</p><p>Healing can’t restore temporary hit points, and they can’t be added together. If you have temporary hit points and receive more of them, you decide whether to keep the ones you have or to gain the new ones. For example, if a spell grants you 12 temporary hit points when you already have 10, you can have 12 or 10, not 22.</p><p>If you have 0 hit points, receiving temporary hit points doesn’t restore you to consciousness or stabilize you. They can still absorb damage directed at you while you’re in that state, but only true healing can save you.</p><p>Unless a feature that grants you temporary hit points has a duration, they last until they’re depleted or you finish a long rest.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1704924894160,
+        "modifiedTime": 1704924911951,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.AW6HpJZHqxfESXaq"
+    },
+    {
+      "sort": 11900000,
+      "name": "Poison",
+      "type": "rule",
+      "_id": "k5wOYXdWPzcWwds1",
+      "title": {
+        "show": true,
+        "level": 3
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p><strong>Poison. </strong>Venomous stings and the toxic gas of a green dragon’s breath deal poison damage.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "<p>Venomous stings and the toxic gas of a green dragon’s breath deal poison damage.</p>",
+        "type": "damage"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1704925416023,
+        "modifiedTime": 1704925439233,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.k5wOYXdWPzcWwds1"
+    },
+    {
+      "sort": 13600000,
+      "name": "Mounting and Dismounting",
+      "type": "rule",
+      "_id": "MFpyvUIdcBpC9kIE",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>Once during your move, you can mount a creature that is within 5 feet of you or dismount. Doing so costs an amount of movement equal to half your speed. For example, if your speed is 30 feet, you must spend 15 feet of movement to mount a horse. Therefore, you can't mount it if you don't have 15 feet of movement left or if your speed is 0.</p><p>If an effect moves your mount against its will while you're on it, you must succeed on a DC 10 Dexterity saving throw or fall off the mount, landing prone in a space within 5 feet of it. If you're knocked prone while mounted, you must make the same saving throw.</p><p>If your mount is knocked prone, you can use your reaction to dismount it as it falls and land on your feet. Otherwise, you are dismounted and fall prone in a space within 5 feet it.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1704925553099,
+        "modifiedTime": 1704925562307,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.MFpyvUIdcBpC9kIE"
+    },
+    {
+      "sort": 13700000,
+      "name": "Controlling a Mount",
+      "type": "rule",
+      "_id": "khmR2xFk1NxoQUgZ",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>While you're mounted, you have two options. You can either control the mount or allow it to act independently. Intelligent creatures, such as dragons, act independently.</p><p>You can control a mount only if it has been trained to accept a rider. Domesticated horses, donkeys, and similar creatures are assumed to have such training. The initiative of a controlled mount changes to match yours when you mount it. It moves as you direct it, and it has only three action options: Dash, Disengage, and Dodge. A controlled mount can move and act even on the turn that you mount it.</p><p>An independent mount retains its place in the initiative order. Bearing a rider puts no restrictions on the actions the mount can take, and it moves and acts as it wishes. It might flee from combat, rush to attack and devour a badly injured foe, or otherwise act against your wishes.</p><p>In either case, if the mount provokes an opportunity attack while you're on it, the attacker can target you or the mount.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1704925567016,
+        "modifiedTime": 1704925570926,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.khmR2xFk1NxoQUgZ"
+    },
+    {
+      "sort": 13800000,
+      "name": "Underwater Combat",
+      "type": "rule",
+      "_id": "6zVOeLyq4iMnrQT4",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>When making a <strong>melee weapon attack</strong>, a creature that doesn't have a swimming speed (either natural or granted by magic) has disadvantage on the attack roll unless the weapon is a dagger, javelin, shortsword, spear, or trident.</p><p>A <strong>ranged weapon attack</strong> automatically misses a target beyond the weapon's normal range. Even against a target within normal range, the attack roll has disadvantage unless the weapon is a crossbow, a net, or a weapon that is thrown like a javelin (including a spear, trident, or dart).</p><p>Creatures and objects that are fully immersed in water have resistance to fire damage.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1704925609616,
+        "modifiedTime": 1704925621984,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.6zVOeLyq4iMnrQT4"
+    },
+    {
+      "sort": 4150000,
+      "name": "Forced March",
+      "type": "rule",
+      "_id": "uQWQpRKQ1kWhuvjZ",
+      "title": {
+        "show": true,
+        "level": 3
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p><strong>Forced March. </strong>The Travel Pace table assumes that characters travel for 8 hours in day. They can push on beyond that limit, at the risk of exhaustion.</p><p>For each additional hour of travel beyond 8 hours, the characters cover the distance shown in the Hour column for their pace, and each character must make a Constitution saving throw at the end of the hour. The DC is 10 + 1 for each hour past 8 hours. On a failed saving throw, a character suffers one level of &amp;Reference[Exhaustion].</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "<p>For each additional hour of travel beyond 8 hours each character must make a Constitution saving throw at the end of the hour. The DC is 10 + 1 for each hour past 8 hours. On a failed saving throw, a character suffers one level of &amp;Reference[Exhaustion].</p>",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1704927249941,
+        "modifiedTime": 1704927739182,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.uQWQpRKQ1kWhuvjZ"
+    },
+    {
+      "sort": 4175000,
+      "name": "Mounts and Vehicles",
+      "type": "rule",
+      "_id": "D8K6ansoz1q6P37s",
+      "title": {
+        "show": true,
+        "level": 3
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p><strong>Mounts and Vehicles. </strong>For short spans of time (up to an hour), many animals move much faster than humanoids. A mounted character can ride at a gallop for about an hour, covering twice the usual distance for a fast pace. If fresh mounts are available every 8 to 10 miles, characters can cover larger distances at this pace, but this is very rare except in densely populated areas.</p><p>Characters in wagons, carriages, or other land vehicles choose a pace as normal. Characters in a waterborne vessel are limited to the speed of the vessel, and they don’t suffer penalties for a fast pace or gain benefits from a slow pace. Depending on the vessel and the size of the crew, ships might be able to travel for up to 24 hours per day.</p><p>Certain special mounts, such as a pegasus or griffon, or special vehicles, such as a @Compendium[dnd5e.items.TjWk2mpNXjDdfIDM]{Carpet of Flying}, allow you to travel more swiftly.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1704927257562,
+        "modifiedTime": 1704927363637,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.D8K6ansoz1q6P37s"
     }
   ],
   "folder": null,
@@ -2748,7 +5902,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1704059808409,
-    "modifiedTime": 1704861550347,
+    "modifiedTime": 1704927739182,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_id": "NizgRXLNUqtdlC1s",
