@@ -3,7 +3,7 @@
   "pages": [
     {
       "name": "Conditions",
-      "type": "text",
+      "type": "rule",
       "title": {
         "show": false,
         "level": 1
@@ -30,14 +30,14 @@
     },
     {
       "name": "Blinded",
-      "type": "text",
+      "type": "rule",
       "title": {
         "show": true,
         "level": 2
       },
       "text": {
         "format": 1,
-        "content": "<ul>\n<li>A blinded creature can’t see and automatically fails any ability check that requires sight</li>\n<li>Attack rolls against the creature have advantage, and the creature’s attack rolls have disadvantage.</li>\n</ul>"
+        "content": "<ul><li>A blinded creature can’t see and automatically fails any ability check that requires sight</li><li>Attack rolls against the creature have advantage, and the creature’s attack rolls have disadvantage.</li></ul>"
       },
       "_id": "0b8N4FymGGfbZGpJ",
       "image": {},
@@ -46,24 +46,34 @@
         "volume": 0.5
       },
       "src": null,
-      "system": {},
+      "system": {
+        "type": "condition"
+      },
       "sort": 0,
       "ownership": {
         "default": -1
       },
       "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": null,
+        "modifiedTime": 1704861123130,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
       "_key": "!journal.pages!w7eitkpD7QQTB6j0.0b8N4FymGGfbZGpJ"
     },
     {
       "name": "Charmed",
-      "type": "text",
+      "type": "rule",
       "title": {
         "show": true,
         "level": 2
       },
       "text": {
         "format": 1,
-        "content": "<ul>\n<li>A charmed creature can’t attack the charmer or target the charmer with harmful abilities or magical effects.</li>\n<li>The charmer has advantage on any ability check to interact socially with the creature.</li>\n</ul>"
+        "content": "<ul><li>A charmed creature can’t attack the charmer or target the charmer with harmful abilities or magical effects.</li><li>The charmer has advantage on any ability check to interact socially with the creature.</li></ul>"
       },
       "_id": "zZaEBrKkr66OWJvD",
       "image": {},
@@ -72,24 +82,34 @@
         "volume": 0.5
       },
       "src": null,
-      "system": {},
+      "system": {
+        "type": "condition"
+      },
       "sort": 0,
       "ownership": {
         "default": -1
       },
       "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": null,
+        "modifiedTime": 1704861126503,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
       "_key": "!journal.pages!w7eitkpD7QQTB6j0.zZaEBrKkr66OWJvD"
     },
     {
       "name": "Deafened",
-      "type": "text",
+      "type": "rule",
       "title": {
         "show": true,
         "level": 2
       },
       "text": {
         "format": 1,
-        "content": "<ul>\n<li>A deafened creature can’t hear and automatically fails any ability check that requires hearing.</li>\n</ul>"
+        "content": "<ul><li>A deafened creature can’t hear and automatically fails any ability check that requires hearing.</li></ul>"
       },
       "_id": "6G8JSjhn701cBITY",
       "image": {},
@@ -98,24 +118,34 @@
         "volume": 0.5
       },
       "src": null,
-      "system": {},
+      "system": {
+        "type": "condition"
+      },
       "sort": 0,
       "ownership": {
         "default": -1
       },
       "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": null,
+        "modifiedTime": 1704861131578,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
       "_key": "!journal.pages!w7eitkpD7QQTB6j0.6G8JSjhn701cBITY"
     },
     {
       "name": "Frightened",
-      "type": "text",
+      "type": "rule",
       "title": {
         "show": true,
         "level": 2
       },
       "text": {
         "format": 1,
-        "content": "<ul>\n<li>A frightened creature has disadvantage on ability checks and attack rolls while the source of its fear is within line of sight.</li>\n<li>The creature can’t willingly move closer to the source of its fear.</li>\n</ul>"
+        "content": "<ul><li>A frightened creature has disadvantage on ability checks and attack rolls while the source of its fear is within line of sight.</li><li>The creature can’t willingly move closer to the source of its fear.</li></ul>"
       },
       "_id": "oreoyaFKnvZCrgij",
       "image": {},
@@ -124,24 +154,34 @@
         "volume": 0.5
       },
       "src": null,
-      "system": {},
+      "system": {
+        "type": "condition"
+      },
       "sort": 0,
       "ownership": {
         "default": -1
       },
       "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": null,
+        "modifiedTime": 1704861134351,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
       "_key": "!journal.pages!w7eitkpD7QQTB6j0.oreoyaFKnvZCrgij"
     },
     {
       "name": "Grappled",
-      "type": "text",
+      "type": "rule",
       "title": {
         "show": true,
         "level": 2
       },
       "text": {
         "format": 1,
-        "content": "<ul>\n<li>A grappled creature’s speed becomes 0, and it can’t benefit from any bonus to its speed.</li>\n<li>The condition ends if the grappler is @UUID[.TpkZgLfxCmSndmpb]{Incapacitated}.</li>\n<li>The condition also ends if an effect removes the grappled creature from the reach of the grappler or grappling effect, such as when a creature is hurled away by the thunderwave spell.</li>\n</ul>",
+        "content": "<ul><li>A grappled creature’s speed becomes 0, and it can’t benefit from any bonus to its speed.</li><li>The condition ends if the grappler is @UUID[.TpkZgLfxCmSndmpb]{Incapacitated}.</li><li>The condition also ends if an effect removes the grappled creature from the reach of the grappler or grappling effect, such as when a creature is hurled away by the thunderwave spell.</li></ul>",
         "markdown": ""
       },
       "_id": "gYDAhd02ryUmtwZn",
@@ -151,24 +191,34 @@
         "volume": 0.5
       },
       "src": null,
-      "system": {},
+      "system": {
+        "type": "condition"
+      },
       "sort": 0,
       "ownership": {
         "default": -1
       },
       "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": null,
+        "modifiedTime": 1704861138702,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
       "_key": "!journal.pages!w7eitkpD7QQTB6j0.gYDAhd02ryUmtwZn"
     },
     {
       "name": "Incapacitated",
-      "type": "text",
+      "type": "rule",
       "title": {
         "show": true,
         "level": 2
       },
       "text": {
         "format": 1,
-        "content": "<ul>\n<li>An incapacitated creature can’t take actions or reactions.</li>\n</ul>"
+        "content": "<ul><li>An incapacitated creature can’t take actions or reactions.</li></ul>"
       },
       "_id": "TpkZgLfxCmSndmpb",
       "image": {},
@@ -177,24 +227,34 @@
         "volume": 0.5
       },
       "src": null,
-      "system": {},
+      "system": {
+        "type": "condition"
+      },
       "sort": 0,
       "ownership": {
         "default": -1
       },
       "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": null,
+        "modifiedTime": 1704861141511,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
       "_key": "!journal.pages!w7eitkpD7QQTB6j0.TpkZgLfxCmSndmpb"
     },
     {
       "name": "Invisible",
-      "type": "text",
+      "type": "rule",
       "title": {
         "show": true,
         "level": 2
       },
       "text": {
         "format": 1,
-        "content": "<ul>\n<li>An invisible creature is impossible to see without the aid of magic or a special sense. For the purpose of hiding, the creature is heavily obscured. The creature's location can be detected by any noise it makes or any tracks it leaves.</li>\n<li>Attack rolls against the creature have disadvantage, and the creature's attack rolls have advantage.</li>\n</ul>"
+        "content": "<ul><li>An invisible creature is impossible to see without the aid of magic or a special sense. For the purpose of hiding, the creature is heavily obscured. The creature's location can be detected by any noise it makes or any tracks it leaves.</li><li>Attack rolls against the creature have disadvantage, and the creature's attack rolls have advantage.</li></ul>"
       },
       "_id": "3UU5GCTVeRDbZy9u",
       "image": {},
@@ -203,24 +263,34 @@
         "volume": 0.5
       },
       "src": null,
-      "system": {},
+      "system": {
+        "type": "condition"
+      },
       "sort": 0,
       "ownership": {
         "default": -1
       },
       "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": null,
+        "modifiedTime": 1704861148295,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
       "_key": "!journal.pages!w7eitkpD7QQTB6j0.3UU5GCTVeRDbZy9u"
     },
     {
       "name": "Paralyzed",
-      "type": "text",
+      "type": "rule",
       "title": {
         "show": true,
         "level": 2
       },
       "text": {
         "format": 1,
-        "content": "<ul>\n<li>A paralyzed creature is @UUID[.TpkZgLfxCmSndmpb]{Incapacitated} and can’t move or speak.</li>\n<li>The creature automatically fails Strength and Dexterity saving throws.</li>\n<li>Attack rolls against the creature have advantage.</li>\n<li>Any attack that hits the creature is a critical hit if the attacker is within 5 feet of the creature.</li>\n</ul>",
+        "content": "<ul><li>A paralyzed creature is @UUID[.TpkZgLfxCmSndmpb]{Incapacitated} and can’t move or speak.</li><li>The creature automatically fails Strength and Dexterity saving throws.</li><li>Attack rolls against the creature have advantage.</li><li>Any attack that hits the creature is a critical hit if the attacker is within 5 feet of the creature.</li></ul>",
         "markdown": ""
       },
       "_id": "xnSV5hLJIMaTABXP",
@@ -230,24 +300,34 @@
         "volume": 0.5
       },
       "src": null,
-      "system": {},
+      "system": {
+        "type": "condition"
+      },
       "sort": 0,
       "ownership": {
         "default": -1
       },
       "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": null,
+        "modifiedTime": 1704861151346,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
       "_key": "!journal.pages!w7eitkpD7QQTB6j0.xnSV5hLJIMaTABXP"
     },
     {
       "name": "Petrified",
-      "type": "text",
+      "type": "rule",
       "title": {
         "show": true,
         "level": 2
       },
       "text": {
         "format": 1,
-        "content": "<ul>\n<li>A petrified creature is transformed, along with any nonmagical object it is wearing or carrying, into a solid inanimate substance (usually stone). Its weight increases by a factor of ten, and it ceases aging.</li>\n<li>The creature is @UUID[.TpkZgLfxCmSndmpb]{Incapacitated}, can’t move or speak, and is unaware of its surroundings.</li>\n<li>Attack rolls against the creature have advantage.</li>\n<li>The creature automatically fails Strength and Dexterity saving throws.</li>\n<li>The creature has resistance to all damage.</li>\n<li>The creature is immune to poison and disease, although a poison or disease already in its system is suspended, not neutralized.</li>\n</ul>",
+        "content": "<ul><li>A petrified creature is transformed, along with any nonmagical object it is wearing or carrying, into a solid inanimate substance (usually stone). Its weight increases by a factor of ten, and it ceases aging.</li><li>The creature is @UUID[.TpkZgLfxCmSndmpb]{Incapacitated}, can’t move or speak, and is unaware of its surroundings.</li><li>Attack rolls against the creature have advantage.</li><li>The creature automatically fails Strength and Dexterity saving throws.</li><li>The creature has resistance to all damage.</li><li>The creature is immune to poison and disease, although a poison or disease already in its system is suspended, not neutralized.</li></ul>",
         "markdown": ""
       },
       "_id": "xaNDaW6NwQTgHSmi",
@@ -257,24 +337,34 @@
         "volume": 0.5
       },
       "src": null,
-      "system": {},
+      "system": {
+        "type": "condition"
+      },
       "sort": 0,
       "ownership": {
         "default": -1
       },
       "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": null,
+        "modifiedTime": 1704861156216,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
       "_key": "!journal.pages!w7eitkpD7QQTB6j0.xaNDaW6NwQTgHSmi"
     },
     {
       "name": "Poisoned",
-      "type": "text",
+      "type": "rule",
       "title": {
         "show": true,
         "level": 2
       },
       "text": {
         "format": 1,
-        "content": "<ul>\n<li>A poisoned creature has disadvantage on attack rolls and ability checks.</li>\n</ul>"
+        "content": "<ul><li>A poisoned creature has disadvantage on attack rolls and ability checks.</li></ul>"
       },
       "_id": "lq3TRI6ZlED8ABMx",
       "image": {},
@@ -283,24 +373,34 @@
         "volume": 0.5
       },
       "src": null,
-      "system": {},
+      "system": {
+        "type": "condition"
+      },
       "sort": 0,
       "ownership": {
         "default": -1
       },
       "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": null,
+        "modifiedTime": 1704861160208,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
       "_key": "!journal.pages!w7eitkpD7QQTB6j0.lq3TRI6ZlED8ABMx"
     },
     {
       "name": "Prone",
-      "type": "text",
+      "type": "rule",
       "title": {
         "show": true,
         "level": 2
       },
       "text": {
         "format": 1,
-        "content": "<ul>\n<li>A prone creature's only movement option is to crawl, unless it stands up and thereby ends the condition.</li>\n<li>The creature has disadvantage on attack rolls.</li>\n<li>An attack roll against the creature has advantage if the attacker is within 5 feet of the creature. Otherwise, the attack roll has disadvantage.</li>\n</ul>"
+        "content": "<ul><li>A prone creature's only movement option is to crawl, unless it stands up and thereby ends the condition.</li><li>The creature has disadvantage on attack rolls.</li><li>An attack roll against the creature has advantage if the attacker is within 5 feet of the creature. Otherwise, the attack roll has disadvantage.</li></ul>"
       },
       "_id": "y0TkcdyoZlOTmAFT",
       "image": {},
@@ -309,24 +409,34 @@
         "volume": 0.5
       },
       "src": null,
-      "system": {},
+      "system": {
+        "type": "condition"
+      },
       "sort": 0,
       "ownership": {
         "default": -1
       },
       "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": null,
+        "modifiedTime": 1704861163391,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
       "_key": "!journal.pages!w7eitkpD7QQTB6j0.y0TkcdyoZlOTmAFT"
     },
     {
       "name": "Restrained",
-      "type": "text",
+      "type": "rule",
       "title": {
         "show": true,
         "level": 2
       },
       "text": {
         "format": 1,
-        "content": "<ul>\n<li>A restrained creature's speed becomes 0, and it can't benefit from any bonus to its speed.</li>\n<li>Attack rolls against the creature have advantage, and the creature's attack rolls have disadvantage.</li>\n<li>The creature has disadvantage on Dexterity saving throws.</li>\n</ul>"
+        "content": "<ul><li>A restrained creature's speed becomes 0, and it can't benefit from any bonus to its speed.</li><li>Attack rolls against the creature have advantage, and the creature's attack rolls have disadvantage.</li><li>The creature has disadvantage on Dexterity saving throws.</li></ul>"
       },
       "_id": "cSVcyZyNe2iG1fIc",
       "image": {},
@@ -335,24 +445,34 @@
         "volume": 0.5
       },
       "src": null,
-      "system": {},
+      "system": {
+        "type": "condition"
+      },
       "sort": 0,
       "ownership": {
         "default": -1
       },
       "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": null,
+        "modifiedTime": 1704861167011,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
       "_key": "!journal.pages!w7eitkpD7QQTB6j0.cSVcyZyNe2iG1fIc"
     },
     {
       "name": "Stunned",
-      "type": "text",
+      "type": "rule",
       "title": {
         "show": true,
         "level": 2
       },
       "text": {
         "format": 1,
-        "content": "<ul>\n<li>A stunned creature is @UUID[.TpkZgLfxCmSndmpb]{Incapacitated}, can’t move, and can speak only falteringly.</li>\n<li>The creature automatically fails Strength and Dexterity saving throws.</li>\n<li>Attack rolls against the creature have advantage.</li>\n</ul>",
+        "content": "<ul><li>A stunned creature is @UUID[.TpkZgLfxCmSndmpb]{Incapacitated}, can’t move, and can speak only falteringly.</li><li>The creature automatically fails Strength and Dexterity saving throws.</li><li>Attack rolls against the creature have advantage.</li></ul>",
         "markdown": ""
       },
       "_id": "ZyZMUwA2rboh4ObS",
@@ -362,24 +482,34 @@
         "volume": 0.5
       },
       "src": null,
-      "system": {},
+      "system": {
+        "type": "condition"
+      },
       "sort": 0,
       "ownership": {
         "default": -1
       },
       "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": null,
+        "modifiedTime": 1704861170044,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
       "_key": "!journal.pages!w7eitkpD7QQTB6j0.ZyZMUwA2rboh4ObS"
     },
     {
       "name": "Unconscious",
-      "type": "text",
+      "type": "rule",
       "title": {
         "show": true,
         "level": 2
       },
       "text": {
         "format": 1,
-        "content": "<ul>\n<li>An unconscious creature is @UUID[.TpkZgLfxCmSndmpb]{Incapacitated}, can’t move or speak, and is unaware of its surroundings</li>\n<li>The creature drops whatever it’s holding and falls prone.</li>\n<li>The creature automatically fails Strength and Dexterity saving throws.</li>\n<li>Attack rolls against the creature have advantage.</li>\n<li>Any attack that hits the creature is a critical hit if the attacker is within 5 feet of the creature.</li>\n</ul>",
+        "content": "<ul><li>An unconscious creature is @UUID[.TpkZgLfxCmSndmpb]{Incapacitated}, can’t move or speak, and is unaware of its surroundings</li><li>The creature drops whatever it’s holding and falls prone.</li><li>The creature automatically fails Strength and Dexterity saving throws.</li><li>Attack rolls against the creature have advantage.</li><li>Any attack that hits the creature is a critical hit if the attacker is within 5 feet of the creature.</li></ul>",
         "markdown": ""
       },
       "_id": "UWw13ISmMxDzmwbd",
@@ -389,24 +519,34 @@
         "volume": 0.5
       },
       "src": null,
-      "system": {},
+      "system": {
+        "type": "condition"
+      },
       "sort": 0,
       "ownership": {
         "default": -1
       },
       "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": null,
+        "modifiedTime": 1704861173483,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
       "_key": "!journal.pages!w7eitkpD7QQTB6j0.UWw13ISmMxDzmwbd"
     },
     {
       "name": "Exhaustion",
-      "type": "text",
+      "type": "rule",
       "title": {
         "show": true,
         "level": 2
       },
       "text": {
         "format": 1,
-        "content": "<p>Some special abilities and environmental hazards, such as starvation and the long-term effects of freezing or scorching temperatures, can lead to a special condition called exhaustion. Exhaustion is measured in six levels. An effect can give a creature one or more levels of exhaustion, as specified in the effect’s description.</p>\n<table border=\"0\">\n<thead>\n<tr>\n<td>Level</td>\n<td>Effect</td>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>1</td>\n<td>Disadvantage on ability checks</td>\n</tr>\n<tr>\n<td>2</td>\n<td>Speed halved</td>\n</tr>\n<tr>\n<td>3</td>\n<td>Disadvantage on attack rolls and saving throws</td>\n</tr>\n<tr>\n<td>4</td>\n<td>Hit point maximum halved</td>\n</tr>\n<tr>\n<td>5</td>\n<td>Speed reduced to 0</td>\n</tr>\n<tr>\n<td>6</td>\n<td>Death</td>\n</tr>\n</tbody>\n</table>\n<p>If an already exhausted creature suffers another effect that causes exhaustion, its current level of exhaustion increases by the amount specified in the effect’s description.</p>\n<p>A creature suffers the effect of its current level of exhaustion as well as all lower levels. For example, a creature suffering level 2 exhaustion has its speed halved and has disadvantage on ability checks.</p>\n<p>An effect that removes exhaustion reduces its level as specified in the effect’s description, with all exhaustion effects ending if a creature’s exhaustion level is reduced below 1.</p>\n<p>Finishing a long rest reduces a creature’s exhaustion level by 1, provided that the creature has also ingested some food and drink.</p>"
+        "content": "<p>Some special abilities and environmental hazards, such as starvation and the long-term effects of freezing or scorching temperatures, can lead to a special condition called exhaustion. Exhaustion is measured in six levels. An effect can give a creature one or more levels of exhaustion, as specified in the effect’s description.</p><table border=\"0\"><thead><tr><td>Level</td><td>Effect</td></tr></thead><tbody><tr><td>1</td><td>Disadvantage on ability checks</td></tr><tr><td>2</td><td>Speed halved</td></tr><tr><td>3</td><td>Disadvantage on attack rolls and saving throws</td></tr><tr><td>4</td><td>Hit point maximum halved</td></tr><tr><td>5</td><td>Speed reduced to 0</td></tr><tr><td>6</td><td>Death</td></tr></tbody></table><p>If an already exhausted creature suffers another effect that causes exhaustion, its current level of exhaustion increases by the amount specified in the effect’s description.</p><p>A creature suffers the effect of its current level of exhaustion as well as all lower levels. For example, a creature suffering level 2 exhaustion has its speed halved and has disadvantage on ability checks.</p><p>An effect that removes exhaustion reduces its level as specified in the effect’s description, with all exhaustion effects ending if a creature’s exhaustion level is reduced below 1.</p><p>Finishing a long rest reduces a creature’s exhaustion level by 1, provided that the creature has also ingested some food and drink.</p>"
       },
       "_id": "cspWveykstnu3Zcv",
       "image": {},
@@ -415,12 +555,22 @@
         "volume": 0.5
       },
       "src": null,
-      "system": {},
+      "system": {
+        "type": "condition"
+      },
       "sort": 0,
       "ownership": {
         "default": -1
       },
       "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": null,
+        "modifiedTime": 1704861176930,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
       "_key": "!journal.pages!w7eitkpD7QQTB6j0.cspWveykstnu3Zcv"
     }
   ],
@@ -438,10 +588,10 @@
   },
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.0.2",
-    "coreVersion": "10.285",
+    "systemVersion": "3.0.0",
+    "coreVersion": "11.315",
     "createdTime": 1660925148884,
-    "modifiedTime": 1663018863337,
+    "modifiedTime": 1704861176930,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "folder": null,
