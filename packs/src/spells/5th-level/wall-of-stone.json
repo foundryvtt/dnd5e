@@ -8,8 +8,7 @@
   "system": {
     "description": {
       "value": "<p>A nonmagical wall of solid stone springs into existence at a point you choose within range. The wall is 6 inches thick and is composed of ten 10-foot-by-10-foot panels. Each panel must be contiguous with at least one other panel. Alternatively, you can create 10-foot-by-20-foot panels that are only 3 inches thick.</p><p>If the wall cuts through a creature's space when it appears, the creature is pushed to one side of the wall (your choice). If a creature would be surrounded on all sides by the wall (or the wall and another solid surface), that creature can make a Dexterity saving throw. On a success, it can use its Reaction to move up to its speed so that it is no longer enclosed by the wall.</p><p>The wall can have any shape you desire, though it can't occupy the same space as a creature or object. The wall doesn't need to be vertical or rest on any firm foundation. It must, however, merge with and be solidly supported by existing stone. Thus, you can use this spell to bridge a chasm or create a ramp.</p><p>If you create a span greater than 20 feet in length, you must halve the size of each panel to create supports. You can crudely shape the wall to create crenellations, battlements, and so on.</p><p>The wall is an object made of stone that can be damaged and thus breached. Each panel has AC 15 and 30 Hit Points per inch of thickness. Reducing a panel to 0 Hit Points destroys it and might cause connected panels to collapse at the DM's discretion.</p><p>If you maintain your Concentration on this spell for its whole Duration, the wall becomes permanent and can't be dispelled. Otherwise, the wall disappears when the spell ends.</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -31,7 +30,8 @@
       "value": 100,
       "width": null,
       "units": "ft",
-      "type": "wall"
+      "type": "wall",
+      "prompt": true
     },
     "range": {
       "value": 120,
@@ -42,12 +42,14 @@
       "value": null,
       "max": "",
       "per": null,
-      "recovery": ""
+      "recovery": "",
+      "prompt": true
     },
     "consume": {
       "type": "",
       "target": null,
-      "amount": null
+      "amount": null,
+      "scale": false
     },
     "ability": "",
     "actionType": "save",
@@ -69,13 +71,6 @@
     },
     "level": 5,
     "school": "evo",
-    "components": {
-      "vocal": true,
-      "somatic": true,
-      "material": true,
-      "ritual": false,
-      "concentration": true
-    },
     "materials": {
       "value": "A small block of granite",
       "consumed": false,
@@ -95,7 +90,8 @@
       "somatic",
       "material",
       "concentration"
-    ]
+    ],
+    "crewed": false
   },
   "sort": 0,
   "flags": {},
@@ -107,7 +103,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787234130,
-    "modifiedTime": 1704565108224,
+    "modifiedTime": 1704823523677,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!NmoRmM1mhuM3pqnY"

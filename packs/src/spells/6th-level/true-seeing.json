@@ -8,8 +8,7 @@
   "system": {
     "description": {
       "value": "<p>This spell gives the willing creature you touch the ability to see things as they actually are. For the duration, the creature has truesight, notices secret doors hidden by magic, and can see into the Ethereal Plane, all out to a range of 120 feet.</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -31,7 +30,8 @@
       "value": 1,
       "width": null,
       "units": "",
-      "type": "creature"
+      "type": "creature",
+      "prompt": true
     },
     "range": {
       "value": null,
@@ -42,12 +42,14 @@
       "value": null,
       "max": "",
       "per": null,
-      "recovery": ""
+      "recovery": "",
+      "prompt": true
     },
     "consume": {
       "type": "",
       "target": null,
-      "amount": null
+      "amount": null,
+      "scale": false
     },
     "ability": "",
     "actionType": "util",
@@ -69,13 +71,6 @@
     },
     "level": 6,
     "school": "div",
-    "components": {
-      "vocal": true,
-      "somatic": true,
-      "material": true,
-      "ritual": false,
-      "concentration": false
-    },
     "materials": {
       "value": "An ointment for the eyes that costs 25gp; is made from mushroom powder, saffron, and fat; and is consumed by the spell",
       "consumed": true,
@@ -94,7 +89,8 @@
       "vocal",
       "somatic",
       "material"
-    ]
+    ],
+    "crewed": false
   },
   "sort": 0,
   "flags": {},
@@ -106,7 +102,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787234160,
-    "modifiedTime": 1704565109114,
+    "modifiedTime": 1704823524417,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!XzkJpE6XpZfKjODD"

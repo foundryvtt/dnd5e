@@ -8,8 +8,7 @@
   "system": {
     "description": {
       "value": "<p>You create a ward against magical travel that protects up to 40,000 square feet of floor space to a height of 30 feet above the floor. For the Duration, creatures can't teleport into the area or use portals, such as those created by the gate spell, to enter the area. The spell proofs the area against Planar Travel, and therefore prevents creatures from accessing the area by way of the Astral Plane, Ethereal Plane, Feywild, Shadowfell, or the Plane Shift spell.</p><p>In addition, the spell damages types of creatures that you choose when you cast it. Choose one or more of the following: Celestials, Elementals, fey, Fiends, and Undead. When a chosen creature enters the spell's area for the first time on a turn or starts its turn there, the creature takes 5d10 radiant or necrotic damage (your choice when you cast this spell).</p><p>When you cast this spell, you can designate a password. A creature that speaks the password as it enters the area takes no damage from the spell.</p><p>The spell's area can't overlap with the area of another forbiddance spell. If you cast forbiddance every day for 30 days in the same location, the spell lasts until it is dispelled, and the material Components are consumed on the last casting.</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -31,7 +30,8 @@
       "value": null,
       "width": null,
       "units": "",
-      "type": ""
+      "type": "",
+      "prompt": true
     },
     "range": {
       "value": null,
@@ -42,12 +42,14 @@
       "value": null,
       "max": "",
       "per": null,
-      "recovery": ""
+      "recovery": "",
+      "prompt": true
     },
     "consume": {
       "type": "",
       "target": null,
-      "amount": null
+      "amount": null,
+      "scale": false
     },
     "ability": "",
     "actionType": "util",
@@ -69,13 +71,6 @@
     },
     "level": 6,
     "school": "abj",
-    "components": {
-      "vocal": true,
-      "somatic": true,
-      "material": true,
-      "ritual": true,
-      "concentration": false
-    },
     "materials": {
       "value": "A sprinkle of holy water, rare incense, and powdered ruby worth at least 1000gp",
       "consumed": false,
@@ -95,7 +90,8 @@
       "somatic",
       "material",
       "ritual"
-    ]
+    ],
+    "crewed": false
   },
   "sort": 0,
   "flags": {},
@@ -107,7 +103,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787234071,
-    "modifiedTime": 1704565106440,
+    "modifiedTime": 1704823522006,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!64D1gNZ4hx7SWG2x"

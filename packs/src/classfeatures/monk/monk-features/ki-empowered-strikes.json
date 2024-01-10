@@ -8,8 +8,7 @@
   "system": {
     "description": {
       "value": "<p>Starting at 6th level, your unarmed strikes count as magical for the purpose of overcoming resistance and immunity to nonmagical attacks and damage.</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -31,7 +30,8 @@
       "value": null,
       "width": null,
       "units": "",
-      "type": ""
+      "type": "",
+      "prompt": true
     },
     "range": {
       "value": null,
@@ -42,12 +42,14 @@
       "value": null,
       "max": "",
       "per": null,
-      "recovery": ""
+      "recovery": "",
+      "prompt": true
     },
     "consume": {
       "type": "",
       "target": null,
-      "amount": null
+      "amount": null,
+      "scale": false
     },
     "ability": "",
     "actionType": "",
@@ -75,7 +77,9 @@
     "recharge": {
       "value": null,
       "charged": false
-    }
+    },
+    "crewed": false,
+    "properties": []
   },
   "flags": {},
   "img": "icons/magic/fire/flame-burning-fist-strike.webp",
@@ -87,7 +91,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787234337,
-    "modifiedTime": 1701910364182,
+    "modifiedTime": 1704824715049,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!7flZKruSSu6dHg6D"

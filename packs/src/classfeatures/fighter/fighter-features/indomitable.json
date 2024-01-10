@@ -8,8 +8,7 @@
   "system": {
     "description": {
       "value": "<p>You can reroll a saving throw that you fail. If you do so, you must use the new roll, and you can't use this feature again until you finish a long rest.</p><p>You can use this feature twice between long rests starting at 13th level and three times between long rests starting at 17th level.</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -31,7 +30,8 @@
       "value": null,
       "width": null,
       "units": "",
-      "type": ""
+      "type": "",
+      "prompt": true
     },
     "range": {
       "value": null,
@@ -42,12 +42,14 @@
       "value": 1,
       "max": "@scale.fighter.indomitable",
       "per": "lr",
-      "recovery": ""
+      "recovery": "",
+      "prompt": true
     },
     "consume": {
       "type": "",
       "target": null,
-      "amount": null
+      "amount": null,
+      "scale": false
     },
     "ability": "",
     "actionType": "",
@@ -75,7 +77,9 @@
     "recharge": {
       "value": null,
       "charged": false
-    }
+    },
+    "crewed": false,
+    "properties": []
   },
   "flags": {},
   "img": "icons/magic/fire/flame-burning-fist-strike.webp",
@@ -87,7 +91,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787234333,
-    "modifiedTime": 1701910244557,
+    "modifiedTime": 1704824714819,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!653ZHbNcmm7ZGXbw"

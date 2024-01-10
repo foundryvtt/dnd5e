@@ -1,7 +1,7 @@
 {
   "name": "Quillathe (Elf Ranger)",
   "type": "character",
-  "img": null,
+  "img": "systems/dnd5e/tokens/heroes/RangerBow.webp",
   "system": {
     "abilities": {
       "str": {
@@ -109,7 +109,7 @@
     },
     "details": {
       "biography": {
-        "value": "<p>Quillathe cleanses monsters from her woods as a hobby, but now a new force menaces her land and she must band with adventurers to defeat it.</p>",
+        "value": "<p>Quillathe cleanses monsters from her woods as a hobby, but now a new force menaces her land and she must band with adventurers to defeat it.</p><p>\n        <em>\n          Token artwork by\n          <a href=\"https://www.forgotten-adventures.net/\" target=\"_blank\" rel=\"noopener\">Forgotten Adventures</a>.\n        </em>      \n      </p><p>\n        <em>\n          Token artwork by\n          <a href=\"https://www.forgotten-adventures.net/\" target=\"_blank\" rel=\"noopener\">Forgotten Adventures</a>.\n        </em>      \n      </p>",
         "public": ""
       },
       "alignment": "Chaotic Neutral",
@@ -173,9 +173,9 @@
         ],
         "custom": ""
       },
-      "toolProf": {
-        "value": [],
-        "custom": ""
+      "dm": {
+        "amount": {},
+        "bypasses": []
       }
     },
     "currency": {
@@ -479,10 +479,10 @@
       "attenuation": 0.5
     },
     "texture": {
-      "src": null,
+      "src": "systems/dnd5e/tokens/heroes/RangerBow.webp",
       "tint": null,
-      "scaleX": 1,
-      "scaleY": 1,
+      "scaleX": 0.9,
+      "scaleY": 0.9,
       "offsetX": 0,
       "offsetY": 0,
       "rotation": 0
@@ -510,8 +510,7 @@
       "system": {
         "description": {
           "value": "<p>This small container holds flint, fire steel, and tinder (usually dry cloth soaked in light oil) used to kindle a fire. Using it to light a torch - or anything else with abundant, exposed fuel - takes an action. Lighting any other fire takes 1 minute.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -525,14 +524,17 @@
           "value": 5,
           "denomination": "sp"
         },
-        "attunement": 0,
-        "equipped": false,
         "rarity": "",
         "identified": true,
         "type": {
           "value": "",
           "subtype": ""
-        }
+        },
+        "unidentified": {
+          "description": ""
+        },
+        "container": null,
+        "properties": []
       },
       "sort": 0,
       "flags": {
@@ -563,8 +565,7 @@
       "system": {
         "description": {
           "value": "<p>Rope, whether made of hemp or silk, has 2 hit points and can be burst with a DC 17 Strength check.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -637,8 +638,15 @@
           "dc": 17,
           "scaling": "flat"
         },
-        "consumableType": "trinket",
-        "properties": {}
+        "properties": [],
+        "unidentified": {
+          "description": ""
+        },
+        "type": {
+          "value": "trinket",
+          "subtype": ""
+        },
+        "container": null
       },
       "sort": 0,
       "flags": {
@@ -669,8 +677,7 @@
       "system": {
         "description": {
           "value": "<p>This tin box contains a cup and simple cutlery. The box clamps together, and one side can be used as a cooking pan and the other as a plate or shallow bowl.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -684,14 +691,17 @@
           "value": 2,
           "denomination": "sp"
         },
-        "attunement": 0,
-        "equipped": false,
         "rarity": "",
         "identified": true,
         "type": {
           "value": "",
           "subtype": ""
-        }
+        },
+        "unidentified": {
+          "description": ""
+        },
+        "container": null,
+        "properties": []
       },
       "sort": 0,
       "flags": {
@@ -722,8 +732,7 @@
       "system": {
         "description": {
           "value": "<p>Roll of cloth used by traveller to sleep in.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -737,14 +746,17 @@
           "value": 1,
           "denomination": "gp"
         },
-        "attunement": 0,
-        "equipped": false,
         "rarity": "",
         "identified": true,
         "type": {
           "value": "",
           "subtype": ""
-        }
+        },
+        "unidentified": {
+          "description": ""
+        },
+        "container": null,
+        "properties": []
       },
       "sort": 0,
       "flags": {
@@ -775,8 +787,7 @@
       "system": {
         "description": {
           "value": "<p>A leather hide sewn into an enclosed skin which can contain up to 4 pints of liquid. It weighs 5 pounds when full; a pint of water is approximately 1 pound.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -849,8 +860,15 @@
           "dc": null,
           "scaling": "spell"
         },
-        "consumableType": "food",
-        "properties": {}
+        "properties": [],
+        "unidentified": {
+          "description": ""
+        },
+        "type": {
+          "value": "food",
+          "subtype": ""
+        },
+        "container": null
       },
       "sort": 0,
       "flags": {
@@ -881,8 +899,7 @@
       "system": {
         "description": {
           "value": "<p>Standard ammunition used for bows of all varieties. These mundane arrows are made of smooth wooden shafts with goose feather fletching and hammer metal bodkins.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -960,8 +977,15 @@
           "dc": null,
           "scaling": "spell"
         },
-        "consumableType": "ammo",
-        "properties": {}
+        "properties": [],
+        "unidentified": {
+          "description": ""
+        },
+        "type": {
+          "value": "ammo",
+          "subtype": ""
+        },
+        "container": null
       },
       "sort": 0,
       "flags": {},
@@ -988,8 +1012,7 @@
       "system": {
         "description": {
           "value": "<p>A backpack can hold one cubic foot or 30 pounds of gear. You can also strap items, such as a bedroll or a coil of rope, to the outside of a backpack.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -1009,8 +1032,7 @@
         "identified": true,
         "capacity": {
           "type": "weight",
-          "value": 30,
-          "weightless": false
+          "value": 30
         },
         "currency": {
           "cp": 0,
@@ -1018,7 +1040,12 @@
           "ep": 0,
           "gp": 0,
           "pp": 0
-        }
+        },
+        "unidentified": {
+          "description": ""
+        },
+        "container": null,
+        "properties": []
       },
       "sort": 0,
       "flags": {
@@ -1049,8 +1076,7 @@
       "system": {
         "description": {
           "value": "<p>A quiver can hold up to 20 arrows.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -1070,8 +1096,7 @@
         "identified": true,
         "capacity": {
           "type": "items",
-          "value": 20,
-          "weightless": false
+          "value": 20
         },
         "currency": {
           "cp": 0,
@@ -1079,7 +1104,12 @@
           "ep": 0,
           "gp": 0,
           "pp": 0
-        }
+        },
+        "unidentified": {
+          "description": ""
+        },
+        "container": null,
+        "properties": []
       },
       "sort": 0,
       "flags": {
@@ -1110,8 +1140,7 @@
       "system": {
         "description": {
           "value": "<p>The breastplate and shoulder protectors of this armor are made of leather that has been stiffened by being boiled in oil. The rest of the armor is made of softer and more flexible materials.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -1185,7 +1214,6 @@
         },
         "armor": {
           "value": 11,
-          "type": "light",
           "dex": null
         },
         "hp": {
@@ -1194,14 +1222,21 @@
           "dt": null,
           "conditions": ""
         },
-        "baseItem": "leather",
         "speed": {
           "value": null,
           "conditions": ""
         },
         "strength": null,
-        "stealth": false,
-        "proficient": null
+        "proficient": null,
+        "unidentified": {
+          "description": ""
+        },
+        "type": {
+          "value": "light",
+          "baseItem": "leather"
+        },
+        "container": null,
+        "properties": []
       },
       "sort": 0,
       "flags": {
@@ -1232,8 +1267,7 @@
       "system": {
         "description": {
           "value": "<p>A thick shaft of laminated wood is bowed by a taut string capable of launching deadly arrows at long distances.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -1319,25 +1353,20 @@
           "dt": null,
           "conditions": ""
         },
-        "weaponType": "martialR",
-        "baseItem": "longbow",
-        "properties": {
-          "amm": true,
-          "hvy": true,
-          "two": true,
-          "fin": false,
-          "fir": false,
-          "foc": false,
-          "lgt": false,
-          "rch": false,
-          "rel": false,
-          "ret": false,
-          "spc": false,
-          "thr": false,
-          "ver": false,
-          "lod": false
+        "properties": [
+          "amm",
+          "hvy",
+          "two"
+        ],
+        "proficient": null,
+        "unidentified": {
+          "description": ""
         },
-        "proficient": null
+        "type": {
+          "value": "martialR",
+          "baseItem": "longbow"
+        },
+        "container": null
       },
       "sort": 0,
       "flags": {
@@ -1368,8 +1397,7 @@
       "system": {
         "description": {
           "value": "<p>A medium sized blade with a firm crossguard and a leather-wrapped handle. A versatile weapon which makes up in versatility what it lacks in reach.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -1455,25 +1483,19 @@
           "dt": null,
           "conditions": ""
         },
-        "weaponType": "martialM",
-        "baseItem": "shortsword",
-        "properties": {
-          "fin": true,
-          "lgt": true,
-          "amm": false,
-          "hvy": false,
-          "fir": false,
-          "foc": false,
-          "lod": false,
-          "rch": false,
-          "rel": false,
-          "ret": false,
-          "spc": false,
-          "thr": false,
-          "two": false,
-          "ver": false
+        "properties": [
+          "fin",
+          "lgt"
+        ],
+        "proficient": null,
+        "unidentified": {
+          "description": ""
         },
-        "proficient": null
+        "type": {
+          "value": "martialM",
+          "baseItem": "shortsword"
+        },
+        "container": null
       },
       "sort": 0,
       "flags": {
@@ -1504,8 +1526,7 @@
       "system": {
         "description": {
           "value": "<p>A medium sized blade with a firm crossguard and a leather-wrapped handle. A versatile weapon which makes up in versatility what it lacks in reach.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -1591,25 +1612,19 @@
           "dt": null,
           "conditions": ""
         },
-        "weaponType": "martialM",
-        "baseItem": "",
-        "properties": {
-          "fin": true,
-          "lgt": true,
-          "amm": false,
-          "hvy": false,
-          "fir": false,
-          "foc": false,
-          "lod": false,
-          "rch": false,
-          "rel": false,
-          "ret": false,
-          "spc": false,
-          "thr": false,
-          "two": false,
-          "ver": false
+        "properties": [
+          "fin",
+          "lgt"
+        ],
+        "proficient": null,
+        "unidentified": {
+          "description": ""
         },
-        "proficient": null
+        "type": {
+          "value": "martialM",
+          "baseItem": ""
+        },
+        "container": null
       },
       "sort": 0,
       "flags": {},
@@ -1636,8 +1651,7 @@
       "system": {
         "description": {
           "value": "<p>Rations consist of dry foods suitable for extended travel, including jerky, dried fruit, hardtack, and nuts.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -1710,8 +1724,15 @@
           "dc": null,
           "scaling": "spell"
         },
-        "consumableType": "food",
-        "properties": {}
+        "properties": [],
+        "unidentified": {
+          "description": ""
+        },
+        "type": {
+          "value": "food",
+          "subtype": ""
+        },
+        "container": null
       },
       "sort": 0,
       "flags": {
@@ -1742,8 +1763,7 @@
       "system": {
         "description": {
           "value": "<p>A torch burns for 1 hour, providing bright light in a 20-foot radius and dim light for an additional 20 feet. If you make a melee attack with a burning torch and hit, it deals 1 fire damage.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -1821,8 +1841,15 @@
           "dc": null,
           "scaling": "spell"
         },
-        "consumableType": "trinket",
-        "properties": {}
+        "properties": [],
+        "unidentified": {
+          "description": ""
+        },
+        "type": {
+          "value": "trinket",
+          "subtype": ""
+        },
+        "container": null
       },
       "sort": 0,
       "flags": {
@@ -1852,8 +1879,7 @@
       "system": {
         "description": {
           "value": "<ul><li><strong>Skill Proficiencies:</strong> Acrobatics, Nature, Investigation</li><li><strong>Tool Proficiencies:</strong> Navigator's Tools</li><li><strong>Equipment:</strong> An Explorer's Pack, and 5gp</li></ul>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -1890,8 +1916,7 @@
       "system": {
         "description": {
           "value": "<p>As a ranger, you gain the following class features.</p>\n<h3>Hit Points</h3>\n<p><strong>Hit Dice:</strong> 1d10 per ranger level<br /><strong>Hit Points at 1st Level:</strong> 10 + your Constitution modifier<br /><strong>Hit Points at Higher Levels:</strong> 1d10 (or 6) + your Constitution modifier per ranger level after 1st</p>\n<h3>Proficiencies</h3>\n<p><strong>Armor:</strong> Light armor, medium armor, shields<br /><strong>Weapons:</strong> Simple weapons, martial weapons<br /><strong>Tools:</strong> None<br /><strong>Saving Throws:</strong> Strength, Dexterity<br /><strong>Skills:</strong> Choose three from Animal Handling, Athletics, Insight, Investigation, Nature, Perception, Stealth, and Survival</p>\n<h3>Equipment</h3>\n<p>You start with the following equipment, in addition to the equipment granted by your background:</p>\n<ul>\n<li>(a) scale mail or (b) leather armor</li>\n<li>(a) two shortswords or (b) two simple melee weapons</li>\n<li>(a) a dungeoneer's pack or (b) an explorer's pack</li>\n<li>A longbow and a quiver of 20 arrows</li>\n</ul>\n<h1>Ranger Advancement</h1>\n<table>\n<thead>\n<tr>\n<td>Level</td>\n<td>Proficiency Bonus</td>\n<td>Features</td>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>1st</td>\n<td>+2</td>\n<td>@Compendium[dnd5e.classfeatures.4Vpj9vCOB37GtXk6]{Favored Enemy}, @Compendium[dnd5e.classfeatures.8fbZt2Qh7ZttwIan]{Natural Explorer}</td>\n</tr>\n<tr>\n<td>2nd</td>\n<td>+2</td>\n<td>@Compendium[dnd5e.classfeatures.nJA3ISVmyj3uPRVM]{Fighting Style}, @Compendium[dnd5e.classfeatures.u6xV3Ki3TXRrD7zg]{Spellcasting}</td>\n</tr>\n<tr>\n<td>3rd</td>\n<td>+2</td>\n<td>@Compendium[dnd5e.classfeatures.1dJHU48yNqn3lcfx]{Ranger Archetype}, @Compendium[dnd5e.classfeatures.kaHcUGiwi8AtfZIm]{Primeval Awareness}</td>\n</tr>\n<tr>\n<td>4th</td>\n<td>+2</td>\n<td>@Compendium[dnd5e.classfeatures.s0Cc2zcX0JzIgam5]{Ability Score Improvement}</td>\n</tr>\n<tr>\n<td>5th</td>\n<td>+3</td>\n<td>2nd Level Spell Slot, @Compendium[dnd5e.classfeatures.XogoBnFWmCAHXppo]{Extra Attack}</td>\n</tr>\n<tr>\n<td>6th</td>\n<td>+3</td>\n<td>@Compendium[dnd5e.classfeatures.4Vpj9vCOB37GtXk6]{Favored Enemy +1}, @Compendium[dnd5e.classfeatures.8fbZt2Qh7ZttwIan]{Natural Explorer improvements}</td>\n</tr>\n<tr>\n<td>7th</td>\n<td>+3</td>\n<td>Ranger Archetype feature</td>\n</tr>\n<tr>\n<td>8th</td>\n<td>+3</td>\n<td>@Compendium[dnd5e.classfeatures.s0Cc2zcX0JzIgam5]{Ability Score Improvement}, @Compendium[dnd5e.classfeatures.C5fzaOBc6HxyOWRn]{Land's Stride}</td>\n</tr>\n<tr>\n<td>9th</td>\n<td>+4</td>\n<td>3rd Level Spell Slot</td>\n</tr>\n<tr>\n<td>10th</td>\n<td>+4</td>\n<td>@Compendium[dnd5e.classfeatures.8fbZt2Qh7ZttwIan]{Natural Explorer improvement}, @Compendium[dnd5e.classfeatures.r0unvWK0lPsDthDx]{Hide in Plain Sight}</td>\n</tr>\n<tr>\n<td>11th</td>\n<td>+4</td>\n<td>Ranger Archetype feature</td>\n</tr>\n<tr>\n<td>12th</td>\n<td>+4</td>\n<td>@Compendium[dnd5e.classfeatures.s0Cc2zcX0JzIgam5]{Ability Score Improvement}</td>\n</tr>\n<tr>\n<td>13th</td>\n<td>+5</td>\n<td>4th Level Spell Slot</td>\n</tr>\n<tr>\n<td>14th</td>\n<td>+5</td>\n<td>@Compendium[dnd5e.classfeatures.4Vpj9vCOB37GtXk6]{Favored Enemy +1}, @Compendium[dnd5e.classfeatures.DhU2dWCNnX78TstR]{Vanish}</td>\n</tr>\n<tr>\n<td>15th</td>\n<td>+5</td>\n<td>Ranger Archetype feature</td>\n</tr>\n<tr>\n<td>16th</td>\n<td>+5</td>\n<td>@Compendium[dnd5e.classfeatures.s0Cc2zcX0JzIgam5]{Ability Score Improvement}</td>\n</tr>\n<tr>\n<td>17th</td>\n<td>+6</td>\n<td>5th Level Spell Slot</td>\n</tr>\n<tr>\n<td>18th</td>\n<td>+6</td>\n<td>@Compendium[dnd5e.classfeatures.QBVmY56RMQuh6C8h]{Feral Senses}</td>\n</tr>\n<tr>\n<td>19th</td>\n<td>+6</td>\n<td>@Compendium[dnd5e.classfeatures.s0Cc2zcX0JzIgam5]{Ability Score Improvement}</td>\n</tr>\n<tr>\n<td>20th</td>\n<td>+6</td>\n<td>@Compendium[dnd5e.classfeatures.3CaP1vFHVR8LgHjx]{Foe Slayer}</td>\n</tr>\n</tbody>\n</table>\n<h1>Ranger Archetypes</h1>\n<p>A classic expression of the ranger ideal is the Hunter.</p>\n<p>@Compendium[dnd5e.classfeatures.uqd2q6WjVfcsaaGb]{Hunter}</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -2479,8 +2504,7 @@
       "system": {
         "description": {
           "value": "<p>Beginning at 1st level, you have significant experience studying, tracking, hunting, and even talking to a certain type of enemy.</p><p>Choose a type of favored enemy: aberrations, beasts, celestials, constructs, dragons, elementals, fey, fiends, giants, monstrosities, oozes, plants, or undead. Alternatively, you can select two races of humanoid (such as gnolls and orcs) as favored enemies.</p><p>You have advantage on Wisdom (Survival) checks to track your favored enemies, as well as on Intelligence checks to recall information about them.</p><p>When you gain this feature, you also learn one language of your choice that is spoken by your favored enemies, if they speak one at all.</p><p>You choose one additional favored enemy, as well as an associated language, at 6th and 14th level. As you gain levels, your choices should reflect the types of monsters you have encountered on your adventures.</p><section class=\"secret foundry-note\" id=\"secret-2vKbF8oen9AQiV1L\"><p><strong>Foundry Note</strong></p><p>If you wish, manually edit this entry and make a note of your choices here:</p><ul><li><em>1st level</em></li><li><em>6th level</em></li><li><em>14th level</em></li></ul></section>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -2544,13 +2568,15 @@
         },
         "type": {
           "value": "class",
-          "subtype": ""
+          "subtype": "",
+          "baseItem": ""
         },
         "requirements": "Ranger 1",
         "recharge": {
           "value": null,
           "charged": false
-        }
+        },
+        "properties": []
       },
       "flags": {
         "dnd5e": {
@@ -2582,8 +2608,7 @@
       "system": {
         "description": {
           "value": "<p>You are particularly familiar with one type of natural environment and are adept at traveling and surviving in such regions. Choose one type of favored terrain: arctic, coast, desert, forest, grassland, mountain, or swamp. When you make an Intelligence or Wisdom check related to your favored terrain, your proficiency bonus is doubled if you are using a skill that you're proficient in.</p><p>While traveling for an hour or more in your favored terrain, you gain the following benefits:</p><ul><li>Difficult terrain doesn't slow your group's travel.</li><li>Your group can't become lost except by magical means.</li><li>Even when you are engaged in another activity while traveling (such as foraging, navigating, or tracking), you remain alert to danger.</li><li>If you are traveling alone, you can move stealthily at a normal pace.</li><li>When you forage, you find twice as much food as you normally would.</li><li>While tracking other creatures, you also learn their exact number, their sizes, and how long ago they passed through the area.</li></ul><p>You choose additional favored terrain types at 6th and 10th level.</p><section class=\"secret\" id=\"secret-xtmITx8xwrAenwFl\"><p><strong>Foundry Note</strong></p><p>If it would be helpful, manually edit this entry and make a note of your choices here:</p><ul><li><em>1st level</em></li><li><em>6th level</em></li><li><em>10th level</em></li></ul></section>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -2647,13 +2672,15 @@
         },
         "type": {
           "value": "class",
-          "subtype": ""
+          "subtype": "",
+          "baseItem": ""
         },
         "requirements": "Ranger 1",
         "recharge": {
           "value": null,
           "charged": false
-        }
+        },
+        "properties": []
       },
       "flags": {
         "dnd5e": {
@@ -2683,8 +2710,7 @@
       "system": {
         "description": {
           "value": "<p>Your elf character has a variety of natural abilities, the result of thousands of years of elven refinement.</p><p><em><strong>Ability Score Increase.</strong></em> Your Dexterity score increases by 2.</p><p><em><strong>Age.</strong></em> Although elves reach physical maturity at about the same age as humans, the elven understanding of adulthood goes beyond physical growth to encompass worldly experience. An elf typically claims adulthood and an adult name around the age of 100 and can live to be 750 years old.</p><p><em><strong>Alignment.</strong></em> Elves love freedom, variety, and self-expression, so they lean strongly toward the gentler aspects of chaos. They value and protect others' freedom as well as their own, and they are more often good than not.</p><p><em><strong>Size.</strong></em> Elves range from under 5 to over 6 feet tall and have slender builds. Your size is Medium.</p><p><em><strong>Speed.</strong></em> Your base walking speed is 30 feet.</p><p><em><strong>Darkvision.</strong></em> Accustomed to twilit forests and the night sky, you have superior vision in dark and dim conditions. You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can't discern color in darkness, only shades of gray.</p><p><em><strong>Keen Senses.</strong></em> You have proficiency in the Perception skill.</p><p><em><strong>Fey Ancestry.</strong></em> You have advantage on saving throws against being charmed, and magic can't put you to sleep.</p><p><em><strong>Trance.</strong></em> Elves don't need to sleep. Instead, they meditate deeply, remaining semiconscious, for 4 hours a day. (The Common word for such meditation is \"trance.\") While meditating, you can dream after a fashion; such dreams are actually mental exercises that have become reflexive through years of practice. After resting in this way, you gain the same benefit that a human does from 8 hours of sleep.</p><p><em><strong>Languages.</strong></em> You can speak, read, and write Common and Elvish. Elvish is fluid, with subtle intonations and intricate grammar. Elven literature is rich and varied, and their songs and poems are famous among other races. Many bards learn their language so they can add Elvish ballads to their repertoires.</p><h5>High Elf</h5><p>As a high elf, you have a keen mind and a mastery of at least the basics of magic. In many fantasy gaming worlds, there are two kinds of high elves. One type is haughty and reclusive, believing themselves to be superior to non-elves and even other elves. The other type is more common and more friendly, and often encountered among humans and other races.</p><p><em><strong>Ability Score Increase.</strong></em> Your Intelligence score increases by 1.</p><p><em><strong>Elf Weapon Training.</strong></em> You have proficiency with the longsword, shortsword, shortbow, and longbow.</p><p><em><strong>Cantrip.</strong></em> You know one cantrip of your choice from the wizard spell list. Intelligence is your spellcasting ability for it.</p><p><em><strong>Extra Language.</strong></em> You can speak, read, and write one extra language of your choice.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -2927,8 +2953,7 @@
       "system": {
         "description": {
           "value": "<p>You have advantage on saving throws against being charmed, and magic can't put you to sleep.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -2992,13 +3017,15 @@
         },
         "type": {
           "value": "race",
-          "subtype": ""
+          "subtype": "",
+          "baseItem": ""
         },
         "requirements": "Elf, Half-Elf",
         "recharge": {
           "value": null,
           "charged": false
-        }
+        },
+        "properties": []
       },
       "flags": {
         "dnd5e": {
@@ -3028,8 +3055,7 @@
       "system": {
         "description": {
           "value": "<p>Elves don't need to sleep. Instead, they meditate deeply, remaining semiconscious, for 4 hours a day. (The Common word for such meditation is \"trance.\") While meditating, you can dream after a fashion; such dreams are actually mental exercises that have become reflexive through years of practice. After resting in this way, you gain the same benefit that a human does from 8 hours of sleep.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -3093,13 +3119,15 @@
         },
         "type": {
           "value": "race",
-          "subtype": ""
+          "subtype": "",
+          "baseItem": ""
         },
         "requirements": "Elf",
         "recharge": {
           "value": null,
           "charged": false
-        }
+        },
+        "properties": []
       },
       "effects": [],
       "ownership": {
@@ -3133,8 +3161,7 @@
       "system": {
         "description": {
           "value": "<p>This spell is a minor magical trick that novice spellcasters use for practice. You create one of the following magical effects within range:</p>\n<ul>\n<li>You create an instantaneous, harmless sensory effect, such as a shower of sparks, a puff of wind, faint musical notes, or an odd odor.</li>\n<li>You instantaneously light or snuff out a candle, a torch, or a small campfire.</li>\n<li>You instantaneously clean or soil an object no larger than 1 cubic foot.</li>\n<li>You chill, warm, or flavor up to 1 cubic foot of nonliving material for 1 hour.</li>\n<li>You make a color, a small mark, or a symbol appear on an object or a surface for 1 hour.</li>\n<li>You create a nonmagical trinket or an illusory image that can fit in your hand and that lasts until the end of your next turn.</li>\n</ul>\n<p>If you cast this spell multiple times, you can have up to three of its non-instantaneous effects active at a time, and you can dismiss such an effect as an action.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -3198,13 +3225,6 @@
         },
         "level": 0,
         "school": "trs",
-        "components": {
-          "vocal": true,
-          "somatic": true,
-          "material": false,
-          "ritual": false,
-          "concentration": false
-        },
         "materials": {
           "value": "",
           "consumed": false,
@@ -3248,7 +3268,32 @@
       "_key": "!actors.items!cYD0wRXLW4B17aoY.U0X7MGDlr5QH3x5R"
     }
   ],
-  "effects": [],
+  "effects": [
+    {
+      "_id": "dnd5eencumbered0",
+      "name": "Encumbered",
+      "icon": "systems/dnd5e/icons/svg/statuses/encumbered.svg",
+      "statuses": [
+        "encumbered"
+      ],
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": 0,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": 0,
+        "startTurn": 0
+      },
+      "description": "",
+      "origin": null,
+      "transfer": false,
+      "flags": {},
+      "_key": "!actors.effects!cYD0wRXLW4B17aoY.dnd5eencumbered0"
+    }
+  ],
   "folder": null,
   "sort": 0,
   "ownership": {
@@ -3261,7 +3306,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787232181,
-    "modifiedTime": 1704466715207,
+    "modifiedTime": 1704823964644,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!cYD0wRXLW4B17aoY"

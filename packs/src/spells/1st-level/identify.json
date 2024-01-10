@@ -8,8 +8,7 @@
   "system": {
     "description": {
       "value": "<p>You choose one object that you must touch throughout the casting of the spell. If it is a magic item or some other magic-imbued object, you learn its properties and how to use them, whether it requires attunement to use, and how many charges it has, if any. You learn whether any spells are affecting the item and what they are. If the item was created by a spell, you learn which spell created it.</p><p>If you instead touch a creature throughout the casting, you learn what spells, if any, are currently affecting it.</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -31,7 +30,8 @@
       "value": 1,
       "width": null,
       "units": "",
-      "type": "object"
+      "type": "object",
+      "prompt": true
     },
     "range": {
       "value": null,
@@ -42,12 +42,14 @@
       "value": null,
       "max": "",
       "per": null,
-      "recovery": ""
+      "recovery": "",
+      "prompt": true
     },
     "consume": {
       "type": "",
       "target": null,
-      "amount": null
+      "amount": null,
+      "scale": false
     },
     "ability": "",
     "actionType": "util",
@@ -69,13 +71,6 @@
     },
     "level": 1,
     "school": "div",
-    "components": {
-      "vocal": true,
-      "somatic": true,
-      "material": true,
-      "ritual": true,
-      "concentration": false
-    },
     "materials": {
       "value": "A pearl worth at least 100gp and an owl feather",
       "consumed": false,
@@ -95,7 +90,8 @@
       "somatic",
       "material",
       "ritual"
-    ]
+    ],
+    "crewed": false
   },
   "sort": 0,
   "flags": {},
@@ -107,7 +103,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787234064,
-    "modifiedTime": 1704565106205,
+    "modifiedTime": 1704823521795,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!3OZnNhunvRtPOQmH"

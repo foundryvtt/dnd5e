@@ -8,8 +8,7 @@
   "system": {
     "description": {
       "value": "<p>A storm cloud appears in the shape of a cylinder that is 10 feet tall with a 60-foot radius, centered on a point you can see 100 feet directly above you. The spell fails if you can't see a point in the air where the storm cloud could appear (for example, if you are in a room that can't accommodate the cloud).</p><p>When you cast the spell, choose a point you can see within range. A bolt of lightning flashes down from the cloud to that point. Each creature within 5 feet of that point must make a Dexterity saving throw. A creature takes 3d10 lightning damage on a failed save, or half as much damage on a successful one. On each of your turns until the spell ends, you can use your action to call down lightning in this way again, targeting the same point or a different one.</p><p>If you are outdoors in stormy conditions when you cast this spell, the spell gives you control over the existing storm instead of creating a new one. Under such conditions, the spell's damage increases by 1d10.</p><p><strong>Higher Levels.</strong> When you cast this spell using a spell slot of 4th or higher level, the damage increases by 1d10 for each slot level above 3rd.</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -31,7 +30,8 @@
       "value": 60,
       "width": null,
       "units": "ft",
-      "type": "cylinder"
+      "type": "cylinder",
+      "prompt": true
     },
     "range": {
       "value": 120,
@@ -42,12 +42,14 @@
       "value": null,
       "max": "",
       "per": null,
-      "recovery": ""
+      "recovery": "",
+      "prompt": true
     },
     "consume": {
       "type": "",
       "target": null,
-      "amount": null
+      "amount": null,
+      "scale": false
     },
     "ability": "",
     "actionType": "save",
@@ -74,13 +76,6 @@
     },
     "level": 3,
     "school": "con",
-    "components": {
-      "vocal": true,
-      "somatic": true,
-      "material": false,
-      "ritual": false,
-      "concentration": true
-    },
     "materials": {
       "value": "",
       "consumed": false,
@@ -99,7 +94,8 @@
       "vocal",
       "somatic",
       "concentration"
-    ]
+    ],
+    "crewed": false
   },
   "sort": 0,
   "flags": {},
@@ -111,7 +107,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787234186,
-    "modifiedTime": 1704565109845,
+    "modifiedTime": 1704823525109,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!ehvmg9U9fcMEhE4z"

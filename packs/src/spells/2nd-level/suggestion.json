@@ -8,8 +8,7 @@
   "system": {
     "description": {
       "value": "<p>You suggest a course of activity (limited to a sentence or two) and magically influence a creature you can see within range that can hear and understand you. Creatures that can't be charmed are immune to this effect. The suggestion must be worded in such a manner as to make the course of action sound reasonable. Asking the creature to stab itself, throw itself onto a spear, immolate itself, or do some other obviously harmful act ends the spell.</p><p>The target must make a Wisdom saving throw. On a failed save, it pursues the course of action you described to the best of its ability. The suggested course of action can continue for the entire duration. If the suggested activity can be completed in a shorter time, the spell ends when the subject finishes what it was asked to do.</p><p>You can also specify conditions that will trigger a special activity during the duration. For example, you might suggest that a knight give her warhorse to the first beggar she meets. If the condition isn't met before the spell expires, the activity isn't performed.</p><p>If you or any of your companions damage the target, the spell ends.</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -31,7 +30,8 @@
       "value": 1,
       "width": null,
       "units": "",
-      "type": "creature"
+      "type": "creature",
+      "prompt": true
     },
     "range": {
       "value": 30,
@@ -42,12 +42,14 @@
       "value": null,
       "max": "",
       "per": null,
-      "recovery": ""
+      "recovery": "",
+      "prompt": true
     },
     "consume": {
       "type": "",
       "target": null,
-      "amount": null
+      "amount": null,
+      "scale": false
     },
     "ability": "",
     "actionType": "save",
@@ -69,13 +71,6 @@
     },
     "level": 2,
     "school": "enc",
-    "components": {
-      "vocal": true,
-      "somatic": false,
-      "material": true,
-      "ritual": false,
-      "concentration": true
-    },
     "materials": {
       "value": "A snake's tongue and either a bit of honeycomb or a drop of sweet oil",
       "consumed": false,
@@ -94,7 +89,8 @@
       "vocal",
       "material",
       "concentration"
-    ]
+    ],
+    "crewed": false
   },
   "sort": 0,
   "flags": {},
@@ -106,7 +102,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787234245,
-    "modifiedTime": 1704565111250,
+    "modifiedTime": 1704823526415,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!zMAWdyc8UVb37BK4"

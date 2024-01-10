@@ -8,8 +8,7 @@
   "system": {
     "description": {
       "value": "<p>You can see normally in darkness, both magical and nonmagical, to a distance of 120 feet.</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -31,7 +30,8 @@
       "value": null,
       "width": null,
       "units": "",
-      "type": ""
+      "type": "",
+      "prompt": true
     },
     "range": {
       "value": null,
@@ -42,12 +42,14 @@
       "value": null,
       "max": "",
       "per": null,
-      "recovery": ""
+      "recovery": "",
+      "prompt": true
     },
     "consume": {
       "type": "",
       "target": null,
-      "amount": null
+      "amount": null,
+      "scale": false
     },
     "ability": "",
     "actionType": "",
@@ -75,7 +77,9 @@
     "recharge": {
       "value": null,
       "charged": false
-    }
+    },
+    "crewed": false,
+    "properties": []
   },
   "flags": {},
   "img": "icons/magic/perception/silhouette-stealth-shadow.webp",
@@ -101,12 +105,13 @@
         "startTurn": null
       },
       "icon": "icons/magic/perception/silhouette-stealth-shadow.webp",
-      "label": "Devil's Sight",
       "origin": "Item.3sN91lT1R3oxcDKd",
       "transfer": true,
       "flags": {},
       "tint": null,
-      "sort": 0,
+      "name": "Devil's Sight",
+      "description": "",
+      "statuses": [],
       "_key": "!items.effects!3sN91lT1R3oxcDKd.3JYlSTG0olbm1FQC"
     }
   ],
@@ -117,7 +122,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787234327,
-    "modifiedTime": 1701911119225,
+    "modifiedTime": 1704824714594,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!3sN91lT1R3oxcDKd"

@@ -8,8 +8,7 @@
   "system": {
     "description": {
       "value": "<p>A beam of crackling energy streaks toward a creature within range. Make a ranged spell attack against the target. On a hit, the target takes 1d10 force damage.</p><p>The spell creates more than one beam when you reach higher levels: two beams at 5th level, three beams at 11th level, and four beams at 17th level. You can direct the beams at the same target or at different ones. Make a separate attack roll for each beam.</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -31,7 +30,8 @@
       "value": 1,
       "width": null,
       "units": "",
-      "type": "creature"
+      "type": "creature",
+      "prompt": true
     },
     "range": {
       "value": 120,
@@ -42,12 +42,14 @@
       "value": null,
       "max": "",
       "per": null,
-      "recovery": ""
+      "recovery": "",
+      "prompt": true
     },
     "consume": {
       "type": "",
       "target": null,
-      "amount": null
+      "amount": null,
+      "scale": false
     },
     "ability": "",
     "actionType": "rsak",
@@ -74,13 +76,6 @@
     },
     "level": 0,
     "school": "evo",
-    "components": {
-      "vocal": true,
-      "somatic": true,
-      "material": false,
-      "ritual": false,
-      "concentration": false
-    },
     "materials": {
       "value": "",
       "consumed": false,
@@ -98,7 +93,8 @@
     "properties": [
       "vocal",
       "somatic"
-    ]
+    ],
+    "crewed": false
   },
   "sort": 0,
   "flags": {},
@@ -110,7 +106,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787234162,
-    "modifiedTime": 1704565109194,
+    "modifiedTime": 1704823524499,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!Z9p1vezIn95jw1Yw"

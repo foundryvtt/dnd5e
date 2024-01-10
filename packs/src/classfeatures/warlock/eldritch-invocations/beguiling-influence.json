@@ -8,8 +8,7 @@
   "system": {
     "description": {
       "value": "<p>You gain proficiency in the Deception and Persuasion skills.</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -31,7 +30,8 @@
       "value": null,
       "width": null,
       "units": "",
-      "type": ""
+      "type": "",
+      "prompt": true
     },
     "range": {
       "value": null,
@@ -42,12 +42,14 @@
       "value": null,
       "max": "",
       "per": null,
-      "recovery": ""
+      "recovery": "",
+      "prompt": true
     },
     "consume": {
       "type": "",
       "target": null,
-      "amount": null
+      "amount": null,
+      "scale": false
     },
     "ability": "",
     "actionType": "",
@@ -75,7 +77,9 @@
     "recharge": {
       "value": null,
       "charged": false
-    }
+    },
+    "crewed": false,
+    "properties": []
   },
   "flags": {},
   "img": "icons/commodities/currency/coin-engraved-sun-smile-copper.webp",
@@ -87,7 +91,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787234401,
-    "modifiedTime": 1701911110944,
+    "modifiedTime": 1704824717840,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!eNvpIaSnJUdF8fHl"

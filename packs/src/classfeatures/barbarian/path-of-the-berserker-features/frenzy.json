@@ -8,8 +8,7 @@
   "system": {
     "description": {
       "value": "<p>Starting when you choose this path at 3rd level, you can go into a frenzy when you @Compendium[dnd5e.classfeatures.VoR0SUrNX5EJVPIO]{Rage}. If you do so, for the duration of your rage you can make a single melee weapon attack as a bonus action on each of your turns after this one. When your rage ends, you suffer one level of exhaustion (as described in appendix A).</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -31,7 +30,8 @@
       "value": null,
       "width": null,
       "units": "",
-      "type": "self"
+      "type": "self",
+      "prompt": true
     },
     "range": {
       "value": null,
@@ -42,12 +42,14 @@
       "value": null,
       "max": "",
       "per": null,
-      "recovery": ""
+      "recovery": "",
+      "prompt": true
     },
     "consume": {
       "type": "",
       "target": null,
-      "amount": null
+      "amount": null,
+      "scale": false
     },
     "ability": "",
     "actionType": "",
@@ -75,7 +77,9 @@
     "recharge": {
       "value": null,
       "charged": false
-    }
+    },
+    "crewed": false,
+    "properties": []
   },
   "flags": {},
   "img": "icons/skills/wounds/anatomy-organ-heart-red.webp",
@@ -87,7 +91,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787234348,
-    "modifiedTime": 1701909913580,
+    "modifiedTime": 1704824715477,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!CkbbAckeCtyHXEnL"

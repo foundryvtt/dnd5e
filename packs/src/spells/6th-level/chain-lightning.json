@@ -8,8 +8,7 @@
   "system": {
     "description": {
       "value": "<p>You create a bolt of lightning that arcs toward a target of your choice that you can see within range. Three bolts then leap from that target to as many as three other targets, each of which must be within 30 feet of the first target. A target can be a creature or an object and can be targeted by only one of the bolts.</p><p>A target must make a Dexterity saving throw. The target takes 10d8 lightning damage on a failed save, or half as much damage on a successful one.</p><p><strong>Higher Levels. </strong>When you cast this spell using a spell slot of 7th level or higher, one additional bolt leaps from the first target to another target for each slot level above 6th.</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -31,7 +30,8 @@
       "value": 1,
       "width": null,
       "units": "",
-      "type": "creature"
+      "type": "creature",
+      "prompt": true
     },
     "range": {
       "value": 150,
@@ -42,12 +42,14 @@
       "value": null,
       "max": "",
       "per": null,
-      "recovery": ""
+      "recovery": "",
+      "prompt": true
     },
     "consume": {
       "type": "",
       "target": null,
-      "amount": null
+      "amount": null,
+      "scale": false
     },
     "ability": "",
     "actionType": "save",
@@ -74,13 +76,6 @@
     },
     "level": 6,
     "school": "evo",
-    "components": {
-      "vocal": true,
-      "somatic": true,
-      "material": true,
-      "ritual": false,
-      "concentration": false
-    },
     "materials": {
       "value": "A bit of fur; a piece of amber, glass, or a crystal rod; and three silver pins",
       "consumed": false,
@@ -99,7 +94,8 @@
       "vocal",
       "somatic",
       "material"
-    ]
+    ],
+    "crewed": false
   },
   "sort": 0,
   "flags": {},
@@ -111,7 +107,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787234136,
-    "modifiedTime": 1704565108376,
+    "modifiedTime": 1704823523821,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!QbTxN5dWIbYZ4jLU"

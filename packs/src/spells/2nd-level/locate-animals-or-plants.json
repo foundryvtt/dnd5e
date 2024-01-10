@@ -8,8 +8,7 @@
   "system": {
     "description": {
       "value": "<p>Describe or name a specific kind of beast or plant. Concentrating on the voice of nature in your surroundings, you learn the direction and distance to the closest creature or plant of that kind within 5 miles, if any are present.</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -31,7 +30,8 @@
       "value": null,
       "width": null,
       "units": "",
-      "type": "self"
+      "type": "self",
+      "prompt": true
     },
     "range": {
       "value": null,
@@ -42,12 +42,14 @@
       "value": null,
       "max": "",
       "per": null,
-      "recovery": ""
+      "recovery": "",
+      "prompt": true
     },
     "consume": {
       "type": "",
       "target": null,
-      "amount": null
+      "amount": null,
+      "scale": false
     },
     "ability": "",
     "actionType": "util",
@@ -69,13 +71,6 @@
     },
     "level": 2,
     "school": "div",
-    "components": {
-      "vocal": true,
-      "somatic": true,
-      "material": true,
-      "ritual": true,
-      "concentration": false
-    },
     "materials": {
       "value": "A bit of fur from a bloodhound",
       "consumed": false,
@@ -95,7 +90,8 @@
       "somatic",
       "material",
       "ritual"
-    ]
+    ],
+    "crewed": false
   },
   "sort": 0,
   "flags": {},
@@ -107,7 +103,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787234110,
-    "modifiedTime": 1704565107614,
+    "modifiedTime": 1704823523061,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!Iv2qqSAT7OkXKPFx"

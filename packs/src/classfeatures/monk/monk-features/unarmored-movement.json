@@ -8,8 +8,7 @@
   "system": {
     "description": {
       "value": "<p>Starting at 2nd level, your speed increases by 10 feet while you are not wearing armor or wielding a shield. This bonus increases when you reach certain monk levels, as shown in the Monk table.</p>\n<p>At 9th level, you gain the ability to move along vertical surfaces and across liquids on your turn without falling during the move.</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -31,7 +30,8 @@
       "value": null,
       "width": null,
       "units": "",
-      "type": ""
+      "type": "",
+      "prompt": true
     },
     "range": {
       "value": null,
@@ -42,12 +42,14 @@
       "value": null,
       "max": "",
       "per": null,
-      "recovery": ""
+      "recovery": "",
+      "prompt": true
     },
     "consume": {
       "type": "",
       "target": null,
-      "amount": null
+      "amount": null,
+      "scale": false
     },
     "ability": "",
     "actionType": "",
@@ -75,7 +77,9 @@
     "recharge": {
       "value": null,
       "charged": false
-    }
+    },
+    "crewed": false,
+    "properties": []
   },
   "flags": {},
   "img": "icons/magic/nature/root-vine-entangle-foot-green.webp",
@@ -102,11 +106,12 @@
         "combat": null
       },
       "icon": "icons/magic/nature/root-vine-entangle-foot-green.webp",
-      "label": "Unarmored Movement",
       "origin": "Item.zCeqyQ8uIPNdYJSW",
       "tint": null,
       "transfer": true,
-      "sort": 0,
+      "name": "Unarmored Movement",
+      "description": "",
+      "statuses": [],
       "_key": "!items.effects!zCeqyQ8uIPNdYJSW.Veg0vXI93A0qlxZn"
     }
   ],
@@ -117,7 +122,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787234338,
-    "modifiedTime": 1701910328335,
+    "modifiedTime": 1704824719978,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!zCeqyQ8uIPNdYJSW"

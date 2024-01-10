@@ -8,8 +8,7 @@
   "system": {
     "description": {
       "value": "<p>You can cast @Compendium[dnd5e.spells.I2LUSF5ogc7Bj62e]{Speak with Dead} at will, without expending a spell slot.</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -31,7 +30,8 @@
       "value": 1,
       "width": null,
       "units": "",
-      "type": "creature"
+      "type": "creature",
+      "prompt": true
     },
     "range": {
       "value": 10,
@@ -42,12 +42,14 @@
       "value": null,
       "max": "",
       "per": null,
-      "recovery": ""
+      "recovery": "",
+      "prompt": true
     },
     "consume": {
       "type": "",
       "target": null,
-      "amount": null
+      "amount": null,
+      "scale": false
     },
     "ability": "",
     "actionType": "",
@@ -75,7 +77,9 @@
     "recharge": {
       "value": null,
       "charged": false
-    }
+    },
+    "crewed": false,
+    "properties": []
   },
   "flags": {},
   "img": "icons/magic/death/undead-ghost-scream-teal.webp",
@@ -87,7 +91,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787234405,
-    "modifiedTime": 1701911169895,
+    "modifiedTime": 1704824718001,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!gFjxo01hAN4c9hDG"

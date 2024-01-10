@@ -8,8 +8,7 @@
   "system": {
     "description": {
       "value": "<p>A sphere of negative energy ripples out in a 60-foot radius from a point within range. Each creature in that area must make a Constitution saving throw. A target takes 8d6 necrotic damage on a failed save, or half as much damage on a successful one.</p><p><strong>Higher Levels.</strong> When you cast this spell using a spell slot of 7th level or higher, the damage increases by 2d6 for each slot level above 6th.</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -31,7 +30,8 @@
       "value": 60,
       "width": null,
       "units": "ft",
-      "type": "sphere"
+      "type": "sphere",
+      "prompt": true
     },
     "range": {
       "value": 150,
@@ -42,12 +42,14 @@
       "value": null,
       "max": "",
       "per": null,
-      "recovery": ""
+      "recovery": "",
+      "prompt": true
     },
     "consume": {
       "type": "",
       "target": null,
-      "amount": null
+      "amount": null,
+      "scale": false
     },
     "ability": "",
     "actionType": "save",
@@ -74,13 +76,6 @@
     },
     "level": 6,
     "school": "nec",
-    "components": {
-      "vocal": true,
-      "somatic": true,
-      "material": true,
-      "ritual": false,
-      "concentration": false
-    },
     "materials": {
       "value": "The powder of a crushed black pearl worth at least 500 gp.",
       "consumed": false,
@@ -99,7 +94,8 @@
       "vocal",
       "somatic",
       "material"
-    ]
+    ],
+    "crewed": false
   },
   "sort": 0,
   "flags": {},
@@ -111,7 +107,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787234116,
-    "modifiedTime": 1704565107816,
+    "modifiedTime": 1704823523256,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!KeunEkg1JYbOCOhV"

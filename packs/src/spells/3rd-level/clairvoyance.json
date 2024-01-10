@@ -8,8 +8,7 @@
   "system": {
     "description": {
       "value": "<p>You create an invisible sensor within range in a location familiar to you (a place you have visited or seen before) or in an obvious location that is unfamiliar to you (such as behind a door, around a corner, or in a grove of trees). The sensor remains in place for the duration, and it can't be attacked or otherwise interacted with.</p><p>When you cast the spell, you choose seeing or hearing. You can use the chosen sense through the sensor as if you were in its space. As your action, you can switch between seeing and hearing.</p><p>A creature that can see the sensor (such as a creature benefiting from see invisibility or truesight) sees a luminous, intangible orb about the size of your fist.</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -31,7 +30,8 @@
       "value": null,
       "width": null,
       "units": "any",
-      "type": "space"
+      "type": "space",
+      "prompt": true
     },
     "range": {
       "value": 1,
@@ -42,12 +42,14 @@
       "value": null,
       "max": "",
       "per": null,
-      "recovery": ""
+      "recovery": "",
+      "prompt": true
     },
     "consume": {
       "type": "",
       "target": null,
-      "amount": null
+      "amount": null,
+      "scale": false
     },
     "ability": "",
     "actionType": "util",
@@ -69,13 +71,6 @@
     },
     "level": 3,
     "school": "div",
-    "components": {
-      "vocal": true,
-      "somatic": true,
-      "material": true,
-      "ritual": false,
-      "concentration": true
-    },
     "materials": {
       "value": "A focus worth at least 100gp, either a jeweled horn for hearing or a glass eye for seeing.",
       "consumed": false,
@@ -95,7 +90,8 @@
       "somatic",
       "material",
       "concentration"
-    ]
+    ],
+    "crewed": false
   },
   "sort": 0,
   "flags": {},
@@ -107,7 +103,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787234175,
-    "modifiedTime": 1704565109528,
+    "modifiedTime": 1704823524822,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!cg50KpBkBdPK6vPL"

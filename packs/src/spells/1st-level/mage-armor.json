@@ -6,8 +6,7 @@
   "system": {
     "description": {
       "value": "<p>You touch a willing creature who isn't wearing armor, and a protective magical force surrounds it until the spell ends. The target's base AC becomes 13 + its Dexterity modifier. The spell ends if the target dons armor or if you dismiss the spell as an action.</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -29,7 +28,8 @@
       "value": 1,
       "width": null,
       "units": "",
-      "type": "creature"
+      "type": "creature",
+      "prompt": true
     },
     "range": {
       "value": null,
@@ -40,12 +40,14 @@
       "value": null,
       "max": "",
       "per": null,
-      "recovery": ""
+      "recovery": "",
+      "prompt": true
     },
     "consume": {
       "type": "",
       "target": null,
-      "amount": null
+      "amount": null,
+      "scale": false
     },
     "ability": "",
     "actionType": "util",
@@ -67,13 +69,6 @@
     },
     "level": 1,
     "school": "abj",
-    "components": {
-      "vocal": true,
-      "somatic": true,
-      "material": true,
-      "ritual": false,
-      "concentration": false
-    },
     "materials": {
       "value": "A piece of cured leather",
       "consumed": false,
@@ -92,7 +87,8 @@
       "vocal",
       "somatic",
       "material"
-    ]
+    ],
+    "crewed": false
   },
   "effects": [
     {
@@ -116,12 +112,13 @@
         "startTurn": null
       },
       "icon": "icons/magic/defensive/shield-barrier-glowing-triangle-blue.webp",
-      "label": "Mage Armor",
       "origin": "Compendium.dnd5e.spells.CKZTpZlxj7hjjo2H",
       "transfer": true,
       "flags": {},
       "tint": null,
-      "sort": 0,
+      "name": "Mage Armor",
+      "description": "",
+      "statuses": [],
       "_key": "!items.effects!CKZTpZlxj7hjjo2H.cfwMU7LuOJ619Lny"
     }
   ],
@@ -136,7 +133,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787234095,
-    "modifiedTime": 1704565107222,
+    "modifiedTime": 1704823522722,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!CKZTpZlxj7hjjo2H"

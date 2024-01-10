@@ -8,8 +8,7 @@
   "system": {
     "description": {
       "value": "<p>You attain the pinnacle of resilience in battle.</p><p>At the start of each of your turns, you regain hit points equal to 5 + your Constitution modifier if you have no more than half of your hit points left.</p><p>You don't gain this benefit if you have 0 hit points.</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -31,7 +30,8 @@
       "value": null,
       "width": null,
       "units": "",
-      "type": ""
+      "type": "",
+      "prompt": true
     },
     "range": {
       "value": null,
@@ -42,12 +42,14 @@
       "value": null,
       "max": "",
       "per": null,
-      "recovery": ""
+      "recovery": "",
+      "prompt": true
     },
     "consume": {
       "type": "",
       "target": null,
-      "amount": null
+      "amount": null,
+      "scale": false
     },
     "ability": "con",
     "actionType": "heal",
@@ -80,7 +82,9 @@
     "recharge": {
       "value": null,
       "charged": false
-    }
+    },
+    "crewed": false,
+    "properties": []
   },
   "flags": {},
   "img": "icons/magic/life/heart-glowing-red.webp",
@@ -92,7 +96,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787234412,
-    "modifiedTime": 1701910220050,
+    "modifiedTime": 1704824718314,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!ipG5yx1tRNmeJfSH"

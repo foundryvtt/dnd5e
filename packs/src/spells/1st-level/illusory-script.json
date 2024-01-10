@@ -8,8 +8,7 @@
   "system": {
     "description": {
       "value": "<p>You write on Parchment, paper, or some other suitable writing material and imbue it with a potent Illusion that lasts for the Duration.</p><p>To you and any creatures you designate when you cast the spell, the writing appears normal, written in your hand, and conveys whatever meaning you intended when you wrote the text. To all others, the writing appears as if it were written in an unknown or magical script that is unintelligible. Alternatively, you can cause the writing to appear to be an entirely different message, written in a different hand and language, though the language must be one you know.</p><p>Should the spell be dispelled, the original script and the Illusion both disappear.</p><p>A creature with Truesight can read the hidden message.</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -31,7 +30,8 @@
       "value": null,
       "width": null,
       "units": "",
-      "type": ""
+      "type": "",
+      "prompt": true
     },
     "range": {
       "value": null,
@@ -42,12 +42,14 @@
       "value": null,
       "max": "",
       "per": null,
-      "recovery": ""
+      "recovery": "",
+      "prompt": true
     },
     "consume": {
       "type": "",
       "target": null,
-      "amount": null
+      "amount": null,
+      "scale": false
     },
     "ability": "",
     "actionType": "util",
@@ -69,13 +71,6 @@
     },
     "level": 1,
     "school": "ill",
-    "components": {
-      "vocal": false,
-      "somatic": true,
-      "material": true,
-      "ritual": true,
-      "concentration": false
-    },
     "materials": {
       "value": "A lead-based ink worth at least 10gp, which the spell consumes",
       "consumed": true,
@@ -94,7 +89,8 @@
       "somatic",
       "material",
       "ritual"
-    ]
+    ],
+    "crewed": false
   },
   "sort": 0,
   "flags": {},
@@ -106,7 +102,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787234078,
-    "modifiedTime": 1704565106691,
+    "modifiedTime": 1704823522238,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!82jM6qD9axLJsTrH"

@@ -8,8 +8,7 @@
   "system": {
     "description": {
       "value": "<p>For the Duration, no sound can be created within or pass through a 20-foot-radius sphere centered on a point you choose within range. Any creature or object entirely inside the sphere is immune to thunder damage, and creatures are Deafened while entirely inside it. Casting a Spell that includes a verbal component is impossible there.</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -31,7 +30,8 @@
       "value": 20,
       "width": null,
       "units": "ft",
-      "type": "sphere"
+      "type": "sphere",
+      "prompt": true
     },
     "range": {
       "value": 120,
@@ -42,12 +42,14 @@
       "value": null,
       "max": "",
       "per": null,
-      "recovery": ""
+      "recovery": "",
+      "prompt": true
     },
     "consume": {
       "type": "",
       "target": null,
-      "amount": null
+      "amount": null,
+      "scale": false
     },
     "ability": "",
     "actionType": "util",
@@ -69,13 +71,6 @@
     },
     "level": 2,
     "school": "ill",
-    "components": {
-      "vocal": true,
-      "somatic": true,
-      "material": false,
-      "ritual": true,
-      "concentration": true
-    },
     "materials": {
       "value": "",
       "consumed": false,
@@ -95,7 +90,8 @@
       "somatic",
       "ritual",
       "concentration"
-    ]
+    ],
+    "crewed": false
   },
   "sort": 0,
   "flags": {},
@@ -107,7 +103,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787234069,
-    "modifiedTime": 1704565106389,
+    "modifiedTime": 1704823521945,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!5VhqFROQYjr1P9lp"

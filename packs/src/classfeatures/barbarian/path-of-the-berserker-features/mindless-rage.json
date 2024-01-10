@@ -8,8 +8,7 @@
   "system": {
     "description": {
       "value": "<p>Beginning at 6th level, you can't be charmed or frightened while raging. If you are charmed or frightened when you enter your @Compendium[dnd5e.classfeatures.VoR0SUrNX5EJVPIO]{Rage}, the effect is suspended for the duration of the rage.</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -31,7 +30,8 @@
       "value": null,
       "width": null,
       "units": "",
-      "type": ""
+      "type": "",
+      "prompt": true
     },
     "range": {
       "value": null,
@@ -42,12 +42,14 @@
       "value": null,
       "max": "",
       "per": null,
-      "recovery": ""
+      "recovery": "",
+      "prompt": true
     },
     "consume": {
       "type": "",
       "target": null,
-      "amount": null
+      "amount": null,
+      "scale": false
     },
     "ability": "",
     "actionType": "",
@@ -75,7 +77,9 @@
     "recharge": {
       "value": null,
       "charged": false
-    }
+    },
+    "crewed": false,
+    "properties": []
   },
   "flags": {},
   "img": "icons/skills/toxins/cup-goblet-poisoned-spilled.webp",
@@ -87,7 +91,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787234321,
-    "modifiedTime": 1701909914799,
+    "modifiedTime": 1704824714368,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!0Jgf8fYY2ExwgQpN"

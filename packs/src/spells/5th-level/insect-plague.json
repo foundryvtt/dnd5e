@@ -8,8 +8,7 @@
   "system": {
     "description": {
       "value": "<p>Swarming, biting locusts fill a 20-foot-radius Sphere centered on a point you choose within range. The sphere spreads around corners. The sphere remains for the Duration, and its area is lightly obscured. The sphere's area is difficult terrain.</p><p>When the area appears, each creature in it must make a Constitution saving throw. A creature takes 4d10 piercing damage on a failed save, or half as much damage on a successful one. A creature must also make this saving throw when it enters the spell's area for the first time on a turn or ends its turn there.</p><p><strong>At Higher Levels.</strong> When you cast this spell using a spell slot of 6th level or higher, the damage increases by 1d10 for each slot level above 5th.</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -31,7 +30,8 @@
       "value": 20,
       "width": null,
       "units": "ft",
-      "type": "sphere"
+      "type": "sphere",
+      "prompt": true
     },
     "range": {
       "value": 300,
@@ -42,12 +42,14 @@
       "value": null,
       "max": "",
       "per": null,
-      "recovery": ""
+      "recovery": "",
+      "prompt": true
     },
     "consume": {
       "type": "",
       "target": null,
-      "amount": null
+      "amount": null,
+      "scale": false
     },
     "ability": "",
     "actionType": "save",
@@ -74,13 +76,6 @@
     },
     "level": 5,
     "school": "con",
-    "components": {
-      "vocal": true,
-      "somatic": true,
-      "material": true,
-      "ritual": false,
-      "concentration": true
-    },
     "materials": {
       "value": "A few grains of sugar, some kernels of grain, and a smear of fat",
       "consumed": false,
@@ -100,7 +95,8 @@
       "somatic",
       "material",
       "concentration"
-    ]
+    ],
+    "crewed": false
   },
   "sort": 0,
   "flags": {},
@@ -112,7 +108,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787234131,
-    "modifiedTime": 1704565108258,
+    "modifiedTime": 1704823523705,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!OVikYmSdHliAG2YD"

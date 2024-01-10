@@ -8,8 +8,7 @@
   "system": {
     "description": {
       "value": "<p>Starting at 6th level, you can call on your patron to alter fate in your favor. When you make an ability check or a saving throw, you can use this feature to add a d10 to your roll. You can do so after seeing the initial roll but before any of the roll's effects occur.</p><p>Once you use this feature, you can't use it again until you finish a short or long rest.</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -31,7 +30,8 @@
       "value": null,
       "width": null,
       "units": "",
-      "type": "self"
+      "type": "self",
+      "prompt": true
     },
     "range": {
       "value": null,
@@ -42,12 +42,14 @@
       "value": 1,
       "max": "1",
       "per": "sr",
-      "recovery": ""
+      "recovery": "",
+      "prompt": true
     },
     "consume": {
       "type": "",
       "target": null,
-      "amount": null
+      "amount": null,
+      "scale": false
     },
     "ability": "",
     "actionType": "other",
@@ -75,7 +77,9 @@
     "recharge": {
       "value": null,
       "charged": false
-    }
+    },
+    "crewed": false,
+    "properties": []
   },
   "flags": {},
   "img": "icons/creatures/unholy/demon-fanged-horned-yellow.webp",
@@ -87,7 +91,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787234370,
-    "modifiedTime": 1701910967372,
+    "modifiedTime": 1704824716477,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!OQSb0bO1yDI4aiMx"

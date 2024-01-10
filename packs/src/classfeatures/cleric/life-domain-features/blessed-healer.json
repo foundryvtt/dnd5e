@@ -8,8 +8,7 @@
   "system": {
     "description": {
       "value": "<p>Beginning at 6th level, the healing spells you cast on others heal you as well.</p><p>When you cast a spell of 1st level or higher that restores hit points to a creature other than you, you regain hit points equal to 2 + the spell's level.</p><section class=\"secret foundry-note\" id=\"secret-8pxfORAMtA2mWG44\"><p><strong>Foundry Note</strong></p><p>The healing formula is set to 2. Please add the additional from the spell level manually.</p></section>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -31,7 +30,8 @@
       "value": null,
       "width": null,
       "units": "",
-      "type": "self"
+      "type": "self",
+      "prompt": true
     },
     "range": {
       "value": null,
@@ -42,12 +42,14 @@
       "value": null,
       "max": "",
       "per": null,
-      "recovery": ""
+      "recovery": "",
+      "prompt": true
     },
     "consume": {
       "type": "",
       "target": null,
-      "amount": null
+      "amount": null,
+      "scale": false
     },
     "ability": "",
     "actionType": "heal",
@@ -80,7 +82,9 @@
     "recharge": {
       "value": null,
       "charged": false
-    }
+    },
+    "crewed": false,
+    "properties": []
   },
   "flags": {},
   "img": "icons/magic/light/orbs-hand-gray.webp",
@@ -92,7 +96,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787234443,
-    "modifiedTime": 1701910044365,
+    "modifiedTime": 1704824719938,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!yv49QN6Bzqs0ecCs"

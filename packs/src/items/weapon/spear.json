@@ -91,22 +91,10 @@
       "dt": null,
       "conditions": ""
     },
-    "properties": {
-      "thr": true,
-      "ver": true,
-      "amm": false,
-      "hvy": false,
-      "fin": false,
-      "fir": false,
-      "foc": false,
-      "lgt": false,
-      "lod": false,
-      "rch": false,
-      "rel": false,
-      "ret": false,
-      "spc": false,
-      "two": false
-    },
+    "properties": [
+      "thr",
+      "ver"
+    ],
     "proficient": null,
     "type": {
       "value": "simpleM",
@@ -130,7 +118,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787233636,
-    "modifiedTime": 1703713482954,
+    "modifiedTime": 1704823150499,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!OG4nBBydvmfWYXIk"

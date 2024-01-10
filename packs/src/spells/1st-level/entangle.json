@@ -5,8 +5,7 @@
   "system": {
     "description": {
       "value": "<p>Grasping weeds and vines sprout from the ground in a 20-foot square starting from a point within range. For the Duration, these Plants turn the ground in the area into difficult terrain.</p><p>A creature in the area when you cast the spell must succeed on a Strength saving throw or be Restrained by the entangling Plants until the spell ends. A creature restrained by the plants can use its action to make a Strength check against your spell save DC. On a success, it frees itself.</p><p>When the spell ends, the conjured Plants wilt away.</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -28,7 +27,8 @@
       "value": 20,
       "width": null,
       "units": "ft",
-      "type": "square"
+      "type": "square",
+      "prompt": true
     },
     "range": {
       "value": 90,
@@ -39,12 +39,14 @@
       "value": null,
       "max": "",
       "per": null,
-      "recovery": ""
+      "recovery": "",
+      "prompt": true
     },
     "consume": {
       "type": "",
       "target": null,
-      "amount": null
+      "amount": null,
+      "scale": false
     },
     "ability": "",
     "actionType": "save",
@@ -66,13 +68,6 @@
     },
     "level": 1,
     "school": "con",
-    "components": {
-      "vocal": true,
-      "somatic": true,
-      "material": false,
-      "ritual": false,
-      "concentration": true
-    },
     "materials": {
       "value": "",
       "consumed": false,
@@ -91,7 +86,8 @@
       "vocal",
       "somatic",
       "concentration"
-    ]
+    ],
+    "crewed": false
   },
   "effects": [],
   "flags": {},
@@ -106,7 +102,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787234191,
-    "modifiedTime": 1704565110000,
+    "modifiedTime": 1704823525255,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!gMrWeG8fMDPRFiVe"

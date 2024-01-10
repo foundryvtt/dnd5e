@@ -8,8 +8,7 @@
   "system": {
     "description": {
       "value": "<p>Starting at 3rd level, you can use the bonus action granted by your @Compendium[dnd5e.classfeatures.01pcLg6PRu5zGrsb]{Cunning Action} to make a Dexterity (Sleight of Hand) check, use your thieves' tools to disarm a trap or open a lock, or take the Use an Object action.</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -31,7 +30,8 @@
       "value": null,
       "width": null,
       "units": "",
-      "type": "self"
+      "type": "self",
+      "prompt": true
     },
     "range": {
       "value": null,
@@ -42,12 +42,14 @@
       "value": null,
       "max": "",
       "per": null,
-      "recovery": ""
+      "recovery": "",
+      "prompt": true
     },
     "consume": {
       "type": "",
       "target": null,
-      "amount": null
+      "amount": null,
+      "scale": false
     },
     "ability": "",
     "actionType": "",
@@ -75,7 +77,9 @@
     "recharge": {
       "value": null,
       "charged": false
-    }
+    },
+    "crewed": false,
+    "properties": []
   },
   "flags": {},
   "img": "icons/skills/social/theft-pickpocket-bribery-brown.webp",
@@ -87,7 +91,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787234406,
-    "modifiedTime": 1701910792711,
+    "modifiedTime": 1704824718048,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!ga3dt2zrCn2MHK8R"

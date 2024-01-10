@@ -8,8 +8,7 @@
   "system": {
     "description": {
       "value": "<p>For the duration, you sense the presence of magic within 30 feet of you. If you sense magic in this way, you can use your action to see a faint aura around any visible creature or object in the area that bears magic, and you learn its school of magic, if any.</p><p>The spell can penetrate most barriers, but it is blocked by 1 foot of stone, 1 inch of common metal, a thin sheet of lead, or 3 feet of wood or dirt.</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -31,7 +30,8 @@
       "value": 30,
       "width": null,
       "units": "ft",
-      "type": "radius"
+      "type": "radius",
+      "prompt": true
     },
     "range": {
       "value": null,
@@ -42,12 +42,14 @@
       "value": null,
       "max": "",
       "per": null,
-      "recovery": ""
+      "recovery": "",
+      "prompt": true
     },
     "consume": {
       "type": "",
       "target": null,
-      "amount": null
+      "amount": null,
+      "scale": false
     },
     "ability": "",
     "actionType": "util",
@@ -69,13 +71,6 @@
     },
     "level": 1,
     "school": "div",
-    "components": {
-      "vocal": true,
-      "somatic": true,
-      "material": false,
-      "ritual": true,
-      "concentration": true
-    },
     "materials": {
       "value": "",
       "consumed": false,
@@ -95,7 +90,8 @@
       "somatic",
       "ritual",
       "concentration"
-    ]
+    ],
+    "crewed": false
   },
   "sort": 0,
   "flags": {},
@@ -107,7 +103,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787234192,
-    "modifiedTime": 1704565110054,
+    "modifiedTime": 1704823525304,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!ghXTfe7sgCbgf1Q8"

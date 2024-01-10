@@ -8,8 +8,7 @@
   "system": {
     "description": {
       "value": "<p>At 10th level, your mastery of the ki flowing through you makes you immune to disease and poison.</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -32,7 +31,8 @@
       "value": null,
       "width": null,
       "units": "",
-      "type": ""
+      "type": "",
+      "prompt": true
     },
     "range": {
       "value": null,
@@ -43,12 +43,14 @@
       "value": null,
       "max": "",
       "per": null,
-      "recovery": ""
+      "recovery": "",
+      "prompt": true
     },
     "consume": {
       "type": "",
       "target": null,
-      "amount": null
+      "amount": null,
+      "scale": false
     },
     "ability": "",
     "actionType": "",
@@ -76,7 +78,8 @@
     "recharge": {
       "value": null,
       "charged": false
-    }
+    },
+    "properties": []
   },
   "flags": {},
   "img": "icons/magic/control/encase-creature-humanoid-hold.webp",
@@ -88,7 +91,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787234396,
-    "modifiedTime": 1701910370244,
+    "modifiedTime": 1704824717634,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!bqWA7t9pDELbNRkp"

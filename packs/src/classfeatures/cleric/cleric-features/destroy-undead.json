@@ -8,8 +8,7 @@
   "system": {
     "description": {
       "value": "<p>Starting at 5th level, when an undead fails its saving throw against your @Compendium[dnd5e.classfeatures.r91UIgwFdHwkXdia]{Turn Undead} feature, the creature is instantly destroyed if its challenge rating is at or below a certain threshold, as shown in the table below.</p>\n<table border=\"1\">\n<tbody>\n<tr>\n<td><strong>Cleric Level</strong></td>\n<td><strong>Destroys Undead of CR...</strong></td>\n</tr>\n<tr>\n<td>5th</td>\n<td>1/2 or lower</td>\n</tr>\n<tr>\n<td>8th</td>\n<td>1 or lower</td>\n</tr>\n<tr>\n<td>11th</td>\n<td>2 or lower</td>\n</tr>\n<tr>\n<td>14th</td>\n<td>3 or lower</td>\n</tr>\n<tr>\n<td>17th</td>\n<td>4 or lower</td>\n</tr>\n</tbody>\n</table>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -31,7 +30,8 @@
       "value": null,
       "width": null,
       "units": "",
-      "type": ""
+      "type": "",
+      "prompt": true
     },
     "range": {
       "value": null,
@@ -42,12 +42,14 @@
       "value": null,
       "max": "",
       "per": null,
-      "recovery": ""
+      "recovery": "",
+      "prompt": true
     },
     "consume": {
       "type": "",
       "target": null,
-      "amount": null
+      "amount": null,
+      "scale": false
     },
     "ability": "",
     "actionType": "",
@@ -75,7 +77,9 @@
     "recharge": {
       "value": null,
       "charged": false
-    }
+    },
+    "crewed": false,
+    "properties": []
   },
   "flags": {},
   "img": "icons/magic/death/skull-horned-worn-fire-blue.webp",
@@ -87,7 +91,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787234368,
-    "modifiedTime": 1701910093372,
+    "modifiedTime": 1704824716407,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!NMy4piwXIpLjYbRE"

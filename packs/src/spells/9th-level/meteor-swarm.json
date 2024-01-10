@@ -8,8 +8,7 @@
   "system": {
     "description": {
       "value": "<p>Blazing orbs of fire plummet to the ground at four different points you can see within range. Each creature in a 40-foot-radius sphere centered on each point you choose must make a Dexterity saving throw. The sphere spreads around corners. A creature takes 20d6 fire damage and 20d6 bludgeoning damage on a failed save, or half as much damage on a successful one. A creature in the area of more than one fiery burst is affected only once.</p><p>The spell damages objects in the area and ignites flammable objects that aren't being worn or carried.</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -31,7 +30,8 @@
       "value": 40,
       "width": null,
       "units": "ft",
-      "type": "sphere"
+      "type": "sphere",
+      "prompt": true
     },
     "range": {
       "value": 1,
@@ -42,12 +42,14 @@
       "value": null,
       "max": "",
       "per": null,
-      "recovery": ""
+      "recovery": "",
+      "prompt": true
     },
     "consume": {
       "type": "",
       "target": null,
-      "amount": null
+      "amount": null,
+      "scale": false
     },
     "ability": "",
     "actionType": "save",
@@ -78,13 +80,6 @@
     },
     "level": 9,
     "school": "evo",
-    "components": {
-      "vocal": true,
-      "somatic": true,
-      "material": false,
-      "ritual": false,
-      "concentration": false
-    },
     "materials": {
       "value": "",
       "consumed": false,
@@ -102,7 +97,8 @@
     "properties": [
       "vocal",
       "somatic"
-    ]
+    ],
+    "crewed": false
   },
   "sort": 0,
   "flags": {},
@@ -114,7 +110,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787234217,
-    "modifiedTime": 1704565110417,
+    "modifiedTime": 1704823525632,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!mF52ldF79Cr7wfQo"

@@ -8,8 +8,7 @@
   "system": {
     "description": {
       "value": "<p>Starting at 2nd level, you can add half your proficiency bonus, rounded down, to any ability check you make that doesn't already include your proficiency bonus.</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -31,7 +30,8 @@
       "value": null,
       "width": null,
       "units": "",
-      "type": ""
+      "type": "",
+      "prompt": true
     },
     "range": {
       "value": null,
@@ -42,12 +42,14 @@
       "value": null,
       "max": "",
       "per": null,
-      "recovery": ""
+      "recovery": "",
+      "prompt": true
     },
     "consume": {
       "type": "",
       "target": null,
-      "amount": null
+      "amount": null,
+      "scale": false
     },
     "ability": "",
     "actionType": "",
@@ -75,7 +77,9 @@
     "recharge": {
       "value": null,
       "charged": false
-    }
+    },
+    "crewed": false,
+    "properties": []
   },
   "flags": {},
   "img": "icons/commodities/tech/cog-steel.webp",
@@ -101,12 +105,13 @@
         "startTurn": null
       },
       "icon": "icons/commodities/tech/cog-steel.webp",
-      "label": "Jack of All Trades",
       "origin": "Item.LaQuQ37mInXH6TiR",
       "transfer": true,
       "flags": {},
       "tint": null,
-      "sort": 0,
+      "name": "Jack of All Trades",
+      "description": "",
+      "statuses": [],
       "_key": "!items.effects!ezWijmCnlnQ9ZRX2.K4xQzXl1Z4zMnyOa"
     }
   ],
@@ -117,7 +122,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787234402,
-    "modifiedTime": 1701909977390,
+    "modifiedTime": 1704824717903,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!ezWijmCnlnQ9ZRX2"

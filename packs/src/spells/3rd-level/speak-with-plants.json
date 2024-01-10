@@ -8,8 +8,7 @@
   "system": {
     "description": {
       "value": "<p>You imbue Plants within 30 feet of you with limited sentience and animation, giving them the ability to communicate with you and follow your simple commands. You can question plants about events in the spell's area within the past day, gaining information about creatures that have passed, weather, and other circumstances.</p><p>You can also turn difficult terrain caused by Plant Growth (such as thickets and undergrowth) into ordinary terrain that lasts for the Duration. Or you can turn ordinary terrain where Plants are present into difficult terrain that lasts for the duration, causing vines and branches to hinder pursuers, for example.</p><p>Plants might be able to perform other tasks on your behalf, at the DM's discretion. The spell doesn't enable Plants to uproot themselves and move about, but they can freely move branches, tendrils, and stalks.</p><p>If a plant creature is in the area, you can communicate with it as if you shared a Common language, but you gain no magical ability to influence it.</p><p>This spell can cause the plants created by the Entangle spell to release a Restrained creature.</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -31,7 +30,8 @@
       "value": 30,
       "width": null,
       "units": "ft",
-      "type": "radius"
+      "type": "radius",
+      "prompt": true
     },
     "range": {
       "value": null,
@@ -42,12 +42,14 @@
       "value": null,
       "max": "",
       "per": null,
-      "recovery": ""
+      "recovery": "",
+      "prompt": true
     },
     "consume": {
       "type": "",
       "target": null,
-      "amount": null
+      "amount": null,
+      "scale": false
     },
     "ability": "",
     "actionType": "util",
@@ -69,13 +71,6 @@
     },
     "level": 3,
     "school": "trs",
-    "components": {
-      "vocal": true,
-      "somatic": true,
-      "material": false,
-      "ritual": false,
-      "concentration": false
-    },
     "materials": {
       "value": "",
       "consumed": false,
@@ -93,7 +88,8 @@
     "properties": [
       "vocal",
       "somatic"
-    ]
+    ],
+    "crewed": false
   },
   "sort": 0,
   "flags": {},
@@ -105,7 +101,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787234060,
-    "modifiedTime": 1704565106067,
+    "modifiedTime": 1704823521664,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!2VXGS206tuChoeXy"

@@ -8,8 +8,7 @@
   "system": {
     "description": {
       "value": "<p>You imbue a creature you touch with positive energy to undo a debilitating effect. You can reduce the target's Exhaustion level by one, or end one of the following Effects on the target:</p>\n<ul>\n<li>One effect that Charmed or Petrified the target</li>\n<li>One curse, including the target's Attunement to a cursed magic item</li>\n<li>Any reduction to one of the target's Ability Scores</li>\n<li>One effect reducing the target's hit point maximum</li>\n</ul>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -31,7 +30,8 @@
       "value": 1,
       "width": null,
       "units": "",
-      "type": "creature"
+      "type": "creature",
+      "prompt": true
     },
     "range": {
       "value": null,
@@ -42,12 +42,14 @@
       "value": null,
       "max": "",
       "per": null,
-      "recovery": ""
+      "recovery": "",
+      "prompt": true
     },
     "consume": {
       "type": "",
       "target": null,
-      "amount": null
+      "amount": null,
+      "scale": false
     },
     "ability": "",
     "actionType": "util",
@@ -69,13 +71,6 @@
     },
     "level": 5,
     "school": "abj",
-    "components": {
-      "vocal": true,
-      "somatic": true,
-      "material": true,
-      "ritual": false,
-      "concentration": false
-    },
     "materials": {
       "value": "diamond dust worth at least 100gp, which the spell consumes",
       "consumed": true,
@@ -94,7 +89,8 @@
       "vocal",
       "somatic",
       "material"
-    ]
+    ],
+    "crewed": false
   },
   "sort": 0,
   "flags": {},
@@ -106,7 +102,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787234154,
-    "modifiedTime": 1704565108940,
+    "modifiedTime": 1704823524260,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!WzvJ7G3cqvIubsLk"

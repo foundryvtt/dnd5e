@@ -1,7 +1,7 @@
 {
   "name": "Randal (Human Fighter)",
   "type": "character",
-  "img": null,
+  "img": "systems/dnd5e/tokens/heroes/FighterShield.webp",
   "system": {
     "abilities": {
       "str": {
@@ -109,7 +109,7 @@
     },
     "details": {
       "biography": {
-        "value": "<p>Randal worked his way through the ranks of his hometown's guard, ultimately growing restless with city life and wandering off in search of adventure.</p>",
+        "value": "<p>Randal worked his way through the ranks of his hometown's guard, ultimately growing restless with city life and wandering off in search of adventure.</p><p>\n        <em>\n          Token artwork by\n          <a href=\"https://www.forgotten-adventures.net/\" target=\"_blank\" rel=\"noopener\">Forgotten Adventures</a>.\n        </em>      \n      </p><p>\n        <em>\n          Token artwork by\n          <a href=\"https://www.forgotten-adventures.net/\" target=\"_blank\" rel=\"noopener\">Forgotten Adventures</a>.\n        </em>      \n      </p>",
         "public": ""
       },
       "alignment": "Neutral Good",
@@ -171,9 +171,9 @@
         ],
         "custom": ""
       },
-      "toolProf": {
-        "value": [],
-        "custom": ""
+      "dm": {
+        "amount": {},
+        "bypasses": []
       }
     },
     "currency": {
@@ -469,7 +469,7 @@
       "attenuation": 0.5
     },
     "texture": {
-      "src": null,
+      "src": "systems/dnd5e/tokens/heroes/FighterShield.webp",
       "tint": null,
       "scaleX": 1,
       "scaleY": 1,
@@ -500,8 +500,7 @@
       "system": {
         "description": {
           "value": "<p>A horn, used to sound the alarm and call upon reinforcements in times of need.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -519,12 +518,19 @@
         "equipped": false,
         "rarity": "",
         "identified": true,
-        "toolType": "",
-        "baseItem": "horn",
         "ability": "cha",
         "chatFlavor": "",
         "proficient": null,
-        "bonus": ""
+        "bonus": "",
+        "unidentified": {
+          "description": ""
+        },
+        "type": {
+          "value": "",
+          "baseItem": "horn"
+        },
+        "container": null,
+        "properties": []
       },
       "sort": 0,
       "flags": {
@@ -555,8 +561,7 @@
       "system": {
         "description": {
           "value": "<p>While you are wearing armor, you gain a +1 bonus to AC</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -620,13 +625,15 @@
         },
         "type": {
           "value": "",
-          "subtype": ""
+          "subtype": "",
+          "baseItem": ""
         },
         "requirements": "Fighter 1, Champion 10, Paladin 2, Ranger 2",
         "recharge": {
           "value": null,
           "charged": false
-        }
+        },
+        "properties": []
       },
       "sort": 0,
       "flags": {
@@ -657,8 +664,7 @@
       "system": {
         "description": {
           "value": "<p><em>Prerequisite: Strength 13 or higher </em></p><p>You've developed the skills necessary to hold your own in close-quarters grappling.</p><p>You gain the following benefits:</p>\n<ul>\n<li>You have advantage on attack rolls against a creature you are grappling.</li>\n<li>You can use your action to try to pin a creature grappled by you. To do so, make another grapple check. If you succeed, you and the creature are both restrained until the grapple ends.</li>\n</ul>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -722,13 +728,15 @@
         },
         "type": {
           "value": "",
-          "subtype": ""
+          "subtype": "",
+          "baseItem": ""
         },
         "requirements": "STR 13 or higher",
         "recharge": {
           "value": null,
           "charged": false
-        }
+        },
+        "properties": []
       },
       "sort": 0,
       "flags": {
@@ -759,8 +767,7 @@
       "system": {
         "description": {
           "value": "<p>Standard ammunition used for bows of all varieties. These mundane arrows are made of smooth wooden shafts with goose feather fletching and hammer metal bodkins.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -838,8 +845,15 @@
           "dc": null,
           "scaling": "spell"
         },
-        "consumableType": "ammo",
-        "properties": {}
+        "properties": [],
+        "unidentified": {
+          "description": ""
+        },
+        "type": {
+          "value": "ammo",
+          "subtype": ""
+        },
+        "container": null
       },
       "sort": 0,
       "flags": {},
@@ -866,8 +880,7 @@
       "system": {
         "description": {
           "value": "<p>A thick shaft of laminated wood is bowed by a taut string capable of launching deadly arrows at long distances.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -953,25 +966,20 @@
           "dt": null,
           "conditions": ""
         },
-        "weaponType": "martialR",
-        "baseItem": "longbow",
-        "properties": {
-          "amm": true,
-          "hvy": true,
-          "two": true,
-          "fin": false,
-          "fir": false,
-          "foc": false,
-          "lgt": false,
-          "rch": false,
-          "rel": false,
-          "ret": false,
-          "spc": false,
-          "thr": false,
-          "ver": false,
-          "lod": false
+        "properties": [
+          "amm",
+          "hvy",
+          "two"
+        ],
+        "proficient": null,
+        "unidentified": {
+          "description": ""
         },
-        "proficient": null
+        "type": {
+          "value": "martialR",
+          "baseItem": "longbow"
+        },
+        "container": null
       },
       "sort": 0,
       "flags": {
@@ -1002,8 +1010,7 @@
       "system": {
         "description": {
           "value": "<p>A lengthy stright blade designed for slashing foes, the longsword is a highly versatile weapon that may also be wielded with two hands for more punishing strikes.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -1089,25 +1096,18 @@
           "dt": null,
           "conditions": ""
         },
-        "weaponType": "martialM",
-        "baseItem": "longsword",
-        "properties": {
-          "ver": true,
-          "amm": false,
-          "fin": false,
-          "fir": false,
-          "foc": false,
-          "hvy": false,
-          "lgt": false,
-          "lod": false,
-          "rch": false,
-          "rel": false,
-          "ret": false,
-          "spc": false,
-          "thr": false,
-          "two": false
+        "properties": [
+          "ver"
+        ],
+        "proficient": null,
+        "unidentified": {
+          "description": ""
         },
-        "proficient": null
+        "type": {
+          "value": "martialM",
+          "baseItem": "longsword"
+        },
+        "container": null
       },
       "sort": 0,
       "flags": {
@@ -1138,8 +1138,7 @@
       "system": {
         "description": {
           "value": "<p>This one-handed axe is light and balanced for throwing while remaining useful in hand combat.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -1225,25 +1224,19 @@
           "dt": null,
           "conditions": ""
         },
-        "weaponType": "simpleM",
-        "baseItem": "",
-        "properties": {
-          "lgt": true,
-          "thr": true,
-          "amm": false,
-          "hvy": false,
-          "fin": false,
-          "fir": false,
-          "foc": false,
-          "lod": false,
-          "rch": false,
-          "rel": false,
-          "ret": false,
-          "spc": false,
-          "two": false,
-          "ver": false
+        "properties": [
+          "lgt",
+          "thr"
+        ],
+        "proficient": null,
+        "unidentified": {
+          "description": ""
         },
-        "proficient": null
+        "type": {
+          "value": "simpleM",
+          "baseItem": ""
+        },
+        "container": null
       },
       "sort": 0,
       "flags": {},
@@ -1270,8 +1263,7 @@
       "system": {
         "description": {
           "value": "<p>Made of interlocking metal rings, chain mail includes a layer of quilted fabric worn underneath the mail to prevent chafing and to cushion the impact of blows. The suit includes gauntlets.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -1345,7 +1337,6 @@
         },
         "armor": {
           "value": 16,
-          "type": "heavy",
           "dex": 0
         },
         "hp": {
@@ -1354,17 +1345,23 @@
           "dt": null,
           "conditions": ""
         },
-        "baseItem": "",
         "speed": {
           "value": null,
           "conditions": ""
         },
         "strength": 13,
-        "stealth": true,
         "proficient": null,
         "properties": [
           "stealthDisadvantage"
-        ]
+        ],
+        "unidentified": {
+          "description": ""
+        },
+        "type": {
+          "value": "heavy",
+          "baseItem": ""
+        },
+        "container": null
       },
       "sort": 0,
       "flags": {},
@@ -1391,8 +1388,7 @@
       "system": {
         "description": {
           "value": "<p>A shield is made from wood or metal and is carried in one hand. Wielding a shield increases your Armor Class by 2. You can benefit from only one shield at a time.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -1466,7 +1462,6 @@
         },
         "armor": {
           "value": 2,
-          "type": "shield",
           "dex": null
         },
         "hp": {
@@ -1475,14 +1470,21 @@
           "dt": null,
           "conditions": ""
         },
-        "baseItem": "",
         "speed": {
           "value": null,
           "conditions": ""
         },
         "strength": null,
-        "stealth": false,
-        "proficient": null
+        "proficient": null,
+        "unidentified": {
+          "description": ""
+        },
+        "type": {
+          "value": "shield",
+          "baseItem": ""
+        },
+        "container": null,
+        "properties": []
       },
       "sort": 0,
       "flags": {
@@ -1513,8 +1515,7 @@
       "system": {
         "description": {
           "value": "<p>A backpack can hold one cubic foot or 30 pounds of gear. You can also strap items, such as a bedroll or a coil of rope, to the outside of a backpack.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -1534,8 +1535,7 @@
         "identified": true,
         "capacity": {
           "type": "weight",
-          "value": 30,
-          "weightless": false
+          "value": 30
         },
         "currency": {
           "cp": 0,
@@ -1543,7 +1543,12 @@
           "ep": 0,
           "gp": 0,
           "pp": 0
-        }
+        },
+        "unidentified": {
+          "description": ""
+        },
+        "container": null,
+        "properties": []
       },
       "sort": 0,
       "flags": {
@@ -1574,8 +1579,7 @@
       "system": {
         "description": {
           "value": "<p>A cloth or leather pouch can hold up to 20 sling bullets or 50 blowgun needles, among other things. A compartmentalized pouch for holding spell components is called a component pouch. A pouch can hold up to ⅕ cubic foot or 6 pounds of gear.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -1595,8 +1599,7 @@
         "identified": true,
         "capacity": {
           "type": "weight",
-          "value": 6,
-          "weightless": false
+          "value": 6
         },
         "currency": {
           "cp": 0,
@@ -1604,7 +1607,12 @@
           "ep": 0,
           "gp": 0,
           "pp": 0
-        }
+        },
+        "unidentified": {
+          "description": ""
+        },
+        "container": null,
+        "properties": []
       },
       "sort": 0,
       "flags": {
@@ -1635,8 +1643,7 @@
       "system": {
         "description": {
           "value": "<p>A tool with heavy metal head mounted ar the right angles at the end of a handle, used for job such as breaking things and driving in nails. </p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -1650,14 +1657,17 @@
           "value": 1,
           "denomination": "gp"
         },
-        "attunement": 0,
-        "equipped": false,
         "rarity": "",
         "identified": true,
         "type": {
           "value": "",
           "subtype": ""
-        }
+        },
+        "unidentified": {
+          "description": ""
+        },
+        "container": null,
+        "properties": []
       },
       "sort": 0,
       "flags": {
@@ -1688,8 +1698,7 @@
       "system": {
         "description": {
           "value": "<p>This small container holds flint, fire steel, and tinder (usually dry cloth soaked in light oil) used to kindle a fire. Using it to light a torch - or anything else with abundant, exposed fuel - takes an action. Lighting any other fire takes 1 minute.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -1703,14 +1712,17 @@
           "value": 5,
           "denomination": "sp"
         },
-        "attunement": 0,
-        "equipped": false,
         "rarity": "",
         "identified": true,
         "type": {
           "value": "",
           "subtype": ""
-        }
+        },
+        "unidentified": {
+          "description": ""
+        },
+        "container": null,
+        "properties": []
       },
       "sort": 0,
       "flags": {
@@ -1741,8 +1753,7 @@
       "system": {
         "description": {
           "value": "<p>A leather hide sewn into an enclosed skin which can contain up to 4 pints of liquid. It weighs 5 pounds when full; a pint of water is approximately 1 pound.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -1815,8 +1826,15 @@
           "dc": null,
           "scaling": "spell"
         },
-        "consumableType": "food",
-        "properties": {}
+        "properties": [],
+        "unidentified": {
+          "description": ""
+        },
+        "type": {
+          "value": "food",
+          "subtype": ""
+        },
+        "container": null
       },
       "sort": 0,
       "flags": {
@@ -1847,8 +1865,7 @@
       "system": {
         "description": {
           "value": "<p>Rope, whether made of hemp or silk, has 2 hit points and can be burst with a DC 17 Strength check.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -1921,8 +1938,15 @@
           "dc": 17,
           "scaling": "flat"
         },
-        "consumableType": "trinket",
-        "properties": {}
+        "properties": [],
+        "unidentified": {
+          "description": ""
+        },
+        "type": {
+          "value": "trinket",
+          "subtype": ""
+        },
+        "container": null
       },
       "sort": 0,
       "flags": {
@@ -1953,8 +1977,7 @@
       "system": {
         "description": {
           "value": "<p>A quiver can hold up to 20 arrows.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -1974,8 +1997,7 @@
         "identified": true,
         "capacity": {
           "type": "items",
-          "value": 20,
-          "weightless": false
+          "value": 20
         },
         "currency": {
           "cp": 0,
@@ -1983,7 +2005,12 @@
           "ep": 0,
           "gp": 0,
           "pp": 0
-        }
+        },
+        "unidentified": {
+          "description": ""
+        },
+        "container": null,
+        "properties": []
       },
       "sort": 0,
       "flags": {
@@ -2014,8 +2041,7 @@
       "system": {
         "description": {
           "value": "<p>Roll of cloth used by traveller to sleep in.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -2029,14 +2055,17 @@
           "value": 1,
           "denomination": "gp"
         },
-        "attunement": 0,
-        "equipped": false,
         "rarity": "",
         "identified": true,
         "type": {
           "value": "",
           "subtype": ""
-        }
+        },
+        "unidentified": {
+          "description": ""
+        },
+        "container": null,
+        "properties": []
       },
       "sort": 0,
       "flags": {
@@ -2067,8 +2096,7 @@
       "system": {
         "description": {
           "value": "<p>This tin box contains a cup and simple cutlery. The box clamps together, and one side can be used as a cooking pan and the other as a plate or shallow bowl.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -2082,14 +2110,17 @@
           "value": 2,
           "denomination": "sp"
         },
-        "attunement": 0,
-        "equipped": false,
         "rarity": "",
         "identified": true,
         "type": {
           "value": "",
           "subtype": ""
-        }
+        },
+        "unidentified": {
+          "description": ""
+        },
+        "container": null,
+        "properties": []
       },
       "sort": 0,
       "flags": {
@@ -2120,8 +2151,7 @@
       "system": {
         "description": {
           "value": "<p>This one-handed axe is light and balanced for throwing while remaining useful in hand combat.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -2207,25 +2237,19 @@
           "dt": null,
           "conditions": ""
         },
-        "weaponType": "simpleM",
-        "baseItem": "handaxe",
-        "properties": {
-          "lgt": true,
-          "thr": true,
-          "amm": false,
-          "hvy": false,
-          "fin": false,
-          "fir": false,
-          "foc": false,
-          "lod": false,
-          "rch": false,
-          "rel": false,
-          "ret": false,
-          "spc": false,
-          "two": false,
-          "ver": false
+        "properties": [
+          "lgt",
+          "thr"
+        ],
+        "proficient": null,
+        "unidentified": {
+          "description": ""
         },
-        "proficient": null
+        "type": {
+          "value": "simpleM",
+          "baseItem": "handaxe"
+        },
+        "container": null
       },
       "sort": 0,
       "flags": {
@@ -2256,8 +2280,7 @@
       "system": {
         "description": {
           "value": "<p>Rations consist of dry foods suitable for extended travel, including jerky, dried fruit, hardtack, and nuts.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -2330,8 +2353,15 @@
           "dc": null,
           "scaling": "spell"
         },
-        "consumableType": "food",
-        "properties": {}
+        "properties": [],
+        "unidentified": {
+          "description": ""
+        },
+        "type": {
+          "value": "food",
+          "subtype": ""
+        },
+        "container": null
       },
       "sort": 0,
       "flags": {
@@ -2362,8 +2392,7 @@
       "system": {
         "description": {
           "value": "<p>A metal spike that is drive into a seam in a climbing surface with a climbing hammer. It can also be used like iron spikes to block doors in a pinch.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -2436,8 +2465,15 @@
           "dc": null,
           "scaling": "spell"
         },
-        "consumableType": "trinket",
-        "properties": {}
+        "properties": [],
+        "unidentified": {
+          "description": ""
+        },
+        "type": {
+          "value": "trinket",
+          "subtype": ""
+        },
+        "container": null
       },
       "sort": 0,
       "flags": {
@@ -2468,8 +2504,7 @@
       "system": {
         "description": {
           "value": "<p>A torch burns for 1 hour, providing bright light in a 20-foot radius and dim light for an additional 20 feet. If you make a melee attack with a burning torch and hit, it deals 1 fire damage.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -2547,8 +2582,15 @@
           "dc": null,
           "scaling": "spell"
         },
-        "consumableType": "trinket",
-        "properties": {}
+        "properties": [],
+        "unidentified": {
+          "description": ""
+        },
+        "type": {
+          "value": "trinket",
+          "subtype": ""
+        },
+        "container": null
       },
       "sort": 0,
       "flags": {
@@ -2579,8 +2621,7 @@
       "system": {
         "description": {
           "value": "<p>Using a crowbar grants advantage to Strength checks where the crowbar's leverage can be applied.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -2594,14 +2635,17 @@
           "value": 2,
           "denomination": "gp"
         },
-        "attunement": 0,
-        "equipped": false,
         "rarity": "",
         "identified": true,
         "type": {
           "value": "",
           "subtype": ""
-        }
+        },
+        "unidentified": {
+          "description": ""
+        },
+        "container": null,
+        "properties": []
       },
       "sort": 0,
       "flags": {
@@ -2631,8 +2675,7 @@
       "system": {
         "description": {
           "value": "<ul><li><strong>Skill Proficiencies:</strong> Athletics, Insight</li><li><strong>Languages:</strong> Two of your choice</li><li><strong>Equipment:</strong> A guard's uniform, a horn with which to summon help, and a pouch containing 10 gp</li></ul>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -2669,8 +2712,7 @@
       "system": {
         "description": {
           "value": "<p>As a fighter, you gain the following class features.</p>\n<h3>Hit Points</h3>\n<p><strong>Hit Dice:</strong> 1d10 per fighter level<br /><strong>Hit Points at 1st Level:</strong> 10 + your Constitution modifier<br /><strong>Hit Points at Higher Levels:</strong> 1d10 (or 6) + your Constitution modifier per fighter level after 1st</p>\n<h3>Proficiencies</h3>\n<p><strong>Armor:</strong> All armor, shields<br /><strong>Weapons:</strong> Simple weapons, martial weapons<br /><strong>Tools:</strong> None<br /><strong>Saving Throws:</strong> Strength, Constitution<br /><strong>Skills:</strong> Choose two skills from Acrobatics, Animal Handling, Athletics, History, Insight, Intimidation, Perception, and Survival</p>\n<h3>Equipment</h3>\n<p>You start with the following equipment, in addition to the equipment granted by your background:</p>\n<ul>\n<li>(a) chain mail or (b) leather armor, longbow, and 20 arrows</li>\n<li>(a) a martial weapon and a shield or (b) two martial weapons</li>\n<li>(a) a light crossbow and 20 bolts or (b) two handaxes</li>\n<li>(a) a dungeoneer's pack or (b) an explorer's pack</li>\n</ul>\n<h1>Fighter Advancement</h1>\n<table>\n<thead>\n<tr>\n<td>Level</td>\n<td>Proficiency Bonus</td>\n<td>Features</td>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>1st</td>\n<td>+2</td>\n<td>@Compendium[dnd5e.classfeatures.fbExzwNwEAl2kW9c]{Fighting Style}, @Compendium[dnd5e.classfeatures.nTjmWbyHweXuIqwc]{Second Wind}</td>\n</tr>\n<tr>\n<td>2nd</td>\n<td>+2</td>\n<td>@Compendium[dnd5e.classfeatures.xF1VTcJ3AdkbTsdQ]{Action Surge}</td>\n</tr>\n<tr>\n<td>3rd</td>\n<td>+2</td>\n<td>@Compendium[dnd5e.classfeatures.ax8M0X0q1GGWM26j]{Martial Archetype}</td>\n</tr>\n<tr>\n<td>4th</td>\n<td>+2</td>\n<td>@Compendium[dnd5e.classfeatures.sPy2OLoN7JaAcMl4]{Ability Score Improvement}</td>\n</tr>\n<tr>\n<td>5th</td>\n<td>+3</td>\n<td>@Compendium[dnd5e.classfeatures.q9g1MLXuLZyxjQMg]{Extra Attack}</td>\n</tr>\n<tr>\n<td>6th</td>\n<td>+3</td>\n<td>@Compendium[dnd5e.classfeatures.sPy2OLoN7JaAcMl4]{Ability Score Improvement}</td>\n</tr>\n<tr>\n<td>7th</td>\n<td>+3</td>\n<td>Martial Archetype feature</td>\n</tr>\n<tr>\n<td>8th</td>\n<td>+3</td>\n<td>@Compendium[dnd5e.classfeatures.sPy2OLoN7JaAcMl4]{Ability Score Improvement}</td>\n</tr>\n<tr>\n<td>9th</td>\n<td>+4</td>\n<td>@Compendium[dnd5e.classfeatures.653ZHbNcmm7ZGXbw]{Indomitable}</td>\n</tr>\n<tr>\n<td>10th</td>\n<td>+4</td>\n<td>Martial Archetype feature</td>\n</tr>\n<tr>\n<td>11th</td>\n<td>+4</td>\n<td>@Compendium[dnd5e.classfeatures.q9g1MLXuLZyxjQMg]{Extra Attack (2)}</td>\n</tr>\n<tr>\n<td>12th</td>\n<td>+4</td>\n<td>@Compendium[dnd5e.classfeatures.sPy2OLoN7JaAcMl4]{Ability Score Improvement}</td>\n</tr>\n<tr>\n<td>13th</td>\n<td>+5</td>\n<td>@Compendium[dnd5e.classfeatures.653ZHbNcmm7ZGXbw]{Indomitable (2 uses)}</td>\n</tr>\n<tr>\n<td>14th</td>\n<td>+5</td>\n<td>@Compendium[dnd5e.classfeatures.sPy2OLoN7JaAcMl4]{Ability Score Improvement}</td>\n</tr>\n<tr>\n<td>15th</td>\n<td>+5</td>\n<td>Martial Archetype feature</td>\n</tr>\n<tr>\n<td>16th</td>\n<td>+5</td>\n<td>@Compendium[dnd5e.classfeatures.sPy2OLoN7JaAcMl4]{Ability Score Improvement}</td>\n</tr>\n<tr>\n<td>17th</td>\n<td>+6</td>\n<td>@Compendium[dnd5e.classfeatures.xF1VTcJ3AdkbTsdQ]{Action Surge (2 uses)}, @Compendium[dnd5e.classfeatures.653ZHbNcmm7ZGXbw]{Indomitable (3 uses)}</td>\n</tr>\n<tr>\n<td>18th</td>\n<td>+6</td>\n<td>Martial Archetype feature</td>\n</tr>\n<tr>\n<td>19th</td>\n<td>+6</td>\n<td>@Compendium[dnd5e.classfeatures.sPy2OLoN7JaAcMl4]{Ability Score Improvement}</td>\n</tr>\n<tr>\n<td>20th</td>\n<td>+6</td>\n<td>@Compendium[dnd5e.classfeatures.q9g1MLXuLZyxjQMg]{Extra Attack (3)}</td>\n</tr>\n</tbody>\n</table>\n<h1>Martial Archetypes</h1>\n<p>Different fighters choose different approaches to perfecting their fighting prowess. The martial archetype you choose to emulate reflects your approach.</p>\n<p>@Compendium[dnd5e.classfeatures.sprHbe7cRg9osTzf]{Champion}</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -3211,8 +3253,7 @@
       "system": {
         "description": {
           "value": "<p>You adopt a particular style of fighting as your specialty. Choose one of the following options from the appropriate class list. You can't take a Fighting Style option more than once, even if you later get to choose again.</p>\n<p>@Compendium[dnd5e.classfeatures.8YwPFv3UAPjWVDNf]{Archery}</p>\n<p>@Compendium[dnd5e.classfeatures.zSlV0O2rQMdoq6pB]{Defense}</p>\n<p>@Compendium[dnd5e.classfeatures.hCop9uJrWhF1QPb4]{Dueling}</p>\n<p>@Compendium[dnd5e.classfeatures.3Nc6u9pyStByuJsm]{Great Weapon Fighting}</p>\n<p>@Compendium[dnd5e.classfeatures.06NVMYf58Z76O85O]{Protection}</p>\n<p>@Compendium[dnd5e.classfeatures.mHcSjcHJ8oZu3hkb]{Two Weapon Fighting}</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -3276,13 +3317,15 @@
         },
         "type": {
           "value": "class",
-          "subtype": ""
+          "subtype": "",
+          "baseItem": ""
         },
         "requirements": "Fighter 1",
         "recharge": {
           "value": null,
           "charged": false
-        }
+        },
+        "properties": []
       },
       "sort": 0,
       "flags": {
@@ -3314,8 +3357,7 @@
       "system": {
         "description": {
           "value": "<p>You have a limited well of stamina that you can draw on to protect yourself from harm. On your turn, you can use a bonus action to regain hit points equal to 1d10 + your fighter level.</p><p>Once you use this feature, you must finish a short or long rest before you can use it again.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -3384,13 +3426,15 @@
         },
         "type": {
           "value": "class",
-          "subtype": ""
+          "subtype": "",
+          "baseItem": ""
         },
         "requirements": "Fighter 1",
         "recharge": {
           "value": null,
           "charged": false
-        }
+        },
+        "properties": []
       },
       "folder": null,
       "sort": 0,
@@ -3422,8 +3466,7 @@
       "system": {
         "description": {
           "value": "<p>While you are wearing armor, you gain a +1 bonus to AC</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -3487,13 +3530,15 @@
         },
         "type": {
           "value": "class",
-          "subtype": "fightingStyle"
+          "subtype": "fightingStyle",
+          "baseItem": ""
         },
         "requirements": "Fighter 1, Champion 10, Paladin 2, Ranger 2",
         "recharge": {
           "value": null,
           "charged": false
-        }
+        },
+        "properties": []
       },
       "flags": {
         "dnd5e": {
@@ -3554,8 +3599,7 @@
       "system": {
         "description": {
           "value": "<p>It's hard to make generalizations about humans, but your human character has these traits.</p><p><em><strong>Ability Score Increase.</strong></em> Your ability scores each increase by 1.</p><p><em><strong>Age.</strong></em> Humans reach adulthood in their late teens and live less than a century.</p><p><em><strong>Alignment.</strong></em> Humans tend toward no particular alignment. The best and the worst are found among them.</p><p><em><strong>Size.</strong></em> Humans vary widely in height and build, from barely 5 feet to well over 6 feet tall. Regardless of your position in that range, your size is Medium.</p><p><em><strong>Speed.</strong></em> Your base walking speed is 30 feet.</p><p><em><strong>Languages.</strong></em> You can speak, read, and write Common and one extra language of your choice. Humans typically learn the languages of other peoples they deal with, including obscure dialects. They are fond of sprinkling their speech with words borrowed from other tongues: Orc curses, Elvish musical expressions, Dwarvish military phrases, and so on.</p>",
-          "chat": "",
-          "unidentified": ""
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -3670,7 +3714,32 @@
       "_key": "!actors.items!2Pdtnswo8Nj2nafY.VFOCTtbEvjeUHo6B"
     }
   ],
-  "effects": [],
+  "effects": [
+    {
+      "_id": "dnd5eencumbered0",
+      "name": "Encumbered",
+      "icon": "systems/dnd5e/icons/svg/statuses/encumbered.svg",
+      "statuses": [
+        "encumbered"
+      ],
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": 0,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": 0,
+        "startTurn": 0
+      },
+      "description": "",
+      "origin": null,
+      "transfer": false,
+      "flags": {},
+      "_key": "!actors.effects!2Pdtnswo8Nj2nafY.dnd5eencumbered0"
+    }
+  ],
   "folder": null,
   "sort": 0,
   "ownership": {
@@ -3683,7 +3752,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787232150,
-    "modifiedTime": 1704466714865,
+    "modifiedTime": 1704823964027,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!2Pdtnswo8Nj2nafY"

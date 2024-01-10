@@ -8,8 +8,7 @@
   "system": {
     "description": {
       "value": "<p>A square yard of cotton of average quality and weight. Used for all many of items and clothing.</p>\n<p>Far lighter, more comfortable, and easier to work with than canvas; however, the comparatively more delicate crop means it is accordingly more expensive and potentially harder to come by.</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -23,10 +22,17 @@
       "value": 5,
       "denomination": "sp"
     },
-    "attunement": 0,
-    "equipped": false,
     "rarity": "",
-    "identified": true
+    "identified": true,
+    "unidentified": {
+      "description": ""
+    },
+    "container": null,
+    "properties": [],
+    "type": {
+      "value": "",
+      "subtype": ""
+    }
   },
   "sort": 0,
   "flags": {},
@@ -35,10 +41,10 @@
   "folder": null,
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.0.3",
-    "coreVersion": "10.290",
+    "systemVersion": "3.0.0",
+    "coreVersion": "11.315",
     "createdTime": 1661787234019,
-    "modifiedTime": 1670010072156,
+    "modifiedTime": 1704823424167,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!ZcAgZHJ1hhqbedLF"

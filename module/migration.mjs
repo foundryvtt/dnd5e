@@ -371,6 +371,7 @@ export function migrateItemData(item, migrationData, flags={}) {
   // Migrate properties
   const migratedProperties = foundry.utils.getProperty(item, "flags.dnd5e.migratedProperties");
   if ( migratedProperties?.length ) {
+    flags.persistSourceMigration = true;
     const properties = new Set(foundry.utils.getProperty(item, "system.properties") ?? [])
       .union(new Set(migratedProperties));
     updateData["system.properties"] = Array.from(properties);

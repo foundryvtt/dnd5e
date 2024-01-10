@@ -6,8 +6,7 @@
   "system": {
     "description": {
       "value": "<p>You gain a +2 bonus to attack rolls you make with ranged weapons</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -29,7 +28,8 @@
       "value": null,
       "width": null,
       "units": "",
-      "type": ""
+      "type": "",
+      "prompt": true
     },
     "range": {
       "value": null,
@@ -40,12 +40,14 @@
       "value": null,
       "max": "",
       "per": null,
-      "recovery": ""
+      "recovery": "",
+      "prompt": true
     },
     "consume": {
       "type": "",
       "target": null,
-      "amount": null
+      "amount": null,
+      "scale": false
     },
     "ability": "",
     "actionType": "",
@@ -73,7 +75,9 @@
     "recharge": {
       "value": null,
       "charged": false
-    }
+    },
+    "crewed": false,
+    "properties": []
   },
   "effects": [
     {
@@ -98,11 +102,12 @@
         "startTurn": null
       },
       "icon": "icons/weapons/bows/shortbow-recurve-yellow.webp",
-      "label": "Fighting Style: Archery",
       "origin": "Item.SDsWYh0xtS6nWuH8",
       "tint": null,
       "transfer": true,
-      "sort": 0,
+      "name": "Fighting Style: Archery",
+      "description": "",
+      "statuses": [],
       "_key": "!items.effects!8YwPFv3UAPjWVDNf.F0Bh4n8Tu1ZZnwSr"
     }
   ],
@@ -117,7 +122,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787234341,
-    "modifiedTime": 1701911280211,
+    "modifiedTime": 1704824715211,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!8YwPFv3UAPjWVDNf"

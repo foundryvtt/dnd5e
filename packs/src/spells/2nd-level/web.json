@@ -6,8 +6,7 @@
   "system": {
     "description": {
       "value": "<p>You conjure a mass of thick, sticky webbing at a point of your choice within range. The webs fill a 20-foot cube from that point for the Duration. The webs are difficult terrain and lightly obscure their area.</p>\n        <p>If the webs aren't anchored between two solid masses (such as walls or trees) or layered across a floor, wall, or ceiling, the conjured web collapses on itself, and the spell ends at the start of your next turn. Webs layered over a flat surface have a depth of 5 feet.</p>\n        <p>Each creature that starts its turn in the webs or that enters them during its turn must make a Dexterity saving throw. On a failed save, the creature is Restrained as long as it remains in the webs or until it breaks free.</p>\n        <p>A creature Restrained by the webs can use its action to make a Strength check against your spell save DC. If it succeeds, it is no longer Restrained.</p>\n        <p>The webs are flammable. Any 5-foot cube of webs exposed to fire burns away in 1 round, dealing 2d4 fire damage to any creature that starts its turn in the fire.</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -29,7 +28,8 @@
       "value": 20,
       "width": null,
       "units": "ft",
-      "type": "cube"
+      "type": "cube",
+      "prompt": true
     },
     "range": {
       "value": 60,
@@ -40,12 +40,14 @@
       "value": null,
       "max": "",
       "per": null,
-      "recovery": ""
+      "recovery": "",
+      "prompt": true
     },
     "consume": {
       "type": "",
       "target": null,
-      "amount": null
+      "amount": null,
+      "scale": false
     },
     "ability": "",
     "actionType": "save",
@@ -67,13 +69,6 @@
     },
     "level": 2,
     "school": "con",
-    "components": {
-      "vocal": true,
-      "somatic": true,
-      "material": true,
-      "ritual": false,
-      "concentration": true
-    },
     "materials": {
       "value": "A bit of spiderweb",
       "consumed": false,
@@ -93,7 +88,8 @@
       "somatic",
       "material",
       "concentration"
-    ]
+    ],
+    "crewed": false
   },
   "effects": [],
   "folder": "Qi4Se3we69ukl2V9",
@@ -107,7 +103,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787234147,
-    "modifiedTime": 1704565108739,
+    "modifiedTime": 1704823524105,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!UJJu9c2UvCzVljiP"

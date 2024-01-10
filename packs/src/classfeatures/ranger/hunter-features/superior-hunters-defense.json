@@ -8,8 +8,7 @@
   "system": {
     "description": {
       "value": "<p>At 15th level, you gain one of the following features of your choice.</p><p>@Compendium[dnd5e.classfeatures.laVHAIOKIsUeezWd]{Evasion}</p><p>@Compendium[dnd5e.classfeatures.Xf763cJoDHPPWSGG]{Stand Against the Tide}</p><p>@Compendium[dnd5e.classfeatures.7pyZjz5vlUWV01qQ]{Uncanny Dodge}</p>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -31,7 +30,8 @@
       "value": null,
       "width": null,
       "units": "",
-      "type": ""
+      "type": "",
+      "prompt": true
     },
     "range": {
       "value": null,
@@ -42,12 +42,14 @@
       "value": null,
       "max": "",
       "per": null,
-      "recovery": ""
+      "recovery": "",
+      "prompt": true
     },
     "consume": {
       "type": "",
       "target": null,
-      "amount": null
+      "amount": null,
+      "scale": false
     },
     "ability": null,
     "actionType": "",
@@ -75,7 +77,9 @@
     "recharge": {
       "value": null,
       "charged": false
-    }
+    },
+    "crewed": false,
+    "properties": []
   },
   "flags": {},
   "img": "icons/creatures/reptiles/serpent-horned-green.webp",
@@ -87,7 +91,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787234391,
-    "modifiedTime": 1701910478889,
+    "modifiedTime": 1704824717418,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!a0Sq88dgnREcIMfl"

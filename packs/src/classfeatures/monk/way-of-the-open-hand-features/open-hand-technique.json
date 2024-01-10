@@ -8,8 +8,7 @@
   "system": {
     "description": {
       "value": "<p>Starting when you choose this tradition at 3rd level, you can manipulate your enemy's ki when you harness your own.</p><p>Whenever you hit a creature with one of the attacks granted by your @Compendium[dnd5e.classfeatures.5MwNlVZK7m6VolOH]{Flurry of Blows}, you can impose one of the following effects on that target:</p><ul><li>It must succeed on a Dexterity saving throw or be knocked prone.</li><li>It must make a Strength saving throw. If it fails, you can push it up to 15 feet away from you.</li><li>It can't take reactions until the end of your next turn.</li></ul>",
-      "chat": "",
-      "unidentified": ""
+      "chat": ""
     },
     "source": {
       "custom": "",
@@ -31,7 +30,8 @@
       "value": 1,
       "width": null,
       "units": "",
-      "type": "creature"
+      "type": "creature",
+      "prompt": true
     },
     "range": {
       "value": null,
@@ -42,12 +42,14 @@
       "value": null,
       "max": "",
       "per": null,
-      "recovery": ""
+      "recovery": "",
+      "prompt": true
     },
     "consume": {
       "type": "",
       "target": null,
-      "amount": null
+      "amount": null,
+      "scale": false
     },
     "ability": "",
     "actionType": "",
@@ -75,7 +77,9 @@
     "recharge": {
       "value": null,
       "charged": false
-    }
+    },
+    "crewed": false,
+    "properties": []
   },
   "flags": {},
   "img": "icons/magic/unholy/strike-hand-glow-pink.webp",
@@ -87,7 +91,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787234410,
-    "modifiedTime": 1701910287609,
+    "modifiedTime": 1704824718224,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!iQxLNydNLlCHNKbp"
