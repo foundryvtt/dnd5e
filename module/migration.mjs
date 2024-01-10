@@ -151,6 +151,7 @@ export const migrateCompendium = async function(pack) {
   // Unlock the pack for editing
   const wasLocked = pack.locked;
   await pack.configure({locked: false});
+  dnd5e.moduleArt.suppressArt = true;
 
   // Begin by requesting server-side data model migration and get the migrated content
   await pack.migrate();
@@ -195,6 +196,7 @@ export const migrateCompendium = async function(pack) {
 
   // Apply the original locked status for the pack
   await pack.configure({locked: wasLocked});
+  dnd5e.moduleArt.suppressArt = false;
   console.log(`Migrated all ${documentName} documents from Compendium ${pack.collection}`);
 };
 
