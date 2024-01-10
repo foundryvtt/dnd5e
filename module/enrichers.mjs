@@ -49,7 +49,7 @@ async function enrichString(match, options) {
     case "embed": return enrichEmbed(config, label, options);
     case "reference": return enrichReference(config, label, options);
   }
-  return match.input;
+  return null;
 }
 
 /* -------------------------------------------- */
@@ -209,7 +209,7 @@ async function enrichCheck(config, label, options) {
 
   if ( config.dc && !Number.isNumeric(config.dc) ) config.dc = simplifyBonus(config.dc, options.rollData ?? {});
 
-  if ( invalid ) return config.input;
+  if ( invalid ) return null;
 
   const type = config.skill ? "skill" : config.tool ? "tool" : "check";
   config = { type, ...config };
@@ -568,7 +568,7 @@ async function enrichSave(config, label, options) {
   const abilityConfig = CONFIG.DND5E.enrichmentLookup.abilities[config.ability];
   if ( !abilityConfig ) {
     console.warn(`Ability ${config.ability} not found while enriching ${config.input}.`);
-    return config.input;
+    return null;
   }
   if ( abilityConfig?.key ) config.ability = abilityConfig.key;
 
