@@ -1375,54 +1375,6 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   }
 
   /* -------------------------------------------- */
-
-  /**
-   * Prepare item tooltip template data.
-   * @param {EnrichmentOptions} enrichmentOptions  Options for text enrichment.
-   * @returns {Promise<object>}
-   */
-  async getTooltipData(enrichmentOptions={}) {
-    const { name, type, img, system } = this;
-    let {
-      price, weight, uses, identified, unidentified, description, school, materials, activation, properties
-    } = system;
-    description = game.user.isGM || identified ? description.value : unidentified.description;
-    uses = game.user.isGM || identified ? uses : null;
-    price = game.user.isGM || identified ? price : null;
-
-    const context = {
-      name, type, img, price, weight, uses, school, materials, activation,
-      labels: foundry.utils.deepClone(this.labels),
-      subtitle: school
-        ? CONFIG.DND5E.spellSchools[school]
-        : system.type?.label ?? game.i18n.localize(CONFIG.Item.typeLabels[this.type]),
-      description: await TextEditor.enrichHTML(description, {
-        async: true, relativeTo: this, rollData: this.getRollData(), ...enrichmentOptions
-      })
-    };
-
-    context.properties = [];
-
-    if ( game.user.isGM || identified ) {
-      context.properties.push(...system.tooltipProperties ?? []);
-      if ( type === "spell" ) context.properties.push(...this.labels.components.tags);
-      else context.properties.push(...system.activatedEffectChatProperties ?? []);
-      if ( "proficient" in system ) {
-        context.properties.push(CONFIG.DND5E.proficiencyLevels[system.prof?.multiplier || 0]);
-      }
-    }
-
-    if ( properties.has("concentration") ) {
-      context.labels.duration = game.i18n.format("DND5E.ConcentrationDuration", {
-        duration: context.labels.duration.toLocaleLowerCase(game.i18n.lang)
-      });
-    }
-
-    context.properties = context.properties.filter(_ => _);
-    return context;
-  }
-
-  /* -------------------------------------------- */
   /*  Item Rolls - Attack, Damage, Saves, Checks  */
   /* -------------------------------------------- */
 

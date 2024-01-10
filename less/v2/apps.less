@@ -626,9 +626,10 @@
 /* ---------------------------------- */
 
 :is(#tooltip, .locked-tooltip) {
-  &.item-tooltip, &:has(.reference-tooltip) {
+  &.dnd5e-tooltip {
     font-family: var(--dnd5e-font-roboto);
     font-size: var(--font-size-13);
+    text-align: start;
     color: var(--color-text-dark-primary);
     border-radius: 5px;
     background: url("ui/texture-gray1.webp") no-repeat top left,
@@ -638,6 +639,122 @@
     border: 2px solid var(--dnd5e-color-gold);
 
     .content { padding: 0 .5rem .25rem; }
+  }
+
+  &.locked-tooltip {
+    &.item-tooltip::after, &:has(.reference-tooltip)::after {
+      content: "";
+      position: absolute;
+      inset: 1px;
+      border: 1px solid var(--dnd5e-color-gold);
+      border-radius: 4px;
+      pointer-events: none;
+    }
+  }
+
+  &.item-tooltip {
+    width: 300px;
+
+    .loading {
+      display: flex;
+      justify-content: center;
+      padding: .75rem;
+      font-size: var(--font-size-24);
+      opacity: .25;
+    }
+
+    .header {
+      display: flex;
+      flex-direction: column;
+      gap: .5rem;
+      padding-top: .75rem;
+
+      .top {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: .75rem;
+
+        .subtitle { font-size: var(--font-size-11); }
+      }
+
+      img {
+        width: 64px;
+        height: 64px;
+        border: 4px solid var(--dnd5e-color-gold);
+        box-shadow: 0 0 4px var(--dnd5e-shadow-45);
+        border-radius: 100%;
+        object-fit: cover;
+        background: var(--dnd5e-color-light-gray);
+      }
+
+      .bottom {
+        display: flex;
+        font-size: var(--font-size-11);
+        color: var(--color-text-dark-5);
+      }
+
+      .weight, .price {
+        width: 70px;
+        display: flex;
+        align-items: center;
+        gap: .25rem;
+
+        span { height: 14px; }
+      }
+
+      .weight {
+        justify-content: end;
+        i { font-size: var(--font-size-9); }
+      }
+
+      .charges {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: .25rem;
+      }
+
+      .school {
+        position: absolute;
+        top: .75rem;
+        right: .75rem;
+        --icon-fill: var(--dnd5e-color-gold);
+        --icon-size: 32px;
+      }
+    }
+
+    .info {
+      font-size: var(--font-size-12);
+
+      .materials, .condition {
+        font-size: var(--font-size-11);
+        color: var(--color-text-dark-5);
+      }
+    }
+
+    .description {
+      font-size: var(--font-size-12);
+      line-height: normal;
+      max-height: 450px;
+      overflow: hidden;
+
+      table { display: none; }
+
+      h1, h2, h3 {
+        border: none;
+        font-family: var(--dnd5e-font-roboto-slab);
+        font-weight: bold;
+      }
+
+      h2 { font-size: 1.4em; }
+      h1 { font-size: 1.5em; }
+  
+      &.overflowing { mask-image: linear-gradient(to bottom, black 90%, transparent); }
+      &:empty { margin-bottom: .5rem; }
+    }
 
     .pill {
       font-size: var(--font-size-10);
@@ -645,142 +762,26 @@
       line-height: 1;
     }
   }
-}
+  
+  &.rule-tooltip {
+    max-width: 450px;
 
-.locked-tooltip {
-  &.item-tooltip::after, &:has(.reference-tooltip)::after {
-    content: "";
-    position: absolute;
-    inset: 1px;
-    border: 1px solid var(--dnd5e-color-gold);
-    border-radius: 4px;
-    pointer-events: none;
-  }
-}
-
-:is(#tooltip, .locked-tooltip).item-tooltip {
-  width: 300px;
-
-  .loading {
-    display: flex;
-    justify-content: center;
-    padding: .75rem;
-    font-size: var(--font-size-24);
-    opacity: .25;
-  }
-
-  .header {
-    display: flex;
-    flex-direction: column;
-    gap: .5rem;
-    padding-top: .75rem;
-
-    .top {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      gap: .75rem;
-
-      .subtitle { font-size: var(--font-size-11); }
-    }
-
-    img {
-      width: 64px;
-      height: 64px;
-      border: 4px solid var(--dnd5e-color-gold);
-      box-shadow: 0 0 4px var(--dnd5e-shadow-45);
-      border-radius: 100%;
-      object-fit: cover;
-      background: var(--dnd5e-color-light-gray);
-    }
-
-    .bottom {
-      display: flex;
-      font-size: var(--font-size-11);
-      color: var(--color-text-dark-5);
-    }
-
-    .weight, .price {
-      width: 70px;
+    .header {
       display: flex;
       align-items: center;
-      gap: .25rem;
+      justify-content: space-between;
+      margin-block: 6px 10px;
 
-      span { height: 14px; }
+      h1 {
+        margin: 0;
+        border: none;
+        font-family: var(--dnd5e-font-roboto-slab);
+        font-size: 1.5em;
+        font-weight: bold;
+      }
     }
-
-    .weight {
-      justify-content: end;
-      i { font-size: var(--font-size-9); }
+    .description {
+      text-align: start;
     }
-
-    .charges {
-      flex: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: .25rem;
-    }
-
-    .school {
-      position: absolute;
-      top: .75rem;
-      right: .75rem;
-      --icon-fill: var(--dnd5e-color-gold);
-      --icon-size: 32px;
-    }
-  }
-
-  .info {
-    font-size: var(--font-size-12);
-
-    .materials, .condition {
-      font-size: var(--font-size-11);
-      color: var(--color-text-dark-5);
-    }
-  }
-
-  .description {
-    font-size: var(--font-size-12);
-    line-height: normal;
-    max-height: 450px;
-    overflow: hidden;
-
-    table { display: none; }
-
-    h1, h2, h3 {
-      border: none;
-      font-family: var(--dnd5e-font-roboto-slab);
-      font-weight: bold;
-    }
-
-    h2 { font-size: 1.4em; }
-    h1 { font-size: 1.5em; }
-
-    &.overflowing { mask-image: linear-gradient(to bottom, black 90%, transparent); }
-    &:empty { margin-bottom: .5rem; }
-  }
-}
-
-:is(#tooltip, .locked-tooltip):has(.reference-tooltip) {
-  max-width: 450px;
-
-  .header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-block: 6px 10px;
-
-    h1 {
-      margin: 0;
-      border: none;
-      font-family: var(--dnd5e-font-roboto-slab);
-      font-size: 1.5em;
-      font-weight: bold;
-    }
-  }
-  .description {
-    text-align: start;
   }
 }

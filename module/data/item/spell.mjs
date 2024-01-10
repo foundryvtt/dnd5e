@@ -1,5 +1,5 @@
 import { filteredKeys } from "../../utils.mjs";
-import SystemDataModel from "../abstract.mjs";
+import { ItemDataModel } from "../abstract.mjs";
 import { FormulaField } from "../fields.mjs";
 import ActionTemplate from "./templates/action.mjs";
 import ActivatedEffectTemplate from "./templates/activated-effect.mjs";
@@ -26,7 +26,7 @@ import ItemDescriptionTemplate from "./templates/item-description.mjs";
  * @property {string} scaling.mode               Spell scaling mode as defined in `DND5E.spellScalingModes`.
  * @property {string} scaling.formula            Dice formula used for scaling.
  */
-export default class SpellData extends SystemDataModel.mixin(
+export default class SpellData extends ItemDataModel.mixin(
   ItemDescriptionTemplate, ActivatedEffectTemplate, ActionTemplate
 ) {
   /** @inheritdoc */

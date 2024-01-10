@@ -1,4 +1,4 @@
-import SystemDataModel from "../abstract.mjs";
+import { ItemDataModel } from "../abstract.mjs";
 import IdentifiableTemplate from "./templates/identifiable.mjs";
 import ItemDescriptionTemplate from "./templates/item-description.mjs";
 import ItemTypeTemplate from "./templates/item-type.mjs";
@@ -12,7 +12,7 @@ import ItemTypeField from "./fields/item-type-field.mjs";
  * @mixes IdentifiableTemplate
  * @mixes PhysicalItemTemplate
  */
-export default class LootData extends SystemDataModel.mixin(
+export default class LootData extends ItemDataModel.mixin(
   ItemDescriptionTemplate, IdentifiableTemplate, ItemTypeTemplate, PhysicalItemTemplate
 ) {
   /** @inheritdoc */

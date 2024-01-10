@@ -7,12 +7,6 @@ export default class Tooltips5e {
   /* -------------------------------------------- */
 
   /**
-   * The handlebars template for rendering item tooltips.
-   * @type {string}
-   */
-  static ITEM_TOOLTIP_TEMPLATE = "systems/dnd5e/templates/items/parts/item-tooltip.hbs";
-
-  /**
    * The currently registered observer.
    * @type {MutationObserver}
    */
@@ -36,7 +30,7 @@ export default class Tooltips5e {
   observe() {
     this.#observer?.disconnect();
     this.#observer = new MutationObserver(this._onMutation.bind(this));
-    this.#observer.observe(this.tooltip, { attributeFilter: ["class"] });
+    this.#observer.observe(this.tooltip, { attributeFilter: ["class"], attributeOldValue: true });
   }
 
   /* -------------------------------------------- */
@@ -49,8 +43,11 @@ export default class Tooltips5e {
   _onMutation(mutationList) {
     let isActive = false;
     const tooltip = this.tooltip;
-    for ( const { type, attributeName } of mutationList ) {
-      if ( (type === "attributes") && (attributeName === "class") ) isActive = tooltip.classList.contains("active");
+    for ( const { type, attributeName, oldValue } of mutationList ) {
+      if ( (type === "attributes") && (attributeName === "class") ) {
+        const difference = new Set(tooltip.classList).difference(new Set(oldValue?.split(" ")));
+        if ( difference.has("active") ) isActive = true;
+      }
     }
     if ( isActive ) this._onTooltipActivate();
   }
@@ -73,7 +70,7 @@ export default class Tooltips5e {
     else {
       const uuid = this.tooltip.querySelector(".loading[data-uuid]")?.dataset.uuid;
       const doc = await fromUuid(uuid);
-      if ( doc instanceof dnd5e.documents.Item5e ) return this._onHoverItem(doc);
+      if ( doc instanceof dnd5e.documents.Item5e ) return this._onHoverContentLink(doc);
       if ( doc instanceof dnd5e.documents.Actor5e ) return this._onHoverActor(doc);
     }
   }
@@ -94,26 +91,15 @@ export default class Tooltips5e {
   /* -------------------------------------------- */
 
   /**
-   * Handle hovering over an Item and showing its tooltip.
-   * @param {Item5e} item  The item being hovered.
-   * @protected
-   */
-  async _onHoverItem(item) {
-    const data = await item.getTooltipData({ secrets: item.isOwner });
-    this.tooltip.innerHTML = await renderTemplate(this.constructor.ITEM_TOOLTIP_TEMPLATE, data);
-    requestAnimationFrame(() => this._positionItemTooltip());
-  }
-
-  /* -------------------------------------------- */
-
-  /**
    * Handle hovering over a content link and showing rich tooltips if possible.
    * @param {Document} doc  The document linked by the content link.
    * @protected
    */
   async _onHoverContentLink(doc) {
     if ( !doc.system?.richTooltip ) return;
-    this.tooltip.innerHTML = await doc.system.richTooltip();
+    const { content, classes } = await doc.system.richTooltip();
+    this.tooltip.innerHTML = content;
+    classes?.forEach(c => this.tooltip.classList.add(c));
     requestAnimationFrame(() => this._positionItemTooltip());
   }
 

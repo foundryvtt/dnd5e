@@ -18,16 +18,20 @@ export default class RuleJournalPageData extends foundry.abstract.DataModel {
 
   /**
    * Render a rich tooltip for this page.
-   * @returns {string}
+   * @param {EnrichmentOptions} [enrichmentOptions={}]  Options for text enrichment.
+   * @returns {{content: string, classes: string[]}}
    */
-  async richTooltip() {
+  async richTooltip(enrichmentOptions={}) {
     const context = {
       page: this.parent,
       type: CONFIG.DND5E.ruleTypes[this.type].label,
       content: await TextEditor.enrichHTML(this.tooltip || this.parent.text.content, {
-        secrets: false, async: true, relativeTo: this.parent
+        secrets: false, async: true, relativeTo: this.parent, ...enrichmentOptions
       })
     };
-    return await renderTemplate("systems/dnd5e/templates/journal/page-rule-tooltip.hbs", context);
+    return {
+      content: await renderTemplate("systems/dnd5e/templates/journal/page-rule-tooltip.hbs", context),
+      classes: ["dnd5e-tooltip", "rule-tooltip"]
+    };
   }
 }

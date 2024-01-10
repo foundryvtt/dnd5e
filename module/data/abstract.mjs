@@ -320,6 +320,84 @@ export class ActorDataModel extends SystemDataModel {
 /* -------------------------------------------- */
 
 /**
+ * Variant of the SystemDataModel with support for rich item tooltips.
+ */
+export class ItemDataModel extends SystemDataModel {
+
+  /**
+   * The handlebars template for rendering item tooltips.
+   * @type {string}
+   */
+  static ITEM_TOOLTIP_TEMPLATE = "systems/dnd5e/templates/items/parts/item-tooltip.hbs";
+
+  /* -------------------------------------------- */
+
+  /**
+   * Render a rich tooltip for this item.
+   * @param {EnrichmentOptions} [enrichmentOptions={}]  Options for text enrichment.
+   * @returns {{content: string, classes: string[]}}
+   */
+  async richTooltip(enrichmentOptions={}) {
+    return {
+      content: await renderTemplate(
+        this.constructor.ITEM_TOOLTIP_TEMPLATE, await this.getTooltipData(enrichmentOptions)
+      ),
+      classes: ["dnd5e2", "dnd5e-tooltip", "item-tooltip"]
+    };
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare item tooltip template data.
+   * @param {EnrichmentOptions} enrichmentOptions  Options for text enrichment.
+   * @returns {Promise<object>}
+   */
+  async getTooltipData(enrichmentOptions={}) {
+    const { name, type, img } = this.parent;
+    let {
+      price, weight, uses, identified, unidentified, description, school, materials, activation, properties
+    } = this;
+    description = game.user.isGM || identified ? description.value : unidentified.description;
+    uses = game.user.isGM || identified ? uses : null;
+    price = game.user.isGM || identified ? price : null;
+
+    const context = {
+      name, type, img, price, weight, uses, school, materials, activation,
+      labels: foundry.utils.deepClone(this.labels),
+      subtitle: school
+        ? CONFIG.DND5E.spellSchools[school]
+        : this.type?.label ?? game.i18n.localize(CONFIG.Item.typeLabels[this.type]),
+      description: await TextEditor.enrichHTML(description, {
+        async: true, relativeTo: this.parent, rollData: this.parent.getRollData(), ...enrichmentOptions
+      })
+    };
+
+    context.properties = [];
+
+    if ( game.user.isGM || identified ) {
+      context.properties.push(...this.tooltipProperties ?? []);
+      if ( type === "spell" ) context.properties.push(...this.parent.labels.components.tags);
+      else context.properties.push(...this.activatedEffectChatProperties ?? []);
+      if ( "proficient" in this ) {
+        context.properties.push(CONFIG.DND5E.proficiencyLevels[this.prof?.multiplier || 0]);
+      }
+    }
+
+    if ( properties.has("concentration") ) {
+      context.labels.duration = game.i18n.format("DND5E.ConcentrationDuration", {
+        duration: context.labels.duration.toLocaleLowerCase(game.i18n.lang)
+      });
+    }
+
+    context.properties = context.properties.filter(_ => _);
+    return context;
+  }
+}
+
+/* -------------------------------------------- */
+
+/**
  * Data Model variant that does not export fields with an `undefined` value during `toObject(true)`.
  */
 export class SparseDataModel extends foundry.abstract.DataModel {

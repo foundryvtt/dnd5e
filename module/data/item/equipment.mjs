@@ -1,4 +1,4 @@
-import SystemDataModel from "../abstract.mjs";
+import { ItemDataModel } from "../abstract.mjs";
 import ActionTemplate from "./templates/action.mjs";
 import ActivatedEffectTemplate from "./templates/activated-effect.mjs";
 import EquippableItemTemplate from "./templates/equippable-item.mjs";
@@ -30,7 +30,7 @@ import ItemTypeField from "./fields/item-type-field.mjs";
  * @property {number} strength          Minimum strength required to use a piece of armor.
  * @property {number} proficient        Does the owner have proficiency in this piece of equipment?
  */
-export default class EquipmentData extends SystemDataModel.mixin(
+export default class EquipmentData extends ItemDataModel.mixin(
   ItemDescriptionTemplate, IdentifiableTemplate, ItemTypeTemplate, PhysicalItemTemplate, EquippableItemTemplate,
   ActivatedEffectTemplate, ActionTemplate, MountableTemplate
 ) {
