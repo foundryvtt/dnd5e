@@ -273,6 +273,7 @@ export default function registerSystemSettings() {
     name: "Primary Party",
     scope: "world",
     config: false,
+    default: null,
     type: PrimaryPartyData,
     onChange: s => ui.actors.render()
   });

@@ -97,6 +97,7 @@ export const migrateWorld = async function() {
 
     // Migrate ActorDeltas individually in order to avoid issues with ActorDelta bulk updates.
     for ( const token of s.tokens ) {
+      if ( token.actorLink || !token.actor ) continue;
       try {
         const flags = { persistSourceMigration: false };
         const source = token.actor.toObject();
@@ -117,7 +118,7 @@ export const migrateWorld = async function() {
           await token.actor.update(updateData, { enforceTypes: false, diff: !flags.persistSourceMigration });
         }
       } catch(err) {
-        err.message = `Failed dnd5e system migration for ActorDelta ${token.actor.name}: ${err.message}`;
+        err.message = `Failed dnd5e system migration for ActorDelta [${token.id}]: ${err.message}`;
         console.error(err);
       }
     }
@@ -480,7 +481,7 @@ export const migrateSceneData = function(scene, migrationData) {
     _migrateTokenImage(t, update);
     if ( !game.actors.has(t.actorId) ) update.actorId = null;
     if ( !foundry.utils.isEmpty(update) ) arr.push({ ...update, _id: t._id });
-    return t;
+    return arr;
   }, []);
   if ( tokens.length ) return { tokens };
   return {};
