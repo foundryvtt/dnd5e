@@ -841,6 +841,8 @@
           inset: 0;
           background: linear-gradient(to right, var(--dnd5e-color-card) 35%, transparent);
           border-radius: 5px;
+          mix-blend-mode: unset;
+          filter: unset;
         }
 
         > * { position: relative; }
@@ -1066,21 +1068,10 @@
 
     .class {
       width: 240px;
-      position: relative;
       display: flex;
       align-items: center;
       gap: .5rem;
       padding-right: .75rem;
-
-      &::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: var(--underlay) no-repeat center / cover;
-        filter: grayscale(1);
-        mix-blend-mode: overlay;
-        pointer-events: none;
-      }
 
       .icons, .name-stacked, .level { position: relative; }
 

@@ -470,10 +470,40 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
   /* -------------------------------------------- */
 
   /**
+   * Filter child embedded Documents based on the current set of filters.
+   * @param {string} collection    The embedded collection name.
+   * @param {Set<string>} filters  Filters to apply to the children.
+   * @returns {Document[]}
+   * @protected
+   */
+  _filterChildren(collection, filters) {
+    switch ( collection ) {
+      case "items": return this._filterItems(this.actor.items, filters);
+      case "effects": return this._filterEffects(Array.from(this.actor.allApplicableEffects()), filters);
+    }
+    return [];
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Filter Active Effects based on the current set of filters.
+   * @param {ActiveEffect5e[]} effects  The effects to filter.
+   * @param {Set<string>} filters       Filters to apply to the effects.
+   * @returns {ActiveEffect5e[]}
+   * @protected
+   */
+  _filterEffects(effects, filters) {
+    return effects;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Filter items based on the current set of filters.
    * @param {Item5e[]} items       Copies of item data to be filtered.
    * @param {Set<string>} filters  Filters applied to the item list.
-   * @returns {object[]}           Subset of input items limited by the provided filters.
+   * @returns {Item5e[]}           Subset of input items limited by the provided filters.
    * @protected
    */
   _filterItems(items, filters) {

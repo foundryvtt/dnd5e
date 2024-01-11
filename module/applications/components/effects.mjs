@@ -1,3 +1,5 @@
+import { staticID } from "../../utils.mjs";
+
 /**
  * Custom element that handles displaying active effects lists.
  */
@@ -163,6 +165,10 @@ export default class EffectsElement extends HTMLElement {
     });
     if ( target.dispatchEvent(event) === false ) return;
 
+    if ( action === "toggleCondition" ) {
+      return this._onToggleCondition(target.closest("[data-condition-id]")?.dataset.conditionId);
+    }
+
     const dataset = target.closest("[data-effect-id]")?.dataset;
     const effect = this.getEffect(dataset);
     if ( (action !== "create") && !effect ) return;
@@ -179,6 +185,20 @@ export default class EffectsElement extends HTMLElement {
       case "toggle":
         return effect.update({disabled: !effect.disabled});
     }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle toggling a condition.
+   * @param {string} conditionId  The condition identifier.
+   * @protected
+   */
+  _onToggleCondition(conditionId) {
+    const existing = this.document.effects.get(staticID(`dnd5e${conditionId}`));
+    if ( existing ) return existing.delete();
+    const effect = ActiveEffect.implementation.fromStatusEffect(conditionId);
+    return ActiveEffect.implementation.create(effect, { parent: this.document, keepId: true });
   }
 
   /* -------------------------------------------- */

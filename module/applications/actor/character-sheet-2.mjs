@@ -1,7 +1,7 @@
 import ActorSheet5eCharacter from "./character-sheet.mjs";
 import * as Trait from "../../documents/actor/trait.mjs";
 import Tabs5e from "../tabs.mjs";
-import { simplifyBonus } from "../../utils.mjs";
+import { simplifyBonus, staticID } from "../../utils.mjs";
 
 /**
  * An Actor sheet for player character type actors.
@@ -318,18 +318,38 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
       ctx.capacity = await container.system.computeCapacity();
     }
 
-    // Effects
+    // Effects & Conditions
+    const conditionIds = new Set();
+    context.conditions = Object.entries(CONFIG.DND5E.conditionTypes).reduce((arr, [k, c]) => {
+      if ( k === "diseased" ) return arr; // Filter out diseased as it's not a real condition.
+      const { label: name, icon, reference } = c;
+      const id = staticID(`dnd5e${k}`);
+      conditionIds.add(id);
+      const existing = this.actor.effects.get(id);
+      const { disabled, img } = existing ?? {};
+      arr.push({
+        name, reference,
+        id: k,
+        icon: img ?? icon,
+        disabled: existing ? disabled : !this.actor.statuses.has(k)
+      });
+      return arr;
+    }, []);
+
     for ( const category of Object.values(context.effects) ) {
-      category.effects = await Promise.all(category.effects.map(async effect => {
+      category.effects = await category.effects.reduce(async (arr, effect) => {
         effect.updateDuration();
+        if ( conditionIds.has(effect.id) && !effect.duration.remaining ) return arr;
         const { id, name, img, disabled, duration } = effect;
-        return {
+        arr = await arr;
+        arr.push({
           id, name, img, disabled, duration,
           parentId: effect.target === effect.parent ? null : effect.parent.id,
           source: await effect.getSource(),
           durationParts: duration.remaining ? duration.label.split(", ") : []
-        };
-      }));
+        });
+        return arr;
+      }, []);
     }
 
     context.effects.suppressed.info = context.effects.suppressed.info[0];

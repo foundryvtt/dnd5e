@@ -62,8 +62,8 @@
 <{{elements.inventory}}>
 
     {{!-- Searching, Filtering, & Sorting --}}
-    <item-list-controls for="features" label="{{ localize "DND5E.FeatureSearch" }}" sort group
-                        group-label="{{ localize "DND5E.FilterGroupOrigin" }}">
+    <item-list-controls for="features" label="{{ localize "DND5E.FeatureSearch" }}" sort="toggle" group
+                        group-label="{{ localize "DND5E.FilterGroupOrigin" }}" collection="items">
         <datalist>
             <option value="action">{{ localize "DND5E.Action" }}</option>
             <option value="bonus">{{ localize "DND5E.BonusAction" }}</option>
@@ -96,9 +96,9 @@
                 {{#dnd5e-itemContext item as |ctx|}}
 
                 {{!-- Items --}}
-                <li class="item" data-item-id="{{ item.id }}" data-item-name="{{ item.name }}"
-                    data-item-sort="{{ item.sort }}" data-ungrouped="{{#if ../hasActions}}active{{else}}passive{{/if}}"
-                    data-grouped="{{ ctx.group }}">
+                <li class="item" data-item-id="{{ item.id }}" data-entry-id="{{ item.id }}"
+                    data-item-name="{{ item.name }}" data-item-sort="{{ item.sort }}" data-grouped="{{ ctx.group }}"
+                    data-ungrouped="{{#if ../hasActions}}active{{else}}passive{{/if}}">
 
                     {{!-- Item Name --}}
                     <div class="item-name item-action item-tooltip {{ @root.rollableClass }}" role="button"

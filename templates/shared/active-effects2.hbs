@@ -1,5 +1,9 @@
 <{{ elements.effects }}>
 
+    {{!-- Searching --}}
+    <item-list-controls for="effects" label="{{ localize "DND5E.EffectsSearch" }}" sort="a"
+                        collection="effects"></item-list-controls>
+
     {{!-- Effects List --}}
     <section class="items-list effects-list" data-item-list="effects">
 
@@ -71,9 +75,16 @@
                             <i class="fas fa-trash"></i>
                         </a>
                         {{else}}
-                        <button type="button" class="radio-button effect-control" data-action="toggle"
-                                data-tooltip="{{#if disabled}}DND5E.EffectEnable{{else}}DND5E.EffectDisable{{/if}}"
-                                aria-label="{{#if disable}}{{ localize "DND5E.EffectEnable" }}{{else}}{{ localize "DND5E.EffectDisable" }}{{/if}}" aria-pressed="{{#if disabled}}false{{else}}true{{/if}}"></button>
+                        <a class="effect-control item-control {{#unless disabled}}active{{/unless}}"
+                           data-action="toggle"
+                           data-tooltip="{{#if disabled}}DND5E.EffectEnable{{else}}DND5E.EffectDisable{{/if}}"
+                           aria-label="{{#if disabled}}{{ localize "DND5E.EffectEnable" }}{{else}}{{ localize "DND5E.EffectDisable" }}{{/if}}">
+                            {{#if disabled}}
+                            <i class="fas fa-toggle-off"></i>
+                            {{else}}
+                            <i class="fas fa-toggle-on"></i>
+                            {{/if}}
+                        </a>
                         {{/if}}
 
                         {{!-- Context Menu --}}
@@ -91,6 +102,38 @@
 
         </div>
         {{/each}}
+
+    </section>
+
+    <section class="items-list">
+
+        <div class="items-section card">
+
+            <div class="items-header header">
+                <h3 class="item-name">{{ localize "DND5E.Conditions" }}</h3>
+            </div>
+
+            <ul class="conditions-list unlist">
+                {{#each conditions}}
+                <li class="condition {{#unless disabled}}active{{/unless}} {{#if reference}}content-link{{/if}}"
+                    data-action="toggleCondition" data-uuid="{{ reference }}" data-condition-id="{{ id }}"
+                    data-tooltip="<section class=&quot;loading&quot;><i class=&quot;fas fa-spinner fa-spin-pulse&quot;></i></section>">
+                    <div class="icon">
+                        <dnd5e-icon src="{{ icon }}"></dnd5e-icon>
+                    </div>
+                    <div class="name-stacked">
+                        <span class="title">{{ name }}</span>
+                    </div>
+                    {{#if disabled}}
+                    <i class="fas fa-toggle-off"></i>
+                    {{else}}
+                    <i class="fas fa-toggle-on"></i>
+                    {{/if}}
+                </li>
+                {{/each}}
+            </ul>
+
+        </div>
 
     </section>
 

@@ -109,6 +109,17 @@ export default class ItemListControlsElement extends HTMLElement {
     return this.hasAttribute("keep-empty");
   }
 
+  /**
+   * Get the current sort mode.
+   * @type {"a"|"m"}
+   */
+  get sortMode() {
+    const sortMode = this.getAttribute("sort");
+    if ( !sortMode ) return "m";
+    if ( sortMode === "toggle" ) return this.prefs?.sort === "a" ? "a" : "m";
+    return sortMode;
+  }
+
   /* -------------------------------------------- */
   /*  Methods                                     */
   /* -------------------------------------------- */
@@ -129,28 +140,37 @@ export default class ItemListControlsElement extends HTMLElement {
             <i class="fas fa-xmark"></i>        
           </button>
         </li>
-        <li class="dropdown">
-          <button type="button" class="unbutton filter-control filter" data-action="filter"
-                  aria-label="${game.i18n.localize("DND5E.Filter")}">
-            <i class="fas fa-filter"></i>
-          </button>
-          <ul class="filter-list unlist"></ul>
-        </li>
       </ul>
     `;
 
     const controls = search.querySelector(".controls");
-    const list = search.querySelector(".filter-list");
-    options.forEach(option => {
+
+    // Filtering
+    if ( options.length ) {
       const item = document.createElement("li");
+      item.classList.add("dropdown");
       item.innerHTML = `
-        <button type="button" class="filter-item" data-filter="${option.value}">${option.innerText}</button>
+        <button type="button" class="unbutton filter-control filter" data-action="filter"
+                aria-label="${game.i18n.localize("DND5E.Filter")}">
+          <i class="fas fa-filter"></i>
+        </button>
+        <ul class="filter-list unlist"></ul>
       `;
-      list.appendChild(item);
-    });
+      controls.appendChild(item);
+
+      const list = item.querySelector(".filter-list");
+      options.forEach(option => {
+        const item = document.createElement("li");
+        item.innerHTML = `
+          <button type="button" class="filter-item" data-filter="${option.value}">${option.innerText}</button>
+        `;
+        list.appendChild(item);
+      });
+    }
 
     // Sorting
-    if ( this.hasAttribute("sort") ) {
+    const sortMode = this.getAttribute("sort");
+    if ( sortMode === "toggle" ) {
       const item = document.createElement("li");
       item.innerHTML = `
         <button type="button" class="unbutton filter-control active" data-action="sort"
@@ -211,9 +231,10 @@ export default class ItemListControlsElement extends HTMLElement {
    * @protected
    */
   _initSorting() {
-    const sortIcon = `fa-${this.prefs?.sort === "a" ? "arrow-down-a-z" : "arrow-down-short-wide"}`;
+    if ( this.getAttribute("sort") !== "toggle" ) return;
+    const sortIcon = `fa-${this.sortMode === "a" ? "arrow-down-a-z" : "arrow-down-short-wide"}`;
     this._controls.sort.querySelector("i").className = `fas ${sortIcon}`;
-    const label = `SIDEBAR.SortMode${this.prefs?.sort === "a" ? "Alpha" : "Manual"}`;
+    const label = `SIDEBAR.SortMode${this.sortMode === "a" ? "Alpha" : "Manual"}`;
     this._controls.sort.dataset.tooltip = label;
     this._controls.sort.setAttribute("aria-label", game.i18n.localize(label));
   }
@@ -227,17 +248,17 @@ export default class ItemListControlsElement extends HTMLElement {
   _applyFilters() {
     const { name, properties } = this.state;
     this._controls.clear.classList.toggle("active", properties.size || name);
-    let items = this.app._filterItems?.(this.app.object.items, properties);
-    if ( !items ) return;
-    if ( name ) items = items.filter(item => item.name.toLocaleLowerCase(game.i18n.lang).includes(name));
+    let entries = this.app._filterChildren?.(this.getAttribute("collection") ?? "items", properties);
+    if ( !entries ) return;
+    if ( name ) entries = entries.filter(item => item.name.toLocaleLowerCase(game.i18n.lang).includes(name));
     const elementMap = {};
     if ( !this.keepEmpty ) this.list.querySelectorAll(".items-section").forEach(el => el.hidden = true);
     this.list.querySelectorAll(".item-list .item").forEach(el => {
-      elementMap[el.dataset.itemId] = el;
+      elementMap[el.dataset.entryId] = el;
       el.hidden = true;
     });
-    for ( const item of items ) {
-      const el = elementMap[item.id];
+    for ( const entry of entries ) {
+      const el = elementMap[entry.id];
       if ( el ) el.hidden = false;
     }
     this.list.querySelectorAll(".items-section:has(.item-list .item:not([hidden]))").forEach(el => el.hidden = false);
@@ -273,7 +294,6 @@ export default class ItemListControlsElement extends HTMLElement {
    * @protected
    */
   _applySorting() {
-    const sortMode = this.prefs?.sort === "a" ? "a" : "m";
     const comparators = {
       a: (a, b) => a.name.localeCompare(b.name),
       m: (a, b) => a.sort - b.sort
@@ -284,7 +304,7 @@ export default class ItemListControlsElement extends HTMLElement {
         const { itemName, itemSort } = element.dataset;
         items.push({ element, name: itemName, sort: Number(itemSort) });
       });
-      items.sort(comparators[sortMode]);
+      items.sort(comparators[this.sortMode]);
       section.replaceChildren(...items.map(({ element }) => element));
     }
   }
