@@ -47,6 +47,7 @@ export default class Award extends FormApplication {
       return obj;
     }, {});
     context.destinations = Award.prepareDestinations(this.transferDestinations);
+    context.hideXP = game.settings.get("dnd5e", "disableExperienceTracking");
     context.xp = this.options.xp ?? this.object?.system.details.xp.value ?? this.object?.system.details.xp.derived;
 
     return context;
@@ -183,7 +184,7 @@ export default class Award extends FormApplication {
    * Regular expression used to split currency & xp values from their labels.
    * @type {RegExp}
    */
-  static VALUE_PATTERN = new RegExp(/^(-?\d+)(\D+)$/);
+  static VALUE_PATTERN = new RegExp(/^(.+?)(\D+)$/);
 
   /* -------------------------------------------- */
 
@@ -215,11 +216,18 @@ export default class Award extends FormApplication {
     for ( const part of command.split(" ") ) {
       if ( !part ) continue;
       let [, amount, label] = part.match(this.VALUE_PATTERN) ?? [];
-      amount = parseInt(amount);
-      if ( label in CONFIG.DND5E.currencies ) currency[label] = amount;
-      else if ( label === "xp" ) xp = amount;
-      else if ( part === "party" ) party = true;
-      else unrecognized.push(part);
+      label = label?.toLowerCase();
+      try {
+        const roll = new Roll(amount);
+        await roll.evaluate();
+        amount = roll.total;
+        if ( label in CONFIG.DND5E.currencies ) currency[label] = amount;
+        else if ( label === "xp" ) xp = amount;
+        else if ( part === "party" ) party = true;
+        else throw new Error();
+      } catch(err) {
+        unrecognized.push(part);
+      }
     }
 
     // Display warning about an unrecognized commands

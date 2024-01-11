@@ -1,10 +1,12 @@
 <form autocomplete="off">
+    {{#unless hideXP}}
     <div class="xp">
         <label>
             <span>{{localize "DND5E.ExperiencePoints"}}</span>
             {{numberInput xp name="xp" min=0 step=1}}
         </label>
     </div>
+    {{/unless}}
     <div class="amount">
         {{#each currency}}
         <label>
