@@ -119,6 +119,12 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
       label.remove();
     });
 
+    const idLink = header.querySelector(".document-id-link");
+    if ( idLink ) {
+      const firstButton = header.querySelector(".header-button");
+      firstButton?.insertAdjacentElement("beforebegin", idLink);
+    }
+
     // Render tabs.
     const nav = document.createElement("nav");
     nav.classList.add("tabs");

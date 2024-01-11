@@ -21,10 +21,16 @@
       display: grid;
       place-content: center;
       font-size: var(--font-size-12);
-      margin-top: .25rem;
 
       > i { margin: 0 }
     }
+
+    .header-button, .document-id-link { margin-top: .25rem; }
+  }
+
+  &.window-app.minimized .window-header .document-id-link {
+    display: block;
+    margin-top: 0;
   }
 
   .window-content {
