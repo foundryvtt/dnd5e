@@ -154,7 +154,7 @@ export default class EquipmentData extends SystemDataModel.mixin(
     return [
       this.type.label,
       (this.isArmor || this.isMountable) ? (this.parent.labels?.armor ?? null) : null,
-      this.properties.has("stealthDisadvantage") ? game.i18n.localize("DND5E.Item.PropertyStealthDisadvantage") : null
+      this.properties.has("stealthDisadvantage") ? game.i18n.localize("DND5E.Item.Property.StealthDisadvantage") : null
     ];
   }
 
@@ -167,7 +167,7 @@ export default class EquipmentData extends SystemDataModel.mixin(
   get tooltipProperties() {
     return [
       (this.isArmor || this.isMountable) ? (this.parent.labels?.armor ?? null) : null,
-      this.properties.has("stealthDisadvantage") ? game.i18n.localize("DND5E.StealthDisadvantage") : null
+      this.properties.has("stealthDisadvantage") ? game.i18n.localize("DND5E.Item.Property.StealthDisadvantage") : null
     ];
   }
 

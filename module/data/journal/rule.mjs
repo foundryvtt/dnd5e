@@ -10,7 +10,7 @@ export default class RuleJournalPageData extends foundry.abstract.DataModel {
   static defineSchema() {
     return {
       tooltip: new HTMLField({label: "DND5E.Rule.Tooltip"}),
-      type: new StringField({blank: false, initial: "rule", label: "DND5E.Rule.Type"})
+      type: new StringField({blank: false, initial: "rule", label: "DND5E.Rule.Type.Label"})
     };
   }
 

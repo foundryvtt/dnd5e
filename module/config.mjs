@@ -1081,24 +1081,24 @@ DND5E.featureTypes = {
     label: "DND5E.Feature.Background"
   },
   class: {
-    label: "DND5E.Feature.Class",
+    label: "DND5E.Feature.Class.Label",
     subtypes: {
-      arcaneShot: "DND5E.ClassFeature.ArcaneShot",
-      artificerInfusion: "DND5E.ClassFeature.ArtificerInfusion",
-      channelDivinity: "DND5E.ClassFeature.ChannelDivinity",
-      defensiveTactic: "DND5E.ClassFeature.DefensiveTactic",
-      eldritchInvocation: "DND5E.ClassFeature.EldritchInvocation",
-      elementalDiscipline: "DND5E.ClassFeature.ElementalDiscipline",
-      fightingStyle: "DND5E.ClassFeature.FightingStyle",
-      huntersPrey: "DND5E.ClassFeature.HuntersPrey",
-      ki: "DND5E.ClassFeature.Ki",
-      maneuver: "DND5E.ClassFeature.Maneuver",
-      metamagic: "DND5E.ClassFeature.Metamagic",
-      multiattack: "DND5E.ClassFeature.Multiattack",
-      pact: "DND5E.ClassFeature.PactBoon",
-      psionicPower: "DND5E.ClassFeature.PsionicPower",
-      rune: "DND5E.ClassFeature.Rune",
-      superiorHuntersDefense: "DND5E.ClassFeature.SuperiorHuntersDefense"
+      arcaneShot: "DND5E.Feature.Class.ArcaneShot",
+      artificerInfusion: "DND5E.Feature.Class.ArtificerInfusion",
+      channelDivinity: "DND5E.Feature.Class.ChannelDivinity",
+      defensiveTactic: "DND5E.Feature.Class.DefensiveTactic",
+      eldritchInvocation: "DND5E.Feature.Class.EldritchInvocation",
+      elementalDiscipline: "DND5E.Feature.Class.ElementalDiscipline",
+      fightingStyle: "DND5E.Feature.Class.FightingStyle",
+      huntersPrey: "DND5E.Feature.Class.HuntersPrey",
+      ki: "DND5E.Feature.Class.Ki",
+      maneuver: "DND5E.Feature.Class.Maneuver",
+      metamagic: "DND5E.Feature.Class.Metamagic",
+      multiattack: "DND5E.Feature.Class.Multiattack",
+      pact: "DND5E.Feature.Class.PactBoon",
+      psionicPower: "DND5E.Feature.Class.PsionicPower",
+      rune: "DND5E.Feature.Class.Rune",
+      superiorHuntersDefense: "DND5E.Feature.Class.SuperiorHuntersDefense"
     }
   },
   monster: {
@@ -1111,11 +1111,11 @@ DND5E.featureTypes = {
     label: "DND5E.Feature.Feat"
   },
   supernaturalGift: {
-    label: "DND5E.Feature.SupernaturalGift",
+    label: "DND5E.Feature.SupernaturalGift.Label",
     subtypes: {
-      blessing: "DND5E.Feature.SupernaturalGiftBlessing",
-      charm: "DND5E.Feature.SupernaturalGiftCharm",
-      epicBoon: "DND5E.Feature.SupernaturalGiftEpicBoon"
+      blessing: "DND5E.Feature.SupernaturalGift.Blessing",
+      charm: "DND5E.Feature.SupernaturalGift.Charm",
+      epicBoon: "DND5E.Feature.SupernaturalGift.EpicBoon"
     }
   }
 };
@@ -1131,83 +1131,83 @@ preLocalize("featureTypes.supernaturalGift.subtypes", { sort: true });
  */
 DND5E.itemProperties = {
   ada: {
-    label: "DND5E.Item.PropertyAdamantine",
+    label: "DND5E.Item.Property.Adamantine",
     isPhysical: true
   },
   amm: {
-    label: "DND5E.Item.PropertyAmmunition"
+    label: "DND5E.Item.Property.Ammunition"
   },
   concentration: {
-    label: "DND5E.Item.PropertyConcentration",
+    label: "DND5E.Item.Property.Concentration",
     abbr: "DND5E.ConcentrationAbbr",
     isTag: true
   },
   fin: {
-    label: "DND5E.Item.PropertyFinesse"
+    label: "DND5E.Item.Property.Finesse"
   },
   fir: {
-    label: "DND5E.Item.PropertyFirearm"
+    label: "DND5E.Item.Property.Firearm"
   },
   foc: {
-    label: "DND5E.Item.PropertyFocus"
+    label: "DND5E.Item.Property.Focus"
   },
   hvy: {
-    label: "DND5E.Item.PropertyHeavy"
+    label: "DND5E.Item.Property.Heavy"
   },
   lgt: {
-    label: "DND5E.Item.PropertyLight"
+    label: "DND5E.Item.Property.Light"
   },
   lod: {
-    label: "DND5E.Item.PropertyLoading"
+    label: "DND5E.Item.Property.Loading"
   },
   material: {
-    label: "DND5E.Item.PropertyMaterial"
+    label: "DND5E.Item.Property.Material"
   },
   mgc: {
-    label: "DND5E.Item.PropertyMagical",
+    label: "DND5E.Item.Property.Magical",
     isPhysical: true
   },
   rch: {
-    label: "DND5E.Item.PropertyReach"
+    label: "DND5E.Item.Property.Reach"
   },
   rel: {
-    label: "DND5E.Item.PropertyReload"
+    label: "DND5E.Item.Property.Reload"
   },
   ret: {
-    label: "DND5E.Item.PropertyReturning"
+    label: "DND5E.Item.Property.Returning"
   },
   ritual: {
-    label: "DND5E.Item.PropertyRitual",
+    label: "DND5E.Item.Property.Ritual",
     abbr: "DND5E.RitualAbbr",
     isTag: true
   },
   sil: {
-    label: "DND5E.Item.PropertySilvered",
+    label: "DND5E.Item.Property.Silvered",
     isPhysical: true
   },
   somatic: {
-    label: "DND5E.Item.PropertySomatic"
+    label: "DND5E.Item.Property.Somatic"
   },
   spc: {
-    label: "DND5E.Item.PropertySpecial"
+    label: "DND5E.Item.Property.Special"
   },
   stealthDisadvantage: {
-    label: "DND5E.Item.PropertyStealthDisadvantage"
+    label: "DND5E.Item.Property.StealthDisadvantage"
   },
   thr: {
-    label: "DND5E.Item.PropertyThrown"
+    label: "DND5E.Item.Property.Thrown"
   },
   two: {
-    label: "DND5E.Item.PropertyTwoHanded"
+    label: "DND5E.Item.Property.TwoHanded"
   },
   ver: {
-    label: "DND5E.Item.PropertyVersatile"
+    label: "DND5E.Item.Property.Versatile"
   },
   vocal: {
-    label: "DND5E.Item.PropertyVerbal"
+    label: "DND5E.Item.Property.Verbal"
   },
   weightlessContents: {
-    label: "DND5E.Item.PropertyWeightlessContents"
+    label: "DND5E.Item.Property.WeightlessContents"
   }
 };
 preLocalize("itemProperties", { keys: ["label", "abbr"], sort: true });
@@ -2740,7 +2740,7 @@ DND5E.defaultArtwork = {
  */
 DND5E.ruleTypes = {
   rule: {
-    label: "DND5E.Rule.TypeRule",
+    label: "DND5E.Rule.Type.Rule",
     references: "rules"
   },
   ability: {
@@ -2748,7 +2748,7 @@ DND5E.ruleTypes = {
     references: "enrichmentLookup.abilities"
   },
   condition: {
-    label: "DND5E.Rule.TypeCondition",
+    label: "DND5E.Rule.Type.Condition",
     references: "conditionTypes"
   },
   skill: {
