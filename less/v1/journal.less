@@ -92,6 +92,26 @@ p:empty:has(+ .content-embed), .content-embed + p:empty {
   display: none;
 }
 
+.award-block {
+  [data-action="awardRequest"] {
+    margin-block: -2px;
+    margin-inline-start: 4px;
+    border: 1px dotted black;
+    border-radius: 4px;
+    padding-block: 2px;
+    padding-inline: 4px 2px;
+
+    &:hover, &:focus {
+      border-style: solid;
+    }
+  }
+  > span {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+}
+
 /* ----------------------------------------- */
 /*  Journal Pages                            */
 /* ----------------------------------------- */

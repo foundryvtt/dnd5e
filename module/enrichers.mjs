@@ -1,4 +1,5 @@
-import { simplifyBonus } from "./utils.mjs";
+import { formatNumber, simplifyBonus } from "./utils.mjs";
+import Award from "./applications/award.mjs";
 import { damageRoll } from "./dice/_module.mjs";
 import * as Trait from "./documents/actor/trait.mjs";
 
@@ -11,7 +12,7 @@ const slugify = value => value?.slugify().replaceAll("-", "");
  */
 export function registerCustomEnrichers() {
   CONFIG.TextEditor.enrichers.push({
-    pattern: /\[\[\/(?<type>check|damage|save|skill|tool) (?<config>[^\]]+)]](?:{(?<label>[^}]+)})?/gi,
+    pattern: /\[\[\/(?<type>award|check|damage|save|skill|tool) (?<config>[^\]]+)]](?:{(?<label>[^}]+)})?/gi,
     enricher: enrichString
   },
   {
@@ -24,6 +25,7 @@ export function registerCustomEnrichers() {
     enricher: enrichString
   });
 
+  document.body.addEventListener("click", awardAction);
   document.body.addEventListener("click", rollAction);
 }
 
@@ -39,8 +41,9 @@ export function registerCustomEnrichers() {
 async function enrichString(match, options) {
   let { type, config, label } = match.groups;
   config = parseConfig(config);
-  config.input = match[0];
+  config._input = match[0];
   switch ( type.toLowerCase() ) {
+    case "award": return enrichAward(config, label, options);
     case "damage": return enrichDamage(config, label, options);
     case "check":
     case "skill":
@@ -65,7 +68,7 @@ async function enrichEmbed(config, label, options) {
   options._embedDepth ??= 0;
   if ( options._embedDepth > MAX_EMBED_DEPTH ) {
     console.warn(
-      `Embed enrichers are restricted to ${MAX_EMBED_DEPTH} levels deep. ${config.input} cannot be enriched fully.`
+      `Embed enrichers are restricted to ${MAX_EMBED_DEPTH} levels deep. ${config._input} cannot be enriched fully.`
     );
     return null;
   }
@@ -98,7 +101,7 @@ async function enrichEmbed(config, label, options) {
  * @returns {object}
  */
 function parseConfig(match) {
-  const config = { values: [] };
+  const config = { _config: match, values: [] };
   for ( const part of match.match(/(?:[^\s"]+|"[^"]*")+/g) ) {
     if ( !part ) continue;
     const [key, value] = part.split("=");
@@ -113,6 +116,55 @@ function parseConfig(match) {
 
 /* -------------------------------------------- */
 /*  Enrichers                                   */
+/* -------------------------------------------- */
+
+/**
+ * Enrich an award block displaying amounts for each part granted with a GM-control for awarding to the party.
+ * @param {object} config              Configuration data.
+ * @param {string} [label]             Optional label to replace default text.
+ * @param {EnrichmentOptions} options  Options provided to customize text enrichment.
+ * @returns {HTMLElement|null}         An HTML link if the check could be built, otherwise null.
+ */
+async function enrichAward(config, label, options) {
+  const command = config._config;
+  let parsed;
+  try {
+    parsed = Award.parseAwardCommand(command);
+  } catch(err) {
+    console.warn(err.message);
+    return null;
+  }
+
+  const block = document.createElement("span");
+  block.classList.add("award-block", "dnd5e2");
+  block.dataset.awardCommand = command;
+
+  const entries = [];
+  for ( let [key, amount] of Object.entries(parsed.currency) ) {
+    const label = CONFIG.DND5E.currencies[key].label;
+    amount = Number.isNumeric(amount) ? formatNumber(amount) : amount;
+    entries.push(`
+      <span class="award">
+        ${amount} <i class="currency ${key}" data-tooltip="${label}" aria-label="${label}"></i>
+      </span>
+    `);
+  }
+  if ( parsed.xp ) entries.push(`
+    <span class="award">
+      ${formatNumber(parsed.xp)} ${game.i18n.localize("DND5E.ExperiencePointsAbbr")}
+    </span>
+  `);
+
+  block.innerHTML += `
+    ${game.i18n.getListFormatter({ type: "unit" }).format(entries)}
+    <a class="award-link" data-action="awardRequest">
+      <i class="fa-solid fa-trophy"></i> ${label ?? game.i18n.localize("DND5E.Award.Action")}
+    </a>
+  `;
+
+  return block;
+}
+
 /* -------------------------------------------- */
 
 /**
@@ -183,7 +235,7 @@ async function enrichCheck(config, label, options) {
 
   const skillConfig = CONFIG.DND5E.enrichmentLookup.skills[slugify(config.skill)];
   if ( config.skill && !skillConfig ) {
-    console.warn(`Skill ${config.skill} not found while enriching ${config.input}.`);
+    console.warn(`Skill ${config.skill} not found while enriching ${config._input}.`);
     invalid = true;
   } else if ( config.skill && !config.ability ) {
     config.ability = skillConfig.ability;
@@ -193,16 +245,16 @@ async function enrichCheck(config, label, options) {
   const toolUUID = CONFIG.DND5E.enrichmentLookup.tools[slugify(config.tool)];
   const toolIndex = toolUUID ? Trait.getBaseItem(toolUUID, { indexOnly: true }) : null;
   if ( config.tool && !toolIndex ) {
-    console.warn(`Tool ${config.tool} not found while enriching ${config.input}.`);
+    console.warn(`Tool ${config.tool} not found while enriching ${config._input}.`);
     invalid = true;
   }
 
   let abilityConfig = CONFIG.DND5E.enrichmentLookup.abilities[slugify(config.ability)];
   if ( config.ability && !abilityConfig ) {
-    console.warn(`Ability ${config.ability} not found while enriching ${config.input}.`);
+    console.warn(`Ability ${config.ability} not found while enriching ${config._input}.`);
     invalid = true;
   } else if ( !abilityConfig ) {
-    console.warn(`No ability provided while enriching check ${config.input}.`);
+    console.warn(`No ability provided while enriching check ${config._input}.`);
     invalid = true;
   }
   if ( abilityConfig?.key ) config.ability = abilityConfig.key;
@@ -522,7 +574,7 @@ async function enrichReference(config, label, options) {
     }
   }
   if ( !source ) {
-    console.warn(`No valid rule found while enriching ${config.input}.`);
+    console.warn(`No valid rule found while enriching ${config._input}.`);
     return null;
   }
   const uuid = foundry.utils.getType(source) === "Object" ? source.reference : source;
@@ -567,7 +619,7 @@ async function enrichSave(config, label, options) {
 
   const abilityConfig = CONFIG.DND5E.enrichmentLookup.abilities[config.ability];
   if ( !abilityConfig ) {
-    console.warn(`Ability ${config.ability} not found while enriching ${config.input}.`);
+    console.warn(`Ability ${config.ability} not found while enriching ${config._input}.`);
     return null;
   }
   if ( abilityConfig?.key ) config.ability = abilityConfig.key;
@@ -686,6 +738,21 @@ function createRollLink(label, dataset) {
 
 /* -------------------------------------------- */
 /*  Actions                                     */
+/* -------------------------------------------- */
+
+/**
+ * Forward clicks on award requests to the Award application.
+ * @param {Event} event  The click event triggering the action.
+ * @returns {Promise|void}
+ */
+async function awardAction(event) {
+  const target = event.target.closest('[data-action="awardRequest"]');
+  const command = target?.closest("[data-award-command]")?.dataset.awardCommand;
+  if ( !command ) return;
+  event.stopPropagation();
+  Award.handleAward(command);
+}
+
 /* -------------------------------------------- */
 
 /**
