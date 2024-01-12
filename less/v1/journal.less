@@ -92,6 +92,25 @@ p:empty:has(+ .content-embed), .content-embed + p:empty {
   display: none;
 }
 
+.award-block {
+  p:empty:has(+ &), & + p:empty { display: none; }
+
+  margin-block: 2px;
+  border: 1px solid black;
+  border-radius: 4px;
+  padding: 4px;
+
+  &, ul, li {
+    display: flex;
+    gap: 12px;
+  }
+  [data-action="awardRequest"] { font-weight: bold; }
+  li {
+    align-items: center;
+    gap: 4px;
+  }
+}
+
 /* ----------------------------------------- */
 /*  Journal Pages                            */
 /* ----------------------------------------- */

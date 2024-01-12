@@ -195,8 +195,7 @@ export default class Award extends FormApplication {
    */
   static chatMessage(message) {
     if ( !this.COMMAND_PATTERN.test(message) ) return;
-    if ( game.user.isGM ) this.parseAwardCommand(message);
-    else ui.notifications.error("DND5E.Award.NotGMError", { localize: true });
+    this.handleAward(message);
     return false;
   }
 
@@ -206,7 +205,46 @@ export default class Award extends FormApplication {
    * Parse the award command and grant an award.
    * @param {string} message  Award command typed in chat.
    */
-  static async parseAwardCommand(message) {
+  static async handleAward(message) {
+    if ( !game.user.isGM ) {
+      ui.notifications.error("DND5E.Award.NotGMError", { localize: true });
+      return;
+    }
+
+    try {
+      const { currency, xp, party } = this.parseAwardCommand(message);
+
+      for ( const [key, formula] of Object.entries(currency) ) {
+        const roll = new Roll(formula);
+        await roll.evaluate();
+        currency[key] = roll.total;
+      }
+
+      // If the party command is set, a primary party is set, and the award isn't empty, skip the UI
+      const primaryParty = game.settings.get("dnd5e", "primaryParty")?.actor;
+      if ( party && primaryParty && (xp || filteredKeys(currency).length) ) {
+        await this.awardCurrency(currency, [primaryParty]);
+        await this.awardXP(xp, [primaryParty]);
+      }
+
+      // Otherwise show the UI with defaults
+      else {
+        const app = new Award(null, { currency, xp });
+        app.render(true);
+      }
+    } catch(err) {
+      ui.notifications.warn(err.message);
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Parse the award command.
+   * @param {string} message  Award command typed in chat.
+   * @returns {{currency: Record<string, number>, xp: number, party: boolean}}
+   */
+  static parseAwardCommand(message) {
     const command = message.replace(this.COMMAND_PATTERN, "").toLowerCase();
 
     const currency = {};
@@ -218,9 +256,7 @@ export default class Award extends FormApplication {
       let [, amount, label] = part.match(this.VALUE_PATTERN) ?? [];
       label = label?.toLowerCase();
       try {
-        const roll = new Roll(amount);
-        await roll.evaluate();
-        amount = roll.total;
+        new Roll(amount);
         if ( label in CONFIG.DND5E.currencies ) currency[label] = amount;
         else if ( label === "xp" ) xp = amount;
         else if ( part === "party" ) party = true;
@@ -231,24 +267,10 @@ export default class Award extends FormApplication {
     }
 
     // Display warning about an unrecognized commands
-    if ( unrecognized.length ) {
-      ui.notifications.warn(game.i18n.format("DND5E.Award.UnrecognizedWarning", {
-        commands: game.i18n.getListFormatter().format(unrecognized.map(u => `"${u}"`))
-      }));
-      return;
-    }
+    if ( unrecognized.length ) throw new Error(game.i18n.format("DND5E.Award.UnrecognizedWarning", {
+      commands: game.i18n.getListFormatter().format(unrecognized.map(u => `"${u}"`))
+    }));
 
-    // If the party command is set, a primary party is set, and the award isn't empty, skip the UI
-    const primaryParty = game.settings.get("dnd5e", "primaryParty")?.actor;
-    if ( party && primaryParty && (xp || filteredKeys(currency).length) ) {
-      await this.awardCurrency(currency, [primaryParty]);
-      await this.awardXP(xp, [primaryParty]);
-    }
-
-    // Otherwise show the UI with defaults
-    else {
-      const app = new Award(null, { currency, xp });
-      app.render(true);
-    }
+    return { currency, xp, party };
   }
 }
