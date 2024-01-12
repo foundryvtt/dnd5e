@@ -148,6 +148,15 @@
     margin: 0;
   }
 
+  h1, h2, h3 {
+    border: none;
+    font-family: var(--dnd5e-font-roboto-slab);
+    font-weight: bold;
+  }
+
+  h2 { font-size: 1.4em; }
+  h1 { font-size: 1.5em; }
+
   h3.icon {
     border-bottom: 1px solid var(--dnd5e-color-black);
     display: flex;
@@ -296,6 +305,24 @@
     }
   }
 
+  filigree-box {
+    > h3 {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: .5rem;
+      padding: .75rem 1rem .375rem;
+      border: none;
+      font-size: var(--font-size-13);
+      margin: 0;
+
+      > i {
+        font-size: var(--font-size-11);
+        color: var(--color-text-dark-5);
+      }
+    }
+  }
+
   /* ---------------------------------- */
   /*  Meters                            */
   /* ---------------------------------- */
@@ -379,39 +406,25 @@
     transition: all 250ms ease;
   }
 
-  button {
-    background: var(--dnd5e-color-card);
-    font-family: var(--dnd5e-font-roboto);
-    font-weight: bold;
-    font-size: var(--font-size-13);
-    text-transform: uppercase;
-    padding: .1875rem;
-    border: 1px solid var(--color-border-light-2);
-    box-shadow: 0 0 8px var(--dnd5e-shadow-15);
+  button.radio-button {
+    width: 13px;
+    height: 13px;
+    border-radius: 100%;
+    background: none;
+    box-shadow: inset 0 0 6px var(--dnd5e-shadow-45);
+    padding: 3px;
+    display: grid;
+    border: none;
 
-    &:disabled { cursor: default; }
-    &:hover, &:focus { box-shadow: 0 0 5px var(--color-shadow-primary); }
+    &:hover { filter: drop-shadow(0 0 6px var(--dnd5e-color-gold)); }
 
-    &.radio-button {
-      width: 13px;
-      height: 13px;
+    &[aria-pressed="true"]::before {
+      content: "";
+      width: 100%;
+      height: 100%;
+      display: inline-block;
       border-radius: 100%;
-      background: none;
-      box-shadow: inset 0 0 6px var(--dnd5e-shadow-45);
-      padding: 3px;
-      display: grid;
-      border: none;
-
-      &:hover { filter: drop-shadow(0 0 6px var(--dnd5e-color-gold)); }
-
-      &[aria-pressed="true"]::before {
-        content: "";
-        width: 100%;
-        height: 100%;
-        display: inline-block;
-        border-radius: 100%;
-        background: var(--color-border-dark-5);
-      }
+      background: var(--color-border-dark-5);
     }
   }
 
@@ -421,6 +434,14 @@
     padding: 0;
     background: transparent;
     height: unset;
+  }
+
+  /* Reset textarea styles */
+  textarea.untext {
+    background: none;
+    border: none;
+
+    &:focus { box-shadow: none; }
   }
 
   .form-grid {
@@ -438,6 +459,7 @@
       background: var(--dnd5e-color-parchment);
       font-size: var(--font-size-14);
       height: unset;
+      width: 100%;
 
       &:focus { box-shadow: 0 0 6px var(--dnd5e-color-gold); }
       &::placeholder { color: var(--color-text-light-6); }
@@ -576,6 +598,20 @@
     }
   }
 
+  button {
+    background: var(--dnd5e-color-card);
+    font-family: var(--dnd5e-font-roboto);
+    font-weight: bold;
+    font-size: var(--font-size-13);
+    text-transform: uppercase;
+    padding: .1875rem;
+    border: 1px solid var(--color-border-light-2);
+    box-shadow: 0 0 8px var(--dnd5e-shadow-15);
+
+    &:disabled { cursor: default; }
+    &:hover, &:focus { box-shadow: 0 0 5px var(--color-shadow-primary); }
+  }
+
   .dialog-buttons {
     padding: .5rem;
     gap: .5rem;
@@ -710,16 +746,6 @@
     border: 2px solid var(--dnd5e-color-gold);
 
     .content { padding: 0 .5rem .25rem; }
-    .description {
-      h1, h2, h3 {
-        border: none;
-        font-family: var(--dnd5e-font-roboto-slab);
-        font-weight: bold;
-      }
-
-      h1 { font-size: 1.5em; }
-      h2 { font-size: 1.4em; }
-    }
   }
 
   &.locked-tooltip {

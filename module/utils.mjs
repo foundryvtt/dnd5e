@@ -25,6 +25,17 @@ export function formatNumber(value, options) {
 }
 
 /* -------------------------------------------- */
+
+/**
+ * A helper function to format textarea text to HTML with linebreaks.
+ * @param {string} value  The text to format.
+ * @returns {Handlebars.SafeString}
+ */
+export function formatText(value) {
+  return new Handlebars.SafeString(value?.replaceAll("\n", "<br>") ?? "");
+}
+
+/* -------------------------------------------- */
 /*  Formulas                                    */
 /* -------------------------------------------- */
 
@@ -197,6 +208,7 @@ export async function preloadHandlebarsTemplates() {
     "systems/dnd5e/templates/actors/tabs/character-details.hbs",
     "systems/dnd5e/templates/actors/tabs/character-features.hbs",
     "systems/dnd5e/templates/actors/tabs/character-spells.hbs",
+    "systems/dnd5e/templates/actors/tabs/character-biography.hbs",
 
     // Item Sheet Partials
     "systems/dnd5e/templates/items/parts/item-action.hbs",
@@ -354,7 +366,8 @@ export function registerHandlebarsHelpers() {
     "dnd5e-groupedSelectOptions": groupedSelectOptions,
     "dnd5e-linkForUuid": linkForUuid,
     "dnd5e-itemContext": itemContext,
-    "dnd5e-numberFormat": (context, options) => formatNumber(context, options.hash)
+    "dnd5e-numberFormat": (context, options) => formatNumber(context, options.hash),
+    "dnd5e-textFormat": formatText
   });
 }
 

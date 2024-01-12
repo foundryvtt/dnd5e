@@ -2,6 +2,7 @@ import ActorSheet5eCharacter from "./character-sheet.mjs";
 import * as Trait from "../../documents/actor/trait.mjs";
 import Tabs5e from "../tabs.mjs";
 import { simplifyBonus, staticID } from "../../utils.mjs";
+import CharacterData from "../../data/actor/character.mjs";
 
 /**
  * An Actor sheet for player character type actors.
@@ -359,6 +360,17 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
     }
 
     context.effects.suppressed.info = context.effects.suppressed.info[0];
+
+    // Characteristics
+    context.characteristics = [
+      "alignment", "eyes", "height", "faith", "hair", "weight", "gender", "skin", "age",
+    ].map(k => {
+      const fields = CharacterData.schema.fields.details.fields;
+      const field = fields[k];
+      const name = `system.details.${k}`;
+      return { name, label: field.label, value: foundry.utils.getProperty(this.actor, name) ?? "" };
+    });
+
     return context;
   }
 
@@ -621,18 +633,34 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
 
   /* -------------------------------------------- */
 
+  /** @inheritDoc */
+  async activateEditor(name, options={}, initialContent="") {
+    options.relativeLinks = true;
+    options.plugins = {
+      menu: ProseMirror.ProseMirrorMenu.build(ProseMirror.defaultSchema, {
+        compact: true,
+        destroyOnSave: false,
+        onSave: () => this.saveEditor(name, { remove: false })
+      })
+    };
+    return super.activateEditor(name, options, initialContent);
+  }
+
+  /* -------------------------------------------- */
+
   /**
    * Handle the user toggling the sheet mode.
    * @param {Event} event  The triggering event.
    * @protected
    */
-  _onChangeSheetMode(event) {
+  async _onChangeSheetMode(event) {
     const { MODES } = this.constructor;
     const toggle = event.currentTarget;
     const label = game.i18n.localize(`DND5E.SheetMode${toggle.checked ? "Play" : "Edit"}`);
     toggle.dataset.tooltip = label;
     toggle.setAttribute("aria-label", label);
     this._mode = toggle.checked ? MODES.EDIT : MODES.PLAY;
+    await this.submit();
     this.render();
   }
 

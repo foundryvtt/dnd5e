@@ -695,22 +695,6 @@
         }
       }
 
-      > h3 {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: .5rem;
-        padding: .75rem 1rem .375rem;
-        border: none;
-        font-size: var(--font-size-13);
-        margin: 0;
-
-        > i {
-          font-size: var(--font-size-11);
-          color: var(--color-text-dark-5);
-        }
-      }
-
       .trait-selector {
         position: absolute;
         inset: .875rem 1.6875rem auto auto;
@@ -1166,6 +1150,145 @@
         align-items: center;
         padding-right: .5rem;
       }
+    }
+  }
+
+  /* ---------------------------------- */
+  /*  Biography                         */
+  /* ---------------------------------- */
+
+  .tab.biography {
+    &.active {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      height: 100%;
+    }
+
+    > .top {
+      display: flex;
+      padding-left: .25rem;
+      margin-bottom: 1.5rem;
+    }
+
+    > .middle {
+      gap: 1rem;
+
+      > * {
+        display: flex;
+        flex-direction: column;
+        gap: .5rem;
+      }
+
+      .right .textbox-half:last-child textarea { height: 156px; }
+    }
+
+    > .bottom {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+
+      h3 {
+        margin-right: 1.5rem;
+        position: relative;
+
+        span { font-size: var(--font-size-14); }
+
+        i.fa-feather {
+          position: absolute;
+          inset: auto auto -1px 100%;
+          font-size: var(--font-size-18);
+        }
+      }
+
+      .editor {
+        flex: 1;
+        min-height: 500px;
+        overflow-y: visible;
+
+        .editor-content {
+          scrollbar-width: thin;
+          scrollbar-color: var(--dnd5e-color-gold) transparent;
+
+          &::-webkit-scrollbar-track {
+            box-shadow: none;
+            border-radius: 0;
+          }
+
+          &::-webkit-scrollbar-thumb {
+            border: none;
+            background: var(--dnd5e-color-gold);
+          }
+        }
+      }
+    }
+
+    .characteristics {
+      width: 520px;
+      display: grid;
+      grid-template-columns: 180px 160px 140px;
+      gap: 1rem;
+
+      label {
+        display: flex;
+        align-items: center;
+        gap: .5rem;
+
+        .label { font-size: var(--font-size-10); }
+
+        input, .value {
+          flex: 1;
+          font-size: var(--font-size-11);
+        }
+
+        input {
+          height: unset;
+          padding: .25rem;
+        }
+
+        .value {
+          min-height: 1em;
+          border-bottom: 1px solid var(--color-text-dark-primary);
+        }
+      }
+    }
+
+    .textbox-half {
+      p {
+        font-size: var(--font-size-12);
+        padding: .375rem;
+
+        &:empty {
+          padding: 0;
+          margin: 0;
+          min-height: unset;
+        }
+      }
+    }
+
+    textarea {
+      font-family: var(--dnd5e-font-roboto);
+      font-size: var(--font-size-12);
+      padding: .375rem;
+      height: 60px;
+      scrollbar-width: thin;
+      scrollbar-color: var(--dnd5e-color-gold) transparent;
+      background: var(--dnd5e-background-5);
+
+      &::-webkit-scrollbar-track {
+        box-shadow: none;
+        border-radius: 0;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        border: none;
+        background: var(--dnd5e-color-gold);
+      }
+    }
+
+    .prosemirror menu .pm-dropdown {
+      background: none;
+      &:hover { background: var(--color-hover-bg); }
     }
   }
 
