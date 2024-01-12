@@ -134,4 +134,20 @@ export default class Tooltips5e {
       description?.classList.toggle("overflowing", description.clientHeight < description.scrollHeight);
     }
   }
+
+  /* -------------------------------------------- */
+  /*  Static Helpers                              */
+  /* -------------------------------------------- */
+
+  /**
+   * Intercept middle-click listeners to prevent scrolling behavior inside a locked tooltip when attempting to lock
+   * another tooltip.
+   */
+  static activateListeners() {
+    document.addEventListener("pointerdown", event => {
+      if ( (event.button === 1) && event.target.closest(".locked-tooltip") ) {
+        event.preventDefault();
+      }
+    }, { capture: true });
+  }
 }

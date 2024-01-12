@@ -306,6 +306,7 @@ function _configureStatusEffects() {
 Hooks.once("setup", function() {
   CONFIG.DND5E.trackableAttributes = expandAttributeList(CONFIG.DND5E.trackableAttributes);
   game.dnd5e.moduleArt.registerModuleArt();
+  Tooltips5e.activateListeners();
   game.dnd5e.tooltips.observe();
 
   // Apply table of contents compendium style if specified in flags

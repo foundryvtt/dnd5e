@@ -5,7 +5,15 @@ import CreatureTemplate from "./templates/creature.mjs";
 import DetailsFields from "./templates/details.mjs";
 import TraitsFields from "./templates/traits.mjs";
 
-const { SchemaField, NumberField, StringField, BooleanField } = foundry.data.fields;
+const { SchemaField, NumberField, StringField, BooleanField, ArrayField, IntegerSortField } = foundry.data.fields;
+
+/**
+ * @typedef {object} ActorFavorites5e
+ * @property {"effect"|"item"|"skill"|"slots"|"tool"} type  The favorite type.
+ * @property {string} id                                    The Document UUID, skill or tool identifier, or spell slot
+ *                                                          level identifier.
+ * @property {number} sort                                  The sort value.
+ */
 
 /**
  * System data definition for Characters.
@@ -45,6 +53,7 @@ const { SchemaField, NumberField, StringField, BooleanField } = foundry.data.fie
  * @property {CharacterResourceData} resources.primary    Resource number one.
  * @property {CharacterResourceData} resources.secondary  Resource number two.
  * @property {CharacterResourceData} resources.tertiary   Resource number three.
+ * @property {ActorFavorites5e[]} favorites               The character's favorites.
  */
 export default class CharacterData extends CreatureTemplate {
 
@@ -124,7 +133,12 @@ export default class CharacterData extends CreatureTemplate {
         primary: makeResourceField({label: "DND5E.ResourcePrimary"}),
         secondary: makeResourceField({label: "DND5E.ResourceSecondary"}),
         tertiary: makeResourceField({label: "DND5E.ResourceTertiary"})
-      }, {label: "DND5E.Resources"})
+      }, {label: "DND5E.Resources"}),
+      favorites: new ArrayField(new SchemaField({
+        type: new StringField({ required: true, blank: false }),
+        id: new StringField({ required: true, blank: false }),
+        sort: new IntegerSortField()
+      }), { label: "DND5E.Favorites" })
     });
   }
 

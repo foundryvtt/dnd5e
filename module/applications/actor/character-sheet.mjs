@@ -242,7 +242,7 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
    * Handle mouse click events for character sheet actions.
    * @param {MouseEvent} event  The originating click event.
    * @returns {Promise}         Dialog or roll result.
-   * @private
+   * @protected
    */
   _onSheetAction(event) {
     event.preventDefault();

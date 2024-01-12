@@ -72,6 +72,16 @@ export default class ToolData extends ItemDataModel.mixin(
   }
 
   /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async getFavoriteData() {
+    return foundry.utils.mergeObject(await super.getFavoriteData(), {
+      subtitle: this.type.label,
+      attack: this.parent.parent?.system.tools?.[this.type.baseItem]?.total
+    });
+  }
+
+  /* -------------------------------------------- */
   /*  Getters                                     */
   /* -------------------------------------------- */
 

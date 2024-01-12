@@ -317,6 +317,103 @@
                         <i class="fas fa-star"></i>
                         <span class="roboto-upper">{{ localize "DND5E.Favorites" }}</span>
                     </h3>
+                    <ul class="unlist">
+                        {{#each favorites}}
+
+                        {{!-- Favorite --}}
+                        <li class="item-tooltip {{ type }}" data-favorite-id="{{ id }}"
+                            {{#if itemId}}data-item-id="{{ itemId }}"{{/if}}>
+
+                            {{!-- Icon --}}
+                            <figure>
+                                <img class="gold-icon" alt="{{ title }}" src="{{ img }}">
+
+                                {{!-- Favorite Deletion --}}
+                                {{#if @root.editable}}
+                                <a class="deletion-control" data-action="removeFavorite" data-tooltip-class
+                                   data-tooltip-direction data-tooltip="DND5E.FavoriteRemove"
+                                   aria-label="{{ localize "DND5E.FavoriteRemove" }}">
+                                    <i class="fas fa-circle-xmark"></i>
+                                </a>
+                                {{/if}}
+                            </figure>
+
+                            {{!-- Name --}}
+                            <div class="name-stacked {{#if rollable}}{{ @root.rollableClass }}{{/if}}" role="button"
+                                 data-action="useFavorite">
+                                <span class="title">{{ title }}</span>
+                                {{#if subtitle}}
+                                <span class="subtitle">{{{ subtitle }}}</span>
+                                {{/if}}
+                            </div>
+
+                            {{!-- Info --}}
+                            <div class="info">
+                                <div class="primary {{ css }}">
+                                    {{!-- Item Uses & Capacity --}}
+                                    {{#if uses}}
+                                    {{#with uses}}
+                                    {{#if (and name @root.actor.isOwner)}}
+                                    <input type="text" class="uninput value" data-name="{{ name }}" value="{{ value }}"
+                                           data-dtype="Number" inputmode="numeric" pattern="[0-9+=\-]*">
+                                    {{else}}
+                                    <span class="value">{{ value }}</span>
+                                    {{/if}}
+                                    <span class="separator">&sol;</span>
+                                    <span class="max">{{ max }}</span>
+                                    {{/with}}
+
+                                    {{!-- Attacks --}}
+                                    {{else if attack}}
+                                    {{#with attack}}
+                                    <span class="sign">{{ sign }}</span>
+                                    <span class="value">{{ abs }}</span>
+                                    {{/with}}
+
+                                    {{!-- Saves --}}
+                                    {{else if save.dc}}
+                                    {{#with save}}
+                                    <span class="ability">
+                                        {{ lookup (lookup @root.config.abilities ability) "abbreviation" }}
+                                    </span>
+                                    <span class="value">{{ dc }}</span>
+                                    {{/with}}
+
+                                    {{!-- Other Value --}}
+                                    {{else if value includeZero=true}}
+                                    <span class="value">{{ value }}</span>
+
+                                    {{!-- Quantity --}}
+                                    {{else if quantity}}
+                                    <span class="sign">&times;</span>
+                                    <span class="value">{{ quantity }}</span>
+                                    {{/if}}
+                                </div>
+                                <div class="secondary">
+                                    {{!-- Quantity --}}
+                                    {{#if (and uses quantity)}}
+                                    <span class="quantity">&times; {{ quantity }}</span>
+
+                                    {{!-- Range --}}
+                                    {{else if range.value}}
+                                    {{#with range}}
+                                    <span class="range">
+                                        {{ value }}
+                                        {{#if long}}&sol; {{ long }}{{/if}}
+                                        {{ units }}
+                                    </span>
+                                    {{/with}}
+                                    {{/if}}
+                                </div>
+                            </div>
+
+                        </li>
+
+                        {{/each}}
+
+                        {{!-- Drop Indicator --}}
+                        <li class="drop roboto-upper">{{ localize "DND5E.FavoriteDrop" }}</li>
+                    </ul>
                 </div>
             </div>
 

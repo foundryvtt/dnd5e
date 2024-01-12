@@ -95,6 +95,18 @@ export default class ActivatedEffectTemplate extends SystemDataModel {
   };
 
   /* -------------------------------------------- */
+  /*  Data Preparation                            */
+  /* -------------------------------------------- */
+
+  /**
+   * Retrieve information on available uses for display.
+   * @returns {{value: number, max: number, name: string}}
+   */
+  getUsesData() {
+    return { value: this.uses.value, max: this.parent.system.uses.max, name: "system.uses.value" };
+  }
+
+  /* -------------------------------------------- */
   /*  Migrations                                  */
   /* -------------------------------------------- */
 

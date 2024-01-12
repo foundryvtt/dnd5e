@@ -13,13 +13,15 @@
             {{/if}}
             {{#if @root.editable}}
             <div class="controls">
-                <a class="item-control item-action" data-action="delete" data-tooltip="DND5E.ItemDelete"
-                   aria-label="{{ localize "DND5E.ItemDelete" }}" data-item-id="{{ cls.id }}">
+                <a class="deletion-control item-control item-action" data-action="delete"
+                   data-tooltip="DND5E.ItemDelete" data-item-id="{{ cls.id }}"
+                   aria-label="{{ localize "DND5E.ItemDelete" }}">
                     <i class="fas fa-circle-xmark"></i>
                 </a>
                 {{#if cls.subclass}}
-                <a class="item-control item-action" data-action="delete" data-tooltip="DND5E.ItemDelete"
-                   aria-label="{{ localize "DND5E.ItemDelete" }}" data-item-id="{{ cls.subclass.id }}">
+                <a class="deletion-control item-control item-action" data-action="delete"
+                   data-tooltip="DND5E.ItemDelete" data-item-id="{{ cls.subclass.id }}"
+                   aria-label="{{ localize "DND5E.ItemDelete" }}">
                     <i class="fas fa-circle-xmark"></i>
                 </a>
                 {{/if}}

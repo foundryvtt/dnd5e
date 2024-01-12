@@ -22,7 +22,9 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
       tabs: [{ navSelector: ".tabs", contentSelector: ".tab-body", initial: "details" }],
       dragDrop: [
         { dragSelector: ".item-list .item", dropSelector: null },
-        { dragSelector: ".containers .container", dropSelector: null }
+        { dragSelector: ".containers .container", dropSelector: null },
+        { dragSelector: ".favorites [data-item-id]", dropSelector: null },
+        { dragSelector: ".classes .gold-icon[data-item-id]", dropSelector: null }
       ],
       scrollY: [".main-content"],
       width: 800,
@@ -371,6 +373,39 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
       return { name, label: field.label, value: foundry.utils.getProperty(this.actor, name) ?? "" };
     });
 
+    // Favorites
+    context.favorites = await this.actor.system.favorites.reduce(async (arr, f) => {
+      const { id, type, sort } = f;
+      const item = fromUuidSync(id);
+      if ( item?.parent !== this.actor ) return arr;
+      arr = await arr;
+      const { img } = item;
+      let { title, subtitle, value, uses, quantity, attack, save, range } = await item.system.getFavoriteData();
+      const css = [];
+      if ( uses ) {
+        css.push("uses");
+        uses.value = Math.round(uses.value);
+      }
+      else if ( attack ) css.push("attack");
+      else if ( save?.dc ) css.push("save");
+      else if ( value !== undefined ) css.push("value");
+      if ( uses?.max > 100 ) css.push("uses-sm");
+      if ( attack ) {
+        const value = Number(attack.replace?.(/\s+/g, "") ?? attack);
+        if ( !isNaN(value) ) attack = { abs: Math.abs(value), sign: value < 0 ? "-" : "+" };
+      }
+      arr.push({
+        id, img, type, title, value, uses, sort, save, attack, range,
+        itemId: item.id,
+        quantity: quantity > 1 ? quantity : "",
+        rollable: type === "item",
+        css: css.filterJoin(" "),
+        subtitle: Array.isArray(subtitle) ? subtitle.filterJoin(" &bull; ") : subtitle
+      });
+      return arr;
+    }, []);
+    context.favorites.sort((a, b) => a.sort - b.sort);
+
     return context;
   }
 
@@ -648,6 +683,16 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
 
   /* -------------------------------------------- */
 
+  /** @inheritDoc */
+  _onDragStart(event) {
+    // Add another deferred deactivation to catch the second pointerenter event that seems to be fired on Firefox.
+    requestAnimationFrame(() => game.tooltip.deactivate());
+    game.tooltip.deactivate();
+    return super._onDragStart(event);
+  }
+
+  /* -------------------------------------------- */
+
   /**
    * Handle the user toggling the sheet mode.
    * @param {Event} event  The triggering event.
@@ -767,11 +812,24 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
    * @protected
    */
   _onAction(event) {
-    const { action } = event.currentTarget.dataset;
-    switch ( action ) {
-      case "findItem": this._onFindItem(event.currentTarget.dataset.itemType); break;
+    const target = event.currentTarget;
+    switch ( target.dataset.action ) {
+      case "findItem": this._onFindItem(target.dataset.itemType); break;
+      case "removeFavorite": this._onRemoveFavorite(event); break;
       case "spellcasting": this._onToggleSpellcasting(event); break;
+      case "useFavorite": this._onUseFavorite(event); break;
     }
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  _onChangeInput(event) {
+    const { name } = event.target.dataset;
+    const { itemId } = event.target.closest("[data-item-id]")?.dataset ?? {};
+    const item = this.actor.items.get(itemId);
+    if ( event.target.closest(".favorites") && name && item ) return item.update({ [name]: event.target.value });
+    return super._onChangeInput(event);
   }
 
   /* -------------------------------------------- */
@@ -902,5 +960,79 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
   /** @inheritDoc */
   _filterItem(item) {
     if ( item.type === "container" ) return true;
+  }
+
+  /* -------------------------------------------- */
+  /*  Favorites                                   */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _onDropItem(event, data) {
+    if ( !event.target.closest(".favorites") ) return super._onDropItem(event, data);
+    const item = await Item.implementation.fromDropData(data);
+    if ( item?.parent !== this.actor ) return super._onDropItem(event, data);
+    if ( this.actor.system.favorites.find(f => f.id === item.uuid) ) return this._onSortFavorites(event, item);
+    let maxSort = 0;
+    const favorites = this.actor.system.favorites.map(f => {
+      if ( f.sort > maxSort ) maxSort = f.sort;
+      return { ...f };
+    });
+    favorites.push({ type: "item", id: item.uuid, sort: maxSort + CONST.SORT_INTEGER_DENSITY });
+    return this.actor.update({ "system.favorites": favorites });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle removing a favorite.
+   * @param {PointerEvent} event  The triggering event.
+   * @protected
+   */
+  _onRemoveFavorite(event) {
+    const { favoriteId } = event.currentTarget.closest("[data-favorite-id]")?.dataset ?? {};
+    if ( !favoriteId ) return;
+    const favorites = this.actor.system.favorites.filter(f => f.id !== favoriteId);
+    return this.actor.update({ "system.favorites": favorites });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle re-ordering the favorites list.
+   * @param {DragEvent} event  The drop event.
+   * @param {Item5e} item      The dropped item.
+   * @protected
+   */
+  _onSortFavorites(event, item) {
+    const dropTarget = event.target.closest("[data-favorite-id]");
+    if ( !dropTarget ) return;
+    let source;
+    let target = fromUuidSync(dropTarget.dataset.favoriteId);
+    if ( (target?.parent !== this.actor) || (item.uuid === target.uuid) ) return;
+    const siblings = this.actor.system.favorites.filter(f => {
+      if ( f.id === target.uuid ) target = f;
+      else if ( f.id === item.uuid ) source = f;
+      return f.id !== item.uuid;
+    });
+    const updates = SortingHelpers.performIntegerSort(source, { target, siblings });
+    const favorites = this.actor.system.favorites.reduce((map, f) => map.set(f.id, { ...f }), new Map());
+    for ( const { target, update } of updates ) {
+      const favorite = favorites.get(target.id);
+      foundry.utils.mergeObject(favorite, update);
+    }
+    return this.actor.update({ "system.favorites": Array.from(favorites.values()) });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle using a favorited item.
+   * @param {PointerEvent} event  The triggering event.
+   * @protected
+   */
+  _onUseFavorite(event) {
+    const { favoriteId } = event.currentTarget.closest("[data-favorite-id]").dataset;
+    const item = fromUuidSync(favoriteId);
+    if ( item?.parent === this.actor ) item.use({}, { event });
   }
 }

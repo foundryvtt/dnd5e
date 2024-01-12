@@ -63,6 +63,20 @@ export default class SpellData extends ItemDataModel.mixin(
   }
 
   /* -------------------------------------------- */
+  /*  Data Preparation                            */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async getFavoriteData() {
+    return foundry.utils.mergeObject(await super.getFavoriteData(), {
+      subtitle: [this.parent.labels.components.vsm, this.parent.labels.activation],
+      attack: this.parent.labels.toHit,
+      range: this.range,
+      save: this.save,
+    });
+  }
+
+  /* -------------------------------------------- */
   /*  Data Migrations                             */
   /* -------------------------------------------- */
 

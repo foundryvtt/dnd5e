@@ -393,6 +393,37 @@ export class ItemDataModel extends SystemDataModel {
     context.properties = context.properties.filter(_ => _);
     return context;
   }
+
+  /* -------------------------------------------- */
+
+  /**
+   * @typedef {object} FavoriteData5e
+   * @property {string} title                The title.
+   * @property {string|string[]} [subtitle]  An optional subtitle or several subtitle parts.
+   * @property {number} [value]              A single value to display.
+   * @property {number} [quantity]           The item's quantity.
+   * @property {string} [attack]             The item's attack modifier.
+   * @property {object} [range]              The item's range.
+   * @property {number} [range.value]        The first range increment.
+   * @property {number|null} [range.long]    The second range increment.
+   * @property {string} [range.units]        The range units.
+   * @property {object} [save]               The item's saving throw.
+   * @property {string} [save.ability]       The saving throw ability.
+   * @property {number} [save.dc]            The saving throw DC.
+   * @property {object} [uses]               Data on an item's uses.
+   * @property {number} [uses.value]         The current available uses.
+   * @property {number} [uses.max]           The maximum available uses.
+   * @property {string} [uses.name]          The property to update on the item. If none is provided, the property will
+   *                                         not be updatable.
+   */
+
+  /**
+   * Prepare item favorite data.
+   * @returns {Promise<FavoriteData5e>}
+   */
+  async getFavoriteData() {
+    return { title: this.parent.name, subtitle: game.i18n.localize(CONFIG.Item.typeLabels[this.parent.type]) };
+  }
 }
 
 /* -------------------------------------------- */
