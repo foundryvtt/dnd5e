@@ -168,6 +168,6 @@ export default class CurrencyManager extends FormApplication {
    * @param {object[]} amounts            Amount of each denomination to transfer.
    */
   static async transferCurrency(origin, destinations, amounts) {
-    Award.awardCurrency(amounts, destinations, origin);
+    Award.awardCurrency(amounts, destinations, { origin });
   }
 }

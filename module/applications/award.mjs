@@ -1,4 +1,4 @@
-import { filteredKeys } from "../utils.mjs";
+import { filteredKeys, formatNumber } from "../utils.mjs";
 
 /**
  * Application for awarding XP and currency to players.
@@ -101,8 +101,10 @@ export default class Award extends FormApplication {
   async _updateObject(event, formData) {
     const data = foundry.utils.expandObject(formData);
     const destinations = this.transferDestinations.filter(d => data.destination[d.id]);
-    await this.constructor.awardCurrency(data.amount, destinations, this.object);
-    await this.constructor.awardXP(data.xp, destinations, this.object);
+    const results = new Map();
+    await this.constructor.awardCurrency(data.amount, destinations, { origin: this.object, results });
+    await this.constructor.awardXP(data.xp, destinations, { origin: this.object, results });
+    this.constructor.displayAwardMessages(results);
     this.close();
   }
 
@@ -114,15 +116,19 @@ export default class Award extends FormApplication {
    * Award currency, optionally transferring between one document and another.
    * @param {object[]} amounts                 Amount of each denomination to transfer.
    * @param {(Actor5e|Item5e)[]} destinations  Documents that should receive the currency.
-   * @param {Actor5e|Item5e} [origin]          Document from which to move the currency, if not a freeform award.
+   * @param {object} [config={}]
+   * @param {Actor5e|Item5e} [config.origin]   Document from which to move the currency, if not a freeform award.
+   * @param {Map<Actor5e|Item5e, object>} [config.results]  Results of the award operation.
    */
-  static async awardCurrency(amounts, destinations, origin) {
+  static async awardCurrency(amounts, destinations, { origin, results=new Map() }={}) {
     if ( !destinations.length ) return;
     const originCurrency = origin ? foundry.utils.deepClone(origin.system.currency) : null;
 
     let remainingDestinations = destinations.length;
     for ( const destination of destinations ) {
       const destinationUpdates = {};
+      if ( !results.has(destination) ) results.set(destination, {});
+      const result = results.get(destination).currency ??= {};
 
       for ( let [key, amount] of Object.entries(amounts) ) {
         if ( !amount ) continue;
@@ -137,6 +143,7 @@ export default class Award extends FormApplication {
         amounts[key] -= amount;
         if ( originCurrency ) originCurrency[key] -= amount;
         destinationUpdates[`system.currency.${key}`] = destination.system.currency[key] + amount;
+        result[key] = amount;
       }
 
       await destination.update(destinationUpdates);
@@ -150,11 +157,13 @@ export default class Award extends FormApplication {
 
   /**
    * Award XP split across the provided destination actors.
-   * @param {number} amount           Amount of XP to award.
-   * @param {Actor5e[]} destinations  Actors that should receive the XP.
-   * @param {Actor5e} [origin]        Group actor from which to transfer the XP.
+   * @param {number} amount            Amount of XP to award.
+   * @param {Actor5e[]} destinations   Actors that should receive the XP.
+   * @param {object} [config={}]
+   * @param {Actor5e} [config.origin]  Group actor from which to transfer the XP.
+   * @param {Map<Actor5e|Item5e, object>} [config.results]  Results of the award operation.
    */
-  static async awardXP(amount, destinations, origin) {
+  static async awardXP(amount, destinations, { origin, results=new Map() }={}) {
     destinations = destinations.filter(d => ["character", "group"].includes(d.type));
     if ( !amount || !destinations.length ) return;
 
@@ -163,9 +172,51 @@ export default class Award extends FormApplication {
     originUpdate -= amount;
     for ( const destination of destinations ) {
       await destination.update({"system.details.xp.value": destination.system.details.xp.value + perDestination});
+      if ( !results.has(destination) ) results.set(destination, {});
+      const result = results.get(destination);
+      result.xp = perDestination;
     }
 
     if ( Number.isFinite(originUpdate) ) await origin.update({"system.details.xp.value": originUpdate});
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Display chat messages for awarded currency and XP.
+   * @param {Map<Actor5e|Item5e, object>} results  Results of any award operations.
+   */
+  static async displayAwardMessages(results) {
+    const cls = getDocumentClass("ChatMessage");
+    const messages = [];
+    for ( const [destination, result] of results ) {
+      const entries = [];
+      for ( const [key, amount] of Object.entries(result.currency ?? {}) ) {
+        const label = CONFIG.DND5E.currencies[key].label;
+        entries.push(`
+          <span class="award-entry">
+            ${formatNumber(amount)} <i class="currency ${key}" data-tooltip="${label}" aria-label="${label}"></i>
+          </span>
+        `);
+      }
+      if ( result.xp ) entries.push(`
+        <span class="award-entry">
+          ${formatNumber(result.xp)} ${game.i18n.localize("DND5E.ExperiencePointsAbbr")}
+        </span>
+      `);
+      const content = game.i18n.format("DND5E.Award.Message", {
+        name: destination.name, award: `<span class="dnd5e2">${game.i18n.getListFormatter().format(entries)}</span>`
+      });
+
+      const whisperTargets = game.users.filter(user => destination.testUserPermission(user, "OWNER"));
+      const whisper = whisperTargets.length !== game.users.size;
+      messages.push({
+        type: CONST.CHAT_MESSAGE_TYPES.OTHER,
+        content,
+        whisper: whisper ? whisperTargets : []
+      });
+    }
+    if ( messages.length ) cls.createDocuments(messages);
   }
 
   /* -------------------------------------------- */
@@ -223,8 +274,10 @@ export default class Award extends FormApplication {
       // If the party command is set, a primary party is set, and the award isn't empty, skip the UI
       const primaryParty = game.settings.get("dnd5e", "primaryParty")?.actor;
       if ( party && primaryParty && (xp || filteredKeys(currency).length) ) {
-        await this.awardCurrency(currency, [primaryParty]);
-        await this.awardXP(xp, [primaryParty]);
+        const results = new Map();
+        await this.awardCurrency(currency, [primaryParty], { results });
+        await this.awardXP(xp, [primaryParty], { results });
+        this.displayAwardMessages(results);
       }
 
       // Otherwise show the UI with defaults

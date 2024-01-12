@@ -144,13 +144,13 @@ async function enrichAward(config, label, options) {
     const label = CONFIG.DND5E.currencies[key].label;
     amount = Number.isNumeric(amount) ? formatNumber(amount) : amount;
     entries.push(`
-      <span class="award">
+      <span class="award-entry">
         ${amount} <i class="currency ${key}" data-tooltip="${label}" aria-label="${label}"></i>
       </span>
     `);
   }
   if ( parsed.xp ) entries.push(`
-    <span class="award">
+    <span class="award-entry">
       ${formatNumber(parsed.xp)} ${game.i18n.localize("DND5E.ExperiencePointsAbbr")}
     </span>
   `);
