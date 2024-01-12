@@ -329,6 +329,7 @@
 "DND5E.Award": {
   "Title": "Distribute Award",
   "Action": "Award",
+  "Message": "{name} has been awarded {award}.",
   "NotGMError": "The /award command is only available to GMs.",
   "UnrecognizedWarning": "Unable to parse {commands}. The /award command should be used with XP & currencies values such as '/award 10gp 50xp'."
 },
