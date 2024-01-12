@@ -93,19 +93,20 @@ p:empty:has(+ .content-embed), .content-embed + p:empty {
 }
 
 .award-block {
-  p:empty:has(+ &), & + p:empty { display: none; }
+  [data-action="awardRequest"] {
+    margin-block: -2px;
+    margin-inline-start: 4px;
+    border: 1px dotted black;
+    border-radius: 4px;
+    padding-block: 2px;
+    padding-inline: 4px 2px;
 
-  margin-block: 2px;
-  border: 1px solid black;
-  border-radius: 4px;
-  padding: 4px;
-
-  &, ul, li {
-    display: flex;
-    gap: 12px;
+    &:hover, &:focus {
+      border-style: solid;
+    }
   }
-  [data-action="awardRequest"] { font-weight: bold; }
-  li {
+  > span {
+    display: inline-flex;
     align-items: center;
     gap: 4px;
   }

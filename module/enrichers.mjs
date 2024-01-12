@@ -135,32 +135,32 @@ async function enrichAward(config, label, options) {
     return null;
   }
 
-  const block = document.createElement("div");
+  const block = document.createElement("span");
   block.classList.add("award-block", "dnd5e2");
   block.dataset.awardCommand = command;
-  block.innerHTML = `
+
+  const entries = [];
+  for ( let [key, amount] of Object.entries(parsed.currency) ) {
+    const label = CONFIG.DND5E.currencies[key].label;
+    amount = Number.isNumeric(amount) ? formatNumber(amount) : amount;
+    entries.push(`
+      <span class="award">
+        ${amount} <i class="currency ${key}" data-tooltip="${label}" aria-label="${label}"></i>
+      </span>
+    `);
+  }
+  if ( parsed.xp ) entries.push(`
+    <span class="award">
+      ${formatNumber(parsed.xp)} ${game.i18n.localize("DND5E.ExperiencePointsAbbr")}
+    </span>
+  `);
+
+  block.innerHTML += `
+    ${game.i18n.getListFormatter({ type: "unit" }).format(entries)}
     <a class="award-link" data-action="awardRequest">
       <i class="fa-solid fa-trophy"></i> ${label ?? game.i18n.localize("DND5E.Award.Action")}
     </a>
   `;
-
-  const list = document.createElement("ul");
-  list.classList.add("unlist");
-  for ( let [key, amount] of Object.entries(parsed.currency) ) {
-    const label = CONFIG.DND5E.currencies[key].label;
-    amount = Number.isNumeric(amount) ? formatNumber(amount) : amount;
-    list.innerHTML += `
-      <li>
-        <span>${amount}</span> <i class="currency ${key}" data-tooltip="${label}"></i>
-      </li>
-    `;
-  }
-  if ( parsed.xp ) list.innerHTML += `
-    <li>
-      <span>${formatNumber(parsed.xp)}</span> ${game.i18n.localize("DND5E.ExperiencePointsAbbr")}
-    </li>
-  `;
-  block.appendChild(list);
 
   return block;
 }
