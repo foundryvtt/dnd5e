@@ -41,7 +41,7 @@ export default class MapLocationControlIcon extends PIXI.Container {
       .endFill();
 
     // Text
-    this.text = new PreciseText(this.code, this._getTextStyle());
+    this.text = new PreciseText(this.code, this._getTextStyle(this.code.length));
     this.text.anchor.set(0.5, 0.5);
     this.text.position.set(this.radius, this.radius);
     this.addChild(this.text);
@@ -76,16 +76,18 @@ export default class MapLocationControlIcon extends PIXI.Container {
 
   /**
    * Define PIXI TestStyle object for rendering the map location code.
+   * @param {number} characterCount  Number of characters in the code.
    * @returns {PIXI.TextStyle}
+   * @protected
    */
-  _getTextStyle() {
+  _getTextStyle(characterCount) {
     const style = CONFIG.canvasTextStyle.clone();
     style.dropShadow = false;
     style.fill = Color.from(this.style.textColor);
     style.strokeThickness = 0;
-    if ( this.style.fontFamily ) {
-      style.fontFamily = this.style.fontFamily;
-    }
+    style.fontFamily = ["Roboto Slab", "Signika"];
+    if ( this.style.fontFamily ) style.fontFamily.unshift(this.style.fontFamily);
+    style.fontSize = characterCount > 2 ? 24 : 32;
     return style;
   }
 }
