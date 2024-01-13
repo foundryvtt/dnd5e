@@ -470,7 +470,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     const attributes = {...CONFIG.DND5E.spellComponents, ...tags};
     this.system.preparation.mode ||= "prepared";
     this.labels.level = CONFIG.DND5E.spellLevels[this.system.level];
-    this.labels.school = CONFIG.DND5E.spellSchools[this.system.school];
+    this.labels.school = CONFIG.DND5E.spellSchools[this.system.school]?.label;
     this.labels.components = this.system.properties.reduce((obj, c) => {
       const config = attributes[c];
       if ( !config ) return obj;
