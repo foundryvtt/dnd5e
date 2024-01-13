@@ -1,15 +1,16 @@
 import { filteredKeys } from "../utils.mjs";
 import Award from "./award.mjs";
+import DialogMixin from "./dialog-mixin.mjs";
 
 /**
  * Application for performing currency conversions & transfers.
  */
-export default class CurrencyManager extends FormApplication {
+export default class CurrencyManager extends DialogMixin(FormApplication) {
 
   /** @inheritdoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
-      classes: ["dnd5e", "currency-manager"],
+      classes: ["dnd5e2", "currency-manager", "dialog"],
       tabs: [{navSelector: "nav", contentSelector: ".sheet-content", initial: "transfer"}],
       template: "systems/dnd5e/templates/apps/currency-manager.hbs",
       title: "DND5E.CurrencyManager.Title",

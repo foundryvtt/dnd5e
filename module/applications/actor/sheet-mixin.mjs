@@ -2,7 +2,7 @@ import { parseInputDelta } from "../../utils.mjs";
 
 /**
  * Mixin method for common uses between all actor sheets.
- * @param {typeof Document} Base   Document class being extended.
+ * @param {typeof Application} Base   Application class being extended.
  * @returns {class}
  * @mixin
  */

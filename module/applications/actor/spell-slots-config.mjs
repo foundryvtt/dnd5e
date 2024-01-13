@@ -1,4 +1,6 @@
-export default class ActorSpellSlotsConfig extends DocumentSheet {
+import DialogMixin from "../dialog-mixin.mjs";
+
+export default class ActorSpellSlotsConfig extends DialogMixin(DocumentSheet) {
   /** @override */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
@@ -39,20 +41,5 @@ export default class ActorSpellSlotsConfig extends DocumentSheet {
       placeholder: spells.pact.max ?? 0
     });
     return { overrides };
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  async _renderOuter() {
-    const html = await super._renderOuter();
-    const header = html[0].querySelector(".window-header");
-    header.querySelectorAll(".header-button").forEach(btn => {
-      const label = btn.querySelector(":scope > i").nextSibling;
-      btn.dataset.tooltip = label.textContent;
-      btn.setAttribute("aria-label", label.textContent);
-      label.remove();
-    });
-    return html;
   }
 }
