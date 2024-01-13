@@ -5890,6 +5890,1564 @@
         "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!journal.pages!NizgRXLNUqtdlC1s.D8K6ansoz1q6P37s"
+    },
+    {
+      "sort": 13900000,
+      "name": "Spell Level",
+      "type": "rule",
+      "_id": "A6k5fS0kFqPXTW3v",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>Every spell has a level from 0 to 9. A spell's level is a general indicator of how powerful it is, with the lowly (but still impressive) @UUID[Compendium.dnd5e.spells.Item.41JIhpDyM9Anm7cs]{Magic Missile} at 1st level and the earth-shaking @UUID[Compendium.dnd5e.spells.Item.3okM6Gn63zzEULkz]{Wish} at 9th. Cantrips—simple but powerful spells that characters can cast almost by rote—are level 0. The higher a spell's level, the higher level a spellcaster must be to use that spell.</p><p>Spell level and character level don't correspond directly. Typically, a character has to be at least 17th level, not 9th level, to cast a 9th-level spell.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705170511902,
+        "modifiedTime": 1705170676184,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.A6k5fS0kFqPXTW3v"
+    },
+    {
+      "sort": 14000000,
+      "name": "Known and Prepared Spells",
+      "type": "rule",
+      "_id": "oezg742GlxmEwT85",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>Before a spellcaster can use a spell, he or she must have the spell firmly fixed in mind, or must have access to the spell in a magic item. Members of a few classes, including bards and sorcerers, have a limited list of spells they know that are always fixed in mind. The same thing is true of many magic-using monsters. Other spellcasters, such as clerics and wizards, undergo a process of preparing spells. This process varies for different classes, as detailed in their descriptions.</p><p>In every case, the number of spells a caster can have fixed in mind at any given time depends on the character's level.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705170519403,
+        "modifiedTime": 1705170670027,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.oezg742GlxmEwT85"
+    },
+    {
+      "sort": 14100000,
+      "name": "Spell Slots",
+      "type": "rule",
+      "_id": "Su6wbb0O9UN4ZDIH",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>Regardless of how many spells a caster knows or prepares, he or she can cast only a limited number of spells before resting. Manipulating the fabric of magic and channeling its energy into even a simple spell is physically and mentally taxing, and higherlevel spells are even more so. Thus, each spellcasting class's description (except that of the warlock) includes a table showing how many spell slots of each spell level a character can use at each character level. For example, the 3rd-level wizard Umara has four 1st-level spell slots and two 2nd-level slots.</p><p>When a character casts a spell, he or she expends a slot of that spell's level or higher, effectively “filling” a slot with the spell. You can think of a spell slot as a groove of a certain size—small for a 1st-level slot, larger for a spell of higher level. A 1st-level spell fits into a slot of any size, but a 9th-level spell fits only in a 9th-level slot. So when Umara casts @UUID[Compendium.dnd5e.spells.Item.41JIhpDyM9Anm7cs]{Magic Missile}, a 1st-level spell, she spends one of her four 1st-level slots and has three remaining.</p><p>Finishing a long rest restores any expended spell slots.</p><p>Some characters and monsters have special abilities that let them cast spells without using spell slots. For example, a monk who follows the Way of the Four Elements, a warlock who chooses certain eldritch invocations, and a pit fiend from the Nine Hells can all cast spells in such a way.</p><h3>Casting a Spell at a Higher Level</h3><p>@Embed[.4H9SLM95OCLfFizz inline]</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705170522331,
+        "modifiedTime": 1705170653459,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.Su6wbb0O9UN4ZDIH"
+    },
+    {
+      "sort": 14200000,
+      "name": "Casting a Spell at a Highler Level",
+      "type": "rule",
+      "_id": "4H9SLM95OCLfFizz",
+      "title": {
+        "show": true,
+        "level": 2
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>When a spellcaster casts a spell using a slot that is of a higher level than the spell, the spell assumes the higher level for that casting. For instance, if Umara casts @UUID[Compendium.dnd5e.spells.Item.41JIhpDyM9Anm7cs]{Magic Missile}<em> </em>using one of her 2nd-level slots, that <em>magic missile </em>is 2nd level. Effectively, the spell expands to fill the slot it is put into.</p><p>Some spells, such as <em>magic missile </em>and @UUID[Compendium.dnd5e.spells.Item.uUWb1wZgtMou0TVP]{Cure Wounds}, have more powerful effects when cast at a higher level, as detailed in a spell's description.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705170535265,
+        "modifiedTime": 1705170624851,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.4H9SLM95OCLfFizz"
+    },
+    {
+      "sort": 14300000,
+      "name": "Casting in Armor",
+      "type": "rule",
+      "_id": "z4A8vHSK2pb8YA9X",
+      "title": {
+        "show": true,
+        "level": 2
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>Because of the mental focus and precise gestures required for spellcasting, you must be proficient with the armor you are wearing to cast a spell. You are otherwise too distracted and physically hampered by your armor for spellcasting.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705170543938,
+        "modifiedTime": 1705170584639,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.z4A8vHSK2pb8YA9X"
+    },
+    {
+      "sort": 14400000,
+      "name": "Cantrips",
+      "type": "rule",
+      "_id": "jZD5mCTnMPJ9jW67",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>A cantrip is a spell that can be cast at will, without using a spell slot and without being prepared in advance. Repeated practice has fixed the spell in the caster's mind and infused the caster with the magic needed to produce the effect over and over. A cantrip's spell level is 0.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705170556201,
+        "modifiedTime": 1705170580154,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.jZD5mCTnMPJ9jW67"
+    },
+    {
+      "sort": 14500000,
+      "name": "Rituals",
+      "type": "rule",
+      "_id": "FjWqT5iyJ89kohdA",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>Certain spells have a special tag: ritual. Such a spell can be cast following the normal rules for spellcasting, or the spell can be cast as a ritual. The ritual version of a spell takes 10 minutes longer to cast than normal. It also doesn't expend a spell slot, which means the ritual version of a spell can't be cast at a higher level.</p><p>To cast a spell as a ritual, a spellcaster must have a feature that grants the ability to do so. The cleric and the druid, for example, have such a feature. The caster must also have the spell prepared or on his or her list of spells known, unless the character's ritual feature specifies otherwise, as the wizard's does.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705170563663,
+        "modifiedTime": 1705170574985,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.FjWqT5iyJ89kohdA"
+    },
+    {
+      "sort": 14600000,
+      "name": "Casting Time",
+      "type": "rule",
+      "_id": "zRVW8Tvyk6BECjZD",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>Most spells require a single action to cast, but some spells require a bonus action, a reaction, or much more time to cast.</p><h3>Bonus Action</h3><p>@Embed[.RP1WL9FXI3aknlxZ inline]</p><h3>Reactions</h3><p>@Embed[.t62lCfinwU9H7Lji inline]</p><h3>Longer Casting Times</h3><p>@Embed[.gOAIRFCyPUx42axn inline]</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705170767305,
+        "modifiedTime": 1705171465762,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.zRVW8Tvyk6BECjZD"
+    },
+    {
+      "sort": 14700000,
+      "name": "Bonus Action",
+      "type": "rule",
+      "_id": "RP1WL9FXI3aknlxZ",
+      "title": {
+        "show": true,
+        "level": 2
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>A spell cast with a bonus action is especially swift. You must use a bonus action on your turn to cast the spell, provided that you haven’t already taken a bonus action this turn. You can’t cast another spell during the same turn, except for a cantrip with a casting time of 1 action.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705170770842,
+        "modifiedTime": 1705171435436,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.RP1WL9FXI3aknlxZ"
+    },
+    {
+      "sort": 14800000,
+      "name": "Reactions",
+      "type": "rule",
+      "_id": "t62lCfinwU9H7Lji",
+      "title": {
+        "show": true,
+        "level": 2
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>Some spells can be cast as reactions. These spells take a fraction of a second to bring about and are cast in response to some event. If a spell can be cast as a reaction, the spell description tells you exactly when you can do so.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705170776960,
+        "modifiedTime": 1705171429348,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.t62lCfinwU9H7Lji"
+    },
+    {
+      "sort": 14900000,
+      "name": "Longer Casting Times",
+      "type": "rule",
+      "_id": "gOAIRFCyPUx42axn",
+      "title": {
+        "show": true,
+        "level": 2
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>Certain spells (including spells cast as rituals) require more time to cast: minutes or even hours. When you cast a spell with a casting time longer than a single action or reaction, you must spend your action each turn casting the spell, and you must maintain your concentration while you do so (see “Concentration” below). If your concentration is broken, the spell fails, but you don’t expend a spell slot. If you want to try casting the spell again, you must start over.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705170788777,
+        "modifiedTime": 1705171449850,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.gOAIRFCyPUx42axn"
+    },
+    {
+      "sort": 15000000,
+      "name": "Range",
+      "type": "rule",
+      "_id": "RBYPyE5z5hAZSbH6",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>The target of a spell must be within the spell’s range. For a spell like @UUID[Compendium.dnd5e.spells.Item.41JIhpDyM9Anm7cs]{Magic Missile}, the target is a creature. For a spell like @UUID[Compendium.dnd5e.spells.Item.ztgcdrWPshKRpFd0]{Fireball}, the target is the point in space where the ball of fire erupts.</p><p>Most spells have ranges expressed in feet. Some spells can target only a creature (including you) that you touch. Other spells, such as the @UUID[Compendium.dnd5e.spells.Item.z1mx84ONwkXKUZd7]{Shield} spell, affect only you. These spells have a range of self.</p><p>Spells that create cones or lines of effect that originate from you also have a range of self, indicating that the origin point of the spell’s effect must be you (see “Areas of Effect”).</p><p>Once a spell is cast, its effects aren’t limited by its range, unless the spell’s description says otherwise.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705170795591,
+        "modifiedTime": 1705171411672,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.RBYPyE5z5hAZSbH6"
+    },
+    {
+      "sort": 15100000,
+      "name": "Components",
+      "type": "rule",
+      "_id": "xeHthAF9lxfn2tII",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>A spell’s components are the physical requirements you must meet in order to cast it. Each spell’s description indicates whether it requires verbal (V), somatic (S), or material (M) components. If you can’t provide one or more of a spell’s components, you are unable to cast the spell.</p><h3>Verbal (V)</h3><p>@Embed[.6UXTNWMCQ0nSlwwx inline]</p><h3>Somatic (S)</h3><p>@Embed[.qwUNgUNilEmZkSC9 inline]</p><h3>Material (M)</h3><p>@Embed[.AeH5eDS4YeM9RETC inline]</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705170803245,
+        "modifiedTime": 1705171393966,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.xeHthAF9lxfn2tII"
+    },
+    {
+      "sort": 15200000,
+      "name": "Verbal (V)",
+      "type": "rule",
+      "_id": "6UXTNWMCQ0nSlwwx",
+      "title": {
+        "show": true,
+        "level": 2
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>Most spells require the chanting of mystic words. The words themselves aren’t the source of the spell’s power; rather, the particular combination of sounds, with specific pitch and resonance, sets the threads of magic in motion. Thus, a character who is gagged or in an area of silence, such as one created by the @UUID[Compendium.dnd5e.spells.Item.5VhqFROQYjr1P9lp]{silence} spell, can’t cast a spell with a verbal component.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705170809012,
+        "modifiedTime": 1705171371694,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.6UXTNWMCQ0nSlwwx"
+    },
+    {
+      "sort": 15300000,
+      "name": "Somatic (S)",
+      "type": "rule",
+      "_id": "qwUNgUNilEmZkSC9",
+      "title": {
+        "show": true,
+        "level": 2
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>Spellcasting gestures might include a forceful gesticulation or an intricate set of gestures. If a spell requires a somatic component, the caster must have free use of at least one hand to perform these gestures.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705170819180,
+        "modifiedTime": 1705171355356,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.qwUNgUNilEmZkSC9"
+    },
+    {
+      "sort": 15400000,
+      "name": "Material (M)",
+      "type": "rule",
+      "_id": "AeH5eDS4YeM9RETC",
+      "title": {
+        "show": true,
+        "level": 2
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>Casting some spells requires particular objects, specified in parentheses in the component entry. A character can use a <strong>component pouch</strong> or a <strong>spellcasting focus </strong>(found in @UUID[Compendium.dnd5e.rules.JournalEntry.BYFd9hiJGo9L5aOM]{Chapter 5: Equipment}) in place of the components specified for a spell. But if a cost is indicated for a component, a character must have that specific component before he or she can cast the spell.</p><p>If a spell states that a material component is consumed by the spell, the caster must provide this component for each casting of the spell.</p><p>A spellcaster must have a hand free to access a spell’s material components—or to hold a spellcasting focus—but it can be the same hand that he or she uses to perform somatic components.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705170825591,
+        "modifiedTime": 1705171348215,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.AeH5eDS4YeM9RETC"
+    },
+    {
+      "sort": 15500000,
+      "name": "Duration",
+      "type": "rule",
+      "_id": "9mp0SRsptjvJcq1e",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>A spell’s duration is the length of time the spell persists. A duration can be expressed in rounds, minutes, hours, or even years. Some spells specify that their effects last until the spells are dispelled or destroyed.</p><h3>Instantaneous</h3><p>@Embed[.kdlgZOpRMB6bGCod inline]</p><h3>Concentration</h3><p>@Embed[.ow58p27ctAnr4VPH inline]</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705170831270,
+        "modifiedTime": 1705171325962,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.9mp0SRsptjvJcq1e"
+    },
+    {
+      "sort": 15600000,
+      "name": "Instantaneous",
+      "type": "rule",
+      "_id": "kdlgZOpRMB6bGCod",
+      "title": {
+        "show": true,
+        "level": 2
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>Many spells are instantaneous. The spell harms, heals, creates, or alters a creature or an object in a way that can’t be dispelled, because its magic exists only for an instant.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705170839545,
+        "modifiedTime": 1705171304809,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.kdlgZOpRMB6bGCod"
+    },
+    {
+      "sort": 15700000,
+      "name": "Concentration",
+      "type": "rule",
+      "_id": "ow58p27ctAnr4VPH",
+      "title": {
+        "show": true,
+        "level": 2
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>Some spells require you to maintain concentration in order to keep their magic active. If you lose concentration, such a spell ends.</p><p>If a spell must be maintained with concentration, that fact appears in its Duration entry, and the spell specifies how long you can concentrate on it. You can end concentration at any time (no action required).</p><p>Normal activity, such as moving and attacking, doesn’t interfere with concentration. The following factors can break concentration:</p><ul><li><strong>Casting another spell that requires concentration. </strong>You lose concentration on a spell if you cast another spell that requires concentration. You can’t concentrate on two spells at once.</li><li><strong>Taking damage. </strong>Whenever you take damage while you are concentrating on a spell, you must make a Constitution saving throw to maintain your concentration. The DC equals 10 or half the damage you take, whichever number is higher. If you take damage from multiple sources, such as an arrow and a dragon’s breath, you make a separate saving throw for each source of damage.</li><li><strong>Being incapacitated or killed. </strong>You lose concentration on a spell if you are incapacitated or if you die.</li></ul><p>The GM might also decide that certain environmental phenomena, such as a wave crashing over you while you’re on a storm-tossed ship, require you to succeed on a DC 10 Constitution saving throw to maintain concentration on a spell.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705170846301,
+        "modifiedTime": 1705171299502,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.ow58p27ctAnr4VPH"
+    },
+    {
+      "sort": 15800000,
+      "name": "Targets",
+      "type": "rule",
+      "_id": "G80AIQr04sxdVpw4",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>A typical spell requires you to pick one or more targets to be affected by the spell’s magic. A spell’s description tells you whether the spell targets creatures, objects, or a point of origin for an area of effect (described below).</p><p>Unless a spell has a perceptible effect, a creature might not know it was targeted by a spell at all. An effect like crackling lightning is obvious, but a more subtle effect, such as an attempt to read a creature’s thoughts, typically goes unnoticed, unless a spell says otherwise.</p><h3>A Clear Path to the Target</h3><p>@Embed[.K2lVWIOvfzThf9xe inline]</p><h3>Targeting Yourself</h3><p>@Embed[.Yljd0J36zC8eibW5 inline]</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705170856108,
+        "modifiedTime": 1705171281643,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.G80AIQr04sxdVpw4"
+    },
+    {
+      "sort": 15900000,
+      "name": "A Clear Path to the Target",
+      "type": "rule",
+      "_id": "K2lVWIOvfzThf9xe",
+      "title": {
+        "show": true,
+        "level": 2
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>To target something, you must have a clear path to it, so it can’t be behind total cover.</p><p>If you place an area of effect at a point that you can’t see and an obstruction, such as a wall, is between you and that point, the point of origin comes into being on the near side of that obstruction.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705170862961,
+        "modifiedTime": 1705171243037,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.K2lVWIOvfzThf9xe"
+    },
+    {
+      "sort": 16000000,
+      "name": "Targeting Yourself",
+      "type": "rule",
+      "_id": "Yljd0J36zC8eibW5",
+      "title": {
+        "show": true,
+        "level": 2
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>If a spell targets a creature of your choice, you can choose yourself, unless the creature must be hostile or specifically a creature other than you. If you are in the area of effect of a spell you cast, you can target yourself.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705170867827,
+        "modifiedTime": 1705171239112,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.Yljd0J36zC8eibW5"
+    },
+    {
+      "sort": 16100000,
+      "name": "Areas of Effect",
+      "type": "rule",
+      "_id": "wvtCeGHgnUmh0cuj",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>Spells such as @UUID[Compendium.dnd5e.spells.Item.5SuJewoa1CRWaj1F]{Burning Hands} and @UUID[Compendium.dnd5e.spells.Item.RpKjTlYASrfqUPVA]{Cone of Cold} cover an area, allowing them to affect multiple creatures at once.</p><p>@Embed[.8HxbRceQQUAhyWRt inline]</p><h3>Cone</h3><p>@Embed[.DqqAOr5JnX71OCOw inline]</p><h3>Cube</h3><p>@Embed[.dRfDIwuaHmUQ06uA inline]</p><h3>Cylinder</h3><p>@Embed[.jZFp4R7tXsIqkiG3 inline]</p><h3>Line</h3><p>@Embed[.6DOoBgg7okm9gBc6 inline]</p><h3>Sphere</h3><p>@Embed[.npdEWb2egUPnB5Fa inline]</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705170885239,
+        "modifiedTime": 1705171215586,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.wvtCeGHgnUmh0cuj"
+    },
+    {
+      "sort": 16200000,
+      "name": "Cone",
+      "type": "rule",
+      "_id": "DqqAOr5JnX71OCOw",
+      "title": {
+        "show": true,
+        "level": 2
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>A cone extends in a direction you choose from its point of origin. A cone’s width at a given point along its length is equal to that point’s distance from the point of origin. A cone’s area of effect specifies its maximum length.</p><p>A cone’s point of origin is not included in the cone’s area of effect, unless you decide otherwise.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705170889137,
+        "modifiedTime": 1705171141550,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.DqqAOr5JnX71OCOw"
+    },
+    {
+      "sort": 16300000,
+      "name": "Cube",
+      "type": "rule",
+      "_id": "dRfDIwuaHmUQ06uA",
+      "title": {
+        "show": true,
+        "level": 2
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>You select a cube’s point of origin, which lies anywhere on a face of the cubic effect. The cube’s size is expressed as the length of each side.</p><p>A cube’s point of origin is not included in the cube’s area of effect, unless you decide otherwise.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705170893040,
+        "modifiedTime": 1705171137392,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.dRfDIwuaHmUQ06uA"
+    },
+    {
+      "sort": 16400000,
+      "name": "Cylinder",
+      "type": "rule",
+      "_id": "jZFp4R7tXsIqkiG3",
+      "title": {
+        "show": true,
+        "level": 2
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>A cylinder’s point of origin is the center of a circle of a particular radius, as given in the spell description. The circle must either be on the ground or at the height of the spell effect. The energy in a cylinder expands in straight lines from the point of origin to the perimeter of the circle, forming the base of the cylinder. The spell’s effect then shoots up from the base or down from the top, to a distance equal to the height of the cylinder.</p><p>A cylinder’s point of origin is included in the cylinder’s area of effect.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705170896467,
+        "modifiedTime": 1705171122963,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.jZFp4R7tXsIqkiG3"
+    },
+    {
+      "sort": 16500000,
+      "name": "Line",
+      "type": "rule",
+      "_id": "6DOoBgg7okm9gBc6",
+      "title": {
+        "show": true,
+        "level": 2
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>A line extends from its point of origin in a straight path up to its length and covers an area defined by its width.</p><p>A line’s point of origin is not included in the line’s area of effect, unless you decide otherwise.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705170901914,
+        "modifiedTime": 1705171118821,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.6DOoBgg7okm9gBc6"
+    },
+    {
+      "sort": 16600000,
+      "name": "Sphere",
+      "type": "rule",
+      "_id": "npdEWb2egUPnB5Fa",
+      "title": {
+        "show": true,
+        "level": 2
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>You select a sphere’s point of origin, and the sphere extends outward from that point. The sphere’s size is expressed as a radius in feet that extends from the point.</p><p>A sphere’s point of origin is included in the sphere’s area of effect.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705170907654,
+        "modifiedTime": 1705171114312,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.npdEWb2egUPnB5Fa"
+    },
+    {
+      "sort": 16700000,
+      "name": "Saving Throws",
+      "type": "rule",
+      "_id": "8DajfNll90eeKcmB",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>Many spells specify that a target can make a saving throw to avoid some or all of a spell’s effects. The spell specifies the ability that the target uses for the save and what happens on a success or failure.</p><p>The DC to resist one of your spells equals 8 + your spellcasting ability modifier + your proficiency bonus + any special modifiers.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705170912741,
+        "modifiedTime": 1705171109446,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.8DajfNll90eeKcmB"
+    },
+    {
+      "sort": 16800000,
+      "name": "Attack Rolls",
+      "type": "rule",
+      "_id": "qAFzmGZKhVvAEUF3",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>Some spells require the caster to make an attack roll to determine whether the spell effect hits the intended target. Your attack bonus with a spell attack equals your spellcasting ability modifier + your proficiency bonus.</p><p>Most spells that require attack rolls involve ranged attacks. Remember that you have disadvantage on a ranged attack roll if you are within 5 feet of a hostile creature that can see you and that isn’t incapacitated.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705170917323,
+        "modifiedTime": 1705171105297,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.qAFzmGZKhVvAEUF3"
+    },
+    {
+      "sort": 16900000,
+      "name": "Combining Magical Effects",
+      "type": "rule",
+      "_id": "TMIN963hG773yZzO",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>The effects of different spells add together while the durations of those spells overlap. The effects of the same spell cast multiple times don’t combine, however. Instead, the most potent effect—such as the highest bonus—from those castings applies while their durations overlap.</p><p>For example, if two clerics cast bless on the same target, that character gains the spell’s benefit only once; he or she doesn’t get to roll two bonus dice.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705170927456,
+        "modifiedTime": 1705171102020,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.TMIN963hG773yZzO"
+    },
+    {
+      "sort": 17000000,
+      "name": "The Schools of Magic",
+      "type": "rule",
+      "_id": "TeF6CKMDRpYpsLd4",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>Academies of magic group spells into eight categories called schools of magic. Scholars, particularly wizards, apply these categories to all spells, believing that all magic functions in essentially the same way, whether it derives from rigorous study or is bestowed by a deity.</p><p>The schools of magic help describe spells; they have no rules of their own, although some rules refer to the schools.</p><p>@Embed[.849AYEWw9FHD6JNz inline]</p><p>@Embed[.TWyKMhZJZGqQ6uls inline]</p><p>@Embed[.HoD2MwzmVbMqj9se inline]</p><p>@Embed[.SehPXk24ySBVOwCZ inline]</p><p>@Embed[.kGp1RNuxL2SELLRC inline]</p><p>@Embed[.smEk7kvVyslFozrB inline]</p><p>@Embed[.W0eyiV1FBmngb6Qh inline]</p><p>@Embed[.IYWewSailtmv6qEb inline]</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705170934535,
+        "modifiedTime": 1705171092454,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.TeF6CKMDRpYpsLd4"
+    },
+    {
+      "sort": 17100000,
+      "name": "Abjuration",
+      "type": "rule",
+      "_id": "849AYEWw9FHD6JNz",
+      "title": {
+        "show": true,
+        "level": 3
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p><strong>Abjuration </strong>spells are protective in nature, though some of them have aggressive uses. They create magical barriers, negate harmful effects, harm trespassers, or banish creatures to other planes of existence.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705170943259,
+        "modifiedTime": 1705171042037,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.849AYEWw9FHD6JNz"
+    },
+    {
+      "sort": 17200000,
+      "name": "Conjuration",
+      "type": "rule",
+      "_id": "TWyKMhZJZGqQ6uls",
+      "title": {
+        "show": true,
+        "level": 3
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p><strong>Conjuration</strong> spells involve the transportation of objects and creatures from one location to another. Some spells summon creatures or objects to the caster’s side, whereas others allow the caster to teleport to another location. Some conjurations create objects or effects out of nothing.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705170949703,
+        "modifiedTime": 1705171039084,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.TWyKMhZJZGqQ6uls"
+    },
+    {
+      "sort": 17300000,
+      "name": "Divination",
+      "type": "rule",
+      "_id": "HoD2MwzmVbMqj9se",
+      "title": {
+        "show": true,
+        "level": 3
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p><strong>Divination</strong> spells reveal information, whether in the form of secrets long forgotten, glimpses of the future, the locations of hidden things, the truth behind illusions, or visions of distant people or places.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705170956034,
+        "modifiedTime": 1705171035971,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.HoD2MwzmVbMqj9se"
+    },
+    {
+      "sort": 17400000,
+      "name": "Enchantment",
+      "type": "rule",
+      "_id": "SehPXk24ySBVOwCZ",
+      "title": {
+        "show": true,
+        "level": 3
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p><strong>Enchantment</strong> spells affect the minds of others, influencing or controlling their behavior. Such spells can make enemies see the caster as a friend, force creatures to take a course of action, or even control another creature like a puppet.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705170960548,
+        "modifiedTime": 1705171032718,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.SehPXk24ySBVOwCZ"
+    },
+    {
+      "sort": 17500000,
+      "name": "Evocation",
+      "type": "rule",
+      "_id": "kGp1RNuxL2SELLRC",
+      "title": {
+        "show": true,
+        "level": 3
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p><strong>Evocation</strong> spells manipulate magical energy to produce a desired effect. Some call up blasts of fire or lightning. Others channel positive energy to heal wounds.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705170964466,
+        "modifiedTime": 1705171028451,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.kGp1RNuxL2SELLRC"
+    },
+    {
+      "sort": 17600000,
+      "name": "Illusion",
+      "type": "rule",
+      "_id": "smEk7kvVyslFozrB",
+      "title": {
+        "show": true,
+        "level": 3
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p><strong>Illusion</strong> spells deceive the senses or minds of others. They cause people to see things that are not there, to miss things that are there, to hear phantom noises, or to remember things that never happened. Some illusions create phantom images that any creature can see, but the most insidious illusions plant an image directly in the mind of a creature.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705170970284,
+        "modifiedTime": 1705171024609,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.smEk7kvVyslFozrB"
+    },
+    {
+      "sort": 17700000,
+      "name": "Necromancy",
+      "type": "rule",
+      "_id": "W0eyiV1FBmngb6Qh",
+      "title": {
+        "show": true,
+        "level": 3
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p><strong>Necromancy</strong> spells manipulate the energies of life and death. Such spells can grant an extra reserve of life force, drain the life energy from another creature, create the undead, or even bring the dead back to life. Creating the undead through the use of necromancy spells such as animate dead is not a good act, and only evil casters use such spells frequently.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705170974681,
+        "modifiedTime": 1705171020498,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.W0eyiV1FBmngb6Qh"
+    },
+    {
+      "sort": 17800000,
+      "name": "Transmutation",
+      "type": "rule",
+      "_id": "IYWewSailtmv6qEb",
+      "title": {
+        "show": true,
+        "level": 3
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p><strong>Transmutation</strong> spells change the properties of a creature, object, or environment. They might turn an enemy into a harmless creature, bolster the strength of an ally, make an object move at the caster’s command, or enhance a creature’s innate healing abilities to rapidly recover from injury.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705170982045,
+        "modifiedTime": 1705171016000,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.IYWewSailtmv6qEb"
+    },
+    {
+      "sort": 16150000,
+      "name": "Point of Origin",
+      "type": "rule",
+      "_id": "8HxbRceQQUAhyWRt",
+      "title": {
+        "show": true,
+        "level": 3
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>A spell’s description specifies its area of effect, which typically has one of five different shapes: cone, cube, cylinder, line, or sphere. Every area of effect has a <strong>point of origin</strong>, a location from which the spell’s energy erupts. The rules for each shape specify how you position its point of origin. Typically, a point of origin is a point in space, but some spells have an area whose origin is a creature or an object.</p><p>A spell’s effect expands in straight lines from the point of origin. If no unblocked straight line extends from the point of origin to a location within the area of effect, that location isn’t included in the spell’s area. To block one of these imaginary lines, an obstruction must provide total cover.</p>",
+        "markdown": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {
+        "tooltip": "",
+        "type": "rule"
+      },
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "systemId": "dnd5e",
+        "systemVersion": "3.0.0",
+        "coreVersion": "11.315",
+        "createdTime": 1705171160280,
+        "modifiedTime": 1705171172224,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!journal.pages!NizgRXLNUqtdlC1s.8HxbRceQQUAhyWRt"
     }
   ],
   "folder": null,
@@ -5902,7 +7460,7 @@
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1704059808409,
-    "modifiedTime": 1704927739182,
+    "modifiedTime": 1705171465762,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_id": "NizgRXLNUqtdlC1s",

@@ -46,7 +46,7 @@
             <option value="ritual">{{ localize "DND5E.Ritual" }}</option>
             <option value="prepared">{{ localize "DND5E.Prepared" }}</option>
             {{#each config.spellSchools}}
-            <option value="{{ @key }}">{{ this }}</option>
+            <option value="{{ @key }}">{{ label }}</option>
             {{/each}}
         </datalist>
     </item-list-controls>

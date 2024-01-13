@@ -1636,8 +1636,9 @@ preLocalize("individualTargetTypes");
  * Information needed to represent different area of effect target types.
  *
  * @typedef {object} AreaTargetDefinition
- * @property {string} label     Localized label for this type.
- * @property {string} template  Type of `MeasuredTemplate` create for this target type.
+ * @property {string} label        Localized label for this type.
+ * @property {string} template     Type of `MeasuredTemplate` create for this target type.
+ * @property {string} [reference]  Reference to a rule page describing this area of effect.
  */
 
 /**
@@ -1651,15 +1652,18 @@ DND5E.areaTargetTypes = {
   },
   sphere: {
     label: "DND5E.TargetSphere",
-    template: "circle"
+    template: "circle",
+    reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.npdEWb2egUPnB5Fa"
   },
   cylinder: {
     label: "DND5E.TargetCylinder",
-    template: "circle"
+    template: "circle",
+    reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.jZFp4R7tXsIqkiG3"
   },
   cone: {
     label: "DND5E.TargetCone",
-    template: "cone"
+    template: "cone",
+    reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.DqqAOr5JnX71OCOw"
   },
   square: {
     label: "DND5E.TargetSquare",
@@ -1667,11 +1671,13 @@ DND5E.areaTargetTypes = {
   },
   cube: {
     label: "DND5E.TargetCube",
-    template: "rect"
+    template: "rect",
+    reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.dRfDIwuaHmUQ06uA"
   },
   line: {
     label: "DND5E.TargetLine",
-    template: "ray"
+    template: "ray",
+    reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.6DOoBgg7okm9gBc6"
   },
   wall: {
     label: "DND5E.TargetWall",
@@ -1898,62 +1904,128 @@ preLocalize("spellScalingModes", { sort: true });
 /* -------------------------------------------- */
 
 /**
+ * Configuration data for spell components.
+ *
+ * @typedef {object} SpellComponentConfiguration
+ * @property {string} label         Localized label.
+ * @property {string} abbr          Localized abbreviation.
+ * @property {string} [reference]   Reference to a rule page describing this component.
+ */
+
+/**
  * Types of components that can be required when casting a spell.
- * @enum {object}
+ * @enum {SpellComponentConfiguration}
  */
 DND5E.spellComponents = {
   vocal: {
     label: "DND5E.ComponentVerbal",
-    abbr: "DND5E.ComponentVerbalAbbr"
+    abbr: "DND5E.ComponentVerbalAbbr",
+    reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.6UXTNWMCQ0nSlwwx"
   },
   somatic: {
     label: "DND5E.ComponentSomatic",
-    abbr: "DND5E.ComponentSomaticAbbr"
+    abbr: "DND5E.ComponentSomaticAbbr",
+    reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.qwUNgUNilEmZkSC9"
   },
   material: {
     label: "DND5E.ComponentMaterial",
-    abbr: "DND5E.ComponentMaterialAbbr"
+    abbr: "DND5E.ComponentMaterialAbbr",
+    reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.AeH5eDS4YeM9RETC"
   }
 };
-preLocalize("spellComponents", {keys: ["label", "abbr"]});
+preLocalize("spellComponents", { keys: ["label", "abbr"] });
 
 /* -------------------------------------------- */
 
 /**
+ * Configuration data for spell tags.
+ *
+ * @typedef {object} SpellTagConfiguration
+ * @property {string} label         Localized label.
+ * @property {string} abbr          Localized abbreviation.
+ * @property {string} icon          Icon representing this tag.
+ * @property {string} [reference]   Reference to a rule page describing this tag.
+ */
+
+/**
  * Supplementary rules keywords that inform a spell's use.
- * @enum {object}
+ * @enum {SpellTagConfiguration}
  */
 DND5E.spellTags = {
   concentration: {
     label: "DND5E.Concentration",
     abbr: "DND5E.ConcentrationAbbr",
-    icon: "systems/dnd5e/icons/svg/statuses/concentrating.svg"
+    icon: "systems/dnd5e/icons/svg/statuses/concentrating.svg",
+    reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.ow58p27ctAnr4VPH"
   },
   ritual: {
     label: "DND5E.Ritual",
     abbr: "DND5E.RitualAbbr",
-    icon: "systems/dnd5e/icons/svg/items/spell.svg"
+    icon: "systems/dnd5e/icons/svg/items/spell.svg",
+    reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.FjWqT5iyJ89kohdA"
   }
 };
-preLocalize("spellTags", {keys: ["label", "abbr"]});
+preLocalize("spellTags", { keys: ["label", "abbr"] });
 
 /* -------------------------------------------- */
 
 /**
+ * Configuration data for spell schools.
+ *
+ * @typedef {object} SpellSchoolConfiguration
+ * @property {string} label        Localized label.
+ * @property {string} fullKey      Fully written key used as alternate for enrichers.
+ * @property {string} [reference]  Reference to a rule page describing this school.
+ */
+
+/**
  * Schools to which a spell can belong.
- * @enum {string}
+ * @enum {SpellSchoolConfiguration}
  */
 DND5E.spellSchools = {
-  abj: "DND5E.SchoolAbj",
-  con: "DND5E.SchoolCon",
-  div: "DND5E.SchoolDiv",
-  enc: "DND5E.SchoolEnc",
-  evo: "DND5E.SchoolEvo",
-  ill: "DND5E.SchoolIll",
-  nec: "DND5E.SchoolNec",
-  trs: "DND5E.SchoolTrs"
+  abj: {
+    label: "DND5E.SchoolAbj",
+    fullKey: "abjuration",
+    reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.849AYEWw9FHD6JNz"
+  },
+  con: {
+    label: "DND5E.SchoolCon",
+    fullKey: "conjuration",
+    reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.TWyKMhZJZGqQ6uls"
+  },
+  div: {
+    label: "DND5E.SchoolDiv",
+    fullKey: "divination",
+    reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.HoD2MwzmVbMqj9se"
+  },
+  enc: {
+    label: "DND5E.SchoolEnc",
+    fullKey: "enchantment",
+    reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.SehPXk24ySBVOwCZ"
+  },
+  evo: {
+    label: "DND5E.SchoolEvo",
+    fullKey: "evocation",
+    reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.kGp1RNuxL2SELLRC"
+  },
+  ill: {
+    label: "DND5E.SchoolIll",
+    fullKey: "illusion",
+    reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.smEk7kvVyslFozrB"
+  },
+  nec: {
+    label: "DND5E.SchoolNec",
+    fullKey: "necromancy",
+    reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.W0eyiV1FBmngb6Qh"
+  },
+  trs: {
+    label: "DND5E.SchoolTrs",
+    fullKey: "transmutation",
+    reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.IYWewSailtmv6qEb"
+  }
 };
-preLocalize("spellSchools", { sort: true });
+preLocalize("spellSchools", { key: "label", sort: true });
+patchConfig("spellSchools", "label", { since: "DnD5e 3.0", until: "DnD5e 3.2" });
 
 /* -------------------------------------------- */
 
@@ -2770,6 +2842,10 @@ DND5E.ruleTypes = {
     label: "DND5E.Ability",
     references: "enrichmentLookup.abilities"
   },
+  areaOfEffect: {
+    label: "DND5E.AreaOfEffect",
+    references: "areaTargetTypes"
+  },
   condition: {
     label: "DND5E.Rule.Type.Condition",
     references: "conditionTypes"
@@ -2781,6 +2857,18 @@ DND5E.ruleTypes = {
   skill: {
     label: "DND5E.Skill",
     references: "enrichmentLookup.skills"
+  },
+  spellComponent: {
+    label: "DND5E.SpellComponent",
+    references: "spellComponents"
+  },
+  spellSchool: {
+    label: "DND5E.SpellSchool",
+    references: "enrichmentLookup.spellSchools"
+  },
+  spellTag: {
+    label: "DND5E.SpellTag",
+    references: "spellTags"
   }
 };
 preLocalize("ruleTypes", { key: "label" });
@@ -2886,7 +2974,33 @@ DND5E.rules = {
   mounting: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.MFpyvUIdcBpC9kIE",
   dismounting: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.MFpyvUIdcBpC9kIE",
   controllingamount: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.khmR2xFk1NxoQUgZ",
-  underwatercombat: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.6zVOeLyq4iMnrQT4"
+  underwatercombat: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.6zVOeLyq4iMnrQT4",
+  spelllevel: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.A6k5fS0kFqPXTW3v",
+  knownspells: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.oezg742GlxmEwT85",
+  preparedspells: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.oezg742GlxmEwT85",
+  spellslots: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.Su6wbb0O9UN4ZDIH",
+  castingatahigherlevel: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.4H9SLM95OCLfFizz",
+  upcasting: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.4H9SLM95OCLfFizz",
+  castinginarmor: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.z4A8vHSK2pb8YA9X",
+  cantrips: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.jZD5mCTnMPJ9jW67",
+  rituals: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.FjWqT5iyJ89kohdA",
+  castingtime: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.zRVW8Tvyk6BECjZD",
+  bonusactioncasting: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.RP1WL9FXI3aknlxZ",
+  reactioncasting: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.t62lCfinwU9H7Lji",
+  longercastingtimes: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.gOAIRFCyPUx42axn",
+  spellrange: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.RBYPyE5z5hAZSbH6",
+  components: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.xeHthAF9lxfn2tII",
+  verbal: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.6UXTNWMCQ0nSlwwx",
+  spellduration: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.9mp0SRsptjvJcq1e",
+  instantaneous: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.kdlgZOpRMB6bGCod",
+  concentrating: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.ow58p27ctAnr4VPH",
+  spelltargets: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.G80AIQr04sxdVpw4",
+  areaofeffect: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.wvtCeGHgnUmh0cuj",
+  pointoforigin: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.8HxbRceQQUAhyWRt",
+  spellsavingthrows: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.8DajfNll90eeKcmB",
+  spellattackrolls: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.qAFzmGZKhVvAEUF3",
+  combiningmagicaleffects: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.TMIN963hG773yZzO",
+  schoolsofmagic: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.TeF6CKMDRpYpsLd4"
 };
 
 /* -------------------------------------------- */
@@ -2914,14 +3028,15 @@ Object.defineProperty(DND5E, "enrichmentLookup", {
       _enrichmentLookup = {
         abilities: foundry.utils.deepClone(DND5E.abilities),
         skills: foundry.utils.deepClone(DND5E.skills),
+        spellSchools: foundry.utils.deepClone(DND5E.spellSchools),
         tools: foundry.utils.deepClone(DND5E.toolIds)
       };
-      Object.entries(DND5E.abilities).forEach(([k, a]) =>
-        _enrichmentLookup.abilities[slugify(a.fullKey)] = { ...a, key: k }
+      const addFullKeys = key => Object.entries(DND5E[key]).forEach(([k, v]) =>
+        _enrichmentLookup[key][slugify(v.fullKey)] = { ...v, key: k }
       );
-      Object.entries(DND5E.skills).forEach(([k, s]) =>
-        _enrichmentLookup.skills[slugify(s.fullKey)] = { ...s, key: k }
-      );
+      addFullKeys("abilities");
+      addFullKeys("skills");
+      addFullKeys("spellSchools");
     }
     return _enrichmentLookup;
   },
