@@ -1021,6 +1021,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
   _onRemoveFavorite(event) {
     const { favoriteId } = event.currentTarget.closest("[data-favorite-id]")?.dataset ?? {};
     if ( !favoriteId ) return;
+    if ( favoriteId.startsWith("resources.") ) return this.actor.update({ [`system.${favoriteId}.max`]: 0 });
     const favorites = this.actor.system.favorites.filter(f => f.id !== favoriteId);
     return this.actor.update({ "system.favorites": favorites });
   }
@@ -1072,11 +1073,29 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
 
   /**
    * Prepare favorites for display.
-   * @returns {object}
+   * @returns {Promise<object>}
    * @protected
    */
-  _prepareFavorites() {
-    return this.actor.system.favorites.reduce(async (arr, f) => {
+  async _prepareFavorites() {
+    // Legacy resources
+    const resources = Object.entries(this.actor.system.resources).reduce((arr, [k, r]) => {
+      const { value, max, sr, lr, label } = r;
+      if ( label && max ) arr.push({
+        id: `resources.${k}`,
+        type: "resource",
+        img: "icons/svg/upgrade.svg",
+        resource: { value, max },
+        css: "uses",
+        title: label,
+        subtitle: [
+          sr ? game.i18n.localize("DND5E.AbbreviationSR") : null,
+          lr ? game.i18n.localize("DND5E.AbbreviationLR") : null
+        ].filterJoin(" &bull; ")
+      });
+      return arr;
+    }, []);
+
+    return resources.concat(await this.actor.system.favorites.reduce(async (arr, f) => {
       const { id, type, sort } = f;
       const favorite = fromUuidSync(id, { relative: this.actor });
       if ( !favorite && ((type === "item") || (type === "effect")) ) return arr;
@@ -1128,7 +1147,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
         subtitle: Array.isArray(subtitle) ? subtitle.filterJoin(" &bull; ") : subtitle
       });
       return arr;
-    }, []);
+    }, []));
   }
 
   /* -------------------------------------------- */

@@ -403,6 +403,24 @@
                                     {{!-- Toggleable --}}
                                     {{else if toggle.applicable}}
                                     <i class="fas fa-toggle-{{#if toggle.value}}on{{else}}off{{/if}}"></i>
+
+                                    {{!-- Legacy Resources --}}
+                                    {{else if resource}}
+                                    {{#if @root.actor.isOwner}}
+                                    <input type="text" class="uninput value" value="{{ resource.value }}"
+                                           data-dtype="Number" name="system.{{ id }}.value" inputmode="numeric"
+                                           pattern="[0-9+=\-]*">
+                                    {{else}}
+                                    <span class="value">{{ resource.value }}</span>
+                                    {{/if}}
+                                    <span class="separator">&sol;</span>
+                                    {{#if @root.actor.isOwner}}
+                                    <input type="text" class="uninput max" value="{{ resource.max }}"
+                                           data-dtype="Number" name="system.{{ id }}.max" inputmode="numeric"
+                                           pattern="[0-9+=\-]*">
+                                    {{else}}
+                                    <span class="max">{{ resource.max }}</span>
+                                    {{/if}}
                                     {{/if}}
                                 </div>
                                 <div class="secondary">
