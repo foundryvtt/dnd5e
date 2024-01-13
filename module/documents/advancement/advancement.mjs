@@ -170,6 +170,21 @@ export default class Advancement extends BaseAdvancement {
   }
 
   /* -------------------------------------------- */
+
+  /**
+   * Perform preliminary operations before an Advancement is created.
+   * @param {object} data      The initial data object provided to the document creation request.
+   * @returns {boolean|void}   A return value of false indicates the creation operation should be cancelled.
+   * @protected
+   */
+  _preCreate(data) {
+    if ( !["class", "subclass"].includes(this.item.type)
+      || foundry.utils.hasProperty(data, "level")
+      || this.constructor.metadata.multiLevel ) return;
+    this.updateSource({level: 1});
+  }
+
+  /* -------------------------------------------- */
   /*  Display Methods                             */
   /* -------------------------------------------- */
 

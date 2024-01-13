@@ -27,7 +27,7 @@ export default class ItemDescriptionTemplate extends SystemDataModel {
   }
 
   /* -------------------------------------------- */
-  /*  Migrations                                  */
+  /*  Data Migrations                             */
   /* -------------------------------------------- */
 
   /** @inheritdoc */
@@ -43,8 +43,20 @@ export default class ItemDescriptionTemplate extends SystemDataModel {
    * @param {object} source  The candidate source data from which the model will be constructed.
    */
   static #migrateSource(source) {
-    if ( foundry.utils.getType(source.source) !== "Object" ) {
+    if ( ("source" in source) && (foundry.utils.getType(source.source) !== "Object") ) {
       source.source = { custom: source.source };
     }
+  }
+
+  /* -------------------------------------------- */
+  /*  Getters                                     */
+  /* -------------------------------------------- */
+
+  /**
+   * What properties can be used for this item?
+   * @returns {Set<string>}
+   */
+  get validProperties() {
+    return new Set(CONFIG.DND5E.validProperties[this.parent.type] ?? []);
   }
 }

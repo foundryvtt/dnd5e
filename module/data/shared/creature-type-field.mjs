@@ -13,4 +13,20 @@ export default class CreatureTypeField extends foundry.data.fields.SchemaField {
     Object.entries(fields).forEach(([k, v]) => !v ? delete fields[k] : null);
     super(fields, { label: "DND5E.CreatureType", ...options });
   }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  initialize(value, model, options={}) {
+    const obj = super.initialize(value, model, options);
+
+    Object.defineProperty(obj, "label", {
+      get() {
+        return dnd5e.documents.Actor5e.formatCreatureType(this);
+      },
+      enumerable: false
+    });
+
+    return obj;
+  }
 }

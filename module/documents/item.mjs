@@ -1,13 +1,18 @@
+import ClassData from "../data/item/class.mjs";
+import ContainerData from "../data/item/container.mjs";
+import EquipmentData from "../data/item/equipment.mjs";
+import SpellData from "../data/item/spell.mjs";
 import {d20Roll, damageRoll} from "../dice/dice.mjs";
 import simplifyRollFormula from "../dice/simplify-roll-formula.mjs";
 import Advancement from "./advancement/advancement.mjs";
 import AbilityUseDialog from "../applications/item/ability-use-dialog.mjs";
 import Proficiency from "./actor/proficiency.mjs";
+import { SystemDocumentMixin } from "./mixin.mjs";
 
 /**
  * Override and extend the basic Item implementation.
  */
-export default class Item5e extends Item {
+export default class Item5e extends SystemDocumentMixin(Item) {
 
   /**
    * Caches an item linked to this one, such as a subclass associated with a class.
@@ -19,14 +24,6 @@ export default class Item5e extends Item {
   /* -------------------------------------------- */
   /*  Item Properties                             */
   /* -------------------------------------------- */
-
-  /**
-   * Is this Item an activatable item?
-   * @type {boolean}
-   */
-  get isActive() {
-    return this.system.isActive ?? false;
-  }
 
   /**
    * Which ability score modifier is used by this item?
@@ -179,6 +176,16 @@ export default class Item5e extends Item {
     return this.system.identifier || this.name.slugify({strict: true});
   }
 
+  /* --------------------------------------------- */
+
+  /**
+   * Is this Item an activatable item?
+   * @type {boolean}
+   */
+  get isActive() {
+    return this.system.isActive ?? false;
+  }
+
   /* -------------------------------------------- */
 
   /**
@@ -237,6 +244,17 @@ export default class Item5e extends Item {
     return this.system.isVersatile ?? false;
   }
 
+  /* --------------------------------------------- */
+
+  /**
+   * Does this item require concentration?
+   * @type {boolean}
+   */
+  get requiresConcentration() {
+    const isValid = this.system.validProperties.has("concentration") && this.system.properties.has("concentration");
+    return isValid && this.isActive && this.system.hasScalarDuration;
+  }
+
   /* -------------------------------------------- */
 
   /**
@@ -269,8 +287,9 @@ export default class Item5e extends Item {
    * @type {object}
    */
   get scaleValues() {
-    if ( !["class", "subclass"].includes(this.type) || !this.advancement.byType.ScaleValue ) return {};
-    const level = this.type === "class" ? this.system.levels : this.class?.system.levels ?? 0;
+    if ( !this.advancement.byType.ScaleValue ) return {};
+    const level = this.type === "class" ? this.system.levels : this.type === "subclass" ? this.class?.system.levels
+      : this.parent?.system.details.level ?? 0;
     return this.advancement.byType.ScaleValue.reduce((obj, advancement) => {
       obj[advancement.identifier] = advancement.valueForLevel(level);
       return obj;
@@ -284,10 +303,10 @@ export default class Item5e extends Item {
    * @type {string|null}
    */
   get usageScaling() {
-    const { level, preparation } = this.system;
-    if ( (this.type === "spell") && (level > 0) && CONFIG.DND5E.spellUpcastModes.includes(preparation.mode) ) {
-      return "slot";
-    }
+    const { level, preparation, consume } = this.system;
+    const isLeveled = (this.type === "spell") && (level > 0);
+    if ( isLeveled && CONFIG.DND5E.spellUpcastModes.includes(preparation.mode) ) return "slot";
+    else if ( isLeveled && this.hasResource && consume.scale ) return "resource";
     return null;
   }
 
@@ -338,7 +357,7 @@ export default class Item5e extends Item {
    */
   get areEffectsSuppressed() {
     const requireEquipped = (this.type !== "consumable")
-      || ["rod", "trinket", "wand"].includes(this.system.consumableType);
+      || ["rod", "trinket", "wand"].includes(this.system.type.value);
     if ( requireEquipped && (this.system.equipped === false) ) return true;
     return this.system.attunement === CONFIG.DND5E.attunementTypes.REQUIRED;
   }
@@ -366,6 +385,8 @@ export default class Item5e extends Item {
         this._prepareFeat(); break;
       case "spell":
         this._prepareSpell(); break;
+      case "weapon":
+        this._prepareWeapon(); break;
     }
 
     // Activated Items
@@ -418,9 +439,9 @@ export default class Item5e extends Item {
     this.system.preparation.mode ||= "prepared";
     this.labels.level = CONFIG.DND5E.spellLevels[this.system.level];
     this.labels.school = CONFIG.DND5E.spellSchools[this.system.school];
-    this.labels.components = Object.entries(this.system.components).reduce((obj, [c, active]) => {
+    this.labels.components = this.system.properties.reduce((obj, c) => {
       const config = attributes[c];
-      if ( !config || (active !== true) ) return obj;
+      if ( !config ) return obj;
       obj.all.push({abbr: config.abbr, tag: config.tag});
       if ( config.tag ) obj.tags.push(config.label);
       else obj.vsm.push(config.abbr);
@@ -429,6 +450,16 @@ export default class Item5e extends Item {
     this.labels.components.vsm = new Intl.ListFormat(game.i18n.lang, { style: "narrow", type: "conjunction" })
       .format(this.labels.components.vsm);
     this.labels.materials = this.system?.materials?.value ?? null;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare derived data for a weapon-type item and define labels.
+   * @protected
+   */
+  _prepareWeapon() {
+    this.labels.armor = this.system.armor.value ? `${this.system.armor.value} ${game.i18n.localize("DND5E.AC")}` : "";
   }
 
   /* -------------------------------------------- */
@@ -443,8 +474,11 @@ export default class Item5e extends Item {
 
     // Ability Activation Label
     const act = this.system.activation ?? {};
-    if ( ["none", ""].includes(act.type) ) act.type = null;   // Backwards compatibility
-    this.labels.activation = act.type ? [act.cost, C.abilityActivationTypes[act.type]].filterJoin(" ") : "";
+    if ( !act.type ) act.type = null;   // Backwards compatibility
+    this.labels.activation = act.type ? [
+      (act.type in C.staticAbilityActivationTypes) ? null : act.cost,
+      C.abilityActivationTypes[act.type]
+    ].filterJoin(" ") : "";
 
     // Target Label
     let tgt = this.system.target ?? {};
@@ -453,7 +487,10 @@ export default class Item5e extends Item {
     else if ( tgt.units === "touch" ) tgt.value = null;
 
     if ( this.hasTarget ) {
-      this.labels.target = [tgt.value, C.distanceUnits[tgt.units], C.targetTypes[tgt.type]].filterJoin(" ");
+      const target = [tgt.value];
+      if ( this.hasAreaTarget ) target.push(C.distanceUnits[tgt.units]);
+      target.push(C.targetTypes[tgt.type]);
+      this.labels.target = target.filterJoin(" ");
     }
 
     // Range Label
@@ -482,7 +519,7 @@ export default class Item5e extends Item {
     if ( dmg.parts ) {
       const types = CONFIG.DND5E.damageTypes;
       this.labels.damage = dmg.parts.map(d => d[0]).join(" + ").replace(/\+ -/g, "- ");
-      this.labels.damageTypes = dmg.parts.map(d => types[d[1]]).join(", ");
+      this.labels.damageTypes = dmg.parts.map(d => types[d[1]]?.label).join(", ");
     }
   }
 
@@ -497,7 +534,7 @@ export default class Item5e extends Item {
     this.advancement = {
       byId: {},
       byLevel: Object.fromEntries(
-        Array.fromRange(CONFIG.DND5E.maxLevel + 1).slice(minAdvancementLevel).map(l => [l, []])
+        Array.fromRange(CONFIG.DND5E.maxLevel + 1, minAdvancementLevel).map(l => [l, []])
       ),
       byType: {},
       needingConfiguration: []
@@ -507,7 +544,7 @@ export default class Item5e extends Item {
       this.advancement.byId[advancement.id] = advancement;
       this.advancement.byType[advancement.type] ??= [];
       this.advancement.byType[advancement.type].push(advancement);
-      advancement.levels.forEach(l => this.advancement.byLevel[l].push(advancement));
+      advancement.levels.forEach(l => this.advancement.byLevel[l]?.push(advancement));
       if ( !advancement.levels.length ) this.advancement.needingConfiguration.push(advancement);
     }
     Object.entries(this.advancement.byLevel).forEach(([lvl, data]) => data.sort((a, b) => {
@@ -590,7 +627,7 @@ export default class Item5e extends Item {
         console.warn(`Unable to simplify formula for ${this.name}: ${err}`);
       }
       const damageType = damagePart[1];
-      return { formula, damageType, label: `${formula} ${damageLabels[damageType] ?? ""}` };
+      return { formula, damageType, label: `${formula} ${damageLabels[damageType]?.label ?? ""}` };
     });
     return this.labels.derivedDamage = derivedDamage;
   }
@@ -665,7 +702,7 @@ export default class Item5e extends Item {
       const ammoItemQuantity = ammo.system.quantity;
       const ammoCanBeConsumed = ammoItemQuantity && (ammoItemQuantity - (this.system.consume.amount ?? 0) >= 0);
       const ammoItemAttackBonus = ammo.system.attackBonus;
-      const ammoIsTypeConsumable = (ammo.type === "consumable") && (ammo.system.consumableType === "ammo");
+      const ammoIsTypeConsumable = (ammo.type === "consumable") && (ammo.system.type.value === "ammo");
       if ( ammoCanBeConsumed && ammoItemAttackBonus && ammoIsTypeConsumable ) {
         parts.push("@ammo");
         rollData.ammo = ammoItemAttackBonus;
@@ -778,6 +815,7 @@ export default class Item5e extends Item {
    * @property {boolean} consumeSpellSlot           Should this item (a spell) consume a spell slot?
    * @property {boolean} consumeUsage               Should this item consume its limited uses or recharge?
    * @property {string|number|null} slotLevel       The spell slot type or level to consume by default.
+   * @property {number|null} resourceAmount         The amount to consume by default when scaling with consumption.
    */
 
   /**
@@ -819,9 +857,6 @@ export default class Item5e extends Item {
     }
     config = foundry.utils.mergeObject(this._getUsageConfig(), config);
 
-    // Are any default values necessitating a prompt?
-    const needsConfiguration = Object.values(config).includes(true);
-
     /**
      * A hook event that fires before an item usage is configured.
      * @function dnd5e.preUseItem
@@ -832,6 +867,9 @@ export default class Item5e extends Item {
      * @returns {boolean}                    Explicitly return `false` to prevent item from being used.
      */
     if ( Hooks.call("dnd5e.preUseItem", item, config, options) === false ) return;
+
+    // Are any default values necessitating a prompt?
+    const needsConfiguration = Object.values(config).includes(true);
 
     // Display configuration dialog
     if ( (options.configureDialog !== false) && needsConfiguration ) {
@@ -847,6 +885,10 @@ export default class Item5e extends Item {
         // A spell slot was consumed.
         level = Number.isInteger(config.slotLevel) ? config.slotLevel
           : config.slotLevel === "pact" ? as.spells.pact.level : parseInt(config.slotLevel.replace("spell", ""));
+      } else if ( config.resourceAmount ) {
+        // A quantity of the resource was consumed.
+        const diff = config.resourceAmount - (this.system.consume.amount || 1);
+        level = is.level + diff;
       }
       if ( level && (level !== is.level) ) {
         item = item.clone({"system.level": level}, {keepId: true});
@@ -938,12 +980,16 @@ export default class Item5e extends Item {
       slotLevel: null,
       consumeUsage: null,
       consumeResource: null,
+      resourceAmount: null,
       createMeasuredTemplate: null
     };
 
-    if ( this.usageScaling === "slot" ) {
+    const scaling = this.usageScaling;
+    if ( scaling === "slot" ) {
       config.consumeSpellSlot = true;
-      config.slotLevel = preparation?.mode === "pact" ? "pact" : `spell${level}`;
+      config.slotLevel = (preparation?.mode === "pact") ? "pact" : `spell${level}`;
+    } else if ( scaling === "resource" ) {
+      config.resourceAmount = consume.amount || 1;
     }
     if ( this.hasLimitedUses ) config.consumeUsage = uses.prompt;
     if ( this.hasResource ) {
@@ -979,7 +1025,7 @@ export default class Item5e extends Item {
 
     // Consume Limited Resource
     if ( config.consumeResource ) {
-      const canConsume = this._handleConsumeResource(itemUpdates, actorUpdates, resourceUpdates, deleteIds);
+      const canConsume = this._handleConsumeResource(config, itemUpdates, actorUpdates, resourceUpdates, deleteIds);
       if ( canConsume === false ) return false;
     }
 
@@ -1007,7 +1053,7 @@ export default class Item5e extends Item {
    * @param {object} itemUpdates        An object of data updates applied to this item
    * @param {object} actorUpdates       An object of data updates applied to the item owner (Actor)
    * @param {object[]} resourceUpdates  An array of updates to apply to other items owned by the actor
-   * @param {Set<string>} deleteIds     A set of item ids that will be deleted off the actor.
+   * @param {Set<string>} deleteIds     A set of item ids that will be deleted off the actor
    * @returns {boolean|void}            Return false to block further progress, or return nothing to continue
    * @protected
    */
@@ -1053,14 +1099,15 @@ export default class Item5e extends Item {
 
   /**
    * Handle update actions required when consuming an external resource
-   * @param {object} itemUpdates        An object of data updates applied to this item
-   * @param {object} actorUpdates       An object of data updates applied to the item owner (Actor)
-   * @param {object[]} resourceUpdates  An array of updates to apply to other items owned by the actor
-   * @param {Set<string>} deleteIds     A set of item ids that will be deleted off the actor.
-   * @returns {boolean|void}            Return false to block further progress, or return nothing to continue
+   * @param {ItemUseConfiguration} usageConfig  Configuration data for an item usage being prepared.
+   * @param {object} itemUpdates                An object of data updates applied to this item
+   * @param {object} actorUpdates               An object of data updates applied to the item owner (Actor)
+   * @param {object[]} resourceUpdates          An array of updates to apply to other items owned by the actor
+   * @param {Set<string>} deleteIds             A set of item ids that will be deleted off the actor
+   * @returns {boolean|void}                    Return false to block further progress, or return nothing to continue
    * @protected
    */
-  _handleConsumeResource(itemUpdates, actorUpdates, resourceUpdates, deleteIds) {
+  _handleConsumeResource(usageConfig, itemUpdates, actorUpdates, resourceUpdates, deleteIds) {
     const consume = this.system.consume || {};
     if ( !consume.type ) return;
 
@@ -1073,7 +1120,7 @@ export default class Item5e extends Item {
 
     // Identify the consumed resource and its current quantity
     let resource = null;
-    let amount = Number(consume.amount ?? 1);
+    let amount = usageConfig.resourceAmount ? usageConfig.resourceAmount : (consume.amount || 0);
     let quantity = 0;
     switch ( consume.type ) {
       case "attribute":
@@ -1130,7 +1177,7 @@ export default class Item5e extends Item {
           if ( consume.target === "largest" ) sort *= -1;
           return sort;
         });
-        let toConsume = consume.amount;
+        let toConsume = amount;
         for ( const cls of resource ) {
           const available = (toConsume > 0 ? cls.system.levels : 0) - cls.system.hitDiceUsed;
           const delta = toConsume > 0 ? Math.min(toConsume, available) : Math.max(toConsume, available);
@@ -1665,7 +1712,7 @@ export default class Item5e extends Item {
    */
   async rollToolCheck(options={}) {
     if ( this.type !== "tool" ) throw new Error("Wrong item type!");
-    return this.actor?.rollToolCheck(this.system.baseItem, {
+    return this.actor?.rollToolCheck(this.system.type.baseItem, {
       ability: this.system.ability,
       bonus: this.system.bonus,
       prof: this.system.prof,
@@ -1782,7 +1829,7 @@ export default class Item5e extends Item {
         await item.rollToolCheck({event}); break;
       case "placeTemplate":
         try {
-          await dnd5e.canvas.AbilityTemplate.fromItem(item)?.drawPreview();
+          await dnd5e.canvas.AbilityTemplate.fromItem(item, {"flags.dnd5e.spellLevel": spellLevel})?.drawPreview();
         } catch(err) {
           Hooks.onError("Item5e._onChatCardAction", err, {
             msg: game.i18n.localize("DND5E.PlaceTemplateError"),
@@ -1880,7 +1927,10 @@ export default class Item5e extends Item {
       throw new Error(`${type} advancement cannot be added to ${this.name}`);
     }
 
+    const createData = foundry.utils.deepClone(data);
     const advancement = new Advancement(data, {parent: this});
+    if ( advancement._preCreate(createData) === false ) return;
+
     const advancementCollection = this.toObject().system.advancement;
     advancementCollection.push(advancement.toObject());
     if ( source ) return this.updateSource({"system.advancement": advancementCollection});
@@ -1980,7 +2030,7 @@ export default class Item5e extends Item {
 
   /** @inheritdoc */
   async _preCreate(data, options, user) {
-    await super._preCreate(data, options, user);
+    if ( (await super._preCreate(data, options, user)) === false ) return false;
 
     // Create class identifier based on name
     if ( ["class", "subclass"].includes(this.type) && !this.system.identifier ) {
@@ -2025,7 +2075,7 @@ export default class Item5e extends Item {
 
   /** @inheritdoc */
   async _preUpdate(changed, options, user) {
-    await super._preUpdate(changed, options, user);
+    if ( (await super._preUpdate(changed, options, user)) === false ) return false;
     if ( (this.type !== "class") || !("levels" in (changed.system || {})) ) return;
 
     // Check to make sure the updated class level isn't below zero
@@ -2138,19 +2188,36 @@ export default class Item5e extends Item {
    * Create a consumable spell scroll Item from a spell Item.
    * @param {Item5e|object} spell     The spell or item data to be made into a scroll
    * @param {object} [options]        Additional options that modify the created scroll
-   * @returns {Item5e}                The created scroll consumable item
+   * @returns {Promise<Item5e>}       The created scroll consumable item
    */
   static async createScrollFromSpell(spell, options={}) {
 
     // Get spell data
     const itemData = (spell instanceof Item5e) ? spell.toObject() : spell;
+
+    /**
+     * A hook event that fires before the item data for a scroll is created.
+     * @function dnd5e.preCreateScrollFromSpell
+     * @memberof hookEvents
+     * @param {object} itemData    The initial item data of the spell to convert to a scroll
+     * @param {object} [options]   Additional options that modify the created scroll
+     * @returns {boolean}          Explicitly return false to prevent the scroll to be created.
+     */
+    if ( Hooks.call("dnd5e.preCreateScrollFromSpell", itemData, options) === false ) return;
+
     let {
       actionType, description, source, activation, duration, target,
-      range, damage, formula, save, level, attackBonus, ability, components
+      range, damage, formula, save, level, attackBonus, ability, properties
     } = itemData.system;
 
     // Get scroll data
-    const scrollUuid = `Compendium.${CONFIG.DND5E.sourcePacks.ITEMS}.${CONFIG.DND5E.spellScrollIds[level]}`;
+    let scrollUuid;
+    const id = CONFIG.DND5E.spellScrollIds[level];
+    if ( foundry.data.validators.isValidId(id) ) {
+      scrollUuid = game.packs.get(CONFIG.DND5E.sourcePacks.ITEMS).index.get(id).uuid;
+    } else {
+      scrollUuid = id;
+    }
     const scrollItem = await fromUuid(scrollUuid);
     const scrollData = scrollItem.toObject();
     delete scrollData._id;
@@ -2161,15 +2228,21 @@ export default class Item5e extends Item {
     const scrollIntroEnd = scrollDescription.indexOf(pdel);
     const scrollIntro = scrollDescription.slice(0, scrollIntroEnd + pdel.length);
     const scrollDetails = scrollDescription.slice(scrollIntroEnd + pdel.length);
+    const isConc = properties.includes("concentration");
 
     // Create a composite description from the scroll description and the spell details
-    const desc = `
-      ${scrollIntro}
-      <hr><h3>${itemData.name} (${game.i18n.format("DND5E.LevelNumber", {level})})</h3>
-      ${(components.concentration ? `<p><em>${game.i18n.localize("DND5E.ScrollRequiresConcentration")}</em></p>` : "")}
-      <hr>${description.value}<hr>
-      <h3>${game.i18n.localize("DND5E.ScrollDetails")}</h3><hr>${scrollDetails}
-    `;
+    const desc = [
+      scrollIntro,
+      "<hr>",
+      `<h3>${itemData.name} (${game.i18n.format("DND5E.LevelNumber", {level})})</h3>`,
+      isConc ? `<p><em>${game.i18n.localize("DND5E.ScrollRequiresConcentration")}</em></p>` : null,
+      "<hr>",
+      description.value,
+      "<hr>",
+      `<h3>${game.i18n.localize("DND5E.ScrollDetails")}</h3>`,
+      "<hr>",
+      scrollDetails
+    ].filterJoin("");
 
     // Used a fixed attack modifier and saving throw according to the level of spell scroll.
     if ( ["mwak", "rwak", "msak", "rsak"].includes(actionType) ) {
@@ -2185,12 +2258,19 @@ export default class Item5e extends Item {
     const spellScrollData = foundry.utils.mergeObject(scrollData, {
       name: `${game.i18n.localize("DND5E.SpellScroll")}: ${itemData.name}`,
       img: itemData.img,
+      effects: itemData.effects ?? [],
       system: {
         description: {value: desc.trim()}, source, actionType, activation, duration, target,
-        range, damage, formula, save, level, attackBonus, ability
+        range, damage, formula, save, level, attackBonus, ability, properties
       }
     });
     foundry.utils.mergeObject(spellScrollData, options);
+    spellScrollData.system.properties = [
+      "mgc",
+      ...scrollData.system.properties,
+      ...properties ?? [],
+      ...options.system?.properties ?? []
+    ];
 
     /**
      * A hook event that fires after the item data for a scroll is created but before the item is returned.
@@ -2201,5 +2281,19 @@ export default class Item5e extends Item {
      */
     Hooks.callAll("dnd5e.createScrollFromSpell", spell, spellScrollData);
     return new this(spellScrollData);
+  }
+
+  /* -------------------------------------------- */
+  /*  Migrations & Deprecations                   */
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  static migrateData(source) {
+    source = super.migrateData(source);
+    if ( source.type === "class" ) ClassData._migrateTraitAdvancement(source);
+    else if ( source.type === "backpack" ) ContainerData._migrateWeightlessData(source);
+    else if ( source.type === "equipment" ) EquipmentData._migrateStealth(source);
+    else if ( source.type === "spell" ) SpellData._migrateComponentData(source);
+    return source;
   }
 }

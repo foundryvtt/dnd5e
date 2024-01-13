@@ -16,7 +16,7 @@
 
             <ul class="summary flexrow">
                 <li>
-                    {{lookup config.weaponTypes system.weaponType }}
+                    {{lookup config.weaponTypes system.type.value }}
                 </li>
                 <li>
                     <select name="system.rarity">
@@ -24,8 +24,7 @@
                     </select>
                 </li>
                 <li>
-                    <input type="text" name="system.source.custom" value="{{system.source.custom}}"
-                           placeholder="{{ localize 'DND5E.Source' }}">
+                    {{> "dnd5e.item-source"}}
                 </li>
             </ul>
         </div>
@@ -51,15 +50,15 @@
             {{!-- Weapon Type --}}
             <div class="form-group">
                 <label>{{ localize "DND5E.ItemWeaponType" }}</label>
-                <select name="system.weaponType">
-                    {{selectOptions config.weaponTypes selected=system.weaponType}}
+                <select name="system.type.value">
+                    {{selectOptions config.weaponTypes selected=system.type.value}}
                 </select>
             </div>
 
             <div class="form-group">
                 <label>{{ localize "DND5E.ItemWeaponBase" }}</label>
-                <select name="system.baseItem">
-                    {{selectOptions baseItems selected=system.baseItem blank=""}}
+                <select name="system.type.baseItem">
+                    {{selectOptions baseItems selected=system.type.baseItem blank=""}}
                 </select>
             </div>
 
@@ -96,9 +95,9 @@
             {{!-- Weapon Properties --}}
             <div class="form-group stacked weapon-properties">
                 <label>{{ localize "DND5E.ItemWeaponProperties" }}</label>
-                {{#each config.weaponProperties as |name prop|}}
+                {{#each properties}}
                 <label class="checkbox">
-                    <input type="checkbox" name="system.properties.{{prop}}" {{checked (lookup ../system.properties prop)}}/> {{ name }}
+                    <input type="checkbox" name="system.properties.{{@key}}" {{checked selected}}> {{ label }}
                 </label>
                 {{/each}}
             </div>

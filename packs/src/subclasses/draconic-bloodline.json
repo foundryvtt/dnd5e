@@ -8,7 +8,12 @@
       "chat": "",
       "unidentified": ""
     },
-    "source": "SRD 5.1",
+    "source": {
+      "custom": "",
+      "book": "SRD 5.1",
+      "page": "",
+      "license": "CC-BY-4.0"
+    },
     "identifier": "draconic-bloodline",
     "classIdentifier": "sorcerer",
     "advancement": [
@@ -96,6 +101,21 @@
         "value": {},
         "level": 18,
         "title": "Features"
+      },
+      {
+        "_id": "Gg8rCLE8zNfjpGOV",
+        "type": "Trait",
+        "configuration": {
+          "hint": "",
+          "mode": "default",
+          "allowReplacements": false,
+          "grants": [
+            "languages:exotic:draconic"
+          ],
+          "choices": []
+        },
+        "level": 1,
+        "title": ""
       }
     ],
     "spellcasting": {
@@ -113,10 +133,10 @@
   "_id": "2nadB2MBSHTQ0kcl",
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.1.0",
-    "coreVersion": "10.291",
+    "systemVersion": "2.4.1",
+    "coreVersion": "10.312",
     "createdTime": 1661787234292,
-    "modifiedTime": 1671220973417,
+    "modifiedTime": 1701456215148,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!2nadB2MBSHTQ0kcl"

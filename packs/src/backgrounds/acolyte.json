@@ -8,8 +8,50 @@
       "chat": "",
       "unidentified": ""
     },
-    "source": "SRD 5.1",
+    "source": {
+      "custom": "",
+      "book": "SRD 5.1",
+      "page": "",
+      "license": "CC-BY-4.0"
+    },
     "advancement": [
+      {
+        "_id": "wIwtQfLdf9tJdZNi",
+        "type": "Trait",
+        "configuration": {
+          "hint": "",
+          "mode": "default",
+          "allowReplacements": true,
+          "grants": [
+            "skills:ins",
+            "skills:rel"
+          ],
+          "choices": []
+        },
+        "level": 0,
+        "title": "",
+        "value": {}
+      },
+      {
+        "_id": "9YuEhI3iqUxEfIOk",
+        "type": "Trait",
+        "configuration": {
+          "hint": "",
+          "mode": "default",
+          "allowReplacements": false,
+          "grants": [],
+          "choices": [
+            {
+              "count": 2,
+              "pool": [
+                "languages:*"
+              ]
+            }
+          ]
+        },
+        "level": 0,
+        "title": ""
+      },
       {
         "_id": "6grrnum72rnphzi5",
         "type": "ItemGrant",
@@ -43,10 +85,10 @@
   "_id": "IgJkSnLiLJOWH7eK",
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.1.0",
-    "coreVersion": "10.291",
+    "systemVersion": "2.3.1",
+    "coreVersion": "10.303",
     "createdTime": 1661787234264,
-    "modifiedTime": 1671220972133,
+    "modifiedTime": 1698857222487,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!IgJkSnLiLJOWH7eK"

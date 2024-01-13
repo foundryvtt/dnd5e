@@ -11,7 +11,12 @@
       "chat": "",
       "unidentified": ""
     },
-    "source": "SRD 5.1",
+    "source": {
+      "custom": "",
+      "book": "SRD 5.1",
+      "page": "",
+      "license": "CC-BY-4.0"
+    },
     "activation": {
       "type": "",
       "cost": null,
@@ -22,6 +27,7 @@
       "units": ""
     },
     "cover": null,
+    "crewed": false,
     "target": {
       "value": null,
       "width": null,
@@ -74,45 +80,15 @@
   },
   "flags": {},
   "img": "icons/magic/defensive/illusion-evasion-echo-purple.webp",
-  "effects": [
-    {
-      "_id": "hNWumbfvMxXQI21x",
-      "changes": [
-        {
-          "key": "system.abilities.wis.proficient",
-          "mode": 5,
-          "value": "1",
-          "priority": null
-        }
-      ],
-      "disabled": false,
-      "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
-      },
-      "icon": "icons/magic/defensive/illusion-evasion-echo-purple.webp",
-      "label": "Slippery Mind",
-      "origin": "Item.V4pwFxlwHtNeB4w9",
-      "transfer": true,
-      "flags": {},
-      "tint": null,
-      "sort": 0,
-      "_key": "!items.effects!V4pwFxlwHtNeB4w9.hNWumbfvMxXQI21x"
-    }
-  ],
+  "effects": [],
   "folder": null,
   "sort": 0,
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.1.0",
-    "coreVersion": "10.291",
+    "systemVersion": "2.4.1",
+    "coreVersion": "10.312",
     "createdTime": 1661787234382,
-    "modifiedTime": 1672335217923,
+    "modifiedTime": 1701456020390,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!V4pwFxlwHtNeB4w9"

@@ -139,6 +139,7 @@ export async function preloadHandlebarsTemplates() {
     "systems/dnd5e/templates/items/parts/item-description.hbs",
     "systems/dnd5e/templates/items/parts/item-mountable.hbs",
     "systems/dnd5e/templates/items/parts/item-spellcasting.hbs",
+    "systems/dnd5e/templates/items/parts/item-source.hbs",
     "systems/dnd5e/templates/items/parts/item-summary.hbs",
 
     // Journal Partials
@@ -157,6 +158,23 @@ export async function preloadHandlebarsTemplates() {
   }
 
   return loadTemplates(paths);
+}
+
+/* -------------------------------------------- */
+
+/**
+ * A helper that converts the provided object into a series of `data-` entries.
+ * @param {object} object   Object to convert into dataset entries.
+ * @param {object} options  Handlebars options.
+ * @returns {string}
+ */
+function dataset(object, options) {
+  const entries = [];
+  for ( let [key, value] of Object.entries(object ?? {}) ) {
+    key = key.replace(/[A-Z]+(?![a-z])|[A-Z]/g, (a, b) => (b ? "-" : "") + a.toLowerCase());
+    entries.push(`data-${key}="${value}"`);
+  }
+  return new Handlebars.SafeString(entries.join(" "));
 }
 
 /* -------------------------------------------- */
@@ -187,7 +205,7 @@ function groupedSelectOptions(choices, options) {
     html += `<option value="${name}" ${chosen ? "selected" : ""}>${label}</option>`;
   };
 
-  // Create an group
+  // Create a group
   const group = category => {
     let label = category[labelAttr];
     if ( localize ) game.i18n.localize(label);
@@ -240,6 +258,7 @@ function itemContext(context, options) {
 export function registerHandlebarsHelpers() {
   Handlebars.registerHelper({
     getProperty: foundry.utils.getProperty,
+    "dnd5e-dataset": dataset,
     "dnd5e-groupedSelectOptions": groupedSelectOptions,
     "dnd5e-linkForUuid": linkForUuid,
     "dnd5e-itemContext": itemContext
@@ -281,6 +300,7 @@ export function preLocalize(configKeyPath, { key, keys=[], sort=false }={}) {
 export function performPreLocalization(config) {
   for ( const [keyPath, settings] of Object.entries(_preLocalizationRegistrations) ) {
     const target = foundry.utils.getProperty(config, keyPath);
+    if ( !target ) continue;
     _localizeObject(target, settings.keys);
     if ( settings.sort ) foundry.utils.setProperty(config, keyPath, sortObjectEntries(target, settings.keys[0]));
   }

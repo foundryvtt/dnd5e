@@ -1,14 +1,16 @@
 import Proficiency from "./proficiency.mjs";
+import * as Trait from "./trait.mjs";
+import ScaleValueAdvancement from "../advancement/scale-value.mjs";
+import { SystemDocumentMixin } from "../mixin.mjs";
 import { d20Roll } from "../../dice/dice.mjs";
 import { simplifyBonus } from "../../utils.mjs";
 import ShortRestDialog from "../../applications/actor/short-rest.mjs";
 import LongRestDialog from "../../applications/actor/long-rest.mjs";
-import * as Trait from "./trait.mjs";
 
 /**
  * Extend the base Actor class to implement additional system-specific logic.
  */
-export default class Actor5e extends Actor {
+export default class Actor5e extends SystemDocumentMixin(Actor) {
 
   /**
    * The data source for Actor5e.classes allowing it to be lazily computed.
@@ -122,6 +124,7 @@ export default class Actor5e extends Actor {
   /** @inheritDoc */
   applyActiveEffects() {
     this._prepareScaleValues();
+    if ( this.system?.prepareEmbeddedData instanceof Function ) this.system.prepareEmbeddedData();
     // The Active Effects do not have access to their parent at preparation time, so we wait until this stage to
     // determine whether they are suppressed or not.
     this.effects.forEach(e => e.determineSuppression());
@@ -234,9 +237,8 @@ export default class Actor5e extends Actor {
    * @protected
    */
   _prepareScaleValues() {
-    this.system.scale = Object.entries(this.classes).reduce((scale, [identifier, cls]) => {
-      scale[identifier] = cls.scaleValues;
-      if ( cls.subclass ) scale[cls.subclass.identifier] = cls.subclass.scaleValues;
+    this.system.scale = this.items.reduce((scale, item) => {
+      if ( ScaleValueAdvancement.metadata.validItemTypes.has(item.type) ) scale[item.identifier] = item.scaleValues;
       return scale;
     }, {});
   }
@@ -467,9 +469,8 @@ export default class Actor5e extends Actor {
     // Identify Equipped Items
     const armorTypes = new Set(Object.keys(CONFIG.DND5E.armorTypes));
     const {armors, shields} = this.itemTypes.equipment.reduce((obj, equip) => {
-      const armor = equip.system.armor;
-      if ( !equip.system.equipped || !armorTypes.has(armor?.type) ) return obj;
-      if ( armor.type === "shield" ) obj.shields.push(equip);
+      if ( !equip.system.equipped || !armorTypes.has(equip.type.value) ) return obj;
+      if ( equip.system.type.value === "shield" ) obj.shields.push(equip);
       else obj.armors.push(equip);
       return obj;
     }, {armors: [], shields: []});
@@ -495,7 +496,7 @@ export default class Actor5e extends Actor {
             message: game.i18n.localize("DND5E.WarnMultipleArmor"), type: "warning"
           });
           const armorData = armors[0].system.armor;
-          const isHeavy = armorData.type === "heavy";
+          const isHeavy = armors[0].system.type.value === "heavy";
           ac.armor = armorData.value ?? ac.armor;
           ac.dex = isHeavy ? 0 : Math.min(armorData.dex ?? Infinity, this.system.abilities.dex?.mod ?? 0);
           ac.equippedArmor = armors[0];
@@ -583,7 +584,7 @@ export default class Actor5e extends Actor {
    * @protected
    */
   _prepareHitPoints(rollData) {
-    if ( this.type !== "character" || (this.system._source.attributes.hp.max !== null) ) return;
+    if ( this.type !== "character" || (this.system.attributes.hp.max !== null) ) return;
     const hp = this.system.attributes.hp;
 
     const abilityId = CONFIG.DND5E.hitPointsAbility || "con";
@@ -838,7 +839,8 @@ export default class Actor5e extends Actor {
 
   /** @inheritdoc */
   async _preCreate(data, options, user) {
-    await super._preCreate(data, options, user);
+    if ( (await super._preCreate(data, options, user)) === false ) return false;
+
     const sourceId = this.getFlag("core", "sourceId");
     if ( sourceId?.startsWith("Compendium.") ) return;
 
@@ -859,7 +861,7 @@ export default class Actor5e extends Actor {
 
   /** @inheritdoc */
   async _preUpdate(changed, options, user) {
-    await super._preUpdate(changed, options, user);
+    if ( (await super._preUpdate(changed, options, user)) === false ) return false;
 
     // Apply changes in Actor size to Token width/height
     if ( "size" in (this.system.traits || {}) ) {
@@ -1134,12 +1136,16 @@ export default class Actor5e extends Actor {
       data.toolBonus = bonus.join(" + ");
     }
 
+    // Reliable Talent applies to any tool check we have full or better proficiency in
+    const reliableTalent = (prof?.multiplier >= 1 && this.getFlag("dnd5e", "reliableTalent"));
+
     const flavor = game.i18n.format("DND5E.ToolPromptTitle", {tool: Trait.keyLabel(toolId, {trait: "tool"}) ?? ""});
     const rollData = foundry.utils.mergeObject({
       data, flavor,
       title: `${flavor}: ${this.name}`,
       chooseModifier: true,
       halflingLucky: this.getFlag("dnd5e", "halflingLucky"),
+      reliableTalent,
       messageData: {
         speaker: options.speaker || ChatMessage.implementation.getSpeaker({actor: this}),
         "flags.dnd5e.roll": {type: "tool", toolId}
@@ -1587,13 +1593,14 @@ export default class Actor5e extends Actor {
     // Temporarily cache the configured roll and use it to roll initiative for the Actor
     this._cachedInitiativeRoll = roll;
     await this.rollInitiative({createCombatants: true});
-    delete this._cachedInitiativeRoll;
   }
 
   /* -------------------------------------------- */
 
   /** @inheritdoc */
-  async rollInitiative(options={}) {
+  async rollInitiative(options={}, rollOptions={}) {
+    this._cachedInitiativeRoll ??= this.getInitiativeRoll(rollOptions);
+
     /**
      * A hook event that fires before initiative is rolled for an Actor.
      * @function dnd5e.preRollInitiative
@@ -1601,7 +1608,10 @@ export default class Actor5e extends Actor {
      * @param {Actor5e} actor  The Actor that is rolling initiative.
      * @param {D20Roll} roll   The initiative roll.
      */
-    if ( Hooks.call("dnd5e.preRollInitiative", this, this._cachedInitiativeRoll) === false ) return;
+    if ( Hooks.call("dnd5e.preRollInitiative", this, this._cachedInitiativeRoll) === false ) {
+      delete this._cachedInitiativeRoll;
+      return null;
+    }
 
     const combat = await super.rollInitiative(options);
     const combatants = this.isToken ? this.getActiveTokens(false, true).reduce((arr, t) => {
@@ -1618,6 +1628,7 @@ export default class Actor5e extends Actor {
      * @param {Combatant[]} combatants  The associated Combatants in the Combat.
      */
     Hooks.callAll("dnd5e.rollInitiative", this, combatants);
+    delete this._cachedInitiativeRoll;
     return combat;
   }
 
@@ -2195,7 +2206,7 @@ export default class Actor5e extends Actor {
       }
 
       // Items that roll to gain charges on a new day
-      if ( recoverDailyUses && uses?.recovery && (uses?.per === "charges") ) {
+      if ( recoverDailyUses && uses?.recovery && (uses?.per in CONFIG.DND5E.limitedUseFormulaPeriods) ) {
         const roll = new Roll(uses.recovery, item.getRollData());
         if ( recoverLongRestUses && (game.settings.get("dnd5e", "restVariant") === "gritty") ) {
           roll.alter(7, 0, {multiplyNumeric: true});
@@ -2661,7 +2672,7 @@ export default class Actor5e extends Actor {
       localizedType = typeData.custom;
     } else {
       let code = CONFIG.DND5E.creatureTypes[typeData.value];
-      localizedType = game.i18n.localize(typeData.swarm ? `${code}Pl` : code);
+      localizedType = game.i18n.localize(typeData.swarm ? code.plural : code.label);
     }
     let type = localizedType;
     if ( typeData.swarm ) {

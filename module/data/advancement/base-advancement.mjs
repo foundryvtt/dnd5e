@@ -25,7 +25,7 @@ export default class BaseAdvancement extends SparseDataModel {
       configuration: new AdvancementDataField(this, {required: true}),
       value: new AdvancementDataField(this, {required: true}),
       level: new foundry.data.fields.NumberField({
-        integer: true, initial: this.metadata?.multiLevel ? undefined : 1, min: 0, label: "DND5E.Level"
+        integer: true, initial: this.metadata?.multiLevel ? undefined : 0, min: 0, label: "DND5E.Level"
       }),
       title: new foundry.data.fields.StringField({initial: undefined, label: "DND5E.AdvancementCustomTitle"}),
       icon: new foundry.data.fields.FilePathField({

@@ -39,21 +39,27 @@ export function actorKeyPath(trait) {
 /**
  * Get the current trait values for the provided actor.
  * @param {Actor5e} actor  Actor from which to retrieve the values.
- * @param {string} trait          Trait as defined in `CONFIG.DND5E.traits`.
+ * @param {string} trait   Trait as defined in `CONFIG.DND5E.traits`.
  * @returns {Object<number>}
  */
-export function actorValues(actor, trait) {
+export async function actorValues(actor, trait) {
   const keyPath = actorKeyPath(trait);
   const data = foundry.utils.getProperty(actor, keyPath);
   if ( !data ) return {};
   const values = {};
+  const traitChoices = await choices(trait, {prefixed: true});
+
+  const setValue = (k, v) => {
+    const result = traitChoices.find(k);
+    if ( result ) values[result[0]] = v;
+  };
 
   if ( ["skills", "tool"].includes(trait) ) {
-    Object.entries(data).forEach(([k, d]) => values[`${trait}:${k}`] = d.value);
+    Object.entries(data).forEach(([k, d]) => setValue(k, d.value));
   } else if ( trait === "saves" ) {
-    Object.entries(data).forEach(([k, d]) => values[`${trait}:${k}`] = d.proficient);
+    Object.entries(data).forEach(([k, d]) => setValue(k, d.proficient));
   } else {
-    data.value.forEach(v => values[`${trait}:${v}`] = 1);
+    data.value.forEach(v => setValue(v, 1));
   }
 
   return values;
@@ -78,7 +84,7 @@ export function changeKeyPath(key, trait) {
 
   if ( trait === "saves" ) {
     return `${keyPath}.${split.pop()}.proficient`;
-  } else if ( ["skills", "tools"].includes(trait) ) {
+  } else if ( ["skills", "tool"].includes(trait) ) {
     return `${keyPath}.${split.pop()}.value`;
   } else {
     return `${keyPath}.value`;
@@ -91,8 +97,8 @@ export function changeKeyPath(key, trait) {
 
 /**
  * Build up a trait structure containing all of the children gathered from config & base items.
- * @param {string} trait  Trait as defined in `CONFIG.DND5E.traits`.
- * @returns {object}      Object with trait categories and children.
+ * @param {string} trait       Trait as defined in `CONFIG.DND5E.traits`.
+ * @returns {Promise<object>}  Object with trait categories and children.
  */
 export async function categories(trait) {
   const traitConfig = CONFIG.DND5E.traits[trait];
@@ -110,7 +116,6 @@ export async function categories(trait) {
   }
 
   if ( traitConfig.subtypes ) {
-    const keyPath = `system.${traitConfig.subtypes.keyPath}`;
     const map = CONFIG.DND5E[`${trait}ProficienciesMap`];
 
     // Merge all ID lists together
@@ -130,7 +135,7 @@ export async function categories(trait) {
       if ( !index ) continue;
 
       // Get the proper subtype, using proficiency map if needed
-      let type = foundry.utils.getProperty(index, keyPath);
+      let type = index.system.type.value;
       if ( map?.[type] ) type = map[type];
 
       // No category for this type, add at top level
@@ -156,7 +161,7 @@ export async function categories(trait) {
  * @param {Set<string>} [options.chosen=[]]   Optional list of keys to be marked as chosen.
  * @param {boolean} [options.prefixed=false]  Should keys be prefixed with trait type?
  * @param {boolean} [options.any=false]       Should the "Any" option be added to each category?
- * @returns {SelectChoices}                   Object mapping proficiency ids to choice objects.
+ * @returns {Promise<SelectChoices>}          Object mapping proficiency ids to choice objects.
  */
 export async function choices(trait, { chosen=new Set(), prefixed=false, any=false }={}) {
   const traitConfig = CONFIG.DND5E.traits[trait];
@@ -173,14 +178,14 @@ export async function choices(trait, { chosen=new Set(), prefixed=false, any=fal
     };
   }
 
-  const prepareCategory = (key, data, result, prefix) => {
+  const prepareCategory = (key, data, result, prefix, topLevel=false) => {
     let label = _innerLabel(data, traitConfig);
     if ( !label ) label = key;
     if ( prefixed ) key = `${prefix}:${key}`;
     result[key] = {
       label: game.i18n.localize(label),
       chosen: chosen.has(key),
-      sorting: traitConfig.sortCategories === true
+      sorting: topLevel ? traitConfig.sortCategories === true : true
     };
     if ( data.children ) {
       const children = result[key].children = {};
@@ -195,7 +200,7 @@ export async function choices(trait, { chosen=new Set(), prefixed=false, any=fal
     }
   };
 
-  Object.entries(categoryData).forEach(([k, v]) => prepareCategory(k, v, result, trait));
+  Object.entries(categoryData).forEach(([k, v]) => prepareCategory(k, v, result, trait, true));
 
   return new SelectChoices(result).sort();
 }
@@ -206,7 +211,7 @@ export async function choices(trait, { chosen=new Set(), prefixed=false, any=fal
  * Prepare an object with all possible choices from a set of keys. These choices will be grouped by
  * trait type if more than one type is present.
  * @param {Set<string>} keys  Prefixed trait keys.
- * @returns {SelectChoices}
+ * @returns {Promise<SelectChoices>}
  */
 export async function mixedChoices(keys) {
   if ( !keys.size ) return new SelectChoices();
@@ -263,8 +268,19 @@ export function getBaseItem(identifier, { indexOnly=false, fullItem=false }={}) 
   if ( !packObject ) return;
 
   // Build the extended index and return a promise for the data
-  const promise = packObject.getIndex({ fields: traitIndexFields() }).then(index => {
+  const fields = traitIndexFields();
+  const promise = packObject.getIndex({ fields }).then(index => {
     const store = index.reduce((obj, entry) => {
+      for ( const field of fields ) {
+        const val = foundry.utils.getProperty(entry, field);
+        if ( (field !== "system.type.value") && (val !== undefined) ) {
+          foundry.utils.setProperty(entry, "system.type.value", val);
+          foundry.utils.logCompatibilityWarning(
+            `The '${field}' property has been deprecated in favor of a standardized \`system.type.value\` property.`,
+            { since: "DnD5e 2.5", until: "DnD5e 2.7", once: true }
+          );
+        }
+      }
       obj[entry._id] = entry;
       return obj;
     }, {});
@@ -283,7 +299,7 @@ export function getBaseItem(identifier, { indexOnly=false, fullItem=false }={}) 
  * @protected
  */
 export function traitIndexFields() {
-  const fields = [];
+  const fields = ["system.type.value"];
   for ( const traitConfig of Object.values(CONFIG.DND5E.traits) ) {
     if ( !traitConfig.subtypes ) continue;
     fields.push(`system.${traitConfig.subtypes.keyPath}`);
@@ -372,6 +388,7 @@ export function keyLabel(key, config={}) {
   if ( !trait ) trait = parts.shift();
   const traitConfig = CONFIG.DND5E.traits[trait];
   if ( !traitConfig ) return key;
+  const traitData = CONFIG.DND5E[traitConfig.configKey ?? trait] ?? {};
   let categoryLabel = game.i18n.localize(`${traitConfig.labels.localization}.${
     pluralRules.select(count ?? 1)}`);
 
@@ -383,8 +400,11 @@ export function keyLabel(key, config={}) {
   if ( lastKey === "*" ) {
     let type;
     if ( parts.length ) {
-      const category = CONFIG.DND5E[traitConfig.configKey ?? trait]?.[parts.pop()];
-      if ( !category ) return key;
+      let category = traitData;
+      do {
+        category = (category.children ?? category)[parts.shift()];
+        if ( !category ) return key;
+      } while ( parts.length );
       type = _innerLabel(category, traitConfig);
     } else type = categoryLabel.toLowerCase();
     const localization = `DND5E.TraitConfigChoose${final ? "Other" : `Any${count ? "Counted" : "Uncounted"}`}`;
@@ -393,7 +413,7 @@ export function keyLabel(key, config={}) {
 
   else {
     // Category (e.g. "Gaming Sets")
-    const category = CONFIG.DND5E[traitConfig.configKey ?? trait]?.[lastKey];
+    const category = traitData[lastKey];
     if ( category ) return _innerLabel(category, traitConfig);
 
     // Child (e.g. "Land Vehicle")
@@ -410,9 +430,20 @@ export function keyLabel(key, config={}) {
       if ( index ) return index.name;
       break;
     }
-  }
 
-  return key;
+    // Explicit categories (e.g. languages)
+    const searchCategory = (data, key) => {
+      for ( const [k, v] of Object.entries(data) ) {
+        if ( k === key ) return v;
+        if ( v.children ) {
+          const result = searchCategory(v.children, key);
+          if ( result ) return result;
+        }
+      }
+    };
+    const config = searchCategory(traitData, lastKey);
+    return config ? _innerLabel(config, traitConfig) : key;
+  }
 }
 
 /* -------------------------------------------- */
@@ -481,9 +512,8 @@ export function choiceLabel(choice, { only=false, final=false }={}) {
 /**
  * Create a human readable description of trait grants & choices.
  * @param {object} config
- * @param {Set<string>} [config.grants]                              Guaranteed trait grants.
- * @param {TraitChoice[]} [config.choices=[]]                        Trait choices.
- * @param {"inclusive"|"exclusive"} [config.choiceMode="inclusive"]  Choice mode.
+ * @param {Set<string>} [config.grants]        Guaranteed trait grants.
+ * @param {TraitChoice[]} [config.choices=[]]  Trait choices.
  * @returns {string}
  *
  * @example
@@ -497,27 +527,13 @@ export function choiceLabel(choice, { only=false, final=false }={}) {
  * @example
  * // Returns "Choose any skill proficiency"
  * localizedList({ choices: [{ count: 1, pool: new Set(["skills:*"])}] });
- *
- * @example
- * // Returns "Choose any 2 languages or any 1 skill proficiency"
- * localizedList({ choices: [
- *   {count: 2, pool: new Set(["languages:*"])}, { count: 1, pool: new Set(["skills:*"])}
- * ], choiceMode: "exclusive" });
  */
-export function localizedList({ grants=new Set(), choices=[], choiceMode="inclusive" }) {
-  const choiceSections = [];
+export function localizedList({ grants=new Set(), choices=[] }) {
+  const sections = Array.from(grants).map(g => keyLabel(g));
 
   for ( const [index, choice] of choices.entries() ) {
-    const final = choiceMode === "exclusive" ? false : index === choices.length - 1;
-    choiceSections.push(choiceLabel(choice, { final, only: !grants.size && choices.length === 1 }));
-  }
-
-  let sections = Array.from(grants).map(g => keyLabel(g));
-  if ( choiceMode === "inclusive" ) {
-    sections = sections.concat(choiceSections);
-  } else if ( choiceSections.length ) {
-    const formatter = new Intl.ListFormat(game.i18n.lang, { style: "long", type: "disjunction" });
-    sections.push(formatter.format(choiceSections));
+    const final = index === choices.length - 1;
+    sections.push(choiceLabel(choice, { final, only: !grants.size && choices.length === 1 }));
   }
 
   const listFormatter = new Intl.ListFormat(game.i18n.lang, { style: "long", type: "conjunction" });

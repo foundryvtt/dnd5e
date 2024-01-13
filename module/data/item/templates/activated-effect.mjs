@@ -66,7 +66,8 @@ export default class ActivatedEffectTemplate extends SystemDataModel {
         target: new foundry.data.fields.StringField({
           required: true, nullable: true, initial: null, label: "DND5E.ConsumeTarget"
         }),
-        amount: new foundry.data.fields.NumberField({required: true, integer: true, label: "DND5E.ConsumeAmount"})
+        amount: new foundry.data.fields.NumberField({required: true, integer: true, label: "DND5E.ConsumeAmount"}),
+        scale: new foundry.data.fields.BooleanField({label: "DND5E.ConsumeScaling"})
       }, {label: "DND5E.ConsumeTitle"})
     };
   }
@@ -213,16 +214,6 @@ export default class ActivatedEffectTemplate extends SystemDataModel {
   /* -------------------------------------------- */
 
   /**
-   * Is this Item an activatable item?
-   * @type {boolean}
-   */
-  get isActive() {
-    return !!this.activation.type;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
    * Does the Item have an area of effect target?
    * @type {boolean}
    */
@@ -310,6 +301,16 @@ export default class ActivatedEffectTemplate extends SystemDataModel {
    */
   get hasTarget() {
     return this.isActive && !["", null].includes(this.target.type);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Is this Item an activatable item?
+   * @type {boolean}
+   */
+  get isActive() {
+    return !!this.activation.type;
   }
 
 }

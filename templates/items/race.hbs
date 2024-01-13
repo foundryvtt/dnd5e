@@ -15,7 +15,7 @@
 
       <ul class="summary flexrow">
         <li>
-          <input type="text" name="system.source" value="{{system.source}}" placeholder="{{localize 'DND5E.Source'}}">
+          {{> "dnd5e.item-source"}}
         </li>
       </ul>
     </div>
@@ -65,7 +65,7 @@
         </ol>
       </div>
 
-      {{editor descriptionHTML target="system.description.value" button=true editable=editable
+      {{editor enriched.description target="system.description.value" button=true editable=editable
                engine="prosemirror" collaborate=false}}
     </div>
 

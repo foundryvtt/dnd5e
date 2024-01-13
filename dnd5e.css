@@ -652,6 +652,7 @@ h5 {
   font-size: 12px;
   line-height: 20px;
   font-weight: normal;
+  align-items: baseline;
 }
 .actor-type label.radio > input[type="radio"] {
   margin: 0 5px 0 0;
@@ -738,14 +739,23 @@ h5 {
 .accordion {
   transition: margin-bottom 500ms ease;
 }
-.accordion.collapsed {
-  margin-bottom: 0.5rem;
-}
 .accordion.collapsed > .accordion-content {
   height: 0;
 }
+.accordion-indicator {
+  display: none;
+  transition: transform 500ms ease;
+}
+.accordion .accordion-indicator {
+  display: inherit;
+  transform: rotate(0deg);
+}
+.accordion.collapsed .accordion-indicator {
+  transform: rotate(-90deg);
+}
 .accordion-heading {
   cursor: pointer;
+  position: relative;
 }
 .accordion-content {
   overflow: hidden;
@@ -1212,6 +1222,7 @@ h5 {
 }
 .dnd5e.sheet.actor .inventory-list .item .item-name {
   cursor: pointer;
+  flex: auto;
 }
 .dnd5e.sheet.actor .inventory-list .item .item-name.rollable:hover .item-image {
   background-image: url("../../icons/svg/d20-grey.svg") !important;
@@ -1440,6 +1451,9 @@ h5 {
   /*  Scale Value                              */
   /* ----------------------------------------- */
   /* ----------------------------------------- */
+  /*  Size                                     */
+  /* ----------------------------------------- */
+  /* ----------------------------------------- */
   /*  Traits                                   */
   /* ----------------------------------------- */
 }
@@ -1528,6 +1542,10 @@ h5 {
   margin-block: 0.5em 0;
   padding: 0;
   font-size: var(--font-size-18);
+}
+.dnd5e.advancement form[data-type="AbilityScoreImprovement"] .ability-scores > label > .cap {
+  margin-block: 0;
+  font-size: var(--font-size-13);
 }
 .dnd5e.advancement form[data-type="AbilityScoreImprovement"] .ability-scores li {
   display: grid;
@@ -1618,6 +1636,19 @@ h5 {
 }
 .dnd5e.advancement.scale-value select option[value=""] {
   color: var(--color-text-light-6);
+}
+.dnd5e.advancement.size textarea {
+  flex: 1 0 100%;
+}
+.dnd5e.advancement.size .trait-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.25rem;
+  padding: 0;
+  list-style: none;
+}
+.dnd5e.advancement.size .trait-list li {
+  flex: 1 1 40%;
 }
 .dnd5e.advancement.traits {
   --grid-two-column-right-size: 0.6fr;
@@ -1743,6 +1774,36 @@ h5 {
 .dnd5e.advancement.flow form[data-type="ScaleValue"] span.none {
   font-style: italic;
 }
+.dnd5e.advancement.flow form[data-type="Trait"] select {
+  min-width: min(20em, 100%);
+  margin-block-end: 0.25em;
+}
+.dnd5e.advancement.flow form[data-type="Trait"] .trait-slots {
+  counter-reset: trait-list;
+  list-style: none;
+  padding: 0;
+}
+.dnd5e.advancement.flow form[data-type="Trait"] .trait-slot {
+  min-height: 30px;
+  align-items: center;
+  font-size: var(--font-size-14);
+}
+.dnd5e.advancement.flow form[data-type="Trait"] .trait-slot::before {
+  counter-increment: trait-list;
+  content: counter(trait-list);
+  width: 2em;
+  text-align: center;
+  font-size: var(--font-size-16);
+}
+.dnd5e.advancement.flow form[data-type="Trait"] .trait-slot a {
+  flex: 0;
+  padding-inline-end: 0.5em;
+}
+.dnd5e.advancement.flow form[data-type="Size"] select {
+  width: 100%;
+  font-size: var(--font-size-16);
+  height: 2em;
+}
 .dnd5e.advancement.flow nav {
   display: flex;
   justify-content: flex-end;
@@ -1797,6 +1858,27 @@ h5 {
   padding: 0 0.25em;
   text-align: right;
 }
+.dnd5e.sheet.item .sheet-header .summary li {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.25em;
+}
+.dnd5e.sheet.item .sheet-header .summary li span {
+  padding-inline: 4px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: 400;
+}
+.dnd5e.sheet.item .sheet-header .summary li .config-button {
+  display: none;
+  font-size: var(--font-size-14);
+  font-weight: normal;
+  padding-inline-end: 0.25em;
+}
+.dnd5e.sheet.item .sheet-header .summary li:hover .config-button {
+  display: block;
+}
 .dnd5e.sheet.item .sheet-navigation {
   margin-bottom: 5px;
 }
@@ -1812,9 +1894,11 @@ h5 {
 }
 .dnd5e.sheet.item .sheet-body .item-properties {
   flex: 0 0 120px;
-  margin: 5px 5px 5px 0;
-  padding-right: 5px;
+  margin: 0 5px 0 0;
+  padding: 5px 5px 0 0;
   border-right: 2px groove #eeede0;
+  overflow: hidden auto;
+  height: 100%;
 }
 .dnd5e.sheet.item .sheet-body .item-properties .form-group {
   margin: 0;
@@ -1866,13 +1950,20 @@ h5 {
 .dnd5e.sheet.item [data-tab="description"] .item-description .description-header {
   display: flex;
   align-items: first baseline;
-  justify-content: space-between;
+  gap: 0.5em;
   margin-block-end: 0;
   padding: 0.25rem;
   background-color: rgba(0, 0, 0, 0.05);
 }
 .dnd5e.sheet.item [data-tab="description"] .item-description .description-header .description-edit {
+  margin-inline-start: auto;
   opacity: 20%;
+}
+.dnd5e.sheet.item [data-tab="description"] .item-description .description-header .description-edit .fa-solid.fa-edit {
+  position: absolute;
+  inset-block: 0;
+  inset-inline-end: 0;
+  padding: 6px;
 }
 .dnd5e.sheet.item [data-tab="description"] .item-description .description-header:hover .description-edit {
   opacity: 100%;
@@ -1884,11 +1975,22 @@ h5 {
   height: auto;
   padding-inline: 0.25rem;
 }
+.dnd5e.sheet.item [data-tab="description"] .item-description .accordion {
+  margin-block-end: 0.5rem;
+}
+.dnd5e.sheet.item [data-tab="description"] .item-description .accordion p:last-child {
+  margin-block-end: 0;
+}
 .dnd5e.sheet.item [data-tab="description"] .item-description .accordion.collapsed > .editor.accordion-content {
   height: 0;
 }
 .dnd5e.sheet.item [data-tab="description"] .item-description .editor.accordion-content > .editor-content {
   overflow: hidden;
+}
+.dnd5e.sheet.item [data-tab="description"] .item-description .accordion-indicator {
+  align-self: center;
+  opacity: 0.5;
+  font-size: 0.75em;
 }
 .dnd5e.sheet.item .details input[type="text"],
 .dnd5e.sheet.item .details input[type="number"],
@@ -2253,17 +2355,30 @@ h5 {
 /* ----------------------------------------- */
 /*  Inline Roll Actions                      */
 /* ----------------------------------------- */
-a.roll-link {
+.roll-link a {
   background: #DDD;
   padding: 1px 4px;
   border: 1px solid var(--color-border-dark-tertiary);
-  border-radius: 2px;
   white-space: nowrap;
   word-break: break-all;
 }
-a.roll-link i {
+.roll-link a:first-child {
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+.roll-link a:last-child {
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
+.roll-link a i {
   color: var(--color-text-dark-inactive);
   margin-inline-end: 0.25em;
+}
+.roll-link a[data-action="request"] {
+  padding-inline-end: 1px;
+}
+.roll-link a + a {
+  margin-inline-start: 2px;
 }
 /* ----------------------------------------- */
 /*  Basic Structure                          */
@@ -2454,29 +2569,56 @@ a.roll-link i {
 .dnd5e.sheet.actor.npc .summary {
   font-size: 18px;
 }
-.dnd5e.sheet.actor.npc .summary .creature-type {
+.dnd5e.sheet.actor.npc .summary li {
   display: flex;
   justify-content: space-between;
-  width: 1em;
-  padding: 0 3px;
+  gap: 0.25em;
 }
-.dnd5e.sheet.actor.npc .summary .creature-type span {
+.dnd5e.sheet.actor.npc .summary li span {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-.dnd5e.sheet.actor.npc .summary .creature-type .config-button {
+.dnd5e.sheet.actor.npc .summary li .config-button {
   display: none;
   font-size: 12px;
   font-weight: normal;
   line-height: 2em;
 }
-.dnd5e.sheet.actor.npc .summary .creature-type:hover .config-button {
+.dnd5e.sheet.actor.npc .summary li:hover .config-button {
   display: block;
+}
+.dnd5e.sheet.actor.npc .summary .creature-type {
+  width: 1em;
+  padding: 0 3px;
+}
+.dnd5e.sheet.actor.npc .summary .source {
+  width: 1em;
 }
 .dnd5e.sheet.actor.vehicle {
   min-width: 720px;
   min-height: 680px;
+}
+.dnd5e.sheet.actor.vehicle .source {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.25em;
+}
+.dnd5e.sheet.actor.vehicle .source span {
+  padding-inline: 4px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.dnd5e.sheet.actor.vehicle .source .config-button {
+  display: none;
+  font-size: var(--font-size-11);
+  font-weight: normal;
+  padding-inline-end: 0.25em;
+}
+.dnd5e.sheet.actor.vehicle .source:hover .config-button {
+  display: block;
+  margin-block-start: -5px;
 }
 .dnd5e.sheet.actor.vehicle .features .item-controls {
   flex: 0 0 68px;

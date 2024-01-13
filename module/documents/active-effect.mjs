@@ -45,6 +45,14 @@ export default class ActiveEffect5e extends ActiveEffect {
 
   /* --------------------------------------------- */
 
+  /** @inheritdoc */
+  _applyUpgrade(actor, change, current, delta, changes) {
+    if ( current === null ) return this._applyOverride(actor, change, current, delta, changes);
+    return super._applyUpgrade(actor, change, current, delta, changes);
+  }
+
+  /* --------------------------------------------- */
+
   /**
    * Transform the data type of the change to match the type expected for flags.
    * @param {Actor5e} actor            The Actor to whom this effect should be applied.
@@ -81,17 +89,22 @@ export default class ActiveEffect5e extends ActiveEffect {
    */
   determineSuppression() {
     this.isSuppressed = false;
-    if ( this.disabled || (this.parent.documentName !== "Actor") ) return;
-    const parts = this.origin?.split(".") ?? [];
-    const [parentType, parentId, documentType, documentId, syntheticItem, syntheticItemId] = parts;
+    if ( this.disabled || (this.parent.documentName !== "Actor") || !this.origin ) return;
+    // Deliberately avoiding using fromUuidSync here, see: https://github.com/foundryvtt/dnd5e/pull/1980
+    const parsed = game.dnd5e.isV10 ? _parseUuid(this.origin) : parseUuid(this.origin);
+    if ( !parsed ) return;
+    const { collection, documentId: parentId, embedded } = parsed;
     let item;
     // Case 1: This is a linked or sidebar actor
-    if ( parentType === "Actor" ) {
+    if ( collection === game.actors ) {
+      const [documentType, documentId] = embedded;
       if ( (parentId !== this.parent.id) || (documentType !== "Item") ) return;
       item = this.parent.items.get(documentId);
     }
     // Case 2: This is a synthetic actor on the scene
-    else if ( parentType === "Scene" ) {
+    else if ( collection === game.scenes ) {
+      if ( embedded.length > 4 ) embedded.splice(2, 2);
+      const [, documentId, syntheticItem, syntheticItemId] = embedded;
       if ( (documentId !== this.parent.token?.id) || (syntheticItem !== "Item") ) return;
       item = this.parent.items.get(syntheticItemId);
     }

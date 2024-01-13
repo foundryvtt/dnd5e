@@ -63,10 +63,10 @@
             {{#select (lookup this "1")}}
                 <option value="">{{ localize "DND5E.None" }}</option>
                 <optgroup label="{{localize 'DND5E.Damage'}}">
-                    {{selectOptions @root.config.damageTypes}}
+                    {{selectOptions @root.config.damageTypes labelAttr="label"}}
                 </optgroup>
                 <optgroup label="{{localize 'DND5E.Healing'}}">
-                    {{selectOptions @root.config.healingTypes}}
+                    {{selectOptions @root.config.healingTypes labelAttr="label"}}
                 </optgroup>
             {{/select}}
         </select>

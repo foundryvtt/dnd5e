@@ -48,12 +48,13 @@ export default class Accordion {
    * Augment the given markup with an accordion effect.
    * @param {HTMLElement} root  The root HTML node.
    */
-  async bind(root) {
+  bind(root) {
     const firstBind = this.#sections.size < 1;
     if ( firstBind ) this.#collapsed = [];
     this.#sections = new Map();
     this.#ongoing = new Map();
     const { headingSelector, contentSelector } = this.#config;
+    let collapsedIndex = 0;
     for ( const heading of root.querySelectorAll(headingSelector) ) {
       const content = heading.querySelector(contentSelector) ?? heading.parentElement.querySelector(contentSelector);
       if ( !content ) continue;
@@ -62,13 +63,15 @@ export default class Accordion {
       heading.before(wrapper);
       wrapper.append(heading, content);
       this.#sections.set(heading, content);
+      content._fullHeight = content.getBoundingClientRect().height;
       if ( firstBind ) this.#collapsed.push(this.#collapsed.length > 0);
+      else if ( this.#collapsed[collapsedIndex] ) wrapper.classList.add("collapsed");
       heading.classList.add("accordion-heading");
       content.classList.add("accordion-content");
       heading.addEventListener("click", this._onClickHeading.bind(this));
+      collapsedIndex++;
     }
-    await new Promise(resolve => { setTimeout(resolve, 0); }); // Allow re-paint.
-    this._restoreCollapsedState();
+    requestAnimationFrame(() => this._restoreCollapsedState());
   }
 
   /* -------------------------------------------- */
@@ -99,7 +102,7 @@ export default class Accordion {
    * @param {boolean} [options.animate=true]  Whether to animate the expand effect.
    * @protected
    */
-  async _onExpandSection(heading, content, { animate=true }={}) {
+  _onExpandSection(heading, content, { animate=true }={}) {
     this.#cancelOngoing(heading);
 
     if ( this.#config.collapseOthers ) {
@@ -116,11 +119,12 @@ export default class Accordion {
       content.style.height = `${content._fullHeight}px`;
       return;
     }
-    await new Promise(resolve => { setTimeout(resolve, 0); }); // Allow re-paint.
-    const onEnd = this._onEnd.bind(this, heading, content);
-    this.#ongoing.set(heading, onEnd);
-    content.addEventListener("transitionend", onEnd, { once: true });
-    content.style.height = `${content._fullHeight}px`;
+    requestAnimationFrame(() => {
+      const onEnd = this._onEnd.bind(this, heading, content);
+      this.#ongoing.set(heading, onEnd);
+      content.addEventListener("transitionend", onEnd, { once: true });
+      content.style.height = `${content._fullHeight}px`;
+    });
   }
 
   /* -------------------------------------------- */
@@ -133,21 +137,22 @@ export default class Accordion {
    * @param {boolean} [options.animate=true]  Whether to animate the collapse effect.
    * @protected
    */
-  async _onCollapseSection(heading, content, { animate=true }={}) {
+  _onCollapseSection(heading, content, { animate=true }={}) {
     this.#cancelOngoing(heading);
     const { height } = content.getBoundingClientRect();
     heading.parentElement.classList.add("collapsed");
-    content._fullHeight = height;
+    content._fullHeight = height || content._fullHeight;
     if ( animate ) content.style.height = `${height}px`;
     else {
       content.style.height = "0";
       return;
     }
-    await new Promise(resolve => { setTimeout(resolve, 0); }); // Allow re-paint.
-    const onEnd = this._onEnd.bind(this, heading, content);
-    this.#ongoing.set(heading, onEnd);
-    content.addEventListener("transitionend", onEnd, { once: true });
-    content.style.height = "0";
+    requestAnimationFrame(() => {
+      const onEnd = this._onEnd.bind(this, heading, content);
+      this.#ongoing.set(heading, onEnd);
+      content.addEventListener("transitionend", onEnd, { once: true });
+      content.style.height = "0";
+    });
   }
 
   /* -------------------------------------------- */

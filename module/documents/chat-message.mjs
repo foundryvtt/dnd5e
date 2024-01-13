@@ -8,23 +8,26 @@ export function highlightCriticalSuccessFailure(message, html, data) {
   if ( !message.isRoll || !message.isContentVisible || !message.rolls.length ) return;
 
   // Highlight rolls where the first part is a d20 roll
-  let d20Roll = message.rolls.find(r => {
-    const d0 = r.dice[0];
-    return (d0?.faces === 20) && (d0?.values.length === 1);
-  });
-  if ( !d20Roll ) return;
-  d20Roll = dnd5e.dice.D20Roll.fromRoll(d20Roll);
-  const d = d20Roll.dice[0];
+  for ( let [index, d20Roll] of message.rolls.entries() ) {
 
-  const isModifiedRoll = ("success" in d.results[0]) || d.options.marginSuccess || d.options.marginFailure;
-  if ( isModifiedRoll ) return;
+    const d0 = d20Roll.dice[0];
+    if ( (d0?.faces !== 20) || (d0?.values.length !== 1) ) continue;
 
-  // Highlight successes and failures
-  if ( d20Roll.isCritical ) html.find(".dice-total").addClass("critical");
-  else if ( d20Roll.isFumble ) html.find(".dice-total").addClass("fumble");
-  else if ( d.options.target ) {
-    if ( d20Roll.total >= d.options.target ) html.find(".dice-total").addClass("success");
-    else html.find(".dice-total").addClass("failure");
+    d20Roll = dnd5e.dice.D20Roll.fromRoll(d20Roll);
+    const d = d20Roll.dice[0];
+
+    const isModifiedRoll = ("success" in d.results[0]) || d.options.marginSuccess || d.options.marginFailure;
+    if ( isModifiedRoll ) continue;
+
+    // Highlight successes and failures
+    const total = html.find(".dice-total")[index];
+    if ( !total ) continue;
+    if ( d20Roll.isCritical ) total.classList.add("critical");
+    else if ( d20Roll.isFumble ) total.classList.add("fumble");
+    else if ( d.options.target ) {
+      if ( d20Roll.total >= d.options.target ) total.classList.add("success");
+      else total.classList.add("failure");
+    }
   }
 }
 

@@ -76,12 +76,12 @@
             "bonus": ""
           },
           "movement": {
-            "burrow": 0,
-            "climb": 0,
-            "fly": 0,
-            "swim": 0,
-            "walk": 30,
-            "units": "ft",
+            "burrow": null,
+            "climb": null,
+            "fly": null,
+            "swim": null,
+            "walk": null,
+            "units": null,
             "hover": false
           }
         },
@@ -127,11 +127,11 @@
             "max": 3
           },
           "senses": {
-            "darkvision": 0,
-            "blindsight": 0,
-            "tremorsense": 0,
-            "truesight": 0,
-            "units": "ft",
+            "darkvision": null,
+            "blindsight": null,
+            "tremorsense": null,
+            "truesight": null,
+            "units": null,
             "special": ""
           },
           "spellcasting": "int"
@@ -618,12 +618,6 @@
       "hitDice": "d6",
       "hitDiceUsed": 0,
       "advancement": [],
-      "saves": [],
-      "skills": {
-        "number": 2,
-        "choices": [],
-        "value": []
-      },
       "spellcasting": {
         "progression": "none",
         "ability": ""
@@ -631,7 +625,11 @@
     },
     "consumable": {
       "templates": ["itemDescription", "physicalItem", "activatedEffect", "action"],
-      "consumableType": "potion",
+      "type": {
+        "value": "potion",
+        "subtype": "",
+        "baseItem": ""
+      },
       "uses": {
         "autoDestroy": false
       }
@@ -639,24 +637,28 @@
     "equipment": {
       "templates": ["itemDescription", "physicalItem", "activatedEffect", "action", "mountable"],
       "armor": {
-        "type": "light",
         "value": null,
         "dex": null
       },
-      "baseItem": "",
       "speed": {
         "value": null,
         "conditions": ""
       },
       "strength": null,
       "stealth": false,
+      "type": {
+        "value": "light",
+        "subtype": "",
+        "baseItem": ""
+      },
       "proficient": null
     },
     "feat": {
       "templates": ["itemDescription", "activatedEffect", "action"],
       "type": {
         "value": "",
-        "subtype": ""
+        "subtype": "",
+        "baseItem": ""
       },
       "requirements": "",
       "recharge": {
@@ -669,11 +671,14 @@
     },
     "tool": {
       "templates": ["itemDescription", "physicalItem"],
-      "toolType": "",
-      "baseItem": "",
       "ability": "int",
       "chatFlavor": "",
       "proficient": null,
+      "type": {
+        "value": "",
+        "subtype": "",
+        "baseItem": ""
+      },
       "bonus": ""
     },
     "race": {},
@@ -715,10 +720,13 @@
     },
     "weapon": {
       "templates": ["itemDescription", "physicalItem" ,"activatedEffect", "action", "mountable"],
-      "weaponType": "simpleM",
-      "baseItem": "",
       "properties": {},
-      "proficient": null
+      "proficient": null,
+      "type": {
+        "value": "simpleM",
+        "subtype": "",
+        "baseItem": ""
+      }
     }
   },
   "JournalEntryPage": {

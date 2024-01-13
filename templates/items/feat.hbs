@@ -22,8 +22,7 @@
                     <input type="text" name="system.requirements" value="{{system.requirements}}" placeholder="{{ localize 'DND5E.Requirements' }}"/>
                 </li>
                 <li>
-                    <input type="text" name="system.source.custom" value="{{system.source.custom}}"
-                           placeholder="{{ localize 'DND5E.Source' }}">
+                    {{> "dnd5e.item-source"}}
                 </li>
             </ul>
         </div>
@@ -54,17 +53,27 @@
                 </select>
             </div>
 
-            {{#if featureSubtypes}}
+            {{#if itemSubtypes}}
             <div class="form-group">
                 <label>
                     {{localize "DND5E.ItemFeatureSubtype"
                         category=(lookup (lookup config.featureTypes system.type.value) "label")}}
                 </label>
                 <select name="system.type.subtype">
-                    {{selectOptions featureSubtypes selected=system.type.subtype blank=""}}
+                    {{selectOptions itemSubtypes selected=system.type.subtype blank=""}}
                 </select>
             </div>
             {{/if}}
+
+            {{!-- Feature Properties --}}
+            <div class="feature-properties form-group stacked">
+                <label>{{ localize "DND5E.ItemFeatureProperties" }}</label>
+                {{#each properties}}
+                <label class="checkbox">
+                    <input type="checkbox" name="system.properties.{{@key}}" {{checked selected}}> {{ label }}
+                </label>
+                {{/each}}
+            </div>
 
             <h3 class="form-header">{{ localize "DND5E.FeatureUsage" }}</h3>
 

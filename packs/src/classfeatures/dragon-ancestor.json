@@ -11,7 +11,12 @@
       "chat": "",
       "unidentified": ""
     },
-    "source": "SRD 5.1",
+    "source": {
+      "custom": "",
+      "book": "SRD 5.1",
+      "page": "",
+      "license": "CC-BY-4.0"
+    },
     "activation": {
       "type": "",
       "cost": null,
@@ -22,6 +27,7 @@
       "units": ""
     },
     "cover": null,
+    "crewed": false,
     "target": {
       "value": null,
       "width": null,
@@ -74,45 +80,15 @@
   },
   "flags": {},
   "img": "icons/creatures/abilities/dragon-fire-breath-orange.webp",
-  "effects": [
-    {
-      "_id": "xI5jjbA2Dlj7L0cd",
-      "changes": [
-        {
-          "key": "system.traits.languages.value",
-          "mode": 2,
-          "value": "draconic",
-          "priority": null
-        }
-      ],
-      "disabled": false,
-      "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
-      },
-      "icon": "icons/creatures/abilities/dragon-fire-breath-orange.webp",
-      "label": "Dragon Ancestor",
-      "origin": "Item.EZsonMThTNLZq35j",
-      "transfer": true,
-      "flags": {},
-      "tint": null,
-      "sort": 0,
-      "_key": "!items.effects!EZsonMThTNLZq35j.xI5jjbA2Dlj7L0cd"
-    }
-  ],
+  "effects": [],
   "folder": null,
   "sort": 0,
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.1.0",
-    "coreVersion": "10.291",
+    "systemVersion": "2.4.1",
+    "coreVersion": "10.312",
     "createdTime": 1661787234352,
-    "modifiedTime": 1672334489889,
+    "modifiedTime": 1701456051092,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!EZsonMThTNLZq35j"

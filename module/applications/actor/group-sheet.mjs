@@ -1,13 +1,13 @@
 import ActorMovementConfig from "./movement-config.mjs";
-import ActorSheet5e from "./base-sheet.mjs";
 import Item5e from "../../documents/item.mjs";
+import ActorSheetMixin from "./sheet-mixin.mjs";
 
 /**
  * A character sheet for group-type Actors.
  * The functionality of this sheet is sufficiently different from other Actor types that we extend the base
  * Foundry VTT ActorSheet instead of the ActorSheet5e abstraction used for character, npc, and vehicle types.
  */
-export default class GroupActorSheet extends ActorSheet {
+export default class GroupActorSheet extends ActorSheetMixin(ActorSheet) {
 
   /**
    * IDs for items on the sheet that have been expanded.
@@ -36,7 +36,7 @@ export default class GroupActorSheet extends ActorSheet {
    * A set of item types that should be prevented from being dropped on this type of actor sheet.
    * @type {Set<string>}
    */
-  static unsupportedItemTypes = new Set(["background", "class", "subclass", "feat"]);
+  static unsupportedItemTypes = new Set(["background", "race", "class", "subclass", "feat"]);
 
   /* -------------------------------------------- */
   /*  Context Preparation                         */
@@ -235,11 +235,12 @@ export default class GroupActorSheet extends ActorSheet {
       // Input focus and update
       const inputs = html.find("input");
       inputs.focus(ev => ev.currentTarget.select());
-      inputs.addBack().find('[type="text"][data-dtype="Number"]').change(ActorSheet5e.prototype._onChangeInputDelta.bind(this));
+      inputs.addBack().find('[type="text"][data-dtype="Number"]').change(this._onChangeInputDelta.bind(this));
       html.find(".action-button").click(this._onClickActionButton.bind(this));
       html.find(".item-control").click(this._onClickItemControl.bind(this));
-      html.find(".item .rollable h4").click(event => this._onClickItemName(event));
-      html.find(".item-quantity input, .item-uses input").change(this._onItemPropertyChange.bind(this));
+      html.find(".item .rollable h4").click(event => this._onItemSummary(event));
+      html.find(".item-uses input").change(this._onUsesChange.bind(this));
+      html.find(".item-quantity input").change(this._onQuantityChange.bind(this));
       new ContextMenu(html, ".item-list .item", [], {onOpen: this._onItemContext.bind(this)});
     }
   }
@@ -329,7 +330,7 @@ export default class GroupActorSheet extends ActorSheet {
   _onItemContext(element) {
     const item = this.actor.items.get(element.dataset.itemId);
     if ( !item ) return;
-    ui.context.menuItems = ActorSheet5e.prototype._getItemContextOptions.call(this, item);
+    ui.context.menuItems = this._getItemContextOptions(item);
     Hooks.call("dnd5e.getItemContextOptions", item, ui.context.menuItems);
   }
 
@@ -345,32 +346,6 @@ export default class GroupActorSheet extends ActorSheet {
     const member = event.currentTarget.closest("li.group-member");
     const actor = game.actors.get(member.dataset.actorId);
     if ( actor ) actor.sheet.render(true, {focus: true});
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Handle clicks on an item name to expand its description
-   * @param {PointerEvent} event      The initiating click event
-   * @protected
-   */
-  _onClickItemName(event) {
-    game.system.applications.actor.ActorSheet5e.prototype._onItemSummary.call(this, event);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Change the quantity or limited uses of an Owned Item within the actor.
-   * @param {Event} event        The triggering click event.
-   * @returns {Promise<Item5e>}  Updated item.
-   * @protected
-   */
-  async _onItemPropertyChange(event) {
-    const proto = game.system.applications.actor.ActorSheet5e.prototype;
-    const parent = event.currentTarget.parentElement;
-    if ( parent.classList.contains("item-quantity") ) return proto._onQuantityChange.call(this, event);
-    else if ( parent.classList.contains("item-uses") ) return proto._onUsesChange.call(this, event);
   }
 
   /* -------------------------------------------- */
@@ -427,7 +402,7 @@ export default class GroupActorSheet extends ActorSheet {
     }
 
     // Stack identical consumables
-    const stacked = game.system.applications.actor.ActorSheet5e.prototype._onDropStackConsumables.call(this, itemData);
+    const stacked = this._onDropStackConsumables(itemData);
     if ( stacked ) return false;
 
     return itemData;

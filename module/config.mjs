@@ -390,17 +390,26 @@ preLocalize("timePeriods");
 /* -------------------------------------------- */
 
 /**
+ * Ways in which to activate an item that cannot be labeled with a cost.
+ * @enum {string}
+ */
+DND5E.staticAbilityActivationTypes = {
+  none: "DND5E.NoneActionLabel",
+  special: DND5E.timePeriods.spec
+};
+
+/**
  * Various ways in which an item or ability can be activated.
  * @enum {string}
  */
 DND5E.abilityActivationTypes = {
+  ...DND5E.staticAbilityActivationTypes,
   action: "DND5E.Action",
   bonus: "DND5E.BonusAction",
   reaction: "DND5E.Reaction",
   minute: DND5E.timePeriods.minute,
   hour: DND5E.timePeriods.hour,
   day: DND5E.timePeriods.day,
-  special: DND5E.timePeriods.spec,
   legendary: "DND5E.LegendaryActionLabel",
   mythic: "DND5E.MythicActionLabel",
   lair: "DND5E.LairActionLabel",
@@ -468,25 +477,74 @@ DND5E.tokenHPColors = {
 
 /**
  * Default types of creatures.
- * *Note: Not pre-localized to allow for easy fetching of pluralized forms.*
- * @enum {string}
+ * @enum {{ label: string, plural: string, [detectAlignment]: boolean }}
  */
 DND5E.creatureTypes = {
-  aberration: "DND5E.CreatureAberration",
-  beast: "DND5E.CreatureBeast",
-  celestial: "DND5E.CreatureCelestial",
-  construct: "DND5E.CreatureConstruct",
-  dragon: "DND5E.CreatureDragon",
-  elemental: "DND5E.CreatureElemental",
-  fey: "DND5E.CreatureFey",
-  fiend: "DND5E.CreatureFiend",
-  giant: "DND5E.CreatureGiant",
-  humanoid: "DND5E.CreatureHumanoid",
-  monstrosity: "DND5E.CreatureMonstrosity",
-  ooze: "DND5E.CreatureOoze",
-  plant: "DND5E.CreaturePlant",
-  undead: "DND5E.CreatureUndead"
+  aberration: {
+    label: "DND5E.CreatureAberration",
+    plural: "DND5E.CreatureAberrationPl",
+    detectAlignment: true
+  },
+  beast: {
+    label: "DND5E.CreatureBeast",
+    plural: "DND5E.CreatureBeastPl"
+  },
+  celestial: {
+    label: "DND5E.CreatureCelestial",
+    plural: "DND5E.CreatureCelestialPl",
+    detectAlignment: true
+  },
+  construct: {
+    label: "DND5E.CreatureConstruct",
+    plural: "DND5E.CreatureConstructPl"
+  },
+  dragon: {
+    label: "DND5E.CreatureDragon",
+    plural: "DND5E.CreatureDragonPl"
+  },
+  elemental: {
+    label: "DND5E.CreatureElemental",
+    plural: "DND5E.CreatureElementalPl",
+    detectAlignment: true
+  },
+  fey: {
+    label: "DND5E.CreatureFey",
+    plural: "DND5E.CreatureFeyPl",
+    detectAlignment: true
+  },
+  fiend: {
+    label: "DND5E.CreatureFiend",
+    plural: "DND5E.CreatureFiendPl",
+    detectAlignment: true
+  },
+  giant: {
+    label: "DND5E.CreatureGiant",
+    plural: "DND5E.CreatureGiantPl"
+  },
+  humanoid: {
+    label: "DND5E.CreatureHumanoid",
+    plural: "DND5E.CreatureHumanoidPl"
+  },
+  monstrosity: {
+    label: "DND5E.CreatureMonstrosity",
+    plural: "DND5E.CreatureMonstrosityPl"
+  },
+  ooze: {
+    label: "DND5E.CreatureOoze",
+    plural: "DND5E.CreatureOozePl"
+  },
+  plant: {
+    label: "DND5E.CreaturePlant",
+    plural: "DND5E.CreaturePlantPl"
+  },
+  undead: {
+    label: "DND5E.CreatureUndead",
+    plural: "DND5E.CreatureUndeadPl",
+    detectAlignment: true
+  }
 };
+preLocalize("creatureTypes", { keys: ["label", "plural"], sort: true });
+patchConfig("creatureTypes", "label", { since: "DnD5e 2.5", until: "DnD5e 2.7" });
 
 /* -------------------------------------------- */
 
@@ -538,6 +596,18 @@ preLocalize("itemRarity");
 /* -------------------------------------------- */
 
 /**
+ * The limited use periods that support a recovery formula.
+ * @enum {string}
+ */
+DND5E.limitedUseFormulaPeriods = {
+  charges: "DND5E.Charges",
+  dawn: "DND5E.Dawn",
+  dusk: "DND5E.Dusk"
+};
+
+/* -------------------------------------------- */
+
+/**
  * Enumerate the lengths of time over which an item can have limited use ability.
  * @enum {string}
  */
@@ -545,7 +615,7 @@ DND5E.limitedUsePeriods = {
   sr: "DND5E.ShortRest",
   lr: "DND5E.LongRest",
   day: "DND5E.Day",
-  charges: "DND5E.Charges"
+  ...DND5E.limitedUseFormulaPeriods
 };
 preLocalize("limitedUsePeriods");
 
@@ -705,16 +775,47 @@ preLocalize("armorClasses", { key: "label" });
  * @enum {string}
  */
 DND5E.consumableTypes = {
-  ammo: "DND5E.ConsumableAmmo",
-  potion: "DND5E.ConsumablePotion",
-  poison: "DND5E.ConsumablePoison",
-  food: "DND5E.ConsumableFood",
-  scroll: "DND5E.ConsumableScroll",
-  wand: "DND5E.ConsumableWand",
-  rod: "DND5E.ConsumableRod",
-  trinket: "DND5E.ConsumableTrinket"
+  ammo: {
+    label: "DND5E.ConsumableAmmo",
+    subtypes: {
+      arrow: "DND5E.ConsumableAmmoArrow",
+      blowgunNeedle: "DND5E.ConsumableAmmoBlowgunNeedle",
+      crossbowBolt: "DND5E.ConsumableAmmoCrossbowBolt",
+      slingBullet: "DND5E.ConsumableAmmoSlingBullet"
+    }
+  },
+  potion: {
+    label: "DND5E.ConsumablePotion"
+  },
+  poison: {
+    label: "DND5E.ConsumablePoison",
+    subtypes: {
+      contact: "DND5E.ConsumablePoisonContact",
+      ingested: "DND5E.ConsumablePoisonIngested",
+      inhaled: "DND5E.ConsumablePoisonInhaled",
+      injury: "DND5E.ConsumablePoisonInjury"
+    }
+  },
+  food: {
+    label: "DND5E.ConsumableFood"
+  },
+  scroll: {
+    label: "DND5E.ConsumableScroll"
+  },
+  wand: {
+    label: "DND5E.ConsumableWand"
+  },
+  rod: {
+    label: "DND5E.ConsumableRod"
+  },
+  trinket: {
+    label: "DND5E.ConsumableTrinket"
+  }
 };
-preLocalize("consumableTypes", { sort: true });
+patchConfig("consumableTypes", "label", { since: "DnD5e 2.5", until: "DnD5e 2.7" });
+preLocalize("consumableTypes", { key: "label", sort: true });
+preLocalize("consumableTypes.ammo.subtypes", { sort: true });
+preLocalize("consumableTypes.poison.subtypes", { sort: true });
 
 /* -------------------------------------------- */
 
@@ -842,6 +943,190 @@ preLocalize("featureTypes.class.subtypes", { sort: true });
 /* -------------------------------------------- */
 
 /**
+ * The various properties of all item types.
+ * @enum {object}
+ */
+DND5E.itemProperties = {
+  ada: {
+    label: "DND5E.Item.PropertyAdamantine",
+    isPhysical: true
+  },
+  amm: {
+    label: "DND5E.Item.PropertyAmmunition"
+  },
+  concentration: {
+    label: "DND5E.Item.PropertyConcentration",
+    abbr: "DND5E.ConcentrationAbbr",
+    isTag: true
+  },
+  fin: {
+    label: "DND5E.Item.PropertyFinesse"
+  },
+  fir: {
+    label: "DND5E.Item.PropertyFirearm"
+  },
+  foc: {
+    label: "DND5E.Item.PropertyFocus"
+  },
+  hvy: {
+    label: "DND5E.Item.PropertyHeavy"
+  },
+  lgt: {
+    label: "DND5E.Item.PropertyLight"
+  },
+  lod: {
+    label: "DND5E.Item.PropertyLoading"
+  },
+  material: {
+    label: "DND5E.Item.PropertyMaterial"
+  },
+  mgc: {
+    label: "DND5E.Item.PropertyMagical",
+    isPhysical: true
+  },
+  rch: {
+    label: "DND5E.Item.PropertyReach"
+  },
+  rel: {
+    label: "DND5E.Item.PropertyReload"
+  },
+  ret: {
+    label: "DND5E.Item.PropertyReturning"
+  },
+  ritual: {
+    label: "DND5E.Item.PropertyRitual",
+    abbr: "DND5E.RitualAbbr",
+    isTag: true
+  },
+  sil: {
+    label: "DND5E.Item.PropertySilvered",
+    isPhysical: true
+  },
+  somatic: {
+    label: "DND5E.Item.PropertySomatic"
+  },
+  spc: {
+    label: "DND5E.Item.PropertySpecial"
+  },
+  stealthDisadvantage: {
+    label: "DND5E.Item.PropertyStealthDisadvantage"
+  },
+  thr: {
+    label: "DND5E.Item.PropertyThrown"
+  },
+  two: {
+    label: "DND5E.Item.PropertyTwoHanded"
+  },
+  ver: {
+    label: "DND5E.Item.PropertyVersatile"
+  },
+  vocal: {
+    label: "DND5E.Item.PropertyVerbal"
+  },
+  weightlessContents: {
+    label: "DND5E.Item.PropertyWeightlessContents"
+  }
+};
+preLocalize("itemProperties", { keys: ["label", "abbr"], sort: true });
+
+/* -------------------------------------------- */
+
+/**
+ * The various properties of an item per item type.
+ * @enum {object}
+ */
+DND5E.validProperties = {
+  backpack: new Set([
+    "mgc",
+    "weightlessContents"
+  ]),
+  consumable: new Set([
+    "mgc"
+  ]),
+  equipment: new Set([
+    "concentration",
+    "mgc"
+  ]),
+  feat: new Set([
+    "concentration",
+    "mgc"
+  ]),
+  loot: new Set([
+    "mgc"
+  ]),
+  weapon: new Set([
+    "ada",
+    "amm",
+    "fin",
+    "fir",
+    "foc",
+    "hvy",
+    "lgt",
+    "lod",
+    "mgc",
+    "rch",
+    "rel",
+    "ret",
+    "sil",
+    "spc",
+    "thr",
+    "two",
+    "ver"
+  ]),
+  spell: new Set([
+    "vocal",
+    "somatic",
+    "material",
+    "concentration",
+    "ritual"
+  ]),
+  tool: new Set([
+    "concentration",
+    "mgc"
+  ])
+};
+
+/* -------------------------------------------- */
+
+/**
+ * Configuration data for an item with the "loot" type.
+ *
+ * @typedef {object} LootTypeConfiguration
+ * @property {string} label                       Localized label for this type.
+ */
+
+/**
+ * Types of "loot" items.
+ * @enum {LootTypeConfiguration}
+ */
+DND5E.lootTypes = {
+  art: {
+    label: "DND5E.Loot.Art"
+  },
+  gear: {
+    label: "DND5E.Loot.Gear"
+  },
+  gem: {
+    label: "DND5E.Loot.Gem"
+  },
+  junk: {
+    label: "DND5E.Loot.Junk"
+  },
+  material: {
+    label: "DND5E.Loot.Material"
+  },
+  resource: {
+    label: "DND5E.Loot.Resource"
+  },
+  treasure: {
+    label: "DND5E.Loot.Treasure"
+  }
+};
+preLocalize("lootTypes", { key: "label" });
+
+/* -------------------------------------------- */
+
+/**
  * @typedef {object} CurrencyConfiguration
  * @property {string} label         Localized label for the currency.
  * @property {string} abbreviation  Localized abbreviation for the currency.
@@ -888,6 +1173,7 @@ preLocalize("currencies", { keys: ["label", "abbreviation"] });
 
 /**
  * Types of damage that are considered physical.
+ * @deprecated since DnD5e 2.5, available until DnD5e 2.7
  * @enum {string}
  */
 DND5E.physicalDamageTypes = {
@@ -901,35 +1187,54 @@ preLocalize("physicalDamageTypes", { sort: true });
 
 /**
  * Types of damage the can be caused by abilities.
- * @enum {string}
+ * @enum {{label: string, [isPhysical]: boolean}}
  */
 DND5E.damageTypes = {
-  ...DND5E.physicalDamageTypes,
-  acid: "DND5E.DamageAcid",
-  cold: "DND5E.DamageCold",
-  fire: "DND5E.DamageFire",
-  force: "DND5E.DamageForce",
-  lightning: "DND5E.DamageLightning",
-  necrotic: "DND5E.DamageNecrotic",
-  poison: "DND5E.DamagePoison",
-  psychic: "DND5E.DamagePsychic",
-  radiant: "DND5E.DamageRadiant",
-  thunder: "DND5E.DamageThunder"
+  acid: {
+    label: "DND5E.DamageAcid"
+  },
+  bludgeoning: {
+    label: "DND5E.DamageBludgeoning",
+    isPhysical: true
+  },
+  cold: {
+    label: "DND5E.DamageCold"
+  },
+  fire: {
+    label: "DND5E.DamageFire"
+  },
+  force: {
+    label: "DND5E.DamageForce"
+  },
+  lightning: {
+    label: "DND5E.DamageLightning"
+  },
+  necrotic: {
+    label: "DND5E.DamageNecrotic"
+  },
+  piercing: {
+    label: "DND5E.DamagePiercing",
+    isPhysical: true
+  },
+  poison: {
+    label: "DND5E.DamagePoison"
+  },
+  psychic: {
+    label: "DND5E.DamagePsychic"
+  },
+  radiant: {
+    label: "DND5E.DamageRadiant"
+  },
+  slashing: {
+    label: "DND5E.DamageSlashing",
+    isPhysical: true
+  },
+  thunder: {
+    label: "DND5E.DamageThunder"
+  }
 };
-preLocalize("damageTypes", { sort: true });
-
-/* -------------------------------------------- */
-
-/**
- * Types of damage to which an actor can possess resistance, immunity, or vulnerability.
- * @enum {string}
- * @deprecated
- */
-DND5E.damageResistanceTypes = {
-  ...DND5E.damageTypes,
-  physical: "DND5E.DamagePhysical"
-};
-preLocalize("damageResistanceTypes", { sort: true });
+patchConfig("damageTypes", "label", { since: "DnD5e 2.5", until: "DnD5e 2.7" });
+preLocalize("damageTypes", { keys: ["label"], sort: true });
 
 /* -------------------------------------------- */
 /*  Movement                                    */
@@ -940,10 +1245,15 @@ preLocalize("damageResistanceTypes", { sort: true });
  * @enum {string}
  */
 DND5E.healingTypes = {
-  healing: "DND5E.Healing",
-  temphp: "DND5E.HealingTemp"
+  healing: {
+    label: "DND5E.Healing"
+  },
+  temphp: {
+    label: "DND5E.HealingTemp"
+  }
 };
-preLocalize("healingTypes");
+patchConfig("healingTypes", "label", { since: "DnD5e 2.5", until: "DnD5e 2.7" });
+preLocalize("healingTypes", { keys: ["label"] });
 
 /* -------------------------------------------- */
 
@@ -1206,7 +1516,7 @@ preLocalize("spellPreparationModes");
 
 /**
  * Subset of `DND5E.spellPreparationModes` that consume spell slots.
- * @type {boolean[]}
+ * @type {string[]}
  */
 DND5E.spellUpcastModes = ["always", "pact", "prepared"];
 
@@ -1413,6 +1723,7 @@ preLocalize("weaponTypes");
 /**
  * A subset of weapon properties that determine the physical characteristics of the weapon.
  * These properties are used for determining physical resistance bypasses.
+ * @deprecated since DnD5e 2.5, available until DnD5e 2.7
  * @enum {string}
  */
 DND5E.physicalWeaponProperties = {
@@ -1426,6 +1737,7 @@ preLocalize("physicalWeaponProperties", { sort: true });
 
 /**
  * The set of weapon property flags which can exist on a weapon.
+ * @deprecated since DnD5e 2.5, available until DnD5e 2.7
  * @enum {string}
  */
 DND5E.weaponProperties = {
@@ -1624,38 +1936,62 @@ DND5E.conditionTypes = {
 };
 preLocalize("conditionTypes", { sort: true });
 
+/* -------------------------------------------- */
+/*  Languages                                   */
+/* -------------------------------------------- */
+
 /**
  * Languages a character can learn.
  * @enum {string}
  */
 DND5E.languages = {
-  common: "DND5E.LanguagesCommon",
-  aarakocra: "DND5E.LanguagesAarakocra",
-  abyssal: "DND5E.LanguagesAbyssal",
-  aquan: "DND5E.LanguagesAquan",
-  auran: "DND5E.LanguagesAuran",
-  celestial: "DND5E.LanguagesCelestial",
-  deep: "DND5E.LanguagesDeepSpeech",
-  draconic: "DND5E.LanguagesDraconic",
+  standard: {
+    label: "DND5E.LanguagesStandard",
+    children: {
+      common: "DND5E.LanguagesCommon",
+      dwarvish: "DND5E.LanguagesDwarvish",
+      elvish: "DND5E.LanguagesElvish",
+      giant: "DND5E.LanguagesGiant",
+      gnomish: "DND5E.LanguagesGnomish",
+      goblin: "DND5E.LanguagesGoblin",
+      halfling: "DND5E.LanguagesHalfling",
+      orc: "DND5E.LanguagesOrc"
+    }
+  },
+  exotic: {
+    label: "DND5E.LanguagesExotic",
+    children: {
+      aarakocra: "DND5E.LanguagesAarakocra",
+      abyssal: "DND5E.LanguagesAbyssal",
+      celestial: "DND5E.LanguagesCelestial",
+      deep: "DND5E.LanguagesDeepSpeech",
+      draconic: "DND5E.LanguagesDraconic",
+      gith: "DND5E.LanguagesGith",
+      gnoll: "DND5E.LanguagesGnoll",
+      infernal: "DND5E.LanguagesInfernal",
+      primordial: {
+        label: "DND5E.LanguagesPrimordial",
+        children: {
+          aquan: "DND5E.LanguagesAquan",
+          auran: "DND5E.LanguagesAuran",
+          ignan: "DND5E.LanguagesIgnan",
+          terran: "DND5E.LanguagesTerran"
+        }
+      },
+      sylvan: "DND5E.LanguagesSylvan",
+      undercommon: "DND5E.LanguagesUndercommon"
+    }
+  },
   druidic: "DND5E.LanguagesDruidic",
-  dwarvish: "DND5E.LanguagesDwarvish",
-  elvish: "DND5E.LanguagesElvish",
-  giant: "DND5E.LanguagesGiant",
-  gith: "DND5E.LanguagesGith",
-  gnomish: "DND5E.LanguagesGnomish",
-  goblin: "DND5E.LanguagesGoblin",
-  gnoll: "DND5E.LanguagesGnoll",
-  halfling: "DND5E.LanguagesHalfling",
-  ignan: "DND5E.LanguagesIgnan",
-  infernal: "DND5E.LanguagesInfernal",
-  orc: "DND5E.LanguagesOrc",
-  primordial: "DND5E.LanguagesPrimordial",
-  sylvan: "DND5E.LanguagesSylvan",
-  terran: "DND5E.LanguagesTerran",
-  cant: "DND5E.LanguagesThievesCant",
-  undercommon: "DND5E.LanguagesUndercommon"
+  cant: "DND5E.LanguagesThievesCant"
 };
-preLocalize("languages", { sort: true });
+preLocalize("languages", { key: "label" });
+preLocalize("languages.standard.children", { sort: true });
+preLocalize("languages.exotic.children", { key: "label", sort: true });
+preLocalize("languages.exotic.children.primordial.children", { sort: true });
+patchConfig("languages", "label", { since: "DnD5e 2.4", until: "DnD5e 2.6" });
+
+/* -------------------------------------------- */
 
 /**
  * Maximum allowed character level.
@@ -1717,6 +2053,7 @@ DND5E.CR_EXP_LEVELS = [
  * @property {string} [labelKeyPath]       If config is an enum of objects, where can the label be found?
  * @property {object} [subtypes]           Configuration for traits that take some sort of base item.
  * @property {string} [subtypes.keyPath]   Path to subtype value on base items, should match a category key.
+ *                                         Deprecated in favor of the standardized `system.type.value`.
  * @property {string[]} [subtypes.ids]     Key for base item ID objects within `CONFIG.DND5E`.
  * @property {object} [children]           Mapping of category key to an object defining its children.
  * @property {boolean} [sortCategories]    Whether top-level categories should be sorted.
@@ -1967,18 +2304,38 @@ DND5E.advancementTypes = {
   ItemChoice: advancement.ItemChoiceAdvancement,
   ItemGrant: advancement.ItemGrantAdvancement,
   ScaleValue: advancement.ScaleValueAdvancement,
+  Size: advancement.SizeAdvancement,
   Trait: advancement.TraitAdvancement
 };
 
+/* -------------------------------------------- */
+/*  Sources                                     */
+/* -------------------------------------------- */
+
+/**
+ * List of books available as sources.
+ * @enum {string}
+ */
+DND5E.sourceBooks = {
+  "SRD 5.1": "SOURCE.BOOK.SRD"
+};
+preLocalize("sourceBooks", { sort: true });
+
+/* -------------------------------------------- */
+/*  Enrichment                                  */
 /* -------------------------------------------- */
 
 let _enrichmentLookup;
 Object.defineProperty(DND5E, "enrichmentLookup", {
   get() {
     if ( !_enrichmentLookup ) {
-      _enrichmentLookup = { abilities: DND5E.abilities, skills: DND5E.skills, tools: DND5E.toolIds };
-      Object.values(DND5E.abilities).forEach(a => _enrichmentLookup.abilities[a.fullKey] = a);
-      Object.values(DND5E.skills).forEach(s => _enrichmentLookup.skills[s.fullKey] = s);
+      _enrichmentLookup = {
+        abilities: foundry.utils.deepClone(DND5E.abilities),
+        skills: foundry.utils.deepClone(DND5E.skills),
+        tools: foundry.utils.deepClone(DND5E.toolIds)
+      };
+      Object.entries(DND5E.abilities).forEach(([k, a]) => _enrichmentLookup.abilities[a.fullKey] = { ...a, key: k });
+      Object.entries(DND5E.skills).forEach(([k, s]) => _enrichmentLookup.skills[s.fullKey] = { ...s, key: k });
     }
     return _enrichmentLookup;
   },
@@ -2210,7 +2567,10 @@ function patchConfig(key, fallbackKey, options) {
     return this[fallbackKey];
   }
 
-  Object.values(DND5E[key]).forEach(o => o.toString = toString);
+  Object.values(DND5E[key]).forEach(o => {
+    if ( foundry.utils.getType(o) !== "Object" ) return;
+    o.toString = toString;
+  });
 }
 
 /* -------------------------------------------- */
