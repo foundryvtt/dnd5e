@@ -15,9 +15,7 @@
             </div>
 
             <ul class="summary flexrow">
-                <li>
-                    {{lookup config.consumableTypes system.consumableType }}
-                </li>
+                <li>{{itemType}}</li>
                 <li>
                     <select name="system.rarity">
                         {{selectOptions config.itemRarity selected=system.rarity blank=""}}
@@ -50,10 +48,21 @@
             {{!-- Consumable Type --}}
             <div class="form-group">
                 <label>{{ localize "DND5E.ItemConsumableType" }}</label>
-                <select name="system.consumableType">
-                    {{selectOptions config.consumableTypes selected=system.consumableType}}
+                <select name="system.type.value">
+                    {{selectOptions config.consumableTypes selected=system.type.value labelAttr="label"}}
                 </select>
             </div>
+            {{#if itemSubtypes}}
+            <div class="form-group">
+                <label>
+                    {{localize "DND5E.ItemConsumableSubtype"
+                        category=(lookup (lookup config.consumableTypes system.type.value) "label")}}
+                </label>
+                <select name="system.type.subtype">
+                    {{selectOptions itemSubtypes selected=system.type.subtype blank=""}}
+                </select>
+            </div>
+            {{/if}}
 
             <div class="form-group">
                 <label>{{localize "DND5E.Attunement"}}</label>
@@ -73,17 +82,19 @@
                 </label>
             </div>
 
-            {{#if (eq system.consumableType "ammo")}}
             {{!-- Consumable Properties --}}
             <div class="form-group stacked weapon-properties">
+                {{#if (eq system.type.value "ammo")}}
                 <label>{{ localize "DND5E.ItemAmmoProperties" }}</label>
-                {{#each config.physicalWeaponProperties as |name prop|}}
+                {{else}}
+                <label>{{ localize "DND5E.ItemConsumableProperties" }}</label>
+                {{/if}}
+                {{#each properties}}
                 <label class="checkbox">
-                    <input type="checkbox" name="system.properties.{{prop}}" {{checked (lookup ../system.properties prop)}}> {{ name }}
+                    <input type="checkbox" name="system.properties.{{@key}}" {{checked selected}}> {{ label }}
                 </label>
                 {{/each}}
             </div>
-            {{/if}}
 
             <h3 class="form-header">{{ localize "DND5E.ItemConsumableUsage" }}</h3>
 

@@ -275,7 +275,7 @@ function _getSubfolderName(data, pack) {
   switch (pack) {
     // Items should be grouped by type
     case "items":
-      if ( (data.type === "consumable") && data.system.consumableType ) return data.system.consumableType;
+      if ( (data.type === "consumable") && data.system.type.value ) return data.system.type.value;
       return data.type;
 
     // Monsters should be grouped by type

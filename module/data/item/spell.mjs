@@ -1,5 +1,6 @@
+import { filteredKeys } from "../../utils.mjs";
 import SystemDataModel from "../abstract.mjs";
-import { FormulaField, MappingField } from "../fields.mjs";
+import { FormulaField } from "../fields.mjs";
 import ActionTemplate from "./templates/action.mjs";
 import ActivatedEffectTemplate from "./templates/activated-effect.mjs";
 import ItemDescriptionTemplate from "./templates/item-description.mjs";
@@ -12,12 +13,7 @@ import ItemDescriptionTemplate from "./templates/item-description.mjs";
  *
  * @property {number} level                      Base level of the spell.
  * @property {string} school                     Magical school to which this spell belongs.
- * @property {object} components                 General components and tags for this spell.
- * @property {boolean} components.vocal          Does this spell require vocal components?
- * @property {boolean} components.somatic        Does this spell require somatic components?
- * @property {boolean} components.material       Does this spell require material components?
- * @property {boolean} components.ritual         Can this spell be cast as a ritual?
- * @property {boolean} components.concentration  Does this spell require concentration?
+ * @property {Set<string>} properties            General components and tags for this spell.
  * @property {object} materials                  Details on material components required for this spell.
  * @property {string} materials.value            Description of the material components required for casting.
  * @property {boolean} materials.consumed        Are these material components consumed during casting?
@@ -40,9 +36,8 @@ export default class SpellData extends SystemDataModel.mixin(
         required: true, integer: true, initial: 1, min: 0, label: "DND5E.SpellLevel"
       }),
       school: new foundry.data.fields.StringField({required: true, label: "DND5E.SpellSchool"}),
-      components: new MappingField(new foundry.data.fields.BooleanField(), {
-        required: true, label: "DND5E.SpellComponents",
-        initialKeys: [...Object.keys(CONFIG.DND5E.spellComponents), ...Object.keys(CONFIG.DND5E.spellTags)]
+      properties: new foundry.data.fields.SetField(new foundry.data.fields.StringField(), {
+        label: "DND5E.SpellComponents"
       }),
       materials: new foundry.data.fields.SchemaField({
         value: new foundry.data.fields.StringField({required: true, label: "DND5E.SpellMaterialsDescription"}),
@@ -68,27 +63,24 @@ export default class SpellData extends SystemDataModel.mixin(
   }
 
   /* -------------------------------------------- */
-  /*  Migrations                                  */
+  /*  Data Migrations                             */
   /* -------------------------------------------- */
 
   /** @inheritdoc */
   static _migrateData(source) {
     super._migrateData(source);
-    SpellData.#migrateComponentData(source);
     SpellData.#migrateScaling(source);
   }
 
   /* -------------------------------------------- */
 
   /**
-   * Migrate the spell's component object to remove any old, non-boolean values.
+   * Migrate the component object to be 'properties' instead.
    * @param {object} source  The candidate source data from which the model will be constructed.
    */
-  static #migrateComponentData(source) {
-    if ( !source.components ) return;
-    for ( const [key, value] of Object.entries(source.components) ) {
-      if ( typeof value !== "boolean" ) delete source.components[key];
-    }
+  static _migrateComponentData(source) {
+    const components = filteredKeys(source.system?.components ?? {});
+    if ( components.length ) foundry.utils.setProperty(source, "flags.dnd5e.migratedProperties", components);
   }
 
   /* -------------------------------------------- */
@@ -140,5 +132,23 @@ export default class SpellData extends SystemDataModel.mixin(
    */
   get proficiencyMultiplier() {
     return 1;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Provide a backwards compatible getter for accessing `components`.
+   * @deprecated since v2.5.
+   * @type {object}
+   */
+  get components() {
+    foundry.utils.logCompatibilityWarning(
+      "The `system.components` property has been deprecated in favor of a standardized `system.properties` property.",
+      { since: "DnD5e 2.5", until: "DnD5e 2.7", once: true }
+    );
+    return this.properties.reduce((acc, p) => {
+      acc[p] = true;
+      return acc;
+    }, {});
   }
 }

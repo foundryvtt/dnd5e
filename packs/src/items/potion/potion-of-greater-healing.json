@@ -5,7 +5,7 @@
   "img": "icons/consumables/potions/bottle-bulb-corked-glowing-red.webp",
   "system": {
     "description": {
-      "value": "<p><em>The potion's red liquid glimmers when agitated.</em></p>\n<p>You regain 4d4+4 hit points when you drink this potion.</p>\n<p> </p>\n<p> </p>",
+      "value": "<p><em>The potion's red liquid glimmers when agitated.</em></p><p>You regain 4d4+4 hit points when you drink this potion.</p>",
       "chat": "",
       "unidentified": ""
     },
@@ -35,6 +35,7 @@
       "units": "inst"
     },
     "cover": null,
+    "crewed": false,
     "target": {
       "value": 1,
       "width": null,
@@ -92,10 +93,10 @@
   "flags": {},
   "_stats": {
     "systemId": "dnd5e",
-    "systemVersion": "2.1.0",
-    "coreVersion": "10.291",
+    "systemVersion": "2.4.1",
+    "coreVersion": "10.303",
     "createdTime": 1661787233614,
-    "modifiedTime": 1671220960000,
+    "modifiedTime": 1700503487794,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!L887NdWEP5NqHCrQ"

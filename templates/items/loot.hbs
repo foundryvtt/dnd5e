@@ -51,17 +51,27 @@
                 </select>
             </div>
 
-            {{#if lootSubtypes}}
+            {{#if itemSubtypes}}
             <div class="form-group">
                 <label>
                     {{localize "DND5E.ItemLootSubtype"
                         category=(lookup (lookup config.lootTypes system.type.value) "label")}}
                 </label>
                 <select name="system.type.subtype">
-                    {{selectOptions lootSubtypes selected=system.type.subtype blank=""}}
+                    {{selectOptions itemSubtypes selected=system.type.subtype blank=""}}
                 </select>
             </div>
             {{/if}}
+
+            {{!-- Loot Properties --}}
+            <div class="form-group stacked loot-properties">
+                <label>{{ localize "DND5E.ItemLootProperties" }}</label>
+                {{#each properties}}
+                <label class="checkbox">
+                    <input type="checkbox" name="system.properties.{{@key}}" {{checked selected}}> {{ label }}
+                </label>
+                {{/each}}
+            </div>
 
         </div>
 

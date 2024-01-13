@@ -1,4 +1,7 @@
 import ClassData from "../data/item/class.mjs";
+import ContainerData from "../data/item/container.mjs";
+import EquipmentData from "../data/item/equipment.mjs";
+import SpellData from "../data/item/spell.mjs";
 import {d20Roll, damageRoll} from "../dice/dice.mjs";
 import simplifyRollFormula from "../dice/simplify-roll-formula.mjs";
 import Advancement from "./advancement/advancement.mjs";
@@ -21,14 +24,6 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   /* -------------------------------------------- */
   /*  Item Properties                             */
   /* -------------------------------------------- */
-
-  /**
-   * Is this Item an activatable item?
-   * @type {boolean}
-   */
-  get isActive() {
-    return this.system.isActive ?? false;
-  }
 
   /**
    * Which ability score modifier is used by this item?
@@ -181,6 +176,16 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     return this.system.identifier || this.name.slugify({strict: true});
   }
 
+  /* --------------------------------------------- */
+
+  /**
+   * Is this Item an activatable item?
+   * @type {boolean}
+   */
+  get isActive() {
+    return this.system.isActive ?? false;
+  }
+
   /* -------------------------------------------- */
 
   /**
@@ -237,6 +242,17 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    */
   get isVersatile() {
     return this.system.isVersatile ?? false;
+  }
+
+  /* --------------------------------------------- */
+
+  /**
+   * Does this item require concentration?
+   * @type {boolean}
+   */
+  get requiresConcentration() {
+    const isValid = this.system.validProperties.has("concentration") && this.system.properties.has("concentration");
+    return isValid && this.isActive && this.system.hasScalarDuration;
   }
 
   /* -------------------------------------------- */
@@ -341,7 +357,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    */
   get areEffectsSuppressed() {
     const requireEquipped = (this.type !== "consumable")
-      || ["rod", "trinket", "wand"].includes(this.system.consumableType);
+      || ["rod", "trinket", "wand"].includes(this.system.type.value);
     if ( requireEquipped && (this.system.equipped === false) ) return true;
     return this.system.attunement === CONFIG.DND5E.attunementTypes.REQUIRED;
   }
@@ -369,6 +385,8 @@ export default class Item5e extends SystemDocumentMixin(Item) {
         this._prepareFeat(); break;
       case "spell":
         this._prepareSpell(); break;
+      case "weapon":
+        this._prepareWeapon(); break;
     }
 
     // Activated Items
@@ -421,9 +439,9 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     this.system.preparation.mode ||= "prepared";
     this.labels.level = CONFIG.DND5E.spellLevels[this.system.level];
     this.labels.school = CONFIG.DND5E.spellSchools[this.system.school];
-    this.labels.components = Object.entries(this.system.components).reduce((obj, [c, active]) => {
+    this.labels.components = this.system.properties.reduce((obj, c) => {
       const config = attributes[c];
-      if ( !config || (active !== true) ) return obj;
+      if ( !config ) return obj;
       obj.all.push({abbr: config.abbr, tag: config.tag});
       if ( config.tag ) obj.tags.push(config.label);
       else obj.vsm.push(config.abbr);
@@ -432,6 +450,16 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     this.labels.components.vsm = new Intl.ListFormat(game.i18n.lang, { style: "narrow", type: "conjunction" })
       .format(this.labels.components.vsm);
     this.labels.materials = this.system?.materials?.value ?? null;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare derived data for a weapon-type item and define labels.
+   * @protected
+   */
+  _prepareWeapon() {
+    this.labels.armor = this.system.armor.value ? `${this.system.armor.value} ${game.i18n.localize("DND5E.AC")}` : "";
   }
 
   /* -------------------------------------------- */
@@ -459,7 +487,10 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     else if ( tgt.units === "touch" ) tgt.value = null;
 
     if ( this.hasTarget ) {
-      this.labels.target = [tgt.value, C.distanceUnits[tgt.units], C.targetTypes[tgt.type]].filterJoin(" ");
+      const target = [tgt.value];
+      if ( this.hasAreaTarget ) target.push(C.distanceUnits[tgt.units]);
+      target.push(C.targetTypes[tgt.type]);
+      this.labels.target = target.filterJoin(" ");
     }
 
     // Range Label
@@ -488,7 +519,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     if ( dmg.parts ) {
       const types = CONFIG.DND5E.damageTypes;
       this.labels.damage = dmg.parts.map(d => d.formula).join(" + ").replace(/\+ -/g, "- ");
-      this.labels.damageTypes = dmg.parts.map(d => types[d.type]).join(", ");
+      this.labels.damageTypes = dmg.parts.map(d => types[d.type]?.label).join(", ");
     }
   }
 
@@ -595,7 +626,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       catch(err) {
         console.warn(`Unable to simplify formula for ${this.name}: ${err}`);
       }
-      return { formula, damageType: part.type, label: `${formula} ${damageLabels[part.type] ?? ""}` };
+      return { formula, damageType: part.type, label: `${formula} ${damageLabels[part.type]?.label ?? ""}` };
     });
     return this.labels.derivedDamage = derivedDamage;
   }
@@ -670,7 +701,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       const ammoItemQuantity = ammo.system.quantity;
       const ammoCanBeConsumed = ammoItemQuantity && (ammoItemQuantity - (this.system.consume.amount ?? 0) >= 0);
       const ammoItemAttackBonus = ammo.system.attackBonus;
-      const ammoIsTypeConsumable = (ammo.type === "consumable") && (ammo.system.consumableType === "ammo");
+      const ammoIsTypeConsumable = (ammo.type === "consumable") && (ammo.system.type.value === "ammo");
       if ( ammoCanBeConsumed && ammoItemAttackBonus && ammoIsTypeConsumable ) {
         parts.push("@ammo");
         rollData.ammo = ammoItemAttackBonus;
@@ -1088,7 +1119,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
 
     // Identify the consumed resource and its current quantity
     let resource = null;
-    let amount = usageConfig.resourceAmount ? usageConfig.resourceAmount : (consume.amount || 1);
+    let amount = usageConfig.resourceAmount ? usageConfig.resourceAmount : (consume.amount || 0);
     let quantity = 0;
     switch ( consume.type ) {
       case "attribute":
@@ -1680,7 +1711,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    */
   async rollToolCheck(options={}) {
     if ( this.type !== "tool" ) throw new Error("Wrong item type!");
-    return this.actor?.rollToolCheck(this.system.baseItem, {
+    return this.actor?.rollToolCheck(this.system.type.baseItem, {
       ability: this.system.ability,
       bonus: this.system.bonus,
       prof: this.system.prof,
@@ -2156,7 +2187,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * Create a consumable spell scroll Item from a spell Item.
    * @param {Item5e|object} spell     The spell or item data to be made into a scroll
    * @param {object} [options]        Additional options that modify the created scroll
-   * @returns {Item5e}                The created scroll consumable item
+   * @returns {Promise<Item5e>}       The created scroll consumable item
    */
   static async createScrollFromSpell(spell, options={}) {
 
@@ -2175,11 +2206,17 @@ export default class Item5e extends SystemDocumentMixin(Item) {
 
     let {
       actionType, description, source, activation, duration, target,
-      range, damage, formula, save, level, attackBonus, ability, components
+      range, damage, formula, save, level, attackBonus, ability, properties
     } = itemData.system;
 
     // Get scroll data
-    const scrollUuid = `Compendium.${CONFIG.DND5E.sourcePacks.ITEMS}.${CONFIG.DND5E.spellScrollIds[level]}`;
+    let scrollUuid;
+    const id = CONFIG.DND5E.spellScrollIds[level];
+    if ( foundry.data.validators.isValidId(id) ) {
+      scrollUuid = game.packs.get(CONFIG.DND5E.sourcePacks.ITEMS).index.get(id).uuid;
+    } else {
+      scrollUuid = id;
+    }
     const scrollItem = await fromUuid(scrollUuid);
     const scrollData = scrollItem.toObject();
     delete scrollData._id;
@@ -2190,15 +2227,21 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     const scrollIntroEnd = scrollDescription.indexOf(pdel);
     const scrollIntro = scrollDescription.slice(0, scrollIntroEnd + pdel.length);
     const scrollDetails = scrollDescription.slice(scrollIntroEnd + pdel.length);
+    const isConc = properties.includes("concentration");
 
     // Create a composite description from the scroll description and the spell details
-    const desc = `
-      ${scrollIntro}
-      <hr><h3>${itemData.name} (${game.i18n.format("DND5E.LevelNumber", {level})})</h3>
-      ${(components.concentration ? `<p><em>${game.i18n.localize("DND5E.ScrollRequiresConcentration")}</em></p>` : "")}
-      <hr>${description.value}<hr>
-      <h3>${game.i18n.localize("DND5E.ScrollDetails")}</h3><hr>${scrollDetails}
-    `;
+    const desc = [
+      scrollIntro,
+      "<hr>",
+      `<h3>${itemData.name} (${game.i18n.format("DND5E.LevelNumber", {level})})</h3>`,
+      isConc ? `<p><em>${game.i18n.localize("DND5E.ScrollRequiresConcentration")}</em></p>` : null,
+      "<hr>",
+      description.value,
+      "<hr>",
+      `<h3>${game.i18n.localize("DND5E.ScrollDetails")}</h3>`,
+      "<hr>",
+      scrollDetails
+    ].filterJoin("");
 
     // Used a fixed attack modifier and saving throw according to the level of spell scroll.
     if ( ["mwak", "rwak", "msak", "rsak"].includes(actionType) ) {
@@ -2214,12 +2257,19 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     const spellScrollData = foundry.utils.mergeObject(scrollData, {
       name: `${game.i18n.localize("DND5E.SpellScroll")}: ${itemData.name}`,
       img: itemData.img,
+      effects: itemData.effects ?? [],
       system: {
         description: {value: desc.trim()}, source, actionType, activation, duration, target,
-        range, damage, formula, save, level, attackBonus, ability
+        range, damage, formula, save, level, attackBonus, ability, properties
       }
     });
     foundry.utils.mergeObject(spellScrollData, options);
+    spellScrollData.system.properties = [
+      "mgc",
+      ...scrollData.system.properties,
+      ...properties ?? [],
+      ...options.system?.properties ?? []
+    ];
 
     /**
      * A hook event that fires after the item data for a scroll is created but before the item is returned.
@@ -2240,6 +2290,9 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   static migrateData(source) {
     source = super.migrateData(source);
     if ( source.type === "class" ) ClassData._migrateTraitAdvancement(source);
+    else if ( source.type === "backpack" ) ContainerData._migrateWeightlessData(source);
+    else if ( source.type === "equipment" ) EquipmentData._migrateStealth(source);
+    else if ( source.type === "spell" ) SpellData._migrateComponentData(source);
     return source;
   }
 }

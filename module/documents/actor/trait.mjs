@@ -39,21 +39,27 @@ export function actorKeyPath(trait) {
 /**
  * Get the current trait values for the provided actor.
  * @param {Actor5e} actor  Actor from which to retrieve the values.
- * @param {string} trait          Trait as defined in `CONFIG.DND5E.traits`.
+ * @param {string} trait   Trait as defined in `CONFIG.DND5E.traits`.
  * @returns {Object<number>}
  */
-export function actorValues(actor, trait) {
+export async function actorValues(actor, trait) {
   const keyPath = actorKeyPath(trait);
   const data = foundry.utils.getProperty(actor, keyPath);
   if ( !data ) return {};
   const values = {};
+  const traitChoices = await choices(trait, {prefixed: true});
+
+  const setValue = (k, v) => {
+    const result = traitChoices.find(k);
+    if ( result ) values[result[0]] = v;
+  };
 
   if ( ["skills", "tool"].includes(trait) ) {
-    Object.entries(data).forEach(([k, d]) => values[`${trait}:${k}`] = d.value);
+    Object.entries(data).forEach(([k, d]) => setValue(k, d.value));
   } else if ( trait === "saves" ) {
-    Object.entries(data).forEach(([k, d]) => values[`${trait}:${k}`] = d.proficient);
+    Object.entries(data).forEach(([k, d]) => setValue(k, d.proficient));
   } else {
-    data.value.forEach(v => values[`${trait}:${v}`] = 1);
+    data.value.forEach(v => setValue(v, 1));
   }
 
   return values;
@@ -110,7 +116,6 @@ export async function categories(trait) {
   }
 
   if ( traitConfig.subtypes ) {
-    const keyPath = `system.${traitConfig.subtypes.keyPath}`;
     const map = CONFIG.DND5E[`${trait}ProficienciesMap`];
 
     // Merge all ID lists together
@@ -130,7 +135,7 @@ export async function categories(trait) {
       if ( !index ) continue;
 
       // Get the proper subtype, using proficiency map if needed
-      let type = foundry.utils.getProperty(index, keyPath);
+      let type = index.system.type.value;
       if ( map?.[type] ) type = map[type];
 
       // No category for this type, add at top level
@@ -173,14 +178,14 @@ export async function choices(trait, { chosen=new Set(), prefixed=false, any=fal
     };
   }
 
-  const prepareCategory = (key, data, result, prefix) => {
+  const prepareCategory = (key, data, result, prefix, topLevel=false) => {
     let label = _innerLabel(data, traitConfig);
     if ( !label ) label = key;
     if ( prefixed ) key = `${prefix}:${key}`;
     result[key] = {
       label: game.i18n.localize(label),
       chosen: chosen.has(key),
-      sorting: traitConfig.sortCategories === true
+      sorting: topLevel ? traitConfig.sortCategories === true : true
     };
     if ( data.children ) {
       const children = result[key].children = {};
@@ -195,7 +200,7 @@ export async function choices(trait, { chosen=new Set(), prefixed=false, any=fal
     }
   };
 
-  Object.entries(categoryData).forEach(([k, v]) => prepareCategory(k, v, result, trait));
+  Object.entries(categoryData).forEach(([k, v]) => prepareCategory(k, v, result, trait, true));
 
   return new SelectChoices(result).sort();
 }
@@ -263,8 +268,19 @@ export function getBaseItem(identifier, { indexOnly=false, fullItem=false }={}) 
   if ( !packObject ) return;
 
   // Build the extended index and return a promise for the data
-  const promise = packObject.getIndex({ fields: traitIndexFields() }).then(index => {
+  const fields = traitIndexFields();
+  const promise = packObject.getIndex({ fields }).then(index => {
     const store = index.reduce((obj, entry) => {
+      for ( const field of fields ) {
+        const val = foundry.utils.getProperty(entry, field);
+        if ( (field !== "system.type.value") && (val !== undefined) ) {
+          foundry.utils.setProperty(entry, "system.type.value", val);
+          foundry.utils.logCompatibilityWarning(
+            `The '${field}' property has been deprecated in favor of a standardized \`system.type.value\` property.`,
+            { since: "DnD5e 2.5", until: "DnD5e 2.7", once: true }
+          );
+        }
+      }
       obj[entry._id] = entry;
       return obj;
     }, {});
@@ -283,7 +299,7 @@ export function getBaseItem(identifier, { indexOnly=false, fullItem=false }={}) 
  * @protected
  */
 export function traitIndexFields() {
-  const fields = [];
+  const fields = ["system.type.value"];
   for ( const traitConfig of Object.values(CONFIG.DND5E.traits) ) {
     if ( !traitConfig.subtypes ) continue;
     fields.push(`system.${traitConfig.subtypes.keyPath}`);

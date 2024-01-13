@@ -21,7 +21,7 @@ import TraitSelector from "./trait-selector.mjs";
 import ProficiencyConfig from "./proficiency-config.mjs";
 import ToolSelector from "./tool-selector.mjs";
 import { simplifyBonus } from "../../utils.mjs";
-import { ActorSheetMixin } from "./sheet-mixin.mjs";
+import ActorSheetMixin from "./sheet-mixin.mjs";
 
 /**
  * Extend the basic ActorSheet class to suppose system-specific logic and functionality.
@@ -270,7 +270,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
     for ( let [k, label] of Object.entries(CONFIG.DND5E.senses) ) {
       const v = senses[k] ?? 0;
       if ( v === 0 ) continue;
-      tags[k] = `${game.i18n.localize(label)} ${v} ${senses.units}`;
+      tags[k] = `${game.i18n.localize(label)} ${v} ${senses.units ?? Object.keys(CONFIG.DND5E.movementUnits)[0]}`;
     }
     if ( senses.special ) senses.special.split(";").forEach((c, i) => tags[`custom${i+1}`] = c.trim());
     return tags;
@@ -430,7 +430,11 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
         const bypassFormatter = new Intl.ListFormat(game.i18n.lang, { style: "long", type: "disjunction" });
         data.selected.physical = game.i18n.format("DND5E.DamagePhysicalBypasses", {
           damageTypes: damageTypesFormatter.format(physical.map(t => Trait.keyLabel(t, { trait }))),
-          bypassTypes: bypassFormatter.format(data.bypasses.map(t => CONFIG.DND5E.physicalWeaponProperties[t]))
+          bypassTypes: bypassFormatter.format(data.bypasses.reduce((acc, t) => {
+            const v = CONFIG.DND5E.itemProperties[t];
+            if ( v && v.isPhysical ) acc.push(v.label);
+            return acc;
+          }, []))
         });
       }
 
@@ -572,8 +576,8 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
       }
 
       // Spell-specific filters
-      if ( filters.has("ritual") && (item.system.components.ritual !== true) ) return false;
-      if ( filters.has("concentration") && (item.system.components.concentration !== true) ) return false;
+      if ( filters.has("ritual") && !item.system.properties.has("ritual") ) return false;
+      if ( filters.has("concentration") && !item.system.properties.has("concentration") ) return false;
       if ( filters.has("prepared") ) {
         if ( (item.system.level === 0) || ["innate", "always"].includes(item.system.preparation.mode) ) return true;
         if ( this.actor.type === "npc" ) return true;
@@ -992,6 +996,18 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
     // Stack identical consumables
     const stacked = this._onDropStackConsumables(itemData);
     if ( stacked ) return false;
+
+    // Ensure that this item isn't violating the singleton rule
+    // TODO: When v10 support is dropped, this will only need to be handled for items with advancement
+    const dataModel = CONFIG.Item[dnd5e.isV10 ? "systemDataModels" : "dataModels"][itemData.type];
+    const singleton = dataModel?.metadata.singleton ?? false;
+    if ( singleton && this.actor.itemTypes[itemData.type].length ) {
+      ui.notifications.error(game.i18n.format("DND5E.ActorWarningSingleton", {
+        itemType: game.i18n.localize(CONFIG.Item.typeLabels[itemData.type]),
+        actorType: game.i18n.localize(CONFIG.Actor.typeLabels[this.actor.type])
+      }));
+      return false;
+    }
 
     // Bypass normal creation flow for any items with advancement
     if ( itemData.system.advancement?.length && !game.settings.get("dnd5e", "disableAdvancements") ) {

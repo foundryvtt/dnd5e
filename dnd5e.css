@@ -2349,17 +2349,30 @@ h5 {
 /* ----------------------------------------- */
 /*  Inline Roll Actions                      */
 /* ----------------------------------------- */
-a.roll-link {
+.roll-link a {
   background: #DDD;
   padding: 1px 4px;
   border: 1px solid var(--color-border-dark-tertiary);
-  border-radius: 2px;
   white-space: nowrap;
   word-break: break-all;
 }
-a.roll-link i {
+.roll-link a:first-child {
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+.roll-link a:last-child {
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
+.roll-link a i {
   color: var(--color-text-dark-inactive);
   margin-inline-end: 0.25em;
+}
+.roll-link a[data-action="request"] {
+  padding-inline-end: 1px;
+}
+.roll-link a + a {
+  margin-inline-start: 2px;
 }
 /* ----------------------------------------- */
 /*  Basic Structure                          */
@@ -2579,6 +2592,27 @@ a.roll-link i {
 .dnd5e.sheet.actor.vehicle {
   min-width: 720px;
   min-height: 680px;
+}
+.dnd5e.sheet.actor.vehicle .source {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.25em;
+}
+.dnd5e.sheet.actor.vehicle .source span {
+  padding-inline: 4px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.dnd5e.sheet.actor.vehicle .source .config-button {
+  display: none;
+  font-size: var(--font-size-11);
+  font-weight: normal;
+  padding-inline-end: 0.25em;
+}
+.dnd5e.sheet.actor.vehicle .source:hover .config-button {
+  display: block;
+  margin-block-start: -5px;
 }
 .dnd5e.sheet.actor.vehicle .features .item-controls {
   flex: 0 0 68px;

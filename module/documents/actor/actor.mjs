@@ -469,9 +469,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     // Identify Equipped Items
     const armorTypes = new Set(Object.keys(CONFIG.DND5E.armorTypes));
     const {armors, shields} = this.itemTypes.equipment.reduce((obj, equip) => {
-      const armor = equip.system.armor;
-      if ( !equip.system.equipped || !armorTypes.has(armor?.type) ) return obj;
-      if ( armor.type === "shield" ) obj.shields.push(equip);
+      if ( !equip.system.equipped || !armorTypes.has(equip.type.value) ) return obj;
+      if ( equip.system.type.value === "shield" ) obj.shields.push(equip);
       else obj.armors.push(equip);
       return obj;
     }, {armors: [], shields: []});
@@ -497,7 +496,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
             message: game.i18n.localize("DND5E.WarnMultipleArmor"), type: "warning"
           });
           const armorData = armors[0].system.armor;
-          const isHeavy = armorData.type === "heavy";
+          const isHeavy = armors[0].system.type.value === "heavy";
           ac.armor = armorData.value ?? ac.armor;
           ac.dex = isHeavy ? 0 : Math.min(armorData.dex ?? Infinity, this.system.abilities.dex?.mod ?? 0);
           ac.equippedArmor = armors[0];
@@ -585,7 +584,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * @protected
    */
   _prepareHitPoints(rollData) {
-    if ( this.type !== "character" || (this.system._source.attributes.hp.max !== null) ) return;
+    if ( this.type !== "character" || (this.system.attributes.hp.max !== null) ) return;
     const hp = this.system.attributes.hp;
 
     const abilityId = CONFIG.DND5E.hitPointsAbility || "con";
@@ -1137,12 +1136,16 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       data.toolBonus = bonus.join(" + ");
     }
 
+    // Reliable Talent applies to any tool check we have full or better proficiency in
+    const reliableTalent = (prof?.multiplier >= 1 && this.getFlag("dnd5e", "reliableTalent"));
+
     const flavor = game.i18n.format("DND5E.ToolPromptTitle", {tool: Trait.keyLabel(toolId, {trait: "tool"}) ?? ""});
     const rollData = foundry.utils.mergeObject({
       data, flavor,
       title: `${flavor}: ${this.name}`,
       chooseModifier: true,
       halflingLucky: this.getFlag("dnd5e", "halflingLucky"),
+      reliableTalent,
       messageData: {
         speaker: options.speaker || ChatMessage.implementation.getSpeaker({actor: this}),
         "flags.dnd5e.roll": {type: "tool", toolId}
@@ -2669,7 +2672,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       localizedType = typeData.custom;
     } else {
       let code = CONFIG.DND5E.creatureTypes[typeData.value];
-      localizedType = game.i18n.localize(typeData.swarm ? `${code}Pl` : code);
+      localizedType = game.i18n.localize(typeData.swarm ? code.plural : code.label);
     }
     let type = localizedType;
     if ( typeData.swarm ) {

@@ -214,16 +214,6 @@ export default class ActivatedEffectTemplate extends SystemDataModel {
   /* -------------------------------------------- */
 
   /**
-   * Is this Item an activatable item?
-   * @type {boolean}
-   */
-  get isActive() {
-    return !!this.activation.type;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
    * Does the Item have an area of effect target?
    * @type {boolean}
    */
@@ -311,6 +301,16 @@ export default class ActivatedEffectTemplate extends SystemDataModel {
    */
   get hasTarget() {
     return this.isActive && !["", null].includes(this.target.type);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Is this Item an activatable item?
+   * @type {boolean}
+   */
+  get isActive() {
+    return !!this.activation.type;
   }
 
 }
